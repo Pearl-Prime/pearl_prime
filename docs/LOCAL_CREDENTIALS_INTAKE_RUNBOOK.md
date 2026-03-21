@@ -56,6 +56,10 @@ What it does not do:
 /bin/zsh ./scripts/integrations/setup_messaging_channels_local.sh
 ```
 
+That setup script will prefill any safe hints it can extract from the local
+credentials file, but it will still ask for the actual platform-issued API
+tokens and recipient IDs.
+
 4. Use `docs/all_credentials.txt` only as a human reference for service-matched
    sign-in where required to obtain the real API token, channel secret, app
    secret, or application password.

@@ -30,6 +30,16 @@ If `docs/all_credentials.txt` exists locally, the master setup can import the
 local source metadata first. That is only a helper for service-matched human
 lookup. It does not turn plain web-login credentials into API tokens.
 
+The messaging setup script also pre-fills any conservative hints it can safely
+extract from that file, such as:
+
+- a general account email hint
+- a phone/profile hint
+- an iMessage handle default when an obvious account email exists
+
+It still requires the real API tokens, IDs, and recipient identifiers that the
+platforms issue.
+
 It will ask, channel by channel, whether you want to configure:
 
 - LINE

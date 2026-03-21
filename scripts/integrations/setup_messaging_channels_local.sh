@@ -3,6 +3,53 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 OUT_FILE="${ROOT_DIR}/.messaging_channels.local.yaml"
+LOCAL_CREDENTIALS_FILE="${ROOT_DIR}/docs/all_credentials.txt"
+
+extract_first_email() {
+  local pattern="$1"
+  if [[ ! -f "$LOCAL_CREDENTIALS_FILE" ]]; then
+    return 0
+  fi
+  awk -v pat="$pattern" '
+    BEGIN { IGNORECASE = 1 }
+    $0 ~ pat { capture = 1; next }
+    capture && match($0, /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/) {
+      print substr($0, RSTART, RLENGTH)
+      exit
+    }
+  ' "$LOCAL_CREDENTIALS_FILE"
+}
+
+extract_first_phoneish() {
+  local pattern="$1"
+  if [[ ! -f "$LOCAL_CREDENTIALS_FILE" ]]; then
+    return 0
+  fi
+  awk -v pat="$pattern" '
+    BEGIN { IGNORECASE = 1 }
+    $0 ~ pat { capture = 1; next }
+    capture && match($0, /[0-9]{7,15}/) {
+      print substr($0, RSTART, RLENGTH)
+      exit
+    }
+  ' "$LOCAL_CREDENTIALS_FILE"
+}
+
+extract_first_after_label() {
+  local label="$1"
+  if [[ ! -f "$LOCAL_CREDENTIALS_FILE" ]]; then
+    return 0
+  fi
+  awk -v pat="$label" '
+    BEGIN { IGNORECASE = 1 }
+    $0 ~ pat { capture = 1; next }
+    capture && NF {
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "", $0)
+      print $0
+      exit
+    }
+  ' "$LOCAL_CREDENTIALS_FILE"
+}
 
 prompt() {
   local label="$1"
@@ -47,6 +94,19 @@ yn() {
   [[ "${answer:l}" == "y" ]]
 }
 
+DEFAULT_GENERAL_EMAIL="$(extract_first_email "Whatsapp and WeChat and all other integrations")"
+DEFAULT_FB_PROFILE="$(extract_first_phoneish "^facebook$")"
+DEFAULT_IMESSAGE_HANDLE="${DEFAULT_GENERAL_EMAIL}"
+DEFAULT_WECHAT_ID="${DEFAULT_GENERAL_EMAIL}"
+DEFAULT_WHATSAPP_PHONE="${DEFAULT_FB_PROFILE}"
+DEFAULT_MESSENGER_PROFILE="${DEFAULT_FB_PROFILE}"
+
+if [[ -f "$LOCAL_CREDENTIALS_FILE" ]]; then
+  printf "Using local credential hints from %s when available.\n" "$LOCAL_CREDENTIALS_FILE" >&2
+  [[ -n "$DEFAULT_GENERAL_EMAIL" ]] && printf "  account hint: %s\n" "$DEFAULT_GENERAL_EMAIL" >&2
+  [[ -n "$DEFAULT_FB_PROFILE" ]] && printf "  profile/phone hint: %s\n" "$DEFAULT_FB_PROFILE" >&2
+fi
+
 LINE_ENABLED=false
 WA_ENABLED=false
 WECHAT_ENABLED=false
@@ -67,7 +127,7 @@ fi
 
 if yn "Configure WhatsApp"; then
   WA_ENABLED=true
-  WA_PHONE_NUMBER="$(prompt "WhatsApp recipient phone number" "")"
+  WA_PHONE_NUMBER="$(prompt "WhatsApp recipient phone number" "${DEFAULT_WHATSAPP_PHONE:-}")"
   WA_PHONE_NUMBER_ID="$(prompt "WhatsApp phone number ID" "")"
   WA_BUSINESS_ACCOUNT_ID="$(prompt "WhatsApp business account ID" "")"
   WA_VERIFY_TOKEN="$(prompt "WhatsApp verify token" "")"
@@ -81,7 +141,7 @@ fi
 
 if yn "Configure WeChat"; then
   WECHAT_ENABLED=true
-  WECHAT_ID="$(prompt "WeChat ID" "")"
+  WECHAT_ID="$(prompt "WeChat ID" "${DEFAULT_WECHAT_ID:-}")"
   WECHAT_APP_ID="$(prompt "WeChat app ID" "")"
   WECHAT_OPEN_ID="$(prompt "WeChat recipient openid" "")"
   WECHAT_VERIFY_TOKEN="$(prompt "WeChat verify token" "")"
@@ -93,7 +153,7 @@ fi
 if yn "Configure Messenger"; then
   MESSENGER_ENABLED=true
   MESSENGER_PAGE_ID="$(prompt "Messenger page ID" "")"
-  MESSENGER_PROFILE="$(prompt "Messenger profile URL or label" "")"
+  MESSENGER_PROFILE="$(prompt "Messenger profile URL or label" "${DEFAULT_MESSENGER_PROFILE:-}")"
   MESSENGER_RECIPIENT_ID="$(prompt "Messenger recipient PSID" "")"
   MESSENGER_VERIFY_TOKEN="$(prompt "Messenger verify token" "")"
   MESSENGER_GRAPH_VERSION="$(prompt "Messenger Graph API version" "v23.0")"
@@ -106,7 +166,7 @@ fi
 
 if yn "Configure iMessage"; then
   IMESSAGE_ENABLED=true
-  IMESSAGE_HANDLE="$(prompt "iMessage send/receive handle" "")"
+  IMESSAGE_HANDLE="$(prompt "iMessage send/receive handle" "${DEFAULT_IMESSAGE_HANDLE:-}")"
 fi
 
 cat > "$OUT_FILE" <<EOF

@@ -54,6 +54,8 @@ Read this with:
 - Wired a safe local credentials intake path for integrations:
   - [docs/LOCAL_CREDENTIALS_INTAKE_RUNBOOK.md](/Users/ahjan/phoenix_omega/docs/LOCAL_CREDENTIALS_INTAKE_RUNBOOK.md)
   - `scripts/integrations/intake_all_credentials_local.sh`
+- Added conservative hint-prefill support to messaging setup from the local credentials source:
+  - `scripts/integrations/setup_messaging_channels_local.sh`
 
 ## Current Verified Repo State
 
