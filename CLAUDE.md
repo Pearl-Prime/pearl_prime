@@ -86,4 +86,5 @@ Use it at session start, before every push, and hourly during active repo work.
 - Read `skills/pearl-github/references/repo_memory.md`
 - Read `docs/GITHUB_OPERATIONS_FRAMEWORK.md`
 - Read `docs/GITHUB_GOVERNANCE.md`
+- For browser or Colab tasks, verify visible outputs before claiming completion; keystroke automation alone is not proof. See `docs/COLAB_AND_BROWSER_VERIFICATION_RUNBOOK.md`
 - Stop and verify rather than improvising

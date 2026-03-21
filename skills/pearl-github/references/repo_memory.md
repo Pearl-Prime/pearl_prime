@@ -136,3 +136,30 @@ When in doubt:
 3. Check tool existence before following scripted instructions
 4. Prefer recovery branches from `origin/main`
 5. Treat stale local branches and worktree branches as debt until explicitly cleaned
+
+## Cleanup Memory — 2026-03-20 / 2026-03-21 verification
+
+Verified current end state after cleanup:
+
+- only one live worktree remains: the main repo checkout
+- only four local branches remain:
+  - `main`
+  - `codex/runtime-consolidation`
+  - `codex/pearl-news-cleanup`
+  - `codex/next-dev-clean`
+- the previously merged remote branches were deleted successfully:
+  - `origin/codex/fix-wp-site-url-normalization`
+  - `origin/codex/harden-pearl-news-pipeline`
+
+Operational lessons:
+
+- do not trust pasted cleanup summaries without re-running `git branch -vv`, `git worktree list --porcelain`, and merged/unmerged remote branch checks
+- on this repo, `scripts/git/push_guard.py` may be absent even though `ps.txt` references it
+- `scripts/ci/preflight_push.sh` should be invoked with `bash`
+- `git branch -r --merged origin/main` and `git branch -r --no-merged origin/main` are the fastest safe branch cleanup inventory pair
+- local `main` can look "healthy enough" while still being unsuitable for direct work because of autobackup commits and unrelated local modifications
+
+Ongoing state tracking:
+
+- use `docs/PEARL_GITHUB_STATE.md` as the fast resume/checklist file
+- update it whenever branch inventory, Colab verification status, or next actions materially change
