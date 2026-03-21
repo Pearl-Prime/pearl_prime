@@ -1,0 +1,114 @@
+You are entering the Phoenix Omega repo. Follow this protocol exactly.
+
+═══════════════════════════════════════════
+SPECIALIZED AGENT
+═══════════════════════════════════════════
+
+This branch is wired for one specialized agent:
+
+  Pearl_GitHub — GitHub operations agent (branching, committing, pushing, PRs,
+                  CI workflows, push-guard, branch protection, repo health,
+                  drift prevention, and recovery)
+                  Skill: skills/pearl-github/SKILL.md
+                  Onboarding: docs/PEARL_GITHUB_ONBOARDING.md
+
+If your task is GIT/GITHUB/PUSH/PR/BRANCH/CI/WORKFLOW/REPO-HEALTH:
+  - Use Pearl_GitHub
+  - Run the hourly health check at session start and before every push:
+    `bash scripts/git/health_check.sh`
+
+If your task is not GitHub-related:
+  - Read `docs/DOCS_INDEX.md`
+  - Find the owning spec/runbook before doing work
+  - Do not guess
+
+═══════════════════════════════════════════
+STEP 1: READ
+═══════════════════════════════════════════
+
+Read these files in order before any git or GitHub work:
+
+1. `CLAUDE.md`
+2. `docs/PEARL_GITHUB_ONBOARDING.md`
+3. `skills/pearl-github/SKILL.md`
+4. `skills/pearl-github/references/git_system.md`
+5. `skills/pearl-github/references/repo_memory.md`
+6. `docs/GITHUB_OPERATIONS_FRAMEWORK.md`
+7. `docs/GITHUB_GOVERNANCE.md`
+8. `docs/BRANCH_PROTECTION_REQUIREMENTS.md`
+9. `docs/GITHUB_GOVERNANCE_INCIDENT_RUNBOOK.md`
+10. `docs/DOCS_INDEX.md`
+
+═══════════════════════════════════════════
+STEP 2: PREFLIGHT
+═══════════════════════════════════════════
+
+Before any branch, commit, push, PR, merge, or workflow action:
+
+1. `git branch --show-current`
+2. `git status --short`
+3. `git fetch origin`
+4. `git rev-list --left-right --count origin/main...HEAD`
+5. `PYTHONPATH=. python scripts/git/push_guard.py`
+6. `scripts/ci/preflight_push.sh`
+7. `bash scripts/git/health_check.sh`
+
+Never skip preflight.
+
+═══════════════════════════════════════════
+STEP 3: BRANCH RULES
+═══════════════════════════════════════════
+
+Always branch from `origin/main`:
+
+```bash
+git fetch origin
+git checkout -b agent/<task-summary> origin/main
+```
+
+Never branch from `codex/*` or another local branch.
+If push-guard blocks because the branch base is wrong, recover with:
+
+```bash
+git fetch origin
+git checkout -b agent/<task-summary>-clean origin/main
+git cherry-pick <commit>
+git push -u origin agent/<task-summary>-clean
+```
+
+═══════════════════════════════════════════
+STEP 4: HOURLY CHECKLIST
+═══════════════════════════════════════════
+
+Run this every hour while doing repo work:
+
+1. Confirm branch and working tree are sane
+2. Confirm no `.git/index.lock`
+3. Confirm you are still near `origin/main`
+4. Confirm push-guard still passes
+5. Confirm no oversized files slipped in
+6. Confirm no stale cherry-pick/rebase is in progress
+7. Confirm planned push still fits PR scope
+8. Confirm next action: branch, commit, push, PR, or stop
+
+Command:
+
+```bash
+bash scripts/git/health_check.sh
+```
+
+═══════════════════════════════════════════
+STEP 5: COORDINATION
+═══════════════════════════════════════════
+
+Pearl_GitHub owns:
+  - branch creation
+  - commit hygiene
+  - push safety
+  - PR creation/readiness
+  - CI workflow awareness
+  - push-guard failures
+  - branch cleanup
+
+Other work can happen in parallel, but no agent should improvise git operations
+without Pearl_GitHub's preflight and checklist.
