@@ -58,6 +58,10 @@ Read this with:
   - `scripts/integrations/setup_messaging_channels_local.sh`
 - Added a short per-channel messaging requirements report:
   - `scripts/integrations/report_messaging_requirements_local.sh`
+- Merged the AI Manga Dharma spec suite on `main`:
+  - [PR #31](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/31)
+  - [specs/AI_MANGA_PIPELINE_SUMMARY.md](/Users/ahjan/phoenix_omega/specs/AI_MANGA_PIPELINE_SUMMARY.md)
+  - [specs/README.md](/Users/ahjan/phoenix_omega/specs/README.md)
 
 ## Current Verified Repo State
 
@@ -68,6 +72,7 @@ Read this with:
   - `codex/main-autobackup-20260320-2124`
 - `agent/ops-docs-and-integrations` has been merged and deleted on remote
 - `agent/pearl-github-state-followup` has been merged and deleted locally
+- The AI Manga Dharma system is now documented on `main` as a 14-document spec suite under `specs/`
 
 ## Current Verified Branch Inventory
 
@@ -145,11 +150,12 @@ Evidence held in thread:
 
 ## Next Actions
 
-1. Execute the agreed delete set from [docs/BRANCH_DISPOSITION_2026_03_20.md](/Users/ahjan/phoenix_omega/docs/BRANCH_DISPOSITION_2026_03_20.md)
-2. Open fresh harvest branches from `origin/main` for any kept feature payloads
-3. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
-4. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
-5. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
+1. Use [specs/AI_MANGA_PIPELINE_SUMMARY.md](/Users/ahjan/phoenix_omega/specs/AI_MANGA_PIPELINE_SUMMARY.md) as the governed entry point for manga implementation and review
+2. Execute the agreed delete set from [docs/BRANCH_DISPOSITION_2026_03_20.md](/Users/ahjan/phoenix_omega/docs/BRANCH_DISPOSITION_2026_03_20.md)
+3. Open fresh harvest branches from `origin/main` for any kept feature payloads
+4. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
+5. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
+6. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
 
 ## Pearl_GitHub Operating Reminder
 
