@@ -49,6 +49,8 @@ Read this with:
   - `origin/agent/ops-docs-and-integrations`
 - Re-fired Colab cells 10-13 via local browser runner
 - User explicitly confirmed Colab Steps 10-13 completed after Step 10 output was verified
+- Completed branch-by-branch disposition audit for the 10 remaining remote `codex/*` branches:
+  - [docs/BRANCH_DISPOSITION_2026_03_20.md](/Users/ahjan/phoenix_omega/docs/BRANCH_DISPOSITION_2026_03_20.md)
 
 ## Current Verified Repo State
 
@@ -91,6 +93,22 @@ Likely archive / stale audit:
 - `origin/codex/ei-v2-hybrid-only-clean` — `98 behind / 7 ahead`
 - `origin/codex/pearl-news-workflows-clean` — `8 behind / 26 ahead`
 
+### Remote branch disposition decided
+
+- `delete`
+  - `origin/codex/ei-v2-gate-fix`
+  - `origin/codex/ei-v2-hybrid-only-clean`
+  - `origin/codex/governance-evidence-pack`
+  - `origin/codex/pearl-news-workflows-clean`
+- `harvest`
+  - `origin/codex/ei-v2-hybrid-pr`
+  - `origin/codex/governance-100`
+  - `origin/codex/pearl-news-cleanup`
+  - `origin/codex/phoenixcontrol-ui`
+  - `origin/codex/runtime-governance-core`
+- `keep-open`
+  - `origin/codex/runtime-consolidation`
+
 ## Current Verified Colab Status
 
 Notebook:
@@ -120,9 +138,10 @@ Evidence held in thread:
 
 ## Next Actions
 
-1. Perform branch-by-branch disposition of the 10 remaining remote `codex/*` branches
-2. Keep `main` synced before the next direct repo-health pass
-3. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
+1. Execute the agreed delete set from [docs/BRANCH_DISPOSITION_2026_03_20.md](/Users/ahjan/phoenix_omega/docs/BRANCH_DISPOSITION_2026_03_20.md)
+2. Open fresh harvest branches from `origin/main` for any kept feature payloads
+3. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
+4. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
 
 ## Pearl_GitHub Operating Reminder
 
