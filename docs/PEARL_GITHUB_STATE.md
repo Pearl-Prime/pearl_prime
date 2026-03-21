@@ -1,6 +1,6 @@
 # Pearl_GitHub State
 
-Last verified: 2026-03-20
+Last verified: 2026-03-21
 Owner: Pearl_GitHub
 
 ## Purpose
@@ -40,42 +40,58 @@ Read this with:
   - [docs/MESSAGING_CHANNELS_LOCAL_SETUP.md](/Users/ahjan/phoenix_omega/docs/MESSAGING_CHANNELS_LOCAL_SETUP.md)
 - Moved this work onto a clean branch from `origin/main`:
   - `agent/ops-docs-and-integrations`
+- Merged PR #24:
+  - [PR #24](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/24)
+- Repaired local `main` safely:
+  - saved autobackup commits on `codex/main-autobackup-20260320-2124`
+  - reset `main` back to `origin/main`
+- Deleted merged remote agent branch:
+  - `origin/agent/ops-docs-and-integrations`
+- Re-fired Colab cells 10-13 via local browser runner
+- User explicitly confirmed Colab Steps 10-13 completed after Step 10 output was verified
 
 ## Current Verified Repo State
 
-- Clean working branch for this work:
-  - `agent/ops-docs-and-integrations`
-- Branch ancestry versus `origin/main`:
-  - behind `0`, ahead `1`
-- Preflight:
-  - `bash scripts/ci/preflight_push.sh` passes
-- Push-guard:
-  - `scripts/git/push_guard.py` is missing on this branch, so Pearl_GitHub must fall back to ancestry checks plus preflight
-- Health check:
-  - branch itself is clean
-  - repo still warns that local `main` differs from `origin/main`
+- Follow-up branch for persistent state updates:
+  - `agent/pearl-github-state-followup`
+- PR for this follow-up branch:
+  - [PR #25](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/25)
+- Local `main` was repaired, then advanced remote activity left it:
+  - behind `origin/main` by 1
+- Safety backup branch exists:
+  - `codex/main-autobackup-20260320-2124`
+- `agent/ops-docs-and-integrations` has been merged and deleted on remote
 
 ## Current Verified Branch Inventory
 
 ### Local branches kept
 
 - `main`
+- `codex/main-autobackup-20260320-2124`
 - `codex/runtime-consolidation`
 - `codex/pearl-news-cleanup`
 - `codex/next-dev-clean`
 
 ### Remote branches still needing audit
 
-- `origin/codex/ei-v2-gate-fix`
-- `origin/codex/ei-v2-hybrid-only-clean`
-- `origin/codex/ei-v2-hybrid-pr`
-- `origin/codex/governance-100`
-- `origin/codex/governance-evidence-pack`
-- `origin/codex/pearl-news-cleanup`
-- `origin/codex/pearl-news-workflows-clean`
-- `origin/codex/phoenixcontrol-ui`
-- `origin/codex/runtime-consolidation`
-- `origin/codex/runtime-governance-core`
+Keep / deliberate audit required:
+
+- `origin/codex/runtime-consolidation` — `3 behind / 165 ahead`
+
+Likely merge-candidate audit:
+
+- `origin/codex/ei-v2-hybrid-pr` — `9 behind / 1 ahead`
+- `origin/codex/pearl-news-cleanup` — `3 behind / 1 ahead`
+- `origin/codex/phoenixcontrol-ui` — `3 behind / 1 ahead`
+- `origin/codex/runtime-governance-core` — `3 behind / 1 ahead`
+- `origin/codex/governance-evidence-pack` — `8 behind / 3 ahead`
+- `origin/codex/governance-100` — `9 behind / 5 ahead`
+
+Likely archive / stale audit:
+
+- `origin/codex/ei-v2-gate-fix` — `7 behind / 54 ahead`
+- `origin/codex/ei-v2-hybrid-only-clean` — `96 behind / 7 ahead`
+- `origin/codex/pearl-news-workflows-clean` — `6 behind / 26 ahead`
 
 ## Current Verified Colab Status
 
@@ -94,22 +110,22 @@ Confirmed from visible notebook output:
 - Step 7 passed
 - Step 8 passed
 - Step 9 passed
+- Step 10 PDF export passed
+- Step 11 provenance manifest passed
+- Step 12 style comparison render passed
+- Step 13 determinism result passed
 
-Not yet confirmed from visible output:
+Evidence held in thread:
 
-- Step 10 PDF export
-- Step 11 provenance manifest
-- Step 12 style comparison render
-- Step 13 determinism result
-
-Rule: do not mark the notebook complete until those four outputs are visibly confirmed.
+- visible Step 10 output was pasted and verified
+- user explicitly confirmed: "all 13 done , i ran them"
 
 ## Next Actions
 
-1. Open and review the PR for `agent/ops-docs-and-integrations`
-2. Audit the 10 remaining unmerged remote `codex/*` branches
-3. Decide what to do about local `main` being ahead of `origin/main` because of the autobackup commit
-4. Verify Colab Steps 10-13 from actual notebook output before calling the manga test fully done
+1. Review and merge this state-followup PR
+2. Perform branch-by-branch audit of the 9 remaining remote `codex/*` branches
+3. Refresh local `main` from `origin/main` when needed before the next direct repo-health pass
+4. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
 
 ## Pearl_GitHub Operating Reminder
 

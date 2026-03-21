@@ -163,3 +163,10 @@ Ongoing state tracking:
 
 - use `docs/PEARL_GITHUB_STATE.md` as the fast resume/checklist file
 - update it whenever branch inventory, Colab verification status, or next actions materially change
+
+Latest verified state change:
+
+- PR #24 merged on 2026-03-21T07:35:43Z
+- local `main` was repaired by saving autobackup commits to `codex/main-autobackup-20260320-2124` and resetting `main` to `origin/main`
+- remote `origin/main` later advanced, so local `main` is now behind by 1 rather than ahead
+- Step 10 PDF export was visibly confirmed in thread, and the user explicitly confirmed Colab Steps 1-13 are done
