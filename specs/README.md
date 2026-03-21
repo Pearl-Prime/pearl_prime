@@ -1,6 +1,6 @@
 # Phoenix Specs
 
-**Last updated:** 2026-03-03
+**Last updated:** 2026-03-21
 
 **Canonical docs index:** [../docs/DOCS_INDEX.md](../docs/DOCS_INDEX.md). For GitHub (both repos, workflows, PR flow, runner): DOCS_INDEX → [GitHub Operations Framework](../docs/DOCS_INDEX.md#github-operations-framework) → [GITHUB_OPERATIONS_FRAMEWORK.md](../docs/GITHUB_OPERATIONS_FRAMEWORK.md).
 
@@ -15,6 +15,31 @@
 **Still to do (whole system):** See [../docs/SYSTEMS_V4.md § Remaining to finish](../docs/SYSTEMS_V4.md#remaining-to-finish-whole-system) and [../docs/PLANNING_STATUS.md](../docs/PLANNING_STATUS.md). Each spec below that is part of the system includes a *Still to do* section pointing to those docs.
 
 **System audit (all functions working):** [../docs/SYSTEMS_AUDIT.md](../docs/SYSTEMS_AUDIT.md) — entry points, pipeline, CI/QA, tools; environment (venv/PyYAML); gate 16 (freebie density) data note.
+
+## AI Manga Dharma System
+
+This repo now includes the full AI Manga Dharma spec suite: one master
+pipeline summary plus 13 agent/system specs covering series setup, chapter
+production, lettering/layout, QC, and brand/anti-spam controls. These specs
+should be read together with [MANGA_MODE_SYSTEM_SPEC.md](./MANGA_MODE_SYSTEM_SPEC.md),
+which remains the broader system-level reference.
+
+| Spec | Purpose |
+|------|---------|
+| [AI_MANGA_PIPELINE_SUMMARY.md](./AI_MANGA_PIPELINE_SUMMARY.md) | Master reference across the complete manga pipeline; maps all agents, artifacts, and handoffs. |
+| [VISUAL_AGENT_SPEC.md](./VISUAL_AGENT_SPEC.md) | Deterministic prompt planning for panel rendering; no story rewriting, no text generation inside art. |
+| [LETTERING_AGENT_SPEC.md](./LETTERING_AGENT_SPEC.md) | Post-render text placement and styling rules using composition notes and lettering style bibles. |
+| [VISUAL_IDENTITY_AGENT_SPEC.md](./VISUAL_IDENTITY_AGENT_SPEC.md) | Series-level visual language authority: style bibles, motif systems, character design, asset registry. |
+| [QC_AGENT_SPEC.md](./QC_AGENT_SPEC.md) | Final release authority for structural, visual, lettering, silence, and transmission-rule enforcement. |
+| [MANGA_CHAPTER_WRITER_SPEC.md](./MANGA_CHAPTER_WRITER_SPEC.md) | Writer-facing chapter script expansion from clean beat sheets into panel-by-panel manga scripts. |
+| [MANGA_STORY_ARCHITECT_SPEC.md](./MANGA_STORY_ARCHITECT_SPEC.md) | Chapter beat planning and dual-view handoff logic between genre blueprint and chapter writing. |
+| [MANGA_GENRE_AGENT_SPEC.md](./MANGA_GENRE_AGENT_SPEC.md) | Genre-native transformation of teaching intent into emotional story architecture. |
+| [MANGA_TEACHING_LIBRARY_SPEC.md](./MANGA_TEACHING_LIBRARY_SPEC.md) | Dharma atom source-of-truth, seed-series profiles, and transmission rules. |
+| [MANGA_LAYOUT_AGENT_SPEC.md](./MANGA_LAYOUT_AGENT_SPEC.md) | Final page composition rules across panel images, lettering specs, and reading-direction layouts. |
+| [MANGA_TEXT_RENDERING_SPEC.md](./MANGA_TEXT_RENDERING_SPEC.md) | Core doctrine for overlay text rendering, never readable text inside generated panel images. |
+| [MANGA_BRAND_DNA_ANTI_SPAM_SPEC.md](./MANGA_BRAND_DNA_ANTI_SPAM_SPEC.md) | Visual and production DNA per therapeutic brand; anti-duplication and anti-spam protections. |
+| [MANGA_SERIES_BIBLE_SPEC.md](./MANGA_SERIES_BIBLE_SPEC.md) | Series-level continuity bible covering motifs, world logic, character arcs, and escalation memory. |
+| [MANGA_PRODUCTION_PIPELINE_SPEC.md](./MANGA_PRODUCTION_PIPELINE_SPEC.md) | End-to-end production orchestration from intake through cold-read test and release decision. |
 
 | Spec | Audience | Purpose |
 |------|----------|---------|
