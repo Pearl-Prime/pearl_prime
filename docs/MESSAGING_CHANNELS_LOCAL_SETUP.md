@@ -26,6 +26,10 @@ Or do the one-pass setup for everything:
 /bin/zsh ./scripts/integrations/setup_all_local_integrations.sh
 ```
 
+If `docs/all_credentials.txt` exists locally, the master setup can import the
+local source metadata first. That is only a helper for service-matched human
+lookup. It does not turn plain web-login credentials into API tokens.
+
 It will ask, channel by channel, whether you want to configure:
 
 - LINE
@@ -82,9 +86,11 @@ Shortcut wrappers:
 ## Notes
 
 - `.messaging_channels.local.yaml` is gitignored.
+- `.integration_sources.local.yaml` is gitignored.
 - Keychain services are named `phoenix-omega-line`, `phoenix-omega-whatsapp`, `phoenix-omega-wechat`, and `phoenix-omega-messenger`.
 - iMessage is stored as a local handle only because it does not use a normal public API-key model like the others.
 - This creates a clean local source of truth for channels you already set up. It does not bypass platform logins, approvals, or business verification.
 - LINE push uses the LINE Messaging API user/group ID model.
 - WhatsApp and Messenger use Meta Graph API access tokens and recipient IDs/phone numbers.
 - WeChat custom send requires the recipient `openid`, not just the public-facing WeChat ID.
+- Use only service-matched credentials or generated app tokens. Do not try random username/password combinations across services.

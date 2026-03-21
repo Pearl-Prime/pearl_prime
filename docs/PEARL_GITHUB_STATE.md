@@ -51,6 +51,9 @@ Read this with:
 - User explicitly confirmed Colab Steps 10-13 completed after Step 10 output was verified
 - Completed branch-by-branch disposition audit for the 10 remaining remote `codex/*` branches:
   - [docs/BRANCH_DISPOSITION_2026_03_20.md](/Users/ahjan/phoenix_omega/docs/BRANCH_DISPOSITION_2026_03_20.md)
+- Wired a safe local credentials intake path for integrations:
+  - [docs/LOCAL_CREDENTIALS_INTAKE_RUNBOOK.md](/Users/ahjan/phoenix_omega/docs/LOCAL_CREDENTIALS_INTAKE_RUNBOOK.md)
+  - `scripts/integrations/intake_all_credentials_local.sh`
 
 ## Current Verified Repo State
 

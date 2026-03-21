@@ -16,6 +16,13 @@ Run:
 ./scripts/integrations/setup_wordpress_local.sh
 ```
 
+If `docs/all_credentials.txt` exists locally and already contains the
+structured WordPress application-password block, you can import it first:
+
+```bash
+/bin/zsh ./scripts/integrations/intake_all_credentials_local.sh
+```
+
 It will ask for:
 
 - WordPress site URL
@@ -71,5 +78,6 @@ We can also wire the same values into GitHub Actions secrets after the local tes
 
 - `.env.wordpress.local` is gitignored.
 - The app password is not stored in the repo.
+- `docs/all_credentials.txt` is treated as a local-only credential source and is gitignored.
 - This only covers WordPress because it is the cleanest working integration already present in this repo.
 - Messenger, WhatsApp, WeChat, and iMessage each need separate account/platform setup and cannot be fully auto-created by me.
