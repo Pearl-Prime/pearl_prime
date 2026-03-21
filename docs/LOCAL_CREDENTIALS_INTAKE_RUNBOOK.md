@@ -63,3 +63,10 @@ tokens and recipient IDs.
 4. Use `docs/all_credentials.txt` only as a human reference for service-matched
    sign-in where required to obtain the real API token, channel secret, app
    secret, or application password.
+
+5. If you want a short checklist of what is still missing for each messaging
+   channel, run:
+
+```bash
+/bin/zsh ./scripts/integrations/report_messaging_requirements_local.sh
+```

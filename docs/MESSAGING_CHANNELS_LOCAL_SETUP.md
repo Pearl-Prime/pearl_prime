@@ -54,6 +54,12 @@ It will ask, channel by channel, whether you want to configure:
 /bin/zsh ./scripts/integrations/check_messaging_channels_local.sh
 ```
 
+To see exactly what is still missing by channel:
+
+```bash
+/bin/zsh ./scripts/integrations/report_messaging_requirements_local.sh
+```
+
 ## Send a message
 
 Dry-run first:

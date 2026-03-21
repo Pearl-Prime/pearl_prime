@@ -56,6 +56,8 @@ Read this with:
   - `scripts/integrations/intake_all_credentials_local.sh`
 - Added conservative hint-prefill support to messaging setup from the local credentials source:
   - `scripts/integrations/setup_messaging_channels_local.sh`
+- Added a short per-channel messaging requirements report:
+  - `scripts/integrations/report_messaging_requirements_local.sh`
 
 ## Current Verified Repo State
 
@@ -147,6 +149,7 @@ Evidence held in thread:
 2. Open fresh harvest branches from `origin/main` for any kept feature payloads
 3. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
 4. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
+5. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
 
 ## Pearl_GitHub Operating Reminder
 

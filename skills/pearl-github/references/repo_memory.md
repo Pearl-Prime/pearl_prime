@@ -173,3 +173,4 @@ Latest verified state change:
 - Step 10 PDF export was visibly confirmed in thread, and the user explicitly confirmed Colab Steps 1-13 are done
 - the remaining 10 remote `codex/*` branches were dispositioned into `delete`, `harvest`, and `keep-open` buckets in `docs/BRANCH_DISPOSITION_2026_03_20.md`
 - a local-only credentials source may exist at `docs/all_credentials.txt`; agents should use `scripts/integrations/intake_all_credentials_local.sh`, avoid echoing secrets, and never try random username/password combinations across services
+- for messaging work, agents should run `scripts/integrations/report_messaging_requirements_local.sh` before setup or send attempts so missing API tokens, recipient IDs, and handles are explicit
