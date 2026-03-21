@@ -52,15 +52,13 @@ Read this with:
 
 ## Current Verified Repo State
 
-- Follow-up branch for persistent state updates:
-  - `agent/pearl-github-state-followup`
-- PR for this follow-up branch:
+- PR #25 merged:
   - [PR #25](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/25)
-- Local `main` was repaired, then advanced remote activity left it:
-  - behind `origin/main` by 1
+- Local `main` now matches `origin/main`
 - Safety backup branch exists:
   - `codex/main-autobackup-20260320-2124`
 - `agent/ops-docs-and-integrations` has been merged and deleted on remote
+- `agent/pearl-github-state-followup` has been merged and deleted locally
 
 ## Current Verified Branch Inventory
 
@@ -76,22 +74,22 @@ Read this with:
 
 Keep / deliberate audit required:
 
-- `origin/codex/runtime-consolidation` — `3 behind / 165 ahead`
+- `origin/codex/runtime-consolidation` — `5 behind / 165 ahead`
 
 Likely merge-candidate audit:
 
-- `origin/codex/ei-v2-hybrid-pr` — `9 behind / 1 ahead`
-- `origin/codex/pearl-news-cleanup` — `3 behind / 1 ahead`
-- `origin/codex/phoenixcontrol-ui` — `3 behind / 1 ahead`
-- `origin/codex/runtime-governance-core` — `3 behind / 1 ahead`
-- `origin/codex/governance-evidence-pack` — `8 behind / 3 ahead`
-- `origin/codex/governance-100` — `9 behind / 5 ahead`
+- `origin/codex/ei-v2-hybrid-pr` — `11 behind / 1 ahead`
+- `origin/codex/pearl-news-cleanup` — `5 behind / 1 ahead`
+- `origin/codex/phoenixcontrol-ui` — `5 behind / 1 ahead`
+- `origin/codex/runtime-governance-core` — `5 behind / 1 ahead`
+- `origin/codex/governance-evidence-pack` — `10 behind / 3 ahead`
+- `origin/codex/governance-100` — `11 behind / 5 ahead`
 
 Likely archive / stale audit:
 
-- `origin/codex/ei-v2-gate-fix` — `7 behind / 54 ahead`
-- `origin/codex/ei-v2-hybrid-only-clean` — `96 behind / 7 ahead`
-- `origin/codex/pearl-news-workflows-clean` — `6 behind / 26 ahead`
+- `origin/codex/ei-v2-gate-fix` — `9 behind / 54 ahead`
+- `origin/codex/ei-v2-hybrid-only-clean` — `98 behind / 7 ahead`
+- `origin/codex/pearl-news-workflows-clean` — `8 behind / 26 ahead`
 
 ## Current Verified Colab Status
 
@@ -122,10 +120,9 @@ Evidence held in thread:
 
 ## Next Actions
 
-1. Review and merge this state-followup PR
-2. Perform branch-by-branch audit of the 9 remaining remote `codex/*` branches
-3. Refresh local `main` from `origin/main` when needed before the next direct repo-health pass
-4. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
+1. Perform branch-by-branch disposition of the 10 remaining remote `codex/*` branches
+2. Keep `main` synced before the next direct repo-health pass
+3. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
 
 ## Pearl_GitHub Operating Reminder
 
