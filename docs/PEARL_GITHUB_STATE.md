@@ -75,6 +75,10 @@ Read this with:
   - `config/manga/asset_selection_priority.yaml`
 - Audited PR #21 / `codex/runtime-consolidation` at deeper commit and file-scope level:
   - [docs/RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md](./RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md)
+- Added an hourly Pearl_GitHub autopilot path for repo alignment:
+  - `scripts/git/hourly_repo_alignment.py`
+  - `scripts/git/hourly_repo_alignment.sh`
+  - [docs/PEARL_GITHUB_AUTOPILOT_RUNBOOK.md](./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md)
 
 ## Current Verified Repo State
 
@@ -183,12 +187,13 @@ Evidence held in thread:
 3. Execute the agreed delete set from [docs/BRANCH_DISPOSITION_2026_03_20.md](./BRANCH_DISPOSITION_2026_03_20.md)
 4. For PR #21 specifically, use [docs/RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md](./RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md) as the execution plan
 5. Open fresh harvest branches from `origin/main` for any kept feature payloads
-6. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
-7. Close PR #21 after the wanted harvest buckets are extracted or rejected
-8. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
-9. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
-10. Treat free Colab as the current manga render engine and ComfyUI as a later scaling backend until actual ComfyUI workflow/config lands in repo
-11. Use `max-quality-catalog.yml` for manual sharded self-hosted QA runs when local serial execution is too slow
+6. Turn on the hourly Pearl_GitHub autopilot after it lands on `main`
+7. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
+8. Close PR #21 after the wanted harvest buckets are extracted or rejected
+9. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
+10. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
+11. Treat free Colab as the current manga render engine and ComfyUI as a later scaling backend until actual ComfyUI workflow/config lands in repo
+12. Use `max-quality-catalog.yml` for manual sharded self-hosted QA runs when local serial execution is too slow
 
 ## Pearl_GitHub Operating Reminder
 

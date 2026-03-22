@@ -56,6 +56,12 @@ bash scripts/git/health_check.sh
 
 Run this at session start, before pushes, and ideally every hour. It checks: branch state, remote sync, push-guard compliance, lock files, stale branches, and large files.
 
+For a full hourly cleanup loop that can merge clean PRs, sync local `main`, and prune stale local branches, use:
+
+```bash
+bash scripts/git/hourly_repo_alignment.sh
+```
+
 ## When Push-Guard Blocks
 
 ```bash
@@ -76,6 +82,8 @@ git push -u origin agent/<task>-clean
 | `scripts/git/push_guard.py` | Blocks oversized pushes |
 | `scripts/git/safe_push.sh` | Push with retry + backoff |
 | `scripts/git/health_check.sh` | Hourly health check |
+| `scripts/git/hourly_repo_alignment.py` | Hourly Pearl_GitHub autopilot |
+| `scripts/git/hourly_repo_alignment.sh` | Shell wrapper for hourly autopilot |
 | `scripts/git/install_push_guard.sh` | Install push hook |
 | `scripts/ci/preflight_push.sh` | Pre-push validation |
 | `.githooks/pre-push` | Active push hook |
@@ -88,5 +96,6 @@ git push -u origin agent/<task>-clean
 - `skills/pearl-github/SKILL.md` — Full agent skill (all rules, workflows, recovery)
 - `docs/LOCAL_GIT_DRIFT_PREVENTION_SOP.md` — Branching rules
 - `docs/BRANCH_PROTECTION_REQUIREMENTS.md` — CI requirements for main
+- `docs/PEARL_GITHUB_AUTOPILOT_RUNBOOK.md` — Hourly repo-alignment loop and report outputs
 - `docs/GITHUB_GOVERNANCE.md` — Governance rules
 - `docs/AUTO_MERGE_POLICY.md` — Auto-merge for bot-fix PRs

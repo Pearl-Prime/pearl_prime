@@ -165,6 +165,7 @@ Ongoing state tracking:
 - update it whenever branch inventory, Colab verification status, or next actions materially change
 - for very large QA catalog runs, prefer a shardable GitHub workflow on self-hosted runners instead of one local monolith
 - the max-quality catalog path is teacher-shard + regular-shard oriented, with artifacts uploaded per shard
+- for continuous repo hygiene, prefer `scripts/git/hourly_repo_alignment.sh` over ad hoc manual cleanup; it writes a report trail under `artifacts/governance/repo_alignment/`
 
 Latest verified state change:
 
@@ -196,3 +197,8 @@ Additional operating lesson:
   - top-level changed-path counts
   - non-backup commit list
 - then convert the branch into bucketed harvest PRs instead of trying to "fix the conflicts"
+- Pearl_GitHub now has an hourly autopilot implementation branch that can:
+  - merge clean PRs
+  - backup and hard-sync local `main` to `origin/main`
+  - prune stale local branches with gone upstreams
+  - write JSON and Markdown reports for each cycle
