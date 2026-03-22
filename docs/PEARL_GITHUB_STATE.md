@@ -65,6 +65,14 @@ Read this with:
 - Added a manual self-hosted GitHub workflow path for maximum QA catalog runs:
   - `.github/workflows/max-quality-catalog.yml`
   - `scripts/run_max_quality_catalog.py`
+- Opened a clean manga implementation branch from `origin/main`:
+  - `agent/manga-pipeline-kernel`
+- Added a high-level implementation map for future agents:
+  - [docs/MANGA_IMPLEMENTATION_OUTLINE.md](/Users/ahjan/phoenix_omega/docs/MANGA_IMPLEMENTATION_OUTLINE.md)
+- Extended the first manga implementation slice with low-cost production scaffolding:
+  - `panel_prompts.json` manifest compiler for free Colab and later backends
+  - retrieval-first manga asset resolver
+  - `config/manga/asset_selection_priority.yaml`
 
 ## Current Verified Repo State
 
@@ -77,6 +85,15 @@ Read this with:
 - `agent/pearl-github-state-followup` has been merged and deleted locally
 - The AI Manga Dharma system is now documented on `main` as a 14-document spec suite under `specs/`
 - A shardable max-quality catalog path now exists for GitHub-triggered QA runs across teacher-mode and regular mode
+- The first manga build slice is now defined as a kernel:
+  - config-backed style archetypes and panel layouts
+  - deterministic visual prompt compiler in `phoenix_v4.manga`
+  - seed teaching-library atom support for `panel_expression`
+  - focused tests
+- The low-cost render path is now clearer:
+  - free Colab remains the validated renderer for seed images
+  - manga can now export `panel_prompts.json` and resolve reusable assets before requesting new renders
+  - ComfyUI is still planned as the later production backend, not current repo wiring
 
 ## Current Verified Branch Inventory
 
@@ -155,12 +172,19 @@ Evidence held in thread:
 ## Next Actions
 
 1. Use [specs/AI_MANGA_PIPELINE_SUMMARY.md](/Users/ahjan/phoenix_omega/specs/AI_MANGA_PIPELINE_SUMMARY.md) as the governed entry point for manga implementation and review
-2. Execute the agreed delete set from [docs/BRANCH_DISPOSITION_2026_03_20.md](/Users/ahjan/phoenix_omega/docs/BRANCH_DISPOSITION_2026_03_20.md)
-3. Open fresh harvest branches from `origin/main` for any kept feature payloads
-4. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
-5. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
-6. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
-7. Use `max-quality-catalog.yml` for manual sharded self-hosted QA runs when local serial execution is too slow
+2. Progress manga implementation in slices:
+   - kernel/config
+   - chapter artifact contracts
+   - retrieval-first asset reuse
+   - render/assembly
+   - QC/memory
+3. Execute the agreed delete set from [docs/BRANCH_DISPOSITION_2026_03_20.md](/Users/ahjan/phoenix_omega/docs/BRANCH_DISPOSITION_2026_03_20.md)
+4. Open fresh harvest branches from `origin/main` for any kept feature payloads
+5. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
+6. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
+7. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
+8. Treat free Colab as the current manga render engine and ComfyUI as a later scaling backend until actual ComfyUI workflow/config lands in repo
+9. Use `max-quality-catalog.yml` for manual sharded self-hosted QA runs when local serial execution is too slow
 
 ## Pearl_GitHub Operating Reminder
 

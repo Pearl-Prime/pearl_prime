@@ -177,3 +177,8 @@ Latest verified state change:
 - a local-only credentials source may exist at `docs/all_credentials.txt`; agents should use `scripts/integrations/intake_all_credentials_local.sh`, avoid echoing secrets, and never try random username/password combinations across services
 - for messaging work, agents should run `scripts/integrations/report_messaging_requirements_local.sh` before setup or send attempts so missing API tokens, recipient IDs, and handles are explicit
 - PR #31 merged on 2026-03-21T21:34:27Z and placed the AI Manga Dharma system on `main` as a 14-document spec suite under `specs/`; future manga work should start from `specs/AI_MANGA_PIPELINE_SUMMARY.md` and `specs/README.md`
+- manga implementation resumed safely on `agent/manga-pipeline-kernel`, a clean branch from `origin/main`, instead of the dirty local `main` checkout
+- the first implementation slice is intentionally kernel-first: config-backed archetypes/layouts, deterministic visual prompt compilation, and a seed teaching-library override path
+- use `docs/MANGA_IMPLEMENTATION_OUTLINE.md` as the high-level manga implementation map so future agents keep the work slice-based instead of jumping directly into orchestration
+- the next safe manga step is reuse-before-render: export `panel_prompts.json`, resolve assets from a manga bank first, and only then send unresolved panels to the free Colab path
+- ComfyUI remains planned but not wired; free Colab + diffusers is still the validated render path in repo today
