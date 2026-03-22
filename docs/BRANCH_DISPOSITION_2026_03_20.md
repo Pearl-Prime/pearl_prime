@@ -141,6 +141,7 @@ Disposition labels:
   - keep branch and PR for audit reference
   - do not merge directly
   - split into bounded follow-up branches if any part is still wanted
+  - use [docs/RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md](./RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md) as the concrete extraction plan
 
 ### `origin/codex/runtime-governance-core`
 

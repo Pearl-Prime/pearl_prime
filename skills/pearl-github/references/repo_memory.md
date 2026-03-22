@@ -182,3 +182,17 @@ Latest verified state change:
 - use `docs/MANGA_IMPLEMENTATION_OUTLINE.md` as the high-level manga implementation map so future agents keep the work slice-based instead of jumping directly into orchestration
 - the next safe manga step is reuse-before-render: export `panel_prompts.json`, resolve assets from a manga bank first, and only then send unresolved panels to the free Colab path
 - ComfyUI remains planned but not wired; free Colab + diffusers is still the validated render path in repo today
+- PR #21 / `codex/runtime-consolidation` was re-audited on 2026-03-22 and confirmed to be a harvest-only branch:
+  - about `22,611` changed paths
+  - `199 ahead / 12 behind` vs `origin/main`
+  - only `17` non-backup commits worth reviewing
+  - source of truth for extraction order is `docs/RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md`
+
+Additional operating lesson:
+
+- when a branch is this large, stop using raw PR state as the decision artifact
+- compute:
+  - ahead/behind
+  - top-level changed-path counts
+  - non-backup commit list
+- then convert the branch into bucketed harvest PRs instead of trying to "fix the conflicts"

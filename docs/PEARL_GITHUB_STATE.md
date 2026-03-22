@@ -14,15 +14,15 @@ It tracks:
 
 Read this with:
 
-- [ps.txt](/Users/ahjan/phoenix_omega/ps.txt)
-- [CLAUDE.md](/Users/ahjan/phoenix_omega/CLAUDE.md)
-- [skills/pearl-github/references/repo_memory.md](/Users/ahjan/phoenix_omega/skills/pearl-github/references/repo_memory.md)
+- [ps.txt](../ps.txt)
+- [CLAUDE.md](../CLAUDE.md)
+- [skills/pearl-github/references/repo_memory.md](../skills/pearl-github/references/repo_memory.md)
 
 ## Completed
 
 - Verified `ps.txt` wiring to Pearl_GitHub
 - Verified Pearl_GitHub skill, onboarding, and memory files exist
-- Verified [scripts/manga/colab_manga_test.ipynb](/Users/ahjan/phoenix_omega/scripts/manga/colab_manga_test.ipynb) exists on `main`
+- Verified [scripts/manga/colab_manga_test.ipynb](../scripts/manga/colab_manga_test.ipynb) exists on `main`
 - Verified current local/remote branch inventory from git, not from pasted thread history
 - Confirmed cleanup end state:
   - only 4 local branches remain
@@ -31,13 +31,13 @@ Read this with:
   - `origin/codex/fix-wp-site-url-normalization`
   - `origin/codex/harden-pearl-news-pipeline`
 - Added branch cleanup documentation:
-  - [docs/BRANCH_CLEANUP_2026_03_21.md](/Users/ahjan/phoenix_omega/docs/BRANCH_CLEANUP_2026_03_21.md)
+  - [docs/BRANCH_CLEANUP_2026_03_21.md](./BRANCH_CLEANUP_2026_03_21.md)
 - Added browser/Colab verification runbook:
-  - [docs/COLAB_AND_BROWSER_VERIFICATION_RUNBOOK.md](/Users/ahjan/phoenix_omega/docs/COLAB_AND_BROWSER_VERIFICATION_RUNBOOK.md)
+  - [docs/COLAB_AND_BROWSER_VERIFICATION_RUNBOOK.md](./COLAB_AND_BROWSER_VERIFICATION_RUNBOOK.md)
 - Added local integrations tooling and docs:
-  - [scripts/integrations](/Users/ahjan/phoenix_omega/scripts/integrations)
-  - [docs/WORDPRESS_LOCAL_SETUP.md](/Users/ahjan/phoenix_omega/docs/WORDPRESS_LOCAL_SETUP.md)
-  - [docs/MESSAGING_CHANNELS_LOCAL_SETUP.md](/Users/ahjan/phoenix_omega/docs/MESSAGING_CHANNELS_LOCAL_SETUP.md)
+  - [scripts/integrations](../scripts/integrations)
+  - [docs/WORDPRESS_LOCAL_SETUP.md](./WORDPRESS_LOCAL_SETUP.md)
+  - [docs/MESSAGING_CHANNELS_LOCAL_SETUP.md](./MESSAGING_CHANNELS_LOCAL_SETUP.md)
 - Moved this work onto a clean branch from `origin/main`:
   - `agent/ops-docs-and-integrations`
 - Merged PR #24:
@@ -50,9 +50,9 @@ Read this with:
 - Re-fired Colab cells 10-13 via local browser runner
 - User explicitly confirmed Colab Steps 10-13 completed after Step 10 output was verified
 - Completed branch-by-branch disposition audit for the 10 remaining remote `codex/*` branches:
-  - [docs/BRANCH_DISPOSITION_2026_03_20.md](/Users/ahjan/phoenix_omega/docs/BRANCH_DISPOSITION_2026_03_20.md)
+  - [docs/BRANCH_DISPOSITION_2026_03_20.md](./BRANCH_DISPOSITION_2026_03_20.md)
 - Wired a safe local credentials intake path for integrations:
-  - [docs/LOCAL_CREDENTIALS_INTAKE_RUNBOOK.md](/Users/ahjan/phoenix_omega/docs/LOCAL_CREDENTIALS_INTAKE_RUNBOOK.md)
+  - [docs/LOCAL_CREDENTIALS_INTAKE_RUNBOOK.md](./LOCAL_CREDENTIALS_INTAKE_RUNBOOK.md)
   - `scripts/integrations/intake_all_credentials_local.sh`
 - Added conservative hint-prefill support to messaging setup from the local credentials source:
   - `scripts/integrations/setup_messaging_channels_local.sh`
@@ -60,19 +60,21 @@ Read this with:
   - `scripts/integrations/report_messaging_requirements_local.sh`
 - Merged the AI Manga Dharma spec suite on `main`:
   - [PR #31](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/31)
-  - [specs/AI_MANGA_PIPELINE_SUMMARY.md](/Users/ahjan/phoenix_omega/specs/AI_MANGA_PIPELINE_SUMMARY.md)
-  - [specs/README.md](/Users/ahjan/phoenix_omega/specs/README.md)
+  - [specs/AI_MANGA_PIPELINE_SUMMARY.md](../specs/AI_MANGA_PIPELINE_SUMMARY.md)
+  - [specs/README.md](../specs/README.md)
 - Added a manual self-hosted GitHub workflow path for maximum QA catalog runs:
   - `.github/workflows/max-quality-catalog.yml`
   - `scripts/run_max_quality_catalog.py`
 - Opened a clean manga implementation branch from `origin/main`:
   - `agent/manga-pipeline-kernel`
 - Added a high-level implementation map for future agents:
-  - [docs/MANGA_IMPLEMENTATION_OUTLINE.md](/Users/ahjan/phoenix_omega/docs/MANGA_IMPLEMENTATION_OUTLINE.md)
+  - [docs/MANGA_IMPLEMENTATION_OUTLINE.md](./MANGA_IMPLEMENTATION_OUTLINE.md)
 - Extended the first manga implementation slice with low-cost production scaffolding:
   - `panel_prompts.json` manifest compiler for free Colab and later backends
   - retrieval-first manga asset resolver
   - `config/manga/asset_selection_priority.yaml`
+- Audited PR #21 / `codex/runtime-consolidation` at deeper commit and file-scope level:
+  - [docs/RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md](./RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md)
 
 ## Current Verified Repo State
 
@@ -146,7 +148,7 @@ Likely archive / stale audit:
 
 Notebook:
 
-- [scripts/manga/colab_manga_test.ipynb](/Users/ahjan/phoenix_omega/scripts/manga/colab_manga_test.ipynb)
+- [scripts/manga/colab_manga_test.ipynb](../scripts/manga/colab_manga_test.ipynb)
 
 Confirmed from visible notebook output:
 
@@ -171,20 +173,22 @@ Evidence held in thread:
 
 ## Next Actions
 
-1. Use [specs/AI_MANGA_PIPELINE_SUMMARY.md](/Users/ahjan/phoenix_omega/specs/AI_MANGA_PIPELINE_SUMMARY.md) as the governed entry point for manga implementation and review
+1. Use [specs/AI_MANGA_PIPELINE_SUMMARY.md](../specs/AI_MANGA_PIPELINE_SUMMARY.md) as the governed entry point for manga implementation and review
 2. Progress manga implementation in slices:
    - kernel/config
    - chapter artifact contracts
    - retrieval-first asset reuse
    - render/assembly
    - QC/memory
-3. Execute the agreed delete set from [docs/BRANCH_DISPOSITION_2026_03_20.md](/Users/ahjan/phoenix_omega/docs/BRANCH_DISPOSITION_2026_03_20.md)
-4. Open fresh harvest branches from `origin/main` for any kept feature payloads
-5. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
-6. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
-7. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
-8. Treat free Colab as the current manga render engine and ComfyUI as a later scaling backend until actual ComfyUI workflow/config lands in repo
-9. Use `max-quality-catalog.yml` for manual sharded self-hosted QA runs when local serial execution is too slow
+3. Execute the agreed delete set from [docs/BRANCH_DISPOSITION_2026_03_20.md](./BRANCH_DISPOSITION_2026_03_20.md)
+4. For PR #21 specifically, use [docs/RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md](./RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md) as the execution plan
+5. Open fresh harvest branches from `origin/main` for any kept feature payloads
+6. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
+7. Close PR #21 after the wanted harvest buckets are extracted or rejected
+8. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
+9. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
+10. Treat free Colab as the current manga render engine and ComfyUI as a later scaling backend until actual ComfyUI workflow/config lands in repo
+11. Use `max-quality-catalog.yml` for manual sharded self-hosted QA runs when local serial execution is too slow
 
 ## Pearl_GitHub Operating Reminder
 
