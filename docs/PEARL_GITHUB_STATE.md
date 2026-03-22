@@ -62,6 +62,9 @@ Read this with:
   - [PR #31](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/31)
   - [specs/AI_MANGA_PIPELINE_SUMMARY.md](/Users/ahjan/phoenix_omega/specs/AI_MANGA_PIPELINE_SUMMARY.md)
   - [specs/README.md](/Users/ahjan/phoenix_omega/specs/README.md)
+- Added a manual self-hosted GitHub workflow path for maximum QA catalog runs:
+  - `.github/workflows/max-quality-catalog.yml`
+  - `scripts/run_max_quality_catalog.py`
 
 ## Current Verified Repo State
 
@@ -73,6 +76,7 @@ Read this with:
 - `agent/ops-docs-and-integrations` has been merged and deleted on remote
 - `agent/pearl-github-state-followup` has been merged and deleted locally
 - The AI Manga Dharma system is now documented on `main` as a 14-document spec suite under `specs/`
+- A shardable max-quality catalog path now exists for GitHub-triggered QA runs across teacher-mode and regular mode
 
 ## Current Verified Branch Inventory
 
@@ -156,6 +160,7 @@ Evidence held in thread:
 4. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
 5. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
 6. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
+7. Use `max-quality-catalog.yml` for manual sharded self-hosted QA runs when local serial execution is too slow
 
 ## Pearl_GitHub Operating Reminder
 

@@ -163,6 +163,8 @@ Ongoing state tracking:
 
 - use `docs/PEARL_GITHUB_STATE.md` as the fast resume/checklist file
 - update it whenever branch inventory, Colab verification status, or next actions materially change
+- for very large QA catalog runs, prefer a shardable GitHub workflow on self-hosted runners instead of one local monolith
+- the max-quality catalog path is teacher-shard + regular-shard oriented, with artifacts uploaded per shard
 
 Latest verified state change:
 
