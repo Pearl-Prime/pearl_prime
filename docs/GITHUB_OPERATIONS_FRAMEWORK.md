@@ -8,6 +8,20 @@
 
 ---
 
+## Monthly Stable Baseline And Rollback Runbooks
+
+Create a stable baseline tag from green `main` once per month. See [RELEASE_POLICY.md](./RELEASE_POLICY.md).
+
+Keep rollback references current in [ROLLBACK_RUNBOOKS_INDEX.md](./ROLLBACK_RUNBOOKS_INDEX.md).
+
+---
+
+## Remote-Only Commit Review
+
+A weekly workflow, [.github/workflows/remote-commit-review.yml](../.github/workflows/remote-commit-review.yml), reports commits on `main` from the last 7 days that were not made via a merged PR. Triage those results within 24 hours.
+
+---
+
 ## Repo identity
 
 | GitHub repo | Default branch | Local path | Note |
@@ -132,6 +146,7 @@ Branch protection: not specified in this framework; Qwen-Agent typically does no
 
 - **Secrets:** Per-workflow (e.g. observability, ML, production alerts may use tokens). Self-hosted marketing/catalog workflows also use `QWEN_BASE_URL`, `QWEN_API_KEY`, `QWEN_MODEL` when LM preflight/warmup is enabled. See workflow files and [AUTONOMOUS_IMPROVEMENT_AND_ML_SYSTEM.md](./AUTONOMOUS_IMPROVEMENT_AND_ML_SYSTEM.md).
 - **Runner:** Mixed. Most workflows are GitHub-hosted (`ubuntu-latest`); `marketing_continuous.yml`, `marketing-briefs-and-proposals.yml`, and `catalog-book-pipeline.yml` run on self-hosted.
+- **Ownership map:** [OWNERSHIP_MATRIX.md](./OWNERSHIP_MATRIX.md)
 
 ### Qwen-Agent
 

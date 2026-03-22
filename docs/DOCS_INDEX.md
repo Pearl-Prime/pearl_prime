@@ -38,6 +38,7 @@
 | **Use Phoenix Recommender** | [Phoenix Recommender (document all)](#phoenix-recommender-document-all) — Catalog-facing recommendation: `python -m phoenix_recommender --top 50 --dry-run`; scoring weights, constraints, hard gates in config/recommender/. |
 | **Do GitHub operations (both repos)** | [GitHub Operations Framework](#github-operations-framework) — repo map, workflow matrix, canonical ownership, system functions (PR flow, merge to main, Qwen-Agent push, runner start/clean, recovery). |
 | **Prevent workflow hangs/failures** | [docs/GITHUB_NO_FAILURE_FRAMEWORK.md](./GITHUB_NO_FAILURE_FRAMEWORK.md) — No-failure rules: heavy-job sharding, preflight + warmup, no-thinking LM calls, runner watchdog/cleanup, UTC windows, push guard, evidence standard. |
+| **Review ownership and rollback governance** | [docs/OWNERSHIP_MATRIX.md](./OWNERSHIP_MATRIX.md) and [docs/ROLLBACK_RUNBOOKS_INDEX.md](./ROLLBACK_RUNBOOKS_INDEX.md) — canonical ownership boundaries plus rollback/DR runbook inventory. |
 
 ---
 
@@ -419,6 +420,10 @@ Single entry point for GitHub operations across **Ahjan108/phoenix_omega_v4.8** 
 | **Framework doc** | [docs/GITHUB_OPERATIONS_FRAMEWORK.md](./GITHUB_OPERATIONS_FRAMEWORK.md) — Repo identity, workflow matrix (phoenix_omega_v4.8 + Qwen-Agent), canonical ownership, secrets and runners, branch protection, system functions (procedures and commands), before-you-push checklists, recovery pointers. |
 | **No-failure standard** | [docs/GITHUB_NO_FAILURE_FRAMEWORK.md](./GITHUB_NO_FAILURE_FRAMEWORK.md) — Reliability baseline for zero-hang operations: heavy job classes/windows, sharding, preflight + warmup, no-thinking calls, one-heavy-queue policy, runner watchdog/cleanup, push guard, evidence. |
 | **Branch protection** | [docs/BRANCH_PROTECTION_REQUIREMENTS.md](./BRANCH_PROTECTION_REQUIREMENTS.md) — Required checks for main (Core tests, Release gates, EI V2 gates, Change impact). |
+| **Ownership matrix** | [docs/OWNERSHIP_MATRIX.md](./OWNERSHIP_MATRIX.md) — which repo and path family owns governance, workflows, runtime, and audit surfaces. |
+| **Remote commit review** | [.github/workflows/remote-commit-review.yml](../.github/workflows/remote-commit-review.yml) + [scripts/audit/remote_commit_review.py](../scripts/audit/remote_commit_review.py) — weekly report of commits on `main` not linked to merged PRs. |
+| **Required-check validator** | [scripts/ci/validate_required_checks_match.py](../scripts/ci/validate_required_checks_match.py) — fails if configured required check names do not match workflow or job names. |
+| **Rollback runbooks** | [docs/ROLLBACK_RUNBOOKS_INDEX.md](./ROLLBACK_RUNBOOKS_INDEX.md) — keep-current rollback and DR reference list. |
 | **Pearl News workflows** | Pearl News workflows in this repo are [.github/workflows/pearl-news-assemble.yml](../.github/workflows/pearl-news-assemble.yml), [.github/workflows/pearl-news-fill-qwen.yml](../.github/workflows/pearl-news-fill-qwen.yml), and [.github/workflows/pearl-news-full-qa.yml](../.github/workflows/pearl-news-full-qa.yml). Qwen-Agent references are external operational notes only. |
 
 ---
