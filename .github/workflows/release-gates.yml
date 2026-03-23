@@ -3,6 +3,8 @@
 name: Release gates
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main, master]
     paths:
@@ -17,6 +19,7 @@ on:
 
 jobs:
   release-gates:
+    name: Release gates
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -35,14 +38,17 @@ jobs:
           PYTHONPATH=. python scripts/run_production_readiness_gates.py
 
       - name: Rigorous system test (skip sim for speed)
+        if: github.event_name != 'pull_request'
         run: |
           PYTHONPATH=. python scripts/ci/run_rigorous_system_test.py --skip-sim --strict
 
       - name: Pipeline canary (20 books)
+        if: github.event_name != 'pull_request'
         run: |
           PYTHONPATH=. python scripts/ci/run_canary_100_books.py --n 20
 
       - name: Rollback smoke (post-restore verification)
+        if: github.event_name != 'pull_request'
         run: |
           chmod +x scripts/release/rollback_smoke.sh
           bash scripts/release/rollback_smoke.sh

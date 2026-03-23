@@ -10,6 +10,7 @@ on:
 
 jobs:
   change-impact:
+    name: Change impact
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -44,3 +45,17 @@ jobs:
         with:
           name: change-impact-${{ github.run_id }}
           path: artifacts/observability/
+
+  change-impact-legacy:
+    name: change-impact
+    runs-on: ubuntu-latest
+    needs: change-impact
+    if: always()
+    steps:
+      - name: Legacy check context alias
+        run: |
+          if [ "${{ needs.change-impact.result }}" != "success" ]; then
+            echo "Primary change-impact job did not succeed"
+            exit 1
+          fi
+          echo "Legacy change-impact context satisfied"
