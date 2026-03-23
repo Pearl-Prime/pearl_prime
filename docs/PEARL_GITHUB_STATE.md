@@ -1,6 +1,6 @@
 # Pearl_GitHub State
 
-Last verified: 2026-03-21
+Last verified: 2026-03-22
 Owner: Pearl_GitHub
 
 ## Purpose
@@ -79,14 +79,26 @@ Read this with:
   - `scripts/git/hourly_repo_alignment.py`
   - `scripts/git/hourly_repo_alignment.sh`
   - [docs/PEARL_GITHUB_AUTOPILOT_RUNBOOK.md](./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md)
+- **2026-03-22 governance audit session** — full read of `ps.txt` + all 10 referenced `.md` files, cross-checked against repo reality:
+  - Identified 6 problems: phantom script references, required-checks discrepancy, missing state pointers, invisible Pearl_Int state, orphaned patch doc, non-existent files in onboarding table
+  - `ps.txt` patched: push_guard gated with "if present", state pointers added for both agents, STATE + GOVERNANCE NOTES section added with YAML-over-prose precedence rule
+  - `docs/PEARL_GITHUB_ONBOARDING.md` patched: `python3`, push_guard gated, fallback instructions, key files table cleaned, key docs list extended
+  - Session documented locally during the governance audit; do not assume a committed session-status file exists on `main`
+  - Changes are in working tree only — not committed or pushed
 
 ## Current Verified Repo State
 
-- PR #25 merged:
-  - [PR #25](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/25)
-- Local `main` now matches `origin/main`
+- Open PRs: `0`
+- Recent repo-alignment / governance / manga cleanup PRs already landed on `main`:
+  - [PR #33](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/33)
+  - [PR #35](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/35)
+  - [PR #36](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/36)
+  - [PR #37](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/37)
+- PR #21 was closed as superseded after harvest planning
+- Local `main` was previously hard-aligned to `origin/main`, but this checkout now has new local-only changes again
 - Safety backup branch exists:
   - `codex/main-autobackup-20260320-2124`
+  - `codex/main-autobackup-20260322-112842`
 - `agent/ops-docs-and-integrations` has been merged and deleted on remote
 - `agent/pearl-github-state-followup` has been merged and deleted locally
 - The AI Manga Dharma system is now documented on `main` as a 14-document spec suite under `specs/`
@@ -100,6 +112,9 @@ Read this with:
   - free Colab remains the validated renderer for seed images
   - manga can now export `panel_prompts.json` and resolve reusable assets before requesting new renders
   - ComfyUI is still planned as the later production backend, not current repo wiring
+- The best single-file onboarding and state summary is now:
+  - [docs/SYSTEM_STATE_MASTER.md](./SYSTEM_STATE_MASTER.md)
+- The hourly Pearl_GitHub autopilot path is already on `main`
 
 ## Current Verified Branch Inventory
 
@@ -175,6 +190,15 @@ Evidence held in thread:
 - visible Step 10 output was pasted and verified
 - user explicitly confirmed: "all 13 done , i ran them"
 
+## Open Governance Items (from 2026-03-22 audit)
+
+1. `docs/PEARL_GITHUB_PS_TXT_PATCH.md` is orphaned — delete or archive
+2. `docs/LOCAL_GIT_DRIFT_PREVENTION_SOP.md` is referenced in onboarding but does not exist — create or remove reference
+3. `git_system.md` lists four required checks as always-required — reconcile with `config/governance/required_checks.yaml` (only Core tests is always-on)
+4. `BRANCH_PROTECTION_REQUIREMENTS.md` lists four required checks without noting only Core tests is always-on — add note or reconcile
+5. Keep [docs/SYSTEM_STATE_MASTER.md](./SYSTEM_STATE_MASTER.md) current when repo reality changes
+6. Commit and push the `ps.txt`, onboarding, state, and session status changes from this audit
+
 ## Next Actions
 
 1. Use [specs/AI_MANGA_PIPELINE_SUMMARY.md](../specs/AI_MANGA_PIPELINE_SUMMARY.md) as the governed entry point for manga implementation and review
@@ -187,9 +211,9 @@ Evidence held in thread:
 3. Execute the agreed delete set from [docs/BRANCH_DISPOSITION_2026_03_20.md](./BRANCH_DISPOSITION_2026_03_20.md)
 4. For PR #21 specifically, use [docs/RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md](./RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md) as the execution plan
 5. Open fresh harvest branches from `origin/main` for any kept feature payloads
-6. Turn on the hourly Pearl_GitHub autopilot after it lands on `main`
+6. Use the hourly Pearl_GitHub autopilot to keep repo-alignment reports current
 7. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
-8. Close PR #21 after the wanted harvest buckets are extracted or rejected
+8. Continue executing the remaining harvest buckets and remote branch dispositions from the documented plans
 9. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
 10. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
 11. Treat free Colab as the current manga render engine and ComfyUI as a later scaling backend until actual ComfyUI workflow/config lands in repo

@@ -2,7 +2,7 @@
 
 **Purpose:** Canonical index for documentation authority and navigation.  
 **Missing-file policy:** Only existing files are linked; planned or missing files are listed as backlog items (plain text or `path` with ⚠️ *file not present*).  
-**Last updated:** 2026-03-08
+**Last updated:** 2026-03-22
 
 **For developers: start here.** This index is your map. Use the **task table** below for "where to go" by task. **GitHub (PRs, merges, two repos, runners):** go to [GitHub Operations Framework](#github-operations-framework) and [docs/GITHUB_OPERATIONS_FRAMEWORK.md](./GITHUB_OPERATIONS_FRAMEWORK.md) — repo map, workflow matrix, canonical ownership, PR flow, merge to main, Qwen-Agent push/runner, recovery. **No-failure standard:** [docs/GITHUB_NO_FAILURE_FRAMEWORK.md](./GITHUB_NO_FAILURE_FRAMEWORK.md). **Tests / CI:** [Test suite (document all)](#test-suite-document-all). **Domain work:** use the task table and the "(document all)" subsections per domain.
 
@@ -20,6 +20,8 @@
 | **Add a doc** | Follow [Document all — usage](#document-all--usage): place in correct section, add to inventory, reference canonical anchors if authority doc. |
 | **Check domain coverage** | Use "(document all)" subsections (e.g. [V4 features, scale & knobs](#v4-features-scale--knobs-document-all), [Marketing & deep research](#marketing--deep-research-document-all), [Freebie funnel, Proof Loop & launch](#freebie-funnel-proof-loop--launch-document-all), [Teacher Mode](#teacher-mode--production-readiness-document-all)) — each lists every asset for that domain. |
 | **Run or verify Colab/browser work** | [docs/COLAB_AND_BROWSER_VERIFICATION_RUNBOOK.md](./COLAB_AND_BROWSER_VERIFICATION_RUNBOOK.md) — verify real state first, browser/Accessibility prerequisites, Colab completion criteria, and retry loop. |
+| **One-file system truth / onboarding** | [docs/SYSTEM_STATE_MASTER.md](./SYSTEM_STATE_MASTER.md) — best single-file view of what is true now, what is local-only, what is merged, and what is still not done. |
+| **Start here for new developers** | [docs/ONBOARDING_START_HERE.md](./ONBOARDING_START_HERE.md) — shortest safe entry path into the current system. |
 | **Resume manga implementation** | [specs/AI_MANGA_PIPELINE_SUMMARY.md](../specs/AI_MANGA_PIPELINE_SUMMARY.md) — governed manga entry point, then [docs/MANGA_IMPLEMENTATION_OUTLINE.md](./MANGA_IMPLEMENTATION_OUTLINE.md) for the implementation map and current first build slice, including `panel_prompts.json` export and retrieval-first asset reuse before rendering. |
 | **Resume Pearl_GitHub state** | [docs/PEARL_GITHUB_STATE.md](./PEARL_GITHUB_STATE.md) — current verified repo state, completed cleanup, Colab verification status, and next actions. |
 | **Run Pearl_GitHub autopilot** | [docs/PEARL_GITHUB_AUTOPILOT_RUNBOOK.md](./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md) — hourly repo-alignment loop: merge clean PRs, sync local `main`, prune stale local branches, and write run reports. |
@@ -42,6 +44,7 @@
 | **Do GitHub operations (both repos)** | [GitHub Operations Framework](#github-operations-framework) — repo map, workflow matrix, canonical ownership, system functions (PR flow, merge to main, Qwen-Agent push, runner start/clean, recovery). |
 | **Prevent workflow hangs/failures** | [docs/GITHUB_NO_FAILURE_FRAMEWORK.md](./GITHUB_NO_FAILURE_FRAMEWORK.md) — No-failure rules: heavy-job sharding, preflight + warmup, no-thinking LM calls, runner watchdog/cleanup, UTC windows, push guard, evidence standard. |
 | **Review ownership and rollback governance** | [docs/OWNERSHIP_MATRIX.md](./OWNERSHIP_MATRIX.md) and [docs/ROLLBACK_RUNBOOKS_INDEX.md](./ROLLBACK_RUNBOOKS_INDEX.md) — canonical ownership boundaries plus rollback/DR runbook inventory. |
+| **Trend feed pipeline** | [Trend feed pipeline (document all)](#trend-feed-pipeline-document-all) — RSS + SerpApi + Exploding Topics → scoring → BookSpec injection → MarketRouter boost; 58 keywords, 4 tiers, budget guard, daily orchestrator. Strategy and implementation assets are currently local-only / not on `main`; treat as backlog until normalized. |
 
 ---
 
@@ -569,6 +572,42 @@ Single index: every doc, spec, script, and config that uses or is fed by marketi
 3. **Ingestion:** Consumer language → [config/marketing/consumer_language_by_topic.yaml](../config/marketing/consumer_language_by_topic.yaml); Invisible scripts → [config/marketing/invisible_scripts_by_persona_topic.yaml](../config/marketing/invisible_scripts_by_persona_topic.yaml). Both are now populated and loaded by the title engine.
 4. **Authority:** [PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC](../specs/PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md) defines how invisible_script and belief_flip integrate into atoms and title philosophy. Config layer (consumer language, invisible scripts, loader, fallback) is specified in [TITLE_ENGINE_MARKETING_CONFIG_SPEC](../specs/TITLE_ENGINE_MARKETING_CONFIG_SPEC.md).
 5. **Generational research (Pearl News):** Local Qwen3 only. Use [research/continue_gen_research3.md](./research/continue_gen_research3.md) and [scripts/research/run_research.py](../scripts/research/run_research.py) for two-pass psychology / pain_points / event_impact runs. Optional: [research_feeds_ingest.yml](../.github/workflows/research_feeds_ingest.yml) fetches RSS to `artifacts/research/raw/`; paste or inject into prompts. See [research/CONTINUOUS_RESEARCH_PLAN.md](./research/CONTINUOUS_RESEARCH_PLAN.md).
+
+---
+
+## Trend feed pipeline (document all)
+
+Automated trend discovery layer: RSS feeds + SerpApi Google Trends + Exploding Topics browser scrape → scoring → BookSpec injection → MarketRouter priority boost. Two-track strategy: evergreen (planned, full Ei) + trending (weekly, fast-publish). **Implemented 2026-03-22.** 58 unique keywords across 4 tiers. 422/422 repo tests passing.
+
+| Item | Location |
+|------|----------|
+| **Strategy doc (authority)** | `docs/TREND_FEED_INTEGRATION_STRATEGY.md` — Local-only / not on `main` yet; architecture, two-track strategy, data flow, weekly cadence, implementation checklist |
+| **Feed sources registry** | `skills/pearl-int/references/feed_sources.md` — Local-only / not on `main` yet; RSS URLs, SerpApi config, Exploding Topics plan, keyword watchlist |
+| **Exploding Topics scrape plan** | `skills/pearl-int/references/exploding_topics_scrape_plan.md` — Local-only / not on `main` yet; confirmed vs 404 slugs, category pages, scrape strategy |
+| **Tier 1 keywords (daily)** | `config/trend_keywords/tier1_primaries.yaml` — Local-only / not on `main` yet; 8 primary keywords (EMDR, somatic therapy, breathwork, etc.) |
+| **Tier 2 keywords (rotation)** | `config/trend_keywords/tier2_rotation.yaml` — Local-only / not on `main` yet; 20 keywords, 5/day round-robin |
+| **Tier 3 keywords (persona)** | `config/trend_keywords/tier3_persona.yaml` — Local-only / not on `main` yet; 20 keywords across 5 persona groups, 2/day |
+| **Tier 4 keywords (emerging)** | `config/trend_keywords/tier4_emerging.yaml` — Local-only / not on `main` yet; 10 weekly cultural discovery + 5 reserve |
+| **Budget config** | `config/trend_keywords/budget_config.yaml` — Local-only / not on `main` yet; 250/month SerpApi, hard_stop=245, tier allocation, batching rules |
+| **RSS puller** | `scripts/feeds/pull_feeds.py` — Local-only / not on `main` yet; pulls 6 RSS feeds, keyword extraction, domain relevance scoring |
+| **Google Trends checker** | `scripts/feeds/check_trends.py` — Local-only / not on `main` yet; SerpApi tiered batching (5 keywords/call), budget-guarded, spike detection |
+| **Trend scorer** | `scripts/feeds/score_trends.py` — Local-only / not on `main` yet; heat scoring (domain×0.4 + velocity×0.35 + novelty×0.25), action classification |
+| **Daily orchestrator** | `scripts/feeds/daily_scrape_runner.py` — Local-only / not on `main` yet; runs pull→check→score→summary; `--dry-run`, `--skip-rss`, `--skip-trends`, `--skip-score` |
+| **Budget guard** | `scripts/feeds/budget_guard.py` — Local-only / not on `main` yet; monthly hard-stop, auto-reset, persistent state, 80% warning |
+| **Keyword validator** | `scripts/feeds/validate_keyword_config.py` — Local-only / not on `main` yet; parse check, required fields, dedup, budget math, cross-ref `topic_ids` |
+| **BookSpec field** | [phoenix_v4/planning/catalog_planner.py](../phoenix_v4/planning/catalog_planner.py) — `trend_heat_score: Optional[float]` on BookSpec dataclass |
+| **MarketRouter wiring** | [scripts/ml_editorial/run_market_router.py](../scripts/ml_editorial/run_market_router.py) — `_load_trend_signals()`, priority boost at heat ≥0.6/≥0.8 |
+| **Validator update** | [phoenix_v4/qa/validate_marketing_config.py](../phoenix_v4/qa/validate_marketing_config.py) — search_clusters limit widened to (3,10) for trend additions |
+| **Artifacts (gitignored)** | `artifacts/feeds/` — `feed_digest_*.jsonl`, `trend_signals_*.jsonl`, `daily_trend_digest_*.jsonl`, `daily_trend_summary_*.md` |
+| **Budget state (gitignored)** | `artifacts/feeds/.serpapi_budget_state.json` — Persistent search counter |
+| **Scheduled task** | `daily-trend-scrape` — 9 AM daily via Cowork scheduled tasks |
+
+### Pending items
+
+- Pearl_Editor: fast-publish quality gate (abbreviated Ei) — not yet defined
+- Pearl_Editor: weekly trend review workflow — not yet defined
+- GitHub Actions cron for daily feed pulls (currently Cowork scheduled task only)
+- Feed health monitoring in integration health check
 
 ---
 
@@ -1730,6 +1769,7 @@ All docs that declare authority must reference the three canonical anchors: `SYS
 | [Rigorous system test & simulation](#rigorous-system-test--simulation-document-all) | § Rigorous system test | Simulation, 10k/100k, analyzer, variation report, config, artifacts, CI |
 | [Pearl News](#pearl-news-document-all) | § Pearl News | Pipeline, docs, scripts, config, tests, artifacts, workflows |
 | [Marketing & deep research](#marketing--deep-research-document-all) | § Marketing | Deep research prompts, invisible script, marketing brief; **generational research** (prompts, scripts, config, artifacts, research_feeds_ingest) |
+| [Trend feed pipeline](#trend-feed-pipeline-document-all) | § Trend feed | RSS + SerpApi + Exploding Topics → scoring → BookSpec injection → MarketRouter boost; 58 keywords, 4 tiers, budget guard, daily orchestrator. Strategy: TREND_FEED_INTEGRATION_STRATEGY.md |
 | [Autonomous improvement & ML system](#autonomous-improvement--ml-system-document-all) | § Autonomous & ML | Observability, operations board, agent PRs, auto-merge, weekly pipeline, KPI triggers, ML editorial, ML loop (24/7 + daily + weekly) |
 | [Change observation and impact](#change-observation-and-impact-document-all) | § Change observation | System registry, change detection, impact analysis, synergy (LLM), Agent change feed, artifacts |
 | [Church & payout](#church--payout-distribution-only-brands) | § Church | Church docs, CHURCH_PAYOUT_AND_BANK_GOVERNANCE, PAYOUT_PARTNER_METHODS, brand config, payout config (churches, payees, CHECKLIST), scripts, tests, CI; see [Document all — Church & payout](#document-all--church--payout) |
@@ -1858,6 +1898,25 @@ Single list of every **doc**, **spec**, **config**, and **script** referenced in
 | `MULTILINGUAL_ARCHITECTURE.md` | Translation | ⚠️ missing |
 | `KOREA_MARKET_AND_PROSE.md` | Translation | ⚠️ missing (covered in LOCALE_PERSONAS.md + locale_strategy.md) |
 | `JAPANESE_MARKET_SELFHELP_GUIDE.md` | Translation | ⚠️ missing (covered in LOCALE_PERSONAS.md + locale_strategy.md) |
+
+### Trend feed pipeline (docs, scripts, config)
+
+| Item | Section | Status |
+|------|---------|--------|
+| `docs/TREND_FEED_INTEGRATION_STRATEGY.md` | Trend feed pipeline | ⚠️ file not present on `main` — local-only strategy doc |
+| `skills/pearl-int/references/feed_sources.md` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed registry |
+| `skills/pearl-int/references/exploding_topics_scrape_plan.md` | Trend feed pipeline | ⚠️ file not present on `main` — local-only scrape plan |
+| `config/trend_keywords/tier1_primaries.yaml` | Trend feed pipeline | ⚠️ file not present on `main` — local-only keyword config |
+| `config/trend_keywords/tier2_rotation.yaml` | Trend feed pipeline | ⚠️ file not present on `main` — local-only keyword config |
+| `config/trend_keywords/tier3_persona.yaml` | Trend feed pipeline | ⚠️ file not present on `main` — local-only keyword config |
+| `config/trend_keywords/tier4_emerging.yaml` | Trend feed pipeline | ⚠️ file not present on `main` — local-only keyword config |
+| `config/trend_keywords/budget_config.yaml` | Trend feed pipeline | ⚠️ file not present on `main` — local-only budget config |
+| `scripts/feeds/pull_feeds.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
+| `scripts/feeds/check_trends.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
+| `scripts/feeds/score_trends.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
+| `scripts/feeds/daily_scrape_runner.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
+| `scripts/feeds/budget_guard.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
+| `scripts/feeds/validate_keyword_config.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
 
 ### Config (config/audiobook_script/)
 
