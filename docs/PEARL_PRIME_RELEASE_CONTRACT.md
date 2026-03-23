@@ -50,7 +50,7 @@ That bundle must summarize the presence of:
 
 - rollback smoke evidence: `artifacts/release/rollback_smoke_evidence.json`
 - canary summary: `artifacts/canary_plans/canary_summary.json`
-- latest systems-test report: `artifacts/systems_test/report_*.json`
+- pinned systems-test report: `artifacts/release/latest_systems_test_report.json`
 
 Optional but useful supporting evidence:
 
@@ -67,8 +67,9 @@ The release workflow must:
 2. run rigorous system test on non-PR release paths
 3. run a real pipeline canary on non-PR release paths
 4. run rollback smoke on non-PR release paths
-5. write `artifacts/release/pearl_prime_release_evidence.json`
-6. upload the evidence artifact bundle
+5. pin the latest systems-test report to `artifacts/release/latest_systems_test_report.json`
+6. write `artifacts/release/pearl_prime_release_evidence.json` even when earlier release steps fail
+7. upload the evidence artifact bundle
 
 ## Relationship to production 100%
 

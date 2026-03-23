@@ -66,7 +66,11 @@ def build_bundle(profile: str) -> dict:
         "release_evidence_bundle": "artifacts/release/pearl_prime_release_evidence.json",
     }
     dynamic_artifacts = {
-        "latest_systems_test_report": _latest("artifacts/systems_test/report_*.json"),
+        "latest_systems_test_report": (
+            "artifacts/release/latest_systems_test_report.json"
+            if _exists("artifacts/release/latest_systems_test_report.json")
+            else _latest("artifacts/systems_test/report_*.json")
+        ),
         "latest_signal_snapshot": _latest("artifacts/observability/signal_snapshot*.json"),
         "simulation_analysis": "artifacts/reports/pearl_prime_sim_analysis.json",
         "simulation_baseline": "artifacts/reports/pearl_prime_sim_baseline.json",

@@ -26,8 +26,8 @@ def test_release_bundle_requires_release_evidence(tmp_path, monkeypatch):
     (repo / "artifacts" / "canary_plans").mkdir(parents=True)
     (repo / "artifacts" / "systems_test").mkdir(parents=True)
     (repo / "artifacts" / "release" / "rollback_smoke_evidence.json").write_text("{}", encoding="utf-8")
+    (repo / "artifacts" / "release" / "latest_systems_test_report.json").write_text("{}", encoding="utf-8")
     (repo / "artifacts" / "canary_plans" / "canary_summary.json").write_text("{}", encoding="utf-8")
-    (repo / "artifacts" / "systems_test" / "report_20260323.json").write_text("{}", encoding="utf-8")
 
     monkeypatch.setattr(evidence, "REPO_ROOT", repo)
 
@@ -36,6 +36,8 @@ def test_release_bundle_requires_release_evidence(tmp_path, monkeypatch):
     assert bundle["missing_required_evidence"] == []
     assert "Core tests" in bundle["required_checks"]
     assert "Workers Builds: pearl-prime" in bundle["non_blocking_checks"]
+    paths = {row["id"]: row["path"] for row in bundle["evidence"]}
+    assert paths["latest_systems_test_report"] == "artifacts/release/latest_systems_test_report.json"
 
 
 def test_release_bundle_reports_missing_required_evidence(tmp_path, monkeypatch):
