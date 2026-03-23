@@ -8,6 +8,7 @@ from scripts.ci import run_canary_100_books
 def test_canary_uses_no_update_freebie_index(monkeypatch, tmp_path: Path) -> None:
     recorded_cmds: list[list[str]] = []
     monkeypatch.setattr("sys.argv", ["run_canary_100_books.py"])
+    monkeypatch.setattr(run_canary_100_books, "REPO_ROOT", tmp_path)
 
     monkeypatch.setattr(
         run_canary_100_books,
