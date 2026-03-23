@@ -75,6 +75,7 @@ def main() -> int:
             "--arc", str(arc_path),
             "--out", str(plan_path),
             "--no-generate-freebies",
+            "--no-update-freebie-index",
         ]
         r = subprocess.run(cmd, cwd=str(REPO_ROOT), env=env, capture_output=True, text=True, timeout=120)
         row = {
