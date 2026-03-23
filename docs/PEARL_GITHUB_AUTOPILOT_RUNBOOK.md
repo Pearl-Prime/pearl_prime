@@ -60,7 +60,7 @@ Ignored check failures:
 
 - `Workers Builds: pearl-prime`
 
-That Cloudflare preview is currently treated as non-authoritative for Pearl_GitHub merge decisions because it has failed across otherwise-green cleanup PRs.
+That Cloudflare preview is currently treated as non-authoritative for Pearl_GitHub merge decisions because it has failed across otherwise-green cleanup PRs. It is also not part of the canonical required-check set for `main` branch protection.
 
 ## Governance note
 

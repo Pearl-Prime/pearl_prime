@@ -9,8 +9,9 @@
 
 - **Governance check fails in CI** (`.github/workflows/github-governance-check.yml`).
 - **PR blocked** by required checks that cannot run (e.g. only path-filtered checks required).
-- **Ruleset changed:** e.g. ruleset targets all branches again, or PR requirement disabled.
+- **Ruleset changed:** e.g. ruleset targets all branches again, PR requirement disabled, or duplicate active rulesets require conflicting contexts.
 - **Required checks missing or wrong** vs [config/governance/required_checks.yaml](../config/governance/required_checks.yaml).
+- **Legacy or unexpected contexts required:** e.g. `change-impact` still required, or a required context comes from an unexpected integration.
 - **Bypass script or token file** committed (verifier fails).
 
 ---
@@ -25,9 +26,14 @@
 ## 3. Rollback steps for bad rules/workflow changes
 
 1. **Revert the change:** Revert the commit(s) that changed the workflow or ruleset (via PR to main).
-2. **Ruleset only (no code):** In GitHub Settings → Rules → Rulesets, edit the ruleset and restore target to `refs/heads/main` only; ensure PR required and required checks are correct.
-3. **Restore from evidence:** If you have a ruleset snapshot in `artifacts/governance/`, use it as reference to reapply correct settings via API or UI.
-4. **Re-run verifier:** `python scripts/ci/verify_github_governance.py --mode local` (and `--mode api` if token available). Confirm pass before closing incident.
+2. **Ruleset only (no code):** In GitHub Settings → Rules → Rulesets, restore the intended live shape:
+   - one active ruleset for `main`, or temporary multiples with identical required contexts
+   - PR required
+   - required checks exactly `Core tests`, `Release gates`, `EI V2 gates`, `Change impact`
+   - no legacy `change-impact`
+   - no required `Workers Builds: pearl-prime`
+3. **Restore from evidence:** Save a fresh before/after ruleset snapshot in `artifacts/governance/`, then use those snapshots to reapply correct settings via API or UI.
+4. **Re-run verifier:** `python3 scripts/ci/validate_required_checks_match.py`, `python3 scripts/ci/verify_github_governance.py --mode local`, and `python3 scripts/ci/verify_github_governance.py --mode api --strict`. Confirm pass before closing incident.
 
 ---
 
@@ -47,5 +53,5 @@
 
 - [ ] Root cause (config change, mistaken ruleset edit, etc.).
 - [ ] What we're changing (process, docs, automation) to prevent recurrence.
-- [ ] Evidence and runbook updated (e.g. new snapshot in `artifacts/governance/`, this runbook).
+- [ ] Evidence and runbook updated (e.g. before/after snapshots in `artifacts/governance/`, this runbook).
 - [ ] Communication sent per template above (if applicable).

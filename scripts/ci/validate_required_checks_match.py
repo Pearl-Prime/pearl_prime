@@ -5,6 +5,7 @@ match real workflow/job check names emitted by GitHub Actions.
 """
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -15,45 +16,54 @@ WORKFLOWS = REPO_ROOT / ".github" / "workflows"
 def load_checks() -> tuple[list[str], list[str]]:
     required: list[str] = []
     optional: list[str] = []
-    in_always = False
+    in_required = False
     in_optional = False
     for raw in CONFIG.read_text(encoding="utf-8").splitlines():
         line = raw.strip()
         if not line or line.startswith("#"):
             continue
-        if line.startswith("always_required:"):
-            in_always = True
+        if line.startswith("required_checks:"):
+            in_required = True
             in_optional = False
             continue
         if line.startswith("path_filtered_optional:"):
-            in_always = False
+            in_required = False
             in_optional = True
             continue
-        if (in_always or in_optional) and not raw.startswith("  - "):
+        if (in_required or in_optional) and not raw.startswith("  - "):
             if not raw.startswith(" "):
                 break
-        if (in_always or in_optional) and line.startswith("- "):
+        if (in_required or in_optional) and line.startswith("- "):
             name = line[2:].strip().strip('"')
             if name:
-                if in_always:
+                if in_required:
                     required.append(name)
                 elif in_optional:
                     optional.append(name)
     return required, optional
 
 
+def parse_yaml_name(line: str) -> str | None:
+    match = re.match(r"^\s*name:\s*(.+?)\s*$", line)
+    if not match:
+        return None
+    return match.group(1).strip().strip('"').strip("'")
+
+
 def collect_available_checks() -> set[str]:
     checks: set[str] = set()
     for wf in sorted(WORKFLOWS.glob("*.yml")):
-        text = wf.read_text(encoding="utf-8")
+        lines = wf.read_text(encoding="utf-8").splitlines()
         in_jobs = False
-        for raw in text.splitlines():
-            line = raw.rstrip("\n")
+        current_job_indent: int | None = None
+        for line in lines:
             stripped = line.strip()
             if not stripped or stripped.startswith("#"):
                 continue
-            if line.startswith("name:"):
-                checks.add(line.split(":", 1)[1].strip().strip('"'))
+            if not in_jobs and line.startswith("name:"):
+                workflow_name = parse_yaml_name(line)
+                if workflow_name:
+                    checks.add(workflow_name)
                 continue
             if line.startswith("jobs:"):
                 in_jobs = True
@@ -61,9 +71,17 @@ def collect_available_checks() -> set[str]:
             if in_jobs:
                 if not line.startswith("  "):
                     in_jobs = False
+                    current_job_indent = None
                     continue
-                if line.startswith("  ") and not line.startswith("    ") and stripped.endswith(":"):
-                    checks.add(stripped[:-1])
+                indent = len(line) - len(line.lstrip(" "))
+                if indent == 2 and stripped.endswith(":"):
+                    current_job_indent = 2
+                    continue
+                if current_job_indent == 2 and indent == 4:
+                    job_name = parse_yaml_name(line)
+                    if job_name:
+                        checks.add(job_name)
+                        current_job_indent = None
     return checks
 
 

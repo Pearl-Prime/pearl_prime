@@ -1,14 +1,31 @@
 # Machine-readable required status checks policy for main.
-# Used by scripts/ci/verify_github_governance.py (no hardcoded checks in script).
-version: 1
+# This is the contract for workflows, docs, and live GitHub rulesets.
+version: 2
+
+# Canonical required checks for PR merge to main.
+required_checks:
+  - "Core tests"
+  - "Release gates"
+  - "EI V2 gates"
+  - "Change impact"
 
 # At least one of these must be required on main. Prefer non-path-filtered workflows.
 always_required:
   - "Core tests"
 
-# Path-filtered checks: optional. If required on main, they must not be the only required checks.
+# Path-filtered checks may exist, but they are not canonical merge requirements.
 path_filtered_optional:
-  - "EI V2 unit tests"
   - "Teacher gates"
   - "Brand guards"
-  - "Pearl News gates"
+
+# Status checks repo automation intentionally treats as non-blocking.
+non_blocking_checks:
+  - "Workers Builds: pearl-prime"
+
+# Legacy required-check contexts that must not remain in active rulesets.
+forbidden_legacy_checks:
+  - "change-impact"
+
+# Required contexts should come from GitHub Actions unless explicitly approved here.
+allowed_required_integrations:
+  - 15368

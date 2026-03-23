@@ -106,7 +106,7 @@ flowchart LR
 
 **LM Studio lock (self-hosted runner):** Jobs that use the local LM Studio acquire a process-level lock via [Qwen-Agent/scripts/lm_studio_lock.py](../Qwen-Agent/scripts/lm_studio_lock.py) (three tiers: light/medium/heavy). This prevents resource contention between concurrent jobs on the same runner. **Important:** lock must be acquired in the same step/process that runs the heavy command (do not acquire in one step and run heavy work in a later step). See lock file for compatibility matrix.
 
-**Branch protection (main):** Require **Core tests**, **Release gates**, **EI V2 gates**, **Change impact**. See [BRANCH_PROTECTION_REQUIREMENTS.md](./BRANCH_PROTECTION_REQUIREMENTS.md). Machine-readable policy: [config/governance/required_checks.yaml](../config/governance/required_checks.yaml).
+**Branch protection (main):** Intended live shape is one active `main` ruleset, or temporary multiple active `main` rulesets with identical required contexts. Require exactly **Core tests**, **Release gates**, **EI V2 gates**, **Change impact**. `Release gates` stays PR-required in lightweight form; heavier release checks stay off the PR path. `Workers Builds: pearl-prime` is non-blocking and must not be required for merge. See [BRANCH_PROTECTION_REQUIREMENTS.md](./BRANCH_PROTECTION_REQUIREMENTS.md). Machine-readable policy: [config/governance/required_checks.yaml](../config/governance/required_checks.yaml).
 
 ---
 
@@ -172,7 +172,7 @@ If any `phoenix_omega` workflow is moved to self-hosted and uses LM Studio, it m
 1. Branch from `origin/main`: `git fetch origin && git checkout -b codex/<topic> origin/main`
 2. Make changes, then run preflight: `scripts/ci/preflight_push.sh` (if present)
 3. Commit, push branch: `git add -A && git commit -m "<type>: <scope>" && git push -u origin codex/<topic>`
-4. Open PR to main; wait for required checks (Core tests, Release gates, EI V2 gates, Change impact); merge.
+4. Open PR to main; wait for the canonical required checks (Core tests, Release gates, EI V2 gates, Change impact); merge. Cloudflare preview noise such as `Workers Builds: pearl-prime` is not a merge requirement.
 
 See [GITHUB_SUPPORT_SYSTEM_SPEC.md](./GITHUB_SUPPORT_SYSTEM_SPEC.md) §5–6.
 

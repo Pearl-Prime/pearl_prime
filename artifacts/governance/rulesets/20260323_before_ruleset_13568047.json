@@ -1,0 +1,77 @@
+{
+    "id": 13568047,
+    "name": "Main protection",
+    "target": "branch",
+    "source_type": "Repository",
+    "source": "Ahjan108/phoenix_omega_v4.8",
+    "enforcement": "active",
+    "conditions": {
+        "ref_name": {
+            "exclude": [],
+            "include": [
+                "~DEFAULT_BRANCH"
+            ]
+        }
+    },
+    "rules": [
+        {
+            "type": "deletion"
+        },
+        {
+            "type": "non_fast_forward"
+        },
+        {
+            "type": "pull_request",
+            "parameters": {
+                "required_approving_review_count": 0,
+                "dismiss_stale_reviews_on_push": false,
+                "required_reviewers": [],
+                "require_code_owner_review": false,
+                "require_last_push_approval": false,
+                "required_review_thread_resolution": false,
+                "allowed_merge_methods": [
+                    "merge",
+                    "squash",
+                    "rebase"
+                ]
+            }
+        },
+        {
+            "type": "required_status_checks",
+            "parameters": {
+                "strict_required_status_checks_policy": false,
+                "do_not_enforce_on_create": false,
+                "required_status_checks": [
+                    {
+                        "context": "Core tests",
+                        "integration_id": 15368
+                    },
+                    {
+                        "context": "EI V2 gates",
+                        "integration_id": 15368
+                    },
+                    {
+                        "context": "change-impact",
+                        "integration_id": 15368
+                    }
+                ]
+            }
+        },
+        {
+            "type": "required_linear_history"
+        }
+    ],
+    "node_id": "RRS_lACqUmVwb3NpdG9yec5E_OC4zgDPCC8",
+    "created_at": "2026-03-05T18:06:39.722-10:00",
+    "updated_at": "2026-03-05T18:31:50.335-10:00",
+    "bypass_actors": [],
+    "current_user_can_bypass": "never",
+    "_links": {
+        "self": {
+            "href": "https://api.github.com/repos/Ahjan108/phoenix_omega_v4.8/rulesets/13568047"
+        },
+        "html": {
+            "href": "https://github.com/Ahjan108/phoenix_omega_v4.8/rules/13568047"
+        }
+    }
+}

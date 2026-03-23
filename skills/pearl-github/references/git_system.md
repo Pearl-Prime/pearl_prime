@@ -31,9 +31,15 @@ agent/<task-summary>           — temporary agent branches (delete after PR mer
 2. release-gates.yml
 3. ei-v2-gates.yml
 4. change-impact.yml
-5. truth-audit-gate.yml
-6. drift-gate.yml
-7. pearl-prime-smoke.yml (path-filtered)
+
+Required context names are:
+
+1. Core tests
+2. Release gates
+3. EI V2 gates
+4. Change impact
+
+Do not require `Workers Builds: pearl-prime` for merge.
 
 ## EXCLUSIVE Files (only one agent at a time)
 

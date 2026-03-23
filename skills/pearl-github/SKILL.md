@@ -105,19 +105,19 @@ git push -u origin agent/<task-summary>
 ### Branch Protection (docs/BRANCH_PROTECTION_REQUIREMENTS.md)
 
 Main branch requires:
-- 1 PR approval
-- All status checks pass (strict: up-to-date required)
+- PR before merge
+- Canonical required status checks pass
 - No force pushes
 - No admin bypass
 
 Required status checks:
-1. `core-tests.yml` — fast pytest + production readiness gates
-2. `release-gates.yml` — release workflow
-3. `ei-v2-gates.yml` — EI v2 scoring
-4. `change-impact.yml` — change impact analysis
-5. `truth-audit-gate.yml` — truth audit
-6. `drift-gate.yml` — drift detection
-7. `pearl-prime-smoke.yml` — path-filtered Pearl Prime smoke
+1. `Core tests` — fast pytest + production readiness gates
+2. `Release gates` — lightweight PR release gate, with heavier checks off the PR path
+3. `EI V2 gates` — EI v2 scoring
+4. `Change impact` — change impact analysis
+
+Non-blocking operational check:
+- `Workers Builds: pearl-prime` — ignore for merge readiness
 
 ### Allowed Long-Lived Branches
 
@@ -156,11 +156,12 @@ Every PR must include:
 
 ### Governance (docs/GITHUB_GOVERNANCE.md)
 
-- One ruleset for `main` only
+- One active ruleset for `main` only, or temporary multiples with identical required contexts
 - Require PR before merging
 - Require status checks to pass
 - Block force pushes
 - Path-filtered workflows must not be the only required checks
+- Legacy contexts like `change-impact` must not remain required in live rulesets
 
 ### Auto-Merge (docs/AUTO_MERGE_POLICY.md)
 

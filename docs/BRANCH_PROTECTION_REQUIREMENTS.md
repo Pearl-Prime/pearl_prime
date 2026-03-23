@@ -7,29 +7,36 @@
 
 ## Required status checks
 
-For 100% production confidence, configure branch protection on `main` (or `master`) to require:
+Machine authority: [config/governance/required_checks.yaml](../config/governance/required_checks.yaml).
+
+For `main`, require exactly these status-check contexts:
 
 | Check | Workflow | Purpose |
 |-------|----------|---------|
 | **Core tests** | `core-tests.yml` | Fast pytest + production readiness gates |
-| **Release gates** | `release-gates.yml` | Release and production readiness workflow checks |
+| **Release gates** | `release-gates.yml` | Lightweight PR gate plus heavier release/canary/rollback checks outside PRs |
 | **EI V2 gates** | `ei-v2-gates.yml` | EI V2 tests, eval, calibration, promotion checks |
 | **Change impact** | `change-impact.yml` | Change observation + impact analysis evidence |
 
-These four are required for d2/d3/d5/d6 go-live.
+Rules:
+
+- Required context names must match workflow-emitted job names exactly.
+- Use one active `main` ruleset when possible. If multiple active rulesets exist during a transition, they must require the exact same four contexts above.
+- `change-impact` is a forbidden legacy alias after cleanup and must not remain required in live rulesets.
+- `Workers Builds: pearl-prime` is non-blocking and must not be required for merge.
 
 ---
 
 ## How to configure
 
-1. Go to **Settings → Branches → Branch protection rules** for `main`.
+1. Go to **Settings → Rules → Rulesets** for `main`.
 2. Enable **Require status checks to pass before merging**.
 3. Add required checks:
    - **Core tests**
    - **Release gates**
    - **EI V2 gates**
    - **Change impact**
-4. Save the rule and verify a test PR shows all four checks as required.
+4. Save the rule and verify a test PR shows only those four checks as blocking.
 
 ---
 
