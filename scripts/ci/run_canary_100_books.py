@@ -2,6 +2,7 @@
 """
 Real pipeline canary: run run_pipeline.py on sampled (topic, persona, arc) combos.
 Proves actual compile + render succeeds for worst/best combos or a fixed diverse set.
+Always writes a machine-readable summary for release evidence, even on success.
 Usage: python scripts/ci/run_canary_100_books.py [--n N] [--out-dir DIR]
 """
 from __future__ import annotations
@@ -62,6 +63,7 @@ def main() -> int:
     pipeline_script = REPO_ROOT / "scripts" / "run_pipeline.py"
     env = {**__import__("os").environ, "PYTHONPATH": str(REPO_ROOT)}
     failures: list[dict] = []
+    executed: list[dict] = []
 
     for i, (arc_path, persona, topic) in enumerate(samples):
         plan_path = out_dir / f"canary_{i:03d}_{arc_path.stem}.json"
@@ -75,24 +77,45 @@ def main() -> int:
             "--no-generate-freebies",
         ]
         r = subprocess.run(cmd, cwd=str(REPO_ROOT), env=env, capture_output=True, text=True, timeout=120)
+        row = {
+            "arc": arc_path.name,
+            "persona": persona,
+            "topic": topic,
+            "plan_path": str(plan_path),
+            "exit_code": r.returncode,
+        }
         if r.returncode != 0:
-            failures.append({
-                "arc": arc_path.name,
-                "persona": persona,
-                "topic": topic,
-                "stderr": (r.stderr or "")[:500],
-            })
+            row["stderr"] = (r.stderr or "")[:500]
+            failures.append(dict(row))
             print(f"FAIL: {arc_path.name} ({persona}/{topic})", file=sys.stderr)
         elif not plan_path.exists():
-            failures.append({"arc": arc_path.name, "persona": persona, "topic": topic, "error": "output not created"})
+            row["error"] = "output not created"
+            failures.append(dict(row))
             print(f"FAIL: {arc_path.name} output missing", file=sys.stderr)
+        else:
+            row["status"] = "pass"
+        executed.append(row)
+
+    summary_path = out_dir / "canary_summary.json"
+    summary = {
+        "sample_size": len(samples),
+        "failed": len(failures),
+        "passed": len(samples) - len(failures),
+        "out_dir": str(out_dir),
+        "samples": executed,
+    }
+    summary_path.write_text(json.dumps(summary, indent=2))
 
     if failures:
         report_path = out_dir / "canary_failures.json"
         report_path.write_text(json.dumps({"failures": failures, "total": len(samples), "failed": len(failures)}, indent=2))
-        print(f"Canary: {len(failures)}/{len(samples)} failed. Report: {report_path}", file=sys.stderr)
+        print(
+            f"Canary: {len(failures)}/{len(samples)} failed. "
+            f"Summary: {summary_path}. Report: {report_path}",
+            file=sys.stderr,
+        )
         return 1
-    print(f"Canary: {len(samples)}/{len(samples)} passed.")
+    print(f"Canary: {len(samples)}/{len(samples)} passed. Summary: {summary_path}")
     return 0
 
 

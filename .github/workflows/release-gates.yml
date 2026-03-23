@@ -53,13 +53,30 @@ jobs:
           chmod +x scripts/release/rollback_smoke.sh
           bash scripts/release/rollback_smoke.sh
 
+      - name: Write Pearl Prime release evidence (PR)
+        if: github.event_name == 'pull_request'
+        run: |
+          PYTHONPATH=. python scripts/ci/write_pearl_prime_release_evidence.py \
+            --profile pr \
+            --out artifacts/release/pearl_prime_release_evidence.json
+
+      - name: Write Pearl Prime release evidence (push/schedule/dispatch)
+        if: github.event_name != 'pull_request'
+        run: |
+          PYTHONPATH=. python scripts/ci/write_pearl_prime_release_evidence.py \
+            --profile release \
+            --strict \
+            --out artifacts/release/pearl_prime_release_evidence.json
+
       - name: Upload release evidence
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: release-gates-evidence
           path: |
+            artifacts/release/pearl_prime_release_evidence.json
             artifacts/release/rollback_smoke_evidence.json
+            artifacts/canary_plans/canary_summary.json
             artifacts/systems_test/report_*.json
             artifacts/canary_plans/canary_failures.json
           if-no-files-found: ignore

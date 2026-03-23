@@ -2,7 +2,7 @@
 
 **Purpose:** Single reference for (1) simulation-based rigorous testing (10k / 100k Pearl Prime knob coverage) and (2) **what is still required** for 100% production. Simulation is **excellent readiness tooling**; it is **not standalone production 100%**.
 
-**See also:** [FEATURES_SCALE_AND_KNOBS.md](FEATURES_SCALE_AND_KNOBS.md) (all knobs), [SYSTEMS_V4.md](SYSTEMS_V4.md) (systems test), [DOCS_INDEX.md](DOCS_INDEX.md) (docs vs production 100%).
+**See also:** [FEATURES_SCALE_AND_KNOBS.md](FEATURES_SCALE_AND_KNOBS.md) (all knobs), [SYSTEMS_V4.md](SYSTEMS_V4.md) (systems test), [DOCS_INDEX.md](DOCS_INDEX.md) (docs vs production 100%), [PEARL_PRIME_RELEASE_CONTRACT.md](PEARL_PRIME_RELEASE_CONTRACT.md) (repo-owned release contract and evidence bundle).
 
 **Document all:** For a single index of every doc, script, config, and artifact for rigorous system test and simulation (10k/100k, analyzer, variation report, config, artifacts, CI), see [DOCS_INDEX.md § Rigorous system test & simulation (document all)](DOCS_INDEX.md#rigorous-system-test--simulation-document-all).
 

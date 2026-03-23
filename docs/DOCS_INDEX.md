@@ -164,6 +164,7 @@ Catalog-facing recommendation engine that decides which books Phoenix should cre
 ## Core system docs
 
 - [docs/RIGOROUS_SYSTEM_TEST.md](./RIGOROUS_SYSTEM_TEST.md) — Simulation (10k/100k) as readiness tooling; **four requirements for production 100%**: real pipeline canaries, CI gate on analyzer, evidence on main, release smoke + rollback proof
+- [docs/PEARL_PRIME_RELEASE_CONTRACT.md](./PEARL_PRIME_RELEASE_CONTRACT.md) — Repo-owned release contract for the main Pearl Prime pipeline; authoritative evidence bundle and non-authoritative external signals
 - [docs/PRODUCTION_OBSERVABILITY_LEARNING_SPEC.md](./PRODUCTION_OBSERVABILITY_LEARNING_SPEC.md) — **Production Observability, Learning & Self-Healing (POLES):** observe 100% repo live; document success; elevate, auto-fix, retest failures; learn and enhance over time
 - [docs/SYSTEMS_V4.md](./SYSTEMS_V4.md) — V4 systems overview
 - [docs/PLANNING_STATUS.md](./PLANNING_STATUS.md) — Planning status
@@ -221,6 +222,7 @@ Single index: every doc, script, config, and artifact for simulation, 10k/100k k
 | Item | Location |
 |------|----------|
 | **Rigorous test & production 100%** | [docs/RIGOROUS_SYSTEM_TEST.md](./RIGOROUS_SYSTEM_TEST.md) — Sim as readiness; four production requirements |
+| **Pearl Prime release contract** | [docs/PEARL_PRIME_RELEASE_CONTRACT.md](./PEARL_PRIME_RELEASE_CONTRACT.md) — Main pipeline release contract and evidence bundle |
 | **V4 features, scale, knobs** | [docs/V4_FEATURES_SCALE_AND_KNOBS.md](./V4_FEATURES_SCALE_AND_KNOBS.md) — All knobs, simulation bullet, observability |
 | **Systems V4 (systems test)** | [docs/SYSTEMS_V4.md](./SYSTEMS_V4.md) — §8 systems test (rigorous) |
 | **Simulation overview** | [simulation/README.md](../simulation/README.md) — Quick run, config, Phase 2/3 workflow |
@@ -246,6 +248,7 @@ Single index: every doc, script, config, and artifact for simulation, 10k/100k k
 | **Bestseller error report** | [scripts/ci/llm_bestseller_error_report.py](../scripts/ci/llm_bestseller_error_report.py) — From 10k sim: heuristic root-cause buckets (insufficient_pool, phase2/phase3, etc.), high-risk format/tier (failure rate >20%); bestseller-tier failures; optional --llm; --strict fails on high-risk; --input, --out; use with analyzer --min-pass-rate 1.0 for 100% gate |
 | **Rigorous suite runner** | [scripts/ci/run_rigorous_system_test.py](../scripts/ci/run_rigorous_system_test.py) — Systems test + variation + atoms coverage + optional sim |
 | **Canary** | [scripts/ci/run_canary_100_books.py](../scripts/ci/run_canary_100_books.py) — Real pipeline on sampled arcs |
+| **Pearl Prime release evidence writer** | [scripts/ci/write_pearl_prime_release_evidence.py](../scripts/ci/write_pearl_prime_release_evidence.py) — Writes `artifacts/release/pearl_prime_release_evidence.json` from repo-owned release artifacts |
 | **Variation report** | [scripts/ci/report_variation_knobs.py](../scripts/ci/report_variation_knobs.py) — variation_knob_distribution, pearl_prime block from plans/index |
 | **Monte Carlo CTSS** | [simulation/run_monte_carlo_ctss.py](../simulation/run_monte_carlo_ctss.py) — Duplication risk vs index |
 | **Systems test** | [scripts/systems_test/run_systems_test.py](../scripts/systems_test/run_systems_test.py) — Phases 1–7; optional sim run |
