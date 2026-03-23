@@ -38,7 +38,9 @@ Machine authority for that set is [`config/governance/required_checks.yaml`](../
 
 `Workers Builds: pearl-prime` from Cloudflare is currently **non-blocking operational noise**, not the authoritative Pearl Prime release signal.
 
-Unless this repo gains a versioned Cloudflare deployment contract for that target, Cloudflare preview/build status must not be treated as the source of truth for Pearl Prime release readiness.
+This repo now includes a versioned Cloudflare deployment contract at [`docs/PEARL_PRIME_CLOUDFLARE_DEPLOYMENT.md`](./PEARL_PRIME_CLOUDFLARE_DEPLOYMENT.md), backed by [`wrangler.jsonc`](../wrangler.jsonc) and [`cloudflare/pearl_prime_worker.js`](../cloudflare/pearl_prime_worker.js).
+
+Until that external Cloudflare build runs green on `main`, Cloudflare preview/build status must still not be treated as the source of truth for Pearl Prime release readiness.
 
 ## Required release evidence
 
