@@ -1,6 +1,6 @@
 # System State Master
 
-Last verified: 2026-03-22
+Last verified: 2026-03-23
 Owner: Pearl_GitHub
 
 ## Purpose
@@ -22,6 +22,7 @@ Phoenix Omega is a large multi-system repo with real production code, major docu
 The clearest current truth is:
 
 - governance and repo-operations docs are substantial and now better aligned
+- GitHub branch protection is now normalized to one active canonical ruleset on `main`
 - Pearl_GitHub tooling and hourly alignment infrastructure exist on `main`
 - the AI Manga Dharma spec suite is merged
 - the first manga kernel/build slice is merged
@@ -47,6 +48,11 @@ After that, go to the domain you are actually touching.
 
 - Open PRs: `0`
 - Repo cleanup / governance / manga alignment PRs already landed on `main`
+- PR #40 normalized GitHub governance drift:
+  - one active `main` ruleset remains
+  - canonical required checks are `Core tests`, `Release gates`, `EI V2 gates`, `Change impact`
+  - legacy `change-impact` is removed from workflow emission and live rulesets
+  - `Workers Builds: pearl-prime` is not merge-required
 - PR #21 (`codex/runtime-consolidation`) was reviewed as harvest-only and closed as superseded
 - hourly repo-alignment tooling exists on `main`:
   - [./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md](./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md)
@@ -90,12 +96,13 @@ Short interpretation:
 - [./PEARL_GITHUB_ONBOARDING.md](./PEARL_GITHUB_ONBOARDING.md) is closer to repo reality than before
 - Pearl_GitHub state and memory docs exist and are useful
 - repo-alignment/autopilot tooling exists
+- governance verifier now checks for conflicting active rulesets and stale required-check contexts
 
 ### What is still imperfect
 
 - prose docs can drift from machine-enforced config
 - local work can move faster than the last committed state doc
-- there are still some orphaned or stale references in governance docs
+- some state docs can still lag fast-moving branch or evidence changes
 
 ### Rule for truth
 

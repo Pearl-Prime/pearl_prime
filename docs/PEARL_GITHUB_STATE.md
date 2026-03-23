@@ -1,6 +1,6 @@
 # Pearl_GitHub State
 
-Last verified: 2026-03-22
+Last verified: 2026-03-23
 Owner: Pearl_GitHub
 
 ## Purpose
@@ -85,6 +85,13 @@ Read this with:
   - `docs/PEARL_GITHUB_ONBOARDING.md` patched: `python3`, push_guard gated, fallback instructions, key files table cleaned, key docs list extended
   - Session documented locally during the governance audit; do not assume a committed session-status file exists on `main`
   - Changes are in working tree only — not committed or pushed
+- **2026-03-23 GitHub governance normalization** — live ruleset drift was cleaned up end to end:
+  - merged [PR #40](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/40)
+  - deleted stale active rulesets `Main protection` and `main_branch_protection`
+  - kept one active canonical ruleset on `main`: `Protect main`
+  - removed the legacy `change-impact` alias job from `.github/workflows/change-impact.yml`
+  - extended `scripts/ci/verify_github_governance.py --mode api --strict` to fail on conflicting active rulesets, forbidden legacy contexts, non-blocking required contexts, and required contexts not emitted by workflows
+  - captured before/after evidence under [../artifacts/governance/rulesets/](../artifacts/governance/rulesets/)
 
 ## Current Verified Repo State
 
@@ -94,8 +101,13 @@ Read this with:
   - [PR #35](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/35)
   - [PR #36](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/36)
   - [PR #37](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/37)
+  - [PR #40](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/40)
 - PR #21 was closed as superseded after harvest planning
-- Local `main` was previously hard-aligned to `origin/main`, but this checkout now has new local-only changes again
+- Live GitHub branch protection is now normalized:
+  - one active ruleset on `main`
+  - canonical required checks are `Core tests`, `Release gates`, `EI V2 gates`, `Change impact`
+  - `Workers Builds: pearl-prime` is not merge-required
+- Local `main` was previously hard-aligned to `origin/main`; individual checkouts may still have local-only changes and should verify with git before assuming alignment
 - Safety backup branch exists:
   - `codex/main-autobackup-20260320-2124`
   - `codex/main-autobackup-20260322-112842`
@@ -194,10 +206,8 @@ Evidence held in thread:
 
 1. `docs/PEARL_GITHUB_PS_TXT_PATCH.md` is orphaned — delete or archive
 2. `docs/LOCAL_GIT_DRIFT_PREVENTION_SOP.md` is referenced in onboarding but does not exist — create or remove reference
-3. `git_system.md` lists four required checks as always-required — reconcile with `config/governance/required_checks.yaml` (only Core tests is always-on)
-4. `BRANCH_PROTECTION_REQUIREMENTS.md` lists four required checks without noting only Core tests is always-on — add note or reconcile
-5. Keep [docs/SYSTEM_STATE_MASTER.md](./SYSTEM_STATE_MASTER.md) current when repo reality changes
-6. Commit and push the `ps.txt`, onboarding, state, and session status changes from this audit
+3. Keep [docs/SYSTEM_STATE_MASTER.md](./SYSTEM_STATE_MASTER.md) current when repo reality changes
+4. Keep [docs/DOCS_INDEX.md](./DOCS_INDEX.md) and evidence inventory current when governance artifacts change
 
 ## Next Actions
 

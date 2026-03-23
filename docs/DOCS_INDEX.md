@@ -2,7 +2,7 @@
 
 **Purpose:** Canonical index for documentation authority and navigation.  
 **Missing-file policy:** Only existing files are linked; planned or missing files are listed as backlog items (plain text or `path` with ⚠️ *file not present*).  
-**Last updated:** 2026-03-22
+**Last updated:** 2026-03-23
 
 **For developers: start here.** This index is your map. Use the **task table** below for "where to go" by task. **GitHub (PRs, merges, two repos, runners):** go to [GitHub Operations Framework](#github-operations-framework) and [docs/GITHUB_OPERATIONS_FRAMEWORK.md](./GITHUB_OPERATIONS_FRAMEWORK.md) — repo map, workflow matrix, canonical ownership, PR flow, merge to main, Qwen-Agent push/runner, recovery. **No-failure standard:** [docs/GITHUB_NO_FAILURE_FRAMEWORK.md](./GITHUB_NO_FAILURE_FRAMEWORK.md). **Tests / CI:** [Test suite (document all)](#test-suite-document-all). **Domain work:** use the task table and the "(document all)" subsections per domain.
 
@@ -429,6 +429,8 @@ Single entry point for GitHub operations across **Ahjan108/phoenix_omega_v4.8** 
 | **Ownership matrix** | [docs/OWNERSHIP_MATRIX.md](./OWNERSHIP_MATRIX.md) — which repo and path family owns governance, workflows, runtime, and audit surfaces. |
 | **Remote commit review** | [.github/workflows/remote-commit-review.yml](../.github/workflows/remote-commit-review.yml) + [scripts/audit/remote_commit_review.py](../scripts/audit/remote_commit_review.py) — weekly report of commits on `main` not linked to merged PRs. |
 | **Required-check validator** | [scripts/ci/validate_required_checks_match.py](../scripts/ci/validate_required_checks_match.py) — fails if configured required check names do not match workflow or job names. |
+| **Ruleset verifier** | [scripts/ci/verify_github_governance.py](../scripts/ci/verify_github_governance.py) — local + API verification for main-only rulesets, canonical required checks, conflicting active rulesets, forbidden legacy contexts, and unexpected required integrations. |
+| **Ruleset cleanup evidence** | [artifacts/governance/rulesets/20260323_ruleset_cleanup_summary.md](../artifacts/governance/rulesets/20260323_ruleset_cleanup_summary.md) — before/after ruleset snapshots and PR #40 governance normalization evidence. |
 | **Rollback runbooks** | [docs/ROLLBACK_RUNBOOKS_INDEX.md](./ROLLBACK_RUNBOOKS_INDEX.md) — keep-current rollback and DR reference list. |
 | **Pearl News workflows** | Pearl News workflows in this repo are [.github/workflows/pearl-news-assemble.yml](../.github/workflows/pearl-news-assemble.yml), [.github/workflows/pearl-news-fill-qwen.yml](../.github/workflows/pearl-news-fill-qwen.yml), and [.github/workflows/pearl-news-full-qa.yml](../.github/workflows/pearl-news-full-qa.yml). Qwen-Agent references are external operational notes only. |
 
@@ -2017,6 +2019,7 @@ All `.md` files under `specs/` confirmed present on disk. Additional `.txt` and 
 | [funnel/README.md](../funnel/README.md) | Freebie funnel | ✓ — Run locally, config, email_mode, deploy |
 | [funnel/burnout_reset/GO_NO_GO.md](../funnel/burnout_reset/GO_NO_GO.md) | Freebie funnel | ✓ — Go/no-go, handoff, three things from Nihala, CAN-SPAM |
 | [artifacts/governance/system_governance_report.json](../artifacts/governance/system_governance_report.json) | Governance status report (from check_system_governance_status.py) | ✓ |
+| [artifacts/governance/rulesets/20260323_ruleset_cleanup_summary.md](../artifacts/governance/rulesets/20260323_ruleset_cleanup_summary.md) | GitHub governance | ✓ — PR #40 ruleset normalization summary with before/after evidence files |
 | [artifacts/research/README.md](../artifacts/research/README.md) | Marketing & deep research (Generational) | ✓ — Layout: raw/, youth_feed_snapshots/, psychology/, pain_points/, world_events/, narrative/, platform/, manifests/, marketing_sources/ |
 | [research/prompts/schemas/README.md](../research/prompts/schemas/README.md) | Marketing & deep research (Generational) | ✓ — YAML schema refs for research prompts |
 | [artifacts/content_coverage_report.json](../artifacts/content_coverage_report.json) | Content coverage report (from content_coverage_report.py); atoms + plan + teacher readiness | ✓ |

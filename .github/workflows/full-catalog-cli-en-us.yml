@@ -1,12 +1,15 @@
 # Invokes scripts/generate_full_catalog.py directly (not canary, not max-quality catalog).
 # en-US: English content uses the default CLUSTER atoms tree at repo `atoms/` (no separate atoms/en-US/).
+# Smoke on GitHub: use workflow_dispatch with max_books=1, skip_wave_selection=true,
+# no_teacher_mode=true. Full teacher-mode compiles are stricter and may fail the
+# teacher coverage gate until pools are green; defaults keep the stricter path available.
 name: Full catalog CLI (generate_full_catalog, en-US)
 
 on:
   workflow_dispatch:
     inputs:
       max_books:
-        description: Max books to plan and compile
+        description: Max books to plan and compile (use 1 for first smoke on main)
         required: false
         default: '3'
         type: number
@@ -21,7 +24,9 @@ on:
         default: false
         type: boolean
       no_teacher_mode:
-        description: Pass --no-teacher-mode (shared atoms; higher chance of green compile)
+        description: >-
+          If true, pass --no-teacher-mode (shared atoms only). Recommended true for first
+          smoke on CI; false exercises full teacher path and may fail on teacher coverage gate.
         required: false
         default: false
         type: boolean
