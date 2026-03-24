@@ -20,6 +20,7 @@ import argparse
 import json
 import os
 import shlex
+import shutil
 import subprocess
 import sys
 from dataclasses import asdict, dataclass, field
@@ -349,7 +350,8 @@ def write_report(report: Report, report_dir: Path) -> tuple[Path, Path]:
         "notes": report.notes,
         "actions": [asdict(action) for action in report.actions],
     }
-    json_path.write_text(json.dumps(json_payload, indent=2) + "\n", encoding="utf-8")
+    json_text = json.dumps(json_payload, indent=2) + "\n"
+    json_path.write_text(json_text, encoding="utf-8")
 
     lines = [
         "# Pearl_GitHub Hourly Repo Alignment",
@@ -387,7 +389,13 @@ def write_report(report: Report, report_dir: Path) -> tuple[Path, Path]:
     if report.notes:
         lines.extend(["", "## Notes", ""])
         lines.extend(f"- {note}" for note in report.notes)
-    md_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    md_text = "\n".join(lines) + "\n"
+    md_path.write_text(md_text, encoding="utf-8")
+
+    latest_json = report_dir / "latest_hourly_repo_alignment.json"
+    latest_md = report_dir / "latest_hourly_repo_alignment.md"
+    shutil.copy2(json_path, latest_json)
+    shutil.copy2(md_path, latest_md)
     return json_path, md_path
 
 
