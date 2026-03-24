@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/manga_common.schema.json",
+  "$defs": {
+    "sha256_hex": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "upstream_artifacts": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "upstream_hashes": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/sha256_hex" }
+        },
+        "config_hash": { "$ref": "#/$defs/sha256_hex" },
+        "code_revision": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "artifact_base": {
+      "type": "object",
+      "required": ["schema_version", "artifact_type"],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "artifact_type": { "type": "string", "minLength": 1 },
+        "spec_version": { "type": "string" },
+        "generator_version": { "type": "string" },
+        "prompt_id": { "type": "string" },
+        "prompt_version": { "type": "string" },
+        "created_at": { "type": "string" },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      },
+      "additionalProperties": true
+    },
+    "stage_status": {
+      "type": "string",
+      "enum": ["pending", "running", "passed", "failed", "skipped", "invalidated"]
+    }
+  }
+}

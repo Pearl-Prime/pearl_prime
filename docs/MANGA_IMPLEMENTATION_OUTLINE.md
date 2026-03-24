@@ -124,6 +124,9 @@ Then:
 
 This branch starts the kernel with:
 
+- **Artifact contracts (Phase 0):** `schemas/manga/*.schema.json` (shared `manga_common`), `phoenix_v4.manga.models` (paths, stage IDs, jsonschema validation, handoff leakage checks), fixtures under `tests/fixtures/manga/`, tests `tests/test_manga_schemas.py` + `tests/test_manga_schema_refs.py`, CLI `scripts/manga/validate_manga_json.py`, layout enum stub `config/manga/page_and_layout_enums.yaml`
+- **Transmission Splitter (PR2):** `phoenix_v4.manga.transmission.story_architecture_internal_to_handoff` per spec §5 — tests in `tests/test_manga_transmission.py`
+- **LLM + writer stub:** `phoenix_v4.manga.llm.client` (`ReplayLLMClient`), `phoenix_v4.manga.chapter.writer_stub.build_chapter_script_pair_from_handoff` — `tests/test_manga_writer_stub.py`
 - config-backed style archetypes
 - config-backed panel layouts
 - seed teaching-library atoms for prompt override testing

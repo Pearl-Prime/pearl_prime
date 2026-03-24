@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/story_architecture_handoff.schema.json",
+  "allOf": [
+    { "$ref": "manga_common.schema.json#/$defs/artifact_base" },
+    {
+      "type": "object",
+      "required": ["artifact_type", "series_id", "arc_id", "chapters"],
+      "properties": {
+        "artifact_type": { "const": "story_architecture_handoff" },
+        "series_id": { "type": "string", "minLength": 1 },
+        "arc_id": { "type": "string", "minLength": 1 },
+        "chapters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["chapter_number", "plot_beats"],
+            "properties": {
+              "chapter_number": { "type": "integer" },
+              "chapter_title": { "type": "string" },
+              "plot_beats": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["beat_index", "beat_text"],
+                  "properties": {
+                    "beat_index": { "type": "integer", "minimum": 0 },
+                    "beat_text": { "type": "string" }
+                  }
+                }
+              },
+              "chapter_end_hook": {},
+              "turning_point": {}
+            }
+          }
+        }
+      }
+    }
+  ]
+}

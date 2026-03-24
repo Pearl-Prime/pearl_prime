@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/style_bible.schema.json",
+  "allOf": [
+    { "$ref": "manga_common.schema.json#/$defs/artifact_base" },
+    {
+      "type": "object",
+      "required": ["artifact_type", "style_bible_version", "lexicons"],
+      "properties": {
+        "artifact_type": { "const": "style_bible" },
+        "style_bible_version": { "type": "string", "minLength": 1 },
+        "lexicons": { "type": "object" }
+      }
+    }
+  ]
+}

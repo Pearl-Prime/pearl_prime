@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "story_architecture_internal",
+  "series_id": "sample_series",
+  "arc_id": "arc_1",
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "chapter_title": "Open",
+      "mini_arc_stage": "wound_establishment",
+      "plot_beats": [
+        {
+          "beat_index": 0,
+          "beat_type": "carrier",
+          "beat_text": "Shade flickers",
+          "somatic_target": null,
+          "carrier_beat": {
+            "atom_id": "atom_1",
+            "hiding_place": "visual_glitch"
+          }
+        }
+      ],
+      "chapter_end_hook": "Hook",
+      "turning_point": null,
+      "silence_beats_allocated": 1,
+      "villain_presence": "catalyst (offscreen)"
+    }
+  ],
+  "transmission_audit": { "total_carrier_beats": 1 },
+  "constraint_checks": { "forbidden_phrase_scan": "pass" }
+}

@@ -22,7 +22,7 @@
 | **Run or verify Colab/browser work** | [docs/COLAB_AND_BROWSER_VERIFICATION_RUNBOOK.md](./COLAB_AND_BROWSER_VERIFICATION_RUNBOOK.md) — verify real state first, browser/Accessibility prerequisites, Colab completion criteria, and retry loop. |
 | **One-file system truth / onboarding** | [docs/SYSTEM_STATE_MASTER.md](./SYSTEM_STATE_MASTER.md) — best single-file view of what is true now, what is local-only, what is merged, and what is still not done. |
 | **Start here for new developers** | [docs/ONBOARDING_START_HERE.md](./ONBOARDING_START_HERE.md) — shortest safe entry path into the current system. |
-| **Resume manga implementation** | [specs/AI_MANGA_PIPELINE_SUMMARY.md](../specs/AI_MANGA_PIPELINE_SUMMARY.md) — governed manga entry point, then [docs/MANGA_IMPLEMENTATION_OUTLINE.md](./MANGA_IMPLEMENTATION_OUTLINE.md) for the implementation map and current first build slice, including `panel_prompts.json` export and retrieval-first asset reuse before rendering. |
+| **Resume manga implementation** | [specs/AI_MANGA_PIPELINE_SUMMARY.md](../specs/AI_MANGA_PIPELINE_SUMMARY.md) — governed manga entry point, then [docs/MANGA_IMPLEMENTATION_OUTLINE.md](./MANGA_IMPLEMENTATION_OUTLINE.md) for the implementation map. **Contracts:** [schemas/manga/](../schemas/manga/), [phoenix_v4/manga/models/](../phoenix_v4/manga/models/), [phoenix_v4/manga/transmission.py](../phoenix_v4/manga/transmission.py), [tests/test_manga_schemas.py](../tests/test_manga_schemas.py), [tests/test_manga_transmission.py](../tests/test_manga_transmission.py). Kernel: `panel_prompts.json` export and retrieval-first asset reuse before rendering. |
 | **Resume Pearl_GitHub state** | [docs/PEARL_GITHUB_STATE.md](./PEARL_GITHUB_STATE.md) — current verified repo state, completed cleanup, Colab verification status, and next actions. |
 | **Run Pearl_GitHub autopilot** | [docs/PEARL_GITHUB_AUTOPILOT_RUNBOOK.md](./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md) — hourly repo-alignment loop: merge clean PRs, sync local `main`, prune stale local branches, and write run reports. |
 | **Disposition remaining codex branches** | [docs/BRANCH_DISPOSITION_2026_03_20.md](./BRANCH_DISPOSITION_2026_03_20.md) — branch-by-branch delete/harvest/keep-open decisions for the remaining remote `codex/*` branches. |
@@ -1936,6 +1936,7 @@ Single list of every **doc**, **spec**, **config**, and **script** referenced in
 
 | Schema | Section | Status |
 |--------|---------|--------|
+| [schemas/manga/](../schemas/manga/) | AI Manga Dharma (Phase 0+) | ✓ — manga artifact JSON Schemas + `manga_common`; validated in CI via [tests/test_manga_schemas.py](../tests/test_manga_schemas.py) |
 | [schemas/comparator_result_v2.schema.json](../schemas/comparator_result_v2.schema.json) | Qwen-Only Audiobook Pipeline | ✓ — v2.0; 9-gate result schema; checklist_schema_version required; additionalProperties: false |
 
 ### Specs (specs/)
