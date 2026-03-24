@@ -6,9 +6,9 @@
 
 **Authority:** Extends [TITLE_AND_CATALOG_MARKETING_SYSTEM.md](./TITLE_AND_CATALOG_MARKETING_SYSTEM.md) (US title philosophy) and [locale_strategy.md](../del_location_plan/locale_strategy.md) (rollout phases). References [locale_registry.yaml](../config/localization/locale_registry.yaml) (technical definitions) and [PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md](../specs/PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md) (invisible script research).
 
-**Last updated:** 2026-03-03
+**Last updated:** 2026-03-23
 
-**Status:** Complete plan for all 13 locales (en-US, zh-CN, zh-TW, zh-HK, zh-SG, ja-JP, ko-KR, es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU). EU catalogue includes de-DE, es-ES, fr-FR, it-IT, hu-HU.
+**Status:** Complete plan for all 13 locales. Research appendix added (2026-03-23) with platform pricing, market sizes, and competitive intelligence from DeepSeek, Rakuten AI, and web research (en-US, zh-CN, zh-TW, zh-HK, zh-SG, ja-JP, ko-KR, es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU). EU catalogue includes de-DE, es-ES, fr-FR, it-IT, hu-HU.
 
 ---
 
@@ -1777,4 +1777,110 @@ This document provides the single, authoritative plan for Phoenix V4's 100% mult
 - Phase 5 (zh-SG): CONDITIONAL on market validation (if en-US outperforms zh-SG in Singapore, skip zh-SG; invest in en-US instead)
 
 All go-live checklists are comprehensive, locale-specific, and cover content, technical, distribution, marketing, and launch readiness criteria. No locale proceeds to pilot without all five dimensions green.
+
+---
+
+## Appendix A: Asian Market Research Data (2026-03-23)
+
+**Sources:** DeepSeek Deep Research (2 sessions, 9+ web pages), Rakuten AI Deep Research (28 sources, 31 searches), 7 web search gap-fill queries.
+
+**Research artifacts (all in `artifacts/research/`):**
+- `deepseek_market_data_followup_2026_03_23.md` — Market sizes, platform economics, GTM recommendations
+- `rakuten_ai_market_research_2026_03_23.md` — Japan/Korea/Taiwan deep report (consumer demographics, competitive landscape, distribution, regulatory, marketing strategies, case studies, risks)
+- `web_search_gap_fill_2026_03_23.md` — Taiwan platforms, China updates (Ximalaya/Tencent acquisition), ISBN/tax requirements, English-language competitor titles
+
+### A.1 Market Size Summary
+
+| Market | 2024 Size | 2030/2033 Projection | CAGR | Key Metric |
+|--------|-----------|---------------------|------|------------|
+| **China (zh-CN)** | RMB 123.7B revenue, 606M users | Not specified | ~14.39% (regional) | Largest in region by far |
+| **Japan (ja-JP)** | USD 119.6M–296.8M | USD 351.6M–1.3B (2033) | 12.74%–27.8% | World's 2nd largest audiobook market |
+| **South Korea (ko-KR)** | Over USD 150M | 10.6M listeners by 2030 | 6.32%+ | Mobile-first consumption |
+| **Taiwan (zh-TW)** | Not specified (APAC regional) | 4.2M listeners by 2030 | Part of APAC 27.2% | Fastest expanding in region |
+| **Singapore (zh-SG)** | Part of SE Asia USD 92.5M | USD 55.1M by 2033 | 12.71% | Fastest-growing in APAC |
+| **Hong Kong (zh-HK)** | No specific data found | No specific data found | N/A | Data gap |
+
+**APAC Mental Wellness Market:** USD 2.9B (2024) → USD 6.8B (2033) at 9.87% CAGR. "Digital apps" was largest segment in 2024.
+
+### A.2 Platform Pricing (Validated)
+
+**Japan:**
+- Audible JP: ¥1,500/month (~USD 10) unlimited listening
+- Individual audiobooks: ¥2,000–4,000
+- Author royalties: 20–40%
+
+**South Korea:**
+- Subscription platforms (Naver, Millie's, Willa): ~₩9,900/month
+- Market trending toward all-you-can-listen models
+
+**Taiwan:**
+- Kobo Plus Reading: NT$199/month (~USD 6.20)
+- Kobo Plus Listening: NT$199/month (~USD 6.20)
+- Kobo Plus Combo: NT$259/month (~USD 8.10)
+- 14-day free trial available
+- Readmoo: individual purchase model
+
+**China:**
+- Ximalaya SVIP: ~¥25/month; VIP: ~¥15/month
+- Pay-per-chapter: ¥0.5–3.0 per chapter
+- User willingness: ¥11–20/month
+- SVIP ARPU: RMB 11.4 (Q1 2025, +7.5% YoY)
+- VAT on digital content: 6–13%
+
+### A.3 Critical Competitive Intelligence
+
+**First-mover opportunity confirmed:** Multiple English-language polyvagal/vagus nerve audiobooks exist (Rosenberg, Porges, Beck, Hart, Mayer, Bennett) but NO localized Asian-language versions found in any market. This is a significant strategic advantage.
+
+**Major platform shift:** Ximalaya FM acquired by Tencent Music for $2.4B (June 2025). Now part of Tencent ecosystem — affects distribution strategy for zh-CN.
+
+**China regulatory:** Foreign publishers must obtain CSBN (not international ISBN), must work through domestic Chinese publishing house, manuscript must pass content review. New digital platform tax reporting requirements effective June 2025.
+
+### A.4 New Config Files Created (2026-03-23)
+
+| File | Purpose | Status |
+|------|---------|--------|
+| `config/marketing/consumer_language_by_topic_ja_JP.yaml` | Japanese consumer language (14 topics) | Created |
+| `config/marketing/consumer_language_by_topic_ko_KR.yaml` | Korean consumer language (14 topics) | Created |
+| `config/marketing/consumer_language_by_topic_zh_TW.yaml` | Taiwan consumer language (14 topics) | Created |
+| `config/marketing/consumer_language_by_topic_zh_CN.yaml` | China consumer language (14 topics) | Created |
+| `config/trend_keywords/trend_keywords_ja_JP.yaml` | Japan SerpApi trend keywords | Created |
+| `config/trend_keywords/trend_keywords_ko_KR.yaml` | Korea SerpApi trend keywords | Created |
+| `config/trend_keywords/trend_keywords_zh_TW.yaml` | Taiwan SerpApi trend keywords | Created |
+| `config/trend_keywords/trend_keywords_zh_CN.yaml` | China SerpApi/Baidu trend keywords | Created |
+| `marketing_deep_research/07_pricing_topology_patch.yaml` | Pricing scaffold updated with Asian locale data | Updated |
+
+### A.5 Platform Revenue Share (Validated 2026-03-23)
+
+| Platform | Exclusive | Non-Exclusive | Subscription Pool |
+|----------|-----------|--------------|-------------------|
+| Audible/ACX (2025 new) | 50% | 30% | Pro-rata listening |
+| Kobo (incl. Taiwan) | — | 55–68% | 60% (time-based) |
+| Spotify | — | 50% (a la carte) | Pro-rata engagement |
+| Ximalaya | Not disclosed | Not disclosed | Negotiated per deal |
+| Naver/Kakao/Readmoo | Not disclosed | Not disclosed | Not disclosed |
+
+Traditional publisher to author share: ~25% of what publisher receives.
+
+### A.6 Consumer Listening Behavior (Global + APAC)
+
+50% of listeners: 1-4 hours/week. 33% of listeners: 5-10 hours/week. Peak contexts: commute/travel (63%), household chores (54%), relaxation/sleep (44%). Primary device: smartphones (44%+ of usage). Growing: smart speakers, in-car, wearables.
+
+### A.7 ACX Upload Requirements (Global Standard)
+
+MP3 192kbps+ CBR, 44.1kHz, mono only, RMS -23 to -18dB, peak under -3dB, noise floor under -60dB. One file per chapter, max 120min. Opening/closing credits required. Retail sample 1-5 min. Review timeline: 1-4 weeks.
+
+### A.8 Additional Research Artifacts (Round 2)
+
+`artifacts/research/deepseek_gap_fill_round2_2026_03_23.md` — HK/SG market data, revenue share details, listening behavior, upload requirements, India bonus data
+
+### A.9 Remaining Research Gaps
+
+- [x] ~~Hong Kong specific market size~~ Confirmed no standalone data exists; grouped in APAC. Kobo Plus launched HK Feb 2024.
+- [x] ~~Singapore audiobook market size~~ USD 18.5M (2024), USD 54.58M (2033), 12.88% CAGR
+- [x] ~~Platform revenue share terms~~ Audible 50%/30%, Kobo 55-68%, Spotify 50%
+- [x] ~~Listening behavior~~ 1-4 hrs/wk majority, smartphone primary, commute peak
+- [x] ~~Upload requirements~~ ACX specs documented, platform-specific for Asian platforms require direct contact
+- [ ] Bestselling wellness/self-help audiobook titles per Asian market (no specific titles found publicly)
+- [ ] Invisible scripts configs for Asian locales (10 personas x 14 topics x 4 locales = 560 entries)
+- [ ] US baseline pricing data for scaffolds 01, 02, 05, 06
 

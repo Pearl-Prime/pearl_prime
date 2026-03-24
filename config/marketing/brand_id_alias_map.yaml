@@ -1,0 +1,138 @@
+# ============================================================
+# Brand ID Alias Map
+# ============================================================
+# Maps descriptive scaffold names → canonical brand_archetype_registry IDs.
+#
+# The 8 marketing_deep_research scaffolds (01–08) were authored using
+# descriptive topic names (e.g. "nervous_system_regulation").
+# The canonical brand_archetype_registry.yaml uses short brand names
+# (e.g. "stabilizer").  This file lets apply_scaffold_patch.py resolve
+# either form.
+#
+# Usage:
+#   from phoenix_v4.config_loader import get_yaml
+#   aliases = get_yaml("config/marketing/brand_id_alias_map.yaml")
+#   canonical = aliases["alias_to_canonical"].get(scaffold_id, scaffold_id)
+#
+# Maintainer: update this file whenever a new brand is added to the
+# registry or a scaffold uses a new descriptive name.
+# ============================================================
+
+# Scaffold descriptive name → canonical brand_id
+alias_to_canonical:
+
+  # ── Core wellness topics (used across scaffolds 01-08) ─────
+  nervous_system_regulation: stabilizer
+  sleep_repair:              night_reset
+  adhd_systems:              adhd_forge
+  burnout_recovery:          career_lift       # career_lift owns burnout + career pivot
+  grief_processing:          trauma_path       # trauma_path covers grief + trauma integration
+  boundary_setting:          relationship_clarity
+  somatic_healing:           healing_ground
+  polyvagal_theory:          stabilizer        # stabilizer is the polyvagal brand
+  overthinking:              minimal_mind
+  imposter_syndrome:         confidence_core
+  financial_stress:          career_lift       # career_lift secondary: financial stress
+  social_anxiety:            confidence_core   # confidence_core secondary: social situations
+  compassion_fatigue:        resilient_parent  # resilient_parent covers caregiver burnout
+  courage_self_worth:        gentle_growth
+
+  # ── Extended mappings for topic variations ──────────────────
+  sleep:                     night_reset
+  adhd:                      adhd_forge
+  burnout:                   career_lift
+  grief:                     trauma_path
+  boundaries:                relationship_clarity
+  somatic:                   healing_ground
+  anxiety:                   stabilizer
+  focus:                     focus_sprint
+  meditation:                spiritual_ground
+  mindfulness:               spiritual_ground
+  hormone:                   hormone_reset
+  stoic:                     stoic_edge
+  student:                   calm_student
+  biohacking:                bio_flow
+  morning_routine:           morning_momentum
+  high_performance:          high_performer
+  legacy:                    legacy_builder
+  creativity:                creative_unfold
+  executive_stress:          executive_calm
+  longevity:                 longevity_lab
+  parenting:                 resilient_parent
+  optimizer:                 optimizer
+
+  # ── Sub-brand / granular aliases from scaffold 01 ──────────
+  somatic_reset:             healing_ground     # somatic sub-brand → healing_ground
+  panic_first_aid:           stabilizer         # acute panic → stabilizer
+  emotional_resilience:      stoic_edge         # resilience framing → stoic_edge
+  grief_companion:           trauma_path        # grief sub-brand → trauma_path
+  gentle_recovery:           gentle_growth      # gentle recovery → gentle_growth
+  inner_security:            confidence_core    # inner security → confidence_core
+  breathwork:                stabilizer         # breathwork is stabilizer modality
+  focus_training:            focus_sprint       # focus sub-brand → focus_sprint
+  dopamine_balance:          adhd_forge         # dopamine framing → adhd_forge
+  habit_building:            morning_momentum   # habit → morning_momentum
+  clarity_decision:          executive_calm     # clarity under pressure → executive_calm
+  high_efficiency:           high_performer     # high efficiency → high_performer
+  energy_return:             bio_flow           # energy optimization → bio_flow
+  movement_flow:             healing_ground     # somatic movement → healing_ground
+  metabolic_stability:       hormone_reset      # metabolic → hormone_reset
+  attachment_repair:         relationship_clarity  # attachment → relationship_clarity
+  communication_clarity:     relationship_clarity  # communication → relationship_clarity
+  gen_z_anxiety:             calm_student       # gen-z anxiety → calm_student
+  identity_rebuild:          gentle_growth      # identity work → gentle_growth
+  shadow_work:               spiritual_ground   # shadow work → spiritual_ground
+
+# Reverse lookup: canonical → primary descriptive topic
+canonical_to_topic:
+  stabilizer:            nervous_system_regulation
+  optimizer:             focus_optimization
+  night_reset:           sleep_repair
+  career_lift:           burnout_recovery
+  adhd_forge:            adhd_systems
+  longevity_lab:         longevity
+  creative_unfold:       creativity
+  resilient_parent:      compassion_fatigue
+  executive_calm:        executive_stress
+  trauma_path:           grief_processing
+  spiritual_ground:      mindfulness
+  focus_sprint:          focus
+  hormone_reset:         hormone
+  stoic_edge:            stoic
+  calm_student:          student
+  healing_ground:        somatic_healing
+  bio_flow:              biohacking
+  confidence_core:       imposter_syndrome
+  relationship_clarity:  boundary_setting
+  morning_momentum:      morning_routine
+  minimal_mind:          overthinking
+  high_performer:        high_performance
+  gentle_growth:         courage_self_worth
+  legacy_builder:        legacy
+
+# All 24 canonical brand_ids (for validation)
+canonical_brand_ids:
+  - stabilizer
+  - optimizer
+  - night_reset
+  - career_lift
+  - adhd_forge
+  - longevity_lab
+  - creative_unfold
+  - resilient_parent
+  - executive_calm
+  - trauma_path
+  - spiritual_ground
+  - focus_sprint
+  - hormone_reset
+  - stoic_edge
+  - calm_student
+  - healing_ground
+  - bio_flow
+  - confidence_core
+  - relationship_clarity
+  - morning_momentum
+  - minimal_mind
+  - high_performer
+  - gentle_growth
+  - legacy_builder

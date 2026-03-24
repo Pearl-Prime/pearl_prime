@@ -1,7 +1,25 @@
 from __future__ import annotations
 
+import yaml
+
 import phoenix_title_engine_v4 as title_engine
 from phoenix_v4.qa import validate_marketing_config as marketing_validator
+from scripts.marketing.apply_scaffold_patch import apply_registry_patch
+
+
+def test_registry_scaffold_aliases_resolve_without_unknown_brand_skips() -> None:
+    patcher = marketing_validator.Path("marketing_deep_research")
+    scaffold_paths = [
+        patcher / "01_gtm_identity_patch.yaml",
+        patcher / "08_kdp_ebook_strategy_patch.yaml",
+    ]
+
+    for scaffold_path in scaffold_paths:
+        raw = scaffold_path.read_text(encoding="utf-8")
+        data = yaml.safe_load(raw) or {}
+        _, messages = apply_registry_patch(scaffold_path, data, dry_run=True)
+
+        assert not [msg for msg in messages if msg.startswith("skip unknown brand_id")], messages
 
 
 def test_marketing_validator_passes_current_config() -> None:
