@@ -1,6 +1,6 @@
 # Pearl_GitHub State
 
-Last verified: 2026-03-23
+Last verified: 2026-03-24
 Owner: Pearl_GitHub
 
 ## Purpose
@@ -107,10 +107,12 @@ Read this with:
   - one active ruleset on `main`
   - canonical required checks are `Core tests`, `Release gates`, `EI V2 gates`, `Change impact`
   - `Workers Builds: pearl-prime` is not merge-required
-- Local `main` was previously hard-aligned to `origin/main`; individual checkouts may still have local-only changes and should verify with git before assuming alignment
+- Local `main` is currently behind `origin/main` in the active checkout; verify live git state before assuming alignment
 - Safety backup branch exists:
   - `codex/main-autobackup-20260320-2124`
   - `codex/main-autobackup-20260322-112842`
+- A salvage branch exists:
+  - `codex/main-salvage-20260323-153043`
 - `agent/ops-docs-and-integrations` has been merged and deleted on remote
 - `agent/pearl-github-state-followup` has been merged and deleted locally
 - The AI Manga Dharma system is now documented on `main` as a 14-document spec suite under `specs/`
@@ -127,53 +129,47 @@ Read this with:
 - The best single-file onboarding and state summary is now:
   - [docs/SYSTEM_STATE_MASTER.md](./SYSTEM_STATE_MASTER.md)
 - The hourly Pearl_GitHub autopilot path is already on `main`
+- 16 stale remote branches were deleted from GitHub on 2026-03-24; 15 remote branches remain including `main`
+- Current active checkout is `agent/manga-sdf-revision-workspace` with `3468` dirty paths (`2539` modified, `929` untracked)
+- `.git/index.lock` is currently present again and held by live editor-side git activity; do not delete it blindly while that activity is running
 
 ## Current Verified Branch Inventory
 
-### Local branches kept
+### Local branches kept (19 total)
 
-- `main`
-- `codex/main-autobackup-20260320-2124`
-- `codex/runtime-consolidation`
-- `codex/pearl-news-cleanup`
-- `codex/next-dev-clean`
+- active agent branches include manga chunk branches, `agent/manga-sdf-revision-workspace`, and `agent/repo-alignment-hardening`
+- local reference / safety branches include `main`, `codex/main-autobackup-20260320-2124`, `codex/main-autobackup-20260322-112842`, `codex/main-salvage-20260323-153043`, `codex/marketing-brand-alias-resolution`, and `codex/runtime-consolidation`
 
 ### Remote branches still needing audit
 
 Keep / deliberate audit required:
 
-- `origin/codex/runtime-consolidation` — `5 behind / 165 ahead`
-
-Likely merge-candidate audit:
-
-- `origin/codex/ei-v2-hybrid-pr` — `11 behind / 1 ahead`
-- `origin/codex/pearl-news-cleanup` — `5 behind / 1 ahead`
-- `origin/codex/phoenixcontrol-ui` — `5 behind / 1 ahead`
-- `origin/codex/runtime-governance-core` — `5 behind / 1 ahead`
-- `origin/codex/governance-evidence-pack` — `10 behind / 3 ahead`
-- `origin/codex/governance-100` — `11 behind / 5 ahead`
-
-Likely archive / stale audit:
-
-- `origin/codex/ei-v2-gate-fix` — `9 behind / 54 ahead`
-- `origin/codex/ei-v2-hybrid-only-clean` — `98 behind / 7 ahead`
-- `origin/codex/pearl-news-workflows-clean` — `8 behind / 26 ahead`
+- `origin/codex/runtime-consolidation` — keep open as harvest-only audit branch
+- `origin/codex/marketing-brand-alias-resolution` — active content branch, still intentionally open
+- `origin/agent/*` branches corresponding to active local work remain intentionally present
 
 ### Remote branch disposition decided
 
-- `delete`
-  - `origin/codex/ei-v2-gate-fix`
-  - `origin/codex/ei-v2-hybrid-only-clean`
-  - `origin/codex/governance-evidence-pack`
-  - `origin/codex/pearl-news-workflows-clean`
-- `harvest`
+- `deleted on 2026-03-24`
+  - `origin/agent/canary-evidence-test-isolation`
+  - `origin/agent/fix-first-responders-pipeline`
+  - `origin/agent/pearl-prime-deploy-contract`
+  - `origin/agent/pearl-prime-release-evidence-fix`
+  - `origin/agent/release-gates-canary-no-index`
+  - `origin/agent/release-gates-node24-and-submodules`
+  - `origin/agent/release-gates-noise-cleanup`
+  - `origin/agent/release-gates-upload-artifact-v6`
   - `origin/codex/ei-v2-hybrid-pr`
   - `origin/codex/governance-100`
   - `origin/codex/pearl-news-cleanup`
   - `origin/codex/phoenixcontrol-ui`
   - `origin/codex/runtime-governance-core`
+  - `origin/codex/system-state-master`
+  - `origin/codex/hourly-repo-alignment-latest-alias`
+  - `origin/codex/manga-phase0-pr1`
 - `keep-open`
   - `origin/codex/runtime-consolidation`
+  - `origin/codex/marketing-brand-alias-resolution`
 
 ## Current Verified Colab Status
 
@@ -218,16 +214,15 @@ Evidence held in thread:
    - retrieval-first asset reuse
    - render/assembly
    - QC/memory
-3. Execute the agreed delete set from [docs/BRANCH_DISPOSITION_2026_03_20.md](./BRANCH_DISPOSITION_2026_03_20.md)
+3. Stabilize local git activity around the live `.git/index.lock` before further local branch mutations
 4. For PR #21 specifically, use [docs/RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md](./RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md) as the execution plan
 5. Open fresh harvest branches from `origin/main` for any kept feature payloads
 6. Use the hourly Pearl_GitHub autopilot to keep repo-alignment reports current
 7. Keep `runtime-consolidation` as a split-only audit branch, not a direct merge target
-8. Continue executing the remaining harvest buckets and remote branch dispositions from the documented plans
-9. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
-10. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
-11. Treat free Colab as the current manga render engine and ComfyUI as a later scaling backend until actual ComfyUI workflow/config lands in repo
-12. Use `max-quality-catalog.yml` for manual sharded self-hosted QA runs when local serial execution is too slow
+8. Keep this file and `repo_memory.md` updated whenever branch inventory or Colab status changes
+9. Use `report_messaging_requirements_local.sh` before channel integration work so the missing token and recipient-ID set is explicit
+10. Treat free Colab as the current manga render engine and ComfyUI as a later scaling backend until actual ComfyUI workflow/config lands in repo
+11. Use `max-quality-catalog.yml` for manual sharded self-hosted QA runs when local serial execution is too slow
 
 ## Pearl_GitHub Operating Reminder
 

@@ -1,6 +1,6 @@
 # System State Master
 
-Last verified: 2026-03-23
+Last verified: 2026-03-24
 Owner: Pearl_GitHub
 
 ## Purpose
@@ -25,10 +25,12 @@ The clearest current truth is:
 - GitHub branch protection is now normalized to one active canonical ruleset on `main`
 - Pearl_GitHub tooling and hourly alignment infrastructure exist on `main`
 - the AI Manga Dharma spec suite is merged
-- the first manga kernel/build slice is merged
+- manga pipeline implementation through Chunks A-F is merged on `main`
 - there are no open PRs right now
-- local `main` has new local-only changes again, so local and GitHub are not perfectly aligned at this moment
-- several remote `codex/*` branches still need harvest or disposition work
+- the current checkout is on `agent/manga-sdf-revision-workspace` (2 commits ahead of `origin/main`) with 3468 dirty paths (`2539` modified, `929` untracked)
+- local repo stabilization is still active because `.git/index.lock` is present again and held by live editor-side git activity
+- 16 stale remote branches were deleted from GitHub on 2026-03-24; 15 remote branches remain including `main`
+- only two remote `codex/*` branches remain: `origin/codex/runtime-consolidation` and `origin/codex/marketing-brand-alias-resolution`
 - some areas are fully real, some are scaffolding, and some are still backlog/reference only
 
 ## What New Developers Should Know First
@@ -60,32 +62,28 @@ After that, go to the domain you are actually touching.
   - [../scripts/git/hourly_repo_alignment.sh](../scripts/git/hourly_repo_alignment.sh)
 - the most recent saved alignment report in the working checkout was `artifacts/governance/repo_alignment/hourly_repo_alignment_20260322_112949.md`
   - treat repo-alignment artifacts as local operational evidence, not guaranteed committed files for fresh clones
-- however, local `main` currently has local-only changes again, so this checkout is not perfectly normalized to GitHub right now
+- however, local `main` currently lags `origin/main`, and the active manga workspace is far from normalized into clean PR flow
 
 ## Branch Reality
 
-### Local branches intentionally present
+### Local branches currently present (19 total)
 
-- `main`
-- `codex/main-autobackup-20260320-2124`
-- `codex/main-autobackup-20260322-112842`
-- `codex/next-dev-clean`
-- `codex/pearl-news-cleanup`
-- `codex/runtime-consolidation`
+- active agent branches include `agent/manga-sdf-revision-workspace`, `agent/repo-alignment-hardening`, manga chunk branches, and repo-health helpers
+- safety/local reference branches include `codex/main-autobackup-20260320-2124`, `codex/main-autobackup-20260322-112842`, `codex/main-salvage-20260323-153043`, `codex/marketing-brand-alias-resolution`, `codex/runtime-consolidation`, and `main`
 
-### Remote branches still needing work
+### Remote branches on GitHub (15 total including `main`)
 
-- `origin/codex/ei-v2-hybrid-pr`
-- `origin/codex/governance-100`
-- `origin/codex/pearl-news-cleanup`
-- `origin/codex/phoenixcontrol-ui`
-- `origin/codex/runtime-consolidation`
-- `origin/codex/runtime-governance-core`
+- active `origin/agent/*` branches remain for current local work, including `origin/agent/repo-alignment-hardening`
+- keep-open `origin/codex/*` branches now are only:
+  - `origin/codex/runtime-consolidation`
+  - `origin/codex/marketing-brand-alias-resolution`
+- the 16 stale remote branches from the old disposition set were deleted on 2026-03-24
 
 Short interpretation:
 
 - branch sprawl is much better than before
-- but branch cleanup/harvest is not fully finished
+- remote stale-branch cleanup is materially improved
+- remaining repo-health risk is concentrated in local dirt and active branch/worktree state, not stale GitHub remnants
 
 ## Governance Status
 
@@ -123,7 +121,7 @@ Status:
 
 Still not done:
 
-- finish remaining remote harvest/disposition work
+- stabilize local repo activity around the live `.git/index.lock`
 - normalize current local-only changes through clean branch/PR flow
 - keep state docs current as repo reality changes
 
@@ -155,7 +153,7 @@ Still not done:
 
 - full in-repo production rendering path is not complete
 - ComfyUI scaling path is planned, not fully wired
-- asset-bank / renderer / assembly / QC still need more implementation slices
+- the active SDF revision workspace changes are not yet normalized through PR flow
 
 ### Video pipeline
 
@@ -195,10 +193,9 @@ That means:
 ## What Is Definitely Not Done
 
 1. Full local-to-GitHub normalization of current working-tree changes
-2. Final harvest/disposition of all remaining remote `codex/*` branches
-3. Full manga production render pipeline inside the repo
-4. Full production completion of every external integration channel
-5. Completion of all backlog-only or file-not-present items listed in [./DOCS_INDEX.md](./DOCS_INDEX.md)
+2. Full manga production render pipeline inside the repo
+3. Full production completion of every external integration channel
+4. Completion of all backlog-only or file-not-present items listed in [./DOCS_INDEX.md](./DOCS_INDEX.md)
 
 ## Best Operating Model
 
