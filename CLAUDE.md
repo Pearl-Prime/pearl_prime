@@ -49,7 +49,7 @@ git branch --show-current
 git status --short
 git fetch origin
 git rev-list --left-right --count origin/main...HEAD
-PYTHONPATH=. python scripts/git/push_guard.py
+PYTHONPATH=. python3 scripts/git/push_guard.py
 scripts/ci/preflight_push.sh
 bash scripts/git/health_check.sh
 ```

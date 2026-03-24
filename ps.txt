@@ -49,7 +49,7 @@ Before any branch, commit, push, PR, merge, or workflow action:
 2. `git status --short`
 3. `git fetch origin`
 4. `git rev-list --left-right --count origin/main...HEAD`
-5. `PYTHONPATH=. python scripts/git/push_guard.py`
+5. `PYTHONPATH=. python3 scripts/git/push_guard.py`
 6. `scripts/ci/preflight_push.sh`
 7. `bash scripts/git/health_check.sh`
 
