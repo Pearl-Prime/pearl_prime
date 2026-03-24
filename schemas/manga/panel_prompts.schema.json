@@ -8,16 +8,28 @@
       "required": ["artifact_type", "panels"],
       "properties": {
         "artifact_type": { "const": "panel_prompts" },
+        "series_id": { "type": "string" },
+        "chapter_id": { "type": "string" },
+        "config_hash": { "type": "string" },
         "panels": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["panel_id"],
+            "required": ["panel_id", "prompt"],
             "properties": {
               "panel_id": { "type": "string", "minLength": 1 },
               "prompt": { "type": "string" },
+              "negative_prompt": { "type": "string" },
               "composition_notes": { "type": "object" },
-              "prompt_token_count": { "type": "integer", "minimum": 0 }
+              "prompt_token_count": { "type": "integer", "minimum": 0 },
+              "negative_token_count": { "type": "integer", "minimum": 0 },
+              "continuity_tags": { "type": "array", "items": { "type": "string" } },
+              "silence_compliance": { "type": "boolean" },
+              "atom_type": { "type": "string" },
+              "engine_type": { "type": "string" },
+              "style_id": { "type": "string" },
+              "teacher_id": { "type": "string" },
+              "panel_function": { "type": "string" }
             }
           }
         }

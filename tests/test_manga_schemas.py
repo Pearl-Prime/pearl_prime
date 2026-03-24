@@ -107,7 +107,7 @@ def _minimal_payload(stem: str) -> dict:
         "panel_prompts": {
             **common,
             "artifact_type": "panel_prompts",
-            "panels": [{"panel_id": "p1"}],
+            "panels": [{"panel_id": "p1", "prompt": "test"}],
         },
         "panel_images_manifest": {
             **common,
