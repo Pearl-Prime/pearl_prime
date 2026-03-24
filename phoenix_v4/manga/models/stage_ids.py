@@ -12,6 +12,7 @@ CHAPTER_IMAGE_GEN = "chapter_image_gen"
 CHAPTER_LETTERING = "chapter_lettering"
 CHAPTER_LAYOUT = "chapter_layout"
 CHAPTER_QC = "chapter_qc"
+SERIES_MEMORY_MERGE = "series_memory_merge"
 
 ALL_STAGE_IDS: tuple[str, ...] = (
     SERIES_VISUAL_IDENTITY,
@@ -24,4 +25,5 @@ ALL_STAGE_IDS: tuple[str, ...] = (
     CHAPTER_LETTERING,
     CHAPTER_LAYOUT,
     CHAPTER_QC,
+    SERIES_MEMORY_MERGE,
 )

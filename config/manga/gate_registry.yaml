@@ -1,0 +1,14 @@
+# Manga QC gate ids (referenced by revision_queue.issue.gate_id).
+gates:
+  - gate_id: MANGA_GATE_IMAGES_ALL_OK
+    stage_owner: chapter_image_gen
+    description: Every panel in panel_images_manifest has status ok with path and dimensions.
+  - gate_id: MANGA_GATE_LETTERING_SILENCE
+    stage_owner: chapter_lettering
+    description: Lettering silence_confirmed matches dialogue presence on panels.
+  - gate_id: MANGA_GATE_LAYOUT_PAGES
+    stage_owner: chapter_layout
+    description: final_page_composite contains expected page PNGs for each script page.
+  - gate_id: MANGA_GATE_STORY_HANDOFF
+    stage_owner: transmission_split
+    description: series/story_architecture_handoff.json exists and validates.
