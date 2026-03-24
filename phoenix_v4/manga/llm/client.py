@@ -26,6 +26,14 @@ class ReplayLLMClient:
     def __init__(self, response: dict[str, Any]) -> None:
         self._response = response
 
+    @classmethod
+    def from_json_file(cls, path: Path) -> ReplayLLMClient:
+        """Load a canned JSON object (e.g. chapter pair replay fixture)."""
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(raw, dict):
+            raise TypeError(f"Expected JSON object in {path}")
+        return cls(raw)
+
     def generate_json(
         self,
         prompt: str,
