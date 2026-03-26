@@ -1,0 +1,197 @@
+{
+  "plan_hash": "276c113dbcec7fd638ae79bb02203505",
+  "plan_id": "276c113dbcec7fd638ae79bb02203505",
+  "chapter_slot_sequence": [
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "INTEGRATION",
+      "STORY"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "EXERCISE",
+      "INTEGRATION",
+      "STORY"
+    ],
+    [
+      "HOOK",
+      "SCENE",
+      "REFLECTION",
+      "EXERCISE",
+      "INTEGRATION"
+    ]
+  ],
+  "atom_ids": [
+    "corporate_managers_depression_HOOK_v09",
+    "corporate_managers_depression_SCENE_v04",
+    "corporate_managers_depression_REFLECTION_v30",
+    "corporate_managers_depression_INTEGRATION_v07",
+    "corporate_managers_depression_watcher_EMBODIMENT_v02",
+    "corporate_managers_depression_HOOK_v13",
+    "corporate_managers_depression_SCENE_v03",
+    "corporate_managers_depression_REFLECTION_v25",
+    "corporate_managers_depression_EXERCISE_v04",
+    "corporate_managers_depression_INTEGRATION_v03",
+    "corporate_managers_depression_watcher_RECOGNITION_v24",
+    "corporate_managers_depression_HOOK_v02",
+    "corporate_managers_depression_SCENE_v02",
+    "corporate_managers_depression_REFLECTION_v19",
+    "corporate_managers_depression_EXERCISE_v03",
+    "corporate_managers_depression_INTEGRATION_v05"
+  ],
+  "dominant_band_sequence": [
+    1,
+    3,
+    null
+  ],
+  "arc_id": "corporate_managers_depression_watcher_F016_gen",
+  "emotional_temperature_sequence": [
+    "cool",
+    "warm",
+    "warm"
+  ],
+  "exercise_chapters": [
+    1,
+    2
+  ],
+  "slot_sig": "MOD_pocket_guide:777fb8092182ec66",
+  "format_id": "MOD_pocket_guide",
+  "runtime_format_id": "",
+  "output_format_id": "pocket_guide",
+  "output_format_name": "Pocket Guide",
+  "v4_freeze_enabled": true,
+  "locale": "en-US",
+  "territory": "US",
+  "atoms_model": "legacy",
+  "engine_id": "watcher",
+  "angle_id": "at_work",
+  "reflection_strategy_sequence": [
+    "didactic",
+    "socratic",
+    "narrative_embedded"
+  ],
+  "chapter_archetypes": [
+    "intro_hook_heavy",
+    "deepen_mechanism",
+    "resolve_integration"
+  ],
+  "chapter_exercise_modes": [
+    "none",
+    "micro",
+    "micro"
+  ],
+  "chapter_reflection_weights": [
+    "light",
+    "standard",
+    "standard"
+  ],
+  "chapter_story_depths": [
+    "standard",
+    "standard",
+    "micro"
+  ],
+  "chapter_planner_warnings": [
+    "arc_role_distribution[short] challenge=0 outside target [1,2]"
+  ],
+  "chapter_bestseller_structures": [
+    "case_file",
+    "letter",
+    "case_file"
+  ],
+  "narrator_id": "default_narrator",
+  "cover_art_base": "assets/authors/cover_art/ahjan_base.png",
+  "cover_art_style_hint": "contemplative",
+  "cover_art_palette_tokens": [
+    "contemplative"
+  ],
+  "cover_variant_id": "ahjan",
+  "emotional_role_sequence": [
+    "recognition",
+    "destabilization",
+    "integration"
+  ],
+  "emotional_role_sig": "r-d-i",
+  "book_structure_id": "three_act",
+  "journey_shape_id": "wave_three_peaks",
+  "motif_id": "motif_cost",
+  "section_reorder_mode": "none",
+  "reframe_profile_id": "balanced",
+  "variation_chapter_archetypes": [
+    "establish",
+    "expose",
+    "destabilize"
+  ],
+  "variation_signature": "26a99c896ab3f49b60bd6eb904e39e29",
+  "motif_injections": [
+    {
+      "chapter_index": 0,
+      "slot_index": 2,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 0,
+      "slot_index": 4,
+      "phrase": "What does it cost you to keep going like this?"
+    },
+    {
+      "chapter_index": 1,
+      "slot_index": 2,
+      "phrase": "The cost of not changing is already here."
+    },
+    {
+      "chapter_index": 1,
+      "slot_index": 4,
+      "phrase": "The cost of not changing is already here."
+    },
+    {
+      "chapter_index": 2,
+      "slot_index": 2,
+      "phrase": "Staying the same has a price."
+    },
+    {
+      "chapter_index": 2,
+      "slot_index": 4,
+      "phrase": "The cost of not changing is already here."
+    }
+  ],
+  "reframe_injections": [
+    {
+      "chapter_index": 0,
+      "slot_index": 2,
+      "line_type": "constraint",
+      "text": "You don't have to do it all at once."
+    },
+    {
+      "chapter_index": 1,
+      "slot_index": 2,
+      "line_type": "worldview",
+      "text": "Your nervous system is doing its best."
+    },
+    {
+      "chapter_index": 2,
+      "slot_index": 2,
+      "line_type": "micro_reframe",
+      "text": "You're not behind; you're exactly where you are."
+    }
+  ],
+  "freebie_bundle": [
+    "accountability_partner_v1"
+  ],
+  "cta_template_id": "tool_forward",
+  "freebie_slug": "depression-corporate-managers-accountability-partner-v1",
+  "freebie_bundle_with_formats": [
+    {
+      "freebie_id": "accountability_partner_v1",
+      "formats": [
+        "html",
+        "pdf"
+      ]
+    }
+  ],
+  "topic_id": "depression",
+  "persona_id": "corporate_managers"
+}
