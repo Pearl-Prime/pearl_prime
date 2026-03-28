@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V3.2 Marketing Systems — Brand Admin Briefing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --accent: #6366F1;
+      --green: #059669;
+      --amber: #D97706;
+      --text-dark: #1E293B;
+      --text-mid: #64748B;
+      --text-light: #94A3B8;
+      --bg-light: #FAFBFC;
+      --card-bg: #FFFFFF;
+      --border: #E2E8F0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      font-size: 1rem;
+      line-height: 1.6;
+      letter-spacing: 0.3px;
+    }
+
+    /* Navigation Bar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      z-index: 1000;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-logo {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-spacer {
+      flex: 1;
+    }
+
+    nav .jp-note {
+      font-size: 0.8125rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    /* Main Content */
+    main {
+      margin-top: 64px;
+      padding: 0;
+    }
+
+    section {
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+      padding: 4rem 3rem;
+      min-height: auto;
+    }
+
+    section.visible {
+      opacity: 1;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 2rem;
+      color: var(--text-dark);
+    }
+
+    h3 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .caption {
+      font-size: 0.8125rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .bilingual-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .bilingual-header .jp-text {
+      font-size: 0.8125rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .en-text {
+      flex-shrink: 0;
+    }
+
+    .jp-text {
+      color: var(--text-light);
+    }
+
+    /* Section: Header */
+    #header {
+      background: linear-gradient(135deg, var(--card-bg) 0%, rgba(99, 102, 241, 0.02) 100%);
+      text-align: center;
+      padding: 5rem 3rem 4rem;
+    }
+
+    #header h1 {
+      margin-bottom: 1.5rem;
+    }
+
+    #header .jp-subtitle {
+      font-size: 1.5rem;
+      color: var(--text-mid);
+      margin-bottom: 3rem;
+      font-weight: 500;
+    }
+
+    .stat-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .stat-card .number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .label {
+      font-size: 0.9375rem;
+      color: var(--text-mid);
+      font-weight: 500;
+    }
+
+    /* Section: Manga Variants */
+    #manga {
+      background-color: var(--bg-light);
+      padding: 4rem 3rem;
+    }
+
+    #manga h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .manga-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .manga-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .manga-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .manga-card .emoji {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .manga-card .title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .manga-card .jp-title {
+      font-size: 0.9375rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .manga-card .description {
+      font-size: 0.9375rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    .spectrum-container {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .spectrum-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .spectrum-bar {
+      position: relative;
+      height: 60px;
+      background: linear-gradient(90deg,
+        rgba(30, 41, 59, 0.1) 0%,
+        rgba(99, 102, 241, 0.1) 25%,
+        rgba(5, 150, 105, 0.1) 75%,
+        rgba(217, 119, 6, 0.1) 100%);
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .spectrum-marker {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .spectrum-marker-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--card-bg);
+    }
+
+    .spectrum-marker-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      white-space: nowrap;
+      margin-top: 0.5rem;
+    }
+
+    .spectrum-note {
+      font-size: 0.8125rem;
+      color: var(--text-mid);
+      margin-top: 1rem;
+    }
+
+    /* Section: Systems Overview */
+    #systems {
+      background-color: var(--card-bg);
+      padding: 4rem 3rem;
+    }
+
+    #systems h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .systems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .system-card {
+      background-color: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .system-card h3 {
+      margin-bottom: 0.75rem;
+    }
+
+    .system-card .system-description {
+      font-size: 0.9375rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .system-card .jp-block {
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      margin-top: 1rem;
+    }
+
+    .system-card .jp-block .jp-description {
+      font-size: 0.9375rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    /* Section: Japanese Market Adaptations */
+    #adaptations {
+      background-color: var(--bg-light);
+      padding: 4rem 3rem;
+    }
+
+    #adaptations h2 {
+      margin-bottom: 2rem;
+    }
+
+    .adaptation-block {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .adaptation-block h3 {
+      margin-bottom: 1rem;
+    }
+
+    .adaptation-block p {
+      font-size: 0.9375rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .adaptation-block .jp-block {
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .adaptation-block .jp-block p {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text-mid);
+    }
+
+    /* Section: Action Items */
+    #actions {
+      background-color: var(--card-bg);
+      padding: 4rem 3rem;
+    }
+
+    #actions h2 {
+      margin-bottom: 2rem;
+    }
+
+    .checklist {
+      background-color: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      max-width: 700px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background-color: var(--card-bg);
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .checklist-item:hover {
+      background-color: rgba(99, 102, 241, 0.03);
+      border-color: var(--accent);
+    }
+
+    .checklist-item input[type="checkbox"] {
+      margin-top: 2px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--green);
+    }
+
+    .checklist-item input[type="checkbox"]:checked + .checklist-label {
+      color: var(--text-light);
+      text-decoration: line-through;
+    }
+
+    .checklist-label {
+      flex: 1;
+      font-size: 0.9375rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checklist-label .en {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .checklist-label .jp {
+      display: block;
+      font-size: 0.8125rem;
+      color: var(--text-light);
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    /* Section: Resources */
+    #resources {
+      background-color: var(--bg-light);
+      padding: 4rem 3rem;
+    }
+
+    #resources h2 {
+      margin-bottom: 2rem;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .resource-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .resource-link {
+      display: inline-block;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .resource-link:hover {
+      color: var(--text-dark);
+    }
+
+    .resource-caption {
+      font-size: 0.8125rem;
+      color: var(--text-light);
+    }
+
+    .contact-block {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 2rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .contact-block h3 {
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-info {
+      font-size: 0.9375rem;
+      color: var(--text-mid);
+    }
+
+    .contact-email {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* Section: Footer */
+    footer {
+      background-color: var(--card-bg);
+      border-top: 1px solid var(--border);
+      padding: 3rem;
+      text-align: center;
+      color: var(--text-mid);
+      font-size: 0.9375rem;
+      line-height: 1.8;
+    }
+
+    footer .en-footer {
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    footer .jp-footer {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text-light);
+      font-size: 0.8125rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 1.5rem;
+      }
+
+      section {
+        padding: 3rem 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.875rem;
+      }
+
+      h2 {
+        font-size: 1.375rem;
+      }
+
+      .stat-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .manga-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+
+      .systems-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bilingual-header {
+        flex-direction: column;
+        gap: 0.25rem;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-logo">Phoenix Omega</div>
+    <div class="nav-spacer"></div>
+    <div class="jp-note">Brand Admin Briefing</div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Section 1: Header -->
+    <section id="header">
+      <h1>V3.2 Marketing Systems — Brand Admin Briefing</h1>
+      <div class="jp-subtitle">V3.2 マーケティングシステム — ブランド管理者向けブリーフィング</div>
+
+      <p style="max-width: 600px; margin: 0 auto 2rem; font-size: 0.9375rem; color: var(--text-mid); text-align: center; line-height: 1.8;">
+        For Japanese-market brand administrators. This briefing covers V3.2 marketing systems plus JP-exclusive manga variants.<br>
+        <span style="font-family: 'Noto Sans JP', sans-serif; font-size: 0.8125rem; color: var(--text-light);">日本市場のブランド管理者向け。V3.2マーケティングシステムと日本市場専用マンガバリアントについて説明します。</span>
+      </p>
+
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="number">7</div>
+          <div class="label">新システム</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">20</div>
+          <div class="label">品質チェック</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">6</div>
+          <div class="label">マンガバリアント</div>
+        </div>
+      </div>
+
+      <div style="background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; margin-top: 3rem; max-width: 700px; margin-left: auto; margin-right: auto; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);">
+        <p style="font-size: 0.9375rem; color: var(--text-mid); line-height: 1.8; margin: 0;">
+          <strong style="color: var(--text-dark);">How to use this briefing:</strong> Start with the manga variants unique to JP brands, then review the seven core systems, and finish with Japan-specific adaptations. Action items at the end summarize your next steps.
+        </p>
+        <div style="border-left: 3px solid var(--accent); padding-left: 1rem; margin-top: 1rem;">
+          <p style="font-size: 0.9375rem; color: var(--text-mid); line-height: 1.8; margin: 0; font-family: 'Noto Sans JP', sans-serif;">
+            <strong style="color: var(--text-dark);">このブリーフィングの使い方：</strong>まずJPブランド独自のマンガバリアントを確認し、次に7つのコアシステムを確認し、最後に日本固有の適応を確認してください。最後のアクション項目があなたの次のステップをまとめています。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Manga Variants -->
+    <section id="manga">
+      <h2 style="text-align: center;">Manga Variants (JP-Exclusive)</h2>
+
+      <p style="text-align: center; color: var(--text-light); font-size: 0.9375rem; margin-bottom: 3rem; line-height: 1.8;">
+        Six manga format categories available exclusively for Japanese market brands. Each variant targets a specific demographic with distinct narrative conventions.<br>
+        <span style="display: block; margin-top: 0.5rem; font-family: 'Noto Sans JP', sans-serif;">日本市場ブランド専用の6つのマンガフォーマットカテゴリー。各バリアントは、独自のナラティブ規則を持つ特定のデモグラフィックをターゲットとしています。</span>
+      </p>
+
+      <div class="manga-grid">
+        <div class="manga-card">
+          <div class="emoji">少</div>
+          <div class="title">Shonen</div>
+          <div class="jp-title">少年</div>
+          <div class="description">Young male energy, action-oriented therapeutic narratives</div>
+        </div>
+
+        <div class="manga-card">
+          <div class="emoji">女</div>
+          <div class="title">Josei</div>
+          <div class="jp-title">女性</div>
+          <div class="description">Adult women, emotional depth and relational healing</div>
+        </div>
+
+        <div class="manga-card">
+          <div class="emoji">青</div>
+          <div class="title">Seinen</div>
+          <div class="jp-title">青年</div>
+          <div class="description">Adult male, philosophical and existential themes</div>
+        </div>
+
+        <div class="manga-card">
+          <div class="emoji">子</div>
+          <div class="title">Kodomo</div>
+          <div class="jp-title">子供</div>
+          <div class="description">Children/youth, gentle emotional regulation</div>
+        </div>
+
+        <div class="manga-card">
+          <div class="emoji">少</div>
+          <div class="title">Shoujo</div>
+          <div class="jp-title">少女</div>
+          <div class="description">Young female, identity and self-worth exploration</div>
+        </div>
+
+        <div class="manga-card">
+          <div class="emoji">異</div>
+          <div class="title">Isekai</div>
+          <div class="jp-title">異世界</div>
+          <div class="description">"Other world" framing for perspective shifts</div>
+        </div>
+      </div>
+
+      <div class="spectrum-container">
+        <div class="spectrum-title">Audience Age Spectrum</div>
+        <div class="spectrum-bar">
+          <div class="spectrum-marker" style="left: 5%;">
+            <div class="spectrum-marker-dot" style="background-color: var(--text-dark);"></div>
+            <div class="spectrum-marker-label">Kodomo<br>4–8</div>
+          </div>
+          <div class="spectrum-marker" style="left: 20%;">
+            <div class="spectrum-marker-dot" style="background-color: var(--accent);"></div>
+            <div class="spectrum-marker-label">Shoujo<br>10–18</div>
+          </div>
+          <div class="spectrum-marker" style="left: 35%;">
+            <div class="spectrum-marker-dot" style="background-color: var(--accent);"></div>
+            <div class="spectrum-marker-label">Shonen<br>10–18</div>
+          </div>
+          <div class="spectrum-marker" style="left: 55%;">
+            <div class="spectrum-marker-dot" style="background-color: var(--green);"></div>
+            <div class="spectrum-marker-label">Josei<br>20–45</div>
+          </div>
+          <div class="spectrum-marker" style="left: 70%;">
+            <div class="spectrum-marker-dot" style="background-color: var(--amber);"></div>
+            <div class="spectrum-marker-label">Seinen<br>20–45</div>
+          </div>
+          <div class="spectrum-marker" style="left: 85%;">
+            <div class="spectrum-marker-dot" style="background-color: var(--accent);"></div>
+            <div class="spectrum-marker-label">Isekai<br>All Ages</div>
+          </div>
+        </div>
+        <div class="spectrum-note">These formats are exclusive to the Japanese market. / これらのフォーマットは日本市場専用です。</div>
+      </div>
+    </section>
+
+    <!-- Section 3: V3.2 Systems Overview -->
+    <section id="systems">
+      <h2 style="text-align: center;">V3.2 Systems Overview</h2>
+
+      <p style="text-align: center; color: var(--text-light); font-size: 0.9375rem; margin-bottom: 3rem; line-height: 1.8;">
+        The same seven core systems used across all Phoenix Omega brands. Each card shows the system name in English and Japanese with a brief description.<br>
+        <span style="display: block; margin-top: 0.5rem; font-family: 'Noto Sans JP', sans-serif;">すべてのPhoenix Omegaブランドで使用される同じ7つのコアシステム。各カードには、システム名が英語と日本語で、簡単な説明とともに表示されます。</span>
+      </p>
+
+      <div class="systems-grid">
+        <div class="system-card">
+          <div class="bilingual-header">
+            <span class="en-text">EOIS</span>
+            <span class="jp-text">感情結果強度スコア</span>
+          </div>
+          <div class="system-description">
+            Emotional Outcome Intensity Score measures therapeutic depth and emotional resonance in narrative design.
+          </div>
+          <div class="jp-block">
+            <div class="jp-description">
+              ナラティブデザインにおける治療的深さと感情的共鳴を測定します。
+            </div>
+          </div>
+        </div>
+
+        <div class="system-card">
+          <div class="bilingual-header">
+            <span class="en-text">Controlled Contrast</span>
+            <span class="jp-text">コントロールドコントラスト</span>
+          </div>
+          <div class="system-description">
+            Manages tension and release cycles to optimize engagement without overwhelming the reader.
+          </div>
+          <div class="jp-block">
+            <div class="jp-description">
+              緊張と解放のサイクルを管理し、読者を圧倒することなく関与を最適化します。
+            </div>
+          </div>
+        </div>
+
+        <div class="system-card">
+          <div class="bilingual-header">
+            <span class="en-text">Audiobook Dominance</span>
+            <span class="jp-text">オーディオブック優位性</span>
+          </div>
+          <div class="system-description">
+            Prioritizes sonic narrative elements — voice pacing, tone modulation, and acoustic metaphor placement.
+          </div>
+          <div class="jp-block">
+            <div class="jp-description">
+              音声ペーシング、トーン変調、音響メタファーの配置を優先します。
+            </div>
+          </div>
+        </div>
+
+        <div class="system-card">
+          <div class="bilingual-header">
+            <span class="en-text">Binge Loop</span>
+            <span class="jp-text">ビンジループ</span>
+          </div>
+          <div class="system-description">
+            Structures episode arcs to create natural momentum that encourages continuous engagement.
+          </div>
+          <div class="jp-block">
+            <div class="jp-description">
+              エピソードアークを構成し、継続的な関与を促す自然な勢いを生成します。
+            </div>
+          </div>
+        </div>
+
+        <div class="system-card">
+          <div class="bilingual-header">
+            <span class="en-text">Social Wiring</span>
+            <span class="jp-text">ソーシャルワイヤリング</span>
+          </div>
+          <div class="system-description">
+            Embeds shareable moments and community touchpoints that activate peer-to-peer amplification.
+          </div>
+          <div class="jp-block">
+            <div class="jp-description">
+              共有可能な瞬間とコミュニティタッチポイントを組み込み、ピアツーピア増幅を活性化します。
+            </div>
+          </div>
+        </div>
+
+        <div class="system-card">
+          <div class="bilingual-header">
+            <span class="en-text">Chaos Slot</span>
+            <span class="jp-text">カオススロット</span>
+          </div>
+          <div class="system-description">
+            Introduces controlled unpredictability to maintain novelty and sustain psychological freshness.
+          </div>
+          <div class="jp-block">
+            <div class="jp-description">
+              制御された予測不可能性を導入し、新規性を維持し、心理的な新鮮さを維持します。
+            </div>
+          </div>
+        </div>
+
+        <div class="system-card">
+          <div class="bilingual-header">
+            <span class="en-text">Transformation Promise</span>
+            <span class="jp-text">変容の約束</span>
+          </div>
+          <div class="system-description">
+            Articulates the core value proposition: how the narrative catalyzes measurable personal growth.
+          </div>
+          <div class="jp-block">
+            <div class="jp-description">
+              ナラティブがどのように測定可能な個人的成長を促進するかを明確にします。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Japanese Market Adaptations -->
+    <section id="adaptations">
+      <h2>Japanese Market Adaptations</h2>
+
+      <p style="color: var(--text-light); font-size: 0.9375rem; margin-bottom: 3rem; line-height: 1.8;">
+        These four adaptations tailor the core V3.2 systems for Japanese cultural context, listening habits, and aesthetic expectations.<br>
+        <span style="display: block; margin-top: 0.5rem; font-family: 'Noto Sans JP', sans-serif;">これらの4つの適応は、日本の文化的コンテキスト、リスニング習慣、美的期待に合わせてコアV3.2システムを調整します。</span>
+      </p>
+
+      <div class="adaptation-block">
+        <h3>Contrast Level Calibration</h3>
+        <p>
+          For the Japanese market, Controlled Contrast operates at L1–L2 intensity. This aligns with cultural preferences for aesthetic subtlety and emotional restraint. Narratives avoid jarring transitions and favor gradual tension escalation over sharp spikes.
+        </p>
+        <div class="jp-block">
+          <p>
+            日本市場向けに、コントロールドコントラストはL1～L2の強度で動作します。これは文化的な美的微妙さと感情的抑制の嗜好と一致しています。ナラティブは急激な遷移を回避し、急激なスパイクよりも段階的な緊張のエスカレーションを優先します。
+          </p>
+        </div>
+      </div>
+
+      <div class="adaptation-block">
+        <h3>Somatic Practice Integration</h3>
+        <p>
+          Japanese cultural traditions emphasize body-mind unity (心身一如). Somatic practices — breathing exercises, postural cues, kinesthetic metaphors — are woven into narrative moments to align with this aesthetic philosophy. Voice acting in audiobook formats prioritizes resonance and embodied presence.
+        </p>
+        <div class="jp-block">
+          <p>
+            日本の文化的伝統は身心一致（心身一如）を強調しています。呼吸法、姿勢の手がかり、キネステティックメタファーはナラティブの瞬間に織り込まれます。オーディオブック形式の音声演技は、共鳴と具現化された存在を優先します。
+          </p>
+        </div>
+      </div>
+
+      <div class="adaptation-block">
+        <h3>Listening Moments (聴く瞬間)</h3>
+        <p>
+          Audiobook content is optimized for three key listening contexts:
+        </p>
+        <ul style="margin-left: 1.5rem; color: var(--text-mid); font-size: 0.9375rem; line-height: 1.8;">
+          <li><strong>通勤 (Commute):</strong> 15–35 minute episodes designed for train or car travel, with narrative beats that provide emotional scaffolding for the workday transition.</li>
+          <li><strong>就寝前 (Before Sleep):</strong> Calming, contemplative narratives (Josei, Seinen) that facilitate wind-down and restful cognitive processing.</li>
+          <li><strong>朝の習慣 (Morning Routine):</strong> Energizing, intention-setting content (Shonen, Kodomo) timed for breakfast or morning preparation.</li>
+        </ul>
+        <div class="jp-block">
+          <p>
+            オーディオブックコンテンツは、3つの主要な聴く文脈に最適化されています：通勤時（15～35分のエピソード）、就寝前（落ち着き、思慮深いナラティブ）、朝の習慣（エネルギッシュで意思設定コンテンツ）。
+          </p>
+        </div>
+      </div>
+
+      <div class="adaptation-block">
+        <h3>Voice Tone & Aesthetic Sensibility</h3>
+        <p>
+          Japanese audiobook performance emphasizes clarity, restraint, and tonal nuance. Voice actors are coached to avoid excessive emotionality, instead favoring subtle vocal modulation that invites listener introspection. This aligns with the Japanese aesthetic of 余白 (yohaku) — the power of empty space and implication.
+        </p>
+        <div class="jp-block">
+          <p>
+            日本のオーディオブック性能は、明確さ、抑制、音響的なニュアンスを強調します。声優は過度な感情性を避けるようコーチされ、代わりにリスナーの内省を招く微妙な声の変調を支持します。これは余白（よはく）の日本的美学と一致しています。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Action Items -->
+    <section id="actions">
+      <h2>Action Items</h2>
+
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="check-1">
+          <label for="check-1" class="checklist-label">
+            <span class="en">Review manga variant assignments</span>
+            <span class="jp">マンガバリアントの割り当てを確認</span>
+          </label>
+        </div>
+
+        <div class="checklist-item">
+          <input type="checkbox" id="check-2">
+          <label for="check-2" class="checklist-label">
+            <span class="en">Confirm contrast level ceiling</span>
+            <span class="jp">コントラストレベルの上限を確認</span>
+          </label>
+        </div>
+
+        <div class="checklist-item">
+          <input type="checkbox" id="check-3">
+          <label for="check-3" class="checklist-label">
+            <span class="en">Review social assets for JP platform fit</span>
+            <span class="jp">日本のプラットフォーム向けソーシャルアセットを確認</span>
+          </label>
+        </div>
+
+        <div class="checklist-item">
+          <input type="checkbox" id="check-4">
+          <label for="check-4" class="checklist-label">
+            <span class="en">Listen to sample with audiobook dominance tags</span>
+            <span class="jp">オーディオブック優位性タグ付きサンプルを試聴</span>
+          </label>
+        </div>
+
+        <div class="checklist-item">
+          <input type="checkbox" id="check-5">
+          <label for="check-5" class="checklist-label">
+            <span class="en">Approve transformation promise language</span>
+            <span class="jp">変容の約束の言語を承認</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Resources -->
+    <section id="resources">
+      <h2>Resources</h2>
+
+      <div class="resources-grid">
+        <div class="resource-card">
+          <a href="phoenix_omega_intro.html" class="resource-link">Phoenix Omega Intro</a>
+          <div class="resource-caption">Platform overview & onboarding</div>
+        </div>
+
+        <div class="resource-card">
+          <a href="brand_onboarding_hub.html" class="resource-link">Brand Onboarding Hub</a>
+          <div class="resource-caption">Complete admin toolkit</div>
+        </div>
+
+        <div class="resource-card">
+          <a href="us_brand_admin_v32_briefing.html" class="resource-link">US Brand Admin Briefing</a>
+          <div class="resource-caption">For comparison & cross-market alignment</div>
+        </div>
+
+        <div class="resource-card">
+          <a href="writer_v32_quick_reference.html" class="resource-link">Writer Quick Reference</a>
+          <div class="resource-caption">V3.2 field types & constraints</div>
+        </div>
+      </div>
+
+      <div class="contact-block">
+        <h3>Questions or Support</h3>
+        <p class="contact-info">
+          Contact: <span style="font-weight: 600;">Maat</span><br>
+          <a href="mailto:hello@48social.com" class="contact-email">hello@48social.com</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="en-footer">Phoenix Omega — United Spiritual Leaders Forum | Last updated: March 2026 | Canonical brand-admin package</div>
+    <div class="jp-footer">フェニックスオメガ — ユナイテッド・スピリチュアル・リーダーズ・フォーラム | 最終更新：2026年3月 | 公式ブランド管理者パッケージ</div>
+  </footer>
+
+  <script>
+    // IntersectionObserver for fade-in animations
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('section').forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Checkbox state persistence (localStorage)
+    document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach((checkbox) => {
+      const id = checkbox.id;
+      if (localStorage.getItem(id)) {
+        checkbox.checked = true;
+      }
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          localStorage.setItem(id, 'true');
+        } else {
+          localStorage.removeItem(id);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

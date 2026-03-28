@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoenix Omega — Brand Onboarding Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0B0F1A;
+            --card-dark: #131825;
+            --border-dark: #1E2536;
+            --text-light: #E2E8F0;
+            --text-muted: #94A3B8;
+            --text-subtle: #64748B;
+            --accent: #6366F1;
+            --green: #34D399;
+            --amber: #FBBF24;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.015em;
+        }
+
+        body {
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .caption {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 220px;
+            height: 100vh;
+            background-color: var(--card-dark);
+            border-right: 1px solid var(--border-dark);
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .sidebar-section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-subtle);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .sidebar-link {
+            padding: 0.625rem 0.875rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+
+        .sidebar-link:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--accent);
+        }
+
+        .sidebar-link.active {
+            color: var(--accent);
+            background-color: rgba(99, 102, 241, 0.15);
+            border-left-color: var(--accent);
+        }
+
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 101;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 20px;
+            height: 2px;
+            background-color: var(--text-light);
+            border-radius: 1px;
+            transition: all 0.3s ease;
+        }
+
+        /* Main content */
+        .main-content {
+            margin-left: 220px;
+            flex: 1;
+            padding: 4rem;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 6rem;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Start Here Section */
+        .welcome-box {
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .welcome-box p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .link-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .link-card {
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .link-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+        }
+
+        .link-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .link-card .caption {
+            color: var(--text-subtle);
+        }
+
+        .canonical-package-note {
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+        }
+
+        .canonical-package-note p {
+            margin-bottom: 1rem;
+        }
+
+        .canonical-package-note ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .canonical-package-note li {
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        /* Brand Explorer Section */
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-chip {
+            padding: 0.625rem 1.25rem;
+            border: 1px solid var(--border-dark);
+            background-color: transparent;
+            color: var(--text-muted);
+            border-radius: 24px;
+            cursor: pointer;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .filter-chip:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .filter-chip.active {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .brand-card {
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .brand-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .brand-card.hidden {
+            display: none;
+        }
+
+        .brand-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .brand-info {
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-info-label {
+            color: var(--text-subtle);
+            font-weight: 500;
+        }
+
+        /* V3.2 Systems Section */
+        .expandable-cards {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .expandable-card {
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .card-header:hover {
+            background-color: rgba(99, 102, 241, 0.08);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .card-toggle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.125rem;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .card-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .card-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .card-body.open {
+            max-height: 800px;
+        }
+
+        .card-content {
+            padding: 0 2rem 2rem 2rem;
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .card-content ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .card-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* QA Checklist Section */
+        .progress-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.9375rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--border-dark);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--green);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .checklist-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .group-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .checklist-items {
+            display: grid;
+            gap: 0.875rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.875rem 1rem;
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            border-color: var(--accent);
+            background-color: rgba(99, 102, 241, 0.08);
+        }
+
+        .checklist-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-dark);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .checklist-item.checked .checklist-checkbox {
+            background-color: var(--green);
+            border-color: var(--green);
+        }
+
+        .checklist-item.checked .checklist-checkbox::after {
+            content: '✓';
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .checklist-text {
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            flex: 1;
+        }
+
+        .checklist-item.checked .checklist-text {
+            color: var(--text-subtle);
+            text-decoration: line-through;
+        }
+
+        /* Changelog Section */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--border-dark);
+        }
+
+        .timeline-entry {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .timeline-entry::before {
+            content: '';
+            position: absolute;
+            left: -11px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            border: 3px solid var(--bg-dark);
+        }
+
+        .timeline-date {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-dark);
+            border-top: 1px solid var(--border-dark);
+            padding: 3rem 4rem;
+            margin-top: 4rem;
+            margin-left: 220px;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 1rem;
+        }
+
+        .footer-content p {
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-contact {
+            font-size: 0.8125rem;
+            color: var(--text-subtle);
+        }
+
+        .footer-contact a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .footer-contact a:hover {
+            color: var(--text-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -220px;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+                padding-top: 5rem;
+            }
+
+            .brand-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            footer {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .link-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                padding: 1.5rem 1rem;
+            }
+
+            .welcome-box {
+                padding: 1.5rem;
+            }
+
+            .card-header {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-menu-toggle" id="mobileMenuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">PHOENIX OMEGA</div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Navigation</div>
+                <div class="sidebar-nav">
+                    <a class="sidebar-link active" data-target="start-here">1. Start Here</a>
+                    <a class="sidebar-link" data-target="brand-explorer">2. Brand Explorer</a>
+                    <a class="sidebar-link" data-target="v32-systems">3. V3.2 Systems</a>
+                    <a class="sidebar-link" data-target="qa-checklist">4. QA Checklist</a>
+                    <a class="sidebar-link" data-target="changelog">5. Changelog</a>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <!-- START HERE SECTION -->
+            <section id="start-here">
+                <h1>Welcome to Phoenix Omega</h1>
+                <div class="welcome-box">
+                    <p>This hub is your starting point for Phoenix Omega brand operations. Use the sidebar to navigate between the brand explorer, V3.2 marketing systems, and quality checklist.</p>
+                    <p>This file is part of a 5-document canonical presentation set: this hub, the US and JP brand admin briefings, the writer's quick reference, and the investor due diligence workbook.</p>
+                </div>
+                <div class="link-cards">
+                    <a href="us_brand_admin_v32_briefing.html" class="link-card">
+                        <h3>US Brand Admin V3.2 Briefing</h3>
+                        <p class="caption">Complete V3.2 systems briefing for US brand operations</p>
+                    </a>
+                    <a href="writer_v32_quick_reference.html" class="link-card">
+                        <h3>Writer's Quick Reference</h3>
+                        <p class="caption">Field-level reference for all V3.2 writer parameters</p>
+                    </a>
+                    <a href="jp_brand_admin_v32_briefing.html" class="link-card">
+                        <h3>JP Brand Admin Briefing</h3>
+                        <p class="caption">V3.2 requirements with Japanese market adaptations and manga variants</p>
+                    </a>
+                    <div class="link-card" style="cursor: default; opacity: 0.85;">
+                        <h3>Investor Due Diligence Workbook</h3>
+                        <p class="caption">XLSX file with financial models, projections, and analysis (download separately)</p>
+                    </div>
+                </div>
+                <div class="canonical-package-note">
+                    <p><strong>Canonical Package</strong></p>
+                    <p>These five files form the complete brand-admin and investor materials set. Updates should be made to these files directly — do not create parallel copies.</p>
+                    <ul>
+                        <li>Brand Onboarding Hub (this file)</li>
+                        <li>US Brand Admin V3.2 Briefing</li>
+                        <li>JP Brand Admin V3.2 Briefing</li>
+                        <li>Writer V3.2 Quick Reference</li>
+                        <li>Investor Due Diligence Workbook</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- BRAND EXPLORER SECTION -->
+            <section id="brand-explorer">
+                <h2>Brand Explorer</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9375rem;">All 24 brands organized by emotional cluster. Use the filter chips to narrow by category. Each card shows the brand persona, target age range, primary emotional job, and price positioning.</p>
+                <div class="filter-chips">
+                    <button class="filter-chip active" data-filter="all">All</button>
+                    <button class="filter-chip" data-filter="nervous_system">Nervous System</button>
+                    <button class="filter-chip" data-filter="productivity">Productivity</button>
+                    <button class="filter-chip" data-filter="vitality">Vitality</button>
+                    <button class="filter-chip" data-filter="relationships">Relationships</button>
+                    <button class="filter-chip" data-filter="identity">Identity</button>
+                    <button class="filter-chip" data-filter="gen_z">Gen Z</button>
+                    <button class="filter-chip" data-filter="wisdom">Wisdom</button>
+                </div>
+                <div class="brand-grid" id="brandGrid">
+                    <!-- Brands will be inserted here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- V3.2 SYSTEMS SECTION -->
+            <section id="v32-systems">
+                <h2>V3.2 Marketing Systems</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9375rem;">The seven V3.2 marketing systems govern how each brand communicates, engages, and retains its audience. Click any card to expand details. These systems are organized from measurement (EOIS, Contrast) through engagement (Audiobook, Binge Loop) to distribution (Social Wiring, Chaos Slot, Transformation Promise).</p>
+                <div class="expandable-cards">
+                    <div class="expandable-card">
+                        <div class="card-header">
+                            <div class="card-title">EOIS</div>
+                            <div class="card-toggle">+</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <p><strong>3-Dimension Scoring System</strong></p>
+                                <ul>
+                                    <li>Minimum composite score: 10/15</li>
+                                    <li>Each brand has defined EOIS ceiling</li>
+                                    <li>Ensures emotional resonance and market positioning</li>
+                                    <li>Part of core V3.2 brand validation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expandable-card">
+                        <div class="card-header">
+                            <div class="card-title">Controlled Contrast</div>
+                            <div class="card-toggle">+</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <p><strong>4 Tension Levels</strong></p>
+                                <ul>
+                                    <li>Level 1: Minimal tension</li>
+                                    <li>Level 2: Moderate tension</li>
+                                    <li>Level 3: High tension</li>
+                                    <li>Level 4: Maximum tension</li>
+                                    <li>Each brand has defined permission levels</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expandable-card">
+                        <div class="card-header">
+                            <div class="card-title">Audiobook Dominance</div>
+                            <div class="card-toggle">+</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <p><strong>Listening Moments & Voice Strategy</strong></p>
+                                <ul>
+                                    <li>Defined listening moments for each brand</li>
+                                    <li>Emotional tone voice assignments</li>
+                                    <li>Somatic markers for listener engagement</li>
+                                    <li>5-platform copy optimization</li>
+                                    <li>Cross-platform voice consistency</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expandable-card">
+                        <div class="card-header">
+                            <div class="card-title">Binge Loop</div>
+                            <div class="card-toggle">+</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <p><strong>Engagement & Series Pull</strong></p>
+                                <ul>
+                                    <li>Unresolved hooks per episode</li>
+                                    <li>Identity arc development across series</li>
+                                    <li>Series-level pull and momentum</li>
+                                    <li>Listener retention mechanics</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expandable-card">
+                        <div class="card-header">
+                            <div class="card-title">Social Wiring</div>
+                            <div class="card-toggle">+</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <p><strong>Multi-Platform Content Strategy</strong></p>
+                                <ul>
+                                    <li>5 YouTube hooks per book</li>
+                                    <li>10 Pinterest pins per book</li>
+                                    <li>3 viral content moments per book</li>
+                                    <li>5 quote cards per book</li>
+                                    <li>Coordinated cross-platform messaging</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expandable-card">
+                        <div class="card-header">
+                            <div class="card-title">Chaos Slot</div>
+                            <div class="card-toggle">+</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <p><strong>Controlled Unpredictability</strong></p>
+                                <ul>
+                                    <li>5-10% unpredictability allocation</li>
+                                    <li>Type 1: Format surprises</li>
+                                    <li>Type 2: Guest appearance variance</li>
+                                    <li>Type 3: Content timing shifts</li>
+                                    <li>Type 4: Narrative pivots</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="expandable-card">
+                        <div class="card-header">
+                            <div class="card-title">Transformation Promise</div>
+                            <div class="card-toggle">+</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-content">
+                                <p><strong>"10 Minutes After Pressing Play..."</strong></p>
+                                <ul>
+                                    <li>Core transformation statement for each brand</li>
+                                    <li>Listener outcome clarity</li>
+                                    <li>Quality score minimum: 3/5</li>
+                                    <li>Measurable, specific results</li>
+                                    <li>Brand differentiation anchor</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- QA CHECKLIST SECTION -->
+            <section id="qa-checklist">
+                <h2>QA Checklist</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9375rem;">20 quality checks across V3.2 and V3.1 standards. Check items as you verify each requirement. Progress is tracked in the bar above.</p>
+                <div class="progress-section">
+                    <div class="progress-label">
+                        <span>Quality Assurance Progress</span>
+                        <span id="progressText">0/20</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <div class="checklist-group">
+                    <div class="group-title">V3.2 Checks (11)</div>
+                    <div class="checklist-items">
+                        <div class="checklist-item" data-item="eois-composite">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">EOIS composite ≥ 10/15</div>
+                        </div>
+                        <div class="checklist-item" data-item="eois-ceiling">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">EOIS within brand ceiling</div>
+                        </div>
+                        <div class="checklist-item" data-item="contrast-level">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Contrast level within brand permission</div>
+                        </div>
+                        <div class="checklist-item" data-item="audiobook-fields">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Audiobook dominance fields present</div>
+                        </div>
+                        <div class="checklist-item" data-item="listening-moment">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Listening moment assigned</div>
+                        </div>
+                        <div class="checklist-item" data-item="voice-tone">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Voice emotional tone assigned</div>
+                        </div>
+                        <div class="checklist-item" data-item="social-wiring">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Social wiring complete (5+10+3+5)</div>
+                        </div>
+                        <div class="checklist-item" data-item="binge-hooks">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Binge loop hooks present</div>
+                        </div>
+                        <div class="checklist-item" data-item="chaos-slot">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Chaos slot within 5-10%</div>
+                        </div>
+                        <div class="checklist-item" data-item="transformation-promise">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Transformation promise present</div>
+                        </div>
+                        <div class="checklist-item" data-item="transformation-quality">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Transformation promise quality score ≥ 3/5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checklist-group">
+                    <div class="group-title">V3.1 Checks (9)</div>
+                    <div class="checklist-items">
+                        <div class="checklist-item" data-item="title-eois">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Title EOIS ≥ 10/15</div>
+                        </div>
+                        <div class="checklist-item" data-item="description-length">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Description length 150-300 words</div>
+                        </div>
+                        <div class="checklist-item" data-item="keywords">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Keywords present</div>
+                        </div>
+                        <div class="checklist-item" data-item="category-tags">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Category tags assigned</div>
+                        </div>
+                        <div class="checklist-item" data-item="series-metadata">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Series metadata complete</div>
+                        </div>
+                        <div class="checklist-item" data-item="cover-direction">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Cover art direction present</div>
+                        </div>
+                        <div class="checklist-item" data-item="pricing-posture">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Pricing within brand posture</div>
+                        </div>
+                        <div class="checklist-item" data-item="cta-template">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">CTA template assigned</div>
+                        </div>
+                        <div class="checklist-item" data-item="freebie-link">
+                            <div class="checklist-checkbox"></div>
+                            <div class="checklist-text">Freebie linked</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHANGELOG SECTION -->
+            <section id="changelog">
+                <h2>Changelog</h2>
+                <div class="timeline">
+                    <div class="timeline-entry">
+                        <div class="timeline-date">March 2026</div>
+                        <div class="timeline-title">V3.2 Marketing Systems</div>
+                        <div class="timeline-description">7 new systems added: EOIS, Controlled Contrast, Audiobook Dominance, Binge Loop, Social Wiring, Chaos Slot, and Transformation Promise. Full framework integration across all 24 brands.</div>
+                    </div>
+
+                    <div class="timeline-entry">
+                        <div class="timeline-date">February 2026</div>
+                        <div class="timeline-title">Revenue Dashboard</div>
+                        <div class="timeline-description">5-scenario projection model, cluster analysis, and platform split analytics. Real-time revenue tracking and forecasting capabilities.</div>
+                    </div>
+
+                    <div class="timeline-entry">
+                        <div class="timeline-date">January 2026</div>
+                        <div class="timeline-title">Writer's Bible V3.1</div>
+                        <div class="timeline-description">Core pipeline documentation, atom types, and format registry. Comprehensive guidance for content creation across all brands.</div>
+                    </div>
+
+                    <div class="timeline-entry">
+                        <div class="timeline-date">December 2025</div>
+                        <div class="timeline-title">Brand Archetype Registry V1.1</div>
+                        <div class="timeline-description">24 brands with full GTM identity. Complete brand positioning, persona mappings, and market differentiation strategy.</div>
+                    </div>
+
+                    <div class="timeline-entry">
+                        <div class="timeline-date">November 2025</div>
+                        <div class="timeline-title">Teacher Registry V4</div>
+                        <div class="timeline-description">13 USLF teachers with doctrine profiles and 15 canonical topics. Teacher-to-brand mapping and curriculum alignment.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>Phoenix Omega — United Spiritual Leaders Forum</p>
+            <p style="font-size: 0.8125rem; color: var(--text-subtle); margin-bottom: 1rem;">Last updated: March 2026 | Canonical brand-admin package</p>
+            <p class="footer-contact">Questions? <a href="mailto:hello@48social.com">hello@48social.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Brand data with clustering
+        const brands = [
+            { name: 'Stabilizer', persona: 'Anxious mind anchor', ageRange: '25-45', emotionalJob: 'Nervous regulation', priceRange: '$19-39', cluster: 'nervous_system' },
+            { name: 'Night Reset', persona: 'Sleep champion', ageRange: '30-50', emotionalJob: 'Sleep deepening', priceRange: '$19-39', cluster: 'nervous_system' },
+            { name: 'Trauma Path', persona: 'Healing guide', ageRange: '28-55', emotionalJob: 'Trauma integration', priceRange: '$29-59', cluster: 'nervous_system' },
+            { name: 'Spiritual Ground', persona: 'Faith anchor', ageRange: '35-65', emotionalJob: 'Spiritual connection', priceRange: '$29-59', cluster: 'nervous_system' },
+            { name: 'Healing Ground', persona: 'Recovery champion', ageRange: '25-50', emotionalJob: 'Physical recovery', priceRange: '$19-39', cluster: 'nervous_system' },
+            { name: 'ADHD Forge', persona: 'Focus architect', ageRange: '20-45', emotionalJob: 'Attention mastery', priceRange: '$19-39', cluster: 'nervous_system' },
+            { name: 'Hormone Reset', persona: 'Balance restorer', ageRange: '30-55', emotionalJob: 'Hormonal harmony', priceRange: '$29-59', cluster: 'nervous_system' },
+            { name: 'Bio Flow', persona: 'Rhythm optimizer', ageRange: '25-50', emotionalJob: 'Biological alignment', priceRange: '$19-39', cluster: 'nervous_system' },
+            { name: 'Minimal Mind', persona: 'Clarity keeper', ageRange: '28-50', emotionalJob: 'Mental simplicity', priceRange: '$19-39', cluster: 'nervous_system' },
+            { name: 'Optimizer', persona: 'Performance engineer', ageRange: '25-50', emotionalJob: 'Peak performance', priceRange: '$29-59', cluster: 'productivity' },
+            { name: 'Career Lift', persona: 'Ambition accelerator', ageRange: '25-45', emotionalJob: 'Career breakthrough', priceRange: '$29-59', cluster: 'productivity' },
+            { name: 'Focus Sprint', persona: 'Deep work master', ageRange: '25-50', emotionalJob: 'Focused execution', priceRange: '$19-39', cluster: 'productivity' },
+            { name: 'Stoic Edge', persona: 'Resilience builder', ageRange: '28-55', emotionalJob: 'Emotional mastery', priceRange: '$29-59', cluster: 'productivity' },
+            { name: 'Morning Momentum', persona: 'Day designer', ageRange: '25-45', emotionalJob: 'Morning excellence', priceRange: '$19-39', cluster: 'productivity' },
+            { name: 'High Performer', persona: 'Excellence seeker', ageRange: '30-55', emotionalJob: 'Sustained excellence', priceRange: '$29-59', cluster: 'productivity' },
+            { name: 'Longevity Lab', persona: 'Life extender', ageRange: '40-70', emotionalJob: 'Life extension', priceRange: '$39-79', cluster: 'vitality' },
+            { name: 'Executive Calm', persona: 'Leader grounding', ageRange: '35-65', emotionalJob: 'Leadership presence', priceRange: '$29-59', cluster: 'vitality' },
+            { name: 'Legacy Builder', persona: 'Impact multiplier', ageRange: '45-75', emotionalJob: 'Generational impact', priceRange: '$39-79', cluster: 'vitality' },
+            { name: 'Resilient Parent', persona: 'Parent strengthener', ageRange: '28-55', emotionalJob: 'Parental resilience', priceRange: '$19-39', cluster: 'relationships' },
+            { name: 'Relationship Clarity', persona: 'Connection healer', ageRange: '25-50', emotionalJob: 'Relationship depth', priceRange: '$29-59', cluster: 'relationships' },
+            { name: 'Confidence Core', persona: 'Self-trust builder', ageRange: '25-45', emotionalJob: 'Authentic confidence', priceRange: '$19-39', cluster: 'relationships' },
+            { name: 'Creative Unfold', persona: 'Artist awakener', ageRange: '25-50', emotionalJob: 'Creative expression', priceRange: '$19-39', cluster: 'identity' },
+            { name: 'Gentle Growth', persona: 'Self-kindness guide', ageRange: '20-45', emotionalJob: 'Self-compassion', priceRange: '$19-39', cluster: 'identity' },
+            { name: 'Calm Student', persona: 'Gen Z anchor', ageRange: '16-25', emotionalJob: 'Exam calm', priceRange: '$9-19', cluster: 'gen_z' }
+        ];
+
+        // Initialize brand grid
+        function initBrandGrid() {
+            const grid = document.getElementById('brandGrid');
+            grid.innerHTML = brands.map(brand => `
+                <div class="brand-card" data-cluster="${brand.cluster}">
+                    <div class="brand-name">${brand.name}</div>
+                    <div class="brand-info"><span class="brand-info-label">Persona:</span> ${brand.persona}</div>
+                    <div class="brand-info"><span class="brand-info-label">Age:</span> ${brand.ageRange}</div>
+                    <div class="brand-info"><span class="brand-info-label">Job:</span> ${brand.emotionalJob}</div>
+                    <div class="brand-info"><span class="brand-info-label">Price:</span> ${brand.priceRange}</div>
+                </div>
+            `).join('');
+        }
+
+        // Filter functionality
+        function setupFilters() {
+            const chips = document.querySelectorAll('.filter-chip');
+            chips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    chips.forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    const filter = chip.getAttribute('data-filter');
+                    filterBrands(filter);
+                });
+            });
+        }
+
+        function filterBrands(filter) {
+            const cards = document.querySelectorAll('.brand-card');
+            cards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-cluster') === filter) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Expandable cards
+        function setupExpandableCards() {
+            const headers = document.querySelectorAll('.card-header');
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const card = header.closest('.expandable-card');
+                    const body = card.querySelector('.card-body');
+                    const toggle = header.querySelector('.card-toggle');
+
+                    body.classList.toggle('open');
+                    toggle.classList.toggle('open');
+                });
+            });
+        }
+
+        // Checklist functionality
+        function setupChecklist() {
+            const items = document.querySelectorAll('.checklist-item');
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    item.classList.toggle('checked');
+                    updateProgress();
+                });
+            });
+        }
+
+        function updateProgress() {
+            const checked = document.querySelectorAll('.checklist-item.checked').length;
+            const total = document.querySelectorAll('.checklist-item').length;
+            const percent = (checked / total) * 100;
+
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('progressText').textContent = `${checked}/${total}`;
+        }
+
+        // Sidebar navigation
+        function setupSidebarNav() {
+            const links = document.querySelectorAll('.sidebar-link');
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    links.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+
+                    const target = link.getAttribute('data-target');
+                    const section = document.getElementById(target);
+                    section.scrollIntoView({ behavior: 'smooth' });
+
+                    document.getElementById('sidebar').classList.remove('open');
+                });
+            });
+        }
+
+        // Mobile menu toggle
+        function setupMobileMenu() {
+            const toggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+
+            toggle.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.sidebar') && !e.target.closest('.mobile-menu-toggle')) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initBrandGrid();
+            setupFilters();
+            setupExpandableCards();
+            setupChecklist();
+            setupSidebarNav();
+            setupMobileMenu();
+        });
+    </script>
+</body>
+</html>

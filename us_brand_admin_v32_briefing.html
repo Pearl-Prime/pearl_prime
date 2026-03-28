@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Brand Admin V3.2 Briefing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-base: #0B0F1A;
+            --bg-card: #131825;
+            --border-color: #1E2536;
+            --accent: #6366F1;
+            --success: #34D399;
+            --warning: #FBBF24;
+            --text-primary: #E2E8F0;
+            --text-secondary: #94A3B8;
+            --text-tertiary: #64748B;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Typography System */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        p, li {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .caption {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Layout */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100vh;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-chapter {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-chapter-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar-section {
+            list-style: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .sidebar-link:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--accent);
+        }
+
+        .sidebar-link.active {
+            background-color: rgba(99, 102, 241, 0.2);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 110;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 20px;
+            height: 2px;
+            background-color: var(--text-primary);
+            border-radius: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translateY(10px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-10px);
+        }
+
+        /* Main Content */
+        main {
+            margin-left: 200px;
+            width: calc(100% - 200px);
+            padding: 3rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transition: opacity 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card.accent-border {
+            border-color: var(--accent);
+        }
+
+        .card.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .card.warning {
+            border-left: 4px solid var(--warning);
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        /* Before/After Comparison */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .comparison-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .comparison-card.old {
+            border: 1px solid var(--text-tertiary);
+        }
+
+        .comparison-card.new {
+            border: 2px solid var(--accent);
+        }
+
+        .comparison-card ul {
+            list-style: none;
+        }
+
+        .comparison-card li {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .comparison-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* Gauge Bars */
+        .gauge-container {
+            margin-bottom: 2rem;
+        }
+
+        .gauge-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .gauge-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .gauge-bar {
+            width: 100%;
+            height: 24px;
+            background-color: rgba(99, 102, 241, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .gauge-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #818CF8);
+            transition: width 0.6s ease;
+            display: flex;
+            align-items: center;
+            padding: 0 0.5rem;
+        }
+
+        .gauge-text {
+            color: var(--text-primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Scale/Ladder */
+        .contrast-scale {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 0;
+            margin-bottom: 2rem;
+        }
+
+        .contrast-level {
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contrast-level.l1 {
+            background-color: rgba(99, 102, 241, 0.05);
+        }
+
+        .contrast-level.l2 {
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+
+        .contrast-level.l3 {
+            background-color: rgba(99, 102, 241, 0.15);
+        }
+
+        .contrast-level.l4 {
+            background-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .contrast-level:first-child {
+            border-top: 1px solid var(--border-color);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .contrast-level:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+
+        .contrast-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            min-width: 120px;
+        }
+
+        .contrast-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .flow-node {
+            flex: 1;
+            background-color: var(--bg-card);
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .flow-node:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Cycle Diagram */
+        .cycle-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cycle-node {
+            width: 120px;
+            height: 120px;
+            background-color: var(--bg-card);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 1rem;
+        }
+
+        /* Bar Chart */
+        .bar-chart {
+            margin-bottom: 2rem;
+        }
+
+        .bar-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .bar-fill {
+            width: 100%;
+            height: 32px;
+            background: linear-gradient(90deg, var(--accent), #818CF8);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        /* Chaos Slot Cards */
+        .chaos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chaos-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .chaos-card:hover {
+            border-color: var(--accent);
+        }
+
+        .chaos-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .chaos-type {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .chaos-description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Transformation Promise */
+        .promise-callout {
+            background-color: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .promise-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        .promise-template {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            border-color: var(--accent);
+            background-color: rgba(99, 102, 241, 0.05);
+        }
+
+        .checklist-item.checked {
+            border-color: var(--success);
+            background-color: rgba(52, 211, 153, 0.05);
+        }
+
+        .checklist-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--success);
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item.checked .checklist-checkbox {
+            background-color: var(--success);
+            border-color: var(--success);
+            color: var(--bg-base);
+        }
+
+        .checklist-text {
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* Links */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .resource-link {
+            background-color: var(--bg-card);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .resource-link:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .resource-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .resource-title {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .resource-description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Contact */
+        .contact-card {
+            background-color: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .contact-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-info {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent);
+            word-break: break-all;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                width: 250px;
+                z-index: 99;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            main {
+                margin-left: 0;
+                width: 100%;
+                padding: 1.5rem;
+                padding-top: 5rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.35rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-node:not(:last-child)::after {
+                content: '↓';
+                position: relative;
+                right: auto;
+                transform: none;
+            }
+
+            .chaos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.15rem;
+            }
+
+            main {
+                padding: 1rem;
+                padding-top: 5rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .chaos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .promise-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <ul class="sidebar-nav">
+            <!-- Chapter 1: Overview -->
+            <li class="sidebar-chapter">
+                <div class="sidebar-chapter-title">Chapter 1: Overview</div>
+                <ul class="sidebar-section">
+                    <li><a class="sidebar-link" href="#section-1">Executive Summary</a></li>
+                    <li><a class="sidebar-link" href="#section-2">What Changed</a></li>
+                </ul>
+            </li>
+
+            <!-- Chapter 2: The Seven Systems -->
+            <li class="sidebar-chapter">
+                <div class="sidebar-chapter-title">Chapter 2: The Seven Systems</div>
+                <ul class="sidebar-section">
+                    <li><div class="sidebar-chapter-title" style="margin-bottom: 0.5rem; font-size: 0.7rem;">Measurement & Control</div></li>
+                    <li><a class="sidebar-link" href="#section-3">EOIS</a></li>
+                    <li><a class="sidebar-link" href="#section-4">Controlled Contrast</a></li>
+                    <li style="margin-top: 1rem;"><div class="sidebar-chapter-title" style="margin-bottom: 0.5rem; font-size: 0.7rem;">Engagement Engine</div></li>
+                    <li><a class="sidebar-link" href="#section-5">Audiobook Dominance</a></li>
+                    <li><a class="sidebar-link" href="#section-6">Binge Loop Engineering</a></li>
+                    <li style="margin-top: 1rem;"><div class="sidebar-chapter-title" style="margin-bottom: 0.5rem; font-size: 0.7rem;">Distribution & Impact</div></li>
+                    <li><a class="sidebar-link" href="#section-7">Social Platform Wiring</a></li>
+                    <li><a class="sidebar-link" href="#section-8">Chaos Slot</a></li>
+                    <li><a class="sidebar-link" href="#section-9">Transformation Promise</a></li>
+                </ul>
+            </li>
+
+            <!-- Chapter 3: Your Role -->
+            <li class="sidebar-chapter">
+                <div class="sidebar-chapter-title">Chapter 3: Your Role</div>
+                <ul class="sidebar-section">
+                    <li><a class="sidebar-link" href="#section-10">Action Items</a></li>
+                </ul>
+            </li>
+
+            <!-- Chapter 4: Resources -->
+            <li class="sidebar-chapter">
+                <div class="sidebar-chapter-title">Chapter 4: Resources</div>
+                <ul class="sidebar-section">
+                    <li><a class="sidebar-link" href="#section-11">Resources</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- CHAPTER 1: OVERVIEW -->
+
+        <!-- Section 1: Executive Summary -->
+        <section id="section-1">
+            <h1>V3.2: Marketing Intelligence Systems</h1>
+            <p>V3.2 adds seven marketing intelligence systems to every book. Automatic. No new tools.</p>
+
+            <div class="card">
+                <h3>Audience & Scope</h3>
+                <p><strong>Who this is for:</strong> US-market brand administrators</p>
+                <p><strong>What it covers:</strong> The 7 V3.2 marketing intelligence systems added to every book</p>
+                <p><strong>How to use it:</strong> Read the overview first, then explore each system section</p>
+                <p><strong>Prerequisite:</strong> brand_onboarding_hub.html for general onboarding</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">7</div>
+                    <div class="metric-label">New Systems</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">20</div>
+                    <div class="metric-label">QA Checks</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">0</div>
+                    <div class="metric-label">New Tools</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: What Changed -->
+        <section id="section-2">
+            <h2>What Changed</h2>
+
+            <div class="comparison-grid">
+                <div class="card comparison-card old">
+                    <h3>V3.1</h3>
+                    <ul>
+                        <li>Single emotion tracking</li>
+                        <li>Basic contrast levels</li>
+                        <li>Manual audio notes</li>
+                        <li>Platform-agnostic copy</li>
+                        <li>Static social templates</li>
+                        <li>No loop metrics</li>
+                    </ul>
+                </div>
+                <div class="card comparison-card new accent-border">
+                    <h3>V3.2</h3>
+                    <ul>
+                        <li>Multi-dimensional emotional scoring</li>
+                        <li>4-level contrast framework</li>
+                        <li>Audiobook dominance layer</li>
+                        <li>Platform-specific wiring</li>
+                        <li>23+ social asset templates</li>
+                        <li>Binge loop engineering</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER 2: THE SEVEN SYSTEMS -->
+
+        <!-- Chapter 2 Intro -->
+        <section>
+            <div class="card">
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">Now that you understand what changed in V3.2, the next section breaks down each of the seven systems you'll be working with.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: EOIS -->
+        <section id="section-3">
+            <h2>EOIS: Emotional Outcome Intensity Score</h2>
+            <p>Measure the emotional intensity of your book across three dimensions. Minimum composite score: 10/15.</p>
+            <p>As a brand admin, you'll use EOIS scores to verify emotional depth meets your brand's ceiling before publication.</p>
+
+            <div class="gauge-container">
+                <div class="gauge-item">
+                    <div class="gauge-label">
+                        <span>Relief</span>
+                        <span>5/5</span>
+                    </div>
+                    <div class="gauge-bar">
+                        <div class="gauge-fill" style="width: 100%;">
+                            <span class="gauge-text">Full</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gauge-item">
+                    <div class="gauge-label">
+                        <span>Urgency</span>
+                        <span>3/5</span>
+                    </div>
+                    <div class="gauge-bar">
+                        <div class="gauge-fill" style="width: 60%;">
+                            <span class="gauge-text">Moderate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gauge-item">
+                    <div class="gauge-label">
+                        <span>Identity Shift</span>
+                        <span>4/5</span>
+                    </div>
+                    <div class="gauge-bar">
+                        <div class="gauge-fill" style="width: 80%;">
+                            <span class="gauge-text">Strong</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Controlled Contrast -->
+        <section id="section-4">
+            <h2>Controlled Contrast</h2>
+            <p>Four levels of emotional and narrative contrast. L4 (maximum) is reserved for critical moments.</p>
+            <p>Your brand has a defined contrast permission level — check submissions against this before approval.</p>
+
+            <div class="contrast-scale">
+                <div class="contrast-level l4">
+                    <div class="contrast-name">L4: Maximum</div>
+                    <div class="contrast-description">Extreme reversal, peak revelation, emotional breaking point</div>
+                </div>
+                <div class="contrast-level l3">
+                    <div class="contrast-name">L3: Sharp</div>
+                    <div class="contrast-description">Clear emotional shift, significant narrative turn</div>
+                </div>
+                <div class="contrast-level l2">
+                    <div class="contrast-name">L2: Clear</div>
+                    <div class="contrast-description">Noticeable contrast, supports narrative flow</div>
+                </div>
+                <div class="contrast-level l1">
+                    <div class="contrast-name">L1: Warm</div>
+                    <div class="contrast-description">Subtle variation, maintains baseline emotional state</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Audiobook Dominance Layer -->
+        <section id="section-5">
+            <h2>Audiobook Dominance Layer</h2>
+            <p>Optimize every book for the listening experience. Voice, pacing, and emotional tone are engineered for audio consumption.</p>
+            <p>Every book ships with audio-first optimization — your role is to confirm the listening moment matches your brand's audience.</p>
+
+            <div class="flow-diagram">
+                <div class="flow-node">Listener Moment</div>
+                <div class="flow-node">Voice Tone</div>
+                <div class="flow-node">Somatic Markers</div>
+                <div class="flow-node">Platform Copy</div>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Key Components</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.75rem;"><strong>listening_moment:</strong> Time of day and context (morning commute, evening wind-down, workout)</li>
+                    <li style="margin-bottom: 0.75rem;"><strong>voice_emotional_tone:</strong> Speaker intent and resonance</li>
+                    <li style="margin-bottom: 0.75rem;"><strong>somatic_pacing:</strong> Breath, cadence, emotional rhythm</li>
+                    <li style="margin-bottom: 0.75rem;"><strong>5-platform_positioning:</strong> YouTube, Spotify, Apple Podcasts, Audible, TikTok</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 6: Binge Loop Engineering -->
+        <section id="section-6">
+            <h2>Binge Loop Engineering</h2>
+            <p>Create unstoppable momentum. Unresolved hooks, identity arcs, and binge pull copy keep listeners engaged.</p>
+            <p>Series momentum directly impacts reorder rates — verify hooks and arcs connect across your brand's catalog.</p>
+
+            <div class="cycle-diagram">
+                <div class="cycle-node">Hook</div>
+                <div class="cycle-node">Arc</div>
+                <div class="cycle-node">Pull</div>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">The Three Stages</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.75rem;"><strong>Unresolved Hooks:</strong> Questions that demand answers. Curiosity gaps that pull the listener forward.</li>
+                    <li style="margin-bottom: 0.75rem;"><strong>Identity Arcs:</strong> The listener sees themselves transformed. Small wins build momentum.</li>
+                    <li style="margin-bottom: 0.75rem;"><strong>Binge Pull Copy:</strong> "What happens next?" Copy that appears in social, ads, and episode descriptions.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 7: Social Platform Wiring -->
+        <section id="section-7">
+            <h2>Social Platform Wiring</h2>
+            <p>Every book generates 23 pre-written social assets across 4 platforms.</p>
+            <p>These 23 assets auto-generate per book — review them for brand fit before distribution.</p>
+
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <div class="bar-label">
+                        <span>YouTube Hooks</span>
+                        <span>5</span>
+                    </div>
+                    <div class="bar-fill" style="width: 100%;">5</div>
+                </div>
+
+                <div class="bar-item">
+                    <div class="bar-label">
+                        <span>Pinterest Titles</span>
+                        <span>10</span>
+                    </div>
+                    <div class="bar-fill" style="width: 100%;">10</div>
+                </div>
+
+                <div class="bar-item">
+                    <div class="bar-label">
+                        <span>Viral Phrases</span>
+                        <span>3</span>
+                    </div>
+                    <div class="bar-fill" style="width: 100%;">3</div>
+                </div>
+
+                <div class="bar-item">
+                    <div class="bar-label">
+                        <span>Quote Cards</span>
+                        <span>5</span>
+                    </div>
+                    <div class="bar-fill" style="width: 100%;">5</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Chaos Slot -->
+        <section id="section-8">
+            <h2>Chaos Slot</h2>
+            <p>Controlled unpredictability. 5–10% of content embraces surprise, breaking patterns without breaking trust.</p>
+            <p>The chaos allocation is automatic — your job is to ensure it stays within the 5–10% band for your brand.</p>
+
+            <div class="chaos-grid">
+                <div class="chaos-card">
+                    <div class="chaos-icon">✧</div>
+                    <div class="chaos-type">Unexpected Metaphor</div>
+                    <div class="chaos-description">Counterintuitive comparison that reframes understanding</div>
+                </div>
+                <div class="chaos-card">
+                    <div class="chaos-icon">⁂</div>
+                    <div class="chaos-type">Format Break</div>
+                    <div class="chaos-description">Departure from chapter structure or pacing norm</div>
+                </div>
+                <div class="chaos-card">
+                    <div class="chaos-icon">◆</div>
+                    <div class="chaos-type">Emotional Pivot</div>
+                    <div class="chaos-description">Sudden tonal shift that resets listener expectations</div>
+                </div>
+                <div class="chaos-card">
+                    <div class="chaos-icon">∴</div>
+                    <div class="chaos-type">Sensory Surprise</div>
+                    <div class="chaos-description">Unexpected sound design or vocal technique</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Transformation Promise -->
+        <section id="section-9">
+            <h2>Transformation Promise</h2>
+            <p>Every book delivers one clear promise. What does the listener feel 10 minutes after pressing play?</p>
+            <p>This is the single most important quality check — if the promise isn't clear and specific, the book doesn't ship.</p>
+
+            <div class="promise-callout">
+                <div class="promise-text">
+                    10 minutes after pressing play, the listener will feel <span class="promise-template">[specific emotional state or realization]</span>.
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Example Promises</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.5rem;">• Less alone in their struggle</li>
+                    <li style="margin-bottom: 0.5rem;">• Clear about their next step</li>
+                    <li style="margin-bottom: 0.5rem;">• Excited about a new possibility</li>
+                    <li style="margin-bottom: 0.5rem;">• Validated in their experience</li>
+                    <li style="margin-bottom: 0.5rem;">• Energized to take action</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Chapter 2 Summary Table -->
+        <section>
+            <h2>Seven Systems Reference</h2>
+            <div class="card">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--border-color);">
+                            <th style="text-align: left; padding: 1rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em;">System Name</th>
+                            <th style="text-align: left; padding: 1rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em;">Purpose</th>
+                            <th style="text-align: left; padding: 1rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em;">Key Metric</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 1rem; color: var(--text-primary);">EOIS</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Emotional resonance scoring</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Composite ≥ 10/15</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 1rem; color: var(--text-primary);">Controlled Contrast</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Tension calibration</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Level 1–4 per brand</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 1rem; color: var(--text-primary);">Audiobook Dominance</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Listening experience</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Voice + moment assigned</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 1rem; color: var(--text-primary);">Binge Loop</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Series engagement</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Hooks + identity arc</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 1rem; color: var(--text-primary);">Social Wiring</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Platform distribution</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">5+10+3+5 assets</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 1rem; color: var(--text-primary);">Chaos Slot</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Controlled unpredictability</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">5–10% allocation</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem; color: var(--text-primary);">Transformation Promise</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Outcome clarity</td>
+                            <td style="padding: 1rem; color: var(--text-primary);">Quality ≥ 3/5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CHAPTER 3: YOUR ROLE -->
+
+        <!-- Chapter 3 Intro -->
+        <section>
+            <div class="card">
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">With all seven systems understood, here's what you need to do as a brand admin.</p>
+            </div>
+        </section>
+
+        <!-- Section 10: Action Items -->
+        <section id="section-10">
+            <h2>Action Items</h2>
+            <p>Complete these checks before your next book submission.</p>
+
+            <ul class="checklist">
+                <li class="checklist-item" data-item="0">
+                    <div class="checklist-checkbox"></div>
+                    <div class="checklist-text">Review your brand's EOIS ceilings</div>
+                </li>
+                <li class="checklist-item" data-item="1">
+                    <div class="checklist-checkbox"></div>
+                    <div class="checklist-text">Check contrast level permissions</div>
+                </li>
+                <li class="checklist-item" data-item="2">
+                    <div class="checklist-checkbox"></div>
+                    <div class="checklist-text">Listen to a sample with audiobook dominance tags</div>
+                </li>
+                <li class="checklist-item" data-item="3">
+                    <div class="checklist-checkbox"></div>
+                    <div class="checklist-text">Review social assets for brand fit</div>
+                </li>
+                <li class="checklist-item" data-item="4">
+                    <div class="checklist-checkbox"></div>
+                    <div class="checklist-text">Confirm transformation promise language</div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- CHAPTER 4: RESOURCES -->
+
+        <!-- Section 11: Resources -->
+        <section id="section-11">
+            <h2>Resources & Support</h2>
+            <p>Additional documentation and support channels.</p>
+
+            <div class="resources-grid">
+                <a href="phoenix_omega_intro.html" class="resource-link">
+                    <div class="resource-icon">📖</div>
+                    <div class="resource-title">Phoenix Omega Intro</div>
+                    <div class="resource-description">Full framework overview and foundations</div>
+                </a>
+                <a href="brand_onboarding_hub.html" class="resource-link">
+                    <div class="resource-icon">🎯</div>
+                    <div class="resource-title">Brand Onboarding Hub</div>
+                    <div class="resource-description">Get started with your brand profile</div>
+                </a>
+                <a href="jp_brand_admin_v32_briefing.html" class="resource-link">
+                    <div class="resource-icon">🌍</div>
+                    <div class="resource-title">JP Brand Admin Briefing</div>
+                    <div class="resource-description">V3.2 systems for Japan-market administrators</div>
+                </a>
+                <a href="writer_v32_quick_reference.html" class="resource-link">
+                    <div class="resource-icon">✍️</div>
+                    <div class="resource-title">Writer Quick Reference</div>
+                    <div class="resource-description">Quick lookup guide for writers implementing V3.2</div>
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-label">Questions?</div>
+                <div class="contact-info">Maat</div>
+                <div class="contact-info"><a href="mailto:hello@48social.com" style="color: var(--accent); text-decoration: none;">hello@48social.com</a></div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background-color: var(--bg-card); border-top: 1px solid var(--border-color); padding: 2rem 3rem; text-align: center; margin-left: 200px;">
+        <p style="font-size: 0.875rem; color: var(--text-secondary);">Phoenix Omega — US Brand Admin V3.2 Briefing | Last updated: March 2026</p>
+        <p style="font-size: 0.8125rem; color: var(--text-tertiary); margin-top: 0.5rem;">Part of the canonical brand-admin package. Questions? <a href="mailto:hello@48social.com" style="color: var(--accent); text-decoration: none;">hello@48social.com</a></p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            sidebar.classList.toggle('open');
+        });
+
+        // Close sidebar when a link is clicked
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                    mobileMenuBtn.classList.remove('active');
+                }
+            });
+        });
+
+        // Sidebar Active State
+        function updateActiveLink() {
+            const sections = document.querySelectorAll('section');
+            const scrollPosition = window.scrollY + 150;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    sidebarLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+
+                    const activeLink = document.querySelector(`.sidebar-link[href="#${section.id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveLink);
+
+        // IntersectionObserver for Fade-In Animation
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Checklist Functionality
+        const checklistItems = document.querySelectorAll('.checklist-item');
+        checklistItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('checked');
+            });
+        });
+
+        // Smooth Scroll for Sidebar Links
+        const sidebarNavLinks = document.querySelectorAll('.sidebar-link');
+        sidebarNavLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', e => {
+            if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                sidebar.classList.remove('open');
+                mobileMenuBtn.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
