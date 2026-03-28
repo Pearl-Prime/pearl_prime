@@ -177,12 +177,24 @@
 
         section {
             margin-bottom: 4rem;
+            opacity: 1;
+        }
+
+        html.js-enhanced section {
             opacity: 0;
             transition: opacity 0.6s ease-out;
         }
 
-        section.visible {
+        html.js-enhanced section.visible {
             opacity: 1;
+        }
+
+        .page-footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 3rem;
+            text-align: center;
+            margin-left: 200px;
         }
 
         /* Cards */
@@ -655,6 +667,11 @@
                 padding-top: 5rem;
             }
 
+            .page-footer {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+            }
+
             h1 {
                 font-size: 1.75rem;
             }
@@ -936,7 +953,7 @@
                     <li style="margin-bottom: 0.75rem;"><strong>listening_moment:</strong> Time of day and context (morning commute, evening wind-down, workout)</li>
                     <li style="margin-bottom: 0.75rem;"><strong>voice_emotional_tone:</strong> Speaker intent and resonance</li>
                     <li style="margin-bottom: 0.75rem;"><strong>somatic_pacing:</strong> Breath, cadence, emotional rhythm</li>
-                    <li style="margin-bottom: 0.75rem;"><strong>5-platform_positioning:</strong> YouTube, Spotify, Apple Podcasts, Audible, TikTok</li>
+                    <li style="margin-bottom: 0.75rem;"><strong>platform_descriptions:</strong> Google Play, Amazon KDP, Apple Books, Audible, Spotify</li>
                 </ul>
             </div>
         </section>
@@ -1187,12 +1204,14 @@
         </section>
     </main>
 
-    <footer style="background-color: var(--bg-card); border-top: 1px solid var(--border-color); padding: 2rem 3rem; text-align: center; margin-left: 200px;">
+    <footer class="page-footer">
         <p style="font-size: 0.875rem; color: var(--text-secondary);">Phoenix Omega — US Brand Admin V3.2 Briefing | Last updated: March 2026</p>
         <p style="font-size: 0.8125rem; color: var(--text-tertiary); margin-top: 0.5rem;">Part of the canonical brand-admin package. Questions? <a href="mailto:hello@48social.com" style="color: var(--accent); text-decoration: none;">hello@48social.com</a></p>
     </footer>
 
     <script>
+        document.documentElement.classList.add('js-enhanced');
+
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const sidebar = document.getElementById('sidebar');
@@ -1215,7 +1234,7 @@
 
         // Sidebar Active State
         function updateActiveLink() {
-            const sections = document.querySelectorAll('section');
+            const sections = document.querySelectorAll('section[id]');
             const scrollPosition = window.scrollY + 150;
 
             sections.forEach(section => {

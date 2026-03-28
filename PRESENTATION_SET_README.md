@@ -33,7 +33,7 @@ Every sheet has a DATA SOURCE column. Revenue projections, conversion rates, and
 
 ## Where numbers come from
 
-- Brand count (24), teacher count (13), brand personas, price ranges: `config/brand_archetype_registry.yaml`, `config/authoring/`
+- Brand count (24), teacher count (13), brand personas, price ranges: `config/brand_registry.yaml`, `config/catalog_planning/brand_archetype_registry.yaml`, `config/authoring/`
 - Pipeline architecture, EI V2: `phoenix_v4/quality/ei_v2/`, pipeline docs
 - $0 COGS claim: auto-narration pipeline (repo-verified)
 - Market sizing: Grand View Research 2025 (external)
@@ -48,6 +48,6 @@ Every sheet has a DATA SOURCE column. Revenue projections, conversion rates, and
 
 ## Authority
 
-This set is governed by `docs/OLD_CHAT_AND_HOME_PROMOTION_SPEC.md` section 4 (`brand_admin_and_investor_enhancement` lane). Design guidance was drawn from `old_chat_specs/chat_clause_marketing_close_prez.txt` (historical design notes, not current truth).
+This set is governed by workstream `ws_brand_admin_investor_enhancement_20260328` in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`. Design guidance was drawn from `old_chat_specs/chat_clause_marketing_close_prez.txt` (historical design notes, not current truth).
 
 Last updated: 2026-03-28

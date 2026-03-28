@@ -29,6 +29,8 @@
             background-color: var(--bg-dark);
             color: var(--text-light);
             line-height: 1.6;
+            font-size: 1rem;
+            font-weight: 400;
         }
 
         h1 {
@@ -43,12 +45,6 @@
             font-weight: 600;
             margin-bottom: 1.25rem;
             letter-spacing: -0.015em;
-        }
-
-        body {
-            font-size: 1rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
         }
 
         .caption {
@@ -163,6 +159,16 @@
         section {
             margin-bottom: 6rem;
             animation: fadeIn 0.6s ease;
+            opacity: 1;
+        }
+
+        html.js-enhanced section {
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        html.js-enhanced section.visible {
+            opacity: 1;
         }
 
         @keyframes fadeIn {
@@ -671,11 +677,11 @@
             <div class="sidebar-section">
                 <div class="sidebar-section-title">Navigation</div>
                 <div class="sidebar-nav">
-                    <a class="sidebar-link active" data-target="start-here">1. Start Here</a>
-                    <a class="sidebar-link" data-target="brand-explorer">2. Brand Explorer</a>
-                    <a class="sidebar-link" data-target="v32-systems">3. V3.2 Systems</a>
-                    <a class="sidebar-link" data-target="qa-checklist">4. QA Checklist</a>
-                    <a class="sidebar-link" data-target="changelog">5. Changelog</a>
+                    <a class="sidebar-link active" href="#start-here" data-target="start-here">1. Start Here</a>
+                    <a class="sidebar-link" href="#brand-explorer" data-target="brand-explorer">2. Brand Explorer</a>
+                    <a class="sidebar-link" href="#v32-systems" data-target="v32-systems">3. V3.2 Systems</a>
+                    <a class="sidebar-link" href="#qa-checklist" data-target="qa-checklist">4. QA Checklist</a>
+                    <a class="sidebar-link" href="#changelog" data-target="changelog">5. Changelog</a>
                 </div>
             </div>
         </aside>
@@ -1030,6 +1036,8 @@
     </footer>
 
     <script>
+        document.documentElement.classList.add('js-enhanced');
+
         // Brand data with clustering
         const brands = [
             { name: 'Stabilizer', persona: 'Anxious mind anchor', ageRange: '25-45', emotionalJob: 'Nervous regulation', priceRange: '$19-39', cluster: 'nervous_system' },
@@ -1140,7 +1148,7 @@
                     links.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
 
-                    const target = link.getAttribute('data-target');
+                    const target = link.getAttribute('data-target') || link.getAttribute('href')?.slice(1);
                     const section = document.getElementById(target);
                     section.scrollIntoView({ behavior: 'smooth' });
 
