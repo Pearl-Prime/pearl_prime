@@ -129,6 +129,7 @@ Read this with:
 - The best single-file onboarding and state summary is now:
   - [docs/SYSTEM_STATE_MASTER.md](./SYSTEM_STATE_MASTER.md)
 - The hourly Pearl_GitHub autopilot path is already on `main`; alignment reports now record `mode` (`online_live` / `offline_degraded`), optional `--report-label`, `open_pr_count`, `blocked_items`, `remaining_branch_drift`, and `followup_candidates` (see [PEARL_GITHUB_AUTOPILOT_RUNBOOK.md](./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md))
+- A separate **harvest-to-main** report-only lane exists: `scripts/git/harvest_to_main.py`, `scripts/git/harvest_to_main.sh`, [HARVEST_TO_MAIN_RUNBOOK.md](./HARVEST_TO_MAIN_RUNBOOK.md) — governed PR-slice intelligence vs `origin/main` (no `codex/*` wholesale merge); see [REPO_ALIGNMENT_AND_MAIN_HARVEST_SPEC.md](./REPO_ALIGNMENT_AND_MAIN_HARVEST_SPEC.md) Workstream B
 - 16 stale remote branches were deleted from GitHub on 2026-03-24; 15 remote branches remain including `main`
 - Current active checkout is `agent/manga-sdf-revision-workspace` with `3468` dirty paths (`2539` modified, `929` untracked)
 - `.git/index.lock` is currently present again and held by live editor-side git activity; do not delete it blindly while that activity is running
