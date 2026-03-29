@@ -14,6 +14,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, List, Optional
 
+import yaml
+
 from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow, evaluate_chapter_flow_with_slots
 
 # ---------------------------------------------------------------------------
@@ -38,6 +40,11 @@ _LOC_VAR_FALLBACKS: dict[str, str] = {
     "office_building":  "the office building",
     "commute_mode":     "the commute",
 }
+
+_LOCATION_PROFILE_PATH = (
+    Path(__file__).resolve().parent.parent.parent / "config" / "localization" / "render_location_profiles.yaml"
+)
+_LOCATION_PROFILE_CACHE: Optional[dict[str, dict[str, str]]] = None
 
 # Metadata keys that belong to the pipeline, not the reader.
 _METADATA_LINE_RE = re.compile(
@@ -64,11 +71,68 @@ class DeliveryContractError(ValueError):
     """Raised by delivery_contract_gate() when forbidden artifacts survive into prose output."""
 
 
-def _resolve_loc_var_fallbacks(text: str) -> str:
-    """Replace known location variables with universal sensory fallbacks.
+class LocationGroundingError(ValueError):
+    """Raised when a run requests location grounding but the opening does not realize it."""
+
+
+def _load_location_profiles() -> dict[str, dict[str, str]]:
+    """Load render_location_profiles.yaml for loc-var substitution and grounding checks.
+
+    Only string-valued keys are kept (excludes ``aliases`` lists). Matches the on-disk
+    schema used by catalog_planner.load_render_location_profiles.
+    """
+    global _LOCATION_PROFILE_CACHE
+    if _LOCATION_PROFILE_CACHE is not None:
+        return _LOCATION_PROFILE_CACHE
+    data: dict = {}
+    if _LOCATION_PROFILE_PATH.exists():
+        try:
+            data = yaml.safe_load(_LOCATION_PROFILE_PATH.read_text(encoding="utf-8")) or {}
+        except Exception:
+            data = {}
+    profiles = data.get("profiles") or {}
+    cleaned: dict[str, dict[str, str]] = {}
+    for profile_id, profile in profiles.items():
+        if not isinstance(profile, dict):
+            continue
+        vars_only: dict[str, str] = {}
+        for k, v in profile.items():
+            if k == "aliases":
+                continue
+            if isinstance(v, str) and v.strip():
+                vars_only[str(k)] = v.strip()
+        cleaned[str(profile_id)] = vars_only
+    _LOCATION_PROFILE_CACHE = cleaned
+    return _LOCATION_PROFILE_CACHE
+
+
+def _infer_location_id(plan: Optional[dict[str, Any]]) -> str:
+    plan = plan or {}
+    for key in ("resolved_location_id", "requested_location_id", "location_id", "city", "city_name"):
+        value = plan.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    book_spec = plan.get("book_spec") or {}
+    if isinstance(book_spec, dict):
+        for key in ("resolved_location_id", "requested_location_id", "location_id", "city", "city_name"):
+            value = book_spec.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+    persona_id = str(plan.get("persona_id") or "")
+    if persona_id.startswith("nyc_"):
+        return "nyc_metro"
+    return ""
+
+
+def _resolve_loc_var_fallbacks(text: str, plan: Optional[dict[str, Any]] = None) -> str:
+    """Replace known location variables with universal or location-aware fallbacks.
     Any {var} that remains after this is caught and hard-failed by delivery_contract_gate().
     """
-    for var_name, fallback in _LOC_VAR_FALLBACKS.items():
+    fallbacks = dict(_LOC_VAR_FALLBACKS)
+    location_id = _infer_location_id(plan)
+    if location_id:
+        fallbacks.update(_load_location_profiles().get(location_id, {}))
+    for var_name, fallback in fallbacks.items():
         text = text.replace("{" + var_name + "}", fallback)
     return text
 
@@ -90,17 +154,17 @@ def _strip_scaffolding_lines(text: str) -> str:
     return "\n".join(out)
 
 
-def clean_for_delivery(text: str) -> str:
+def clean_for_delivery(text: str, plan: Optional[dict[str, Any]] = None) -> str:
     """Post-assembly cleanup pass.
 
     Order of operations:
-      1. Resolve known loc-var placeholders with universal fallbacks.
+      1. Resolve known loc-var placeholders with universal or location-aware fallbacks.
       2. Strip pipeline metadata lines and markdown scaffolding.
       3. Collapse 3+ consecutive blank lines to 2 (paragraph breathing room only).
 
     Always call this before delivery_contract_gate().
     """
-    text = _resolve_loc_var_fallbacks(text)
+    text = _resolve_loc_var_fallbacks(text, plan=plan)
     text = _strip_scaffolding_lines(text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
@@ -145,9 +209,142 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
             + "\n\nFix the upstream atom, or add the variable to _LOC_VAR_FALLBACKS."
         )
 
-import json
 
-import yaml
+_LOCATION_SIGNAL_PRIORITY: list[tuple[str, str]] = [
+    ("transit_line", "strong"),
+    ("transit_stop", "strong"),
+    ("street_name", "strong"),
+    ("neighborhood", "strong"),
+    ("local_landmark", "strong"),
+    ("park_name", "strong"),
+    ("coffee_shop", "strong"),
+    ("restaurant", "strong"),
+    ("store_name", "strong"),
+    ("office_building", "strong"),
+    ("city_name", "strong"),
+    ("commute_mode", "soft"),
+    ("building_type", "soft"),
+    ("weather_detail", "soft"),
+]
+
+_CHAPTER_HEADER_ONLY_RE = re.compile(r"^Chapter\s+(\d+)\s*$", re.IGNORECASE)
+
+
+def _extract_opening_paragraphs(
+    text: str,
+    *,
+    max_paragraphs: int = 8,
+    max_chars: int = 2200,
+) -> list[str]:
+    """Return the opening paragraphs of Chapter 1 for location realization checks."""
+    lines = text.splitlines()
+    start_idx: Optional[int] = None
+    for idx, line in enumerate(lines):
+        m = _CHAPTER_HEADER_ONLY_RE.match(line.strip())
+        if m and m.group(1) == "1":
+            start_idx = idx + 1
+            break
+    if start_idx is None:
+        return []
+
+    paragraphs: list[str] = []
+    current: list[str] = []
+    total_chars = 0
+
+    def flush() -> None:
+        nonlocal total_chars
+        if not current:
+            return
+        paragraph = " ".join(part.strip() for part in current if part.strip()).strip()
+        current.clear()
+        if not paragraph:
+            return
+        paragraphs.append(paragraph)
+        total_chars += len(paragraph)
+
+    for line in lines[start_idx:]:
+        stripped = line.strip()
+        m = _CHAPTER_HEADER_ONLY_RE.match(stripped)
+        if m and m.group(1) != "1":
+            break
+        if not stripped:
+            flush()
+            if len(paragraphs) >= max_paragraphs or total_chars >= max_chars:
+                break
+            continue
+        current.append(stripped)
+        if sum(len(part) for part in current) + total_chars >= max_chars:
+            flush()
+            break
+
+    flush()
+    return paragraphs[:max_paragraphs]
+
+
+def location_grounding_report(text: str, plan: Optional[dict[str, Any]] = None) -> Optional[dict[str, Any]]:
+    """Check whether the opening of Chapter 1 realizes the requested location profile."""
+    plan = plan or {}
+    location_id = _infer_location_id(plan)
+    if not location_id:
+        return None
+
+    profiles = _load_location_profiles()
+    profile = profiles.get(location_id)
+    if not profile:
+        return {
+            "status": "FAIL",
+            "location_id": location_id,
+            "errors": [f"location profile '{location_id}' not found in render_location_profiles.yaml"],
+            "signals_found": [],
+            "required_total": 0,
+            "required_strong": 0,
+            "opening_excerpt": "",
+        }
+
+    paragraphs = _extract_opening_paragraphs(text)
+    opening_excerpt = "\n\n".join(paragraphs).strip()
+    opening_text = opening_excerpt.lower()
+
+    hits: list[dict[str, str]] = []
+    strong_available = 0
+    total_available = 0
+    strong_found = 0
+
+    for key, strength in _LOCATION_SIGNAL_PRIORITY:
+        value = str(profile.get(key) or "").strip()
+        if not value:
+            continue
+        total_available += 1
+        if strength == "strong":
+            strong_available += 1
+        if value.lower() in opening_text:
+            hits.append({"key": key, "value": value, "strength": strength})
+            if strength == "strong":
+                strong_found += 1
+
+    required_total = 2 if total_available >= 2 else total_available
+    required_strong = 1 if strong_available >= 1 else 0
+    errors: list[str] = []
+    if len(hits) < required_total:
+        errors.append(
+            f"opening only realized {len(hits)} location signal(s); requires at least {required_total}"
+        )
+    if strong_found < required_strong:
+        errors.append("opening is missing a strong location anchor in the first page")
+
+    return {
+        "status": "PASS" if not errors else "FAIL",
+        "location_id": location_id,
+        "signals_found": hits,
+        "required_total": required_total,
+        "required_strong": required_strong,
+        "opening_paragraph_count": len(paragraphs),
+        "opening_excerpt": opening_excerpt,
+        "errors": errors,
+    }
+
+
+import json
 
 # ---------------------------------------------------------------------------
 # Mechanism alias system
@@ -620,7 +817,7 @@ class TxtWriter:
         full_text = _resolve_mechanism_alias_tokens(full_text, alias)
 
         if self.options.clean_output:
-            full_text = clean_for_delivery(full_text)
+            full_text = clean_for_delivery(full_text, plan=self.plan)
             delivery_contract_gate(full_text, source_hint=str(out_path))
 
         out_path = Path(out_path)
@@ -644,6 +841,7 @@ def render_book(
     clean_output: bool = True,
     enforce_word_count: bool = True,
     enforce_chapter_flow: bool = False,
+    enforce_location_grounding: bool = True,
 ) -> dict[str, Path]:
     """
     Stage 6: resolve prose for plan and write requested formats to output_dir.
@@ -668,6 +866,12 @@ def render_book(
     enforce_chapter_flow=False (default):
       - Computes chapter flow report at output_dir/chapter_flow_report.json.
       - If True and any chapter fails flow gate, raises ChapterFlowGateError.
+
+    enforce_location_grounding=True (default):
+      - If the plan carries a resolved/requested location profile, checks whether
+        the opening of Chapter 1 realizes that location with profile-specific signals.
+      - Writes location_grounding_report.json when a location is present.
+      - Raises LocationGroundingError if the opening does not ground the location.
     """
     formats = formats or ["txt"]
     output_dir = Path(output_dir)
@@ -739,5 +943,16 @@ def render_book(
             wc_metrics = word_count_gate(rendered_text, runtime_format_id, source_hint=str(out_path))
             deficit_report["gate_result"] = wc_metrics
             budget_path.write_text(json.dumps(deficit_report, indent=2), encoding="utf-8")
+
+        location_report = location_grounding_report(rendered_text, plan=plan)
+        if location_report is not None:
+            location_path = output_dir / "location_grounding_report.json"
+            location_path.write_text(json.dumps(location_report, indent=2), encoding="utf-8")
+            written["location_grounding_report"] = location_path
+            if enforce_location_grounding and location_report.get("status") != "PASS":
+                raise LocationGroundingError(
+                    f"Location grounding FAILED for {location_report.get('location_id')}: "
+                    + "; ".join(location_report.get("errors") or ["opening failed location grounding"])
+                )
 
     return written

@@ -28,6 +28,24 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 CONFIG_CATALOG = REPO_ROOT / "config" / "catalog_planning"
 CONFIG_LOCALIZATION = REPO_ROOT / "config" / "localization"
 CONFIG_AUTHORING = REPO_ROOT / "config" / "authoring"
+RENDER_LOCATION_PROFILES = CONFIG_LOCALIZATION / "render_location_profiles.yaml"
+
+
+def _normalize_location_key(value: Optional[str]) -> str:
+    return re.sub(r"[^a-z0-9]+", "_", (value or "").strip().lower()).strip("_")
+
+
+def load_render_location_profiles(path: Optional[Path] = None) -> dict[str, dict[str, Any]]:
+    location_path = path or RENDER_LOCATION_PROFILES
+    if not location_path.exists() or yaml is None:
+        return {}
+    data = yaml.safe_load(location_path.read_text(encoding="utf-8")) or {}
+    profiles = data.get("profiles") or {}
+    return {
+        str(profile_id): (profile or {})
+        for profile_id, profile in profiles.items()
+        if isinstance(profile, dict)
+    }
 
 
 def _norm_trend_match_key(value: Optional[str]) -> str:
@@ -109,6 +127,28 @@ def trend_heat_for_topic_id(topic_id: str, trend_payload: Optional[dict[str, Any
     return round(min(100.0, best), 4)
 
 
+def resolve_location_profile_id(location_id: Optional[str], path: Optional[Path] = None) -> Optional[str]:
+    """Resolve a caller-supplied location key against render location profiles and aliases."""
+    if not location_id:
+        return None
+    normalized_requested = _normalize_location_key(location_id)
+    if not normalized_requested:
+        return None
+    profiles = load_render_location_profiles(path)
+    for profile_id, profile in profiles.items():
+        if _normalize_location_key(profile_id) == normalized_requested:
+            return profile_id
+        aliases = profile.get("aliases") or []
+        for alias in aliases:
+            if _normalize_location_key(str(alias)) == normalized_requested:
+                return profile_id
+    available = ", ".join(sorted(profiles.keys())) or "none"
+    raise ValueError(
+        f"location '{location_id}' not found in render_location_profiles.yaml. "
+        f"Available location profiles: {available}"
+    )
+
+
 @dataclass
 class BookSpec:
     """Stage 1 output. Stage 2 consumes required; identity passed through to Stage 3.
@@ -125,6 +165,8 @@ class BookSpec:
     seed: str
     locale: str = "en-US"
     territory: str = "US"
+    requested_location_id: Optional[str] = None
+    resolved_location_id: Optional[str] = None
     teacher_mode: bool = False
     author_id: Optional[str] = None
     author_positioning_profile: Optional[str] = None
@@ -135,8 +177,18 @@ class BookSpec:
     # Authority: specs/COMPANION_WORKBOOK_CATALOG_SPEC.md §2
     # EI V2 uses this to calibrate EXERCISE slot density and reflection prompt depth.
     companion_workbook_type: Optional[str] = None
+    # Experience layer fields (EXPERIENCE_LAYER_ANTI_SPAM_SPEC §3).
+    delivery_experience: Optional[str] = None
+    reader_intent: Optional[str] = None
+    pacing_model: Optional[str] = None
+    outcome_type: Optional[str] = None
+    engagement_depth: Optional[str] = None
+    transformation_speed: Optional[str] = None
+    perceived_positioning: Optional[str] = None
+    experience_hash: Optional[str] = None
+    ai_disclosure_status: Optional[str] = None
     # Optional: populated when ``produce_single`` / ``produce_wave`` is given a readable
-    # structured trend_score JSON path (TREND_PIPELINE_TRUTH_AND_AUTOMATION_DEV_SPEC.md PR 3).
+    # structured trend_score JSON path (docs/TREND_PIPELINE_TRUTH_AND_AUTOMATION_DEV_SPEC.md PR 3).
     trend_heat_score: Optional[float] = None
 
     def to_dict(self) -> dict[str, Any]:
@@ -154,6 +206,10 @@ class BookSpec:
             "territory": self.territory,
             "teacher_mode": self.teacher_mode,
         }
+        if self.requested_location_id is not None:
+            out["requested_location_id"] = self.requested_location_id
+        if self.resolved_location_id is not None:
+            out["resolved_location_id"] = self.resolved_location_id
         if self.author_id is not None:
             out["author_id"] = self.author_id
         if self.author_positioning_profile is not None:
@@ -164,6 +220,20 @@ class BookSpec:
             out["atoms_model"] = self.atoms_model.value
         if self.companion_workbook_type is not None:
             out["companion_workbook_type"] = self.companion_workbook_type
+        for experience_field in (
+            "delivery_experience",
+            "reader_intent",
+            "pacing_model",
+            "outcome_type",
+            "engagement_depth",
+            "transformation_speed",
+            "perceived_positioning",
+            "experience_hash",
+            "ai_disclosure_status",
+        ):
+            value = getattr(self, experience_field, None)
+            if value is not None:
+                out[experience_field] = value
         if self.trend_heat_score is not None:
             out["trend_heat_score"] = self.trend_heat_score
         return out
@@ -274,6 +344,8 @@ class CatalogPlanner:
         domain_id: Optional[str] = None,
         locale: Optional[str] = None,
         territory: Optional[str] = None,
+        requested_location_id: Optional[str] = None,
+        resolved_location_id: Optional[str] = None,
         teacher_mode: bool = False,
         author_id: Optional[str] = None,
         author_positioning_profile: Optional[str] = None,
@@ -287,17 +359,24 @@ class CatalogPlanner:
         locale resolution: 1) caller-supplied 2) brand_registry[brand_id].locale 3) en-US.
         territory resolution: 1) caller-supplied 2) brand_registry[brand_id].territory 3) US.
         teacher_mode: when True, Stage 3 uses teacher_banks/<teacher_id>/approved_atoms/ for pools.
+        requested_location_id: user-facing location key for render/naming grounding (e.g. nyc_grand_central).
+        resolved_location_id: canonical profile id from config/localization/render_location_profiles.yaml.
         author_id: when set, author_positioning_profile is resolved from author_registry (mandatory there).
         author_positioning_profile: if supplied with author_id, must match registry or Stage 1 fails.
         narrator_id: optional; when set, validated against narrator_registry (Writer Spec §23.5).
         trend_score_path: optional path to structured ``trend_score_*.json``; when missing or invalid,
-        ``trend_heat_score`` is left None (no crash).
+            ``trend_heat_score`` is left None (no crash).
         """
         if not topic_id or not persona_id:
             raise ValueError("BookSpec requires topic_id and persona_id")
         positioning = self._resolve_author_positioning(author_id, brand_id, author_positioning_profile)
         trend_payload = load_structured_trend_score(trend_score_path) if trend_score_path else None
         trend_heat = trend_heat_for_topic_id(topic_id, trend_payload)
+
+        if requested_location_id and resolved_location_id is None:
+            resolved_location_id = resolve_location_profile_id(requested_location_id)
+        elif resolved_location_id:
+            resolved_location_id = resolve_location_profile_id(resolved_location_id)
 
         series_cfg = self._series.get("series") or {}
         brand_cfg = self._brands.get(brand_id) or {}
@@ -349,6 +428,8 @@ class CatalogPlanner:
             seed=seed,
             locale=locale,
             territory=territory,
+            requested_location_id=requested_location_id,
+            resolved_location_id=resolved_location_id,
             teacher_mode=teacher_mode,
             author_id=author_id,
             author_positioning_profile=positioning,

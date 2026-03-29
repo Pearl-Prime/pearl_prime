@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -21,9 +22,90 @@ except ImportError:
     yaml = None
 
 ALIASES_PATH = REPO_ROOT / "config" / "identity_aliases.yaml"
+BINDINGS_PATH = REPO_ROOT / "config" / "topic_engine_bindings.yaml"
+ARCS_ROOT = REPO_ROOT / "config" / "source_of_truth" / "master_arcs"
+ATOMS_ROOT = REPO_ROOT / "atoms"
+
+_KEYLIKE_METADATA_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_ ]{0,40}\s*:\s*.+$")
 
 
-def resolve_to_canonical(aliases_path: Path, topic_id: str, persona_id: str) -> tuple[str, str]:
+def _load_yaml(path: Path) -> dict:
+    if not path.exists() or not yaml:
+        return {}
+    data = yaml.safe_load(path.read_text()) or {}
+    return data if isinstance(data, dict) else {}
+
+
+def _topic_has_direct_support(
+    *,
+    topic_id: str,
+    canonical_persona: str,
+    arc_topic: str | None = None,
+    repo_root: Path = REPO_ROOT,
+) -> bool:
+    if arc_topic and arc_topic == topic_id:
+        return True
+    arcs_root = repo_root / "config" / "source_of_truth" / "master_arcs"
+    if canonical_persona and any(arcs_root.glob(f"{canonical_persona}__{topic_id}__*.yaml")):
+        return True
+    bindings = _load_yaml(repo_root / "config" / "topic_engine_bindings.yaml")
+    topic_cfg = bindings.get(topic_id)
+    return isinstance(topic_cfg, dict) and bool(topic_cfg.get("allowed_engines"))
+
+
+def _count_proseful_sections(path: Path) -> int:
+    if not path.exists():
+        return 0
+    text = path.read_text(encoding="utf-8")
+    count = 0
+    for section in re.split(r"(?m)^##\s+", text):
+        section = section.strip()
+        if not section:
+            continue
+        lines = section.splitlines()
+        prose_lines: list[str] = []
+        for line in lines[1:]:
+            stripped = line.strip()
+            if not stripped or stripped == "---":
+                continue
+            if _KEYLIKE_METADATA_RE.match(stripped):
+                continue
+            prose_lines.append(stripped)
+        if len(" ".join(prose_lines).split()) >= 6:
+            count += 1
+    return count
+
+
+def _topic_source_readiness_issues(
+    *,
+    persona_id: str,
+    topic_id: str,
+    engine_id: str,
+    atoms_root: Path = ATOMS_ROOT,
+) -> list[str]:
+    issues: list[str] = []
+    scene_path = atoms_root / persona_id / topic_id / "SCENE" / "CANONICAL.txt"
+    story_path = atoms_root / persona_id / topic_id / engine_id / "CANONICAL.txt"
+
+    scene_count = _count_proseful_sections(scene_path)
+    if scene_count == 0:
+        issues.append(f"SCENE bank has no proseful entries at {scene_path}")
+
+    story_count = _count_proseful_sections(story_path)
+    if story_count == 0:
+        issues.append(f"STORY bank for engine '{engine_id}' has no proseful entries at {story_path}")
+
+    return issues
+
+
+def resolve_to_canonical(
+    aliases_path: Path,
+    topic_id: str,
+    persona_id: str,
+    *,
+    repo_root: Path = REPO_ROOT,
+    arc_topic: str | None = None,
+) -> tuple[str, str]:
     """Resolve topic_id and persona_id to canonical (atoms dir names). Stage 3 receives only canonical IDs."""
     if not aliases_path.exists() or not yaml:
         return topic_id, persona_id
@@ -31,7 +113,15 @@ def resolve_to_canonical(aliases_path: Path, topic_id: str, persona_id: str) -> 
     persona_aliases = data.get("persona_aliases") or {}
     topic_aliases = data.get("topic_aliases") or {}
     canonical_persona = persona_aliases.get(persona_id, persona_id)
-    canonical_topic = topic_aliases.get(topic_id, topic_id)
+    aliased_topic = topic_aliases.get(topic_id, topic_id)
+    canonical_topic = aliased_topic
+    if aliased_topic != topic_id and _topic_has_direct_support(
+        topic_id=topic_id,
+        canonical_persona=canonical_persona,
+        arc_topic=arc_topic,
+        repo_root=repo_root,
+    ):
+        canonical_topic = topic_id
     return canonical_topic, canonical_persona
 
 
@@ -68,6 +158,11 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="BookSpec -> FormatPlan -> CompiledBook")
     ap.add_argument("--topic", default=None, help="Topic ID (e.g. relationship_anxiety)")
     ap.add_argument("--persona", default=None, help="Persona ID (e.g. nyc_exec)")
+    ap.add_argument(
+        "--location",
+        default=None,
+        help="Location profile or alias for render/naming grounding (e.g. nyc_grand_central, nyc, 'New York City')",
+    )
     ap.add_argument("--installment", type=int, default=None, help="Installment number")
     ap.add_argument("--series", default=None, help="Series ID")
     ap.add_argument(
@@ -155,6 +250,8 @@ def main() -> int:
     installment_number = args.installment
     series_id = args.series
     angle_id = args.angle
+    requested_location_id = args.location
+    resolved_location_id = None
     seed = args.seed
     input_atoms_model = None  # from --input YAML when present
     if args.input:
@@ -169,6 +266,8 @@ def main() -> int:
         series_id = series_id if series_id is not None else data.get("series_id")
         if angle_id is None:
             angle_id = data.get("angle_id")
+        requested_location_id = requested_location_id or data.get("location_id") or data.get("requested_location_id")
+        resolved_location_id = data.get("resolved_location_id") or resolved_location_id
         seed = data.get("seed", seed)
         if data.get("atoms_model") in ("legacy", "cluster"):
             input_atoms_model = data["atoms_model"]
@@ -258,7 +357,12 @@ def main() -> int:
         return 1
 
     # Stage 1: BookSpec (author_id, narrator_id optional)
-    from phoenix_v4.planning.catalog_planner import AtomsModel, CatalogPlanner, BookSpec
+    from phoenix_v4.planning.catalog_planner import (
+        AtomsModel,
+        CatalogPlanner,
+        BookSpec,
+        load_render_location_profiles,
+    )
     planner = CatalogPlanner()
     teacher_mode = bool(teacher_id and teacher_id != "default_teacher")
     spec_atoms_model = AtomsModel(input_atoms_model) if input_atoms_model in ("legacy", "cluster") else None
@@ -271,6 +375,8 @@ def main() -> int:
         series_id=series_id,
         installment_number=installment_number,
         angle_id=angle_id,
+        requested_location_id=requested_location_id,
+        resolved_location_id=resolved_location_id,
         author_id=author_id,
         narrator_id=narrator_id,
         teacher_mode=teacher_mode,
@@ -305,8 +411,35 @@ def main() -> int:
     )
 
     # Resolve aliases before Stage 3 (Canonical §3.0). Stage 3 only sees canonical IDs.
-    canonical_topic, canonical_persona = resolve_to_canonical(ALIASES_PATH, topic_id, persona_id)
+    canonical_topic, canonical_persona = resolve_to_canonical(
+        ALIASES_PATH,
+        topic_id,
+        persona_id,
+        repo_root=REPO_ROOT,
+        arc_topic=getattr(arc, "topic", None),
+    )
     book_spec_for_compiler = {**book_spec.to_dict(), "topic_id": canonical_topic, "persona_id": canonical_persona}
+
+    alias_data = _load_yaml(ALIASES_PATH)
+    topic_alias_target = (alias_data.get("topic_aliases") or {}).get(topic_id, topic_id)
+    explicit_topic_preserved = topic_alias_target != topic_id and canonical_topic == topic_id
+    if explicit_topic_preserved:
+        source_issues = _topic_source_readiness_issues(
+            persona_id=canonical_persona,
+            topic_id=canonical_topic,
+            engine_id=getattr(arc, "engine", ""),
+            atoms_root=ATOMS_ROOT,
+        )
+        if source_issues:
+            print(
+                f"Topic source readiness failed for requested topic '{topic_id}'. "
+                "The pipeline preserved the explicit topic instead of collapsing it to a broader alias, "
+                "but the dedicated source bank is not ready for compile:",
+                file=sys.stderr,
+            )
+            for issue in source_issues:
+                print(f"  - {issue}", file=sys.stderr)
+            return 1
 
     # atoms_model: precedence 1) CLI --atoms-model 2) book spec 3) derive from config (legacy_personas). Always persist in plan.
     if args.atoms_model is not None:
@@ -762,6 +895,16 @@ def main() -> int:
     out["v4_freeze_enabled"] = freeze_enabled
     out["locale"] = book_spec_for_compiler.get("locale", "en-US")
     out["territory"] = book_spec_for_compiler.get("territory", "US")
+    if book_spec_for_compiler.get("requested_location_id"):
+        out["requested_location_id"] = book_spec_for_compiler["requested_location_id"]
+    if book_spec_for_compiler.get("resolved_location_id"):
+        out["resolved_location_id"] = book_spec_for_compiler["resolved_location_id"]
+        out["location_id"] = book_spec_for_compiler["resolved_location_id"]
+        location_profiles = load_render_location_profiles()
+        location_profile = location_profiles.get(book_spec_for_compiler["resolved_location_id"]) or {}
+        city_name = location_profile.get("city_name")
+        if city_name:
+            out["city_name"] = city_name
     out["atoms_model"] = effective_atoms_model
     if getattr(arc, "engine", None):
         out["engine_id"] = arc.engine
@@ -885,8 +1028,41 @@ def main() -> int:
             out["freebie_bundle_with_formats"] = [{"freebie_id": fid, "formats": ["html"]} for fid in freebie_bundle]
     else:
         out["freebie_bundle_with_formats"] = [{"freebie_id": fid, "formats": ["html"]} for fid in freebie_bundle]
-    out["topic_id"] = book_spec_for_compiler.get("topic_id") or book_spec_for_compiler.get("topic") or ""
-    out["persona_id"] = book_spec_for_compiler.get("persona_id") or book_spec_for_compiler.get("persona") or ""
+    out["requested_topic_id"] = topic_id
+    out["requested_persona_id"] = persona_id
+    out["canonical_topic_id"] = book_spec_for_compiler.get("topic_id") or book_spec_for_compiler.get("topic") or ""
+    out["canonical_persona_id"] = book_spec_for_compiler.get("persona_id") or book_spec_for_compiler.get("persona") or ""
+    out["topic_id"] = out["canonical_topic_id"]
+    out["persona_id"] = out["canonical_persona_id"]
+    for experience_field in (
+        "delivery_experience",
+        "reader_intent",
+        "pacing_model",
+        "outcome_type",
+        "engagement_depth",
+        "transformation_speed",
+        "perceived_positioning",
+        "experience_hash",
+        "ai_disclosure_status",
+    ):
+        compiled_value = getattr(compiled, experience_field, None)
+        if compiled_value is not None:
+            out[experience_field] = compiled_value
+            continue
+        book_spec_value = book_spec_for_compiler.get(experience_field)
+        if book_spec_value is not None:
+            out[experience_field] = book_spec_value
+    try:
+        from phoenix_v4.planning.experience_resolver import ensure_ai_disclosure, resolve_and_attach
+
+        resolve_and_attach(out)
+        ensure_ai_disclosure(out)
+    except ImportError:
+        pass
+    except Exception as experience_error:
+        import warnings
+
+        warnings.warn(f"Experience resolver failed (non-blocking): {experience_error}", stacklevel=2)
     # Ending cap/duplicate gate (intro_ending_variation)
     if out.get("ending_signature"):
         try:
