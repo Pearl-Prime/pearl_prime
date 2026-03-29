@@ -14,9 +14,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, List, Optional
 
-import yaml
-
-from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow, evaluate_chapter_flow_with_slots
+from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
 
 # ---------------------------------------------------------------------------
 # Delivery contract: forbidden patterns that must never reach output
@@ -41,9 +39,7 @@ _LOC_VAR_FALLBACKS: dict[str, str] = {
     "commute_mode":     "the commute",
 }
 
-_LOCATION_PROFILE_PATH = (
-    Path(__file__).resolve().parent.parent.parent / "config" / "localization" / "render_location_profiles.yaml"
-)
+_LOCATION_PROFILE_PATH = Path(__file__).resolve().parent.parent.parent / "config" / "localization" / "render_location_profiles.yaml"
 _LOCATION_PROFILE_CACHE: Optional[dict[str, dict[str, str]]] = None
 
 # Metadata keys that belong to the pipeline, not the reader.
@@ -343,8 +339,9 @@ def location_grounding_report(text: str, plan: Optional[dict[str, Any]] = None) 
         "errors": errors,
     }
 
-
 import json
+
+import yaml
 
 # ---------------------------------------------------------------------------
 # Mechanism alias system
@@ -442,6 +439,7 @@ from phoenix_v4.rendering.prose_resolver import (
     _is_placeholder_or_silence,
     _slot_type_from_placeholder_or_silence,
 )
+from phoenix_v4.rendering.chapter_composer import compose_chapter_prose
 
 # ---------------------------------------------------------------------------
 # Word-count build gate + slot-level deficit report
@@ -564,7 +562,8 @@ def chapter_flow_gate_report(
     chapter_slot_sequence = (plan or {}).get("chapter_slot_sequence") or []
     atom_ids = (plan or {}).get("atom_ids") or []
     if plan and prose_map and chapter_slot_sequence and atom_ids:
-        # Slot-level: require TAKEAWAY and THREAD content when present
+        # Slot-level: evaluate the actual composed chapter text, then enforce
+        # TAKEAWAY / THREAD slot presence when those slots exist in the plan.
         chapter_reports = []
         failed = 0
         idx = 0
@@ -573,20 +572,45 @@ def chapter_flow_gate_report(
             for _ in slots:
                 if idx < len(atom_ids):
                     aid = atom_ids[idx]
-                    segment_proses.append(prose_map.get(aid, ""))
+                    segment_proses.append(clean_for_delivery(prose_map.get(aid, ""), plan=plan))
                 else:
                     segment_proses.append("")
                 idx += 1
-            res = evaluate_chapter_flow_with_slots(slots, segment_proses)
-            if res.status != "PASS":
+            composed = compose_chapter_prose(
+                slot_types=slots,
+                slot_proses=segment_proses,
+                chapter_index=ch,
+                total_chapters=len(chapter_slot_sequence),
+            )
+            text_result = evaluate_chapter_flow(composed)
+            errors = list(text_result.errors)
+            slot_names = [(s or "").strip().upper() for s in slots]
+            for i, slot_name in enumerate(slot_names):
+                if slot_name == "TAKEAWAY":
+                    if i >= len(segment_proses) or not (segment_proses[i] or "").strip():
+                        errors.append("TAKEAWAY_EMPTY")
+                    break
+            for i, slot_name in enumerate(slot_names):
+                if slot_name == "THREAD":
+                    if i >= len(segment_proses) or not (segment_proses[i] or "").strip():
+                        errors.append("THREAD_EMPTY")
+                    break
+            status = "PASS" if not errors else "FAIL"
+            score = max(0, 100 - len(errors) * 15 - len(text_result.warnings) * 5)
+            if status != "PASS":
                 failed += 1
             chapter_reports.append({
                 "chapter": ch + 1,
-                "status": res.status,
-                "score": res.score,
-                "errors": res.errors,
-                "warnings": res.warnings,
-                "metrics": res.metrics,
+                "status": status,
+                "score": score,
+                "errors": errors,
+                "warnings": text_result.warnings,
+                "metrics": {
+                    **text_result.metrics,
+                    "takeaway_checked": "TAKEAWAY" in slot_names,
+                    "thread_checked": "THREAD" in slot_names,
+                    "evaluated_text": "composed",
+                },
             })
         return {
             "chapter_count": len(chapter_reports),
@@ -763,23 +787,25 @@ class TxtWriter:
 
         lines: list[str] = []
         if self.options.title_page and not self.options.clean_output:
-            # Title page only in QA mode; clean_output strips persona/topic metadata
             lines.extend(_build_title_page_lines(self.plan))
 
         atom_sources = self.plan.get("atom_sources") or []
         alias = self.options.mechanism_alias  # may be None
         naming_moment_injected = False
+        total_chapters = len(chapter_slot_sequence)
 
         idx = 0
         for ch, slots in enumerate(chapter_slot_sequence):
             lines.append("")
             if self.options.clean_output:
-                # Clean delivery: simple heading, no scaffold decoration
                 lines.append(f"Chapter {ch + 1}")
             else:
-                # QA mode: scaffold markers kept for diff/debugging
                 lines.append(f"========== CHAPTER {ch + 1} ==========")
             lines.append("")
+
+            # ── Collect all slot types + prose for this chapter ──
+            chapter_slot_types: list[str] = []
+            chapter_slot_proses: list[str] = []
             for si, slot_type in enumerate(slots):
                 if idx >= len(atom_ids):
                     break
@@ -789,26 +815,38 @@ class TxtWriter:
                 if atom_sources and idx < len(atom_sources) and atom_sources[idx] == "practice_fallback" and slot_label == "EXERCISE":
                     prose = _wrap_practice_fallback_exercise(prose, self.plan, ch, si)
                 idx += 1
-                if self.options.include_slot_labels_qa and slot_label == "STORY" and not _is_placeholder_or_silence(aid):
-                    lines.append(f"[STORY] {aid}")
-                    lines.append("")
-                lines.append(prose)
-                lines.append("")
+                chapter_slot_types.append(slot_label)
+                chapter_slot_proses.append(prose)
 
-                # Inject mechanism alias naming_moment once, after the first HOOK in Chapter 1
-                if (
-                    not naming_moment_injected
-                    and ch == 0
-                    and slot_label == "HOOK"
-                    and alias
-                    and self.options.clean_output
-                ):
-                    naming_block = _build_naming_moment_block(alias)
-                    if naming_block:
-                        lines.append(naming_block)
-                        lines.append("")
-                        naming_moment_injected = True
+            # ── Bestseller composition (always-on) ──
+            # Reorders slots into argued chapter: Opening → Bridge → Mechanism →
+            # Bridge → Story → Bridge → Exercise → Integration → Takeaway
+            composed = compose_chapter_prose(
+                slot_types=chapter_slot_types,
+                slot_proses=chapter_slot_proses,
+                chapter_index=ch,
+                total_chapters=total_chapters,
+                include_slot_labels_qa=self.options.include_slot_labels_qa,
+            )
 
+            # Inject mechanism alias naming_moment once after Chapter 1 opening
+            if (
+                not naming_moment_injected
+                and ch == 0
+                and alias
+                and self.options.clean_output
+            ):
+                naming_block = _build_naming_moment_block(alias)
+                if naming_block:
+                    # Insert after first paragraph of composed text
+                    first_break = composed.find("\n\n")
+                    if first_break > 0:
+                        composed = composed[:first_break] + "\n\n" + naming_block + composed[first_break:]
+                    else:
+                        composed = composed + "\n\n" + naming_block
+                    naming_moment_injected = True
+
+            lines.append(composed)
             lines.append("")
 
         full_text = "\n".join(lines).strip()

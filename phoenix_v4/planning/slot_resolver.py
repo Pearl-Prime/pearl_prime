@@ -7,6 +7,7 @@ Teacher Mode: when teacher_mode=True and no candidates, raise TeacherCoverageErr
 from __future__ import annotations
 
 import hashlib
+import re
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Optional, Tuple
 
@@ -35,6 +36,10 @@ class ResolverContext:
     # Required slot counts (for EXERCISE fallback merge). teacher_exercise_fallback from config.
     required_slots_by_type: Optional[dict[str, int]] = None
     teacher_exercise_fallback: bool = False
+    # Thesis-aware ranking (V4.8): per-chapter thesis text for biasing REFLECTION/STORY atom selection.
+    # Keys are 1-based chapter numbers (same as arc chapter_thesis / CompiledBook.chapter_thesis).
+    # Atoms with metadata keywords matching the thesis rank higher.
+    chapter_thesis: Optional[dict[int, str]] = None
 
 
 def _selector_index(selector_key: str, available_count: int) -> int:
@@ -51,6 +56,44 @@ def _selector_index(selector_key: str, available_count: int) -> int:
     # First 16 bytes (or full 32) as big-endian integer
     n = int.from_bytes(digest[:16], "big")
     return n % available_count
+
+
+_THESIS_STOPWORDS = frozenset({
+    "the", "is", "that", "this", "and", "but", "not", "you", "your", "are",
+    "was", "were", "been", "being", "have", "has", "had", "does", "did",
+    "will", "would", "could", "should", "can", "may", "might", "shall",
+    "with", "for", "from", "into", "about", "than", "then", "when", "where",
+    "what", "which", "who", "how", "its", "our", "their", "there", "here",
+    "just", "also", "very", "more", "most", "some", "any", "all", "each",
+    "every", "both", "few", "many", "much", "such", "own", "same", "other",
+    "only", "over", "after", "before", "between", "because", "while",
+    "point", "thing", "things", "like", "even",
+})
+
+_WORD_RE = re.compile(r"[a-z]{4,}")
+
+
+def _thesis_keyword_overlap(thesis: str, metadata: dict) -> float:
+    """Score 0.0-1.0: how well an atom's metadata aligns with the chapter thesis."""
+    if not thesis:
+        return 0.0
+    thesis_words = set(_WORD_RE.findall(thesis.lower())) - _THESIS_STOPWORDS
+    if not thesis_words:
+        return 0.0
+    # Gather searchable text from metadata
+    meta_text_parts = []
+    for key in ("description", "summary", "keywords", "semantic_family", "theme", "topic"):
+        val = metadata.get(key)
+        if isinstance(val, str):
+            meta_text_parts.append(val.lower())
+        elif isinstance(val, list):
+            meta_text_parts.extend(str(v).lower() for v in val)
+    meta_text = " ".join(meta_text_parts)
+    meta_words = set(_WORD_RE.findall(meta_text)) - _THESIS_STOPWORDS
+    if not meta_words:
+        return 0.0
+    overlap = thesis_words & meta_words
+    return len(overlap) / len(thesis_words)
 
 
 def resolve_slot(
@@ -114,6 +157,27 @@ def resolve_slot(
             def _key_end(e: "AtomEntry") -> tuple:
                 return (-score_ending_atom(e.metadata, ending_style_id), e.atom_id)
             available.sort(key=_key_end)
+        else:
+            available.sort(key=lambda e: e.atom_id)
+    # Thesis-aware ranking (V4.8): bias REFLECTION and STORY atoms toward chapter thesis.
+    # Keys follow arc/plan convention: 1-based chapter index (same as CompiledBook.chapter_thesis).
+    elif (
+        slot_type in ("REFLECTION", "STORY", "HOOK", "SCENE")
+        and context.chapter_thesis
+    ):
+        th_map = context.chapter_thesis
+        thesis_key = chapter_idx + 1
+        ch_thesis = th_map.get(thesis_key)
+        if ch_thesis is None:
+            ch_thesis = th_map.get(str(thesis_key))
+        if ch_thesis and str(ch_thesis).strip():
+            thesis_text = str(ch_thesis).strip()
+
+            def _key_thesis(e: "AtomEntry") -> tuple:
+                score = _thesis_keyword_overlap(thesis_text, e.metadata or {})
+                return (-score, e.atom_id)  # Higher overlap first, then deterministic tiebreak
+
+            available.sort(key=_key_thesis)
         else:
             available.sort(key=lambda e: e.atom_id)
     else:

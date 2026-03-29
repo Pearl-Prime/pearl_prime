@@ -32,6 +32,13 @@ _REPETITIVE_PHRASES = [
     "there is a mechanism that",
 ]
 
+_SCAFFOLD_RISK_PHRASES = [
+    "what this means going forward is simple",
+    "that moment matters because",
+    "so this is not just your private glitch",
+    "gray light through the window",
+]
+
 _TRANSITION_CUES = (
     "that moment",
     "which means",
@@ -48,6 +55,17 @@ _THESIS_CUES = (
     "the point is",
     "what this means",
     "this is not",
+)
+
+_AHA_CUES = (
+    "the cost",
+    "the price",
+    "what you call",
+    "not the problem",
+    "did not happen",
+    "your body",
+    "instead",
+    "but the",
 )
 
 
@@ -84,6 +102,19 @@ def evaluate_chapter_flow(chapter_text: str) -> ChapterFlowResult:
         if count > 1:
             errors.append(f"REPETITIVE_STEM:{phrase}")
 
+    scaffold_hits = {}
+    for phrase in _SCAFFOLD_RISK_PHRASES:
+        count = lower.count(phrase)
+        if count:
+            scaffold_hits[phrase] = count
+        if count >= 1 and phrase == "gray light through the window":
+            errors.append("GENERIC_SCENE_FALLBACK")
+        elif count >= 1 and phrase != "gray light through the window":
+            warnings.append(f"SCAFFOLD_RISK:{phrase}")
+
+    if "in the next chapter" in lower or "there is more to explore" in lower:
+        errors.append("ANNOUNCED_THREAD")
+
     transition_hits = sum(1 for cue in _TRANSITION_CUES if cue in lower)
     if transition_hits < 3:
         errors.append("WEAK_TRANSITIONS")
@@ -112,6 +143,10 @@ def evaluate_chapter_flow(chapter_text: str) -> ChapterFlowResult:
     if not re.search(r"\b(breathe|pause|exhale|inhale|write|name|notice|choose|practice)\b", lower):
         errors.append("NO_ACTIONABLE_STEP")
 
+    aha_hits = sum(1 for cue in _AHA_CUES if cue in lower)
+    if aha_hits < 1:
+        warnings.append("LOW_AHA_SIGNAL")
+
     status = "PASS" if not errors else "FAIL"
     score = max(0, 100 - len(errors) * 15 - len(warnings) * 5)
 
@@ -122,6 +157,8 @@ def evaluate_chapter_flow(chapter_text: str) -> ChapterFlowResult:
         "thesis_hits": thesis_hits,
         "avg_adjacent_overlap": round(avg_overlap, 3),
         "sentence_len_std": round(std_len, 2),
+        "aha_hits": aha_hits,
+        "scaffold_hits": scaffold_hits,
     }
     return ChapterFlowResult(status, score, errors, warnings, metrics)
 

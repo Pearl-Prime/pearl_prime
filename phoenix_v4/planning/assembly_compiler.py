@@ -165,6 +165,15 @@ NARRATIVE_DEFAULTS = {
 VALID_COST_TYPES = frozenset({"social", "internal", "opportunity", "identity"})
 VALID_IDENTITY_STAGES = frozenset({"pre_awareness", "destabilization", "experimentation", "self_claim"})
 VALID_CALLBACK_PHASES = frozenset({"setup", "escalation", "return"})
+VALID_NARRATIVE_FUNCTIONS = frozenset({
+    "recognition",
+    "pattern_exposure",
+    "cost_realization",
+    "paradox",
+    "micro_shift",
+    "identity_integration",
+    "continuation",
+})
 
 
 def _parse_narrative_metadata(metadata: str, path: Path, role: str, ver: str) -> dict[str, Any]:
@@ -198,6 +207,8 @@ def _parse_narrative_metadata(metadata: str, path: Path, role: str, ver: str) ->
             out["callback_id"] = val if val else None
         elif key == "CALLBACK_PHASE" and val.lower() in VALID_CALLBACK_PHASES:
             out["callback_phase"] = val.lower()
+        elif key == "NARRATIVE_FUNCTION" and val.lower() in VALID_NARRATIVE_FUNCTIONS:
+            out["narrative_function"] = val.lower()
     return out
 
 
@@ -605,6 +616,7 @@ def compile_plan(
         teacher_mode=teacher_mode,
         required_slots_by_type=required_slots_by_type,
         teacher_exercise_fallback=teacher_exercise_fallback,
+        chapter_thesis=chapter_thesis_from_arc,
     )
 
     chapter_slot_sequence: list[list[str]] = []

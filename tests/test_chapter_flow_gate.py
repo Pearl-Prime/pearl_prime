@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+from unittest.mock import MagicMock
+
+from phoenix_v4.planning.pool_index import AtomEntry
+from phoenix_v4.planning.slot_resolver import ResolverContext, resolve_slot
 from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow, evaluate_chapter_flow_with_slots
 from scripts.build_proof_chapter import build_chapter
 
@@ -49,3 +53,47 @@ def test_chapter_flow_with_slots_requires_takeaway_and_thread_when_present() -> 
     result2 = evaluate_chapter_flow_with_slots(slots, segment_proses)
     assert "TAKEAWAY_EMPTY" not in result2.errors
     assert "THREAD_EMPTY" not in result2.errors
+
+
+def test_resolve_slot_thesis_bias_prefers_metadata_overlap(monkeypatch) -> None:
+    """Thesis-aware ranking (1-based chapter keys): aligned metadata sorts before generic."""
+    low = AtomEntry("atom_low", metadata={"keywords": "calm breathing pause"})
+    high = AtomEntry("atom_high", metadata={"keywords": "spiral regret prediction anxiety"})
+    mock_index = MagicMock()
+    mock_index.get_pool.return_value = [low, high]
+
+    ctx = ResolverContext(
+        persona_id="p",
+        topic_id="t",
+        slot_definitions=[],
+        used_atom_ids=set(),
+        pool_index=mock_index,
+        selector_key_prefix="test-thesis",
+        chapter_thesis={1: "The spiral tightens when regret predicts every outcome before you choose."},
+    )
+    monkeypatch.setattr(
+        "phoenix_v4.planning.slot_resolver._selector_index",
+        lambda _key, n: 0,
+    )
+    result = resolve_slot("REFLECTION", 0, 0, ctx)
+    assert result is not None
+    assert result[0] == "atom_high"
+
+
+def test_chapter_flow_gate_flags_generic_overlay_scaffolding() -> None:
+    bad = """
+You sit at the desk. gray light through the window on the glass.
+
+That moment matters because it reveals the pattern before you have language for it.
+
+What this means going forward is simple.
+
+In the next chapter, we look at what it costs when it runs unchecked.
+
+Notice your breath. Exhale once. Write one line.
+"""
+    result = evaluate_chapter_flow(bad)
+    assert result.status == "FAIL"
+    assert "GENERIC_SCENE_FALLBACK" in result.errors
+    assert "ANNOUNCED_THREAD" in result.errors
+    assert any(w.startswith("SCAFFOLD_RISK:") for w in result.warnings)
