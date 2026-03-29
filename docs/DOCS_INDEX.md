@@ -2,7 +2,7 @@
 
 **Purpose:** Canonical index for documentation authority and navigation.  
 **Missing-file policy:** Only existing files are linked; planned or missing files are listed as backlog items (plain text or `path` with ⚠️ *file not present*).  
-**Last updated:** 2026-03-23
+**Last updated:** 2026-03-29
 
 **For developers: start here.** This index is your map. Use the **task table** below for "where to go" by task. **GitHub (PRs, merges, two repos, runners):** go to [GitHub Operations Framework](#github-operations-framework) and [docs/GITHUB_OPERATIONS_FRAMEWORK.md](./GITHUB_OPERATIONS_FRAMEWORK.md) — repo map, workflow matrix, canonical ownership, PR flow, merge to main, Qwen-Agent push/runner, recovery. **No-failure standard:** [docs/GITHUB_NO_FAILURE_FRAMEWORK.md](./GITHUB_NO_FAILURE_FRAMEWORK.md). **Tests / CI:** [Test suite (document all)](#test-suite-document-all). **Domain work:** use the task table and the "(document all)" subsections per domain.
 
@@ -26,6 +26,10 @@
 | **Resume Pearl_GitHub state** | [docs/PEARL_GITHUB_STATE.md](./PEARL_GITHUB_STATE.md) — current verified repo state, completed cleanup, Colab verification status, and next actions. |
 | **Run Pearl_GitHub autopilot** | [docs/PEARL_GITHUB_AUTOPILOT_RUNBOOK.md](./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md) — hourly repo-alignment loop: merge clean PRs, sync local `main`, prune stale local branches, and write run reports. |
 | **Harvest-to-main (PR slices, report-only)** | [docs/HARVEST_TO_MAIN_RUNBOOK.md](./HARVEST_TO_MAIN_RUNBOOK.md) — separate from hourly alignment: classifies `codex/*` vs `origin/main` and emits governed Pearl Prime PR slices from specs; does not merge branches. |
+| **Harden Pearl Prime whole workflow** | [docs/PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md](./PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md) — dev hardening contract: teacher-mode truth, topic integrity, location grounding, editorial/bestseller enforcement, runtime truthfulness, output contract completeness. |
+| **Audit Pearl Prime salvage vs `main`** | [docs/PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md](./PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md) — maps salvage-only material, unmerged branches, `origin/main` state, and the PR sequence to recover Pearl Prime runtime truth. |
+| **Recover Pearl Prime runtime onto `main`** | [docs/PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md](./PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md) — execution-ready dev spec for clean PRs (identity/location, composition/editorial, docs) from the convergence branch. |
+| **Bestseller writing overlay (Pearl Prime)** | [docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md](./PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md) — writer overlay for hooks, aha, integration, thread, scene specificity, anti-generic rules on top of the canonical writer spec. |
 | **Disposition remaining codex branches** | [docs/BRANCH_DISPOSITION_2026_03_20.md](./BRANCH_DISPOSITION_2026_03_20.md) — branch-by-branch delete/harvest/keep-open decisions for the remaining remote `codex/*` branches. |
 | **Decompose PR #21 runtime consolidation safely** | [docs/RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md](./RUNTIME_CONSOLIDATION_HARVEST_PLAN_2026_03_22.md) — concrete keep/split/close plan for `codex/runtime-consolidation` / PR #21, including bucketed follow-up PRs. |
 | **Use a local credentials file safely** | [docs/LOCAL_CREDENTIALS_INTAKE_RUNBOOK.md](./LOCAL_CREDENTIALS_INTAKE_RUNBOOK.md) — local-only intake path for `docs/all_credentials.txt`, WordPress import, and strict no-password-spraying rules. |
@@ -166,6 +170,10 @@ Catalog-facing recommendation engine that decides which books Phoenix should cre
 
 - [docs/RIGOROUS_SYSTEM_TEST.md](./RIGOROUS_SYSTEM_TEST.md) — Simulation (10k/100k) as readiness tooling; **four requirements for production 100%**: real pipeline canaries, CI gate on analyzer, evidence on main, release smoke + rollback proof
 - [docs/PEARL_PRIME_RELEASE_CONTRACT.md](./PEARL_PRIME_RELEASE_CONTRACT.md) — Repo-owned release contract for the main Pearl Prime pipeline; authoritative evidence bundle and non-authoritative external signals
+- [docs/PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md](./PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md) — Pearl Prime whole-pipeline hardening contract (teacher-mode, topic/location, editorial, output contract)
+- [docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md](./PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md) — Bestseller craft overlay on top of PHOENIX_V4_5_WRITER_SPEC
+- [docs/PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md](./PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md) — Salvage vs `main` audit and recovery PR sequencing
+- [docs/PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md](./PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md) — Main recovery dev spec (PR 1–3 execution contract)
 - [docs/PRODUCTION_OBSERVABILITY_LEARNING_SPEC.md](./PRODUCTION_OBSERVABILITY_LEARNING_SPEC.md) — **Production Observability, Learning & Self-Healing (POLES):** observe 100% repo live; document success; elevate, auto-fix, retest failures; learn and enhance over time
 - [docs/SYSTEMS_V4.md](./SYSTEMS_V4.md) — V4 systems overview
 - [docs/PLANNING_STATUS.md](./PLANNING_STATUS.md) — Planning status
@@ -225,6 +233,10 @@ Single index: every doc, script, config, and artifact for simulation, 10k/100k k
 | **Rigorous test & production 100%** | [docs/RIGOROUS_SYSTEM_TEST.md](./RIGOROUS_SYSTEM_TEST.md) — Sim as readiness; four production requirements |
 | **Pearl Prime release contract** | [docs/PEARL_PRIME_RELEASE_CONTRACT.md](./PEARL_PRIME_RELEASE_CONTRACT.md) — Main pipeline release contract and evidence bundle |
 | **Pearl Prime Cloudflare deployment** | [docs/PEARL_PRIME_CLOUDFLARE_DEPLOYMENT.md](./PEARL_PRIME_CLOUDFLARE_DEPLOYMENT.md) — Repo-owned Cloudflare worker contract for the `pearl-prime` service |
+| **Pearl Prime workflow hardening** | [docs/PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md](./PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md) — Whole-pipeline hardening contract |
+| **Pearl Prime bestseller overlay** | [docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md](./PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md) — Writer craft overlay |
+| **Pearl Prime salvage audit** | [docs/PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md](./PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md) — Salvage vs `main` and recovery sequencing |
+| **Pearl Prime main recovery (dev spec)** | [docs/PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md](./PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md) — PR 1–3 execution spec |
 | **V4 features, scale, knobs** | [docs/V4_FEATURES_SCALE_AND_KNOBS.md](./V4_FEATURES_SCALE_AND_KNOBS.md) — All knobs, simulation bullet, observability |
 | **Systems V4 (systems test)** | [docs/SYSTEMS_V4.md](./SYSTEMS_V4.md) — §8 systems test (rigorous) |
 | **Simulation overview** | [simulation/README.md](../simulation/README.md) — Quick run, config, Phase 2/3 workflow |
@@ -1819,6 +1831,10 @@ Single list of every **doc**, **spec**, **config**, and **script** referenced in
 | [SYSTEMS_V4.md](./SYSTEMS_V4.md) | Core system docs | ✓ |
 | [PLANNING_STATUS.md](./PLANNING_STATUS.md) | Core system docs | ✓ |
 | [SYSTEMS_AUDIT.md](./SYSTEMS_AUDIT.md) | Core system docs | ✓ |
+| [PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md](./PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md) | Pearl Prime recovery / writing | ✓ |
+| [PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md](./PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md) | Pearl Prime recovery / execution | ✓ |
+| [PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md](./PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md) | Pearl Prime recovery / salvage | ✓ |
+| [PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md](./PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md) | Pearl Prime recovery / hardening | ✓ |
 | [PEARL_NEWS_ARCHITECTURE_SPEC.md](./PEARL_NEWS_ARCHITECTURE_SPEC.md) | Pearl News | ✓ |
 | [PEARL_NEWS_ARTICLE_METADATA_SCHEMA.md](./PEARL_NEWS_ARTICLE_METADATA_SCHEMA.md) | Pearl News | ✓ |
 | [PEARL_NEWS_GITHUB_SCHEDULING.md](./PEARL_NEWS_GITHUB_SCHEDULING.md) | Pearl News | ✓ |
