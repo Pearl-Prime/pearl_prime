@@ -4,15 +4,15 @@ Purpose: keep local Phoenix Omega aligned with `origin/main` and continuously re
 
 ## What it does each run
 
-1. Fetches and prunes remote refs.
-2. Inspects open PRs and auto-merges the clean ones.
+1. Fetches and prunes remote refs when the network is available.
+2. When online, inspects open PRs and auto-merges the clean ones.
 3. Ignores non-blocking Cloudflare preview failures for `pearl-prime`.
 4. Refuses to merge draft PRs, PRs with unresolved review threads, or PRs with other failing or pending checks.
-5. Creates a timestamped backup branch from local `main` if local `main` is dirty or diverged.
-6. Hard-resets local `main` to `origin/main`.
-7. Deletes local branches whose upstream is gone, unless they are checked out in a live worktree.
+5. When online and not `--dry-run`, creates a timestamped backup branch from local `main` if local `main` is dirty or diverged, then hard-resets local `main` to `origin/main`.
+6. When **offline or degraded** (`mode: offline_degraded` in the report), skips remote mutations: no PR merges, no reset of `main` to `origin/main`, no deletion of local branches (candidates are still listed).
+7. Deletes local branches whose upstream is gone, unless they are checked out in a live worktree — **only when online and not `--dry-run`**.
 8. Writes a JSON and Markdown report under `artifacts/governance/repo_alignment/`.
-9. Runs the Pearl_GitHub health check at the end of the cycle.
+9. Runs the Pearl_GitHub health check at the end of the cycle (or after a recoverable error once the report is assembled).
 
 ## Commands
 
@@ -22,25 +22,48 @@ Dry run:
 bash scripts/git/hourly_repo_alignment.sh --dry-run
 ```
 
+Dry run with a run label (for automation vs manual):
+
+```bash
+bash scripts/git/hourly_repo_alignment.sh --dry-run --report-label manual
+```
+
 Live run:
 
 ```bash
 bash scripts/git/hourly_repo_alignment.sh
 ```
 
+Automation-style label:
+
+```bash
+bash scripts/git/hourly_repo_alignment.sh --report-label automation
+```
+
 ## Output
 
-- JSON: `artifacts/governance/repo_alignment/hourly_repo_alignment_<timestamp>.json`
-- Markdown: `artifacts/governance/repo_alignment/hourly_repo_alignment_<timestamp>.md`
+Always read the stable aliases (do not guess timestamped filenames):
 
-Each report records:
+- `artifacts/governance/repo_alignment/latest_hourly_repo_alignment.json`
+- `artifacts/governance/repo_alignment/latest_hourly_repo_alignment.md`
 
-- merged PRs
-- blocked PRs and why they were not merged
-- whether a `main` backup branch was created
-- whether local `main` was synced
-- which stale local branches were pruned
-- the tail of the health-check result
+Each run also writes timestamped copies: `hourly_repo_alignment_<timestamp>.json` / `.md`.
+
+### Report fields (JSON)
+
+- `mode`: `online_live` or `offline_degraded` (remote fetch or GitHub inspection failed).
+- `run_label`: optional string from `--report-label`.
+- `github_inspection_ok`: whether GitHub PR list/detail inspection completed (do not treat `open_pr_count` as live when this is false).
+- `remote_errors`: strings describing fetch/GitHub/command failures.
+- `local_branch`: current branch at repo root.
+- `local_main_state`: parsed `git status --short --branch` for the `main` worktree (dirty, ahead, behind).
+- `open_pr_count`: integer when GitHub inspection succeeded, else `unknown`.
+- `merged_prs`, `blocked_prs`, `blocked_items` (structured), `backup_branch`, `synced_main`, `pruned_branches`.
+- `remaining_branch_drift`: local branches with ahead/behind/gone/no-upstream signals.
+- `followup_candidates`: suggested next steps (safe, non-executing hints).
+- `notes`, `actions` (audit log).
+
+If `mode` is `offline_degraded`, the Markdown summary states that remote/GitHub mutations were intentionally skipped where applicable. Do not claim live GitHub PR state when `github_inspection_ok` is false.
 
 ## Current decision policy
 
@@ -55,6 +78,7 @@ Autopilot is conservative.
   - unresolved review discussions
   - pending non-ignored checks
   - failing non-ignored checks
+  - when review-thread GraphQL cannot be verified (treated as blocked)
 
 Ignored check failures:
 
@@ -71,3 +95,5 @@ This tool is for repo alignment and housekeeping. It is not a substitute for:
 - `scripts/ci/preflight_push.sh`
 
 Pearl_GitHub should still follow the onboarding order and state tracking discipline in `docs/PEARL_GITHUB_STATE.md`.
+
+Promotion of feature payloads from convergence branches belongs in the separate harvest-to-main lane (`docs/REPO_ALIGNMENT_AND_MAIN_HARVEST_SPEC.md` Workstream B), not in this hourly loop.

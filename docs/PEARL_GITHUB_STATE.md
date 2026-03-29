@@ -128,7 +128,7 @@ Read this with:
   - ComfyUI is still planned as the later production backend, not current repo wiring
 - The best single-file onboarding and state summary is now:
   - [docs/SYSTEM_STATE_MASTER.md](./SYSTEM_STATE_MASTER.md)
-- The hourly Pearl_GitHub autopilot path is already on `main`
+- The hourly Pearl_GitHub autopilot path is already on `main`; alignment reports now record `mode` (`online_live` / `offline_degraded`), optional `--report-label`, `open_pr_count`, `blocked_items`, `remaining_branch_drift`, and `followup_candidates` (see [PEARL_GITHUB_AUTOPILOT_RUNBOOK.md](./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md))
 - 16 stale remote branches were deleted from GitHub on 2026-03-24; 15 remote branches remain including `main`
 - Current active checkout is `agent/manga-sdf-revision-workspace` with `3468` dirty paths (`2539` modified, `929` untracked)
 - `.git/index.lock` is currently present again and held by live editor-side git activity; do not delete it blindly while that activity is running
