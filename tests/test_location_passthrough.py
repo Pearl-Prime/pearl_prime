@@ -17,6 +17,11 @@ def test_resolve_location_profile_id_supports_aliases() -> None:
     assert resolve_location_profile_id("grand_central") == "nyc_grand_central"
     assert resolve_location_profile_id("coastal_california") == "coastal_california"
     assert resolve_location_profile_id("santa_monica") == "coastal_california"
+    assert resolve_location_profile_id("generic_us_urban") == "generic_us_urban"
+    assert resolve_location_profile_id("chicago") == "generic_us_urban"
+    assert resolve_location_profile_id("chicago_metro") == "generic_us_urban"
+    assert resolve_location_profile_id("toronto_ca") == "toronto_ca"
+    assert resolve_location_profile_id("queen_west") == "toronto_ca"
 
 
 def test_bookspec_to_dict_includes_location_fields() -> None:
