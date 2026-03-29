@@ -45,7 +45,7 @@
 | **Do GitHub operations (both repos)** | [GitHub Operations Framework](#github-operations-framework) — repo map, workflow matrix, canonical ownership, system functions (PR flow, merge to main, Qwen-Agent push, runner start/clean, recovery). |
 | **Prevent workflow hangs/failures** | [docs/GITHUB_NO_FAILURE_FRAMEWORK.md](./GITHUB_NO_FAILURE_FRAMEWORK.md) — No-failure rules: heavy-job sharding, preflight + warmup, no-thinking LM calls, runner watchdog/cleanup, UTC windows, push guard, evidence standard. |
 | **Review ownership and rollback governance** | [docs/OWNERSHIP_MATRIX.md](./OWNERSHIP_MATRIX.md) and [docs/ROLLBACK_RUNBOOKS_INDEX.md](./ROLLBACK_RUNBOOKS_INDEX.md) — canonical ownership boundaries plus rollback/DR runbook inventory. |
-| **Trend feed pipeline** | [Trend feed pipeline (document all)](#trend-feed-pipeline-document-all) — RSS + SerpApi + Exploding Topics → scoring → BookSpec injection → MarketRouter boost; 58 keywords, 4 tiers, budget guard, daily orchestrator. Strategy and implementation assets are currently local-only / not on `main`; treat as backlog until normalized. |
+| **Trend feed pipeline** | [Trend feed pipeline (document all)](#trend-feed-pipeline-document-all) — End-to-end: RSS + SerpApi + Exploding Topics → scoring → BookSpec injection → MarketRouter boost; 58 keywords, 4 tiers, budget guard, daily orchestrator. **On `main` (PR #68):** BookSpec `trend_heat_score` and MarketRouter optional trend-score elevation (`catalog_planner.py`, `run_market_router.py`, tests). **Still local-only:** acquisition layer (tier YAMLs, feed scripts, strategy docs in the section table); treat that slice as backlog until promoted. |
 
 ---
 
@@ -584,7 +584,7 @@ Single index: every doc, spec, script, and config that uses or is fed by marketi
 
 ## Trend feed pipeline (document all)
 
-Automated trend discovery layer: RSS feeds + SerpApi Google Trends + Exploding Topics browser scrape → scoring → BookSpec injection → MarketRouter priority boost. Two-track strategy: evergreen (planned, full Ei) + trending (weekly, fast-publish). **Implemented 2026-03-22.** 58 unique keywords across 4 tiers. 422/422 repo tests passing.
+Automated trend discovery layer: RSS feeds + SerpApi Google Trends + Exploding Topics browser scrape → scoring → BookSpec injection → MarketRouter priority boost. Two-track strategy: evergreen (planned, full Ei) + trending (weekly, fast-publish). **Implemented 2026-03-22.** 58 unique keywords across 4 tiers. 422/422 repo tests passing. **On `main` (PR #68):** `trend_heat_score` on BookSpec and MarketRouter trend-based priority elevation are merged; the acquisition scripts and tier YAMLs in the rows below remain local-only until promoted.
 
 | Item | Location |
 |------|----------|
@@ -602,9 +602,9 @@ Automated trend discovery layer: RSS feeds + SerpApi Google Trends + Exploding T
 | **Daily orchestrator** | `scripts/feeds/daily_scrape_runner.py` — Local-only / not on `main` yet; runs pull→check→score→summary; `--dry-run`, `--skip-rss`, `--skip-trends`, `--skip-score` |
 | **Budget guard** | `scripts/feeds/budget_guard.py` — Local-only / not on `main` yet; monthly hard-stop, auto-reset, persistent state, 80% warning |
 | **Keyword validator** | `scripts/feeds/validate_keyword_config.py` — Local-only / not on `main` yet; parse check, required fields, dedup, budget math, cross-ref `topic_ids` |
-| **BookSpec field** | [phoenix_v4/planning/catalog_planner.py](../phoenix_v4/planning/catalog_planner.py) — `trend_heat_score: Optional[float]` on BookSpec dataclass |
-| **MarketRouter wiring** | [scripts/ml_editorial/run_market_router.py](../scripts/ml_editorial/run_market_router.py) — `_load_trend_signals()`, priority boost at heat ≥0.6/≥0.8 |
-| **Validator update** | [phoenix_v4/qa/validate_marketing_config.py](../phoenix_v4/qa/validate_marketing_config.py) — search_clusters limit widened to (3,10) for trend additions |
+| **BookSpec field** | [phoenix_v4/planning/catalog_planner.py](../phoenix_v4/planning/catalog_planner.py) — ✓ on `main` (PR #68) — `trend_heat_score: Optional[float]` on BookSpec; `trend_heat_for_topic_id()` for structured trend payloads (0–100 heat) |
+| **MarketRouter wiring** | [scripts/ml_editorial/run_market_router.py](../scripts/ml_editorial/run_market_router.py) — ✓ on `main` (PR #68) — optional `trend_score_path`; `load_structured_trend_score` + `trend_heat_for_topic_id`; elevates priority to `high` when heat ≥ `market_router.trend_heat_priority_threshold` (default 60) unless section scores already forced `low` |
+| **Marketing config validator** | [phoenix_v4/qa/validate_marketing_config.py](../phoenix_v4/qa/validate_marketing_config.py) — ✓ on `main` — topic marketing YAML validation; `search_clusters` list length bounds (3, 5) per `TOPIC_FIELD_SPECS` (no separate trend widening on `main` yet) |
 | **Artifacts (gitignored)** | `artifacts/feeds/` — `feed_digest_*.jsonl`, `trend_signals_*.jsonl`, `daily_trend_digest_*.jsonl`, `daily_trend_summary_*.md` |
 | **Budget state (gitignored)** | `artifacts/feeds/.serpapi_budget_state.json` — Persistent search counter |
 | **Scheduled task** | `daily-trend-scrape` — 9 AM daily via Cowork scheduled tasks |
@@ -1776,7 +1776,7 @@ All docs that declare authority must reference the three canonical anchors: `SYS
 | [Rigorous system test & simulation](#rigorous-system-test--simulation-document-all) | § Rigorous system test | Simulation, 10k/100k, analyzer, variation report, config, artifacts, CI |
 | [Pearl News](#pearl-news-document-all) | § Pearl News | Pipeline, docs, scripts, config, tests, artifacts, workflows |
 | [Marketing & deep research](#marketing--deep-research-document-all) | § Marketing | Deep research prompts, invisible script, marketing brief; **generational research** (prompts, scripts, config, artifacts, research_feeds_ingest) |
-| [Trend feed pipeline](#trend-feed-pipeline-document-all) | § Trend feed | RSS + SerpApi + Exploding Topics → scoring → BookSpec injection → MarketRouter boost; 58 keywords, 4 tiers, budget guard, daily orchestrator. Strategy: TREND_FEED_INTEGRATION_STRATEGY.md |
+| [Trend feed pipeline](#trend-feed-pipeline-document-all) | § Trend feed | End-to-end pipeline described in section; **on `main` (PR #68):** BookSpec trend field + MarketRouter trend elevation + tests. Acquisition (feeds, tiers, orchestrator) still local-only. Strategy: TREND_FEED_INTEGRATION_STRATEGY.md (local-only) |
 | [Autonomous improvement & ML system](#autonomous-improvement--ml-system-document-all) | § Autonomous & ML | Observability, operations board, agent PRs, auto-merge, weekly pipeline, KPI triggers, ML editorial, ML loop (24/7 + daily + weekly) |
 | [Change observation and impact](#change-observation-and-impact-document-all) | § Change observation | System registry, change detection, impact analysis, synergy (LLM), Agent change feed, artifacts |
 | [Church & payout](#church--payout-distribution-only-brands) | § Church | Church docs, CHURCH_PAYOUT_AND_BANK_GOVERNANCE, PAYOUT_PARTNER_METHODS, brand config, payout config (churches, payees, CHECKLIST), scripts, tests, CI; see [Document all — Church & payout](#document-all--church--payout) |
@@ -1924,6 +1924,11 @@ Single list of every **doc**, **spec**, **config**, and **script** referenced in
 | `scripts/feeds/daily_scrape_runner.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
 | `scripts/feeds/budget_guard.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
 | `scripts/feeds/validate_keyword_config.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
+| `phoenix_v4/planning/catalog_planner.py` | Trend feed pipeline | ✓ on `main` (PR #68) — BookSpec `trend_heat_score`, structured trend helpers |
+| `scripts/ml_editorial/run_market_router.py` | Trend feed pipeline | ✓ on `main` (PR #68) — optional trend score path; heat-threshold priority elevation |
+| `tests/test_catalog_planner_trend_heat.py` | Trend feed pipeline | ✓ on `main` (PR #68) |
+| `tests/test_market_router_trend_boost.py` | Trend feed pipeline | ✓ on `main` (PR #68) |
+| `phoenix_v4/qa/validate_marketing_config.py` | Trend feed pipeline | ✓ on `main` — marketing YAML validation (not feed acquisition; listed here as related config gate) |
 
 ### Config (config/audiobook_script/)
 
