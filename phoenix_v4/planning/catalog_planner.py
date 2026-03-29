@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
@@ -27,6 +28,85 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 CONFIG_CATALOG = REPO_ROOT / "config" / "catalog_planning"
 CONFIG_LOCALIZATION = REPO_ROOT / "config" / "localization"
 CONFIG_AUTHORING = REPO_ROOT / "config" / "authoring"
+
+
+def _norm_trend_match_key(value: Optional[str]) -> str:
+    """Normalize topic/slug/keyword for matching catalog topic_id to trend_score payloads."""
+    return re.sub(r"[^a-z0-9]+", "", (value or "").lower())
+
+
+def load_structured_trend_score(path: Optional[Path]) -> Optional[dict[str, Any]]:
+    """Load canonical ``trend_score_{date}.json`` dict, or None if missing/unreadable."""
+    if path is None:
+        return None
+    p = Path(path)
+    if not p.exists():
+        return None
+    try:
+        raw = json.loads(p.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+    if not isinstance(raw, dict):
+        return None
+    return raw
+
+
+def trend_heat_for_topic_id(topic_id: str, trend_payload: Optional[dict[str, Any]]) -> Optional[float]:
+    """
+    Derive a bounded heat score (0–100) from structured trend output for ``topic_id``.
+    Uses ``top_signals`` and ``confirmed_topics`` only; returns None when no match.
+    """
+    if not trend_payload or not topic_id:
+        return None
+    key = _norm_trend_match_key(topic_id)
+    if not key:
+        return None
+    best: Optional[float] = None
+
+    for row in trend_payload.get("confirmed_topics") or []:
+        if not isinstance(row, dict):
+            continue
+        t = row.get("topic")
+        if t is None:
+            continue
+        if _norm_trend_match_key(str(t)) != key:
+            continue
+        try:
+            growth = float(row.get("et_growth_pct") or 0)
+        except (TypeError, ValueError):
+            growth = 0.0
+        score = 45.0 + min(55.0, max(0.0, growth) * 0.275)
+        best = max(best or 0.0, score)
+
+    for sig in trend_payload.get("top_signals") or []:
+        if not isinstance(sig, dict):
+            continue
+        kind = sig.get("kind")
+        if kind == "exploding_topics":
+            t = sig.get("topic")
+            if t is None or _norm_trend_match_key(str(t)) != key:
+                continue
+            try:
+                growth = float(sig.get("growth_pct") or 0)
+            except (TypeError, ValueError):
+                growth = 0.0
+            score = 40.0 + min(60.0, max(0.0, growth) * 0.3)
+            best = max(best or 0.0, score)
+        elif kind == "google_trends_serpapi":
+            kw = sig.get("keyword")
+            if kw is None or _norm_trend_match_key(str(kw)) != key:
+                continue
+            spike = bool(sig.get("spike"))
+            try:
+                pc = float(sig.get("pct_change_7d") or 0)
+            except (TypeError, ValueError):
+                pc = 0.0
+            score = 70.0 if spike else 35.0 + min(35.0, max(0.0, pc) * 0.7)
+            best = max(best or 0.0, score)
+
+    if best is None:
+        return None
+    return round(min(100.0, best), 4)
 
 
 @dataclass
@@ -55,6 +135,9 @@ class BookSpec:
     # Authority: specs/COMPANION_WORKBOOK_CATALOG_SPEC.md §2
     # EI V2 uses this to calibrate EXERCISE slot density and reflection prompt depth.
     companion_workbook_type: Optional[str] = None
+    # Optional: populated when ``produce_single`` / ``produce_wave`` is given a readable
+    # structured trend_score JSON path (TREND_PIPELINE_TRUTH_AND_AUTOMATION_DEV_SPEC.md PR 3).
+    trend_heat_score: Optional[float] = None
 
     def to_dict(self) -> dict[str, Any]:
         out = {
@@ -81,6 +164,8 @@ class BookSpec:
             out["atoms_model"] = self.atoms_model.value
         if self.companion_workbook_type is not None:
             out["companion_workbook_type"] = self.companion_workbook_type
+        if self.trend_heat_score is not None:
+            out["trend_heat_score"] = self.trend_heat_score
         return out
 
 
@@ -194,6 +279,7 @@ class CatalogPlanner:
         author_positioning_profile: Optional[str] = None,
         narrator_id: Optional[str] = None,
         atoms_model: Optional[AtomsModel] = None,
+        trend_score_path: Optional[Path] = None,
     ) -> BookSpec:
         """Produce one BookSpec. Required: topic_id, persona_id.
 
@@ -204,10 +290,14 @@ class CatalogPlanner:
         author_id: when set, author_positioning_profile is resolved from author_registry (mandatory there).
         author_positioning_profile: if supplied with author_id, must match registry or Stage 1 fails.
         narrator_id: optional; when set, validated against narrator_registry (Writer Spec §23.5).
+        trend_score_path: optional path to structured ``trend_score_*.json``; when missing or invalid,
+        ``trend_heat_score`` is left None (no crash).
         """
         if not topic_id or not persona_id:
             raise ValueError("BookSpec requires topic_id and persona_id")
         positioning = self._resolve_author_positioning(author_id, brand_id, author_positioning_profile)
+        trend_payload = load_structured_trend_score(trend_score_path) if trend_score_path else None
+        trend_heat = trend_heat_for_topic_id(topic_id, trend_payload)
 
         series_cfg = self._series.get("series") or {}
         brand_cfg = self._brands.get(brand_id) or {}
@@ -264,6 +354,7 @@ class CatalogPlanner:
             author_positioning_profile=positioning,
             narrator_id=narrator_id,
             atoms_model=atoms_model,
+            trend_heat_score=trend_heat,
         )
 
     def _derive_angle(
@@ -341,10 +432,12 @@ class CatalogPlanner:
         locale: Optional[str] = None,
         territory: Optional[str] = None,
         teacher_mode: bool = False,
+        trend_score_path: Optional[Path] = None,
     ) -> list[BookSpec]:
         """Produce n BookSpecs from series/angles. Deterministic given n and seed.
         locale/territory default from brand config when not supplied.
         teacher_mode: when True, Stage 3 uses teacher_banks/<teacher_id>/approved_atoms/.
+        trend_score_path: optional structured trend JSON; heat computed per topic when readable.
         """
         series_cfg = self._series.get("series") or {}
         if not series_cfg:
@@ -352,6 +445,7 @@ class CatalogPlanner:
         brand_cfg = self._brands.get(brand_id) or {}
         wave_locale = locale or brand_cfg.get("locale") or "en-US"
         wave_territory = territory or brand_cfg.get("territory") or "US"
+        trend_payload = load_structured_trend_score(trend_score_path) if trend_score_path else None
         series_ids = list(series_cfg.keys())
         h = hashlib.sha256(f"{seed}:{n}".encode()).digest()
         specs: list[BookSpec] = []
@@ -370,6 +464,7 @@ class CatalogPlanner:
             inst = (i // (len(angles) * max(len(high), 1))) + 1
             spec_seed = hashlib.sha256(f"{seed}:{i}:{series_id}:{angle_id}".encode()).hexdigest()[:24]
             positioning = self._resolve_author_positioning(None, brand_id, None)
+            wave_heat = trend_heat_for_topic_id(topic_id, trend_payload)
             specs.append(BookSpec(
                 topic_id=topic_id,
                 persona_id=persona_id,
@@ -385,6 +480,7 @@ class CatalogPlanner:
                 teacher_mode=teacher_mode,
                 author_id=None,
                 author_positioning_profile=positioning,
+                trend_heat_score=wave_heat,
             ))
         return specs
 
