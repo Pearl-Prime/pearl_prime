@@ -39,18 +39,18 @@ def test_resolve_to_canonical_keeps_legacy_relationship_anxiety_alias() -> None:
     assert persona == "gen_z_professionals"
 
 
-def test_count_proseful_sections_detects_hollow_overthinking_scene_bank() -> None:
+def test_count_proseful_sections_overthinking_scene_bank_is_proseful() -> None:
     scene_path = REPO_ROOT / "atoms" / "gen_z_professionals" / "overthinking" / "SCENE" / "CANONICAL.txt"
 
-    assert _count_proseful_sections(scene_path) == 0
+    # PR-S1: 20 scene variants with substantive body prose each (see SOURCE_BANK_REPAIR_DEV_SPEC).
+    assert _count_proseful_sections(scene_path) == 20
 
 
-def test_topic_source_readiness_flags_hollow_scene_bank() -> None:
+def test_topic_source_readiness_overthinking_spiral_has_scene_and_story() -> None:
     issues = _topic_source_readiness_issues(
         persona_id="gen_z_professionals",
         topic_id="overthinking",
         engine_id="spiral",
     )
 
-    assert any("SCENE bank has no proseful entries" in issue for issue in issues)
-    assert not any("STORY bank" in issue for issue in issues)
+    assert issues == []
