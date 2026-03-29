@@ -15,6 +15,8 @@ def test_resolve_location_profile_id_supports_aliases() -> None:
     assert resolve_location_profile_id("nyc") == "nyc_metro"
     assert resolve_location_profile_id("New York City") == "nyc_metro"
     assert resolve_location_profile_id("grand_central") == "nyc_grand_central"
+    assert resolve_location_profile_id("coastal_california") == "coastal_california"
+    assert resolve_location_profile_id("santa_monica") == "coastal_california"
 
 
 def test_bookspec_to_dict_includes_location_fields() -> None:
