@@ -335,6 +335,39 @@ At the end of the full recovery sequence, the final closeout must answer:
 
 ---
 
+## 9a. Recorded closeout — Pearl Prime recovery sequence (merged)
+
+**Recorded:** 2026-03-30. **`origin/main` tip at closeout record:** `37e55387` (includes PR #75 on top of PR #74 and PR #67).
+
+### Changed paths (by PR lane)
+
+- **PR #67:** Identity + location truth — e.g. `phoenix_v4/rendering/book_renderer.py` (`LocationGroundingError`, location grounding reports, `enforce_location_grounding`), `config/localization/render_location_profiles.yaml`, `scripts/run_pipeline.py` location passthrough, planning/topic identity tests.
+- **PR #74:** Composition + editorial runtime — e.g. `phoenix_v4/rendering/chapter_composer.py`, `phoenix_v4/quality/chapter_flow_gate.py`, `phoenix_v4/qa/bestseller_editor.py`, `phoenix_v4/planning/slot_resolver.py`, `phoenix_v4/planning/assembly_compiler.py`, associated tests.
+- **PR #75:** Governing docs — `docs/PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md`, `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md`, `docs/PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md`, selective updates to `docs/DOCS_INDEX.md` (Pearl recovery links; not a wholesale copy from convergence).
+
+### Verification
+
+- `PYTHONPATH=. python3 scripts/ci/check_docs_governance.py` — **passed** at PR #75 merge (re-run after any follow-up doc edits).
+- All three Pearl Prime recovery specs above are linked from `docs/DOCS_INDEX.md`.
+
+### §9 final sequence answers
+
+1. **Is explicit-topic drift fixed on `main`?** The merged runtime preserves explicit topics when dedicated support exists and fails honestly when topic banks are hollow or unsupported, instead of silent collapse to a broader alias (see PR #67 identity/topic path and tests). Remaining failures from thin banks are **source-bank debt**, not undocumented runtime drift.
+2. **Is location now a first-class runtime contract on `main`?** **Yes** — `--location`, governed profiles, plan/run metadata, and renderer contracts including grounding reports are on `main` (PR #67).
+3. **Is page-one location grounding enforced on `main`?** **Yes** on the default render path when `enforce_location_grounding` applies — failures raise `LocationGroundingError` rather than silently emitting generic opening prose.
+4. **Is the stronger composer/editor runtime on `main`?** **Yes** — `chapter_composer`, flow gate evaluation on composed+cleaned prose, `bestseller_editor`, and related resolver/assembly wiring from PR #74.
+5. **What still fails because of source-bank debt rather than runtime drift?** Hollow or tech-coded atoms, incomplete teacher slot-family coverage, limited profile/scene grounding until banks expand, and craft/length gaps surfaced by gates — see **Follow-up Lane — Source/Bank Repair** above and **PR 4** in the salvage audit.
+
+### Follow-up lane
+
+**Source/bank repair** is **ready to scope** as a separate implementation workstream (not part of recovery PRs 1–3).
+
+### Ops note
+
+Some task templates reference `docs/SESSION_UNITY_PROTOCOL.md`; that path is **not present** in this repository at record time. Use `docs/ONBOARDING_START_HERE.md` and this spec until a unity-protocol doc is added.
+
+---
+
 ## 10. Definition Of Done
 
 This dev spec is complete when:

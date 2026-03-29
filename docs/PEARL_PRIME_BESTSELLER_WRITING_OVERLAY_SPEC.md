@@ -1,5 +1,7 @@
 # Pearl Prime — Bestseller Writing Overlay Spec
 
+**Runtime context (2026-03):** `origin/main` includes PR #74 composition path (`chapter_composer`, flow gate on composed prose) and `bestseller_editor`. This spec is the **writing-craft overlay** on top of the canonical writer spec; it does not replace release or QA contracts.
+
 **Purpose:** Craft-layer overlay that sits on top of the V4.5 Writer Spec (§1–§26) and the Bestseller Structures doc. This spec does not replace either. It adds the missing execution-level writing craft that turns a structurally correct chapter into a chapter a listener cannot stop.
 
 **Status:** Writer/craft overlay — subordinate to the V4.5 Writer Spec and the Arc-First Canonical Spec.

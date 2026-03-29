@@ -4,6 +4,14 @@
 
 **Status:** Recovery audit only. This file is not a replacement for the canonical runtime/spec docs. It is the branch/spec reconciliation map for Pearl Prime salvage.
 
+## Current `origin/main` status (post-recovery PRs)
+
+**As of 2026-03-30,** Pearl Prime recovery **PR #67** (runtime identity + location truth), **PR #74** (bestseller composition + editorial runtime), and **PR #75** (governing recovery docs + selective `DOCS_INDEX` links) are merged to `origin/main` (tip `37e55387`). The **14-file Pearl Prime runtime delta** that was previously carried on `codex/state-convergence-20260328` is **on `main`** for the code paths merged in PR #67 and PR #74 (see `book_renderer`, `chapter_composer`, `bestseller_editor`, `run_pipeline`, tests, and location profiles).
+
+The **Repo Snapshot** below and **§B — Exists on unmerged branches only** describe the **2026-03-29 audit moment** and are **retained for traceability**; they are not a live description of merge state after those PRs.
+
+**Still open:** Source/bank repair and content-readiness work (**§PR 4** / follow-up lane in [PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md](./PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md)) remains; recovery PRs surface gaps honestly rather than hiding them.
+
 ## Questions Answered
 
 1. Did earlier work already describe persona + topic + location tied to lived experience?
