@@ -32,4 +32,4 @@ Key facts: the system is pre-revenue. "2,160+ books" is a target (24 brands x 90
 
 ## Authority
 
-This package was created under workstream `ws_brand_admin_investor_enhancement_20260328` recorded in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`.
+This package was created under lane `brand_admin_and_investor_enhancement` from `docs/OLD_CHAT_AND_HOME_PROMOTION_SPEC.md` section 4.

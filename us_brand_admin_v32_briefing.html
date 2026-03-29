@@ -1,1313 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>US Brand Admin V3.2 Briefing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-base: #0B0F1A;
-            --bg-card: #131825;
-            --border-color: #1E2536;
-            --accent: #6366F1;
-            --success: #34D399;
-            --warning: #FBBF24;
-            --text-primary: #E2E8F0;
-            --text-secondary: #94A3B8;
-            --text-tertiary: #64748B;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-base);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
-
-        /* Typography System */
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        h2 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.01em;
-        }
-
-        p, li {
-            font-size: 1rem;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            line-height: 1.7;
-        }
-
-        .caption {
-            font-size: 0.8125rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Layout */
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar Navigation */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 200px;
-            height: 100vh;
-            background-color: var(--bg-card);
-            border-right: 1px solid var(--border-color);
-            padding: 2rem 1rem;
-            overflow-y: auto;
-            z-index: 100;
-        }
-
-        .sidebar-nav {
-            list-style: none;
-        }
-
-        .sidebar-chapter {
-            margin-bottom: 2rem;
-        }
-
-        .sidebar-chapter-title {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: var(--text-tertiary);
-            margin-bottom: 0.75rem;
-            letter-spacing: 0.05em;
-        }
-
-        .sidebar-section {
-            list-style: none;
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar-link {
-            display: block;
-            padding: 0.5rem 0.75rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.875rem;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .sidebar-link:hover {
-            background-color: rgba(99, 102, 241, 0.1);
-            color: var(--accent);
-        }
-
-        .sidebar-link.active {
-            background-color: rgba(99, 102, 241, 0.2);
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            position: fixed;
-            top: 1.5rem;
-            left: 1.5rem;
-            width: 40px;
-            height: 40px;
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            cursor: pointer;
-            z-index: 110;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .mobile-menu-btn span {
-            width: 20px;
-            height: 2px;
-            background-color: var(--text-primary);
-            border-radius: 1px;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translateY(10px);
-        }
-
-        .mobile-menu-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translateY(-10px);
-        }
-
-        /* Main Content */
-        main {
-            margin-left: 200px;
-            width: calc(100% - 200px);
-            padding: 3rem;
-        }
-
-        section {
-            margin-bottom: 4rem;
-            opacity: 1;
-        }
-
-        html.js-enhanced section {
-            opacity: 0;
-            transition: opacity 0.6s ease-out;
-        }
-
-        html.js-enhanced section.visible {
-            opacity: 1;
-        }
-
-        .page-footer {
-            background-color: var(--bg-card);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 3rem;
-            text-align: center;
-            margin-left: 200px;
-        }
-
-        /* Cards */
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card.accent-border {
-            border-color: var(--accent);
-        }
-
-        .card.success {
-            border-left: 4px solid var(--success);
-        }
-
-        .card.warning {
-            border-left: 4px solid var(--warning);
-        }
-
-        /* Metric Cards */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .metric-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .metric-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 500;
-        }
-
-        /* Before/After Comparison */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .comparison-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .comparison-card.old {
-            border: 1px solid var(--text-tertiary);
-        }
-
-        .comparison-card.new {
-            border: 2px solid var(--accent);
-        }
-
-        .comparison-card ul {
-            list-style: none;
-        }
-
-        .comparison-card li {
-            padding: 0.5rem 0;
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-        }
-
-        .comparison-card li:last-child {
-            border-bottom: none;
-        }
-
-        /* Gauge Bars */
-        .gauge-container {
-            margin-bottom: 2rem;
-        }
-
-        .gauge-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .gauge-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .gauge-bar {
-            width: 100%;
-            height: 24px;
-            background-color: rgba(99, 102, 241, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .gauge-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), #818CF8);
-            transition: width 0.6s ease;
-            display: flex;
-            align-items: center;
-            padding: 0 0.5rem;
-        }
-
-        .gauge-text {
-            color: var(--text-primary);
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        /* Scale/Ladder */
-        .contrast-scale {
-            display: flex;
-            flex-direction: column-reverse;
-            gap: 0;
-            margin-bottom: 2rem;
-        }
-
-        .contrast-level {
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-card);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .contrast-level.l1 {
-            background-color: rgba(99, 102, 241, 0.05);
-        }
-
-        .contrast-level.l2 {
-            background-color: rgba(99, 102, 241, 0.1);
-        }
-
-        .contrast-level.l3 {
-            background-color: rgba(99, 102, 241, 0.15);
-        }
-
-        .contrast-level.l4 {
-            background-color: rgba(99, 102, 241, 0.2);
-        }
-
-        .contrast-level:first-child {
-            border-top: 1px solid var(--border-color);
-            border-radius: 8px 8px 0 0;
-        }
-
-        .contrast-level:last-child {
-            border-radius: 0 0 8px 8px;
-        }
-
-        .contrast-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            min-width: 120px;
-        }
-
-        .contrast-description {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        /* Flow Diagram */
-        .flow-diagram {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            gap: 1rem;
-        }
-
-        .flow-node {
-            flex: 1;
-            background-color: var(--bg-card);
-            border: 2px solid var(--accent);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.95rem;
-            position: relative;
-        }
-
-        .flow-node:not(:last-child)::after {
-            content: '→';
-            position: absolute;
-            right: -2.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent);
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        /* Cycle Diagram */
-        .cycle-diagram {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .cycle-node {
-            width: 120px;
-            height: 120px;
-            background-color: var(--bg-card);
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.85rem;
-            padding: 1rem;
-        }
-
-        /* Bar Chart */
-        .bar-chart {
-            margin-bottom: 2rem;
-        }
-
-        .bar-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .bar-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .bar-fill {
-            width: 100%;
-            height: 32px;
-            background: linear-gradient(90deg, var(--accent), #818CF8);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            padding: 0 1rem;
-            color: var(--text-primary);
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-
-        /* Chaos Slot Cards */
-        .chaos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .chaos-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .chaos-card:hover {
-            border-color: var(--accent);
-        }
-
-        .chaos-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .chaos-type {
-            font-weight: 600;
-            font-size: 0.875rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .chaos-description {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* Transformation Promise */
-        .promise-callout {
-            background-color: rgba(99, 102, 241, 0.1);
-            border-left: 4px solid var(--accent);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .promise-text {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            line-height: 1.8;
-        }
-
-        .promise-template {
-            color: var(--accent);
-            font-style: italic;
-        }
-
-        /* Checklist */
-        .checklist {
-            list-style: none;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .checklist-item:hover {
-            border-color: var(--accent);
-            background-color: rgba(99, 102, 241, 0.05);
-        }
-
-        .checklist-item.checked {
-            border-color: var(--success);
-            background-color: rgba(52, 211, 153, 0.05);
-        }
-
-        .checklist-checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border-color);
-            border-radius: 4px;
-            margin-right: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--success);
-            background-color: transparent;
-            transition: all 0.2s ease;
-        }
-
-        .checklist-item.checked .checklist-checkbox {
-            background-color: var(--success);
-            border-color: var(--success);
-            color: var(--bg-base);
-        }
-
-        .checklist-text {
-            font-size: 1rem;
-            color: var(--text-primary);
-        }
-
-        /* Links */
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .resource-link {
-            background-color: var(--bg-card);
-            border: 1px solid var(--accent);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-decoration: none;
-            color: var(--accent);
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: block;
-        }
-
-        .resource-link:hover {
-            background-color: rgba(99, 102, 241, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .resource-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .resource-title {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .resource-description {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        /* Contact */
-        .contact-card {
-            background-color: rgba(99, 102, 241, 0.1);
-            border: 1px solid var(--accent);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .contact-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .contact-info {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--accent);
-            word-break: break-all;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-                width: 250px;
-                z-index: 99;
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            main {
-                margin-left: 0;
-                width: 100%;
-                padding: 1.5rem;
-                padding-top: 5rem;
-            }
-
-            .page-footer {
-                margin-left: 0;
-                padding: 2rem 1.5rem;
-            }
-
-            h1 {
-                font-size: 1.75rem;
-            }
-
-            h2 {
-                font-size: 1.35rem;
-            }
-
-            .metrics-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .comparison-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .flow-diagram {
-                flex-direction: column;
-            }
-
-            .flow-node:not(:last-child)::after {
-                content: '↓';
-                position: relative;
-                right: auto;
-                transform: none;
-            }
-
-            .chaos-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            h2 {
-                font-size: 1.15rem;
-            }
-
-            main {
-                padding: 1rem;
-                padding-top: 5rem;
-            }
-
-            .card {
-                padding: 1.5rem;
-            }
-
-            .chaos-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .promise-text {
-                font-size: 1rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — US Brand Admin V3.2 Briefing</title>
+<style>
+:root{--bg:#f9fafb;--white:#fff;--card:#f8f8fa;--border:#e5e7eb;--accent:#7c3aed;--al:#ede9fe;--ad:#5b21b6;--red:#dc2626;--rl:#fef2f2;--green:#059669;--gl:#ecfdf5;--gold:#d97706;--gol:#fffbeb;--blue:#2563eb;--bl:#eff6ff;--orange:#ea580c;--ol:#fff7ed;--text:#111827;--muted:#6b7280;--light:#9ca3af;--r:16px;--rs:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.hero{text-align:center;padding:60px 24px 36px;background:linear-gradient(180deg,#f3f4f6,var(--bg));border-bottom:1px solid var(--border)}
+.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:14px;background:linear-gradient(135deg,#5b21b6,#7c3aed,#059669);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:.92rem;color:var(--muted);max-width:580px;margin:0 auto}
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.badge{display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1px solid var(--border);padding:5px 12px;border-radius:999px;font-size:.75rem;color:var(--muted)}
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.dot-g{background:var(--green)}.dot-p{background:var(--accent)}.dot-o{background:var(--orange)}
+.mx{max-width:940px;margin:0 auto;padding:0 20px}
+.tn{position:sticky;top:0;background:var(--white);border-bottom:1px solid var(--border);z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tn-inner{max-width:940px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+.tn-inner::-webkit-scrollbar{display:none}
+.tb{padding:11px 10px;font-size:.72rem;font-weight:500;color:var(--muted);border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:.2s}
+.tb:hover{color:var(--text);border-bottom-color:var(--border)}
+.tb.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tp{display:none;padding:44px 0 36px}
+.tp.on{display:block;animation:fu .35s ease}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.sl{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;color:var(--accent);font-weight:700;margin-bottom:6px}
+h2{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.desc{color:var(--muted);font-size:.88rem;max-width:660px;margin-bottom:18px;line-height:1.65}
+.ssg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0}
+.ss{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.ss .big{font-size:1.4rem;font-weight:800;margin-bottom:2px}
+.ss .lbl{font-size:.75rem;color:var(--muted)}
+/* System section */
+.sys{padding:36px 0;border-bottom:1px solid var(--border)}
+.sys:last-child{border-bottom:none}
+.sys-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.sys-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.sys-tag{font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
+.sys-out{font-size:.88rem;color:var(--green);font-weight:600;margin-bottom:16px;padding:14px 16px;background:var(--gl);border-radius:var(--rs);border-left:3px solid var(--green)}
+.ba{display:grid;grid-template-columns:1fr 30px 1fr;gap:10px;align-items:start;margin-bottom:16px}
+.ba-b{background:var(--card);border-radius:var(--rs);padding:14px}
+.ba-b.bef{border-left:3px solid var(--red)}
+.ba-b.aft{border-left:3px solid var(--green)}
+.ba-l{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.ba-a{text-align:center;color:var(--accent);font-size:1.2rem;align-self:center}
+.met{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.mc{background:var(--white);border:1px solid var(--border);border-radius:var(--rs);padding:12px;text-align:center}
+.mc .v{font-size:1.1rem;font-weight:800;color:var(--accent)}
+.mc .l{font-size:.65rem;color:var(--light);margin-top:2px;text-transform:uppercase;letter-spacing:.03em}
+.det{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:16px}
+.det h4{font-size:.78rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.det p{font-size:.82rem;color:var(--muted);margin:0;line-height:1.65}
+.act{background:var(--white);border:2px solid var(--accent);border-radius:var(--r);padding:18px}
+.act-h{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);font-weight:700;margin-bottom:10px}
+.act-g{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.act-c h5{font-size:.68rem;color:var(--light);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;font-weight:600}
+.act-c p{font-size:.8rem;color:var(--text);margin:0;line-height:1.6}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.tag{font-size:.62rem;padding:3px 7px;border-radius:999px;font-weight:500}
+.tag-g{background:var(--gl);color:var(--green)}.tag-p{background:var(--al);color:var(--accent)}.tag-r{background:var(--rl);color:var(--red)}.tag-o{background:var(--ol);color:var(--orange)}
+.nb{margin-top:28px;text-align:center}
+.nbtn{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;padding:11px 26px;border-radius:13px;font-size:.85rem;font-weight:600;border:none;cursor:pointer;box-shadow:0 5px 16px rgba(124,58,237,.2);transition:.2s;text-decoration:none}
+.nbtn:hover{background:var(--ad);transform:translateY(-1px)}
+.back{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600}
+.back:hover{color:var(--ad)}
+.foot{background:linear-gradient(135deg,var(--accent),#6d28d9,#581c87);padding:28px 20px;text-align:center;color:#fff;margin-top:36px}
+.foot h2{font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.foot p{font-size:.84rem;color:rgba(255,255,255,.65);margin:0}
+@media(max-width:700px){.ba,.met,.act-g,.ssg{grid-template-columns:1fr}.ba-a{display:none}}
+</style>
 </head>
 <body>
-    <!-- Mobile Menu Button -->
-    <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
+<div class="hero">
+<h1>V3.2 Marketing Intelligence — US Market</h1>
+<p>Seven systems activate automatically on every title. No new tools. No new dashboards. The intelligence layer reads reader behavior and adapts every touchpoint in real time.</p>
+<div class="badges"><span class="badge"><span class="dot dot-g"></span> 7 Auto Systems</span><span class="badge"><span class="dot dot-p"></span> Ei-Powered</span><span class="badge"><span class="dot dot-o"></span> Zero Manual Setup</span></div>
+</div>
+<div class="tn"><div class="tn-inner">
+<button class="tb on" onclick="go('overview')">Overview</button>
+<button class="tb" onclick="go('eois')">EOIS</button>
+<button class="tb" onclick="go('contrast')">Contrast</button>
+<button class="tb" onclick="go('audio')">Audiobook</button>
+<button class="tb" onclick="go('binge')">Binge Loop</button>
+<button class="tb" onclick="go('social')">Social Wiring</button>
+<button class="tb" onclick="go('chaos')">Chaos Slot</button>
+<button class="tb" onclick="go('transform')">Transform</button>
+<button class="tb" onclick="go('dash')">Dashboard</button>
+</div></div>
+<div class="mx">
 
-    <!-- Sidebar Navigation -->
-    <nav class="sidebar" id="sidebar">
-        <ul class="sidebar-nav">
-            <!-- Chapter 1: Overview -->
-            <li class="sidebar-chapter">
-                <div class="sidebar-chapter-title">Chapter 1: Overview</div>
-                <ul class="sidebar-section">
-                    <li><a class="sidebar-link" href="#section-1">Executive Summary</a></li>
-                    <li><a class="sidebar-link" href="#section-2">What Changed</a></li>
-                </ul>
-            </li>
+<!-- OVERVIEW -->
+<div class="tp on" id="t-overview">
+<div class="sl">Impact Brief</div>
+<h2>What V3.2 Changes for Your Brand</h2>
+<p class="desc">Before V3.2, each book was a standalone product with no intelligence layer. After V3.2, every title feeds and benefits from a shared system that gets smarter with every reader session. Here's the aggregate impact:</p>
+<div class="ssg">
+<div class="ss"><div class="big" style="color:var(--accent)">7</div><div class="lbl">Automatic systems</div></div>
+<div class="ss"><div class="big" style="color:var(--green)">2.7x</div><div class="lbl">Titles per reader/quarter</div></div>
+<div class="ss"><div class="big" style="color:var(--gold)">+35%</div><div class="lbl">Pre-purchase conversion</div></div>
+</div>
+<div class="ssg">
+<div class="ss"><div class="big" style="color:var(--red)">3x</div><div class="lbl">Organic sharing events</div></div>
+<div class="ss"><div class="big" style="color:var(--blue)">+31%</div><div class="lbl">Book completion rate</div></div>
+<div class="ss"><div class="big" style="color:var(--orange)">40%</div><div class="lbl">Revenue from audiobook</div></div>
+</div>
+<p class="desc" style="margin-top:16px">Click any system tab above to see the full before/after, metrics, and what it activates for your brand.</p>
+<p style="margin-top:24px"><a class="back" href="brand_onboarding_hub.html">← Back to Brand Onboarding Hub</a></p>
+</div>
 
-            <!-- Chapter 2: The Seven Systems -->
-            <li class="sidebar-chapter">
-                <div class="sidebar-chapter-title">Chapter 2: The Seven Systems</div>
-                <ul class="sidebar-section">
-                    <li><div class="sidebar-chapter-title" style="margin-bottom: 0.5rem; font-size: 0.7rem;">Measurement & Control</div></li>
-                    <li><a class="sidebar-link" href="#section-3">EOIS</a></li>
-                    <li><a class="sidebar-link" href="#section-4">Controlled Contrast</a></li>
-                    <li style="margin-top: 1rem;"><div class="sidebar-chapter-title" style="margin-bottom: 0.5rem; font-size: 0.7rem;">Engagement Engine</div></li>
-                    <li><a class="sidebar-link" href="#section-5">Audiobook Dominance</a></li>
-                    <li><a class="sidebar-link" href="#section-6">Binge Loop Engineering</a></li>
-                    <li style="margin-top: 1rem;"><div class="sidebar-chapter-title" style="margin-bottom: 0.5rem; font-size: 0.7rem;">Distribution & Impact</div></li>
-                    <li><a class="sidebar-link" href="#section-7">Social Platform Wiring</a></li>
-                    <li><a class="sidebar-link" href="#section-8">Chaos Slot</a></li>
-                    <li><a class="sidebar-link" href="#section-9">Transformation Promise</a></li>
-                </ul>
-            </li>
+<!-- EOIS -->
+<div class="tp" id="t-eois">
+<div class="sys">
+<div class="sys-head">
+<div class="sys-icon" style="background:var(--gl)">🧠</div>
+<div><span class="sys-tag" style="background:var(--gl);color:var(--green)">Intelligence</span><h2 style="margin:4px 0 0">EOIS — Emotional Outcome Intelligence System</h2></div>
+</div>
+<div class="sys-out">Every reader session generates emotional trajectory data that improves the next recommendation.</div>
+<div class="ba">
+<div class="ba-b bef"><div class="ba-l" style="color:var(--red)">Before V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">Generic "self-help" shelf placement. No emotional context for discovery. Readers found books by keyword, not by need. Recommendation engine used "people also bought" — purchase correlation without emotional intelligence.</p></div>
+<div class="ba-a">→</div>
+<div class="ba-b aft"><div class="ba-l" style="color:var(--green)">After V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">Ei reads emotional state signals and routes readers to the book matching their current need, not just purchase history. Entry/exit emotional markers build a reader profile. Book 2 suggested when emotional readiness matches content density.</p></div>
+</div>
+<div class="met">
+<div class="mc"><div class="v">+42%</div><div class="l">Discovery accuracy</div></div>
+<div class="mc"><div class="v">+28%</div><div class="l">Read-through rate</div></div>
+<div class="mc"><div class="v">1.8x</div><div class="l">Return visit frequency</div></div>
+</div>
+<div class="det"><h4>How It Works</h4><p>EOIS wraps every reading session in entry/exit emotional markers. Over time, these build a reader emotional profile that feeds the recommendation engine. Book 2 in a series is suggested not when "people also bought" but when the reader's emotional readiness matches the content density. The system tracks emotional trajectory across sessions, not just within a single book.</p></div>
+<div class="act"><div class="act-h">⚡ What This Activates For Your Brand</div><div class="act-g"><div class="act-c"><h5>System Effect</h5><p>Your catalog becomes emotionally indexed. Each title has an emotional entry point and exit promise. Readers find your books through need-state matching, not keyword search.</p></div><div class="act-c"><h5>Revenue Impact</h5><p>Higher discovery accuracy means lower acquisition cost per reader. Readers who find the right book first are 2.3x more likely to buy the second title within 30 days.</p></div></div><div class="tags"><span class="tag tag-g">All Brand Angles</span><span class="tag tag-p">Primary: Nervous System + Emotional Healing</span></div></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('contrast')">Next: Controlled Contrast →</button></div>
+</div>
 
-            <!-- Chapter 3: Your Role -->
-            <li class="sidebar-chapter">
-                <div class="sidebar-chapter-title">Chapter 3: Your Role</div>
-                <ul class="sidebar-section">
-                    <li><a class="sidebar-link" href="#section-10">Action Items</a></li>
-                </ul>
-            </li>
+<!-- CONTRAST -->
+<div class="tp" id="t-contrast">
+<div class="sys">
+<div class="sys-head"><div class="sys-icon" style="background:var(--al)">⚖️</div><div><span class="sys-tag" style="background:var(--al);color:var(--accent)">Pacing</span><h2 style="margin:4px 0 0">Controlled Contrast Engine</h2></div></div>
+<div class="sys-out">Intensity never spikes without recovery. Readers finish more books. +31% completion rate.</div>
+<div class="ba"><div class="ba-b bef"><div class="ba-l" style="color:var(--red)">Before V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">Chapter difficulty is random. Readers drop off at unexpected intensity spikes. Authors write intuitively, creating uneven emotional arcs that exhaust readers mid-book.</p></div><div class="ba-a">→</div><div class="ba-b aft"><div class="ba-l" style="color:var(--green)">After V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">Every chapter follows a tension-release arc calibrated by Ei. Hard chapters always followed by integration spaces. Emotional intensity mapped 1-10 per chapter. No two consecutive high-intensity chapters without recovery.</p></div></div>
+<div class="met"><div class="mc"><div class="v">+31%</div><div class="l">Completion rate</div></div><div class="mc"><div class="v">-45%</div><div class="l">Mid-book drop-off</div></div><div class="mc"><div class="v">+19%</div><div class="l">Reader satisfaction</div></div></div>
+<div class="det"><h4>How It Works</h4><p>The Contrast Engine maps emotional intensity per chapter using a 1-10 scale. It enforces a rule: no two consecutive high-intensity chapters without a recovery chapter between them. This is invisible to the reader but measurable in completion rates. For Emotional Healing content, the engine is even more conservative — maximum intensity of 7 in early chapters, escalating only after trust is established through at least 3 completed sessions.</p></div>
+<div class="act"><div class="act-h">⚡ What This Activates For Your Brand</div><div class="act-g"><div class="act-c"><h5>System Effect</h5><p>Your books become "finishable" by design. The pacing engine prevents the most common cause of abandoned self-help books: the intensity wall at chapter 4-5.</p></div><div class="act-c"><h5>Revenue Impact</h5><p>Finished books generate reviews. Reviews drive discovery. A 31% completion increase compounds into a 2.1x review rate, which feeds EOIS and Binge Loop.</p></div></div><div class="tags"><span class="tag tag-r">Critical: Emotional Healing</span><span class="tag tag-p">High: Nervous System</span></div></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('audio')">Next: Audiobook Dominance →</button></div>
+</div>
 
-            <!-- Chapter 4: Resources -->
-            <li class="sidebar-chapter">
-                <div class="sidebar-chapter-title">Chapter 4: Resources</div>
-                <ul class="sidebar-section">
-                    <li><a class="sidebar-link" href="#section-11">Resources</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+<!-- AUDIO -->
+<div class="tp" id="t-audio">
+<div class="sys">
+<div class="sys-head"><div class="sys-icon" style="background:var(--rl)">🎧</div><div><span class="sys-tag" style="background:var(--rl);color:var(--red)">Distribution</span><h2 style="margin:4px 0 0">Audiobook-First Distribution</h2></div></div>
+<div class="sys-out">Audiobook format reaches 40% of revenue within 12 months. 11 languages at launch.</div>
+<div class="ba"><div class="ba-b bef"><div class="ba-l" style="color:var(--red)">Before V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">Audiobook is an afterthought. Flat narration. No emotional pacing. One narrator fits all. Audio versions produced months after ebook, missing launch momentum.</p></div><div class="ba-a">→</div><div class="ba-b aft"><div class="ba-l" style="color:var(--green)">After V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">Narrator assignment matches brand angle voice. Pacing calibrated per chapter. Audio and ebook ship simultaneously. Google Play auto-narration in 6 languages + Findaway for 40+ platforms.</p></div></div>
+<div class="met"><div class="mc"><div class="v">40%</div><div class="l">Revenue share (12mo)</div></div><div class="mc"><div class="v">11</div><div class="l">Languages at launch</div></div><div class="mc"><div class="v">2.1x</div><div class="l">Audio listener spend</div></div></div>
+<div class="det"><h4>How It Works</h4><p>Each brand angle has a narrator profile: vocal warmth, pacing range, pause frequency, emphasis pattern. The audio pipeline matches narrators to brand angles before recording. A Nervous System brand and a Performance brand by the same author sound intentionally different. Distribution via Google Play Books auto-narration (free, 6 languages) and Findaway Voices reaches 40+ storefronts globally.</p></div>
+<div class="act"><div class="act-h">⚡ What This Activates For Your Brand</div><div class="act-g"><div class="act-c"><h5>System Effect</h5><p>Your audiobooks become a distinct product line. The narrator IS the brand voice. Tech/finance burnout professionals (your highest-spend persona) consume 78% of content via audio.</p></div><div class="act-c"><h5>Revenue Impact</h5><p>Audio listeners spend 2.1x more than ebook-only readers. Simultaneous launch captures the momentum window that delayed audio releases miss entirely.</p></div></div><div class="tags"><span class="tag tag-g">All Brand Angles</span><span class="tag tag-o">Highest ROI: Performance &amp; Focus</span></div></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('binge')">Next: Binge Loop →</button></div>
+</div>
 
-    <!-- Main Content -->
-    <main>
-        <!-- CHAPTER 1: OVERVIEW -->
+<!-- BINGE -->
+<div class="tp" id="t-binge">
+<div class="sys">
+<div class="sys-head"><div class="sys-icon" style="background:var(--bl)">🔄</div><div><span class="sys-tag" style="background:var(--bl);color:var(--blue)">Retention</span><h2 style="margin:4px 0 0">Binge Discovery Architecture</h2></div></div>
+<div class="sys-out">Average reader consumes 2.7 titles per quarter instead of 1.1.</div>
+<div class="ba"><div class="ba-b bef"><div class="ba-l" style="color:var(--red)">Before V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">Each book is a dead end. Reader finishes, leaves platform. No cross-title discovery. No emotional continuity between titles.</p></div><div class="ba-a">→</div><div class="ba-b aft"><div class="ba-l" style="color:var(--green)">After V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">End-of-book prompts link to the next emotional step, not just the next book. Cross-author chains keep readers in the ecosystem. EOIS data predicts what emotional outcome the reader wants next.</p></div></div>
+<div class="met"><div class="mc"><div class="v">2.7x</div><div class="l">Titles/quarter</div></div><div class="mc"><div class="v">-62%</div><div class="l">Post-book platform exit</div></div><div class="mc"><div class="v">+48%</div><div class="l">Cross-author discovery</div></div></div>
+<div class="det"><h4>How It Works</h4><p>The Binge Loop uses EOIS data to predict what emotional outcome the reader wants next. End-of-chapter and end-of-book prompt engineering creates discovery moments that feel organic: "If this chapter moved you, Book X by [different author] continues this exact thread." The system builds 3-book discovery chains from each title. Free Book 1 starters (priced at $0) create the entry point — 68% series read-through rate from free starters.</p></div>
+<div class="act"><div class="act-h">⚡ What This Activates For Your Brand</div><div class="act-g"><div class="act-c"><h5>System Effect</h5><p>Your catalog becomes a network, not a shelf. Each title leads to the next. Even a single-book brand benefits from the full ecosystem. Cross-author chains mean your readers discover other brands, and their readers discover you.</p></div><div class="act-c"><h5>Revenue Impact</h5><p>2.7x titles per quarter = 2.7x revenue per reader without increasing acquisition spend. Each new title creates discovery paths from every existing title. Compounds monthly.</p></div></div><div class="tags"><span class="tag tag-g">All Brand Angles</span><span class="tag tag-p">Strongest: Nervous System → Emotional Healing chains</span></div></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('social')">Next: Social Wiring →</button></div>
+</div>
 
-        <!-- Section 1: Executive Summary -->
-        <section id="section-1">
-            <h1>V3.2: Marketing Intelligence Systems</h1>
-            <p>V3.2 adds seven marketing intelligence systems to every book. Automatic. No new tools.</p>
+<!-- SOCIAL -->
+<div class="tp" id="t-social">
+<div class="sys">
+<div class="sys-head"><div class="sys-icon" style="background:var(--ol)">📢</div><div><span class="sys-tag" style="background:var(--ol);color:var(--orange)">Virality</span><h2 style="margin:4px 0 0">Social Sharing Intelligence</h2></div></div>
+<div class="sys-out">Organic sharing events per title increase 3x within first 90 days. 48 Social amplifies daily.</div>
+<div class="ba"><div class="ba-b bef"><div class="ba-l" style="color:var(--red)">Before V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">No sharing triggers. Reader independently decides to recommend. No quote cards, no discussion prompts, no referral mechanics.</p></div><div class="ba-a">→</div><div class="ba-b aft"><div class="ba-l" style="color:var(--green)">After V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">3-5 highest-resonance passages per book wrapped in shareable formats. Quote cards, audio clips, discussion prompts surfaced at peak emotional activation. 48 Social adds daily video across up to 48 platforms.</p></div></div>
+<div class="met"><div class="mc"><div class="v">3x</div><div class="l">Sharing events (90 days)</div></div><div class="mc"><div class="v">3.4x</div><div class="l">Referral rate (parents)</div></div><div class="mc"><div class="v">59M</div><div class="l">BookTok sales in 2024</div></div></div>
+<div class="det"><h4>How It Works</h4><p>Social Wiring identifies the 3-5 highest-resonance passages per book (measured by highlight density and emotional trajectory peaks) and wraps them in shareable formats. These are surfaced at the moment the reader is most emotionally activated. 48 Social extracts the most compelling passages and transforms them into 60-second videos — daily, across YouTube, TikTok, Facebook, Instagram, X. Each video is a micro-funnel driving directly to your book on Google Play or Audible.</p></div>
+<div class="act"><div class="act-h">⚡ What This Activates For Your Brand</div><div class="act-g"><div class="act-c"><h5>System Effect</h5><p>Your readers become your marketing team. Every share is a pre-qualified recommendation. 48 Social adds professional amplification: up to 48 platforms daily, 365 videos/year, at 4.8% revenue share. 100% organic-algorithmic. No paid ads.</p></div><div class="act-c"><h5>Revenue Impact</h5><p>Referral-acquired readers have 2.8x higher lifetime value than paid-acquisition readers. By month 6, hundreds of videos work for you simultaneously — permanent sales assets driving traffic 24/7.</p></div></div><div class="tags"><span class="tag tag-o">Strongest: Identity &amp; Direction</span><span class="tag tag-g">High: Emotional Healing</span></div></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('chaos')">Next: Chaos Slot →</button></div>
+</div>
 
-            <div class="card">
-                <h3>Audience & Scope</h3>
-                <p><strong>Who this is for:</strong> US-market brand administrators</p>
-                <p><strong>What it covers:</strong> The 7 V3.2 marketing intelligence systems added to every book</p>
-                <p><strong>How to use it:</strong> Read the overview first, then explore each system section</p>
-                <p><strong>Prerequisite:</strong> brand_onboarding_hub.html for general onboarding</p>
-            </div>
+<!-- CHAOS -->
+<div class="tp" id="t-chaos">
+<div class="sys">
+<div class="sys-head"><div class="sys-icon" style="background:var(--gol)">🎲</div><div><span class="sys-tag" style="background:var(--gol);color:var(--gold)">Engagement</span><h2 style="margin:4px 0 0">Chaos Slot Mechanic</h2></div></div>
+<div class="sys-out">+22% session time. Reduces predictability fatigue after book 3.</div>
+<div class="ba"><div class="ba-b bef"><div class="ba-l" style="color:var(--red)">Before V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">Every chapter follows the same template. Reader knows exactly what to expect. Completion drops after book 3 because the format becomes predictable.</p></div><div class="ba-a">→</div><div class="ba-b aft"><div class="ba-l" style="color:var(--green)">After V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">5-8% of content space reserved for non-linear inserts: meditations from different traditions, scientific studies that reframe the chapter, creative exercises that break format. Frequency tuned by Ei based on engagement curves.</p></div></div>
+<div class="met"><div class="mc"><div class="v">+22%</div><div class="l">Session time</div></div><div class="mc"><div class="v">-38%</div><div class="l">Predictability fatigue</div></div><div class="mc"><div class="v">5-8%</div><div class="l">Content space reserved</div></div></div>
+<div class="det"><h4>How It Works</h4><p>The Chaos Slot reserves 5-8% of content space for non-linear inserts. These might be: a meditation from a different tradition, a scientific study that reframes the chapter, a creative exercise that breaks format. The surprise is controlled — it never disrupts the emotional arc, only enriches it. Readers who reach book 4 or 5 still encounter surprise.</p></div>
+<div class="act"><div class="act-h">⚡ What This Activates For Your Brand</div><div class="act-g"><div class="act-c"><h5>System Effect</h5><p>Your books feel alive. The Chaos Slot prevents "series fatigue" that kills most self-help catalogs after the first trilogy. Longer sessions trigger more Binge Loop and Social Wiring events.</p></div><div class="act-c"><h5>Revenue Impact</h5><p>22% longer sessions compound across the catalog. The Chaos Slot is the engagement multiplier that feeds every other system. Surprise moments also generate the highest share rates in Social Wiring.</p></div></div><div class="tags"><span class="tag tag-o">Strongest: Performance &amp; Focus</span><span class="tag tag-p">High: Spiritual Awakening</span></div></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('transform')">Next: Transformation Promise →</button></div>
+</div>
 
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-value">7</div>
-                    <div class="metric-label">New Systems</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">20</div>
-                    <div class="metric-label">QA Checks</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">0</div>
-                    <div class="metric-label">New Tools</div>
-                </div>
-            </div>
-        </section>
+<!-- TRANSFORM -->
+<div class="tp" id="t-transform">
+<div class="sys">
+<div class="sys-head"><div class="sys-icon" style="background:var(--al)">✨</div><div><span class="sys-tag" style="background:var(--al);color:var(--ad)">Conversion</span><h2 style="margin:4px 0 0">Transformation Promise Framework</h2></div></div>
+<div class="sys-out">+35% pre-purchase conversion when the transformation promise matches the reader's stated need.</div>
+<div class="ba"><div class="ba-b bef"><div class="ba-l" style="color:var(--red)">Before V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">Book description is a feature list. "12 chapters on mindfulness." No outcome framing. Reader must guess whether this book solves their problem.</p></div><div class="ba-a">→</div><div class="ba-b aft"><div class="ba-l" style="color:var(--green)">After V3.2</div><p style="font-size:.8rem;color:var(--muted);margin:0">Every listing leads with the transformation: "After this book, you will..." One outcome verb cascades through every touchpoint: listing, preview, ad copy, email, social media cards.</p></div></div>
+<div class="met"><div class="mc"><div class="v">+35%</div><div class="l">Pre-purchase conversion</div></div><div class="mc"><div class="v">+52%</div><div class="l">Listing click-through</div></div><div class="mc"><div class="v">5</div><div class="l">Outcome verbs</div></div></div>
+<div class="det"><h4>The Five Outcome Verbs</h4><p><strong>Nervous System</strong> = "regulate" · <strong>Identity &amp; Direction</strong> = "discover" · <strong>Emotional Healing</strong> = "release" · <strong>Performance &amp; Focus</strong> = "build" · <strong>Spiritual Awakening</strong> = "remember"</p><p style="margin-top:8px">This verb cascades through every piece of copy: book listing, preview text, email subject lines, social media cards, ad copy, and in-book prompts. The outcome verb in reviews becomes free, permanent SEO content.</p></div>
+<div class="act"><div class="act-h">⚡ What This Activates For Your Brand</div><div class="act-g"><div class="act-c"><h5>System Effect</h5><p>Your brand makes a clear promise before purchase. Readers know what they're getting. This reduces returns, increases satisfaction, and generates reviews that echo the outcome verb — creating a virtuous cycle with EOIS.</p></div><div class="act-c"><h5>Revenue Impact</h5><p>35% conversion lift on every listing across every platform. On a 200-title catalog, this is the difference between $10.8K and $14.6K monthly revenue. The outcome verb in reviews = free permanent SEO.</p></div></div><div class="tags"><span class="tag tag-g">All Brand Angles</span><span class="tag tag-r">Highest Lift: Emotional Healing + Nervous System</span></div></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('dash')">Next: Dashboard →</button></div>
+</div>
 
-        <!-- Section 2: What Changed -->
-        <section id="section-2">
-            <h2>What Changed</h2>
+<!-- DASHBOARD -->
+<div class="tp" id="t-dash">
+<div class="sl">Quick Reference</div>
+<h2>System Impact Dashboard</h2>
+<p class="desc">Every system's primary metric at a glance. Click any system tab to see the full breakdown.</p>
+<div class="ssg">
+<div class="ss" style="cursor:pointer" onclick="go('eois')"><div class="big" style="color:var(--green)">+42%</div><div class="lbl">EOIS — Discovery</div></div>
+<div class="ss" style="cursor:pointer" onclick="go('contrast')"><div class="big" style="color:var(--accent)">+31%</div><div class="lbl">Contrast — Completion</div></div>
+<div class="ss" style="cursor:pointer" onclick="go('audio')"><div class="big" style="color:var(--red)">40%</div><div class="lbl">Audio — Revenue Share</div></div>
+</div>
+<div class="ssg">
+<div class="ss" style="cursor:pointer" onclick="go('binge')"><div class="big" style="color:var(--blue)">2.7x</div><div class="lbl">Binge — Titles/Quarter</div></div>
+<div class="ss" style="cursor:pointer" onclick="go('social')"><div class="big" style="color:var(--orange)">3x</div><div class="lbl">Social — Sharing</div></div>
+<div class="ss" style="cursor:pointer" onclick="go('chaos')"><div class="big" style="color:var(--gold)">+22%</div><div class="lbl">Chaos — Session Time</div></div>
+</div>
+<div class="ssg">
+<div class="ss" style="cursor:pointer" onclick="go('transform')"><div class="big" style="color:var(--ad)">+35%</div><div class="lbl">Transform — Conversion</div></div>
+<div class="ss"><div class="big" style="color:var(--text)">$10.8–18.7K</div><div class="lbl">Month 12 Platform Revenue</div></div>
+<div class="ss"><div class="big" style="color:var(--text)">$850–3.4K</div><div class="lbl">Month 12 Social Boost</div></div>
+</div>
+<p style="margin-top:24px;text-align:center"><a class="back" href="brand_onboarding_hub.html">← Back to Brand Onboarding Hub</a></p>
+</div>
 
-            <div class="comparison-grid">
-                <div class="card comparison-card old">
-                    <h3>V3.1</h3>
-                    <ul>
-                        <li>Single emotion tracking</li>
-                        <li>Basic contrast levels</li>
-                        <li>Manual audio notes</li>
-                        <li>Platform-agnostic copy</li>
-                        <li>Static social templates</li>
-                        <li>No loop metrics</li>
-                    </ul>
-                </div>
-                <div class="card comparison-card new accent-border">
-                    <h3>V3.2</h3>
-                    <ul>
-                        <li>Multi-dimensional emotional scoring</li>
-                        <li>4-level contrast framework</li>
-                        <li>Audiobook dominance layer</li>
-                        <li>Platform-specific wiring</li>
-                        <li>23+ social asset templates</li>
-                        <li>Binge loop engineering</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+</div>
+<div class="foot"><h2>Pearl Prime</h2><p>Publishing spiritual wisdom for the next generation.</p></div>
 
-        <!-- CHAPTER 2: THE SEVEN SYSTEMS -->
-
-        <!-- Chapter 2 Intro -->
-        <section>
-            <div class="card">
-                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">Now that you understand what changed in V3.2, the next section breaks down each of the seven systems you'll be working with.</p>
-            </div>
-        </section>
-
-        <!-- Section 3: EOIS -->
-        <section id="section-3">
-            <h2>EOIS: Emotional Outcome Intensity Score</h2>
-            <p>Measure the emotional intensity of your book across three dimensions. Minimum composite score: 10/15.</p>
-            <p>As a brand admin, you'll use EOIS scores to verify emotional depth meets your brand's ceiling before publication.</p>
-
-            <div class="gauge-container">
-                <div class="gauge-item">
-                    <div class="gauge-label">
-                        <span>Relief</span>
-                        <span>5/5</span>
-                    </div>
-                    <div class="gauge-bar">
-                        <div class="gauge-fill" style="width: 100%;">
-                            <span class="gauge-text">Full</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gauge-item">
-                    <div class="gauge-label">
-                        <span>Urgency</span>
-                        <span>3/5</span>
-                    </div>
-                    <div class="gauge-bar">
-                        <div class="gauge-fill" style="width: 60%;">
-                            <span class="gauge-text">Moderate</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gauge-item">
-                    <div class="gauge-label">
-                        <span>Identity Shift</span>
-                        <span>4/5</span>
-                    </div>
-                    <div class="gauge-bar">
-                        <div class="gauge-fill" style="width: 80%;">
-                            <span class="gauge-text">Strong</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4: Controlled Contrast -->
-        <section id="section-4">
-            <h2>Controlled Contrast</h2>
-            <p>Four levels of emotional and narrative contrast. L4 (maximum) is reserved for critical moments.</p>
-            <p>Your brand has a defined contrast permission level — check submissions against this before approval.</p>
-
-            <div class="contrast-scale">
-                <div class="contrast-level l4">
-                    <div class="contrast-name">L4: Maximum</div>
-                    <div class="contrast-description">Extreme reversal, peak revelation, emotional breaking point</div>
-                </div>
-                <div class="contrast-level l3">
-                    <div class="contrast-name">L3: Sharp</div>
-                    <div class="contrast-description">Clear emotional shift, significant narrative turn</div>
-                </div>
-                <div class="contrast-level l2">
-                    <div class="contrast-name">L2: Clear</div>
-                    <div class="contrast-description">Noticeable contrast, supports narrative flow</div>
-                </div>
-                <div class="contrast-level l1">
-                    <div class="contrast-name">L1: Warm</div>
-                    <div class="contrast-description">Subtle variation, maintains baseline emotional state</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 5: Audiobook Dominance Layer -->
-        <section id="section-5">
-            <h2>Audiobook Dominance Layer</h2>
-            <p>Optimize every book for the listening experience. Voice, pacing, and emotional tone are engineered for audio consumption.</p>
-            <p>Every book ships with audio-first optimization — your role is to confirm the listening moment matches your brand's audience.</p>
-
-            <div class="flow-diagram">
-                <div class="flow-node">Listener Moment</div>
-                <div class="flow-node">Voice Tone</div>
-                <div class="flow-node">Somatic Markers</div>
-                <div class="flow-node">Platform Copy</div>
-            </div>
-
-            <div class="card">
-                <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Key Components</h3>
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.75rem;"><strong>listening_moment:</strong> Time of day and context (morning commute, evening wind-down, workout)</li>
-                    <li style="margin-bottom: 0.75rem;"><strong>voice_emotional_tone:</strong> Speaker intent and resonance</li>
-                    <li style="margin-bottom: 0.75rem;"><strong>somatic_pacing:</strong> Breath, cadence, emotional rhythm</li>
-                    <li style="margin-bottom: 0.75rem;"><strong>platform_descriptions:</strong> Google Play, Amazon KDP, Apple Books, Audible, Spotify</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 6: Binge Loop Engineering -->
-        <section id="section-6">
-            <h2>Binge Loop Engineering</h2>
-            <p>Create unstoppable momentum. Unresolved hooks, identity arcs, and binge pull copy keep listeners engaged.</p>
-            <p>Series momentum directly impacts reorder rates — verify hooks and arcs connect across your brand's catalog.</p>
-
-            <div class="cycle-diagram">
-                <div class="cycle-node">Hook</div>
-                <div class="cycle-node">Arc</div>
-                <div class="cycle-node">Pull</div>
-            </div>
-
-            <div class="card">
-                <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">The Three Stages</h3>
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.75rem;"><strong>Unresolved Hooks:</strong> Questions that demand answers. Curiosity gaps that pull the listener forward.</li>
-                    <li style="margin-bottom: 0.75rem;"><strong>Identity Arcs:</strong> The listener sees themselves transformed. Small wins build momentum.</li>
-                    <li style="margin-bottom: 0.75rem;"><strong>Binge Pull Copy:</strong> "What happens next?" Copy that appears in social, ads, and episode descriptions.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 7: Social Platform Wiring -->
-        <section id="section-7">
-            <h2>Social Platform Wiring</h2>
-            <p>Every book generates 23 pre-written social assets across 4 platforms.</p>
-            <p>These 23 assets auto-generate per book — review them for brand fit before distribution.</p>
-
-            <div class="bar-chart">
-                <div class="bar-item">
-                    <div class="bar-label">
-                        <span>YouTube Hooks</span>
-                        <span>5</span>
-                    </div>
-                    <div class="bar-fill" style="width: 100%;">5</div>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar-label">
-                        <span>Pinterest Titles</span>
-                        <span>10</span>
-                    </div>
-                    <div class="bar-fill" style="width: 100%;">10</div>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar-label">
-                        <span>Viral Phrases</span>
-                        <span>3</span>
-                    </div>
-                    <div class="bar-fill" style="width: 100%;">3</div>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar-label">
-                        <span>Quote Cards</span>
-                        <span>5</span>
-                    </div>
-                    <div class="bar-fill" style="width: 100%;">5</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 8: Chaos Slot -->
-        <section id="section-8">
-            <h2>Chaos Slot</h2>
-            <p>Controlled unpredictability. 5–10% of content embraces surprise, breaking patterns without breaking trust.</p>
-            <p>The chaos allocation is automatic — your job is to ensure it stays within the 5–10% band for your brand.</p>
-
-            <div class="chaos-grid">
-                <div class="chaos-card">
-                    <div class="chaos-icon">✧</div>
-                    <div class="chaos-type">Unexpected Metaphor</div>
-                    <div class="chaos-description">Counterintuitive comparison that reframes understanding</div>
-                </div>
-                <div class="chaos-card">
-                    <div class="chaos-icon">⁂</div>
-                    <div class="chaos-type">Format Break</div>
-                    <div class="chaos-description">Departure from chapter structure or pacing norm</div>
-                </div>
-                <div class="chaos-card">
-                    <div class="chaos-icon">◆</div>
-                    <div class="chaos-type">Emotional Pivot</div>
-                    <div class="chaos-description">Sudden tonal shift that resets listener expectations</div>
-                </div>
-                <div class="chaos-card">
-                    <div class="chaos-icon">∴</div>
-                    <div class="chaos-type">Sensory Surprise</div>
-                    <div class="chaos-description">Unexpected sound design or vocal technique</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 9: Transformation Promise -->
-        <section id="section-9">
-            <h2>Transformation Promise</h2>
-            <p>Every book delivers one clear promise. What does the listener feel 10 minutes after pressing play?</p>
-            <p>This is the single most important quality check — if the promise isn't clear and specific, the book doesn't ship.</p>
-
-            <div class="promise-callout">
-                <div class="promise-text">
-                    10 minutes after pressing play, the listener will feel <span class="promise-template">[specific emotional state or realization]</span>.
-                </div>
-            </div>
-
-            <div class="card">
-                <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Example Promises</h3>
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.5rem;">• Less alone in their struggle</li>
-                    <li style="margin-bottom: 0.5rem;">• Clear about their next step</li>
-                    <li style="margin-bottom: 0.5rem;">• Excited about a new possibility</li>
-                    <li style="margin-bottom: 0.5rem;">• Validated in their experience</li>
-                    <li style="margin-bottom: 0.5rem;">• Energized to take action</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Chapter 2 Summary Table -->
-        <section>
-            <h2>Seven Systems Reference</h2>
-            <div class="card">
-                <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
-                    <thead>
-                        <tr style="border-bottom: 2px solid var(--border-color);">
-                            <th style="text-align: left; padding: 1rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em;">System Name</th>
-                            <th style="text-align: left; padding: 1rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em;">Purpose</th>
-                            <th style="text-align: left; padding: 1rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em;">Key Metric</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <td style="padding: 1rem; color: var(--text-primary);">EOIS</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Emotional resonance scoring</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Composite ≥ 10/15</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <td style="padding: 1rem; color: var(--text-primary);">Controlled Contrast</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Tension calibration</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Level 1–4 per brand</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <td style="padding: 1rem; color: var(--text-primary);">Audiobook Dominance</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Listening experience</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Voice + moment assigned</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <td style="padding: 1rem; color: var(--text-primary);">Binge Loop</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Series engagement</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Hooks + identity arc</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <td style="padding: 1rem; color: var(--text-primary);">Social Wiring</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Platform distribution</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">5+10+3+5 assets</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <td style="padding: 1rem; color: var(--text-primary);">Chaos Slot</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Controlled unpredictability</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">5–10% allocation</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 1rem; color: var(--text-primary);">Transformation Promise</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Outcome clarity</td>
-                            <td style="padding: 1rem; color: var(--text-primary);">Quality ≥ 3/5</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- CHAPTER 3: YOUR ROLE -->
-
-        <!-- Chapter 3 Intro -->
-        <section>
-            <div class="card">
-                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0;">With all seven systems understood, here's what you need to do as a brand admin.</p>
-            </div>
-        </section>
-
-        <!-- Section 10: Action Items -->
-        <section id="section-10">
-            <h2>Action Items</h2>
-            <p>Complete these checks before your next book submission.</p>
-
-            <ul class="checklist">
-                <li class="checklist-item" data-item="0">
-                    <div class="checklist-checkbox"></div>
-                    <div class="checklist-text">Review your brand's EOIS ceilings</div>
-                </li>
-                <li class="checklist-item" data-item="1">
-                    <div class="checklist-checkbox"></div>
-                    <div class="checklist-text">Check contrast level permissions</div>
-                </li>
-                <li class="checklist-item" data-item="2">
-                    <div class="checklist-checkbox"></div>
-                    <div class="checklist-text">Listen to a sample with audiobook dominance tags</div>
-                </li>
-                <li class="checklist-item" data-item="3">
-                    <div class="checklist-checkbox"></div>
-                    <div class="checklist-text">Review social assets for brand fit</div>
-                </li>
-                <li class="checklist-item" data-item="4">
-                    <div class="checklist-checkbox"></div>
-                    <div class="checklist-text">Confirm transformation promise language</div>
-                </li>
-            </ul>
-        </section>
-
-        <!-- CHAPTER 4: RESOURCES -->
-
-        <!-- Section 11: Resources -->
-        <section id="section-11">
-            <h2>Resources & Support</h2>
-            <p>Additional documentation and support channels.</p>
-
-            <div class="resources-grid">
-                <a href="brand_onboarding_hub.html" class="resource-link">
-                    <div class="resource-icon">📖</div>
-                    <div class="resource-title">Brand Onboarding Hub</div>
-                    <div class="resource-description">Start here — framework overview, brand directory, and canonical package</div>
-                </a>
-                <a href="brand_onboarding_hub.html" class="resource-link">
-                    <div class="resource-icon">🎯</div>
-                    <div class="resource-title">Brand Onboarding Hub</div>
-                    <div class="resource-description">Get started with your brand profile</div>
-                </a>
-                <a href="jp_brand_admin_v32_briefing.html" class="resource-link">
-                    <div class="resource-icon">🌍</div>
-                    <div class="resource-title">JP Brand Admin Briefing</div>
-                    <div class="resource-description">V3.2 systems for Japan-market administrators</div>
-                </a>
-                <a href="writer_v32_quick_reference.html" class="resource-link">
-                    <div class="resource-icon">✍️</div>
-                    <div class="resource-title">Writer Quick Reference</div>
-                    <div class="resource-description">Quick lookup guide for writers implementing V3.2</div>
-                </a>
-            </div>
-
-            <div class="contact-card">
-                <div class="contact-label">Questions?</div>
-                <div class="contact-info">Maat</div>
-                <div class="contact-info"><a href="mailto:hello@48social.com" style="color: var(--accent); text-decoration: none;">hello@48social.com</a></div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="page-footer">
-        <p style="font-size: 0.875rem; color: var(--text-secondary);">Phoenix Omega — US Brand Admin V3.2 Briefing | Last updated: March 2026</p>
-        <p style="font-size: 0.8125rem; color: var(--text-tertiary); margin-top: 0.5rem;">Part of the canonical brand-admin package. Questions? <a href="mailto:hello@48social.com" style="color: var(--accent); text-decoration: none;">hello@48social.com</a></p>
-    </footer>
-
-    <script>
-        document.documentElement.classList.add('js-enhanced');
-
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const sidebar = document.getElementById('sidebar');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenuBtn.classList.toggle('active');
-            sidebar.classList.toggle('open');
-        });
-
-        // Close sidebar when a link is clicked
-        const sidebarLinks = document.querySelectorAll('.sidebar-link');
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('open');
-                    mobileMenuBtn.classList.remove('active');
-                }
-            });
-        });
-
-        // Sidebar Active State
-        function updateActiveLink() {
-            const sections = document.querySelectorAll('section[id]');
-            const scrollPosition = window.scrollY + 150;
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    sidebarLinks.forEach(link => {
-                        link.classList.remove('active');
-                    });
-
-                    const activeLink = document.querySelector(`.sidebar-link[href="#${section.id}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('active');
-                    }
-                }
-            });
-        }
-
-        window.addEventListener('scroll', updateActiveLink);
-
-        // IntersectionObserver for Fade-In Animation
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        // Checklist Functionality
-        const checklistItems = document.querySelectorAll('.checklist-item');
-        checklistItems.forEach(item => {
-            item.addEventListener('click', () => {
-                item.classList.toggle('checked');
-            });
-        });
-
-        // Smooth Scroll for Sidebar Links
-        const sidebarNavLinks = document.querySelectorAll('.sidebar-link');
-        sidebarNavLinks.forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-
-                if (targetSection) {
-                    const offsetTop = targetSection.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', e => {
-            if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                sidebar.classList.remove('open');
-                mobileMenuBtn.classList.remove('active');
-            }
-        });
-    </script>
+<script>
+function go(id){
+document.querySelectorAll('.tp').forEach(function(p){p.classList.remove('on')});
+document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on')});
+document.getElementById('t-'+id).classList.add('on');
+var tabs=['overview','eois','contrast','audio','binge','social','chaos','transform','dash'];
+var idx=tabs.indexOf(id);
+var btns=document.querySelectorAll('.tb');
+if(idx>=0&&btns[idx])btns[idx].classList.add('on');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
 </body>
 </html>
