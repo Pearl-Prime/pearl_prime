@@ -54,6 +54,8 @@ These run in parallel; the twist may land before or after somatic release.
 
 ### Revenue Tier Assignment
 
+**[provisional internal SAM estimate]** — The **Revenue Est. (US Annual)** column is **not** comparable to publisher receipt totals or listener-incidence figures without a documented segmentation model. Per `artifacts/research/citations/RCG-001_revenue_estimates.md`, industry anchors (US audiobook receipts, listener incidence, adult population denominator) are cited in **## References** at the end of this document; persona dollar bands remain internal planning estimates until a syndicated SAM or published methodology is added. **Niche workforce counts** in this table (e.g. $3.4M / $2.5M) are **not** covered by Batch 1 — treat as internal placeholders unless a separate citation is added.
+
 | Tier | Persona ID | Display Name | Revenue Est. (US Annual) | Atom Status |
 |------|-----------|--------------|-------------------------|-------------|
 | **1** | `millennial_women_professionals` | Millennial Women Professionals | $130–165M | **NEW — No atoms** |
@@ -1992,3 +1994,15 @@ somatic_healing:
 12. Publish remaining titles to reach 1,008
 13. Launch bundle compilations and companion products
 14. Seasonal titles for Q4 (holiday stress, relationship anxiety)
+
+---
+
+## References
+
+Industry anchors for audiobook market scale and listener incidence (persona revenue bands remain **provisional internal SAM** per RCG-001):
+
+1. Audio Publishers Association — Sales & Consumer Data (accessed 2026-03-30). https://www.audiopub.org/surveys
+2. Audio Publishers Association — Research FAQ (accessed 2026-03-30). https://www.audiopub.org/research-faq
+3. U.S. Census Bureau — SCPRC-EST2024-18+POP (18+ resident population; PDF mirror cited in RCG-001). https://files.hawaii.gov/dbedt/census/popestimate/2024/state-pop/SCPRC-EST2024-18+POP.pdf
+
+Full rationale: `artifacts/research/citations/RCG-001_revenue_estimates.md`.

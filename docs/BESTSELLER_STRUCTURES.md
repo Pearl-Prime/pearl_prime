@@ -47,7 +47,7 @@ The THREAD slot carries different narrative weight depending on structure. See i
 ### 1. Promise Engine
 
 **One-line description:**  
-Establishes a specific, measurable outcome and proves it's possible by walking the reader through the mechanism.
+Establishes a specific, measurable outcome and proves it's possible by walking the reader through the mechanism. **Exemplar:** *Atomic Habits* [1]; compare also *The Power of Now* [2].
 
 **Beat order:**  
 1. Open with a relatable void (what the reader lacks)
@@ -70,7 +70,7 @@ Establishes a specific, measurable outcome and proves it's possible by walking t
 - THREAD: Quiet orientation ("Next, we build on this foundation...")
 
 **What it does for the reader:**  
-Creates a cognitive contract. The reader sees the logic, trusts the path, and enters a state of hope. This is the structure of *Atomic Habits* openings and *The Power of Now* promise sequences.
+Creates a cognitive contract. The reader sees the logic, trusts the path, and enters a state of hope. This is the structure of *Atomic Habits* [1] openings and *The Power of Now* [2] promise sequences.
 
 **Key constraint:**  
 The mechanism must be believable and explainable in 1–2 minutes of narration. If the mechanism requires heavy explanation, break it across two chapters using this structure twice.
@@ -79,14 +79,14 @@ The mechanism must be believable and explainable in 1–2 minutes of narration. 
 Early-middle (chapters 4–8). Readers have been primed by opening chapters and are ready to learn the core system.
 
 **Short example:**  
-"You're tired. Not just physically, but spiritually. There's a gap between who you are and who you want to be, and nobody's ever really named it. But that gap isn't a character flaw—it's a signal. Your nervous system is trying to tell you something. And here's what I've learned: when you learn to listen to that signal, everything changes. Not in a magical way. In a neurological way. Your amygdala stops running the show. You get your prefrontal cortex back online. And from there, you can build the life you want. Let me show you how."
+"You're tired. Not just physically, but spiritually. There's a gap between who you are and who you want to be, and nobody's ever really named it. But that gap isn't a character flaw—it's a signal. Your nervous system is trying to tell you something. And here's what I've learned: when you learn to listen to that signal, everything changes. Not in a magical way. In a grounded way. Research on emotion regulation often implicates **prefrontal–limbic interactions** (a sketch, not a literal switch for every listener) [19]. If you prefer plain language: the alarm can quiet enough that planning and perspective come back. And from there, you can build the life you want. Let me show you how."
 
 ---
 
 ### 2. Gladwell Spiral
 
 **One-line description:**  
-Opens small with a specific human moment, spirals outward to reveal patterns and context, then spirals back inward to the reader's life.
+Opens small with a specific human moment, spirals outward to reveal patterns and context, then spirals back inward to the reader's life. **Exemplar:** *The Tipping Point* [3].
 
 **Beat order:**  
 1. Begin with a concrete scene (specific person, place, time)
@@ -116,14 +116,14 @@ The opening scene must be truly specific and sensory. Generic scenes kill this s
 Opening (chapters 1–3). Sets the immersive, narrative tone that makes readers stay with the audiobook.
 
 **Short example:**  
-"It was 6 a.m. on a Tuesday, and Marcus was already at his desk, three unread messages on his phone, his chest tight. He'd gone to bed at 11. He'd woken at 3. He couldn't turn it off. And he's not alone. In the last decade, sleep complaints have risen 40 percent. But here's what's strange: people are sleeping more, not less. The problem isn't sleep. It's what we're activating in the hours before sleep..."
+"It was 6 a.m. on a Tuesday, and Marcus was already at his desk, three unread messages on his phone, his chest tight. He'd gone to bed at 11. He'd woken at 3. He couldn't turn it off. And he's not alone. National health surveys find substantial sleep difficulty among US adults—for example, **14.5%** trouble falling asleep (2020 NHIS) [11], and peer-reviewed work reports rising **short sleep** among working adults 2010–2018 [12] (constructs differ; do not equate to a single headline percent). But here's what's strange: people are sleeping more, not less. The problem isn't sleep. It's what we're activating in the hours before sleep..."
 
 ---
 
 ### 3. Van der Kolk
 
 **One-line description:**  
-Names a somatic experience the reader has felt but couldn't articulate, validates it as real, then explains the neurobiology beneath it.
+Names a somatic experience the reader has felt but couldn't articulate, validates it as real, then explains the neurobiology beneath it. **Exemplar:** *The Body Keeps the Score* [4].
 
 **Beat order:**  
 1. Describe a physical sensation or felt experience without explaining it
@@ -159,7 +159,7 @@ Opening (chapters 1–3). Best used early because it establishes safety and cred
 ### 4. Atomic
 
 **One-line description:**  
-Isolates a single, microscopic behavior change and explains why it catalyzes larger shifts.
+Isolates a single, microscopic behavior change and explains why it catalyzes larger shifts. **Exemplar:** *Atomic Habits* [1].
 
 **Beat order:**  
 1. Show a problem (stated without drama)
@@ -187,14 +187,14 @@ The atomic unit must be real and testable. It can't be vague ("be more present")
 Late-middle (chapters 15–20). By this point, readers are ready to execute small, specific actions.
 
 **Short example:**  
-"You don't need a new personality. You need one new sentence. Instead of 'I can't do this,' what if you said, 'I can't do this yet'? That one word—yet—changes your neural pathway from fixed to growth. One word. Not a mindset overhaul. Not a 30-day challenge. One word, said out loud, three times today."
+"You don't need a new personality. You need one new sentence. Instead of 'I can't do this,' what if you said, 'I can't do this yet'? That one word—yet—changes your framing from fixed to growth [1]. One word. Not a mindset overhaul. Not a 30-day challenge. One word, said out loud, three times today."
 
 ---
 
 ### 5. Brené Brown
 
 **One-line description:**  
-The author reveals a personal vulnerability or failure, explores the shame or fear beneath it, then shows how moving through shame creates connection and courage.
+The author reveals a personal vulnerability or failure, explores the shame or fear beneath it, then shows how moving through shame creates connection and courage. **Exemplar:** *Daring Greatly* [5]; see also *The Gifts of Imperfection* [8].
 
 **Beat order:**  
 1. Describe a moment of shame or failure (specific, not abstract)
@@ -226,14 +226,14 @@ The vulnerability must be genuine and proportional. Too mild and it lands as fal
 Late-middle (chapters 15–20). By this point, the author has earned credibility and the reader is ready for intimacy.
 
 **Short example:**  
-"I lied to my kids. Not a big lie. A small lie. I told them I didn't eat the ice cream I was hiding in the freezer. And I felt ashamed. Because I'm supposed to model integrity. And I realized I'd been modeling integrity in public and secrecy in private. And the cost of that split wasn't just the ice cream. It was the part of me I was hiding. So I told them the truth. And do you know what happened? They didn't think less of me. They thought I was brave for telling the truth. And I realized: my mess is my message."
+"I lied to my kids. Not a big lie. A small lie. I told them I didn't eat the ice cream I was hiding in the freezer. And I felt ashamed. Because I'm supposed to model integrity. And I realized I'd been modeling integrity in public and secrecy in private. And the cost of that split wasn't just the ice cream. It was the part of me I was hiding. So I told them the truth. And do you know what happened? They didn't think less of me. They thought I was brave for telling the truth. And I realized: my mess is my message." *(Voice shaped after Brené Brown–style vulnerability arcs; see [5].)*
 
 ---
 
 ### 6. Myth-Killer
 
 **One-line description:**  
-Identifies a widespread belief or assumption that readers likely hold, proves it wrong with evidence, then offers a better framework.
+Identifies a widespread belief or assumption that readers likely hold, proves it wrong with evidence, then offers a better framework. **Exemplar:** *Don't Believe Everything You Think* [6].
 
 **Beat order:**  
 1. State the myth (the common belief)
@@ -262,14 +262,14 @@ The evidence must be undeniable. If readers can dismiss it, the whole structure 
 Early-middle (chapters 4–8). Readers are primed by opening chapters to question their assumptions.
 
 **Short example:**  
-"Everyone says willpower is the problem. You're not disciplined enough. But here's what neuroscience actually shows: willpower is a limited resource. The more you rely on it, the weaker it gets. So discipline isn't the issue. Design is. Instead of asking 'Why can't I stick with this?' ask 'What would I have to change about my environment for this to be irresistible?' That's where actual change lives."
+"Everyone says willpower is the problem. You're not disciplined enough. Psychologists once widely taught that willpower **depletes** with use [13], but large registered replication efforts found **small, contested** pooled effects [15][17]—treat this as **unsettled science**, not a settled brain fact. So discipline framing alone may miss the point. Design is. Instead of asking 'Why can't I stick with this?' ask 'What would I have to change about my environment for this to be irresistible?' That's where actual change lives."
 
 ---
 
 ### 7. Case File
 
 **One-line description:**  
-Follows a real person's journey through a problem to a resolution, layering pattern and teaching into the narrative.
+Follows a real person's journey through a problem to a resolution, layering pattern and teaching into the narrative. **Exemplar pattern:** habit-change case narratives as in *Atomic Habits* [1].
 
 **Beat order:**  
 1. Introduce the person and their problem
@@ -305,7 +305,7 @@ Early-middle (chapters 4–8) or Late-middle (chapters 15–20). Works anywhere 
 ### 8. Permission Slip
 
 **One-line description:**  
-Identifies a belief or behavior the reader wants permission to have or do, then explicitly grants that permission and explains why it's not selfish or wrong.
+Identifies a belief or behavior the reader wants permission to have or do, then explicitly grants that permission and explains why it's not selfish or wrong. **Exemplar:** *Set Boundaries, Find Peace* [7].
 
 **Beat order:**  
 1. Name the permission the reader secretly wants
@@ -342,7 +342,7 @@ Mid-book (chapters 9–14). By this point, readers trust the author enough to be
 ### 9. Zoom Lens
 
 **One-line description:**  
-Shifts the reader's perspective scale, moving from macro to micro or micro to macro to reveal hidden patterns or larger significance.
+Shifts the reader's perspective scale, moving from macro to micro or micro to macro to reveal hidden patterns or larger significance. **Exemplar:** *The Gifts of Imperfection* [8].
 
 **Beat order:**  
 1. Establish one scale (either very small or very large)
@@ -379,7 +379,7 @@ Opening (chapters 1–3) or Closing (chapters 21–24). In opening, it establish
 ### 10. Contrast Engine
 
 **One-line description:**  
-Shows a before-and-after state or comparison between two ways of being, using the contrast itself as the teaching mechanism.
+Shows a before-and-after state or comparison between two ways of being, using the contrast itself as the teaching mechanism. **Exemplar:** *The 7 Habits of Highly Effective People* [9].
 
 **Beat order:**  
 1. Describe state A (the old way, the struggle)
@@ -416,7 +416,7 @@ Mid-book (chapters 9–14). Readers have learned enough to understand what trans
 ### 11. Ancestor
 
 **One-line description:**  
-Connects the reader's current situation to a lineage (family pattern, cultural pattern, historical pattern), showing how understanding inheritance creates choice.
+Connects the reader's current situation to a lineage (family pattern, cultural pattern, historical pattern), showing how understanding inheritance creates choice. **Exemplar:** *The Body Keeps the Score* [4].
 
 **Beat order:**  
 1. Name a pattern the reader recognizes in themselves
@@ -454,7 +454,7 @@ Mid-book (chapters 9–14). By this point, readers have context and are ready fo
 ### 12. The Letter
 
 **One-line description:**  
-Addresses the reader directly in an intimate, formal letter structure, reflecting on the journey and honoring what the reader has undertaken.
+Addresses the reader directly in an intimate, formal letter structure, reflecting on the journey and honoring what the reader has undertaken. **Exemplar:** *Tiny Beautiful Things* [10].
 
 **Beat order:**  
 1. Greet the reader (acknowledge them specifically)
@@ -584,6 +584,40 @@ Each structure creates a different emotional shape in a chapter:
 - Zoom Lens
 - The Letter
 - Gladwell Spiral (return to opening structure, deepened)
+
+
+## References
+
+Primary exemplar editions for named structures (ISBNs and publisher pages per `artifacts/research/citations/RCG-002_bestseller_citations.md`):
+
+1. James Clear, *Atomic Habits* (Avery / Penguin Random House, 2018). ISBN 9780735211292. https://www.penguinrandomhouse.com/books/543993/atomic-habits-by-james-clear/
+2. Eckhart Tolle, *The Power of Now* (New World Library, 1999). ISBN 9781577314806. https://newworldlibrary.com/product/the-power-of-now/
+3. Malcolm Gladwell, *The Tipping Point* (Back Bay Books / Little, Brown, 2002). ISBN 9780316346627. https://www.gladwellbooks.com/titles/malcolm-gladwell/the-tipping-point/9780316346627/
+4. Bessel van der Kolk, M.D., *The Body Keeps the Score* (Penguin Books / Penguin Random House, 2015). ISBN 9780143127741. https://www.penguinrandomhouse.com/books/313183/the-body-keeps-the-score-by-bessel-van-der-kolk-md
+5. Brené Brown, *Daring Greatly* (Penguin Random House, 2015). ISBN 9781592408412. https://www.penguinrandomhouse.com/books/600469/daring-greatly-by-brene-brown/
+6. Joseph Nguyen, *Don't Believe Everything You Think (Expanded Edition)* (Authors Equity; dist. Simon & Schuster, 2024). ISBN 9798893310153. https://www.simonandschuster.com/books/Dont-Believe-Everything-You-Think-(Expanded-Edition)/Joseph-Nguyen/Books-By-Joseph-Nguyen/9798893310153
+7. Nedra Glover Tawwab, *Set Boundaries, Find Peace* (TarcherPerigee / Penguin Random House, 2021). ISBN 9780593192092. https://www.penguinrandomhouse.com/books/647316/set-boundaries-find-peace-by-nedra-glover-tawwab/
+8. Brené Brown, *The Gifts of Imperfection* (Hazelden Publishing, 2010). ISBN 9781592405915. https://www.hazelden.org/store/item/550281?The-Gifts-of-Imperfection
+9. Stephen R. Covey, *The 7 Habits of Highly Effective People* (30th Anniversary Ed., Simon & Schuster, 2020). ISBN 9781982137274. https://www.simonandschuster.com/books/The-7-Habits-of-Highly-Effective-People/Stephen-R-Covey/9781982137274
+10. Cheryl Strayed, *Tiny Beautiful Things* (10th Anniversary Ed., Penguin Random House, 2022). ISBN 9780593685211. https://www.penguinrandomhouse.com/books/217211/tiny-beautiful-things-by-cheryl-strayed/
+
+Sleep statistics (Gladwell Spiral example; per `RCG-005_sleep_complaints.md`):
+
+11. National Center for Health Statistics, *Sleep difficulties in adults: United States, 2020* (Data Brief 436). https://www.cdc.gov/nchs/products/databriefs/db436.htm (PDF: https://www.cdc.gov/nchs/data/databriefs/db436.pdf)
+12. Khubchandani & Price (2020), "Short sleep duration in working American adults, 2010–2018," *Journal of Community Health*. https://link.springer.com/article/10.1007/s10900-019-00731-9
+
+Ego depletion / willpower (Myth-Killer example; per `RCG-003_ego_depletion.md`):
+
+13. Baumeister et al. (1998), *Journal of Personality and Social Psychology*. PubMed: https://pubmed.ncbi.nlm.nih.gov/9599441/ — DOI https://doi.org/10.1037/0022-3514.74.5.1252
+14. Carter & McCullough (2014), *Frontiers in Psychology*. https://www.frontiersin.org/journal/10.3389/fpsyg.2014.00823/abstract
+15. Hagger et al. (2016), registered replication report. https://journals.sagepub.com/doi/10.1177/1745691616652873
+16. Inzlicht et al. (2015) commentary. https://pmc.ncbi.nlm.nih.gov/articles/PMC4971805/
+17. Dang et al. (2021) multilab replication. https://journals.sagepub.com/doi/full/10.1177/1948550619887702
+18. Dang (2017) meta-analysis. PubMed: https://pubmed.ncbi.nlm.nih.gov/28391367/
+
+Emotion regulation sketch (Promise Engine example; per `RCG-004_amygdala_prefrontal.md`):
+
+19. Ochsner & Gross (2005), "The cognitive control of emotion," *Trends in Cognitive Sciences*. PubMed: https://pubmed.ncbi.nlm.nih.gov/15866151/ — DOI https://doi.org/10.1016/j.tics.2005.03.010
 
 ---
 

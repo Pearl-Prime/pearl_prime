@@ -1,0 +1,31 @@
+# Pen name / teacher-adjacent profile citation anchors (persona audience economics).
+# Canonical pen names: config/author_registry.yaml. Production personas: unified_personas.md
+# Batch 1 research: artifacts/research/citations/RCG-001_revenue_estimates.md
+version: "1.0"
+
+persona_market_sizing_methodology_source:
+  url: "https://www.audiopub.org/surveys"
+  study: "Audio Publishers Association — Sales & Consumer Data (US publisher receipts)"
+  date: "2026-03-30"
+  note: >-
+    Industry anchors only. Per RCG-001, persona-level US annual revenue bands in unified_personas.md
+    are provisional internal SAM estimates — not derivable from APA figures without a documented segmentation model.
+
+listener_incidence_context_source:
+  url: "https://www.audiopub.org/research-faq"
+  study: "Audio Publishers Association Research FAQ (Edison survey cited by APA)"
+  date: "2026-03-30"
+  note: >-
+    Cited in RCG-001 for US adult audiobook listener incidence context (~51% / ~134M adults cited by APA).
+
+us_adult_population_denominator_source:
+  url: "https://files.hawaii.gov/dbedt/census/popestimate/2024/state-pop/SCPRC-EST2024-18+POP.pdf"
+  study: "U.S. Census Bureau SCPRC-EST2024-18+POP (18+ resident population; mirror PDF per RCG-001)"
+  date: "2026-03-30"
+  note: >-
+    Sanity-check denominator referenced in RCG-001 (e.g. listener-incidence cross-check). Not a revenue model.
+
+pen_name_persona_mapping_source:
+  note: >-
+    No external citation — internal resolver mapping (author_id → persona_ids, topic_ids) in author_registry.yaml.
+    Audience assumptions must align with unified_personas.md; Batch 1 did not audit each mapping.

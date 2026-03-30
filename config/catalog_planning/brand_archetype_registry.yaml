@@ -28,6 +28,19 @@ global_constraints:
     reset: 12
     clarity: 18
     calm: 24
+  emotional_token_global_caps_source:
+    note: >-
+      No external citation — internal engineering defaults for emotional-token quotas.
+      Batch 1 (RCG-001–RCG-005) did not validate these numerics.
+  max_mid_form_ratio_source:
+    note: >-
+      No external citation — internal guardrail for mid-form mix in duration_strategy.
+      Batch 1 (RCG-001–RCG-005) did not cite this ratio.
+  archetype_sketch_demographics_source:
+    note: >-
+      No external citation — internal brand-facing sketches (age_range, emotional_job,
+      functional_job, primary_moment). Production persona IDs and economics: unified_personas.md
+      (revenue column is provisional internal SAM per RCG-001).
 
 brand_archetypes:
   # 01 — Stabilizer
