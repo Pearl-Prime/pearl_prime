@@ -6,6 +6,7 @@ artifacts/research/raw/<date>/ for use in generational research prompts.
 from __future__ import annotations
 
 import argparse
+import gzip
 import urllib.request
 from datetime import datetime
 from pathlib import Path
@@ -25,9 +26,19 @@ def load_yaml(path: Path) -> dict:
 
 
 def fetch_url(url: str, timeout: int = 30) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": "PearlNewsResearch/1.0"})
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "PearlNewsResearch/1.0 (RSS ingest; +https://github.com/)",
+            "Accept": "application/rss+xml, application/xml, text/xml, */*",
+        },
+    )
     with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read().decode("utf-8", errors="replace")
+        raw = r.read()
+        enc = (r.headers.get("Content-Encoding") or "").lower()
+        if enc == "gzip" or raw[:2] == b"\x1f\x8b":
+            raw = gzip.decompress(raw)
+        return raw.decode("utf-8", errors="replace")
 
 
 def main() -> None:
@@ -47,6 +58,9 @@ def main() -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     for entry in rss_list:
+        if (entry.get("type") or "rss").lower() == "manual":
+            print(f"Skip {entry.get('id', 'unknown')}: type=manual")
+            continue
         feed_id = entry.get("id", "unknown")
         url = entry.get("url")
         if not url:

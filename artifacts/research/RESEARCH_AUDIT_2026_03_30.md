@@ -33,6 +33,8 @@
 | 21 | `atoms/` (sampled) | Teacher profiles and location data — no research citations in atom files | MEDIUM | Ground in cited demographic and geographic data sources per locale |
 | 22 | `SOURCE_OF_TRUTH/teacher_banks/` (sampled) | Teacher slot definitions — no provenance for pedagogical claims | MEDIUM | "effective teaching personas self-help audiobook listener engagement research" |
 
+**Batch 3 LOW — citation memos (2026-03-31):** §A items **19** (`omega/title_entropy/subtitle_patterns.yaml`) and **20** (`config/payouts/`) → **RESEARCHED** with `artifacts/research/citations/RCG-021_subtitle_patterns.md` and `artifacts/research/citations/RCG-022_payout_tiers.md` (see `artifacts/research/citations/BATCH_3_SUMMARY.md`). Items **1–18, 21–22** remain on the table above until separate memos land.
+
 ### Summary: 22 items flagged (5 HIGH, 15 MEDIUM, 2 LOW)
 
 **Systemic observation:** The repo has no inline citation system anywhere in config or spec files. Claims flow from docs into configs unchecked. The `MARKETING_DEEP_RESEARCH_PROMPTS.md` provenance-block requirement (§174–191) is not enforced in any downstream file.
@@ -55,20 +57,20 @@
 | 10 | `artifacts/research/narrative/` | Empty directory — narrative layer never executed | Writer spec, chapter structures | PLANNED-NEVER-RUN |
 | 11 | `artifacts/research/platform/` | Empty directory — platform behavior layer never executed | Distribution strategy, marketing | PLANNED-NEVER-RUN |
 | 12 | (no directory) | Linguistic/semantic trend layer — only system prompt exists (`research/prompts/system/semantic_trend_spotter.txt`) | Pearl News vocabulary, title engine | PLANNED-NEVER-RUN |
-| 13 | `artifacts/research/raw/` | Empty directory — RSS feed ingest never executed | All research layers (input) | PLANNED-NEVER-RUN |
-| 14 | `artifacts/research/youth_feed_snapshots/` | Empty directory — youth platform snapshots never collected | Psychology and pain-points layers | PLANNED-NEVER-RUN |
-| 15 | `artifacts/research/marketing_sources/` | Empty directory — marketing source extracts never produced | Marketing config, brand registry | PLANNED-NEVER-RUN |
-| 16 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 1 | Per-brand GTM & audience funnel | config/catalog_planning/ | PARTIAL — some findings embedded in brand_archetype_registry.yaml but no standalone output file |
-| 17 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 2 | Controlled emotional vocabulary | config/catalog_planning/ | PARTIAL — some findings in brand_archetype_registry.yaml |
+| 13 | `artifacts/research/raw/` | RSS ingest and dated raw extracts | All research layers (input) | EXECUTED — see `artifacts/research/raw/2026-03-31/INGEST_MANIFEST.md`, `un_youth.xml`, UNICEF `.txt` captures |
+| 14 | `artifacts/research/youth_feed_snapshots/` | Youth platform snapshot text captures | Psychology and pain-points layers | EXECUTED — see `artifacts/research/raw/2026-03-31/INGEST_MANIFEST.md` and `artifacts/research/youth_feed_snapshots/2026-03-31_*.txt` |
+| 15 | `artifacts/research/marketing_sources/` | Standalone cited outputs for marketing sub-deliverables 1, 2, 5, 6, 7 | Marketing config, brand registry | EXECUTED — see `artifacts/research/marketing_sources/*.md` and `MARKETING_RESEARCH_SUMMARY.md` |
+| 16 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 1 | Per-brand GTM & audience funnel | config/catalog_planning/ | FULL — `artifacts/research/marketing_sources/sub1_gtm_audience_funnel.md` (registry still authoritative for `gtm_identity` / `discovery_contract`) |
+| 17 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 2 | Controlled emotional vocabulary | config/catalog_planning/ | FULL — `artifacts/research/marketing_sources/sub2_emotional_vocabulary.md` (token-level conversion data not publicly cited; policy risk framed) |
 | 18 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 3 | Consumer language vs. clinical | config/marketing/ | FULL — consumer_language_by_topic.yaml (627 lines, 5 locale variants) |
 | 19 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 4 | Persona × topic invisible scripts | config/marketing/ | FULL — invisible_scripts_by_persona_topic.yaml (140 entries, used by title engine v4) |
-| 20 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 5 | Duration bands & consumption behavior | config/catalog_planning/ | PARTIAL — some data in brand_archetype_registry.yaml |
-| 21 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 6 | Cover design language by audience | config/catalog_planning/ | PARTIAL — some data in brand_archetype_registry.yaml |
-| 22 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 7 | Pricing topology & discount psychology | config/payouts/ | PARTIAL — some data in brand_archetype_registry.yaml |
+| 20 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 5 | Duration bands & consumption behavior | config/catalog_planning/ | FULL — `artifacts/research/marketing_sources/sub5_duration_bands.md` (cited reach/context; completion-by-band gaps noted) |
+| 21 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 6 | Cover design language by audience | config/catalog_planning/ | FULL — `artifacts/research/marketing_sources/sub6_cover_design.md` (platform specs + UX heuristics; segment conversion A/B not publicly cited) |
+| 22 | `docs/research/MARKETING_DEEP_RESEARCH_PROMPTS.md` — Sub-deliverable 7 | Pricing topology & discount psychology | config/payouts/ | FULL — `artifacts/research/marketing_sources/sub7_pricing_topology.md` (Google bundle + list price mechanics cited; tier USD benchmarks still internal/registry) |
 | 23 | `docs/research/PEARL_NEWS_QWEN_DEEP_RESEARCH_ENGINE.md` | 47 prompts across 6 dimensions — only 12 implemented as prompt files (6 system + 6 task for layers 1-3); remaining 35+ never prepared | Pearl News content pipeline, EI v2 | PARTIAL — spec complete, execution 25% |
 | 24 | `artifacts/research/kb/entries.jsonl` | 16 generational research seed entries with citations, confidence scores | EI v2, editorial hooks | PARTIAL — KB exists but `marketing_sources.enabled: false` in EI v2 config; not actively consumed |
 
-### Summary: 24 items flagged (6 ORPHANED, 9 PARTIAL, 9 PLANNED-NEVER-RUN)
+### Summary: 24 items flagged (5 ORPHANED, 3 PARTIAL, 6 PLANNED-NEVER-RUN, 3 EXECUTED, 7 FULL)
 
 ---
 
@@ -110,9 +112,9 @@
 
 | Category | Count |
 |----------|-------|
-| Cited research artifacts | 8 files (Asian market data + KB) |
+| Cited research artifacts | 13+ files (Asian market data + KB + `artifacts/research/marketing_sources/` sub1/2/5/6/7 + summary) |
 | Uncited system/task prompts | 12 files (operational, not expected to have citations) |
-| Empty placeholder directories | 8 (`psychology/`, `pain_points/`, `world_events/`, `narrative/`, `platform/`, `raw/`, `youth_feed_snapshots/`, `marketing_sources/`) |
+| Empty placeholder directories | 5 (`psychology/`, `pain_points/`, `world_events/`, `narrative/`, `platform/`) — `raw/`, `youth_feed_snapshots/`, and `marketing_sources/` populated 2026-03-31 |
 | Config feed sources | 2 YAML files (youth + marketing) |
 | Repo assets with uncited claims | 22 flagged (5 HIGH, 15 MEDIUM, 2 LOW) |
-| Research not implemented | 24 flagged (6 ORPHANED, 9 PARTIAL, 9 PLANNED-NEVER-RUN) |
+| Research not implemented | 24 flagged (5 ORPHANED, 3 PARTIAL, 6 PLANNED-NEVER-RUN, 3 EXECUTED, 7 FULL) |

@@ -6,13 +6,20 @@ schema_version: 1
 
 # RSS feeds (fetch to artifacts/research/raw/ or youth_feed_snapshots/)
 rss:
+  # 2026-03-31 verified: unicef.org RSS (media_17653.xml, press-releases/rss, stories/rss, /rss) returns HTTP 403
+  # Cloudflare "Attention Required" to scripted clients; urllib/curl and PearlNewsResearch UA blocked.
+  # No stable machine-readable feed URL found for automated ingest — use Playwright/browser capture or manual paste.
   - id: unicef_news
-    url: https://www.unicef.org/rss/media_17653.xml
-    description: UNICEF news and youth
+    type: manual
+    url: https://www.unicef.org/press-releases
+    description: UNICEF press releases (human/browser capture only; RSS blocked 403)
     refresh: weekly
+  # 2026-03-31 verified: youthenvoy/feed/ returns 200 HTML (Drupal portal), not RSS/XML.
+  # news.un.org topic/youth RSS returns HTTP 200 with empty body (broken/empty feed on server).
+  # Using official UN News topic feed for Culture and Education as youth-adjacent UN editorial RSS.
   - id: un_youth
-    url: https://www.un.org/youthenvoy/feed/
-    description: UN Youth Envoy
+    url: https://news.un.org/feed/subscribe/en/news/topic/culture-and-education/feed/rss.xml
+    description: UN News — Culture and Education (RSS proxy; replaces UN Youth Envoy /feed/ HTML)
     refresh: weekly
   # Add more as needed, e.g.:
   # - id: pew_research
