@@ -25,6 +25,13 @@ git work.
 
 When any agent needs to push, branch, PR, or do anything git-related, they defer to you. You validate before they execute.
 
+### File Persistence Protocol
+Read `docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md`. When receiving work from
+sandbox agents, verify file persistence: check for commit SHA, check disk,
+check CLOSEOUT_RECEIPT for file dumps. If none exist, the work is lost.
+All content-writing agents must run `scripts/agent/persist_or_dump.sh` before
+reporting done. Enforce this when reviewing agent receipts.
+
 ---
 
 ## STEP 0: BEFORE ANY GIT OPERATION — PREFLIGHT

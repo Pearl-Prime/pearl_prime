@@ -17,6 +17,7 @@ Read these files in order before doing any git or GitHub work:
 8. `docs/BRANCH_PROTECTION_REQUIREMENTS.md`
 9. `docs/GITHUB_GOVERNANCE_INCIDENT_RUNBOOK.md`
 10. `docs/DOCS_INDEX.md`
+11. `docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md`
 
 ## Pearl_GitHub Scope
 
@@ -31,6 +32,7 @@ Pearl_GitHub owns:
 - branch protection awareness
 - hourly repo health checks
 - recovery from wrong-base branches, stuck cherry-picks, and blocked pushes
+- file persistence enforcement (see `docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md`)
 
 ## Non-Negotiable Git Rules
 
@@ -39,6 +41,7 @@ Pearl_GitHub owns:
 3. Never push without running push-guard and preflight
 4. Never guess branch state; check first
 5. Keep scope small enough for push-guard and PR review
+6. Never report "done" without a commit SHA or full file dump in CLOSEOUT_RECEIPT
 
 ## Mandatory Preflight
 

@@ -83,6 +83,45 @@ Permanent lesson:
   - check file existence before invoking tooling
   - invoke shell scripts with `bash ...`
 
+### 2026-03-30 — Sandbox file loss: D1/D3 voice re-localization + deep-research skill (×3)
+
+What happened:
+
+- Pearl_Writer agents in Cowork sandbox wrote D1 (4 files) and D3 (4 files) voice
+  re-localization SCENE content — 240 scenes total
+- Sandbox could not push (no GitHub credentials, no network access to github.com)
+- `.git/index.lock` was stuck and could not be removed (permission denied in sandbox)
+- Agent sessions ended. Files existed only in sandbox memory. Content was lost.
+- Same pattern hit Pearl_Research deep-research skill files 3 times earlier in the day
+- D2 survived because it got a git commit through before the lock appeared
+
+Root cause:
+
+- Cowork sandbox ≠ user's local filesystem for agent operations
+- Files written to sandbox are ephemeral unless committed or dumped
+- No protocol existed to ensure content persistence when git is blocked
+
+Recovery:
+
+- D1/D3 were rewritten from scratch via Cowork session (which HAS disk access)
+- Deep-research files were recreated 3 times before finally being committed
+
+Permanent lesson:
+
+- All content-writing agents MUST run `scripts/agent/persist_or_dump.sh` after writing
+- If git is blocked, agent MUST dump full file contents in CLOSEOUT_RECEIPT
+- Never report "done" without commit SHA or file dump
+- See `docs/AGENT_FILE_PERSISTENCE_PROTOCOL.md` for the full protocol
+- Prefer Cowork direct-write (Option A) for critical content over sandbox agents
+
+Files affected:
+
+- `atoms/working_parents/{burnout,financial_anxiety}/SCENE/CANONICAL.txt` (D1)
+- `atoms/healthcare_rns/{burnout,financial_anxiety}/SCENE/CANONICAL.txt` (D1)
+- `atoms/gen_alpha_students/{burnout,financial_anxiety}/SCENE/CANONICAL.txt` (D3)
+- `atoms/corporate_managers/{burnout,financial_anxiety}/SCENE/CANONICAL.txt` (D3)
+- `skills/deep-research/SKILL.md` and reference files (×3 losses)
+
 ## Branch Memory Snapshot — 2026-03-20
 
 ### Healthy / intentional
