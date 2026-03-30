@@ -12,10 +12,25 @@ Covers (when modules present):
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
 import pytest
+
+
+def _selector_key_for_v1_index(candidates_raw: list, target_index: int) -> str:
+    """V1 pick uses sha256(selector_key) mod len; find a key that selects target_index."""
+    n = len(candidates_raw)
+    if n == 0:
+        return "empty"
+    for i in range(50000):
+        key = f"sk_{i}"
+        h = hashlib.sha256(key.encode()).hexdigest()
+        idx = int(h[:8], 16) % n
+        if idx == target_index:
+            return key
+    raise RuntimeError("could not find selector_key for target_index")
 
 
 def _hybrid_modules_available():
@@ -308,3 +323,360 @@ class TestHybridSelector:
         )
         assert d1.final_chosen_id == d2.final_chosen_id
         assert d1.v1_chosen_id == d2.v1_chosen_id
+
+    def _minimal_v2_cfg(self):
+        """Non-empty merged config: enable scoring modules needed for hybrid tests."""
+        from phoenix_v4.quality.ei_v2.config import load_ei_v2_config
+
+        cfg = load_ei_v2_config()
+        cfg["hybrid"] = {**cfg.get("hybrid", {}), "enabled": True, "override_margin": 0.12}
+        cfg["cross_encoder"] = {**cfg.get("cross_encoder", {}), "enabled": True}
+        cfg["safety_classifier"] = {**cfg.get("safety_classifier", {}), "enabled": True}
+        cfg["tts_readability"] = {**cfg.get("tts_readability", {}), "enabled": True}
+        cfg["semantic_dedup"] = {**cfg.get("semantic_dedup", {}), "enabled": False}
+        cfg["domain_embeddings"] = {**cfg.get("domain_embeddings", {}), "enabled": False}
+        cfg["emotion_arc"] = {**cfg.get("emotion_arc", {}), "enabled": False}
+        return cfg
+
+    def test_hybrid_v2_override_when_margin_exceeded(self, require_hybrid_modules):
+        """V2-best beats V1 when composite delta > override_margin."""
+        from phoenix_v4.quality.ei_v2.hybrid_selector import hybrid_select
+
+        cfg = self._minimal_v2_cfg()
+        cfg["hybrid"]["override_margin"] = 0.01
+        thesis = "nervous system alarm stress body tension recovery breath"
+        candidates_raw = [
+            {
+                "atom_id": "weak_v1",
+                "text": (
+                    "Abstract ideas about life. No body words. Very generic prose that repeats. "
+                    "Abstract ideas about life. No body words. Very generic prose that repeats."
+                ),
+            },
+            {
+                "atom_id": "strong_v2",
+                "text": (
+                    "Your shoulders tighten before your mind names what happened. "
+                    "Your breath catches in traffic. The nervous system fires first. "
+                    "Your chest stays heavy until you exhale slowly. Your jaw unclenches."
+                ),
+            },
+        ]
+        sk = _selector_key_for_v1_index(candidates_raw, 0)
+        decision = hybrid_select(
+            slot="STORY",
+            chapter_index=0,
+            slot_index=0,
+            candidates_raw=candidates_raw,
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            thesis=thesis,
+            v1_cfg={"selector": "rule_best"},
+            v2_cfg=cfg,
+            selector_key=sk,
+        )
+        assert decision.v1_chosen_id == "weak_v1"
+        assert decision.v2_chosen_id == "strong_v2"
+        assert decision.final_chosen_id == "strong_v2"
+        assert decision.override_applied is True
+
+    def test_hybrid_no_override_when_margin_not_met(self, require_hybrid_modules):
+        from phoenix_v4.quality.ei_v2.hybrid_selector import hybrid_select
+
+        cfg = self._minimal_v2_cfg()
+        cfg["hybrid"]["override_margin"] = 0.95
+        thesis = "body breath shoulder tension"
+        text_ok = (
+            "Her shoulders were tight. Her breath quickened. Her chest felt heavy. "
+            "Her jaw clenched. The moment held still."
+        )
+        candidates_raw = [
+            {"atom_id": "a_first", "text": text_ok},
+            {"atom_id": "b_second", "text": text_ok + " Extra sentence for length."},
+        ]
+        sk = _selector_key_for_v1_index(candidates_raw, 0)
+        decision = hybrid_select(
+            slot="STORY",
+            chapter_index=0,
+            slot_index=0,
+            candidates_raw=candidates_raw,
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            thesis=thesis,
+            v2_cfg=cfg,
+            selector_key=sk,
+        )
+        assert decision.v1_chosen_id == "a_first"
+        assert decision.final_chosen_id == "a_first"
+        assert decision.override_applied is False
+
+    def test_hybrid_safety_block_falls_through_to_v2_best(self, require_hybrid_modules):
+        from phoenix_v4.quality.ei_v2.hybrid_selector import hybrid_select
+
+        cfg = self._minimal_v2_cfg()
+        cfg["hybrid"]["override_margin"] = 0.99
+        cfg["hybrid"]["safety_block_threshold"] = 0.2
+        thesis = "nervous system stress body"
+        candidates_raw = [
+            {
+                "atom_id": "unsafe_v1",
+                "text": (
+                    "This drug cures anxiety completely. You will be healed forever. "
+                    "Guaranteed results. Your shoulders relax. Your breath slows."
+                ),
+            },
+            {
+                "atom_id": "safe_alt",
+                "text": (
+                    "Your shoulders tighten when the message arrives. Your breath stays shallow. "
+                    "Your chest feels tight. Your jaw holds tension. Nothing here is medical advice."
+                ),
+            },
+        ]
+        sk = _selector_key_for_v1_index(candidates_raw, 0)
+        decision = hybrid_select(
+            slot="STORY",
+            chapter_index=0,
+            slot_index=0,
+            candidates_raw=candidates_raw,
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            thesis=thesis,
+            v2_cfg=cfg,
+            selector_key=sk,
+        )
+        assert decision.v1_chosen_id == "unsafe_v1"
+        assert decision.final_chosen_id == "safe_alt"
+        assert decision.override_applied is True
+
+    def test_hybrid_tts_block_falls_through(self, require_hybrid_modules):
+        from phoenix_v4.quality.ei_v2.hybrid_selector import hybrid_select
+
+        cfg = self._minimal_v2_cfg()
+        cfg["hybrid"]["override_margin"] = 0.99
+        cfg["hybrid"]["tts_block_threshold"] = 0.45
+        cfg["tts_readability"]["ideal_sentence_range"] = [8, 12]
+        cfg["tts_readability"]["max_sentence_words"] = 14
+        thesis = "body breath shoulder"
+        bad_tts = "Word " * 80
+        good_tts = (
+            "Your shoulders tighten. Your breath catches. Your chest feels heavy. "
+            "Your jaw clenches. You notice the room."
+        )
+        candidates_raw = [
+            {"atom_id": "v1_bad_tts", "text": bad_tts},
+            {"atom_id": "v2_good_tts", "text": good_tts},
+        ]
+        sk = _selector_key_for_v1_index(candidates_raw, 0)
+        decision = hybrid_select(
+            slot="STORY",
+            chapter_index=0,
+            slot_index=0,
+            candidates_raw=candidates_raw,
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            thesis=thesis,
+            v2_cfg=cfg,
+            selector_key=sk,
+        )
+        assert decision.v1_chosen_id == "v1_bad_tts"
+        assert decision.final_chosen_id == "v2_good_tts"
+        assert decision.override_applied is True
+
+    def test_hybrid_dedup_block_falls_through(self, require_hybrid_modules):
+        from phoenix_v4.quality.ei_v2.hybrid_selector import hybrid_select
+
+        cfg = self._minimal_v2_cfg()
+        cfg["semantic_dedup"] = {**cfg.get("semantic_dedup", {}), "enabled": True}
+        cfg["hybrid"]["override_margin"] = 0.99
+        # v1–v2 ~0.83; v3 max pair ~0.46 — threshold between them blocks v1/v2 only
+        cfg["hybrid"]["dedup_block_threshold"] = 0.47
+        cfg["semantic_dedup"]["ngram_overlap_threshold"] = 0.15
+        thesis = "shoulder breath tension"
+        dup_body = (
+            "That morning Sarah opened her laptop at the kitchen table and felt her shoulders tighten. "
+            "Her breath stayed shallow while she read the subject line again."
+        )
+        near_dup = dup_body + " She stared at the screen without moving."
+        unique_best = (
+            "Your shoulders tighten when the ping arrives. Your breath catches in the hallway. "
+            "Your chest feels heavy before you read the name. Your jaw clenches without permission. "
+            "The nervous system reacts first."
+        )
+        candidates_raw = [
+            {"atom_id": "v1_dup", "text": dup_body},
+            {"atom_id": "v2_near", "text": near_dup},
+            {"atom_id": "v3_unique", "text": unique_best},
+        ]
+        sk = _selector_key_for_v1_index(candidates_raw, 0)
+        decision = hybrid_select(
+            slot="STORY",
+            chapter_index=0,
+            slot_index=0,
+            candidates_raw=candidates_raw,
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            thesis=thesis,
+            v2_cfg=cfg,
+            selector_key=sk,
+        )
+        assert decision.v1_chosen_id == "v1_dup"
+        assert decision.v2_chosen_id == "v3_unique"
+        assert decision.final_chosen_id == "v3_unique"
+        assert decision.override_applied is True
+
+    def test_hybrid_respects_learned_override_margin(self, require_hybrid_modules, tmp_path):
+        from phoenix_v4.quality.ei_v2.hybrid_selector import hybrid_select
+        from phoenix_v4.quality.ei_v2.learner import LearnedParams, save_learned_params
+
+        params_path = tmp_path / "learned.json"
+        save_learned_params(LearnedParams(override_margin=0.99, total_observations=1), params_path)
+
+        cfg = self._minimal_v2_cfg()
+        cfg["hybrid"]["override_margin"] = 0.01
+        thesis = "nervous system alarm stress body tension recovery breath"
+        candidates_raw = [
+            {
+                "atom_id": "weak_v1",
+                "text": "Abstract ideas. No shoulders. No breath. Generic filler text here.",
+            },
+            {
+                "atom_id": "strong_v2",
+                "text": (
+                    "Your shoulders tighten before your mind catches up. Your breath catches. "
+                    "Your chest feels heavy. Your jaw clenches. The nervous system moves first."
+                ),
+            },
+        ]
+        sk = _selector_key_for_v1_index(candidates_raw, 0)
+        d_learned = hybrid_select(
+            slot="STORY",
+            chapter_index=0,
+            slot_index=0,
+            candidates_raw=candidates_raw,
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            thesis=thesis,
+            v2_cfg=cfg,
+            selector_key=sk,
+            learned_params_path=params_path,
+        )
+        assert d_learned.override_applied is False
+
+        d_no_learned = hybrid_select(
+            slot="STORY",
+            chapter_index=0,
+            slot_index=0,
+            candidates_raw=candidates_raw,
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            thesis=thesis,
+            v2_cfg=cfg,
+            selector_key=sk,
+            learned_params_path=tmp_path / "missing.json",
+        )
+        assert d_no_learned.override_applied is True
+
+    def test_hybrid_tie_breaks_lexicographic(self, require_hybrid_modules):
+        from phoenix_v4.quality.ei_v2.hybrid_selector import hybrid_select
+
+        cfg = self._minimal_v2_cfg()
+        cfg["hybrid"]["override_margin"] = 0.99
+        thesis = "x"
+        same = (
+            "Her shoulders were tight. Her breath quickened. Her chest felt heavy. "
+            "Her jaw clenched. She noticed the room."
+        )
+        candidates_raw = [
+            {"atom_id": "z_last", "text": same},
+            {"atom_id": "m_mid", "text": same},
+            {"atom_id": "a_first", "text": same},
+        ]
+        sk = _selector_key_for_v1_index(candidates_raw, 0)
+        d1 = hybrid_select(
+            slot="STORY",
+            chapter_index=0,
+            slot_index=0,
+            candidates_raw=candidates_raw,
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            thesis=thesis,
+            v2_cfg=cfg,
+            selector_key=sk,
+        )
+        d2 = hybrid_select(
+            slot="STORY",
+            chapter_index=0,
+            slot_index=0,
+            candidates_raw=candidates_raw,
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            thesis=thesis,
+            v2_cfg=cfg,
+            selector_key=sk,
+        )
+        assert d1.v2_chosen_id == "a_first"
+        assert d2.v2_chosen_id == "a_first"
+        assert d1.final_chosen_id == d2.final_chosen_id
+
+    def test_hybrid_arc_deviation_suppresses_margin_override(self, require_hybrid_modules):
+        from phoenix_v4.quality.ei_v2.hybrid_selector import hybrid_select
+
+        cfg = self._minimal_v2_cfg()
+        cfg["hybrid"]["override_margin"] = 0.05
+        cfg["hybrid"]["arc_block_threshold"] = 0.05
+        cfg["emotion_arc"] = {**cfg.get("emotion_arc", {}), "enabled": True}
+        thesis = "nervous system stress body tension"
+        candidates_raw = [
+            {"atom_id": "weak_v1", "text": "Abstract ideas only. Thoughts and patterns. No body anchor."},
+            {
+                "atom_id": "strong_v2",
+                "text": (
+                    "Your shoulders tighten. Your breath catches. Your chest feels heavy. "
+                    "Your jaw clenches. The alarm rings before the story starts."
+                ),
+            },
+        ]
+        chapter_off_arc = (
+            "Everything is wonderful and calm.\n\n"
+            "Life feels easy and bright.\n\n"
+            "Joy flows without effort.\n\n"
+            "Peace is everywhere today.\n\n"
+            "Sunshine fills each moment.\n\n"
+            "Hope stays simple and light.\n\n"
+            "Rest feels complete and soft.\n\n"
+            "Ease stays close at hand.\n\n"
+            "Warmth stays steady and kind.\n\n"
+            "Quiet feels safe and open.\n\n"
+            "Light stays gentle and clear.\n\n"
+            "Softness stays available now.\n\n"
+        )
+        sk = _selector_key_for_v1_index(candidates_raw, 0)
+        d_no_arc = hybrid_select(
+            slot="STORY",
+            chapter_index=0,
+            slot_index=0,
+            candidates_raw=candidates_raw,
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            thesis=thesis,
+            v2_cfg=cfg,
+            selector_key=sk,
+            chapter_text=None,
+            arc_intent=None,
+        )
+        d_with_arc = hybrid_select(
+            slot="STORY",
+            chapter_index=0,
+            slot_index=0,
+            candidates_raw=candidates_raw,
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            thesis=thesis,
+            v2_cfg=cfg,
+            selector_key=sk,
+            chapter_text=chapter_off_arc,
+            arc_intent={"band": 4, "emotional_role": "TURNING_POINT"},
+        )
+        assert d_no_arc.override_applied is True
+        assert d_with_arc.override_applied is False
