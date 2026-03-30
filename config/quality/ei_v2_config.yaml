@@ -44,6 +44,17 @@ safety_classifier:
   cache_enabled: true
   cache_path: artifacts/ei_v2/safety_cache.jsonl
 
+# ── LLM quality (opt-in master switch; budgets; mode hints for future wiring) ──
+# Does not override safety_classifier.mode / cross_encoder.mode above unless the
+# caller applies llm_quality.* when building runtime config.
+llm_quality:
+  enabled: false
+  max_calls_per_book: 100
+  max_calls_per_chapter: 10
+  safety_classifier_mode: heuristic_plus
+  cross_encoder_mode: heuristic
+  fallback_on_budget_exceeded: heuristic
+
 cross_encoder:
   enabled: true
   mode: heuristic                # "heuristic" (no deps) or "model" (requires model callback)
@@ -119,8 +130,8 @@ hybrid:
 dimension_gates:
   enabled: true
   fail_mode: block               # "warn" (log only) or "block" (fail build)
-  blocked_dimensions: [engagement, somatic_precision]
-  dimension_gate_phase: 1
+  blocked_dimensions: [engagement, somatic_precision, uniqueness, cohesion, listen_experience]
+  dimension_gate_phase: 3
   uniqueness:
     pass_threshold: 0.15
     warn_threshold: 0.30
@@ -137,8 +148,10 @@ dimension_gates:
     pass_threshold: 0.40
     warn_threshold: 0.25
   listen_experience:
-    pass_threshold: 0.55
-    warn_threshold: 0.40
+    pass_threshold: 0.5
+    warn_threshold: 0.3
+    repetition_window_words: 200
+    repetition_ngram_words: 4
   cohesion:
     min_cross_chapter_refs: 1
     pass_threshold: 0.40
