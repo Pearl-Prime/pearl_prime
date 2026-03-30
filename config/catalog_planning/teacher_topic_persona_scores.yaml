@@ -47,6 +47,27 @@ teachers:
       courage: 0.8
     persona_scores: {}   # All default 0.5
 
+  adi_da:
+    topic_scores:
+      anxiety: 0.85       # contraction observation directly addresses anxiety
+      self_worth: 0.8     # prior freedom + the Bright as inherent nature
+      shame: 0.75         # contraction as self-protection, not moral failure
+      grief: 0.85         # loss as dissolution of the separate self's boundaries
+      boundaries: 0.8     # relationship as mirror; contraction vs openness
+      burnout: 0.7        # seeking/striving as exhaustion of the self
+      depression: 0.7     # contraction as withdrawal; Bright as what remains
+      overthinking: 0.8   # seeking-mind loop; recognition stops the loop
+      courage: 0.65       # vulnerability as absence of contraction
+      compassion_fatigue: 0.65  # service practice + conductivity
+      # financial_stress, financial_anxiety, sleep_anxiety, social_anxiety,
+      # imposter_syndrome, somatic_healing: default 0.5 (weaker doctrinal fit)
+    persona_scores:
+      gen_z_professionals: 0.75       # seeking/achievement critique resonates
+      tech_finance_burnout: 0.7       # striving/seeking loop directly addressed
+      millennial_women_professionals: 0.7  # relationship-as-mirror teaching
+      healthcare_rns: 0.6             # compassion fatigue + conductivity
+      # other personas default to 0.5
+
   # Other teachers: omit to use default_score for all pairs, or add overrides as needed.
   # master_feung:
   #   topic_scores: {}
