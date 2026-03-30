@@ -10,7 +10,7 @@
 # fallback to built-in for that component with warning (no crash).
 # One global switch (enabled: false) disables all marketing integration instantly.
 marketing_sources:
-  enabled: false
+  enabled: true
   source_path: marketing_deep_research
   use_marketing_lexicons: true
   use_marketing_safety_bans: true
