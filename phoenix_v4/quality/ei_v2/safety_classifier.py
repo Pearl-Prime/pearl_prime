@@ -23,6 +23,25 @@ from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 
 from phoenix_v4.quality.ei_v2.marketing_lexicons import get_banned_clinical_and_forbidden
 
+# Categories passed to LLM classify callback (vocabulary contract).
+SAFETY_LLM_CATEGORIES: List[str] = [
+    "medical_claims",
+    "clinical_language",
+    "promotional",
+    "reassurance_spam",
+    "pathologizing",
+    "marketing_compliance",
+]
+
+# Only these keys use heuristic-vs-LLM score merge (weighted risk dimensions).
+_LLM_MERGE_CATEGORY_KEYS: Set[str] = {
+    "medical_claims",
+    "clinical_language",
+    "promotional",
+    "reassurance_spam",
+    "pathologizing",
+}
+
 
 # --- Expanded pattern banks (beyond V1 exact phrase lists) ---
 
@@ -136,6 +155,87 @@ def _negation_adjusted_hits(text: str, patterns: list) -> int:
     return max(0, raw_hits - negated)
 
 
+def _finalize_aggregate_and_reason_codes(
+    result: Dict[str, Any],
+    cfg: Dict[str, Any],
+) -> None:
+    """Recompute reason_codes (non-marketing detections) and risk_score from category scores."""
+    cats = result["categories"]
+    med_threshold = float(cfg.get("medical_claim_threshold", 0.6))
+    clin_threshold = float(cfg.get("clinical_language_threshold", 0.5))
+    promo_threshold = float(cfg.get("promotional_threshold", 0.5))
+
+    rc_marketing_only = [c for c in result["reason_codes"] if c.startswith("marketing_")]
+    rc: List[str] = list(rc_marketing_only)
+
+    if cats["medical_claims"]["score"] >= med_threshold:
+        rc.append("medical_claim_detected")
+    if cats["clinical_language"]["score"] >= clin_threshold:
+        rc.append("clinical_language_detected")
+    if cats["promotional"]["score"] >= promo_threshold:
+        rc.append("promotional_detected")
+    if cats["reassurance_spam"]["score"] >= 0.4:
+        rc.append("reassurance_spam_detected")
+    if cats["pathologizing"]["score"] >= 0.4:
+        rc.append("pathologizing_detected")
+
+    result["reason_codes"] = rc
+
+    weights = {
+        "medical_claims": 0.30,
+        "clinical_language": 0.15,
+        "promotional": 0.25,
+        "reassurance_spam": 0.15,
+        "pathologizing": 0.15,
+    }
+    total = sum(
+        cats[cat]["score"] * w
+        for cat, w in weights.items()
+        if cat in cats
+    )
+    mc_weight = float(cfg.get("marketing_compliance_weight", 0.2))
+    mc_score = cats.get("marketing_compliance", {}).get("score", 1.0)
+    result["risk_score"] = round(
+        min(1.0, (1.0 - mc_weight) * total + mc_weight * (1.0 - mc_score)), 4
+    )
+
+
+def _normalize_llm_classify_payload(raw: Any) -> Optional[Dict[str, Any]]:
+    if not isinstance(raw, dict):
+        return None
+    cat = raw.get("category")
+    if not isinstance(cat, str) or not cat.strip():
+        return None
+    try:
+        conf = float(raw.get("confidence", 0.0))
+    except (TypeError, ValueError):
+        return None
+    conf = max(0.0, min(1.0, conf))
+    flags = raw.get("flags", [])
+    if flags is None:
+        flags = []
+    if not isinstance(flags, list):
+        flags = [flags]
+    return {"category": cat.strip(), "confidence": conf, "flags": flags}
+
+
+def _apply_llm_safety_merge(result: Dict[str, Any], llm: Dict[str, Any]) -> None:
+    """Merge LLM classification into heuristic category scores (risk dimensions only)."""
+    cat = llm["category"]
+    conf = float(llm["confidence"])
+    if cat not in _LLM_MERGE_CATEGORY_KEYS:
+        return
+    if cat not in result["categories"]:
+        return
+    h = float(result["categories"][cat]["score"])
+    if conf > 0.8:
+        merged = conf
+    else:
+        merged = (h + conf) / 2.0
+    merged = max(0.0, min(1.0, merged))
+    result["categories"][cat]["score"] = round(merged, 3)
+
+
 def classify_safety(
     text: str,
     *,
@@ -149,7 +249,12 @@ def classify_safety(
 
     cfg: safety_classifier subsection (thresholds, etc.).
     full_cfg: full EI V2 config (for marketing_sources / get_banned_clinical_and_forbidden). If None, uses cfg.
+    call_llm_fn: Optional ``(text, categories) -> dict`` (see ``LLMClassifyCallback`` in ``llm_callback``). Used only
+        when ``cfg["mode"] == "llm"``. Expected keys: ``category``, ``confidence``, ``flags``. Returns ``None`` for
+        budget-exhausted wrappers; invalid payloads or exceptions fall back to heuristic scores silently.
+
     Returns dict with per-category scores and an aggregate risk_score in [0, 1].
+    Heuristic scoring is deterministic for fixed inputs; LLM merge depends on the callback.
     """
     cfg = cfg or {}
     full_cfg = full_cfg or cfg
@@ -164,7 +269,6 @@ def classify_safety(
     }
 
     # Medical claims
-    med_threshold = float(cfg.get("medical_claim_threshold", 0.6))
     med_hits_raw, med_excerpts = _count_pattern_hits(text, _MEDICAL_CLAIM_PATTERNS)
     med_hits = _negation_adjusted_hits(text, _MEDICAL_CLAIM_PATTERNS)
     med_score = min(1.0, med_hits / 2.0)
@@ -174,11 +278,7 @@ def classify_safety(
         "raw_hits": med_hits_raw,
         "excerpts": med_excerpts[:3],
     }
-    if med_score >= med_threshold:
-        result["reason_codes"].append("medical_claim_detected")
-
     # Clinical language
-    clin_threshold = float(cfg.get("clinical_language_threshold", 0.5))
     clin_hits, clin_excerpts = _count_pattern_hits(text, _CLINICAL_PATTERNS)
     clin_score = min(1.0, clin_hits / 3.0)
     result["categories"]["clinical_language"] = {
@@ -186,11 +286,7 @@ def classify_safety(
         "hits": clin_hits,
         "excerpts": clin_excerpts[:3],
     }
-    if clin_score >= clin_threshold:
-        result["reason_codes"].append("clinical_language_detected")
-
     # Promotional
-    promo_threshold = float(cfg.get("promotional_threshold", 0.5))
     promo_hits, promo_excerpts = _count_pattern_hits(text, _PROMOTIONAL_PATTERNS)
     promo_score = min(1.0, promo_hits / 2.0)
     result["categories"]["promotional"] = {
@@ -198,9 +294,6 @@ def classify_safety(
         "hits": promo_hits,
         "excerpts": promo_excerpts[:3],
     }
-    if promo_score >= promo_threshold:
-        result["reason_codes"].append("promotional_detected")
-
     # Reassurance spam
     reas_hits, reas_excerpts = _count_phrase_hits(text, _REASSURANCE_SPAM_PHRASES)
     word_count = max(1, len(text.split()))
@@ -212,9 +305,6 @@ def classify_safety(
         "density_per_100_words": round(reas_density, 3),
         "excerpts": reas_excerpts[:3],
     }
-    if reas_score >= 0.4:
-        result["reason_codes"].append("reassurance_spam_detected")
-
     # Pathologizing
     path_hits, path_excerpts = _count_pattern_hits(text, _PATHOLOGIZING_PATTERNS)
     path_hits_adj = _negation_adjusted_hits(text, _PATHOLOGIZING_PATTERNS)
@@ -225,9 +315,6 @@ def classify_safety(
         "raw_hits": path_hits,
         "excerpts": path_excerpts[:3],
     }
-    if path_score >= 0.4:
-        result["reason_codes"].append("pathologizing_detected")
-
     # Marketing compliance: separate signal (1.0 = no hit, 0.0 = hit). Blended via config weight.
     marketing_compliance_score = 1.0
     ms = (full_cfg.get("marketing_sources") or {}).get("use_marketing_safety_bans", False)
@@ -252,24 +339,21 @@ def classify_safety(
         "excerpts": [],
     }
 
-    # Aggregate risk score (weighted)
-    weights = {
-        "medical_claims": 0.30,
-        "clinical_language": 0.15,
-        "promotional": 0.25,
-        "reassurance_spam": 0.15,
-        "pathologizing": 0.15,
-    }
-    total = sum(
-        result["categories"][cat]["score"] * w
-        for cat, w in weights.items()
-        if cat in result["categories"]
-    )
-    # Blend in marketing_compliance via config weight (no hardwired penalty)
-    mc_weight = float(cfg.get("marketing_compliance_weight", 0.2))
-    mc_score = result["categories"].get("marketing_compliance", {}).get("score", 1.0)
-    result["risk_score"] = round(
-        min(1.0, (1.0 - mc_weight) * total + mc_weight * (1.0 - mc_score)), 4
-    )
+    _finalize_aggregate_and_reason_codes(result, cfg)
+
+    if mode == "llm" and call_llm_fn is not None:
+        llm_raw: Any = None
+        try:
+            llm_raw = call_llm_fn(text, SAFETY_LLM_CATEGORIES)
+        except Exception:
+            llm_raw = None
+        normalized = _normalize_llm_classify_payload(llm_raw)
+        if normalized is not None:
+            _apply_llm_safety_merge(result, normalized)
+            _finalize_aggregate_and_reason_codes(result, cfg)
+            for f in normalized["flags"]:
+                code = str(f).strip()
+                if code and code not in result["reason_codes"]:
+                    result["reason_codes"].append(code)
 
     return result
