@@ -55,6 +55,24 @@ def _compute_slot_signature(format_id: str, chapter_slot_sequence: list[list[str
     return f"{format_id}:{h}"
 
 
+def _resolved_story_band(
+    aid: str,
+    chapter_idx: int,
+    band_by_id: dict[str, int],
+    universal_story_ids: set[str],
+    required_band_by_chapter: Optional[dict[int, int]],
+) -> int:
+    """
+    Effective STORY band for dominant_band_sequence.
+    Universal STORY atoms are treated as satisfying the chapter's required arc band.
+    """
+    if aid in universal_story_ids and required_band_by_chapter is not None:
+        req = required_band_by_chapter.get(chapter_idx)
+        if req is not None:
+            return int(req)
+    return int(band_by_id.get(aid, 3))
+
+
 @dataclass
 class CompiledBook:
     """Stage 3 output. Contract: plan_hash, chapter_slot_sequence, atom_ids, dominant_band_sequence.
@@ -578,6 +596,9 @@ def compile_plan(
     band_by_id: dict[str, int] = {
         e.atom_id: (e.metadata or {}).get("band", 3) for e in story_pool
     }
+    universal_story_ids: set[str] = {
+        e.atom_id for e in story_pool if bool((e.metadata or {}).get("band_universal"))
+    }
     used: set[str] = set()
     optional_slot_types = frozenset(
         (format_plan.get("optional_slot_types") or book_spec.get("optional_slot_types") or [])
@@ -648,7 +669,15 @@ def compile_plan(
                     atom_sources_out.append(atom_source)
                 used.add(aid)
                 if slot_type == "STORY":
-                    chapter_story_bands.append(band_by_id.get(aid, 3))
+                    chapter_story_bands.append(
+                        _resolved_story_band(
+                            aid,
+                            ch,
+                            band_by_id,
+                            universal_story_ids,
+                            required_band_by_chapter,
+                        )
+                    )
                 if slot_type == "COMPRESSION":
                     compression_atom_ids[ch] = aid
                     comp_pool = pool_index.get_pool("COMPRESSION", persona_id, topic_id, None)
