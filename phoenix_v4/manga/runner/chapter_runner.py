@@ -21,32 +21,11 @@ from phoenix_v4.manga.models import paths as manga_paths
 from phoenix_v4.manga.models import stage_ids as sid
 from phoenix_v4.manga.models.validation import validate_instance
 from phoenix_v4.manga.qc.chapter_qc import build_revision_queue_for_chapter
+from phoenix_v4.manga.runner.dag_order import RUN_ORDER, STAGE_NAMES
 from phoenix_v4.manga.runner.stage_manifest_io import (
     stage_is_passed,
     write_stage_manifest,
 )
-
-RUN_ORDER: tuple[str, ...] = (
-    sid.TRANSMISSION_SPLIT,
-    sid.CHAPTER_WRITER,
-    sid.CHAPTER_VISUAL,
-    sid.CHAPTER_IMAGE_GEN,
-    sid.CHAPTER_LETTERING,
-    sid.CHAPTER_LAYOUT,
-    sid.CHAPTER_QC,
-    sid.SERIES_MEMORY_MERGE,
-)
-
-_STAGE_NAMES: dict[str, str] = {
-    sid.TRANSMISSION_SPLIT: "Verify story architecture handoff",
-    sid.CHAPTER_WRITER: "Chapter script (writer handoff)",
-    sid.CHAPTER_VISUAL: "Panel prompts",
-    sid.CHAPTER_IMAGE_GEN: "Panel images manifest",
-    sid.CHAPTER_LETTERING: "Lettering spec",
-    sid.CHAPTER_LAYOUT: "Page composites",
-    sid.CHAPTER_QC: "QC revision queue",
-    sid.SERIES_MEMORY_MERGE: "Merge series memory",
-}
 
 
 def _slice_run_order(
@@ -118,6 +97,7 @@ def _stage_visual(
     config_hash: str,
     style_id: str,
     teacher_id: str,
+    sdf_stub: bool,
 ) -> None:
     raw = _load_json(workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF)
     cr = _load_json(workspace / manga_paths.CHAPTER_REQUEST)
@@ -129,6 +109,10 @@ def _stage_visual(
         style_id=style_id,
         teacher_id=teacher_id,
     )
+    if sdf_stub:
+        from phoenix_v4.manga.sdf.stub import attach_sdf_stub_conditioning
+
+        doc = attach_sdf_stub_conditioning(doc)
     validate_instance(doc, "panel_prompts")
     (workspace / manga_paths.PANEL_PROMPTS).write_text(
         json.dumps(doc, indent=2) + "\n", encoding="utf-8"
@@ -229,6 +213,7 @@ def run_chapter_dag(
     config_hash: str = "",
     style_id: str = "dark_psychological",
     teacher_id: str = "ahjan",
+    sdf_stub: bool = True,
 ) -> list[str]:
     """Execute DAG stages (skipping those already ``passed``). Returns stages executed."""
     ws = Path(workspace).resolve()
@@ -243,6 +228,7 @@ def run_chapter_dag(
             config_hash=config_hash,
             style_id=style_id,
             teacher_id=teacher_id,
+            sdf_stub=sdf_stub,
         ),
         sid.CHAPTER_IMAGE_GEN: lambda: _stage_image_gen(ws, image_backend),
         sid.CHAPTER_LETTERING: lambda: _stage_lettering(ws),
@@ -261,7 +247,7 @@ def run_chapter_dag(
             write_stage_manifest(
                 ws,
                 st,
-                stage_name=_STAGE_NAMES.get(st, st),
+                stage_name=STAGE_NAMES.get(st, st),
                 status="passed",
                 attempt=att,
                 outputs={"workspace": str(ws)},
@@ -271,7 +257,7 @@ def run_chapter_dag(
             write_stage_manifest(
                 ws,
                 st,
-                stage_name=_STAGE_NAMES.get(st, st),
+                stage_name=STAGE_NAMES.get(st, st),
                 status="failed",
                 attempt=att,
                 error_summary=str(e)[:2000],
@@ -279,3 +265,64 @@ def run_chapter_dag(
             raise
 
     return ran
+
+
+def run_chapter_dag_with_auto_revision(
+    workspace: Path,
+    *,
+    image_backend: ImageBackend,
+    max_revision_rounds: int = 3,
+    from_stage: str | None = None,
+    to_stage: str | None = None,
+    chapter_number: int = 1,
+    config_hash: str = "",
+    style_id: str = "dark_psychological",
+    teacher_id: str = "ahjan",
+    sdf_stub: bool = True,
+) -> tuple[list[str], int]:
+    """On QC hold, clear manifests from earliest implicated stage and re-run (bounded).
+
+    Returns ``(stages_run_cumulative, rounds_used)``.
+    """
+    from phoenix_v4.manga.runner.revision_policy import (
+        clear_stage_manifests_from,
+        load_revision_queue,
+        revision_resume_stage_from_queue,
+    )
+
+    ws = Path(workspace).resolve()
+    all_ran: list[str] = []
+    cur_from = from_stage
+    cur_to = to_stage
+    for round_idx in range(max_revision_rounds):
+        try:
+            ran = run_chapter_dag(
+                ws,
+                image_backend=image_backend,
+                from_stage=cur_from,
+                to_stage=cur_to,
+                chapter_number=chapter_number,
+                config_hash=config_hash,
+                style_id=style_id,
+                teacher_id=teacher_id,
+                sdf_stub=sdf_stub,
+            )
+            all_ran.extend(ran)
+            return all_ran, round_idx + 1
+        except RuntimeError as e:
+            rq = load_revision_queue(ws)
+            if rq is None or rq.get("chapter_clearance") == "pass":
+                raise
+            resume = revision_resume_stage_from_queue(rq)
+            if resume is None:
+                raise RuntimeError(
+                    "QC hold but no resumable stage_owner in issues"
+                ) from e
+            if round_idx >= max_revision_rounds - 1:
+                raise RuntimeError(
+                    f"auto-revision exhausted after {max_revision_rounds} attempt(s): {e}"
+                ) from e
+            clear_stage_manifests_from(ws, resume)
+            cur_from = None
+            cur_to = None
+    raise RuntimeError("auto-revision loop fell through")

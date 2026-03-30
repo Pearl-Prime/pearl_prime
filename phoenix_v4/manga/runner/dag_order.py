@@ -1,0 +1,27 @@
+"""Ordered chapter pipeline stages (single source for runner + revision policy)."""
+
+from __future__ import annotations
+
+from phoenix_v4.manga.models import stage_ids as sid
+
+RUN_ORDER: tuple[str, ...] = (
+    sid.TRANSMISSION_SPLIT,
+    sid.CHAPTER_WRITER,
+    sid.CHAPTER_VISUAL,
+    sid.CHAPTER_IMAGE_GEN,
+    sid.CHAPTER_LETTERING,
+    sid.CHAPTER_LAYOUT,
+    sid.CHAPTER_QC,
+    sid.SERIES_MEMORY_MERGE,
+)
+
+STAGE_NAMES: dict[str, str] = {
+    sid.TRANSMISSION_SPLIT: "Verify story architecture handoff",
+    sid.CHAPTER_WRITER: "Chapter script (writer handoff)",
+    sid.CHAPTER_VISUAL: "Panel prompts",
+    sid.CHAPTER_IMAGE_GEN: "Panel images manifest",
+    sid.CHAPTER_LETTERING: "Lettering spec",
+    sid.CHAPTER_LAYOUT: "Page composites",
+    sid.CHAPTER_QC: "QC revision queue",
+    sid.SERIES_MEMORY_MERGE: "Merge series memory",
+}

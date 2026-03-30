@@ -29,7 +29,33 @@
               "engine_type": { "type": "string" },
               "style_id": { "type": "string" },
               "teacher_id": { "type": "string" },
-              "panel_function": { "type": "string" }
+              "panel_function": { "type": "string" },
+              "sdf_conditioning": {
+                "type": "object",
+                "description": "Layer 2.5 geometric prior (§6.7 MANGA_MODE_SYSTEM_SPEC); Comfy/ControlNet consumes maps when trained.",
+                "properties": {
+                  "layer": { "type": "string" },
+                  "map_kind": {
+                    "type": "string",
+                    "enum": ["disabled", "depth", "contour", "replay_fixture"]
+                  },
+                  "pose_mod": { "type": "string" },
+                  "controlnet_strength": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "model_ref": {
+                    "type": "string",
+                    "description": "Path or URI to trained neural SDF weights when available"
+                  },
+                  "conditioning_map_path": {
+                    "type": "string",
+                    "description": "Optional projected depth/contour image for ControlNet"
+                  },
+                  "spec_ref": { "type": "string" }
+                }
+              }
             }
           }
         }

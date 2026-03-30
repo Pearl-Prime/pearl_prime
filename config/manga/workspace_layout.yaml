@@ -1,0 +1,8 @@
+# Multi-chapter manga workspace (optional). Flat single-chapter layout remains valid.
+# See docs/MANGA_MULTI_CHAPTER_WORKSPACE.md
+chapters_subdir: chapters
+# Chapter artifacts live at: <workspace>/<chapters_subdir>/<chapter_id>/chapter_request.json
+single_chapter_flat: true
+description: >
+  If chapter_request.json exists at workspace root, treat workspace as the chapter root.
+  Otherwise resolve chapter root as workspace/chapters/<chapter_id>/ when --chapter-id is set.
