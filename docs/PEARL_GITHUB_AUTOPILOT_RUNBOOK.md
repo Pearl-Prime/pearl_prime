@@ -40,19 +40,32 @@ Automation-style label:
 bash scripts/git/hourly_repo_alignment.sh --report-label automation
 ```
 
+Branch census only (no PR merges, main sync, or pruning — still writes alignment report + census):
+
+```bash
+bash scripts/git/hourly_repo_alignment.sh --dry-run --branch-census-only --report-label audit
+```
+
 ## Output
 
 Always read the stable aliases (do not guess timestamped filenames):
 
 - `artifacts/governance/repo_alignment/latest_hourly_repo_alignment.json`
 - `artifacts/governance/repo_alignment/latest_hourly_repo_alignment.md`
+- `artifacts/governance/repo_alignment/latest_branch_census.json` (when census runs)
 
-Each run also writes timestamped copies: `hourly_repo_alignment_<timestamp>.json` / `.md`.
+Each run also writes timestamped copies: `hourly_repo_alignment_<timestamp>.json` / `.md`, and `branch_census_<timestamp>.json` when the branch census executes.
+
+Invalid CLI flags still produce a failure-state alignment report (and refresh `latest_hourly_repo_alignment.*`) instead of exiting with only a argparse message and no artifact.
 
 ### Report fields (JSON)
 
 - `mode`: `online_live` or `offline_degraded` (remote fetch or GitHub inspection failed).
 - `run_label`: optional string from `--report-label`.
+- `success`, `failure_reason`, `finished_at`: run outcome metadata (`failure_reason` set on argparse errors or subprocess failures).
+- `run_context`: argv snapshot, HEAD / `origin/main` SHAs when resolvable, `gh_auth_ok`.
+- `branch_census_summary`: counts and sample unmanaged / registry-only branches when census ran.
+- `branch_census_path`: path to the timestamped full census JSON, or null if census skipped.
 - `github_inspection_ok`: whether GitHub PR list/detail inspection completed (do not treat `open_pr_count` as live when this is false).
 - `remote_errors`: strings describing fetch/GitHub/command failures.
 - `local_branch`: current branch at repo root.
@@ -97,3 +110,9 @@ This tool is for repo alignment and housekeeping. It is not a substitute for:
 Pearl_GitHub should still follow the onboarding order and state tracking discipline in `docs/PEARL_GITHUB_STATE.md`.
 
 Promotion of feature payloads from convergence branches belongs in the separate harvest-to-main lane (`docs/REPO_ALIGNMENT_AND_MAIN_HARVEST_SPEC.md` Workstream B), not in this hourly loop.
+
+## Branch policy registry and census
+
+- Canonical registry scaffold: `config/governance/branch_registry.json` (patterns such as `agent/*`, `codex/*`, and explicit branch rows).
+- Each alignment run loads this registry (when the file exists), compares live local + `origin/*` branch names against patterns and explicit rows, records ahead/behind vs `origin/main`, and writes a full census JSON plus `branch_census_summary` on the main report.
+- Use `--branch-census-only` for audit-style runs that must not merge PRs or reset local `main`.

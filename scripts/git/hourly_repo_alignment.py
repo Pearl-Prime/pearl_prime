@@ -21,6 +21,7 @@ Online vs offline:
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import json
 import os
 import shlex
@@ -35,7 +36,17 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_REPORT_DIR = REPO_ROOT / "artifacts" / "governance" / "repo_alignment"
+DEFAULT_BRANCH_REGISTRY = REPO_ROOT / "config" / "governance" / "branch_registry.json"
 IGNORED_CHECKS = {"Workers Builds: pearl-prime", "auto-merge"}
+
+
+class ParserError(ValueError):
+    """Raised when CLI args are invalid so the caller can still write a report."""
+
+
+class ReportingArgumentParser(argparse.ArgumentParser):
+    def error(self, message: str) -> None:
+        raise ParserError(message)
 
 
 def utc_now() -> str:
@@ -124,6 +135,11 @@ class Report:
     remaining_branch_drift: list[dict[str, Any]] = field(default_factory=list)
     followup_candidates: list[str] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
+    success: bool = False
+    failure_reason: str | None = None
+    finished_at: str | None = None
+    run_context: dict[str, Any] = field(default_factory=dict)
+    branch_census_summary: dict[str, Any] = field(default_factory=dict)
 
     def add(self, kind: str, target: str, status: str, details: str = "") -> None:
         self.actions.append(Action(kind=kind, target=target, status=status, details=details))
@@ -172,6 +188,130 @@ def branch_to_worktree_map() -> dict[str, Path]:
         if branch_ref and path and branch_ref.startswith("refs/heads/"):
             mapping[branch_ref.removeprefix("refs/heads/")] = Path(path)
     return mapping
+
+
+def safe_git_stdout(args: list[str], *, cwd: Path = REPO_ROOT) -> str | None:
+    proc = safe_run(args, cwd=cwd)
+    if proc.returncode != 0:
+        return None
+    return proc.stdout.strip()
+
+
+def load_branch_registry(path: Path) -> dict[str, Any]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload.setdefault("patterns", [])
+    payload.setdefault("branches", [])
+    return payload
+
+
+def local_branch_names() -> list[str]:
+    proc = safe_run(["git", "for-each-ref", "--format=%(refname:short)", "refs/heads"])
+    if proc.returncode != 0:
+        return []
+    return sorted(line.strip() for line in proc.stdout.splitlines() if line.strip())
+
+
+def remote_branch_names() -> list[str]:
+    proc = safe_run(["git", "for-each-ref", "--format=%(refname:short)", "refs/remotes/origin"])
+    if proc.returncode != 0:
+        return []
+    branches: list[str] = []
+    for raw in proc.stdout.splitlines():
+        branch = raw.strip()
+        if not branch or branch in {"origin", "origin/HEAD"}:
+            continue
+        branches.append(branch)
+    return sorted(branches)
+
+
+def branch_distance_vs_main(branch: str) -> tuple[int | None, int | None]:
+    stdout = safe_git_stdout(["git", "rev-list", "--left-right", "--count", f"origin/main...{branch}"])
+    if not stdout:
+        return None, None
+    parts = stdout.split()
+    if len(parts) != 2:
+        return None, None
+    try:
+        return int(parts[0]), int(parts[1])
+    except ValueError:
+        return None, None
+
+
+def match_branch_policy(branch: str, branch_type: str, registry: dict[str, Any]) -> dict[str, Any] | None:
+    for entry in registry.get("branches", []):
+        if entry.get("branch") == branch:
+            return entry
+    for pattern in registry.get("patterns", []):
+        expected_kind = pattern.get("kind")
+        if expected_kind and expected_kind != branch_type:
+            continue
+        if fnmatch.fnmatch(branch, pattern.get("pattern", "")):
+            return pattern
+    return None
+
+
+def build_branch_census(report: Report, registry_path: Path) -> dict[str, Any]:
+    registry = load_branch_registry(registry_path)
+    local = local_branch_names()
+    remote = remote_branch_names()
+    live_entries: list[dict[str, Any]] = []
+    unmanaged: list[str] = []
+
+    for branch_type, names in (("local", local), ("remote", remote)):
+        for branch in names:
+            behind, ahead = branch_distance_vs_main(branch)
+            policy = match_branch_policy(branch, branch_type, registry)
+            entry: dict[str, Any] = {
+                "branch": branch,
+                "type": branch_type,
+                "behind_main": behind,
+                "ahead_main": ahead,
+                "policy_match": bool(policy),
+            }
+            if policy:
+                entry["policy"] = {
+                    "owner": policy.get("owner"),
+                    "disposition": policy.get("disposition"),
+                    "allowed_actions": policy.get("allowed_actions", []),
+                    "source_doc": policy.get("source_doc"),
+                    "notes": policy.get("notes", ""),
+                }
+            else:
+                unmanaged.append(branch)
+            live_entries.append(entry)
+
+    registry_only: list[str] = []
+    live_set = set(local) | set(remote)
+    for entry in registry.get("branches", []):
+        b = entry.get("branch")
+        if b and b not in live_set:
+            registry_only.append(b)
+
+    summary = {
+        "registry_path": str(registry_path),
+        "generated_at": utc_now(),
+        "counts": {
+            "local": len(local),
+            "remote": len(remote),
+            "live_total": len(live_entries),
+            "unmanaged": len(unmanaged),
+            "registry_only": len(registry_only),
+        },
+        "unmanaged_branches": unmanaged,
+        "registry_only_branches": registry_only,
+        "entries": live_entries,
+    }
+
+    report.branch_census_summary = summary["counts"] | {
+        "unmanaged_branches": unmanaged[:20],
+        "registry_only_branches": registry_only[:20],
+    }
+    status = "ok" if not unmanaged else f"unmanaged:{len(unmanaged)}"
+    details = f"local={len(local)} remote={len(remote)} registry_only={len(registry_only)}"
+    if unmanaged:
+        details += f" unmanaged={', '.join(unmanaged[:8])}"
+    report.add("branch-census", str(registry_path), status, details)
+    return summary
 
 
 def parse_local_main_state(main_path: Path) -> dict[str, Any]:
@@ -478,6 +618,17 @@ def run_health_check(report: Report) -> None:
     report.add("health-check", shell_join(cmd), status, tail)
 
 
+def gather_run_context() -> dict[str, Any]:
+    gh_proc = safe_run(["gh", "auth", "status"])
+    return {
+        "argv": sys.argv[1:],
+        "head_sha": safe_git_stdout(["git", "rev-parse", "HEAD"]),
+        "origin_main_sha": safe_git_stdout(["git", "rev-parse", "origin/main"]),
+        "current_branch": safe_git_stdout(["git", "branch", "--show-current"]),
+        "gh_auth_ok": gh_proc.returncode == 0,
+    }
+
+
 def build_blocked_items(report: Report) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
     for b in report.blocked_prs:
@@ -509,21 +660,40 @@ def build_followup_candidates(report: Report) -> list[str]:
         c.append(f"Verify backup branch `{report.backup_branch}` before any cleanup.")
     c.append("Branch disposition (remote codex/*): docs/BRANCH_DISPOSITION_2026_03_20.md")
     c.append("Separate harvest-to-main reporting lane: docs/REPO_ALIGNMENT_AND_MAIN_HARVEST_SPEC.md (Workstream B).")
+    c.append("Branch policy registry + census: config/governance/branch_registry.json (see runbook).")
     return c
 
 
-def write_report(report: Report, report_dir: Path) -> tuple[Path, Path]:
+def write_branch_census(census: dict[str, Any], report_dir: Path, stamp: str) -> Path:
+    path = report_dir / f"branch_census_{stamp}.json"
+    path.write_text(json.dumps(census, indent=2) + "\n", encoding="utf-8")
+    latest = report_dir / "latest_branch_census.json"
+    shutil.copy2(path, latest)
+    return path
+
+
+def write_report(
+    report: Report,
+    report_dir: Path,
+    branch_census: dict[str, Any] | None = None,
+) -> tuple[Path, Path]:
     report_dir.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     json_path = report_dir / f"hourly_repo_alignment_{stamp}.json"
     md_path = report_dir / f"hourly_repo_alignment_{stamp}.md"
+    branch_census_path: Path | None = None
+    if branch_census is not None:
+        branch_census_path = write_branch_census(branch_census, report_dir, stamp)
 
     json_payload = {
         "started_at": report.started_at,
+        "finished_at": report.finished_at,
         "repo_root": report.repo_root,
         "dry_run": report.dry_run,
         "mode": report.mode,
         "run_label": report.run_label,
+        "success": report.success,
+        "failure_reason": report.failure_reason,
         "github_inspection_ok": report.github_inspection_ok,
         "remote_errors": report.remote_errors,
         "local_branch": report.local_branch,
@@ -537,6 +707,9 @@ def write_report(report: Report, report_dir: Path) -> tuple[Path, Path]:
         "pruned_branches": report.pruned_branches,
         "remaining_branch_drift": report.remaining_branch_drift,
         "followup_candidates": report.followup_candidates,
+        "run_context": report.run_context,
+        "branch_census_summary": report.branch_census_summary,
+        "branch_census_path": str(branch_census_path) if branch_census_path else None,
         "notes": report.notes,
         "actions": [asdict(action) for action in report.actions],
     }
@@ -552,13 +725,16 @@ def write_report(report: Report, report_dir: Path) -> tuple[Path, Path]:
         "# Pearl_GitHub Hourly Repo Alignment",
         "",
         f"- Started: `{report.started_at}`",
+        f"- Finished: `{report.finished_at or 'unknown'}`",
         f"- Repo: `{report.repo_root}`",
         f"- Dry run: `{report.dry_run}`",
         f"- Run label: `{report.run_label or 'none'}`",
+        f"- Success: `{report.success}`",
         f"- Mode: `{report.mode}`",
         f"- GitHub inspection OK: `{report.github_inspection_ok}`",
         f"- Local branch (checkout): `{report.local_branch}`",
         f"- Open PR count: `{report.open_pr_count}`",
+        f"- Branch census file: `{branch_census_path or 'none'}`",
         f"- {gh_note}",
         "",
         "## Local main state",
@@ -617,6 +793,20 @@ def write_report(report: Report, report_dir: Path) -> tuple[Path, Path]:
     if report.notes:
         lines.extend(["", "## Notes", ""])
         lines.extend(f"- {note}" for note in report.notes)
+    if report.failure_reason:
+        lines.extend(["", "## Failure", "", f"- `{report.failure_reason}`"])
+    if report.branch_census_summary:
+        lines.extend(
+            [
+                "",
+                "## Branch census summary",
+                "",
+                "```text",
+                json.dumps(report.branch_census_summary, indent=2),
+                "```",
+                "",
+            ]
+        )
     md_text = "\n".join(lines) + "\n"
     md_path.write_text(md_text, encoding="utf-8")
 
@@ -627,8 +817,8 @@ def write_report(report: Report, report_dir: Path) -> tuple[Path, Path]:
     return json_path, md_path
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Pearl_GitHub hourly repo alignment runner")
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = ReportingArgumentParser(description="Pearl_GitHub hourly repo alignment runner")
     parser.add_argument("--dry-run", action="store_true", help="Report actions without mutating repo or PRs")
     parser.add_argument("--max-prs", type=int, default=5, help="Maximum number of clean PRs to merge per run")
     parser.add_argument(
@@ -642,18 +832,47 @@ def parse_args() -> argparse.Namespace:
         default=str(DEFAULT_REPORT_DIR),
         help="Directory for JSON/Markdown run reports",
     )
-    return parser.parse_args()
+    parser.add_argument(
+        "--branch-registry",
+        default=str(DEFAULT_BRANCH_REGISTRY),
+        help="Machine-readable branch policy registry used by branch census",
+    )
+    parser.add_argument(
+        "--branch-census-only",
+        action="store_true",
+        help="Write branch census and alignment report without PR merges, main sync, or pruning",
+    )
+    return parser.parse_args(argv)
 
 
 def main() -> int:
     os.chdir(REPO_ROOT)
-    args = parse_args()
+    raw_argv = sys.argv[1:]
+    try:
+        args = parse_args(raw_argv)
+    except ParserError as exc:
+        report = Report(
+            started_at=utc_now(),
+            repo_root=str(REPO_ROOT),
+            dry_run=False,
+            run_label=None,
+            success=False,
+            failure_reason=f"argument-parse failed: {exc}",
+            finished_at=utc_now(),
+        )
+        report.run_context = {"argv": raw_argv}
+        report.add("error", "argv", "parse-error", str(exc))
+        json_path, md_path = write_report(report, DEFAULT_REPORT_DIR)
+        print(f"FAILED: wrote {json_path} and {md_path}", file=sys.stderr)
+        return 2
+
     report = Report(
         started_at=utc_now(),
         repo_root=str(REPO_ROOT),
         dry_run=args.dry_run,
         run_label=args.report_label,
     )
+    report.run_context = gather_run_context()
     report.local_branch = current_checkout_branch()
     _worktrees_early = branch_to_worktree_map()
     _main_early = _worktrees_early.get("main", REPO_ROOT)
@@ -664,7 +883,8 @@ def main() -> int:
         report.mode = "offline_degraded"
         report.remote_errors.append(f"git fetch origin --prune: {fetch_err}")
         report.add("fetch", "origin", "failed", fetch_err)
-    detailed_prs, gh_err = (None, None)
+    detailed_prs: list[dict[str, Any]] | None = None
+    gh_err: str | None = None
     if fetch_ok:
         detailed_prs, gh_err = load_detailed_open_prs()
         if gh_err is not None:
@@ -677,14 +897,29 @@ def main() -> int:
             report.github_inspection_ok = True
             report.open_pr_count = len(detailed_prs or [])
 
+    branch_census: dict[str, Any] | None = None
+    reg_path = Path(args.branch_registry)
+
     try:
-        merge_clean_prs(report, dry_run=args.dry_run, max_prs=args.max_prs, detailed_prs=detailed_prs)
-        sync_local_main(report, dry_run=args.dry_run, online=fetch_ok)
+        if reg_path.is_file():
+            branch_census = build_branch_census(report, reg_path)
+        else:
+            report.add("branch-census", str(reg_path), "skipped", "registry file not found")
+            report.notes.append(f"Branch registry not found at {reg_path}; census skipped.")
+
+        if args.branch_census_only:
+            report.notes.append("branch_census_only: skipped PR merges, main sync, and branch pruning.")
+        else:
+            merge_clean_prs(report, dry_run=args.dry_run, max_prs=args.max_prs, detailed_prs=detailed_prs)
+            sync_local_main(report, dry_run=args.dry_run, online=fetch_ok)
+            prune_local_branches(report, dry_run=args.dry_run, online=fetch_ok)
+
         report.remaining_branch_drift = compute_remaining_branch_drift()
-        prune_local_branches(report, dry_run=args.dry_run, online=fetch_ok)
         report.blocked_items = build_blocked_items(report)
         report.followup_candidates = build_followup_candidates(report)
         run_health_check(report)
+        report.finished_at = utc_now()
+        report.success = True
     except subprocess.CalledProcessError as exc:
         report.mode = "offline_degraded"
         detail = (exc.stderr or exc.stdout or "").strip()
@@ -694,9 +929,15 @@ def main() -> int:
             report.remaining_branch_drift = compute_remaining_branch_drift()
         report.blocked_items = build_blocked_items(report)
         report.followup_candidates = build_followup_candidates(report)
+        report.finished_at = utc_now()
+        report.success = False
+        report.failure_reason = f"{shell_join(list(exc.cmd))} exited {exc.returncode}"
         run_health_check(report)
+        json_path, md_path = write_report(report, Path(args.report_dir), branch_census)
+        print(f"FAILED: wrote {json_path} and {md_path}", file=sys.stderr)
+        return exc.returncode
 
-    json_path, md_path = write_report(report, Path(args.report_dir))
+    json_path, md_path = write_report(report, Path(args.report_dir), branch_census)
     print(f"Wrote {json_path}")
     print(f"Wrote {md_path}")
     if report.mode == "offline_degraded":
