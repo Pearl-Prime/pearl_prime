@@ -1789,6 +1789,10 @@ All go-live checklists are comprehensive, locale-specific, and cover content, te
 - `rakuten_ai_market_research_2026_03_23.md` — Japan/Korea/Taiwan deep report (consumer demographics, competitive landscape, distribution, regulatory, marketing strategies, case studies, risks)
 - `web_search_gap_fill_2026_03_23.md` — Taiwan platforms, China updates (Ximalaya/Tencent acquisition), ISBN/tax requirements, English-language competitor titles
 
+### A.0 Config provenance (PR-RI-005)
+
+Structured numeric and table extracts from `deepseek_market_data_followup_2026_03_23.md` with per-block `_source` fields live in `config/localization/asian_audiobook_market_data_followup.yaml`. **Singapore:** The §A.1 row below follows this follow-up file (USD 55.1M by 2033, SE Asia framing). A separate DeepSeek gap-fill pass (`deepseek_gap_fill_round2_2026_03_23.md`) is integrated as `config/localization/hk_sg_market_facts.yaml` (PR-RI-002) and may state different Singapore projections — treat each YAML file as authoritative for its cited research file.
+
 ### A.1 Market Size Summary
 
 | Market | 2024 Size | 2030/2033 Projection | CAGR | Key Metric |
