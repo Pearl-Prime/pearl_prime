@@ -43,3 +43,9 @@ Put in `payees.yaml` (display_name, bank_last4) or `fill_template.csv` (payee_na
 | 2 | 24 bank connections | credentials.yaml (auto when you connect) |
 | 3 | 24 Bluevine last4 | churches.yaml or fill_template.csv |
 | 4 | 24 payee names + bank last4 | payees.yaml or fill_template.csv |
+
+---
+
+## 5. KDP store / royalty reference (research only)
+
+- [ ] Skim `config/payouts/kdp_store_royalty_reference.yaml` — research-backed Kindle marketplace rows and KDP Select notes from `artifacts/research/kdp_global_ebook_strategy_2026_03_23.md` (PR-RI-003). **Not** a substitute for `payees.yaml` or current Amazon KDP contract terms.

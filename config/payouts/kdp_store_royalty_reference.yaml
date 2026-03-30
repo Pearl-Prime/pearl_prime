@@ -1,0 +1,234 @@
+# KDP Kindle store and royalty reference (research extract only).
+# Authority: docs/RESEARCH_INTEGRATION_DEV_SPEC.md §2 PR-RI-003.
+# Do not treat as contractual Phoenix payout terms; verify live Amazon KDP rules.
+schema_version: 1
+document_type: kdp_store_royalty_reference
+
+source_heading_discrepancy:
+  heading_text: "All 13 Kindle Stores (one KDP account covers all)"
+  table_row_count_in_source: 15
+  _source:
+    file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+    section: "## 1. Amazon KDP Marketplace Coverage"
+    note: "Heading claims 13 stores; following markdown table lists 15 marketplace rows — stored count as stated in source body."
+    extracted_at: "2026-03-31"
+
+kindle_marketplaces:
+  - market: US
+    domain: amazon.com
+    currency: USD
+    seventy_percent_royalty: "Yes"
+    ku_available: "Yes"
+    notes: "Largest market"
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "US row"
+      extracted_at: "2026-03-31"
+  - market: UK
+    domain: amazon.co.uk
+    currency: GBP
+    seventy_percent_royalty: "Yes"
+    ku_available: "Yes"
+    notes: "2nd largest English"
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "UK row"
+      extracted_at: "2026-03-31"
+  - market: Germany
+    domain: amazon.de
+    currency: EUR
+    seventy_percent_royalty: "Yes"
+    ku_available: "Yes"
+    notes: "Largest EU"
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "Germany row"
+      extracted_at: "2026-03-31"
+  - market: France
+    domain: amazon.fr
+    currency: EUR
+    seventy_percent_royalty: "Yes"
+    ku_available: "Yes"
+    notes: ""
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "France row"
+      extracted_at: "2026-03-31"
+  - market: Italy
+    domain: amazon.it
+    currency: EUR
+    seventy_percent_royalty: "Yes"
+    ku_available: "Yes"
+    notes: ""
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "Italy row"
+      extracted_at: "2026-03-31"
+  - market: Spain
+    domain: amazon.es
+    currency: EUR
+    seventy_percent_royalty: "Yes"
+    ku_available: "Yes"
+    notes: ""
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "Spain row"
+      extracted_at: "2026-03-31"
+  - market: Netherlands
+    domain: amazon.nl
+    currency: EUR
+    seventy_percent_royalty: "Yes"
+    ku_available: "Yes"
+    notes: ""
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "Netherlands row"
+      extracted_at: "2026-03-31"
+  - market: Poland
+    domain: amazon.pl
+    currency: PLN
+    seventy_percent_royalty: "Yes"
+    ku_available: "Yes"
+    notes: ""
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "Poland row"
+      extracted_at: "2026-03-31"
+  - market: Sweden
+    domain: amazon.se
+    currency: SEK
+    seventy_percent_royalty: "Yes"
+    ku_available: "Yes"
+    notes: ""
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "Sweden row"
+      extracted_at: "2026-03-31"
+  - market: Japan
+    domain: amazon.co.jp
+    currency: JPY
+    seventy_percent_royalty: "KDP Select only"
+    ku_available: "Yes"
+    notes: "10% consumption tax"
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "Japan row"
+      extracted_at: "2026-03-31"
+  - market: Canada
+    domain: amazon.ca
+    currency: CAD
+    seventy_percent_royalty: "Yes"
+    ku_available: "Yes"
+    notes: ""
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "Canada row"
+      extracted_at: "2026-03-31"
+  - market: Brazil
+    domain: amazon.com.br
+    currency: BRL
+    seventy_percent_royalty: "KDP Select only"
+    ku_available: "Yes"
+    notes: ""
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "Brazil row"
+      extracted_at: "2026-03-31"
+  - market: India
+    domain: amazon.in
+    currency: INR
+    seventy_percent_royalty: "KDP Select only"
+    ku_available: "Yes"
+    notes: ""
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "India row"
+      extracted_at: "2026-03-31"
+  - market: Mexico
+    domain: amazon.com.mx
+    currency: MXN
+    seventy_percent_royalty: "KDP Select only"
+    ku_available: "Yes"
+    notes: ""
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "Mexico row"
+      extracted_at: "2026-03-31"
+  - market: Australia
+    domain: amazon.com.au
+    currency: AUD
+    seventy_percent_royalty: "Yes"
+    ku_available: "Yes"
+    notes: ""
+    _source:
+      file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+      section: "## 1. Amazon KDP Marketplace Coverage (table)"
+      note: "Australia row"
+      extracted_at: "2026-03-31"
+
+seventy_vs_thirtyfive_percent:
+  without_kdp_select_in_select_only_markets_royalty_percent: 35
+  select_only_markets_for_seventy_percent:
+    - Japan
+    - Brazil
+    - India
+    - Mexico
+  kdp_select_digital_exclusivity_days: 90
+  _source:
+    file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+    section: "### Critical: Japan, Brazil, India, Mexico Require KDP Select for 70% Royalty"
+    note: "Bullets on 35% without Select; KDP Select = 90-day exclusive (no digital distribution elsewhere)."
+    extracted_at: "2026-03-31"
+
+japan_list_price_consumption_tax:
+  rate_percent: 10
+  _source:
+    file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+    section: "### Japan-Specific Pricing"
+    note: "Include 10% consumption tax in list price."
+    extracted_at: "2026-03-31"
+
+kdp_select_kindle_unlimited_snapshot:
+  subscribers_millions: 4.8
+  monthly_fee_usd: 11.99
+  kenpc_per_page_usd_low: 0.0041
+  kenpc_per_page_usd_high: 0.0048
+  _source:
+    file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+    section: "## 2. KDP Select — Why It's The Right Choice for This Strategy / ### What KDP Select Gives Us:"
+    note: "KU subscriber count, monthly fee, KENPC page read rate range."
+    extracted_at: "2026-03-31"
+
+seventy_percent_price_band_usd:
+  low: 2.99
+  high: 9.99
+  _source:
+    file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+    section: "## 6. Pricing Strategy / ### 70% Royalty Sweet Spot: $2.99 – $9.99"
+    note: "Heading states dollar band for 70% royalty sweet spot."
+    extracted_at: "2026-03-31"
+
+countries_served_without_dedicated_stores_note:
+  summary: >-
+    Amazon.com serves 170+ countries for Kindle purchases. Readers in South Korea,
+    Taiwan, China, Hong Kong, Singapore, and other Asian markets buy from amazon.com
+    (US store) using international credit cards.
+  _source:
+    file: artifacts/research/kdp_global_ebook_strategy_2026_03_23.md
+    section: "### Countries Served but Without Dedicated Stores"
+    note: "Verbatim paraphrase of bullet block."
+    extracted_at: "2026-03-31"
