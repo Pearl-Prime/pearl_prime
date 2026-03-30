@@ -130,7 +130,11 @@ def resolve_slot(
     if slot_type == "STORY" and context.required_band_by_chapter is not None:
         ch_band = context.required_band_by_chapter.get(chapter_idx)
         if ch_band is not None:
-            available = [e for e in available if (e.metadata or {}).get("band") == ch_band]
+            available = [
+                e for e in available
+                if (e.metadata or {}).get("band") == ch_band
+                or bool((e.metadata or {}).get("band_universal"))
+            ]
     if not available:
         if context.teacher_mode:
             from phoenix_v4.teacher.coverage_gate import TeacherCoverageError

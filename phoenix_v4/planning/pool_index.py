@@ -138,6 +138,7 @@ def _load_teacher_pool(teacher_atoms_root: Path, slot_type: str) -> list[AtomEnt
                     meta["band"] = int(band)
                 except (TypeError, ValueError):
                     if str(band).strip().lower() == "universal":
+                        meta["band_universal"] = True
                         eib = data.get("emotional_intensity_band")
                         if eib is not None:
                             try:
