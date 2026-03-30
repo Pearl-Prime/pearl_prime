@@ -14,7 +14,8 @@ Do not merge any codex/* convergence branch directly to main. Cut a clean agent/
 
 ### pearl_prime_pr1: Runtime identity + location truth
 
-- **Classification:** `needs_clean_pr`
+- **Classification:** `satisfied_on_main`
+- **Note:** Governed paths resolved on `origin/main` via S0–S8 and related work; convergence tip stale vs main (no transplant 2026-03-30).
 - **Source (material):** `codex/state-convergence-20260328`
 - **Target:** `origin/main`
 - **Recommended clean branch:** `agent/pearl-prime-runtime-truth`
@@ -27,10 +28,7 @@ Do not merge any codex/* convergence branch directly to main. Cut a clean agent/
   - `tests/test_book_renderer.py`
   - `tests/test_book_renderer_location_fallbacks.py`
   - `tests/test_topic_identity_resolution.py`
-- **Still divergent vs origin/main (per-path diff):**
-  - `phoenix_v4/planning/catalog_planner.py`
-  - `config/localization/render_location_profiles.yaml`
-  - `tests/test_topic_identity_resolution.py`
+- **Still divergent vs origin/main (per-path diff):** *(none — satisfied on main as of 2026-03-30)*
 - **Required tests:**
   - `PYTHONPATH=. python3 -m pytest tests/test_topic_identity_resolution.py tests/test_book_renderer_location_fallbacks.py tests/test_book_renderer.py tests/test_location_passthrough.py -q`
 
@@ -58,7 +56,8 @@ Do not merge any codex/* convergence branch directly to main. Cut a clean agent/
 
 ### pearl_prime_pr3: Governing Pearl Prime recovery docs
 
-- **Classification:** `needs_clean_pr`
+- **Classification:** `satisfied_on_main`
+- **Note:** All four governed docs newer/more complete on `origin/main` than stale convergence tip; `DOCS_INDEX` links present (2026-03-30).
 - **Source (material):** `codex/state-convergence-20260328`
 - **Target:** `origin/main`
 - **Recommended clean branch:** `agent/pearl-prime-recovery-docs`
@@ -70,17 +69,13 @@ Do not merge any codex/* convergence branch directly to main. Cut a clean agent/
   - `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md`
   - `docs/PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md`
   - `docs/DOCS_INDEX.md`
-- **Still divergent vs origin/main (per-path diff):**
-  - `docs/PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md`
-  - `docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md`
-  - `docs/PEARL_PRIME_SALVAGE_AUDIT_2026_03_29.md`
-  - `docs/DOCS_INDEX.md`
+- **Still divergent vs origin/main (per-path diff):** *(none — satisfied on main as of 2026-03-30)*
 - **Required tests:**
   - `PYTHONPATH=. python3 scripts/ci/check_docs_governance.py`
 
 ## Codex branch candidates
 
-- **`codex/main-autobackup-20260320-2124`** (`codex/main-autobackup-20260320-2124`): `blocked` — No row in docs/BRANCH_DISPOSITION_2026_03_20.md; human triage before harvest.
+- **`codex/main-autobackup-20260320-2124`** (`codex/main-autobackup-20260320-2124`): `archived` — Disposition `archive` (2026-03-30): autobackup snapshot; no governed merge target. Row added to `docs/BRANCH_DISPOSITION_2026_03_20.md`. Remote not present at triage.
   - commits ahead of origin/main: `2`
   - diff sample (first 40 paths, symmetric):
     - `.gitignore`
@@ -95,7 +90,7 @@ Do not merge any codex/* convergence branch directly to main. Cut a clean agent/
     - `scripts/integrations/check_messaging_channels_local.sh`
     - …
 
-- **`codex/main-autobackup-20260322-112842`** (`codex/main-autobackup-20260322-112842`): `blocked` — No row in docs/BRANCH_DISPOSITION_2026_03_20.md; human triage before harvest.
+- **`codex/main-autobackup-20260322-112842`** (`codex/main-autobackup-20260322-112842`): `archived` — Disposition `archive` (2026-03-30): autobackup snapshot; cherry-pick later if product needs. Row in disposition doc. Remote not present at triage.
   - commits ahead of origin/main: `22`
   - diff sample (first 40 paths, symmetric):
     - `ASIAN_MARKET_EXPANSION_WRITERS_SPEC.md`
@@ -110,7 +105,7 @@ Do not merge any codex/* convergence branch directly to main. Cut a clean agent/
     - `artifacts/ei_v2/ei_v1_v2_summary.txt`
     - …
 
-- **`codex/main-salvage-20260323-153043`** (`codex/main-salvage-20260323-153043`): `blocked` — No row in docs/BRANCH_DISPOSITION_2026_03_20.md; human triage before harvest.
+- **`codex/main-salvage-20260323-153043`** (`codex/main-salvage-20260323-153043`): `archived` — Disposition `archive` (2026-03-30): salvage snapshot; teacher-bank work superseded by S6/S7 on `main`. Row in disposition doc. Remote not present at triage.
   - commits ahead of origin/main: `15`
   - diff sample (first 40 paths, symmetric):
     - `.github/pull_request_template.md`
@@ -125,7 +120,7 @@ Do not merge any codex/* convergence branch directly to main. Cut a clean agent/
     - `SOURCE_OF_TRUTH/teacher_banks/adi_da/approved_atoms/EXERCISE/adi_da_EXERCISE_001.yaml`
     - …
 
-- **`codex/marketing-brand-alias-resolution`** (`codex/marketing-brand-alias-resolution`): `blocked` — No row in docs/BRANCH_DISPOSITION_2026_03_20.md; human triage before harvest.
+- **`codex/marketing-brand-alias-resolution`** (`codex/marketing-brand-alias-resolution`): `archived` — Disposition `archive` (2026-03-30): marketing integration snapshot; not governed by active spec. Row in disposition doc. Remote deleted after triage (Pearl_GitHub 2026-03-30).
   - commits ahead of origin/main: `6`
   - diff sample (first 40 paths, symmetric):
     - `.github/workflows/bestseller-scrape-weekly.yml`
@@ -156,7 +151,7 @@ Do not merge any codex/* convergence branch directly to main. Cut a clean agent/
     - `.github/workflows/audiobook-regression.yml`
     - …
 
-- **`codex/state-convergence-20260328`** (`codex/state-convergence-20260328`): `needs_clean_pr` — Primary Pearl Prime convergence carrier; use governed PR slices only (see pearl_prime_slices in report).
+- **`codex/state-convergence-20260328`** (`codex/state-convergence-20260328`): `superseded` — Both governed PR slices (PR1 runtime-truth, PR3 recovery-docs) confirmed satisfied on `origin/main`; no remaining transplant targets. Disposition `superseded` (2026-03-30). **Do not delete remote** — audit reference (see `codex/runtime-consolidation` pattern).
   - commits ahead of origin/main: `42`
   - diff sample (first 40 paths, symmetric):
     - `.github/workflows/audiobook-regression.yml`
@@ -173,8 +168,8 @@ Do not merge any codex/* convergence branch directly to main. Cut a clean agent/
 
 ## Auxiliary items
 
-- **Source/bank repair lane (not a branch cherry-pick)** (`pearl_prime_followup_source_repair`) — `blocked`
-  - docs/PEARL_PRIME_MAIN_RECOVERY_DEV_SPEC.md §5 follow-up: hollow atoms, teacher coverage, persona/location catalog work—new implementation, not salvage PR.
+- **Source/bank repair lane (not a branch cherry-pick)** (`pearl_prime_followup_source_repair`) — `completed`
+  - S0–S8 workstream completed; closeout receipt at `artifacts/source_bank_repair/CLOSEOUT_RECEIPT.md` (PR #88 on `main`).
 
 - **Bestseller 100 signoff evidence (narrow artifact)** (`bestseller_100_signoff_branch`) — `already_on_main`
   - Salvage audit: `origin/agent/bestseller-100-signoff-clean` carries signoff evidence only. If the signoff markdown is not on `origin/main`, open a narrow PR from a clean `agent/*` branch—do not merge the agent branch wholesale.

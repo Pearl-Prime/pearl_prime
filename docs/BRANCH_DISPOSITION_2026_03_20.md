@@ -13,6 +13,8 @@ Disposition labels:
 
 - `delete` — do not merge; remove remote branch after preserving anything useful
 - `harvest` — do not merge wholesale; cherry-pick or rebuild only the useful part
+- `archive` — historical snapshot; governed content absent or superseded on `main`; safe to drop remote after record (cherry-pick later only if product asks)
+- `superseded` — carrier branch whose governed slices landed elsewhere on `main`; keep local/remote only for audit if desired, not for merge
 - `keep-open` — branch still has an active review vehicle or meaningful unique work
 - `keep-audit` — explicitly keep for deliberate deeper audit; unsafe for blind action
 
@@ -174,6 +176,18 @@ Disposition labels:
 ### Keep open for deliberate decomposition
 
 - `origin/codex/runtime-consolidation`
+
+## Harvest triage addendum — 2026-03-30
+
+Pearl_GitHub triage vs `artifacts/governance/main_harvest/latest_main_harvest.md` (post PR #90). Rows: branch | disposition | rationale | date.
+
+| Branch | Disposition | Rationale | Date |
+|--------|-------------|-----------|------|
+| `origin/codex/main-autobackup-20260320-2124` | `archive` | Autobackup snapshot (~2 commits ahead); misc docs/backup noise; no governed merge target. Remote absent at triage — record only. | 2026-03-30 |
+| `origin/codex/main-autobackup-20260322-112842` | `archive` | Autobackup snapshot (~22 commits ahead); GTM/marketing/PhoenixControl noise; rescue via future cherry-picks if needed. Remote absent at triage — record only. | 2026-03-30 |
+| `origin/codex/main-salvage-20260323-153043` | `archive` | Salvage snapshot (~15 commits ahead); teacher-bank deltas superseded by S6/S7 on `main`; remainder superseded. Remote absent at triage — record only. | 2026-03-30 |
+| `origin/codex/marketing-brand-alias-resolution` | `archive` | Marketing workflows + artifacts; not governed by active spec; future marketing lane may revisit. | 2026-03-30 |
+| `origin/codex/state-convergence-20260328` | `superseded` | Pearl Prime convergence carrier; governed PR1 + PR3 slices confirmed **satisfied on `main`** (no transplant vs stale tip). PR2 already_on_main per harvest. Keep branch for audit only; do not merge wholesale. | 2026-03-30 |
 
 ## Pearl_GitHub Rule Going Forward
 
