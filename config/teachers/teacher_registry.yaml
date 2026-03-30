@@ -6,6 +6,29 @@ all_canonical_topics: &all_topics
   [anxiety, boundaries, burnout, compassion_fatigue, courage, depression, financial_anxiety, financial_stress, grief, imposter_syndrome, overthinking, self_worth, sleep_anxiety, social_anxiety, somatic_healing]
 
 teachers:
+  adi_da:
+    display_name: "Adi Da"
+    kb_id: "adi_da"
+    doctrine_profile: "adi_da"
+    ei_profile:
+      ei_name: "Enlightened Intelligence"
+      ei_short: "EI"
+      years_teaching: 30
+      tradition_phrase: "a teacher of radical devotion and prior freedom for over 30 years"
+      ei_one_liner: "a practice of recognizing what is already free before the search begins"
+      ei_description: "EI through Adi Da's lineage works with the understanding that freedom is not achieved but recognized, that the Bright is already present before any effort to find it."
+      reader_benefit_phrase: "people stop seeking and discover that what they were looking for was already here"
+    allowed_topics: *all_topics
+    disallowed_topics: [manifestation, get_rich_quick]
+    allowed_engines: [shame, false_alarm, overwhelm, spiral, watcher, grief, comparison]
+    allowed_resolution_types: [open_loop, internal_shift_only, grounded_reframe]
+    identity_shift_allowed: false
+    preferred_formats: [F006, standard_book]
+    teacher_mode_defaults:
+      require_teacher_story: true
+      require_teacher_exercise: true
+      allow_generic_fallback_for_scene: true
+
   ahjan:
     display_name: "Ahjan"
     kb_id: "ahjan"
