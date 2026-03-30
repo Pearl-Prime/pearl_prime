@@ -106,6 +106,8 @@ DEFAULTS: Dict[str, Any] = {
         ],
         "thesis_from_arc": True,   # When True, thesis is chapter-level from arc chapter_thesis when present
         "arc_intent_keys": ["band", "emotional_role", "chapter_index", "chapter_thesis", "bestseller_structure"],
+        # BG-PR-09: when True, compile fails if chapter_slot_sequence disagrees with chapter_bestseller_structures
+        "enforce_bestseller_beat_order": False,
     },
 }
 

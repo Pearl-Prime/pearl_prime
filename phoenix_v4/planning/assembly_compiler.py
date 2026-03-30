@@ -706,6 +706,24 @@ def compile_plan(
         chapter_slot_sequence.append(ch_slots)
         dominant_band_sequence.append(max(chapter_story_bands) if chapter_story_bands else None)
 
+    # BG-PR-09: bestseller structure beat order vs slot sequence (EI v2 book_structure flag).
+    structures_for_bestseller_gate: Optional[list[str]] = chapter_bestseller_structures_out
+    _cfs = format_plan.get("chapter_bestseller_structures") if isinstance(format_plan, dict) else None
+    if isinstance(_cfs, list) and len(_cfs) == chapter_count:
+        structures_for_bestseller_gate = ["" if x is None else str(x) for x in _cfs]
+    if structures_for_bestseller_gate:
+        from phoenix_v4.planning.bestseller_structure_map import apply_bestseller_beat_order_gate
+        from phoenix_v4.quality.ei_v2.config import load_ei_v2_config
+
+        _ei_cfg = load_ei_v2_config()
+        _enforce_beats = bool((_ei_cfg.get("book_structure") or {}).get("enforce_bestseller_beat_order", False))
+        apply_bestseller_beat_order_gate(
+            chapter_slot_sequence=chapter_slot_sequence,
+            chapter_bestseller_structures=structures_for_bestseller_gate,
+            chapter_count=chapter_count,
+            enforce=_enforce_beats,
+        )
+
     # Intro/ending variation: compute ending_signature from final INTEGRATION atom + carry line
     ending_signature_out: Optional[str] = None
     carry_line_out: Optional[str] = None

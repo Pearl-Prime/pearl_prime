@@ -105,6 +105,9 @@ emotion_arc:
 # known_slot_types include PIVOT, TAKEAWAY, PERMISSION, THREAD. Full defaults in config.py.
 book_structure:
   thesis_from_arc: true
+  # BG-PR-09: when true, assembly compile raises if slot order does not match assigned bestseller structure.
+  # Default false for one release cycle; flip to true after plans are aligned.
+  enforce_bestseller_beat_order: false
 
 # Composite weights for V2 candidate selection (sum to 1.0 recommended)
 # These are defaults; the learner can adjust them over time.
