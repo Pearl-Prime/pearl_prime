@@ -44,6 +44,7 @@ def test_config_loading_and_override_merging(canary_mod):
     blocked = merged["dimension_gates"]["blocked_dimensions"]
     assert "engagement" in blocked
     assert "cohesion" in blocked
+    assert "listen_experience" in blocked
     # Base keys preserved
     assert "enabled" in merged["dimension_gates"]
     assert merged["llm_quality"]["enabled"] is False
@@ -125,5 +126,5 @@ def test_mock_single_chapter_pipeline_evidence_files(canary_mod, tmp_path):
     detail = json.loads((base / "chapter_gates_detail.json").read_text(encoding="utf-8"))
     assert "gates" in detail
     assert detail["excerpt_word_count"] > 0
-    # With cohesion/listen_experience missing from dimension_gates.py, expect gap on main
+    assert summary["gates_missing"] == []
     assert code in (0, 1, 2)

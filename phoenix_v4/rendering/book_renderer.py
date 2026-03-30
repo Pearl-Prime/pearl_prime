@@ -529,25 +529,6 @@ class DimensionGateBlockError(ValueError):
     """Raised when EI v2 dimension gates set blocks_delivery and enforcement is enabled."""
 
 
-def _norm_dimension_gate_name(name: str) -> str:
-    return str(name).strip().lower().replace("-", "_")
-
-
-def _parse_blocked_dimensions_list(raw: Any) -> list[str]:
-    if raw is None:
-        return []
-    if isinstance(raw, (str, bytes)):
-        return []
-    if not isinstance(raw, (list, tuple)):
-        return []
-    out: list[str] = []
-    for x in raw:
-        s = str(x).strip()
-        if s:
-            out.append(s)
-    return out
-
-
 def _run_dimension_gates_for_composed_chapter(
     composed: str,
     other_composed: list[str],
@@ -555,61 +536,11 @@ def _run_dimension_gates_for_composed_chapter(
     dg_cfg: dict[str, Any],
 ) -> dict[str, Any]:
     """EI v2 dimension gates on composed chapter text; telemetry dict includes blocks_delivery."""
-    from phoenix_v4.quality.ei_v2.dimension_gates import (
-        gate_engagement,
-        gate_somatic_precision,
-        gate_uniqueness,
-    )
+    from phoenix_v4.quality.ei_v2.dimension_gates import run_chapter_dimension_gates
 
-    phase = int(dg_cfg.get("dimension_gate_phase", 1))
-    fail_mode = str(dg_cfg.get("fail_mode", "warn"))
-    blocked_list = _parse_blocked_dimensions_list(dg_cfg.get("blocked_dimensions"))
-    blocked_set = frozenset(_norm_dimension_gate_name(x) for x in blocked_list)
-
-    gates = [
-        gate_uniqueness(composed, other_composed, chapter_index),
-        gate_engagement(composed, chapter_index),
-        gate_somatic_precision(composed),
-    ]
-    fail_count = sum(1 for g in gates if g.status == "FAIL")
-    warn_count = sum(1 for g in gates if g.status == "WARN")
-    if any(g.status == "FAIL" for g in gates):
-        overall = "FAIL"
-    elif any(g.status == "WARN" for g in gates):
-        overall = "WARN"
-    else:
-        overall = "PASS"
-
-    blocks_delivery = False
-    if fail_mode == "block" and blocked_set:
-        for g in gates:
-            if g.status == "FAIL" and _norm_dimension_gate_name(g.dimension) in blocked_set:
-                blocks_delivery = True
-                break
-
-    gate_rows: list[dict[str, Any]] = []
-    for g in gates:
-        row = g.to_dict()
-        row["dimension_gate_phase"] = phase
-        row["contributes_to_delivery_block"] = (
-            fail_mode == "block"
-            and bool(blocked_set)
-            and g.status == "FAIL"
-            and _norm_dimension_gate_name(g.dimension) in blocked_set
-        )
-        gate_rows.append(row)
-
-    return {
-        "chapter_index": chapter_index,
-        "gates": gate_rows,
-        "overall_status": overall,
-        "fail_count": fail_count,
-        "warn_count": warn_count,
-        "blocks_delivery": blocks_delivery,
-        "dimension_gate_phase": phase,
-        "fail_mode": fail_mode,
-        "blocked_dimensions": blocked_list,
-    }
+    return run_chapter_dimension_gates(
+        composed, other_composed, chapter_index, dg_cfg
+    ).to_dict()
 
 
 def _extract_rendered_chapters(rendered_text: str) -> list[tuple[int, str]]:

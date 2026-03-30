@@ -142,13 +142,22 @@ def _import_dimension_gates() -> Tuple[Optional[Any], Optional[str]]:
         return None, str(e)
 
 
-def build_gate_registry(dg: Any) -> dict[str, Callable[..., Any]]:
+def build_gate_registry(dg: Any, dg_cfg: dict[str, Any]) -> dict[str, Callable[..., Any]]:
+    cohesion_cfg = dg_cfg.get("cohesion") if isinstance(dg_cfg.get("cohesion"), dict) else {}
+    listen_cfg = dg_cfg.get("listen_experience") if isinstance(dg_cfg.get("listen_experience"), dict) else {}
     return {
         "uniqueness": lambda text, **kw: dg.gate_uniqueness(
             text, kw.get("other_texts") or [], int(kw.get("chapter_index", 0))
         ),
         "engagement": lambda text, **kw: dg.gate_engagement(text, int(kw.get("chapter_index", 0))),
         "somatic_precision": lambda text, **kw: dg.gate_somatic_precision(text),
+        "cohesion": lambda text, **kw: dg.gate_cohesion(
+            text,
+            kw.get("other_texts") or [],
+            int(kw.get("chapter_index", 0)),
+            cohesion_cfg,
+        ),
+        "listen_experience": lambda text, **kw: dg.gate_listen_experience(text, listen_cfg),
     }
 
 
@@ -163,7 +172,7 @@ def run_blocked_dimension_gates(
     """
     dg_cfg = merged_cfg.get("dimension_gates") or {}
     blocked_dims: List[str] = list(dg_cfg.get("blocked_dimensions") or [])
-    registry = build_gate_registry(dg_mod)
+    registry = build_gate_registry(dg_mod, dg_cfg)
 
     records: list[dict[str, Any]] = []
     passed: list[str] = []
