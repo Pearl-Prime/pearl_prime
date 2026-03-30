@@ -17,6 +17,7 @@ from phoenix_v4.rendering.prose_resolver import (
 )
 from phoenix_v4.rendering.book_renderer import (
     ChapterFlowGateError,
+    DimensionGateBlockError,
     RenderOptions,
     TxtWriter,
     render_book,
@@ -146,6 +147,47 @@ def test_render_book_enforce_chapter_flow_raises(tmp_path: Path) -> None:
             title_page=False,
             enforce_word_count=False,
             enforce_chapter_flow=True,
+        )
+
+
+def test_render_book_enforce_dimension_gates_raises(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    plan = {
+        "plan_hash": "dg_block_hash",
+        "atom_ids": ["placeholder:HOOK:ch0:slot0", "placeholder:STORY:ch0:slot1"],
+        "chapter_slot_sequence": [["HOOK", "STORY"]],
+    }
+
+    def fake_run_dimension_gates(*_a: object, **_k: object) -> dict:
+        return {
+            "chapter_index": 0,
+            "gates": [],
+            "overall_status": "FAIL",
+            "fail_count": 1,
+            "warn_count": 0,
+            "blocks_delivery": True,
+            "dimension_gate_phase": 1,
+            "fail_mode": "block",
+            "blocked_dimensions": ["engagement"],
+        }
+
+    monkeypatch.setattr(
+        book_renderer_module,
+        "_run_dimension_gates_for_composed_chapter",
+        fake_run_dimension_gates,
+    )
+
+    with pytest.raises(DimensionGateBlockError):
+        render_book(
+            plan,
+            tmp_path,
+            formats=["txt"],
+            allow_placeholders=True,
+            on_missing="placeholder",
+            title_page=False,
+            enforce_word_count=False,
+            enforce_dimension_gates=True,
         )
 
 

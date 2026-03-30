@@ -525,6 +525,93 @@ class ChapterFlowGateError(ValueError):
     """Raised when chapter flow gate is enforced and one or more chapters fail."""
 
 
+class DimensionGateBlockError(ValueError):
+    """Raised when EI v2 dimension gates set blocks_delivery and enforcement is enabled."""
+
+
+def _norm_dimension_gate_name(name: str) -> str:
+    return str(name).strip().lower().replace("-", "_")
+
+
+def _parse_blocked_dimensions_list(raw: Any) -> list[str]:
+    if raw is None:
+        return []
+    if isinstance(raw, (str, bytes)):
+        return []
+    if not isinstance(raw, (list, tuple)):
+        return []
+    out: list[str] = []
+    for x in raw:
+        s = str(x).strip()
+        if s:
+            out.append(s)
+    return out
+
+
+def _run_dimension_gates_for_composed_chapter(
+    composed: str,
+    other_composed: list[str],
+    chapter_index: int,
+    dg_cfg: dict[str, Any],
+) -> dict[str, Any]:
+    """EI v2 dimension gates on composed chapter text; telemetry dict includes blocks_delivery."""
+    from phoenix_v4.quality.ei_v2.dimension_gates import (
+        gate_engagement,
+        gate_somatic_precision,
+        gate_uniqueness,
+    )
+
+    phase = int(dg_cfg.get("dimension_gate_phase", 1))
+    fail_mode = str(dg_cfg.get("fail_mode", "warn"))
+    blocked_list = _parse_blocked_dimensions_list(dg_cfg.get("blocked_dimensions"))
+    blocked_set = frozenset(_norm_dimension_gate_name(x) for x in blocked_list)
+
+    gates = [
+        gate_uniqueness(composed, other_composed, chapter_index),
+        gate_engagement(composed, chapter_index),
+        gate_somatic_precision(composed),
+    ]
+    fail_count = sum(1 for g in gates if g.status == "FAIL")
+    warn_count = sum(1 for g in gates if g.status == "WARN")
+    if any(g.status == "FAIL" for g in gates):
+        overall = "FAIL"
+    elif any(g.status == "WARN" for g in gates):
+        overall = "WARN"
+    else:
+        overall = "PASS"
+
+    blocks_delivery = False
+    if fail_mode == "block" and blocked_set:
+        for g in gates:
+            if g.status == "FAIL" and _norm_dimension_gate_name(g.dimension) in blocked_set:
+                blocks_delivery = True
+                break
+
+    gate_rows: list[dict[str, Any]] = []
+    for g in gates:
+        row = g.to_dict()
+        row["dimension_gate_phase"] = phase
+        row["contributes_to_delivery_block"] = (
+            fail_mode == "block"
+            and bool(blocked_set)
+            and g.status == "FAIL"
+            and _norm_dimension_gate_name(g.dimension) in blocked_set
+        )
+        gate_rows.append(row)
+
+    return {
+        "chapter_index": chapter_index,
+        "gates": gate_rows,
+        "overall_status": overall,
+        "fail_count": fail_count,
+        "warn_count": warn_count,
+        "blocks_delivery": blocks_delivery,
+        "dimension_gate_phase": phase,
+        "fail_mode": fail_mode,
+        "blocked_dimensions": blocked_list,
+    }
+
+
 def _extract_rendered_chapters(rendered_text: str) -> list[tuple[int, str]]:
     """
     Split rendered manuscript by clean chapter headings ("Chapter N").
@@ -553,19 +640,32 @@ def chapter_flow_gate_report(
     rendered_text: str,
     plan: Optional[dict[str, Any]] = None,
     prose_map: Optional[dict[str, str]] = None,
+    ei_v2_config: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     """
     Evaluate each rendered chapter with chapter_flow_gate and return summary report.
     When plan and prose_map are provided, uses slot-level checks so TAKEAWAY and THREAD
     are required to be non-empty when present.
+
+    When EI v2 ``dimension_gates.enabled`` is true, also runs per-chapter dimension gates
+    on composed chapter text and attaches ``dimension_gates`` (includes ``blocks_delivery``).
     """
+    cfg_full = ei_v2_config
+    if cfg_full is None:
+        try:
+            from phoenix_v4.quality.ei_v2.config import load_ei_v2_config
+
+            cfg_full = load_ei_v2_config()
+        except Exception:
+            cfg_full = {}
+    dg_cfg = (cfg_full or {}).get("dimension_gates") or {}
+    dg_enabled = dg_cfg.get("enabled", True)
+
     chapter_slot_sequence = (plan or {}).get("chapter_slot_sequence") or []
     atom_ids = (plan or {}).get("atom_ids") or []
     if plan and prose_map and chapter_slot_sequence and atom_ids:
-        # Slot-level: evaluate the actual composed chapter text, then enforce
-        # TAKEAWAY / THREAD slot presence when those slots exist in the plan.
-        chapter_reports = []
-        failed = 0
+        composed_chapters: list[str] = []
+        slot_meta: list[tuple[list[str], list[str]]] = []
         idx = 0
         for ch, slots in enumerate(chapter_slot_sequence):
             segment_proses = []
@@ -582,9 +682,18 @@ def chapter_flow_gate_report(
                 chapter_index=ch,
                 total_chapters=len(chapter_slot_sequence),
             )
+            composed_chapters.append(composed)
+            slot_names = [(s or "").strip().upper() for s in slots]
+            slot_meta.append((slot_names, segment_proses))
+
+        chapter_reports = []
+        failed = 0
+        for ch, slots in enumerate(chapter_slot_sequence):
+            slot_names, segment_proses = slot_meta[ch]
+            composed = composed_chapters[ch]
+            other_composed = [composed_chapters[j] for j in range(len(composed_chapters)) if j != ch]
             text_result = evaluate_chapter_flow(composed)
             errors = list(text_result.errors)
-            slot_names = [(s or "").strip().upper() for s in slots]
             for i, slot_name in enumerate(slot_names):
                 if slot_name == "TAKEAWAY":
                     if i >= len(segment_proses) or not (segment_proses[i] or "").strip():
@@ -599,7 +708,7 @@ def chapter_flow_gate_report(
             score = max(0, 100 - len(errors) * 15 - len(text_result.warnings) * 5)
             if status != "PASS":
                 failed += 1
-            chapter_reports.append({
+            entry: dict[str, Any] = {
                 "chapter": ch + 1,
                 "status": status,
                 "score": score,
@@ -611,12 +720,28 @@ def chapter_flow_gate_report(
                     "thread_checked": "THREAD" in slot_names,
                     "evaluated_text": "composed",
                 },
-            })
+            }
+            if dg_enabled:
+                entry["dimension_gates"] = _run_dimension_gates_for_composed_chapter(
+                    composed, other_composed, ch, dg_cfg,
+                )
+            chapter_reports.append(entry)
+
+        dg_blocks = bool(
+            dg_enabled
+            and any(
+                (c.get("dimension_gates") or {}).get("blocks_delivery")
+                for c in chapter_reports
+            )
+        )
+        dg_status = "SKIP" if not dg_enabled else ("FAIL" if dg_blocks else "PASS")
         return {
             "chapter_count": len(chapter_reports),
             "failed_chapters": failed,
             "status": "PASS" if failed == 0 else "FAIL",
             "chapters": chapter_reports,
+            "dimension_gates_status": dg_status,
+            "dimension_gates_blocks_delivery": dg_blocks,
         }
     # Fallback: text-only (no TAKEAWAY/THREAD slot enforcement)
     chapters = _extract_rendered_chapters(rendered_text)
@@ -626,19 +751,36 @@ def chapter_flow_gate_report(
         res = evaluate_chapter_flow(chapter_text)
         if res.status != "PASS":
             failed += 1
-        chapter_reports.append({
+        entry: dict[str, Any] = {
             "chapter": chapter_number,
             "status": res.status,
             "score": res.score,
             "errors": res.errors,
             "warnings": res.warnings,
             "metrics": res.metrics,
-        })
+        }
+        if dg_enabled and chapter_text.strip():
+            others = [t for n, t in chapters if n != chapter_number]
+            entry["dimension_gates"] = _run_dimension_gates_for_composed_chapter(
+                chapter_text,
+                others,
+                chapter_number - 1,
+                dg_cfg,
+            )
+        chapter_reports.append(entry)
+
+    dg_blocks = bool(
+        dg_enabled
+        and any((c.get("dimension_gates") or {}).get("blocks_delivery") for c in chapter_reports)
+    )
+    dg_status = "SKIP" if not dg_enabled else ("FAIL" if dg_blocks else "PASS")
     return {
         "chapter_count": len(chapters),
         "failed_chapters": failed,
         "status": "PASS" if failed == 0 else "FAIL",
         "chapters": chapter_reports,
+        "dimension_gates_status": dg_status,
+        "dimension_gates_blocks_delivery": dg_blocks,
     }
 
 
@@ -879,6 +1021,7 @@ def render_book(
     clean_output: bool = True,
     enforce_word_count: bool = True,
     enforce_chapter_flow: bool = False,
+    enforce_dimension_gates: bool = False,
     enforce_location_grounding: bool = True,
 ) -> dict[str, Path]:
     """
@@ -904,6 +1047,10 @@ def render_book(
     enforce_chapter_flow=False (default):
       - Computes chapter flow report at output_dir/chapter_flow_report.json.
       - If True and any chapter fails flow gate, raises ChapterFlowGateError.
+
+    enforce_dimension_gates=False (default):
+      - chapter_flow_report.json includes EI v2 dimension gate telemetry when enabled in config.
+      - If True and any chapter has dimension_gates.blocks_delivery, raises DimensionGateBlockError.
 
     enforce_location_grounding=True (default):
       - If the plan carries a resolved/requested location profile, checks whether
@@ -971,6 +1118,12 @@ def render_book(
                     + ", ".join(first_fail.get("errors") or ["UNKNOWN"])
                 )
             raise ChapterFlowGateError("Chapter flow gate FAILED.")
+
+        if enforce_dimension_gates and flow_report.get("dimension_gates_blocks_delivery"):
+            raise DimensionGateBlockError(
+                "EI v2 dimension gates blocked delivery (see chapter_flow_report.json "
+                "per-chapter dimension_gates.blocks_delivery)."
+            )
 
         deficit_report = _build_deficit_report(plan, render_result.prose_map, runtime_format_id)
         budget_path = output_dir / "budget.json"

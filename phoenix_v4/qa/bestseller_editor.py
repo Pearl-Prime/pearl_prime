@@ -10,6 +10,7 @@ from typing import Any
 
 from phoenix_v4.rendering.prose_resolver import resolve_prose_for_plan
 from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
+from phoenix_v4.quality.ei_v2.hybrid_selector import HybridDecision
 
 
 def _extract_keywords(text: str) -> set[str]:
@@ -151,6 +152,61 @@ def _summarize_status(*statuses: str) -> str:
     return "PASS"
 
 
+def _dimension_gate_rollup_status(chapter_flow_report: dict) -> str:
+    """
+    Map chapter_flow_report dimension gate fields to a single status for overall rollup.
+    SKIP (gates off or absent) does not fail the editor; FAIL when delivery is blocked.
+    """
+    if bool(chapter_flow_report.get("dimension_gates_blocks_delivery")):
+        return "FAIL"
+    dg = chapter_flow_report.get("dimension_gates_status", "SKIP")
+    if dg == "FAIL":
+        return "FAIL"
+    if dg in ("SKIP", "PASS"):
+        return "PASS"
+    return str(dg).upper()
+
+
+def hybrid_select_slot_production(
+    *,
+    slot: str,
+    chapter_index: int,
+    slot_index: int,
+    candidates_raw: list[dict[str, Any]],
+    persona_id: str,
+    topic_id: str,
+    thesis: str,
+    v1_cfg: dict[str, Any] | None = None,
+    selector_key: str | None = None,
+    ei_v2_config: dict[str, Any] | None = None,
+) -> HybridDecision:
+    """
+    Production hook for hybrid V1+V2 selection (BG-PR-01). Passes the loaded EI v2 config
+    as ``v2_cfg`` when ``hybrid.enabled`` is true; otherwise ``v2_cfg`` is omitted (V1-only).
+
+    Call from catalog assembly when multiple atom candidates exist for a slot. Renderer
+    plans that already pin ``atom_ids`` do not use this path.
+    """
+    from phoenix_v4.quality.ei_v2.config import load_ei_v2_config
+    from phoenix_v4.quality.ei_v2.hybrid_selector import hybrid_select
+
+    cfg = ei_v2_config if ei_v2_config is not None else load_ei_v2_config()
+    hybrid = cfg.get("hybrid") or {}
+    v2_cfg: dict[str, Any] | None = cfg if hybrid.get("enabled", False) else None
+    return hybrid_select(
+        slot=slot,
+        chapter_index=chapter_index,
+        slot_index=slot_index,
+        candidates_raw=candidates_raw,
+        persona_id=persona_id,
+        topic_id=topic_id,
+        thesis=thesis,
+        v1_cfg=v1_cfg,
+        v2_cfg=v2_cfg,
+        selector_key=selector_key,
+    )
+
+
 def build_bestseller_editor_report(
     plan: dict,
     render_dir: Path,
@@ -228,6 +284,10 @@ def build_bestseller_editor_report(
     # Extract DNA status (placeholder for now)
     dna_status = "PASS"
 
+    dimension_gates_status = chapter_flow_report.get("dimension_gates_status", "SKIP")
+    dimension_gates_blocks_delivery = bool(chapter_flow_report.get("dimension_gates_blocks_delivery", False))
+    dimension_gate_status = _dimension_gate_rollup_status(chapter_flow_report)
+
     # Collect chapter bestseller structures from flow report
     chapter_bestseller_structures = []
     for ch_data in chapter_flow_report.get("chapters", []):
@@ -243,7 +303,14 @@ def build_bestseller_editor_report(
     carry_line = plan.get("carry_line") or plan.get("ending_carry_line") or ""
 
     # Combine statuses
-    overall_status = _summarize_status(flow_status, word_status, book_pass_status, thesis_drift_status, dna_status)
+    overall_status = _summarize_status(
+        flow_status,
+        word_status,
+        book_pass_status,
+        thesis_drift_status,
+        dna_status,
+        dimension_gate_status,
+    )
 
     report = {
         "status": overall_status,
@@ -270,6 +337,9 @@ def build_bestseller_editor_report(
         "book_pass_status": book_pass_status,
         "thesis_drift_status": thesis_drift_status,
         "dna_status": dna_status,
+        "dimension_gates_status": dimension_gates_status,
+        "dimension_gates_blocks_delivery": dimension_gates_blocks_delivery,
+        "dimension_gate_status": dimension_gate_status,
     }
 
     return report
@@ -307,6 +377,11 @@ def write_bestseller_editor_report(report: dict, render_dir: Path) -> tuple[Path
         f"  Status: {report.get('flow_status', 'UNKNOWN')}",
         f"  Chapters: {report.get('chapter_count', 0)}",
         f"  Failed Chapters: {sum(1 for ch in report.get('chapters', []) if ch.get('status') == 'FAIL')}",
+        "",
+        "EI v2 Dimension Gates:",
+        f"  Telemetry: {report.get('dimension_gates_status', 'SKIP')}",
+        f"  Blocks delivery: {report.get('dimension_gates_blocks_delivery', False)}",
+        f"  Rollup: {report.get('dimension_gate_status', 'PASS')}",
         "",
         "Word Budget:",
         f"  Status: {report.get('word_status', 'UNKNOWN')}",

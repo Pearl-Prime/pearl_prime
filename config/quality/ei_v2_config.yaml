@@ -118,7 +118,9 @@ hybrid:
 # Per-chapter quality minimums. FAIL = hard block; WARN = logged.
 dimension_gates:
   enabled: true
-  fail_mode: warn                # "warn" (log only) or "block" (fail build)
+  fail_mode: block               # "warn" (log only) or "block" (fail build)
+  blocked_dimensions: [engagement, somatic_precision]
+  dimension_gate_phase: 1
   uniqueness:
     pass_threshold: 0.15
     warn_threshold: 0.30
