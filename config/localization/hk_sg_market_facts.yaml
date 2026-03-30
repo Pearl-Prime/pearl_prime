@@ -1,0 +1,93 @@
+# HK / SG audiobook market facts (structured extract).
+# Reference only. Authority: docs/RESEARCH_INTEGRATION_DEV_SPEC.md §2 PR-RI-002.
+schema_version: 1
+document_type: hk_sg_market_facts
+
+hong_kong:
+  audiobook_market_size:
+    summary: "No standalone Hong Kong audiobook market size data found in any public source. HK typically grouped within broader APAC or China/Greater China figures."
+    _source:
+      file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+      section: "## 1. Hong Kong Audiobook Market / **Market Size:**"
+      extracted_at: "2026-03-31"
+  platforms_available:
+    - Audible (global, English-language content)
+    - Apple Books (audiobook section available)
+    - Google Play Books
+    - Kobo Plus — launched in Hong Kong in February 2024 (alongside Taiwan), includes personalized recommendations and narration speed adjustment
+    - Spotify (audiobooks launching globally)
+    - Ximalaya — available but usage limited vs mainland China
+  platforms_source:
+    file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+    section: "## 1. Hong Kong Audiobook Market / **Platforms Available in HK:**"
+    extracted_at: "2026-03-31"
+  consumer_behavior:
+    - "Trilingual market: Cantonese (daily spoken), English (business/professional), Mandarin (growing)"
+    - "Higher English penetration than any other Asian market — en-US titles may compete for affluent audiences"
+  consumer_behavior_source:
+    file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+    section: "## 1. Hong Kong Audiobook Market / **Consumer Behavior:**"
+    extracted_at: "2026-03-31"
+  revenue_share_note: "Same as global Audible/Kobo/Spotify rates (research points to Section 3 of same file)."
+  revenue_share_source:
+    file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+    section: "## 1. Hong Kong Audiobook Market / **Revenue Share:**"
+    extracted_at: "2026-03-31"
+  data_gap_status: "Confirmed — HK requires dedicated research (possible via HKTDC trade data or direct platform inquiry)"
+  data_gap_source:
+    file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+    section: "## 1. Hong Kong Audiobook Market / **Data Gap Status:**"
+    extracted_at: "2026-03-31"
+
+singapore:
+  market_size_usd_2024:
+    value_million_usd: 18.5
+    attribution_in_research: "Deep Market Insights"
+    _source:
+      file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+      section: "## 2. Singapore Audiobook Market / **Market Size:** (2024 bullet)"
+      extracted_at: "2026-03-31"
+  market_size_usd_2033_projected:
+    value_million_usd: 54.58
+    _source:
+      file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+      section: "## 2. Singapore Audiobook Market / **Market Size:** (2033 projected bullet)"
+      extracted_at: "2026-03-31"
+  cagr_percent_2025_2033:
+    value: 12.88
+    _source:
+      file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+      section: "## 2. Singapore Audiobook Market / **CAGR (2025–2033):**"
+      extracted_at: "2026-03-31"
+  market_share_note_2024: "Download format held largest market share in 2024; streaming is fastest-growing segment"
+  market_share_note_source:
+    file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+    section: "## 2. Singapore Audiobook Market / **Market Size:**"
+    extracted_at: "2026-03-31"
+  platforms:
+    - Audible (primary, English-language)
+    - Apple Books
+    - Google Play Books
+    - Spotify (audiobooks)
+    - Storytel (international subscription service, operates in SG)
+  platforms_source:
+    file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+    section: "## 2. Singapore Audiobook Market / **Platforms:**"
+    extracted_at: "2026-03-31"
+  consumer_language_preferences:
+    - "English dominant for audiobook consumption (business language, education system)"
+    - "Mandarin growing segment"
+    - "Malay and Tamil smaller segments"
+    - "Multilingual/multicultural market"
+  consumer_language_source:
+    file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+    section: "## 2. Singapore Audiobook Market / **Consumer Language Preferences:**"
+    extracted_at: "2026-03-31"
+  digital_content_regulations:
+    - "Infocomm Media Development Authority (IMDA) oversees digital content"
+    - "Generally liberal content regulations compared to mainland China"
+    - "No audiobook-specific licensing requirements"
+  digital_content_regulations_source:
+    file: artifacts/research/deepseek_gap_fill_round2_2026_03_23.md
+    section: "## 2. Singapore Audiobook Market / **Digital Content Regulations:**"
+    extracted_at: "2026-03-31"
