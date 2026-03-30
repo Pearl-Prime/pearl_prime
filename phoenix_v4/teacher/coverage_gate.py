@@ -123,7 +123,17 @@ def compute_story_band_inventory(teacher_id: str) -> dict[str, int]:
         try:
             data = yaml.safe_load(f.read_text()) or {}
             band = data.get("band") or data.get("BAND") or 3
-            bands[str(band)] = bands.get(str(band), 0) + 1
+            try:
+                band_i = int(band)
+            except (TypeError, ValueError):
+                # Legacy teacher atoms may mark band as "universal";
+                # use emotional_intensity_band if available, otherwise default 3.
+                eib = data.get("emotional_intensity_band")
+                try:
+                    band_i = int(eib) if eib is not None else 3
+                except (TypeError, ValueError):
+                    band_i = 3
+            bands[str(band_i)] = bands.get(str(band_i), 0) + 1
         except Exception:
             bands["3"] = bands.get("3", 0) + 1
     return dict(bands)

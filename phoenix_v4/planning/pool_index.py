@@ -7,6 +7,7 @@ Other slot types: atoms/<persona>/<topic>/<slot_type>/CANONICAL.txt (or <slot_ty
 from __future__ import annotations
 
 import hashlib
+import logging
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -21,6 +22,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 ATOMS_ROOT = REPO_ROOT / "atoms"
 CONFIG_ROOT = REPO_ROOT / "config"
 COMPRESSION_ATOMS_ROOT = REPO_ROOT / "SOURCE_OF_TRUTH" / "compression_atoms"
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -130,7 +132,27 @@ def _load_teacher_pool(teacher_atoms_root: Path, slot_type: str) -> list[AtomEnt
         if slot_type == "STORY":
             band = data.get("band")
             if band is not None:
-                meta["band"] = int(band)
+                # Teacher banks may carry "universal" as a legacy/non-numeric marker.
+                # Compile-time band contract remains numeric; prefer emotional_intensity_band when present.
+                try:
+                    meta["band"] = int(band)
+                except (TypeError, ValueError):
+                    if str(band).strip().lower() == "universal":
+                        eib = data.get("emotional_intensity_band")
+                        if eib is not None:
+                            try:
+                                meta["band"] = int(eib)
+                            except (TypeError, ValueError):
+                                meta["band"] = 3
+                        else:
+                            meta["band"] = 3
+                    else:
+                        logger.warning(
+                            "Invalid STORY band %r in %s; defaulting to 3",
+                            band,
+                            path,
+                        )
+                        meta["band"] = 3
             else:
                 meta["band"] = 3
         fam = data.get("semantic_family")
