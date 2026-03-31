@@ -33,7 +33,13 @@
 | 21 | `atoms/` (sampled) | Teacher profiles and location data — no research citations in atom files | MEDIUM | Ground in cited demographic and geographic data sources per locale |
 | 22 | `SOURCE_OF_TRUTH/teacher_banks/` (sampled) | Teacher slot definitions — no provenance for pedagogical claims | MEDIUM | "effective teaching personas self-help audiobook listener engagement research" |
 
-**Batch 3 LOW — citation memos (2026-03-31):** §A items **19** (`omega/title_entropy/subtitle_patterns.yaml`) and **20** (`config/payouts/`) → **RESEARCHED** with `artifacts/research/citations/RCG-021_subtitle_patterns.md` and `artifacts/research/citations/RCG-022_payout_tiers.md` (see `artifacts/research/citations/BATCH_3_SUMMARY.md`). Items **1–18, 21–22** remain on the table above until separate memos land.
+**Batch 1 — citation memos (2026-03-31):** Industry-statistics batch **RCG-001**–**RCG-005** → **RESEARCHED** (`artifacts/research/citations/RCG-001_revenue_estimates.md` … `RCG-005_print_revenue_share.md`; see `artifacts/research/citations/BATCH_1_SUMMARY.md`). Scope: self-publishing scale/revenue framing, audiobook growth, digital-first readership, KDP vs traditional royalties, print share of consumer book revenue — **not** a substitute for inline citations in §A rows that reference doc neuroscience/sleep/bibliography claims.
+
+**Batch 2 — citation memos (2026-03-31):** **RCG-006**–**RCG-020** → **RESEARCHED** (`artifacts/research/citations/BATCH_2_SUMMARY.md`). **Note:** Batch 2 prompt claims do not map 1:1 to §A row numbers.
+
+**Batch 3 LOW — citation memos (2026-03-31):** §A items **19** (`omega/title_entropy/subtitle_patterns.yaml`) and **20** (`config/payouts/`) → **RESEARCHED** with `artifacts/research/citations/RCG-021_subtitle_patterns.md` and `artifacts/research/citations/RCG-022_payout_tiers.md` (see `artifacts/research/citations/BATCH_3_SUMMARY.md`).
+
+**RCG-001–022 memo inventory (2026-03-31):** All **22** numbered citation memos exist under `artifacts/research/citations/`. The §A table above remains the **canonical register of target files** that still lack **in-repo inline** citations (`_source:` blocks, bibliographies, etc.) where applicable; **RCG “RESEARCHED”** means **memo triage exists**, not that every cell in the table has been edited in the cited path.
 
 ### Summary: 22 items flagged (5 HIGH, 15 MEDIUM, 2 LOW)
 

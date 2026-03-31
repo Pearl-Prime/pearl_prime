@@ -11,6 +11,7 @@
 # One global switch (enabled: false) disables all marketing integration instantly.
 marketing_sources:
   enabled: true
+  # Repo-root directory: 02/03/04 YAMLs for EI lexicons. 03/04 symlink to config/marketing/* for canonical copy.
   source_path: marketing_deep_research
   use_marketing_lexicons: true
   use_marketing_safety_bans: true

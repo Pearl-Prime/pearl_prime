@@ -116,9 +116,21 @@ def _validate_04(data: Any, path: Path) -> Tuple[bool, Optional[str]]:
     for i, s in enumerate(scripts):
         if not isinstance(s, dict):
             return False, f"04: scripts[{i}] is not a dict"
-        for key in ("persona_id", "topic_id", "invisible_script"):
-            if key not in s:
-                return False, f"04: scripts[{i}].{key} missing"
+        if "persona_id" not in s or "topic_id" not in s:
+            return False, f"04: scripts[{i}] missing persona_id or topic_id"
+        has_inv = "invisible_script" in s
+        has_lines = "scripts" in s
+        if has_inv and not isinstance(s.get("invisible_script"), str):
+            return False, f"04: scripts[{i}].invisible_script is not a string"
+        if has_lines:
+            lines = s.get("scripts")
+            if not isinstance(lines, list):
+                return False, f"04: scripts[{i}].scripts is not a list"
+            for j, line in enumerate(lines):
+                if not isinstance(line, str):
+                    return False, f"04: scripts[{i}].scripts[{j}] is not a string"
+        if not has_inv and not has_lines:
+            return False, f"04: scripts[{i}] missing invisible_script and scripts[]"
     return True, None
 
 
@@ -159,7 +171,8 @@ def load_marketing_lexicons(
     source_path = ms.get("source_path", "").strip()
     if not source_path:
         return None
-    repo_root = repo_root or Path(__file__).resolve().parent.parent.parent
+    # Repo root (phoenix_omega/), not the phoenix_v4/ package directory — source_path is repo-relative.
+    repo_root = repo_root or Path(__file__).resolve().parents[3]
     base = repo_root / source_path
     if not base.is_dir():
         logging.warning("marketing_lexicons: source_path not a dir: %s", base)
@@ -221,13 +234,16 @@ def load_marketing_lexicons(
             persona_lexicons = {}
             for s in data_04.get("scripts") or []:
                 pid = str(s.get("persona_id", ""))
-                script = (s.get("invisible_script") or "").strip()
                 if not pid:
                     continue
                 if pid not in persona_lexicons:
                     persona_lexicons[pid] = set()
-                if script:
-                    persona_lexicons[pid].update(lexicon_tokenize(script))
+                inv = (s.get("invisible_script") or "").strip()
+                if inv:
+                    persona_lexicons[pid].update(lexicon_tokenize(inv))
+                for line in s.get("scripts") or []:
+                    if isinstance(line, str) and line.strip():
+                        persona_lexicons[pid].update(lexicon_tokenize(line))
             for pid in list(persona_lexicons.keys()):
                 if not persona_lexicons[pid]:
                     del persona_lexicons[pid]

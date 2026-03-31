@@ -12,4 +12,4 @@
 
 **Chrome MCP:** Not invoked (unavailable); web search + official Audible page fetch only.
 
-**Workstream note:** Section A still lists **items 1–18 and 21–22** as uncited in the main table. Completing **all 22** RCG rows requires additional memos beyond this batch.
+**Workstream note:** All **RCG-001–022** memos exist as of 2026-03-31 (Batches 1–3); see `RESEARCH_AUDIT_2026_03_30.md` §A footer for **memo RESEARCHED** vs **inline citations in target files**.
