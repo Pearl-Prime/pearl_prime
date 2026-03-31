@@ -1,0 +1,72 @@
+# Cloudflare Pages: brand-wizard-app + synced onboarding JSON.
+#
+# Repo secrets (Settings → Secrets → Actions):
+#   CLOUDFLARE_API_TOKEN — Create in Cloudflare dash with Account → API Tokens:
+#     permissions: Account → Cloudflare Pages → Edit (or use "Edit Cloudflare Workers" template and add Pages).
+#   CLOUDFLARE_ACCOUNT_ID — Dashboard right sidebar on any domain overview.
+# Pages project: create once as "brand-admin-onboarding"; confirm hostname under Domains (often *.pages.dev).
+name: Brand admin onboarding (Pages)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - "brand-wizard-app/**"
+      - "config/onboarding/**"
+      - "scripts/onboarding/**"
+      - ".github/workflows/brand-admin-onboarding-pages.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: brand-wizard-app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: brand-wizard-app/package-lock.json
+
+      - name: Validate onboarding JSON
+        run: python3 scripts/ci/validate_onboarding_registry.py
+        working-directory: ${{ github.workspace }}
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: brand-admin-onboarding-dist
+          path: brand-wizard-app/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: brand-admin-onboarding-dist
+          path: dist
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=brand-admin-onboarding

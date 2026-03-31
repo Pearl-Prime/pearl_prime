@@ -1,0 +1,298 @@
+{
+  "plan_id": "test-vce-001",
+  "video_id": "video-test-vce-001",
+  "config_hash": "8dd144c142fc3a88",
+  "variants": [
+    {
+      "platform": "youtube",
+      "encode": {
+        "width": 1920,
+        "height": 1080,
+        "codec": "h264_high",
+        "crf": 23,
+        "container": "mp4",
+        "caption_types": [
+          "srt_sidecar",
+          "chapters"
+        ]
+      },
+      "ffmpeg": {
+        "video_encode_argv": [
+          "-c:v",
+          "libx264",
+          "-pix_fmt",
+          "yuv420p",
+          "-preset",
+          "medium",
+          "-crf",
+          "23",
+          "-profile:v",
+          "high",
+          "-movflags",
+          "+faststart"
+        ],
+        "audio_encode_argv": [
+          "-c:a",
+          "aac",
+          "-ar",
+          "48000",
+          "-b:a",
+          "192k"
+        ],
+        "duration_cap_argv": [],
+        "encode_argv_tail": [
+          "-c:v",
+          "libx264",
+          "-pix_fmt",
+          "yuv420p",
+          "-preset",
+          "medium",
+          "-crf",
+          "23",
+          "-profile:v",
+          "high",
+          "-movflags",
+          "+faststart",
+          "-c:a",
+          "aac",
+          "-ar",
+          "48000",
+          "-b:a",
+          "192k"
+        ],
+        "webp_panel_argv_template": null
+      },
+      "caption_delivery": {
+        "mode": "srt_sidecar",
+        "drawtext_template": null,
+        "notes": "Prefer SRT sidecar; no burn-in for YouTube long-form."
+      },
+      "thumbnail_spec": {
+        "dimensions": [
+          1280,
+          720
+        ],
+        "hook_band_palette_ref": {
+          "description": "First 3 seconds. Scroll-stop. Topic-agnostic. Thumbnail = hook.",
+          "palette": {
+            "thumbnails": [
+              {
+                "hex": "#F5C842",
+                "prompt_name": "butter gold"
+              },
+              {
+                "hex": "#F0A500",
+                "prompt_name": "amber"
+              },
+              {
+                "hex": "#1A1714",
+                "prompt_name": "near black"
+              },
+              {
+                "hex": "#FFFFFF",
+                "prompt_name": "white"
+              }
+            ],
+            "broll": [
+              {
+                "hex": "#FF6B3D",
+                "prompt_name": "warm citrus"
+              },
+              {
+                "hex": "#FFE566",
+                "prompt_name": "soft yellow"
+              },
+              {
+                "hex": "#FFA94D",
+                "prompt_name": "warm orange"
+              },
+              {
+                "hex": "#2A2218",
+                "prompt_name": "dark warm"
+              }
+            ]
+          },
+          "spec": {
+            "thumbnail_bg": "#1A1714",
+            "title_color": "#F5C842",
+            "accent": "#F0A500",
+            "broll_grade": "warm_citrus",
+            "text_primary": "#FFFFFF",
+            "text_emphasis": "#F5C842",
+            "duration": "0-3 seconds only"
+          },
+          "never_rules": []
+        },
+        "variants": 3
+      },
+      "metadata": {
+        "title": "How to breathe when stress | When anxiety shows up",
+        "description": "A short on noticing anxiety without fighting it.",
+        "tags": [
+          "anxiety",
+          "mindfulness",
+          "therapeutic"
+        ],
+        "hashtags": []
+      },
+      "compliance": {
+        "notes": [
+          "no_misleading_health_claims",
+          "therapeutic_structural_only"
+        ]
+      },
+      "animation_ref": {
+        "shot_count": 2
+      }
+    },
+    {
+      "platform": "tiktok",
+      "encode": {
+        "width": 1080,
+        "height": 1920,
+        "codec": "h264_main",
+        "crf": 21,
+        "container": "mp4",
+        "caption_types": [
+          "burnt_in",
+          "platform_auto"
+        ]
+      },
+      "ffmpeg": {
+        "video_encode_argv": [
+          "-c:v",
+          "libx264",
+          "-pix_fmt",
+          "yuv420p",
+          "-preset",
+          "fast",
+          "-crf",
+          "21",
+          "-profile:v",
+          "main",
+          "-movflags",
+          "+faststart"
+        ],
+        "audio_encode_argv": [
+          "-c:a",
+          "aac",
+          "-ar",
+          "48000",
+          "-b:a",
+          "128k"
+        ],
+        "duration_cap_argv": [],
+        "encode_argv_tail": [
+          "-c:v",
+          "libx264",
+          "-pix_fmt",
+          "yuv420p",
+          "-preset",
+          "fast",
+          "-crf",
+          "21",
+          "-profile:v",
+          "main",
+          "-movflags",
+          "+faststart",
+          "-c:a",
+          "aac",
+          "-ar",
+          "48000",
+          "-b:a",
+          "128k"
+        ],
+        "webp_panel_argv_template": null
+      },
+      "caption_delivery": {
+        "mode": "burn_in_drawtext",
+        "fontfile": "Inter.ttf",
+        "drawtext_template": "drawtext=fontfile={fontfile}:fontsize=48:fontcolor=white:borderw=3:bordercolor=black:x=(w-text_w)/2:y=h-100:text='{text}'",
+        "cjk_fontfile": "NotoSansCJK.ttf",
+        "cjk_fontsize": 40
+      },
+      "thumbnail_spec": {
+        "dimensions": [
+          1280,
+          720
+        ],
+        "hook_band_palette_ref": {
+          "description": "First 3 seconds. Scroll-stop. Topic-agnostic. Thumbnail = hook.",
+          "palette": {
+            "thumbnails": [
+              {
+                "hex": "#F5C842",
+                "prompt_name": "butter gold"
+              },
+              {
+                "hex": "#F0A500",
+                "prompt_name": "amber"
+              },
+              {
+                "hex": "#1A1714",
+                "prompt_name": "near black"
+              },
+              {
+                "hex": "#FFFFFF",
+                "prompt_name": "white"
+              }
+            ],
+            "broll": [
+              {
+                "hex": "#FF6B3D",
+                "prompt_name": "warm citrus"
+              },
+              {
+                "hex": "#FFE566",
+                "prompt_name": "soft yellow"
+              },
+              {
+                "hex": "#FFA94D",
+                "prompt_name": "warm orange"
+              },
+              {
+                "hex": "#2A2218",
+                "prompt_name": "dark warm"
+              }
+            ]
+          },
+          "spec": {
+            "thumbnail_bg": "#1A1714",
+            "title_color": "#F5C842",
+            "accent": "#F0A500",
+            "broll_grade": "warm_citrus",
+            "text_primary": "#FFFFFF",
+            "text_emphasis": "#F5C842",
+            "duration": "0-3 seconds only"
+          },
+          "never_rules": []
+        },
+        "variants": 1
+      },
+      "metadata": {
+        "title": "How to breathe when stress | When anxiety shows up",
+        "description": "A short on noticing anxiety without fighting it.",
+        "tags": [
+          "anxiety",
+          "mindfulness",
+          "therapeutic"
+        ],
+        "hashtags": [
+          "anxiety",
+          "mindfulness",
+          "therapeutic"
+        ]
+      },
+      "compliance": {
+        "mental_health": {
+          "blocker": true,
+          "no_suicide_self_harm_imagery": true,
+          "no_diagnostic_claims": true
+        }
+      },
+      "animation_ref": {
+        "shot_count": 2
+      }
+    }
+  ]
+}

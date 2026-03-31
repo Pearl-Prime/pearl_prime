@@ -3,11 +3,20 @@ actions-runner/
 .github_token
 github_access_token.rtf
 cloudflare_workers_ai.txt
+# Local-only Cloudflare API material (never commit)
+docs/cloudflare_credentials.txt
+.claude/cloudflare_credentials.txt
+**/cloudflare_credentials.txt
 .env
 .env.wordpress.local
 .messaging_channels.local.yaml
 .integration_sources.local.yaml
 docs/all_credentials.txt
+
+# Qwen API credential fallbacks (never commit real keys)
+docs/qwen_api_base_url.txt
+docs/qwen_api_key.txt
+docs/qwen_model.txt
 *.rtf
 *.rtfc
 git_token.rtf
@@ -22,3 +31,6 @@ artifacts/governance/repo_alignment/
 # Generated / temp directories
 artifacts/feeds/
 scripts/feeds/
+
+# Vite production build (CI builds on deploy)
+brand-wizard-app/dist/

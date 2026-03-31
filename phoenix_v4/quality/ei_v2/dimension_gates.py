@@ -11,6 +11,10 @@ from dataclasses import dataclass, field
 from typing import Any, List
 
 from phoenix_v4.quality.ei_v2.tts_readability import _syllable_estimate, score_tts_readability
+from phoenix_v4.quality.ei_v2.visual_therapeutic import (
+    compute_visual_therapeutic_scores,
+    vt_stealth,
+)
 
 # Body-word set for somatic precision (align with ei_adapter)
 BODY_WORDS = frozenset({
@@ -362,6 +366,79 @@ class DimensionGatesRunReport:
             "fail_mode": self.fail_mode,
             "blocked_dimensions": self.blocked_dimensions,
         }
+
+
+def gate_vt_stealth_text(text: str, visual_therapeutic_cfg: dict[str, Any] | None = None) -> GateResult:
+    """Chapter dialogue/caption scan for ITE stealth terms (manga lettering paths)."""
+    from phoenix_v4.quality.ei_v2.config import load_ei_v2_config
+
+    ei = load_ei_v2_config()
+    cfg = visual_therapeutic_cfg if visual_therapeutic_cfg is not None else (ei.get("visual_therapeutic") or {})
+    st_dim = ((cfg.get("dimensions") or {}).get("vt_stealth")) or {}
+    score = vt_stealth(text or "", cfg=ei)
+    blocker_t = float(st_dim.get("blocker_threshold", st_dim.get("fail_below", 0.50)))
+    warn_t = float(st_dim.get("warn_below", 0.70))
+    if score < blocker_t:
+        return GateResult(
+            "vt_stealth",
+            "FAIL",
+            score,
+            issues=["forbidden therapeutic vocabulary or instructional regulation"],
+            remediation=["remove explicit technique language; show regulation through action"],
+        )
+    if score < warn_t:
+        return GateResult("vt_stealth", "WARN", score, issues=["close to stealth boundary"])
+    return GateResult("vt_stealth", "PASS", score)
+
+
+def run_visual_therapeutic_dimension_gates(
+    artifacts: dict[str, Any],
+    *,
+    dialogue_text: str | None = None,
+    ei_cfg: dict[str, Any] | None = None,
+) -> ChapterGateReport:
+    """
+    Map ITE artifact bundle + optional dialogue to PASS/WARN/FAIL per vt_* dimension.
+    Uses thresholds from ``ei_cfg['visual_therapeutic']`` when present.
+    """
+    from phoenix_v4.quality.ei_v2.config import load_ei_v2_config
+
+    cfg = ei_cfg if ei_cfg is not None else load_ei_v2_config()
+    vt_cfg = cfg.get("visual_therapeutic") if isinstance(cfg.get("visual_therapeutic"), dict) else {}
+    if not vt_cfg.get("enabled", False):
+        return ChapterGateReport(0, [], "PASS", 0, 0)
+
+    scores = compute_visual_therapeutic_scores(artifacts, dialogue_text=dialogue_text, cfg=cfg)
+    dims_meta = vt_cfg.get("dimensions") or {}
+    gates: list[GateResult] = []
+
+    for key in ("vt_parasympathetic", "vt_processing", "vt_somatic", "vt_stealth"):
+        sc = float(scores.get(key) or 0.0)
+        meta = dims_meta.get(key) if isinstance(dims_meta.get(key), dict) else {}
+        warn_b = float(meta.get("warn_below", 0.35))
+        fail_b = float(meta.get("fail_below", 0.15))
+        if sc < fail_b:
+            status = "FAIL"
+        elif sc < warn_b:
+            status = "WARN"
+        else:
+            status = "PASS"
+        tgt = float(meta.get("target_threshold", 0.60))
+        issues: list[str] = []
+        if sc < tgt and status == "PASS":
+            issues.append(f"below target {tgt}")
+            status = "WARN"
+        gates.append(GateResult(key, status, sc, issues=issues))
+
+    fail_c = sum(1 for g in gates if g.status == "FAIL")
+    warn_c = sum(1 for g in gates if g.status == "WARN")
+    if fail_c:
+        overall = "FAIL"
+    elif warn_c:
+        overall = "WARN"
+    else:
+        overall = "PASS"
+    return ChapterGateReport(0, gates, overall, fail_c, warn_c)
 
 
 def run_chapter_dimension_gates(

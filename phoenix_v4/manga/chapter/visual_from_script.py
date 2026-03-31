@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
+from phoenix_v4.manga.ite_pipeline import ite_prompt_suffix
 from phoenix_v4.manga.visual_prompt_compiler import VisualPromptRequest, compile_visual_prompt
 
 # Rough mood → engine mapping for kernel defaults (VISUAL_AGENT will refine).
@@ -75,6 +76,14 @@ def compile_panel_prompts_from_chapter_script(
             raise ValueError("Every panel must have a non-empty panel_id")
         req = _panel_to_request(panel, style_id=style_id, teacher_id=teacher_id)
         built = compile_visual_prompt(req)
+        ite = ite_prompt_suffix()
+        pos = str(built.get("positive") or "").rstrip()
+        if ite and ite not in pos:
+            built["positive"] = f"{pos} {ite}".strip()
+        neg = str(built.get("negative") or "").rstrip()
+        anti = "geometric grid, digital noise, repeating tile"
+        if anti.lower() not in neg.lower():
+            built["negative"] = f"{neg}, {anti}".strip(", ")
         comp = built.get("composition_notes", "")
         if isinstance(comp, str):
             comp_notes: dict[str, Any] = {"summary": comp}

@@ -38,6 +38,11 @@ jobs:
           PYTHONPATH=. python -m phoenix_v4.qa.validate_marketing_config
         continue-on-error: false
 
+      - name: Validate onboarding registry JSON
+        run: |
+          python scripts/ci/validate_onboarding_registry.py
+        continue-on-error: false
+
       - name: Rebuild curated freebie index for deterministic gates
         run: |
           python scripts/rebuild_freebie_index_from_plans.py \

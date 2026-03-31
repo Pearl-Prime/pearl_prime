@@ -4,6 +4,7 @@ from __future__ import annotations
 from dataclasses import fields
 from typing import Any
 
+from phoenix_v4.manga.ite_pipeline import ite_prompt_suffix
 from phoenix_v4.manga.visual_prompt_compiler import VisualPromptRequest, compile_visual_prompt
 
 REQUEST_FIELD_NAMES = {field.name for field in fields(VisualPromptRequest)}
@@ -23,6 +24,14 @@ def compile_panel_prompts(chapter_request: dict[str, Any], config_hash: str) -> 
         seed = int(panel_request.get("seed", base_seed + index))
         request_kwargs = {key: value for key, value in panel_request.items() if key in REQUEST_FIELD_NAMES}
         prompt = compile_visual_prompt(VisualPromptRequest(**request_kwargs))
+        ite = ite_prompt_suffix()
+        pos = str(prompt.get("positive") or "").rstrip()
+        if ite and ite not in pos:
+            prompt["positive"] = f"{pos} {ite}".strip()
+        neg = str(prompt.get("negative") or "").rstrip()
+        anti = "geometric grid, digital noise, repeating tile"
+        if anti.lower() not in neg.lower():
+            prompt["negative"] = f"{neg}, {anti}".strip(", ")
         compiled_panels.append(
             {
                 **prompt,

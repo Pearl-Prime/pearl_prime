@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 """
 Two-pass generational research runner for Pearl News.
-Pass 1: reasoning with /think; save to <timestamp>_reasoning.md.
-Pass 2: YAML-only with /no_think; save to artifacts/research/<layer>/ with provenance.
+Pass 1: reasoning (Qwen enable_thinking=True or Ollama /think).
+Pass 2: structured YAML (enable_thinking=False or Ollama /no_think).
 
 Usage:
   python scripts/research/run_research.py --prompt-id psychology [--paste path/to/raw.txt]
-  python scripts/research/run_research.py --prompt-id pain_points --paste artifacts/research/raw/feed_2026-03-04.txt
-  python scripts/research/run_research.py --prompt-id event_impact --paste -   # read stdin
-  python scripts/research/run_research.py --prompt-id narrative --dry-run
-  python scripts/research/run_research.py --prompt-id platform --paste raw.txt
-  python scripts/research/run_research.py --prompt-id linguistic --paste raw.txt
-  python scripts/research/run_research.py --prompt-id semantic_trend --paste raw.txt
+  python scripts/research/run_research.py --prompt-id psychology --output-stem 2026-03-31
 
-Requires: Ollama running with Qwen3-14B-GGUF (or set OLLAMA_MODEL).
-  pip install requests pyyaml (optional, for YAML parse check)
+Config (OpenAI-compatible Qwen / DashScope — repo standard):
+  QWEN_BASE_URL → else docs/qwen_api_base_url.txt
+  QWEN_API_KEY  → else docs/qwen_api_key.txt
+  QWEN_MODEL    → else docs/qwen_model.txt
+
+Backward compat: if QWEN_BASE_URL contains "11434", uses Ollama /api/generate (OLLAMA_MODEL, OLLAMA_HOST).
+
+Requires: pip install openai requests pyyaml
 """
 from __future__ import annotations
 
@@ -22,6 +23,7 @@ import argparse
 import os
 import re
 import sys
+import urllib.parse
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -30,6 +32,10 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PROMPTS_ROOT = REPO_ROOT / "research" / "prompts"
 ARTIFACTS_ROOT = REPO_ROOT / "artifacts" / "research"
+
+DOCS_QWEN_BASE = REPO_ROOT / "docs" / "qwen_api_base_url.txt"
+DOCS_QWEN_KEY = REPO_ROOT / "docs" / "qwen_api_key.txt"
+DOCS_QWEN_MODEL = REPO_ROOT / "docs" / "qwen_model.txt"
 
 # Per prompt-id: artifact subdirectory under artifacts/research/, then paths relative to PROMPTS_ROOT.
 LAYER_CONFIG: dict[str, dict[str, Any]] = {
@@ -81,7 +87,7 @@ LAYER_CONFIG: dict[str, dict[str, Any]] = {
         "yaml_instruction": "tasks/linguistic_yaml_instruction.txt",
     },
     "semantic_trend": {
-        "artifacts_subdir": "linguistic",
+        "artifacts_subdir": "semantic_trend",
         "system": "system/semantic_trend_spotter.txt",
         "tasks": ["tasks/semantic_trend_task.txt"],
         "yaml_instruction": "tasks/semantic_trend_yaml_instruction.txt",
@@ -89,7 +95,85 @@ LAYER_CONFIG: dict[str, dict[str, Any]] = {
 }
 
 PROMPT_IDS = list(LAYER_CONFIG.keys())
-DEFAULT_MODEL = os.environ.get("OLLAMA_MODEL", "qwen3:14b")
+OLLAMA_DEFAULT_MODEL = os.environ.get("OLLAMA_MODEL", "qwen3:14b")
+
+
+def _read_repo_text(relative: str) -> str:
+    path = REPO_ROOT / relative
+    if not path.exists():
+        return ""
+    return path.read_text(encoding="utf-8", errors="replace").strip()
+
+
+def _load_qwen_api_key_from_file() -> str:
+    """Match pearl_news.pipeline.slot_provider_qwen key file parsing."""
+    raw = _read_repo_text("docs/qwen_api_key.txt")
+    if not raw:
+        return ""
+    patterns = [
+        r'Api\s*key\s*=\s*"([^"]+)"',
+        r"Api\s*key\s*=\s*'([^']+)'",
+        r"Api\s*key\s*=\s*([^\s]+)",
+        r"\b(sk-[A-Za-z0-9._-]+)\b",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, raw, re.IGNORECASE)
+        if match:
+            value = match.group(1).strip()
+            return re.sub(r"^-+(?=sk-)", "", value)
+    value = raw.strip().strip('"').strip("'")
+    return re.sub(r"^-+(?=sk-)", "", value)
+
+
+def _load_qwen_base_url_from_file() -> str:
+    raw = _read_repo_text("docs/qwen_api_base_url.txt")
+    if not raw:
+        return ""
+    match = re.search(r"(https?://[^\s\"']+)", raw)
+    if match:
+        return match.group(1).strip()
+    return raw.strip().strip('"').strip("'")
+
+
+def _load_qwen_model_from_file() -> str:
+    raw = _read_repo_text("docs/qwen_model.txt")
+    if not raw:
+        return ""
+    if "=" in raw:
+        raw = raw.split("=", 1)[1].strip()
+    return raw.strip().strip('"').strip("'")
+
+
+def resolve_qwen_config() -> tuple[str, str, str]:
+    """Return (base_url, api_key, model_hint) after env + file + slot-style defaults."""
+    base_url = os.environ.get("QWEN_BASE_URL", "").strip() or _load_qwen_base_url_from_file()
+    if os.environ.get("QWEN_API_KEY") is not None:
+        api_key = (os.environ.get("QWEN_API_KEY") or "").strip()
+    else:
+        api_key = _load_qwen_api_key_from_file()
+    model = os.environ.get("QWEN_MODEL", "").strip() or _load_qwen_model_from_file()
+    if api_key and (not base_url or "localhost" in base_url or "127.0.0.1" in base_url):
+        if "11434" not in base_url:
+            base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    if api_key and not model:
+        model = "qwen-plus"
+    return base_url, api_key, model
+
+
+def is_ollama_endpoint(base_url: str) -> bool:
+    return "11434" in base_url
+
+
+def ollama_host_from_base_url(base_url: str) -> str:
+    if not base_url.strip():
+        return os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
+    u = base_url.strip()
+    if not u.startswith("http"):
+        u = "http://" + u
+    parsed = urllib.parse.urlparse(u)
+    if parsed.netloc:
+        return f"{parsed.scheme}://{parsed.netloc}".rstrip("/")
+    return os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
 
 
 def load_text(path: Path) -> str:
@@ -132,33 +216,138 @@ def load_layer_bundle(prompt_id: str, raw_data: str) -> tuple[str, str, str]:
     return system, combined_task, yaml_instruction
 
 
-def call_ollama(prompt: str, model: str, use_think: bool, temperature: float = 0.6) -> str:
-    """Call Ollama generate API. use_think=True appends /think to prompt."""
+def call_ollama_generate(
+    prompt: str,
+    model: str,
+    *,
+    use_think_suffix: bool,
+    temperature: float,
+    ollama_host: str,
+) -> str:
     try:
         import requests
     except ImportError:
         print("Install requests: pip install requests", file=sys.stderr)
         sys.exit(1)
-    if use_think:
+    if use_think_suffix:
         prompt = prompt.rstrip() + "\n\n/think"
-    url = os.environ.get("OLLAMA_HOST", "http://localhost:11434") + "/api/generate"
+    url = ollama_host.rstrip("/") + "/api/generate"
     payload = {
         "model": model,
         "prompt": prompt,
         "stream": False,
         "options": {"temperature": temperature},
     }
-    r = requests.post(url, json=payload, timeout=300)
+    r = requests.post(url, json=payload, timeout=600)
     r.raise_for_status()
     return r.json().get("response", "")
 
 
+def _extract_message_text(resp: Any) -> str:
+    choice = resp.choices[0] if getattr(resp, "choices", None) else None
+    if not choice or not getattr(choice, "message", None):
+        return ""
+    msg = choice.message
+    parts: list[str] = []
+    reasoning = getattr(msg, "reasoning_content", None) or getattr(msg, "reasoning", None)
+    if reasoning:
+        parts.append(str(reasoning).strip())
+    content = (msg.content or "").strip()
+    if content:
+        parts.append(content)
+    return "\n\n".join(parts).strip() if parts else ""
+
+
+def call_openai_chat(
+    client: Any,
+    model: str,
+    messages: list[dict[str, str]],
+    *,
+    enable_thinking: bool,
+    temperature: float,
+    max_tokens: int,
+) -> str:
+    resp = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        extra_body={"enable_thinking": enable_thinking},
+    )
+    return _extract_message_text(resp)
+
+
+def create_openai_client(base_url: str, api_key: str) -> Any:
+    from openai import OpenAI
+
+    return OpenAI(base_url=base_url.rstrip("/"), api_key=api_key or "lm-studio", timeout=600.0)
+
+
+def _strip_yaml_fences(raw: str) -> str:
+    s = raw.strip()
+    if not s.startswith("```"):
+        return s
+    lines = s.splitlines()
+    if lines and lines[0].strip().startswith("```"):
+        lines = lines[1:]
+    while lines and lines[-1].strip() == "```":
+        lines = lines[:-1]
+    return "\n".join(lines).strip()
+
+
+def _validate_yaml_body(yaml_body: str) -> None:
+    try:
+        import yaml as pyyaml  # type: ignore
+    except ImportError:
+        return
+    try:
+        pyyaml.safe_load(yaml_body)
+    except Exception as e:
+        raise ValueError(f"YAML parse failed: {e}") from e
+
+
+def _validate_written_artifact(path: Path) -> None:
+    try:
+        import yaml as pyyaml  # type: ignore
+    except ImportError:
+        return
+    text = path.read_text(encoding="utf-8")
+    try:
+        pyyaml.safe_load(text)
+    except Exception as e:
+        raise ValueError(f"Written artifact failed YAML parse ({path}): {e}") from e
+
+
+def format_reasoning_artifact(
+    body: str,
+    *,
+    layer: str,
+    model: str,
+    date_str: str,
+    mode_line: str,
+) -> str:
+    """Markdown with YAML frontmatter (Pearl News two-pass convention)."""
+    header = (
+        "---\n"
+        f"layer: {layer}\n"
+        f"model: {model}\n"
+        f"mode: {mode_line}\n"
+        f"date: {date_str}\n"
+        "pass: 1\n"
+        "---\n\n"
+    )
+    return header + body.lstrip("\n")
+
+
 def extract_analysis_summary(reasoning: str, max_chars: int = 12000) -> str:
-    """Take first substantive part for YAML pass; strip <think> blocks if present."""
     text = reasoning
     think_match = re.search(r"<think>(.*?)</think>", text, re.DOTALL | re.IGNORECASE)
     if think_match:
         text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL | re.IGNORECASE).strip()
+    if text.startswith("---"):
+        end = text.find("\n---\n", 3)
+        if end != -1:
+            text = text[end + 5 :].lstrip()
     text = text.strip()
     if len(text) > max_chars:
         text = text[: max_chars - 80] + "\n\n[... truncated for YAML pass ...]"
@@ -183,29 +372,170 @@ source: yaml_pass
 
 def run_dry_run(prompt_id: str, cfg: dict[str, Any], out_dir: Path) -> None:
     paths = validate_layer_files(prompt_id, cfg)
+    base_url, api_key, model_hint = resolve_qwen_config()
+    transport = "ollama" if base_url and is_ollama_endpoint(base_url) else "openai"
+    if not base_url and not api_key:
+        transport = "ollama"
     print(f"prompt-id: {prompt_id}", file=sys.stderr)
     print(f"artifacts_subdir: {cfg['artifacts_subdir']}", file=sys.stderr)
     print(f"output_dir (resolved): {out_dir}", file=sys.stderr)
+    print(f"transport (resolved): {transport}", file=sys.stderr)
+    if transport == "openai":
+        print(f"QWEN_BASE_URL: {base_url or '(empty)'}", file=sys.stderr)
+        print(f"QWEN_API_KEY: {'set' if api_key else 'missing'}", file=sys.stderr)
+        print(f"QWEN_MODEL (hint): {model_hint or '(default after --model)'}", file=sys.stderr)
     print("prompt files:", file=sys.stderr)
     for p in paths:
         print(f"  ok {p.relative_to(REPO_ROOT)}", file=sys.stderr)
 
 
+def run_layer_openai(
+    *,
+    client: Any,
+    model: str,
+    system: str,
+    task: str,
+    yaml_instruction_template: str,
+    prompt_id: str,
+    reasoning_path: Path,
+    yaml_path: Path,
+    layer_label: str,
+    date_for_frontmatter: str,
+    mode_line_p1: str,
+) -> None:
+    messages_p1: list[dict[str, str]] = [
+        {"role": "system", "content": system},
+        {"role": "user", "content": task},
+    ]
+    print("Pass 1 (reasoning, enable_thinking=True)...", file=sys.stderr)
+    response1_raw = call_openai_chat(
+        client,
+        model,
+        messages_p1,
+        enable_thinking=True,
+        temperature=0.6,
+        max_tokens=16384,
+    )
+    reasoning_doc = format_reasoning_artifact(
+        response1_raw,
+        layer=layer_label,
+        model=model,
+        date_str=date_for_frontmatter,
+        mode_line=mode_line_p1,
+    )
+    reasoning_path.write_text(reasoning_doc, encoding="utf-8")
+    print(f"Wrote {reasoning_path}", file=sys.stderr)
+
+    analysis_summary = extract_analysis_summary(reasoning_doc)
+    yaml_instruction = yaml_instruction_template.replace("{{ANALYSIS_SUMMARY}}", analysis_summary)
+    user_p2 = (
+        "Now output structured YAML for this analysis.\n\n"
+        "Output only valid YAML. No thinking, no markdown fences.\n\n"
+        f"{yaml_instruction}"
+    )
+    messages_p2: list[dict[str, str]] = [
+        {"role": "system", "content": system},
+        {"role": "user", "content": task},
+        {"role": "assistant", "content": response1_raw},
+        {"role": "user", "content": user_p2},
+    ]
+    print("Pass 2 (YAML, enable_thinking=False)...", file=sys.stderr)
+    response2_raw = call_openai_chat(
+        client,
+        model,
+        messages_p2,
+        enable_thinking=False,
+        temperature=0.4,
+        max_tokens=8192,
+    )
+    yaml_body = _strip_yaml_fences(response2_raw)
+    _validate_yaml_body(yaml_body)
+    write_yaml_with_provenance(yaml_path, yaml_body, prompt_id, model)
+    _validate_written_artifact(yaml_path)
+    print(f"Wrote {yaml_path}", file=sys.stderr)
+
+
+def run_layer_ollama(
+    *,
+    model: str,
+    ollama_host: str,
+    system: str,
+    task: str,
+    yaml_instruction_template: str,
+    prompt_id: str,
+    reasoning_path: Path,
+    yaml_path: Path,
+    layer_label: str,
+    date_for_frontmatter: str,
+) -> None:
+    prompt_pass1 = f"{system}\n\n---\n\n{task}"
+    print("Pass 1 (Ollama /think)...", file=sys.stderr)
+    response1_raw = call_ollama_generate(
+        prompt_pass1,
+        model,
+        use_think_suffix=True,
+        temperature=0.6,
+        ollama_host=ollama_host,
+    )
+    reasoning_doc = format_reasoning_artifact(
+        response1_raw,
+        layer=layer_label,
+        model=model,
+        date_str=date_for_frontmatter,
+        mode_line="reasoning (/think)",
+    )
+    reasoning_path.write_text(reasoning_doc, encoding="utf-8")
+    print(f"Wrote {reasoning_path}", file=sys.stderr)
+
+    analysis_summary = extract_analysis_summary(reasoning_doc)
+    yaml_instruction = yaml_instruction_template.replace("{{ANALYSIS_SUMMARY}}", analysis_summary)
+    prompt_pass2 = (
+        "/no_think\n\n"
+        "Now output structured YAML for this analysis.\n\n"
+        "Output only valid YAML. No thinking, no markdown fences.\n\n"
+        f"{yaml_instruction}"
+    )
+    print("Pass 2 (Ollama /no_think)...", file=sys.stderr)
+    response2_raw = call_ollama_generate(
+        prompt_pass2,
+        model,
+        use_think_suffix=False,
+        temperature=0.4,
+        ollama_host=ollama_host,
+    )
+    yaml_body = _strip_yaml_fences(response2_raw)
+    _validate_yaml_body(yaml_body)
+    write_yaml_with_provenance(yaml_path, yaml_body, prompt_id, model)
+    _validate_written_artifact(yaml_path)
+    print(f"Wrote {yaml_path}", file=sys.stderr)
+
+
 def main() -> None:
     prompt_help = (
         "Research layer: psychology, pain_points, event_impact (dims 1–3); "
-        "narrative, platform, linguistic (dims 4–6); semantic_trend (linguistic plane)."
+        "narrative, platform, linguistic (dims 4–6); semantic_trend (artifacts/research/semantic_trend/)."
     )
     parser = argparse.ArgumentParser(description="Two-pass Qwen3 generational research")
     parser.add_argument("--prompt-id", required=True, choices=PROMPT_IDS, help=prompt_help)
     parser.add_argument("--paste", default=None, help="Path to raw data file, or '-' for stdin")
-    parser.add_argument("--model", default=DEFAULT_MODEL, help="Ollama model name")
+    parser.add_argument(
+        "--model",
+        default=None,
+        help="Override model id (else QWEN_MODEL / docs file, or Ollama OLLAMA_MODEL)",
+    )
     parser.add_argument("--skip-yaml-pass", action="store_true", help="Only run reasoning pass")
     parser.add_argument("--out-dir", default=None, help="Override artifacts/research subdir (full path)")
     parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Verify prompt paths exist and print config; do not call the LLM",
+    )
+    parser.add_argument(
+        "--output-stem",
+        default=None,
+        metavar="STEM",
+        help="Fixed filenames: <STEM>_reasoning.md and <STEM>.yaml (e.g. 2026-03-31). "
+        "Default: UTC timestamp.",
     )
     args = parser.parse_args()
 
@@ -218,6 +548,31 @@ def main() -> None:
         run_dry_run(prompt_id, cfg, out_dir)
         return
 
+    base_url, api_key, model_hint = resolve_qwen_config()
+    use_ollama = bool(base_url and is_ollama_endpoint(base_url))
+    if not base_url and not api_key:
+        use_ollama = True
+        ollama_host = os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
+        resolved_model = args.model or OLLAMA_DEFAULT_MODEL
+    elif use_ollama:
+        ollama_host = ollama_host_from_base_url(base_url)
+        resolved_model = args.model or OLLAMA_DEFAULT_MODEL
+    else:
+        ollama_host = ""
+        if not base_url:
+            print(
+                "error: QWEN_BASE_URL missing (set env or docs/qwen_api_base_url.txt)",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        if not api_key:
+            print(
+                "error: QWEN_API_KEY missing (set env or docs/qwen_api_key.txt)",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        resolved_model = args.model or model_hint or "qwen-plus"
+
     raw_data = ""
     if args.paste:
         if args.paste == "-":
@@ -226,28 +581,94 @@ def main() -> None:
             raw_data = load_text(Path(args.paste))
 
     system, task, yaml_instruction_template = load_layer_bundle(prompt_id, raw_data)
-    prompt_pass1 = f"{system}\n\n---\n\n{task}"
 
-    print("Pass 1 (reasoning with /think)...", file=sys.stderr)
-    response1 = call_ollama(prompt_pass1, args.model, use_think=True, temperature=0.6)
-    ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
-    reasoning_path = out_dir / f"{ts}_reasoning.md"
-    with open(reasoning_path, "w", encoding="utf-8") as f:
-        f.write(response1)
-    print(f"Wrote {reasoning_path}", file=sys.stderr)
+    if args.output_stem:
+        stem = args.output_stem.strip()
+        reasoning_path = out_dir / f"{stem}_reasoning.md"
+        yaml_path = out_dir / f"{stem}.yaml"
+        date_for_frontmatter = (
+            stem if re.match(r"^\d{4}-\d{2}-\d{2}$", stem) else datetime.utcnow().strftime("%Y-%m-%d")
+        )
+    else:
+        ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+        reasoning_path = out_dir / f"{ts}_reasoning.md"
+        yaml_path = out_dir / f"{ts}.yaml"
+        date_for_frontmatter = datetime.utcnow().strftime("%Y-%m-%d")
 
-    if args.skip_yaml_pass:
+    layer_label = cfg["artifacts_subdir"]
+
+    if use_ollama:
+        if args.skip_yaml_pass:
+            prompt_pass1 = f"{system}\n\n---\n\n{task}"
+            response1_raw = call_ollama_generate(
+                prompt_pass1,
+                resolved_model,
+                use_think_suffix=True,
+                temperature=0.6,
+                ollama_host=ollama_host,
+            )
+            reasoning_doc = format_reasoning_artifact(
+                response1_raw,
+                layer=layer_label,
+                model=resolved_model,
+                date_str=date_for_frontmatter,
+                mode_line="reasoning (/think)",
+            )
+            reasoning_path.write_text(reasoning_doc, encoding="utf-8")
+            print(f"Wrote {reasoning_path}", file=sys.stderr)
+            return
+        run_layer_ollama(
+            model=resolved_model,
+            ollama_host=ollama_host,
+            system=system,
+            task=task,
+            yaml_instruction_template=yaml_instruction_template,
+            prompt_id=prompt_id,
+            reasoning_path=reasoning_path,
+            yaml_path=yaml_path,
+            layer_label=layer_label,
+            date_for_frontmatter=date_for_frontmatter,
+        )
         return
 
-    analysis_summary = extract_analysis_summary(response1)
-    yaml_instruction = yaml_instruction_template.replace("{{ANALYSIS_SUMMARY}}", analysis_summary)
-    prompt_pass2 = f"Output only valid YAML. No thinking, no markdown fences.\n\n{yaml_instruction}"
+    client = create_openai_client(base_url, api_key)
+    if args.skip_yaml_pass:
+        messages_p1 = [
+            {"role": "system", "content": system},
+            {"role": "user", "content": task},
+        ]
+        response1_raw = call_openai_chat(
+            client,
+            resolved_model,
+            messages_p1,
+            enable_thinking=True,
+            temperature=0.6,
+            max_tokens=16384,
+        )
+        reasoning_doc = format_reasoning_artifact(
+            response1_raw,
+            layer=layer_label,
+            model=resolved_model,
+            date_str=date_for_frontmatter,
+            mode_line="reasoning (enable_thinking=True)",
+        )
+        reasoning_path.write_text(reasoning_doc, encoding="utf-8")
+        print(f"Wrote {reasoning_path}", file=sys.stderr)
+        return
 
-    print("Pass 2 (YAML only, /no_think)...", file=sys.stderr)
-    response2 = call_ollama(prompt_pass2, args.model, use_think=False, temperature=0.4)
-    yaml_path = out_dir / f"{ts}.yaml"
-    write_yaml_with_provenance(yaml_path, response2.strip(), prompt_id, args.model)
-    print(f"Wrote {yaml_path}", file=sys.stderr)
+    run_layer_openai(
+        client=client,
+        model=resolved_model,
+        system=system,
+        task=task,
+        yaml_instruction_template=yaml_instruction_template,
+        prompt_id=prompt_id,
+        reasoning_path=reasoning_path,
+        yaml_path=yaml_path,
+        layer_label=layer_label,
+        date_for_frontmatter=date_for_frontmatter,
+        mode_line_p1="reasoning (enable_thinking=True)",
+    )
 
 
 if __name__ == "__main__":

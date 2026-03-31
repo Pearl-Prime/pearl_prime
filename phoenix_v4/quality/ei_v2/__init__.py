@@ -51,6 +51,7 @@ class EIV2CandidateReport:
     rerank_score: Optional[float] = None
     domain_similarity: Optional[float] = None
     tts_readability: Optional[Dict[str, Any]] = None
+    duration_fit: Optional[float] = None  # CDIS / duration_fit dimension 0..1
 
 
 @dataclass
@@ -143,6 +144,25 @@ def run_ei_v2_analysis(
             tts_result = score_tts_readability(text, cfg=tts_cfg)
             candidate_reports[cid].tts_readability = tts_result
 
+    # --- Duration fit (optional per-candidate metadata) ---
+    df_cfg = cfg.get("duration_fit") or {}
+    if df_cfg.get("enabled", False):
+        from phoenix_v4.quality.ei_v2.duration_fit import score_duration_fit
+
+        for cid, c in zip(ids, candidates):
+            if c.get("duration_fit_score") is not None:
+                candidate_reports[cid].duration_fit = float(c["duration_fit_score"])
+                continue
+            meta = {
+                "format": c.get("duration_format"),
+                "intent": c.get("duration_intent") or "therapeutic",
+                "duration_sec": c.get("duration_sec"),
+                "page_count": c.get("page_count"),
+                "panel_count": c.get("panel_count"),
+            }
+            if meta.get("format") and (meta.get("duration_sec") or meta.get("page_count") or meta.get("panel_count")):
+                candidate_reports[cid].duration_fit = float(score_duration_fit(meta, cfg)["score"])
+
     # --- Semantic dedup ---
     dedup_cfg = cfg.get("semantic_dedup", {})
     if dedup_cfg.get("enabled", False) and len(texts) >= 2:
@@ -179,6 +199,8 @@ def _select_v2_best(
     w_safety = float(weights.get("safety", 0.25))
     w_domain = float(weights.get("domain_similarity", 0.20))
     w_tts = float(weights.get("tts_readability", 0.20))
+    w_dur = float(weights.get("duration_fit", 0.0))
+    dur_neutral = float((cfg.get("duration_fit") or {}).get("neutral_when_unscored", 0.62))
 
     best_id = ids[0]
     best_score = -999.0
@@ -200,6 +222,10 @@ def _select_v2_best(
         if isinstance(cr.tts_readability, dict):
             readability = float(cr.tts_readability.get("composite", 0.5))
             score += w_tts * readability
+
+        if w_dur > 0.0:
+            df = cr.duration_fit if cr.duration_fit is not None else dur_neutral
+            score += w_dur * max(0.0, min(1.0, float(df)))
 
         if score > best_score or (score == best_score and cid < best_id):
             best_score = score

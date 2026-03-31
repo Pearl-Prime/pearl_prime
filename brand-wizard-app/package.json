@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "bash ../scripts/onboarding/sync_onboarding_config_to_public.sh",
     "build": "vite build",
     "preview": "vite preview"
   },

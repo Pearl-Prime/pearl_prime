@@ -112,11 +112,13 @@ book_structure:
 
 # Composite weights for V2 candidate selection (sum to 1.0 recommended)
 # These are defaults; the learner can adjust them over time.
+# CDIS §11.2: duration_fit added at 0.20; others scaled down.
 composite_weights:
-  rerank: 0.35                   # Cross-encoder relevance
-  safety: 0.25                   # Safety inversed (1 - risk)
-  domain_similarity: 0.20        # Domain-tuned thesis alignment
-  tts_readability: 0.20          # TTS readability composite
+  rerank: 0.30                   # Cross-encoder relevance
+  safety: 0.20                   # Safety inversed (1 - risk)
+  domain_similarity: 0.15        # Domain-tuned thesis alignment
+  tts_readability: 0.15          # TTS readability composite
+  duration_fit: 0.20             # Content Duration Intelligence (registry / platform / persona)
 
 # ── Hybrid V1+V2 selector ──
 # Layered override: V1 picks, V2 scores, override only when clearly better.
@@ -127,7 +129,22 @@ hybrid:
   dedup_block_threshold: 0.6     # V1 winner blocked if dedup sim > this
   arc_block_threshold: 0.5       # Block if arc deviation > this
   tts_block_threshold: 0.3       # Block if TTS composite < this
+  duration_fit_block_threshold: 0.44  # Below duration_fit composite (CDIS §13)
   scope: "all"                   # "all", or list of format/persona/topic to limit
+
+# ── Content Duration Intelligence (CDIS) §11.1 ──
+duration_fit:
+  enabled: true
+  mode: rule_based
+  neutral_when_unscored: 0.62   # hybrid selector: no per-candidate duration metadata
+  weights:
+    therapeutic_fit: 0.40
+    platform_fit: 0.35
+    attention_fit: 0.25
+  thresholds:
+    pass: 0.60
+    warn: 0.45
+    fail: 0.44
 
 # ── Dimension enforcement gates ──
 # Per-chapter quality minimums. FAIL = hard block; WARN = logged.
@@ -160,6 +177,54 @@ dimension_gates:
     min_cross_chapter_refs: 1
     pass_threshold: 0.40
     warn_threshold: 0.25
+
+# ── Visual / implicit therapeutic (manga, illustrated, companion QC) ──
+visual_therapeutic:
+  enabled: true
+  mode: heuristic
+  dimensions:
+    vt_parasympathetic:
+      weight: 0.30
+      warn_below: 0.40
+      fail_below: 0.20
+      target_threshold: 0.60
+      inputs: [fractal_density, cool_palette_ratio, breath_sequence_count, panel_size_ratio]
+    vt_processing:
+      weight: 0.25
+      warn_below: 0.35
+      fail_below: 0.15
+      target_threshold: 0.60
+      inputs: [gutter_compliance, sabido_completeness, beat_sequence_alignment]
+    vt_somatic:
+      weight: 0.25
+      warn_below: 0.35
+      fail_below: 0.15
+      target_threshold: 0.60
+      inputs: [breath_validity, color_arc_monotonicity, fractal_hold_presence, tempo_compliance, silence_compliance]
+    vt_stealth:
+      weight: 0.20
+      warn_below: 0.70
+      fail_below: 0.50
+      target_threshold: 0.60
+      blocker_threshold: 0.50
+      forbidden_terms:
+        - therapy
+        - mindfulness
+        - grounding
+        - breathing exercise
+        - meditation
+        - wellness
+        - self-care
+        - healing journey
+        - inner peace
+        - mental health
+        - calm down
+        - relax your body
+        - take a breath
+      penalty_weight: 100
+  composite:
+    pass_threshold: 0.50
+    target: 0.70
 
 # ── Teacher × topic × persona fit (optional) ──
 # When set, EI v2 can use scores for adaptation hints and learning. See specs/TEACHER_UNIVERSAL_AND_SCORING_SPEC.md.

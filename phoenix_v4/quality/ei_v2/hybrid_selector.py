@@ -124,13 +124,16 @@ def _score_composite(
     safety: Dict[str, Any],
     domain_similarity: Optional[float],
     tts_readability: Optional[Dict[str, Any]],
+    duration_fit: Optional[float],
     weights: Dict[str, float],
+    duration_neutral: float = 0.62,
 ) -> float:
-    """Match _select_v2_best logic."""
+    """Match _select_v2_best logic; optional duration_fit (CDIS §11)."""
     w_rerank = float(weights.get("rerank", 0.35))
     w_safety = float(weights.get("safety", 0.25))
     w_domain = float(weights.get("domain_similarity", 0.20))
     w_tts = float(weights.get("tts_readability", 0.20))
+    w_dur = float(weights.get("duration_fit", 0.0))
 
     score = 0.0
     if rerank_score is not None:
@@ -143,6 +146,9 @@ def _score_composite(
     if isinstance(tts_readability, dict):
         readability = float(tts_readability.get("composite", 0.5))
         score += w_tts * readability
+    if w_dur > 0.0:
+        df = float(duration_fit) if duration_fit is not None else duration_neutral
+        score += w_dur * max(0.0, min(1.0, df))
 
     return max(0.0, score)
 
@@ -223,6 +229,7 @@ def hybrid_select(
     arc_intent: Optional[Dict[str, Any]] = None,
     learned_params_path: Optional[Path] = None,
     call_llm_fn: Optional[Callable[..., Any]] = None,
+    duration_fit_by_id: Optional[Dict[str, float]] = None,
 ) -> HybridDecision:
     """
     Hybrid selection: V1 hash pick, optional V2 composite scoring and override.
@@ -289,6 +296,8 @@ def hybrid_select(
     tts_block_threshold = float(hybrid_cfg.get("tts_block_threshold", 0.3))
 
     weights = _effective_composite_weights(cfg, learned)
+    dur_cfg = cfg.get("duration_fit") or {}
+    duration_neutral = float(dur_cfg.get("neutral_when_unscored", 0.62))
 
     texts = [c.get("text", "") for c in candidates_raw]
     ids = [(c.get("id") or c.get("atom_id") or f"c{i}").strip() for i, c in enumerate(candidates_raw)]
@@ -339,12 +348,15 @@ def hybrid_select(
 
     composite_by_id: Dict[str, float] = {}
     for cid in ids:
+        dfs = duration_fit_by_id.get(cid) if duration_fit_by_id else None
         composite_by_id[cid] = _score_composite(
             rerank_score=rerank_by_id.get(cid),
             safety=safety_by_id.get(cid, {}),
             domain_similarity=domain_by_id.get(cid),
             tts_readability=tts_by_id.get(cid),
+            duration_fit=dfs,
             weights=weights,
+            duration_neutral=duration_neutral,
         )
 
     v2_best = _pick_v2_best(composite_by_id, ids)

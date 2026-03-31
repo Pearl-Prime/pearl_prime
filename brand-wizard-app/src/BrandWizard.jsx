@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
+import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 
 // ─────────────────────────────────────────────────────────────
 // PEARL PRIME — BRAND CREATION WIZARD v2.1
@@ -1075,6 +1076,7 @@ function Step2PrimaryReader({ state, update }) {
           color="#3b82f6"
         />
       )}
+      {state.persona ? <OutputProofStrip wizardPersonaId={state.persona} formatFocus={state.formatFocus} /> : null}
     </div>
   );
 }

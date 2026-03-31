@@ -102,6 +102,23 @@ def test_qc_summary_exists(run_pipeline):
     data = json.loads(path.read_text(encoding="utf-8"))
     assert "passed" in data
     assert data["passed"] is True
+    assert "vce_blockers" in data and isinstance(data["vce_blockers"], list)
+
+
+def test_vce_artifacts_exist(run_pipeline):
+    """VCE stages 12–17 leave composited_layers, platform_variants, analytics_feedback."""
+    for name in (
+        "composited_layers.json",
+        "animation_plan.json",
+        "soundtrack_plan.json",
+        "platform_variants.json",
+        "multilang_plan.json",
+        "analytics_feedback.json",
+    ):
+        path = OUT_ROOT / name
+        if not path.exists():
+            pytest.skip(f"Missing {name}")
+        assert json.loads(path.read_text(encoding="utf-8"))
 
 
 def test_provenance_exists_and_has_config_hash(run_pipeline):

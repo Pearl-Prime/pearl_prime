@@ -17,3 +17,8 @@ require_primary_asset_ids_in_batch: true
 # rest of the batch; coverage gaps surface in the preflight report (generate more
 # variants of high-use assets).
 max_asset_reuse_per_batch: 15
+
+# VCE §11 VCE-B09 — cross-channel isolation (QC stub: require_unique_assets per batch).
+cross_channel:
+  require_unique_primary_assets_across_channels: true
+  allow_shared_library_ambience: true

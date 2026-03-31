@@ -1,0 +1,53 @@
+# Sabido character transmission — manga dialogue constraints (ITE §9)
+schema_version: "1.0.0"
+
+roles:
+  positive_model:
+    function: "Demonstrate regulation through action only — never explain technique."
+    may_say_about_feelings: true
+    may_reference_body_sensations_implicitly: true
+    must_not_say:
+      - therapeutic technique names
+      - instructions to breathe, meditate, or ground
+      - wellness or mental-health framing
+    dialogue_rules:
+      - "Show recovery through behavior (pause, nature, stillness), not advice."
+      - "No lines that name why the character is coping."
+
+  negative_model:
+    function: "Show dysregulation and consequences through story causality, not lectures."
+    may_escalate_dramatically: true
+    must_not_say:
+      - "You should go to therapy"
+      - moralistic wellness slogans
+    dialogue_rules:
+      - "Consequences are narrative (loss, isolation, cost), not labeled lessons."
+
+  transitional:
+    function: "Reader-identified companion; organic doubt and change."
+    may_express_uncertainty: true
+    may_ask_questions: true
+    must_not_say:
+      - explicit therapeutic vocabulary from stealth list
+    dialogue_rules:
+      - "Shift comes from plot pressure and witnessed behavior, not pep talks."
+
+  global_rules:
+    forbid_explicit_technique_names: true
+    forbid_instructional_regulation_lines: true
+
+forbidden_explicit_techniques:
+  - CBT
+  - DBT
+  - EMDR
+  - exposure therapy
+  - mindfulness practice
+  - meditation session
+  - breathing exercise
+
+transitional_arc_beats:
+  - skepticism_or_avoidance
+  - observation_without_commitment
+  - tentative_trial_in_private
+  - setback_that_tests_commitment
+  - integration_without_speechifying

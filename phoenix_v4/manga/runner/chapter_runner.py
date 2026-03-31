@@ -17,6 +17,14 @@ from phoenix_v4.manga.memory.series_memory_merge import (
     build_series_memory_snapshot,
     load_or_init_series_memory,
 )
+from phoenix_v4.manga.ite_pipeline import (
+    annotate_gutter_therapy,
+    annotate_panel_breath,
+    build_color_arc,
+    load_ite_merged_config,
+    run_fractal_check,
+    run_ite_qc,
+)
 from phoenix_v4.manga.models import paths as manga_paths
 from phoenix_v4.manga.models import stage_ids as sid
 from phoenix_v4.manga.models.validation import validate_instance
@@ -128,6 +136,53 @@ def _stage_image_gen(workspace: Path, backend: ImageBackend) -> None:
     (workspace / manga_paths.PANEL_IMAGES_MANIFEST).write_text(
         json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
     )
+    _run_ite_artifacts(workspace, manifest)
+
+
+def _run_ite_artifacts(workspace: Path, manifest: dict[str, Any]) -> None:
+    """Implicit Therapeutic Engine: breath → color arc → gutter → fractal → QC (debug/ite)."""
+    ite_cfg = load_ite_merged_config()
+    script_path = workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF
+    if not script_path.is_file():
+        return
+    script = _load_json(script_path)
+    ite_dir = workspace / manga_paths.DEBUG_DIR / "ite"
+    ite_dir.mkdir(parents=True, exist_ok=True)
+
+    breath = annotate_panel_breath(script, cfg=ite_cfg)
+    (ite_dir / "chapter_breath.json").write_text(
+        json.dumps(breath, indent=2) + "\n", encoding="utf-8"
+    )
+
+    paths_map: dict[str, Path] = {}
+    for p in manifest.get("panels") or []:
+        pid = str(p.get("panel_id") or "")
+        raw = p.get("path")
+        if not pid or not raw:
+            continue
+        path = Path(str(raw))
+        if not path.is_absolute():
+            path = (workspace / path).resolve()
+        if path.is_file():
+            paths_map[pid] = path
+
+    color = build_color_arc(breath, paths_map or None, cfg=ite_cfg)
+    (ite_dir / "color_arc.json").write_text(json.dumps(color, indent=2) + "\n", encoding="utf-8")
+
+    gutter = annotate_gutter_therapy(breath, cfg=ite_cfg)
+    (ite_dir / "chapter_gutter.json").write_text(json.dumps(gutter, indent=2) + "\n", encoding="utf-8")
+
+    fractal = run_fractal_check(paths_map, gutter, cfg=ite_cfg)
+    (ite_dir / "fractal_report.json").write_text(json.dumps(fractal, indent=2) + "\n", encoding="utf-8")
+
+    qc_report = run_ite_qc(
+        chapter_enriched=gutter,
+        color_arc=color,
+        fractal_report=fractal,
+        breath_doc=breath,
+        cfg=ite_cfg,
+    )
+    (ite_dir / "ite_qc_report.json").write_text(json.dumps(qc_report, indent=2) + "\n", encoding="utf-8")
 
 
 def _stage_lettering(workspace: Path) -> None:

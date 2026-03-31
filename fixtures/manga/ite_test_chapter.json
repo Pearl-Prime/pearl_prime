@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "chapter_script_writer_handoff",
+  "series_id": "s_test",
+  "chapter_id": "ch_ite_01",
+  "genre": "romance",
+  "pages": [
+    {
+      "page_number": 1,
+      "page_type": "standard",
+      "panels": [
+        {
+          "panel_id": "p01",
+          "width_pct": 22,
+          "emotional_intensity": 2,
+          "emotional_band": 2,
+          "dialogue": ["We should keep moving."],
+          "action": "Street at dusk",
+          "background_category": "urban"
+        },
+        {
+          "panel_id": "p02",
+          "width_pct": 28,
+          "emotional_intensity": 3,
+          "emotional_band": 3,
+          "dialogue": ["Something feels off."],
+          "action": "Pause at corner"
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "page_type": "standard",
+      "panels": [
+        {
+          "panel_id": "p03",
+          "width_pct": 35,
+          "emotional_intensity": 4,
+          "emotional_band": 4,
+          "dialogue": ["Wait."],
+          "action": "Recognition beat"
+        },
+        {
+          "panel_id": "p04",
+          "width_pct": 42,
+          "emotional_intensity": 5,
+          "emotional_band": 5,
+          "dialogue": ["No — not like this."],
+          "action": "Climax beat"
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "page_type": "standard",
+      "panels": [
+        {
+          "panel_id": "p05",
+          "width_pct": 50,
+          "emotional_intensity": 2,
+          "emotional_band": 2,
+          "dialogue": ["The river is quieter here."],
+          "action": "River bank",
+          "background_category": "arboreal"
+        },
+        {
+          "panel_id": "p06",
+          "width_pct": 55,
+          "emotional_intensity": 1,
+          "emotional_band": 1,
+          "dialogue": ["Yeah."],
+          "action": "Wide still panel",
+          "background_category": "aquatic"
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "page_type": "standard",
+      "panels": [
+        {
+          "panel_id": "p07",
+          "width_pct": 48,
+          "emotional_intensity": 1,
+          "emotional_band": 1,
+          "dialogue": [],
+          "action": "Afterglow walk",
+          "background_category": "atmospheric"
+        }
+      ]
+    }
+  ]
+}

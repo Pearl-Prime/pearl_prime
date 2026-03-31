@@ -91,10 +91,22 @@ DEFAULTS: Dict[str, Any] = {
         "arc_deviation_fail": 0.6,
     },
     "composite_weights": {
-        "rerank": 0.35,
-        "safety": 0.25,
-        "domain_similarity": 0.20,
-        "tts_readability": 0.20,
+        "rerank": 0.30,
+        "safety": 0.20,
+        "domain_similarity": 0.15,
+        "tts_readability": 0.15,
+        "duration_fit": 0.20,
+    },
+    "duration_fit": {
+        "enabled": True,
+        "mode": "rule_based",
+        "neutral_when_unscored": 0.62,
+        "weights": {
+            "therapeutic_fit": 0.40,
+            "platform_fit": 0.35,
+            "attention_fit": 0.25,
+        },
+        "thresholds": {"pass": 0.60, "warn": 0.45, "fail": 0.44},
     },
     # Book structure (Pearl Prime): slot types and arc context for EI learning and assembly.
     # When plan has chapter_thesis, callers pass chapter thesis per chapter; arc_intent may include
@@ -108,6 +120,25 @@ DEFAULTS: Dict[str, Any] = {
         "arc_intent_keys": ["band", "emotional_role", "chapter_index", "chapter_thesis", "bestseller_structure"],
         # BG-PR-09: when True, compile fails if chapter_slot_sequence disagrees with chapter_bestseller_structures
         "enforce_bestseller_beat_order": False,
+    },
+    "visual_therapeutic": {
+        "enabled": False,
+        "mode": "heuristic",
+        "dimensions": {
+            "vt_parasympathetic": {"weight": 0.30, "warn_below": 0.40, "fail_below": 0.20, "target_threshold": 0.60},
+            "vt_processing": {"weight": 0.25, "warn_below": 0.35, "fail_below": 0.15, "target_threshold": 0.60},
+            "vt_somatic": {"weight": 0.25, "warn_below": 0.35, "fail_below": 0.15, "target_threshold": 0.60},
+            "vt_stealth": {
+                "weight": 0.20,
+                "warn_below": 0.70,
+                "fail_below": 0.50,
+                "target_threshold": 0.60,
+                "blocker_threshold": 0.50,
+                "penalty_weight": 100,
+                "forbidden_terms": [],
+            },
+        },
+        "composite": {"pass_threshold": 0.50, "target": 0.70},
     },
 }
 
