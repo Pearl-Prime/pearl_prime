@@ -33,10 +33,14 @@ export function OutputProofStrip({ wizardPersonaId, formatFocus, market = "us" }
     <div className="mt-6 rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50/90 to-white p-4 shadow-sm">
       <div className="flex items-center gap-2 mb-2">
         <Sparkles size={16} className="text-violet-600" />
-        <span className="text-xs font-bold uppercase tracking-wider text-violet-700">Output proof (registry)</span>
+        <span className="text-xs font-bold uppercase tracking-wider text-violet-700">What the system can show</span>
       </div>
       <p className="text-[11px] text-violet-900/80 mb-3 leading-relaxed">
-        Examples that match your primary reader{formatFocus ? " and format focus" : ""} — the same IDs power the static gallery.
+        Registry examples aligned to your <strong className="font-semibold text-violet-950">primary reader</strong>
+        {formatFocus ? (
+          <> and <strong className="font-semibold text-violet-950">{formatFocus === "manga" ? "manga-first" : "book-first"}</strong> packaging bias</>
+        ) : null}
+        . Status colors: ready / planned / missing — the gallery uses the same JSON.
       </p>
 
       {loading && <p className="text-[11px] text-gray-500">Loading registry…</p>}
@@ -44,12 +48,15 @@ export function OutputProofStrip({ wizardPersonaId, formatFocus, market = "us" }
 
       {!loading && !error && !regPersona && (
         <p className="text-[11px] text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-2 py-2">
-          No registry persona mapping for this wizard id yet — see <code className="text-[10px]">lane_examples_gallery.html</code> at repo root for full coverage.
+          This reader type is not mapped to a registry persona yet, so we can’t list proof IDs here. Open{" "}
+          <code className="text-[10px]">lane_examples_gallery.html</code> (repo root, over HTTP) for the full board.
         </p>
       )}
 
       {!loading && !error && regPersona && matched.length === 0 && (
-        <p className="text-[11px] text-gray-600">No rows for this combination in the v1 registry (try another reader or format).</p>
+        <p className="text-[11px] text-gray-600">
+          No proof rows for this reader {formatFocus ? "with this format bias " : ""}in the v1 registry — try another primary reader or finish the wizard and revisit after format selection.
+        </p>
       )}
 
       {matched.length > 0 && (

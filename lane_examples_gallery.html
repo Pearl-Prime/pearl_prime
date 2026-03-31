@@ -78,14 +78,25 @@ kbd{font-size:.7em;padding:1px 5px;border:1px solid var(--border);border-radius:
 (function(){
 var REGISTRY_URL = 'config/onboarding/example_registry.json';
 var LANES_ORDER = ['self_help','audiobook','manga','pearl_news','breathwork_tools','tools','other'];
+var REPO_STATIC_MODE = REGISTRY_URL.indexOf('config/') === 0;
 
 function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+function resolveAssetUrl(path){
+  if(!path)return path;
+  if(path.indexOf('http://')===0||path.indexOf('https://')===0)return path;
+  if(REPO_STATIC_MODE && path.indexOf('/onboarding/')===0)return 'brand-wizard-app/public'+path;
+  return path;
+}
 function statusPill(st, stale){var p=el('span','pill');if(stale){p.classList.add('pill-stale');p.textContent='Stale ready';return p}if(st==='ready'){p.classList.add('pill-ready');p.textContent='Ready'}else if(st==='planned'){p.classList.add('pill-planned');p.textContent='Planned'}else{p.classList.add('pill-missing');p.textContent='Missing'}return p}
 
 function renderPlaceholder(row, stale){
   var d=el('div','pending-note');
   var strong=stale?'Asset failed (treat as proof-pending)':'Proof pending';
-  d.innerHTML='<strong>'+strong+'</strong>'+(row.status==='planned'?'Planned example — asset in pipeline.':row.status==='missing'?'Not generated yet.':'Registry marked ready but visual unavailable.')+'<div class="tag-row"><span class="tag">'+row.lane+'</span><span class="tag">'+row.market+'</span><span class="tag">'+(row.persona||'')+'</span></div>';
+  var line=row.status==='planned'?'Planned — packaging not verified in-repo yet.':row.status==='missing'?'Reserved slot — not generated yet.':'Registry marked ready but visual unavailable.';
+  d.innerHTML='<strong>'+strong+'</strong>'+line+'<div class="tag-row"><span class="tag">'+row.lane+'</span><span class="tag">'+row.market+'</span><span class="tag">'+(row.persona||'')+'</span></div>';
+  if(row.placeholder_reason && !stale){
+    var pr=el('div','cap');pr.style.marginTop='10px';pr.style.fontSize='.74rem';pr.style.fontStyle='normal';pr.textContent=row.placeholder_reason;d.appendChild(pr);
+  }
   return d;
 }
 
@@ -99,7 +110,7 @@ function renderTile(row){
   } else if(row.asset_path){
     var img=document.createElement('img');
     img.alt=row.caption||row.id;
-    img.src=row.asset_path;
+    img.src=resolveAssetUrl(row.asset_path);
     img.onload=function(){};
     img.onerror=function(){
       stale=true;
@@ -121,6 +132,9 @@ function renderTile(row){
   if(isSupport){
     var note=el('div','cap');note.style.marginTop='6px';note.style.color='#6b21a8';note.textContent='Supporting visual — distinct from product proof.';
     meta.appendChild(note);
+  }
+  if(row.source==='onboarding_seed_asset'){
+    var seed=el('div','cap');seed.style.marginTop='4px';seed.style.fontSize='.68rem';seed.style.color='#0891b2';seed.textContent='Interim in-repo seed asset — swap for pipeline export when ready.';meta.appendChild(seed);
   }
   tile.appendChild(meta);
   return tile;

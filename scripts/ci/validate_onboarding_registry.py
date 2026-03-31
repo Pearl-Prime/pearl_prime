@@ -71,6 +71,9 @@ def main() -> int:
                     errors.append(
                         f"{p}: production_fidelity must be one of {sorted(FIDELITY)}, got {fid!r}"
                     )
+                pr = row.get("placeholder_reason")
+                if pr is not None and not isinstance(pr, str):
+                    errors.append(f"{p}: placeholder_reason must be a string when present")
         else:
             if not isinstance(data, (dict, list)):
                 errors.append(f"{path.name}: root must be object or array")

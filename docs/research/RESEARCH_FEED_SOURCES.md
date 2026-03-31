@@ -40,4 +40,4 @@ Use: Fetch or copy text → paste into Qwen3 extract prompt → output to `artif
 ## Related
 
 - [continue_gen_research3.md](continue_gen_research3.md) — Generational research master spec
-- [CONTINUOUS_RESEARCH_PLAN.md](CONTINUOUS_RESEARCH_PLAN.md) — How the research plane runs (local Qwen3, feed ingest, artifacts)
+- [CONTINUOUS_RESEARCH_PLAN.md](CONTINUOUS_RESEARCH_PLAN.md) — How the research plane runs (default: **Qwen API key lane**; offline variant documented there; feed ingest; artifacts)

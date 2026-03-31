@@ -14,7 +14,12 @@ export function useOnboardingRegistry() {
         return r.json();
       })
       .then((data) => {
-        if (!cancelled) setRows(Array.isArray(data) ? data : []);
+        if (cancelled) return;
+        if (!Array.isArray(data)) {
+          setRows([]);
+          return;
+        }
+        setRows(data);
       })
       .catch((e) => {
         if (!cancelled) setError(e instanceof Error ? e.message : String(e));

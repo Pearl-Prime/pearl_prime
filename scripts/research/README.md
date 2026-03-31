@@ -1,12 +1,12 @@
 # Generational research scripts
 
-Run two-pass Qwen3 generational research locally. See [docs/research/continue_gen_research3.md](../../docs/research/continue_gen_research3.md).
+**Repo standard:** two-pass Qwen3 research on the **Qwen API key lane** (OpenAI-compatible HTTP — same as GitHub Actions). See [docs/AGENT_QWEN_API_KEY_LANE.md](../../docs/AGENT_QWEN_API_KEY_LANE.md). Spec and offline variant: [docs/research/continue_gen_research3.md](../../docs/research/continue_gen_research3.md).
 
 ## Prerequisites
 
 - Python 3.9+ with **`openai`**, **`requests`**, **`pyyaml`**: `pip install openai requests pyyaml`.
 
-### Qwen (default) — OpenAI-compatible API (repo standard)
+### Qwen API (default) — OpenAI-compatible endpoint (repo standard)
 
 Same pattern as `pearl_news/pipeline/slot_provider_qwen.py` and GitHub workflows:
 
@@ -18,9 +18,11 @@ Same pattern as `pearl_news/pipeline/slot_provider_qwen.py` and GitHub workflows
 
 Pass 1 uses `extra_body={"enable_thinking": True}`; pass 2 uses `enable_thinking=False` and continues the chat with the pass-1 assistant message.
 
-### Ollama (backward compat)
+### Ollama / local (optional backward compat only)
 
-If `QWEN_BASE_URL` contains **`11434`**, the runner uses Ollama **`/api/generate`** instead (append `/think` / `/no_think`). Or, with **no** base URL and **no** API key, it defaults to `http://localhost:11434` + `OLLAMA_MODEL` / `qwen3:14b` pull: `ollama run hf.co/Qwen/Qwen3-14B-GGUF:Q8_0`.
+**Do not treat this as the default lane for agents or CI.** Use only for local experiments.
+
+If `QWEN_BASE_URL` contains **`11434`**, the runner uses Ollama **`/api/generate`** instead (append `/think` / `/no_think`). With **no** base URL and **no** API key, it may default to `http://localhost:11434` + `OLLAMA_MODEL` / `qwen3:14b`. That path is **not** the repo’s stated standard; prefer **Qwen API** secrets above.
 
 ## Usage
 

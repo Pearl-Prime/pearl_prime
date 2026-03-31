@@ -1,6 +1,8 @@
-# Continuous research plan (local Qwen3, no Gemini)
+# Continuous research plan (Qwen3 two-pass; offline plan below)
 
-**Purpose:** How the Pearl News continuous research “plane” runs: versioned prompts, feed ingest, local Qwen3 two-pass flow, youth signal sources, and artifact storage. **No Gemini; no external APIs for inference.**
+> **Repo default:** **Qwen API key lane** for automation and agents — see [AGENT_QWEN_API_KEY_LANE.md](../AGENT_QWEN_API_KEY_LANE.md) and [scripts/research/README.md](../../scripts/research/README.md). This page still describes an **offline / no-cloud-inference** variant for experiments.
+
+**Purpose:** How the Pearl News continuous research “plane” runs: versioned prompts, feed ingest, Qwen3 two-pass flow, youth signal sources, and artifact storage. **Offline variant below:** no Gemini; no external APIs for inference.
 
 **Generational research spec:** [continue_gen_research3.md](continue_gen_research3.md) is the single buildable spec for the generational intelligence engine (three core layers, two-pass YAML fix, Contradiction Audit, Persona Switching, youth sources).
 

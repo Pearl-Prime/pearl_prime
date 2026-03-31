@@ -1,6 +1,10 @@
 # Generational Deep Research — Master Spec (Pearl News)
 
-**Purpose:** Single buildable spec for the Pearl News generational intelligence engine. Merges File 1 (continue_gen_research.rtf), File 2 (continue_gen_research2.rtf), and editor feedback. **Runtime:** Local Qwen3-14B-GGUF only (llama.cpp/Ollama). No Gemini. No external APIs for inference.
+**Purpose:** Single buildable spec for the Pearl News generational intelligence engine. Merges File 1 (continue_gen_research.rtf), File 2 (continue_gen_research2.rtf), and editor feedback.
+
+**Operational default (repo / CI / agents):** Use the **Qwen API key lane** — OpenAI-compatible HTTP with `QWEN_BASE_URL`, `QWEN_API_KEY`, `QWEN_MODEL` (see [scripts/research/README.md](../../scripts/research/README.md), [AGENT_QWEN_API_KEY_LANE.md](../AGENT_QWEN_API_KEY_LANE.md)). **Do not** describe that path as “local Qwen” or “LM Studio” unless you mean optional backward compat only.
+
+**Historical / offline variant in this doc:** Local Qwen3-14B-GGUF (llama.cpp/Ollama), no Gemini, no cloud inference — retained for self-hosted experiments below.
 
 **Related:** [CONTINUOUS_RESEARCH_PLAN.md](CONTINUOUS_RESEARCH_PLAN.md), [PEARL_NEWS_WRITER_SPEC.md](../PEARL_NEWS_WRITER_SPEC.md), [MARKETING_DEEP_RESEARCH_PROMPTS.md](MARKETING_DEEP_RESEARCH_PROMPTS.md).
 

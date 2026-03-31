@@ -457,6 +457,7 @@ Single entry point for GitHub operations across **Ahjan108/phoenix_omega_v4.8** 
 | **Ruleset cleanup evidence** | [artifacts/governance/rulesets/20260323_ruleset_cleanup_summary.md](../artifacts/governance/rulesets/20260323_ruleset_cleanup_summary.md) — before/after ruleset snapshots and PR #40 governance normalization evidence. |
 | **Rollback runbooks** | [docs/ROLLBACK_RUNBOOKS_INDEX.md](./ROLLBACK_RUNBOOKS_INDEX.md) — keep-current rollback and DR reference list. |
 | **Pearl News workflows** | Pearl News workflows in this repo are [.github/workflows/pearl-news-assemble.yml](../.github/workflows/pearl-news-assemble.yml), [.github/workflows/pearl-news-fill-qwen.yml](../.github/workflows/pearl-news-fill-qwen.yml), and [.github/workflows/pearl-news-full-qa.yml](../.github/workflows/pearl-news-full-qa.yml). Qwen-Agent references are external operational notes only. |
+| **Qwen API key lane (agents)** | [docs/AGENT_QWEN_API_KEY_LANE.md](./AGENT_QWEN_API_KEY_LANE.md) — Branch `agent/qwen3-live-run-*` naming: **Qwen3 = API lane**, not local LM Studio/Ollama; PR/merge + Pages workflow checklist; wording table for dev + GitHub agents. |
 
 ---
 
@@ -575,7 +576,7 @@ Single index: every doc, spec, script, and config that uses or is fed by marketi
 | **Title engine (v4)** | [phoenix_title_engine_v4.py](../phoenix_title_engine_v4.py) — Config-driven invisible_script + compliance; loads `MarketingConfigLoader` from `config/marketing/`; falls back to hardcoded TOPIC_VOCABULARY if config absent; generates persona×topic scripts deterministically |
 | **EI v2 Marketing dashboard tab** | [scripts/ei_v2_marketing_dashboard_tab.py](../scripts/ei_v2_marketing_dashboard_tab.py) — Streamlit `render_marketing_tab()`: tail `artifacts/ei_v2/marketing_integration.log`, last-event age, file hashes, schema guards, optional events-by-source chart |
 | **Title engine (legacy)** | [phoenix_title_engine.py](../phoenix_title_engine.py) — `invisible_script` in title model; picks from topic invisible_scripts |
-| **Generational research runner** | [scripts/research/run_research.py](../scripts/research/run_research.py) — Two-pass Qwen3 (reasoning → YAML); psychology, pain_points, event_impact; Ollama API |
+| **Generational research runner** | [scripts/research/run_research.py](../scripts/research/run_research.py) — Two-pass Qwen3 (reasoning → YAML); psychology, pain_points, event_impact; **default: Qwen API key lane** (`QWEN_*`); optional Ollama/local compat. See [docs/AGENT_QWEN_API_KEY_LANE.md](./AGENT_QWEN_API_KEY_LANE.md), [scripts/research/README.md](../scripts/research/README.md) |
 | **Research feed fetcher** | [scripts/research/fetch_feeds.py](../scripts/research/fetch_feeds.py) — Fetches RSS from youth_feed_sources.yaml to artifacts/research/raw/ |
 
 ### Config (marketing layer)
@@ -605,7 +606,7 @@ Single index: every doc, spec, script, and config that uses or is fed by marketi
 2. **Outputs:** Structured YAML/JSON (e.g. per-brand GTM, emotional vocabulary, consumer language, invisible scripts, duration bands, cover language, pricing).
 3. **Ingestion:** Consumer language → [config/marketing/consumer_language_by_topic.yaml](../config/marketing/consumer_language_by_topic.yaml); Invisible scripts → [config/marketing/invisible_scripts_by_persona_topic.yaml](../config/marketing/invisible_scripts_by_persona_topic.yaml). Both are now populated and loaded by the title engine.
 4. **Authority:** [PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC](../specs/PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md) defines how invisible_script and belief_flip integrate into atoms and title philosophy. Config layer (consumer language, invisible scripts, loader, fallback) is specified in [TITLE_ENGINE_MARKETING_CONFIG_SPEC](../specs/TITLE_ENGINE_MARKETING_CONFIG_SPEC.md).
-5. **Generational research (Pearl News):** Local Qwen3 only. Use [research/continue_gen_research3.md](./research/continue_gen_research3.md) and [scripts/research/run_research.py](../scripts/research/run_research.py) for two-pass psychology / pain_points / event_impact runs. Optional: [research_feeds_ingest.yml](../.github/workflows/research_feeds_ingest.yml) fetches RSS to `artifacts/research/raw/`; paste or inject into prompts. See [research/CONTINUOUS_RESEARCH_PLAN.md](./research/CONTINUOUS_RESEARCH_PLAN.md).
+5. **Generational research (Pearl News):** **Default: Qwen API key lane** (OpenAI-compatible `QWEN_*` — see [AGENT_QWEN_API_KEY_LANE.md](./AGENT_QWEN_API_KEY_LANE.md), [scripts/research/README.md](../scripts/research/README.md)). Spec (includes offline GGUF narrative): [research/continue_gen_research3.md](./research/continue_gen_research3.md). Runner: [scripts/research/run_research.py](../scripts/research/run_research.py). Optional: [research_feeds_ingest.yml](../.github/workflows/research_feeds_ingest.yml) fetches RSS to `artifacts/research/raw/`. Plan doc: [research/CONTINUOUS_RESEARCH_PLAN.md](./research/CONTINUOUS_RESEARCH_PLAN.md).
 
 ---
 

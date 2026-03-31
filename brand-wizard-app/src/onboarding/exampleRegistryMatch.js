@@ -22,6 +22,7 @@ export function registryPersonaForWizard(wizardPersonaId) {
 
 export function filterExamples(registryRows, { wizardPersonaId, formatFocus, market = "us" }) {
   const regPersona = registryPersonaForWizard(wizardPersonaId);
+  if (wizardPersonaId && !regPersona) return [];
   const laneFilter = lanesForFormatFocus(formatFocus);
   return registryRows.filter((row) => {
     if (row.market !== market) return false;
