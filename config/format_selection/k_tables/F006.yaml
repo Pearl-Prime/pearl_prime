@@ -17,3 +17,14 @@ k_min_per_slot:
     k_min: 12
   COMPRESSION:
     k_min: 12
+  # Bestseller structure slots (docs/BESTSELLER_STRUCTURES.md).
+  # k_min=8 matches 8-chapter F006 default; all 12 structures require PIVOT and THREAD,
+  # 10 of 12 require TAKEAWAY, 5 of 12 require PERMISSION.
+  PIVOT:
+    k_min: 8
+  TAKEAWAY:
+    k_min: 8
+  THREAD:
+    k_min: 8
+  PERMISSION:
+    k_min: 8

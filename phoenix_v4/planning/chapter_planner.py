@@ -12,6 +12,7 @@ This prevents high-scoring but invalid chapter plans.
 from __future__ import annotations
 
 import hashlib
+import logging
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Optional
@@ -20,6 +21,8 @@ try:
     import yaml
 except ImportError:  # pragma: no cover
     yaml = None
+
+logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 POLICY_PATH = REPO_ROOT / "config" / "source_of_truth" / "chapter_planner_policies.yaml"
@@ -79,6 +82,88 @@ def assign_bestseller_structures(chapter_count: int, selector_key_prefix: str) -
                     candidate = alt
                     break
         result.append(candidate)
+    return result
+
+
+def _augment_slots_for_bestseller_structure(
+    base_row: list[str],
+    structure_key: str,
+) -> list[str]:
+    """
+    Augment a chapter's slot sequence to include slots required by its
+    assigned bestseller structure. Uses the beat order from
+    bestseller_structure_map.BESTSELLER_BEAT_STEPS.
+
+    Strategy:
+    - Start from the bestseller structure's full beat order
+    - For each required beat step, include the slot
+    - For optional beat steps, include if the slot exists in base_row
+    - Preserve COMPRESSION and EXERCISE from base_row at their correct positions
+    - Slots in base_row but not in the beat order (e.g. COMPRESSION) are
+      inserted at their natural position relative to their neighbors
+    """
+    from phoenix_v4.planning.bestseller_structure_map import (
+        BESTSELLER_BEAT_STEPS,
+        normalize_structure_key,
+    )
+
+    key = normalize_structure_key(structure_key)
+    steps = BESTSELLER_BEAT_STEPS.get(key)
+    if not steps:
+        logger.warning(
+            "Unknown bestseller structure %r; keeping base slot row unchanged.", structure_key,
+        )
+        return base_row
+
+    base_upper = [s.strip().upper() for s in base_row]
+
+    # Build the target slot sequence from the beat order
+    result: list[str] = []
+    for optional, spec in steps:
+        if isinstance(spec, frozenset):
+            # SCENE|STORY alternative: pick whichever is in base_row first, default to first
+            chosen = None
+            for candidate in sorted(spec):
+                if candidate in base_upper:
+                    chosen = candidate
+                    break
+            if chosen is None:
+                if optional:
+                    continue
+                chosen = sorted(spec)[0]
+            result.append(chosen)
+        else:
+            slot_name = spec.strip().upper()
+            if optional and slot_name not in base_upper:
+                # Optional slot not in base — skip
+                continue
+            result.append(slot_name)
+
+    # Preserve slots from base_row that aren't in the beat order vocabulary
+    # (e.g. COMPRESSION, EXERCISE if not in beat steps).
+    beat_vocab: set[str] = set()
+    for _, spec in steps:
+        if isinstance(spec, frozenset):
+            beat_vocab |= set(spec)
+        else:
+            beat_vocab.add(spec.strip().upper())
+
+    extra_slots = [s for s in base_upper if s not in beat_vocab and s not in result]
+    for extra in extra_slots:
+        # Insert COMPRESSION after REFLECTION (its natural home)
+        if extra == "COMPRESSION" and "REFLECTION" in result:
+            idx = result.index("REFLECTION") + 1
+            result.insert(idx, extra)
+        # Insert EXERCISE before INTEGRATION if not already present
+        elif extra == "EXERCISE" and "EXERCISE" not in result:
+            if "INTEGRATION" in result:
+                idx = result.index("INTEGRATION")
+                result.insert(idx, extra)
+            else:
+                result.append(extra)
+        else:
+            result.append(extra)
+
     return result
 
 
@@ -332,6 +417,13 @@ def plan_chapters(
             full_ex_used += 1
         if refl_w == "heavy":
             reflection_heavy_used += 1
+
+        # 5) Augment slot row with bestseller structure beat order
+        # This adds PIVOT, TAKEAWAY, THREAD, PERMISSION etc. as required by
+        # the chapter's assigned bestseller structure.
+        bs_key = chapter_bestseller_structures[ch] if ch < len(chapter_bestseller_structures) else None
+        if bs_key:
+            chosen_row = _augment_slots_for_bestseller_structure(chosen_row, bs_key)
 
         chapter_archetypes.append(archetype_id)
         chapter_exercise_modes.append(ex_mode)

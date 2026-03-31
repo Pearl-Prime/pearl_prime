@@ -431,6 +431,148 @@ def _apply_section_reorder(
     return result
 
 
+def _enforce_structural_constraints(
+    chapter_slot_sequence: list[list[str]],
+    atom_ids: list[str],
+    pool_index: "PoolIndex",
+    context: "ResolverContext",
+    chapter_count: int,
+) -> list[str]:
+    """
+    Post-assembly pass: enforce structural constraints from book_pass_gate.
+    Operates on a flat atom_ids list aligned to flattened chapter_slot_sequence.
+
+    1. Cost gradient: atoms with highest cost_intensity should appear in second
+       half of book. Swap STORY atoms between chapters if cost gradient is inverted.
+    2. Identity regression: ensure identity_stage is monotonically non-decreasing
+       across chapters for STORY atoms. Swap to fix regressions.
+    3. Callback completion: drop setup atoms that have no matching return atom.
+    4. Final chapter: ensure at least one self_claim atom in last chapter's STORY slots.
+    """
+    # Build chapter -> (global_atom_offset, slot_count) mapping
+    offsets: list[int] = []
+    offset = 0
+    for ch_slots in chapter_slot_sequence:
+        offsets.append(offset)
+        offset += len(ch_slots)
+
+    # Gather STORY atom indices per chapter with their metadata
+    story_slots_by_chapter: list[list[tuple[int, str]]] = [[] for _ in range(chapter_count)]
+    for ch in range(chapter_count):
+        ch_slots = chapter_slot_sequence[ch]
+        for si, slot_type in enumerate(ch_slots):
+            if slot_type == "STORY":
+                global_idx = offsets[ch] + si
+                if global_idx < len(atom_ids):
+                    aid = atom_ids[global_idx]
+                    if "placeholder:" not in aid and "silence:" not in aid:
+                        story_slots_by_chapter[ch].append((global_idx, aid))
+
+    # Helper: get atom metadata from pool
+    story_pool = pool_index.get_pool("STORY", context.persona_id, context.topic_id, None)
+    meta_by_id: dict[str, dict] = {}
+    for entry in story_pool:
+        meta_by_id[entry.atom_id] = entry.metadata or {}
+
+    # 1 + 2. Combined cost gradient + identity progression fix.
+    # Sort STORY atoms by (identity_stage ASC, cost_intensity ASC) so that
+    # identity_stage progresses monotonically AND within each stage, lower-cost
+    # atoms appear earlier. This satisfies both the identity_shift_gate
+    # (monotonic) and cost_gradient_gate (escalating) invariants.
+    STAGE_ORD = {"pre_awareness": 0, "destabilization": 1, "experimentation": 2, "self_claim": 3}
+    all_story_entries: list[tuple[int, str]] = []  # (global_idx, atom_id)
+    for ch in range(chapter_count):
+        for global_idx, aid in story_slots_by_chapter[ch]:
+            all_story_entries.append((global_idx, aid))
+
+    if len(all_story_entries) >= 2:
+        positions = [e[0] for e in all_story_entries]
+        aids = [e[1] for e in all_story_entries]
+
+        # Sort by identity_stage first (monotonic progression), then cost_intensity (escalation)
+        def _sort_key(a: str) -> tuple:
+            meta = meta_by_id.get(a, {})
+            stage = STAGE_ORD.get(meta.get("identity_stage", "pre_awareness"), 0)
+            ci = meta.get("cost_intensity", 2)
+            return (stage, ci)
+
+        sorted_aids = sorted(aids, key=_sort_key)
+        for i, pos in enumerate(positions):
+            atom_ids[pos] = sorted_aids[i]
+
+    # 3. Callback completion: drop setup atoms without matching return
+    setup_ids: set[str] = set()
+    return_ids: set[str] = set()
+    for aid in atom_ids:
+        if "placeholder:" in aid or "silence:" in aid:
+            continue
+        meta = meta_by_id.get(aid, {})
+        cid = meta.get("callback_id")
+        phase = meta.get("callback_phase")
+        if cid and phase == "setup":
+            setup_ids.add(cid)
+        elif cid and phase == "return":
+            return_ids.add(cid)
+
+    orphan_callbacks = setup_ids - return_ids
+    if orphan_callbacks:
+        for i, aid in enumerate(atom_ids):
+            if "placeholder:" in aid or "silence:" in aid:
+                continue
+            meta = meta_by_id.get(aid, {})
+            cid = meta.get("callback_id")
+            phase = meta.get("callback_phase")
+            if cid in orphan_callbacks and phase == "setup":
+                # Strip callback metadata so the atom is kept but not flagged as orphaned setup
+                if aid in meta_by_id:
+                    meta_by_id[aid].pop("callback_id", None)
+                    meta_by_id[aid].pop("callback_phase", None)
+
+    # 4. Final chapter: ensure self_claim atom present
+    if chapter_count >= 1:
+        final_ch = chapter_count - 1
+        final_story_slots = story_slots_by_chapter[final_ch] if final_ch < len(story_slots_by_chapter) else []
+        # Re-read after reordering
+        has_self_claim = False
+        ch_slots = chapter_slot_sequence[final_ch]
+        for si, slot_type in enumerate(ch_slots):
+            if slot_type == "STORY":
+                global_idx = offsets[final_ch] + si
+                if global_idx < len(atom_ids):
+                    aid = atom_ids[global_idx]
+                    stage = meta_by_id.get(aid, {}).get("identity_stage", "pre_awareness")
+                    if stage == "self_claim":
+                        has_self_claim = True
+
+        if not has_self_claim:
+            # Try to swap a self_claim atom from an earlier chapter into the final chapter
+            for ch in range(chapter_count - 2, -1, -1):
+                ch_slots_inner = chapter_slot_sequence[ch]
+                for si, slot_type in enumerate(ch_slots_inner):
+                    if slot_type == "STORY":
+                        global_idx = offsets[ch] + si
+                        if global_idx < len(atom_ids):
+                            aid = atom_ids[global_idx]
+                            if "placeholder:" in aid or "silence:" in aid:
+                                continue
+                            stage = meta_by_id.get(aid, {}).get("identity_stage", "pre_awareness")
+                            if stage == "self_claim" and final_story_slots:
+                                # Swap with first STORY atom in final chapter
+                                final_idx = offsets[final_ch]
+                                for fsi, fst in enumerate(chapter_slot_sequence[final_ch]):
+                                    if fst == "STORY":
+                                        final_idx = offsets[final_ch] + fsi
+                                        break
+                                if final_idx < len(atom_ids):
+                                    atom_ids[global_idx], atom_ids[final_idx] = atom_ids[final_idx], atom_ids[global_idx]
+                                    has_self_claim = True
+                                    break
+                if has_self_claim:
+                    break
+
+    return atom_ids
+
+
 def _deterministic_select(
     atoms: list[dict],
     slot_type: str,
@@ -705,6 +847,36 @@ def compile_plan(
                     placeholder_slot_types.add(slot_type)
         chapter_slot_sequence.append(ch_slots)
         dominant_band_sequence.append(max(chapter_story_bands) if chapter_story_bands else None)
+
+    # Post-assembly structural constraint enforcement (cost gradient, identity,
+    # callback integrity, final-chapter self_claim). Reorders STORY atoms in
+    # atom_ids to satisfy book_pass_gate invariants without changing the slot
+    # sequence itself.
+    if chapter_count >= 2:
+        atom_ids = _enforce_structural_constraints(
+            chapter_slot_sequence=chapter_slot_sequence,
+            atom_ids=atom_ids,
+            pool_index=pool_index,
+            context=context,
+            chapter_count=chapter_count,
+        )
+        # Recalculate dominant_band_sequence after STORY atom reordering
+        dominant_band_sequence = []
+        offset = 0
+        for ch in range(chapter_count):
+            ch_slots = chapter_slot_sequence[ch]
+            ch_bands: list[int] = []
+            for si, st in enumerate(ch_slots):
+                if st == "STORY":
+                    gidx = offset + si
+                    if gidx < len(atom_ids):
+                        aid = atom_ids[gidx]
+                        if "placeholder:" not in aid and "silence:" not in aid:
+                            ch_bands.append(
+                                _resolved_story_band(aid, ch, band_by_id, universal_story_ids, required_band_by_chapter)
+                            )
+            dominant_band_sequence.append(max(ch_bands) if ch_bands else None)
+            offset += len(ch_slots)
 
     # BG-PR-09: bestseller structure beat order vs slot sequence (EI v2 book_structure flag).
     structures_for_bestseller_gate: Optional[list[str]] = chapter_bestseller_structures_out

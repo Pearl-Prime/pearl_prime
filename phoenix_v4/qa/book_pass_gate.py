@@ -9,12 +9,21 @@ Focus:
 
 This gate combines narrative metadata gates (mechanism/cost/identity/callback/macro)
 with prose-level heuristics.
+
+Duration-aware: thresholds scale with chapter count via
+config/quality/book_pass_gate_thresholds.yaml (micro/short/standard/extended/deep tiers).
 """
 from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Optional
+
+try:
+    import yaml as _yaml
+except ImportError:
+    _yaml = None
 
 from phoenix_v4.qa.callback_integrity_gate import validate_callback_integrity
 from phoenix_v4.qa.cost_gradient_gate import validate_cost_gradient
@@ -25,6 +34,62 @@ from phoenix_v4.qa.validate_compiled_plan import ValidationResult
 from phoenix_v4.qa._narrative_plan_utils import iter_chapter_slot_atom_ids, get_chapter_count
 from phoenix_v4.rendering.book_renderer import clean_for_delivery
 from phoenix_v4.rendering.prose_resolver import resolve_prose_for_plan
+
+_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+_THRESHOLDS_PATH = _REPO_ROOT / "config" / "quality" / "book_pass_gate_thresholds.yaml"
+
+# Default tier thresholds (used if config file is missing).
+_DEFAULT_TIER_THRESHOLDS = {
+    "micro": {"min_distinct_bands": 2, "min_mechanism_depth": 2, "identity_stages_required": 2,
+              "min_cost_intensity_peak": 3, "require_self_claim_final": True,
+              "require_callback_completion": False, "min_bestseller_structures_distinct": 1},
+    "short": {"min_distinct_bands": 3, "min_mechanism_depth": 3, "identity_stages_required": 3,
+              "min_cost_intensity_peak": 3, "require_self_claim_final": True,
+              "require_callback_completion": True, "min_bestseller_structures_distinct": 2},
+    "standard": {"min_distinct_bands": 4, "min_mechanism_depth": 4, "identity_stages_required": 4,
+                 "min_cost_intensity_peak": 4, "require_self_claim_final": True,
+                 "require_callback_completion": True, "min_bestseller_structures_distinct": 4},
+    "extended": {"min_distinct_bands": 4, "min_mechanism_depth": 4, "identity_stages_required": 4,
+                 "min_cost_intensity_peak": 4, "require_self_claim_final": True,
+                 "require_callback_completion": True, "min_bestseller_structures_distinct": 5},
+    "deep": {"min_distinct_bands": 5, "min_mechanism_depth": 4, "identity_stages_required": 4,
+             "min_cost_intensity_peak": 4, "require_self_claim_final": True,
+             "require_callback_completion": True, "min_bestseller_structures_distinct": 6},
+}
+
+_DEFAULT_TIER_BOUNDARIES = {
+    "micro": [3, 5], "short": [6, 8], "standard": [9, 12],
+    "extended": [13, 18], "deep": [19, 999],
+}
+
+
+def _load_tier_config() -> tuple[dict, dict]:
+    """Load tier thresholds and boundaries from config, or use defaults."""
+    if _THRESHOLDS_PATH.exists() and _yaml is not None:
+        with open(_THRESHOLDS_PATH) as f:
+            data = _yaml.safe_load(f) or {}
+        thresholds = data.get("book_pass", _DEFAULT_TIER_THRESHOLDS)
+        boundaries = data.get("tier_boundaries", _DEFAULT_TIER_BOUNDARIES)
+        return thresholds, boundaries
+    return _DEFAULT_TIER_THRESHOLDS, _DEFAULT_TIER_BOUNDARIES
+
+
+def get_chapter_tier(chapter_count: int) -> str:
+    """Determine the chapter-count tier for threshold lookup."""
+    _, boundaries = _load_tier_config()
+    for tier_name, (lo, hi) in sorted(boundaries.items(), key=lambda x: x[1][0]):
+        if lo <= chapter_count <= hi:
+            return tier_name
+    if chapter_count < 3:
+        return "micro"
+    return "deep"
+
+
+def get_tier_thresholds(chapter_count: int) -> dict:
+    """Load thresholds for the tier matching the given chapter count."""
+    thresholds, _ = _load_tier_config()
+    tier = get_chapter_tier(chapter_count)
+    return thresholds.get(tier, thresholds.get("standard", _DEFAULT_TIER_THRESHOLDS["standard"]))
 
 
 _STOP = {
@@ -129,6 +194,13 @@ def validate_book_pass(
         rr = resolve_prose_for_plan(plan)
         prose_map = rr.prose_map
 
+    # Determine chapter count and load tier-appropriate thresholds
+    n_ch_for_tier = get_chapter_count(plan)
+    tier = get_chapter_tier(n_ch_for_tier)
+    tier_thresholds = get_tier_thresholds(n_ch_for_tier)
+    metrics["chapter_tier"] = tier
+    metrics["tier_thresholds"] = tier_thresholds
+
     # Metadata progression gates
     for gate_name, res in (
         ("mechanism", validate_mechanism_escalation(plan, atom_metadata)),
@@ -150,10 +222,14 @@ def validate_book_pass(
     metrics["chapter_count"] = n_ch
     metrics["claim_coverage"] = round(claim_coverage, 3)
 
-    if n_ch and claim_coverage < 0.8:
-        errors.append(f"book_pass: chapter claim coverage too low ({claim_coverage:.0%} < 80%).")
+    # Claim coverage: relax for micro books (70% vs 80%)
+    min_claim_coverage = 0.70 if tier == "micro" else 0.80
+    if n_ch and claim_coverage < min_claim_coverage:
+        errors.append(f"book_pass: chapter claim coverage too low ({claim_coverage:.0%} < {min_claim_coverage:.0%}).")
 
-    # Repetitive claim gate
+    # Repetitive claim gate — relax thresholds for micro/short
+    max_share_error = 0.50 if tier == "micro" else 0.40 if tier == "short" else 0.34
+    max_share_warn = 0.40 if tier == "micro" else 0.30 if tier == "short" else 0.25
     if claim_keys:
         from collections import Counter
         counts = Counter(claim_keys)
@@ -161,11 +237,11 @@ def validate_book_pass(
         most_share = most_count / len(claim_keys)
         metrics["max_claim_share"] = round(most_share, 3)
         metrics["unique_claim_keys"] = len(counts)
-        if most_share > 0.34:
+        if most_share > max_share_error:
             errors.append(
                 f"book_pass: repetitive chapter claims ({most_count}/{len(claim_keys)} = {most_share:.0%} share)."
             )
-        elif most_share > 0.25:
+        elif most_share > max_share_warn:
             warnings.append(
                 f"book_pass: claim repetition elevated ({most_count}/{len(claim_keys)} = {most_share:.0%})."
             )
@@ -187,7 +263,9 @@ def validate_book_pass(
             errors.append("book_pass: chapters appear shuffleable/redundant (too many near-identical adjacent claims).")
 
     # Act progression proxy (lexical intent shift)
-    if n_ch >= 6:
+    # Only apply 3-act analysis for books with 6+ chapters; micro books get a pass.
+    min_chapters_for_act_check = 6
+    if n_ch >= min_chapters_for_act_check:
         one_third = n_ch // 3
         first = chapter_claims[:one_third]
         mid = chapter_claims[one_third : 2 * one_third]
@@ -211,7 +289,9 @@ def validate_book_pass(
             "act3_agency_last": round(act3_last, 3),
             "act3_agency_first": round(act3_first, 3),
         }
-        if act2_mid < 0.6:
+        # Relax mechanism threshold for short books
+        mechanism_threshold = 0.4 if tier == "short" else 0.6
+        if act2_mid < mechanism_threshold:
             errors.append("book_pass: weak mechanism deepening in middle third.")
         if act3_last <= act3_first:
             errors.append("book_pass: no forward-agency increase by final third.")

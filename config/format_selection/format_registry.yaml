@@ -1,7 +1,8 @@
 # Format registry for Stage 2 (Format Selector).
 # Structural format IDs (F001–F015) and slot semantics are defined in Canonical Spec Part 2.
 # Stage 3 MUST receive slot_definitions from FormatPlan; no internal default. This file is the authority.
-# Allowed slot types: HOOK, SCENE, STORY, REFLECTION, EXERCISE, INTEGRATION, COMPRESSION (slot_08_compression; DEV SPEC 2).
+# Allowed slot types: HOOK, SCENE, STORY, REFLECTION, EXERCISE, INTEGRATION, COMPRESSION (slot_08_compression; DEV SPEC 2),
+# PIVOT, TAKEAWAY, THREAD, PERMISSION (bestseller structures; docs/BESTSELLER_STRUCTURES.md).
 
 # Default beat (6-type) per chapter. Formats may override via slot_template (e.g. include COMPRESSION).
 default_slot_definitions:
@@ -88,39 +89,49 @@ structural_formats:
     typical_runtime: "micro_book_15"
 
 # Runtime formats (V4.5 duration classes). Orthogonal to structural.
+# Each runtime declares compatible_structural_formats — the validator accepts
+# any pairing where chapter_count_default falls in the structural format's
+# chapter_range OR the structural format is in compatible_structural_formats.
 runtime_formats:
+  micro_book_15:
+    duration_minutes: 15
+    chapter_count_default: 5
+    word_range: [2500, 3000]
+    compatible_tiers: [A, B, C]
+    compatible_structural_formats: [F015, F003]
+  micro_book_20:
+    duration_minutes: 20
+    chapter_count_default: 5
+    word_range: [3000, 4000]
+    compatible_tiers: [A, B, C]
+    compatible_structural_formats: [F015, F003]
+  short_book_30:
+    duration_minutes: 30
+    chapter_count_default: 7
+    word_range: [4500, 5500]
+    compatible_tiers: [A, B, C]
+    compatible_structural_formats: [F003, F006, F007, F011]
   standard_book:
     duration_minutes: 55
     chapter_count_default: 12
     word_range: [9000, 11000]
     compatible_tiers: [A, B]
-  deep_book_4h:
-    duration_minutes: 240
-    chapter_count_default: 20
-    word_range: [36000, 44000]
-    compatible_tiers: [A]
-  micro_book_15:
-    duration_minutes: 15
-    chapter_count_default: 3
-    word_range: [2500, 3000]
-    compatible_tiers: [C]
-  short_book_30:
-    duration_minutes: 30
-    chapter_count_default: 6
-    word_range: [4500, 5500]
-    compatible_tiers: [A, B]
+    compatible_structural_formats: [F006, F007, F010, F011, F014]
   extended_book_2h:
     duration_minutes: 120
     chapter_count_default: 15
     word_range: [18000, 22000]
     compatible_tiers: [A, B]
-  micro_book_20:
-    duration_minutes: 20
-    chapter_count_default: 4
-    word_range: [3000, 4000]
-    compatible_tiers: [B, C]
+    compatible_structural_formats: [F004, F009, F010, F014]
+  deep_book_4h:
+    duration_minutes: 240
+    chapter_count_default: 20
+    word_range: [36000, 44000]
+    compatible_tiers: [A]
+    compatible_structural_formats: [F004, F009, F013]
   deep_book_6h:
     duration_minutes: 360
     chapter_count_default: 24
     word_range: [52000, 58000]
     compatible_tiers: [A]
+    compatible_structural_formats: [F013]

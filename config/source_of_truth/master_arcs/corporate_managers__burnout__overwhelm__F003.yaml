@@ -1,0 +1,58 @@
+# Arc: corporate_managers × burnout × overwhelm × F003 (7 chapters)
+# Short book: one sitting, complete 3-act arc.
+
+arc_id: corp_mgr_burnout_overwhelm_short_7
+persona: corporate_managers
+topic: burnout
+engine: overwhelm
+format: F003
+
+chapter_count: 7
+
+emotional_curve: [3, 3, 4, 4, 4, 3, 3]
+
+emotional_temperature_curve:
+  1: cool
+  2: cool
+  3: warm
+  4: warm
+  5: hot
+  6: warm
+  7: cool
+
+chapter_intent:
+  1: establish_mask
+  2: expose_cost
+  3: destabilize_strategy
+  4: reveal_hidden_belief
+  5: confrontation
+  6: somatic_repair
+  7: embodied_identity
+
+emotional_role_sequence:
+  - recognition
+  - destabilization
+  - destabilization
+  - reframe
+  - reframe
+  - stabilization
+  - integration
+
+reflection_strategy_sequence:
+  - didactic
+  - socratic
+  - narrative_embedded
+  - didactic
+  - socratic
+  - narrative_embedded
+  - didactic
+
+cost_chapter_index: 5
+
+resolution_type: internal_shift_only
+
+motif:
+  primary_symbol: inbox_zero
+  recurring_image: office_at_midnight
+  recurring_question: "Who told you rest was earned?"
+  tonal_signature: exhausted_clarity

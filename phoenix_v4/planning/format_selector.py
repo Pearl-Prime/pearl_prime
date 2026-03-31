@@ -116,11 +116,17 @@ class FormatSelector:
         preferred = (pc or {}).get("preferred_runtime") or struct_info.get("typical_runtime", "standard_book")
         if preferred in self._runtime:
             rt_info = self._runtime[preferred]
-            if tier in (rt_info.get("compatible_tiers") or []):
+            compat_structs = rt_info.get("compatible_structural_formats") or []
+            if tier in (rt_info.get("compatible_tiers") or []) or structural_id in compat_structs:
                 return preferred
         typical = struct_info.get("typical_runtime", "standard_book")
         if typical in self._runtime:
             return typical
+        # Fallback: prefer runtimes that list this structural format as compatible
+        for rid, rinfo in self._runtime.items():
+            compat_structs = rinfo.get("compatible_structural_formats") or []
+            if structural_id in compat_structs:
+                return rid
         for rid, rinfo in self._runtime.items():
             if tier in (rinfo.get("compatible_tiers") or []):
                 return rid
@@ -254,11 +260,21 @@ class FormatSelector:
         rt = self._runtime.get(plan.format_runtime_id) or {}
         if plan.tier not in (rt.get("compatible_tiers") or []):
             raise ValueError(f"Runtime {plan.format_runtime_id} not compatible with tier {plan.tier}")
+        # Chapter-count validation: accept if chapter_count falls within the
+        # structural format's chapter_range OR the structural format is listed
+        # in the runtime's compatible_structural_formats.
         struct_info = self._structural.get(plan.format_structural_id) or {}
         ch_range = struct_info.get("chapter_range") or [1, 99]
         ch_min, ch_max = ch_range[0], ch_range[1]
-        if not (ch_min <= plan.chapter_count <= ch_max):
-            raise ValueError(f"chapter_count {plan.chapter_count} outside range [{ch_min},{ch_max}] for {plan.format_structural_id}")
+        in_range = ch_min <= plan.chapter_count <= ch_max
+        compatible_structs = rt.get("compatible_structural_formats") or []
+        in_compat = plan.format_structural_id in compatible_structs
+        if not in_range and not in_compat:
+            raise ValueError(
+                f"chapter_count {plan.chapter_count} outside range [{ch_min},{ch_max}] for "
+                f"{plan.format_structural_id} and {plan.format_structural_id} not in "
+                f"compatible_structural_formats for {plan.format_runtime_id}"
+            )
         if plan.blueprint_variant not in ("linear", "wave", "scaffold", "rupture"):
             raise ValueError(f"Invalid blueprint_variant: {plan.blueprint_variant}")
 
