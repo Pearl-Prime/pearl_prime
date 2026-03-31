@@ -18,6 +18,8 @@ For `main`, require exactly these status-check contexts:
 | **EI V2 gates** | `ei-v2-gates.yml` | EI V2 tests, eval, calibration, promotion checks |
 | **Change impact** | `change-impact.yml` | Change observation + impact analysis evidence |
 
+**Core tests — onboarding proof regression guard:** The **Core tests** job runs `scripts/ci/validate_onboarding_registry.py` on every PR/push to `main`/`master`. That step enforces registry schema, `ready` → non-empty `asset_path`, source/fidelity consistency, and blocks critical comparison/product-proof rows from returning to `planned`/`missing` without an explicit intentional marker. No extra required status name is needed in branch protection.
+
 Rules:
 
 - Required context names must match workflow-emitted job names exactly.

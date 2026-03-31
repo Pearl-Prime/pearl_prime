@@ -17,7 +17,7 @@ Suggested Pages project name: `brand-admin-onboarding` (set in Cloudflare dashbo
 
 **Default Pages URL:** `https://brand-admin-onboarding.pages.dev` (exact subdomain is assigned when you create the project; note the final hostname in Cloudflare → Pages → project → Domains).
 
-**After first deploy (smoke test):** Open the wizard URL; in devtools Network confirm `GET …/onboarding/example_registry.json` is 200. In the gallery (served from repo static host or mirrored), confirm a stale-ready tile shows the fallback when an image 404s; in the wizard at Primary Reader, confirm the proof strip lists IDs when a mapped persona is selected.
+**Current post-merge baseline:** workflow is on `main`, deploys successfully, and the live smoke checks pass for `/`, `/onboarding/example_registry.json`, and generated proof assets under `/onboarding/proof/generated/`.
 
 ---
 

@@ -1,5 +1,9 @@
 # Machine-readable required status checks policy for main.
 # This is the contract for workflows, docs, and live GitHub rulesets.
+#
+# Onboarding registry: scripts/ci/validate_onboarding_registry.py runs inside the
+# required "Core tests" workflow on all PRs/pushes to main. Docs CI also runs
+# the same validator when onboarding JSON/public proof paths change.
 version: 2
 
 # Canonical required checks for PR merge to main.

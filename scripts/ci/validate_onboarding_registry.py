@@ -30,6 +30,16 @@ REQUIRED_KEYS = (
 STATUSES = frozenset({"ready", "planned", "missing"})
 PROOF_INTENTS = frozenset({"ships_product", "teaches_persona", "teaches_topic", "teaches_comparison"})
 FIDELITY = frozenset({"production", "pipeline_demo", "supporting_visual"})
+READY_SOURCE_ALLOWED = frozenset(
+    {
+        "onboarding_seed_asset",
+        "onboarding_pipeline_demo",
+        "pipeline",
+        "pipeline_demo",
+        "production_export",
+        "curated",
+    }
+)
 
 
 def main() -> int:
@@ -74,8 +84,29 @@ def main() -> int:
                 asset_path = row.get("asset_path")
                 if st == "ready" and (not isinstance(asset_path, str) or not asset_path.strip()):
                     errors.append(f"{p}: ready rows must include non-empty asset_path")
+                if st == "ready":
+                    source = row.get("source")
+                    if source not in READY_SOURCE_ALLOWED:
+                        errors.append(
+                            f"{p}: ready rows must use allowed source {sorted(READY_SOURCE_ALLOWED)}, got {source!r}"
+                        )
+                    if source == "onboarding_pipeline_demo" and fid != "pipeline_demo":
+                        errors.append(f"{p}: source onboarding_pipeline_demo requires production_fidelity='pipeline_demo'")
+                    if source == "onboarding_seed_asset" and fid == "production":
+                        errors.append(f"{p}: source onboarding_seed_asset cannot use production_fidelity='production'")
+                    if source == "registry_plan":
+                        errors.append(f"{p}: ready rows cannot keep source='registry_plan'")
                 if st != "ready" and row.get("source") == "onboarding_seed_asset":
                     errors.append(f"{p}: non-ready rows cannot declare source onboarding_seed_asset")
+                is_critical = bool(row.get("comparison_set_id")) or row.get("proof_intent") == "ships_product"
+                if is_critical and st != "ready":
+                    if row.get("intentional_non_ready") is True:
+                        if not isinstance(row.get("placeholder_reason"), str) or not row.get("placeholder_reason", "").strip():
+                            errors.append(f"{p}: intentional_non_ready rows must include non-empty placeholder_reason")
+                    else:
+                        errors.append(
+                            f"{p}: critical onboarding proof rows must be ready; use intentional_non_ready=true if explicitly intended"
+                        )
                 pr = row.get("placeholder_reason")
                 if pr is not None and not isinstance(pr, str):
                     errors.append(f"{p}: placeholder_reason must be a string when present")

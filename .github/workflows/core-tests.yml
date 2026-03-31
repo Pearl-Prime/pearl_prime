@@ -38,6 +38,8 @@ jobs:
           PYTHONPATH=. python -m phoenix_v4.qa.validate_marketing_config
         continue-on-error: false
 
+      # Regression guard: schema, ready asset_path, source/fidelity honesty,
+      # critical rows must stay ready unless intentional_non_ready + placeholder_reason.
       - name: Validate onboarding registry JSON
         run: |
           python scripts/ci/validate_onboarding_registry.py

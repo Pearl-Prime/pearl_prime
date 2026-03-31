@@ -1,5 +1,9 @@
 # Agent instruction — Qwen API key lane (not local runtime)
 
+## Current status note (post PR #130)
+
+The onboarding Pages workflow is already on `main` and live deploy is proven. Any sections below that describe pre-merge `404` workflow discovery behavior are historical lane context, not current state.
+
 **Audience:** Pearl_Dev, Pearl_GitHub, and any automation describing work on branch `agent/qwen3-live-run-20260331`.
 
 ---

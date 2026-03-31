@@ -7,8 +7,11 @@ on:
       - 'docs/**'
       - 'specs/**'
       - 'ONBOARDING.md'
+      - 'config/onboarding/**'
+      - 'brand-wizard-app/public/onboarding/**'
       - 'scripts/ci/check_docs_governance.py'
       - 'scripts/ci/check_church_yaml_no_sensitive_tokens.py'
+      - 'scripts/ci/validate_onboarding_registry.py'
       - '.github/workflows/docs-ci.yml'
   pull_request:
     branches: [main, master]
@@ -16,8 +19,11 @@ on:
       - 'docs/**'
       - 'specs/**'
       - 'ONBOARDING.md'
+      - 'config/onboarding/**'
+      - 'brand-wizard-app/public/onboarding/**'
       - 'scripts/ci/check_docs_governance.py'
       - 'scripts/ci/check_church_yaml_no_sensitive_tokens.py'
+      - 'scripts/ci/validate_onboarding_registry.py'
       - '.github/workflows/docs-ci.yml'
 
 jobs:
@@ -33,3 +39,5 @@ jobs:
           PYTHONPATH=. python scripts/ci/check_docs_governance.py --check-inventory
       - name: Church YAML no sensitive tokens (ssn, account_number, etc.)
         run: python scripts/ci/check_church_yaml_no_sensitive_tokens.py
+      - name: Validate onboarding registry JSON
+        run: python scripts/ci/validate_onboarding_registry.py

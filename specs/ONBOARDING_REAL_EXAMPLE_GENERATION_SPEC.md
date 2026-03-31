@@ -71,7 +71,7 @@ Additional axes (e.g. **topic** variation at fixed persona) may use new `cmp_*` 
 
 ### 3.3 Locked first comparison sets (v1 contract)
 
-These **`comparison_set_id` values are required in the registry plan** (rows may start as `status: "planned"`). They are the **authoritative v1 set** for teaching “one variable at a time.” UI and gallery modules should key off these IDs.
+These **`comparison_set_id` values are required in the registry plan**. During rollout, rows could start as `status: "planned"`; on current `main` the v1 sets are **`ready`** with explicit demo or seed fidelity until upgraded. They remain the **authoritative v1 set** for teaching “one variable at a time.” UI and gallery modules should key off these IDs. **Fidelity upgrades (demo → production export):** [docs/ONBOARDING_PROOF_FIDELITY_UPGRADE_LANE.md](../docs/ONBOARDING_PROOF_FIDELITY_UPGRADE_LANE.md).
 
 | Priority | `comparison_set_id` | Varying axis | Fixed context (illustrative) | Member rows must share |
 |----------|---------------------|--------------|------------------------------|-------------------------|
@@ -81,9 +81,9 @@ These **`comparison_set_id` values are required in the registry plan** (rows may
 | 4 | `cmp_burnout_posture_v1` | Brand posture | Persona + topic fixed | Same `persona`, `topic`, `format`; different `style_variant` or posture knob (e.g. premium_spiritual vs practical_mainstream) |
 | 5 | `cmp_manga_style_mode_v1` | Manga sub-mode | One topic + persona | Same `lane: manga`; different `style_variant` (see §4: cinematic, youth_inspire, spiritual, healing, civic) |
 
-**Rollout:** Tier implementation as **1 → 2 → 3** first if bandwidth is limited; still **register** all five sets with planned rows so the schema and UI do not churn. **Marketing “example-complete”** (internal bar): at least **three** of the five sets have **all** member tiles `status: "ready"` **or** an explicit written exception in QC docs.
+**Rollout:** Tier implementation as **1 → 2 → 3** first if bandwidth is limited. On `main` today, all five sets are registered and **fully `ready`** for onboarding proof coverage (via pipeline-demo assets unless rows are upgraded per fidelity lane). **Marketing “example-complete”** (internal bar): all five sets have **all** member tiles `status: "ready"` with honest `production_fidelity` / `source`; optional QC notes for commerce-critical tiles that still use demo fidelity.
 
-Until rows are ready, `status: "planned"` / `"missing"` and proof-pending UI apply per scaffold plan.
+If a future change reintroduces gaps, `status: "planned"` / `"missing"` and proof-pending UI apply per scaffold plan, and CI must allow only intentional non-ready rows on critical paths (see `scripts/ci/validate_onboarding_registry.py`).
 
 ---
 
