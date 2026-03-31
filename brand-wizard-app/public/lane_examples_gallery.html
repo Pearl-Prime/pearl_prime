@@ -79,9 +79,21 @@ kbd{font-size:.7em;padding:1px 5px;border:1px solid var(--border);border-radius:
 
 <script>
 (function(){
-var REGISTRY_URL = 'config/onboarding/example_registry.json';
 var LANES_ORDER = ['self_help','audiobook','manga','pearl_news','breathwork_tools','tools','other'];
-var REPO_STATIC_MODE = REGISTRY_URL.indexOf('config/') === 0;
+var REPO_STATIC_MODE = false;
+function loadRegistryJson(){
+  return fetch('onboarding/example_registry.json').then(function(r){
+    if(!r.ok)throw new Error('pages-miss');
+    REPO_STATIC_MODE=false;
+    return r.json();
+  }).catch(function(){
+    return fetch('config/onboarding/example_registry.json').then(function(r){
+      if(!r.ok)throw new Error('repo-miss');
+      REPO_STATIC_MODE=true;
+      return r.json();
+    });
+  });
+}
 
 function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
 function resolveAssetUrl(path){
@@ -150,7 +162,7 @@ function sortLane(a,b){
   return (a.id||'').localeCompare(b.id||'');
 }
 
-fetch(REGISTRY_URL).then(function(r){if(!r.ok)throw new Error('bad status');return r.json()}).then(function(rows){
+loadRegistryJson().then(function(rows){
   document.getElementById('fetch-err').classList.remove('on');
   document.getElementById('main').style.display='block';
 

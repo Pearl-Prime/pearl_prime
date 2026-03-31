@@ -56,11 +56,21 @@ tr:last-child td{border-bottom:none}
 </div>
 <script>
 (function(){
-var URL = 'config/onboarding/example_registry.json';
 function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
 function clsReady(ready,total){if(ready===0)return'n nmiss';if(ready>=total)return'n nok';return'n nwarn'}
+function loadRegistryJson(){
+  return fetch('onboarding/example_registry.json').then(function(r){
+    if(!r.ok)throw new Error();
+    return r.json();
+  }).catch(function(){
+    return fetch('config/onboarding/example_registry.json').then(function(r){
+      if(!r.ok)throw new Error();
+      return r.json();
+    });
+  });
+}
 
-fetch(URL).then(function(r){if(!r.ok)throw new Error();return r.json()}).then(function(rows){
+loadRegistryJson().then(function(rows){
   document.getElementById('err').classList.remove('on');
   document.getElementById('main').style.display='block';
 
