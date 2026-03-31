@@ -9,13 +9,13 @@ function StatusDot({ status }) {
   return <span className={`inline-block w-1.5 h-1.5 rounded-full ${color}`} title={status} />;
 }
 
-export function OutputProofStrip({ wizardPersonaId, formatFocus, market = "us" }) {
+export function OutputProofStrip({ wizardPersonaId, formatFocus, market = "us", onboardingLane = null }) {
   const { rows, error, loading } = useOnboardingRegistry();
 
   const matched = useMemo(() => {
     if (!rows || !wizardPersonaId) return [];
-    return filterExamples(rows, { wizardPersonaId, formatFocus, market });
-  }, [rows, wizardPersonaId, formatFocus, market]);
+    return filterExamples(rows, { wizardPersonaId, formatFocus, market, onboardingLane });
+  }, [rows, wizardPersonaId, formatFocus, market, onboardingLane]);
 
   const comparisonSetIds = useMemo(() => {
     const s = new Set();
@@ -39,6 +39,12 @@ export function OutputProofStrip({ wizardPersonaId, formatFocus, market = "us" }
         Registry examples aligned to your <strong className="font-semibold text-violet-950">primary reader</strong>
         {formatFocus ? (
           <> and <strong className="font-semibold text-violet-950">{formatFocus === "manga" ? "manga-first" : "book-first"}</strong> packaging bias</>
+        ) : null}
+        {onboardingLane ? (
+          <> in the <strong className="font-semibold text-violet-950">{onboardingLane.replace(/_/g, " ")}</strong> lane</>
+        ) : null}
+        {market ? (
+          <> for market <strong className="font-semibold text-violet-950">{market}</strong></>
         ) : null}
         . Status colors: ready / planned / missing — the gallery uses the same JSON.
       </p>

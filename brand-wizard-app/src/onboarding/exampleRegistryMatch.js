@@ -16,18 +16,27 @@ export function lanesForFormatFocus(formatFocus) {
   return null;
 }
 
+export function lanesForOnboardingLane(onboardingLane) {
+  if (!onboardingLane || onboardingLane === "hybrid") return null;
+  if (onboardingLane === "audiobook") return new Set(["audiobook", "self_help"]);
+  if (onboardingLane === "tools") return new Set(["breathwork_tools", "tools"]);
+  return new Set([onboardingLane]);
+}
+
 export function registryPersonaForWizard(wizardPersonaId) {
   return WIZARD_PERSONA_TO_REGISTRY_PERSONA[wizardPersonaId] ?? null;
 }
 
-export function filterExamples(registryRows, { wizardPersonaId, formatFocus, market = "us" }) {
+export function filterExamples(registryRows, { wizardPersonaId, formatFocus, market = "us", onboardingLane = null }) {
   const regPersona = registryPersonaForWizard(wizardPersonaId);
   if (wizardPersonaId && !regPersona) return [];
   const laneFilter = lanesForFormatFocus(formatFocus);
+  const onboardingLaneFilter = lanesForOnboardingLane(onboardingLane);
   return registryRows.filter((row) => {
     if (row.market !== market) return false;
     if (regPersona && row.persona !== regPersona) return false;
     if (laneFilter && !laneFilter.has(row.lane)) return false;
+    if (onboardingLaneFilter && !onboardingLaneFilter.has(row.lane)) return false;
     return true;
   });
 }

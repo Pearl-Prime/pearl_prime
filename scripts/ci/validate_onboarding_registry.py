@@ -71,6 +71,11 @@ def main() -> int:
                     errors.append(
                         f"{p}: production_fidelity must be one of {sorted(FIDELITY)}, got {fid!r}"
                     )
+                asset_path = row.get("asset_path")
+                if st == "ready" and (not isinstance(asset_path, str) or not asset_path.strip()):
+                    errors.append(f"{p}: ready rows must include non-empty asset_path")
+                if st != "ready" and row.get("source") == "onboarding_seed_asset":
+                    errors.append(f"{p}: non-ready rows cannot declare source onboarding_seed_asset")
                 pr = row.get("placeholder_reason")
                 if pr is not None and not isinstance(pr, str):
                     errors.append(f"{p}: placeholder_reason must be a string when present")

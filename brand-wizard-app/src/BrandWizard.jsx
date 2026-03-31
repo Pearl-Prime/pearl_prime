@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
+import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
+import { MarketChoiceCard } from "./onboarding/MarketChoiceCard.jsx";
 
 // ─────────────────────────────────────────────────────────────
 // PEARL PRIME — BRAND CREATION WIZARD v2.1
@@ -1057,6 +1059,24 @@ function Step1Archetype({ state, update }) {
 }
 
 function Step2PrimaryReader({ state, update }) {
+  const laneChoices = [
+    { key: "self_help", label: "Self-help books", hint: "Long-form titles and programs for deep transformation." },
+    { key: "manga", label: "Manga / visual stories", hint: "Panel-first storytelling for youth and visual-native readers." },
+    { key: "pearl_news", label: "Pearl News editorial", hint: "Article-led civic and narrative explainers." },
+    { key: "tools", label: "Breathwork / tools", hint: "Utility-first experiences and practical support flows." },
+    { key: "hybrid", label: "Hybrid lane", hint: "Blend book, manga, and editorial proof in one path." },
+  ];
+  const marketChoices = [
+    { key: "us", label: "United States (en-US)", hint: "Primary launch market." },
+    { key: "japan", label: "Japan (ja-JP)", hint: "Localized visual and wording expectations." },
+    { key: "taiwan", label: "Taiwan (zh-TW)", hint: "Traditional Chinese market alignment." },
+  ];
+
+  const selectedLane = state.onboardingLane || "self_help";
+  const selectedMarket = state.onboardingMarket || "us";
+
+  const selectedFormatFocus = selectedLane === "manga" ? "manga" : state.formatFocus;
+
   return (
     <div>
       <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Primary Reader</h2>
@@ -1076,7 +1096,46 @@ function Step2PrimaryReader({ state, update }) {
           color="#3b82f6"
         />
       )}
-      {state.persona ? <OutputProofStrip wizardPersonaId={state.persona} formatFocus={state.formatFocus} /> : null}
+      {state.persona && (
+        <>
+          <div className="mt-6">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-2">Choose lane</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+              {laneChoices.map((lane) => (
+                <LaneChoiceCard
+                  key={lane.key}
+                  laneKey={lane.key}
+                  label={lane.label}
+                  hint={lane.hint}
+                  selected={selectedLane === lane.key}
+                  onSelect={(laneKey) => update({ onboardingLane: laneKey })}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="mt-6">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-2">Choose market</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+              {marketChoices.map((mkt) => (
+                <MarketChoiceCard
+                  key={mkt.key}
+                  marketKey={mkt.key}
+                  label={mkt.label}
+                  hint={mkt.hint}
+                  selected={selectedMarket === mkt.key}
+                  onSelect={(marketKey) => update({ onboardingMarket: marketKey })}
+                />
+              ))}
+            </div>
+          </div>
+          <OutputProofStrip
+            wizardPersonaId={state.persona}
+            formatFocus={selectedFormatFocus}
+            market={selectedMarket}
+            onboardingLane={selectedLane}
+          />
+        </>
+      )}
     </div>
   );
 }
@@ -1621,6 +1680,8 @@ function Step10Blueprint({ state }) {
           {moment && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Trigger Moment</div><div className="text-xs font-bold">{moment.emoji} {moment.label}</div></div>}
           {visual && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Visual Style</div><div className="text-xs font-bold">{visual.label}</div></div>}
           {state.tradition && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Tradition</div><div className="text-xs font-bold">{state.tradition}</div></div>}
+          {state.onboardingLane && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Onboarding Lane</div><div className="text-xs font-bold">{state.onboardingLane.replace(/_/g, " ")}</div></div>}
+          {state.onboardingMarket && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Onboarding Market</div><div className="text-xs font-bold">{state.onboardingMarket}</div></div>}
           {state.formatFocus && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Format Focus</div><div className="text-xs font-bold">{state.formatFocus === "manga" ? "Manga / Visual" : "Traditional Books"}</div></div>}
           {(state.channels || []).length > 0 && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Channels</div><div className="text-xs font-bold">{state.channels.length} active</div></div>}
         </div>
@@ -1658,6 +1719,8 @@ function Step11Launch({ state, update }) {
       state.tradition && { label: "Spiritual Foundation", value: state.tradition, icon: Sun, gradient: "from-amber-400 to-yellow-500", systemEffect: "Influences vocabulary, philosophical grounding, and tradition-specific references throughout all content", emotionalBenefit: "Readers with this tradition feel recognized and respected. The language carries the weight of authentic lineage rather than surface-level appropriation." },
       (state.angles || []).length > 0 && { label: "Content Angles", value: state.angles.map(a => V4_ANGLES.find(v => v.id === a)?.label).filter(Boolean).join(", "), icon: Layers, gradient: "from-purple-500 to-indigo-500", systemEffect: `${state.angles.length} framing modes active — every title opens with one of these argumentative strategies`, emotionalBenefit: "Each angle gives your reader a different doorway into healing. Multiple angles means your brand reaches people wherever they are in their readiness for change." },
       (state.topicTags || []).length > 0 && { label: "Search Territory", value: `${state.topicTags.length} topics claimed`, icon: Search, gradient: "from-emerald-500 to-teal-500", systemEffect: `${state.topicTags.length} search topics feed into title generation, keyword targeting, series planning, and ad campaigns`, emotionalBenefit: "Your content appears in the exact moment someone types their pain into a search bar. You're not marketing — you're answering a cry for help with exactly the right words." },
+      state.onboardingLane && { label: "Onboarding Lane", value: state.onboardingLane.replace(/_/g, " "), icon: Layers, gradient: "from-fuchsia-500 to-purple-500", systemEffect: "Proof strip and registry matching now constrain to your selected lane so stakeholders preview the right output family early.", emotionalBenefit: "You can immediately see if the lane you want to lead with has convincing proof, reducing launch-time surprises." },
+      state.onboardingMarket && { label: "Onboarding Market", value: state.onboardingMarket, icon: Globe, gradient: "from-sky-500 to-cyan-500", systemEffect: "Registry matches now use explicit market filtering during onboarding to avoid cross-market false confidence.", emotionalBenefit: "Your team reviews examples that actually match the market you plan to launch in." },
       state.formatFocus && { label: "Format Focus", value: state.formatFocus === "manga" ? "Manga / Visual" : "Traditional Books", icon: BookOpen, gradient: "from-cyan-500 to-blue-500", systemEffect: SELECTION_FEEDBACK.formats[state.formatFocus]?.systemEffect, emotionalBenefit: SELECTION_FEEDBACK.formats[state.formatFocus]?.emotionalBenefit },
       (state.channels || []).length > 0 && { label: "Publishing Channels", value: `${state.channels.length} channels active`, icon: Globe, gradient: "from-violet-500 to-purple-500", systemEffect: `Content adapts to ${state.channels.length} platforms — each generates format-specific, algorithm-optimized variations`, emotionalBenefit: "Your reader discovers you wherever they already spend time. Whether it's a 3AM TikTok scroll or a Sunday audiobook walk — your brand is there, ready, in the right format." },
     ].filter(Boolean);
@@ -1874,6 +1937,7 @@ function generateYAML(state) {
   Object.entries(state.voiceSettings || {}).forEach(([k, v]) => { y += `    ${k}: ${v}\n`; });
   y += `\n  visual_style: "${state.visualStyle}"\n  tradition: "${state.tradition}"\n  emotional_outcomes: [${(state.emotions || []).map((e) => `"${e}"`).join(", ")}]\n\n`;
   y += `  content_angles: [${(state.angles || []).map((a) => `"${a}"`).join(", ")}]\n  topic_tags: [${(state.topicTags || []).map((t) => `"${t}"`).join(", ")}]\n\n`;
+  y += `  onboarding_lane: "${state.onboardingLane || "self_help"}"\n  onboarding_market: "${state.onboardingMarket || "us"}"\n`;
   y += `  format_focus: "${state.formatFocus || "book"}"\n  channels: [${(state.channels || []).map((c) => `"${c}"`).join(", ")}]\n\n`;
   y += `  revenue_blend:\n    user_topics_weight: 0.30\n    proven_topics_weight: 0.70\n    note: "System blends brand identity with persona-based demand and proven search terms"\n\n`;
   y += `  proven_personas:\n`;
@@ -2081,6 +2145,7 @@ export default function BrandWizard() {
     voiceSettings: {}, visualStyle: null, emotions: [],
     tradition: "", angles: [], topicTags: [],
     formatFocus: null, channels: [],
+    onboardingLane: "self_help", onboardingMarket: "us",
     contact: { firstName: "", lastName: "", email: "", phone: "", line: "", whatsapp: "", wechat: "", messenger: "", preferred: "email" },
   });
 
@@ -2102,7 +2167,13 @@ export default function BrandWizard() {
     if (introPage === 5) return <ShowcaseFormats onNext={startWizard} onBack={prevIntro} />;
   }
 
-  const canNext = step === 0 ? !!state.archetype : step === 1 ? !!state.persona : step === 2 ? !!state.moment : true;
+  const canNext = step === 0
+    ? !!state.archetype
+    : step === 1
+      ? !!state.persona && !!state.onboardingLane && !!state.onboardingMarket
+      : step === 2
+        ? !!state.moment
+        : true;
 
   const steps = [
     <Step1Archetype key={0} state={state} update={update} />,

@@ -36,7 +36,9 @@ Sections per lane (self-help, audiobook, manga, Pearl News, tools). Load [exampl
 
 ## 5. Navigation
 
-All spine pages link to: hub, deployed wizard base URL (from env or documented constant), gallery, matrix, weekly OS.
+All spine pages link to: hub, deployed wizard (`https://brand-admin-onboarding.pages.dev`), gallery, matrix, weekly OS.
+
+Use one canonical public wizard URL in copy and WP shells to avoid split-routing drift.
 
 ---
 
