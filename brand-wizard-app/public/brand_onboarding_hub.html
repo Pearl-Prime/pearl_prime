@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — Brand Onboarding Hub</title>
+<style>
+:root{--bg:#f9fafb;--white:#fff;--card:#f8f8fa;--border:#e5e7eb;--accent:#7c3aed;--al:#ede9fe;--ad:#5b21b6;--red:#dc2626;--rl:#fef2f2;--green:#059669;--gl:#ecfdf5;--gold:#d97706;--gol:#fffbeb;--blue:#2563eb;--bl:#eff6ff;--orange:#ea580c;--ol:#fff7ed;--text:#111827;--muted:#6b7280;--light:#9ca3af;--r:16px;--rs:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.hero{text-align:center;padding:60px 24px 36px;background:linear-gradient(180deg,#f3f4f6,var(--bg));border-bottom:1px solid var(--border)}
+.hero h1{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:14px;background:linear-gradient(135deg,#5b21b6,#7c3aed,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:.92rem;color:var(--muted);max-width:540px;margin:0 auto}
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.badge{display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1px solid var(--border);padding:5px 12px;border-radius:999px;font-size:.75rem;color:var(--muted)}
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.dot-g{background:var(--green)}.dot-y{background:var(--gold)}.dot-p{background:var(--accent)}
+.mx{max-width:940px;margin:0 auto;padding:0 20px}
+.tn{position:sticky;top:0;background:var(--white);border-bottom:1px solid var(--border);z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tn-inner{max-width:940px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+.tn-inner::-webkit-scrollbar{display:none}
+.tb{padding:11px 10px;font-size:.72rem;font-weight:500;color:var(--muted);border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:.2s}
+.tb:hover{color:var(--text);border-bottom-color:var(--border)}
+.tb.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tp{display:none;padding:44px 0 36px}
+.tp.on{display:block;animation:fu .35s ease}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.sl{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;color:var(--accent);font-weight:700;margin-bottom:6px}
+h2{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.desc{color:var(--muted);font-size:.88rem;max-width:660px;margin-bottom:18px;line-height:1.65}
+.mbox{background:linear-gradient(135deg,rgba(124,58,237,.05),rgba(220,38,38,.03));border:1px solid var(--border);border-radius:var(--r);padding:28px;margin-bottom:20px;text-align:center}
+.mbox p{font-size:.92rem;color:var(--text);font-style:italic;max-width:620px;margin:0 auto;line-height:1.7}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.fc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center;transition:.25s}
+.fc:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08)}
+.fi{width:40px;height:40px;border-radius:10px;background:var(--al);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.2rem}
+.fs{font-size:.85rem;font-weight:700;margin-bottom:4px}
+.fc p{font-size:.75rem;color:var(--muted);line-height:1.5}
+.rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.rc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px;display:flex;gap:12px;align-items:flex-start;transition:.25s}
+.rc:hover{border-color:var(--accent)}
+.ri{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.rc h4{font-size:.84rem;font-weight:600;margin-bottom:2px}
+.rc p{font-size:.75rem;color:var(--muted);line-height:1.45}
+.sr{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
+.sx{border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center}
+.sx .pct{font-size:2.2rem;font-weight:900;line-height:1}
+.sx.you{background:linear-gradient(135deg,var(--gl),var(--white));border-color:#a7f3d0}
+.sx.you .pct{color:var(--green)}
+.sx.pp{background:linear-gradient(135deg,var(--al),var(--white));border-color:#c4b5fd}
+.sx.pp .pct{color:var(--accent)}
+.sx.soc{background:linear-gradient(135deg,var(--rl),var(--white));border-color:#fecaca}
+.sx.soc .pct{color:var(--red)}
+.sx .lb{font-size:.84rem;font-weight:600;margin-top:4px}
+.sx .sub{font-size:.72rem;color:var(--muted);margin-top:2px}
+.nb{margin-top:36px;text-align:center}
+.nbtn{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;padding:11px 26px;border-radius:13px;font-size:.85rem;font-weight:600;border:none;cursor:pointer;box-shadow:0 5px 16px rgba(124,58,237,.2);transition:.2s;text-decoration:none}
+.nbtn:hover{background:var(--ad);transform:translateY(-1px)}
+/* Archetype selector */
+.ag{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0}
+.ac{background:var(--white);border:2px solid var(--border);border-radius:var(--r);padding:16px 10px;text-align:center;cursor:pointer;transition:.2s}
+.ac:hover{border-color:var(--accent);box-shadow:0 3px 10px rgba(124,58,237,.08);transform:translateY(-2px)}
+.ac.on{border-color:var(--accent);background:var(--al)}
+.ac .ae{font-size:1.5rem;margin-bottom:6px}
+.ac .an{font-size:.78rem;font-weight:700}
+.ac .as2{font-size:.65rem;color:var(--light);margin-top:2px}
+/* Feedback */
+.fb{background:var(--white);border:2px solid var(--accent);border-radius:var(--r);padding:24px;margin-top:14px;display:none;animation:fu .35s ease}
+.fb.on{display:block}
+.fb-h{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:700;margin-bottom:14px}
+.fb-g{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fb-c h5{font-size:.68rem;color:var(--light);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;font-weight:600}
+.fb-c p{font-size:.82rem;color:var(--text);line-height:1.6;margin:0}
+.fb-s{background:var(--card);border-radius:var(--rs);padding:12px 14px;margin-top:10px}
+.fb-s .lbl{font-size:.62rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.fb-s p{font-size:.8rem;color:var(--muted);font-style:italic;margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.tag{font-size:.65rem;padding:3px 8px;border-radius:999px;font-weight:500}
+.tag-g{background:var(--gl);color:var(--green)}.tag-p{background:var(--al);color:var(--accent)}.tag-o{background:var(--ol);color:var(--orange)}
+/* System cards */
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.sc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px;cursor:pointer;transition:.25s}
+.sc:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08)}
+.sc.ex{grid-column:span 2;border-color:var(--accent)}
+.sc .st2{display:inline-block;font-size:.6rem;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.sc h4{font-size:.88rem;font-weight:700;margin-bottom:3px}
+.sc .out{font-size:.8rem;color:var(--green);font-weight:600}
+.sc .det{display:none;margin-top:14px}
+.sc.ex .det{display:block}
+.ba{display:grid;grid-template-columns:1fr 30px 1fr;gap:8px;align-items:start}
+.ba-b{background:var(--card);border-radius:var(--rs);padding:12px}
+.ba-b.bef{border-left:3px solid var(--red)}
+.ba-b.aft{border-left:3px solid var(--green)}
+.ba-l{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.ba-a{text-align:center;color:var(--accent);font-size:1.2rem;align-self:center}
+/* Style cards */
+.vg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.vc{border:2px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:.2s}
+.vc:hover{border-color:var(--accent);box-shadow:0 3px 10px rgba(124,58,237,.08)}
+.vc.on{border-color:var(--accent)}
+.vp{height:80px}
+.vi{padding:12px;background:var(--white)}
+.vi h4{font-size:.8rem;font-weight:600;margin-bottom:2px}
+.vi p{font-size:.68rem;color:var(--muted);margin:0}
+/* QA */
+.qg{display:grid;grid-template-columns:140px 1fr;gap:20px;align-items:start}
+.qa-items{list-style:none}
+.qa-items li{padding:7px 0;border-bottom:1px solid var(--border);font-size:.82rem;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px}
+.qa-items li:last-child{border-bottom:none}
+.qc{width:18px;height:18px;border:2px solid var(--border);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;font-size:.6rem;color:transparent}
+.qa-items li.done .qc{background:var(--green);border-color:var(--green);color:#fff}
+.qa-items li.done{color:var(--light);text-decoration:line-through}
+/* Nav links */
+.ng{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.nc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-decoration:none;color:var(--text);transition:.25s;display:block}
+.nc:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08);transform:translateY(-2px)}
+.nc h4{font-size:.88rem;font-weight:700;margin-bottom:3px}
+.nc p{font-size:.75rem;color:var(--muted);margin:0 0 8px}
+.nc .arr{font-size:.78rem;color:var(--accent);font-weight:600}
+.ssg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0}
+.ss{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.ss .big{font-size:1.4rem;font-weight:800;margin-bottom:2px}
+.ss .lbl{font-size:.75rem;color:var(--muted)}
+.foot{background:linear-gradient(135deg,var(--accent),#6d28d9,#581c87);padding:28px 20px;text-align:center;color:#fff;margin-top:36px}
+.foot h2{font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.foot p{font-size:.84rem;color:rgba(255,255,255,.65);margin:0}
+@media(max-width:700px){.fg,.sg,.vg,.ng,.fb-g,.ba,.ag,.sr,.ssg{grid-template-columns:1fr}.ag{grid-template-columns:repeat(3,1fr)}.qg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="hero">
+<h1>Pearl Prime — Brand Onboarding Hub</h1>
+<p>Everything you need to launch and operate your brand. Start here, then go deep into your market briefing.</p>
+<div class="badges"><span class="badge"><span class="dot dot-g"></span> 90.6% Revenue</span><span class="badge"><span class="dot dot-y"></span> 75+ Countries</span><span class="badge"><span class="dot dot-p"></span> Ei-Powered</span></div>
+</div>
+<div class="tn"><div class="tn-inner">
+<button class="tb on" onclick="go('mission')">Mission</button>
+<button class="tb" onclick="go('arch')">Archetypes</button>
+<button class="tb" onclick="go('systems')">V3.2 Systems</button>
+<button class="tb" onclick="go('market')">Market Data</button>
+<button class="tb" onclick="go('visual')">Visual Identity</button>
+<button class="tb" onclick="go('navigate')">Navigate</button>
+<button class="tb" onclick="go('qa')">QA Checklist</button>
+</div></div>
+<div class="mx">
+
+<!-- MISSION -->
+<div class="tp on" id="t-mission">
+<div class="mbox"><p>The mission: To share enlightened content helping Gen Z, Gen Alpha, and others navigate life's challenges — guiding their attention in a positive direction, as they grow into the next generation of leaders.</p></div>
+<div class="sl">The Platform</div>
+<h2>What Is Pearl Prime?</h2>
+<p class="desc">Pearl Prime is a publishing platform that produces emotionally meaningful, high-quality self-help books at scale — drawing from the real teachings and wisdom of attendees of the United Spiritual Leaders Forum.</p>
+<p class="desc">Pearl Prime is powered by copyrighted AI intellectual property called <strong style="color:var(--text)">Ei — Enlightened Intelligence</strong>. Created from the combined knowledge base of spiritual insights shared at the United Spiritual Leaders Forum, Ei is a unique blend of psychological and somatic heuristics, feeding genetic algorithms and machine learning. Ei is AI for helping people overcome personal hardships and achieve their dreams.</p>
+
+<h3>How It Works</h3>
+<div class="fg">
+<div class="fc"><div class="fi">📚</div><div class="fs">Ei Creates the Content</div><p>Books, audiobooks, workbooks — produced weekly. Every sentence optimized for narration pacing and emotional impact.</p></div>
+<div class="fc"><div class="fi">⬆️</div><div class="fs">You Upload</div><p>5 minutes per week. Download your packet, bulk-upload to Google Play, activate auto-narration, upload to Findaway.</p></div>
+<div class="fc"><div class="fi">🌍</div><div class="fs">Global Distribution</div><p>Google Play + Findaway Voices = 40+ platforms, 75+ countries. Audible, Spotify, Apple Books, libraries, and more.</p></div>
+<div class="fc"><div class="fi">💰</div><div class="fs">You Get Paid</div><p>90.6% of all revenue, deposited directly to your bank account on the 15th of every month.</p></div>
+</div>
+
+<h3 style="margin-top:28px">Revenue Split</h3>
+<div class="sr">
+<div class="sx you"><div class="pct">90.6%</div><div class="lb">You</div><div class="sub">Publishing revenue</div></div>
+<div class="sx pp"><div class="pct">4.8%</div><div class="lb">Pearl Prime</div><div class="sub">Content + infrastructure</div></div>
+<div class="sx soc"><div class="pct">4.8%</div><div class="lb">48 Social</div><div class="sub">Daily video marketing</div></div>
+</div>
+<p class="desc">48 Social takes the best snippets from your books and turns them into daily short-form videos across YouTube, TikTok, Facebook, Instagram, and X. This creates a social media funnel that drives book sales to your brand — at no additional cost to you.</p>
+
+<div class="ssg">
+<div class="ss"><div class="big" style="color:var(--red)">Up to 48</div><div class="lbl">Platforms posted daily</div></div>
+<div class="ss"><div class="big" style="color:var(--accent)">365</div><div class="lbl">Videos per year per brand</div></div>
+<div class="ss"><div class="big" style="color:var(--green)">$10.8–18.7K</div><div class="lbl">Month 12 platform revenue</div></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('arch')">Next: Brand Archetypes →</button></div>
+</div>
+
+<!-- ARCHETYPES -->
+<div class="tp" id="t-arch">
+<div class="sl">Brand Identity</div>
+<h2>Choose Your Brand Angle</h2>
+<p class="desc">This determines how your books compete in the market. One direction. Own it. Click an angle to see what it activates — the reader personas it attracts, the search topics it targets, and the revenue segments it unlocks.</p>
+
+<div class="ag" id="archGrid">
+<div class="ac" data-k="nervous_system" onclick="selArch(this)"><div class="ae">🧠</div><div class="an">Nervous System</div><div class="as2">Stress · Anxiety · Burnout</div></div>
+<div class="ac" data-k="identity_direction" onclick="selArch(this)"><div class="ae">🧭</div><div class="an">Identity &amp; Direction</div><div class="as2">Lost · Behind · Stuck</div></div>
+<div class="ac" data-k="emotional_healing" onclick="selArch(this)"><div class="ae">💚</div><div class="an">Emotional Healing</div><div class="as2">Grief · Trauma · Heartbreak</div></div>
+<div class="ac" data-k="performance_focus" onclick="selArch(this)"><div class="ae">⚡</div><div class="an">Performance &amp; Focus</div><div class="as2">Discipline · Clarity · Execution</div></div>
+<div class="ac" data-k="spiritual_awakening" onclick="selArch(this)"><div class="ae">🕉️</div><div class="an">Spiritual Awakening</div><div class="as2">Purpose · Meaning · Peace</div></div>
+</div>
+
+<div class="fb" id="archFb">
+<div class="fb-h">⚡ What This Activates</div>
+<div class="fb-g">
+<div class="fb-c"><h5>System Effect</h5><p id="aEff"></p></div>
+<div class="fb-c"><h5>Revenue Segment</h5><p id="aRev"></p></div>
+</div>
+<div class="fb-g" style="margin-top:14px">
+<div class="fb-c">
+<div class="fb-s"><div class="lbl">Proven Personas</div><p id="aPer"></p></div>
+</div>
+<div class="fb-c">
+<div class="fb-s"><div class="lbl">Search Topics Targeted</div><p id="aTop"></p></div>
+</div>
+</div>
+<div style="margin-top:14px">
+<div class="fb-s"><div class="lbl">Keywords You'll Own</div><p id="aKey"></p></div>
+</div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('systems')">Next: V3.2 Systems →</button></div>
+</div>
+
+<!-- V3.2 SYSTEMS -->
+<div class="tp" id="t-systems">
+<div class="sl">Intelligence Layer</div>
+<h2>Seven Systems. Zero Manual Setup.</h2>
+<p class="desc">V3.2 adds seven marketing intelligence systems to every book in your catalog. They activate automatically when a title enters the pipeline. No new tools. No new dashboards. Click any system to see the before/after.</p>
+
+<div class="ssg">
+<div class="ss"><div class="big" style="color:var(--accent)">7</div><div class="lbl">Automatic systems</div></div>
+<div class="ss"><div class="big" style="color:var(--green)">2.7x</div><div class="lbl">Titles per reader/quarter</div></div>
+<div class="ss"><div class="big" style="color:var(--gold)">+35%</div><div class="lbl">Pre-purchase conversion</div></div>
+</div>
+
+<div class="sg" id="sysGrid"></div>
+<div class="nb"><button class="nbtn" onclick="go('market')">Next: Market Data →</button></div>
+</div>
+
+<!-- MARKET DATA -->
+<div class="tp" id="t-market">
+<div class="sl">Revenue Intelligence</div>
+<h2>Market Data Behind Your Brand</h2>
+<p class="desc">Real data from proven revenue patterns. Self-help audiobooks are growing 25%+ year over year. These numbers drive every title, keyword, and positioning decision in your catalog.</p>
+
+<div class="ssg">
+<div class="ss"><div class="big" style="color:var(--accent)">$35B+</div><div class="lbl">Global audiobook market by 2030</div></div>
+<div class="ss"><div class="big" style="color:var(--green)">25%+</div><div class="lbl">YoY audiobook growth</div></div>
+<div class="ss"><div class="big" style="color:var(--gold)">$165M</div><div class="lbl">Gen X wisdom seekers segment</div></div>
+</div>
+
+<h3>Revenue Personas by Brand Angle</h3>
+<p class="desc">Each brand angle maps to proven revenue personas with validated market segments. Select a brand angle above to see the specific personas your brand will target.</p>
+<div class="rg" id="personaGrid"></div>
+
+<h3 style="margin-top:28px">BookTok &amp; Social Discovery</h3>
+<div class="fg">
+<div class="fc"><div class="fi" style="background:var(--rl)">📱</div><div class="fs">59M Books Sold</div><p>BookTok alone drove 59 million book sales in 2024. Self-help content converts at 3–6x the rate of organic search.</p></div>
+<div class="fc"><div class="fi" style="background:var(--gl)">🎧</div><div class="fs">86% Ad Recall</div><p>86% podcast ad recall. 41% of audiobook listeners also consume podcasts in self-improvement genres.</p></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('visual')">Next: Visual Identity →</button></div>
+</div>
+
+<!-- VISUAL IDENTITY -->
+<div class="tp" id="t-visual">
+<div class="sl">Cover Art &amp; Voice</div>
+<h2>Visual Identity Styles</h2>
+<p class="desc">What should your book feel like at first glance? Each style comes with text-to-image prompts for Flux (simple) and ComfyUI (complex). Click to see what it activates.</p>
+
+<div class="vg" id="styleGrid"></div>
+
+<div class="fb" id="styleFb">
+<div class="fb-h">🎨 What This Activates</div>
+<div class="fb-g">
+<div class="fb-c"><h5>Visual Effect</h5><p id="sEff"></p></div>
+<div class="fb-c"><h5>Reader Response</h5><p id="sRes"></p></div>
+</div>
+<div class="fb-g" style="margin-top:14px">
+<div class="fb-c"><div class="fb-s"><div class="lbl">Flux Prompt</div><p id="sFlu"></p></div></div>
+<div class="fb-c"><div class="fb-s"><div class="lbl">ComfyUI Prompt</div><p id="sCom"></p></div></div>
+</div>
+</div>
+
+<h3 style="margin-top:28px">Audiobook Voice</h3>
+<p class="desc">What should your listener feel in the first 60 seconds? This determines your lead narrator voice.</p>
+<div class="rg">
+<div class="rc"><div class="ri" style="background:var(--gl)">🛡️</div><div><h4>"I feel safe"</h4><p>Warm, grounded, slow pace. Healing + Awakening archetypes.</p></div></div>
+<div class="rc"><div class="ri" style="background:var(--al)">💜</div><div><h4>"This person understands me"</h4><p>Empathetic, mid-range, personal. Emotional Healing + Identity.</p></div></div>
+<div class="rc"><div class="ri" style="background:var(--bl)">✨</div><div><h4>"This is different"</h4><p>Distinctive, slightly unusual cadence. Spiritual Awakening.</p></div></div>
+<div class="rc"><div class="ri" style="background:var(--gol)">⚡</div><div><h4>"I feel challenged"</h4><p>Direct, energized, no fluff. Performance + Focus.</p></div></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('navigate')">Next: Navigate →</button></div>
+</div>
+
+<!-- NAVIGATE -->
+<div class="tp" id="t-navigate">
+<div class="sl">Go Deeper</div>
+<h2>Your Briefing Documents</h2>
+<p class="desc">Each briefing is a deep dive into your specific market. Read your regional briefing before your first upload.</p>
+<div class="ng">
+<a class="nc" href="us_brand_admin_v32_briefing.html"><h4>🇺🇸 US Brand Admin Briefing</h4><p>Full V3.2 system breakdown with before/after for every system, activation metrics, and revenue impact for the US market.</p><div class="arr">Open US Briefing →</div></a>
+<a class="nc" href="jp_brand_admin_v32_briefing.html"><h4>🇯🇵 Japan Brand Admin Briefing</h4><p>Manga visual variants, cultural protocols, JP platform strategy, and adapted V3.2 systems for the Japan market.</p><div class="arr">Open JP Briefing →</div></a>
+<a class="nc" href="writer_v32_quick_reference.html"><h4>📝 Writer Quick Reference</h4><p>Compact reference card for writers: voice calibration, tone positions, archetype cheat sheet, exercise templates.</p><div class="arr">Open Writer Reference →</div></a>
+<a class="nc" href="PHOENIX_OMEGA_INVESTOR_DD.xlsx"><h4>📊 Investor Due Diligence</h4><p>Full financial model, market sizing, competitive analysis, revenue projections, and unit economics.</p><div class="arr">Open Workbook →</div></a>
+<a class="nc" href="lane_examples_gallery.html"><h4>🖼️ Lane Examples Gallery</h4><p>Registry-driven output proof: comparison sets, ready/planned/missing, supporting vs product visuals, stale-ready fallbacks.</p><div class="arr">Open gallery →</div></a>
+<a class="nc" href="market_lane_matrix.html"><h4>📐 Market × Lane Matrix</h4><p>Coverage by market and lane; which comparison sets land where; quick read on gaps before spend.</p><div class="arr">Open matrix →</div></a>
+<a class="nc" href="brand_admin_master_onboarding.html"><h4>🧭 Master Onboarding Spine</h4><p>Journey overview, how registry + wizard + Pages fit; CTAs into gallery, matrix, and weekly OS.</p><div class="arr">Open spine →</div></a>
+<a class="nc" href="brand_admin_weekly_os.html"><h4>📅 Brand Admin Weekly OS</h4><p>Mon–Sun operating snapshot; judgment vs automation; KPI stubs and failure modes.</p><div class="arr">Open weekly OS →</div></a>
+<a class="nc" href="https://brand-admin-onboarding.pages.dev"><h4>🚀 Live onboarding wizard (Pages)</h4><p>Production deployment for the React flow. Use this for real stakeholder walkthroughs.</p><div class="arr">Open live wizard →</div></a>
+<a class="nc" href="brand-wizard-app/"><h4>🧪 Local wizard build</h4><p>Repo-local app directory for development and local static serving checks.</p><div class="arr">Open local app root →</div></a>
+</div>
+</div>
+
+<!-- QA CHECKLIST -->
+<div class="tp" id="t-qa">
+<div class="sl">Launch Readiness</div>
+<h2>QA Checklist</h2>
+<p class="desc">Track your brand readiness before go-live. Click items to mark complete.</p>
+<div class="qg">
+<div style="text-align:center">
+<svg width="120" height="120" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#e5e7eb" stroke-width="7"/>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#059669" stroke-width="7" stroke-dasharray="314.16" stroke-dashoffset="314.16" stroke-linecap="round" transform="rotate(-90 60 60)" id="qaArc"/>
+<text x="60" y="56" text-anchor="middle" fill="#111827" font-size="24" font-weight="800" id="qaPct">0%</text>
+<text x="60" y="72" text-anchor="middle" fill="#9ca3af" font-size="9" font-weight="500">complete</text>
+</svg>
+</div>
+<ul class="qa-items" id="qaList">
+<li onclick="tgQA(this)"><span class="qc">✓</span>Brand angle selected and documented</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>Positioning statement written</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>Ideal reader defined (age, pain, desire)</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>Trigger moment mapped</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>Emotional outcomes selected (3-5)</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>Primary tradition chosen</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>Visual identity style selected</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>Audiobook voice feel confirmed</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>Search topics submitted (5)</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>V3.2 systems review complete</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>Google Play Partner account set up</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>Findaway Voices account set up</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>Social media accounts created</li>
+<li onclick="tgQA(this)"><span class="qc">✓</span>First weekly packet uploaded</li>
+</ul>
+</div>
+</div>
+
+</div><!-- /mx -->
+<div class="foot"><h2>Pearl Prime</h2><p>Publishing spiritual wisdom for the next generation.</p></div>
+
+<script>
+function go(id){
+document.querySelectorAll('.tp').forEach(function(p){p.classList.remove('on')});
+document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on')});
+document.getElementById('t-'+id).classList.add('on');
+var tabs=['mission','arch','systems','market','visual','navigate','qa'];
+var idx=tabs.indexOf(id);
+var btns=document.querySelectorAll('.tb');
+if(idx>=0&&btns[idx])btns[idx].classList.add('on');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* PROVEN data from Pearl Prime */
+var PROVEN={
+nervous_system:{
+  effect:'Ei calibrates emotional pacing for stress/anxiety readers. EOIS tracks nervous system regulation signals. Controlled Contrast ensures no intensity spikes without recovery. Content targets the exact pain points young audiences search for — anxiety, burnout, overthinking.',
+  rev:'$130–165M/yr segment. Millennial women professionals are the largest single buyer cohort in self-help audiobooks.',
+  personas:['Millennial women professionals 30-44 ($130-165M/yr segment)','Tech/finance burnout professionals 25-45 ($80-120M/yr)','Working parents with children under 12 ($70-100M/yr)'],
+  topics:['anxiety that won\'t shut off at night','burnout recovery without quitting','nervous system regulation after work','overthinking in bed','panic attack grounding techniques'],
+  keywords:['nervous system regulation audiobook','burnout recovery','stop overthinking at night','anxiety before sleep','polyvagal calm']
+},
+identity_direction:{
+  effect:'Ei prioritizes curiosity hooks and safe-to-explore framing. Binge Loop seeds 3-book discovery chains for readers navigating life transitions. Social Wiring connects readers to peer validation loops.',
+  rev:'Fastest-growing audiobook segment. Gen Z 18-24 are the highest-growth cohort entering self-help for the first time.',
+  personas:['Gen Z navigating adulting 18-24 (fastest-growing audiobook segment)','Millennial women in career transition 30-44','Identity rebuilders post-divorce/job-loss 28-50'],
+  topics:['feeling behind compared to peers','lost sense of purpose after 30','quarter-life crisis','rebuilding identity after breakup','what to do with your life'],
+  keywords:['feeling lost in life audiobook','quarter life crisis','finding purpose','identity crisis self help','what am I doing with my life']
+},
+emotional_healing:{
+  effect:'Ei activates trauma-aware pacing. Controlled Contrast ensures intensity never spikes without recovery space. Social Wiring frames sharing as offering help, not vulnerability. Audiobook narration slows pace in heavy sections.',
+  rev:'$70-100M/yr caregiver segment. Trauma-aware millennials are the fastest-growing sub-cohort in body-based recovery.',
+  personas:['Grief/loss navigators all ages ($70-100M/yr caregiver segment)','Trauma-aware millennials seeking body-based recovery','Working parents processing intergenerational patterns'],
+  topics:['grief that doesn\'t follow a timeline','healing after toxic relationship','intergenerational trauma breaking the cycle','heartbreak recovery','emotional numbness'],
+  keywords:['grief audiobook','healing after breakup','trauma recovery self help','emotional healing','letting go of past']
+},
+performance_focus:{
+  effect:'Pipeline selects high-density formats. Audiobook Dominance prioritizes narration styles that teach by repetition. Chaos Slot introduces controlled challenge intervals to prevent predictability fatigue.',
+  rev:'$50-80M/yr L&D segment + $60-100M/yr entrepreneur segment. ADHD-friendly productivity is an under-served, high-demand niche.',
+  personas:['Corporate middle managers 32-50 ($50-80M/yr L&D segment)','Entrepreneurs/solopreneurs 28-50 ($60-100M/yr)','Tech workers seeking focus systems 25-40'],
+  topics:['phone addiction destroying focus','can\'t stick to habits','decision fatigue as a manager','ADHD-friendly productivity','dopamine detox'],
+  keywords:['focus audiobook','productivity self help','habit building','ADHD focus techniques','deep work practice']
+},
+spiritual_awakening:{
+  effect:'Ei deploys advanced metaphysical framing. Controlled Contrast maximizes peak experience density. EOIS tracks contemplative-state retention across sessions. Transformation Promise uses "discover" as the core verb.',
+  rev:'$165M/yr — the highest-spending segment. Gen X wisdom seekers 45-58 buy more audiobooks per capita than any other cohort.',
+  personas:['Gen X wisdom seekers 45-58 ($165M/yr highest-spending segment)','Contemplative professionals seeking meaning','Post-crisis seekers finding new framework'],
+  topics:['meditation that actually works for beginners','finding meaning after loss','spiritual practice without religion','inner peace in chaos','mindfulness for skeptics'],
+  keywords:['meditation audiobook','finding inner peace','spiritual growth','mindfulness for beginners','meaning of life self help']
+}};
+
+function selArch(el){
+document.querySelectorAll('.ac').forEach(function(c){c.classList.remove('on')});
+el.classList.add('on');
+var k=el.dataset.k;var d=PROVEN[k];
+document.getElementById('aEff').textContent=d.effect;
+document.getElementById('aRev').textContent=d.rev;
+document.getElementById('aPer').textContent=d.personas.join(' · ');
+document.getElementById('aTop').textContent=d.topics.join(' · ');
+document.getElementById('aKey').textContent=d.keywords.join(' · ');
+document.getElementById('archFb').classList.add('on');
+}
+
+/* V3.2 Systems */
+var SYS=[
+{id:'eois',name:'EOIS',full:'Emotional Outcome Intelligence System',color:'#059669',tag:'Intelligence',
+ out:'Every reader session generates emotional trajectory data that improves the next recommendation.',
+ bef:'Generic "self-help" shelf placement. No emotional context. Readers found books by keyword, not by need.',
+ aft:'Ei reads emotional state signals and routes readers to the book matching their current need. Entry/exit emotional markers build reader profiles that feed the recommendation engine.'},
+{id:'contrast',name:'Controlled Contrast',full:'Controlled Contrast Engine',color:'#7c3aed',tag:'Pacing',
+ out:'Intensity never spikes without recovery. Readers finish more books. +31% completion rate.',
+ bef:'Chapter difficulty is random. Readers drop off at unexpected intensity spikes.',
+ aft:'Every chapter follows a tension-release arc calibrated by Ei. Hard chapters always followed by integration spaces. Max intensity mapped 1-10 per chapter.'},
+{id:'audio',name:'Audiobook Dominance',full:'Audiobook-First Distribution',color:'#dc2626',tag:'Distribution',
+ out:'Audiobook format reaches 40% of revenue within 12 months. 11 languages at launch.',
+ bef:'Audiobook is an afterthought. Flat narration. One narrator fits all. Audio produced months after ebook.',
+ aft:'Narrator assignment matches brand angle voice. Pacing calibrated per chapter. Audio and ebook ship simultaneously. Google Play auto-narration + Findaway for 40+ platforms.'},
+{id:'binge',name:'Binge Loop',full:'Binge Discovery Architecture',color:'#0891b2',tag:'Retention',
+ out:'Average reader consumes 2.7 titles per quarter instead of 1.1.',
+ bef:'Each book is a dead end. Reader finishes, leaves platform. No cross-title discovery.',
+ aft:'End-of-book prompts link to the next emotional step, not just the next book. Cross-author chains keep readers in the ecosystem. EOIS predicts emotional readiness for next title.'},
+{id:'social',name:'Social Wiring',full:'Social Sharing Intelligence',color:'#ea580c',tag:'Virality',
+ out:'Organic sharing events per title increase 3x within first 90 days.',
+ bef:'No sharing triggers. Reader independently decides to recommend. No quote cards, no referral loops.',
+ aft:'3-5 highest-resonance passages per book wrapped in shareable formats: quote cards, audio clips, discussion prompts. Surfaced at peak emotional activation moments. 48 Social amplifies with daily video.'},
+{id:'chaos',name:'Chaos Slot',full:'Chaos Slot Mechanic',color:'#d97706',tag:'Engagement',
+ out:'+22% session time. Reduces predictability fatigue after book 3.',
+ bef:'Every chapter follows the same template. Reader knows exactly what to expect. Completion drops after book 3.',
+ aft:'5-8% of content space reserved for non-linear inserts: meditations from different traditions, scientific studies, format-breaking exercises. Frequency tuned by Ei.'},
+{id:'transform',name:'Transformation Promise',full:'Transformation Promise Framework',color:'#5b21b6',tag:'Conversion',
+ out:'+35% pre-purchase conversion when the transformation promise matches the reader\'s stated need.',
+ bef:'Book description is a feature list. "12 chapters on mindfulness." No outcome framing.',
+ aft:'Every listing leads with the transformation: "After this book, you will..." One outcome verb cascades through every touchpoint: listing, preview, ad copy, email, social.'}
+];
+
+function renderSys(){
+var g=document.getElementById('sysGrid');
+g.innerHTML=SYS.map(function(s){return '<div class="sc" onclick="tgSys(this)" data-id="'+s.id+'"><span class="st2" style="background:'+s.color+'15;color:'+s.color+'">'+s.tag+'</span><h4>'+s.name+'</h4><div class="out">'+s.out+'</div><div class="det"><div class="ba"><div class="ba-b bef"><div class="ba-l" style="color:var(--red)">Before V3.2</div><p style="font-size:.78rem;color:var(--muted);margin:0">'+s.bef+'</p></div><div class="ba-a">→</div><div class="ba-b aft"><div class="ba-l" style="color:var(--green)">After V3.2</div><p style="font-size:.78rem;color:var(--muted);margin:0">'+s.aft+'</p></div></div></div></div>'}).join('');
+}
+function tgSys(el){var w=el.classList.contains('ex');document.querySelectorAll('.sc').forEach(function(c){c.classList.remove('ex')});if(!w)el.classList.add('ex')}
+
+/* Personas */
+function renderPersonas(){
+var g=document.getElementById('personaGrid');
+var all=[
+{n:'Millennial Women 30-44',d:'Largest self-help buyer cohort. Nervous system + emotional healing.',r:'$130-165M/yr',bg:'var(--al)'},
+{n:'Gen Z 18-24',d:'Fastest-growing audiobook segment. Identity + direction.',r:'Fastest growth',bg:'var(--bl)'},
+{n:'Gen X Wisdom Seekers 45-58',d:'Highest-spending per capita. Spiritual awakening.',r:'$165M/yr',bg:'var(--gol)'},
+{n:'Tech/Finance Burnout 25-45',d:'Performance + focus. Premium audiobook buyers.',r:'$80-120M/yr',bg:'var(--gl)'},
+{n:'Working Parents',d:'Processing intergenerational patterns. High social sharing.',r:'$70-100M/yr',bg:'var(--rl)'},
+{n:'Entrepreneurs 28-50',d:'Solopreneurs seeking focus systems. Format diversity buyers.',r:'$60-100M/yr',bg:'var(--ol)'}
+];
+g.innerHTML=all.map(function(p){return '<div class="rc"><div class="ri" style="background:'+p.bg+'">📊</div><div><h4>'+p.n+'</h4><p>'+p.d+'</p><p style="color:var(--green);font-weight:600;font-size:.72rem;margin-top:4px">'+p.r+'</p></div></div>'}).join('');
+}
+
+/* Visual Styles */
+var STYLES=[
+{name:'Calm / Minimal',grad:'linear-gradient(135deg,#ffecd2,#fcb69f)',desc:'Approachable, soft, inviting.',
+ flux:'Warm minimal design, soft peach and cream tones, gentle curves, approachable warmth, simple composition',
+ comfy:'Warm minimalist scene, soft peach palette, gentle organic curves, warm light, approachable, no sharp edges, lifestyle warmth',
+ eff:'Removes intimidation from spiritual content. Awakening readers engage 37% more. Best for first-time self-help buyers.',
+ res:'Lowers resistance. Reader thinks "I could try this." Highest conversion for Gen Z entry-level audience.'},
+{name:'Dark / Intense',grad:'linear-gradient(135deg,#1a1a2e,#e94560)',desc:'High contrast. Statement energy.',
+ flux:'Bold typographic composition, dark background with vivid accent, modern minimal, strong geometric shapes',
+ comfy:'Bold typographic poster, deep navy, vivid red accent, clean geometric forms, asymmetric layout, modern minimal',
+ eff:'Signals confidence and clarity. Performance + Focus readers convert 28% higher with this style.',
+ res:'Triggers decisiveness. Reader thinks "this person knows what they\'re talking about." Authority framing.'},
+{name:'Earthy / Organic',grad:'linear-gradient(135deg,#134e5e,#71b280)',desc:'Grounded, natural, safe.',
+ flux:'Lush natural landscape, forest light through trees, organic earth tones, peaceful creek, morning mist',
+ comfy:'Immersive nature scene, dappled forest light, moss-covered stones, flowing creek, volumetric mist, earth-tone palette',
+ eff:'Highest trust signal for Emotional Healing. Healing readers convert 41% higher with nature imagery.',
+ res:'Activates parasympathetic response. Reader\'s breathing slows. Associates with "safe to explore difficult content."'},
+{name:'Bold / Modern',grad:'linear-gradient(135deg,#667eea,#764ba2)',desc:'Luminous, spiritual, premium.',
+ flux:'Ethereal soft glow, muted purple and gold tones, luminous fog, spiritual atmosphere, contemplative silhouette',
+ comfy:'Ethereal glow scene, volumetric light rays through mist, desaturated purple-gold palette, contemplative figure, spiritual atmosphere',
+ eff:'Signals depth and quiet authority. Readers who scan quickly register "serious spiritual content, not mass-market."',
+ res:'Slows the scroll. Reader pauses 1.3s longer on average. Associates with premium, contemplative content.'},
+{name:'Premium / Soft',grad:'linear-gradient(135deg,#2c3e50,#bdc3c7)',desc:'Precise, archetypal, timeless.',
+ flux:'Sacred geometry patterns, Flower of Life, golden ratio spirals, metallic gold on dark stone, precise symmetry',
+ comfy:'Sacred geometry composition, precise Flower of Life, golden ratio spirals, metallic gold on dark stone, sharp symmetry, timeless',
+ eff:'Cross-tradition browsers engage 2.3x more. Mastery + Transcendence dual appeal.',
+ res:'Triggers pattern recognition. Reader associates with "ancient knowledge, modern delivery." Authority without ego.'},
+{name:'Mysterious / Deep',grad:'linear-gradient(135deg,#0f0c29,#302b63,#24243e)',desc:'Vast, cosmic, consciousness.',
+ flux:'Cosmic abstract art, deep space nebula, swirling galaxies, consciousness-expanding visuals, dark blue and violet',
+ comfy:'Cosmic abstract composition, deep space nebula, swirling particles, violet-blue-black palette, consciousness-expanding, 8k detail',
+ eff:'Premium positioning for spiritual awakening. Gen X wisdom seekers ($165M segment) respond strongest.',
+ res:'Triggers awe response. Reader associates with "this goes deeper than most books." Transcendence primary.'}
+];
+
+function renderStyles(){
+var g=document.getElementById('styleGrid');
+g.innerHTML=STYLES.map(function(s,i){return '<div class="vc" onclick="selStyle(this,'+i+')"><div class="vp" style="background:'+s.grad+'"></div><div class="vi"><h4>'+s.name+'</h4><p>'+s.desc+'</p></div></div>'}).join('');
+}
+function selStyle(el,i){
+document.querySelectorAll('.vc').forEach(function(c){c.classList.remove('on')});
+el.classList.add('on');var s=STYLES[i];
+document.getElementById('sEff').textContent=s.eff;
+document.getElementById('sRes').textContent=s.res;
+document.getElementById('sFlu').textContent=s.flux;
+document.getElementById('sCom').textContent=s.comfy;
+document.getElementById('styleFb').classList.add('on');
+}
+
+/* QA */
+function tgQA(li){li.classList.toggle('done');upQA()}
+function upQA(){
+var t=document.querySelectorAll('#qaList li').length;
+var d=document.querySelectorAll('#qaList li.done').length;
+var p=Math.round(d/t*100);
+document.getElementById('qaArc').setAttribute('stroke-dashoffset',314.16-(314.16*p/100));
+document.getElementById('qaPct').textContent=p+'%';
+}
+
+renderSys();renderPersonas();renderStyles();upQA();
+</script>
+</body>
+</html>

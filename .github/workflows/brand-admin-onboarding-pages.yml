@@ -15,6 +15,11 @@ on:
       - "brand-wizard-app/**"
       - "config/onboarding/**"
       - "scripts/onboarding/**"
+      - "brand_onboarding_hub.html"
+      - "brand_admin_master_onboarding.html"
+      - "brand_admin_weekly_os.html"
+      - "market_lane_matrix.html"
+      - "lane_examples_gallery.html"
       - ".github/workflows/brand-admin-onboarding-pages.yml"
 
 permissions:

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — Brand Admin Master Onboarding</title>
+<style>
+:root{--bg:#f9fafb;--white:#fff;--border:#e5e7eb;--accent:#7c3aed;--ad:#5b21b6;--text:#111827;--muted:#6b7280;--r:16px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.hero{text-align:center;padding:52px 20px 32px;background:linear-gradient(180deg,#f3f4f6,var(--bg));border-bottom:1px solid var(--border)}
+.hero h1{font-size:clamp(1.35rem,3.2vw,2.15rem);font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#5b21b6,#dc2626,#0891b2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--muted);max-width:580px;margin:14px auto 0;font-size:.9rem}
+.nav-top{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
+.nav-top a{font-size:.76rem;font-weight:600;color:var(--ad);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--white)}
+.mx{max-width:820px;margin:0 auto;padding:36px 20px 56px}
+.sl{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);font-weight:700;margin-bottom:8px}
+h2{font-size:1.25rem;font-weight:800;margin:28px 0 10px}
+p,li{font-size:.9rem;color:var(--muted);margin-bottom:12px;max-width:65ch}
+ul{margin:0 0 16px 18px}
+li{margin-bottom:8px}
+.cta-box{background:linear-gradient(135deg,#ede9fe,#ecfeff);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin:28px 0;text-align:center}
+.cta-box p{margin:0 auto 14px;font-size:.92rem;color:var(--text)}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#fff;padding:10px 20px;border-radius:12px;font-size:.82rem;font-weight:600;text-decoration:none;border:none}
+.btn.secondary{background:var(--white);color:var(--ad);border:1px solid var(--border)}
+.foot{font-size:.78rem;color:var(--muted);margin-top:40px;padding-top:20px;border-top:1px solid var(--border)}
+code{font-size:.85em;background:#f3f4f6;padding:2px 6px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="hero">
+<h1>Brand Admin — Master Onboarding</h1>
+<p>Spine page for the journey: vision, how the system works, and CTAs into proof surfaces and the interactive wizard.</p>
+<div class="nav-top">
+<a href="brand_onboarding_hub.html">Onboarding Hub</a>
+<a href="lane_examples_gallery.html">Output gallery</a>
+<a href="market_lane_matrix.html">Market matrix</a>
+<a href="brand_admin_weekly_os.html">Weekly OS</a>
+</div>
+</div>
+<div class="mx">
+<div class="sl">Pearl Prez framing</div>
+<h2>Vision</h2>
+<p>Brand admins operate a publishing system that spans lanes (self-help, manga, Pearl News, tools), markets, and proof-backed packaging. This onboarding path shows <em>real outputs</em> — honestly labeled when assets are still pending.</p>
+
+<div class="sl">How it works</div>
+<h2>System spine</h2>
+<ul>
+<li><strong>Registry</strong> — <code>config/onboarding/example_registry.json</code> lists every proof tile, comparison set membership, and <code>status</code> (<code>ready</code> / <code>planned</code> / <code>missing</code>).</li>
+<li><strong>Gallery &amp; matrix</strong> — Static pages validate the model locally and on Pages before the wizard deepens choices.</li>
+<li><strong>Wizard</strong> — React app (<code>brand-wizard-app</code>) surfaces matching example IDs after persona / format decisions using the same JSON.</li>
+</ul>
+
+<div class="sl">What brand admins do</div>
+<h2>Your operating loop</h2>
+<p>Choose narrative and primary reader in the wizard, confirm format bias (book vs manga-forward), then use the gallery to align stakeholders on proof quality. Use the matrix to see market × lane coverage before greenlighting spend.</p>
+
+<div class="cta-box">
+<p><strong>Next actions</strong></p>
+<div class="btn-row">
+<a class="btn" href="https://brand-admin-onboarding.pages.dev">Open live onboarding wizard</a>
+<a class="btn" href="lane_examples_gallery.html">Open lane examples gallery</a>
+<a class="btn secondary" href="market_lane_matrix.html">Open market × lane matrix</a>
+<a class="btn secondary" href="brand_admin_weekly_os.html">Open weekly OS</a>
+</div>
+<p style="margin-top:16px;font-size:.85rem;color:var(--muted)">Interactive wizard: run <code>npm run dev</code> in <code>brand-wizard-app</code> locally, or use the Cloudflare Pages deployment (<code>brand-admin-onboarding</code>) when published.</p>
+</div>
+
+<p class="foot">Until product sign-off, this page is supporting — not the only “start here.” Primary entry remains <a href="brand_onboarding_hub.html">Brand Onboarding Hub</a>. WordPress: link out to the deployed wizard URL; avoid duplicating registry JSON in WP.</p>
+</div>
+</body>
+</html>
