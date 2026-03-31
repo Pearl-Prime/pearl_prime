@@ -1,0 +1,139 @@
+# Translate bestseller atoms (PIVOT/TAKEAWAY/THREAD/PERMISSION/STORY) to CJK6 locales
+# Uses Qwen via Dashscope API. Translates one persona at a time to keep PRs reviewable.
+#
+# Usage: trigger manually via workflow_dispatch, pick persona + locale(s).
+
+name: Translate bestseller atoms (CJK6)
+
+concurrency:
+  group: translate-bestseller-${{ github.event.inputs.persona }}-${{ github.event.inputs.locale }}
+  cancel-in-progress: false
+
+on:
+  workflow_dispatch:
+    inputs:
+      persona:
+        description: 'Persona to translate (e.g. educators, healthcare_rns, or "all")'
+        required: true
+        type: string
+      locale:
+        description: 'Target locale (ja-JP, ko-KR, zh-CN, zh-HK, zh-SG, zh-TW, or "all")'
+        required: true
+        type: string
+        default: 'ja-JP'
+      slot:
+        description: 'Slot type filter (PIVOT, TAKEAWAY, THREAD, PERMISSION, STORY, or blank for all)'
+        required: false
+        type: string
+        default: ''
+      dry_run:
+        description: 'Dry run (show manifest only, no API calls)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  translate:
+    runs-on: self-hosted
+    timeout-minutes: 120
+    env:
+      # Map repo secrets to what the translation scripts expect
+      DASHSCOPE_API_KEY: ${{ secrets.QWEN_API_KEY }}
+      DASHSCOPE_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
+      DASHSCOPE_MODEL: ${{ secrets.QWEN_MODEL }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install --quiet openai pyyaml
+
+      - name: Build translation command
+        id: cmd
+        run: |
+          CMD="python3 scripts/translate_atoms_all_locales_cloud.py"
+
+          PERSONA="${{ github.event.inputs.persona }}"
+          LOCALE="${{ github.event.inputs.locale }}"
+          SLOT="${{ github.event.inputs.slot }}"
+          DRY="${{ github.event.inputs.dry_run }}"
+
+          if [ "$PERSONA" != "all" ]; then
+            CMD="$CMD --persona $PERSONA"
+          fi
+
+          if [ "$LOCALE" = "all" ]; then
+            CMD="$CMD --all-locales"
+          else
+            CMD="$CMD --locale $LOCALE"
+          fi
+
+          if [ -n "$SLOT" ]; then
+            CMD="$CMD --slot $SLOT"
+          fi
+
+          if [ "$DRY" = "true" ]; then
+            CMD="$CMD --dry-run"
+          fi
+
+          CMD="$CMD --resume --batch-size 5 --rate-limit 0.15"
+
+          echo "cmd=$CMD" >> "$GITHUB_OUTPUT"
+          echo "Running: $CMD"
+
+      - name: Run translation
+        run: |
+          PYTHONPATH=. ${{ steps.cmd.outputs.cmd }}
+
+      - name: Report coverage
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          PYTHONPATH=. python3 scripts/ci/report_translation_coverage.py || true
+
+      - name: Create PR with translations
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          PERSONA="${{ github.event.inputs.persona }}"
+          LOCALE="${{ github.event.inputs.locale }}"
+
+          # Check if there are new files
+          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard atoms/)" ]; then
+            echo "No new translations generated."
+            exit 0
+          fi
+
+          BRANCH="agent/translate-${PERSONA}-${LOCALE}-$(date +%Y%m%d-%H%M%S)"
+          git checkout -b "$BRANCH"
+          git add atoms/*/*/locales/ atoms/*/*/*/locales/
+          git commit -m "feat(localization): translate ${PERSONA} bestseller atoms to ${LOCALE}
+
+          Automated CJK6 translation via Qwen/Dashscope.
+          Persona: ${PERSONA}
+          Locale(s): ${LOCALE}
+
+          Co-Authored-By: Qwen (Dashscope) <noreply@alibaba.com>"
+
+          git push -u origin "$BRANCH"
+
+          gh pr create \
+            --title "feat(localization): ${PERSONA} bestseller atoms → ${LOCALE}" \
+            --body "Automated CJK6 translation via workflow dispatch.
+
+          - Persona: ${PERSONA}
+          - Locale(s): ${LOCALE}
+          - Slot(s): ${SLOT:-all}
+          - Pipeline: \`translate_atoms_all_locales_cloud.py\`
+
+          Review sample translations before merging." \
+            --head "$BRANCH"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SLOT: ${{ github.event.inputs.slot }}
