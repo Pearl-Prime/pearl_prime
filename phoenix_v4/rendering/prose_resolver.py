@@ -129,19 +129,29 @@ class RenderResult:
 
 
 def _parse_canonical_with_prose(path: Path, persona: str, topic: str, engine: str) -> dict[str, str]:
-    """Parse STORY CANONICAL.txt; return atom_id -> prose (content between second --- and third ---)."""
+    """Parse STORY engine CANONICAL.txt; atom_id contract matches assembly_compiler._parse_canonical_txt."""
     if not path.exists():
         return {}
+    from phoenix_v4.planning.assembly_compiler import _resolve_story_role
+
     text = path.read_text(encoding="utf-8")
-    parts = re.split(r"\n---\s*\n", text)
+    # Per-block: ## RAW vNN --- metadata --- prose --- (same boundaries as Stage 3 parser)
+    block = re.compile(
+        r"^##\s+([A-Z_]+)\s+v(\d+)\s*\n---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*?)(?=\n---|\Z)",
+        re.MULTILINE,
+    )
     out: dict[str, str] = {}
-    for i, part in enumerate(parts):
-        m = re.search(r"##\s+([A-Z_]+)\s+v(\d+)", part)
-        if m and i + 2 < len(parts):
-            role, ver = m.group(1), m.group(2)
+    for m in block.finditer(text):
+        raw_role, ver, metadata, prose = m.group(1), m.group(2), m.group(3), m.group(4)
+        role = _resolve_story_role(raw_role, ver, metadata)
+        if role is None:
+            continue
+        if raw_role == role:
             atom_id = f"{persona}_{topic}_{engine}_{role}_v{ver}"
-            prose = parts[i + 2].strip()
-            out[atom_id] = prose
+        else:
+            raw_slug = re.sub(r"[^A-Za-z0-9]+", "_", raw_role).strip("_").upper() or "LEGACY"
+            atom_id = f"{persona}_{topic}_{engine}_{role}_{raw_slug}_v{ver}"
+        out[atom_id] = prose.strip()
     return out
 
 
