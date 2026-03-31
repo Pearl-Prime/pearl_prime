@@ -254,8 +254,8 @@ def resolve_prose_for_plan(
             for slot_type in ("STORY", "REFLECTION", "EXERCISE", "HOOK", "SCENE", "INTEGRATION", "TEACHING"):
                 prose_map.update(_load_teacher_prose(teacher_root, slot_type))
 
-    # Non-STORY canonical (REFLECTION, EXERCISE, HOOK, SCENE, INTEGRATION) from atoms/<persona>/<topic>/<slot_type>/CANONICAL.txt
-    for slot_type in ("REFLECTION", "EXERCISE", "HOOK", "SCENE", "INTEGRATION"):
+    # Non-STORY canonical (REFLECTION, EXERCISE, HOOK, SCENE, INTEGRATION, PIVOT, TAKEAWAY, THREAD, PERMISSION) from atoms/<persona>/<topic>/<slot_type>/CANONICAL.txt
+    for slot_type in ("REFLECTION", "EXERCISE", "HOOK", "SCENE", "INTEGRATION", "PIVOT", "TAKEAWAY", "THREAD", "PERMISSION"):
         path = atoms_root / ctx.persona_id / ctx.topic_id / slot_type / "CANONICAL.txt"
         prose_map.update(_parse_block_file_with_prose(path, ctx.persona_id, ctx.topic_id, slot_type))
 

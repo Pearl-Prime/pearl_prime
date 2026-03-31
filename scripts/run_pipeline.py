@@ -209,6 +209,7 @@ def main() -> int:
     ap.add_argument("--render-formats", default="txt", help="Comma-separated book output formats (default: txt)")
     ap.add_argument("--render-dir", default=None, help="Output dir for rendered book (default: artifacts/rendered/<plan_id>)")
     ap.add_argument("--skip-word-count-gate", action="store_true", help="Bypass word count minimum gate (use when content density work is in progress)")
+    ap.add_argument("--allow-placeholders", action="store_true", help="Allow placeholder/silence slots in rendered output (omit from prose, log warning)")
     ap.add_argument(
         "--enforce-book-pass-gate",
         action="store_true",
@@ -1194,12 +1195,13 @@ def main() -> int:
             render_dir = Path(args.render_dir) if args.render_dir else (REPO_ROOT / "artifacts" / "rendered" / (out.get("plan_id") or out.get("plan_hash", "book")))
             formats_list = [f.strip().lower() for f in (args.render_formats or "txt").split(",") if f.strip()]
             try:
+                _allow_ph = getattr(args, "allow_placeholders", False) or getattr(args, "skip_word_count_gate", False)
                 written = render_book(
                     out,
                     render_dir,
                     formats=formats_list,
-                    allow_placeholders=False,
-                    on_missing="fail",
+                    allow_placeholders=_allow_ph,
+                    on_missing="placeholder" if _allow_ph else "fail",
                     title_page=True,
                     include_slot_labels_qa=False,
                     enforce_word_count=not args.skip_word_count_gate,

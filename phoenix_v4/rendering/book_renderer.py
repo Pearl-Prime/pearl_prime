@@ -9,10 +9,13 @@ Delivery: clean_for_delivery() strips scaffolding + resolves loc-var fallbacks.
 from __future__ import annotations
 
 import hashlib
+import logging
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, List, Optional
+
+logger = logging.getLogger(__name__)
 
 from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
 
@@ -782,13 +785,17 @@ def _get_prose(
     render_result: RenderResult,
     options: RenderOptions,
 ) -> str:
-    """Return prose for this slot. Normalizes placeholders, silence, missing."""
+    """Return prose for this slot. Normalizes placeholders, silence, missing.
+
+    When allow_placeholders=True, placeholder/silence slots return empty string
+    (gracefully omitted from rendered output) with a logged warning.
+    When on_missing="placeholder", missing atoms also return empty string.
+    """
     if _is_placeholder_or_silence(atom_id):
-        if not options.allow_placeholders:
-            return f"[Placeholder: {slot_type}]"  # caller may have chosen to fail earlier
-        if atom_id.startswith("silence:"):
-            return f"[Silence: {slot_type}]"
-        return f"[Placeholder: {slot_type}]"
+        if options.allow_placeholders:
+            logger.warning("Skipping %s slot (atom_id=%s) — placeholder/silence omitted from rendered output", slot_type, atom_id)
+            return ""
+        return f"[Placeholder: {slot_type}]"  # caller may have chosen to fail earlier
 
     prose = prose_map.get(atom_id)
     if prose is not None and prose != "":
@@ -796,10 +803,12 @@ def _get_prose(
     if atom_id in render_result.missing_ids:
         if options.on_missing == "fail":
             raise ValueError(f"Missing prose for atom_id: {atom_id}")
-        return f"[Missing: {atom_id}]"
+        logger.warning("Missing prose for atom_id=%s — omitted from rendered output", atom_id)
+        return ""
     if options.on_missing == "fail":
         raise ValueError(f"Missing prose for atom_id: {atom_id}")
-    return f"[Missing: {atom_id}]"
+    logger.warning("Missing prose for atom_id=%s — omitted from rendered output", atom_id)
+    return ""
 
 
 def _wrap_practice_fallback_exercise(prose: str, plan: dict[str, Any], chapter_index: int, slot_index: int) -> str:
@@ -1000,17 +1009,31 @@ def render_book(
     )
 
     # Normalize edge cases: fail on placeholders or missing when not allowed
-    if not allow_placeholders and render_result.placeholder_or_silence_ids:
-        raise ValueError(
-            "Plan contains placeholders or silence slots. Resolve upstream or use allow_placeholders=True. "
-            f"First: {render_result.placeholder_or_silence_ids[0]}"
-        )
-    if on_missing == "fail" and render_result.missing_ids:
-        raise ValueError(
-            "Missing prose for atom_ids (not found in atoms/ or teacher_banks or compression_atoms): "
-            + ", ".join(render_result.missing_ids[:5])
-            + (f" ... and {len(render_result.missing_ids) - 5} more" if len(render_result.missing_ids) > 5 else "")
-        )
+    if render_result.placeholder_or_silence_ids:
+        if not allow_placeholders:
+            raise ValueError(
+                "Plan contains placeholders or silence slots. Resolve upstream or use allow_placeholders=True. "
+                f"First: {render_result.placeholder_or_silence_ids[0]}"
+            )
+        else:
+            logger.warning(
+                "Plan has %d placeholder/silence slots — will be omitted from rendered output. First: %s",
+                len(render_result.placeholder_or_silence_ids),
+                render_result.placeholder_or_silence_ids[0],
+            )
+    if render_result.missing_ids:
+        if on_missing == "fail":
+            raise ValueError(
+                "Missing prose for atom_ids (not found in atoms/ or teacher_banks or compression_atoms): "
+                + ", ".join(render_result.missing_ids[:5])
+                + (f" ... and {len(render_result.missing_ids) - 5} more" if len(render_result.missing_ids) > 5 else "")
+            )
+        else:
+            logger.warning(
+                "Missing prose for %d atom_ids — will be omitted. First 5: %s",
+                len(render_result.missing_ids),
+                ", ".join(render_result.missing_ids[:5]),
+            )
 
     # Load mechanism alias for this persona × topic (gracefully no-ops if not found)
     persona_id = (plan.get("persona_id") or (plan.get("book_spec") or {}).get("persona_id") or "").strip()
