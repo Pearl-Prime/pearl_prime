@@ -1,0 +1,30 @@
+{
+  "panels": [
+    {"panel_id": "p1_1", "chapter_pct": 5, "emotional_band": 2, "gutter_after": "standard", "size_pct": 15, "color_temperature": {"temp_k": 4000, "saturation_pct": 60}},
+    {"panel_id": "p1_2", "chapter_pct": 15, "emotional_band": 3, "gutter_after": "standard", "size_pct": 20, "color_temperature": {"temp_k": 3500, "saturation_pct": 70}},
+    {"panel_id": "p1_3", "chapter_pct": 30, "emotional_band": 4, "gutter_after": "processing", "size_pct": 25, "color_temperature": {"temp_k": 3000, "saturation_pct": 75}},
+    {"panel_id": "p1_4", "chapter_pct": 45, "emotional_band": 5, "gutter_after": "therapeutic", "size_pct": 30, "color_temperature": {"temp_k": 3200, "saturation_pct": 70}},
+    {"panel_id": "p2_1", "chapter_pct": 55, "emotional_band": 3, "gutter_after": "standard", "size_pct": 25, "color_temperature": {"temp_k": 5000, "saturation_pct": 55}},
+    {"panel_id": "p2_2", "chapter_pct": 60, "emotional_band": 2, "gutter_after": "standard", "size_pct": 15, "breath_role": "inhale", "color_temperature": {"temp_k": 5200, "saturation_pct": 50}},
+    {"panel_id": "p2_3", "chapter_pct": 65, "emotional_band": 2, "gutter_after": "standard", "size_pct": 20, "breath_role": "inhale", "color_temperature": {"temp_k": 5500, "saturation_pct": 48}},
+    {"panel_id": "p2_4", "chapter_pct": 70, "emotional_band": 1, "gutter_after": "standard", "size_pct": 45, "breath_role": "hold", "fractal_target": {"fd_range": [1.3, 1.5], "source_category": "arboreal", "coverage_pct": 80, "therapeutic_role": "breath_hold"}, "color_temperature": {"temp_k": 6000, "saturation_pct": 45}},
+    {"panel_id": "p2_5", "chapter_pct": 75, "emotional_band": 1, "gutter_after": "processing", "size_pct": 25, "breath_role": "exhale", "color_temperature": {"temp_k": 6200, "saturation_pct": 42}},
+    {"panel_id": "p2_6", "chapter_pct": 80, "emotional_band": 1, "gutter_after": "breath", "size_pct": 20, "breath_role": "exhale", "fractal_target": {"fd_range": [1.3, 1.5], "source_category": "atmospheric", "coverage_pct": 60, "therapeutic_role": "resolution"}, "color_temperature": {"temp_k": 6500, "saturation_pct": 40}},
+    {"panel_id": "p3_1", "chapter_pct": 90, "emotional_band": 1, "gutter_after": "standard", "size_pct": 60, "fractal_target": {"fd_range": [1.3, 1.4], "source_category": "aquatic", "coverage_pct": 90, "therapeutic_role": "afterglow"}, "color_temperature": {"temp_k": 4500, "saturation_pct": 35}},
+    {"panel_id": "p3_2", "chapter_pct": 95, "emotional_band": 1, "gutter_after": "standard", "size_pct": 50, "color_temperature": {"temp_k": 4800, "saturation_pct": 32}}
+  ],
+  "breath_map": {
+    "breath_sequences": [
+      {
+        "page_range": [2, 2],
+        "phase_panels": {
+          "inhale": ["p2_2", "p2_3"],
+          "hold": ["p2_4"],
+          "exhale": ["p2_5", "p2_6"]
+        },
+        "target_state": "parasympathetic_activation",
+        "chapter_section": "resolution"
+      }
+    ]
+  }
+}
