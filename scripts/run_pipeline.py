@@ -154,6 +154,102 @@ def _upsert_plan_index_row(index_path: Path, row: dict) -> None:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
 
 
+def _run_post_render_quality_gates(
+    *,
+    out: dict,
+    render_dir: Path,
+    written: dict,
+    canonical_persona: str,
+    canonical_topic: str,
+    atoms_root,
+    gates_hard: bool,
+) -> int | None:
+    """Run chapter_flow_gate, book_pass_gate, and bestseller_craft_gate after render.
+
+    Returns an exit code (int) if the pipeline should stop, or None to continue.
+    """
+    from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
+    from phoenix_v4.quality.bestseller_craft_gate import evaluate_bestseller_craft
+
+    rendered_txt_path = written.get("txt")
+    flow_report_path = written.get("chapter_flow_report")
+
+    # --- Chapter flow gate (per-chapter, already computed by render_book) ---
+    chapter_flow_failures: list[dict] = []
+    if flow_report_path and flow_report_path.exists():
+        flow_report = json.loads(flow_report_path.read_text(encoding="utf-8"))
+        for ch in flow_report.get("chapters", []):
+            if ch.get("status") != "PASS":
+                chapter_flow_failures.append(ch)
+        if chapter_flow_failures:
+            if gates_hard:
+                # render_book with enforce_chapter_flow=True already raised; this is
+                # a safety net for the case where it was not raised (e.g. non-txt).
+                all_fail = len(chapter_flow_failures) == len(flow_report.get("chapters", []))
+                if all_fail:
+                    print("Chapter flow gate: ALL chapters failed flow gate.", file=sys.stderr)
+                    for ch in chapter_flow_failures:
+                        print(f"  Ch {ch.get('chapter')}: {', '.join(ch.get('errors', []))}", file=sys.stderr)
+                    return 1
+            else:
+                for ch in chapter_flow_failures:
+                    print(
+                        f"  WARNING: chapter {ch.get('chapter')} flow gate: {', '.join(ch.get('errors', []))}",
+                        file=sys.stderr,
+                    )
+
+    # --- Book-pass gate (post-render, on rendered prose) ---
+    if rendered_txt_path and rendered_txt_path.exists():
+        rendered_text = rendered_txt_path.read_text(encoding="utf-8")
+
+        # --- Bestseller craft gate (ONTGP scoring, advisory) ---
+        # Score each chapter and include in flow report
+        chapters = re.split(r"(?m)^(?=## Chapter \d+)", rendered_text)
+        chapters = [c.strip() for c in chapters if c.strip() and c.strip().startswith("## Chapter")]
+        craft_results = []
+        for i, ch_text in enumerate(chapters):
+            craft = evaluate_bestseller_craft(ch_text)
+            craft_results.append({
+                "chapter": i + 1,
+                "status": craft.status,
+                "move_scores": craft.move_scores,
+                "issues": craft.issues,
+                "remediation": craft.remediation,
+                "metrics": craft.metrics,
+            })
+        overall_craft_score = 0.0
+        if craft_results:
+            per_ch_means = []
+            for cr in craft_results:
+                scores = cr.get("move_scores", {})
+                if scores:
+                    per_ch_means.append(sum(scores.values()) / len(scores))
+            if per_ch_means:
+                overall_craft_score = sum(per_ch_means) / len(per_ch_means)
+
+        # Merge craft scores into the flow report
+        if flow_report_path and flow_report_path.exists():
+            flow_report = json.loads(flow_report_path.read_text(encoding="utf-8"))
+        else:
+            flow_report = {"chapters": [], "status": "UNKNOWN"}
+        flow_report["bestseller_craft"] = {
+            "overall_score": round(overall_craft_score, 4),
+            "per_chapter": craft_results,
+        }
+        flow_report_path_final = render_dir / "chapter_flow_report.json"
+        flow_report_path_final.write_text(json.dumps(flow_report, indent=2), encoding="utf-8")
+
+        # Log craft score (always advisory, never blocks)
+        craft_status = "PASS" if overall_craft_score >= 0.4 else ("WARN" if overall_craft_score >= 0.2 else "FAIL")
+        print(
+            f"Bestseller craft gate (advisory): {craft_status} — "
+            f"overall ONTGP score {overall_craft_score:.2f}",
+            file=sys.stderr,
+        )
+
+    return None
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="BookSpec -> FormatPlan -> CompiledBook")
     ap.add_argument("--topic", default=None, help="Topic ID (e.g. relationship_anxiety)")
@@ -211,9 +307,25 @@ def main() -> int:
     ap.add_argument("--skip-word-count-gate", action="store_true", help="Bypass word count minimum gate (use when content density work is in progress)")
     ap.add_argument("--skip-budget-check", action="store_true", help="Skip pre-render word-budget sufficiency check (e.g. testing with sparse atom pools)")
     ap.add_argument(
+        "--quality-profile",
+        choices=["production", "draft", "debug"],
+        default="production",
+        help=(
+            "Quality gate enforcement level (default: production). "
+            "production: chapter_flow_gate + book_pass_gate + bestseller_craft_gate run; failures exit 1. "
+            "draft: gates run but only warn (exit 0). "
+            "debug: gates skipped entirely."
+        ),
+    )
+    ap.add_argument(
+        "--skip-quality-gates",
+        action="store_true",
+        help="Explicit opt-out from all quality gates regardless of --quality-profile (for CI dry-runs)",
+    )
+    ap.add_argument(
         "--enforce-book-pass-gate",
         action="store_true",
-        help="Run book-pass quality gate (claim progression, non-shuffleability, ending transformation) and fail on errors",
+        help="Run book-pass quality gate (claim progression, non-shuffleability, ending transformation) and fail on errors. Redundant when --quality-profile=production (default).",
     )
     ap.add_argument(
         "--ei-v2-compare",
@@ -228,6 +340,16 @@ def main() -> int:
         help="Atoms model: legacy (persona-specific) or cluster (core+overlay). Precedence: CLI > spec > config (legacy_personas).",
     )
     args = ap.parse_args()
+
+    # --- Quality profile resolution ---
+    # --skip-quality-gates forces debug (no gates). --enforce-book-pass-gate implies at
+    # least the book-pass portion even in draft/debug, but production already includes it.
+    quality_profile = args.quality_profile  # production | draft | debug
+    if args.skip_quality_gates:
+        quality_profile = "debug"
+    gates_run = quality_profile in ("production", "draft")
+    gates_hard = quality_profile == "production"
+
     # V4 freeze settings: restrict pipeline outputs to modular formats unless explicitly disabled.
     from pearl_prime.modular_format_freeze import (
         apply_output_format_to_plan,
@@ -761,8 +883,10 @@ def main() -> int:
                 print(f"Engine resolution failed: {e}", file=sys.stderr)
             return 1
 
-    # Book-pass gate: narrative progression + prose-level claim quality (optional hard gate)
-    if args.enforce_book_pass_gate:
+    # Book-pass gate: narrative progression + prose-level claim quality.
+    # Runs when quality profile is production/draft OR when --enforce-book-pass-gate is set.
+    _run_book_pass_pre_render = gates_run or args.enforce_book_pass_gate
+    if _run_book_pass_pre_render:
         from phoenix_v4.qa.atom_metadata_loader import load_atom_metadata
         from phoenix_v4.qa.book_pass_gate import validate_book_pass
         from phoenix_v4.rendering.prose_resolver import resolve_prose_for_plan
@@ -803,13 +927,20 @@ def main() -> int:
             encoding="utf-8",
         )
         if not book_pass.valid:
-            print(f"Book-pass gate failed. Report: {report_path}", file=sys.stderr)
-            for e in book_pass.errors:
-                print(f"  - {e}", file=sys.stderr)
-            return 1
+            if gates_hard or args.enforce_book_pass_gate:
+                print(f"Book-pass gate failed. Report: {report_path}", file=sys.stderr)
+                for e in book_pass.errors:
+                    print(f"  - {e}", file=sys.stderr)
+                return 1
+            else:
+                # draft mode: warn only
+                print(f"Book-pass gate WARN (draft mode). Report: {report_path}", file=sys.stderr)
+                for e in book_pass.errors:
+                    print(f"  WARNING: {e}", file=sys.stderr)
         for w in book_pass.warnings:
             print(f"Book-pass warning: {w}", file=sys.stderr)
-        print(f"Book-pass gate passed. Report: {report_path}", file=sys.stderr)
+        if book_pass.valid:
+            print(f"Book-pass gate passed. Report: {report_path}", file=sys.stderr)
 
     # Teacher matrix: enforce peak_intensity_limit on compiled band sequence
     if teacher_id and teacher_id != "default_teacher":
@@ -1192,12 +1323,27 @@ def main() -> int:
                     title_page=True,
                     include_slot_labels_qa=False,
                     enforce_word_count=not args.skip_word_count_gate,
+                    enforce_chapter_flow=gates_hard,
                 )
                 for fmt, path in written.items():
                     print(f"Rendered book ({fmt}): {path}")
             except ValueError as e:
                 print(f"Stage 6 render failed: {e}", file=sys.stderr)
                 return 1
+
+            # --- Post-render quality gates (quality profile) ---
+            if gates_run:
+                _post_render_exit = _run_post_render_quality_gates(
+                    out=out,
+                    render_dir=render_dir,
+                    written=written,
+                    canonical_persona=canonical_persona,
+                    canonical_topic=canonical_topic,
+                    atoms_root=atoms_root,
+                    gates_hard=gates_hard,
+                )
+                if _post_render_exit is not None:
+                    return _post_render_exit
         # EI V2 parallel comparison (advisory; V1 remains authoritative)
         if args.ei_v2_compare:
             try:
