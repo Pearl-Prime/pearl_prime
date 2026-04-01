@@ -747,8 +747,8 @@ def main() -> int:
     arc_errors = validate_arc_alignment(compiled, arc)
     if arc_errors:
         for e in arc_errors:
-            print(f"Arc alignment warning: {e}", file=sys.stderr)
-        # Downgraded from hard fail to warning — atom band diversity gap is a known content issue
+            print(f"Arc alignment failed: {e}", file=sys.stderr)
+        return 1
 
     from phoenix_v4.planning.engine_loader import load_engine
     engine_def = load_engine(arc.engine)

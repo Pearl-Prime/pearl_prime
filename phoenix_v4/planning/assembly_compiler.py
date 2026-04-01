@@ -437,6 +437,8 @@ def _enforce_structural_constraints(
     pool_index: "PoolIndex",
     context: "ResolverContext",
     chapter_count: int,
+    required_band_by_chapter: Optional[dict[int, int]] = None,
+    band_by_id: Optional[dict[str, int]] = None,
 ) -> list[str]:
     """
     Post-assembly pass: enforce structural constraints from book_pass_gate.
@@ -479,26 +481,47 @@ def _enforce_structural_constraints(
     # identity_stage progresses monotonically AND within each stage, lower-cost
     # atoms appear earlier. This satisfies both the identity_shift_gate
     # (monotonic) and cost_gradient_gate (escalating) invariants.
+    #
+    # BAND-AWARE: When required_band_by_chapter is set, sort within band groups
+    # instead of globally. This prevents the sort from moving atoms across band
+    # boundaries and breaking arc emotional_curve alignment.
     STAGE_ORD = {"pre_awareness": 0, "destabilization": 1, "experimentation": 2, "self_claim": 3}
-    all_story_entries: list[tuple[int, str]] = []  # (global_idx, atom_id)
-    for ch in range(chapter_count):
-        for global_idx, aid in story_slots_by_chapter[ch]:
-            all_story_entries.append((global_idx, aid))
 
-    if len(all_story_entries) >= 2:
-        positions = [e[0] for e in all_story_entries]
-        aids = [e[1] for e in all_story_entries]
+    def _sort_key(a: str) -> tuple:
+        meta = meta_by_id.get(a, {})
+        stage = STAGE_ORD.get(meta.get("identity_stage", "pre_awareness"), 0)
+        ci = meta.get("cost_intensity", 2)
+        return (stage, ci)
 
-        # Sort by identity_stage first (monotonic progression), then cost_intensity (escalation)
-        def _sort_key(a: str) -> tuple:
-            meta = meta_by_id.get(a, {})
-            stage = STAGE_ORD.get(meta.get("identity_stage", "pre_awareness"), 0)
-            ci = meta.get("cost_intensity", 2)
-            return (stage, ci)
+    if required_band_by_chapter is not None and band_by_id is not None:
+        # Band-aware sort: group atoms by their band, sort within each group,
+        # then place them back respecting chapter band requirements.
+        band_groups: dict[int, list[tuple[int, str]]] = {}
+        for ch in range(chapter_count):
+            for global_idx, aid in story_slots_by_chapter[ch]:
+                band = int(band_by_id.get(aid, 3))
+                band_groups.setdefault(band, []).append((global_idx, aid))
 
-        sorted_aids = sorted(aids, key=_sort_key)
-        for i, pos in enumerate(positions):
-            atom_ids[pos] = sorted_aids[i]
+        for band, entries in band_groups.items():
+            if len(entries) >= 2:
+                positions = [e[0] for e in entries]
+                aids = [e[1] for e in entries]
+                sorted_aids = sorted(aids, key=_sort_key)
+                for i, pos in enumerate(positions):
+                    atom_ids[pos] = sorted_aids[i]
+    else:
+        # Fallback: global sort (no arc band constraint)
+        all_story_entries: list[tuple[int, str]] = []
+        for ch in range(chapter_count):
+            for global_idx, aid in story_slots_by_chapter[ch]:
+                all_story_entries.append((global_idx, aid))
+
+        if len(all_story_entries) >= 2:
+            positions = [e[0] for e in all_story_entries]
+            aids = [e[1] for e in all_story_entries]
+            sorted_aids = sorted(aids, key=_sort_key)
+            for i, pos in enumerate(positions):
+                atom_ids[pos] = sorted_aids[i]
 
     # 3. Callback completion: drop setup atoms without matching return
     setup_ids: set[str] = set()
@@ -859,6 +882,8 @@ def compile_plan(
             pool_index=pool_index,
             context=context,
             chapter_count=chapter_count,
+            required_band_by_chapter=required_band_by_chapter,
+            band_by_id=band_by_id,
         )
         # Recalculate dominant_band_sequence after STORY atom reordering
         dominant_band_sequence = []
