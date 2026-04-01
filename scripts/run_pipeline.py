@@ -332,6 +332,17 @@ def main() -> int:
         action="store_true",
         help="Run EI V2 AI techniques in parallel with V1 and produce comparison report (artifacts/ei_v2/)",
     )
+    ap.add_argument(
+        "--enforce-scene-gate",
+        action="store_true",
+        help="Run scene anti-genericity gate after render (§8 overlay spec: three-detail rule, collision scan, action-state test, location repetition)",
+    )
+    ap.add_argument(
+        "--scene-gate-mode",
+        choices=["production", "draft"],
+        default="production",
+        help="Scene gate mode: production (blocking) or draft (warn only). Default: production.",
+    )
     ap.add_argument("--atoms-root", default=None, help="Atoms root (e.g. atoms/zh-TW). Default: repo atoms/")
     ap.add_argument(
         "--atoms-model",
@@ -1365,6 +1376,62 @@ def main() -> int:
                 print(f"Output contract: {_oc_path}")
             except ValueError as e:
                 print(f"Stage 6 render failed: {e}", file=sys.stderr)
+                return 1
+
+        # Scene anti-genericity gate (§8 overlay spec) — post-render quality check
+        if args.enforce_scene_gate and args.render_book:
+            try:
+                from phoenix_v4.qa.scene_anti_genericity_gate import enforce_scene_gate
+
+                # Extract rendered chapter texts from the plan output
+                chapter_proses: list[str] = []
+                prose_map = out.get("prose_map") or {}
+                chapter_slot_seq = out.get("chapter_slot_sequence", [])
+                for ch_idx, slots in enumerate(chapter_slot_seq):
+                    ch_text_parts = []
+                    for slot_label in (slots if isinstance(slots, list) else [slots]):
+                        key = f"{ch_idx}:{slot_label}"
+                        prose = prose_map.get(key, "")
+                        if prose:
+                            ch_text_parts.append(prose)
+                    if ch_text_parts:
+                        chapter_proses.append("\n\n".join(ch_text_parts))
+
+                if chapter_proses:
+                    scene_result = enforce_scene_gate(
+                        chapter_proses,
+                        mode=args.scene_gate_mode,
+                    )
+                    scene_report_dir = REPO_ROOT / "artifacts" / "scene_gate"
+                    scene_report_dir.mkdir(parents=True, exist_ok=True)
+                    scene_report_path = scene_report_dir / f"{out.get('plan_hash', 'book')}.json"
+                    scene_report_path.write_text(
+                        json.dumps(
+                            {
+                                "status": scene_result.status,
+                                "mode": scene_result.mode,
+                                "blocking": scene_result.blocking,
+                                "errors": scene_result.report.errors,
+                                "warnings": scene_result.report.warnings,
+                                "metrics": scene_result.report.metrics,
+                            },
+                            indent=2,
+                        ),
+                        encoding="utf-8",
+                    )
+                    if scene_result.blocking:
+                        print(f"Scene anti-genericity gate FAILED. Report: {scene_report_path}", file=sys.stderr)
+                        for e in scene_result.report.errors:
+                            print(f"  - {e}", file=sys.stderr)
+                        return 1
+                    if scene_result.report.warnings:
+                        for w in scene_result.report.warnings:
+                            print(f"Scene gate warning: {w}", file=sys.stderr)
+                    print(f"Scene anti-genericity gate {scene_result.status}. Report: {scene_report_path}", file=sys.stderr)
+                else:
+                    print("Scene gate skipped: no chapter prose available.", file=sys.stderr)
+            except Exception as e:
+                print(f"Scene anti-genericity gate error: {e}", file=sys.stderr)
                 return 1
 
             # --- Post-render quality gates (quality profile) ---
