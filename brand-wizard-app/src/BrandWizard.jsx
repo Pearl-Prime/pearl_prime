@@ -687,16 +687,35 @@ const VOICE_TONE_10 = {
 // SHARED COMPONENTS
 // ═══════════════════════════════════════════════════════════
 
+function StepHero({ eyebrow, title, subtitle, helper }) {
+  return (
+    <div className="mb-8">
+      {eyebrow ? <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">{eyebrow}</p> : null}
+      <h2 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{title}</h2>
+      {subtitle ? <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-600">{subtitle}</p> : null}
+      {helper ? <p className="mt-2 text-xs text-gray-400">{helper}</p> : null}
+    </div>
+  );
+}
+
 function ProgressBar({ step, total, labels }) {
   const pct = ((step + 1) / total) * 100;
   return (
-    <div className="mb-6">
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-xs font-bold text-gray-600 uppercase tracking-wider">Step {step + 1} of {total} — {labels[step]}</span>
-        <span className="text-xs text-gray-400">{Math.round(pct)}%</span>
+    <div className="brand-studio-panel mb-6 px-5 py-4 sm:mb-8">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-violet-600">
+            Step {step + 1} of {total}
+          </p>
+          <p className="text-sm font-bold text-gray-900">{labels[step]}</p>
+        </div>
+        <span className="text-xs font-semibold tabular-nums text-gray-400">{Math.round(pct)}%</span>
       </div>
-      <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-        <div className="h-full bg-gradient-to-r from-gray-800 to-gray-600 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
+      <div className="h-2 overflow-hidden rounded-full bg-gray-100/90">
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-700 transition-all duration-500 ease-out"
+          style={{ width: `${pct}%` }}
+        />
       </div>
     </div>
   );
@@ -1037,13 +1056,15 @@ function PersonaImpactPanel({ state }) {
 function Step1Archetype({ state, update }) {
   return (
     <div>
-      <div className="bg-indigo-50 rounded-xl p-4 mb-6 border border-indigo-100">
-        <p className="text-sm text-indigo-800 font-medium">Let's begin designing your brand!</p>
-        <p className="text-xs text-indigo-600 mt-1">Your archetype is the emotional foundation of everything your brand creates. It defines the feeling readers associate with you across every title, cover, video, and social post. Each archetype carries a unique philosophy about how healing and growth work — choose the one that resonates with how you see the world.</p>
+      <StepHero
+        eyebrow="Foundation"
+        title="Choose your emotional world"
+        subtitle="Your archetype is the feeling readers associate with you — across prose, covers, video, and social. Pick the worldview that matches how you want to show up."
+        helper="Each card includes a short vision of the world your brand invites readers into."
+      />
+      <div className="mb-6 rounded-xl border border-indigo-100/80 bg-indigo-50/60 px-4 py-3 backdrop-blur-sm">
+        <p className="text-xs font-medium text-indigo-900">This is the highest-leverage choice in the studio — everything else builds on the emotional territory you choose here.</p>
       </div>
-      <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Choose Your Emotional World</h2>
-      <p className="text-sm text-gray-500 mt-1 mb-2">This single choice sets the foundation for your entire brand. It determines your writing voice, visual aesthetic, exercise style, video treatment, audience targeting, and the emotional promise every piece of content makes. Take your time — this is the most important decision in the wizard.</p>
-      <p className="text-xs text-gray-400 mb-6 italic">Each archetype below includes its vision — the world your brand invites readers into.</p>
       <div className="grid grid-cols-1 gap-3">
         {ARCHETYPES.map((arch) => <ArchetypeCard key={arch.id} arch={arch} selected={state.archetype} onClick={(id) => update({ archetype: id })} />)}
       </div>
@@ -1079,11 +1100,14 @@ function Step2PrimaryReader({ state, update }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Primary Reader</h2>
-      <p className="text-sm text-gray-500 mt-1 mb-2">Every great brand has a protagonist — the person whose story it tells. This isn't about limiting your audience; it's about giving your brand a heartbeat.</p>
-      <div className="rounded-xl bg-blue-50 border border-blue-100 p-4 mb-6">
-        <p className="text-xs text-blue-800 leading-relaxed">
-          <strong className="text-blue-900">Your catalog will automatically reach all audiences.</strong> The system builds books for every persona segment in your archetype. Choosing a primary reader here shapes your <em>brand narrative</em> — the voice of your titles, the tone of your covers, and the emotional hook that makes your brand instantly recognizable. Think of it as your lead character, not your only audience. Every cover, title, opening line, and exercise is tuned to this person first — then the system adapts the same content for every other persona.
+      <StepHero
+        eyebrow="Audience"
+        title="Primary reader"
+        subtitle="Every strong brand has a protagonist — the reader you lead with. Your catalog still reaches every segment; this choice shapes voice, covers, and hooks first."
+      />
+      <div className="mb-6 rounded-xl border border-blue-100/80 bg-blue-50/50 p-4 backdrop-blur-sm">
+        <p className="text-xs leading-relaxed text-blue-900">
+          <strong>Still reaching everyone.</strong> We tune titles, packaging, and exercises to this reader first, then adapt across your archetype&apos;s other segments.
         </p>
       </div>
       <div className="grid grid-cols-1 gap-2.5">
@@ -1099,7 +1123,7 @@ function Step2PrimaryReader({ state, update }) {
       {state.persona && (
         <>
           <div className="mt-6">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-2">Choose lane</h3>
+            <h3 className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-violet-600">Your lane</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
               {laneChoices.map((lane) => (
                 <LaneChoiceCard
@@ -1114,7 +1138,7 @@ function Step2PrimaryReader({ state, update }) {
             </div>
           </div>
           <div className="mt-6">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 mb-2">Choose market</h3>
+            <h3 className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-violet-600">Your market</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
               {marketChoices.map((mkt) => (
                 <MarketChoiceCard
@@ -1143,13 +1167,17 @@ function Step2PrimaryReader({ state, update }) {
 function Step3TriggerMoment({ state, update }) {
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">The Moment They Reach for Your Book</h2>
-      <p className="text-sm text-gray-500 mt-1 mb-2">Books aren't bought in bookstores anymore. They're found in moments of desperation, curiosity, or quiet surrender — a 2AM search bar, a podcast clip that hits different, a TikTok that stops the scroll.</p>
-      <div className="rounded-xl bg-amber-50 border border-amber-100 p-4 mb-6">
-        <p className="text-xs text-amber-800 leading-relaxed">
-          <strong className="text-amber-900">Your choice here determines everything about your hook strategy.</strong> It shapes how your titles are written, how your first paragraph lands, what emotional promise your cover makes, and how your TikTok captions stop the scroll. The most effective brands don't just speak to a person — they speak to a <em>moment</em>. Pick the moment your reader is most vulnerable, most open, most ready to receive what you have. That's where your book meets them.
+      <StepHero
+        eyebrow="Hook"
+        title="The moment they reach for you"
+        subtitle="Pick the scene where your reader is most open — titles, covers, and social hooks follow from here."
+      />
+      <details className="mb-5 rounded-xl border border-amber-100/90 bg-amber-50/40 px-4 py-2 text-xs text-amber-900 backdrop-blur-sm open:pb-3">
+        <summary className="cursor-pointer font-semibold text-amber-900/90 outline-none">Why this matters</summary>
+        <p className="mt-2 leading-relaxed text-amber-900/85">
+          Strong brands speak to a <em>moment</em>, not only a demographic. This choice steers first lines, cover promise, and scroll-stopping hooks.
         </p>
-      </div>
+      </details>
       <div className="grid grid-cols-1 gap-2.5">
         {MOMENTS.map((m) => <MomentCard key={m.id} moment={m} selected={state.moment} onClick={(id) => update({ moment: id })} />)}
       </div>
@@ -1171,9 +1199,12 @@ function Step4VoiceGraphs({ state, update }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Reveal Your Brand Tone</h2>
-      <p className="text-sm text-gray-500 mt-1 mb-2">These four sliders control the personality of every sentence your brand produces. Slide them and watch the graphs respond — each visualization represents the frequency, texture, and energy of your brand's voice. There are no wrong answers. The system uses these settings to calibrate prose rhythm, vocabulary register, sentence structure, and the emotional temperature of every chapter.</p>
-      <p className="text-xs text-gray-400 mb-6 italic">On the next page, you'll see exactly how each setting affects your reader's experience.</p>
+      <StepHero
+        eyebrow="Voice"
+        title="Shape your brand tone"
+        subtitle="Four sliders — slide and watch the graphs move. Each axis changes how every sentence feels."
+      />
+      <p className="mb-5 text-[11px] text-gray-400">Next step shows what each position does for your reader.</p>
 
       <div className="space-y-6">
         {VOICE_SLIDERS.map((s, idx) => {
@@ -1222,9 +1253,15 @@ function Step5VoiceEffects({ state, update }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Voice Tone — Reader Impact</h2>
-      <p className="text-sm text-gray-500 mt-1 mb-2">Here's exactly what your voice settings mean for your reader. Slide the controls and watch both the graph and the impact change in real time. Each technique describes how we write your content at this setting, and the five benefits explain the psychological, emotional, and practical impact on your target persona.</p>
-      <p className="text-xs text-gray-400 mb-6 italic">This scoring system ensures every voice choice maps to a real reader outcome — nothing is arbitrary.</p>
+      <StepHero
+        eyebrow="Impact"
+        title="What your tone does for readers"
+        subtitle="Adjust sliders and read how we write — and what your reader gets — at each setting."
+      />
+      <details className="mb-5 rounded-xl border border-gray-100 bg-gray-50/80 px-4 py-2 text-[11px] text-gray-600 open:pb-3">
+        <summary className="cursor-pointer font-semibold text-gray-700 outline-none">More detail</summary>
+        <p className="mt-2 leading-relaxed">Each position maps to concrete writing moves and reader outcomes — nothing arbitrary.</p>
+      </details>
 
       <div className="space-y-6">
         {VOICE_SLIDERS.map((s, idx) => {
@@ -1298,11 +1335,18 @@ function Step6VisualStyle({ state, update }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Visual World & Emotional Outcomes</h2>
-      <p className="text-sm text-gray-500 mt-1 mb-2">Your visual style controls every cover, social post, video thumbnail, and ad creative your brand produces. Your emotional outcomes define the transformation promise — the feeling readers have when they finish your content. Together, these two choices create the visual and emotional signature that makes your brand unmistakable.</p>
+      <StepHero
+        eyebrow="Look & feel"
+        title="Visual world and emotional promise"
+        subtitle="Choose the look of covers and social art, then the outcomes readers should feel."
+      />
+      <details className="mb-5 rounded-xl border border-violet-100/80 bg-violet-50/30 px-4 py-2 text-[11px] text-gray-600 open:pb-3">
+        <summary className="cursor-pointer font-semibold text-violet-900/90 outline-none">How this is used</summary>
+        <p className="mt-2 leading-relaxed">Styles drive cover and thumbnail generation; emotional outcomes anchor titles and CTAs.</p>
+      </details>
 
-      <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3 mt-6">Visual Style</div>
-      <p className="text-[11px] text-gray-500 mb-3">Each style includes a text-to-image prompt — this is what the system uses to generate your covers, thumbnails, and social content.</p>
+      <div className="text-xs font-bold uppercase tracking-wider text-violet-600/90 mb-3">Visual style</div>
+      <p className="text-[11px] text-gray-500 mb-3">Each card includes prompts the system uses for imagery.</p>
       <div className="grid grid-cols-2 gap-3 mb-4">
         {VISUAL_STYLES.map((vs) => (
           <button key={vs.id} onClick={() => handleVisual(vs.id)}
@@ -1334,10 +1378,10 @@ function Step6VisualStyle({ state, update }) {
         </>
       )}
 
-      <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">
-        Emotional Outcomes <span className="text-gray-300 normal-case font-normal">(pick up to 5)</span>
+      <div className="text-xs font-bold uppercase tracking-wider text-violet-600/90 mb-2">
+        Emotional outcomes <span className="font-normal normal-case text-gray-400">(up to 5)</span>
       </div>
-      <p className="text-[11px] text-gray-500 mb-3">These are the feelings your reader has after finishing your content. They drive the transformation promise in every title, CTA, and marketing message.</p>
+      <p className="text-[11px] text-gray-500 mb-3">Transformation promise for titles and marketing — pick what you want readers to feel.</p>
       <div className="flex flex-wrap gap-2 mb-3">
         {allEmotions.map((e) => {
           const active = (state.emotions || []).includes(e);
@@ -1359,8 +1403,8 @@ function Step6VisualStyle({ state, update }) {
         </div>
       )}
 
-      <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Spiritual Foundation</div>
-      <p className="text-[11px] text-gray-500 mb-3">If your brand draws from a specific tradition, select it here. This influences vocabulary, references, and the philosophical grounding of your content. Optional — many powerful brands are tradition-agnostic.</p>
+      <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Spiritual foundation</div>
+      <p className="text-[11px] text-gray-500 mb-3">Optional — grounds vocabulary and references if you draw from a tradition.</p>
       <select className="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-gray-500 focus:ring-2 focus:ring-gray-100 outline-none"
         value={state.tradition || ""} onChange={(e) => handleTradition(e.target.value)}>
         <option value="">Select primary tradition (optional)...</option>
@@ -1645,49 +1689,203 @@ function Step10Blueprint({ state }) {
     { label: "Platform Reach", value: reachScore, desc: "Multi-channel distribution coverage" },
   ];
 
+  const brandOneSentence = [
+    arch?.name,
+    persona && `${persona.emoji} ${persona.label}`,
+    moment && `${moment.emoji} ${moment.label}`,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
+  const assessmentText =
+    marketability >= 85
+      ? "Exceptional brand positioning. Your archetype, audience, and topic choices align powerfully with high-revenue market segments. This brand has strong commercial potential with deep reader impact."
+      : marketability >= 75
+        ? "Strong brand foundation. Your selections create a compelling identity with solid market alignment. A few more refinements could push this into exceptional territory."
+        : "Good starting point. Your brand identity is taking shape — consider adding more topic selections and channel coverage to strengthen your market position.";
+
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Your Brand Blueprint</h2>
-      <p className="text-sm text-gray-500 mt-1 mb-6">A complete report of your brand identity, projected impact scores, and all the choices that built this universe. Review everything below before launching.</p>
+      <StepHero
+        eyebrow="Reveal"
+        title="Here is your brand"
+        subtitle="Everything below is what you defined in the studio — grouped so you can scan it once before you activate."
+      />
 
-      <div className="grid grid-cols-2 gap-3 mb-8">
-        {scores.map((s) => (
-          <div key={s.label} className="bg-white rounded-xl p-4 border border-gray-200 text-center">
-            <div className="relative w-16 h-16 mx-auto mb-2">
-              <svg viewBox="0 0 64 64" className="w-full h-full -rotate-90">
-                <circle cx="32" cy="32" r="28" fill="none" stroke="#f3f4f6" strokeWidth="5" />
-                <circle cx="32" cy="32" r="28" fill="none" strokeWidth="5" strokeLinecap="round" style={{ color: s.value > 85 ? '#10b981' : s.value > 70 ? '#6366f1' : '#f59e0b' }} className="stroke-current" strokeDasharray={`${s.value * 1.759} 175.9`} />
-              </svg>
-              <div className="absolute inset-0 flex items-center justify-center"><span className="text-lg font-black text-gray-900">{s.value}</span></div>
-            </div>
-            <div className="text-xs font-bold text-gray-900">{s.label}</div>
-            <div className="text-[10px] text-gray-500 mt-0.5">{s.desc}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className="rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 p-5 mb-6">
-        <div className="flex items-center gap-2 mb-2"><Rocket size={16} className="text-emerald-600" /><span className="text-sm font-bold text-emerald-800">Brand Assessment</span></div>
-        <p className="text-xs text-emerald-700 leading-relaxed">
-          {marketability >= 85 ? "Exceptional brand positioning. Your archetype, audience, and topic choices align powerfully with high-revenue market segments. This brand has strong commercial potential with deep reader impact." : marketability >= 75 ? "Strong brand foundation. Your selections create a compelling identity with solid market alignment. A few more refinements could push this into exceptional territory." : "Good starting point. Your brand identity is taking shape — consider adding more topic selections and channel coverage to strengthen your market position."}
+      {brandOneSentence ? (
+        <p className="mb-6 rounded-2xl border border-violet-200/70 bg-gradient-to-r from-violet-50/90 to-fuchsia-50/50 px-4 py-3 text-center text-sm font-semibold leading-snug text-violet-950 shadow-sm">
+          {brandOneSentence}
         </p>
+      ) : null}
+
+      {/* Demoted score strip — same numeric logic, quieter visual */}
+      <div className="mb-8 rounded-2xl border border-gray-100 bg-gray-50/60 px-3 py-3 opacity-90">
+        <div className="mb-2 text-center text-[9px] font-bold uppercase tracking-wider text-gray-400">Signal scores</div>
+        <div className="grid grid-cols-4 gap-2">
+          {scores.map((s) => (
+            <div key={s.label} className="rounded-lg bg-white/90 px-1 py-2 text-center shadow-sm">
+              <div className="relative mx-auto mb-1 h-10 w-10">
+                <svg viewBox="0 0 64 64" className="h-full w-full -rotate-90">
+                  <circle cx="32" cy="32" r="26" fill="none" stroke="#f3f4f6" strokeWidth="4" />
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="26"
+                    fill="none"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    style={{ color: s.value > 85 ? "#10b981" : s.value > 70 ? "#6366f1" : "#f59e0b" }}
+                    className="stroke-current"
+                    strokeDasharray={`${s.value * 1.63} 163`}
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-xs font-black text-gray-800">{s.value}</span>
+                </div>
+              </div>
+              <div className="text-[8px] font-bold uppercase leading-tight text-gray-500">{s.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="space-y-3">
-        {arch && <div className={`rounded-xl p-4 ${arch.bg} border ${arch.border}`}><div className="text-[10px] font-bold uppercase text-gray-500 mb-1">Emotional World</div><div className="font-bold text-gray-900">{arch.name}</div><div className="text-xs text-gray-600">{arch.tagline}</div></div>}
-        <div className="grid grid-cols-2 gap-3">
-          {persona && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Primary Reader</div><div className="text-xs font-bold">{persona.emoji} {persona.label}</div></div>}
-          {moment && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Trigger Moment</div><div className="text-xs font-bold">{moment.emoji} {moment.label}</div></div>}
-          {visual && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Visual Style</div><div className="text-xs font-bold">{visual.label}</div></div>}
-          {state.tradition && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Tradition</div><div className="text-xs font-bold">{state.tradition}</div></div>}
-          {state.onboardingLane && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Onboarding Lane</div><div className="text-xs font-bold">{state.onboardingLane.replace(/_/g, " ")}</div></div>}
-          {state.onboardingMarket && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Onboarding Market</div><div className="text-xs font-bold">{state.onboardingMarket}</div></div>}
-          {state.formatFocus && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Format Focus</div><div className="text-xs font-bold">{state.formatFocus === "manga" ? "Manga / Visual" : "Traditional Books"}</div></div>}
-          {(state.channels || []).length > 0 && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1">Channels</div><div className="text-xs font-bold">{state.channels.length} active</div></div>}
-        </div>
-        {(state.emotions || []).length > 0 && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1.5">Emotional Outcomes</div><div className="flex flex-wrap gap-1.5">{state.emotions.map((e) => <span key={e} className="text-[10px] bg-gray-100 text-gray-700 px-2.5 py-0.5 rounded-full">{e}</span>)}</div></div>}
-        {(state.topicTags || []).length > 0 && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1.5">Topics ({state.topicTags.length})</div><div className="flex flex-wrap gap-1.5">{state.topicTags.map((t) => <span key={t} className="text-[10px] bg-gray-100 text-gray-700 px-2.5 py-0.5 rounded-full">{t.replace(/-/g, " ")}</span>)}</div></div>}
-        {(state.angles || []).length > 0 && <div className="bg-white rounded-xl p-3 border border-gray-200"><div className="text-[10px] font-bold uppercase text-gray-400 mb-1.5">Content Angles</div><div className="flex flex-wrap gap-1.5">{state.angles.map((a) => { const angle = V4_ANGLES.find((v) => v.id === a); return <span key={a} className="text-[10px] bg-gray-100 text-gray-700 px-2.5 py-0.5 rounded-full">{angle?.label || a}</span>; })}</div></div>}
+      <div className="space-y-8">
+        <section>
+          <h3 className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">1 · Brand identity</h3>
+          <div className="space-y-3">
+            {arch ? (
+              <div className={`rounded-2xl border-2 p-5 ${arch.bg} ${arch.border}`}>
+                <div className="text-[10px] font-bold uppercase text-gray-500">Emotional world</div>
+                <div className="mt-1 text-lg font-bold text-gray-900">{arch.name}</div>
+                <p className="mt-1 text-sm text-gray-700">{arch.tagline}</p>
+              </div>
+            ) : null}
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {persona ? (
+                <div className="rounded-2xl border border-gray-200/90 bg-white p-4 shadow-sm">
+                  <div className="text-[10px] font-bold uppercase text-gray-400">Primary reader</div>
+                  <div className="mt-1 text-sm font-bold text-gray-900">
+                    {persona.emoji} {persona.label}
+                  </div>
+                </div>
+              ) : null}
+              {moment ? (
+                <div className="rounded-2xl border border-gray-200/90 bg-white p-4 shadow-sm">
+                  <div className="text-[10px] font-bold uppercase text-gray-400">Trigger moment</div>
+                  <div className="mt-1 text-sm font-bold text-gray-900">
+                    {moment.emoji} {moment.label}
+                  </div>
+                </div>
+              ) : null}
+              {state.tradition ? (
+                <div className="rounded-2xl border border-gray-200/90 bg-white p-4 shadow-sm sm:col-span-2">
+                  <div className="text-[10px] font-bold uppercase text-gray-400">Tradition</div>
+                  <div className="mt-1 text-sm font-semibold text-gray-900">{state.tradition}</div>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3 className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">2 · How it shows up</h3>
+          <div className="space-y-3">
+            {visual ? (
+              <div className="overflow-hidden rounded-2xl border-2 border-gray-200 bg-white shadow-md ring-1 ring-violet-100/80">
+                <div className="flex gap-2 border-b border-gray-100 bg-gradient-to-r from-slate-50 to-violet-50/40 px-4 py-3">
+                  {visual.palette.map((col, i) => (
+                    <div key={i} className="h-10 w-10 rounded-xl shadow-md ring-2 ring-white" style={{ backgroundColor: col }} />
+                  ))}
+                </div>
+                <div className="p-4">
+                  <div className="text-[10px] font-bold uppercase text-violet-600">Visual style</div>
+                  <div className="mt-1 text-base font-bold text-gray-900">{visual.label}</div>
+                  <p className="mt-1 text-xs text-gray-600">{visual.desc}</p>
+                  <p className="mt-2 text-[11px] italic text-gray-500">{visual.mood}</p>
+                </div>
+              </div>
+            ) : null}
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {state.onboardingLane ? (
+                <div className="rounded-xl border border-gray-100 bg-white p-3 text-center shadow-sm">
+                  <div className="text-[9px] font-bold uppercase text-gray-400">Lane</div>
+                  <div className="mt-0.5 text-xs font-bold text-gray-900">{state.onboardingLane.replace(/_/g, " ")}</div>
+                </div>
+              ) : null}
+              {state.onboardingMarket ? (
+                <div className="rounded-xl border border-gray-100 bg-white p-3 text-center shadow-sm">
+                  <div className="text-[9px] font-bold uppercase text-gray-400">Market</div>
+                  <div className="mt-0.5 text-xs font-bold text-gray-900">{state.onboardingMarket}</div>
+                </div>
+              ) : null}
+              {state.formatFocus ? (
+                <div className="rounded-xl border border-gray-100 bg-white p-3 text-center shadow-sm">
+                  <div className="text-[9px] font-bold uppercase text-gray-400">Format</div>
+                  <div className="mt-0.5 text-xs font-bold text-gray-900">{state.formatFocus === "manga" ? "Manga / visual" : "Books"}</div>
+                </div>
+              ) : null}
+              {(state.channels || []).length > 0 ? (
+                <div className="rounded-xl border border-gray-100 bg-white p-3 text-center shadow-sm">
+                  <div className="text-[9px] font-bold uppercase text-gray-400">Channels</div>
+                  <div className="mt-0.5 text-xs font-bold text-gray-900">{state.channels.length} active</div>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3 className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">3 · What it promises</h3>
+          {(state.emotions || []).length > 0 ? (
+            <div className="mb-4 rounded-2xl border border-rose-100 bg-gradient-to-br from-rose-50/80 to-amber-50/40 p-4 shadow-sm">
+              <div className="text-[10px] font-bold uppercase text-rose-800/90">Emotional outcomes</div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {state.emotions.map((e) => (
+                  <span
+                    key={e}
+                    className="rounded-full border border-white/80 bg-white/90 px-3 py-1.5 text-xs font-semibold text-rose-950 shadow-sm"
+                  >
+                    {e}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+          {(state.topicTags || []).length > 0 ? (
+            <div className="mb-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+              <div className="text-[10px] font-bold uppercase text-gray-400">Topics ({state.topicTags.length})</div>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {state.topicTags.map((t) => (
+                  <span key={t} className="rounded-full bg-gray-100 px-2.5 py-1 text-[10px] font-medium text-gray-800">
+                    {t.replace(/-/g, " ")}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+          {(state.angles || []).length > 0 ? (
+            <div className="mb-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+              <div className="text-[10px] font-bold uppercase text-gray-400">Content angles</div>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {state.angles.map((a) => {
+                  const angle = V4_ANGLES.find((v) => v.id === a);
+                  return (
+                    <span key={a} className="rounded-full bg-indigo-50 px-2.5 py-1 text-[10px] font-semibold text-indigo-900">
+                      {angle?.label || a}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          ) : null}
+          <div className="rounded-2xl border border-emerald-200 bg-gradient-to-r from-emerald-50/90 to-teal-50/50 p-4">
+            <div className="flex items-center gap-2">
+              <Rocket size={16} className="text-emerald-600" />
+              <span className="text-xs font-bold text-emerald-900">Read on your direction</span>
+            </div>
+            <p className="mt-2 text-xs leading-relaxed text-emerald-900/90">{assessmentText}</p>
+          </div>
+        </section>
       </div>
     </div>
   );
@@ -1890,32 +2088,142 @@ function Step11Launch({ state, update }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Launch Your Brand</h2>
-      <p className="text-sm text-gray-500 mt-1 mb-6">Add your contact information to complete your brand setup. All required fields must be filled before the Launch Brand button activates.</p>
-      <div className="space-y-4 mb-6">
-        <div className="grid grid-cols-2 gap-3">
-          <div><label className="text-xs font-semibold text-gray-600 mb-1 block">First Name *</label><input type="text" placeholder="First Name" className="w-full p-3 border border-gray-200 rounded-xl text-sm focus:border-gray-500 outline-none" value={c.firstName || ""} onChange={(e) => handleField("firstName", e.target.value)} /></div>
-          <div><label className="text-xs font-semibold text-gray-600 mb-1 block">Last Name *</label><input type="text" placeholder="Last Name" className="w-full p-3 border border-gray-200 rounded-xl text-sm focus:border-gray-500 outline-none" value={c.lastName || ""} onChange={(e) => handleField("lastName", e.target.value)} /></div>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          <div><label className="text-xs font-semibold text-gray-600 mb-1 block">Email *</label><input type="email" placeholder="you@example.com" className="w-full p-3 border border-gray-200 rounded-xl text-sm focus:border-gray-500 outline-none" value={c.email || ""} onChange={(e) => handleField("email", e.target.value)} /></div>
-          <div><label className="text-xs font-semibold text-gray-600 mb-1 block">Phone</label><input type="tel" placeholder="+1 555 000 0000" className="w-full p-3 border border-gray-200 rounded-xl text-sm focus:border-gray-500 outline-none" value={c.phone || ""} onChange={(e) => handleField("phone", e.target.value)} /></div>
-        </div>
-        <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mt-6 mb-3">Messaging Channels</div>
-        <div className="grid grid-cols-2 gap-3">
-          <div><label className="text-[10px] text-gray-400 font-semibold mb-1 block">LINE ID</label><input type="text" placeholder="U..." className="w-full p-2.5 border border-gray-200 rounded-lg text-sm focus:border-gray-500 outline-none" value={c.line || ""} onChange={(e) => handleField("line", e.target.value)} /></div>
-          <div><label className="text-[10px] text-gray-400 font-semibold mb-1 block">WhatsApp</label><input type="tel" placeholder="+1..." className="w-full p-2.5 border border-gray-200 rounded-lg text-sm focus:border-gray-500 outline-none" value={c.whatsapp || ""} onChange={(e) => handleField("whatsapp", e.target.value)} /></div>
-          <div><label className="text-[10px] text-gray-400 font-semibold mb-1 block">WeChat ID</label><input type="text" className="w-full p-2.5 border border-gray-200 rounded-lg text-sm focus:border-gray-500 outline-none" value={c.wechat || ""} onChange={(e) => handleField("wechat", e.target.value)} /></div>
-          <div><label className="text-[10px] text-gray-400 font-semibold mb-1 block">FB Messenger</label><input type="text" className="w-full p-2.5 border border-gray-200 rounded-lg text-sm focus:border-gray-500 outline-none" value={c.messenger || ""} onChange={(e) => handleField("messenger", e.target.value)} /></div>
-        </div>
-        <div><label className="text-[10px] text-gray-400 font-semibold mb-1 block">Preferred Channel</label><select className="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white focus:border-gray-500 outline-none" value={c.preferred || "email"} onChange={(e) => handleField("preferred", e.target.value)}><option value="email">Email Only</option><option value="line">LINE</option><option value="whatsapp">WhatsApp</option><option value="wechat">WeChat</option><option value="fb_messenger">FB Messenger</option></select></div>
-        <div className="bg-gray-50 rounded-xl p-3 flex items-start gap-2"><Shield size={14} className="text-gray-400 flex-shrink-0 mt-0.5" /><p className="text-[11px] text-gray-500">Tax ID (SSN/EIN) collected through a separate secure process after approval. We never collect sensitive financial information through this form.</p></div>
+      <div className="mb-8 rounded-2xl border border-violet-200/80 bg-gradient-to-br from-violet-50/90 via-white to-fuchsia-50/30 px-5 py-6 text-center shadow-sm">
+        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">Completion</p>
+        <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">You now have a working brand</h2>
+        <p className="mx-auto mt-2 max-w-md text-sm text-gray-600">
+          Save your details so we can activate this configuration. Same requirements as before — we just frame it as turning the studio output on.
+        </p>
       </div>
-      <button onClick={handleLaunch} disabled={!isReady}
-        className={`w-full py-5 rounded-2xl text-lg font-extrabold tracking-tight transition-all ${isReady ? "bg-gray-900 text-white hover:bg-gray-800 shadow-lg hover:shadow-xl cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
-        {isReady ? "Launch Brand" : "Complete required fields to launch"}
+
+      <div className="mb-6 space-y-6">
+        <section className="rounded-2xl border border-gray-200/90 bg-white/90 p-5 shadow-sm backdrop-blur-sm">
+          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">1 · Identity &amp; contact</h3>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-gray-600">First name *</label>
+              <input
+                type="text"
+                placeholder="First name"
+                className="w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-gray-500"
+                value={c.firstName || ""}
+                onChange={(e) => handleField("firstName", e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-gray-600">Last name *</label>
+              <input
+                type="text"
+                placeholder="Last name"
+                className="w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-gray-500"
+                value={c.lastName || ""}
+                onChange={(e) => handleField("lastName", e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="mt-3 grid grid-cols-2 gap-3">
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-gray-600">Email *</label>
+              <input
+                type="email"
+                placeholder="you@example.com"
+                className="w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-gray-500"
+                value={c.email || ""}
+                onChange={(e) => handleField("email", e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-gray-600">Phone</label>
+              <input
+                type="tel"
+                placeholder="+1 555 000 0000"
+                className="w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-gray-500"
+                value={c.phone || ""}
+                onChange={(e) => handleField("phone", e.target.value)}
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-2xl border border-gray-200/90 bg-white/90 p-5 shadow-sm backdrop-blur-sm">
+          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">2 · Messaging channels</h3>
+          <p className="mb-3 text-[11px] text-gray-500">Optional — how we reach you beyond email.</p>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="mb-1 block text-[10px] font-semibold text-gray-400">LINE ID</label>
+              <input
+                type="text"
+                placeholder="U..."
+                className="w-full rounded-lg border border-gray-200 p-2.5 text-sm outline-none focus:border-gray-500"
+                value={c.line || ""}
+                onChange={(e) => handleField("line", e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-[10px] font-semibold text-gray-400">WhatsApp</label>
+              <input
+                type="tel"
+                placeholder="+1..."
+                className="w-full rounded-lg border border-gray-200 p-2.5 text-sm outline-none focus:border-gray-500"
+                value={c.whatsapp || ""}
+                onChange={(e) => handleField("whatsapp", e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-[10px] font-semibold text-gray-400">WeChat ID</label>
+              <input
+                type="text"
+                className="w-full rounded-lg border border-gray-200 p-2.5 text-sm outline-none focus:border-gray-500"
+                value={c.wechat || ""}
+                onChange={(e) => handleField("wechat", e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-[10px] font-semibold text-gray-400">FB Messenger</label>
+              <input
+                type="text"
+                className="w-full rounded-lg border border-gray-200 p-2.5 text-sm outline-none focus:border-gray-500"
+                value={c.messenger || ""}
+                onChange={(e) => handleField("messenger", e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="mt-3">
+            <label className="mb-1 block text-[10px] font-semibold text-gray-400">Preferred channel</label>
+            <select
+              className="w-full rounded-lg border border-gray-200 bg-white p-2.5 text-sm outline-none focus:border-gray-500"
+              value={c.preferred || "email"}
+              onChange={(e) => handleField("preferred", e.target.value)}
+            >
+              <option value="email">Email only</option>
+              <option value="line">LINE</option>
+              <option value="whatsapp">WhatsApp</option>
+              <option value="wechat">WeChat</option>
+              <option value="fb_messenger">FB Messenger</option>
+            </select>
+          </div>
+        </section>
+
+        <section className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 p-4">
+          <Shield size={18} className="mt-0.5 flex-shrink-0 text-slate-500" />
+          <div>
+            <div className="text-xs font-bold text-slate-800">Secure process</div>
+            <p className="mt-1 text-[11px] leading-relaxed text-slate-600">
+              Tax ID (SSN/EIN) is collected through a separate secure step after approval. We do not collect sensitive financial data in this form.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <button
+        type="button"
+        onClick={handleLaunch}
+        disabled={!isReady}
+        className={`w-full rounded-2xl py-5 text-lg font-extrabold tracking-tight transition-all ${isReady ? "cursor-pointer bg-gradient-to-r from-violet-700 to-indigo-800 text-white shadow-lg shadow-violet-300/40 hover:from-violet-800 hover:to-indigo-900" : "cursor-not-allowed bg-gray-200 text-gray-400"}`}
+      >
+        {isReady ? "Activate my brand" : "Add name & email to activate"}
       </button>
-      {!isReady && <p className="text-center text-[11px] text-gray-400 mt-2">Fill in First Name, Last Name, and Email to activate the launch button.</p>}
+      {!isReady ? <p className="mt-2 text-center text-[11px] text-gray-400">First name, last name, and a valid email unlock activation.</p> : null}
     </div>
   );
 }
@@ -1967,34 +2275,42 @@ function CompareBlock({ labelA, labelB, contentA, contentB, colorA, colorB }) {
 }
 
 function IntroWelcome({ onNext }) {
+  const pillars = [
+    { icon: PenTool, label: "Voice", tint: "from-violet-500 to-indigo-600" },
+    { icon: Image, label: "Visual", tint: "from-fuchsia-500 to-pink-600" },
+    { icon: Users, label: "Reader", tint: "from-sky-500 to-blue-600" },
+    { icon: Layers, label: "Formats", tint: "from-emerald-500 to-teal-600" },
+  ];
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <div className="max-w-3xl mx-auto px-6 py-16">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-semibold mb-6"><Sparkles size={12} /> Pearl Prime Brand Studio</div>
-          <h1 className="text-5xl font-black tracking-tight leading-tight mb-2 bg-gradient-to-r from-purple-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">Define Your Brand</h1>
-          <h2 className="text-3xl font-black tracking-tight bg-gradient-to-r from-purple-600 via-violet-600 to-purple-600 bg-clip-text text-transparent mb-6">Create A Universe</h2>
-          <p className="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">A brand in Pearl Prime is a complete publishing identity — with its own voice, visual world, emotional territory, and audience. Every book, audiobook, video, and piece of content flows from the choices you make here.</p>
-        </div>
-        <div className="rounded-2xl bg-gray-50 border border-gray-200 p-8 mb-10">
-          <h2 className="text-xl font-bold mb-4 text-gray-900">What is a Pearl Prime brand?</h2>
-          <div className="grid grid-cols-1 gap-4">
-            {[
-              { icon: PenTool, label: "A writing voice", desc: "Gentle or direct. Poetic or practical. Your brand's prose has a personality that readers recognize across every title." },
-              { icon: Image, label: "A visual world", desc: "Cover art, color palettes, typography — from soft watercolors to bold geometric. Your books look like they belong together." },
-              { icon: Film, label: "A video presence", desc: "Daily TikTok, YouTube Shorts, and Reels. Cinematic or minimal. Symbolic or raw. Your social content has a signature look." },
-              { icon: Users, label: "An audience", desc: "Burned-out professionals, Gen Z navigators, grief carriers, Gen Alpha explorers — your brand speaks to one core reader and reaches all." },
-              { icon: Layers, label: "A content system", desc: "Books, audiobooks, workbooks, manga, exercises, freebies — all generated from your brand's DNA. Hundreds of titles, one coherent identity." },
-            ].map(({ icon: I, label, desc }) => (
-              <div key={label} className="flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center flex-shrink-0"><I size={18} className="text-gray-600" /></div>
-                <div><h3 className="font-bold text-sm text-gray-900">{label}</h3><p className="text-xs text-gray-500 leading-relaxed mt-0.5">{desc}</p></div>
+    <div className="brand-studio-bg min-h-screen text-gray-900">
+      <div className="mx-auto max-w-3xl px-6 py-16">
+        <div className="brand-studio-panel p-10 text-center sm:p-12">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-violet-200/80 bg-violet-50/80 px-4 py-1.5 text-xs font-semibold text-violet-800 backdrop-blur-sm">
+            <Sparkles size={12} /> Pearl Prime Brand Studio
+          </div>
+          <h1 className="text-4xl font-black leading-tight tracking-tight text-gray-900 sm:text-5xl">Launch and shape your publishing brand</h1>
+          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-gray-600">
+            One guided studio session turns choices into a coherent identity — voice, look, and proof you can stand behind.
+          </p>
+          <div className="mx-auto mt-10 grid max-w-md grid-cols-4 gap-3">
+            {pillars.map(({ icon: I, label, tint }) => (
+              <div key={label} className="flex flex-col items-center gap-2">
+                <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${tint} shadow-lg shadow-slate-300/30`}>
+                  <I size={22} className="text-white" />
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">{label}</span>
               </div>
             ))}
           </div>
-        </div>
-        <div className="text-center">
-          <button onClick={onNext} className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-gray-900 text-white font-bold text-sm shadow-lg hover:bg-gray-800 transition-all hover:-translate-y-0.5">See Your Journey <ChevronRight size={18} /></button>
+          <div className="mt-12">
+            <button
+              type="button"
+              onClick={onNext}
+              className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-slate-400/30 transition-all hover:-translate-y-0.5 hover:bg-gray-800"
+            >
+              Start building <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -2002,41 +2318,53 @@ function IntroWelcome({ onNext }) {
 }
 
 function IntroJourney({ onNext, onBack }) {
+  const phases = [
+    { step: "1", title: "Foundation", sub: "Archetype & reader", color: "from-indigo-500 to-violet-600" },
+    { step: "2", title: "Voice", sub: "Tone & impact", color: "from-violet-500 to-fuchsia-600" },
+    { step: "3", title: "Look & topics", sub: "Visuals + territory", color: "from-rose-500 to-orange-500" },
+    { step: "4", title: "Formats", sub: "Channels & pipeline", color: "from-sky-500 to-cyan-600" },
+    { step: "5", title: "Reveal", sub: "Blueprint & launch", color: "from-slate-600 to-gray-900" },
+  ];
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <div className="max-w-3xl mx-auto px-6 py-12">
-        <button onClick={onBack} className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600 mb-6"><ChevronLeft size={14} /> Back</button>
-        <div className="text-center mb-10">
-          <h1 className="text-3xl font-black tracking-tight mb-2">Your Journey</h1>
-          <p className="text-lg font-bold text-gray-500">11 choices that build everything</p>
-          <p className="text-sm text-gray-400 mt-2 max-w-lg mx-auto">Each step below shapes a different dimension of your brand. Together, they create a complete publishing identity that produces hundreds of titles across 40+ platforms in 75+ countries.</p>
-        </div>
-        <div className="space-y-2 mb-12">
-          {[
-            { step: "1", name: "Emotional World", desc: "Choose your brand's archetype — the feeling that defines everything", color: "from-indigo-500 to-blue-500" },
-            { step: "2", name: "Primary Reader", desc: "Pick the protagonist of your brand narrative", color: "from-emerald-500 to-teal-500" },
-            { step: "3", name: "Trigger Moment", desc: "The exact moment they reach for your book", color: "from-rose-500 to-pink-500" },
-            { step: "4", name: "Voice Tone Graphs", desc: "Slide and see how your voice shapes the reading experience", color: "from-indigo-500 to-violet-500" },
-            { step: "5", name: "Voice Impact", desc: "See the psychological and emotional benefits of each setting", color: "from-purple-500 to-indigo-500" },
-            { step: "6", name: "Visual & Emotions", desc: "Define your color world, style, and transformation promise", color: "from-rose-500 to-amber-500" },
-            { step: "7", name: "Topics & Angles", desc: "Claim the search territory your brand will own", color: "from-amber-500 to-orange-500" },
-            { step: "8", name: "Market Intelligence", desc: "See how we blend your vision with proven demand data", color: "from-emerald-500 to-green-500" },
-            { step: "9", name: "Formats & Channels", desc: "Manga or books, audiobooks or TikTok — choose your pipeline", color: "from-blue-500 to-cyan-500" },
-            { step: "10", name: "Blueprint", desc: "Full report with scores: marketability, youth reach, life impact", color: "from-violet-500 to-purple-500" },
-            { step: "11", name: "Launch", desc: "Add your info and launch your brand into the universe", color: "from-gray-700 to-gray-900" },
-          ].map(({ step, name, desc, color }) => (
-            <div key={step} className="flex gap-3 items-center bg-gray-50 rounded-xl p-3.5 border border-gray-100 hover:border-gray-200 transition-all">
-              <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${color} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>{step}</div>
-              <div className="flex-1">
-                <span className="font-bold text-sm text-gray-900">{name}</span>
-                <span className="text-xs text-gray-500 ml-2">{desc}</span>
-              </div>
+    <div className="brand-studio-bg min-h-screen text-gray-900">
+      <div className="mx-auto max-w-3xl px-6 py-12">
+        <button type="button" onClick={onBack} className="mb-6 flex items-center gap-1 text-xs text-gray-500 transition-colors hover:text-gray-800">
+          <ChevronLeft size={14} /> Back
+        </button>
+        <div className="brand-studio-panel p-8 sm:p-10">
+          <div className="text-center">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">How this works</p>
+            <h1 className="mt-2 text-3xl font-black tracking-tight">Five beats, eleven choices</h1>
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-gray-600">
+              You move from emotional foundation to formats, then see a clear blueprint before launch.
+            </p>
+          </div>
+          <div className="relative mt-10">
+            <div className="absolute left-[18px] top-3 bottom-3 w-px bg-gradient-to-b from-violet-200 via-indigo-200 to-gray-200 sm:left-1/2 sm:top-12 sm:bottom-12 sm:h-auto sm:w-full sm:max-w-xl sm:-translate-x-1/2 sm:bg-gradient-to-r" aria-hidden />
+            <div className="space-y-4 sm:grid sm:grid-cols-5 sm:gap-3 sm:space-y-0">
+              {phases.map(({ step, title, sub, color }) => (
+                <div key={step} className="relative flex gap-3 sm:flex-col sm:items-center sm:text-center">
+                  <div className={`relative z-[1] flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${color} text-xs font-bold text-white shadow-md`}>
+                    {step}
+                  </div>
+                  <div className="pt-0.5 sm:pt-2">
+                    <div className="text-sm font-bold text-gray-900">{title}</div>
+                    <div className="text-[11px] text-gray-500">{sub}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="text-center">
-          <p className="text-gray-400 text-sm mb-6">First, let's show you what your choices create.</p>
-          <button onClick={onNext} className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-gray-900 text-white font-bold text-sm shadow-lg hover:bg-gray-800 transition-all hover:-translate-y-0.5">See Examples <ChevronRight size={18} /></button>
+          </div>
+          <p className="mt-8 text-center text-xs text-gray-500">Next: quick demos of what your choices change.</p>
+          <div className="mt-6 text-center">
+            <button
+              type="button"
+              onClick={onNext}
+              className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
+            >
+              See examples <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -2045,9 +2373,12 @@ function IntroJourney({ onNext, onBack }) {
 
 function ShowcaseProse({ onNext, onBack }) {
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <div className="max-w-3xl mx-auto px-6 py-12">
-        <button onClick={onBack} className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600 mb-4"><ChevronLeft size={14} /> Back</button>
+    <div className="brand-studio-bg min-h-screen text-gray-900">
+      <div className="mx-auto max-w-3xl px-6 py-12">
+        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-gray-500 transition-colors hover:text-gray-800">
+          <ChevronLeft size={14} /> Back
+        </button>
+        <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-semibold mb-4"><PenTool size={12} /> Step 1 Preview — Writing Voice</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">Same topic. Completely different voice.</h1>
         <p className="text-gray-500 mb-8">Your archetype choice transforms how every sentence sounds. Two brands, same topic — watch how the prose, exercises, and energy change completely.</p>
@@ -2055,7 +2386,12 @@ function ShowcaseProse({ onNext, onBack }) {
           contentA={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #818cf8, #e0e7ff)" }} /><div><div className="text-[10px] text-gray-400 font-semibold uppercase">Stillness Lab</div><div className="text-sm font-bold text-gray-900">The Body Keeps the Score at 2AM</div></div></div><p className="text-sm text-gray-700 leading-relaxed italic border-l-2 border-indigo-300 pl-3">"Your body remembers what your mind tries to forget. Right now, your shoulders are holding yesterday's argument."</p><div className="mt-3 bg-indigo-50 rounded-lg p-3"><div className="text-[10px] font-bold text-indigo-600 uppercase mb-1">Exercise</div><p className="text-xs text-indigo-800">"Inhale for 4 counts. Hold for 7. Exhale slowly for 8."</p></div></div>}
           contentB={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #d97706, #f59e0b, #fef3c7)" }} /><div><div className="text-[10px] text-gray-400 font-semibold uppercase">Clear Mind Lab</div><div className="text-sm font-bold text-gray-900">Your Phone Is Stealing Your Sleep</div></div></div><p className="text-sm text-gray-700 leading-relaxed italic border-l-2 border-amber-400 pl-3">"You're staring at the ceiling because your brain is running yesterday's argument on a loop."</p><div className="mt-3 bg-amber-50 rounded-lg p-3"><div className="text-[10px] font-bold text-amber-600 uppercase mb-1">Exercise</div><p className="text-xs text-amber-800">"Phone in another room. Lie flat. Breathe out longer than in. 90 seconds. Go."</p></div></div>}
         />
-        <div className="text-center mt-8"><button onClick={onNext} className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-gray-900 text-white font-bold text-sm hover:bg-gray-800 transition-all">See Cover Differences <ChevronRight size={18} /></button></div>
+        <div className="mt-8 text-center">
+          <button type="button" onClick={onNext} className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-gray-800">
+            See cover differences <ChevronRight size={18} />
+          </button>
+        </div>
+        </div>
       </div>
     </div>
   );
@@ -2063,9 +2399,12 @@ function ShowcaseProse({ onNext, onBack }) {
 
 function ShowcaseCovers({ onNext, onBack }) {
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <div className="max-w-3xl mx-auto px-6 py-12">
-        <button onClick={onBack} className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600 mb-4"><ChevronLeft size={14} /> Back</button>
+    <div className="brand-studio-bg min-h-screen text-gray-900">
+      <div className="mx-auto max-w-3xl px-6 py-12">
+        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-gray-500 transition-colors hover:text-gray-800">
+          <ChevronLeft size={14} /> Back
+        </button>
+        <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-semibold mb-4"><Image size={12} /> Visual Style Preview</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">Your visual style shapes everything.</h1>
         <p className="text-gray-500 mb-8">Covers, social content, video aesthetics — all driven by one choice.</p>
@@ -2079,7 +2418,12 @@ function ShowcaseCovers({ onNext, onBack }) {
             </div>
           ))}
         </div>
-        <div className="text-center mt-8"><button onClick={onNext} className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-gray-900 text-white font-bold text-sm hover:bg-gray-800 transition-all">See Video Styles <ChevronRight size={18} /></button></div>
+        <div className="mt-8 text-center">
+          <button type="button" onClick={onNext} className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-gray-800">
+            See video styles <ChevronRight size={18} />
+          </button>
+        </div>
+        </div>
       </div>
     </div>
   );
@@ -2087,9 +2431,12 @@ function ShowcaseCovers({ onNext, onBack }) {
 
 function ShowcaseVideo({ onNext, onBack }) {
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <div className="max-w-3xl mx-auto px-6 py-12">
-        <button onClick={onBack} className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600 mb-4"><ChevronLeft size={14} /> Back</button>
+    <div className="brand-studio-bg min-h-screen text-gray-900">
+      <div className="mx-auto max-w-3xl px-6 py-12">
+        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-gray-500 transition-colors hover:text-gray-800">
+          <ChevronLeft size={14} /> Back
+        </button>
+        <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-semibold mb-4"><Film size={12} /> Video & Social Preview</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">Daily content. Your signature look.</h1>
         <p className="text-gray-500 mb-8">TikTok, YouTube Shorts, Reels — all auto-generated from your brand DNA across 48 Social channels.</p>
@@ -2101,7 +2448,12 @@ function ShowcaseVideo({ onNext, onBack }) {
             </div>
           ))}
         </div>
-        <div className="text-center mt-8"><button onClick={onNext} className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-gray-900 text-white font-bold text-sm hover:bg-gray-800 transition-all">See Format Diversity <ChevronRight size={18} /></button></div>
+        <div className="mt-8 text-center">
+          <button type="button" onClick={onNext} className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-gray-800">
+            See format diversity <ChevronRight size={18} />
+          </button>
+        </div>
+        </div>
       </div>
     </div>
   );
@@ -2109,9 +2461,12 @@ function ShowcaseVideo({ onNext, onBack }) {
 
 function ShowcaseFormats({ onNext, onBack }) {
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <div className="max-w-3xl mx-auto px-6 py-12">
-        <button onClick={onBack} className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600 mb-4"><ChevronLeft size={14} /> Back</button>
+    <div className="brand-studio-bg min-h-screen text-gray-900">
+      <div className="mx-auto max-w-3xl px-6 py-12">
+        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-gray-500 transition-colors hover:text-gray-800">
+          <ChevronLeft size={14} /> Back
+        </button>
+        <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold mb-4"><Layers size={12} /> Format Diversity</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">One brand. Infinite formats.</h1>
         <p className="text-gray-500 mb-8">Books, manga, audiobooks, courses, journals — all from the same brand DNA.</p>
@@ -2124,7 +2479,12 @@ function ShowcaseFormats({ onNext, onBack }) {
           ))}
         </div>
         <div className="rounded-xl bg-gray-50 border border-gray-200 p-5 mb-8"><p className="text-xs text-gray-600 leading-relaxed">Plus manga editions, audiobooks in multiple lengths, daily video content, pocket guides, 7-day transformation programs, mastercourse series, and interactive workbooks. The system adapts your brand to every format and platform automatically.</p></div>
-        <div className="text-center mt-8"><button onClick={onNext} className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-gray-900 text-white font-bold text-sm hover:bg-gray-800 transition-all">Start Building Your Brand <ArrowRight size={18} /></button></div>
+        <div className="mt-8 text-center">
+          <button type="button" onClick={onNext} className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-gray-800">
+            Start building your brand <ArrowRight size={18} />
+          </button>
+        </div>
+        </div>
       </div>
     </div>
   );
@@ -2190,21 +2550,36 @@ export default function BrandWizard() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-6xl mx-auto px-4 py-6">
+    <div className="brand-studio-bg min-h-screen">
+      <div className="mx-auto max-w-6xl px-4 py-8">
         <ProgressBar step={step} total={11} labels={STEP_LABELS} />
-        <div className="flex gap-6">
-          <div className="flex-1 min-w-0">
-            {steps[step]}
-            <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-100">
-              <button onClick={prevStep} className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-gray-500 hover:text-gray-800 transition-colors"><ChevronLeft size={16} /> Back</button>
-              {step < 10 && <button onClick={nextStep} disabled={!canNext} className={`flex items-center gap-1.5 px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${canNext ? "bg-gray-900 text-white hover:bg-gray-800 shadow-md" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>Continue <ChevronRight size={16} /></button>}
+        <div className="brand-studio-panel p-6 sm:p-8 lg:p-10">
+          <div className="flex gap-6 lg:gap-8">
+            <div className="min-w-0 flex-1">
+              {steps[step]}
+              <div className="mt-8 flex items-center justify-between border-t border-gray-100/80 pt-6">
+                <button type="button" onClick={prevStep} className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-gray-500 transition-colors hover:text-gray-900">
+                  <ChevronLeft size={16} /> Back
+                </button>
+                {step < 10 ? (
+                  <button
+                    type="button"
+                    onClick={nextStep}
+                    disabled={!canNext}
+                    className={`flex items-center gap-1.5 rounded-xl px-6 py-2.5 text-sm font-bold transition-all ${canNext ? "bg-gray-900 text-white shadow-md shadow-slate-300/40 hover:bg-gray-800" : "cursor-not-allowed bg-gray-200 text-gray-400"}`}
+                  >
+                    Continue <ChevronRight size={16} />
+                  </button>
+                ) : null}
+              </div>
             </div>
-          </div>
-          <div className="w-72 flex-shrink-0 hidden lg:block">
-            <div className="sticky top-6">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-3">Brand Impact</div>
-              <PersonaImpactPanel state={state} />
+            <div className="hidden w-72 flex-shrink-0 lg:block">
+              <div className="sticky top-8">
+                <div className="mb-3 text-[10px] font-bold uppercase tracking-wider text-violet-600/90">Studio insight</div>
+                <div className="rounded-2xl border border-gray-100/90 bg-white/60 p-1 shadow-inner backdrop-blur-sm">
+                  <PersonaImpactPanel state={state} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
