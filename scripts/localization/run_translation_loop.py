@@ -183,7 +183,8 @@ def _call_judge(english_source: str, translation: str, locale: str,
         + "\n\nOutput a JSON array — one object per gate. Each object has keys: "
         "gate_id, pass (bool), score (float 0.0-1.0 for scored gates, null for hard), "
         "defect (string or null), prompt_patch (string or null — fix instruction for the translator).\n"
-        "Output ONLY JSON — no preamble, no markdown fences."
+        "IMPORTANT: Keep defect and prompt_patch strings SHORT (one sentence each).\n"
+        "Output ONLY valid JSON — no preamble, no markdown fences."
     )
 
     user_prompt = (
@@ -196,8 +197,48 @@ def _call_judge(english_source: str, translation: str, locale: str,
 
     return call_llm(
         system_prompt, user_prompt, cfg,
-        role="judge", temperature=0.1, max_tokens=2000,
+        role="judge", temperature=0.1, max_tokens=16384,
     )
+
+
+# ─── JSON REPAIR ────────────────────────────────────────────────────────────
+
+def _parse_judge_json(raw: str) -> list[dict]:
+    """Parse judge JSON with fallback repair for truncated responses."""
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError as first_err:
+        logger.warning("Judge JSON parse failed (%s), attempting repair", first_err)
+
+    # Strategy 1: truncate to last complete object in array
+    # Find the last '}' and close the array
+    last_brace = raw.rfind("}")
+    if last_brace > 0:
+        candidate = raw[:last_brace + 1].rstrip().rstrip(",") + "]"
+        # Ensure it starts with '['
+        arr_start = candidate.find("[")
+        if arr_start >= 0:
+            candidate = candidate[arr_start:]
+            try:
+                result = json.loads(candidate)
+                logger.info("Judge JSON repaired by truncating to last complete object")
+                return result
+            except json.JSONDecodeError:
+                pass
+
+    # Strategy 2: extract individual JSON objects with regex
+    obj_pattern = re.compile(r'\{[^{}]*\}', re.DOTALL)
+    objects = []
+    for m in obj_pattern.finditer(raw):
+        try:
+            objects.append(json.loads(m.group()))
+        except json.JSONDecodeError:
+            continue
+    if objects:
+        logger.info("Judge JSON repaired by extracting %d individual objects", len(objects))
+        return objects
+
+    raise ValueError(f"Could not parse or repair judge JSON: {raw[:200]}...")
 
 
 # ─── PATCH APPLIER (ported from run_comparator_loop.py) ─────────────────────
@@ -450,7 +491,7 @@ def run_file_loop(
             if raw.startswith("```"):
                 raw = raw.split("\n", 1)[-1]
                 raw = raw.rsplit("```", 1)[0]
-            gate_results = json.loads(raw.strip())
+            gate_results = _parse_judge_json(raw.strip())
             if not isinstance(gate_results, list):
                 gate_results = [gate_results]
         except Exception as e:
@@ -532,6 +573,7 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--resume", action="store_true", help="Skip files with existing translations")
     ap.add_argument("--max-parallel", type=int, default=5)
+    ap.add_argument("--max-files", type=int, default=0, help="Limit number of files (0=all)")
     args = ap.parse_args()
 
     cfg = _load_config()
@@ -555,6 +597,8 @@ def main() -> int:
 
     atoms_root = REPO_ROOT / "atoms"
     manifest = discover_atoms(atoms_root, persona=args.persona, topic=args.topic, slot=args.slot)
+    if args.max_files and args.max_files > 0:
+        manifest = manifest[:args.max_files]
     max_loops = cfg.get("loop_control", {}).get("max_loops", 3)
 
     print(f"Manifest: {len(manifest)} files × {len(locales)} locales = {len(manifest) * len(locales)} jobs")

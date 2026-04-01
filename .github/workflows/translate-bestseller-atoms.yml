@@ -113,7 +113,7 @@ jobs:
 
           BRANCH="agent/translate-${PERSONA}-${LOCALE}-$(date +%Y%m%d-%H%M%S)"
           git checkout -b "$BRANCH"
-          git add atoms/*/*/locales/ atoms/*/*/*/locales/
+          git add 'atoms/*/*/*/locales/'
           git commit -m "feat(localization): translate ${PERSONA} bestseller atoms to ${LOCALE}
 
           Automated CJK6 translation via Qwen/Dashscope.
