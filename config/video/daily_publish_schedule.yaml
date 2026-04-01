@@ -1,0 +1,64 @@
+# Daily Publish Schedule — batch assembly rules for the daily video publishing workflow.
+# Authority: specs/VIDEO_CONTENT_ENGINE_DEV_SPEC.md, config/video/upload_config.yaml
+#
+# Used by scripts/video/build_daily_batch.py to select which rendered videos
+# to include in each day's publishing batch per brand/channel.
+
+# Global batch limits
+batch_limits:
+  max_videos_per_brand_per_day: 9       # 3 channels x 3 uploads max
+  max_videos_per_channel_per_day: 3     # Matches daily_upload_cap in channel_registry.yaml
+  max_total_uploads_per_day: 27         # 3 brands x 9 videos max
+
+# Content mix targets (percentage of daily batch per brand)
+# Ensures variety in each day's output. Percentages are targets, not hard limits.
+content_mix:
+  short_form_pct: 60       # YouTube Shorts, TikTok, Reels
+  mid_form_pct: 30         # YouTube long-form, Bilibili
+  long_form_pct: 10        # Deep content (YouTube only)
+
+# Priority rules for selecting videos from the render queue
+priority:
+  # Videos with higher engagement feedback scores get priority
+  engagement_score_weight: 0.4
+  # Newer renders get slight priority to keep content fresh
+  recency_weight: 0.3
+  # Content-type diversity (penalizes same-type clustering)
+  diversity_weight: 0.3
+
+# Day-of-week publishing patterns (UTC)
+# Some channels publish more on specific days based on platform analytics.
+day_of_week_multipliers:
+  monday: 1.0
+  tuesday: 1.0
+  wednesday: 1.1      # Mid-week engagement bump
+  thursday: 1.1
+  friday: 0.9
+  saturday: 0.8       # Reduce weekend volume
+  sunday: 0.8
+
+# Brand publishing windows (UTC hours, matching CI workflow cron)
+brand_windows:
+  stillness_press:
+    start_hour_utc: 6
+    end_hour_utc: 13
+  cognitive_clarity:
+    start_hour_utc: 14
+    end_hour_utc: 19
+  norcal_dharma:
+    start_hour_utc: 20
+    end_hour_utc: 23
+
+# Cross-dedup enforcement (references config/video/cross_video_dedup.yaml)
+dedup:
+  enforce_cross_video_dedup: true
+  enforce_cross_channel_unique_assets: true
+
+# Queue management
+queue:
+  # Where rendered-but-unpublished videos accumulate
+  ready_dir: artifacts/video/publish_queue
+  # How many days a video can sit in the queue before it expires
+  max_queue_age_days: 14
+  # Archive path for successfully published batches
+  archive_dir: artifacts/video/publish_archive

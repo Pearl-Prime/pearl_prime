@@ -106,6 +106,22 @@ jobs:
             norcal_dharma)     echo "suffix=_ND" >> "$GITHUB_OUTPUT" ;;
           esac
 
+      - name: Build daily batch
+        id: batch
+        run: |
+          BATCH_OUT="artifacts/video/daily_batches/batch-$(date -u +%Y%m%d)-${{ matrix.brand }}.json"
+          mkdir -p artifacts/video/daily_batches
+          python scripts/video/build_daily_batch.py \
+            --brand ${{ matrix.brand }} \
+            -o "$BATCH_OUT" || true
+          if [ -f "$BATCH_OUT" ]; then
+            TOTAL=$(python3 -c "import json; print(json.load(open('$BATCH_OUT')).get('total_selected', 0))")
+            echo "batch_path=$BATCH_OUT" >> "$GITHUB_OUTPUT"
+            echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
+          else
+            echo "total=0" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Find latest platform variants
         id: variants
         run: |
@@ -171,6 +187,14 @@ jobs:
         with:
           name: upload-results-${{ matrix.brand }}-${{ github.run_number }}
           path: artifacts/video/uploads/
+          retention-days: 30
+
+      - name: Upload batch manifest artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-batch-${{ matrix.brand }}-${{ github.run_number }}
+          path: artifacts/video/daily_batches/
           retention-days: 30
 
       - name: Check for failures

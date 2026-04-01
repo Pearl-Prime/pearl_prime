@@ -116,8 +116,25 @@ def write_colorbalance_sendcmd_file(
 
 
 def quality_tuning(quality: str) -> tuple[int, str]:
-    """Return (crf_offset, preset_name_fragment)."""
+    """Return (crf_offset, preset_name_fragment).
+
+    Values are loaded from config/video/render_defaults.yaml when available,
+    falling back to hardcoded defaults for backward compatibility.
+    """
     q = (quality or "standard").strip().lower()
+
+    # Try loading from config (graceful fallback if missing or yaml unavailable)
+    try:
+        from scripts.video._config import load_yaml
+        cfg = load_yaml("config/video/render_defaults.yaml")
+        tiers = cfg.get("quality_tiers", {})
+        if q in tiers:
+            tier = tiers[q]
+            return int(tier.get("crf_offset", 0)), str(tier.get("x264_preset", "medium"))
+    except Exception:
+        pass
+
+    # Hardcoded fallback (matches render_defaults.yaml defaults)
     if q == "draft":
         return +4, "veryfast"
     if q == "high":
