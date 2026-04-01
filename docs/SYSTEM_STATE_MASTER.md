@@ -1,6 +1,6 @@
 # System State Master
 
-Last verified: 2026-03-24
+Last verified: 2026-04-01
 Owner: Pearl_GitHub
 
 ## Purpose
@@ -17,20 +17,23 @@ If this file disagrees with live git state, machine-readable config, or fresh ar
 
 ## Executive Summary
 
-Phoenix Omega is a large multi-system repo with real production code, major documentation/governance infrastructure, active local work, and some backlog-only or partially wired areas. The repo is usable, but it is not in a final “everything complete and production-clean” state.
+Phoenix Omega is a large multi-system repo with real production code, major documentation/governance infrastructure, active local work, and some backlog-only or partially wired areas. The repo is usable, but it is not in a final "everything complete and production-clean" state.
 
 The clearest current truth is:
 
-- governance and repo-operations docs are substantial and now better aligned
-- GitHub branch protection is now normalized to one active canonical ruleset on `main`
+- governance and repo-operations docs are substantial and well aligned
+- GitHub branch protection is normalized to one active canonical ruleset on `main`
 - Pearl_GitHub tooling and hourly alignment infrastructure exist on `main`
 - the AI Manga Dharma spec suite is merged
 - manga pipeline implementation through Chunks A-F is merged on `main`
-- there are no open PRs right now
-- the current checkout is on `agent/manga-sdf-revision-workspace` (2 commits ahead of `origin/main`) with 3468 dirty paths (`2539` modified, `929` untracked)
-- local repo stabilization is still active because `.git/index.lock` is present again and held by live editor-side git activity
-- 16 stale remote branches were deleted from GitHub on 2026-03-24; 15 remote branches remain including `main`
-- only two remote `codex/*` branches remain: `origin/codex/runtime-consolidation` and `origin/codex/marketing-brand-alias-resolution`
+- atom coverage is complete: 11 types x 12 personas (3,969 files) on `main`
+- teacher banks cover 13 teachers with 2,143 files in SOURCE_OF_TRUTH/teacher_banks/
+- translation pipeline infrastructure is merged but no translations generated yet (DashScope API in arrears)
+- video pipeline Stage 18 Upload/Publish is merged; 0/24 credentials provisioned, dry-run mode active
+- brand wizard / onboarding is live on Pages with premium studio UI
+- branch consolidation complete: PR #146 reduced 46 to 8 local branches; `main` is the only active remote branch
+- open PRs: 1 (#152 — YAML repair + exercise promotion + governance files)
+- canonical credential registry exists: docs/INTEGRATION_CREDENTIALS_REGISTRY.md
 - some areas are fully real, some are scaffolding, and some are still backlog/reference only
 
 ## What New Developers Should Know First
@@ -48,53 +51,98 @@ After that, go to the domain you are actually touching.
 
 ## Current Repo Truth
 
-- Open PRs: `0`
-- Repo cleanup / governance / manga alignment PRs already landed on `main`
-- PR #40 normalized GitHub governance drift:
-  - one active `main` ruleset remains
-  - canonical required checks are `Core tests`, `Release gates`, `EI V2 gates`, `Change impact`
-  - legacy `change-impact` is removed from workflow emission and live rulesets
-  - `Workers Builds: pearl-prime` is not merge-required
-- PR #21 (`codex/runtime-consolidation`) was reviewed as harvest-only and closed as superseded
+- Open PRs: `1` (#152 — fix: repair broken YAMLs + promote exercises + create governance files)
+- Branch consolidation landed via PR #146 on 2026-04-01
+- Canonical required checks are `Core tests`, `Release gates`, `EI V2 gates`, `Change impact`
 - hourly repo-alignment tooling exists on `main`:
   - [./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md](./PEARL_GITHUB_AUTOPILOT_RUNBOOK.md)
   - [../scripts/git/hourly_repo_alignment.py](../scripts/git/hourly_repo_alignment.py)
   - [../scripts/git/hourly_repo_alignment.sh](../scripts/git/hourly_repo_alignment.sh)
-- the most recent saved alignment report in the working checkout was `artifacts/governance/repo_alignment/hourly_repo_alignment_20260322_112949.md`
-  - treat repo-alignment artifacts as local operational evidence, not guaranteed committed files for fresh clones
-- however, local `main` currently lags `origin/main`, and the active manga workspace is far from normalized into clean PR flow
 
 ## Branch Reality
 
-### Local branches currently present (19 total)
+### Post-consolidation state (2026-04-01)
 
-- active agent branches include `agent/manga-sdf-revision-workspace`, `agent/repo-alignment-hardening`, manga chunk branches, and repo-health helpers
-- safety/local reference branches include `codex/main-autobackup-20260320-2124`, `codex/main-autobackup-20260322-112842`, `codex/main-salvage-20260323-153043`, `codex/marketing-brand-alias-resolution`, `codex/runtime-consolidation`, and `main`
+PR #146 performed a full branch consolidation: 46 local branches triaged down to 8, with 12 promotions cherry-picked and 37 branches archived.
 
-### Remote branches on GitHub (15 total including `main`)
-
-- active `origin/agent/*` branches remain for current local work, including `origin/agent/repo-alignment-hardening`
-- keep-open `origin/codex/*` branches now are only:
-  - `origin/codex/runtime-consolidation`
-  - `origin/codex/marketing-brand-alias-resolution`
-- the 16 stale remote branches from the old disposition set were deleted on 2026-03-24
+- `main` is the only active remote branch
+- 4 remote refs remain besides `main`: `origin/agent/brand-admin-media-generation-spec`, `origin/agent/manga-author-system`, `origin/agent/verify-and-fix`, `v48-main`
+- local branch sprawl is eliminated
 
 Short interpretation:
 
-- branch sprawl is much better than before
-- remote stale-branch cleanup is materially improved
-- remaining repo-health risk is concentrated in local dirt and active branch/worktree state, not stale GitHub remnants
+- branch hygiene is now excellent
+- remaining work is on `main` or in short-lived agent branches
+- no stale `codex/*` branches remain on remote
+
+## Atom Coverage
+
+### atoms/ directory (3,969 files on main)
+
+All 11 atom types x 12 personas are covered:
+
+- PIVOT/TAKEAWAY/THREAD/PERMISSION landed in PR #138 (588 files)
+- STORY coverage landed in PR #140 (172 files)
+- COMPRESSION/INTEGRATION and other base types were present from earlier PRs
+
+### SOURCE_OF_TRUTH/teacher_banks/ (13 teachers, 2,143 files)
+
+Teachers: adi_da, ahjan, joshin, junko, maat, master_feung, master_sha, master_wu, miki, omote, pamela_fellows, ra, sai_ma
+
+- adi_da has full 11-type coverage (COMPRESSION, EXERCISE, HOOK, INTEGRATION, PERMISSION, PIVOT, REFLECTION, SCENE, STORY, TAKEAWAY, THREAD) plus localized atoms (ja-JP)
+- Other teachers have 6 types (base coverage)
+
+## Translation Pipeline
+
+- Infrastructure merged across PRs #142, #143, #148, #149:
+  - CJK6 translation pipeline for bestseller atoms (PR #142)
+  - CJK6 bestseller atom translation CI workflow (PR #143)
+  - Full comparator loop for translation pipeline (PR #148)
+  - CI workflows switched to ubuntu-latest (PR #149)
+- Zero translations generated yet — pipeline is ready but DashScope API is in arrears
+- Quality contracts (glossary, golden segments) are stubs awaiting first real translation run
+- Target locales: ja-JP, zh-CN, zh-TW, ko-KR, vi-VN, th-TH (CJK6)
+
+## Video Pipeline
+
+Status:
+
+- Stage 18 Upload/Publish merged (PR #144): 5 platform uploaders, daily CI workflow
+- 0/24 credentials provisioned
+- Dry-run mode active — no real uploads happening
+- Substantial local planning artifacts and pipeline code exist
+
+Still not done:
+
+- credential provisioning for all 24 platform slots
+- first real upload run
+
+## Brand Wizard / Onboarding
+
+- Premium studio UI pass landed (PR #147)
+- Last 5% polish landed (PR #151) — copy, blueprint, launch checklist
+- Pages deploy live at brand-admin-onboarding.pages.dev
+- Proof asset generation and completion reporting merged (PR #133)
+- Onboarding spine HTML deployed via Cloudflare Pages (PRs #135, #136, #137)
+
+## Exercise Component System
+
+- Component assembler built: bridge/intro/description/aha/integration pipeline
+- 39 production-ready exercises created from teacher bank atoms
+- 11 exercises_v4 promoted from candidate to approved
+- Exercise YAML repair and promotion in progress (PR #152)
 
 ## Governance Status
 
 ### What is good
 
-- [../ps.txt](../ps.txt) now works better as an agent entry protocol
-- [./DOCS_INDEX.md](./DOCS_INDEX.md) is the best canonical doc map
-- [./PEARL_GITHUB_ONBOARDING.md](./PEARL_GITHUB_ONBOARDING.md) is closer to repo reality than before
+- [../ps.txt](../ps.txt) works as an agent entry protocol
+- [./DOCS_INDEX.md](./DOCS_INDEX.md) is the canonical doc map
+- [./PEARL_GITHUB_ONBOARDING.md](./PEARL_GITHUB_ONBOARDING.md) is close to repo reality
 - Pearl_GitHub state and memory docs exist and are useful
 - repo-alignment/autopilot tooling exists
-- governance verifier now checks for conflicting active rulesets and stale required-check contexts
+- governance verifier checks for conflicting active rulesets and stale required-check contexts
+- canonical integration credentials registry exists (PR #145)
 
 ### What is still imperfect
 
@@ -118,20 +166,13 @@ Status:
 
 - real and active
 - docs, memory, cleanup runbooks, branch-disposition docs, and autopilot tooling are present
-
-Still not done:
-
-- stabilize local repo activity around the live `.git/index.lock`
-- normalize current local-only changes through clean branch/PR flow
-- keep state docs current as repo reality changes
+- branch consolidation complete (PR #146)
 
 ### Integrations
 
 Status:
 
 - meaningful local setup tooling and runbooks exist
-- WordPress local setup has been wired before
-- messaging setup flows and requirement-reporting scripts exist
 - canonical credential registry exists: [docs/INTEGRATION_CREDENTIALS_REGISTRY.md](./INTEGRATION_CREDENTIALS_REGISTRY.md) — every env var, service, and setup link in one place
 - validation script: `python3 scripts/ci/check_integration_env.py` reports what's wired vs missing
 
@@ -150,23 +191,12 @@ Status:
   - [./MANGA_IMPLEMENTATION_OUTLINE.md](./MANGA_IMPLEMENTATION_OUTLINE.md)
 - first kernel/build slice exists in `phoenix_v4.manga`
 - Colab validation exists for the prototype render path
+- STORY engine prose IDs aligned with Stage 3 assembly (PR #141)
 
 Still not done:
 
 - full in-repo production rendering path is not complete
 - ComfyUI scaling path is planned, not fully wired
-- the active SDF revision workspace changes are not yet normalized through PR flow
-
-### Video pipeline
-
-Status:
-
-- substantial real system exists
-- local artifacts and planning outputs are present
-
-Still not done:
-
-- some current work is still local-only and not yet normalized through GitHub truth
 
 ### Marketing / trend feeds / editorial routing
 
@@ -176,28 +206,18 @@ Status:
   - [../config/marketing/consumer_language_by_topic.yaml](../config/marketing/consumer_language_by_topic.yaml)
   - [../phoenix_v4/planning/catalog_planner.py](../phoenix_v4/planning/catalog_planner.py)
   - [../scripts/ml_editorial/run_market_router.py](../scripts/ml_editorial/run_market_router.py)
-  - `config/trend_keywords/` local-only working directory, not yet landed on `main`
-  - `scripts/feeds/` local-only working directory, not yet landed on `main`
-
-Still not done:
-
-- this active local work has not yet been cleanly normalized into GitHub via fresh branch/PR flow
-
-## What Is Local-Only Right Now
-
-Local `main` currently contains changes that are not yet normalized into clean GitHub truth.
-
-That means:
-
-- this checkout is useful and active
-- but it is not the same thing as saying GitHub already contains the best current local work
+- band-aware sort and post-merge coordination artifacts landed (PR #150)
 
 ## What Is Definitely Not Done
 
-1. Full local-to-GitHub normalization of current working-tree changes
-2. Full manga production render pipeline inside the repo
-3. Full production completion of every external integration channel
-4. Completion of all backlog-only or file-not-present items listed in [./DOCS_INDEX.md](./DOCS_INDEX.md)
+1. Translation pipeline: DashScope API in arrears, zero translations generated, quality contracts are stubs
+2. Video pipeline: 0/24 credentials provisioned, dry-run only
+3. Full manga production render pipeline inside the repo
+4. Full production completion of every external integration channel
+5. Research citation gaps: 20 of 22 gaps still open (ws_research_citation_gaps_20260330)
+6. Research pipeline activation: blocked on citation gap closure
+7. Completion of all backlog-only or file-not-present items listed in [./DOCS_INDEX.md](./DOCS_INDEX.md)
+8. Exercise YAML repair and promotion (PR #152 in progress)
 
 ## Best Operating Model
 
@@ -218,7 +238,7 @@ If you are onboarding a new developer, tell them:
 - `ps.txt` is protocol, not the full current state
 - `DOCS_INDEX.md` is the navigation map
 - `PEARL_GITHUB_STATE.md` is the fast GitHub/repo-health resume point
-- current local work may be ahead of the last normalized GitHub state
+- branch consolidation is complete; `main` is the only active branch
 
 ## Update Rule
 
