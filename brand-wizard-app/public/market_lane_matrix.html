@@ -32,6 +32,9 @@ tr:last-child td{border-bottom:none}
 .nmiss{color:var(--red)}
 .pill{display:inline-block;font-size:.58rem;padding:2px 6px;border-radius:999px;background:var(--gl);color:var(--green);font-weight:600}
 .legend{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0;font-size:.72rem;color:var(--muted)}
+.lane-preview{width:40px;height:40px;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:#f3f4f6;margin-top:6px;flex-shrink:0}
+.lane-preview img,.lane-preview video{width:100%;height:100%;object-fit:cover;display:block}
+.lane-preview .pv-ph{font-size:.55rem;padding:4px;text-align:center;line-height:1.2;color:var(--muted)}
 .foot{margin-top:28px;font-size:.78rem;color:var(--muted)}
 </style>
 </head>
@@ -56,8 +59,20 @@ tr:last-child td{border-bottom:none}
 </div>
 <script>
 (function(){
+var LANE_PREVIEW_ID={self_help:'pack_v1_vi_premium_v1',audiobook:'pack_v1_sys_audiobook_dominance_v1',manga:null,pearl_news:'pack_v1_mission_output_overview',breathwork_tools:'pack_v1_sys_eois_v1',tools:'pack_v1_sys_chaos_slot_v1',other:'pack_v1_mission_output_overview'};
 function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
 function clsReady(ready,total){if(ready===0)return'n nmiss';if(ready>=total)return'n nok';return'n nwarn'}
+function resolveUrl(path){if(!path)return '';if(/^https?:\/\//i.test(path))return path;return path;}
+function isVid(p){return p&&/\.(mp4|webm|ogg|mov)$/i.test(p);}
+function lanePreviewEl(lane, byId){
+  var pid=LANE_PREVIEW_ID[lane];if(!pid||!byId[pid])return null;
+  var r=byId[pid];var d=el('div','lane-preview');
+  if(r.status==='ready'&&r.asset_path){
+    if(isVid(r.asset_path)){var v=document.createElement('video');v.src=resolveUrl(r.asset_path);v.muted=true;v.playsInline=true;v.setAttribute('preload','metadata');d.appendChild(v);}
+    else{var im=document.createElement('img');im.alt='';im.src=resolveUrl(r.asset_path);d.appendChild(im);}
+  }else{var ph=el('div','pv-ph','Preview pending');d.appendChild(ph);}
+  return d;
+}
 function loadRegistryJson(){
   return fetch('onboarding/example_registry.json').then(function(r){
     if(!r.ok)throw new Error();
@@ -73,6 +88,8 @@ function loadRegistryJson(){
 loadRegistryJson().then(function(rows){
   document.getElementById('err').classList.remove('on');
   document.getElementById('main').style.display='block';
+
+  var byId={};rows.forEach(function(r){byId[r.id]=r;});
 
   var markets={};var lanes={};
   rows.forEach(function(r){
@@ -112,6 +129,7 @@ loadRegistryJson().then(function(rows){
         var ids=Object.keys(d.sets).sort().join(', ');
         wrap.appendChild(el('span','mono',ids));
       }
+      var pv=lanePreviewEl(l, byId);if(pv)wrap.appendChild(pv);
       td.appendChild(wrap);
       tr.appendChild(td);
     });

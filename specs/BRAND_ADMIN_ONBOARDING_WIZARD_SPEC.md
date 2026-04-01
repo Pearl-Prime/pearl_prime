@@ -6,6 +6,8 @@
 
 - [ONBOARDING_OUTPUT_PROOF_SYSTEM.md](./ONBOARDING_OUTPUT_PROOF_SYSTEM.md) — registry UX, stale-`ready`, JSON delivery.
 - [ONBOARDING_REAL_EXAMPLE_GENERATION_SPEC.md](./ONBOARDING_REAL_EXAMPLE_GENERATION_SPEC.md) — example matrix, `cmp_*` sets, field schema.
+- [BRAND_ADMIN_MEDIA_GENERATION_SPEC.md](./BRAND_ADMIN_MEDIA_GENERATION_SPEC.md) — canonical image/video generation contract, QA gates, and registry linkage.
+- [BRAND_ADMIN_ONBOARDING_IMAGE_PACK_V1_TRUST_LAYER_SPEC.md](./BRAND_ADMIN_ONBOARDING_IMAGE_PACK_V1_TRUST_LAYER_SPEC.md) — Image Pack v1 (19 prompts, rubric, wizard step placement).
 - [docs/BRAND_ADMIN_ONBOARDING_PAGES_SPEC.md](../docs/BRAND_ADMIN_ONBOARDING_PAGES_SPEC.md) — surrounding pages.
 - Config: [config/onboarding/wizard_decision_explainer_data.json](../config/onboarding/wizard_decision_explainer_data.json), [config/onboarding/example_registry.json](../config/onboarding/example_registry.json).
 - Implementation: [brand-wizard-app/src/BrandWizard.jsx](../brand-wizard-app/src/BrandWizard.jsx) (evolve incrementally).
@@ -19,6 +21,8 @@ Every important claim should be backed by at least one of:
 - registry-linked proof (`ships_product` / `teaches_comparison`),
 - explainer copy from `wizard_decision_explainer_data.json`,
 - revenue/workload **stubs** (until dashboard mode is wired).
+
+The wizard output is the authoritative brand contract. Downstream media generation must remain contract-locked (no manual drift from wizard decisions), as defined in [BRAND_ADMIN_MEDIA_GENERATION_SPEC.md](./BRAND_ADMIN_MEDIA_GENERATION_SPEC.md).
 
 ---
 

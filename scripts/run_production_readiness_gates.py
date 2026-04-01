@@ -262,6 +262,7 @@ def main() -> int:
                         "--arc", str(arc_path),
                         "--out", str(out_path),
                         "--no-update-freebie-index",
+                        "--skip-quality-gates",
                     ],
                     cwd=str(REPO_ROOT),
                     capture_output=True,

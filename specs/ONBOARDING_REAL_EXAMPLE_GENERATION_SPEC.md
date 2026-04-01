@@ -5,6 +5,8 @@
 **Companion docs:**
 
 - Scaffold transport + UI rules: [ONBOARDING_OUTPUT_PROOF_SYSTEM.md](./ONBOARDING_OUTPUT_PROOF_SYSTEM.md), [BRAND_ADMIN_ONBOARDING_WIZARD_SPEC.md](./BRAND_ADMIN_ONBOARDING_WIZARD_SPEC.md), Brand Admin Onboarding Stack plan (JSON-first, proof-pending, Cloudflare Pages).
+- Canonical generation contract (how assets are generated and validated): [BRAND_ADMIN_MEDIA_GENERATION_SPEC.md](./BRAND_ADMIN_MEDIA_GENERATION_SPEC.md).
+- Image Pack v1 (trust layer — prompts, QA rubric, placement, registry starters): [BRAND_ADMIN_ONBOARDING_IMAGE_PACK_V1_TRUST_LAYER_SPEC.md](./BRAND_ADMIN_ONBOARDING_IMAGE_PACK_V1_TRUST_LAYER_SPEC.md).
 - Pages + deploy: [docs/BRAND_ADMIN_ONBOARDING_PAGES_SPEC.md](../docs/BRAND_ADMIN_ONBOARDING_PAGES_SPEC.md), [docs/BRAND_ADMIN_ONBOARDING_CLOUDFLARE_DEPLOYMENT.md](../docs/BRAND_ADMIN_ONBOARDING_CLOUDFLARE_DEPLOYMENT.md).
 - Operational checklist: [docs/ONBOARDING_EXAMPLE_PRODUCTION_CHECKLIST.md](../docs/ONBOARDING_EXAMPLE_PRODUCTION_CHECKLIST.md).
 - Canonical brand-admin entry governance: [BRAND_ADMIN_CANONICAL_PACKAGE.md](../BRAND_ADMIN_CANONICAL_PACKAGE.md).
@@ -20,6 +22,8 @@
 2. **Pipeline demo run** — explicitly labeled in registry as `source: pipeline_demo` (same toolchain, fixed seed/config), never arbitrary stock art pretending to be product.
 
 The **registry** is the contract surface; this spec defines **what rows must exist** and **how generations are batched and approved**.
+
+Responsibility boundary: this document defines **what examples must exist** and how they are represented in the registry. The media-generation spec defines **how image/video assets are generated, quality-gated, and marked ready**.
 
 ---
 
