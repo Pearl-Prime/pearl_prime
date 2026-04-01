@@ -94,47 +94,67 @@ jobs:
         run: |
           PYTHONPATH=. ${{ steps.cmd.outputs.cmd }}
 
+      # SAFETY NET: Save translations to disk as artifact IMMEDIATELY
+      # Even if git/PR steps fail, the translated files are preserved
+      - name: Save translations as artifact (safety net)
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: translations-${{ github.event.inputs.persona }}-${{ github.event.inputs.locale }}-${{ github.run_id }}
+          path: |
+            atoms/**/locales/*/CANONICAL.txt
+          if-no-files-found: warn
+          retention-days: 30
+
       - name: Report coverage
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           PYTHONPATH=. python3 scripts/ci/report_translation_coverage.py || true
 
-      - name: Create PR with translations
+      - name: Count translated files
         if: ${{ github.event.inputs.dry_run != 'true' }}
+        id: count
+        run: |
+          COUNT=$(find atoms -path '*/locales/*/CANONICAL.txt' -type f 2>/dev/null | wc -l | tr -d ' ')
+          echo "file_count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "Found $COUNT translated files"
+
+      - name: Create PR with translations
+        if: ${{ github.event.inputs.dry_run != 'true' && steps.count.outputs.file_count > 0 }}
         run: |
           PERSONA="${{ github.event.inputs.persona }}"
           LOCALE="${{ github.event.inputs.locale }}"
-
-          # Check if there are new files
-          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard atoms/)" ]; then
-            echo "No new translations generated."
-            exit 0
-          fi
 
           git config user.name "Phoenix Omega Bot"
           git config user.email "noreply@phoenix-omega.dev"
 
           BRANCH="agent/translate-${PERSONA}-${LOCALE}-$(date +%Y%m%d-%H%M%S)"
           git checkout -b "$BRANCH"
-          git add $(find atoms -path '*/locales/*/CANONICAL.txt' -type f 2>/dev/null)
+
+          # Add all translated files (handles any directory depth)
+          find atoms -path '*/locales/*/CANONICAL.txt' -type f -exec git add {} +
+
           git commit -m "feat(localization): translate ${PERSONA} bestseller atoms to ${LOCALE}
 
           Automated CJK6 translation via Qwen/Dashscope.
           Persona: ${PERSONA}
           Locale(s): ${LOCALE}
+          Files: ${{ steps.count.outputs.file_count }}
 
           Co-Authored-By: Qwen (Dashscope) <noreply@alibaba.com>"
 
           git push -u origin "$BRANCH"
 
           gh pr create \
-            --title "feat(localization): ${PERSONA} bestseller atoms → ${LOCALE}" \
+            --title "feat(localization): ${PERSONA} bestseller atoms → ${LOCALE} (${{ steps.count.outputs.file_count }} files)" \
             --body "Automated CJK6 translation via workflow dispatch.
 
           - Persona: ${PERSONA}
           - Locale(s): ${LOCALE}
           - Slot(s): ${SLOT:-all}
-          - Pipeline: \`translate_atoms_all_locales_cloud.py\`
+          - Files translated: ${{ steps.count.outputs.file_count }}
+          - Pipeline: \`run_translation_loop.py\`
+          - Artifact backup: translations-${PERSONA}-${LOCALE}-${{ github.run_id }}
 
           Review sample translations before merging." \
             --head "$BRANCH"
