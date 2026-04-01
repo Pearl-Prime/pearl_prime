@@ -1,5 +1,6 @@
-# Translate bestseller atoms (PIVOT/TAKEAWAY/THREAD/PERMISSION/STORY) to CJK6 locales
-# Uses Qwen via Dashscope API. Translates one persona at a time to keep PRs reviewable.
+# Translate bestseller atoms (PIVOT/TAKEAWAY/THREAD/PERMISSION/STORY) to CJK6 locales.
+# Uses the full comparator loop: translate -> judge -> patch -> retry (max 3).
+# Ported from audiobook comparator (run_comparator_loop.py).
 #
 # Usage: trigger manually via workflow_dispatch, pick persona + locale(s).
 
@@ -59,7 +60,7 @@ jobs:
       - name: Build translation command
         id: cmd
         run: |
-          CMD="python3 scripts/translate_atoms_all_locales_cloud.py"
+          CMD="python3 scripts/localization/run_translation_loop.py"
 
           PERSONA="${{ github.event.inputs.persona }}"
           LOCALE="${{ github.event.inputs.locale }}"
@@ -84,12 +85,12 @@ jobs:
             CMD="$CMD --dry-run"
           fi
 
-          CMD="$CMD --resume --batch-size 5 --rate-limit 0.15"
+          CMD="$CMD --resume --max-parallel 5"
 
           echo "cmd=$CMD" >> "$GITHUB_OUTPUT"
           echo "Running: $CMD"
 
-      - name: Run translation
+      - name: Run translation (with judge loop)
         run: |
           PYTHONPATH=. ${{ steps.cmd.outputs.cmd }}
 
