@@ -1,10 +1,14 @@
-# Cloudflare Pages: brand-wizard-app + synced onboarding JSON.
+# Cloudflare Pages: brand-wizard-app + synced onboarding JSON + spine HTML (copied in prebuild).
 #
-# Repo secrets (Settings → Secrets → Actions):
-#   CLOUDFLARE_API_TOKEN — Create in Cloudflare dash with Account → API Tokens:
-#     permissions: Account → Cloudflare Pages → Edit (or use "Edit Cloudflare Workers" template and add Pages).
-#   CLOUDFLARE_ACCOUNT_ID — Dashboard right sidebar on any domain overview.
-# Pages project: create once as "brand-admin-onboarding"; confirm hostname under Domains (often *.pages.dev).
+# Required repo secrets (Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN — Cloudflare dashboard → Manage Account → API Tokens → Create Token.
+#     Use a custom token with: Account → Cloudflare Pages → Edit (minimum for `wrangler pages deploy`).
+#   CLOUDFLARE_ACCOUNT_ID — Dashboard → any zone → Overview → Account ID (right sidebar).
+#
+# Cloudflare Pages project: create once named exactly `brand-admin-onboarding` (must match --project-name below).
+# After first deploy, confirm the live hostname under Pages → project → Domains (often https://brand-admin-onboarding.pages.dev).
+#
+# If either secret is missing, the deploy job fails after a successful build — add both before expecting green deploys.
 name: Brand admin onboarding (Pages)
 
 on:
@@ -22,12 +26,17 @@ on:
       - "lane_examples_gallery.html"
       - ".github/workflows/brand-admin-onboarding-pages.yml"
 
+concurrency:
+  group: brand-admin-onboarding-pages
+  cancel-in-progress: false
+
 permissions:
   contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     defaults:
       run:
         working-directory: brand-wizard-app
@@ -62,6 +71,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4
