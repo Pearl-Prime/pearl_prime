@@ -111,6 +111,9 @@ jobs:
             exit 0
           fi
 
+          git config user.name "Phoenix Omega Bot"
+          git config user.email "noreply@phoenix-omega.dev"
+
           BRANCH="agent/translate-${PERSONA}-${LOCALE}-$(date +%Y%m%d-%H%M%S)"
           git checkout -b "$BRANCH"
           git add $(find atoms -path '*/locales/*/CANONICAL.txt' -type f 2>/dev/null)
