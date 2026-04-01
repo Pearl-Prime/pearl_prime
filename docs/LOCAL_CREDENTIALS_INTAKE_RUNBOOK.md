@@ -1,5 +1,7 @@
 # Local Credentials Intake Runbook
 
+> **Canonical registry:** For the full list of every integration credential this repo uses, see [docs/INTEGRATION_CREDENTIALS_REGISTRY.md](./INTEGRATION_CREDENTIALS_REGISTRY.md).
+
 This runbook is for local-only credential sources such as
 `docs/all_credentials.txt`.
 

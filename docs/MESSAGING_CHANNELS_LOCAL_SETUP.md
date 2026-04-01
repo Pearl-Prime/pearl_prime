@@ -1,5 +1,7 @@
 # Messaging Channels Local Setup
 
+> **Canonical registry:** For all integration credentials (not just messaging), see [docs/INTEGRATION_CREDENTIALS_REGISTRY.md](./INTEGRATION_CREDENTIALS_REGISTRY.md).
+
 This mirrors the existing channel model already present in the admin UI:
 
 - LINE

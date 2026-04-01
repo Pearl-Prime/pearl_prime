@@ -132,6 +132,8 @@ Status:
 - meaningful local setup tooling and runbooks exist
 - WordPress local setup has been wired before
 - messaging setup flows and requirement-reporting scripts exist
+- canonical credential registry exists: [docs/INTEGRATION_CREDENTIALS_REGISTRY.md](./INTEGRATION_CREDENTIALS_REGISTRY.md) — every env var, service, and setup link in one place
+- validation script: `python3 scripts/ci/check_integration_env.py` reports what's wired vs missing
 
 Still not done:
 
