@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ite_color_arc.schema.json",
+  "title": "ITE Color Arc",
+  "description": "Per-panel color temperature targets and FFmpeg colorbalance parameters.",
+  "type": "object",
+  "required": ["schema_version", "artifact_type", "panels"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "artifact_type": {
+      "type": "string",
+      "const": "ite_color_arc"
+    },
+    "genre": {
+      "type": "string"
+    },
+    "panels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["panel_id", "chapter_position_pct", "color_temp_target", "ffmpeg_colorbalance"],
+        "properties": {
+          "panel_id": { "type": "string" },
+          "chapter_position_pct": { "type": "number", "minimum": 0, "maximum": 100 },
+          "color_temp_target": { "type": "number" },
+          "ffmpeg_colorbalance": {
+            "type": "object",
+            "required": ["rs", "gs", "bs"],
+            "properties": {
+              "rs": { "type": "number" },
+              "gs": { "type": "number" },
+              "bs": { "type": "number" }
+            },
+            "additionalProperties": false
+          },
+          "image_path": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

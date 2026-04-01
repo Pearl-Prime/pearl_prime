@@ -15,6 +15,7 @@ class GateSpec:
     gate_id: str
     stage_owner: str
     description: str
+    severity: str = "BLOCKER"
 
 
 def load_gate_registry(path: Path | None = None) -> list[GateSpec]:
@@ -39,6 +40,7 @@ def load_gate_registry(path: Path | None = None) -> list[GateSpec]:
                 gate_id=str(gid),
                 stage_owner=str(g.get("stage_owner") or "unknown"),
                 description=str(g.get("description") or ""),
+                severity=str(g.get("severity") or "BLOCKER"),
             )
         )
     return gates

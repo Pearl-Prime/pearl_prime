@@ -207,6 +207,123 @@ def _stage_layout(workspace: Path) -> None:
     compose_final_page_pngs(script, manifest, out)
 
 
+def _ite_dir(workspace: Path) -> Path:
+    d = workspace / manga_paths.DEBUG_DIR / "ite"
+    d.mkdir(parents=True, exist_ok=True)
+    return d
+
+
+def _stage_ite_breath(workspace: Path) -> None:
+    """ITE breath annotation: enrich chapter with breath_phase on panels."""
+    ite_cfg = load_ite_merged_config()
+    script_path = workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF
+    if not script_path.is_file():
+        return
+    script = _load_json(script_path)
+    breath = annotate_panel_breath(script, cfg=ite_cfg)
+    (_ite_dir(workspace) / "chapter_breath.json").write_text(
+        json.dumps(breath, indent=2) + "\n", encoding="utf-8"
+    )
+
+
+def _stage_ite_gutter(workspace: Path) -> None:
+    """ITE gutter therapy: assign gutter_class per panel."""
+    ite_cfg = load_ite_merged_config()
+    breath_path = _ite_dir(workspace) / "chapter_breath.json"
+    if not breath_path.is_file():
+        # Fall back to chapter script if breath not yet run
+        script_path = workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF
+        if not script_path.is_file():
+            return
+        breath = _load_json(script_path)
+    else:
+        breath = _load_json(breath_path)
+    gutter = annotate_gutter_therapy(breath, cfg=ite_cfg)
+    (_ite_dir(workspace) / "chapter_gutter.json").write_text(
+        json.dumps(gutter, indent=2) + "\n", encoding="utf-8"
+    )
+
+
+def _stage_ite_color_arc(workspace: Path) -> None:
+    """ITE color arc: per-panel color temperature targets."""
+    ite_cfg = load_ite_merged_config()
+    breath_path = _ite_dir(workspace) / "chapter_breath.json"
+    if not breath_path.is_file():
+        return
+    breath = _load_json(breath_path)
+    manifest_path = workspace / manga_paths.PANEL_IMAGES_MANIFEST
+    paths_map: dict[str, Path] = {}
+    if manifest_path.is_file():
+        manifest = _load_json(manifest_path)
+        for p in manifest.get("panels") or []:
+            pid = str(p.get("panel_id") or "")
+            raw = p.get("path")
+            if not pid or not raw:
+                continue
+            path = Path(str(raw))
+            if not path.is_absolute():
+                path = (workspace / path).resolve()
+            if path.is_file():
+                paths_map[pid] = path
+    color = build_color_arc(breath, paths_map or None, cfg=ite_cfg)
+    (_ite_dir(workspace) / "color_arc.json").write_text(
+        json.dumps(color, indent=2) + "\n", encoding="utf-8"
+    )
+
+
+def _stage_ite_fractal(workspace: Path) -> None:
+    """ITE fractal compliance check."""
+    ite_cfg = load_ite_merged_config()
+    gutter_path = _ite_dir(workspace) / "chapter_gutter.json"
+    if not gutter_path.is_file():
+        return
+    gutter = _load_json(gutter_path)
+    manifest_path = workspace / manga_paths.PANEL_IMAGES_MANIFEST
+    paths_map: dict[str, Path] = {}
+    if manifest_path.is_file():
+        manifest = _load_json(manifest_path)
+        for p in manifest.get("panels") or []:
+            pid = str(p.get("panel_id") or "")
+            raw = p.get("path")
+            if not pid or not raw:
+                continue
+            path = Path(str(raw))
+            if not path.is_absolute():
+                path = (workspace / path).resolve()
+            if path.is_file():
+                paths_map[pid] = path
+    fractal = run_fractal_check(paths_map, gutter, cfg=ite_cfg)
+    (_ite_dir(workspace) / "fractal_report.json").write_text(
+        json.dumps(fractal, indent=2) + "\n", encoding="utf-8"
+    )
+
+
+def _stage_ite_qc(workspace: Path) -> None:
+    """ITE QC: run all T-01..T-20 gates."""
+    ite_cfg = load_ite_merged_config()
+    ite_d = _ite_dir(workspace)
+    gutter_path = ite_d / "chapter_gutter.json"
+    if not gutter_path.is_file():
+        return
+    gutter = _load_json(gutter_path)
+    breath_path = ite_d / "chapter_breath.json"
+    breath = _load_json(breath_path) if breath_path.is_file() else None
+    color_path = ite_d / "color_arc.json"
+    color = _load_json(color_path) if color_path.is_file() else None
+    fractal_path = ite_d / "fractal_report.json"
+    fractal = _load_json(fractal_path) if fractal_path.is_file() else None
+    qc_report = run_ite_qc(
+        chapter_enriched=gutter,
+        color_arc=color,
+        fractal_report=fractal,
+        breath_doc=breath,
+        cfg=ite_cfg,
+    )
+    (ite_d / "ite_qc_report.json").write_text(
+        json.dumps(qc_report, indent=2) + "\n", encoding="utf-8"
+    )
+
+
 def _stage_qc(workspace: Path) -> None:
     rq = build_revision_queue_for_chapter(workspace)
     (workspace / manga_paths.REVISION_QUEUE).write_text(
@@ -288,6 +405,11 @@ def run_chapter_dag(
         sid.CHAPTER_IMAGE_GEN: lambda: _stage_image_gen(ws, image_backend),
         sid.CHAPTER_LETTERING: lambda: _stage_lettering(ws),
         sid.CHAPTER_LAYOUT: lambda: _stage_layout(ws),
+        sid.ITE_BREATH: lambda: _stage_ite_breath(ws),
+        sid.ITE_GUTTER: lambda: _stage_ite_gutter(ws),
+        sid.ITE_COLOR_ARC: lambda: _stage_ite_color_arc(ws),
+        sid.ITE_FRACTAL: lambda: _stage_ite_fractal(ws),
+        sid.ITE_QC: lambda: _stage_ite_qc(ws),
         sid.CHAPTER_QC: lambda: _stage_qc(ws),
         sid.SERIES_MEMORY_MERGE: lambda: _stage_memory(ws),
     }

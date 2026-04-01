@@ -167,6 +167,47 @@ def _minimal_payload(stem: str) -> dict:
             "attempt": 1,
             "status": "passed",
         },
+        "ite_qc_report": {
+            "schema_version": "1.0.0",
+            "artifact_type": "ite_qc_report",
+            "ITE_score": 0.65,
+            "gates": [
+                {"id": "T-01", "level": "BLOCKER", "passed": True, "detail": "ok"},
+            ],
+            "blocker_fail_count": 0,
+            "warn_fail_count": 0,
+            "passed": True,
+            "fractal_blocker": False,
+        },
+        "ite_color_arc": {
+            "schema_version": "1.0.0",
+            "artifact_type": "ite_color_arc",
+            "genre": "shonen",
+            "panels": [
+                {
+                    "panel_id": "p1",
+                    "chapter_position_pct": 0.0,
+                    "color_temp_target": 3200.0,
+                    "ffmpeg_colorbalance": {"rs": 0.05, "gs": 0.01, "bs": -0.03},
+                },
+            ],
+        },
+        "ite_fractal_report": {
+            "schema_version": "1.0.0",
+            "artifact_type": "ite_fractal_report",
+            "stub_mode": True,
+            "panels": [
+                {
+                    "panel_id": "p1",
+                    "fd_estimate": 1.4,
+                    "source_category": "arboreal",
+                    "compliant": True,
+                    "warn_out_of_band": False,
+                    "note": "ok",
+                },
+            ],
+            "blocker_no_fractal_nature_in_release_resolve": False,
+        },
     }
     if stem not in builders:
         raise KeyError(stem)

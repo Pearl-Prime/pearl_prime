@@ -688,3 +688,24 @@ def ite_prompt_suffix(cfg: Mapping[str, Any] | None = None) -> str:
     if fractal.get("source_categories"):
         lines.append(f"fractal-friendly categories: {', '.join(fractal['source_categories'])}.")
     return " ".join(lines)
+
+
+# ── Schema validation helpers ───────────────────────────────────────
+
+
+def validate_ite_color_arc(data: dict[str, Any]) -> None:
+    """Validate an ITE color arc artifact against ``schemas/manga/ite_color_arc.schema.json``."""
+    from phoenix_v4.manga.models.validation import validate_instance
+    validate_instance(data, "ite_color_arc")
+
+
+def validate_ite_fractal_report(data: dict[str, Any]) -> None:
+    """Validate an ITE fractal report against ``schemas/manga/ite_fractal_report.schema.json``."""
+    from phoenix_v4.manga.models.validation import validate_instance
+    validate_instance(data, "ite_fractal_report")
+
+
+def validate_ite_qc_report(data: dict[str, Any]) -> None:
+    """Validate an ITE QC report against ``schemas/manga/ite_qc_report.schema.json``."""
+    from phoenix_v4.manga.models.validation import validate_instance
+    validate_instance(data, "ite_qc_report")

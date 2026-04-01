@@ -14,6 +14,13 @@ CHAPTER_LAYOUT = "chapter_layout"
 CHAPTER_QC = "chapter_qc"
 SERIES_MEMORY_MERGE = "series_memory_merge"
 
+# ITE (Implicit Therapeutic Engine) enrichment stages
+ITE_BREATH = "ite_breath"
+ITE_GUTTER = "ite_gutter"
+ITE_COLOR_ARC = "ite_color_arc"
+ITE_FRACTAL = "ite_fractal"
+ITE_QC = "ite_qc"
+
 ALL_STAGE_IDS: tuple[str, ...] = (
     SERIES_VISUAL_IDENTITY,
     SERIES_GENRE,
@@ -24,6 +31,11 @@ ALL_STAGE_IDS: tuple[str, ...] = (
     CHAPTER_IMAGE_GEN,
     CHAPTER_LETTERING,
     CHAPTER_LAYOUT,
+    ITE_BREATH,
+    ITE_GUTTER,
+    ITE_COLOR_ARC,
+    ITE_FRACTAL,
+    ITE_QC,
     CHAPTER_QC,
     SERIES_MEMORY_MERGE,
 )
