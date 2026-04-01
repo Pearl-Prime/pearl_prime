@@ -35,7 +35,7 @@ on:
 
 jobs:
   translate:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
       # Map repo secrets to what the translation scripts expect
