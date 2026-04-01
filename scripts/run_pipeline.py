@@ -323,22 +323,6 @@ def main() -> int:
         help="Explicit opt-out from all quality gates regardless of --quality-profile (for CI dry-runs)",
     )
     ap.add_argument(
-        "--quality-profile",
-        choices=["production", "draft", "debug"],
-        default="production",
-        help=(
-            "Quality gate enforcement level (default: production). "
-            "production: chapter_flow_gate + book_pass_gate + bestseller_craft_gate run; failures exit 1. "
-            "draft: gates run but only warn (exit 0). "
-            "debug: gates skipped entirely."
-        ),
-    )
-    ap.add_argument(
-        "--skip-quality-gates",
-        action="store_true",
-        help="Explicit opt-out from all quality gates regardless of --quality-profile (for CI dry-runs)",
-    )
-    ap.add_argument(
         "--enforce-book-pass-gate",
         action="store_true",
         help="Run book-pass quality gate (claim progression, non-shuffleability, ending transformation) and fail on errors. Redundant when --quality-profile=production (default).",

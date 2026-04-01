@@ -138,6 +138,20 @@ Together, these give **structural anti-spam**: we never ship waves of near-ident
 | `--render-book` | Stage 6: render plan to prose (txt) after writing plan. |
 | `--render-formats` | Comma-separated book output formats (default: txt). |
 | `--render-dir` | Output dir for rendered book (default: artifacts/rendered/\<plan_id\>). |
+| `--location` | Location profile ID or alias for render grounding and naming (e.g., nyc_metro, coastal_california). |
+| `--output-format` | Modular output format ID (V4 freeze mode). |
+| `--disable-v4-freeze` | Disable modular V4 freeze, allow legacy format selection. |
+| `--no-update-freebie-index` | Skip upsert to freebie index.jsonl after generation. |
+| `--skip-word-count-gate` | Bypass word count minimum gate during render. |
+| `--skip-budget-check` | Skip pre-render word-budget sufficiency check. |
+| `--quality-profile` | Quality gate enforcement level: production (default, hard fail), draft (warn only), debug (skip gates). |
+| `--skip-quality-gates` | Explicit opt-out from all quality gates (forces debug mode). |
+| `--enforce-book-pass-gate` | Run book-pass quality gate (redundant in production mode, kept for backwards compatibility). |
+| `--enforce-scene-gate` | Run scene anti-genericity gate post-render. |
+| `--scene-gate-mode` | Scene gate enforcement: production (block on collision/repetition) or draft (warn only). |
+| `--ei-v2-compare` | Enable EI V2 AI techniques comparison mode. |
+| `--atoms-root` | Override atoms root directory path. |
+| `--atoms-model` | Atoms model selection: legacy or cluster. |
 
 ### 3.2 Asset pipeline and observability CLI
 
