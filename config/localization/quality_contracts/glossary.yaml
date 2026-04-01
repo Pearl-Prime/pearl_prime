@@ -1,10 +1,146 @@
 # Canonical glossary for translation quality.
-# Terms and preferred translations per locale (stub).
+# 10 core brand terms × 6 CJK locales = 60 entries.
 
 schema_version: "1.0"
 
-terms: []
-# Example:
-#   - id: anxiety_reset
-#     en_US: "Anxiety Reset"
-#     hu_HU: "Szorongás reset"
+terms:
+  # ── 1. nervous system ──────────────────────────────────────────────
+  - id: nervous_system
+    source_en: "nervous system"
+    translations:
+      ja-JP: "神経系"
+      ko-KR: "신경계"
+      zh-CN: "神经系统"
+      zh-TW: "神經系統"
+      zh-HK: "神經系統"
+      zh-SG: "神经系统"
+    context: >-
+      The biological nervous system; used literally to describe the body's
+      stress-response wiring. Always translate as the anatomical term, never
+      as a metaphor for 'being nervous'.
+
+  # ── 2. the alarm ──────────────────────────────────────────────────
+  - id: the_alarm
+    source_en: "the alarm"
+    translations:
+      ja-JP: "アラーム"
+      ko-KR: "경보"
+      zh-CN: "警报"
+      zh-TW: "警報"
+      zh-HK: "警報"
+      zh-SG: "警报"
+    context: >-
+      The body's threat-detection signal — a felt, somatic alarm, not a
+      clock alarm. In CJK contexts prefer the emergency/warning sense.
+
+  # ── 3. the mask ────────────────────────────────────────────────────
+  - id: the_mask
+    source_en: "the mask"
+    translations:
+      ja-JP: "仮面"
+      ko-KR: "가면"
+      zh-CN: "面具"
+      zh-TW: "面具"
+      zh-HK: "面具"
+      zh-SG: "面具"
+    context: >-
+      A protective persona someone wears to hide vulnerability. Use the
+      theatrical/figurative mask, not a medical or physical mask.
+
+  # ── 4. the pattern ────────────────────────────────────────────────
+  - id: the_pattern
+    source_en: "the pattern"
+    translations:
+      ja-JP: "パターン"
+      ko-KR: "패턴"
+      zh-CN: "模式"
+      zh-TW: "模式"
+      zh-HK: "模式"
+      zh-SG: "模式"
+    context: >-
+      A recurring behavioural or emotional loop the listener unconsciously
+      repeats. Use the behavioural/psychological sense, not textile pattern.
+
+  # ── 5. the strategy ───────────────────────────────────────────────
+  - id: the_strategy
+    source_en: "the strategy"
+    translations:
+      ja-JP: "戦略"
+      ko-KR: "전략"
+      zh-CN: "策略"
+      zh-TW: "策略"
+      zh-HK: "策略"
+      zh-SG: "策略"
+    context: >-
+      A coping mechanism the nervous system adopted to stay safe. Frame as
+      a survival strategy, not a business or military strategy.
+
+  # ── 6. the cost ────────────────────────────────────────────────────
+  - id: the_cost
+    source_en: "the cost"
+    translations:
+      ja-JP: "代償"
+      ko-KR: "대가"
+      zh-CN: "代价"
+      zh-TW: "代價"
+      zh-HK: "代價"
+      zh-SG: "代价"
+    context: >-
+      The emotional or relational price paid for maintaining a protective
+      pattern. Not a financial cost — use the figurative/consequence sense.
+
+  # ── 7. somatic ─────────────────────────────────────────────────────
+  - id: somatic
+    source_en: "somatic"
+    translations:
+      ja-JP: "身体的"
+      ko-KR: "신체적"
+      zh-CN: "躯体的"
+      zh-TW: "身體的"
+      zh-HK: "身體的"
+      zh-SG: "躯体的"
+    context: >-
+      Relating to the body as felt from the inside — body-based sensation.
+      Prefer the clinical/somatic-psychology term over colloquial 'physical'.
+
+  # ── 8. watcher ─────────────────────────────────────────────────────
+  - id: watcher
+    source_en: "watcher"
+    translations:
+      ja-JP: "観察者"
+      ko-KR: "관찰자"
+      zh-CN: "观察者"
+      zh-TW: "觀察者"
+      zh-HK: "觀察者"
+      zh-SG: "观察者"
+    context: >-
+      The part of awareness that can observe thoughts and feelings without
+      being consumed by them. A mindfulness/witness-consciousness term.
+
+  # ── 9. false alarm ─────────────────────────────────────────────────
+  - id: false_alarm
+    source_en: "false alarm"
+    translations:
+      ja-JP: "誤報"
+      ko-KR: "오경보"
+      zh-CN: "误报"
+      zh-TW: "誤報"
+      zh-HK: "誤報"
+      zh-SG: "误报"
+    context: >-
+      When the nervous system fires a threat response but there is no real
+      danger. Keep the alarm/warning metaphor consistent with 'the alarm'.
+
+  # ── 10. the thread ─────────────────────────────────────────────────
+  - id: the_thread
+    source_en: "the thread"
+    translations:
+      ja-JP: "糸"
+      ko-KR: "실마리"
+      zh-CN: "线索"
+      zh-TW: "線索"
+      zh-HK: "線索"
+      zh-SG: "线索"
+    context: >-
+      A thin connecting line between past experience and present reaction;
+      the narrative thread that links protective patterns to their origin.
