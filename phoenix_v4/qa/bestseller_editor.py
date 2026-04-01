@@ -1,5 +1,5 @@
 """
-Post-render bestseller editorial review. This is the closest thing to a Pearl_Editor whole-book pass in the current repo: structural/narrative book-pass gate, chapter flow review, runtime word-budget gate.
+Post-render bestseller editorial review. This is the closest thing to a Pearl_Editor whole-book pass in the current repo: structural/narrative book-pass gate, chapter flow review, runtime word-budget gate, and ONTGP craft-prose gate.
 """
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ from typing import Any
 
 from phoenix_v4.rendering.prose_resolver import resolve_prose_for_plan
 from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
+from phoenix_v4.quality.bestseller_craft_gate import evaluate_bestseller_craft, CraftGateResult
 from phoenix_v4.quality.ei_v2.hybrid_selector import HybridDecision
 
 
@@ -119,6 +120,92 @@ def _thesis_drift_check(plan: dict[str, Any], prose_map: dict[str, str]) -> dict
 
     report["drift_count"] = drift_count
     if drift_count > 0:
+        report["status"] = "WARN"
+
+    return report
+
+
+def _load_craft_gate_config() -> dict:
+    """Load bestseller craft gate config from config/quality/bestseller_craft_gate.yaml."""
+    try:
+        import yaml as _yaml_mod
+    except ImportError:
+        return {}
+    cfg_path = Path(__file__).resolve().parent.parent.parent / "config" / "quality" / "bestseller_craft_gate.yaml"
+    if not cfg_path.exists():
+        return {}
+    try:
+        with open(cfg_path, "r", encoding="utf-8") as f:
+            data = _yaml_mod.safe_load(f) or {}
+        return data.get("bestseller_craft", {})
+    except Exception:
+        return {}
+
+
+def _evaluate_craft_per_chapter(
+    plan: dict,
+    prose_map: dict[str, str],
+) -> dict:
+    """
+    Run bestseller_craft_gate on each chapter's concatenated prose.
+    Returns: {status, chapters: [{chapter, status, move_scores, issues, remediation}], fail_count, warn_count}
+    """
+    from phoenix_v4.qa._narrative_plan_utils import iter_chapter_slot_atom_ids, get_chapter_count
+    from phoenix_v4.rendering.book_renderer import clean_for_delivery
+
+    craft_cfg = _load_craft_gate_config()
+    enforcement = craft_cfg.get("enforcement", {})
+    skip_below = int(enforcement.get("skip_short_chapters_below_words", 200))
+    # Build thresholds dict for evaluate_bestseller_craft
+    thresholds = {}
+    for key in ("fail_below", "warn_below", "orient_word_span", "pull_word_span",
+                "name_start_frac", "name_end_frac", "turn_start_frac", "turn_end_frac",
+                "give_start_frac"):
+        if key in craft_cfg:
+            thresholds[key] = craft_cfg[key]
+
+    n = get_chapter_count(plan)
+    chapter_texts: list[str] = [""] * n
+    for ch, _si, _slot_type, aid in iter_chapter_slot_atom_ids(plan):
+        if ch >= n or "placeholder:" in aid or "silence:" in aid:
+            continue
+        prose = clean_for_delivery(prose_map.get(aid, "")).strip()
+        if prose:
+            chapter_texts[ch] = (chapter_texts[ch] + " " + prose).strip()
+
+    report: dict = {"status": "PASS", "chapters": [], "fail_count": 0, "warn_count": 0}
+    for ch_idx, text in enumerate(chapter_texts):
+        wc = len(text.split())
+        if wc < skip_below:
+            report["chapters"].append({
+                "chapter": ch_idx + 1,
+                "status": "SKIP",
+                "word_count": wc,
+                "move_scores": {},
+                "issues": ["chapter_below_minimum_word_count"],
+                "remediation": [],
+            })
+            continue
+
+        result: CraftGateResult = evaluate_bestseller_craft(
+            text, thresholds=thresholds if thresholds else None
+        )
+        report["chapters"].append({
+            "chapter": ch_idx + 1,
+            "status": result.status,
+            "word_count": wc,
+            "move_scores": result.move_scores,
+            "issues": result.issues,
+            "remediation": result.remediation,
+        })
+        if result.status == "FAIL":
+            report["fail_count"] += 1
+        elif result.status == "WARN":
+            report["warn_count"] += 1
+
+    if report["fail_count"] > 0:
+        report["status"] = "FAIL"
+    elif report["warn_count"] > 0:
         report["status"] = "WARN"
 
     return report
@@ -284,6 +371,14 @@ def build_bestseller_editor_report(
     # Extract DNA status (placeholder for now)
     dna_status = "PASS"
 
+    # Bestseller craft gate (ONTGP prose-quality per chapter)
+    try:
+        craft_report = _evaluate_craft_per_chapter(plan, prose_map)
+        craft_status = craft_report.get("status", "PASS")
+    except Exception:
+        craft_report = {"status": "SKIP", "chapters": [], "fail_count": 0, "warn_count": 0}
+        craft_status = "PASS"
+
     dimension_gates_status = chapter_flow_report.get("dimension_gates_status", "SKIP")
     dimension_gates_blocks_delivery = bool(chapter_flow_report.get("dimension_gates_blocks_delivery", False))
     dimension_gate_status = _dimension_gate_rollup_status(chapter_flow_report)
@@ -310,6 +405,7 @@ def build_bestseller_editor_report(
         thesis_drift_status,
         dna_status,
         dimension_gate_status,
+        craft_status,
     )
 
     report = {
@@ -340,6 +436,8 @@ def build_bestseller_editor_report(
         "dimension_gate_status": dimension_gate_status,
         "dimension_gates_status": dimension_gates_status,
         "dimension_gates_blocks_delivery": dimension_gates_blocks_delivery,
+        "craft_gate": craft_report,
+        "craft_gate_status": craft_status,
     }
 
     return report
@@ -393,6 +491,11 @@ def write_bestseller_editor_report(report: dict, render_dir: Path) -> tuple[Path
         f"  Valid: {report.get('book_pass', {}).get('valid', False)}",
         f"  Errors: {len(report.get('book_pass', {}).get('errors', []))}",
         f"  Warnings: {len(report.get('book_pass', {}).get('warnings', []))}",
+        "",
+        "Bestseller Craft Gate (ONTGP):",
+        f"  Status: {report.get('craft_gate_status', 'SKIP')}",
+        f"  Fail Chapters: {report.get('craft_gate', {}).get('fail_count', 0)}",
+        f"  Warn Chapters: {report.get('craft_gate', {}).get('warn_count', 0)}",
         "",
         "Thesis Drift:",
         f"  Status: {report.get('thesis_drift_status', 'UNKNOWN')}",
