@@ -1256,12 +1256,8 @@ function Step5VoiceEffects({ state, update }) {
       <StepHero
         eyebrow="Impact"
         title="What your tone does for readers"
-        subtitle="Adjust sliders and read how we write — and what your reader gets — at each setting."
+        subtitle="Slide, then open impact below if you want the full read."
       />
-      <details className="mb-5 rounded-xl border border-gray-100 bg-gray-50/80 px-4 py-2 text-[11px] text-gray-600 open:pb-3">
-        <summary className="cursor-pointer font-semibold text-gray-700 outline-none">More detail</summary>
-        <p className="mt-2 leading-relaxed">Each position maps to concrete writing moves and reader outcomes — nothing arbitrary.</p>
-      </details>
 
       <div className="space-y-6">
         {VOICE_SLIDERS.map((s, idx) => {
@@ -1280,12 +1276,10 @@ function Step5VoiceEffects({ state, update }) {
                   </div>
                   <span className="text-xs font-bold px-2.5 py-0.5 rounded-full" style={{ backgroundColor: s.color + '15', color: s.color }}>{toneData.label}</span>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">{s.desc}</p>
               </div>
 
               <div className="p-4">
-                {/* Graph + Slider */}
-                <div className="bg-gray-50 rounded-xl p-3 mb-4 border border-gray-100">
+                <div className="bg-gray-50 rounded-xl p-3 mb-3 border border-gray-100">
                   <GraphComp position={position} color={s.color} />
                   <input type="range" min="0" max="100" value={val}
                     onChange={(e) => handleSlider(s.id, parseInt(e.target.value))}
@@ -1294,25 +1288,24 @@ function Step5VoiceEffects({ state, update }) {
                   />
                   <div className="flex justify-between items-center mt-1.5">
                     <span className="text-[10px] font-semibold" style={{ color: s.color }}>{s.left}</span>
-                    <span className="text-[10px] text-gray-400">Position {position} of 10</span>
+                    <span className="text-[10px] text-gray-400">{position}/10</span>
                     <span className="text-[10px] font-semibold" style={{ color: s.color }}>{s.right}</span>
                   </div>
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-3 mb-4">
-                  <div className="text-[10px] font-bold uppercase text-gray-400 mb-1">How We Write This</div>
-                  <p className="text-sm text-gray-800 font-medium leading-relaxed">{toneData.technique}</p>
-                </div>
-
-                <div className="text-[10px] font-bold uppercase text-gray-400 mb-2">Reader Benefits at This Setting</div>
-                <div className="space-y-2.5">
-                  {toneData.benefits.map((benefit, i) => (
-                    <div key={i} className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-[10px] font-bold text-white" style={{ backgroundColor: s.color }}>{i + 1}</div>
-                      <p className="text-[11px] text-gray-700 leading-relaxed">{benefit}</p>
-                    </div>
-                  ))}
-                </div>
+                <details className="rounded-lg border border-gray-100 bg-gray-50/90 px-3 py-2 text-[11px] text-gray-700 open:pb-3">
+                  <summary className="cursor-pointer text-xs font-bold text-gray-800 outline-none">How this lands for readers</summary>
+                  <p className="mt-2 text-[11px] leading-relaxed text-gray-600">{s.desc}</p>
+                  <p className="mt-2 text-sm font-medium leading-relaxed text-gray-900">{toneData.technique}</p>
+                  <div className="mt-3 space-y-2">
+                    {toneData.benefits.map((benefit, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 text-[9px] font-bold text-white" style={{ backgroundColor: s.color }}>{i + 1}</div>
+                        <p className="text-[11px] text-gray-700 leading-relaxed">{benefit}</p>
+                      </div>
+                    ))}
+                  </div>
+                </details>
               </div>
             </div>
           );
@@ -1338,15 +1331,10 @@ function Step6VisualStyle({ state, update }) {
       <StepHero
         eyebrow="Look & feel"
         title="Visual world and emotional promise"
-        subtitle="Choose the look of covers and social art, then the outcomes readers should feel."
+        subtitle="Pick a look, then the feelings you want readers to walk away with."
       />
-      <details className="mb-5 rounded-xl border border-violet-100/80 bg-violet-50/30 px-4 py-2 text-[11px] text-gray-600 open:pb-3">
-        <summary className="cursor-pointer font-semibold text-violet-900/90 outline-none">How this is used</summary>
-        <p className="mt-2 leading-relaxed">Styles drive cover and thumbnail generation; emotional outcomes anchor titles and CTAs.</p>
-      </details>
 
       <div className="text-xs font-bold uppercase tracking-wider text-violet-600/90 mb-3">Visual style</div>
-      <p className="text-[11px] text-gray-500 mb-3">Each card includes prompts the system uses for imagery.</p>
       <div className="grid grid-cols-2 gap-3 mb-4">
         {VISUAL_STYLES.map((vs) => (
           <button key={vs.id} onClick={() => handleVisual(vs.id)}
@@ -1361,12 +1349,13 @@ function Step6VisualStyle({ state, update }) {
 
       {selectedVisual && (
         <>
-          <div className="bg-gray-50 rounded-xl p-4 mb-4 border border-gray-200">
-            <div className="text-[10px] font-bold uppercase text-gray-400 mb-2">Cover Image Prompt</div>
-            <p className="text-[11px] text-gray-700 leading-relaxed mb-3 italic">"{selectedVisual.imagePrompt}"</p>
-            <div className="text-[10px] font-bold uppercase text-gray-400 mb-2">Emotional Image Prompt</div>
-            <p className="text-[11px] text-gray-700 leading-relaxed italic">"{selectedVisual.emotionPrompt}"</p>
-          </div>
+          <details className="mb-4 rounded-xl border border-gray-200 bg-gray-50/80 px-3 py-2 text-[11px] text-gray-700 open:pb-3">
+            <summary className="cursor-pointer font-semibold text-gray-800 outline-none">Image prompts (system)</summary>
+            <div className="mt-2 space-y-2">
+              <p className="italic text-gray-700">"{selectedVisual.imagePrompt}"</p>
+              <p className="italic text-gray-600">"{selectedVisual.emotionPrompt}"</p>
+            </div>
+          </details>
           {SELECTION_FEEDBACK.visualStyles[state.visualStyle] && (
             <SelectionFeedback
               systemEffect={SELECTION_FEEDBACK.visualStyles[state.visualStyle].systemEffect}
@@ -1381,7 +1370,7 @@ function Step6VisualStyle({ state, update }) {
       <div className="text-xs font-bold uppercase tracking-wider text-violet-600/90 mb-2">
         Emotional outcomes <span className="font-normal normal-case text-gray-400">(up to 5)</span>
       </div>
-      <p className="text-[11px] text-gray-500 mb-3">Transformation promise for titles and marketing — pick what you want readers to feel.</p>
+      <p className="text-[11px] text-gray-500 mb-3">Pick up to five outcomes — they anchor titles and CTAs.</p>
       <div className="flex flex-wrap gap-2 mb-3">
         {allEmotions.map((e) => {
           const active = (state.emotions || []).includes(e);
@@ -1390,17 +1379,17 @@ function Step6VisualStyle({ state, update }) {
       </div>
 
       {(state.emotions || []).length > 0 && (
-        <div className="bg-gray-50 rounded-xl p-4 mb-8 border border-gray-200">
-          <div className="text-[10px] font-bold uppercase text-gray-400 mb-2">Emotional Outcome Image Prompts</div>
-          {state.emotions.map((e) => (
-            <div key={e} className="mb-2">
-              <span className="text-[10px] font-bold text-gray-700">{e}:</span>
-              <span className="text-[11px] text-gray-600 italic ml-1">
-                "Abstract visualization of '{e.toLowerCase()}' — soft light radiating from center, human silhouette in peaceful pose, {VISUAL_STYLES.find(v => v.id === state.visualStyle)?.mood?.toLowerCase() || 'serene'} color palette, therapeutic art style, feeling of deep transformation and release"
-              </span>
-            </div>
-          ))}
-        </div>
+        <details className="mb-8 rounded-xl border border-gray-200 bg-gray-50/80 px-3 py-2 open:pb-3">
+          <summary className="cursor-pointer text-[10px] font-bold uppercase text-gray-500 outline-none">Prompt lines per outcome</summary>
+          <div className="mt-2 space-y-2">
+            {state.emotions.map((e) => (
+              <p key={e} className="text-[11px] text-gray-600 italic">
+                <span className="font-semibold not-italic text-gray-800">{e}: </span>
+                {`"Abstract visualization of '${e.toLowerCase()}' — soft light radiating from center, human silhouette in peaceful pose, ${VISUAL_STYLES.find((v) => v.id === state.visualStyle)?.mood?.toLowerCase() || "serene"} color palette, therapeutic art style, feeling of deep transformation and release"`}
+              </p>
+            ))}
+          </div>
+        </details>
       )}
 
       <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Spiritual foundation</div>
@@ -1709,76 +1698,45 @@ function Step10Blueprint({ state }) {
       <StepHero
         eyebrow="Reveal"
         title="Here is your brand"
-        subtitle="Everything below is what you defined in the studio — grouped so you can scan it once before you activate."
+        subtitle="Your choices — distilled first, then grouped so you can read the arc at a glance."
       />
 
       {brandOneSentence ? (
-        <p className="mb-6 rounded-2xl border border-violet-200/70 bg-gradient-to-r from-violet-50/90 to-fuchsia-50/50 px-4 py-3 text-center text-sm font-semibold leading-snug text-violet-950 shadow-sm">
+        <p className="mb-8 rounded-2xl border border-violet-300/80 bg-gradient-to-br from-violet-50 via-white to-fuchsia-50/60 px-5 py-6 text-center text-lg font-extrabold leading-snug tracking-tight text-violet-950 shadow-md [text-shadow:0_1px_0_rgba(255,255,255,0.9)] sm:text-xl sm:leading-snug">
           {brandOneSentence}
         </p>
       ) : null}
 
-      {/* Demoted score strip — same numeric logic, quieter visual */}
-      <div className="mb-8 rounded-2xl border border-gray-100 bg-gray-50/60 px-3 py-3 opacity-90">
-        <div className="mb-2 text-center text-[9px] font-bold uppercase tracking-wider text-gray-400">Signal scores</div>
-        <div className="grid grid-cols-4 gap-2">
-          {scores.map((s) => (
-            <div key={s.label} className="rounded-lg bg-white/90 px-1 py-2 text-center shadow-sm">
-              <div className="relative mx-auto mb-1 h-10 w-10">
-                <svg viewBox="0 0 64 64" className="h-full w-full -rotate-90">
-                  <circle cx="32" cy="32" r="26" fill="none" stroke="#f3f4f6" strokeWidth="4" />
-                  <circle
-                    cx="32"
-                    cy="32"
-                    r="26"
-                    fill="none"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    style={{ color: s.value > 85 ? "#10b981" : s.value > 70 ? "#6366f1" : "#f59e0b" }}
-                    className="stroke-current"
-                    strokeDasharray={`${s.value * 1.63} 163`}
-                  />
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xs font-black text-gray-800">{s.value}</span>
-                </div>
-              </div>
-              <div className="text-[8px] font-bold uppercase leading-tight text-gray-500">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
       <div className="space-y-8">
-        <section>
-          <h3 className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">1 · Brand identity</h3>
+        <section className="rounded-2xl border border-slate-200/90 bg-slate-50/50 p-4 shadow-sm ring-1 ring-slate-200/70 sm:p-5">
+          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">1 · Brand identity</h3>
           <div className="space-y-3">
             {arch ? (
               <div className={`rounded-2xl border-2 p-5 ${arch.bg} ${arch.border}`}>
                 <div className="text-[10px] font-bold uppercase text-gray-500">Emotional world</div>
-                <div className="mt-1 text-lg font-bold text-gray-900">{arch.name}</div>
+                <div className="mt-1 text-xl font-bold text-gray-900">{arch.name}</div>
                 <p className="mt-1 text-sm text-gray-700">{arch.tagline}</p>
               </div>
             ) : null}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {persona ? (
-                <div className="rounded-2xl border border-gray-200/90 bg-white p-4 shadow-sm">
-                  <div className="text-[10px] font-bold uppercase text-gray-400">Primary reader</div>
-                  <div className="mt-1 text-sm font-bold text-gray-900">
+                <div className="rounded-2xl border border-violet-200/90 bg-white p-4 shadow-md ring-1 ring-violet-100/80">
+                  <div className="text-[10px] font-bold uppercase text-violet-600/90">Primary reader</div>
+                  <div className="mt-1.5 text-base font-extrabold leading-snug text-gray-900 sm:text-lg">
                     {persona.emoji} {persona.label}
                   </div>
                 </div>
               ) : null}
               {moment ? (
-                <div className="rounded-2xl border border-gray-200/90 bg-white p-4 shadow-sm">
-                  <div className="text-[10px] font-bold uppercase text-gray-400">Trigger moment</div>
-                  <div className="mt-1 text-sm font-bold text-gray-900">
+                <div className="rounded-2xl border border-amber-200/90 bg-white p-4 shadow-md ring-1 ring-amber-100/80">
+                  <div className="text-[10px] font-bold uppercase text-amber-700/90">Trigger moment</div>
+                  <div className="mt-1.5 text-base font-extrabold leading-snug text-gray-900 sm:text-lg">
                     {moment.emoji} {moment.label}
                   </div>
                 </div>
               ) : null}
               {state.tradition ? (
-                <div className="rounded-2xl border border-gray-200/90 bg-white p-4 shadow-sm sm:col-span-2">
+                <div className="rounded-2xl border border-gray-200/90 bg-white/90 p-4 shadow-sm sm:col-span-2">
                   <div className="text-[10px] font-bold uppercase text-gray-400">Tradition</div>
                   <div className="mt-1 text-sm font-semibold text-gray-900">{state.tradition}</div>
                 </div>
@@ -1787,11 +1745,11 @@ function Step10Blueprint({ state }) {
           </div>
         </section>
 
-        <section>
-          <h3 className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">2 · How it shows up</h3>
+        <section className="rounded-2xl border border-violet-200/80 bg-violet-50/35 p-4 shadow-sm ring-1 ring-violet-200/60 sm:p-5">
+          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-700/90">2 · How it shows up</h3>
           <div className="space-y-3">
             {visual ? (
-              <div className="overflow-hidden rounded-2xl border-2 border-gray-200 bg-white shadow-md ring-1 ring-violet-100/80">
+              <div className="overflow-hidden rounded-2xl border-2 border-white bg-white shadow-md ring-1 ring-violet-200/80">
                 <div className="flex gap-2 border-b border-gray-100 bg-gradient-to-r from-slate-50 to-violet-50/40 px-4 py-3">
                   {visual.palette.map((col, i) => (
                     <div key={i} className="h-10 w-10 rounded-xl shadow-md ring-2 ring-white" style={{ backgroundColor: col }} />
@@ -1805,37 +1763,38 @@ function Step10Blueprint({ state }) {
                 </div>
               </div>
             ) : null}
+            <div className="text-[9px] font-bold uppercase tracking-wider text-violet-600/70">Publishing context</div>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               {state.onboardingLane ? (
-                <div className="rounded-xl border border-gray-100 bg-white p-3 text-center shadow-sm">
-                  <div className="text-[9px] font-bold uppercase text-gray-400">Lane</div>
-                  <div className="mt-0.5 text-xs font-bold text-gray-900">{state.onboardingLane.replace(/_/g, " ")}</div>
+                <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
+                  <div className="text-[8px] font-bold uppercase text-gray-400">Lane</div>
+                  <div className="mt-0.5 text-[11px] font-semibold text-gray-800">{state.onboardingLane.replace(/_/g, " ")}</div>
                 </div>
               ) : null}
               {state.onboardingMarket ? (
-                <div className="rounded-xl border border-gray-100 bg-white p-3 text-center shadow-sm">
-                  <div className="text-[9px] font-bold uppercase text-gray-400">Market</div>
-                  <div className="mt-0.5 text-xs font-bold text-gray-900">{state.onboardingMarket}</div>
+                <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
+                  <div className="text-[8px] font-bold uppercase text-gray-400">Market</div>
+                  <div className="mt-0.5 text-[11px] font-semibold text-gray-800">{state.onboardingMarket}</div>
                 </div>
               ) : null}
               {state.formatFocus ? (
-                <div className="rounded-xl border border-gray-100 bg-white p-3 text-center shadow-sm">
-                  <div className="text-[9px] font-bold uppercase text-gray-400">Format</div>
-                  <div className="mt-0.5 text-xs font-bold text-gray-900">{state.formatFocus === "manga" ? "Manga / visual" : "Books"}</div>
+                <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
+                  <div className="text-[8px] font-bold uppercase text-gray-400">Format</div>
+                  <div className="mt-0.5 text-[11px] font-semibold text-gray-800">{state.formatFocus === "manga" ? "Manga / visual" : "Books"}</div>
                 </div>
               ) : null}
               {(state.channels || []).length > 0 ? (
-                <div className="rounded-xl border border-gray-100 bg-white p-3 text-center shadow-sm">
-                  <div className="text-[9px] font-bold uppercase text-gray-400">Channels</div>
-                  <div className="mt-0.5 text-xs font-bold text-gray-900">{state.channels.length} active</div>
+                <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
+                  <div className="text-[8px] font-bold uppercase text-gray-400">Channels</div>
+                  <div className="mt-0.5 text-[11px] font-semibold text-gray-800">{state.channels.length} active</div>
                 </div>
               ) : null}
             </div>
           </div>
         </section>
 
-        <section>
-          <h3 className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">3 · What it promises</h3>
+        <section className="rounded-2xl border border-rose-200/80 bg-gradient-to-br from-rose-50/50 to-amber-50/20 p-4 shadow-sm ring-1 ring-rose-200/50 sm:p-5">
+          <h3 className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-rose-800/80">3 · What it promises</h3>
           {(state.emotions || []).length > 0 ? (
             <div className="mb-4 rounded-2xl border border-rose-100 bg-gradient-to-br from-rose-50/80 to-amber-50/40 p-4 shadow-sm">
               <div className="text-[10px] font-bold uppercase text-rose-800/90">Emotional outcomes</div>
@@ -1886,6 +1845,37 @@ function Step10Blueprint({ state }) {
             <p className="mt-2 text-xs leading-relaxed text-emerald-900/90">{assessmentText}</p>
           </div>
         </section>
+      </div>
+
+      {/* Demoted score strip — same numeric logic, after narrative sections */}
+      <div className="mt-10 rounded-2xl border border-gray-100 bg-gray-50/60 px-3 py-3 opacity-90">
+        <div className="mb-2 text-center text-[9px] font-bold uppercase tracking-wider text-gray-400">Signal scores</div>
+        <div className="grid grid-cols-4 gap-2">
+          {scores.map((s) => (
+            <div key={s.label} className="rounded-lg bg-white/90 px-1 py-2 text-center shadow-sm">
+              <div className="relative mx-auto mb-1 h-10 w-10">
+                <svg viewBox="0 0 64 64" className="h-full w-full -rotate-90">
+                  <circle cx="32" cy="32" r="26" fill="none" stroke="#f3f4f6" strokeWidth="4" />
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="26"
+                    fill="none"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    style={{ color: s.value > 85 ? "#10b981" : s.value > 70 ? "#6366f1" : "#f59e0b" }}
+                    className="stroke-current"
+                    strokeDasharray={`${s.value * 1.63} 163`}
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-xs font-black text-gray-800">{s.value}</span>
+                </div>
+              </div>
+              <div className="text-[8px] font-bold uppercase leading-tight text-gray-500">{s.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -2092,8 +2082,24 @@ function Step11Launch({ state, update }) {
         <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">Completion</p>
         <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">You now have a working brand</h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-gray-600">
-          Save your details so we can activate this configuration. Same requirements as before — we just frame it as turning the studio output on.
+          Add your details to turn the studio output on — name, email, and optional channels.
         </p>
+      </div>
+
+      <div
+        className="mb-6 flex flex-col items-center gap-2 rounded-xl border border-emerald-100/90 bg-emerald-50/40 px-4 py-3 text-[11px] text-emerald-950/80 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-8 sm:gap-y-1"
+        role="note"
+        aria-label="Before you activate"
+      >
+        <span className="inline-flex items-center gap-1.5 font-medium">
+          <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> Brand direction set
+        </span>
+        <span className="inline-flex items-center gap-1.5 font-medium">
+          <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> Reader and market chosen
+        </span>
+        <span className="inline-flex items-center gap-1.5 font-medium">
+          <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> Launch details ready
+        </span>
       </div>
 
       <div className="mb-6 space-y-6">
@@ -2290,7 +2296,7 @@ function IntroWelcome({ onNext }) {
           </div>
           <h1 className="text-4xl font-black leading-tight tracking-tight text-gray-900 sm:text-5xl">Launch and shape your publishing brand</h1>
           <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-gray-600">
-            One guided studio session turns choices into a coherent identity — voice, look, and proof you can stand behind.
+            One guided session — voice, look, and proof aligned.
           </p>
           <div className="mx-auto mt-10 grid max-w-md grid-cols-4 gap-3">
             {pillars.map(({ icon: I, label, tint }) => (
@@ -2336,7 +2342,7 @@ function IntroJourney({ onNext, onBack }) {
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">How this works</p>
             <h1 className="mt-2 text-3xl font-black tracking-tight">Five beats, eleven choices</h1>
             <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-gray-600">
-              You move from emotional foundation to formats, then see a clear blueprint before launch.
+              Foundation → formats → blueprint → launch.
             </p>
           </div>
           <div className="relative mt-10">
@@ -2355,7 +2361,7 @@ function IntroJourney({ onNext, onBack }) {
               ))}
             </div>
           </div>
-          <p className="mt-8 text-center text-xs text-gray-500">Next: quick demos of what your choices change.</p>
+          <p className="mt-8 text-center text-xs text-gray-500">Next: a few concrete previews.</p>
           <div className="mt-6 text-center">
             <button
               type="button"
@@ -2381,7 +2387,7 @@ function ShowcaseProse({ onNext, onBack }) {
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-semibold mb-4"><PenTool size={12} /> Step 1 Preview — Writing Voice</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">Same topic. Completely different voice.</h1>
-        <p className="text-gray-500 mb-8">Your archetype choice transforms how every sentence sounds. Two brands, same topic — watch how the prose, exercises, and energy change completely.</p>
+        <p className="text-gray-500 mb-8">Two brands, one topic — feel the shift in prose and energy.</p>
         <CompareBlock labelA="Stillness Lab" labelB="Clear Mind Lab" colorA="text-indigo-600" colorB="text-amber-600"
           contentA={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #818cf8, #e0e7ff)" }} /><div><div className="text-[10px] text-gray-400 font-semibold uppercase">Stillness Lab</div><div className="text-sm font-bold text-gray-900">The Body Keeps the Score at 2AM</div></div></div><p className="text-sm text-gray-700 leading-relaxed italic border-l-2 border-indigo-300 pl-3">"Your body remembers what your mind tries to forget. Right now, your shoulders are holding yesterday's argument."</p><div className="mt-3 bg-indigo-50 rounded-lg p-3"><div className="text-[10px] font-bold text-indigo-600 uppercase mb-1">Exercise</div><p className="text-xs text-indigo-800">"Inhale for 4 counts. Hold for 7. Exhale slowly for 8."</p></div></div>}
           contentB={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #d97706, #f59e0b, #fef3c7)" }} /><div><div className="text-[10px] text-gray-400 font-semibold uppercase">Clear Mind Lab</div><div className="text-sm font-bold text-gray-900">Your Phone Is Stealing Your Sleep</div></div></div><p className="text-sm text-gray-700 leading-relaxed italic border-l-2 border-amber-400 pl-3">"You're staring at the ceiling because your brain is running yesterday's argument on a loop."</p><div className="mt-3 bg-amber-50 rounded-lg p-3"><div className="text-[10px] font-bold text-amber-600 uppercase mb-1">Exercise</div><p className="text-xs text-amber-800">"Phone in another room. Lie flat. Breathe out longer than in. 90 seconds. Go."</p></div></div>}
@@ -2407,7 +2413,7 @@ function ShowcaseCovers({ onNext, onBack }) {
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-semibold mb-4"><Image size={12} /> Visual Style Preview</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">Your visual style shapes everything.</h1>
-        <p className="text-gray-500 mb-8">Covers, social content, video aesthetics — all driven by one choice.</p>
+        <p className="text-gray-500 mb-8">One choice ripples across covers and thumbnails.</p>
         <div className="grid grid-cols-3 gap-4 mb-8">
           {ARCHETYPES.slice(0, 3).map((arch) => (
             <div key={arch.id} className="text-center">
@@ -2439,7 +2445,7 @@ function ShowcaseVideo({ onNext, onBack }) {
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-semibold mb-4"><Film size={12} /> Video & Social Preview</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">Daily content. Your signature look.</h1>
-        <p className="text-gray-500 mb-8">TikTok, YouTube Shorts, Reels — all auto-generated from your brand DNA across 48 Social channels.</p>
+        <p className="text-gray-500 mb-8">Short-form video inherits your palette and mood.</p>
         <div className="grid grid-cols-2 gap-4 mb-8">
           {ARCHETYPES.slice(0, 4).map((arch) => (
             <div key={arch.id} className="rounded-xl overflow-hidden border border-gray-200">
@@ -2469,7 +2475,7 @@ function ShowcaseFormats({ onNext, onBack }) {
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold mb-4"><Layers size={12} /> Format Diversity</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">One brand. Infinite formats.</h1>
-        <p className="text-gray-500 mb-8">Books, manga, audiobooks, courses, journals — all from the same brand DNA.</p>
+        <p className="text-gray-500 mb-8">Same DNA — different containers.</p>
         <div className="grid grid-cols-3 gap-3 mb-8">
           {V4_FORMATS_STRUCTURAL.map((f) => (
             <div key={f.id} className="p-4 rounded-xl border border-gray-200 bg-white">
@@ -2478,7 +2484,7 @@ function ShowcaseFormats({ onNext, onBack }) {
             </div>
           ))}
         </div>
-        <div className="rounded-xl bg-gray-50 border border-gray-200 p-5 mb-8"><p className="text-xs text-gray-600 leading-relaxed">Plus manga editions, audiobooks in multiple lengths, daily video content, pocket guides, 7-day transformation programs, mastercourse series, and interactive workbooks. The system adapts your brand to every format and platform automatically.</p></div>
+        <div className="rounded-xl bg-gray-50 border border-gray-200 p-5 mb-8"><p className="text-xs text-gray-600 leading-relaxed">Manga, audio, courses, journals, video — adapted automatically from the same core.</p></div>
         <div className="mt-8 text-center">
           <button type="button" onClick={onNext} className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-gray-800">
             Start building your brand <ArrowRight size={18} />
