@@ -22,6 +22,11 @@ def main() -> int:
     parser.add_argument("--arc-id", required=True)
     parser.add_argument("--genre-id", required=True)
     parser.add_argument("--schema-version", default="1.0.0")
+    parser.add_argument("--brand-id", default="", help="Brand ID for manga author resolution")
+    parser.add_argument("--locale", default="en_US", help="Locale for manga author")
+    parser.add_argument("--topic", default="anxiety", help="Therapeutic topic")
+    parser.add_argument("--demographic", default="anxious_millennials_urban", help="Target demographic")
+    parser.add_argument("--auto-generate-author", action="store_true", help="Auto-generate manga author if none found")
     args = parser.parse_args()
 
     repo = Path(__file__).resolve().parents[2]
@@ -35,6 +40,11 @@ def main() -> int:
         arc_id=args.arc_id,
         genre_id=args.genre_id,
         schema_version=args.schema_version,
+        brand_id=args.brand_id,
+        locale=args.locale,
+        topic=args.topic,
+        demographic=args.demographic,
+        auto_generate_author=args.auto_generate_author,
     )
     print("OK wrote series artifacts under", args.workspace.resolve())
     return 0

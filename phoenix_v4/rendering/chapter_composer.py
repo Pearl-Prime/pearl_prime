@@ -17,6 +17,8 @@ import hashlib
 import re
 from typing import Optional
 
+from phoenix_v4.exercises.models import AssemblyContext
+
 
 # ---------------------------------------------------------------------------
 # Sentence utilities
@@ -393,6 +395,7 @@ def compose_chapter_prose(
     chapter_index: int = 0,
     total_chapters: int = 1,
     include_slot_labels_qa: bool = False,
+    exercise_context: Optional[AssemblyContext] = None,
 ) -> str:
     """
     Compose a single chapter's prose from its slot types and resolved prose strings.
@@ -463,11 +466,37 @@ def compose_chapter_prose(
     if compression_raw and not _is_placeholder_text(compression_raw):
         parts.append(compression_raw)
 
-    # 7. Exercise with bridge
+    # 7. Exercise with bridge (component-aware when exercise_context is provided)
     if exercise_raw and not _is_placeholder_text(exercise_raw):
-        parts.append(_bridge_before_exercise(thesis, reflection=reflection_raw, story=story_raw))
-        parts.append(_exercise_setup_sentence(reflection_raw, story_raw))
-        parts.append(exercise_raw)
+        if exercise_context is not None:
+            # Use the component assembler for context-aware exercise rendering
+            try:
+                from phoenix_v4.exercises.component_assembler import (
+                    assemble_exercise_for_chapter,
+                )
+                composed_exercise = assemble_exercise_for_chapter(
+                    exercise_id=exercise_context.exercise_id,
+                    exercise_type="",  # resolved from templates
+                    description_text=exercise_raw,
+                    ctx=exercise_context,
+                    aha_text="",  # resolved from standards
+                    integration_text=integration_raw,
+                )
+                if composed_exercise.strip():
+                    parts.append(composed_exercise)
+                    # Skip the separate integration block below since it was
+                    # included in the component assembly
+                    integration_raw = ""
+            except Exception:
+                # Fallback to legacy hardcoded bridges on any import/runtime error
+                parts.append(_bridge_before_exercise(thesis, reflection=reflection_raw, story=story_raw))
+                parts.append(_exercise_setup_sentence(reflection_raw, story_raw))
+                parts.append(exercise_raw)
+        else:
+            # Legacy path: hardcoded bridges (backward compatible)
+            parts.append(_bridge_before_exercise(thesis, reflection=reflection_raw, story=story_raw))
+            parts.append(_exercise_setup_sentence(reflection_raw, story_raw))
+            parts.append(exercise_raw)
 
     # 8. Integration with bridge
     if integration_raw and not _is_placeholder_text(integration_raw):
