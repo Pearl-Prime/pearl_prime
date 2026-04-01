@@ -2,9 +2,9 @@
 Bestseller chapter composer: transforms raw slot prose into thesis-threaded chapters.
 
 Assembly order per chapter:
-  HOOK/SCENE → bridge → MECHANISM (derived from REFLECTION) → bridge →
-  REFLECTION (trimmed/warmed) → bridge → STORY → bridge → EXERCISE →
-  INTEGRATION → TAKEAWAY → THREAD
+  HOOK/SCENE → bridge → STORY → PIVOT → bridge → MECHANISM (derived from REFLECTION) →
+  REFLECTION (trimmed/warmed) → bridge → EXERCISE → COMPRESSION →
+  PERMISSION (high-cost chapters only) → INTEGRATION → TAKEAWAY → THREAD
 
 Bridge sentences create argument flow between slots so chapters
 make argued points rather than presenting disconnected slot sequences.
@@ -417,9 +417,11 @@ def compose_chapter_prose(
     hook = slot_map.get("HOOK", "")
     scene = _polish_scene(slot_map.get("SCENE", ""))
     story_raw = slot_map.get("STORY", "")
+    pivot_raw = slot_map.get("PIVOT", "")
     reflection_raw = slot_map.get("REFLECTION", "")
     integration_raw = _shape_integration(slot_map.get("INTEGRATION", ""))
     exercise_raw = slot_map.get("EXERCISE", "")
+    permission_raw = slot_map.get("PERMISSION", "")
     takeaway_raw = slot_map.get("TAKEAWAY", "")
     thread_raw = slot_map.get("THREAD", "")
     compression_raw = slot_map.get("COMPRESSION", "")
@@ -462,6 +464,11 @@ def compose_chapter_prose(
                     break
         parts.append(story_raw)
 
+    # 5a. PIVOT (land the story before teaching — Writer Spec §4.3a)
+    # PIVOT names what the story revealed without explaining. Placed between STORY and REFLECTION.
+    if pivot_raw and not _is_placeholder_text(pivot_raw):
+        parts.append(pivot_raw)
+
     # 6. COMPRESSION (if present, adds density/summary)
     if compression_raw and not _is_placeholder_text(compression_raw):
         parts.append(compression_raw)
@@ -497,6 +504,11 @@ def compose_chapter_prose(
             parts.append(_bridge_before_exercise(thesis, reflection=reflection_raw, story=story_raw))
             parts.append(_exercise_setup_sentence(reflection_raw, story_raw))
             parts.append(exercise_raw)
+
+    # 7a. PERMISSION (receive the reader — Writer Spec §4.8)
+    # Short emotional permission statement placed near INTEGRATION. High-cost chapters only.
+    if permission_raw and not _is_placeholder_text(permission_raw):
+        parts.append(permission_raw)
 
     # 8. Integration with bridge
     if integration_raw and not _is_placeholder_text(integration_raw):

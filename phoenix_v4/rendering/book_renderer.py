@@ -638,6 +638,16 @@ def chapter_flow_gate_report(
                     if i >= len(segment_proses) or not (segment_proses[i] or "").strip():
                         errors.append("THREAD_EMPTY")
                     break
+            for i, slot_name in enumerate(slot_names):
+                if slot_name == "PIVOT":
+                    if i >= len(segment_proses) or not (segment_proses[i] or "").strip():
+                        errors.append("PIVOT_EMPTY")
+                    break
+            for i, slot_name in enumerate(slot_names):
+                if slot_name == "PERMISSION":
+                    if i >= len(segment_proses) or not (segment_proses[i] or "").strip():
+                        errors.append("PERMISSION_EMPTY")
+                    break
             status = "PASS" if not errors else "FAIL"
             score = max(0, 100 - len(errors) * 15 - len(text_result.warnings) * 5)
             if status != "PASS":
@@ -652,6 +662,8 @@ def chapter_flow_gate_report(
                     **text_result.metrics,
                     "takeaway_checked": "TAKEAWAY" in slot_names,
                     "thread_checked": "THREAD" in slot_names,
+                    "pivot_checked": "PIVOT" in slot_names,
+                    "permission_checked": "PERMISSION" in slot_names,
                     "evaluated_text": "composed",
                 },
             }
@@ -677,7 +689,7 @@ def chapter_flow_gate_report(
             "dimension_gates_status": dg_status,
             "dimension_gates_blocks_delivery": dg_blocks,
         }
-    # Fallback: text-only (no TAKEAWAY/THREAD slot enforcement)
+    # Fallback: text-only (no TAKEAWAY/THREAD/PIVOT/PERMISSION slot enforcement)
     chapters = _extract_rendered_chapters(rendered_text)
     chapter_reports = []
     failed = 0
