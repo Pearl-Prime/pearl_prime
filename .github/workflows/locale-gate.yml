@@ -10,11 +10,13 @@ on:
       - 'config/localization/**'
       - 'atoms/**/locales/**'
       - 'scripts/localization/**'
+      - 'SOURCE_OF_TRUTH/teacher_banks/**/approved_atoms_localized/**'
   push:
     branches: [main]
     paths:
       - 'config/localization/**'
       - 'atoms/**/locales/**'
+      - 'SOURCE_OF_TRUTH/teacher_banks/**/approved_atoms_localized/**'
 
 jobs:
   locale-gate:
@@ -30,13 +32,18 @@ jobs:
       - name: Install dependencies
         run: pip install --quiet pyyaml
 
-      - name: Structural validation
+      - name: Structural validation (Pearl News atoms)
         run: |
           PYTHONPATH=. python3 scripts/localization/locale_structural_gate.py --all-locales || true
 
       - name: Translation coverage report
         run: |
           PYTHONPATH=. python3 scripts/ci/report_translation_coverage.py || true
+
+      - name: Teacher bank locale parity
+        run: |
+          PYTHONPATH=. python3 scripts/localization/teacher_bank_locale_parity.py \
+            --json-out artifacts/localization/teacher_parity.json || true
 
       - name: Validate translation format
         run: |
@@ -54,3 +61,11 @@ jobs:
           else
             echo "OK: all checked translation files have 20 variants"
           fi
+
+      - name: Upload parity report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: locale-parity-report
+          path: artifacts/localization/teacher_parity.json
+          if-no-files-found: ignore
