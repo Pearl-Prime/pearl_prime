@@ -11,7 +11,6 @@ enum TabTag: String, CaseIterable, Identifiable {
     case teacher
     case ci
     case docs
-    case manualReview
     var id: String { rawValue }
     var title: String {
         switch self {
@@ -25,7 +24,6 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .teacher: return "Teacher"
         case .ci: return "CI / Workflows"
         case .docs: return "Docs & Config"
-        case .manualReview: return "Manual Review"
         }
     }
     var systemImage: String {
@@ -40,7 +38,6 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .teacher: return "person.crop.circle"
         case .ci: return "arrow.triangle.2.circlepath"
         case .docs: return "doc.text"
-        case .manualReview: return "exclamationmark.triangle.fill"
         }
     }
 }
@@ -133,16 +130,6 @@ struct ContentView: View {
             }
         }
     }
-    .commands {
-        CommandGroup(after: .sidebar) {
-            ForEach(Array(TabTag.allCases.enumerated()), id: \.element) { index, tab in
-                Button(tab.title) { selectedTab = tab }
-                    .keyboardShortcut(KeyEquivalent(Character(Unicode.Scalar(48 + (index == 9 ? 0 : index + 1))!)), modifiers: .command)
-            }
-            Button("Refresh") { runStartupHealthCheckIfNeeded(); refreshCurrentTab() }
-                .keyboardShortcut("r", modifiers: .command)
-        }
-    }
 
     private var detailContent: some View {
         Group {
@@ -167,8 +154,6 @@ struct ContentView: View {
                 CIWorkflowsView(state: state, githubService: githubService)
             case .docs:
                 DocsConfigView(state: state, artifactReader: artifactReader, scriptRunner: scriptRunner)
-            case .manualReview:
-                ManualReviewView(state: state, artifactReader: artifactReader, scriptRunner: scriptRunner)
             }
         }
     }

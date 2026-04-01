@@ -1947,20 +1947,20 @@ Single list of every **doc**, **spec**, **config**, and **script** referenced in
 
 | Item | Section | Status |
 |------|---------|--------|
-| `docs/TREND_FEED_INTEGRATION_STRATEGY.md` | Trend feed pipeline | ⚠️ file not present on `main` — local-only strategy doc |
-| `skills/pearl-int/references/feed_sources.md` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed registry |
-| `skills/pearl-int/references/exploding_topics_scrape_plan.md` | Trend feed pipeline | ⚠️ file not present on `main` — local-only scrape plan |
-| `config/trend_keywords/tier1_primaries.yaml` | Trend feed pipeline | ⚠️ file not present on `main` — local-only keyword config |
-| `config/trend_keywords/tier2_rotation.yaml` | Trend feed pipeline | ⚠️ file not present on `main` — local-only keyword config |
-| `config/trend_keywords/tier3_persona.yaml` | Trend feed pipeline | ⚠️ file not present on `main` — local-only keyword config |
-| `config/trend_keywords/tier4_emerging.yaml` | Trend feed pipeline | ⚠️ file not present on `main` — local-only keyword config |
-| `config/trend_keywords/budget_config.yaml` | Trend feed pipeline | ⚠️ file not present on `main` — local-only budget config |
-| `scripts/feeds/pull_feeds.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
-| `scripts/feeds/check_trends.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
-| `scripts/feeds/score_trends.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
-| `scripts/feeds/daily_scrape_runner.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
-| `scripts/feeds/budget_guard.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
-| `scripts/feeds/validate_keyword_config.py` | Trend feed pipeline | ⚠️ file not present on `main` — local-only feed script |
+| [docs/TREND_FEED_INTEGRATION_STRATEGY.md](./TREND_FEED_INTEGRATION_STRATEGY.md) | Trend feed pipeline | ✓ — Strategy doc (promoted via WS-1) |
+| [skills/pearl-int/references/feed_sources.md](../skills/pearl-int/references/feed_sources.md) | Trend feed pipeline | ✓ — Feed registry (promoted via WS-1) |
+| [skills/pearl-int/references/exploding_topics_scrape_plan.md](../skills/pearl-int/references/exploding_topics_scrape_plan.md) | Trend feed pipeline | ✓ — Scrape plan (promoted via WS-1) |
+| [config/trend_keywords/tier1_primaries.yaml](../config/trend_keywords/tier1_primaries.yaml) | Trend feed pipeline | ✓ — Keyword config (promoted via WS-1) |
+| [config/trend_keywords/tier2_rotation.yaml](../config/trend_keywords/tier2_rotation.yaml) | Trend feed pipeline | ✓ — Keyword config (promoted via WS-1) |
+| [config/trend_keywords/tier3_persona.yaml](../config/trend_keywords/tier3_persona.yaml) | Trend feed pipeline | ✓ — Keyword config (promoted via WS-1) |
+| [config/trend_keywords/tier4_emerging.yaml](../config/trend_keywords/tier4_emerging.yaml) | Trend feed pipeline | ✓ — Keyword config (promoted via WS-1) |
+| [config/trend_keywords/budget_config.yaml](../config/trend_keywords/budget_config.yaml) | Trend feed pipeline | ✓ — Budget config (promoted via WS-1) |
+| `scripts/feeds/pull_feeds.py` | Trend feed pipeline | ⚠️ missing — not yet promoted |
+| [scripts/feeds/check_trends.py](../scripts/feeds/check_trends.py) | Trend feed pipeline | ✓ — Feed script (promoted via WS-1) |
+| [scripts/feeds/score_trends.py](../scripts/feeds/score_trends.py) | Trend feed pipeline | ✓ — Feed script (promoted via WS-1) |
+| [scripts/feeds/daily_scrape_runner.py](../scripts/feeds/daily_scrape_runner.py) | Trend feed pipeline | ✓ — Feed script (promoted via WS-1) |
+| [scripts/feeds/budget_guard.py](../scripts/feeds/budget_guard.py) | Trend feed pipeline | ✓ — Feed script (promoted via WS-1) |
+| `scripts/feeds/validate_keyword_config.py` | Trend feed pipeline | ⚠️ missing — not yet promoted |
 | `phoenix_v4/planning/catalog_planner.py` | Trend feed pipeline | ✓ on `main` (PR #68) — BookSpec `trend_heat_score`, structured trend helpers |
 | `scripts/ml_editorial/run_market_router.py` | Trend feed pipeline | ✓ on `main` (PR #68) — optional trend score path; heat-threshold priority elevation |
 | `tests/test_catalog_planner_trend_heat.py` | Trend feed pipeline | ✓ on `main` (PR #68) |
@@ -2124,10 +2124,10 @@ All `.md` files under `specs/` confirmed present on disk. Additional `.txt` and 
 | [config/source_of_truth/chapter_order_modes.yaml](../config/source_of_truth/chapter_order_modes.yaml) | Simulation | ✓ — Chapter order modes for simulation; aligned with section_reorder_modes |
 | [config/freebies/funnel_proof_loop.yaml](../config/freebies/funnel_proof_loop.yaml) | Freebie funnel | ✓ — topic, first_exercise, story_id, book_slug per hub |
 | [config/freebies/freebie_to_book_map.yaml](../config/freebies/freebie_to_book_map.yaml) | Freebie funnel | ✓ — exercise/topic → book_title, book_url, more_books; slugs for /books/<slug> |
-| `config/recommender/scoring_weights.yaml` | Phoenix Recommender | ⚠️ missing — backlog config reference |
-| `config/recommender/constraints.yaml` | Phoenix Recommender | ⚠️ missing — backlog config reference |
-| `config/recommender/hard_gates.yaml` | Phoenix Recommender | ⚠️ missing — backlog config reference |
-| `config/recommender/topic_mapping.yaml` | Phoenix Recommender | ⚠️ missing — backlog config reference |
+| [config/recommender/scoring_weights.yaml](../config/recommender/scoring_weights.yaml) | Phoenix Recommender | ✓ — Scoring weights (promoted via WS-3) |
+| [config/recommender/constraints.yaml](../config/recommender/constraints.yaml) | Phoenix Recommender | ✓ — Constraints config (promoted via WS-3) |
+| [config/recommender/hard_gates.yaml](../config/recommender/hard_gates.yaml) | Phoenix Recommender | ✓ — Hard gates config (promoted via WS-3) |
+| [config/recommender/topic_mapping.yaml](../config/recommender/topic_mapping.yaml) | Phoenix Recommender | ✓ — Topic mapping (promoted via WS-3) |
 | `ei-v2-learning.yml` | Automation cadence | ⚠️ missing — backlog workflow reference |
 | [.github/workflows/catalog-book-pipeline.yml](../.github/workflows/catalog-book-pipeline.yml) | Automation cadence | ✓ — Weekly Mon 6am UTC; generate schedule, run pipeline, optional EI learn; self-hosted; concurrency: `catalog-book-pipeline` (no cancel) |
 
@@ -2177,14 +2177,14 @@ All `.md` files under `specs/` confirmed present on disk. Additional `.txt` and 
 | [phoenix_v4/quality/ei_v2/dimension_gates.py](../phoenix_v4/quality/ei_v2/dimension_gates.py) | Enlightened Intelligence V2 (gates) | ✓ — gate_uniqueness, gate_engagement, gate_somatic_precision; GateResult, ChapterGateReport |
 | [scripts/ci/run_ei_v2_catalog_calibration.py](../scripts/ci/run_ei_v2_catalog_calibration.py) | Enlightened Intelligence (calibration) | ✓ — Stub: writes minimal calibration report; extend for catalog scan |
 | [tests/test_ei_v2_hybrid.py](../tests/test_ei_v2_hybrid.py) | Enlightened Intelligence V2 (tests) | ✓ — 17 tests: learner, dimension gates, hybrid selector, config, integration |
-| `phoenix_recommender/__init__.py` | Phoenix Recommender | ⚠️ missing — backlog module reference |
-| `phoenix_recommender/__main__.py` | Phoenix Recommender | ⚠️ missing — backlog module reference |
-| `phoenix_recommender/candidate_generator.py` | Phoenix Recommender | ⚠️ missing — backlog module reference |
-| `phoenix_recommender/feature_builder.py` | Phoenix Recommender | ⚠️ missing — backlog module reference |
-| `phoenix_recommender/scoring_model.py` | Phoenix Recommender | ⚠️ missing — backlog module reference |
-| `phoenix_recommender/ranker.py` | Phoenix Recommender | ⚠️ missing — backlog module reference |
-| `phoenix_recommender/recommendation_report.py` | Phoenix Recommender | ⚠️ missing — backlog module reference |
-| `phoenix_recommender/cli.py` | Phoenix Recommender | ⚠️ missing — backlog module reference |
+| [phoenix_recommender/\_\_init\_\_.py](../phoenix_recommender/__init__.py) | Phoenix Recommender | ✓ — Module init (promoted via WS-3) |
+| [phoenix_recommender/\_\_main\_\_.py](../phoenix_recommender/__main__.py) | Phoenix Recommender | ✓ — CLI entrypoint (promoted via WS-3) |
+| [phoenix_recommender/candidate_generator.py](../phoenix_recommender/candidate_generator.py) | Phoenix Recommender | ✓ — Candidate generation (promoted via WS-3) |
+| `phoenix_recommender/feature_builder.py` | Phoenix Recommender | ⚠️ missing — not yet promoted |
+| [phoenix_recommender/scoring_model.py](../phoenix_recommender/scoring_model.py) | Phoenix Recommender | ✓ — Scoring model (promoted via WS-3) |
+| `phoenix_recommender/ranker.py` | Phoenix Recommender | ⚠️ missing — not yet promoted |
+| [phoenix_recommender/recommendation_report.py](../phoenix_recommender/recommendation_report.py) | Phoenix Recommender | ✓ — Report generator (promoted via WS-3) |
+| [phoenix_recommender/cli.py](../phoenix_recommender/cli.py) | Phoenix Recommender | ✓ — CLI interface (promoted via WS-3) |
 | [phoenix_title_engine.py](../phoenix_title_engine.py) | Marketing & deep research | ✓ |
 | [phoenix_title_engine_v3.py](../phoenix_title_engine_v3.py) | Marketing & deep research | ✓ |
 | [phoenix_title_engine_v4.py](../phoenix_title_engine_v4.py) | Marketing & deep research | ✓ |

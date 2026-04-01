@@ -1,0 +1,70 @@
+{
+  "score_date": "2026-03-28",
+  "scorer": "manual_et_scrape",
+  "note": "score_trends.py not yet built; manual scoring against consumer_language_by_topic.yaml topic IDs",
+  "confirmed_topics": [
+    {
+      "topic": "somatic-therapy",
+      "et_volume": 110000,
+      "et_growth_pct": 102,
+      "matched_topic_ids": ["anxiety", "burnout", "grief", "somatic_healing"],
+      "topic_id_match_count": 4,
+      "signal_strength": "strong",
+      "fast_publish_candidate": true,
+      "rationale": "Highest topic_id overlap (4 matches). +102% growth = doubling. Maps directly to somatic_healing topic_id and bridges into anxiety, burnout, grief. Consumer language alignment: 'my body holds all my stress', 'shaking and releasing things', 'nervous system is fried'. Bridge language ready."
+    },
+    {
+      "topic": "emdr",
+      "et_volume": 450000,
+      "et_growth_pct": 37,
+      "matched_topic_ids": ["anxiety", "overthinking", "grief"],
+      "topic_id_match_count": 3,
+      "signal_strength": "mature_steady",
+      "fast_publish_candidate": false,
+      "rationale": "Highest volume of all tracked topics. Growth slowing (+37%) = mature topic. Good evergreen content target. Maps to anxiety, overthinking, grief. Not a spike — no urgency."
+    },
+    {
+      "topic": "breathwork",
+      "et_volume": 60500,
+      "et_growth_pct": 75,
+      "matched_topic_ids": ["anxiety", "sleep_anxiety", "burnout", "somatic_healing"],
+      "topic_id_match_count": 4,
+      "signal_strength": "strong",
+      "fast_publish_candidate": true,
+      "rationale": "4 topic_id matches like somatic-therapy. +75% growth solid. Natural pairing with somatic-therapy content. Consumer language: 'can't breathe right because of stress', 'my nervous system is fried'. Slight recent dip — publish while interest rebounds."
+    },
+    {
+      "topic": "rosebud-ai",
+      "et_volume": 49500,
+      "et_growth_pct": 1243,
+      "matched_topic_ids": ["overthinking", "anxiety"],
+      "topic_id_match_count": 2,
+      "signal_strength": "explosive_spike",
+      "fast_publish_candidate": false,
+      "rationale": "Explosive +1243% growth but this is a specific AI product (journaling app), not a therapy modality. Only 2 topic_id matches. Competitor signal — indicates consumer appetite for AI-guided self-reflection. Content angle: 'AI journaling for overthinkers' positioned with Phoenix bridge language. Monitor, don't chase the brand name."
+    },
+    {
+      "topic": "ketamine-therapy",
+      "et_volume": 201000,
+      "et_growth_pct": 74,
+      "matched_topic_ids": ["grief", "burnout"],
+      "topic_id_match_count": 2,
+      "signal_strength": "high_volume_risky",
+      "fast_publish_candidate": false,
+      "rationale": "High volume (201K) but only 2 topic_id matches. Platform risk: medical content triggers. Had massive spike mid-2025 now stabilized. Bridge language approach ONLY — no clinical claims. Not a fast-publish target due to compliance risk."
+    }
+  ],
+  "discovery_scan": {
+    "new_topics_found": 0,
+    "pages_scanned": ["explodingtopics.com/health-topics", "explodingtopics.com/lifestyle-topics"],
+    "note": "No new self-help/wellness/therapy/mental health topics with >1000% growth discovered. Health dominated by PDRN skincare, pharma (Retatrutide), AI tech. Lifestyle dominated by consumer products. Some topics hidden behind PRO paywall."
+  },
+  "fast_publish_candidates": ["somatic-therapy", "breathwork"],
+  "watch_list_updates": ["rosebud-ai remains explosive — monitor for content angle opportunity"],
+  "pipeline_gaps": [
+    "daily_scrape_runner.py does not exist yet in scripts/feeds/",
+    "score_trends.py does not exist yet in scripts/feeds/",
+    "RSS feed pull (6 feeds) not executed — no script available",
+    "Google Trends / SerpApi check not executed — no script available"
+  ]
+}

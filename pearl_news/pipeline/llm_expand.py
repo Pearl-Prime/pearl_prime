@@ -157,7 +157,7 @@ def _load_config(config_root: Path) -> dict[str, Any]:
     if path.exists() and yaml:
         with open(path, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f) or {}
-    # Env override (e.g. GitHub Secrets on self-hosted runner with LM Studio)
+    # Env override (e.g. GitHub Secrets on self-hosted runner with Qwen-compatible API)
     if os.environ.get("QWEN_BASE_URL"):
         data["base_url"] = os.environ.get("QWEN_BASE_URL", "").strip()
     if os.environ.get("QWEN_API_KEY") is not None:

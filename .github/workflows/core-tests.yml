@@ -33,6 +33,11 @@ jobs:
             -x
         continue-on-error: false
 
+      - name: Smoke manga chapter runner CLI
+        run: |
+          PYTHONPATH=. python scripts/ci/smoke_manga_chapter_runner.py
+        continue-on-error: false
+
       - name: Validate marketing config
         run: |
           PYTHONPATH=. python -m phoenix_v4.qa.validate_marketing_config

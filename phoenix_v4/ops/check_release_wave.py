@@ -434,6 +434,9 @@ def run_anti_homogeneity(
     var_count: dict[str, int] = defaultdict(int)
     cta_count: dict[str, int] = defaultdict(int)
     slug_count: dict[str, int] = defaultdict(int)
+    delivery_exp_count: dict[str, int] = defaultdict(int)
+    reader_intent_count: dict[str, int] = defaultdict(int)
+    positioning_count: dict[str, int] = defaultdict(int)
     for r in rows:
         topic_count[r.topic_id] += 1
         persona_count[r.persona_id] += 1
@@ -448,6 +451,15 @@ def run_anti_homogeneity(
             cta_count[r.cta_template_id] += 1
         if r.slug_pattern:
             slug_count[r.slug_pattern] += 1
+        delivery_experience = str(r.raw.get("delivery_experience") or "")
+        reader_intent = str(r.raw.get("reader_intent") or "")
+        perceived_positioning = str(r.raw.get("perceived_positioning") or "")
+        if delivery_experience:
+            delivery_exp_count[delivery_experience] += 1
+        if reader_intent:
+            reader_intent_count[reader_intent] += 1
+        if perceived_positioning:
+            positioning_count[perceived_positioning] += 1
 
     w = weights
     score = (
@@ -459,8 +471,26 @@ def run_anti_homogeneity(
         + w.get("variation_diversity", 0) * normalized_entropy(var_count, total)
         + w.get("cta_diversity", 0) * normalized_entropy(cta_count, total)
         + w.get("slug_diversity", 0) * normalized_entropy(slug_count, total)
+        + w.get("delivery_experience_diversity", 0) * normalized_entropy(delivery_exp_count, total)
+        + w.get("reader_intent_diversity", 0) * normalized_entropy(reader_intent_count, total)
+        + w.get("perceived_positioning_diversity", 0) * normalized_entropy(positioning_count, total)
     )
-    total_w = sum(w.get(k, 0) for k in ("topic_diversity", "persona_diversity", "arc_diversity", "band_shape_diversity", "slot_diversity", "variation_diversity", "cta_diversity", "slug_diversity"))
+    total_w = sum(
+        w.get(k, 0)
+        for k in (
+            "topic_diversity",
+            "persona_diversity",
+            "arc_diversity",
+            "band_shape_diversity",
+            "slot_diversity",
+            "variation_diversity",
+            "cta_diversity",
+            "slug_diversity",
+            "delivery_experience_diversity",
+            "reader_intent_diversity",
+            "perceived_positioning_diversity",
+        )
+    )
     if total_w > 0:
         score /= total_w
     return round(score, 4)

@@ -17,6 +17,6 @@ SITE_URL="${SITE_URL%/}"
 SITE_URL="${SITE_URL%/wp-admin}"
 
 open "${SITE_URL}/wp-admin/profile.php"
-open "https://github.com/Ahjan108/Qwen-Agent/settings/secrets/actions"
+open "https://github.com/Ahjan108/phoenix_omega_v4.8/settings/secrets/actions"
 
-echo "Opened WordPress profile page and Qwen-Agent GitHub Actions secrets page."
+echo "Opened WordPress profile page and phoenix_omega_v4.8 GitHub Actions secrets page."

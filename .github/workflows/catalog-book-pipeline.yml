@@ -30,9 +30,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  QWEN_BASE_URL: http://127.0.0.1:1234/v1
-  QWEN_API_KEY: lm-studio
-  QWEN_MODEL: qwen3-14b
+  QWEN_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
+  QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+  QWEN_MODEL: ${{ secrets.QWEN_MODEL }}
 
 jobs:
   build:
@@ -53,13 +53,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Preflight runner + LM health
+      - name: Preflight runner + Qwen API health
         run: |
           set -euo pipefail
-          echo "== LM Studio model check =="
+          echo "== Qwen model check =="
           curl -fsS "$QWEN_BASE_URL/models" >/tmp/models.json
           cat /tmp/models.json | head -c 300; echo
-          echo "== LM Studio warmup =="
+          echo "== Qwen warmup =="
           curl -fsS --max-time 45 "$QWEN_BASE_URL/chat/completions" \
             -H 'Content-Type: application/json' \
             -H "Authorization: Bearer $QWEN_API_KEY" \
@@ -92,60 +92,31 @@ jobs:
             raise SystemExit("Insufficient free disk (<15 GB).")
           PY
 
-      - name: Generate schedule + run pipeline with LM lock (retry-once)
+      - name: Generate schedule + run pipeline (retry-once)
         run: |
           python3 - <<'PY'
-          import importlib.util
           import subprocess
           import time
-          from pathlib import Path
-
-          def load_lock_module():
-              candidates = [
-                  Path("Qwen-Agent/scripts/lm_studio_lock.py"),
-              ]
-              for p in candidates:
-                  if p.exists():
-                      spec = importlib.util.spec_from_file_location("lm_studio_lock_mod", p)
-                      mod = importlib.util.module_from_spec(spec)
-                      spec.loader.exec_module(mod)  # type: ignore[arg-type]
-                      return mod
-              return None
 
           lane = "${{ inputs.lane || 'en' }}"
           cap = "${{ inputs.books_cap || 10 }}"
           commands = [
               f"python3 scripts/release/generate_weekly_schedule.py --lane {lane} --out artifacts/release_schedule.json",
-              f"python3 scripts/ci/run_canary_100_books.py --cap {cap}",
+              f"python3 scripts/ci/run_canary_100_books.py --n {cap}",
           ]
-          lock_mod = load_lock_module()
-          lock_ctx = (
-              lock_mod.lm_studio_lock("catalog-book-pipeline", shards=120, timeout_sec=180)
-              if lock_mod is not None else None
-          )
-          if lock_ctx is None:
-              print("LM lock module not found in repo checkout; running without external lock")
-
-          class _NoOpContext:
-              def __enter__(self):
-                  return None
-              def __exit__(self, exc_type, exc, tb):
-                  return False
-
-          with (lock_ctx or _NoOpContext()):
-              for cmd in commands:
-                  ok = False
-                  for attempt in (1, 2):
-                      print(f"cmd={cmd} attempt={attempt}")
-                      rc = subprocess.call(cmd, shell=True)
-                      if rc == 0:
-                          ok = True
-                          break
-                      if attempt == 2:
-                          raise SystemExit(f"Command failed after retry: {cmd}")
-                      time.sleep(15)
-                  if not ok:
-                      raise SystemExit(f"Unexpected failure: {cmd}")
+          for cmd in commands:
+              ok = False
+              for attempt in (1, 2):
+                  print(f"cmd={cmd} attempt={attempt}")
+                  rc = subprocess.call(cmd, shell=True)
+                  if rc == 0:
+                      ok = True
+                      break
+                  if attempt == 2:
+                      raise SystemExit(f"Command failed after retry: {cmd}")
+                  time.sleep(15)
+              if not ok:
+                  raise SystemExit(f"Unexpected failure: {cmd}")
           PY
 
       - name: Upload pipeline artifacts

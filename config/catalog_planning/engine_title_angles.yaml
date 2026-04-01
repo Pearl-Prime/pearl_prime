@@ -1,0 +1,135 @@
+# Engine → human-readable title angle phrases.
+# Authority: EXPERIENCE_LAYER_ANTI_SPAM_SPEC §16 (metadata consistency)
+#
+# Problem this solves: The naming engine uses engine_id (e.g. "false_alarm", "spiral")
+# as raw keywords in titles when no series_template match is found. These internal
+# taxonomy names must NEVER appear in reader-facing metadata.
+#
+# This file maps each engine_id to:
+#   - primary_phrase: the main angle phrase used in titles/subtitles
+#   - alt_phrases: 3-5 alternative phrasings for title diversity
+#   - subtitle_hook: a reader-facing promise clause specific to this engine's approach
+#   - title_tone: the emotional register (calm, urgent, empowering, reflective, precise)
+#
+# The naming engine should use primary_phrase (or a seeded alt_phrase) wherever
+# it would currently use angle_id.replace("_", " ").
+
+schema_version: 1
+
+engine_angles:
+
+  false_alarm:
+    primary_phrase: "When Your Mind Screams Danger"
+    alt_phrases:
+      - "The False Alarm Response"
+      - "Why Your Brain Cries Wolf"
+      - "When Fear Lies to You"
+      - "Misreading the Danger Signal"
+    subtitle_hook: "How to Recognize When Anxiety Is a False Alarm — and What to Do Instead"
+    title_tone: empowering
+
+  spiral:
+    primary_phrase: "Breaking the Thought Loop"
+    alt_phrases:
+      - "The Overthinking Spiral"
+      - "When One Thought Becomes a Thousand"
+      - "Escaping the Mental Loop"
+      - "The Rumination Trap"
+    subtitle_hook: "A Step-by-Step Method to Interrupt Spiraling Thoughts Before They Take Over"
+    title_tone: urgent
+
+  comparison:
+    primary_phrase: "The Comparison Trap"
+    alt_phrases:
+      - "Measuring Yourself Against Everyone"
+      - "When Other People's Success Feels Like Your Failure"
+      - "Beyond the Highlight Reel"
+      - "The Comparison Habit"
+    subtitle_hook: "How to Stop Measuring Your Worth Against Others and Build Real Confidence"
+    title_tone: reflective
+
+  grief:
+    primary_phrase: "The Weight You Carry"
+    alt_phrases:
+      - "When Loss Reshapes Everything"
+      - "Living with What You've Lost"
+      - "The Grief That Doesn't Leave"
+      - "After the Loss"
+    subtitle_hook: "A Gentle Guide to Moving Through Grief Without Forcing Yourself to 'Get Over It'"
+    title_tone: calm
+
+  overwhelm:
+    primary_phrase: "When Everything Is Too Much"
+    alt_phrases:
+      - "The Overwhelm Response"
+      - "Drowning in Demands"
+      - "Too Many Things, Not Enough You"
+      - "The Shutdown Point"
+    subtitle_hook: "Practical Tools to Regain Control When Life Feels Unmanageable"
+    title_tone: urgent
+
+  watcher:
+    primary_phrase: "The Observer's Mind"
+    alt_phrases:
+      - "Watching Your Thoughts Without Drowning"
+      - "The Space Between You and Your Anxiety"
+      - "Stepping Back from the Storm"
+      - "The Witnessing Practice"
+    subtitle_hook: "How to Create Distance from Anxious Thoughts and Find Clarity"
+    title_tone: calm
+
+  shame:
+    primary_phrase: "The Hidden Weight of Shame"
+    alt_phrases:
+      - "What Shame Does to You"
+      - "When You Feel Fundamentally Wrong"
+      - "The Shame Response"
+      - "Carrying What You Can't Say"
+    subtitle_hook: "Understanding How Shame Works in Your Body and Mind — and How to Release It"
+    title_tone: reflective
+
+  # Legacy / generic engines (from original naming engine)
+  somatic_exercise:
+    primary_phrase: "What Your Body Already Knows"
+    alt_phrases:
+      - "The Body's Own Wisdom"
+      - "Healing Through the Body"
+      - "When Words Aren't Enough"
+    subtitle_hook: "Body-Based Practices to Release Tension, Regulate Your Nervous System, and Feel Safe Again"
+    title_tone: calm
+
+  narrative_transformation:
+    primary_phrase: "Rewriting Your Story"
+    alt_phrases:
+      - "The Story You Tell Yourself"
+      - "Changing the Narrative"
+      - "Beyond the Old Story"
+    subtitle_hook: "How to Recognize the Stories Holding You Back — and Write New Ones"
+    title_tone: reflective
+
+  practical_system:
+    primary_phrase: "A System That Works"
+    alt_phrases:
+      - "The Method"
+      - "A Clear Path Forward"
+      - "The Framework You Need"
+    subtitle_hook: "A Structured, Repeatable Approach to [Topic] That Fits Your Real Life"
+    title_tone: precise
+
+  spiritual_reflection:
+    primary_phrase: "The Quiet Practice"
+    alt_phrases:
+      - "Returning to Stillness"
+      - "The Inner Path"
+      - "A Contemplative Approach"
+    subtitle_hook: "Ancient Practices for Modern Minds — A Contemplative Path to Inner Peace"
+    title_tone: calm
+
+  rational_framework:
+    primary_phrase: "The Clear-Thinking Guide"
+    alt_phrases:
+      - "What the Evidence Shows"
+      - "A Rational Approach"
+      - "The Logic of Calm"
+    subtitle_hook: "Evidence-Based Strategies to Understand Your Mind and Make Better Decisions"
+    title_tone: precise

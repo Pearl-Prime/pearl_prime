@@ -3,7 +3,7 @@ GitHub Status Tab — PhoenixControl Executive Dashboard.
 Authority: docs/EXECUTIVE_DASHBOARD_AND_PHOENIXCONTROL_SPEC.md §6 (Agent change feed)
 
 Shows live workflow run status, open PRs, and workflow dispatch triggers
-for both repos: phoenix_omega_v4.8 and Qwen-Agent (Pearl News).
+for the canonical Phoenix repo.
 
 Requires: GITHUB_TOKEN env var (set via `gh auth token` or ~/.env)
 Usage (standalone test): streamlit run scripts/dashboard/github_tab.py
@@ -22,7 +22,6 @@ import requests
 
 REPOS = {
     "phoenix_omega": "Ahjan108/phoenix_omega_v4.8",
-    "qwen_agent":    "Ahjan108/Qwen-Agent",
 }
 
 # Key workflows to surface in the dashboard (workflow filename → display name)
@@ -30,15 +29,13 @@ WATCHED_WORKFLOWS = {
     "Ahjan108/phoenix_omega_v4.8": {
         "core-tests.yml":               "Core Tests",
         "release-gates.yml":            "Release Gates",
-        "audiobook-regression.yml":     "Audiobook Regression",
         "ei-v2-gates.yml":              "EI V2 Gates",
         "github-governance-check.yml":  "GitHub Governance",
         "production-observability.yml": "Production Observability",
         "docs-ci.yml":                  "Docs CI",
-    },
-    "Ahjan108/Qwen-Agent": {
-        "pearl_news_scheduled.yml":     "Pearl News (Scheduled)",
-        "pearl_news_manual_expand.yml": "Pearl News (Manual Expand)",
+        "pearl-news-assemble.yml":      "Pearl News Assemble",
+        "pearl-news-fill-qwen.yml":     "Pearl News Fill Qwen",
+        "pearl-news-full-qa.yml":       "Pearl News Full QA",
     },
 }
 
@@ -46,10 +43,7 @@ WATCHED_WORKFLOWS = {
 DISPATCHABLE = {
     "Ahjan108/phoenix_omega_v4.8": [
         ("release-gates.yml",        "Run Release Gates"),
-        ("audiobook-regression.yml", "Run Audiobook Regression"),
-    ],
-    "Ahjan108/Qwen-Agent": [
-        ("pearl_news_manual_expand.yml", "Run Pearl News Expand"),
+        ("pearl-news-fill-qwen.yml", "Run Pearl News Fill Qwen"),
     ],
 }
 
@@ -249,7 +243,7 @@ def render_github_tab(token: str | None = None) -> None:
     for repo_key, repo_full in REPOS.items():
         repo_label = {
             "phoenix_omega": "phoenix\_omega\_v4.8",
-            "qwen_agent":    "Qwen-Agent (Pearl News)",
+            "phoenix_omega": "Phoenix Omega",
         }.get(repo_key, repo_full)
 
         st.subheader(f"📦 {repo_label}")

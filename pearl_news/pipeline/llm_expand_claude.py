@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pearl News — Claude-powered article writer (replaces Qwen/LM Studio expansion).
+Pearl News — Claude-powered article writer (replaces Qwen-compatible HTTP expansion).
 
 Slot-by-slot article generation using the Anthropic API (Claude Sonnet).
 Each slot uses the same prompts from pearl_news/prompts/slot_by_slot/ that were

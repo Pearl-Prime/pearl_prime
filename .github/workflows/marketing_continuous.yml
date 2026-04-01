@@ -24,9 +24,9 @@ jobs:
     runs-on: self-hosted
     timeout-minutes: 30
     env:
-      QWEN_BASE_URL: http://127.0.0.1:1234/v1
-      QWEN_API_KEY: lm-studio
-      QWEN_MODEL: qwen3-14b
+      QWEN_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
+      QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+      QWEN_MODEL: ${{ secrets.QWEN_MODEL }}
       MODE: ${{ github.event.inputs.mode || 'ingest-only' }}
     steps:
       - uses: actions/checkout@v4
@@ -34,7 +34,7 @@ jobs:
       - name: Install deps
         run: pip install pyyaml requests --break-system-packages
 
-      - name: Preflight runner + LM health
+      - name: Preflight runner + Qwen API health
         run: |
           set -euo pipefail
           echo "mode=$MODE"
@@ -59,10 +59,10 @@ jobs:
               raise SystemExit("Insufficient free disk (<10 GB).")
           PY
           if [ "$MODE" != "ingest-only" ]; then
-            echo "== LM Studio model check =="
+            echo "== Qwen model check =="
             curl -fsS "$QWEN_BASE_URL/models" >/tmp/models.json
             cat /tmp/models.json | head -c 300; echo
-            echo "== LM Studio warmup =="
+            echo "== Qwen warmup =="
             curl -fsS --max-time 45 "$QWEN_BASE_URL/chat/completions" \
               -H 'Content-Type: application/json' \
               -H "Authorization: Bearer $QWEN_API_KEY" \

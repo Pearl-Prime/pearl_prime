@@ -139,6 +139,23 @@ This branch starts the kernel with:
 - a `panel_prompts.json` manifest compiler for free Colab and future render backends
 - a retrieval-first manga asset resolver so existing visuals are reused before new images are requested
 
+## Landmarks merged to `main` (implementation log)
+
+Use this as the canonical “what shipped” timeline for the contract-first manga kernel. **Next branch:** always from current `origin/main` (as of last merge below).
+
+| When (merge) | PR / focus | What landed |
+|--------------|------------|-------------|
+| 2026-03-24 | **#60** — Chunk E+F | `828c9a181e76819e24a57325b9f6cdc231d8b46d` — QC + resumable runner: `config/manga/gate_registry.yaml`, `phoenix_v4/manga/qc/`, `phoenix_v4/manga/memory/`, `phoenix_v4/manga/runner/` (`run_chapter_dag`, stage manifests under `stages/<stage_id>/`), `scripts/manga/run_manga_chapter.py` (`--from-stage` / `--to-stage`), stage id `series_memory_merge`, tests `tests/test_manga_chapter_runner_e2e_replay.py`. CI: Core tests, Release gates, EI V2, Change impact, governance, pearl-prime reported green before merge. |
+| (prior) | **#59** — Chunk C+D | Chapter production: `lettering_from_script`, `page_compose` (Pillow), `chapter_production.produce_chapter_assets`, `scripts/manga/run_chapter_production.py`, `tests/test_manga_lettering_from_script.py`, `tests/test_manga_chapter_production_integration.py`, `Pillow` in `requirements-test.txt`. |
+| (prior) | **#58** — Chunk B | Series setup: `phoenix_v4/manga/series/*`, `emit_series_setup`, `scripts/manga/run_series_setup.py`, `tests/test_manga_series_setup.py`, series replay fixture. |
+| (prior) | **#57** | `scripts/git/push_guard.py`, `tests/test_push_guard.py`, `python3` alignment in `ps.txt` / `CLAUDE.md`. |
+| (prior) | **#56** — Chunk A | Replay chapter writer: `phoenix_v4/manga/chapter/writer.py`, `ReplayLLMClient.from_json_file`, pair replay fixture, `tests/test_manga_chapter_writer.py`. |
+| (prior) | Visual / Phase 0 | `visual_from_script`, `image_backend`, `run_chapter_visual`, schemas/models/transmission as documented above. |
+
+**Deliberately not in this kernel yet:** live LLM calls inside the runner; ComfyUI / batch SD workers; SDF training and Comfy SDF nodes (those remain in **`specs/MANGA_MODE_SYSTEM_SPEC.md`** §6.7, not in `phoenix_v4` code).
+
+**Local-only note:** an untracked `specs/MANGA_QC_AND_EBOOK_PIPELINE_SPEC.md` in some checkouts is unrelated to the merged PRs unless added intentionally.
+
 ## What Pearl_GitHub Should Remember
 
 - manga implementation starts from the summary doc, not from isolated partial specs

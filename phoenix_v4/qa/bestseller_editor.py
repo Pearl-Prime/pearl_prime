@@ -337,9 +337,9 @@ def build_bestseller_editor_report(
         "book_pass_status": book_pass_status,
         "thesis_drift_status": thesis_drift_status,
         "dna_status": dna_status,
+        "dimension_gate_status": dimension_gate_status,
         "dimension_gates_status": dimension_gates_status,
         "dimension_gates_blocks_delivery": dimension_gates_blocks_delivery,
-        "dimension_gate_status": dimension_gate_status,
     }
 
     return report

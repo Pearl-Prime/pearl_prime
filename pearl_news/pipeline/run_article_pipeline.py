@@ -412,7 +412,7 @@ def main() -> int:
         len(articles_to_output), language,
     )
 
-    # Manual review queue: articles that need human review
+    # Editorial review queue: articles that need human follow-up
     needs_review = [
         {
             "article_id": item.get("id"),
@@ -427,12 +427,12 @@ def main() -> int:
         if item.get("_needs_manual_review")
     ]
     if needs_review:
-        review_queue_path = out_dir / "manual_review_queue.json"
+        review_queue_path = out_dir / "editorial_review_queue.json"
         review_queue_path.write_text(
             json.dumps(needs_review, indent=2, ensure_ascii=False), encoding="utf-8"
         )
         logger.warning(
-            "%d articles flagged for manual review → %s", len(needs_review), review_queue_path
+            "%d articles flagged for editorial review → %s", len(needs_review), review_queue_path
         )
 
     logger.info(

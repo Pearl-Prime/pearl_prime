@@ -45,16 +45,27 @@ def mode_share(values: List[str]) -> float:
     return cnt / len(values)
 
 
+def experience_sig(p: Dict[str, Any]) -> str:
+    """Experience fingerprint: delivery + intent + positioning (the 3 highest-signal dimensions)."""
+    return "|".join(
+        str(p.get(f, ""))
+        for f in ("delivery_experience", "reader_intent", "perceived_positioning")
+    )
+
+
 def wave_ok(wave: List[Dict[str, Any]]) -> bool:
     arcs = [str(p.get("arc_id", "")) for p in wave]
     bands = [band_seq(p) for p in wave]
     slots = [str(p.get("slot_sig", "")) for p in wave]
     exps = [ex_pattern(p) for p in wave]
+    exp_sigs = [experience_sig(p) for p in wave]
     return (
         mode_share(arcs) < 0.30
         and mode_share(bands) < 0.40
         and mode_share(slots) < 0.50
         and mode_share(exps) < 0.60
+        # Experience layer: no single experience signature > 40% of wave
+        and mode_share(exp_sigs) < 0.40
     )
 
 
@@ -70,17 +81,21 @@ def penalty(candidate: Dict[str, Any], wave: List[Dict[str, Any]]) -> float:
     c_band = band_seq(candidate)
     c_slot = candidate.get("slot_sig", "")
     c_exp = ex_pattern(candidate)
+    c_esig = experience_sig(candidate)
 
     arc_hits = sum(1 for p in wave if p.get("arc_id") == c_arc)
     band_hits = sum(1 for p in wave if band_seq(p) == c_band)
     slot_hits = sum(1 for p in wave if p.get("slot_sig") == c_slot)
     exp_hits = sum(1 for p in wave if ex_pattern(p) == c_exp)
+    # Experience collision: same delivery + intent + positioning
+    esig_hits = sum(1 for p in wave if experience_sig(p) == c_esig)
 
     return (
         1.5 * arc_hits
         + 2.0 * band_hits
         + 2.5 * slot_hits
         + 1.8 * exp_hits
+        + 2.0 * esig_hits  # Experience penalty: same weight as band collision
     )
 
 
@@ -168,10 +183,22 @@ def main() -> int:
     bands = [band_seq(p) for p in plans]
     slots = [str(p.get("slot_sig", "")) for p in plans]
     exps = [ex_pattern(p) for p in plans]
+    esigs = [experience_sig(p) for p in plans]
     print("  arc mode share:", f"{mode_share(arcs) * 100:.1f}%")
     print("  band mode share:", f"{mode_share(bands) * 100:.1f}%")
     print("  slot mode share:", f"{mode_share(slots) * 100:.1f}%")
     print("  ex pattern mode share:", f"{mode_share(exps) * 100:.1f}%")
+    print("  experience sig mode share:", f"{mode_share(esigs) * 100:.1f}%")
+    # Experience diversity breakdown
+    del_exp = [str(p.get("delivery_experience", "")) for p in plans if p.get("delivery_experience")]
+    rd_int = [str(p.get("reader_intent", "")) for p in plans if p.get("reader_intent")]
+    pp = [str(p.get("perceived_positioning", "")) for p in plans if p.get("perceived_positioning")]
+    if del_exp:
+        print(f"  distinct delivery_experience: {len(set(del_exp))}")
+    if rd_int:
+        print(f"  distinct reader_intent: {len(set(rd_int))}")
+    if pp:
+        print(f"  distinct perceived_positioning: {len(set(pp))}")
     return 0
 
 

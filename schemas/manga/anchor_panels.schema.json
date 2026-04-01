@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/anchor_panels.schema.json",
+  "title": "Anchor Panels",
+  "description": "Reference panels with measured parameters for visual drift detection. Produced by Visual Identity Agent (§6.3). Consumed by QC Agent for Level 3 rendered output validation.",
+  "allOf": [
+    { "$ref": "manga_common.schema.json#/$defs/artifact_base" }
+  ],
+  "type": "object",
+  "required": ["schema_version", "artifact_type", "series_id", "anchor_panels"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "artifact_type": {
+      "const": "anchor_panels"
+    },
+    "series_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "style_bible_version": {
+      "type": "string",
+      "description": "The style_bible version these anchor panels were generated against. All drift checks must use anchor panels matching the current style_bible_version."
+    },
+    "anchor_panels": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/anchor_panel" }
+    },
+    "drift_detection": { "$ref": "#/$defs/drift_detection_config" }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "anchor_panel": {
+      "type": "object",
+      "required": [
+        "anchor_panel_id",
+        "category",
+        "reference_image_id",
+        "measured_parameters"
+      ],
+      "properties": {
+        "anchor_panel_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique ID for this anchor panel. All downstream agents reference by ID only — free-text names prohibited (Visual Identity Spec §10)."
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "silent_stillness",
+            "high_action",
+            "emotional_peak",
+            "dialogue_standard",
+            "establishing_shot",
+            "close_up_face",
+            "transition",
+            "splash_page"
+          ],
+          "description": "Panel mood/function category. QC drift detection matches rendered panels to the nearest anchor by category."
+        },
+        "reference_image_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "File reference or asset ID for the anchor image stored in series/anchor_panels/."
+        },
+        "embedding_id": {
+          "type": "string",
+          "description": "ID of the stored embedding vector for similarity comparison during drift detection."
+        },
+        "measured_parameters": { "$ref": "#/$defs/measured_parameters" },
+        "prompt_used": {
+          "type": "string",
+          "description": "The exact generation prompt that produced this anchor panel. Stored for reproducibility."
+        },
+        "generation_settings": { "$ref": "#/$defs/generation_settings" }
+      },
+      "additionalProperties": true
+    },
+    "measured_parameters": {
+      "type": "object",
+      "required": [
+        "contrast_ratio",
+        "linework_weight_px",
+        "shadow_coverage_pct",
+        "highlight_coverage_pct"
+      ],
+      "properties": {
+        "contrast_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Measured contrast ratio of the panel. QC drift threshold: ±0.10."
+        },
+        "linework_weight_px": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Average linework weight in pixels. QC drift threshold: ±0.5px."
+        },
+        "shadow_coverage_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Fraction of panel area in shadow. QC drift threshold: ±0.08."
+        },
+        "highlight_coverage_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Fraction of panel area in highlight. QC drift threshold: ±0.10."
+        },
+        "detail_density": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "Detail density tier. Drift = one_tier tolerance (low→medium OK, low→high = drift)."
+        },
+        "color_temperature": {
+          "type": "string",
+          "enum": ["warm", "neutral_warm", "neutral", "neutral_cool", "cool"],
+          "description": "Color temperature classification for the panel."
+        },
+        "screentone_density_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Fraction of panel area using screentone. Per Visual Identity Spec §3.5 silence grammar."
+        }
+      },
+      "additionalProperties": true
+    },
+    "generation_settings": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Image generation model used (e.g. flux_v1, sdxl_v1)."
+        },
+        "seed": {
+          "type": "integer",
+          "description": "Random seed for reproducibility."
+        },
+        "cfg_scale": {
+          "type": "number",
+          "description": "Classifier-free guidance scale."
+        },
+        "steps": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of denoising steps."
+        },
+        "lora_ids": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "LoRA model IDs applied during generation."
+        }
+      },
+      "additionalProperties": true
+    },
+    "drift_detection_config": {
+      "type": "object",
+      "description": "Drift detection settings. Per Visual Identity Spec §6.4: check every 10 panels against nearest anchor.",
+      "properties": {
+        "check_interval": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 10,
+          "description": "Check rendered panels against anchors every N panels."
+        },
+        "threshold": {
+          "type": "object",
+          "properties": {
+            "contrast_ratio": { "type": "number", "default": 0.10 },
+            "linework_weight_px": { "type": "number", "default": 0.5 },
+            "shadow_coverage_pct": { "type": "number", "default": 0.08 },
+            "highlight_coverage_pct": { "type": "number", "default": 0.10 },
+            "detail_density": {
+              "type": "string",
+              "default": "one_tier",
+              "description": "Tolerance for detail_density drift. 'one_tier' means low→medium OK, low→high = drift."
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

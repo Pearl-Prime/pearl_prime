@@ -37,6 +37,18 @@ jobs:
         run: |
           PYTHONPATH=. python scripts/run_production_readiness_gates.py
 
+      - name: Simulation analyzer gate
+        if: github.event_name != 'pull_request'
+        run: |
+          SIM_N=1000
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            SIM_N=10000
+          fi
+          PYTHONPATH=. python scripts/ci/run_intelligent_sim_gates.py \
+            --run-sim \
+            --n "$SIM_N" \
+            --baseline artifacts/reports/pearl_prime_sim_baseline.json
+
       - name: Rigorous system test (skip sim for speed)
         if: github.event_name != 'pull_request'
         run: |
@@ -45,7 +57,16 @@ jobs:
       - name: Pipeline canary (20 books)
         if: github.event_name != 'pull_request'
         run: |
-          PYTHONPATH=. python scripts/ci/run_canary_100_books.py --n 20
+          PYTHONPATH=. python scripts/ci/run_canary_100_books.py \
+            --n 20 \
+            --analysis artifacts/reports/pearl_prime_sim_analysis.json \
+            --combo-mode best-worst \
+            --combo-limit 3
+
+      - name: Release smoke (pre-rollback)
+        if: github.event_name != 'pull_request'
+        run: |
+          bash scripts/release/release_smoke.sh
 
       - name: Rollback smoke (post-restore verification)
         if: github.event_name != 'pull_request'
@@ -70,6 +91,24 @@ jobs:
               print("No systems-test report found to pin.")
           PY
 
+      - name: Write workflow run manifest
+        if: always()
+        run: |
+          PYTHONPATH=. python scripts/ci/write_workflow_run_manifest.py \
+            --workflow-name "Release gates" \
+            --workflow-file ".github/workflows/release-gates.yml" \
+            --out artifacts/release/workflow_run_manifest.json \
+            --artifact artifacts/simulation_10k.json \
+            --artifact artifacts/release/latest_systems_test_report.json \
+            --artifact artifacts/release/release_smoke_evidence.json \
+            --artifact artifacts/release/rollback_smoke_evidence.json \
+            --artifact artifacts/canary_plans/canary_summary.json \
+            --artifact artifacts/canary_plans/canary_failures.json \
+            --artifact artifacts/reports/pearl_prime_sim_analysis.json \
+            --artifact artifacts/reports/pearl_prime_sim_analysis_SUMMARY.txt \
+            --artifact artifacts/reports/bestseller_error_report.json \
+            --artifact artifacts/reports/bestseller_error_report_SUMMARY.txt
+
       - name: Write Pearl Prime release evidence (PR)
         if: always() && github.event_name == 'pull_request'
         run: |
@@ -81,6 +120,7 @@ jobs:
         if: always() && github.event_name != 'pull_request'
         run: |
           PYTHONPATH=. python scripts/ci/write_pearl_prime_release_evidence.py \
+            --strict \
             --profile release \
             --out artifacts/release/pearl_prime_release_evidence.json
 
@@ -90,9 +130,16 @@ jobs:
         with:
           name: release-gates-evidence
           path: |
+            artifacts/release/workflow_run_manifest.json
             artifacts/release/pearl_prime_release_evidence.json
             artifacts/release/latest_systems_test_report.json
+            artifacts/release/release_smoke_evidence.json
             artifacts/release/rollback_smoke_evidence.json
+            artifacts/simulation_10k.json
             artifacts/canary_plans/canary_summary.json
             artifacts/canary_plans/canary_failures.json
+            artifacts/reports/pearl_prime_sim_analysis.json
+            artifacts/reports/pearl_prime_sim_analysis_SUMMARY.txt
+            artifacts/reports/bestseller_error_report.json
+            artifacts/reports/bestseller_error_report_SUMMARY.txt
           if-no-files-found: ignore

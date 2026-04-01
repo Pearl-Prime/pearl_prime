@@ -7,10 +7,12 @@ FAIL wave if:
 - >=40% identical band sequence
 - >=50% identical slot signature
 - >=60% identical exercise placement
+- Experience layer caps exceeded (when experience fields present; §5.1 of EXPERIENCE_LAYER_ANTI_SPAM_SPEC)
 
 No prose inspection.
-Structural only.
+Structural + experience layer.
 Requires plans to have: arc_id, emotional_temperature_sequence, slot_sig, exercise_chapters (Stage 3 emitted).
+Experience fields are optional (graceful degrade).
 """
 from __future__ import annotations
 
@@ -40,9 +42,11 @@ def mode_share(values: List[str]) -> Tuple[float, str]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(
-        description="Wave density gate: FAIL if >=30%% same arc, >=40%% same band_seq, >=50%% same slot_sig, >=60%% same exercise placement"
+        description="Wave density gate: FAIL if >=30%% same arc, >=40%% same band_seq, >=50%% same slot_sig, >=60%% same exercise placement, or experience layer caps exceeded"
     )
     ap.add_argument("--plans-dir", required=True, help="Directory containing compiled plan JSON files (Stage 3 output with arc_id, emotional_temperature_sequence, slot_sig, exercise_chapters)")
+    ap.add_argument("--network-mode", action="store_true", help="Run cross-brand network-level experience checks")
+    ap.add_argument("--catalog-index", default="", help="Path to catalog similarity index.jsonl (for first-of-kind alerts)")
     args = ap.parse_args()
 
     plans: List[Dict[str, Any]] = []
@@ -120,11 +124,54 @@ def main() -> int:
                 f"compression structure density: pos_sig {pos_share:.0%} and len_vec {len_share:.0%} both >= 50%"
             )
 
+    # --- Experience layer checks (§5.1 of EXPERIENCE_LAYER_ANTI_SPAM_SPEC) ---
+    exp_failures: List[str] = []
+    exp_warnings: List[str] = []
+    try:
+        # Import from phoenix_v4 package (add repo root to path if needed)
+        repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        if repo_root not in sys.path:
+            sys.path.insert(0, repo_root)
+        from phoenix_v4.qa.experience_wave_checks import (
+            check_experience_wave,
+            check_experience_metadata_consistency,
+        )
+        from pathlib import Path
+
+        catalog_index = Path(args.catalog_index) if args.catalog_index else None
+        exp_failures, exp_warnings = check_experience_wave(
+            plans,
+            allow_legacy_plans=True,
+            network_mode=args.network_mode,
+            catalog_index_path=catalog_index,
+        )
+
+        # Experience-metadata consistency (WARN only)
+        consistency_warnings = check_experience_metadata_consistency(plans)
+        exp_warnings.extend(consistency_warnings)
+
+    except ImportError:
+        # phoenix_v4 not importable (e.g. CI without full env); skip experience checks gracefully
+        exp_warnings.append("EXP WAVE: phoenix_v4.qa.experience_wave_checks not importable; experience checks skipped")
+    except Exception as e:
+        exp_warnings.append(f"EXP WAVE: experience check error (non-blocking): {e}")
+
+    failures.extend(exp_failures)
+
     if failures:
         print("WAVE DENSITY: FAIL")
         for f in failures:
             print(" -", f)
+        if exp_warnings:
+            print("WAVE DENSITY: WARNINGS")
+            for w in exp_warnings:
+                print(" -", w)
         return 2
+
+    if exp_warnings:
+        print("WAVE DENSITY: WARNINGS")
+        for w in exp_warnings:
+            print(" -", w)
 
     print("WAVE DENSITY: PASS")
     return 0

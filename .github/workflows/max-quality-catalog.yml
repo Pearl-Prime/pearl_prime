@@ -39,9 +39,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  QWEN_BASE_URL: http://127.0.0.1:1234/v1
-  QWEN_API_KEY: lm-studio
-  QWEN_MODEL: qwen3-14b
+  QWEN_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
+  QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+  QWEN_MODEL: ${{ secrets.QWEN_MODEL }}
 
 jobs:
   run:
@@ -106,13 +106,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Preflight runner + LM health
+      - name: Preflight runner + Qwen API health
         run: |
           set -euo pipefail
-          echo "== LM Studio model check =="
+          echo "== Qwen model check =="
           curl -fsS "$QWEN_BASE_URL/models" >/tmp/models.json
           cat /tmp/models.json | head -c 300; echo
-          echo "== LM Studio warmup =="
+          echo "== Qwen warmup =="
           curl -fsS --max-time 45 "$QWEN_BASE_URL/chat/completions" \
             -H 'Content-Type: application/json' \
             -H "Authorization: Bearer $QWEN_API_KEY" \
@@ -125,29 +125,11 @@ jobs:
           print("warmup_ok=true")
           PY
 
-      - name: Run max-quality shard with LM lock
+      - name: Run max-quality shard
         run: |
           python3 - <<'PY'
-          import importlib.util
           import shlex
           import subprocess
-          from pathlib import Path
-
-          def load_lock_module():
-              candidates = [Path("Qwen-Agent/scripts/lm_studio_lock.py")]
-              for p in candidates:
-                  if p.exists():
-                      spec = importlib.util.spec_from_file_location("lm_studio_lock_mod", p)
-                      mod = importlib.util.module_from_spec(spec)
-                      spec.loader.exec_module(mod)  # type: ignore[arg-type]
-                      return mod
-              return None
-
-          class _NoOpContext:
-              def __enter__(self):
-                  return None
-              def __exit__(self, exc_type, exc, tb):
-                  return False
 
           shard = "${{ matrix.shard }}"
           mode = "${{ matrix.mode }}"
@@ -170,13 +152,7 @@ jobs:
               cmd.append("--skip-word-count-gate")
 
           print("cmd=", " ".join(shlex.quote(x) for x in cmd))
-          lock_mod = load_lock_module()
-          lock_ctx = (
-              lock_mod.lm_studio_lock(f"max-quality-catalog-{shard}", shards=120, timeout_sec=180)
-              if lock_mod is not None else None
-          )
-          with (lock_ctx or _NoOpContext()):
-              raise SystemExit(subprocess.call(cmd))
+          raise SystemExit(subprocess.call(cmd))
           PY
 
       - name: Upload shard artifacts

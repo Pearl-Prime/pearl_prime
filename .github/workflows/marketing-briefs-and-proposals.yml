@@ -25,9 +25,9 @@ jobs:
     environment: marketing
 
     env:
-      QWEN_BASE_URL: http://127.0.0.1:1234/v1
-      QWEN_API_KEY: lm-studio
-      QWEN_MODEL: qwen3-14b
+      QWEN_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
+      QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+      QWEN_MODEL: ${{ secrets.QWEN_MODEL }}
       MODE: ${{ github.event.inputs.mode || 'briefs' }}
 
     steps:
@@ -43,14 +43,14 @@ jobs:
         run: |
           pip install -r requirements-test.txt --break-system-packages || pip install -r requirements-test.txt
 
-      - name: Preflight runner + LM health
+      - name: Preflight runner + Qwen API health
         run: |
           set -euo pipefail
           echo "mode=$MODE"
-          echo "== LM Studio model check =="
+          echo "== Qwen model check =="
           curl -fsS "$QWEN_BASE_URL/models" >/tmp/models.json
           cat /tmp/models.json | head -c 300; echo
-          echo "== LM Studio warmup =="
+          echo "== Qwen warmup =="
           curl -fsS --max-time 45 "$QWEN_BASE_URL/chat/completions" \
             -H 'Content-Type: application/json' \
             -H "Authorization: Bearer $QWEN_API_KEY" \
@@ -78,26 +78,12 @@ jobs:
         run: |
           python -c "import yaml; c=yaml.safe_load(open('config/marketing/ingest_limits.yaml')); exit(1 if c.get('global',{}).get('emergency_stop') else 0)" && echo "Emergency stop is NOT active" || (echo "Emergency stop is active"; exit 1)
 
-      - name: Run briefs/proposals with LM lock (retry-once)
+      - name: Run briefs/proposals (retry-once)
         run: |
           python3 - <<'PY'
-          import importlib.util
           import subprocess
-          import sys
           import time
           from pathlib import Path
-
-          def load_lock_module():
-              candidates = [
-                  Path("Qwen-Agent/scripts/lm_studio_lock.py"),
-              ]
-              for p in candidates:
-                  if p.exists():
-                      spec = importlib.util.spec_from_file_location("lm_studio_lock_mod", p)
-                      mod = importlib.util.module_from_spec(spec)
-                      spec.loader.exec_module(mod)  # type: ignore[arg-type]
-                      return mod
-              return None
 
           mode = "${{ github.event.inputs.mode || 'briefs' }}"
           commands = []
@@ -116,34 +102,19 @@ jobs:
               print("No marketing scripts are available in this checkout; exiting without failure")
               raise SystemExit(0)
 
-          lock_mod = load_lock_module()
-          lock_ctx = (
-              lock_mod.lm_studio_lock("marketing-briefs", shards=12, timeout_sec=120)
-              if lock_mod is not None else None
-          )
-          if lock_ctx is None:
-              print("LM lock module not found in repo checkout; running without external lock")
-
-          class _NoOpContext:
-              def __enter__(self):
-                  return None
-              def __exit__(self, exc_type, exc, tb):
-                  return False
-
-          with (lock_ctx or _NoOpContext()):
-              for cmd in commands:
-                  ok = False
-                  for attempt in (1, 2):
-                      print(f"cmd={cmd} attempt={attempt}")
-                      rc = subprocess.call(cmd, shell=True)
-                      if rc == 0:
-                          ok = True
-                          break
-                      if attempt == 2:
-                          raise SystemExit(f"Command failed after retry: {cmd}")
-                      time.sleep(10)
-                  if not ok:
-                      raise SystemExit(f"Unexpected failure: {cmd}")
+          for cmd in commands:
+              ok = False
+              for attempt in (1, 2):
+                  print(f"cmd={cmd} attempt={attempt}")
+                  rc = subprocess.call(cmd, shell=True)
+                  if rc == 0:
+                      ok = True
+                      break
+                  if attempt == 2:
+                      raise SystemExit(f"Command failed after retry: {cmd}")
+                  time.sleep(10)
+              if not ok:
+                  raise SystemExit(f"Unexpected failure: {cmd}")
           PY
 
       - name: Upload artifacts

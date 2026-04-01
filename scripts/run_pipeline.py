@@ -209,7 +209,6 @@ def main() -> int:
     ap.add_argument("--render-formats", default="txt", help="Comma-separated book output formats (default: txt)")
     ap.add_argument("--render-dir", default=None, help="Output dir for rendered book (default: artifacts/rendered/<plan_id>)")
     ap.add_argument("--skip-word-count-gate", action="store_true", help="Bypass word count minimum gate (use when content density work is in progress)")
-    ap.add_argument("--allow-placeholders", action="store_true", help="Allow placeholder/silence slots in rendered output (omit from prose, log warning)")
     ap.add_argument(
         "--enforce-book-pass-gate",
         action="store_true",
@@ -220,19 +219,6 @@ def main() -> int:
         action="store_true",
         help="Run EI V2 AI techniques in parallel with V1 and produce comparison report (artifacts/ei_v2/)",
     )
-    ap.add_argument(
-        "--auto-duration",
-        action="store_true",
-        help="Enable Stage 0 duration planner to auto-select runtime + structural format from persona/topic/intent",
-    )
-    ap.add_argument("--platform", default=None, help="Platform ID for duration optimization (e.g. audible, spotify, youtube)")
-    ap.add_argument(
-        "--therapeutic-intent",
-        default=None,
-        choices=["discovery", "engagement", "therapeutic", "deep_engagement", "conversion"],
-        help="Therapeutic intent for duration planner (default: engagement)",
-    )
-    ap.add_argument("--locale", default=None, help="Locale for duration planner persona modifier (e.g. en-US, zh-CN)")
     ap.add_argument("--atoms-root", default=None, help="Atoms root (e.g. atoms/zh-TW). Default: repo atoms/")
     ap.add_argument(
         "--atoms-model",
@@ -408,46 +394,14 @@ def main() -> int:
             stacklevel=2,
         )
 
-    # Stage 0 (optional): Duration Planner — auto-select runtime + structural format
-    # Activated by --auto-duration when --runtime-format and --structural-format are NOT set.
-    duration_recommendation = None
-    if args.auto_duration and not args.runtime_format and not args.structural_format:
-        from phoenix_v4.planning.duration_planner import DurationPlanner
-        dp = DurationPlanner()
-        duration_recommendation = dp.plan(
-            topic_id=topic_id,
-            persona_id=persona_id,
-            intent=args.therapeutic_intent or "engagement",
-            platform_id=args.platform,
-            locale=args.locale,
-            structural_format_hint=args.structural_format,
-        )
-        if duration_recommendation.blockers:
-            for b in duration_recommendation.blockers:
-                print(f"Duration planner blocker: {b}", file=sys.stderr)
-            return 1
-        for w in duration_recommendation.warnings:
-            print(f"Duration planner warning: {w}", file=sys.stderr)
-        print(
-            f"Stage 0 duration planner: runtime={duration_recommendation.recommended_runtime_format}, "
-            f"structural={duration_recommendation.recommended_structural_format}, "
-            f"duration={duration_recommendation.recommended_duration_minutes}min, "
-            f"score={duration_recommendation.duration_fit_score}",
-            file=sys.stderr,
-        )
-
     # Stage 2: FormatPlan
     from phoenix_v4.planning.format_selector import FormatSelector
     selector = FormatSelector()
     constraints = {}
     if args.runtime_format:
         constraints["force_runtime_format"] = args.runtime_format
-    elif duration_recommendation:
-        constraints["force_runtime_format"] = duration_recommendation.recommended_runtime_format
     if args.structural_format:
         constraints["force_structural_format"] = args.structural_format
-    elif duration_recommendation:
-        constraints["force_structural_format"] = duration_recommendation.recommended_structural_format
     format_plan = selector.select_format(
         topic_id=topic_id,
         persona_id=persona_id,
@@ -1195,13 +1149,12 @@ def main() -> int:
             render_dir = Path(args.render_dir) if args.render_dir else (REPO_ROOT / "artifacts" / "rendered" / (out.get("plan_id") or out.get("plan_hash", "book")))
             formats_list = [f.strip().lower() for f in (args.render_formats or "txt").split(",") if f.strip()]
             try:
-                _allow_ph = getattr(args, "allow_placeholders", False) or getattr(args, "skip_word_count_gate", False)
                 written = render_book(
                     out,
                     render_dir,
                     formats=formats_list,
-                    allow_placeholders=_allow_ph,
-                    on_missing="placeholder" if _allow_ph else "fail",
+                    allow_placeholders=False,
+                    on_missing="fail",
                     title_page=True,
                     include_slot_labels_qa=False,
                     enforce_word_count=not args.skip_word_count_gate,

@@ -1,10 +1,10 @@
 # GitHub Operations Framework
 
-**Purpose:** Single place to map repos, workflows, triggers, secrets, and runners for **Ahjan108/phoenix_omega_v4.8** and **Ahjan108/Qwen-Agent** so GitHub operations are repeatable and error-free.
+**Purpose:** Single place to map workflows, triggers, secrets, and runner expectations for **Ahjan108/phoenix_omega_v4.8** so GitHub operations are repeatable and error-free.
 
-**You found this from:** [docs/DOCS_INDEX.md](./DOCS_INDEX.md) (task table: "Do GitHub operations (both repos)" or "For developers: start here"). Use this doc whenever you do PRs, merges, pushes, or runner/workflow work in either repo.
+**You found this from:** [docs/DOCS_INDEX.md](./DOCS_INDEX.md). Use this doc whenever you do PRs, merges, pushes, or runner/workflow work in this repo.
 
-**Authority:** [DOCS_INDEX.md](./DOCS_INDEX.md). Related: [BRANCH_PROTECTION_REQUIREMENTS.md](./BRANCH_PROTECTION_REQUIREMENTS.md), [GITHUB_SUPPORT_SYSTEM_SPEC.md](./GITHUB_SUPPORT_SYSTEM_SPEC.md), [PEARL_NEWS_OPTION_B_RUNBOOK.md](./PEARL_NEWS_OPTION_B_RUNBOOK.md), [GITHUB_GOVERNANCE_INCIDENT_RUNBOOK.md](./GITHUB_GOVERNANCE_INCIDENT_RUNBOOK.md).
+**Authority:** [DOCS_INDEX.md](./DOCS_INDEX.md). Related: [BRANCH_PROTECTION_REQUIREMENTS.md](./BRANCH_PROTECTION_REQUIREMENTS.md), [GITHUB_SUPPORT_SYSTEM_SPEC.md](./GITHUB_SUPPORT_SYSTEM_SPEC.md), [GITHUB_GOVERNANCE_INCIDENT_RUNBOOK.md](./GITHUB_GOVERNANCE_INCIDENT_RUNBOOK.md).
 
 ---
 
@@ -26,8 +26,7 @@ A weekly workflow, [.github/workflows/remote-commit-review.yml](../.github/workf
 
 | GitHub repo | Default branch | Local path | Note |
 |-------------|----------------|------------|------|
-| **Ahjan108/phoenix_omega_v4.8** | main | phoenix_omega | Phoenix system. phoenix_omega_v4.8 = this repo on GitHub. |
-| **Ahjan108/Qwen-Agent** | main | Qwen-Agent (sibling or elsewhere) | Self-hosted runtime for Pearl News + Audiobook + Localization; fork of QwenLM/Qwen-Agent. |
+| **Ahjan108/phoenix_omega_v4.8** | main | phoenix_omega | Canonical production repo for Phoenix system code, governance, Pearl News, marketing, catalog, EI V2, manga, and operator docs. |
 
 ---
 
@@ -40,19 +39,14 @@ flowchart LR
     W2[Release gates]
     W3[EI V2 gates]
     W4[Change impact]
+    PN1[Pearl News assemble]
+    PN2[Pearl News fill Qwen]
+    PN3[Pearl News full QA]
+    SELF[Self-hosted Qwen workflows]
     BP[Branch protection]
   end
-  subgraph Qwen ["Ahjan108/Qwen-Agent"]
-    PN1[Pearl News scheduled]
-    PN2[Pearl News manual expand]
-    AB1[Audiobook regression/manual/scheduled]
-    LOC1[Locale max agents + weekly quality]
-    OPS1[Runner cleanup]
-    Runner[Self-hosted runner]
-    Secrets[6 secrets]
-  end
   Phoenix --> BP
-  Qwen --> Runner
+  SELF --> PN2
 ```
 
 ---
@@ -83,11 +77,14 @@ flowchart LR
 | translate-atoms-qwen-matrix.yml | Translate atoms (Qwen matrix) | schedule, dispatch | ubuntu-latest | No |
 | research_feeds_ingest.yml | Research feeds ingest | schedule, dispatch | ubuntu-latest | No |
 | pages.yml | pages build and deployment | push (e.g. main) | ubuntu-latest | No |
-| audiobook-regression.yml | Audiobook regression | workflow_dispatch | ubuntu-latest + self-hosted | No |
+| pearl-news-assemble.yml | Pearl News assemble | push, PR, dispatch | ubuntu-latest | No |
+| pearl-news-fill-qwen.yml | Pearl News fill Qwen | workflow_dispatch | self-hosted | No |
+| pearl-news-full-qa.yml | Pearl News full QA | push, PR, dispatch | ubuntu-latest | No |
 | marketing_continuous.yml | Marketing continuous ingest | schedule (hourly :15) | self-hosted | No |
 | marketing-briefs-and-proposals.yml | Marketing briefs + proposals (daily) | schedule (daily 8am UTC), dispatch | self-hosted | No |
 | ei-v2-learning.yml | EI V2 daily learning | schedule (daily 5am UTC), dispatch | ubuntu-latest | No |
 | catalog-book-pipeline.yml | Catalog book pipeline (weekly) | schedule (Mon 6am UTC), dispatch | self-hosted | No |
+| max-quality-catalog.yml | Max Quality Catalog | workflow_dispatch | self-hosted | No |
 
 **Concurrency groups (automation cadence):**
 
@@ -96,38 +93,20 @@ flowchart LR
 | marketing_continuous.yml | `marketing-continuous` | true | Hourly ingest; latest-only avoids stacked runs. |
 | catalog-book-pipeline.yml | `catalog-book-pipeline` | false | Weekly job; let it finish. |
 | marketing-briefs-and-proposals.yml | `marketing-briefs-proposals` | true | Daily; prefer latest-only. |
+| max-quality-catalog.yml | `max-quality-catalog-<shard>` | false | Manual shard runs should finish once started. |
 | ei-v2-learning.yml | `ei-v2-learning` | false | Learning run should complete. |
 
-**Self-hosted hardening status (phoenix_omega):**
+**Self-hosted hardening status:**
 
-- `marketing_continuous.yml`: concurrency + runner preflight + retry-once ingest loops.
-- `marketing-briefs-and-proposals.yml`: lock held in the same step/process as heavy commands + preflight + retry-once.
-- `catalog-book-pipeline.yml`: LM preflight + in-step LM lock + retry-once loops for build and EI learn.
+- `marketing_continuous.yml`: concurrency + Qwen API preflight when non-ingest-only + retry-once ingest loops.
+- `marketing-briefs-and-proposals.yml`: concurrency + Qwen API preflight + retry-once.
+- `catalog-book-pipeline.yml`: Qwen API preflight + retry-once loops for build and EI learn.
+- `max-quality-catalog.yml`: concurrency + Qwen API preflight + direct shard execution without external lock import.
+- `pearl-news-fill-qwen.yml`: self-hosted Qwen path for manual Pearl News expansion; keep secrets and runtime evidence current.
 
-**LM Studio lock (self-hosted runner):** Jobs that use the local LM Studio acquire a process-level lock via [Qwen-Agent/scripts/lm_studio_lock.py](../Qwen-Agent/scripts/lm_studio_lock.py) (three tiers: light/medium/heavy). This prevents resource contention between concurrent jobs on the same runner. **Important:** lock must be acquired in the same step/process that runs the heavy command (do not acquire in one step and run heavy work in a later step). See lock file for compatibility matrix.
+**Phoenix self-hosted Qwen policy:** self-hosted workflows in this repo rely on workflow `concurrency`, in-step Qwen API preflight/warmup, retry-once loops where appropriate, and workflow-run evidence.
 
 **Branch protection (main):** Intended live shape is one active `main` ruleset, or temporary multiple active `main` rulesets with identical required contexts. Require exactly **Core tests**, **Release gates**, **EI V2 gates**, **Change impact**. `Release gates` stays PR-required in lightweight form; heavier release checks stay off the PR path. `Workers Builds: pearl-prime` is non-blocking and must not be required for merge. See [BRANCH_PROTECTION_REQUIREMENTS.md](./BRANCH_PROTECTION_REQUIREMENTS.md). Machine-readable policy: [config/governance/required_checks.yaml](../config/governance/required_checks.yaml).
-
----
-
-## Workflow matrix: Qwen-Agent
-
-| Workflow file | Name | Trigger | Runner | Secrets |
-|---------------|------|---------|--------|---------|
-| pearl_news_scheduled.yml | Pearl News scheduled | schedule (6am/6pm UTC), workflow_dispatch | self-hosted | All 6 below |
-| pearl_news_manual_expand.yml | Pearl News manual (expand) | workflow_dispatch | self-hosted | All 6 below |
-| locale_max_agents.yml | Locale max-agents run | workflow_dispatch | self-hosted | QWEN_BASE_URL, QWEN_API_KEY, QWEN_MODEL |
-| audiobook_regression.yml | Audiobook regression | workflow_dispatch + PR(path) | ubuntu-latest + self-hosted | QWEN_BASE_URL, QWEN_API_KEY, QWEN_MODEL |
-| audiobook_scheduled.yml | Audiobook scheduled (Qwen-only) | schedule + workflow_dispatch | self-hosted | QWEN_BASE_URL, QWEN_API_KEY, QWEN_MODEL |
-| audiobook_manual.yml | Audiobook manual run (Qwen-only) | workflow_dispatch | self-hosted | QWEN_BASE_URL, QWEN_API_KEY, QWEN_MODEL |
-| locale_quality_weekly.yml | Locale Quality — Weekly EI V2 Loop | schedule + workflow_dispatch | ubuntu-latest | None required |
-| runner_artifacts_cleanup.yml | Runner artifacts cleanup | schedule + workflow_dispatch | self-hosted | None required |
-| deploy-docs.yml | Deploy to GitHub Pages | push(paths) + workflow_dispatch | ubuntu-latest | Pages permissions |
-
-**Secrets (Settings → Secrets and variables → Actions):** WORDPRESS_SITE_URL, WORDPRESS_USERNAME, WORDPRESS_APP_PASSWORD, QWEN_BASE_URL, QWEN_API_KEY, QWEN_MODEL.
-Note: audiobook/localization workflows currently rely on QWEN* env vars; if new workflows add non-default endpoints/auth, update this table.
-
-Branch protection: not specified in this framework; Qwen-Agent typically does not require status checks for main.
 
 ---
 
@@ -135,39 +114,31 @@ Branch protection: not specified in this framework; Qwen-Agent typically does no
 
 | Feature / capability | Primary repo | Workflows | Notes |
 |----------------------|--------------|-----------|--------|
-| Phoenix (EI V2, Core, Release, Change impact, Teacher, Brand, ML loop, etc.) | phoenix_omega_v4.8 | All workflows in phoenix_omega | No Pearl News workflows in this repo. |
-| Pearl News (scheduled + manual expand) | Qwen-Agent | pearl_news_scheduled.yml, pearl_news_manual_expand.yml | Canonical workflows live in Qwen-Agent only. phoenix_omega does not contain pearl_news_*.yml. |
+| Phoenix (EI V2, Core, Release, Change impact, Teacher, Brand, ML loop, etc.) | phoenix_omega_v4.8 | All workflows in this repo | Canonical repo for production automation and governance. |
+| Pearl News (assemble, fill, QA, WordPress) | phoenix_omega_v4.8 | `pearl-news-assemble.yml`, `pearl-news-fill-qwen.yml`, `pearl-news-full-qa.yml` | Canonical Pearl News workflows live in this repo. |
 
 ---
 
 ## Secrets and runners
 
-### phoenix_omega_v4.8
-
-- **Secrets:** Per-workflow (e.g. observability, ML, production alerts may use tokens). Self-hosted marketing/catalog workflows also use `QWEN_BASE_URL`, `QWEN_API_KEY`, `QWEN_MODEL` when LM preflight/warmup is enabled. See workflow files and [AUTONOMOUS_IMPROVEMENT_AND_ML_SYSTEM.md](./AUTONOMOUS_IMPROVEMENT_AND_ML_SYSTEM.md).
-- **Runner:** Mixed. Most workflows are GitHub-hosted (`ubuntu-latest`); `marketing_continuous.yml`, `marketing-briefs-and-proposals.yml`, and `catalog-book-pipeline.yml` run on self-hosted.
+- **Secrets:** Per-workflow tokens as needed. Self-hosted marketing, catalog, and Pearl News Qwen workflows use `QWEN_BASE_URL`, `QWEN_API_KEY`, `QWEN_MODEL`. WordPress posting uses `WORDPRESS_SITE_URL`, `WORDPRESS_USERNAME`, `WORDPRESS_APP_PASSWORD`.
+- **Runner:** Mixed. Most workflows are GitHub-hosted (`ubuntu-latest`); `marketing_continuous.yml`, `marketing-briefs-and-proposals.yml`, `catalog-book-pipeline.yml`, `max-quality-catalog.yml`, and `pearl-news-fill-qwen.yml` run on self-hosted infrastructure.
 - **Ownership map:** [OWNERSHIP_MATRIX.md](./OWNERSHIP_MATRIX.md)
 
-### Qwen-Agent
+### Self-hosted contention
 
-- **Secrets (6):** WORDPRESS_SITE_URL, WORDPRESS_USERNAME, WORDPRESS_APP_PASSWORD, QWEN_BASE_URL, QWEN_API_KEY, QWEN_MODEL.
-- **Runner:** Self-hosted on the machine where LM Studio runs. Typical path: `Qwen-Agent/actions-runner/`. Start: `cd /path/to/Qwen-Agent/actions-runner && ./run.sh`. Ensure LM Studio is running when workflows that use `--expand` are triggered.
-- **LM Studio config reference:** [LM_STUDIO_CONFIG.md](./LM_STUDIO_CONFIG.md) (runtime recommendations and stability settings).
+If a workflow in this repo uses a Qwen-compatible endpoint on self-hosted infrastructure, it must follow the Phoenix self-hosted policy:
 
-### Cross-repo self-hosted contention
-
-If any `phoenix_omega` workflow is moved to self-hosted and uses LM Studio, it must follow the same heavy-job policy as Qwen-Agent:
-
-- concurrency group + LM lock
-- heavy window guard
+- concurrency group
 - preflight + warmup + retry loop
 - `enable_thinking: false` for production draft/judge/translation calls
+- workflow-run evidence for any readiness claim
 
 ---
 
 ## System functions (procedures)
 
-### Standard PR flow (phoenix_omega)
+### Standard PR flow
 
 1. Branch from `origin/main`: `git fetch origin && git checkout -b codex/<topic> origin/main`
 2. Make changes, then run preflight: `scripts/ci/preflight_push.sh` (if present)
@@ -190,49 +161,18 @@ git push origin main
 
 Or push your branch and merge via GitHub PR; then locally: `git checkout main && git pull origin main`.
 
-### Push to Qwen-Agent main
+### Start self-hosted runner
 
-When changing only Qwen-Agent (e.g. workflow or Pearl News code):
-
-1. Confirm you are in the Qwen-Agent repo and on main (or the branch you intend to push).
-2. `git pull origin main` (avoid rejected push).
-3. `git add <files> && git commit -m "<message>" && git push origin main`.
-
-### Start self-hosted runner (Qwen-Agent)
-
-On the machine where LM Studio runs:
+On the machine where the repo runner is installed:
 
 ```bash
-cd /path/to/Qwen-Agent/actions-runner
+cd /path/to/actions-runner
 ./run.sh
 ```
 
-Run in background or a dedicated terminal. Keep LM Studio running if you trigger workflows that use LLM expansion.
+Run in background or a dedicated terminal. Keep the configured Qwen-compatible endpoint reachable when triggering self-hosted Qwen workflows.
 
-### Safe localization run defaults (Qwen-Agent)
-
-Use these defaults for `locale_max_agents.yml` to avoid long silent hangs:
-
-- `locale_set=core` (6 production locales only)
-- `max_agents=2` (safe for local LM Studio throughput; up to 6 on fast hardware)
-- `timeout_sec=120` (hard stop per teacher shard — each shard = 1 LLM call ~20s)
-- `mode=translate+validate`
-
-The batch runner shards by **teacher** (not topic) so each shard = exactly 1 LLM call (~20s), well within the 120s timeout (6x safety margin). Features: LM Studio preflight check, accurate heartbeat (active vs queued), early abort after 5 consecutive failures, error output surfacing. The LM Studio lock prevents concurrent heavy jobs from resource-starving each other.
-
-### Runner _diag "file already exists" fix (Qwen-Agent)
-
-If the workflow fails with a message like `The file '.../actions-runner/_diag/pages/...log' already exists`:
-
-1. Stop the runner (Ctrl+C in the terminal where `./run.sh` is running).
-2. Clear diagnostic files:
-   ```bash
-   rm -rf /path/to/Qwen-Agent/actions-runner/_diag/pages/*
-   ```
-   If the error persists, clear all: `rm -rf /path/to/Qwen-Agent/actions-runner/_diag/*`
-3. Start the runner again: `cd /path/to/Qwen-Agent/actions-runner && ./run.sh`
-
-### Recovery: rejected push (non–fast-forward)
+### Recovery: rejected push (non-fast-forward)
 
 Do **not** force-push. Integrate remote changes then push:
 
@@ -246,23 +186,15 @@ For governance or ruleset issues, see [GITHUB_GOVERNANCE_INCIDENT_RUNBOOK.md](./
 
 ---
 
-## Before you push (checklists)
-
-### phoenix_omega
+## Before you push
 
 - [ ] Not on `main` (use a feature branch for changes).
 - [ ] Branch name matches convention (e.g. `codex/<topic>`).
 - [ ] Run `scripts/ci/preflight_push.sh` if available.
 - [ ] No token or secret files staged.
 
-### Qwen-Agent
-
-- [ ] Confirm repo and branch (e.g. main if pushing directly).
-- [ ] `git pull origin main` first if others may have pushed.
-- [ ] No accidental phoenix-only files (e.g. from phoenix_omega) in the commit.
-
 ---
 
 ## Optional: machine-readable registry
 
-A registry file [config/governance/github_repos_registry.yaml](../config/governance/github_repos_registry.yaml) (if present) lists repos, workflow file names, required checks, and expected secret names for scripts or tooling. The framework doc above is the human-readable source of truth.
+A registry file [config/governance/github_repos_registry.yaml](../config/governance/github_repos_registry.yaml) (if present) lists workflow file names, required checks, and expected secret names for scripts or tooling. The framework doc above is the human-readable source of truth.

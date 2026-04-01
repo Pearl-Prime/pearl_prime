@@ -195,7 +195,41 @@ def main() -> int:
         if r.returncode != 0:
             failures.append({"gate": "check_book_output_tier0_contract", "detail": r.stderr.strip() or r.stdout.strip()})
 
-    # 4b) Series diversity (P0: hard fail on adjacent mech+journey or band_curve; soft warn on combo density)
+    all_plans_data = [json.loads(p.read_text(encoding="utf-8")) for p in plans]
+
+    # 4b) AI disclosure gate (§14.6 of EXPERIENCE_LAYER_ANTI_SPAM_SPEC)
+    try:
+        from phoenix_v4.qa.experience_wave_checks import check_ai_disclosure
+
+        ai_failures, ai_warnings = check_ai_disclosure(all_plans_data)
+        steps.append({"ai_disclosure": {"failures": len(ai_failures), "warnings": len(ai_warnings)}})
+        for failure in ai_failures:
+            failures.append({"gate": "ai_disclosure", "detail": failure})
+        for warning in ai_warnings:
+            warnings.append({"gate": "ai_disclosure", "detail": warning})
+    except ImportError:
+        steps.append({"ai_disclosure": {"skipped": "phoenix_v4.qa.experience_wave_checks not importable"}})
+    except Exception as e:
+        steps.append({"ai_disclosure": {"error": str(e)}})
+        warnings.append({"gate": "ai_disclosure", "detail": f"Non-blocking error: {e}"})
+
+    # 4c) Catalog spam gates (Google Play compliance + health-claim surfaces)
+    try:
+        from phoenix_v4.qa.catalog_spam_gates import run_all_catalog_spam_gates
+
+        spam_failures, spam_warnings = run_all_catalog_spam_gates(all_plans_data)
+        steps.append({"catalog_spam_gates": {"failures": len(spam_failures), "warnings": len(spam_warnings)}})
+        for failure in spam_failures:
+            failures.append({"gate": "catalog_spam_gates", "detail": failure})
+        for warning in spam_warnings:
+            warnings.append({"gate": "catalog_spam_gates", "detail": warning})
+    except ImportError:
+        steps.append({"catalog_spam_gates": {"skipped": "phoenix_v4.qa.catalog_spam_gates not importable"}})
+    except Exception as e:
+        steps.append({"catalog_spam_gates": {"error": str(e)}})
+        warnings.append({"gate": "catalog_spam_gates", "detail": f"Non-blocking error: {e}"})
+
+    # 4d) Series diversity (P0: hard fail on adjacent mech+journey or band_curve; soft warn on combo density)
     try:
         from phoenix_v4.qa.validate_series_diversity import validate_series_diversity
         hard_series, soft_series = validate_series_diversity(plans_dir)
@@ -263,4 +297,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

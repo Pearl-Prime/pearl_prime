@@ -80,14 +80,14 @@ with tab_github:
 with tab_pearl_news:
     st.header("📰 Pearl News")
 
-    drafts_dir = REPO_ROOT / "Qwen-Agent" / "artifacts" / "pearl_news" / "drafts"
-    review_queue = drafts_dir / "manual_review_queue.json"
+    drafts_dir = REPO_ROOT / "artifacts" / "pearl_news" / "drafts"
     build_manifest = drafts_dir / "build_manifests.json"
+    networked_evidence = REPO_ROOT / "artifacts" / "pearl_news" / "evaluation" / "networked_run_evidence.json"
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.subheader("Pipeline Output")
+        st.subheader("Pipeline output")
         if build_manifest.exists():
             import json
             with open(build_manifest) as f:
@@ -97,17 +97,6 @@ with tab_pearl_news:
             if records:
                 latest = records[-1]
                 st.metric("Build date", latest.get("built_at", "—")[:10])
-                passed = latest.get("validation", {}).get("passed", None)
-                gates = latest.get("validation", {}).get("passed_count", "?")
-                total = latest.get("validation", {}).get("gate_count", "?")
-                status = "✅" if passed else "⚠️"
-                st.caption(f"Language: {latest.get('language', '—')} · Validation: {status} {gates}/{total} gates")
-            # build_manifests.json is a list of article records
-            st.metric("Articles written", len(records))
-            if records:
-                latest = records[-1]
-                built_at = latest.get("built_at", "—")[:10]
-                st.metric("Build date", built_at)
                 lang = latest.get("language", "—")
                 passed = latest.get("validation", {}).get("passed", None)
                 gates = latest.get("validation", {}).get("passed_count", "?")
@@ -115,43 +104,27 @@ with tab_pearl_news:
                 status = "✅" if passed else "⚠️"
                 st.caption(f"Language: {lang} · Validation: {status} {gates}/{total} gates")
         else:
-            st.info("No build manifest yet — run the pipeline first.")
+            st.info("No build manifest yet — run the pipeline from this repo (see command below).")
 
     with col2:
-        st.subheader("Manual Review Queue")
-        if review_queue.exists():
-            import json
-            with open(review_queue) as f:
-                queue = json.load(f)
-            if queue:
-                st.warning(f"{len(queue)} article(s) need review")
-                for item in queue:
-                    with st.expander(
-                        f"⚠️ {item.get('title', item.get('article_id', '?'))[:60]}"
-                    ):
-                        st.write("**Failed gates:**", item.get("failed_gates", []))
-                        st.write("**Topic:**", item.get("topic", "—"))
-                        st.write("**Queued:**", item.get("queued_at", "—")[:19])
-                        content = item.get("expanded_content", "")
-                        if content:
-                            st.markdown("**Expanded content preview:**")
-                            st.code(content[:1500], language="html")
-            else:
-                st.success("Review queue is empty")
+        st.subheader("Operational evidence")
+        if networked_evidence.exists():
+            st.success("Networked run evidence present")
+            st.caption(str(networked_evidence.relative_to(REPO_ROOT)))
         else:
-            st.info("No review queue file yet.")
+            st.info("No networked_run_evidence.json yet — run scripts/pearl_news_networked_run_and_evidence.sh when ready.")
 
     st.divider()
-    st.subheader("Run Pipeline")
+    st.subheader("Run pipeline (repo-local)")
     st.code(
-        "cd ~/phoenix_omega/Qwen-Agent\n"
+        "cd " + str(REPO_ROOT) + "\n"
         "PYTHONPATH=. python3 -m pearl_news.pipeline.run_article_pipeline \\\n"
         "  --feeds pearl_news/config/feeds.yaml \\\n"
         "  --out-dir artifacts/pearl_news/drafts \\\n"
         "  --limit 1 --expand --validate --select-image",
         language="bash",
     )
-    st.caption("Or trigger via GitHub tab → ▶ Run Pearl News Expand")
+    st.caption("Or trigger Pearl News fill / QA via GitHub Actions in this repo (GitHub tab).")
 
 # ── Pipeline Tab ─────────────────────────────────────────────────────────────
 with tab_pipeline:

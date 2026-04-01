@@ -1,0 +1,56 @@
+# Experience Wave Controls — per-wave and sliding-window caps for experience dimensions.
+# Extends (does not replace) release_wave_controls.yaml.
+# Authority: specs/EXPERIENCE_LAYER_ANTI_SPAM_SPEC.md §4.2
+
+schema_version: 1
+
+experience_wave_controls:
+
+  # Threshold ramp: start with launch thresholds; tighten after confidence builds.
+  # Switch to "established" after 3 clean waves (no platform flags, no manual reviews).
+  threshold_tier: launch   # launch | established
+
+  # Per-wave caps (same week)
+  weekly_caps:
+    launch:
+      max_same_delivery_experience: 0.50
+      max_same_reader_intent: 0.50
+      max_same_pacing_model: 0.55
+      max_same_outcome_type: 0.55
+      max_same_engagement_depth: 0.60
+      max_same_transformation_speed: 0.60
+      max_same_perceived_positioning: 0.45
+    established:
+      max_same_delivery_experience: 0.40
+      max_same_reader_intent: 0.40
+      max_same_pacing_model: 0.50
+      max_same_outcome_type: 0.50
+      max_same_engagement_depth: 0.55
+      max_same_transformation_speed: 0.55
+      max_same_perceived_positioning: 0.35
+
+  # Composite experience similarity (Jaccard on 7-field tuple)
+  experience_similarity:
+    wave_max_identical_experience_tuple: 3
+    catalog_window_weeks: 8
+    catalog_max_same_experience_per_brand: 6
+    use_experience_hash: true
+
+  # Anti-homogeneity contribution weights
+  anti_homogeneity_weights:
+    delivery_experience_diversity: 0.10
+    reader_intent_diversity: 0.10
+    perceived_positioning_diversity: 0.05
+
+  # Natural variance: allow controlled imperfection
+  natural_variance:
+    allow_minor_violation_rate: 0.05
+    max_overshoot_pct: 0.10
+    max_consecutive_variance_uses_per_brand: 2
+    applies_to: weekly_caps_only   # Never network caps, risky combos, or AI disclosure
+
+  # Novelty injection
+  novelty_injection:
+    rare_threshold_pct: 10
+    min_rare_per_wave: 2
+    enforcement: warn

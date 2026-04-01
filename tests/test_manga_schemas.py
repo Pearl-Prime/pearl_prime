@@ -25,6 +25,24 @@ _ZERO_SHA = "0" * 64
 def _minimal_payload(stem: str) -> dict:
     common = {"schema_version": "1.0.0", "artifact_type": stem}
     builders: dict[str, dict] = {
+        "anchor_panels": {
+            **common,
+            "artifact_type": "anchor_panels",
+            "series_id": "s",
+            "anchor_panels": [
+                {
+                    "anchor_panel_id": "ap1",
+                    "category": "dialogue_standard",
+                    "reference_image_id": "ref1",
+                    "measured_parameters": {
+                        "contrast_ratio": 0.5,
+                        "linework_weight_px": 2.0,
+                        "shadow_coverage_pct": 0.3,
+                        "highlight_coverage_pct": 0.2,
+                    },
+                }
+            ],
+        },
         "chapter_request": {
             **common,
             "artifact_type": "chapter_request",
