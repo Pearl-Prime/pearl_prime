@@ -136,7 +136,7 @@ jobs:
               print(f"   - {f.name}")
           PY
 
-      - name: Dry-run: run_comparator_loop importable
+      - name: "Dry-run: run_comparator_loop importable"
         run: |
           PYTHONPATH=. python3 -c "import scripts.audiobook_script.run_comparator_loop as m; print('✅ run_comparator_loop importable')" 2>/dev/null || \
           PYTHONPATH=. python3 -c "
@@ -148,7 +148,7 @@ jobs:
           print('✅ run_comparator_loop importable')
           "
 
-      - name: Dry-run: run_regression.py --dry-run
+      - name: "Dry-run: run_regression.py --dry-run"
         run: |
           PYTHONPATH=. python3 scripts/audiobook_script/run_regression.py --dry-run
           echo "✅ regression dry-run: setup OK"

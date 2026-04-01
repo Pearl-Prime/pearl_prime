@@ -1,7 +1,12 @@
+# DISABLED: This workflow references pearl-news-plan.yml and pearl-news-post.yml
+# which do not exist yet. Re-enable when those reusable workflows are created.
+# See: .github/workflows/pearl-news-assemble.yml and pearl-news-fill-qwen.yml
+# for the workflows that DO exist.
 name: Pearl News Full QA
 
 on:
-  workflow_dispatch:
+  # workflow_dispatch disabled until missing reusable workflows are created
+  workflow_dispatch_disabled:
     inputs:
       teacher:
         description: 'Single teacher ID (leave empty for all active teachers)'

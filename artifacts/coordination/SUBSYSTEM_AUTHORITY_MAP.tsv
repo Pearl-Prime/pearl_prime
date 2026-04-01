@@ -1,0 +1,14 @@
+subsystem_id	authority_doc	config_path	owner_agent	status
+core_pipeline	specs/PHOENIX_ARC_FIRST_CANONICAL_SPEC.md;specs/PHOENIX_V4_5_WRITER_SPEC.md	config/governance/system_registry.yaml	Pearl_Prime	active
+pearl_prime	docs/PEARL_PRIME_WHOLE_WORKFLOW_HARDENING_SPEC.md;docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md	config/brand_registry.yaml;config/brand_author_assignments.yaml	Pearl_Prime	active
+teacher_mode	docs/SYSTEMS_V4.md;specs/PHOENIX_V4_5_WRITER_SPEC.md	SOURCE_OF_TRUTH/teacher_banks/;config/authoring/pen_name_teacher_profiles.yaml	Pearl_Editor	active
+manga_pipeline	specs/AI_MANGA_PIPELINE_SUMMARY.md;docs/MANGA_IMPLEMENTATION_OUTLINE.md	config/manga/gate_registry.yaml;schemas/manga/	Pearl_Dev	active
+pearl_news	docs/PEARL_NEWS_WRITER_SPEC.md;docs/research/PEARL_NEWS_QWEN_DEEP_RESEARCH_ENGINE.md	pearl_news/config/;pearl_news/prompts/	Pearl_News	active
+translation	config/localization/quality_contracts/README.md;docs/DOCS_INDEX.md	config/localization/locale_registry.yaml;config/localization/quality_contracts/	Pearl_Localization	active
+video_pipeline	config/video/;scripts/video/README.md	config/video/render_params.yaml;config/video/upload_config.yaml	Pearl_Video	active
+ei_v2	phoenix_v4/quality/ei_v2/;docs/DOCS_INDEX.md	config/quality/ei_v2_config.yaml	Pearl_Research	active
+trend_feeds	docs/TREND_FEED_INTEGRATION_STRATEGY.md;scripts/feeds/	config/trend_keywords/;scripts/feeds/budget_guard.py	Pearl_Int	active
+recommendations	config/recommender/;docs/DOCS_INDEX.md	config/recommender/scoring_weights.yaml;config/recommender/hard_gates.yaml	Pearl_PM	backlog
+brand_admin	docs/OLD_CHAT_AND_HOME_PROMOTION_SPEC.md;BRAND_ADMIN_CANONICAL_PACKAGE.md	config/brand_registry.yaml;config/brand_author_assignments.yaml	Pearl_Prez	active
+ite	phoenix_v4/manga/ite_pipeline.py;docs/DOCS_INDEX.md	config/manga/gate_registry.yaml	Pearl_Dev	active
+integrations	docs/INTEGRATION_CREDENTIALS_REGISTRY.md;skills/pearl-int/SKILL.md	skills/pearl-int/references/integration_registry.md	Pearl_Int	active
