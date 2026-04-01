@@ -2,7 +2,7 @@
 
 **Purpose:** Single canonical reference for every external service credential in Phoenix Omega.
 **Owner:** Pearl_Int / Pearl_Architect
-**Last updated:** 2026-04-01
+**Last updated:** 2026-04-01 (video platforms + SerpApi added)
 **Rule:** No actual secrets in this file. Only env var names, documentation, and pointers.
 
 ---
@@ -171,6 +171,81 @@ This reads the registry below and reports which env vars are set vs missing.
 
 ---
 
+## Video platforms
+
+### 13. YouTube — Video publishing (per brand: SP, CC, ND)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `YT_CLIENT_ID_SP`, `YT_CLIENT_SECRET_SP`, `YT_REFRESH_TOKEN_SP`, `YT_CLIENT_ID_CC`, `YT_CLIENT_SECRET_CC`, `YT_REFRESH_TOKEN_CC`, `YT_CLIENT_ID_ND`, `YT_CLIENT_SECRET_ND`, `YT_REFRESH_TOKEN_ND` |
+| **Consumed by** | `scripts/video/uploaders/youtube.py` |
+| **GitHub workflows** | `video-daily-publish.yml` |
+| **How to obtain** | Google Cloud Console: https://console.cloud.google.com/ — APIs & Services > Credentials > OAuth 2.0 Client (YouTube Data API v3 enabled) |
+| **Required vs optional** | Required for YouTube video publishing |
+| **Status** | Missing — credentials not yet provisioned |
+| **Detailed docs** | [docs/VIDEO_PLATFORM_CREDENTIAL_SETUP.md](./VIDEO_PLATFORM_CREDENTIAL_SETUP.md) |
+
+### 14. TikTok — Video publishing (per brand: SP, CC, ND)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `TIKTOK_CLIENT_KEY_SP`, `TIKTOK_CLIENT_SECRET_SP`, `TIKTOK_ACCESS_TOKEN_SP`, `TIKTOK_CLIENT_KEY_CC`, `TIKTOK_CLIENT_SECRET_CC`, `TIKTOK_ACCESS_TOKEN_CC`, `TIKTOK_CLIENT_KEY_ND`, `TIKTOK_CLIENT_SECRET_ND`, `TIKTOK_ACCESS_TOKEN_ND` |
+| **Consumed by** | `scripts/video/uploaders/tiktok.py` |
+| **GitHub workflows** | `video-daily-publish.yml` |
+| **How to obtain** | TikTok Developer Portal: https://developers.tiktok.com/ — Content Posting API |
+| **Required vs optional** | Required for TikTok video publishing |
+| **Status** | Missing — credentials not yet provisioned |
+| **Detailed docs** | [docs/VIDEO_PLATFORM_CREDENTIAL_SETUP.md](./VIDEO_PLATFORM_CREDENTIAL_SETUP.md) |
+
+### 15. Instagram — Video publishing (per brand: SP, CC, ND)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `IG_ACCESS_TOKEN_SP`, `IG_USER_ID_SP`, `IG_ACCESS_TOKEN_CC`, `IG_USER_ID_CC`, `IG_ACCESS_TOKEN_ND`, `IG_USER_ID_ND` |
+| **Consumed by** | `scripts/video/uploaders/instagram.py` |
+| **GitHub workflows** | `video-daily-publish.yml` |
+| **How to obtain** | Meta Developer Portal: https://developers.facebook.com/ — Graph API > Instagram Business account |
+| **Required vs optional** | Required for Instagram Reels publishing |
+| **Status** | Missing — credentials not yet provisioned |
+| **Detailed docs** | [docs/VIDEO_PLATFORM_CREDENTIAL_SETUP.md](./VIDEO_PLATFORM_CREDENTIAL_SETUP.md) |
+
+### 16. Bilibili — Video publishing
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `BILIBILI_SESSDATA`, `BILIBILI_CSRF` |
+| **Consumed by** | `scripts/video/uploaders/bilibili.py` |
+| **GitHub workflows** | None (disabled platform) |
+| **How to obtain** | Browser cookie extraction — see `scripts/video/credential_setup/bilibili_cookie_setup.py` |
+| **Required vs optional** | Optional — platform currently disabled |
+| **Status** | Missing, platform disabled |
+| **Detailed docs** | [docs/VIDEO_PLATFORM_CREDENTIAL_SETUP.md](./VIDEO_PLATFORM_CREDENTIAL_SETUP.md) |
+
+### 17. Douyin — Video publishing
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `DOUYIN_CLIENT_KEY`, `DOUYIN_CLIENT_SECRET`, `DOUYIN_ACCESS_TOKEN` |
+| **Consumed by** | `scripts/video/uploaders/douyin.py` |
+| **GitHub workflows** | None (disabled platform) |
+| **How to obtain** | Douyin Open Platform: https://open.douyin.com/ |
+| **Required vs optional** | Optional — platform currently disabled, requires ICP filing |
+| **Status** | Missing, platform disabled, requires ICP filing |
+| **Detailed docs** | [docs/VIDEO_PLATFORM_CREDENTIAL_SETUP.md](./VIDEO_PLATFORM_CREDENTIAL_SETUP.md) |
+
+### 18. SerpApi — Trend checking
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `SERPAPI_KEY` |
+| **Consumed by** | `scripts/feeds/check_trends.py` |
+| **GitHub workflows** | None |
+| **How to obtain** | SerpApi dashboard: https://serpapi.com/dashboard — API Key |
+| **Required vs optional** | Optional — used for trend-aware feed enrichment |
+| **Status** | Missing (budget_guard limits to 245 calls/month) |
+
+---
+
 ## Messaging channels (Keychain-based)
 
 These are stored in macOS Keychain, not environment variables. Managed by `scripts/integrations/setup_messaging_channels_local.sh`.
@@ -252,5 +327,7 @@ This registry consolidates information previously scattered across:
 - [config/tts/engines.yaml](../config/tts/engines.yaml) — TTS API key env refs
 - [config/payouts/credentials.yaml.example](../config/payouts/credentials.yaml.example) — Plaid template
 - [config/governance/github_repos_registry.yaml](../config/governance/github_repos_registry.yaml) — workflow secret expectations
+
+- [docs/VIDEO_PLATFORM_CREDENTIAL_SETUP.md](./VIDEO_PLATFORM_CREDENTIAL_SETUP.md) — video platform OAuth/cookie credential setup
 
 Those files remain authoritative for their domain-specific setup procedures. This registry is the single index that answers "what credentials does this repo need?"
