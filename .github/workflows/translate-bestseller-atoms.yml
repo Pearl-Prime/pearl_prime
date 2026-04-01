@@ -33,6 +33,10 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   translate:
     runs-on: ubuntu-latest
