@@ -209,6 +209,7 @@ def main() -> int:
     ap.add_argument("--render-formats", default="txt", help="Comma-separated book output formats (default: txt)")
     ap.add_argument("--render-dir", default=None, help="Output dir for rendered book (default: artifacts/rendered/<plan_id>)")
     ap.add_argument("--skip-word-count-gate", action="store_true", help="Bypass word count minimum gate (use when content density work is in progress)")
+    ap.add_argument("--skip-budget-check", action="store_true", help="Skip pre-render word-budget sufficiency check (e.g. testing with sparse atom pools)")
     ap.add_argument(
         "--enforce-book-pass-gate",
         action="store_true",
@@ -1090,6 +1091,39 @@ def main() -> int:
         except Exception as e:
             import warnings
             warnings.warn(f"Ending cap check failed: {e}", stacklevel=2)
+    # Pre-render word-budget sufficiency check
+    if not args.skip_budget_check:
+        try:
+            from phoenix_v4.planning.budget_check import check_word_budget
+
+            # Load runtime format config for word_range
+            _fmt_registry_path = REPO_ROOT / "config" / "format_selection" / "format_registry.yaml"
+            _runtime_fmt_id = out.get("runtime_format_id") or format_plan_dict.get("runtime_format_id") or ""
+            _fmt_cfg: dict = {}
+            if _fmt_registry_path.exists() and yaml:
+                _all_fmts = yaml.safe_load(_fmt_registry_path.read_text(encoding="utf-8")) or {}
+                _fmt_cfg = (_all_fmts.get("runtime_formats") or {}).get(_runtime_fmt_id, {})
+
+            if _fmt_cfg.get("word_range"):
+                budget = check_word_budget(out, _fmt_cfg, atoms_root=atoms_root)
+                print(budget.message, file=sys.stderr)
+                if not budget.sufficient:
+                    for ce in budget.per_chapter_estimates:
+                        if ce.shortfall > 0:
+                            print(
+                                f"  Chapter {ce.chapter_index}: {ce.estimated_words} words "
+                                f"(target {ce.target_min}, short by {ce.shortfall})",
+                                file=sys.stderr,
+                            )
+                    if args.render_book:
+                        print("Budget check failed in render mode. Use --skip-budget-check to override.", file=sys.stderr)
+                        return 1
+                    else:
+                        print("Budget check: insufficient but not in render mode; continuing.", file=sys.stderr)
+        except Exception as _budget_exc:
+            import warnings as _budget_warnings
+            _budget_warnings.warn(f"Budget check failed (non-blocking): {_budget_exc}", stacklevel=2)
+
     if args.out:
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         with open(args.out, "w") as f:
