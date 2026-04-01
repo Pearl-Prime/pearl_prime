@@ -564,6 +564,20 @@ def main() -> int:
                 print(f"  - {issue}", file=sys.stderr)
             return 1
 
+    # §5G Output Contract: build initial contract after alias resolution
+    from phoenix_v4.planning.output_contract import build_output_contract, update_contract_post_render
+    _oc_resolved_config = {
+        "canonical_topic_id": canonical_topic,
+        "canonical_persona_id": canonical_persona,
+        "resolved_location_id": resolved_location_id or "",
+        "teacher_mode": teacher_mode,
+        "teacher_id": teacher_id,
+        "quality_profile": "production",
+        "runtime_format": args.runtime_format or "",
+        "structural_format": args.structural_format or "",
+    }
+    _output_contract = build_output_contract(args, _oc_resolved_config)
+
     # atoms_model: precedence 1) CLI --atoms-model 2) book spec 3) derive from config (legacy_personas). Always persist in plan.
     if args.atoms_model is not None:
         effective_atoms_model = args.atoms_model
@@ -1166,6 +1180,8 @@ def main() -> int:
     out["canonical_persona_id"] = book_spec_for_compiler.get("persona_id") or book_spec_for_compiler.get("persona") or ""
     out["topic_id"] = out["canonical_topic_id"]
     out["persona_id"] = out["canonical_persona_id"]
+    # §5G: attach output contract to plan
+    out["output_contract"] = _output_contract
     for experience_field in (
         "delivery_experience",
         "reader_intent",
@@ -1327,6 +1343,26 @@ def main() -> int:
                 )
                 for fmt, path in written.items():
                     print(f"Rendered book ({fmt}): {path}")
+                # §5G: update output contract post-render
+                _rendered_wc = 0
+                for _fmt, _rpath in written.items():
+                    try:
+                        _rendered_wc = len(Path(_rpath).read_text(encoding="utf-8").split())
+                        break  # use first format's word count
+                    except Exception:
+                        pass
+                _output_contract = update_contract_post_render(
+                    _output_contract,
+                    runtime_achieved=args.runtime_format or out.get("runtime_format_id", ""),
+                    word_count_achieved=_rendered_wc,
+                )
+                out["output_contract"] = _output_contract
+                # Write standalone output_contract.json alongside rendered book
+                _oc_path = render_dir / "output_contract.json"
+                _oc_path.parent.mkdir(parents=True, exist_ok=True)
+                with open(_oc_path, "w", encoding="utf-8") as _ocf:
+                    json.dump(_output_contract, _ocf, indent=2)
+                print(f"Output contract: {_oc_path}")
             except ValueError as e:
                 print(f"Stage 6 render failed: {e}", file=sys.stderr)
                 return 1
