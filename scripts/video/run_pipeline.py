@@ -48,6 +48,8 @@ def main() -> int:
     ap.add_argument("--title", default="When anxiety shows up", help="Stub/final title for distribution")
     ap.add_argument("--description", default="A short on noticing anxiety without fighting it.", help="Description")
     ap.add_argument("--tags", default="anxiety,mindfulness,therapeutic", help="Comma-separated tags")
+    ap.add_argument("--upload", action="store_true", help="Run Stage 18 Upload/Publish after pipeline (dry-run by default)")
+    ap.add_argument("--upload-live", action="store_true", help="Upload for real (requires --upload)")
     args = ap.parse_args()
 
     skip_render = args.skip_render and not args.no_skip_render
@@ -259,6 +261,26 @@ def main() -> int:
         print("Failed: Analytics Ingestor", file=sys.stderr)
         return 1
     print("OK: Analytics Ingestor")
+
+    # Stage 18 — Upload/Publish (dry-run by default; --upload to enable)
+    if getattr(args, "upload", False):
+        upload_cmd = [
+            py, str(scripts / "run_upload.py"),
+            str(out_root / "platform_variants.json"),
+            "--channel-id", args.channel_id,
+            "--video-dir", str(out_root),
+            "-o", str(out_root / "upload_results.json"),
+        ]
+        if args.platforms:
+            upload_cmd.extend(["--platforms", args.platforms])
+        if not getattr(args, "upload_live", False):
+            pass  # dry-run is the default
+        else:
+            upload_cmd.append("--no-dry-run")
+        if not run(upload_cmd, REPO_ROOT):
+            print("Failed: Upload/Publish", file=sys.stderr)
+            return 1
+        print("OK: Upload/Publish")
 
     print(f"Pipeline complete. Outputs in {out_root}")
     return 0

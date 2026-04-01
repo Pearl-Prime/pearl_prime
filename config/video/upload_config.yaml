@@ -1,0 +1,221 @@
+# Upload Config — Stage 18 (Upload/Publish) credential and scheduling configuration.
+# Authority: specs/VIDEO_CONTENT_ENGINE_DEV_SPEC.md §Stage-18
+#
+# Credential env var names per platform. Actual values stored in GitHub Secrets
+# and injected at CI runtime. NEVER store credential values in this file.
+#
+# Scheduling: each channel has upload_window_offset_hours (0-23) in channel_registry.yaml.
+# The daily publish workflow reads this offset to stagger uploads across the day.
+# Daily quota per channel: daily_upload_cap from channel_registry.yaml (default 3).
+#
+# Platform daily API limits (conservative estimates):
+#   YouTube: 10,000 quota units/day (1 upload = ~1,600 units → ~6 uploads/day/project)
+#   TikTok: 20 videos/day per app
+#   Instagram Reels: 25 posts/day per account
+#   Bilibili: 20 videos/day per account
+#   Douyin: 20 videos/day per account
+#   Webtoon: manual publish (Canvas API has no bulk upload)
+
+platforms:
+  youtube:
+    enabled: true
+    api_version: "v3"
+    upload_endpoint: "https://www.googleapis.com/upload/youtube/v3/videos"
+    auth_type: oauth2
+    scopes:
+      - "https://www.googleapis.com/auth/youtube.upload"
+      - "https://www.googleapis.com/auth/youtube"
+    credentials:
+      client_id_env: YT_CLIENT_ID
+      client_secret_env: YT_CLIENT_SECRET
+      refresh_token_env: YT_REFRESH_TOKEN
+    rate_limits:
+      daily_quota_units: 10000
+      units_per_upload: 1600
+      max_uploads_per_day: 6
+      retry_after_quota_s: 3600
+    upload:
+      resumable: true
+      chunk_size_bytes: 10485760  # 10 MB
+      max_file_size_bytes: 137438953472  # 128 GB
+      supported_containers: [mp4, mov, avi, wmv, flv, webm]
+    metadata_limits:
+      title_max_chars: 100
+      description_max_chars: 5000
+      tags_max_chars: 500
+      max_tags: 30
+
+  youtube_shorts:
+    enabled: true
+    # Shorts use the same YouTube Data API; upload as regular video with #Shorts tag
+    inherits: youtube
+    metadata_overrides:
+      add_hashtag: "#Shorts"
+      max_duration_s: 60
+
+  tiktok:
+    enabled: true
+    api_version: "v2"
+    upload_endpoint: "https://open.tiktokapis.com/v2/post/publish/video/init/"
+    auth_type: oauth2
+    scopes:
+      - "video.publish"
+      - "video.upload"
+    credentials:
+      client_key_env: TIKTOK_CLIENT_KEY
+      client_secret_env: TIKTOK_CLIENT_SECRET
+      access_token_env: TIKTOK_ACCESS_TOKEN
+    rate_limits:
+      max_uploads_per_day: 20
+      retry_after_rate_limit_s: 60
+    upload:
+      method: "pull_from_url"  # TikTok pulls video from a URL; or direct upload via chunks
+      chunk_upload_endpoint: "https://open.tiktokapis.com/v2/post/publish/inbox/video/init/"
+      max_file_size_bytes: 4294967296  # 4 GB
+      supported_containers: [mp4, webm, mov]
+    metadata_limits:
+      title_max_chars: 150
+      description_max_chars: 2200
+      max_hashtags: 30
+
+  instagram_reels:
+    enabled: true
+    api_version: "v18.0"
+    upload_endpoint: "https://graph.facebook.com/v18.0/{ig_user_id}/media"
+    auth_type: oauth2
+    scopes:
+      - "instagram_basic"
+      - "instagram_content_publish"
+    credentials:
+      access_token_env: IG_ACCESS_TOKEN
+      ig_user_id_env: IG_USER_ID
+    rate_limits:
+      max_uploads_per_day: 25
+      retry_after_rate_limit_s: 300
+    upload:
+      method: "container_publish"  # Create container → poll status → publish
+      max_file_size_bytes: 1073741824  # 1 GB
+      max_duration_s: 90
+      supported_containers: [mp4, mov]
+    metadata_limits:
+      caption_max_chars: 2200
+      max_hashtags: 30
+
+  bilibili:
+    enabled: true
+    api_version: "v2"
+    upload_endpoint: "https://member.bilibili.com/x/vu/web/add"
+    auth_type: cookie_sessdata
+    credentials:
+      sessdata_env: BILI_SESSDATA
+      csrf_env: BILI_CSRF
+    rate_limits:
+      max_uploads_per_day: 20
+      retry_after_rate_limit_s: 300
+    upload:
+      method: "multipart_chunk"
+      chunk_size_bytes: 5242880  # 5 MB
+      max_file_size_bytes: 8589934592  # 8 GB
+      supported_containers: [mp4, flv]
+    metadata_limits:
+      title_max_chars: 80
+      description_max_chars: 2000
+      max_tags: 12
+    compliance:
+      requires_zh_subtitles: true
+      pre_review: true
+
+  douyin:
+    enabled: true
+    api_version: "v1"
+    upload_endpoint: "https://open.douyin.com/api/media/video/upload/"
+    auth_type: oauth2
+    scopes:
+      - "video.create"
+    credentials:
+      client_key_env: DOUYIN_CLIENT_KEY
+      client_secret_env: DOUYIN_CLIENT_SECRET
+      access_token_env: DOUYIN_ACCESS_TOKEN
+    rate_limits:
+      max_uploads_per_day: 20
+      retry_after_rate_limit_s: 300
+      content_review_lag_hours: 24
+    upload:
+      method: "direct_upload"
+      max_file_size_bytes: 4294967296  # 4 GB
+      supported_containers: [mp4]
+    metadata_limits:
+      title_max_chars: 55
+      description_max_chars: 2000
+      max_hashtags: 20
+    compliance:
+      icp_required: true
+      separate_api_from_tiktok: true
+
+  webtoon:
+    enabled: false  # WEBTOON Canvas has no bulk upload API; manual publish for now
+    notes: "WEBTOON Canvas requires manual episode upload via creator portal. Enable when API becomes available."
+
+# Brand-to-platform mapping: which brands are enabled on which platforms.
+# Each brand may have separate credentials (e.g., separate YouTube channels per brand).
+# To add a new brand: add an entry here + run the credential setup scripts.
+# Credential suffix is appended to all secret names (e.g., YT_CLIENT_ID_SP).
+#
+# Default platform set for new brands (copy this block):
+#   brand_name:
+#     youtube: true
+#     youtube_shorts: true
+#     tiktok: true
+#     instagram_reels: true
+#     bilibili: false
+#     douyin: false
+#     webtoon: false
+#     credential_suffix: "_XX"
+
+brand_platform_map:
+  stillness_press:
+    youtube: true
+    youtube_shorts: true
+    tiktok: true
+    instagram_reels: true
+    bilibili: false
+    douyin: false
+    webtoon: false
+    credential_suffix: "_SP"
+  cognitive_clarity:
+    youtube: true
+    youtube_shorts: true
+    tiktok: true
+    instagram_reels: true
+    bilibili: false
+    douyin: false
+    webtoon: false
+    credential_suffix: "_CC"
+  norcal_dharma:
+    youtube: true
+    youtube_shorts: true
+    tiktok: true
+    instagram_reels: true
+    bilibili: false
+    douyin: false
+    webtoon: false
+    credential_suffix: "_ND"
+  # ── Add more brands below (copy the block above, change name + suffix) ──
+  # new_brand:
+  #   youtube: true
+  #   youtube_shorts: true
+  #   tiktok: true
+  #   instagram_reels: true
+  #   bilibili: false
+  #   douyin: false
+  #   webtoon: false
+  #   credential_suffix: "_NB"
+
+# Scheduling defaults
+scheduling:
+  base_hour_utc: 6  # First upload window starts at 06:00 UTC
+  window_duration_hours: 1  # Each channel gets a 1-hour window
+  stagger_minutes: 15  # Within a window, stagger uploads by 15 min
+  retry_max: 3
+  retry_backoff_base_s: 60
+  dry_run_default: true  # Safety: default to dry-run mode

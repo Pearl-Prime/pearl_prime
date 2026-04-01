@@ -1,0 +1,186 @@
+# Video Daily Publish — Stage 18 Upload/Publish CI Workflow
+#
+# Runs daily at staggered times to upload rendered videos to all enabled platforms.
+# Each brand gets its own scheduled run to isolate credentials and rate limits.
+#
+# Architecture:
+#   - Three brand-specific jobs run at different UTC hours (staggered by upload_window_offset_hours)
+#   - Each job processes all channels for that brand
+#   - Dry-run mode is the default; set DRY_RUN=false in repository variables to go live
+#   - Upload results are saved as workflow artifacts for audit
+#
+# Required GitHub Secrets (per brand):
+#   YouTube:   YT_CLIENT_ID_SP, YT_CLIENT_SECRET_SP, YT_REFRESH_TOKEN_SP (and _CC, _ND)
+#   TikTok:    TIKTOK_CLIENT_KEY_SP, TIKTOK_CLIENT_SECRET_SP, TIKTOK_ACCESS_TOKEN_SP (and _CC, _ND)
+#   Instagram: IG_ACCESS_TOKEN_SP, IG_USER_ID_SP (and _CC, _ND)
+#   Bilibili:  BILI_SESSDATA_SP, BILI_CSRF_SP (and _CC, _ND) — only if enabled
+#   Douyin:    DOUYIN_CLIENT_KEY_SP, DOUYIN_CLIENT_SECRET_SP, DOUYIN_ACCESS_TOKEN_SP (and _CC, _ND) — only if enabled
+#
+# Brand suffixes: _SP (Stillness Press), _CC (Cognitive Clarity), _ND (NorCal Dharma)
+
+name: Video Daily Publish
+
+on:
+  schedule:
+    # Staggered brand windows (UTC):
+    # Stillness Press: 06:00 UTC (channels with offset 0-7)
+    - cron: '0 6 * * *'
+    # Cognitive Clarity: 14:00 UTC (channels with offset 8-15)
+    # NorCal Dharma: 20:00 UTC (channels with offset 16-23)
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: 'Brand to publish (stillness_press, cognitive_clarity, norcal_dharma, all)'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - stillness_press
+          - cognitive_clarity
+          - norcal_dharma
+      platforms:
+        description: 'Platform filter (comma-separated, e.g., youtube,tiktok). Leave empty for all.'
+        required: false
+        type: string
+      dry_run:
+        description: 'Dry run mode (true = no actual uploads)'
+        required: true
+        default: true
+        type: boolean
+      channel_id:
+        description: 'Specific channel ID (leave empty for all channels of the brand)'
+        required: false
+        type: string
+
+concurrency:
+  group: video-publish-${{ github.event.inputs.brand || 'scheduled' }}
+  cancel-in-progress: false  # Never cancel in-progress uploads
+
+env:
+  PYTHONPATH: ${{ github.workspace }}
+  DRY_RUN: ${{ github.event.inputs.dry_run || vars.VIDEO_PUBLISH_DRY_RUN || 'true' }}
+
+jobs:
+  determine-brands:
+    runs-on: ubuntu-latest
+    outputs:
+      brands: ${{ steps.brands.outputs.matrix }}
+    steps:
+      - name: Determine brand matrix
+        id: brands
+        run: |
+          BRAND="${{ github.event.inputs.brand || 'all' }}"
+          if [ "$BRAND" = "all" ] || [ "$BRAND" = "" ]; then
+            echo 'matrix=["stillness_press","cognitive_clarity","norcal_dharma"]' >> "$GITHUB_OUTPUT"
+          else
+            echo "matrix=[\"$BRAND\"]" >> "$GITHUB_OUTPUT"
+          fi
+
+  publish:
+    needs: determine-brands
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false  # Don't cancel other brands if one fails
+      matrix:
+        brand: ${{ fromJson(needs.determine-brands.outputs.brands) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Set brand credential suffix
+        id: creds
+        run: |
+          case "${{ matrix.brand }}" in
+            stillness_press)   echo "suffix=_SP" >> "$GITHUB_OUTPUT" ;;
+            cognitive_clarity) echo "suffix=_CC" >> "$GITHUB_OUTPUT" ;;
+            norcal_dharma)     echo "suffix=_ND" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      - name: Find latest platform variants
+        id: variants
+        run: |
+          # Find the most recent platform_variants.json for this brand's channels
+          VARIANTS_DIR="artifacts/video"
+          LATEST=$(find "$VARIANTS_DIR" -name "platform_variants.json" -type f 2>/dev/null | sort | tail -1)
+          if [ -z "$LATEST" ]; then
+            echo "No platform_variants.json found — skipping upload"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "path=$LATEST" >> "$GITHUB_OUTPUT"
+            echo "found=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run Stage 18 Upload
+        if: steps.variants.outputs.found == 'true'
+        env:
+          # YouTube credentials (per brand)
+          YT_CLIENT_ID${{ steps.creds.outputs.suffix }}: ${{ secrets[format('YT_CLIENT_ID{0}', steps.creds.outputs.suffix)] }}
+          YT_CLIENT_SECRET${{ steps.creds.outputs.suffix }}: ${{ secrets[format('YT_CLIENT_SECRET{0}', steps.creds.outputs.suffix)] }}
+          YT_REFRESH_TOKEN${{ steps.creds.outputs.suffix }}: ${{ secrets[format('YT_REFRESH_TOKEN{0}', steps.creds.outputs.suffix)] }}
+          # TikTok credentials (per brand)
+          TIKTOK_CLIENT_KEY${{ steps.creds.outputs.suffix }}: ${{ secrets[format('TIKTOK_CLIENT_KEY{0}', steps.creds.outputs.suffix)] }}
+          TIKTOK_CLIENT_SECRET${{ steps.creds.outputs.suffix }}: ${{ secrets[format('TIKTOK_CLIENT_SECRET{0}', steps.creds.outputs.suffix)] }}
+          TIKTOK_ACCESS_TOKEN${{ steps.creds.outputs.suffix }}: ${{ secrets[format('TIKTOK_ACCESS_TOKEN{0}', steps.creds.outputs.suffix)] }}
+          # Instagram credentials (per brand)
+          IG_ACCESS_TOKEN${{ steps.creds.outputs.suffix }}: ${{ secrets[format('IG_ACCESS_TOKEN{0}', steps.creds.outputs.suffix)] }}
+          IG_USER_ID${{ steps.creds.outputs.suffix }}: ${{ secrets[format('IG_USER_ID{0}', steps.creds.outputs.suffix)] }}
+        run: |
+          ARGS="${{ steps.variants.outputs.path }}"
+
+          # Channel filter
+          CHANNEL="${{ github.event.inputs.channel_id }}"
+          if [ -n "$CHANNEL" ]; then
+            ARGS="$ARGS --channel-id $CHANNEL"
+          else
+            ARGS="$ARGS --batch"
+          fi
+
+          # Platform filter
+          PLATFORMS="${{ github.event.inputs.platforms }}"
+          if [ -n "$PLATFORMS" ]; then
+            ARGS="$ARGS --platforms $PLATFORMS"
+          fi
+
+          # Dry run control
+          if [ "${{ env.DRY_RUN }}" = "false" ]; then
+            ARGS="$ARGS --no-dry-run"
+          fi
+
+          # Output path
+          TIMESTAMP=$(date -u +%Y%m%dT%H%M%S)
+          OUTPUT="artifacts/video/uploads/upload_results_${{ matrix.brand }}_${TIMESTAMP}.json"
+          mkdir -p artifacts/video/uploads
+          ARGS="$ARGS -o $OUTPUT"
+
+          echo "Running: python scripts/video/run_upload.py $ARGS"
+          python scripts/video/run_upload.py $ARGS
+
+      - name: Upload results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: upload-results-${{ matrix.brand }}-${{ github.run_number }}
+          path: artifacts/video/uploads/
+          retention-days: 30
+
+      - name: Check for failures
+        if: steps.variants.outputs.found == 'true'
+        run: |
+          RESULT_FILE=$(ls -t artifacts/video/uploads/upload_results_${{ matrix.brand }}_*.json 2>/dev/null | head -1)
+          if [ -n "$RESULT_FILE" ]; then
+            FAILED=$(python3 -c "import json; d=json.load(open('$RESULT_FILE')); print(d.get('uploads_failed', 0))")
+            if [ "$FAILED" -gt 0 ] && [ "${{ env.DRY_RUN }}" = "false" ]; then
+              echo "::error::$FAILED uploads failed for ${{ matrix.brand }}"
+              exit 1
+            fi
+          fi
