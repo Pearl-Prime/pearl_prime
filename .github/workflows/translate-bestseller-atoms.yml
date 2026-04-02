@@ -23,7 +23,7 @@ on:
         type: string
         default: 'ja-JP'
       slot:
-        description: 'Slot type filter (PIVOT, TAKEAWAY, THREAD, PERMISSION, STORY, or blank for all)'
+        description: 'Atom type filter (PIVOT, TAKEAWAY, THREAD, PERMISSION, STORY, comparison, false_alarm, grief, overwhelm, shame, spiral, watcher, "engines" for all 7, or blank for all)'
         required: false
         type: string
         default: ''
