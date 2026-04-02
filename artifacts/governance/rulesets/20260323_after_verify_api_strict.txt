@@ -1,6 +1,0 @@
-  PASS: Ruleset Protect main targets main only
-  PASS: Ruleset Protect main requires PR before merge
-  PASS: Ruleset Protect main requires canonical contexts
-  PASS: Active main rulesets share one required-check set: ['Change impact', 'Core tests', 'EI V2 gates', 'Release gates'] across Protect main
-  INFO: Canonical required checks: ['Core tests', 'Release gates', 'EI V2 gates', 'Change impact']
-  INFO: Always-required checks: ['Core tests']
