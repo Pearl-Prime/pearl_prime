@@ -8,6 +8,7 @@ struct StatusBadge: View {
         case "pass": return .green
         case "fail": return .red
         case "skip", "passive": return .gray
+        case "pending": return .orange
         default: return .orange
         }
     }
@@ -17,6 +18,7 @@ struct StatusBadge: View {
         case "pass": return "checkmark.circle.fill"
         case "fail": return "xmark.circle.fill"
         case "skip", "passive": return "minus.circle.fill"
+        case "pending": return "clock.circle.fill"
         default: return "questionmark.circle.fill"
         }
     }

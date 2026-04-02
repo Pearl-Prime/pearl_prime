@@ -112,6 +112,9 @@ WA_ENABLED=false
 WECHAT_ENABLED=false
 MESSENGER_ENABLED=false
 IMESSAGE_ENABLED=false
+SLACK_ENABLED=false
+DISCORD_ENABLED=false
+TELEGRAM_ENABLED=false
 
 if yn "Configure LINE"; then
   LINE_ENABLED=true
@@ -169,6 +172,33 @@ if yn "Configure iMessage"; then
   IMESSAGE_HANDLE="$(prompt "iMessage send/receive handle" "${DEFAULT_IMESSAGE_HANDLE:-}")"
 fi
 
+if yn "Configure Slack"; then
+  SLACK_ENABLED=true
+  SLACK_CHANNEL_ID="$(prompt "Slack channel ID (e.g. C0123456789)" "")"
+  SLACK_WORKSPACE="$(prompt "Slack workspace name (optional label)" "")"
+  SLACK_SERVICE="phoenix-omega-slack"
+  SLACK_BOT_TOKEN="$(prompt_secret "Slack bot token (xoxb-...)")"
+  store_secret "$SLACK_SERVICE" "bot_token" "$SLACK_BOT_TOKEN"
+fi
+
+if yn "Configure Discord"; then
+  DISCORD_ENABLED=true
+  DISCORD_CHANNEL_ID="$(prompt "Discord channel ID" "")"
+  DISCORD_GUILD_ID="$(prompt "Discord guild/server ID (optional label)" "")"
+  DISCORD_SERVICE="phoenix-omega-discord"
+  DISCORD_BOT_TOKEN="$(prompt_secret "Discord bot token")"
+  store_secret "$DISCORD_SERVICE" "bot_token" "$DISCORD_BOT_TOKEN"
+fi
+
+if yn "Configure Telegram"; then
+  TELEGRAM_ENABLED=true
+  TELEGRAM_CHAT_ID="$(prompt "Telegram chat ID (group or user)" "")"
+  TELEGRAM_BOT_NAME="$(prompt "Telegram bot username (optional label)" "")"
+  TELEGRAM_SERVICE="phoenix-omega-telegram"
+  TELEGRAM_BOT_TOKEN="$(prompt_secret "Telegram bot token")"
+  store_secret "$TELEGRAM_SERVICE" "bot_token" "$TELEGRAM_BOT_TOKEN"
+fi
+
 cat > "$OUT_FILE" <<EOF
 channels:
   line:
@@ -203,6 +233,21 @@ channels:
   imessage:
     enabled: ${IMESSAGE_ENABLED}
     handle: "${IMESSAGE_HANDLE:-}"
+  slack:
+    enabled: ${SLACK_ENABLED}
+    channel_id: "${SLACK_CHANNEL_ID:-}"
+    workspace: "${SLACK_WORKSPACE:-}"
+    keychain_service: "${SLACK_SERVICE:-}"
+  discord:
+    enabled: ${DISCORD_ENABLED}
+    channel_id: "${DISCORD_CHANNEL_ID:-}"
+    guild_id: "${DISCORD_GUILD_ID:-}"
+    keychain_service: "${DISCORD_SERVICE:-}"
+  telegram:
+    enabled: ${TELEGRAM_ENABLED}
+    chat_id: "${TELEGRAM_CHAT_ID:-}"
+    bot_name: "${TELEGRAM_BOT_NAME:-}"
+    keychain_service: "${TELEGRAM_SERVICE:-}"
 EOF
 
 printf "Saved messaging channel config to %s\n" "$OUT_FILE"

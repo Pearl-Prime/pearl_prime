@@ -36,6 +36,7 @@ Pearl_GitHub owns:
 
 ## Non-Negotiable Git Rules
 
+0. **NEVER merge a PR that deletes more than 50 files without explicit owner approval.** Before merging ANY PR, check the diff size: `gh pr diff <number> --stat | tail -1`. If it shows deletions > 50, STOP and ask the user. PR #245 deleted 20,006 files and cost hundreds of hours to recover.
 1. Always branch from `origin/main`
 2. Never branch from `codex/*` or another local branch for agent work
 3. Never push without running push-guard and preflight
@@ -56,6 +57,29 @@ PYTHONPATH=. python3 scripts/git/push_guard.py
 scripts/ci/preflight_push.sh
 bash scripts/git/health_check.sh
 ```
+
+## Automated PR Governance (Pearl_PM + Pearl_Architect gate)
+
+Every PR to main is automatically reviewed by the governance CI workflow.
+It checks:
+- **Mass deletion** — blocks PRs deleting >50 files
+- **PR size** — warns on >200 files, blocks >500
+- **Subsystem scope** — warns if PR touches >3 subsystems
+- **Authority docs** — warns if subsystem authority docs are missing
+- **Drift patterns** — warns on duplicate specs, root-level files, etc.
+- **Workstream conflict** — warns if PR overlaps with active workstreams
+
+The review posts a comment on the PR with a pass/warn/block verdict.
+**PRs with BLOCKED status cannot be merged** (enforced by GitHub ruleset).
+
+### Manual pre-merge check (run locally before pushing)
+
+```bash
+bash scripts/git/pre_merge_check.sh <PR_NUMBER>
+python3 scripts/ci/pr_governance_review.py
+```
+
+If either blocks, do NOT merge. Ask the owner.
 
 ## Golden Branch Pattern
 

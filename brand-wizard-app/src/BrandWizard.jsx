@@ -1259,6 +1259,27 @@ function Step5VoiceEffects({ state, update }) {
         subtitle="Slide, then open impact below if you want the full read."
       />
 
+      <div className="mb-6 rounded-2xl border border-violet-100 bg-violet-50/50 px-4 py-3">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-violet-800">Narrator preview</p>
+        <p className="mt-1 text-[11px] leading-relaxed text-gray-600">
+          Same comfort passage, three Edge TTS pipeline-demo voices. Pair what you hear with the sliders above.
+        </p>
+        <div className="mt-3 space-y-2">
+          <div>
+            <span className="text-[10px] font-semibold text-gray-800">Regulating / calm</span>
+            <audio className="mt-1 block h-9 w-full" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_regulating_female.mp3" />
+          </div>
+          <div>
+            <span className="text-[10px] font-semibold text-gray-800">Warm empathetic</span>
+            <audio className="mt-1 block h-9 w-full" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_warm_male.mp3" />
+          </div>
+          <div>
+            <span className="text-[10px] font-semibold text-gray-800">Direct / authority</span>
+            <audio className="mt-1 block h-9 w-full" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_direct_authority.mp3" />
+          </div>
+        </div>
+      </div>
+
       <div className="space-y-6">
         {VOICE_SLIDERS.map((s, idx) => {
           const val = state.voiceSettings?.[s.id] ?? s.default;
@@ -1706,6 +1727,12 @@ function Step10Blueprint({ state }) {
           {brandOneSentence}
         </p>
       ) : null}
+
+      <div className="mb-6 rounded-2xl border border-indigo-100 bg-indigo-50/40 px-4 py-3">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-indigo-800">Audiobook voice — preview</p>
+        <p className="mt-1 text-[11px] text-gray-600">Regulating narrator on the comfort benchmark (registry: <span className="font-mono text-[10px]">cmp_voice_narrator_contrast_v1</span>).</p>
+        <audio className="mt-2 block h-9 w-full max-w-md" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_regulating_female.mp3" />
+      </div>
 
       <div className="space-y-8">
         <section className="rounded-2xl border border-slate-200/90 bg-slate-50/50 p-4 shadow-sm ring-1 ring-slate-200/70 sm:p-5">
@@ -2317,6 +2344,15 @@ function IntroWelcome({ onNext }) {
               Start building <ChevronRight size={18} />
             </button>
           </div>
+          <p className="mt-8 text-center text-xs text-gray-500">
+            <a
+              href="/brand_onboarding_hub.html"
+              className="font-semibold text-violet-600 underline decoration-violet-200 underline-offset-2 hover:text-violet-800"
+            >
+              Brand Onboarding Hub
+            </a>
+            <span className="text-gray-400"> — gallery, matrix, master spine, weekly OS</span>
+          </p>
         </div>
       </div>
     </div>
@@ -2558,6 +2594,15 @@ export default function BrandWizard() {
   return (
     <div className="brand-studio-bg min-h-screen">
       <div className="mx-auto max-w-6xl px-4 py-8">
+        <p className="mb-3 text-center text-[11px] text-gray-500">
+          <a
+            href="/brand_onboarding_hub.html"
+            className="font-semibold text-violet-600 underline decoration-violet-200 underline-offset-2 hover:text-violet-800"
+          >
+            Brand Onboarding Hub
+          </a>
+          <span className="text-gray-400"> · static spine + proof tools</span>
+        </p>
         <ProgressBar step={step} total={11} labels={STEP_LABELS} />
         <div className="brand-studio-panel p-6 sm:p-8 lg:p-10">
           <div className="flex gap-6 lg:gap-8">

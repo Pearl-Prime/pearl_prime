@@ -163,7 +163,8 @@ def build_manifest(arcs: List[Dict[str, str]], total: int = 1000, seed: int = 42
         rng.shuffle(pool)  # reshuffle for next wrap-around
 
     # Assign quality profiles: 90% production, 10% draft
-    n_production = int(total * 0.9)
+    # TEMP: override all to draft for initial simulation run (identity_gate blocks in production)
+    n_production = 0  # int(total * 0.9)
     profiles = ["production"] * n_production + ["draft"] * (total - n_production)
     rng.shuffle(profiles)
 

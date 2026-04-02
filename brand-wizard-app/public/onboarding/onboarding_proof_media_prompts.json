@@ -1,0 +1,184 @@
+{
+  "schema_version": "1",
+  "notes": "T2I three-part strings + video assembly hints per example_registry id. Used by scripts/onboarding/run_onboarding_proof_flux_and_video.py.",
+  "shared_negatives": {
+    "book_cover_default": "watermark, illegible tiny text, distorted title lettering, extra fingers, mangled hands, gore, medical gore, celebrity likeness, low resolution, jpeg artifacts",
+    "manga_default": "photoreal human skin pores, western superhero comic, chibi exaggeration, gore, sexualized minors, watermark, muddy inks",
+    "editorial_default": "stock photo cliché, smiling corporate handshake, gore, sensational tabloid, watermark, oversaturated HDR",
+    "tool_ui_default": "illegible microcopy, fake OS chrome, cluttered dashboard, dark pattern UI, watermark",
+    "portrait_supporting": "book cover layout, title typography, gore, sexualization, watermark, caricature exaggeration"
+  },
+  "by_id": {
+    "cmp_bp_founder_v1": {
+      "t2i": {
+        "foreground": "Ebook cover illustration, exhausted founder silhouette at dim desk lamp, indigo and slate palette, generous negative space, empty title band, no readable words.",
+        "background": "Atmospheric abstract gradient in cool slate blue and soft violet, soft blur, no hard edges.",
+        "lighting": "Single warm desk pool against cool ambient fill, quiet mood, 2:3 portrait trim feel, highly detailed but soft.",
+        "negative_key": "book_cover_default"
+      },
+      "video": { "prompt": "9:16 slow push-in on dim desk, indigo grain, ambient, no text.", "aspect": "9:16", "duration_s": 12 }
+    },
+    "cmp_bp_student_v1": {
+      "t2i": {
+        "foreground": "Ebook cover, young adult study lamp glow, notebook abstract, teal and amber, clean self-help grid, empty headline zone.",
+        "background": "Soft teal mist with warm amber halo, library-quiet haze.",
+        "lighting": "Warm desk key, cool fill, 2:3, highly detailed but soft.",
+        "negative_key": "book_cover_default"
+      },
+      "video": { "prompt": "9:16 handheld drift over desk glow, calm pacing, no text.", "aspect": "9:16", "duration_s": 10 }
+    },
+    "cmp_bp_caregiver_v1": {
+      "t2i": {
+        "foreground": "Ebook cover, caregiver fatigue metaphor, empty mug steam, rose and warm grey, compassionate layout, clear title space.",
+        "background": "Diffused morning gradient, pale rose fog.",
+        "lighting": "Soft window side light, low contrast, 2:3, highly detailed but soft.",
+        "negative_key": "book_cover_default"
+      },
+      "video": { "prompt": "9:16 steam from mug slow motion, intimate table bokeh, no faces required.", "aspect": "9:16", "duration_s": 12 }
+    },
+    "cmp_anx_us_v1": {
+      "t2i": {
+        "foreground": "US self-help ebook cover, anxiety theme, gentle wave line abstract, cool blue and white, open title zone.",
+        "background": "Breath-like pale blue to mist white gradient.",
+        "lighting": "Even soft daylight mood, 2:3, highly detailed but soft.",
+        "negative_key": "book_cover_default"
+      },
+      "video": { "prompt": "9:16 abstract wave pulses like breath, blue to white gradient shift.", "aspect": "9:16", "duration_s": 8 }
+    },
+    "cmp_anx_jp_v1": {
+      "t2i": {
+        "foreground": "Japanese-market calm ebook cover, minimal vertical composition, soft ink-wash hills implied, indigo and paper white, no fake kanji.",
+        "background": "Wash gradient like morning fog over paper tone.",
+        "lighting": "Diffuse top light, 2:3, highly detailed but soft.",
+        "negative_key": "book_cover_default"
+      },
+      "video": { "prompt": "9:16 ink particles settle, paper texture parallax, no on-screen text.", "aspect": "9:16", "duration_s": 12 }
+    },
+    "cmp_anx_tw_v1": {
+      "t2i": {
+        "foreground": "Traditional-Chinese-market calm ebook cover, jade and parchment, lantern glow as bokeh only, empty bilingual title band.",
+        "background": "Mist gradient jade to warm cream.",
+        "lighting": "Warm lantern fill against cool jade shadow, 2:3, highly detailed but soft.",
+        "negative_key": "book_cover_default"
+      },
+      "video": { "prompt": "9:16 lantern bokeh drifts, mist over abstract hills, no text.", "aspect": "9:16", "duration_s": 10 }
+    },
+    "cmp_fmt_cover_v1": {
+      "t2i": {
+        "foreground": "Self-help ebook cover hero, burnout recovery, bold soft sans title area empty, gradient spine accent.",
+        "background": "Clean studio gradient, subtle paper grain.",
+        "lighting": "Soft key with slight rim, 2:3, highly detailed but soft.",
+        "negative_key": "book_cover_default"
+      },
+      "video": { "prompt": "9:16 shallow DOF over cover flat-lay, light sweep, no legible title.", "aspect": "9:16", "duration_s": 6 }
+    },
+    "cmp_fmt_manga_v1": {
+      "t2i": {
+        "foreground": "Manga panel, healing burnout arc, two figures mid-distance, screentone, clean gutters, empty speech bubbles.",
+        "background": "Soft city dusk wash.",
+        "lighting": "Golden hour rim, emotional clarity, single panel ~3:4.",
+        "negative_key": "manga_default"
+      },
+      "video": { "prompt": "9:16 Ken Burns over manga panel, subtle screentone flicker, no readable dialogue.", "aspect": "9:16", "duration_s": 8 }
+    },
+    "cmp_fmt_article_v1": {
+      "t2i": {
+        "foreground": "Pearl News article hero, civic editorial, wide composition, soft crowd silhouettes, empty headline strip, navy and cream.",
+        "background": "Abstract city skyline haze, trustworthy tone.",
+        "lighting": "Dawn sidelight, sober hope, 16:9 hero.",
+        "negative_key": "editorial_default"
+      },
+      "video": { "prompt": "16:9 slow parallax on abstract skyline, empty lower third space.", "aspect": "16:9", "duration_s": 10 }
+    },
+    "cmp_pos_premium_v1": {
+      "t2i": {
+        "foreground": "Premium spiritual ebook cover, gold foil line, deep purple dusk, abstract geometry only, elevated serif zone empty.",
+        "background": "Nebula-soft purple gold haze.",
+        "lighting": "Soft gold rim, 2:3, highly detailed but soft.",
+        "negative_key": "book_cover_default"
+      },
+      "video": { "prompt": "9:16 gold particles drift upward, reverent pacing.", "aspect": "9:16", "duration_s": 12 }
+    },
+    "cmp_pos_mainstream_v1": {
+      "t2i": {
+        "foreground": "Practical mainstream self-help cover, bright blocks, subtle checklist icons, blue and white clarity, big title band empty.",
+        "background": "Clean geometric soft shadow planes.",
+        "lighting": "Bright even retail-friendly, 2:3, highly detailed but soft.",
+        "negative_key": "book_cover_default"
+      },
+      "video": { "prompt": "9:16 geometric shapes snap to grid, calm motion graphics.", "aspect": "9:16", "duration_s": 8 }
+    },
+    "cmp_mg_cin_v1": {
+      "t2i": {
+        "foreground": "Manga cinematic panel, dramatic inks, rain as fine lines, teen anxiety beat, empty balloons.",
+        "background": "Urban night bokeh abstract.",
+        "lighting": "Backlit rim, filmic contrast in manga language.",
+        "negative_key": "manga_default"
+      },
+      "video": { "prompt": "9:16 letterbox feel, rain streak overlay slow, subtle push.", "aspect": "9:16", "duration_s": 10 }
+    },
+    "cmp_mg_youth_v1": {
+      "t2i": {
+        "foreground": "Manga youth inspiration, dynamic silhouette, sunrise palette, clean lines, empty sfx.",
+        "background": "Gradient speed lines softened, hopeful sky.",
+        "lighting": "Rim sparkle, optimistic.",
+        "negative_key": "manga_default"
+      },
+      "video": { "prompt": "9:16 sun flare drift, speed lines parallax.", "aspect": "9:16", "duration_s": 8 }
+    },
+    "cmp_mg_spirit_v1": {
+      "t2i": {
+        "foreground": "Manga spiritual philosophical, small figure under vast sky mandala-abstract, contemplative inks, empty dialogue.",
+        "background": "Muted starfield wash.",
+        "lighting": "Soft glow from above.",
+        "negative_key": "manga_default"
+      },
+      "video": { "prompt": "9:16 slow rotate on starfield, mandala lines breathe.", "aspect": "9:16", "duration_s": 12 }
+    },
+    "cmp_mg_heal_v1": {
+      "t2i": {
+        "foreground": "Manga emotional healing, hands and tea implied, warm pastels, soft screentone, empty balloons.",
+        "background": "Cozy interior abstract, plants as soft shapes.",
+        "lighting": "Warm window diffusion.",
+        "negative_key": "manga_default"
+      },
+      "video": { "prompt": "9:16 steam and warm light flicker, micro-sway leaves.", "aspect": "9:16", "duration_s": 10 }
+    },
+    "cmp_mg_civic_v1": {
+      "t2i": {
+        "foreground": "Manga civic youth, gentle gesture, blank sign rectangles, hopeful solidarity inks.",
+        "background": "City plaza abstract silhouettes.",
+        "lighting": "Late afternoon gold.",
+        "negative_key": "manga_default"
+      },
+      "video": { "prompt": "9:16 slow abstract crowd parallax, blank signs.", "aspect": "9:16", "duration_s": 12 }
+    },
+    "gal_selfhelp_cover_01": {
+      "t2i": {
+        "foreground": "Gallery self-help cover, seeker purpose theme, misty path abstract, violet and gold, empty title.",
+        "background": "Ethereal forest fog gradient.",
+        "lighting": "Very soft god-rays, 2:3.",
+        "negative_key": "book_cover_default"
+      },
+      "video": { "prompt": "9:16 slow walk POV through mist, light shafts.", "aspect": "9:16", "duration_s": 15 }
+    },
+    "gal_tool_breath_01": {
+      "t2i": {
+        "foreground": "Mobile breathwork UI mock, large inhale-exhale ring, teal gradient, fictional app chrome, blurred app name.",
+        "background": "Soft aurora for app backdrop.",
+        "lighting": "Even UI glow, 9:19 feel.",
+        "negative_key": "tool_ui_default"
+      },
+      "video": { "prompt": "9:19 phone bezel, breathing circle 4-7-8 pacing, no labels.", "aspect": "9:19", "duration_s": 20 }
+    },
+    "support_persona_founder_01": {
+      "t2i": {
+        "foreground": "Editorial supporting illustration, founder exhaustion, shoulders heavy, face turned away or cropped, photojournal humanity, not a book cover.",
+        "background": "Office window bokeh abstract.",
+        "lighting": "Fluorescent fatigue with sunset leak.",
+        "negative_key": "portrait_supporting"
+      },
+      "video": { "prompt": "9:16 slow shoulder loop, window light time shift, documentary tone.", "aspect": "9:16", "duration_s": 12 }
+    }
+  }
+}

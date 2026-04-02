@@ -44,6 +44,7 @@ code{font-size:.85em;background:#f3f4f6;padding:2px 6px;border-radius:4px}
 <div class="nav-top">
 <a href="brand_onboarding_hub.html">Onboarding Hub</a>
 <a href="lane_examples_gallery.html">Output gallery</a>
+<a href="onboarding/presentation.html">PNG presentation</a>
 <a href="market_lane_matrix.html">Market matrix</a>
 <a href="brand_admin_weekly_os.html">Weekly OS</a>
 </div>
@@ -63,6 +64,14 @@ code{font-size:.85em;background:#f3f4f6;padding:2px 6px;border-radius:4px}
 <li><strong>Gallery &amp; matrix</strong> — Static pages validate the model locally and on Pages before the wizard deepens choices.</li>
 <li><strong>Wizard</strong> — React app (<code>brand-wizard-app</code>) surfaces matching example IDs after persona / format decisions using the same JSON.</li>
 </ul>
+
+<div class="sl">Audiobook voice proof</div>
+<h2>Hear benchmark narrators</h2>
+<p>Registry rows <code>cmp_voice_narrator_contrast_v1</code> and <code>cmp_voice_benchmark_passages_v1</code> point at MP3s under <code>onboarding/audio/</code>. Regenerate locally with <code>python3 scripts/onboarding/generate_voice_benchmark_audio.py</code> (requires <code>pip install -r scripts/onboarding/requirements-tts.txt</code>).</p>
+<div style="display:grid;gap:12px;margin:14px 0 20px;max-width:520px">
+<div><strong style="font-size:.78rem;color:var(--text)">Comfort — regulating</strong><audio controls preload="metadata" style="width:100%;margin-top:6px;height:36px" src="onboarding/audio/voice_cmp_comfort_voice_regulating_female.mp3"></audio></div>
+<div><strong style="font-size:.78rem;color:var(--text)">Comfort — warm</strong><audio controls preload="metadata" style="width:100%;margin-top:6px;height:36px" src="onboarding/audio/voice_cmp_comfort_voice_warm_male.mp3"></audio></div>
+</div>
 
 <div class="sl">What brand admins do</div>
 <h2>Your operating loop</h2>

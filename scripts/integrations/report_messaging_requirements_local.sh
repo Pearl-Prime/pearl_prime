@@ -137,3 +137,21 @@ printf "\n"
 
 printf "iMessage\n"
 print_field "handle" "$(yaml_value channels.imessage.handle)"
+printf "\n"
+
+printf "Slack\n"
+print_field "channel id" "$(yaml_value channels.slack.channel_id)"
+print_field "workspace" "$(yaml_value channels.slack.workspace)"
+print_secret_field "bot token" "phoenix-omega-slack" "bot_token"
+printf "\n"
+
+printf "Discord\n"
+print_field "channel id" "$(yaml_value channels.discord.channel_id)"
+print_field "guild id" "$(yaml_value channels.discord.guild_id)"
+print_secret_field "bot token" "phoenix-omega-discord" "bot_token"
+printf "\n"
+
+printf "Telegram\n"
+print_field "chat id" "$(yaml_value channels.telegram.chat_id)"
+print_field "bot name" "$(yaml_value channels.telegram.bot_name)"
+print_secret_field "bot token" "phoenix-omega-telegram" "bot_token"

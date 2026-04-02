@@ -284,6 +284,8 @@ def run_phase3_on_results(results: list[dict[str, Any]], stack_size: int = 20, f
     Run Phase 3 on Phase 1/2 results. Generates synthetic chapter text per book (from request_id + chapters + tier),
     runs volatility/cognitive/consequence per book, then reassurance repetition on stacks of stack_size.
     flat_fraction: fraction of books given flat (cognitive-heavy) text so Phase 3 can fail them (default 12%).
+    Intentional negative tests (force_flat=True) that fail are classified as negative_test_caught,
+    not counted toward the failure rate.
     """
     for r in results:
         if not r.get("passed"):
@@ -291,6 +293,7 @@ def run_phase3_on_results(results: list[dict[str, Any]], stack_size: int = 20, f
             r["phase3_errors"] = ["phase1/2 failed"]
             r["phase3_scores"] = {}
             r["phase3_skipped"] = True
+            r["phase3_negative_test"] = False
             continue
         chapters = r.get("chapters", 1)
         tier = r.get("tier", "B")
@@ -298,11 +301,22 @@ def run_phase3_on_results(results: list[dict[str, Any]], stack_size: int = 20, f
         force_flat = (seed % 100) / 100.0 < flat_fraction
         ch_list = generate_synthetic_chapters(chapters, tier, seed, force_flat=force_flat)
         out = validate_book_phase3(ch_list, r.get("request_id", ""))
-        r["phase3_passed"] = out["phase3_passed"]
-        r["phase3_errors"] = out.get("phase3_errors", [])
-        r["phase3_warnings"] = out.get("phase3_warnings", [])
-        r["phase3_scores"] = out.get("phase3_scores", {})
         r["phase3_skipped"] = False
+        r["phase3_negative_test"] = force_flat
+        if force_flat and not out["phase3_passed"]:
+            # Intentional negative test correctly caught by the gate
+            r["phase3_passed"] = True
+            r["phase3_negative_test_caught"] = True
+            r["phase3_errors"] = []
+            r["phase3_warnings"] = out.get("phase3_warnings", [])
+            r["phase3_scores"] = out.get("phase3_scores", {})
+            r["phase3_gate_errors"] = out.get("phase3_errors", [])
+        else:
+            r["phase3_passed"] = out["phase3_passed"]
+            r["phase3_negative_test_caught"] = False
+            r["phase3_errors"] = out.get("phase3_errors", [])
+            r["phase3_warnings"] = out.get("phase3_warnings", [])
+            r["phase3_scores"] = out.get("phase3_scores", {})
         r["_phase3_full_text"] = " ".join(c.text for c in ch_list)
     # Stack-wise reassurance
     n = len([r for r in results if not r.get("phase3_skipped") and r.get("_phase3_full_text")])
@@ -318,9 +332,11 @@ def run_phase3_on_results(results: list[dict[str, Any]], stack_size: int = 20, f
                 r["phase3_errors"] = r.get("phase3_errors", []) + rep_err
     for r in results:
         r.pop("_phase3_full_text", None)
+    negative_caught = sum(1 for r in results if r.get("phase3_negative_test_caught"))
     summary = {
         "phase3_passed": sum(1 for r in results if r.get("phase3_passed")),
         "phase3_failed": sum(1 for r in results if not r.get("phase3_skipped") and not r.get("phase3_passed")),
         "phase3_skipped": sum(1 for r in results if r.get("phase3_skipped")),
+        "phase3_negative_test_caught": negative_caught,
     }
     return results, summary

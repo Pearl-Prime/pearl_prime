@@ -1,0 +1,27 @@
+# Author / brand voice alignment for narrator selection and ElevenLabs binding.
+# v1: onboarding + benchmark generation; literal voice clone is out of scope unless approved.
+# See: config/narrators/narrator_registry.yaml, config/brand_narrator_assignments.yaml
+
+authors:
+  onboarding_demo_stillness:
+    display_name: "Onboarding demo — Stillness lane"
+    brand_id: stillness_press
+    locale: en-US
+    positioning_profile: grounded_somatic_teacher
+    narrator_archetype: warm_regulating
+    elevenlabs:
+      preferred_voice_id: null
+      preferred_voice_name: null
+      model_id: eleven_multilingual_v2
+    delivery_modes:
+      default: regulating
+      alternates: [instructional, hopeful]
+    approved_narrator_ids:
+      - voice_regulating_female
+      - voice_warm_male
+      - voice_direct_authority
+    fallback_narrator_ids:
+      - default_narrator
+    approval_status: approved
+    approved_by: system
+    approved_at: "2026-04-02"

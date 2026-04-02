@@ -1,0 +1,93 @@
+# Onboarding / output-proof presentation — file manifest
+# Repo: phoenix_omega (paths relative to repo root unless noted)
+# Generated: machine-readable inventory; regenerate tree with find (see bottom).
+
+== A. PNG deck (primary “presentation” raster tiles) ==
+scripts/onboarding/generate_onboarding_proof_pngs.py   # builds PNGs + sets registry .png
+scripts/onboarding/onboarding_proof_visual.py          # gradient tokens shared with PNG script
+scripts/onboarding/requirements-rasterize.txt        # pip: Pillow
+
+brand-wizard-app/public/onboarding/proof/**/*.png      # raster outputs (run generator)
+  # Also list: see artifacts/onboarding/_proof_tree.txt
+
+== B. Static HTML — presentation & spine ==
+brand-wizard-app/public/onboarding/presentation.html           # full-screen deck (fetch example_registry.json)
+brand-wizard-app/public/onboarding_proof_presentation.html     # 302/JS redirect → /onboarding/presentation.html
+brand-wizard-app/public/_redirects                             # Cloudflare: /onboarding_proof_presentation.html → deck
+onboarding_proof_presentation.html                             # repo root: human index of URLs + paths
+
+brand-wizard-app/public/lane_examples_gallery.html             # registry-driven gallery (links “PNG deck”)
+brand-wizard-app/public/brand_admin_master_onboarding.html     # spine (links PNG presentation)
+brand-wizard-app/public/brand_onboarding_hub.html              # hub card → onboarding/presentation.html
+brand-wizard-app/public/market_lane_matrix.html
+brand-wizard-app/public/brand_admin_weekly_os.html
+brand-wizard-app/public/us_brand_admin_v32_briefing.html
+brand-wizard-app/public/jp_brand_admin_v32_briefing.html
+brand-wizard-app/public/onboarding/briefing_audio.html         # adjacent TTS / briefing surface
+
+# Same spine HTML also maintained at repo root (copied to public by sync script):
+lane_examples_gallery.html
+brand_admin_master_onboarding.html
+brand_onboarding_hub.html
+market_lane_matrix.html
+brand_admin_weekly_os.html
+us_brand_admin_v32_briefing.html
+jp_brand_admin_v32_briefing.html
+
+== C. Registry & config (source of truth for tiles) ==
+config/onboarding/example_registry.json
+brand-wizard-app/public/onboarding/example_registry.json
+config/onboarding/onboarding_proof_media_prompts.json
+brand-wizard-app/public/onboarding/onboarding_proof_media_prompts.json
+config/onboarding/wizard_decision_explainer_data.json          # if present
+brand-wizard-app/public/onboarding/wizard_decision_explainer_data.json
+
+== D. SVG pipeline demos (legacy / parallel to PNG; generator may still emit) ==
+scripts/onboarding/generate_onboarding_proof_demos.py
+brand-wizard-app/public/onboarding/proof/**/*.svg
+
+== E. Voice / audio proof (shown in gallery, not PNG deck) ==
+scripts/onboarding/generate_voice_benchmark_audio.py
+scripts/onboarding/requirements-tts.txt
+brand-wizard-app/public/onboarding/audio/*.mp3
+brand-wizard-app/public/onboarding/audio/README.md
+
+== F. Optional / alternate pipelines (often NOT used for PNG deck) ==
+scripts/onboarding/run_onboarding_proof_flux_and_video.py      # FLUX / video experiment lane
+docs/VIDEO_AND_COVER_ART_FLUX_WIRING.md                        # FLUX (separate from PNG demo tier)
+
+== G. Docs & specs (governance / production) ==
+docs/BRAND_ADMIN_ONBOARDING_PAGES_SPEC.md
+docs/BRAND_ADMIN_ONBOARDING_CLOUDFLARE_DEPLOYMENT.md
+docs/ONBOARDING_PROOF_FIDELITY_UPGRADE_LANE.md
+docs/ONBOARDING_PROOF_ASSET_PRODUCTION_BACKLOG.md
+docs/ONBOARDING_POST_MERGE_HYGIENE.md
+docs/ONBOARDING_EXAMPLE_PRODUCTION_CHECKLIST.md
+docs/ONBOARDING_START_HERE.md
+specs/BRAND_ADMIN_ONBOARDING_IMAGE_PACK_V1_TRUST_LAYER_SPEC.md
+specs/BRAND_ADMIN_ONBOARDING_WIZARD_SPEC.md
+specs/BRAND_ADMIN_ONBOARDING_TTS_SPEC.md
+specs/ONBOARDING_REAL_EXAMPLE_GENERATION_SPEC.md
+
+== H. Local static server ==
+scripts/dev/serve_brand_admin_public.sh
+scripts/onboarding/sync_onboarding_config_to_public.sh         # copies config JSON + spine HTML → public
+
+== I. CI (when present on branch) ==
+scripts/ci/validate_onboarding_registry.py
+scripts/ci/report_onboarding_proof_completion.py
+.github/workflows/brand-admin-onboarding-pages.yml
+
+== J. React wizard (interactive; separate from static PNG deck) ==
+brand-wizard-app/src/BrandWizard.jsx
+brand-wizard-app/src/onboarding/OutputProofStrip.jsx
+brand-wizard-app/src/onboarding/useOnboardingRegistry.js
+brand-wizard-app/src/onboarding/exampleRegistryMatch.js
+# (+ other src/onboarding/*)
+
+---
+Full tree under brand-wizard-app/public/onboarding/ (this run):
+See artifacts/onboarding/_proof_tree.txt
+
+Regenerate tree:
+  find brand-wizard-app/public/onboarding -type f | sort > artifacts/onboarding/_proof_tree.txt

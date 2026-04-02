@@ -2,8 +2,16 @@
 
 **Purpose:** Single canonical reference for every external service credential in Phoenix Omega.
 **Owner:** Pearl_Int / Pearl_Architect
-**Last updated:** 2026-04-01 (video platforms + SerpApi added)
+**Last updated:** 2026-04-02 (Phase 1 + 2 scope banner; checker alignment)
 **Rule:** No actual secrets in this file. Only env var names, documentation, and pointers.
+
+### Phase 1 + 2 scope (deliverables)
+
+- **12 core services** (sections 1–12 below): Qwen/DashScope, Anthropic, OpenAI, ElevenLabs, Cloudflare, GitHub, WordPress, GoHighLevel, Plaid (YAML config, not `.env`), SMTP, Google Analytics 4, Ollama.
+- **Environment variables:** `scripts/ci/check_integration_env.py` tracks one row per env var name (includes video platforms and SerpApi); run it for set vs missing. Exit code **1** if any **required** row is unset in the current shell (today: Qwen key + base URL).
+- **Messaging:** five operator channels documented in [Messaging channels (Keychain-based)](#messaging-channels-keychain-based); secrets live in macOS Keychain (or local YAML for iMessage), not in the checker.
+- **GitHub Actions:** repository secrets used by workflows are summarized in [GitHub Actions secrets](#github-actions-secrets); local shells use `GITHUB_TOKEN` / `GITHUB_REPOSITORY` where applicable.
+- **Pearl_Int operational notes:** trend feeds, SerpApi budget, and per-integration validation history remain in `skills/pearl-int/references/integration_registry.md`, which defers env var names to this file.
 
 ---
 

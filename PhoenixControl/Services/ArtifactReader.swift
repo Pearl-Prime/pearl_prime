@@ -152,4 +152,165 @@ final class ArtifactReader {
 
         return ObservabilityPhaseStatus(p1Observe: p1, p2Document: p2, p3ElevateFix: p3, p4LearnEnhance: p4)
     }
+
+    // MARK: - Dashboard artifacts
+
+    func loadSimulationAnalysis(repoPath: String) -> SimulationAnalysis? {
+        let dir = repoURL(repoPath: repoPath).appendingPathComponent("artifacts/reports")
+        guard let contents = try? fileManager.contentsOfDirectory(at: dir, includingPropertiesForKeys: [.contentModificationDateKey], options: .skipsHiddenFiles) else { return nil }
+        let matches = contents.filter { $0.lastPathComponent.hasPrefix("pearl_prime_sim_") && $0.lastPathComponent.hasSuffix("_analysis.json") }
+        guard let latest = matches.sorted(by: modDateDesc).first,
+              let data = try? Data(contentsOf: latest) else { return nil }
+        return SimulationAnalysis.fromAnalysisJSON(data)
+    }
+
+    func loadLocaleParity(repoPath: String) -> LocaleParityReport? {
+        let dir = repoURL(repoPath: repoPath).appendingPathComponent("artifacts/localization")
+        guard let contents = try? fileManager.contentsOfDirectory(at: dir, includingPropertiesForKeys: [.contentModificationDateKey], options: .skipsHiddenFiles) else { return nil }
+        let reports = contents.filter { $0.lastPathComponent.hasPrefix("LOCALE_PARITY_REPORT_") && $0.lastPathComponent.hasSuffix(".md") }
+        guard let latest = reports.sorted(by: modDateDesc).first,
+              let text = try? String(contentsOf: latest, encoding: .utf8) else { return nil }
+        return Self.parseLocaleParityMarkdown(text)
+    }
+
+    func loadFeedTrends(repoPath: String) -> String? {
+        let dir = repoURL(repoPath: repoPath).appendingPathComponent("artifacts/feeds")
+        guard let contents = try? fileManager.contentsOfDirectory(at: dir, includingPropertiesForKeys: [.contentModificationDateKey], options: .skipsHiddenFiles) else { return nil }
+        let files = contents.filter { $0.lastPathComponent.hasPrefix("daily_trend_summary_") && $0.lastPathComponent.hasSuffix(".md") }
+        guard let latest = files.sorted(by: modDateDesc).first,
+              let text = try? String(contentsOf: latest, encoding: .utf8) else { return nil }
+        return text
+    }
+
+    func loadBookPassResults(repoPath: String) -> [BookPassResult] {
+        let dir = repoURL(repoPath: repoPath).appendingPathComponent("artifacts/book_pass")
+        guard let contents = try? fileManager.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) else { return [] }
+        var out: [BookPassResult] = []
+        for url in contents where url.pathExtension == "json" {
+            guard let data = try? Data(contentsOf: url),
+                  let obj = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { continue }
+            let bid = obj["book_id"] as? String ?? obj["bookId"] as? String
+            let passed = obj["passed"] as? Bool ?? obj["book_pass"] as? Bool
+            out.append(BookPassResult(bookId: bid, passed: passed, path: url.path))
+        }
+        return out
+    }
+
+    func loadCredentialStatus(repoPath: String) -> CredentialStatus? {
+        guard let data = runPythonScriptCaptureStdout(repoPath: repoPath, script: "scripts/ci/check_integration_env.py", arguments: ["--json"]) else { return nil }
+        guard let payload = try? JSONDecoder().decode(IntegrationEnvJSONPayload.self, from: data) else { return nil }
+        return payload.asCredentialStatus()
+    }
+
+    func loadVideoUploadConfigJSON(repoPath: String) -> [String: Any]? {
+        guard let data = runPythonScriptCaptureStdout(repoPath: repoPath, script: "scripts/ci/dump_video_config_json.py", arguments: []) else { return nil }
+        return (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]
+    }
+
+    func loadTranslationLocaleCounts(repoPath: String) -> [String: Int] {
+        let root = repoURL(repoPath: repoPath).appendingPathComponent("SOURCE_OF_TRUTH/teacher_banks")
+        guard let personas = try? fileManager.contentsOfDirectory(at: root, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) else { return [:] }
+        var counts: [String: Int] = [:]
+        for p in personas {
+            var isDir: ObjCBool = false
+            guard fileManager.fileExists(atPath: p.path, isDirectory: &isDir), isDir.boolValue else { continue }
+            let locRoot = p.appendingPathComponent("approved_atoms_localized")
+            guard let locales = try? fileManager.contentsOfDirectory(at: locRoot, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) else { continue }
+            for loc in locales {
+                var isL: ObjCBool = false
+                guard fileManager.fileExists(atPath: loc.path, isDirectory: &isL), isL.boolValue else { continue }
+                let code = loc.lastPathComponent
+                let sub = (try? fileManager.subpathsOfDirectory(atPath: loc.path)) ?? []
+                let n = sub.filter { $0.hasSuffix(".yaml") || $0.hasSuffix(".yml") }.count
+                counts[code, default: 0] += n
+            }
+        }
+        return counts
+    }
+
+    func loadMLLoopScoreSnippet(repoPath: String) -> String? {
+        let dir = repoURL(repoPath: repoPath).appendingPathComponent("artifacts/ml_loop")
+        guard let contents = try? fileManager.contentsOfDirectory(at: dir, includingPropertiesForKeys: [.contentModificationDateKey], options: .skipsHiddenFiles) else { return nil }
+        let jsons = contents.filter { $0.pathExtension == "json" }
+        guard let latest = jsons.sorted(by: modDateDesc).first,
+              let data = try? Data(contentsOf: latest),
+              let obj = try? JSONSerialization.jsonObject(with: data),
+              let pretty = try? JSONSerialization.data(withJSONObject: obj, options: [.prettyPrinted, .sortedKeys]),
+              let s = String(data: pretty, encoding: .utf8) else { return nil }
+        return s.count > 4000 ? String(s.prefix(4000)) + "\n…" : s
+    }
+
+    /// YAML filenames under `approved_atoms_localized/<locale>/` for a teacher bank folder (matches `persona` row loosely).
+    func listLocalizedAtomFiles(repoPath: String, personaRow: String, locale: String) -> [String] {
+        let banks = repoURL(repoPath: repoPath).appendingPathComponent("SOURCE_OF_TRUTH/teacher_banks")
+        guard let dirs = try? fileManager.contentsOfDirectory(at: banks, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) else { return [] }
+        let key = personaRow.lowercased().replacingOccurrences(of: " ", with: "_")
+        let match = dirs.first { dir in
+            let name = dir.lastPathComponent.lowercased()
+            return name == key || name.contains(key) || key.contains(name)
+        }
+        guard let base = match?.appendingPathComponent("approved_atoms_localized").appendingPathComponent(locale) else { return [] }
+        guard let sub = try? fileManager.subpathsOfDirectory(atPath: base.path) else { return [] }
+        return sub.filter { $0.hasSuffix(".yaml") || $0.hasSuffix(".yml") }.sorted()
+    }
+
+    private func modDateDesc(_ a: URL, _ b: URL) -> Bool {
+        let da = (try? a.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast
+        let db = (try? b.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast
+        return da > db
+    }
+
+    private func runPythonScriptCaptureStdout(repoPath: String, script: String, arguments: [String]) -> Data? {
+        let repo = URL(fileURLWithPath: (repoPath as NSString).expandingTildeInPath)
+        let scriptURL = repo.appendingPathComponent(script)
+        guard fileManager.fileExists(atPath: scriptURL.path) else { return nil }
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+        process.arguments = ["python3", scriptURL.path] + arguments
+        process.currentDirectoryURL = repo
+        var env = ProcessInfo.processInfo.environment
+        env["PYTHONPATH"] = repo.path
+        process.environment = env
+        let pipe = Pipe()
+        process.standardOutput = pipe
+        process.standardError = FileHandle.nullDevice
+        do {
+            try process.run()
+            process.waitUntilExit()
+        } catch {
+            return nil
+        }
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        return data.isEmpty ? nil : data
+    }
+
+    private static func parseLocaleParityMarkdown(_ text: String) -> LocaleParityReport? {
+        let lines = text.components(separatedBy: .newlines)
+        var headerLocales: [String] = []
+        var entries: [LocaleParityEntry] = []
+        var inTable = false
+        for line in lines {
+            let t = line.trimmingCharacters(in: .whitespaces)
+            guard t.contains("|") else { continue }
+            let cells = t.split(separator: "|").map { $0.trimmingCharacters(in: .whitespaces) }
+            let row = cells.filter { !$0.isEmpty }
+            if row.isEmpty { continue }
+            if row.count >= 2, row[0].lowercased().contains("persona") {
+                headerLocales = Array(row.dropFirst())
+                inTable = true
+                continue
+            }
+            guard inTable, !headerLocales.isEmpty else { continue }
+            if row[0].allSatisfy({ $0 == "-" || $0 == ":" || $0 == " " }) { continue }
+            let persona = row[0]
+            for (i, loc) in headerLocales.enumerated() where i + 1 < row.count {
+                let cell = row[i + 1].replacingOccurrences(of: "%", with: "")
+                if let pct = Double(cell) {
+                    entries.append(LocaleParityEntry(persona: persona, locale: loc, coverage: pct))
+                }
+            }
+        }
+        if entries.isEmpty { return nil }
+        return LocaleParityReport(entries: entries, localeColumns: headerLocales)
+    }
 }

@@ -8,6 +8,48 @@ final class GitHubService {
     var repoOwner: String = ""
     var repoName: String = ""
 
+    func applyGitRemoteFromRepoRoot(_ repoPath: String) {
+        let root = (repoPath as NSString).expandingTildeInPath
+        let configURL = URL(fileURLWithPath: root).appendingPathComponent(".git/config")
+        guard let text = try? String(contentsOf: configURL, encoding: .utf8) else { return }
+        var inOrigin = false
+        for line in text.components(separatedBy: .newlines) {
+            let t = line.trimmingCharacters(in: .whitespaces)
+            if t.hasPrefix("[remote \"origin\"]") { inOrigin = true; continue }
+            if t.hasPrefix("[") { inOrigin = false; continue }
+            if inOrigin, t.hasPrefix("url = ") {
+                let raw = String(t.dropFirst(6)).trimmingCharacters(in: .whitespaces)
+                if let pair = Self.parseGitHubOwnerRepo(from: raw) {
+                    repoOwner = pair.0
+                    repoName = pair.1
+                }
+                return
+            }
+        }
+    }
+
+    private static func parseGitHubOwnerRepo(from url: String) -> (String, String)? {
+        let u = url.trimmingCharacters(in: .whitespaces)
+        if u.contains("github.com:") {
+            let parts = u.split(separator: ":")
+            guard let last = parts.last else { return nil }
+            var path = String(last)
+            if path.hasSuffix(".git") { path = String(path.dropLast(4)) }
+            let bits = path.split(separator: "/")
+            guard bits.count >= 2 else { return nil }
+            return (String(bits[bits.count - 2]), String(bits[bits.count - 1]))
+        }
+        if let range = u.range(of: "github.com/") {
+            var path = String(u[range.upperBound...])
+            if path.hasSuffix(".git") { path = String(path.dropLast(4)) }
+            if path.hasSuffix("/") { path = String(path.dropLast()) }
+            let bits = path.split(separator: "/")
+            guard bits.count >= 2 else { return nil }
+            return (String(bits[bits.count - 2]), String(bits[bits.count - 1]))
+        }
+        return nil
+    }
+
     enum GitHubError: Error {
         case noToken
         case rateLimited(retryAfterSeconds: Int?)
@@ -63,6 +105,9 @@ final class GitHubService {
         let name: String
         let conclusion: String
         let htmlUrl: String
+        let path: String?
+        let status: String?
+        let updatedAt: String?
     }
 
     struct Issue: Identifiable {
@@ -101,17 +146,70 @@ final class GitHubService {
                 let name: String?
                 let conclusion: String?
                 let html_url: String?
+                let path: String?
+                let status: String?
+                let updated_at: String?
             }
         }
         let decoded = try JSONDecoder().decode(RunsResponse.self, from: data)
         return (decoded.workflow_runs ?? []).prefix(limit).map { r in
-            WorkflowRun(
+            let conc = r.conclusion ?? (r.status == "completed" ? "unknown" : (r.status ?? "pending"))
+            return WorkflowRun(
                 id: r.id,
                 name: r.name ?? "Workflow",
-                conclusion: r.conclusion ?? "unknown",
-                htmlUrl: r.html_url ?? "https://github.com/\(repoOwner)/\(repoName)/actions"
+                conclusion: conc,
+                htmlUrl: r.html_url ?? "https://github.com/\(repoOwner)/\(repoName)/actions",
+                path: r.path,
+                status: r.status,
+                updatedAt: r.updated_at
             )
         }
+    }
+
+    func latestRunsByWorkflowStem(perPage: Int = 100) async throws -> [String: WorkflowRun] {
+        let runs = try await fetchWorkflowRuns(limit: perPage)
+        var best: [String: WorkflowRun] = [:]
+        for r in runs {
+            guard let path = r.path else { continue }
+            let stem = Self.workflowStem(from: path)
+            guard let existing = best[stem] else {
+                best[stem] = r
+                continue
+            }
+            if Self.runIsNewer(r, than: existing) {
+                best[stem] = r
+            }
+        }
+        return best
+    }
+
+    func ciHealthSummary(perPage: Int = 100) async throws -> CIHealthSummary {
+        let runs = try await fetchWorkflowRuns(limit: perPage)
+        var passing = 0, failing = 0, pending = 0
+        for r in runs {
+            let st = (r.status ?? "").lowercased()
+            if st == "completed" {
+                let c = r.conclusion.lowercased()
+                if c == "success" { passing += 1 }
+                else if c == "failure" { failing += 1 }
+                else { pending += 1 }
+            } else {
+                pending += 1
+            }
+        }
+        return CIHealthSummary(passing: passing, failing: failing, pending: pending, total: runs.count)
+    }
+
+    private static func workflowStem(from path: String) -> String {
+        let name = (path as NSString).lastPathComponent.lowercased()
+        if name.hasSuffix(".yml") { return String(name.dropLast(4)) }
+        if name.hasSuffix(".yaml") { return String(name.dropLast(5)) }
+        return name
+    }
+
+    private static func runIsNewer(_ a: WorkflowRun, than b: WorkflowRun) -> Bool {
+        guard let da = a.updatedAt, let db = b.updatedAt else { return a.id > b.id }
+        return da > db
     }
 
     func fetchProductionAlertIssues(limit: Int = 10) async throws -> [Issue] {

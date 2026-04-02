@@ -1,0 +1,173 @@
+{
+  "n": 1000,
+  "passed": 1000,
+  "failed": 0,
+  "overall_pass_rate": 1.0,
+  "overall_pass_rate_stderr": 0.0,
+  "pass_rate_by_format": {
+    "standard_book": 1.0,
+    "deep_book_4h": 1.0,
+    "short_book_30": 1.0,
+    "micro_book_15": 1.0,
+    "extended_book_2h": 1.0
+  },
+  "pass_rate_by_tier": {
+    "A": 1.0,
+    "B": 1.0,
+    "C": 1.0
+  },
+  "by_format": {
+    "standard_book": {
+      "pass": 415,
+      "fail": 0,
+      "total": 415
+    },
+    "deep_book_4h": {
+      "pass": 168,
+      "fail": 0,
+      "total": 168
+    },
+    "short_book_30": {
+      "pass": 333,
+      "fail": 0,
+      "total": 333
+    },
+    "micro_book_15": {
+      "pass": 3,
+      "fail": 0,
+      "total": 3
+    },
+    "extended_book_2h": {
+      "pass": 81,
+      "fail": 0,
+      "total": 81
+    }
+  },
+  "by_tier": {
+    "A": {
+      "pass": 505,
+      "fail": 0,
+      "total": 505
+    },
+    "B": {
+      "pass": 492,
+      "fail": 0,
+      "total": 492
+    },
+    "C": {
+      "pass": 3,
+      "fail": 0,
+      "total": 3
+    }
+  },
+  "best_combos": [
+    {
+      "format_id": "standard_book",
+      "tier": "A",
+      "pass_rate": 1.0,
+      "count": 169
+    },
+    {
+      "format_id": "deep_book_4h",
+      "tier": "A",
+      "pass_rate": 1.0,
+      "count": 168
+    },
+    {
+      "format_id": "short_book_30",
+      "tier": "B",
+      "pass_rate": 1.0,
+      "count": 165
+    },
+    {
+      "format_id": "micro_book_15",
+      "tier": "C",
+      "pass_rate": 1.0,
+      "count": 3
+    },
+    {
+      "format_id": "extended_book_2h",
+      "tier": "B",
+      "pass_rate": 1.0,
+      "count": 81
+    },
+    {
+      "format_id": "short_book_30",
+      "tier": "A",
+      "pass_rate": 1.0,
+      "count": 168
+    },
+    {
+      "format_id": "standard_book",
+      "tier": "B",
+      "pass_rate": 1.0,
+      "count": 246
+    }
+  ],
+  "worst_combos": [
+    {
+      "format_id": "standard_book",
+      "tier": "A",
+      "pass_rate": 1.0,
+      "count": 169
+    },
+    {
+      "format_id": "deep_book_4h",
+      "tier": "A",
+      "pass_rate": 1.0,
+      "count": 168
+    },
+    {
+      "format_id": "short_book_30",
+      "tier": "B",
+      "pass_rate": 1.0,
+      "count": 165
+    },
+    {
+      "format_id": "micro_book_15",
+      "tier": "C",
+      "pass_rate": 1.0,
+      "count": 3
+    },
+    {
+      "format_id": "extended_book_2h",
+      "tier": "B",
+      "pass_rate": 1.0,
+      "count": 81
+    },
+    {
+      "format_id": "short_book_30",
+      "tier": "A",
+      "pass_rate": 1.0,
+      "count": 168
+    },
+    {
+      "format_id": "standard_book",
+      "tier": "B",
+      "pass_rate": 1.0,
+      "count": 246
+    }
+  ],
+  "error_reasons": {},
+  "phase2_summary": {
+    "phase2_passed": 999,
+    "phase2_failed": 1,
+    "phase2_skipped": 0,
+    "waveform_failed": 1,
+    "arc_failed": 0,
+    "drift_stacks_checked": 99,
+    "drift_stacks_failed": 0,
+    "drift_failures": []
+  },
+  "phase3_summary": {
+    "phase3_passed": 1000,
+    "phase3_failed": 0,
+    "phase3_skipped": 0,
+    "phase3_negative_test_caught": 117
+  },
+  "phase2_pass_rate": 0.999,
+  "phase3_pass_rate": 1.0,
+  "phase2_n": 1000,
+  "phase3_n": 1000,
+  "phase3_negative_test_caught": 117
+}

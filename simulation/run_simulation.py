@@ -29,7 +29,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Phoenix V4.5 format simulation")
     ap.add_argument("--n", type=int, default=10, help="Number of books to simulate (default 10)")
     ap.add_argument("--seed", type=int, default=42, help="Random seed")
-    ap.add_argument("--pool", type=int, default=100, help="Mock pool size per atom type")
+    ap.add_argument("--pool", type=int, default=300, help="Mock pool size per atom type (raised from 100 to cover extended_book_2h and standard_book Tier B plans)")
     ap.add_argument("--phase2", action="store_true", help="Run Phase 2 (waveform, arc, drift) on Phase 1 results")
     ap.add_argument("--phase3", action="store_true", help="Run Phase 3 MVP (volatility, cognitive, consequence, reassurance) on synthetic chapter text")
     ap.add_argument("--analyze", action="store_true", help="Print detailed analysis and failure reasons")

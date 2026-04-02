@@ -32,6 +32,13 @@
 		A10000000000000000000017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000017 /* Assets.xcassets */; };
 		A10000000000000000000018 /* GovernanceReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000019 /* GovernanceReport.swift */; };
 		A10000000000000000000019 /* ContentCoverageReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000001A /* ContentCoverageReport.swift */; };
+		C10000000000000000000001 /* DashboardMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000000000000000000001 /* DashboardMetrics.swift */; };
+		C10000000000000000000002 /* MetricCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000000000000000000002 /* MetricCard.swift */; };
+		C10000000000000000000003 /* ManualReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000000000000000000003 /* ManualReviewView.swift */; };
+		C10000000000000000000004 /* CredentialStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000000000000000000004 /* CredentialStatusView.swift */; };
+		C10000000000000000000005 /* LocaleParityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000000000000000000005 /* LocaleParityView.swift */; };
+		C10000000000000000000006 /* VideoPublishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000000000000000000006 /* VideoPublishView.swift */; };
+		C10000000000000000000007 /* MLLoopMonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000000000000000000007 /* MLLoopMonitorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +68,13 @@
 		A20000000000000000000018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A20000000000000000000019 /* GovernanceReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GovernanceReport.swift; sourceTree = "<group>"; };
 		A2000000000000000000001A /* ContentCoverageReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCoverageReport.swift; sourceTree = "<group>"; };
+		C20000000000000000000001 /* DashboardMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardMetrics.swift; sourceTree = "<group>"; };
+		C20000000000000000000002 /* MetricCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricCard.swift; sourceTree = "<group>"; };
+		C20000000000000000000003 /* ManualReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualReviewView.swift; sourceTree = "<group>"; };
+		C20000000000000000000004 /* CredentialStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialStatusView.swift; sourceTree = "<group>"; };
+		C20000000000000000000005 /* LocaleParityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleParityView.swift; sourceTree = "<group>"; };
+		C20000000000000000000006 /* VideoPublishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPublishView.swift; sourceTree = "<group>"; };
+		C20000000000000000000007 /* MLLoopMonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLLoopMonitorView.swift; sourceTree = "<group>"; };
 		A30000000000000000000001 /* Phoenix Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Phoenix Control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -109,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				A20000000000000000000002 /* AppState.swift */,
+				C20000000000000000000001 /* DashboardMetrics.swift */,
 				A20000000000000000000003 /* ObservabilitySnapshot.swift */,
 				A20000000000000000000019 /* GovernanceReport.swift */,
 				A2000000000000000000001A /* ContentCoverageReport.swift */,
@@ -145,8 +160,13 @@
 				A2000000000000000000000D /* ObservabilityView.swift */,
 				A2000000000000000000000E /* GatesReleaseView.swift */,
 				A2000000000000000000000F /* PearlNewsView.swift */,
+				C20000000000000000000003 /* ManualReviewView.swift */,
 				A20000000000000000000010 /* TeacherView.swift */,
 				A20000000000000000000011 /* CIWorkflowsView.swift */,
+				C20000000000000000000004 /* CredentialStatusView.swift */,
+				C20000000000000000000006 /* VideoPublishView.swift */,
+				C20000000000000000000005 /* LocaleParityView.swift */,
+				C20000000000000000000007 /* MLLoopMonitorView.swift */,
 				A20000000000000000000012 /* DocsConfigView.swift */,
 				A50000000000000000000008 /* Components */,
 			);
@@ -156,6 +176,7 @@
 		A50000000000000000000008 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C20000000000000000000002 /* MetricCard.swift */,
 				A20000000000000000000013 /* LiveLogView.swift */,
 				A20000000000000000000014 /* StatusBadge.swift */,
 				A20000000000000000000015 /* ErrorStateView.swift */,
@@ -252,6 +273,13 @@
 				A10000000000000000000016 /* EvidenceLogTable.swift in Sources */,
 				A10000000000000000000018 /* GovernanceReport.swift in Sources */,
 				A10000000000000000000019 /* ContentCoverageReport.swift in Sources */,
+				C10000000000000000000001 /* DashboardMetrics.swift in Sources */,
+				C10000000000000000000002 /* MetricCard.swift in Sources */,
+				C10000000000000000000003 /* ManualReviewView.swift in Sources */,
+				C10000000000000000000004 /* CredentialStatusView.swift in Sources */,
+				C10000000000000000000005 /* LocaleParityView.swift in Sources */,
+				C10000000000000000000006 /* VideoPublishView.swift in Sources */,
+				C10000000000000000000007 /* MLLoopMonitorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
