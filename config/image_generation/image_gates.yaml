@@ -1,0 +1,36 @@
+# Image generation QC gate definitions.
+# Loaded by scripts/image_generation/image_qc.py
+gates:
+  - id: IMAGE.PROMPT.STRUCTURE
+    severity: BLOCKER
+    description: "Positive prompt must contain subject and quality tokens"
+
+  - id: IMAGE.PROMPT.TOKEN_BUDGET
+    severity: MAJOR
+    max_positive_tokens: 120
+    max_negative_tokens: 60
+    description: "Token count must be within FLUX model limits"
+
+  - id: IMAGE.OUTPUT.FILE_EXISTS
+    severity: BLOCKER
+    description: "Generated image file must exist on disk"
+
+  - id: IMAGE.OUTPUT.FORMAT
+    severity: BLOCKER
+    allowed_formats: [PNG, JPEG]
+    description: "Image must be valid PNG or JPEG"
+
+  - id: IMAGE.OUTPUT.MIN_FILE_SIZE
+    severity: MAJOR
+    min_bytes: 512
+    description: "Image file must exceed minimum byte size"
+
+  - id: IMAGE.OUTPUT.DIMENSIONS
+    severity: MAJOR
+    tolerance_px: 10
+    description: "Image dimensions must match expected within tolerance"
+
+  - id: IMAGE.AUTHOR_PIC.PROMPT_HAS_BIO
+    severity: MAJOR
+    min_bio_chars: 50
+    description: "Author pic prompt must incorporate bio content"
