@@ -839,7 +839,8 @@ def main() -> int:
             print(f"Arc/format role compatibility: {e}", file=sys.stderr)
         return 1
 
-    # Teacher Mode: mandatory pre-compile coverage gate (after arc + format expanded, before compile)
+    # Teacher Mode: pre-compile coverage gate (after arc + format expanded, before compile)
+    skip_gates = getattr(args, 'skip_quality_gates', False)
     if book_spec_for_compiler.get("teacher_mode"):
         from phoenix_v4.teacher.coverage_gate import run_coverage_gate, TeacherCoverageError
         from phoenix_v4.teacher.teacher_config import load_teacher_config
@@ -859,10 +860,13 @@ def main() -> int:
             (artifacts_dir / "teacher_coverage_report.json").write_text(
                 json.dumps(gap_report, indent=2), encoding="utf-8"
             )
-            print("Teacher coverage gate failed. See artifacts/teacher_coverage_report.json", file=sys.stderr)
-            raise TeacherCoverageError(
-                "Teacher coverage insufficient for required slots. See artifacts/teacher_coverage_report.json"
-            )
+            if skip_gates:
+                print("Teacher coverage gate WARN (skipped via --skip-quality-gates). See artifacts/teacher_coverage_report.json", file=sys.stderr)
+            else:
+                print("Teacher coverage gate failed. See artifacts/teacher_coverage_report.json", file=sys.stderr)
+                raise TeacherCoverageError(
+                    "Teacher coverage insufficient for required slots. See artifacts/teacher_coverage_report.json"
+                )
 
     # Stage 3: CompiledBook (Arc-First: arc required)
     # Teacher Mode: require_full_resolution=True so no placeholders are allowed (Gate A).
