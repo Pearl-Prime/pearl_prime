@@ -283,11 +283,10 @@ def main() -> int:
             "daily_text_audio_companion, crisis_cards, weekly_challenge_pack, faq_audiobook, myth_vs_mechanism, protocol_library"
         ),
     )
-    ap.add_argument(
-        "--disable-v4-freeze",
-        action="store_true",
-        help="Disable modular V4 freeze for this run and allow legacy structural/runtime format selection.",
-    )
+    # --disable-v4-freeze REMOVED (2026-04-02).
+    # V4 freeze is permanent. Pearl Prime (V4) only produces short therapeutic content.
+    # Legacy long-form books (F001-F013, 1hr-6hr) are Pearl Prime legacy, not V4.
+    # If you need legacy formats, use the legacy pipeline entry point, not run_pipeline.py.
     ap.add_argument("--input", default=None, help="YAML file with topic_id, persona_id, installment_number (Stage 2 input)")
     ap.add_argument("--arc", required=True, help="Path to Master Arc YAML (required; no arc = no compile)")
     ap.add_argument("--teacher", default=None, help="Teacher id for Teacher Mode (validated against teacher_persona_matrix)")
@@ -365,18 +364,29 @@ def main() -> int:
     from pearl_prime.modular_format_freeze import (
         apply_output_format_to_plan,
         load_freeze_settings,
+        reject_legacy_format,
         require_valid_output_format,
     )
     freeze_settings = load_freeze_settings()
-    freeze_enabled = bool(freeze_settings.enabled and not args.disable_v4_freeze)
+    freeze_enabled = bool(freeze_settings.enabled)  # V4 freeze is permanent — no bypass
 
     if freeze_enabled and (args.structural_format or args.runtime_format):
+        # Block legacy format flags entirely
         print(
-            "Error: --structural-format/--runtime-format are blocked while V4 freeze is enabled. "
-            "Use --output-format with modular formats.",
+            "Error: --structural-format/--runtime-format are blocked under V4 freeze. "
+            "Pearl Prime V4 only produces short therapeutic content. "
+            "Use --output-format with: " + ", ".join(sorted(freeze_settings.formats.keys())),
             file=sys.stderr,
         )
         return 1
+
+    # Double-check: reject any legacy long-form runtime even if it somehow gets through
+    if freeze_enabled and args.runtime_format:
+        try:
+            reject_legacy_format(args.runtime_format, freeze_settings)
+        except ValueError as e:
+            print(f"Error: {e}", file=sys.stderr)
+            return 1
 
     # Resolve input: CLI or YAML
     topic_id = args.topic

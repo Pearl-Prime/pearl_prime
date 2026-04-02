@@ -37,6 +37,35 @@ def allowed_output_formats(settings: FreezeSettings) -> list[str]:
     return sorted(settings.formats.keys())
 
 
+# Maximum runtime duration (minutes) allowed under V4 freeze.
+# Pearl Prime V4 = short therapeutic content only.
+# Long-form books (1hr+) are Pearl Prime legacy — use a different entry point.
+V4_MAX_RUNTIME_MINUTES = 60
+
+# Legacy runtime formats that are BLOCKED under V4 freeze.
+BLOCKED_LEGACY_RUNTIMES = {
+    "standard_book",      # 1hr, 12 chapters, 9-11K words
+    "extended_book_2h",   # 2hr, 16 chapters, ~20K words
+    "deep_book_4h",       # 4hr, 20 chapters, ~40K words
+    "deep_book_6h",       # 6hr, 24 chapters, ~54K words
+}
+
+
+def reject_legacy_format(runtime_format_id: str, settings: FreezeSettings) -> None:
+    """Raise if a legacy long-form format is requested while V4 freeze is active."""
+    if not settings.enabled:
+        return
+    rt = (runtime_format_id or "").strip()
+    if rt in BLOCKED_LEGACY_RUNTIMES:
+        allowed = ", ".join(allowed_output_formats(settings))
+        raise ValueError(
+            f"BLOCKED: '{rt}' is a legacy long-form format (1hr+). "
+            f"Pearl Prime V4 only produces short therapeutic content. "
+            f"Allowed V4 formats: {allowed}. "
+            f"Do NOT use --disable-v4-freeze (flag removed)."
+        )
+
+
 def require_valid_output_format(output_format_id: str, settings: FreezeSettings) -> dict[str, Any]:
     key = (output_format_id or "").strip()
     if key not in settings.formats:
