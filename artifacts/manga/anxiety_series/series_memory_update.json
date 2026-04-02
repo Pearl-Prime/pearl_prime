@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "series_memory_update",
+  "patches": [
+    {
+      "op": "append_fact",
+      "fact": {
+        "kind": "chapter_pipeline_completed",
+        "series_id": "anxiety_gen_alpha_01",
+        "chapter_id": "ch_01",
+        "arc_id": "gen_alpha_students_anxiety_spiral_F006"
+      }
+    }
+  ]
+}
