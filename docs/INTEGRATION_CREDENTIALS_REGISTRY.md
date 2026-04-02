@@ -37,15 +37,24 @@ This reads the registry below and reports which env vars are set vs missing.
 
 ### 1. Qwen / DashScope (Alibaba Cloud) — LLM
 
+> **⚠️ CRITICAL: Use the SINGAPORE region, NOT Beijing.**
+> The Beijing console (`bailian.console.alibabacloud.com/cn-beijing`) shows "Account abnormal" and "No API Key" — that is the WRONG region.
+> The correct console URL is: **`https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key`**
+> If the console opens in Beijing, click the region dropdown (top-right) and select **Singapore**.
+> The API base URL is the international endpoint: `https://dashscope-intl.aliyuncs.com/compatible-mode/v1`
+> Do NOT use the Beijing endpoint (`dashscope.aliyuncs.com`).
+
 | Field | Value |
 |-------|-------|
 | **Env vars** | `QWEN_API_KEY`, `QWEN_BASE_URL`, `QWEN_MODEL` |
 | **Alt env vars** | `DASHSCOPE_API_KEY`, `DASHSCOPE_BASE_URL`, `DASHSCOPE_MODEL` |
 | **Consumed by** | `pearl_news/pipeline/llm_expand.py`, `pearl_news/pipeline/slot_provider_qwen.py`, `scripts/research/run_research.py`, `scripts/localization/llm_client.py`, `scripts/localization/run_locale_batches.py`, `scripts/translate_atoms_all_locales_cloud.py` |
 | **GitHub workflows** | `research-pipeline-run.yml`, `pearl-news-fill-qwen.yml`, `translate-atoms-qwen-matrix.yml`, `translate-bestseller-atoms.yml`, `catalog-book-pipeline.yml`, `marketing-briefs-and-proposals.yml`, `marketing_continuous.yml`, `max-quality-catalog.yml` |
-| **How to obtain** | DashScope console: https://dashscope.console.aliyun.com/ — create API key under Access Key Management |
+| **How to obtain** | **Singapore Model Studio console:** https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key — click the 📋 copy icon next to the key (starts with `sk-`). **DO NOT use the Beijing console.** |
 | **Required vs optional** | Required for Pearl News, translation, research pipelines |
-| **Status** | Wired in CI and local scripts |
+| **Status** | Wired in CI and local Keychain |
+| **Local Keychain** | `security find-generic-password -s "phoenix-omega" -a "QWEN_API_KEY" -w` |
+| **Base URL** | `https://dashscope-intl.aliyuncs.com/compatible-mode/v1` (Singapore/international) |
 | **Detailed docs** | [docs/AGENT_QWEN_API_KEY_LANE.md](./AGENT_QWEN_API_KEY_LANE.md) |
 
 ### 2. Anthropic — LLM
@@ -357,31 +366,47 @@ Those files remain authoritative for their domain-specific setup procedures. Thi
 
 ---
 
-## Local development key setup (ONE-TIME)
+## Local development key setup
 
-For any key that's in GitHub Secrets but not on your local machine, run:
+### Keys currently stored in macOS Keychain (verified 2026-04-03)
 
-```bash
-# Go to the provider dashboard, copy the key, then:
-security add-generic-password -U -s "phoenix-omega" -a "<ENV_VAR_NAME>" -w "<paste key here>"
-```
+| Key | Keychain | GitHub Secrets | Where to get it |
+|-----|----------|---------------|-----------------|
+| `QWEN_API_KEY` | ✅ | ✅ | **Singapore** Model Studio: `https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key` — **NOT Beijing** |
+| `DASHSCOPE_API_KEY` | ✅ (same value as QWEN) | ❌ (uses QWEN fallback) | Same as QWEN_API_KEY |
+| `RUNCOMFY_API_KEY` | ✅ | ✅ | RunComfy profile: `https://www.runcomfy.com/profile` → API Tokens → Copy Token 1 |
+| `ELEVENLABS_API_KEY` | ✅ | ❌ | Recovered from `docs/11.txt` (gitignored). Also at: `https://elevenlabs.io/app/settings/api-keys` |
 
-Then load it in your shell:
+### Load all keys in your shell
 
-```bash
-export RUNCOMFY_API_KEY=$(security find-generic-password -s "phoenix-omega" -a "RUNCOMFY_API_KEY" -w 2>/dev/null)
-export QWEN_API_KEY=$(security find-generic-password -s "phoenix-omega" -a "QWEN_API_KEY" -w 2>/dev/null)
-```
-
-Or add to your `.zshrc`:
+Add to `.zshrc` or run before any local pipeline command:
 
 ```bash
 # Phoenix Omega credentials (from macOS Keychain)
-for key in RUNCOMFY_API_KEY QWEN_API_KEY ANTHROPIC_API_KEY ELEVENLABS_API_KEY; do
+for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY; do
   val=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
   [ -n "$val" ] && export $key="$val"
 done
 ```
 
+### Store a new key
+
+```bash
+security add-generic-password -U -s "phoenix-omega" -a "<ENV_VAR_NAME>" -w "<paste key here>"
+```
+
+### Check what's set vs missing
+
+```bash
+PYTHONPATH=. python3 scripts/ci/check_integration_env.py
+```
+
+### ⚠️ Common mistakes agents make
+
+1. **Qwen: Going to Beijing instead of Singapore.** The Beijing console shows "Account abnormal" and "No API Key". Always use: `https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key`
+2. **Putting keys only in GitHub Secrets but not locally.** Every key must be in BOTH Keychain AND GitHub Secrets. CI uses GitHub Secrets. Local dev uses Keychain.
+3. **Looking for keys in env vars instead of Keychain.** Keys are in Keychain, not in `.env` files. Load them with the shell snippet above.
+4. **ElevenLabs key file:** `docs/11.txt` is gitignored (contains the actual key). If missing, recover from Keychain: `security find-generic-password -s "phoenix-omega" -a "ELEVENLABS_API_KEY" -w`
+
 **If running in CI:** All keys are in GitHub Secrets. Use workflow dispatch.
-**If running locally:** Keys must be in Keychain or environment. Run `python3 scripts/ci/check_integration_env.py` to see what's missing.
+**If running locally:** Load from Keychain with the snippet above.
