@@ -58,16 +58,28 @@ scripts/ci/preflight_push.sh
 bash scripts/git/health_check.sh
 ```
 
-## Mandatory Pre-Merge Check
+## Automated PR Governance (Pearl_PM + Pearl_Architect gate)
 
-Run before merging ANY PR (in addition to preflight):
+Every PR to main is automatically reviewed by the governance CI workflow.
+It checks:
+- **Mass deletion** — blocks PRs deleting >50 files
+- **PR size** — warns on >200 files, blocks >500
+- **Subsystem scope** — warns if PR touches >3 subsystems
+- **Authority docs** — warns if subsystem authority docs are missing
+- **Drift patterns** — warns on duplicate specs, root-level files, etc.
+- **Workstream conflict** — warns if PR overlaps with active workstreams
+
+The review posts a comment on the PR with a pass/warn/block verdict.
+**PRs with BLOCKED status cannot be merged** (enforced by GitHub ruleset).
+
+### Manual pre-merge check (run locally before pushing)
 
 ```bash
 bash scripts/git/pre_merge_check.sh <PR_NUMBER>
+python3 scripts/ci/pr_governance_review.py
 ```
 
-This blocks merges that delete >50 files. NEVER bypass this check.
-If it blocks, ask the owner before proceeding.
+If either blocks, do NOT merge. Ask the owner.
 
 ## Golden Branch Pattern
 

@@ -13,40 +13,86 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check for mass deletions
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: PR Governance Review (Pearl_PM + Pearl_Architect)
         run: |
-          DELETED=$(git diff --name-status origin/main...HEAD | grep '^D' | wc -l)
-          ADDED=$(git diff --name-status origin/main...HEAD | grep '^A' | wc -l)
-          MODIFIED=$(git diff --name-status origin/main...HEAD | grep '^M' | wc -l)
-          TOTAL=$(git diff --name-only origin/main...HEAD | wc -l)
-          
-          echo "## Change Impact Summary" >> $GITHUB_STEP_SUMMARY
-          echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
-          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Files added | $ADDED |" >> $GITHUB_STEP_SUMMARY
-          echo "| Files modified | $MODIFIED |" >> $GITHUB_STEP_SUMMARY
-          echo "| Files deleted | $DELETED |" >> $GITHUB_STEP_SUMMARY
-          echo "| Total changed | $TOTAL |" >> $GITHUB_STEP_SUMMARY
-          
-          if [ "$DELETED" -gt 50 ]; then
-            echo ""
-            echo "::error::BLOCKED: This PR deletes $DELETED files. PRs that delete more than 50 files require manual review."
-            echo "::error::Review the full deletion list: git diff --name-status origin/main...HEAD | grep '^D'"
-            echo ""
-            echo "### ⛔ BLOCKED — Mass deletion detected" >> $GITHUB_STEP_SUMMARY
-            echo "This PR deletes **$DELETED files**. Threshold: 50." >> $GITHUB_STEP_SUMMARY
+          echo "## PR Governance Review" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Run the full governance check
+          OUTPUT=$(python3 scripts/ci/pr_governance_review.py 2>&1) || EXIT_CODE=$?
+          EXIT_CODE=${EXIT_CODE:-0}
+
+          echo "$OUTPUT"
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "$OUTPUT" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+          # Also output JSON for structured consumption
+          python3 scripts/ci/pr_governance_review.py --json > /tmp/governance_review.json 2>/dev/null || true
+
+          if [ -f /tmp/governance_review.json ]; then
+            STATUS=$(python3 -c "import json; print(json.load(open('/tmp/governance_review.json')).get('status','UNKNOWN'))")
+            BLOCKED=$(python3 -c "import json; print(json.load(open('/tmp/governance_review.json')).get('summary',{}).get('blocked',0))")
+            WARNINGS=$(python3 -c "import json; print(json.load(open('/tmp/governance_review.json')).get('summary',{}).get('warnings',0))")
+
             echo "" >> $GITHUB_STEP_SUMMARY
-            echo "Top deleted directories:" >> $GITHUB_STEP_SUMMARY
-            git diff --name-status origin/main...HEAD | grep '^D' | cut -f2 | cut -d/ -f1 | sort | uniq -c | sort -rn | head -10 | while read count dir; do
-              echo "- $dir: $count files" >> $GITHUB_STEP_SUMMARY
-            done
-            exit 1
+            echo "**Status: $STATUS** ($BLOCKED blocked, $WARNINGS warnings)" >> $GITHUB_STEP_SUMMARY
           fi
-          
-          if [ "$TOTAL" -gt 500 ]; then
-            echo "::warning::Large PR: $TOTAL files changed. Consider splitting into smaller PRs."
-            echo "### ⚠️ Large PR warning" >> $GITHUB_STEP_SUMMARY
-            echo "This PR changes **$TOTAL files**. Consider splitting." >> $GITHUB_STEP_SUMMARY
+
+          exit $EXIT_CODE
+
+      - name: Post review comment on PR
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -f /tmp/governance_review.json ]; then
+            STATUS=$(python3 -c "import json; print(json.load(open('/tmp/governance_review.json')).get('status','UNKNOWN'))")
+            BLOCKED=$(python3 -c "import json; print(json.load(open('/tmp/governance_review.json')).get('summary',{}).get('blocked',0))")
+            WARNINGS=$(python3 -c "import json; print(json.load(open('/tmp/governance_review.json')).get('summary',{}).get('warnings',0))")
+            PASSED=$(python3 -c "import json; print(json.load(open('/tmp/governance_review.json')).get('summary',{}).get('passed',0))")
+
+            if [ "$STATUS" = "BLOCKED" ]; then
+              ICON="⛔"
+              VERDICT="BLOCKED — do NOT merge"
+            elif [ "$STATUS" = "WARN" ]; then
+              ICON="⚠️"
+              VERDICT="APPROVED with $WARNINGS warning(s)"
+            else
+              ICON="✅"
+              VERDICT="APPROVED — all checks passed"
+            fi
+
+            BODY="$ICON **PR Governance Review** — $VERDICT
+
+| Check | Result |
+|-------|--------|"
+
+            # Parse each check from JSON
+            CHECKS=$(python3 -c "
+import json
+data = json.load(open('/tmp/governance_review.json'))
+icons = {'PASS': '✅', 'WARN': '⚠️', 'BLOCKED': '⛔'}
+for c in data.get('checks', []):
+    icon = icons.get(c['status'], '❓')
+    print(f'| {icon} {c[\"check\"]} | {c[\"message\"]} |')
+")
+            BODY="$BODY
+$CHECKS
+
+_Automated by Pearl_PM + Pearl_Architect governance gate_"
+
+            # Post as PR comment (find and update existing or create new)
+            PR_NUM=${{ github.event.pull_request.number }}
+            EXISTING=$(gh api repos/${{ github.repository }}/issues/${PR_NUM}/comments --jq '.[] | select(.body | contains("PR Governance Review")) | .id' 2>/dev/null | head -1)
+
+            if [ -n "$EXISTING" ]; then
+              gh api repos/${{ github.repository }}/issues/comments/${EXISTING} -X PATCH -f body="$BODY" 2>/dev/null || true
+            else
+              gh pr comment ${PR_NUM} --body "$BODY" 2>/dev/null || true
+            fi
           fi
-          
-          echo "✅ Change impact check passed ($DELETED deletions, $TOTAL total)"
