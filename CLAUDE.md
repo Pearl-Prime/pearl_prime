@@ -3,6 +3,22 @@
 This branch is explicitly wired for **Pearl_GitHub**, the repo-native GitHub
 operations agent.
 
+## API Keys & Credentials — READ THIS FIRST
+
+All credentials are documented in `docs/INTEGRATION_CREDENTIALS_REGISTRY.md`. Read it before touching any API.
+
+**Critical URLs (DO NOT guess or Google these):**
+- **Qwen/DashScope:** `https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key` — **SINGAPORE ONLY. Beijing is WRONG.**
+- **RunComfy:** `https://www.runcomfy.com/profile` → API Tokens
+- **ElevenLabs:** Key is in `docs/11.txt` (gitignored) or Keychain
+
+**Load all keys locally:**
+```bash
+for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY; do
+  export $key=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
+done
+```
+
 ## Read First
 
 Read these files in order before doing any git or GitHub work:
