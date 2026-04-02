@@ -1,0 +1,85 @@
+{
+  "score_date": "2026-03-29",
+  "scorer": "manual_et_scrape",
+  "note": "score_trends.py not yet built. Manual scoring against consumer_language_by_topic.yaml topic IDs. All 5 confirmed ET topics unchanged from 3/28. SerpApi blocked in sandbox — no Google Trends data today.",
+  "confirmed_topics": [
+    {
+      "topic": "somatic-therapy",
+      "et_volume": 110000,
+      "et_growth_pct": 102,
+      "matched_topic_ids": ["anxiety", "burnout", "grief", "somatic_healing"],
+      "topic_id_match_count": 4,
+      "signal_strength": "strong",
+      "fast_publish_candidate": true,
+      "delta_from_prev": "No change in headline metrics. Chart shows late-Mar rebound.",
+      "rationale": "Highest topic_id overlap (4 matches). +102% growth = doubling. Maps directly to somatic_healing topic_id and bridges into anxiety, burnout, grief. Consumer language alignment: 'my body holds all my stress', 'shaking and releasing things', 'nervous system is fried'. Bridge language ready."
+    },
+    {
+      "topic": "breathwork",
+      "et_volume": 60500,
+      "et_growth_pct": 75,
+      "matched_topic_ids": ["anxiety", "sleep_anxiety", "burnout", "somatic_healing"],
+      "topic_id_match_count": 4,
+      "signal_strength": "strong",
+      "fast_publish_candidate": true,
+      "delta_from_prev": "No change in headline metrics. Chart shows uptick from mid-Mar dip.",
+      "rationale": "4 topic_id matches like somatic-therapy. +75% growth solid. Natural pairing with somatic-therapy content. Consumer language: 'can't breathe right because of stress', 'my nervous system is fried'. Trending upward again after dip."
+    },
+    {
+      "topic": "emdr",
+      "et_volume": 450000,
+      "et_growth_pct": 37,
+      "matched_topic_ids": ["anxiety", "overthinking", "grief"],
+      "topic_id_match_count": 3,
+      "signal_strength": "mature_steady",
+      "fast_publish_candidate": false,
+      "delta_from_prev": "No change. Chart shows late-Mar uptick approaching prior highs.",
+      "rationale": "Highest volume of all tracked topics. Growth slowing (+37%) = mature topic. Good evergreen content target. Maps to anxiety, overthinking, grief. Not a spike — no urgency."
+    },
+    {
+      "topic": "rosebud-ai",
+      "et_volume": 49500,
+      "et_growth_pct": 1243,
+      "matched_topic_ids": ["overthinking", "anxiety"],
+      "topic_id_match_count": 2,
+      "signal_strength": "explosive_spike",
+      "fast_publish_candidate": false,
+      "delta_from_prev": "No change. Sustained high plateau.",
+      "rationale": "Explosive +1243% growth but this is a specific AI product (journaling app), not a therapy modality. Only 2 topic_id matches. Competitor signal — indicates consumer appetite for AI-guided self-reflection. Content angle: 'AI journaling for overthinkers' positioned with Phoenix bridge language. Monitor, don't chase the brand name."
+    },
+    {
+      "topic": "ketamine-therapy",
+      "et_volume": 201000,
+      "et_growth_pct": 74,
+      "matched_topic_ids": ["grief", "burnout"],
+      "topic_id_match_count": 2,
+      "signal_strength": "high_volume_risky",
+      "fast_publish_candidate": false,
+      "delta_from_prev": "No change. Stable post-spike plateau.",
+      "rationale": "High volume (201K) but only 2 topic_id matches. Platform risk: medical content triggers. Bridge language approach ONLY — no clinical claims. Not a fast-publish target due to compliance risk."
+    }
+  ],
+  "discovery_scan": {
+    "new_topics_found": 0,
+    "pages_scanned": ["explodingtopics.com/health-topics", "explodingtopics.com/lifestyle-topics"],
+    "note": "No new self-help/wellness/therapy/mental health topics with >1000% growth discovered. Health page: PDRN products, Retatrutide, AI Agentic, OpenEvidence, Snapcalorie, body sculpting. Lifestyle page: consumer products, pet anxiety supplements. Serene Herbs (+2767%) re-confirmed — product signal only."
+  },
+  "fast_publish_candidates": ["somatic-therapy", "breathwork"],
+  "watch_list_updates": [
+    "rosebud-ai remains explosive at sustained ~49.5K plateau — monitor for content angle opportunity",
+    "emdr showing late-Mar uptick — revisit if it breaks above 484K"
+  ],
+  "pipeline_gaps": [
+    "daily_scrape_runner.py does not exist yet in scripts/feeds/",
+    "score_trends.py does not exist yet in scripts/feeds/",
+    "RSS feed pull (6 feeds) not automated — no script available",
+    "SerpApi blocked in sandbox — 403 tunnel error. 0/245 budget used for March. Need non-sandboxed execution."
+  ],
+  "serpapi_budget": {
+    "month": "2026-03",
+    "used": 0,
+    "hard_stop": 245,
+    "remaining": 245,
+    "note": "All 6 batches (25 keywords, tiers 1-4 incl Sunday tier4 emerging) failed due to sandbox network restriction."
+  }
+}

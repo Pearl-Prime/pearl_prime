@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/chapter_script_writer_handoff.schema.json",
+  "allOf": [
+    { "$ref": "manga_common.schema.json#/$defs/artifact_base" },
+    {
+      "type": "object",
+      "required": ["artifact_type", "pages"],
+      "properties": {
+        "artifact_type": { "const": "chapter_script_writer_handoff" },
+        "series_id": { "type": "string" },
+        "chapter_id": { "type": "string" },
+        "pages": { "type": "array", "items": { "type": "object" } }
+      }
+    }
+  ]
+}

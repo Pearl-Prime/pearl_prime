@@ -1,0 +1,127 @@
+# Experience Layer Defaults — maps existing planning keys to experience dimensions.
+# Authority: specs/EXPERIENCE_LAYER_ANTI_SPAM_SPEC.md §4.1
+# Resolution priority: explicit override > these defaults > hardcoded fallback.
+
+schema_version: 1
+
+experience_defaults:
+
+  # Engine → delivery_experience + engagement_depth
+  by_engine:
+    somatic_exercise:
+      delivery_experience: exercise_workbook
+      engagement_depth: intensive
+    narrative_transformation:
+      delivery_experience: narrative_journey
+      engagement_depth: moderate
+    practical_system:
+      delivery_experience: guided_program
+      engagement_depth: moderate
+    spiritual_reflection:
+      delivery_experience: audio_immersion
+      engagement_depth: light
+    rational_framework:
+      delivery_experience: reference_toolkit
+      engagement_depth: moderate
+    shame:
+      delivery_experience: narrative_journey
+      engagement_depth: intensive
+    # Engines found in full_catalog/candidates_compiled plans:
+    comparison:
+      delivery_experience: reference_toolkit
+      engagement_depth: moderate
+    grief:
+      delivery_experience: narrative_journey
+      engagement_depth: moderate
+    false_alarm:
+      delivery_experience: guided_program
+      engagement_depth: moderate
+    overwhelm:
+      delivery_experience: exercise_workbook
+      engagement_depth: intensive
+    spiral:
+      delivery_experience: narrative_journey
+      engagement_depth: intensive
+    watcher:
+      delivery_experience: reference_toolkit
+      engagement_depth: light
+
+  # Topic → reader_intent + outcome_type + perceived_positioning
+  # Persona can modify these; this is the soft default.
+  by_topic:
+    anxiety:
+      reader_intent: calm_down
+      outcome_type: emotional_shift
+      perceived_positioning: quick_fix
+    overthinking:
+      reader_intent: understand_self
+      outcome_type: cognitive_clarity
+      perceived_positioning: reflective_insight
+    burnout:
+      reader_intent: calm_down
+      outcome_type: behavioral_change
+      perceived_positioning: practical_system
+    productivity:
+      reader_intent: build_skill
+      outcome_type: skill_acquired
+      perceived_positioning: practical_system
+    grief:
+      reader_intent: find_meaning
+      outcome_type: worldview_expanded
+      perceived_positioning: narrative_companion
+    relationships:
+      reader_intent: understand_self
+      outcome_type: behavioral_change
+      perceived_positioning: reflective_insight
+    shame:
+      reader_intent: understand_self
+      outcome_type: emotional_shift
+      perceived_positioning: deep_work
+    discipline:
+      reader_intent: build_skill
+      outcome_type: behavioral_change
+      perceived_positioning: practical_system
+    presence:
+      reader_intent: deepen_practice
+      outcome_type: worldview_expanded
+      perceived_positioning: spiritual_path
+    identity:
+      reader_intent: shift_identity
+      outcome_type: worldview_expanded
+      perceived_positioning: deep_work
+    sleep:
+      reader_intent: calm_down
+      outcome_type: emotional_shift
+      perceived_positioning: quick_fix
+    anger:
+      reader_intent: understand_self
+      outcome_type: behavioral_change
+      perceived_positioning: deep_work
+
+  # Arc chapter count → pacing_model + transformation_speed
+  by_arc_chapter_count:
+    short:     # 3–5 chapters
+      pacing_model: single_sitting
+      transformation_speed: immediate
+    medium:    # 6–10 chapters
+      pacing_model: multi_day
+      transformation_speed: gradual
+    long:      # 11+ chapters
+      pacing_model: extended_program
+      transformation_speed: long_arc
+
+  # Arc chapter count thresholds
+  arc_chapter_thresholds:
+    short_max: 5
+    medium_max: 10
+    # long = anything above medium_max
+
+  # Hardcoded fallback (when no engine/topic/arc match)
+  fallback:
+    delivery_experience: passive_reading
+    reader_intent: understand_self
+    pacing_model: single_sitting
+    outcome_type: cognitive_clarity
+    engagement_depth: moderate
+    transformation_speed: gradual
+    perceived_positioning: reflective_insight

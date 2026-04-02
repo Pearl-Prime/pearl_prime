@@ -1,0 +1,16 @@
+# Page/panel layout enums (manga). Align with specs when tightening schemas.
+
+page_type:
+  - standard
+  - splash
+  - double_spread
+  - silent
+
+panel_type:
+  - standard
+  - silent
+
+reading_direction:
+  - rtl
+  - ltr
+  - vertical_scroll

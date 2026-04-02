@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/series_memory.schema.json",
+  "allOf": [
+    { "$ref": "manga_common.schema.json#/$defs/artifact_base" },
+    {
+      "type": "object",
+      "required": ["artifact_type", "facts"],
+      "properties": {
+        "artifact_type": { "const": "series_memory" },
+        "facts": { "type": "array", "items": { "type": "object" } },
+        "forward_expectations": { "type": "array", "items": { "type": "object" } }
+      }
+    }
+  ]
+}

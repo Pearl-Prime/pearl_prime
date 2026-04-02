@@ -1,0 +1,445 @@
+# Series templates for Stage 1 (Catalog Planner).
+# Links domain → series → angles. Authoritative format IDs live in Canonical Spec Part 2.
+# All series have non-empty angles (required for naming engine; see del_intake_planner).
+
+series:
+  # ─── ANXIETY CLUSTER ──────────────────────────────────────────────────────
+
+  social_anxiety_arc:
+    domain: anxiety_cluster
+    description: "Social interaction anxiety patterns"
+    series_title: "The Room Full of People"
+    series_subtitle: "How to Show Up When Every Room Feels Like a Test"
+    search_keywords:
+      - social anxiety
+      - social phobia
+      - fear of people
+    persona_affinity:
+      high:
+        - nyc_exec
+        - nyc_executives
+        - gen_z_la
+        - healthcare_worker
+      medium:
+        - burned_out_professional
+    target_installments: 8
+    angles:
+      - at_work
+      - on_dates
+      - public_speaking
+      - at_parties
+      - online
+      - with_authority_figures
+      - in_new_groups
+      - after_conflict
+
+  panic_response_arc:
+    domain: anxiety_cluster
+    description: "Acute panic and anticipatory anxiety patterns"
+    series_title: "The False Emergency"
+    series_subtitle: "What to Do When Your Body Screams Danger and Nothing Is Wrong"
+    search_keywords:
+      - panic attacks
+      - panic disorder
+      - anxiety attacks
+    persona_affinity:
+      high:
+        - acute_anxiety_sufferer
+        - gen_z_la
+      medium:
+        - healthcare_worker
+        - burned_out_professional
+    target_installments: 6
+    angles:
+      - at_night
+      - while_driving
+      - in_public
+      - at_work
+      - physical_symptoms
+      - anticipatory
+
+  # ─── GRIEF CLUSTER ────────────────────────────────────────────────────────
+
+  acute_loss_arc:
+    domain: grief_cluster
+    description: "Loss, mourning, and acute grief patterns"
+    series_title: "The Absence"
+    series_subtitle: "Living with Loss When the World Keeps Moving"
+    search_keywords:
+      - grief
+      - coping with death
+      - loss and healing
+    persona_affinity:
+      high:
+        - bereaved_adult
+      medium:
+        - burned_out_professional
+        - healthcare_worker
+    target_installments: 6
+    angles:
+      - sudden_loss
+      - long_illness_loss
+      - loss_of_parent
+      - loss_of_partner
+      - loss_of_child
+      - grieving_alone
+
+  ambiguous_loss_arc:
+    domain: grief_cluster
+    description: "Ambiguous loss, disenfranchised grief, living loss"
+    series_title: "Grieving Someone Still Here"
+    series_subtitle: "When Loss Has No Funeral and No One Knows You Are Mourning"
+    search_keywords:
+      - ambiguous loss
+      - disenfranchised grief
+      - grieving someone still alive
+    persona_affinity:
+      high:
+        - bereaved_adult
+      medium:
+        - relationship_struggler
+        - life_transition_navigator
+    target_installments: 5
+    angles:
+      - estranged_family
+      - dementia_loss
+      - relationship_ending
+      - pregnancy_loss
+      - identity_loss
+
+  # ─── SHAME CLUSTER ────────────────────────────────────────────────────────
+
+  social_shame_arc:
+    domain: shame_cluster
+    description: "Shame in professional and social contexts"
+    series_title: "The Thing You Hide at Work"
+    series_subtitle: "What Shame Does in Professional Life and How to Unclench"
+    search_keywords:
+      - imposter syndrome
+      - shame at work
+      - fear of exposure
+    persona_affinity:
+      high:
+        - nyc_exec
+        - nyc_executives
+        - self_doubting_competent
+      medium:
+        - gen_z_la
+        - burned_out_professional
+    target_installments: 6
+    angles:
+      - imposter_at_work
+      - after_public_mistake
+      - fear_of_promotion
+      - hiding_struggle
+      - comparison_trap
+      - first_generation_shame
+
+  body_shame_arc:
+    domain: shame_cluster
+    description: "Body shame and physical self-consciousness"
+    series_title: "The Body You Apologize For"
+    series_subtitle: "Releasing the Shame That Lives in How You See Yourself"
+    search_keywords:
+      - body shame
+      - body image
+      - self-consciousness about body
+    persona_affinity:
+      high:
+        - gen_z_la
+        - trauma_aware_healer
+      medium:
+        - anxious_insomniac
+    target_installments: 5
+    angles:
+      - in_professional_settings
+      - in_intimate_relationships
+      - in_health_contexts
+      - on_social_media
+      - after_body_change
+
+  # ─── TOPIC-BASED SERIES (engine-agnostic, for full catalog) ───────────────
+  # These match topic_id values used by generate_full_catalog.py.
+  # The naming engine falls back to series_id = topic_id when no
+  # explicit series is assigned. These entries ensure proper SEO keywords
+  # instead of raw engine names in titles.
+  #
+  # Added 2026-03-19: series_title + series_subtitle fields for reader-facing
+  # series naming. Per MARKETING_ANTI_SPAM_ALIGNMENT_PLAN §6: each series gets
+  # a human-readable title and subtitle, not just an internal series_id.
+  # Pipeline wiring (run_pipeline.py) resolves series_name_runtime from these.
+
+  anxiety:
+    domain: anxiety_cluster
+    description: "General anxiety patterns and nervous system regulation"
+    series_title: "The Alarm Is Lying"
+    series_subtitle: "Paths Through the Noise Your Nervous System Made"
+    # series_subtitle_mode: controls subtitle treatment for ALL books in this series.
+    # none = punchy standalone titles, short = colon-joined tagline, long = separate subtitle field.
+    # When absent, mode is derived deterministically from series_id + brand strategy.
+    # NOTE: When --location is used, mode should allow subtitle so both engine angle
+    # AND location can appear. Use "none" only for non-location runs.
+    series_subtitle_mode: long
+    search_keywords:
+      - anxiety relief
+      - calm anxious mind
+      - nervous system regulation
+    persona_affinity:
+      high: [gen_z_professionals, corporate_managers, entrepreneurs]
+      medium: [healthcare_rns, working_parents]
+    target_installments: 8
+    angles:
+      - racing_thoughts
+      - physical_symptoms
+      - anticipatory_dread
+      - nighttime_anxiety
+      - workplace_anxiety
+      - social_situations
+      - decision_paralysis
+      - chronic_worry
+
+  overthinking:
+    domain: cognitive_cluster
+    description: "Rumination, mental loops, and cognitive overprocessing"
+    series_title: "The Thought That Won't Leave"
+    series_subtitle: "Breaking the Loop Between Your Mind and Your Peace"
+    search_keywords:
+      - stop overthinking
+      - quiet racing mind
+      - mental clarity
+    persona_affinity:
+      high: [gen_z_professionals, corporate_managers]
+      medium: [entrepreneurs, first_responders]
+    target_installments: 7
+    angles:
+      - late_night_spirals
+      - analysis_paralysis
+      - replaying_conversations
+      - catastrophizing
+      - perfectionism_loops
+      - what_if_thinking
+      - decision_fatigue
+
+  burnout:
+    domain: energy_cluster
+    description: "Professional exhaustion, depletion, and recovery"
+    series_title: "After the Flame"
+    series_subtitle: "Rebuilding When You Have Nothing Left to Give"
+    search_keywords:
+      - burnout recovery
+      - work exhaustion
+      - professional fatigue
+    persona_affinity:
+      high: [entrepreneurs, healthcare_rns, corporate_managers]
+      medium: [working_parents, gen_z_professionals]
+    target_installments: 6
+    angles:
+      - career_disillusionment
+      - compassion_depletion
+      - chronic_overwork
+      - identity_beyond_job
+      - energy_restoration
+      - setting_limits
+
+  boundaries:
+    domain: relational_cluster
+    description: "Establishing and maintaining personal boundaries"
+    series_title: "The Line You Never Drew"
+    series_subtitle: "Learning to Protect What Matters Without Losing Who You Are"
+    search_keywords:
+      - setting boundaries
+      - saying no
+      - healthy boundaries
+    persona_affinity:
+      high: [working_parents, gen_z_professionals, healthcare_rns]
+      medium: [corporate_managers, entrepreneurs]
+    target_installments: 6
+    angles:
+      - with_family
+      - at_work
+      - in_friendships
+      - with_yourself
+      - after_people_pleasing
+      - when_guilt_follows
+
+  depression:
+    domain: mood_cluster
+    description: "Low mood, emotional flatness, and motivation loss"
+    series_title: "The Weight Without a Name"
+    series_subtitle: "Finding Movement When Everything Has Gone Still"
+    search_keywords:
+      - overcoming depression
+      - lifting low mood
+      - finding motivation again
+    persona_affinity:
+      high: [corporate_managers, gen_z_professionals]
+      medium: [working_parents, first_responders]
+    target_installments: 6
+    angles:
+      - morning_heaviness
+      - functional_depression
+      - loss_of_interest
+      - emotional_numbness
+      - isolation_patterns
+      - small_steps_forward
+
+  self_worth:
+    domain: identity_cluster
+    description: "Self-value, inner critic, and worthiness patterns"
+    series_title: "The Voice That Says Not Enough"
+    series_subtitle: "Rebuilding Worth from the Inside When Nothing External Sticks"
+    search_keywords:
+      - building self worth
+      - overcoming self doubt
+      - knowing your value
+    persona_affinity:
+      high: [gen_z_professionals, gen_alpha_students]
+      medium: [working_parents, first_responders]
+    target_installments: 6
+    angles:
+      - inner_critic
+      - achievement_dependency
+      - comparison_and_worth
+      - worthiness_in_relationships
+      - reclaiming_identity
+      - quiet_confidence
+
+  imposter_syndrome:
+    domain: identity_cluster
+    description: "Feeling like a fraud in professional and personal life"
+    series_title: "The Seat You Earned"
+    series_subtitle: "How to Stop Waiting to Be Found Out and Start Owning Your Place"
+    search_keywords:
+      - imposter syndrome
+      - feeling like a fraud
+      - professional self doubt
+    persona_affinity:
+      high: [first_responders, gen_z_professionals, corporate_managers]
+      medium: [entrepreneurs, healthcare_rns]
+    target_installments: 5
+    angles:
+      - new_role_panic
+      - high_achiever_doubt
+      - expertise_questioning
+      - visibility_fear
+      - owning_your_seat
+
+  financial_anxiety:
+    domain: practical_cluster
+    description: "Money stress, financial worry, and economic uncertainty"
+    series_title: "The Number in Your Head"
+    series_subtitle: "Untangling the Anxiety That Lives in Your Bank Account"
+    search_keywords:
+      - financial anxiety
+      - money stress relief
+      - financial worry
+    persona_affinity:
+      high: [gen_z_professionals]
+      medium: [entrepreneurs, working_parents]
+    target_installments: 5
+    angles:
+      - debt_overwhelm
+      - income_uncertainty
+      - spending_guilt
+      - comparison_spending
+      - building_security
+
+  financial_stress:
+    domain: practical_cluster
+    description: "Work-related financial pressure and economic strain"
+    series_title: "The Paycheck Pressure"
+    series_subtitle: "Finding Calm When Money Is the Thing That Never Stops"
+    search_keywords:
+      - financial stress management
+      - money pressure
+      - economic anxiety
+    persona_affinity:
+      high: [healthcare_rns]
+      medium: [working_parents, gen_z_professionals]
+    target_installments: 5
+    angles:
+      - living_paycheck
+      - unexpected_expenses
+      - career_income_gap
+      - family_financial_burden
+      - practical_money_calm
+
+  sleep_anxiety:
+    domain: anxiety_cluster
+    description: "Sleep-related anxiety, insomnia, and nighttime worry"
+    series_title: "The 3am Mind"
+    series_subtitle: "How to Quiet the Voice That Wakes You and Finally Rest"
+    search_keywords:
+      - sleep anxiety
+      - insomnia relief
+      - calm mind at bedtime
+    persona_affinity:
+      high: [entrepreneurs, corporate_managers]
+      medium: [healthcare_rns, gen_z_professionals]
+    target_installments: 5
+    angles:
+      - racing_mind_at_night
+      - performance_anxiety_sleep
+      - waking_in_panic
+      - bedtime_dread
+      - sleep_routine_reset
+
+  compassion_fatigue:
+    domain: energy_cluster
+    description: "Empathy exhaustion in caregiving and helping roles"
+    series_title: "The Cost of Caring"
+    series_subtitle: "What Happens When the Person Who Holds Everyone Falls Apart"
+    search_keywords:
+      - compassion fatigue
+      - caregiver burnout
+      - empathy exhaustion
+    persona_affinity:
+      high: [working_parents, healthcare_rns]
+      medium: [gen_alpha_students, first_responders]
+    target_installments: 5
+    angles:
+      - when_caring_hurts
+      - emotional_depletion
+      - guilt_of_pulling_back
+      - refilling_your_cup
+      - sustainable_caring
+
+  courage:
+    domain: growth_cluster
+    description: "Finding courage in fear, risk-taking, and bold action"
+    series_title: "The Thing You Won't Say"
+    series_subtitle: "Finding the Courage to Move When Every Part of You Says Stay"
+    search_keywords:
+      - building courage
+      - facing fear
+      - brave action
+    persona_affinity:
+      high: [gen_x_sandwich, first_responders]
+      medium: [gen_z_professionals, entrepreneurs]
+    target_installments: 5
+    angles:
+      - speaking_up
+      - career_risk
+      - difficult_conversations
+      - standing_alone
+      - courage_after_failure
+
+  somatic_healing:
+    domain: body_cluster
+    description: "Body-based healing, stored tension, and physical release"
+    series_title: "What the Body Remembers"
+    series_subtitle: "Releasing What Words Cannot Reach Through the Nervous System"
+    search_keywords:
+      - somatic healing
+      - body tension release
+      - nervous system reset
+    persona_affinity:
+      high: [gen_x_sandwich]
+      medium: [healthcare_rns, working_parents]
+    target_installments: 5
+    angles:
+      - stored_trauma
+      - chronic_tension
+      - breath_and_body
+      - movement_as_healing
+      - body_awareness

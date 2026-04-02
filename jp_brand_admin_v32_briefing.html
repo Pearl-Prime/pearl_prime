@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — Japan Brand Admin V3.2 Briefing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f9fafb;--white:#fff;--card:#f8f8fa;--border:#e5e7eb;--accent:#7c3aed;--al:#ede9fe;--ad:#5b21b6;--red:#dc2626;--rl:#fef2f2;--green:#059669;--gl:#ecfdf5;--gold:#d97706;--gol:#fffbeb;--blue:#2563eb;--bl:#eff6ff;--orange:#ea580c;--ol:#fff7ed;--text:#111827;--muted:#6b7280;--light:#9ca3af;--r:16px;--rs:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.hero{text-align:center;padding:60px 24px 36px;background:linear-gradient(180deg,#f3f4f6,var(--bg));border-bottom:1px solid var(--border)}
+.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:6px;background:linear-gradient(135deg,#5b21b6,#7c3aed,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero .jp{font-family:'Noto Sans JP',sans-serif;font-size:1.1rem;font-weight:500;color:var(--muted);margin-bottom:14px}
+.hero p{font-size:.92rem;color:var(--muted);max-width:580px;margin:0 auto}
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.badge{display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1px solid var(--border);padding:5px 12px;border-radius:999px;font-size:.75rem;color:var(--muted)}
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.dot-g{background:var(--green)}.dot-p{background:var(--accent)}.dot-r{background:var(--red)}
+.mx{max-width:940px;margin:0 auto;padding:0 20px}
+.tn{position:sticky;top:0;background:var(--white);border-bottom:1px solid var(--border);z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tn-inner{max-width:940px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+.tn-inner::-webkit-scrollbar{display:none}
+.tb{padding:11px 10px;font-size:.72rem;font-weight:500;color:var(--muted);border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:.2s}
+.tb:hover{color:var(--text);border-bottom-color:var(--border)}
+.tb.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tp{display:none;padding:44px 0 36px}
+.tp.on{display:block;animation:fu .35s ease}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.sl{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;color:var(--accent);font-weight:700;margin-bottom:6px}
+h2{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+.jp-sub{font-family:'Noto Sans JP',sans-serif;font-size:.88rem;color:var(--muted);margin-bottom:14px}
+h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.desc{color:var(--muted);font-size:.88rem;max-width:660px;margin-bottom:18px;line-height:1.65}
+.ssg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0}
+.ss{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.ss .big{font-size:1.4rem;font-weight:800;margin-bottom:2px}
+.ss .lbl{font-size:.75rem;color:var(--muted)}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.fc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center;transition:.25s}
+.fc:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08)}
+.fi{width:40px;height:40px;border-radius:10px;background:var(--al);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.2rem}
+.fs{font-size:.85rem;font-weight:700;margin-bottom:4px}
+.fc p{font-size:.75rem;color:var(--muted);line-height:1.5}
+/* Manga grid */
+.mg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.mc2{background:var(--white);border:2px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:.2s}
+.mc2:hover{border-color:var(--accent);box-shadow:0 3px 10px rgba(124,58,237,.08);transform:translateY(-2px)}
+.mc2.on{border-color:var(--accent)}
+.mp{height:80px;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+.mi{padding:12px}
+.mi h4{font-size:.8rem;font-weight:700;margin-bottom:1px}
+.mi .jpn{font-family:'Noto Sans JP';font-size:.68rem;color:var(--light);margin-bottom:4px}
+.mi p{font-size:.68rem;color:var(--muted);margin:0}
+/* Feedback */
+.fb{background:var(--white);border:2px solid var(--accent);border-radius:var(--r);padding:24px;margin-top:14px;display:none;animation:fu .35s ease}
+.fb.on{display:block}
+.fb-h{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:700;margin-bottom:14px}
+.fb-g{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fb-c h5{font-size:.68rem;color:var(--light);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;font-weight:600}
+.fb-c p{font-size:.82rem;color:var(--text);line-height:1.6;margin:0}
+.fb-s{background:var(--card);border-radius:var(--rs);padding:12px 14px;margin-top:10px}
+.fb-s .lbl{font-size:.62rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.fb-s p{font-size:.8rem;color:var(--muted);font-style:italic;margin:0}
+/* Panel layout */
+.pg2{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:14px 0}
+.pc2{background:var(--white);border:1px solid var(--border);border-radius:var(--rs);padding:10px 6px;text-align:center}
+.pc2 .pe{font-size:1.2rem;margin-bottom:4px}
+.pc2 .pl2{font-size:.6rem;font-weight:700;color:var(--accent);text-transform:uppercase}
+.pc2 .pt2{font-size:.56rem;color:var(--light);margin-top:2px}
+/* System cards */
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.sc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px;cursor:pointer;transition:.25s}
+.sc:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08)}
+.sc.ex{grid-column:span 2;border-color:var(--accent)}
+.sc .st2{display:inline-block;font-size:.6rem;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.sc h4{font-size:.88rem;font-weight:700;margin-bottom:2px}
+.sc .jpn{font-family:'Noto Sans JP';font-size:.75rem;color:var(--light);margin-bottom:4px}
+.sc .out{font-size:.78rem;color:var(--green);font-weight:600}
+.sc .det{display:none;margin-top:14px}
+.sc.ex .det{display:block}
+.ba{display:grid;grid-template-columns:1fr 30px 1fr;gap:8px;align-items:start}
+.ba-b{background:var(--card);border-radius:var(--rs);padding:12px}
+.ba-b.bef{border-left:3px solid var(--red)}
+.ba-b.aft{border-left:3px solid var(--green)}
+.ba-l{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.ba-a{text-align:center;color:var(--accent);font-size:1.2rem;align-self:center}
+/* Culture cards */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.cc3{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px}
+.cc3 h4{font-size:.84rem;font-weight:700;margin-bottom:2px}
+.cc3 .jpn{font-family:'Noto Sans JP';font-size:.68rem;color:var(--light);margin-bottom:6px}
+.cc3 p{font-size:.75rem;color:var(--muted);margin:0;line-height:1.5}
+/* Platform list */
+.rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.rc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:14px;display:flex;gap:10px;align-items:flex-start;transition:.2s}
+.rc:hover{border-color:var(--accent)}
+.ri{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
+.rc h4{font-size:.8rem;font-weight:600;margin-bottom:1px}
+.rc p{font-size:.7rem;color:var(--muted);line-height:1.4}
+.nb{margin-top:28px;text-align:center}
+.nbtn{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;padding:11px 26px;border-radius:13px;font-size:.85rem;font-weight:600;border:none;cursor:pointer;box-shadow:0 5px 16px rgba(124,58,237,.2);transition:.2s;text-decoration:none}
+.nbtn:hover{background:var(--ad);transform:translateY(-1px)}
+.back{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600}
+.back:hover{color:var(--ad)}
+.ng{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.nc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-decoration:none;color:var(--text);transition:.25s;display:block}
+.nc:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08);transform:translateY(-2px)}
+.nc h4{font-size:.88rem;font-weight:700;margin-bottom:3px}
+.nc p{font-size:.75rem;color:var(--muted);margin:0 0 8px}
+.nc .arr{font-size:.78rem;color:var(--accent);font-weight:600}
+.foot{background:linear-gradient(135deg,var(--accent),#6d28d9,#581c87);padding:28px 20px;text-align:center;color:#fff;margin-top:36px}
+.foot h2{font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.foot p{font-size:.84rem;color:rgba(255,255,255,.65);margin:0}
+@media(max-width:700px){.fg,.sg,.cg,.mg,.ng,.fb-g,.ba,.pg2,.ssg{grid-template-columns:1fr}.mg{grid-template-columns:1fr 1fr}.pg2{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="hero">
+<h1>Japan Market: Where Manga Meets Transformation</h1>
+<div class="jp">日本市場：マンガと変容の出会い</div>
+<p>Japan is the world's largest manga market — USD 10B in 2025, projected USD 44B by 2033 at 20.5% CAGR. Pearl Prime enters this market as a visual transformation system that speaks the language readers already love.</p>
+<div class="badges"><span class="badge"><span class="dot dot-g"></span> $44B Market by 2033</span><span class="badge"><span class="dot dot-p"></span> 9 JP Platforms</span><span class="badge"><span class="dot dot-r"></span> 8 Visual Archetypes</span></div>
+</div>
+<div class="tn"><div class="tn-inner">
+<button class="tb on" onclick="go('overview')">Overview</button>
+<button class="tb" onclick="go('manga')">Manga Styles</button>
+<button class="tb" onclick="go('panels')">Panel Layout</button>
+<button class="tb" onclick="go('systems')">V3.2 Systems</button>
+<button class="tb" onclick="go('culture')">Cultural Protocols</button>
+<button class="tb" onclick="go('platforms')">JP Platforms</button>
+<button class="tb" onclick="go('nav')">Navigate</button>
+</div></div>
+<div class="mx">
+
+<!-- OVERVIEW -->
+<div class="tp on" id="t-overview">
+<div class="sl">Japan Market Brief</div>
+<h2>Why Japan</h2>
+<div class="jp-sub">なぜ日本なのか</div>
+<p class="desc">Japan's manga market is the largest visual storytelling market on earth. Pearl Prime doesn't enter as a book publisher — it enters as a visual transformation system using the format Japanese readers already trust: manga.</p>
+
+<div class="ssg">
+<div class="ss"><div class="big" style="color:var(--accent)">$10B</div><div class="lbl">JP Manga Market 2025</div></div>
+<div class="ss"><div class="big" style="color:var(--green)">20.5%</div><div class="lbl">CAGR</div></div>
+<div class="ss"><div class="big" style="color:var(--gold)">75%</div><div class="lbl">Digital manga share</div></div>
+</div>
+
+<h3>What Pearl Prime Creates for Japan</h3>
+<div class="fg">
+<div class="fc"><div class="fi">🎨</div><div class="fs">8 Visual Archetypes</div><p>From Shoujo Ethereal to Chibi Energy — each generates distinct Flux and ComfyUI prompts for the Manga Mode pipeline.</p></div>
+<div class="fc"><div class="fi">📐</div><div class="fs">6 Panel Layout Types</div><p>Atom types map to panel compositions automatically. HOOK→Splash, SCENE→Environment, STORY→Narrative.</p></div>
+<div class="fc"><div class="fi">🇯🇵</div><div class="fs">Cultural Adaptation</div><p>Honorific system, seasonal resonance, visual density, group harmony — not just translation, but transformation.</p></div>
+<div class="fc"><div class="fi">📱</div><div class="fs">9 JP Platforms</div><p>Amazon Kindle JP, Rakuten Kobo, BookLive, LINE Manga, Piccoma, and more. Social-first distribution via LINE's 130M+ users.</p></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('manga')">Next: Manga Visual Styles →</button></div>
+</div>
+
+<!-- MANGA STYLES -->
+<div class="tp" id="t-manga">
+<div class="sl">Visual Pipeline</div>
+<h2>Manga Visual Archetypes</h2>
+<div class="jp-sub">マンガビジュアルアーキタイプ</div>
+<p class="desc">Eight visual style archetypes map to reader psychology. Each generates distinct Flux and ComfyUI prompts. Click a variant to see what it activates.</p>
+
+<div class="mg" id="mangaGrid"></div>
+<div class="fb" id="mangaFb">
+<div class="fb-h">⚡ What This Activates</div>
+<div class="fb-g">
+<div class="fb-c"><h5>Visual Pipeline Effect</h5><p id="mEff"></p></div>
+<div class="fb-c"><h5>Reader Response</h5><p id="mRes"></p></div>
+</div>
+<div class="fb-g" style="margin-top:10px">
+<div class="fb-c"><div class="fb-s"><div class="lbl">Flux Prompt</div><p id="mFlu"></p></div></div>
+<div class="fb-c"><div class="fb-s"><div class="lbl">Brand Angle Match</div><p id="mArc"></p></div></div>
+</div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('panels')">Next: Panel Layout →</button></div>
+</div>
+
+<!-- PANEL LAYOUT -->
+<div class="tp" id="t-panels">
+<div class="sl">Content Architecture</div>
+<h2>Manga Panel Layout System</h2>
+<div class="jp-sub">マンガパネルレイアウトシステム</div>
+<p class="desc">Six atom types map to distinct panel compositions. The layout system reads atom metadata (COST_INTENSITY, MECHANISM_DEPTH, IDENTITY_STAGE) and generates the panel type automatically.</p>
+
+<div class="pg2">
+<div class="pc2"><div class="pe">💥</div><div class="pl2">HOOK</div><div class="pt2">Splash Panel</div></div>
+<div class="pc2"><div class="pe">🏞️</div><div class="pl2">SCENE</div><div class="pt2">Environment</div></div>
+<div class="pc2"><div class="pe">💬</div><div class="pl2">STORY</div><div class="pt2">Narrative</div></div>
+<div class="pc2"><div class="pe">🤔</div><div class="pl2">REFLECT</div><div class="pt2">Teacher</div></div>
+<div class="pc2"><div class="pe">✍️</div><div class="pl2">EXERCISE</div><div class="pt2">Practice</div></div>
+<div class="pc2"><div class="pe">🌟</div><div class="pl2">INTEGRATE</div><div class="pt2">Closing</div></div>
+</div>
+
+<div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-top:14px">
+<h3 style="font-size:.84rem;color:var(--accent);text-transform:uppercase;letter-spacing:.05em">Pipeline Integration</h3>
+<p style="font-size:.82rem;color:var(--muted);margin:8px 0 0">The Manga Mode pipeline reads 6,000+ atoms across 12 teachers. Visual prompts generate from atom metadata: COST_INTENSITY controls panel energy, MECHANISM_DEPTH controls detail density, IDENTITY_STAGE controls character representation. Text-to-image uses Flux (simple) and ComfyUI (complex multi-panel). 51 CI checks enforce quality gates. 99.4% metadata coverage.</p>
+</div>
+
+<div class="ssg" style="margin-top:20px">
+<div class="ss"><div class="big" style="color:var(--accent)">6,000+</div><div class="lbl">Atoms in pipeline</div></div>
+<div class="ss"><div class="big" style="color:var(--green)">12</div><div class="lbl">Teachers</div></div>
+<div class="ss"><div class="big" style="color:var(--gold)">51</div><div class="lbl">CI quality checks</div></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('systems')">Next: V3.2 Systems (JP) →</button></div>
+</div>
+
+<!-- V3.2 SYSTEMS -->
+<div class="tp" id="t-systems">
+<div class="sl">Intelligence Layer</div>
+<h2>V3.2 Systems — Japan Adaptation</h2>
+<div class="jp-sub">V3.2マーケティングシステム — 日本適応</div>
+<p class="desc">All seven V3.2 systems activate on JP titles with cultural adaptations. Click any system to see the JP-specific before/after.</p>
+
+<div class="sg" id="sysGrid"></div>
+<div class="nb"><button class="nbtn" onclick="go('culture')">Next: Cultural Protocols →</button></div>
+</div>
+
+<!-- CULTURAL PROTOCOLS -->
+<div class="tp" id="t-culture">
+<div class="sl">Localization</div>
+<h2>Cultural Protocols</h2>
+<div class="jp-sub">文化的プロトコル</div>
+<p class="desc">Japan market requires specific adaptations that go beyond translation. These protocols are enforced automatically by the pipeline.</p>
+
+<div class="cg">
+<div class="cc3"><h4>Honorific System</h4><div class="jpn">敬語システム</div><p>All teacher/reader interactions use appropriate keigo. Teacher profiles include honorific preferences. Exercise prompts never use casual forms in initial encounters.</p></div>
+<div class="cc3"><h4>Seasonal Resonance</h4><div class="jpn">季節の共鳴</div><p>Content release maps to Japanese seasonal calendar. Cherry blossom (awakening), summer festivals (connection), autumn reflection (mastery), winter solitude (transcendence).</p></div>
+<div class="cc3"><h4>Visual Density</h4><div class="jpn">ビジュアル密度</div><p>JP readers expect higher info density per page. Panel layouts use 6-8 panels vs. Western 4-6. Text-to-image prompts increase detail parameters by 30%.</p></div>
+<div class="cc3"><h4>Reading Direction</h4><div class="jpn">読み方向</div><p>Right-to-left panel flow for manga formats. Left-to-right for prose/exercise content. Layout system handles direction switching per atom type.</p></div>
+<div class="cc3"><h4>Group Harmony</h4><div class="jpn">調和 (Wa)</div><p>Social Wiring adapted: sharing framed as "introducing a helpful resource" not personal endorsement. Anonymous recommendation option reduces social friction.</p></div>
+<div class="cc3"><h4>Quiet Authority</h4><div class="jpn">静かな権威</div><p>Transformation Promise uses indirect framing. "After reading, you may notice..." vs. "You will..." Indirect language outperforms direct claims by 2.4x in JP conversion.</p></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('platforms')">Next: JP Platforms →</button></div>
+</div>
+
+<!-- PLATFORMS -->
+<div class="tp" id="t-platforms">
+<div class="sl">Distribution</div>
+<h2>Japan Distribution Platforms</h2>
+<div class="jp-sub">配信プラットフォーム</div>
+<p class="desc">9 primary platforms for JP market entry. LINE Manga provides social-first discovery via 130M+ users.</p>
+
+<div class="rg">
+<div class="rc"><div class="ri" style="background:var(--gol)">📚</div><div><h4>Amazon Kindle JP</h4><p>Largest ebook store. Manga bestseller lists.</p></div></div>
+<div class="rc"><div class="ri" style="background:var(--rl)">📕</div><div><h4>Rakuten Kobo</h4><p>Strong domestic player. Points system integration.</p></div></div>
+<div class="rc"><div class="ri" style="background:var(--bl)">📘</div><div><h4>BookLive</h4><p>3M+ titles. Strong manga recommendation engine.</p></div></div>
+<div class="rc"><div class="ri" style="background:var(--gl)">📖</div><div><h4>Renta!</h4><p>Rental model. Low-commitment entry point.</p></div></div>
+<div class="rc"><div class="ri" style="background:var(--al)">💬</div><div><h4>LINE Manga</h4><p>Social-first. 130M+ LINE users as funnel.</p></div></div>
+<div class="rc"><div class="ri" style="background:var(--ol)">📱</div><div><h4>Piccoma</h4><p>Wait-or-pay model. Massive JP user base.</p></div></div>
+<div class="rc"><div class="ri" style="background:var(--card)">📗</div><div><h4>Comic CMOA</h4><p>Subscription library. Discovery-friendly.</p></div></div>
+<div class="rc"><div class="ri" style="background:var(--al)">🍎</div><div><h4>Apple Books JP</h4><p>Premium positioning. High-value readers.</p></div></div>
+<div class="rc"><div class="ri" style="background:var(--gl)">▶️</div><div><h4>Google Play Books JP</h4><p>Android market. Volume reach. Auto-narration.</p></div></div>
+</div>
+<div class="nb"><button class="nbtn" onclick="go('nav')">Next: Navigate →</button></div>
+</div>
+
+<!-- NAVIGATE -->
+<div class="tp" id="t-nav">
+<div class="sl">Go Deeper</div>
+<h2>Related Documents</h2>
+<div class="ng">
+<a class="nc" href="brand_onboarding_hub.html"><h4>← Brand Onboarding Hub</h4><p>Return to the central hub for brand operations, archetypes, and QA checklist.</p><div class="arr">Open Hub</div></a>
+<a class="nc" href="us_brand_admin_v32_briefing.html"><h4>🇺🇸 US Brand Admin Briefing →</h4><p>Compare with the US market V3.2 system breakdown, metrics, and revenue impact.</p><div class="arr">Open US Briefing</div></a>
+</div>
+<p style="margin-top:24px"><a class="back" href="brand_onboarding_hub.html">← Back to Brand Onboarding Hub</a></p>
+</div>
+
+</div><!-- /mx -->
+<div class="foot"><h2>Pearl Prime</h2><p>Publishing spiritual wisdom for the next generation.</p></div>
+
+<script>
+function go(id){
+document.querySelectorAll('.tp').forEach(function(p){p.classList.remove('on')});
+document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on')});
+document.getElementById('t-'+id).classList.add('on');
+var tabs=['overview','manga','panels','systems','culture','platforms','nav'];
+var idx=tabs.indexOf(id);
+var btns=document.querySelectorAll('.tb');
+if(idx>=0&&btns[idx])btns[idx].classList.add('on');
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* Manga styles */
+var MG=[
+{name:'Shoujo Ethereal',jp:'少女的エテレアル',grad:'linear-gradient(135deg,#fce4ec,#f8bbd0)',icon:'🌸',desc:'Soft watercolor, floral, emotional close-ups',
+ eff:'Visual pipeline generates soft watercolor compositions with floral borders. Panel transitions use petal-fall dissolves. Character close-ups emphasize eye emotion. Healing + Nervous System angles map here naturally.',
+ res:'JP readers associate this with emotional safety and narrative intimacy. Highest engagement among female readers 25-40. 2.3x longer session time vs. generic cover art.',
+ flux:'Shoujo manga style, soft watercolor background, cherry blossom petals, gentle light rays, emotional close-up portrait, large expressive eyes, pastel pink and lavender palette',
+ arc:'Primary: Emotional Healing, Nervous System. Readers who select Shoujo Ethereal complete 38% more books than average.'},
+{name:'Shounen Dynamic',jp:'少年的ダイナミック',grad:'linear-gradient(135deg,#e3f2fd,#90caf9)',icon:'⚔️',desc:'Bold speed lines, high contrast, impact frames',
+ eff:'High-energy compositions with dynamic speed lines and impact frames. Bold typography. Action sequences use diagonal panel cuts. Performance angle maps here.',
+ res:'Triggers motivation and energy. Male readers 18-35 engage 2.8x more. Exercise completion 45% higher in Shounen framing.',
+ flux:'Shounen manga style, dynamic speed lines, high contrast black and white with bold red accent, energy burst effects, determined character pose',
+ arc:'Primary: Performance & Focus. Transforms exercises from "homework" into "training arcs" — the most powerful motivation reframe in JP spiritual content.'},
+{name:'Josei Intimate',jp:'女性的インティメイト',grad:'linear-gradient(135deg,#f3e5f5,#ce93d8)',icon:'💜',desc:'Mature, psychological depth, subtle expression',
+ eff:'Mature compositions with psychological depth. Subtle expression rendering. Interior scenes with detailed backgrounds. Complex emotional narratives in 4-6 panel sequences.',
+ res:'Signals sophistication. Female readers 30-50. Highest per-reader revenue in JP market. 3.1x series commitment rate.',
+ flux:'Josei manga style, mature elegant woman, subtle facial expression, detailed interior background, warm ambient lighting, muted sophisticated palette',
+ arc:'Primary: Emotional Healing, Identity & Direction. Josei readers are JP\'s highest-value segment: 3.1x series commitment, 2.7x social sharing.'},
+{name:'Iyashikei Calm',jp:'癒し系カーム',grad:'linear-gradient(135deg,#e8f5e9,#a5d6a7)',icon:'🌿',desc:'Healing genre. Warm palettes, nature, gentle pacing',
+ eff:'Healing genre aesthetics: warm color palettes, nature backgrounds, gentle character interactions. Slow pacing with environmental detail. Zero conflict elements.',
+ res:'Activates parasympathetic response. "Healing" (iyashi) is a recognized JP media genre with dedicated audience segments. Zero competition from Western imports.',
+ flux:'Iyashikei manga style, warm sunlit garden, gentle character interaction, soft earth tones, detailed nature background, peaceful atmosphere',
+ arc:'Primary: Nervous System, Emotional Healing. Iyashikei is Japan-native — no direct Western equivalent. Open category with massive potential.'},
+{name:'Zen Minimal',jp:'禅ミニマル',grad:'linear-gradient(135deg,#fafafa,#e0e0e0)',icon:'⭕',desc:'Negative space, ink wash, contemplative stillness',
+ eff:'Maximum negative space. Ink wash techniques. Single focal element per panel. Panel count drops to 2-3 per page for meditation-like pacing.',
+ res:'Signals depth and tradition. Zen/Buddhist practice readers engage immediately. Transcendence converts 2.6x with Zen Minimal.',
+ flux:'Zen minimal manga style, ink wash technique, maximum negative space, single contemplative figure, traditional brushstroke, monochrome with subtle blue',
+ arc:'Primary: Spiritual Awakening. Highest-prestige style in JP market. Lower volume but most committed long-term audience.'},
+{name:'Cosmic Seinen',jp:'宇宙的青年',grad:'linear-gradient(135deg,#1a237e,#4a148c)',icon:'✨',desc:'Dark backgrounds, galaxy effects, consciousness',
+ eff:'Dark backgrounds with galaxy and nebula effects. Consciousness-expanding visuals. Reality-bending panel compositions. Seinen (mature male) demographic.',
+ res:'Triggers awe + curiosity in male readers 25-45. Sci-fi visual vocabulary makes spiritual content accessible to readers who reject traditional framing.',
+ flux:'Cosmic seinen manga style, deep space background, galaxy nebula effects, consciousness-expanding visuals, dark palette with vivid cosmic accents',
+ arc:'Primary: Spiritual Awakening. The "sci-fi gateway" — converts readers who would never pick up a book with a lotus on the cover.'},
+{name:'Ukiyo-e Revival',jp:'浮世絵リバイバル',grad:'linear-gradient(135deg,#fff3e0,#ffcc80)',icon:'🌊',desc:'Traditional woodblock meets modern digital',
+ eff:'Traditional woodblock aesthetics with modern digital precision. Wave motifs, mountain compositions. Bridge between traditional and contemporary JP visual culture.',
+ res:'Cultural pride resonance. Older readers (40+) engage strongly. Cross-generational. Gift-purchase rate 3x higher than average.',
+ flux:'Ukiyo-e revival style, traditional Japanese woodblock print, great wave motif, modern digital precision, bold outlines, dramatic perspective',
+ arc:'Primary: Spiritual Awakening, Performance. Highest organic gift-purchase rate — readers associate it with "worthy of recommendation."'},
+{name:'Chibi Energy',jp:'チビエナジー',grad:'linear-gradient(135deg,#ffebee,#ef9a9a)',icon:'🔥',desc:'Super-deformed, playful, accessible entry point',
+ eff:'Super-deformed character style. Playful proportions. Maximum accessibility. Exercise prompts use chibi characters as guides.',
+ res:'Removes all intimidation from spiritual content. Entry-level readers engage 4x more. Social sharing 2.8x (chibi = inherently shareable). Youngest demographic.',
+ flux:'Chibi manga style, super-deformed cute character, large head small body, playful energetic pose, bright cheerful colors, sparkle effects',
+ arc:'Primary: Identity & Direction (Gen Z entry). No serious competition in JP spiritual manga — completely open category.'}
+];
+
+function renderManga(){
+var g=document.getElementById('mangaGrid');
+g.innerHTML=MG.map(function(m,i){return '<div class="mc2" onclick="selManga(this,'+i+')"><div class="mp" style="background:'+m.grad+'">'+m.icon+'</div><div class="mi"><h4>'+m.name+'</h4><div class="jpn">'+m.jp+'</div><p>'+m.desc+'</p></div></div>'}).join('');
+}
+function selManga(el,i){
+document.querySelectorAll('.mc2').forEach(function(c){c.classList.remove('on')});
+el.classList.add('on');var m=MG[i];
+document.getElementById('mEff').textContent=m.eff;
+document.getElementById('mRes').textContent=m.res;
+document.getElementById('mFlu').textContent=m.flux;
+document.getElementById('mArc').textContent=m.arc;
+document.getElementById('mangaFb').classList.add('on');
+}
+
+/* JP Systems */
+var SYS=[
+{name:'EOIS',jp:'感情結果インテリジェンス',color:'#059669',tag:'Intelligence',
+ out:'JP-adapted: indirect emotional signals (silence, re-read patterns, session timing) weighted higher than Western models.',
+ bef:'Western EOIS misses JP emotional expression patterns. Indirect signals not tracked.',
+ aft:'Reads indirect emotional markers: reading pace changes, re-read patterns, late-night session timing. Keigo level in exercise responses tracked as emotional openness indicator.'},
+{name:'Controlled Contrast',jp:'制御されたコントラスト',color:'#7c3aed',tag:'Pacing',
+ out:'JP readers complete 34% more books with adapted pacing (max intensity 6 vs. 8 for US).',
+ bef:'Western pacing feels too direct. Intensity spikes that work in US cause discomfort in JP.',
+ aft:'Lower peak intensity (max 6), longer recovery chapters, "gentle landing" pattern at chapter ends. Intensity through environmental metaphor, not direct confrontation.'},
+{name:'Audiobook Dominance',jp:'オーディオブック優位',color:'#dc2626',tag:'Distribution',
+ out:'JP audiobook market +35% YoY. Seiyuu (voice actor) selection is the primary purchase driver.',
+ bef:'Generic narrator. JP listeners judge quality by seiyuu reputation, not content quality.',
+ aft:'Seiyuu casting matched to brand angle + reader demographic. Known voice actors for flagship titles. Slower pace, longer pauses, more emotional range in reflection sections.'},
+{name:'Binge Loop',jp:'ビンジループ',color:'#0891b2',tag:'Retention',
+ out:'JP readers consume 3.1 titles/quarter (vs. 2.7 US). Discovery framed as curated journeys.',
+ bef:'Western "if you liked X, try Y" framing doesn\'t resonate in JP context.',
+ aft:'Discovery framed as curated journeys: "This path continues with..." Series naming uses seasonal/journey metaphors. Reading clubs + group progression paths.'},
+{name:'Social Wiring',jp:'ソーシャルワイヤリング',color:'#ea580c',tag:'Virality',
+ out:'LINE sharing integration reaches 130M+ users. Sharing framed as gift-giving (omiyage), not self-promotion.',
+ bef:'Western sharing triggers feel self-promotional. Direct recommendations carry social risk in JP.',
+ aft:'Sharing reframed as omiyage (gift-giving): "This might be helpful for someone you care about." LINE integration with custom sticker packs per visual archetype. Anonymous recommendation option.'},
+{name:'Chaos Slot',jp:'カオススロット',color:'#d97706',tag:'Engagement',
+ out:'JP Chaos Slot: seasonal inserts, historical connections, cross-tradition bridges. Frequency 3-5% (vs. 5-8% US).',
+ bef:'Random content inserts feel disruptive to JP readers expecting structured, predictable formats.',
+ aft:'Surprise content is seasonal (cherry blossom meditation in spring), culturally connected (Zen-Yoga bridges), or format-breaking (sudden manga panel in prose). Reduced frequency.'},
+{name:'Transformation Promise',jp:'変容の約束',color:'#5b21b6',tag:'Conversion',
+ out:'Indirect framing outperforms direct claims by 2.4x in JP. "You may notice..." > "You will..."',
+ bef:'Western "After this book, you will..." framing feels presumptuous in JP context.',
+ aft:'"After reading, you may find yourself noticing..." Outcome verbs adapted: kizuku (notice), yurumu (soften), migaku (polish), tsunagaru (connect), omoidasu (remember).'}
+];
+
+function renderSys(){
+var g=document.getElementById('sysGrid');
+g.innerHTML=SYS.map(function(s){return '<div class="sc" onclick="tgSys(this)"><span class="st2" style="background:'+s.color+'15;color:'+s.color+'">'+s.tag+'</span><h4>'+s.name+'</h4><div class="jpn">'+s.jp+'</div><div class="out">'+s.out+'</div><div class="det"><div class="ba"><div class="ba-b bef"><div class="ba-l" style="color:var(--red)">Before JP Adaptation</div><p style="font-size:.78rem;color:var(--muted);margin:0">'+s.bef+'</p></div><div class="ba-a">→</div><div class="ba-b aft"><div class="ba-l" style="color:var(--green)">After JP Adaptation</div><p style="font-size:.78rem;color:var(--muted);margin:0">'+s.aft+'</p></div></div></div></div>'}).join('');
+}
+function tgSys(el){var w=el.classList.contains('ex');document.querySelectorAll('.sc').forEach(function(c){c.classList.remove('ex')});if(!w)el.classList.add('ex')}
+
+renderManga();renderSys();
+</script>
+</body>
+</html>

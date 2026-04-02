@@ -1,0 +1,155 @@
+{
+  "plan_id": "plan-therapeutic-001",
+  "vce_format": "short",
+  "config_hash": "c4daf080e74ab8c2",
+  "content_type": "therapeutic",
+  "output_resolution": {
+    "width": 1080,
+    "height": 1920
+  },
+  "default_fps": 30,
+  "ffmpeg_motion_templates": {
+    "breathing_pulse": {
+      "motion": "breathing_pulse",
+      "fps": 30,
+      "duration_frames": 150,
+      "zoompan": "z='1+0.03*sin(2*PI*t/10.0)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=150:s=1080x1920:fps=30",
+      "bpm_equiv": 6,
+      "notes": "Subtle zoom sinusoid ~6 BPM therapeutic pulse (spec \u00a76.5)."
+    },
+    "camera_pan": {
+      "motion": "camera_pan",
+      "fps": 30,
+      "duration_frames": 150,
+      "crop": "crop=1080:1920:'(iw-1080)/2+40*sin(t/6)':'(ih-1920)/2+24*cos(t/7)'",
+      "notes": "Angle-derived drift as separable sinusoids on crop origin."
+    },
+    "ken_burns": {
+      "motion": "ken_burns",
+      "fps": 30,
+      "duration_frames": 150,
+      "zoompan": "z='min(zoom+0.0015,1.5)':d=150:s=1080x1920:fps=30",
+      "notes": "Classic Ken Burns \u2014 accumulate zoom cap 1.5 (VCE \u00a75 ken_burns)."
+    },
+    "parallax_scroll": {
+      "motion": "parallax_scroll",
+      "fps": 30,
+      "duration_frames": 150,
+      "crop": "crop=1080:1920:min(max(0\\,(iw-1080)/2+12.0*t)\\,iw-1080):0",
+      "notes": "Parallax as sliding crop window on overscaled plate."
+    },
+    "particle_system": {
+      "motion": "particle_system",
+      "fps": 30,
+      "particle": {
+        "overlay_position_x": "if(gte(t\\,0.0)\\,5+mod(28*t\\,1080-10)\\,5)",
+        "overlay_position_y": "if(gte(t\\,0.0)\\,1920*0.2+0.15*1920*sin(2*PI*t/14)\\,1920*0.2)"
+      },
+      "overlay_filter_fragment": "[fg]format=rgba,colorchannelmixer=aa=0.55[fg_a];[base][fg_a]overlay=x='if(gte(t\\,0.0)\\,5+mod(28*t\\,1080-10)\\,5)':y='if(gte(t\\,0.0)\\,1920*0.2+0.15*1920*sin(2*PI*t/14)\\,1920*0.2)':format=auto",
+      "notes": "Foreground spark layer composited over base."
+    },
+    "scale_drift": {
+      "motion": "scale_drift",
+      "fps": 30,
+      "duration_frames": 150,
+      "zoompan": "z='1+0.02*sin(2*PI*t/10.0)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=150:s=1080x1920:fps=30",
+      "period_s": 10.0
+    },
+    "static": {
+      "motion": "static",
+      "fps": 30,
+      "duration_frames": 150,
+      "zoompan": "z='1':d=150:s=1080x1920:fps=30",
+      "shot_id": "template"
+    },
+    "text_reveal": {
+      "motion": "text_reveal",
+      "fps": 30,
+      "drawtext": "drawtext=text='{caption}':fontsize=52:fontcolor=white@'if(between(t\\,0.0\\,5.0)\\,(t-0.0)/5.0\\,0)':enable='between(t\\,0.0\\,5.0)':x=(w-text_w)/2:y=h*0.78",
+      "notes": "Alpha fades in over shot duration; caption substituted at render."
+    },
+    "water_nature_loop": {
+      "motion": "water_nature_loop",
+      "fps": 30,
+      "loop_filter": "loop=loop=-1:size=150:start=0",
+      "setpts_reset": "setpts=N/FRAME_RATE/TB",
+      "notes": "Seamless loop metadata for background clips (VCE water_nature_loop)."
+    }
+  },
+  "motion_cycle": [
+    "ken_burns",
+    "parallax_scroll",
+    "breathing_pulse",
+    "particle_system",
+    "camera_pan",
+    "scale_drift",
+    "text_reveal",
+    "water_nature_loop"
+  ],
+  "shots": [
+    {
+      "shot_id": "shot-1",
+      "arc_section": "PEAK",
+      "motion_type": "ken_burns",
+      "ite_motion_hint": "contemplation",
+      "arc_pacing_ref": {
+        "cut_interval_s": [
+          8,
+          12
+        ],
+        "bpm_equiv": [
+          5,
+          7.5
+        ],
+        "motion_budget_pct": 15
+      },
+      "arc_cut_interval_s": {
+        "cut_interval_s_min": 8.0,
+        "cut_interval_s_max": 12.0
+      },
+      "max_speed_hint": 2,
+      "static_fraction_policy": 0.75,
+      "ffmpeg_motion": {
+        "motion": "ken_burns",
+        "fps": 24,
+        "duration_frames": 113,
+        "zoompan": "z='min(zoom+0.0015,1.5)':d=113:s=1080x1920:fps=24",
+        "notes": "Classic Ken Burns \u2014 accumulate zoom cap 1.5 (VCE \u00a75 ken_burns)."
+      },
+      "colorbalance_section": {
+        "colorbalance": "rs=-0.05:gs=0.0:bs=0.05"
+      },
+      "duration_s": 4.71,
+      "clip_start_global_s": 0.0
+    },
+    {
+      "shot_id": "shot-2",
+      "arc_section": "RESOLVE",
+      "motion_type": "static",
+      "ite_motion_hint": "none",
+      "arc_pacing_ref": {
+        "cut_interval_s_min": 15,
+        "bpm_equiv_max": 4,
+        "motion_budget_pct": 0
+      },
+      "arc_cut_interval_s": {
+        "cut_interval_s_min": 15.0,
+        "cut_interval_s_max": 12.0
+      },
+      "max_speed_hint": null,
+      "static_fraction_policy": 0.75,
+      "ffmpeg_motion": {
+        "motion": "static",
+        "fps": 30,
+        "duration_frames": 65,
+        "zoompan": "z='1':d=65:s=1080x1920:fps=30",
+        "shot_id": "shot-2"
+      },
+      "colorbalance_section": {
+        "colorbalance": "rs=0.08:gs=0.03:bs=-0.05"
+      },
+      "duration_s": 2.15,
+      "clip_start_global_s": 4.71
+    }
+  ]
+}

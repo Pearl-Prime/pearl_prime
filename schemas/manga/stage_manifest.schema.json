@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/stage_manifest.schema.json",
+  "allOf": [
+    { "$ref": "manga_common.schema.json#/$defs/artifact_base" },
+    {
+      "type": "object",
+      "required": [
+        "artifact_type",
+        "stage_id",
+        "stage_name",
+        "attempt",
+        "status"
+      ],
+      "properties": {
+        "artifact_type": { "const": "stage_manifest" },
+        "stage_id": { "type": "string", "minLength": 1 },
+        "stage_name": { "type": "string", "minLength": 1 },
+        "attempt": { "type": "integer", "minimum": 1 },
+        "status": { "$ref": "manga_common.schema.json#/$defs/stage_status" },
+        "inputs": { "type": "object" },
+        "outputs": { "type": "object" },
+        "duration_ms": { "type": "number", "minimum": 0 },
+        "error_summary": { "type": "string" },
+        "started_at": { "type": "string" },
+        "finished_at": { "type": "string" }
+      }
+    }
+  ]
+}

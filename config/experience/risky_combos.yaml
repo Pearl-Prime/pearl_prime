@@ -1,0 +1,46 @@
+# Risky Experience Combos — multi-dimension combinations that flag as "same product cluster."
+# Authority: specs/EXPERIENCE_LAYER_ANTI_SPAM_SPEC.md §13
+# Review and update quarterly based on wave data and platform feedback.
+# Keep list short (4–8 entries). If it grows beyond 12, taxonomy needs revision.
+
+schema_version: 1
+
+risky_combos:
+
+  - combo:
+      reader_intent: calm_down
+      transformation_speed: immediate
+      pacing_model: single_sitting
+    label: anxiety_quick_fix
+    max_share: 0.20
+    max_per_brand_per_window: 3
+
+  - combo:
+      reader_intent: build_skill
+      delivery_experience: guided_program
+      perceived_positioning: practical_system
+    label: productivity_program
+    max_share: 0.25
+    max_per_brand_per_window: 4
+
+  - combo:
+      reader_intent: calm_down
+      perceived_positioning: quick_fix
+      engagement_depth: light
+    label: comfort_content
+    max_share: 0.20
+    max_per_brand_per_window: 3
+
+  - combo:
+      reader_intent: find_meaning
+      delivery_experience: audio_immersion
+      perceived_positioning: spiritual_path
+    label: spiritual_audio
+    max_share: 0.25
+    max_per_brand_per_window: 4
+
+# Novel clustering alert config (§13.5)
+novel_clustering:
+  min_books_for_alert: 3          # 3+ books sharing unseen combo → alert
+  min_shared_dimensions: 3        # Must share at least 3 dimensions
+  max_historical_occurrences: 2   # Only alert if combo seen ≤2 times historically

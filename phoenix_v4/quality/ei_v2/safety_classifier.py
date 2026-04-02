@@ -1,0 +1,359 @@
+"""
+Few-shot safety classifier for EI V2.
+
+Detects safety violations that regex-based patterns miss:
+  - Paraphrased medical/cure claims
+  - Subtle promotional language
+  - Clinical/DSM language creeping into consumer content
+  - Reassurance spam (repetitive comfort without substance)
+  - Pathologizing language
+
+Two modes:
+  - "heuristic_plus": Enhanced pattern matching with context windows,
+    co-occurrence analysis, and negation handling. Zero dependencies.
+  - "llm": Few-shot classification via LLM callback. Higher accuracy,
+    requires API.
+
+Each violation category returns a score in [0, 1] and reason codes.
+"""
+from __future__ import annotations
+
+import re
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple
+
+from phoenix_v4.quality.ei_v2.marketing_lexicons import get_banned_clinical_and_forbidden
+
+# Categories passed to LLM classify callback (vocabulary contract).
+SAFETY_LLM_CATEGORIES: List[str] = [
+    "medical_claims",
+    "clinical_language",
+    "promotional",
+    "reassurance_spam",
+    "pathologizing",
+    "marketing_compliance",
+]
+
+# Only these keys use heuristic-vs-LLM score merge (weighted risk dimensions).
+_LLM_MERGE_CATEGORY_KEYS: Set[str] = {
+    "medical_claims",
+    "clinical_language",
+    "promotional",
+    "reassurance_spam",
+    "pathologizing",
+}
+
+
+# --- Expanded pattern banks (beyond V1 exact phrase lists) ---
+
+# Medical claims: broader than V1's exact phrase match.
+# Catches paraphrased variants like "eliminate your panic" or
+# "this technique has been proven to cure".
+_MEDICAL_CLAIM_PATTERNS = [
+    re.compile(r"\b(?:cure[sd]?|eliminat(?:e[sd]?|ing)|eradicat(?:e[sd]?|ing))\b.*\b(?:anxiety|depression|ptsd|disorder|trauma|insomnia|adhd)\b", re.I),
+    re.compile(r"\b(?:anxiety|depression|ptsd|disorder|trauma|insomnia)\b.*\b(?:cure[sd]?|eliminat(?:e[sd]?|ing)|eradicat(?:e[sd]?|ing))\b", re.I),
+    re.compile(r"\b(?:proven|clinically proven|scientifically proven)\s+to\s+(?:cure|fix|heal|treat|eliminate)\b", re.I),
+    re.compile(r"\b(?:permanent(?:ly)?|completely|totally)\s+(?:cure[sd]?|fix(?:e[sd])?|heal(?:e?d)?|remov(?:e[sd]?|ing))\b", re.I),
+    re.compile(r"\bthis\s+(?:will|can|is\s+going\s+to)\s+(?:cure|fix|heal)\s+(?:you|your)\b", re.I),
+    re.compile(r"\b100\s*%\s*(?:effective|success|cure|recovery)\b", re.I),
+    re.compile(r"\bguaranteed?\s+(?:results?|recovery|healing|cure|improvement)\b", re.I),
+    re.compile(r"\bnever\s+(?:feel|experience|suffer|have)\s+(?:anxiety|depression|panic|insomnia)\s+again\b", re.I),
+]
+
+# Clinical/DSM language that should not appear in consumer-facing self-help.
+_CLINICAL_PATTERNS = [
+    re.compile(r"\b(?:dsm|dsm-5|icd-10|icd-11)\b", re.I),
+    re.compile(r"\b(?:generalized\s+anxiety\s+disorder|major\s+depressive\s+disorder|bipolar\s+disorder)\b", re.I),
+    re.compile(r"\b(?:ptsd|post-traumatic\s+stress\s+disorder)\b", re.I),
+    re.compile(r"\b(?:borderline\s+personality|antisocial\s+personality|narcissistic\s+personality)\b", re.I),
+    re.compile(r"\b(?:comorbid(?:ity)?|psychopathology|serotonin\s+reuptake|benzodiazepine)\b", re.I),
+    re.compile(r"\b(?:diagnos(?:e[sd]?|is|tic)|prescri(?:be[sd]?|ption)|medic(?:ation|ine|al\s+treatment))\b", re.I),
+    re.compile(r"\b(?:cognitive\s+behavioral\s+therapy|dialectical\s+behavior\s+therapy|emdr)\b", re.I),
+    re.compile(r"\b(?:symptom(?:s|atology)?|patholog(?:y|ical)|clinical\s+(?:trial|intervention|assessment))\b", re.I),
+]
+
+# Promotional language (expanded beyond V1 exact phrases).
+_PROMOTIONAL_PATTERNS = [
+    re.compile(r"\b(?:sign\s+up|enroll|register|subscribe|join)\s+(?:now|today|for|to)\b", re.I),
+    re.compile(r"\b(?:limited\s+time|act\s+now|don'?t\s+miss|hurry|last\s+chance|exclusive\s+offer)\b", re.I),
+    re.compile(r"\b(?:buy|purchase|order|get\s+yours?)\s+(?:now|today|here)\b", re.I),
+    re.compile(r"\b(?:my\s+(?:program|course|coaching|method|system|framework|masterclass))\b", re.I),
+    re.compile(r"\b(?:free\s+(?:trial|consultation|session|webinar|download))\b", re.I),
+    re.compile(r"\b(?:discount|coupon|promo\s*code|special\s+(?:offer|price|deal))\b", re.I),
+    re.compile(r"\b(?:testimonial|success\s+stor(?:y|ies)|client\s+results?)\b", re.I),
+]
+
+# Reassurance spam: empty comfort with no substance.
+_REASSURANCE_SPAM_PHRASES = [
+    "you are not broken",
+    "you've got this",
+    "everything will be okay",
+    "everything happens for a reason",
+    "it will all work out",
+    "trust the process",
+    "you are enough",
+    "believe in yourself",
+    "the universe has a plan",
+    "you are worthy",
+    "you deserve happiness",
+    "let it go",
+    "stay positive",
+    "good vibes only",
+    "you are stronger than you think",
+]
+
+# Pathologizing language: labels the person rather than the experience.
+_PATHOLOGIZING_PATTERNS = [
+    re.compile(r"\byou\s+(?:are|have)\s+(?:a\s+)?(?:anxious|depressed|broken|damaged|sick|disordered|dysfunctional)\b", re.I),
+    re.compile(r"\b(?:your|the)\s+(?:disorder|illness|condition|disease|dysfunction|pathology)\b", re.I),
+    re.compile(r"\b(?:suffer(?:er|ing)?|victim|patient)\b", re.I),
+]
+
+# Negation window: phrases near "not" that flip meaning (reduces false positives).
+_NEGATION_WINDOW = 4
+
+
+def _count_pattern_hits(text: str, patterns: list) -> Tuple[int, List[str]]:
+    """Count how many patterns match and return matched excerpts."""
+    hits = 0
+    excerpts: List[str] = []
+    for pat in patterns:
+        matches = pat.findall(text)
+        if matches:
+            hits += len(matches)
+            excerpts.extend(str(m)[:60] for m in matches[:3])
+    return hits, excerpts
+
+
+def _count_phrase_hits(text: str, phrases: List[str]) -> Tuple[int, List[str]]:
+    """Count exact phrase hits (case-insensitive)."""
+    tl = text.lower()
+    hits = 0
+    excerpts: List[str] = []
+    for phrase in phrases:
+        count = tl.count(phrase.lower())
+        if count > 0:
+            hits += count
+            excerpts.append(phrase)
+    return hits, excerpts
+
+
+def _negation_adjusted_hits(text: str, patterns: list) -> int:
+    """Reduce hit count when pattern occurs near negation words."""
+    words = text.lower().split()
+    negations = {"not", "no", "never", "neither", "nor", "don't", "doesn't",
+                 "didn't", "won't", "wouldn't", "can't", "cannot", "shouldn't",
+                 "isn't", "aren't", "wasn't", "weren't", "without"}
+    raw_hits, _ = _count_pattern_hits(text, patterns)
+    negated = 0
+    for i, w in enumerate(words):
+        if w in negations:
+            window = " ".join(words[max(0, i - 1):i + _NEGATION_WINDOW + 1])
+            for pat in patterns:
+                if pat.search(window):
+                    negated += 1
+                    break
+    return max(0, raw_hits - negated)
+
+
+def _finalize_aggregate_and_reason_codes(
+    result: Dict[str, Any],
+    cfg: Dict[str, Any],
+) -> None:
+    """Recompute reason_codes (non-marketing detections) and risk_score from category scores."""
+    cats = result["categories"]
+    med_threshold = float(cfg.get("medical_claim_threshold", 0.6))
+    clin_threshold = float(cfg.get("clinical_language_threshold", 0.5))
+    promo_threshold = float(cfg.get("promotional_threshold", 0.5))
+
+    rc_marketing_only = [c for c in result["reason_codes"] if c.startswith("marketing_")]
+    rc: List[str] = list(rc_marketing_only)
+
+    if cats["medical_claims"]["score"] >= med_threshold:
+        rc.append("medical_claim_detected")
+    if cats["clinical_language"]["score"] >= clin_threshold:
+        rc.append("clinical_language_detected")
+    if cats["promotional"]["score"] >= promo_threshold:
+        rc.append("promotional_detected")
+    if cats["reassurance_spam"]["score"] >= 0.4:
+        rc.append("reassurance_spam_detected")
+    if cats["pathologizing"]["score"] >= 0.4:
+        rc.append("pathologizing_detected")
+
+    result["reason_codes"] = rc
+
+    weights = {
+        "medical_claims": 0.30,
+        "clinical_language": 0.15,
+        "promotional": 0.25,
+        "reassurance_spam": 0.15,
+        "pathologizing": 0.15,
+    }
+    total = sum(
+        cats[cat]["score"] * w
+        for cat, w in weights.items()
+        if cat in cats
+    )
+    mc_weight = float(cfg.get("marketing_compliance_weight", 0.2))
+    mc_score = cats.get("marketing_compliance", {}).get("score", 1.0)
+    result["risk_score"] = round(
+        min(1.0, (1.0 - mc_weight) * total + mc_weight * (1.0 - mc_score)), 4
+    )
+
+
+def _normalize_llm_classify_payload(raw: Any) -> Optional[Dict[str, Any]]:
+    if not isinstance(raw, dict):
+        return None
+    cat = raw.get("category")
+    if not isinstance(cat, str) or not cat.strip():
+        return None
+    try:
+        conf = float(raw.get("confidence", 0.0))
+    except (TypeError, ValueError):
+        return None
+    conf = max(0.0, min(1.0, conf))
+    flags = raw.get("flags", [])
+    if flags is None:
+        flags = []
+    if not isinstance(flags, list):
+        flags = [flags]
+    return {"category": cat.strip(), "confidence": conf, "flags": flags}
+
+
+def _apply_llm_safety_merge(result: Dict[str, Any], llm: Dict[str, Any]) -> None:
+    """Merge LLM classification into heuristic category scores (risk dimensions only)."""
+    cat = llm["category"]
+    conf = float(llm["confidence"])
+    if cat not in _LLM_MERGE_CATEGORY_KEYS:
+        return
+    if cat not in result["categories"]:
+        return
+    h = float(result["categories"][cat]["score"])
+    if conf > 0.8:
+        merged = conf
+    else:
+        merged = (h + conf) / 2.0
+    merged = max(0.0, min(1.0, merged))
+    result["categories"][cat]["score"] = round(merged, 3)
+
+
+def classify_safety(
+    text: str,
+    *,
+    slot: str = "",
+    cfg: Optional[Dict[str, Any]] = None,
+    full_cfg: Optional[Dict[str, Any]] = None,
+    call_llm_fn: Optional[Callable] = None,
+) -> Dict[str, Any]:
+    """
+    Classify text for safety violations.
+
+    cfg: safety_classifier subsection (thresholds, etc.).
+    full_cfg: full EI V2 config (for marketing_sources / get_banned_clinical_and_forbidden). If None, uses cfg.
+    call_llm_fn: Optional ``(text, categories) -> dict`` (see ``LLMClassifyCallback`` in ``llm_callback``). Used only
+        when ``cfg["mode"] == "llm"``. Expected keys: ``category``, ``confidence``, ``flags``. Returns ``None`` for
+        budget-exhausted wrappers; invalid payloads or exceptions fall back to heuristic scores silently.
+
+    Returns dict with per-category scores and an aggregate risk_score in [0, 1].
+    Heuristic scoring is deterministic for fixed inputs; LLM merge depends on the callback.
+    """
+    cfg = cfg or {}
+    full_cfg = full_cfg or cfg
+    mode = cfg.get("mode", "heuristic_plus")
+    text = text or ""
+
+    result: Dict[str, Any] = {
+        "risk_score": 0.0,
+        "categories": {},
+        "reason_codes": [],
+        "mode": mode,
+    }
+
+    # Medical claims
+    med_hits_raw, med_excerpts = _count_pattern_hits(text, _MEDICAL_CLAIM_PATTERNS)
+    med_hits = _negation_adjusted_hits(text, _MEDICAL_CLAIM_PATTERNS)
+    med_score = min(1.0, med_hits / 2.0)
+    result["categories"]["medical_claims"] = {
+        "score": round(med_score, 3),
+        "hits": med_hits,
+        "raw_hits": med_hits_raw,
+        "excerpts": med_excerpts[:3],
+    }
+    # Clinical language
+    clin_hits, clin_excerpts = _count_pattern_hits(text, _CLINICAL_PATTERNS)
+    clin_score = min(1.0, clin_hits / 3.0)
+    result["categories"]["clinical_language"] = {
+        "score": round(clin_score, 3),
+        "hits": clin_hits,
+        "excerpts": clin_excerpts[:3],
+    }
+    # Promotional
+    promo_hits, promo_excerpts = _count_pattern_hits(text, _PROMOTIONAL_PATTERNS)
+    promo_score = min(1.0, promo_hits / 2.0)
+    result["categories"]["promotional"] = {
+        "score": round(promo_score, 3),
+        "hits": promo_hits,
+        "excerpts": promo_excerpts[:3],
+    }
+    # Reassurance spam
+    reas_hits, reas_excerpts = _count_phrase_hits(text, _REASSURANCE_SPAM_PHRASES)
+    word_count = max(1, len(text.split()))
+    reas_density = reas_hits / (word_count / 100.0)
+    reas_score = min(1.0, reas_density / 3.0)
+    result["categories"]["reassurance_spam"] = {
+        "score": round(reas_score, 3),
+        "hits": reas_hits,
+        "density_per_100_words": round(reas_density, 3),
+        "excerpts": reas_excerpts[:3],
+    }
+    # Pathologizing
+    path_hits, path_excerpts = _count_pattern_hits(text, _PATHOLOGIZING_PATTERNS)
+    path_hits_adj = _negation_adjusted_hits(text, _PATHOLOGIZING_PATTERNS)
+    path_score = min(1.0, path_hits_adj / 2.0)
+    result["categories"]["pathologizing"] = {
+        "score": round(path_score, 3),
+        "hits": path_hits_adj,
+        "raw_hits": path_hits,
+        "excerpts": path_excerpts[:3],
+    }
+    # Marketing compliance: separate signal (1.0 = no hit, 0.0 = hit). Blended via config weight.
+    marketing_compliance_score = 1.0
+    ms = (full_cfg.get("marketing_sources") or {}).get("use_marketing_safety_bans", False)
+    if ms and full_cfg:
+        banned_clinical, forbidden_tokens = get_banned_clinical_and_forbidden(full_cfg)
+        if banned_clinical or forbidden_tokens:
+            text_lower = text.lower()
+            for term in banned_clinical:
+                if term and term in text_lower:
+                    marketing_compliance_score = 0.0
+                    result["reason_codes"].append("marketing_banned_clinical")
+                    break
+            if marketing_compliance_score > 0 and forbidden_tokens:
+                for token in forbidden_tokens:
+                    if token and re.search(r"\b" + re.escape(token) + r"\b", text_lower):
+                        marketing_compliance_score = 0.0
+                        result["reason_codes"].append("marketing_forbidden_token")
+                        break
+    result["categories"]["marketing_compliance"] = {
+        "score": round(marketing_compliance_score, 3),
+        "hits": 0 if marketing_compliance_score >= 1.0 else 1,
+        "excerpts": [],
+    }
+
+    _finalize_aggregate_and_reason_codes(result, cfg)
+
+    if mode == "llm" and call_llm_fn is not None:
+        llm_raw: Any = None
+        try:
+            llm_raw = call_llm_fn(text, SAFETY_LLM_CATEGORIES)
+        except Exception:
+            llm_raw = None
+        normalized = _normalize_llm_classify_payload(llm_raw)
+        if normalized is not None:
+            _apply_llm_safety_merge(result, normalized)
+            _finalize_aggregate_and_reason_codes(result, cfg)
+            for f in normalized["flags"]:
+                code = str(f).strip()
+                if code and code not in result["reason_codes"]:
+                    result["reason_codes"].append(code)
+
+    return result

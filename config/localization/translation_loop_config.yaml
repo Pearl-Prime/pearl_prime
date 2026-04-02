@@ -1,0 +1,60 @@
+schema_version: "1.0"
+description: >
+  Runtime configuration for the Translation Comparator Loop.
+  Ported from config/audiobook_script/comparator_config.yaml.
+  Translate -> Judge -> Patch -> Retry (max 3) -> pass or manual_review.
+  No human in the loop at runtime.
+config_version: "1.0.0"
+last_updated: "2026-04-01"
+
+loop_control:
+  max_loops: 3
+  hard_fail_routes_to: manual_review
+  loop_index_base: 1
+
+parallel:
+  max_parallel_files: 5
+  file_timeout_seconds: 300
+  batch_timeout_seconds: 7200
+
+draft_model:
+  # Cloud mode (DASHSCOPE_API_KEY set): uses Dashscope endpoint
+  # Local mode: uses LM Studio at 127.0.0.1:1234
+  cloud_model_id: qwen-plus
+  temperature: 0.25
+  max_output_tokens: 32000
+  timeout_seconds: 300
+
+judge_model:
+  cloud_model_id: qwen-max
+  temperature: 0.1
+  max_output_tokens: 16384
+  timeout_seconds: 180
+
+patch_injection:
+  injection_strategy: append_to_system
+  revision_block_header: "## REVISION INSTRUCTIONS (Loop {loop_index})\n## Fix ALL issues below before producing the translation.\n"
+  hard_gate_prefix: "[HARD — must fix]"
+  scored_gate_prefix: "[IMPROVE]"
+  max_patch_tokens: 800
+  on_patch_overflow: truncate_scored_keep_hard
+
+scoring:
+  pass_requires_all_hard_gates: true
+  min_scored_pass_threshold: 0.75
+
+locale_threshold_overrides:
+  ja-JP:
+    min_scored_pass_threshold: 0.78
+  zh-SG:
+    min_scored_pass_threshold: 0.72
+  ko-KR:
+    min_scored_pass_threshold: 0.75
+
+artifact_trace:
+  base_path: "artifacts/localization/translation_loop"
+  manual_review_queue_file: "artifacts/localization/manual_review_queue.json"
+
+observability:
+  jsonl_log_path: "artifacts/localization/loop_decisions.jsonl"
+  alert_on_manual_review_rate_above: 0.10

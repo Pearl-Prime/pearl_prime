@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ite_fractal_report.schema.json",
+  "title": "ITE Fractal Report",
+  "description": "Per-panel fractal dimension compliance from run_fractal_check.",
+  "type": "object",
+  "required": ["schema_version", "artifact_type", "panels"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "artifact_type": {
+      "type": "string",
+      "const": "ite_fractal_report"
+    },
+    "stub_mode": {
+      "type": "boolean"
+    },
+    "panels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["panel_id", "compliant"],
+        "properties": {
+          "panel_id": { "type": "string" },
+          "fd_estimate": { "type": ["number", "null"] },
+          "source_category": { "type": "string" },
+          "compliant": { "type": "boolean" },
+          "warn_out_of_band": { "type": "boolean" },
+          "note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "blocker_no_fractal_nature_in_release_resolve": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

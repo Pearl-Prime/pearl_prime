@@ -1,0 +1,15 @@
+schema_version: 1
+
+gates:
+  - gate_id: "MANGA.PROMPT.STRUCTURE"
+    severity: "BLOCKER"
+    description: "Visual prompt artifacts must include one compiled prompt per panel with composition notes and continuity tags."
+  - gate_id: "MANGA.PROMPT.TOKEN_BUDGET"
+    severity: "MAJOR"
+    description: "Positive prompt token count must remain <= 120 and negative prompt token count <= 60."
+  - gate_id: "MANGA.TEACHING.PANEL_EXPRESSION"
+    severity: "MAJOR"
+    description: "If a teaching atom defines panel_expression, the visual prompt compiler must preserve it in prompt composition."
+  - gate_id: "MANGA.SILENCE.STRUCTURE"
+    severity: "BLOCKER"
+    description: "Silent panel intent must remain machine-visible so silence-specific QC can run later."

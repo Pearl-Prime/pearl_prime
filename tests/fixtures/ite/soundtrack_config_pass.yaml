@@ -1,0 +1,25 @@
+total_duration_sec: 300
+total_silence_sec: 12
+sections:
+  - type: hook
+    tempo_bpm: 90
+    scale: major
+    has_lyrics: false
+  - type: build
+    tempo_bpm: 80
+    scale: minor
+    has_lyrics: false
+  - type: calming
+    tempo_bpm: 66
+    scale: pentatonic
+    has_lyrics: false
+  - type: resolution
+    tempo_bpm: 62
+    scale: pentatonic
+    has_lyrics: false
+  - type: resolve
+    tempo_bpm: 58
+    scale: pentatonic
+    has_lyrics: false
+video_end:
+  final_cut_interval_sec: 12

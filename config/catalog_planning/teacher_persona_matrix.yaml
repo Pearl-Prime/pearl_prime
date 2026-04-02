@@ -1,0 +1,213 @@
+# Persona × Teacher compatibility for Teacher Mode planning.
+# Authority: specs/TEACHER_UNIVERSAL_AND_SCORING_SPEC.md
+# Empty allowed_personas = all canonical personas allowed. Fit is scored in teacher_topic_persona_scores.yaml.
+
+teachers:
+  adi_da:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - shame
+      - false_alarm
+      - overwhelm
+      - spiral
+      - watcher
+      - grief
+      - comparison
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  ahjan:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales:
+      - nyc_metro
+      - coastal_california
+    allowed_engines:
+      - shame
+      - false_alarm
+      - overwhelm
+      - spiral
+      - watcher
+      - grief
+      - comparison
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+    persona_overlays:
+      nyc_executives:
+        default_angle: at_work
+        preferred_story_style: case_study
+        locale_overlays:
+          - "West Side Highway"
+          - "A train"
+          - "midtown lobby"
+      healthcare_rns:
+        default_angle: on_shift
+        preferred_story_style: micro_failure
+        locale_overlays:
+          - "handoff"
+          - "night shift"
+      gen_z_professionals:
+        default_angle: at_work
+        preferred_story_style: narrative
+
+  ajahn_x:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - shame
+      - anxiety
+      - false_alarm
+      - overwhelm
+      - spiral
+      - watcher
+      - grief
+      - comparison
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  master_feung:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - overwhelm
+      - shame
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  sai_ma:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - overwhelm
+      - shame
+      - spiral
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  ra:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - overwhelm
+      - spiral
+      - grief
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  junko:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - overwhelm
+      - shame
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  miki:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - overwhelm
+      - shame
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  master_wu:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - overwhelm
+      - shame
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  pamela_fellows:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - overwhelm
+      - shame
+      - spiral
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  joshin:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - overwhelm
+      - shame
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  maat:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - overwhelm
+      - shame
+      - spiral
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  omote:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - overwhelm
+      - shame
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5
+
+  master_sha:
+    allowed_personas: []
+    disallowed_personas: []
+    preferred_locales: []
+    allowed_engines:
+      - overwhelm
+      - shame
+      - spiral
+    constraints:
+      peak_intensity_limit: 5
+      identity_shift_allowed: false
+      min_tps_per_chapter: 5

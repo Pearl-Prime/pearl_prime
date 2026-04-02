@@ -1,0 +1,45 @@
+{
+  "chapter_script_writer_handoff": {
+    "schema_version": "1.0.0",
+    "artifact_type": "chapter_script_writer_handoff",
+    "series_id": "sample_series",
+    "chapter_id": "ch01",
+    "pages": [
+      {
+        "page_number": 1,
+        "page_type": "standard",
+        "panels": [
+          {
+            "panel_id": "p_1_0",
+            "dialogue": [],
+            "action": "Open on the street.",
+            "camera": "wide",
+            "mood": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "chapter_script_internal_record": {
+    "schema_version": "1.0.0",
+    "artifact_type": "chapter_script_internal_record",
+    "series_id": "sample_series",
+    "chapter_id": "ch01",
+    "pages": [
+      {
+        "page_number": 1,
+        "page_type": "standard",
+        "panels": [
+          {
+            "panel_id": "p_1_0",
+            "dialogue": [],
+            "action": "Open on the street.",
+            "camera": "wide",
+            "mood": "neutral",
+            "is_carrier_beat": false
+          }
+        ]
+      }
+    ]
+  }
+}

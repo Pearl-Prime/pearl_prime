@@ -1,0 +1,282 @@
+# Authority: SYSTEMS_DOCUMENTATION §29.2.5, EXPERIENCE_LAYER_ANTI_SPAM_SPEC §16
+# Title/subtitle structural templates. Variables: PrimaryKeyword, ScenarioPhrase,
+# PersonaDescription, PromiseClause, DistressVerb, OutcomeVerb, N, FormatUnit,
+# EngineAngle (new: human-readable phrase from engine_title_angles.yaml).
+#
+# ANTI-SPAM DESIGN: 8 title templates across 4 grammar families.
+# Each brand uses a DIFFERENT family mix so the same topic produces
+# structurally different titles under different brands.
+# Reference: New Harbinger (scientific/workbook), Hay House (reader-addressed),
+# Sounds True (evocative/journey), Shambhala (philosophical/contemplative).
+
+title_templates:
+  # --- Grammar Family A: Direct statement (New Harbinger style) ---
+  scenario_direct: "{PrimaryKeyword}"
+  scenario_promise: "{PrimaryKeyword}: {PromiseClause}"
+
+  # --- Grammar Family B: Reader-addressed (Hay House style) ---
+  persona_targeted: "{PrimaryKeyword} for {PersonaDescription}"
+  outcome_focused: "How to {OutcomeVerb} and Take Back Your Mind"
+
+  # --- Grammar Family C: Metaphorical / evocative (Sounds True style) ---
+  metaphor_title: "{EngineAngle}"
+  journey_title: "{EngineAngle}: {PromiseClause}"
+
+  # --- Grammar Family D: Scientific / method (workbook style) ---
+  method_title: "The {PrimaryKeyword} Method"
+  guide_title: "A Practical Guide to {OutcomeVerb}"
+
+# ─── SUBTITLE TEMPLATES ──────────────────────────────────────────────────
+# Three lengths: none (no subtitle), short (tagline, <8 words), long (full sentence).
+# Each template is tagged with its length class. The generator picks based on
+# brand subtitle_strategy weights, then fills from the matching pool.
+#
+# Content tags: persona_direct (names persona), topic_direct (names topic keyword),
+# metaphor (pure evocative), location (includes {Location} variable when present).
+# Brand content_mix weights control the % of each tag in the candidate set.
+
+subtitle_templates:
+
+  # ─── SHORT subtitles (tagline / colon-join style, <8 words) ───
+  # These join into the title as "Title: Tagline" in the plan output.
+  short_gentle:       { text: "A Path Back to Stillness", length: short, content: metaphor }
+  short_permission:   { text: "You Were Never Broken", length: short, content: metaphor }
+  short_body:         { text: "A Nervous System Reset", length: short, content: topic_direct }
+  short_method:       { text: "A Practical System for {PrimaryKeyword}", length: short, content: topic_direct }
+  short_persona:      { text: "For {PersonaDescription}", length: short, content: persona_direct }
+  short_location:     { text: "Voices from {Location}", length: short, content: location }
+  short_promise:      { text: "{PromiseClause}", length: short, content: metaphor }
+  short_mechanism:    { text: "What Your Body Already Knows", length: short, content: metaphor }
+
+  # ─── LONG subtitles (full sentence, 10-20 words) ───
+  three_part:         { text: "How to {OutcomeVerb}, {Action1}, and {Action2}", length: long, content: topic_direct }
+  how_to_stack:       { text: "How to {Action1}, {Action2}, and {Action3}", length: long, content: topic_direct }
+  micro_promise:      { text: "A Proven Path to {OutcomeVerb} and Find Lasting Calm", length: long, content: metaphor }
+  numbered_steps:     { text: "{N} {FormatUnit} to {OutcomeVerb} and Reclaim Your Peace of Mind", length: long, content: topic_direct }
+  practical_tools:    { text: "Practical Tools for {PersonaDescription} Who {DistressVerb} Under Pressure", length: long, content: persona_direct }
+  gentle_promise:     { text: "A Gentle Approach to {PrimaryKeyword} That Meets You Where You Are", length: long, content: topic_direct }
+  science_backed:     { text: "Evidence-Based Strategies to {OutcomeVerb} and Build Lasting Change", length: long, content: topic_direct }
+  body_first:         { text: "Body-Based Practices for {PrimaryKeyword} and Nervous System Reset", length: long, content: topic_direct }
+  identity_shift:     { text: "How {PersonaDescription} Are Rewriting the Rules of {PrimaryKeyword}", length: long, content: persona_direct }
+  permission_grant:   { text: "You Do Not Have to {DistressVerb} Anymore — A Path to {OutcomeVerb}", length: long, content: metaphor }
+  invisible_script:   { text: "The Hidden Pattern Behind Your {PrimaryKeyword} — and How to Break It", length: long, content: topic_direct }
+  mechanism_reveal:   { text: "What Your {PrimaryKeyword} Is Really Telling You — and What to Do About It", length: long, content: topic_direct }
+  somatic_anchor:     { text: "A Nervous System Approach to {OutcomeVerb} and Feeling Safe in Your Body", length: long, content: metaphor }
+  daily_ritual:       { text: "{N} Minutes a Day to {OutcomeVerb} and Build Lasting Resilience", length: long, content: topic_direct }
+  profession_specific: { text: "A Field Guide for {PersonaDescription} Navigating {PrimaryKeyword}", length: long, content: persona_direct }
+  generation_voice:   { text: "A Real Talk Guide to {PrimaryKeyword} for {PersonaDescription}", length: long, content: persona_direct }
+  location_grounded:  { text: "A Guide for {PersonaDescription} in {Location} Navigating {PrimaryKeyword}", length: long, content: location }
+  engine_hook:        { text: "{EngineSubtitleHook}", length: long, content: metaphor }
+
+# ─── BRAND PREFERENCES ────────────────────────────────────────────────────
+# Each brand has:
+#   title: preferred title template IDs
+#   subtitle: preferred subtitle template IDs (from any length class)
+#   subtitle_strategy:
+#     none_pct:  % of books with NO subtitle (punchy standalone title)
+#     short_pct: % with SHORT subtitle (colon-joined tagline)
+#     long_pct:  % with LONG subtitle (full separate sentence)
+#     Must sum to ~1.0. Generator uses seeded roll to pick mode per book.
+#   content_mix:
+#     persona_direct: weight for naming persona in subtitle
+#     topic_direct:   weight for naming topic keyword in subtitle
+#     metaphor:       weight for pure evocative/metaphorical subtitle
+#     location:       weight for including location name (when location in book)
+#     Weights are relative; generator normalizes. Higher = more likely.
+#
+# ANTI-SPAM: No two brands share the same (subtitle_strategy + content_mix) profile.
+
+brand_template_preferences:
+
+  # ─── Calm / Contemplative cluster ───
+  stillness_press:
+    title: [metaphor_title, journey_title]
+    subtitle: [short_gentle, short_permission, somatic_anchor, engine_hook]
+    subtitle_strategy: { none_pct: 0.30, short_pct: 0.40, long_pct: 0.30 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.15, metaphor: 0.70, location: 0.10 }
+
+  spiritual_ground:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_gentle, short_mechanism, gentle_promise, permission_grant]
+    subtitle_strategy: { none_pct: 0.25, short_pct: 0.35, long_pct: 0.40 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.10, metaphor: 0.80, location: 0.05 }
+
+  healing_ground:
+    title: [metaphor_title, journey_title]
+    subtitle: [short_body, body_first, somatic_anchor, engine_hook]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.30, long_pct: 0.55 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.30, metaphor: 0.50, location: 0.10 }
+
+  # ─── Practical / Regulation cluster ───
+  stabilizer:
+    title: [scenario_direct, scenario_promise]
+    subtitle: [short_method, micro_promise, three_part, mechanism_reveal]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.25, long_pct: 0.65 }
+    content_mix: { persona_direct: 0.15, topic_direct: 0.50, metaphor: 0.25, location: 0.10 }
+
+  stoic_edge:
+    title: [metaphor_title, scenario_direct]
+    subtitle: [short_mechanism, science_backed, invisible_script]
+    subtitle_strategy: { none_pct: 0.35, short_pct: 0.30, long_pct: 0.35 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.25, metaphor: 0.65, location: 0.05 }
+
+  bio_flow:
+    title: [method_title, guide_title]
+    subtitle: [short_body, body_first, science_backed, somatic_anchor]
+    subtitle_strategy: { none_pct: 0.05, short_pct: 0.20, long_pct: 0.75 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.55, metaphor: 0.25, location: 0.10 }
+
+  # ─── Performance / Action cluster ───
+  high_performer:
+    title: [method_title, outcome_focused]
+    subtitle: [short_method, practical_tools, numbered_steps, profession_specific]
+    subtitle_strategy: { none_pct: 0.20, short_pct: 0.20, long_pct: 0.60 }
+    content_mix: { persona_direct: 0.35, topic_direct: 0.40, metaphor: 0.10, location: 0.15 }
+
+  optimizer:
+    title: [guide_title, method_title]
+    subtitle: [short_method, science_backed, practical_tools, mechanism_reveal]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.25, long_pct: 0.60 }
+    content_mix: { persona_direct: 0.15, topic_direct: 0.55, metaphor: 0.20, location: 0.10 }
+
+  focus_sprint:
+    title: [guide_title, outcome_focused]
+    subtitle: [short_method, numbered_steps, practical_tools, daily_ritual]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.20, long_pct: 0.70 }
+    content_mix: { persona_direct: 0.20, topic_direct: 0.50, metaphor: 0.15, location: 0.15 }
+
+  # ─── Narrative / Growth cluster ───
+  gentle_growth:
+    title: [journey_title, persona_targeted]
+    subtitle: [short_gentle, short_permission, gentle_promise, permission_grant]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.45, long_pct: 0.40 }
+    content_mix: { persona_direct: 0.20, topic_direct: 0.15, metaphor: 0.55, location: 0.10 }
+
+  creative_unfold:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_permission, short_gentle, micro_promise, identity_shift]
+    subtitle_strategy: { none_pct: 0.25, short_pct: 0.40, long_pct: 0.35 }
+    content_mix: { persona_direct: 0.15, topic_direct: 0.10, metaphor: 0.70, location: 0.05 }
+
+  legacy_builder:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_mechanism, gentle_promise, science_backed, invisible_script]
+    subtitle_strategy: { none_pct: 0.20, short_pct: 0.30, long_pct: 0.50 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.20, metaphor: 0.60, location: 0.10 }
+
+  # ─── Identity / Confidence cluster ───
+  confidence_core:
+    title: [outcome_focused, method_title]
+    subtitle: [short_persona, practical_tools, science_backed, identity_shift]
+    subtitle_strategy: { none_pct: 0.20, short_pct: 0.15, long_pct: 0.65 }
+    content_mix: { persona_direct: 0.40, topic_direct: 0.30, metaphor: 0.15, location: 0.15 }
+
+  executive_calm:
+    title: [method_title, scenario_direct]
+    subtitle: [short_method, short_persona, numbered_steps, profession_specific]
+    subtitle_strategy: { none_pct: 0.25, short_pct: 0.30, long_pct: 0.45 }
+    content_mix: { persona_direct: 0.35, topic_direct: 0.35, metaphor: 0.10, location: 0.20 }
+
+  career_lift:
+    title: [method_title, guide_title]
+    subtitle: [short_persona, practical_tools, numbered_steps, identity_shift]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.20, long_pct: 0.70 }
+    content_mix: { persona_direct: 0.35, topic_direct: 0.40, metaphor: 0.10, location: 0.15 }
+
+  # ─── Youth / Reset cluster ───
+  calm_student:
+    title: [persona_targeted, outcome_focused]
+    subtitle: [short_persona, short_promise, numbered_steps, generation_voice]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.40, long_pct: 0.45 }
+    content_mix: { persona_direct: 0.30, topic_direct: 0.25, metaphor: 0.30, location: 0.15 }
+
+  night_reset:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_gentle, short_permission, gentle_promise, permission_grant]
+    subtitle_strategy: { none_pct: 0.30, short_pct: 0.40, long_pct: 0.30 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.20, metaphor: 0.70, location: 0.05 }
+
+  minimal_mind:
+    title: [metaphor_title, scenario_direct]
+    subtitle: [short_mechanism, short_gentle, invisible_script, science_backed]
+    subtitle_strategy: { none_pct: 0.40, short_pct: 0.35, long_pct: 0.25 }
+    content_mix: { persona_direct: 0.05, topic_direct: 0.20, metaphor: 0.70, location: 0.05 }
+
+  # ─── Specialized cluster ───
+  trauma_path:
+    title: [journey_title, metaphor_title]
+    subtitle: [short_gentle, short_permission, gentle_promise, engine_hook]
+    subtitle_strategy: { none_pct: 0.20, short_pct: 0.35, long_pct: 0.45 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.15, metaphor: 0.70, location: 0.05 }
+
+  hormone_reset:
+    title: [guide_title, method_title]
+    subtitle: [short_body, short_method, science_backed, mechanism_reveal]
+    subtitle_strategy: { none_pct: 0.05, short_pct: 0.20, long_pct: 0.75 }
+    content_mix: { persona_direct: 0.15, topic_direct: 0.60, metaphor: 0.15, location: 0.10 }
+
+  longevity_lab:
+    title: [method_title, guide_title]
+    subtitle: [short_method, science_backed, numbered_steps, daily_ritual]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.25, long_pct: 0.65 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.55, metaphor: 0.25, location: 0.10 }
+
+  adhd_forge:
+    title: [method_title, outcome_focused]
+    subtitle: [short_method, practical_tools, numbered_steps, daily_ritual]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.25, long_pct: 0.60 }
+    content_mix: { persona_direct: 0.20, topic_direct: 0.45, metaphor: 0.20, location: 0.15 }
+
+  resilient_parent:
+    title: [persona_targeted, scenario_promise]
+    subtitle: [short_persona, practical_tools, numbered_steps, generation_voice]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.15, long_pct: 0.75 }
+    content_mix: { persona_direct: 0.40, topic_direct: 0.30, metaphor: 0.15, location: 0.15 }
+
+  relationship_clarity:
+    title: [outcome_focused, guide_title]
+    subtitle: [short_method, practical_tools, how_to_stack, profession_specific]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.20, long_pct: 0.70 }
+    content_mix: { persona_direct: 0.25, topic_direct: 0.45, metaphor: 0.15, location: 0.15 }
+
+  morning_momentum:
+    title: [scenario_promise, outcome_focused]
+    subtitle: [short_method, short_promise, numbered_steps, daily_ritual]
+    subtitle_strategy: { none_pct: 0.15, short_pct: 0.35, long_pct: 0.50 }
+    content_mix: { persona_direct: 0.15, topic_direct: 0.45, metaphor: 0.25, location: 0.15 }
+
+  cognitive_clarity:
+    title: [method_title, guide_title]
+    subtitle: [short_method, science_backed, numbered_steps, mechanism_reveal]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.20, long_pct: 0.70 }
+    content_mix: { persona_direct: 0.10, topic_direct: 0.55, metaphor: 0.25, location: 0.10 }
+
+  default:
+    title: [scenario_direct, outcome_focused]
+    subtitle: [short_method, three_part, how_to_stack]
+    subtitle_strategy: { none_pct: 0.10, short_pct: 0.25, long_pct: 0.65 }
+    content_mix: { persona_direct: 0.20, topic_direct: 0.40, metaphor: 0.30, location: 0.10 }
+
+# Micro-promise clauses per brand (for {PromiseClause})
+micro_promises:
+  default:
+    - "How to Stop Freezing and Speak Up with Confidence"
+    - "How to Calm Your Mind and Show Up Fully"
+    - "A Clear Path from Overwhelm to Calm"
+    - "Practical Relief for a Restless Mind"
+  stabilizer:
+    - "How to Stop Freezing in Meetings and Speak Up with Confidence"
+    - "How to Calm Your Nerves and Show Up with Confidence"
+  stillness_press:
+    - "A Gentle Return to Stillness"
+    - "Finding Peace in the Middle of It All"
+    - "When the Noise Inside Finally Quiets"
+  cognitive_clarity:
+    - "Evidence-Based Tools for a Clearer Mind"
+    - "A Research-Backed Approach to Mental Clarity"
+  high_performer:
+    - "A Performance-Ready System for Your Mind"
+    - "The Mental Edge for High-Stakes Moments"
+  trauma_path:
+    - "A Compassionate Path Through What Happened"
+    - "Healing at the Pace Your Nervous System Needs"

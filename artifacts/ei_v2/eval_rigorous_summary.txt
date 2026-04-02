@@ -1,0 +1,72 @@
+========================================================================
+  RIGOROUS EVALUATION: SELF-HELP AUDIOBOOK QUALITY + V1 vs V2
+========================================================================
+
+  Books evaluated:   3
+  Total chapters:    54
+  Total words:       17,585
+  Personas covered:  1
+  Total time:        3.3s
+
+  AUDIOBOOK QUALITY DIMENSIONS (avg across all books)
+  --------------------------------------------------------------------
+  B Therapeutic Value      [###############..........] 0.632  (lo=0.61 hi=0.67)
+  A Emotional Coherence    [#######################..] 0.944  (lo=0.93 hi=0.97)
+  D Engagement             [#####....................] 0.236  (lo=0.20 hi=0.28)
+  C Chapter Journey        [#############............] 0.540  (lo=0.47 hi=0.60)
+  C Cohesion               [###########..............] 0.464  (lo=0.36 hi=0.54)
+  B Listen Experience      [###############..........] 0.626  (lo=0.55 hi=0.69)
+  D Marketability          [######...................] 0.243  (lo=0.21 hi=0.29)
+  A Safety Compliance      [########################.] 0.996  (lo=0.99 hi=1.00)
+  F Content Uniqueness     [.........................] 0.036  (lo=0.00 hi=0.06)
+  D Somatic Precision      [########.................] 0.334  (lo=0.21 hi=0.41)
+
+  C OVERALL COMPOSITE:  0.5395
+
+  V1 vs V2 PARALLEL COMPARISON
+  --------------------------------------------------------------------
+  Total slots compared:  297
+  Agreements:            72 (24.2%)
+  Disagreements:         225
+  V2 safety flags:       0
+  V2 dedup flags:        519
+  V2 TTS issues:         274
+  V2 arc issues:         42
+
+  PERFORMANCE (per book)
+  --------------------------------------------------------------------
+  Compile    avg:      158ms  min:    107ms  max:    202ms
+  Render     avg:       22ms  min:     18ms  max:     30ms
+  Evaluate   avg:      345ms  min:    215ms  max:    563ms
+  V1vs V2    avg:      559ms  min:    350ms  max:    840ms
+  Total      avg:     1084ms  min:    691ms  max:   1623ms
+
+  V1 avg per slot: 0.21ms
+  V2 avg per slot: 4.40ms
+  V2/V1 ratio:     21.31x (V2 slower)
+
+  PER-BOOK RESULTS
+  --------------------------------------------------------------------
+  0.5467  gen_z_professionals/anxiety/spiral  (12ch, 4984w, 939ms) V1V2=34%
+  0.5406  gen_z_professionals/overthinking/spiral  (12ch, 3469w, 691ms) V1V2=17%
+  0.5310  gen_z_professionals/anxiety/overwhelm  (30ch, 9132w, 1623ms) V1V2=23%
+
+  DIMENSIONS RANKED (weakest → strongest)
+  --------------------------------------------------------------------
+  F  0.036  Content Uniqueness *** NEEDS WORK ***
+  D  0.236  Engagement *** NEEDS WORK ***
+  D  0.243  Marketability *** NEEDS WORK ***
+  D  0.334  Somatic Precision *** NEEDS WORK ***
+  C  0.464  Cohesion * room to improve *
+  C  0.540  Chapter Journey * room to improve *
+  B  0.626  Listen Experience
+  B  0.632  Therapeutic Value
+  A  0.944  Emotional Coherence
+  A  0.996  Safety Compliance
+
+  ARC ISSUES (3)
+    ch7: band_4_valence_drift: avg=0.00, expected=[-0.7, -0.3], deviation=0.30
+    ch7: band_4_valence_drift: avg=0.01, expected=[-0.7, -0.3], deviation=0.31
+    ch17: band_4_valence_drift: avg=0.06, expected=[-0.7, -0.3], deviation=0.36
+
+========================================================================

@@ -1,0 +1,20 @@
+version: 1
+
+pending_assignments:
+  - brand_id: sleep_repair_tw
+    locale: zh-TW
+    field: voice_identity.elevenlabs_voice_id
+    placeholder: TBD
+    status: pending_audition
+    fallback_provider: google
+    fallback_voice_id: cmn-TW-Wavenet-A
+    notes: Assign after ElevenLabs voice audition for zh-TW.
+
+  - brand_id: stabilizer_hu
+    locale: hu-HU
+    field: voice_identity.elevenlabs_voice_id
+    placeholder: null
+    status: pending_audition
+    fallback_provider: google
+    fallback_voice_id: hu-HU-Standard-A
+    notes: ElevenLabs is preferred for hu-HU; assign a production voice after audition.

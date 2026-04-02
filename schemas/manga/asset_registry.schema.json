@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/asset_registry.schema.json",
+  "allOf": [
+    { "$ref": "manga_common.schema.json#/$defs/artifact_base" },
+    {
+      "type": "object",
+      "required": ["artifact_type", "assets"],
+      "properties": {
+        "artifact_type": { "const": "asset_registry" },
+        "assets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["asset_id"],
+            "properties": { "asset_id": { "type": "string", "minLength": 1 } }
+          }
+        }
+      }
+    }
+  ]
+}

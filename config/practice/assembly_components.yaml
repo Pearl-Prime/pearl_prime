@@ -1,0 +1,85 @@
+# Exercise component assembly rules.
+# Ordered list — first matching rule wins.
+# Each rule specifies match conditions and component modes (full/lean/skip).
+# bridge_tone: "gentle" triggers the softer bridge variant for post-emotional content.
+
+version: 1
+
+rules:
+  - name: quick_repeat
+    description: "Exercise done 2+ times already in this session — minimal wrapper"
+    match:
+      repeat_count_gte: 2
+    components:
+      bridge: skip
+      intro: skip
+      description: lean
+      aha: skip
+      integration: skip
+
+  - name: emotional_pivot
+    description: "Heavy emotional content just landed — full gentle transition into exercise"
+    match:
+      emotional_state: heavy
+    components:
+      bridge: full
+      intro: full
+      description: full
+      aha: full
+      integration: full
+    bridge_tone: gentle
+
+  - name: flow_state
+    description: "Reader is in good rhythm — light entry, skip integration to keep momentum"
+    match:
+      emotional_state: flow
+    components:
+      bridge: lean
+      intro: skip
+      description: full
+      aha: full
+      integration: skip
+
+  - name: session_close
+    description: "Final exercise of chapter/session — skip entry, land fully"
+    match:
+      is_session_close: true
+    components:
+      bridge: skip
+      intro: skip
+      description: full
+      aha: full
+      integration: full
+
+  - name: familiar_new_context
+    description: "Reader knows this exercise but it's applied to a new topic"
+    match:
+      first_encounter: false
+      repeat_count_lte: 1
+    components:
+      bridge: lean
+      intro: lean
+      description: full
+      aha: full
+      integration: full
+
+  - name: first_encounter
+    description: "Reader has never done this exercise — full preparation"
+    match:
+      first_encounter: true
+    components:
+      bridge: full
+      intro: full
+      description: full
+      aha: full
+      integration: full
+
+  - name: default
+    description: "No specific context — lean bridge, full everything else"
+    match: {}
+    components:
+      bridge: lean
+      intro: full
+      description: full
+      aha: full
+      integration: full

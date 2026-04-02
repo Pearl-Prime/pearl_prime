@@ -1,0 +1,85 @@
+# CDIS §6 — Minimum effective dose by modality (+ micro-dose exceptions).
+version: 1
+
+attention_residue_minutes: [15, 23]
+
+modalities:
+  breathing:
+    modality: breathing
+    minimum_effective_dose_minutes: 5
+    optimal_dose_minutes: 15
+    maximum_single_dose_minutes: 20
+    frequency: "2x_daily"
+    attention_residue_minutes: 20
+
+  visualization:
+    modality: visualization
+    minimum_effective_dose_minutes: 10
+    optimal_dose_minutes: 17
+    maximum_single_dose_minutes: 20
+    frequency: "2x_daily"
+    attention_residue_minutes: 22
+
+  music_exposure:
+    modality: music_exposure
+    minimum_effective_dose_minutes: 15
+    optimal_dose_minutes: 30
+    maximum_single_dose_minutes: 45
+    frequency: "daily"
+    attention_residue_minutes: 20
+
+  nature_pill:
+    modality: nature_pill
+    minimum_effective_dose_minutes: 20
+    optimal_dose_minutes: 25
+    maximum_single_dose_minutes: 30
+    frequency: "as_needed"
+    attention_residue_minutes: 25
+
+  cognitive_reframe:
+    modality: cognitive_reframe
+    minimum_effective_dose_minutes: 8
+    optimal_dose_minutes: 20
+    maximum_single_dose_minutes: 45
+    frequency: "session_based"
+    attention_residue_minutes: 18
+
+  somatic_release:
+    modality: somatic_release
+    minimum_effective_dose_minutes: 10
+    optimal_dose_minutes: 15
+    maximum_single_dose_minutes: 30
+    frequency: "3x_weekly"
+    attention_residue_minutes: 20
+
+  micro_mindfulness:
+    modality: micro_mindfulness
+    minimum_effective_dose_seconds: 60
+    optimal_dose_seconds: 120
+    maximum_single_dose_minutes: 5
+    frequency: "4x_daily_minimum"
+    attention_residue_minutes: 15
+    micro_dose_exception:
+      bypass_absolute_min_when: "frequency >= 4/day for >= 14 days"
+
+  narrative_transport:
+    modality: narrative_transport
+    minimum_effective_dose_minutes: 30
+    optimal_dose_minutes: 45
+    maximum_single_dose_minutes: 120
+    frequency: "weekly_plus"
+    attention_residue_minutes: 23
+
+  panel_breath_sequence:
+    modality: panel_breath_sequence
+    minimum_effective_dose_seconds: 18
+    panels_per_cycle_min: 6
+    panels_per_cycle_max: 8
+    frequency: "per_chapter_iyashikei"
+    attention_residue_minutes: 5
+
+micro_dose_rules:
+  eligible_modalities: [breathing, micro_mindfulness, meditation_short]
+  min_frequency_per_day: 4
+  min_protocol_days: 14
+  cortisol_claim: "stub_research_ref_42"

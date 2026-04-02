@@ -1,0 +1,18 @@
+# K-table for F003 (Challenge). Dev Spec §4.2.2. 7-21 chapters.
+format_id: F003
+tier: A
+chapter_count: 21
+
+k_min_per_slot:
+  HOOK: { k_min: 10 }
+  SCENE: { k_min: 12 }
+  STORY: { k_min: 21 }
+  REFLECTION: { k_min: 12 }
+  EXERCISE: { k_min: 4 }
+  INTEGRATION: { k_min: 8 }
+  # Bestseller structure slots (docs/BESTSELLER_STRUCTURES.md).
+  # k_min=7 proportional to F003 7-chapter minimum.
+  PIVOT: { k_min: 7 }
+  TAKEAWAY: { k_min: 7 }
+  THREAD: { k_min: 7 }
+  PERMISSION: { k_min: 7 }
