@@ -39,3 +39,10 @@ scripts/feeds/
 
 # Vite production build (CI builds on deploy)
 brand-wizard-app/dist/
+
+# ElevenLabs briefing outputs (regenerate via scripts/onboarding/generate_briefing_narration.py)
+artifacts/onboarding_audio/*.mp3
+artifacts/onboarding_audio/segments/
+artifacts/onboarding_audio/_ffmpeg_concat_list.txt
+# Published copies for Pages (optional local deploy bundle)
+brand-wizard-app/public/onboarding/audio/*.mp3

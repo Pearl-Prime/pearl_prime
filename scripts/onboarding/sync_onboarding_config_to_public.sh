@@ -15,6 +15,8 @@ SPINE_HTML=(
   brand_admin_weekly_os.html
   market_lane_matrix.html
   lane_examples_gallery.html
+  us_brand_admin_v32_briefing.html
+  jp_brand_admin_v32_briefing.html
 )
 for f in "${SPINE_HTML[@]}"; do
   src="${ROOT}/${f}"

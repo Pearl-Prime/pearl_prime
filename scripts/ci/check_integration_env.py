@@ -7,6 +7,7 @@ docs/INTEGRATION_CREDENTIALS_REGISTRY.md and reports set vs missing.
 Usage:
     python3 scripts/ci/check_integration_env.py
     python3 scripts/ci/check_integration_env.py --json
+        # JSON: object with "summary", "items" (per-var rows), "env_vars_tracked"
 """
 
 import os
@@ -36,6 +37,7 @@ REGISTRY = [
     ("Cloudflare", "CLOUDFLARE_API_TOKEN", False, "Cloudflare API token"),
     ("Cloudflare", "CLOUDFLARE_AI_API_TOKEN", False, "Workers AI alt token"),
     ("GitHub", "GITHUB_TOKEN", False, "GitHub API (auto in Actions)"),
+    ("GitHub", "GITHUB_REPOSITORY", False, "owner/repo for API calls; auto in Actions"),
 
     # --- Publishing ---
     ("WordPress", "WORDPRESS_SITE_URL", False, "Pearl News publishing"),
@@ -45,6 +47,7 @@ REGISTRY = [
     # --- Funnel ---
     ("GoHighLevel", "GHL_API_KEY", False, "Funnel CRM"),
     ("GoHighLevel", "GHL_LOCATION_ID", False, "GHL location"),
+    ("GoHighLevel", "GHL_CONTACTS_URL", False, "GHL contacts / webhook URL"),
     ("SMTP", "SMTP_HOST", False, "Funnel email host"),
     ("SMTP", "SMTP_PORT", False, "Funnel email port"),
     ("SMTP", "SMTP_USER", False, "Funnel email user"),
@@ -87,6 +90,8 @@ REGISTRY = [
     ("Douyin", "DOUYIN_ACCESS_TOKEN", False, "Douyin access token (disabled, needs ICP)"),
     ("SerpApi", "SERPAPI_KEY", False, "Trend checking (245 calls/month budget)"),
 ]
+
+ENV_VARS_TRACKED_COUNT = len({row[1] for row in REGISTRY})
 
 
 def check_env():
@@ -150,8 +155,21 @@ def print_report(results):
 
 def print_json(results):
     import json
-    print(json.dumps(results, indent=2))
+
+    set_vars = [r for r in results if r["set"]]
     missing_required = [r for r in results if not r["set"] and r["required"]]
+    payload = {
+        "registry_doc": "docs/INTEGRATION_CREDENTIALS_REGISTRY.md",
+        "env_vars_tracked": ENV_VARS_TRACKED_COUNT,
+        "summary": {
+            "total_rows": len(results),
+            "set_count": len(set_vars),
+            "missing_required_count": len(missing_required),
+            "missing_required_env_vars": [r["env_var"] for r in missing_required],
+        },
+        "items": results,
+    }
+    print(json.dumps(payload, indent=2))
     return 1 if missing_required else 0
 
 

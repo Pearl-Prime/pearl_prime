@@ -1,0 +1,70 @@
+# ElevenLabs + cumulative VoiceProfile for teacher Ahjan brand briefing narration.
+# Authority: specs/BRAND_ADMIN_ONBOARDING_TTS_SPEC.md
+# Voice IDs: set in this file OR via env (env wins if non-empty).
+
+teacher_id: ahjan
+display_name: Ahjan
+
+# macOS `say` voices when using scripts/onboarding/generate_briefing_narration.py --offline-demo
+offline_demo_voices:
+  say_male: Daniel
+  say_female: Samantha
+
+elevenlabs_model_id: eleven_multilingual_v2
+
+voices:
+  # Optional inline ids (leave empty to use env only).
+  male_id: ""
+  female_id: ""
+  male_id_env: ELEVENLABS_VOICE_ID_MALE
+  female_id_env: ELEVENLABS_VOICE_ID_FEMALE
+
+base_profile:
+  stability: 0.45
+  similarity_boost: 0.72
+  style: 0.12
+  use_speaker_boost: true
+  prosody_rate_percent: 100.0
+  prosody_pitch_percent: 100.0
+  break_after_ms: 400
+
+clamps:
+  stability: [0.22, 0.78]
+  similarity_boost: [0.55, 0.92]
+  style: [0.0, 0.5]
+  prosody_rate_percent: [86.0, 118.0]
+  prosody_pitch_percent: [92.0, 110.0]
+  break_after_ms: [220, 1300]
+
+# Per-slider (0–100): effect uses (value - 50) * per_unit on each axis.
+slider_deltas:
+  gentleDirect:
+    stability_per_unit: 0.0022
+    prosody_rate_percent_per_unit: -0.14
+    break_after_ms_per_unit: 3.2
+  simpleDeep:
+    style_per_unit: 0.0014
+    prosody_rate_percent_per_unit: -0.09
+    similarity_boost_per_unit: 0.0006
+  emotionalLogical:
+    prosody_pitch_percent_per_unit: 0.07
+    stability_per_unit: -0.0018
+    style_per_unit: 0.001
+  spiritualPractical:
+    style_per_unit: 0.002
+    prosody_rate_percent_per_unit: -0.06
+    prosody_pitch_percent_per_unit: 0.04
+
+# Applied when step.category matches (additive, before per-step delta).
+category_baseline_delta:
+  intro: { break_after_ms: 30 }
+  archetype: { style: 0.018, prosody_rate_percent: -0.8 }
+  persona: { stability: 0.012, similarity_boost: 0.008 }
+  moment: { break_after_ms: 55, prosody_pitch_percent: -0.5 }
+  tradition: { style: 0.014 }
+  visual: { prosody_rate_percent: -1.2, break_after_ms: 25 }
+  voice: { similarity_boost: 0.01 }
+  emotion: { prosody_pitch_percent: 0.6, stability: -0.008 }
+  angle: { style: 0.012, prosody_rate_percent: 0.9 }
+  formats: { prosody_rate_percent: 1.1, stability: 0.006 }
+  outro: { break_after_ms: 40 }

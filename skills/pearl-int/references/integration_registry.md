@@ -1,9 +1,10 @@
 # Pearl_Int — Integration Registry
 
-Last updated: 2026-03-22
+> **Canonical repo-wide credentials** (env var names, consumers, Keychain messaging, Actions secrets, cross-links) live in [`docs/INTEGRATION_CREDENTIALS_REGISTRY.md`](../../docs/INTEGRATION_CREDENTIALS_REGISTRY.md). Treat that document as the single source of truth for *what* to set. This file is Pearl_Int **operational memory**: trend feeds, SerpApi budgeting, validation notes, and channel quirks — not a second registry for secret names.
 
-This file tracks every external integration in Phoenix Omega.
-Pearl_Int consults this before any integration work.
+Last updated: 2026-04-02
+
+Pearl_Int consults the canonical registry for credential names and this file for integration-specific run history and procedures.
 
 ## Registry Format
 

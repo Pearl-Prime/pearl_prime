@@ -8,6 +8,8 @@ Define the canonical media-generation contract for Brand Admin onboarding so wiz
 
 **Related operational pack:** [BRAND_ADMIN_ONBOARDING_IMAGE_PACK_V1_TRUST_LAYER_SPEC.md](./BRAND_ADMIN_ONBOARDING_IMAGE_PACK_V1_TRUST_LAYER_SPEC.md) — 19-slot trust-layer prompts (A), selection rubric (B), page/wizard placement map (C), registry starter shapes, rollout PR order.
 
+**Audio / TTS (onboarding):** [BRAND_ADMIN_ONBOARDING_TTS_SPEC.md](./BRAND_ADMIN_ONBOARDING_TTS_SPEC.md) — ElevenLabs brand briefing narration, cumulative SSML/voice profile, `scripts/onboarding/generate_briefing_narration.py`.
+
 ---
 
 ## 1. Purpose, non-goals, constraints
