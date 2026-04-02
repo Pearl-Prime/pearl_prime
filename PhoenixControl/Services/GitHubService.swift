@@ -154,7 +154,7 @@ final class GitHubService {
         let decoded = try JSONDecoder().decode(RunsResponse.self, from: data)
         return (decoded.workflow_runs ?? []).prefix(limit).map { r in
             let conc = r.conclusion ?? (r.status == "completed" ? "unknown" : (r.status ?? "pending"))
-            WorkflowRun(
+            return WorkflowRun(
                 id: r.id,
                 name: r.name ?? "Workflow",
                 conclusion: conc,

@@ -122,7 +122,7 @@ final class ScriptRunner: ObservableObject {
                 }
 
                 if let timeout = timeoutSeconds, timeout > 0 {
-                    DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(Double(timeout))) {
+                    DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(Int(timeout))) {
                         if process.isRunning {
                             process.terminate()
                             continuation.resume(throwing: RunError.timeout)

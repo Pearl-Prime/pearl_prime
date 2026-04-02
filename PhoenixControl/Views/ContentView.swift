@@ -97,16 +97,16 @@ struct ContentView: View {
             }
         }
         .onAppear { runStartupHealthCheckIfNeeded() }
-        .onChange(of: state.repoPath) { _, _ in runStartupHealthCheckIfNeeded() }
+        .onChange(of: state.repoPath) { _ in runStartupHealthCheckIfNeeded() }
         .sheet(isPresented: $showingPathSheet) {
             pathSheet
         }
-        .onChange(of: pathInput) { _, _ in
+        .onChange(of: pathInput) { _ in
             if !showingPathSheet { return }
             let (valid, _) = artifactReader.validateRepoPath(pathInput)
             state.repoPathValid = valid
         }
-        .onChange(of: showingPathSheet) { _, visible in
+        .onChange(of: showingPathSheet) { visible in
             if !visible { runStartupHealthCheckIfNeeded() }
         }
         .alert("Error", isPresented: Binding(

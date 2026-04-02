@@ -35,7 +35,7 @@ struct DashboardView: View {
         }
         .background(PhoenixColors.phoenixBackground)
         .onAppear { refresh() }
-        .onChange(of: state.refreshTrigger) { _, _ in refresh() }
+        .onChange(of: state.refreshTrigger) { _ in refresh() }
         .task {
             await refreshCIHealth()
             await refreshMLStems()
