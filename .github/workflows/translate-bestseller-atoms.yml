@@ -27,6 +27,11 @@ on:
         required: false
         type: string
         default: ''
+      ref:
+        description: 'Branch to checkout (default: main)'
+        required: false
+        type: string
+        default: 'main'
       dry_run:
         description: 'Dry run (show manifest only, no API calls)'
         required: false
@@ -50,7 +55,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event.inputs.ref || github.ref }}
           fetch-depth: 1
 
       - name: Set up Python
