@@ -45,6 +45,12 @@ repos:
       - QWEN_MODEL
       - CLOUDFLARE_API_TOKEN
       - CLOUDFLARE_ACCOUNT_ID
+      - RUNCOMFY_API_KEY          # PRIMARY image gen (manga, video bank, author art)
+      - WORDPRESS_SITE_URL
+      - WORDPRESS_USERNAME
+      - WORDPRESS_APP_PASSWORD
+      - SLACK_BOT_TOKEN
+      - TELEGRAM_BOT_TOKEN
 
   Qwen-Agent:
     owner: Ahjan108
