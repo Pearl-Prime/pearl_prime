@@ -523,6 +523,45 @@ def _enforce_structural_constraints(
             for i, pos in enumerate(positions):
                 atom_ids[pos] = sorted_aids[i]
 
+    # 2b. Depth-repair pass: swap atoms between chapters when a late chapter
+    # has insufficient mechanism_depth. Reader experience requires that later
+    # chapters feel deeper. Two strategies:
+    #   1. Same-band swap: find an earlier chapter with a deeper atom (preserves arc)
+    #   2. Cross-band swap: if no same-band fix, swap across bands (minor arc deviation
+    #      is acceptable to avoid flat late chapters — reader notices depth > band)
+    early_end = max(1, chapter_count // 3)
+    mid_end = max(early_end + 1, 2 * chapter_count // 3)
+
+    for ch in range(chapter_count):
+        required_depth = 1 if ch < early_end else (2 if ch < mid_end else 3)
+        for slot_i, (global_idx, _orig_aid) in enumerate(story_slots_by_chapter[ch]):
+            aid = atom_ids[global_idx]
+            if "placeholder:" in aid or "silence:" in aid:
+                continue
+            actual_depth = meta_by_id.get(aid, {}).get("mechanism_depth", 1)
+            if actual_depth >= required_depth:
+                continue
+            # Strategy 1: same-band swap with earlier chapter
+            my_band = int(band_by_id.get(aid, 3)) if band_by_id else 3
+            swapped = False
+            for swap_ch in range(ch):
+                swap_required = 1 if swap_ch < early_end else (2 if swap_ch < mid_end else 3)
+                for swap_global_idx, _swap_orig in story_slots_by_chapter[swap_ch]:
+                    swap_aid = atom_ids[swap_global_idx]
+                    if "placeholder:" in swap_aid or "silence:" in swap_aid:
+                        continue
+                    swap_depth = meta_by_id.get(swap_aid, {}).get("mechanism_depth", 1)
+                    swap_band = int(band_by_id.get(swap_aid, 3)) if band_by_id else 3
+                    if swap_band == my_band and swap_depth >= required_depth and actual_depth >= swap_required:
+                        atom_ids[global_idx], atom_ids[swap_global_idx] = atom_ids[swap_global_idx], atom_ids[global_idx]
+                        swapped = True
+                        break
+                if swapped:
+                    break
+            # Note: cross-band swaps are intentionally omitted to preserve arc alignment.
+            # The band-aware sort and same-band swap handle depth progression within
+            # arc constraints. Remaining depth gaps require atom pool enrichment.
+
     # 3. Callback completion: drop setup atoms without matching return
     setup_ids: set[str] = set()
     return_ids: set[str] = set()

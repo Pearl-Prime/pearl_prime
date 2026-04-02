@@ -60,6 +60,9 @@ class TupleRow:
     story_pool_path_rel: str
     risk: str  # BLOCKER | RED | YELLOW | GREEN
     deficit_codes: list[str]  # NO_BINDING, NO_ARC, NO_STORY_POOL, POOL_TOO_SHALLOW, BAND_DEFICIT
+    # Phase 7 extensions: bestseller structure and location coverage
+    bestseller_structures_used: list[str] = None  # type: ignore[assignment]
+    location_profiles_tested: list[str] = None  # type: ignore[assignment]
 
 
 def _load_yaml(p: Path) -> dict:
@@ -90,6 +93,41 @@ def _get_alerts_config() -> dict[str, Any]:
     path = CONFIG_ROOT / "gates.yaml"
     data = _load_yaml(path)
     return data.get("coverage_health_alerts") or {}
+
+
+def _get_bestseller_structures(chapter_count: int, selector_key: str) -> list[str]:
+    """Return bestseller structures assigned for a given chapter count and key.
+
+    Uses chapter_planner.assign_bestseller_structures if available;
+    returns empty list on import failure (non-blocking).
+    """
+    try:
+        from phoenix_v4.planning.chapter_planner import assign_bestseller_structures
+        return assign_bestseller_structures(chapter_count, selector_key)
+    except Exception:
+        return []
+
+
+def _get_tested_location_profiles() -> list[str]:
+    """Discover which location profiles have grounding reports in artifacts.
+
+    Scans artifacts/ for location_grounding_report.json files and extracts
+    the resolved_location_id from each.
+    """
+    tested: list[str] = []
+    artifacts_dir = REPO_ROOT / "artifacts"
+    if not artifacts_dir.exists():
+        return tested
+    for report in artifacts_dir.rglob("location_grounding_report.json"):
+        try:
+            import json
+            data = json.loads(report.read_text(encoding="utf-8"))
+            loc = data.get("resolved_location_id") or data.get("location_id")
+            if loc and loc not in tested:
+                tested.append(loc)
+        except Exception:
+            continue
+    return sorted(tested)
 
 
 def _load_story_atoms_and_mtime(

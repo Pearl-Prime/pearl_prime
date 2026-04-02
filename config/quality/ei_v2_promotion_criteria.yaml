@@ -27,6 +27,7 @@ quality:
     safety_compliance: 0.95
     content_uniqueness: 0.02
     somatic_precision: 0.30
+    tts_readability: 0.45
 
   # V1/V2 agreement floor: V2 must agree with V1 on at least this
   # fraction of slots (prevents V2 from being wildly divergent)
