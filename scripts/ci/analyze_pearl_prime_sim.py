@@ -79,6 +79,11 @@ def analyze(results: list[dict], summary: dict) -> dict:
     phase2_rate = (phase2.get("phase2_passed", 0) / phase2_total) if phase2_total else 1.0
     phase3_total = (phase3.get("phase3_passed", 0) + phase3.get("phase3_failed", 0)) if phase3 else 0
     phase3_rate = (phase3.get("phase3_passed", 0) / phase3_total) if phase3_total else 1.0
+    phase3_negative_caught = phase3.get("phase3_negative_test_caught", 0)
+
+    # Per-result negative test counting (when summary doesn't have it)
+    if phase3_negative_caught == 0:
+        phase3_negative_caught = sum(1 for r in results if r.get("phase3_negative_test_caught"))
 
     return {
         "n": n,
@@ -99,6 +104,7 @@ def analyze(results: list[dict], summary: dict) -> dict:
         "phase3_pass_rate": phase3_rate,
         "phase2_n": phase2_total,
         "phase3_n": phase3_total,
+        "phase3_negative_test_caught": phase3_negative_caught,
     }
 
 
@@ -168,6 +174,8 @@ def main() -> int:
         lines.append(f"\nPhase 2 pass rate: {analysis.get('phase2_pass_rate', 0):.2%} (n={analysis['phase2_n']})")
     if analysis.get("phase3_n"):
         lines.append(f"Phase 3 pass rate: {analysis.get('phase3_pass_rate', 0):.2%} (n={analysis['phase3_n']})")
+    if analysis.get("phase3_negative_test_caught"):
+        lines.append(f"Phase 3 negative tests caught (correct rejections): {analysis['phase3_negative_test_caught']}")
     if analysis.get("error_reasons"):
         lines.append("")
         lines.append("Error reasons:")
