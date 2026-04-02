@@ -252,6 +252,20 @@ This reads the registry below and reports which env vars are set vs missing.
 | **Required vs optional** | Optional — used for trend-aware feed enrichment |
 | **Status** | Missing (budget_guard limits to 245 calls/month) |
 
+### 19. RunComfy — Image generation (PRIMARY — manga panels, video bank, author art)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `RUNCOMFY_API_KEY`, `RUNCOMFY_DEPLOYMENT_ID` (default: `677edba8-ace0-4b2b-bad2-8e94b9959065`) |
+| **Consumed by** | `scripts/image_generation/runcomfy_batch.py`, `phoenix_v4/manga/image_backend.py` (RunComfyImageBackend) |
+| **GitHub workflows** | None yet — add `RUNCOMFY_API_KEY` to secrets for CI image generation |
+| **How to obtain** | RunComfy dashboard: https://www.runcomfy.com/dashboard — API Keys (user has paid subscription) |
+| **Required vs optional** | **Required** for manga panel generation and video image bank |
+| **Status** | **Not in GitHub Secrets — needs adding.** Was working previously via local env var. |
+| **CLI usage** | `python3 scripts/image_generation/runcomfy_batch.py --api-key $RUNCOMFY_API_KEY` |
+| **Manga usage** | `python3 scripts/manga/run_manga_chapter.py --backend runcomfy` (reads `RUNCOMFY_API_KEY` from env) |
+| **Note** | This is the PRIMARY image generation service. Cloudflare FLUX (§5) is demoted to fallback only. |
+
 ---
 
 ## Messaging channels (Keychain-based)

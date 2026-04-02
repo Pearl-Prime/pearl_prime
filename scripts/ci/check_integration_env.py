@@ -89,6 +89,9 @@ REGISTRY = [
     ("Douyin", "DOUYIN_CLIENT_SECRET", False, "Douyin client secret (disabled, needs ICP)"),
     ("Douyin", "DOUYIN_ACCESS_TOKEN", False, "Douyin access token (disabled, needs ICP)"),
     ("SerpApi", "SERPAPI_KEY", False, "Trend checking (245 calls/month budget)"),
+    # Image generation (PRIMARY — RunComfy; Cloudflare FLUX is fallback)
+    ("RunComfy", "RUNCOMFY_API_KEY", True, "RunComfy API key (PRIMARY image gen — manga, video bank, author art)"),
+    ("RunComfy", "RUNCOMFY_DEPLOYMENT_ID", False, "RunComfy deployment ID (default: 677edba8-ace0-4b2b-bad2-8e94b9959065)"),
 ]
 
 ENV_VARS_TRACKED_COUNT = len({row[1] for row in REGISTRY})
