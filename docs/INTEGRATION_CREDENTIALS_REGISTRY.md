@@ -379,7 +379,7 @@ Those files remain authoritative for their domain-specific setup procedures. Thi
 | `ANTHROPIC_API_KEY` | ✅ | ✅ | ✅ 200 | `https://console.anthropic.com/settings/keys` |
 | `CLOUDFLARE_ACCOUNT_ID` | ✅ | ✅ | — (config) | Cloudflare dashboard URL path |
 | `CLOUDFLARE_API_TOKEN` | ✅ | ✅ | ✅ 200 (active) | `https://dash.cloudflare.com/` → My Profile → API Tokens |
-| `CLOUDFLARE_AI_API_TOKEN` | ❌ (deleted) | ❌ | ❌ 401 (invalid) | Needs regeneration from Cloudflare Workers AI |
+| `CLOUDFLARE_AI_API_TOKEN` | ✅ | ✅ | ✅ 200 (active) | Cloudflare → My Profile → API Tokens → Workers AI template |
 | `WORDPRESS_SITE_URL` | ✅ | ✅ | ✅ 200 | `https://pearlnewsuna.org` |
 | `WORDPRESS_USERNAME` | ✅ | ✅ | ✅ | `admin` |
 | `WORDPRESS_APP_PASSWORD` | ✅ | ✅ | ✅ 200 | WordPress Admin → Application Passwords |
@@ -409,10 +409,10 @@ Those files remain authoritative for their domain-specific setup procedures. Thi
 |-----|---------|
 | `YT_REFRESH_TOKEN_SP` / `YT_REFRESH_TOKEN_CC` | Needs OAuth consent flow per channel |
 | `TIKTOK_ACCESS_TOKEN_SP` / `TIKTOK_ACCESS_TOKEN_CC` | TikTok app review pending |
-| `DISCORD_BOT_TOKEN` | Discord MFA required to reset token — owner must do manually |
+| `DISCORD_BOT_TOKEN` | ✅ Done — reset via MFA, stored + pushed |
 | `IG_ACCESS_TOKEN_SP` / `IG_USER_ID_SP` / `IG_ACCESS_TOKEN_CC` / `IG_USER_ID_CC` | Meta developer account confirmation needed + Instagram phone reset |
 | All `*_ND` keys | NorCal Dharma brand not set up |
-| `CLOUDFLARE_AI_API_TOKEN` | Invalid token — needs regeneration from Cloudflare Workers AI |
+| `CLOUDFLARE_AI_API_TOKEN` | ✅ Done — regenerated via Workers AI template |
 
 ### Load all keys in your shell
 
@@ -420,7 +420,7 @@ Add to `.zshrc` or run before any local pipeline command:
 
 ```bash
 # Phoenix Omega credentials (from macOS Keychain)
-for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY ANTHROPIC_API_KEY DEEPSEEK_API_KEY CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN WORDPRESS_SITE_URL WORDPRESS_USERNAME WORDPRESS_APP_PASSWORD YT_CLIENT_ID_SP YT_CLIENT_SECRET_SP YT_CLIENT_ID_CC YT_CLIENT_SECRET_CC TIKTOK_CLIENT_KEY_SP TIKTOK_CLIENT_SECRET_SP TIKTOK_CLIENT_KEY_CC TIKTOK_CLIENT_SECRET_CC QWEN_BASE_URL QWEN_MODEL RUNCOMFY_DEPLOYMENT_ID META_APP_ID META_APP_SECRET SLACK_BOT_TOKEN SLACK_SIGNING_SECRET TELEGRAM_BOT_TOKEN; do
+for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY ANTHROPIC_API_KEY DEEPSEEK_API_KEY CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN CLOUDFLARE_AI_API_TOKEN WORDPRESS_SITE_URL WORDPRESS_USERNAME WORDPRESS_APP_PASSWORD YT_CLIENT_ID_SP YT_CLIENT_SECRET_SP YT_CLIENT_ID_CC YT_CLIENT_SECRET_CC TIKTOK_CLIENT_KEY_SP TIKTOK_CLIENT_SECRET_SP TIKTOK_CLIENT_KEY_CC TIKTOK_CLIENT_SECRET_CC QWEN_BASE_URL QWEN_MODEL RUNCOMFY_DEPLOYMENT_ID META_APP_ID META_APP_SECRET SLACK_BOT_TOKEN SLACK_SIGNING_SECRET TELEGRAM_BOT_TOKEN DISCORD_BOT_TOKEN; do
   val=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
   [ -n "$val" ] && export $key="$val"
 done
