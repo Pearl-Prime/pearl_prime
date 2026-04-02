@@ -12,12 +12,13 @@ All credentials are documented in `docs/INTEGRATION_CREDENTIALS_REGISTRY.md`. Re
 - **RunComfy:** `https://www.runcomfy.com/profile` → API Tokens
 - **ElevenLabs:** Key is in `docs/11.txt` (gitignored) or Keychain
 
-**Load all keys locally:**
+**Load all tracked integration env vars from macOS Keychain** (single source of truth: `scripts/ci/integration_env_registry.py`, same list as `scripts/ci/check_integration_env.py`):
+
 ```bash
-for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY; do
-  export $key=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
-done
+eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
 ```
+
+Diagnostics: `python3 scripts/ci/load_integration_env_from_keychain.py --count` (how many names are tracked), `--list` (names only), `--verbose` (stderr notes for missing Keychain items while still emitting exports on stdout).
 
 ## Read First
 
