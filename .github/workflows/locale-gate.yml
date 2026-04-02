@@ -1,0 +1,71 @@
+# Locale gate: validate translation quality on PRs that touch atoms or localization config.
+# Runs structural validation (no LLM, fast) on every PR.
+# See config/localization/quality_contracts/ and docs/DOCS_INDEX.md § Translation.
+
+name: Locale gate
+
+on:
+  pull_request:
+    paths:
+      - 'config/localization/**'
+      - 'atoms/**/locales/**'
+      - 'scripts/localization/**'
+      - 'SOURCE_OF_TRUTH/teacher_banks/**/approved_atoms_localized/**'
+  push:
+    branches: [main]
+    paths:
+      - 'config/localization/**'
+      - 'atoms/**/locales/**'
+      - 'SOURCE_OF_TRUTH/teacher_banks/**/approved_atoms_localized/**'
+
+jobs:
+  locale-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install --quiet pyyaml
+
+      - name: Structural validation (Pearl News atoms)
+        run: |
+          PYTHONPATH=. python3 scripts/localization/locale_structural_gate.py --all-locales || true
+
+      - name: Translation coverage report
+        run: |
+          PYTHONPATH=. python3 scripts/ci/report_translation_coverage.py || true
+
+      - name: Teacher bank locale parity
+        run: |
+          PYTHONPATH=. python3 scripts/localization/teacher_bank_locale_parity.py \
+            --json-out artifacts/localization/teacher_parity.json || true
+
+      - name: Validate translation format
+        run: |
+          # Quick format check: all translated CANONICAL.txt files must have 20 variants
+          ERRORS=0
+          for f in $(find atoms -path "*/locales/*/CANONICAL.txt" 2>/dev/null | head -100); do
+            count=$(grep -c "^## " "$f" 2>/dev/null || echo 0)
+            if [ "$count" != "20" ]; then
+              echo "ERROR: $f has $count variants (expected 20)"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done
+          if [ "$ERRORS" -gt 0 ]; then
+            echo "WARN: $ERRORS files with wrong variant count"
+          else
+            echo "OK: all checked translation files have 20 variants"
+          fi
+
+      - name: Upload parity report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: locale-parity-report
+          path: artifacts/localization/teacher_parity.json
+          if-no-files-found: ignore

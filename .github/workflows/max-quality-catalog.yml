@@ -1,0 +1,162 @@
+name: Max Quality Catalog
+
+on:
+  workflow_dispatch:
+    inputs:
+      shard:
+        description: "Shard to run"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - regular
+          - ahjan
+          - master_feung
+          - sai_ma
+          - ra
+          - junko
+          - miki
+          - master_wu
+          - pamela_fellows
+          - joshin
+          - maat
+          - omote
+          - master_sha
+      max_jobs:
+        description: "Optional cap per shard; 0 = all"
+        required: false
+        default: "0"
+        type: number
+      skip_word_count_gate:
+        description: "Pass --skip-word-count-gate to run_pipeline"
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: max-quality-catalog-${{ github.event.inputs.shard || 'all' }}
+  cancel-in-progress: false
+
+env:
+  QWEN_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
+  QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+  QWEN_MODEL: ${{ secrets.QWEN_MODEL }}
+
+jobs:
+  run:
+    name: Run shard
+    runs-on: self-hosted
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - shard: regular
+            mode: regular
+            teacher_id: ""
+          - shard: ahjan
+            mode: teacher
+            teacher_id: ahjan
+          - shard: master_feung
+            mode: teacher
+            teacher_id: master_feung
+          - shard: sai_ma
+            mode: teacher
+            teacher_id: sai_ma
+          - shard: ra
+            mode: teacher
+            teacher_id: ra
+          - shard: junko
+            mode: teacher
+            teacher_id: junko
+          - shard: miki
+            mode: teacher
+            teacher_id: miki
+          - shard: master_wu
+            mode: teacher
+            teacher_id: master_wu
+          - shard: pamela_fellows
+            mode: teacher
+            teacher_id: pamela_fellows
+          - shard: joshin
+            mode: teacher
+            teacher_id: joshin
+          - shard: maat
+            mode: teacher
+            teacher_id: maat
+          - shard: omote
+            mode: teacher
+            teacher_id: omote
+          - shard: master_sha
+            mode: teacher
+            teacher_id: master_sha
+    if: ${{ github.event.inputs.shard == 'all' || github.event.inputs.shard == matrix.shard }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Preflight runner + Qwen API health
+        run: |
+          set -euo pipefail
+          echo "== Qwen model check =="
+          curl -fsS "$QWEN_BASE_URL/models" >/tmp/models.json
+          cat /tmp/models.json | head -c 300; echo
+          echo "== Qwen warmup =="
+          curl -fsS --max-time 45 "$QWEN_BASE_URL/chat/completions" \
+            -H 'Content-Type: application/json' \
+            -H "Authorization: Bearer $QWEN_API_KEY" \
+            -d "{\"model\":\"$QWEN_MODEL\",\"messages\":[{\"role\":\"user\",\"content\":\"ok\"}],\"max_tokens\":64,\"temperature\":0.0,\"enable_thinking\":false}" >/tmp/warmup.json
+          python3 - <<'PY'
+          import json
+          data = json.load(open("/tmp/warmup.json"))
+          if "error" in data:
+              raise SystemExit(f"Warmup failed: {data['error']}")
+          print("warmup_ok=true")
+          PY
+
+      - name: Run max-quality shard
+        run: |
+          python3 - <<'PY'
+          import shlex
+          import subprocess
+
+          shard = "${{ matrix.shard }}"
+          mode = "${{ matrix.mode }}"
+          teacher_id = "${{ matrix.teacher_id }}"
+          max_jobs = "${{ github.event.inputs.max_jobs || 0 }}"
+          skip_word_count = "${{ github.event.inputs.skip_word_count_gate || 'false' }}"
+          out_root = f"artifacts/max_quality_catalog_runs/{shard}"
+
+          cmd = [
+              "python3",
+              "scripts/run_max_quality_catalog.py",
+              "--mode", mode,
+              "--root-dir", out_root,
+          ]
+          if teacher_id:
+              cmd.extend(["--teacher-id", teacher_id])
+          if max_jobs and str(max_jobs) != "0":
+              cmd.extend(["--max-jobs", str(max_jobs)])
+          if str(skip_word_count).lower() == "true":
+              cmd.append("--skip-word-count-gate")
+
+          print("cmd=", " ".join(shlex.quote(x) for x in cmd))
+          raise SystemExit(subprocess.call(cmd))
+          PY
+
+      - name: Upload shard artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: max-quality-catalog-${{ matrix.shard }}-${{ github.run_id }}
+          path: artifacts/max_quality_catalog_runs/${{ matrix.shard }}/
