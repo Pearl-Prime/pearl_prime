@@ -52,6 +52,9 @@ sys.path.insert(0, str(REPO_ROOT))
 logger = logging.getLogger("translation_loop")
 
 SLOT_TYPES = ("PIVOT", "TAKEAWAY", "THREAD", "PERMISSION", "STORY")
+ENGINE_DIRS = ("comparison", "false_alarm", "grief", "overwhelm", "shame", "spiral", "watcher")
+# All translatable atom types: slot types + engine directories
+ALL_ATOM_TYPES = SLOT_TYPES + ENGINE_DIRS
 CJK6_LOCALES = ("ja-JP", "ko-KR", "zh-CN", "zh-HK", "zh-SG", "zh-TW")
 
 LOCALE_NAMES: dict[str, str] = {
@@ -354,9 +357,27 @@ def discover_atoms(
     topic: str | None = None,
     slot: str | None = None,
 ) -> list[tuple[str, str, str, Path]]:
-    slots = (slot.upper(),) if slot else SLOT_TYPES
+    # Determine which atom types to scan.
+    # --slot STORY  => only STORY directory
+    # --slot comparison => only comparison engine
+    # --slot ENGINE => all 7 engine directories
+    # no filter => ALL_ATOM_TYPES (slots + engines)
+    if slot:
+        upper = slot.upper()
+        lower = slot.lower()
+        if upper in SLOT_TYPES:
+            search_types = (upper,)
+        elif lower in ENGINE_DIRS:
+            search_types = (lower,)
+        elif lower == "engine" or lower == "engines":
+            search_types = ENGINE_DIRS
+        else:
+            search_types = (slot,)
+    else:
+        search_types = ALL_ATOM_TYPES
+
     manifest = []
-    for st in slots:
+    for st in search_types:
         for path in atoms_root.rglob(f"{st}/CANONICAL.txt"):
             if "locales" in path.parts:
                 continue

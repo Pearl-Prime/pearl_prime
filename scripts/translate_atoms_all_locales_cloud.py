@@ -28,6 +28,8 @@ from scripts.localization.llm_client import call_llm  # noqa: E402
 logger = logging.getLogger("translate_atoms_cloud")
 
 SLOT_TYPES = ("PIVOT", "TAKEAWAY", "THREAD", "PERMISSION", "STORY")
+ENGINE_DIRS = ("comparison", "false_alarm", "grief", "overwhelm", "shame", "spiral", "watcher")
+ALL_ATOM_TYPES = SLOT_TYPES + ENGINE_DIRS
 
 CJK6_LOCALES = ("ja-JP", "ko-KR", "zh-CN", "zh-HK", "zh-SG", "zh-TW")
 
@@ -118,9 +120,19 @@ def discover_atoms(
     Return manifest: (persona, topic, slot_type, filepath) for English sources.
     Skips locales/ subtrees.
     """
-    slots = (slot,) if slot else SLOT_TYPES
-    if slot and slot not in SLOT_TYPES:
-        raise ValueError(f"slot must be one of {SLOT_TYPES}, got {slot!r}")
+    if slot:
+        upper = slot.upper()
+        lower = slot.lower()
+        if upper in SLOT_TYPES:
+            slots = (upper,)
+        elif lower in ENGINE_DIRS:
+            slots = (lower,)
+        elif lower in ("engine", "engines"):
+            slots = ENGINE_DIRS
+        else:
+            slots = (slot,)
+    else:
+        slots = ALL_ATOM_TYPES
 
     manifest: list[tuple[str, str, str, Path]] = []
     for st in slots:
@@ -300,7 +312,7 @@ def main() -> int:
     ap.add_argument("--topic", help="Filter to one topic")
     ap.add_argument(
         "--slot",
-        help="Filter to one slot type (PIVOT/TAKEAWAY/THREAD/PERMISSION/STORY)",
+        help="Filter to atom type: slot (PIVOT/TAKEAWAY/THREAD/PERMISSION/STORY), engine (comparison/false_alarm/grief/overwhelm/shame/spiral/watcher), or 'engines' for all 7",
     )
     ap.add_argument(
         "--dry-run",

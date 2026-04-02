@@ -3,9 +3,11 @@
 Per-locale (persona, topic, engine) coverage.
 Authority: PEARL_PRIME_100_PERCENT_DEV_PLAN §5.
 
-Also reports bestseller atom coverage for CJK6: English sources under
-atoms/{persona}/{topic}/{PIVOT|TAKEAWAY|THREAD|PERMISSION|STORY}/CANONICAL.txt
-vs translations at atoms/.../{slot}/locales/{locale}/CANONICAL.txt.
+Also reports atom coverage for CJK6: English sources under
+atoms/{persona}/{topic}/{SLOT_OR_ENGINE}/CANONICAL.txt
+(slots: PIVOT, TAKEAWAY, THREAD, PERMISSION, STORY;
+ engines: comparison, false_alarm, grief, overwhelm, shame, spiral, watcher)
+vs translations at atoms/.../{type}/locales/{locale}/CANONICAL.txt.
 """
 from __future__ import annotations
 
@@ -18,6 +20,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 CJK6_LOCALES = ("ja-JP", "ko-KR", "zh-CN", "zh-HK", "zh-SG", "zh-TW")
 BESTSELLER_SLOTS = ("PIVOT", "TAKEAWAY", "THREAD", "PERMISSION", "STORY")
+ENGINE_DIRS = ("comparison", "false_alarm", "grief", "overwhelm", "shame", "spiral", "watcher")
+ALL_ATOM_TYPES = BESTSELLER_SLOTS + ENGINE_DIRS
 
 
 def _count_canonical_under(root: Path) -> int:
@@ -27,10 +31,10 @@ def _count_canonical_under(root: Path) -> int:
 
 
 def _bestseller_english_sources(atoms_root: Path) -> list[Path]:
-    """CANONICAL.txt under slot dirs only; excludes locales/ outputs."""
+    """CANONICAL.txt under slot + engine dirs; excludes locales/ outputs."""
     out: list[Path] = []
-    for slot in BESTSELLER_SLOTS:
-        for path in atoms_root.rglob(f"{slot}/CANONICAL.txt"):
+    for atom_type in ALL_ATOM_TYPES:
+        for path in atoms_root.rglob(f"{atom_type}/CANONICAL.txt"):
             if "locales" in path.parts:
                 continue
             rel = path.relative_to(atoms_root)
@@ -104,7 +108,7 @@ def main() -> int:
         print(f"  {loc}: {data['persona_topic_count']} CANONICAL.txt")
     bs = report["bestseller"]
     print(
-        f"\nBestseller (5 slots, CJK6): {bs['english_source_files']} English source files"
+        f"\nAll atoms ({len(ALL_ATOM_TYPES)} types, CJK6): {bs['english_source_files']} English source files"
     )
     for loc, row in bs["by_cjk_locale"].items():
         print(
