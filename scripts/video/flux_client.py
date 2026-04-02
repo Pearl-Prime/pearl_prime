@@ -1,3 +1,4 @@
+# DEMOTED: Cloudflare FLUX is fallback only. Primary image generation uses RunComfy (scripts/image_generation/runcomfy_batch.py)
 """
 Shared Cloudflare Workers AI FLUX client for video image bank and author cover art.
 Load credentials, build prompts from config, call FLUX API.

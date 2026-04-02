@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# DEMOTED: Cloudflare FLUX is fallback only. Primary image generation uses RunComfy (scripts/image_generation/runcomfy_batch.py)
 """
 Build the video image bank: generate FLUX images per (topic, visual_intent) and write index.json
 for the asset resolver. Uses config/video/flux_bank_scenes.yaml and canonical_topics.

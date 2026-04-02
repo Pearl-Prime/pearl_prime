@@ -13,7 +13,11 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from phoenix_v4.manga.image_backend import FixtureReplayImageBackend, NoopImageBackend
+from phoenix_v4.manga.image_backend import (
+    FixtureReplayImageBackend,
+    NoopImageBackend,
+    RunComfyImageBackend,
+)
 from phoenix_v4.manga.models.workspace_layout import resolve_chapter_workspace
 from phoenix_v4.manga.runner.chapter_runner import (
     run_chapter_dag,
@@ -26,7 +30,7 @@ from scripts.manga._config import config_snapshot_hash
 def main() -> int:
     ap = argparse.ArgumentParser(description="Run manga chapter pipeline stages (resumable).")
     ap.add_argument("--workspace", type=Path, required=True)
-    ap.add_argument("--backend", choices=("noop", "replay"), default="replay")
+    ap.add_argument("--backend", choices=("noop", "replay", "runcomfy"), default="replay")
     ap.add_argument("--replay-map", type=Path, help="panel_id → relative PNG (replay backend)")
     ap.add_argument(
         "--from-stage",
@@ -44,6 +48,18 @@ def main() -> int:
         help="On QC hold, clear manifests from earliest implicated stage and retry",
     )
     ap.add_argument("--max-revision-rounds", type=int, default=3)
+    ap.add_argument(
+        "--runcomfy-deployment",
+        default=None,
+        help="RunComfy deployment ID (default: env RUNCOMFY_DEPLOYMENT_ID or 677edba8-ace0-4b2b-bad2-8e94b9959065)",
+    )
+    ap.add_argument(
+        "--runcomfy-workflow",
+        type=Path,
+        default=None,
+        help="Path to ComfyUI workflow JSON (default: bundled flux_video_bank.json)",
+    )
+    ap.add_argument("--dry-run", action="store_true", help="Compile prompts only, skip API calls (runcomfy backend)")
     ap.add_argument(
         "--no-sdf-stub",
         action="store_true",
@@ -66,6 +82,13 @@ def main() -> int:
 
     if args.backend == "noop":
         backend = NoopImageBackend()
+    elif args.backend == "runcomfy":
+        backend = RunComfyImageBackend(
+            deployment_id=args.runcomfy_deployment,
+            workflow_path=args.runcomfy_workflow,
+            output_dir=ws / "panel_images",
+            dry_run=args.dry_run,
+        )
     else:
         if not args.replay_map or not args.replay_map.is_file():
             print("replay backend requires --replay-map", file=sys.stderr)
