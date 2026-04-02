@@ -21,4 +21,10 @@ final class AppState: ObservableObject {
     @Published var workflowRuns: [GitHubService.WorkflowRun] = []
     @Published var productionAlertIssues: [GitHubService.Issue] = []
     @Published var githubStatusMessage: String? // rate-limit, offline, or nil
+
+    @Published var simulationAnalysis: SimulationAnalysis?
+    @Published var credentialStatus: CredentialStatus?
+    @Published var ciHealthSummary: CIHealthSummary?
+    @Published var localeParityEntries: [LocaleParityEntry] = []
+    @Published var videoPublishStatuses: [VideoPublishStatus] = []
 }

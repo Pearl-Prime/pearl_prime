@@ -8,10 +8,24 @@ enum TabTag: String, CaseIterable, Identifiable {
     case observability
     case gates
     case pearlNews
+    case manualReview
     case teacher
     case ci
+    case credentials
+    case video
+    case localeParity
+    case mlLoop
     case docs
+
     var id: String { rawValue }
+
+    static let sidebarSections: [(String, [TabTag])] = [
+        ("Core", [.dashboard, .pipeline, .simulation]),
+        ("Quality", [.tests, .gates, .observability, .teacher]),
+        ("Content", [.pearlNews, .manualReview]),
+        ("Operations", [.ci, .credentials, .video, .localeParity, .mlLoop, .docs]),
+    ]
+
     var title: String {
         switch self {
         case .dashboard: return "Dashboard"
@@ -21,11 +35,17 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .observability: return "Observability"
         case .gates: return "Gates & Release"
         case .pearlNews: return "Pearl News"
+        case .manualReview: return "Manual Review"
         case .teacher: return "Teacher"
         case .ci: return "CI / Workflows"
+        case .credentials: return "Credentials"
+        case .video: return "Video"
+        case .localeParity: return "Locale Parity"
+        case .mlLoop: return "ML Loop"
         case .docs: return "Docs & Config"
         }
     }
+
     var systemImage: String {
         switch self {
         case .dashboard: return "gauge.medium"
@@ -35,8 +55,13 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .observability: return "waveform.path.ecg"
         case .gates: return "lock.shield"
         case .pearlNews: return "newspaper"
+        case .manualReview: return "tray.2"
         case .teacher: return "person.crop.circle"
         case .ci: return "arrow.triangle.2.circlepath"
+        case .credentials: return "key.fill"
+        case .video: return "play.rectangle"
+        case .localeParity: return "globe"
+        case .mlLoop: return "brain"
         case .docs: return "doc.text"
         }
     }
@@ -105,12 +130,18 @@ struct ContentView: View {
                 })
             }
             NavigationSplitView {
-                List(TabTag.allCases, selection: $selectedTab) { tab in
-                    Label(tab.title, systemImage: tab.systemImage)
-                        .tag(tab)
+                List(selection: $selectedTab) {
+                    ForEach(TabTag.sidebarSections, id: \.0) { section in
+                        Section(header: Text(section.0)) {
+                            ForEach(section.1, id: \.self) { tab in
+                                Label(tab.title, systemImage: tab.systemImage)
+                                    .tag(tab)
+                            }
+                        }
+                    }
                 }
                 .listStyle(.sidebar)
-                .navigationSplitViewColumnWidth(min: 180, ideal: 200)
+                .navigationSplitViewColumnWidth(min: 180, ideal: 220)
             } detail: {
                 detailContent
                     .frame(minWidth: 500, minHeight: 400)
@@ -135,7 +166,7 @@ struct ContentView: View {
         Group {
             switch selectedTab {
             case .dashboard:
-                DashboardView(state: state, artifactReader: artifactReader, onSelectObservability: { selectedTab = .observability })
+                DashboardView(state: state, artifactReader: artifactReader, githubService: githubService, onSelectObservability: { selectedTab = .observability })
             case .pipeline:
                 PipelineView(state: state, scriptRunner: scriptRunner)
             case .simulation:
@@ -148,10 +179,20 @@ struct ContentView: View {
                 GatesReleaseView(state: state, scriptRunner: scriptRunner)
             case .pearlNews:
                 PearlNewsView(state: state, scriptRunner: scriptRunner)
+            case .manualReview:
+                ManualReviewView(state: state, artifactReader: artifactReader, scriptRunner: scriptRunner)
             case .teacher:
                 TeacherView(state: state, scriptRunner: scriptRunner)
             case .ci:
                 CIWorkflowsView(state: state, githubService: githubService)
+            case .credentials:
+                CredentialStatusView(state: state, artifactReader: artifactReader)
+            case .video:
+                VideoPublishView(state: state, artifactReader: artifactReader, githubService: githubService)
+            case .localeParity:
+                LocaleParityView(state: state, artifactReader: artifactReader)
+            case .mlLoop:
+                MLLoopMonitorView(state: state, artifactReader: artifactReader, githubService: githubService)
             case .docs:
                 DocsConfigView(state: state, artifactReader: artifactReader, scriptRunner: scriptRunner)
             }
@@ -195,10 +236,9 @@ struct ContentView: View {
         state.healthCheckPassed = passed
         state.healthCheckMessage = passed ? nil : message
         state.repoPathValid = passed
-    }
-
-    private func refreshCurrentTab() {
-        state.refreshTrigger = UUID()
+        if passed {
+            githubService.applyGitRemoteFromRepoRoot(state.repoPath)
+        }
     }
 
     private func abbreviatedPath(_ path: String) -> String {

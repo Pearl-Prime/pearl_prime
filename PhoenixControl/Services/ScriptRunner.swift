@@ -24,7 +24,12 @@ final class ScriptRunner: ObservableObject {
         "scripts/ci/run_canary_100_books.py",
         "scripts/ci/run_teacher_production_gates.py",
         "scripts/ci/check_docs_governance.py",
+        "scripts/ci/check_integration_env.py",
+        "scripts/ci/check_system_governance_status.py",
+        "scripts/ci/content_coverage_report.py",
+        "scripts/ci/dump_video_config_json.py",
         "scripts/systems_test/run_systems_test.py",
+        "scripts/audiobook_script/run_comparator_loop.py",
         "pearl_news/pipeline/run_article_pipeline.py",
     ]
 

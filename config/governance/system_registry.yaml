@@ -82,5 +82,69 @@ systems:
     domain: ml
     assets:
       - docs/ML_AUTONOMOUS_LOOP_SPEC.md
+      - artifacts/ml_loop/**/*
+    related_systems: []
+    downstream:
+      - .github/workflows/ml-loop-continuous.yml
+      - .github/workflows/ml-loop-daily-promotion.yml
+      - .github/workflows/ml-loop-weekly-recalibration.yml
+
+  video_pipeline:
+    name: Video upload and publishing
+    domain: video
+    assets:
+      - config/video/**/*.yaml
+      - scripts/video/**/*
+    related_systems: []
+    downstream:
+      - .github/workflows/video-daily-publish.yml
+
+  localization:
+    name: Localization and locale parity
+    domain: translation
+    assets:
+      - config/localization/**/*
+      - SOURCE_OF_TRUTH/teacher_banks/**/approved_atoms_localized/**/*
+    related_systems: [teacher_mode]
+    downstream:
+      - .github/workflows/locale-gate.yml
+      - .github/workflows/translate-atoms-qwen-matrix.yml
+      - .github/workflows/translate-bestseller-atoms.yml
+
+  messaging:
+    name: Operator messaging integrations
+    domain: integrations
+    assets:
+      - scripts/integrations/**/*
+      - docs/MESSAGING_CHANNELS_LOCAL_SETUP.md
     related_systems: []
     downstream: []
+
+  integration_credentials:
+    name: Integration credentials registry
+    domain: integrations
+    assets:
+      - docs/INTEGRATION_CREDENTIALS_REGISTRY.md
+    related_systems: [messaging, video_pipeline]
+    downstream:
+      - scripts/ci/check_integration_env.py
+
+  audiobook:
+    name: Audiobook production and regression
+    domain: content
+    assets:
+      - scripts/audiobook_script/**/*
+    related_systems: []
+    downstream:
+      - .github/workflows/audiobook-regression.yml
+
+  simulation:
+    name: Pearl Prime simulation harness
+    domain: testing
+    assets:
+      - simulation/**/*
+      - scripts/ci/run_simulation_10k.py
+      - scripts/ci/analyze_pearl_prime_sim.py
+    related_systems: [teacher_mode]
+    downstream:
+      - .github/workflows/simulation-10k.yml
