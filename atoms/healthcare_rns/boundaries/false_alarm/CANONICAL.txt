@@ -51,7 +51,7 @@ Alicia misses a social event after her shift because she's exhausted. She simply
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/recognition/micro/v05.txt
 BAND: 4
-MECHANISM_DEPTH: 2
+MECHANISM_DEPTH: 1
 COST_TYPE: identity
 COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
@@ -99,7 +99,7 @@ The charge nurse approaches Dominique asking her to stay late. Dominique feels t
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/mechanism_proof/micro/v04.txt
 BAND: 4
-MECHANISM_DEPTH: 3
+MECHANISM_DEPTH: 2
 COST_TYPE: identity
 COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
@@ -111,7 +111,7 @@ Maria lies awake thinking about what would happen if she said no. She runs throu
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/mechanism_proof/micro/v05.txt
 BAND: 3
-MECHANISM_DEPTH: 3
+MECHANISM_DEPTH: 2
 COST_TYPE: identity
 COST_INTENSITY: 2
 IDENTITY_STAGE: destabilization
@@ -123,7 +123,7 @@ The false alarm is the gap between what actually happens when others set boundar
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/turning_point/micro/v01.txt
 BAND: 3
-MECHANISM_DEPTH: 2
+MECHANISM_DEPTH: 3
 COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
@@ -135,7 +135,7 @@ One evening, the charge nurse calls asking if Maria can stay late. Maria feels t
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/turning_point/micro/v02.txt
 BAND: 3
-MECHANISM_DEPTH: 2
+MECHANISM_DEPTH: 3
 COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
@@ -147,7 +147,7 @@ At eight p.m., Maria tells the charge nurse she's heading out. The charge nurse 
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/turning_point/micro/v03.txt
 BAND: 3
-MECHANISM_DEPTH: 2
+MECHANISM_DEPTH: 3
 COST_TYPE: identity
 COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
@@ -159,7 +159,7 @@ The next time there's a request for extra coverage, Maria rehearses what she'll 
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/turning_point/micro/v04.txt
 BAND: 3
-MECHANISM_DEPTH: 2
+MECHANISM_DEPTH: 3
 COST_TYPE: identity
 COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
@@ -183,7 +183,7 @@ Over weeks, each time Maria sets a small boundary and the feared consequence doe
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/embodiment/micro/v01.txt
 BAND: 2
-MECHANISM_DEPTH: 1
+MECHANISM_DEPTH: 4
 COST_TYPE: social
 COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
@@ -195,7 +195,7 @@ Maria stands at the intersection of shift end and a request for coverage. She do
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/embodiment/micro/v02.txt
 BAND: 1
-MECHANISM_DEPTH: 1
+MECHANISM_DEPTH: 4
 COST_TYPE: social
 COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
@@ -207,7 +207,7 @@ When someone is disappointed by Maria's boundary, she feels compassion for them 
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/embodiment/micro/v03.txt
 BAND: 2
-MECHANISM_DEPTH: 1
+MECHANISM_DEPTH: 4
 COST_TYPE: identity
 COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
@@ -219,7 +219,7 @@ Maria volunteers for a shift because she wants to, not because she's afraid of j
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/embodiment/micro/v04.txt
 BAND: 1
-MECHANISM_DEPTH: 1
+MECHANISM_DEPTH: 4
 COST_TYPE: identity
 COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
@@ -231,7 +231,7 @@ A new nurse asks Maria for advice about saying no to requests. Maria speaks from
 ---
 path: story_atoms/healthcare_rns/anchored/boundaries/false_alarm/embodiment/micro/v05.txt
 BAND: 1
-MECHANISM_DEPTH: 1
+MECHANISM_DEPTH: 4
 COST_TYPE: identity
 COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim

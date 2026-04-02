@@ -187,6 +187,8 @@ def resolve_slot(
     else:
         # Lexicographic sort by atom_id (raw UTF-8; no Unicode normalization)
         available.sort(key=lambda e: e.atom_id)
+
+
     selector_key = f"{context.selector_key_prefix}:{slot_type}:ch{chapter_idx:02d}:s{slot_idx:02d}"
     idx = _selector_index(selector_key, len(available))
     chosen = available[idx]

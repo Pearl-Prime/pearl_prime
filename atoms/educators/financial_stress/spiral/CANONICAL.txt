@@ -67,7 +67,7 @@ BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
 COST_INTENSITY: 3
-IDENTITY_STAGE: pre_awareness
+IDENTITY_STAGE: destabilization
 ---
 The spiral has a structure. Lisa tracks it: trigger is always small. A bill, a price tag, a comment about money. Then the first calculation. Then the second. Then the tenth. Each calculation produces the next like dominoes falling sideways. The content changes—sometimes it's rent, sometimes it's retirement—but the architecture is identical. Small trigger. Rapid escalation. Full catastrophe. The math is never about the math. The math is the vehicle for the dread.
 ---
@@ -79,7 +79,7 @@ BAND: 2
 MECHANISM_DEPTH: 2
 COST_TYPE: social
 COST_INTENSITY: 2
-IDENTITY_STAGE: pre_awareness
+IDENTITY_STAGE: destabilization
 ---
 Damon notices something: the spiral happens fastest when other people are present. Alone, a bill is a bill. But when a colleague mentions a new car, the bill becomes evidence. Evidence of falling behind. Evidence of wrong choices. The presence of witnesses accelerates the math. Other people's stability makes his instability louder. He can spiral from a coworker's vacation photo to career regret in under thirty seconds. The speed is the mechanism. The audience is the fuel.
 ---
@@ -100,7 +100,7 @@ Vanessa discovers the spiral runs even when the numbers are good. She gets a tut
 ---
 path: story_atoms/educators/anchored/financial_stress/spiral/mechanism_proof/micro/v04.txt
 BAND: 4
-MECHANISM_DEPTH: 3
+MECHANISM_DEPTH: 2
 COST_TYPE: internal
 COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
@@ -115,7 +115,7 @@ BAND: 2
 MECHANISM_DEPTH: 2
 COST_TYPE: opportunity
 COST_INTENSITY: 2
-IDENTITY_STAGE: pre_awareness
+IDENTITY_STAGE: destabilization
 ---
 The spiral steals time. Amber counts: forty minutes last Tuesday doing mental math instead of grading. An hour on Sunday recalculating a budget she already calculated. Twenty minutes in the shower running numbers. The time spent spiraling about money is time not spent on things that could actually change the situation. The spiral consumes the resource it claims to protect. But the spiral feels productive. The spiral feels like planning. The difference between planning and spiraling is that planning stops.
 ---
@@ -174,7 +174,7 @@ Bill night again. Marcus lies in the dark. The spiral starts: rent, car, insuran
 ---
 path: story_atoms/educators/anchored/financial_stress/spiral/turning_point/micro/v05.txt
 BAND: 3
-MECHANISM_DEPTH: 2
+MECHANISM_DEPTH: 3
 COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
@@ -186,10 +186,10 @@ Amber opens the budgeting app. The spiral starts on cue. This time she sets a ti
 ---
 path: story_atoms/educators/anchored/financial_stress/spiral/embodiment/micro/v01.txt
 BAND: 3
-MECHANISM_DEPTH: 3
+MECHANISM_DEPTH: 4
 COST_TYPE: internal
 COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+IDENTITY_STAGE: self_claim
 ---
 Lisa opens the electric bill. The spiral starts. She lets it run for two steps—bill to car payment—then names it out loud: "Spiraling." The naming doesn't stop step three. Step three comes anyway. But something shifted in the naming. She's watching the spiral instead of being inside it. The bill still needs paying. The spiral still runs. Lisa pays the bill while the spiral plays in the background. Both things happen. Neither one wins.
 ---
@@ -198,10 +198,10 @@ Lisa opens the electric bill. The spiral starts. She lets it run for two steps�
 ---
 path: story_atoms/educators/anchored/financial_stress/spiral/embodiment/micro/v02.txt
 BAND: 2
-MECHANISM_DEPTH: 3
+MECHANISM_DEPTH: 4
 COST_TYPE: social
 COST_INTENSITY: 2
-IDENTITY_STAGE: experimentation
+IDENTITY_STAGE: self_claim
 ---
 The summer plans conversation happens again. Damon feels the spiral engage—vacation to budget to career regret. This time he stays in the conversation. Answers honestly: "Probably staying local this year." No cover story. No elaborate excuse. The honesty lands flat—no one reacts. The spiral expected a reaction. The absence of reaction confuses the machinery. He sits with the conversation continuing around him. The spiral idles. It doesn't stop. It idles.
 ---
@@ -210,10 +210,10 @@ The summer plans conversation happens again. Damon feels the spiral engage—vac
 ---
 path: story_atoms/educators/anchored/financial_stress/spiral/embodiment/micro/v03.txt
 BAND: 3
-MECHANISM_DEPTH: 3
+MECHANISM_DEPTH: 4
 COST_TYPE: internal
 COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+IDENTITY_STAGE: self_claim
 ---
 Vanessa gets the tutoring schedule for next month. Fewer hours than expected. The spiral engages immediately: fewer hours to less money to not enough to what now. She notices her feet on the floor. Presses them down. The spiral runs above the feet. The feet stay. She responds to the email about the schedule while the spiral calculates catastrophe. The response is professional, clear. The spiral is loud, recursive. Both exist in the same body at the same time. She sends the email.
 ---
@@ -222,10 +222,10 @@ Vanessa gets the tutoring schedule for next month. Fewer hours than expected. Th
 ---
 path: story_atoms/educators/anchored/financial_stress/spiral/embodiment/micro/v04.txt
 BAND: 4
-MECHANISM_DEPTH: 3
+MECHANISM_DEPTH: 4
 COST_TYPE: internal
 COST_INTENSITY: 4
-IDENTITY_STAGE: experimentation
+IDENTITY_STAGE: self_claim
 CALLBACK_ID: bill_night
 CALLBACK_PHASE: return
 ---
@@ -236,10 +236,10 @@ Bill night. Marcus lies in the dark. The spiral starts: rent, car, insurance. He
 ---
 path: story_atoms/educators/anchored/financial_stress/spiral/embodiment/micro/v05.txt
 BAND: 3
-MECHANISM_DEPTH: 3
+MECHANISM_DEPTH: 4
 COST_TYPE: internal
 COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+IDENTITY_STAGE: self_claim
 ---
 Amber opens the budgeting app. Sets the timer for five minutes. The spiral starts. She logs two expenses. The spiral says: not enough. She logs a third. The spiral says: never enough. At five minutes she closes the app. The spiral tries to follow her into the kitchen. She makes tea. The spiral runs alongside the tea-making—quieter now, persistent but not commanding. She drinks the tea with the spiral still murmuring. The tea is real. The spiral is a pattern. Both are present. She finishes the tea.
 ---

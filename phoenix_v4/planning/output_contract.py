@@ -22,6 +22,15 @@ ALIASES_PATH = REPO_ROOT / "config" / "identity_aliases.yaml"
 FORMAT_REGISTRY_PATH = REPO_ROOT / "config" / "format_selection" / "format_registry.yaml"
 
 
+class TopicIdentityError(Exception):
+    """Raised when strict_identity mode detects silent topic alias collapse.
+
+    Hardening Spec §5A: if user requests topic X and system would silently
+    collapse it to canonical topic Y, strict mode rejects instead of allowing
+    silent drift.
+    """
+
+
 def _load_yaml(path: Path) -> dict:
     if not path.exists() or not yaml:
         return {}
@@ -55,6 +64,7 @@ def build_output_contract(
     *,
     aliases_path: Path = ALIASES_PATH,
     registry_path: Path = FORMAT_REGISTRY_PATH,
+    strict_identity: bool = False,
 ) -> dict[str, Any]:
     """Build an output contract dict capturing requested-vs-resolved state.
 
@@ -78,6 +88,13 @@ def build_output_contract(
     canonical_topic = resolved_config.get("canonical_topic_id") or requested_topic
     alias_target = _resolve_topic_alias(requested_topic, aliases_path=aliases_path)
     topic_aliased = bool(requested_topic and alias_target != requested_topic)
+
+    if strict_identity and topic_aliased:
+        raise TopicIdentityError(
+            f"Strict identity mode: requested topic '{requested_topic}' would be "
+            f"silently aliased to '{alias_target}'. Either resolve via governed "
+            f"'{requested_topic}' path or fail before compile."
+        )
 
     requested_location = getattr(args, "location", None) or ""
     resolved_location = resolved_config.get("resolved_location_id") or requested_location or ""
