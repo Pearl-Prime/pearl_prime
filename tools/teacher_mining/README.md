@@ -12,8 +12,13 @@ Run first when onboarding a teacher so gap-fill and normalizers have doctrine-la
 # Stub only (no API): writes placeholder YAML for all 5 assets + intake_manifest.json
 python3 tools/teacher_mining/intake_normalize.py --teacher ahjan --dry-run
 
-# With Anthropic API key: full extraction from raw/
-export ANTHROPIC_API_KEY=...
+# Load all keys from Keychain (includes ANTHROPIC_API_KEY):
+for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY ANTHROPIC_API_KEY DEEPSEEK_API_KEY CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN CLOUDFLARE_AI_API_TOKEN WORDPRESS_SITE_URL WORDPRESS_USERNAME WORDPRESS_APP_PASSWORD YT_CLIENT_ID_SP YT_CLIENT_SECRET_SP YT_CLIENT_ID_CC YT_CLIENT_SECRET_CC TIKTOK_CLIENT_KEY_SP TIKTOK_CLIENT_SECRET_SP TIKTOK_CLIENT_KEY_CC TIKTOK_CLIENT_SECRET_CC QWEN_BASE_URL QWEN_MODEL RUNCOMFY_DEPLOYMENT_ID META_APP_ID META_APP_SECRET SLACK_BOT_TOKEN SLACK_SIGNING_SECRET TELEGRAM_BOT_TOKEN DISCORD_BOT_TOKEN GITHUB_PAT; do
+  val=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
+  [ -n "$val" ] && export $key="$val"
+done
+
+# Full extraction from raw/
 python3 tools/teacher_mining/intake_normalize.py --teacher ahjan
 ```
 

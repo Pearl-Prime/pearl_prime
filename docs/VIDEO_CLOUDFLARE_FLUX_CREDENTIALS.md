@@ -54,16 +54,19 @@ CLOUDFLARE_API_TOKEN=your_long_api_token_string
 - No spaces around `=`. No quotes unless the value contains spaces (then use straight quotes).
 - Keep this file **out of version control** (add to `.gitignore` if needed).
 
-### Option B: Environment variables
+### Option B: Environment variables (preferred — load all from Keychain)
 
-In your shell or in a CI environment:
+All keys including Cloudflare are now in macOS Keychain. Load them all at once:
 
 ```bash
-export CLOUDFLARE_ACCOUNT_ID=your_32_char_hex_account_id
-export CLOUDFLARE_API_TOKEN=your_long_api_token_string
+# Load all 30 keys from Keychain (see CLAUDE.md or docs/INTEGRATION_CREDENTIALS_REGISTRY.md)
+for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY ANTHROPIC_API_KEY DEEPSEEK_API_KEY CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN CLOUDFLARE_AI_API_TOKEN WORDPRESS_SITE_URL WORDPRESS_USERNAME WORDPRESS_APP_PASSWORD YT_CLIENT_ID_SP YT_CLIENT_SECRET_SP YT_CLIENT_ID_CC YT_CLIENT_SECRET_CC TIKTOK_CLIENT_KEY_SP TIKTOK_CLIENT_SECRET_SP TIKTOK_CLIENT_KEY_CC TIKTOK_CLIENT_SECRET_CC QWEN_BASE_URL QWEN_MODEL RUNCOMFY_DEPLOYMENT_ID META_APP_ID META_APP_SECRET SLACK_BOT_TOKEN SLACK_SIGNING_SECRET TELEGRAM_BOT_TOKEN DISCORD_BOT_TOKEN GITHUB_PAT; do
+  val=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
+  [ -n "$val" ] && export $key="$val"
+done
 ```
 
-Or use `CLOUDFLARE_AI_API_TOKEN` instead of `CLOUDFLARE_API_TOKEN`.
+This sets `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`, and `CLOUDFLARE_AI_API_TOKEN` (Workers AI / FLUX Schnell).
 
 ### Option C: `.env` at repo root
 

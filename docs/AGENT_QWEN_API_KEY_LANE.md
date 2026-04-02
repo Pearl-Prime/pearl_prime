@@ -1,5 +1,7 @@
 # Agent instruction — Qwen API key lane (not local runtime)
 
+> **Load all keys first (2026-04-03):** Before running any command, load all 30 keys from Keychain. See `CLAUDE.md` or `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` § "Load all keys in your shell". This sets `QWEN_API_KEY`, `QWEN_BASE_URL`, `QWEN_MODEL` and all other service credentials.
+
 ## Current status note (post PR #130)
 
 The onboarding Pages workflow is already on `main` and live deploy is proven. Any sections below that describe pre-merge `404` workflow discovery behavior are historical lane context, not current state.

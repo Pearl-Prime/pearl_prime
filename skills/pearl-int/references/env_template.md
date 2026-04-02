@@ -1,5 +1,7 @@
 # Pearl_Int — .env Template Reference
 
+> **Preferred local path (2026-04-03):** All keys are now in macOS Keychain under service `phoenix-omega`. Load them with the shell snippet in `CLAUDE.md` or `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` § "Load all keys in your shell". The `.env` template below is for CI/Docker environments that can't use Keychain.
+
 This file defines the canonical .env structure for Phoenix Omega.
 Pearl_Int uses this as the source of truth when creating or updating .env files.
 
