@@ -9,6 +9,9 @@ This mirrors the existing channel model already present in the admin UI:
 - WeChat
 - FB Messenger
 - iMessage
+- Slack
+- Discord
+- Telegram
 
 ## What this setup does
 
@@ -49,6 +52,9 @@ It will ask, channel by channel, whether you want to configure:
 - WeChat
 - Messenger
 - iMessage
+- Slack
+- Discord
+- Telegram
 
 ## Verify
 
@@ -83,6 +89,15 @@ Other channels:
 /bin/zsh ./scripts/integrations/send_message.sh --channel messenger --message "test from phoenix"
 /bin/zsh ./scripts/integrations/send_message.sh --channel wechat --message "test from phoenix"
 /bin/zsh ./scripts/integrations/send_message.sh --channel imessage --message "test from phoenix"
+/bin/zsh ./scripts/integrations/send_message.sh --channel slack --message "test from phoenix"
+/bin/zsh ./scripts/integrations/send_message.sh --channel discord --message "test from phoenix"
+/bin/zsh ./scripts/integrations/send_message.sh --channel telegram --message "test from phoenix"
+```
+
+Send a file to any channel:
+
+```bash
+/bin/zsh ./scripts/integrations/send_message.sh --channel slack --file ./report.pdf
 ```
 
 If you need to override the recipient for one send:
@@ -99,13 +114,28 @@ Shortcut wrappers:
 /bin/zsh ./scripts/integrations/send_messenger.sh --message "test from phoenix"
 /bin/zsh ./scripts/integrations/send_wechat.sh --message "test from phoenix"
 /bin/zsh ./scripts/integrations/send_imessage.sh --message "test from phoenix"
+/bin/zsh ./scripts/integrations/send_slack.sh --message "test from phoenix"
+/bin/zsh ./scripts/integrations/send_discord.sh --message "test from phoenix"
+/bin/zsh ./scripts/integrations/send_telegram.sh --message "test from phoenix"
 ```
+
+## Brand Admin Distribution
+
+Fan-out a message to all admin channels for a brand:
+
+```bash
+python3 scripts/distribution/distribute_to_brand_admins.py --brand default --message "Build is live"
+python3 scripts/distribution/distribute_to_brand_admins.py --brand default --file ./report.pdf --dry-run
+```
+
+Edit ``config/messaging/brand_admin_channels.yaml`` to map brands to their admin
+notification channels.
 
 ## Notes
 
 - `.messaging_channels.local.yaml` is gitignored.
 - `.integration_sources.local.yaml` is gitignored.
-- Keychain services are named `phoenix-omega-line`, `phoenix-omega-whatsapp`, `phoenix-omega-wechat`, and `phoenix-omega-messenger`.
+- Keychain services are named `phoenix-omega-line`, `phoenix-omega-whatsapp`, `phoenix-omega-wechat`, `phoenix-omega-messenger`, `phoenix-omega-slack`, `phoenix-omega-discord`, and `phoenix-omega-telegram`.
 - iMessage is stored as a local handle only because it does not use a normal public API-key model like the others.
 - This creates a clean local source of truth for channels you already set up. It does not bypass platform logins, approvals, or business verification.
 - LINE push uses the LINE Messaging API user/group ID model.
