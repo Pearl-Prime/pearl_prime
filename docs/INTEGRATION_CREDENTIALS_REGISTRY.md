@@ -354,3 +354,34 @@ This registry consolidates information previously scattered across:
 - [docs/VIDEO_PLATFORM_CREDENTIAL_SETUP.md](./VIDEO_PLATFORM_CREDENTIAL_SETUP.md) — video platform OAuth/cookie credential setup
 
 Those files remain authoritative for their domain-specific setup procedures. This registry is the single index that answers "what credentials does this repo need?"
+
+---
+
+## Local development key setup (ONE-TIME)
+
+For any key that's in GitHub Secrets but not on your local machine, run:
+
+```bash
+# Go to the provider dashboard, copy the key, then:
+security add-generic-password -U -s "phoenix-omega" -a "<ENV_VAR_NAME>" -w "<paste key here>"
+```
+
+Then load it in your shell:
+
+```bash
+export RUNCOMFY_API_KEY=$(security find-generic-password -s "phoenix-omega" -a "RUNCOMFY_API_KEY" -w 2>/dev/null)
+export QWEN_API_KEY=$(security find-generic-password -s "phoenix-omega" -a "QWEN_API_KEY" -w 2>/dev/null)
+```
+
+Or add to your `.zshrc`:
+
+```bash
+# Phoenix Omega credentials (from macOS Keychain)
+for key in RUNCOMFY_API_KEY QWEN_API_KEY ANTHROPIC_API_KEY ELEVENLABS_API_KEY; do
+  val=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
+  [ -n "$val" ] && export $key="$val"
+done
+```
+
+**If running in CI:** All keys are in GitHub Secrets. Use workflow dispatch.
+**If running locally:** Keys must be in Keychain or environment. Run `python3 scripts/ci/check_integration_env.py` to see what's missing.
