@@ -1,11 +1,7 @@
-# Change observation and impact — run detect + impact on PR.
-# Authority: docs/CHANGE_OBSERVATION_AND_IMPACT_SPEC.md
 name: Change impact
 
 on:
   pull_request:
-    branches: [main]
-  push:
     branches: [main]
 
 jobs:
@@ -17,31 +13,40 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install PyYAML
-        run: pip install pyyaml
-
-      - name: Detect changes
+      - name: Check for mass deletions
         run: |
-          BASE="${{ github.event.pull_request.base.sha || 'HEAD~1' }}"
-          HEAD="${{ github.event.pull_request.head.sha || github.sha }}"
-          if [ "${{ github.event_name }}" = "push" ]; then
-            BASE="HEAD~1"
-            HEAD="HEAD"
+          DELETED=$(git diff --name-status origin/main...HEAD | grep '^D' | wc -l)
+          ADDED=$(git diff --name-status origin/main...HEAD | grep '^A' | wc -l)
+          MODIFIED=$(git diff --name-status origin/main...HEAD | grep '^M' | wc -l)
+          TOTAL=$(git diff --name-only origin/main...HEAD | wc -l)
+          
+          echo "## Change Impact Summary" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Files added | $ADDED |" >> $GITHUB_STEP_SUMMARY
+          echo "| Files modified | $MODIFIED |" >> $GITHUB_STEP_SUMMARY
+          echo "| Files deleted | $DELETED |" >> $GITHUB_STEP_SUMMARY
+          echo "| Total changed | $TOTAL |" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "$DELETED" -gt 50 ]; then
+            echo ""
+            echo "::error::BLOCKED: This PR deletes $DELETED files. PRs that delete more than 50 files require manual review."
+            echo "::error::Review the full deletion list: git diff --name-status origin/main...HEAD | grep '^D'"
+            echo ""
+            echo "### ⛔ BLOCKED — Mass deletion detected" >> $GITHUB_STEP_SUMMARY
+            echo "This PR deletes **$DELETED files**. Threshold: 50." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Top deleted directories:" >> $GITHUB_STEP_SUMMARY
+            git diff --name-status origin/main...HEAD | grep '^D' | cut -f2 | cut -d/ -f1 | sort | uniq -c | sort -rn | head -10 | while read count dir; do
+              echo "- $dir: $count files" >> $GITHUB_STEP_SUMMARY
+            done
+            exit 1
           fi
-          PYTHONPATH=. python scripts/observability/detect_changes.py --base "$BASE" --head "$HEAD" \
-            --out artifacts/observability/change_events.jsonl
-
-      - name: Impact from changes
-        run: |
-          PYTHONPATH=. python scripts/observability/impact_from_changes.py \
-            --events artifacts/observability/change_events.jsonl
-
-      - name: Upload change artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: change-impact-${{ github.run_id }}
-          path: artifacts/observability/
+          
+          if [ "$TOTAL" -gt 500 ]; then
+            echo "::warning::Large PR: $TOTAL files changed. Consider splitting into smaller PRs."
+            echo "### ⚠️ Large PR warning" >> $GITHUB_STEP_SUMMARY
+            echo "This PR changes **$TOTAL files**. Consider splitting." >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "✅ Change impact check passed ($DELETED deletions, $TOTAL total)"
