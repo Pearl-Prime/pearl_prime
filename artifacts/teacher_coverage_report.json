@@ -1,54 +1,54 @@
 {
-  "teacher_id": "adi_da",
-  "topic_id": "anxiety",
-  "persona_id": "gen_alpha_students",
-  "format_id": "F006",
-  "arc_id": "gen_alpha_students_anxiety_spiral_F006_gen",
+  "teacher_id": "master_sha",
+  "topic_id": "burnout",
+  "persona_id": "gen_z_professionals",
+  "format_id": "MOD_pocket_guide",
+  "arc_id": "gen_z_professionals_burnout_overwhelm_F006_gen",
   "required_by_slot": {
     "HOOK": 20,
     "SCENE": 20,
-    "STORY": 20,
     "REFLECTION": 20,
-    "COMPRESSION": 20,
     "EXERCISE": 20,
-    "INTEGRATION": 20
-  },
-  "required_story_by_band": {
-    "1": 2,
-    "2": 6,
-    "3": 5,
-    "4": 5,
-    "5": 2
-  },
-  "available_by_slot": {
-    "PIVOT": 20,
+    "TAKEAWAY": 20,
     "INTEGRATION": 20,
-    "EXERCISE": 40,
-    "COMPRESSION": 20,
-    "SCENE": 20,
-    "PERMISSION": 20,
-    "THREAD": 20,
-    "HOOK": 30,
-    "STORY": 20,
-    "REFLECTION": 30,
-    "TAKEAWAY": 20
+    "THREAD": 20
+  },
+  "required_story_by_band": {},
+  "available_by_slot": {
+    "INTEGRATION": 12,
+    "EXERCISE": 12,
+    "COMPRESSION": 12,
+    "SCENE": 12,
+    "HOOK": 12,
+    "STORY": 14,
+    "REFLECTION": 12
   },
   "story_band_inventory": {
-    "2": 18,
-    "3": 2
+    "2": 7,
+    "4": 3,
+    "3": 4
   },
   "gaps": {
-    "COMPRESSION": {},
-    "EXERCISE": {},
-    "HOOK": {},
-    "INTEGRATION": {},
-    "REFLECTION": {},
-    "SCENE": {},
-    "STORY": {
-      "band_1": 2,
-      "band_3": 3,
-      "band_4": 5,
-      "band_5": 2
+    "EXERCISE": {
+      "total_missing": 8
+    },
+    "HOOK": {
+      "total_missing": 8
+    },
+    "INTEGRATION": {
+      "total_missing": 8
+    },
+    "REFLECTION": {
+      "total_missing": 8
+    },
+    "SCENE": {
+      "total_missing": 8
+    },
+    "TAKEAWAY": {
+      "total_missing": 20
+    },
+    "THREAD": {
+      "total_missing": 20
     }
   },
   "fallback_required": false

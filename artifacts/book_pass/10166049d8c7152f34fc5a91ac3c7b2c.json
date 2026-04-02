@@ -1,0 +1,49 @@
+{
+  "plan_hash": "10166049d8c7152f34fc5a91ac3c7b2c",
+  "persona_id": "gen_z_professionals",
+  "topic_id": "overthinking",
+  "valid": false,
+  "errors": [
+    "mechanism_gate: Chapter 5 (mid): max mechanism_depth must be >= 2 (behavioral), got 1.",
+    "mechanism_gate: Chapter 6 (mid): max mechanism_depth must be >= 2 (behavioral), got 1.",
+    "mechanism_gate: Chapter 8 (mid): max mechanism_depth must be >= 2 (behavioral), got 1.",
+    "mechanism_gate: Chapter 9 (late): max mechanism_depth must be >= 3 (nervous_system), got 1.",
+    "mechanism_gate: Chapter 10 (late): max mechanism_depth must be >= 3 (nervous_system), got 2.",
+    "cost_gate: Cost gradient: no chapter with average cost_intensity >= 4 in second half of book.",
+    "cost_gate: Cost gradient: average cost across book is 2.2; minimum 2.5 required.",
+    "identity_gate: Identity shift: chapter 2 has max stage 0 after chapter 1 with 3 (regression).",
+    "identity_gate: Identity shift: chapter 6 has max stage 0 after chapter 5 with 2 (regression).",
+    "identity_gate: Identity shift: chapter 8 has max stage 0 after chapter 7 with 2 (regression).",
+    "identity_gate: Identity shift: self_claim appears in chapter 1 (before midpoint); identity shift should occur in second half.",
+    "book_pass: no forward-agency increase by final third."
+  ],
+  "warnings": [
+    "book_pass: claim repetition elevated (4/12 = 33%)."
+  ],
+  "metrics": {
+    "chapter_tier": "standard",
+    "tier_thresholds": {
+      "min_distinct_bands": 4,
+      "min_mechanism_depth": 4,
+      "identity_stages_required": 4,
+      "min_cost_intensity_peak": 4,
+      "require_self_claim_final": true,
+      "require_callback_completion": true,
+      "min_bestseller_structures_distinct": 4
+    },
+    "chapter_count": 12,
+    "claim_coverage": 1.0,
+    "max_claim_share": 0.333,
+    "unique_claim_keys": 8,
+    "adjacent_claim_similarity_mean": 0.034,
+    "adjacent_claim_similarity_hi_pairs": 0,
+    "act_scores": {
+      "act1_recognition_first": 0.0,
+      "act2_mechanism_mid": 0.75,
+      "act3_agency_last": 0.0,
+      "act3_agency_first": 0.0
+    },
+    "ending_has_contrast": true,
+    "ending_has_forward": true
+  }
+}
