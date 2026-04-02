@@ -2220,3 +2220,4 @@ All `.md` files under `specs/` confirmed present on disk. Additional `.txt` and 
 | [scripts/merge_translation_shards.py](../scripts/merge_translation_shards.py) | Translation | ✓ — Stub: implement to merge shard outputs into locale atom tree |
 | [scripts/check_golden_translation.py](../scripts/check_golden_translation.py) | Translation | ✓ — Stub: implement for golden_translation_regression.yaml check |
 | [scripts/native_prompts_eval_learn.py](../scripts/native_prompts_eval_learn.py) | Translation | ✓ — Stub: implement for native-speaker eval prompts and learn |
+# Locale parity report added
