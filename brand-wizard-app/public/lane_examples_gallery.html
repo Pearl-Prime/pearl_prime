@@ -37,6 +37,8 @@ h2{font-size:1.35rem;font-weight:800;margin:28px 0 8px;letter-spacing:-.02em}
 .tile .ph{aspect-ratio:3/4;background:linear-gradient(145deg,#e5e7eb,#f3f4f6);display:flex;align-items:center;justify-content:center;position:relative}
 .tile .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .tile .ph video.proof-video{width:100%;height:100%;object-fit:cover;display:block;background:#111}
+.tile .ph.audio-ph{aspect-ratio:auto;min-height:72px;padding:12px;align-items:stretch;background:linear-gradient(180deg,#f8fafc,#f1f5f9)}
+.tile .ph.audio-ph audio.proof-audio{width:100%;max-width:100%}
 .tile.support .ph{aspect-ratio:4/5}
 .featured-mission .tile{max-width:520px;margin:0 auto}
 .featured-mission .ph{aspect-ratio:16/9}
@@ -84,7 +86,7 @@ kbd{font-size:.7em;padding:1px 5px;border:1px solid var(--border);border-radius:
 <script>
 (function(){
 var LANES_ORDER = ['self_help','audiobook','manga','pearl_news','breathwork_tools','tools','other'];
-var SET_ORDER_FIRST = ['cmp_visual_identity_v1','cmp_archetypes_v1','cmp_systems_v1'];
+var SET_ORDER_FIRST = ['cmp_voice_narrator_contrast_v1','cmp_voice_benchmark_passages_v1','cmp_visual_identity_v1','cmp_archetypes_v1','cmp_systems_v1'];
 var MISSION_PACK_ID = 'pack_v1_mission_output_overview';
 var REPO_STATIC_MODE = false;
 function loadRegistryJson(){
@@ -111,6 +113,10 @@ function resolveAssetUrl(path){
 function isVideoAsset(path){
   if(!path||typeof path!=='string')return false;
   return /\.(mp4|webm|ogg|mov)$/i.test(path);
+}
+function isAudioAsset(path){
+  if(!path||typeof path!=='string')return false;
+  return /\.(mp3|wav|ogg|m4a|aac)$/i.test(path);
 }
 function sortComparisonSetKeys(keys){
   return keys.sort(function(a,b){
@@ -142,7 +148,21 @@ function renderTile(row){
     ph.appendChild(renderPlaceholder(row,false));
   } else if(row.asset_path){
     var url=resolveAssetUrl(row.asset_path);
-    if(isVideoAsset(row.asset_path)){
+    if(isAudioAsset(row.asset_path)){
+      ph.classList.add('audio-ph');
+      var aud=document.createElement('audio');
+      aud.className='proof-audio';
+      aud.src=url;
+      aud.controls=true;
+      aud.setAttribute('preload','metadata');
+      aud.onerror=function(){
+        stale=true;
+        ph.innerHTML='';
+        ph.classList.remove('audio-ph');
+        ph.appendChild(renderPlaceholder(row,true));
+      };
+      ph.appendChild(aud);
+    } else if(isVideoAsset(row.asset_path)){
       var vid=document.createElement('video');
       vid.className='proof-video';
       vid.src=url;

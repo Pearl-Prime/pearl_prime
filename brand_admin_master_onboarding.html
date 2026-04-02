@@ -64,6 +64,14 @@ code{font-size:.85em;background:#f3f4f6;padding:2px 6px;border-radius:4px}
 <li><strong>Wizard</strong> — React app (<code>brand-wizard-app</code>) surfaces matching example IDs after persona / format decisions using the same JSON.</li>
 </ul>
 
+<div class="sl">Audiobook voice proof</div>
+<h2>Hear benchmark narrators</h2>
+<p>Registry rows <code>cmp_voice_narrator_contrast_v1</code> and <code>cmp_voice_benchmark_passages_v1</code> point at MP3s under <code>onboarding/audio/</code>. Regenerate locally with <code>python3 scripts/onboarding/generate_voice_benchmark_audio.py</code> (requires <code>pip install -r scripts/onboarding/requirements-tts.txt</code>).</p>
+<div style="display:grid;gap:12px;margin:14px 0 20px;max-width:520px">
+<div><strong style="font-size:.78rem;color:var(--text)">Comfort — regulating</strong><audio controls preload="metadata" style="width:100%;margin-top:6px;height:36px" src="onboarding/audio/voice_cmp_comfort_voice_regulating_female.mp3"></audio></div>
+<div><strong style="font-size:.78rem;color:var(--text)">Comfort — warm</strong><audio controls preload="metadata" style="width:100%;margin-top:6px;height:36px" src="onboarding/audio/voice_cmp_comfort_voice_warm_male.mp3"></audio></div>
+</div>
+
 <div class="sl">What brand admins do</div>
 <h2>Your operating loop</h2>
 <p>Choose narrative and primary reader in the wizard, confirm format bias (book vs manga-forward), then use the gallery to align stakeholders on proof quality. Use the matrix to see market × lane coverage before greenlighting spend.</p>

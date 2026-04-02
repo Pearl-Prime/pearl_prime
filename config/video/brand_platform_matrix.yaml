@@ -1,0 +1,680 @@
+# Brand × Platform × Daily Quota Matrix
+# Authority: specs/VIDEO_CONTENT_ENGINE_DEV_SPEC.md §Stage-18
+# Source truth: config/video/upload_config.yaml (credential suffixes, platform flags)
+#               config/video/channel_registry.yaml (channels, upload_window_offset_hours)
+#               config/brand_registry.yaml (brand definitions)
+#
+# This matrix is the single authoritative lookup for:
+#   - which platforms are enabled per brand
+#   - daily quota per brand per platform
+#   - scheduling preferences (publish windows, stagger)
+#   - content type preferences (format, aspect ratio)
+#   - credential suffix used to compose env var names
+#
+# Quota semantics:
+#   daily_quota is the MAX uploads across ALL channels for that brand on that platform.
+#   Each channel contributes up to daily_upload_cap (3) from channel_registry.yaml.
+#   The quota_manager enforces these cross-channel ceilings.
+#
+# Channel counts per brand (from channel_registry.yaml):
+#   stillness_press:   8 channels (ch_001,004,006,009,012,017,018,020,022) → actually 9
+#   cognitive_clarity: 12 channels (ch_002,003,005,007,008,010,011,013,016,019,021,023,024) → 13
+#   norcal_dharma:     2 channels (ch_014, ch_015)
+#
+# Platform daily quotas below are conservative and well within API ceilings:
+#   YouTube: 10,000 quota units/day (~6 uploads max); we cap at 6 for safety
+#   TikTok: 20 videos/day API limit; we cap at 9 per brand (3 channels × 3)
+#   Instagram Reels: 25 posts/day API limit; we cap at 9
+#   Bilibili: 20 videos/day; disabled for EN brands (no zh content)
+#   Douyin: 20 videos/day; disabled for EN brands (ICP requirements not met)
+
+schema_version: 1
+generated_from:
+  - config/video/upload_config.yaml
+  - config/video/channel_registry.yaml
+  - config/brand_registry.yaml
+
+# ── BRAND MATRIX ──────────────────────────────────────────────────────────────
+
+brands:
+
+  # ---------------------------------------------------------------------------
+  # stillness_press — EN/US, calm & healing focus
+  # Channels: ch_001 (offset 0), ch_004 (3), ch_006 (5), ch_009 (8),
+  #           ch_012 (11), ch_017 (16), ch_018 (17), ch_020 (19), ch_022 (21)
+  # ---------------------------------------------------------------------------
+  stillness_press:
+    credential_suffix: "_SP"
+    locale: en_US
+    channel_count: 9
+
+    platforms:
+      youtube:
+        enabled: true
+        daily_quota: 6          # Conservative YouTube ceiling (6 × 1,600 ≈ 9,600 units)
+        content_type: long_form  # 16:9, landscape-first for long-form
+        aspect_ratio: "16:9"
+        max_duration_s: 43200
+      youtube_shorts:
+        enabled: true
+        daily_quota: 9          # Up to 3 shorts per channel, 3 active channels/day
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 60
+      tiktok:
+        enabled: true
+        daily_quota: 9
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 600
+      instagram_reels:
+        enabled: true
+        daily_quota: 9
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 90
+      bilibili:
+        enabled: false
+        daily_quota: 0
+        reason: "EN-only brand; no zh subtitle pipeline"
+      douyin:
+        enabled: false
+        daily_quota: 0
+        reason: "ICP requirements not met for EN brand"
+
+    scheduling:
+      # stillness_press channels span offsets 0,3,5,8,11,16,17,19,21
+      # First window at base_hour_utc (06:00 UTC) + offset
+      preferred_publish_hours_utc: [6, 9, 11, 14, 17, 22, 23, 25, 27]  # 06:00+offset
+      stagger_offset_minutes: 15
+      timezone_hint: "America/Los_Angeles"  # Primary audience West Coast US
+      retry_max: 3
+
+  # ---------------------------------------------------------------------------
+  # cognitive_clarity — EN/US, analytical & performance focus
+  # Channels: ch_002 (1), ch_003 (2), ch_005 (4), ch_007 (6), ch_008 (7),
+  #           ch_010 (9), ch_011 (10), ch_013 (12), ch_016 (15), ch_019 (18),
+  #           ch_021 (20), ch_023 (22), ch_024 (23)
+  # ---------------------------------------------------------------------------
+  cognitive_clarity:
+    credential_suffix: "_CC"
+    locale: en_US
+    channel_count: 13
+
+    platforms:
+      youtube:
+        enabled: true
+        daily_quota: 6
+        content_type: long_form
+        aspect_ratio: "16:9"
+        max_duration_s: 43200
+      youtube_shorts:
+        enabled: true
+        daily_quota: 9
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 60
+      tiktok:
+        enabled: true
+        daily_quota: 9
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 600
+      instagram_reels:
+        enabled: true
+        daily_quota: 9
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 90
+      bilibili:
+        enabled: false
+        daily_quota: 0
+        reason: "EN-only brand; no zh subtitle pipeline"
+      douyin:
+        enabled: false
+        daily_quota: 0
+        reason: "ICP requirements not met for EN brand"
+
+    scheduling:
+      # cognitive_clarity channels span offsets 1,2,4,6,7,9,10,12,15,18,20,22,23
+      preferred_publish_hours_utc: [7, 8, 10, 12, 13, 15, 16, 18, 21, 0, 2, 4, 5]
+      stagger_offset_minutes: 15
+      timezone_hint: "America/New_York"  # Mixed East/West Coast audience
+      retry_max: 3
+
+  # ---------------------------------------------------------------------------
+  # norcal_dharma — EN/US, mindfulness/somatic healing, 2 channels
+  # Channels: ch_014 (offset 13), ch_015 (offset 14)
+  # Church-compliance brand — conservative quota, no short-form emphasis
+  # ---------------------------------------------------------------------------
+  norcal_dharma:
+    credential_suffix: "_ND"
+    locale: en_US
+    channel_count: 2
+
+    platforms:
+      youtube:
+        enabled: true
+        daily_quota: 3          # 2 channels × 1 upload safety margin
+        content_type: long_form
+        aspect_ratio: "16:9"
+        max_duration_s: 43200
+      youtube_shorts:
+        enabled: true
+        daily_quota: 2
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 60
+      tiktok:
+        enabled: true
+        daily_quota: 2
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 600
+      instagram_reels:
+        enabled: true
+        daily_quota: 2
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 90
+      bilibili:
+        enabled: false
+        daily_quota: 0
+        reason: "EN-only brand; no zh subtitle pipeline"
+      douyin:
+        enabled: false
+        daily_quota: 0
+        reason: "ICP requirements not met for EN brand"
+
+    scheduling:
+      # norcal_dharma channels at offsets 13, 14 → 19:00 and 20:00 UTC
+      preferred_publish_hours_utc: [19, 20]
+      stagger_offset_minutes: 30   # Wider stagger; only 2 channels, mindfulness pacing
+      timezone_hint: "America/Los_Angeles"
+      retry_max: 3
+
+  # ---------------------------------------------------------------------------
+  # zh_TW brands — Traditional Chinese, Taiwan market
+  # Platforms: bilibili disabled (different script), douyin disabled (PRC only)
+  # YouTube + TikTok + Instagram active; conservative quotas (1 channel each)
+  # ---------------------------------------------------------------------------
+  sleep_repair_tw:
+    credential_suffix: "_SRTW"
+    locale: zh_TW
+    channel_count: 1
+    platforms:
+      youtube:
+        enabled: true
+        daily_quota: 3
+        content_type: long_form
+        aspect_ratio: "16:9"
+        max_duration_s: 43200
+      youtube_shorts:
+        enabled: true
+        daily_quota: 3
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 60
+      tiktok:
+        enabled: true
+        daily_quota: 3
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 600
+      instagram_reels:
+        enabled: true
+        daily_quota: 3
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 90
+      bilibili:
+        enabled: false
+        daily_quota: 0
+        reason: "Traditional Chinese; Bilibili targets Simplified CN"
+      douyin:
+        enabled: false
+        daily_quota: 0
+        reason: "Douyin targets PRC only; TW market uses TikTok"
+    scheduling:
+      preferred_publish_hours_utc: [1, 9, 13]  # 09:00/17:00/21:00 CST
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Taipei"
+      retry_max: 3
+
+  stabilizer_tw:
+    credential_suffix: "_STBTW"
+    locale: zh_TW
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "Traditional Chinese; Bilibili targets Simplified CN"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC only"}
+    scheduling:
+      preferred_publish_hours_utc: [2, 10, 14]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Taipei"
+      retry_max: 3
+
+  panic_first_aid_tw:
+    credential_suffix: "_PFTW"
+    locale: zh_TW
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "Traditional Chinese; Bilibili targets Simplified CN"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC only"}
+    scheduling:
+      preferred_publish_hours_utc: [3, 11, 15]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Taipei"
+      retry_max: 3
+
+  gen_z_grounding_tw:
+    credential_suffix: "_GZGTW"
+    locale: zh_TW
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "Traditional Chinese; Bilibili targets Simplified CN"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC only"}
+    scheduling:
+      preferred_publish_hours_utc: [4, 12, 16]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Taipei"
+      retry_max: 3
+
+  grief_companion_tw:
+    credential_suffix: "_GCTW"
+    locale: zh_TW
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "Traditional Chinese; Bilibili targets Simplified CN"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC only"}
+    scheduling:
+      preferred_publish_hours_utc: [5, 13, 17]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Taipei"
+      retry_max: 3
+
+  inner_security_tw:
+    credential_suffix: "_ISTW"
+    locale: zh_TW
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "Traditional Chinese; Bilibili targets Simplified CN"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC only"}
+    scheduling:
+      preferred_publish_hours_utc: [6, 14, 18]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Taipei"
+      retry_max: 3
+
+  # ---------------------------------------------------------------------------
+  # zh_HK brands — Traditional Chinese, Hong Kong market (same platform set as TW)
+  # ---------------------------------------------------------------------------
+  sleep_repair_hk:
+    credential_suffix: "_SRHK"
+    locale: zh_HK
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "HK Traditional Chinese; Bilibili audience is Simplified CN"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC; HK audience uses TikTok"}
+    scheduling:
+      preferred_publish_hours_utc: [1, 9, 13]   # 09:00/17:00/21:00 HKT
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Hong_Kong"
+      retry_max: 3
+
+  stabilizer_hk:
+    credential_suffix: "_STBHK"
+    locale: zh_HK
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "HK Traditional Chinese; Bilibili audience is Simplified CN"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC"}
+    scheduling:
+      preferred_publish_hours_utc: [2, 10, 14]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Hong_Kong"
+      retry_max: 3
+
+  panic_first_aid_hk:
+    credential_suffix: "_PFHK"
+    locale: zh_HK
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "HK Traditional Chinese"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC"}
+    scheduling:
+      preferred_publish_hours_utc: [3, 11, 15]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Hong_Kong"
+      retry_max: 3
+
+  gen_z_grounding_hk:
+    credential_suffix: "_GZGHK"
+    locale: zh_HK
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "HK Traditional Chinese"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC"}
+    scheduling:
+      preferred_publish_hours_utc: [4, 12, 16]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Hong_Kong"
+      retry_max: 3
+
+  grief_companion_hk:
+    credential_suffix: "_GCHK"
+    locale: zh_HK
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "HK Traditional Chinese"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC"}
+    scheduling:
+      preferred_publish_hours_utc: [5, 13, 17]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Hong_Kong"
+      retry_max: 3
+
+  inner_security_hk:
+    credential_suffix: "_ISHK"
+    locale: zh_HK
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "HK Traditional Chinese"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC"}
+    scheduling:
+      preferred_publish_hours_utc: [6, 14, 18]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Hong_Kong"
+      retry_max: 3
+
+  # ---------------------------------------------------------------------------
+  # zh_CN brands — Simplified Chinese, Mainland China market
+  # Bilibili + Douyin ENABLED (PRC market); YouTube/TikTok/Instagram DISABLED
+  # (GFW blocks these platforms in mainland CN)
+  # ---------------------------------------------------------------------------
+  sleep_repair_cn:
+    credential_suffix: "_SRCN"
+    locale: zh_CN
+    channel_count: 1
+    platforms:
+      youtube: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      youtube_shorts: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      tiktok: {enabled: false, daily_quota: 0, reason: "TikTok not available in PRC; use Douyin"}
+      instagram_reels: {enabled: false, daily_quota: 0, reason: "GFW blocks Instagram in mainland CN"}
+      bilibili:
+        enabled: true
+        daily_quota: 3
+        content_type: long_form
+        aspect_ratio: "16:9"
+        max_duration_s: 14400
+        requires_zh_subtitles: true
+      douyin:
+        enabled: true
+        daily_quota: 3
+        content_type: short_vertical
+        aspect_ratio: "9:16"
+        max_duration_s: 300
+    scheduling:
+      preferred_publish_hours_utc: [1, 9, 13]   # 09:00/17:00/21:00 CST
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Shanghai"
+      retry_max: 3
+
+  stabilizer_cn:
+    credential_suffix: "_STBCN"
+    locale: zh_CN
+    channel_count: 1
+    platforms:
+      youtube: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      youtube_shorts: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      tiktok: {enabled: false, daily_quota: 0, reason: "TikTok not available in PRC"}
+      instagram_reels: {enabled: false, daily_quota: 0, reason: "GFW blocks Instagram in mainland CN"}
+      bilibili: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 14400, requires_zh_subtitles: true}
+      douyin: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 300}
+    scheduling:
+      preferred_publish_hours_utc: [2, 10, 14]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Shanghai"
+      retry_max: 3
+
+  panic_first_aid_cn:
+    credential_suffix: "_PFCN"
+    locale: zh_CN
+    channel_count: 1
+    platforms:
+      youtube: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      youtube_shorts: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      tiktok: {enabled: false, daily_quota: 0, reason: "TikTok not available in PRC"}
+      instagram_reels: {enabled: false, daily_quota: 0, reason: "GFW blocks Instagram in mainland CN"}
+      bilibili: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 14400, requires_zh_subtitles: true}
+      douyin: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 300}
+    scheduling:
+      preferred_publish_hours_utc: [3, 11, 15]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Shanghai"
+      retry_max: 3
+
+  gen_z_grounding_cn:
+    credential_suffix: "_GZGCN"
+    locale: zh_CN
+    channel_count: 1
+    platforms:
+      youtube: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      youtube_shorts: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      tiktok: {enabled: false, daily_quota: 0, reason: "TikTok not available in PRC"}
+      instagram_reels: {enabled: false, daily_quota: 0, reason: "GFW blocks Instagram in mainland CN"}
+      bilibili: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 14400, requires_zh_subtitles: true}
+      douyin: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 300}
+    scheduling:
+      preferred_publish_hours_utc: [4, 12, 16]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Shanghai"
+      retry_max: 3
+
+  grief_companion_cn:
+    credential_suffix: "_GCCN"
+    locale: zh_CN
+    channel_count: 1
+    platforms:
+      youtube: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      youtube_shorts: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      tiktok: {enabled: false, daily_quota: 0, reason: "TikTok not available in PRC"}
+      instagram_reels: {enabled: false, daily_quota: 0, reason: "GFW blocks Instagram in mainland CN"}
+      bilibili: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 14400, requires_zh_subtitles: true}
+      douyin: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 300}
+    scheduling:
+      preferred_publish_hours_utc: [5, 13, 17]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Shanghai"
+      retry_max: 3
+
+  inner_security_cn:
+    credential_suffix: "_ISCN"
+    locale: zh_CN
+    channel_count: 1
+    platforms:
+      youtube: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      youtube_shorts: {enabled: false, daily_quota: 0, reason: "GFW blocks YouTube in mainland CN"}
+      tiktok: {enabled: false, daily_quota: 0, reason: "TikTok not available in PRC"}
+      instagram_reels: {enabled: false, daily_quota: 0, reason: "GFW blocks Instagram in mainland CN"}
+      bilibili: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 14400, requires_zh_subtitles: true}
+      douyin: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 300}
+    scheduling:
+      preferred_publish_hours_utc: [6, 14, 18]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Shanghai"
+      retry_max: 3
+
+  # ---------------------------------------------------------------------------
+  # zh_SG brands — Simplified Chinese, Singapore market
+  # YouTube/TikTok/Instagram active (no GFW); Bilibili optional; Douyin disabled
+  # ---------------------------------------------------------------------------
+  sleep_repair_sg:
+    credential_suffix: "_SRSG"
+    locale: zh_SG
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "SG audience primarily on YouTube/TikTok"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC; SG uses TikTok"}
+    scheduling:
+      preferred_publish_hours_utc: [1, 9, 13]   # 09:00/17:00/21:00 SGT
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Singapore"
+      retry_max: 3
+
+  stabilizer_sg:
+    credential_suffix: "_STBSG"
+    locale: zh_SG
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "SG audience primarily on YouTube/TikTok"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC"}
+    scheduling:
+      preferred_publish_hours_utc: [2, 10, 14]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Singapore"
+      retry_max: 3
+
+  panic_first_aid_sg:
+    credential_suffix: "_PFSG"
+    locale: zh_SG
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "SG audience primarily on YouTube/TikTok"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC"}
+    scheduling:
+      preferred_publish_hours_utc: [3, 11, 15]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Singapore"
+      retry_max: 3
+
+  gen_z_grounding_sg:
+    credential_suffix: "_GZGSG"
+    locale: zh_SG
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "SG audience primarily on YouTube/TikTok"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC"}
+    scheduling:
+      preferred_publish_hours_utc: [4, 12, 16]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Singapore"
+      retry_max: 3
+
+  grief_companion_sg:
+    credential_suffix: "_GCSG"
+    locale: zh_SG
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "SG audience primarily on YouTube/TikTok"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC"}
+    scheduling:
+      preferred_publish_hours_utc: [5, 13, 17]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Singapore"
+      retry_max: 3
+
+  inner_security_sg:
+    credential_suffix: "_ISSG"
+    locale: zh_SG
+    channel_count: 1
+    platforms:
+      youtube: {enabled: true, daily_quota: 3, content_type: long_form, aspect_ratio: "16:9", max_duration_s: 43200}
+      youtube_shorts: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 60}
+      tiktok: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 600}
+      instagram_reels: {enabled: true, daily_quota: 3, content_type: short_vertical, aspect_ratio: "9:16", max_duration_s: 90}
+      bilibili: {enabled: false, daily_quota: 0, reason: "SG audience primarily on YouTube/TikTok"}
+      douyin: {enabled: false, daily_quota: 0, reason: "Douyin targets PRC"}
+    scheduling:
+      preferred_publish_hours_utc: [6, 14, 18]
+      stagger_offset_minutes: 15
+      timezone_hint: "Asia/Singapore"
+      retry_max: 3
+
+# ── PLATFORM CONTENT TYPE DEFINITIONS ─────────────────────────────────────────
+# Reference for content_type values used above.
+
+content_type_definitions:
+  long_form:
+    description: "16:9 landscape, >= 3 minutes, full-length episodes"
+    primary_platforms: [youtube, bilibili]
+    aspect_ratio: "16:9"
+    min_duration_s: 180
+  short_vertical:
+    description: "9:16 vertical, <= 10 minutes, hook-first format"
+    primary_platforms: [youtube_shorts, tiktok, instagram_reels, douyin]
+    aspect_ratio: "9:16"
+    max_duration_s: 600
+
+# ── CREDENTIAL SUFFIX CONVENTIONS ────────────────────────────────────────────
+# The credential_suffix is appended to all platform env var names.
+# Example: YT_CLIENT_ID + _SP → YT_CLIENT_ID_SP
+# See config/video/upload_config.yaml for base env var names.
+#
+# EN brands use 2-char suffixes (_SP, _CC, _ND).
+# Locale brands use 4-6 char suffixes to avoid collisions.
+# All suffixes registered at: docs/credentials_registry.yaml

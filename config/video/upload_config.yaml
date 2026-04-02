@@ -213,9 +213,15 @@ brand_platform_map:
 
 # Scheduling defaults
 scheduling:
-  base_hour_utc: 6  # First upload window starts at 06:00 UTC
-  window_duration_hours: 1  # Each channel gets a 1-hour window
-  stagger_minutes: 15  # Within a window, stagger uploads by 15 min
+  default_cron: "0 14 * * *"             # 14:00 UTC = 6:00 AM PT
+  timezone: America/Los_Angeles
+  publish_window_hours: [6, 7, 8, 9]     # 6 AM – 9 AM PT
+  stagger_minutes_between_brands: 15
+  stagger_minutes_between_platforms: 5
+  # Legacy fields kept for backward-compat with channel_registry offset logic:
+  base_hour_utc: 14   # mirrors default_cron hour
+  window_duration_hours: 1
+  stagger_minutes: 15
   retry_max: 3
   retry_backoff_base_s: 60
   dry_run_default: true  # Safety: default to dry-run mode

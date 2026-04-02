@@ -27,3 +27,5 @@ for f in "${SPINE_HTML[@]}"; do
   fi
 done
 echo "Synced onboarding spine HTML -> brand-wizard-app/public/"
+# Onboarding MP3 benchmarks (TTS): committed under brand-wizard-app/public/onboarding/audio/
+# Regenerate: python3 scripts/onboarding/generate_voice_benchmark_audio.py

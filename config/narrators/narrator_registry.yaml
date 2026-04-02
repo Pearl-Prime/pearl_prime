@@ -12,6 +12,41 @@ narrators:
     disallowed_topics: []
     status: approved
 
+  # Onboarding / benchmark voices — previews generated via Edge TTS (see scripts/onboarding/generate_voice_benchmark_audio.py).
+  # edge_tts_voice: Microsoft Edge TTS voice name; optional elevenlabs_voice_id when production narration is wired.
+  voice_regulating_female:
+    display_name: "Regulating — calm (US female)"
+    brand_compatibility: [phoenix, stillness_press, cognitive_clarity]
+    persona_alignment: [overwhelmed_caregiver, anxious_student]
+    pacing_profile: calm
+    voice_engine_id: edge_tts_preview
+    edge_tts_voice: en-US-JennyNeural
+    elevenlabs_voice_id: null
+    disallowed_topics: []
+    status: approved
+
+  voice_warm_male:
+    display_name: "Warm empathetic (US male)"
+    brand_compatibility: [phoenix, stillness_press, cognitive_clarity]
+    persona_alignment: [burned_out_founder, spiritual_seeker]
+    pacing_profile: calm
+    voice_engine_id: edge_tts_preview
+    edge_tts_voice: en-US-GuyNeural
+    elevenlabs_voice_id: null
+    disallowed_topics: []
+    status: approved
+
+  voice_direct_authority:
+    display_name: "Direct / authority (US male)"
+    brand_compatibility: [phoenix, stillness_press, cognitive_clarity]
+    persona_alignment: [burned_out_founder]
+    pacing_profile: standard
+    voice_engine_id: edge_tts_preview
+    edge_tts_voice: en-US-EricNeural
+    elevenlabs_voice_id: null
+    disallowed_topics: []
+    status: approved
+
   # Example entries for multi-narrator use:
   # ava_reed:
   #   display_name: "Ava Reed"

@@ -1,0 +1,42 @@
+{
+  "plan_hash": "a7e2bb03b8eebab3af462b7b47bd013f",
+  "persona_id": "nyc_executives",
+  "topic_id": "anxiety",
+  "valid": false,
+  "errors": [
+    "mechanism_gate: Chapter 2 (mid): max mechanism_depth must be >= 2 (behavioral), got 1.",
+    "mechanism_gate: Chapter 3 (mid): max mechanism_depth must be >= 2 (behavioral), got 1.",
+    "mechanism_gate: Final third of book must contain at least one mechanism_depth=4 (identity-level) atom.",
+    "mechanism_gate: Chapter 4 (late): max mechanism_depth must be >= 3 (nervous_system), got 1.",
+    "mechanism_gate: Chapter 5 (late): max mechanism_depth must be >= 3 (nervous_system), got 1.",
+    "mechanism_gate: Max mechanism_depth across book is 1; minimum 3 required for books with 3+ chapters.",
+    "cost_gate: Cost gradient: highest cost occurs at chapter 1 (before midpoint 3). Peak should be at or after midpoint.",
+    "cost_gate: Cost gradient: no chapter with average cost_intensity >= 4 in second half of book.",
+    "cost_gate: Cost gradient: average cost across book is 2.0; minimum 2.5 required.",
+    "identity_gate: Identity shift: no experimentation stage before final quarter of book.",
+    "identity_gate: Identity shift: final chapter must contain at least one self_claim atom."
+  ],
+  "warnings": [
+    "mechanism_gate: Chapter 5: mechanism_depth does not increase from chapter 4 (plateau)."
+  ],
+  "metrics": {
+    "chapter_tier": "micro",
+    "tier_thresholds": {
+      "min_distinct_bands": 2,
+      "min_mechanism_depth": 2,
+      "identity_stages_required": 2,
+      "min_cost_intensity_peak": 3,
+      "require_self_claim_final": true,
+      "require_callback_completion": false,
+      "min_bestseller_structures_distinct": 1
+    },
+    "chapter_count": 5,
+    "claim_coverage": 1.0,
+    "max_claim_share": 0.2,
+    "unique_claim_keys": 5,
+    "adjacent_claim_similarity_mean": 0.037,
+    "adjacent_claim_similarity_hi_pairs": 0,
+    "ending_has_contrast": true,
+    "ending_has_forward": true
+  }
+}
