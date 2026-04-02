@@ -168,18 +168,37 @@ const VISUAL_STYLES = [
     emotionPrompt: "Abstract geometric explosion of red and yellow shapes on white background, sharp angular forms radiating outward, feeling of decisive action and clarity, kinetic energy frozen in motion",
   },
   {
-    id: "premium_soft", label: "Premium / Soft", desc: "Luxurious, muted, editorial",
-    palette: ["#fdf4ff", "#d8b4fe", "#7e22ce", "#3b0764"], mood: "Elevated, refined, intimate",
-    imagePrompt: "Premium editorial book cover with soft lavender and deep purple gradient, elegant thin serif typography, subtle gold foil accent line, silk fabric texture overlay, luxury beauty brand aesthetic, muted soft-focus floral",
-    emotionPrompt: "Soft focus lavender field at golden hour, silk fabric flowing in slow motion breeze, delicate gold light particles, feeling of being held in luxury and care, premium spa atmosphere",
+    id: "premium_soft",
+    label: "Premium / Geometric",
+    desc: "Refined, precise, luxury-positioned",
+    palette: ["#fdf4ff", "#d8b4fe", "#7e22ce", "#3b0764"],
+    mood: "Elevated, geometric, timeless",
+    imagePrompt:
+      "Premium luxury nonfiction book cover with precise geometric layout, thin elegant serif or restrained sans typography, subtle gold line or foil accent, controlled lavender and deep purple planes, editorial grid discipline, aspirational transformation",
+    emotionPrompt:
+      "Architectural light on refined surfaces, crisp geometric shadows, sense of order and quiet authority, timeless high-end publishing mood",
   },
   {
-    id: "sacred_cosmic", label: "Sacred / Cosmic", desc: "Geometry, gradients, gold",
-    palette: ["#0f172a", "#7c3aed", "#f59e0b", "#fef3c7"], mood: "Mystical, expansive, luminous",
-    imagePrompt: "Sacred geometry book cover with deep navy background, intricate golden Flower of Life pattern, cosmic nebula purple and gold gradient, celestial star field, ancient wisdom meets modern design, gold foil mandala",
-    emotionPrompt: "Vast cosmic nebula scene with sacred geometry overlaid in gold, spiraling galaxies forming mandala patterns, person meditating as silhouette against universe, feeling of infinite connection and awakening",
+    id: "sacred_cosmic",
+    label: "Mysterious / Deep",
+    desc: "Atmospheric, contemplative, subtly luminous",
+    palette: ["#0f172a", "#7c3aed", "#f59e0b", "#fef3c7"], mood: "Intriguing, expansive, still commercial",
+    imagePrompt:
+      "Premium mysterious nonfiction book cover, atmospheric deep navy and violet, subtle sacred geometry or soft nebula hint, contemplative spiritual-transformation adjacent, magnetic curiosity without horror, crisp typography zone, editorial finish",
+    emotionPrompt:
+      "Contemplative night sky or soft abstract depth, subtle light bloom, sense of mystery and inward expansion without fantasy excess, emotionally open-ended, thumbnail-strong focal read",
   },
 ];
+
+/** Image Pack v1 visual-identity proof URLs — keep in sync with onboarding example_registry.json */
+const VISUAL_IDENTITY_PROOF_URL = {
+  calm_minimal: "/onboarding/proof/generated/pack_v1_vi_calm_v1.png",
+  dark_intense: "/onboarding/proof/generated/pack_v1_vi_dark_v1.png",
+  earthy_organic: "/onboarding/proof/generated/pack_v1_vi_earthy_v1.png",
+  bold_modern: "/onboarding/proof/generated/pack_v1_vi_bold_v1.png",
+  premium_soft: "/onboarding/proof/generated/pack_v1_vi_premium_v1.png",
+  sacred_cosmic: "/onboarding/proof/generated/pack_v1_vi_mysterious_v1.png",
+};
 
 const PROVEN = {
   nervous_system: {
@@ -913,8 +932,8 @@ const SELECTION_FEEDBACK = {
     dark_intense: { systemEffect: "Generates covers with deep indigo/black, dramatic lighting, cinematic grain, high contrast", emotionalBenefit: "Readers feel the gravity of their own transformation. Dark aesthetics signal depth — this isn't gentle wellness, it's real work. Attracts readers who distrust soft-looking self-help." },
     earthy_organic: { systemEffect: "Generates covers with handmade textures, botanical elements, warm amber tones, artisan aesthetic", emotionalBenefit: "Readers feel grounded before they read a word. Natural textures trigger biophilic calm — the brain interprets organic visuals as 'safe.' Powerful for somatic and nature-based healing." },
     bold_modern: { systemEffect: "Generates covers with stark contrast, oversized typography, red geometric accents, Swiss design grid", emotionalBenefit: "Readers feel energized and decisive. Bold visuals cut through shelf noise and scroll fatigue. Signals 'this is different' — attracting action-oriented readers tired of pastel wellness." },
-    premium_soft: { systemEffect: "Generates covers with lavender/purple gradients, thin serif type, gold accents, silk texture overlay", emotionalBenefit: "Readers feel elevated and cared for. Premium aesthetics trigger 'I deserve this' self-worth responses. Soft luxury attracts readers who associate healing with quality and refinement." },
-    sacred_cosmic: { systemEffect: "Generates covers with sacred geometry, golden mandalas, cosmic nebula, celestial star fields", emotionalBenefit: "Readers feel connected to something larger. Sacred geometry triggers awe — the brain's pathway to perspective shift. Attracts seekers ready for depth and meaning beyond the everyday." },
+    premium_soft: { systemEffect: "Generates covers with geometric structure, precise typography hierarchy, gold accent lines, disciplined luxury palettes", emotionalBenefit: "Readers feel they are holding something authoritative and intentional. Geometric premium signals craft and clarity — attracting buyers who want transformation with editorial credibility." },
+    sacred_cosmic: { systemEffect: "Generates mysterious atmospheric covers — deep blues and violets, subtle light, contemplative depth without horror", emotionalBenefit: "Readers feel curiosity and inward expansion. Mysterious visuals invite depth seekers without fantasy overload — magnetic on shelf and thumbnail." },
   },
   formats: {
     manga: { systemEffect: "Catalog planner prioritizes illustrated panels, short-form audiobooks (15-30 min), visual storytelling across all channels", emotionalBenefit: "Visual-first readers process emotions through images faster than text. Manga reduces reading anxiety, engages Gen Z/Alpha natively, and makes complex psychological concepts accessible through story." },
@@ -1360,6 +1379,14 @@ function Step6VisualStyle({ state, update }) {
         {VISUAL_STYLES.map((vs) => (
           <button key={vs.id} onClick={() => handleVisual(vs.id)}
             className={`p-4 rounded-xl border-2 text-left transition-all ${state.visualStyle === vs.id ? "border-gray-900 bg-gray-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}>
+            <div className="w-full max-h-32 aspect-[2/3] mb-2 rounded-lg overflow-hidden border border-gray-100 bg-gray-100">
+              <img
+                src={VISUAL_IDENTITY_PROOF_URL[vs.id]}
+                alt=""
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
             <div className="flex gap-1.5 mb-2">{vs.palette.map((c, i) => <div key={i} className="w-6 h-6 rounded-md shadow-sm" style={{ backgroundColor: c }} />)}</div>
             <div className="text-xs font-bold text-gray-900">{vs.label}</div>
             <div className="text-[10px] text-gray-500 mt-0.5">{vs.desc}</div>
