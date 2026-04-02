@@ -39,6 +39,7 @@ repos:
       - Change impact
     # Full credential inventory: docs/INTEGRATION_CREDENTIALS_REGISTRY.md
     secrets_expected:
+      - DASHSCOPE_API_KEY
       - QWEN_API_KEY
       - QWEN_BASE_URL
       - QWEN_MODEL
@@ -59,5 +60,6 @@ repos:
       - WORDPRESS_USERNAME
       - WORDPRESS_APP_PASSWORD
       - QWEN_BASE_URL
+      - DASHSCOPE_API_KEY
       - QWEN_API_KEY
       - QWEN_MODEL

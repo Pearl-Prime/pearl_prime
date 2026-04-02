@@ -42,7 +42,7 @@ This reads the registry below and reports which env vars are set vs missing.
 | **Env vars** | `QWEN_API_KEY`, `QWEN_BASE_URL`, `QWEN_MODEL` |
 | **Alt env vars** | `DASHSCOPE_API_KEY`, `DASHSCOPE_BASE_URL`, `DASHSCOPE_MODEL` |
 | **Consumed by** | `pearl_news/pipeline/llm_expand.py`, `pearl_news/pipeline/slot_provider_qwen.py`, `scripts/research/run_research.py`, `scripts/localization/llm_client.py`, `scripts/localization/run_locale_batches.py`, `scripts/translate_atoms_all_locales_cloud.py` |
-| **GitHub workflows** | `research-pipeline-run.yml`, `pearl-news-fill-qwen.yml`, `translate-atoms-qwen-matrix.yml` |
+| **GitHub workflows** | `research-pipeline-run.yml`, `pearl-news-fill-qwen.yml`, `translate-atoms-qwen-matrix.yml`, `translate-bestseller-atoms.yml`, `catalog-book-pipeline.yml`, `marketing-briefs-and-proposals.yml`, `marketing_continuous.yml`, `max-quality-catalog.yml` |
 | **How to obtain** | DashScope console: https://dashscope.console.aliyun.com/ — create API key under Access Key Management |
 | **Required vs optional** | Required for Pearl News, translation, research pipelines |
 | **Status** | Wired in CI and local scripts |
@@ -299,9 +299,10 @@ Secrets that must be configured in GitHub repo settings for CI workflows:
 
 | Secret name | Used by workflow(s) | Notes |
 |-------------|---------------------|-------|
-| `QWEN_API_KEY` | `research-pipeline-run.yml`, `pearl-news-fill-qwen.yml`, `translate-atoms-qwen-matrix.yml` | DashScope API key |
-| `QWEN_BASE_URL` | Same as above | DashScope endpoint URL |
-| `QWEN_MODEL` | Same as above | Model name (e.g., `qwen-max`) |
+| `DASHSCOPE_API_KEY` | Qwen/DashScope workflows (see §1) | **Preferred** GitHub secret name for the DashScope API key; workflows read `DASHSCOPE_API_KEY` first, then fall back to `QWEN_API_KEY` |
+| `QWEN_API_KEY` | Same | Legacy secret name; same key value if you do not use `DASHSCOPE_API_KEY` |
+| `QWEN_BASE_URL` | Same | DashScope endpoint URL |
+| `QWEN_MODEL` | Same | Model name (e.g., `qwen-max`) |
 | `CLOUDFLARE_API_TOKEN` | `brand-admin-onboarding-pages.yml` | Cloudflare API token |
 | `CLOUDFLARE_ACCOUNT_ID` | `brand-admin-onboarding-pages.yml` | Cloudflare account ID |
 | `GITHUB_TOKEN` | Auto-provided by GitHub Actions | No manual config needed |
@@ -315,7 +316,7 @@ Some scripts support reading API keys from local files as an alternative to env 
 | File | Service | Env var alternative |
 |------|---------|-------------------|
 | `claude_api_key.rtf` | Anthropic | `ANTHROPIC_API_KEY` |
-| `11.txt` | ElevenLabs | `ELEVENLABS_API_KEY` |
+| `11.txt` (repo root) or `docs/11.txt` | ElevenLabs | `ELEVENLABS_API_KEY` — `generate_briefing_narration.py` loads both paths; **never commit** real keys (see `.gitignore`) |
 | `cloudflare_workers_ai.txt` | Cloudflare | `CLOUDFLARE_ACCOUNT_ID` + `CLOUDFLARE_API_TOKEN` |
 | `docs/qwen_*.txt` | Qwen | `QWEN_BASE_URL`, `QWEN_API_KEY`, `QWEN_MODEL` |
 

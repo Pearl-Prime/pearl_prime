@@ -121,7 +121,7 @@ flowchart LR
 
 ## Secrets and runners
 
-- **Secrets:** Per-workflow tokens as needed. Self-hosted marketing, catalog, and Pearl News Qwen workflows use `QWEN_BASE_URL`, `QWEN_API_KEY`, `QWEN_MODEL`. WordPress posting uses `WORDPRESS_SITE_URL`, `WORDPRESS_USERNAME`, `WORDPRESS_APP_PASSWORD`.
+- **Secrets:** Per-workflow tokens as needed. Self-hosted marketing, catalog, and Pearl News Qwen workflows use `QWEN_BASE_URL`, `QWEN_MODEL`, and **`DASHSCOPE_API_KEY`** (preferred GitHub secret for the DashScope key) or legacy `QWEN_API_KEY` (workflows accept either). WordPress posting uses `WORDPRESS_SITE_URL`, `WORDPRESS_USERNAME`, `WORDPRESS_APP_PASSWORD`.
 - **Runner:** Mixed. Most workflows are GitHub-hosted (`ubuntu-latest`); `marketing_continuous.yml`, `marketing-briefs-and-proposals.yml`, `catalog-book-pipeline.yml`, `max-quality-catalog.yml`, and `pearl-news-fill-qwen.yml` run on self-hosted infrastructure.
 - **Ownership map:** [OWNERSHIP_MATRIX.md](./OWNERSHIP_MATRIX.md)
 

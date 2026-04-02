@@ -1,5 +1,5 @@
 # Two-pass generational research (Qwen API via OpenAI-compatible endpoint).
-# Uses repository secrets: QWEN_BASE_URL, QWEN_API_KEY, QWEN_MODEL (same as pearl-news-fill-qwen).
+# Uses repository secrets: QWEN_BASE_URL, QWEN_MODEL, and API key from DASHSCOPE_API_KEY (preferred) or QWEN_API_KEY.
 name: Research Pipeline — Qwen3 Two-Pass
 
 on:
@@ -22,8 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       QWEN_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
-      QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+      QWEN_API_KEY: ${{ secrets.DASHSCOPE_API_KEY || secrets.QWEN_API_KEY }}
       QWEN_MODEL: ${{ secrets.QWEN_MODEL }}
+      DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY || secrets.QWEN_API_KEY }}
     steps:
       - uses: actions/checkout@v4
         with:

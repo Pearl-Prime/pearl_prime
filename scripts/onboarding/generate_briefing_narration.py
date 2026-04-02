@@ -5,7 +5,7 @@ Authority: specs/BRAND_ADMIN_ONBOARDING_TTS_SPEC.md
 
 Usage:
   PYTHONPATH=. python3 scripts/onboarding/generate_briefing_narration.py [--dry-run]
-Requires PyYAML for config. API key from ELEVENLABS_API_KEY; voice ids from env or YAML.
+Requires PyYAML for config. API key from ELEVENLABS_API_KEY (env, .env, 11.txt or docs/11.txt); voice ids from env or YAML.
 """
 from __future__ import annotations
 
@@ -47,6 +47,47 @@ def _load_repo_dotenv() -> None:
         val = val.strip().strip("'").strip('"')
         if key and key not in os.environ:
             os.environ[key] = val
+
+
+def _load_11_txt_paths() -> None:
+    """Load KEY=value and optional raw sk_ API key from 11.txt locations (do not override env).
+
+    Order: repo root `11.txt`, `docs/11.txt`, `11.txt.example`. See docs/INTEGRATION_CREDENTIALS_REGISTRY.md.
+    """
+    texts: list[str] = []
+    for rel in ("11.txt", "docs/11.txt", "11.txt.example"):
+        path = ROOT / rel
+        if path.is_file():
+            texts.append(path.read_text(encoding="utf-8", errors="replace"))
+    if not texts:
+        return
+    for text in texts:
+        for raw in text.splitlines():
+            line = raw.strip()
+            if not line or line.startswith("#"):
+                continue
+            if line.startswith("export "):
+                line = line[7:].strip()
+            if "=" not in line:
+                continue
+            key, _, val = line.partition("=")
+            key = key.strip()
+            val = val.strip().strip("'").strip('"')
+            if key and key not in os.environ:
+                os.environ[key] = val
+    if not os.environ.get("ELEVENLABS_API_KEY", "").strip():
+        for text in texts:
+            for raw in text.splitlines():
+                line = raw.strip()
+                if not line or line.startswith("#") or "=" in line:
+                    continue
+                if line.lower().startswith("elevenlabs"):
+                    continue
+                if line.startswith("sk_") and len(line) > 24:
+                    os.environ["ELEVENLABS_API_KEY"] = line
+                    break
+            if os.environ.get("ELEVENLABS_API_KEY", "").strip():
+                break
 
 
 @dataclass
@@ -343,7 +384,7 @@ def run(*, dry_run: bool, offline_demo: bool, publish_public: bool) -> int:
     elif not api_key:
         print(
             "ELEVENLABS_API_KEY not set; only SSML/profile written. "
-            "Set key + voice ids, or pass --offline-demo on macOS.",
+            "Set key + voice ids (env, .env, 11.txt or docs/11.txt), or pass --offline-demo on macOS.",
             file=sys.stderr,
         )
         return 0
@@ -427,6 +468,7 @@ def run(*, dry_run: bool, offline_demo: bool, publish_public: bool) -> int:
 
 def main() -> int:
     _load_repo_dotenv()
+    _load_11_txt_paths()
     ap = argparse.ArgumentParser(description="Brand briefing TTS (Ahjan / ElevenLabs)")
     ap.add_argument("--dry-run", action="store_true", help="SSML + JSON only, no API calls")
     ap.add_argument(

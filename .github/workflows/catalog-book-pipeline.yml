@@ -31,8 +31,9 @@ concurrency:
 
 env:
   QWEN_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
-  QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+  QWEN_API_KEY: ${{ secrets.DASHSCOPE_API_KEY || secrets.QWEN_API_KEY }}
   QWEN_MODEL: ${{ secrets.QWEN_MODEL }}
+  DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY || secrets.QWEN_API_KEY }}
 
 jobs:
   build:
