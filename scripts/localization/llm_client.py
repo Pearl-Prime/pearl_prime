@@ -36,8 +36,15 @@ logger = logging.getLogger("llm_client")
 
 # ─── CLOUD CONSTANTS ──────────────────────────────────────────────────────────
 
-# Default: China mainland. Override with DASHSCOPE_BASE_URL env var for
-# international regions (e.g. Singapore: https://dashscope-intl.aliyuncs.com/compatible-mode/v1).
+# Together AI (preferred — US-based, no Chinese identity verification).
+TOGETHER_BASE_URL = "https://api.together.xyz/v1"
+# Model mapping: Together AI model IDs for Qwen equivalents
+TOGETHER_MODELS = {
+    "draft": "Qwen/Qwen2.5-7B-Instruct-Turbo",      # fast, cheap — equivalent to qwen-turbo
+    "judge": "Qwen/Qwen3-235B-A22B-Instruct-2507-tput",  # best quality — equivalent to qwen-max
+}
+
+# DashScope (fallback — Alibaba Cloud, requires active billing).
 DASHSCOPE_BASE_URL = os.environ.get(
     "DASHSCOPE_BASE_URL",
     "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
@@ -69,10 +76,33 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
     else:
         model_cfg = cfg.get("draft_model", cfg)
 
-    api_key_env = os.environ.get("DASHSCOPE_API_KEY", "").strip()
+    together_key = os.environ.get("TOGETHER_API_KEY", "").strip()
+    dashscope_key = os.environ.get("DASHSCOPE_API_KEY", "").strip()
 
-    if api_key_env:
-        # ── CLOUD MODE ────────────────────────────────────────────────────────
+    if together_key:
+        # ── TOGETHER AI MODE (preferred) ─────────────────────────────────────
+        together_model = (
+            os.environ.get("TOGETHER_MODEL", "").strip()
+            or TOGETHER_MODELS.get(role, TOGETHER_MODELS["draft"])
+        )
+        # Together AI models have strict context limits; cap max_tokens to avoid 422
+        raw_max = int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000)))
+        max_tokens = min(raw_max, 16000)  # safe cap for 32K context models
+
+        resolved = {
+            "base_url": TOGETHER_BASE_URL,
+            "api_key": together_key,
+            "model_id": together_model,
+            "temperature": float(model_cfg.get("temperature", 0.6)),
+            "max_tokens": max_tokens,
+            "timeout": float(model_cfg.get("timeout_seconds", model_cfg.get("timeout", 180))),
+            "mode": "together",
+            "enable_thinking": False,
+        }
+        logger.debug("LLM client: Together AI mode, model=%s", together_model)
+
+    elif dashscope_key:
+        # ── DASHSCOPE MODE (fallback) ────────────────────────────────────────
         cloud_model = (
             os.environ.get("DASHSCOPE_MODEL", "").strip()
             or model_cfg.get("cloud_model_id", "").strip()
@@ -84,16 +114,15 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
 
         resolved = {
             "base_url": DASHSCOPE_BASE_URL,
-            "api_key": api_key_env,
+            "api_key": dashscope_key,
             "model_id": cloud_model,
             "temperature": float(model_cfg.get("temperature", 0.6)),
             "max_tokens": int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000))),
             "timeout": float(model_cfg.get("timeout_seconds", model_cfg.get("timeout", 180))),
             "mode": "cloud",
-            # Dashscope does not use enable_thinking param for qwen-plus/max base models
             "enable_thinking": False,
         }
-        logger.debug("LLM client: cloud mode, model=%s", cloud_model)
+        logger.debug("LLM client: DashScope mode, model=%s", cloud_model)
 
     else:
         # ── LOCAL MODE (LM Studio) ────────────────────────────────────────────

@@ -47,7 +47,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
-      # Map repo secrets to what the translation scripts expect
+      # Together AI (preferred — US-based, no Chinese identity verification)
+      TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+      # DashScope (fallback — Alibaba Cloud)
       DASHSCOPE_API_KEY: ${{ secrets.QWEN_API_KEY }}
       DASHSCOPE_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
       DASHSCOPE_MODEL: ${{ secrets.QWEN_MODEL }}
