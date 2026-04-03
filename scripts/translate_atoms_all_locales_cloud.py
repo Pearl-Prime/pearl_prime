@@ -96,8 +96,15 @@ def format_canonical(variants: list[tuple[str, str, str] | tuple[str, str]]) -> 
     return "\n\n".join(blocks) + "\n"
 
 
+def _variant_header_prose(v: tuple[str, str, str] | tuple[str, str]) -> tuple[str, str]:
+    """Normalize parse_canonical rows to (header, prose)."""
+    if len(v) == 3:
+        return v[0], v[2]
+    return v[0], v[1]
+
+
 def validate_translation(
-    source_variants: list[tuple[str, str]],
+    source_variants: list[tuple[str, str, str] | tuple[str, str]],
     out_text: str,
 ) -> tuple[bool, str]:
     """Post-translation checks: count, non-empty, not identical to English, not header-only."""
@@ -106,9 +113,9 @@ def validate_translation(
         return False, (
             f"variant count mismatch: expected {len(source_variants)}, got {len(out_vars)}"
         )
-    for i, ((src_h, src_p), (out_h, out_p)) in enumerate(
-        zip(source_variants, out_vars)
-    ):
+    for i, (src_v, out_v) in enumerate(zip(source_variants, out_vars)):
+        src_h, src_p = _variant_header_prose(src_v)
+        out_h, out_p = _variant_header_prose(out_v)
         if src_h.strip() != out_h.strip():
             return False, f"variant {i + 1}: header must stay English; mismatch"
         if not out_p.strip():

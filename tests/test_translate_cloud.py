@@ -19,7 +19,7 @@ def test_parse_canonical_real_file() -> None:
     text = path.read_text(encoding="utf-8")
     variants = tac.parse_canonical(text)
     assert len(variants) == 20
-    h0, p0 = variants[0]
+    h0, _meta0, p0 = variants[0]
     assert h0 == "## PIVOT v01"
     assert "reorg" in p0.lower() or "threat" in p0.lower()
 
@@ -36,7 +36,7 @@ def test_format_output_roundtrip() -> None:
 def test_format_output_translated_prose() -> None:
     src = REPO_ROOT / "atoms/corporate_managers/anxiety/PIVOT/CANONICAL.txt"
     variants = tac.parse_canonical(src.read_text(encoding="utf-8"))
-    fake = [(h, "JA " + p) for h, p in variants]
+    fake = [(h, m, "JA " + p) for h, m, p in variants]
     out = tac.format_canonical(fake)
     assert "## PIVOT v01" in out
     assert "JA " in out
@@ -46,7 +46,7 @@ def test_format_output_translated_prose() -> None:
 def test_validation_ok() -> None:
     src = REPO_ROOT / "atoms/educators/anxiety/PIVOT/CANONICAL.txt"
     variants = tac.parse_canonical(src.read_text(encoding="utf-8"))
-    ja = [(h, "（日本語）" + p) for h, p in variants]
+    ja = [(h, m, "（日本語）" + p) for h, m, p in variants]
     out = tac.format_canonical(ja)
     ok, msg = tac.validate_translation(variants, out)
     assert ok and msg == "ok"
