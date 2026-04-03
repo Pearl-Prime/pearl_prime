@@ -185,7 +185,7 @@ def _call_translate(source_text: str, locale: str, system_prompt: str, cfg: dict
     from scripts.localization.llm_client import call_llm
     return call_llm(
         system_prompt, source_text, cfg,
-        role="draft", temperature=0.25, max_tokens=32000,
+        role="draft", temperature=0.25,
     )
 
 
@@ -640,8 +640,8 @@ def main() -> int:
         print("Specify --locale or --all-locales", file=sys.stderr)
         return 2
 
-    if not args.dry_run and not os.environ.get("DASHSCOPE_API_KEY", "").strip():
-        print("DASHSCOPE_API_KEY required (set env var or use --dry-run)", file=sys.stderr)
+    if not args.dry_run and not (os.environ.get("TOGETHER_API_KEY", "").strip() or os.environ.get("DASHSCOPE_API_KEY", "").strip()):
+        print("TOGETHER_API_KEY or DASHSCOPE_API_KEY required (set env var or use --dry-run)", file=sys.stderr)
         return 2
 
     atoms_root = REPO_ROOT / "atoms"

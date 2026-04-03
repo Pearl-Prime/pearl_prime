@@ -35,7 +35,20 @@ This reads the registry below and reports which env vars are set vs missing.
 
 ## Service registry
 
-### 1. Qwen / DashScope (Alibaba Cloud) — LLM
+### 1a. Together AI — LLM (preferred)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `TOGETHER_API_KEY`, `TOGETHER_MODEL` |
+| **Consumed by** | `scripts/localization/llm_client.py` (auto-detected, takes priority over DashScope) |
+| **GitHub workflows** | `translate-bestseller-atoms.yml`, `generate-and-translate-atoms.yml` |
+| **How to obtain** | Together AI: https://api.together.ai/settings/api-keys — create key |
+| **Required vs optional** | Preferred for all Qwen LLM work (translation, research). Falls back to DashScope if not set. |
+| **Status** | Wired in CI and local scripts |
+| **Default models** | Draft: `Qwen/Qwen2.5-7B-Instruct-Turbo`, Judge: `Qwen/Qwen3-235B-A22B-Instruct-2507-tput` |
+| **Base URL** | `https://api.together.xyz/v1` (hardcoded, OpenAI-compatible) |
+
+### 1b. Qwen / DashScope (Alibaba Cloud) — LLM (fallback)
 
 > **⚠️ CRITICAL: Use the SINGAPORE region, NOT Beijing.**
 > The Beijing console (`bailian.console.alibabacloud.com/cn-beijing`) shows "Account abnormal" and "No API Key" — that is the WRONG region.
