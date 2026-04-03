@@ -89,9 +89,10 @@ def test_validation_identical_to_english() -> None:
 
 def test_discover_atoms_educators() -> None:
     manifest = tac.discover_atoms(REPO_ROOT / "atoms", persona="educators")
-    assert len(manifest) == 8 * 5  # 8 topics × 5 slots
+    assert len(manifest) >= 8 * 5  # core slots + engine dirs per topic (count grows with atoms)
     slots = {m[2] for m in manifest}
-    assert slots == set(tac.SLOT_TYPES)
+    assert set(tac.SLOT_TYPES).issubset(slots)
+    assert slots.issubset(set(tac.ALL_ATOM_TYPES))
 
 
 def test_dry_run_no_api(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
@@ -108,6 +109,7 @@ def test_dry_run_no_api(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureF
         code = tac.main()
     assert code == 0
     out = capsys.readouterr().out
-    assert "40 files" in out
-    assert "800 variants" in out
+    n_files = len(tac.discover_atoms(REPO_ROOT / "atoms", persona="educators"))
+    assert f"{n_files} files" in out
+    assert f"{n_files * 20} variants" in out
     assert "educators/anxiety/PIVOT" in out

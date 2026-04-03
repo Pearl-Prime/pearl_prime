@@ -286,6 +286,52 @@ def _build_output_report(
     return report
 
 
+def run_panel_qc(
+    image_path: Path,
+    min_width: int = 256,
+    min_height: int = 256,
+) -> dict[str, Any]:
+    """Run QC checks on a single panel image file.
+
+    Returns ``{passed, width, height, checks}`` where *checks* is a list of
+    ``{name, passed, detail}`` dicts.
+    """
+    checks: list[dict[str, Any]] = []
+    width, height = 0, 0
+
+    # Check: file_exists
+    if not image_path.is_file():
+        checks.append({"name": "file_exists", "passed": False, "detail": f"Not found: {image_path}"})
+        return {"passed": False, "width": 0, "height": 0, "checks": checks}
+    checks.append({"name": "file_exists", "passed": True, "detail": "ok"})
+
+    data = image_path.read_bytes()
+
+    # Check: non-empty
+    if not data:
+        checks.append({"name": "valid_png", "passed": False, "detail": "Empty file"})
+        return {"passed": False, "width": 0, "height": 0, "checks": checks}
+
+    # Check: valid_png
+    is_png = len(data) >= 8 and data[:8] == b"\x89PNG\r\n\x1a\n"
+    if not is_png:
+        checks.append({"name": "valid_png", "passed": False, "detail": "Not a valid PNG"})
+        return {"passed": False, "width": 0, "height": 0, "checks": checks}
+    checks.append({"name": "valid_png", "passed": True, "detail": "ok"})
+
+    # Extract dimensions
+    width, height = _png_dimensions(data)
+
+    # Check: min_dimensions
+    if width >= min_width and height >= min_height:
+        checks.append({"name": "min_dimensions", "passed": True, "detail": f"{width}x{height}"})
+    else:
+        checks.append({"name": "min_dimensions", "passed": False, "detail": f"{width}x{height} below {min_width}x{min_height}"})
+
+    passed = all(c["passed"] for c in checks)
+    return {"passed": passed, "width": width, "height": height, "checks": checks}
+
+
 def validate_author_pic_prompt(
     compiled: dict[str, Any],
     author_id: str,

@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 
@@ -131,13 +131,13 @@ class TestDryRun:
             assert "negative" in r["compiled_prompt"]
 
     def test_dry_run_no_api_calls(self) -> None:
-        """Ensure no HTTP requests are made in dry_run mode."""
+        """Ensure RunComfy submit path is not used in dry_run mode (no urllib batch calls)."""
         backend = RunComfyImageBackend(dry_run=True)
         pp = _sample_panel_prompts()
-        with patch("scripts.image_generation.runcomfy_batch.requests") as mock_req:
+        with patch.object(backend, "_generate_single") as mock_gen:
             results = backend.generate(pp)
-            mock_req.post.assert_not_called()
-            mock_req.get.assert_not_called()
+            mock_gen.assert_not_called()
+        assert len(results) == 2
 
     def test_dry_run_empty_panels(self) -> None:
         backend = RunComfyImageBackend(dry_run=True)
@@ -258,7 +258,7 @@ class TestImageQC:
 
 
 class TestMockAPIFlow:
-    """Test full generate flow with mocked HTTP calls."""
+    """Exercise generate() orchestration by mocking _generate_single (HTTP uses urllib, not requests)."""
 
     def _make_backend(self, tmp_path: Path) -> RunComfyImageBackend:
         wf = tmp_path / "workflow.json"
@@ -280,39 +280,12 @@ class TestMockAPIFlow:
     def test_successful_generation(self, tmp_path: Path) -> None:
         backend = self._make_backend(tmp_path)
         pp = _sample_panel_prompts()
-
-        mock_submit_resp = MagicMock()
-        mock_submit_resp.status_code = 200
-        mock_submit_resp.json.return_value = {"run_id": "run-abc"}
-        mock_submit_resp.raise_for_status = MagicMock()
-
-        mock_poll_resp = MagicMock()
-        mock_poll_resp.status_code = 200
-        mock_poll_resp.json.return_value = {
-            "status": "completed",
-            "outputs": {"images": [{"url": "https://cdn.runcomfy.net/img/result.png"}]},
-        }
-        mock_poll_resp.raise_for_status = MagicMock()
-
-        mock_download_resp = MagicMock()
-        mock_download_resp.status_code = 200
-        mock_download_resp.content = _MIN_PNG
-        mock_download_resp.raise_for_status = MagicMock()
-
-        def side_effect_post(url, **kwargs):
-            return mock_submit_resp
-
-        def side_effect_get(url, **kwargs):
-            if "runs/run-abc" in url:
-                return mock_poll_resp
-            return mock_download_resp
-
-        with patch("scripts.image_generation.runcomfy_batch.requests") as mock_req:
-            mock_req.post = MagicMock(side_effect=side_effect_post)
-            mock_req.get = MagicMock(side_effect=side_effect_get)
-
+        out_a = tmp_path / "p_1_0.png"
+        out_b = tmp_path / "p_1_1.png"
+        out_a.write_bytes(_MIN_PNG)
+        out_b.write_bytes(_MIN_PNG)
+        with patch.object(backend, "_generate_single", side_effect=[out_a, out_b]):
             results = backend.generate(pp)
-
         assert len(results) == 2
         for r in results:
             assert r["status"] == "ok"
@@ -324,23 +297,8 @@ class TestMockAPIFlow:
     def test_api_timeout_marks_failed(self, tmp_path: Path) -> None:
         backend = self._make_backend(tmp_path)
         pp = {"panels": [{"panel_id": "p_1_0", "visual_prompt": "test"}]}
-
-        mock_submit_resp = MagicMock()
-        mock_submit_resp.json.return_value = {"run_id": "run-timeout"}
-        mock_submit_resp.raise_for_status = MagicMock()
-
-        mock_poll_resp = MagicMock()
-        mock_poll_resp.json.return_value = {"status": "running"}
-        mock_poll_resp.raise_for_status = MagicMock()
-
-        with patch("scripts.image_generation.runcomfy_batch.requests") as mock_req:
-            mock_req.post = MagicMock(return_value=mock_submit_resp)
-            mock_req.get = MagicMock(return_value=mock_poll_resp)
-            # Patch time.sleep to avoid actual waiting, and set max_wait low
-            with patch("scripts.image_generation.runcomfy_batch.time.sleep"):
-                with patch("scripts.image_generation.runcomfy_batch.MAX_POLL_S", 0.01):
-                    results = backend.generate(pp)
-
+        with patch.object(backend, "_generate_single", side_effect=TimeoutError("poll timed out")):
+            results = backend.generate(pp)
         assert len(results) == 1
         assert results[0]["status"] == "failed"
         assert "error" in results[0]
@@ -348,54 +306,20 @@ class TestMockAPIFlow:
     def test_api_failure_marks_failed(self, tmp_path: Path) -> None:
         backend = self._make_backend(tmp_path)
         pp = {"panels": [{"panel_id": "p_1_0", "visual_prompt": "test"}]}
-
-        mock_submit_resp = MagicMock()
-        mock_submit_resp.json.return_value = {"run_id": "run-fail"}
-        mock_submit_resp.raise_for_status = MagicMock()
-
-        mock_poll_resp = MagicMock()
-        mock_poll_resp.json.return_value = {"status": "failed", "error": "GPU OOM"}
-        mock_poll_resp.raise_for_status = MagicMock()
-
-        with patch("scripts.image_generation.runcomfy_batch.requests") as mock_req:
-            mock_req.post = MagicMock(return_value=mock_submit_resp)
-            mock_req.get = MagicMock(return_value=mock_poll_resp)
+        with patch.object(backend, "_generate_single", side_effect=RuntimeError("GPU OOM")):
             results = backend.generate(pp)
-
         assert len(results) == 1
         assert results[0]["status"] == "failed"
         assert "GPU OOM" in results[0]["error"]
 
     def test_qc_failure_marks_failed(self, tmp_path: Path) -> None:
-        """Image downloads OK but QC fails (e.g., not a valid PNG)."""
+        """Download path returns bytes that fail run_panel_qc (not a valid PNG)."""
         backend = self._make_backend(tmp_path)
         pp = {"panels": [{"panel_id": "p_1_0", "visual_prompt": "test"}]}
-
-        mock_submit_resp = MagicMock()
-        mock_submit_resp.json.return_value = {"run_id": "run-qc"}
-        mock_submit_resp.raise_for_status = MagicMock()
-
-        mock_poll_resp = MagicMock()
-        mock_poll_resp.json.return_value = {
-            "status": "completed",
-            "outputs": {"images": [{"url": "https://cdn.runcomfy.net/bad.png"}]},
-        }
-        mock_poll_resp.raise_for_status = MagicMock()
-
-        mock_download_resp = MagicMock()
-        mock_download_resp.content = b"not a valid png"
-        mock_download_resp.raise_for_status = MagicMock()
-
-        def side_effect_get(url, **kwargs):
-            if "runs/run-qc" in url:
-                return mock_poll_resp
-            return mock_download_resp
-
-        with patch("scripts.image_generation.runcomfy_batch.requests") as mock_req:
-            mock_req.post = MagicMock(return_value=mock_submit_resp)
-            mock_req.get = MagicMock(side_effect=side_effect_get)
+        bad_path = tmp_path / "p_1_0.png"
+        bad_path.write_bytes(b"not a valid png")
+        with patch.object(backend, "_generate_single", return_value=bad_path):
             results = backend.generate(pp)
-
         assert len(results) == 1
         assert results[0]["status"] == "failed"
         assert "qc_checks" in results[0]

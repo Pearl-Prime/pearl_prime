@@ -293,6 +293,63 @@ def download_image(url: str, output_path: Path) -> Path:
     return output_path
 
 
+# ── Manga-backend bridge (RunComfyImageBackend) ─────────────────────
+
+MAX_POLL_S: float = 300.0
+
+
+def load_workflow(workflow_path: Path) -> dict[str, Any]:
+    """Load a ComfyUI workflow JSON template."""
+    return json.loads(Path(workflow_path).read_text(encoding="utf-8"))
+
+
+def submit_workflow(
+    api_key: str,
+    deployment_id: str,
+    workflow: dict[str, Any],
+) -> str:
+    """Submit a workflow to RunComfy and return run_id (or request_id)."""
+    url = f"{_RUNCOMFY_API_BASE}/deployments/{deployment_id}/inference"
+    data = _runcomfy_request(url, api_key=api_key, method="POST", data={"workflow": workflow})
+    rid = data.get("run_id") or data.get("request_id")
+    return str(rid or "")
+
+
+def poll_run(
+    api_key: str,
+    deployment_id: str,
+    run_id: str,
+    *,
+    max_wait: float | None = None,
+    interval: float = 5.0,
+) -> dict[str, Any]:
+    """Poll a RunComfy run until completed, failed, or timeout."""
+    if max_wait is None:
+        max_wait = MAX_POLL_S
+    url = f"{_RUNCOMFY_API_BASE}/deployments/{deployment_id}/runs/{run_id}"
+    start = time.time()
+    while time.time() - start < max_wait:
+        data = _runcomfy_request(url, api_key=api_key)
+        status = str(data.get("status", "unknown")).lower()
+        if status in ("completed", "succeeded"):
+            return data
+        if status in ("failed", "error"):
+            raise RuntimeError(data.get("error", f"RunComfy run {run_id} failed: {status}"))
+        time.sleep(interval)
+    raise RuntimeError(f"RunComfy run {run_id} timed out after {max_wait}s")
+
+
+def extract_image_url(result: dict[str, Any]) -> str | None:
+    """Extract the first image URL from a RunComfy result payload."""
+    outputs = result.get("outputs", {})
+    images = outputs.get("images", [])
+    if images and isinstance(images[0], dict):
+        return images[0].get("url")
+    if images and isinstance(images[0], str):
+        return images[0]
+    return None
+
+
 # ── Batch execution ──
 
 def run_batch(
