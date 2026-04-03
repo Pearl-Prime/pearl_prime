@@ -62,6 +62,8 @@ def _load_story_entries(
         meta: dict[str, Any] = {"band": a.get("band", 3)}
         if a.get("semantic_family"):
             meta["semantic_family"] = str(a["semantic_family"])
+        if a.get("role"):
+            meta["role"] = a["role"]
         for k in narrative_keys:
             if k in a and a[k] is not None:
                 meta[k] = a[k]

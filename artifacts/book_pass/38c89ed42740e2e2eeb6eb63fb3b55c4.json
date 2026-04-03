@@ -1,0 +1,52 @@
+{
+  "plan_hash": "38c89ed42740e2e2eeb6eb63fb3b55c4",
+  "persona_id": "gen_z_professionals",
+  "topic_id": "grief",
+  "valid": false,
+  "errors": [
+    "mechanism_gate: Chapter 13 (mid): max mechanism_depth must be >= 2 (behavioral), got 1.",
+    "mechanism_gate: Chapter 14 (late): max mechanism_depth must be >= 3 (nervous_system), got 1.",
+    "mechanism_gate: Chapter 15 (late): max mechanism_depth must be >= 3 (nervous_system), got 1.",
+    "mechanism_gate: Chapter 20 (late): max mechanism_depth must be >= 3 (nervous_system), got 1.",
+    "mechanism_gate: Chapter 20: mechanism_depth decreased from 4 to 1 (late-stage regression).",
+    "cost_gate: Cost gradient: highest cost occurs at chapter 5 (before midpoint 11). Peak should be at or after midpoint.",
+    "cost_gate: Cost gradient: no chapter with average cost_intensity >= 4 in second half of book.",
+    "identity_gate: Identity shift: chapter 7 has max stage 2 after chapter 6 with 3 (regression).",
+    "identity_gate: Identity shift: chapter 11 has max stage 1 after chapter 10 with 2 (regression).",
+    "identity_gate: Identity shift: chapter 20 has max stage 0 after chapter 19 with 3 (regression).",
+    "identity_gate: Identity shift: final chapter must contain at least one self_claim atom.",
+    "identity_gate: Identity shift: self_claim appears in chapter 6 (before midpoint); identity shift should occur in second half.",
+    "macro_gate: Macro-cadence: chapter 16 has intensity 5; must be followed within 2 chapters by at least medium regulation.",
+    "book_pass: no forward-agency increase by final third.",
+    "book_pass: ending lacks net transformation contrast statement."
+  ],
+  "warnings": [
+    "mechanism_gate: Chapter 15: mechanism_depth does not increase from chapter 14 (plateau)."
+  ],
+  "metrics": {
+    "chapter_tier": "deep",
+    "tier_thresholds": {
+      "min_distinct_bands": 5,
+      "min_mechanism_depth": 4,
+      "identity_stages_required": 4,
+      "min_cost_intensity_peak": 4,
+      "require_self_claim_final": true,
+      "require_callback_completion": true,
+      "min_bestseller_structures_distinct": 6
+    },
+    "chapter_count": 20,
+    "claim_coverage": 0.95,
+    "max_claim_share": 0.053,
+    "unique_claim_keys": 19,
+    "adjacent_claim_similarity_mean": 0.138,
+    "adjacent_claim_similarity_hi_pairs": 0,
+    "act_scores": {
+      "act1_recognition_first": 0.0,
+      "act2_mechanism_mid": 1.667,
+      "act3_agency_last": 0.0,
+      "act3_agency_first": 0.0
+    },
+    "ending_has_contrast": false,
+    "ending_has_forward": true
+  }
+}

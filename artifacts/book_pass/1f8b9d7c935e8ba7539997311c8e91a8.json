@@ -1,0 +1,46 @@
+{
+  "plan_hash": "1f8b9d7c935e8ba7539997311c8e91a8",
+  "persona_id": "gen_alpha_students",
+  "topic_id": "courage",
+  "valid": false,
+  "errors": [
+    "mechanism_gate: Chapter 18 (late): max mechanism_depth must be >= 3 (nervous_system), got 1.",
+    "mechanism_gate: Chapter 19 (late): max mechanism_depth must be >= 3 (nervous_system), got 1.",
+    "mechanism_gate: Chapter 18: mechanism_depth decreased from 4 to 1 (late-stage regression).",
+    "cost_gate: Cost gradient: highest cost occurs at chapter 8 (before midpoint 11). Peak should be at or after midpoint.",
+    "cost_gate: Cost gradient: no chapter with average cost_intensity >= 4 in second half of book.",
+    "identity_gate: Identity shift: chapter 18 has max stage 0 after chapter 17 with 3 (regression).",
+    "callback_gate: Callback 'class_rep': phase=return appears but no prior phase=setup (ungrounded payoff).",
+    "book_pass: no forward-agency increase by final third.",
+    "book_pass: ending lacks forward-motion directive."
+  ],
+  "warnings": [
+    "mechanism_gate: Chapter 19: mechanism_depth does not increase from chapter 18 (plateau)."
+  ],
+  "metrics": {
+    "chapter_tier": "deep",
+    "tier_thresholds": {
+      "min_distinct_bands": 5,
+      "min_mechanism_depth": 4,
+      "identity_stages_required": 4,
+      "min_cost_intensity_peak": 4,
+      "require_self_claim_final": true,
+      "require_callback_completion": true,
+      "min_bestseller_structures_distinct": 6
+    },
+    "chapter_count": 20,
+    "claim_coverage": 0.9,
+    "max_claim_share": 0.056,
+    "unique_claim_keys": 18,
+    "adjacent_claim_similarity_mean": 0.118,
+    "adjacent_claim_similarity_hi_pairs": 0,
+    "act_scores": {
+      "act1_recognition_first": 0.0,
+      "act2_mechanism_mid": 0.667,
+      "act3_agency_last": 0.0,
+      "act3_agency_first": 0.167
+    },
+    "ending_has_contrast": true,
+    "ending_has_forward": false
+  }
+}

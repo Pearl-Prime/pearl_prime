@@ -171,6 +171,17 @@ def _parse_band_from_metadata(metadata: str, path: Path, role: str, ver: str) ->
     return band
 
 
+# V4 Book Template: map arc emotional_role_sequence to STORY atom roles.
+# This ensures the resolver picks atoms whose mechanism_depth, identity_stage,
+# and cost_intensity inherently satisfy quality gates by design.
+EMOTIONAL_ROLE_TO_STORY_ROLE: dict[str, str] = {
+    "recognition": "RECOGNITION",
+    "destabilization": "MECHANISM_PROOF",
+    "reframe": "TURNING_POINT",
+    "stabilization": "TURNING_POINT",  # promoted to EMBODIMENT in final third
+    "integration": "EMBODIMENT",
+}
+
 # Narrative Intelligence (V4 Dev Spec): optional metadata with safe defaults for existing atoms.
 NARRATIVE_DEFAULTS = {
     "mechanism_depth": 1,
@@ -493,50 +504,34 @@ def _enforce_structural_constraints(
         ci = meta.get("cost_intensity", 2)
         return (stage, ci)
 
-    # Global sort: order ALL STORY atoms by (identity_stage, cost_intensity)
-    # so that early chapters get pre_awareness/recognition and late chapters
-    # get self_claim/embodiment. This is the primary mechanism for depth
-    # escalation — band alignment is secondary to narrative progression.
-    all_story_entries: list[tuple[int, str]] = []
-    for ch in range(chapter_count):
-        for global_idx, aid in story_slots_by_chapter[ch]:
-            all_story_entries.append((global_idx, aid))
+    # Sort STORY atoms within band groups by (identity_stage, cost_intensity).
+    # With V4 Book Template role-based selection, atoms already have correct
+    # depth per chapter — this sort fine-tunes ordering within each band group.
+    if required_band_by_chapter is not None and band_by_id is not None:
+        band_groups: dict[int, list[tuple[int, str]]] = {}
+        for ch in range(chapter_count):
+            for global_idx, aid in story_slots_by_chapter[ch]:
+                band = int(band_by_id.get(aid, 3))
+                band_groups.setdefault(band, []).append((global_idx, aid))
 
-    if len(all_story_entries) >= 2:
-        positions = [e[0] for e in all_story_entries]
-        aids = [e[1] for e in all_story_entries]
-        sorted_aids = sorted(aids, key=_sort_key)
-        for i, pos in enumerate(positions):
-            atom_ids[pos] = sorted_aids[i]
-
-    # Depth-repair: fix chapters where the sort couldn't place a deep-enough
-    # atom (single-atom band groups). Swap with an earlier chapter that has
-    # more depth than it needs — accept band deviation for depth correctness.
-    early_end = max(1, chapter_count // 3)
-    mid_end = max(early_end + 1, 2 * chapter_count // 3)
-    for ch in range(chapter_count):
-        required_depth = 1 if ch < early_end else (2 if ch < mid_end else 3)
-        for global_idx, _orig in story_slots_by_chapter[ch]:
-            aid = atom_ids[global_idx]
-            if "placeholder:" in aid or "silence:" in aid:
-                continue
-            actual_depth = meta_by_id.get(aid, {}).get("mechanism_depth", 1)
-            if actual_depth >= required_depth:
-                continue
-            # Find an earlier chapter with excess depth to swap with
-            for swap_ch in range(ch):
-                swap_required = 1 if swap_ch < early_end else (2 if swap_ch < mid_end else 3)
-                for swap_idx, _ in story_slots_by_chapter[swap_ch]:
-                    swap_aid = atom_ids[swap_idx]
-                    if "placeholder:" in swap_aid or "silence:" in swap_aid:
-                        continue
-                    swap_depth = meta_by_id.get(swap_aid, {}).get("mechanism_depth", 1)
-                    if swap_depth >= required_depth and actual_depth >= swap_required:
-                        atom_ids[global_idx], atom_ids[swap_idx] = atom_ids[swap_idx], atom_ids[global_idx]
-                        break
-                else:
-                    continue
-                break
+        for band, entries in band_groups.items():
+            if len(entries) >= 2:
+                positions = [e[0] for e in entries]
+                aids = [e[1] for e in entries]
+                sorted_aids = sorted(aids, key=_sort_key)
+                for i, pos in enumerate(positions):
+                    atom_ids[pos] = sorted_aids[i]
+    else:
+        all_story_entries: list[tuple[int, str]] = []
+        for ch in range(chapter_count):
+            for global_idx, aid in story_slots_by_chapter[ch]:
+                all_story_entries.append((global_idx, aid))
+        if len(all_story_entries) >= 2:
+            positions = [e[0] for e in all_story_entries]
+            aids = [e[1] for e in all_story_entries]
+            sorted_aids = sorted(aids, key=_sort_key)
+            for i, pos in enumerate(positions):
+                atom_ids[pos] = sorted_aids[i]
 
     # 3. Callback completion: drop setup atoms without matching return
     setup_ids: set[str] = set()
@@ -745,6 +740,20 @@ def compile_plan(
 
     required_band_by_chapter = {i: emotional_curve[i] for i in range(chapter_count)} if emotional_curve else None
 
+    # V4 Book Template: map emotional_role_sequence to required STORY roles per chapter.
+    # This ensures the resolver selects atoms whose depth/stage/cost match the narrative phase.
+    required_role_by_chapter: Optional[dict[int, str]] = None
+    if emotional_role_sequence and isinstance(emotional_role_sequence, list):
+        final_third_start = 2 * chapter_count // 3
+        required_role_by_chapter = {}
+        for ch_idx, em_role in enumerate(emotional_role_sequence[:chapter_count]):
+            story_role = EMOTIONAL_ROLE_TO_STORY_ROLE.get(str(em_role).lower())
+            # Promote stabilization to EMBODIMENT in final third for identity-level depth
+            if str(em_role).lower() == "stabilization" and ch_idx >= final_third_start:
+                story_role = "EMBODIMENT"
+            if story_role:
+                required_role_by_chapter[ch_idx] = story_role
+
     from phoenix_v4.planning.pool_index import PoolIndex
     from phoenix_v4.planning.slot_resolver import ResolverContext, resolve_slot
 
@@ -811,6 +820,7 @@ def compile_plan(
         pool_index=pool_index,
         selector_key_prefix=selector_key_prefix,
         required_band_by_chapter=required_band_by_chapter,
+        required_role_by_chapter=required_role_by_chapter,
         used_semantic_families=used_semantic_families,
         angle_context=angle_context,
         ending_context=ending_context,

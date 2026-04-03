@@ -1,0 +1,47 @@
+{
+  "plan_hash": "5af0ecc5a79a30285616b33fcfc7cc4b",
+  "persona_id": "tech_finance_burnout",
+  "topic_id": "depression",
+  "valid": false,
+  "errors": [
+    "mechanism_gate: Chapter 9 (mid): max mechanism_depth must be >= 2 (behavioral), got 1.",
+    "mechanism_gate: Chapter 15 (late): max mechanism_depth must be >= 3 (nervous_system), got 1.",
+    "mechanism_gate: Chapter 15: mechanism_depth decreased from 3 to 1 (late-stage regression).",
+    "cost_gate: Cost gradient: highest cost occurs at chapter 7 (before midpoint 11). Peak should be at or after midpoint.",
+    "identity_gate: Identity shift: chapter 7 has max stage 2 after chapter 6 with 3 (regression).",
+    "identity_gate: Identity shift: chapter 9 has max stage 0 after chapter 8 with 2 (regression).",
+    "identity_gate: Identity shift: self_claim appears in chapter 6 (before midpoint); identity shift should occur in second half.",
+    "macro_gate: Macro-cadence: chapter 16 has intensity 5; must be followed within 2 chapters by at least medium regulation.",
+    "book_pass: weak mechanism deepening in middle third.",
+    "book_pass: no forward-agency increase by final third."
+  ],
+  "warnings": [
+    "mechanism_gate: Chapter 15: mechanism_depth does not increase from chapter 14 (plateau)."
+  ],
+  "metrics": {
+    "chapter_tier": "deep",
+    "tier_thresholds": {
+      "min_distinct_bands": 5,
+      "min_mechanism_depth": 4,
+      "identity_stages_required": 4,
+      "min_cost_intensity_peak": 4,
+      "require_self_claim_final": true,
+      "require_callback_completion": true,
+      "min_bestseller_structures_distinct": 6
+    },
+    "chapter_count": 20,
+    "claim_coverage": 1.0,
+    "max_claim_share": 0.05,
+    "unique_claim_keys": 20,
+    "adjacent_claim_similarity_mean": 0.131,
+    "adjacent_claim_similarity_hi_pairs": 0,
+    "act_scores": {
+      "act1_recognition_first": 0.0,
+      "act2_mechanism_mid": 0.333,
+      "act3_agency_last": 0.0,
+      "act3_agency_first": 0.0
+    },
+    "ending_has_contrast": true,
+    "ending_has_forward": true
+  }
+}

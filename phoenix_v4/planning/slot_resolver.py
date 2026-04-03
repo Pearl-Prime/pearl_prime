@@ -40,6 +40,9 @@ class ResolverContext:
     # Keys are 1-based chapter numbers (same as arc chapter_thesis / CompiledBook.chapter_thesis).
     # Atoms with metadata keywords matching the thesis rank higher.
     chapter_thesis: Optional[dict[int, str]] = None
+    # V4 Book Template: required STORY role per chapter (chapter_idx -> RECOGNITION|MECHANISM_PROOF|TURNING_POINT|EMBODIMENT).
+    # Derived from arc emotional_role_sequence. Soft filter: falls back to band-filtered pool if no match.
+    required_role_by_chapter: Optional[dict[int, str]] = None
 
 
 def _selector_index(selector_key: str, available_count: int) -> int:
@@ -126,15 +129,26 @@ def resolve_slot(
             e for e in available
             if (e.metadata or {}).get("semantic_family") not in context.used_semantic_families
         ]
-    # Arc-First: filter STORY by required BAND for this chapter when arc is set
+    # Arc-First: filter STORY by required BAND for this chapter when arc is set.
     if slot_type == "STORY" and context.required_band_by_chapter is not None:
         ch_band = context.required_band_by_chapter.get(chapter_idx)
         if ch_band is not None:
-            available = [
+            band_filtered = [
                 e for e in available
                 if (e.metadata or {}).get("band") == ch_band
                 or bool((e.metadata or {}).get("band_universal"))
             ]
+            if band_filtered:
+                available = band_filtered
+    # V4 Book Template: filter STORY by required ROLE for this chapter.
+    # Role filter takes priority — guarantees depth escalation by design.
+    # Soft fallback: if no atoms match role, use band-filtered pool.
+    if slot_type == "STORY" and context.required_role_by_chapter is not None:
+        required_role = context.required_role_by_chapter.get(chapter_idx)
+        if required_role:
+            role_filtered = [e for e in available if (e.metadata or {}).get("role") == required_role]
+            if role_filtered:
+                available = role_filtered
     if not available:
         if context.teacher_mode:
             from phoenix_v4.teacher.coverage_gate import TeacherCoverageError
