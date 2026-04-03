@@ -44,6 +44,10 @@ LOCALE_NAMES: dict[str, str] = {
 
 # Same structure as prose_resolver: split on \n---\s*\n
 VARIANT_RE = re.compile(
+    r"(^##\s+\S+\s+v\d+\s*)\s*\n---\s*\n([\s\S]*?)---\s*\n(.*?)(?=\n---\s*\n\n##|\n---\s*\Z)",
+    re.MULTILINE | re.DOTALL,
+)
+VARIANT_RE_LEGACY = re.compile(
     r"(^##\s+\S+\s+v\d+\s*)\s*\n---\s*\n\s*---\s*\n(.*?)(?=\n---\s*\n\n##|\n---\s*\Z)",
     re.MULTILINE | re.DOTALL,
 )
@@ -67,21 +71,28 @@ def _load_dotenv() -> None:
 _load_dotenv()
 
 
-def parse_canonical(text: str) -> list[tuple[str, str]]:
-    """Extract (header line, prose) per variant; expects 20 variants for bestseller atoms."""
-    variants: list[tuple[str, str]] = []
-    for m in VARIANT_RE.finditer(text):
-        header = m.group(1).strip()
-        prose = m.group(2).strip()
-        variants.append((header, prose))
-    return variants
+def parse_canonical(text: str) -> list[tuple[str, str, str]]:
+    """Extract (header, metadata, prose) per variant. Handles both legacy (no metadata) and engine (with metadata) formats."""
+    results = list(VARIANT_RE.finditer(text))
+    if results:
+        return [(m.group(1).strip(), m.group(2).strip(), m.group(3).strip()) for m in results]
+    legacy = list(VARIANT_RE_LEGACY.finditer(text))
+    return [(m.group(1).strip(), "", m.group(2).strip()) for m in legacy]
 
 
-def format_canonical(variants: list[tuple[str, str]]) -> str:
-    """Rebuild CANONICAL.txt from headers (English) and translated prose."""
+def format_canonical(variants: list[tuple[str, str, str] | tuple[str, str]]) -> str:
+    """Rebuild CANONICAL.txt from (header, metadata, prose) or (header, prose) tuples."""
     blocks: list[str] = []
-    for header, prose in variants:
-        blocks.append(f"{header}\n---\n\n---\n{prose}\n---")
+    for v in variants:
+        if len(v) == 3:
+            header, meta, prose = v
+            if meta.strip():
+                blocks.append(f"{header}\n---\n{meta}\n---\n{prose}\n---")
+            else:
+                blocks.append(f"{header}\n---\n\n---\n{prose}\n---")
+        else:
+            header, prose = v
+            blocks.append(f"{header}\n---\n\n---\n{prose}\n---")
     return "\n\n".join(blocks) + "\n"
 
 
@@ -275,12 +286,12 @@ def run_job(
 
     src_text = src.read_text(encoding="utf-8")
     source_variants = parse_canonical(src_text)
-    if len(source_variants) != 20:
+    if len(source_variants) == 0:
         return (
             persona,
             topic,
             slot_type,
-            f"skip: source has {len(source_variants)} variants (need 20): {src}",
+            f"skip: source has 0 variants (cannot translate empty file): {src}",
         )
 
     if resume and should_resume(out_path, source_variants):
