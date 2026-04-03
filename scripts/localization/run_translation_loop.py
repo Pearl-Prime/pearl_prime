@@ -67,6 +67,11 @@ LOCALE_NAMES: dict[str, str] = {
 }
 
 VARIANT_RE = re.compile(
+    r"(^##\s+\S+\s+v\d+\s*)\s*\n---\s*\n([\s\S]*?)---\s*\n(.*?)(?=\n---\s*\n\n##|\n---\s*\Z)",
+    re.MULTILINE | re.DOTALL,
+)
+# Legacy regex for atoms without metadata (empty block between --- delimiters)
+VARIANT_RE_LEGACY = re.compile(
     r"(^##\s+\S+\s+v\d+\s*)\s*\n---\s*\n\s*---\s*\n(.*?)(?=\n---\s*\n\n##|\n---\s*\Z)",
     re.MULTILINE | re.DOTALL,
 )
@@ -142,12 +147,35 @@ class FileResult:
 
 # ─── PARSING ─────────────────────────────────────────────────────────────────
 
-def parse_canonical(text: str) -> list[tuple[str, str]]:
-    return [(m.group(1).strip(), m.group(2).strip()) for m in VARIANT_RE.finditer(text)]
+def parse_canonical(text: str) -> list[tuple[str, str, str]]:
+    """Parse CANONICAL.txt into [(header, metadata, prose), ...].
+
+    Handles both formats:
+      - Legacy (no metadata): ## ROLE vNN\\n---\\n\\n---\\nprose\\n---
+      - Engine (with metadata): ## ROLE vNN\\n---\\nBAND: 2\\n...\\n---\\nprose\\n---
+    Returns (header, metadata_block, prose) tuples. metadata_block may be empty.
+    """
+    results = list(VARIANT_RE.finditer(text))
+    if results:
+        return [(m.group(1).strip(), m.group(2).strip(), m.group(3).strip()) for m in results]
+    # Fall back to legacy regex (no metadata between --- delimiters)
+    legacy = list(VARIANT_RE_LEGACY.finditer(text))
+    return [(m.group(1).strip(), "", m.group(2).strip()) for m in legacy]
 
 
-def format_canonical(variants: list[tuple[str, str]]) -> str:
-    blocks = [f"{h}\n---\n\n---\n{p}\n---" for h, p in variants]
+def format_canonical(variants: list[tuple[str, str, str] | tuple[str, str]]) -> str:
+    """Format variants back to CANONICAL.txt. Accepts 2-tuples (legacy) or 3-tuples (with metadata)."""
+    blocks = []
+    for v in variants:
+        if len(v) == 3:
+            header, meta, prose = v
+            if meta.strip():
+                blocks.append(f"{header}\n---\n{meta}\n---\n{prose}\n---")
+            else:
+                blocks.append(f"{header}\n---\n\n---\n{prose}\n---")
+        else:
+            header, prose = v
+            blocks.append(f"{header}\n---\n\n---\n{prose}\n---")
     return "\n\n".join(blocks) + "\n"
 
 
@@ -469,12 +497,12 @@ def run_file_loop(
 
     source_text = source_path.read_text(encoding="utf-8")
     source_variants = parse_canonical(source_text)
-    if len(source_variants) != 20:
+    if len(source_variants) == 0:
         return FileResult(
             persona=persona, topic=topic, slot_type=slot_type, locale=locale,
             decision="skip", loops_attempted=0, best_score=0.0,
             best_translation="", final_translation="",
-            error=f"Source has {len(source_variants)} variants (need 20)",
+            error=f"Source has 0 variants (cannot translate empty file)",
         )
 
     max_loops = cfg.get("loop_control", {}).get("max_loops", 3)
