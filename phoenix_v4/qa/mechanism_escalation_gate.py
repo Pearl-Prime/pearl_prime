@@ -30,21 +30,21 @@ def validate_mechanism_escalation(
         return int((atom_metadata.get(aid) or {}).get("mechanism_depth", 1))
 
     max_depth_per_chapter = [
-        max((depth(aid) for aid in ch_atoms), default=1)
+        max((depth(aid) for aid in ch_atoms), default=-1)
         for ch_atoms in by_ch
     ]
     early_end = max(1, n_ch // 3)
     mid_end = max(early_end + 1, 2 * n_ch // 3)
     late_start = mid_end
 
-    # Early: >= 1
+    # Early: >= 1 (skip chapters with no STORY atoms, depth=-1)
     for i in range(0, early_end):
-        if i < len(max_depth_per_chapter) and max_depth_per_chapter[i] < 1:
+        if i < len(max_depth_per_chapter) and max_depth_per_chapter[i] >= 0 and max_depth_per_chapter[i] < 1:
             errors.append(f"Chapter {i + 1} (early): max mechanism_depth must be >= 1, got {max_depth_per_chapter[i]}.")
 
-    # Mid: >= 2
+    # Mid: >= 2 (skip chapters with no STORY atoms)
     for i in range(early_end, mid_end):
-        if i < len(max_depth_per_chapter) and max_depth_per_chapter[i] < 2:
+        if i < len(max_depth_per_chapter) and max_depth_per_chapter[i] >= 0 and max_depth_per_chapter[i] < 2:
             errors.append(f"Chapter {i + 1} (mid): max mechanism_depth must be >= 2 (behavioral), got {max_depth_per_chapter[i]}.")
 
     # Late: >= 3 and at least one depth=4 in final third
@@ -57,20 +57,24 @@ def validate_mechanism_escalation(
         errors.append("Final third of book must contain at least one mechanism_depth=4 (identity-level) atom.")
 
     for i in range(late_start, n_ch):
-        if i < len(max_depth_per_chapter) and max_depth_per_chapter[i] < 3:
+        if i < len(max_depth_per_chapter) and max_depth_per_chapter[i] >= 0 and max_depth_per_chapter[i] < 3:
             errors.append(f"Chapter {i + 1} (late): max mechanism_depth must be >= 3 (nervous_system), got {max_depth_per_chapter[i]}.")
 
-    # Depth plateaus (no increase) after midpoint
+    # Depth plateaus (no increase) after midpoint — skip chapters without STORY
     for i in range(mid_end, n_ch - 1):
         if i + 1 >= len(max_depth_per_chapter):
             break
+        if max_depth_per_chapter[i] < 0 or max_depth_per_chapter[i + 1] < 0:
+            continue  # skip chapters with no STORY atoms
         if max_depth_per_chapter[i + 1] <= max_depth_per_chapter[i] and max_depth_per_chapter[i] < 4:
             warnings.append(f"Chapter {i + 2}: mechanism_depth does not increase from chapter {i + 1} (plateau).")
 
-    # Depth decreases in late-stage
+    # Depth decreases in late-stage — skip chapters without STORY
     for i in range(late_start, n_ch - 1):
         if i + 1 >= len(max_depth_per_chapter):
             break
+        if max_depth_per_chapter[i] < 0 or max_depth_per_chapter[i + 1] < 0:
+            continue
         if max_depth_per_chapter[i + 1] < max_depth_per_chapter[i]:
             errors.append(
                 f"Chapter {i + 2}: mechanism_depth decreased from {max_depth_per_chapter[i]} to {max_depth_per_chapter[i + 1]} (late-stage regression)."

@@ -38,31 +38,38 @@ def validate_identity_shift(
         return STAGE_ORD.get(s, 0)
 
     max_stage_per_chapter = [
-        max((stage_ord(aid) for aid in ch_atoms), default=0)
+        max((stage_ord(aid) for aid in ch_atoms), default=-1)
         for ch_atoms in by_ch
     ]
 
-    # Monotonic: no regression
+    # Monotonic: no regression (skip chapters with no STORY atoms, stage=-1)
     for i in range(len(max_stage_per_chapter) - 1):
+        if max_stage_per_chapter[i] < 0 or max_stage_per_chapter[i + 1] < 0:
+            continue
         if max_stage_per_chapter[i + 1] < max_stage_per_chapter[i]:
             errors.append(
                 f"Identity shift: chapter {i + 2} has max stage {max_stage_per_chapter[i + 1]} "
                 f"after chapter {i + 1} with {max_stage_per_chapter[i]} (regression)."
             )
 
-    # Experimentation before final quarter
+    # Experimentation before final quarter (skip no-STORY chapters)
     final_quarter_start = 3 * n_ch // 4
     has_experimentation_before_final = any(
-        max_stage_per_chapter[i] >= 2 for i in range(0, final_quarter_start)
+        max_stage_per_chapter[i] >= 2 for i in range(0, final_quarter_start) if max_stage_per_chapter[i] >= 0
     )
     if not has_experimentation_before_final and n_ch >= 4:
         errors.append("Identity shift: no experimentation stage before final quarter of book.")
 
-    # Final chapter must have at least one self_claim (stage 3)
-    if n_ch >= 1 and max_stage_per_chapter[-1] < 3:
+    # Final chapter must have at least one self_claim (stage 3) — check last chapter WITH STORY atoms
+    last_with_story = -1
+    for i in range(n_ch - 1, -1, -1):
+        if max_stage_per_chapter[i] >= 0:
+            last_with_story = i
+            break
+    if last_with_story >= 0 and max_stage_per_chapter[last_with_story] < 3:
         errors.append("Identity shift: final chapter must contain at least one self_claim atom.")
 
-    # Self_claim before midpoint = too early
+    # Self_claim before midpoint = too early (skip no-STORY chapters)
     mid = n_ch // 2
     for i in range(0, mid):
         if max_stage_per_chapter[i] >= 3:

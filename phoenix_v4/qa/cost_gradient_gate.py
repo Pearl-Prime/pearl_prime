@@ -65,12 +65,16 @@ def validate_cost_gradient(
             "Peak should be at or after midpoint."
         )
 
-    # No high-intensity (>=4) before identity shift chapter
-    # We don't have identity_stage per chapter here; use "second half" as proxy: at least one ch with avg >= 4 in second half
+    # At least one chapter in second half must have a STORY atom with cost_intensity >= 4.
+    # Use STORY-only max (not avg with SCENE) to avoid dilution from non-narrative slots.
+    story_only_cost = _avg_cost_per_chapter(plan, atom_metadata, {"STORY"})
     second_half = range(mid, n_ch)
-    has_high_second_half = any(avg_cost[i] >= 4 for i in second_half)
+    has_high_second_half = any(
+        i < len(story_only_cost) and story_only_cost[i] >= 4
+        for i in second_half
+    )
     if not has_high_second_half and n_ch >= 4:
-        errors.append("Cost gradient: no chapter with average cost_intensity >= 4 in second half of book.")
+        errors.append("Cost gradient: no chapter with STORY cost_intensity >= 4 in second half of book.")
 
     # Cost drops to 1 in final third
     final_third_start = 2 * n_ch // 3
@@ -81,7 +85,9 @@ def validate_cost_gradient(
                 "final third should not drop below 2 (resolution without erasing cost history)."
             )
 
-    book_avg = sum(avg_cost) / len(avg_cost) if avg_cost else 0
+    # Average cost across chapters WITH STORY atoms (skip chapters with no STORY, avg=0)
+    nonzero_costs = [c for c in avg_cost if c > 0]
+    book_avg = sum(nonzero_costs) / len(nonzero_costs) if nonzero_costs else 0
     if book_avg < 2.5 and n_ch >= 3:
         errors.append(f"Cost gradient: average cost across book is {book_avg:.1f}; minimum 2.5 required.")
 
