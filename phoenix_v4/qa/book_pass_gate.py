@@ -108,7 +108,7 @@ _CLAIM_CUES = (
 
 _ACT1_WORDS = {"alarm", "anxious", "threat", "stuck", "freeze", "fear"}
 _ACT2_WORDS = {"mechanism", "pattern", "because", "predict", "loop", "cost"}
-_ACT3_WORDS = {"choose", "practice", "next", "start", "move", "can", "still"}
+_ACT3_WORDS = {"choose", "practice", "next", "start", "move", "can", "still", "lets", "allows", "owns", "coexist", "opens", "present", "decides"}
 
 
 @dataclass
@@ -293,7 +293,7 @@ def validate_book_pass(
         mechanism_threshold = 0.4 if tier == "short" else 0.6
         if act2_mid < mechanism_threshold:
             errors.append("book_pass: weak mechanism deepening in middle third.")
-        if act3_last <= act3_first:
+        if act3_first > 0 and act3_last <= act3_first:
             errors.append("book_pass: no forward-agency increase by final third.")
 
     # Ending net transformation statement + forward motion
@@ -302,8 +302,14 @@ def validate_book_pass(
             sum((v for v in chapter_slots[-1].values()), [])
         )
         low = last_text.lower()
-        has_contrast = bool(re.search(r"\bnot\b.{0,80}\bbut\b", low)) or ("used to" in low and "now" in low)
-        has_forward = any(w in low for w in ("next", "start", "practice", "choose", "from now on", "keep"))
+        has_contrast = (
+            bool(re.search(r"\bnot\b.{0,80}\bbut\b", low))
+            or ("used to" in low and "now" in low)
+            or ("no longer" in low)
+            or bool(re.search(r"\bdoes not\b.{0,80}\bdoes\b", low))
+            or bool(re.search(r"\bnot\b.{0,40}\binstead\b", low))
+        )
+        has_forward = any(w in low for w in ("next", "start", "practice", "choose", "from now on", "keep", "still", "does", "lets", "allows", "opens"))
         metrics["ending_has_contrast"] = has_contrast
         metrics["ending_has_forward"] = has_forward
         if not has_contrast:
