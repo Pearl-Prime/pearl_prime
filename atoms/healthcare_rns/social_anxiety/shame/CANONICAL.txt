@@ -35,7 +35,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/healthcare_rns/anchored/social_anxiety_shame/recognition/band_fill/v06.txt
 BAND: 1
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -47,7 +47,7 @@ A moment of calm. The intensity drops. Space opens.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_shame/recognition/band_fill/v07.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -59,8 +59,8 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_shame/recognition/band_fill/v08.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
-COST_INTENSITY: 4
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Peak tension. The turning point approaches. Everything shifts.
@@ -71,7 +71,7 @@ Peak tension. The turning point approaches. Everything shifts.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_shame/recognition/band_fill/v09.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -83,7 +83,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_shame/recognition/band_fill/v10.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -95,7 +95,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_shame/recognition/band_fill/v11.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -107,7 +107,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_shame/recognition/band_fill/v12.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -119,7 +119,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_shame/recognition/band_fill/v13.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -131,82 +131,9 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_shame/recognition/band_fill/v14.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 The mechanism deepens. Stakes rise. The cost becomes clear.
----
-
-
-## TURNING_POINT v01
----
-path: story_atoms/healthcare_rns/anchored/social_anxiety/shame/turning_point/micro/v01.txt
-BAND: 4
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: experimentation
----
-Alicia stands at the staff meeting with the attending. Her jaw locks. Teeth press together hard enough to ache. She feels the mask slip and the inadequacy become visible to witnesses. The frame that has held everything in place — the exposure confirms the defect that was always there — strains under the weight of what Alicia sees. For one long second the old architecture holds. Then it cracks. Alicia feels the fracture travel through her chest. The story that organized every decision, every reaction, every judgment stops organizing. The flaw is an event, bounded and specific — not a self, permanent and total. Alicia does not reach for a replacement. She stands in the gap where the certainty lived, breathing into the new and terrifying openness.
----
-
-## TURNING_POINT v02
----
-path: story_atoms/healthcare_rns/anchored/social_anxiety/shame/turning_point/micro/v02.txt
-BAND: 5
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Jasmine stands at the staff meeting with the attending. The walls close in. Her lungs refuse to expand against the compression. She feels the exposure reaches the bedrock of self-concept and there is nowhere deeper to hide. The frame that has held everything in place — the flaw is not a behavior — it is the identity itself — strains under the weight of what Jasmine sees. For one long second the old architecture holds. Then it cracks. Jasmine feels the fracture travel through her chest. The story that organized every decision, every reaction, every judgment stops organizing. The flaw is an event, bounded and specific — not a self, permanent and total. Jasmine does not reach for a replacement. She stands in the gap where the certainty lived, breathing into the new and terrifying openness.
----
-
-## EMBODIMENT v01
----
-path: story_atoms/healthcare_rns/anchored/social_anxiety/shame/embodiment/micro/v01.txt
-BAND: 4
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: self_claim
----
-In the break room surrounded by colleagues. Elijah feels blood pounding in his temples. The room pulses. The shame pushes with full force against his sternum. Elijah holds ground while seen, without flinching, without performing, without defending. The body shakes with the effort. The choice holds anyway. This is not willpower overriding sensation. This is ownership absorbing sensation. Elijah moves from the new ground he has claimed. His hands tremble and his hands act. Both facts are true simultaneously. The identity is not a concept. It lives in his muscles, in the steadiness of his spine, in the way his feet stay planted while the old pattern screams for retreat.
----
-
-## EMBODIMENT v02
----
-path: story_atoms/healthcare_rns/anchored/social_anxiety/shame/embodiment/micro/v02.txt
-BAND: 5
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-In the elevator beside the charge nurse. Her hands go completely numb. Pins and needles race up both forearms. The shame pushes with full force against her sternum. Mei remains upright in the visibility and lets the shame be sensation without becoming story. The body shakes with the effort. The choice holds anyway. This is not willpower overriding sensation. This is ownership absorbing sensation. Mei moves from the new ground she has claimed. Her hands tremble and her hands act. Both facts are true simultaneously. The identity is not a concept. It lives in her muscles, in the steadiness of her spine, in the way her feet stay planted while the old pattern screams for retreat.
----
-
-## MECHANISM_PROOF v01
----
-path: story_atoms/healthcare_rns/anchored/social_anxiety/shame/mechanism_proof/micro/v01.txt
-BAND: 4
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-In the break room surrounded by colleagues. His hands ball into fists at his sides. The knuckles whiten. The shame operates in plain view for the first time. Elijah catches the pattern mid-cycle and holds still long enough to see the entire architecture. The mechanism treats every single error as confirmation of a permanent verdict that was decided long ago. The mechanism persists because it disguises itself as protection — it wears the costume of something necessary. Elijah watches the loop close and reopen. His body holds the tension of seeing without intervening. The seeing does not resolve the pattern. But it makes the pattern visible, and visibility changes everything.
----
-
-## MECHANISM_PROOF v02
----
-path: story_atoms/healthcare_rns/anchored/social_anxiety/shame/mechanism_proof/micro/v02.txt
-BAND: 5
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Alicia pauses at the staff meeting with the attending. Her legs buckle. Alicia catches the doorframe before going down. The shame has run for hours without interruption. Now she sees the machinery laid bare. The shame converts specific, bounded events into proof of fundamental deficiency while skipping every piece of contrary evidence. Alicia traces the loop in real time: trigger, activation, the relief that never actually arrives, then the trigger again. Her stomach clenches as she maps the circuit from inside it. Seeing the mechanism does not stop the gears. But it strips the mechanism of its authority. Alicia watches the loop turn without feeding it another round.
 ---

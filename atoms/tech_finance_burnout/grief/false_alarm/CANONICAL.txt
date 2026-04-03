@@ -5,7 +5,7 @@
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -29,7 +29,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/recognition/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,7 +41,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -53,7 +53,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/recognition/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: identity
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -89,8 +89,8 @@ IDENTITY_STAGE: destabilization
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/mechanism_proof/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: social
-COST_INTENSITY: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 [Mechanism_proof atom: showing impact on relationships/team.]
@@ -113,7 +113,7 @@ IDENTITY_STAGE: destabilization
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/mechanism_proof/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: identity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
@@ -125,8 +125,8 @@ IDENTITY_STAGE: destabilization
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 [Turning_point atom: first disruption of the pattern. Slight shift. Experimentation begins.]
@@ -137,8 +137,8 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: social
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 [Turning_point atom: shift in relational dimension.]
@@ -149,8 +149,8 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 [Turning_point atom: testing the new possibility. Building evidence.]
@@ -161,8 +161,8 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 [Turning_point atom: mechanism begins to loosen.]
@@ -173,8 +173,8 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 [Turning_point atom: identity begins to shift. New self beginning.]
@@ -185,8 +185,8 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: claimed. New knowledge integrated. Can feel the shift in body.]
@@ -197,8 +197,8 @@ IDENTITY_STAGE: self_claim
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: relational dimension. Different way of being with others.]
@@ -209,8 +209,8 @@ IDENTITY_STAGE: self_claim
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: sustained shift. New baseline.]
@@ -221,8 +221,8 @@ IDENTITY_STAGE: self_claim
 path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: ownership of the new way.]
@@ -234,81 +234,8 @@ path: story_atoms/tech_finance_burnout/anchored/grief_false/alarm/embodiment/mic
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 1
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: fully integrated. New identity. Rest.]
----
-
-
-## TURNING_POINT v06
----
-path: story_atoms/tech_finance_burnout/anchored/grief/false_alarm/turning_point/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: experimentation
----
-The false alarm slams into Derek during the team sync. Ribs tighten. Every signal says the loss means what the threat misfire claims — the absence that fills every room. Derek holds still. The body burns. Heart rate doubles. The narrative falters because Derek does not feed it the next link. For the first time, Derek separates the sensation from the verdict. The loss remains. The false alarm's conclusion about it dissolves. The old frame does not survive the separation. Derek closes the laptop lid and the action carries a different weight now. Lighter. Owned.
----
-
-## TURNING_POINT v07
----
-path: story_atoms/tech_finance_burnout/anchored/grief/false_alarm/turning_point/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: experimentation
----
-Marcus hits the wall. Chest seizes. The false alarm runs at maximum velocity — the absence that fills every room. The loss is total. The body shakes. Vision sharpens to tunnel. The narrative reaches its loudest point and Marcus hears the mechanism underneath it for what it is. The threat misfire is not reality. It is a machine that converts loss into identity verdict. Marcus's frame shatters at the point of highest pressure. The old story cannot survive being seen this clearly. Marcus opens the PR. The body still shakes. The frame stays broken. What replaces it is not comfort. It is clarity.
----
-
-## EMBODIMENT v06
----
-path: story_atoms/tech_finance_burnout/anchored/grief/false_alarm/embodiment/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: self_claim
----
-The false alarm arrives hot and familiar. Pulse hammers. Priya recognizes the threat misfire without obeying it. The loss burns in the body — the absence that fills every room. Muscles brace for impact. Priya acts anyway. Not despite the feeling — through it. Identity is no longer assigned by the false alarm. Priya claims it. The body holds both the intensity and the ownership. Priya refreshes the dashboard. The false alarm protests. The protest does not alter the action. This is what embodiment looks like: the pattern fires and the person moves from their own center regardless. Priya moves.
----
-
-## EMBODIMENT v07
----
-path: story_atoms/tech_finance_burnout/anchored/grief/false_alarm/embodiment/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-Derek's body takes the full wave. Throat closes. The false alarm and the loss converge at their highest point — the absence that fills every room. Adrenaline floods the limbs. This is where identity either surrenders or solidifies. Derek solidifies. Moves from the center of the storm as someone who belongs to themselves. The threat misfire loses jurisdiction. The body trembles. The self holds. Derek closes the laptop lid and the trembling does not make the action smaller. The false alarm fires at peak volume. Derek acts at peak ownership. The volume does not determine the outcome. Derek does.
----
-
-## MECHANISM_PROOF v06
----
-path: story_atoms/tech_finance_burnout/anchored/grief/false_alarm/mechanism_proof/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 3
-IDENTITY_STAGE: destabilization
----
-Marcus's false alarm about the loss runs hot. Shoulders lock. The mechanism is visible now: loss triggers the threat misfire, the threat misfire produces a verdict, the verdict intensifies the loss. The loop is closed and self-sustaining. Heart rate doubles. Marcus sees the spreadsheet and the pattern fires again. Automatic. Relentless. The false alarm is not insight. It is machinery. It needs no external evidence because it generates its own. Each cycle tightens the siren. Marcus watches the loop complete itself and recognizes that the conviction it produces is manufactured, not earned. The threat misfire is a closed system wearing the mask of truth.
----
-
-## MECHANISM_PROOF v07
----
-path: story_atoms/tech_finance_burnout/anchored/grief/false_alarm/mechanism_proof/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-Crisis velocity. Palms slick with sweat. The false alarm runs its fastest loop around the loss — the absence that fills every room. Priya sees every gear. Vision sharpens to tunnel. The threat misfire converts sensation into certainty, certainty into despair, despair into deeper loss. At peak speed, the machinery is fully exposed — each conversion visible, each false step from feeling to verdict traceable. Priya cannot unfeel the loss. But sees that the false alarm is adding a story the loss does not require. The siren runs hot. Priya refreshes the dashboard and watches the loop spin without being pulled into its center.
 ---

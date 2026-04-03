@@ -493,74 +493,50 @@ def _enforce_structural_constraints(
         ci = meta.get("cost_intensity", 2)
         return (stage, ci)
 
-    if required_band_by_chapter is not None and band_by_id is not None:
-        # Band-aware sort: group atoms by their band, sort within each group,
-        # then place them back respecting chapter band requirements.
-        band_groups: dict[int, list[tuple[int, str]]] = {}
-        for ch in range(chapter_count):
-            for global_idx, aid in story_slots_by_chapter[ch]:
-                band = int(band_by_id.get(aid, 3))
-                band_groups.setdefault(band, []).append((global_idx, aid))
+    # Global sort: order ALL STORY atoms by (identity_stage, cost_intensity)
+    # so that early chapters get pre_awareness/recognition and late chapters
+    # get self_claim/embodiment. This is the primary mechanism for depth
+    # escalation — band alignment is secondary to narrative progression.
+    all_story_entries: list[tuple[int, str]] = []
+    for ch in range(chapter_count):
+        for global_idx, aid in story_slots_by_chapter[ch]:
+            all_story_entries.append((global_idx, aid))
 
-        for band, entries in band_groups.items():
-            if len(entries) >= 2:
-                positions = [e[0] for e in entries]
-                aids = [e[1] for e in entries]
-                sorted_aids = sorted(aids, key=_sort_key)
-                for i, pos in enumerate(positions):
-                    atom_ids[pos] = sorted_aids[i]
-    else:
-        # Fallback: global sort (no arc band constraint)
-        all_story_entries: list[tuple[int, str]] = []
-        for ch in range(chapter_count):
-            for global_idx, aid in story_slots_by_chapter[ch]:
-                all_story_entries.append((global_idx, aid))
+    if len(all_story_entries) >= 2:
+        positions = [e[0] for e in all_story_entries]
+        aids = [e[1] for e in all_story_entries]
+        sorted_aids = sorted(aids, key=_sort_key)
+        for i, pos in enumerate(positions):
+            atom_ids[pos] = sorted_aids[i]
 
-        if len(all_story_entries) >= 2:
-            positions = [e[0] for e in all_story_entries]
-            aids = [e[1] for e in all_story_entries]
-            sorted_aids = sorted(aids, key=_sort_key)
-            for i, pos in enumerate(positions):
-                atom_ids[pos] = sorted_aids[i]
-
-    # 2b. Depth-repair pass: swap atoms between chapters when a late chapter
-    # has insufficient mechanism_depth. Reader experience requires that later
-    # chapters feel deeper. Two strategies:
-    #   1. Same-band swap: find an earlier chapter with a deeper atom (preserves arc)
-    #   2. Cross-band swap: if no same-band fix, swap across bands (minor arc deviation
-    #      is acceptable to avoid flat late chapters — reader notices depth > band)
+    # Depth-repair: fix chapters where the sort couldn't place a deep-enough
+    # atom (single-atom band groups). Swap with an earlier chapter that has
+    # more depth than it needs — accept band deviation for depth correctness.
     early_end = max(1, chapter_count // 3)
     mid_end = max(early_end + 1, 2 * chapter_count // 3)
-
     for ch in range(chapter_count):
         required_depth = 1 if ch < early_end else (2 if ch < mid_end else 3)
-        for slot_i, (global_idx, _orig_aid) in enumerate(story_slots_by_chapter[ch]):
+        for global_idx, _orig in story_slots_by_chapter[ch]:
             aid = atom_ids[global_idx]
             if "placeholder:" in aid or "silence:" in aid:
                 continue
             actual_depth = meta_by_id.get(aid, {}).get("mechanism_depth", 1)
             if actual_depth >= required_depth:
                 continue
-            # Strategy 1: same-band swap with earlier chapter
-            my_band = int(band_by_id.get(aid, 3)) if band_by_id else 3
-            swapped = False
+            # Find an earlier chapter with excess depth to swap with
             for swap_ch in range(ch):
                 swap_required = 1 if swap_ch < early_end else (2 if swap_ch < mid_end else 3)
-                for swap_global_idx, _swap_orig in story_slots_by_chapter[swap_ch]:
-                    swap_aid = atom_ids[swap_global_idx]
+                for swap_idx, _ in story_slots_by_chapter[swap_ch]:
+                    swap_aid = atom_ids[swap_idx]
                     if "placeholder:" in swap_aid or "silence:" in swap_aid:
                         continue
                     swap_depth = meta_by_id.get(swap_aid, {}).get("mechanism_depth", 1)
-                    swap_band = int(band_by_id.get(swap_aid, 3)) if band_by_id else 3
-                    if swap_band == my_band and swap_depth >= required_depth and actual_depth >= swap_required:
-                        atom_ids[global_idx], atom_ids[swap_global_idx] = atom_ids[swap_global_idx], atom_ids[global_idx]
-                        swapped = True
+                    if swap_depth >= required_depth and actual_depth >= swap_required:
+                        atom_ids[global_idx], atom_ids[swap_idx] = atom_ids[swap_idx], atom_ids[global_idx]
                         break
-                if swapped:
-                    break
-            # Note: cross-band swaps are intentionally omitted to preserve arc alignment.
-            # The band-aware sort and same-band swap handle depth progression within
-            # arc constraints. Remaining depth gaps require atom pool enrichment.
+                else:
+                    continue
+                break
 
     # 3. Callback completion: drop setup atoms without matching return
     setup_ids: set[str] = set()

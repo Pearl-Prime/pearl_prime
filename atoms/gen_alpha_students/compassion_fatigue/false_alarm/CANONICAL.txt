@@ -5,8 +5,8 @@
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Zoe feels the weight in her chest. The exhaustion is persistent. Nothing feels good. Getting out of bed is hard. Going to class is impossible. The motivation is gone. She moves through her day like she's underwater. Everyone else seems fine. She seems broken. Her hands are cold. The heaviness doesn't lift. She's not excited about anything. This is depression.
@@ -18,8 +18,8 @@ RECOGNITION v02
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/recognition/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Nia should be excited about her major. She's supposed to be on a path. Instead she feels nothing. The future feels grey. Even the good things feel muted. She's going through the motions. She's supposed to be thriving. She's surviving. The gap between expectation and reality is crushing. Her shoulders drop. Nothing feels worth the effort. This is what depression feels like when you're supposed to be happy.
@@ -31,8 +31,8 @@ RECOGNITION v04
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/recognition/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: identity
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Mika is depressed and she knows what that means. It means she's weak. It means she can't handle what other people handle easily. It means her brain is broken. The depression brings its own narrative. She's not just sad. She's defective. The weight in her chest confirms it. She should be able to manage. She can't. She's failing. The depression is proof.
@@ -44,8 +44,8 @@ MECHANISM_PROOF v01
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/mechanism_proof/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: social
-COST_INTENSITY: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Asha is depressed and isolated. The depression makes connection feel pointless. She's not responding to texts. Her friends stop reaching out. The isolation deepens the depression. The depression deepens the isolation. She's alone in the depression. The alone is part of the depression. Her stomach is tight. Everything is heavy. She can't imagine this ending.
@@ -57,8 +57,8 @@ MECHANISM_PROOF v03
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/mechanism_proof/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: identity
-COST_INTENSITY: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Leo is depressed and his brain is telling him a story. The story is: this is permanent. You're always going to feel this way. The future is grey. Hope is gone. The story feels true. The depression makes it feel true. His hands are cold. The narrative is complete. He's broken forever.
@@ -70,8 +70,8 @@ MECHANISM_PROOF v05
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Eli talks to someone. He says: I'm depressed. The words out loud make it real. The person says: you should talk to someone professional. The suggestion doesn't fix it. But it plants something. Professional help is possible. The depression doesn't lift immediately. But there's a next step. The step is small. But it's movement. His hands warm up slightly. There's a direction.
@@ -84,7 +84,7 @@ path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/turning_point/mic
 BAND: 3
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Mika calls the counseling center. She makes an appointment. She's terrified. But she makes the call. The call is an action. The action is defiance against the depression's narrative. The depression says nothing will help. The call says maybe something will. The appointment is still days away. But the action creates a small space of possibility.
@@ -96,8 +96,8 @@ TURNING_POINT v04
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Asha asks her doctor for help. The doctor listens and says: this is treatable. Not a character flaw. Not permanent. Treatable. The reframing breaks something. The depression had said Asha was broken. The doctor says: Asha's brain chemistry needs support. Different thing. Smaller thing. Fixable thing. The possibility is new. Her hands warm up. There's a path forward.
@@ -109,8 +109,8 @@ EMBODIMENT v01
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/embodiment/micro/v02.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: social
-COST_INTENSITY: 1
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Leo is taking medication. The color is slowly coming back. Not all at once. But incrementally. The future is less grey. His friends are back. The connection is real. The medication helped turn the system back on. His hands are warm. The depression is still possible. But not inevitable.
@@ -123,81 +123,9 @@ path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/embodiment/micro/
 BAND: 2
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 1
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Nia is learning that depression is not identity. It's something that happens. It's treatable. It's manageable. She's learning to separate herself from the depression. She's still Nia. The depression is a condition. The distinction is everything.
 EMBODIMENT v05
----
-
-## TURNING_POINT v06
----
-path: story_atoms/gen_alpha_students/anchored/compassion_fatigue/false_alarm/turning_point/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 4
-IDENTITY_STAGE: experimentation
----
-Theo stands in the friend's crisis text feeling the pattern of false_alarm pressing against the inside of the chest. The compassion fatigue has been building for weeks. Hands cold. Jaw locked. The old story — that this pattern is permanent, that it defines everything — starts to crack. Theo notices the crack. Does not fill it. Does not repair the old story. Just stands in the friend's crisis text and watches the frame shift. The pattern is still running. But the frame around it is no longer solid. Something moved. Not much. Enough.
----
-
-## TURNING_POINT v07
----
-path: story_atoms/gen_alpha_students/anchored/compassion_fatigue/false_alarm/turning_point/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 5
-IDENTITY_STAGE: experimentation
----
-Zadie's phone buzzes. Before she reads the message, her body floods with exhaustion. Not adrenaline — exhaustion. The false alarm has inverted: instead of fear, her body produces fatigue. Every incoming message is pre-loaded with the weight of emotional labor. She reads the text: a friend sending a funny video. No crisis. No request. Just humor. Her body cannot process the lightness. The frame collapses: her nervous system has been reconfigured to treat all social contact as emotional work. Even a funny video triggers the fatigue response. She watches the video. It is funny. She does not laugh yet. But she recognizes it is funny.
----
-
-## EMBODIMENT v06
----
-path: story_atoms/gen_alpha_students/anchored/compassion_fatigue/false_alarm/embodiment/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-Lina gets called to the principal's office. His stomach drops. His body goes cold. The false alarm screams: trouble. He walks the hallway with his heart in his throat. The principal gives him a certificate for community service. His body is still shaking when he reads the certificate. The alarm fired on a reward. He holds the paper. Lets his body catch up to the information. The catching up takes time. He gives it the time.
----
-
-## EMBODIMENT v07
----
-path: story_atoms/gen_alpha_students/anchored/compassion_fatigue/false_alarm/embodiment/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-Deshawn gets his report card. His body braces for devastation before he reads it. The false alarm runs: failure, disappointment, consequences. He reads the card. It is the best report card he has ever received. His body is still braced. Still cold-handed. Still tight-chested. He holds the card and lets the alarm run next to the reality. The alarm says: danger. The card says: growth. He believes the card. The alarm will learn. Or it will not. Either way, Deshawn holds the card. The card is what is real.
----
-
-## MECHANISM_PROOF v06
----
-path: story_atoms/gen_alpha_students/anchored/compassion_fatigue/false_alarm/mechanism_proof/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-Mira maps the false alarm's trigger network. A notification sound. A teacher calling his name. A parent's serious face. Each one activates the alarm before the content is known. The mechanism: his nervous system has linked certain stimuli to threat regardless of context. The alarm is pre-loaded. The trigger fires the alarm, then the brain catches up. His chest pounds. He sees the sequence clearly: sound, alarm, then information. The information arrives last. The alarm arrives first. The order is wrong but the wiring is set.
----
-
-## MECHANISM_PROOF v07
----
-path: story_atoms/gen_alpha_students/anchored/compassion_fatigue/false_alarm/mechanism_proof/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Ezra sees the false alarm's deepest pattern: it has taught her body that safety does not exist. Not that danger is everywhere. That safety is nowhere. Every safe moment is provisional — a gap between alarms. She cannot rest in the gaps because the gaps feel like countdown timers to the next alarm. Her chest is tight. The mechanism: the false alarms have not just created fear. They have erased the concept of safety. Her body has no template for safe. Only templates for not-yet-alarmed.
 ---

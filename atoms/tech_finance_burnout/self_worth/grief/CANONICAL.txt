@@ -5,7 +5,7 @@
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -29,7 +29,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/recognition/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,7 +41,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -53,7 +53,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/recognition/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: identity
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -89,8 +89,8 @@ IDENTITY_STAGE: destabilization
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/mechanism_proof/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: social
-COST_INTENSITY: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 [Mechanism_proof atom: showing impact on relationships/team.]
@@ -113,7 +113,7 @@ IDENTITY_STAGE: destabilization
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/mechanism_proof/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: identity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
@@ -125,8 +125,8 @@ IDENTITY_STAGE: destabilization
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 [Turning_point atom: first disruption of the pattern. Slight shift. Experimentation begins.]
@@ -137,8 +137,8 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: social
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 [Turning_point atom: shift in relational dimension.]
@@ -149,8 +149,8 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 [Turning_point atom: testing the new possibility. Building evidence.]
@@ -161,8 +161,8 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 [Turning_point atom: mechanism begins to loosen.]
@@ -173,8 +173,8 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 [Turning_point atom: identity begins to shift. New self beginning.]
@@ -185,8 +185,8 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: claimed. New knowledge integrated. Can feel the shift in body.]
@@ -197,8 +197,8 @@ IDENTITY_STAGE: self_claim
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: relational dimension. Different way of being with others.]
@@ -209,8 +209,8 @@ IDENTITY_STAGE: self_claim
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: sustained shift. New baseline.]
@@ -221,8 +221,8 @@ IDENTITY_STAGE: self_claim
 path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: ownership of the new way.]
@@ -234,81 +234,8 @@ path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/embodiment/micr
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 1
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: fully integrated. New identity. Rest.]
----
-
-
-## TURNING_POINT v06
----
-path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/turning_point/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: experimentation
----
-Priya notices the grief surge arrive at full force during the deployment window. Throat swells shut. The value questioning surges — the doubt about deserving to exist as-is. The loss mechanism demands its usual conclusion about who Priya is. Spine curves inward. Priya refuses the final step. Holds the body in the intensity without translating it into the grief surge's verdict. The sensation burns. The story falters. Priya sees the laptop screen and the old frame collapses around it. Priya stands in the wreckage of the interpretation and finds solid ground beneath it. The ground was always there. The loss mechanism built over it.
----
-
-## TURNING_POINT v07
----
-path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/turning_point/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: experimentation
----
-Derek's body reaches its limit. Eyes burn. The grief surge screams its conclusion about the value questioning — the doubt about deserving to exist as-is. This is the peak. The maximum. Weight settles in the ribcage. Derek stops fighting the sensation and starts witnessing the mechanism. The loss mechanism is visible now. Fully exposed. Every gear, every conversion, every false step from feeling to verdict. The old frame cannot function once Derek sees the gears turning. The crisis does not end. But the frame that made the crisis into identity collapses under its own weight. Derek breathes inside the collapse.
----
-
-## EMBODIMENT v06
----
-path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/embodiment/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: self_claim
----
-Marcus walks into the quarterly review. Chest hollows. The grief surge fires. Marcus feels the heat and acts from the new understanding. The value questioning is present — the doubt about deserving to exist as-is. The loss mechanism runs its pattern. Marcus does not follow it. Lungs ache. Moves through the intensity as someone who knows what the grief surge is and what it is not. Sees the backlog. Owns the new frame. The body carries the weight and Marcus carries the authority to interpret it. The grief surge loses its vote on identity. Marcus closes the laptop lid and the action belongs to Marcus, not to the pattern.
----
-
-## EMBODIMENT v07
----
-path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/embodiment/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-Maximum intensity. Breath turns shallow. The grief surge runs its peak sequence against the value questioning — the doubt about deserving to exist as-is. Priya lets the body experience the full force. Hands feel heavy. Does not translate it into the loss mechanism's verdict. Stands as the person who survived seeing the pattern and chose to keep standing. Acts from that survival. Priya opens the PR. The crisis does not define Priya. Priya defines the response to the crisis. The body absorbs the peak. The self absorbs nothing from the grief surge's narrative. Identity is not what the pattern says. Identity is what Priya does next.
----
-
-## MECHANISM_PROOF v06
----
-path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/mechanism_proof/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 3
-IDENTITY_STAGE: destabilization
----
-Hot activation. Gut empties. Derek watches the grief surge manufacture its conclusion about the value questioning — the doubt about deserving to exist as-is. Spine curves inward. The loss mechanism takes raw sensation and produces identity judgment. Then feeds the judgment back as fuel for the next cycle. Derek sees the calendar invite. The loop tightens. The grief surge is a closed system. It generates its own evidence, consumes its own output, and produces the same verdict every time. Derek refreshes the dashboard while the machinery runs. The wave is relentless. But now Derek sees it as machinery, not as the voice of reality.
----
-
-## MECHANISM_PROOF v07
----
-path: story_atoms/tech_finance_burnout/anchored/self_worth/grief/mechanism_proof/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-The grief surge reaches peak velocity. Sternum aches. Marcus sees the full mechanism at maximum power — the doubt about deserving to exist as-is. The value questioning is real. The loss mechanism is real. What is not real is the grief surge's conclusion. Weight settles in the ribcage. The mechanism manufactures conviction at crisis speed: sensation becomes narrative, narrative becomes verdict, verdict becomes fuel. Marcus's body absorbs the force while the mind maps the machinery. The pattern is loudest when it is most visible. At peak speed, the loss mechanism exposes every joint and seam. Marcus closes the laptop lid. The wave screams. The truth underneath it is quiet.
 ---

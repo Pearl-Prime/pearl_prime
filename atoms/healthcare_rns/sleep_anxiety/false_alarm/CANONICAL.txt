@@ -35,7 +35,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/healthcare_rns/anchored/sleep_anxiety_false_alarm/recognition/band_fill/v06.txt
 BAND: 1
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -47,7 +47,7 @@ A moment of calm. The intensity drops. Space opens.
 path: story_atoms/healthcare_rns/anchored/sleep_anxiety_false_alarm/recognition/band_fill/v07.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -59,8 +59,8 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/sleep_anxiety_false_alarm/recognition/band_fill/v08.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
-COST_INTENSITY: 4
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Peak tension. The turning point approaches. Everything shifts.
@@ -71,7 +71,7 @@ Peak tension. The turning point approaches. Everything shifts.
 path: story_atoms/healthcare_rns/anchored/sleep_anxiety_false_alarm/recognition/band_fill/v09.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -83,7 +83,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/sleep_anxiety_false_alarm/recognition/band_fill/v10.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -95,7 +95,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/sleep_anxiety_false_alarm/recognition/band_fill/v11.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -107,7 +107,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/sleep_anxiety_false_alarm/recognition/band_fill/v12.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -119,7 +119,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/sleep_anxiety_false_alarm/recognition/band_fill/v13.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -131,82 +131,9 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/sleep_anxiety_false_alarm/recognition/band_fill/v14.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 The mechanism deepens. Stakes rise. The cost becomes clear.
----
-
-
-## TURNING_POINT v01
----
-path: story_atoms/healthcare_rns/anchored/sleep_anxiety/false_alarm/turning_point/micro/v01.txt
-BAND: 4
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: experimentation
----
-Staring at the ceiling before the alarm. Jasmine feels the warning system activate in a moment of actual safety. Her breath catches mid-inhale. The air thickens. For months the frame has held: if the sensation says danger then danger is here. Now Jasmine watches the frame buckle under evidence it cannot metabolize. Her body registers the shift before her mind can catch up. The chest opens half an inch. Something loosens at the base of her spine. The muscles that held the old posture begin to release. The siren and the threat occupy different timelines entirely. The old story does not end with a conclusion. It ends with a silence. Jasmine stands in that silence. Her hands open at her sides.
----
-
-## TURNING_POINT v02
----
-path: story_atoms/healthcare_rns/anchored/sleep_anxiety/false_alarm/turning_point/micro/v02.txt
-BAND: 5
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Dominique stands in bed with the phone face-down on the nightstand. A roar fills her ears and blots out the ambient sound of the room. She feels the false alarm peaks at maximum volume and the world remains unchanged. The frame that has held everything in place — the alarm means real danger exists — strains under the weight of what Dominique sees. For one long second the old architecture holds. Then it cracks. Dominique feels the fracture travel through her chest. The story that organized every decision, every reaction, every judgment stops organizing. The siren and the threat occupy different timelines entirely. Dominique does not reach for a replacement. She stands in the gap where the certainty lived, breathing into the new and terrifying openness.
----
-
-## EMBODIMENT v01
----
-path: story_atoms/healthcare_rns/anchored/sleep_anxiety/false_alarm/embodiment/micro/v01.txt
-BAND: 4
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: self_claim
----
-Her stomach drops hard. The nausea is sudden and specific. Mei stands at 3 AM after a double shift. The alarm screams at peak volume, demanding the old compliance. Mei lets the alarm ring through the body without lifting a hand to respond. Not despite the sensation — she feels every degree of it. Her body carries the heat. Her choices carry her name. She does not wait for the feeling to pass before acting. She acts while the feeling burns at full intensity. The acting is the embodiment. The body and the choice exist in the same moment. Mei owns this. The ownership lives in her hands, in her breath, in the ground beneath her feet.
----
-
-## EMBODIMENT v02
----
-path: story_atoms/healthcare_rns/anchored/sleep_anxiety/false_alarm/embodiment/micro/v02.txt
-BAND: 5
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-In bed with the phone face-down on the nightstand. Her vision whites out at the edges. The center shrinks. The alarm pushes with full force against her sternum. Mei stays seated and breathing while the false siren screams itself out. The body shakes with the effort. The choice holds anyway. This is not willpower overriding sensation. This is ownership absorbing sensation. Mei moves from the new ground she has claimed. Her hands tremble and her hands act. Both facts are true simultaneously. The identity is not a concept. It lives in her muscles, in the steadiness of her spine, in the way her feet stay planted while the old pattern screams for retreat.
----
-
-## MECHANISM_PROOF v01
----
-path: story_atoms/healthcare_rns/anchored/sleep_anxiety/false_alarm/mechanism_proof/micro/v01.txt
-BAND: 4
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-Luz pauses while staring at the ceiling before the alarm. Her stomach drops hard. The nausea is sudden and specific. The alarm has run for hours without interruption. Now she sees the machinery laid bare. The alarm has lost the ability to distinguish remembered threat from present fact. Luz traces the loop in real time: trigger, activation, the relief that never actually arrives, then the trigger again. Her stomach clenches as she maps the circuit from inside it. Seeing the mechanism does not stop the gears. But it strips the mechanism of its authority. Luz watches the loop turn without feeding it another round.
----
-
-## MECHANISM_PROOF v02
----
-path: story_atoms/healthcare_rns/anchored/sleep_anxiety/false_alarm/mechanism_proof/micro/v02.txt
-BAND: 5
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Her body shakes — not a tremor but a quake that starts in the core. Fatima stands in bed with the phone face-down on the nightstand. The alarm runs its program at full speed. Fatima watches with the detachment of someone reading their own diagnostic. The mechanism reveals itself in full: the threat detector runs on outdated code — it responds to the shape of the past, not the content of the present. Every previous attempt to fight the pattern used the same logic that powers it. Fatima sees this now. Her ribs expand with the recognition. Not relief — clarity. The pattern does not stop. But Fatima stops mistaking it for truth. It is machinery. It is not her name.
 ---

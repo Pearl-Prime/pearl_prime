@@ -5,7 +5,7 @@
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -17,7 +17,7 @@ Ryan is burning out but his peer seems fine. His peer is working the same hours.
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/recognition/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -29,7 +29,7 @@ Ava is burning out but her peer produced more this quarter. Her throat closes. T
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/recognition/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: identity
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,7 +41,7 @@ Marcus is burning out but his peer closed the biggest deal of the year. His jaw 
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -53,7 +53,7 @@ Wei is burning out but his peer seems energized. His shoulders droop. The compar
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/recognition/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: identity
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -89,8 +89,8 @@ Ava's comparison is producing additional burnout. The mechanism is: burnout degr
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/mechanism_proof/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: identity
-COST_INTENSITY: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Marcus's comparison with his peer is producing existential doubt. The mechanism is: burnout produces doubt, doubt triggers comparison, comparison produces shame about inadequacy, shame prevents asking for help, lack of help deepens burnout and doubt. He is now doubting whether he belongs in the role. The peer closing the deal is evidence against him. The comparison has become evidence of unsuitability.
@@ -113,7 +113,7 @@ Wei's comparison is producing identity collapse. The mechanism is: burnout produ
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/mechanism_proof/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: identity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
@@ -125,8 +125,8 @@ Natasha's comparison is producing existential doubt about her career. The mechan
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Ryan stops comparing with his peer. He focuses on his own recovery. His peer is not burned out. That is different. It does not mean his peer is stronger. It might mean his peer has different supports, different stress response, different family situation. The comparison is not evidence. It is speculation. He is learning to focus on his own recovery instead of his peer's apparent strength.
@@ -137,8 +137,8 @@ Ryan stops comparing with his peer. He focuses on his own recovery. His peer is 
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Ava stops trying to match her peer's output. She focuses on recovering from burnout. Her output will return. Not immediately. Not to previous levels immediately. But it will recover. The comparison was producing overwork that was deepening burnout. Stopping the comparison allows recovery to begin.
@@ -149,8 +149,8 @@ Ava stops trying to match her peer's output. She focuses on recovering from burn
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Marcus stops using his peer's success as evidence against him. His peer closed a big deal. That is his peer's trajectory. Marcus's trajectory includes burnout and recovery. Different paths. The comparison was producing shame that prevented help. Stopping it allows intervention. He is learning that burnout doesn't mean unsuitability. It might mean different stress response. It might mean different support needs.
@@ -161,8 +161,8 @@ Marcus stops using his peer's success as evidence against him. His peer closed a
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Wei stops using his peer's apparent vitality as evidence of his own unsuitability as a leader. He focuses on his recovery. His peer might have different stress responses. Might have different support. Might be burning out silently. The comparison is not evidence of Wei's inadequacy. It is just comparison. He is learning to focus on his own path, not his peer's appearance.
@@ -173,8 +173,8 @@ Wei stops using his peer's apparent vitality as evidence of his own unsuitabilit
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Natasha stops using her peer's steady returns as evidence of her own unsuitability. She focuses on recovery. Her returns will improve. Not immediately. Her peer might have different risk tolerance or different market exposure. The comparison is not evidence. It is just noise. She is learning to focus on her recovery instead of her peer's appearance of stability.
@@ -185,8 +185,8 @@ Natasha stops using her peer's steady returns as evidence of her own unsuitabili
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Ryan is recovering and he is not comparing. His recovery is his. His peer's path is their own. The comparison was deepening his burnout. It is gone. His chest is open. His focus is on his own restoration.
@@ -197,8 +197,8 @@ Ryan is recovering and he is not comparing. His recovery is his. His peer's path
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Ava is recovering and she is not competing. Her peer's output is not her measure. Her recovery is. Her work will return. She claims her right to recover at her pace. Her throat is open. Her focus is on restoration, not relative standing.
@@ -210,7 +210,7 @@ path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/embodiment/mi
 BAND: 2
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Marcus is recovering and he is not measuring against his peer. His peer's deal is not evidence about him. His burnout is not evidence of unsuitability. It is evidence of stress. Recovery is evidence of resilience. He claims his right to recover and continue in his role. His jaw is unclenched.
@@ -221,8 +221,8 @@ Marcus is recovering and he is not measuring against his peer. His peer's deal i
 path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Wei is recovering and he is not comparing. His peer's vitality is not evidence about him. His burnout is not evidence of inadequate leadership. It is evidence of stress. Recovery is evidence of capacity to respond. He claims his leadership identity even while recovering. His shoulders are loose.
@@ -234,81 +234,8 @@ path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/embodiment/mi
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 1
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Natasha is recovering and she is not comparing. Her peer's returns are not evidence about her. Her burnout is not evidence of unsuitability. It is evidence of stress. Recovery is evidence of capacity to continue. She claims her trader identity even while recovering. Her hands are warm. Her focus is on her own restoration.
----
-
-
-## TURNING_POINT v06
----
-path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/turning_point/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: experimentation
----
-Her breath catches mid-inhale. The air thickens. Sana is at the IDE at 11 PM on a Friday with no one else online when she watches someone younger receive the role. The operating assumption — worth depends on relative position — meets a fact it cannot absorb. Her jaw unclenches. Not relief. Disorientation. The frame that held her world in place tilts on its axis. Sana does not fall. She stands in the vertigo and lets the room reorient around her new position. The metric measures nothing real — it is a machine for producing inadequacy. She does not grasp for a replacement frame. She breathes into the space where the old certainty stood and finds the space survivable.
----
-
-## TURNING_POINT v07
----
-path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/turning_point/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-In the fluorescent hum of the empty office at midnight. Nolan the ranking arrives and the number is undeniable. The air evacuates the room. His ribs lock. The diaphragm freezes. For months the frame has held: standing relative to others is the only metric that counts. Now Nolan watches the frame buckle under evidence it cannot metabolize. His body registers the shift before his mind can catch up. The chest opens half an inch. Something loosens at the base of his spine. The muscles that held the old posture begin to release. The metric measures nothing real — it is a machine for producing inadequacy. The old story does not end with a conclusion. It ends with a silence. Nolan stands in that silence. His hands open at his sides.
----
-
-## EMBODIMENT v06
----
-path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/embodiment/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: self_claim
----
-Weight presses his chest flat. Breathing becomes a conscious act. Kiran stares at the same ticket for the third consecutive day. The comparison screams at peak volume, demanding the old compliance. Kiran stops checking the scoreboard and turns to face the work itself. Not despite the sensation — he feels every degree of it. His body carries the heat. His choices carry his name. He does not wait for the feeling to pass before acting. He acts while the feeling burns at full intensity. The acting is the embodiment. The body and the choice exist in the same moment. Kiran owns this. The ownership lives in his hands, in his breath, in the ground beneath his feet.
----
-
-## EMBODIMENT v07
----
-path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/embodiment/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-In the fluorescent hum of the empty office at midnight. A roar fills his ears and blots out the ambient sound of the room. The comparison pushes with full force against his sternum. Raj walks past the comparison without pausing to measure. The body shakes with the effort. The choice holds anyway. This is not willpower overriding sensation. This is ownership absorbing sensation. Raj moves from the new ground he has claimed. His hands tremble and his hands act. Both facts are true simultaneously. The identity is not a concept. It lives in his muscles, in the steadiness of his spine, in the way his feet stay planted while the old pattern screams for retreat.
----
-
-## MECHANISM_PROOF v06
----
-path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/mechanism_proof/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-Staring at the same ticket for the third consecutive day. Her throat closes around the words. The vocal cords tighten. The comparison operates in plain view for the first time. Yuki catches the pattern mid-cycle and holds still long enough to see the entire architecture. The measuring instrument calibrates itself to find deficiency, discarding accomplishments that do not fit the verdict. The mechanism persists because it disguises itself as protection — it wears the costume of something necessary. Yuki watches the loop close and reopen. Her body holds the tension of seeing without intervening. The seeing does not resolve the pattern. But it makes the pattern visible, and visibility changes everything.
----
-
-## MECHANISM_PROOF v07
----
-path: story_atoms/tech_finance_burnout/anchored/burnout/comparison/mechanism_proof/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Dev pauses at the IDE at 11 PM on a Friday with no one else online. His chest caves inward. Breathing stops. The body refuses the air. The comparison has run for hours without interruption. Now he sees the machinery laid bare. The ranking system uses rigged criteria — it selects only data that confirms inferiority and discards everything else. Dev traces the loop in real time: trigger, activation, the relief that never actually arrives, then the trigger again. His stomach clenches as he maps the circuit from inside it. Seeing the mechanism does not stop the gears. But it strips the mechanism of its authority. Dev watches the loop turn without feeding it another round.
 ---

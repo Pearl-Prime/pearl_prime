@@ -5,7 +5,7 @@
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -17,7 +17,7 @@ Rosa watches another nurse manage five patients with apparent ease. This nurse m
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/recognition/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -29,7 +29,7 @@ Tyler watches his peer manage a code. The peer moves with fluid precision. The c
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/recognition/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,7 +41,7 @@ Amy notices that another pediatric nurse seems to have more energy. This nurse p
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -53,7 +53,7 @@ Dani watches a newer nurse approach trauma care with some anxiety. Dani remember
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/recognition/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -78,7 +78,7 @@ path: story_atoms/healthcare_rns/anchored/burnout/comparison/mechanism_proof/mic
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 4
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Tyler has now created an internal ranking. This peer is better. Tyler is declining. The mechanism is that the comparison has become proof of his incompetence. He's not gathering evidence objectively. He's seeing the other nurse's strengths and his own deficits. The ranking is reinforced every time they work together. Tyler's identity is now wrapped up in being less than. His skills are still intact. But his belief in them is eroding. The mechanism has convinced him that this other nurse is naturally better. That Tyler's decline is inevitable. His hands stay cold. His confidence is freezing. The comparison has become embedded in his identity.
@@ -102,7 +102,7 @@ path: story_atoms/healthcare_rns/anchored/burnout/comparison/mechanism_proof/mic
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 4
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Dani has internalized the comparison as proof that she's losing herself. The mechanism is that she's trying to feel what she used to feel. Trying to reconnect with the engagement she's watching in the newer nurse. The trying makes it worse. The dissociation deepens because she's forcing a feeling that's not accessible right now. The mechanism has created a loop: she's numb, she compares herself to the engaged nurse, she feels worse about the numbness, the numbness deepens. She's trying to cure the burnout by recreating an internal state she's lost. The mechanism doesn't work. It just confirms that she's not okay.
@@ -114,7 +114,7 @@ path: story_atoms/healthcare_rns/anchored/burnout/comparison/mechanism_proof/mic
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 4
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Chris has stopped trying to advance. The mechanism is that the comparison has convinced Chris that movement is only for nurses who don't have burnout. Chris is stuck managing the chaos while this peer moves forward. The mechanism has created a ceiling. Chris can't move because Chris is burned out and movement requires having what Chris doesn't have. The comparison is now preventing change. Chris is staying in the role that's causing the burnout because the comparison suggests there's no escape. The throat is tight. The shoulders are tight. The mechanism has created paralysis.
@@ -125,8 +125,8 @@ Chris has stopped trying to advance. The mechanism is that the comparison has co
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Rosa stops watching the other nurse. The experiment is to focus on her own work instead of comparing. On her own shift. On her own limitations. What would happen if she just did her job without the comparison? Her chest loosens slightly. The work is still hard. But it's her hard. Not measured against someone else's easy. The experiment is to be in her own experience instead of watching someone else's.
@@ -137,8 +137,8 @@ Rosa stops watching the other nurse. The experiment is to focus on her own work 
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Tyler asks the other nurse how they manage the codes so calmly. The answer is complex. Years of experience. But also, this nurse struggles with different aspects of nursing. The comparison was incomplete. Tyler was seeing competence without context. The experiment is to gather information instead of assuming inferiority. His hands begin to warm. The ranking dissolves. There's just two nurses doing the work differently.
@@ -149,8 +149,8 @@ Tyler asks the other nurse how they manage the codes so calmly. The answer is co
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Amy stops trying to be like the other nurse. The experiment is to accept where she is right now. Burned out. Engaged differently. Not worse. Just different because of her current capacity. She's still good at her job. The engagement will return when the burnout is addressed. The comparison is released. Her chest opens slightly. She's not competing with her peer. She's just doing her job.
@@ -161,8 +161,8 @@ Amy stops trying to be like the other nurse. The experiment is to accept where s
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Dani stops trying to feel what the newer nurse feels. The experiment is to accept the numbness as a symptom of her burnout. Not as a character flaw. Not as a permanent loss of self. The forcing stops. The acceptance of what is begins. Her chest loosens slightly.
@@ -173,8 +173,8 @@ Dani stops trying to feel what the newer nurse feels. The experiment is to accep
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Chris acknowledges the comparison. Then asks: Is this true? Am I actually stuck? Or am I burned out and seeing everything as impossible? The experiment is to separate the burnout thoughts from the reality. There might be paths forward. The burnout is making them invisible. The comparison stops being proof of permanence.
@@ -185,8 +185,8 @@ Chris acknowledges the comparison. Then asks: Is this true? Am I actually stuck?
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 1
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Rosa does her work. She doesn't compare it to anyone else's work. She's learning to honor her own pace and process. The chest loosens. The comparison was releasing her from her own experience. Now she's in it.
@@ -197,8 +197,8 @@ Rosa does her work. She doesn't compare it to anyone else's work. She's learning
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 1
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Tyler's skills are visible to him now. In his own right. Not measured against anyone else. His hands are warm. His confidence is returning.
@@ -209,8 +209,8 @@ Tyler's skills are visible to him now. In his own right. Not measured against an
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 1
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Amy engages at her own level. She's not trying to be someone else. She's being herself. Burned out and doing the work anyway. The chest opens. The comparison was blocking self-acceptance. Now she accepts where she is.
@@ -221,8 +221,8 @@ Amy engages at her own level. She's not trying to be someone else. She's being h
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/embodiment/micro/v04.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 1
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Dani is herself. Not compared to anyone. The numbness is addressed through treatment of the burnout. Not through competing with engaged nurses. She's becoming herself again.
@@ -233,81 +233,9 @@ Dani is herself. Not compared to anyone. The numbness is addressed through treat
 path: story_atoms/healthcare_rns/anchored/burnout/comparison/embodiment/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 1
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Chris is moving forward. Not by being like the peer director. By being Chris who is addressing the burnout. The throat releases. The shoulders drop. Movement is possible.
----
-
-## TURNING_POINT v06
----
-path: story_atoms/healthcare_rns/anchored/burnout/comparison/turning_point/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-Keiko clocks in for the third double shift this week. The comparison engine measures against someone else's visible success. Keiko's neck locks. The pattern demands attention now—hot, insistent, refusing to wait. Keiko watches it demand. This time, instead of obeying, Keiko tracks where the demand originates. It starts in the legs. It travels to the thoughts. The thoughts build a story. The story says: act now or lose everything. Keiko examines the story. The story has no evidence. The neck has real sensation. The story has fabricated urgency. Keiko holds the sensation without following the story. The sensation stays. The story loses its audience. The frame shifts: the pattern is loud, but loudness is not truth.
----
-
-## TURNING_POINT v07
----
-path: story_atoms/healthcare_rns/anchored/burnout/comparison/turning_point/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Nora sits in the supply closet between rooms. The pager buzzes. The body does not move. The comparison engine hits maximum volume. Nora's eyelids drag. Nora's arms feel hollow. Everything narrows to this moment—collapse or breakthrough, no middle ground. Nora stands inside the peak. The pattern says: this is who you are. Nora hears it. For the first time, Nora hears it as a sentence, not a fact. A sentence can be wrong. Nora's body shakes with the intensity. The shaking is real. The sentence is interpretation. Nora separates the shaking from the sentence. The body still trembles. The identity claim dissolves. The metric collapses under its own selectivity. The frame cracks open.
----
-
-## EMBODIMENT v06
----
-path: story_atoms/healthcare_rns/anchored/burnout/comparison/embodiment/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: self_claim
----
-Tomás finishes the shift. Does not check the schedule for tomorrow. Drives home in silence. The comparison engine activates. Tomás's arms feel hollow. The heat rises. Tomás recognizes the heat. Does not turn away from it. Tomás holds both someone else's achievement and their own without ranking. The old pattern fires and Tomás acts from the new understanding anyway. Tomás's ribs ache, but the hands keep moving. The identity is not the pattern. The identity is what Tomás does while the pattern runs. Tomás does the next right thing with the pattern screaming in the background. The screaming fades to a hum. The hum fades to a fact: the pattern exists. Tomás also exists. They are not the same thing.
----
-
-## EMBODIMENT v07
----
-path: story_atoms/healthcare_rns/anchored/burnout/comparison/embodiment/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-Aisha cries in the supply closet and then walks out and gives the best handoff of the shift. Maximum intensity. Aisha's legs go heavy. Aisha's eyelids drag. The comparison engine roars at peak volume. Every nerve says yield. Aisha does not yield. Aisha stands at the center of the storm and acts from the new identity—not against the pattern, but through it. The pattern is noise. The action is signal. Aisha's body carries both. The crisis does not define Aisha. Aisha's response defines Aisha. Aisha moves forward with the full weight of the moment pressing down. The weight is real. The collapse is not. Aisha walks through the peak and comes out the other side still standing. Still choosing.
----
-
-## MECHANISM_PROOF v06
----
-path: story_atoms/healthcare_rns/anchored/burnout/comparison/mechanism_proof/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 2
-COST_TYPE: opportunity
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-Claire documents the depletion curve: give care, absorb stress, skip break, give more care, absorb more stress. Claire's ribs ache. The heat is on. The comparison engine measures against someone else's visible success. Claire tracks the sequence this time: trigger, body response, thought cascade, behavioral pull. The trigger is external. The body response is automatic. The thought cascade is relative positioning against curated highlights. The behavioral pull is the part that costs. Claire sees the cost clearly now. Claire's neck locks as the pattern runs its circuit. The pattern persists because each comparison produces a momentary relief—at least Claire checked—followed by a deeper deficit. The persistence is not mysterious. The persistence is mechanical. Seeing the machine does not stop the machine. Seeing the machine reveals the machine is not Claire.
----
-
-## MECHANISM_PROOF v07
----
-path: story_atoms/healthcare_rns/anchored/burnout/comparison/mechanism_proof/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Marcus walks past the patient call light and does not stop. The burnout has reached the reflex level. Peak intensity. Marcus's eyelids drag. Marcus's arms feel hollow. The comparison engine runs at full power. Marcus watches it run. Even at maximum volume, the mechanism follows the same sequence: trigger, selective data pull, asymmetric weighting, deficit verdict, temporary relief, repeat. The sequence is identical at band five as at band two. Only the amplitude changes. The pattern does not become smarter at higher intensity. It becomes louder. Marcus's body absorbs the volume. Marcus's mind maps the circuit. The circuit has no exit built in—it loops. The loop persists because it feeds on its own output. Marcus sees the feed. Seeing the feed does not stop the loop. Seeing the feed reveals the loop has a structure. Structure can be interrupted.
 ---

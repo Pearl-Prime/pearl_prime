@@ -5,7 +5,7 @@
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -17,7 +17,7 @@ Alex is on Twitter at 6 AM. His former competitor just announced Series A fundin
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/recognition/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: identity
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -29,7 +29,7 @@ Maya has a coffee with another consultant. The consultant casually mentions that
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/recognition/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -53,7 +53,7 @@ Jen sees a peer land a major client she'd also pitched to. The peer's company an
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/recognition/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -77,7 +77,7 @@ Alex starts obsessively tracking his competitors. He has alerts on every announc
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/mechanism_proof/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: identity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
@@ -101,7 +101,7 @@ Carlos starts making operational decisions based on what he sees other restauran
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/mechanism_proof/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
@@ -114,7 +114,7 @@ path: story_atoms/entrepreneurs/anchored/anxiety/comparison/mechanism_proof/micr
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 4
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Omar is feature-chasing. He sees a competitor add a feature and immediately wants it too. He's making product decisions based on what he sees others doing rather than what his users actually want. His shoulders are tight. His jaw is clenched. The product is losing coherence. It's becoming a collection of competitive reactions rather than a focused solution. His team is confused about direction because the direction changes whenever he sees something new. He's not building a product. He's building against a product.
@@ -125,8 +125,8 @@ Omar is feature-chasing. He sees a competitor add a feature and immediately want
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Alex takes a hard look at his comparison pattern. He realizes he's comparing his year two to a competitor's year four. He's comparing his self-funded bootstrap to someone who raised capital. He's comparing his chosen market to their chosen market. Every comparison is apples-to-oranges. More importantly, he realizes: his business is growing. It's not Series A growth. But it's healthy growth. His chest loosens. He unfollows the competitor. He stops tracking the gap. He refocuses on his own metrics, his own progress, his own vision. The anxiety doesn't disappear immediately. But it has less fuel when he stops comparing.
@@ -137,8 +137,8 @@ Alex takes a hard look at his comparison pattern. He realizes he's comparing his
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Maya decides to anchor her pricing to her value, not to what others charge. She thinks about the results she delivers, the problems she solves, the outcomes her clients experience. She raises her rates. A few clients push back. Most accept. Some actually appreciate the positioning shift toward higher value. Her hands warm. She realizes that pricing based on comparison kept her small. Pricing based on value allows her to actually serve the kind of clients she wants to serve. The comparison loses power when she stops using it as a reference point.
@@ -149,8 +149,8 @@ Maya decides to anchor her pricing to her value, not to what others charge. She 
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Carlos goes back to his original concept. He stops trying to be what other restaurants are being. He clarifies what he actually cares about. He makes decisions based on that clarity. The restaurant becomes more coherent. Customers respond to the clarity. His shoulders drop. He realizes that trying to compete on someone else's terms meant he could never win—they were already ahead. But competing on his own terms, from his own clarity, creates a different kind of differentiation. His chest opens.
@@ -161,8 +161,8 @@ Carlos goes back to his original concept. He stops trying to be what other resta
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: social
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Jen writes down her actual unique positioning. Not what others are doing. What she actually brings. What problems she actually solves better. What clients actually hire her for. She organizes her services around that clarity. She stops pivoting. Her positioning becomes coherent. Clients can finally understand what she does. Her hands warm. She discovers that coherent positioning attracts better clients than constantly-shifting positioning ever did.
@@ -173,8 +173,8 @@ Jen writes down her actual unique positioning. Not what others are doing. What s
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Omar focuses on user feedback from his own users, not on what competitors are doing. He listens to his users' actual needs. He builds features that address those needs. His product becomes more coherent. His users become more satisfied. His shoulders drop. He realizes that competitors will always be ahead on some dimension. But if he focuses on his users, he'll be ahead on the dimension that matters: serving your users well.
@@ -185,8 +185,8 @@ Omar focuses on user feedback from his own users, not on what competitors are do
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/embodiment/micro/v01.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Alex builds his business on his own terms. He celebrates his own milestones. His chest is open. He's aware of the market, but he's not enslaved to comparison. He makes strategic decisions based on his vision, not on the gap between his achievement and someone else's. His hands are warm.
@@ -198,7 +198,7 @@ path: story_atoms/entrepreneurs/anchored/anxiety/comparison/embodiment/micro/v02
 BAND: 2
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Maya's pricing reflects her value. Her positioning is clear. Her clients are aligned. Her hands are warm. She's learned that competing based on comparison creates perpetual inadequacy. Leading from clarity creates differentiation.
@@ -209,8 +209,8 @@ Maya's pricing reflects her value. Her positioning is clear. Her clients are ali
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Carlos's restaurant is an expression of his vision. His decisions come from his clarity, not from reaction to others. His shoulders are relaxed. The restaurant is thriving because it's coherent, not because it's copied well.
@@ -221,8 +221,8 @@ Carlos's restaurant is an expression of his vision. His decisions come from his 
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/embodiment/micro/v04.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Jen's business is coherent. Her positioning is clear. Her clients know what she does and why. Her hands are warm. She's competing on her terms, not on someone else's.
@@ -233,8 +233,8 @@ Jen's business is coherent. Her positioning is clear. Her clients know what she 
 path: story_atoms/entrepreneurs/anchored/anxiety/comparison/embodiment/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Omar's product serves his users. He makes decisions based on user feedback, not competitive positioning. His team knows the direction because it's rooted in serving users, not in chasing competitors. His shoulders are relaxed.
@@ -245,81 +245,9 @@ Omar's product serves his users. He makes decisions based on user feedback, not 
 path: story_atoms/entrepreneurs/anchored/anxiety_comparison/recognition/band_fill/v06.txt
 BAND: 5
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
-COST_INTENSITY: 4
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Crisis. Breakthrough. The moment of maximum intensity.
----
-
-## TURNING_POINT v06
----
-path: story_atoms/entrepreneurs/anchored/anxiety/comparison/turning_point/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 4
-IDENTITY_STAGE: experimentation
----
-Alex watches a peer handle anxiety with apparent ease. The comparison fires hot — Alex struggles while others seem to navigate the same terrain effortlessly. Chest tight. Hands cold. The gap between Alex's experience and the peer's performance feels like proof of deficiency. Then something cracks open. Alex catches a glimpse behind the peer's composure — a trembling hand, a tight jaw, a voice that almost breaks. The ease was armor. The frame shifts: Alex was comparing a private struggle to a public performance. Chest loosens The comparison mechanism was measuring the wrong dimension. Both people carry the weight. One hides it better.
----
-
-## TURNING_POINT v07
----
-path: story_atoms/entrepreneurs/anchored/anxiety/comparison/turning_point/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 5
-IDENTITY_STAGE: experimentation
----
-Alex's anxiety reaches a breaking point. The comparison has been running for so long and so hard that the body refuses to continue. Hands grip the desk. Face burns. Alex stands in the wreckage of a metric system that collapsed under its own weight — measuring against others until the measurement consumed all the energy that should have gone to the actual work. Then the person Alex has been comparing against reveals their own collapse. The carefully maintained exterior crumbles. Alex's chest cracks open. The comparison was between two performances of adequacy, not between adequacy and inadequacy. Both were performing. Both were breaking. The frame shatters because the person who seemed to have it all together was held together by the same kind of wire. Nobody wins the comparison because nobody was competing. They were all just surviving.
----
-
-## EMBODIMENT v06
----
-path: story_atoms/entrepreneurs/anchored/anxiety/comparison/embodiment/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: self_claim
----
-Maya encounters the familiar trigger — a peer's success, a visible achievement, the data that usually fires the comparison engine. The comparison activates. Chest tight. Maya notices it, acknowledges it, and returns attention to the work in front of them. The peer's achievement does not determine Maya's value. Maya's value comes from the work Maya does, the decisions Maya makes, the life Maya has built. Chest stays open The comparison still fires. Maya no longer builds an identity around its reports. Maya is a person who does their own work well. The peer does their own work well. Both exist. Neither diminishes the other.
----
-
-## EMBODIMENT v07
----
-path: story_atoms/entrepreneurs/anchored/anxiety/comparison/embodiment/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-The maximum test arrives. Maya's anxiety situation reaches its most intense moment alongside a peer who is handling the same situation differently and, by every visible measure, better. The comparison fires at full intensity. Jaw clenches. Maya feels it all — the inadequacy, the envy, the deficit — and acts anyway. Acts from Maya's own understanding, Maya's own values, Maya's own way of handling this. The outcome is not the peer's outcome. It is Maya's outcome. Imperfect. Real. Earned. Stomach drops. Maya stands in the aftermath with the comparison still running its calculations and the calculations no longer matter. Maya did the work. The work stands on its own. It does not need to be better than anyone else's to be valid. Hands are warm The comparison has been permanently reframed: information, not identity.
----
-
-## MECHANISM_PROOF v06
----
-path: story_atoms/entrepreneurs/anchored/anxiety/comparison/mechanism_proof/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-Alex catches the comparison operating in real time within anxiety. The comparison fires before the thought completes — automatic, pre-rational, faster than analysis. Chest crushes. Alex watches the machinery: a neutral data point enters the system and exits as a deficit. The peer's action becomes evidence of Alex's inadequacy. The conversion happens in milliseconds. Hands shake. The protective logic is visible now: if Alex tracks who is better, Alex can never be surprised by falling short. But the tracking IS the falling short. The comparison creates the deficit it claims to measure. The pattern persists because the comparison feels like assessment when it is actually assault.
----
-
-## MECHANISM_PROOF v07
----
-path: story_atoms/entrepreneurs/anchored/anxiety/comparison/mechanism_proof/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Alex lies awake at night and the comparison runs its full program within anxiety. Every peer. Every gap. Every dimension on which Alex falls short. The comparison has become autonomous — it needs no trigger, no input, no event. It generates its own material from memory and projection. Chest tight. Alex sees the full architecture in the dark: the comparison is not a response to external data. It is an internal program that creates its own data. It selects the peers. It chooses the dimensions. It constructs the gaps. The entire comparison is self-authored. Hands cold. The pattern persists because the comparison feels like it is about other people when it is entirely about Alex's relationship with Alex's own adequacy. Other people are just the raw material. The deficiency is pre-existing. The comparison just gives it a face.
 ---

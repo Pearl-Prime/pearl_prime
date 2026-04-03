@@ -5,8 +5,8 @@
 path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: identity
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Jake's body tightens during a false alarm. The nervous system remembers. The body activates even for false threat. It's becoming visible. Jake notices the pattern.
@@ -18,7 +18,7 @@ RECOGNITION v02
 path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/recognition/micro/v03.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: identity
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -31,8 +31,8 @@ RECOGNITION v04
 path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/recognition/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: identity
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Heather feels the weight of the somatic_healing settling into her. The false_alarm is how it manifests for her. She's learning the pattern.
@@ -44,8 +44,8 @@ MECHANISM_PROOF v01
 path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/mechanism_proof/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: social
-COST_INTENSITY: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Sofia's somatic_healing is becoming toxic. The false_alarm is creating problems at work. People notice. She's isolated by it.
@@ -57,8 +57,8 @@ MECHANISM_PROOF v03
 path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/mechanism_proof/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: identity
-COST_INTENSITY: 4
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Brianna is drowning in the somatic_healing. The false_alarm is everywhere. She can't escape it.
@@ -70,7 +70,7 @@ MECHANISM_PROOF v05
 path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: identity
+COST_TYPE: opportunity
 COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
@@ -83,8 +83,8 @@ TURNING_POINT v02
 path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Marcus realizes: the somatic_healing is manageable if he works with it. The false_alarm isn't an enemy. It's information.
@@ -96,8 +96,8 @@ TURNING_POINT v04
 path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: social
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Heather rests. The somatic_healing becomes smaller. The false_alarm quiets when she's not exhausted.
@@ -109,8 +109,8 @@ EMBODIMENT v01
 path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Sofia is present with her somatic_healing. The false_alarm still shows up. But it doesn't prevent connection.
@@ -123,81 +123,9 @@ path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/embodime
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Brianna knows the somatic_healing now. The false_alarm mechanism doesn't surprise her anymore. She's stable with it.
 EMBODIMENT v05
----
-
-## TURNING_POINT v06
----
-path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/turning_point/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 4
-IDENTITY_STAGE: experimentation
----
-Patel's shoulder twinges during a call and she braces for re-injury. Her body goes into protective mode — restricted movement, elevated heart rate, guarded posture. The call ends. The shoulder is fine. The twinge was muscle fatigue, not re-injury. The false alarm is her body's protection system firing on memory, not current data. The frame shifts: the twinge is information, not a verdict. Her body can learn to distinguish between old pain and new sensation. The distinction is the healing.
----
-
-## TURNING_POINT v07
----
-path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/turning_point/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 5
-IDENTITY_STAGE: experimentation
----
-O'Brien reaches the breaking point. The false_alarm pattern at peak somatic healing intensity has stripped everything back to bone. Chest cracking. Hands shaking. The old frame is not bending. It is shattering. O'Brien watches the pieces fall and does not try to reassemble them. The frame told a story about why this pain was the price of the work. The story was wrong. The pain is real. The price was manufactured by a system that confuses endurance with character. O'Brien stands in the wreckage of the old explanation. Something new is visible in the gap. Not a solution. A direction. The first direction that does not lead back to the same station, the same silence, the same acceptance of the unacceptable.
----
-
-## EMBODIMENT v06
----
-path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/embodiment/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-Kim hears a sound at home — a crash from the garage. Her body launches into response mode. Heart rate doubled. Hands ready. Then she pauses. Holds the doorframe. Checks: is this a real emergency or is this my training? She walks to the garage at a normal pace. The cat knocked over a paint can. She picks up the can. Her heart rate is still elevated but her response was measured. The false alarm fired. She chose not to obey it. The choosing is the identity: someone who can feel the alarm and select the response.
----
-
-## EMBODIMENT v07
----
-path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/embodiment/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-Jackson wakes up at 3 AM in his own bed, heart slamming, body ready for a call that is not coming. The false alarm is total. His nervous system is in the fire. He lies still. Puts his hands on his chest. Feels the heart rate. Does not fight it. Does not check his phone. Does not verify that the world is safe. He lies in the alarm and lets his body discharge the activation. Three minutes. Five. The heart rate drops. He did not need to check. He needed to wait. The waiting is the identity: someone who knows the alarm from the inside and trusts it to pass.
----
-
-## MECHANISM_PROOF v06
----
-path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/mechanism_proof/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-Nowak maps the false alarm's conditioning. Every tone drop trained her nervous system to expect the worst. After hundreds of calls, the worst-case pathway is the strongest neural pathway. The pathway fires before thought engages. The mechanism is not fear — it is training. Her body was trained to activate on every stimulus. The training was effective. Too effective. It eliminated the delay between stimulus and response that would allow assessment. Her chest tightens. The false alarm is not a malfunction. It is an over-trained response. The muscle is too strong.
----
-
-## MECHANISM_PROOF v07
----
-path: story_atoms/first_responders/anchored/somatic_healing/false_alarm/mechanism_proof/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Rivera sees the false alarm's deepest function: it has replaced intuition. He no longer has a gut feeling that distinguishes between real threats and false ones. Every feeling is the same feeling — alarm. The alarm replaced the nuance. The mechanism: years of genuine emergencies burned out the calibration between levels. Everything is maximum. A tone drop is maximum. A doorbell is maximum. His child's shout is maximum. Rivera's chest is pounding. The mechanism is not hypervigilance. It is the death of graduated response.
 ---

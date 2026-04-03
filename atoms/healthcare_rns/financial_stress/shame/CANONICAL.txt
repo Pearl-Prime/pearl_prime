@@ -5,7 +5,7 @@
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/recognition/micro/v01.txt
 BAND: 1
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -17,7 +17,7 @@ Nora is in the break room when her colleagues discuss conference attendance. The
 path: story_atoms/healthcare_rns/anchored/depression/grief/recognition/micro/v02.txt
 BAND: 1
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -29,7 +29,7 @@ Aisha brings lunch from home. Her colleague says: "You're so organized." Aisha a
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/recognition/micro/v03.txt
 BAND: 1
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,8 +41,8 @@ Claire is asked to contribute to a unit gift. Twenty dollars. She reaches for he
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/recognition/micro/v04.txt
 BAND: 1
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Tomás is observing the financial gap between himself and his colleagues. One colleague mentions a vacation planned. Another is buying a house. Another is paying for graduate school while working. Tomás is working a single FTE and has student loans from his BSN and rent in an urban market where housing is expensive. His salary does not move. His expenses do not decrease. He watches his colleagues discuss their futures and feels the shame of his own financial stagnation. The shame says: you are not managing this well enough. The shame does not say: the system was not designed to make this math work.
@@ -53,7 +53,7 @@ Tomás is observing the financial gap between himself and his colleagues. One co
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/recognition/micro/v05.txt
 BAND: 1
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -90,7 +90,7 @@ path: story_atoms/healthcare_rns/anchored/financial_stress/shame/mechanism_proof
 BAND: 2
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 4
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Claire is listening to her colleagues discuss student loans and the loan forgiveness programs. She has forty thousand dollars in student loans from her nursing degree. The forgiveness programs exist but require specific employment situations. She does not qualify. She listens to colleagues discuss their loan payoff timelines and realizes that the timelines assume income flexibility she does not have. The shame is beginning to attach to something larger than the immediate financial constraint. The shame is attaching to the realization that the profession does not actually value its workers enough to make the economic math work for those who do not start from financial privilege.
@@ -102,7 +102,7 @@ path: story_atoms/healthcare_rns/anchored/financial_stress/shame/mechanism_proof
 BAND: 2
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 4
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Tomás watches travel nurses make double his salary for the same work. The watching is the beginning of a calculation. The calculation is: am I supposed to stay for the mission while making half of what I could make elsewhere? The question becomes a source of shame. Tomás chose nursing for reasons that were not purely financial. But the financial gap is making the non-financial reasons feel like excuses. He is ashamed that he is even doing the calculation. The shame says: nurses should not be thinking about money. The shame does not acknowledge: nurses need to eat and pay rent, and the system is refusing to pay them adequately.
@@ -125,8 +125,8 @@ Derek is asked to work an extra shift. The money would help. The extra shift wou
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Nora's colleague mentions that she is taking a travel nurse contract for the increased pay. The colleague is not leaving nursing. The colleague is not rejecting the work. The colleague is accessing better compensation by being willing to be mobile. Nora realizes that she has been ashaming herself for the financial constraint as if it were a personal failing. Her colleague's solution suggests that the constraint is systemic. The colleague can move. Nora is rooted by family. But the fact that mobility is the primary path to better compensation means that the system has a structural failure. The reframe — from "I'm not managing money well" to "the nursing salary structure does not account for lived realities" — begins to separate the shame from the situation.
@@ -137,8 +137,8 @@ Nora's colleague mentions that she is taking a travel nurse contract for the inc
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Aisha is at a conference and hears a panel about financial stress in nursing. The panelists are speaking about the gap between the work's demands and the compensation. One panelist says: "The shame is misplaced. You are not failing to manage. The system is failing to pay." The statement creates a crack in the frame. Aisha has been ashaming herself for ten years. The shame has a source outside of her. The shame is not about her competence or her planning. The shame is about a system that asks nurses to do profound work while ensuring that basic financial stability is a constant stress.
@@ -149,7 +149,7 @@ Aisha is at a conference and hears a panel about financial stress in nursing. Th
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
+COST_TYPE: opportunity
 COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 CALLBACK_ID: claire_student_debt
@@ -163,7 +163,7 @@ Claire is at the financial counseling session offered by her hospital. The couns
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
+COST_TYPE: opportunity
 COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
@@ -175,8 +175,8 @@ Tomás is talking with his sister about the financial gap. His sister asks: "Why
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Derek sees an attendant at the hospital struggling with the same financial situation. The attendant is not in nursing. But the struggle is visible. Derek realizes that the financial constraint is not unique to him. It is endemic to hospital workers. The realization does not solve the financial problem. But the realization allows Derek to begin to stop attributing the problem to his own failure. The system has failed to pay hospital workers adequately. Derek is one person experiencing the failure of a system, not one person failing at his own financial management.
@@ -187,8 +187,8 @@ Derek sees an attendant at the hospital struggling with the same financial situa
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/embodiment/micro/v01.txt
 BAND: 4
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Nora attends the next after-shift dinner. She orders a modest meal. She does not hide that the modest meal is a choice based on budget. She says: "I'm on a budget this month." The table continues. No one makes a thing of it. No one judges. The shame that used to surround the acknowledgment of financial constraint is smaller. The acknowledgment does not change the financial situation. But the acknowledgment allows Nora to participate without the exhaustion of the performance.
@@ -199,8 +199,8 @@ Nora attends the next after-shift dinner. She orders a modest meal. She does not
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/embodiment/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Aisha stops performing financial stability. She brings her lunch. She does not offer a lifestyle explanation. She brings lunch because she budgets that way. The change is small. The effect is significant. The energy that was going into the performance is now available for the actual work. She is still managing the same financial constraints. But the constraints are no longer accompanied by the shame of hiding them.
@@ -211,8 +211,8 @@ Aisha stops performing financial stability. She brings her lunch. She does not o
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/embodiment/micro/v03.txt
 BAND: 4
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 CALLBACK_ID: claire_student_debt
 CALLBACK_PHASE: return
@@ -225,8 +225,8 @@ Claire is exploring loan forgiveness options and income-driven repayment plans. 
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/embodiment/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Tomás is interviewing at travel nursing agencies. He is not abandoning his commitment to the work. He is abandoning the idea that commitment to the work requires financial self-sacrifice. He can do the work and be paid adequately for it. The two are not mutually exclusive. The shame of considering travel nursing has lifted. In its place is the practical question: what arrangement allows me to do meaningful work while also ensuring financial stability?
@@ -237,8 +237,8 @@ Tomás is interviewing at travel nursing agencies. He is not abandoning his comm
 path: story_atoms/healthcare_rns/anchored/financial_stress/shame/embodiment/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Derek bought new scrubs. He allowed himself the seventy dollar expense. The scrubs wear well. He wears them without the shame that used to attach to the acknowledgment of financial constraint. He is still managing a tight budget. But the budget is being managed as a practical reality, not as a moral failing. He works hard. His labor deserves compensation adequate enough to include basic professional clothing. The recognition allows him to wear the scrubs without carrying the shame.
@@ -249,81 +249,9 @@ Derek bought new scrubs. He allowed himself the seventy dollar expense. The scru
 path: story_atoms/healthcare_rns/anchored/financial_stress_shame/recognition/band_fill/v06.txt
 BAND: 5
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
-COST_INTENSITY: 4
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Crisis. Breakthrough. The moment of maximum intensity.
----
-
-## TURNING_POINT v06
----
-path: story_atoms/healthcare_rns/anchored/financial_stress/shame/turning_point/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-Dante picks up the extra shift not because of the patients but because of the rent. The shame contraction collapses identity into a single failure point. Dante's vision narrows. The pattern demands attention now—hot, insistent, refusing to wait. Dante watches it demand. This time, instead of obeying, Dante tracks where the demand originates. It starts in the hands. It travels to the thoughts. The thoughts build a story. The story says: act now or lose everything. Dante examines the story. The story has no evidence. The vision has real sensation. The story has fabricated urgency. Dante holds the sensation without following the story. The sensation stays. The story loses its audience. The frame shifts: the pattern is loud, but loudness is not truth.
----
-
-## TURNING_POINT v07
----
-path: story_atoms/healthcare_rns/anchored/financial_stress/shame/turning_point/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 3
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Keiko picks up the extra shift and the body protests before the schedule confirms. The shame contraction hits maximum volume. Keiko's shoulders bunch. Keiko's stomach drops. Everything narrows to this moment—collapse or breakthrough, no middle ground. Keiko stands inside the peak. The pattern says: this is who you are. Keiko hears it. For the first time, Keiko hears it as a sentence, not a fact. A sentence can be wrong. Keiko's body shakes with the intensity. The shaking is real. The sentence is interpretation. Keiko separates the shaking from the sentence. The body still trembles. The identity claim dissolves. The contraction loosens when the moment separates from the person. The frame cracks open.
----
-
-## EMBODIMENT v06
----
-path: story_atoms/healthcare_rns/anchored/financial_stress/shame/embodiment/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: self_claim
----
-Nora sits with the financial planner and looks at the numbers. The numbers are hard. The looking is harder. Nora looks. The shame contraction activates. Nora's stomach drops. The heat rises. Nora recognizes the heat. Does not turn away from it. Nora stands inside the shame without shrinking, body upright, voice even. The old pattern fires and Nora acts from the new understanding anyway. Nora's neck tenses, but the hands keep moving. The identity is not the pattern. The identity is what Nora does while the pattern runs. Nora does the next right thing with the pattern screaming in the background. The screaming fades to a hum. The hum fades to a fact: the pattern exists. Nora also exists. They are not the same thing.
----
-
-## EMBODIMENT v07
----
-path: story_atoms/healthcare_rns/anchored/financial_stress/shame/embodiment/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-Tomás walks into the financial aid office at the hospital. Asks for help. The asking is the breakthrough. Maximum intensity. Tomás's hands clench. Tomás's shoulders bunch. The shame contraction roars at peak volume. Every nerve says yield. Tomás does not yield. Tomás stands at the center of the storm and acts from the new identity—not against the pattern, but through it. The pattern is noise. The action is signal. Tomás's body carries both. The crisis does not define Tomás. Tomás's response defines Tomás. Tomás moves forward with the full weight of the moment pressing down. The weight is real. The collapse is not. Tomás walks through the peak and comes out the other side still standing. Still choosing.
----
-
-## MECHANISM_PROOF v06
----
-path: story_atoms/healthcare_rns/anchored/financial_stress/shame/mechanism_proof/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 2
-COST_TYPE: opportunity
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-Aisha charts the paycheck-to-crisis cycle: deposit arrives, bills consume, anxiety returns, next deposit feels distant. Aisha's neck tenses. The heat is on. The shame contraction collapses identity into a single failure point. Aisha tracks the sequence this time: trigger, body response, thought cascade, behavioral pull. The trigger is external. The body response is automatic. The thought cascade is a moment becoming a permanent verdict on selfhood. The behavioral pull is the part that costs. Aisha sees the cost clearly now. Aisha's vision narrows as the pattern runs its circuit. The pattern persists because the shame prevents examination because examination requires looking at the thing that shames. The persistence is not mysterious. The persistence is mechanical. Seeing the machine does not stop the machine. Seeing the machine reveals the machine is not Aisha.
----
-
-## MECHANISM_PROOF v07
----
-path: story_atoms/healthcare_rns/anchored/financial_stress/shame/mechanism_proof/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Claire discovers the health insurance premium increase on the same day as the car repair estimate. Peak intensity. Claire's shoulders bunch. Claire's stomach drops. The shame contraction runs at full power. Claire watches it run. Even at maximum volume, the mechanism follows the same sequence: event recall, identity fusion, contraction, hiding behavior, isolation, deeper fusion. The sequence is identical at band five as at band two. Only the amplitude changes. The pattern does not become smarter at higher intensity. It becomes louder. Claire's body absorbs the volume. Claire's mind maps the circuit. The circuit has no exit built in—it loops. The loop persists because it feeds on its own output. Claire sees the feed. Seeing the feed does not stop the loop. Seeing the feed reveals the loop has a structure. Structure can be interrupted.
 ---

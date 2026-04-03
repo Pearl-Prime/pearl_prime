@@ -5,7 +5,7 @@
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -17,7 +17,7 @@ David's engineer makes a mistake. The mistake creates a small bug. The small bug
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -29,8 +29,8 @@ Sarah's team has lower engagement scores this quarter. The engagement scores tri
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Kevin gets feedback that one of his direct reports is underperforming. The feedback starts a cascade. Underperformance means Kevin didn't set clear expectations. Unclear expectations means Kevin isn't providing good leadership. Bad leadership means his whole team is probably struggling. Team struggling means his org is failing. His org failing means Kevin is failing. By the time he finishes the spiral, he's convinced his entire operation is broken and it's his fault. His stomach feels hollow. The cascade happened in the space between hearing the feedback and taking a breath.
@@ -41,7 +41,7 @@ Kevin gets feedback that one of his direct reports is underperforming. The feedb
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -53,8 +53,8 @@ Anthony misses one forecast line item. The small miss triggers a spiral. If he m
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Tanya delivers a campaign that underperforms expectations. The underperformance triggers a spiral. Underperformance means the strategy was wrong. Wrong strategy means Tanya's strategic thinking is flawed. Flawed thinking means she shouldn't be VP. Shouldn't be VP means the organization knows and is probably already planning her replacement. By the end of the spiral, she's convinced she's being displaced and she hasn't even finished analyzing why the campaign underperformed. Her shoulders are tight. The spiral has a narrative momentum all its own.
@@ -77,7 +77,7 @@ David doesn't stop the spiral. He feeds it. He starts reviewing his other hires.
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/mechanism_proof/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
@@ -125,8 +125,8 @@ Tanya doesn't analyze the campaign. She spirals around the campaign. The underpe
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 David notices he's spiraling and interrupts it. "This is spiral thinking," he says to himself. "One bug is a bug. It's not evidence about my hiring judgment." He forces himself to look at the actual facts. His team has delivered solid work for three years. One bug in the context of three years of solid work looks like what it is: a bug. His chest unclenches slightly. The spiral is interrupted by naming it. He addresses the bug as a technical problem, not as a referendum on his competence.
@@ -137,8 +137,8 @@ David notices he's spiraling and interrupts it. "This is spiral thinking," he sa
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Sarah stops the spiral by getting data. She looks at the engagement scores in context. The two-point drop is within normal variance. Some of her teams went up. Some went down. Nothing suggests systemic failure. The spiral stops when Sarah interrupts it with facts. She talks to her team about the scores. Her team says they feel okay. The spiral dissolves because it was built on assumption, not reality.
@@ -149,8 +149,8 @@ Sarah stops the spiral by getting data. She looks at the engagement scores in co
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Kevin talks to the underperformer. The person is dealing with a personal issue. It's temporary. They're not disengaged. They're just managing something hard. The spiral stops when Kevin gets information. The underperformance isn't evidence of systemic failure. It's a person managing a situation. Kevin can actually help instead of spiraling.
@@ -161,8 +161,8 @@ Kevin talks to the underperformer. The person is dealing with a personal issue. 
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Anthony stops the spiral by examining the forecast Miss. The miss is a rounding difference in the sales forecast. It's not a systemic problem. His methodology is sound. His thinking is solid. The two-point variance doesn't change the strategy. The spiral stops when Anthony interrupts it by actually looking at the data instead of extrapolating from fear.
@@ -173,8 +173,8 @@ Anthony stops the spiral by examining the forecast Miss. The miss is a rounding 
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Tanya analyzes the campaign. The underperformance has clear causes: the timing was off, the audience targeting shifted, the competitive landscape changed. None of it is about her flawed strategic thinking. The spiral stops when Tanya separates the campaign analysis from the identity analysis. She's a strategic thinker who made a campaign choice that didn't land. That's just managing. It's not evidence of incompetence.
@@ -185,8 +185,8 @@ Tanya analyzes the campaign. The underperformance has clear causes: the timing w
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 1
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 David now notices when spiraling starts. He catches it early. He interrupts it with facts. His nervous system still activates but he has a practice that interrupts the spiral before it consumes his sense of competence. His chest stays more open because he's not feeding the catastrophe narrative.
@@ -197,8 +197,8 @@ David now notices when spiraling starts. He catches it early. He interrupts it w
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 1
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Sarah gets data before she spirals. The practice of checking facts first stops the spiral before it starts. Her stomach is calmer because she's not in the habit of turning small numbers into identity threats.
@@ -209,8 +209,8 @@ Sarah gets data before she spirals. The practice of checking facts first stops t
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 1
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Kevin talks to people instead of spiraling about them. The conversations interrupt the spiral before it reaches its destination. He manages actual situations instead of catastrophe narratives.
@@ -221,8 +221,8 @@ Kevin talks to people instead of spiraling about them. The conversations interru
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/embodiment/micro/v04.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 1
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Anthony examines the data when he feels the spiral starting. The practice of looking at what's actually happening stops the spiral dead. His nervous system is less activated because the spiral is interrupted early and often.
@@ -233,8 +233,8 @@ Anthony examines the data when he feels the spiral starting. The practice of loo
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/embodiment/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: internal
-COST_INTENSITY: 1
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Tanya separates campaign analytics from identity analytics. A campaign miss is data. It's not about her. She analyzes the data and moves forward. The spiral stops because she's refusing to turn external problems into internal identity threats.
@@ -245,8 +245,8 @@ Tanya separates campaign analytics from identity analytics. A campaign miss is d
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/band_fill/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
-COST_INTENSITY: 4
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Peak tension. The turning point approaches. Everything shifts.
@@ -257,8 +257,8 @@ Peak tension. The turning point approaches. Everything shifts.
 path: story_atoms/corporate_managers/anchored/anxiety_spiral/recognition/band_fill/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 1
-COST_TYPE: internal
-COST_INTENSITY: 4
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
 Crisis. Breakthrough. The moment of maximum intensity.
@@ -406,76 +406,4 @@ COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Tanya takes a sabbatical. Three months. She goes to a cabin in Vermont. No Slack. No email. No meetings. The first week is withdrawal. The spiral runs continuously, generating scenarios about what is falling apart without her. The second week, the scenarios lose specificity. They become vague. The spiral is running but it has no fresh material. By the third week, something happens that Tanya has not experienced since childhood. Silence. Not the absence of sound. The absence of the spiral. For twenty minutes on a Tuesday afternoon, sitting on the porch watching rain fall on a lake, Tanya's mind is quiet. The quiet is terrifying. The quiet is the most beautiful thing she has ever experienced. She cries. Not from sadness. From recognition. This is what her mind sounds like when it is not running catastrophe simulations. This is who she is underneath the anxiety. This person is calm. This person is curious. This person watches rain without calculating what the rain means for the quarterly forecast. Tanya has met herself for the first time. And the self she meets is someone the spiral has been hiding from her for fifteen years. The self does not need to anticipate disaster. The self is sitting on a porch in Vermont, watching rain, breathing normally, jaw unclenched, shoulders dropped, hands still. The self is whole. The spiral told her she needed it to survive. The porch says otherwise.
----
-
-## TURNING_POINT v06
----
-path: story_atoms/corporate_managers/anchored/anxiety/spiral/turning_point/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 4
-IDENTITY_STAGE: experimentation
----
-Sarah is three loops deep. The board meeting went fine but what if they were being polite and what if the polite masks real concern and what if the real concern leads to restructuring and what if restructuring means her role is eliminated. Each rotation adds velocity. Her chest is a drum. Her jaw is welded shut. Then she catches herself on the fourth loop — she notices the AND THEN. Every spiral has an "and then" that bridges from reality to catastrophe. She pulls the bridge out. The board meeting went fine. Full stop. No "and then." Her body resists — the spiral insists on continuation, demands the next rotation. But the frame has cracked. She saw the mechanism building the next loop in real time. Her hands still tremble. The spiral continues for a few more minutes on residual momentum, but the engine is exposed. She saw the "and then" as invention, not prediction.
----
-
-## TURNING_POINT v07
----
-path: story_atoms/corporate_managers/anchored/anxiety/spiral/turning_point/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 5
-IDENTITY_STAGE: experimentation
----
-Sarah spirals for eleven hours straight. From 9 PM to 8 AM. One thought to the next to the next, each worse, each more vivid, each more certain. By dawn she has constructed an entire future in which she is unemployed, divorced, and living in her sister's spare room. Her body is destroyed — chest crushed, eyes swollen, hands like ice. She stands in the shower and the water hits her face and something breaks. Not gently. The spiral simply cannot sustain itself any longer. Her nervous system is spent. The catastrophe did not arrive. Eleven hours of prediction and nothing happened. She stands in the steam and feels the gap between the spiral's reality and actual reality. They are entirely separate worlds. The old frame — that the spiral is preparation — is no longer survivable. Eleven hours of preparation for nothing. Her body made a decision her mind could not. It stopped. The frame overturned because the body refused to carry it one more minute.
----
-
-## EMBODIMENT v06
----
-path: story_atoms/corporate_managers/anchored/anxiety/spiral/embodiment/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 4
-IDENTITY_STAGE: self_claim
----
-Sarah feels the spiral start. The quarterly report has one ambiguous data point. The old pattern reaches for it — what if this means, and then what if that leads to, and then — she notices the reach. She does not follow it. She sits with the ambiguity. Her chest tightens. Her hands go cool. She lets the tightness exist without building a story around it. The data point is ambiguous. That is all it is. She writes a note to ask for clarification tomorrow. Her jaw stays loose. She is not a person who spirals. She is a person who sometimes feels the pull of the spiral and chooses to sit still. The distinction lives in her body now. She goes home and cooks dinner and the data point does not follow her. She left it at the office. Her hands are warm on the cutting board.
----
-
-## EMBODIMENT v07
----
-path: story_atoms/corporate_managers/anchored/anxiety/spiral/embodiment/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
-IDENTITY_STAGE: self_claim
----
-The real crisis hits. The company loses its largest client. Sarah's role is genuinely at risk. The spiral revs its engine — familiar, powerful, ready to run. Sarah feels it in her chest, in her cold hands, in her clenching jaw. She breathes. She does not predict. She calls her team. She makes a plan for the next forty-eight hours. Not the next six months. Not the catastrophic future. The next forty-eight hours. Her voice is steady. Inside, her body is screaming. She lets it scream while she works. She does not pretend the fear is gone. She acts alongside the fear instead of inside the spiral. Forty-eight hours later, the situation is managed. Not resolved. Managed. Sarah sits in her car and the spiral tries one more time — what if this is the beginning of — and she turns the key and drives home. The spiral is talking. She is driving. She chose which one to follow. Her hands are on the wheel. Warm.
----
-
-## MECHANISM_PROOF v06
----
-path: story_atoms/corporate_managers/anchored/anxiety/spiral/mechanism_proof/micro/v06.txt
-BAND: 4
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 4
-IDENTITY_STAGE: destabilization
----
-Sarah maps the spiral on paper. She writes down the first thought and draws an arrow to the next and the next. Seven arrows. Each arrow adds intensity. Each arrow adds certainty. Each arrow moves further from the original thought. She stares at the map. The original thought was: "My boss seemed distracted in our check-in." The seventh thought is: "I am going to be fired and I will never find another job at this level." Her hands shake holding the paper. The pattern is visible. Every spiral follows the same architecture — start with observation, add interpretation, escalate to catastrophe, repeat with increasing conviction. The spiral does not seek resolution. It seeks the next loop. She sees why it persists: each rotation feels like productive worry, like she is solving something. But she is building something. Building a prison from her own thoughts. Her chest aches with the recognition.
----
-
-## MECHANISM_PROOF v07
----
-path: story_atoms/corporate_managers/anchored/anxiety/spiral/mechanism_proof/micro/v07.txt
-BAND: 5
-MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 5
-IDENTITY_STAGE: destabilization
----
-Sarah realizes the spiral has colonized her sleep. She dreams in spirals now. The same architecture — observation, interpretation, escalation — running while she is unconscious. She wakes exhausted, chest tight, as if she ran all night. Because she did. The spiral does not stop when she stops. It runs autonomously, self-fueled, independent of her waking attention. She sits on the edge of her bed in the dark and understands with full-body clarity why the pattern persists. The spiral promises that if she thinks hard enough, she will find safety. But the thinking IS the danger. Each loop generates the next threat. The spiral feeds on its own output. There is no thinking her way out of a thinking problem. Her chest is hollow. Her jaw aches. The recognition sits in her bones. She has been running from a fire she is carrying.
 ---
