@@ -198,11 +198,11 @@
       "warnings": [],
       "metrics": {
         "paragraphs": 16,
-        "sentences": 56,
-        "transition_hits": 4,
+        "sentences": 55,
+        "transition_hits": 3,
         "thesis_hits": 1,
-        "avg_adjacent_overlap": 0.084,
-        "sentence_len_std": 5.52,
+        "avg_adjacent_overlap": 0.086,
+        "sentence_len_std": 5.95,
         "aha_hits": 3,
         "scaffold_hits": {},
         "takeaway_checked": true,
@@ -382,11 +382,11 @@
       "warnings": [],
       "metrics": {
         "paragraphs": 13,
-        "sentences": 42,
-        "transition_hits": 3,
+        "sentences": 43,
+        "transition_hits": 4,
         "thesis_hits": 1,
-        "avg_adjacent_overlap": 0.095,
-        "sentence_len_std": 4.92,
+        "avg_adjacent_overlap": 0.088,
+        "sentence_len_std": 4.44,
         "aha_hits": 1,
         "scaffold_hits": {},
         "takeaway_checked": true,
@@ -937,11 +937,11 @@
       "warnings": [],
       "metrics": {
         "paragraphs": 16,
-        "sentences": 59,
+        "sentences": 58,
         "transition_hits": 2,
         "thesis_hits": 1,
-        "avg_adjacent_overlap": 0.082,
-        "sentence_len_std": 4.54,
+        "avg_adjacent_overlap": 0.083,
+        "sentence_len_std": 4.07,
         "aha_hits": 3,
         "scaffold_hits": {},
         "takeaway_checked": true,
@@ -992,13 +992,14 @@
           {
             "dimension": "listen_experience",
             "status": "WARN",
-            "score": 0.397,
+            "score": 0.357,
             "issues": [
               "low sentence rhythm variance for listening",
               "paragraph breaks too sparse or too choppy for breath pacing",
               "phrase repetition within short listening distance",
               "monotone_pacing: consecutive similar-length sentences",
-              "insufficient_paragraph_breaks"
+              "insufficient_paragraph_breaks",
+              "tts_problematic_patterns: 1 found"
             ],
             "remediation": [],
             "dimension_gate_phase": 3,
@@ -1120,11 +1121,11 @@
       "warnings": [],
       "metrics": {
         "paragraphs": 16,
-        "sentences": 59,
+        "sentences": 62,
         "transition_hits": 4,
         "thesis_hits": 1,
-        "avg_adjacent_overlap": 0.079,
-        "sentence_len_std": 5.56,
+        "avg_adjacent_overlap": 0.077,
+        "sentence_len_std": 5.35,
         "aha_hits": 1,
         "scaffold_hits": {},
         "takeaway_checked": true,
@@ -1211,11 +1212,11 @@
       "warnings": [],
       "metrics": {
         "paragraphs": 16,
-        "sentences": 62,
+        "sentences": 64,
         "transition_hits": 3,
         "thesis_hits": 1,
-        "avg_adjacent_overlap": 0.107,
-        "sentence_len_std": 4.79,
+        "avg_adjacent_overlap": 0.098,
+        "sentence_len_std": 5.15,
         "aha_hits": 2,
         "scaffold_hits": {},
         "takeaway_checked": true,
@@ -1266,14 +1267,13 @@
           {
             "dimension": "listen_experience",
             "status": "WARN",
-            "score": 0.357,
+            "score": 0.397,
             "issues": [
               "low sentence rhythm variance for listening",
               "paragraph breaks too sparse or too choppy for breath pacing",
               "phrase repetition within short listening distance",
               "monotone_pacing: consecutive similar-length sentences",
-              "insufficient_paragraph_breaks",
-              "tts_problematic_patterns: 1 found"
+              "insufficient_paragraph_breaks"
             ],
             "remediation": [],
             "dimension_gate_phase": 3,
@@ -1389,17 +1389,19 @@
     {
       "chapter": 16,
       "status": "PASS",
-      "score": 100,
+      "score": 95,
       "errors": [],
-      "warnings": [],
+      "warnings": [
+        "LOW_RHYTHM_VARIATION"
+      ],
       "metrics": {
         "paragraphs": 16,
-        "sentences": 57,
+        "sentences": 69,
         "transition_hits": 3,
         "thesis_hits": 1,
-        "avg_adjacent_overlap": 0.062,
-        "sentence_len_std": 4.04,
-        "aha_hits": 3,
+        "avg_adjacent_overlap": 0.053,
+        "sentence_len_std": 3.48,
+        "aha_hits": 4,
         "scaffold_hits": {},
         "takeaway_checked": true,
         "thread_checked": true,
@@ -1449,7 +1451,7 @@
           {
             "dimension": "listen_experience",
             "status": "PASS",
-            "score": 0.531,
+            "score": 0.536,
             "issues": [
               "low sentence rhythm variance for listening",
               "paragraph breaks too sparse or too choppy for breath pacing",
@@ -1479,19 +1481,20 @@
     {
       "chapter": 17,
       "status": "FAIL",
-      "score": 85,
+      "score": 70,
       "errors": [
-        "WEAK_TRANSITIONS"
+        "WEAK_TRANSITIONS",
+        "NO_ACTIONABLE_STEP"
       ],
       "warnings": [],
       "metrics": {
         "paragraphs": 14,
-        "sentences": 50,
-        "transition_hits": 0,
+        "sentences": 56,
+        "transition_hits": 1,
         "thesis_hits": 1,
-        "avg_adjacent_overlap": 0.072,
-        "sentence_len_std": 5.02,
-        "aha_hits": 2,
+        "avg_adjacent_overlap": 0.071,
+        "sentence_len_std": 4.87,
+        "aha_hits": 3,
         "scaffold_hits": {},
         "takeaway_checked": true,
         "thread_checked": true,
@@ -1541,7 +1544,7 @@
           {
             "dimension": "listen_experience",
             "status": "WARN",
-            "score": 0.443,
+            "score": 0.451,
             "issues": [
               "low sentence rhythm variance for listening",
               "paragraph breaks too sparse or too choppy for breath pacing",
