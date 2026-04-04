@@ -946,6 +946,16 @@ def main() -> int:
             persona=canonical_persona,
             topic=canonical_topic,
         )
+        # Teacher Mode: merge teacher atom metadata into atom_meta so gates
+        # can see mechanism_depth, identity_stage, cost from teacher banks.
+        if teacher_mode and teacher_id:
+            from phoenix_v4.planning.pool_index import _load_teacher_pool
+            teacher_root = REPO_ROOT / "SOURCE_OF_TRUTH" / "teacher_banks" / teacher_id / "approved_atoms"
+            if teacher_root.exists():
+                teacher_entries = _load_teacher_pool(teacher_root, "STORY")
+                for e in teacher_entries:
+                    if e.metadata:
+                        atom_meta[e.atom_id] = dict(e.metadata)
         # Clean orphaned callbacks: strip setup-only callback metadata from atoms
         # that have no matching return atom in the plan's atom_ids.
         plan_aids = set(compiled.atom_ids)

@@ -161,6 +161,20 @@ def _load_teacher_pool(teacher_atoms_root: Path, slot_type: str) -> list[AtomEnt
         fam = data.get("semantic_family")
         if fam is not None:
             meta["semantic_family"] = str(fam)
+        # Propagate narrative metadata for teacher STORY atoms (role, depth, stage, cost)
+        if slot_type == "STORY":
+            for nk in ("mechanism_depth", "cost_type", "cost_intensity", "identity_stage"):
+                if nk in data and data[nk] is not None:
+                    meta[nk] = data[nk]
+            # Infer role from mechanism_depth for V4 Book Template role-based selection
+            depth = meta.get("mechanism_depth", 1)
+            try:
+                depth = int(depth)
+            except (TypeError, ValueError):
+                depth = 1
+            _DEPTH_TO_ROLE = {1: "RECOGNITION", 2: "MECHANISM_PROOF", 3: "TURNING_POINT", 4: "EMBODIMENT"}
+            meta["role"] = _DEPTH_TO_ROLE.get(depth, "RECOGNITION")
+
         src = data.get("source") or ""
         atom_source = "teacher_synthetic" if src and "synthetic" in str(src).lower() else "teacher_native"
         entries.append(AtomEntry(atom_id=atom_id, metadata=meta if meta else None, atom_source=atom_source))

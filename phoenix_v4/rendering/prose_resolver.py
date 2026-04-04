@@ -261,7 +261,8 @@ def resolve_prose_for_plan(
     if ctx.teacher_mode and ctx.teacher_id and teacher_banks_root.exists():
         teacher_root = teacher_banks_root / ctx.teacher_id / "approved_atoms"
         if teacher_root.exists():
-            for slot_type in ("STORY", "REFLECTION", "EXERCISE", "HOOK", "SCENE", "INTEGRATION", "TEACHING"):
+            for slot_type in ("STORY", "REFLECTION", "EXERCISE", "HOOK", "SCENE", "INTEGRATION",
+                              "PIVOT", "TAKEAWAY", "THREAD", "PERMISSION", "COMPRESSION", "TEACHING"):
                 prose_map.update(_load_teacher_prose(teacher_root, slot_type))
 
     # Non-STORY canonical (REFLECTION, EXERCISE, HOOK, SCENE, INTEGRATION, PIVOT, TAKEAWAY, THREAD, PERMISSION) from atoms/<persona>/<topic>/<slot_type>/CANONICAL.txt
