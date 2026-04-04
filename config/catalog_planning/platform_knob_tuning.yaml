@@ -1,0 +1,152 @@
+# Platform-specific knob tuning for catalog planning.
+# Authority: docs/PLATFORM_ALGORITHM_RESEARCH_2026.md
+# Consumed by: variation_selector, format_selector, wave_optimizer
+#
+# Each platform profile specifies preferred knob values that maximize
+# algorithmic discoverability and listener retention on that platform.
+
+schema_version: "1.0"
+last_updated: "2026-04-04"
+
+platform_profiles:
+  # ── Western Audiobook Platforms ──────────────────────────────────────
+  audible:
+    preferred_runtimes: [standard_book, extended_book_2h]
+    preferred_formats: [F006, F003, F004, F009]
+    preferred_structures: [promise_engine, gladwell_spiral, brene_brown, van_der_kolk]
+    preferred_journey_shapes: [recognition_to_agency, linear_rise]
+    max_runtime_hours: 6  # beyond 10h kills completion
+    ideal_runtime_hours: 5  # self-help sweet spot
+    chapter_duration_min: 15
+    chapter_duration_max: 30
+    completion_target: 0.70
+    opening_investment: high  # first 10-20 min is make-or-break
+    release_window: Q1  # January peak
+    anti_spam_strictness: moderate
+    notes: "50% market share. Sales velocity + completion rate drive ranking."
+
+  spotify:
+    preferred_runtimes: [short_book_30, standard_book, micro_book_20]
+    preferred_formats: [F003, F006, F015]
+    preferred_structures: [atomic, myth_killer, permission_slip, case_file]
+    preferred_journey_shapes: [crisis_landing, scaffold_deepen]
+    max_runtime_hours: 6
+    ideal_runtime_hours: 3  # shorter, casual listeners
+    chapter_duration_min: 10
+    chapter_duration_max: 20
+    completion_target: 0.70
+    opening_investment: high
+    release_window: Q1
+    anti_spam_strictness: tightening  # new spam filter 2025
+    notes: "Graph neural net cross-domain from music/podcast. AudioBoost for cold-start."
+
+  apple_books:
+    preferred_runtimes: [standard_book, extended_book_2h]
+    preferred_formats: [F006, F004, F009]
+    preferred_structures: [promise_engine, gladwell_spiral, zoom_lens]
+    preferred_journey_shapes: [recognition_to_agency, wave_three_peaks]
+    max_runtime_hours: 8
+    ideal_runtime_hours: 5
+    completion_target: 0.65
+    opening_investment: high
+    anti_spam_strictness: moderate
+    notes: "Editorial curation + algorithm. Metadata accuracy critical."
+
+  google_play:
+    preferred_runtimes: [standard_book, short_book_30]
+    preferred_formats: [F006, F003]
+    preferred_structures: [promise_engine, atomic, gladwell_spiral]
+    max_runtime_hours: 6
+    anti_spam_strictness: strictest  # rejects identical ISBNs
+    notes: "Popularity + downloads. Strictest anti-duplicate among Western platforms."
+
+  kobo:
+    preferred_runtimes: [standard_book, extended_book_2h]
+    preferred_formats: [F006, F004]
+    preferred_structures: [promise_engine, brene_brown, van_der_kolk]
+    completion_target: 0.65
+    notes: "Kobo Plus subscription. Editorial + engagement signals."
+
+  findaway:
+    preferred_runtimes: [standard_book, short_book_30]
+    preferred_formats: [F006, F003, F015]
+    notes: "Distribution aggregator. Serves Apple, Kobo, Spotify, libraries."
+
+  # ── Chinese Platforms ────────────────────────────────────────────────
+  ximalaya:
+    preferred_runtimes: [micro_book_15, micro_book_20, short_book_30]
+    preferred_formats: [F015, F003, F005]
+    preferred_structures: [case_file, zoom_lens, atomic]
+    preferred_journey_shapes: [crisis_landing, scaffold_deepen]
+    max_runtime_hours: 1  # episode format, not full audiobook
+    ideal_runtime_minutes: 20  # 10-30 min episodes
+    chapter_duration_min: 5
+    chapter_duration_max: 15
+    completion_target: 0.80  # shorter = higher completion
+    content_moderation: strict  # government compliance required
+    pricing_model: freemium
+    notes: "303M MAU, 70%+ CN audiobook market. Episode format. Tencent acquired 2025."
+
+  wechat_read:
+    preferred_runtimes: [standard_book, short_book_30]
+    preferred_formats: [F006, F003]
+    preferred_structures: [gladwell_spiral, promise_engine]
+    notes: "Social reading. WeChat friends' activity influences discovery."
+
+  netease_cloud:
+    preferred_runtimes: [standard_book]
+    preferred_formats: [F006]
+    notes: "Premium tier (Vinyl Membership). Quality-focused."
+
+  dedao:
+    preferred_runtimes: [short_book_30, standard_book]
+    preferred_formats: [F003, F006]
+    notes: "Premium knowledge platform. Quality-gated, expert content."
+
+  # ── Korean Platforms ─────────────────────────────────────────────────
+  naver_audiobook:
+    preferred_runtimes: [short_book_30, micro_book_20]
+    preferred_formats: [F003, F015]
+    preferred_structures: [case_file, myth_killer, atomic]
+    preferred_journey_shapes: [crisis_landing]
+    ideal_runtime_minutes: 90  # "90-minute compact" trend
+    notes: "Naver Search SEO critical. 90-min compact format trending."
+
+  kakao_page:
+    preferred_runtimes: [micro_book_15, micro_book_20]
+    preferred_formats: [F015, F001]
+    preferred_structures: [the_letter, contrast_engine, case_file]
+    serialization_preferred: true
+    notes: "'Wait for Free' model. Serialized > complete books."
+
+  # ── Japanese Platforms ───────────────────────────────────────────────
+  audible_jp:
+    preferred_runtimes: [standard_book, extended_book_2h]
+    preferred_formats: [F006, F004, F009]
+    preferred_structures: [van_der_kolk, ancestor, zoom_lens, gladwell_spiral]
+    preferred_journey_shapes: [scaffold_deepen, recognition_to_agency]
+    voice_quality: premium  # seiyuu culture demands top-tier narration
+    notes: "Japan 2nd-largest audiobook market. Fiction 80%. Voice actor quality paramount."
+
+  audiobook_jp:
+    preferred_runtimes: [standard_book]
+    preferred_formats: [F006, F007]
+    preferred_structures: [van_der_kolk, ancestor, zoom_lens]
+    voice_quality: premium
+    notes: "Similar to Audible JP. Literary quality valued."
+
+# ── Locale → Platform Mapping ──────────────────────────────────────────
+locale_platform_defaults:
+  en-US: [audible, spotify, apple_books, google_play, kobo, findaway]
+  zh-TW: [google_play, apple_books, kobo, spotify, findaway]
+  zh-HK: [google_play, apple_books, kobo, spotify, findaway]
+  zh-CN: [ximalaya, wechat_read, netease_cloud, dedao, apple_books]
+  zh-SG: [google_play, apple_books, kobo, spotify, findaway]
+  ja-JP: [audible_jp, audiobook_jp, google_play, apple_books, kobo, spotify]
+  ko-KR: [naver_audiobook, kakao_page, google_play, apple_books, kobo, spotify]
+  es-US: [audible, spotify, apple_books, google_play, kobo]
+  es-ES: [audible, spotify, apple_books, google_play, kobo]
+  fr-FR: [audible, spotify, apple_books, google_play, kobo]
+  de-DE: [audible, spotify, apple_books, google_play, kobo]
+  it-IT: [audible, spotify, apple_books, google_play, kobo]
+  hu-HU: [google_play, apple_books, kobo, spotify]
