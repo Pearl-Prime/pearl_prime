@@ -210,7 +210,10 @@ class PoolIndex:
         EXERCISE fallback: when teacher_exercise_fallback and 0 < len(teacher_pool) < required_count, merge with practice library (teacher first); sort by (source_priority, stable_hash(atom_id)).
         Otherwise: STORY from engines; others from atoms/<persona>/<topic>/<slot_type>/CANONICAL.txt.
         """
-        if self.teacher_atoms_root is not None:
+        # HOOK and SCENE use persona atoms even in teacher mode — they carry
+        # location template variables for grounding. Location is WHERE, not WHO.
+        _TEACHER_SKIP_SLOTS = frozenset({"HOOK", "SCENE"})
+        if self.teacher_atoms_root is not None and slot_type not in _TEACHER_SKIP_SLOTS:
             teacher_pool = _load_teacher_pool(self.teacher_atoms_root, slot_type)
             if slot_type == "EXERCISE" and teacher_exercise_fallback and required_count is not None and 0 < len(teacher_pool) < required_count:
                 from phoenix_v4.planning.practice_selector import get_backstop_pool

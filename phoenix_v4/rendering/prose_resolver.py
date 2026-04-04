@@ -257,11 +257,15 @@ def resolve_prose_for_plan(
         path = atoms_root / ctx.persona_id / ctx.topic_id / engine / "CANONICAL.txt"
         prose_map.update(_parse_canonical_with_prose(path, ctx.persona_id, ctx.topic_id, engine))
 
-    # Teacher Mode: override with teacher_banks prose when teacher_mode
+    # Teacher Mode: override teaching/narrative slots with teacher_banks prose.
+    # HOOK and SCENE stay from the persona atom pool — they carry location
+    # template variables ({street_name}, {transit_line}, etc.) that the
+    # renderer needs for location grounding. Location is WHERE the reader is,
+    # not WHO is teaching.
     if ctx.teacher_mode and ctx.teacher_id and teacher_banks_root.exists():
         teacher_root = teacher_banks_root / ctx.teacher_id / "approved_atoms"
         if teacher_root.exists():
-            for slot_type in ("STORY", "REFLECTION", "EXERCISE", "HOOK", "SCENE", "INTEGRATION",
+            for slot_type in ("STORY", "REFLECTION", "EXERCISE", "INTEGRATION",
                               "PIVOT", "TAKEAWAY", "THREAD", "PERMISSION", "COMPRESSION", "TEACHING"):
                 prose_map.update(_load_teacher_prose(teacher_root, slot_type))
 
