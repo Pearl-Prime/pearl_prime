@@ -12,13 +12,13 @@ All credentials are documented in `docs/INTEGRATION_CREDENTIALS_REGISTRY.md`. Re
 - **RunComfy:** `https://www.runcomfy.com/profile` → API Tokens
 - **ElevenLabs:** Key is in `docs/11.txt` (gitignored) or Keychain
 
-**Load all keys locally (updated 2026-04-03, 30 keys):**
+**Load all tracked integration env vars from macOS Keychain** (single source of truth: `scripts/ci/integration_env_registry.py`, same list as `scripts/ci/check_integration_env.py`):
+
 ```bash
-for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY ANTHROPIC_API_KEY DEEPSEEK_API_KEY CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN CLOUDFLARE_AI_API_TOKEN WORDPRESS_SITE_URL WORDPRESS_USERNAME WORDPRESS_APP_PASSWORD YT_CLIENT_ID_SP YT_CLIENT_SECRET_SP YT_CLIENT_ID_CC YT_CLIENT_SECRET_CC TIKTOK_CLIENT_KEY_SP TIKTOK_CLIENT_SECRET_SP TIKTOK_CLIENT_KEY_CC TIKTOK_CLIENT_SECRET_CC QWEN_BASE_URL QWEN_MODEL RUNCOMFY_DEPLOYMENT_ID META_APP_ID META_APP_SECRET SLACK_BOT_TOKEN SLACK_SIGNING_SECRET TELEGRAM_BOT_TOKEN DISCORD_BOT_TOKEN GITHUB_PAT; do
-  val=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
-  [ -n "$val" ] && export $key="$val"
-done
+eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
 ```
+
+Diagnostics: `python3 scripts/ci/load_integration_env_from_keychain.py --count` (how many names are tracked), `--list` (names only), `--verbose` (stderr notes for missing Keychain items while still emitting exports on stdout).
 
 ## Read First
 

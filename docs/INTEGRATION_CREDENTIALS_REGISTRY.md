@@ -8,7 +8,7 @@
 ### Phase 1 + 2 scope (deliverables)
 
 - **12 core services** (sections 1–12 below): Qwen/DashScope, Anthropic, OpenAI, ElevenLabs, Cloudflare, GitHub, WordPress, GoHighLevel, Plaid (YAML config, not `.env`), SMTP, Google Analytics 4, Ollama.
-- **Environment variables:** `scripts/ci/check_integration_env.py` tracks one row per env var name (includes video platforms and SerpApi); run it for set vs missing. Exit code **1** if any **required** row is unset in the current shell (today: Qwen key + base URL).
+- **Environment variables:** `scripts/ci/integration_env_registry.py` is the canonical list of env var names; `scripts/ci/check_integration_env.py` reports set vs missing for the current shell (includes video platforms and SerpApi). Exit code **1** if any **required** row is unset (today: Qwen key + base URL, RunComfy key).
 - **Messaging:** five operator channels documented in [Messaging channels (Keychain-based)](#messaging-channels-keychain-based); secrets live in macOS Keychain (or local YAML for iMessage), not in the checker.
 - **GitHub Actions:** repository secrets used by workflows are summarized in [GitHub Actions secrets](#github-actions-secrets); local shells use `GITHUB_TOKEN` / `GITHUB_REPOSITORY` where applicable.
 - **Pearl_Int operational notes:** trend feeds, SerpApi budget, and per-integration validation history remain in `skills/pearl-int/references/integration_registry.md`, which defers env var names to this file.
@@ -24,6 +24,14 @@ python3 scripts/ci/check_integration_env.py
 ```
 
 This reads the registry below and reports which env vars are set vs missing.
+
+**Load every tracked name from macOS Keychain into the current shell** (only emits `export` lines for accounts that exist; service `phoenix-omega`, account = env var name):
+
+```bash
+eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
+```
+
+List tracked names or count: `python3 scripts/ci/load_integration_env_from_keychain.py --list` / `--count`.
 
 **Set up all local integrations (WordPress + messaging channels):**
 
@@ -279,7 +287,7 @@ This reads the registry below and reports which env vars are set vs missing.
 | Field | Value |
 |-------|-------|
 | **Env vars** | `RUNCOMFY_API_KEY`, `RUNCOMFY_DEPLOYMENT_ID` (default: `677edba8-ace0-4b2b-bad2-8e94b9959065`) |
-| **Consumed by** | `scripts/image_generation/runcomfy_batch.py`, `phoenix_v4/manga/image_backend.py` (RunComfyImageBackend) |
+| **Consumed by** | `scripts/image_generation/runcomfy_batch.py`, `phoenix_v4/manga/image_backend.py` (RunComfyImageBackend), `scripts/onboarding/generate_visual_identity_covers_runcomfy.py` (PR B visual-identity KDP covers) |
 | **GitHub workflows** | None yet — add `RUNCOMFY_API_KEY` to secrets for CI image generation |
 | **How to obtain** | RunComfy dashboard: https://www.runcomfy.com/dashboard — API Keys (user has paid subscription) |
 | **Required vs optional** | **Required** for manga panel generation and video image bank |
