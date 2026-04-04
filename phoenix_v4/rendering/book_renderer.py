@@ -883,6 +883,77 @@ class TxtWriter:
         if self.options.title_page and not self.options.clean_output:
             lines.extend(_build_title_page_lines(self.plan))
 
+        # ── Pre-intro (before Chapter 1) ────────────────────────────────
+        # Author pre-intro: narrator intro, book title, author intro, why this book
+        pre_intro = self.plan.get("pre_intro_blocks") or {}
+        author_assets = self.plan.get("author_assets") or {}
+        pen_name = author_assets.get("pen_name") or self.plan.get("author_id") or ""
+        teacher_id = self.plan.get("teacher_id") or ""
+        topic_id = self.plan.get("topic_id") or (self.plan.get("book_spec") or {}).get("topic_id") or ""
+
+        if pen_name or pre_intro:
+            lines.append("")
+            # Narrator intro
+            narrator_intro = pre_intro.get("narrator_intro", "")
+            if narrator_intro:
+                lines.append(narrator_intro)
+                lines.append("")
+            # Book title line
+            book_title = pre_intro.get("book_title_line", "")
+            if not book_title and pen_name:
+                topic_display = topic_id.replace("_", " ").title() if topic_id else "This Book"
+                book_title = f'You are listening to "{topic_display}", written by {pen_name}.'
+            if book_title:
+                lines.append(book_title)
+                lines.append("")
+            # Author intro
+            author_intro = pre_intro.get("author_intro", "")
+            if author_intro:
+                lines.append(author_intro)
+                lines.append("")
+            # Teacher mode intro
+            if teacher_id:
+                teacher_intro = pre_intro.get("teacher_intro", "")
+                if not teacher_intro:
+                    teacher_intro = (
+                        f"This book is guided by {teacher_id.replace('_', ' ').title()}. "
+                        f"The teaching voice you will hear throughout comes from their tradition."
+                    )
+                lines.append(teacher_intro)
+                lines.append("")
+            # Why this book
+            why_this_book = pre_intro.get("why_this_book", "")
+            if why_this_book:
+                lines.append(why_this_book)
+                lines.append("")
+            # Transition into Chapter 1
+            transition = pre_intro.get("transition_line", "")
+            if transition:
+                lines.append(transition)
+                lines.append("")
+
+        # ── Introduction ────────────────────────────────────────────────
+        # Frame the book's promise to the reader
+        lines.append("")
+        lines.append("Introduction")
+        lines.append("")
+        topic_display = topic_id.replace("_", " ") if topic_id else "what you are carrying"
+        lines.append(
+            f"This book is about {topic_display}. Not the version you read about online. "
+            f"The version that lives in your body — the one that shows up before you have words for it."
+        )
+        lines.append("")
+        lines.append(
+            "Each chapter will take you through a single scene. You will recognize something. "
+            "You will understand why it persists. You will feel your frame shift. "
+            "And by the end, you will own something new — not as a concept, but as a lived experience."
+        )
+        lines.append("")
+        lines.append(
+            "There is nothing to fix. There is something to see. Let's begin."
+        )
+        lines.append("")
+
         atom_sources = self.plan.get("atom_sources") or []
         alias = self.options.mechanism_alias  # may be None
         naming_moment_injected = False
@@ -942,6 +1013,28 @@ class TxtWriter:
 
             lines.append(composed)
             lines.append("")
+
+        # ── Conclusion ──────────────────────────────────────────────────
+        lines.append("")
+        lines.append("Conclusion")
+        lines.append("")
+        lines.append(
+            "You started this book carrying something. Not a problem to solve — "
+            "a pattern to see. You have seen it now. Not once, but from several angles."
+        )
+        lines.append("")
+        lines.append(
+            "The pattern has not disappeared. Patterns rarely do. But you are no longer "
+            "inside it without knowing. You can name it. You can feel it arrive. "
+            "And you have practiced responding differently — not perfectly, but differently."
+        )
+        lines.append("")
+        lines.append(
+            "That is the work. Not the end of something. The beginning of a different "
+            "relationship with what you carry. Take what landed. Leave what did not. "
+            "The door stays open."
+        )
+        lines.append("")
 
         full_text = "\n".join(lines).strip()
 
