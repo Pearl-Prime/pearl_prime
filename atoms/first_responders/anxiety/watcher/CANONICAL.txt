@@ -5,8 +5,8 @@
 path: story_atoms/first_responders/anchored/anxiety/watcher/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Sofia is at a family dinner. Her sister is talking. Sofia hears the words but also observes herself hearing the words. She's watching herself perform presence. She's monitoring: am I nodding the right amount? Do I look engaged? The watcher divides her. Part of her is in the conversation. Part is observing the performance. Her hands are cold. She's not fully landed anywhere. She's managing the external presentation while the internal feels split.
@@ -18,7 +18,7 @@ RECOGNITION v02
 path: story_atoms/first_responders/anchored/anxiety/watcher/recognition/micro/v03.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: identity
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -31,8 +31,8 @@ RECOGNITION v04
 path: story_atoms/first_responders/anchored/anxiety/watcher/recognition/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Heather is leading a briefing. She's speaking but also watching herself speak. Monitoring her tone for authority. Watching the crew's faces for doubt. The watcher means she's never fully in the moment. She's always managing the external presentation. Always evaluating. Her jaw is clenched. She's not present. She's present with her performance.
@@ -44,8 +44,8 @@ MECHANISM_PROOF v01
 path: story_atoms/first_responders/anchored/anxiety/watcher/mechanism_proof/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Jake's watcher has made him unable to relax off-duty. He comes home and the watcher is still running. Still monitoring. Still evaluating his own performance. He sits on the couch and watches himself sitting. Watches his breathing. Checks his expression. The watcher is making intimacy impossible. His girlfriend tries to touch him and he's aware of being touched. He's not feeling it. He's watching himself feel it. The watcher has divided him completely.
@@ -57,8 +57,8 @@ MECHANISM_PROOF v03
 path: story_atoms/first_responders/anchored/anxiety/watcher/mechanism_proof/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Brianna's watcher has made her socially isolated. She's so focused on monitoring her own performance that she can't just interact. The crew notices she's stiff. She seems manufactured. The watcher is making her exactly what she's afraid of: an awkward person pretending to fit in. The performance is so visible now that the very thing she's avoiding is happening. The watcher has created the problem it was designed to prevent.
@@ -70,8 +70,8 @@ MECHANISM_PROOF v05
 path: story_atoms/first_responders/anchored/anxiety/watcher/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Sofia stops fighting the watcher. She just observes the watcher observing. She's in conversation with her sister and she notices: I'm watching myself. That's interesting. She doesn't try to fix it. She just notes it. And by noting it, something shifts. The watch itself becomes less charged. She's not trying to perform anymore. She's just letting the watcher do its thing while she participates anyway. She lands a little bit.
@@ -83,7 +83,7 @@ TURNING_POINT v02
 path: story_atoms/first_responders/anchored/anxiety/watcher/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -96,7 +96,7 @@ TURNING_POINT v04
 path: story_atoms/first_responders/anchored/anxiety/watcher/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -109,8 +109,8 @@ EMBODIMENT v01
 path: story_atoms/first_responders/anchored/anxiety/watcher/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Jake is with his girlfriend now. The watcher still operates. But she's aware of it. They're conspiring together against the watcher. He lands more often. The presence is increasing. The watcher hasn't disappeared. But it has company now.
@@ -123,7 +123,7 @@ path: story_atoms/first_responders/anchored/anxiety/watcher/embodiment/micro/v04
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Brianna is part of the crew now. The watcher is still there. But it's not separating her anymore. She's present with the separation. The crew recognizes her. She's real.
@@ -135,8 +135,8 @@ EMBODIMENT v05
 path: story_atoms/first_responders/anchored/anxiety_watcher/recognition/band_fill/v06.txt
 BAND: 5
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Crisis. Breakthrough. The moment of maximum intensity.
@@ -147,7 +147,7 @@ Crisis. Breakthrough. The moment of maximum intensity.
 path: story_atoms/first_responders/anchored/anxiety_watcher/recognition/band_fill/v07.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -160,7 +160,7 @@ path: story_atoms/first_responders/anchored/anxiety/watcher/turning_point/micro/
 BAND: 4
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Kim scans every restaurant for exits, threats, and tactical positions. Off duty. Civilian clothes. Dinner with his wife. His eyes move before his thoughts do. His wife says: you're doing it again. His neck is rigid. His jaw is set. The watcher does not clock out. The frame shifts when his wife takes his hand and he realizes he has not looked at her face in twenty minutes. He has cataloged every exit and every stranger. He missed his wife's new earrings. The watcher saw everything except the person he came to see. He looks at her. The watcher protests. He holds her gaze. The restaurant is still there. He does not need to watch it.
@@ -172,7 +172,7 @@ path: story_atoms/first_responders/anchored/anxiety/watcher/turning_point/micro/
 BAND: 5
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 5
 IDENTITY_STAGE: experimentation
 ---
 Jackson is at his daughter's birthday party and he is scanning the room for threats. Balloon pop — his body jumps. A child screams with joy — his chest locks. He is watching a children's birthday party with the vigilance of an active scene. His daughter brings him cake. He looks at her face. The watcher screams: check the exits. He holds his daughter's gaze. The watcher loses the feed for five seconds. Five seconds of his daughter's face without the overlay of threat assessment. The frame collapses: he is missing her childhood while watching for dangers that do not exist in this room. He takes the cake. Eats it. The watcher rages. He chews.
@@ -208,7 +208,7 @@ path: story_atoms/first_responders/anchored/anxiety/watcher/mechanism_proof/micr
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Morales identifies the watcher's origin story. It began on a specific call — the one where she was not watching and something went wrong. That call installed the watcher permanently. The mechanism: one moment of missed attention became a lifetime of hyperattention. The watcher is a security system installed by a single breach. The breach was years ago. The security system has not been updated. It still protects against the exact threat from the exact call. Her shoulders are rigid. The watcher is guarding a door that was breached once, in a building that no longer exists.
@@ -220,7 +220,7 @@ path: story_atoms/first_responders/anchored/anxiety/watcher/mechanism_proof/micr
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Gutierrez sees the watcher's deepest paradox: it makes him less safe. The constant scanning depletes the attention needed for actual threat response. He is so busy watching for everything that he cannot focus on anything. The watcher has reduced his effectiveness while convincing him it is the source of his effectiveness. His neck is stone. The mechanism: the watcher is a net negative. It consumes more safety than it produces. The vigilance is not protective. It is expensive. It costs more than the threats it theoretically prevents.

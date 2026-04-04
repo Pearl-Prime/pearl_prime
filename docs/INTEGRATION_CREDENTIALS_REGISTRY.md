@@ -8,7 +8,7 @@
 ### Phase 1 + 2 scope (deliverables)
 
 - **12 core services** (sections 1–12 below): Qwen/DashScope, Anthropic, OpenAI, ElevenLabs, Cloudflare, GitHub, WordPress, GoHighLevel, Plaid (YAML config, not `.env`), SMTP, Google Analytics 4, Ollama.
-- **Environment variables:** `scripts/ci/integration_env_registry.py` is the canonical list of env var names; `scripts/ci/check_integration_env.py` reports set vs missing for the current shell (includes video platforms and SerpApi). Exit code **1** if any **required** row is unset (today: Qwen key + base URL, RunComfy key).
+- **Environment variables:** `scripts/ci/check_integration_env.py` tracks one row per env var name (includes video platforms and SerpApi); run it for set vs missing. Exit code **1** if any **required** row is unset in the current shell (today: Qwen key + base URL).
 - **Messaging:** five operator channels documented in [Messaging channels (Keychain-based)](#messaging-channels-keychain-based); secrets live in macOS Keychain (or local YAML for iMessage), not in the checker.
 - **GitHub Actions:** repository secrets used by workflows are summarized in [GitHub Actions secrets](#github-actions-secrets); local shells use `GITHUB_TOKEN` / `GITHUB_REPOSITORY` where applicable.
 - **Pearl_Int operational notes:** trend feeds, SerpApi budget, and per-integration validation history remain in `skills/pearl-int/references/integration_registry.md`, which defers env var names to this file.
@@ -24,14 +24,6 @@ python3 scripts/ci/check_integration_env.py
 ```
 
 This reads the registry below and reports which env vars are set vs missing.
-
-**Load every tracked name from macOS Keychain into the current shell** (only emits `export` lines for accounts that exist; service `phoenix-omega`, account = env var name):
-
-```bash
-eval "$(python3 scripts/ci/load_integration_env_from_keychain.py)"
-```
-
-List tracked names or count: `python3 scripts/ci/load_integration_env_from_keychain.py --list` / `--count`.
 
 **Set up all local integrations (WordPress + messaging channels):**
 
@@ -58,24 +50,15 @@ List tracked names or count: `python3 scripts/ci/load_integration_env_from_keych
 
 ### 1b. Qwen / DashScope (Alibaba Cloud) — LLM (fallback)
 
-> **⚠️ CRITICAL: Use the SINGAPORE region, NOT Beijing.**
-> The Beijing console (`bailian.console.alibabacloud.com/cn-beijing`) shows "Account abnormal" and "No API Key" — that is the WRONG region.
-> The correct console URL is: **`https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key`**
-> If the console opens in Beijing, click the region dropdown (top-right) and select **Singapore**.
-> The API base URL is the international endpoint: `https://dashscope-intl.aliyuncs.com/compatible-mode/v1`
-> Do NOT use the Beijing endpoint (`dashscope.aliyuncs.com`).
-
 | Field | Value |
 |-------|-------|
 | **Env vars** | `QWEN_API_KEY`, `QWEN_BASE_URL`, `QWEN_MODEL` |
 | **Alt env vars** | `DASHSCOPE_API_KEY`, `DASHSCOPE_BASE_URL`, `DASHSCOPE_MODEL` |
 | **Consumed by** | `pearl_news/pipeline/llm_expand.py`, `pearl_news/pipeline/slot_provider_qwen.py`, `scripts/research/run_research.py`, `scripts/localization/llm_client.py`, `scripts/localization/run_locale_batches.py`, `scripts/translate_atoms_all_locales_cloud.py` |
-| **GitHub workflows** | `research-pipeline-run.yml`, `pearl-news-fill-qwen.yml`, `translate-atoms-qwen-matrix.yml`, `translate-bestseller-atoms.yml`, `catalog-book-pipeline.yml`, `marketing-briefs-and-proposals.yml`, `marketing_continuous.yml`, `max-quality-catalog.yml` |
-| **How to obtain** | **Singapore Model Studio console:** https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key — click the 📋 copy icon next to the key (starts with `sk-`). **DO NOT use the Beijing console.** |
+| **GitHub workflows** | `research-pipeline-run.yml`, `pearl-news-fill-qwen.yml`, `translate-atoms-qwen-matrix.yml` |
+| **How to obtain** | DashScope console: https://dashscope.console.aliyun.com/ — create API key under Access Key Management |
 | **Required vs optional** | Required for Pearl News, translation, research pipelines |
-| **Status** | Wired in CI and local Keychain |
-| **Local Keychain** | `security find-generic-password -s "phoenix-omega" -a "QWEN_API_KEY" -w` |
-| **Base URL** | `https://dashscope-intl.aliyuncs.com/compatible-mode/v1` (Singapore/international) |
+| **Status** | Wired in CI and local scripts |
 | **Detailed docs** | [docs/AGENT_QWEN_API_KEY_LANE.md](./AGENT_QWEN_API_KEY_LANE.md) |
 
 ### 2. Anthropic — LLM
@@ -282,20 +265,6 @@ List tracked names or count: `python3 scripts/ci/load_integration_env_from_keych
 | **Required vs optional** | Optional — used for trend-aware feed enrichment |
 | **Status** | Missing (budget_guard limits to 245 calls/month) |
 
-### 19. RunComfy — Image generation (PRIMARY — manga panels, video bank, author art)
-
-| Field | Value |
-|-------|-------|
-| **Env vars** | `RUNCOMFY_API_KEY`, `RUNCOMFY_DEPLOYMENT_ID` (default: `677edba8-ace0-4b2b-bad2-8e94b9959065`) |
-| **Consumed by** | `scripts/image_generation/runcomfy_batch.py`, `phoenix_v4/manga/image_backend.py` (RunComfyImageBackend), `scripts/onboarding/generate_visual_identity_covers_runcomfy.py` (PR B visual-identity KDP covers) |
-| **GitHub workflows** | None yet — add `RUNCOMFY_API_KEY` to secrets for CI image generation |
-| **How to obtain** | RunComfy dashboard: https://www.runcomfy.com/dashboard — API Keys (user has paid subscription) |
-| **Required vs optional** | **Required** for manga panel generation and video image bank |
-| **Status** | **Not in GitHub Secrets — needs adding.** Was working previously via local env var. |
-| **CLI usage** | `python3 scripts/image_generation/runcomfy_batch.py --api-key $RUNCOMFY_API_KEY` |
-| **Manga usage** | `python3 scripts/manga/run_manga_chapter.py --backend runcomfy` (reads `RUNCOMFY_API_KEY` from env) |
-| **Note** | This is the PRIMARY image generation service. Cloudflare FLUX (§5) is demoted to fallback only. |
-
 ---
 
 ## Messaging channels (Keychain-based)
@@ -343,10 +312,9 @@ Secrets that must be configured in GitHub repo settings for CI workflows:
 
 | Secret name | Used by workflow(s) | Notes |
 |-------------|---------------------|-------|
-| `DASHSCOPE_API_KEY` | Qwen/DashScope workflows (see §1) | **Preferred** GitHub secret name for the DashScope API key; workflows read `DASHSCOPE_API_KEY` first, then fall back to `QWEN_API_KEY` |
-| `QWEN_API_KEY` | Same | Legacy secret name; same key value if you do not use `DASHSCOPE_API_KEY` |
-| `QWEN_BASE_URL` | Same | DashScope endpoint URL |
-| `QWEN_MODEL` | Same | Model name (e.g., `qwen-max`) |
+| `QWEN_API_KEY` | `research-pipeline-run.yml`, `pearl-news-fill-qwen.yml`, `translate-atoms-qwen-matrix.yml` | DashScope API key |
+| `QWEN_BASE_URL` | Same as above | DashScope endpoint URL |
+| `QWEN_MODEL` | Same as above | Model name (e.g., `qwen-max`) |
 | `CLOUDFLARE_API_TOKEN` | `brand-admin-onboarding-pages.yml` | Cloudflare API token |
 | `CLOUDFLARE_ACCOUNT_ID` | `brand-admin-onboarding-pages.yml` | Cloudflare account ID |
 | `GITHUB_TOKEN` | Auto-provided by GitHub Actions | No manual config needed |
@@ -360,7 +328,7 @@ Some scripts support reading API keys from local files as an alternative to env 
 | File | Service | Env var alternative |
 |------|---------|-------------------|
 | `claude_api_key.rtf` | Anthropic | `ANTHROPIC_API_KEY` |
-| `11.txt` (repo root) or `docs/11.txt` | ElevenLabs | `ELEVENLABS_API_KEY` — `generate_briefing_narration.py` loads both paths; **never commit** real keys (see `.gitignore`) |
+| `11.txt` | ElevenLabs | `ELEVENLABS_API_KEY` |
 | `cloudflare_workers_ai.txt` | Cloudflare | `CLOUDFLARE_ACCOUNT_ID` + `CLOUDFLARE_API_TOKEN` |
 | `docs/qwen_*.txt` | Qwen | `QWEN_BASE_URL`, `QWEN_API_KEY`, `QWEN_MODEL` |
 
@@ -384,87 +352,3 @@ This registry consolidates information previously scattered across:
 - [docs/VIDEO_PLATFORM_CREDENTIAL_SETUP.md](./VIDEO_PLATFORM_CREDENTIAL_SETUP.md) — video platform OAuth/cookie credential setup
 
 Those files remain authoritative for their domain-specific setup procedures. This registry is the single index that answers "what credentials does this repo need?"
-
----
-
-## Local development key setup
-
-### Keys currently stored in macOS Keychain (verified 2026-04-03, credential hunt pass)
-
-| Key | Keychain | GitHub Secrets | API Test | Where to get it |
-|-----|----------|---------------|----------|-----------------|
-| `QWEN_API_KEY` | ✅ | ✅ | ✅ 200 | **Singapore** Model Studio: `https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key` — **NOT Beijing** |
-| `DASHSCOPE_API_KEY` | ✅ (same value as QWEN) | ✅ | ✅ | Same as QWEN_API_KEY |
-| `RUNCOMFY_API_KEY` | ✅ | ✅ | ⚠️ 521 (server down) | RunComfy profile: `https://www.runcomfy.com/profile` → API Tokens |
-| `ELEVENLABS_API_KEY` | ✅ | ✅ | ✅ 200 (Pro tier) | `https://elevenlabs.io/app/settings/api-keys` |
-| `ANTHROPIC_API_KEY` | ✅ | ✅ | ✅ 200 | `https://console.anthropic.com/settings/keys` |
-| `CLOUDFLARE_ACCOUNT_ID` | ✅ | ✅ | — (config) | Cloudflare dashboard URL path |
-| `CLOUDFLARE_API_TOKEN` | ✅ | ✅ | ✅ 200 (active) | `https://dash.cloudflare.com/` → My Profile → API Tokens |
-| `CLOUDFLARE_AI_API_TOKEN` | ✅ | ✅ | ✅ 200 (active) | Cloudflare → My Profile → API Tokens → Workers AI template |
-| `WORDPRESS_SITE_URL` | ✅ | ✅ | ✅ 200 | `https://pearlnewsuna.org` |
-| `WORDPRESS_USERNAME` | ✅ | ✅ | ✅ | `admin` |
-| `WORDPRESS_APP_PASSWORD` | ✅ | ✅ | ✅ 200 | WordPress Admin → Application Passwords |
-| `YT_CLIENT_ID_SP` | ✅ | ✅ | — | Google Cloud Console OAuth |
-| `YT_CLIENT_SECRET_SP` | ✅ | ✅ | — | Google Cloud Console OAuth |
-| `YT_REFRESH_TOKEN_SP` | ❌ | ❌ | — | Needs OAuth consent flow |
-| `TIKTOK_CLIENT_KEY_SP` | ✅ | ✅ | — | TikTok Developer Portal |
-| `TIKTOK_CLIENT_SECRET_SP` | ✅ | ✅ | — | TikTok Developer Portal |
-| `QWEN_BASE_URL` | ✅ | ✅ | — (config) | `https://dashscope-intl.aliyuncs.com/compatible-mode/v1` |
-| `QWEN_MODEL` | ✅ | ✅ | — (config) | `qwen-plus` |
-| `RUNCOMFY_DEPLOYMENT_ID` | ✅ | ✅ | — (config) | `677edba8-ace0-4b2b-bad2-8e94b9959065` |
-| `DEEPSEEK_API_KEY` | ✅ | ✅ | ✅ 200 | `https://platform.deepseek.com/` |
-| `GITHUB_PAT` | ✅ | — (auto in CI) | ✅ 200 (Ahjan108) | GitHub Settings → Developer settings → PAT |
-| `META_APP_ID` | ✅ | ✅ | — | Meta Developer Portal |
-| `META_APP_SECRET` | ✅ | ✅ | — | Meta Developer Portal |
-| `SLACK_BOT_TOKEN` | ✅ | ✅ | — | Slack API → Install App → Bot User OAuth Token |
-| `SLACK_SIGNING_SECRET` | ✅ | ✅ | — | Slack API → Basic Information → Signing Secret |
-| `TELEGRAM_BOT_TOKEN` | ✅ | ✅ | ✅ 200 (@phoenix_omega_bot) | Telegram @BotFather |
-| `YT_CLIENT_ID_CC` | ✅ (same app as SP) | ✅ | — | Google Cloud Console OAuth |
-| `YT_CLIENT_SECRET_CC` | ✅ (same app as SP) | ✅ | — | Google Cloud Console OAuth |
-| `TIKTOK_CLIENT_KEY_CC` | ✅ (same app as SP) | ✅ | — | TikTok Developer Portal |
-| `TIKTOK_CLIENT_SECRET_CC` | ✅ (same app as SP) | ✅ | — | TikTok Developer Portal |
-
-### Blocked / missing keys (as of 2026-04-03)
-
-| Key | Blocker |
-|-----|---------|
-| `YT_REFRESH_TOKEN_SP` / `YT_REFRESH_TOKEN_CC` | Needs OAuth consent flow per channel |
-| `TIKTOK_ACCESS_TOKEN_SP` / `TIKTOK_ACCESS_TOKEN_CC` | TikTok app review pending |
-| `DISCORD_BOT_TOKEN` | ✅ Done — reset via MFA, stored + pushed |
-| `IG_ACCESS_TOKEN_SP` / `IG_USER_ID_SP` / `IG_ACCESS_TOKEN_CC` / `IG_USER_ID_CC` | Meta developer account confirmation needed + Instagram phone reset |
-| All `*_ND` keys | NorCal Dharma brand not set up |
-| `CLOUDFLARE_AI_API_TOKEN` | ✅ Done — regenerated via Workers AI template |
-
-### Load all keys in your shell
-
-Add to `.zshrc` or run before any local pipeline command:
-
-```bash
-# Phoenix Omega credentials (from macOS Keychain)
-for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY ANTHROPIC_API_KEY DEEPSEEK_API_KEY CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN CLOUDFLARE_AI_API_TOKEN WORDPRESS_SITE_URL WORDPRESS_USERNAME WORDPRESS_APP_PASSWORD YT_CLIENT_ID_SP YT_CLIENT_SECRET_SP YT_CLIENT_ID_CC YT_CLIENT_SECRET_CC TIKTOK_CLIENT_KEY_SP TIKTOK_CLIENT_SECRET_SP TIKTOK_CLIENT_KEY_CC TIKTOK_CLIENT_SECRET_CC QWEN_BASE_URL QWEN_MODEL RUNCOMFY_DEPLOYMENT_ID META_APP_ID META_APP_SECRET SLACK_BOT_TOKEN SLACK_SIGNING_SECRET TELEGRAM_BOT_TOKEN DISCORD_BOT_TOKEN; do
-  val=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
-  [ -n "$val" ] && export $key="$val"
-done
-```
-
-### Store a new key
-
-```bash
-security add-generic-password -U -s "phoenix-omega" -a "<ENV_VAR_NAME>" -w "<paste key here>"
-```
-
-### Check what's set vs missing
-
-```bash
-PYTHONPATH=. python3 scripts/ci/check_integration_env.py
-```
-
-### ⚠️ Common mistakes agents make
-
-1. **Qwen: Going to Beijing instead of Singapore.** The Beijing console shows "Account abnormal" and "No API Key". Always use: `https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key`
-2. **Putting keys only in GitHub Secrets but not locally.** Every key must be in BOTH Keychain AND GitHub Secrets. CI uses GitHub Secrets. Local dev uses Keychain.
-3. **Looking for keys in env vars instead of Keychain.** Keys are in Keychain, not in `.env` files. Load them with the shell snippet above.
-4. **ElevenLabs key file:** `docs/11.txt` is gitignored (contains the actual key). If missing, recover from Keychain: `security find-generic-password -s "phoenix-omega" -a "ELEVENLABS_API_KEY" -w`
-
-**If running in CI:** All keys are in GitHub Secrets. Use workflow dispatch.
-**If running locally:** Load from Keychain with the snippet above.

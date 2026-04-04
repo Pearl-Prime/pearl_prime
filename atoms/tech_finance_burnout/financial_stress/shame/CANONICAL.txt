@@ -5,7 +5,7 @@
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -29,7 +29,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/recognition/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,7 +41,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -53,7 +53,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/recognition/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: identity
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -66,7 +66,7 @@ path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/mechanism
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 [Mechanism_proof atom: showing how the mechanism operates. Feedback loops. Deepening of the issue.]
@@ -78,7 +78,7 @@ path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/mechanism
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 [Mechanism_proof atom: deeper exploration of how mechanism self-perpetuates.]
@@ -89,8 +89,8 @@ IDENTITY_STAGE: destabilization
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/mechanism_proof/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 [Mechanism_proof atom: showing impact on relationships/team.]
@@ -102,7 +102,7 @@ path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/mechanism
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 [Mechanism_proof atom: chronic/established pattern.]
@@ -113,8 +113,8 @@ IDENTITY_STAGE: destabilization
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/mechanism_proof/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 [Mechanism_proof atom: identity dimension locked in.]
@@ -125,7 +125,7 @@ IDENTITY_STAGE: destabilization
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -137,7 +137,7 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -149,7 +149,7 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -161,7 +161,7 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -173,7 +173,7 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: identity
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -185,8 +185,8 @@ IDENTITY_STAGE: experimentation
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: claimed. New knowledge integrated. Can feel the shift in body.]
@@ -197,8 +197,8 @@ IDENTITY_STAGE: self_claim
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: relational dimension. Different way of being with others.]
@@ -209,8 +209,8 @@ IDENTITY_STAGE: self_claim
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: sustained shift. New baseline.]
@@ -221,8 +221,8 @@ IDENTITY_STAGE: self_claim
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: ownership of the new way.]
@@ -234,7 +234,7 @@ path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/embodimen
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 [Embodiment atom: fully integrated. New identity. Rest.]
@@ -245,8 +245,8 @@ IDENTITY_STAGE: self_claim
 path: story_atoms/tech_finance_burnout/anchored/financial_stress_shame/recognition/band_fill/v06.txt
 BAND: 5
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Crisis. Breakthrough. The moment of maximum intensity.
@@ -258,8 +258,8 @@ Crisis. Breakthrough. The moment of maximum intensity.
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Priya notices the shame arrive at full force during the standup meeting. Shoulders cave. The money pressure surges — the bills that accumulate faster than income. The shame mechanism demands its usual conclusion about who Priya is. Heat radiates from the sternum. Priya refuses the final step. Holds the body in the intensity without translating it into the shame's verdict. The sensation burns. The story falters. Priya sees the Slack notification and the old frame collapses around it. Priya stands in the wreckage of the interpretation and finds solid ground beneath it. The ground was always there. The shame mechanism built over it.
@@ -270,8 +270,8 @@ Priya notices the shame arrive at full force during the standup meeting. Shoulde
 path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 5
 IDENTITY_STAGE: experimentation
 ---
 Derek's body reaches its limit. Stomach drops to the floor. The shame screams its conclusion about the money pressure — the bills that accumulate faster than income. This is the peak. The maximum. Vision drops to the floor. Derek stops fighting the sensation and starts witnessing the mechanism. The shame mechanism is visible now. Fully exposed. Every gear, every conversion, every false step from feeling to verdict. The old frame cannot function once Derek sees the gears turning. The crisis does not end. But the frame that made the crisis into identity collapses under its own weight. Derek breathes inside the collapse.
@@ -283,7 +283,7 @@ path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/embodimen
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Marcus walks into the team sync. Face burns. The shame fires. Marcus feels the heat and acts from the new understanding. The money pressure is present — the bills that accumulate faster than income. The shame mechanism runs its pattern. Marcus does not follow it. Muscles contract inward. Moves through the intensity as someone who knows what the shame is and what it is not. Sees the calendar invite. Owns the new frame. The body carries the weight and Marcus carries the authority to interpret it. The shame loses its vote on identity. Marcus stares at the backlog and the action belongs to Marcus, not to the pattern.
@@ -307,7 +307,7 @@ path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/mechanism
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Hot activation. Skin crawls. Derek watches the shame manufacture its conclusion about the money pressure — the bills that accumulate faster than income. Heat radiates from the sternum. The shame mechanism takes raw sensation and produces identity judgment. Then feeds the judgment back as fuel for the next cycle. Derek sees the performance review form. The loop tightens. The shame is a closed system. It generates its own evidence, consumes its own output, and produces the same verdict every time. Derek types a response while the machinery runs. The verdict is relentless. But now Derek sees it as machinery, not as the voice of reality.
@@ -319,7 +319,7 @@ path: story_atoms/tech_finance_burnout/anchored/financial_stress/shame/mechanism
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 The shame reaches peak velocity. Throat constricts. Marcus sees the full mechanism at maximum power — the bills that accumulate faster than income. The money pressure is real. The shame mechanism is real. What is not real is the shame's conclusion. Vision drops to the floor. The mechanism manufactures conviction at crisis speed: sensation becomes narrative, narrative becomes verdict, verdict becomes fuel. Marcus's body absorbs the force while the mind maps the machinery. The pattern is loudest when it is most visible. At peak speed, the shame mechanism exposes every joint and seam. Marcus stares at the backlog. The verdict screams. The truth underneath it is quiet.

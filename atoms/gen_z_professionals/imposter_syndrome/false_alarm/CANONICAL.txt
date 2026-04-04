@@ -5,7 +5,7 @@
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -29,7 +29,7 @@ Dev is in a meeting with senior engineers. The meeting is routine. Dev has prepa
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/recognition/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,8 +41,8 @@ Maya gets introduced to a senior client. The introduction is standard. The clien
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Alex gets asked a technical question in a team meeting. The question is reasonable. Alex has skills that cover it. But the alarm fires immediately. Alex hears: this is a test, if you get it wrong they'll know you're a fraud, if you get it right they'll know you're lying about knowing it, either way you're exposed. The throat closes. The hands start shaking. Alex's response comes out uncertain even though Alex knows the answer. The body's response to being seen performing competence is the same as the body's response to a predator: immediate activation, loss of function, fight-or-flight. The alarm isn't calibrated to the actual threat level.
@@ -53,8 +53,8 @@ Alex gets asked a technical question in a team meeting. The question is reasonab
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/recognition/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Marcus walks into a room full of people from his field. Peers, mostly. People he knows. But the alarm screams: you don't belong here, you're the fraud in the room, everyone can see it, you're about to be exposed. Marcus's nervous system is in combat readiness. The body doesn't trust the mind's assessment that this is a safe, professional environment. The body only knows: performing competence in this room = exposure. The chest is tight. The jaw is clenched. The shoulders are rigid. Marcus has to consciously control his facial expression to not show the internal alarm state. This is exhausting.
@@ -66,7 +66,7 @@ path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/mec
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Kai's alarm system has learned a false association: competence performance equals threat. The system isn't broken—it's just miscalibrated. Kai has real competence. Kai can prove it. But the moment Kai has to perform that competence in front of an audience, the alarm fires. The body moves into protection mode. Kai's performance suffers not because Kai lacks competence but because Kai is in fight-or-flight while trying to perform. This proves nothing about competence. It only proves the alarm is misfiring. But Kai doesn't know this. Kai only knows: I tried to demonstrate competence and my body betrayed me, which proves something is wrong.
@@ -77,8 +77,8 @@ Kai's alarm system has learned a false association: competence performance equal
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/mechanism_proof/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Dev's body has mapped "being seen in a professional context" to "threat." Every meeting with people who might assess Dev's performance triggers the response. The response is involuntary. Dev's mind knows the room is safe. The body doesn't care. The body is designed to protect Dev from exposure and the body thinks exposure in a competence context is equivalent to physical danger. Dev's voice shakes. Dev's hands shake. Dev's mind races. Dev is in the alarm state for hours at a time, multiple times a week. The cost is exhaustion. The body's constant activation is depleting Dev.
@@ -89,8 +89,8 @@ Dev's body has mapped "being seen in a professional context" to "threat." Every 
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/mechanism_proof/micro/v03.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Maya's alarm system is now generating evidence for its own beliefs. When Maya encounters a competence-visibility situation, the alarm fires. Maya's performance suffers because of the alarm state. Maya interprets the suffering as evidence that the alarm is right—Maya doesn't belong. Maya doesn't make the connection that the alarm-state itself is causing the performance deficit. The system is now self-reinforcing. The more Maya is in situations that trigger the alarm, the more evidence Maya seems to have that the alarm is right. Maya is not collecting evidence. Maya is generating evidence through the alarm system itself.
@@ -101,8 +101,8 @@ Maya's alarm system is now generating evidence for its own beliefs. When Maya en
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/mechanism_proof/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Alex avoids situations where competence will be visible. Alex doesn't raise hand in meetings. Doesn't volunteer for presentations. Doesn't put work on public portfolios. This avoidance feels like safety but it's actually reinforcing the alarm system. The alarm says: you don't belong here, don't be seen. Alex listens. Alex hides. The hiding feels like confirmation that the alarm is right. But it's actually just confirmation that the alarm is controlling behavior. Alex is shrinking to accommodate the alarm system.
@@ -113,8 +113,8 @@ Alex avoids situations where competence will be visible. Alex doesn't raise hand
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/mechanism_proof/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Marcus is code-switching constantly now. Has to maintain a false persona at work to prevent exposure. This is exhausting. The alarm system is demanding constant performance. Marcus has to appear confident while feeling terrified. Has to appear knowledgeable while feeling fraudulent. Has to appear like he belongs while internally screaming that he doesn't. The cognitive load is massive. Marcus is performing competence while the body is in threat-response. This works until it doesn't. Then Marcus has an anxiety attack in the bathroom or calls in sick or just stops showing up.
@@ -125,7 +125,7 @@ Marcus is code-switching constantly now. Has to maintain a false persona at work
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -137,7 +137,7 @@ Kai is given the project assignment and the alarm fires and Kai starts the proje
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -149,7 +149,7 @@ Dev presents in the meeting and the alarm fires and Dev's voice shakes and Dev's
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: identity
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -161,7 +161,7 @@ Maya meets with the senior client and the alarm fires and Maya's chest is tight 
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/turning_point/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -173,7 +173,7 @@ Alex raises hand in a meeting and the alarm fires and Alex answers and the answe
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/turning_point/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -185,8 +185,8 @@ Marcus is in the meeting and the alarm fires and Marcus is terrified and Marcus 
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Kai completes the project and it's well-received. The alarm quiets. Not completely gone but quieter. Kai's chest is looser. Kai starts to trust that the alarm is not a reliable indicator of threat. The competence was real. The performance was real. The exposure didn't happen because the exposure doesn't exist. Kai's shoulders relax slightly. Kai still gets nervous when new competence-visibility situations arise. But the nervousness is less total. Kai has evidence now.
@@ -197,8 +197,8 @@ Kai completes the project and it's well-received. The alarm quiets. Not complete
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Dev continues to participate in meetings and presentations. The alarm continues to fire. But Dev's nervous system is learning. The threat never materializes. Dev is still there. Dev still belongs. Dev is still respected. Dev's voice still shakes sometimes but Dev speaks anyway. The body is slowly learning that this isn't actually dangerous. Dev's hands are less cold. Dev's throat is less closed. The alarm is still there but Dev is moving forward despite it.
@@ -210,7 +210,7 @@ path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/emb
 BAND: 2
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Maya continues to meet with clients and take on visible work. The alarm still fires sometimes. But the contradiction between the alarm's prediction and reality is now clear. The alarm says: you'll be exposed. Reality says: I'm doing good work. Maya is learning to trust reality more than the alarm. Maya's chest is looser. Maya's shoulders are dropped. Maya's competence is evident in the work. The alarm is just noise now, not threat.
@@ -221,8 +221,8 @@ Maya continues to meet with clients and take on visible work. The alarm still fi
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Alex stops hiding. Raises hand. Volunteers. Puts work in portfolios. The alarm fires when Alex does these things but Alex is building evidence that the alarm is wrong. The exposure doesn't come. The fraudulence doesn't show. Alex is just someone doing work. The narrative that Alex doesn't belong is contradicted by the evidence of Alex doing the work and being fine. The body is learning. Alex's hands are warm now. The throat releases when Alex speaks.
@@ -233,8 +233,8 @@ Alex stops hiding. Raises hand. Volunteers. Puts work in portfolios. The alarm f
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/embodiment/micro/v05.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Marcus is in meetings and the alarm fires and Marcus participates anyway and the exposure doesn't come. Marcus has now done this hundreds of times. The alarm still fires but Marcus's body is learning from the evidence. The threat is not real. The alarm is miscalibrated. Marcus doesn't have to perform constantly anymore. Marcus can just be in the room. Marcus belongs. The jaw is relaxed. The shoulders are down. The alarm still fires sometimes but Marcus knows now that the alarm is lying. The actual evidence from actual repeated interactions shows that Marcus is fine.
@@ -245,9 +245,9 @@ Marcus is in meetings and the alarm fires and Marcus participates anyway and the
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
 ---
 Nia gets praised in the all-hands and waits for the correction. The alarm system fires danger signals when no real threat exists. Nia's mouth dries. The pattern demands attention now—hot, insistent, refusing to wait. Nia watches it demand. This time, instead of obeying, Nia tracks where the demand originates. It starts in the face. It travels to the thoughts. The thoughts build a story. The story says: act now or lose everything. Nia examines the story. The story has no evidence. The mouth has real sensation. The story has fabricated urgency. Nia holds the sensation without following the story. The sensation stays. The story loses its audience. The frame shifts: the pattern is loud, but loudness is not truth.
 ---
@@ -257,9 +257,9 @@ Nia gets praised in the all-hands and waits for the correction. The alarm system
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
 ---
 Jordan gets the promotion email and the first feeling is terror. Pure, physical terror. The alarm system hits maximum volume. Jordan's stomach sinks. Jordan's hands shake. Everything narrows to this moment—collapse or breakthrough, no middle ground. Jordan stands inside the peak. The pattern says: this is who you are. Jordan hears it. For the first time, Jordan hears it as a sentence, not a fact. A sentence can be wrong. Jordan's body shakes with the intensity. The shaking is real. The sentence is interpretation. Jordan separates the shaking from the sentence. The body still trembles. The identity claim dissolves. The alarm sounds and the body recognizes it as noise. The frame cracks open.
 ---
@@ -270,7 +270,7 @@ path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/emb
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Priya accepts the compliment. Does not deflect, correct, or minimize. The alarm system activates. Priya's hands shake. The heat rises. Priya recognizes the heat. Does not turn away from it. Priya lets the alarm ring and acts anyway, body buzzing but hands steady. The old pattern fires and Priya acts from the new understanding anyway. Priya's heart races, but the hands keep moving. The identity is not the pattern. The identity is what Priya does while the pattern runs. Priya does the next right thing with the pattern screaming in the background. The screaming fades to a hum. The hum fades to a fact: the pattern exists. Priya also exists. They are not the same thing.
@@ -293,8 +293,8 @@ Kai leads the critical meeting when the manager is out. No safety net. No unders
 path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/mechanism_proof/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Maya maps the fraud cycle: receive praise, dismiss evidence, wait for exposure, receive praise again. Maya's heart races. The heat is on. The alarm system fires danger signals when no real threat exists. Maya tracks the sequence this time: trigger, body response, thought cascade, behavioral pull. The trigger is external. The body response is automatic. The thought cascade is threat detection without actual danger. The behavioral pull is the part that costs. Maya sees the cost clearly now. Maya's mouth dries as the pattern runs its circuit. The pattern persists because the alarm's false positives never get corrected because Maya avoids the situation before learning it was safe. The persistence is not mysterious. The persistence is mechanical. Seeing the machine does not stop the machine. Seeing the machine reveals the machine is not Maya.
@@ -306,7 +306,7 @@ path: story_atoms/gen_z_professionals/anchored/imposter_syndrome/false_alarm/mec
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Dev gets asked a question in front of the CEO and the mind goes completely blank. Peak intensity. Dev's stomach sinks. Dev's hands shake. The alarm system runs at full power. Dev watches it run. Even at maximum volume, the mechanism follows the same sequence: ambiguous stimulus, threat interpretation, body mobilization, avoidance or escape, relief, reinforcement. The sequence is identical at band five as at band two. Only the amplitude changes. The pattern does not become smarter at higher intensity. It becomes louder. Dev's body absorbs the volume. Dev's mind maps the circuit. The circuit has no exit built in—it loops. The loop persists because it feeds on its own output. Dev sees the feed. Seeing the feed does not stop the loop. Seeing the feed reveals the loop has a structure. Structure can be interrupted.

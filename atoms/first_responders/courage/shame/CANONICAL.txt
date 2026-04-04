@@ -5,8 +5,8 @@
 path: story_atoms/first_responders/anchored/courage/shame/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Jake feels the courage. The shame mechanism is starting. He notices the pattern emerging.
@@ -18,7 +18,7 @@ RECOGNITION v02
 path: story_atoms/first_responders/anchored/courage/shame/recognition/micro/v03.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: identity
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -31,8 +31,8 @@ RECOGNITION v04
 path: story_atoms/first_responders/anchored/courage/shame/recognition/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Heather notices the shift. The courage is here. The shame is how it manifests.
@@ -44,8 +44,8 @@ MECHANISM_PROOF v01
 path: story_atoms/first_responders/anchored/courage/shame/mechanism_proof/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Sofia is isolated by it. The courage is affecting her work. The shame is spreading.
@@ -57,8 +57,8 @@ MECHANISM_PROOF v03
 path: story_atoms/first_responders/anchored/courage/shame/mechanism_proof/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Brianna is consumed. The courage is her reality now. The shame is running her life.
@@ -70,8 +70,8 @@ MECHANISM_PROOF v05
 path: story_atoms/first_responders/anchored/courage/shame/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Jake names it. The courage is real. The shame is how it works. Understanding shifts things.
@@ -83,7 +83,7 @@ TURNING_POINT v02
 path: story_atoms/first_responders/anchored/courage/shame/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -96,7 +96,7 @@ TURNING_POINT v04
 path: story_atoms/first_responders/anchored/courage/shame/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -109,8 +109,8 @@ EMBODIMENT v01
 path: story_atoms/first_responders/anchored/courage/shame/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Sofia is present. The courage is part of her. The shame is integrated.
@@ -123,7 +123,7 @@ path: story_atoms/first_responders/anchored/courage/shame/embodiment/micro/v04.t
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Brianna is whole. The courage is integrated. The shame doesn't define her.
@@ -135,8 +135,8 @@ EMBODIMENT v05
 path: story_atoms/first_responders/anchored/courage_shame/recognition/band_fill/v06.txt
 BAND: 5
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Crisis. Breakthrough. The moment of maximum intensity.
@@ -147,7 +147,7 @@ Crisis. Breakthrough. The moment of maximum intensity.
 path: story_atoms/first_responders/anchored/courage_shame/recognition/band_fill/v07.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -160,7 +160,7 @@ path: story_atoms/first_responders/anchored/courage/shame/turning_point/micro/v0
 BAND: 4
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Vasquez felt fear during a call and is ashamed of it. Real, gripping, stop-you-in-your-tracks fear. He finished the call. Nobody was hurt. But the fear existed and the shame says it should not have. His face burns in the locker room. The frame shifts when he opens his locker and sees his commendation from last year — awarded for bravery during a call where he also felt fear. The commendation does not mention the fear. But the fear was there. Courage and fear coexisted then. They coexist now. The shame says they cannot. The commendation says they do.
@@ -172,7 +172,7 @@ path: story_atoms/first_responders/anchored/courage/shame/turning_point/micro/v0
 BAND: 5
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 5
 IDENTITY_STAGE: experimentation
 ---
 Kim reaches the breaking point. The shame pattern at peak courage intensity has stripped everything back to bone. Chest cracking. Hands shaking. The old frame is not bending. It is shattering. Kim watches the pieces fall and does not try to reassemble them. The frame told a story about why this pain was the price of the work. The story was wrong. The pain is real. The price was manufactured by a system that confuses endurance with character. Kim stands in the wreckage of the old explanation. Something new is visible in the gap. Not a solution. A direction. The first direction that does not lead back to the same station, the same silence, the same acceptance of the unacceptable.
@@ -208,7 +208,7 @@ path: story_atoms/first_responders/anchored/courage/shame/mechanism_proof/micro/
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Chen identifies the shame's enforcement mechanism in first responder culture. The culture permits physical injury but not emotional injury. A broken bone gets sympathy and sick leave. A broken spirit gets silence and suspicion. The shame is not personal. It is institutional. The mechanism: the culture rewards stoicism and punishes vulnerability. Chen has been following a script written by the institution, not by her own values. Her face warms as the mechanism becomes visible. The shame is a cultural product, not a personal failing.
@@ -220,7 +220,7 @@ path: story_atoms/first_responders/anchored/courage/shame/mechanism_proof/micro/
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Morales sees the shame's generational transmission. His captain learned it from his captain. The silence, the stoicism, the punishment of vulnerability — it passes through the ranks like an inherited disease. The mechanism: shame is not felt. It is taught. It is modeled. The new recruit learns it from the veteran's silence. The veteran learned it from the captain's disapproval. The captain learned it from the culture's mythology of the unbreakable hero. Morales's face burns. He is not carrying his own shame. He is carrying decades of institutional shame that was handed down like equipment.

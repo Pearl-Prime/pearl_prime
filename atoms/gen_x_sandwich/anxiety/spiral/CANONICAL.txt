@@ -5,7 +5,7 @@
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -17,8 +17,8 @@ Carol's mother doesn't answer the phone at 4 p.m. Carol calls again. Still no an
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/recognition/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Steve's father had a Parkinson's symptom yesterday—a slight tremor that worsened. Steve immediately spirals. The tremor is worsening means Parkinson's is progressing means his father is declining means Steve should have visited sooner means Steve wasn't present enough means his father's decline is partially Steve's fault. Steve's throat closes. By the time Steve's father's doctor confirms the tremor is just normal fluctuation, Steve has lived through multiple layers of guilt and failure. He should have noticed sooner. He should be visiting more. He should quit his job and be his father's full-time caregiver. His hands are cold. The spiral has him. One tremor has become evidence that Steve is not doing enough. His chest is heavy.
@@ -29,7 +29,7 @@ Steve's father had a Parkinson's symptom yesterday—a slight tremor that worsen
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/recognition/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,8 +41,8 @@ Ray's daughter called and mentioned her son has a cold. Ray immediately spirals.
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Mike gets a text from his mother asking about money. This is a simple question. But Mike spirals immediately. His mother is asking for money means his mother is struggling financially means Mike hasn't done enough means Mike should be supporting them more means Mike is failing at his responsibility means the business is the problem means Mike should prioritize his parents' welfare over his own means Mike is selfish. His hands are cold. His stomach is twisted. By the time Mike realizes his mother just wants to reimburse him for something he paid, Mike has lived through a catastrophe of guilt. He should be financially supporting his parents. He's failing. His chest is heavy. The spiral has activated. One simple question has become evidence of his fundamental inadequacy.
@@ -53,7 +53,7 @@ Mike gets a text from his mother asking about money. This is a simple question. 
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/recognition/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -66,7 +66,7 @@ path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/mechanism_proof/micro/v
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Carol's spiral is self-perpetuating. She calls her mother to check on her. Her mother says, "You're checking so much. Do you think I'm in trouble?" Carol's concern has now activated her mother's anxiety, which means Carol's response to missing a call has generated an actual problem. Carol spirals again. She shouldn't have called because calling made her mother worried. But not calling would mean she doesn't care. Carol is trapped. The mechanism is that the spiral creates the very problem it fears. Carol's anxious vigilance is making her mother anxious. One missed call has become a chain of events: mother anxious, Carol more vigilant, mother more anxious, Carol more vigilant. Carol's chest is tight all the time now.
@@ -78,7 +78,7 @@ path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/mechanism_proof/micro/v
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Steve's spiral about his father's tremor has created distance. Steve called more frequently to compensate for his guilt. His father noticed. His father became self-conscious about his own body, watching for tremors, reporting them to Steve. Steve's guilt has created a situation where his father is now anxious about his own body. The mechanism is that Steve's spiral has generated the very problem it feared: his father is now struggling with anxiety about his condition. Steve's response to feeling inadequate has made him more inadequate. His throat is perpetually closed. He's more anxious now, not less. The spiral has activated a secondary loop: Steve's guilt creates hypervigilance, hypervigilance creates problems, problems justify the guilt. He's trapped.
@@ -90,7 +90,7 @@ path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/mechanism_proof/micro/v
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Ray's spiral about the cold has created additional stress. Ray has called his daughter three times to check on her. His daughter is now irritated. She doesn't need him to call three times about a cold. The mechanism is that Ray's spiral has created the very problem it feared: a strain in Ray's relationship with his daughter. Ray's guilt has made him intrusive. Now he's not just anxious, he's also damaged the relationship he was trying to protect. His jaw is clenched. His stomach is in knots. The spiral has loops now. Cold means he needs to check, checking makes his daughter annoyed, her annoyance confirms he's doing it wrong, doing it wrong confirms he should check more. He's locked in a loop.
@@ -102,7 +102,7 @@ path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/mechanism_proof/micro/v
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Mike's spiral about his mother's money question has expanded into a broader anxiety about finances. He's now thinking he should restructure his business to be more family-focused. He's less focused at work. His business performance is declining. The mechanism is that his spiral about financial responsibility has created actual financial problems. His anxiety about not doing enough has made him do less. His hands are cold. His stomach is twisted. The spiral is self-validating now. He's anxious about failing financially, so he acts anxiously, which creates financial problems, which validates the anxiety. He's trapped in a loop of his own creation.
@@ -114,7 +114,7 @@ path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/mechanism_proof/micro/v
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Janet's spiral about the work email has made her less confident. She's second-guessing her timeline, her decisions, her capability. She's now presenting less confidently at work, which has her boss questioning whether she can handle the division. The mechanism is that Janet's spiral has created doubt that has created actual problems. Her anxiety about failing has made her underperform. Her chest is tight. She's in a loop now where anxiety creates behavior that validates the anxiety. She's trapped in her own spiral.
@@ -125,7 +125,7 @@ Janet's spiral about the work email has made her less confident. She's second-gu
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -137,7 +137,7 @@ Carol's mother says directly: "You're spiraling when I don't answer. I need you 
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -149,8 +149,8 @@ Steve's therapist asks him: "What would happen if you didn't call your father ab
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Ray's daughter says: "Dad, you're spiraling. Please stop calling." Ray feels the impact. His spiral is damaging his relationship. The turning point is that Ray recognizes his anxiety is hurting the people he's trying to protect. Ray makes a deal with himself: no more anxious calls. When the spiral activates—the cold makes him worry—Ray feels the activation and doesn't call. He breathes through it. His stomach settles slightly. The turning point is accepting that his anxiety is his responsibility, not his daughter's. She has her own life to live. His anxiety is his to manage.
@@ -161,7 +161,7 @@ Ray's daughter says: "Dad, you're spiraling. Please stop calling." Ray feels the
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -173,8 +173,8 @@ Mike's therapist asks him: "What would happen if you didn't restructure your bus
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Janet's boss says: "The timeline is fine. Why are you spiraling?" Janet realizes her spiral is internal. She asked for a problem that wasn't there. The turning point is that Janet recognizes the spiral pattern. When it activates, Janet stops and asks: "What's actually true?" The email was routine. Janet is doing fine. Her parents' move is challenging but not a failure. The turning point is choosing to distinguish between the spiral narrative and actual reality. Janet's chest loosens. She's not acting on the spiral anymore. She's just experiencing it and letting it pass. Her body settles slightly.
@@ -185,8 +185,8 @@ Janet's boss says: "The timeline is fine. Why are you spiraling?" Janet realizes
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Carol now expects the spiral when her mother doesn't answer. She recognizes the pattern. She sits with it instead of acting on it. Her mother answers eventually. Everything is fine. Carol's chest is less tight now. The spiral doesn't disappear, but Carol is no longer enslaved to it. She's built a relationship with her mother that includes Carol's own nervous system regulation. Carol and her mother have both settled. Carol's shoulders are lower. She's learning to have a life that includes her mother without being consumed by anxiety about her mother.
@@ -197,8 +197,8 @@ Carol now expects the spiral when her mother doesn't answer. She recognizes the 
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/embodiment/micro/v02.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Steve visits his father without the spiral framework. He's not checking, not investigating. He's just being. His father is fine with this. Steve's throat is less closed. He's sleeping better. The spiral still activates sometimes—his father has a symptom, Steve feels the guilt—but Steve doesn't act on it. He lets it pass. His father appreciates having a son who's present rather than a son who's anxious. Steve's hands are warmer. He's learning to have a relationship with his father that's built on presence, not on anxiety management.
@@ -209,8 +209,8 @@ Steve visits his father without the spiral framework. He's not checking, not inv
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Ray is building a different relationship with his family. When the spiral activates, Ray feels it and doesn't call. His family feels the difference. They're more relaxed. Ray is more relaxed. His jaw unclenches. His granddaughter has a cold and nobody spirals. It's just a cold. Ray is learning that he can be available without being anxiously preoccupied. His presence is actually more valuable when he's not spiraling.
@@ -221,8 +221,8 @@ Ray is building a different relationship with his family. When the spiral activa
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Mike keeps his business focused. His anxiety still comes, but he's not letting it drive his decisions. His mother's questions don't trigger a life restructuring anymore. They're just questions. Mike's stomach is less twisted. He's sleeping better. His hands are warmer. He's learning to hold his parents' needs and his own needs in the same space without the spiral taking over. His body is more settled now.
@@ -233,8 +233,8 @@ Mike keeps his business focused. His anxiety still comes, but he's not letting i
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/embodiment/micro/v05.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Janet is building her division on her actual timeline. Her parents are settling in. When the spiral activates, Janet recognizes it. She distinguishes between the spiral narrative and actual reality. The reality is fine. Janet is doing fine. Her chest is open. She's breathing more deeply. She's learning to build a life that includes both work and family care without letting the spiral consume her. Her body is different now—more grounded, more present.
@@ -245,8 +245,8 @@ Janet is building her division on her actual timeline. Her parents are settling 
 path: story_atoms/gen_x_sandwich/anchored/anxiety_spiral/recognition/band_fill/v06.txt
 BAND: 5
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Crisis. Breakthrough. The moment of maximum intensity.
@@ -257,9 +257,9 @@ Crisis. Breakthrough. The moment of maximum intensity.
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+IDENTITY_STAGE: destabilization
 ---
 Rob stands in the middle of the pattern and sees it. The recursive thought loops runs hot—goosebumps erupt. Rob has carried this story about anxiety for so long the weight became invisible. Now the weight announces itself. Rob's chest caves inward. The old frame says: endure. Push through. Keep performing. But the frame cracks. Rob watches the crack spread. The story that held everything together—the one about being strong enough, disciplined enough, good enough—stops making sense. Not because it was wrong. Because it was incomplete. Rob feels the incompleteness in the body. Something shifts behind the sternum. The old story doesn't fit the evidence anymore. Rob stands in the gap between what was believed and what is true.
 ---
@@ -269,9 +269,9 @@ Rob stands in the middle of the pattern and sees it. The recursive thought loops
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: identity
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
 ---
 Everything collapses at once. Barb's grip tightens. The anxiety detonates and the recursive thought loops pattern amplifies it past capacity. Barb's cheeks burn. The body cannot sustain this. The mind cannot sustain this. Something has to break. What breaks is the story. The story that tells Barb to hold this. The story that makes holding the only job. The story shatters and beneath it Barb finds something unexpected: the ground. Not the ground of the old narrative. Raw ground. Unnarrated. Barb stands on it and feels it hold weight. The crisis does not resolve. But the frame through which Barb sees the crisis transforms completely. There is no going back to the old interpretation. The recursive thought loops pattern has burned through its own container.
 ---
@@ -281,8 +281,8 @@ Everything collapses at once. Barb's grip tightens. The anxiety detonates and th
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/embodiment/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Brian moves differently now. The recursive thought loops pattern fires and Brian feels it—eyes sting—but does not become it. Brian acts from the new understanding. The anxiety is present. Hot. Demanding attention. Brian's trapezius hardens. But Brian responds from a different place. Not the old identity that was defined by this pattern. A newer architecture. Brian speaks from it. Makes choices from it. The recursive thought loops pushes back. Brian holds position. Not through force. Through recognition. Brian knows what this is now. Knows the cost structure. Chooses differently anyway. The body carries the heat without collapsing into the old shape. Brian owns this response. It belongs to the person Brian is becoming.
@@ -293,7 +293,7 @@ Brian moves differently now. The recursive thought loops pattern fires and Brian
 path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/embodiment/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
+COST_TYPE: opportunity
 COST_INTENSITY: 5
 IDENTITY_STAGE: self_claim
 ---
@@ -306,7 +306,7 @@ path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/mechanism_proof/micro/v
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Barb sees the machinery in real time. The recursive thought loops pattern fires and Barb catches the sequence: trigger, body response, narrative, behavioral loop. Barb's stance widens. The anxiety is hot. Active. But Barb traces the wiring. The recursive thought loops protects by analyzing the analysis of the analysis. It has always protected by analyzing the analysis of the analysis. The protection costs more than the threat. Barb's abdomen tightens. Barb watches the cost accumulate in the body. Watches the pattern spend resources defending against something that is already happening. The mechanism is visible now. Not as theory. As lived architecture. Barb feels every gear turn. The understanding doesn't reduce the heat. But it names the fire.
@@ -318,7 +318,7 @@ path: story_atoms/gen_x_sandwich/anchored/anxiety/spiral/mechanism_proof/micro/v
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Peak intensity strips everything to structure. Brian's stomach drops. The anxiety hits maximum. The recursive thought loops pattern runs at capacity. Brian's vision narrows. In the crisis, the mechanism becomes naked. Brian sees it without narrative, without justification, without the story that makes it make sense. Raw machinery. The recursive thought loops pattern takes the pain of anxiety and converts it into recursive analysis. The conversion is lossy. More energy goes in than comes out. The deficit accumulates in the body. Brian feels years of deficit in this single moment. The mechanism has been running at a loss for so long the debt is staggering. Brian sees the balance sheet. The numbers do not lie. The pattern costs more than it saves.

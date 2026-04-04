@@ -5,7 +5,7 @@
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -17,7 +17,7 @@ David stares at his calendar and sees it's fully booked in fifteen-minute increm
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/recognition/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -29,8 +29,8 @@ Sarah has responsibility for twelve people. Each of them is managing their own c
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/recognition/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Kevin sits in a meeting about headcount and the message is: do more with less. Every quarter, the directive is the same. Expect more output, expect higher quality, expect team engagement to remain high, expect retention to be better, expect fewer errors. Kevin has seventeen people and he's responsible for the outcomes they produce. He doesn't control how much work gets assigned. He doesn't control the resource constraints. He doesn't control whether the company decides to hire more people. He controls only the translation of impossible demands into daily asks of his team. His throat feels tight. There's no way to do this that doesn't leave people depleted.
@@ -41,7 +41,7 @@ Kevin sits in a meeting about headcount and the message is: do more with less. E
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/recognition/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -53,8 +53,8 @@ Anthony gets the quarterly guidance update. The company is supposed to deliver m
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/recognition/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Tanya gets her marching orders for the quarter: launch three product campaigns, reduce marketing spend by twelve percent, increase engagement metrics by fifteen percent, and do it with the same headcount as last quarter. Her team is already maxed out. Three people are burned out and performing at sixty percent capacity but she can't fire them because she can't hire replacements. So she's managing people who are overwhelmed while being asked to produce more. The gap between what's asked and what's possible has become the water she swims in. Her shoulders are tight by the time the meeting ends.
@@ -66,7 +66,7 @@ path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/mechanism_proof/
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 David actually looks at the work. His team has one major platform migration, three minor feature releases, and two production firefighting incidents in the queue. That's two quarters of work in one quarter. He can either deliver the migration badly or delay the features. He can't deliver everything. He sits with the impossible choice and feels his nervous system fracture. The overcommitment isn't his failure. It's structural. But the failure to deliver will be pinned on him. He's responsible for translating the structural problem into a personal failure and then wearing it.
@@ -77,8 +77,8 @@ David actually looks at the work. His team has one major platform migration, thr
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/mechanism_proof/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Sarah holds a team meeting and the subtext is that her job is to help everyone stay engaged while everyone is overwhelmed. She needs to acknowledge the reality without creating despair. She needs to motivate without lying. She needs to translate up that the team is stretched while translating down that they're capable. She becomes the person in the middle who can't actually solve the core problem—too much work for too many people—but has to perform like someone who has it handled. Her chest is so tight by the end of the meeting that she can't breathe normally. The performance of competence while drowning is more exhausting than the drowning itself.
@@ -90,7 +90,7 @@ path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/mechanism_proof/
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Kevin pulls his team together and realizes there's no good way to deliver the increased expectations. He could push harder and burn everyone out faster. He could underdeliver and face consequences. He could deceive about progress and push the crisis to next quarter. All three options are available. All three are forms of failure. He's responsible for finding a fourth option that doesn't exist. His nervous system is in a state of chronic activation because he's structurally unable to succeed.
@@ -102,7 +102,7 @@ path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/mechanism_proof/
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Anthony presents the quarterly forecast and internally he knows it's optimistic. The numbers assume certain things about market conditions and sales team performance that are uncertain. But the board expects a credible forecast. Credible means confident. Confident means he's accountable if the forecast is wrong. He's responsible for an outcome that depends on variables he doesn't control. His jaw is so tight he can barely enunciate. The overwhelm is that he owns outcomes that are partially determined by forces outside his sphere of control.
@@ -114,7 +114,7 @@ path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/mechanism_proof/
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Tanya sits with her team and acknowledges the gap: what's being asked is not achievable with current resources. She has three options. She can lie and commit to the impossible. She can tell the truth and face pushback. She can try to thread the needle and probably fail anyway. She chooses truth. The pushback comes immediately. She becomes the person who's not delivering because she's being realistic. Her shoulders feel like they're carrying everyone's weight.
@@ -125,8 +125,8 @@ Tanya sits with her team and acknowledges the gap: what's being asked is not ach
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 David stops trying to find the impossible fourth option and instead maps what the trade-offs are. Migration quality versus feature velocity. Long-term platform health versus short-term feature delivery. He brings this to his leadership: "Here's the choice we're actually making. Here's what we're optimizing for. Here's what we're accepting. Let's decide explicitly." His chest unclenches slightly. The overwhelm doesn't disappear but it shifts from "I'm failing at impossible" to "we're making a choice with clear trade-offs." That's a different cognitive state. He's no longer in acute shame. He's in active problem-solving.
@@ -137,8 +137,8 @@ David stops trying to find the impossible fourth option and instead maps what th
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Sarah stops performing competence and starts being real. "The team is stretched," she tells her leadership. "We have capacity for four quarters of work in one quarter. Here's what we need: either more people or clearer priorities." She doesn't solve the problem but she stops pretending it's not a problem. The relief is immediate. She's no longer carrying the burden of making the impossible look manageable. Her team responds with more honesty too. They're not all pretending. They start actually planning around constraint instead of working around it.
@@ -149,8 +149,8 @@ Sarah stops performing competence and starts being real. "The team is stretched,
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Kevin does something radical: he asks his team what's actually possible instead of pushing for the impossible. His team tells him they can maintain quality and deliver two of the three initiatives. Kevin brings this back to his leadership: "Here's what's possible with current resources." Some of the initiatives don't happen. The overwhelm lifts slightly because now the expectations match the reality. His team isn't burning out because Kevin stopped accepting impossible commitments.
@@ -161,8 +161,8 @@ Kevin does something radical: he asks his team what's actually possible instead 
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Anthony models his forecast with scenario planning. "Here's the base case, here's if the market shifts, here's if sales productivity changes." He's no longer pretending certainty. He's showing variables. He's accountable for the forecast methodology, not for outcomes he doesn't control. The board response is better than he expected. They're interested in the thinking. The overwhelm of being solely responsible for an unknowable future shifts to being jointly responsible for thinking through possibilities. His jaw loosens.
@@ -173,8 +173,8 @@ Anthony models his forecast with scenario planning. "Here's the base case, here'
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Tanya negotiates. "We can do three campaigns if we reduce engagement targets. Or two campaigns with the current targets. Or we need more budget." She presents the choice. Her leadership decides. Tanya's overwhelm decreases because she's no longer carrying the tension of the gap alone. It's acknowledged. It's a shared constraint instead of her hidden failure.
@@ -185,8 +185,8 @@ Tanya negotiates. "We can do three campaigns if we reduce engagement targets. Or
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 David manages by trade-offs now. He's no longer trying to do everything. He's doing what's possible and being explicit about what's not. His team has permission to not be overwhelmed because David has given them permission to not deliver the impossible. The overwhelm is still present in the work environment, but it's distributed and acknowledged instead of hidden. His chest stays open.
@@ -197,8 +197,8 @@ David manages by trade-offs now. He's no longer trying to do everything. He's do
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Sarah's team performs better because Sarah stopped pretending to be okay with an untenable situation. Honesty about the constraint created capacity for actually managing the constraint. The overwhelm is still there but it's not multiplied by the performance of false competence. Her energy goes to actual problem-solving instead of impression management.
@@ -209,8 +209,8 @@ Sarah's team performs better because Sarah stopped pretending to be okay with an
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Kevin's team delivers what they actually committed to instead of what they were asked to deliver. Quality improves. Burnout decreases. The initiatives that don't launch don't launch with Kevin's intention, not as his failure. He's accountable for good work within constraints, not for making constraints disappear. His nervous system is less activated.
@@ -221,8 +221,8 @@ Kevin's team delivers what they actually committed to instead of what they were 
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/embodiment/micro/v04.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Anthony forecasts with variables. His board understands the methodology. He's accountable for good thinking, not for perfect prediction. The overwhelm of owning uncontrollable outcomes transforms into the more manageable challenge of thinking well about what might happen. He's still responsible, but the responsibility is right-sized.
@@ -233,8 +233,8 @@ Anthony forecasts with variables. His board understands the methodology. He's ac
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/embodiment/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Tanya leads with transparency. The overwhelm is still there but now everyone can see it and respond to it. Her team rallies around priorities because priorities are clear instead of impossible. She's not drowning alone.
@@ -245,8 +245,8 @@ Tanya leads with transparency. The overwhelm is still there but now everyone can
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/recognition/band_fill/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Peak tension. The turning point approaches. Everything shifts.
@@ -257,8 +257,8 @@ Peak tension. The turning point approaches. Everything shifts.
 path: story_atoms/corporate_managers/anchored/anxiety_overwhelm/recognition/band_fill/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Crisis. Breakthrough. The moment of maximum intensity.
@@ -270,7 +270,7 @@ path: story_atoms/corporate_managers/anchored/anxiety/overwhelm/turning_point/mi
 BAND: 4
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Sarah has forty-seven unread emails, three overdue deliverables, and a team member in crisis. Her chest is a fist. Her vision tunnels. She opens her laptop and stares at the inbox and her fingers freeze over the keyboard. The overwhelm is total — every task demands attention and no task can receive it. Then something shifts. She closes the laptop. The gesture is small and radical. She picks up a pen and writes three words on a sticky note: the one thing. Not the forty-seven things. The one thing she can do in the next thirty minutes. Her hand shakes writing it. The frame that says she must hold everything simultaneously — that frame cracks. She cannot hold everything. She never could. The belief that she should is the source of the paralysis, not the volume of work. Her chest opens one fraction. She does the one thing.
@@ -282,7 +282,7 @@ path: story_atoms/corporate_managers/anchored/anxiety/overwhelm/turning_point/mi
 BAND: 5
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 5
 IDENTITY_STAGE: experimentation
 ---
 Sarah collapses at her desk. Not metaphorically. Her body gives out. Her vision grays. Her arms go limp. She sits with her forehead on the keyboard and cannot move. The overwhelm has exceeded her nervous system's capacity to sustain it. A colleague finds her. Asks if she is okay. Sarah opens her mouth and what comes out is: "I cannot do all of this." The words hang in the air. She has never said them before. She has always believed she should be able to do all of it. The collapse breaks the frame completely. Her body has voted. The old story — that capacity is limitless if you just try harder — is no longer survivable. Her body refused to carry it. She sits up slowly. Her hands tremble. Everything changes from this point. Not because she wants it to change, but because her body will no longer permit the alternative.
@@ -294,7 +294,7 @@ path: story_atoms/corporate_managers/anchored/anxiety/overwhelm/embodiment/micro
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Sarah walks into Monday morning with a list of five priorities. Not forty-seven. Five. Her chest is tight — the old reflex says five is not enough, she is dropping things, she is failing. She breathes into the tightness and holds the list. She delegates three projects she used to grip. She says no to a committee invitation. Her jaw clenches on the no and then releases. She is not a person who does everything. She is a person who does the right things with full attention. The distinction rewires her day. By noon she has finished two priorities with actual focus. Her hands are warm. She is present in her work instead of scattered across it. The overwhelm still whispers at the edges. She lets it whisper. She does not reorganize her identity around it.
@@ -318,7 +318,7 @@ path: story_atoms/corporate_managers/anchored/anxiety/overwhelm/mechanism_proof/
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Sarah opens her calendar and counts: fourteen meetings in a single day. She scheduled them all. She said yes to every request. Her chest is concrete. Her hands are numb. She sees the pattern with hot clarity. The overwhelm is not happening to her. She is building it. Each yes adds a brick to the wall that traps her. The protective logic is visible: saying yes means she is indispensable, and indispensable people are safe. But the safety is an illusion. She is drowning in the evidence of her own indispensability. Her throat closes. The pattern persists because saying no feels like risking her value. She would rather be overwhelmed and valued than available and uncertain. Her jaw aches from clenching. The understanding does not reduce the overwhelm. It shows her the architecture.
@@ -330,7 +330,7 @@ path: story_atoms/corporate_managers/anchored/anxiety/overwhelm/mechanism_proof/
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Sarah cannot remember the last day she did not feel behind. The overwhelm has become her baseline. She wakes behind. She sleeps behind. Her chest never fully unclenches. At 1 AM she lies in bed and sees the entire system: she takes on more because more proves her worth, the more becomes unmanageable, the unmanageable becomes shame, the shame drives her to take on more to compensate. The loop is perfect. Airtight. Self-fueling. Her heart pounds in the dark. She sees why the pattern never resolves — resolution would mean accepting that she is enough without the volume. That her value does not scale with her output. That doing less does not mean being less. Her body resists the understanding. Every muscle says: if you stop, you disappear. The pattern persists because the alternative feels like annihilation.

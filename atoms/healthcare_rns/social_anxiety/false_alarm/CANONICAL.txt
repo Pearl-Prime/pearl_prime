@@ -35,7 +35,7 @@ IDENTITY_STAGE: pre_awareness
 path: story_atoms/healthcare_rns/anchored/social_anxiety_false_alarm/recognition/band_fill/v06.txt
 BAND: 1
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -47,7 +47,7 @@ A moment of calm. The intensity drops. Space opens.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_false_alarm/recognition/band_fill/v07.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -59,8 +59,8 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_false_alarm/recognition/band_fill/v08.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Peak tension. The turning point approaches. Everything shifts.
@@ -71,7 +71,7 @@ Peak tension. The turning point approaches. Everything shifts.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_false_alarm/recognition/band_fill/v09.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -83,7 +83,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_false_alarm/recognition/band_fill/v10.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -95,7 +95,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_false_alarm/recognition/band_fill/v11.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -107,7 +107,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_false_alarm/recognition/band_fill/v12.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -119,7 +119,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_false_alarm/recognition/band_fill/v13.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -131,7 +131,7 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety_false_alarm/recognition/band_fill/v14.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -144,8 +144,8 @@ The mechanism deepens. Stakes rise. The cost becomes clear.
 path: story_atoms/healthcare_rns/anchored/social_anxiety/false_alarm/turning_point/micro/v01.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Marcus stands in the elevator beside the charge nurse. His fingers dig into his own palms. Crescents form in the skin. He feels adrenaline flood through a body with no danger present. The frame that has held everything in place — the body never lies about threat — strains under the weight of what Marcus sees. For one long second the old architecture holds. Then it cracks. Marcus feels the fracture travel through his chest. The story that organized every decision, every reaction, every judgment stops organizing. The siren and the threat occupy different timelines entirely. Marcus does not reach for a replacement. He stands in the gap where the certainty lived, breathing into the new and terrifying openness.
@@ -156,9 +156,9 @@ Marcus stands in the elevator beside the charge nurse. His fingers dig into his 
 path: story_atoms/healthcare_rns/anchored/social_anxiety/false_alarm/turning_point/micro/v02.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
 ---
 Brianna stands in the break room surrounded by colleagues. The walls close in. Her lungs refuse to expand against the compression. She feels the alarm reaches screaming intensity while the room stays perfectly still. The frame that has held everything in place — the body never lies about threat — strains under the weight of what Brianna sees. For one long second the old architecture holds. Then it cracks. Brianna feels the fracture travel through her chest. The story that organized every decision, every reaction, every judgment stops organizing. The siren and the threat occupy different timelines entirely. Brianna does not reach for a replacement. She stands in the gap where the certainty lived, breathing into the new and terrifying openness.
 ---
@@ -169,7 +169,7 @@ path: story_atoms/healthcare_rns/anchored/social_anxiety/false_alarm/embodiment/
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 At the staff meeting with the attending. The pulse in her neck hammers against the skin. Keisha feels it in her fingertips. The alarm pushes with full force against her sternum. Keisha holds still in the noise and lets the wave pass through without obeying. The body shakes with the effort. The choice holds anyway. This is not willpower overriding sensation. This is ownership absorbing sensation. Keisha moves from the new ground she has claimed. Her hands tremble and her hands act. Both facts are true simultaneously. The identity is not a concept. It lives in her muscles, in the steadiness of her spine, in the way her feet stay planted while the old pattern screams for retreat.
@@ -193,7 +193,7 @@ path: story_atoms/healthcare_rns/anchored/social_anxiety/false_alarm/mechanism_p
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 At the staff meeting with the attending. Sweat breaks along his hairline. His shirt collar dampens. The alarm operates in plain view for the first time. Marcus catches the pattern mid-cycle and holds still long enough to see the entire architecture. The alarm has lost the ability to distinguish remembered threat from present fact. The mechanism persists because it disguises itself as protection — it wears the costume of something necessary. Marcus watches the loop close and reopen. His body holds the tension of seeing without intervening. The seeing does not resolve the pattern. But it makes the pattern visible, and visibility changes everything.
@@ -205,7 +205,7 @@ path: story_atoms/healthcare_rns/anchored/social_anxiety/false_alarm/mechanism_p
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 In the elevator beside the charge nurse. Nausea rolls through like a rogue wave. Keisha grips the counter to stay vertical. The alarm operates in plain view for the first time. Keisha catches the pattern mid-cycle and holds still long enough to see the entire architecture. The threat detector runs on outdated code — it responds to the shape of the past, not the content of the present. The mechanism persists because it disguises itself as protection — it wears the costume of something necessary. Keisha watches the loop close and reopen. Her body holds the tension of seeing without intervening. The seeing does not resolve the pattern. But it makes the pattern visible, and visibility changes everything.

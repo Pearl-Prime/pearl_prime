@@ -5,7 +5,7 @@
 path: story_atoms/educators/anchored/self_worth/comparison/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -18,7 +18,7 @@ path: story_atoms/educators/anchored/self_worth/comparison/recognition/micro/v02
 BAND: 3
 MECHANISM_DEPTH: 1
 COST_TYPE: social
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 James attends a conference and watches a presenter—same subject, same grade level. The presenter is polished: smooth transitions, timed slides, a joke that lands perfectly. James remembers his own last presentation—the slide that advanced too early, the tangent he didn't plan, the joke that got silence. The comparison takes the presenter's best performance and James's worst and declares the gap definitive. The gap is between curated and uncurated: the presenter rehearsed this talk twenty times. James is comparing a performance to a memory. The performance was designed to impress. The memory wasn't designed at all.
@@ -29,7 +29,7 @@ James attends a conference and watches a presenter—same subject, same grade le
 path: story_atoms/educators/anchored/self_worth/comparison/recognition/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -42,7 +42,7 @@ path: story_atoms/educators/anchored/self_worth/comparison/recognition/micro/v04
 BAND: 3
 MECHANISM_DEPTH: 1
 COST_TYPE: social
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Michael's colleague publishes an article in an education journal. Michael hasn't published anything. The comparison converts the publication gap into a worth gap: published means serious educator, unpublished means just a teacher. The "just a teacher" is the comparison's devaluation mechanism—it reduces the primary function of the profession to a consolation prize. Michael teaches five classes a day, mentors three new teachers, and coaches the debate team. The comparison can't weigh these against one publication because publications are countable and mentoring isn't. The comparison always favors the countable.
@@ -53,8 +53,8 @@ Michael's colleague publishes an article in an education journal. Michael hasn't
 path: story_atoms/educators/anchored/self_worth/comparison/recognition/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Anika attends a doctoral seminar with educators from private schools. Their resources: dedicated tech staff, class sizes of fifteen, budgets for materials. Anika's reality: thirty-two students, shared supplies, a copier that works every other Tuesday. The comparison runs on resources and produces a worth verdict: they can do more because they have more, therefore they're better educators. The comparison doesn't adjust for context. Context-adjusted, Anika's outcomes with thirty-two students and a broken copier might equal or exceed their outcomes with fifteen students and dedicated staff. The comparison doesn't do context adjustment. The comparison does raw output comparison.
@@ -66,7 +66,7 @@ path: story_atoms/educators/anchored/self_worth/comparison/mechanism_proof/micro
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Rachel maps the comparison's selection pattern. The comparison selects the teacher who's best at each individual thing and measures Rachel against that teacher. Bulletin boards: compares to the design-expert colleague. Technology: compares to the young teacher who's a digital native. Parent communication: compares to the colleague who sends weekly newsletters. Rachel is competing against a composite—a fictional teacher who has every colleague's greatest strength simultaneously. The composite doesn't exist. No single teacher has all those strengths. The comparison manufactures an impossible benchmark from real pieces of real people.
@@ -77,7 +77,7 @@ Rachel maps the comparison's selection pattern. The comparison selects the teach
 path: story_atoms/educators/anchored/self_worth/comparison/mechanism_proof/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: destabilization
 ---
@@ -90,7 +90,7 @@ path: story_atoms/educators/anchored/self_worth/comparison/mechanism_proof/micro
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Sofia realizes the comparison uses social media as an evidence source. The evidence is fundamentally corrupted: social media shows best moments. Comparing best moments to all moments always finds a deficit in the all moments. The corruption is structural, not accidental—the platform is designed to display the curated. Using curated displays as a benchmark for uncurated reality is a measurement error so fundamental that every conclusion drawn from it is invalid. Every conclusion. The comparison draws conclusions from invalid data with full confidence. The confidence is the problem. Invalid data, delivered confidently, produces false beliefs.
@@ -101,8 +101,8 @@ Sofia realizes the comparison uses social media as an evidence source. The evide
 path: story_atoms/educators/anchored/self_worth/comparison/mechanism_proof/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Michael maps the comparison's impact on his actual teaching. The comparison with the published colleague produces: guilt about not writing, resentment about time pressures, diminished satisfaction with his classroom work. The guilt produces nothing—he still doesn't write because there's no time. The resentment poisons the parts of his job he loves. The diminished satisfaction reduces his engagement with students. The comparison—intended by some psychological logic to motivate improvement—actually degrades current performance. He teaches worse on days the comparison is loudest. The comparison is an anti-motivator disguised as a motivator.
@@ -113,7 +113,7 @@ Michael maps the comparison's impact on his actual teaching. The comparison with
 path: story_atoms/educators/anchored/self_worth/comparison/mechanism_proof/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
+COST_TYPE: opportunity
 COST_INTENSITY: 2
 IDENTITY_STAGE: destabilization
 ---
@@ -125,7 +125,7 @@ Anika calculates the comparison's cost in the doctoral program. Each seminar, th
 path: story_atoms/educators/anchored/self_worth/comparison/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -137,8 +137,8 @@ Rachel stops looking at the colleague's bulletin board and starts looking at her
 path: story_atoms/educators/anchored/self_worth/comparison/turning_point/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 James lists his invisible work. One page, one week. Twenty-seven individual student interactions that addressed specific needs. Three modified assignments. Two parent calls. One college recommendation letter. Four hallway conversations that redirected a student's day. The list fills a page. The page is evidence of a kind of teaching that doesn't present at conferences but changes lives at the individual level. The conference presenter reaches hundreds for an hour. James reaches twenty-seven for a year. Both have value. Different kinds. The comparison measured one kind. James counted the other.
@@ -149,7 +149,7 @@ James lists his invisible work. One page, one week. Twenty-seven individual stud
 path: story_atoms/educators/anchored/self_worth/comparison/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 CALLBACK_ID: teacher_instagram
@@ -163,8 +163,8 @@ Sofia unfollows the classroom Instagram accounts. The unfollowing is a data-sour
 path: story_atoms/educators/anchored/self_worth/comparison/turning_point/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Michael talks to the published colleague over coffee. The colleague says: "I wrote that article on winter break. I had no kids at home and nothing else to do." The context the comparison stripped away is restored in one sentence. The publication wasn't produced by a better educator. The publication was produced by different life circumstances. Michael has three children. His winter break goes to them. The comparison measured the article without measuring the circumstances. The circumstances change the meaning entirely. The article and the three children are both legitimate uses of time. The comparison only counted the article.
@@ -175,7 +175,7 @@ Michael talks to the published colleague over coffee. The colleague says: "I wro
 path: story_atoms/educators/anchored/self_worth/comparison/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -187,8 +187,8 @@ Anika presents her research proposal. The proposal draws on her public school ex
 path: story_atoms/educators/anchored/self_worth/comparison/embodiment/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: self_claim
 ---
 Rachel evaluates her classroom using her own metrics. Student engagement during discussion: high—she can see it in their posture, their questions, their willingness to disagree with each other. Student risk-taking in writing: increasing—the poems are getting braver. Student attendance in her class versus others: her rate is higher. Her metrics measure what her teaching produces. The comparison's metrics measure what the hallway displays. She tracks her metrics in a notebook. The notebook is her alternative to the drawer—an active record instead of a passive file. The active record builds a cumulative picture the comparison can't reframe because the picture is in Rachel's handwriting, updated weekly.
@@ -199,8 +199,8 @@ Rachel evaluates her classroom using her own metrics. Student engagement during 
 path: story_atoms/educators/anchored/self_worth/comparison/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 James keeps the weekly invisible-work list going. Four weeks of data. The data shows a pattern: consistent, daily, student-centered work that doesn't appear on any professional scoreboard. The pattern is his teaching identity. The teaching identity isn't defined by publications or presentations. The teaching identity is defined by twenty-seven interactions per week, sustained over years. He shows the list to a mentee—a new teacher overwhelmed by the comparison with experienced colleagues. The mentee says: "I didn't know this was teaching too." The list redefined teaching for someone who was measuring herself against the same wrong scoreboard.
@@ -211,8 +211,8 @@ James keeps the weekly invisible-work list going. Four weeks of data. The data s
 path: story_atoms/educators/anchored/self_worth/comparison/embodiment/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: self_claim
 CALLBACK_ID: teacher_instagram
 CALLBACK_PHASE: return
@@ -225,8 +225,8 @@ Sofia photographs her own classroom. Not for social media—for her own record. 
 path: story_atoms/educators/anchored/self_worth/comparison/embodiment/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 3
 IDENTITY_STAGE: self_claim
 ---
 Michael doesn't publish an article. He does write a guide for the three new teachers he mentors—a practical document about classroom management, parent communication, and surviving the first year. The guide isn't peer-reviewed. The guide is read by three people who need it. The three people use it daily. The article the comparison measured would have been read by academics. The guide is read by practitioners in their first year of the hardest job they've done. The comparison measures prestige. The guide measures utility. Three teachers with a practical guide versus an academic audience with a theoretical article. Different value systems. Michael chose his.
@@ -237,8 +237,8 @@ Michael doesn't publish an article. He does write a guide for the three new teac
 path: story_atoms/educators/anchored/self_worth/comparison/embodiment/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Anika writes her doctoral work from her public school reality. The reality is her methodology, her data source, her scholarly contribution. The classmates with private school backgrounds write from theirs. Both are valid. Both produce research. The comparison wanted one reality to be better. The academy says both are needed. Anika's chapters read differently because they're written from thirty-two desks and a broken copier. The differently isn't worse. The differently is a perspective the field lacks. The lack is her contribution. The contribution is built from the conditions the comparison called disadvantages. The disadvantages are the scholarship.
@@ -250,7 +250,7 @@ path: story_atoms/educators/anchored/self_worth/comparison/turning_point/micro/v
 BAND: 4
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Rachel watches a peer handle self-worth with apparent ease. The comparison fires hot — Rachel struggles while others seem to navigate the same terrain effortlessly. Chest tight. Hands cold. The gap between Rachel's experience and the peer's performance feels like proof of deficiency. Then something cracks open. Rachel catches a glimpse behind the peer's composure — a trembling hand, a tight jaw, a voice that almost breaks. The ease was armor. The frame shifts: Rachel was comparing a private struggle to a public performance. Chest loosens The comparison mechanism was measuring the wrong dimension. Both people carry the weight. One hides it better.
@@ -262,7 +262,7 @@ path: story_atoms/educators/anchored/self_worth/comparison/turning_point/micro/v
 BAND: 5
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 5
 IDENTITY_STAGE: experimentation
 ---
 Rachel's self-worth reaches a breaking point. The comparison has been running for so long and so hard that the body refuses to continue. Hands grip the desk. Face burns. Rachel stands in the wreckage of a metric system that collapsed under its own weight — measuring against others until the measurement consumed all the energy that should have gone to the actual work. Then the person Rachel has been comparing against reveals their own collapse. The carefully maintained exterior crumbles. Rachel's chest cracks open. The comparison was between two performances of adequacy, not between adequacy and inadequacy. Both were performing. Both were breaking. The frame shatters because the person who seemed to have it all together was held together by the same kind of wire. Nobody wins the comparison because nobody was competing. They were all just surviving.
@@ -274,7 +274,7 @@ path: story_atoms/educators/anchored/self_worth/comparison/embodiment/micro/v06.
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 James encounters the familiar trigger — a peer's success, a visible achievement, the data that usually fires the comparison engine. The comparison activates. Chest tight. James notices it, acknowledges it, and returns attention to the work in front of them. The peer's achievement does not determine James's value. James's value comes from the work James does, the decisions James makes, the life James has built. Chest stays open The comparison still fires. James no longer builds an identity around its reports. James is a person who does their own work well. The peer does their own work well. Both exist. Neither diminishes the other.
@@ -298,7 +298,7 @@ path: story_atoms/educators/anchored/self_worth/comparison/mechanism_proof/micro
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Rachel catches the comparison operating in real time within self-worth. The comparison fires before the thought completes — automatic, pre-rational, faster than analysis. Chest crushes. Rachel watches the machinery: a neutral data point enters the system and exits as a deficit. The peer's action becomes evidence of Rachel's inadequacy. The conversion happens in milliseconds. Hands shake. The protective logic is visible now: if Rachel tracks who is better, Rachel can never be surprised by falling short. But the tracking IS the falling short. The comparison creates the deficit it claims to measure. The pattern persists because the comparison feels like assessment when it is actually assault.
@@ -310,7 +310,7 @@ path: story_atoms/educators/anchored/self_worth/comparison/mechanism_proof/micro
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Rachel lies awake at night and the comparison runs its full program within self-worth. Every peer. Every gap. Every dimension on which Rachel falls short. The comparison has become autonomous — it needs no trigger, no input, no event. It generates its own material from memory and projection. Chest tight. Rachel sees the full architecture in the dark: the comparison is not a response to external data. It is an internal program that creates its own data. It selects the peers. It chooses the dimensions. It constructs the gaps. The entire comparison is self-authored. Hands cold. The pattern persists because the comparison feels like it is about other people when it is entirely about Rachel's relationship with Rachel's own adequacy. Other people are just the raw material. The deficiency is pre-existing. The comparison just gives it a face.

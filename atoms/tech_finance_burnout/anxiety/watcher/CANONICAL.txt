@@ -5,7 +5,7 @@
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -17,7 +17,7 @@ Ryan sits in a meeting and he watches himself in the meeting. He is speaking abo
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/recognition/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,7 +41,7 @@ Marcus is in a negotiation. He is also watching himself in the negotiation. The 
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -53,7 +53,7 @@ Wei is leading a team meeting. He is also observing himself leading. Is he comin
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/recognition/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -66,7 +66,7 @@ path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/mechanism_proof/
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Ryan has developed a comprehensive watcher. It is not just observing. It is building a case. The case: he is not as smart as he thinks. The case: he talks too much. The case: he is losing his edge. The watcher collects evidence. Every moment where he is uncertain is evidence. Every moment where he is not the quickest to the answer is evidence. The mechanism is: the watcher creates anxiety and collects evidence that the anxiety is justified. He is split now. The performer is degraded by the constant judgment.
@@ -78,7 +78,7 @@ path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/mechanism_proof/
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Ava's watcher has become a critic. It is not observing neutrally. It is narrating a story of failure. She is presenting and the watcher is saying: this is boring. This is unclear. People are losing interest. The critic is creating anxiety while the performer is trying to deliver. The mechanism is: the anxiety produces physical symptoms, the physical symptoms produce more anxiety, the watcher interprets the anxiety as proof that the performance is failing. She is trapped in a loop. She cannot deliver well because she is too anxious about the delivery.
@@ -89,8 +89,8 @@ Ava's watcher has become a critic. It is not observing neutrally. It is narratin
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/mechanism_proof/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Marcus's watcher has colonized his negotiations. He is in the room but not in the room. He is simultaneously performing and judging the performance. His attention is divided. His decisions are affected. The watcher's anxiety is influencing his choices in real time. He backs down when he should push because the watcher is anxious about being perceived as aggressive. He holds when he should back down because the watcher is anxious about being perceived as weak. The mechanism is: the watcher's anxiety is running his decisions.
@@ -102,7 +102,7 @@ path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/mechanism_proof/
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Wei's watcher is producing performance anxiety about his leadership. He is watching himself lead. The watcher is anxious about whether he looks like a leader. The anxiety about looking like a leader is preventing him from being a leader. The mechanism is: the watcher creates anxiety about performance, the anxiety degrades the performance, the degraded performance confirms the anxiety. He is no longer fully leading. He is performing leadership while watching himself perform it. The split is destroying his effectiveness.
@@ -114,7 +114,7 @@ path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/mechanism_proof/
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Natasha's watcher is producing real-time self-judgment. She makes a trade. Immediately, the watcher judges it. Was that the right timing? Is the market going to move against you? The watcher is creating doubt about decisions in real time. The anxiety is affecting her decision-making quality. She is holding onto positions too long because the watcher is anxious about being the person who closed too early. She is closing too early because the watcher is anxious about being the person who held too long. The mechanism is: the watcher's anxiety is preventing clear decision-making.
@@ -125,7 +125,7 @@ Natasha's watcher is producing real-time self-judgment. She makes a trade. Immed
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -137,7 +137,7 @@ Ryan notices the watcher. He is in a meeting and he catches himself doing it—w
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -149,7 +149,7 @@ Ava stops assuming the watcher is right. The watcher says: people are judging yo
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -161,7 +161,7 @@ Marcus makes a decision in the negotiation without waiting for the watcher's app
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -173,7 +173,7 @@ Wei stops trying to manage the watcher's perception. He leads the meeting. The w
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -185,8 +185,8 @@ Natasha turns off the real-time judgment. She makes a trade. She doesn't immedia
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Ryan has integrated the watcher. The watcher still shows up. He has just learned to use it differently. The watcher is observational now, not judging. He can be present in a meeting and also notice what is happening. The observer and the performer are working together instead of against each other. His chest is open. He is more effective because he is fully present.
@@ -197,8 +197,8 @@ Ryan has integrated the watcher. The watcher still shows up. He has just learned
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Ava is presenting without the critic. The watcher is there but it is not narrating failure. She is present in her work. She can feel the audience engaged. She is delivering with full attention. The anxiety is less because she is not creating additional anxiety about the delivery. Her throat is open. She is whole. She is not split.
@@ -209,8 +209,8 @@ Ava is presenting without the critic. The watcher is there but it is not narrati
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Marcus negotiates from presence, not from performance observation. The watcher is no longer running his decisions. He is making calls from his own thinking. His negotiations are clearer. His decisions are better. The watcher is still there. He has just stopped letting it be the director. He is the director. His jaw is unclenched. He is fully in the room.
@@ -221,8 +221,8 @@ Marcus negotiates from presence, not from performance observation. The watcher i
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Wei leads without the performance anxiety. He is not trying to look like a leader anymore. He is leading. His presence is natural. His decisions are clear. The watcher has stopped interfering. His shoulders are down. He is whole. His team responds to the wholeness. He is more effective because he is fully present in the role instead of performing the role and watching himself perform it.
@@ -233,8 +233,8 @@ Wei leads without the performance anxiety. He is not trying to look like a leade
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/embodiment/micro/v05.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Natasha trades with full attention. The watcher observes. She does not divide her attention between the trade and the self-judgment about the trade. Her decisions are clearer. Her returns improve. The watcher is present but not in charge. She is doing the work. Her hands are warm. Her mind is in the trade.
@@ -245,8 +245,8 @@ Natasha trades with full attention. The watcher observes. She does not divide he
 path: story_atoms/tech_finance_burnout/anchored/anxiety_watcher/recognition/band_fill/v06.txt
 BAND: 5
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Crisis. Breakthrough. The moment of maximum intensity.
@@ -258,8 +258,8 @@ Crisis. Breakthrough. The moment of maximum intensity.
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Watching the build fail for the second time today. Priya notices the split — one part of the self performs while another part judges without mercy. Sweat breaks along her hairline. Her shirt collar dampens. For months the frame has held: constant self-awareness is a form of protection. Now Priya watches the frame buckle under evidence it cannot metabolize. Her body registers the shift before her mind can catch up. The chest opens half an inch. Something loosens at the base of her spine. The muscles that held the old posture begin to release. The watching is the interference itself — the monitor is the source of the static, not the cure. The old story does not end with a conclusion. It ends with a silence. Priya stands in that silence. Her hands open at her sides.
@@ -270,9 +270,9 @@ Watching the build fail for the second time today. Priya notices the split — o
 path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
 ---
 Yuki watches the build fail for the second time today. Her chest caves inward. Breathing stops. The body refuses the air. She feels the distance between self and observer collapses and the watching consumes the thing being watched. The frame that has held everything in place — the watching is necessary because without it everything falls apart — strains under the weight of what Yuki sees. For one long second the old architecture holds. Then it cracks. Yuki feels the fracture travel through her chest. The story that organized every decision, every reaction, every judgment stops organizing. The watching is the interference itself — the monitor is the source of the static, not the cure. Yuki does not reach for a replacement. She stands in the gap where the certainty lived, breathing into the new and terrifying openness.
 ---
@@ -283,7 +283,7 @@ path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/embodiment/micro
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 His hands ball into fists at his sides. The knuckles whiten. Raj stands before the sprint review with three tickets still open. The watcher screams at peak volume, demanding the old compliance. Raj acts without auditing the action, letting the doing exist unscored and unranked. Not despite the sensation — he feels every degree of it. His body carries the heat. His choices carry his name. He does not wait for the feeling to pass before acting. He acts while the feeling burns at full intensity. The acting is the embodiment. The body and the choice exist in the same moment. Raj owns this. The ownership lives in his hands, in his breath, in the ground beneath his feet.
@@ -307,7 +307,7 @@ path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/mechanism_proof/
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Raj pauses in the standup where nothing is on track and the PM is silent. His stomach drops hard. The nausea is sudden and specific. The watcher has run for hours without interruption. Now he sees the machinery laid bare. The watcher creates a permanent split between performer and judge, and the judge never once approves — the observation itself is what contaminates the performance. Raj traces the loop in real time: trigger, activation, the relief that never actually arrives, then the trigger again. His stomach clenches as he maps the circuit from inside it. Seeing the mechanism does not stop the gears. But it strips the mechanism of its authority. Raj watches the loop turn without feeding it another round.
@@ -319,7 +319,7 @@ path: story_atoms/tech_finance_burnout/anchored/anxiety/watcher/mechanism_proof/
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Watching the build fail for the second time today. Ezra feels the ground tilt under his feet. Vertigo without motion. The watcher operates in plain view for the first time. Ezra catches the pattern mid-cycle and holds still long enough to see the entire architecture. The surveillance generates the anxiety it claims to manage, creating a feedback loop where watching causes the errors it watches for. The mechanism persists because it disguises itself as protection — it wears the costume of something necessary. Ezra watches the loop close and reopen. His body holds the tension of seeing without intervening. The seeing does not resolve the pattern. But it makes the pattern visible, and visibility changes everything.

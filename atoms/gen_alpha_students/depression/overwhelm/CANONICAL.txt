@@ -3,7 +3,7 @@
 path: [generated path for coherence]
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -27,8 +27,8 @@ Zara notices that when the depression hit, everything became overwhelming. A nor
 path: [generated path for coherence]
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Ava is stuck in a loop. The depression makes her tired, so she doesn't do things, so things pile up, so she's overwhelmed, so the depression deepens. The opportunity cost is everything. She can't focus on schoolwork because the overwhelm paralyzes her and the depression says it doesn't matter anyway. She can't pursue her hobbies because the overwhelm is too loud. She can't rest because the pile of things is too visible. She's locked in a cycle where depression and overwhelm feed each other.
@@ -39,8 +39,8 @@ Ava is stuck in a loop. The depression makes her tired, so she doesn't do things
 path: [generated path for coherence]
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Kai experiences the identity dissolution that comes from this combination. Who is he when he's depressed and overwhelmed? He's not the competent person. He's not the stable friend. He's someone scattered and heavy at the same time. The identity cost is that he doesn't recognize himself. He's falling apart, and the falling apart is both too fast and too slow. The depression says nothing matters, but the overwhelm keeps insisting that everything matters and it's all falling apart.
@@ -51,8 +51,8 @@ Kai experiences the identity dissolution that comes from this combination. Who i
 path: [generated path for coherence]
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: relational
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Sasha feels the relational cost most acutely. The depression keeps her from reaching out. The overwhelm keeps her from managing relationships. So she withdraws. People feel the withdrawal and wonder what's wrong. But she can't explain because explaining would require energy she doesn't have, and the depression says why bother. The relational cost is isolation. But the isolation is both chosen (the depression is pulling her inward) and unchosen (she doesn't have the capacity to reach out even though she wants to).
@@ -75,7 +75,7 @@ Miles understands the mechanism now. The depression depletes executive function.
 path: [generated path for coherence]
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
+COST_TYPE: social
 COST_INTENSITY: 2
 IDENTITY_STAGE: destabilization
 ---
@@ -87,8 +87,8 @@ Zara traces the mechanism. The depression is making her less able to handle soci
 path: [generated path for coherence]
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Ava maps the mechanism. The depression says "nothing matters." So she doesn't do things. Things pile up. The pile becomes overwhelming. The overwhelm says "everything matters and you're failing." So the depression deepens. The mechanism is: depression indifference + task accumulation + overwhelm = deeper depression + reduced capacity = deeper overwhelm. The opportunity cost is enormous. She's losing time, losing grades, losing projects, losing possibilities. The mechanism is self-perpetuating.
@@ -99,8 +99,8 @@ Ava maps the mechanism. The depression says "nothing matters." So she doesn't do
 path: [generated path for coherence]
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Kai sees the identity cost clearly. The mechanism is: depression saying you're nothing + overwhelm saying you're failing + both together saying you're broken = identity fragmentation. The identity cost is that he doesn't know who he is anymore. He's not the person he was. He's not the person he wants to be. He's stuck in a state where both depression and overwhelm are defining him. The mechanism is eroding his sense of self.
@@ -111,8 +111,8 @@ Kai sees the identity cost clearly. The mechanism is: depression saying you're n
 path: [generated path for coherence]
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: relational
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Sasha traces the mechanism. The depression is pulling her inward. The overwhelm is keeping her from being able to show up. The mechanism is: depression + overwhelm = withdrawal = relational rupture = deeper depression = further withdrawal. The relational cost is isolation that feels like it can't be reversed. The mechanism is isolating in real time. People are giving up on reaching out because she never responds. She's giving up on reaching out because she can't manage it.
@@ -123,8 +123,8 @@ Sasha traces the mechanism. The depression is pulling her inward. The overwhelm 
 path: [generated path for coherence]
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Miles tries interrupting the cycle. He picks one small thing and does it. Not to fix everything. Just to interrupt the loop. When he does one small thing, the overwhelm decreases slightly. The depression doesn't immediately lift, but the cycle loosens. The internal cost is effort that feels huge but produces small results. But the small results are enough. He's experimenting with the knowledge that breaking the cycle doesn't require fixing everything, just breaking one link.
@@ -135,8 +135,8 @@ Miles tries interrupting the cycle. He picks one small thing and does it. Not to
 path: [generated path for coherence]
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Zara tries something different. Instead of withdrawing completely, she tells one person: "I'm depressed and overwhelmed. I need low-pressure connection." The social cost is vulnerability. But something shifts. The person responds without demands. The connection feels different. It's not performance. It's just presence. She's experimenting with the idea that depression and overwhelm don't require complete isolation. They require honest communication about capacity.
@@ -148,7 +148,7 @@ path: [generated path for coherence]
 BAND: 3
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Ava writes a list of what's actually urgent versus what just feels urgent because it's piled up. The opportunity cost is confronting the pile. But when she separates urgent from piled-up, suddenly things feel less overwhelming. Not manageable yet. But less like the world is ending. She's experimenting with the idea that the overwhelm might be exaggerating the actual emergency. When she addresses just the urgent things, the depression is still there, but the overwhelm loosens.
@@ -159,8 +159,8 @@ Ava writes a list of what's actually urgent versus what just feels urgent becaus
 path: [generated path for coherence]
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Kai stops trying to be someone. He stops trying to be competent or stable or helpful. He just is, broken and depressed and overwhelmed. The identity cost is that he's no longer performing. But something shifts. When he stops performing, the identity pressure decreases. The depression and overwhelm are still there, but they're not attacking an identity anymore. They're just feelings. He's experimenting with the idea that identity shifts when you stop defending it.
@@ -171,8 +171,8 @@ Kai stops trying to be someone. He stops trying to be competent or stable or hel
 path: [generated path for coherence]
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: relational
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Sasha reaches out to one person with an honest request: "Can you just sit with me?" Not fix her. Not help her get out. Just be present. The relational cost is radical vulnerability. But the presence interrupts the isolation loop. She's experimenting with the idea that depression and overwhelm don't require solving. They require witness.
@@ -183,8 +183,8 @@ Sasha reaches out to one person with an honest request: "Can you just sit with m
 path: [generated path for coherence]
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Miles has developed a system for breaking the cycle. When he feels it starting, he intervenes early. One small action. One small interruption. The cycle is slower now. The depression and overwhelm still arise, but he's learned to interrupt them before they spiral. The internal cost has decreased. He's embodying the knowledge that you can live with depression and overwhelm if you interrupt the cycle early.
@@ -195,8 +195,8 @@ Miles has developed a system for breaking the cycle. When he feels it starting, 
 path: [generated path for coherence]
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Zara has a different social rhythm now. She's honest about her capacity. People know when she's struggling. The connection is less constant but more real. The depression and overwhelm haven't disappeared, but they're not isolating her anymore. She's embodying the knowledge that social honesty about limits is actually relational protection.
@@ -207,8 +207,8 @@ Zara has a different social rhythm now. She's honest about her capacity. People 
 path: [generated path for coherence]
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: opportunity
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Ava has her capacity back partially. The depression and overwhelm still visit, but they're not completely paralyzing. She's managing school. She's able to do some of the things she cares about. She's embodying the knowledge that depression plus overwhelm can be survived if you don't let them merge into total system collapse.
@@ -220,7 +220,7 @@ path: [generated path for coherence]
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Kai has a new relationship with depression and overwhelm. They happen. They're difficult. But they don't define him because he's stopped defending against them. He's embodying the knowledge that when you stop fighting the feelings, they lose their destructive power. They're just feelings, not failures.
@@ -231,8 +231,8 @@ Kai has a new relationship with depression and overwhelm. They happen. They're d
 path: [generated path for coherence]
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: relational
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Sasha is reconnected now. The depression and overwhelm haven't gone away, but she's not managing them alone. She has people who know what she's dealing with. The relational cost has become relational gain. She's embodying the knowledge that reaching out in depression and overwhelm is actually what heals it, not what deepens it.
@@ -243,8 +243,8 @@ Sasha is reconnected now. The depression and overwhelm haven't gone away, but sh
 path: story_atoms/gen_alpha_students/anchored/depression_overwhelm/recognition/band_fill/v06.txt
 BAND: 5
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Crisis. Breakthrough. The moment of maximum intensity.
@@ -255,9 +255,9 @@ Crisis. Breakthrough. The moment of maximum intensity.
 path: story_atoms/gen_alpha_students/anchored/depression/overwhelm/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
 ---
 Ren hits the wall. Not metaphorically. The body announces it: gut clenches. The system overload pattern has been running for so long Ren stopped noticing the cost. Now the cost is visible. Ren's skin prickles. The old narrative about depression says this is weakness. But Ren looks at the narrative and sees the machinery. Sees how the story protects by constraining. Sees how the frame keeps Ren locked in a loop that feels like safety but functions as a cage. The frame shifts. Not dramatically. A hairline fracture in the foundation. Ren notices the fracture. Does not repair it. Lets it widen. The system overload pattern stumbles. For the first time, Ren sees the pattern from outside.
 ---
@@ -267,9 +267,9 @@ Ren hits the wall. Not metaphorically. The body announces it: gut clenches. The 
 path: story_atoms/gen_alpha_students/anchored/depression/overwhelm/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: identity
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
 ---
 Sol breaks. The system overload pattern reaches maximum intensity and something gives. Sol's cheeks burn. Every system fires at once. The depression is no longer background noise. It is the entire room. A shiver runs through Sol. And then—in the center of the breaking—Sol sees the architecture. The whole structure. How the system overload feeds the depression feeds the system overload feeds the collapse. Sol sees the loop from inside the loop's core. The frame doesn't shift gently. It shatters. What replaces it is not comfort. It is clarity. Sol stands in the wreckage of the old story and feels the ground beneath it. Solid. Different. The old frame is debris now. Sol does not rebuild it.
 ---
@@ -279,7 +279,7 @@ Sol breaks. The system overload pattern reaches maximum intensity and something 
 path: story_atoms/gen_alpha_students/anchored/depression/overwhelm/embodiment/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
+COST_TYPE: internal
 COST_INTENSITY: 5
 IDENTITY_STAGE: self_claim
 ---
@@ -291,8 +291,8 @@ The depression arrives at full volume. Thea's ribcage constricts. The system ove
 path: story_atoms/gen_alpha_students/anchored/depression/overwhelm/embodiment/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Maximum intensity. Ren's chest hollows. The depression is total. The system overload pattern screams. Every old circuit demands the old response. Ren's cheeks burn. And Ren holds. Not through endurance. Through identity. Ren acts from who Ren is now, not who Ren was. The crisis does not diminish. The crisis is real. But Ren meets it as a different person. The actions Ren takes come from the new architecture. The words Ren speaks carry the new frequency. The system overload pattern crashes against this new structure and does not find purchase. Ren is not surviving the crisis. Ren is living through it as someone transformed. The body shakes. Ren holds position. This is ownership at maximum cost.
@@ -303,8 +303,8 @@ Maximum intensity. Ren's chest hollows. The depression is total. The system over
 path: story_atoms/gen_alpha_students/anchored/depression/overwhelm/mechanism_proof/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Sol's shoulders curl forward. The depression activates and the system overload pattern responds on schedule. But this time Sol traces the mechanism back to its origin. Sees the protective logic. The system overload started as defense. Sol learned that controlling everything prevented collapse. The defense became automatic. The automatic became identity. Sol's hands go cold. The cost structure is visible now: every activation of the system overload pattern spends energy, narrows options, reinforces the loop. Sol sees the reinforcement happening. Watches the pattern strengthen itself through use. The mechanism is elegant in its dysfunction. It solves the wrong problem perfectly. Sol stands in the heat and sees every moving part.
@@ -315,8 +315,8 @@ Sol's shoulders curl forward. The depression activates and the system overload p
 path: story_atoms/gen_alpha_students/anchored/depression/overwhelm/mechanism_proof/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 The mechanism reveals itself at maximum intensity. Thea's throat closes. The depression and the system overload pattern fuse into a single overwhelming force. Thea's chest hollows. And in the overwhelm, the structure becomes transparent. Thea sees the entire architecture: how the system overload creates the conditions it claims to prevent. How the protective mechanism generates the exact threat it guards against. The loop is perfect. Self-sustaining. Self-generating. Thea sees it running at full speed and understands why it never stops. It never stops because stopping feels like the danger. The mechanism's deepest trick: convincing Thea that the mechanism itself is safety. The body shakes with the recognition. The pattern is the problem wearing the mask of the solution.

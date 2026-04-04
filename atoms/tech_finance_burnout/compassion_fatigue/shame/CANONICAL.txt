@@ -5,7 +5,7 @@
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,7 +41,7 @@ James runs an all-hands meeting with the team facing layoffs. He should feel the
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -66,7 +66,7 @@ path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/mechani
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Priya's shame about her numbness is now affecting her work. She is not showing up fully because she is ashamed of her depletion. The mechanism is: compassion fatigue produces numbness, numbness produces shame, shame produces withdrawal, withdrawal reduces her presence, reduced presence worsens relationships. She is ashamed and hiding, which deepens the fatigue. The shame is preventing the vulnerability that would invite support.
@@ -77,8 +77,8 @@ Priya's shame about her numbness is now affecting her work. She is not showing u
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/mechanism_proof/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Derek's shame about his depletion is now making him withdraw further from his team. He is avoiding them because he is ashamed of his numbness. The mechanism is: compassion fatigue produces emptiness, emptiness produces shame, shame produces avoidance, avoidance worsens team relationships, worsened relationships deepen the fatigue. He is isolated by shame. His team feels the withdrawal. The team suffers more. Derek feels worse about it.
@@ -89,8 +89,8 @@ Derek's shame about his depletion is now making him withdraw further from his te
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/mechanism_proof/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 James's shame about his numbness is making him overcompensate. He is trying to perform caring he doesn't feel. The mechanism is: compassion fatigue produces numbness, numbness produces shame, shame produces performance, performance is not authentic, inauthenticity damages relationships. He is trying to fake the care and it is making things worse. The shame is both the symptom and the cause of deeper disconnection.
@@ -102,7 +102,7 @@ path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/mechani
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Derek is now ashamed of being ashamed. He is a manager and he should be able to care for his team. He cannot. So he is ashamed. The shame is making him despise himself. The mechanism is: fatigue produces numbness, numbness produces shame, shame produces self-contempt, self-contempt produces isolation. He is now isolated not just from his team but from himself. The shame is the prison.
@@ -113,8 +113,8 @@ Derek is now ashamed of being ashamed. He is a manager and he should be able to 
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/mechanism_proof/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Priya is now ashamed of her numbness and hiding it. No one knows she is empty. So no one can help. The mechanism is: fatigue produces depletion, depletion produces numbness, numbness produces shame, shame produces hiding, hiding prevents help, prevention deepens fatigue. She is locked. The shame is keeping her isolated where she most needs connection.
@@ -125,7 +125,7 @@ Priya is now ashamed of her numbness and hiding it. No one knows she is empty. S
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -137,7 +137,7 @@ Priya discloses her depletion. She tells someone she is numb. Her shame is high.
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -149,7 +149,7 @@ Derek tells his team he is depleted. His shame is present. So is his honesty. Th
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -161,7 +161,7 @@ James stops performing care. He discloses his depletion. His shame is high. So i
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -173,7 +173,7 @@ Derek stops being ashamed of being ashamed. He is depleted. That is okay. It is 
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -185,8 +185,8 @@ Priya reaches out for connection instead of hiding her depletion. Her shame is p
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Priya has acknowledged her depletion. She is no longer ashamed of it. Compassion fatigue is real. Numbness is a symptom. She is restoring her capacity for connection through authenticity. Her chest is beginning to open. Her shame is gone. She is present again.
@@ -197,8 +197,8 @@ Priya has acknowledged her depletion. She is no longer ashamed of it. Compassion
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Derek has claimed his depletion. He is no longer ashamed of it. He is resting and restoring. His capacity to care is returning. His team is responding to his authenticity. His throat is open. His shame is gone. He is present to his team again.
@@ -209,8 +209,8 @@ Derek has claimed his depletion. He is no longer ashamed of it. He is resting an
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 James has acknowledged his numbness. He is no longer ashamed of it. He is no longer performing. He is real. His presence is returning. His jaw is unclenched. His shame is gone. He is present to his company again.
@@ -221,8 +221,8 @@ James has acknowledged his numbness. He is no longer ashamed of it. He is no lon
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Derek has released his self-contempt. He is no longer ashamed of being ashamed. He is compassionate toward his own depletion. His shoulders are loose. His presence with his team is authentic. He is restoring.
@@ -233,8 +233,8 @@ Derek has released his self-contempt. He is no longer ashamed of being ashamed. 
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/embodiment/micro/v05.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Priya is connected and authentic. The shame is gone. Her capacity for compassion is returning through rest and connection. Her hands are warm. She is present to her customers and herself.
@@ -246,8 +246,8 @@ Priya is connected and authentic. The shame is gone. Her capacity for compassion
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 After mentoring the third junior developer this week who is struggling. Kiran feels the mask slip and the inadequacy become visible to witnesses. His shoulders climb toward his ears and lock there. For months the frame has held: the shame is a verdict, delivered by the body, and the body does not lie. Now Kiran watches the frame buckle under evidence it cannot metabolize. His body registers the shift before his mind can catch up. The chest opens half an inch. Something loosens at the base of his spine. The muscles that held the old posture begin to release. The flaw is an event, bounded and specific — not a self, permanent and total. The old story does not end with a conclusion. It ends with a silence. Kiran stands in that silence. His hands open at his sides.
@@ -258,9 +258,9 @@ After mentoring the third junior developer this week who is struggling. Kiran fe
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
 ---
 His vision whites out at the edges. The center shrinks. Aiden is absorbing another round of one-on-ones that all end the same way when he feels the exposure reaches the bedrock of self-concept and there is nowhere deeper to hide. The operating assumption — the flaw is not a behavior — it is the identity itself — meets a fact it cannot absorb. His jaw unclenches. Not relief. Disorientation. The frame that held his world in place tilts on its axis. Aiden does not fall. He stands in the vertigo and lets the room reorient around his new position. The flaw is an event, bounded and specific — not a self, permanent and total. He does not grasp for a replacement frame. He breathes into the space where the old certainty stood and finds the space survivable.
 ---
@@ -271,7 +271,7 @@ path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/embodim
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 After mentoring the third junior developer this week who is struggling. The pulse in his neck hammers against the skin. Raj feels it in his fingertips. The shame pushes with full force against his sternum. Raj holds ground while seen, without flinching, without performing, without defending. The body shakes with the effort. The choice holds anyway. This is not willpower overriding sensation. This is ownership absorbing sensation. Raj moves from the new ground he has claimed. His hands tremble and his hands act. Both facts are true simultaneously. The identity is not a concept. It lives in his muscles, in the steadiness of his spine, in the way his feet stay planted while the old pattern screams for retreat.
@@ -295,7 +295,7 @@ path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/mechani
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Weight presses his chest flat. Breathing becomes a conscious act. James listens to another team member describe their own burnout. The shame runs its program at full speed. James watches with the detachment of someone reading their own diagnostic. The mechanism reveals itself in full: the shame converts specific, bounded events into proof of fundamental deficiency while skipping every piece of contrary evidence. Every previous attempt to fight the pattern used the same logic that powers it. James sees this now. His ribs expand with the recognition. Not relief — clarity. The pattern does not stop. But James stops mistaking it for truth. It is machinery. It is not his name.
@@ -307,7 +307,7 @@ path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/shame/mechani
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 After mentoring the third junior developer this week who is struggling. A roar fills her ears and blots out the ambient sound of the room. The shame operates in plain view for the first time. Priya catches the pattern mid-cycle and holds still long enough to see the entire architecture. The shame converts specific, bounded events into proof of fundamental deficiency while skipping every piece of contrary evidence. The mechanism persists because it disguises itself as protection — it wears the costume of something necessary. Priya watches the loop close and reopen. Her body holds the tension of seeing without intervening. The seeing does not resolve the pattern. But it makes the pattern visible, and visibility changes everything.

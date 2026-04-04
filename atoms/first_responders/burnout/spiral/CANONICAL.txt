@@ -5,8 +5,8 @@
 path: story_atoms/first_responders/anchored/burnout/spiral/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Sofia made a mistake. Small. But her mind spirals. What if I'm too burned out to do this job safely? What if the burnout is destroying my competence? The spiral feeds on burnout.
@@ -18,7 +18,7 @@ RECOGNITION v02
 path: story_atoms/first_responders/anchored/burnout/spiral/recognition/micro/v03.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: identity
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -31,8 +31,8 @@ RECOGNITION v04
 path: story_atoms/first_responders/anchored/burnout/spiral/recognition/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Heather spirals about leadership. If I'm burned out, is my judgment compromised? The spiral feeds on responsibility.
@@ -44,8 +44,8 @@ MECHANISM_PROOF v01
 path: story_atoms/first_responders/anchored/burnout/spiral/mechanism_proof/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Jake's spiral is creating self-doubt. He's checking and rechecking his work. The burnout is making him obsessive.
@@ -57,8 +57,8 @@ MECHANISM_PROOF v03
 path: story_atoms/first_responders/anchored/burnout/spiral/mechanism_proof/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Brianna is considering quitting. The spiral has convinced her she's unsafe. The burnout and spiral are feeding each other.
@@ -70,8 +70,8 @@ MECHANISM_PROOF v05
 path: story_atoms/first_responders/anchored/burnout/spiral/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Sofia realizes: the spiral is about burnout, not reality. She brings evidence. The calls worked out fine. Rest breaks the spiral.
@@ -83,7 +83,7 @@ TURNING_POINT v02
 path: story_atoms/first_responders/anchored/burnout/spiral/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -96,7 +96,7 @@ TURNING_POINT v04
 path: story_atoms/first_responders/anchored/burnout/spiral/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -109,8 +109,8 @@ EMBODIMENT v01
 path: story_atoms/first_responders/anchored/burnout/spiral/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Jake returns to work. The spiral is manageable when he's rested.
@@ -123,7 +123,7 @@ path: story_atoms/first_responders/anchored/burnout/spiral/embodiment/micro/v04.
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Brianna stays in the job. She manages the burnout so the spiral doesn't start.
@@ -136,7 +136,7 @@ path: story_atoms/first_responders/anchored/burnout/spiral/turning_point/micro/v
 BAND: 4
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Patel counts the years she has left until retirement. Twelve. She counts the shifts. Over three thousand. She counts the calls per shift. Her mind multiplies and divides and the number grows into something her chest cannot hold. The spiral converts time into an impossible quantity. The frame shifts when she stops calculating the total and looks at today. One shift. Twelve hours. A manageable unit. The spiral needs the total to create despair. One day does not create despair. It creates a shift. She can do a shift. Her shoulders drop.
@@ -148,7 +148,7 @@ path: story_atoms/first_responders/anchored/burnout/spiral/turning_point/micro/v
 BAND: 5
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 5
 IDENTITY_STAGE: experimentation
 ---
 O'Brien reaches the breaking point. The spiral pattern at peak burnout intensity has stripped everything back to bone. Chest cracking. Hands shaking. The old frame is not bending. It is shattering. O'Brien watches the pieces fall and does not try to reassemble them. The frame told a story about why this pain was the price of the work. The story was wrong. The pain is real. The price was manufactured by a system that confuses endurance with character. O'Brien stands in the wreckage of the old explanation. Something new is visible in the gap. Not a solution. A direction. The first direction that does not lead back to the same station, the same silence, the same acceptance of the unacceptable.
@@ -184,7 +184,7 @@ path: story_atoms/first_responders/anchored/burnout/spiral/mechanism_proof/micro
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Nowak tracks the spiral's fuel source: incomplete debriefs. Every call that is not fully processed becomes material for the spiral. The unprocessed calls stack in memory and the spiral cycles through them looking for the decision that could have changed the outcome. The mechanism: the spiral is not overthinking. It is under-processing. The calls were never completed in Nowak's nervous system. The spiral is the nervous system's attempt to finish them. His chest tightens. The spiral is not the problem. The incomplete processing is the problem.
@@ -196,7 +196,7 @@ path: story_atoms/first_responders/anchored/burnout/spiral/mechanism_proof/micro
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Rivera sees the spiral's deepest layer: it is a grief response disguised as analysis. Every spiral about a call is really about the calls she cannot undo. The spiral runs because the calls are irreversible. The analysis is the mind's attempt to reverse what cannot be reversed. The mechanism: the spiral is not about the future. It is about the past wearing the future's clothes. Her chest aches. The spiral replays old calls under the disguise of reviewing current ones. The current call is the surface. The old call is the engine.

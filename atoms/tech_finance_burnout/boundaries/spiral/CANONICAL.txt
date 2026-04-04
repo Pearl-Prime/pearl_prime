@@ -5,7 +5,7 @@
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,7 +41,7 @@ Marcus thinks about declining a deal. His mind spirals immediately. If he declin
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -53,7 +53,7 @@ Wei thinks about not checking email on vacation. His mind spirals. If he doesn't
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/recognition/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: identity
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -66,7 +66,7 @@ path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/mechanism_proo
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Ryan's spiral about boundaries has become automatic. Any time he considers a boundary, the cascade happens. The mechanism is: boundary attempt triggers spiral, spiral generates catastrophe scenario, catastrophe scenario prevents boundary maintenance. He is trapped. He cannot set boundaries because the spiral prevents it. The spiral is protecting him from risk but the protection is costing him the rest and the sustainability that boundaries would provide.
@@ -77,8 +77,8 @@ Ryan's spiral about boundaries has become automatic. Any time he considers a bou
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/mechanism_proof/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Ava's spiral is preventing her from leaving work on time ever. The spiral is so convincing that she believes the work genuinely cannot proceed without her. She stays. The work gets done. The spiral says: see, if you had left, it would not be done. The mechanism is circular. The spiral prevents the boundary, which confirms the spiral's narrative. She is locked. She cannot leave because the spiral has built a convincing case that leaving is impossible.
@@ -89,8 +89,8 @@ Ava's spiral is preventing her from leaving work on time ever. The spiral is so 
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/mechanism_proof/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Marcus's spiral about declining deals is now preventing him from being selective. He takes every deal. His capacity is exceeded. The mechanism is: decline triggers spiral, spiral says he will miss opportunity, he takes the deal instead. He is over-committed because the spiral prevents him from exercising judgment about what to take. His overwhelm is produced by the spiral preventing boundaries.
@@ -102,7 +102,7 @@ path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/mechanism_proo
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Wei's spiral about not checking email is now preventing him from ever truly resting. He checks compulsively. The spiral says if he doesn't check, catastrophe. He checks. Nothing has broken. The spiral says: you prevented catastrophe by checking. You must always check. He is now checking constantly because the spiral has convinced him that checking prevents disaster. He cannot rest because the spiral prevents it.
@@ -113,8 +113,8 @@ Wei's spiral about not checking email is now preventing him from ever truly rest
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/mechanism_proof/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Natasha's spiral about not being available has locked her into constant availability. The spiral says if she is not available, trading failure. She is always available. The spiral says: see, you were available and nothing went wrong. You must stay available. The mechanism is: spiral prevents boundary, boundary absence confirms spiral's narrative. She is locked. The spiral is protecting her from risk but the protection is costing her everything.
@@ -125,7 +125,7 @@ Natasha's spiral about not being available has locked her into constant availabi
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -137,7 +137,7 @@ Ryan tests the spiral. He says no to a project. He expects the cascade. The casc
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -149,7 +149,7 @@ Ava leaves work on time. The spiral fires. The work doesn't get done. Her anxiet
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -161,7 +161,7 @@ Marcus declines a deal. The spiral fires catastrophically. He is passing up oppo
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -173,7 +173,7 @@ Wei takes a vacation without email checking. The spiral fires. Catastrophe is co
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: identity
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -185,8 +185,8 @@ Natasha is not available after hours. The spiral fires. She is failing as a trad
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Ryan knows the spiral now. It fires when he sets boundaries. It generates catastrophic predictions. The predictions have been wrong repeatedly. He is learning to say no despite the spiral. The spiral is not accurate. It is just loud. He is claiming his right to boundaries and he is not letting the spiral's volume determine his choices.
@@ -197,8 +197,8 @@ Ryan knows the spiral now. It fires when he sets boundaries. It generates catast
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Ava is setting boundaries and the spiral is losing power. She leaves work on time. She is still anxious about it. But she is doing it. The spiral said the work wouldn't get done. It gets done. She is building a new relationship with the spiral. It is not truth. It is noise. She is choosing her boundaries over the spiral's predictions.
@@ -209,8 +209,8 @@ Ava is setting boundaries and the spiral is losing power. She leaves work on tim
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Marcus is declining deals that don't fit his strategy. The spiral fires about missed opportunity. He is learning the spiral was catastrophizing. Declining one deal doesn't mean missing all opportunity. He is being strategic. His work quality improves. He is claiming his right to be selective. The spiral is still there. It is just not in charge.
@@ -221,8 +221,8 @@ Marcus is declining deals that don't fit his strategy. The spiral fires about mi
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Wei is on vacation without email. The spiral generates doom. He ignores it. He rests. His team handles the work. He returns restored. He is learning that the spiral's protection was unnecessary. He is claiming his right to rest and he is not letting the spiral prevent it.
@@ -234,7 +234,7 @@ path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/embodiment/mic
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Natasha is unavailable after hours. She is trading well. She is rested. The spiral said this would fail. It didn't. She is claiming her boundary. The spiral is less loud now. She has proven it wrong repeatedly. She is a good trader who is also not available after hours. Both can be true.
@@ -246,8 +246,8 @@ Natasha is unavailable after hours. She is trading well. She is rested. The spir
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Heat climbs through his sternum and spreads across his collarbones. Marcus is declining the Saturday deploy for the first time when he feels the loop accelerate until the branches outnumber any capacity to track them. The operating assumption — thinking harder will eventually solve the problem — meets a fact it cannot absorb. His jaw unclenches. Not relief. Disorientation. The frame that held his world in place tilts on its axis. Marcus does not fall. He stands in the vertigo and lets the room reorient around his new position. The next thought does not contain the answer any more than the last one did. He does not grasp for a replacement frame. He breathes into the space where the old certainty stood and finds the space survivable.
@@ -258,9 +258,9 @@ Heat climbs through his sternum and spreads across his collarbones. Marcus is de
 path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
 ---
 Aiden feels the ground tilt under his feet. Vertigo without motion. Aiden is when Slack pings at midnight with an urgent tag when he feels the thoughts multiply beyond counting and the chain reaction passes critical mass. The operating assumption — thinking harder will eventually solve the problem — meets a fact it cannot absorb. His jaw unclenches. Not relief. Disorientation. The frame that held his world in place tilts on its axis. Aiden does not fall. He stands in the vertigo and lets the room reorient around his new position. The spiral is motion without destination — no thought in the chain reaches ground. He does not grasp for a replacement frame. He breathes into the space where the old certainty stood and finds the space survivable.
 ---
@@ -271,7 +271,7 @@ path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/embodiment/mic
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Priya closes the laptop at 9 PM and feeling the guilt arrive. Sweat breaks along her hairline. Her shirt collar dampens. The spiral arrives — hot, familiar, insistent, demanding the old response. This time Priya lets the thought arrive, exist, and depart without sprinting after it into the next room. Not as strategy. Not as technique. As identity. The sensation remains in her body — chest tight, breath shallow, adrenaline still circulating. Priya acts through it. The acting is not despite the sensation. It is through the sensation and alongside it. The action carries her name. This is who Priya is now. Someone who moves with the fire still burning.
@@ -295,7 +295,7 @@ path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/mechanism_proo
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Closing the laptop at 9 pm and feeling the guilt arrive. A tremor moves through his hands. James presses them flat against the surface. The spiral operates in plain view for the first time. James catches the pattern mid-cycle and holds still long enough to see the entire architecture. Each thought treats possibility as certainty and uses that false certainty to generate the next link in the chain. The mechanism persists because it disguises itself as protection — it wears the costume of something necessary. James watches the loop close and reopen. His body holds the tension of seeing without intervening. The seeing does not resolve the pattern. But it makes the pattern visible, and visibility changes everything.
@@ -307,7 +307,7 @@ path: story_atoms/tech_finance_burnout/anchored/boundaries/spiral/mechanism_proo
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 When slack pings at midnight with an urgent tag. The room tilts. Her legs lose the certainty of ground beneath them. The spiral operates in plain view for the first time. Sana catches the pattern mid-cycle and holds still long enough to see the entire architecture. The chain builds itself because each link feels like evidence, when in fact each link is only a guess wearing the costume of a fact. The mechanism persists because it disguises itself as protection — it wears the costume of something necessary. Sana watches the loop close and reopen. Her body holds the tension of seeing without intervening. The seeing does not resolve the pattern. But it makes the pattern visible, and visibility changes everything.

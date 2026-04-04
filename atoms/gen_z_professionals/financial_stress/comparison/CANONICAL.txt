@@ -5,7 +5,7 @@
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -31,7 +31,7 @@ Jordan's shame emerges not from lack of money but from awareness that her stress
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/recognition/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -57,8 +57,8 @@ The stress that emerges isn't about absolute earning, though that's part of it. 
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/recognition/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Marcus sits at the team lunch and someone mentions their apartment building—luxury, doorman, gym in the building. Marcus's apartment is fine but basic. The colleague's salary is probably ten percent higher, not dramatically different. But the ten percent is enough to access a different quality of life. Marcus could stretch for the luxury apartment if he wanted, but the stretch would be the entire financial decision point. For the colleague, the luxury apartment is accessible without being the central calculation.
@@ -71,7 +71,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/mecha
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 The comparison mechanism operates through visible difference. The characters see someone else having an easier relationship to money and immediately interpret it as evidence of personal failure. "I'm stressed about money. That person isn't stressed about money. Therefore I'm failing at something they're not failing at." The comparison converts structural difference into personal inadequacy.
@@ -85,7 +85,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/mecha
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 The comparison mechanism also operates through shame amplification. The characters are stressed about money. That's the primary emotion. But the comparison generates a secondary emotion: shame about the stress. "I shouldn't be this stressed about money. Other people aren't stressed about money. Therefore something is wrong with me." The shame about the stress makes it harder to address the underlying stress, because the focus shifts to fixing the wrong thing—fixing the self instead of addressing the circumstances.
@@ -100,7 +100,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/mecha
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 The comparison mechanism also operates through invisibility of advantage. The characters see the outcome (person casual about money, person has house down payment, person has luxury apartment) and assume it comes from something the other person is doing better. What they don't see are the structures that created the advantage. The parental financial support, the educational debt paid by family, the safety net, the inheritance, the starting position of advantage.
@@ -114,7 +114,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/mecha
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 The comparison mechanism also creates a specific kind of deprivation stress. The characters are not actually deprived—they have income, they're paying bills, they're functional. But the comparison creates a feeling of deprivation relative to the comparison group. This is relative deprivation: not being poor, but being less-well-off than the people you're comparing yourself to.
@@ -129,7 +129,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/mecha
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Finally, the comparison mechanism operates as a moving target. The characters don't compare themselves to people worse off. They compare themselves to people slightly better off. And once they get to the level of the people they're comparing to, they immediately find new people slightly better off to compare themselves to. The comparison group keeps moving. The target of adequacy keeps moving. There's no point at which the characters are "done" comparing because there's always someone slightly ahead.
@@ -143,7 +143,7 @@ This is what makes the comparison mechanism so sticky and so destructive: it's n
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -156,7 +156,7 @@ She notices that the colleague who takes vacations casually is not more successf
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -170,7 +170,7 @@ Her throat, which was constricted, opens. The shame about the stress loosens sli
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -184,7 +184,7 @@ Her shoulders, which were tight from the comparison, drop. She can see her own s
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -197,8 +197,8 @@ Sam's stress about money isn't because Sam is doing freelancing wrong. Sam's str
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/turning_point/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Marcus is talking to his father about the colleague's luxury apartment. His father says: "That apartment costs more than your rent. Why are you comparing yourself to someone spending more than you?" The simple statement cuts through the comparison. Marcus is comparing his financial adequacy to someone spending more. Of course he feels inadequate. He's measuring his adequacy against someone spending more. That's not a fair measure.
@@ -211,8 +211,8 @@ His chest, which was tight, releases. By stopping the comparison, Marcus can act
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Maya stops following Instagram. Specifically, she stops looking at the parts where people post about vacations and experiences. She's not deleting Instagram, she's just stopping the comparison ritual. She notices that without the visual comparison, her financial stress is actually lower. She can afford things. She can do things. The stress was partly real, but partly just the visual evidence of other people doing more. Without the visual evidence, the stress is smaller.
@@ -224,8 +224,8 @@ She also starts looking at her own timeline instead of comparing to others. She 
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Jordan and her partner have a conversation about money and advantage. The partner acknowledges the starting point difference. They make a commitment: when there's a financial decision, they explicitly acknowledge what advantages or disadvantages each person is working with. This removes the invisible comparison. The advantage becomes visible and named instead of being hidden underneath performance comparison.
@@ -237,8 +237,8 @@ This doesn't change the financial reality. Jordan still doesn't have a safety ne
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Kai changes who she measures herself against. Instead of comparing to her roommate who's saving for a house, she compares to her own trajectory from two years ago. Two years ago she had $5,000 saved. Now she has $35,000 saved. She's making progress. The comparison is not to someone who got parental help with education. The comparison is to her own previous self.
@@ -250,8 +250,8 @@ She also becomes interested in her roommate's actual situation instead of just c
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Sam stops tracking what other freelancers are doing and starts tracking what Sam is doing. Rate progression, client retention, quality of work, personal financial stability. Sam creates metrics that are actually about Sam's situation instead of metrics that are comparisons to people with different situations. Sam's rates might be lower than someone with a trust fund, but Sam's rate-to-survival ratio might actually be better. Sam's business might look precarious compared to someone with passive income, but Sam's business is actually growing.
@@ -263,8 +263,8 @@ By measuring against metrics that are actually relevant to Sam's situation, the 
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/embodiment/micro/v05.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Marcus stops trying to feel adequate by earning more and starts noticing what he's actually achieving. He's saving. He has benefits. He has security. A colleague with a luxury apartment is not "doing better." The colleague is "spending more." That's a different calculation. Marcus is choosing to save. The colleague is choosing to spend. Both are valid. Neither is better.
@@ -276,9 +276,9 @@ Marcus also limits his comparison exposure. He stops checking what colleagues ar
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
 ---
 Leo declines the team lunch invitation again because the budget is gone. The comparison engine measures against someone else's visible success. Leo's stomach drops. The pattern demands attention now—hot, insistent, refusing to wait. Leo watches it demand. This time, instead of obeying, Leo tracks where the demand originates. It starts in the neck. It travels to the thoughts. The thoughts build a story. The story says: act now or lose everything. Leo examines the story. The story has no evidence. The stomach has real sensation. The story has fabricated urgency. Leo holds the sensation without following the story. The sensation stays. The story loses its audience. The frame shifts: the pattern is loud, but loudness is not truth.
 ---
@@ -288,9 +288,9 @@ Leo declines the team lunch invitation again because the budget is gone. The com
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
 ---
 Suki sits in the car outside the grocery store, unable to go in, unable to go home. The comparison engine hits maximum volume. Suki's vision narrows. Suki's hands clench. Everything narrows to this moment—collapse or breakthrough, no middle ground. Suki stands inside the peak. The pattern says: this is who you are. Suki hears it. For the first time, Suki hears it as a sentence, not a fact. A sentence can be wrong. Suki's body shakes with the intensity. The shaking is real. The sentence is interpretation. Suki separates the shaking from the sentence. The body still trembles. The identity claim dissolves. The metric collapses under its own selectivity. The frame cracks open.
 ---
@@ -301,7 +301,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/embod
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Marco says yes to the team lunch. The budget is tight. The connection matters. The comparison engine activates. Marco's hands clench. The heat rises. Marco recognizes the heat. Does not turn away from it. Marco holds both someone else's achievement and their own without ranking. The old pattern fires and Marco acts from the new understanding anyway. Marco's shoulders bunch, but the hands keep moving. The identity is not the pattern. The identity is what Marco does while the pattern runs. Marco does the next right thing with the pattern screaming in the background. The screaming fades to a hum. The hum fades to a fact: the pattern exists. Marco also exists. They are not the same thing.
@@ -324,8 +324,8 @@ Nia tells the roommate: I cannot cover your half this month. The sentence costs 
 path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/mechanism_proof/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Jordan charts the stress escalation: bill arrives, stomach drops, catastrophize, freeze. Jordan's shoulders bunch. The heat is on. The comparison engine measures against someone else's visible success. Jordan tracks the sequence this time: trigger, body response, thought cascade, behavioral pull. The trigger is external. The body response is automatic. The thought cascade is relative positioning against curated highlights. The behavioral pull is the part that costs. Jordan sees the cost clearly now. Jordan's stomach drops as the pattern runs its circuit. The pattern persists because each comparison produces a momentary relief—at least Jordan checked—followed by a deeper deficit. The persistence is not mysterious. The persistence is mechanical. Seeing the machine does not stop the machine. Seeing the machine reveals the machine is not Jordan.
@@ -337,7 +337,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/comparison/mecha
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Priya stares at the eviction notice. The stress mechanism runs without brakes. Peak intensity. Priya's vision narrows. Priya's hands clench. The comparison engine runs at full power. Priya watches it run. Even at maximum volume, the mechanism follows the same sequence: trigger, selective data pull, asymmetric weighting, deficit verdict, temporary relief, repeat. The sequence is identical at band five as at band two. Only the amplitude changes. The pattern does not become smarter at higher intensity. It becomes louder. Priya's body absorbs the volume. Priya's mind maps the circuit. The circuit has no exit built in—it loops. The loop persists because it feeds on its own output. Priya sees the feed. Seeing the feed does not stop the loop. Seeing the feed reveals the loop has a structure. Structure can be interrupted.

@@ -5,8 +5,8 @@
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Zoe feels the weight in her chest. The exhaustion is persistent. Nothing feels good. Getting out of bed is hard. Going to class is impossible. The motivation is gone. She moves through her day like she's underwater. Everyone else seems fine. She seems broken. Her hands are cold. The heaviness doesn't lift. She's not excited about anything. This is depression.
@@ -18,8 +18,8 @@ RECOGNITION v02
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/recognition/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Nia should be excited about her major. She's supposed to be on a path. Instead she feels nothing. The future feels grey. Even the good things feel muted. She's going through the motions. She's supposed to be thriving. She's surviving. The gap between expectation and reality is crushing. Her shoulders drop. Nothing feels worth the effort. This is what depression feels like when you're supposed to be happy.
@@ -31,8 +31,8 @@ RECOGNITION v04
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/recognition/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Mika is depressed and she knows what that means. It means she's weak. It means she can't handle what other people handle easily. It means her brain is broken. The depression brings its own narrative. She's not just sad. She's defective. The weight in her chest confirms it. She should be able to manage. She can't. She's failing. The depression is proof.
@@ -44,8 +44,8 @@ MECHANISM_PROOF v01
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/mechanism_proof/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Asha is depressed and isolated. The depression makes connection feel pointless. She's not responding to texts. Her friends stop reaching out. The isolation deepens the depression. The depression deepens the isolation. She's alone in the depression. The alone is part of the depression. Her stomach is tight. Everything is heavy. She can't imagine this ending.
@@ -57,8 +57,8 @@ MECHANISM_PROOF v03
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/mechanism_proof/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Leo is depressed and his brain is telling him a story. The story is: this is permanent. You're always going to feel this way. The future is grey. Hope is gone. The story feels true. The depression makes it feel true. His hands are cold. The narrative is complete. He's broken forever.
@@ -70,7 +70,7 @@ MECHANISM_PROOF v05
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -96,7 +96,7 @@ TURNING_POINT v04
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: identity
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -109,8 +109,8 @@ EMBODIMENT v01
 path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/embodiment/micro/v02.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Leo is taking medication. The color is slowly coming back. Not all at once. But incrementally. The future is less grey. His friends are back. The connection is real. The medication helped turn the system back on. His hands are warm. The depression is still possible. But not inevitable.
@@ -123,7 +123,7 @@ path: story_atoms/gen_alpha_students/anchored/{topic}/{engine}/embodiment/micro/
 BAND: 2
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Nia is learning that depression is not identity. It's something that happens. It's treatable. It's manageable. She's learning to separate herself from the depression. She's still Nia. The depression is a condition. The distinction is everything.
@@ -136,8 +136,8 @@ path: story_atoms/gen_alpha_students/anchored/compassion_fatigue/spiral/turning_
 BAND: 4
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
 ---
 Noa stands in the middle of the pattern and sees it. The recursive thought loops runs hot—gut twists. Noa has carried this story about compassion fatigue for so long the weight became invisible. Now the weight announces itself. Goosebumps erupt across Noa's skin. The old frame says: endure. Push through. Keep performing. But the frame cracks. Noa watches the crack spread. The story that held everything together—the one about being strong enough, disciplined enough, good enough—stops making sense. Not because it was wrong. Because it was incomplete. Noa feels the incompleteness in the body. Something shifts behind the sternum. The old story doesn't fit the evidence anymore. Noa stands in the gap between what was believed and what is true.
 ---
@@ -148,8 +148,8 @@ path: story_atoms/gen_alpha_students/anchored/compassion_fatigue/spiral/turning_
 BAND: 5
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
 ---
 Peak. Felix's fists clench. The recursive thought loops mechanism runs so hot it melts its own tracks. Felix's gut twists. The compassion fatigue becomes total. There is no outside. No perspective. No distance. Just the raw force of it. Felix is inside the center of the storm and the center is silent. In that silence, the old frame stops. Just stops. Like a clock that runs out. Felix waits for the old story to restart and it does not. The silence stretches. In the absence of the old frame, Felix notices what remains: a body, breathing. A floor, holding weight. A present moment with no narrative attached. The recursive thought loops pattern cannot operate without a story to run on. Felix stands in the gap.
 ---
@@ -159,8 +159,8 @@ Peak. Felix's fists clench. The recursive thought loops mechanism runs so hot it
 path: story_atoms/gen_alpha_students/anchored/compassion_fatigue/spiral/embodiment/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Theo moves differently now. The recursive thought loops pattern fires and Theo feels it—shoulders curl forward—but does not become it. Theo acts from the new understanding. The compassion fatigue is present. Hot. Demanding attention. Theo's teeth clench. But Theo responds from a different place. Not the old identity that was defined by this pattern. A newer architecture. Theo speaks from it. Makes choices from it. The recursive thought loops pushes back. Theo holds position. Not through force. Through recognition. Theo knows what this is now. Knows the cost structure. Chooses differently anyway. The body carries the heat without collapsing into the old shape. Theo owns this response. It belongs to the person Theo is becoming.
@@ -184,7 +184,7 @@ path: story_atoms/gen_alpha_students/anchored/compassion_fatigue/spiral/mechanis
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Felix sees the machinery in real time. The recursive thought loops pattern fires and Felix catches the sequence: trigger, body response, narrative, behavioral loop. Felix's chest tightens. The compassion fatigue is hot. Active. But Felix traces the wiring. The recursive thought loops protects by analyzing the analysis of the analysis. It has always protected by analyzing the analysis of the analysis. The protection costs more than the threat. Felix's throat seals. Felix watches the cost accumulate in the body. Watches the pattern spend resources defending against something that is already happening. The mechanism is visible now. Not as theory. As lived architecture. Felix feels every gear turn. The understanding doesn't reduce the heat. But it names the fire.
@@ -195,8 +195,8 @@ Felix sees the machinery in real time. The recursive thought loops pattern fires
 path: story_atoms/gen_alpha_students/anchored/compassion_fatigue/spiral/mechanism_proof/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Everything is visible now. Theo's legs go heavy. The recursive thought loops mechanism fires at peak capacity and Theo sees through it completely. Theo's cheeks burn. The compassion fatigue at this intensity burns away every excuse, every rationalization, every reason the pattern seemed necessary. What remains is the bare mechanism: a loop that feeds itself. The recursive thought loops creates more thoughts to think about, which activates more recursive thought loops, which creates more thoughts to think about. Perpetual motion machine of suffering. Theo sees the engine running and understands it is not broken. It is working exactly as designed. The design is the problem. The crisis makes the design obvious. Theo cannot unsee what the peak has revealed.

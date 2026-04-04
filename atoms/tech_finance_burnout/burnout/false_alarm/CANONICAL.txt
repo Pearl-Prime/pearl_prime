@@ -5,7 +5,7 @@
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -17,7 +17,7 @@ Ryan's nervous system treats every alert like emergency. A Slack message launche
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/recognition/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -29,7 +29,7 @@ Ava is constantly in emergency response. Her stomach is liquid. Her body is in p
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/recognition/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,7 +41,7 @@ Marcus's system has learned that deals contain risk. Now every deal is treated a
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -53,7 +53,7 @@ Wei's nervous system is exhausted from constant alarm. His shoulders stay high. 
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/recognition/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -66,7 +66,7 @@ path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/mechanism_pr
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Ryan's burned-out nervous system is producing alarms constantly. The mechanism is: burnout dysregulates the nervous system, dysregulation produces constant alarm, constant alarm produces more burnout. The false alarms are now producing the very exhaustion that created them. He is caught in a loop where burnout is feeding the alarm system that is feeding the burnout.
@@ -78,7 +78,7 @@ path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/mechanism_pr
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Ava's system is exhausted from constant alarm. The false alarms are no longer producing adrenaline. They are just producing more exhaustion. The mechanism is: burnout dysregulates, dysregulation removes recovery capacity, no recovery deepens burnout. She cannot rest and the body cannot recover. She is running on empty and the alarm system is still firing.
@@ -90,7 +90,7 @@ path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/mechanism_pr
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Marcus's alarm system has become a cage. The mechanism is: burnout creates hypervigilance, hypervigilance prevents rest, preventing rest deepens burnout, deeper burnout increases hypervigilance. He cannot escape the cycle. The false alarms are symptoms of burnout and also causes of deeper burnout. He is locked.
@@ -102,7 +102,7 @@ path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/mechanism_pr
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Wei's body is now in chronic stress. The false alarms are automatic. The recovery is not happening. The mechanism is: burnout dysregulates the system, dysregulation becomes the baseline, baseline doesn't recover, lack of recovery produces chronic stress, chronic stress makes recovery impossible. He is locked in his own nervous system.
@@ -114,7 +114,7 @@ path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/mechanism_pr
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Natasha's system has lost the ability to distinguish real threat. The mechanism is: burnout erodes discernment, eroded discernment means everything is threat, everything being threat means constant alarm, constant alarm produces more burnout. The false alarms are indistinguishable from real alarms because her system has lost the ability to make that distinction.
@@ -125,7 +125,7 @@ Natasha's system has lost the ability to distinguish real threat. The mechanism 
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -137,7 +137,7 @@ Ryan begins to rest. Small amounts. His nervous system begins to recalibrate. Th
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -149,7 +149,7 @@ Ava takes time off. Her alarm system begins to settle. The false alarms are stil
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -161,7 +161,7 @@ Marcus reduces his workload. His alarm system begins to have space between firin
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -173,7 +173,7 @@ Wei takes a leave of absence. His nervous system begins to deregulate from the p
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -185,8 +185,8 @@ Natasha reduces her trading hours. Her nervous system has space to recover. The 
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Ryan's nervous system is regulated now. The false alarms still happen. He has the capacity to recover between them. Rest is ongoing. He is claiming his right to have a calm nervous system. His chest is open. His baseline is manageable.
@@ -197,8 +197,8 @@ Ryan's nervous system is regulated now. The false alarms still happen. He has th
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Ava's alarm system is recalibrating. She is not in constant emergency. She is able to distinguish routine from crisis. Rest has restored her discernment. She is claiming her right to have a responsive but not reactive system.
@@ -209,8 +209,8 @@ Ava's alarm system is recalibrating. She is not in constant emergency. She is ab
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Marcus's baseline has lowered. His jaw is unclenched. He can feel the difference between real threat and the old patterns of hypervigilance. Rest has broken the cycle. He is claiming his capacity to be calm in his work.
@@ -221,8 +221,8 @@ Marcus's baseline has lowered. His jaw is unclenched. He can feel the difference
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Wei's shoulders have dropped. His nervous system is no longer locked in emergency. Rest has restored the capacity for recovery. He is claiming his right to have a regulated nervous system. His presence is calmer. His team notices.
@@ -233,8 +233,8 @@ Wei's shoulders have dropped. His nervous system is no longer locked in emergenc
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/embodiment/micro/v05.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Natasha's hands are warm. Her baseline is regulated. She can distinguish signal from noise. Rest has restored her discernment. She is claiming her capacity to trade from clarity, not from emergency.
@@ -246,8 +246,8 @@ Natasha's hands are warm. Her baseline is regulated. She can distinguish signal 
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 At the ide at 11 pm on a friday with no one else online. Sana feels the warning system activate in a moment of actual safety. Her shoulders climb toward her ears and lock there. For months the frame has held: if the sensation says danger then danger is here. Now Sana watches the frame buckle under evidence it cannot metabolize. Her body registers the shift before her mind can catch up. The chest opens half an inch. Something loosens at the base of her spine. The muscles that held the old posture begin to release. The body remembers what the present does not contain. The old story does not end with a conclusion. It ends with a silence. Sana stands in that silence. Her hands open at her sides.
@@ -258,9 +258,9 @@ At the ide at 11 pm on a friday with no one else online. Sana feels the warning 
 path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
 ---
 Leo stands at the IDE at 11 PM on a Friday with no one else online. Every nerve fires simultaneously. His skin burns from scalp to soles. He feels the alarm reaches screaming intensity while the room stays perfectly still. The frame that has held everything in place — the body never lies about threat — strains under the weight of what Leo sees. For one long second the old architecture holds. Then it cracks. Leo feels the fracture travel through his chest. The story that organized every decision, every reaction, every judgment stops organizing. The body remembers what the present does not contain. Leo does not reach for a replacement. He stands in the gap where the certainty lived, breathing into the new and terrifying openness.
 ---
@@ -271,7 +271,7 @@ path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/embodiment/m
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Mei stares at the same ticket for the third consecutive day. Her fingers dig into her own palms. Crescents form in the skin. The alarm arrives — hot, familiar, insistent, demanding the old response. This time Mei lets the alarm ring through the body without lifting a hand to respond. Not as strategy. Not as technique. As identity. The sensation remains in her body — chest tight, breath shallow, adrenaline still circulating. Mei acts through it. The acting is not despite the sensation. It is through the sensation and alongside it. The action carries her name. This is who Mei is now. Someone who moves with the fire still burning.
@@ -295,7 +295,7 @@ path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/mechanism_pr
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Kiran pauses while staring at the same ticket for the third consecutive day. His hands ball into fists at his sides. The knuckles whiten. The alarm has run for hours without interruption. Now he sees the machinery laid bare. The warning system fires on pattern-match rather than reality, and each false firing strengthens the hair-trigger. Kiran traces the loop in real time: trigger, activation, the relief that never actually arrives, then the trigger again. His stomach clenches as he maps the circuit from inside it. Seeing the mechanism does not stop the gears. But it strips the mechanism of its authority. Kiran watches the loop turn without feeding it another round.
@@ -307,7 +307,7 @@ path: story_atoms/tech_finance_burnout/anchored/burnout/false_alarm/mechanism_pr
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 The air evacuates the room. His ribs lock. The diaphragm freezes. Soren stands in the fluorescent hum of the empty office at midnight. The alarm runs its program at full speed. Soren watches with the detachment of someone reading their own diagnostic. The mechanism reveals itself in full: the threat detector runs on outdated code — it responds to the shape of the past, not the content of the present. Every previous attempt to fight the pattern used the same logic that powers it. Soren sees this now. His ribs expand with the recognition. Not relief — clarity. The pattern does not stop. But Soren stops mistaking it for truth. It is machinery. It is not his name.

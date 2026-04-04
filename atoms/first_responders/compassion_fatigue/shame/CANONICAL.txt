@@ -5,8 +5,8 @@
 path: story_atoms/first_responders/anchored/compassion_fatigue/shame/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Marcus has seen so much suffering. He's exhausted from caring. But now he's feeling the shame. He's supposed to care. But the caring is killing him. The shame is that he's resentful of the suffering. He's supposed to have compassion. But the compassion has depleted him. The shame is: I'm bad for being human.
@@ -18,7 +18,7 @@ RECOGNITION v02
 path: story_atoms/first_responders/anchored/compassion_fatigue/shame/recognition/micro/v03.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: identity
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -31,8 +31,8 @@ RECOGNITION v04
 path: story_atoms/first_responders/anchored/compassion_fatigue/shame/recognition/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Kyle is tired of tragedy. The overdoses. The accidents. The suffering. He's supposed to respond with compassion. But the compassion is bankrupt. The shame is: I'm a bad person for not caring. But I'm also a bad EMT for not being able to care anymore.
@@ -44,8 +44,8 @@ MECHANISM_PROOF v01
 path: story_atoms/first_responders/anchored/compassion_fatigue/shame/mechanism_proof/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Sofia is withdrawing from patients. She provides care. But there's no warmth. The shame is immense. She's betraying the whole reason she became a firefighter. The compassion fatigue has created distance. The distance is creating shame.
@@ -57,8 +57,8 @@ MECHANISM_PROOF v03
 path: story_atoms/first_responders/anchored/compassion_fatigue/shame/mechanism_proof/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Renata is cold with the crew. They notice. She's aware they notice. The shame is overwhelming. She's supposed to care. About them. About the victims. But the compassion is exhausted. The fatigue has created coldness. The coldness is creating shame.
@@ -70,8 +70,8 @@ MECHANISM_PROOF v05
 path: story_atoms/first_responders/anchored/compassion_fatigue/shame/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Marcus understands: this is compassion fatigue. Not character failure. The distinction is critical. He's not bad. He's depleted. The shame dissolves slightly. Understanding that it's a system problem, not a personal problem, creates space for recovery.
@@ -83,7 +83,7 @@ TURNING_POINT v02
 path: story_atoms/first_responders/anchored/compassion_fatigue/shame/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -96,7 +96,7 @@ TURNING_POINT v04
 path: story_atoms/first_responders/anchored/compassion_fatigue/shame/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -109,8 +109,8 @@ EMBODIMENT v01
 path: story_atoms/first_responders/anchored/compassion_fatigue/shame/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Sofia is warming up again. The compassion is returning. The crew notices. She's becoming real again. The shame is dissolved.
@@ -123,7 +123,7 @@ path: story_atoms/first_responders/anchored/compassion_fatigue/shame/embodiment/
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Renata is present again. The warmth is returning. The crew responds. She's human again. The shame is integrated as learning.
@@ -136,7 +136,7 @@ path: story_atoms/first_responders/anchored/compassion_fatigue/shame/turning_poi
 BAND: 4
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Kim does not want to go to the critical incident debriefing because she does not feel anything about the critical incident. Everyone else will have feelings. She will sit there empty and exposed. Her face burns in advance. The shame says: something is wrong with you for not feeling devastated. Her chest constricts. The frame shifts when she attends and another veteran says: I felt nothing too. Three veterans out of nine felt nothing. The shame assumed she was the only numb one. She was one of three. The numbness is not pathology. It is pattern.
@@ -148,7 +148,7 @@ path: story_atoms/first_responders/anchored/compassion_fatigue/shame/turning_poi
 BAND: 5
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 5
 IDENTITY_STAGE: experimentation
 ---
 Jackson reaches the breaking point. The shame pattern at peak compassion fatigue intensity has stripped everything back to bone. Chest cracking. Hands shaking. The old frame is not bending. It is shattering. Jackson watches the pieces fall and does not try to reassemble them. The frame told a story about why this pain was the price of the work. The story was wrong. The pain is real. The price was manufactured by a system that confuses endurance with character. Jackson stands in the wreckage of the old explanation. Something new is visible in the gap. Not a solution. A direction. The first direction that does not lead back to the same station, the same silence, the same acceptance of the unacceptable.
@@ -184,7 +184,7 @@ path: story_atoms/first_responders/anchored/compassion_fatigue/shame/mechanism_p
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Morales identifies the shame's enforcement mechanism in first responder culture. The culture permits physical injury but not emotional injury. A broken bone gets sympathy and sick leave. A broken spirit gets silence and suspicion. The shame is not personal. It is institutional. The mechanism: the culture rewards stoicism and punishes vulnerability. Morales has been following a script written by the institution, not by her own values. Her face warms as the mechanism becomes visible. The shame is a cultural product, not a personal failing.
@@ -196,7 +196,7 @@ path: story_atoms/first_responders/anchored/compassion_fatigue/shame/mechanism_p
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Gutierrez sees the shame's generational transmission. His captain learned it from his captain. The silence, the stoicism, the punishment of vulnerability — it passes through the ranks like an inherited disease. The mechanism: shame is not felt. It is taught. It is modeled. The new recruit learns it from the veteran's silence. The veteran learned it from the captain's disapproval. The captain learned it from the culture's mythology of the unbreakable hero. Gutierrez's face burns. He is not carrying his own shame. He is carrying decades of institutional shame that was handed down like equipment.

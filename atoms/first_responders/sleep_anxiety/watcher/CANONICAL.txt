@@ -5,8 +5,8 @@
 path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Marcus watches himself try to sleep. The watcher prevents sleeping. He's aware of his own insomnia. It's becoming visible. Jake notices the pattern.
@@ -18,7 +18,7 @@ RECOGNITION v02
 path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/recognition/micro/v03.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: identity
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -31,8 +31,8 @@ RECOGNITION v04
 path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/recognition/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Heather feels the weight of the sleep_anxiety settling into her. The watcher is how it manifests for her. She's learning the pattern.
@@ -44,8 +44,8 @@ MECHANISM_PROOF v01
 path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/mechanism_proof/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Sofia's sleep_anxiety is becoming toxic. The watcher is creating problems at work. People notice. She's isolated by it.
@@ -57,8 +57,8 @@ MECHANISM_PROOF v03
 path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/mechanism_proof/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Brianna is drowning in the sleep_anxiety. The watcher is everywhere. She can't escape it.
@@ -70,8 +70,8 @@ MECHANISM_PROOF v05
 path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Jake stops fighting the sleep_anxiety. He names it. Acknowledges it. The watcher is how it works. Understanding changes things.
@@ -83,7 +83,7 @@ TURNING_POINT v02
 path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -96,7 +96,7 @@ TURNING_POINT v04
 path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -109,8 +109,8 @@ EMBODIMENT v01
 path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Sofia is present with her sleep_anxiety. The watcher still shows up. But it doesn't prevent connection.
@@ -123,7 +123,7 @@ path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/embodiment/mic
 BAND: 1
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Brianna knows the sleep_anxiety now. The watcher mechanism doesn't surprise her anymore. She's stable with it.
@@ -136,7 +136,7 @@ path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/turning_point/
 BAND: 4
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Gutierrez keeps one ear on the speaker even in sleep. His body has trained itself to half-sleep — aware enough to respond, unconscious enough to rest slightly. Except the rest is not rest. It is surveillance with closed eyes. His shoulders never fully relax. The frame shifts during a night with no calls. His body remains at half-sleep anyway. The watcher does not need actual calls. It needs the possibility of calls. He cannot eliminate the possibility. But he can notice that tonight, no calls came. His jaw unclenches at 5 AM. One night of evidence that the watcher's vigil was unnecessary.
@@ -148,7 +148,7 @@ path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/turning_point/
 BAND: 5
 MECHANISM_DEPTH: 3
 COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_INTENSITY: 5
 IDENTITY_STAGE: experimentation
 ---
 Patel reaches the breaking point. The watcher pattern at peak sleep anxiety intensity has stripped everything back to bone. Chest cracking. Hands shaking. The old frame is not bending. It is shattering. Patel watches the pieces fall and does not try to reassemble them. The frame told a story about why this pain was the price of the work. The story was wrong. The pain is real. The price was manufactured by a system that confuses endurance with character. Patel stands in the wreckage of the old explanation. Something new is visible in the gap. Not a solution. A direction. The first direction that does not lead back to the same station, the same silence, the same acceptance of the unacceptable.
@@ -184,7 +184,7 @@ path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/mechanism_proo
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Jackson identifies the watcher's origin story. It began on a specific call — the one where she was not watching and something went wrong. That call installed the watcher permanently. The mechanism: one moment of missed attention became a lifetime of hyperattention. The watcher is a security system installed by a single breach. The breach was years ago. The security system has not been updated. It still protects against the exact threat from the exact call. Her shoulders are rigid. The watcher is guarding a door that was breached once, in a building that no longer exists.
@@ -196,7 +196,7 @@ path: story_atoms/first_responders/anchored/sleep_anxiety/watcher/mechanism_proo
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Nowak sees the watcher's deepest paradox: it makes him less safe. The constant scanning depletes the attention needed for actual threat response. He is so busy watching for everything that he cannot focus on anything. The watcher has reduced his effectiveness while convincing him it is the source of his effectiveness. His neck is stone. The mechanism: the watcher is a net negative. It consumes more safety than it produces. The vigilance is not protective. It is expensive. It costs more than the threats it theoretically prevents.

@@ -5,7 +5,7 @@
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -41,7 +41,7 @@ James feels disconnected from his company. His mind spirals. He feels disconnect
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -66,7 +66,7 @@ path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/mechan
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Priya's spiral about her numbness is now automatic. The mechanism is: fatigue produces numbness, numbness triggers spiral, spiral produces unsuitability narrative, narrative produces despair, despair worsens fatigue. She is locked. The spiral is evidence to herself that she doesn't belong. She is no longer just depleted. She is convinced she is unsuitable.
@@ -77,8 +77,8 @@ Priya's spiral about her numbness is now automatic. The mechanism is: fatigue pr
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/mechanism_proof/micro/v02.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Derek's spiral about his irritability is producing identity collapse. The mechanism is: fatigue produces irritability, irritability triggers spiral, spiral produces belief he is toxic, belief produces despair, despair worsens fatigue. He is locked. The spiral is evidence to himself that he is failing. He is no longer just depleted. He believes he is unsuitable for leadership.
@@ -89,8 +89,8 @@ Derek's spiral about his irritability is producing identity collapse. The mechan
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/mechanism_proof/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 James's spiral about his disconnection is producing existential collapse. The mechanism is: fatigue produces numbness, numbness triggers spiral, spiral produces belief he is fraud, belief produces despair, despair worsens fatigue. He is locked. The spiral is evidence to himself that he shouldn't be founder. The spiral is destroying his willingness to lead.
@@ -102,7 +102,7 @@ path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/mechan
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Derek's spiral about his withdrawal is preventing recovery. The mechanism is: fatigue produces need for rest, rest triggers spiral, spiral produces belief he is isolating, belief produces shame, shame prevents rest. He needs to withdraw to recover. The spiral converts rest into failure. He is locked. The spiral is preventing the very recovery he needs.
@@ -113,8 +113,8 @@ Derek's spiral about his withdrawal is preventing recovery. The mechanism is: fa
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/mechanism_proof/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Priya's spiral about resting is preventing recovery. The mechanism is: fatigue produces need for rest, rest triggers spiral, spiral produces belief she doesn't care, belief produces shame, shame prevents rest. She needs to rest to recover. The spiral converts rest into unsuitability. She is locked. The spiral is preventing recovery.
@@ -125,7 +125,7 @@ Priya's spiral about resting is preventing recovery. The mechanism is: fatigue p
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -137,7 +137,7 @@ Priya interrupts the spiral. Numbness is a symptom of fatigue. Not evidence of u
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -149,7 +149,7 @@ Derek interrupts the spiral. Irritability is a symptom of fatigue. Not evidence 
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -161,7 +161,7 @@ James interrupts the spiral. Disconnection is a symptom of fatigue. Not evidence
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -173,7 +173,7 @@ Derek interrupts the spiral about rest. Rest is necessary recovery. Not failure.
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: social
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -185,8 +185,8 @@ Priya interrupts the spiral about rest. Rest is necessary for recovery. Not fail
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Priya feels numb and she does not believe the spiral. The spiral says she is unsuitable. The facts say she is recovering. She claims her right to recover. Her chest is opening.
@@ -197,8 +197,8 @@ Priya feels numb and she does not believe the spiral. The spiral says she is uns
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Derek is irritable and he does not believe the spiral. The spiral says he is toxic. The facts say he is recovering. He claims his right to recover. His throat is open.
@@ -209,8 +209,8 @@ Derek is irritable and he does not believe the spiral. The spiral says he is tox
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 James is disconnected and he does not believe the spiral. The spiral says he is a fraud. The facts say he is recovering. He claims his leadership identity. His jaw is unclenched.
@@ -221,8 +221,8 @@ James is disconnected and he does not believe the spiral. The spiral says he is 
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Derek rests and the spiral protests. He rests anyway. He is claiming his recovery. His shoulders are loose. The spiral is no longer in charge.
@@ -233,8 +233,8 @@ Derek rests and the spiral protests. He rests anyway. He is claiming his recover
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/embodiment/micro/v05.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 1
 IDENTITY_STAGE: self_claim
 ---
 Priya rests and the spiral protests. She rests anyway. She is claiming her recovery. Her hands are warm. She is recovering and the spiral is just noise.
@@ -246,8 +246,8 @@ Priya rests and the spiral protests. She rests anyway. She is claiming her recov
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Marcus stands in the code review. Stomach churns. The spiral fires hard — numbness after giving too much, and the cascade mechanism demanding its usual conclusion. Marcus catches it mid-sequence. Breath shortens to gasps. The care depletion is real. The body holds both the intensity and a new recognition: the spiral converts one fact into total failure, but the conversion is not truth. It is habit. Marcus feels the heat in the chest and does not follow the narrative to its endpoint. The frame cracks. Marcus refreshes the dashboard. Something underneath the old interpretation breathes. The spiral still fires. The story it tells no longer lands as fact.
@@ -258,8 +258,8 @@ Marcus stands in the code review. Stomach churns. The spiral fires hard — numb
 path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: identity
+COST_INTENSITY: 5
 IDENTITY_STAGE: experimentation
 ---
 Everything peaks at once. Fingers go cold. Priya cannot outrun the spiral. The care depletion fills every cell — numbness after giving too much. The body reaches maximum intensity. Pulse quickens in the throat. In the center of the crisis, Priya sees the entire structure of the cascade mechanism. Sees how it manufactures the verdict from raw sensation. Sees that the verdict is manufactured, not discovered. The frame breaks at its foundation. The care depletion remains but the spiral's interpretation of it falls away. Priya stands in the wreckage and does not rebuild the old structure. Cannot. Will not.
@@ -271,7 +271,7 @@ path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/embodi
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Derek enters the intensity with open eyes. Ribs cage the breath. The spiral demands the old response to the care depletion — numbness after giving too much. Derek gives it a new one. Acts from self-knowledge, not from the cascade mechanism. The body registers the heat. Hands clench and release. Derek registers the choice. Sees the laptop screen and responds as the person who survived seeing the pattern, not as the person the pattern describes. Identity belongs to Derek now. Not to the spiral. The body still feels everything. Derek no longer translates feeling into the spiral's verdict. The translation stops here.
@@ -295,7 +295,7 @@ path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/mechan
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 The spiral fires at high intensity. Temples pulse. Priya traces the mechanism in real time — numbness after giving too much. The care depletion feeds the cascade mechanism. The cascade mechanism produces certainty about failure. The certainty deepens the care depletion. Breath shortens to gasps. Round and round. Priya sees the Slack notification and watches the loop complete itself without any new information entering. The pattern is self-sustaining. It needs no evidence because it treats its own output as input. Priya closes the laptop lid. The spiral is the chain that the spiral converts one fact into total failure. Seeing the conversion does not stop it. But the seeing changes what the conviction means.
@@ -307,7 +307,7 @@ path: story_atoms/tech_finance_burnout/anchored/compassion_fatigue/spiral/mechan
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Everything at maximum. Jaw locks. The spiral completes its loop about the care depletion in seconds — numbness after giving too much. Pulse quickens in the throat. Sensation to narrative to verdict to deeper sensation. Derek tracks each conversion in real time. The cascade mechanism operates at peak efficiency during crisis. This is when the pattern is most powerful — and most transparent. Every gear visible. Every false conclusion traceable to its source in sensation. Derek opens the PR. The chain completes another cycle. Derek sees it complete. The seeing does not stop the machinery. The seeing changes who is operating it.

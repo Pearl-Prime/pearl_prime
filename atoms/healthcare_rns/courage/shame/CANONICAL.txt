@@ -5,7 +5,7 @@
 path: story_atoms/healthcare_rns/anchored/courage/shame/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -18,7 +18,7 @@ path: story_atoms/healthcare_rns/anchored/courage/shame/recognition/micro/v02.tx
 BAND: 3
 MECHANISM_DEPTH: 1
 COST_TYPE: social
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Tomás watches a colleague volunteer for the rapid response team. The colleague has the same experience level, the same certifications, the same clinical skills. The difference is the colleague raised his hand. Tomás didn't. The shame's logic: you're not ready, you need more experience, you'll freeze and everyone will see. The colleague who volunteered has the same amount of readiness. The shame didn't run the same calculation for the colleague—it only runs for Tomás. The shame is person-specific. It doesn't measure readiness objectively. It measures Tomás against an impossible standard and finds him short every time.
@@ -29,7 +29,7 @@ Tomás watches a colleague volunteer for the rapid response team. The colleague 
 path: story_atoms/healthcare_rns/anchored/courage/shame/recognition/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -42,7 +42,7 @@ path: story_atoms/healthcare_rns/anchored/courage/shame/recognition/micro/v04.tx
 BAND: 3
 MECHANISM_DEPTH: 1
 COST_TYPE: social
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Claire considers publishing a case study. She managed a rare obstetric emergency—a successful outcome that involved clinical judgment that deviated from the standard protocol. The deviation saved the patient. The case study would contribute to the literature. The shame says: who publishes case studies. Physicians publish case studies. Researchers publish case studies. Nurses with PhDs publish case studies. Claire has a BSN and ten years of clinical expertise. The shame creates a publishing hierarchy that places bedside nurses at the bottom. The case doesn't know about the hierarchy. The case is worth publishing regardless of who writes it.
@@ -53,8 +53,8 @@ Claire considers publishing a case study. She managed a rare obstetric emergency
 path: story_atoms/healthcare_rns/anchored/courage/shame/recognition/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Derek wants to question a physician's treatment plan. Not the medication—the approach. The patient is declining on the current plan and Derek's clinical instinct says the plan needs revisiting. The instinct is built on three years of watching patients on this exact trajectory. The shame says: you're a three-year nurse questioning a physician's clinical reasoning. The hierarchy of credentialing overrides the hierarchy of observation. The physician has training Derek doesn't have. Derek has continuity of observation the physician doesn't have. Both types of information are clinically valid. The shame only validates one type and it's not Derek's.
@@ -66,7 +66,7 @@ path: story_atoms/healthcare_rns/anchored/courage/shame/mechanism_proof/micro/v0
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Nora identifies the shame's operating model: you are your title, and your title defines your permission. Staff nurse is the title. Staff nurses do staff nursing. The model is a box. Inside the box: assessments, medications, charting, patient care. Outside the box: program design, education innovation, systems improvement. The box doesn't match reality—nurses innovate at every level. But the shame's box is smaller than reality's box. The shame's box is designed to contain, not to describe. Nora's idea exists outside the shame's box and inside reality's box. The shame says she's overreaching. Reality says she's contributing. The frames disagree about the same action.
@@ -77,7 +77,7 @@ Nora identifies the shame's operating model: you are your title, and your title 
 path: story_atoms/healthcare_rns/anchored/courage/shame/mechanism_proof/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
+COST_TYPE: opportunity
 COST_INTENSITY: 2
 IDENTITY_STAGE: destabilization
 ---
@@ -90,7 +90,7 @@ path: story_atoms/healthcare_rns/anchored/courage/shame/mechanism_proof/micro/v0
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Aisha discovers that the shame's credentialing requirement is infinitely receding. When she had her ADN, the shame said she needed a BSN. She got the BSN. The shame said she needed a specialty certification. She got the certification. The shame now says she needs a master's degree to speak at a support group. The requirement isn't static—it moves forward whenever she meets it. The shame will never declare her credentials sufficient because sufficiency would remove the shame's authority. The shame maintains itself by maintaining the gap. The gap between what she has and what the shame requires is the shame's own structure.
@@ -101,8 +101,8 @@ Aisha discovers that the shame's credentialing requirement is infinitely recedin
 path: story_atoms/healthcare_rns/anchored/courage/shame/mechanism_proof/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Claire maps the shame to nursing's professional hierarchy. Physicians publish. Nurses implement. The hierarchy is historical and is changing—nursing journals exist, nurse researchers publish, bedside nurses contribute to evidence—but the shame operates on the old map. The old map says nurses don't produce knowledge; nurses apply it. The old map is wrong. Claire's clinical judgment during the obstetric emergency was knowledge production in real time. The judgment deviated from the protocol because the protocol didn't account for the specific clinical picture. The deviation was a contribution to the field. The shame says only the protocol is knowledge. The patient's survival says the deviation was knowledge too.
@@ -125,7 +125,7 @@ Derek studies the outcomes of nurse-initiated clinical questions. Literature he 
 path: story_atoms/healthcare_rns/anchored/courage/shame/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -137,8 +137,8 @@ Nora shares the discharge education idea at a staff meeting. She prefaces it: "I
 path: story_atoms/healthcare_rns/anchored/courage/shame/turning_point/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Tomás volunteers for the rapid response team. He raises his hand during the recruitment meeting. The shame says: you'll freeze, you'll fail in front of everyone. His hand stays up. The team lead adds his name to the roster. The addition is administrative—a name on a list. The shame treated it as an identity claim—I am a rapid response nurse—and attacked the claim. The list doesn't make identity claims. The list assigns shifts. He's on the list for Tuesday. Tuesday arrives. He responds to a rapid response call. He doesn't freeze. He does his assessment, reports his findings, contributes to the team. The contribution is ordinary. The shame said it would be catastrophic. Ordinary and catastrophic differ by the entire distance of reality.
@@ -149,7 +149,7 @@ Tomás volunteers for the rapid response team. He raises his hand during the rec
 path: story_atoms/healthcare_rns/anchored/courage/shame/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 CALLBACK_ID: support_group_voice
@@ -163,8 +163,8 @@ Aisha attends the parents' support group. Not as a speaker—as an observer. She
 path: story_atoms/healthcare_rns/anchored/courage/shame/turning_point/micro/v04.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: social
+COST_INTENSITY: 4
 IDENTITY_STAGE: experimentation
 ---
 Claire sends the case study to a nursing journal. Not a medical journal—a nursing journal that publishes clinical narratives from bedside practitioners. The submission guidelines explicitly welcome BSN-prepared nurses. The shame fires anyway: your writing isn't academic enough, the case isn't significant enough, the journal will reject it and you'll have proof you don't belong. She submits. The confirmation email arrives. The shame reads the email as the beginning of eventual rejection. The email says: "Manuscript received. Review timeline: 8-12 weeks." The email is neutral. The shame reads menace in neutral text. She closes the email and lets the review timeline proceed.
@@ -175,7 +175,7 @@ Claire sends the case study to a nursing journal. Not a medical journal—a nurs
 path: story_atoms/healthcare_rns/anchored/courage/shame/turning_point/micro/v05.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -187,8 +187,8 @@ Derek raises the concern about the treatment plan. He uses clinical language: "I
 path: story_atoms/healthcare_rns/anchored/courage/shame/embodiment/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: self_claim
 ---
 Nora writes the proposal. Ten pages of methodology, evidence, and implementation plan. The shame runs throughout the writing: who are you, this isn't your role, someone more qualified should do this. She writes through the shame. The proposal is good—she can evaluate this because she's read enough proposals to know what good looks like. She submits it to her manager. The manager reads it and responds with one word: "When?" Not who are you. When. The manager's question assumes the program will happen. The shame assumes it shouldn't. The manager's assumption is the one connected to resources and timelines. The shame's assumption is connected to nothing but itself.
@@ -199,8 +199,8 @@ Nora writes the proposal. Ten pages of methodology, evidence, and implementation
 path: story_atoms/healthcare_rns/anchored/courage/shame/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Tomás responds to his third rapid response call. The shame still fires at the page—a brief pulse that says you'll freeze. He arrives at the bedside. He doesn't freeze. His assessment is quick and accurate. The team acts on his findings. The shame fires and fades now in the same breath—a contraction that passes through him without stopping his hands. Three calls, three adequate performances, zero catastrophes. The shame's prediction model hasn't updated. His behavior has. He responds to the calls regardless of the prediction. The responding is becoming the evidence that the shame can't argue with because the evidence is accumulating in real time.
@@ -211,8 +211,8 @@ Tomás responds to his third rapid response call. The shame still fires at the p
 path: story_atoms/healthcare_rns/anchored/courage/shame/embodiment/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: self_claim
 CALLBACK_ID: support_group_voice
 CALLBACK_PHASE: return
@@ -225,8 +225,8 @@ Aisha speaks at the parents' support group. Ten minutes. She talks about what nu
 path: story_atoms/healthcare_rns/anchored/courage/shame/embodiment/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: social
+COST_INTENSITY: 3
 IDENTITY_STAGE: self_claim
 ---
 Claire receives a revise-and-resubmit from the nursing journal. Not a rejection. Not an acceptance. A request for revisions—three specific areas the reviewers want strengthened. The shame reads it as: not good enough. The actual message is: good enough to develop further. The reviewers engaged with the case. They have suggestions. The suggestions are collaborative, not dismissive. Claire revises. The revision process teaches her things about her own case she hadn't articulated. The shame said submission would lead to exposure. The submission led to learning. The exposure the shame predicted was humiliation. The exposure that arrived was development.
@@ -237,8 +237,8 @@ Claire receives a revise-and-resubmit from the nursing journal. Not a rejection.
 path: story_atoms/healthcare_rns/anchored/courage/shame/embodiment/micro/v05.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Derek raises another clinical concern. Different patient, same approach: observation data, clinical language, specific question. The physician engages. The plan adjusts. Derek's pattern recognition contributed to two treatment plan changes this month. The shame still fires on each conversation—a brief signal that says he's overstepping. The conversations' outcomes say he's contributing. Two treatment adjustments. Two patients whose care improved because a three-year nurse reported what he observed. The shame measures experience in years and finds three insufficient. The patients' outcomes measure experience in observations and find Derek's sufficient. The outcomes don't count years. The outcomes count accuracy.
@@ -249,7 +249,7 @@ Derek raises another clinical concern. Different patient, same approach: observa
 path: story_atoms/healthcare_rns/anchored/courage_shame/recognition/band_fill/v06.txt
 BAND: 1
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -261,8 +261,8 @@ A moment of calm. The intensity drops. Space opens.
 path: story_atoms/healthcare_rns/anchored/courage_shame/recognition/band_fill/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
 IDENTITY_STAGE: pre_awareness
 ---
 Crisis. Breakthrough. The moment of maximum intensity.
@@ -273,9 +273,9 @@ Crisis. Breakthrough. The moment of maximum intensity.
 path: story_atoms/healthcare_rns/anchored/courage/shame/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
 ---
 Elena picks up the phone to call the attending about a medication error. The shame contraction collapses identity into a single failure point. Elena's pulse hammers. The pattern demands attention now—hot, insistent, refusing to wait. Elena watches it demand. This time, instead of obeying, Elena tracks where the demand originates. It starts in the knees. It travels to the thoughts. The thoughts build a story. The story says: act now or lose everything. Elena examines the story. The story has no evidence. The pulse has real sensation. The story has fabricated urgency. Elena holds the sensation without following the story. The sensation stays. The story loses its audience. The frame shifts: the pattern is loud, but loudness is not truth.
 ---
@@ -285,9 +285,9 @@ Elena picks up the phone to call the attending about a medication error. The sha
 path: story_atoms/healthcare_rns/anchored/courage/shame/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
 ---
 Ravi holds the phone, the attending's number ready, the medication error documented. One button away from the conversation. The shame contraction hits maximum volume. Ravi's voice cracks. Ravi's lungs expand. Everything narrows to this moment—collapse or breakthrough, no middle ground. Ravi stands inside the peak. The pattern says: this is who you are. Ravi hears it. For the first time, Ravi hears it as a sentence, not a fact. A sentence can be wrong. Ravi's body shakes with the intensity. The shaking is real. The sentence is interpretation. Ravi separates the shaking from the sentence. The body still trembles. The identity claim dissolves. The contraction loosens when the moment separates from the person. The frame cracks open.
 ---
@@ -298,7 +298,7 @@ path: story_atoms/healthcare_rns/anchored/courage/shame/embodiment/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Grace calls the attending about the order discrepancy. The voice is calm. The hands are not. The shame contraction activates. Grace's lungs expand. The heat rises. Grace recognizes the heat. Does not turn away from it. Grace stands inside the shame without shrinking, body upright, voice even. The old pattern fires and Grace acts from the new understanding anyway. Grace's fingertips tingle, but the hands keep moving. The identity is not the pattern. The identity is what Grace does while the pattern runs. Grace does the next right thing with the pattern screaming in the background. The screaming fades to a hum. The hum fades to a fact: the pattern exists. Grace also exists. They are not the same thing.
@@ -321,8 +321,8 @@ Dante reports the safety violation to the board. The career risk is real. The pa
 path: story_atoms/healthcare_rns/anchored/courage/shame/mechanism_proof/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Keiko watches the silence pattern: see the error, fear the hierarchy, stay quiet, carry the weight home. Keiko's fingertips tingle. The heat is on. The shame contraction collapses identity into a single failure point. Keiko tracks the sequence this time: trigger, body response, thought cascade, behavioral pull. The trigger is external. The body response is automatic. The thought cascade is a moment becoming a permanent verdict on selfhood. The behavioral pull is the part that costs. Keiko sees the cost clearly now. Keiko's pulse hammers as the pattern runs its circuit. The pattern persists because the shame prevents examination because examination requires looking at the thing that shames. The persistence is not mysterious. The persistence is mechanical. Seeing the machine does not stop the machine. Seeing the machine reveals the machine is not Keiko.
@@ -334,7 +334,7 @@ path: story_atoms/healthcare_rns/anchored/courage/shame/mechanism_proof/micro/v0
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Nora watches the unsafe practice happen again and the silence pattern runs its fastest circuit. Peak intensity. Nora's voice cracks. Nora's lungs expand. The shame contraction runs at full power. Nora watches it run. Even at maximum volume, the mechanism follows the same sequence: event recall, identity fusion, contraction, hiding behavior, isolation, deeper fusion. The sequence is identical at band five as at band two. Only the amplitude changes. The pattern does not become smarter at higher intensity. It becomes louder. Nora's body absorbs the volume. Nora's mind maps the circuit. The circuit has no exit built in—it loops. The loop persists because it feeds on its own output. Nora sees the feed. Seeing the feed does not stop the loop. Seeing the feed reveals the loop has a structure. Structure can be interrupted.

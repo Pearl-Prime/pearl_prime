@@ -5,7 +5,7 @@
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/recognition/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -18,7 +18,7 @@ The response is disproportionate to the actual threat. The actual threat is a $3
 path: story_atoms/gen_z_professionals/anchored/financial_anxiety/false_alarm/recognition/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -31,7 +31,7 @@ The false alarm doesn't distinguish between "one late payment that will be a sma
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/recognition/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
+COST_TYPE: internal
 COST_INTENSITY: 2
 IDENTITY_STAGE: pre_awareness
 ---
@@ -44,8 +44,8 @@ The arc from "car made a noise" to "loss of everything" takes maybe five minutes
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/recognition/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Sam gets an email from a client: "We need to discuss the project." That's all it says. But Sam's nervous system immediately interprets this as catastrophe: the client is unhappy, they're pulling funding, the contract is being terminated, this gig is done. Sam's stomach clenches. The thinking spirals: if this gig ends, how will the other clients respond? Will they all pull funding? Will the gig work disappear entirely?
@@ -57,8 +57,8 @@ The actual email might just be a routine discussion about timeline or budget. Bu
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/recognition/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 1
-COST_TYPE: social
-COST_INTENSITY: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
 IDENTITY_STAGE: pre_awareness
 ---
 Marcus gets his annual review notification and the false alarm fires immediately. The notification is routine—every employee gets them. But Marcus's nervous system responds as if the review is a termination notice. He's getting fired, he's about to lose the salary, the stock options are gone, the insurance is gone, the stability is evaporating. His hands go cold. He can't sleep the night before the review.
@@ -71,7 +71,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/mech
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 The false alarm mechanism operates through a specific miscalibration. The nervous system is designed to detect threat and produce a response appropriate to the threat level. But the false alarm system has lost the ability to distinguish between threat levels. A $34 fee triggers the same stress response as a $3,400 unexpected cost. A one-day late payment triggers the same stress response as a credit default. A car noise triggers the same stress response as a car that won't start. A routine email triggers the same stress response as actual job loss. A review notification triggers the same stress response as a termination notice.
@@ -85,7 +85,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/mech
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 The false alarm mechanism also includes a narrative component. Once the alarm fires, the mind immediately fills in the catastrophic story. The actual event is small, but the narrative that attaches to it is apocalyptic. Alex's overdraft fee becomes "the account is broken, and once accounts are broken they're permanently broken." Jordan's one late payment becomes "my credit is destroyed, I'm permanently marked as unreliable." Priya's car noise becomes "the engine is destroyed, I'll lose the car, I'll lose everything." Sam's routine email becomes "the client is pulling funding, the gig is gone, all the gigs will be gone." Marcus's review notification becomes "I'm getting fired, everything is collapsing."
@@ -99,7 +99,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/mech
 BAND: 3
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 The false alarm system also creates a specific kind of stress exhaustion. Because everything gets treated as maximum emergency, the body is in constant activation. The characters are moving through their days in emergency mode even when they should be moving through them in normal mode. The nervous system burns through cortisol, adrenaline, the resources that are supposed to be reserved for actual emergencies.
@@ -114,7 +114,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/mech
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 The false alarm also creates a specific kind of decision-making deficit. Because everything is treated as catastrophic, decision-making becomes paralyzed. Alex can't decide whether to take the gig that requires upfront investment because the false alarm is screaming "depletion of savings equals catastrophe." Jordan can't decide whether to apply for the higher-paying job because the false alarm is screaming "change equals catastrophe." Priya can't decide whether to take time off because the false alarm is screaming "loss of income equals catastrophe." Sam can't decide whether to raise rates because the false alarm is screaming "client loss equals catastrophe." Marcus can't decide whether to take a different job because the false alarm is screaming "change equals catastrophe."
@@ -128,7 +128,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/mech
 BAND: 4
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 3
 IDENTITY_STAGE: destabilization
 ---
 Finally, the false alarm mechanism has a temporal component. It operates in the present moment—something happens and the alarm fires. But it also creates a persistent anticipatory anxiety. The characters don't know when the next false alarm will fire, so they live in constant readiness. The alarm isn't sounding right now, but it might sound in the next moment, and the body stays braced for that moment.
@@ -141,7 +141,7 @@ So the characters are exhausted not just by the discrete moments of false alarm,
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/turning_point/micro/v01.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -154,7 +154,7 @@ In noticing the pattern, something shifts. Alex can observe the false alarm mech
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/turning_point/micro/v02.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -167,7 +167,7 @@ In seeing the actual outcome compared to the catastrophic narrative, something s
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/turning_point/micro/v03.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -180,7 +180,7 @@ In this moment, she can see the mechanism clearly: the false alarm fired, jumped
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/turning_point/micro/v04.txt
 BAND: 3
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
+COST_TYPE: internal
 COST_INTENSITY: 3
 IDENTITY_STAGE: experimentation
 ---
@@ -193,8 +193,8 @@ Sam sits with this realization: the false alarm doesn't just fire, it invents na
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/turning_point/micro/v05.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: experimentation
 ---
 Marcus gets the review and it's fine. More than fine—it's positive. The catastrophic narrative—"I'm getting fired, everything is collapsing"—was completely unfounded. The alarm fired at maximum intensity in response to a routine event. Marcus sat through the night before in maximum stress mode, and the worst outcome was... a positive review. His nervous system produced a massive stress response to nothing.
@@ -206,8 +206,8 @@ In this moment, Marcus can see: the false alarm isn't giving him useful informat
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/embodiment/micro/v01.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Alex develops a practice of waiting. When the false alarm fires—when the catastrophic narrative appears—Alex forces himself to wait 24 hours before responding. Just wait. Don't act on the alarm. Don't spiral. Just wait and get more information. What he discovers is remarkable: after 24 hours, the catastrophe never materializes. The situation either resolves itself, or it becomes clear what actually needs to be done, which is different from what the alarm said needed to be done.
@@ -219,8 +219,8 @@ The false alarm wants immediate action. But the immediate action almost always m
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/embodiment/micro/v02.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Jordan makes a decision to check her credit report once a month instead of obsessively. Once a month, she gets the data. The data either shows a problem that needs attention, or it shows that things are fine. By checking regularly but not obsessively, she gets information without feeding the false alarm. She knows the status. She doesn't have to live in fear between checks.
@@ -232,8 +232,8 @@ She also starts noticing: the moment after she checks and sees everything is fin
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/embodiment/micro/v03.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Priya starts asking herself when something triggers the false alarm: "What is the actual worst case scenario?" Not the catastrophic worst case that the alarm invents. The actual, realistic worst case. For the car situation, the actual worst case was "I'll need to replace the transmission, which would cost several thousand, which would be stressful but I could handle it in a few months." The alarm had invented "I'll lose the car and everything collapses." Once she distinguishes between the actual worst case and the invented catastrophe, the alarm loses its power.
@@ -245,8 +245,8 @@ She also asks: "What's the most likely outcome?" The most likely outcome for a c
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/embodiment/micro/v04.txt
 BAND: 2
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Sam starts acting on the false alarm differently. Instead of being paralyzed by it, Sam gets curious about it. "Why did the alarm fire for this email?" By investigating the false alarm rather than accepting it, Sam starts understanding the patterns. Sam's nervous system alarm fires when: financial uncertainty appears, client communication happens, changes to schedule occur. Once Sam recognizes the patterns, the alarm becomes predictable instead of seemingly accurate.
@@ -258,8 +258,8 @@ Sam stops trusting the alarm's catastrophic narrative and starts investigating w
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/embodiment/micro/v05.txt
 BAND: 1
 MECHANISM_DEPTH: 4
-COST_TYPE: identity
-COST_INTENSITY: 5
+COST_TYPE: internal
+COST_INTENSITY: 2
 IDENTITY_STAGE: self_claim
 ---
 Marcus stops treating the false alarm as an accurate threat detector and starts treating it as a symptom that he's tired or stressed about something else. When the review notification triggers the alarm, Marcus doesn't assume it means he's getting fired. He assumes it means his nervous system is activated and needs reset. He takes the day off before the review instead of spiraling. He rests. He trusts that the review will be what it is, and his nervous system's alarm level doesn't determine the outcome.
@@ -271,9 +271,9 @@ By separating the alarm from the threat, Marcus releases the anxiety. The alarm 
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/turning_point/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
 ---
 Dev declines the team lunch invitation again because the budget is gone. The alarm system fires danger signals when no real threat exists. Dev's hands clench. The pattern demands attention now—hot, insistent, refusing to wait. Dev watches it demand. This time, instead of obeying, Dev tracks where the demand originates. It starts in the shoulders. It travels to the thoughts. The thoughts build a story. The story says: act now or lose everything. Dev examines the story. The story has no evidence. The hands has real sensation. The story has fabricated urgency. Dev holds the sensation without following the story. The sensation stays. The story loses its audience. The frame shifts: the pattern is loud, but loudness is not truth.
 ---
@@ -283,9 +283,9 @@ Dev declines the team lunch invitation again because the budget is gone. The ala
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/turning_point/micro/v07.txt
 BAND: 5
 MECHANISM_DEPTH: 3
-COST_TYPE: opportunity
-COST_INTENSITY: 3
-IDENTITY_STAGE: experimentation
+COST_TYPE: identity
+COST_INTENSITY: 5
+IDENTITY_STAGE: destabilization
 ---
 Zara sits in the car outside the grocery store, unable to go in, unable to go home. The alarm system hits maximum volume. Zara's stomach drops. Zara's neck tenses. Everything narrows to this moment—collapse or breakthrough, no middle ground. Zara stands inside the peak. The pattern says: this is who you are. Zara hears it. For the first time, Zara hears it as a sentence, not a fact. A sentence can be wrong. Zara's body shakes with the intensity. The shaking is real. The sentence is interpretation. Zara separates the shaking from the sentence. The body still trembles. The identity claim dissolves. The alarm sounds and the body recognizes it as noise. The frame cracks open.
 ---
@@ -296,7 +296,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/embo
 BAND: 4
 MECHANISM_DEPTH: 4
 COST_TYPE: identity
-COST_INTENSITY: 5
+COST_INTENSITY: 4
 IDENTITY_STAGE: self_claim
 ---
 Leo says yes to the team lunch. The budget is tight. The connection matters. The alarm system activates. Leo's neck tenses. The heat rises. Leo recognizes the heat. Does not turn away from it. Leo lets the alarm ring and acts anyway, body buzzing but hands steady. The old pattern fires and Leo acts from the new understanding anyway. Leo's vision narrows, but the hands keep moving. The identity is not the pattern. The identity is what Leo does while the pattern runs. Leo does the next right thing with the pattern screaming in the background. The screaming fades to a hum. The hum fades to a fact: the pattern exists. Leo also exists. They are not the same thing.
@@ -319,8 +319,8 @@ Suki tells the roommate: I cannot cover your half this month. The sentence costs
 path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/mechanism_proof/micro/v06.txt
 BAND: 4
 MECHANISM_DEPTH: 2
-COST_TYPE: internal
-COST_INTENSITY: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 4
 IDENTITY_STAGE: destabilization
 ---
 Marco charts the stress escalation: bill arrives, stomach drops, catastrophize, freeze. Marco's vision narrows. The heat is on. The alarm system fires danger signals when no real threat exists. Marco tracks the sequence this time: trigger, body response, thought cascade, behavioral pull. The trigger is external. The body response is automatic. The thought cascade is threat detection without actual danger. The behavioral pull is the part that costs. Marco sees the cost clearly now. Marco's hands clench as the pattern runs its circuit. The pattern persists because the alarm's false positives never get corrected because Marco avoids the situation before learning it was safe. The persistence is not mysterious. The persistence is mechanical. Seeing the machine does not stop the machine. Seeing the machine reveals the machine is not Marco.
@@ -332,7 +332,7 @@ path: story_atoms/gen_z_professionals/anchored/financial_stress/false_alarm/mech
 BAND: 5
 MECHANISM_DEPTH: 2
 COST_TYPE: internal
-COST_INTENSITY: 2
+COST_INTENSITY: 5
 IDENTITY_STAGE: destabilization
 ---
 Nia stares at the eviction notice. The stress mechanism runs without brakes. Peak intensity. Nia's stomach drops. Nia's neck tenses. The alarm system runs at full power. Nia watches it run. Even at maximum volume, the mechanism follows the same sequence: ambiguous stimulus, threat interpretation, body mobilization, avoidance or escape, relief, reinforcement. The sequence is identical at band five as at band two. Only the amplitude changes. The pattern does not become smarter at higher intensity. It becomes louder. Nia's body absorbs the volume. Nia's mind maps the circuit. The circuit has no exit built in—it loops. The loop persists because it feeds on its own output. Nia sees the feed. Seeing the feed does not stop the loop. Seeing the feed reveals the loop has a structure. Structure can be interrupted.
