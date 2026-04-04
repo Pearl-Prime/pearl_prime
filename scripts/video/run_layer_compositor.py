@@ -28,6 +28,112 @@ ALPHA_L4_MIN, ALPHA_L4_MAX = 0.30, 0.60
 ALPHA_L5_MIN, ALPHA_L5_MAX = 0.15, 0.25
 
 
+def _compute_overlay_position(
+    l1_tags: dict, l3_tags: dict, output_w: int, output_h: int, rules: list
+) -> dict:
+    """Compute L3 overlay position on L1 using composition rules.
+
+    Returns dict with: x, y (pixel coords) or full_frame=True (skip L1) or default overlay.
+    Composition tags come from asset metadata (framing, subject_type, safe_overlay_zones, etc.)
+    Rules come from config/video/composition_rules.yaml.
+    """
+    l3_subject = l3_tags.get("subject_type", "none")
+    l1_subject = l1_tags.get("subject_type", "none")
+    l3_framing = l3_tags.get("framing", "medium")
+    l1_framing = l1_tags.get("framing", "wide")
+    blocked = l1_tags.get("blocked_zones") or []
+    safe = l1_tags.get("safe_overlay_zones") or []
+
+    for rule in rules:
+        cond = rule.get("condition") or {}
+        if not cond:  # default rule — matches everything
+            action = rule.get("action", "overlay_center")
+        else:
+            # Check all conditions
+            match = True
+            for key, expected in cond.items():
+                if key == "L3_subject_type":
+                    actual = l3_subject
+                elif key == "L1_subject_type":
+                    actual = l1_subject
+                elif key == "L3_framing":
+                    actual = l3_framing
+                elif key == "L1_framing":
+                    actual = l1_framing
+                elif key == "L1_has_blocked_zones":
+                    actual = bool(blocked)
+                else:
+                    actual = None
+                if isinstance(expected, list):
+                    if actual not in expected:
+                        match = False
+                        break
+                elif isinstance(expected, bool):
+                    if actual != expected:
+                        match = False
+                        break
+                elif actual != expected:
+                    match = False
+                    break
+            if not match:
+                continue
+            action = rule.get("action", "overlay_center")
+
+        # Execute action
+        if action == "use_l3_fullframe":
+            return {"full_frame": True, "rule": rule.get("name", "?")}
+
+        if action == "place_in_safe_zone":
+            if safe:
+                zone = safe[0]
+                x = int(zone.get("x_pct", 0) / 100 * output_w)
+                y = int(zone.get("y_pct", 0) / 100 * output_h)
+                return {"x": x, "y": y, "rule": rule.get("name", "?")}
+            return {"full_frame": True, "rule": rule.get("name", "?") + "_fallback"}
+
+        if action == "place_lower_third":
+            scale_pct = rule.get("scale_pct", 40)
+            return {
+                "x": output_w // 2 - int(output_w * scale_pct / 200),
+                "y": int(output_h * 0.6),
+                "scale_pct": scale_pct,
+                "rule": rule.get("name", "?"),
+            }
+
+        if action == "place_offset_center":
+            ox = rule.get("offset_x_pct", 10)
+            oy = rule.get("offset_y_pct", -5)
+            return {
+                "x": int(output_w * ox / 100),
+                "y": int(output_h * (50 + oy) / 100),
+                "rule": rule.get("name", "?"),
+            }
+
+        if action == "overlay_center_alpha":
+            return {
+                "x": 0, "y": 0,
+                "alpha_override": rule.get("alpha", 0.6),
+                "rule": rule.get("name", "?"),
+            }
+
+        if action == "place_rule_of_thirds":
+            pos = rule.get("position", "bottom_right")
+            thirds = {"top_left": (33, 33), "top_right": (67, 33),
+                      "bottom_left": (33, 67), "bottom_right": (67, 67)}
+            pct = thirds.get(pos, (50, 50))
+            return {
+                "x": int(output_w * pct[0] / 100),
+                "y": int(output_h * pct[1] / 100),
+                "scale_pct": rule.get("scale_pct", 30),
+                "rule": rule.get("name", "?"),
+            }
+
+        # overlay_center (default)
+        return {"x": 0, "y": 0, "rule": rule.get("name", "default")}
+
+    return {"x": 0, "y": 0, "rule": "no_match"}
+
+
 def _alpha_in_range(shot_id: str, key: str, lo: float, hi: float) -> float:
     h = int(hashlib.sha256(f"{shot_id}:{key}".encode()).hexdigest(), 16)
     t = (h % 10000) / 10000.0
@@ -153,6 +259,10 @@ def run_compositor(resolved: dict, shot_plan: dict, format_key: str) -> dict:
     y_min = float(safe.get("y_min_pct", 0.72))
     y_max = float(safe.get("y_max_pct", 0.88))
 
+    # Load composition rules for intelligent layer positioning
+    comp_rules_cfg = load_yaml("config/video/composition_rules.yaml")
+    comp_rules = comp_rules_cfg.get("rules") or []
+
     shots_out = []
     res_map = resolved.get("resolved") or {}
     for shot in shot_plan.get("shots", []):
@@ -166,7 +276,17 @@ def run_compositor(resolved: dict, shot_plan: dict, format_key: str) -> dict:
             "L4": f"{asset_id}_fg",
             "L5": preset_name,
         }
+
+        # Composition intelligence: check L1 + L3 compatibility
+        l1_tags = row.get("composition_tags") or shot.get("composition_hint") or {}
+        l3_tags = row.get("l3_composition_tags") or shot.get("l3_composition_hint") or {}
+        overlay_pos = _compute_overlay_position(l1_tags, l3_tags, out_w, out_h, comp_rules)
+
         layers = _layer_stack_for_mode("three_layer" if layer_mode == "three_layer" else "five_layer", keys, sid)
+        # Attach overlay position to L3 layer for filter_complex generation
+        for layer in layers:
+            if layer["id"] == "L3":
+                layer["overlay_position"] = overlay_pos
         if layer_mode == "three_layer":
             l5_a_layer = next(x["alpha"] for x in layers if x["id"] == "L5")
             fc = _filter_complex_three_layer(sid, out_w, out_h, l5_a_layer)

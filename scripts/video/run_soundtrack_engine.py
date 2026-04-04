@@ -34,6 +34,103 @@ def _arc_from_time(t: float, duration: float) -> str:
     return "resolve"
 
 
+import hashlib
+
+# ── Arc timing boundaries (match _arc_from_time) ─────────────────
+_ARC_TIMING = {
+    "hook": (0.0, 0.15),
+    "build": (0.15, 0.55),
+    "peak": (0.55, 0.70),
+    "release": (0.70, 0.85),
+    "resolve": (0.85, 1.0),
+}
+
+
+def _selector_index(key: str, count: int) -> int:
+    """Same deterministic hash selector as everywhere else."""
+    if count <= 0:
+        return 0
+    digest = hashlib.sha256(key.encode("utf-8")).digest()
+    n = int.from_bytes(digest[:16], "big")
+    return n % count
+
+
+def _generate_sfx_events(plan_id: str, channel_id: str, duration_s: float) -> list[dict]:
+    """Generate therapeutic SFX events per arc section from the SFX bank index.
+
+    Returns list of SFX events, each with: arc, category, asset_id, file,
+    start_s, end_s, level_db, pitch_shift_pct.
+
+    Light touch: 1-2 layers per arc section, -22 to -30 dB.
+    Deterministic: same plan_id + channel_id → same SFX selection.
+    """
+    sfx_index = load_yaml("config/video/sfx_bank_index.yaml")
+    if not sfx_index:
+        return []
+
+    categories = sfx_index.get("categories") or {}
+    arc_to_sfx = sfx_index.get("arc_to_sfx") or {}
+    arc_to_level = sfx_index.get("arc_to_level_db") or {}
+
+    events = []
+    for arc, (start_pct, end_pct) in _ARC_TIMING.items():
+        arc_sfx = arc_to_sfx.get(arc)
+        if not arc_sfx:
+            continue
+
+        start_s = round(duration_s * start_pct, 2)
+        end_s = round(duration_s * end_pct, 2)
+        level_db = arc_to_level.get(arc, -26)
+
+        # Primary SFX layer
+        primary_cat = arc_sfx.get("primary")
+        if primary_cat and primary_cat in categories:
+            variants = categories[primary_cat].get("variants") or []
+            if variants:
+                idx = _selector_index(f"sfx|{primary_cat}|{channel_id}|{plan_id}", len(variants))
+                variant = variants[idx]
+                # Deterministic pitch shift: ±3% based on hash
+                pitch_hash = _selector_index(f"pitch|{primary_cat}|{plan_id}", 7)
+                pitch_shift = (pitch_hash - 3) * 1.0  # -3% to +3%
+                events.append({
+                    "arc": arc,
+                    "layer": "primary",
+                    "category": primary_cat,
+                    "asset_id": variant["id"],
+                    "file": variant["file"],
+                    "start_s": start_s,
+                    "end_s": end_s,
+                    "level_db": level_db,
+                    "pitch_shift_pct": round(pitch_shift, 1),
+                    "fade_in_s": 2.0,
+                    "fade_out_s": 2.0,
+                })
+
+        # Secondary SFX layer (if specified and arc has 2 layers)
+        secondary_cat = arc_sfx.get("secondary")
+        layers = arc_sfx.get("layers", 1)
+        if secondary_cat and layers >= 2 and secondary_cat in categories:
+            variants = categories[secondary_cat].get("variants") or []
+            if variants:
+                idx = _selector_index(f"sfx|{secondary_cat}|{channel_id}|{plan_id}|secondary", len(variants))
+                variant = variants[idx]
+                events.append({
+                    "arc": arc,
+                    "layer": "secondary",
+                    "category": secondary_cat,
+                    "asset_id": variant["id"],
+                    "file": variant["file"],
+                    "start_s": start_s,
+                    "end_s": end_s,
+                    "level_db": level_db - 4,  # secondary is 4dB quieter
+                    "pitch_shift_pct": 0,
+                    "fade_in_s": 3.0,
+                    "fade_out_s": 3.0,
+                })
+
+    return events
+
+
 def run_soundtrack(timeline: dict, shot_plan: dict, script_segments: dict, channel_id: str) -> dict:
     music_policy = load_yaml("config/video/music_policy.yaml")
     arc_to_mood = music_policy.get("arc_to_mood") or {}
@@ -132,6 +229,22 @@ def run_soundtrack(timeline: dict, shot_plan: dict, script_segments: dict, chann
         },
     }
 
+    # ── Therapeutic SFX events (per arc section) ────────────────────
+    # Resolved from config/video/sfx_bank_index.yaml.
+    # Light touch: 1-2 layers, -22 to -30 dB, deterministic selection.
+    sfx_events = _generate_sfx_events(plan_id, channel_id, duration)
+
+    # Add SFX tracks to mix_spec
+    if sfx_events:
+        mix_spec["tracks"].append(
+            {"id": "sfx_primary", "level_db": -26, "pan": "stereo",
+             "optional": True, "ducking": "voice_minus_4db_when_active"}
+        )
+        mix_spec["tracks"].append(
+            {"id": "sfx_secondary", "level_db": -30, "pan": "wide_stereo",
+             "optional": True}
+        )
+
     return {
         "plan_id": plan_id,
         "channel_id": channel_id,
@@ -140,6 +253,7 @@ def run_soundtrack(timeline: dict, shot_plan: dict, script_segments: dict, chann
         "narration_segments": narration_segments,
         "suno_api_calls": suno_calls,
         "elevenlabs_api_calls": eleven_calls,
+        "sfx_events": sfx_events,
         "mix_spec": mix_spec,
         "arc_to_mood_applied": arc_to_mood,
     }
