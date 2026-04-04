@@ -891,7 +891,7 @@ class TxtWriter:
         teacher_id = self.plan.get("teacher_id") or ""
         topic_id = self.plan.get("topic_id") or (self.plan.get("book_spec") or {}).get("topic_id") or ""
 
-        if pen_name or pre_intro:
+        if pen_name or pre_intro or teacher_id:
             lines.append("")
             # Narrator intro
             narrator_intro = pre_intro.get("narrator_intro", "")
@@ -900,9 +900,13 @@ class TxtWriter:
                 lines.append("")
             # Book title line
             book_title = pre_intro.get("book_title_line", "")
-            if not book_title and pen_name:
+            if not book_title:
                 topic_display = topic_id.replace("_", " ").title() if topic_id else "This Book"
-                book_title = f'You are listening to "{topic_display}", written by {pen_name}.'
+                if pen_name:
+                    book_title = f'You are listening to "{topic_display}", written by {pen_name}.'
+                elif teacher_id:
+                    teacher_display = teacher_id.replace("_", " ").title()
+                    book_title = f'You are listening to "{topic_display}", guided by {teacher_display}.'
             if book_title:
                 lines.append(book_title)
                 lines.append("")
