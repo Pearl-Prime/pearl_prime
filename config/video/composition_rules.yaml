@@ -44,7 +44,15 @@ rules:
     fallback: "use_l3_fullframe"
     reason: "Subject must not overlap furniture, objects, or other focal points"
 
-  # Rule 3: Wide person on wide scene = REJECT (both compete for frame)
+  # Rule 3: Abstract/text overlay = always OK at center with alpha (check before wide_on_wide)
+  - name: "abstract_overlay"
+    condition:
+      L3_subject_type: ["abstract", "text"]
+    action: "overlay_center_alpha"
+    alpha: 0.6
+    reason: "Abstract and text overlays blend safely at any position"
+
+  # Rule 4: Wide person on wide scene = REJECT (both compete for frame)
   - name: "no_wide_on_wide"
     condition:
       L3_framing: ["wide", "panoramic"]
@@ -52,7 +60,7 @@ rules:
     action: "use_l3_fullframe"
     reason: "Two wide shots overlap entirely — no visual separation"
 
-  # Rule 4: Close-up on wide = OK (small subject on big background)
+  # Rule 5: Close-up on wide = OK (small subject on big background)
   - name: "closeup_on_wide"
     condition:
       L3_framing: ["extreme_close", "close_up"]
@@ -61,7 +69,7 @@ rules:
     scale_pct: 40
     reason: "Close-up is small enough to sit in corner of wide background"
 
-  # Rule 5: Medium subject centered on environment = OK with offset
+  # Rule 6: Medium subject centered on environment = OK with offset
   - name: "medium_on_environment"
     condition:
       L3_framing: "medium"
@@ -70,14 +78,6 @@ rules:
     offset_x_pct: 10   # slightly off-center for visual interest
     offset_y_pct: -5    # slightly above center
     reason: "Medium shot works on clean background with slight offset"
-
-  # Rule 6: Abstract/text overlay = always OK at center with alpha
-  - name: "abstract_overlay"
-    condition:
-      L3_subject_type: ["abstract", "text"]
-    action: "overlay_center_alpha"
-    alpha: 0.6
-    reason: "Abstract and text overlays blend safely at any position"
 
   # Rule 7: Object on any background = OK at rule-of-thirds
   - name: "object_placement"
