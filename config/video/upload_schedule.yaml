@@ -70,3 +70,35 @@ line_adaptation:
   pacing_multiplier: 0.85        # 15% slower than other platforms
   qr_code_in_video: true         # embed QR code pointing to freebie
   locale_aware: true             # Japanese vs Traditional Chinese CTAs
+
+# ── Auto-Upload + Cleanup Lifecycle ──────────────────────────────
+# Weekly flow: produce → R2 → auto-upload to platforms → cleanup MP4s
+lifecycle:
+  # Monday-Friday: produce videos, upload to R2, auto-upload to platforms
+  # Saturday: final uploads for the week
+  # Sunday 23:59 UTC: delete MP4s from R2 (keep metadata, manifests, etc.)
+  weekly_flow:
+    - day: "mon-fri"
+      action: "produce_and_upload"
+      description: "Generate videos from weekly book packages, store on R2, auto-upload to platforms"
+    - day: "sat"
+      action: "final_uploads"
+      description: "Complete any remaining uploads, verify all platforms received content"
+    - day: "sun"
+      time: "23:59_utc"
+      action: "cleanup_mp4s"
+      description: "Delete MP4 files from R2 after confirming all platform uploads succeeded"
+
+  # Upload agents
+  upload_agents:
+    primary: "pearl_int"        # handles YouTube, TikTok, Instagram, LINE via API
+    secondary: "pearl_github"   # handles GitHub-based distribution, CI triggers
+    fallback: "brand_admin"     # manual upload if auto-upload fails (notified via admin channel)
+
+  # Cleanup safety
+  cleanup_rules:
+    require_upload_confirmation: true   # never delete until platform confirms receipt
+    min_retention_hours: 48             # keep at least 48h even if upload succeeds immediately
+    max_retention_days: 7               # always delete by end of week
+    skip_if_upload_failed: true         # if any platform upload failed, keep MP4 + notify admin
+    cleanup_log_path: "artifacts/video/cleanup_log.jsonl"

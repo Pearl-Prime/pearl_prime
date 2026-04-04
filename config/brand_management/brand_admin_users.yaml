@@ -92,6 +92,31 @@ portal:
   auth_method: "magic_link"
   session_duration_hours: 168  # 7 days
   download_format: "zip"
+
+  # ── Video Lifecycle ───────────────────────────────────────────────
+  # MP4s are auto-uploaded to platforms by Pearl_Int + Pearl_GitHub.
+  # After upload confirmation, MP4s are stored on Cloudflare R2 for
+  # brand admin viewing during the week. At end of week (Sunday 23:59 UTC),
+  # MP4 files are DELETED from R2 to save storage.
+  # All other files (manifests, metadata, ebooks, thumbnails, captions)
+  # persist indefinitely.
+  video_lifecycle:
+    auto_upload: true                    # Pearl_Int uploads to all platforms automatically
+    upload_agents: ["pearl_int", "pearl_github"]
+    storage_during_week: "cloudflare_r2" # viewable by brand admin during the week
+    mp4_retention_days: 7                # delete MP4s after 7 days
+    mp4_cleanup_schedule: "sunday_2359_utc"
+    cleanup_pattern: "*.mp4"             # only MP4s — everything else persists
+    persist_after_cleanup:
+      - "*.json"      # manifests, metadata, platform variants
+      - "*.csv"       # upload manifests
+      - "*.epub"      # ebooks
+      - "*.jpg"       # thumbnails, cover art
+      - "*.png"       # thumbnails, cover art
+      - "*.txt"       # prose, README
+      - "*.srt"       # subtitles/captions
+    upload_confirmation_required: true   # don't delete until platform confirms upload success
+    cleanup_log: "artifacts/video/cleanup_log.jsonl"
   platforms_by_lane:
     en_US: [google_play, youtube, youtube_shorts, tiktok, instagram]
     ja_JP: [google_play, youtube, youtube_shorts, tiktok, instagram, line]
