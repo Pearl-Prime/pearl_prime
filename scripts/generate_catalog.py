@@ -89,6 +89,16 @@ def build_catalog_manifest(
     if locales:
         all_locales = [l for l in all_locales if l in locales]
 
+    # Load catalog priority scores from marketing research (RSS loop)
+    priority_path = REPO_ROOT / "artifacts" / "catalog_priority" / "priority_scores.json"
+    topic_priority: dict[str, float] = {}
+    if priority_path.exists():
+        try:
+            priority_data = json.loads(priority_path.read_text())
+            topic_priority = priority_data.get("priority_scores", {})
+        except Exception:
+            pass
+
     # Find available arcs
     arc_files = {f.stem: f for f in arcs_dir.glob("*.yaml")}
 
@@ -126,6 +136,14 @@ def build_catalog_manifest(
         if limit and len(manifest) >= limit:
             manifest = manifest[:limit]
             break
+
+    # Sort by topic priority (highest-priority topics first) so builds
+    # focus on trending/seasonal content when limited by weekly caps
+    if topic_priority:
+        manifest.sort(key=lambda m: -topic_priority.get(m["topic"], 1.0))
+
+    if limit:
+        manifest = manifest[:limit]
 
     return manifest
 
