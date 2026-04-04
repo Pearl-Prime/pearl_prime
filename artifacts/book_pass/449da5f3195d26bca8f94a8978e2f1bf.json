@@ -2,12 +2,8 @@
   "plan_hash": "449da5f3195d26bca8f94a8978e2f1bf",
   "persona_id": "gen_z_professionals",
   "topic_id": "anxiety",
-  "valid": false,
-  "errors": [
-    "cost_gate: Cost gradient: average cost across book is 2.5; minimum 2.5 required.",
-    "callback_gate: Callback 'brainstorm_voice': phase=setup has no matching phase=return (orphaned thread).",
-    "book_pass: no forward-agency increase by final third."
-  ],
+  "valid": true,
+  "errors": [],
   "warnings": [
     "mechanism_gate: Chapter 10: mechanism_depth does not increase from chapter 9 (plateau)."
   ],
