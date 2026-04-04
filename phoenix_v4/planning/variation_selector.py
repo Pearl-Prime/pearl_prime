@@ -117,6 +117,7 @@ def select_variation_knobs(
     wave_index: Optional[list[dict[str, Any]]] = None,
     config_root: Optional[Path] = None,
     arc_tags: Optional[list[str]] = None,
+    platform_id: Optional[str] = None,
 ) -> dict[str, Any]:
     """
     Deterministic selection pipeline (spec §4, §7).
@@ -127,8 +128,18 @@ def select_variation_knobs(
     5. Select section_reorder_mode by size and structure compatibility.
     6. Generate chapter_archetypes from structure blueprint.
     7. Compute variation_signature.
+
+    platform_id: Optional platform hint (e.g. "audible", "spotify", "ximalaya").
+    When set, preferred structures/shapes from platform_knob_tuning.yaml get
+    a weight boost so the selector biases toward platform-optimal choices.
     """
     config_root = config_root or CONFIG_SOT
+
+    # Load platform knob tuning (boost weights for platform-preferred knobs)
+    _platform_prefs: dict[str, Any] = {}
+    if platform_id:
+        _tuning = _load_yaml(REPO_ROOT / "config" / "catalog_planning" / "platform_knob_tuning.yaml")
+        _platform_prefs = (_tuning.get("platform_profiles") or {}).get(platform_id, {})
     digest = _seed_digest(seed, topic_id, persona_id, angle_id, arc_id or "", installment_number)
 
     structures = _load_yaml(config_root / "book_structure_archetypes.yaml")
@@ -162,9 +173,10 @@ def select_variation_knobs(
     wave_size = max(1, len(wave_rows))
     combo_cap = max(1, int(wave_size * ANTI_CLUSTER_COMBO_MAX_SHARE))
 
-    # 1. book_structure_id
+    # 1. book_structure_id (platform-boosted)
+    _pref_structures = set(_platform_prefs.get("preferred_structures") or [])
     struct_candidates = [
-        (sid, _weight(ent))
+        (sid, _weight(ent) * (1.5 if sid in _pref_structures else 1.0))
         for sid, ent in arch_list
         if _compatible(ent, persona_id, topic_id, arc_tags)
     ]
@@ -174,7 +186,8 @@ def select_variation_knobs(
     if not book_structure_id and arch_list:
         book_structure_id = arch_list[0][0]
 
-    # 2. journey_shape_id (chapter_count in range)
+    # 2. journey_shape_id (chapter_count in range, platform-boosted)
+    _pref_shapes = set(_platform_prefs.get("preferred_journey_shapes") or [])
     journey_candidates = []
     for jid, jent in journey_list:
         if not _compatible(jent, persona_id, topic_id, arc_tags):
@@ -182,7 +195,8 @@ def select_variation_knobs(
         rng = jent.get("chapter_count_range") or [0, 99]
         if rng and len(rng) >= 2 and not (rng[0] <= chapter_count <= rng[1]):
             continue
-        journey_candidates.append((jid, _weight(jent)))
+        w = _weight(jent) * (1.5 if jid in _pref_shapes else 1.0)
+        journey_candidates.append((jid, w))
     if not journey_candidates:
         journey_candidates = [(jid, _weight(jent)) for jid, jent in journey_list]
     journey_shape_id = _weighted_select(journey_candidates, digest, soft_penalty=False)
