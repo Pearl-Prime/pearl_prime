@@ -381,14 +381,51 @@ Those files remain authoritative for their domain-specific setup procedures. Thi
 
 ## Local development key setup
 
-### Keys currently stored in macOS Keychain (verified 2026-04-03)
+### Keys currently stored in macOS Keychain (verified 2026-04-03, credential hunt pass)
 
-| Key | Keychain | GitHub Secrets | Where to get it |
-|-----|----------|---------------|-----------------|
-| `QWEN_API_KEY` | ✅ | ✅ | **Singapore** Model Studio: `https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key` — **NOT Beijing** |
-| `DASHSCOPE_API_KEY` | ✅ (same value as QWEN) | ❌ (uses QWEN fallback) | Same as QWEN_API_KEY |
-| `RUNCOMFY_API_KEY` | ✅ | ✅ | RunComfy profile: `https://www.runcomfy.com/profile` → API Tokens → Copy Token 1 |
-| `ELEVENLABS_API_KEY` | ✅ | ❌ | Recovered from `docs/11.txt` (gitignored). Also at: `https://elevenlabs.io/app/settings/api-keys` |
+| Key | Keychain | GitHub Secrets | API Test | Where to get it |
+|-----|----------|---------------|----------|-----------------|
+| `QWEN_API_KEY` | ✅ | ✅ | ✅ 200 | **Singapore** Model Studio: `https://modelstudio.console.alibabacloud.com/ap-southeast-1#/api-key` — **NOT Beijing** |
+| `DASHSCOPE_API_KEY` | ✅ (same value as QWEN) | ✅ | ✅ | Same as QWEN_API_KEY |
+| `RUNCOMFY_API_KEY` | ✅ | ✅ | ⚠️ 521 (server down) | RunComfy profile: `https://www.runcomfy.com/profile` → API Tokens |
+| `ELEVENLABS_API_KEY` | ✅ | ✅ | ✅ 200 (Pro tier) | `https://elevenlabs.io/app/settings/api-keys` |
+| `ANTHROPIC_API_KEY` | ✅ | ✅ | ✅ 200 | `https://console.anthropic.com/settings/keys` |
+| `CLOUDFLARE_ACCOUNT_ID` | ✅ | ✅ | — (config) | Cloudflare dashboard URL path |
+| `CLOUDFLARE_API_TOKEN` | ✅ | ✅ | ✅ 200 (active) | `https://dash.cloudflare.com/` → My Profile → API Tokens |
+| `CLOUDFLARE_AI_API_TOKEN` | ✅ | ✅ | ✅ 200 (active) | Cloudflare → My Profile → API Tokens → Workers AI template |
+| `WORDPRESS_SITE_URL` | ✅ | ✅ | ✅ 200 | `https://pearlnewsuna.org` |
+| `WORDPRESS_USERNAME` | ✅ | ✅ | ✅ | `admin` |
+| `WORDPRESS_APP_PASSWORD` | ✅ | ✅ | ✅ 200 | WordPress Admin → Application Passwords |
+| `YT_CLIENT_ID_SP` | ✅ | ✅ | — | Google Cloud Console OAuth |
+| `YT_CLIENT_SECRET_SP` | ✅ | ✅ | — | Google Cloud Console OAuth |
+| `YT_REFRESH_TOKEN_SP` | ❌ | ❌ | — | Needs OAuth consent flow |
+| `TIKTOK_CLIENT_KEY_SP` | ✅ | ✅ | — | TikTok Developer Portal |
+| `TIKTOK_CLIENT_SECRET_SP` | ✅ | ✅ | — | TikTok Developer Portal |
+| `QWEN_BASE_URL` | ✅ | ✅ | — (config) | `https://dashscope-intl.aliyuncs.com/compatible-mode/v1` |
+| `QWEN_MODEL` | ✅ | ✅ | — (config) | `qwen-plus` |
+| `RUNCOMFY_DEPLOYMENT_ID` | ✅ | ✅ | — (config) | `677edba8-ace0-4b2b-bad2-8e94b9959065` |
+| `DEEPSEEK_API_KEY` | ✅ | ✅ | ✅ 200 | `https://platform.deepseek.com/` |
+| `GITHUB_PAT` | ✅ | — (auto in CI) | ✅ 200 (Ahjan108) | GitHub Settings → Developer settings → PAT |
+| `META_APP_ID` | ✅ | ✅ | — | Meta Developer Portal |
+| `META_APP_SECRET` | ✅ | ✅ | — | Meta Developer Portal |
+| `SLACK_BOT_TOKEN` | ✅ | ✅ | — | Slack API → Install App → Bot User OAuth Token |
+| `SLACK_SIGNING_SECRET` | ✅ | ✅ | — | Slack API → Basic Information → Signing Secret |
+| `TELEGRAM_BOT_TOKEN` | ✅ | ✅ | ✅ 200 (@phoenix_omega_bot) | Telegram @BotFather |
+| `YT_CLIENT_ID_CC` | ✅ (same app as SP) | ✅ | — | Google Cloud Console OAuth |
+| `YT_CLIENT_SECRET_CC` | ✅ (same app as SP) | ✅ | — | Google Cloud Console OAuth |
+| `TIKTOK_CLIENT_KEY_CC` | ✅ (same app as SP) | ✅ | — | TikTok Developer Portal |
+| `TIKTOK_CLIENT_SECRET_CC` | ✅ (same app as SP) | ✅ | — | TikTok Developer Portal |
+
+### Blocked / missing keys (as of 2026-04-03)
+
+| Key | Blocker |
+|-----|---------|
+| `YT_REFRESH_TOKEN_SP` / `YT_REFRESH_TOKEN_CC` | Needs OAuth consent flow per channel |
+| `TIKTOK_ACCESS_TOKEN_SP` / `TIKTOK_ACCESS_TOKEN_CC` | TikTok app review pending |
+| `DISCORD_BOT_TOKEN` | ✅ Done — reset via MFA, stored + pushed |
+| `IG_ACCESS_TOKEN_SP` / `IG_USER_ID_SP` / `IG_ACCESS_TOKEN_CC` / `IG_USER_ID_CC` | Meta developer account confirmation needed + Instagram phone reset |
+| All `*_ND` keys | NorCal Dharma brand not set up |
+| `CLOUDFLARE_AI_API_TOKEN` | ✅ Done — regenerated via Workers AI template |
 
 ### Load all keys in your shell
 
@@ -396,7 +433,7 @@ Add to `.zshrc` or run before any local pipeline command:
 
 ```bash
 # Phoenix Omega credentials (from macOS Keychain)
-for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY; do
+for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY ANTHROPIC_API_KEY DEEPSEEK_API_KEY CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN CLOUDFLARE_AI_API_TOKEN WORDPRESS_SITE_URL WORDPRESS_USERNAME WORDPRESS_APP_PASSWORD YT_CLIENT_ID_SP YT_CLIENT_SECRET_SP YT_CLIENT_ID_CC YT_CLIENT_SECRET_CC TIKTOK_CLIENT_KEY_SP TIKTOK_CLIENT_SECRET_SP TIKTOK_CLIENT_KEY_CC TIKTOK_CLIENT_SECRET_CC QWEN_BASE_URL QWEN_MODEL RUNCOMFY_DEPLOYMENT_ID META_APP_ID META_APP_SECRET SLACK_BOT_TOKEN SLACK_SIGNING_SECRET TELEGRAM_BOT_TOKEN DISCORD_BOT_TOKEN; do
   val=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
   [ -n "$val" ] && export $key="$val"
 done

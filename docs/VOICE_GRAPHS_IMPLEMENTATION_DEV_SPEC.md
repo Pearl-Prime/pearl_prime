@@ -147,7 +147,12 @@ PYTHONPATH=. python3 scripts/onboarding/generate_briefing_narration.py --dry-run
 **Live run (ElevenLabs):**
 
 ```bash
-export ELEVENLABS_API_KEY="sk_..."
+# Load all keys from Keychain first (see CLAUDE.md § "Load all keys locally")
+for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY ANTHROPIC_API_KEY DEEPSEEK_API_KEY CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN CLOUDFLARE_AI_API_TOKEN WORDPRESS_SITE_URL WORDPRESS_USERNAME WORDPRESS_APP_PASSWORD YT_CLIENT_ID_SP YT_CLIENT_SECRET_SP YT_CLIENT_ID_CC YT_CLIENT_SECRET_CC TIKTOK_CLIENT_KEY_SP TIKTOK_CLIENT_SECRET_SP TIKTOK_CLIENT_KEY_CC TIKTOK_CLIENT_SECRET_CC QWEN_BASE_URL QWEN_MODEL RUNCOMFY_DEPLOYMENT_ID META_APP_ID META_APP_SECRET SLACK_BOT_TOKEN SLACK_SIGNING_SECRET TELEGRAM_BOT_TOKEN DISCORD_BOT_TOKEN GITHUB_PAT; do
+  val=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
+  [ -n "$val" ] && export $key="$val"
+done
+# Voice IDs not in Keychain yet — set manually:
 export ELEVENLABS_VOICE_ID_MALE="..."
 export ELEVENLABS_VOICE_ID_FEMALE="..."
 PYTHONPATH=. python3 scripts/onboarding/generate_briefing_narration.py --publish-public
@@ -257,9 +262,12 @@ The existing `generate_briefing_narration.py` already implements this pattern (t
 # Dry-run (creates manifest, no audio)
 PYTHONPATH=. python3 scripts/onboarding/generate_voice_graphs.py --dry-run
 
-# Live generation
-export ELEVENLABS_API_KEY="sk_..."
-export ELEVENLABS_VOICE_ID_MALE="..."
+# Load all keys from Keychain (see CLAUDE.md), then:
+for key in QWEN_API_KEY DASHSCOPE_API_KEY RUNCOMFY_API_KEY ELEVENLABS_API_KEY ANTHROPIC_API_KEY DEEPSEEK_API_KEY CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN CLOUDFLARE_AI_API_TOKEN WORDPRESS_SITE_URL WORDPRESS_USERNAME WORDPRESS_APP_PASSWORD YT_CLIENT_ID_SP YT_CLIENT_SECRET_SP YT_CLIENT_ID_CC YT_CLIENT_SECRET_CC TIKTOK_CLIENT_KEY_SP TIKTOK_CLIENT_SECRET_SP TIKTOK_CLIENT_KEY_CC TIKTOK_CLIENT_SECRET_CC QWEN_BASE_URL QWEN_MODEL RUNCOMFY_DEPLOYMENT_ID META_APP_ID META_APP_SECRET SLACK_BOT_TOKEN SLACK_SIGNING_SECRET TELEGRAM_BOT_TOKEN DISCORD_BOT_TOKEN GITHUB_PAT; do
+  val=$(security find-generic-password -s "phoenix-omega" -a "$key" -w 2>/dev/null)
+  [ -n "$val" ] && export $key="$val"
+done
+export ELEVENLABS_VOICE_ID_MALE="..."  # not in Keychain yet
 PYTHONPATH=. python3 scripts/onboarding/generate_voice_graphs.py
 ```
 
