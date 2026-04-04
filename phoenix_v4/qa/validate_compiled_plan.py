@@ -102,12 +102,15 @@ def validate_compiled_plan(
                     errors.append(f"Chapter {ch} slot {si}: expected slot type {expected_type}, got {kind} {got_type}.")
             idx += 1
 
-    # No duplicate atom IDs (excluding placeholders and silence slots)
+    # No duplicate atom IDs (excluding placeholders, silence, and SCENE/HOOK which are reusable)
     non_placeholder = [a for a in atom_ids if "placeholder:" not in a and "silence:" not in a]
     seen: set[str] = set()
     for a in non_placeholder:
         if a in seen:
-            errors.append(f"Duplicate atom ID in plan: {a}.")
+            if "_SCENE_" in a or "_HOOK_" in a:
+                warnings.append(f"Reused location atom in plan: {a}.")
+            else:
+                errors.append(f"Duplicate atom ID in plan: {a}.")
         seen.add(a)
 
     # Emotional curve

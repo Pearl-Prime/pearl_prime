@@ -123,6 +123,11 @@ def resolve_slot(
         teacher_exercise_fallback=teacher_exercise_fallback,
     )
     available = [e for e in pool if e.atom_id not in context.used_atom_ids]
+    # HOOK and SCENE carry location grounding, not emotional content.
+    # Allow reuse when pool is exhausted — semantic_family decay still applies.
+    _REUSABLE_SLOTS = frozenset({"HOOK", "SCENE"})
+    if not available and pool and slot_type in _REUSABLE_SLOTS:
+        available = list(pool)  # allow full pool for reuse
     # Repetition decay: exclude atoms whose semantic_family was already used this book
     if context.used_semantic_families is not None:
         available = [
@@ -150,7 +155,8 @@ def resolve_slot(
             if role_filtered:
                 available = role_filtered
     if not available:
-        if context.teacher_mode:
+        _TEACHER_SKIP_SLOTS = frozenset({"HOOK", "SCENE"})
+        if context.teacher_mode and slot_type not in _TEACHER_SKIP_SLOTS:
             from phoenix_v4.teacher.coverage_gate import TeacherCoverageError
             raise TeacherCoverageError(
                 f"No teacher atoms for slot {slot_type} at chapter {chapter_idx} slot {slot_idx}. "

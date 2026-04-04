@@ -20,3 +20,8 @@ ending_signature_cap_share: 0.20
 
 # Quarter window: calendar quarter in brand locale time (from locale_registry / brand territory).
 # Used so 15%/20% caps do not vary by runner. No config needed here; resolved from brand_id -> locale -> territory at runtime.
+
+# ── Introduction & Conclusion Chapters ──────────────────────────────
+intro_conclusion_chapters_enabled: true
+intro_chapter_signature_cap_share: 0.12
+conclusion_chapter_signature_cap_share: 0.12

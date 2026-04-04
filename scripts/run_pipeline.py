@@ -1064,6 +1064,61 @@ def main() -> int:
                     out["doctrine_fingerprint"] = fingerprint_doctrine(doctrine)
             except Exception:
                 pass
+    # ── Teacher Mode Pre-Intro Chapter + Closing (TEACHER_MODE_STRUCTURAL_SPEC §1, §4) ──
+    if teacher_id and teacher_id != "default_teacher":
+        _teacher_display = ""
+        _teacher_tradition = ""
+        _doctrine_for_preintro: dict = {}
+        _t_doctrine_path = REPO_ROOT / "SOURCE_OF_TRUTH" / "teacher_banks" / teacher_id / "doctrine" / "doctrine.yaml"
+        if not _t_doctrine_path.exists():
+            _t_doctrine_path = REPO_ROOT / "SOURCE_OF_TRUTH" / "teacher_banks" / teacher_id / "doctrine.yaml"
+        if _t_doctrine_path.exists():
+            _doctrine_for_preintro = _load_yaml(_t_doctrine_path)
+            _teacher_display = _doctrine_for_preintro.get("display_name") or teacher_id.replace("_", " ").title()
+            _teacher_tradition = _doctrine_for_preintro.get("tradition") or ""
+        else:
+            _teacher_display = teacher_id.replace("_", " ").title()
+        _topic_display = (book_spec_for_compiler.get("topic_id") or "").replace("_", " ")
+        _persona_display = (book_spec_for_compiler.get("persona_id") or "").replace("_", " ")
+        _pre_intro_paras = [
+            f"I was not a direct student of {_teacher_display}. I encountered their work "
+            f"through books, talks, and publicly available teachings. What follows is not "
+            f"an official interpretation of {_teacher_display}'s work — it is an application. "
+            f"I have done my best to honor the integrity of the original teachings while "
+            f"translating them into practical guidance for the challenges you may be facing.",
+            f"{_teacher_display}'s understanding of {_topic_display} reshaped the way I see "
+            f"this subject.{(' Their approach — rooted in ' + _teacher_tradition + ' — ') if _teacher_tradition else ' Their approach '}"
+            f"offers a lens that goes beyond conventional advice. It speaks to something "
+            f"deeper: the patterns beneath the surface, the quiet mechanisms that keep "
+            f"us stuck, and the often-overlooked pathways toward genuine relief.",
+            f"This book applies {_teacher_display}'s teachings to the specific experience "
+            f"of {_persona_display} navigating {_topic_display}. It does not replace the "
+            f"teacher's original work. Where I have adapted exercises or frameworks, I have "
+            f"done so with care and transparency. Any simplification is mine, not theirs.",
+            f"If something in these pages resonates with you, I encourage you to go to "
+            f"the source. Seek out {_teacher_display}'s own words — their talks, their "
+            f"writings, their direct teachings. What I offer here is a bridge, not a "
+            f"destination. The real work lives in the original.",
+        ]
+        out["teacher_pre_intro_chapter"] = {
+            "title": f"A Note on the Teachings of {_teacher_display}",
+            "content": "\n\n".join(_pre_intro_paras),
+        }
+        _closing_paras = [
+            f"This book drew from the teachings of {_teacher_display} to offer you a "
+            f"practical path through {_topic_display}. But what you have read here is "
+            f"only one application — shaped by my perspective and filtered through "
+            f"the specific challenges of {_persona_display}.",
+            f"If these ideas spoke to you, go deeper. Seek out {_teacher_display}'s "
+            f"original works. Listen to their talks. Sit with their words directly. "
+            f"The bridge this book offers is meant to lead you to the source, not "
+            f"to stand in its place.",
+        ]
+        out["teacher_closing_section"] = {
+            "title": "Where to Go Deeper",
+            "content": "\n\n".join(_closing_paras),
+        }
+
     if getattr(compiled, "atom_sources", None):
         out["atom_sources"] = compiled.atom_sources
     if getattr(compiled, "chapter_thesis", None):
@@ -1147,6 +1202,95 @@ def main() -> int:
         out["ending_signature"] = compiled.ending_signature
     if getattr(compiled, "carry_line", None):
         out["carry_line"] = compiled.carry_line
+    # ── Introduction & Conclusion Chapters (Hybrid Template Bank) ──────
+    # Applies to both regular and teacher mode books when enabled.
+    _ic_config = _load_yaml(REPO_ROOT / "config" / "source_of_truth" / "intro_ending_variation.yaml")
+    if _ic_config.get("intro_conclusion_chapters_enabled", False):
+        try:
+            from phoenix_v4.planning.intro_conclusion_resolver import (
+                resolve_introduction_chapter,
+                resolve_conclusion_chapter,
+            )
+            _ic_topic = book_spec_for_compiler.get("topic_id") or ""
+            _ic_persona = book_spec_for_compiler.get("persona_id") or ""
+            _ic_seed = book_spec_for_compiler.get("seed") or "default_seed"
+            _ic_brand = book_spec_for_compiler.get("brand_id") or None
+            _ic_alias = None
+            if out.get("mechanism_alias"):
+                _ic_alias = out["mechanism_alias"]
+            elif book_spec_for_compiler.get("mechanism_alias"):
+                _ic_alias = book_spec_for_compiler["mechanism_alias"]
+            _ic_ch_count = len(compiled.chapter_slot_sequence) if compiled.chapter_slot_sequence else None
+            _ic_format_id = out.get("format_id") or format_plan_dict.get("format_structural_id") or None
+            _ic_runtime_id = out.get("runtime_format_id") or format_plan_dict.get("runtime_format_id") or None
+
+            intro_resolved = resolve_introduction_chapter(
+                _ic_topic, _ic_persona, _ic_seed, brand_id=_ic_brand,
+                format_id=_ic_format_id, runtime_format_id=_ic_runtime_id,
+                mechanism_alias=_ic_alias, chapter_count=_ic_ch_count,
+            )
+            conclusion_resolved = resolve_conclusion_chapter(
+                _ic_topic, _ic_persona, _ic_seed, brand_id=_ic_brand,
+                format_id=_ic_format_id, runtime_format_id=_ic_runtime_id,
+                mechanism_alias=_ic_alias, chapter_count=_ic_ch_count,
+            )
+
+            # Cap/duplicate check (best-effort; skip if no brand_id)
+            if _ic_brand:
+                from phoenix_v4.planning.intro_ending_caps import (
+                    check_intro_chapter_cap, check_conclusion_chapter_cap,
+                    get_quarter_for_brand, load_signature_index,
+                )
+                _ic_quarter = get_quarter_for_brand(_ic_brand)
+                _sig_path = REPO_ROOT / "artifacts" / "pre_intro_signatures.jsonl"
+                _sig_index = load_signature_index(_sig_path)
+                _ic_cap = _ic_config.get("intro_chapter_signature_cap_share", 0.12)
+                _cc_cap = _ic_config.get("conclusion_chapter_signature_cap_share", 0.12)
+                _max_retries = _ic_config.get("max_retries", 5)
+
+                for _retry in range(_max_retries):
+                    intro_check = check_intro_chapter_cap(
+                        _ic_brand, _ic_quarter, intro_resolved["signature"], _sig_index, _ic_cap,
+                    )
+                    if intro_check.ok:
+                        break
+                    intro_resolved = resolve_introduction_chapter(
+                        _ic_topic, _ic_persona, _ic_seed, brand_id=_ic_brand,
+                        format_id=_ic_format_id, runtime_format_id=_ic_runtime_id,
+                        mechanism_alias=_ic_alias, chapter_count=_ic_ch_count,
+                        retry_index=_retry + 1,
+                    )
+
+                for _retry in range(_max_retries):
+                    conclusion_check = check_conclusion_chapter_cap(
+                        _ic_brand, _ic_quarter, conclusion_resolved["signature"], _sig_index, _cc_cap,
+                    )
+                    if conclusion_check.ok:
+                        break
+                    conclusion_resolved = resolve_conclusion_chapter(
+                        _ic_topic, _ic_persona, _ic_seed, brand_id=_ic_brand,
+                        format_id=_ic_format_id, runtime_format_id=_ic_runtime_id,
+                        mechanism_alias=_ic_alias, chapter_count=_ic_ch_count,
+                        retry_index=_retry + 1,
+                    )
+
+            out["introduction_chapter"] = {
+                "title": intro_resolved["title"],
+                "content": intro_resolved["content"],
+                "template_id": intro_resolved.get("template_id", ""),
+                "size": intro_resolved.get("size", "full"),
+            }
+            out["intro_chapter_signature"] = intro_resolved["signature"]
+            out["conclusion_chapter"] = {
+                "title": conclusion_resolved["title"],
+                "content": conclusion_resolved["content"],
+                "template_id": conclusion_resolved.get("template_id", ""),
+                "size": conclusion_resolved.get("size", "full"),
+            }
+            out["conclusion_chapter_signature"] = conclusion_resolved["signature"]
+        except Exception as e:
+            print(f"Intro/Conclusion chapter resolution failed (non-fatal): {e}", file=sys.stderr)
+
     # Author positioning (Writer Spec §24)
     if compiled.author_positioning_profile:
         out["author_positioning_profile"] = compiled.author_positioning_profile

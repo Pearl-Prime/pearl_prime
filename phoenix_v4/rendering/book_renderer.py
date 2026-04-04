@@ -883,9 +883,8 @@ class TxtWriter:
         if self.options.title_page and not self.options.clean_output:
             lines.extend(_build_title_page_lines(self.plan))
 
-        # ── Pre-intro (before Chapter 1) — Writer Spec §23.4 ──────────
-        # Narrator (AI voice) reads blocks in fixed order. Teacher is NEVER
-        # mentioned by name — their voice shows through prose, not bio.
+        # ── Pen-Name Pre-Intro (before Chapter 1) — Writer Spec §23.4 ──
+        # Narrator (AI voice) reads 7 blocks in fixed order for pen-name books.
         # Blocks come from author_assets audiobook_pre_intro.yaml.
         pre_intro = self.plan.get("pre_intro_blocks") or {}
         author_assets = self.plan.get("author_assets") or {}
@@ -894,12 +893,10 @@ class TxtWriter:
 
         if pen_name or pre_intro:
             lines.append("")
-            # 1. narrator_intro
             narrator_intro = pre_intro.get("narrator_intro", "")
             if narrator_intro:
                 lines.append(narrator_intro)
                 lines.append("")
-            # 2. book_title_line
             book_title = pre_intro.get("book_title_line", "")
             if not book_title and pen_name:
                 topic_display = topic_id.replace("_", " ").title() if topic_id else "This Book"
@@ -907,36 +904,83 @@ class TxtWriter:
             if book_title:
                 lines.append(book_title)
                 lines.append("")
-            # 3. series_line (only when series)
             series_line = pre_intro.get("series_line", "")
             if series_line:
                 lines.append(series_line)
                 lines.append("")
-            # 4. author_intro
             author_intro = pre_intro.get("author_intro", "")
             if author_intro:
                 lines.append(author_intro)
                 lines.append("")
-            # 5. author_background
             author_bg = pre_intro.get("author_background", "")
             if author_bg:
                 lines.append(author_bg)
                 lines.append("")
-            # 6. why_this_book
             why_this_book = pre_intro.get("why_this_book", "")
             if why_this_book:
                 lines.append(why_this_book)
                 lines.append("")
-            # 7. transition_line
             transition = pre_intro.get("transition_line", "")
             if transition:
                 lines.append(transition)
                 lines.append("")
 
+        # ── Teacher Mode Pre-Intro Chapter (TEACHER_MODE_STRUCTURAL_SPEC §1) ──
+        teacher_pre_intro = self.plan.get("teacher_pre_intro_chapter") or {}
+        if teacher_pre_intro and teacher_pre_intro.get("content"):
+            lines.append("")
+            title = teacher_pre_intro.get("title", "A Note on the Teachings")
+            if self.options.clean_output:
+                lines.append(title)
+            else:
+                lines.append(f"========== {title.upper()} ==========")
+            lines.append("")
+            lines.append(teacher_pre_intro["content"])
+            lines.append("")
+
+        # ── Introduction Chapter (Hybrid Template Bank) ─────────────────
+        intro_chapter = self.plan.get("introduction_chapter") or {}
+        if intro_chapter and intro_chapter.get("content"):
+            lines.append("")
+            intro_title = intro_chapter.get("title", "Introduction")
+            if intro_title:  # lean size has empty title
+                if self.options.clean_output:
+                    lines.append(intro_title)
+                else:
+                    lines.append(f"========== {intro_title.upper()} ==========")
+                lines.append("")
+            lines.append(intro_chapter["content"])
+            lines.append("")
+
+        # ── Freebie CTA: Audiobook post-intro spoken (Placement 1) ──────
+        # "This audiobook has a companion {workbook_label}..."
+        freebie_slug = self.plan.get("freebie_slug") or ""
+        freebie_cta_id = self.plan.get("cta_template_id") or ""
+        if freebie_slug and self.options.clean_output:
+            workbook_type = self.plan.get("companion_workbook_type") or "none"
+            workbook_label = "workbook" if workbook_type == "full" else "practice guide" if workbook_type == "light_guide" else "free guide"
+            lines.append("")
+            lines.append(
+                f"This audiobook has a companion {workbook_label} with all the exercises "
+                f"and reflection prompts. You can get it free at "
+                f"PhoenixProtocolBooks.com/free/{freebie_slug}."
+            )
+            lines.append("")
+
+        # ── Freebie CTA: Ebook front-matter pointer (Placement 3) ──────
+        if freebie_slug and workbook_type == "full" and self.options.clean_output:
+            lines.append(
+                f"A companion {workbook_label} is available for this book at "
+                f"PhoenixProtocolBooks.com/free/{freebie_slug}. "
+                f"You may want to have it alongside you as you read."
+            )
+            lines.append("")
+
         atom_sources = self.plan.get("atom_sources") or []
         alias = self.options.mechanism_alias  # may be None
         naming_moment_injected = False
         total_chapters = len(chapter_slot_sequence)
+        highest_exercise_ch = -1  # track for mid-book CTA
 
         idx = 0
         for ch, slots in enumerate(chapter_slot_sequence):
@@ -993,8 +1037,57 @@ class TxtWriter:
             lines.append(composed)
             lines.append("")
 
-        # No hardcoded conclusion — the final chapter's INTEGRATION slot
-        # and carry_line serve as the book's conclusion (Writer Spec §7).
+        # The final chapter's INTEGRATION slot + carry_line serve as the
+        # narrative conclusion (Writer Spec §7). The Conclusion chapter below
+        # is a separate framing section — a bookend to the Introduction.
+
+        # ── Conclusion Chapter (Hybrid Template Bank) ───────────────────
+        conclusion_chapter = self.plan.get("conclusion_chapter") or {}
+        if conclusion_chapter and conclusion_chapter.get("content"):
+            lines.append("")
+            conclusion_title = conclusion_chapter.get("title", "Conclusion")
+            if conclusion_title:
+                if self.options.clean_output:
+                    lines.append(conclusion_title)
+                else:
+                    lines.append(f"========== {conclusion_title.upper()} ==========")
+                lines.append("")
+            lines.append(conclusion_chapter["content"])
+            lines.append("")
+
+        # ── Teacher Mode Closing Section (TEACHER_MODE_STRUCTURAL_SPEC §4) ──
+        teacher_closing = self.plan.get("teacher_closing_section") or {}
+        if teacher_closing and teacher_closing.get("content"):
+            lines.append("")
+            closing_title = teacher_closing.get("title", "Where to Go Deeper")
+            if self.options.clean_output:
+                lines.append(closing_title)
+            else:
+                lines.append(f"========== {closing_title.upper()} ==========")
+            lines.append("")
+            lines.append(teacher_closing["content"])
+            lines.append("")
+
+        # ── Freebie CTA: Audiobook back-matter spoken (Placement 2) ─────
+        if freebie_slug and self.options.clean_output:
+            lines.append("")
+            lines.append(
+                f"To go deeper and actually do the work from this book, download the "
+                f"companion {workbook_label} at PhoenixProtocolBooks.com/free/{freebie_slug}. "
+                f"You will find guided exercises, journaling pages, and tools you can "
+                f"return to again and again. It is free — designed to go with exactly this book."
+            )
+            lines.append("")
+
+        # ── Freebie CTA: Ebook back-matter upsell (Placement 6) ────────
+        if freebie_slug and self.options.clean_output:
+            lines.append("")
+            lines.append(
+                f"Before you go — if you want to take this further, a companion "
+                f"{workbook_label} is waiting for you at "
+                f"PhoenixProtocolBooks.com/free/{freebie_slug}."
+            )
+            lines.append("")
 
         full_text = "\n".join(lines).strip()
 

@@ -144,3 +144,40 @@ def check_ending_cap_and_duplicate(
             ],
         )
     return CapCheckResult(ok=True)
+
+
+# ── Introduction & Conclusion Chapter Caps ──────────────────────────
+
+
+def check_intro_chapter_cap(
+    brand_id: str, quarter: str, intro_chapter_signature: str,
+    signature_index: list[dict[str, Any]], cap_share: float = 0.12,
+) -> CapCheckResult:
+    """Check intro chapter signature under cap and not duplicate."""
+    in_quarter = [r for r in signature_index if r.get("brand_id") == brand_id and r.get("quarter") == quarter]
+    total = len(in_quarter)
+    sig_count = sum(1 for r in in_quarter if r.get("intro_chapter_signature") == intro_chapter_signature)
+    if total >= 1 / max(cap_share, 0.01) and (sig_count + 1) / (total + 1) > cap_share:
+        return CapCheckResult(ok=False, error=f"Intro chapter cap exceeded for {brand_id!r} in {quarter}.",
+                              candidate_alternatives=["Add more intro templates.", "Use different seed."])
+    if any(r.get("intro_chapter_signature") == intro_chapter_signature for r in in_quarter):
+        return CapCheckResult(ok=False, error=f"Intro chapter duplicate for {brand_id!r} in {quarter}.",
+                              candidate_alternatives=["Reselect via retry index.", "Add more templates."])
+    return CapCheckResult(ok=True)
+
+
+def check_conclusion_chapter_cap(
+    brand_id: str, quarter: str, conclusion_chapter_signature: str,
+    signature_index: list[dict[str, Any]], cap_share: float = 0.12,
+) -> CapCheckResult:
+    """Check conclusion chapter signature under cap and not duplicate."""
+    in_quarter = [r for r in signature_index if r.get("brand_id") == brand_id and r.get("quarter") == quarter]
+    total = len(in_quarter)
+    sig_count = sum(1 for r in in_quarter if r.get("conclusion_chapter_signature") == conclusion_chapter_signature)
+    if total >= 1 / max(cap_share, 0.01) and (sig_count + 1) / (total + 1) > cap_share:
+        return CapCheckResult(ok=False, error=f"Conclusion chapter cap exceeded for {brand_id!r} in {quarter}.",
+                              candidate_alternatives=["Add more conclusion templates.", "Use different seed."])
+    if any(r.get("conclusion_chapter_signature") == conclusion_chapter_signature for r in in_quarter):
+        return CapCheckResult(ok=False, error=f"Conclusion chapter duplicate for {brand_id!r} in {quarter}.",
+                              candidate_alternatives=["Reselect via retry index.", "Add more templates."])
+    return CapCheckResult(ok=True)
