@@ -1,0 +1,108 @@
+# Brand Admin Users — 1 admin per brand, organized by lane
+# Each admin receives weekly content packages for their brand.
+# Auth: magic link via email (no passwords).
+# Access: read-only catalog + weekly downloads, packaged by platform.
+# Notification: via configured channel (slack, discord, telegram, line, email).
+
+schema_version: "1.0"
+
+# Admin assignment is per brand_id (from global_brand_registry.yaml).
+# TBD = admin not yet recruited/assigned.
+
+admins:
+  # ── en_US lane ──────────────────────────────────────────────────
+  # US: each brand has its own non-profit church publication corp.
+  # Admin = church publication manager.
+  inner_light_press_en_us:
+    admin_name: "TBD"
+    admin_email: ""
+    notification_channel: slack
+    notification_id: ""
+    lane_id: en_US
+    status: "unassigned"
+
+  awakening_press_en_us:
+    admin_name: "TBD"
+    admin_email: ""
+    notification_channel: slack
+    notification_id: ""
+    lane_id: en_US
+    status: "unassigned"
+
+  # ... (remaining 22 en_US brands follow same pattern)
+
+  # ── ja_JP lane ──────────────────────────────────────────────────
+  # Japan: all brands under Phoenix Omega LLC Japan.
+  # Admin = content manager for Japanese market.
+  inner_light_press_ja_jp:
+    admin_name: "TBD"
+    admin_email: ""
+    notification_channel: line
+    notification_id: ""
+    lane_id: ja_JP
+    status: "unassigned"
+    notes: "Japan team member"
+
+  # ── zh_TW lane ──────────────────────────────────────────────────
+  inner_light_press_zh_tw:
+    admin_name: "TBD"
+    admin_email: ""
+    notification_channel: line
+    notification_id: ""
+    lane_id: zh_TW
+    status: "unassigned"
+    notes: "Taiwan team member"
+
+  # ── zh_CN lane ──────────────────────────────────────────────────
+  inner_light_press_zh_cn:
+    admin_name: "TBD"
+    admin_email: ""
+    notification_channel: wechat
+    notification_id: ""
+    lane_id: zh_CN
+    status: "unassigned"
+    notes: "China team member — requires Chinese national"
+
+# ── Portal Access ─────────────────────────────────────────────────
+# Each admin accesses their brand portal at:
+#   catalog.phoenixprotocolbooks.com/{brand_id}
+#
+# Auth: magic link sent to admin_email
+# Views:
+#   /catalog — full catalog of all published titles
+#   /weekly — current week's upload package
+#   /weekly/{week_id} — specific week's package
+#   /weekly/{week_id}/{platform} — platform-specific download
+#
+# Downloads: packaged by platform
+#   /download/google_play — ebooks + metadata
+#   /download/youtube — 10-min videos + thumbnails + metadata
+#   /download/youtube_shorts — 60s portrait videos
+#   /download/tiktok — 30-60s portrait videos
+#   /download/instagram — 60s reels + captions
+#   /download/line — 60-90s portrait (Japan/Taiwan/China only)
+#
+# All downloads are ZIP files containing platform-ready assets.
+# Brand admins CANNOT modify content — read-only access.
+
+portal:
+  domain: "catalog.phoenixprotocolbooks.com"
+  hosting: "cloudflare_pages"
+  storage: "cloudflare_r2"
+  auth_method: "magic_link"
+  session_duration_hours: 168  # 7 days
+  download_format: "zip"
+  platforms_by_lane:
+    en_US: [google_play, youtube, youtube_shorts, tiktok, instagram]
+    ja_JP: [google_play, youtube, youtube_shorts, tiktok, instagram, line]
+    ko_KR: [google_play, youtube, youtube_shorts, tiktok, instagram]
+    zh_TW: [google_play, youtube, youtube_shorts, tiktok, instagram, line]
+    zh_HK: [google_play, youtube, youtube_shorts, tiktok, instagram]
+    zh_CN: [ximalaya, youtube_shorts, tiktok, instagram]  # no Google Play in China
+    zh_SG: [google_play, youtube, youtube_shorts, tiktok, instagram]
+    es_US: [google_play, youtube, youtube_shorts, tiktok, instagram]
+    es_ES: [google_play, youtube, youtube_shorts, tiktok, instagram]
+    fr_FR: [google_play, youtube, youtube_shorts, tiktok, instagram]
+    de_DE: [google_play, youtube, youtube_shorts, tiktok, instagram]
+    it_IT: [google_play, youtube, youtube_shorts, tiktok, instagram]
+    hu_HU: [google_play, youtube, youtube_shorts, tiktok, instagram]

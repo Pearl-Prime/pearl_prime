@@ -1,0 +1,393 @@
+# Teacher → Brand Archetype Map (Global)
+# Each teacher gets ONE brand in EVERY lane. Brand identity aligns with teacher's tradition.
+# Display names are localized per lane; brand_archetype_id is global.
+# Authority: Global Brand Management System plan.
+
+schema_version: "1.0"
+
+# ── 13 Teacher Brands ─────────���───────────────────────────────────
+teacher_brands:
+
+  inner_light_press:
+    teacher_id: ahjan
+    tradition: "Contemplative / inner light / karma yoga"
+    brand_focus: "Meditation, mindfulness, inner peace, spiritual illumination"
+    content_families: [alarm_fear_systems, collapse_burnout, existential_void]
+    primary_topics: [anxiety, burnout, depression, self_worth, somatic_healing]
+    primary_personas: [corporate_managers, millennial_women_professionals, working_parents]
+    display_names:
+      en_US: "Inner Light Press"
+      ja_JP: "内なる光出版"
+      ko_KR: "내면의 빛 출판"
+      zh_TW: "內在光明出版"
+      zh_HK: "內在光明出版"
+      zh_CN: "内��光明出版"
+      zh_SG: "内在光明出版"
+      es_US: "Editorial Luz Interior"
+      es_ES: "Editorial Luz Interior"
+      fr_FR: "Éditions Lumière Intérieure"
+      de_DE: "Verlag Inneres Licht"
+      it_IT: "Edizioni Luce Interiore"
+      hu_HU: "Belső Fény Kiadó"
+    church_name_us: "Inner Light Fellowship"
+    church_alignment: "Contemplative meditation, karma yoga, inner illumination"
+
+  awakening_press:
+    teacher_id: adi_da
+    tradition: "Radical devotion / Enlightened Intelligence"
+    brand_focus: "Spiritual awakening, radical self-inquiry, devotional practice"
+    content_families: [existential_void, identity_fracture, shame_engine]
+    primary_topics: [self_worth, courage, boundaries, depression, grief]
+    primary_personas: [gen_z_professionals, tech_finance_burnout, entrepreneurs]
+    display_names:
+      en_US: "Awakening Press"
+      ja_JP: "覚醒出版"
+      ko_KR: "각성 출판"
+      zh_TW: "覺醒出版"
+      zh_HK: "覺醒出版"
+      zh_CN: "觉醒出版"
+      zh_SG: "觉醒出���"
+      es_US: "Editorial Despertar"
+      es_ES: "Editorial Despertar"
+      fr_FR: "Éditions Éveil"
+      de_DE: "Verlag Erwachen"
+      it_IT: "Edizioni Risveglio"
+      hu_HU: "Ébredés Kiadó"
+    church_name_us: "Awakening Fellowship"
+    church_alignment: "Radical devotion, self-inquiry, enlightened intelligence"
+
+  vitality_path:
+    teacher_id: master_feung
+    tradition: "Taoist energy cultivation"
+    brand_focus: "Energy management, vitality, life force balance"
+    content_families: [collapse_burnout, performance_pressure]
+    primary_topics: [burnout, somatic_healing, courage, self_worth]
+    primary_personas: [healthcare_rns, first_responders, working_parents]
+    display_names:
+      en_US: "Vitality Path"
+      ja_JP: "活力の道"
+      ko_KR: "활력의 길"
+      zh_TW: "活力之道"
+      zh_HK: "活力之道"
+      zh_CN: "活力之道"
+      zh_SG: "活力之道"
+      es_US: "Camino de Vitalidad"
+      es_ES: "Camino de Vitalidad"
+      fr_FR: "Chemin de Vitalité"
+      de_DE: "Weg der Vitalität"
+      it_IT: "Via della Vitalità"
+      hu_HU: "Életerő Útja"
+    church_name_us: "Vitality Path Fellowship"
+    church_alignment: "Taoist energy cultivation, life force practices"
+
+  healing_ground_press:
+    teacher_id: sai_ma
+    tradition: "Divine healing / compassion"
+    brand_focus: "Grief integration, emotional healing, compassion practices"
+    content_families: [grief_loss, relational_instability, shame_engine]
+    primary_topics: [grief, compassion_fatigue, depression, boundaries]
+    primary_personas: [healthcare_rns, educators, working_parents]
+    display_names:
+      en_US: "Healing Ground Press"
+      ja_JP: "癒しの大地出版"
+      ko_KR: "치유의 땅 출판"
+      zh_TW: "療癒之地出版"
+      zh_HK: "療癒之地出版"
+      zh_CN: "疗愈之地出版"
+      zh_SG: "疗愈之地出版"
+      es_US: "Editorial Tierra Sanadora"
+      es_ES: "Editorial Tierra Sanadora"
+      fr_FR: "Éditions Terre de Guérison"
+      de_DE: "Verlag Heilende Erde"
+      it_IT: "Edizioni Terra di Guarigione"
+      hu_HU: "Gyógyító Föld Kiadó"
+    church_name_us: "Healing Ground Fellowship"
+    church_alignment: "Divine healing, compassion, grief ministry"
+
+  cosmic_edge:
+    teacher_id: ra
+    tradition: "Cosmic consciousness / universal wisdom"
+    brand_focus: "Purpose, meaning, existential clarity, cosmic perspective"
+    content_families: [existential_void, identity_fracture]
+    primary_topics: [imposter_syndrome, self_worth, courage, overthinking]
+    primary_personas: [gen_z_professionals, entrepreneurs, gen_alpha_students]
+    display_names:
+      en_US: "Cosmic Edge"
+      ja_JP: "コズミック・エッジ"
+      ko_KR: "코즈믹 엣지"
+      zh_TW: "宇宙邊際"
+      zh_HK: "宇宙邊際"
+      zh_CN: "宇宙边际"
+      zh_SG: "宇宙边际"
+      es_US: "Borde Cósmico"
+      es_ES: "Borde Cósmico"
+      fr_FR: "Horizon Cosmique"
+      de_DE: "Kosmischer Rand"
+      it_IT: "Confine Cosmico"
+      hu_HU: "Kozmikus Szél"
+    church_name_us: "Cosmic Edge Fellowship"
+    church_alignment: "Universal consciousness, cosmic wisdom teachings"
+
+  zen_clarity:
+    teacher_id: junko
+    tradition: "Japanese mindfulness / zen practice"
+    brand_focus: "Mental clarity, overthinking relief, zen-inspired calm"
+    content_families: [overcontrol_perfection, alarm_fear_systems]
+    primary_topics: [overthinking, anxiety, sleep_anxiety, social_anxiety]
+    primary_personas: [corporate_managers, tech_finance_burnout, nyc_executives]
+    display_names:
+      en_US: "Zen Clarity"
+      ja_JP: "禅の明晰"
+      ko_KR: "선의 명료"
+      zh_TW: "禪之明晰"
+      zh_HK: "���之明晰"
+      zh_CN: "禅之明晰"
+      zh_SG: "��之明晰"
+      es_US: "Claridad Zen"
+      es_ES: "Claridad Zen"
+      fr_FR: "Clarté Zen"
+      de_DE: "Zen Klarheit"
+      it_IT: "Chiarezza Zen"
+      hu_HU: "Zen Tisztaság"
+    church_name_us: "Zen Clarity Fellowship"
+    church_alignment: "Zen mindfulness, mental clarity practices"
+
+  gen_spark:
+    teacher_id: miki
+    tradition: "Youth activation / modern spirituality"
+    brand_focus: "Gen Z grounding, identity formation, confidence building"
+    content_families: [identity_fracture, performance_pressure, shame_engine]
+    primary_topics: [imposter_syndrome, social_anxiety, self_worth, boundaries]
+    primary_personas: [gen_z_professionals, gen_alpha_students]
+    display_names:
+      en_US: "Gen Spark"
+      ja_JP: "ジェン・スパーク"
+      ko_KR: "젠 스파크"
+      zh_TW: "世代火花"
+      zh_HK: "世代火花"
+      zh_CN: "世代火花"
+      zh_SG: "世代火花"
+      es_US: "Chispa Gen"
+      es_ES: "Chispa Gen"
+      fr_FR: "Étincelle Génération"
+      de_DE: "Gen Funke"
+      it_IT: "Scintilla Gen"
+      hu_HU: "Generáció Szikra"
+    church_name_us: "Gen Spark Fellowship"
+    church_alignment: "Youth spiritual activation, identity formation"
+
+  iron_will:
+    teacher_id: master_wu
+    tradition: "Warrior discipline / martial arts philosophy"
+    brand_focus: "Discipline, resilience, courage, mental toughness"
+    content_families: [performance_pressure, overcontrol_perfection]
+    primary_topics: [courage, burnout, imposter_syndrome, boundaries]
+    primary_personas: [first_responders, entrepreneurs, gen_z_professionals]
+    display_names:
+      en_US: "Iron Will"
+      ja_JP: "鉄の意志"
+      ko_KR: "철의 의지"
+      zh_TW: "鐵志"
+      zh_HK: "鐵志"
+      zh_CN: "铁志"
+      zh_SG: "铁志"
+      es_US: "Voluntad de Hierro"
+      es_ES: "Voluntad de Hierro"
+      fr_FR: "Volonté de Fer"
+      de_DE: "Eiserner Wille"
+      it_IT: "Volontà di Ferro"
+      hu_HU: "Vas Akarat"
+    church_name_us: "Iron Will Fellowship"
+    church_alignment: "Warrior discipline, martial arts philosophy, inner strength"
+
+  body_wisdom:
+    teacher_id: pamela_fellows
+    tradition: "Somatic therapy / polyvagal theory"
+    brand_focus: "Nervous system regulation, somatic awareness, body-based healing"
+    content_families: [alarm_fear_systems, collapse_burnout]
+    primary_topics: [anxiety, somatic_healing, sleep_anxiety, burnout]
+    primary_personas: [healthcare_rns, millennial_women_professionals, working_parents]
+    display_names:
+      en_US: "Body Wisdom"
+      ja_JP: "身体の叡智"
+      ko_KR: "몸의 지혜"
+      zh_TW: "身體智慧"
+      zh_HK: "身體智慧"
+      zh_CN: "身体智慧"
+      zh_SG: "身体智慧"
+      es_US: "Sabiduría Corporal"
+      es_ES: "Sabiduría Corporal"
+      fr_FR: "Sagesse du Corps"
+      de_DE: "Körperweisheit"
+      it_IT: "Saggezza del Corpo"
+      hu_HU: "Test Bölcsessége"
+    church_name_us: "Body Wisdom Fellowship"
+    church_alignment: "Somatic healing, nervous system regulation, polyvagal practices"
+
+  still_forest:
+    teacher_id: joshin
+    tradition: "Forest meditation / nature connection"
+    brand_focus: "Nature-based grounding, presence, contemplative stillness"
+    content_families: [alarm_fear_systems, existential_void]
+    primary_topics: [anxiety, overthinking, somatic_healing, depression]
+    primary_personas: [corporate_managers, educators, gen_x_sandwich]
+    display_names:
+      en_US: "Still Forest"
+      ja_JP: "��寂の森"
+      ko_KR: "고요한 숲"
+      zh_TW: "靜謐之森"
+      zh_HK: "靜謐之森"
+      zh_CN: "静谧之森"
+      zh_SG: "静谧之森"
+      es_US: "Bosque Quieto"
+      es_ES: "Bosque Quieto"
+      fr_FR: "Forêt Silencieuse"
+      de_DE: "Stiller Wald"
+      it_IT: "Foresta Quieta"
+      hu_HU: "Csendes Erdő"
+    church_name_us: "Still Forest Fellowship"
+    church_alignment: "Forest meditation, nature connection, contemplative practices"
+
+  truth_compass:
+    teacher_id: maat
+    tradition: "Divine principle / truth and justice"
+    brand_focus: "Boundaries, self-worth, integrity, truth-based living"
+    content_families: [shame_engine, relational_instability, identity_fracture]
+    primary_topics: [boundaries, self_worth, imposter_syndrome, financial_stress]
+    primary_personas: [millennial_women_professionals, gen_z_professionals, educators]
+    display_names:
+      en_US: "Truth Compass"
+      ja_JP: "真実の羅針盤"
+      ko_KR: "진실의 나침반"
+      zh_TW: "真理羅盤"
+      zh_HK: "真理羅盤"
+      zh_CN: "真理罗盘"
+      zh_SG: "真理罗盘"
+      es_US: "Brújula de la Verdad"
+      es_ES: "Brújula de la Verdad"
+      fr_FR: "Boussole de Vérité"
+      de_DE: "Wahrheitskompass"
+      it_IT: "Bussola della Verità"
+      hu_HU: "Igazság Iránytű"
+    church_name_us: "Truth Compass Fellowship"
+    church_alignment: "Divine principle, truth, justice, integrity-based living"
+
+  gentle_wave:
+    teacher_id: omote
+    tradition: "Japanese healing / gentle restoration"
+    brand_focus: "Sleep, rest, gentle recovery, soft restoration"
+    content_families: [collapse_burnout, alarm_fear_systems]
+    primary_topics: [sleep_anxiety, burnout, anxiety, compassion_fatigue]
+    primary_personas: [healthcare_rns, working_parents, educators]
+    display_names:
+      en_US: "Gentle Wave"
+      ja_JP: "穏やかな波"
+      ko_KR: "부드러운 파도"
+      zh_TW: "溫柔浪潮"
+      zh_HK: "溫柔浪潮"
+      zh_CN: "��柔浪潮"
+      zh_SG: "温柔浪潮"
+      es_US: "Ola Suave"
+      es_ES: "Ola Suave"
+      fr_FR: "Vague Douce"
+      de_DE: "Sanfte Welle"
+      it_IT: "Onda Gentile"
+      hu_HU: "Szelíd Hullám"
+    church_name_us: "Gentle Wave Fellowship"
+    church_alignment: "Japanese healing traditions, gentle restoration practices"
+
+  soul_repair:
+    teacher_id: master_sha
+    tradition: "Soul healing / spiritual medicine"
+    brand_focus: "Trauma recovery, spiritual healing, soul-level repair"
+    content_families: [grief_loss, shame_engine, identity_fracture]
+    primary_topics: [grief, depression, self_worth, somatic_healing, courage]
+    primary_personas: [first_responders, healthcare_rns, gen_x_sandwich]
+    display_names:
+      en_US: "Soul Repair"
+      ja_JP: "魂の修復"
+      ko_KR: "영혼 수리"
+      zh_TW: "靈魂修復"
+      zh_HK: "靈魂修復"
+      zh_CN: "灵魂修复"
+      zh_SG: "灵魂修复"
+      es_US: "Reparación del Alma"
+      es_ES: "Reparación del Alma"
+      fr_FR: "Réparation de l'Âme"
+      de_DE: "Seelenreparatur"
+      it_IT: "Riparazione dell'Anima"
+      hu_HU: "Lélek Javítás"
+    church_name_us: "Soul Repair Fellowship"
+    church_alignment: "Soul healing, spiritual medicine, trauma recovery"
+
+# ── 11 Non-Teacher Brands (market-niche driven) ──────────────────
+non_teacher_brands:
+
+  stabilizer:
+    brand_focus: "Burnout recovery, nervous system regulation"
+    primary_personas: [corporate_managers, tech_finance_burnout]
+    primary_topics: [burnout, anxiety, somatic_healing]
+    content_families: [collapse_burnout, alarm_fear_systems]
+
+  optimizer:
+    brand_focus: "Peak performance, focus, productivity"
+    primary_personas: [entrepreneurs, nyc_executives]
+    primary_topics: [imposter_syndrome, burnout, overthinking]
+    content_families: [performance_pressure, overcontrol_perfection]
+
+  night_reset:
+    brand_focus: "Sleep anxiety, insomnia, nighttime rest"
+    primary_personas: [tech_finance_burnout, gen_z_professionals]
+    primary_topics: [sleep_anxiety, anxiety, overthinking]
+    content_families: [alarm_fear_systems]
+
+  career_lift:
+    brand_focus: "Career transitions, feeling unstuck"
+    primary_personas: [gen_x_sandwich, millennial_women_professionals]
+    primary_topics: [imposter_syndrome, courage, financial_anxiety]
+    content_families: [performance_pressure, identity_fracture]
+
+  adhd_forge:
+    brand_focus: "Neurodivergent focus, ADHD support"
+    primary_personas: [gen_z_professionals, gen_alpha_students]
+    primary_topics: [overthinking, anxiety, imposter_syndrome]
+    content_families: [overcontrol_perfection, identity_fracture]
+
+  creative_unfold:
+    brand_focus: "Creative blocks, artistic expression"
+    primary_personas: [gen_z_professionals, gen_alpha_students]
+    primary_topics: [self_worth, courage, boundaries]
+    content_families: [identity_fracture, shame_engine]
+
+  resilient_parent:
+    brand_focus: "Parenting stress, co-regulation"
+    primary_personas: [working_parents, gen_x_sandwich]
+    primary_topics: [burnout, compassion_fatigue, boundaries]
+    content_families: [collapse_burnout, relational_instability]
+
+  executive_calm:
+    brand_focus: "Executive performance, leadership under pressure"
+    primary_personas: [nyc_executives, corporate_managers]
+    primary_topics: [burnout, anxiety, imposter_syndrome]
+    content_families: [performance_pressure, overcontrol_perfection]
+
+  confidence_core:
+    brand_focus: "Social anxiety, confidence building"
+    primary_personas: [gen_z_professionals, gen_alpha_students]
+    primary_topics: [social_anxiety, self_worth, imposter_syndrome]
+    content_families: [shame_engine, identity_fracture]
+
+  relationship_clarity:
+    brand_focus: "Relationship repair, co-regulation"
+    primary_personas: [millennial_women_professionals, working_parents]
+    primary_topics: [boundaries, grief, compassion_fatigue]
+    content_families: [relational_instability, grief_loss]
+
+  legacy_builder:
+    brand_focus: "Life transitions, legacy, reinvention"
+    primary_personas: [gen_x_sandwich, corporate_managers]
+    primary_topics: [self_worth, courage, financial_stress]
+    content_families: [existential_void, identity_fracture]
+
+# ── Global Mission ────────────────────────────────────────────────
+global_mission: "To elevate people, especially the youth, helping them with their life challenges and aspirations."
