@@ -1,14 +1,14 @@
 {
-  "plan_hash": "398d83a1697db89f7ee4cf76438ff497",
+  "plan_hash": "68091b943b8d2be62aa45a9738a6d409",
   "persona_id": "gen_z_professionals",
   "topic_id": "anxiety",
   "valid": false,
   "errors": [
+    "mechanism_gate: Chapter 6 (mid): max mechanism_depth must be >= 2 (behavioral), got 1.",
+    "identity_gate: Identity shift: chapter 6 has max stage 0 after chapter 5 with 1 (regression).",
     "book_pass: chapter claim coverage too low (0% < 80%).",
     "book_pass: no chapter claims extracted.",
-    "book_pass: weak mechanism deepening in middle third.",
-    "book_pass: ending lacks net transformation contrast statement.",
-    "book_pass: ending lacks forward-motion directive."
+    "book_pass: weak mechanism deepening in middle third."
   ],
   "warnings": [],
   "metrics": {
@@ -30,7 +30,7 @@
       "act3_agency_last": 0.0,
       "act3_agency_first": 0.0
     },
-    "ending_has_contrast": false,
-    "ending_has_forward": false
+    "ending_has_contrast": true,
+    "ending_has_forward": true
   }
 }
