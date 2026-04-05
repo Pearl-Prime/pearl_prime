@@ -77,3 +77,66 @@
 2026-04-05 12:22:38,465 atom_writer INFO Response received in 41.8s (6538 chars, stop=end_turn)
 2026-04-05 12:22:38,468 atom_writer INFO Wrote atoms/first_responders/burnout/COMPRESSION/CANONICAL.txt (6538 bytes)
 2026-04-05 12:22:38,476 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/compassion_fatigue/COMPRESSION (13 variants)
+2026-04-05 12:22:46,531 anthropic._base_client INFO Retrying request to /v1/messages in 0.483559 seconds
+2026-04-05 12:22:52,827 anthropic._base_client INFO Retrying request to /v1/messages in 0.880788 seconds
+2026-04-05 12:23:02,117 writing_campaign ERROR [ERROR] first_responders/compassion_fatigue/COMPRESSION_gap: Request timed out or interrupted. This could be due to a network timeout, dropped connection, or request cancellation. See https://docs.anthropic.com/en/api/errors#long-requests for more details.
+2026-04-05 12:23:02,125 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/courage/COMPRESSION (13 variants)
+2026-04-05 12:23:45,988 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:23:46,005 atom_writer INFO Response received in 43.9s (6696 chars, stop=end_turn)
+2026-04-05 12:23:46,009 atom_writer INFO Wrote atoms/first_responders/courage/COMPRESSION/CANONICAL.txt (6696 bytes)
+2026-04-05 12:23:46,018 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/depression/COMPRESSION (13 variants)
+2026-04-05 12:24:33,048 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:24:33,081 atom_writer INFO Response received in 47.1s (7033 chars, stop=end_turn)
+2026-04-05 12:24:33,085 atom_writer INFO Wrote atoms/first_responders/depression/COMPRESSION/CANONICAL.txt (7033 bytes)
+2026-04-05 12:24:33,093 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/financial_anxiety/COMPRESSION (13 variants)
+2026-04-05 12:25:29,747 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:25:29,758 atom_writer INFO Response received in 56.7s (8600 chars, stop=end_turn)
+2026-04-05 12:25:29,762 atom_writer INFO Wrote atoms/first_responders/financial_anxiety/COMPRESSION/CANONICAL.txt (8600 bytes)
+2026-04-05 12:25:29,770 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/financial_stress/COMPRESSION (13 variants)
+2026-04-05 12:26:07,201 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:26:07,203 atom_writer INFO Response received in 37.4s (5778 chars, stop=end_turn)
+2026-04-05 12:26:07,207 atom_writer INFO Wrote atoms/first_responders/financial_stress/COMPRESSION/CANONICAL.txt (5778 bytes)
+2026-04-05 12:26:07,214 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/grief/COMPRESSION (13 variants)
+2026-04-05 12:26:51,096 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:26:51,101 atom_writer INFO Response received in 43.9s (7001 chars, stop=end_turn)
+2026-04-05 12:26:51,105 atom_writer INFO Wrote atoms/first_responders/grief/COMPRESSION/CANONICAL.txt (7001 bytes)
+2026-04-05 12:26:51,114 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/imposter_syndrome/COMPRESSION (13 variants)
+2026-04-05 12:27:20,060 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:27:20,062 atom_writer INFO Response received in 28.9s (4608 chars, stop=end_turn)
+2026-04-05 12:27:20,065 atom_writer INFO Wrote atoms/first_responders/imposter_syndrome/COMPRESSION/CANONICAL.txt (4608 bytes)
+2026-04-05 12:27:20,072 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/overthinking/COMPRESSION (13 variants)
+2026-04-05 12:28:13,504 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:28:13,509 atom_writer INFO Response received in 53.4s (8345 chars, stop=end_turn)
+2026-04-05 12:28:13,513 atom_writer INFO Wrote atoms/first_responders/overthinking/COMPRESSION/CANONICAL.txt (8345 bytes)
+2026-04-05 12:28:13,522 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/self_worth/COMPRESSION (13 variants)
+2026-04-05 12:28:58,328 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:28:58,332 atom_writer INFO Response received in 44.8s (7489 chars, stop=end_turn)
+2026-04-05 12:28:58,335 atom_writer INFO Wrote atoms/first_responders/self_worth/COMPRESSION/CANONICAL.txt (7489 bytes)
+2026-04-05 12:28:58,341 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/sleep_anxiety/COMPRESSION (13 variants)
+2026-04-05 12:29:51,381 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:29:51,394 atom_writer INFO Response received in 53.1s (8024 chars, stop=end_turn)
+2026-04-05 12:29:51,398 atom_writer INFO Wrote atoms/first_responders/sleep_anxiety/COMPRESSION/CANONICAL.txt (8024 bytes)
+2026-04-05 12:29:51,404 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/social_anxiety/COMPRESSION (13 variants)
+2026-04-05 12:30:28,964 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:30:28,971 atom_writer INFO Response received in 37.6s (5691 chars, stop=end_turn)
+2026-04-05 12:30:28,976 atom_writer INFO Wrote atoms/first_responders/social_anxiety/COMPRESSION/CANONICAL.txt (5691 bytes)
+2026-04-05 12:30:28,984 atom_writer INFO Calling claude-sonnet-4-6 for first_responders/somatic_healing/COMPRESSION (13 variants)
+2026-04-05 12:31:02,184 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:31:02,186 atom_writer INFO Response received in 33.2s (4979 chars, stop=end_turn)
+2026-04-05 12:31:02,189 atom_writer INFO Wrote atoms/first_responders/somatic_healing/COMPRESSION/CANONICAL.txt (4979 bytes)
+2026-04-05 12:31:02,190 writing_campaign INFO Task 'exercise_compression_gap' completed in 911.7s: {'completed': 29, 'error': 1}
+
+=== CAMPAIGN SUMMARY ===
+{
+  "elapsed_seconds": 911.7,
+  "tasks_run": 1,
+  "task_summaries": {
+    "exercise_compression_gap": {
+      "statuses": {
+        "completed": 29,
+        "error": 1
+      },
+      "total_variants": 377
+    }
+  }
+}

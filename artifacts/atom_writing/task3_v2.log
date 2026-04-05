@@ -91,3 +91,42 @@
 2026-04-05 12:22:12,894 teacher_writer INFO Loaded doctrine for ra: Ra
 2026-04-05 12:22:12,898 teacher_writer INFO Found 12 existing approved stories for ra
 2026-04-05 12:22:12,917 teacher_writer INFO Calling claude-sonnet-4-6 for teacher ra (8 stories)
+2026-04-05 12:23:37,010 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:23:37,121 teacher_writer INFO Response received in 84.2s (14573 chars, stop=end_turn)
+2026-04-05 12:23:37,122 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/ra/approved_atoms/STORY/ra_STORY_012.yaml
+2026-04-05 12:23:37,122 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/ra/approved_atoms/STORY/ra_STORY_013.yaml
+2026-04-05 12:23:37,122 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/ra/approved_atoms/STORY/ra_STORY_014.yaml
+2026-04-05 12:23:37,122 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/ra/approved_atoms/STORY/ra_STORY_015.yaml
+2026-04-05 12:23:37,123 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/ra/approved_atoms/STORY/ra_STORY_016.yaml
+2026-04-05 12:23:37,123 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/ra/approved_atoms/STORY/ra_STORY_017.yaml
+2026-04-05 12:23:37,123 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/ra/approved_atoms/STORY/ra_STORY_018.yaml
+2026-04-05 12:23:37,123 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/ra/approved_atoms/STORY/ra_STORY_019.yaml
+2026-04-05 12:23:37,127 teacher_writer INFO Loaded doctrine for sai_ma: Sai Maa
+2026-04-05 12:23:37,129 teacher_writer INFO Found 12 existing approved stories for sai_ma
+2026-04-05 12:23:37,135 teacher_writer INFO Calling claude-sonnet-4-6 for teacher sai_ma (8 stories)
+2026-04-05 12:24:53,474 httpx INFO HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-04-05 12:24:53,478 teacher_writer INFO Response received in 76.3s (14080 chars, stop=end_turn)
+2026-04-05 12:24:53,479 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/sai_ma/approved_atoms/STORY/sai_ma_STORY_012.yaml
+2026-04-05 12:24:53,480 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/sai_ma/approved_atoms/STORY/sai_ma_STORY_013.yaml
+2026-04-05 12:24:53,480 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/sai_ma/approved_atoms/STORY/sai_ma_STORY_014.yaml
+2026-04-05 12:24:53,480 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/sai_ma/approved_atoms/STORY/sai_ma_STORY_015.yaml
+2026-04-05 12:24:53,480 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/sai_ma/approved_atoms/STORY/sai_ma_STORY_016.yaml
+2026-04-05 12:24:53,480 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/sai_ma/approved_atoms/STORY/sai_ma_STORY_017.yaml
+2026-04-05 12:24:53,480 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/sai_ma/approved_atoms/STORY/sai_ma_STORY_018.yaml
+2026-04-05 12:24:53,481 teacher_writer INFO Wrote /Users/ahjan/phoenix_omega/SOURCE_OF_TRUTH/teacher_banks/sai_ma/approved_atoms/STORY/sai_ma_STORY_019.yaml
+2026-04-05 12:24:53,481 writing_campaign INFO Task 'teacher_stories' completed in 543.0s: {'skipped': 2, 'completed': 9}
+
+=== CAMPAIGN SUMMARY ===
+{
+  "elapsed_seconds": 543.0,
+  "tasks_run": 1,
+  "task_summaries": {
+    "teacher_stories": {
+      "statuses": {
+        "skipped": 2,
+        "completed": 9
+      },
+      "total_variants": 63
+    }
+  }
+}
