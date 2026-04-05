@@ -85,6 +85,26 @@ admins:
 # All downloads are ZIP files containing platform-ready assets.
 # Brand admins CANNOT modify content — read-only access.
 
+# ── Plaid Revenue Collection ──────────────────────────────────────
+# Monthly ACH: 4.8% from each brand admin's bank → Pearl Prime
+#              4.8% from each brand admin's bank → 48 Social
+# Brand admins authorize via Plaid Link (they connect their own bank).
+# We never see their bank credentials — Plaid handles everything.
+# Signed contracts authorize these recurring transfers.
+plaid:
+  client_id: ""              # PLAID_CLIENT_ID env var
+  secret: ""                 # PLAID_SECRET env var
+  environment: "sandbox"     # sandbox → development → production
+  pearl_prime_bank:
+    account_id: ""           # Pearl Prime receiving account (set in env)
+    routing_number: ""
+  forty_eight_social_bank:
+    account_id: ""           # 48 Social receiving account (set in env)
+    routing_number: ""
+  monthly_percentage: 4.8    # 4.8% to each destination = 9.6% total
+  transfer_day_of_month: 1   # 1st of each month
+  minimum_transfer_usd: 1.00 # skip if amount < $1
+
 portal:
   domain: "catalog.phoenixprotocolbooks.com"
   hosting: "cloudflare_pages"
