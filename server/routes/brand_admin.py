@@ -85,7 +85,7 @@ async def send_magic_link(req: MagicLinkRequest):
     token = create_magic_link_token(req.email, admin["brand_id"])
 
     # Send email via Brevo SMTP (reuse funnel pattern)
-    portal_domain = _load_admin_users().get("portal", {}).get("domain", "catalog.phoenixprotocolbooks.com")
+    portal_domain = _load_admin_users().get("portal", {}).get("domain", "catalog.brand-admin-onboarding.pages.dev")
     link = f"https://{portal_domain}/verify?token={token}"
 
     # TODO: Wire to actual email sender (Brevo SMTP from funnel/)

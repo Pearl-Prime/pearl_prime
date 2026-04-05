@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-Create 312 brand subdomains on Cloudflare — $0 cost.
+Generate brand URL routing manifest for Cloudflare Pages — $0 cost.
 
-For each brand in global_brand_registry.yaml:
-1. Landing page subdomain: {brand}.phoenixprotocolbooks.com → CNAME funnels.msgsndr.com (GHL)
-2. Email sending subdomain: mail.{brand}.phoenixprotocolbooks.com → CNAME mailgun.org (GHL email)
+Using path-based routing on brand-admin-onboarding.pages.dev:
+  - Landing pages: brand-admin-onboarding.pages.dev/{brand-slug}/
+  - Freebie pages: brand-admin-onboarding.pages.dev/free/{freebie-slug}
+  - Email sending: via GHL msgsndr.com infrastructure (no custom domain needed)
 
 Requires: CLOUDFLARE_API_TOKEN and CLOUDFLARE_ZONE_ID env vars (or Keychain).
 
@@ -45,7 +46,7 @@ except ImportError:
 
 # ── Cloudflare API ────────────────────────────────────────────────
 CF_API_BASE = "https://api.cloudflare.com/client/v4"
-ROOT_DOMAIN = "phoenixprotocolbooks.com"
+ROOT_DOMAIN = "brand-admin-onboarding.pages.dev"
 
 # GHL targets for CNAME records
 GHL_FUNNEL_TARGET = "funnels.msgsndr.com"      # Landing pages / funnels

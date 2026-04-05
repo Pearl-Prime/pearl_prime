@@ -65,7 +65,7 @@ admins:
 
 # ── Portal Access ─────────────────────────────────────────────────
 # Each admin accesses their brand portal at:
-#   catalog.phoenixprotocolbooks.com/{brand_id}
+#   catalog.brand-admin-onboarding.pages.dev/{brand_id}
 #
 # Auth: magic link sent to admin_email
 # Views:
@@ -106,7 +106,7 @@ plaid:
   minimum_transfer_usd: 1.00 # skip if amount < $1
 
 portal:
-  domain: "catalog.phoenixprotocolbooks.com"
+  domain: "catalog.brand-admin-onboarding.pages.dev"
   hosting: "cloudflare_pages"
   storage: "cloudflare_r2"
   auth_method: "magic_link"

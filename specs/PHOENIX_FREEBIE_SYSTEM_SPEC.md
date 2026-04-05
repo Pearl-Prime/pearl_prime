@@ -172,7 +172,7 @@ Set **after** Stage 3 by the freebie planner. Arc unchanged. Planner may receive
 **Contract:**
 
 - **Location:** After last chapter / final integration. Implementations may use a dedicated “back_matter” segment or append to the final integration segment.
-- **Content:** Rendered CTA text (from `cta_templates.yaml` keyed by `cta_template_id`) with `{topic}`, `{freebie_name}`, `{slug}` substituted; plus the canonical URL `PhoenixProtocolBooks.com/free/{slug}` (or locale-equivalent).
+- **Content:** Rendered CTA text (from `cta_templates.yaml` keyed by `cta_template_id`) with `{topic}`, `{freebie_name}`, `{slug}` substituted; plus the canonical URL `brand-admin-onboarding.pages.dev/free/{slug}` (or locale-equivalent).
 - **Source:** Plan fields `cta_template_id`, `freebie_slug`, plus `topic_id` / `persona_id` and primary freebie name for substitution. Pipeline MUST resolve these from the compiled plan and MUST NOT emit raw placeholders (e.g. `{{cta_text}}`, `{{slug}}`) in book output — see delivery gate §10.6.
 
 **Writer spec / assembly:** The assembly or rendering step that produces manuscript/HTML/audio script MUST receive `cta_template_id`, `freebie_slug`, and inject the single back-matter CTA at the defined insertion point. See OMEGA_LAYER_CONTRACTS and writer spec for integration.

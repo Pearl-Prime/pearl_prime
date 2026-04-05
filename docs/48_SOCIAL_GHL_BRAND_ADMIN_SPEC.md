@@ -77,7 +77,7 @@ r2://pearl-prime-content/{brand_id}/{week}/
 |------|--------|-------|---------|
 | R2 read-only API key | API credential | Secure handoff | Access all brand content |
 | Brand style guide | JSON | `manifest.json → brand_style` | Colors, fonts, logo, CTA templates |
-| CTA URL templates | String | In manifest.json | `PhoenixProtocolBooks.com/free/{slug}?utm_source={platform}` |
+| CTA URL templates | String | In manifest.json | `brand-admin-onboarding.pages.dev/free/{slug}?utm_source={platform}` |
 | GHL sub-account credentials | Login | Secure handoff | Post scheduling, email automation |
 | Platform account handles | List | In manifest.json | @handle per platform per brand |
 | Voice/tone brief | Text | In manifest.json | "Warm, direct, somatic, no guru voice" |
@@ -148,7 +148,7 @@ Each post includes a **CTA** pointing to your freebie landing page.
 
 Every CTA points to:
 ```
-https://PhoenixProtocolBooks.com/free/{freebie_slug}
+https://brand-admin-onboarding.pages.dev/free/{freebie_slug}
 ```
 
 With UTM parameters per platform:
@@ -157,8 +157,8 @@ With UTM parameters per platform:
 ```
 
 **Examples:**
-- Instagram post: `PhoenixProtocolBooks.com/free/anxiety-corporate-managers-breath-timer-v1?utm_source=instagram&utm_medium=quote_card&utm_campaign=stabilizer_en_us&utm_content=book_042`
-- TikTok bio: `PhoenixProtocolBooks.com/free/anxiety-corporate-managers-breath-timer-v1?utm_source=tiktok&utm_medium=bio_link&utm_campaign=stabilizer_en_us`
+- Instagram post: `brand-admin-onboarding.pages.dev/free/anxiety-corporate-managers-breath-timer-v1?utm_source=instagram&utm_medium=quote_card&utm_campaign=stabilizer_en_us&utm_content=book_042`
+- TikTok bio: `brand-admin-onboarding.pages.dev/free/anxiety-corporate-managers-breath-timer-v1?utm_source=tiktok&utm_medium=bio_link&utm_campaign=stabilizer_en_us`
 
 ### 3.2 CTA Text by Post Type
 
@@ -177,16 +177,16 @@ With UTM parameters per platform:
 
 | Language | CTA (Short) | CTA (Medium) | CTA (Bio Link) |
 |----------|------------|-------------|----------------|
-| **English** | "Free guide in bio ↗" | "Get the companion guide free → link in bio" | "Free wellness tools: PhoenixProtocolBooks.com/free/{slug}" |
-| **Japanese** | "無料ガイド → プロフリンク" | "��料の実践ガイドをダウンロード → プロフィールのリンクから" | "無料ウェルネスツール: PhoenixProtocolBooks.com/free/{slug}" |
-| **Korean** | "무료 가이드 → 프로필 링크" | "무료 실천 가이드 받기 → 프로필 링크에서" | "무료 웰니스 도구: PhoenixProtocolBooks.com/free/{slug}" |
-| **Traditional Chinese** | "免費指南 → 個人檔案連結" | "免費下載實踐指南 → 個人檔案連結" | "免費身心工具: PhoenixProtocolBooks.com/free/{slug}" |
-| **Simplified Chinese** | "免费指南 → 个人资料链接" | "免费下载实践指南 → 个人资料链接" | "免费身心工具: PhoenixProtocolBooks.com/free/{slug}" |
-| **Spanish** | "Guía gratis en bio ↗" | "Descarga la guía complementaria gratis → enlace en bio" | "Herramientas gratis: PhoenixProtocolBooks.com/free/{slug}" |
-| **French** | "Guide gratuit → lien en bio" | "Téléchargez le guide gratuit → lien dans la bio" | "Outils gratuits: PhoenixProtocolBooks.com/free/{slug}" |
-| **German** | "Kostenloser Guide → Link in Bio" | "Kostenloser Begleitguide herunterladen → Link in Bio" | "Kostenlose Tools: PhoenixProtocolBooks.com/free/{slug}" |
-| **Italian** | "Guida gratuita → link in bio" | "Scarica la guida gratuita → link nel profilo" | "Strumenti gratuiti: PhoenixProtocolBooks.com/free/{slug}" |
-| **Hungarian** | "Ingyenes útmutató → link a bio-ban" | "Töltsd le az ingyenes útmutatót ��� link a profilban" | "Ingyenes eszközök: PhoenixProtocolBooks.com/free/{slug}" |
+| **English** | "Free guide in bio ↗" | "Get the companion guide free → link in bio" | "Free wellness tools: brand-admin-onboarding.pages.dev/free/{slug}" |
+| **Japanese** | "無料ガイド → プロフリンク" | "��料の実践ガイドをダウンロード → プロフィールのリンクから" | "無料ウェルネスツール: brand-admin-onboarding.pages.dev/free/{slug}" |
+| **Korean** | "무료 가이드 → 프로필 링크" | "무료 실천 가이드 받기 → 프로필 링크에서" | "무료 웰니스 도구: brand-admin-onboarding.pages.dev/free/{slug}" |
+| **Traditional Chinese** | "免費指南 → 個人檔案連結" | "免費下載實踐指南 → 個人檔案連結" | "免費身心工具: brand-admin-onboarding.pages.dev/free/{slug}" |
+| **Simplified Chinese** | "免费指南 → 个人资料链接" | "免费下载实践指南 → 个人资料链接" | "免费身心工具: brand-admin-onboarding.pages.dev/free/{slug}" |
+| **Spanish** | "Guía gratis en bio ↗" | "Descarga la guía complementaria gratis → enlace en bio" | "Herramientas gratis: brand-admin-onboarding.pages.dev/free/{slug}" |
+| **French** | "Guide gratuit → lien en bio" | "Téléchargez le guide gratuit → lien dans la bio" | "Outils gratuits: brand-admin-onboarding.pages.dev/free/{slug}" |
+| **German** | "Kostenloser Guide → Link in Bio" | "Kostenloser Begleitguide herunterladen → Link in Bio" | "Kostenlose Tools: brand-admin-onboarding.pages.dev/free/{slug}" |
+| **Italian** | "Guida gratuita → link in bio" | "Scarica la guida gratuita → link nel profilo" | "Strumenti gratuiti: brand-admin-onboarding.pages.dev/free/{slug}" |
+| **Hungarian** | "Ingyenes útmutató → link a bio-ban" | "Töltsd le az ingyenes útmutatót ��� link a profilban" | "Ingyenes eszközök: brand-admin-onboarding.pages.dev/free/{slug}" |
 
 ---
 
@@ -210,11 +210,11 @@ When someone downloads a freebie, they enter the **proof-loop email sequence**. 
 
 | Email | CTA URL |
 |-------|---------|
-| E1 | `PhoenixProtocolBooks.com/free/{slug}#download` (direct download) |
-| E2 | `PhoenixProtocolBooks.com/free/{slug}#exercise2` (second exercise) |
-| E3 | `PhoenixProtocolBooks.com/free/{slug}#story` (story page) |
+| E1 | `brand-admin-onboarding.pages.dev/free/{slug}#download` (direct download) |
+| E2 | `brand-admin-onboarding.pages.dev/free/{slug}#exercise2` (second exercise) |
+| E3 | `brand-admin-onboarding.pages.dev/free/{slug}#story` (story page) |
 | E4 | `{platform_store_link}` (Google Play, Amazon, Apple — varies by lane) |
-| E5 | `catalog.phoenixprotocolbooks.com/{brand_id}` (brand catalog) |
+| E5 | `catalog.brand-admin-onboarding.pages.dev/{brand_id}` (brand catalog) |
 
 ### Email Subject Lines by Language
 
@@ -287,7 +287,7 @@ Every book produces 5 video formats. Each video has CTAs baked in:
 | Timing | CTA Type | Text |
 |--------|----------|------|
 | ~2 min mark | Spoken by narrator | "This video has a free companion {workbook_label}. Link in the description." |
-| Last 10 seconds | Text overlay | "Free {workbook_label}: PhoenixProtocolBooks.com/free/{slug}" |
+| Last 10 seconds | Text overlay | "Free {workbook_label}: brand-admin-onboarding.pages.dev/free/{slug}" |
 | Description | Link | "📖 Free {workbook_label}: {url}?utm_source=youtube&utm_medium=video" |
 | Pinned comment | Link | "Get the free {workbook_label}: {url}" |
 
@@ -413,35 +413,29 @@ The pipeline automatically selects the right freebie for each book based on topi
 
 ---
 
-## 11. Brand Subdomain Setup (FREE — Automated)
+## 11. Brand URL Setup (FREE — Path-Based on Cloudflare Pages)
 
-Every brand gets its own unique subdomain for landing pages and email sending. This prevents spam flags and keeps brands isolated.
+Every brand gets its own unique path on Cloudflare Pages. No custom domain needed. No DNS setup. $0 cost.
 
-**Structure:** 1 root domain (`phoenixprotocolbooks.com`) → 312 subdomains (FREE on Cloudflare)
+**Structure:** `brand-admin-onboarding.pages.dev/{brand-slug}/` — one path per brand
 
 **Per brand:**
-| URL | Purpose | Points To |
-|-----|---------|-----------|
-| `{brand-slug}.phoenixprotocolbooks.com` | Landing pages, freebie funnels | GHL funnels (funnels.msgsndr.com) |
-| `mail.{brand-slug}.phoenixprotocolbooks.com` | Email sending (E1-E5 proof loop) | GHL email (Mailgun) |
+| URL | Purpose |
+|-----|---------|
+| `brand-admin-onboarding.pages.dev/{brand-slug}/` | Brand landing page, catalog |
+| `brand-admin-onboarding.pages.dev/free/{freebie-slug}` | Freebie download page |
+| GHL sends from `{brand-name}@msgsndr.com` | Email sending (no custom domain needed) |
 
 **Examples:**
-- `stabilizer-en-us.phoenixprotocolbooks.com` → Stabilizer brand landing pages
-- `inner-light-press-ja-jp.phoenixprotocolbooks.com` → Inner Light Press Japan landing pages
-- `mail.zen-clarity-ko-kr.phoenixprotocolbooks.com` → Zen Clarity Korea email sending
+- `brand-admin-onboarding.pages.dev/stabilizer-en-us/` → Stabilizer brand page
+- `brand-admin-onboarding.pages.dev/inner-light-press-ja-jp/` → Inner Light Press Japan
+- `brand-admin-onboarding.pages.dev/free/anxiety-workbook` → Freebie landing page
 
-**Cost:** $0. Subdomains are free on Cloudflare. SSL auto-generated by GHL.
+**Email sending:** GHL provides unique sending addresses via `msgsndr.com`. Each GHL sub-account sends from a distinct address. No custom email domain needed.
 
-**Setup:** Automated via `scripts/brand_management/setup_brand_subdomains.py`:
-```bash
-# Preview all 312 subdomains
-python scripts/brand_management/setup_brand_subdomains.py --dry-run
+**Anti-spam isolation:** Each GHL sub-account has independent sender reputation. Path-based URLs on Pages are all under one domain but email is isolated per GHL sub-account.
 
-# Create all 624 DNS records (312 landing + 312 email)
-python scripts/brand_management/setup_brand_subdomains.py --create
-```
-
-**Anti-spam isolation:** Each subdomain has independent sender reputation. If one brand gets flagged, others are unaffected.
+**Cost: $0.** Cloudflare Pages free tier. GHL email infrastructure included in plan.
 
 ---
 
@@ -459,8 +453,8 @@ python scripts/brand_management/setup_brand_subdomains.py --create
 - [ ] Log into Metricool → connect each social account via OAuth (5 min)
 - [ ] Enter platform credentials in brand admin portal (Google Play, Kobo, etc.)
 - [ ] Connect bank via Plaid Link (for revenue collection)
-- [ ] Verify: open `{brand-slug}.phoenixprotocolbooks.com` — landing page loads
-- [ ] Verify: receive test email from `mail.{brand-slug}.phoenixprotocolbooks.com`
+- [ ] Verify: open `{brand-slug}.brand-admin-onboarding.pages.dev` — landing page loads
+- [ ] Verify: receive test email from `mail.{brand-slug}.brand-admin-onboarding.pages.dev`
 
 **After onboarding, brand admin does weekly:**
 - [ ] Glance at Monday notification confirming content was published (2 min)

@@ -81,7 +81,7 @@ def _resolve_freebie(plan: dict) -> dict:
         "freebie_slug": freebie_slug,
         "cta_template_id": cta_template_id,
         "workbook_label": workbook_label,
-        "url": f"PhoenixProtocolBooks.com/free/{freebie_slug}" if freebie_slug else "",
+        "url": f"brand-admin-onboarding.pages.dev/free/{freebie_slug}" if freebie_slug else "",
     }
 
 

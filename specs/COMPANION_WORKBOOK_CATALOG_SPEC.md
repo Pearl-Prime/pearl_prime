@@ -67,13 +67,13 @@ The narrator reads both. Platform description must echo the same URL.
 ```
 "This audiobook has a companion {workbook_label} with all the exercises
 and reflection prompts. You can get it free at
-PhoenixProtocolBooks.com/free/{slug}."
+brand-admin-onboarding.pages.dev/free/{slug}."
 ```
 
 **Long form template (back matter, ≤45 seconds narrated):**
 ```
 "To go deeper and actually do the work from this book, download the
-companion {workbook_label} at PhoenixProtocolBooks.com/free/{slug}.
+companion {workbook_label} at brand-admin-onboarding.pages.dev/free/{slug}.
 You'll find guided exercises, journaling pages, and tools you can
 return to. It's free — designed to go with exactly this book."
 ```
@@ -90,7 +90,7 @@ return to. It's free — designed to go with exactly this book."
 **Front matter pointer (one line):**
 ```
 A companion {workbook_label} is available for this book at
-PhoenixProtocolBooks.com/free/{slug}. You may want to have it
+brand-admin-onboarding.pages.dev/free/{slug}. You may want to have it
 alongside you as you read.
 ```
 
@@ -102,14 +102,14 @@ alongside you as you read.
 A companion {workbook_label} is available for this book.
 It deepens every exercise with guided practice pages, reflection
 prompts, and tools you can return to.
-Get it free at PhoenixProtocolBooks.com/free/{slug}.
+Get it free at brand-admin-onboarding.pages.dev/free/{slug}.
 
 [CHAPTER 1 BEGINS]
 ```
 
 **Mid-book one-liner (optional, `full` only):**
 ```
-"[Download the companion {workbook_label} at PhoenixProtocolBooks.com/free/{slug}
+"[Download the companion {workbook_label} at brand-admin-onboarding.pages.dev/free/{slug}
 to work through these exercises in depth.]"
 ```
 
@@ -132,7 +132,7 @@ to work through these exercises in depth.]"
 |---|---|---|
 | `companion_workbook_type` | Freebie planner output | `full` \| `light_guide` \| `none` |
 | `companion_workbook_slug` | Freebie planner (`freebie_slug`) | e.g. `burnout-gen-z-workbook` |
-| `companion_workbook_url` | Constructed from slug | `PhoenixProtocolBooks.com/free/{slug}` |
+| `companion_workbook_url` | Constructed from slug | `brand-admin-onboarding.pages.dev/free/{slug}` |
 | `workbook_label` | Derived from type | `workbook` or `practice guide` |
 
 ### 4.2 Platform description content
@@ -141,7 +141,7 @@ These go into the book listing description on KDP, Findaway, ACX, etc. The platf
 
 | Field | Content |
 |---|---|
-| `platform_description_workbook_line` | "Includes a free companion {workbook_label} with guided exercises and reflection prompts. Download at PhoenixProtocolBooks.com/free/{slug}." |
+| `platform_description_workbook_line` | "Includes a free companion {workbook_label} with guided exercises and reflection prompts. Download at brand-admin-onboarding.pages.dev/free/{slug}." |
 | `platform_description_bundle_line` | (`full` only) "Available as a bundle with the companion workbook at a reduced price." |
 | `platform_keywords_workbook` | `["companion workbook", "workbook", "practice guide", "exercises", "reflection prompts"]` (trim to platform keyword limit) |
 
@@ -185,11 +185,11 @@ All workbook URLs must include UTM parameters so GA4 can attribute conversions b
 
 | Format | URL |
 |---|---|
-| Audiobook (spoken post-intro) | `PhoenixProtocolBooks.com/free/{slug}?utm_source=audiobook&utm_medium=spoken_cta&utm_campaign={book_id}&utm_content=post_intro` |
-| Audiobook (back matter) | `PhoenixProtocolBooks.com/free/{slug}?utm_source=audiobook&utm_medium=spoken_cta&utm_campaign={book_id}&utm_content=back_matter` |
-| Ebook (front matter) | `PhoenixProtocolBooks.com/free/{slug}?utm_source=ebook&utm_medium=front_matter&utm_campaign={book_id}` |
-| Ebook (post-intro) | `PhoenixProtocolBooks.com/free/{slug}?utm_source=ebook&utm_medium=post_intro_cta&utm_campaign={book_id}` |
-| Ebook (back matter) | `PhoenixProtocolBooks.com/free/{slug}?utm_source=ebook&utm_medium=back_matter&utm_campaign={book_id}` |
+| Audiobook (spoken post-intro) | `brand-admin-onboarding.pages.dev/free/{slug}?utm_source=audiobook&utm_medium=spoken_cta&utm_campaign={book_id}&utm_content=post_intro` |
+| Audiobook (back matter) | `brand-admin-onboarding.pages.dev/free/{slug}?utm_source=audiobook&utm_medium=spoken_cta&utm_campaign={book_id}&utm_content=back_matter` |
+| Ebook (front matter) | `brand-admin-onboarding.pages.dev/free/{slug}?utm_source=ebook&utm_medium=front_matter&utm_campaign={book_id}` |
+| Ebook (post-intro) | `brand-admin-onboarding.pages.dev/free/{slug}?utm_source=ebook&utm_medium=post_intro_cta&utm_campaign={book_id}` |
+| Ebook (back matter) | `brand-admin-onboarding.pages.dev/free/{slug}?utm_source=ebook&utm_medium=back_matter&utm_campaign={book_id}` |
 
 **Note:** The short spoken URL (no UTM) is used in narration. The UTM URL is placed in ebook hyperlinks, platform description links, and the metadata landing page. Use a redirect at the clean URL that appends UTM when needed, or maintain both.
 
