@@ -800,6 +800,7 @@ def compile_plan(
     teacher_id = (book_spec.get("teacher_id") or "").strip()
     teacher_atoms_root: Optional[Path] = None
     teacher_exercise_fallback = False
+    teacher_story_fallback = False
     required_slots_by_type: Optional[dict[str, int]] = None
     if teacher_mode and teacher_id and TEACHER_BANKS_ROOT.exists():
         teacher_root = TEACHER_BANKS_ROOT / teacher_id / "approved_atoms"
@@ -808,6 +809,7 @@ def compile_plan(
         from phoenix_v4.teacher.teacher_config import load_teacher_config
         tcfg = load_teacher_config(teacher_id)
         teacher_exercise_fallback = bool(tcfg.get("teacher_exercise_fallback"))
+        teacher_story_fallback = bool(tcfg.get("teacher_story_fallback", True))  # Default True
         required_slots_by_type = {}
         for row in slot_definitions:
             for st in row:
@@ -866,6 +868,7 @@ def compile_plan(
         teacher_mode=teacher_mode,
         required_slots_by_type=required_slots_by_type,
         teacher_exercise_fallback=teacher_exercise_fallback,
+        teacher_story_fallback=teacher_story_fallback,
         chapter_thesis=chapter_thesis_from_arc,
     )
 

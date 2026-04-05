@@ -845,6 +845,43 @@ def _wrap_practice_fallback_exercise(prose: str, plan: dict[str, Any], chapter_i
         return prose
 
 
+def _wrap_persona_fallback_story(prose: str, plan: dict[str, Any], chapter_index: int, slot_index: int) -> str:
+    """When STORY has atom_source=persona_fallback, wrap with teacher voice framing.
+
+    Same pattern as _wrap_practice_fallback_exercise but for STORY atoms.
+    Teacher-native STORY atoms are used first; when exhausted, persona STORY atoms
+    fill remaining chapters with teacher-voiced framing around them.
+    """
+    teacher_id = (plan.get("teacher_id") or (plan.get("book_spec") or {}).get("teacher_id") or "").strip()
+    if not teacher_id:
+        return prose
+    try:
+        from phoenix_v4.teacher.teacher_config import load_teacher_config
+        cfg = load_teacher_config(teacher_id)
+        display_name = cfg.get("display_name") or teacher_id.replace("_", " ").title()
+
+        wrapper = cfg.get("story_wrapper") or {}
+        intro_templates = list(wrapper.get("intro_templates") or [
+            f"In {display_name}'s framework, what follows speaks to something deeper than the surface pattern.",
+            f"Through the lens of {display_name}'s teachings, consider this.",
+            f"What {display_name} calls recognition begins with scenes like this.",
+            f"{display_name}'s work reminds us that the pattern is never just the pattern. Consider what follows.",
+        ])
+        close_templates = list(wrapper.get("close_templates") or [
+            f"This is what {display_name} points to — the moment before the mind names it.",
+            f"In {display_name}'s tradition, this recognition is where the practice begins.",
+            f"What you just witnessed is the mechanism {display_name}'s teachings address directly.",
+            f"Stay with what shifted. {display_name}'s work lives in that shift.",
+        ])
+        book_id = plan.get("plan_id") or plan.get("plan_hash") or "book"
+        h = hashlib.sha256(f"story:{book_id}:{chapter_index}:{slot_index}".encode("utf-8")).hexdigest()
+        intro = (intro_templates[int(int(h[:8], 16) % len(intro_templates))] + "\n\n") if intro_templates else ""
+        close = ("\n\n" + close_templates[int(int(h[8:16], 16) % len(close_templates))]) if close_templates else ""
+        return f"{intro}{prose}{close}"
+    except Exception:
+        return prose
+
+
 def _build_title_page_lines(plan: dict[str, Any]) -> list[str]:
     """Optional title/credits from plan (author_assets, topic_id, persona_id)."""
     lines: list[str] = []
@@ -1000,8 +1037,11 @@ class TxtWriter:
                 aid = atom_ids[idx]
                 slot_label = str(slot_type).strip()
                 prose = _get_prose(aid, slot_label, self.prose_map, self.render_result, self.options)
-                if atom_sources and idx < len(atom_sources) and atom_sources[idx] == "practice_fallback" and slot_label == "EXERCISE":
-                    prose = _wrap_practice_fallback_exercise(prose, self.plan, ch, si)
+                if atom_sources and idx < len(atom_sources):
+                    if atom_sources[idx] == "practice_fallback" and slot_label == "EXERCISE":
+                        prose = _wrap_practice_fallback_exercise(prose, self.plan, ch, si)
+                    elif atom_sources[idx] == "persona_fallback" and slot_label == "STORY":
+                        prose = _wrap_persona_fallback_story(prose, self.plan, ch, si)
                 idx += 1
                 chapter_slot_types.append(slot_label)
                 chapter_slot_proses.append(prose)

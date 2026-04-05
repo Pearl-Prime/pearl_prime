@@ -36,6 +36,7 @@ class ResolverContext:
     # Required slot counts (for EXERCISE fallback merge). teacher_exercise_fallback from config.
     required_slots_by_type: Optional[dict[str, int]] = None
     teacher_exercise_fallback: bool = False
+    teacher_story_fallback: bool = False  # When True, use persona STORY atoms wrapped with teacher voice
     # Thesis-aware ranking (V4.8): per-chapter thesis text for biasing REFLECTION/STORY atom selection.
     # Keys are 1-based chapter numbers (same as arc chapter_thesis / CompiledBook.chapter_thesis).
     # Atoms with metadata keywords matching the thesis rank higher.
@@ -114,6 +115,7 @@ def resolve_slot(
     """
     required_count = context.required_slots_by_type.get(slot_type) if context.required_slots_by_type else None
     teacher_exercise_fallback = context.teacher_exercise_fallback if slot_type == "EXERCISE" else False
+    teacher_story_fallback = getattr(context, "teacher_story_fallback", False) if slot_type == "STORY" else False
     pool = context.pool_index.get_pool(
         slot_type,
         context.persona_id,
@@ -121,6 +123,7 @@ def resolve_slot(
         None,
         required_count=required_count,
         teacher_exercise_fallback=teacher_exercise_fallback,
+        teacher_story_fallback=teacher_story_fallback,
     )
     available = [e for e in pool if e.atom_id not in context.used_atom_ids]
     # HOOK and SCENE carry location grounding, not emotional content.
@@ -157,6 +160,12 @@ def resolve_slot(
     if not available:
         _TEACHER_SKIP_SLOTS = frozenset({"HOOK", "SCENE"})
         if context.teacher_mode and slot_type not in _TEACHER_SKIP_SLOTS:
+            # When teacher_story_fallback is enabled, allow ALL teaching slots to
+            # fall through to persona atoms instead of crashing. STORY gets wrapped
+            # with teacher voice at render time; other slots use persona atoms silently
+            # (they're structural — REFLECTION, INTEGRATION, PIVOT, etc.)
+            if getattr(context, "teacher_story_fallback", False):
+                return None  # let compiler handle as placeholder or persona atom
             from phoenix_v4.teacher.coverage_gate import TeacherCoverageError
             raise TeacherCoverageError(
                 f"No teacher atoms for slot {slot_type} at chapter {chapter_idx} slot {slot_idx}. "

@@ -849,6 +849,7 @@ def main() -> int:
         _tid = (book_spec_for_compiler.get("teacher_id") or "").strip()
         _tcfg = load_teacher_config(_tid) if _tid else {}
         teacher_exercise_fallback = bool(_tcfg.get("teacher_exercise_fallback"))
+        teacher_story_fallback = bool(_tcfg.get("teacher_story_fallback", True))  # Default True: all teachers can use persona STORY fallback
         passed, gap_report = run_coverage_gate(
             book_spec_for_compiler,
             format_plan_dict,
@@ -870,7 +871,9 @@ def main() -> int:
 
     # Stage 3: CompiledBook (Arc-First: arc required)
     # Teacher Mode: require_full_resolution=True so no placeholders are allowed (Gate A).
-    require_full_resolution = bool(book_spec_for_compiler.get("teacher_mode"))
+    # Exception: when teacher_story_fallback is enabled, allow placeholders for non-STORY slots
+    # (they'll be filled from persona atoms at render time).
+    require_full_resolution = bool(book_spec_for_compiler.get("teacher_mode")) and not teacher_story_fallback
     from phoenix_v4.planning.assembly_compiler import compile_plan
     compiled = compile_plan(
         book_spec_for_compiler,

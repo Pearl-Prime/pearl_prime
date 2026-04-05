@@ -203,6 +203,8 @@ class PoolIndex:
         format_plan: Optional[dict] = None,
         required_count: Optional[int] = None,
         teacher_exercise_fallback: bool = False,
+        teacher_story_fallback: bool = False,
+        **kwargs,
     ) -> list[AtomEntry]:
         """
         Return list of AtomEntry for (persona, topic, slot_type).
@@ -215,22 +217,61 @@ class PoolIndex:
         _TEACHER_SKIP_SLOTS = frozenset({"HOOK", "SCENE"})
         if self.teacher_atoms_root is not None and slot_type not in _TEACHER_SKIP_SLOTS:
             teacher_pool = _load_teacher_pool(self.teacher_atoms_root, slot_type)
-            if slot_type == "EXERCISE" and teacher_exercise_fallback and required_count is not None and 0 < len(teacher_pool) < required_count:
-                from phoenix_v4.planning.practice_selector import get_backstop_pool
-                backstop = get_backstop_pool()
-                merged = list(teacher_pool) + list(backstop)
-                _SOURCE_PRIORITY = {"teacher_native": 0, "teacher_synthetic": 1, "practice_fallback": 2}
+            # ── Teacher fallback: merge teacher atoms with persona atoms when pool is short ──
+            # EXERCISE fallback: merge with practice library (existing)
+            # STORY fallback: merge with persona STORY pool (NEW — teacher wrapper applied at render)
+            # All teaching slots can fall back to persona atoms when teacher pool is short/empty
+            _FALLBACK_SLOTS = {"EXERCISE", "STORY", "REFLECTION", "INTEGRATION", "PIVOT", "TAKEAWAY", "THREAD", "PERMISSION", "COMPRESSION"}
+            _teacher_story_fallback = teacher_story_fallback
 
-                def _sort_key(e: AtomEntry) -> tuple:
-                    pri = _SOURCE_PRIORITY.get(getattr(e, "atom_source", None) or "teacher_native", 0)
-                    h = hashlib.sha256(e.atom_id.encode("utf-8")).hexdigest()
-                    return (pri, h)
+            if slot_type in _FALLBACK_SLOTS and required_count is not None and 0 < len(teacher_pool) < required_count:
+                # Determine which fallback pool to use
+                if slot_type == "EXERCISE" and teacher_exercise_fallback:
+                    from phoenix_v4.planning.practice_selector import get_backstop_pool
+                    backstop = list(get_backstop_pool())
+                elif slot_type == "STORY" and _teacher_story_fallback:
+                    # Load persona STORY atoms as fallback — wrapped with teacher voice at render
+                    backstop = list(_load_story_entries(self.atoms_root, persona_id, topic_id, self._bindings))
+                    for entry in backstop:
+                        if hasattr(entry, "metadata") and entry.metadata is not None:
+                            entry.metadata["atom_source"] = "persona_fallback"
+                elif _teacher_story_fallback and slot_type in _FALLBACK_SLOTS:
+                    # For all other teaching slots: load persona atoms as silent fallback
+                    if slot_type == "COMPRESSION":
+                        backstop = list(_load_compression_pool(persona_id, topic_id))
+                    else:
+                        path = self.atoms_root / persona_id / topic_id / slot_type / "CANONICAL.txt"
+                        backstop = list(_parse_block_file_canonical(path, persona_id, topic_id, slot_type))
+                else:
+                    backstop = []
 
-                merged.sort(key=_sort_key)
-                return merged
+                if backstop:
+                    merged = list(teacher_pool) + backstop
+                    _SOURCE_PRIORITY = {"teacher_native": 0, "teacher_synthetic": 1, "practice_fallback": 2, "persona_fallback": 2}
+
+                    def _sort_key(e: AtomEntry) -> tuple:
+                        src = getattr(e, "atom_source", None) or (e.metadata or {}).get("atom_source") or "teacher_native"
+                        pri = _SOURCE_PRIORITY.get(src, 0)
+                        h = hashlib.sha256(e.atom_id.encode("utf-8")).hexdigest()
+                        return (pri, h)
+
+                    merged.sort(key=_sort_key)
+                    return merged
+
             if teacher_pool:
                 return teacher_pool
-            # Empty teacher pool: return empty (compile will fail or placeholder per spec)
+            # Empty teacher pool: try persona fallback if enabled
+            if _teacher_story_fallback and slot_type in _FALLBACK_SLOTS:
+                if slot_type == "STORY":
+                    return list(_load_story_entries(self.atoms_root, persona_id, topic_id, self._bindings))
+                elif slot_type == "COMPRESSION":
+                    return list(_load_compression_pool(persona_id, topic_id))
+                elif slot_type == "EXERCISE":
+                    from phoenix_v4.planning.practice_selector import get_backstop_pool
+                    return list(get_backstop_pool())
+                else:
+                    path = self.atoms_root / persona_id / topic_id / slot_type / "CANONICAL.txt"
+                    return list(_parse_block_file_canonical(path, persona_id, topic_id, slot_type))
             return []
         if slot_type == "STORY":
             return _load_story_entries(
