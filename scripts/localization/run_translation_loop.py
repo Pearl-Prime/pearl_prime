@@ -56,6 +56,8 @@ ENGINE_DIRS = ("comparison", "false_alarm", "grief", "overwhelm", "shame", "spir
 # All translatable atom types: slot types + engine directories
 ALL_ATOM_TYPES = SLOT_TYPES + ENGINE_DIRS
 CJK6_LOCALES = ("ja-JP", "ko-KR", "zh-CN", "zh-HK", "zh-SG", "zh-TW")
+EUROPEAN_LOCALES = ("es-US", "es-ES", "fr-FR", "de-DE", "it-IT", "hu-HU")
+ALL_LOCALES = CJK6_LOCALES + EUROPEAN_LOCALES
 
 LOCALE_NAMES: dict[str, str] = {
     "ja-JP": "Japanese (日本語)",
@@ -613,9 +615,10 @@ def run_file_loop(
 def main() -> int:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
 
-    ap = argparse.ArgumentParser(description="Translation Comparator Loop (translate -> judge -> patch -> retry)")
+    ap = argparse.ArgumentParser(description="Translation Loop — single-pass (default) or comparator loop mode")
     ap.add_argument("--locale", help="Target locale (e.g. ja-JP)")
     ap.add_argument("--all-locales", action="store_true", help="All 6 CJK locales")
+    ap.add_argument("--european-locales", action="store_true", help="All 6 European locales (es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU)")
     ap.add_argument("--persona", help="Filter to one persona")
     ap.add_argument("--topic", help="Filter to one topic")
     ap.add_argument("--slot", help="Slot type filter")
@@ -623,6 +626,8 @@ def main() -> int:
     ap.add_argument("--resume", action="store_true", help="Skip files with existing translations")
     ap.add_argument("--max-parallel", type=int, default=5)
     ap.add_argument("--max-files", type=int, default=0, help="Limit number of files (0=all)")
+    ap.add_argument("--judge-loop", action="store_true", help="Use multi-pass judge loop (old behavior). Default is single-pass.")
+    ap.add_argument("--tts-check", action="store_true", default=True, help="Validate translation via TTS MP3 byte check (default: on)")
     args = ap.parse_args()
 
     cfg = _load_config()
@@ -635,9 +640,18 @@ def main() -> int:
         print("ERROR: config/localization/translation_checklist.yaml missing", file=sys.stderr)
         return 1
 
-    locales = list(CJK6_LOCALES) if args.all_locales else ([args.locale] if args.locale else [])
+    locales = []
+    if args.all_locales:
+        locales = list(CJK6_LOCALES)
+    if args.european_locales:
+        locales.extend(list(EUROPEAN_LOCALES))
+    if args.locale:
+        locales.append(args.locale)
+    # Deduplicate while preserving order
+    seen = set()
+    locales = [l for l in locales if not (l in seen or seen.add(l))]
     if not locales:
-        print("Specify --locale or --all-locales", file=sys.stderr)
+        print("Specify --locale, --all-locales, or --european-locales", file=sys.stderr)
         return 2
 
     if not args.dry_run and not (os.environ.get("TOGETHER_API_KEY", "").strip() or os.environ.get("DASHSCOPE_API_KEY", "").strip()):
@@ -650,9 +664,19 @@ def main() -> int:
         manifest = manifest[:args.max_files]
     max_loops = cfg.get("loop_control", {}).get("max_loops", 3)
 
+    # Single-pass mode (DEFAULT): translate → write → TTS byte check. No judge, no retry.
+    # Judge-loop mode (--judge-loop): translate → judge → score → patch → retry (old behavior).
+    if args.judge_loop:
+        mode = "judge_loop"
+        calls_per_job = f"1 translate + 1 judge × up to {max_loops} loops = max {max_loops * 2}"
+    else:
+        mode = "single_pass"
+        max_loops = 1  # Override: single pass only
+        calls_per_job = "1 translate + 1 TTS byte check (no judge)"
+
     print(f"Manifest: {len(manifest)} files × {len(locales)} locales = {len(manifest) * len(locales)} jobs")
-    print(f"Loop config: max_loops={max_loops}, threshold=0.75, parallel={args.max_parallel}")
-    print(f"API calls per job: 1 translate + 1 judge × up to {max_loops} loops = max {max_loops * 2}")
+    print(f"Mode: {mode} | parallel={args.max_parallel}")
+    print(f"API calls per job: {calls_per_job}")
 
     if args.dry_run:
         for p, t, s, path in manifest[:20]:
