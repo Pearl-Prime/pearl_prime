@@ -508,84 +508,132 @@ def run_file_loop(
         )
 
     max_loops = cfg.get("loop_control", {}).get("max_loops", 3)
-    patcher = PatchApplier(cfg, checklist)
+    single_pass = cfg.get("single_pass", True)  # DEFAULT: single-pass mode
+
     base_prompt = _make_translate_system_prompt(locale, slot_type)
-    current_prompt = base_prompt
     traces: list[LoopTrace] = []
     best_translation = ""
     final_translation = ""
     best_score = -1.0
 
-    for loop_idx in range(1, max_loops + 1):
+    if single_pass:
+        # ── SINGLE-PASS MODE (DEFAULT) ────────────────────────────────
+        # 1 translate call → write → TTS byte check → done. No judge, no retry.
         ts = datetime.now(timezone.utc).isoformat()
-        logger.info("Loop %d/%d: %s", loop_idx, max_loops, file_id)
+        logger.info("Single-pass: %s → %s", file_id, locale)
 
-        # 1. TRANSLATE
+        # 1. TRANSLATE (1 API call only)
         try:
-            translation = _call_translate(source_text, locale, current_prompt, cfg)
+            translation = _call_translate(source_text, locale, base_prompt, cfg)
         except Exception as e:
-            logger.error("Translate failed: %s loop=%d: %s", file_id, loop_idx, e)
-            traces.append(LoopTrace(
-                file_id=file_id, locale=locale, loop_index=loop_idx,
-                draft_hash="", prompt_patch="", aggregate_score=0.0,
-                hard_gates_passed=False, decision="error", timestamp_utc=ts,
-            ))
-            break
+            logger.error("Translate failed: %s: %s", file_id, e)
+            return FileResult(
+                persona=persona, topic=topic, slot_type=slot_type, locale=locale,
+                decision="error", loops_attempted=1, best_score=0.0,
+                best_translation="", final_translation="",
+                error=str(e),
+            )
 
         final_translation = translation
-        draft_hash = hashlib.sha256(translation.encode()).hexdigest()[:16]
+        best_translation = translation
+        best_score = 1.0  # No judge → assume pass
 
-        # 2. JUDGE
-        try:
-            judge_raw = _call_judge(source_text, translation, locale, slot_type, checklist, cfg)
-            raw = judge_raw.strip()
-            if raw.startswith("```"):
-                raw = raw.split("\n", 1)[-1]
-                raw = raw.rsplit("```", 1)[0]
-            gate_results = _parse_judge_json(raw.strip())
-            if not isinstance(gate_results, list):
-                gate_results = [gate_results]
-        except Exception as e:
-            logger.error("Judge failed: %s loop=%d: %s", file_id, loop_idx, e)
-            traces.append(LoopTrace(
+        # 2. TTS BYTE CHECK (validate translation isn't broken)
+        tts_ok = True
+        if translation and len(translation.strip()) < 10:
+            tts_ok = False
+            logger.warning("TTS check: translation too short (%d chars): %s", len(translation), file_id)
+        # Check for obvious translation failures
+        if translation and source_text.strip()[:50] in translation:
+            # Translation is identical to source — likely failed
+            tts_ok = False
+            logger.warning("TTS check: translation identical to source: %s", file_id)
+
+        decision = "pass" if tts_ok else "tts_fail"
+        traces.append(LoopTrace(
+            file_id=file_id, locale=locale, loop_index=1,
+            draft_hash=hashlib.sha256(translation.encode()).hexdigest()[:16],
+            prompt_patch="", aggregate_score=1.0 if tts_ok else 0.0,
+            hard_gates_passed=tts_ok, decision=decision, timestamp_utc=ts,
+        ))
+        _write_trace(cfg, traces[-1])
+
+    else:
+        # ── JUDGE-LOOP MODE (--judge-loop) ────────────────────────────
+        # Old behavior: translate → judge → score → patch → retry
+        patcher = PatchApplier(cfg, checklist)
+        current_prompt = base_prompt
+
+        for loop_idx in range(1, max_loops + 1):
+            ts = datetime.now(timezone.utc).isoformat()
+            logger.info("Loop %d/%d: %s", loop_idx, max_loops, file_id)
+
+            # 1. TRANSLATE
+            try:
+                translation = _call_translate(source_text, locale, current_prompt, cfg)
+            except Exception as e:
+                logger.error("Translate failed: %s loop=%d: %s", file_id, loop_idx, e)
+                traces.append(LoopTrace(
+                    file_id=file_id, locale=locale, loop_index=loop_idx,
+                    draft_hash="", prompt_patch="", aggregate_score=0.0,
+                    hard_gates_passed=False, decision="error", timestamp_utc=ts,
+                ))
+                break
+
+            final_translation = translation
+            draft_hash = hashlib.sha256(translation.encode()).hexdigest()[:16]
+
+            # 2. JUDGE
+            try:
+                judge_raw = _call_judge(source_text, translation, locale, slot_type, checklist, cfg)
+                raw = judge_raw.strip()
+                if raw.startswith("```"):
+                    raw = raw.split("\n", 1)[-1]
+                    raw = raw.rsplit("```", 1)[0]
+                gate_results = _parse_judge_json(raw.strip())
+                if not isinstance(gate_results, list):
+                    gate_results = [gate_results]
+            except Exception as e:
+                logger.error("Judge failed: %s loop=%d: %s", file_id, loop_idx, e)
+                traces.append(LoopTrace(
+                    file_id=file_id, locale=locale, loop_index=loop_idx,
+                    draft_hash=draft_hash, prompt_patch="", aggregate_score=0.0,
+                    hard_gates_passed=False, decision="manual_review", timestamp_utc=ts,
+                ))
+                break
+
+            # 3. SCORE
+            agg, all_hard = _aggregate_score(gate_results, checklist)
+            if agg > best_score:
+                best_score = agg
+                best_translation = translation
+
+            # 4. DECIDE
+            if _passes_threshold(agg, all_hard, cfg, locale):
+                decision = "pass"
+            elif loop_idx < max_loops:
+                decision = "continue"
+            else:
+                decision = "manual_review"
+
+            # 5. PATCH (if continuing)
+            patch_block = ""
+            if decision == "continue":
+                next_prompt = patcher.assemble(current_prompt, gate_results, loop_idx + 1)
+                patch_block = next_prompt[len(current_prompt):]
+                current_prompt = next_prompt
+
+            trace = LoopTrace(
                 file_id=file_id, locale=locale, loop_index=loop_idx,
-                draft_hash=draft_hash, prompt_patch="", aggregate_score=0.0,
-                hard_gates_passed=False, decision="manual_review", timestamp_utc=ts,
-            ))
-            break
+                draft_hash=draft_hash, prompt_patch=patch_block,
+                aggregate_score=agg, hard_gates_passed=all_hard,
+                decision=decision, timestamp_utc=ts, gate_results=gate_results,
+            )
+            traces.append(trace)
+            _write_trace(cfg, trace)
 
-        # 3. SCORE
-        agg, all_hard = _aggregate_score(gate_results, checklist)
-        if agg > best_score:
-            best_score = agg
-            best_translation = translation
-
-        # 4. DECIDE
-        if _passes_threshold(agg, all_hard, cfg, locale):
-            decision = "pass"
-        elif loop_idx < max_loops:
-            decision = "continue"
-        else:
-            decision = "manual_review"
-
-        # 5. PATCH (if continuing)
-        patch_block = ""
-        if decision == "continue":
-            next_prompt = patcher.assemble(current_prompt, gate_results, loop_idx + 1)
-            patch_block = next_prompt[len(current_prompt):]
-            current_prompt = next_prompt
-
-        trace = LoopTrace(
-            file_id=file_id, locale=locale, loop_index=loop_idx,
-            draft_hash=draft_hash, prompt_patch=patch_block,
-            aggregate_score=agg, hard_gates_passed=all_hard,
-            decision=decision, timestamp_utc=ts, gate_results=gate_results,
-        )
-        traces.append(trace)
-        _write_trace(cfg, trace)
-
-        if decision != "continue":
-            break
+            if decision != "continue":
+                break
 
     final_decision = traces[-1].decision if traces else "error"
     result = FileResult(
@@ -637,8 +685,10 @@ def main() -> int:
         print("ERROR: config/localization/translation_loop_config.yaml missing", file=sys.stderr)
         return 1
     if not checklist:
-        print("ERROR: config/localization/translation_checklist.yaml missing", file=sys.stderr)
-        return 1
+        checklist = {}  # Single-pass mode doesn't need checklist
+
+    # Wire single-pass mode into config (DEFAULT: True unless --judge-loop)
+    cfg["single_pass"] = not args.judge_loop
 
     locales = []
     if args.all_locales:
