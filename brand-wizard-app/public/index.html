@@ -138,6 +138,7 @@ function selectLane(laneId) {
   var lane = LANES[laneId];
   // Save to localStorage so other pages can read it
   localStorage.setItem('pearl_prime_lane', laneId);
+  localStorage.setItem('phoenix_lane', laneId);
 
   // Hide entry, show nav + hub
   document.getElementById('entry').style.display = 'none';
@@ -152,7 +153,7 @@ function selectLane(laneId) {
     {title:"Pearl Prime Introduction",desc:"What Pearl Prime is, how it works, your revenue model, weekly rhythm.",href:"presenter.html?deck=intro&market="+lane.path,badge:"prez",label:"PRESENTER"},
     {title:"Your Market Briefing",desc:"Platform stack, upload guide, cold-start strategy for "+lane.name+".",href:"presenter.html?deck="+lane.briefing+"&market="+lane.path,badge:"prez",label:"BRIEFING"},
     {title:"Marketing Intelligence",desc:"Ad ROI, content audit, video strategy, fleet rollout across all markets.",href:"presenter.html?deck=marketing&market="+lane.path,badge:"prez",label:"MARKETING"},
-    {title:"Brand Creation Wizard",desc:"Choose your archetype, teacher, persona, voice, visual style. See live pipeline output.",href:"brand_wizard.html?lane="+laneId,badge:"prez",label:"WIZARD"},
+    {title:"Choose Your Teacher",desc:"Select from 13 teachers + Composite. See pipeline output demos (text, audio, cover, video, manga).",href:"teacher_select.html?lane="+laneId,badge:"prez",label:"TEACHER"},
     {title:"Marketing Dashboard",desc:"Ad spend simulator, content heatmap, lane comparison, value ladder, fleet budget.",href:"marketing_dashboard.html",badge:"dash",label:"DASHBOARD"},
     {title:"Market Lane Matrix",desc:"Which platforms are available in which markets. Coverage status.",href:"market_lane_matrix.html",badge:"ref",label:"REFERENCE"},
     {title:"Output Gallery",desc:"Real pipeline examples — books, audio, video, manga, covers.",href:"lane_examples_gallery.html",badge:"ref",label:"GALLERY"},

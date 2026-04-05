@@ -31,8 +31,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-import anthropic
-
 try:
     import yaml
 except ImportError:
@@ -266,14 +264,18 @@ def write_teacher_stories(
     dry_run: bool = False,
 ) -> str:
     """
-    Generate new STORY atoms matching teacher's voice, tradition, and doctrine.
+    Build prompt for teacher STORY atom generation.
+
+    NOTE: This function does NOT call any external API. It returns the
+    combined system + user prompt. When used from Claude Code, the caller
+    should pass this prompt to an Agent subagent for generation.
 
     Loads:
     - SOURCE_OF_TRUTH/teacher_banks/{teacher_id}/doctrine/doctrine.yaml
     - SOURCE_OF_TRUTH/teacher_banks/{teacher_id}/approved_atoms/STORY/*.yaml
     - SOURCE_OF_TRUTH/teacher_banks/{teacher_id}/kb/index.json
 
-    Returns generated content as string.
+    Returns combined prompt string (system + user).
     """
     # Load doctrine
     doctrine = load_teacher_doctrine(teacher_id)
@@ -298,37 +300,19 @@ def write_teacher_stories(
     )
 
     if dry_run:
-        logger.info("DRY RUN — not calling API")
+        logger.info("DRY RUN — returning prompt only")
         print("=== SYSTEM PROMPT ===")
         print(TEACHER_STORY_SYSTEM_PROMPT[:500] + "...")
         print("\n=== USER PROMPT ===")
         print(user_prompt)
         return ""
 
-    client = anthropic.Anthropic()
-
+    # Return combined prompt for Claude Code Agent tool usage
     logger.info(
-        "Calling %s for teacher %s (%d stories)",
-        model, teacher_id, num_stories,
+        "Prompt built for teacher %s (%d stories requested)",
+        teacher_id, num_stories,
     )
-    t0 = time.monotonic()
-
-    message = client.messages.create(
-        model=model,
-        max_tokens=max_tokens,
-        temperature=temperature,
-        system=TEACHER_STORY_SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": user_prompt}],
-    )
-
-    elapsed = time.monotonic() - t0
-    content = message.content[0].text
-    logger.info(
-        "Response received in %.1fs (%d chars, stop=%s)",
-        elapsed, len(content), message.stop_reason,
-    )
-
-    return content
+    return f"SYSTEM:\n{TEACHER_STORY_SYSTEM_PROMPT}\n\nUSER:\n{user_prompt}"
 
 
 def write_teacher_yaml_files(

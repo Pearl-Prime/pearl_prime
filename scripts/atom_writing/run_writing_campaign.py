@@ -2,25 +2,32 @@
 """
 Writing Campaign Orchestrator — run_writing_campaign.py
 
-Launches 5 parallel writing tasks to generate ~7,152 new atoms in English.
-Uses concurrent.futures.ThreadPoolExecutor for parallel execution.
-Progress tracked via JSONL log file.
+Generates a campaign plan for ~7,152 new atoms in English.
+Does NOT call any external API. Designed to be driven from Claude Code
+sessions using the Agent tool (zero external API cost).
 
 Usage:
-  # Full campaign
-  python scripts/atom_writing/run_writing_campaign.py
+  # Generate campaign plan (JSON file for Claude Code to iterate)
+  python scripts/atom_writing/run_writing_campaign.py --plan
 
-  # Single task
-  python scripts/atom_writing/run_writing_campaign.py --task pivot_takeaway_thread_permission
+  # List available tasks
+  python scripts/atom_writing/run_writing_campaign.py --list-tasks
 
-  # Dry run
+  # Generate plan for single task
+  python scripts/atom_writing/run_writing_campaign.py --plan --task teacher_stories
+
+  # Dry run — show prompts without generating plan
   python scripts/atom_writing/run_writing_campaign.py --dry-run
 
-  # Custom concurrency
-  python scripts/atom_writing/run_writing_campaign.py --max-workers 3
+  # Show campaign stats
+  python scripts/atom_writing/run_writing_campaign.py --stats
 
-  # Resume from log (skip completed items)
-  python scripts/atom_writing/run_writing_campaign.py --resume
+How to execute the plan from Claude Code:
+  1. Run: python scripts/atom_writing/run_writing_campaign.py --plan
+  2. In Claude Code, read artifacts/atom_writing/campaign_plan.json
+  3. For each item, spawn an Agent subagent with the system+user prompt
+  4. Parse the subagent output and write via write_canonical()
+  5. Validate with validate_output()
 """
 from __future__ import annotations
 
@@ -73,6 +80,9 @@ from scripts.atom_writing.write_atoms_claude import (
     ALL_PERSONAS,
     ALL_TOPICS,
     ENGINE_DIRS,
+    build_system_prompt,
+    build_user_prompt,
+    generate_campaign_plan,
     load_existing_examples,
     validate_output,
     write_atoms,
@@ -80,7 +90,12 @@ from scripts.atom_writing.write_atoms_claude import (
 )
 from scripts.atom_writing.write_teacher_stories import (
     ALL_TEACHERS,
+    TEACHER_STORY_SYSTEM_PROMPT,
+    build_teacher_prompt,
     count_existing_stories,
+    load_existing_stories,
+    load_teacher_doctrine,
+    load_teacher_kb,
     write_teacher_stories,
     write_teacher_yaml_files,
 )
@@ -713,19 +728,90 @@ def run_campaign(
 
 # ─── CLI ────────────────────────────────────────────────────────────────────
 
+def generate_full_plan(
+    task_filter: str | None = None,
+    output_path: Path | None = None,
+) -> list[dict[str, Any]]:
+    """
+    Generate a full campaign plan including teacher stories.
+
+    Returns a list of plan items, each with:
+    - task, persona/teacher_id, topic, slot_type
+    - system_prompt, user_prompt
+    - output_path
+    """
+    if output_path is None:
+        output_path = REPO_ROOT / "artifacts" / "atom_writing" / "campaign_plan.json"
+
+    # Get base plan from write_atoms_claude
+    plan = generate_campaign_plan()
+
+    # Add teacher story items
+    if task_filter is None or task_filter == "teacher_stories":
+        for teacher_id in ALL_TEACHERS:
+            existing_count = count_existing_stories(teacher_id)
+            target = 20
+            needed = max(0, target - existing_count)
+            if needed == 0:
+                continue
+
+            try:
+                doctrine = load_teacher_doctrine(teacher_id)
+                existing = load_existing_stories(teacher_id)
+                kb_summary = load_teacher_kb(teacher_id)
+
+                user_prompt = build_teacher_prompt(
+                    teacher_id=teacher_id,
+                    doctrine=doctrine,
+                    existing_examples=existing,
+                    num_stories=needed,
+                    start_index=existing_count,
+                    kb_summary=kb_summary,
+                )
+
+                plan.append({
+                    "task": "teacher_stories",
+                    "teacher_id": teacher_id,
+                    "stories_needed": needed,
+                    "existing_count": existing_count,
+                    "system_prompt": TEACHER_STORY_SYSTEM_PROMPT,
+                    "user_prompt": user_prompt,
+                    "output_path": f"SOURCE_OF_TRUTH/teacher_banks/{teacher_id}/approved_atoms/STORY/",
+                })
+            except FileNotFoundError:
+                logger.warning("Doctrine not found for %s, skipping", teacher_id)
+
+    # Filter by task if specified
+    if task_filter and task_filter != "teacher_stories":
+        plan = [p for p in plan if p.get("task") == task_filter]
+
+    # Write plan
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(plan, indent=2), encoding="utf-8")
+    logger.info("Full campaign plan: %d items -> %s", len(plan), output_path)
+
+    return plan
+
+
 def main():
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s %(name)s %(levelname)s %(message)s",
     )
 
-    parser = argparse.ArgumentParser(description="Phoenix Omega Atom Writing Campaign")
-    parser.add_argument("--task", help="Run a single task by name")
-    parser.add_argument("--dry-run", action="store_true", help="Print prompts without calling API")
-    parser.add_argument("--resume", action="store_true", help="Skip items already completed in log")
-    parser.add_argument("--max-workers", type=int, default=None, help="Max parallel API calls")
-    parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG_PATH, help="Config YAML path")
+    parser = argparse.ArgumentParser(
+        description="Phoenix Omega Atom Writing Campaign (Plan Generator)",
+    )
+    parser.add_argument("--plan", action="store_true", help="Generate campaign plan JSON")
+    parser.add_argument("--task", help="Filter to a single task by name")
+    parser.add_argument("--dry-run", action="store_true", help="Show what would be planned")
     parser.add_argument("--list-tasks", action="store_true", help="List available tasks")
+    parser.add_argument("--stats", action="store_true", help="Show campaign statistics")
+    parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG_PATH)
+    parser.add_argument(
+        "--output", type=Path,
+        default=REPO_ROOT / "artifacts" / "atom_writing" / "campaign_plan.json",
+    )
 
     args = parser.parse_args()
 
@@ -735,18 +821,39 @@ def main():
             print(f"  {task['name']:40s} {task.get('description', '')}")
         return
 
-    config = CampaignConfig.from_yaml(args.config)
+    if args.stats:
+        plan = generate_full_plan(task_filter=args.task, output_path=args.output)
+        tasks: dict[str, int] = {}
+        for item in plan:
+            t = item.get("task", "unknown")
+            tasks[t] = tasks.get(t, 0) + 1
+        print(f"Total plan items: {len(plan)}")
+        for t, count in sorted(tasks.items()):
+            print(f"  {t}: {count} items")
+        # Estimate total atoms
+        total_variants = sum(item.get("variants", item.get("stories_needed", 0)) for item in plan)
+        print(f"Estimated total atoms to generate: {total_variants}")
+        return
 
-    summary = run_campaign(
-        task_filter=args.task,
-        config=config,
-        dry_run=args.dry_run,
-        resume=args.resume,
-        max_workers=args.max_workers,
-    )
+    if args.plan or args.dry_run:
+        plan = generate_full_plan(task_filter=args.task, output_path=args.output)
+        tasks = {}
+        for item in plan:
+            t = item.get("task", "unknown")
+            tasks[t] = tasks.get(t, 0) + 1
+        print(f"\n=== CAMPAIGN PLAN ===")
+        print(f"Total items: {len(plan)}")
+        for t, count in sorted(tasks.items()):
+            print(f"  {t}: {count} items")
+        print(f"\nPlan written to: {args.output}")
+        print("\nTo execute from Claude Code:")
+        print("  1. Read the plan JSON")
+        print("  2. For each item, spawn Agent(subagent_type='general-purpose')")
+        print("     with the system_prompt + user_prompt")
+        print("  3. Parse output and write via write_canonical() or write_teacher_yaml_files()")
+        return
 
-    print("\n=== CAMPAIGN SUMMARY ===")
-    print(json.dumps(summary, indent=2))
+    parser.print_help()
 
 
 if __name__ == "__main__":
