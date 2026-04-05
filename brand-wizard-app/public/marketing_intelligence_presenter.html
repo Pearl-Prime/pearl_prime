@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — Marketing Intelligence Presenter</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e0a06;overflow:hidden;color:#faf6f0}
+:root{--acc:#b45309;--acc2:#d97706;--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace}
+#app{width:100%;height:100%;display:grid;grid-template-rows:1fr 210px}
+#frame-wrap{position:relative;overflow:hidden;background:#1c1009}
+#prez-frame{width:1280px;height:720px;border:none;transform-origin:top left;position:absolute;top:28px;left:0}
+#status-bar{position:absolute;top:0;left:0;right:0;height:28px;background:rgba(14,10,6,.9);display:flex;align-items:center;padding:0 1rem;gap:.8rem;z-index:25}
+#status-dot{width:6px;height:6px;border-radius:50%;background:#444;flex-shrink:0}
+#status-dot.playing{background:#22c55e;animation:pulse 1.5s infinite}
+#status-dot.paused{background:#f59e0b}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+#status-txt{font-family:var(--mono);font-size:.42rem;letter-spacing:.08em;color:rgba(250,246,240,.4)}
+#timer{font-family:var(--mono);font-size:.42rem;color:rgba(250,246,240,.22);margin-left:auto}
+#slide-badge{position:absolute;top:36px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.42rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(180,83,9,.92);color:#fff;padding:.2rem .65rem;border-radius:2px;z-index:20;opacity:0;transition:opacity .4s;white-space:nowrap}
+#slide-badge.show{opacity:1}
+#prog-track{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(180,83,9,.12);z-index:20}
+#prog-fill{height:100%;background:var(--acc);width:0%;transition:width .5s ease}
+/* hero card (replaces iframe content) */
+#hero-card{position:absolute;top:28px;left:0;right:0;bottom:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;z-index:10;background:#1c1009}
+#hero-card .hero-icon{font-size:3.5rem;opacity:.7}
+#hero-card .hero-title{font-family:var(--serif);font-size:1.6rem;font-weight:300;color:var(--acc2);text-align:center;max-width:680px;line-height:1.5}
+#hero-card .hero-sub{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.25);text-align:center;max-width:580px;line-height:1.8}
+#hero-card .hero-stat{font-family:var(--mono);font-size:.72rem;color:var(--acc);letter-spacing:.04em}
+/* narrator */
+#narrator{background:#13100c;border-top:1px solid rgba(180,83,9,.18);display:grid;grid-template-columns:260px 1fr 200px;overflow:hidden}
+#ctl{padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.6rem;border-right:1px solid rgba(180,83,9,.1)}
+.ctl-h{font-family:var(--serif);font-size:.95rem;font-weight:300;color:var(--acc2)}
+.ctl-s{font-family:var(--mono);font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,240,.22)}
+#path-chips{display:flex;gap:.35rem;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:.42rem;letter-spacing:.05em;padding:.15rem .45rem;border-radius:2px;border:1px solid rgba(180,83,9,.2);color:rgba(250,246,240,.35);cursor:pointer;transition:all .18s}
+.chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+#spd-row{display:flex;align-items:center;gap:.45rem}
+#spd-row label{font-family:var(--mono);font-size:.4rem;letter-spacing:.08em;color:rgba(250,246,240,.25)}
+#spd{width:65px;accent-color:var(--acc)}
+#spd-v{font-family:var(--mono);font-size:.42rem;color:var(--acc2)}
+.btn-row{display:flex;gap:.4rem}
+.btn{font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;text-transform:uppercase;padding:.34rem .75rem;border-radius:1px;cursor:pointer;border:1px solid rgba(250,246,240,.13);background:transparent;color:rgba(250,246,240,.45);transition:all .18s}
+.btn:hover:not(:disabled){background:rgba(250,246,240,.07);color:rgba(250,246,240,.9)}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.pri:hover:not(:disabled){background:#d97706}
+.btn:disabled{opacity:.2;pointer-events:none}
+/* script */
+#script-area{padding:1rem 1.6rem;display:flex;flex-direction:column;gap:.4rem;overflow:hidden}
+#sc-label{font-family:var(--mono);font-size:.42rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(180,83,9,.55)}
+#sc-text{font-size:.79rem;font-weight:300;line-height:1.9;color:rgba(250,246,240,.7);overflow-y:auto;flex:1;padding-right:.4rem}
+#sc-text .w{display:inline}
+#sc-text .w.done{color:rgba(180,83,9,.5)}
+#sc-text .w.cur{color:#fff;font-weight:400}
+.lp{display:inline-flex;align-items:center;font-family:var(--mono);font-size:.4rem;letter-spacing:.05em;padding:.08rem .3rem;border-radius:2px;margin:0 .12rem;vertical-align:middle}
+.lp.en{background:rgba(180,83,9,.12);color:#fbbf24;border:1px solid rgba(180,83,9,.2)}
+.lp.jp{background:rgba(220,38,38,.1);color:#fca5a5;border:1px solid rgba(220,38,38,.18)}
+.lp.ztw{background:rgba(37,99,235,.1);color:#93c5fd;border:1px solid rgba(37,99,235,.18)}
+.lp.zcn{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.18)}
+.lp.ko{background:rgba(168,85,247,.1);color:#c4b5fd;border:1px solid rgba(168,85,247,.18)}
+/* timeline */
+#tl{padding:.9rem 1rem;border-left:1px solid rgba(180,83,9,.1);overflow-y:auto;display:flex;flex-direction:column}
+#tl-hd{font-family:var(--mono);font-size:.4rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.2);margin-bottom:.5rem;flex-shrink:0}
+.tl-sec{font-family:var(--mono);font-size:.38rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(180,83,9,.35);padding:.4rem .3rem .15rem;margin-top:.2rem}
+.ti{display:flex;align-items:flex-start;gap:.4rem;padding:.28rem .35rem;border-radius:2px;cursor:pointer;transition:background .15s}
+.ti:hover{background:rgba(180,83,9,.07)}
+.ti.on{background:rgba(180,83,9,.13)}
+.ti-dot{width:5px;height:5px;border-radius:50%;background:rgba(180,83,9,.2);flex-shrink:0;margin-top:4px;transition:background .2s}
+.ti.on .ti-dot,.ti.done .ti-dot{background:var(--acc)}
+.ti.done .ti-dot{background:rgba(180,83,9,.35)}
+.ti-lbl{font-size:.58rem;color:rgba(250,246,240,.35);line-height:1.4}
+.ti.on .ti-lbl{color:rgba(250,246,240,.85)}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="frame-wrap">
+    <div id="status-bar">
+      <div id="status-dot"></div>
+      <span id="status-txt">Ready — press &#9654; Play</span>
+      <span id="timer">0:00</span>
+    </div>
+    <div id="slide-badge"></div>
+    <div id="prog-track"><div id="prog-fill"></div></div>
+    <div id="hero-card">
+      <div class="hero-icon">&#x1F4CA;</div>
+      <div class="hero-title">Pearl Prime Marketing Intelligence</div>
+      <div class="hero-sub">312 brands &middot; 13 global markets &middot; $0 to $5K ad scenarios &middot; content audit &middot; video strategy &middot; fleet rollout</div>
+      <div class="hero-stat">Press &#9654; Play to begin</div>
+    </div>
+  </div>
+  <div id="narrator">
+    <div id="ctl">
+      <div><div class="ctl-h">Marketing Intel</div><div class="ctl-s">Automated Presenter</div></div>
+      <div>
+        <div class="ctl-s" style="margin-bottom:.28rem">Market path</div>
+        <div id="path-chips">
+          <div class="chip on" data-p="all">All</div>
+          <div class="chip" data-p="us">&#x1F1FA;&#x1F1F8; US</div>
+          <div class="chip" data-p="jp">&#x1F1EF;&#x1F1F5; JP</div>
+          <div class="chip" data-p="tw">&#x1F1F9;&#x1F1FC; TW</div>
+          <div class="chip" data-p="cn">&#x1F1E8;&#x1F1F3; CN</div>
+          <div class="chip" data-p="kr">&#x1F1F0;&#x1F1F7; KR</div>
+          <div class="chip" data-p="eu">&#x1F1EA;&#x1F1FA; EU</div>
+        </div>
+      </div>
+      <div id="spd-row"><label>Speed</label><input type="range" id="spd" min="0.5" max="2" step="0.1" value="1"><span id="spd-v">1.0&times;</span></div>
+      <div class="btn-row">
+        <button class="btn pri" id="b-play" onclick="doPlay()">&#9654; Play</button>
+        <button class="btn" id="b-pause" onclick="doPause()" disabled>&#9208;</button>
+        <button class="btn" id="b-stop" onclick="doStop()" disabled>&#9632;</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn" id="b-prev" onclick="goSlide(-1)">&larr; Prev</button>
+        <button class="btn" id="b-next" onclick="goSlide(1)">Next &rarr;</button>
+      </div>
+    </div>
+    <div id="script-area">
+      <div id="sc-label">Welcome</div>
+      <div id="sc-text">Choose a market path and press <strong style="color:var(--acc2)">&#9654; Play</strong> to begin. The presenter walks through marketing strategy with narration in <span class="lp en">EN</span> English, <span class="lp jp">日本語</span> Japanese, <span class="lp zcn">简中</span> Chinese, and <span class="lp ko">한국어</span> Korean — matched to each market.</div>
+    </div>
+    <div id="tl"><div id="tl-hd">Timeline</div><div id="tl-list"></div></div>
+  </div>
+</div>
+<script>
+// ── SCRIPTS ───────────────────────────────────────────
+var SCRIPTS=[
+
+// ── 1. WELCOME ────────────────────────────────────────
+{path:"landing",slide:null,label:"\u2728 Welcome",flag:"\u2728",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"Pearl Prime Marketing Intelligence. 312 brands across 13 global markets. This presentation covers per-market strategy, advertising ROI data, budget scenarios from zero to five thousand dollars per month, content audit findings, video strategy, and the fleet rollout plan."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Every number you hear is sourced from 2025-2026 industry benchmarks. Every strategy is calibrated to our specific catalog: self-help, wellness, somatic healing, and therapeutic content — delivered as ebooks, audiobooks, manga, and podcasts."},
+]},
+
+// ── 2. STRATEGY ───────────────────────────────────────
+{path:"landing",slide:null,label:"\uD83C\uDFAF Strategy",flag:"\uD83C\uDFAF",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"The global strategy rests on three pillars. First: the value ladder. Free workbook lead magnets capture email addresses. A ninety-nine cent challenge book makes the first sale and generates reviews. Standard ebooks at three ninety-nine to six ninety-nine are the core revenue product. Premium deep books at fourteen ninety-nine to twenty-four ninety-nine serve engaged readers. Series installments at four ninety-nine times seven to fourteen books create recurring revenue."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Second: the content stack. Every book becomes five layers of marketing — the book itself, a freebie lead magnet, five video formats, thirty to fifty social posts via 48 Social through GoHighLevel, a proof loop email sequence E1 through E5, and podcast episodes. One book fuels an entire marketing engine."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Third: 48 Social integration. It takes emotional peaks from each book and transforms them into daily short-form content — scheduled across YouTube, TikTok, Instagram, and 48 platforms via GHL. Email campaigns, SMS, funnel pages, social scheduling, and CRM tracking are all live and active."},
+]},
+
+// ── 3. US MARKETING ───────────────────────────────────
+{path:"us",slide:null,label:"\uD83C\uDDFA\uD83C\uDDF8 US Marketing",flag:"\uD83C\uDDFA\uD83C\uDDF8",lines:[
+  {lang:"en",nav:{path:"us",slide:null},text:"The US market. Primary discovery channels: Google Play search, YouTube organic, and TikTok organic. Secondary: Instagram Reels, podcast cross-promotion, and Reddit organic. If budget is available, paid priority goes to Meta ads, Google ads, and Amazon ads."},
+  {lang:"en",nav:{path:"us",slide:null},text:"Content repurposing: fifty posts per book across Instagram, TikTok, Facebook, Twitter, Pinterest, and LinkedIn. Email through GoHighLevel with the proof loop E1 through E5 sequence. Expected open rate: thirty-five percent. Expected click rate: eight percent."},
+  {lang:"en",nav:{path:"us",slide:null},text:"Video strategy: YouTube long-form three times per week with SEO focus. YouTube Shorts daily with hook-first-two-seconds format. TikTok daily with trending sounds. Instagram three times per week with carousel mix."},
+  {lang:"en",nav:{path:"us",slide:null},text:"Cold-start product: the ninety-nine cent Seven Day Anxiety Challenge. Review strategy: Advance Review Copy to fifty beta readers before launch. Cultural notes: direct call-to-action works in the US. Evidence-based framing preferred. Somatic and nervous system language resonates strongly."},
+  {lang:"en",nav:{path:"us",slide:null},text:"Ad ROI data for the US. Amazon ads: thirty cents to one dollar thirty CPC, two to five percent conversion, ten dollar minimum daily. Books need ten-plus reviews before ads become cost-effective. TikTok Spark Ads: fifty cents median CPC, forty to fifty percent cheaper than Facebook. BookTok drove fifty-nine million print sales and an estimated seven hundred sixty million dollars in US revenue. Meta carousel ads outperform Reels for self-help conversions, but CPM is twenty dollars seventy — the highest of any vertical."},
+]},
+
+// ── 4. JAPAN MARKETING ────────────────────────────────
+{path:"jp",slide:null,label:"\uD83C\uDDEF\uD83C\uDDF5 Japan Marketing",flag:"\uD83C\uDDEF\uD83C\uDDF5",lines:[
+  {lang:"jp",nav:{path:"jp",slide:null},text:"日本市場のマーケティング戦略です。主要な発見チャネル：YouTube オーガニック、LINE オーガニック、Audiobook.jp。セカンダリ：Twitter JP、note.com、Voicy。"},
+  {lang:"en",nav:{path:"jp",slide:null},text:"Japan marketing. Primary discovery: YouTube organic, LINE organic, and Audiobook.jp. Secondary: Twitter Japan, note.com, and Voicy. Paid priority goes to LINE ads, YouTube ads, and Twitter ads Japan."},
+  {lang:"en",nav:{path:"jp",slide:null},text:"The critical data point: LINE ads have the cheapest CPM found in our entire research — sixty-seven cents. Typical CPM is sixty-seven cents to one dollar fifty-two. Cost per click starts at sixteen cents. Video ads deliver five-point-four-times higher click-through than static images, with thirty percent lower cost per acquisition. LINE reaches ninety-five million monthly active users in Japan."},
+  {lang:"jp",nav:{path:"jp",slide:null},text:"LINE広告は本研究で見つかった中で最も安いCPMを持っています — 67セント。動画広告は静止画より5.4倍高いクリック率と30%低いCPAを実現します。"},
+  {lang:"en",nav:{path:"jp",slide:null},text:"Cold-start product: one hundred fifty yen Five-Minute Reset. Content repurposing: thirty posts per book across Twitter Japan, LINE, Instagram, and note.com. Review strategy: influencer seeding on note.com and Voicy. Cultural notes: indirect framing is essential. Never say 'you have anxiety.' Use curiosity hooks instead of direct calls to action."},
+  {lang:"en",nav:{path:"jp",slide:null},text:"Manga is the first-mover opportunity in Japan. Self-help manga in therapeutic format with seiyuu-matched narration and somatic read timing — no one else is doing this at scale."},
+]},
+
+// ── 5. TAIWAN MARKETING ───────────────────────────────
+{path:"tw",slide:null,label:"\uD83C\uDDF9\uD83C\uDDFC Taiwan Marketing",flag:"\uD83C\uDDF9\uD83C\uDDFC",lines:[
+  {lang:"zh-tw",nav:{path:"tw",slide:null},text:"台灣市場策略。主要發現管道：Google Play、YouTube、LINE 台灣。次要管道：Readmoo、Kobo 台灣、PTT 論壇。"},
+  {lang:"en",nav:{path:"tw",slide:null},text:"Taiwan marketing. Primary discovery: Google Play, YouTube, and LINE Taiwan. Secondary: Readmoo, Kobo Taiwan, and PTT forum. Paid priority: Meta ads, Google ads, and LINE ads Taiwan."},
+  {lang:"en",nav:{path:"tw",slide:null},text:"Content repurposing: thirty posts per book across Instagram, Facebook, LINE, and PTT. Cold-start product: thirty New Taiwan dollars Five-Minute Reset. Cultural framing: body-mind-spirit resonates strongly in Taiwan. Filial piety angle works for parent-focused topics. Traditional Chinese only — never simplified."},
+  {lang:"en",nav:{path:"tw",slide:null},text:"Kobo Taiwan is a strong ebook platform. LINE integration works similarly to Japan but with Traditional Chinese content. The Taiwan market is smaller but has strong per-reader engagement and low competition in therapeutic self-help."},
+]},
+
+// ── 6. CHINA MARKETING ────────────────────────────────
+{path:"cn",slide:null,label:"\uD83C\uDDE8\uD83C\uDDF3 China Marketing",flag:"\uD83C\uDDE8\uD83C\uDDF3",lines:[
+  {lang:"zh-cn",nav:{path:"cn",slide:null},text:"中国大陆市场策略。主要发现渠道：喜马拉雅、微信读书、抖音。次要：小红书、哔哩哔哩、得到。"},
+  {lang:"en",nav:{path:"cn",slide:null},text:"China marketing. Primary discovery: Ximalaya, WeChat Read, and Douyin. Secondary: Xiaohongshu, Bilibili, and Dedao. No Google Play in China — distribution is entirely through local platforms."},
+  {lang:"en",nav:{path:"cn",slide:null},text:"The critical constraint: WeChat Moments ads require a minimum campaign budget of fifty thousand RMB — roughly seven thousand US dollars. Douyin ads minimum is five hundred dollars. These are enterprise-level thresholds, not suitable for per-brand testing at lower tiers."},
+  {lang:"en",nav:{path:"cn",slide:null},text:"The opportunity: Ximalaya has three hundred forty-five million monthly active users and seventy-plus percent market share in audio. The free-to-listen model works — chapters as free samples, then pay-per-chapter micropayments. Self-help and self-development are among Ximalaya's top categories with twenty percent sales growth in 2025."},
+  {lang:"zh-cn",nav:{path:"cn",slide:null},text:"喜马拉雅拥有3.45亿月活用户，自助成长类内容增长20%。免费收听模式是进入中国市场的最佳路径。"},
+  {lang:"en",nav:{path:"cn",slide:null},text:"Cold-start product: free on Ximalaya to build audience first. Content repurposing: forty posts per book across WeChat, Douyin, Xiaohongshu, Weibo, and Bilibili. Cultural notes: no direct mental health language — use growth and regulation framing. Fast-cut Douyin format. Community-driven via WeChat groups."},
+]},
+
+// ── 7. KOREA MARKETING ────────────────────────────────
+{path:"kr",slide:null,label:"\uD83C\uDDF0\uD83C\uDDF7 Korea Marketing",flag:"\uD83C\uDDF0\uD83C\uDDF7",lines:[
+  {lang:"ko",nav:{path:"kr",slide:null},text:"한국 시장 마케팅 전략입니다. 주요 발견 채널: 네이버 검색, YouTube 오가닉, 인스타그램. 보조: 카카오, TikTok, 브런치 스토리."},
+  {lang:"en",nav:{path:"kr",slide:null},text:"Korea marketing. Primary discovery: Naver search, YouTube organic, and Instagram. Secondary: Kakao, TikTok, and Brunch Story. Paid priority: Naver ads, Meta ads, and Kakao ads."},
+  {lang:"en",nav:{path:"kr",slide:null},text:"The standout data point: Naver minimum CPC is seventy Korean won — roughly five point four US cents. That is remarkably cheap search advertising. Naver Blog content marketing is more effective than display ads for book discovery — Korean readers trust blog reviews heavily."},
+  {lang:"en",nav:{path:"kr",slide:null},text:"Cold-start product: twelve hundred won Quick Reset. Content repurposing: thirty-five posts per book across Instagram, Naver Blog, Kakao, and Twitter. Cultural notes: achievement culture resonance. The concept of ppalli ppalli — hurry hurry — means micro-format content is preferred. K-beauty wellness crossover audience is a natural fit."},
+  {lang:"en",nav:{path:"kr",slide:null},text:"Recommended allocation at five hundred dollars per month: Naver three hundred dollars at five-point-four cents CPC, Meta one hundred twenty-five dollars, Kakao seventy-five dollars. Partner with five to ten Korean book bloggers per launch for Naver Blog reviews."},
+]},
+
+// ── 8. EUROPE MARKETING ───────────────────────────────
+{path:"eu",slide:null,label:"\uD83C\uDDEA\uD83C\uDDFA Europe Marketing",flag:"\uD83C\uDDEA\uD83C\uDDFA",lines:[
+  {lang:"en",nav:{path:"eu",slide:null},text:"Europe spans three priority markets: France, Germany, and Hungary. Each has a distinct strategy."},
+  {lang:"en",nav:{path:"eu",slide:null},text:"France. Primary discovery: Google Play, YouTube, Spotify, and Kobo France. France is the number one manga market in Europe. Self-help manga is a first-mover opportunity — philosophical framing resonates with French readers. Cold-start: ninety-nine euro cents Seven Day Challenge."},
+  {lang:"en",nav:{path:"eu",slide:null},text:"Germany. Primary discovery: Google Play, Audible Germany, and YouTube. Evidence-based framing is required — no spiritual language. The word 'wissenschaftlich fundiert' — scientifically grounded — sells in Germany. Long-form content preferred. Amazon Germany ads plus Meta is the paid allocation. Cold-start: ninety-nine euro cents Seven Day Challenge."},
+  {lang:"en",nav:{path:"eu",slide:null},text:"Hungary. This is a greenfield market. Self-help as a category is virtually non-existent in Hungarian. First-mover advantage on everything. Primary discovery is Google Play, YouTube, and Spotify. Facebook Groups are the primary discovery channel for Hungarian readers. Cold-start: two hundred ninety-nine forint Seven Day Challenge. Meta ads are the only viable paid platform."},
+  {lang:"en",nav:{path:"eu",slide:null},text:"Recommended European allocation at five hundred dollars per month: France — Meta three hundred dollars plus Google one hundred twenty-five plus Amazon France seventy-five. Germany — Amazon Germany three hundred plus Meta one hundred twenty-five plus Google seventy-five."},
+]},
+
+// ── 9. AD BUDGET ──────────────────────────────────────
+{path:"landing",slide:null,label:"\uD83D\uDCB0 Ad Budget",flag:"\uD83D\uDCB0",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"Ad budget scenarios. Five tiers from zero to five thousand dollars per month."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Zero dollars. Pure organic — content marketing, SEO, social, email, 48 Social repurposing. Expected monthly revenue per brand: zero to two hundred dollars in months one through six, two hundred to five hundred in months seven through twelve. ROAS is infinite because there is no spend. Key metric: email list size. Every one thousand subscribers equals fifty to one hundred fifty sales per launch."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"One hundred dollars per month. Below viable threshold for most platforms — but works on Reddit at five dollars per day or LINE Japan at three dollars per day. Expected ROAS: zero-point-five to one-point-five-x. Best platforms by lane: US gets Reddit ads at three to seven dollar CPM. Japan gets LINE ads at sixty-seven cent CPM. Korea gets Naver ads at five-point-four cent CPC. China is not viable — WeChat minimum is seven thousand dollars."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Five hundred dollars per month. The sweet spot for testing. Sixty percent to best-performing platform, twenty-five percent to second channel, fifteen percent to experimental. Expected ROAS: zero-point-six to two-x. Expected monthly conversions: ten to forty book sales. Break-even in month two to four with consistent optimization."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"One thousand dollars per month. Full funnel. Forty percent to awareness — YouTube Shorts, TikTok Spark, Meta reach. Thirty-five percent to retargeting — Meta retargeting, Google Display remarketing. Twenty-five percent to conversion — Amazon Sponsored Products, Google Search. At one thousand per month, retargeting warm audiences delivers three to five times better ROAS than cold prospecting."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Five thousand dollars per month. Maximum reach. Thirty percent paid social, twenty-five percent search and retail, twenty percent retargeting, fifteen percent influencer seeding, ten percent testing new platforms. Expected monthly revenue: four thousand to fifteen thousand dollars. Expected monthly conversions: one hundred to five hundred book sales."},
+]},
+
+// ── 10. CONTENT AUDIT ─────────────────────────────────
+{path:"landing",slide:null,label:"\uD83D\uDCCA Content Audit",flag:"\uD83D\uDCCA",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"Content audit findings. The raw configuration space: twenty-four brand archetypes times fifteen topics times ten personas times fifteen structural formats times thirteen locales equals seven million possible configurations. Nobody needs seven million books."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"After applying constraints — brand restricts topics, brand restricts personas, format compatibility, and locale viability — we get ninety-six hundred theoretically valid configurations. Of those, roughly eight hundred are high-confidence market-validated configurations that should drive eighty percent of catalog planning."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"The tiers: eight hundred high-confidence with primary topic, primary persona, proven format, and top five locales. Twenty-five hundred medium — valid but secondary combinations. Three thousand low — edge cases and niche formats. And thirty-three hundred invalid that should never be built due to constraint violations or cultural mismatches."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Won't-sell flags identified: generic self-help ebooks are extremely crowded with over three hundred million self-published units sold annually. Standard format saturation is very high. But micro books, manga self-help, daily practice secular books, and multi-installment series in self-help are all undersupplied."},
+]},
+
+// ── 11. VIDEO STRATEGY ────────────────────────────────
+{path:"landing",slide:null,label:"\uD83C\uDFAC Video Strategy",flag:"\uD83C\uDFAC",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"Video strategy. Five formats per book: YouTube long-form, YouTube Shorts, TikTok, Instagram Reels, and LINE video. Short-form video drives an eighty-four percent conversion increase. At five thousand dollars per month budget, invest heavily in video ad creative from the existing pipeline output."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"BookTok impact: fifty-nine million print book sales in 2024. Estimated seven hundred sixty million dollars in US revenue from TikTok-discovered titles. One viral video reaches hundreds of thousands at zero ad spend. Referral readers carry two-point-eight times higher lifetime value. 48 Social generates three hundred sixty-five permanent social assets per brand per year."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"TikTok Spark Ads — boosting organic content — outperform standard in-feed ads for books. More authentic feel, lower CPM, higher engagement. TikTok is forty to fifty percent cheaper than Facebook per click. Minimum viable test budget: five hundred per month for algorithm optimization. Focus on emotional hooks in the first two to three seconds."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"YouTube Discovery ads capture high-intent traffic at five to ten cents per view. Sixty to ninety second book trailer videos work best. For audiobooks, use audio sample clips as pre-roll ads targeting wellness and meditation content viewers."},
+]},
+
+// ── 12. EMAIL + FREEBIES ──────────────────────────────
+{path:"landing",slide:null,label:"\uD83D\uDCE7 Email + Freebies",flag:"\uD83D\uDCE7",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"Email and freebie strategy. The proof loop sequence E1 through E5: welcome email with free chapter, value content demonstrating the book's method, soft sell with social proof, testimonials and reviews, then the offer. Eighty percent value content, twenty percent promotion — wellness audiences have the highest unsubscribe rates of any vertical."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Freebie performance: workbook companions increase completion rates by forty-nine percent. Ebooks are the most popular lead magnet — twenty-seven-point-seven percent of marketers use them. But checklists and guides convert at sixty-seven-point-two percent — higher than full ebook previews. Keep free content under thirty pages. Bundle free chapter with a companion worksheet for higher perceived value."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"The freebie CTA funnel: freebie download captures email, proof loop E1 through E5 nurtures trust, ninety-nine cent challenge book makes first sale, standard ebook upsell follows, then premium deep book or series. Every one thousand email subscribers equals fifty to one hundred fifty sales per launch. The email list is the single most valuable marketing asset."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"ARC strategy: twenty to fifty advance review copies per debut title. Expect twenty to forty percent to post reviews. Books with fifty-plus Amazon reviews at launch sell roughly two times more copies. Start ARC distribution four to six weeks before publication. Use BookFunnel, StoryOrigin, or NetGalley."},
+]},
+
+// ── 13. FLEET ROLLOUT ─────────────────────────────────
+{path:"landing",slide:null,label:"\uD83D\uDE80 Fleet Rollout",flag:"\uD83D\uDE80",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"Fleet rollout plan. Do not run ads on all three hundred twelve brands at once. The phased approach:"},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Phase 1: ten brands at five hundred dollars each. Total monthly budget: five thousand dollars. Duration: three months. Goal: identify the top three to five performing brands and channels. Test across at least three platforms per brand. Kill underperformers fast."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Phase 2: twenty brands. Budget per brand: five hundred to one thousand dollars — winners get more. Total monthly: ten thousand dollars. Duration: three months. Goal: scale winners, kill non-performers. Double down on the platforms and creative that delivered the best ROAS in Phase 1."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Phase 3: fifty brands. Budget per brand: one thousand to five thousand dollars, tiered by performance. Total monthly: fifty thousand dollars. Goal: full scale with optimized allocation. By this phase, you know which brands, which platforms, which creative formats, and which audiences convert. The fleet runs on data, not guesses."},
+]},
+
+// ── 14. CLOSE ─────────────────────────────────────────
+{path:"landing",slide:null,label:"\uD83C\uDFC1 Close",flag:"\uD83C\uDFC1",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"The opportunity is now. Three hundred twelve brands. Thirteen global markets. LINE Japan at sixty-seven cents CPM. Naver Korea at five cents CPC. Hungary as a greenfield market. France as the manga first-mover. BookTok driving seven hundred sixty million in revenue. And a content engine that turns every single book into five layers of marketing automatically."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Start with zero dollars. The organic engine — 48 Social, email proof loops, freebie funnels, ARC reviews — works without any ad spend. When you are ready to scale, the data tells you exactly where to put every dollar. Pearl Prime Marketing Intelligence. The fleet is ready."},
+  {lang:"jp",nav:{path:"landing",slide:null},text:"マーケティングインテリジェンスの準備は完了しています。312ブランド、13のグローバル市場。機会は今です。"},
+  {lang:"zh-cn",nav:{path:"landing",slide:null},text:"营销情报系统已就绪。312个品牌，13个全球市场。机会就在现在。"},
+  {lang:"ko",nav:{path:"landing",slide:null},text:"마케팅 인텔리전스 준비 완료. 312개 브랜드, 13개 글로벌 시장. 기회는 지금입니다."},
+]},
+
+];
+
+// ── STATE ──────────────────────────────────────────────
+var synth = window.speechSynthesis;
+var langMap = {en:"en-US", jp:"ja-JP", "zh-tw":"zh-TW", "zh-cn":"zh-CN", ko:"ko-KR"};
+var lpClass = {en:"en", jp:"jp", "zh-tw":"ztw", "zh-cn":"zcn", ko:"ko"};
+var lpName  = {en:"EN", jp:"\u65E5\u672C\u8A9E", "zh-tw":"\u7E41\u4E2D", "zh-cn":"\u7B80\u4E2D", ko:"\uD55C\uAD6D\uC5B4"};
+
+var state = {
+  playing: false,
+  session: 0,
+  curIdx: 0,
+  filtered: [],
+  elapsed: 0,
+  clk: null
+};
+
+// ── HERO CARD ─────────────────────────────────────────
+var heroData = {
+  landing: {icon:"\uD83D\uDCCA", title:"Pearl Prime Marketing Intelligence", sub:"312 brands \u00b7 13 global markets \u00b7 data-driven strategy"},
+  us: {icon:"\uD83C\uDDFA\uD83C\uDDF8", title:"United States Market", sub:"Amazon \u00b7 Meta \u00b7 Google \u00b7 TikTok \u00b7 BookTok $760M revenue"},
+  jp: {icon:"\uD83C\uDDEF\uD83C\uDDF5", title:"\u65E5\u672C\u5E02\u5834 \u2014 Japan Market", sub:"LINE $0.67 CPM \u00b7 Manga first-mover \u00b7 95M LINE MAU"},
+  tw: {icon:"\uD83C\uDDF9\uD83C\uDDFC", title:"\u53F0\u7063\u5E02\u5834 \u2014 Taiwan Market", sub:"LINE TW \u00b7 Kobo TW \u00b7 \u8EAB\u5FC3\u9748 framing"},
+  cn: {icon:"\uD83C\uDDE8\uD83C\uDDF3", title:"\u4E2D\u56FD\u5E02\u573A \u2014 China Market", sub:"Ximalaya 345M MAU \u00b7 WeChat $7K minimum \u00b7 Douyin"},
+  kr: {icon:"\uD83C\uDDF0\uD83C\uDDF7", title:"\uD55C\uAD6D \u2014 Korea Market", sub:"Naver $0.054 CPC \u00b7 \uBE68\uB9AC\uBE68\uB9AC culture \u00b7 Kakao"},
+  eu: {icon:"\uD83C\uDDEA\uD83C\uDDFA", title:"European Markets", sub:"France manga first-mover \u00b7 Germany evidence-based \u00b7 Hungary greenfield"}
+};
+
+function updateHero(path){
+  var h = heroData[path] || heroData.landing;
+  var card = document.getElementById("hero-card");
+  card.querySelector(".hero-icon").textContent = h.icon;
+  card.querySelector(".hero-title").textContent = h.title;
+  card.querySelector(".hero-sub").textContent = h.sub;
+  card.querySelector(".hero-stat").textContent = "";
+}
+
+// ── FILTERED SCRIPTS ───────────────────────────────────
+function buildFiltered(){
+  var p = document.querySelector(".chip.on").dataset.p;
+  state.filtered = p==="all" ? SCRIPTS : SCRIPTS.filter(function(s){
+    return s.path==="landing" || s.path===p;
+  });
+}
+
+// ── TIMELINE ───────────────────────────────────────────
+function buildTL(){
+  var el=document.getElementById("tl-list"); el.innerHTML=""; var lp=null;
+  state.filtered.forEach(function(s,i){
+    if(s.path!==lp){
+      var sec=document.createElement("div"); sec.className="tl-sec";
+      sec.textContent = s.path==="landing"?"Strategy":s.path.toUpperCase();
+      el.appendChild(sec); lp=s.path;
+    }
+    var d=document.createElement("div"); d.className="ti"; d.id="ti"+i;
+    d.innerHTML='<div class="ti-dot"></div><div class="ti-lbl">'+s.label+'</div>';
+    d.onclick=(function(idx){return function(){userJump(idx);};})(i);
+    el.appendChild(d);
+  });
+}
+function updTL(i){
+  state.filtered.forEach(function(_,j){
+    var e=document.getElementById("ti"+j); if(!e)return;
+    e.classList.toggle("on",j===i);
+    e.classList.toggle("done",j<i);
+    if(j===i) e.scrollIntoView({block:"nearest",behavior:"smooth"});
+  });
+  document.getElementById("prog-fill").style.width =
+    (state.filtered.length>1 ? i/(state.filtered.length-1)*100 : 0)+"%";
+}
+
+// ── FRAME NAV ──────────────────────────────────────────
+function frameNav(path, slide){
+  updateHero(path || "landing");
+}
+
+function showBadge(txt){
+  var b=document.getElementById("slide-badge");
+  b.textContent=txt; b.classList.add("show");
+  clearTimeout(b._t); b._t=setTimeout(function(){b.classList.remove("show");},2400);
+}
+
+// ── SCRIPT DISPLAY ─────────────────────────────────────
+function renderScript(s){
+  document.getElementById("sc-label").textContent=s.flag+"  "+s.label;
+  var c=document.getElementById("sc-text"); c.innerHTML="";
+  s.lines.forEach(function(ln,li){
+    var p=document.createElement("span");
+    p.className="lp "+(lpClass[ln.lang]||"en");
+    p.textContent=lpName[ln.lang]||ln.lang;
+    c.appendChild(p); c.appendChild(document.createTextNode(" "));
+    ln.text.split(" ").forEach(function(w,wi){
+      var words = ln.text.split(" ");
+      var sp=document.createElement("span"); sp.className="w"; sp.id="w"+li+"_"+wi;
+      sp.textContent=w+(wi<words.length-1?" ":"");
+      c.appendChild(sp);
+    });
+    if(li<s.lines.length-1){ c.appendChild(document.createElement("br")); c.appendChild(document.createElement("br")); }
+  });
+}
+function hlWord(li,wi){
+  var p=document.querySelector(".w.cur"); if(p){p.classList.remove("cur");p.classList.add("done");}
+  var e=document.getElementById("w"+li+"_"+wi);
+  if(e){e.classList.add("cur");e.scrollIntoView({block:"nearest",behavior:"smooth"});}
+}
+
+// ── SPEECH ─────────────────────────────────────────────
+function speakLine(ln, li, session, cb){
+  if(session !== state.session){ cb(false); return; }
+  if(ln.nav) frameNav(ln.nav.path, ln.nav.slide);
+  synth.cancel();
+  var u = new SpeechSynthesisUtterance(ln.text);
+  u.lang  = langMap[ln.lang] || "en-US";
+  u.rate  = parseFloat(document.getElementById("spd").value);
+  var wc  = 0;
+  u.onboundary = function(e){ if(e.name==="word" && session===state.session) hlWord(li,wc++); };
+  u.onend  = function(){ if(session===state.session) cb(true); };
+  u.onerror = function(){ if(session===state.session) cb(true); };
+  synth.speak(u);
+}
+
+function speakScript(s, session, doneCb){
+  var li = 0;
+  function next(){
+    if(session!==state.session){ doneCb(false); return; }
+    if(li>=s.lines.length){ doneCb(true); return; }
+    var idx=li++;
+    speakLine(s.lines[idx], idx, session, function(ok){
+      if(!ok){ doneCb(false); return; }
+      setTimeout(function(){
+        if(session!==state.session){ doneCb(false); return; }
+        next();
+      }, 320);
+    });
+  }
+  next();
+}
+
+function playFrom(i){
+  if(!state.playing) return;
+  if(i>=state.filtered.length){ endPrez(); return; }
+  var session = state.session;
+  state.curIdx = i;
+  var s = state.filtered[i];
+  renderScript(s);
+  updTL(i);
+  showBadge(s.flag+" "+s.label);
+  updStatus("playing", s.flag+" "+s.label);
+  speakScript(s, session, function(ok){
+    if(!ok) return;
+    setTimeout(function(){
+      if(session===state.session && state.playing) playFrom(i+1);
+    }, 500);
+  });
+}
+
+// ── CONTROLS ───────────────────────────────────────────
+function killSpeech(){
+  state.session++;
+  synth.cancel();
+}
+
+function doPlay(){
+  if(state.playing) return;
+  buildFiltered(); buildTL();
+  state.playing=true;
+  setBtns("playing"); startClk();
+  playFrom(state.curIdx);
+}
+
+function doPause(){
+  if(!state.playing) return;
+  state.playing=false;
+  killSpeech();
+  stopClk();
+  setBtns("paused");
+  updStatus("paused");
+}
+
+function doStop(){
+  state.playing=false;
+  state.curIdx=0;
+  killSpeech();
+  stopClk();
+  state.elapsed=0;
+  document.getElementById("timer").textContent="0:00";
+  document.getElementById("prog-fill").style.width="0";
+  setBtns("stopped");
+  updStatus("stopped");
+  document.getElementById("sc-text").innerHTML='Press <strong style="color:var(--acc2)">\u25B6 Play</strong> to begin.';
+  document.getElementById("sc-label").textContent="Stopped";
+  updateHero("landing");
+}
+
+function userJump(i){
+  if(i<0||i>=state.filtered.length) return;
+  var wasPlaying = state.playing;
+  state.playing=false;
+  killSpeech();
+  state.curIdx=i;
+  var s=state.filtered[i];
+  if(s.lines&&s.lines[0]&&s.lines[0].nav){
+    frameNav(s.lines[0].nav.path, s.lines[0].nav.slide);
+  } else {
+    frameNav(s.path, s.slide);
+  }
+  renderScript(s);
+  updTL(i);
+  showBadge(s.flag+" "+s.label);
+  if(wasPlaying){
+    state.playing=true;
+    setBtns("playing");
+    updStatus("playing", s.flag+" "+s.label);
+    playFrom(i);
+  } else {
+    updStatus("paused", s.flag+" "+s.label);
+  }
+}
+
+function goSlide(d){
+  userJump(state.curIdx+d);
+}
+
+function endPrez(){
+  state.playing=false;
+  stopClk();
+  setBtns("stopped");
+  updStatus("done");
+  document.getElementById("prog-fill").style.width="100%";
+  document.getElementById("sc-text").innerHTML='<span style="color:var(--acc2)">\u2713 Complete.</span> Press \u25B6 Play to restart.';
+  document.getElementById("sc-label").textContent="Complete";
+}
+
+// ── UI HELPERS ─────────────────────────────────────────
+function setBtns(st){
+  document.getElementById("b-play").disabled  = (st==="playing");
+  document.getElementById("b-pause").disabled = (st!=="playing");
+  document.getElementById("b-stop").disabled  = (st==="stopped");
+}
+function updStatus(st,lbl){
+  var d=document.getElementById("status-dot"), t=document.getElementById("status-txt");
+  d.className="";
+  if(st==="playing"){ d.classList.add("playing"); t.textContent="Playing \u2014 "+(lbl||""); }
+  else if(st==="paused"){ d.classList.add("paused"); t.textContent="Paused \u2014 "+(lbl||""); }
+  else if(st==="done"){ t.textContent="Complete"; }
+  else t.textContent="Ready \u2014 press \u25B6 Play";
+}
+function startClk(){
+  stopClk();
+  state.clk=setInterval(function(){
+    state.elapsed++;
+    var m=Math.floor(state.elapsed/60), s=state.elapsed%60;
+    document.getElementById("timer").textContent=m+":"+(s<10?"0":"")+s;
+  },1000);
+}
+function stopClk(){ clearInterval(state.clk); }
+
+// ── CHIPS & SPEED ──────────────────────────────────────
+document.querySelectorAll(".chip").forEach(function(c){c.addEventListener("click",function(){
+  document.querySelectorAll(".chip").forEach(function(x){x.classList.remove("on");});
+  this.classList.add("on");
+  var p = this.dataset.p;
+  updateHero(p==="all"?"landing":p);
+  buildFiltered(); buildTL();
+  if(!state.playing){ state.curIdx=0; }
+});});
+document.getElementById("spd").addEventListener("input",function(){
+  document.getElementById("spd-v").textContent=parseFloat(this.value).toFixed(1)+"\u00d7";
+});
+
+// ── INIT ──────────────────────────────────────────────
+window.addEventListener("load",function(){
+  buildFiltered();
+  buildTL();
+  updateHero("landing");
+});
+</script>
+</body>
+</html>
