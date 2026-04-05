@@ -22,6 +22,104 @@
 
 ---
 
+## 1b. How 48 Social Gets Our Content (Integration Spec)
+
+### Content Delivery: Cloudflare R2 → 48 Social
+
+48 Social gets READ-ONLY access to the Cloudflare R2 bucket where all brand content lives. They pull what they need — they don't need to ask us.
+
+**R2 bucket structure (per brand, per week):**
+```
+r2://pearl-prime-content/{brand_id}/{week}/
+  ├── books/                    # rendered prose .txt files
+  │   ├── book_001.txt
+  │   └── book_002.txt
+  ├── videos/                   # all 5 formats per book
+  │   ├── book_001_youtube.mp4      (10 min, 16:9)
+  │   ├── book_001_shorts.mp4       (60s, 9:16)
+  │   ├── book_001_tiktok.mp4       (30-60s, 9:16)
+  │   ├── book_001_instagram.mp4    (60s, 9:16)
+  │   └── book_001_line.mp4         (60-90s, 9:16 — Japan/Taiwan only)
+  ├── covers/                   # ebook + audiobook + manga covers
+  │   ├── book_001_ebook_cover.jpg
+  │   ├── book_001_audiobook_cover.jpg
+  │   └── book_001_manga_cover.jpg
+  ├── metadata/                 # per-platform metadata JSONs
+  │   ├── book_001_google_play.json
+  │   ├── book_001_youtube.json
+  │   └── book_001_tiktok.json
+  ├── freebies/                 # companion workbooks, tools
+  │   └── book_001_workbook.html
+  └── manifest.json             # full inventory for the week
+```
+
+**48 Social access:**
+- **Read-only R2 API key** scoped to `r2://pearl-prime-content/` (all brands)
+- They can list, read, download — but NOT modify or delete
+- New content appears every Monday (weekly build cycle)
+- MP4s are deleted Sunday 23:59 UTC — 48 Social must pull videos within the week
+
+### What 48 Social Does With Our Content
+
+| Our Asset | What 48 Social Creates | How |
+|-----------|----------------------|-----|
+| `book_001.txt` (prose) | 10 quote cards, 6 hook posts, 5 carousels | Extract best lines, overlay on brand-colored templates |
+| `book_001_shorts.mp4` (60s video) | 4 video clip posts | Trim to 15-30s highlights, add captions + CTA overlay |
+| `book_001_tiktok.mp4` (30-60s) | 3 TikTok posts | Add trending sounds, text hooks, hashtags |
+| `book_001_instagram.mp4` (60s) | 3 Reels + 2 Stories | Reels with CTA, Stories with swipe-up |
+| `book_001_ebook_cover.jpg` | Post graphics | Cover reveal posts, "new release" announcements |
+| `book_001_workbook.html` | 2 freebie promo posts | "Free companion guide" CTA posts |
+| `manifest.json` | Scheduling calendar | Maps content to posting dates |
+
+### What We Give 48 Social (One-Time Setup Per Brand)
+
+| Item | Format | Where | Purpose |
+|------|--------|-------|---------|
+| R2 read-only API key | API credential | Secure handoff | Access all brand content |
+| Brand style guide | JSON | `manifest.json → brand_style` | Colors, fonts, logo, CTA templates |
+| CTA URL templates | String | In manifest.json | `PhoenixProtocolBooks.com/free/{slug}?utm_source={platform}` |
+| GHL sub-account credentials | Login | Secure handoff | Post scheduling, email automation |
+| Platform account handles | List | In manifest.json | @handle per platform per brand |
+| Voice/tone brief | Text | In manifest.json | "Warm, direct, somatic, no guru voice" |
+
+### What 48 Social Accesses via Metricool/GHL
+
+48 Social uses **Metricool** (or GHL native scheduling) to:
+1. Pull videos from R2 → upload to Metricool media library
+2. Create posts with our CTA text + brand hashtags
+3. Schedule across all connected platforms
+4. Track engagement metrics → feed back to GHL CRM
+
+**Metricool integration:**
+- 48 Social connects each brand's social accounts to their Metricool workspace
+- They import videos weekly from R2 (API or manual download)
+- Posts are created in Metricool with our pre-written captions + CTAs
+- Scheduling follows our upload_schedule.yaml cadence (2-3/day/platform)
+- Auto-approve is ON — posts go live without brand admin approval
+
+**GHL integration:**
+- 48 Social has admin access to each brand's GHL sub-account
+- Email sequences (E1-E5) are pre-configured and auto-triggered by freebie downloads
+- Social scheduling can also run through GHL's social module if preferred over Metricool
+- CRM tracks: freebie downloads → email signups → book purchases → upsells
+
+### Weekly Sync
+
+Every Monday:
+1. Pipeline builds weekly content → uploads to R2
+2. 48 Social's system detects new content in R2 (webhook or polling)
+3. 48 Social pulls assets, creates posts, schedules across platforms
+4. Brand admin gets a "Your week is live" notification (auto — no action needed)
+
+### What Happens to Videos After the Week
+
+- **Monday-Saturday:** Videos live on R2, 48 Social pulls and schedules them
+- **Sunday 23:59 UTC:** MP4s deleted from R2 (save storage)
+- **But:** 48 Social already has the videos in their Metricool media library — deletion doesn't affect scheduled or published posts
+- **Metadata, covers, freebies, book text:** Persist indefinitely on R2
+
+---
+
 ## 2. The Content Repurposing Pipeline
 
 ```
