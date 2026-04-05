@@ -1,0 +1,209 @@
+# Catalog Generation Configuration
+# Authority: Pearl_Research + Pearl_Marketing + EI v2
+# Generates ~800 high-confidence catalog entries from brand x topic x persona x format constraints.
+
+schema_version: "1.0"
+
+# ── Locales ──────────────────────────────────────────────────────────
+locales:
+  en_US: { language: English, region: "United States", currency: USD, tier: primary }
+  ja_JP: { language: Japanese, region: Japan, currency: JPY, tier: primary }
+  ko_KR: { language: Korean, region: "South Korea", currency: KRW, tier: primary }
+  de_DE: { language: German, region: Germany, currency: EUR, tier: primary }
+  fr_FR: { language: French, region: France, currency: EUR, tier: primary }
+  zh_TW: { language: "Traditional Chinese", region: Taiwan, currency: TWD, tier: secondary }
+  zh_CN: { language: "Simplified Chinese", region: "China Mainland", currency: CNY, tier: secondary }
+  zh_HK: { language: "Traditional Chinese", region: "Hong Kong", currency: HKD, tier: secondary }
+  es_US: { language: "Latin American Spanish", region: "US Hispanic", currency: USD, tier: secondary }
+  es_ES: { language: "Castilian Spanish", region: Spain, currency: EUR, tier: secondary }
+  it_IT: { language: Italian, region: Italy, currency: EUR, tier: secondary }
+  zh_SG: { language: "Simplified Chinese", region: Singapore, currency: SGD, tier: tertiary }
+  hu_HU: { language: Hungarian, region: Hungary, currency: HUF, tier: tertiary }
+
+# ── Canonical Topics (15 active, per content audit) ──────────────────
+topics:
+  - anxiety
+  - boundaries
+  - burnout
+  - compassion_fatigue
+  - courage
+  - depression
+  - financial_anxiety
+  - financial_stress
+  - grief
+  - imposter_syndrome
+  - overthinking
+  - self_worth
+  - sleep_anxiety
+  - social_anxiety
+  - somatic_healing
+
+# ── Canonical Personas ───────────────────────────────────────────────
+personas:
+  - corporate_managers
+  - millennial_women_professionals
+  - tech_finance_burnout
+  - gen_z_professionals
+  - healthcare_rns
+  - first_responders
+  - educators
+  - working_parents
+  - entrepreneurs
+  - gen_x_sandwich
+  - gen_alpha_students
+  - nyc_executives
+
+# ── Content Mix Ratios (per brand) ──────────────────────────────────
+content_mix:
+  series_ratio: 0.45
+  standalone_ratio: 0.30
+  micro_ratio: 0.20
+  deep_ratio: 0.05
+
+# ── Series Configuration ─────────────────────────────────────────────
+series_config:
+  series_per_brand: [1, 2]
+  books_per_series: [7, 10]
+  book_1_price_override: 0.99
+  series_pricing:
+    standard: [3.99, 6.99]
+    extended: [9.99, 14.99]
+
+# ── Wave Assignment Rules ────────────────────────────────────────────
+wave_rules:
+  WAVE_1:
+    description: "Cold-start: $0.99 micro-books and series Book 1s"
+    content_types: [micro_book]
+    price_max: 0.99
+  WAVE_2:
+    description: "Series expansion and standalones"
+    content_types: [series_book, standalone]
+  WAVE_3:
+    description: "Deep books for proven markets"
+    content_types: [deep_book]
+
+# ── Locale Pricing Adjustments ───────────────────────────────────────
+locale_pricing:
+  en_US: { multiplier: 1.0 }
+  ja_JP: { multiplier: 0.85, min_micro: 0.99, max_standard: 19.99 }
+  ko_KR: { multiplier: 0.35, min_micro: 0.75, max_standard: 7.20 }
+  de_DE: { multiplier: 0.95, min_micro: 0.99, max_standard: 27.99 }
+  fr_FR: { multiplier: 0.90, min_micro: 0.99, max_standard: 24.99 }
+  zh_TW: { multiplier: 0.45, min_micro: 1.50, max_standard: 11.00 }
+  zh_CN: { multiplier: 0.25, min_micro: 0.50, max_standard: 6.50 }
+  zh_HK: { multiplier: 0.50, min_micro: 1.00, max_standard: 12.00 }
+  es_US: { multiplier: 0.70, min_micro: 0.99, max_standard: 17.99 }
+  es_ES: { multiplier: 0.85, min_micro: 0.99, max_standard: 22.99 }
+  it_IT: { multiplier: 0.85, min_micro: 0.99, max_standard: 22.99 }
+  zh_SG: { multiplier: 0.45, min_micro: 1.50, max_standard: 10.00 }
+  hu_HU: { multiplier: 0.40, min_micro: 0.99, max_standard: 14.99 }
+
+# ── Kill List (Never Build) ──────────────────────────────────────────
+kill_list:
+  topic_persona_kills:
+    - { topic: financial_anxiety, persona: gen_alpha_students }
+    - { topic: financial_stress, persona: gen_alpha_students }
+    - { topic: compassion_fatigue, persona: gen_alpha_students }
+    - { topic: compassion_fatigue, persona: entrepreneurs }
+  format_locale_kills:
+    - { format: deep_book_6h, locale: hu_HU }
+    - { format: deep_book_4h, locale: hu_HU }
+    - { format: extended_book_2h, locale: hu_HU }
+  brand_locale_kills:
+    - { brand: cosmic_edge, locale: hu_HU }
+    - { brand: soul_repair, locale: de_DE }
+    - { brand: vitality_path, locale: hu_HU }
+
+# ── Title Template Formulas ──────────────────────────────────────────
+title_templates:
+  anxiety:
+    - { title: "The Alarm Is Lying", subtitle_pattern: "A Nervous System Guide to {topic} Recovery" }
+    - { title: "Safe Enough", subtitle_pattern: "How to Calm {topic} and Reclaim Your Nervous System" }
+    - { title: "The Emergency That Never Comes", subtitle_pattern: "Breaking Free from High-Functioning {topic}" }
+  burnout:
+    - { title: "Running on Fumes", subtitle_pattern: "A Recovery Guide for {topic} and Work Exhaustion" }
+    - { title: "The Collapse You Earned", subtitle_pattern: "{topic} Recovery for People Who Can't Stop" }
+    - { title: "Before You Break", subtitle_pattern: "Escaping {topic} and Rebuilding Your Energy" }
+  sleep_anxiety:
+    - { title: "The 3 AM Mind", subtitle_pattern: "A Guide to Overcoming Insomnia and {topic}" }
+    - { title: "Permission to Rest", subtitle_pattern: "How to Calm Racing Thoughts and Finally Sleep" }
+    - { title: "The Quiet Hour", subtitle_pattern: "Reclaiming Sleep from {topic} and Overthinking" }
+  imposter_syndrome:
+    - { title: "You're Not a Fraud", subtitle_pattern: "Overcoming {topic} and Owning Your Worth" }
+    - { title: "The Proof Was Always You", subtitle_pattern: "An {topic} Recovery Guide for Professionals" }
+    - { title: "Belonging at the Table", subtitle_pattern: "Silencing {topic} and Claiming Your Place" }
+  social_anxiety:
+    - { title: "The Room Isn't Watching", subtitle_pattern: "A {topic} Recovery Guide for Quiet People" }
+    - { title: "Brave Enough to Show Up", subtitle_pattern: "Overcoming {topic} and Building Real Connection" }
+    - { title: "The Script Nobody Gave You", subtitle_pattern: "How to Navigate {topic} with Confidence" }
+  self_worth:
+    - { title: "You Were Always Enough", subtitle_pattern: "Rebuilding Self-Esteem and Reclaiming Your Worth" }
+    - { title: "The Mirror Lied", subtitle_pattern: "A Self-Love Guide to Healing Low Self-Esteem" }
+    - { title: "Worthy Without Proof", subtitle_pattern: "How to Build Unshakable {topic} and Confidence" }
+  boundaries:
+    - { title: "The No That Saved Me", subtitle_pattern: "A Practical Guide to Setting {topic} and Finding Peace" }
+    - { title: "Stop Pouring from an Empty Cup", subtitle_pattern: "{topic} for People Pleasers and Overgivers" }
+    - { title: "The Line You Draw", subtitle_pattern: "How to Set {topic} Without Guilt or Fear" }
+  grief:
+    - { title: "The Weight of Gone", subtitle_pattern: "A Gentle Guide to {topic}, Loss, and Healing" }
+    - { title: "Still Here Without You", subtitle_pattern: "Finding Your Way Through {topic} and Heartbreak" }
+    - { title: "The Shape of Missing", subtitle_pattern: "A {topic} Recovery Companion for the Worst Days" }
+  overthinking:
+    - { title: "The Loop Breaker", subtitle_pattern: "How to Stop {topic} and Quiet Your Racing Mind" }
+    - { title: "Your Brain Is Not the Boss", subtitle_pattern: "A Guide to Overcoming {topic} and Mental Spirals" }
+    - { title: "Thought Traffic", subtitle_pattern: "Breaking Free from {topic}, Worry, and Analysis Paralysis" }
+  somatic_healing:
+    - { title: "The Body Remembers the Way Out", subtitle_pattern: "{topic} and Nervous System Recovery" }
+    - { title: "Unlock the Freeze", subtitle_pattern: "A Somatic Guide to Nervous System Reset and Trauma Release" }
+    - { title: "Held by the Body", subtitle_pattern: "A {topic} Guide for Stress, Trauma, and Anxiety" }
+  depression:
+    - { title: "The Light You Forgot", subtitle_pattern: "A Gentle Guide to Healing {topic} and Finding Hope" }
+    - { title: "Still Breathing", subtitle_pattern: "{topic} Recovery for People Running on Empty" }
+    - { title: "Color Returns", subtitle_pattern: "How to Move Through {topic} One Day at a Time" }
+  courage:
+    - { title: "The Fear That Built You", subtitle_pattern: "Finding {topic} When Everything Feels Uncertain" }
+    - { title: "Jump Scared", subtitle_pattern: "A Guide to Building {topic} and Facing the Unknown" }
+    - { title: "Bold Enough", subtitle_pattern: "How to Find {topic} in Anxious Times" }
+  compassion_fatigue:
+    - { title: "Caring Until There's Nothing Left", subtitle_pattern: "A {topic} Recovery Guide for Helpers" }
+    - { title: "The Empty Well", subtitle_pattern: "Healing {topic} and Emotional Exhaustion" }
+    - { title: "Who Heals the Healer", subtitle_pattern: "{topic} Recovery for Nurses and Caregivers" }
+  financial_anxiety:
+    - { title: "The Money Knot", subtitle_pattern: "Untangling {topic} and Building Financial Peace" }
+    - { title: "Broke and Breathing", subtitle_pattern: "A Somatic Guide to {topic} Recovery" }
+    - { title: "Worth More Than Your Balance", subtitle_pattern: "Healing {topic} and Money Shame" }
+  financial_stress:
+    - { title: "The Money Knot", subtitle_pattern: "Untangling {topic} and Building Financial Peace" }
+    - { title: "Broke and Breathing", subtitle_pattern: "A Somatic Guide to {topic} Recovery" }
+    - { title: "Worth More Than Your Balance", subtitle_pattern: "Healing {topic} and Money Shame" }
+
+# ── Cover Brief Templates ────────────────────────────────────────────
+cover_brief_templates:
+  minimalist_gradient: "Minimalist gradient background ({palette}). Bold sans-serif title in white or dark contrast. Clean, modern, premium feel. No illustrations."
+  geometric_anchor: "Geometric shapes on {palette} background. Strong typography, structured layout. Professional, focused energy."
+  dark_minimal: "Dark background ({palette}). Subtle texture. Serif or thin sans-serif title. Calm, nighttime, restful mood."
+  bold_typography: "Typography-driven cover. Large bold title on clean {palette} background. Minimal decoration."
+  vibrant_shapes: "Colorful abstract shapes on {palette} background. Energetic, youthful, ADHD-friendly visual rhythm."
+  warm_soft: "Warm, soft gradients ({palette}). Rounded typography. Inviting, nurturing feel."
+  dark_elegant: "Dark elegant design ({palette}). Gold or silver accents. Executive/premium positioning."
+  earth_tones: "Earth-tone palette ({palette}). Organic textures. Grounded, safe, body-connection feel."
+  abstract_symbolic: "Abstract symbolic imagery on {palette}. Contemplative, spiritual but modern."
+  whimsical_illustrated: "Light hand-drawn illustrations on {palette}. Creative, artistic, gentle energy."
+
+# ── Keyword Templates Per Topic ──────────────────────────────────────
+keyword_templates:
+  anxiety: ["anxiety relief", "nervous system regulation", "calm anxiety naturally", "anxiety recovery", "high functioning anxiety", "anxiety workbook adults", "somatic anxiety"]
+  burnout: ["burnout recovery", "work exhaustion healing", "nervous system reset", "burnout book professionals", "hustle culture recovery", "stress management", "burnout prevention"]
+  sleep_anxiety: ["insomnia self help", "racing thoughts night", "sleep anxiety relief", "cant sleep book", "3am anxiety", "calm mind sleep", "bedtime anxiety"]
+  imposter_syndrome: ["imposter syndrome book", "feeling like fraud", "self doubt recovery", "imposter syndrome women", "imposter syndrome work", "confidence building", "worthy enough"]
+  social_anxiety: ["social anxiety recovery", "overcoming shyness", "introvert anxiety", "social confidence", "making friends adult", "phone anxiety", "social skills"]
+  self_worth: ["self esteem books", "self worth healing", "self love guide", "confidence building", "feeling worthless recovery", "enough self help", "body neutrality"]
+  boundaries: ["setting boundaries book", "how say no", "people pleasing recovery", "boundaries without guilt", "codependency healing", "toxic relationship boundaries", "healthy boundaries"]
+  grief: ["grief recovery book", "coping with loss", "grief healing guide", "losing loved one", "grief companion", "complicated grief", "bereavement self help"]
+  overthinking: ["stop overthinking book", "racing thoughts relief", "quiet mind guide", "analysis paralysis", "worry less book", "mental spirals", "rumination recovery"]
+  somatic_healing: ["nervous system regulation book", "somatic exercises", "vagus nerve healing", "body trauma release", "polyvagal theory guide", "somatic therapy self help", "freeze response"]
+  depression: ["depression recovery book", "feeling numb healing", "low energy guide", "depression self help", "finding hope again", "functioning depression", "mood healing"]
+  courage: ["courage building book", "facing fear guide", "brave living", "fear of change", "bold decisions", "risk taking self help", "courage practice"]
+  compassion_fatigue: ["compassion fatigue recovery", "caregiver burnout book", "empathy exhaustion", "nurse self care", "helper burnout", "vicarious trauma", "moral injury healing"]
+  financial_anxiety: ["money anxiety book", "financial stress relief", "money shame healing", "financial anxiety guide", "broke and scared", "money mindset", "financial therapy"]
+  financial_stress: ["financial stress book", "money worry relief", "financial wellness guide", "money anxiety recovery", "financial peace", "money shame healing", "financial self help"]
