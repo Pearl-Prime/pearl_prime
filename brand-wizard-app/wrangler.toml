@@ -1,0 +1,9 @@
+# Cloudflare Pages deployment config
+# Deploy: cd brand-wizard-app && npm run build && npx wrangler pages deploy dist/
+# Domain: command.phoenixprotocolbooks.com (or phoenix-command.pages.dev)
+
+name = "phoenix-command"
+compatibility_date = "2026-04-05"
+
+[site]
+bucket = "./dist"
