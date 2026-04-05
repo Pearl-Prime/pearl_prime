@@ -595,25 +595,16 @@ def generate_catalog(
         if not topics or not personas:
             continue
 
-        # Determine how many topic-persona combos this brand gets
-        # based on locale tier. This constrains to ~800 total high-confidence.
-        # Primary lanes: top 2 topics x 1 persona = 2 combos (series + micro + standalone each)
-        # Secondary lanes: top 1 topic x 1 persona = 1 combo
-        # Tertiary lanes: 1 micro only
+        # Every brand in every lane gets full catalog — production cost is near-zero.
+        # No artificial tier limits. 24 brands × all topics × series + standalones + micros.
+        # The 800 high-confidence configs are tagged WAVE_1 (ship first).
+        # Everything else is WAVE_2 (ship alongside, track performance).
+        # KILL rule: zero sales after 90 days → deprioritize.
         locale_config = config.get("locales", {}).get(lane_id, {})
         tier = locale_config.get("tier", "secondary")
-        if tier == "primary":
-            max_topic_combos = 2
-            include_series = True
-            series_length = 7
-        elif tier == "secondary":
-            max_topic_combos = 1
-            include_series = True
-            series_length = 4
-        else:  # tertiary: hu_HU, zh_SG
-            max_topic_combos = 1
-            include_series = False
-            series_length = 0
+        max_topic_combos = len(topics)  # ALL topics for this brand
+        include_series = True
+        series_length = 7 if tier == "primary" else 4
 
         # --- Generate content per topic x persona ---
         brand_entries: list[dict] = []
@@ -622,7 +613,8 @@ def generate_catalog(
         for topic in topics:
             if combo_count >= max_topic_combos:
                 break
-            persona = personas[0]  # Highest-confidence persona only
+            # Use primary persona for this brand (archetype-defined)
+            persona = personas[0] if personas else "corporate_managers"
             combo_count += 1
 
             # --- Series (if lane supports it) ---
