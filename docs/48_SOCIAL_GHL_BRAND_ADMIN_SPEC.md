@@ -151,19 +151,32 @@ Each brand gets its own GHL sub-account. 48 Social sets this up. Brand admin nee
   - E4 purchase → tag as buyer → add to upsell list
   - No engagement after E5 → move to re-engagement sequence (30 days later)
 
-### 5.3 What You (Brand Admin) Do Weekly
-1. **Monday:** Receive weekly content package from Pearl Prime portal
-2. **Tuesday:** Review 48 Social's scheduled posts for the week in GHL
-3. **Wednesday:** Approve or request changes to any posts
-4. **Thursday:** Check email campaign performance in GHL dashboard
-5. **Friday:** Review freebie download numbers and email list growth
-6. **Weekend:** Rest. Everything runs automatically.
+### 5.3 Auto-Approve Mode (DEFAULT)
+
+**All posts are auto-approved and auto-published.** Brand admins do NOT need to review or approve individual posts. 48 Social's content comes directly from your books — it's already brand-safe because the books passed quality gates.
+
+```
+Auto-approve: ON (default for all brands)
+Review mode:  OFF (admin can opt-in if they want manual review)
+```
+
+To opt into manual review mode, admin toggles "Review Before Publish" in their GHL settings. This is NOT recommended — it adds work without improving quality since content is deterministic from book atoms.
+
+### 5.3b What You (Brand Admin) Actually Do Weekly
+1. **Monday:** Glance at weekly notification (email/Slack) confirming content was published
+2. **Thursday:** Optional — check GHL dashboard for engagement metrics (2 min)
+3. **That's it.** Everything else runs automatically.
+
+Total weekly time: **2-5 minutes.** Not hours.
 
 ### 5.4 What You NEVER Do
 - Write social media copy (48 Social does this from your books)
 - Design graphics (generated from cover art system)
 - Set up email sequences (48 Social configures in GHL)
 - Manage ad campaigns (organic only at baseline; paid is optional)
+- Approve individual posts (auto-approve is default)
+- Upload content to platforms (Pearl_Int auto-uploads via API)
+- Schedule anything (48 Social handles all scheduling)
 
 ---
 

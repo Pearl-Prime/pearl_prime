@@ -57,7 +57,9 @@ global_strategy:
       funnel_pages: true           # freebie landing pages per book
       social_scheduling: true      # post scheduling to all platforms
       crm_tracking: true           # reader journey: freebie → purchase → upsell
-    status: "active — email campaigns live, social repurposing configured"
+    auto_approve: true              # DEFAULT: posts go live without admin review
+    review_mode: false              # admin can opt-in to manual review (not recommended)
+    status: "active — email campaigns live, social repurposing configured, auto-approve ON"
 
 # ── Per-Lane Marketing Strategy ───────────────────────────────────
 lane_strategies:
