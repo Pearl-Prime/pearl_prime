@@ -195,31 +195,109 @@ lane_strategies:
 ad_budget_scenarios:
   zero:
     monthly_spend: 0
-    strategy: "Pure organic — content marketing, SEO, social, email"
-    expected_monthly_revenue_per_brand: "TBD from research"
+    strategy: "Pure organic — content marketing, SEO, social, email, 48 Social repurposing"
+    expected_monthly_revenue_per_brand: "$0-$200 (months 1-6), $200-$500 (months 7-12)"
+    expected_roas: "infinite (no spend)"
+    channels: "BookTok/Shorts organic, Pinterest evergreen, podcast guesting, 48 Social 30-50 posts/book, email proof loop (2K subs = 100-300 sales/launch)"
+    key_metric: "Email list size — every 1,000 subscribers ≈ 50-150 sales per launch"
+    break_even: "Month 4-8 (depends on review velocity and email list growth)"
 
   starter:
     monthly_spend: 100
-    strategy: "Test 1 platform — best ROI channel for this lane"
-    allocation: "100% to top-performing platform"
-    expected_roas: "TBD from research"
+    strategy: "Below viable threshold for most platforms — but can work on Reddit ($5/day) or LINE Japan ($3/day)"
+    allocation: "100% to single cheapest channel for this lane"
+    expected_roas: "0.5-1.5x"
+    expected_monthly_revenue: "$50-$150"
+    best_platforms_by_lane:
+      en_US: "Reddit Ads ($3-7 CPM, $0.43-$1.00 CPC, niche health targeting)"
+      ja_JP: "LINE Ads ($0.67-$1.52 CPM — cheapest in study, 3-5% CTR)"
+      ko_KR: "Naver Ads ($0.054 CPC — remarkably cheap search ads)"
+      zh_CN: "Not viable — WeChat minimum $7K campaign, Douyin minimum $500)"
+      de_DE: "Reddit Ads (German subreddits, evidence-based wellness targeting)"
+      hu_HU: "Meta Ads (Facebook Groups dominate Hungarian book discovery)"
+    note: "At $100/month, organic should still be primary. Paid is supplemental."
 
   growth:
     monthly_spend: 500
-    strategy: "Multi-platform — 2-3 channels"
-    allocation: "60% top platform, 25% second, 15% test"
-    expected_roas: "TBD from research"
+    strategy: "Sweet spot for testing — 1-2 platforms with enough data to optimize"
+    allocation:
+      primary: "60% ($300) to best-performing platform"
+      secondary: "25% ($125) to second channel"
+      test: "15% ($75) to experimental channel"
+    expected_roas: "0.6-2.0x"
+    expected_monthly_revenue: "$300-$1,000"
+    expected_monthly_impressions: "50,000-150,000"
+    expected_monthly_clicks: "500-2,000"
+    expected_monthly_conversions: "10-40 book sales"
+    best_allocation_by_lane:
+      en_US: "Amazon Ads $300 ($0.30-$1.30 CPC, 2-5% conv) + TikTok $125 + Reddit $75"
+      ja_JP: "LINE $300 ($0.67 CPM!) + YouTube $125 + Twitter JP $75"
+      ko_KR: "Naver $300 ($0.054 CPC) + Meta $125 + Kakao $75"
+      fr_FR: "Meta $300 + Google $125 + Amazon FR $75"
+      de_DE: "Amazon DE $300 + Meta $125 + Google $75"
+    break_even: "Month 2-4 with consistent optimization"
 
   scale:
     monthly_spend: 1000
-    strategy: "Full funnel — awareness + retargeting + conversion"
-    allocation: "40% awareness, 35% retargeting, 25% conversion"
-    expected_roas: "TBD from research"
+    strategy: "Full funnel — paid starts outperforming organic after 90 days sustained"
+    allocation:
+      awareness: "40% ($400) — YouTube Shorts ads, TikTok Spark Ads, Meta reach"
+      retargeting: "35% ($350) — Meta retargeting, Google Display remarketing"
+      conversion: "25% ($250) — Amazon Sponsored Products, Google Search"
+    expected_roas: "0.8-2.5x"
+    expected_monthly_revenue: "$800-$2,500"
+    expected_monthly_impressions: "100,000-400,000"
+    expected_monthly_clicks: "1,500-5,000"
+    expected_monthly_conversions: "30-100 book sales"
+    key_insight: "At $1K/month, retargeting warm audiences (video viewers, site visitors) delivers 3-5x better ROAS than cold prospecting"
+    break_even: "Month 1-2 with retargeting; month 3-4 for full funnel"
 
   enterprise:
     monthly_spend: 5000
-    strategy: "Maximum reach — all channels + influencer + PR"
-    expected_roas: "TBD from research"
+    strategy: "Maximum reach — all channels + influencer seeding + PR"
+    allocation:
+      paid_social: "30% ($1,500) — Meta + TikTok + YouTube"
+      search_retail: "25% ($1,250) — Amazon Ads + Google Search"
+      retargeting: "20% ($1,000) — full cross-platform retargeting"
+      influencer: "15% ($750) — BookTok creators, wellness podcasters"
+      test_new: "10% ($500) — new platforms, new formats, A/B tests"
+    expected_roas: "0.8-3.0x"
+    expected_monthly_revenue: "$4,000-$15,000"
+    expected_monthly_impressions: "500,000-2,000,000"
+    expected_monthly_conversions: "100-500 book sales"
+    key_insight: "Short-form video drives 84% conversion increase. At $5K, invest heavily in video ad creative from existing pipeline output."
+
+  # Fleet-level recommendation (don't do all 312 brands at once)
+  fleet_rollout:
+    phase_1:
+      brands: 10
+      budget_per_brand: 500
+      total_monthly: 5000
+      duration: "3 months"
+      goal: "Identify top 3-5 performing brands and channels"
+    phase_2:
+      brands: 20
+      budget_per_brand: "500-1000 (winners get more)"
+      total_monthly: 10000
+      duration: "3 months"
+      goal: "Scale winners, kill non-performers"
+    phase_3:
+      brands: 50
+      budget_per_brand: "1000-5000 (tiered by performance)"
+      total_monthly: 50000
+      goal: "Full scale with optimized allocation"
+
+  # Platform cost reference (from research)
+  platform_costs:
+    amazon_ads: {cpc: "$0.30-$1.30", conversion: "2-5%", min_daily: "$10"}
+    tiktok_ads: {cpc: "$0.50-$1.00", conversion: "1-3%", min_daily: "$20", note: "40-50% cheaper than Facebook"}
+    reddit_ads: {cpm: "$3-7", cpc: "$0.43-$1.00", min_daily: "$5", note: "Underpriced for niche health"}
+    meta_ads: {cpm: "$20.70", cpc: "$1.50-$3.00", conversion: "1-2%", min_daily: "$20", note: "38% YoY CPM increase"}
+    google_ads: {cpc: "$1.00-$4.00", conversion: "2-4%", min_daily: "$15"}
+    line_japan: {cpm: "$0.67-$1.52", ctr: "3-5%", min_daily: "$5", note: "Cheapest platform found"}
+    naver_korea: {cpc: "$0.054", note: "Blog reviews more important than ads"}
+    youtube_ads: {cpv: "$0.10-$0.30", conversion: "0.5-1%", min_daily: "$20"}
+    wechat_china: {min_campaign: "$7,000+", note: "Enterprise only — not for brand-level testing"}
 
 # ── Marketing Dashboard Config ────────────────────────────────────
 dashboard:
