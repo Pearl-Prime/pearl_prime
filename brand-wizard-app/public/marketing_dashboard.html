@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phoenix Command — Marketing Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --bg-primary: #0d0d0d;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #252525;
+    --bg-card: #1e1e1e;
+    --amber: #f5a623;
+    --amber-dim: #c68a1a;
+    --cream: #f5e6c8;
+    --cream-dim: #b8a88a;
+    --green: #4caf50;
+    --yellow: #ffc107;
+    --red: #e53935;
+    --blue: #42a5f5;
+    --purple: #ab47bc;
+    --text-primary: #f5e6c8;
+    --text-secondary: #9e9e9e;
+    --border: #333;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font);
+    line-height: 1.5;
+  }
+  header {
+    background: linear-gradient(135deg, #1a1206 0%, #0d0d0d 100%);
+    border-bottom: 1px solid var(--amber-dim);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  header .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: 1px;
+  }
+  header .subtitle {
+    color: var(--cream-dim);
+    font-size: 0.85rem;
+  }
+  nav {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  nav button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: var(--font);
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  nav button:hover { color: var(--cream); background: var(--bg-tertiary); }
+  nav button.active { color: var(--amber); border-bottom-color: var(--amber); }
+  .tab-content { display: none; padding: 1.5rem; max-width: 1600px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .card h3 {
+    color: var(--amber);
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+  .metric-box {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.75rem;
+    text-align: center;
+  }
+  .metric-box .label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-box .value { font-size: 1.3rem; font-weight: 700; color: var(--amber); margin-top: 0.25rem; }
+  .metric-box .value.good { color: var(--green); }
+  .metric-box .value.warn { color: var(--yellow); }
+  .metric-box .value.bad { color: var(--red); }
+  select, input[type="range"] { font-family: var(--font); }
+  select {
+    background: var(--bg-tertiary);
+    color: var(--cream);
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  select:focus { outline: 1px solid var(--amber); }
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--bg-tertiary);
+    border-radius: 3px;
+    outline: none;
+    margin: 0.5rem 0;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--amber);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .controls-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .control-group { display: flex; flex-direction: column; gap: 0.25rem; }
+  .control-group label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
+  .budget-display {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--amber);
+    font-variant-numeric: tabular-nums;
+  }
+  .chart-container { position: relative; height: 300px; margin-top: 0.5rem; }
+  .chart-container.tall { height: 400px; }
+
+  /* Heatmap */
+  .heatmap-grid { display: grid; gap: 2px; font-size: 0.7rem; }
+  .heatmap-cell {
+    padding: 0.4rem 0.25rem;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: transform 0.15s;
+    font-size: 0.65rem;
+    line-height: 1.2;
+  }
+  .heatmap-cell:hover { transform: scale(1.05); z-index: 1; }
+  .heatmap-header { background: var(--bg-tertiary); color: var(--cream-dim); font-weight: 600; cursor: default; font-size: 0.65rem; }
+  .heatmap-header:hover { transform: none; }
+  .heat-strong { background: #2e7d32; color: #fff; }
+  .heat-viable { background: #827717; color: #fff; }
+  .heat-skip { background: #b71c1c; color: #fff; }
+  .heat-weak { background: #4a1212; color: #ccc; }
+
+  /* Funnel */
+  .funnel { display: flex; flex-direction: column; align-items: center; gap: 0; margin: 1rem 0; }
+  .funnel-tier {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    position: relative;
+    clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+    transition: transform 0.15s;
+  }
+  .funnel-tier:hover { transform: scaleX(1.02); }
+  .funnel-arrow {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+    padding: 0.15rem 0;
+  }
+  .funnel-detail { font-weight: 400; font-size: 0.75rem; opacity: 0.85; }
+
+  /* Fleet planner */
+  .phase-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: var(--bg-tertiary);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid var(--amber);
+  }
+  .phase-bar .phase-label { font-weight: 700; color: var(--amber); min-width: 80px; }
+  .phase-bar .phase-info { font-size: 0.8rem; color: var(--cream-dim); }
+  .phase-bar .phase-budget { font-weight: 700; color: var(--cream); margin-left: auto; }
+
+  /* Detail modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--bg-card);
+    border: 1px solid var(--amber-dim);
+    border-radius: 8px;
+    padding: 1.5rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .modal h3 { color: var(--amber); margin-bottom: 0.5rem; }
+  .modal p { color: var(--cream-dim); font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .modal .close-btn {
+    background: var(--amber);
+    color: #000;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 0.75rem;
+  }
+
+  @media (max-width: 1024px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .grid-4 { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .grid-4 { grid-template-columns: 1fr; }
+    .controls-row { flex-direction: column; align-items: stretch; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">PHOENIX COMMAND</div>
+    <div class="subtitle">Marketing Intelligence Dashboard &mdash; 312 Brands x 13 Lanes</div>
+  </div>
+</header>
+
+<nav id="nav">
+  <button class="active" onclick="showTab('sim')">Ad Spend Simulator</button>
+  <button onclick="showTab('heatmap')">Content Heatmap</button>
+  <button onclick="showTab('lanes')">Lane Comparison</button>
+  <button onclick="showTab('funnel')">Value Ladder</button>
+  <button onclick="showTab('fleet')">Fleet Planner</button>
+</nav>
+
+<!-- ═══════════════ TAB 1: AD SPEND SIMULATOR ═══════════════ -->
+<div id="tab-sim" class="tab-content active">
+  <div class="card">
+    <h3>Ad Spend Simulator</h3>
+    <div class="controls-row">
+      <div class="control-group" style="flex:2">
+        <label>Monthly Budget</label>
+        <input type="range" id="budgetSlider" min="0" max="5000" step="50" value="500">
+        <div class="budget-display" id="budgetDisplay">$500</div>
+      </div>
+      <div class="control-group">
+        <label>Platform</label>
+        <select id="platformSelect">
+          <option value="amazon">Amazon Ads</option>
+          <option value="meta">Meta (FB/IG)</option>
+          <option value="tiktok">TikTok</option>
+          <option value="reddit">Reddit</option>
+          <option value="google">Google Search</option>
+          <option value="youtube">YouTube</option>
+          <option value="line">LINE (Japan)</option>
+          <option value="naver">Naver (Korea)</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>Lane</label>
+        <select id="laneSelect">
+          <option value="en_US">en_US (English US)</option>
+          <option value="ja_JP">ja_JP (Japanese)</option>
+          <option value="ko_KR">ko_KR (Korean)</option>
+          <option value="zh_TW">zh_TW (Taiwan)</option>
+          <option value="zh_CN">zh_CN (China)</option>
+          <option value="zh_HK">zh_HK (Hong Kong)</option>
+          <option value="zh_SG">zh_SG (Singapore)</option>
+          <option value="es_US">es_US (Spanish US)</option>
+          <option value="es_ES">es_ES (Spain)</option>
+          <option value="fr_FR">fr_FR (French)</option>
+          <option value="de_DE">de_DE (German)</option>
+          <option value="it_IT">it_IT (Italian)</option>
+          <option value="hu_HU">hu_HU (Hungarian)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-4" id="metricsGrid">
+    <div class="metric-box"><div class="label">Monthly Impressions</div><div class="value" id="mImpressions">--</div></div>
+    <div class="metric-box"><div class="label">Monthly Clicks</div><div class="value" id="mClicks">--</div></div>
+    <div class="metric-box"><div class="label">Monthly Conversions</div><div class="value" id="mConversions">--</div></div>
+    <div class="metric-box"><div class="label">Expected Revenue</div><div class="value" id="mRevenue">--</div></div>
+    <div class="metric-box"><div class="label">ROAS</div><div class="value" id="mROAS">--</div></div>
+    <div class="metric-box"><div class="label">CPA</div><div class="value" id="mCPA">--</div></div>
+    <div class="metric-box"><div class="label">Break-Even Month</div><div class="value" id="mBreakEven">--</div></div>
+    <div class="metric-box"><div class="label">Daily Budget</div><div class="value" id="mDaily">--</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>ROAS Curve</h3>
+      <div class="chart-container"><canvas id="roasChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>Revenue vs Spend</h3>
+      <div class="chart-container"><canvas id="revSpendChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ TAB 2: CONTENT HEATMAP ═══════════════ -->
+<div id="tab-heatmap" class="tab-content">
+  <div class="card">
+    <h3>Content Performance Heatmap &mdash; Topic x Brand Strength</h3>
+    <p style="color:var(--cream-dim);font-size:0.8rem;margin-bottom:1rem">Click any cell for details. Green = strong market signal. Yellow = viable. Red = skip.</p>
+    <div id="heatmapContainer"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ TAB 3: LANE COMPARISON ═══════════════ -->
+<div id="tab-lanes" class="tab-content">
+  <div class="grid-2">
+    <div class="card">
+      <h3>Estimated Year 1 Revenue by Lane</h3>
+      <div class="chart-container tall"><canvas id="laneRevenueChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>Competition vs Opportunity</h3>
+      <div class="chart-container tall"><canvas id="laneScatterChart"></canvas></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Greenfield Opportunity Flags</h3>
+    <div class="grid-3" id="greenfieldCards"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ TAB 4: VALUE LADDER ═══════════════ -->
+<div id="tab-funnel" class="tab-content">
+  <div class="grid-2">
+    <div class="card">
+      <h3>Value Ladder Funnel</h3>
+      <div id="funnelContainer"></div>
+    </div>
+    <div class="card">
+      <h3>LTV Calculation</h3>
+      <div class="chart-container tall"><canvas id="ltvChart"></canvas></div>
+      <div style="margin-top:1rem;" id="ltvSummary"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ TAB 5: FLEET PLANNER ═══════════════ -->
+<div id="tab-fleet" class="tab-content">
+  <div class="card">
+    <h3>Fleet Budget Planner</h3>
+    <div class="controls-row">
+      <div class="control-group" style="flex:2">
+        <label>Total Monthly Fleet Budget</label>
+        <input type="range" id="fleetBudgetSlider" min="1000" max="100000" step="1000" value="5000">
+        <div class="budget-display" id="fleetBudgetDisplay">$5,000</div>
+      </div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Phase Timeline</h3>
+      <div id="phaseTimeline"></div>
+    </div>
+    <div class="card">
+      <h3>Budget Allocation</h3>
+      <div class="chart-container"><canvas id="fleetAllocChart"></canvas></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Brand Tier Breakdown</h3>
+    <div class="grid-3" id="tierBreakdown"></div>
+  </div>
+</div>
+
+<!-- Detail modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 id="modalTitle"></h3>
+    <div id="modalBody"></div>
+    <button class="close-btn" onclick="document.getElementById('modalOverlay').classList.remove('show')">Close</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════
+
+const PLATFORMS = {
+  amazon:  { name:'Amazon Ads',  cpcLow:0.30, cpcHigh:1.30, cpmLow:null, cpmHigh:null, ctrLow:0.04, ctrHigh:0.06, convLow:0.02, convHigh:0.05, minDaily:10 },
+  meta:    { name:'Meta (FB/IG)', cpcLow:1.50, cpcHigh:3.00, cpmLow:20.70, cpmHigh:20.70, ctrLow:0.027, ctrHigh:0.027, convLow:0.01, convHigh:0.02, minDaily:20 },
+  tiktok:  { name:'TikTok',      cpcLow:0.50, cpcHigh:1.00, cpmLow:6.06, cpmHigh:10.00, ctrLow:0.01, ctrHigh:0.02, convLow:0.01, convHigh:0.03, minDaily:20 },
+  reddit:  { name:'Reddit',      cpcLow:0.43, cpcHigh:1.00, cpmLow:3.00, cpmHigh:7.00, ctrLow:0.005, ctrHigh:0.01, convLow:0.02, convHigh:0.08, minDaily:5 },
+  google:  { name:'Google Search',cpcLow:1.00, cpcHigh:4.00, cpmLow:null, cpmHigh:null, ctrLow:0.04, ctrHigh:0.06, convLow:0.02, convHigh:0.04, minDaily:15 },
+  youtube: { name:'YouTube',     cpcLow:null, cpcHigh:null, cpmLow:4.00, cpmHigh:10.00, ctrLow:0.005, ctrHigh:0.015, convLow:0.005, convHigh:0.01, cpvLow:0.10, cpvHigh:0.30, minDaily:20 },
+  line:    { name:'LINE (Japan)', cpcLow:0.16, cpcHigh:0.50, cpmLow:0.67, cpmHigh:1.52, ctrLow:0.03, ctrHigh:0.05, convLow:0.01, convHigh:0.03, minDaily:5 },
+  naver:   { name:'Naver (Korea)',cpcLow:0.054, cpcHigh:0.20, cpmLow:null, cpmHigh:null, ctrLow:0.02, ctrHigh:0.04, convLow:0.02, convHigh:0.05, minDaily:5 }
+};
+
+const LANE_PRICES = {
+  en_US:4.99, ja_JP:4.50, ko_KR:3.99, zh_TW:3.50, zh_CN:2.99,
+  zh_HK:3.99, zh_SG:4.50, es_US:3.99, es_ES:3.99, fr_FR:4.99,
+  de_DE:4.99, it_IT:3.99, hu_HU:2.99
+};
+
+const LANE_Y1_REVENUE = {
+  en_US:180000, ja_JP:95000, ko_KR:65000, zh_TW:35000, zh_CN:55000,
+  zh_HK:18000, zh_SG:15000, es_US:45000, es_ES:28000, fr_FR:42000,
+  de_DE:38000, it_IT:22000, hu_HU:12000
+};
+
+const LANE_COMPETITION = {
+  en_US:{comp:9,opp:8}, ja_JP:{comp:6,opp:9}, ko_KR:{comp:5,opp:8},
+  zh_TW:{comp:4,opp:7}, zh_CN:{comp:8,opp:6}, zh_HK:{comp:3,opp:5},
+  zh_SG:{comp:3,opp:4}, es_US:{comp:5,opp:7}, es_ES:{comp:4,opp:5},
+  fr_FR:{comp:2,opp:9}, de_DE:{comp:5,opp:6}, it_IT:{comp:3,opp:5},
+  hu_HU:{comp:1,opp:10}
+};
+
+const TOPICS = ['Anxiety','Burnout','Depression','Boundaries','Self-Worth','Grief','Sleep','Somatic Healing','Imposter Syndrome','Overthinking','Compassion Fatigue','Financial Stress','Social Anxiety','Courage'];
+const BRANDS = ['Pearl Prime','Velvet Mind','Iron Calm','Kintsugi','Sapphire Reset','Ember Glow','Lunar Tide','Nova Shift'];
+
+const HEATMAP_DATA = {};
+TOPICS.forEach(t => {
+  HEATMAP_DATA[t] = {};
+  BRANDS.forEach(b => {
+    const strongTopics = ['Anxiety','Burnout','Depression','Boundaries','Self-Worth','Grief','Imposter Syndrome','Overthinking'];
+    const viableTopics = ['Sleep','Somatic Healing','Compassion Fatigue','Social Anxiety'];
+    const skipTopics = ['Financial Stress','Courage'];
+    let base;
+    if (strongTopics.includes(t)) base = 0.7 + Math.random()*0.3;
+    else if (viableTopics.includes(t)) base = 0.35 + Math.random()*0.3;
+    else base = 0.05 + Math.random()*0.25;
+    // brand variation
+    if (b === 'Pearl Prime') base = Math.min(1, base + 0.1);
+    if (b === 'Iron Calm' && t === 'Burnout') base = 0.95;
+    HEATMAP_DATA[t][b] = Math.round(base * 100) / 100;
+  });
+});
+
+const HEATMAP_DETAILS = {
+  'strong': 'Market research shows high demand, low competition, and strong keyword volume. Prioritize for launch wave 1.',
+  'viable': 'Moderate demand with some competition. Good for wave 2-3 launches. Test with micro-content first.',
+  'skip': 'Low demand or saturated market. Save resources for stronger clusters unless you have a unique angle.'
+};
+
+// ═══════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════════════════════════
+
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  const btns = document.querySelectorAll('nav button');
+  const tabMap = ['sim','heatmap','lanes','funnel','fleet'];
+  btns[tabMap.indexOf(id)].classList.add('active');
+  // Lazy init charts
+  if (id === 'lanes' && !window._lanesInit) initLanes();
+  if (id === 'heatmap' && !window._heatInit) initHeatmap();
+  if (id === 'funnel' && !window._funnelInit) initFunnel();
+  if (id === 'fleet' && !window._fleetInit) initFleet();
+}
+
+function closeModal(e) { if (e.target === e.currentTarget) document.getElementById('modalOverlay').classList.remove('show'); }
+function showModal(title, html) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+// ═══════════════════════════════════════════════════════════
+// TAB 1: AD SPEND SIMULATOR
+// ═══════════════════════════════════════════════════════════
+
+const fmt = n => n >= 1000000 ? (n/1000000).toFixed(1)+'M' : n >= 1000 ? (n/1000).toFixed(1)+'K' : Math.round(n).toLocaleString();
+const fmtD = n => '$' + n.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+
+function calcMetrics(budget, platformKey, laneKey) {
+  const p = PLATFORMS[platformKey];
+  const bookPrice = LANE_PRICES[laneKey] || 4.99;
+  if (budget === 0) return { impressions:0, clicks:0, conversions:0, revenue:0, roas:0, cpa:0, breakEven:'N/A', daily:0 };
+
+  const avgCPC = p.cpcLow && p.cpcHigh ? (p.cpcLow + p.cpcHigh) / 2 : null;
+  const avgCPM = p.cpmLow && p.cpmHigh ? (p.cpmLow + p.cpmHigh) / 2 : null;
+  const avgCTR = (p.ctrLow + p.ctrHigh) / 2;
+  const avgConv = (p.convLow + p.convHigh) / 2;
+
+  let impressions, clicks;
+  if (avgCPM) {
+    impressions = (budget / avgCPM) * 1000;
+    clicks = impressions * avgCTR;
+  } else if (avgCPC) {
+    clicks = budget / avgCPC;
+    impressions = clicks / avgCTR;
+  } else {
+    const cpv = ((p.cpvLow||0.1) + (p.cpvHigh||0.3)) / 2;
+    clicks = budget / cpv;
+    impressions = clicks / avgCTR;
+  }
+
+  const conversions = clicks * avgConv;
+  const revenue = conversions * bookPrice;
+  const roas = budget > 0 ? revenue / budget : 0;
+  const cpa = conversions > 0 ? budget / conversions : 0;
+  const breakEven = roas >= 1 ? 'Month 1' : roas >= 0.5 ? 'Month 2-3' : roas >= 0.3 ? 'Month 4-6' : 'Month 6+';
+
+  return { impressions, clicks, conversions, revenue, roas, cpa, breakEven, daily: budget / 30 };
+}
+
+let roasChart, revSpendChart;
+const chartDefaults = { color: '#f5e6c8', borderColor: '#333' };
+
+function initSimCharts() {
+  const rCtx = document.getElementById('roasChart').getContext('2d');
+  roasChart = new Chart(rCtx, {
+    type: 'line',
+    data: { labels: [], datasets: [{ label: 'ROAS', data: [], borderColor: '#f5a623', backgroundColor: 'rgba(245,166,35,0.1)', fill: true, tension: 0.3, pointRadius: 3 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { title: { display:true, text:'Monthly Budget ($)', color:'#9e9e9e' }, ticks:{color:'#9e9e9e'}, grid:{color:'#333'} },
+        y: { title: { display:true, text:'ROAS (x)', color:'#9e9e9e' }, ticks:{color:'#9e9e9e'}, grid:{color:'#333'}, beginAtZero:true }
+      },
+      plugins: {
+        legend: { labels: { color:'#f5e6c8' } },
+        annotation: { annotations: { line1: { type:'line', yMin:1, yMax:1, borderColor:'#4caf50', borderDash:[5,5], label:{ display:true, content:'Break-Even', color:'#4caf50' } } } }
+      }
+    }
+  });
+
+  const sCtx = document.getElementById('revSpendChart').getContext('2d');
+  revSpendChart = new Chart(sCtx, {
+    type: 'bar',
+    data: {
+      labels: ['$0','$250','$500','$1K','$2K','$3K','$5K'],
+      datasets: [
+        { label: 'Spend', data: [], backgroundColor: 'rgba(229,57,53,0.7)', borderRadius: 4 },
+        { label: 'Revenue', data: [], backgroundColor: 'rgba(76,175,80,0.7)', borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { ticks:{color:'#9e9e9e'}, grid:{color:'#333'} },
+        y: { ticks:{color:'#9e9e9e', callback: v=>'$'+v.toLocaleString()}, grid:{color:'#333'}, beginAtZero:true }
+      },
+      plugins: { legend: { labels:{color:'#f5e6c8'} } }
+    }
+  });
+}
+
+function updateSim() {
+  const budget = parseInt(document.getElementById('budgetSlider').value);
+  const platform = document.getElementById('platformSelect').value;
+  const lane = document.getElementById('laneSelect').value;
+
+  document.getElementById('budgetDisplay').textContent = '$' + budget.toLocaleString();
+  const m = calcMetrics(budget, platform, lane);
+
+  document.getElementById('mImpressions').textContent = fmt(m.impressions);
+  document.getElementById('mClicks').textContent = fmt(m.clicks);
+  document.getElementById('mConversions').textContent = Math.round(m.conversions);
+  document.getElementById('mRevenue').textContent = fmtD(m.revenue);
+
+  const roasEl = document.getElementById('mROAS');
+  roasEl.textContent = m.roas.toFixed(2) + 'x';
+  roasEl.className = 'value ' + (m.roas >= 2 ? 'good' : m.roas >= 1 ? 'warn' : 'bad');
+
+  const cpaEl = document.getElementById('mCPA');
+  cpaEl.textContent = m.cpa > 0 ? fmtD(m.cpa) : '--';
+  cpaEl.className = 'value ' + (m.cpa > 0 && m.cpa < 3 ? 'good' : m.cpa < 8 ? 'warn' : 'bad');
+
+  document.getElementById('mBreakEven').textContent = m.breakEven;
+  document.getElementById('mDaily').textContent = fmtD(m.daily);
+
+  // ROAS curve
+  const budgets = [0,100,250,500,750,1000,1500,2000,2500,3000,4000,5000];
+  const roasData = budgets.map(b => {
+    const r = calcMetrics(b, platform, lane);
+    // Slight efficiency gain at higher spend (retargeting effect)
+    return b === 0 ? 0 : r.roas * (1 + Math.min(b/10000, 0.3));
+  });
+  roasChart.data.labels = budgets.map(b => '$'+b.toLocaleString());
+  roasChart.data.datasets[0].data = roasData;
+  roasChart.update();
+
+  // Rev vs Spend
+  const revBudgets = [0,250,500,1000,2000,3000,5000];
+  const spendData = revBudgets;
+  const revData = revBudgets.map(b => calcMetrics(b, platform, lane).revenue * (1 + Math.min(b/10000, 0.3)));
+  revSpendChart.data.datasets[0].data = spendData;
+  revSpendChart.data.datasets[1].data = revData;
+  revSpendChart.update();
+}
+
+// ═══════════════════════════════════════════════════════════
+// TAB 2: HEATMAP
+// ═══════════════════════════════════════════════════════════
+
+function initHeatmap() {
+  window._heatInit = true;
+  const container = document.getElementById('heatmapContainer');
+  const cols = BRANDS.length + 1;
+  container.style.gridTemplateColumns = `120px repeat(${BRANDS.length}, 1fr)`;
+  container.classList.add('heatmap-grid');
+
+  // Header row
+  container.innerHTML = '<div class="heatmap-cell heatmap-header"></div>';
+  BRANDS.forEach(b => { container.innerHTML += `<div class="heatmap-cell heatmap-header">${b}</div>`; });
+
+  TOPICS.forEach(topic => {
+    container.innerHTML += `<div class="heatmap-cell heatmap-header">${topic}</div>`;
+    BRANDS.forEach(brand => {
+      const val = HEATMAP_DATA[topic][brand];
+      let cls = 'heat-weak';
+      if (val >= 0.7) cls = 'heat-strong';
+      else if (val >= 0.4) cls = 'heat-viable';
+      else if (val < 0.25) cls = 'heat-skip';
+      const pct = Math.round(val * 100);
+      container.innerHTML += `<div class="heatmap-cell ${cls}" onclick="showHeatDetail('${topic}','${brand}',${val})">${pct}%</div>`;
+    });
+  });
+}
+
+function showHeatDetail(topic, brand, val) {
+  const tier = val >= 0.7 ? 'STRONG' : val >= 0.4 ? 'VIABLE' : 'SKIP';
+  const tierKey = val >= 0.7 ? 'strong' : val >= 0.4 ? 'viable' : 'skip';
+  const color = val >= 0.7 ? '#4caf50' : val >= 0.4 ? '#ffc107' : '#e53935';
+  showModal(`${topic} x ${brand}`,
+    `<p><strong style="color:${color}">${tier}</strong> &mdash; Signal strength: ${Math.round(val*100)}%</p>
+     <p>${HEATMAP_DETAILS[tierKey]}</p>
+     <p style="margin-top:0.5rem;color:var(--cream-dim)"><em>Recommendation:</em> ${val >= 0.7 ? 'Include in Wave 1 launch. Allocate top-tier ad budget.' : val >= 0.4 ? 'Queue for Wave 2-3. Test with organic content first.' : 'Deprioritize. Only build if brand has unique differentiation.'}</p>`
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// TAB 3: LANE COMPARISON
+// ═══════════════════════════════════════════════════════════
+
+function initLanes() {
+  window._lanesInit = true;
+  const lanes = Object.keys(LANE_Y1_REVENUE);
+  const labels = lanes;
+  const revenues = lanes.map(l => LANE_Y1_REVENUE[l]);
+
+  // Bar chart
+  const bCtx = document.getElementById('laneRevenueChart').getContext('2d');
+  new Chart(bCtx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Est. Year 1 Revenue ($)',
+        data: revenues,
+        backgroundColor: lanes.map(l => {
+          if (['hu_HU','fr_FR'].includes(l)) return 'rgba(76,175,80,0.8)';
+          if (LANE_Y1_REVENUE[l] > 50000) return 'rgba(245,166,35,0.8)';
+          return 'rgba(245,166,35,0.4)';
+        }),
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+      scales: {
+        x: { ticks:{color:'#9e9e9e', callback:v=>'$'+v.toLocaleString()}, grid:{color:'#333'} },
+        y: { ticks:{color:'#f5e6c8'}, grid:{color:'#222'} }
+      },
+      plugins: { legend:{display:false} }
+    }
+  });
+
+  // Scatter
+  const sCtx = document.getElementById('laneScatterChart').getContext('2d');
+  const scatterData = lanes.map(l => ({
+    x: LANE_COMPETITION[l].comp,
+    y: LANE_COMPETITION[l].opp,
+    label: l
+  }));
+  const greenfields = ['hu_HU','fr_FR','zh_HK'];
+  new Chart(sCtx, {
+    type: 'scatter',
+    data: {
+      datasets: [
+        {
+          label: 'Standard Lanes',
+          data: scatterData.filter(d => !greenfields.includes(d.label)),
+          backgroundColor: 'rgba(245,166,35,0.7)',
+          pointRadius: 8
+        },
+        {
+          label: 'Greenfield',
+          data: scatterData.filter(d => greenfields.includes(d.label)),
+          backgroundColor: 'rgba(76,175,80,0.9)',
+          pointRadius: 10,
+          pointStyle: 'star'
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { title:{display:true,text:'Competition Level (1-10)',color:'#9e9e9e'}, ticks:{color:'#9e9e9e'}, grid:{color:'#333'}, min:0, max:10 },
+        y: { title:{display:true,text:'Market Opportunity (1-10)',color:'#9e9e9e'}, ticks:{color:'#9e9e9e'}, grid:{color:'#333'}, min:0, max:10 }
+      },
+      plugins: {
+        legend: { labels:{color:'#f5e6c8'} },
+        tooltip: { callbacks: { label: ctx => ctx.raw.label + ` (Comp: ${ctx.raw.x}, Opp: ${ctx.raw.y})` } }
+      }
+    }
+  });
+
+  // Greenfield cards
+  const gf = document.getElementById('greenfieldCards');
+  const greenfieldInfo = [
+    { lane:'hu_HU', title:'Hungary (hu_HU)', desc:'Self-help category virtually non-existent in Hungarian. First mover on everything. Facebook Groups are primary discovery.', color:'#4caf50' },
+    { lane:'fr_FR', title:'France (fr_FR)', desc:'#1 manga market in Europe. Manga self-help is a FIRST MOVER opportunity. Philosophical framing resonates strongly.', color:'#4caf50' },
+    { lane:'zh_HK', title:'Hong Kong (zh_HK)', desc:'Cantonese audio is underserved. Bilingual audience. Compact formats for MTR commute. Political anxiety resonance.', color:'#42a5f5' }
+  ];
+  gf.innerHTML = greenfieldInfo.map(g =>
+    `<div class="metric-box" style="border-left:3px solid ${g.color};text-align:left;padding:1rem">
+      <div style="font-weight:700;color:${g.color};margin-bottom:0.25rem">${g.title}</div>
+      <div style="font-size:0.8rem;color:var(--cream-dim)">${g.desc}</div>
+    </div>`
+  ).join('');
+}
+
+// ═══════════════════════════════════════════════════════════
+// TAB 4: VALUE LADDER
+// ═══════════════════════════════════════════════════════════
+
+function initFunnel() {
+  window._funnelInit = true;
+  const tiers = [
+    { name:'Free (Freebie/Lead Magnet)', price:'$0', conv:'100%', width:100, color:'#2e7d32', users:10000 },
+    { name:'Micro ($0.99 Challenge)', price:'$0.99', conv:'8-12%', width:85, color:'#558b2f', users:1000 },
+    { name:'Standard ($3.99-$6.99 Ebook)', price:'$3.99', conv:'15-25%', width:70, color:'#f57f17', users:200 },
+    { name:'Premium ($14.99-$24.99 Deep Book)', price:'$14.99', conv:'5-10%', width:50, color:'#e65100', users:15 },
+    { name:'Series (7-14 books)', price:'$4.99/ea', conv:'20-30%', width:38, color:'#bf360c', users:5 },
+    { name:'B2B Bundle (Book+Course+App)', price:'$99+', conv:'1-3%', width:25, color:'#b71c1c', users:1 }
+  ];
+
+  const fc = document.getElementById('funnelContainer');
+  let html = '<div class="funnel">';
+  tiers.forEach((t, i) => {
+    html += `<div class="funnel-tier" style="width:${t.width}%;background:${t.color}">
+      <span>${t.name}</span>
+      <span class="funnel-detail">${t.price} | ~${t.users.toLocaleString()} users</span>
+    </div>`;
+    if (i < tiers.length - 1) {
+      html += `<div class="funnel-arrow">${tiers[i+1].conv} convert to next tier</div>`;
+    }
+  });
+  html += '</div>';
+  fc.innerHTML = html;
+
+  // LTV chart
+  const lCtx = document.getElementById('ltvChart').getContext('2d');
+  const tierNames = ['Free','Micro','Standard','Premium','Series (x7)','B2B Bundle'];
+  const revenuePerUser = [0, 0.99, 4.99, 14.99, 34.93, 99];
+  const cumulativeLTV = revenuePerUser.reduce((acc, v, i) => { acc.push((acc[i-1]||0) + v); return acc; }, []);
+
+  new Chart(lCtx, {
+    type: 'bar',
+    data: {
+      labels: tierNames,
+      datasets: [
+        { label: 'Revenue per Tier', data: revenuePerUser, backgroundColor: 'rgba(245,166,35,0.7)', borderRadius: 4 },
+        { label: 'Cumulative LTV', data: cumulativeLTV, type: 'line', borderColor: '#4caf50', backgroundColor: 'transparent', pointRadius: 5, tension: 0.3 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { ticks:{color:'#9e9e9e'}, grid:{color:'#333'} },
+        y: { ticks:{color:'#9e9e9e', callback:v=>'$'+v}, grid:{color:'#333'}, beginAtZero:true }
+      },
+      plugins: { legend:{labels:{color:'#f5e6c8'}} }
+    }
+  });
+
+  const maxLTV = cumulativeLTV[cumulativeLTV.length-1];
+  document.getElementById('ltvSummary').innerHTML = `
+    <div class="metric-box" style="display:inline-block;padding:0.75rem 1.5rem">
+      <div class="label">Maximum LTV per Reader</div>
+      <div class="value good">$${maxLTV.toFixed(2)}</div>
+    </div>
+    <div class="metric-box" style="display:inline-block;padding:0.75rem 1.5rem;margin-left:0.5rem">
+      <div class="label">Avg LTV (Standard path)</div>
+      <div class="value">$${(0.99 + 4.99).toFixed(2)}</div>
+    </div>
+    <p style="color:var(--cream-dim);font-size:0.8rem;margin-top:0.75rem">
+      Key insight: Email list of 2,000 subscribers = 100-300 sales per launch.
+      Every 1,000 subscribers adds ~$500-$1,500 per launch at standard tier.
+    </p>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════
+// TAB 5: FLEET PLANNER
+// ═══════════════════════════════════════════════════════════
+
+let fleetAllocChart;
+
+function initFleet() {
+  window._fleetInit = true;
+  const fCtx = document.getElementById('fleetAllocChart').getContext('2d');
+  fleetAllocChart = new Chart(fCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Top Performers ($1K-$5K/brand)', 'Growth Tier ($500-$1K/brand)', 'Test Tier ($100-$500/brand)', 'Organic Only ($0)'],
+      datasets: [{ data: [0,0,0,0], backgroundColor: ['#4caf50','#f5a623','#42a5f5','#555'], borderWidth: 0 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels:{color:'#f5e6c8', padding:12}, position:'bottom' } }
+    }
+  });
+  updateFleet();
+}
+
+function updateFleet() {
+  const total = parseInt(document.getElementById('fleetBudgetSlider').value);
+  document.getElementById('fleetBudgetDisplay').textContent = '$' + total.toLocaleString();
+
+  // Phase allocation logic
+  let topBrands, growthBrands, testBrands, organicBrands;
+  let topBudget, growthBudget, testBudget;
+
+  if (total <= 5000) {
+    topBrands = 0; growthBrands = 0; testBrands = Math.min(10, Math.floor(total/500));
+    organicBrands = 312 - testBrands;
+    topBudget = 0; growthBudget = 0; testBudget = testBrands > 0 ? Math.floor(total / testBrands) : 0;
+  } else if (total <= 15000) {
+    topBrands = Math.floor(total * 0.3 / 2000);
+    growthBrands = Math.floor(total * 0.4 / 750);
+    testBrands = Math.floor(total * 0.3 / 300);
+    organicBrands = 312 - topBrands - growthBrands - testBrands;
+    topBudget = topBrands > 0 ? Math.round(total*0.3/topBrands) : 0;
+    growthBudget = growthBrands > 0 ? Math.round(total*0.4/growthBrands) : 0;
+    testBudget = testBrands > 0 ? Math.round(total*0.3/testBrands) : 0;
+  } else {
+    topBrands = Math.floor(total * 0.4 / 3000);
+    growthBrands = Math.floor(total * 0.35 / 1000);
+    testBrands = Math.floor(total * 0.15 / 300);
+    organicBrands = 312 - topBrands - growthBrands - testBrands;
+    topBudget = topBrands > 0 ? Math.round(total*0.4/topBrands) : 0;
+    growthBudget = growthBrands > 0 ? Math.round(total*0.35/growthBrands) : 0;
+    testBudget = testBrands > 0 ? Math.round(total*0.15/testBrands) : 0;
+  }
+  if (organicBrands < 0) organicBrands = 0;
+
+  // Phase timeline
+  const pt = document.getElementById('phaseTimeline');
+  const phase1Total = Math.min(total, 5000);
+  const phase2Total = Math.min(total, 15000);
+  pt.innerHTML = `
+    <div class="phase-bar" style="border-left-color:#42a5f5">
+      <span class="phase-label">Phase 1</span>
+      <span class="phase-info">Months 1-3 &mdash; ${Math.min(10, testBrands+topBrands+growthBrands)} brands, identify winners</span>
+      <span class="phase-budget">$${phase1Total.toLocaleString()}/mo</span>
+    </div>
+    <div class="phase-bar" style="border-left-color:#f5a623">
+      <span class="phase-label">Phase 2</span>
+      <span class="phase-info">Months 4-6 &mdash; ${Math.min(20, topBrands+growthBrands+testBrands)} brands, scale winners</span>
+      <span class="phase-budget">$${phase2Total.toLocaleString()}/mo</span>
+    </div>
+    <div class="phase-bar" style="border-left-color:#4caf50">
+      <span class="phase-label">Phase 3</span>
+      <span class="phase-info">Months 7+ &mdash; ${topBrands+growthBrands+testBrands} brands, full optimized allocation</span>
+      <span class="phase-budget">$${total.toLocaleString()}/mo</span>
+    </div>
+  `;
+
+  // Doughnut
+  if (fleetAllocChart) {
+    fleetAllocChart.data.datasets[0].data = [
+      topBrands > 0 ? total * (total <= 5000 ? 0 : total <= 15000 ? 0.3 : 0.4) : 0,
+      growthBrands > 0 ? total * (total <= 5000 ? 0 : total <= 15000 ? 0.4 : 0.35) : 0,
+      testBrands > 0 ? total * (total <= 5000 ? 1 : total <= 15000 ? 0.3 : 0.15) : 0,
+      0
+    ];
+    fleetAllocChart.update();
+  }
+
+  // Tier breakdown
+  const tb = document.getElementById('tierBreakdown');
+  tb.innerHTML = `
+    <div class="metric-box" style="border-top:3px solid #4caf50">
+      <div class="label">Top Performers</div>
+      <div class="value good">${topBrands} brands</div>
+      <div style="font-size:0.75rem;color:var(--cream-dim);margin-top:0.25rem">${topBudget > 0 ? '$'+topBudget.toLocaleString()+'/brand/mo' : 'N/A at this budget'}</div>
+    </div>
+    <div class="metric-box" style="border-top:3px solid #f5a623">
+      <div class="label">Growth Tier</div>
+      <div class="value">${growthBrands} brands</div>
+      <div style="font-size:0.75rem;color:var(--cream-dim);margin-top:0.25rem">${growthBudget > 0 ? '$'+growthBudget.toLocaleString()+'/brand/mo' : 'N/A at this budget'}</div>
+    </div>
+    <div class="metric-box" style="border-top:3px solid #42a5f5">
+      <div class="label">Test Tier</div>
+      <div class="value" style="color:#42a5f5">${testBrands} brands</div>
+      <div style="font-size:0.75rem;color:var(--cream-dim);margin-top:0.25rem">${testBudget > 0 ? '$'+testBudget.toLocaleString()+'/brand/mo' : '--'}</div>
+    </div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+
+document.addEventListener('DOMContentLoaded', () => {
+  initSimCharts();
+  updateSim();
+
+  document.getElementById('budgetSlider').addEventListener('input', updateSim);
+  document.getElementById('platformSelect').addEventListener('change', updateSim);
+  document.getElementById('laneSelect').addEventListener('change', updateSim);
+  document.getElementById('fleetBudgetSlider').addEventListener('input', () => {
+    if (window._fleetInit) updateFleet();
+  });
+});
+</script>
+</body>
+</html>
