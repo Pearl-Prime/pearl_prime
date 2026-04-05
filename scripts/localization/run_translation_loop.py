@@ -427,6 +427,27 @@ def discover_atoms(
 
 # ─── ARTIFACTS ───────────────────────────────────────────────────────────────
 
+def _flag_for_review(cfg: dict, file_id: str, locale: str, out_path: Path) -> None:
+    """Flag single-pass translations for owner review.
+
+    All single-pass translations bypass the judge loop and go straight to disk.
+    They are written to a review queue so the owner can personally review them.
+    The translation IS written to disk and usable — but flagged as unreviewed.
+    """
+    review_path = REPO_ROOT / "artifacts" / "localization" / "review_queue.jsonl"
+    review_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(review_path, "a", encoding="utf-8") as f:
+        f.write(json.dumps({
+            "file_id": file_id,
+            "locale": locale,
+            "path": str(out_path),
+            "status": "pending_review",
+            "mode": "single_pass",
+            "flagged_at": datetime.now(timezone.utc).isoformat(),
+            "note": "Single-pass translation — no judge loop. Owner review required.",
+        }, ensure_ascii=False) + "\n")
+
+
 def _write_trace(cfg: dict, trace: LoopTrace) -> None:
     base = REPO_ROOT / cfg.get("artifact_trace", {}).get("base_path", "artifacts/localization/translation_loop")
     d = base / trace.file_id / f"loop_{trace.loop_index}"
@@ -549,7 +570,7 @@ def run_file_loop(
             tts_ok = False
             logger.warning("TTS check: translation identical to source: %s", file_id)
 
-        decision = "pass" if tts_ok else "tts_fail"
+        decision = "pass_pending_review" if tts_ok else "tts_fail"
         traces.append(LoopTrace(
             file_id=file_id, locale=locale, loop_index=1,
             draft_hash=hashlib.sha256(translation.encode()).hexdigest()[:16],
@@ -557,6 +578,10 @@ def run_file_loop(
             hard_gates_passed=tts_ok, decision=decision, timestamp_utc=ts,
         ))
         _write_trace(cfg, traces[-1])
+
+        # Single-pass translations are flagged for owner review
+        if tts_ok:
+            _flag_for_review(cfg, file_id, locale, out_path)
 
     else:
         # ── JUDGE-LOOP MODE (--judge-loop) ────────────────────────────
@@ -644,11 +669,13 @@ def run_file_loop(
     )
 
     # Write output
-    if final_decision == "pass":
-        # Use best-scoring translation
+    if final_decision in ("pass", "pass_pending_review"):
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(best_translation, encoding="utf-8")
-        logger.info("PASS: %s (score=%.3f, loops=%d)", file_id, best_score, len(traces))
+        if final_decision == "pass_pending_review":
+            logger.info("WRITTEN (pending owner review): %s → %s", file_id, out_path)
+        else:
+            logger.info("PASS: %s (score=%.3f, loops=%d)", file_id, best_score, len(traces))
     elif final_decision == "manual_review":
         # Still write best translation but flag for review
         out_path.parent.mkdir(parents=True, exist_ok=True)
