@@ -10,15 +10,7 @@
 html,body{width:100%;height:100vh;font-family:"DM Sans",sans-serif;background:#0e0a06;color:#faf6f0;overflow:hidden}
 :root{--acc:#b45309;--acc2:#d97706;--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace}
 
-/* Top nav */
-.topnav{position:fixed;top:0;left:0;right:0;height:34px;background:rgba(14,10,6,.96);border-bottom:1px solid rgba(180,83,9,.1);display:flex;align-items:center;padding:0 14px;gap:10px;z-index:100;backdrop-filter:blur(8px)}
-.topnav .logo{font-family:var(--serif);font-size:.8rem;font-weight:300;color:var(--acc2);cursor:pointer;text-decoration:none}
-.topnav .sep{width:1px;height:14px;background:rgba(180,83,9,.15)}
-.topnav a{font-family:var(--mono);font-size:.4rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,246,240,.3);text-decoration:none;padding:3px 7px;border-radius:3px;transition:all .15s}
-.topnav a:hover{color:rgba(250,246,240,.7);background:rgba(180,83,9,.08)}
-.topnav a.active{color:var(--acc2);background:rgba(180,83,9,.1)}
-
-.layout{display:flex;height:100vh;padding-top:34px}
+.layout{display:flex;height:100vh;padding-top:36px}
 
 /* Sidebar */
 .sidebar{width:200px;min-width:200px;background:rgba(0,0,0,.3);border-right:1px solid rgba(180,83,9,.1);display:flex;flex-direction:column;overflow-y:auto}
@@ -33,8 +25,10 @@ html,body{width:100%;height:100vh;font-family:"DM Sans",sans-serif;background:#0
 .nav-item .count{margin-left:auto;font-family:var(--mono);font-size:.4rem;color:rgba(250,246,240,.15)}
 .nav-item.active .name{color:var(--acc2)}
 
-/* Main */
+/* Main scrollable panel */
 .main{flex:1;overflow-y:auto;padding:24px 32px}
+
+/* Section 1: Teacher header/bio */
 .teacher-header{margin-bottom:20px}
 .teacher-header h2{font-family:var(--serif);font-size:1.8rem;font-weight:300;color:#f5d0a9}
 .teacher-header .meta{font-family:var(--mono);font-size:.5rem;letter-spacing:.07em;color:rgba(250,246,240,.2);margin-top:3px}
@@ -47,7 +41,7 @@ html,body{width:100%;height:100vh;font-family:"DM Sans",sans-serif;background:#0
 .stat .num{font-family:var(--mono);font-size:1.2rem;color:var(--acc2)}
 .stat .lbl{font-family:var(--mono);font-size:.38rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,246,240,.18);margin-top:1px}
 
-/* Pearl News style samples */
+/* Section 2: Pearl News samples */
 .samples{margin-top:16px}
 .samples h3{font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px}
 .sample-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
@@ -63,12 +57,47 @@ html,body{width:100%;height:100vh;font-family:"DM Sans",sans-serif;background:#0
 .audio-slot .text{font-size:.65rem;color:rgba(250,246,240,.25)}
 
 /* Actions */
-.actions{margin-top:18px;display:flex;gap:8px}
+.actions{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
 .btn{font-family:var(--mono);font-size:.55rem;letter-spacing:.05em;text-transform:uppercase;padding:8px 20px;border-radius:4px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;border:none}
 .btn-primary{background:var(--acc);color:#faf6f0}
 .btn-primary:hover{background:var(--acc2)}
 .btn-secondary{background:transparent;color:var(--acc2);border:1px solid rgba(180,83,9,.25)}
 .btn-secondary:hover{border-color:var(--acc2)}
+
+/* Section divider */
+.section-divider{margin:28px 0;border:none;border-top:1px solid rgba(180,83,9,.08)}
+
+/* Section 3: Cover cards grid */
+.covers-section h3{font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px}
+.cover-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.cover-card{aspect-ratio:3/4;border-radius:8px;border:1px solid rgba(180,83,9,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:transform .2s;cursor:pointer;overflow:hidden}
+.cover-card:hover{transform:scale(1.02)}
+.cover-card img{width:100%;height:160px;object-fit:cover;border-radius:6px}
+.cover-card .cover-icon{font-family:var(--mono);font-size:.9rem;font-weight:700;color:#f5e6c8;letter-spacing:.1em}
+.cover-card .cover-label{font-family:var(--serif);font-size:.95rem;color:#f5e6c8;text-align:center;padding:0 10px}
+.cover-card .cover-subtitle{font-family:var(--mono);font-size:.6rem;color:rgba(250,246,240,.25)}
+
+/* Section 4: Book reader */
+.book-section{margin-top:8px}
+.book-reader-toggle{background:rgba(255,255,255,.03);border:1px solid rgba(180,83,9,.1);border-radius:8px;padding:12px 20px;cursor:pointer;font-family:var(--mono);font-size:.75rem;color:var(--acc2);transition:all .2s;margin-bottom:4px}
+.book-reader-toggle:hover{background:rgba(180,83,9,.06)}
+.toggle-icon{font-family:var(--mono);margin-right:8px;font-weight:700}
+.book-reader{border:1px solid rgba(180,83,9,.08);border-radius:0 0 8px 8px;overflow:hidden;margin-bottom:24px}
+.book-content{max-height:500px;overflow-y:auto;padding:32px 40px;background:rgba(0,0,0,.2);font-family:var(--serif);font-size:1.05rem;line-height:1.8;color:#f5e6c8}
+.book-content p{margin-bottom:.6em;text-indent:0}
+.book-content h3.chapter-heading{font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--acc2);margin:2em 0 .8em;padding-top:1em;border-top:1px solid rgba(180,83,9,.08)}
+.book-content h3.pre-intro-heading{font-family:var(--serif);font-size:1.2rem;font-weight:500;color:rgba(250,246,240,.4);margin-bottom:1em;font-style:italic}
+.book-content br{display:block;height:.3em}
+.book-content::-webkit-scrollbar{width:8px}
+.book-content::-webkit-scrollbar-track{background:rgba(0,0,0,.2)}
+.book-content::-webkit-scrollbar-thumb{background:rgba(180,83,9,.15);border-radius:4px}
+.book-content::-webkit-scrollbar-thumb:hover{background:rgba(180,83,9,.3)}
+.book-loading{padding:24px;text-align:center;font-family:var(--mono);font-size:.7rem;color:rgba(250,246,240,.2)}
+
+@media(max-width:700px){
+  .sidebar{display:none}
+  .cover-grid{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
 <body>
@@ -78,7 +107,6 @@ html,body{width:100%;height:100vh;font-family:"DM Sans",sans-serif;background:#0
 <span style="width:1px;height:14px;background:rgba(180,83,9,.2);flex-shrink:0"></span>
 <a href="pearl_prime_entry.html" class="unav" data-i18n="nav.markets">Markets</a>
 <a href="teacher_select.html" class="unav" data-i18n="nav.teachers">Teachers</a>
-<a href="teacher_showcase.html" class="unav" data-i18n="nav.showcase">Showcase</a>
 <a href="presenter.html?deck=intro" class="unav" data-i18n="nav.intro">Intro</a>
 <a href="marketing_dashboard.html" class="unav" data-i18n="nav.marketing">Marketing</a>
 <a href="market_lane_matrix.html" class="unav" data-i18n="nav.matrix">Matrix</a>
@@ -88,12 +116,6 @@ html,body{width:100%;height:100vh;font-family:"DM Sans",sans-serif;background:#0
 <div style="height:36px"></div>
 <script src="assets/i18n.js"></script>
 <!-- /Universal Nav -->
-
-
-
-
-<!-- Top Nav -->
-
 
 <div class="layout">
 <div class="sidebar">
@@ -106,90 +128,120 @@ html,body{width:100%;height:100vh;font-family:"DM Sans",sans-serif;background:#0
 <script>
 const T=[
 {id:"ahjan",name:"Ahjan",icon:"\u2728",brand:"Inner Light Press",tradition:"Theravada Buddhist",focus:"Meditation, mindfulness, inner peace, spiritual illumination",total:136,topics:["anxiety","burnout","depression","self_worth","somatic_healing"],
+  brandColor:"#F5A623",brandDark:"#4A2C00",initials:"OM",brandJp:"\u5185\u306A\u308B\u5149\u51FA\u7248",words:"10,120",
+  covers:[{img:"assets/covers/cover_ahjan_anxiety.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:null,icon:"MANGA",label:"Manga Edition"}],
   news:[
     {topic:"Mental Health",attr:"From within the Theravada Buddhist tradition, Ajahn Ahjan teaches that",body:"the teaching of dukkha is consistently mistranslated as suffering; more precisely it describes the structural unsatisfactoriness of grasping. For Gen Z, who were told that achievement and security would follow a predictable path and have found that path broken, this teaching names an experience they have but no culturally legible language for."},
     {topic:"Education",attr:"Ajahn Ahjan teaches that",body:"mindfulness in its original context was not a wellness product; it was a practice for seeing how the mind generates and sustains its own distress, and for developing the capacity to interrupt that process. Young people who feel they have failed at mindfulness because it did not relieve their anxiety have been given the tool without the philosophy that makes the tool work."},
     {topic:"Self-Inquiry",attr:"The Theravada tradition holds that",body:"the Buddhist teaching of kalama\u2014investigate for yourself, do not accept from authority alone\u2014is a direct antidote to the crisis of institutional trust. The tradition does not ask for compliance; it asks for discernment."}
   ]},
 {id:"adi_da",name:"Adi Da",icon:"\uD83D\uDD25",brand:"Awakening Press",tradition:"Radical Devotion",focus:"Spiritual awakening, radical self-inquiry, devotional practice",total:160,topics:["self_worth","courage","boundaries","depression","grief"],
+  brandColor:"#E74C3C",brandDark:"#2C0000",initials:"AW",brandJp:"\u899A\u9192\u51FA\u7248",words:"14,025",
+  covers:[{img:"assets/covers/cover_adi_da_self_worth.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:null,icon:"MANGA",label:"Manga Edition"}],
   news:[
     {topic:"Self-Worth",attr:"In the tradition of radical devotion, Adi Da teaches that",body:"you are not broken. You are contracted. The difference matters. Broken implies something needs to be fixed. Contracted means something needs to be seen. The seeing itself is the release. This reframe moves the locus of inquiry from personal failure to a structural pattern that can be observed and released."},
-    {topic:"Boundaries",attr:"Adi Da's teaching holds that",body:"the separate self is a gesture, not a thing. It arises in each moment as contraction. In relationship, you feel the moment when it activates. Someone does not respond as you hoped, and contraction comes. If you do not reinforce that emergence, it dissipates."},
+    {topic:"Boundaries",attr:"Adi Da\u2019s teaching holds that",body:"the separate self is a gesture, not a thing. It arises in each moment as contraction. In relationship, you feel the moment when it activates. Someone does not respond as you hoped, and contraction comes. If you do not reinforce that emergence, it dissipates."},
     {topic:"Depression",attr:"From within the devotional tradition,",body:"what people call practice is the self recognizing its unity with what is prior. The contraction is not a failure. It is the starting point of honest seeing. Peace was not absent. It was obscured by the effort to find it."}
   ]},
 {id:"joshin",name:"Joshin",icon:"\uD83C\uDF3F",brand:"Stillpoint Press",tradition:"Zen Buddhist",focus:"Presence, simplicity, direct experience",total:83,topics:["overthinking","anxiety","burnout","sleep_anxiety"],
+  brandColor:"#4E7A51",brandDark:"#1A2E1B",initials:"SF",brandJp:"\u9759\u5BC2\u306E\u68EE",words:"4,799",
+  covers:[{img:"assets/covers/cover_joshin_anxiety.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:"assets/manga_covers/joshin_cover_anxiety.png",label:"Manga Edition"}],
   news:[
     {topic:"Overthinking",attr:"From within the Zen tradition, Joshin teaches that",body:"the stories your mind creates about your failures are like reflections in a mirror. They appear and disappear. But the awareness itself\u2014the mirror\u2014remains unchanged. This is returning. Not stopping the reflections, but remembering: I am the mirror, not the image."},
-    {topic:"Anxiety",attr:"Joshin's Zen teaching holds that",body:"shoshin\u2014beginner's mind\u2014is not humility as virtue; it is a specific cognitive practice of approaching each situation without the overlay of how it was last time. For young people whose anxiety is partly produced by comparing their present to an imagined future, shoshin is a practical interrupt, not a spiritual aspiration."},
+    {topic:"Anxiety",attr:"Joshin\u2019s Zen teaching holds that",body:"shoshin\u2014beginner\u2019s mind\u2014is not humility as virtue; it is a specific cognitive practice of approaching each situation without the overlay of how it was last time. For young people whose anxiety is partly produced by comparing their present to an imagined future, shoshin is a practical interrupt, not a spiritual aspiration."},
     {topic:"Burnout",attr:"The Zen tradition teaches that",body:"sit down and shut up is not aggression. It is the kindest instruction anyone ever gave you. Your mind has been running the show long enough. The grasping loosened\u2014not because the object changed, but because the hand noticed it was gripping."}
   ]},
 {id:"junko",name:"Junko",icon:"\uD83C\uDF38",brand:"Resilience Press",tradition:"Zen Buddhist",focus:"Endurance, quiet strength, perseverance",total:83,topics:["burnout","imposter_syndrome","courage","financial_stress"],
+  brandColor:"#1ABC9C",brandDark:"#0A2E28",initials:"ZC",brandJp:"\u7985\u306E\u660E\u6670",words:"8,872",
+  covers:[{img:"assets/covers/cover_junko_overthinking.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:"assets/manga_covers/junko_cover_sleep_anxiety.png",label:"Manga Edition"}],
   news:[
     {topic:"Mental Health",attr:"From within the Zen Buddhist tradition, Junko teaches that",body:"the Japanese concept of ma\u2014the meaningful pause, the productive empty space\u2014is absent from most digital youth culture, where silence is experienced as failure to engage. The teaching on ma is not about disconnecting from technology; it is about developing the capacity to be present in the gap between stimulus and response, which is where choice lives."},
     {topic:"Imposter Syndrome",attr:"Junko teaches that",body:"impermanence is not a threat. It is the very condition that makes love possible. Nothing that lasted forever would need to be cherished. She stopped rehearsing and started moving. The body knew what the mind kept debating."},
-    {topic:"Courage",attr:"In the Zen tradition,",body:"Yuki sits at the kitchen table before dawn, watching her hands tremble. The anxiety about the presentation is three hours away. She doesn't try to steady herself. Just looks at her knuckles. Somewhere in the last three minutes, she stopped arguing with it."}
+    {topic:"Courage",attr:"In the Zen tradition,",body:"Yuki sits at the kitchen table before dawn, watching her hands tremble. The anxiety about the presentation is three hours away. She doesn\u2019t try to steady herself. Just looks at her knuckles. Somewhere in the last three minutes, she stopped arguing with it."}
   ]},
-{id:"maat",name:"Ma'at",icon:"\u2696\uFE0F",brand:"Truth Scales Press",tradition:"Egyptian Mystery",focus:"Truth-telling, ethical alignment, balance",total:83,topics:["boundaries","self_worth","social_anxiety","courage"],
+{id:"maat",name:"Ma\u2019at",icon:"\u2696\uFE0F",brand:"Truth Scales Press",tradition:"Egyptian Mystery",focus:"Truth-telling, ethical alignment, balance",total:83,topics:["boundaries","self_worth","social_anxiety","courage"],
+  brandColor:"#F39C12",brandDark:"#3D2500",initials:"TC",brandJp:"\u771F\u5B9F\u306E\u7F85\u91DD\u76E4",words:"10,162",
+  covers:[{img:"assets/covers/cover_maat_boundaries.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:null,icon:"MANGA",label:"Manga Edition"}],
   news:[
-    {topic:"Truth & Balance",attr:"From within the Egyptian mystery tradition, Ma'at teaches that",body:"when a soul approaches judgment, the heart is weighed against the feather of truth. This is not a judgment about morality. This is physics. Truth has a particular weight. Deception has another. When they balance, the system is in harmony."},
-    {topic:"Shame",attr:"Ma'at's teaching holds that",body:"shame\u2014which is secrecy\u2014feels so heavy because the hidden thing adds mass to the heart. But truth spoken aloud, even hard truth, lightens the load. Because truth aligns you with the cosmic order itself. And that alignment brings peace, not punishment."},
+    {topic:"Truth & Balance",attr:"From within the Egyptian mystery tradition, Ma\u2019at teaches that",body:"when a soul approaches judgment, the heart is weighed against the feather of truth. This is not a judgment about morality. This is physics. Truth has a particular weight. Deception has another. When they balance, the system is in harmony."},
+    {topic:"Shame",attr:"Ma\u2019at\u2019s teaching holds that",body:"shame\u2014which is secrecy\u2014feels so heavy because the hidden thing adds mass to the heart. But truth spoken aloud, even hard truth, lightens the load. Because truth aligns you with the cosmic order itself. And that alignment brings peace, not punishment."},
     {topic:"Boundaries",attr:"The Egyptian tradition teaches that",body:"the defense dropped. Not because it was conquered, but because the thing being defended turned out to be a fiction. Truth is not what you believe. Truth is what remains when every belief has been tested and released."}
   ]},
 {id:"master_feung",name:"Master Feung",icon:"\u26A1",brand:"Vitality Path",tradition:"Taoist",focus:"Energy management, vitality, life force balance",total:83,topics:["burnout","somatic_healing","courage","self_worth"],
+  brandColor:"#2ECC71",brandDark:"#0A3D1E",initials:"VP",brandJp:"\u6D3B\u529B\u306E\u9053",words:"8,614",
+  covers:[{img:"assets/covers/cover_master_feung_burnout.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:null,icon:"MANGA",label:"Manga Edition"}],
   news:[
     {topic:"Economy & Work",attr:"From within the Taoist tradition, Master Feung teaches that",body:"Wei sits at her desk, shoulders rising toward her ears. Three hours into email responses and her breath lives only in her throat. She does not notice her chest is locked. The tension in her shoulders reveals itself not as stress, but as held energy with nowhere to flow."},
     {topic:"Burnout",attr:"Master Feung teaches that",body:"the mountain does not try to be still. Stillness is its nature. Your restlessness is learned. Unlearn it and discover what was always underneath. Energy flows where attention goes\u2014the question is where you are directing yours."},
     {topic:"Somatic Healing",attr:"The Taoist tradition holds that",body:"the body already knows how to heal. The practice is not to add something but to remove the obstruction. When Wei stops trying to make it change, she discovers she is the one holding herself this tight."}
   ]},
 {id:"master_sha",name:"Master Sha",icon:"\uD83D\uDD2E",brand:"Quantum Healing Press",tradition:"Soul Mind Body",focus:"Vibrational healing, soul power",total:83,topics:["somatic_healing","depression","grief","anxiety"],
+  brandColor:"#8E44AD",brandDark:"#1A0A22",initials:"SR",brandJp:"\u9B42\u306E\u4FEE\u5FA9",words:"8,492",
+  covers:[{img:"assets/covers/cover_master_sha_grief.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:null,icon:"MANGA",label:"Manga Edition"}],
   news:[
     {topic:"Healing",attr:"From within the Soul Mind Body tradition, Master Sha teaches that",body:"the heart houses the soul. When the heart is blocked, the soul cannot express itself. Every healing begins with opening the heart first. Ming carries deep shame about a mistake that affected someone she loved. She has punished herself with it for years."},
     {topic:"Depression",attr:"Master Sha teaches that",body:"love melts blockages. She placed her hand on her heart and the words stopped being technique. They became truth. Divine energy does not discriminate. It flows to whoever opens the channel. Worthiness is not a prerequisite. Willingness is."},
     {topic:"Grief",attr:"The Soul Mind Body tradition holds that",body:"every cell carries memory. Grief is not only in the mind\u2014it lives in the tissues, the joints, the breath pattern. Healing addresses the whole system, not just the narrative the mind has constructed around the loss."}
   ]},
 {id:"master_wu",name:"Master Wu",icon:"\u26F0\uFE0F",brand:"Mountain Gate Press",tradition:"Shaolin",focus:"Discipline, warrior spirit, embodiment",total:83,topics:["courage","burnout","boundaries","self_worth"],
+  brandColor:"#95A5A6",brandDark:"#1A1A2E",initials:"IW",brandJp:"\u9244\u306E\u610F\u5FD7",words:"6,784",
+  covers:[{img:"assets/covers/cover_master_wu_courage.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:"assets/manga_covers/master_wu_cover_courage.png",label:"Manga Edition"}],
   news:[
-    {topic:"Courage",attr:"From within the Shaolin tradition, Master Wu teaches that",body:"Ling is anxious about a conflict at work. She's been planning her approach for days. The script is tight in her chest. At meditation, her teacher says nothing. Just sits. That night, Ling stops planning. She goes to the meeting and just listens."},
+    {topic:"Courage",attr:"From within the Shaolin tradition, Master Wu teaches that",body:"Ling is anxious about a conflict at work. She\u2019s been planning her approach for days. The script is tight in her chest. At meditation, her teacher says nothing. Just sits. That night, Ling stops planning. She goes to the meeting and just listens."},
     {topic:"Discipline",attr:"Master Wu teaches that",body:"he stopped pushing and the door opened. It had been a pull door the entire time. The way that can be named is not the eternal way. Stop trying to capture it in words and simply walk it. The path reveals itself to the walker."},
-    {topic:"Burnout",attr:"The Shaolin tradition holds that",body:"the hard overcomes through force. The soft overcomes through yielding. Where in your life are you forcing something that wants to be easy? The warrior's greatest strength is knowing when not to fight."}
+    {topic:"Burnout",attr:"The Shaolin tradition holds that",body:"the hard overcomes through force. The soft overcomes through yielding. Where in your life are you forcing something that wants to be easy? The warrior\u2019s greatest strength is knowing when not to fight."}
   ]},
 {id:"miki",name:"Miki",icon:"\uD83C\uDF19",brand:"Gentle Path Press",tradition:"Shinto",focus:"Softness as strength, gentle approach",total:83,topics:["sleep_anxiety","anxiety","compassion_fatigue","overthinking"],
+  brandColor:"#FF6B9D",brandDark:"#3D0020",initials:"GS",brandJp:"\u30B8\u30A7\u30F3\u30FB\u30B9\u30D1\u30FC\u30AF",words:"8,177",
+  covers:[{img:"assets/covers/cover_miki_imposter_syndrome.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:null,icon:"MANGA",label:"Manga Edition"}],
   news:[
-    {topic:"Mental Health",attr:"From within the Shinto tradition, Miki teaches that",body:"connection is not a luxury. It is a biological imperative. Every symptom of disconnection\u2014anxiety, depression, rage\u2014is a signal, not a flaw. Rain on the window. Nana sits with her coffee, watching the drops slide down the glass. The rain doesn't plan its trajectory."},
+    {topic:"Mental Health",attr:"From within the Shinto tradition, Miki teaches that",body:"connection is not a luxury. It is a biological imperative. Every symptom of disconnection\u2014anxiety, depression, rage\u2014is a signal, not a flaw. Rain on the window. Nana sits with her coffee, watching the drops slide down the glass. The rain doesn\u2019t plan its trajectory."},
     {topic:"Compassion Fatigue",attr:"Miki teaches that",body:"attention is the first gift you give yourself. Her attention shifted from the worry to the sensation of her feet on the floor. The worry did not vanish. It lost its monopoly. This is the teaching: not elimination, but proportion."},
     {topic:"Sleep",attr:"The Shinto tradition holds that",body:"nature does not hurry. Find a place near a window. Sit. Notice one thing: a plant, a stone, the sky. Not analyzing. Just watching. The nervous system remembers what the mind has forgotten\u2014that rest is not earned. It is given."}
   ]},
 {id:"omote",name:"Omote",icon:"\uD83C\uDFAD",brand:"Hidden Depth Press",tradition:"Japanese Aesthetics",focus:"Hidden beauty, depth in simplicity",total:83,topics:["self_worth","social_anxiety","imposter_syndrome"],
+  brandColor:"#5DADE2",brandDark:"#0A1E30",initials:"GW",brandJp:"\u7A4F\u3084\u304B\u306A\u6CE2",words:"9,073",
+  covers:[{img:"assets/covers/cover_omote_sleep_anxiety.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:null,icon:"MANGA",label:"Manga Edition"}],
   news:[
     {topic:"Imposter Syndrome",attr:"From within the Japanese aesthetic tradition, Omote teaches that",body:"Akira sits in the boardroom, presenting quarterly results. His jaw is set. His voice is even. Fifteen years perfecting this performance. But today, something beneath the surface cracks. He said what he actually thought instead of what he thought was expected. The room did not collapse."},
     {topic:"Social Anxiety",attr:"Omote teaches that",body:"the mask you show the world is not false. It is incomplete. Wholeness is not removing the mask but knowing when you are wearing one. The practice is not authenticity as performance\u2014it is awareness of the performance itself."},
     {topic:"Self-Worth",attr:"The aesthetic tradition holds that",body:"wabi-sabi\u2014the beauty of imperfection\u2014is not a consolation prize. It is a radical reframe: the crack in the bowl is not damage. It is the place where the light enters. Your so-called flaws are the most interesting thing about you."}
   ]},
 {id:"pamela_fellows",name:"Pamela Fellows",icon:"\uD83C\uDF3B",brand:"Grounded Wisdom Press",tradition:"Somatic",focus:"Body intelligence, grounded presence",total:83,topics:["somatic_healing","anxiety","financial_anxiety","burnout"],
+  brandColor:"#E8B4B8",brandDark:"#2E1418",initials:"BW",brandJp:"\u8EAB\u4F53\u306E\u53E1\u667A",words:"10,487",
+  covers:[{img:"assets/covers/cover_pamela_fellows_anxiety.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:null,icon:"MANGA",label:"Manga Edition"}],
   news:[
-    {topic:"Anxiety",attr:"From within the somatic tradition, Pamela Fellows teaches that",body:"the nervous system learns through safety, not willpower. Sarah sits in her kitchen at 6 AM. Her chest is tight. Coffee grows cold in her hands. For three months, her nervous system has been in constant alert. Her therapist's words return: your nervous system learned something important."},
+    {topic:"Anxiety",attr:"From within the somatic tradition, Pamela Fellows teaches that",body:"the nervous system learns through safety, not willpower. Sarah sits in her kitchen at 6 AM. Her chest is tight. Coffee grows cold in her hands. For three months, her nervous system has been in constant alert. Her therapist\u2019s words return: your nervous system learned something important."},
     {topic:"Trauma",attr:"Pamela Fellows teaches that",body:"trauma is not what happened to you. It is what happened inside you as a result. This distinction returns agency to the one who felt they had none. The body keeps the score\u2014and the body also keeps the remedy."},
     {topic:"Somatic Healing",attr:"The somatic tradition holds that",body:"her nervous system downshifted. Not because the danger passed, but because her body finally registered that the danger was not present. Are you creating safety or demanding performance? The answer lives in your body, not your mind."}
   ]},
 {id:"ra",name:"Ra",icon:"\u2600\uFE0F",brand:"Solar Press",tradition:"African Spiritual",focus:"Clarity, vision, transformative light",total:83,topics:["depression","courage","self_worth","grief"],
+  brandColor:"#3498DB",brandDark:"#0A1D30",initials:"CE",brandJp:"\u30B3\u30BA\u30DF\u30C3\u30AF\u30FB\u30A8\u30C3\u30B8",words:"8,894",
+  covers:[{img:"assets/covers/cover_ra_imposter_syndrome.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:null,icon:"MANGA",label:"Manga Edition"}],
   news:[
     {topic:"Depression",attr:"From within the African spiritual tradition, Ra teaches that",body:"Kenji is a high school teacher. Twelve years and very good at what he does. But for six months, increasingly anxious. Cannot sleep. Cannot eat. His mind spins with catastrophic thoughts. The witness emerged. Not as a new arrival, but as the recognition of what had been watching all along."},
     {topic:"Courage",attr:"Ra teaches that",body:"you are not a human having a spiritual experience. You are awareness wearing a human costume. The costume is temporary. What wears it is not. The witness is never harmed. What watches the pain?"},
     {topic:"Grief",attr:"The African spiritual tradition holds that",body:"grief is not the absence of the beloved. It is the presence of love with nowhere to land. The practice is not to fill the empty space but to let the love expand until it includes the absence itself."}
   ]},
 {id:"sai_ma",name:"Sai Ma",icon:"\uD83D\uDC9A",brand:"Healing Ground Press",tradition:"Vedic Hindu",focus:"Grief integration, emotional healing, compassion",total:83,topics:["grief","compassion_fatigue","depression","boundaries"],
+  brandColor:"#9B59B6",brandDark:"#2D1A36",initials:"HG",brandJp:"\u7652\u3057\u306E\u5927\u5730\u51FA\u7248",words:"10,004",
+  covers:[{img:"assets/covers/cover_sai_ma_grief.png",label:"Pocket Guide"},{img:null,icon:"AUDIO",label:"Audiobook"},{img:null,icon:"MANGA",label:"Manga Edition"}],
   news:[
     {topic:"Mental Health",attr:"From within the Vedic tradition, Sai Maa teaches that",body:"Vedic understanding of prana\u2014life force\u2014teaches that mental health is not a state to be achieved but a dynamic flow to be maintained. For young people experiencing burnout, the tradition asks not what is wrong with you but where is the flow obstructed, and what is obstructing it."},
-    {topic:"Self-Study",attr:"Sai Maa teaches that",body:"the practice of svadhyaya\u2014self-study, the disciplined examination of one's own patterns, reactions, and inherited scripts\u2014is a Vedic antecedent to what clinical psychology now calls metacognition. Young people told to be more self-aware without tools find in svadhyaya a structured practice."},
+    {topic:"Self-Study",attr:"Sai Maa teaches that",body:"the practice of svadhyaya\u2014self-study, the disciplined examination of one\u2019s own patterns, reactions, and inherited scripts\u2014is a Vedic antecedent to what clinical psychology now calls metacognition. Young people told to be more self-aware without tools find in svadhyaya a structured practice."},
     {topic:"Grief",attr:"The Vedic tradition holds that",body:"the lotus opened not because conditions were perfect, but because it was time. The mud did not prevent the blooming. What would happen if you treated yourself with the love you give to someone you deeply cherish?"}
   ]}
 ];
 
+// Book content cache
+const bookCache={};
 let cur=T[0].id;
 
 function init(){
   const nav=document.getElementById("sidebar-nav");
   nav.innerHTML=T.map(t=>`<div class="nav-item${t.id===cur?' active':''}" onclick="show('${t.id}')" id="nav-${t.id}"><span class="icon">${t.icon}</span><span class="name">${t.name}</span><span class="count">${t.total}</span></div>`).join("");
+  // Check hash for deep link
+  if(location.hash){const h=location.hash.slice(1);if(T.find(x=>x.id===h))cur=h;}
   show(cur);
 }
 
@@ -197,17 +249,30 @@ function show(id){
   cur=id;
   document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));
   const el=document.getElementById("nav-"+id);
-  if(el)el.classList.add("active");
+  if(el){el.classList.add("active");el.scrollIntoView({block:"nearest"});}
 
   const t=T.find(x=>x.id===id);
   if(!t)return;
   const m=document.getElementById("main-content");
+  m.scrollTop=0;
 
+  // News cards
   const cards=t.news.map(n=>`<div class="sample-card"><div class="topic-label"><span class="dot"></span>${n.topic}</div><div class="attribution">${n.attr}</div><div class="body">${n.body}</div></div>`).join("");
 
+  // Topic tags
   const tags=t.topics.map(tp=>`<span style="font-family:var(--mono);font-size:.4rem;letter-spacing:.05em;padding:2px 6px;border-radius:3px;border:1px solid rgba(180,83,9,.12);color:rgba(250,246,240,.3)">${tp.replace(/_/g," ")}</span>`).join(" ");
 
+  // Cover cards
+  const coverCards=t.covers.map(c=>{
+    const bg=`background:linear-gradient(135deg,${t.brandColor}22,${t.brandDark}88)`;
+    const inner=c.img
+      ?`<img src="${c.img}" alt="${t.name} cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px"><div class="cover-label">${t.brand}</div><div class="cover-subtitle">${c.label}</div>`
+      :`<div class="cover-icon">${c.icon||""}</div><div class="cover-label">${t.brand}</div><div class="cover-subtitle">${c.label}</div>`;
+    return `<div class="cover-card" style="${bg}">${inner}</div>`;
+  }).join("");
+
   m.innerHTML=`
+    <!-- Section 1: Teacher Bio & Stats -->
     <div class="teacher-header">
       <h2>${t.icon} ${t.name}</h2>
       <div class="meta">${t.brand} \u00B7 ${t.tradition} \u00B7 ${t.total} approved atoms</div>
@@ -218,7 +283,10 @@ function show(id){
       <div class="stat"><div class="num">6</div><div class="lbl" data-i18n="teacher.stat.types">Types</div></div>
       <div class="stat"><div class="num">${t.topics.length}</div><div class="lbl" data-i18n="teacher.stat.topics">Topics</div></div>
       <div class="stat"><div class="num">${t.news.length}</div><div class="lbl" data-i18n="teacher.stat.news">News Articles</div></div>
+      <div class="stat"><div class="num">${t.words}</div><div class="lbl">Book Words</div></div>
     </div>
+
+    <!-- Section 2: Pearl News Samples -->
     <div class="samples">
       <h3 data-i18n="teacher.samples.heading">Pearl News \u2014 Teaching Samples</h3>
       <div class="sample-cards">${cards}</div>
@@ -229,9 +297,73 @@ function show(id){
     </div>
     <div class="actions">
       <a class="btn btn-primary" href="presenter.html?deck=intro&teacher=${t.id}" data-i18n="teacher.btn.briefing">Briefing</a>
-      <a class="btn btn-secondary" href="teacher_showcase.html#${t.id}" data-i18n="teacher.btn.profile">Full Profile</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- Section 3: Book Covers -->
+    <div class="covers-section">
+      <h3>Book Covers &amp; Formats</h3>
+      <div class="cover-grid">${coverCards}</div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- Section 4: Book Reader -->
+    <div class="book-section">
+      <div class="book-reader-toggle" onclick="toggleReader('${t.id}')">
+        <span class="toggle-icon" id="toggle-icon-${t.id}">+</span> Read Book (${t.words} words)
+      </div>
+      <div class="book-reader" id="reader-${t.id}" style="display:none">
+        <div class="book-content" id="book-content-${t.id}">
+          <div class="book-loading">Loading book content...</div>
+        </div>
+      </div>
     </div>`;
+
   if(window.i18n)window.i18n.applyTranslations();
+}
+
+function toggleReader(teacherId){
+  const reader=document.getElementById("reader-"+teacherId);
+  const icon=document.getElementById("toggle-icon-"+teacherId);
+  if(reader.style.display==="none"){
+    reader.style.display="block";
+    icon.textContent="\u2212";
+    loadBookContent(teacherId);
+  }else{
+    reader.style.display="none";
+    icon.textContent="+";
+  }
+}
+
+function loadBookContent(teacherId){
+  const container=document.getElementById("book-content-"+teacherId);
+  if(bookCache[teacherId]){
+    container.innerHTML=bookCache[teacherId];
+    return;
+  }
+  fetch("teacher_showcase.html")
+    .then(r=>r.text())
+    .then(html=>{
+      const parser=new DOMParser();
+      const doc=parser.parseFromString(html,"text/html");
+      const section=doc.getElementById(teacherId);
+      if(section){
+        const bookEl=section.querySelector(".book-content");
+        if(bookEl){
+          bookCache[teacherId]=bookEl.innerHTML;
+          container.innerHTML=bookEl.innerHTML;
+        }else{
+          container.innerHTML='<div class="book-loading">No book content available for this teacher.</div>';
+        }
+      }else{
+        container.innerHTML='<div class="book-loading">No book content available for this teacher.</div>';
+      }
+    })
+    .catch(()=>{
+      container.innerHTML='<div class="book-loading">Could not load book content.</div>';
+    });
 }
 
 init();

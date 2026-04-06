@@ -412,6 +412,13 @@ body {
 </style>
 </head>
 <body>
+<script>
+// Redirect to unified teacher page — teacher_select.html now includes showcase content
+(function(){
+  var hash = window.location.hash || '';
+  window.location.replace('teacher_select.html' + hash);
+})();
+</script>
 <!-- Phoenix Command Universal Nav -->
 <nav data-nav="universal" style="position:fixed;top:0;left:0;right:0;height:36px;background:rgba(14,10,6,.97);border-bottom:1px solid rgba(180,83,9,.12);display:flex;align-items:center;padding:0 14px;gap:8px;z-index:9999;backdrop-filter:blur(8px);font-family:'DM Sans',sans-serif;overflow-x:auto">
 <a href="pearl_prime_entry.html" style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#d97706;text-decoration:none;white-space:nowrap" data-i18n="nav.brand">Pearl Prime</a>

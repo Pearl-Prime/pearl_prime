@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pearl Prime — Marketing Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/icons.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   :root {
     --bg-primary: #0e0a06;
     --bg-secondary: rgba(255,255,255,.03);
     --bg-tertiary: rgba(255,255,255,.05);
-    --bg-card: rgba(255,255,255,.03);
+    --bg-card: rgba(14,10,6,.6);
     --amber: #d97706;
     --amber-bright: #f59e0b;
     --amber-dim: #b45309;
@@ -27,6 +28,8 @@
     --font-body: 'DM Sans', sans-serif;
     --font-heading: 'Cormorant Garamond', serif;
     --font-mono: 'DM Mono', monospace;
+    --serif: 'Cormorant Garamond', serif;
+    --mono: 'DM Mono', monospace;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -35,232 +38,409 @@
     font-family: var(--font-body);
     line-height: 1.5;
   }
-  header {
-    background: linear-gradient(135deg, rgba(180,83,9,.06) 0%, rgba(14,10,6,1) 100%);
+
+  /* ── Page header ─────────────────────────────────── */
+  .dash-header {
+    padding: 2rem 2rem 1.2rem;
     border-bottom: 1px solid var(--border);
-    padding: 1rem 2rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+  }
+  .dash-header-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 300;
+    color: var(--amber);
+    letter-spacing: .02em;
+  }
+  .dash-header-sub {
+    font-family: var(--font-mono);
+    font-size: .5rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(250,246,240,.25);
+    padding-bottom: .2rem;
+  }
+
+  /* ── Tab navigation ──────────────────────────────── */
+  .dash-tabs {
+    display: flex;
+    gap: .5rem;
+    padding: .8rem 2rem;
+    border-bottom: 1px solid rgba(180,83,9,.08);
+    overflow-x: auto;
+    background: rgba(255,255,255,.015);
+  }
+  .dash-tab {
+    font-family: var(--font-mono);
+    font-size: .42rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: .25rem .7rem;
+    border: 1px solid rgba(180,83,9,.12);
+    border-radius: 1px;
+    background: transparent;
+    color: rgba(250,246,240,.3);
+    cursor: pointer;
+    transition: all .18s;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+  }
+  .dash-tab:hover {
+    border-color: rgba(180,83,9,.3);
+    color: rgba(250,246,240,.6);
+    background: rgba(180,83,9,.04);
+  }
+  .dash-tab.active {
+    background: rgba(180,83,9,.1);
+    border-color: rgba(180,83,9,.3);
+    color: var(--amber);
+  }
+  .dash-tab .pp-icon { --icon-size: 14px; }
+  .dash-tab.active .pp-icon svg { stroke: var(--amber); }
+
+  /* ── Content area ────────────────────────────────── */
+  .tab-content { display: none; padding: 1.5rem 2rem; max-width: 1600px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  /* ── KPI metrics row ─────────────────────────────── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: .75rem;
+    margin-bottom: 1.5rem;
+  }
+  .kpi-card {
+    background: rgba(14,10,6,.6);
+    border: 1px solid rgba(180,83,9,.1);
+    border-radius: 4px;
+    padding: .8rem .6rem;
+    text-align: center;
+    transition: border-color .2s, background .2s;
+  }
+  .kpi-card:hover {
+    border-color: rgba(180,83,9,.25);
+    background: rgba(180,83,9,.04);
+  }
+  .kpi-val {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--amber);
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+  .kpi-val.good { color: var(--green); }
+  .kpi-val.warn { color: var(--yellow); }
+  .kpi-val.bad { color: var(--red); }
+  .kpi-lbl {
+    font-family: var(--font-mono);
+    font-size: .38rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(250,246,240,.25);
+    margin-top: .3rem;
+  }
+
+  /* ── Section card ────────────────────────────────── */
+  .dash-card {
+    background: rgba(14,10,6,.6);
+    border: 1px solid rgba(180,83,9,.1);
+    border-radius: 4px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    transition: border-color .2s;
+  }
+  .dash-card:hover { border-color: rgba(180,83,9,.2); }
+  .dash-card-head {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: .5rem;
+    margin-bottom: .8rem;
   }
-  header .logo {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: var(--amber);
-    letter-spacing: 1px;
-  }
-  header .subtitle {
-    color: var(--text-medium);
-    font-size: 0.85rem;
+  .dash-card-head .pp-icon { --icon-size: 20px; }
+  .dash-card-head .pp-icon svg { stroke: var(--amber); }
+  .dash-card-title {
     font-family: var(--font-mono);
-    font-weight: 300;
-  }
-  nav#nav {
-    background: rgba(255,255,255,.02);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    gap: 0;
-    overflow-x: auto;
-  }
-  nav#nav button {
-    background: none;
-    border: none;
-    color: var(--text-dim);
-    padding: 0.75rem 1.5rem;
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-family: var(--font-mono);
-    letter-spacing: .05em;
+    font-size: .5rem;
+    letter-spacing: .08em;
     text-transform: uppercase;
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
+    color: rgba(250,246,240,.5);
   }
-  nav#nav button:hover { color: var(--text-medium); background: rgba(255,255,255,.03); }
-  nav#nav button.active { color: var(--amber); border-bottom-color: var(--amber); }
-  .tab-content { display: none; padding: 1.5rem; max-width: 1600px; margin: 0 auto; }
-  .tab-content.active { display: block; }
-  .card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem;
-    margin-bottom: 1rem;
-  }
-  .card h3 {
-    font-family: var(--font-heading);
-    color: var(--amber);
-    font-size: 1.05rem;
-    font-weight: 400;
-    margin-bottom: 0.75rem;
-    letter-spacing: 0.3px;
-  }
+
+  /* ── Grid layouts ────────────────────────────────── */
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
-  .metric-box {
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 0.75rem;
-    text-align: center;
+
+  /* ── Controls / form elements ────────────────────── */
+  .controls-row {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
   }
-  .metric-box .label { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.07em; font-family: var(--font-mono); }
-  .metric-box .value { font-size: 1.3rem; font-weight: 500; color: var(--amber); margin-top: 0.25rem; font-variant-numeric: tabular-nums; }
-  .metric-box .value.good { color: var(--green); }
-  .metric-box .value.warn { color: var(--yellow); }
-  .metric-box .value.bad { color: var(--red); }
-  select, input[type="range"] { font-family: var(--font-body); }
+  .control-group { display: flex; flex-direction: column; gap: .3rem; }
+  .control-group label {
+    font-family: var(--font-mono);
+    font-size: .38rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(250,246,240,.25);
+  }
+  .budget-display {
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--amber);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.02em;
+  }
   select {
-    background: rgba(255,255,255,.05);
+    font-family: var(--font-mono);
+    font-size: .5rem;
+    letter-spacing: .04em;
+    background: rgba(255,255,255,.04);
     color: var(--text-high);
-    border: 1px solid var(--border);
-    padding: 0.5rem 0.75rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
+    border: 1px solid rgba(180,83,9,.15);
+    padding: .45rem .6rem;
+    border-radius: 2px;
     cursor: pointer;
+    text-transform: uppercase;
   }
-  select:focus { outline: none; border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber); }
+  select:focus { outline: none; border-color: var(--amber); box-shadow: 0 0 0 1px rgba(217,119,6,.2); }
   input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
-    height: 6px;
-    background: rgba(255,255,255,.08);
-    border-radius: 3px;
+    height: 4px;
+    background: rgba(180,83,9,.15);
+    border-radius: 0;
     outline: none;
-    margin: 0.5rem 0;
+    margin: .5rem 0;
   }
   input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     background: var(--amber);
-    border-radius: 50%;
+    border-radius: 1px;
     cursor: pointer;
+    border: 1px solid rgba(180,83,9,.4);
   }
-  .controls-row {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-  }
-  .control-group { display: flex; flex-direction: column; gap: 0.25rem; }
-  .control-group label { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; font-family: var(--font-mono); letter-spacing: .07em; }
-  .budget-display {
-    font-size: 1.8rem;
-    font-weight: 500;
-    color: var(--amber);
-    font-variant-numeric: tabular-nums;
-    font-family: var(--font-body);
-  }
-  .chart-container { position: relative; height: 300px; margin-top: 0.5rem; }
-  .chart-container.tall { height: 400px; }
 
-  /* Heatmap */
-  .heatmap-grid { display: grid; gap: 2px; font-size: 0.7rem; }
+  /* ── Chart container ─────────────────────────────── */
+  .chart-wrap {
+    position: relative;
+    height: 300px;
+    margin-top: .5rem;
+  }
+  .chart-wrap.tall { height: 400px; }
+
+  /* ── Heatmap ─────────────────────────────────────── */
+  .heatmap-grid { display: grid; gap: 1px; font-size: .65rem; }
   .heatmap-cell {
-    padding: 0.4rem 0.25rem;
+    padding: .35rem .2rem;
     text-align: center;
-    border-radius: 3px;
     cursor: pointer;
-    transition: transform 0.15s;
-    font-size: 0.65rem;
+    transition: opacity .15s;
+    font-size: .5rem;
     line-height: 1.2;
     font-family: var(--font-mono);
+    letter-spacing: .02em;
   }
-  .heatmap-cell:hover { transform: scale(1.05); z-index: 1; }
-  .heatmap-header { background: rgba(255,255,255,.04); color: var(--text-dim); font-weight: 600; cursor: default; font-size: 0.65rem; font-family: var(--font-mono); }
-  .heatmap-header:hover { transform: none; }
-  .heat-strong { background: rgba(76,175,80,.7); color: #fff; }
-  .heat-viable { background: rgba(180,83,9,.5); color: #fff; }
-  .heat-skip { background: rgba(229,57,53,.5); color: rgba(255,255,255,.7); }
-  .heat-weak { background: rgba(255,255,255,.04); color: var(--text-dim); }
+  .heatmap-cell:hover { opacity: .8; }
+  .heatmap-header {
+    background: rgba(180,83,9,.08);
+    color: rgba(250,246,240,.4);
+    font-weight: 400;
+    cursor: default;
+    font-size: .38rem;
+    font-family: var(--font-mono);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(180,83,9,.12);
+  }
+  .heatmap-header:hover { opacity: 1; }
+  .heat-strong { background: rgba(76,175,80,.6); color: rgba(255,255,255,.9); }
+  .heat-viable { background: rgba(180,83,9,.4); color: rgba(255,255,255,.9); }
+  .heat-skip { background: rgba(229,57,53,.4); color: rgba(255,255,255,.6); }
+  .heat-weak { background: rgba(255,255,255,.03); color: var(--text-dim); }
 
-  /* Funnel */
+  /* ── Funnel ──────────────────────────────────────── */
   .funnel { display: flex; flex-direction: column; align-items: center; gap: 0; margin: 1rem 0; }
   .funnel-tier {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
+    gap: .75rem;
+    padding: .7rem;
     color: #fff;
-    font-weight: 600;
-    font-size: 0.85rem;
+    font-weight: 400;
+    font-size: .55rem;
+    font-family: var(--font-mono);
+    letter-spacing: .03em;
     position: relative;
-    clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
-    transition: transform 0.15s;
+    clip-path: polygon(4% 0%, 96% 0%, 100% 100%, 0% 100%);
+    transition: opacity .15s;
   }
-  .funnel-tier:hover { transform: scaleX(1.02); }
+  .funnel-tier:hover { opacity: .85; }
   .funnel-arrow {
     text-align: center;
-    color: var(--text-dim);
-    font-size: 0.7rem;
-    padding: 0.15rem 0;
+    color: rgba(250,246,240,.2);
+    font-size: .42rem;
+    padding: .15rem 0;
     font-family: var(--font-mono);
+    letter-spacing: .06em;
+    text-transform: uppercase;
   }
-  .funnel-detail { font-weight: 400; font-size: 0.75rem; opacity: 0.85; }
+  .funnel-detail { font-weight: 300; font-size: .5rem; opacity: .7; }
 
-  /* Fleet planner */
+  /* ── Phase timeline ──────────────────────────────── */
   .phase-bar {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
-    background: var(--bg-tertiary);
-    border-radius: 6px;
-    margin-bottom: 0.5rem;
-    border-left: 3px solid var(--amber);
+    gap: .75rem;
+    padding: .75rem;
+    background: rgba(14,10,6,.6);
+    border: 1px solid rgba(180,83,9,.08);
+    border-radius: 2px;
+    margin-bottom: .5rem;
+    border-left: 2px solid var(--amber);
   }
-  .phase-bar .phase-label { font-weight: 600; color: var(--amber); min-width: 80px; font-family: var(--font-heading); }
-  .phase-bar .phase-info { font-size: 0.8rem; color: var(--text-medium); }
-  .phase-bar .phase-budget { font-weight: 500; color: var(--text-high); margin-left: auto; font-variant-numeric: tabular-nums; }
+  .phase-bar .phase-label {
+    font-family: var(--font-mono);
+    font-size: .45rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--amber);
+    min-width: 70px;
+  }
+  .phase-bar .phase-info { font-size: .5rem; color: var(--text-medium); font-family: var(--font-mono); letter-spacing: .02em; }
+  .phase-bar .phase-budget {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    color: var(--text-high);
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+    font-size: .55rem;
+  }
 
-  /* Detail modal */
+  /* ── Detail modal ────────────────────────────────── */
   .modal-overlay {
     display: none;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,.75);
     z-index: 1000;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(4px);
   }
   .modal-overlay.show { display: flex; }
   .modal {
     background: #1a1206;
-    border: 1px solid var(--amber-dim);
-    border-radius: 8px;
+    border: 1px solid rgba(180,83,9,.2);
+    border-radius: 4px;
     padding: 1.5rem;
-    max-width: 500px;
+    max-width: 480px;
     width: 90%;
     max-height: 80vh;
     overflow-y: auto;
   }
-  .modal h3 { color: var(--amber); margin-bottom: 0.5rem; font-family: var(--font-heading); font-weight: 400; }
-  .modal p { color: var(--text-medium); font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .modal h3 {
+    font-family: var(--font-mono);
+    font-size: .55rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: .5rem;
+  }
+  .modal p { color: var(--text-medium); font-size: .55rem; margin-bottom: .5rem; line-height: 1.6; }
   .modal .close-btn {
-    background: var(--amber);
-    color: #0e0a06;
+    font-family: var(--font-mono);
+    font-size: .42rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    background: var(--amber-dim);
+    color: #fff;
     border: none;
-    padding: 0.4rem 1rem;
-    border-radius: 4px;
+    padding: .4rem 1rem;
+    border-radius: 2px;
     cursor: pointer;
-    font-weight: 600;
-    margin-top: 0.75rem;
-    font-family: var(--font-body);
+    margin-top: .75rem;
+    transition: background .18s;
+  }
+  .modal .close-btn:hover { background: var(--amber); }
+
+  /* ── Greenfield cards ────────────────────────────── */
+  .greenfield-card {
+    background: rgba(14,10,6,.6);
+    border: 1px solid rgba(180,83,9,.1);
+    border-left: 2px solid var(--green);
+    border-radius: 0 4px 4px 0;
+    padding: 1rem;
+    text-align: left;
+  }
+  .greenfield-card .gf-title {
+    font-family: var(--font-mono);
+    font-size: .45rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: .35rem;
+  }
+  .greenfield-card .gf-desc {
+    font-size: .5rem;
+    color: var(--text-medium);
+    line-height: 1.5;
   }
 
+  /* ── Tier breakdown cards ────────────────────────── */
+  .tier-card {
+    background: rgba(14,10,6,.6);
+    border: 1px solid rgba(180,83,9,.1);
+    border-radius: 4px;
+    padding: .8rem;
+    text-align: center;
+    border-top: 2px solid var(--amber);
+  }
+  .tier-card .kpi-lbl { margin-bottom: .25rem; }
+  .tier-card .tier-detail {
+    font-size: .45rem;
+    color: var(--text-medium);
+    margin-top: .25rem;
+    font-family: var(--font-mono);
+    letter-spacing: .02em;
+  }
+
+  /* ── LTV summary inline cards ────────────────────── */
+  .ltv-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: rgba(14,10,6,.6);
+    border: 1px solid rgba(180,83,9,.1);
+    border-radius: 4px;
+    padding: .6rem 1rem;
+    margin-right: .5rem;
+    margin-top: .5rem;
+  }
+  .ltv-inline .kpi-val { font-size: 1.1rem; }
+  .ltv-inline .kpi-lbl { margin-top: 0; margin-left: .3rem; }
+
+  /* ── Responsive ──────────────────────────────────── */
   @media (max-width: 1024px) {
     .grid-2 { grid-template-columns: 1fr; }
     .grid-3 { grid-template-columns: 1fr; }
-    .grid-4 { grid-template-columns: 1fr 1fr; }
+    .kpi-row { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
   }
   @media (max-width: 640px) {
-    .grid-4 { grid-template-columns: 1fr; }
     .controls-row { flex-direction: column; align-items: stretch; }
+    .tab-content { padding: 1rem; }
+    .dash-tabs { padding: .6rem 1rem; }
+    .kpi-row { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -284,27 +464,47 @@
 <!-- /Universal Nav -->
 
 
-
-
-<header>
+<!-- ── Dashboard header ────────────────────────────── -->
+<div class="dash-header">
   <div>
-    <div class="logo" data-i18n="dashboard.logo">PEARL PRIME</div>
-    <div class="subtitle" data-i18n="dashboard.subtitle">Marketing Intelligence Dashboard &mdash; 312 Brands x 13 Lanes</div>
+    <div class="dash-header-title" data-i18n="dashboard.logo">Pearl Prime</div>
+    <div class="dash-header-sub" data-i18n="dashboard.subtitle">Marketing Intelligence &mdash; 312 Brands &times; 13 Lanes</div>
   </div>
-</header>
+</div>
 
-<nav id="nav">
-  <button class="active" onclick="showTab('sim')" data-i18n="dashboard.tab.sim">Ad Spend Simulator</button>
-  <button onclick="showTab('heatmap')" data-i18n="dashboard.tab.heatmap">Content Heatmap</button>
-  <button onclick="showTab('lanes')" data-i18n="dashboard.tab.lanes">Lane Comparison</button>
-  <button onclick="showTab('funnel')" data-i18n="dashboard.tab.funnel">Value Ladder</button>
-  <button onclick="showTab('fleet')" data-i18n="dashboard.tab.fleet">Fleet Planner</button>
-</nav>
+<!-- ── Tab navigation ──────────────────────────────── -->
+<div class="dash-tabs" id="nav">
+  <button class="dash-tab active" onclick="showTab('sim')">
+    <span data-icon="revenue" class="pp-icon sm"></span>
+    <span data-i18n="dashboard.tab.sim">Ad Spend Simulator</span>
+  </button>
+  <button class="dash-tab" onclick="showTab('heatmap')">
+    <span data-icon="chart" class="pp-icon sm"></span>
+    <span data-i18n="dashboard.tab.heatmap">Content Heatmap</span>
+  </button>
+  <button class="dash-tab" onclick="showTab('lanes')">
+    <span data-icon="market" class="pp-icon sm"></span>
+    <span data-i18n="dashboard.tab.lanes">Lane Comparison</span>
+  </button>
+  <button class="dash-tab" onclick="showTab('funnel')">
+    <span data-icon="funnel" class="pp-icon sm"></span>
+    <span data-i18n="dashboard.tab.funnel">Value Ladder</span>
+  </button>
+  <button class="dash-tab" onclick="showTab('fleet')">
+    <span data-icon="distribution" class="pp-icon sm"></span>
+    <span data-i18n="dashboard.tab.fleet">Fleet Planner</span>
+  </button>
+</div>
 
 <!-- ═══════════════ TAB 1: AD SPEND SIMULATOR ═══════════════ -->
 <div id="tab-sim" class="tab-content active">
-  <div class="card">
-    <h3 data-i18n="dashboard.tab.sim">Ad Spend Simulator</h3>
+
+  <!-- Controls card -->
+  <div class="dash-card">
+    <div class="dash-card-head">
+      <span data-icon="operations" class="pp-icon"></span>
+      <span class="dash-card-title" data-i18n="dashboard.tab.sim">Ad Spend Simulator</span>
+    </div>
     <div class="controls-row">
       <div class="control-group" style="flex:2">
         <label data-i18n="dashboard.label.budget">Monthly Budget</label>
@@ -345,34 +545,69 @@
     </div>
   </div>
 
-  <div class="grid-4" id="metricsGrid">
-    <div class="metric-box"><div class="label">Monthly Impressions</div><div class="value" id="mImpressions">--</div></div>
-    <div class="metric-box"><div class="label">Monthly Clicks</div><div class="value" id="mClicks">--</div></div>
-    <div class="metric-box"><div class="label">Monthly Conversions</div><div class="value" id="mConversions">--</div></div>
-    <div class="metric-box"><div class="label">Expected Revenue</div><div class="value" id="mRevenue">--</div></div>
-    <div class="metric-box"><div class="label">ROAS</div><div class="value" id="mROAS">--</div></div>
-    <div class="metric-box"><div class="label">CPA</div><div class="value" id="mCPA">--</div></div>
-    <div class="metric-box"><div class="label">Break-Even Month</div><div class="value" id="mBreakEven">--</div></div>
-    <div class="metric-box"><div class="label">Daily Budget</div><div class="value" id="mDaily">--</div></div>
+  <!-- KPI metrics row -->
+  <div class="kpi-row" id="metricsGrid">
+    <div class="kpi-card">
+      <div class="kpi-val" id="mImpressions">--</div>
+      <div class="kpi-lbl">Monthly Impressions</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" id="mClicks">--</div>
+      <div class="kpi-lbl">Monthly Clicks</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" id="mConversions">--</div>
+      <div class="kpi-lbl">Monthly Conversions</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" id="mRevenue">--</div>
+      <div class="kpi-lbl">Expected Revenue</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" id="mROAS">--</div>
+      <div class="kpi-lbl">ROAS</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" id="mCPA">--</div>
+      <div class="kpi-lbl">CPA</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" id="mBreakEven">--</div>
+      <div class="kpi-lbl">Break-Even Month</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" id="mDaily">--</div>
+      <div class="kpi-lbl">Daily Budget</div>
+    </div>
   </div>
 
+  <!-- Charts -->
   <div class="grid-2">
-    <div class="card">
-      <h3 data-i18n="dashboard.roas">ROAS Curve</h3>
-      <div class="chart-container"><canvas id="roasChart"></canvas></div>
+    <div class="dash-card">
+      <div class="dash-card-head">
+        <span data-icon="growth" class="pp-icon"></span>
+        <span class="dash-card-title" data-i18n="dashboard.roas">ROAS Curve</span>
+      </div>
+      <div class="chart-wrap"><canvas id="roasChart"></canvas></div>
     </div>
-    <div class="card">
-      <h3 data-i18n="dashboard.revenue.vs.spend">Revenue vs Spend</h3>
-      <div class="chart-container"><canvas id="revSpendChart"></canvas></div>
+    <div class="dash-card">
+      <div class="dash-card-head">
+        <span data-icon="revenue" class="pp-icon"></span>
+        <span class="dash-card-title" data-i18n="dashboard.revenue.vs.spend">Revenue vs Spend</span>
+      </div>
+      <div class="chart-wrap"><canvas id="revSpendChart"></canvas></div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════ TAB 2: CONTENT HEATMAP ═══════════════ -->
 <div id="tab-heatmap" class="tab-content">
-  <div class="card">
-    <h3 data-i18n="dashboard.heatmap.title">Content Performance Heatmap &mdash; Topic x Brand Strength</h3>
-    <p style="color:var(--text-medium);font-size:0.8rem;margin-bottom:1rem">Click any cell for details. Green = strong market signal. Yellow = viable. Red = skip.</p>
+  <div class="dash-card">
+    <div class="dash-card-head">
+      <span data-icon="chart" class="pp-icon"></span>
+      <span class="dash-card-title" data-i18n="dashboard.heatmap.title">Content Performance Heatmap</span>
+    </div>
+    <p style="color:rgba(250,246,240,.25);font-size:.42rem;font-family:var(--font-mono);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem">Topic x Brand Strength &mdash; click cell for details</p>
     <div id="heatmapContainer"></div>
   </div>
 </div>
@@ -380,17 +615,26 @@
 <!-- ═══════════════ TAB 3: LANE COMPARISON ═══════════════ -->
 <div id="tab-lanes" class="tab-content">
   <div class="grid-2">
-    <div class="card">
-      <h3 data-i18n="dashboard.lane.revenue">Estimated Year 1 Revenue by Lane</h3>
-      <div class="chart-container tall"><canvas id="laneRevenueChart"></canvas></div>
+    <div class="dash-card">
+      <div class="dash-card-head">
+        <span data-icon="revenue" class="pp-icon"></span>
+        <span class="dash-card-title" data-i18n="dashboard.lane.revenue">Est. Year 1 Revenue by Lane</span>
+      </div>
+      <div class="chart-wrap tall"><canvas id="laneRevenueChart"></canvas></div>
     </div>
-    <div class="card">
-      <h3 data-i18n="dashboard.lane.competition">Competition vs Opportunity</h3>
-      <div class="chart-container tall"><canvas id="laneScatterChart"></canvas></div>
+    <div class="dash-card">
+      <div class="dash-card-head">
+        <span data-icon="market" class="pp-icon"></span>
+        <span class="dash-card-title" data-i18n="dashboard.lane.competition">Competition vs Opportunity</span>
+      </div>
+      <div class="chart-wrap tall"><canvas id="laneScatterChart"></canvas></div>
     </div>
   </div>
-  <div class="card">
-    <h3 data-i18n="dashboard.greenfield">Greenfield Opportunity Flags</h3>
+  <div class="dash-card">
+    <div class="dash-card-head">
+      <span data-icon="awakening" class="pp-icon"></span>
+      <span class="dash-card-title" data-i18n="dashboard.greenfield">Greenfield Opportunity Flags</span>
+    </div>
     <div class="grid-3" id="greenfieldCards"></div>
   </div>
 </div>
@@ -398,13 +642,19 @@
 <!-- ═══════════════ TAB 4: VALUE LADDER ═══════════════ -->
 <div id="tab-funnel" class="tab-content">
   <div class="grid-2">
-    <div class="card">
-      <h3 data-i18n="dashboard.funnel.title">Value Ladder Funnel</h3>
+    <div class="dash-card">
+      <div class="dash-card-head">
+        <span data-icon="funnel" class="pp-icon"></span>
+        <span class="dash-card-title" data-i18n="dashboard.funnel.title">Value Ladder Funnel</span>
+      </div>
       <div id="funnelContainer"></div>
     </div>
-    <div class="card">
-      <h3 data-i18n="dashboard.ltv">LTV Calculation</h3>
-      <div class="chart-container tall"><canvas id="ltvChart"></canvas></div>
+    <div class="dash-card">
+      <div class="dash-card-head">
+        <span data-icon="growth" class="pp-icon"></span>
+        <span class="dash-card-title" data-i18n="dashboard.ltv">LTV Calculation</span>
+      </div>
+      <div class="chart-wrap tall"><canvas id="ltvChart"></canvas></div>
       <div style="margin-top:1rem;" id="ltvSummary"></div>
     </div>
   </div>
@@ -412,8 +662,11 @@
 
 <!-- ═══════════════ TAB 5: FLEET PLANNER ═══════════════ -->
 <div id="tab-fleet" class="tab-content">
-  <div class="card">
-    <h3 data-i18n="dashboard.fleet.title">Fleet Budget Planner</h3>
+  <div class="dash-card">
+    <div class="dash-card-head">
+      <span data-icon="distribution" class="pp-icon"></span>
+      <span class="dash-card-title" data-i18n="dashboard.fleet.title">Fleet Budget Planner</span>
+    </div>
     <div class="controls-row">
       <div class="control-group" style="flex:2">
         <label data-i18n="dashboard.fleet.budget">Total Monthly Fleet Budget</label>
@@ -423,17 +676,26 @@
     </div>
   </div>
   <div class="grid-2">
-    <div class="card">
-      <h3 data-i18n="dashboard.fleet.timeline">Phase Timeline</h3>
+    <div class="dash-card">
+      <div class="dash-card-head">
+        <span data-icon="calendar" class="pp-icon"></span>
+        <span class="dash-card-title" data-i18n="dashboard.fleet.timeline">Phase Timeline</span>
+      </div>
       <div id="phaseTimeline"></div>
     </div>
-    <div class="card">
-      <h3 data-i18n="dashboard.fleet.allocation">Budget Allocation</h3>
-      <div class="chart-container"><canvas id="fleetAllocChart"></canvas></div>
+    <div class="dash-card">
+      <div class="dash-card-head">
+        <span data-icon="chart" class="pp-icon"></span>
+        <span class="dash-card-title" data-i18n="dashboard.fleet.allocation">Budget Allocation</span>
+      </div>
+      <div class="chart-wrap"><canvas id="fleetAllocChart"></canvas></div>
     </div>
   </div>
-  <div class="card">
-    <h3 data-i18n="dashboard.fleet.tiers">Brand Tier Breakdown</h3>
+  <div class="dash-card">
+    <div class="dash-card-head">
+      <span data-icon="audience" class="pp-icon"></span>
+      <span class="dash-card-title" data-i18n="dashboard.fleet.tiers">Brand Tier Breakdown</span>
+    </div>
     <div class="grid-3" id="tierBreakdown"></div>
   </div>
 </div>
@@ -447,6 +709,7 @@
   </div>
 </div>
 
+<script src="assets/icons.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════════
 // DATA
@@ -516,9 +779,9 @@ const HEATMAP_DETAILS = {
 
 function showTab(id) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('nav#nav button').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('#nav .dash-tab').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
-  const btns = document.querySelectorAll('nav#nav button');
+  const btns = document.querySelectorAll('#nav .dash-tab');
   const tabMap = ['sim','heatmap','lanes','funnel','fleet'];
   btns[tabMap.indexOf(id)].classList.add('active');
   // Lazy init charts
@@ -577,11 +840,11 @@ function calcMetrics(budget, platformKey, laneKey) {
 let roasChart, revSpendChart;
 
 // Pearl Prime chart colors
-const ppGrid = 'rgba(180,83,9,.1)';
-const ppTickColor = 'rgba(250,246,240,.3)';
-const ppLegendColor = '#faf6f0';
+const ppGrid = 'rgba(180,83,9,.08)';
+const ppTickColor = 'rgba(250,246,240,.25)';
+const ppLegendColor = 'rgba(250,246,240,.4)';
 const ppAmber = '#d97706';
-const ppAmberFill = 'rgba(217,119,6,.15)';
+const ppAmberFill = 'rgba(217,119,6,.12)';
 
 function initSimCharts() {
   const rCtx = document.getElementById('roasChart').getContext('2d');
@@ -591,11 +854,11 @@ function initSimCharts() {
     options: {
       responsive: true, maintainAspectRatio: false,
       scales: {
-        x: { title: { display:true, text:'Monthly Budget ($)', color:ppTickColor }, ticks:{color:ppTickColor}, grid:{color:ppGrid} },
-        y: { title: { display:true, text:'ROAS (x)', color:ppTickColor }, ticks:{color:ppTickColor}, grid:{color:ppGrid}, beginAtZero:true }
+        x: { title: { display:true, text:'Monthly Budget ($)', color:ppTickColor, font:{family:'DM Mono',size:10} }, ticks:{color:ppTickColor,font:{family:'DM Mono',size:9}}, grid:{color:ppGrid} },
+        y: { title: { display:true, text:'ROAS (x)', color:ppTickColor, font:{family:'DM Mono',size:10} }, ticks:{color:ppTickColor,font:{family:'DM Mono',size:9}}, grid:{color:ppGrid}, beginAtZero:true }
       },
       plugins: {
-        legend: { labels: { color:ppLegendColor } },
+        legend: { labels: { color:ppLegendColor, font:{family:'DM Mono',size:10} } },
         annotation: { annotations: { line1: { type:'line', yMin:1, yMax:1, borderColor:'#4caf50', borderDash:[5,5], label:{ display:true, content:'Break-Even', color:'#4caf50' } } } }
       }
     }
@@ -607,17 +870,17 @@ function initSimCharts() {
     data: {
       labels: ['$0','$250','$500','$1K','$2K','$3K','$5K'],
       datasets: [
-        { label: 'Spend', data: [], backgroundColor: 'rgba(229,57,53,0.6)', borderRadius: 4 },
-        { label: 'Revenue', data: [], backgroundColor: 'rgba(76,175,80,0.6)', borderRadius: 4 }
+        { label: 'Spend', data: [], backgroundColor: 'rgba(229,57,53,0.5)', borderRadius: 2 },
+        { label: 'Revenue', data: [], backgroundColor: 'rgba(76,175,80,0.5)', borderRadius: 2 }
       ]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       scales: {
-        x: { ticks:{color:ppTickColor}, grid:{color:ppGrid} },
-        y: { ticks:{color:ppTickColor, callback: v=>'$'+v.toLocaleString()}, grid:{color:ppGrid}, beginAtZero:true }
+        x: { ticks:{color:ppTickColor,font:{family:'DM Mono',size:9}}, grid:{color:ppGrid} },
+        y: { ticks:{color:ppTickColor, callback: v=>'$'+v.toLocaleString(),font:{family:'DM Mono',size:9}}, grid:{color:ppGrid}, beginAtZero:true }
       },
-      plugins: { legend: { labels:{color:ppLegendColor} } }
+      plugins: { legend: { labels:{color:ppLegendColor,font:{family:'DM Mono',size:10}} } }
     }
   });
 }
@@ -637,11 +900,11 @@ function updateSim() {
 
   const roasEl = document.getElementById('mROAS');
   roasEl.textContent = m.roas.toFixed(2) + 'x';
-  roasEl.className = 'value ' + (m.roas >= 2 ? 'good' : m.roas >= 1 ? 'warn' : 'bad');
+  roasEl.className = 'kpi-val ' + (m.roas >= 2 ? 'good' : m.roas >= 1 ? 'warn' : 'bad');
 
   const cpaEl = document.getElementById('mCPA');
   cpaEl.textContent = m.cpa > 0 ? fmtD(m.cpa) : '--';
-  cpaEl.className = 'value ' + (m.cpa > 0 && m.cpa < 3 ? 'good' : m.cpa < 8 ? 'warn' : 'bad');
+  cpaEl.className = 'kpi-val ' + (m.cpa > 0 && m.cpa < 3 ? 'good' : m.cpa < 8 ? 'warn' : 'bad');
 
   document.getElementById('mBreakEven').textContent = m.breakEven;
   document.getElementById('mDaily').textContent = fmtD(m.daily);
@@ -726,18 +989,18 @@ function initLanes() {
         label: 'Est. Year 1 Revenue ($)',
         data: revenues,
         backgroundColor: lanes.map(l => {
-          if (['hu_HU','fr_FR'].includes(l)) return 'rgba(76,175,80,0.7)';
-          if (LANE_Y1_REVENUE[l] > 50000) return 'rgba(217,119,6,0.7)';
-          return 'rgba(217,119,6,0.3)';
+          if (['hu_HU','fr_FR'].includes(l)) return 'rgba(76,175,80,0.6)';
+          if (LANE_Y1_REVENUE[l] > 50000) return 'rgba(217,119,6,0.6)';
+          return 'rgba(217,119,6,0.25)';
         }),
-        borderRadius: 4
+        borderRadius: 2
       }]
     },
     options: {
       responsive: true, maintainAspectRatio: false, indexAxis: 'y',
       scales: {
-        x: { ticks:{color:ppTickColor, callback:v=>'$'+v.toLocaleString()}, grid:{color:ppGrid} },
-        y: { ticks:{color:'#faf6f0'}, grid:{color:'rgba(180,83,9,.06)'} }
+        x: { ticks:{color:ppTickColor, callback:v=>'$'+v.toLocaleString(),font:{family:'DM Mono',size:9}}, grid:{color:ppGrid} },
+        y: { ticks:{color:'rgba(250,246,240,.5)',font:{family:'DM Mono',size:10}}, grid:{color:'rgba(180,83,9,.04)'} }
       },
       plugins: { legend:{display:false} }
     }
@@ -758,14 +1021,14 @@ function initLanes() {
         {
           label: 'Standard Lanes',
           data: scatterData.filter(d => !greenfields.includes(d.label)),
-          backgroundColor: 'rgba(217,119,6,0.6)',
-          pointRadius: 8
+          backgroundColor: 'rgba(217,119,6,0.5)',
+          pointRadius: 7
         },
         {
           label: 'Greenfield',
           data: scatterData.filter(d => greenfields.includes(d.label)),
-          backgroundColor: 'rgba(76,175,80,0.8)',
-          pointRadius: 10,
+          backgroundColor: 'rgba(76,175,80,0.7)',
+          pointRadius: 9,
           pointStyle: 'star'
         }
       ]
@@ -773,11 +1036,11 @@ function initLanes() {
     options: {
       responsive: true, maintainAspectRatio: false,
       scales: {
-        x: { title:{display:true,text:'Competition Level (1-10)',color:ppTickColor}, ticks:{color:ppTickColor}, grid:{color:ppGrid}, min:0, max:10 },
-        y: { title:{display:true,text:'Market Opportunity (1-10)',color:ppTickColor}, ticks:{color:ppTickColor}, grid:{color:ppGrid}, min:0, max:10 }
+        x: { title:{display:true,text:'Competition Level (1-10)',color:ppTickColor,font:{family:'DM Mono',size:10}}, ticks:{color:ppTickColor,font:{family:'DM Mono',size:9}}, grid:{color:ppGrid}, min:0, max:10 },
+        y: { title:{display:true,text:'Market Opportunity (1-10)',color:ppTickColor,font:{family:'DM Mono',size:10}}, ticks:{color:ppTickColor,font:{family:'DM Mono',size:9}}, grid:{color:ppGrid}, min:0, max:10 }
       },
       plugins: {
-        legend: { labels:{color:ppLegendColor} },
+        legend: { labels:{color:ppLegendColor,font:{family:'DM Mono',size:10}} },
         tooltip: { callbacks: { label: ctx => ctx.raw.label + ` (Comp: ${ctx.raw.x}, Opp: ${ctx.raw.y})` } }
       }
     }
@@ -791,9 +1054,9 @@ function initLanes() {
     { lane:'zh_HK', title:'Hong Kong (zh_HK)', desc:'Cantonese audio is underserved. Bilingual audience. Compact formats for MTR commute. Political anxiety resonance.', color:'#42a5f5' }
   ];
   gf.innerHTML = greenfieldInfo.map(g =>
-    `<div class="metric-box" style="border-left:3px solid ${g.color};text-align:left;padding:1rem">
-      <div style="font-weight:600;color:${g.color};margin-bottom:0.25rem;font-family:var(--font-heading)">${g.title}</div>
-      <div style="font-size:0.8rem;color:var(--text-medium)">${g.desc}</div>
+    `<div class="greenfield-card" style="border-left-color:${g.color}">
+      <div class="gf-title" style="color:${g.color}">${g.title}</div>
+      <div class="gf-desc">${g.desc}</div>
     </div>`
   ).join('');
 }
@@ -838,31 +1101,35 @@ function initFunnel() {
     data: {
       labels: tierNames,
       datasets: [
-        { label: 'Revenue per Tier', data: revenuePerUser, backgroundColor: 'rgba(217,119,6,0.6)', borderRadius: 4 },
-        { label: 'Cumulative LTV', data: cumulativeLTV, type: 'line', borderColor: '#4caf50', backgroundColor: 'transparent', pointRadius: 5, tension: 0.3 }
+        { label: 'Revenue per Tier', data: revenuePerUser, backgroundColor: 'rgba(217,119,6,0.5)', borderRadius: 2 },
+        { label: 'Cumulative LTV', data: cumulativeLTV, type: 'line', borderColor: '#4caf50', backgroundColor: 'transparent', pointRadius: 4, tension: 0.3 }
       ]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       scales: {
-        x: { ticks:{color:ppTickColor}, grid:{color:ppGrid} },
-        y: { ticks:{color:ppTickColor, callback:v=>'$'+v}, grid:{color:ppGrid}, beginAtZero:true }
+        x: { ticks:{color:ppTickColor,font:{family:'DM Mono',size:9}}, grid:{color:ppGrid} },
+        y: { ticks:{color:ppTickColor, callback:v=>'$'+v,font:{family:'DM Mono',size:9}}, grid:{color:ppGrid}, beginAtZero:true }
       },
-      plugins: { legend:{labels:{color:ppLegendColor}} }
+      plugins: { legend:{labels:{color:ppLegendColor,font:{family:'DM Mono',size:10}}} }
     }
   });
 
   const maxLTV = cumulativeLTV[cumulativeLTV.length-1];
   document.getElementById('ltvSummary').innerHTML = `
-    <div class="metric-box" style="display:inline-block;padding:0.75rem 1.5rem">
-      <div class="label">Maximum LTV per Reader</div>
-      <div class="value good">$${maxLTV.toFixed(2)}</div>
+    <div class="ltv-inline">
+      <div>
+        <div class="kpi-val good">$${maxLTV.toFixed(2)}</div>
+        <div class="kpi-lbl">Maximum LTV per Reader</div>
+      </div>
     </div>
-    <div class="metric-box" style="display:inline-block;padding:0.75rem 1.5rem;margin-left:0.5rem">
-      <div class="label">Avg LTV (Standard path)</div>
-      <div class="value">$${(0.99 + 4.99).toFixed(2)}</div>
+    <div class="ltv-inline">
+      <div>
+        <div class="kpi-val">$${(0.99 + 4.99).toFixed(2)}</div>
+        <div class="kpi-lbl">Avg LTV (Standard path)</div>
+      </div>
     </div>
-    <p style="color:var(--text-medium);font-size:0.8rem;margin-top:0.75rem">
+    <p style="color:rgba(250,246,240,.25);font-size:.42rem;font-family:var(--font-mono);letter-spacing:.04em;margin-top:.75rem;line-height:1.6">
       Key insight: Email list of 2,000 subscribers = 100-300 sales per launch.
       Every 1,000 subscribers adds ~$500-$1,500 per launch at standard tier.
     </p>
@@ -882,11 +1149,11 @@ function initFleet() {
     type: 'doughnut',
     data: {
       labels: ['Top Performers ($1K-$5K/brand)', 'Growth Tier ($500-$1K/brand)', 'Test Tier ($100-$500/brand)', 'Organic Only ($0)'],
-      datasets: [{ data: [0,0,0,0], backgroundColor: ['#4caf50','#d97706','#42a5f5','rgba(255,255,255,.08)'], borderWidth: 0 }]
+      datasets: [{ data: [0,0,0,0], backgroundColor: ['#4caf50','#d97706','#42a5f5','rgba(255,255,255,.06)'], borderWidth: 0 }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { labels:{color:ppLegendColor, padding:12, font:{family:'DM Sans'}}, position:'bottom' } }
+      plugins: { legend: { labels:{color:ppLegendColor, padding:12, font:{family:'DM Mono',size:10}}, position:'bottom' } }
     }
   });
   updateFleet();
@@ -959,20 +1226,20 @@ function updateFleet() {
   // Tier breakdown
   const tb = document.getElementById('tierBreakdown');
   tb.innerHTML = `
-    <div class="metric-box" style="border-top:3px solid #4caf50">
-      <div class="label">Top Performers</div>
-      <div class="value good">${topBrands} brands</div>
-      <div style="font-size:0.75rem;color:var(--text-medium);margin-top:0.25rem">${topBudget > 0 ? '$'+topBudget.toLocaleString()+'/brand/mo' : 'N/A at this budget'}</div>
+    <div class="tier-card" style="border-top-color:#4caf50">
+      <div class="kpi-lbl">Top Performers</div>
+      <div class="kpi-val good">${topBrands} brands</div>
+      <div class="tier-detail">${topBudget > 0 ? '$'+topBudget.toLocaleString()+'/brand/mo' : 'N/A at this budget'}</div>
     </div>
-    <div class="metric-box" style="border-top:3px solid #d97706">
-      <div class="label">Growth Tier</div>
-      <div class="value">${growthBrands} brands</div>
-      <div style="font-size:0.75rem;color:var(--text-medium);margin-top:0.25rem">${growthBudget > 0 ? '$'+growthBudget.toLocaleString()+'/brand/mo' : 'N/A at this budget'}</div>
+    <div class="tier-card" style="border-top-color:#d97706">
+      <div class="kpi-lbl">Growth Tier</div>
+      <div class="kpi-val">${growthBrands} brands</div>
+      <div class="tier-detail">${growthBudget > 0 ? '$'+growthBudget.toLocaleString()+'/brand/mo' : 'N/A at this budget'}</div>
     </div>
-    <div class="metric-box" style="border-top:3px solid #42a5f5">
-      <div class="label">Test Tier</div>
-      <div class="value" style="color:#42a5f5">${testBrands} brands</div>
-      <div style="font-size:0.75rem;color:var(--text-medium);margin-top:0.25rem">${testBudget > 0 ? '$'+testBudget.toLocaleString()+'/brand/mo' : '--'}</div>
+    <div class="tier-card" style="border-top-color:#42a5f5">
+      <div class="kpi-lbl">Test Tier</div>
+      <div class="kpi-val" style="color:#42a5f5">${testBrands} brands</div>
+      <div class="tier-detail">${testBudget > 0 ? '$'+testBudget.toLocaleString()+'/brand/mo' : '--'}</div>
     </div>
   `;
 }
