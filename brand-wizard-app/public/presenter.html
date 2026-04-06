@@ -1433,9 +1433,29 @@ window.addEventListener("load", function() {
   if (activeMeta) {
     document.getElementById("deck-title").textContent = activeMeta.title;
     initChips();
+
+    // Auto-select market chip from URL ?lane= param
+    var laneParam = params.get("lane");
+    if (laneParam) {
+      var chips = document.querySelectorAll(".chip");
+      chips.forEach(function(c) {
+        c.classList.remove("on");
+        if (c.dataset.p === laneParam) c.classList.add("on");
+      });
+      updateHero(laneParam);
+    }
+
     buildFiltered();
     buildTL();
-    updateHero("landing");
+
+    // Show first slide visual immediately (don't wait for Play)
+    if (state.filtered.length > 0) {
+      showVisual(state.filtered[0]);
+      renderScript(state.filtered[0]);
+      updTL(0);
+    } else {
+      updateHero(laneParam || "landing");
+    }
   }
 });
 </script>

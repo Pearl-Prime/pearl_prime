@@ -152,14 +152,37 @@ function selectLane(id){
   showScreen('s2');
 }
 
+/* Lane → briefing deck mapping */
+var LANE_DECK={
+  en_US:"briefing_us",ja_JP:"briefing_jp",ko_KR:"briefing_kr",
+  zh_TW:"intro",zh_CN:"intro",zh_HK:"intro",zh_SG:"intro",
+  es_US:"intro",es_ES:"intro",
+  fr_FR:"briefing_fr",de_DE:"briefing_de",it_IT:"intro",hu_HU:"intro"
+};
+/* Lane → presenter chip path */
+var LANE_CHIP={
+  en_US:"us",ja_JP:"jp",ko_KR:"kr",zh_TW:"tw",zh_CN:"cn",
+  zh_HK:"cn",zh_SG:"cn",es_US:"us",es_ES:"eu",
+  fr_FR:"fr",de_DE:"de",it_IT:"eu",hu_HU:"eu"
+};
+
 function goLearn(){
-  window.location.href='presenter.html?deck=intro';
+  if(!currentLane)return;
+  var deck=LANE_DECK[currentLane]||"intro";
+  var chip=LANE_CHIP[currentLane]||"all";
+  if(deck.indexOf("briefing_")===0){
+    window.location.href='presenter.html?deck='+deck;
+  } else {
+    window.location.href='presenter.html?deck='+deck+'&lane='+chip;
+  }
 }
 function goOnboarding(){
-  window.location.href='brand_admin.html?phase=0';
+  var chip=LANE_CHIP[currentLane]||"";
+  window.location.href='brand_admin.html?phase=0'+(chip?'&lane='+chip:'');
 }
 function goOperations(){
-  window.location.href='brand_admin.html?phase=3';
+  var chip=LANE_CHIP[currentLane]||"";
+  window.location.href='brand_admin.html?phase=3'+(chip?'&lane='+chip:'');
 }
 
 /* Auto-restore */
