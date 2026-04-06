@@ -1,0 +1,190 @@
+# Exercise Component Templates — 5 dimensions of variation
+# Assembled at runtime: bridge[i] + intro_template(name, mechanism[j]) + description + aha_template(obs[k], perm[l]) + integration_template(takeaway[m], closing[n])
+# 12 exercises per book, each picks unique indices to never repeat
+
+schema_version: "1.0.0"
+
+# ─────────────────────────────────────────────────────────────
+# BRIDGE — invitation to pause (universal, not type-specific)
+# Rotate 1 per chapter. Never repeat in same book.
+# ─────────────────────────────────────────────────────────────
+bridge:
+  - "Try this before you move on."
+  - "Pause here for a moment."
+  - "Put the book down."
+  - "Before you keep reading."
+  - "Stop here."
+  - "This one is for your body."
+  - "Do this one out loud."
+  - "Close the book for this."
+  - "Just thirty seconds."
+  - "Your body needs this one."
+  - "This is the practice."
+  - "Right now. Not later."
+
+# ─────────────────────────────────────────────────────────────
+# INTRO MECHANISMS — one fact about why (per exercise type)
+# Template: "This is {exercise_name}. {mechanism}."
+# ─────────────────────────────────────────────────────────────
+intro_mechanism:
+  body_awareness:
+    - "Your body holds what your mind skipped."
+    - "Attention is the first step."
+    - "Notice before you fix."
+    - "Your body already knows."
+  sensory_grounding:
+    - "Your senses are always in the present."
+    - "When your mind spins, your body is still here."
+    - "Sensation pulls you back."
+    - "The room is real. Start there."
+  meditations:
+    - "Not to empty your mind. Just to rest it."
+    - "One thing to focus on. That is enough."
+    - "Your breath is always available."
+    - "Stillness is not doing nothing."
+  affirmations:
+    - "Words to sit with. Not to force."
+    - "Let them land where they can."
+    - "You do not have to believe them yet."
+    - "Say them. See what sticks."
+  reflections:
+    - "Notice. Do not analyze."
+    - "See what is already there."
+    - "No right answer."
+    - "Just look."
+  self_inquiry:
+    - "Hold the question. Do not answer it."
+    - "Let it sit."
+    - "Curiosity, not conclusion."
+    - "The discomfort is the data."
+  integration_bridges:
+    - "Connect what you read to what you do."
+    - "Insight without action fades."
+    - "The bridge is one step."
+    - "Bring it with you."
+  thought_experiments:
+    - "No wrong answers."
+    - "Follow where it goes."
+    - "Your imagination knows things your logic does not."
+    - "Play with this."
+  breath_regulation:
+    - "Your breath changes your nervous system directly."
+    - "The exhale is where the reset lives."
+    - "Follow the count. Your body does the rest."
+    - "This works whether you believe it or not."
+
+# ─────────────────────────────────────────────────────────────
+# AHA OBSERVATIONS — what to notice after (per exercise type)
+# Template: "Now, notice {observation}. {permission}."
+# ─────────────────────────────────────────────────────────────
+aha_observation:
+  body_awareness:
+    - "which areas felt vivid"
+    - "where you held tension"
+    - "what wanted your attention"
+    - "if anything released"
+  sensory_grounding:
+    - "that you are here now"
+    - "how the room feels different"
+    - "which sense was strongest"
+    - "that your mind slowed"
+  meditations:
+    - "if your breathing changed"
+    - "how quiet feels"
+    - "what your mind did"
+    - "the space between thoughts"
+  affirmations:
+    - "which words landed"
+    - "where you felt resistance"
+    - "if anything softened"
+    - "what your body did while you read them"
+  reflections:
+    - "what came up first"
+    - "if you surprised yourself"
+    - "what you avoided"
+    - "where your mind went"
+  self_inquiry:
+    - "if the question made you uncomfortable"
+    - "what you wanted to say but did not"
+    - "if the answer changed as you sat with it"
+    - "what you are avoiding"
+  integration_bridges:
+    - "if you feel more ready"
+    - "what shifted"
+    - "if the next step feels clearer"
+    - "what you want to do differently"
+  thought_experiments:
+    - "what surprised you"
+    - "where your imagination went"
+    - "what felt true"
+    - "what you learned about yourself"
+  breath_regulation:
+    - "if your exhale got longer"
+    - "if your shoulders dropped"
+    - "how your chest feels now"
+    - "if something loosened"
+
+# Universal permission phrases (rotate across all types)
+aha_permission:
+  - "Or not. Both are fine."
+  - "Whatever came up is valid."
+  - "There is no wrong answer."
+  - "That is useful information."
+
+# ─────────────────────────────────────────────────────────────
+# INTEGRATION TAKEAWAYS — what to carry forward (per type)
+# Template: "Before you move on, {takeaway}. {closing}."
+# ─────────────────────────────────────────────────────────────
+integration_takeaway:
+  body_awareness:
+    - "check in with your body once today"
+    - "pick one area and notice it later"
+    - "your body will tell you when it needs this again"
+    - "one scan a day changes everything"
+  sensory_grounding:
+    - "one sense is enough to land"
+    - "the room is always available"
+    - "start with what is closest"
+    - "your senses never leave the present"
+  meditations:
+    - "one breath is a whole meditation"
+    - "you can return to this in ten seconds"
+    - "stillness does not require silence"
+    - "your breath is always with you"
+  affirmations:
+    - "repeat the one that landed"
+    - "the ones that felt hard are the ones you need"
+    - "say one to yourself tonight"
+    - "you do not have to earn these words"
+  reflections:
+    - "the first thing that came up matters most"
+    - "sit with it. do not solve it"
+    - "write one word about what you noticed"
+    - "let it change shape over the day"
+  self_inquiry:
+    - "the question stays with you"
+    - "let it work in the background"
+    - "you do not owe anyone the answer"
+    - "come back to it tomorrow"
+  integration_bridges:
+    - "do one thing differently in the next hour"
+    - "the smallest step counts"
+    - "action does not need to be big"
+    - "try it once. see what happens"
+  thought_experiments:
+    - "remember what surprised you"
+    - "your imagination showed you something real"
+    - "play with it again later"
+    - "there is more where that came from"
+  breath_regulation:
+    - "one breath with a longer exhale is enough"
+    - "this is always available"
+    - "your breath goes where you go"
+    - "the reset takes ten seconds"
+
+# Universal closing phrases (rotate)
+integration_closing:
+  - "One breath at a time."
+  - "That is enough."
+  - "You did something just now."
+  - "Keep going."

@@ -13,6 +13,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
+import json
+
 from phoenix_v4.manga.image_backend import (
     FixtureReplayImageBackend,
     NoopImageBackend,
@@ -25,6 +27,29 @@ from phoenix_v4.manga.runner.chapter_runner import (
 )
 from phoenix_v4.manga.runner.dag_order import RUN_ORDER
 from scripts.manga._config import config_snapshot_hash
+
+
+def _ensure_chapter_request(ws: Path, chapter_number: int) -> None:
+    """Auto-create chapter_request.json from series handoff if missing."""
+    cr_path = ws / "chapter_request.json"
+    if cr_path.is_file():
+        return
+    handoff = ws / "series" / "story_architecture_handoff.json"
+    if not handoff.is_file():
+        # Try parent directory (flat workspace)
+        handoff = ws.parent / "series" / "story_architecture_handoff.json"
+    if not handoff.is_file():
+        return
+    data = json.loads(handoff.read_text(encoding="utf-8"))
+    cr = {
+        "schema_version": "1.0.0",
+        "artifact_type": "chapter_request",
+        "series_id": data.get("series_id", "unknown"),
+        "chapter_id": f"ch_{chapter_number}",
+        "arc_id": data.get("arc_id", "arc_1"),
+    }
+    cr_path.write_text(json.dumps(cr, indent=2) + "\n", encoding="utf-8")
+    print(f"Auto-created {cr_path}")
 
 
 def main() -> int:
@@ -67,12 +92,15 @@ def main() -> int:
     )
     ap.add_argument("--style-id", default="dark_psychological")
     ap.add_argument("--teacher-id", default="ahjan")
+    ap.add_argument("--export-pdf", action="store_true", help="Assemble page PNGs into a manga PDF after DAG completes")
     args = ap.parse_args()
 
     base = args.workspace.resolve()
     if not base.is_dir():
         print(f"Workspace not a directory: {base}", file=sys.stderr)
         return 1
+    # Auto-create chapter_request.json if series setup exists but chapter request doesn't
+    _ensure_chapter_request(base, args.chapter_number)
     try:
         ws = resolve_chapter_workspace(base, chapter_id=args.chapter_id)
     except FileNotFoundError as e:
@@ -129,7 +157,35 @@ def main() -> int:
         return 1
 
     print("Stages executed:", ", ".join(ran) or "(none — all skipped or empty range)")
+
+    # ── PDF export ──
+    if args.export_pdf:
+        _export_pdf(ws)
+
     return 0
+
+
+def _export_pdf(ws: Path) -> None:
+    """Assemble final_page_composite PNGs into a single manga PDF."""
+    composite_dir = ws / "final_page_composite"
+    pages = sorted(composite_dir.glob("page_*.png"))
+    if not pages:
+        print("No page PNGs found for PDF export", file=sys.stderr)
+        return
+    try:
+        from PIL import Image
+    except ImportError:
+        print("Pillow required for PDF export: pip install Pillow", file=sys.stderr)
+        return
+    images = [Image.open(p).convert("RGB") for p in pages]
+    pdf_path = ws / "manga.pdf"
+    if len(images) == 1:
+        images[0].save(pdf_path, format="PDF")
+    else:
+        images[0].save(pdf_path, format="PDF", save_all=True, append_images=images[1:])
+    for img in images:
+        img.close()
+    print(f"Exported manga PDF: {pdf_path} ({len(pages)} pages)")
 
 
 if __name__ == "__main__":

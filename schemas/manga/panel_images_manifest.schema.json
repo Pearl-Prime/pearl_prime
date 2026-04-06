@@ -19,7 +19,7 @@
               "width": { "type": "integer", "minimum": 1 },
               "height": { "type": "integer", "minimum": 1 },
               "content_sha256": { "$ref": "manga_common.schema.json#/$defs/sha256_hex" },
-              "status": { "type": "string", "enum": ["pending", "ok", "failed"] }
+              "status": { "type": "string", "enum": ["pending", "ok", "failed", "dry_run"] }
             }
           }
         }

@@ -1,0 +1,318 @@
+# Audiobook Video Catalog Plan — 13 Teachers × 13 Locales × 24 Channels
+# Authority: artifacts/catalog/PHOENIX_OMEGA_MASTER_CATALOG_PLAN.md
+# Depends: config/release_velocity/video_cadence.yaml, config/video/audiobook_style.yaml
+#
+# This config wires the audiobook video pipeline (render_audiobook.py) into the
+# global production catalog. Every audiobook gets video derivatives. Every video
+# goes through the balanced upload cadence system.
+
+schema_version: 1
+
+# ─── TEACHER → BRAND → CHANNEL ROUTING ───────────────────────────────────
+#
+# Each teacher has a primary brand. Each brand maps to YouTube channels.
+# Audiobook videos for that teacher route to those channels.
+
+teacher_brand_channel_map:
+  ahjan:
+    brands: [stillness_press, cognitive_clarity]
+    primary_channels: [ch_001, ch_004, ch_006]
+    audiobook_style: default
+    topics: [anxiety, self_worth, impermanence, alarm_systems, pausing]
+
+  pamela_fellows:
+    brands: [stillness_press]
+    primary_channels: [ch_002, ch_011]
+    audiobook_style: cool
+    topics: [perfectionism, performance_pressure, embodiment, burnout]
+
+  master_feung:
+    brands: [stillness_press]
+    primary_channels: [ch_014, ch_020]
+    audiobook_style: warm
+    topics: [qi_cultivation, stability, foundation, chronic_stress]
+
+  joshin:
+    brands: [cognitive_clarity]
+    primary_channels: [ch_003, ch_005]
+    audiobook_style: default
+    topics: [zen, direct_pointing, sitting, koans]
+
+  miki:
+    brands: [cognitive_clarity]
+    primary_channels: [ch_005, ch_021]
+    audiobook_style: cool
+    topics: [gen_z_grounding, digital_presence, identity, anxiety]
+
+  junko:
+    brands: [stillness_press]
+    primary_channels: [ch_015, ch_020]
+    audiobook_style: warm
+    topics: [relational_harmony, shame, inner_security]
+
+  maat:
+    brands: [cognitive_clarity]
+    primary_channels: [ch_009, ch_022]
+    audiobook_style: warm
+    topics: [justice, balance, heart_weighing, grief]
+
+  master_wu:
+    brands: [stillness_press]
+    primary_channels: [ch_007, ch_008]
+    audiobook_style: cool
+    topics: [panic_response, composure, warrior_calm]
+
+  master_sha:
+    brands: [cognitive_clarity]
+    primary_channels: [ch_010, ch_016]
+    audiobook_style: warm
+    topics: [sleep_repair, energy_medicine, restoration]
+
+  omote:
+    brands: [stillness_press]
+    primary_channels: [ch_012, ch_018]
+    audiobook_style: warm
+    topics: [grief, body_memory, seasonal_healing, somatic]
+
+  ra:
+    brands: [cognitive_clarity]
+    primary_channels: [ch_013, ch_019]
+    audiobook_style: cool
+    topics: [burnout, solar_return, fire_renewal]
+
+  sai_ma:
+    brands: [stillness_press]
+    primary_channels: [ch_017, ch_024]
+    audiobook_style: warm
+    topics: [compassion, devotion, surrender]
+
+  ajahn_x:
+    brands: [stillness_press, norcal_dharma]
+    primary_channels: [ch_014, ch_015]
+    audiobook_style: default
+    topics: [forest_refuge, simplicity, renunciation]
+
+# ─── LOCALE LANE DEFINITIONS ─────────────────────────────────────────────
+#
+# Two independent production lanes. Video cadence is per-lane.
+# Each lane has its own platform caps and upload schedule.
+
+lanes:
+  en:
+    locales: [en-US]
+    book_platforms: [google_play, kdp, apple_books, kobo]
+    audio_platforms: [audible, findaway, spotify, apple_books]
+    video_platforms: [youtube, tiktok, instagram_reels]
+    trust_tier: new_imprint
+    brands: [stillness_press, cognitive_clarity, norcal_dharma]
+    channels: [ch_001, ch_002, ch_003, ch_004, ch_005, ch_006, ch_007, ch_008,
+               ch_009, ch_010, ch_011, ch_012, ch_013, ch_014, ch_015, ch_016,
+               ch_017, ch_018, ch_019, ch_020, ch_021, ch_022, ch_023, ch_024]
+
+  zh_tw_hk_sg:
+    locales: [zh-TW, zh-HK, zh-SG]
+    book_platforms: [google_play, readmoo, kobo]
+    audio_platforms: [findaway, spotify, apple_books]
+    video_platforms: [youtube, tiktok, instagram_reels]
+    trust_tier: new_imprint
+    brands: [sleep_repair_tw, stabilizer_tw, panic_first_aid_tw, gen_z_grounding_tw,
+             grief_companion_tw, inner_security_tw,
+             sleep_repair_hk, stabilizer_hk, panic_first_aid_hk, gen_z_grounding_hk,
+             grief_companion_hk, inner_security_hk,
+             sleep_repair_sg, stabilizer_sg, panic_first_aid_sg, gen_z_grounding_sg,
+             grief_companion_sg, inner_security_sg]
+
+  zh_cn:
+    locales: [zh-CN]
+    book_platforms: [ximalaya, qq_reading, weread]
+    audio_platforms: [ximalaya, netease_cloud]
+    video_platforms: [bilibili, douyin]
+    trust_tier: new_imprint
+    brands: [sleep_repair_cn, stabilizer_cn, panic_first_aid_cn, gen_z_grounding_cn,
+             grief_companion_cn, inner_security_cn]
+
+  ja:
+    locales: [ja-JP]
+    book_platforms: [google_play, kindle_jp, kobo_jp]
+    audio_platforms: [audible_jp, findaway, spotify]
+    video_platforms: [youtube, tiktok]
+    trust_tier: new_imprint
+
+  ko:
+    locales: [ko-KR]
+    book_platforms: [google_play, yes24]
+    audio_platforms: [millie, naver_audiobook, findaway]
+    video_platforms: [youtube, tiktok]
+    trust_tier: new_imprint
+
+  eu_west:
+    locales: [de-DE, fr-FR, es-ES, it-IT]
+    book_platforms: [google_play, apple_books, kobo, thalia]
+    audio_platforms: [audible_de, findaway, storytel, spotify]
+    video_platforms: [youtube, tiktok, instagram_reels]
+    trust_tier: new_imprint
+
+  es_us:
+    locales: [es-US]
+    book_platforms: [google_play, kdp, apple_books]
+    audio_platforms: [findaway, spotify, audible]
+    video_platforms: [youtube, tiktok, instagram_reels]
+    trust_tier: new_imprint
+
+  hu:
+    locales: [hu-HU]
+    book_platforms: [google_play, kobo]
+    audio_platforms: [findaway, spotify]
+    video_platforms: [youtube]
+    trust_tier: new_imprint
+
+# ─── AUDIOBOOK VIDEO OUTPUT PER BOOK ─────────────────────────────────────
+#
+# Every audiobook (across all locales) produces these video derivatives.
+
+video_derivatives_per_book:
+  audiobook_chapter_long:
+    format: audiobook
+    count_per_book: 20        # 1 per chapter, avg 20 chapters
+    duration_range: [5, 30]   # minutes
+    platforms: [youtube, bilibili]
+    monetization: youtube_adsense
+
+  audiobook_chapter_short:
+    format: audiobook_short
+    count_per_book: 40        # 2 per chapter (hook + peak)
+    duration_range: [30, 60]  # seconds
+    platforms: [youtube_shorts, tiktok, instagram_reels, douyin]
+    monetization: youtube_shorts_fund
+
+  audiobook_full:
+    format: audiobook
+    count_per_book: 1
+    duration_range: [60, 240] # minutes (1-4 hours)
+    platforms: [youtube]
+    monetization: youtube_adsense_longform
+
+# ─── REVENUE PROJECTIONS ─────────────────────────────────────────────────
+#
+# Conservative estimates based on reference channels and platform RPM data.
+
+revenue_model:
+  # YouTube AdSense RPM (Revenue Per Mille = per 1000 views)
+  youtube_rpm:
+    audiobook_long:
+      us: 12.00     # $12 RPM — meditation/wellness niche is premium
+      de: 10.00
+      jp: 8.00
+      kr: 5.00
+      tw: 4.00
+      cn: 0         # Bilibili uses different model
+      average: 8.00
+    audiobook_short:
+      us: 0.05      # $0.05 per 1000 Shorts views (YT Shorts Fund)
+      average: 0.03
+
+  # Bilibili monetization (for zh-CN)
+  bilibili:
+    rpm_cny: 3.0    # ¥3 per 1000 views (充电 + 激励)
+
+  # Phase 1 projections (first 6 months, en_US only)
+  phase_1_en_us:
+    books: 354
+    long_videos: 7080         # 354 books × 20 chapters
+    short_videos: 14160       # 354 books × 40 shorts
+    full_audiobooks: 354
+    total_videos: 21594
+
+    # Conservative view assumptions (Year 1)
+    avg_views_per_long: 500   # New channel, niche content
+    avg_views_per_short: 2000 # Shorts get more algorithmic push
+    total_long_views: 3540000
+    total_short_views: 28320000
+
+    # Revenue estimate (Year 1, en_US only)
+    long_adsense: 42480       # 3.54M views × $12 RPM
+    short_fund: 1416          # 28.3M views × $0.05/1000
+    audiobook_royalties: 106200  # 354 books × $0.82 avg royalty × 365 borrows/year
+    total_year_1: 150096      # ~$150K Year 1 (conservative)
+
+  # Phase 3 projections (all 13 locales, Year 2)
+  phase_3_all_locales:
+    total_books: 13104
+    total_long_videos: 262080
+    total_short_videos: 524160
+    total_videos: 799344
+
+    # With channel growth (avg 5K views/long, 10K views/short by Year 2)
+    total_long_views: 1310400000
+    total_short_views: 5241600000
+    long_adsense_year_2: 10483200   # $10.48M
+    short_fund_year_2: 262080       # $262K
+    audiobook_royalties_year_2: 3932000  # $3.93M (13K books × ~$300/year each)
+    total_year_2: 14677280   # ~$14.7M Year 2 (optimistic, requires channel growth)
+
+    # Realistic Year 2 (10% of optimistic)
+    realistic_year_2: 1467728  # ~$1.5M
+
+# ─── PRODUCTION SCHEDULE ─────────────────────────────────────────────────
+#
+# How audiobook video production maps to the velocity ramp.
+
+production_phases:
+  phase_1:
+    label: "en_US Pilot"
+    duration_months: 3
+    books: 354
+    videos: 21594
+    lanes: [en]
+    upload_cadence:
+      youtube_long: "1/day per channel, 3-5 channels active = 3-5 long/day"
+      youtube_shorts: "2/day per channel, 5 channels = 10 shorts/day"
+      tiktok: "3/day across brands"
+      instagram: "2/day across brands"
+    notes: "354 books × 61 videos = 21,594 videos. At 15 uploads/day = 1,440 days to drain. Need multiple channels."
+
+  phase_2:
+    label: "ja_JP + ko_KR + zh_TW"
+    duration_months: 3
+    books: 3000
+    videos: 183000
+    lanes: [ja, ko, zh_tw_hk_sg]
+    notes: "Locale-specific TTS voices. Translation pipeline required."
+
+  phase_3:
+    label: "All 13 Locales"
+    duration_months: 6
+    books: 13104
+    videos: 799344
+    lanes: [en, zh_tw_hk_sg, zh_cn, ja, ko, eu_west, es_us, hu]
+    notes: "Full catalog production. Multiple GPU servers needed for video rendering."
+
+# ─── ANTI-SPAM VIDEO DIVERSIFICATION ─────────────────────────────────────
+#
+# Prevent YouTube/TikTok from flagging audiobook videos as "reused content."
+
+anti_spam_video:
+  # Each video MUST have at least one unique visual element (YouTube TOS)
+  required_unique_elements:
+    - waveform_visualization      # amplitude-reactive, changes per audio
+    - karaoke_text_sync           # word-level sync, unique per transcript
+    - style_variation             # rotate default/warm/cool per topic
+
+  # Cross-channel diversification
+  channel_diversification:
+    max_same_teacher_per_channel_per_week: 5
+    max_same_topic_per_channel_per_day: 1
+    rotate_styles_across_channels: true
+    notes: "Don't flood one channel with one teacher. Interleave teachers across channels."
+
+  # Short clip diversification
+  short_clip_rules:
+    no_duplicate_clips: true      # Each short must be from different chapter section
+    min_transcript_distance: 100  # Words between clip start points
+    hook_preference: true         # Prefer emotional peaks, rhetorical questions
+
+  # Thumbnail diversification
+  thumbnail_rules:
+    use_text_overlay: true        # Title text on black bg with accent color
+    rotate_accent_colors: true    # Each video in series gets different accent
+    accent_palette: ["#4A90D9", "#D94A4A", "#4AD97A", "#D9A84A", "#9B4AD9", "#D94A90"]

@@ -435,9 +435,22 @@ Pearl News is 100% at **code/tests** when classifier, selector, quality gates, a
 
 ---
 
+## Brand Lane Architecture (2026-04-07)
+
+- **[docs/BRAND_LANE_ARCHITECTURE_HANDOFF.md](./BRAND_LANE_ARCHITECTURE_HANDOFF.md)** — **START HERE.** Handoff doc: 12 lanes × 37 brands = 444 instances. Audiobook video pipeline. Upload cadence. Everything in one place.
+- [config/catalog_planning/teacher_brand_lane_assignments.yaml](../config/catalog_planning/teacher_brand_lane_assignments.yaml) — Master config: lanes, brands, platforms, market sizes
+- [config/catalog_planning/teacher_brand_archetypes.yaml](../config/catalog_planning/teacher_brand_archetypes.yaml) — 13 teacher brand positioning + anti-spam differentiation
+- [config/catalog_planning/brand_identity_system.yaml](../config/catalog_planning/brand_identity_system.yaml) — Visual identity: colophon, colors, fonts, cover style (all 37 brands)
+- [config/catalog_planning/locale_brand_names.yaml](../config/catalog_planning/locale_brand_names.yaml) — 444 culturally native publisher names (37 × 12 locales)
+- [config/catalog_planning/teacher_brand_author_roster.yaml](../config/catalog_planning/teacher_brand_author_roster.yaml) — 91 authors: voices, bios, topics, cover art (4 brands expanded, 9 skeleton)
+- [config/release_velocity/video_cadence.yaml](../config/release_velocity/video_cadence.yaml) — Upload pacing per platform
+- [config/catalog_planning/audiobook_video_catalog.yaml](../config/catalog_planning/audiobook_video_catalog.yaml) — Video derivatives + revenue projections
+
+---
+
 ## Governance
 
-- [docs/PHOENIX_24_BRAND_GOVERNANCE_ARCHITECTURE.md](./PHOENIX_24_BRAND_GOVERNANCE_ARCHITECTURE.md) — North-star governance at 24-brand scale
+- [docs/PHOENIX_24_BRAND_GOVERNANCE_ARCHITECTURE.md](./PHOENIX_24_BRAND_GOVERNANCE_ARCHITECTURE.md) — North-star governance at 24-brand scale (note: now 37 brands with teacher mode addition)
 - [docs/PHOENIX_24_BRAND_MINIMUM_GOVERNANCE_CORE.md](./PHOENIX_24_BRAND_MINIMUM_GOVERNANCE_CORE.md) — Minimum governance core
 - [docs/GOVERNANCE_HARDENING_BLUEPRINT.md](./GOVERNANCE_HARDENING_BLUEPRINT.md) — Candidate controls backlog (reference only, non-authoritative)
 - [docs/governance/registry_integrity_checker_v1.md](./governance/registry_integrity_checker_v1.md) — Registry integrity checker

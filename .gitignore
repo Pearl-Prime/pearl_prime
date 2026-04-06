@@ -43,6 +43,14 @@ scripts/feeds/
 # Vite production build (CI builds on deploy)
 brand-wizard-app/dist/
 
+# Large binary assets (regenerate from pipeline — do NOT commit)
+assets/sentence_bank/
+assets/music_bank/base/
+assets/music_bank/by_brand/
+artifacts/produced/
+artifacts/video/vid_*/
+artifacts/video/test-*/
+
 # ElevenLabs briefing outputs (regenerate via scripts/onboarding/generate_briefing_narration.py)
 artifacts/onboarding_audio/*.mp3
 artifacts/onboarding_audio/segments/

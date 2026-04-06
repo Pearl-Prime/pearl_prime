@@ -3,16 +3,20 @@
 
 content_types:
   therapeutic:
-    min_duration_s: 3
-    max_duration_s: 12
+    min_duration_s: 15
+    max_duration_s: 90
     hook_timing: "0-3s"
+  therapeutic_long:
+    min_duration_s: 60
+    max_duration_s: 300
+    hook_timing: "0-5s"
   short_mythbust:
     min_duration_s: 2
-    max_duration_s: 8
+    max_duration_s: 30
     hook_timing: "0-2s"
   default:
     min_duration_s: 2
-    max_duration_s: 10
+    max_duration_s: 60
     hook_timing: "0-3s"
 
 # VCE §6.2 — arc section cut rhythm / motion budget (Edit rhythm entrainment).

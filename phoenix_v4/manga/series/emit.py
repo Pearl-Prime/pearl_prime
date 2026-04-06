@@ -43,7 +43,8 @@ def build_series_artifact_bundle(
     letter = build_lettering_style_bible(schema_version=schema_version)
     genre = build_genre_blueprint(genre_id=genre_id, schema_version=schema_version)
     internal = build_story_architecture_internal(
-        series_id=series_id, arc_id=arc_id, schema_version=schema_version
+        series_id=series_id, arc_id=arc_id, schema_version=schema_version,
+        genre_id=genre_id,
     )
     handoff = story_architecture_internal_to_handoff(internal)
     assets = build_asset_registry(schema_version=schema_version)
