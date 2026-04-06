@@ -3,6 +3,7 @@ import SwiftUI
 enum TabTag: String, CaseIterable, Identifiable {
     case dashboard
     case pipeline
+    case contentInventory
     case simulation
     case tests
     case observability
@@ -20,7 +21,7 @@ enum TabTag: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 
     static let sidebarSections: [(String, [TabTag])] = [
-        ("Core", [.dashboard, .pipeline, .simulation]),
+        ("Core", [.dashboard, .pipeline, .contentInventory, .simulation]),
         ("Quality", [.tests, .gates, .observability, .teacher]),
         ("Content", [.pearlNews, .manualReview]),
         ("Operations", [.ci, .credentials, .video, .localeParity, .mlLoop, .docs]),
@@ -30,6 +31,7 @@ enum TabTag: String, CaseIterable, Identifiable {
         switch self {
         case .dashboard: return "Dashboard"
         case .pipeline: return "Pipeline"
+        case .contentInventory: return "Content inventory"
         case .simulation: return "Simulation"
         case .tests: return "Tests"
         case .observability: return "Observability"
@@ -50,6 +52,7 @@ enum TabTag: String, CaseIterable, Identifiable {
         switch self {
         case .dashboard: return "gauge.medium"
         case .pipeline: return "book"
+        case .contentInventory: return "tray.full"
         case .simulation: return "chart.bar"
         case .tests: return "checkmark.circle"
         case .observability: return "waveform.path.ecg"
@@ -169,6 +172,8 @@ struct ContentView: View {
                 DashboardView(state: state, artifactReader: artifactReader, githubService: githubService, onSelectObservability: { selectedTab = .observability })
             case .pipeline:
                 PipelineView(state: state, scriptRunner: scriptRunner)
+            case .contentInventory:
+                ContentInventoryView(state: state, scriptRunner: scriptRunner)
             case .simulation:
                 SimulationView(state: state, scriptRunner: scriptRunner)
             case .tests:

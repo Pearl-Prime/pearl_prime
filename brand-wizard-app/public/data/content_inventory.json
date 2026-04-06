@@ -1,0 +1,424 @@
+{
+  "scan_date": "2026-04-06",
+  "repo_root": "/Users/ahjan/phoenix_omega",
+  "summary": {
+    "catalog_rows": 7923,
+    "total_configured": 7923,
+    "total_built": 38,
+    "coverage_pct": 0.48,
+    "missing_count": 13,
+    "total_built_assets": 5711,
+    "by_type": {
+      "book_text": {
+        "configured": 7923,
+        "built": 12,
+        "pct": 0.15
+      },
+      "epub": {
+        "configured": 7923,
+        "built": 26,
+        "pct": 0.33
+      },
+      "cover": {
+        "configured": 7923,
+        "built": 0,
+        "pct": 0.0
+      },
+      "manga_cover": {
+        "configured": 800,
+        "built": 0,
+        "pct": 0.0
+      },
+      "manga_panels": {
+        "configured": 500,
+        "built": 0,
+        "pct": 0.0
+      },
+      "video_plan": {
+        "configured": 26,
+        "built": 0,
+        "pct": 0.0
+      },
+      "video_rendered": {
+        "configured": 26,
+        "built": 0,
+        "pct": 0.0
+      },
+      "audio_presenter": {
+        "configured": 200,
+        "built": 0,
+        "pct": 0.0
+      },
+      "atoms_canonical": {
+        "configured": 6500,
+        "built": 5673,
+        "pct": 87.28
+      }
+    }
+  },
+  "teachers": [
+    {
+      "id": "ahjan",
+      "book_text": true,
+      "epub": true,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    },
+    {
+      "id": "ahjan_self",
+      "book_text": true,
+      "epub": false,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    },
+    {
+      "id": "joshin",
+      "book_text": true,
+      "epub": true,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    },
+    {
+      "id": "maat",
+      "book_text": true,
+      "epub": true,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    },
+    {
+      "id": "master_feung",
+      "book_text": true,
+      "epub": true,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    },
+    {
+      "id": "master_sha",
+      "book_text": true,
+      "epub": true,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    },
+    {
+      "id": "master_wu",
+      "book_text": true,
+      "epub": true,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    },
+    {
+      "id": "miki",
+      "book_text": true,
+      "epub": true,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    },
+    {
+      "id": "omote",
+      "book_text": true,
+      "epub": true,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    },
+    {
+      "id": "pamela_fellows",
+      "book_text": true,
+      "epub": true,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    },
+    {
+      "id": "ra",
+      "book_text": true,
+      "epub": true,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    },
+    {
+      "id": "sai_ma",
+      "book_text": true,
+      "epub": true,
+      "cover": false,
+      "manga_cover": false,
+      "manga_panels": false,
+      "manga_any": false,
+      "video_plan": false,
+      "video_youtube": false,
+      "video_tiktok": false,
+      "video_rendered_any": false,
+      "audio_presenter": false
+    }
+  ],
+  "missing": [
+    {
+      "type": "cover",
+      "teacher": "ahjan",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for ahjan"
+    },
+    {
+      "type": "epub",
+      "teacher": "ahjan_self",
+      "topic": "",
+      "lane": "",
+      "action": "python3 scripts/release/build_epub.py  # if script present"
+    },
+    {
+      "type": "cover",
+      "teacher": "ahjan_self",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for ahjan_self"
+    },
+    {
+      "type": "cover",
+      "teacher": "joshin",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for joshin"
+    },
+    {
+      "type": "cover",
+      "teacher": "maat",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for maat"
+    },
+    {
+      "type": "cover",
+      "teacher": "master_feung",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for master_feung"
+    },
+    {
+      "type": "cover",
+      "teacher": "master_sha",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for master_sha"
+    },
+    {
+      "type": "cover",
+      "teacher": "master_wu",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for master_wu"
+    },
+    {
+      "type": "cover",
+      "teacher": "miki",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for miki"
+    },
+    {
+      "type": "cover",
+      "teacher": "omote",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for omote"
+    },
+    {
+      "type": "cover",
+      "teacher": "pamela_fellows",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for pamela_fellows"
+    },
+    {
+      "type": "cover",
+      "teacher": "ra",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for ra"
+    },
+    {
+      "type": "cover",
+      "teacher": "sai_ma",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for sai_ma"
+    }
+  ],
+  "missing_sample": [
+    {
+      "type": "cover",
+      "teacher": "ahjan",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for ahjan"
+    },
+    {
+      "type": "epub",
+      "teacher": "ahjan_self",
+      "topic": "",
+      "lane": "",
+      "action": "python3 scripts/release/build_epub.py  # if script present"
+    },
+    {
+      "type": "cover",
+      "teacher": "ahjan_self",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for ahjan_self"
+    },
+    {
+      "type": "cover",
+      "teacher": "joshin",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for joshin"
+    },
+    {
+      "type": "cover",
+      "teacher": "maat",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for maat"
+    },
+    {
+      "type": "cover",
+      "teacher": "master_feung",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for master_feung"
+    },
+    {
+      "type": "cover",
+      "teacher": "master_sha",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for master_sha"
+    },
+    {
+      "type": "cover",
+      "teacher": "master_wu",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for master_wu"
+    },
+    {
+      "type": "cover",
+      "teacher": "miki",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for miki"
+    },
+    {
+      "type": "cover",
+      "teacher": "omote",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for omote"
+    },
+    {
+      "type": "cover",
+      "teacher": "pamela_fellows",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for pamela_fellows"
+    },
+    {
+      "type": "cover",
+      "teacher": "ra",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for ra"
+    },
+    {
+      "type": "cover",
+      "teacher": "sai_ma",
+      "topic": "",
+      "lane": "",
+      "action": "Add cover_*.png under brand-wizard-app/public/assets/covers/ for sai_ma"
+    }
+  ],
+  "commands": {
+    "scan": "python3 scripts/inventory/scan_content_inventory.py",
+    "content_coverage": "PYTHONPATH=. python3 scripts/ci/content_coverage_report.py",
+    "videos_dry": "python3 scripts/video/render_videos.py --dry-run  # if script present",
+    "videos": "python3 scripts/video/render_videos.py  # if script present",
+    "manga_assemble": "python3 scripts/release/build_manga_webtoon.py  # if script present",
+    "presenter_audio": "PYTHONPATH=. python3 scripts/audio/generate_presenter_audio.py --deck intro  # if script present",
+    "epub": "python3 scripts/release/build_epub.py  # if script present"
+  }
+}

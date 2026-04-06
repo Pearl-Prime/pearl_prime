@@ -27,6 +27,7 @@ final class ScriptRunner: ObservableObject {
         "scripts/ci/check_integration_env.py",
         "scripts/ci/check_system_governance_status.py",
         "scripts/ci/content_coverage_report.py",
+        "scripts/inventory/scan_content_inventory.py",
         "scripts/ci/dump_video_config_json.py",
         "scripts/systems_test/run_systems_test.py",
         "scripts/audiobook_script/run_comparator_loop.py",
