@@ -91,33 +91,76 @@ def load_catalog_config() -> dict:
 ENGINES = ["spiral", "shame", "comparison", "false_alarm", "overwhelm", "grief", "watcher"]
 
 TOPIC_DISPLAY = {
-    "anxiety": "Anxiety", "boundaries": "Boundaries", "burnout": "Burnout",
-    "compassion_fatigue": "Compassion Fatigue", "courage": "Courage",
+    "adhd_focus": "ADHD & Focus", "anxiety": "Anxiety", "boundaries": "Boundaries",
+    "burnout": "Burnout", "compassion_fatigue": "Compassion Fatigue", "courage": "Courage",
     "depression": "Depression", "financial_anxiety": "Financial Anxiety",
     "financial_stress": "Financial Stress", "grief": "Grief",
-    "imposter_syndrome": "Imposter Syndrome", "overthinking": "Overthinking",
-    "self_worth": "Self-Worth", "sleep_anxiety": "Sleep Anxiety",
-    "social_anxiety": "Social Anxiety", "somatic_healing": "Somatic Healing",
+    "imposter_syndrome": "Imposter Syndrome", "mindfulness": "Mindfulness",
+    "overthinking": "Overthinking", "self_worth": "Self-Worth",
+    "sleep_anxiety": "Sleep Anxiety", "social_anxiety": "Social Anxiety",
+    "somatic_healing": "Somatic Healing",
 }
 
 PERSONA_DISPLAY = {
     "corporate_managers": "Professionals", "millennial_women_professionals": "Women",
     "tech_finance_burnout": "High Performers", "gen_z_professionals": "Young Professionals",
-    "healthcare_rns": "Nurses and Caregivers", "first_responders": "First Responders",
-    "educators": "Educators", "working_parents": "Working Parents",
-    "entrepreneurs": "Entrepreneurs", "gen_x_sandwich": "Midlife Adults",
-    "gen_alpha_students": "Students", "nyc_executives": "Executives",
+    "gen_z_student": "College Students", "healthcare_rns": "Nurses and Caregivers",
+    "first_responders": "First Responders", "educators": "Educators",
+    "working_parents": "Working Parents", "entrepreneurs": "Entrepreneurs",
+    "gen_x_sandwich": "Midlife Adults", "gen_alpha_students": "Students",
+    "nyc_executives": "Executives",
 }
+
+# Persona subtitle strategy (from persona_in_titles_strategy_research.md):
+# 70% persona-subtitle, 20% situation-subtitle, 10% generic
+# Per-market: JP/KR prefer universal titles; US/DE/FR respond to persona targeting
+PERSONA_SUBTITLE_MODE = {
+    # "always" = append "for {persona}" if not already in subtitle
+    # "never" = never add persona to subtitle (keep generic)
+    # "situation" = use situation phrase instead of persona label
+    "healthcare_rns": "always",        # "for Nurses and Caregivers" — high specificity
+    "first_responders": "always",      # "for First Responders" — high specificity
+    "educators": "always",             # "for Educators" — high specificity
+    "working_parents": "always",       # "for Working Parents" — clear audience
+    "corporate_managers": "situation",  # "for Busy Professionals" — broader
+    "entrepreneurs": "situation",       # "for People Who Can't Stop" — aspirational
+    "millennial_women_professionals": "situation",  # "for Women Who Do Too Much"
+    "tech_finance_burnout": "situation",  # "for High Performers"
+    "gen_z_professionals": "situation",   # "for Your Twenties"
+    "gen_z_student": "always",           # "for College Students"
+    "gen_alpha_students": "always",       # "for Students"
+    "gen_x_sandwich": "situation",        # "for the Sandwich Generation"
+    "nyc_executives": "situation",        # "for Leaders Under Pressure"
+}
+
+# Situation phrases (used when mode = "situation")
+PERSONA_SITUATION = {
+    "corporate_managers": "for Busy Professionals",
+    "entrepreneurs": "for People Who Can't Stop",
+    "millennial_women_professionals": "for Women Who Do Too Much",
+    "tech_finance_burnout": "for High Performers",
+    "gen_z_professionals": "for Your Twenties",
+    "gen_x_sandwich": "for the Sandwich Generation",
+    "nyc_executives": "for Leaders Under Pressure",
+}
+
+# Lanes where persona targeting is suppressed (prefer universal titles)
+PERSONA_SUPPRESS_LANES = {"ja_JP", "ko_KR"}
 
 # Runtime format word counts and pricing
 RUNTIME_FORMATS = {
-    "micro_book_15":   {"words": 2750, "price": 0.99,  "structural": ["F015", "F003"]},
-    "micro_book_20":   {"words": 3500, "price": 0.99,  "structural": ["F015", "F003"]},
-    "short_book_30":   {"words": 5000, "price": 2.99,  "structural": ["F003", "F006", "F007", "F011"]},
-    "standard_book":   {"words": 10000, "price": 3.99, "structural": ["F006", "F007", "F010", "F011", "F014"]},
-    "extended_book_2h": {"words": 20000, "price": 9.99, "structural": ["F004", "F009", "F010", "F014"]},
-    "deep_book_4h":    {"words": 40000, "price": 17.99, "structural": ["F004", "F009", "F013"]},
-    "deep_book_6h":    {"words": 55000, "price": 24.99, "structural": ["F013"]},
+    # Text ebook formats
+    "micro_book_15":   {"words": 2750, "price": 0.99,  "structural": ["F015", "F003"], "type": "ebook"},
+    "micro_book_20":   {"words": 3500, "price": 0.99,  "structural": ["F015", "F003"], "type": "ebook"},
+    "short_book_30":   {"words": 5000, "price": 2.99,  "structural": ["F003", "F006", "F007", "F011"], "type": "ebook"},
+    "standard_book":   {"words": 10000, "price": 3.99, "structural": ["F006", "F007", "F010", "F011", "F014"], "type": "ebook"},
+    "extended_book_2h": {"words": 20000, "price": 9.99, "structural": ["F004", "F009", "F010", "F014"], "type": "ebook"},
+    "deep_book_4h":    {"words": 40000, "price": 17.99, "structural": ["F004", "F009", "F013"], "type": "ebook"},
+    "deep_book_6h":    {"words": 55000, "price": 24.99, "structural": ["F013"], "type": "ebook"},
+    # Manga/webtoon formats (JP-primary)
+    "manga_episode":   {"panels": 12, "price": 0.00,  "structural": ["MF01"], "type": "manga"},  # free webtoon episode
+    "manga_volume":    {"panels": 40, "price": 4.99,  "structural": ["MF02"], "type": "manga"},  # tankōbon collected volume
+    "manga_micro":     {"panels": 5,  "price": 0.00,  "structural": ["MF03"], "type": "manga"},  # short episode (LINE Manga)
 }
 
 # Micro formats for the "strong_micros" slot
@@ -126,26 +169,139 @@ MICRO_RUNTIMES = ["micro_book_15", "micro_book_20"]
 STANDALONE_RUNTIMES = ["short_book_30", "standard_book"]
 # For format variations
 ALL_RUNTIMES = list(RUNTIME_FORMATS.keys())
+# Manga formats for JP lane
+MANGA_RUNTIMES = ["manga_episode", "manga_volume", "manga_micro"]
+MANGA_STANDALONE_RUNTIMES = ["manga_volume"]
+MANGA_MICRO_RUNTIMES = ["manga_episode", "manga_micro"]
+
+# Manga-specific series names (iyashikei therapeutic manga)
+MANGA_SERIES_NAMES = {
+    "anxiety": ["The Quiet Signal", "Breath Between Panels"],
+    "burnout": ["Ashes to Still", "The Empty Desk"],
+    "sleep_anxiety": ["The 2 AM Scroll", "Moonlit Breath"],
+    "imposter_syndrome": ["The Wrong Room", "Mirror Image"],
+    "overthinking": ["The Loop", "Thought Spiral"],
+    "self_worth": ["Enough", "The Cracked Mirror"],
+    "boundaries": ["The Line", "No with Grace"],
+    "grief": ["The Empty Chair", "Still Water"],
+    "depression": ["Grey Morning", "The Slow Return"],
+    "social_anxiety": ["The Doorway", "Invisible Wall"],
+    "courage": ["The First Step", "Brave Enough"],
+    "somatic_healing": ["Body Map", "The Tension Backpack"],
+    "mindfulness": ["Present Tense", "The Pause"],
+    "adhd_focus": ["Scattered", "The Focus Thief"],
+    "compassion_fatigue": ["Empty Cup", "The Last Drop"],
+    "financial_anxiety": ["The Number", "Broke and Breathing"],
+    "financial_stress": ["Paycheck to Paycheck", "The Budget Spiral"],
+}
+
+# Manga title templates (for graphic novel EPUBs and webtoon series)
+MANGA_TITLE_TEMPLATES = {
+    "anxiety": [
+        {"title": "Quiet Signal", "subtitle_pattern": "A Therapeutic Manga About {topic} and the Nervous System"},
+        {"title": "The Alarm in Her Chest", "subtitle_pattern": "An Iyashikei Manga for {topic} Recovery"},
+        {"title": "Breathe Between Panels", "subtitle_pattern": "A Healing Manga About Living with {topic}"},
+    ],
+    "burnout": [
+        {"title": "The Empty Desk", "subtitle_pattern": "A Therapeutic Manga About {topic} and Recovery"},
+        {"title": "Ashes to Still", "subtitle_pattern": "An Iyashikei Manga for {topic} Healing"},
+        {"title": "Running on Empty", "subtitle_pattern": "A Healing Manga About {topic} and Rest"},
+    ],
+    "sleep_anxiety": [
+        {"title": "The 2 AM Scroll", "subtitle_pattern": "A Therapeutic Manga About {topic} and Rest"},
+        {"title": "Moonlit Breath", "subtitle_pattern": "An Iyashikei Manga for {topic} Recovery"},
+        {"title": "Dark Room, Still Mind", "subtitle_pattern": "A Healing Manga About {topic}"},
+    ],
+    "imposter_syndrome": [
+        {"title": "The Wrong Room", "subtitle_pattern": "A Therapeutic Manga About {topic}"},
+        {"title": "Mirror Image", "subtitle_pattern": "An Iyashikei Manga for {topic} Recovery"},
+        {"title": "Who Let Me In", "subtitle_pattern": "A Healing Manga About {topic} and Belonging"},
+    ],
+    "overthinking": [
+        {"title": "The Loop", "subtitle_pattern": "A Therapeutic Manga About {topic} and Mental Spirals"},
+        {"title": "Thought Spiral", "subtitle_pattern": "An Iyashikei Manga for {topic} Recovery"},
+        {"title": "The Reply Draft", "subtitle_pattern": "A Healing Manga About {topic}"},
+    ],
+    "self_worth": [
+        {"title": "The Cracked Mirror", "subtitle_pattern": "A Therapeutic Manga About {topic}"},
+        {"title": "Enough", "subtitle_pattern": "An Iyashikei Manga for Rebuilding {topic}"},
+        {"title": "Kintsugi Heart", "subtitle_pattern": "A Healing Manga About {topic} and Gold"},
+    ],
+    "boundaries": [
+        {"title": "The Line", "subtitle_pattern": "A Therapeutic Manga About Setting {topic}"},
+        {"title": "No with Grace", "subtitle_pattern": "An Iyashikei Manga for {topic}"},
+        {"title": "The Open Door", "subtitle_pattern": "A Healing Manga About {topic} and Peace"},
+    ],
+    "grief": [
+        {"title": "The Empty Chair", "subtitle_pattern": "A Therapeutic Manga About {topic} and Loss"},
+        {"title": "Still Water", "subtitle_pattern": "An Iyashikei Manga for {topic} Recovery"},
+        {"title": "Phantom Warmth", "subtitle_pattern": "A Healing Manga About Living with {topic}"},
+    ],
+    "depression": [
+        {"title": "Grey Morning", "subtitle_pattern": "A Therapeutic Manga About {topic}"},
+        {"title": "The Slow Return", "subtitle_pattern": "An Iyashikei Manga for {topic} Recovery"},
+        {"title": "Color Comes Back", "subtitle_pattern": "A Healing Manga About {topic} and Hope"},
+    ],
+    "courage": [
+        {"title": "The First Step", "subtitle_pattern": "A Therapeutic Manga About {topic}"},
+        {"title": "Brave Enough", "subtitle_pattern": "An Iyashikei Manga for Finding {topic}"},
+        {"title": "The Raised Hand", "subtitle_pattern": "A Healing Manga About {topic} and Voice"},
+    ],
+    "mindfulness": [
+        {"title": "Present Tense", "subtitle_pattern": "A Therapeutic Manga About {topic}"},
+        {"title": "The Pause", "subtitle_pattern": "An Iyashikei Manga for {topic} Practice"},
+        {"title": "Here Not There", "subtitle_pattern": "A Healing Manga About {topic} and Presence"},
+    ],
+    "adhd_focus": [
+        {"title": "Scattered", "subtitle_pattern": "A Therapeutic Manga About {topic}"},
+        {"title": "The Focus Thief", "subtitle_pattern": "An Iyashikei Manga for {topic} Recovery"},
+        {"title": "Brain on Fire", "subtitle_pattern": "A Healing Manga About Living with {topic}"},
+    ],
+    "somatic_healing": [
+        {"title": "Body Map", "subtitle_pattern": "A Therapeutic Manga About {topic}"},
+        {"title": "The Tension Backpack", "subtitle_pattern": "An Iyashikei Manga for {topic}"},
+        {"title": "Unlock", "subtitle_pattern": "A Healing Manga About {topic} and the Nervous System"},
+    ],
+    "social_anxiety": [
+        {"title": "The Doorway", "subtitle_pattern": "A Therapeutic Manga About {topic}"},
+        {"title": "Invisible Wall", "subtitle_pattern": "An Iyashikei Manga for {topic} Recovery"},
+        {"title": "Show Up", "subtitle_pattern": "A Healing Manga About {topic} and Connection"},
+    ],
+}
 
 SERIES_NAMES = {
+    "adhd_focus": ["The Focus Reset Series", "Wired Different Collection"],
     "anxiety": ["The Steady Ground Collection", "Calm Signal Series"],
     "burnout": ["The Recovery Road Series", "Ashes to Energy Collection"],
-    "sleep_anxiety": ["The Midnight Reset Series", "Quiet Night Collection"],
+    "sleep_anxiety": ["The Midnight Reset Series", "Quiet Night Collection", "Sleep and Body Collection"],
     "imposter_syndrome": ["The Belonging Series", "Own Your Seat Collection"],
     "social_anxiety": ["The Brave Room Series", "Show Up Collection"],
     "self_worth": ["The Enough Series", "Mirror Work Collection"],
     "boundaries": ["The Sacred Line Series", "No with Grace Collection"],
-    "grief": ["The After Collection", "Still Standing Series"],
+    "grief": ["The After Collection", "Still Standing Series", "The Long Goodbye Series", "The Unnamed Loss Collection"],
+    "mindfulness": ["The Present Moment Series", "Stillness Practice Collection"],
     "overthinking": ["The Quiet Mind Series", "Loop Breaker Collection"],
     "somatic_healing": ["The Body Knows Series", "Nervous System Reset Collection"],
-    "depression": ["The Color Returns Series", "Light Ahead Collection"],
-    "courage": ["The Bold Step Series", "Fear to Fire Collection"],
+    "depression": ["The Slow Return Series", "Light Ahead Collection"],
+    "courage": ["The Bold Step Series", "Brave Enough Collection"],
     "compassion_fatigue": ["The Healer's Rest Series", "Empty Well Collection"],
     "financial_anxiety": ["The Money Peace Series", "Worth Beyond Balance Collection"],
-    "financial_stress": ["The Money Peace Series", "Worth Beyond Balance Collection"],
+    "financial_stress": ["The Paycheck Reset Series", "Financial Ground Collection"],
 }
 
 SERIES_BOOK_SUBTITLES = {
+    "adhd_focus": [
+        "Understanding Your ADHD Brain and How It Works",
+        "Focus Strategies That Work with Your Wiring",
+        "ADHD and Overwhelm: Calming the Input Flood",
+        "Executive Function Recovery for Daily Life",
+        "The Dopamine Connection: Why Motivation Disappears",
+        "ADHD Time Blindness and How to Navigate It",
+        "Hyperfocus and Burnout: Managing the Extremes",
+        "ADHD in Relationships and Social Life",
+        "Building Routines That Survive the ADHD Brain",
+        "Long-Term ADHD Management Without Shame",
+    ],
     "anxiety": [
         "Understanding Your Nervous System and Anxiety Triggers",
         "Somatic Exercises for Anxiety Relief",
@@ -315,114 +471,257 @@ SERIES_BOOK_SUBTITLES = {
         "Long-Term Financial Peace and Nervous System Health",
     ],
     "financial_stress": [
-        "Understanding Financial Stress Responses",
-        "The Body's Reaction to Money Worries",
-        "Financial Stress and Sleep",
-        "Building a Financial Safety Net",
-        "Somatic Tools for Money Anxiety",
-        "Financial Stress in Families",
-        "From Scarcity to Security",
-        "Money Stress and Decision Making",
-        "Financial Recovery After Crisis",
-        "Building Financial Resilience for Life",
+        "Understanding Paycheck-to-Paycheck Stress",
+        "The Body Under Financial Pressure",
+        "Financial Stress and Sleep Disruption",
+        "Building a Stability Plan on a Tight Budget",
+        "Somatic Tools for Money Pressure",
+        "Financial Stress in Families and Relationships",
+        "From Survival Mode to Financial Ground",
+        "Making Decisions Under Financial Pressure",
+        "Financial Recovery After Job Loss or Crisis",
+        "Building Long-Term Financial Resilience",
+    ],
+    "mindfulness": [
+        "What Mindfulness Actually Is (Not What You Think)",
+        "Your First Meditation: A No-Pressure Guide",
+        "Mindfulness for Anxiety and Racing Thoughts",
+        "The Body Scan: Listening to What You Carry",
+        "Mindfulness in Daily Life: Not Just Cushion Time",
+        "When Meditation Feels Impossible: Common Blocks",
+        "Mindful Breathing for Stress and Overwhelm",
+        "Presence Practice for Overthinkers",
+        "Mindfulness and Sleep: Winding Down the Mind",
+        "A Lifelong Mindfulness Practice: Beyond the Basics",
     ],
 }
 
 # Title templates per topic (from catalog_generation_config.yaml + search research)
 TITLE_TEMPLATES = {
+    "adhd_focus": [
+        {"title": "The Focus Thief", "subtitle_pattern": "Understanding {topic} and Reclaiming Your Attention"},
+        {"title": "Scattered but Whole", "subtitle_pattern": "A Neurodivergent Guide to {topic} and Self-Acceptance"},
+        {"title": "Brain on Fire", "subtitle_pattern": "Managing {topic} Overwhelm and Sensory Overload"},
+        {"title": "Not Lazy, Wired Different", "subtitle_pattern": "An {topic} Guide for Adults Who Were Never Diagnosed"},
+        {"title": "The Dopamine Debt", "subtitle_pattern": "How {topic} Hijacks Motivation and How to Get It Back"},
+        {"title": "When Focus Fights Back", "subtitle_pattern": "A Somatic Approach to {topic} and Executive Function"},
+        {"title": "Attention Is Not a Choice", "subtitle_pattern": "An {topic} Recovery Guide for {persona}"},
+        {"title": "The ADHD Reset", "subtitle_pattern": "Daily Strategies for {topic} and Neurodivergent Burnout"},
+        {"title": "Hyperfocus Hangover", "subtitle_pattern": "Managing the Extremes of {topic}"},
+        {"title": "Wired for Chaos", "subtitle_pattern": "How to Build Structure with an {topic} Brain"},
+    ],
     "anxiety": [
         {"title": "The Alarm Is Lying", "subtitle_pattern": "A Nervous System Guide to {topic} Recovery for {persona}"},
         {"title": "Safe Enough", "subtitle_pattern": "How to Calm {topic} and Reclaim Your Nervous System"},
         {"title": "The Emergency That Never Comes", "subtitle_pattern": "Breaking Free from High-Functioning {topic}"},
+        {"title": "Wired for Worry", "subtitle_pattern": "Understanding Your {topic} Response and How to Rewire It"},
+        {"title": "The Calm After", "subtitle_pattern": "A Body-Based Guide to {topic} Recovery"},
+        {"title": "False Alarm", "subtitle_pattern": "When Your Nervous System Lies About Danger"},
+        {"title": "Steady Ground", "subtitle_pattern": "Finding Calm in the Middle of {topic}"},
+        {"title": "The Panic You Survived", "subtitle_pattern": "How to Stop {topic} from Running Your Life"},
+        {"title": "Breath Before the Storm", "subtitle_pattern": "Somatic Tools for {topic} and Overwhelm"},
+        {"title": "Quiet Enough", "subtitle_pattern": "A {topic} Recovery Guide for Overthinkers"},
     ],
     "burnout": [
         {"title": "Running on Fumes", "subtitle_pattern": "A Recovery Guide for {topic} and Work Exhaustion"},
         {"title": "The Collapse You Earned", "subtitle_pattern": "{topic} Recovery for People Who Can't Stop"},
         {"title": "Before You Break", "subtitle_pattern": "Escaping {topic} and Rebuilding Your Energy"},
+        {"title": "Empty Battery", "subtitle_pattern": "A Nervous System Reset for {topic} and Exhaustion"},
+        {"title": "The Rest You Owe Yourself", "subtitle_pattern": "Recovering from {topic} Without Guilt"},
+        {"title": "Ashes to Energy", "subtitle_pattern": "Rebuilding After {topic} and Total Depletion"},
+        {"title": "The Wall", "subtitle_pattern": "What Happens When {topic} Catches Up"},
+        {"title": "Hustle Hangover", "subtitle_pattern": "A Recovery Plan for {topic} and Overwork"},
+        {"title": "Not Lazy, Depleted", "subtitle_pattern": "Understanding {topic} and Reclaiming Your Life"},
+        {"title": "The Slow Return", "subtitle_pattern": "How to Come Back from {topic} Without Burning Again"},
     ],
     "sleep_anxiety": [
         {"title": "The 3 AM Mind", "subtitle_pattern": "A Guide to Overcoming Insomnia and {topic}"},
         {"title": "Permission to Rest", "subtitle_pattern": "How to Calm Racing Thoughts and Finally Sleep"},
         {"title": "The Quiet Hour", "subtitle_pattern": "Reclaiming Sleep from {topic} and Overthinking"},
+        {"title": "Dark Room, Loud Brain", "subtitle_pattern": "A Somatic Guide to Beating {topic}"},
+        {"title": "Sleep Is Not a Reward", "subtitle_pattern": "How to Break the {topic} Cycle"},
+        {"title": "The Pillow Wars", "subtitle_pattern": "Winning the Battle Against {topic} and Insomnia"},
+        {"title": "Drift", "subtitle_pattern": "A Body-Based Approach to Overcoming {topic}"},
+        {"title": "Lights Out, Mind On", "subtitle_pattern": "A Practical Guide to Silencing {topic}"},
+        {"title": "The Night Shift", "subtitle_pattern": "How Your Body Keeps You Awake and How to Stop It"},
+        {"title": "Tired of Being Tired", "subtitle_pattern": "{topic} Recovery for Exhausted Minds"},
     ],
     "imposter_syndrome": [
         {"title": "You're Not a Fraud", "subtitle_pattern": "Overcoming {topic} and Owning Your Worth"},
         {"title": "The Proof Was Always You", "subtitle_pattern": "An {topic} Recovery Guide for {persona}"},
         {"title": "Belonging at the Table", "subtitle_pattern": "Silencing {topic} and Claiming Your Place"},
+        {"title": "The Mask You Wore", "subtitle_pattern": "How {topic} Kept You Small and How to Break Free"},
+        {"title": "Earned, Not Faked", "subtitle_pattern": "Overcoming {topic} and Owning Your Success"},
+        {"title": "Who Let Me In", "subtitle_pattern": "A Guide to Dismantling {topic} from the Inside"},
+        {"title": "The Competence Gap", "subtitle_pattern": "Why {topic} Lies About What You Know"},
+        {"title": "Own Your Seat", "subtitle_pattern": "How to Silence {topic} and Show Up Fully"},
+        {"title": "The Credential Trap", "subtitle_pattern": "When No Amount of Proof Defeats {topic}"},
+        {"title": "Enough Already", "subtitle_pattern": "A Nervous System Approach to {topic} Recovery"},
     ],
     "social_anxiety": [
         {"title": "The Room Isn't Watching", "subtitle_pattern": "A {topic} Recovery Guide for Quiet People"},
         {"title": "Brave Enough to Show Up", "subtitle_pattern": "Overcoming {topic} and Building Real Connection"},
         {"title": "The Script Nobody Gave You", "subtitle_pattern": "How to Navigate {topic} with Confidence"},
+        {"title": "Small Talk Survival", "subtitle_pattern": "A Practical Guide to Overcoming {topic}"},
+        {"title": "Visible Without Fear", "subtitle_pattern": "How to Stop {topic} from Shrinking Your Life"},
+        {"title": "The First Word", "subtitle_pattern": "Breaking Through {topic} One Conversation at a Time"},
+        {"title": "Wallflower to Bloom", "subtitle_pattern": "A Body-Based Approach to {topic} Recovery"},
+        {"title": "The Exit Plan You Don't Need", "subtitle_pattern": "Overcoming {topic} and Staying Present"},
+        {"title": "Nervous and Going Anyway", "subtitle_pattern": "A Guide to Living with {topic}"},
+        {"title": "The Eyes on You", "subtitle_pattern": "What {topic} Gets Wrong About Being Seen"},
     ],
     "self_worth": [
         {"title": "You Were Always Enough", "subtitle_pattern": "Rebuilding Self-Esteem and Reclaiming Your Worth"},
         {"title": "The Mirror Lied", "subtitle_pattern": "A Self-Love Guide to Healing Low Self-Esteem"},
         {"title": "Worthy Without Proof", "subtitle_pattern": "How to Build Unshakable {topic} and Confidence"},
+        {"title": "The Measuring Stops Here", "subtitle_pattern": "Breaking Free from the {topic} Deficit"},
+        {"title": "Not for Sale", "subtitle_pattern": "Reclaiming Your {topic} from Performance Culture"},
+        {"title": "Inherent", "subtitle_pattern": "A Guide to {topic} That Doesn't Depend on Achievement"},
+        {"title": "The Comparison Cure", "subtitle_pattern": "How to Stop Measuring and Start Living"},
+        {"title": "Unearned and Deserved", "subtitle_pattern": "A Radical Approach to {topic} Recovery"},
+        {"title": "Before the Grade", "subtitle_pattern": "Rediscovering {topic} Beyond Performance"},
+        {"title": "Already Whole", "subtitle_pattern": "A Somatic Guide to Rebuilding {topic}"},
     ],
     "boundaries": [
         {"title": "The No That Saved Me", "subtitle_pattern": "A Practical Guide to Setting {topic} and Finding Peace"},
         {"title": "Stop Pouring from an Empty Cup", "subtitle_pattern": "{topic} for People Pleasers and Overgivers"},
         {"title": "The Line You Draw", "subtitle_pattern": "How to Set {topic} Without Guilt or Fear"},
+        {"title": "Sacred Limits", "subtitle_pattern": "A Guide to {topic} That Protect Without Isolating"},
+        {"title": "Not Your Emergency", "subtitle_pattern": "How to Set {topic} When Everyone Needs Something"},
+        {"title": "The Fence You Build", "subtitle_pattern": "A Body-Based Guide to Healthy {topic}"},
+        {"title": "Guard Your Peace", "subtitle_pattern": "Setting {topic} in Relationships, Work, and Life"},
+        {"title": "Kind and Clear", "subtitle_pattern": "How to Say No Without Being the Villain"},
+        {"title": "The Open Door Problem", "subtitle_pattern": "Why {topic} Feel Impossible and How to Start"},
+        {"title": "Protect What Matters", "subtitle_pattern": "A {topic} Guide for People Who Give Too Much"},
     ],
     "grief": [
         {"title": "The Weight of Gone", "subtitle_pattern": "A Gentle Guide to {topic}, Loss, and Healing"},
         {"title": "Still Here Without You", "subtitle_pattern": "Finding Your Way Through {topic} and Heartbreak"},
         {"title": "The Shape of Missing", "subtitle_pattern": "A {topic} Recovery Companion for the Worst Days"},
+        {"title": "Grief Has No Schedule", "subtitle_pattern": "A Guide to Healing Loss on Your Own Timeline"},
+        {"title": "The Empty Chair", "subtitle_pattern": "Learning to Live with {topic} and Absence"},
+        {"title": "Love After Loss", "subtitle_pattern": "How to Carry {topic} Without Being Crushed by It"},
+        {"title": "The Wave That Comes", "subtitle_pattern": "Understanding {topic} and Finding Solid Ground"},
+        {"title": "Not Getting Over It", "subtitle_pattern": "A {topic} Guide for People Tired of Being Told to Move On"},
+        {"title": "Phantom Presence", "subtitle_pattern": "Living with {topic} and the People We Still Feel"},
+        {"title": "After the Funeral", "subtitle_pattern": "What Nobody Tells You About Long-Term {topic}"},
     ],
     "overthinking": [
         {"title": "The Loop Breaker", "subtitle_pattern": "How to Stop {topic} and Quiet Your Racing Mind"},
         {"title": "Your Brain Is Not the Boss", "subtitle_pattern": "A Guide to Overcoming {topic} and Mental Spirals"},
         {"title": "Thought Traffic", "subtitle_pattern": "Breaking Free from {topic}, Worry, and Analysis Paralysis"},
+        {"title": "The Replay Button", "subtitle_pattern": "How to Stop {topic} from Hijacking Your Day"},
+        {"title": "Analysis Paralysis", "subtitle_pattern": "A Practical Guide to Escaping {topic}"},
+        {"title": "The Mind Won't Quit", "subtitle_pattern": "Somatic Tools for {topic} and Rumination"},
+        {"title": "One Thought Too Many", "subtitle_pattern": "How to Break the {topic} Cycle"},
+        {"title": "Decision Made", "subtitle_pattern": "How to Move Past {topic} and Into Action"},
+        {"title": "The Draft You Never Send", "subtitle_pattern": "Overcoming {topic} in Communication and Life"},
+        {"title": "Quieter Than Yesterday", "subtitle_pattern": "A Week-by-Week Guide to Reducing {topic}"},
     ],
     "somatic_healing": [
         {"title": "The Body Remembers the Way Out", "subtitle_pattern": "{topic} and Nervous System Recovery"},
         {"title": "Unlock the Freeze", "subtitle_pattern": "A Somatic Guide to Nervous System Reset and Trauma Release"},
         {"title": "Held by the Body", "subtitle_pattern": "A {topic} Guide for Stress, Trauma, and Anxiety"},
+        {"title": "Your Nervous System Is Talking", "subtitle_pattern": "How to Listen and Heal with {topic}"},
+        {"title": "The Tension You Carry", "subtitle_pattern": "A {topic} Guide for Chronic Stress and Pain"},
+        {"title": "Reset", "subtitle_pattern": "Vagus Nerve Exercises and {topic} for Daily Calm"},
+        {"title": "Thaw", "subtitle_pattern": "Coming Back to Life After Freeze, Shutdown, and Numbness"},
+        {"title": "Body First", "subtitle_pattern": "Why {topic} Works When Talk Therapy Alone Doesn't"},
+        {"title": "The Shake Off", "subtitle_pattern": "A {topic} Guide to Releasing Stored Stress"},
+        {"title": "Wired for Safety", "subtitle_pattern": "How Your Nervous System Heals Through {topic}"},
     ],
     "depression": [
         {"title": "The Light You Forgot", "subtitle_pattern": "A Gentle Guide to Healing {topic} and Finding Hope"},
         {"title": "Still Breathing", "subtitle_pattern": "{topic} Recovery for People Running on Empty"},
         {"title": "Color Returns", "subtitle_pattern": "How to Move Through {topic} One Day at a Time"},
+        {"title": "The Flat Morning", "subtitle_pattern": "A Guide to Getting Up When {topic} Holds You Down"},
+        {"title": "Numb and Navigating", "subtitle_pattern": "Living with High-Functioning {topic}"},
+        {"title": "The Grey Season", "subtitle_pattern": "A Somatic Approach to {topic} Recovery"},
+        {"title": "Small Movements", "subtitle_pattern": "How Tiny Steps Break Through {topic}"},
+        {"title": "Not Fine", "subtitle_pattern": "A Guide to {topic} for People Who Keep Saying They're Okay"},
+        {"title": "Below the Surface", "subtitle_pattern": "Understanding {topic} and the Body's Role in Healing"},
+        {"title": "The First Good Day", "subtitle_pattern": "What {topic} Recovery Actually Looks Like"},
     ],
     "courage": [
         {"title": "The Fear That Built You", "subtitle_pattern": "Finding {topic} When Everything Feels Uncertain"},
         {"title": "Jump Scared", "subtitle_pattern": "A Guide to Building {topic} and Facing the Unknown"},
         {"title": "Bold Enough", "subtitle_pattern": "How to Find {topic} in Anxious Times"},
+        {"title": "The Raised Hand", "subtitle_pattern": "A Guide to {topic} for People Who Stay Silent"},
+        {"title": "Scared and Starting", "subtitle_pattern": "How to Act with {topic} Before You Feel Ready"},
+        {"title": "The Other Side of Fear", "subtitle_pattern": "What Happens When You Choose {topic}"},
+        {"title": "Brave Is a Verb", "subtitle_pattern": "A Daily Practice Guide for Building {topic}"},
+        {"title": "The Leap Year", "subtitle_pattern": "Finding {topic} in Uncertain Times"},
+        {"title": "Voice Unlocked", "subtitle_pattern": "How to Speak Up When {topic} Feels Impossible"},
+        {"title": "Trembling and Going", "subtitle_pattern": "A Somatic Guide to Everyday {topic}"},
     ],
     "compassion_fatigue": [
         {"title": "Caring Until There's Nothing Left", "subtitle_pattern": "A {topic} Recovery Guide for Helpers"},
         {"title": "The Empty Well", "subtitle_pattern": "Healing {topic} and Emotional Exhaustion"},
         {"title": "Who Heals the Healer", "subtitle_pattern": "{topic} Recovery for {persona}"},
+        {"title": "Empathy Overdraft", "subtitle_pattern": "When {topic} Drains Everything You Have"},
+        {"title": "The Helper's Burnout", "subtitle_pattern": "A Somatic Guide to {topic} Recovery"},
+        {"title": "Boundaries for Caregivers", "subtitle_pattern": "How to Give Without Losing Yourself to {topic}"},
+        {"title": "Refill First", "subtitle_pattern": "A {topic} Recovery Plan for Nurses, Teachers, and Helpers"},
+        {"title": "The Cost of Caring", "subtitle_pattern": "Understanding {topic} and What to Do About It"},
+        {"title": "Numb to Need", "subtitle_pattern": "When {topic} Turns Empathy Into Exhaustion"},
+        {"title": "Your Turn to Heal", "subtitle_pattern": "A {topic} Guide for People Who Put Everyone First"},
     ],
     "financial_anxiety": [
         {"title": "The Money Knot", "subtitle_pattern": "Untangling {topic} and Building Financial Peace"},
         {"title": "Broke and Breathing", "subtitle_pattern": "A Somatic Guide to {topic} Recovery"},
         {"title": "Worth More Than Your Balance", "subtitle_pattern": "Healing {topic} and Money Shame"},
+        {"title": "The Number You Avoid", "subtitle_pattern": "How to Face {topic} Without Spiraling"},
+        {"title": "Debt and Breath", "subtitle_pattern": "A Nervous System Approach to {topic}"},
+        {"title": "Rich in Everything but Calm", "subtitle_pattern": "Understanding {topic} and Finding Peace"},
+        {"title": "Money on the Mind", "subtitle_pattern": "Breaking the {topic} Thought Loop"},
+        {"title": "The Safety Net", "subtitle_pattern": "How to Build Financial Security Despite {topic}"},
+        {"title": "Not About the Numbers", "subtitle_pattern": "A Somatic Guide to Healing {topic}"},
+        {"title": "Scarcity Thinking", "subtitle_pattern": "How {topic} Hijacks Your Decisions"},
     ],
     "financial_stress": [
         {"title": "The Money Knot", "subtitle_pattern": "Untangling {topic} and Building Financial Peace"},
         {"title": "Broke and Breathing", "subtitle_pattern": "A Somatic Guide to {topic} Recovery"},
         {"title": "Worth More Than Your Balance", "subtitle_pattern": "Healing {topic} and Money Shame"},
+        {"title": "Paycheck to Paycheck", "subtitle_pattern": "A Calm Guide to Surviving {topic}"},
+        {"title": "The Budget Spiral", "subtitle_pattern": "How {topic} Controls Your Life and How to Take It Back"},
+        {"title": "Earning Enough, Feeling Broke", "subtitle_pattern": "Understanding Hidden {topic}"},
+        {"title": "Money and Meaning", "subtitle_pattern": "A Guide to {topic} Recovery for {persona}"},
+        {"title": "The Cost of Living", "subtitle_pattern": "How to Navigate {topic} with Less Panic"},
+        {"title": "Financial Calm", "subtitle_pattern": "A Nervous System Guide to Managing {topic}"},
+        {"title": "Beyond the Balance", "subtitle_pattern": "Healing Your Relationship with Money and {topic}"},
+    ],
+    "mindfulness": [
+        {"title": "The Breath You Forgot", "subtitle_pattern": "A Beginner's Guide to {topic} and Present-Moment Awareness"},
+        {"title": "Present Tense", "subtitle_pattern": "How {topic} Calms Anxiety and Quiets the Mind"},
+        {"title": "Here Not There", "subtitle_pattern": "A {topic} Guide for Overthinkers and Worriers"},
+        {"title": "The Stillness Practice", "subtitle_pattern": "Daily {topic} Exercises for Stress and Calm"},
+        {"title": "Quiet Thunder", "subtitle_pattern": "{topic} and Meditation for People Who Can't Sit Still"},
+        {"title": "One Breath at a Time", "subtitle_pattern": "A Simple {topic} Practice for {persona}"},
+        {"title": "The Attention Anchor", "subtitle_pattern": "How {topic} Trains Your Brain to Stay Present"},
+        {"title": "Grounded", "subtitle_pattern": "A {topic} Guide for Anxiety, Stress, and Overwhelm"},
+        {"title": "Mind Full to Mindful", "subtitle_pattern": "The Shift from Overthinking to {topic}"},
+        {"title": "The Art of Noticing", "subtitle_pattern": "A {topic} Workbook for Daily Presence"},
     ],
 }
 
 KEYWORD_TEMPLATES = {
-    "anxiety": ["anxiety relief", "nervous system regulation", "calm anxiety naturally", "anxiety recovery", "high functioning anxiety", "anxiety workbook adults", "somatic anxiety"],
-    "burnout": ["burnout recovery", "work exhaustion healing", "nervous system reset", "burnout book professionals", "hustle culture recovery", "stress management", "burnout prevention"],
-    "sleep_anxiety": ["insomnia self help", "racing thoughts night", "sleep anxiety relief", "cant sleep book", "3am anxiety", "calm mind sleep", "bedtime anxiety"],
-    "imposter_syndrome": ["imposter syndrome book", "feeling like fraud", "self doubt recovery", "imposter syndrome women", "imposter syndrome work", "confidence building", "worthy enough"],
-    "social_anxiety": ["social anxiety recovery", "overcoming shyness", "introvert anxiety", "social confidence", "making friends adult", "phone anxiety", "social skills"],
-    "self_worth": ["self esteem books", "self worth healing", "self love guide", "confidence building", "feeling worthless recovery", "enough self help", "body neutrality"],
-    "boundaries": ["setting boundaries book", "how say no", "people pleasing recovery", "boundaries without guilt", "codependency healing", "toxic relationship boundaries", "healthy boundaries"],
-    "grief": ["grief recovery book", "coping with loss", "grief healing guide", "losing loved one", "grief companion", "complicated grief", "bereavement self help"],
-    "overthinking": ["stop overthinking book", "racing thoughts relief", "quiet mind guide", "analysis paralysis", "worry less book", "mental spirals", "rumination recovery"],
-    "somatic_healing": ["nervous system regulation book", "somatic exercises", "vagus nerve healing", "body trauma release", "polyvagal theory guide", "somatic therapy self help", "freeze response"],
-    "depression": ["depression recovery book", "feeling numb healing", "low energy guide", "depression self help", "finding hope again", "functioning depression", "mood healing"],
-    "courage": ["courage building book", "facing fear guide", "brave living", "fear of change", "bold decisions", "risk taking self help", "courage practice"],
-    "compassion_fatigue": ["compassion fatigue recovery", "caregiver burnout book", "empathy exhaustion", "nurse self care", "helper burnout", "vicarious trauma", "moral injury healing"],
-    "financial_anxiety": ["money anxiety book", "financial stress relief", "money shame healing", "financial anxiety guide", "broke and scared", "money mindset", "financial therapy"],
-    "financial_stress": ["financial stress book", "money worry relief", "financial wellness guide", "money anxiety recovery", "financial peace", "money shame healing", "financial self help"],
+    "adhd_focus": ["adhd self help", "adhd focus book", "neurodivergent guide", "adhd adults", "dopamine regulation", "adhd burnout", "executive function", "adhd and anxiety", "adhd women book", "neurodivergent burnout"],
+    "anxiety": ["anxiety relief", "nervous system regulation", "calm anxiety naturally", "anxiety recovery", "high functioning anxiety", "anxiety workbook adults", "somatic anxiety", "how to stop anxiety", "anxiety and stress relief", "panic attack help"],
+    "burnout": ["burnout recovery", "work exhaustion healing", "nervous system reset", "burnout book professionals", "hustle culture recovery", "stress management", "burnout prevention", "exhaustion recovery", "work life balance", "chronic stress"],
+    "sleep_anxiety": ["insomnia self help", "racing thoughts night", "sleep anxiety relief", "cant sleep book", "3am anxiety", "calm mind sleep", "bedtime anxiety", "how to fall asleep", "sleep hygiene", "nighttime anxiety"],
+    "imposter_syndrome": ["imposter syndrome book", "feeling like fraud", "self doubt recovery", "imposter syndrome women", "imposter syndrome work", "confidence building", "worthy enough", "not good enough", "self doubt at work", "feeling inadequate"],
+    "social_anxiety": ["social anxiety recovery", "overcoming shyness", "introvert anxiety", "social confidence", "making friends adult", "phone anxiety", "social skills", "how to talk to people", "fear of judgment", "social anxiety workbook"],
+    "self_worth": ["self esteem books", "self worth healing", "self love guide", "confidence building", "feeling worthless recovery", "enough self help", "body neutrality", "how to love yourself", "not good enough", "inner critic healing"],
+    "boundaries": ["setting boundaries book", "how say no", "people pleasing recovery", "boundaries without guilt", "codependency healing", "toxic relationship boundaries", "healthy boundaries", "how to say no book", "stop people pleasing", "boundaries in relationships"],
+    "grief": ["grief recovery book", "coping with loss", "grief healing guide", "losing loved one", "grief companion", "complicated grief", "bereavement self help", "how to grieve", "grief and loss", "moving on after death"],
+    "overthinking": ["stop overthinking book", "racing thoughts relief", "quiet mind guide", "analysis paralysis", "worry less book", "mental spirals", "rumination recovery", "how to stop overthinking", "anxious thoughts", "quiet your mind"],
+    "somatic_healing": ["nervous system regulation book", "somatic exercises", "vagus nerve healing", "body trauma release", "polyvagal theory guide", "somatic therapy self help", "freeze response", "nervous system reset", "body keeps the score", "trauma release exercises"],
+    "depression": ["depression recovery book", "feeling numb healing", "low energy guide", "depression self help", "finding hope again", "functioning depression", "mood healing", "high functioning depression", "emotional numbness", "feeling empty"],
+    "courage": ["courage building book", "facing fear guide", "brave living", "fear of change", "bold decisions", "risk taking self help", "courage practice", "afraid to speak up", "fear of failure", "overcoming fear"],
+    "compassion_fatigue": ["compassion fatigue recovery", "caregiver burnout book", "empathy exhaustion", "nurse self care", "helper burnout", "vicarious trauma", "moral injury healing", "empathy overload", "caregiver stress", "helping profession burnout"],
+    "financial_anxiety": ["money anxiety book", "financial stress relief", "money shame healing", "financial anxiety guide", "broke and scared", "money mindset", "financial therapy", "money worries", "financial stress and anxiety", "debt stress"],
+    "mindfulness": ["mindfulness book", "meditation for beginners", "how to meditate", "present moment awareness", "calm mind", "mindfulness workbook", "daily meditation guide", "mindfulness and anxiety", "being present", "mindfulness exercises"],
+    "financial_stress": ["financial stress book", "money worry relief", "financial wellness guide", "money anxiety recovery", "financial peace", "money shame healing", "financial self help", "paycheck to paycheck stress", "money problems help", "financial wellness"],
 }
 
 
@@ -550,26 +849,35 @@ def get_brand_valid_configs(brand: dict, queue_cfg: dict) -> tuple[list[dict], l
 
 def generate_title(topic_id: str, persona_id: str, engine: str,
                    runtime_format_id: str, seed: str, sequence: int,
-                   content_type: str, series_book_num: int = 0) -> tuple[str, str]:
-    """Generate a title + subtitle pair."""
+                   content_type: str, series_book_num: int = 0,
+                   lane_id: str = "en_US") -> tuple[str, str]:
+    """Generate a title + subtitle pair with persona targeting.
+
+    Persona targeting strategy (from research):
+    - 70% of titles include persona/situation in subtitle
+    - JP/KR lanes suppress persona targeting (prefer universal)
+    - "always" mode: append "for {Persona}" if not in subtitle
+    - "situation" mode: append aspirational phrase instead of persona label
+    - "never" mode: no persona reference
+    """
     topic_display = TOPIC_DISPLAY.get(topic_id, topic_id.replace("_", " ").title())
     persona_display = PERSONA_DISPLAY.get(persona_id, persona_id.replace("_", " ").title())
 
     if content_type == "series" and topic_id in SERIES_BOOK_SUBTITLES:
-        # Series: use series book subtitles
         subtitles = SERIES_BOOK_SUBTITLES[topic_id]
         idx = series_book_num % len(subtitles)
         series_list = SERIES_NAMES.get(topic_id, [f"The {topic_display} Series"])
         series_name = series_list[0]
         title = f"{series_name}: Book {series_book_num + 1}"
         subtitle = subtitles[idx]
+        # Add persona to series subtitles too (unless JP/KR)
+        subtitle = _apply_persona_suffix(subtitle, persona_id, persona_display, lane_id)
         return title, subtitle
 
     # Standalone / micro / variation: use title templates
     templates = TITLE_TEMPLATES.get(topic_id, [
-        {"title": f"The {topic_display} Reset", "subtitle_pattern": "A Guide to {topic} Recovery for {persona}"},
+        {"title": f"The {topic_display} Reset", "subtitle_pattern": "A Guide to {topic} Recovery"},
     ])
-    # Deterministic selection based on seed
     seed_int = int(seed[:8], 16)
     template = templates[seed_int % len(templates)]
 
@@ -579,11 +887,69 @@ def generate_title(topic_id: str, persona_id: str, engine: str,
         persona=persona_display,
     )
 
-    # For micro books, append format signal
-    if runtime_format_id in MICRO_RUNTIMES:
-        subtitle = subtitle.rstrip(".") + " — A Quick Guide"
+    # Apply persona targeting if not already in subtitle
+    subtitle = _apply_persona_suffix(subtitle, persona_id, persona_display, lane_id)
 
     return title, subtitle
+
+
+def _apply_persona_suffix(subtitle: str, persona_id: str, persona_display: str,
+                           lane_id: str) -> str:
+    """Append persona targeting to subtitle based on strategy config.
+
+    Skips if:
+    - Subtitle already contains persona reference
+    - Lane is in PERSONA_SUPPRESS_LANES (JP/KR prefer universal)
+    - Mode is "never" for this persona
+    - Adding would exceed 120 chars (Amazon subtitle limit)
+    """
+    # Check if persona already referenced
+    if persona_display.lower() in subtitle.lower() or f"for {persona_display}" in subtitle:
+        return subtitle
+
+    # Suppress for JP/KR markets (prefer universal titles)
+    if lane_id in PERSONA_SUPPRESS_LANES:
+        return subtitle
+
+    mode = PERSONA_SUBTITLE_MODE.get(persona_id, "situation")
+
+    if mode == "never":
+        return subtitle
+
+    if mode == "always":
+        persona_phrase = f"for {persona_display}"
+    elif mode == "situation":
+        persona_phrase = PERSONA_SITUATION.get(persona_id, f"for {persona_display}")
+    else:
+        return subtitle
+
+    # Avoid double "for" — if subtitle already has a generic audience "for X" phrase,
+    # replace it with the persona phrase. Only replace known generic patterns.
+    import re
+    _GENERIC_FOR = re.compile(
+        r" for (People Pleasers and Overgivers|Quiet People|Helpers|"
+        r"People Running on Empty|People Tired of Being Told to Move On|"
+        r"People Who Give Too Much|Overthinkers and Worriers|"
+        r"Adults Who Were Never Diagnosed|People Who Can't Sit Still)$"
+    )
+    match = _GENERIC_FOR.search(subtitle)
+    if match:
+        new_subtitle = subtitle[:match.start()] + " " + persona_phrase
+    elif " for " not in subtitle:
+        # No existing "for" — safe to append
+        new_subtitle = subtitle + " " + persona_phrase
+    else:
+        # Has a "for" but it's content-specific (e.g., "for the Worst Days") — append
+        new_subtitle = subtitle + " " + persona_phrase
+        # But check for double "for" and skip if it reads badly
+        if new_subtitle.count(" for ") > 1:
+            return subtitle  # skip — better generic than awkward double
+
+    # Check length (optimal <120 chars for Amazon)
+    if len(new_subtitle) > 120:
+        return subtitle
+
+    return new_subtitle
 
 
 # ---------------------------------------------------------------------------
@@ -611,12 +977,24 @@ def generate_weekly_queue(brand_id: str, brand: dict, week_id: str,
     - 2 format variations
     """
     target = queue_cfg.get("titles_per_brand_per_week", 15)
-    mix = queue_cfg.get("weekly_mix", {})
-    n_series = mix.get("series_installments", 2)
-    n_strong_standalone = mix.get("strong_standalones", 5)
-    n_strong_micro = mix.get("strong_micros", 3)
-    n_viable_standalone = mix.get("viable_standalones", 3)
-    n_format_var = mix.get("format_variations", 2)
+    lane_id = brand.get("lane_id", "en_US")
+
+    # Check for lane-specific weekly mix (manga-primary for JP)
+    lane_mix = queue_cfg.get("lane_weekly_mix", {}).get(lane_id)
+    if lane_mix:
+        # JP manga-primary mix
+        n_series = lane_mix.get("manga_series_installments", 3) + lane_mix.get("ebook_series_installments", 1)
+        n_strong_standalone = lane_mix.get("manga_standalone", 3) + lane_mix.get("ebook_standalone", 3)
+        n_strong_micro = lane_mix.get("manga_micro", 2) + lane_mix.get("ebook_micro", 1)
+        n_viable_standalone = 0  # all slots used by manga+ebook split
+        n_format_var = lane_mix.get("format_variations", 2)
+    else:
+        mix = queue_cfg.get("weekly_mix", {})
+        n_series = mix.get("series_installments", 2)
+        n_strong_standalone = mix.get("strong_standalones", 5)
+        n_strong_micro = mix.get("strong_micros", 3)
+        n_viable_standalone = mix.get("viable_standalones", 3)
+        n_format_var = mix.get("format_variations", 2)
 
     strong_configs, viable_configs = get_brand_valid_configs(brand, queue_cfg)
 
@@ -634,24 +1012,57 @@ def generate_weekly_queue(brand_id: str, brand: dict, week_id: str,
         used_seeds.add(s)
         return s
 
+    # Track usage counts for diversity enforcement
+    _engine_counts: dict[str, int] = {}
+    _topic_counts: dict[str, int] = {}
+
     def _pick_config(configs: list[dict], runtime_filter: Optional[list[str]] = None) -> Optional[dict]:
-        """Pick the first config whose seed hasn't been produced yet."""
-        for cfg in configs:
-            if runtime_filter and cfg["runtime_format_id"] not in runtime_filter:
+        """Pick a config with engine AND topic diversity.
+
+        Enforces:
+        - Engine rotation: prefers least-used engine
+        - Topic cap: no topic exceeds ceil(15 / n_brand_topics) + 2
+        - Combined sort: (topic_count, engine_count) ensures both diversify
+        """
+        filtered = [c for c in configs if not runtime_filter or c["runtime_format_id"] in runtime_filter]
+        if not filtered:
+            return None
+
+        # Calculate per-topic cap
+        brand_topics_in_configs = set(c["topic_id"] for c in filtered)
+        n_topics = max(len(brand_topics_in_configs), 1)
+        topic_cap = (15 // n_topics) + 2
+
+        # Sort by: (topic_count, engine_count) — diversifies BOTH simultaneously
+        def sort_key(cfg):
+            tc = _topic_counts.get(cfg["topic_id"], 0)
+            ec = _engine_counts.get(cfg["engine"], 0)
+            return (tc, ec)
+
+        candidates = sorted(filtered, key=sort_key)
+
+        # Pick first candidate under topic cap
+        for cfg in candidates:
+            tc = _topic_counts.get(cfg["topic_id"], 0)
+            if tc >= topic_cap:
                 continue
-            # Check if this exact config has been produced (by checking a synthetic seed)
-            test_seed = hashlib.sha256(
-                f"{brand_id}|{cfg['topic_id']}|{cfg['persona_id']}|{cfg['engine']}|{cfg['runtime_format_id']}".encode()
-            ).hexdigest()[:16]
-            if test_seed not in produced_seeds:
-                return cfg
-        # All configs produced at least once — return any with fresh week-seed
-        if configs:
-            seed_int = int(make_seed(brand_id, week_id, len(queue))[:8], 16)
-            filtered = [c for c in configs if not runtime_filter or c["runtime_format_id"] in runtime_filter]
-            if filtered:
-                return filtered[seed_int % len(filtered)]
-        return None
+            _topic_counts[cfg["topic_id"]] = tc + 1
+            _engine_counts[cfg["engine"]] = _engine_counts.get(cfg["engine"], 0) + 1
+            return cfg
+
+        # All topics at cap — pick least-used engine regardless
+        for cfg in candidates:
+            tc = _topic_counts.get(cfg["topic_id"], 0)
+            _topic_counts[cfg["topic_id"]] = tc + 1
+            _engine_counts[cfg["engine"]] = _engine_counts.get(cfg["engine"], 0) + 1
+            return cfg
+
+        # Fallback
+        seed_int = int(make_seed(brand_id, week_id, len(queue))[:8], 16)
+        cfg = filtered[seed_int % len(filtered)]
+        _topic_counts[cfg["topic_id"]] = _topic_counts.get(cfg["topic_id"], 0) + 1
+        _engine_counts[cfg["engine"]] = _engine_counts.get(cfg["engine"], 0) + 1
+        return cfg
 
     def _build_item(cfg: dict, content_type: str, seed: str,
                     series_id: Optional[str] = None,
@@ -659,15 +1070,27 @@ def generate_weekly_queue(brand_id: str, brand: dict, week_id: str,
         rt_info = RUNTIME_FORMATS.get(cfg["runtime_format_id"], {})
         price = rt_info.get("price", 3.99)
         if content_type == "series" and series_book_num == 0:
-            price = 0.99  # Book 1 is always $0.99
+            price = 0.00  # Book 1 is permafree (KDP price-match via free on Google Play/Kobo)
 
+        # Pass lane_id for persona targeting (JP/KR suppress persona in subtitles)
+        _lane = brand.get("lane_id", "en_US") if isinstance(brand, dict) else "en_US"
         title, subtitle = generate_title(
             cfg["topic_id"], cfg["persona_id"], cfg["engine"],
             cfg["runtime_format_id"], seed, len(queue),
-            content_type, series_book_num,
+            content_type, series_book_num, lane_id=_lane,
         )
 
-        keywords = KEYWORD_TEMPLATES.get(cfg["topic_id"], [])
+        # Differentiate keywords by content_type to prevent cannibalization
+        base_kw = KEYWORD_TEMPLATES.get(cfg["topic_id"], [])
+        content_type_suffix = {
+            "micro": "quick guide",
+            "standalone": "workbook",
+            "series": "step by step",
+            "format_variation": "comprehensive guide",
+        }
+        suffix = content_type_suffix.get(content_type, "")
+        # Use first 6 base keywords + 1 content-type keyword (7 total for Amazon max)
+        keywords = base_kw[:6] + [f"{cfg['topic_id'].replace('_', ' ')} {suffix}".strip()] if suffix else base_kw[:7]
 
         return {
             "queue_id": make_queue_id(brand_id, week_id, len(queue) + 1),
@@ -699,39 +1122,45 @@ def generate_weekly_queue(brand_id: str, brand: dict, week_id: str,
         }
 
     # ── 1. Series installments (2) ──────────────────────────────────
+    # Strategy: 1 continuation + 1 new series starter per week.
+    # The new series produces a permafree Book 1 ($0.00) every week.
+    # The continuation advances an existing series.
     brand_topics = list(brand.get("primary_topics", []))
+    week_num = int(week_id.split("-W")[-1]) if "-W" in week_id else 1
     for i in range(n_series):
         if not brand_topics:
             break
-        topic = brand_topics[i % len(brand_topics)]
-        # Determine which book in series based on week
-        week_num = int(week_id.split("-W")[-1]) if "-W" in week_id else 1
-        book_num = (week_num - 1) % 10  # 10-book series, cycles
+
+        if i == 0:
+            # Slot 0: CONTINUATION — advance existing series
+            topic = brand_topics[0]
+            book_num = (week_num - 1) % 10  # cycles through 10-book series
+        else:
+            # Slot 1: NEW SERIES STARTER — permafree Book 1 ($0.00)
+            # Rotate through topics each week so different series launch
+            topic = brand_topics[(week_num + i) % len(brand_topics)]
+            book_num = 0  # always Book 1 = permafree
 
         series_name_list = SERIES_NAMES.get(topic, [f"The {TOPIC_DISPLAY.get(topic, topic)} Series"])
-        series_id = f"SER-{brand_id}-{topic}-{series_name_list[i % len(series_name_list)].replace(' ', '_').lower()}"
+        series_idx = (week_num + i) % len(series_name_list) if i > 0 else 0
+        series_id = f"SER-{brand_id}-{topic}-{series_name_list[series_idx].replace(' ', '_').lower()}"
 
-        # Pick a config for series (standard_book runtime preferred)
-        series_cfg = None
+        # Pick a config for series — rotate engine by week + series index
         brand_personas = brand.get("primary_personas", [])
-        for persona in brand_personas:
-            for engine in ENGINES:
-                candidate = {
-                    "topic_id": topic,
-                    "persona_id": persona,
-                    "engine": engine,
-                    "format_id": "F006",
-                    "runtime_format_id": "standard_book",
-                }
-                series_cfg = candidate
-                break
-            if series_cfg:
-                break
+        persona = brand_personas[(week_num + i) % len(brand_personas)] if brand_personas else "corporate_managers"
+        engine = ENGINES[(week_num + i) % len(ENGINES)]  # rotate engine by week
 
-        if series_cfg:
-            seed = _next_seed()
-            item = _build_item(series_cfg, "series", seed, series_id, book_num)
-            queue.append(item)
+        series_cfg = {
+            "topic_id": topic,
+            "persona_id": persona,
+            "engine": engine,
+            "format_id": "F006",
+            "runtime_format_id": "standard_book",
+        }
+
+        seed = _next_seed()
+        item = _build_item(series_cfg, "series", seed, series_id, book_num)
+        queue.append(item)
 
     # ── 2. STRONG standalones (5) ───────────────────────────────────
     for _ in range(n_strong_standalone):

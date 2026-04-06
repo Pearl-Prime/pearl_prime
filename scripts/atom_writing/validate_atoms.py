@@ -44,15 +44,15 @@ logger = logging.getLogger("atom_validator")
 ALL_PERSONAS = [
     "corporate_managers", "educators", "entrepreneurs", "first_responders",
     "gen_alpha_students", "gen_x_sandwich", "gen_z_professionals",
-    "healthcare_rns", "millennial_women_professionals", "nyc_executives",
-    "tech_finance_burnout", "working_parents",
+    "gen_z_student", "healthcare_rns", "millennial_women_professionals",
+    "nyc_executives", "tech_finance_burnout", "working_parents",
 ]
 
 ALL_TOPICS = [
-    "anxiety", "boundaries", "burnout", "compassion_fatigue", "courage",
-    "depression", "financial_anxiety", "financial_stress", "grief",
-    "imposter_syndrome", "overthinking", "self_worth", "sleep_anxiety",
-    "social_anxiety", "somatic_healing",
+    "adhd_focus", "anxiety", "boundaries", "burnout", "compassion_fatigue",
+    "courage", "depression", "financial_anxiety", "financial_stress", "grief",
+    "imposter_syndrome", "mindfulness", "overthinking", "self_worth",
+    "sleep_anxiety", "social_anxiety", "somatic_healing",
 ]
 
 CANONICAL_SLOT_TYPES = [

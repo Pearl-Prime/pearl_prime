@@ -6,78 +6,79 @@
 <title>Pearl Prime — Japan Brand Admin V3.2 Briefing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-wizard-app/public/assets/icons.css">
 <style>
-:root{--bg:#f9fafb;--white:#fff;--card:#f8f8fa;--border:#e5e7eb;--accent:#7c3aed;--al:#ede9fe;--ad:#5b21b6;--red:#dc2626;--rl:#fef2f2;--green:#059669;--gl:#ecfdf5;--gold:#d97706;--gol:#fffbeb;--blue:#2563eb;--bl:#eff6ff;--orange:#ea580c;--ol:#fff7ed;--text:#111827;--muted:#6b7280;--light:#9ca3af;--r:16px;--rs:12px}
+:root{--acc:#b45309;--acc2:#d97706;--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace;--bg:#0e0a06;--card:rgba(255,255,255,.03);--border:rgba(180,83,9,.15);--dim:rgba(250,246,240,.35);--mid:rgba(250,246,240,.6);--hi:rgba(250,246,240,.9);--green:#4ade80;--red:#f87171;--r:16px;--rs:12px}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-.hero{text-align:center;padding:60px 24px 36px;background:linear-gradient(180deg,#f3f4f6,var(--bg));border-bottom:1px solid var(--border)}
-.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:6px;background:linear-gradient(135deg,#5b21b6,#7c3aed,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero .jp{font-family:'Noto Sans JP',sans-serif;font-size:1.1rem;font-weight:500;color:var(--muted);margin-bottom:14px}
-.hero p{font-size:.92rem;color:var(--muted);max-width:580px;margin:0 auto}
+body{font-family:"DM Sans",-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans JP',sans-serif;background:var(--bg);color:#faf6f0;line-height:1.7}
+.hero{text-align:center;padding:60px 24px 36px;background:linear-gradient(180deg,rgba(180,83,9,.06),var(--bg));border-bottom:1px solid var(--border)}
+.hero h1{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:600;letter-spacing:-.03em;line-height:1.2;margin-bottom:6px;color:var(--acc2)}
+.hero .jp{font-family:'Noto Sans JP',sans-serif;font-size:1.1rem;font-weight:500;color:var(--dim);margin-bottom:14px}
+.hero p{font-size:.92rem;color:var(--mid);max-width:580px;margin:0 auto}
 .badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px}
-.badge{display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1px solid var(--border);padding:5px 12px;border-radius:999px;font-size:.75rem;color:var(--muted)}
+.badge{display:inline-flex;align-items:center;gap:5px;background:var(--card);border:1px solid var(--border);padding:5px 12px;border-radius:999px;font-size:.75rem;color:var(--mid)}
 .dot{width:6px;height:6px;border-radius:50%;display:inline-block}
-.dot-g{background:var(--green)}.dot-p{background:var(--accent)}.dot-r{background:var(--red)}
+.dot-g{background:var(--green)}.dot-p{background:var(--acc2)}.dot-r{background:var(--red)}
 .mx{max-width:940px;margin:0 auto;padding:0 20px}
-.tn{position:sticky;top:0;background:var(--white);border-bottom:1px solid var(--border);z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.tn{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--border);z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.2)}
 .tn-inner{max-width:940px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
 .tn-inner::-webkit-scrollbar{display:none}
-.tb{padding:11px 10px;font-size:.72rem;font-weight:500;color:var(--muted);border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:.2s}
-.tb:hover{color:var(--text);border-bottom-color:var(--border)}
-.tb.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tb{padding:11px 10px;font-size:.72rem;font-weight:500;color:var(--dim);border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:.2s}
+.tb:hover{color:var(--hi);border-bottom-color:var(--border)}
+.tb.on{color:var(--acc2);border-bottom-color:var(--acc2);font-weight:600}
 .tp{display:none;padding:44px 0 36px}
 .tp.on{display:block;animation:fu .35s ease}
 @keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.sl{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;color:var(--accent);font-weight:700;margin-bottom:6px}
-h2{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
-.jp-sub{font-family:'Noto Sans JP',sans-serif;font-size:.88rem;color:var(--muted);margin-bottom:14px}
-h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
-.desc{color:var(--muted);font-size:.88rem;max-width:660px;margin-bottom:18px;line-height:1.65}
+.sl{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;color:var(--acc2);font-weight:700;margin-bottom:6px}
+h2{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;margin-bottom:4px;color:var(--hi)}
+.jp-sub{font-family:'Noto Sans JP',sans-serif;font-size:.88rem;color:var(--dim);margin-bottom:14px}
+h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--hi)}
+.desc{color:var(--mid);font-size:.88rem;max-width:660px;margin-bottom:18px;line-height:1.65}
 .ssg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0}
-.ss{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.ss{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
 .ss .big{font-size:1.4rem;font-weight:800;margin-bottom:2px}
-.ss .lbl{font-size:.75rem;color:var(--muted)}
+.ss .lbl{font-size:.75rem;color:var(--dim)}
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.fc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center;transition:.25s}
-.fc:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08)}
-.fi{width:40px;height:40px;border-radius:10px;background:var(--al);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.2rem}
-.fs{font-size:.85rem;font-weight:700;margin-bottom:4px}
-.fc p{font-size:.75rem;color:var(--muted);line-height:1.5}
+.fc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center;transition:.25s}
+.fc:hover{border-color:var(--acc2);box-shadow:0 3px 12px rgba(180,83,9,.1)}
+.fi{width:40px;height:40px;border-radius:10px;background:rgba(180,83,9,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.2rem}
+.fs{font-size:.85rem;font-weight:700;margin-bottom:4px;color:var(--hi)}
+.fc p{font-size:.75rem;color:var(--mid);line-height:1.5}
 /* Manga grid */
 .mg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
-.mc2{background:var(--white);border:2px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:.2s}
-.mc2:hover{border-color:var(--accent);box-shadow:0 3px 10px rgba(124,58,237,.08);transform:translateY(-2px)}
-.mc2.on{border-color:var(--accent)}
+.mc2{background:var(--card);border:2px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:.2s}
+.mc2:hover{border-color:var(--acc2);box-shadow:0 3px 10px rgba(180,83,9,.1);transform:translateY(-2px)}
+.mc2.on{border-color:var(--acc2)}
 .mp{height:80px;display:flex;align-items:center;justify-content:center;font-size:1.8rem}
 .mi{padding:12px}
-.mi h4{font-size:.8rem;font-weight:700;margin-bottom:1px}
-.mi .jpn{font-family:'Noto Sans JP';font-size:.68rem;color:var(--light);margin-bottom:4px}
-.mi p{font-size:.68rem;color:var(--muted);margin:0}
+.mi h4{font-size:.8rem;font-weight:700;margin-bottom:1px;color:var(--hi)}
+.mi .jpn{font-family:'Noto Sans JP';font-size:.68rem;color:var(--dim);margin-bottom:4px}
+.mi p{font-size:.68rem;color:var(--mid);margin:0}
 /* Feedback */
-.fb{background:var(--white);border:2px solid var(--accent);border-radius:var(--r);padding:24px;margin-top:14px;display:none;animation:fu .35s ease}
+.fb{background:var(--card);border:2px solid var(--acc);border-radius:var(--r);padding:24px;margin-top:14px;display:none;animation:fu .35s ease}
 .fb.on{display:block}
-.fb-h{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:700;margin-bottom:14px}
+.fb-h{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--acc2);font-weight:700;margin-bottom:14px}
 .fb-g{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.fb-c h5{font-size:.68rem;color:var(--light);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;font-weight:600}
-.fb-c p{font-size:.82rem;color:var(--text);line-height:1.6;margin:0}
-.fb-s{background:var(--card);border-radius:var(--rs);padding:12px 14px;margin-top:10px}
-.fb-s .lbl{font-size:.62rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
-.fb-s p{font-size:.8rem;color:var(--muted);font-style:italic;margin:0}
+.fb-c h5{font-size:.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;font-weight:600}
+.fb-c p{font-size:.82rem;color:var(--hi);line-height:1.6;margin:0}
+.fb-s{background:rgba(255,255,255,.02);border-radius:var(--rs);padding:12px 14px;margin-top:10px}
+.fb-s .lbl{font-size:.62rem;font-weight:700;color:var(--acc2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.fb-s p{font-size:.8rem;color:var(--mid);font-style:italic;margin:0}
 /* Panel layout */
 .pg2{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:14px 0}
-.pc2{background:var(--white);border:1px solid var(--border);border-radius:var(--rs);padding:10px 6px;text-align:center}
+.pc2{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:10px 6px;text-align:center}
 .pc2 .pe{font-size:1.2rem;margin-bottom:4px}
-.pc2 .pl2{font-size:.6rem;font-weight:700;color:var(--accent);text-transform:uppercase}
-.pc2 .pt2{font-size:.56rem;color:var(--light);margin-top:2px}
+.pc2 .pl2{font-size:.6rem;font-weight:700;color:var(--acc2);text-transform:uppercase}
+.pc2 .pt2{font-size:.56rem;color:var(--dim);margin-top:2px}
 /* System cards */
 .sg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.sc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px;cursor:pointer;transition:.25s}
-.sc:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08)}
-.sc.ex{grid-column:span 2;border-color:var(--accent)}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;cursor:pointer;transition:.25s}
+.sc:hover{border-color:var(--acc2);box-shadow:0 3px 12px rgba(180,83,9,.1)}
+.sc.ex{grid-column:span 2;border-color:var(--acc2)}
 .sc .st2{display:inline-block;font-size:.6rem;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
-.sc h4{font-size:.88rem;font-weight:700;margin-bottom:2px}
-.sc .jpn{font-family:'Noto Sans JP';font-size:.75rem;color:var(--light);margin-bottom:4px}
+.sc h4{font-size:.88rem;font-weight:700;margin-bottom:2px;color:var(--hi)}
+.sc .jpn{font-family:'Noto Sans JP';font-size:.75rem;color:var(--dim);margin-bottom:4px}
 .sc .out{font-size:.78rem;color:var(--green);font-weight:600}
 .sc .det{display:none;margin-top:14px}
 .sc.ex .det{display:block}
@@ -86,32 +87,32 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
 .ba-b.bef{border-left:3px solid var(--red)}
 .ba-b.aft{border-left:3px solid var(--green)}
 .ba-l{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
-.ba-a{text-align:center;color:var(--accent);font-size:1.2rem;align-self:center}
+.ba-a{text-align:center;color:var(--acc2);font-size:1.2rem;align-self:center}
 /* Culture cards */
 .cg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.cc3{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px}
-.cc3 h4{font-size:.84rem;font-weight:700;margin-bottom:2px}
-.cc3 .jpn{font-family:'Noto Sans JP';font-size:.68rem;color:var(--light);margin-bottom:6px}
-.cc3 p{font-size:.75rem;color:var(--muted);margin:0;line-height:1.5}
+.cc3{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px}
+.cc3 h4{font-size:.84rem;font-weight:700;margin-bottom:2px;color:var(--hi)}
+.cc3 .jpn{font-family:'Noto Sans JP';font-size:.68rem;color:var(--dim);margin-bottom:6px}
+.cc3 p{font-size:.75rem;color:var(--mid);margin:0;line-height:1.5}
 /* Platform list */
 .rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
-.rc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:14px;display:flex;gap:10px;align-items:flex-start;transition:.2s}
-.rc:hover{border-color:var(--accent)}
+.rc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;display:flex;gap:10px;align-items:flex-start;transition:.2s}
+.rc:hover{border-color:var(--acc2)}
 .ri{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
-.rc h4{font-size:.8rem;font-weight:600;margin-bottom:1px}
-.rc p{font-size:.7rem;color:var(--muted);line-height:1.4}
+.rc h4{font-size:.8rem;font-weight:600;margin-bottom:1px;color:var(--hi)}
+.rc p{font-size:.7rem;color:var(--mid);line-height:1.4}
 .nb{margin-top:28px;text-align:center}
-.nbtn{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;padding:11px 26px;border-radius:13px;font-size:.85rem;font-weight:600;border:none;cursor:pointer;box-shadow:0 5px 16px rgba(124,58,237,.2);transition:.2s;text-decoration:none}
-.nbtn:hover{background:var(--ad);transform:translateY(-1px)}
-.back{font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:600}
-.back:hover{color:var(--ad)}
+.nbtn{display:inline-flex;align-items:center;gap:7px;background:var(--acc2);color:#fff;padding:11px 26px;border-radius:13px;font-size:.85rem;font-weight:600;border:none;cursor:pointer;box-shadow:0 5px 16px rgba(180,83,9,.25);transition:.2s;text-decoration:none}
+.nbtn:hover{background:var(--acc);transform:translateY(-1px)}
+.back{font-size:.82rem;color:var(--acc2);text-decoration:none;font-weight:600}
+.back:hover{color:var(--acc)}
 .ng{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.nc{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-decoration:none;color:var(--text);transition:.25s;display:block}
-.nc:hover{border-color:var(--accent);box-shadow:0 3px 12px rgba(124,58,237,.08);transform:translateY(-2px)}
+.nc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-decoration:none;color:var(--hi);transition:.25s;display:block}
+.nc:hover{border-color:var(--acc2);box-shadow:0 3px 12px rgba(180,83,9,.1);transform:translateY(-2px)}
 .nc h4{font-size:.88rem;font-weight:700;margin-bottom:3px}
-.nc p{font-size:.75rem;color:var(--muted);margin:0 0 8px}
-.nc .arr{font-size:.78rem;color:var(--accent);font-weight:600}
-.foot{background:linear-gradient(135deg,var(--accent),#6d28d9,#581c87);padding:28px 20px;text-align:center;color:#fff;margin-top:36px}
+.nc p{font-size:.75rem;color:var(--mid);margin:0 0 8px}
+.nc .arr{font-size:.78rem;color:var(--acc2);font-weight:600}
+.foot{background:linear-gradient(135deg,var(--acc),#92400e,#78350f);padding:28px 20px;text-align:center;color:#fff;margin-top:36px}
 .foot h2{font-size:1.2rem;font-weight:800;margin-bottom:4px}
 .foot p{font-size:.84rem;color:rgba(255,255,255,.65);margin:0}
 @media(max-width:700px){.fg,.sg,.cg,.mg,.ng,.fb-g,.ba,.pg2,.ssg{grid-template-columns:1fr}.mg{grid-template-columns:1fr 1fr}.pg2{grid-template-columns:repeat(3,1fr)}}
@@ -143,9 +144,9 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
 <p class="desc">Japan's manga market is the largest visual storytelling market on earth. Pearl Prime doesn't enter as a book publisher — it enters as a visual transformation system using the format Japanese readers already trust: manga.</p>
 
 <div class="ssg">
-<div class="ss"><div class="big" style="color:var(--accent)">$10B</div><div class="lbl">JP Manga Market 2025</div></div>
+<div class="ss"><div class="big" style="color:var(--acc2)">$10B</div><div class="lbl">JP Manga Market 2025</div></div>
 <div class="ss"><div class="big" style="color:var(--green)">20.5%</div><div class="lbl">CAGR</div></div>
-<div class="ss"><div class="big" style="color:var(--gold)">75%</div><div class="lbl">Digital manga share</div></div>
+<div class="ss"><div class="big" style="color:var(--acc2)">75%</div><div class="lbl">Digital manga share</div></div>
 </div>
 
 <h3>What Pearl Prime Creates for Japan</h3>
@@ -196,15 +197,15 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
 <div class="pc2"><div class="pe">🌟</div><div class="pl2">INTEGRATE</div><div class="pt2">Closing</div></div>
 </div>
 
-<div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-top:14px">
-<h3 style="font-size:.84rem;color:var(--accent);text-transform:uppercase;letter-spacing:.05em">Pipeline Integration</h3>
-<p style="font-size:.82rem;color:var(--muted);margin:8px 0 0">The Manga Mode pipeline reads 6,000+ atoms across 12 teachers. Visual prompts generate from atom metadata: COST_INTENSITY controls panel energy, MECHANISM_DEPTH controls detail density, IDENTITY_STAGE controls character representation. Text-to-image uses Flux (simple) and ComfyUI (complex multi-panel). 51 CI checks enforce quality gates. 99.4% metadata coverage.</p>
+<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-top:14px">
+<h3 style="font-size:.84rem;color:var(--acc2);text-transform:uppercase;letter-spacing:.05em">Pipeline Integration</h3>
+<p style="font-size:.82rem;color:var(--mid);margin:8px 0 0">The Manga Mode pipeline reads 6,000+ atoms across 12 teachers. Visual prompts generate from atom metadata: COST_INTENSITY controls panel energy, MECHANISM_DEPTH controls detail density, IDENTITY_STAGE controls character representation. Text-to-image uses Flux (simple) and ComfyUI (complex multi-panel). 51 CI checks enforce quality gates. 99.4% metadata coverage.</p>
 </div>
 
 <div class="ssg" style="margin-top:20px">
-<div class="ss"><div class="big" style="color:var(--accent)">6,000+</div><div class="lbl">Atoms in pipeline</div></div>
+<div class="ss"><div class="big" style="color:var(--acc2)">6,000+</div><div class="lbl">Atoms in pipeline</div></div>
 <div class="ss"><div class="big" style="color:var(--green)">12</div><div class="lbl">Teachers</div></div>
-<div class="ss"><div class="big" style="color:var(--gold)">51</div><div class="lbl">CI quality checks</div></div>
+<div class="ss"><div class="big" style="color:var(--acc2)">51</div><div class="lbl">CI quality checks</div></div>
 </div>
 <div class="nb"><button class="nbtn" onclick="go('systems')">Next: V3.2 Systems (JP) →</button></div>
 </div>
@@ -246,15 +247,15 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
 <p class="desc">9 primary platforms for JP market entry. LINE Manga provides social-first discovery via 130M+ users.</p>
 
 <div class="rg">
-<div class="rc"><div class="ri" style="background:var(--gol)">📚</div><div><h4>Amazon Kindle JP</h4><p>Largest ebook store. Manga bestseller lists.</p></div></div>
-<div class="rc"><div class="ri" style="background:var(--rl)">📕</div><div><h4>Rakuten Kobo</h4><p>Strong domestic player. Points system integration.</p></div></div>
-<div class="rc"><div class="ri" style="background:var(--bl)">📘</div><div><h4>BookLive</h4><p>3M+ titles. Strong manga recommendation engine.</p></div></div>
-<div class="rc"><div class="ri" style="background:var(--gl)">📖</div><div><h4>Renta!</h4><p>Rental model. Low-commitment entry point.</p></div></div>
-<div class="rc"><div class="ri" style="background:var(--al)">💬</div><div><h4>LINE Manga</h4><p>Social-first. 130M+ LINE users as funnel.</p></div></div>
-<div class="rc"><div class="ri" style="background:var(--ol)">📱</div><div><h4>Piccoma</h4><p>Wait-or-pay model. Massive JP user base.</p></div></div>
+<div class="rc"><div class="ri" style="background:rgba(180,83,9,.1)">📚</div><div><h4>Amazon Kindle JP</h4><p>Largest ebook store. Manga bestseller lists.</p></div></div>
+<div class="rc"><div class="ri" style="background:rgba(248,113,113,.1)">📕</div><div><h4>Rakuten Kobo</h4><p>Strong domestic player. Points system integration.</p></div></div>
+<div class="rc"><div class="ri" style="background:rgba(74,222,128,.08)">📘</div><div><h4>BookLive</h4><p>3M+ titles. Strong manga recommendation engine.</p></div></div>
+<div class="rc"><div class="ri" style="background:rgba(74,222,128,.08)">📖</div><div><h4>Renta!</h4><p>Rental model. Low-commitment entry point.</p></div></div>
+<div class="rc"><div class="ri" style="background:rgba(180,83,9,.1)">💬</div><div><h4>LINE Manga</h4><p>Social-first. 130M+ LINE users as funnel.</p></div></div>
+<div class="rc"><div class="ri" style="background:rgba(217,119,6,.1)">📱</div><div><h4>Piccoma</h4><p>Wait-or-pay model. Massive JP user base.</p></div></div>
 <div class="rc"><div class="ri" style="background:var(--card)">📗</div><div><h4>Comic CMOA</h4><p>Subscription library. Discovery-friendly.</p></div></div>
-<div class="rc"><div class="ri" style="background:var(--al)">🍎</div><div><h4>Apple Books JP</h4><p>Premium positioning. High-value readers.</p></div></div>
-<div class="rc"><div class="ri" style="background:var(--gl)">▶️</div><div><h4>Google Play Books JP</h4><p>Android market. Volume reach. Auto-narration.</p></div></div>
+<div class="rc"><div class="ri" style="background:rgba(180,83,9,.1)">🍎</div><div><h4>Apple Books JP</h4><p>Premium positioning. High-value readers.</p></div></div>
+<div class="rc"><div class="ri" style="background:rgba(74,222,128,.08)">▶️</div><div><h4>Google Play Books JP</h4><p>Android market. Volume reach. Auto-narration.</p></div></div>
 </div>
 <div class="nb"><button class="nbtn" onclick="go('nav')">Next: Navigate →</button></div>
 </div>
@@ -377,11 +378,13 @@ var SYS=[
 
 function renderSys(){
 var g=document.getElementById('sysGrid');
-g.innerHTML=SYS.map(function(s){return '<div class="sc" onclick="tgSys(this)"><span class="st2" style="background:'+s.color+'15;color:'+s.color+'">'+s.tag+'</span><h4>'+s.name+'</h4><div class="jpn">'+s.jp+'</div><div class="out">'+s.out+'</div><div class="det"><div class="ba"><div class="ba-b bef"><div class="ba-l" style="color:var(--red)">Before JP Adaptation</div><p style="font-size:.78rem;color:var(--muted);margin:0">'+s.bef+'</p></div><div class="ba-a">→</div><div class="ba-b aft"><div class="ba-l" style="color:var(--green)">After JP Adaptation</div><p style="font-size:.78rem;color:var(--muted);margin:0">'+s.aft+'</p></div></div></div></div>'}).join('');
+g.innerHTML=SYS.map(function(s){return '<div class="sc" onclick="tgSys(this)"><span class="st2" style="background:'+s.color+'15;color:'+s.color+'">'+s.tag+'</span><h4>'+s.name+'</h4><div class="jpn">'+s.jp+'</div><div class="out">'+s.out+'</div><div class="det"><div class="ba"><div class="ba-b bef"><div class="ba-l" style="color:var(--red)">Before JP Adaptation</div><p style="font-size:.78rem;color:var(--mid);margin:0">'+s.bef+'</p></div><div class="ba-a">→</div><div class="ba-b aft"><div class="ba-l" style="color:var(--green)">After JP Adaptation</div><p style="font-size:.78rem;color:var(--mid);margin:0">'+s.aft+'</p></div></div></div></div>'}).join('');
 }
 function tgSys(el){var w=el.classList.contains('ex');document.querySelectorAll('.sc').forEach(function(c){c.classList.remove('ex')});if(!w)el.classList.add('ex')}
 
 renderManga();renderSys();
 </script>
+<script src="brand-wizard-app/public/assets/icons.js"></script>
+<script src="brand-wizard-app/public/assets/i18n.js"></script>
 </body>
 </html>

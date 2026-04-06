@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Admin -- Pearl Prime</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/icons.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e0a06;color:#faf6f0;overflow-x:hidden}
+:root{--acc:#b45309;--acc2:#d97706;--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace;--bg:#0e0a06;--card:rgba(255,255,255,.03);--border:rgba(180,83,9,.15);--dim:rgba(250,246,240,.35);--mid:rgba(250,246,240,.6);--hi:rgba(250,246,240,.9);--green:#4ade80;--red:#f87171}
+
+/* -- Top Bar -- */
+#topbar{position:fixed;top:0;left:0;right:0;height:48px;background:rgba(14,10,6,.97);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:14px;z-index:100;backdrop-filter:blur(10px)}
+#topbar h1{font-family:var(--serif);font-size:1rem;font-weight:300;color:var(--acc2)}
+.pill{font-family:var(--mono);font-size:.55rem;color:var(--acc2);border:1px solid var(--border);padding:3px 12px;border-radius:14px;letter-spacing:.04em}
+#topbar .progress-text{margin-left:auto;font-family:var(--mono);font-size:.55rem;color:var(--dim);letter-spacing:.04em}
+.nav-pills{display:flex;gap:4px;margin-left:16px}
+.nav-pill{font-family:var(--mono);font-size:.5rem;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);padding:5px 12px;border-radius:4px;cursor:pointer;transition:all .15s;border:1px solid transparent;background:none}
+.nav-pill:hover{color:var(--hi);background:rgba(180,83,9,.08)}
+.nav-pill.active{color:var(--acc2);background:rgba(180,83,9,.14);border-color:var(--border)}
+.nav-pill.locked{opacity:.3;cursor:not-allowed}
+
+/* -- Credential Fields -- */
+.cred-section{margin-top:14px;padding:12px;background:rgba(180,83,9,.04);border:1px solid rgba(180,83,9,.12);border-radius:6px}
+.cred-header{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;color:var(--acc2);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.cred-hint{color:var(--dim);font-size:.5rem;margin-left:6px}
+.cred-row{margin-bottom:8px}
+.cred-label{display:block;font-family:var(--mono);font-size:.5rem;letter-spacing:.05em;color:var(--mid);margin-bottom:3px}
+.cred-input{width:100%;padding:7px 10px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:4px;color:var(--hi);font-family:var(--mono);font-size:.7rem;outline:none;transition:border-color .2s}
+.cred-input:focus{border-color:var(--acc2)}
+.cred-input::placeholder{color:rgba(250,246,240,.15);font-size:.6rem}
+
+/* -- Main Progress Bar -- */
+#main-progress{position:fixed;top:48px;left:0;right:0;z-index:99;padding:12px 20px;background:rgba(14,10,6,.95);border-bottom:1px solid var(--border)}
+.progress-phases{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.phase-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.5rem;color:var(--dim);transition:all .3s;flex-shrink:0}
+.phase-dot.active{border-color:var(--acc2);color:var(--acc2);box-shadow:0 0 12px rgba(180,83,9,.3)}
+.phase-dot.done{border-color:var(--green);background:rgba(74,222,128,.15);color:var(--green)}
+.phase-line{flex:1;height:2px;background:var(--border);position:relative}
+.phase-line .fill{height:100%;background:var(--acc2);transition:width .4s}
+.phase-label{font-family:var(--mono);font-size:.45rem;color:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+.phase-label.active{color:var(--acc2)}
+.phase-label.done{color:var(--green)}
+.bar-track{height:6px;background:rgba(180,83,9,.1);border-radius:3px;overflow:hidden;margin-top:6px}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:3px;transition:width .5s ease}
+.pct-text{font-family:var(--mono);font-size:.65rem;color:var(--acc2);margin-top:4px;text-align:right}
+
+/* -- Container -- */
+.container{max-width:900px;margin:0 auto;padding:140px 20px 80px}
+
+/* -- Phase Section -- */
+.phase-section{display:none}
+.phase-section.visible{display:block}
+.phase-title{font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--acc2);margin-bottom:6px}
+.phase-sub{font-family:var(--mono);font-size:.55rem;color:var(--dim);letter-spacing:.06em;margin-bottom:28px}
+
+/* -- Next Best Action Callout -- */
+.nba-callout{background:linear-gradient(135deg,rgba(180,83,9,.12),rgba(217,119,6,.06));border:1px solid rgba(180,83,9,.25);border-radius:6px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:14px}
+.nba-callout .nba-icon{flex-shrink:0}
+.nba-callout .nba-body{flex:1}
+.nba-label{font-family:var(--mono);font-size:.42rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc2);margin-bottom:4px}
+.nba-text{font-size:.82rem;color:var(--hi);line-height:1.5}
+
+/* -- Checklist Card -- */
+.check-card{background:var(--card);border:1px solid var(--border);border-radius:6px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.check-card:hover{border-color:rgba(180,83,9,.3)}
+.check-card.completed{border-color:rgba(74,222,128,.2)}
+.check-head{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none}
+.check-box{width:24px;height:24px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:transparent;transition:all .2s;flex-shrink:0;cursor:pointer}
+.check-box.done{border-color:var(--green);background:rgba(74,222,128,.15);color:var(--green)}
+.check-num{font-family:var(--mono);font-size:.55rem;color:var(--dim);width:16px;flex-shrink:0}
+.check-label{font-size:.85rem;color:var(--hi);flex:1;display:flex;align-items:center;gap:8px}
+.check-time{font-family:var(--mono);font-size:.45rem;color:var(--dim);letter-spacing:.04em}
+.check-status{font-family:var(--mono);font-size:.38rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .5rem;border-radius:2px;flex-shrink:0}
+.check-status.done{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);color:var(--green)}
+.check-status.pending{background:rgba(180,83,9,.08);border:1px solid rgba(180,83,9,.15);color:var(--acc2)}
+.check-status.action{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.15);color:var(--red)}
+.check-arrow{color:var(--dim);font-size:.7rem;transition:transform .2s}
+.check-body{display:none;padding:0 18px 18px;border-top:1px solid var(--border)}
+.check-body.open{display:block}
+
+/* -- Action Button -- */
+.action-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(180,83,9,.18);border:1px solid var(--border);color:var(--acc2);font-family:var(--mono);font-size:.55rem;letter-spacing:.06em;text-transform:uppercase;padding:8px 18px;border-radius:4px;cursor:pointer;transition:all .15s;text-decoration:none;margin:6px 4px 6px 0}
+.action-btn:hover{background:rgba(180,83,9,.35);border-color:var(--acc2);transform:translateY(-1px)}
+.action-btn.big{padding:12px 28px;font-size:.6rem;background:linear-gradient(135deg,rgba(180,83,9,.25),rgba(217,119,6,.2));border-color:var(--acc)}
+.action-btn.big:hover{background:linear-gradient(135deg,rgba(180,83,9,.4),rgba(217,119,6,.35))}
+
+/* -- Prefill -- */
+.prefill{background:rgba(0,0,0,.25);border:1px solid rgba(180,83,9,.1);border-radius:4px;padding:10px 12px;margin:8px 0}
+.prefill-label{font-family:var(--mono);font-size:.42rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.prefill-row{display:flex;align-items:center;gap:8px}
+.prefill-val{flex:1;background:rgba(0,0,0,.3);border:1px solid rgba(180,83,9,.08);border-radius:4px;padding:7px 10px;font-family:var(--mono);font-size:.65rem;color:var(--hi);line-height:1.45;white-space:pre-wrap;word-break:break-all}
+.copy-btn{flex-shrink:0;background:rgba(180,83,9,.15);border:1px solid var(--border);color:var(--acc2);font-family:var(--mono);font-size:.42rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:4px;cursor:pointer;transition:all .15s}
+.copy-btn:hover{background:rgba(180,83,9,.3)}
+.copy-btn.copied{background:rgba(22,163,74,.2);border-color:rgba(22,163,74,.4);color:var(--green)}
+
+/* -- Warn / Note -- */
+.warn{border-left:3px solid #dc2626;background:rgba(220,38,38,.06);padding:8px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:.72rem;color:var(--mid);line-height:1.55;display:flex;align-items:flex-start;gap:8px}
+.warn strong{color:var(--red)}
+.note{border-left:3px solid var(--acc);background:rgba(180,83,9,.06);padding:8px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:.72rem;color:var(--mid);line-height:1.55}
+
+/* -- Upload Card (Phase 2) -- */
+.upload-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px;margin-bottom:14px;transition:border-color .2s}
+.upload-card:hover{border-color:rgba(180,83,9,.25)}
+.upload-card h3{font-family:var(--mono);font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.upload-steps{font-size:.75rem;color:var(--mid);line-height:1.7;padding-left:18px;margin:8px 0}
+.upload-steps li{margin-bottom:4px}
+.upload-progress{font-family:var(--mono);font-size:.55rem;color:var(--dim);margin-top:10px;display:flex;align-items:center;gap:8px}
+.title-checks{margin-top:10px}
+.title-check{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:.72rem;color:var(--mid);cursor:pointer;user-select:none}
+.title-check:hover{color:var(--hi)}
+.mini-box{width:16px;height:16px;border:1.5px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:transparent;flex-shrink:0}
+.mini-box.done{border-color:var(--green);background:rgba(74,222,128,.12);color:var(--green)}
+
+/* -- Platform upload status bar -- */
+.platform-progress-bar{height:4px;background:rgba(180,83,9,.1);border-radius:2px;margin-top:8px;overflow:hidden}
+.platform-progress-fill{height:100%;background:linear-gradient(90deg,var(--acc),var(--green));border-radius:2px;transition:width .4s}
+.upload-status-badge{font-family:var(--mono);font-size:.38rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-left:auto}
+.upload-status-badge.done{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);color:var(--green)}
+.upload-status-badge.pending{background:rgba(180,83,9,.08);border:1px solid rgba(180,83,9,.15);color:var(--acc2)}
+
+/* -- Day Card (Phase 3) -- */
+.day-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:16px 0}
+.day-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:16px;transition:border-color .2s;position:relative}
+.day-card:hover{border-color:rgba(180,83,9,.3)}
+.day-card.today{border-color:var(--acc2);box-shadow:0 0 16px rgba(180,83,9,.1)}
+.day-card.done-day{border-color:rgba(74,222,128,.2)}
+.day-name{font-family:var(--mono);font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.day-title{font-family:var(--serif);font-size:1rem;font-weight:400;color:#f5d0a9;margin-bottom:8px}
+.day-actions{list-style:none;padding:0}
+.day-actions li{font-size:.72rem;color:var(--mid);padding:3px 0;display:flex;align-items:center;gap:6px;cursor:pointer}
+.day-actions li:hover{color:var(--hi)}
+.today-tag{font-family:var(--mono);font-size:.35rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(180,83,9,.15);border:1px solid var(--acc);color:var(--acc2);padding:2px 8px;border-radius:2px}
+.day-status{position:absolute;top:12px;right:12px}
+.day-status .pp-icon{--icon-size:16px}
+
+/* -- Weekly flow (horizontal) -- */
+.week-flow{display:flex;align-items:stretch;gap:0;margin:16px 0;overflow-x:auto;padding-bottom:8px}
+.week-flow-step{flex:1;min-width:110px;text-align:center;position:relative;padding:12px 8px}
+.week-flow-step::after{content:'';position:absolute;top:50%;right:0;width:1px;height:40%;transform:translateY(-50%);background:var(--border)}
+.week-flow-step:last-child::after{display:none}
+.week-flow-step.today{background:rgba(180,83,9,.08);border-radius:6px}
+.week-flow-step.completed{opacity:.7}
+.week-flow-day{font-family:var(--mono);font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.week-flow-title{font-size:.72rem;color:var(--hi);margin-bottom:6px}
+.week-flow-status{display:flex;justify-content:center}
+
+/* -- Trust Board / Metrics -- */
+.trust-board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
+.trust-metric{text-align:center;padding:16px 10px;background:var(--card);border:1px solid var(--border);border-radius:6px}
+.trust-metric .metric-val{font-family:var(--mono);font-size:1.4rem;font-weight:400;color:var(--acc2);line-height:1.2}
+.trust-metric .metric-lbl{font-family:var(--mono);font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-top:4px}
+
+/* -- Platform Status Tiles -- */
+.platform-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:16px 0}
+.platform-tile{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;transition:border-color .2s}
+.platform-tile:hover{border-color:rgba(180,83,9,.25)}
+.platform-tile .tile-name{font-family:var(--mono);font-size:.45rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mid)}
+.platform-tile .tile-status{font-family:var(--mono);font-size:.35rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:2px}
+.platform-tile .tile-status.active{background:rgba(74,222,128,.1);color:var(--green);border:1px solid rgba(74,222,128,.2)}
+.platform-tile .tile-status.setup{background:rgba(180,83,9,.08);color:var(--acc2);border:1px solid rgba(180,83,9,.15)}
+
+/* -- Quick Links -- */
+.quick-links{display:flex;flex-wrap:wrap;gap:6px;margin:20px 0;justify-content:center}
+.qlink{font-family:var(--mono);font-size:.45rem;letter-spacing:.05em;text-transform:uppercase;color:var(--dim);border:1px solid var(--border);padding:6px 14px;border-radius:4px;text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.qlink:hover{color:var(--acc2);border-color:var(--acc);background:rgba(180,83,9,.08)}
+
+/* -- Brand Picker -- */
+#picker{display:none;min-height:100vh;padding:80px 20px 40px;text-align:center}
+#picker.show{display:block}
+#picker h1{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:var(--acc2);margin-bottom:6px}
+#picker .sub{font-family:var(--mono);font-size:.55rem;color:var(--dim);letter-spacing:.08em;margin-bottom:32px}
+.brand-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;max-width:1100px;margin:0 auto;text-align:left}
+.brand-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:14px;cursor:pointer;transition:all .2s}
+.brand-card:hover{border-color:var(--acc);background:rgba(180,83,9,.06);transform:translateY(-2px)}
+.brand-card h3{font-size:.82rem;font-weight:500;color:#f5d0a9;margin-bottom:3px}
+.brand-card .focus{font-size:.62rem;color:var(--dim);line-height:1.4}
+.brand-card .teacher-tag{font-family:var(--mono);font-size:.4rem;color:var(--acc2);border:1px solid var(--acc);padding:1px 6px;border-radius:3px;margin-top:5px;display:inline-block}
+
+/* -- Celebration Overlay -- */
+#celebration{display:none;position:fixed;inset:0;z-index:200;background:rgba(14,10,6,.85);align-items:center;justify-content:center;flex-direction:column;gap:16px}
+#celebration.show{display:flex}
+#celebration h2{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--green)}
+#celebration p{font-family:var(--mono);font-size:.6rem;color:var(--dim)}
+
+/* -- Locked overlay -- */
+.locked-overlay{position:relative}
+.locked-overlay::after{content:"Complete previous phase to unlock";position:absolute;inset:0;background:rgba(14,10,6,.8);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.6rem;color:var(--dim);border-radius:6px;letter-spacing:.04em}
+
+/* -- Section header with icon -- */
+.section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.section-hdr .pp-icon{--icon-size:22px}
+.section-hdr-title{font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+
+/* -- Overall upload progress bar -- */
+.overall-upload-bar{margin-bottom:20px}
+.overall-upload-bar .bar-label{display:flex;justify-content:space-between;margin-bottom:6px}
+.overall-upload-bar .bar-label span{font-family:var(--mono);font-size:.45rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.overall-upload-bar .bar-label strong{font-family:var(--mono);font-size:.55rem;color:var(--acc2)}
+
+@media(max-width:768px){
+  .trust-board{grid-template-columns:1fr 1fr}
+  .platform-tiles{grid-template-columns:1fr 1fr}
+  .week-flow{flex-wrap:wrap}
+  .week-flow-step{min-width:auto;flex:0 0 calc(50% - 4px)}
+  .week-flow-step::after{display:none}
+}
+@media(max-width:600px){
+  #topbar{flex-wrap:wrap;height:auto;padding:8px 12px;gap:6px}
+  .nav-pills{margin-left:0}
+  .container{padding-top:160px}
+  .day-grid{grid-template-columns:1fr}
+  .brand-grid{grid-template-columns:1fr 1fr}
+  .trust-board{grid-template-columns:1fr 1fr}
+  .pp-flow{flex-direction:column}
+  .pp-flow-arrow{transform:rotate(90deg)}
+}
+</style>
+</head>
+<body>
+<script src="assets/i18n.js"></script>
+<script src="assets/icons.js"></script>
+
+<!-- Top Bar -->
+<div id="topbar">
+  <h1 data-i18n="admin.title">Brand Admin</h1>
+  <span class="pill" id="brand-pill">No brand</span>
+  <div class="nav-pills">
+    <button class="nav-pill active" data-phase="0" onclick="showPhase(0)" data-i18n="admin.phase.overview">Overview</button>
+    <button class="nav-pill" data-phase="1" onclick="showPhase(1)" data-i18n="admin.phase.setup">Setup</button>
+    <button class="nav-pill locked" data-phase="2" onclick="showPhase(2)" data-i18n="admin.phase.upload">Upload</button>
+    <button class="nav-pill locked" data-phase="3" onclick="showPhase(3)" data-i18n="admin.phase.weekly">Weekly</button>
+  </div>
+  <div class="progress-text" id="top-progress">Phase 0 of 3</div>
+</div>
+
+<!-- Main Progress -->
+<div id="main-progress">
+  <div class="progress-phases">
+    <div class="phase-dot active" id="pd0">0</div>
+    <div class="phase-line"><div class="fill" id="pf0" style="width:0"></div></div>
+    <div class="phase-dot" id="pd1">1</div>
+    <div class="phase-line"><div class="fill" id="pf1" style="width:0"></div></div>
+    <div class="phase-dot" id="pd2">2</div>
+    <div class="phase-line"><div class="fill" id="pf2" style="width:0"></div></div>
+    <div class="phase-dot" id="pd3">3</div>
+  </div>
+  <div style="display:flex;justify-content:space-between">
+    <span class="phase-label active" id="pl0" data-i18n="admin.phase.label.overview">Overview</span>
+    <span class="phase-label" id="pl1" data-i18n="admin.phase.label.setup">Setup</span>
+    <span class="phase-label" id="pl2" data-i18n="admin.phase.label.upload">First Upload</span>
+    <span class="phase-label" id="pl3" data-i18n="admin.phase.label.weekly">Weekly Rhythm</span>
+  </div>
+  <div class="bar-track"><div class="bar-fill" id="bar-fill" style="width:0"></div></div>
+  <div class="pct-text" id="pct-text">0% complete</div>
+</div>
+
+<!-- Brand Picker -->
+<div id="picker"></div>
+
+<!-- Celebration -->
+<div id="celebration"><h2 data-i18n="admin.celebration.title">Phase Complete</h2><p data-i18n="admin.celebration.sub">Next phase unlocked.</p><button class="action-btn" onclick="dismissCelebration()" data-i18n="admin.celebration.btn">Continue</button></div>
+
+<!-- Main Content -->
+<div class="container" id="main-wrap" style="display:none">
+  <div id="phase0" class="phase-section visible"></div>
+  <div id="phase1" class="phase-section"></div>
+  <div id="phase2" class="phase-section"></div>
+  <div id="phase3" class="phase-section"></div>
+
+  <!-- Quick Links -->
+  <div style="margin-top:40px;padding-top:20px;border-top:1px solid var(--border);text-align:center">
+    <div class="section-hdr" style="justify-content:center">
+      <span class="pp-icon sm" data-icon="external"></span>
+      <span class="section-hdr-title" data-i18n="admin.links.title">Quick Platform Links</span>
+    </div>
+    <div class="quick-links">
+      <a class="qlink" href="https://kdp.amazon.com/bookshelf" target="_blank"><span class="pp-icon sm" data-icon="book"></span> KDP</a>
+      <a class="qlink" href="https://play.google.com/books/publish" target="_blank"><span class="pp-icon sm" data-icon="book"></span> Google Play</a>
+      <a class="qlink" href="https://authors.apple.com" target="_blank"><span class="pp-icon sm" data-icon="book"></span> Apple Books</a>
+      <a class="qlink" href="https://studio.youtube.com" target="_blank"><span class="pp-icon sm" data-icon="video"></span> YouTube</a>
+      <a class="qlink" href="https://www.tiktok.com/creator" target="_blank"><span class="pp-icon sm" data-icon="video"></span> TikTok</a>
+      <a class="qlink" href="https://www.webtoons.com/en/challenge/publish" target="_blank"><span class="pp-icon sm" data-icon="manga"></span> WEBTOON</a>
+      <a class="qlink" href="https://writinglife.kobobooks.com" target="_blank"><span class="pp-icon sm" data-icon="book"></span> Kobo</a>
+      <a class="qlink" href="https://draft2digital.com" target="_blank"><span class="pp-icon sm" data-icon="distribution"></span> D2D</a>
+      <a class="qlink" href="https://www.instagram.com" target="_blank"><span class="pp-icon sm" data-icon="social"></span> Instagram</a>
+      <a class="qlink" href="https://manager.line.biz" target="_blank"><span class="pp-icon sm" data-icon="social"></span> LINE</a>
+    </div>
+    <div style="margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <a class="action-btn" onclick="resetBrand()" style="cursor:pointer" data-i18n="admin.btn.change"><span class="pp-icon sm" data-icon="arrow_left"></span> Change Brand</a>
+      <a class="action-btn" href="brand_admin_setup_guide.html" target="_blank" data-i18n="admin.btn.docs"><span class="pp-icon sm" data-icon="info"></span> Detailed Setup Docs</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Brand Data (24 en_US) ──
+const B={
+  inner_light_press_en_us:{d:"Inner Light Press",t:"Ahjan",tm:true,tr:"Contemplative / inner light",f:"Meditation, mindfulness, inner peace",tp:["anxiety","burnout","depression","self_worth","somatic_healing","mindfulness"]},
+  awakening_press_en_us:{d:"Awakening Press",t:"Adi Da",tm:true,tr:"Radical devotion",f:"Spiritual awakening, radical self-inquiry",tp:["self_worth","courage","boundaries","depression","grief"]},
+  vitality_path_en_us:{d:"Vitality Path",t:"Master Feung",tm:true,tr:"Taoist energy cultivation",f:"Energy management, vitality, life force balance",tp:["burnout","somatic_healing","courage","self_worth"]},
+  healing_ground_press_en_us:{d:"Healing Ground Press",t:"Sai Ma",tm:true,tr:"Divine healing / compassion",f:"Grief integration, emotional healing",tp:["grief","compassion_fatigue","depression","boundaries"]},
+  cosmic_edge_en_us:{d:"Cosmic Edge",t:"Ra",tm:true,tr:"Cosmic consciousness",f:"Purpose, meaning, existential clarity",tp:["imposter_syndrome","self_worth","courage","overthinking"]},
+  zen_clarity_en_us:{d:"Zen Clarity",t:"Junko",tm:true,tr:"Japanese mindfulness / zen",f:"Mental clarity, overthinking relief",tp:["overthinking","anxiety","sleep_anxiety","social_anxiety","mindfulness"]},
+  gen_spark_en_us:{d:"Gen Spark",t:"Miki",tm:true,tr:"Youth activation",f:"Gen Z grounding, identity, confidence",tp:["imposter_syndrome","social_anxiety","self_worth","boundaries"]},
+  iron_will_en_us:{d:"Iron Will",t:"Master Wu",tm:true,tr:"Warrior discipline",f:"Discipline, resilience, courage",tp:["courage","burnout","imposter_syndrome","boundaries"]},
+  body_wisdom_en_us:{d:"Body Wisdom",t:"Pamela Fellows",tm:true,tr:"Somatic therapy / polyvagal",f:"Nervous system regulation, somatic awareness",tp:["anxiety","somatic_healing","sleep_anxiety","burnout"]},
+  still_forest_en_us:{d:"Still Forest",t:"Joshin",tm:true,tr:"Forest meditation",f:"Nature-based grounding, presence",tp:["anxiety","overthinking","somatic_healing","depression"]},
+  truth_compass_en_us:{d:"Truth Compass",t:"Maat",tm:true,tr:"Divine principle / truth",f:"Boundaries, self-worth, integrity",tp:["boundaries","self_worth","imposter_syndrome","financial_stress"]},
+  gentle_wave_en_us:{d:"Gentle Wave",t:"Omote",tm:true,tr:"Japanese healing",f:"Sleep, rest, gentle recovery",tp:["sleep_anxiety","burnout","anxiety","compassion_fatigue","mindfulness"]},
+  soul_repair_en_us:{d:"Soul Repair",t:"Master Sha",tm:true,tr:"Soul healing",f:"Trauma recovery, spiritual healing",tp:["grief","depression","self_worth","somatic_healing","courage"]},
+  stabilizer_en_us:{d:"Stabilizer",t:null,tm:false,tr:"",f:"Burnout recovery, nervous system regulation",tp:["burnout","anxiety","somatic_healing"]},
+  optimizer_en_us:{d:"Optimizer",t:null,tm:false,tr:"",f:"Peak performance, focus, productivity",tp:["imposter_syndrome","burnout","overthinking"]},
+  night_reset_en_us:{d:"Night Reset",t:null,tm:false,tr:"",f:"Sleep anxiety, insomnia, nighttime rest",tp:["sleep_anxiety","anxiety","overthinking"]},
+  career_lift_en_us:{d:"Career Lift",t:null,tm:false,tr:"",f:"Career transitions, feeling unstuck",tp:["imposter_syndrome","courage","financial_anxiety"]},
+  adhd_forge_en_us:{d:"ADHD Forge",t:null,tm:false,tr:"",f:"Neurodivergent focus, ADHD support",tp:["adhd_focus","overthinking","anxiety","imposter_syndrome"]},
+  creative_unfold_en_us:{d:"Creative Unfold",t:null,tm:false,tr:"",f:"Creative blocks, artistic expression",tp:["self_worth","courage","boundaries"]},
+  resilient_parent_en_us:{d:"Resilient Parent",t:null,tm:false,tr:"",f:"Parenting stress, co-regulation",tp:["burnout","compassion_fatigue","boundaries"]},
+  executive_calm_en_us:{d:"Executive Calm",t:null,tm:false,tr:"",f:"Executive performance, leadership under pressure",tp:["burnout","anxiety","imposter_syndrome"]},
+  confidence_core_en_us:{d:"Confidence Core",t:null,tm:false,tr:"",f:"Social anxiety, confidence building",tp:["social_anxiety","self_worth","imposter_syndrome"]},
+  relationship_clarity_en_us:{d:"Relationship Clarity",t:null,tm:false,tr:"",f:"Relationship repair, co-regulation",tp:["boundaries","grief","compassion_fatigue"]},
+  legacy_builder_en_us:{d:"Legacy Builder",t:null,tm:false,tr:"",f:"Life transitions, legacy, reinvention",tp:["self_worth","courage","financial_stress"]}
+};
+
+const KW={anxiety:"anxiety relief, calm, stress management",burnout:"burnout recovery, rest, energy restoration",depression:"emotional healing, hope, mental wellness",self_worth:"self-worth, confidence, self-esteem",somatic_healing:"somatic healing, body awareness, nervous system",mindfulness:"mindfulness, meditation, present moment",courage:"courage, bravery, resilience, inner strength",boundaries:"healthy boundaries, self-protection, assertiveness",grief:"grief support, loss, healing after loss",compassion_fatigue:"compassion fatigue, caregiver support",overthinking:"overthinking, mental clarity, calm mind",sleep_anxiety:"sleep anxiety, insomnia help, restful sleep",social_anxiety:"social anxiety, social confidence",imposter_syndrome:"imposter syndrome, self-doubt, confidence",financial_stress:"financial stress, money anxiety, abundance",financial_anxiety:"financial anxiety, career confidence",adhd_focus:"ADHD focus, neurodivergent support, attention"};
+
+// Setup steps with platform info
+const SETUP=[
+  {id:"gmail",n:"Google Account",url:"https://accounts.google.com/signup",t:"5 min",all:true,icon:"email",
+    creds:[{name:"gmail_email",label:"Gmail Address",type:"email",req:true,help:"The Gmail you created for this brand"}]},
+  {id:"youtube",n:"YouTube Channel",url:"https://www.youtube.com/channel_switcher",t:"15 min",all:true,icon:"video",
+    creds:[{name:"channel_id",label:"Channel ID",type:"text",req:true,help:"YouTube Studio > Settings > Channel > Advanced > Channel ID"},{name:"channel_url",label:"Channel URL",type:"url",req:false,help:"youtube.com/@yourchannelname"}]},
+  {id:"kdp",n:"Amazon KDP",url:"https://kdp.amazon.com/signup",t:"20 min",all:true,icon:"book",
+    creds:[{name:"kdp_email",label:"KDP Account Email",type:"email",req:true,help:"Email used to sign up for KDP"},{name:"kdp_author_url",label:"Author Page URL",type:"url",req:false,help:"amazon.com/author/yourname (create at Author Central)"}]},
+  {id:"gplay",n:"Google Play Books",url:"https://play.google.com/books/publish/",t:"25 min",all:true,icon:"book",
+    creds:[{name:"gplay_publisher_id",label:"Publisher ID",type:"text",req:true,help:"Partner Center > Account details > Publisher ID"},{name:"gplay_email",label:"Publisher Email",type:"email",req:true}]},
+  {id:"apple",n:"Apple Books",url:"https://authors.apple.com",t:"30 min",all:true,icon:"book",
+    creds:[{name:"apple_id",label:"Apple ID Email",type:"email",req:true,help:"The Apple ID used for Apple Books for Authors"}]},
+  {id:"kobo",n:"Kobo Writing Life",url:"https://writinglife.kobobooks.com",t:"20 min",all:true,icon:"book",
+    creds:[{name:"kobo_publisher_id",label:"Publisher ID",type:"text",req:true,help:"Kobo Writing Life > Account > Publisher ID"}]},
+  {id:"tiktok",n:"TikTok Business",url:"https://www.tiktok.com/signup",t:"15 min",all:true,icon:"video",
+    creds:[{name:"tiktok_username",label:"TikTok Username",type:"text",req:true,help:"Your @username on TikTok"},{name:"tiktok_business_id",label:"Business Account ID",type:"text",req:false,help:"TikTok Business Center > Account ID"}]},
+  {id:"instagram",n:"Instagram Business",url:"https://www.instagram.com/accounts/emailsignup/",t:"15 min",all:true,icon:"social",
+    creds:[{name:"ig_username",label:"Instagram Username",type:"text",req:true,help:"Your @username on Instagram"}]},
+  {id:"webtoon",n:"WEBTOON Canvas",url:"https://www.webtoons.com/en/challenge/publish",t:"20 min",all:true,icon:"manga",
+    creds:[{name:"webtoon_username",label:"WEBTOON Username",type:"text",req:true,help:"Your WEBTOON creator username"},{name:"webtoon_series_url",label:"Series URL",type:"url",req:false,help:"Link to your first series on WEBTOON"}]},
+  {id:"d2d",n:"Draft2Digital / PublishDrive",url:"https://draft2digital.com/signup",t:"15 min",all:true,icon:"distribution",
+    creds:[{name:"d2d_email",label:"D2D Account Email",type:"email",req:true,help:"Email used for Draft2Digital or PublishDrive"}]}
+];
+
+// Upload platforms for Phase 2
+const UPLOADS=[
+  {id:"u_kdp",n:"Amazon KDP",url:"https://kdp.amazon.com/bookshelf",titles:6,icon:"book",steps:["Log in to KDP Bookshelf","Click 'Create New Title' > Kindle eBook","Enter title, subtitle, author, description (use COPY buttons below)","Upload EPUB from KDP/ folder","Upload cover from KDP/ folder","Set price ($2.99-9.99 for 70% royalty) and publish","Repeat for each title"]},
+  {id:"u_gplay",n:"Google Play Books",url:"https://play.google.com/books/publish",titles:4,icon:"book",steps:["Open Partner Center","Click 'Add Book' > 'Add New Book'","Upload EPUB from GooglePlay/ folder","Fill in metadata (use COPY buttons)","Upload cover image","Set pricing and territories","Submit for review"]},
+  {id:"u_apple",n:"Apple Books",url:"https://authors.apple.com",titles:3,icon:"book",steps:["Open Apple Books for Authors","Click 'New Book'","Upload EPUB 3.3 from AppleBooks/ folder","Enter metadata","Upload cover","Set pricing and publish"]},
+  {id:"u_webtoon",n:"WEBTOON Canvas",url:"https://www.webtoons.com/en/challenge/publish",titles:2,icon:"manga",manga:true,steps:["Open WEBTOON Creator Studio","Select your series (or create new)","Click 'Add Episode'","Upload panels from WEBTOON/ folder (800px wide, JPG)","Add episode title and thumbnail","Publish episode"]},
+  {id:"u_kobo",n:"Kobo Writing Life",url:"https://writinglife.kobobooks.com",titles:3,icon:"book",steps:["Log in to Kobo Writing Life","Click 'Create New eBook'","Upload EPUB and cover","Enter metadata","Set pricing and territories","Publish"]},
+  {id:"u_tiktok",n:"TikTok",url:"https://www.tiktok.com/creator",titles:3,icon:"video",video:true,steps:["Open TikTok Creator","Tap '+' to upload","Select MP4 from Video/ folder","Add caption with hashtags","Post"]},
+  {id:"u_youtube",n:"YouTube",url:"https://studio.youtube.com",titles:2,icon:"video",video:true,steps:["Open YouTube Studio","Click 'Create' > 'Upload Video'","Select MP4 from Video/ folder","Add title, description, tags (use COPY buttons)","Set thumbnail and publish"]}
+];
+
+// Weekly schedule
+const WEEK=[
+  {day:"MON",title:"Download Package",icon:"download",tasks:[{t:"Download this week's content package",btn:"Download",url:null}]},
+  {day:"TUE",title:"KDP Upload Day",icon:"book",tasks:[{t:"Upload 6 titles to Amazon KDP",btn:"Open KDP",url:"https://kdp.amazon.com/bookshelf"}]},
+  {day:"WED",title:"Multi-Platform",icon:"distribution",tasks:[{t:"Upload to Google Play Books",btn:"Open GP",url:"https://play.google.com/books/publish"},{t:"Upload to Apple Books",btn:"Open AB",url:"https://authors.apple.com"},{t:"Upload to Kobo",btn:"Open Kobo",url:"https://writinglife.kobobooks.com"}]},
+  {day:"THU",title:"Manga + D2D",icon:"manga",tasks:[{t:"Upload manga episodes to WEBTOON",btn:"Open WEBTOON",url:"https://www.webtoons.com/en/challenge/publish"},{t:"Upload remaining to Draft2Digital",btn:"Open D2D",url:"https://draft2digital.com"}]},
+  {day:"FRI",title:"Video Day",icon:"video",tasks:[{t:"Post TikTok videos",btn:"Open TikTok",url:"https://www.tiktok.com/creator"},{t:"Upload YouTube videos",btn:"Open YouTube",url:"https://studio.youtube.com"},{t:"Post Instagram Reels",btn:"Open IG",url:"https://www.instagram.com"}]},
+  {day:"SAT",title:"Review",icon:"chart",tasks:[{t:"Check KDP reports",btn:"KDP Reports",url:"https://kdp.amazon.com/reports"},{t:"Check YouTube Analytics",btn:"YT Analytics",url:"https://studio.youtube.com/channel/analytics"}]},
+  {day:"SUN",title:"Rest",icon:"healing",tasks:[{t:"System auto-refreshes next week's queue. Take the day off."}]}
+];
+
+// Platform icon mapping for uploads
+const PLATFORM_ICONS={u_kdp:'book',u_gplay:'book',u_apple:'book',u_webtoon:'manga',u_kobo:'book',u_tiktok:'video',u_youtube:'video'};
+
+// ── State ──
+let brand=null, brandId=null, state={};
+function key(){ return brandId||'_'; }
+function load(){ try{ state=JSON.parse(localStorage.getItem('ba_state')||'{}'); }catch(e){ state={}; } }
+function save(){ try{ localStorage.setItem('ba_state',JSON.stringify(state)); }catch(e){} }
+function bs(){ return state[key()]||(state[key()]={setup:{},upload:{},weekly:{},creds:{},phase:1}); }
+
+// ── Credential storage ──
+function saveCred(platform, field, value){
+  const s=bs();
+  if(!s.creds) s.creds={};
+  if(!s.creds[platform]) s.creds[platform]={};
+  s.creds[platform][field]=value;
+  save();
+}
+function getCred(platform, field){
+  const s=bs();
+  return (s.creds && s.creds[platform] && s.creds[platform][field]) || '';
+}
+
+// ── Helpers ──
+function slug(n){ return n.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/_+$/,''); }
+function keywords(b){ return b.tp.map(t=>KW[t]||t).join(', '); }
+function desc(b){ let s=`${b.d}. ${b.f}.`; if(b.tm&&b.t) s+=` Guided by ${b.t}.`; return s; }
+function bio(b){ let s=b.d+' -- '+b.f.split(',')[0]; if(b.tr) s+='. '+b.tr+' wisdom.'; else s+='. Practical tools.'; return s.length>150?s.substring(0,147)+'...':s; }
+function icon(name,cls){ return '<span class="pp-icon'+(cls?' '+cls:'')+'" data-icon="'+name+'"></span>'; }
+
+function copyText(text,btn){
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='COPIED'; btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent='COPY'; btn.classList.remove('copied'); },1500);
+  });
+}
+function prefill(label,val){
+  const eid='pf_'+Math.random().toString(36).substr(2,6);
+  return '<div class="prefill"><div class="prefill-label">'+label+'</div><div class="prefill-row"><div class="prefill-val" id="'+eid+'">'+val+'</div><button class="copy-btn" onclick="copyText(document.getElementById(\''+eid+'\').textContent,this)">COPY</button></div></div>';
+}
+
+// ── Phase calculation ──
+function calcPhase(){
+  const s=bs();
+  const setupDone=SETUP.every(st=>s.setup[st.id]);
+  const uploadDone=UPLOADS.every(u=>s.upload[u.id+'_all']);
+  if(uploadDone && setupDone) return 3;
+  if(setupDone) return 2;
+  return 1;
+}
+function setupPct(){ const s=bs(); const done=SETUP.filter(st=>s.setup[st.id]).length; return Math.round((done/SETUP.length)*100); }
+function uploadPct(){ const s=bs(); const done=UPLOADS.filter(u=>s.upload[u.id+'_all']).length; return Math.round((done/UPLOADS.length)*100); }
+function weekPct(){ const s=bs(); const days=['MON','TUE','WED','THU','FRI','SAT','SUN']; const done=days.filter(d=>s.weekly[d]).length; return Math.round((done/7)*100); }
+
+function overallPct(){
+  const sp=setupPct(), up=uploadPct(), wp=weekPct();
+  return Math.round((sp*0.33+up*0.34+wp*0.33));
+}
+
+// ── Render progress ──
+function renderProgress(){
+  const s=bs(), phase=calcPhase(), sp=setupPct(), up=uploadPct(), wp=weekPct(), op=overallPct();
+  const anySetupDone=SETUP.some(st=>s.setup[st.id]);
+  const phase0Done=anySetupDone;
+  // Phase dots
+  const pd0=document.getElementById('pd0'), pd1=document.getElementById('pd1'), pd2=document.getElementById('pd2'), pd3=document.getElementById('pd3');
+  pd0.className='phase-dot'+(phase0Done?' done':' active');
+  pd1.className='phase-dot'+(sp>=100?' done':(phase0Done?' active':''));
+  pd2.className='phase-dot'+(up>=100?' done':(sp>=100?' active':''));
+  pd3.className='phase-dot'+(wp>=100?' done':(up>=100&&sp>=100?' active':''));
+  // Phase labels
+  document.getElementById('pl0').className='phase-label'+(phase0Done?' done':' active');
+  document.getElementById('pl1').className='phase-label'+(sp>=100?' done':(phase0Done?' active':''));
+  document.getElementById('pl2').className='phase-label'+(up>=100?' done':(sp>=100?' active':''));
+  document.getElementById('pl3').className='phase-label'+(wp>=100?' done':(up>=100&&sp>=100?' active':''));
+  // Phase lines
+  document.getElementById('pf0').style.width=(phase0Done?'100':'0')+'%';
+  document.getElementById('pf1').style.width=sp+'%';
+  document.getElementById('pf2').style.width=up+'%';
+  // Overall bar
+  document.getElementById('bar-fill').style.width=op+'%';
+  document.getElementById('pct-text').textContent=op+'% complete';
+  // Top progress
+  const curPhase=!phase0Done?0:(sp<100?1:(up<100?2:3));
+  document.getElementById('top-progress').textContent='Phase '+curPhase+' of 3 -- '+op+'%';
+  // Nav pills
+  document.querySelectorAll('.nav-pill').forEach(p=>{
+    const ph=parseInt(p.dataset.phase);
+    p.classList.remove('locked','active');
+    if(currentPhaseLock===0 && ph>0) p.classList.add('locked');
+    else if(currentPhaseLock===3 && ph<3 && ph>0) { /* not locked, just not active */ }
+    else {
+      if(ph===2 && sp<100) p.classList.add('locked');
+      else if(ph===3 && (sp<100||up<100) && currentPhaseLock!==3) p.classList.add('locked');
+    }
+  });
+  const activePh=document.querySelector('.phase-section.visible');
+  if(activePh){
+    const phNum=activePh.id.replace('phase','');
+    document.querySelectorAll('.nav-pill').forEach(p=>{
+      if(p.dataset.phase===phNum && !p.classList.contains('locked')) p.classList.add('active');
+    });
+  }
+}
+
+// ── Render Phase 0: Overview — Operations Runway ──
+function renderPhase0(){
+  const el=document.getElementById('phase0'), b=brand;
+  if(!b){ el.innerHTML=''; return; }
+  const sp=setupPct(), up=uploadPct(), wp=weekPct();
+  const setupDone=SETUP.filter(st=>bs().setup[st.id]).length;
+  const uploadsDone=UPLOADS.filter(u=>bs().upload[u.id+'_all']).length;
+
+  // Determine next best action
+  let nbaText='', nbaAction='', nbaPhase=0;
+  if(setupDone===0){
+    nbaText='Start by choosing your teacher and setting up platform accounts.';
+    nbaAction='<a class="pp-btn primary" href="teacher_select.html'+(brandId?'?brand='+brandId:'')+'">'+icon('play','sm')+' Choose Teacher</a>';
+    nbaPhase=0;
+  } else if(sp<100){
+    const remaining=SETUP.length-setupDone;
+    nbaText=remaining+' platform account'+(remaining>1?'s':'')+' remaining. Continue setup to unlock uploads.';
+    nbaAction='<button class="pp-btn primary" onclick="showPhase(1)">'+icon('arrow_right','sm')+' Continue Setup</button>';
+    nbaPhase=1;
+  } else if(up<100){
+    nbaText='Accounts ready. Upload your first week of content across all platforms.';
+    nbaAction='<button class="pp-btn primary" onclick="showPhase(2)">'+icon('upload','sm')+' Start Uploading</button>';
+    nbaPhase=2;
+  } else {
+    nbaText='All platforms live. Follow your weekly rhythm to keep content flowing.';
+    nbaAction='<button class="pp-btn primary" onclick="showPhase(3)">'+icon('calendar','sm')+' Weekly Ops</button>';
+    nbaPhase=3;
+  }
+
+  let h='';
+
+  // Hero
+  h+='<div class="pp-hero" style="padding:1.5rem 0 2rem;text-align:left">';
+  h+='<div class="pp-hero-title" style="text-align:left;font-size:clamp(1.4rem,3vw,2rem)" data-i18n="admin.overview.title">Operations Runway</div>';
+  h+='<div class="pp-hero-sub" style="text-align:left" data-i18n="admin.overview.sub">'+b.d+(b.tm?' / '+b.t:'')+'</div>';
+  h+='</div>';
+
+  // Next Best Action
+  h+='<div class="nba-callout">';
+  h+='<div class="nba-icon">'+icon('performance','accent lg')+'</div>';
+  h+='<div class="nba-body">';
+  h+='<div class="nba-label">Next Action</div>';
+  h+='<div class="nba-text">'+nbaText+'</div>';
+  h+='<div style="margin-top:10px">'+nbaAction+'</div>';
+  h+='</div></div>';
+
+  // System Architecture Flow
+  h+='<div class="section-hdr">'+icon('system','sm')+' <span class="section-hdr-title">System Architecture</span></div>';
+  h+='<div class="pp-flow" style="margin-bottom:24px">';
+  h+='<div class="pp-flow-step"><div class="pp-flow-step-title">'+icon('market','sm')+' Market Story</div><div class="pp-flow-step-sub">Brand + Teacher</div></div>';
+  h+='<span class="pp-flow-arrow">&#8594;</span>';
+  h+='<div class="pp-flow-step"><div class="pp-flow-step-title">'+icon('intelligence','sm')+' Wizard</div><div class="pp-flow-step-sub">Content Pipeline</div></div>';
+  h+='<span class="pp-flow-arrow">&#8594;</span>';
+  h+='<div class="pp-flow-step"><div class="pp-flow-step-title">'+icon('proof','sm')+' Proof Gallery</div><div class="pp-flow-step-sub">Quality Check</div></div>';
+  h+='<span class="pp-flow-arrow">&#8594;</span>';
+  h+='<div class="pp-flow-step"><div class="pp-flow-step-title">'+icon('operations','sm')+' Weekly Ops</div><div class="pp-flow-step-sub">Publish + Grow</div></div>';
+  h+='</div>';
+
+  // Trust Board Metrics
+  h+='<div class="section-hdr">'+icon('chart','sm')+' <span class="section-hdr-title">Trust Board</span></div>';
+  h+='<div class="trust-board">';
+  h+='<div class="trust-metric"><div class="metric-val">'+setupDone+'/'+SETUP.length+'</div><div class="metric-lbl">Platforms</div></div>';
+  h+='<div class="trust-metric"><div class="metric-val">'+uploadsDone+'/'+UPLOADS.length+'</div><div class="metric-lbl">Uploads</div></div>';
+  h+='<div class="trust-metric"><div class="metric-val">'+sp+'%</div><div class="metric-lbl">Setup</div></div>';
+  h+='<div class="trust-metric"><div class="metric-val">'+overallPct()+'%</div><div class="metric-lbl">Overall</div></div>';
+  h+='</div>';
+
+  // Platform Status Tiles
+  h+='<div class="section-hdr" style="margin-top:24px">'+icon('platform','sm')+' <span class="section-hdr-title">Platform Status</span></div>';
+  h+='<div class="platform-tiles">';
+  SETUP.forEach(function(st){
+    const done=bs().setup[st.id];
+    h+='<div class="platform-tile">';
+    h+=icon(st.icon||'platform','');
+    h+='<div class="tile-name">'+st.n+'</div>';
+    h+='<div class="tile-status '+(done?'active':'setup')+'">'+(done?'Active':'Setup')+'</div>';
+    h+='</div>';
+  });
+  h+='</div>';
+
+  // Weekly Delivery — what you receive
+  h+='<div class="pp-card narrative" style="margin-top:24px">';
+  h+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
+  h+=icon('distribution','accent');
+  h+='<span style="font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2)">Weekly Delivery</span>';
+  h+='</div>';
+  h+='<div style="font-size:.82rem;color:var(--mid);line-height:1.7">';
+  h+='Every week you receive: <strong style="color:var(--hi)">15 titles</strong> (8 ebooks + 4 manga + 3 micro) with covers, metadata, and video &mdash; ready to upload.';
+  h+='</div></div>';
+
+  el.innerHTML=h;
+  renderIcons(el);
+}
+
+// ── Render Phase 1: Setup — Platform Checklist ──
+function renderPhase1(){
+  const el=document.getElementById('phase1'), s=bs(), b=brand, sl=slug(b.d);
+  const setupDone=SETUP.filter(st=>s.setup[st.id]).length;
+  const remaining=SETUP.length-setupDone;
+
+  let h='<div class="phase-title" data-i18n="admin.setup.title">Platform Setup</div>';
+  h+='<div class="phase-sub" data-i18n="admin.setup.sub">'+setupDone+' of '+SETUP.length+' platforms configured</div>';
+
+  // Progress bar for setup
+  h+='<div class="overall-upload-bar"><div class="bar-label"><span>Setup Progress</span><strong>'+setupPct()+'%</strong></div>';
+  h+='<div class="bar-track"><div class="bar-fill" style="width:'+setupPct()+'%"></div></div></div>';
+
+  // Next best action for setup
+  if(remaining>0){
+    const nextStep=SETUP.find(st=>!s.setup[st.id]);
+    if(nextStep){
+      h+='<div class="nba-callout" style="margin-bottom:20px">';
+      h+='<div class="nba-icon">'+icon('arrow_right','accent')+'</div>';
+      h+='<div class="nba-body"><div class="nba-label">Next Step</div>';
+      h+='<div class="nba-text">Set up '+nextStep.n+' ('+nextStep.t+')</div></div></div>';
+    }
+  }
+
+  SETUP.forEach(function(st,i){
+    const done=s.setup[st.id];
+    const cid='s1_'+st.id;
+    const statusCls=done?'done':'pending';
+    const statusText=done?'Done':'Pending';
+    h+='<div class="check-card '+(done?'completed':'')+'" id="card_'+st.id+'">';
+    h+='<div class="check-head" onclick="toggleBody(\''+cid+'\')">';
+    h+='<div class="check-box '+(done?'done':'')+'" onclick="event.stopPropagation();toggleSetup(\''+st.id+'\')">'+(done?'&#10003;':'')+'</div>';
+    h+='<div class="check-num">'+(i+1)+'</div>';
+    h+='<div class="check-label">'+icon(st.icon||'platform','sm')+' '+st.n+'</div>';
+    h+='<span class="check-status '+statusCls+'">'+statusText+'</span>';
+    h+='<div class="check-time">'+st.t+'</div>';
+    h+='<div class="check-arrow" id="arr_'+cid+'">&#9662;</div>';
+    h+='</div>';
+    h+='<div class="check-body" id="'+cid+'">';
+    h+='<a class="pp-btn" href="'+st.url+'" target="_blank">'+icon('external','sm')+' Open '+st.n+'</a>';
+
+    // Per-step prefills
+    if(st.id==='youtube'){
+      h+=prefill('Channel Name',b.d);
+      h+=prefill('Description',desc(b));
+    } else if(st.id==='kdp'){
+      h+='<div class="warn">'+icon('warning','sm')+' <div><strong>AI Disclosure required on every upload.</strong> Amazon requires you to declare AI-assisted content.</div></div>';
+      h+=prefill('Author / Publisher',b.tm?b.t:b.d);
+      h+=prefill('Keywords',keywords(b));
+    } else if(st.id==='gplay'){
+      h+=prefill('Publisher Name',b.d+' Publishing');
+    } else if(st.id==='tiktok'||st.id==='instagram'){
+      h+=prefill('Display Name',b.d);
+      h+=prefill('Bio (150 chars)',bio(b));
+      h+=prefill('Username','@'+sl);
+    } else if(st.id==='webtoon'){
+      h+=prefill('Creator Nickname',sl);
+      h+=prefill('Series Summary',b.f+'. New episodes weekly.');
+    } else if(st.id==='d2d'){
+      h+=prefill('Author / Pen Name',b.tm?b.t:b.d);
+      h+=prefill('Publisher Name',b.d+' Publishing');
+    } else if(st.id==='gmail'){
+      h+=prefill('Email',sl+'media@gmail.com');
+    } else if(st.id==='apple'){
+      h+=prefill('Publisher',b.d+' Publishing');
+    } else if(st.id==='kobo'){
+      h+=prefill('Author Name',b.tm?b.t:b.d);
+    }
+
+    // Credential collection fields
+    if(st.creds && st.creds.length){
+      h+='<div class="cred-section"><div class="cred-header">'+icon('identity','sm')+' Your Credentials <span class="cred-hint">(saved locally)</span></div>';
+      st.creds.forEach(function(cr){
+        var val=getCred(st.id,cr.name);
+        h+='<div class="cred-row">';
+        h+='<label class="cred-label">'+cr.label+(cr.req?' <span style="color:var(--red)">*</span>':'')+'</label>';
+        h+='<input class="cred-input" type="'+(cr.type||'text')+'" placeholder="'+(cr.help||'')+'" value="'+(val||'')+'"';
+        h+=' onchange="saveCred(\''+st.id+'\',\''+cr.name+'\',this.value)" autocomplete="off">';
+        h+='</div>';
+      });
+      h+='</div>';
+    }
+
+    h+='<div style="margin-top:10px"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.72rem;color:var(--mid)"><input type="checkbox" '+(done?'checked':'')+' onchange="toggleSetup(\''+st.id+'\')"> I\'ve completed this step</label></div>';
+    h+='</div></div>';
+  });
+  el.innerHTML=h;
+  renderIcons(el);
+}
+
+// ── Render Phase 2: First Upload — Platform Cards ──
+function renderPhase2(){
+  const el=document.getElementById('phase2'), s=bs(), b=brand, sl=slug(b.d);
+  const locked=setupPct()<100;
+  let h='<div class="phase-title" data-i18n="admin.upload.title">First Upload</div>';
+  h+='<div class="phase-sub" data-i18n="admin.upload.sub">'+(locked?'Complete Phase 1 to unlock.':'Upload your first week of content to every platform.')+'</div>';
+  if(locked){ h='<div class="locked-overlay">'+h+'<div style="height:200px"></div></div>'; el.innerHTML=h; return; }
+
+  // Overall upload progress
+  var totalUploaded=UPLOADS.filter(function(u){return s.upload[u.id+'_all']}).length;
+  h+='<div class="overall-upload-bar"><div class="bar-label"><span>'+icon('upload','sm')+' Upload Progress</span><strong>'+totalUploaded+'/'+UPLOADS.length+' Platforms</strong></div>';
+  h+='<div class="bar-track"><div class="bar-fill" style="width:'+uploadPct()+'%"></div></div></div>';
+
+  // Package download card
+  h+='<div class="pp-card" style="margin-bottom:20px;display:flex;align-items:center;gap:16px">';
+  h+='<div>'+icon('distribution','accent lg')+'</div>';
+  h+='<div style="flex:1">';
+  h+='<div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;color:var(--acc2);margin-bottom:4px">Content Package</div>';
+  h+='<div style="font-size:.75rem;color:var(--mid)">8 ebooks + 4 manga + 3 micro = 15 titles. Covers, metadata, video included.</div>';
+  h+='</div>';
+  h+='<button class="pp-btn primary" onclick="alert(\'Package download activates when your content pipeline is connected.\')">'+icon('arrow_right','sm')+' Download</button>';
+  h+='</div>';
+
+  // Per-platform upload cards
+  UPLOADS.forEach(function(u){
+    var allDone=s.upload[u.id+'_all'];
+    var cnt=countUpload(u);
+    var pct=Math.round((cnt/u.titles)*100);
+    h+='<div class="upload-card '+(allDone?'completed':'')+'">';
+    h+='<h3>'+icon(u.icon||'platform','sm')+' '+u.n;
+    h+='<span class="upload-status-badge '+(allDone?'done':'pending')+'">'+(allDone?'Complete':cnt+'/'+u.titles)+'</span>';
+    h+='</h3>';
+    h+='<div class="platform-progress-bar"><div class="platform-progress-fill" style="width:'+pct+'%"></div></div>';
+    h+='<div style="margin-top:12px"><a class="pp-btn" href="'+u.url+'" target="_blank">'+icon('external','sm')+' Open '+u.n+'</a></div>';
+    h+='<ol class="upload-steps" style="margin-top:10px">'+u.steps.map(function(st){return '<li>'+st+'</li>'}).join('')+'</ol>';
+
+    // Prefill metadata
+    h+=prefill('Title Template',b.d+': [Topic] -- A Guided Journey');
+    h+=prefill('Author',b.tm?b.t:b.d);
+    h+=prefill('Description',desc(b));
+    h+=prefill('Keywords',keywords(b).split(', ').slice(0,7).join(', '));
+    if(u.id==='u_kdp') h+='<div class="warn">'+icon('warning','sm')+' <div><strong>AI Disclosure:</strong> Select "Yes" for AI-assisted content on every title.</div></div>';
+
+    // Title checkboxes
+    h+='<div class="title-checks">';
+    for(var i=1;i<=u.titles;i++){
+      var tid=u.id+'_t'+i, done=s.upload[tid];
+      h+='<div class="title-check" onclick="toggleUpload(\''+tid+'\',\''+u.id+'\','+u.titles+')">';
+      h+='<div class="mini-box '+(done?'done':'')+'">'+(done?'&#10003;':'')+'</div>';
+      h+=' Title '+i+' uploaded</div>';
+    }
+    h+='</div>';
+    h+='<div class="upload-progress">'+icon(allDone?'success':'pending','sm')+' '+cnt+' / '+u.titles+' uploaded</div>';
+    h+='</div>';
+  });
+  el.innerHTML=h;
+  renderIcons(el);
+}
+function countUpload(u){ const s=bs(); let c=0; for(let i=1;i<=u.titles;i++) if(s.upload[u.id+'_t'+i]) c++; return c; }
+
+// ── Render Phase 3: Weekly Operations ──
+function renderPhase3(){
+  const el=document.getElementById('phase3'), s=bs();
+  const locked=setupPct()<100||uploadPct()<100;
+  let h='<div class="phase-title" data-i18n="admin.weekly.title">Weekly Operations</div>';
+  h+='<div class="phase-sub" data-i18n="admin.weekly.sub">'+(locked?'Complete Phases 1 & 2 to unlock.':'Your repeating weekly workflow.')+'</div>';
+  if(locked){ h='<div class="locked-overlay">'+h+'<div style="height:200px"></div></div>'; el.innerHTML=h; return; }
+
+  const today=new Date().toLocaleDateString('en-US',{weekday:'short'}).toUpperCase();
+  const todayIdx=WEEK.findIndex(function(w){return today.startsWith(w.day.substring(0,3))});
+
+  // Next best action for today
+  if(todayIdx>=0){
+    const todayW=WEEK[todayIdx];
+    const todayDone=s.weekly[todayW.day];
+    if(!todayDone){
+      h+='<div class="nba-callout">';
+      h+='<div class="nba-icon">'+icon('calendar','accent lg')+'</div>';
+      h+='<div class="nba-body"><div class="nba-label">Today &mdash; '+todayW.day+'</div>';
+      h+='<div class="nba-text">'+todayW.title+': '+todayW.tasks.map(function(t){return t.t}).join(', ')+'</div>';
+      if(todayW.tasks[0] && todayW.tasks[0].url){
+        h+='<div style="margin-top:8px"><a class="pp-btn primary" href="'+todayW.tasks[0].url+'" target="_blank">'+icon('external','sm')+' '+todayW.tasks[0].btn+'</a></div>';
+      }
+      h+='</div></div>';
+    }
+  }
+
+  // Week progress
+  h+='<div class="overall-upload-bar"><div class="bar-label"><span>'+icon('operations','sm')+' This Week</span><strong>'+weekPct()+'%</strong></div>';
+  h+='<div class="bar-track"><div class="bar-fill" style="width:'+weekPct()+'%"></div></div></div>';
+
+  // Horizontal week flow
+  h+='<div class="section-hdr">'+icon('calendar','sm')+' <span class="section-hdr-title">Weekly Flow</span></div>';
+  h+='<div class="week-flow">';
+  WEEK.forEach(function(w,idx){
+    const done=s.weekly[w.day];
+    const isToday=todayIdx===idx;
+    const isUpcoming=idx>(todayIdx>=0?todayIdx:6);
+    let statusCls='';
+    if(done) statusCls='completed';
+    else if(isToday) statusCls='today';
+
+    h+='<div class="week-flow-step '+statusCls+'">';
+    h+='<div class="week-flow-day">'+(isToday?'<span class="today-tag">Today</span> ':'')+w.day+'</div>';
+    h+='<div class="week-flow-title">'+w.title+'</div>';
+    h+='<div class="week-flow-status">';
+    if(done) h+=icon('success','sm accent');
+    else if(isToday) h+=icon('performance','sm accent');
+    else h+=icon('pending','sm');
+    h+='</div></div>';
+  });
+  h+='</div>';
+
+  // Day detail cards
+  h+='<div class="section-hdr" style="margin-top:24px">'+icon('operations','sm')+' <span class="section-hdr-title">Daily Detail</span></div>';
+  h+='<div class="day-grid">';
+  WEEK.forEach(function(w,idx){
+    const done=s.weekly[w.day];
+    const isToday=todayIdx===idx;
+    h+='<div class="day-card '+(isToday?'today':'')+' '+(done?'done-day':'')+'">';
+
+    // Status icon in corner
+    h+='<div class="day-status">';
+    if(done) h+=icon('success','sm');
+    else if(isToday) h+=icon('performance','sm accent');
+    else h+=icon('pending','sm');
+    h+='</div>';
+
+    h+='<div class="day-name">'+(isToday?'<span class="today-tag">Today</span> ':'')+w.day+'</div>';
+    h+='<div class="day-title">'+w.title+'</div>';
+    h+='<div class="day-actions">';
+    w.tasks.forEach(function(tk){
+      h+='<li>'+icon(w.icon||'operations','sm')+' '+tk.t;
+      if(tk.url) h+=' <a class="pp-btn secondary" href="'+tk.url+'" target="_blank" style="font-size:.38rem;padding:3px 8px;margin:0">'+icon('external','sm')+' '+tk.btn+'</a>';
+      h+='</li>';
+    });
+    h+='</div>';
+    h+='<div style="margin-top:8px"><label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.65rem;color:var(--mid)">';
+    h+='<input type="checkbox" '+(done?'checked':'')+' onchange="toggleWeekly(\''+w.day+'\')"> Day complete';
+    h+='</label></div>';
+    h+='</div>';
+  });
+  h+='</div>';
+
+  // Platform status recap
+  h+='<div class="section-hdr" style="margin-top:24px">'+icon('platform','sm')+' <span class="section-hdr-title">Platform Status</span></div>';
+  h+='<div class="platform-tiles">';
+  SETUP.forEach(function(st){
+    var done=bs().setup[st.id];
+    h+='<div class="platform-tile">';
+    h+=icon(st.icon||'platform','');
+    h+='<div class="tile-name">'+st.n+'</div>';
+    h+='<div class="tile-status '+(done?'active':'setup')+'">'+(done?'Active':'Setup')+'</div>';
+    h+='</div>';
+  });
+  h+='</div>';
+
+  el.innerHTML=h;
+  renderIcons(el);
+}
+
+// ── Toggle handlers ──
+function toggleSetup(id){
+  const s=bs(); s.setup[id]=!s.setup[id]; save();
+  const wasDone=setupPct();
+  renderPhase0(); renderPhase1(); renderPhase2(); renderProgress();
+  if(wasDone>=100 && setupPct()>=100) celebrate('Phase 1 Complete','Upload phase unlocked!');
+}
+function toggleUpload(tid,uid,total){
+  const s=bs(); s.upload[tid]=!s.upload[tid];
+  let allDone=true;
+  for(let i=1;i<=total;i++) if(!s.upload[uid+'_t'+i]) allDone=false;
+  s.upload[uid+'_all']=allDone;
+  save();
+  const wasDone=uploadPct();
+  renderPhase2(); renderProgress();
+  if(wasDone>=100 && uploadPct()>=100) celebrate('Phase 2 Complete','Weekly rhythm unlocked!');
+}
+function toggleWeekly(day){
+  const s=bs(); s.weekly[day]=!s.weekly[day]; save();
+  renderPhase3(); renderProgress();
+}
+function toggleBody(id){
+  const body=document.getElementById(id);
+  const arr=document.getElementById('arr_'+id);
+  body.classList.toggle('open');
+  if(arr) arr.style.transform=body.classList.contains('open')?'rotate(180deg)':'';
+}
+
+// ── Phase navigation ──
+function showPhase(n){
+  const sp=setupPct(), up=uploadPct();
+  if(n===1 && currentPhaseLock===0) return;
+  if(n===2 && (sp<100 || currentPhaseLock===0)) return;
+  if(n===3 && (sp<100||up<100) && currentPhaseLock!==3) return;
+  document.querySelectorAll('.phase-section').forEach(s=>s.classList.remove('visible'));
+  document.getElementById('phase'+n).classList.add('visible');
+  document.querySelectorAll('.nav-pill').forEach(p=>p.classList.remove('active'));
+  const pill=document.querySelector('.nav-pill[data-phase="'+n+'"]');
+  if(pill) pill.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+let currentPhaseLock=-1;
+
+// ── Celebration ──
+function celebrate(title,sub){
+  const el=document.getElementById('celebration');
+  el.querySelector('h2').textContent=title;
+  el.querySelector('p').textContent=sub;
+  el.classList.add('show');
+}
+function dismissCelebration(){
+  document.getElementById('celebration').classList.remove('show');
+  const sp=setupPct();
+  if(sp>=100 && uploadPct()<100) showPhase(2);
+  else if(sp>=100 && uploadPct()>=100) showPhase(3);
+}
+
+// ── Brand Picker ──
+function renderPicker(){
+  const el=document.getElementById('picker');
+  el.classList.add('show');
+  document.getElementById('main-wrap').style.display='none';
+  let h='<h1>Brand Admin</h1><p class="sub">Select a brand to begin</p><div class="brand-grid">';
+  for(const [bid,b] of Object.entries(B)){
+    h+='<div class="brand-card" onclick="selectBrand(\''+bid+'\')">';
+    h+='<h3>'+b.d+'</h3>';
+    h+='<div class="focus">'+b.f+'</div>';
+    if(b.tm) h+='<span class="teacher-tag">'+b.t+'</span>';
+    h+='</div>';
+  }
+  h+='</div>';
+  el.innerHTML=h;
+}
+function selectBrand(bid){
+  history.replaceState(null,'','?brand='+bid);
+  initBrand(bid);
+}
+function resetBrand(){
+  history.replaceState(null,'','?');
+  document.getElementById('main-wrap').style.display='none';
+  renderPicker();
+}
+
+// ── Init ──
+function initBrand(bid){
+  if(!B[bid]){ renderPicker(); return; }
+  brandId=bid; brand=B[bid]; load();
+  document.getElementById('picker').classList.remove('show');
+  document.getElementById('picker').style.display='none';
+  document.getElementById('main-wrap').style.display='block';
+  document.getElementById('brand-pill').textContent=brand.d;
+  renderPhase0(); renderPhase1(); renderPhase2(); renderPhase3(); renderProgress();
+
+  const urlP=new URLSearchParams(window.location.search);
+  const phaseParam=urlP.get('phase');
+  const sp=setupPct(), up=uploadPct();
+  const anySetupDone=SETUP.some(st=>bs().setup[st.id]);
+
+  if(phaseParam==='0'){
+    currentPhaseLock=0;
+    renderProgress();
+    showPhase(0);
+  } else if(phaseParam==='3'){
+    currentPhaseLock=3;
+    renderProgress();
+    showPhase(3);
+  } else if(phaseParam==='1'){
+    currentPhaseLock=-1;
+    renderProgress();
+    showPhase(1);
+  } else if(phaseParam==='2' && sp>=100){
+    currentPhaseLock=-1;
+    renderProgress();
+    showPhase(2);
+  } else {
+    currentPhaseLock=-1;
+    if(!anySetupDone){
+      showPhase(0);
+    } else if(sp>=100 && up>=100){
+      showPhase(3);
+    } else if(sp>=100){
+      showPhase(2);
+    } else {
+      showPhase(1);
+    }
+  }
+}
+
+function init(){
+  const p=new URLSearchParams(window.location.search);
+  const bid=p.get('brand');
+  if(bid && B[bid]) initBrand(bid);
+  else renderPicker();
+}
+init();
+</script>
+</body>
+</html>

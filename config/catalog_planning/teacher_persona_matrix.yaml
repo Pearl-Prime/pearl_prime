@@ -56,6 +56,13 @@ teachers:
       gen_z_professionals:
         default_angle: at_work
         preferred_story_style: narrative
+      gen_z_student:
+        default_angle: on_campus
+        preferred_story_style: narrative
+        locale_overlays:
+          - "dorm room"
+          - "library desk"
+          - "dining hall"
 
   ajahn_x:
     allowed_personas: []

@@ -5,4 +5,5 @@ enum PhoenixColors {
     static let phoenixBackground = Color(red: 245/255, green: 245/255, blue: 247/255)
     static let phoenixCardTint = Color(red: 232/255, green: 244/255, blue: 253/255)
     static let phoenixWhite = Color.white
+    static let phoenixAmber = Color(red: 180/255, green: 83/255, blue: 9/255)
 }
