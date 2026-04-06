@@ -1,0 +1,266 @@
+# Teacher manga character prompts — img2img style transfer for 13 core teachers.
+# Authority: config/manga/style_archetypes.yaml, SOURCE_OF_TRUTH/teacher_banks/
+# Used by: scripts/image_generation/manga_teacher_batch.py
+#
+# Each teacher has:
+#   - positive: manga-style prompt (prepended with shared prefix)
+#   - negative: style-specific negatives (appended with shared negatives)
+#   - style_archetype: closest match from style_archetypes.yaml
+#   - ip_adapter_weight: face preservation strength (0.7-0.95)
+#   - img2img_denoise: latent space denoise strength (0.65-0.85)
+
+schema_version: 1
+last_updated: "2026-04-06"
+
+shared_prefix: "img2img, manga character sheet, front-facing portrait and 3/4 view, high quality, detailed face, manga proportions"
+shared_negative: "low quality, blurry, deformed, extra fingers, bad anatomy, watermark, text, logo, 3d render, photograph"
+
+teachers:
+
+  ahjan:
+    display_name: "Ahjan"
+    style_archetype: cozy_iyashikei
+    ip_adapter_weight: 0.85
+    img2img_denoise: 0.78
+    positive: >-
+      seinen manga character, soft ink linework, warm earth-toned watercolor wash,
+      gentle eyes with depth and stillness, monastic simplicity, simple robes or
+      clean modern clothing, expression is calm present quietly radiating warmth,
+      subtle golden light aura around the figure, background soft bokeh of temple
+      garden or meditation hall, Studio Ghibli meets Vagabond contemplative scenes,
+      high detail face, clean linework
+    negative: >-
+      chibi, exaggerated, action pose, bright neon, horror, dark shadows,
+      speed lines, battle aura
+
+  adi_da:
+    display_name: "Adi Da"
+    style_archetype: dark_psychological
+    ip_adapter_weight: 0.80
+    img2img_denoise: 0.75
+    positive: >-
+      seinen manga character, bold confident ink lines, high contrast black and
+      white with selective golden highlight, intense piercing eyes that see
+      through everything, powerful presence seated but radiating authority like
+      a king on a throne, expression is fierce compassion not angry but absolutely
+      uncompromising, dramatic lighting from above creating sharp shadows,
+      background abstract radiant light breaking through darkness, style of
+      Berserk portraits meets philosophical manga like Buddha by Osamu Tezuka,
+      magnetic charisma in every line
+    negative: >-
+      cute, pastel, chibi, comedic, action battle, speed lines,
+      flat colors, simple background
+
+  ajahn_x:
+    display_name: "Ajahn X"
+    style_archetype: dark_psychological
+    ip_adapter_weight: 0.85
+    img2img_denoise: 0.76
+    positive: >-
+      seinen manga character, clean precise ink linework, minimal screentone,
+      high white space, face is serene but alert eyes slightly narrowed in
+      gentle observation, simple monastic appearance, expression balances warmth
+      with quiet discipline, atmospheric ink wash background misty forest or
+      dawn mountain, style of Blade of the Immortal quiet moments meets Mushishi
+      contemplative framing, precise anatomical proportions detailed hands
+      clean manga linework
+    negative: >-
+      neon colors, exaggerated expressions, chibi, action pose, horror,
+      busy background, sparkles
+
+  master_feung:
+    display_name: "Master Feung"
+    style_archetype: interactive_branching
+    ip_adapter_weight: 0.82
+    img2img_denoise: 0.76
+    positive: >-
+      xianxia cultivation manga character, fine brushstroke linework inspired by
+      Chinese ink painting sumi-e, flowing qi energy lines visible around hands
+      and body subtle not flashy, traditional Chinese master appearance composed
+      posture hands in qigong position, expression is ancient patience eyes
+      half-closed in deep awareness, background flowing water bamboo grove or
+      mountain mist rendered in ink wash, style of Kingdom meets The Ravages of
+      Time portraiture, dignified unhurried every line deliberate
+    negative: >-
+      anime sparkles, bright colors, chibi, exaggerated muscles, action battle,
+      modern clothing, neon
+
+  sai_maa:
+    display_name: "Sai Maa"
+    style_archetype: webtoon_vertical_romance
+    ip_adapter_weight: 0.85
+    img2img_denoise: 0.75
+    positive: >-
+      josei manga character, soft flowing linework, warm color palette rose gold
+      saffron deep magenta highlights, radiant feminine presence eyes full of
+      unconditional love and gentle fire, ornate but not heavy flowing fabrics
+      subtle jewelry details, soft golden light emanating from the heart center,
+      expression is tender fierceness compassion that burns away shame, background
+      lotus flowers sacred geometry warm light particles, style of Nana meets
+      Bride Story in character detail, beautiful but grounded never objectified
+      power through love
+    negative: >-
+      dark, horror, cold tones, chibi, action battle, harsh shadows,
+      masculine, armor, weapons
+
+  ra:
+    display_name: "Ra"
+    style_archetype: dark_psychological
+    ip_adapter_weight: 0.80
+    img2img_denoise: 0.78
+    positive: >-
+      seinen manga character, clean geometric linework, high contrast, expansive
+      negative space around the figure, eyes are vast looking through you not at
+      you, minimal clothing detail focus entirely on presence and expression,
+      subtle cosmic elements star field reflection in eyes light geometry,
+      expression is absolute stillness the witness observing without judgment,
+      background infinite space subtle constellation patterns deep indigo wash,
+      style of Planetes philosophical moments meets Knights of Sidonia cosmic
+      stillness, otherworldly yet grounded
+    negative: >-
+      cute, busy background, action pose, bright neon, chibi, comedic,
+      detailed clothing, ornate
+
+  junko:
+    display_name: "Junko"
+    style_archetype: dark_psychological
+    ip_adapter_weight: 0.82
+    img2img_denoise: 0.80
+    positive: >-
+      manga character in stark Zen aesthetic, bold decisive brushstrokes each
+      line placed once no correction, maximum negative space figure emerges from
+      white void, sharp intelligent eyes with a hint of dry amusement, simple
+      appearance perhaps a plain robe or clean modern clothing, expression is
+      I see you completely and that is enough, enso circle brushstroke in
+      background incomplete alive, style of Vagabond Zen master scenes meets
+      Ping Pong the Animation spare character design, every line essential
+      nothing extra
+    negative: >-
+      detailed background, ornate, colorful, chibi, sparkles,
+      busy composition, action pose, neon
+
+  miki:
+    display_name: "Miki"
+    style_archetype: cozy_iyashikei
+    ip_adapter_weight: 0.85
+    img2img_denoise: 0.75
+    positive: >-
+      iyashikei healing manga character, soft rounded linework, warm pastel
+      watercolor palette moss green warm wood brown soft sky blue, kind observant
+      eyes noticing everything with gentle delight, natural setting integrated
+      with figure leaves in hair dappled forest light on face, expression is
+      quiet wonder the face of someone who just noticed a firefly, background
+      lush forest path filtered sunlight wildflowers, style of Mushishi meets
+      Yotsuba in warmth and observation, healing presence in every soft line
+    negative: >-
+      dark, horror, urban, harsh contrast, chibi action, neon, sharp angles,
+      dramatic lighting, violence
+
+  master_wu:
+    display_name: "Master Wu"
+    style_archetype: interactive_branching
+    ip_adapter_weight: 0.82
+    img2img_denoise: 0.77
+    positive: >-
+      wuxia manga character, fluid ink brushwork lines that flow like water
+      never forced, Taoist master appearance relaxed posture that contains
+      coiled power, eyes are amused and ancient someone who has watched rivers
+      change course, subtle water imagery woven into the composition sleeve
+      becoming waterfall hair becoming mist, expression is paradox embodied
+      completely relaxed yet completely present, background waterfall mountain
+      stream or fog on still lake, style of The Ravages of Time meets Feng
+      Shen Ji, effortless power yielding lines
+    negative: >-
+      rigid pose, bright neon, chibi, action explosion, heavy screentone,
+      modern setting, Western style
+
+  pamela_fellows:
+    display_name: "Pamela Fellows"
+    style_archetype: webtoon_vertical_romance
+    ip_adapter_weight: 0.88
+    img2img_denoise: 0.74
+    positive: >-
+      josei manga character, clean modern linework, warm neutral color palette
+      soft cream warm grey gentle amber accents, professional but deeply warm
+      the face of someone who makes you feel safe in 3 seconds, intelligent
+      compassionate eyes clinical precision softened by genuine care, modern
+      Western clothing approachable, subtle body-awareness visual cue gentle
+      glow around hands or heart area, background warm therapy space or sunlit
+      room with plants, style of Blue Period emotional realism meets March
+      Comes in Like a Lion warmth, grounded human safe
+    negative: >-
+      fantasy, armor, action pose, dark horror, chibi, exaggerated,
+      ornate clothing, dramatic lighting
+
+  joshin:
+    display_name: "Joshin"
+    style_archetype: dark_psychological
+    ip_adapter_weight: 0.83
+    img2img_denoise: 0.77
+    positive: >-
+      seinen manga character, sharp clean linework with selective warmth precise
+      ink lines that soften around the eyes and mouth, penetrating gaze that is
+      simultaneously kind the look of someone asking a question that will change
+      your life, clean simple appearance, expression sits between a smile and a
+      challenge what are you really feeling right now, minimal background single
+      object a cup a stone a candle rendered with exquisite care, style of
+      Vinland Saga philosophical moments meets Honey and Clover emotional
+      clarity, pure seeing
+    negative: >-
+      busy background, dark horror, chibi, action battle, heavy screentone,
+      ornate, neon colors
+
+  maat:
+    display_name: "Maat"
+    style_archetype: power_progression
+    ip_adapter_weight: 0.80
+    img2img_denoise: 0.78
+    positive: >-
+      manga character with Egyptian-inspired aesthetic, bold geometric linework
+      with Art Nouveau flowing curves, rich earth and gold color palette lapis
+      blue desert gold deep terra cotta, regal grounded presence posture of
+      someone who IS balance not seeking it, eyes hold both light and shadow
+      without flinching, subtle Egyptian motifs feather of Maat ankh solar disc
+      integrated into composition without costume, background desert horizon at
+      golden hour geometric sacred patterns, style of JoJo Bizarre Adventure
+      dramatic posing meets Cleopatra Tezuka in Egyptian grandeur, truth embodied
+    negative: >-
+      cute, chibi, pastel, horror, anime sparkles, comedic,
+      modern clothing, Western style
+
+  omote:
+    display_name: "Omote"
+    style_archetype: hyper_clean_cinematic
+    ip_adapter_weight: 0.83
+    img2img_denoise: 0.76
+    positive: >-
+      manga character with Noh theater aesthetic, delicate precise linework
+      porcelain-smooth face rendering with subtle expression shifts, dual
+      composition one half shows the social mask clean composed public face
+      other half shows authentic presence beneath same face but alive breathing
+      real, elegant restraint beauty in what is held back, traditional Japanese
+      aesthetic elements subtle Noh mask motif in background pine tree flowing
+      fabric, expression is the moment the mask becomes transparent, style of
+      Blade of the Immortal beautiful restraint meets The Tale of the Princess
+      Kaguya in delicate linework, precision as devotion
+    negative: >-
+      loud colors, action pose, chibi, Western comic style, horror,
+      exaggerated, modern setting, neon
+
+  master_sha:
+    display_name: "Master Sha"
+    style_archetype: cozy_iyashikei
+    ip_adapter_weight: 0.84
+    img2img_denoise: 0.75
+    positive: >-
+      manga character with Chinese healing lineage aesthetic, warm luminous
+      linework blending traditional Chinese painting with modern manga, golden
+      and warm rose light emanating from the figure, compassionate powerful
+      eyes full of unconditional love, dignified traditional appearance with
+      subtle sacred geometry in clothing details, expression is devotional
+      warmth hope grounded in ancient practice, background lotus pond golden
+      light particles sacred mandalas, style of Kingdom gentle moments meets
+      Saint Seiya divine character design, love as visible force
+    negative: >-
+      dark, horror, cold tones, chibi, battle pose, harsh shadows,
+      Western style, violent

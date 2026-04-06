@@ -412,10 +412,31 @@ body {
 </style>
 </head>
 <body>
+<!-- Phoenix Command Universal Nav -->
+<nav data-nav="universal" style="position:fixed;top:0;left:0;right:0;height:36px;background:rgba(14,10,6,.97);border-bottom:1px solid rgba(180,83,9,.12);display:flex;align-items:center;padding:0 14px;gap:8px;z-index:9999;backdrop-filter:blur(8px);font-family:'DM Sans',sans-serif;overflow-x:auto">
+<a href="pearl_prime_entry.html" style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#d97706;text-decoration:none;white-space:nowrap" data-i18n="nav.brand">Pearl Prime</a>
+<span style="width:1px;height:14px;background:rgba(180,83,9,.2);flex-shrink:0"></span>
+<a href="pearl_prime_entry.html" class="unav" data-i18n="nav.markets">Markets</a>
+<a href="teacher_select.html" class="unav" data-i18n="nav.teachers">Teachers</a>
+<a href="teacher_showcase.html" class="unav" data-i18n="nav.showcase">Showcase</a>
+<a href="presenter.html?deck=intro" class="unav" data-i18n="nav.intro">Intro</a>
+<a href="marketing_dashboard.html" class="unav" data-i18n="nav.marketing">Marketing</a>
+<a href="market_lane_matrix.html" class="unav" data-i18n="nav.matrix">Matrix</a>
+<a href="brand_admin.html" class="unav" style="color:#d97706;border:1px solid rgba(180,83,9,.25);margin-left:auto" data-i18n="nav.admin">Brand Admin</a>
+</nav>
+<style>.unav{font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,246,240,.3);text-decoration:none;padding:3px 7px;border-radius:3px;transition:all .15s;white-space:nowrap}.unav:hover{color:rgba(250,246,240,.7);background:rgba(180,83,9,.08)}</style>
+<div style="height:36px"></div>
+<script src="assets/i18n.js"></script>
+<!-- /Universal Nav -->
+
+
+
+
+
 
 <nav class="sidebar">
-  <div class="sidebar-title">Pearl Prime</div>
-  <div class="sidebar-subtitle">13 TEACHERS / 13 BRANDS</div>
+  <div class="sidebar-title" data-i18n="showcase.sidebar.title">Pearl Prime</div>
+  <div class="sidebar-subtitle" data-i18n="showcase.sidebar.sub">13 TEACHERS / 13 BRANDS</div>
   <a href="#ahjan" class="nav-item" data-teacher="ahjan" style="--brand-color: #F5A623">
       <span class="nav-icon" style="background: linear-gradient(135deg, #F5A623, #4A2C00)">OM</span>
       <span class="nav-name">Ahjan</span>
@@ -504,7 +525,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #F5A62322, #4A2C0088)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_ahjan_anxiety.png" alt="ahjan cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Inner Light Press</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -1474,7 +1495,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #E74C3C22, #2C000088)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_adi_da_self_worth.png" alt="adi_da cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Awakening Press</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -2603,7 +2624,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #2ECC7122, #0A3D1E88)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_master_feung_burnout.png" alt="master_feung cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Vitality Path</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -3186,7 +3207,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #9B59B622, #2D1A3688)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_sai_ma_grief.png" alt="sai_ma cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Healing Ground Press</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -3900,7 +3921,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #3498DB22, #0A1D3088)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_ra_imposter_syndrome.png" alt="ra cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Cosmic Edge</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -4594,7 +4615,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #1ABC9C22, #0A2E2888)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_junko_overthinking.png" alt="junko cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Zen Clarity</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -4604,7 +4625,7 @@ body {
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #1ABC9C44, #0A2E2866)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/junko_cover_sleep_anxiety.png" alt="junko manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Zen Clarity</div>
           <div class="cover-subtitle">Manga Edition</div>
         </div>
@@ -5493,7 +5514,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #FF6B9D22, #3D002088)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_miki_imposter_syndrome.png" alt="miki cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Gen Spark</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -6145,7 +6166,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #95A5A622, #1A1A2E88)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_master_wu_courage.png" alt="master_wu cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Iron Will</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -6155,7 +6176,7 @@ body {
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #95A5A644, #1A1A2E66)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/master_wu_cover_courage.png" alt="master_wu manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Iron Will</div>
           <div class="cover-subtitle">Manga Edition</div>
         </div>
@@ -6732,7 +6753,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #E8B4B822, #2E141888)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_pamela_fellows_anxiety.png" alt="pamela_fellows cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Body Wisdom</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -7594,7 +7615,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #4E7A5122, #1A2E1B88)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_joshin_anxiety.png" alt="joshin cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Still Forest</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -7604,7 +7625,7 @@ body {
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #4E7A5144, #1A2E1B66)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/joshin_cover_anxiety.png" alt="joshin manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Still Forest</div>
           <div class="cover-subtitle">Manga Edition</div>
         </div>
@@ -8042,7 +8063,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #F39C1222, #3D250088)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_maat_boundaries.png" alt="maat cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Truth Compass</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -8684,7 +8705,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #5DADE222, #0A1E3088)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_omote_sleep_anxiety.png" alt="omote cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Gentle Wave</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
@@ -9271,7 +9292,7 @@ body {
 
       <div class="content-grid">
         <div class="cover-card" style="background: linear-gradient(135deg, #8E44AD22, #1A0A2288)">
-          <div class="cover-icon">BOOK</div>
+          <img src="assets/covers/cover_master_sha_grief.png" alt="master_sha cover" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Soul Repair</div>
           <div class="cover-subtitle">Pocket Guide</div>
         </div>

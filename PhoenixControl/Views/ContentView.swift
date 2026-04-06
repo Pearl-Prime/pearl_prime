@@ -16,6 +16,7 @@ enum TabTag: String, CaseIterable, Identifiable {
     case localeParity
     case mlLoop
     case docs
+    case pearlPrimeWeb
 
     var id: String { rawValue }
 
@@ -24,6 +25,7 @@ enum TabTag: String, CaseIterable, Identifiable {
         ("Quality", [.tests, .gates, .observability, .teacher]),
         ("Content", [.pearlNews, .manualReview]),
         ("Operations", [.ci, .credentials, .video, .localeParity, .mlLoop, .docs]),
+        ("Web", [.pearlPrimeWeb]),
     ]
 
     var title: String {
@@ -43,6 +45,7 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .localeParity: return "Locale Parity"
         case .mlLoop: return "ML Loop"
         case .docs: return "Docs & Config"
+        case .pearlPrimeWeb: return "Pearl Prime Web"
         }
     }
 
@@ -63,6 +66,29 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .localeParity: return "globe"
         case .mlLoop: return "brain"
         case .docs: return "doc.text"
+        case .pearlPrimeWeb: return "globe.americas"
+        }
+    }
+
+    /// One-line guidance shown as tooltip or help text in the sidebar.
+    var guidance: String {
+        switch self {
+        case .dashboard: return "System health at a glance. Check observability, evidence, branch protection, CI, and credentials status."
+        case .pipeline: return "Run the book production pipeline. Select persona, topic, engine, format, then execute."
+        case .simulation: return "Simulate 10K-book catalog runs. Validates configs, pricing, and atom coverage before production."
+        case .tests: return "Run and review test suites. Push-guard, preflight, and unit tests."
+        case .observability: return "Live metrics and alert history. Watch for drift, failures, and performance regressions."
+        case .gates: return "Release gates and evidence. All checks must pass before any push to production."
+        case .pearlNews: return "Pearl News article pipeline. Generate, expand, and publish research-backed articles."
+        case .manualReview: return "Translation and content flagged for human review. Approve, reject, or send back for revision."
+        case .teacher: return "13 teacher profiles. View doctrine, approved atoms, knowledge base, and story coverage."
+        case .ci: return "GitHub Actions workflow status. Monitor runs, failures, and re-trigger jobs."
+        case .credentials: return "API key and credential health. Verify all integrations (Cloudflare, DashScope, ElevenLabs, RunComfy) are active."
+        case .video: return "Video production and upload status. Track MP4 lifecycle across 5 platforms."
+        case .localeParity: return "Translation coverage by locale. Track CJK6 + European locale completion vs en_US baseline."
+        case .mlLoop: return "EI v2 machine learning loop. Monitor stem runs, knowledge base activation, and model feedback."
+        case .docs: return "Browse and search repo docs and config files. Quick reference for specs, authority docs, and governance."
+        case .pearlPrimeWeb: return "Open the deployed Pearl Prime web portal. Share with brand operators and investors."
         }
     }
 }
@@ -136,6 +162,7 @@ struct ContentView: View {
                             ForEach(section.1, id: \.self) { tab in
                                 Label(tab.title, systemImage: tab.systemImage)
                                     .tag(tab)
+                                    .help(tab.guidance)
                             }
                         }
                     }
@@ -195,6 +222,8 @@ struct ContentView: View {
                 MLLoopMonitorView(state: state, artifactReader: artifactReader, githubService: githubService)
             case .docs:
                 DocsConfigView(state: state, artifactReader: artifactReader, scriptRunner: scriptRunner)
+            case .pearlPrimeWeb:
+                PearlPrimeWebView()
             }
         }
     }

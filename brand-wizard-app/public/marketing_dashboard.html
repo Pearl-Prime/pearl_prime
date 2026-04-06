@@ -3,74 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phoenix Command — Marketing Dashboard</title>
+<title>Pearl Prime — Marketing Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   :root {
-    --bg-primary: #0d0d0d;
-    --bg-secondary: #1a1a1a;
-    --bg-tertiary: #252525;
-    --bg-card: #1e1e1e;
-    --amber: #f5a623;
-    --amber-dim: #c68a1a;
-    --cream: #f5e6c8;
-    --cream-dim: #b8a88a;
+    --bg-primary: #0e0a06;
+    --bg-secondary: rgba(255,255,255,.03);
+    --bg-tertiary: rgba(255,255,255,.05);
+    --bg-card: rgba(255,255,255,.03);
+    --amber: #d97706;
+    --amber-bright: #f59e0b;
+    --amber-dim: #b45309;
+    --text-high: #faf6f0;
+    --text-medium: rgba(250,246,240,.6);
+    --text-dim: rgba(250,246,240,.3);
     --green: #4caf50;
     --yellow: #ffc107;
     --red: #e53935;
     --blue: #42a5f5;
     --purple: #ab47bc;
-    --text-primary: #f5e6c8;
-    --text-secondary: #9e9e9e;
-    --border: #333;
-    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --border: rgba(180,83,9,.15);
+    --font-body: 'DM Sans', sans-serif;
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-mono: 'DM Mono', monospace;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     background: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: var(--font);
+    color: var(--text-high);
+    font-family: var(--font-body);
     line-height: 1.5;
   }
   header {
-    background: linear-gradient(135deg, #1a1206 0%, #0d0d0d 100%);
-    border-bottom: 1px solid var(--amber-dim);
+    background: linear-gradient(135deg, rgba(180,83,9,.06) 0%, rgba(14,10,6,1) 100%);
+    border-bottom: 1px solid var(--border);
     padding: 1rem 2rem;
     display: flex;
     align-items: center;
     gap: 1rem;
   }
   header .logo {
+    font-family: var(--font-heading);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 300;
     color: var(--amber);
     letter-spacing: 1px;
   }
   header .subtitle {
-    color: var(--cream-dim);
+    color: var(--text-medium);
     font-size: 0.85rem;
+    font-family: var(--font-mono);
+    font-weight: 300;
   }
-  nav {
-    background: var(--bg-secondary);
+  nav#nav {
+    background: rgba(255,255,255,.02);
     border-bottom: 1px solid var(--border);
     display: flex;
     gap: 0;
     overflow-x: auto;
   }
-  nav button {
+  nav#nav button {
     background: none;
     border: none;
-    color: var(--text-secondary);
+    color: var(--text-dim);
     padding: 0.75rem 1.5rem;
     cursor: pointer;
-    font-size: 0.85rem;
-    font-family: var(--font);
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    letter-spacing: .05em;
+    text-transform: uppercase;
     white-space: nowrap;
     border-bottom: 2px solid transparent;
     transition: all 0.2s;
   }
-  nav button:hover { color: var(--cream); background: var(--bg-tertiary); }
-  nav button.active { color: var(--amber); border-bottom-color: var(--amber); }
+  nav#nav button:hover { color: var(--text-medium); background: rgba(255,255,255,.03); }
+  nav#nav button.active { color: var(--amber); border-bottom-color: var(--amber); }
   .tab-content { display: none; padding: 1.5rem; max-width: 1600px; margin: 0 auto; }
   .tab-content.active { display: block; }
   .card {
@@ -81,11 +89,12 @@
     margin-bottom: 1rem;
   }
   .card h3 {
+    font-family: var(--font-heading);
     color: var(--amber);
-    font-size: 0.95rem;
+    font-size: 1.05rem;
+    font-weight: 400;
     margin-bottom: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
   }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
@@ -97,27 +106,27 @@
     padding: 0.75rem;
     text-align: center;
   }
-  .metric-box .label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
-  .metric-box .value { font-size: 1.3rem; font-weight: 700; color: var(--amber); margin-top: 0.25rem; }
+  .metric-box .label { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.07em; font-family: var(--font-mono); }
+  .metric-box .value { font-size: 1.3rem; font-weight: 500; color: var(--amber); margin-top: 0.25rem; font-variant-numeric: tabular-nums; }
   .metric-box .value.good { color: var(--green); }
   .metric-box .value.warn { color: var(--yellow); }
   .metric-box .value.bad { color: var(--red); }
-  select, input[type="range"] { font-family: var(--font); }
+  select, input[type="range"] { font-family: var(--font-body); }
   select {
-    background: var(--bg-tertiary);
-    color: var(--cream);
+    background: rgba(255,255,255,.05);
+    color: var(--text-high);
     border: 1px solid var(--border);
     padding: 0.5rem 0.75rem;
     border-radius: 4px;
     font-size: 0.85rem;
     cursor: pointer;
   }
-  select:focus { outline: 1px solid var(--amber); }
+  select:focus { outline: none; border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber); }
   input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
     height: 6px;
-    background: var(--bg-tertiary);
+    background: rgba(255,255,255,.08);
     border-radius: 3px;
     outline: none;
     margin: 0.5rem 0;
@@ -138,12 +147,13 @@
     margin-bottom: 1rem;
   }
   .control-group { display: flex; flex-direction: column; gap: 0.25rem; }
-  .control-group label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
+  .control-group label { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; font-family: var(--font-mono); letter-spacing: .07em; }
   .budget-display {
     font-size: 1.8rem;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--amber);
     font-variant-numeric: tabular-nums;
+    font-family: var(--font-body);
   }
   .chart-container { position: relative; height: 300px; margin-top: 0.5rem; }
   .chart-container.tall { height: 400px; }
@@ -158,14 +168,15 @@
     transition: transform 0.15s;
     font-size: 0.65rem;
     line-height: 1.2;
+    font-family: var(--font-mono);
   }
   .heatmap-cell:hover { transform: scale(1.05); z-index: 1; }
-  .heatmap-header { background: var(--bg-tertiary); color: var(--cream-dim); font-weight: 600; cursor: default; font-size: 0.65rem; }
+  .heatmap-header { background: rgba(255,255,255,.04); color: var(--text-dim); font-weight: 600; cursor: default; font-size: 0.65rem; font-family: var(--font-mono); }
   .heatmap-header:hover { transform: none; }
-  .heat-strong { background: #2e7d32; color: #fff; }
-  .heat-viable { background: #827717; color: #fff; }
-  .heat-skip { background: #b71c1c; color: #fff; }
-  .heat-weak { background: #4a1212; color: #ccc; }
+  .heat-strong { background: rgba(76,175,80,.7); color: #fff; }
+  .heat-viable { background: rgba(180,83,9,.5); color: #fff; }
+  .heat-skip { background: rgba(229,57,53,.5); color: rgba(255,255,255,.7); }
+  .heat-weak { background: rgba(255,255,255,.04); color: var(--text-dim); }
 
   /* Funnel */
   .funnel { display: flex; flex-direction: column; align-items: center; gap: 0; margin: 1rem 0; }
@@ -185,9 +196,10 @@
   .funnel-tier:hover { transform: scaleX(1.02); }
   .funnel-arrow {
     text-align: center;
-    color: var(--text-secondary);
+    color: var(--text-dim);
     font-size: 0.7rem;
     padding: 0.15rem 0;
+    font-family: var(--font-mono);
   }
   .funnel-detail { font-weight: 400; font-size: 0.75rem; opacity: 0.85; }
 
@@ -202,9 +214,9 @@
     margin-bottom: 0.5rem;
     border-left: 3px solid var(--amber);
   }
-  .phase-bar .phase-label { font-weight: 700; color: var(--amber); min-width: 80px; }
-  .phase-bar .phase-info { font-size: 0.8rem; color: var(--cream-dim); }
-  .phase-bar .phase-budget { font-weight: 700; color: var(--cream); margin-left: auto; }
+  .phase-bar .phase-label { font-weight: 600; color: var(--amber); min-width: 80px; font-family: var(--font-heading); }
+  .phase-bar .phase-info { font-size: 0.8rem; color: var(--text-medium); }
+  .phase-bar .phase-budget { font-weight: 500; color: var(--text-high); margin-left: auto; font-variant-numeric: tabular-nums; }
 
   /* Detail modal */
   .modal-overlay {
@@ -218,7 +230,7 @@
   }
   .modal-overlay.show { display: flex; }
   .modal {
-    background: var(--bg-card);
+    background: #1a1206;
     border: 1px solid var(--amber-dim);
     border-radius: 8px;
     padding: 1.5rem;
@@ -227,17 +239,18 @@
     max-height: 80vh;
     overflow-y: auto;
   }
-  .modal h3 { color: var(--amber); margin-bottom: 0.5rem; }
-  .modal p { color: var(--cream-dim); font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .modal h3 { color: var(--amber); margin-bottom: 0.5rem; font-family: var(--font-heading); font-weight: 400; }
+  .modal p { color: var(--text-medium); font-size: 0.85rem; margin-bottom: 0.5rem; }
   .modal .close-btn {
     background: var(--amber);
-    color: #000;
+    color: #0e0a06;
     border: none;
     padding: 0.4rem 1rem;
     border-radius: 4px;
     cursor: pointer;
     font-weight: 600;
     margin-top: 0.75rem;
+    font-family: var(--font-body);
   }
 
   @media (max-width: 1024px) {
@@ -252,34 +265,54 @@
 </style>
 </head>
 <body>
+<!-- Phoenix Command Universal Nav -->
+<nav data-nav="universal" style="position:fixed;top:0;left:0;right:0;height:36px;background:rgba(14,10,6,.97);border-bottom:1px solid rgba(180,83,9,.12);display:flex;align-items:center;padding:0 14px;gap:8px;z-index:9999;backdrop-filter:blur(8px);font-family:'DM Sans',sans-serif;overflow-x:auto">
+<a href="pearl_prime_entry.html" style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#d97706;text-decoration:none;white-space:nowrap" data-i18n="nav.brand">Pearl Prime</a>
+<span style="width:1px;height:14px;background:rgba(180,83,9,.2);flex-shrink:0"></span>
+<a href="pearl_prime_entry.html" class="unav" data-i18n="nav.markets">Markets</a>
+<a href="teacher_select.html" class="unav" data-i18n="nav.teachers">Teachers</a>
+<a href="teacher_showcase.html" class="unav" data-i18n="nav.showcase">Showcase</a>
+<a href="presenter.html?deck=intro" class="unav" data-i18n="nav.intro">Intro</a>
+<a href="presenter.html?deck=marketing" class="unav" data-i18n="nav.marketing">Marketing</a>
+<a href="marketing_dashboard.html" class="unav" data-i18n="nav.dashboard">Dashboard</a>
+<a href="market_lane_matrix.html" class="unav" data-i18n="nav.matrix">Matrix</a>
+<a href="brand_admin.html" class="unav" style="color:#d97706;border:1px solid rgba(180,83,9,.25);margin-left:auto" data-i18n="nav.admin">Brand Admin</a>
+</nav>
+<style>.unav{font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,246,240,.3);text-decoration:none;padding:3px 7px;border-radius:3px;transition:all .15s;white-space:nowrap}.unav:hover{color:rgba(250,246,240,.7);background:rgba(180,83,9,.08)}</style>
+<div style="height:36px"></div>
+<script src="assets/i18n.js"></script>
+<!-- /Universal Nav -->
+
+
+
 
 <header>
   <div>
-    <div class="logo">PHOENIX COMMAND</div>
-    <div class="subtitle">Marketing Intelligence Dashboard &mdash; 312 Brands x 13 Lanes</div>
+    <div class="logo" data-i18n="dashboard.logo">PEARL PRIME</div>
+    <div class="subtitle" data-i18n="dashboard.subtitle">Marketing Intelligence Dashboard &mdash; 312 Brands x 13 Lanes</div>
   </div>
 </header>
 
 <nav id="nav">
-  <button class="active" onclick="showTab('sim')">Ad Spend Simulator</button>
-  <button onclick="showTab('heatmap')">Content Heatmap</button>
-  <button onclick="showTab('lanes')">Lane Comparison</button>
-  <button onclick="showTab('funnel')">Value Ladder</button>
-  <button onclick="showTab('fleet')">Fleet Planner</button>
+  <button class="active" onclick="showTab('sim')" data-i18n="dashboard.tab.sim">Ad Spend Simulator</button>
+  <button onclick="showTab('heatmap')" data-i18n="dashboard.tab.heatmap">Content Heatmap</button>
+  <button onclick="showTab('lanes')" data-i18n="dashboard.tab.lanes">Lane Comparison</button>
+  <button onclick="showTab('funnel')" data-i18n="dashboard.tab.funnel">Value Ladder</button>
+  <button onclick="showTab('fleet')" data-i18n="dashboard.tab.fleet">Fleet Planner</button>
 </nav>
 
 <!-- ═══════════════ TAB 1: AD SPEND SIMULATOR ═══════════════ -->
 <div id="tab-sim" class="tab-content active">
   <div class="card">
-    <h3>Ad Spend Simulator</h3>
+    <h3 data-i18n="dashboard.tab.sim">Ad Spend Simulator</h3>
     <div class="controls-row">
       <div class="control-group" style="flex:2">
-        <label>Monthly Budget</label>
+        <label data-i18n="dashboard.label.budget">Monthly Budget</label>
         <input type="range" id="budgetSlider" min="0" max="5000" step="50" value="500">
         <div class="budget-display" id="budgetDisplay">$500</div>
       </div>
       <div class="control-group">
-        <label>Platform</label>
+        <label data-i18n="dashboard.label.platform">Platform</label>
         <select id="platformSelect">
           <option value="amazon">Amazon Ads</option>
           <option value="meta">Meta (FB/IG)</option>
@@ -292,7 +325,7 @@
         </select>
       </div>
       <div class="control-group">
-        <label>Lane</label>
+        <label data-i18n="dashboard.label.lane">Lane</label>
         <select id="laneSelect">
           <option value="en_US">en_US (English US)</option>
           <option value="ja_JP">ja_JP (Japanese)</option>
@@ -325,11 +358,11 @@
 
   <div class="grid-2">
     <div class="card">
-      <h3>ROAS Curve</h3>
+      <h3 data-i18n="dashboard.roas">ROAS Curve</h3>
       <div class="chart-container"><canvas id="roasChart"></canvas></div>
     </div>
     <div class="card">
-      <h3>Revenue vs Spend</h3>
+      <h3 data-i18n="dashboard.revenue.vs.spend">Revenue vs Spend</h3>
       <div class="chart-container"><canvas id="revSpendChart"></canvas></div>
     </div>
   </div>
@@ -338,8 +371,8 @@
 <!-- ═══════════════ TAB 2: CONTENT HEATMAP ═══════════════ -->
 <div id="tab-heatmap" class="tab-content">
   <div class="card">
-    <h3>Content Performance Heatmap &mdash; Topic x Brand Strength</h3>
-    <p style="color:var(--cream-dim);font-size:0.8rem;margin-bottom:1rem">Click any cell for details. Green = strong market signal. Yellow = viable. Red = skip.</p>
+    <h3 data-i18n="dashboard.heatmap.title">Content Performance Heatmap &mdash; Topic x Brand Strength</h3>
+    <p style="color:var(--text-medium);font-size:0.8rem;margin-bottom:1rem">Click any cell for details. Green = strong market signal. Yellow = viable. Red = skip.</p>
     <div id="heatmapContainer"></div>
   </div>
 </div>
@@ -348,16 +381,16 @@
 <div id="tab-lanes" class="tab-content">
   <div class="grid-2">
     <div class="card">
-      <h3>Estimated Year 1 Revenue by Lane</h3>
+      <h3 data-i18n="dashboard.lane.revenue">Estimated Year 1 Revenue by Lane</h3>
       <div class="chart-container tall"><canvas id="laneRevenueChart"></canvas></div>
     </div>
     <div class="card">
-      <h3>Competition vs Opportunity</h3>
+      <h3 data-i18n="dashboard.lane.competition">Competition vs Opportunity</h3>
       <div class="chart-container tall"><canvas id="laneScatterChart"></canvas></div>
     </div>
   </div>
   <div class="card">
-    <h3>Greenfield Opportunity Flags</h3>
+    <h3 data-i18n="dashboard.greenfield">Greenfield Opportunity Flags</h3>
     <div class="grid-3" id="greenfieldCards"></div>
   </div>
 </div>
@@ -366,11 +399,11 @@
 <div id="tab-funnel" class="tab-content">
   <div class="grid-2">
     <div class="card">
-      <h3>Value Ladder Funnel</h3>
+      <h3 data-i18n="dashboard.funnel.title">Value Ladder Funnel</h3>
       <div id="funnelContainer"></div>
     </div>
     <div class="card">
-      <h3>LTV Calculation</h3>
+      <h3 data-i18n="dashboard.ltv">LTV Calculation</h3>
       <div class="chart-container tall"><canvas id="ltvChart"></canvas></div>
       <div style="margin-top:1rem;" id="ltvSummary"></div>
     </div>
@@ -380,10 +413,10 @@
 <!-- ═══════════════ TAB 5: FLEET PLANNER ═══════════════ -->
 <div id="tab-fleet" class="tab-content">
   <div class="card">
-    <h3>Fleet Budget Planner</h3>
+    <h3 data-i18n="dashboard.fleet.title">Fleet Budget Planner</h3>
     <div class="controls-row">
       <div class="control-group" style="flex:2">
-        <label>Total Monthly Fleet Budget</label>
+        <label data-i18n="dashboard.fleet.budget">Total Monthly Fleet Budget</label>
         <input type="range" id="fleetBudgetSlider" min="1000" max="100000" step="1000" value="5000">
         <div class="budget-display" id="fleetBudgetDisplay">$5,000</div>
       </div>
@@ -391,16 +424,16 @@
   </div>
   <div class="grid-2">
     <div class="card">
-      <h3>Phase Timeline</h3>
+      <h3 data-i18n="dashboard.fleet.timeline">Phase Timeline</h3>
       <div id="phaseTimeline"></div>
     </div>
     <div class="card">
-      <h3>Budget Allocation</h3>
+      <h3 data-i18n="dashboard.fleet.allocation">Budget Allocation</h3>
       <div class="chart-container"><canvas id="fleetAllocChart"></canvas></div>
     </div>
   </div>
   <div class="card">
-    <h3>Brand Tier Breakdown</h3>
+    <h3 data-i18n="dashboard.fleet.tiers">Brand Tier Breakdown</h3>
     <div class="grid-3" id="tierBreakdown"></div>
   </div>
 </div>
@@ -410,7 +443,7 @@
   <div class="modal" onclick="event.stopPropagation()">
     <h3 id="modalTitle"></h3>
     <div id="modalBody"></div>
-    <button class="close-btn" onclick="document.getElementById('modalOverlay').classList.remove('show')">Close</button>
+    <button class="close-btn" onclick="document.getElementById('modalOverlay').classList.remove('show')" data-i18n="dashboard.btn.close">Close</button>
   </div>
 </div>
 
@@ -483,9 +516,9 @@ const HEATMAP_DETAILS = {
 
 function showTab(id) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('nav#nav button').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
-  const btns = document.querySelectorAll('nav button');
+  const btns = document.querySelectorAll('nav#nav button');
   const tabMap = ['sim','heatmap','lanes','funnel','fleet'];
   btns[tabMap.indexOf(id)].classList.add('active');
   // Lazy init charts
@@ -542,21 +575,27 @@ function calcMetrics(budget, platformKey, laneKey) {
 }
 
 let roasChart, revSpendChart;
-const chartDefaults = { color: '#f5e6c8', borderColor: '#333' };
+
+// Pearl Prime chart colors
+const ppGrid = 'rgba(180,83,9,.1)';
+const ppTickColor = 'rgba(250,246,240,.3)';
+const ppLegendColor = '#faf6f0';
+const ppAmber = '#d97706';
+const ppAmberFill = 'rgba(217,119,6,.15)';
 
 function initSimCharts() {
   const rCtx = document.getElementById('roasChart').getContext('2d');
   roasChart = new Chart(rCtx, {
     type: 'line',
-    data: { labels: [], datasets: [{ label: 'ROAS', data: [], borderColor: '#f5a623', backgroundColor: 'rgba(245,166,35,0.1)', fill: true, tension: 0.3, pointRadius: 3 }] },
+    data: { labels: [], datasets: [{ label: 'ROAS', data: [], borderColor: ppAmber, backgroundColor: ppAmberFill, fill: true, tension: 0.3, pointRadius: 3 }] },
     options: {
       responsive: true, maintainAspectRatio: false,
       scales: {
-        x: { title: { display:true, text:'Monthly Budget ($)', color:'#9e9e9e' }, ticks:{color:'#9e9e9e'}, grid:{color:'#333'} },
-        y: { title: { display:true, text:'ROAS (x)', color:'#9e9e9e' }, ticks:{color:'#9e9e9e'}, grid:{color:'#333'}, beginAtZero:true }
+        x: { title: { display:true, text:'Monthly Budget ($)', color:ppTickColor }, ticks:{color:ppTickColor}, grid:{color:ppGrid} },
+        y: { title: { display:true, text:'ROAS (x)', color:ppTickColor }, ticks:{color:ppTickColor}, grid:{color:ppGrid}, beginAtZero:true }
       },
       plugins: {
-        legend: { labels: { color:'#f5e6c8' } },
+        legend: { labels: { color:ppLegendColor } },
         annotation: { annotations: { line1: { type:'line', yMin:1, yMax:1, borderColor:'#4caf50', borderDash:[5,5], label:{ display:true, content:'Break-Even', color:'#4caf50' } } } }
       }
     }
@@ -568,17 +607,17 @@ function initSimCharts() {
     data: {
       labels: ['$0','$250','$500','$1K','$2K','$3K','$5K'],
       datasets: [
-        { label: 'Spend', data: [], backgroundColor: 'rgba(229,57,53,0.7)', borderRadius: 4 },
-        { label: 'Revenue', data: [], backgroundColor: 'rgba(76,175,80,0.7)', borderRadius: 4 }
+        { label: 'Spend', data: [], backgroundColor: 'rgba(229,57,53,0.6)', borderRadius: 4 },
+        { label: 'Revenue', data: [], backgroundColor: 'rgba(76,175,80,0.6)', borderRadius: 4 }
       ]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       scales: {
-        x: { ticks:{color:'#9e9e9e'}, grid:{color:'#333'} },
-        y: { ticks:{color:'#9e9e9e', callback: v=>'$'+v.toLocaleString()}, grid:{color:'#333'}, beginAtZero:true }
+        x: { ticks:{color:ppTickColor}, grid:{color:ppGrid} },
+        y: { ticks:{color:ppTickColor, callback: v=>'$'+v.toLocaleString()}, grid:{color:ppGrid}, beginAtZero:true }
       },
-      plugins: { legend: { labels:{color:'#f5e6c8'} } }
+      plugins: { legend: { labels:{color:ppLegendColor} } }
     }
   });
 }
@@ -663,7 +702,7 @@ function showHeatDetail(topic, brand, val) {
   showModal(`${topic} x ${brand}`,
     `<p><strong style="color:${color}">${tier}</strong> &mdash; Signal strength: ${Math.round(val*100)}%</p>
      <p>${HEATMAP_DETAILS[tierKey]}</p>
-     <p style="margin-top:0.5rem;color:var(--cream-dim)"><em>Recommendation:</em> ${val >= 0.7 ? 'Include in Wave 1 launch. Allocate top-tier ad budget.' : val >= 0.4 ? 'Queue for Wave 2-3. Test with organic content first.' : 'Deprioritize. Only build if brand has unique differentiation.'}</p>`
+     <p style="margin-top:0.5rem;color:var(--text-medium)"><em>Recommendation:</em> ${val >= 0.7 ? 'Include in Wave 1 launch. Allocate top-tier ad budget.' : val >= 0.4 ? 'Queue for Wave 2-3. Test with organic content first.' : 'Deprioritize. Only build if brand has unique differentiation.'}</p>`
   );
 }
 
@@ -687,9 +726,9 @@ function initLanes() {
         label: 'Est. Year 1 Revenue ($)',
         data: revenues,
         backgroundColor: lanes.map(l => {
-          if (['hu_HU','fr_FR'].includes(l)) return 'rgba(76,175,80,0.8)';
-          if (LANE_Y1_REVENUE[l] > 50000) return 'rgba(245,166,35,0.8)';
-          return 'rgba(245,166,35,0.4)';
+          if (['hu_HU','fr_FR'].includes(l)) return 'rgba(76,175,80,0.7)';
+          if (LANE_Y1_REVENUE[l] > 50000) return 'rgba(217,119,6,0.7)';
+          return 'rgba(217,119,6,0.3)';
         }),
         borderRadius: 4
       }]
@@ -697,8 +736,8 @@ function initLanes() {
     options: {
       responsive: true, maintainAspectRatio: false, indexAxis: 'y',
       scales: {
-        x: { ticks:{color:'#9e9e9e', callback:v=>'$'+v.toLocaleString()}, grid:{color:'#333'} },
-        y: { ticks:{color:'#f5e6c8'}, grid:{color:'#222'} }
+        x: { ticks:{color:ppTickColor, callback:v=>'$'+v.toLocaleString()}, grid:{color:ppGrid} },
+        y: { ticks:{color:'#faf6f0'}, grid:{color:'rgba(180,83,9,.06)'} }
       },
       plugins: { legend:{display:false} }
     }
@@ -719,13 +758,13 @@ function initLanes() {
         {
           label: 'Standard Lanes',
           data: scatterData.filter(d => !greenfields.includes(d.label)),
-          backgroundColor: 'rgba(245,166,35,0.7)',
+          backgroundColor: 'rgba(217,119,6,0.6)',
           pointRadius: 8
         },
         {
           label: 'Greenfield',
           data: scatterData.filter(d => greenfields.includes(d.label)),
-          backgroundColor: 'rgba(76,175,80,0.9)',
+          backgroundColor: 'rgba(76,175,80,0.8)',
           pointRadius: 10,
           pointStyle: 'star'
         }
@@ -734,11 +773,11 @@ function initLanes() {
     options: {
       responsive: true, maintainAspectRatio: false,
       scales: {
-        x: { title:{display:true,text:'Competition Level (1-10)',color:'#9e9e9e'}, ticks:{color:'#9e9e9e'}, grid:{color:'#333'}, min:0, max:10 },
-        y: { title:{display:true,text:'Market Opportunity (1-10)',color:'#9e9e9e'}, ticks:{color:'#9e9e9e'}, grid:{color:'#333'}, min:0, max:10 }
+        x: { title:{display:true,text:'Competition Level (1-10)',color:ppTickColor}, ticks:{color:ppTickColor}, grid:{color:ppGrid}, min:0, max:10 },
+        y: { title:{display:true,text:'Market Opportunity (1-10)',color:ppTickColor}, ticks:{color:ppTickColor}, grid:{color:ppGrid}, min:0, max:10 }
       },
       plugins: {
-        legend: { labels:{color:'#f5e6c8'} },
+        legend: { labels:{color:ppLegendColor} },
         tooltip: { callbacks: { label: ctx => ctx.raw.label + ` (Comp: ${ctx.raw.x}, Opp: ${ctx.raw.y})` } }
       }
     }
@@ -753,8 +792,8 @@ function initLanes() {
   ];
   gf.innerHTML = greenfieldInfo.map(g =>
     `<div class="metric-box" style="border-left:3px solid ${g.color};text-align:left;padding:1rem">
-      <div style="font-weight:700;color:${g.color};margin-bottom:0.25rem">${g.title}</div>
-      <div style="font-size:0.8rem;color:var(--cream-dim)">${g.desc}</div>
+      <div style="font-weight:600;color:${g.color};margin-bottom:0.25rem;font-family:var(--font-heading)">${g.title}</div>
+      <div style="font-size:0.8rem;color:var(--text-medium)">${g.desc}</div>
     </div>`
   ).join('');
 }
@@ -768,10 +807,10 @@ function initFunnel() {
   const tiers = [
     { name:'Free (Freebie/Lead Magnet)', price:'$0', conv:'100%', width:100, color:'#2e7d32', users:10000 },
     { name:'Micro ($0.99 Challenge)', price:'$0.99', conv:'8-12%', width:85, color:'#558b2f', users:1000 },
-    { name:'Standard ($3.99-$6.99 Ebook)', price:'$3.99', conv:'15-25%', width:70, color:'#f57f17', users:200 },
-    { name:'Premium ($14.99-$24.99 Deep Book)', price:'$14.99', conv:'5-10%', width:50, color:'#e65100', users:15 },
-    { name:'Series (7-14 books)', price:'$4.99/ea', conv:'20-30%', width:38, color:'#bf360c', users:5 },
-    { name:'B2B Bundle (Book+Course+App)', price:'$99+', conv:'1-3%', width:25, color:'#b71c1c', users:1 }
+    { name:'Standard ($3.99-$6.99 Ebook)', price:'$3.99', conv:'15-25%', width:70, color:'#b45309', users:200 },
+    { name:'Premium ($14.99-$24.99 Deep Book)', price:'$14.99', conv:'5-10%', width:50, color:'#d97706', users:15 },
+    { name:'Series (7-14 books)', price:'$4.99/ea', conv:'20-30%', width:38, color:'#92400e', users:5 },
+    { name:'B2B Bundle (Book+Course+App)', price:'$99+', conv:'1-3%', width:25, color:'#78350f', users:1 }
   ];
 
   const fc = document.getElementById('funnelContainer');
@@ -799,17 +838,17 @@ function initFunnel() {
     data: {
       labels: tierNames,
       datasets: [
-        { label: 'Revenue per Tier', data: revenuePerUser, backgroundColor: 'rgba(245,166,35,0.7)', borderRadius: 4 },
+        { label: 'Revenue per Tier', data: revenuePerUser, backgroundColor: 'rgba(217,119,6,0.6)', borderRadius: 4 },
         { label: 'Cumulative LTV', data: cumulativeLTV, type: 'line', borderColor: '#4caf50', backgroundColor: 'transparent', pointRadius: 5, tension: 0.3 }
       ]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       scales: {
-        x: { ticks:{color:'#9e9e9e'}, grid:{color:'#333'} },
-        y: { ticks:{color:'#9e9e9e', callback:v=>'$'+v}, grid:{color:'#333'}, beginAtZero:true }
+        x: { ticks:{color:ppTickColor}, grid:{color:ppGrid} },
+        y: { ticks:{color:ppTickColor, callback:v=>'$'+v}, grid:{color:ppGrid}, beginAtZero:true }
       },
-      plugins: { legend:{labels:{color:'#f5e6c8'}} }
+      plugins: { legend:{labels:{color:ppLegendColor}} }
     }
   });
 
@@ -823,7 +862,7 @@ function initFunnel() {
       <div class="label">Avg LTV (Standard path)</div>
       <div class="value">$${(0.99 + 4.99).toFixed(2)}</div>
     </div>
-    <p style="color:var(--cream-dim);font-size:0.8rem;margin-top:0.75rem">
+    <p style="color:var(--text-medium);font-size:0.8rem;margin-top:0.75rem">
       Key insight: Email list of 2,000 subscribers = 100-300 sales per launch.
       Every 1,000 subscribers adds ~$500-$1,500 per launch at standard tier.
     </p>
@@ -843,11 +882,11 @@ function initFleet() {
     type: 'doughnut',
     data: {
       labels: ['Top Performers ($1K-$5K/brand)', 'Growth Tier ($500-$1K/brand)', 'Test Tier ($100-$500/brand)', 'Organic Only ($0)'],
-      datasets: [{ data: [0,0,0,0], backgroundColor: ['#4caf50','#f5a623','#42a5f5','#555'], borderWidth: 0 }]
+      datasets: [{ data: [0,0,0,0], backgroundColor: ['#4caf50','#d97706','#42a5f5','rgba(255,255,255,.08)'], borderWidth: 0 }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { labels:{color:'#f5e6c8', padding:12}, position:'bottom' } }
+      plugins: { legend: { labels:{color:ppLegendColor, padding:12, font:{family:'DM Sans'}}, position:'bottom' } }
     }
   });
   updateFleet();
@@ -894,7 +933,7 @@ function updateFleet() {
       <span class="phase-info">Months 1-3 &mdash; ${Math.min(10, testBrands+topBrands+growthBrands)} brands, identify winners</span>
       <span class="phase-budget">$${phase1Total.toLocaleString()}/mo</span>
     </div>
-    <div class="phase-bar" style="border-left-color:#f5a623">
+    <div class="phase-bar" style="border-left-color:#d97706">
       <span class="phase-label">Phase 2</span>
       <span class="phase-info">Months 4-6 &mdash; ${Math.min(20, topBrands+growthBrands+testBrands)} brands, scale winners</span>
       <span class="phase-budget">$${phase2Total.toLocaleString()}/mo</span>
@@ -923,17 +962,17 @@ function updateFleet() {
     <div class="metric-box" style="border-top:3px solid #4caf50">
       <div class="label">Top Performers</div>
       <div class="value good">${topBrands} brands</div>
-      <div style="font-size:0.75rem;color:var(--cream-dim);margin-top:0.25rem">${topBudget > 0 ? '$'+topBudget.toLocaleString()+'/brand/mo' : 'N/A at this budget'}</div>
+      <div style="font-size:0.75rem;color:var(--text-medium);margin-top:0.25rem">${topBudget > 0 ? '$'+topBudget.toLocaleString()+'/brand/mo' : 'N/A at this budget'}</div>
     </div>
-    <div class="metric-box" style="border-top:3px solid #f5a623">
+    <div class="metric-box" style="border-top:3px solid #d97706">
       <div class="label">Growth Tier</div>
       <div class="value">${growthBrands} brands</div>
-      <div style="font-size:0.75rem;color:var(--cream-dim);margin-top:0.25rem">${growthBudget > 0 ? '$'+growthBudget.toLocaleString()+'/brand/mo' : 'N/A at this budget'}</div>
+      <div style="font-size:0.75rem;color:var(--text-medium);margin-top:0.25rem">${growthBudget > 0 ? '$'+growthBudget.toLocaleString()+'/brand/mo' : 'N/A at this budget'}</div>
     </div>
     <div class="metric-box" style="border-top:3px solid #42a5f5">
       <div class="label">Test Tier</div>
       <div class="value" style="color:#42a5f5">${testBrands} brands</div>
-      <div style="font-size:0.75rem;color:var(--cream-dim);margin-top:0.25rem">${testBudget > 0 ? '$'+testBudget.toLocaleString()+'/brand/mo' : '--'}</div>
+      <div style="font-size:0.75rem;color:var(--text-medium);margin-top:0.25rem">${testBudget > 0 ? '$'+testBudget.toLocaleString()+'/brand/mo' : '--'}</div>
     </div>
   `;
 }

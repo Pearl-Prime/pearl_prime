@@ -13,7 +13,7 @@ teacher_brands:
     tradition: "Contemplative / inner light / karma yoga"
     brand_focus: "Meditation, mindfulness, inner peace, spiritual illumination"
     content_families: [alarm_fear_systems, collapse_burnout, existential_void]
-    primary_topics: [anxiety, burnout, depression, self_worth, somatic_healing]
+    primary_topics: [anxiety, burnout, depression, self_worth, somatic_healing, mindfulness]
     primary_personas: [corporate_managers, millennial_women_professionals, working_parents]
     display_names:
       en_US: "Inner Light Press"
@@ -38,7 +38,7 @@ teacher_brands:
     brand_focus: "Spiritual awakening, radical self-inquiry, devotional practice"
     content_families: [existential_void, identity_fracture, shame_engine]
     primary_topics: [self_worth, courage, boundaries, depression, grief]
-    primary_personas: [gen_z_professionals, tech_finance_burnout, entrepreneurs]
+    primary_personas: [gen_z_professionals, tech_finance_burnout, entrepreneurs, gen_z_student]
     display_names:
       en_US: "Awakening Press"
       ja_JP: "覚醒出版"
@@ -110,7 +110,7 @@ teacher_brands:
     brand_focus: "Purpose, meaning, existential clarity, cosmic perspective"
     content_families: [existential_void, identity_fracture]
     primary_topics: [imposter_syndrome, self_worth, courage, overthinking]
-    primary_personas: [gen_z_professionals, entrepreneurs, gen_alpha_students]
+    primary_personas: [gen_z_professionals, entrepreneurs, gen_alpha_students, gen_z_student]
     display_names:
       en_US: "Cosmic Edge"
       ja_JP: "コズミック・エッジ"
@@ -133,7 +133,7 @@ teacher_brands:
     tradition: "Japanese mindfulness / zen practice"
     brand_focus: "Mental clarity, overthinking relief, zen-inspired calm"
     content_families: [overcontrol_perfection, alarm_fear_systems]
-    primary_topics: [overthinking, anxiety, sleep_anxiety, social_anxiety]
+    primary_topics: [overthinking, anxiety, sleep_anxiety, social_anxiety, mindfulness]
     primary_personas: [corporate_managers, tech_finance_burnout, nyc_executives]
     display_names:
       en_US: "Zen Clarity"
@@ -158,7 +158,7 @@ teacher_brands:
     brand_focus: "Gen Z grounding, identity formation, confidence building"
     content_families: [identity_fracture, performance_pressure, shame_engine]
     primary_topics: [imposter_syndrome, social_anxiety, self_worth, boundaries]
-    primary_personas: [gen_z_professionals, gen_alpha_students]
+    primary_personas: [gen_z_professionals, gen_alpha_students, gen_z_student]
     display_names:
       en_US: "Gen Spark"
       ja_JP: "ジェン・スパーク"
@@ -277,7 +277,7 @@ teacher_brands:
     tradition: "Japanese healing / gentle restoration"
     brand_focus: "Sleep, rest, gentle recovery, soft restoration"
     content_families: [collapse_burnout, alarm_fear_systems]
-    primary_topics: [sleep_anxiety, burnout, anxiety, compassion_fatigue]
+    primary_topics: [sleep_anxiety, burnout, anxiety, compassion_fatigue, mindfulness]
     primary_personas: [healthcare_rns, working_parents, educators]
     display_names:
       en_US: "Gentle Wave"
@@ -337,7 +337,7 @@ non_teacher_brands:
 
   night_reset:
     brand_focus: "Sleep anxiety, insomnia, nighttime rest"
-    primary_personas: [tech_finance_burnout, gen_z_professionals]
+    primary_personas: [tech_finance_burnout, gen_z_professionals, gen_z_student]
     primary_topics: [sleep_anxiety, anxiety, overthinking]
     content_families: [alarm_fear_systems]
 
@@ -349,13 +349,13 @@ non_teacher_brands:
 
   adhd_forge:
     brand_focus: "Neurodivergent focus, ADHD support"
-    primary_personas: [gen_z_professionals, gen_alpha_students]
-    primary_topics: [overthinking, anxiety, imposter_syndrome]
+    primary_personas: [gen_z_professionals, gen_alpha_students, gen_z_student]
+    primary_topics: [adhd_focus, overthinking, anxiety, imposter_syndrome]
     content_families: [overcontrol_perfection, identity_fracture]
 
   creative_unfold:
     brand_focus: "Creative blocks, artistic expression"
-    primary_personas: [gen_z_professionals, gen_alpha_students]
+    primary_personas: [gen_z_professionals, gen_alpha_students, gen_z_student]
     primary_topics: [self_worth, courage, boundaries]
     content_families: [identity_fracture, shame_engine]
 
@@ -373,7 +373,7 @@ non_teacher_brands:
 
   confidence_core:
     brand_focus: "Social anxiety, confidence building"
-    primary_personas: [gen_z_professionals, gen_alpha_students]
+    primary_personas: [gen_z_professionals, gen_alpha_students, gen_z_student]
     primary_topics: [social_anxiety, self_worth, imposter_syndrome]
     content_families: [shame_engine, identity_fracture]
 

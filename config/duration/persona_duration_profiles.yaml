@@ -19,6 +19,16 @@ personas:
     reading_pages_session_max: 60
     format_preferences: [video_short, manga_micro, podcast_micro, meditation_short]
 
+  gen_z_student:
+    persona_id: gen_z_student
+    daily_attention_budget_min: 25
+    preferred_session_length_min: 5
+    preferred_session_length_max: 15
+    short_video_max_seconds: 60
+    audiobook_max_hours: 4
+    reading_pages_session_max: 80
+    format_preferences: [manga_micro, video_short, podcast_micro, audiobook_micro, ebook_standard]
+
   gen_z_professionals:
     persona_id: gen_z_professionals
     daily_attention_budget_min: 41

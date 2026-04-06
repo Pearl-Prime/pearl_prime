@@ -15,6 +15,124 @@ weekly_mix:
   viable_standalones: 3       # testing new territory
   format_variations: 2        # same topic, different format (e.g., pocket guide of a standard book)
 
+# ── Lane-Specific Weekly Mix Overrides ─────────────────────────────
+# Per global_manga_distribution_strategy.md:
+# ALL lanes include manga content. Manga sells on Amazon KDP as graphic novels.
+# WEBTOON Canvas 2026 supports 7 languages (EN, JA, KO, FR, ES, DE, TH).
+lane_weekly_mix:
+  ja_JP:
+    # Manga-primary: 53% manga, 33% ebook
+    manga_series_installments: 3    # webtoon serialization (LINE Manga, Piccoma)
+    manga_standalone: 3             # tankōbon volumes (KDP JP)
+    manga_micro: 2                  # short episodes
+    ebook_series_installments: 1    # text series
+    ebook_standalone: 3             # text standalone
+    ebook_micro: 1                  # $0.99 text micro
+    format_variations: 2
+  ko_KR:
+    # Manga-heavy: 40% manga, 47% ebook. Vertical scroll mandatory. (=15)
+    manga_series_installments: 2    # Naver CANVAS webtoon
+    manga_standalone: 2             # collected volumes (KDP KR)
+    manga_micro: 2                  # short episodes
+    ebook_series_installments: 2    # text series
+    ebook_standalone: 4             # text standalone
+    ebook_micro: 1                  # text micro
+    format_variations: 2
+  zh_TW:
+    # Balanced: 33% manga, 53% ebook (=15)
+    manga_series_installments: 2    # LINE Webtoon TW
+    manga_standalone: 1             # Bookwalker TW
+    manga_micro: 2                  # short episodes
+    ebook_series_installments: 2    # text series
+    ebook_standalone: 4             # text standalone (Readmoo)
+    ebook_micro: 2                  # text micro
+    format_variations: 2
+  en_US:
+    # Ebook-primary with manga: 13% manga, 73% ebook (=15)
+    manga_series_installments: 1    # WEBTOON Canvas
+    manga_standalone: 1             # KDP graphic novel EPUB
+    manga_micro: 0                  # no micro manga
+    ebook_series_installments: 1    # text series (permafree Book 1)
+    ebook_standalone: 7             # text standalone (primary)
+    ebook_micro: 3                  # $0.99 text micro
+    format_variations: 2            # manga↔ebook cross-format
+  fr_FR:
+    # France #1 EU manga market: 20% manga, 67% ebook (=15)
+    manga_series_installments: 1    # WEBTOON Canvas FR
+    manga_standalone: 1             # KDP FR graphic novel
+    manga_micro: 1                  # short episodes
+    ebook_series_installments: 1    # text series
+    ebook_standalone: 6             # text standalone
+    ebook_micro: 3                  # text micro
+    format_variations: 2
+  # EU lanes: 13% manga, 73% ebook (all sum to 15)
+  de_DE:
+    manga_series_installments: 1
+    manga_standalone: 0
+    manga_micro: 1
+    ebook_series_installments: 1
+    ebook_standalone: 7             # text standalone
+    ebook_micro: 3
+    format_variations: 2
+  es_ES:
+    manga_series_installments: 1
+    manga_standalone: 0
+    manga_micro: 1
+    ebook_series_installments: 1
+    ebook_standalone: 7             # text standalone
+    ebook_micro: 3
+    format_variations: 2
+  es_US:
+    manga_series_installments: 1
+    manga_standalone: 0
+    manga_micro: 1
+    ebook_series_installments: 1
+    ebook_standalone: 7             # text standalone
+    ebook_micro: 3
+    format_variations: 2
+  it_IT:
+    manga_series_installments: 1
+    manga_standalone: 0
+    manga_micro: 1
+    ebook_series_installments: 1
+    ebook_standalone: 7             # text standalone
+    ebook_micro: 3
+    format_variations: 2
+  hu_HU:
+    manga_series_installments: 1
+    manga_standalone: 0
+    manga_micro: 1
+    ebook_series_installments: 1
+    ebook_standalone: 7             # text standalone
+    ebook_micro: 3
+    format_variations: 2
+  # Asia default: 20% manga, 67% ebook (all sum to 15)
+  zh_HK:
+    manga_series_installments: 1
+    manga_standalone: 1
+    manga_micro: 1
+    ebook_series_installments: 1
+    ebook_standalone: 6
+    ebook_micro: 3
+    format_variations: 2
+  zh_SG:
+    manga_series_installments: 1
+    manga_standalone: 1
+    manga_micro: 1
+    ebook_series_installments: 1
+    ebook_standalone: 6
+    ebook_micro: 3
+    format_variations: 2
+  # China: ebook-only (no manga platforms accessible)
+  zh_CN:
+    manga_series_installments: 0
+    manga_standalone: 0
+    manga_micro: 0
+    ebook_series_installments: 2
+    ebook_standalone: 8             # text standalone
+    ebook_micro: 3
+    format_variations: 2
+
 # ── Priority Ordering (what gets produced first) ────────────────────
 priority_order:
   - STRONG_unproduced         # never-before-produced STRONG configs
@@ -92,24 +210,29 @@ runtime_structural_compat:
 # ── STRONG Clusters (from full_content_audit.md) ────────────────────
 # These topic×persona combos are highest confidence — produce first.
 strong_clusters:
-  - { topic: anxiety, personas: [corporate_managers, millennial_women_professionals, tech_finance_burnout, gen_z_professionals] }
-  - { topic: burnout, personas: [healthcare_rns, first_responders, tech_finance_burnout, entrepreneurs] }
-  - { topic: sleep_anxiety, personas: [corporate_managers, millennial_women_professionals, working_parents, tech_finance_burnout] }
-  - { topic: imposter_syndrome, personas: [gen_z_professionals, millennial_women_professionals, corporate_managers, entrepreneurs] }
-  - { topic: social_anxiety, personas: [gen_z_professionals, gen_alpha_students, millennial_women_professionals] }
-  - { topic: burnout, personas: [entrepreneurs, corporate_managers] }
+  # Tier 1: highest confidence, most atom coverage
+  - { topic: anxiety, personas: [corporate_managers, millennial_women_professionals, tech_finance_burnout, gen_z_professionals, gen_z_student] }
+  - { topic: burnout, personas: [healthcare_rns, first_responders, tech_finance_burnout, entrepreneurs, gen_z_student] }
+  - { topic: sleep_anxiety, personas: [corporate_managers, millennial_women_professionals, working_parents, tech_finance_burnout, gen_z_student] }
+  - { topic: imposter_syndrome, personas: [gen_z_professionals, millennial_women_professionals, corporate_managers, entrepreneurs, gen_z_student] }
+  - { topic: overthinking, personas: [corporate_managers, tech_finance_burnout, entrepreneurs, gen_z_student] }
+  # Tier 2: promoted from VIABLE — strong market demand
+  - { topic: boundaries, personas: [millennial_women_professionals, working_parents, gen_z_student] }
+  - { topic: self_worth, personas: [gen_z_professionals, gen_alpha_students, millennial_women_professionals, gen_z_student] }
+  - { topic: depression, personas: [working_parents, millennial_women_professionals, gen_x_sandwich, gen_z_student] }
   - { topic: somatic_healing, personas: [corporate_managers, millennial_women_professionals, healthcare_rns, working_parents] }
-  - { topic: financial_anxiety, personas: [gen_z_professionals, millennial_women_professionals, entrepreneurs] }
+  - { topic: social_anxiety, personas: [gen_z_professionals, gen_alpha_students, millennial_women_professionals, gen_z_student] }
+  - { topic: grief, personas: [gen_x_sandwich, working_parents, healthcare_rns, gen_z_student] }
+  - { topic: courage, personas: [first_responders, entrepreneurs, gen_z_professionals, gen_z_student] }
+  - { topic: sleep_anxiety, personas: [gen_z_student, gen_alpha_students, gen_z_professionals] }
+  - { topic: financial_anxiety, personas: [gen_z_professionals, millennial_women_professionals, entrepreneurs, gen_z_student] }
+  - { topic: financial_stress, personas: [working_parents, gen_x_sandwich, entrepreneurs, gen_z_student] }
+  - { topic: compassion_fatigue, personas: [healthcare_rns, educators, first_responders] }
+  - { topic: adhd_focus, personas: [gen_z_professionals, gen_alpha_students, gen_z_student, entrepreneurs] }
+  - { topic: mindfulness, personas: [corporate_managers, millennial_women_professionals, gen_z_student, working_parents, gen_z_professionals] }
 
 # ── VIABLE Clusters ─────────────────────────────────────────────────
-viable_clusters:
-  - { topic: depression, personas: [working_parents, millennial_women_professionals, gen_x_sandwich] }
-  - { topic: boundaries, personas: [millennial_women_professionals, working_parents, educators] }
-  - { topic: compassion_fatigue, personas: [healthcare_rns, educators, first_responders] }
-  - { topic: overthinking, personas: [corporate_managers, tech_finance_burnout, entrepreneurs] }
-  - { topic: grief, personas: [gen_x_sandwich, working_parents, healthcare_rns] }
-  - { topic: courage, personas: [first_responders, entrepreneurs, gen_z_professionals] }
-  - { topic: self_worth, personas: [gen_z_professionals, gen_alpha_students, millennial_women_professionals] }
+viable_clusters: []
 
 # ── Kill List (Never Build) ─────────────────────────────────────────
 # Imported from catalog_generation_config.yaml

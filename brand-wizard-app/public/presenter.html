@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pearl Prime — Unified Presenter</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e0a06;overflow:hidden;color:#faf6f0}
@@ -32,6 +33,37 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 #hero-card .hero-title{font-family:var(--serif);font-size:1.6rem;font-weight:300;color:var(--acc2);text-align:center;max-width:680px;line-height:1.5}
 #hero-card .hero-sub{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.25);text-align:center;max-width:580px;line-height:1.8}
 #hero-card .hero-stat{font-family:var(--mono);font-size:.72rem;color:var(--acc);letter-spacing:.04em}
+/* ── VISUAL PANEL ──────────────────────────────── */
+#visual-panel{position:absolute;top:32px;left:0;right:0;bottom:4px;z-index:12;overflow-y:auto;padding:1.2rem 2rem;display:none;background:#1c1009}
+#visual-panel.active{display:block}
+#visual-panel::-webkit-scrollbar{width:4px}
+#visual-panel::-webkit-scrollbar-thumb{background:rgba(180,83,9,.3);border-radius:2px}
+.vp-title{font-family:var(--serif);font-size:1.1rem;font-weight:300;color:var(--acc2);margin-bottom:.8rem;text-align:center}
+.vp-grid{display:grid;gap:1rem;margin-bottom:1rem}
+.vp-grid.g2{grid-template-columns:1fr 1fr}
+.vp-grid.g3{grid-template-columns:1fr 1fr 1fr}
+.vp-grid.g4{grid-template-columns:1fr 1fr 1fr 1fr}
+.vp-card{background:rgba(14,10,6,.6);border:1px solid rgba(180,83,9,.15);border-radius:4px;padding:.8rem;text-align:center}
+.vp-card-val{font-family:var(--mono);font-size:1.4rem;color:var(--acc2);font-weight:400}
+.vp-card-lbl{font-family:var(--mono);font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,240,.3);margin-top:.25rem}
+.vp-chart-wrap{background:rgba(14,10,6,.4);border:1px solid rgba(180,83,9,.1);border-radius:4px;padding:.8rem;margin-bottom:1rem;max-height:220px;position:relative}
+.vp-chart-wrap canvas{max-height:190px}
+.vp-table{width:100%;border-collapse:collapse;margin-bottom:1rem;font-size:.68rem}
+.vp-table th{font-family:var(--mono);font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,240,.3);text-align:left;padding:.4rem .5rem;border-bottom:1px solid rgba(180,83,9,.2)}
+.vp-table td{padding:.4rem .5rem;color:rgba(250,246,240,.6);border-bottom:1px solid rgba(180,83,9,.07)}
+.vp-table td.num{font-family:var(--mono);color:var(--acc2);text-align:right}
+.vp-cover-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:.5rem;margin-bottom:1rem}
+.vp-cover-grid img{width:100%;border-radius:3px;border:1px solid rgba(180,83,9,.15);aspect-ratio:2/3;object-fit:cover;background:#0e0a06}
+.vp-diagram{display:flex;align-items:center;justify-content:center;gap:.6rem;margin:1rem 0;flex-wrap:wrap}
+.vp-dbox{background:rgba(180,83,9,.08);border:1px solid rgba(180,83,9,.25);border-radius:4px;padding:.5rem .8rem;text-align:center;min-width:100px}
+.vp-dbox-title{font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;color:var(--acc2);text-transform:uppercase}
+.vp-dbox-sub{font-size:.42rem;color:rgba(250,246,240,.35);margin-top:.15rem}
+.vp-arrow{color:rgba(180,83,9,.4);font-size:1.2rem}
+.vp-bar{display:flex;align-items:flex-end;gap:4px;height:120px;margin:1rem 0;justify-content:center}
+.vp-bar-col{display:flex;flex-direction:column;align-items:center;gap:.2rem;flex:1;max-width:60px}
+.vp-bar-fill{width:100%;background:var(--acc);border-radius:2px 2px 0 0;transition:height .4s}
+.vp-bar-lbl{font-family:var(--mono);font-size:.36rem;color:rgba(250,246,240,.3);writing-mode:vertical-rl;text-orientation:mixed;max-height:60px;overflow:hidden}
+.vp-bar-val{font-family:var(--mono);font-size:.38rem;color:var(--acc2)}
 #status-bar{position:absolute;top:0;left:0;right:0;height:28px;background:rgba(14,10,6,.9);display:flex;align-items:center;padding:0 1rem;gap:.8rem;z-index:25}
 #status-dot{width:6px;height:6px;border-radius:50%;background:#444;flex-shrink:0}
 #status-dot.playing{background:#22c55e;animation:pulse 1.5s infinite}
@@ -91,36 +123,75 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 </style>
 </head>
 <body>
+<!-- Phoenix Command Universal Nav -->
+<nav data-nav="universal" style="position:fixed;top:0;left:0;right:0;height:36px;background:rgba(14,10,6,.97);border-bottom:1px solid rgba(180,83,9,.12);display:flex;align-items:center;padding:0 14px;gap:8px;z-index:9999;backdrop-filter:blur(8px);font-family:'DM Sans',sans-serif;overflow-x:auto">
+<a href="pearl_prime_entry.html" style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#d97706;text-decoration:none;white-space:nowrap" data-i18n="nav.brand">Pearl Prime</a>
+<span style="width:1px;height:14px;background:rgba(180,83,9,.2);flex-shrink:0"></span>
+<a href="pearl_prime_entry.html" class="unav" data-i18n="nav.markets">Markets</a>
+<a href="teacher_select.html" class="unav" data-i18n="nav.teachers">Teachers</a>
+<a href="teacher_showcase.html" class="unav" data-i18n="nav.showcase">Showcase</a>
+<a href="presenter.html?deck=intro" class="unav" data-i18n="nav.intro">Intro</a>
+<a href="marketing_dashboard.html" class="unav" data-i18n="nav.marketing">Marketing</a>
+<a href="market_lane_matrix.html" class="unav" data-i18n="nav.matrix">Matrix</a>
+<a href="brand_admin.html" class="unav" style="color:#d97706;border:1px solid rgba(180,83,9,.25);margin-left:auto" data-i18n="nav.admin">Brand Admin</a>
+</nav>
+<style>.unav{font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,246,240,.3);text-decoration:none;padding:3px 7px;border-radius:3px;transition:all .15s;white-space:nowrap}.unav:hover{color:rgba(250,246,240,.7);background:rgba(180,83,9,.08)}</style>
+<div style="height:36px"></div>
+<script src="assets/i18n.js"></script>
+<!-- /Universal Nav -->
+
+
+
 
 <!-- ── DECK SELECTOR ──────────────────────────────────── -->
 <div id="deck-selector">
-  <div class="ds-title">Pearl Prime Presenter</div>
-  <div class="ds-sub">Select a deck to begin</div>
+  <div class="ds-title" data-i18n="presenter.title">Pearl Prime Presenter</div>
+  <div class="ds-sub" data-i18n="presenter.subtitle">Select a deck to begin</div>
   <div class="ds-grid">
     <a class="ds-card" href="?deck=intro">
       <div class="ds-card-icon">&#x2728;</div>
-      <div class="ds-card-name">Pearl Prime Intro</div>
-      <div class="ds-card-desc">Brand admin onboarding. Revenue, architecture, weekly OS.</div>
+      <div class="ds-card-name" data-i18n="presenter.deck.intro">Pearl Prime Intro</div>
+      <div class="ds-card-desc" data-i18n="presenter.deck.intro.desc">Brand admin onboarding. Revenue, architecture, weekly OS.</div>
     </a>
     <a class="ds-card" href="?deck=marketing">
       <div class="ds-card-icon">&#x1F4CA;</div>
-      <div class="ds-card-name">Marketing Intelligence</div>
-      <div class="ds-card-desc">13 markets, ad ROI, content audit, fleet rollout.</div>
+      <div class="ds-card-name" data-i18n="presenter.deck.marketing">Marketing Intelligence</div>
+      <div class="ds-card-desc" data-i18n="presenter.deck.marketing.desc">13 markets, ad ROI, content audit, fleet rollout.</div>
     </a>
     <a class="ds-card" href="?deck=briefing_us">
       <div class="ds-card-icon">&#x1F1FA;&#x1F1F8;</div>
-      <div class="ds-card-name">US Briefing</div>
-      <div class="ds-card-desc">Platform stack, upload guide, revenue projections.</div>
+      <div class="ds-card-name" data-i18n="presenter.deck.us">US Briefing</div>
+      <div class="ds-card-desc" data-i18n="presenter.deck.us.desc">Platform stack, upload guide, revenue projections.</div>
     </a>
     <a class="ds-card" href="?deck=briefing_jp">
       <div class="ds-card-icon">&#x1F1EF;&#x1F1F5;</div>
-      <div class="ds-card-name">Japan Briefing</div>
-      <div class="ds-card-desc">Manga, audiobook.jp, LINE, Piccoma, Japan-specific.</div>
+      <div class="ds-card-name" data-i18n="presenter.deck.jp">Japan Briefing</div>
+      <div class="ds-card-desc" data-i18n="presenter.deck.jp.desc">Manga, audiobook.jp, LINE, Piccoma, Japan-specific.</div>
     </a>
     <a class="ds-card" href="?deck=briefing_kr">
       <div class="ds-card-icon">&#x1F1F0;&#x1F1F7;</div>
-      <div class="ds-card-name">Korea Briefing</div>
-      <div class="ds-card-desc">Naver, Kakao, Millie's Library, Korea-specific.</div>
+      <div class="ds-card-name" data-i18n="presenter.deck.kr">Korea Briefing</div>
+      <div class="ds-card-desc" data-i18n="presenter.deck.kr.desc">Naver, Kakao, Millie's Library, Korea-specific.</div>
+    </a>
+    <a class="ds-card" href="?deck=briefing_fr">
+      <div class="ds-card-icon">&#x1F1EB;&#x1F1F7;</div>
+      <div class="ds-card-name">France Briefing</div>
+      <div class="ds-card-desc">Manga first-mover, Kobo France, philosophical framing.</div>
+    </a>
+    <a class="ds-card" href="?deck=briefing_de">
+      <div class="ds-card-icon">&#x1F1E9;&#x1F1EA;</div>
+      <div class="ds-card-name">Germany Briefing</div>
+      <div class="ds-card-desc">Evidence-based, Audible DE, wissenschaftlich fundiert.</div>
+    </a>
+    <a class="ds-card" href="?deck=briefing_id">
+      <div class="ds-card-icon">&#x1F1EE;&#x1F1E9;</div>
+      <div class="ds-card-name">Indonesia Briefing</div>
+      <div class="ds-card-desc">Tokopedia, Gramedia Digital, 275M population.</div>
+    </a>
+    <a class="ds-card" href="?deck=briefing_br">
+      <div class="ds-card-icon">&#x1F1E7;&#x1F1F7;</div>
+      <div class="ds-card-name">Brazil Briefing</div>
+      <div class="ds-card-desc">Amazon BR, Google Play, Skeelo, Portuguese.</div>
     </a>
   </div>
 </div>
@@ -130,11 +201,12 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
   <div id="frame-wrap">
     <div id="status-bar">
       <div id="status-dot"></div>
-      <span id="status-txt">Ready &#8212; press &#9654; Play</span>
+      <span id="status-txt" data-i18n="presenter.status.ready">Ready &#8212; press &#9654; Play</span>
       <span id="timer">0:00</span>
     </div>
     <div id="slide-badge"></div>
     <div id="prog-track"><div id="prog-fill"></div></div>
+    <div id="visual-panel"></div>
     <div id="hero-card">
       <div class="hero-icon">&#x2728;</div>
       <div class="hero-title">Pearl Prime</div>
@@ -243,6 +315,46 @@ var DECK_META = {
     heroes: {
       landing:{icon:"\uD83C\uDDF0\uD83C\uDDF7",title:"\uD55C\uAD6D \uBE0C\uB9AC\uD551",sub:"Naver \u00b7 Kakao \u00b7 Millie\u2019s Library"},
       kr:{icon:"\uD83C\uDDF0\uD83C\uDDF7",title:"\uD55C\uAD6D \u2014 Korea Market",sub:"Naver $0.054 CPC \u00b7 \uBE68\uB9AC\uBE68\uB9AC culture \u00b7 Kakao"}
+    }
+  },
+  briefing_fr: {
+    title: "France Briefing",
+    sub: "Admin Briefing",
+    chips: [{p:"all",label:"All"},{p:"fr",label:"\uD83C\uDDEB\uD83C\uDDF7"}],
+    heroDefault: {icon:"\uD83C\uDDEB\uD83C\uDDF7", title:"Briefing France", sub:"Manga first-mover \u00b7 Kobo FR \u00b7 Philosophical framing"},
+    heroes: {
+      landing:{icon:"\uD83C\uDDEB\uD83C\uDDF7",title:"Briefing France",sub:"Manga first-mover \u00b7 Kobo FR \u00b7 Google Play FR"},
+      fr:{icon:"\uD83C\uDDEB\uD83C\uDDF7",title:"France \u2014 March\u00e9 fran\u00e7ais",sub:"#1 EU manga market \u00b7 Philosophical self-help"}
+    }
+  },
+  briefing_de: {
+    title: "Germany Briefing",
+    sub: "Admin Briefing",
+    chips: [{p:"all",label:"All"},{p:"de",label:"\uD83C\uDDE9\uD83C\uDDEA"}],
+    heroDefault: {icon:"\uD83C\uDDE9\uD83C\uDDEA", title:"Briefing Deutschland", sub:"Audible DE \u00b7 Evidence-based \u00b7 Long-form"},
+    heroes: {
+      landing:{icon:"\uD83C\uDDE9\uD83C\uDDEA",title:"Briefing Deutschland",sub:"Audible DE \u00b7 Thalia \u00b7 Wissenschaftlich fundiert"},
+      de:{icon:"\uD83C\uDDE9\uD83C\uDDEA",title:"Deutschland \u2014 German Market",sub:"Evidence-based framing \u00b7 Long-form preferred"}
+    }
+  },
+  briefing_id: {
+    title: "Indonesia Briefing",
+    sub: "Admin Briefing",
+    chips: [{p:"all",label:"All"},{p:"id",label:"\uD83C\uDDEE\uD83C\uDDE9"}],
+    heroDefault: {icon:"\uD83C\uDDEE\uD83C\uDDE9", title:"Briefing Indonesia", sub:"275M population \u00b7 Gramedia \u00b7 Tokopedia"},
+    heroes: {
+      landing:{icon:"\uD83C\uDDEE\uD83C\uDDE9",title:"Briefing Indonesia",sub:"275M population \u00b7 Mobile-first \u00b7 Fastest growth"},
+      id:{icon:"\uD83C\uDDEE\uD83C\uDDE9",title:"Indonesia Market",sub:"Gramedia Digital \u00b7 Google Play ID \u00b7 Tokopedia"}
+    }
+  },
+  briefing_br: {
+    title: "Brazil Briefing",
+    sub: "Admin Briefing",
+    chips: [{p:"all",label:"All"},{p:"br",label:"\uD83C\uDDE7\uD83C\uDDF7"}],
+    heroDefault: {icon:"\uD83C\uDDE7\uD83C\uDDF7", title:"Briefing Brasil", sub:"Amazon BR \u00b7 Skeelo \u00b7 Portuguese"},
+    heroes: {
+      landing:{icon:"\uD83C\uDDE7\uD83C\uDDF7",title:"Briefing Brasil",sub:"Amazon BR \u00b7 Skeelo \u00b7 Google Play BR"},
+      br:{icon:"\uD83C\uDDE7\uD83C\uDDF7",title:"Brasil \u2014 Mercado brasileiro",sub:"215M population \u00b7 Autoajuda em portugu\u00eas"}
     }
   }
 };
@@ -567,6 +679,71 @@ var SCRIPTS_BRIEFING_KR = [
 ];
 
 // ══════════════════════════════════════════════════════════
+// SCRIPTS DATA — FRANCE BRIEFING DECK
+// ══════════════════════════════════════════════════════════
+var SCRIPTS_BRIEFING_FR = [
+{path:"landing",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDEB\uD83C\uDDF7",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"The France platform stack. Google Play Books France, Kobo France \u2014 strong ebook presence. Apple Books via Draft2Digital. Amazon Kindle France at 70% royalty."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Manga distribution: France is the number one manga market in Europe and number two globally after Japan. Self-help manga in French is a first-mover opportunity with zero competition."},
+]},
+{path:"fr",slide:null,label:"\uD83C\uDFA8 Manga First-Mover",flag:"\uD83C\uDDEB\uD83C\uDDF7",lines:[
+  {lang:"en",nav:{path:"fr",slide:null},text:"France consumes more manga per capita than any country outside Japan. Philosophical framing resonates with French readers \u2014 use introspection, existential questioning, and beauty-focused language."},
+  {lang:"en",nav:{path:"fr",slide:null},text:"Cold-start product: \u20AC0.99 Seven Day Challenge. Content repurposing: 30 posts per book across Instagram France, TikTok France, and Facebook. BookTok France is growing rapidly."},
+]},
+{path:"fr",slide:null,label:"\uD83D\uDCB0 Revenue & Ads",flag:"\uD83C\uDDEB\uD83C\uDDF7",lines:[
+  {lang:"en",nav:{path:"fr",slide:null},text:"Revenue projection: $2,000 to $8,000 Year One organic. Recommended $500/mo allocation: Meta $300, Google $125, Amazon France $75."},
+  {lang:"en",nav:{path:"fr",slide:null},text:"No one is delivering ancient wisdom to France's next generation through manga at scale. The combination of French philosophical culture and manga visual format is uniquely powerful. Pearl Prime is the first."},
+]},
+];
+
+// ══════════════════════════════════════════════════════════
+// SCRIPTS DATA — GERMANY BRIEFING DECK
+// ══════════════════════════════════════════════════════════
+var SCRIPTS_BRIEFING_DE = [
+{path:"landing",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDE9\uD83C\uDDEA",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"The Germany platform stack. Amazon Kindle Germany, Audible Germany \u2014 the strongest audiobook market in Europe. Thalia and Hugendubel for ebook distribution. Google Play Books DE."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Evidence-based framing is essential in Germany. The word wissenschaftlich fundiert \u2014 scientifically grounded \u2014 sells. Never use spiritual or mystical language. Long-form content preferred."},
+]},
+{path:"de",slide:null,label:"\uD83E\uDDEC Evidence-Based",flag:"\uD83C\uDDE9\uD83C\uDDEA",lines:[
+  {lang:"en",nav:{path:"de",slide:null},text:"German readers require evidence. Frame somatic healing as neuroscience, frame meditation as cognitive training, frame emotional regulation as stress physiology. Cite research. Use precise language."},
+  {lang:"en",nav:{path:"de",slide:null},text:"Cold-start product: \u20AC0.99 Seven Day Challenge. Content repurposing: 25 posts per book across Instagram, YouTube, and LinkedIn. German LinkedIn has strong professional wellness audience."},
+]},
+{path:"de",slide:null,label:"\uD83D\uDCB0 Revenue & Ads",flag:"\uD83C\uDDE9\uD83C\uDDEA",lines:[
+  {lang:"en",nav:{path:"de",slide:null},text:"Revenue projection: $2,500 to $10,000 Year One organic. Audible Germany alone is a significant revenue driver \u2014 German audiobook market grew 25% in 2024."},
+  {lang:"en",nav:{path:"de",slide:null},text:"Recommended $500/mo allocation: Amazon Germany $300, Meta $125, Google $75. Amazon Sponsored Products perform well for evidence-based self-help in the German market."},
+]},
+];
+
+// ══════════════════════════════════════════════════════════
+// SCRIPTS DATA — INDONESIA BRIEFING DECK
+// ══════════════════════════════════════════════════════════
+var SCRIPTS_BRIEFING_ID = [
+{path:"landing",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDEE\uD83C\uDDE9",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"The Indonesia platform stack. Google Play Books \u2014 dominant mobile platform in a 275 million population market. Gramedia Digital \u2014 Indonesia's largest book retailer. Tokopedia for physical and digital distribution."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Indonesia is mobile-first with 73% smartphone penetration. Short-form content and micro-pricing work best. TikTok Indonesia has 125 million users \u2014 the second largest TikTok market globally."},
+]},
+{path:"id",slide:null,label:"\uD83D\uDCF1 Mobile-First",flag:"\uD83C\uDDEE\uD83C\uDDE9",lines:[
+  {lang:"en",nav:{path:"id",slide:null},text:"Cold-start product: Rp 15,000 Quick Reset (roughly $0.99). Religious framing is important \u2014 88% Muslim population. Frame wellness through spiritual growth and community values. Avoid clinical mental health language."},
+  {lang:"en",nav:{path:"id",slide:null},text:"Revenue projection: $1,000 to $5,000 Year One organic. Indonesia is a greenfield market for therapeutic self-help content. The combination of massive population and low competition creates significant opportunity."},
+]},
+];
+
+// ══════════════════════════════════════════════════════════
+// SCRIPTS DATA — BRAZIL BRIEFING DECK
+// ══════════════════════════════════════════════════════════
+var SCRIPTS_BRIEFING_BR = [
+{path:"landing",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDE7\uD83C\uDDF7",lines:[
+  {lang:"en",nav:{path:"landing",slide:null},text:"The Brazil platform stack. Amazon Kindle Brazil at 70% royalty. Google Play Books Brazil. Skeelo \u2014 Brazil's leading ebook subscription service with 10 million users. Apple Books via Draft2Digital."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Brazil has 215 million population with strong autoajuda \u2014 self-help \u2014 culture. Portuguese content. Instagram and TikTok Brazil are primary discovery channels. WhatsApp groups drive organic book discovery."},
+]},
+{path:"br",slide:null,label:"\uD83C\uDDE7\uD83C\uDDF7 Autoajuda Culture",flag:"\uD83C\uDDE7\uD83C\uDDF7",lines:[
+  {lang:"en",nav:{path:"br",slide:null},text:"Cold-start product: R$4.99 Seven Day Challenge. Brazilian readers respond to warmth, community, and transformation narratives. The autoajuda category is one of the top three bestseller categories in Brazil consistently."},
+  {lang:"en",nav:{path:"br",slide:null},text:"Revenue projection: $2,000 to $8,000 Year One organic. Recommended $500/mo allocation: Meta $250, Google $150, Amazon Brazil $100. Instagram Reels and TikTok are the primary content discovery channels."},
+  {lang:"en",nav:{path:"br",slide:null},text:"No one is delivering ancient enlightened wisdom to Brazil's next generation in Portuguese at scale. Pearl Prime is the first. The opportunity is now."},
+]},
+];
+
+// ══════════════════════════════════════════════════════════
 // DECK LOADER
 // ══════════════════════════════════════════════════════════
 var DECK_SCRIPTS = {
@@ -574,18 +751,23 @@ var DECK_SCRIPTS = {
   marketing: SCRIPTS_MARKETING,
   briefing_us: SCRIPTS_BRIEFING_US,
   briefing_jp: SCRIPTS_BRIEFING_JP,
-  briefing_kr: SCRIPTS_BRIEFING_KR
+  briefing_kr: SCRIPTS_BRIEFING_KR,
+  briefing_fr: SCRIPTS_BRIEFING_FR,
+  briefing_de: SCRIPTS_BRIEFING_DE,
+  briefing_id: SCRIPTS_BRIEFING_ID,
+  briefing_br: SCRIPTS_BRIEFING_BR
 };
 
 // ── READ URL PARAM ────────────────────────────────────────
 var params = new URLSearchParams(window.location.search);
 var deckId = params.get("deck");
 
-var SCRIPTS, activeMeta;
+var SCRIPTS, activeMeta, activeDeck;
 
 if (deckId && DECK_SCRIPTS[deckId]) {
   SCRIPTS = DECK_SCRIPTS[deckId];
   activeMeta = DECK_META[deckId];
+  activeDeck = deckId;
   document.getElementById("deck-selector").classList.add("hidden");
   document.getElementById("app").classList.remove("hidden");
   document.title = "Pearl Prime \u2014 " + activeMeta.title;
@@ -699,6 +881,7 @@ function showBadge(txt) {
 // ── SCRIPT DISPLAY ────────────────────────────────────
 function renderScript(s) {
   document.getElementById("sc-label").textContent = s.flag + "  " + s.label;
+  showVisual(s);
   var c = document.getElementById("sc-text"); c.innerHTML = "";
   s.lines.forEach(function(ln, li) {
     var p = document.createElement("span");
@@ -805,6 +988,7 @@ function doStop() {
   updStatus("stopped");
   document.getElementById("sc-text").innerHTML = 'Press <strong style="color:var(--acc2)">\u25B6 Play</strong> to begin.';
   document.getElementById("sc-label").textContent = "Stopped";
+  hideVisual();
   updateHero("landing");
 }
 
@@ -875,6 +1059,374 @@ function stopClk() { clearInterval(state.clk); }
 document.getElementById("spd").addEventListener("input", function() {
   document.getElementById("spd-v").textContent = parseFloat(this.value).toFixed(1) + "\u00d7";
 });
+
+// ══════════════════════════════════════════════════════════
+// SLIDE VISUALS — Charts, Tables, Cover Grids, Diagrams
+// ══════════════════════════════════════════════════════════
+var _activeCharts = [];
+function destroyCharts(){_activeCharts.forEach(function(c){try{c.destroy()}catch(e){}});_activeCharts=[];}
+
+var CHART_DEFAULTS = {
+  plugins:{legend:{labels:{color:"rgba(250,246,240,.4)",font:{family:"DM Mono",size:9},boxWidth:10}},tooltip:{backgroundColor:"#1c1009",borderColor:"rgba(180,83,9,.3)",borderWidth:1,titleFont:{family:"DM Mono",size:10},bodyFont:{family:"DM Sans",size:11}}},
+  scales:{x:{ticks:{color:"rgba(250,246,240,.3)",font:{family:"DM Mono",size:8}},grid:{color:"rgba(180,83,9,.08)"}},y:{ticks:{color:"rgba(250,246,240,.3)",font:{family:"DM Mono",size:8}},grid:{color:"rgba(180,83,9,.08)"}}}
+};
+
+var COVERS = [
+  {src:"assets/covers/cover_adi_da_self_worth.png",t:"Adi Da"},
+  {src:"assets/covers/cover_ahjan_anxiety.png",t:"Ahjan"},
+  {src:"assets/covers/cover_joshin_anxiety.png",t:"Joshin"},
+  {src:"assets/covers/cover_junko_overthinking.png",t:"Junko"},
+  {src:"assets/covers/cover_maat_boundaries.png",t:"Maat"},
+  {src:"assets/covers/cover_master_feung_burnout.png",t:"Master Feung"},
+  {src:"assets/covers/cover_master_sha_grief.png",t:"Master Sha"},
+  {src:"assets/covers/cover_master_wu_courage.png",t:"Master Wu"},
+  {src:"assets/covers/cover_miki_imposter_syndrome.png",t:"Miki"},
+  {src:"assets/covers/cover_omote_sleep_anxiety.png",t:"Omote"},
+  {src:"assets/covers/cover_pamela_fellows_anxiety.png",t:"Pamela"},
+  {src:"assets/covers/cover_ra_imposter_syndrome.png",t:"Ra"},
+  {src:"assets/covers/cover_sai_ma_grief.png",t:"Sai Ma"}
+];
+var MANGA_COVERS = [
+  {src:"assets/manga_covers/joshin_cover_anxiety.png",t:"Joshin Anxiety"},
+  {src:"assets/manga_covers/joshin_cover_depression.png",t:"Joshin Depression"},
+  {src:"assets/manga_covers/joshin_cover_overthinking.png",t:"Joshin Overthinking"},
+  {src:"assets/manga_covers/junko_cover_mindfulness.png",t:"Junko Mindfulness"},
+  {src:"assets/manga_covers/junko_cover_sleep_anxiety.png",t:"Junko Sleep"},
+  {src:"assets/manga_covers/junko_cover_social_anxiety.png",t:"Junko Social"},
+  {src:"assets/manga_covers/master_wu_cover_boundaries.png",t:"Wu Boundaries"},
+  {src:"assets/manga_covers/master_wu_cover_burnout.png",t:"Wu Burnout"},
+  {src:"assets/manga_covers/master_wu_cover_courage.png",t:"Wu Courage"}
+];
+
+var SLIDE_VISUALS = {};
+
+// ── INTRO DECK ──
+SLIDE_VISUALS["intro:Overview & Revenue"] = function(vp){
+  vp.innerHTML='<div class="vp-title">US Revenue Projection — Year 1 (Organic)</div>'
+  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">$0–200</div><div class="vp-card-lbl">Month 1</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$500–1.5K</div><div class="vp-card-lbl">Month 6</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$3K–12K</div><div class="vp-card-lbl">Year 1</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">90.6%</div><div class="vp-card-lbl">You Keep</div></div></div>'
+  +'<div class="vp-chart-wrap"><canvas id="vc-rev"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-rev"),{type:"line",data:{labels:["M1","M2","M3","M4","M5","M6","M7","M8","M9","M10","M11","M12"],datasets:[
+    {label:"Optimistic",data:[200,350,500,700,900,1500,2000,2500,3000,3500,4000,5000],borderColor:"#d97706",backgroundColor:"rgba(217,119,6,.1)",fill:true,tension:.3},
+    {label:"Conservative",data:[0,50,100,200,300,500,700,900,1100,1300,1500,1800],borderColor:"rgba(250,246,240,.3)",backgroundColor:"rgba(250,246,240,.03)",fill:true,tension:.3}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:CHART_DEFAULTS.plugins,scales:CHART_DEFAULTS.scales}});
+  _activeCharts.push(c);
+};
+
+SLIDE_VISUALS["intro:Origin & Mission"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Teacher Lineup — 13 Masters</div>'
+  +'<div class="vp-cover-grid">'+COVERS.map(function(cv){return'<img src="'+cv.src+'" alt="'+cv.t+'" title="'+cv.t+'" onerror="this.style.display=\'none\'">';}).join("")+'</div>'
+  +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val">13</div><div class="vp-card-lbl">Teachers</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">312</div><div class="vp-card-lbl">Brands</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">24</div><div class="vp-card-lbl">Brand Archetypes</div></div></div>';
+};
+
+SLIDE_VISUALS["intro:Architecture"] = function(vp){
+  vp.innerHTML='<div class="vp-title">4-Layer Architecture</div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Teacher</div><div class="vp-dbox-sub">Wisdom · Lineage</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Ei</div><div class="vp-dbox-sub">Diagnosis · Pacing</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Brand</div><div class="vp-dbox-sub">Cover · Voice</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Output</div><div class="vp-dbox-sub">Book · Audio · Manga</div></div></div>'
+  +'<div class="vp-diagram" style="margin-top:.6rem">'
+  +'<div class="vp-dbox" style="border-color:rgba(34,197,94,.3)"><div class="vp-dbox-title" style="color:#22c55e">Pipeline</div><div class="vp-dbox-sub">Queue \u2192 Build \u2192 QA \u2192 Release</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox" style="border-color:rgba(34,197,94,.3)"><div class="vp-dbox-title" style="color:#22c55e">Platforms</div><div class="vp-dbox-sub">KDP · Google · Apple</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox" style="border-color:rgba(34,197,94,.3)"><div class="vp-dbox-title" style="color:#22c55e">Marketing</div><div class="vp-dbox-sub">48Social · Email</div></div></div>';
+};
+
+SLIDE_VISUALS["intro:Brand Angles"] = function(vp){
+  var a=[{n:"Nervous System",i:"\uD83E\uDDE0",d:"Stress, anxiety, burnout",v:"Highest search vol"},{n:"Identity",i:"\uD83E\uDE9E",d:"Direction, purpose",v:"Primary Gen Z"},{n:"Emotional Healing",i:"\uD83D\uDC9B",d:"Trauma, grief, repair",v:"Deep engagement"},{n:"Performance",i:"\u26A1",d:"Focus, energy",v:"Premium pricing"},{n:"Awakening",i:"\u2728",d:"Tradition-rooted",v:"Loyal readers"}];
+  vp.innerHTML='<div class="vp-title">5 Brand Angles</div><div class="vp-grid" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr))">'
+  +a.map(function(x){return'<div class="vp-card"><div style="font-size:1.4rem">'+x.i+'</div><div class="vp-card-val" style="font-size:.75rem">'+x.n+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.42rem">'+x.d+'</div><div style="font-family:var(--mono);font-size:.36rem;color:var(--acc);margin-top:.2rem">'+x.v+'</div></div>';}).join("")+'</div>';
+};
+
+SLIDE_VISUALS["intro:48Social"] = function(vp){
+  vp.innerHTML='<div class="vp-title">48Social + Freebie Growth Engine</div>'
+  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">59M</div><div class="vp-card-lbl">BookTok Sales</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">2.8\u00d7</div><div class="vp-card-lbl">Referral LTV</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">365</div><div class="vp-card-lbl">Assets/Yr</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">49%</div><div class="vp-card-lbl">Completion \u2191</div></div></div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Book</div><div class="vp-dbox-sub">Peaks extracted</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">48Social</div><div class="vp-dbox-sub">365 clips/yr</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Freebie</div><div class="vp-dbox-sub">Workbook \u2192 email</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">List</div><div class="vp-dbox-sub">1K = 50-150 sales</div></div></div>';
+};
+
+SLIDE_VISUALS["intro:Weekly OS"] = function(vp){
+  var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"Upload ebooks",c:"var(--acc)"},{d:"WED",t:"Submit audio",c:"var(--acc)"},{d:"THU",t:"Verify live",c:"#f59e0b"},{d:"FRI",t:"Review clips",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
+  vp.innerHTML='<div class="vp-title">Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+};
+
+SLIDE_VISUALS["intro:Platform Revenue"] = function(vp){
+  vp.innerHTML='<div class="vp-title">US Platform Stack</div>'
+  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Royalty</th><th>Key Feature</th><th style="text-align:right">Share</th></tr></thead><tbody>'
+  +'<tr><td>Amazon KDP</td><td class="num">70%</td><td>Highest volume</td><td class="num">45%</td></tr>'
+  +'<tr><td>Google Play</td><td class="num">52%</td><td>Auto-narration 6 langs</td><td class="num">20%</td></tr>'
+  +'<tr><td>Apple (D2D)</td><td class="num">70%</td><td>Kobo+B&N+OverDrive</td><td class="num">15%</td></tr>'
+  +'<tr><td>Webtoon</td><td class="num">varies</td><td>90M monthly readers</td><td class="num">10%</td></tr>'
+  +'<tr><td>Findaway</td><td class="num">60-80%</td><td>Apple+Spotify+libraries</td><td class="num">10%</td></tr></tbody></table>'
+  +'<div class="vp-chart-wrap"><canvas id="vc-plat"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-plat"),{type:"doughnut",data:{labels:["KDP","Google Play","Apple/D2D","Webtoon","Findaway"],datasets:[{data:[45,20,15,10,10],backgroundColor:["#d97706","#f59e0b","#fbbf24","#92400e","#78350f"],borderColor:"#1c1009",borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:"rgba(250,246,240,.5)",font:{family:"DM Mono",size:9},boxWidth:10}}}}});
+  _activeCharts.push(c);
+};
+
+SLIDE_VISUALS["intro:Close"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Book Covers (13 Teachers)</div>'
+  +'<div class="vp-cover-grid" style="grid-template-columns:repeat(auto-fill,minmax(85px,1fr))">'+COVERS.map(function(cv){return'<img src="'+cv.src+'" alt="'+cv.t+'" title="'+cv.t+'" onerror="this.style.display=\'none\'">';}).join("")+'</div>'
+  +'<div class="vp-title" style="margin-top:.4rem">Manga Covers (9 Styles)</div>'
+  +'<div class="vp-cover-grid" style="grid-template-columns:repeat(auto-fill,minmax(85px,1fr))">'+MANGA_COVERS.map(function(cv){return'<img src="'+cv.src+'" alt="'+cv.t+'" title="'+cv.t+'" onerror="this.style.display=\'none\'">';}).join("")+'</div>';
+};
+
+// ── MARKETING DECK ──
+SLIDE_VISUALS["marketing:Strategy"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Value Ladder + Content Stack</div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Free</div><div class="vp-dbox-sub">Lead Magnet</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">$0.99</div><div class="vp-dbox-sub">Challenge</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">$3.99\u20136.99</div><div class="vp-dbox-sub">Standard</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">$14.99+</div><div class="vp-dbox-sub">Premium</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">$4.99\u00d77-14</div><div class="vp-dbox-sub">Series</div></div></div>'
+  +'<div class="vp-grid g3" style="margin-top:.8rem"><div class="vp-card"><div class="vp-card-val">5</div><div class="vp-card-lbl">Layers / Book</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">50</div><div class="vp-card-lbl">Posts / Book</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">E1\u2013E5</div><div class="vp-card-lbl">Proof Loop</div></div></div>';
+};
+
+SLIDE_VISUALS["marketing:US Marketing"] = function(vp){
+  vp.innerHTML='<div class="vp-title">US Ad ROI</div>'
+  +'<table class="vp-table"><thead><tr><th>Platform</th><th style="text-align:right">CPC</th><th style="text-align:right">CPM</th><th>Notes</th></tr></thead><tbody>'
+  +'<tr><td>Amazon Ads</td><td class="num">$0.30\u20131.30</td><td class="num">\u2014</td><td>Need 10+ reviews</td></tr>'
+  +'<tr><td>TikTok Spark</td><td class="num">$0.50</td><td class="num">~$6</td><td>40-50% cheaper than FB</td></tr>'
+  +'<tr><td>Meta Carousel</td><td class="num">$0.80\u20132.00</td><td class="num">$20.70</td><td>Best self-help conv.</td></tr>'
+  +'<tr><td>Google Discovery</td><td class="num">$0.05\u20130.10</td><td class="num">~$4</td><td>High-intent</td></tr>'
+  +'<tr><td>Reddit</td><td class="num">$0.10\u20130.30</td><td class="num">$3\u20137</td><td>$100/mo viable</td></tr></tbody></table>'
+  +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val">$760M</div><div class="vp-card-lbl">BookTok Revenue</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">59M</div><div class="vp-card-lbl">BookTok Sales</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">2.8\u00d7</div><div class="vp-card-lbl">Referral LTV</div></div></div>';
+};
+
+SLIDE_VISUALS["marketing:Japan Marketing"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Japan \u2014 LINE: Cheapest CPM</div>'
+  +'<div class="vp-grid g4"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">$0.67</div><div class="vp-card-lbl">LINE CPM</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$0.16</div><div class="vp-card-lbl">LINE CPC</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">5.4\u00d7</div><div class="vp-card-lbl">Video vs Static</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">95M</div><div class="vp-card-lbl">LINE MAU</div></div></div>'
+  +'<div class="vp-chart-wrap"><canvas id="vc-cpm"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-cpm"),{type:"bar",data:{labels:["LINE JP","Reddit US","Google","TikTok","Meta"],datasets:[{label:"CPM ($)",data:[0.67,5,4,6,20.70],backgroundColor:["#22c55e","#60a5fa","#f59e0b","#ec4899","#ef4444"],borderRadius:3}]},options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,plugins:CHART_DEFAULTS.plugins,scales:{x:{ticks:{color:"rgba(250,246,240,.3)",font:{family:"DM Mono",size:8}},grid:{color:"rgba(180,83,9,.08)"}},y:{ticks:{color:"rgba(250,246,240,.4)",font:{family:"DM Mono",size:9}},grid:{display:false}}}}});
+  _activeCharts.push(c);
+};
+
+SLIDE_VISUALS["marketing:Korea Marketing"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Korea \u2014 Naver $0.054 CPC</div>'
+  +'<div class="vp-grid g3"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">$0.054</div><div class="vp-card-lbl">Naver CPC</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">58%</div><div class="vp-card-lbl">Audio Listeners</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">\uBE68\uB9AC\uBE68\uB9AC</div><div class="vp-card-lbl">Quick-Reset</div></div></div>'
+  +'<table class="vp-table"><thead><tr><th>$500/mo</th><th style="text-align:right">Budget</th><th style="text-align:right">CPC</th></tr></thead><tbody>'
+  +'<tr><td>Naver</td><td class="num">$300</td><td class="num">$0.054</td></tr>'
+  +'<tr><td>Meta</td><td class="num">$125</td><td class="num">$0.80</td></tr>'
+  +'<tr><td>Kakao</td><td class="num">$75</td><td class="num">$0.30</td></tr></tbody></table>';
+};
+
+SLIDE_VISUALS["marketing:Taiwan Marketing"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Taiwan \u2014 Traditional Chinese</div>'
+  +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val">93%</div><div class="vp-card-lbl">Readmoo YoY</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$4,164</div><div class="vp-card-lbl">Month 12 Rev</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">63%</div><div class="vp-card-lbl">Uplift</div></div></div>';
+};
+
+SLIDE_VISUALS["marketing:China Marketing"] = function(vp){
+  vp.innerHTML='<div class="vp-title">China \u2014 Ximalaya 345M MAU</div>'
+  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">345M</div><div class="vp-card-lbl">MAU</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">70%+</div><div class="vp-card-lbl">Audio Share</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$7K</div><div class="vp-card-lbl">WeChat Min</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">20%</div><div class="vp-card-lbl">Self-Help Growth</div></div></div>';
+};
+
+SLIDE_VISUALS["marketing:Europe Marketing"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Europe \u2014 3 Priority Markets</div>'
+  +'<table class="vp-table"><thead><tr><th>Market</th><th>Strategy</th><th>Cold-Start</th><th>Opportunity</th></tr></thead><tbody>'
+  +'<tr><td>\uD83C\uDDEB\uD83C\uDDF7 France</td><td>Manga first-mover</td><td>\u20AC0.99</td><td>#1 EU manga</td></tr>'
+  +'<tr><td>\uD83C\uDDE9\uD83C\uDDEA Germany</td><td>Evidence-based</td><td>\u20AC0.99</td><td>Wissenschaftlich</td></tr>'
+  +'<tr><td>\uD83C\uDDED\uD83C\uDDFA Hungary</td><td>Greenfield</td><td>299 Ft</td><td>Zero competition</td></tr></tbody></table>';
+};
+
+SLIDE_VISUALS["marketing:Ad Budget"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Ad Budget Tiers</div>'
+  +'<div class="vp-chart-wrap"><canvas id="vc-bud"></canvas></div>'
+  +'<table class="vp-table"><thead><tr><th>$/mo</th><th style="text-align:right">ROAS</th><th style="text-align:right">Conv.</th><th>Strategy</th></tr></thead><tbody>'
+  +'<tr><td>$0</td><td class="num">\u221E</td><td class="num">\u2014</td><td>Organic + 48Social</td></tr>'
+  +'<tr><td>$100</td><td class="num">0.5\u20131.5\u00d7</td><td class="num">3\u201310</td><td>Reddit / LINE / Naver</td></tr>'
+  +'<tr><td>$500</td><td class="num">0.6\u20132\u00d7</td><td class="num">10\u201340</td><td>Sweet spot</td></tr>'
+  +'<tr><td>$1K</td><td class="num">1\u20133\u00d7</td><td class="num">30\u2013100</td><td>Full funnel</td></tr>'
+  +'<tr><td>$5K</td><td class="num">2\u20135\u00d7</td><td class="num">100\u2013500</td><td>Max reach</td></tr></tbody></table>';
+  var c=new Chart(document.getElementById("vc-bud"),{type:"bar",data:{labels:["$0","$100","$500","$1K","$5K"],datasets:[
+    {label:"Rev Low",data:[0,50,300,1000,4000],backgroundColor:"rgba(180,83,9,.4)",borderRadius:3},
+    {label:"Rev High",data:[200,150,1000,3000,15000],backgroundColor:"#d97706",borderRadius:3}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:CHART_DEFAULTS.plugins,scales:CHART_DEFAULTS.scales}});
+  _activeCharts.push(c);
+};
+
+SLIDE_VISUALS["marketing:Content Audit"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Content Configuration Space</div>'
+  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">7M</div><div class="vp-card-lbl">Raw</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">9,600</div><div class="vp-card-lbl">Valid</div></div>'
+  +'<div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">800</div><div class="vp-card-lbl">High-Conf</div></div>'
+  +'<div class="vp-card" style="border-color:#ef4444"><div class="vp-card-val">3,300</div><div class="vp-card-lbl">Invalid</div></div></div>'
+  +'<div class="vp-chart-wrap"><canvas id="vc-aud"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-aud"),{type:"doughnut",data:{labels:["High (800)","Medium (2.5K)","Low (3K)","Invalid (3.3K)"],datasets:[{data:[800,2500,3000,3300],backgroundColor:["#22c55e","#f59e0b","#78350f","#ef4444"],borderColor:"#1c1009",borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:"rgba(250,246,240,.5)",font:{family:"DM Mono",size:9},boxWidth:10}}}}});
+  _activeCharts.push(c);
+};
+
+SLIDE_VISUALS["marketing:Video Strategy"] = function(vp){
+  var f=[{i:"\uD83D\uDCFA",n:"YouTube Long",d:"3\u00d7/wk SEO"},{i:"\u26A1",n:"Shorts",d:"Daily, 2s hook"},{i:"\uD83C\uDFB5",n:"TikTok",d:"Daily, trending"},{i:"\uD83D\uDCF8",n:"Reels",d:"3\u00d7/wk carousel"},{i:"\uD83D\uDCAC",n:"LINE Video",d:"Japan-specific"}];
+  vp.innerHTML='<div class="vp-title">5 Video Formats / Book</div><div class="vp-grid" style="grid-template-columns:repeat(auto-fit,minmax(110px,1fr))">'
+  +f.map(function(x){return'<div class="vp-card"><div style="font-size:1.1rem">'+x.i+'</div><div class="vp-card-val" style="font-size:.65rem">'+x.n+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem">'+x.d+'</div></div>';}).join("")+'</div>'
+  +'<div class="vp-grid g2" style="margin-top:.6rem"><div class="vp-card"><div class="vp-card-val">84%</div><div class="vp-card-lbl">Video Conv. \u2191</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">365</div><div class="vp-card-lbl">Assets/Brand/Yr</div></div></div>';
+};
+
+SLIDE_VISUALS["marketing:Email + Freebies"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Email Proof Loop</div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">E1</div><div class="vp-dbox-sub">Welcome</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">E2</div><div class="vp-dbox-sub">Value</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">E3</div><div class="vp-dbox-sub">Soft sell</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">E4</div><div class="vp-dbox-sub">Proof</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">E5</div><div class="vp-dbox-sub">Offer</div></div></div>'
+  +'<div class="vp-grid g4" style="margin-top:.8rem"><div class="vp-card"><div class="vp-card-val">35%</div><div class="vp-card-lbl">Open Rate</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">8%</div><div class="vp-card-lbl">Click Rate</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">67%</div><div class="vp-card-lbl">Checklist Conv.</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">50+</div><div class="vp-card-lbl">ARC Reviews</div></div></div>';
+};
+
+SLIDE_VISUALS["marketing:Fleet Rollout"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Fleet Rollout \u2014 Phased</div>'
+  +'<div class="vp-diagram" style="align-items:stretch">'
+  +'<div class="vp-dbox" style="flex:1"><div class="vp-dbox-title">Phase 1</div><div class="vp-dbox-sub" style="margin-top:.2rem">10 brands \u00b7 $500 ea<br>$5K/mo \u00b7 3 months<br><span style="color:var(--acc)">Find winners</span></div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox" style="flex:1"><div class="vp-dbox-title">Phase 2</div><div class="vp-dbox-sub" style="margin-top:.2rem">20 brands \u00b7 $500\u20131K<br>$10K/mo \u00b7 3 months<br><span style="color:var(--acc)">Scale winners</span></div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox" style="flex:1"><div class="vp-dbox-title">Phase 3</div><div class="vp-dbox-sub" style="margin-top:.2rem">50 brands \u00b7 $1K\u20135K<br>$50K/mo \u00b7 Ongoing<br><span style="color:var(--acc)">Full fleet</span></div></div></div>';
+};
+
+// ── JP/TW/CN/KR INTRO VISUALS ──
+SLIDE_VISUALS["intro:JP"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Japan \u2014 Year 1 Revenue</div>'
+  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">$0\u2013100</div><div class="vp-card-lbl">Month 1</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$300\u2013800</div><div class="vp-card-lbl">Month 6</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$2K\u20138K</div><div class="vp-card-lbl">Year 1</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">53%</div><div class="vp-card-lbl">Manga Mix</div></div></div>'
+  +'<div class="vp-cover-grid" style="grid-template-columns:repeat(auto-fill,minmax(75px,1fr))">'+MANGA_COVERS.map(function(cv){return'<img src="'+cv.src+'" alt="'+cv.t+'" title="'+cv.t+'" onerror="this.style.display=\'none\'">';}).join("")+'</div>';
+};
+
+SLIDE_VISUALS["intro:Ei Adaptation"] = function(vp){
+  vp.innerHTML='<div class="vp-title">Ei \u2014 Japan Adaptation</div>'
+  +'<div class="vp-grid g4"><div class="vp-card"><div style="font-size:1.1rem">\uD83C\uDFAD</div><div class="vp-card-val" style="font-size:.6rem">Seiyuu</div><div class="vp-card-lbl">Voice matching</div></div>'
+  +'<div class="vp-card"><div style="font-size:1.1rem">\uD83D\uDCD6</div><div class="vp-card-val" style="font-size:.6rem">EPUB 3.0</div><div class="vp-card-lbl">Vertical text</div></div>'
+  +'<div class="vp-card"><div style="font-size:1.1rem">\u23F8\uFE0F</div><div class="vp-card-val" style="font-size:.6rem">\u9593 (Ma)</div><div class="vp-card-lbl">Meaningful pause</div></div>'
+  +'<div class="vp-card"><div style="font-size:1.1rem">\uD83C\uDFA8</div><div class="vp-card-val" style="font-size:.6rem">8 Archetypes</div><div class="vp-card-lbl">Visual styles</div></div></div>';
+};
+
+SLIDE_VISUALS["intro:Incorporation"] = function(vp){
+  vp.innerHTML='<div class="vp-title">\u5408\u540C\u4F1A\u793E Setup</div>'
+  +'<table class="vp-table"><thead><tr><th>Item</th><th style="text-align:right">Details</th></tr></thead><tbody>'
+  +'<tr><td>Entity</td><td class="num">\u5408\u540C\u4F1A\u793E (LLC)</td></tr>'
+  +'<tr><td>Cost</td><td class="num">\uFFE560,000</td></tr>'
+  +'<tr><td>Timeline</td><td class="num">2\u20134 weeks</td></tr>'
+  +'<tr><td>Required For</td><td class="num">Audiobook.jp, LINE, Piccoma</td></tr></tbody></table>';
+};
+
+// ── NEW MARKET BRIEFING VISUALS ──
+SLIDE_VISUALS["briefing_fr:Platform Stack"]=function(vp){
+  vp.innerHTML='<div class="vp-title">France \u2014 #1 EU Manga Market</div>'
+  +'<div class="vp-grid g4"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">#1</div><div class="vp-card-lbl">EU Manga</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">#2</div><div class="vp-card-lbl">Global</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">\u20AC0.99</div><div class="vp-card-lbl">Cold-Start</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$2K\u20138K</div><div class="vp-card-lbl">Year 1</div></div></div>'
+  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Type</th></tr></thead><tbody>'
+  +'<tr><td>Google Play FR</td><td>Ebook + auto-narration</td></tr>'
+  +'<tr><td>Kobo France</td><td>Strong French presence</td></tr>'
+  +'<tr><td>Amazon Kindle FR</td><td>70% royalty</td></tr>'
+  +'<tr><td>Webtoon Canvas</td><td>Manga first-mover</td></tr></tbody></table>';
+};
+SLIDE_VISUALS["briefing_fr:Manga"]=SLIDE_VISUALS["briefing_fr:Platform Stack"];
+SLIDE_VISUALS["briefing_fr:Revenue"]=function(vp){
+  vp.innerHTML='<div class="vp-title">France $500/mo Split</div><div class="vp-chart-wrap"><canvas id="vc-fr"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-fr"),{type:"doughnut",data:{labels:["Meta $300","Google $125","Amazon FR $75"],datasets:[{data:[300,125,75],backgroundColor:["#d97706","#f59e0b","#78350f"],borderColor:"#1c1009",borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:"rgba(250,246,240,.5)",font:{family:"DM Mono",size:9},boxWidth:10}}}}});
+  _activeCharts.push(c);
+};
+
+SLIDE_VISUALS["briefing_de:Platform Stack"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Germany \u2014 Evidence-Based</div>'
+  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">25%</div><div class="vp-card-lbl">Audio Growth</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">\u20AC0.99</div><div class="vp-card-lbl">Cold-Start</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$2.5K\u201310K</div><div class="vp-card-lbl">Year 1</div></div>'
+  +'<div class="vp-card" style="border-color:#60a5fa"><div class="vp-card-val" style="font-size:.55rem">Wissenschaftlich</div><div class="vp-card-lbl">Required</div></div></div>'
+  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Notes</th></tr></thead><tbody>'
+  +'<tr><td>Amazon Kindle DE</td><td>70% royalty</td></tr>'
+  +'<tr><td>Audible Germany</td><td>Largest EU audiobook</td></tr>'
+  +'<tr><td>Thalia</td><td>German bookseller</td></tr></tbody></table>';
+};
+SLIDE_VISUALS["briefing_de:Evidence"]=SLIDE_VISUALS["briefing_de:Platform Stack"];
+SLIDE_VISUALS["briefing_de:Revenue"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Germany $500/mo Split</div><div class="vp-chart-wrap"><canvas id="vc-de"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-de"),{type:"doughnut",data:{labels:["Amazon DE $300","Meta $125","Google $75"],datasets:[{data:[300,125,75],backgroundColor:["#d97706","#f59e0b","#78350f"],borderColor:"#1c1009",borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:"rgba(250,246,240,.5)",font:{family:"DM Mono",size:9},boxWidth:10}}}}});
+  _activeCharts.push(c);
+};
+
+SLIDE_VISUALS["briefing_id:Platform Stack"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Indonesia \u2014 275M Mobile-First</div>'
+  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">275M</div><div class="vp-card-lbl">Population</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">73%</div><div class="vp-card-lbl">Smartphone</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">125M</div><div class="vp-card-lbl">TikTok</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">Rp 15K</div><div class="vp-card-lbl">Cold-Start</div></div></div>';
+};
+SLIDE_VISUALS["briefing_id:Mobile"]=SLIDE_VISUALS["briefing_id:Platform Stack"];
+
+SLIDE_VISUALS["briefing_br:Platform Stack"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Brazil \u2014 Autoajuda</div>'
+  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">215M</div><div class="vp-card-lbl">Population</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">10M</div><div class="vp-card-lbl">Skeelo</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">R$4.99</div><div class="vp-card-lbl">Cold-Start</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$2K\u20138K</div><div class="vp-card-lbl">Year 1</div></div></div>';
+};
+SLIDE_VISUALS["briefing_br:Autoajuda"]=SLIDE_VISUALS["briefing_br:Platform Stack"];
+
+// ── VISUAL RENDERING ENGINE ──
+function showVisual(scriptItem){
+  var vp=document.getElementById("visual-panel");
+  var hero=document.getElementById("hero-card");
+  destroyCharts();
+  var label=scriptItem.label||"";
+  var dn=activeDeck||"intro";
+  var found=false;
+  var keys=Object.keys(SLIDE_VISUALS);
+  // exact deck:label match
+  for(var k=0;k<keys.length;k++){
+    var p=keys[k].split(":");
+    if(p[0]===dn && label.indexOf(p[1])!==-1){
+      vp.innerHTML="";SLIDE_VISUALS[keys[k]](vp);
+      vp.classList.add("active");hero.style.display="none";found=true;break;
+    }
+  }
+  // fallback: any deck match
+  if(!found){
+    for(var k2=0;k2<keys.length;k2++){
+      var p2=keys[k2].split(":");
+      if(label.indexOf(p2[1])!==-1){
+        vp.innerHTML="";SLIDE_VISUALS[keys[k2]](vp);
+        vp.classList.add("active");hero.style.display="none";found=true;break;
+      }
+    }
+  }
+  if(!found){vp.classList.remove("active");vp.innerHTML="";hero.style.display="";}
+}
+function hideVisual(){
+  var vp=document.getElementById("visual-panel");
+  vp.classList.remove("active");vp.innerHTML="";destroyCharts();
+  document.getElementById("hero-card").style.display="";
+}
 
 // ── INIT ──────────────────────────────────────────────
 window.addEventListener("load", function() {

@@ -20,8 +20,9 @@ locales:
   zh_SG: { language: "Simplified Chinese", region: Singapore, currency: SGD, tier: tertiary }
   hu_HU: { language: Hungarian, region: Hungary, currency: HUF, tier: tertiary }
 
-# ── Canonical Topics (15 active, per content audit) ──────────────────
+# ── Canonical Topics (17 active) ─────────────────────────────────────
 topics:
+  - adhd_focus
   - anxiety
   - boundaries
   - burnout
@@ -32,6 +33,7 @@ topics:
   - financial_stress
   - grief
   - imposter_syndrome
+  - mindfulness
   - overthinking
   - self_worth
   - sleep_anxiety
@@ -52,19 +54,110 @@ personas:
   - gen_x_sandwich
   - gen_alpha_students
   - nyc_executives
+  - gen_z_student
 
-# ── Content Mix Ratios (per brand) ──────────────────────────────────
+# ── Content Mix Ratios (per brand, default = Western ebook markets) ──
 content_mix:
   series_ratio: 0.45
   standalone_ratio: 0.30
   micro_ratio: 0.20
   deep_ratio: 0.05
 
+# ── Lane-Specific Content Mix Overrides ─────────────────────────────
+# Per global_manga_distribution_strategy.md (1,416 lines):
+# - ALL lanes include manga (not just JP)
+# - Manga sells on Amazon KDP as graphic novel EPUB
+# - WEBTOON Canvas 2026 supports 7 languages
+# - France = #1 EU manga market (35% share)
+
+lane_content_mix:
+  # Japan: manga-primary. Piccoma #1 app ($482M+), webtoon $10.85B.
+  ja_JP:
+    manga_series: 0.40          # webtoon serialization (LINE Manga, Piccoma via MediaDo)
+    manga_standalone: 0.20      # tankōbon volumes (KDP JP, Rakuten Kobo JP)
+    ebook_series: 0.15          # text audiobook series
+    ebook_standalone: 0.10      # text standalone
+    micro_manga: 0.10           # short episodes (LINE Manga)
+    micro_ebook: 0.05           # $0.99 text micro
+
+  # Korea: vertical scroll mandatory. Naver CANVAS only self-publish option.
+  ko_KR:
+    manga_series: 0.35          # webtoon serialization (Naver CANVAS)
+    manga_standalone: 0.15      # collected volumes (KDP KR)
+    ebook_series: 0.20          # text series
+    ebook_standalone: 0.15      # text standalone
+    micro_manga: 0.10           # short webtoon episodes
+    micro_ebook: 0.05           # text micro
+
+  # Taiwan: LINE Webtoon TW + Bookwalker TW
+  zh_TW:
+    manga_series: 0.30          # LINE Webtoon TW
+    manga_standalone: 0.15      # Bookwalker TW, KDP TW
+    ebook_series: 0.20          # text series
+    ebook_standalone: 0.20      # text standalone (Readmoo)
+    micro_manga: 0.10           # short episodes
+    micro_ebook: 0.05           # text micro
+
+  # US: manga growing fast. KDP graphic novels + WEBTOON Canvas.
+  en_US:
+    manga_series: 0.10          # WEBTOON Canvas serialization
+    manga_standalone: 0.05      # KDP graphic novel EPUB
+    ebook_series: 0.35          # text series (primary)
+    ebook_standalone: 0.25      # text standalone
+    micro_manga: 0.05           # WEBTOON short episodes
+    micro_ebook: 0.20           # $0.99 text micro
+
+  # France: #1 EU manga market (35% share). WEBTOON CANVAS 2026 FR.
+  fr_FR:
+    manga_series: 0.15          # WEBTOON Canvas FR
+    manga_standalone: 0.10      # KDP FR graphic novel
+    ebook_series: 0.30          # text series
+    ebook_standalone: 0.25      # text standalone
+    micro_manga: 0.05           # short episodes
+    micro_ebook: 0.15           # text micro
+
+  # Spain: growing manga market. WEBTOON CANVAS 2026 ES.
+  es_ES:
+    manga_series: 0.10          # WEBTOON Canvas ES
+    manga_standalone: 0.05      # KDP ES graphic novel
+    ebook_series: 0.35          # text series
+    ebook_standalone: 0.25      # text standalone
+    micro_manga: 0.05           # short episodes
+    micro_ebook: 0.20           # text micro
+
+  # Germany: moderate manga market.
+  de_DE:
+    manga_series: 0.10          # WEBTOON Canvas DE
+    manga_standalone: 0.05      # KDP DE graphic novel
+    ebook_series: 0.35          # text series
+    ebook_standalone: 0.25      # text standalone
+    micro_manga: 0.05           # short episodes
+    micro_ebook: 0.20           # text micro
+
+  # China: SKIP (inaccessible without local entity)
+  zh_CN:
+    manga_series: 0.00
+    manga_standalone: 0.00
+    ebook_series: 0.45          # text only via any accessible platform
+    ebook_standalone: 0.30
+    micro_manga: 0.00
+    micro_ebook: 0.25
+
+  # Default for remaining lanes (HK, SG, US-Hispanic, Italy, Hungary):
+  # Ebook-primary with 10% manga
+  _default:
+    manga_series: 0.05
+    manga_standalone: 0.05
+    ebook_series: 0.35
+    ebook_standalone: 0.30
+    micro_manga: 0.05
+    micro_ebook: 0.20
+
 # ── Series Configuration ─────────────────────────────────────────────
 series_config:
   series_per_brand: [1, 2]
   books_per_series: [7, 10]
-  book_1_price_override: 0.99
+  book_1_price_override: 0.00  # permafree via KDP price-match (list free on Google Play/Kobo)
   series_pricing:
     standard: [3.99, 6.99]
     extended: [9.99, 14.99]
@@ -105,6 +198,10 @@ kill_list:
     - { topic: financial_stress, persona: gen_alpha_students }
     - { topic: compassion_fatigue, persona: gen_alpha_students }
     - { topic: compassion_fatigue, persona: entrepreneurs }
+    - { topic: compassion_fatigue, persona: gen_z_student }
+    - { topic: adhd_focus, persona: gen_x_sandwich }
+    - { topic: adhd_focus, persona: healthcare_rns }
+    - { topic: mindfulness, persona: gen_alpha_students }
   format_locale_kills:
     - { format: deep_book_6h, locale: hu_HU }
     - { format: deep_book_4h, locale: hu_HU }
