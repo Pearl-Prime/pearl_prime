@@ -1037,6 +1037,12 @@ function speakLine(ln, li, session, cb) {
     a.play().catch(function() { _activeAudio = null; speakLineTTS(ln, li, session, cb); });
     return;
   }
+  // No MP3: non-English lines display text on screen, pause 2.5s, then advance
+  // (avoids bad browser TTS for Korean, French, German, etc.)
+  if (ln.lang && ln.lang !== "en") {
+    setTimeout(function() { if (session === state.session) cb(true); }, 2500);
+    return;
+  }
   speakLineTTS(ln, li, session, cb);
 }
 
@@ -1471,49 +1477,396 @@ SLIDE_VISUALS["intro:Incorporation"] = function(vp){
   +'<tr><td>Required For</td><td class="num">Audiobook.jp, LINE, Piccoma</td></tr></tbody></table>';
 };
 
-// ── NEW MARKET BRIEFING VISUALS ──
+// ══════════════════════════════════════════════════════════
+// BRIEFING DECK VISUALS — ALL 7 MARKETS
+// ══════════════════════════════════════════════════════════
+
+// ── US BRIEFING ──
+SLIDE_VISUALS["briefing_us:Weekly OS"]=function(vp){
+  var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"Upload KDP, Google, Apple",c:"var(--acc)"},{d:"WED",t:"Submit audio Findaway",c:"var(--acc)"},{d:"THU",t:"Verify live / fix",c:"#f59e0b"},{d:"FRI",t:"Approve 48Social",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
+  vp.innerHTML='<div class="vp-title">US Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+};
+SLIDE_VISUALS["briefing_us:Platform Stack"]=function(vp){
+  vp.innerHTML='<div class="vp-title">US Platform Stack</div>'
+  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Royalty</th><th>Key Feature</th></tr></thead><tbody>'
+  +'<tr><td>Amazon KDP</td><td class="num">70%</td><td>Highest volume ebook</td></tr>'
+  +'<tr><td>Google Play</td><td class="num">52%</td><td>Auto-narration 6 langs</td></tr>'
+  +'<tr><td>Apple / D2D</td><td class="num">70%</td><td>Kobo+B&N+OverDrive</td></tr>'
+  +'<tr><td>Webtoon Canvas</td><td class="num">varies</td><td>90M monthly readers</td></tr>'
+  +'<tr><td>Findaway</td><td class="num">60-80%</td><td>Apple+Spotify+libraries</td></tr></tbody></table>'
+  +'<div class="vp-chart-wrap"><canvas id="vc-bus-plat"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-bus-plat"),{type:"doughnut",data:{labels:["KDP 70%","Google 52%","Apple/D2D 70%","Webtoon","Findaway"],datasets:[{data:[45,20,15,10,10],backgroundColor:["#d97706","#f59e0b","#fbbf24","#92400e","#78350f"],borderColor:"#1c1009",borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:"rgba(250,246,240,.5)",font:{family:"DM Mono",size:9},boxWidth:10}}}}});
+  _activeCharts.push(c);
+};
+SLIDE_VISUALS["briefing_us:48Social"]=function(vp){
+  vp.innerHTML='<div class="vp-title">48Social + Email Integration</div>'
+  +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val">50</div><div class="vp-card-lbl">Posts / Book</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">35%</div><div class="vp-card-lbl">Email Open Rate</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">365</div><div class="vp-card-lbl">Assets / Year</div></div></div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Book</div><div class="vp-dbox-sub">Content peaks</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">48Social</div><div class="vp-dbox-sub">30-50 clips</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Email</div><div class="vp-dbox-sub">E1-E5 proof loop</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">CRM</div><div class="vp-dbox-sub">GoHighLevel</div></div></div>';
+};
+SLIDE_VISUALS["briefing_us:Freebie Funnel"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Freebie Funnel Growth Engine</div>'
+  +'<div class="vp-grid g3"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">49%</div><div class="vp-card-lbl">Completion \u2191</div></div>'
+  +'<div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">67.2%</div><div class="vp-card-lbl">Conversion Rate</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">2K subs</div><div class="vp-card-lbl">\u2192 100-300 sales</div></div></div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Freebie</div><div class="vp-dbox-sub">Workbook CTA</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Email</div><div class="vp-dbox-sub">Capture address</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Trust</div><div class="vp-dbox-sub">Proof loop E1-E5</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Sale</div><div class="vp-dbox-sub">Challenge \u2192 Standard</div></div></div>';
+};
+SLIDE_VISUALS["briefing_us:Cold-Start"]=function(vp){
+  vp.innerHTML='<div class="vp-title">US Cold-Start Strategy</div>'
+  +'<div class="vp-grid g4"><div class="vp-card" style="border-color:var(--acc)"><div class="vp-card-val">$0.99</div><div class="vp-card-lbl">Challenge Book</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">20-50</div><div class="vp-card-lbl">ARC Copies</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">10+</div><div class="vp-card-lbl">Reviews Needed</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">2\u00d7</div><div class="vp-card-lbl">50+ Reviews Lift</div></div></div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">$0.99</div><div class="vp-dbox-sub">7-Day Challenge</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">ARC</div><div class="vp-dbox-sub">20-50 copies</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">10+ Reviews</div><div class="vp-dbox-sub">Algo trust</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Price Raise</div><div class="vp-dbox-sub">$3.99-$24.99</div></div></div>';
+};
+SLIDE_VISUALS["briefing_us:Revenue"]=function(vp){
+  vp.innerHTML='<div class="vp-title">US Revenue Projection</div>'
+  +'<table class="vp-table"><thead><tr><th>Period</th><th style="text-align:right">Range</th><th>Notes</th></tr></thead><tbody>'
+  +'<tr><td>Month 1</td><td class="num">$0\u2013200</td><td>Account approvals</td></tr>'
+  +'<tr><td>Month 6</td><td class="num">$500\u20131,500</td><td>Reviews growing</td></tr>'
+  +'<tr><td>Year 1</td><td class="num">$3K\u201312K</td><td>Organic only</td></tr>'
+  +'<tr><td>Year 2</td><td class="num">$15K\u201350K</td><td>Catalog momentum</td></tr></tbody></table>'
+  +'<div class="vp-chart-wrap"><canvas id="vc-bus-rev"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-bus-rev"),{type:"doughnut",data:{labels:["You Keep 90.6%","Pearl Prime 4.8%","48Social 4.8%"],datasets:[{data:[90.6,4.8,4.8],backgroundColor:["#d97706","#78350f","#92400e"],borderColor:"#1c1009",borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:"rgba(250,246,240,.5)",font:{family:"DM Mono",size:9},boxWidth:10}}}}});
+  _activeCharts.push(c);
+};
+
+// ── JP BRIEFING ──
+SLIDE_VISUALS["briefing_jp:Weekly OS"]=function(vp){
+  var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"Ebooks: Google JP, Kindle JP, Kobo",c:"var(--acc)"},{d:"WED",t:"Audio: Audiobook.jp, Spotify JP",c:"var(--acc)"},{d:"THU",t:"Manga: LINE Manga",c:"#f59e0b"},{d:"FRI",t:"Manga: Piccoma",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
+  vp.innerHTML='<div class="vp-title">JP Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+};
+SLIDE_VISUALS["briefing_jp:Platform Stack"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Japan Platform Stack</div>'
+  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Type</th><th>Revenue Share</th></tr></thead><tbody>'
+  +'<tr><td>Google Play JP</td><td>Ebook</td><td class="num">62%</td></tr>'
+  +'<tr><td>Audiobook.jp</td><td>Audio</td><td class="num">22%</td></tr>'
+  +'<tr><td>LINE Manga</td><td>Manga</td><td class="num">Omiyage viral</td></tr>'
+  +'<tr><td>Piccoma</td><td>Manga</td><td class="num">Wait-or-pay</td></tr>'
+  +'<tr><td>Kindle JP</td><td>Ebook</td><td class="num">70%</td></tr></tbody></table>'
+  +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val">$2K\u20138K</div><div class="vp-card-lbl">Year 1</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$2,550</div><div class="vp-card-lbl">Month 12</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">90.6%</div><div class="vp-card-lbl">You Keep</div></div></div>';
+};
+SLIDE_VISUALS["briefing_jp:Manga Distribution"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Manga Distribution Pipeline</div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">8 Archetypes</div><div class="vp-dbox-sub">JP visual culture</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Somatic Pacing</div><div class="vp-dbox-sub">Vertical text timing</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Seiy\u016b Narration</div><div class="vp-dbox-sub">Voice-matched audio</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Platform</div><div class="vp-dbox-sub">LINE \u00b7 Piccoma \u00b7 CMOA</div></div></div>'
+  +'<div class="vp-grid g3" style="margin-top:.8rem"><div class="vp-card"><div class="vp-card-val">8</div><div class="vp-card-lbl">Visual Archetypes</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">EPUB 3.0</div><div class="vp-card-lbl">Vertical Text</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">\u9593 (ma)</div><div class="vp-card-lbl">Meaningful Pause</div></div></div>';
+};
+SLIDE_VISUALS["briefing_jp:LINE Discovery"]=function(vp){
+  vp.innerHTML='<div class="vp-title">LINE Discovery Channel</div>'
+  +'<div class="vp-grid g3"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">95M</div><div class="vp-card-lbl">LINE MAU</div></div>'
+  +'<div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">$0.67</div><div class="vp-card-lbl">CPM (cheapest)</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">5.4\u00d7</div><div class="vp-card-lbl">Video vs Static CTR</div></div></div>'
+  +'<div class="vp-diagram" style="margin-top:.6rem">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">LINE Manga</div><div class="vp-dbox-sub">Publish chapter</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Omiyage</div><div class="vp-dbox-sub">Gift-sharing viral</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Discovery</div><div class="vp-dbox-sub">Zero-cost organic</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Revenue</div><div class="vp-dbox-sub">Wait-or-pay upsell</div></div></div>';
+};
+SLIDE_VISUALS["briefing_jp:Cold-Start"]=function(vp){
+  vp.innerHTML='<div class="vp-title">JP Cold-Start Strategy</div>'
+  +'<div class="vp-grid g3"><div class="vp-card" style="border-color:var(--acc)"><div class="vp-card-val">\u00a5150</div><div class="vp-card-lbl">5-Min Reset</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">Indirect</div><div class="vp-card-lbl">Cultural Framing</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">note.com</div><div class="vp-card-lbl">Influencer Seeding</div></div></div>'
+  +'<div class="vp-diagram" style="margin-top:.6rem">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">\u00a5150</div><div class="vp-dbox-sub">Remove friction</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Influencer</div><div class="vp-dbox-sub">note.com + Voicy</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Reviews</div><div class="vp-dbox-sub">Algo trust</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Price Raise</div><div class="vp-dbox-sub">Standard pricing</div></div></div>';
+};
+SLIDE_VISUALS["briefing_jp:Corporation"]=function(vp){
+  vp.innerHTML='<div class="vp-title">\u5408\u540c\u4f1a\u793e \u2014 Japan LLC Setup</div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">\u5408\u540c\u4f1a\u793e</div><div class="vp-dbox-sub">Register entity</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Bank Account</div><div class="vp-dbox-sub">JPY payments</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Contracts</div><div class="vp-dbox-sub">Audiobook.jp \u00b7 LINE \u00b7 Piccoma</div></div></div>'
+  +'<div class="vp-grid g3" style="margin-top:.8rem"><div class="vp-card" style="border-color:var(--acc)"><div class="vp-card-val">\u00a560K</div><div class="vp-card-lbl">Setup Cost</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">2-4 wks</div><div class="vp-card-lbl">Timeline</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">Required</div><div class="vp-card-lbl">Direct Accounts</div></div></div>';
+};
+
+// ── KR BRIEFING ──
+SLIDE_VISUALS["briefing_kr:Platform Stack"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Korea Platform Stack</div>'
+  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Type</th><th>Notes</th></tr></thead><tbody>'
+  +'<tr><td>Naver Series</td><td>Ebook/Webtoon</td><td>Dominant search+content</td></tr>'
+  +'<tr><td>Kakao Page</td><td>Serialized</td><td>Wait-or-unlock</td></tr>'
+  +'<tr><td>Millie\'s Library</td><td>Subscription</td><td>Leading ebook sub</td></tr>'
+  +'<tr><td>Yes24</td><td>Ebook</td><td>Traditional sales</td></tr>'
+  +'<tr><td>Ridi</td><td>Digital reading</td><td>Growing platform</td></tr></tbody></table>'
+  +'<div class="vp-grid g2"><div class="vp-card"><div class="vp-card-val">58%</div><div class="vp-card-lbl">Audio Consumption</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">Spotify KR</div><div class="vp-card-lbl">+ Apple Books KR</div></div></div>';
+};
+SLIDE_VISUALS["briefing_kr:Naver Advertising"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Naver Advertising</div>'
+  +'<div class="vp-grid g3"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">\u20a970</div><div class="vp-card-lbl">Min CPC ($0.054)</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$300/mo</div><div class="vp-card-lbl">Naver Allocation</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">5,500</div><div class="vp-card-lbl">Clicks / Month</div></div></div>'
+  +'<div class="vp-chart-wrap"><canvas id="vc-bkr-cpc"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-bkr-cpc"),{type:"bar",data:{labels:["Naver","Google","Meta","Kakao","Reddit"],datasets:[{label:"CPC ($)",data:[0.054,0.10,0.80,0.15,0.20],backgroundColor:["#22c55e","#f59e0b","#d97706","#fbbf24","#92400e"],borderColor:"#1c1009",borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:"y",plugins:CHART_DEFAULTS.plugins,scales:CHART_DEFAULTS.scales}});
+  _activeCharts.push(c);
+};
+SLIDE_VISUALS["briefing_kr:\ube68\ub9ac\ube68\ub9ac"]=function(vp){
+  vp.innerHTML='<div class="vp-title">\ube68\ub9ac\ube68\ub9ac Culture</div>'
+  +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">Micro-Format</div><div class="vp-card-lbl">Quick resets preferred</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">Achievement</div><div class="vp-card-lbl">Performance culture</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">K-Beauty</div><div class="vp-card-lbl">Wellness crossover</div></div></div>'
+  +'<div class="vp-grid g2" style="margin-top:.6rem"><div class="vp-card" style="border-color:var(--acc)"><div class="vp-card-val">35</div><div class="vp-card-lbl">Posts / Book</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">Brunch Story</div><div class="vp-card-lbl">Korea\'s Medium</div></div></div>';
+};
+SLIDE_VISUALS["briefing_kr:Cold-Start"]=function(vp){
+  vp.innerHTML='<div class="vp-title">KR Cold-Start Strategy</div>'
+  +'<div class="vp-grid g3"><div class="vp-card" style="border-color:var(--acc)"><div class="vp-card-val">\u20a91,200</div><div class="vp-card-lbl">\ube68\ub9ac\ube68\ub9ac Reset</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">58%</div><div class="vp-card-lbl">Audio Consumption</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">Naver Blog</div><div class="vp-card-lbl">Review Strategy</div></div></div>'
+  +'<div class="vp-diagram" style="margin-top:.6rem">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">\u20a91,200</div><div class="vp-dbox-sub">\ube68\ub9ac\ube68\ub9ac Reset</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Naver Blog</div><div class="vp-dbox-sub">5-10 bloggers</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Reviews</div><div class="vp-dbox-sub">Naver + Kakao trust</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Scale</div><div class="vp-dbox-sub">Standard pricing</div></div></div>';
+};
+
+// ── TW BRIEFING ──
+SLIDE_VISUALS["briefing_tw:Weekly OS"]=function(vp){
+  var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"Google Play, Kindle, Kobo TW",c:"var(--acc)"},{d:"WED",t:"Spotify TW via Findaway",c:"var(--acc)"},{d:"THU",t:"Readmoo + KKBOX",c:"#f59e0b"},{d:"FRI",t:"Review 48Social",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
+  vp.innerHTML='<div class="vp-title">TW Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+};
+SLIDE_VISUALS["briefing_tw:Platform Stack"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Taiwan Platform Stack</div>'
+  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Type</th><th>Revenue Share</th></tr></thead><tbody>'
+  +'<tr><td>Google Play TW</td><td>Ebook</td><td class="num">52%</td></tr>'
+  +'<tr><td>Kobo Taiwan</td><td>Ebook</td><td class="num">45-70%</td></tr>'
+  +'<tr><td>Readmoo</td><td>Ebook</td><td class="num">50%</td></tr>'
+  +'<tr><td>Apple Books TW</td><td>Ebook</td><td class="num">70%</td></tr>'
+  +'<tr><td>KKBOX</td><td>Audio</td><td class="num">Varies</td></tr>'
+  +'<tr><td>Spotify TW</td><td>Audio</td><td class="num">Via Findaway</td></tr>'
+  +'<tr><td>LINE Taiwan</td><td>Social</td><td class="num">Organic</td></tr></tbody></table>';
+};
+SLIDE_VISUALS["briefing_tw:Cultural Framing"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Taiwan Cultural Framing</div>'
+  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">\u8eab\u5fc3\u9748</div><div class="vp-card-lbl">Body-Mind-Spirit</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">\u5b5d\u9053</div><div class="vp-card-lbl">Filial Piety</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">\u5b78\u696d</div><div class="vp-card-lbl">Academic Pressure</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">\u904e\u52de</div><div class="vp-card-lbl">Tech Overwork</div></div></div>'
+  +'<div class="vp-grid g3" style="margin-top:.6rem"><div class="vp-card" style="border-color:var(--acc)"><div class="vp-card-val">6</div><div class="vp-card-lbl">Pilot Brands</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">36</div><div class="vp-card-lbl">TW Authors</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">227</div><div class="vp-card-lbl">Translated Atoms</div></div></div>';
+};
+SLIDE_VISUALS["briefing_tw:Cold-Start"]=function(vp){
+  vp.innerHTML='<div class="vp-title">TW Cold-Start Strategy</div>'
+  +'<div class="vp-grid g3"><div class="vp-card" style="border-color:var(--acc)"><div class="vp-card-val">NT$30</div><div class="vp-card-lbl">5-Min Reset</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">PTT</div><div class="vp-card-lbl">Taiwan\'s Reddit</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">30</div><div class="vp-card-lbl">Posts / Book</div></div></div>'
+  +'<div class="vp-diagram" style="margin-top:.6rem">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">NT$30</div><div class="vp-dbox-sub">Remove friction</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">PTT Forum</div><div class="vp-dbox-sub">Community reviews</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Reviews</div><div class="vp-dbox-sub">Algo trust</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Scale</div><div class="vp-dbox-sub">Standard pricing</div></div></div>';
+};
+SLIDE_VISUALS["briefing_tw:Revenue"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Taiwan Revenue Projection</div>'
+  +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val">$1.5K\u20136K</div><div class="vp-card-lbl">Year 1</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$8K\u201320K</div><div class="vp-card-lbl">Year 2</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">90.6%</div><div class="vp-card-lbl">You Keep</div></div></div>'
+  +'<div class="vp-chart-wrap"><canvas id="vc-btw-rev"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-btw-rev"),{type:"doughnut",data:{labels:["You Keep 90.6%","Pearl Prime 4.8%","48Social 4.8%"],datasets:[{data:[90.6,4.8,4.8],backgroundColor:["#d97706","#78350f","#92400e"],borderColor:"#1c1009",borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:"rgba(250,246,240,.5)",font:{family:"DM Mono",size:9},boxWidth:10}}}}});
+  _activeCharts.push(c);
+};
+
+// ── CN BRIEFING ──
+SLIDE_VISUALS["briefing_cn:Weekly OS"]=function(vp){
+  var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"WeChat Read + Dedao",c:"var(--acc)"},{d:"WED",t:"Ximalaya audio",c:"var(--acc)"},{d:"THU",t:"Bilibili video",c:"#f59e0b"},{d:"FRI",t:"Douyin + WeChat articles",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
+  vp.innerHTML='<div class="vp-title">CN Weekly OS \u2014 Local Platforms Only</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+};
+SLIDE_VISUALS["briefing_cn:Platform Stack"]=function(vp){
+  vp.innerHTML='<div class="vp-title">China Platform Stack</div>'
+  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Type</th><th>MAU</th></tr></thead><tbody>'
+  +'<tr><td>Ximalaya</td><td>Audio</td><td class="num">345M</td></tr>'
+  +'<tr><td>WeChat Read</td><td>Ebook</td><td class="num">\u2014</td></tr>'
+  +'<tr><td>Dedao</td><td>Knowledge</td><td class="num">\u2014</td></tr>'
+  +'<tr><td>Douyin</td><td>Video</td><td class="num">750M</td></tr>'
+  +'<tr><td>Xiaohongshu</td><td>Lifestyle</td><td class="num">200M</td></tr>'
+  +'<tr><td>Bilibili</td><td>Video</td><td class="num">315M</td></tr></tbody></table>';
+};
+SLIDE_VISUALS["briefing_cn:Ximalaya"]=function(vp){
+  vp.innerHTML='<div class="vp-title">\u559c\u9a6c\u62c9\u96c5 \u2014 Audio Entry Point</div>'
+  +'<div class="vp-grid g3"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">345M</div><div class="vp-card-lbl">Monthly Active Users</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">70%</div><div class="vp-card-lbl">Audio Market Share</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">20%</div><div class="vp-card-lbl">Self-Help Growth</div></div></div>'
+  +'<div class="vp-diagram" style="margin-top:.6rem">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Free Chapters</div><div class="vp-dbox-sub">Sample content</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Listen</div><div class="vp-dbox-sub">Build audience</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Micropay</div><div class="vp-dbox-sub">Pay-per-chapter</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Revenue</div><div class="vp-dbox-sub">Commute + sleep</div></div></div>';
+};
+SLIDE_VISUALS["briefing_cn:Hong Kong"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Greater China: Mainland vs HK vs SG</div>'
+  +'<table class="vp-table"><thead><tr><th></th><th>Mainland</th><th>Hong Kong</th><th>Singapore</th></tr></thead><tbody>'
+  +'<tr><td>Script</td><td class="num">Simplified</td><td class="num">Traditional</td><td class="num">Simplified</td></tr>'
+  +'<tr><td>Platforms</td><td class="num">Ximalaya, WeChat</td><td class="num">Google, Apple, Kobo</td><td class="num">Google, Apple, Kobo</td></tr>'
+  +'<tr><td>Atoms</td><td class="num">147</td><td class="num">243</td><td class="num">243</td></tr>'
+  +'<tr><td>Authors</td><td class="num">36</td><td class="num">36</td><td class="num">36</td></tr>'
+  +'<tr><td>TTS</td><td class="num">Mandarin</td><td class="num">Cantonese</td><td class="num">Mandarin</td></tr></tbody></table>';
+};
+SLIDE_VISUALS["briefing_cn:Cold-Start"]=function(vp){
+  vp.innerHTML='<div class="vp-title">3 Cold-Start Strategies</div>'
+  +'<div class="vp-grid g3"><div class="vp-card" style="border-color:var(--acc)"><div class="vp-card-val" style="font-size:.7rem">Mainland</div><div class="vp-card-lbl">Free on Ximalaya</div></div>'
+  +'<div class="vp-card" style="border-color:var(--acc)"><div class="vp-card-val">HK$8</div><div class="vp-card-lbl">HK Quick Reset</div></div>'
+  +'<div class="vp-card" style="border-color:var(--acc)"><div class="vp-card-val">S$1.49</div><div class="vp-card-lbl">SG Quick Reset</div></div></div>'
+  +'<div class="vp-diagram" style="margin-top:.6rem">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Free / Low Price</div><div class="vp-dbox-sub">Remove friction</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Community</div><div class="vp-dbox-sub">WeChat groups / forums</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Reviews</div><div class="vp-dbox-sub">Platform trust</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Monetize</div><div class="vp-dbox-sub">Micropayments</div></div></div>';
+};
+SLIDE_VISUALS["briefing_cn:Revenue"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Greater China Revenue</div>'
+  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">$2.8K\u201312K</div><div class="vp-card-lbl">Combined Y1</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">147</div><div class="vp-card-lbl">zh-CN Atoms</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">243</div><div class="vp-card-lbl">zh-HK Atoms</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">243</div><div class="vp-card-lbl">zh-SG Atoms</div></div></div>'
+  +'<table class="vp-table" style="margin-top:.6rem"><thead><tr><th>Market</th><th style="text-align:right">Year 1</th></tr></thead><tbody>'
+  +'<tr><td>Mainland (Ximalaya)</td><td class="num">$1K\u20135K</td></tr>'
+  +'<tr><td>Hong Kong</td><td class="num">$1K\u20134K</td></tr>'
+  +'<tr><td>Singapore</td><td class="num">$0.8K\u20133K</td></tr></tbody></table>';
+};
+
+// ── FR BRIEFING ──
+SLIDE_VISUALS["briefing_fr:Weekly OS"]=function(vp){
+  var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"Kindle FR, Kobo FR, Google, Apple",c:"var(--acc)"},{d:"WED",t:"Audio: Spotify FR, Apple via Findaway",c:"var(--acc)"},{d:"THU",t:"Manga: Izneo + WEBTOON FR",c:"#f59e0b"},{d:"FRI",t:"Review 48Social",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
+  vp.innerHTML='<div class="vp-title">FR Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+};
 SLIDE_VISUALS["briefing_fr:Platform Stack"]=function(vp){
-  vp.innerHTML='<div class="vp-title">France \u2014 #1 EU Manga Market</div>'
-  +'<div class="vp-grid g4"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">#1</div><div class="vp-card-lbl">EU Manga</div></div>'
-  +'<div class="vp-card"><div class="vp-card-val">#2</div><div class="vp-card-lbl">Global</div></div>'
-  +'<div class="vp-card"><div class="vp-card-val">\u20AC0.99</div><div class="vp-card-lbl">Cold-Start</div></div>'
-  +'<div class="vp-card"><div class="vp-card-val">$2K\u20138K</div><div class="vp-card-lbl">Year 1</div></div></div>'
-  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Type</th></tr></thead><tbody>'
-  +'<tr><td>Google Play FR</td><td>Ebook + auto-narration</td></tr>'
-  +'<tr><td>Kobo France</td><td>Strong French presence</td></tr>'
-  +'<tr><td>Amazon Kindle FR</td><td>70% royalty</td></tr>'
-  +'<tr><td>Webtoon Canvas</td><td>Manga first-mover</td></tr></tbody></table>';
+  vp.innerHTML='<div class="vp-title">France Platform Stack</div>'
+  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Type</th><th>Notes</th></tr></thead><tbody>'
+  +'<tr><td>Kindle FR</td><td>Ebook</td><td>70% royalty</td></tr>'
+  +'<tr><td>Kobo France</td><td>Ebook</td><td>Fnac retail integration</td></tr>'
+  +'<tr><td>Google Play FR</td><td>Ebook</td><td>Auto-narration</td></tr>'
+  +'<tr><td>Apple FR (D2D)</td><td>Ebook</td><td>70% royalty</td></tr>'
+  +'<tr><td>Izneo</td><td>Manga</td><td>Primary digital manga</td></tr>'
+  +'<tr><td>WEBTOON FR</td><td>Manga</td><td>Growing audience</td></tr></tbody></table>'
+  +'<div class="vp-grid g2" style="margin-top:.6rem"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">#1 EU</div><div class="vp-card-lbl">Manga Market</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">#2 Global</div><div class="vp-card-lbl">After Japan</div></div></div>';
 };
-SLIDE_VISUALS["briefing_fr:Manga"]=SLIDE_VISUALS["briefing_fr:Platform Stack"];
+SLIDE_VISUALS["briefing_fr:Manga"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Manga First-Mover Advantage</div>'
+  +'<div class="vp-grid g3"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">#1 EU</div><div class="vp-card-lbl">Manga Market</div></div>'
+  +'<div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">Zero</div><div class="vp-card-lbl">Competition</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">Philosophical</div><div class="vp-card-lbl">French Framing</div></div></div>'
+  +'<div class="vp-grid g2" style="margin-top:.6rem"><div class="vp-card"><div class="vp-card-val" style="font-size:.65rem">Introspection</div><div class="vp-card-lbl">Existential depth</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.65rem">Intellectual Rigor</div><div class="vp-card-lbl">French readers demand</div></div></div>';
+};
+SLIDE_VISUALS["briefing_fr:Social"]=function(vp){
+  vp.innerHTML='<div class="vp-title">France Social Discovery</div>'
+  +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val">30</div><div class="vp-card-lbl">Posts / Book</div></div>'
+  +'<div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val" style="font-size:.7rem">BookTok FR</div><div class="vp-card-lbl">Rapidly Growing</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">E1-E5</div><div class="vp-card-lbl">Proof Loop</div></div></div>'
+  +'<div class="vp-diagram" style="margin-top:.6rem">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Content</div><div class="vp-dbox-sub">Long captions</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Instagram FR</div><div class="vp-dbox-sub">Stories + Reels</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">TikTok FR</div><div class="vp-dbox-sub">BookTok growing</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Email</div><div class="vp-dbox-sub">GHL proof loop</div></div></div>';
+};
+SLIDE_VISUALS["briefing_fr:Cold-Start"]=function(vp){
+  vp.innerHTML='<div class="vp-title">FR Cold-Start Strategy</div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">\u20ac0.99</div><div class="vp-dbox-sub">7-Day Challenge</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Babelio</div><div class="vp-dbox-sub">France\'s Goodreads</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Reviews</div><div class="vp-dbox-sub">20-30 ARCs</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Scale</div><div class="vp-dbox-sub">Amazon FR + Kobo</div></div></div>'
+  +'<div class="vp-grid g2" style="margin-top:.6rem"><div class="vp-card"><div class="vp-card-val" style="font-size:.65rem">No Hard Sells</div><div class="vp-card-lbl">French readers distrust</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">Babelio</div><div class="vp-card-lbl">Key discovery driver</div></div></div>';
+};
 SLIDE_VISUALS["briefing_fr:Revenue"]=function(vp){
-  vp.innerHTML='<div class="vp-title">France $500/mo Split</div><div class="vp-chart-wrap"><canvas id="vc-fr"></canvas></div>';
-  var c=new Chart(document.getElementById("vc-fr"),{type:"doughnut",data:{labels:["Meta $300","Google $125","Amazon FR $75"],datasets:[{data:[300,125,75],backgroundColor:["#d97706","#f59e0b","#78350f"],borderColor:"#1c1009",borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:"rgba(250,246,240,.5)",font:{family:"DM Mono",size:9},boxWidth:10}}}}});
+  vp.innerHTML='<div class="vp-title">France Revenue Projection</div>'
+  +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val">$2K\u20138K</div><div class="vp-card-lbl">Year 1</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$10K\u201325K</div><div class="vp-card-lbl">Year 2</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">90.6%</div><div class="vp-card-lbl">You Keep</div></div></div>'
+  +'<div class="vp-chart-wrap"><canvas id="vc-bfr-alloc"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-bfr-alloc"),{type:"doughnut",data:{labels:["Meta $300","Google $125","Amazon FR $75"],datasets:[{data:[300,125,75],backgroundColor:["#d97706","#f59e0b","#78350f"],borderColor:"#1c1009",borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:"rgba(250,246,240,.5)",font:{family:"DM Mono",size:9},boxWidth:10}}}}});
   _activeCharts.push(c);
 };
 
+// ── DE BRIEFING ──
+SLIDE_VISUALS["briefing_de:Weekly OS"]=function(vp){
+  var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"Kindle DE, Thalia, Hugendubel, Google",c:"var(--acc)"},{d:"WED",t:"Audible DE + Spotify via Findaway",c:"var(--acc)"},{d:"THU",t:"Verify uploads",c:"#f59e0b"},{d:"FRI",t:"Review 48Social",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
+  vp.innerHTML='<div class="vp-title">DE Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+};
 SLIDE_VISUALS["briefing_de:Platform Stack"]=function(vp){
-  vp.innerHTML='<div class="vp-title">Germany \u2014 Evidence-Based</div>'
-  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">25%</div><div class="vp-card-lbl">Audio Growth</div></div>'
-  +'<div class="vp-card"><div class="vp-card-val">\u20AC0.99</div><div class="vp-card-lbl">Cold-Start</div></div>'
-  +'<div class="vp-card"><div class="vp-card-val">$2.5K\u201310K</div><div class="vp-card-lbl">Year 1</div></div>'
-  +'<div class="vp-card" style="border-color:#60a5fa"><div class="vp-card-val" style="font-size:.55rem">Wissenschaftlich</div><div class="vp-card-lbl">Required</div></div></div>'
-  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Notes</th></tr></thead><tbody>'
-  +'<tr><td>Amazon Kindle DE</td><td>70% royalty</td></tr>'
-  +'<tr><td>Audible Germany</td><td>Largest EU audiobook</td></tr>'
-  +'<tr><td>Thalia</td><td>German bookseller</td></tr></tbody></table>';
+  vp.innerHTML='<div class="vp-title">Germany Platform Stack</div>'
+  +'<table class="vp-table"><thead><tr><th>Platform</th><th>Type</th><th>Notes</th></tr></thead><tbody>'
+  +'<tr><td>Kindle DE</td><td>Ebook</td><td>70% royalty</td></tr>'
+  +'<tr><td>Audible DE</td><td>Audio</td><td>Largest EU audiobook</td></tr>'
+  +'<tr><td>Thalia</td><td>Ebook</td><td>German bookseller</td></tr>'
+  +'<tr><td>Hugendubel</td><td>Ebook</td><td>German retail</td></tr>'
+  +'<tr><td>Google Play DE</td><td>Ebook</td><td>Auto-narration</td></tr></tbody></table>'
+  +'<div class="vp-grid g2" style="margin-top:.6rem"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">25%</div><div class="vp-card-lbl">Audio Growth 2024</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">Audible DE</div><div class="vp-card-lbl">Top Revenue Driver</div></div></div>';
 };
-SLIDE_VISUALS["briefing_de:Evidence"]=SLIDE_VISUALS["briefing_de:Platform Stack"];
+SLIDE_VISUALS["briefing_de:Evidence"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Evidence-Based Framing</div>'
+  +'<div class="vp-grid g3"><div class="vp-card" style="border-color:#60a5fa"><div class="vp-card-val" style="font-size:.6rem">wissenschaftlich</div><div class="vp-card-lbl">Scientifically Grounded</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">Neuroscience</div><div class="vp-card-lbl">Not spiritual language</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">Measurable</div><div class="vp-card-lbl">Cite research always</div></div></div>'
+  +'<div class="vp-grid g3" style="margin-top:.6rem"><div class="vp-card"><div class="vp-card-val" style="font-size:.6rem">Somatic \u2192 Neuroscience</div><div class="vp-card-lbl">Reframe healing</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.6rem">Meditation \u2192 Cognitive</div><div class="vp-card-lbl">Reframe practice</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val" style="font-size:.6rem">Emotional \u2192 Physiology</div><div class="vp-card-lbl">Reframe regulation</div></div></div>';
+};
+SLIDE_VISUALS["briefing_de:Social"]=function(vp){
+  vp.innerHTML='<div class="vp-title">Germany Social Discovery</div>'
+  +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val">25</div><div class="vp-card-lbl">Posts / Book</div></div>'
+  +'<div class="vp-card" style="border-color:#60a5fa"><div class="vp-card-val" style="font-size:.7rem">LinkedIn DE</div><div class="vp-card-lbl">Pro Wellness Audience</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">28%</div><div class="vp-card-lbl">Email Open Rate</div></div></div>'
+  +'<div class="vp-diagram" style="margin-top:.6rem">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Content</div><div class="vp-dbox-sub">Data-driven copy</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">YouTube DE</div><div class="vp-dbox-sub">Primary video</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">LinkedIn DE</div><div class="vp-dbox-sub">Professional audience</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Email</div><div class="vp-dbox-sub">GHL proof loop</div></div></div>';
+};
+SLIDE_VISUALS["briefing_de:Cold-Start"]=function(vp){
+  vp.innerHTML='<div class="vp-title">DE Cold-Start Strategy</div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">\u20ac0.99</div><div class="vp-dbox-sub">7-Day Challenge</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">LovelyBooks</div><div class="vp-dbox-sub">Germany\'s Goodreads</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Reviews</div><div class="vp-dbox-sub">20-40 ARCs, 25-35% post</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox"><div class="vp-dbox-title">Scale</div><div class="vp-dbox-sub">Amazon DE discovery</div></div></div>';
+};
 SLIDE_VISUALS["briefing_de:Revenue"]=function(vp){
-  vp.innerHTML='<div class="vp-title">Germany $500/mo Split</div><div class="vp-chart-wrap"><canvas id="vc-de"></canvas></div>';
-  var c=new Chart(document.getElementById("vc-de"),{type:"doughnut",data:{labels:["Amazon DE $300","Meta $125","Google $75"],datasets:[{data:[300,125,75],backgroundColor:["#d97706","#f59e0b","#78350f"],borderColor:"#1c1009",borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:"rgba(250,246,240,.5)",font:{family:"DM Mono",size:9},boxWidth:10}}}}});
+  vp.innerHTML='<div class="vp-title">Germany Revenue Projection</div>'
+  +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val">$2.5K\u201310K</div><div class="vp-card-lbl">Year 1</div></div>'
+  +'<div class="vp-card"><div class="vp-card-val">$12K\u201330K</div><div class="vp-card-lbl">Year 2</div></div>'
+  +'<div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val" style="font-size:.7rem">Audible DE</div><div class="vp-card-lbl">#1 Revenue Driver</div></div></div>'
+  +'<div class="vp-chart-wrap"><canvas id="vc-bde-alloc"></canvas></div>';
+  var c=new Chart(document.getElementById("vc-bde-alloc"),{type:"doughnut",data:{labels:["Amazon DE $300","Meta $125","Google $75"],datasets:[{data:[300,125,75],backgroundColor:["#d97706","#f59e0b","#78350f"],borderColor:"#1c1009",borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"right",labels:{color:"rgba(250,246,240,.5)",font:{family:"DM Mono",size:9},boxWidth:10}}}}});
   _activeCharts.push(c);
 };
 
-SLIDE_VISUALS["briefing_tw:Platform Stack"]=function(vp){vp.innerHTML='<div class="vp-table"><table><tr><th>Platform</th><th>Type</th><th>Revenue Share</th></tr><tr><td>Google Play TW</td><td>Ebook</td><td>52%</td></tr><tr><td>Kobo Taiwan</td><td>Ebook</td><td>45-70%</td></tr><tr><td>Readmoo</td><td>Ebook</td><td>50%</td></tr><tr><td>Apple Books TW</td><td>Ebook</td><td>70%</td></tr><tr><td>KKBOX</td><td>Audio</td><td>Varies</td></tr><tr><td>Spotify TW</td><td>Audio</td><td>Via Findaway</td></tr><tr><td>LINE Taiwan</td><td>Social</td><td>Organic</td></tr></table></div>';};
-SLIDE_VISUALS["briefing_tw:Cultural Framing"]=SLIDE_VISUALS["briefing_tw:Platform Stack"];
-SLIDE_VISUALS["briefing_cn:Platform Stack"]=function(vp){vp.innerHTML='<div class="vp-table"><table><tr><th>Platform</th><th>Type</th><th>MAU</th></tr><tr><td>Ximalaya</td><td>Audio</td><td>345M</td></tr><tr><td>WeChat Read</td><td>Ebook</td><td>—</td></tr><tr><td>Dedao</td><td>Knowledge</td><td>—</td></tr><tr><td>Douyin</td><td>Video</td><td>750M</td></tr><tr><td>Xiaohongshu</td><td>Lifestyle</td><td>200M</td></tr><tr><td>Bilibili</td><td>Video</td><td>315M</td></tr></table></div>';};
-SLIDE_VISUALS["briefing_cn:Ximalaya"]=SLIDE_VISUALS["briefing_cn:Platform Stack"];
-SLIDE_VISUALS["briefing_cn:Hong Kong"]=SLIDE_VISUALS["briefing_cn:Platform Stack"];
 
 // ── VISUAL RENDERING ENGINE ──
 function showVisual(scriptItem){
