@@ -183,15 +183,15 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
       <div class="ds-card-name">Germany Briefing</div>
       <div class="ds-card-desc">Evidence-based, Audible DE, wissenschaftlich fundiert.</div>
     </a>
-    <a class="ds-card" href="?deck=briefing_id">
-      <div class="ds-card-icon">&#x1F1EE;&#x1F1E9;</div>
-      <div class="ds-card-name">Indonesia Briefing</div>
-      <div class="ds-card-desc">Tokopedia, Gramedia Digital, 275M population.</div>
+    <a class="ds-card" href="?deck=briefing_tw">
+      <div class="ds-card-icon">&#x1F1F9;&#x1F1FC;</div>
+      <div class="ds-card-name">Taiwan Briefing</div>
+      <div class="ds-card-desc">Readmoo, Kobo TW, LINE TW, Traditional Chinese.</div>
     </a>
-    <a class="ds-card" href="?deck=briefing_br">
-      <div class="ds-card-icon">&#x1F1E7;&#x1F1F7;</div>
-      <div class="ds-card-name">Brazil Briefing</div>
-      <div class="ds-card-desc">Amazon BR, Google Play, Skeelo, Portuguese.</div>
+    <a class="ds-card" href="?deck=briefing_cn">
+      <div class="ds-card-icon">&#x1F1E8;&#x1F1F3;</div>
+      <div class="ds-card-name">China Briefing</div>
+      <div class="ds-card-desc">Ximalaya 345M MAU, WeChat Read, Douyin. Covers HK + SG.</div>
     </a>
   </div>
 </div>
@@ -337,24 +337,26 @@ var DECK_META = {
       de:{icon:"\uD83C\uDDE9\uD83C\uDDEA",title:"Deutschland \u2014 German Market",sub:"Evidence-based framing \u00b7 Long-form preferred"}
     }
   },
-  briefing_id: {
-    title: "Indonesia Briefing",
+  briefing_tw: {
+    title: "Taiwan Briefing",
     sub: "Admin Briefing",
-    chips: [{p:"all",label:"All"},{p:"id",label:"\uD83C\uDDEE\uD83C\uDDE9"}],
-    heroDefault: {icon:"\uD83C\uDDEE\uD83C\uDDE9", title:"Briefing Indonesia", sub:"275M population \u00b7 Gramedia \u00b7 Tokopedia"},
+    chips: [{p:"all",label:"All"},{p:"tw",label:"\uD83C\uDDF9\uD83C\uDDFC"}],
+    heroDefault: {icon:"\uD83C\uDDF9\uD83C\uDDFC", title:"\u53F0\u7063\u5E02\u5834\u7C21\u5831", sub:"Readmoo \u00b7 Kobo TW \u00b7 LINE TW \u00b7 \u8EAB\u5FC3\u9748"},
     heroes: {
-      landing:{icon:"\uD83C\uDDEE\uD83C\uDDE9",title:"Briefing Indonesia",sub:"275M population \u00b7 Mobile-first \u00b7 Fastest growth"},
-      id:{icon:"\uD83C\uDDEE\uD83C\uDDE9",title:"Indonesia Market",sub:"Gramedia Digital \u00b7 Google Play ID \u00b7 Tokopedia"}
+      landing:{icon:"\uD83C\uDDF9\uD83C\uDDFC",title:"\u53F0\u7063\u5E02\u5834\u7C21\u5831",sub:"Readmoo \u00b7 Kobo TW \u00b7 LINE TW \u00b7 Traditional Chinese"},
+      tw:{icon:"\uD83C\uDDF9\uD83C\uDDFC",title:"\u53F0\u7063\u5E02\u5834",sub:"\u8EAB\u5FC3\u9748 framing \u00b7 Filial piety angle \u00b7 6 pilot brands"}
     }
   },
-  briefing_br: {
-    title: "Brazil Briefing",
+  briefing_cn: {
+    title: "China Briefing",
     sub: "Admin Briefing",
-    chips: [{p:"all",label:"All"},{p:"br",label:"\uD83C\uDDE7\uD83C\uDDF7"}],
-    heroDefault: {icon:"\uD83C\uDDE7\uD83C\uDDF7", title:"Briefing Brasil", sub:"Amazon BR \u00b7 Skeelo \u00b7 Portuguese"},
+    chips: [{p:"all",label:"All"},{p:"cn",label:"\uD83C\uDDE8\uD83C\uDDF3"},{p:"hk",label:"\uD83C\uDDED\uD83C\uDDF0"},{p:"sg",label:"\uD83C\uDDF8\uD83C\uDDEC"}],
+    heroDefault: {icon:"\uD83C\uDDE8\uD83C\uDDF3", title:"\u4E2D\u56FD\u5E02\u573A\u7B80\u62A5", sub:"Ximalaya 345M MAU \u00b7 WeChat Read \u00b7 Douyin \u00b7 HK + SG"},
     heroes: {
-      landing:{icon:"\uD83C\uDDE7\uD83C\uDDF7",title:"Briefing Brasil",sub:"Amazon BR \u00b7 Skeelo \u00b7 Google Play BR"},
-      br:{icon:"\uD83C\uDDE7\uD83C\uDDF7",title:"Brasil \u2014 Mercado brasileiro",sub:"215M population \u00b7 Autoajuda em portugu\u00eas"}
+      landing:{icon:"\uD83C\uDDE8\uD83C\uDDF3",title:"\u4E2D\u56FD\u5E02\u573A\u7B80\u62A5",sub:"Ximalaya 345M MAU \u00b7 WeChat Read \u00b7 Douyin"},
+      cn:{icon:"\uD83C\uDDE8\uD83C\uDDF3",title:"\u4E2D\u56FD\u5927\u9646\u5E02\u573A",sub:"Ximalaya \u00b7 WeChat Read \u00b7 Douyin \u00b7 \u5FAE\u4FE1\u8BFB\u4E66"},
+      hk:{icon:"\uD83C\uDDED\uD83C\uDDF0",title:"\u9999\u6E2F\u5E02\u573A",sub:"Google Play HK \u00b7 Apple Books \u00b7 Spotify HK"},
+      sg:{icon:"\uD83C\uDDF8\uD83C\uDDEC",title:"\u65B0\u52A0\u5761\u5E02\u573A",sub:"Google Play SG \u00b7 Spotify SG \u00b7 Bilingual market"}
     }
   }
 };
@@ -682,17 +684,35 @@ var SCRIPTS_BRIEFING_KR = [
 // SCRIPTS DATA — FRANCE BRIEFING DECK
 // ══════════════════════════════════════════════════════════
 var SCRIPTS_BRIEFING_FR = [
-{path:"landing",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDEB\uD83C\uDDF7",lines:[
-  {lang:"en",nav:{path:"landing",slide:null},text:"The France platform stack. Google Play Books France, Kobo France \u2014 strong ebook presence. Apple Books via Draft2Digital. Amazon Kindle France at 70% royalty."},
-  {lang:"en",nav:{path:"landing",slide:null},text:"Manga distribution: France is the number one manga market in Europe and number two globally after Japan. Self-help manga in French is a first-mover opportunity with zero competition."},
+{path:"landing",slide:null,label:"\uD83D\uDCC5 Weekly OS",flag:"\uD83D\uDCC5",lines:[
+  {lang:"fr",nav:{path:"landing",slide:null},text:"Votre rythme hebdomadaire en tant que Directeur de Marque France. Lundi : r\u00e9ception du paquet de contenu. Mardi : t\u00e9l\u00e9chargement des ebooks. Mercredi : soumission des livres audio."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Your weekly rhythm as France Brand Director. Monday: receive the content packet from Pearl Prime. Ebooks, audiobooks, manga assets, and podcast episodes. Review quality, check metadata, confirm branding."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Tuesday: upload ebooks to Amazon Kindle France, Kobo France, Google Play Books, and Apple Books via Draft2Digital. Wednesday: submit audiobooks to Spotify France and Apple Books via Findaway."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Thursday: upload manga episodes to Izneo and WEBTOON France. Friday: review and approve 48Social clips. Saturday: revenue review. Sunday: plan and rest. Weekly time commitment: 3 to 5 hours once established."},
+]},
+{path:"fr",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDEB\uD83C\uDDF7",lines:[
+  {lang:"fr",nav:{path:"fr",slide:null},text:"La pile de plateformes fran\u00e7aises. Amazon Kindle France \u00e0 70% de royaut\u00e9s. Kobo France, tr\u00e8s fort en ebooks. Google Play Books France. Fnac Kobo pour la distribution en librairie."},
+  {lang:"en",nav:{path:"fr",slide:null},text:"The France platform stack. Amazon Kindle France at 70% royalty. Kobo France with strong ebook presence and Fnac retail integration. Google Play Books France. Apple Books via Draft2Digital."},
+  {lang:"en",nav:{path:"fr",slide:null},text:"Manga distribution is the standout opportunity. France is the number one manga market in Europe and number two globally after Japan. Izneo is the primary digital manga platform. WEBTOON France has a growing audience. Self-help manga in French has zero competition."},
 ]},
 {path:"fr",slide:null,label:"\uD83C\uDFA8 Manga First-Mover",flag:"\uD83C\uDDEB\uD83C\uDDF7",lines:[
-  {lang:"en",nav:{path:"fr",slide:null},text:"France consumes more manga per capita than any country outside Japan. Philosophical framing resonates with French readers \u2014 use introspection, existential questioning, and beauty-focused language."},
-  {lang:"en",nav:{path:"fr",slide:null},text:"Cold-start product: \u20AC0.99 Seven Day Challenge. Content repurposing: 30 posts per book across Instagram France, TikTok France, and Facebook. BookTok France is growing rapidly."},
+  {lang:"fr",nav:{path:"fr",slide:null},text:"La France consomme plus de mangas par habitant que tout autre pays hors Japon. Le manga th\u00e9rapeutique en fran\u00e7ais est une opportunit\u00e9 unique. Personne d'autre ne le fait \u00e0 cette \u00e9chelle."},
+  {lang:"en",nav:{path:"fr",slide:null},text:"France consumes more manga per capita than any country outside Japan. Philosophical framing resonates deeply with French readers. Use introspection, existential questioning, and beauty-focused language. French readers respond to depth and intellectual rigor."},
+  {lang:"en",nav:{path:"fr",slide:null},text:"The combination of French philosophical culture and manga visual format is uniquely powerful. Self-help manga with therapeutic somatic pacing, delivered in French. No one else is doing this. Pearl Prime is the first mover."},
 ]},
-{path:"fr",slide:null,label:"\uD83D\uDCB0 Revenue & Ads",flag:"\uD83C\uDDEB\uD83C\uDDF7",lines:[
-  {lang:"en",nav:{path:"fr",slide:null},text:"Revenue projection: $2,000 to $8,000 Year One organic. Recommended $500/mo allocation: Meta $300, Google $125, Amazon France $75."},
-  {lang:"en",nav:{path:"fr",slide:null},text:"No one is delivering ancient wisdom to France's next generation through manga at scale. The combination of French philosophical culture and manga visual format is uniquely powerful. Pearl Prime is the first."},
+{path:"fr",slide:null,label:"\uD83D\uDCF1 Social & Discovery",flag:"\uD83C\uDDEB\uD83C\uDDF7",lines:[
+  {lang:"en",nav:{path:"fr",slide:null},text:"Social discovery in France. Instagram France and TikTok France are the primary channels. BookTok France is growing rapidly. French wellness audiences engage heavily on Instagram Stories and Reels."},
+  {lang:"en",nav:{path:"fr",slide:null},text:"Content repurposing: 30 posts per book across Instagram France, TikTok France, Facebook, and Twitter. Email campaigns through GoHighLevel with the proof loop sequence. French readers prefer longer, more thoughtful social captions."},
+]},
+{path:"fr",slide:null,label:"\uD83D\uDE80 Cold-Start",flag:"\uD83C\uDDEB\uD83C\uDDF7",lines:[
+  {lang:"fr",nav:{path:"fr",slide:null},text:"Produit de d\u00e9marrage : le D\u00e9fi 7 Jours \u00e0 0,99\u20ac. Prix bas pour \u00e9liminer la friction d'achat. L'objectif : des avis et la confiance algorithmique."},
+  {lang:"en",nav:{path:"fr",slide:null},text:"Cold-start product: the 0.99 euro Seven Day Challenge. Low price removes purchase friction. The goal is reviews and algorithmic trust on Amazon France and Kobo. Cultural note: never use aggressive marketing language. French readers distrust hard sells."},
+  {lang:"en",nav:{path:"fr",slide:null},text:"ARC strategy: send 20 to 30 advance review copies to French book bloggers and Babelio reviewers. Babelio is France's Goodreads equivalent. Reviews on Babelio drive significant discovery in the French market."},
+]},
+{path:"fr",slide:null,label:"\uD83D\uDCB0 Revenue",flag:"\uD83C\uDDEB\uD83C\uDDF7",lines:[
+  {lang:"en",nav:{path:"fr",slide:null},text:"Revenue projection: $2,000 to $8,000 Year One organic. By Month Six, with consistent uploads and growing reviews, revenue reaches $300 to $900 per month. Year Two with catalog momentum: $10,000 to $25,000."},
+  {lang:"en",nav:{path:"fr",slide:null},text:"Recommended $500 per month ad allocation: Meta $300, Google $125, Amazon France $75. Meta carousel ads work well for French wellness audiences. Amazon Sponsored Products for evidence-based self-help."},
+  {lang:"fr",nav:{path:"fr",slide:null},text:"Pearl Prime apporte la sagesse ancienne \u00e0 la prochaine g\u00e9n\u00e9ration fran\u00e7aise. Le manga th\u00e9rapeutique. L'intelligence \u00e9clair\u00e9e. L'opportunit\u00e9 est maintenant."},
 ]},
 ];
 
@@ -700,46 +720,102 @@ var SCRIPTS_BRIEFING_FR = [
 // SCRIPTS DATA — GERMANY BRIEFING DECK
 // ══════════════════════════════════════════════════════════
 var SCRIPTS_BRIEFING_DE = [
-{path:"landing",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDE9\uD83C\uDDEA",lines:[
-  {lang:"en",nav:{path:"landing",slide:null},text:"The Germany platform stack. Amazon Kindle Germany, Audible Germany \u2014 the strongest audiobook market in Europe. Thalia and Hugendubel for ebook distribution. Google Play Books DE."},
-  {lang:"en",nav:{path:"landing",slide:null},text:"Evidence-based framing is essential in Germany. The word wissenschaftlich fundiert \u2014 scientifically grounded \u2014 sells. Never use spiritual or mystical language. Long-form content preferred."},
+{path:"landing",slide:null,label:"\uD83D\uDCC5 Weekly OS",flag:"\uD83D\uDCC5",lines:[
+  {lang:"de",nav:{path:"landing",slide:null},text:"Ihr w\u00f6chentlicher Rhythmus als Markenleiter Deutschland. Montag: Inhaltspaket empfangen. Dienstag: E-Books hochladen. Mittwoch: H\u00f6rb\u00fccher einreichen. Donnerstag: Uploads \u00fcberpr\u00fcfen."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Your weekly rhythm as Germany Brand Director. Monday: receive the content packet. Tuesday: upload ebooks to Amazon Kindle Germany, Thalia, Hugendubel, and Google Play Books. Wednesday: submit audiobooks to Audible Germany and Spotify via Findaway."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Thursday: verify all uploads are live. Fix any platform rejections. Friday: review and approve 48Social clips for the coming week. Saturday: revenue review. Sunday: plan and rest. Same operating rhythm. 3 to 5 hours per week once established."},
 ]},
-{path:"de",slide:null,label:"\uD83E\uDDEC Evidence-Based",flag:"\uD83C\uDDE9\uD83C\uDDEA",lines:[
-  {lang:"en",nav:{path:"de",slide:null},text:"German readers require evidence. Frame somatic healing as neuroscience, frame meditation as cognitive training, frame emotional regulation as stress physiology. Cite research. Use precise language."},
-  {lang:"en",nav:{path:"de",slide:null},text:"Cold-start product: \u20AC0.99 Seven Day Challenge. Content repurposing: 25 posts per book across Instagram, YouTube, and LinkedIn. German LinkedIn has strong professional wellness audience."},
+{path:"de",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDE9\uD83C\uDDEA",lines:[
+  {lang:"de",nav:{path:"de",slide:null},text:"Die deutsche Plattform-\u00dcbersicht. Amazon Kindle Deutschland mit 70% Tantiemen. Audible Deutschland \u2014 der st\u00e4rkste H\u00f6rbuchmarkt Europas. Thalia und Hugendubel f\u00fcr den Buchhandel."},
+  {lang:"en",nav:{path:"de",slide:null},text:"The Germany platform stack. Amazon Kindle Germany at 70% royalty. Audible Germany is the strongest audiobook market in Europe. German audiobook market grew 25% in 2024. Thalia and Hugendubel for retail ebook distribution. Google Play Books DE."},
+  {lang:"en",nav:{path:"de",slide:null},text:"Draft2Digital distributes to Kobo, Apple Books, and library networks. Audible Germany alone is a significant revenue driver. German listeners prefer long-form audiobooks with structured, evidence-based content."},
 ]},
-{path:"de",slide:null,label:"\uD83D\uDCB0 Revenue & Ads",flag:"\uD83C\uDDE9\uD83C\uDDEA",lines:[
-  {lang:"en",nav:{path:"de",slide:null},text:"Revenue projection: $2,500 to $10,000 Year One organic. Audible Germany alone is a significant revenue driver \u2014 German audiobook market grew 25% in 2024."},
-  {lang:"en",nav:{path:"de",slide:null},text:"Recommended $500/mo allocation: Amazon Germany $300, Meta $125, Google $75. Amazon Sponsored Products perform well for evidence-based self-help in the German market."},
+{path:"de",slide:null,label:"\uD83E\uDDEC Evidence-Based Framing",flag:"\uD83C\uDDE9\uD83C\uDDEA",lines:[
+  {lang:"de",nav:{path:"de",slide:null},text:"Wissenschaftlich fundiert. Dieses Wort verkauft in Deutschland. Deutsche Leser verlangen Evidenz. Keine spirituelle oder mystische Sprache. Pr\u00e4zise, sachliche Formulierung."},
+  {lang:"en",nav:{path:"de",slide:null},text:"Evidence-based framing is essential in Germany. The phrase wissenschaftlich fundiert, scientifically grounded, is the single most effective positioning word. German readers require evidence. Frame somatic healing as neuroscience. Frame meditation as cognitive training. Frame emotional regulation as stress physiology."},
+  {lang:"en",nav:{path:"de",slide:null},text:"Cite research. Use precise language. Long-form content is preferred. German readers distrust vague claims. Every assertion should reference measurable outcomes. This is the opposite approach from Japan's indirect framing."},
+]},
+{path:"de",slide:null,label:"\uD83D\uDCF1 Social & Discovery",flag:"\uD83C\uDDE9\uD83C\uDDEA",lines:[
+  {lang:"en",nav:{path:"de",slide:null},text:"Content repurposing: 25 posts per book across Instagram, YouTube, and LinkedIn. German LinkedIn has a strong professional wellness audience. YouTube Germany is the primary video discovery platform for self-help content."},
+  {lang:"en",nav:{path:"de",slide:null},text:"Email campaigns through GoHighLevel. German open rates average 28% for wellness content. The proof loop sequence E1 through E5 works well but requires more data-driven language than the US version."},
+]},
+{path:"de",slide:null,label:"\uD83D\uDE80 Cold-Start",flag:"\uD83C\uDDE9\uD83C\uDDEA",lines:[
+  {lang:"de",nav:{path:"de",slide:null},text:"Startprodukt: 0,99\u20ac Sieben-Tage-Challenge. Niedriger Preis beseitigt Kaufbarrieren. Ziel: Bewertungen und algorithmisches Vertrauen auf Amazon Deutschland."},
+  {lang:"en",nav:{path:"de",slide:null},text:"Cold-start product: the 0.99 euro Seven Day Challenge. Low price removes friction. The goal is reviews and algorithmic trust on Amazon Germany. ARC strategy: partner with German book bloggers on LovelyBooks, Germany's Goodreads equivalent."},
+  {lang:"en",nav:{path:"de",slide:null},text:"Send 20 to 40 advance review copies. LovelyBooks reviews drive discovery on Amazon Germany. German readers trust peer reviews heavily. Expect 25 to 35 percent to post reviews."},
+]},
+{path:"de",slide:null,label:"\uD83D\uDCB0 Revenue",flag:"\uD83C\uDDE9\uD83C\uDDEA",lines:[
+  {lang:"en",nav:{path:"de",slide:null},text:"Revenue projection: $2,500 to $10,000 Year One organic. Audible Germany is the single largest revenue driver in the European market. By Month Six: $400 to $1,200 per month. Year Two with catalog momentum: $12,000 to $30,000."},
+  {lang:"en",nav:{path:"de",slide:null},text:"Recommended $500 per month ad allocation: Amazon Germany $300, Meta $125, Google $75. Amazon Sponsored Products perform exceptionally well for evidence-based self-help in the German market."},
+  {lang:"de",nav:{path:"de",slide:null},text:"Pearl Prime bringt uralte Weisheit zur n\u00e4chsten Generation in Deutschland. Wissenschaftlich fundiert. Evidenzbasiert. Die Gelegenheit ist jetzt."},
 ]},
 ];
 
 // ══════════════════════════════════════════════════════════
-// SCRIPTS DATA — INDONESIA BRIEFING DECK
+// SCRIPTS DATA — TAIWAN BRIEFING DECK
 // ══════════════════════════════════════════════════════════
-var SCRIPTS_BRIEFING_ID = [
-{path:"landing",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDEE\uD83C\uDDE9",lines:[
-  {lang:"en",nav:{path:"landing",slide:null},text:"The Indonesia platform stack. Google Play Books \u2014 dominant mobile platform in a 275 million population market. Gramedia Digital \u2014 Indonesia's largest book retailer. Tokopedia for physical and digital distribution."},
-  {lang:"en",nav:{path:"landing",slide:null},text:"Indonesia is mobile-first with 73% smartphone penetration. Short-form content and micro-pricing work best. TikTok Indonesia has 125 million users \u2014 the second largest TikTok market globally."},
+var SCRIPTS_BRIEFING_TW = [
+{path:"landing",slide:null,label:"\uD83D\uDCC5 Weekly OS",flag:"\uD83D\uDCC5",lines:[
+  {lang:"zh-tw",nav:{path:"landing",slide:null},text:"\u60A8\u7684\u6BCF\u9031\u7BC0\u594F\u3002\u661F\u671F\u4E00\uFF1A\u63A5\u6536\u5167\u5BB9\u5305\u3002\u661F\u671F\u4E8C\uFF1A\u4E0A\u50B3\u96FB\u5B50\u66F8\u81F3Google Play\u3001Apple Books\u3001Kindle\u53F0\u7063\u3001Kobo\u53F0\u7063\u3002"},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Your weekly rhythm as Taiwan Brand Director. Monday: receive the content packet. Tuesday: upload ebooks to Google Play TW, Apple Books TW, Kindle TW, and Kobo Taiwan. Wednesday: submit audiobooks to Spotify TW via Findaway."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Thursday: upload to Readmoo and KKBOX for audio. Friday: review 48Social clips. Saturday: revenue review. Sunday: plan and rest. 3 to 5 hours per week once established."},
 ]},
-{path:"id",slide:null,label:"\uD83D\uDCF1 Mobile-First",flag:"\uD83C\uDDEE\uD83C\uDDE9",lines:[
-  {lang:"en",nav:{path:"id",slide:null},text:"Cold-start product: Rp 15,000 Quick Reset (roughly $0.99). Religious framing is important \u2014 88% Muslim population. Frame wellness through spiritual growth and community values. Avoid clinical mental health language."},
-  {lang:"en",nav:{path:"id",slide:null},text:"Revenue projection: $1,000 to $5,000 Year One organic. Indonesia is a greenfield market for therapeutic self-help content. The combination of massive population and low competition creates significant opportunity."},
+{path:"tw",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDF9\uD83C\uDDFC",lines:[
+  {lang:"zh-tw",nav:{path:"tw",slide:null},text:"\u53F0\u7063\u5E73\u53F0\u7D44\u5408\u3002Google Play Books\u53F0\u7063\u3001Kobo\u53F0\u7063\u3001Readmoo\u2014\u2014\u53F0\u7063\u6700\u5927\u7684\u7E41\u9AD4\u4E2D\u6587\u96FB\u5B50\u66F8\u5E73\u53F0\u3002Apple Books\u53F0\u7063\u3002LINE\u53F0\u7063\u3002"},
+  {lang:"en",nav:{path:"tw",slide:null},text:"The Taiwan platform stack. Google Play Books TW, Kobo Taiwan, and Readmoo. Readmoo is Taiwan's largest Traditional Chinese ebook platform. Apple Books TW via Draft2Digital. LINE Taiwan for social discovery."},
+  {lang:"en",nav:{path:"tw",slide:null},text:"KKBOX for audio content distribution. Spotify TW via Findaway for audiobooks. Traditional Chinese only. Never simplified. Taiwan and mainland China are completely separate markets with separate scripts, platforms, and cultural framing."},
+]},
+{path:"tw",slide:null,label:"\uD83C\uDFA8 Cultural Framing",flag:"\uD83C\uDDF9\uD83C\uDDFC",lines:[
+  {lang:"zh-tw",nav:{path:"tw",slide:null},text:"\u8EAB\u5FC3\u9748\u662F\u53F0\u7063\u8B80\u8005\u7684\u6838\u5FC3\u8A9E\u8A00\u3002\u5B5D\u9053\u89D2\u5EA6\u9069\u7528\u65BC\u7236\u6BCD\u76F8\u95DC\u4E3B\u984C\u3002\u5B78\u696D\u58D3\u529B\u548C\u79D1\u6280\u696D\u904E\u52DE\u662F\u9AD8\u9700\u6C42\u4E3B\u984C\u3002"},
+  {lang:"en",nav:{path:"tw",slide:null},text:"Body-mind-spirit is the core language for Taiwan readers. Filial piety angle works for parent-focused topics. Academic pressure from college entrance exams and tech sector overwork in Hsinchu Science Park are high-demand therapeutic topics."},
+  {lang:"en",nav:{path:"tw",slide:null},text:"Taiwan has 6 pilot brands: sleep_repair_tw, stabilizer_tw, panic_first_aid_tw, gen_z_grounding_tw, grief_companion_tw, inner_security_tw. 36 authors with Taiwan-specific personas. 227 translated atoms in the pipeline."},
+]},
+{path:"tw",slide:null,label:"\uD83D\uDE80 Cold-Start",flag:"\uD83C\uDDF9\uD83C\uDDFC",lines:[
+  {lang:"zh-tw",nav:{path:"tw",slide:null},text:"\u555F\u52D5\u7522\u54C1\uFF1A30\u5143\u65B0\u53F0\u5E63\u300C\u4E94\u5206\u9418\u91CD\u7F6E\u300D\u3002\u4F4E\u50F9\u683C\u6D88\u9664\u8CFC\u8CB7\u969C\u7919\u3002\u76EE\u6A19\uFF1A\u8A55\u8AD6\u548C\u6F14\u7B97\u6CD5\u4FE1\u4EFB\u3002"},
+  {lang:"en",nav:{path:"tw",slide:null},text:"Cold-start product: the NT$30 Five-Minute Reset. Low price removes friction. The goal is reviews and algorithmic trust. Content repurposing: 30 posts per book across Instagram TW, Facebook TW, LINE, and PTT forum."},
+  {lang:"en",nav:{path:"tw",slide:null},text:"PTT is Taiwan's Reddit. Kobo Taiwan integration works well. LINE integration similar to Japan but with Traditional Chinese content. The Taiwan market is smaller than Japan but has strong per-reader engagement and low competition in therapeutic self-help."},
+]},
+{path:"tw",slide:null,label:"\uD83D\uDCB0 Revenue",flag:"\uD83C\uDDF9\uD83C\uDDFC",lines:[
+  {lang:"en",nav:{path:"tw",slide:null},text:"Revenue projection: $1,500 to $6,000 Year One organic. By Month Six: $200 to $700 per month. Year Two with catalog momentum: $8,000 to $20,000. Revenue split: you keep 90.6%. Pearl Prime 4.8%. 48Social 4.8%."},
+  {lang:"en",nav:{path:"tw",slide:null},text:"Recommended $300 per month ad allocation: Meta $150, Google $100, LINE TW $50. Facebook Groups are a strong discovery channel for Taiwanese wellness readers."},
+  {lang:"zh-tw",nav:{path:"tw",slide:null},text:"Pearl Prime\u5C07\u53E4\u8001\u667A\u6167\u5E36\u7D66\u53F0\u7063\u7684\u4E0B\u4E00\u4EE3\u3002\u8EAB\u5FC3\u9748\u7684\u7642\u7652\u3002\u555F\u8499\u667A\u6167\u3002\u6A5F\u6703\u5C31\u5728\u73FE\u5728\u3002"},
 ]},
 ];
 
 // ══════════════════════════════════════════════════════════
-// SCRIPTS DATA — BRAZIL BRIEFING DECK
+// SCRIPTS DATA — CHINA BRIEFING DECK (includes HK + SG delivery)
 // ══════════════════════════════════════════════════════════
-var SCRIPTS_BRIEFING_BR = [
-{path:"landing",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDE7\uD83C\uDDF7",lines:[
-  {lang:"en",nav:{path:"landing",slide:null},text:"The Brazil platform stack. Amazon Kindle Brazil at 70% royalty. Google Play Books Brazil. Skeelo \u2014 Brazil's leading ebook subscription service with 10 million users. Apple Books via Draft2Digital."},
-  {lang:"en",nav:{path:"landing",slide:null},text:"Brazil has 215 million population with strong autoajuda \u2014 self-help \u2014 culture. Portuguese content. Instagram and TikTok Brazil are primary discovery channels. WhatsApp groups drive organic book discovery."},
+var SCRIPTS_BRIEFING_CN = [
+{path:"landing",slide:null,label:"\uD83D\uDCC5 Weekly OS",flag:"\uD83D\uDCC5",lines:[
+  {lang:"zh-cn",nav:{path:"landing",slide:null},text:"\u60A8\u7684\u6BCF\u5468\u8282\u594F\u3002\u661F\u671F\u4E00\uFF1A\u63A5\u6536\u5185\u5BB9\u5305\u3002\u661F\u671F\u4E8C\uFF1A\u4E0A\u4F20\u7535\u5B50\u4E66\u81F3\u5FAE\u4FE1\u8BFB\u4E66\u3001\u5F97\u5230\u3002\u661F\u671F\u4E09\uFF1A\u63D0\u4EA4\u97F3\u9891\u81F3\u559C\u9A6C\u62C9\u96C5\u3002"},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Your weekly rhythm as China Brand Director. Monday: receive the content packet. Tuesday: upload ebooks to WeChat Read and Dedao. Wednesday: submit audio content to Ximalaya. No Google Play in mainland China. Distribution is entirely through local platforms."},
+  {lang:"en",nav:{path:"landing",slide:null},text:"Thursday: upload to Bilibili for video content. Friday: review Douyin clips and WeChat article drafts. Saturday: revenue review across all platforms. Sunday: plan and rest."},
 ]},
-{path:"br",slide:null,label:"\uD83C\uDDE7\uD83C\uDDF7 Autoajuda Culture",flag:"\uD83C\uDDE7\uD83C\uDDF7",lines:[
-  {lang:"en",nav:{path:"br",slide:null},text:"Cold-start product: R$4.99 Seven Day Challenge. Brazilian readers respond to warmth, community, and transformation narratives. The autoajuda category is one of the top three bestseller categories in Brazil consistently."},
-  {lang:"en",nav:{path:"br",slide:null},text:"Revenue projection: $2,000 to $8,000 Year One organic. Recommended $500/mo allocation: Meta $250, Google $150, Amazon Brazil $100. Instagram Reels and TikTok are the primary content discovery channels."},
-  {lang:"en",nav:{path:"br",slide:null},text:"No one is delivering ancient enlightened wisdom to Brazil's next generation in Portuguese at scale. Pearl Prime is the first. The opportunity is now."},
+{path:"cn",slide:null,label:"\uD83D\uDCDA Platform Stack",flag:"\uD83C\uDDE8\uD83C\uDDF3",lines:[
+  {lang:"zh-cn",nav:{path:"cn",slide:null},text:"\u4E2D\u56FD\u5E73\u53F0\u7EC4\u5408\u3002\u559C\u9A6C\u62C9\u96C5\u2014\u20143.45\u4EBF\u6708\u6D3B\u7528\u6237\uFF0C\u97F3\u9891\u5E02\u573A\u4EFD\u989D\u8D8570%\u3002\u5FAE\u4FE1\u8BFB\u4E66\u3002\u5F97\u5230\u3002\u62B6\u97F3\u3002\u5C0F\u7EA2\u4E66\u3002\u54D4\u54E9\u54D4\u54E9\u3002"},
+  {lang:"en",nav:{path:"cn",slide:null},text:"The China platform stack. Ximalaya with 345 million monthly active users and 70% market share in audio. WeChat Read for ebook distribution. Dedao for premium knowledge content. Douyin for short-form video. Xiaohongshu for lifestyle discovery. Bilibili for long-form video."},
+  {lang:"en",nav:{path:"cn",slide:null},text:"Critical constraint: no Google Play, no Findaway, no Audible in mainland China. All distribution must go through local platforms with local accounts. WeChat Moments ads require a minimum campaign budget of 50,000 RMB, roughly $7,000. Douyin ads minimum is $500."},
+]},
+{path:"cn",slide:null,label:"\u559C\u9A6C\u62C9\u96C5 Ximalaya",flag:"\uD83C\uDDE8\uD83C\uDDF3",lines:[
+  {lang:"zh-cn",nav:{path:"cn",slide:null},text:"\u559C\u9A6C\u62C9\u96C5\u662F\u8FDB\u5165\u4E2D\u56FD\u5E02\u573A\u7684\u6700\u4F73\u8DEF\u5F84\u3002\u514D\u8D39\u6536\u542C\u6A21\u5F0F\u5141\u8BB8\u7528\u6237\u514D\u8D39\u8BD5\u542C\u7AE0\u8282\uFF0C\u7136\u540E\u6309\u7AE0\u8282\u4ED8\u8D39\u3002\u81EA\u52A9\u6210\u957F\u7C7B\u5185\u5BB9\u589E\u957F20%\u3002"},
+  {lang:"en",nav:{path:"cn",slide:null},text:"Ximalaya is the entry point for China. The free-to-listen model works. Chapters as free samples, then pay-per-chapter micropayments. Self-help and self-development are among Ximalaya's top categories with 20% sales growth in 2025."},
+  {lang:"en",nav:{path:"cn",slide:null},text:"The opportunity: 345 million monthly active users. Audio-first market. Chinese listeners consume audio during commute and before sleep. Podcast format is growing rapidly. Pearl Prime's audiobook and podcast formats are native to this consumption pattern."},
+]},
+{path:"cn",slide:null,label:"\uD83C\uDDED\uD83C\uDDF0 Hong Kong + \uD83C\uDDF8\uD83C\uDDEC Singapore",flag:"\uD83C\uDDE8\uD83C\uDDF3",lines:[
+  {lang:"zh-cn",nav:{path:"cn",slide:null},text:"\u9999\u6E2F\u548C\u65B0\u52A0\u5761\u5E02\u573A\u3002\u9999\u6E2F\u4F7F\u7528\u7E41\u4F53\u4E2D\u6587\uFF0C\u65B0\u52A0\u5761\u4F7F\u7528\u7B80\u4F53\u4E2D\u6587\u3002\u4E24\u4E2A\u5E02\u573A\u90FD\u901A\u8FC7Google Play\u3001Apple Books\u548CSpotify\u5206\u53D1\u3002"},
+  {lang:"en",nav:{path:"cn",slide:null},text:"Hong Kong and Singapore markets are served under the China briefing. Hong Kong uses Traditional Chinese script. Singapore uses Simplified Chinese. Both markets distribute through Google Play, Apple Books, Kobo, and Spotify, unlike mainland China."},
+  {lang:"en",nav:{path:"cn",slide:null},text:"Hong Kong has 243 translated atoms and 36 authors across 6 brands. Singapore has 243 translated atoms and 36 authors across 6 brands. HK uses Cantonese-capable TTS. SG uses standard Mandarin. Both are fully pipeline-ready."},
+  {lang:"en",nav:{path:"cn",slide:null},text:"Platform differences: HK and SG have access to Google Play, Findaway, Kobo, and all international platforms. Mainland China does not. Content uploaded for HK and SG uses the same weekly rhythm but goes to international storefronts."},
+]},
+{path:"cn",slide:null,label:"\uD83D\uDE80 Cold-Start",flag:"\uD83C\uDDE8\uD83C\uDDF3",lines:[
+  {lang:"zh-cn",nav:{path:"cn",slide:null},text:"\u5927\u9646\u542F\u52A8\u4EA7\u54C1\uFF1A\u559C\u9A6C\u62C9\u96C5\u514D\u8D39\u6536\u542C\u3002\u5148\u5EFA\u7ACB\u542C\u4F17\uFF0C\u518D\u53D8\u73B0\u3002\u4E0D\u4F7F\u7528\u4E34\u5E8A\u5FC3\u7406\u5065\u5EB7\u8BED\u8A00\u3002\u4F7F\u7528\u6210\u957F\u548C\u8C03\u8282\u7684\u8868\u8FBE\u65B9\u5F0F\u3002"},
+  {lang:"en",nav:{path:"cn",slide:null},text:"Mainland cold-start: free on Ximalaya to build audience first. No clinical mental health language. Use growth and regulation framing. Fast-cut Douyin format for social discovery. Community-driven via WeChat groups."},
+  {lang:"en",nav:{path:"cn",slide:null},text:"HK cold-start: HK$8 Quick Reset on Google Play HK. SG cold-start: S$1.49 Quick Reset on Google Play SG. Both use standard cold-start playbook with local pricing and ARC review strategy."},
+]},
+{path:"cn",slide:null,label:"\uD83D\uDCB0 Revenue",flag:"\uD83C\uDDE8\uD83C\uDDF3",lines:[
+  {lang:"en",nav:{path:"cn",slide:null},text:"China revenue projection: $1,000 to $5,000 Year One organic via Ximalaya. Mainland is the largest opportunity but the hardest to enter. HK projection: $1,000 to $4,000 Year One. SG projection: $800 to $3,000 Year One. Combined Greater China: $2,800 to $12,000 Year One."},
+  {lang:"en",nav:{path:"cn",slide:null},text:"147 translated atoms for zh-CN. 243 for zh-HK. 243 for zh-SG. 240 Chinese market book specifications ready. 36 authors per market. The pipeline is built. The content is translated. The opportunity is now."},
+  {lang:"zh-cn",nav:{path:"cn",slide:null},text:"Pearl Prime\u5C06\u53E4\u8001\u667A\u6167\u5E26\u7ED9\u4E2D\u56FD\u7684\u4E0B\u4E00\u4EE3\u3002\u559C\u9A6C\u62C9\u96C53.45\u4EBF\u7528\u6237\u3002\u5FAE\u4FE1\u8BFB\u4E66\u3002\u62B6\u97F3\u3002\u673A\u4F1A\u5C31\u5728\u73B0\u5728\u3002"},
 ]},
 ];
 
@@ -754,8 +830,8 @@ var DECK_SCRIPTS = {
   briefing_kr: SCRIPTS_BRIEFING_KR,
   briefing_fr: SCRIPTS_BRIEFING_FR,
   briefing_de: SCRIPTS_BRIEFING_DE,
-  briefing_id: SCRIPTS_BRIEFING_ID,
-  briefing_br: SCRIPTS_BRIEFING_BR
+  briefing_tw: SCRIPTS_BRIEFING_TW,
+  briefing_cn: SCRIPTS_BRIEFING_CN
 };
 
 // ── READ URL PARAM ────────────────────────────────────────
@@ -779,6 +855,47 @@ if (deckId && DECK_SCRIPTS[deckId]) {
   // No param — show selector
   document.getElementById("deck-selector").classList.remove("hidden");
   document.getElementById("app").classList.add("hidden");
+}
+
+// ══════════════════════════════════════════════════════════
+// AUDIO MANIFEST — pre-generated MP3 narration files
+// Each deck maps to an array of sections; each section is an
+// array of MP3 filenames (one per line in the SCRIPTS array).
+// When a file exists, speakLine plays the MP3 instead of TTS.
+// ══════════════════════════════════════════════════════════
+var AUDIO_BASE = "assets/audio/";
+var AUDIO_MANIFEST = {
+  intro:[["intro/00_00_en.mp3","intro/00_01_en.mp3","intro/00_02_en.mp3"],["intro/01_00_en.mp3","intro/01_01_en.mp3","intro/01_02_en.mp3"],["intro/02_00_en.mp3","intro/02_01_en.mp3"],["intro/03_00_en.mp3","intro/03_01_en.mp3"],["intro/04_00_en.mp3","intro/04_01_en.mp3"],["intro/05_00_en.mp3","intro/05_01_en.mp3","intro/05_02_en.mp3"],["intro/06_00_en.mp3","intro/06_01_en.mp3"],["intro/07_00_en.mp3","intro/07_01_en.mp3"],["intro/08_00_en.mp3","intro/08_01_en.mp3"],["intro/09_00_ja.mp3","intro/09_01_en.mp3","intro/09_02_en.mp3","intro/09_03_ja.mp3","intro/09_04_zh-cn.mp3"],["intro/10_00_ja.mp3","intro/10_01_en.mp3","intro/10_02_zh-cn.mp3"],["intro/11_00_ja.mp3","intro/11_01_en.mp3"],["intro/12_00_ja.mp3","intro/12_01_en.mp3","intro/12_02_zh-cn.mp3"],["intro/13_00_ja.mp3","intro/13_01_en.mp3"],["intro/14_00_ja.mp3","intro/14_01_en.mp3","intro/14_02_zh-cn.mp3"],["intro/15_00_ja.mp3","intro/15_01_en.mp3"],["intro/16_00_ja.mp3","intro/16_01_en.mp3","intro/16_02_en.mp3","intro/16_03_zh-cn.mp3"],["intro/17_00_ja.mp3","intro/17_01_en.mp3"],["intro/18_00_ja.mp3","intro/18_01_en.mp3"],["intro/19_00_zh-tw.mp3","intro/19_01_en.mp3","intro/19_02_en.mp3"],["intro/20_00_zh-tw.mp3","intro/20_01_en.mp3"],["intro/21_00_zh-cn.mp3","intro/21_01_en.mp3","intro/21_02_en.mp3"],["intro/22_00_zh-cn.mp3","intro/22_01_en.mp3"],[null,"intro/23_01_en.mp3","intro/23_02_en.mp3"],[null,"intro/24_01_en.mp3"]],
+  marketing:[["marketing/00_00_en.mp3","marketing/00_01_en.mp3"],["marketing/01_00_en.mp3","marketing/01_01_en.mp3","marketing/01_02_en.mp3"],["marketing/02_00_en.mp3","marketing/02_01_en.mp3","marketing/02_02_en.mp3","marketing/02_03_en.mp3","marketing/02_04_en.mp3"],["marketing/03_00_ja.mp3","marketing/03_01_en.mp3","marketing/03_02_en.mp3","marketing/03_03_ja.mp3","marketing/03_04_en.mp3","marketing/03_05_en.mp3"],[null,"marketing/04_01_en.mp3","marketing/04_02_en.mp3","marketing/04_03_en.mp3"],["marketing/05_00_zh-cn.mp3","marketing/05_01_en.mp3","marketing/05_02_en.mp3","marketing/05_03_en.mp3","marketing/05_04_zh-cn.mp3","marketing/05_05_en.mp3"],[null,"marketing/06_01_en.mp3","marketing/06_02_en.mp3","marketing/06_03_en.mp3","marketing/06_04_en.mp3"],["marketing/07_00_en.mp3","marketing/07_01_en.mp3","marketing/07_02_en.mp3","marketing/07_03_en.mp3","marketing/07_04_en.mp3"],["marketing/08_00_en.mp3","marketing/08_01_en.mp3","marketing/08_02_en.mp3","marketing/08_03_en.mp3","marketing/08_04_en.mp3","marketing/08_05_en.mp3"],["marketing/09_00_en.mp3","marketing/09_01_en.mp3","marketing/09_02_en.mp3","marketing/09_03_en.mp3"],["marketing/10_00_en.mp3","marketing/10_01_en.mp3","marketing/10_02_en.mp3","marketing/10_03_en.mp3"],["marketing/11_00_en.mp3","marketing/11_01_en.mp3","marketing/11_02_en.mp3","marketing/11_03_en.mp3"],["marketing/12_00_en.mp3","marketing/12_01_en.mp3","marketing/12_02_en.mp3","marketing/12_03_en.mp3"],["marketing/13_00_en.mp3","marketing/13_01_en.mp3","marketing/13_02_ja.mp3","marketing/13_03_zh-cn.mp3",null]],
+  briefing_us:[["briefing_us/00_00_en.mp3","briefing_us/00_01_en.mp3","briefing_us/00_02_en.mp3","briefing_us/00_03_en.mp3"],["briefing_us/01_00_en.mp3","briefing_us/01_01_en.mp3","briefing_us/01_02_en.mp3","briefing_us/01_03_en.mp3"],["briefing_us/02_00_en.mp3","briefing_us/02_01_en.mp3","briefing_us/02_02_en.mp3"],["briefing_us/03_00_en.mp3","briefing_us/03_01_en.mp3","briefing_us/03_02_en.mp3"],["briefing_us/04_00_en.mp3","briefing_us/04_01_en.mp3","briefing_us/04_02_en.mp3"],["briefing_us/05_00_en.mp3","briefing_us/05_01_en.mp3","briefing_us/05_02_en.mp3"]],
+  briefing_jp:[["briefing_jp/00_00_ja.mp3","briefing_jp/00_01_en.mp3","briefing_jp/00_02_en.mp3"],["briefing_jp/01_00_en.mp3","briefing_jp/01_01_en.mp3","briefing_jp/01_02_en.mp3"],["briefing_jp/02_00_ja.mp3","briefing_jp/02_01_en.mp3","briefing_jp/02_02_en.mp3"],["briefing_jp/03_00_en.mp3","briefing_jp/03_01_ja.mp3","briefing_jp/03_02_en.mp3"],["briefing_jp/04_00_ja.mp3","briefing_jp/04_01_en.mp3","briefing_jp/04_02_en.mp3"],["briefing_jp/05_00_ja.mp3","briefing_jp/05_01_en.mp3","briefing_jp/05_02_en.mp3"]],
+  briefing_kr:[[null,"briefing_kr/00_01_en.mp3","briefing_kr/00_02_en.mp3"],["briefing_kr/01_00_en.mp3","briefing_kr/01_01_en.mp3","briefing_kr/01_02_en.mp3"],[null,"briefing_kr/02_01_en.mp3","briefing_kr/02_02_en.mp3","briefing_kr/02_03_en.mp3"],[null,"briefing_kr/03_01_en.mp3","briefing_kr/03_02_en.mp3","briefing_kr/03_03_en.mp3"]],
+  briefing_fr:[[null,"briefing_fr/00_01_en.mp3","briefing_fr/00_02_en.mp3","briefing_fr/00_03_en.mp3"],[null,"briefing_fr/01_01_en.mp3","briefing_fr/01_02_en.mp3"],[null,"briefing_fr/02_01_en.mp3","briefing_fr/02_02_en.mp3"],["briefing_fr/03_00_en.mp3","briefing_fr/03_01_en.mp3"],[null,"briefing_fr/04_01_en.mp3","briefing_fr/04_02_en.mp3"],["briefing_fr/05_00_en.mp3","briefing_fr/05_01_en.mp3",null]],
+  briefing_de:[[null,"briefing_de/00_01_en.mp3","briefing_de/00_02_en.mp3"],[null,"briefing_de/01_01_en.mp3","briefing_de/01_02_en.mp3"],[null,"briefing_de/02_01_en.mp3","briefing_de/02_02_en.mp3"],["briefing_de/03_00_en.mp3","briefing_de/03_01_en.mp3"],[null,"briefing_de/04_01_en.mp3","briefing_de/04_02_en.mp3"],["briefing_de/05_00_en.mp3","briefing_de/05_01_en.mp3",null]],
+  briefing_tw:[["briefing_tw/00_00_zh-tw.mp3","briefing_tw/00_01_en.mp3","briefing_tw/00_02_en.mp3"],["briefing_tw/01_00_zh-tw.mp3","briefing_tw/01_01_en.mp3","briefing_tw/01_02_en.mp3"],["briefing_tw/02_00_zh-tw.mp3","briefing_tw/02_01_en.mp3","briefing_tw/02_02_en.mp3"],["briefing_tw/03_00_zh-tw.mp3","briefing_tw/03_01_en.mp3","briefing_tw/03_02_en.mp3"],["briefing_tw/04_00_en.mp3","briefing_tw/04_01_en.mp3","briefing_tw/04_02_zh-tw.mp3"]],
+  briefing_cn:[["briefing_cn/00_00_zh-cn.mp3","briefing_cn/00_01_en.mp3","briefing_cn/00_02_en.mp3"],["briefing_cn/01_00_zh-cn.mp3","briefing_cn/01_01_en.mp3","briefing_cn/01_02_en.mp3"],["briefing_cn/02_00_zh-cn.mp3","briefing_cn/02_01_en.mp3","briefing_cn/02_02_en.mp3"],["briefing_cn/03_00_zh-cn.mp3","briefing_cn/03_01_en.mp3","briefing_cn/03_02_en.mp3","briefing_cn/03_03_en.mp3"],["briefing_cn/04_00_zh-cn.mp3","briefing_cn/04_01_en.mp3","briefing_cn/04_02_en.mp3"],["briefing_cn/05_00_en.mp3","briefing_cn/05_01_en.mp3","briefing_cn/05_02_zh-cn.mp3"]]
+};
+
+var _activeAudio = null;
+
+function getAudioPath(sectionIdx, lineIdx) {
+  if (!activeDeck || !AUDIO_MANIFEST[activeDeck]) return null;
+  var sections = AUDIO_MANIFEST[activeDeck];
+  if (sectionIdx < 0 || sectionIdx >= sections.length) return null;
+  var seg = sections[sectionIdx];
+  if (lineIdx < 0 || lineIdx >= seg.length) return null;
+  if (!seg[lineIdx]) return null;
+  return AUDIO_BASE + seg[lineIdx];
+}
+
+function stopActiveAudio() {
+  if (_activeAudio) {
+    _activeAudio.pause();
+    _activeAudio.currentTime = 0;
+    _activeAudio.onended = null;
+    _activeAudio.onerror = null;
+    _activeAudio = null;
+  }
 }
 
 // ══════════════════════════════════════════════════════════
@@ -908,6 +1025,22 @@ function speakLine(ln, li, session, cb) {
   if (session !== state.session) { cb(false); return; }
   if (ln.nav) frameNav(ln.nav.path, ln.nav.slide);
   synth.cancel();
+  stopActiveAudio();
+
+  // Try MP3 audio first
+  var mp3 = getAudioPath(state.curIdx, li);
+  if (mp3) {
+    var a = new Audio(mp3);
+    _activeAudio = a;
+    a.onended = function() { _activeAudio = null; if (session === state.session) cb(true); };
+    a.onerror = function() { _activeAudio = null; speakLineTTS(ln, li, session, cb); };
+    a.play().catch(function() { _activeAudio = null; speakLineTTS(ln, li, session, cb); });
+    return;
+  }
+  speakLineTTS(ln, li, session, cb);
+}
+
+function speakLineTTS(ln, li, session, cb) {
   var u = new SpeechSynthesisUtterance(ln.text);
   u.lang = langMap[ln.lang] || "en-US";
   u.rate = parseFloat(document.getElementById("spd").value);
@@ -957,6 +1090,7 @@ function playFrom(i) {
 function killSpeech() {
   state.session++;
   synth.cancel();
+  stopActiveAudio();
 }
 
 function doPlay() {
@@ -1375,23 +1509,11 @@ SLIDE_VISUALS["briefing_de:Revenue"]=function(vp){
   _activeCharts.push(c);
 };
 
-SLIDE_VISUALS["briefing_id:Platform Stack"]=function(vp){
-  vp.innerHTML='<div class="vp-title">Indonesia \u2014 275M Mobile-First</div>'
-  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">275M</div><div class="vp-card-lbl">Population</div></div>'
-  +'<div class="vp-card"><div class="vp-card-val">73%</div><div class="vp-card-lbl">Smartphone</div></div>'
-  +'<div class="vp-card"><div class="vp-card-val">125M</div><div class="vp-card-lbl">TikTok</div></div>'
-  +'<div class="vp-card"><div class="vp-card-val">Rp 15K</div><div class="vp-card-lbl">Cold-Start</div></div></div>';
-};
-SLIDE_VISUALS["briefing_id:Mobile"]=SLIDE_VISUALS["briefing_id:Platform Stack"];
-
-SLIDE_VISUALS["briefing_br:Platform Stack"]=function(vp){
-  vp.innerHTML='<div class="vp-title">Brazil \u2014 Autoajuda</div>'
-  +'<div class="vp-grid g4"><div class="vp-card"><div class="vp-card-val">215M</div><div class="vp-card-lbl">Population</div></div>'
-  +'<div class="vp-card"><div class="vp-card-val">10M</div><div class="vp-card-lbl">Skeelo</div></div>'
-  +'<div class="vp-card"><div class="vp-card-val">R$4.99</div><div class="vp-card-lbl">Cold-Start</div></div>'
-  +'<div class="vp-card"><div class="vp-card-val">$2K\u20138K</div><div class="vp-card-lbl">Year 1</div></div></div>';
-};
-SLIDE_VISUALS["briefing_br:Autoajuda"]=SLIDE_VISUALS["briefing_br:Platform Stack"];
+SLIDE_VISUALS["briefing_tw:Platform Stack"]=function(vp){vp.innerHTML='<div class="vp-table"><table><tr><th>Platform</th><th>Type</th><th>Revenue Share</th></tr><tr><td>Google Play TW</td><td>Ebook</td><td>52%</td></tr><tr><td>Kobo Taiwan</td><td>Ebook</td><td>45-70%</td></tr><tr><td>Readmoo</td><td>Ebook</td><td>50%</td></tr><tr><td>Apple Books TW</td><td>Ebook</td><td>70%</td></tr><tr><td>KKBOX</td><td>Audio</td><td>Varies</td></tr><tr><td>Spotify TW</td><td>Audio</td><td>Via Findaway</td></tr><tr><td>LINE Taiwan</td><td>Social</td><td>Organic</td></tr></table></div>';};
+SLIDE_VISUALS["briefing_tw:Cultural Framing"]=SLIDE_VISUALS["briefing_tw:Platform Stack"];
+SLIDE_VISUALS["briefing_cn:Platform Stack"]=function(vp){vp.innerHTML='<div class="vp-table"><table><tr><th>Platform</th><th>Type</th><th>MAU</th></tr><tr><td>Ximalaya</td><td>Audio</td><td>345M</td></tr><tr><td>WeChat Read</td><td>Ebook</td><td>—</td></tr><tr><td>Dedao</td><td>Knowledge</td><td>—</td></tr><tr><td>Douyin</td><td>Video</td><td>750M</td></tr><tr><td>Xiaohongshu</td><td>Lifestyle</td><td>200M</td></tr><tr><td>Bilibili</td><td>Video</td><td>315M</td></tr></table></div>';};
+SLIDE_VISUALS["briefing_cn:Ximalaya"]=SLIDE_VISUALS["briefing_cn:Platform Stack"];
+SLIDE_VISUALS["briefing_cn:Hong Kong"]=SLIDE_VISUALS["briefing_cn:Platform Stack"];
 
 // ── VISUAL RENDERING ENGINE ──
 function showVisual(scriptItem){

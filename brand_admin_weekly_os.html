@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brand Admin -- Pearl Prime</title>
+<title data-i18n="page.title">Brand Admin -- Pearl Prime</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand-wizard-app/public/assets/icons.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e0a06;color:#faf6f0;overflow-x:hidden}
@@ -143,12 +144,12 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 
 <!-- Top Bar -->
 <div id="topbar">
-  <h1>Brand Admin</h1>
+  <h1 data-i18n="topbar.title">Brand Admin</h1>
   <span class="pill" id="brand-pill">No brand</span>
   <div class="nav-pills">
-    <button class="nav-pill active" data-phase="1" onclick="showPhase(1)">Setup</button>
-    <button class="nav-pill locked" data-phase="2" onclick="showPhase(2)">Upload</button>
-    <button class="nav-pill locked" data-phase="3" onclick="showPhase(3)">Weekly</button>
+    <button class="nav-pill active" data-phase="1" data-i18n="nav.setup" onclick="showPhase(1)">Setup</button>
+    <button class="nav-pill locked" data-phase="2" data-i18n="nav.upload" onclick="showPhase(2)">Upload</button>
+    <button class="nav-pill locked" data-phase="3" data-i18n="nav.weekly" onclick="showPhase(3)">Weekly</button>
   </div>
   <div class="progress-text" id="top-progress">Phase 1 of 3</div>
 </div>
@@ -163,9 +164,9 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
     <div class="phase-dot" id="pd3">3</div>
   </div>
   <div style="display:flex;justify-content:space-between">
-    <span class="phase-label active" id="pl1">Setup</span>
-    <span class="phase-label" id="pl2">First Upload</span>
-    <span class="phase-label" id="pl3">Weekly Rhythm</span>
+    <span class="phase-label active" id="pl1" data-i18n="phase.setup">Setup</span>
+    <span class="phase-label" id="pl2" data-i18n="phase.firstUpload">First Upload</span>
+    <span class="phase-label" id="pl3" data-i18n="phase.weeklyRhythm">Weekly Rhythm</span>
   </div>
   <div class="bar-track"><div class="bar-fill" id="bar-fill" style="width:0"></div></div>
   <div class="pct-text" id="pct-text">0% complete</div>
@@ -185,18 +186,18 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 
   <!-- Quick Links -->
   <div style="margin-top:40px;padding-top:20px;border-top:1px solid var(--border);text-align:center">
-    <div style="font-family:var(--mono);font-size:.45rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Quick Platform Links</div>
+    <div style="font-family:var(--mono);font-size:.45rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px" data-i18n="quicklinks.heading">Quick Platform Links</div>
     <div class="quick-links">
-      <a class="qlink" href="https://kdp.amazon.com/bookshelf" target="_blank">KDP</a>
-      <a class="qlink" href="https://play.google.com/books/publish" target="_blank">Google Play</a>
-      <a class="qlink" href="https://authors.apple.com" target="_blank">Apple Books</a>
-      <a class="qlink" href="https://studio.youtube.com" target="_blank">YouTube</a>
-      <a class="qlink" href="https://www.tiktok.com/creator" target="_blank">TikTok</a>
-      <a class="qlink" href="https://www.webtoons.com/en/challenge/publish" target="_blank">WEBTOON</a>
-      <a class="qlink" href="https://writinglife.kobobooks.com" target="_blank">Kobo</a>
-      <a class="qlink" href="https://draft2digital.com" target="_blank">D2D</a>
-      <a class="qlink" href="https://www.instagram.com" target="_blank">Instagram</a>
-      <a class="qlink" href="https://manager.line.biz" target="_blank">LINE</a>
+      <a class="qlink" href="https://kdp.amazon.com/bookshelf" target="_blank" data-i18n="quicklinks.kdp">KDP</a>
+      <a class="qlink" href="https://play.google.com/books/publish" target="_blank" data-i18n="quicklinks.googlePlay">Google Play</a>
+      <a class="qlink" href="https://authors.apple.com" target="_blank" data-i18n="quicklinks.appleBooks">Apple Books</a>
+      <a class="qlink" href="https://studio.youtube.com" target="_blank" data-i18n="quicklinks.youtube">YouTube</a>
+      <a class="qlink" href="https://www.tiktok.com/creator" target="_blank" data-i18n="quicklinks.tiktok">TikTok</a>
+      <a class="qlink" href="https://www.webtoons.com/en/challenge/publish" target="_blank" data-i18n="quicklinks.webtoon">WEBTOON</a>
+      <a class="qlink" href="https://writinglife.kobobooks.com" target="_blank" data-i18n="quicklinks.kobo">Kobo</a>
+      <a class="qlink" href="https://draft2digital.com" target="_blank" data-i18n="quicklinks.d2d">D2D</a>
+      <a class="qlink" href="https://www.instagram.com" target="_blank" data-i18n="quicklinks.instagram">Instagram</a>
+      <a class="qlink" href="https://manager.line.biz" target="_blank" data-i18n="quicklinks.line">LINE</a>
     </div>
     <div style="margin-top:16px">
       <a class="action-btn" onclick="resetBrand()" style="cursor:pointer">Change Brand</a>
@@ -354,7 +355,7 @@ function renderProgress(){
 // ── Render Phase 1: Setup ──
 function renderPhase1(){
   const el=document.getElementById('phase1'), s=bs(), b=brand, sl=slug(b.d);
-  let h=`<div class="phase-title">Phase 1: Setup</div><div class="phase-sub">Create accounts on each platform. Check off when done.</div>`;
+  let h=`<div class="phase-title" data-i18n="phase1.title">Phase 1: Setup</div><div class="phase-sub" data-i18n="phase1.subtitle">Create accounts on each platform. Check off when done.</div>`;
   SETUP.forEach((st,i)=>{
     const done=s.setup[st.id];
     const cid='s1_'+st.id;
@@ -405,7 +406,7 @@ function renderPhase1(){
 function renderPhase2(){
   const el=document.getElementById('phase2'), s=bs(), b=brand, sl=slug(b.d);
   const locked=setupPct()<100;
-  let h=`<div class="phase-title">Phase 2: First Upload</div><div class="phase-sub">${locked?'Complete Phase 1 to unlock.':'Upload your first week of content to every platform.'}</div>`;
+  let h=`<div class="phase-title" data-i18n="phase2.title">Phase 2: First Upload</div><div class="phase-sub">${locked?'Complete Phase 1 to unlock.':'Upload your first week of content to every platform.'}</div>`;
   if(locked){ h=`<div class="locked-overlay">${h}<div style="height:200px"></div></div>`; el.innerHTML=h; return; }
 
   // Package download
@@ -449,7 +450,7 @@ function countUpload(u){ const s=bs(); let c=0; for(let i=1;i<=u.titles;i++) if(
 function renderPhase3(){
   const el=document.getElementById('phase3'), s=bs();
   const locked=setupPct()<100||uploadPct()<100;
-  let h=`<div class="phase-title">Phase 3: Weekly Rhythm</div><div class="phase-sub">${locked?'Complete Phases 1 & 2 to unlock.':'Your repeating weekly workflow. Check off each day.'}</div>`;
+  let h=`<div class="phase-title" data-i18n="phase3.title">Phase 3: Weekly Rhythm</div><div class="phase-sub">${locked?'Complete Phases 1 & 2 to unlock.':'Your repeating weekly workflow. Check off each day.'}</div>`;
   if(locked){ h=`<div class="locked-overlay">${h}<div style="height:200px"></div></div>`; el.innerHTML=h; return; }
 
   h+=`<div style="font-family:var(--mono);font-size:.55rem;color:var(--dim);margin-bottom:12px">This week: ${weekPct()}% complete</div>`;
@@ -538,7 +539,7 @@ function renderPicker(){
   const el=document.getElementById('picker');
   el.classList.add('show');
   document.getElementById('main-wrap').style.display='none';
-  let h=`<h1>Brand Admin</h1><p class="sub">Select a brand to begin</p><div class="brand-grid">`;
+  let h=`<h1 data-i18n="picker.title">Brand Admin</h1><p class="sub" data-i18n="picker.subtitle">Select a brand to begin</p><div class="brand-grid">`;
   for(const [bid,b] of Object.entries(B)){
     h+=`<div class="brand-card" onclick="selectBrand('${bid}')">
       <h3>${b.d}</h3>
@@ -583,5 +584,7 @@ function init(){
 }
 init();
 </script>
+<script src="brand-wizard-app/public/assets/icons.js"></script>
+<script src="brand-wizard-app/public/assets/i18n.js"></script>
 </body>
 </html>
