@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pearl Prime — Unified Presenter</title>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" as="style">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
@@ -11,6 +12,19 @@
 html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e0a06;color:#faf6f0}
 body.presenter-active{overflow:hidden}
 :root{--acc:#b45309;--acc2:#d97706;--gold:linear-gradient(135deg,#f5d0a9 0%,#d97706 40%,#b45309 100%);--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace}
+
+/* ── ACCESSIBILITY + STRUCTURAL FIXES ────────────── */
+/* Focus ring — visible for keyboard, hidden for mouse */
+:focus-visible{outline:2px solid #d97706;outline-offset:2px;border-radius:2px}
+:focus:not(:focus-visible){outline:none}
+/* Contrast floor — raise opacity on secondary text from .3 to .55 */
+.ps-card-body,.ds-card-desc,.vp-card-lbl,.vp-dbox-sub,.ti-lbl,.ps-sub,.ps-card-enter{color:rgba(250,246,240,.55)!important}
+/* Font size floor — nothing below 10px */
+.tl-sec,.vp-badge,.ps-card-subtitle,.ps-global-desc,.ps-divider-label,.ds-card-meta{font-size:max(.625rem,inherit)!important}
+/* Progress bar visibility */
+#prog-track{height:4px}
+/* Firefox scrollbar */
+*{scrollbar-color:rgba(180,83,9,.3) transparent;scrollbar-width:thin}
 
 /* ── DEPTH + ATMOSPHERE ──────────────────────────── */
 @keyframes ambientShift{0%{background-position:50% 20%}25%{background-position:55% 18%}50%{background-position:48% 22%}75%{background-position:52% 19%}100%{background-position:50% 20%}}
@@ -1081,7 +1095,7 @@ function updSpine() {
     var lbl = stages && stages[i] ? stages[i] : '';
     html += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">'
       + '<div style="width:100%;height:3px;border-radius:1px;background:' + barColor + ';transition:background .3s"></div>'
-      + (lbl ? '<div style="font-family:var(--mono);font-size:.28rem;letter-spacing:.06em;color:' + lblColor + ';transition:color .3s;white-space:nowrap">' + lbl + '</div>' : '')
+      + (lbl ? '<div style="font-family:var(--mono);font-size:.625rem;letter-spacing:.04em;color:' + lblColor + ';transition:color .3s;white-space:nowrap">' + lbl + '</div>' : '')
       + '</div>';
   }
   el.innerHTML = html;
@@ -1685,13 +1699,13 @@ var MARKET_SYSTEM = {
 function getSystemReveal(){
   var m=MARKET_SYSTEM[activeDeck]||{dist:"Local platforms",mkt:"48Social \u00b7 Email",tag:"Same engine \u00b7 Every market \u00b7 Every format"};
   return '<div style="margin-top:1.2rem;padding-top:.8rem;border-top:1px solid rgba(180,83,9,.1)">'
-  +'<div style="font-family:var(--mono);font-size:.32rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,246,240,.12);text-align:center;margin-bottom:.6rem">The system</div>'
+  +'<div style="font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,240,.2);text-align:center;margin-bottom:.6rem">The system</div>'
   +'<div class="vp-diagram">'
   +'<div class="vp-dbox" style="border-color:rgba(217,119,6,.3)"><div class="vp-dbox-title" style="color:#fbbf24">Content</div><div class="vp-dbox-sub">Ebook \u00b7 Audio \u00b7 Manga</div></div><div class="vp-arrow">\u2192</div>'
   +'<div class="vp-dbox" style="border-color:rgba(217,119,6,.3)"><div class="vp-dbox-title" style="color:#fbbf24">Distribution</div><div class="vp-dbox-sub">'+m.dist+'</div></div><div class="vp-arrow">\u2192</div>'
   +'<div class="vp-dbox" style="border-color:rgba(217,119,6,.3)"><div class="vp-dbox-title" style="color:#fbbf24">Marketing</div><div class="vp-dbox-sub">'+m.mkt+'</div></div><div class="vp-arrow">\u2192</div>'
   +'<div class="vp-dbox" style="border-color:rgba(34,197,94,.3)"><div class="vp-dbox-title" style="color:#4ade80">Revenue</div><div class="vp-dbox-sub">90.6% \u2192 You</div></div></div>'
-  +'<div style="font-family:var(--mono);font-size:.3rem;letter-spacing:.06em;color:rgba(250,246,240,.1);text-align:center;margin-top:.4rem">'+m.tag+'</div></div>';
+  +'<div style="font-family:var(--mono);font-size:.625rem;letter-spacing:.04em;color:rgba(250,246,240,.18);text-align:center;margin-top:.4rem">'+m.tag+'</div></div>';
 }
 // SYSTEM_REVEAL_HTML replaced by getSystemReveal() called per-slide
 
@@ -2092,7 +2106,7 @@ function showVisual(scriptItem){
   var keys=Object.keys(SLIDE_VISUALS);
   // context headline from framing layer
   var framing=DECK_FRAMING[dn];
-  var ctxHtml=framing&&framing.context?'<div style="font-family:var(--mono);font-size:.36rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,240,.15);text-align:center;margin-bottom:.4rem">'+framing.context+'</div>':'';
+  var ctxHtml=framing&&framing.context?'<div style="font-family:var(--mono);font-size:.625rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,246,240,.25);text-align:center;margin-bottom:.4rem">'+framing.context+'</div>':'';
   // exact deck:label match
   for(var k=0;k<keys.length;k++){
     var p=keys[k].split(":");
