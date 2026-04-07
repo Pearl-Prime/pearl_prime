@@ -194,13 +194,10 @@ var LANE_CHIP={
 
 function goLearn(){
   if(!currentLane)return;
-  var deck=LANE_DECK[currentLane]||"intro";
   var chip=LANE_CHIP[currentLane]||"all";
-  if(deck.indexOf("briefing_")===0){
-    window.location.href='presenter.html?deck='+deck;
-  } else {
-    window.location.href='presenter.html?deck='+deck+'&lane='+chip;
-  }
+  var briefing=LANE_DECK[currentLane]||"intro";
+  // Guided path: intro → marketing → market briefing
+  window.location.href='presenter.html?deck=intro&lane='+chip+'&briefing='+briefing;
 }
 function goOnboarding(){
   var chip=LANE_CHIP[currentLane]||"";

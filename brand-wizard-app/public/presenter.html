@@ -940,6 +940,8 @@ var DECK_SCRIPTS = {
 // ── READ URL PARAM ────────────────────────────────────────
 var params = new URLSearchParams(window.location.search);
 var deckId = params.get("deck");
+var paramLane = params.get("lane") || "";
+var paramBriefing = params.get("briefing") || "";
 
 var SCRIPTS, activeMeta, activeDeck;
 
@@ -1345,6 +1347,32 @@ var DECK_NEXT = {
   briefing_de: null
 };
 
+// ── GUIDED FLOW OVERRIDE ─────────────────────────────────
+// When user arrives via goLearn() (entry page), URL carries
+// ?lane=xx&briefing=yy so we chain: intro → marketing → market briefing
+if (paramLane && paramBriefing) {
+  var _carry = "&lane=" + paramLane + "&briefing=" + paramBriefing;
+  var _briefingMeta = DECK_META[paramBriefing];
+  var _briefingLabel = _briefingMeta ? _briefingMeta.title : "Market Briefing";
+
+  // intro → marketing (carry params forward)
+  DECK_NEXT["intro"] = {
+    id: "marketing",
+    label: "Marketing Intelligence",
+    desc: "See the growth engine, distribution strategy, and revenue model.",
+    urlOverride: "?deck=marketing" + _carry
+  };
+  // marketing → user's specific market briefing
+  if (paramBriefing !== "intro" && DECK_SCRIPTS[paramBriefing]) {
+    DECK_NEXT["marketing"] = {
+      id: paramBriefing,
+      label: _briefingLabel,
+      desc: "Your market-specific briefing, platforms, and launch plan.",
+      urlOverride: "?deck=" + paramBriefing + "&lane=" + paramLane
+    };
+  }
+}
+
 function endPrez() {
   state.playing = false;
   stopClk();
@@ -1368,8 +1396,9 @@ function endPrez() {
 
   // Next path suggestion
   if (next) {
+    var nextHref = next.urlOverride || ("?deck=" + next.id);
     html += '<div style="font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.4);margin-bottom:.6rem">Continue your journey</div>'
-      + '<a href="?deck=' + next.id + '" style="display:inline-block;background:rgba(180,83,9,.1);border:1px solid rgba(180,83,9,.25);border-radius:6px;padding:1rem 1.6rem;text-decoration:none;color:inherit;transition:all .25s;max-width:340px" onmouseover="this.style.borderColor=\'rgba(180,83,9,.5)\';this.style.background=\'rgba(180,83,9,.15)\'" onmouseout="this.style.borderColor=\'rgba(180,83,9,.25)\';this.style.background=\'rgba(180,83,9,.1)\'">'
+      + '<a href="' + nextHref + '" style="display:inline-block;background:rgba(180,83,9,.1);border:1px solid rgba(180,83,9,.25);border-radius:6px;padding:1rem 1.6rem;text-decoration:none;color:inherit;transition:all .25s;max-width:340px" onmouseover="this.style.borderColor=\'rgba(180,83,9,.5)\';this.style.background=\'rgba(180,83,9,.15)\'" onmouseout="this.style.borderColor=\'rgba(180,83,9,.25)\';this.style.background=\'rgba(180,83,9,.1)\'">'
       + '<div style="font-family:var(--serif);font-size:.95rem;color:var(--acc2)">' + next.label + ' \u2192</div>'
       + '<div style="font-size:.65rem;color:rgba(250,246,240,.55);margin-top:.3rem;line-height:1.6">' + next.desc + '</div></a>';
   } else {
