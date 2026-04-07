@@ -485,43 +485,19 @@ function renderPhase0(){
   const setupDone=SETUP.filter(st=>bs().setup[st.id]).length;
   const uploadsDone=UPLOADS.filter(u=>bs().upload[u.id+'_all']).length;
 
-  // Determine next best action
-  let nbaText='', nbaAction='', nbaPhase=0;
-  if(setupDone===0){
-    nbaText='Start by choosing your teacher and setting up platform accounts.';
-    nbaAction='<a class="pp-btn primary" href="teacher_select.html'+(brandId?'?brand='+brandId:'')+'">'+icon('play','sm')+' Choose Teacher</a>';
-    nbaPhase=0;
-  } else if(sp<100){
-    const remaining=SETUP.length-setupDone;
-    nbaText=remaining+' platform account'+(remaining>1?'s':'')+' remaining. Continue setup to unlock uploads.';
-    nbaAction='<button class="pp-btn primary" onclick="showPhase(1)">'+icon('arrow_right','sm')+' Continue Setup</button>';
-    nbaPhase=1;
-  } else if(up<100){
-    nbaText='Accounts ready. Upload your first week of content across all platforms.';
-    nbaAction='<button class="pp-btn primary" onclick="showPhase(2)">'+icon('upload','sm')+' Start Uploading</button>';
-    nbaPhase=2;
-  } else {
-    nbaText='All platforms live. Follow your weekly rhythm to keep content flowing.';
-    nbaAction='<button class="pp-btn primary" onclick="showPhase(3)">'+icon('calendar','sm')+' Weekly Ops</button>';
-    nbaPhase=3;
-  }
-
   let h='';
 
-  // Hero
+  // Hero — show teacher mode context from localStorage
+  const bookMode=JSON.parse(localStorage.getItem('phoenix_book_mode')||'{}');
+  const modeLabel=bookMode.mode==='teacher'
+    ? bookMode.teacherName+' \u00B7 '+bookMode.tradition
+    : bookMode.mode==='composite' ? 'Composite Teacher \u00B7 All Traditions' : '';
+
   h+='<div class="pp-hero" style="padding:1.5rem 0 2rem;text-align:left">';
   h+='<div class="pp-hero-title" style="text-align:left;font-size:clamp(1.4rem,3vw,2rem)" data-i18n="admin.overview.title">Operations Runway</div>';
   h+='<div class="pp-hero-sub" style="text-align:left" data-i18n="admin.overview.sub">'+b.d+(b.tm?' / '+b.t:'')+'</div>';
+  if(modeLabel) h+='<div style="font-family:var(--mono);font-size:.55rem;color:var(--acc2);margin-top:6px;letter-spacing:.06em">'+modeLabel+'</div>';
   h+='</div>';
-
-  // Next Best Action
-  h+='<div class="nba-callout">';
-  h+='<div class="nba-icon">'+icon('performance','accent lg')+'</div>';
-  h+='<div class="nba-body">';
-  h+='<div class="nba-label">Next Action</div>';
-  h+='<div class="nba-text">'+nbaText+'</div>';
-  h+='<div style="margin-top:10px">'+nbaAction+'</div>';
-  h+='</div></div>';
 
   // System Architecture Flow
   h+='<div class="section-hdr">'+icon('system','sm')+' <span class="section-hdr-title">System Architecture</span></div>';
