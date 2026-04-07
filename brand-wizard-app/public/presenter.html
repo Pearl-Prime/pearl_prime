@@ -1242,54 +1242,55 @@ function goSlide(d) {
 }
 
 // ── PER-MARKET FRAMING (context layer above system) ──
+// Pattern: "How [subject] [verb] through [mechanism]"
 var DECK_FRAMING = {
   briefing_us: {
-    context: "How ideas scale through media",
-    stages: ["Rhythm","Platforms","Marketing","Growth","Launch","Revenue"]
+    context: "How ideas scale through media and distribution",
+    stages: ["Rhythm","Distribution","Marketing","Growth","Launch","Revenue"]
   },
   briefing_jp: {
-    context: "How lineage becomes living transmission",
-    stages: ["Rhythm","Platforms","Manga","Discovery","Launch","Structure"]
+    context: "How lineage transmits through manga and audio",
+    stages: ["Rhythm","Distribution","Content","Discovery","Launch","Structure"]
   },
   briefing_kr: {
-    context: "Where achievement culture meets therapeutic content",
-    stages: ["Platforms","Advertising","Culture","Launch"]
+    context: "How high-pressure culture transforms through micro-content",
+    stages: ["Distribution","Advertising","Culture","Launch"]
   },
   briefing_tw: {
-    context: "How systems bridge culture and technology",
-    stages: ["Rhythm","Platforms","Culture","Launch","Revenue"]
+    context: "How wisdom bridges East and West through technology",
+    stages: ["Rhythm","Distribution","Culture","Launch","Revenue"]
   },
   briefing_cn: {
-    context: "How wisdom reaches 1.4 billion through local platforms",
-    stages: ["Rhythm","Platforms","Audio","HK + SG","Launch","Revenue"]
+    context: "How ancient wisdom reaches 1.4 billion through local platforms",
+    stages: ["Rhythm","Distribution","Audio","HK + SG","Launch","Revenue"]
   },
   briefing_fr: {
-    context: "Where philosophy meets manga at scale",
-    stages: ["Rhythm","Platforms","Manga","Social","Launch","Revenue"]
+    context: "How philosophy meets visual storytelling through manga",
+    stages: ["Rhythm","Distribution","Content","Social","Launch","Revenue"]
   },
   briefing_de: {
-    context: "Where precision systems meet evidence-based wellness",
-    stages: ["Rhythm","Platforms","Evidence","Social","Launch","Revenue"]
+    context: "How precision systems deliver measurable wellness outcomes",
+    stages: ["Rhythm","Distribution","Evidence","Social","Launch","Revenue"]
   },
   intro: {
-    context: "Ancient wisdom. Enlightened intelligence. One system.",
+    context: "One engine. Five markets. Ancient wisdom made operational.",
     stages: null
   },
   marketing: {
-    context: "312 brands. 13 markets. Data-driven strategy.",
+    context: "312 brands. 13 markets. Every number sourced.",
     stages: null
   }
 };
 
 var DECK_NEXT = {
-  intro: {id:"briefing_us",label:"US Briefing",desc:"Platform stack, upload guide, revenue projections."},
-  marketing: {id:"briefing_us",label:"US Briefing",desc:"Start with the US market operating guide."},
-  briefing_us: {id:"briefing_jp",label:"Japan Briefing",desc:"Manga pipeline, LINE, Piccoma, Audiobook.jp."},
-  briefing_jp: {id:"briefing_tw",label:"Taiwan Briefing",desc:"Readmoo, Kobo TW, 身心靈 framing."},
-  briefing_tw: {id:"briefing_cn",label:"China Briefing",desc:"Ximalaya, WeChat Read, HK + SG delivery."},
-  briefing_cn: {id:"briefing_kr",label:"Korea Briefing",desc:"Naver, Kakao, 빨리빨리 culture."},
-  briefing_kr: {id:"briefing_fr",label:"France Briefing",desc:"#1 EU manga market, philosophical framing."},
-  briefing_fr: {id:"briefing_de",label:"Germany Briefing",desc:"Evidence-based, Audible DE, long-form."},
+  intro: {id:"briefing_us",label:"United States",desc:"Enter the US media and distribution system."},
+  marketing: {id:"briefing_us",label:"United States",desc:"See the operating system in action."},
+  briefing_us: {id:"briefing_jp",label:"Japan",desc:"Activate through manga, temples, and lineage."},
+  briefing_jp: {id:"briefing_tw",label:"Taiwan",desc:"Bridge culture and technology across markets."},
+  briefing_tw: {id:"briefing_cn",label:"China",desc:"Scale through Ximalaya, WeChat, and Douyin."},
+  briefing_cn: {id:"briefing_kr",label:"Korea",desc:"Transform high-pressure culture through micro-content."},
+  briefing_kr: {id:"briefing_fr",label:"France",desc:"Enter Europe's largest manga market through philosophy."},
+  briefing_fr: {id:"briefing_de",label:"Germany",desc:"Deploy precision systems with measurable outcomes."},
   briefing_de: null
 };
 
@@ -1644,10 +1645,20 @@ SLIDE_VISUALS["intro:Incorporation"] = function(vp){
 // ══════════════════════════════════════════════════════════
 
 // ── US BRIEFING ──
+// ── SYSTEM REVEAL (shared across all briefing decks) ──
+var SYSTEM_REVEAL_HTML = '<div style="margin-top:1.2rem;padding-top:.8rem;border-top:1px solid rgba(180,83,9,.1)">'
+  +'<div style="font-family:var(--mono);font-size:.32rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,246,240,.12);text-align:center;margin-bottom:.6rem">The system</div>'
+  +'<div class="vp-diagram">'
+  +'<div class="vp-dbox" style="border-color:rgba(217,119,6,.3)"><div class="vp-dbox-title" style="color:#fbbf24">Content</div><div class="vp-dbox-sub">Ebook \u00b7 Audio \u00b7 Manga</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox" style="border-color:rgba(217,119,6,.3)"><div class="vp-dbox-title" style="color:#fbbf24">Distribution</div><div class="vp-dbox-sub">Local platforms</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox" style="border-color:rgba(217,119,6,.3)"><div class="vp-dbox-title" style="color:#fbbf24">Marketing</div><div class="vp-dbox-sub">48Social \u00b7 Email</div></div><div class="vp-arrow">\u2192</div>'
+  +'<div class="vp-dbox" style="border-color:rgba(34,197,94,.3)"><div class="vp-dbox-title" style="color:#4ade80">Revenue</div><div class="vp-dbox-sub">90.6% \u2192 You</div></div></div>'
+  +'<div style="font-family:var(--mono);font-size:.3rem;letter-spacing:.06em;color:rgba(250,246,240,.1);text-align:center;margin-top:.4rem">Same engine \u00b7 Every market \u00b7 Every format</div></div>';
+
 SLIDE_VISUALS["briefing_us:Weekly OS"]=function(vp){
   var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"Upload KDP, Google, Apple",c:"var(--acc)"},{d:"WED",t:"Submit audio Findaway",c:"var(--acc)"},{d:"THU",t:"Verify live / fix",c:"#f59e0b"},{d:"FRI",t:"Approve 48Social",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
-  vp.innerHTML='<div class="vp-title">US Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
-  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+  vp.innerHTML+='<div class="vp-title">US Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>'+SYSTEM_REVEAL_HTML;
 };
 SLIDE_VISUALS["briefing_us:Platform Stack"]=function(vp){
   vp.innerHTML='<div class="vp-title">US Platform Stack</div>'
@@ -1711,7 +1722,7 @@ SLIDE_VISUALS["briefing_us:Revenue"]=function(vp){
 SLIDE_VISUALS["briefing_jp:Weekly OS"]=function(vp){
   var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"Ebooks: Google JP, Kindle JP, Kobo",c:"var(--acc)"},{d:"WED",t:"Audio: Audiobook.jp, Spotify JP",c:"var(--acc)"},{d:"THU",t:"Manga: LINE Manga",c:"#f59e0b"},{d:"FRI",t:"Manga: Piccoma",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
   vp.innerHTML='<div class="vp-title">JP Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
-  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>'+SYSTEM_REVEAL_HTML;
 };
 SLIDE_VISUALS["briefing_jp:Platform Stack"]=function(vp){
   vp.innerHTML='<div class="vp-title">Japan Platform Stack</div>'
@@ -1814,7 +1825,7 @@ SLIDE_VISUALS["briefing_kr:Cold-Start"]=function(vp){
 SLIDE_VISUALS["briefing_tw:Weekly OS"]=function(vp){
   var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"Google Play, Kindle, Kobo TW",c:"var(--acc)"},{d:"WED",t:"Spotify TW via Findaway",c:"var(--acc)"},{d:"THU",t:"Readmoo + KKBOX",c:"#f59e0b"},{d:"FRI",t:"Review 48Social",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
   vp.innerHTML='<div class="vp-title">TW Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
-  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>'+SYSTEM_REVEAL_HTML;
 };
 SLIDE_VISUALS["briefing_tw:Platform Stack"]=function(vp){
   vp.innerHTML='<div class="vp-title">Taiwan Platform Stack</div>'
@@ -1862,7 +1873,7 @@ SLIDE_VISUALS["briefing_tw:Revenue"]=function(vp){
 SLIDE_VISUALS["briefing_cn:Weekly OS"]=function(vp){
   var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"WeChat Read + Dedao",c:"var(--acc)"},{d:"WED",t:"Ximalaya audio",c:"var(--acc)"},{d:"THU",t:"Bilibili video",c:"#f59e0b"},{d:"FRI",t:"Douyin + WeChat articles",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
   vp.innerHTML='<div class="vp-title">CN Weekly OS \u2014 Local Platforms Only</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
-  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>'+SYSTEM_REVEAL_HTML;
 };
 SLIDE_VISUALS["briefing_cn:Platform Stack"]=function(vp){
   vp.innerHTML='<div class="vp-title">China Platform Stack</div>'
@@ -1921,7 +1932,7 @@ SLIDE_VISUALS["briefing_cn:Revenue"]=function(vp){
 SLIDE_VISUALS["briefing_fr:Weekly OS"]=function(vp){
   var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"Kindle FR, Kobo FR, Google, Apple",c:"var(--acc)"},{d:"WED",t:"Audio: Spotify FR, Apple via Findaway",c:"var(--acc)"},{d:"THU",t:"Manga: Izneo + WEBTOON FR",c:"#f59e0b"},{d:"FRI",t:"Review 48Social",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
   vp.innerHTML='<div class="vp-title">FR Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
-  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>'+SYSTEM_REVEAL_HTML;
 };
 SLIDE_VISUALS["briefing_fr:Platform Stack"]=function(vp){
   vp.innerHTML='<div class="vp-title">France Platform Stack</div>'
@@ -1978,7 +1989,7 @@ SLIDE_VISUALS["briefing_fr:Revenue"]=function(vp){
 SLIDE_VISUALS["briefing_de:Weekly OS"]=function(vp){
   var d=[{d:"MON",t:"Receive packet",c:"var(--acc2)"},{d:"TUE",t:"Kindle DE, Thalia, Hugendubel, Google",c:"var(--acc)"},{d:"WED",t:"Audible DE + Spotify via Findaway",c:"var(--acc)"},{d:"THU",t:"Verify uploads",c:"#f59e0b"},{d:"FRI",t:"Review 48Social",c:"#22c55e"},{d:"SAT",t:"Revenue review",c:"#60a5fa"},{d:"SUN",t:"Plan & rest",c:"rgba(250,246,240,.3)"}];
   vp.innerHTML='<div class="vp-title">DE Weekly OS \u2014 3-5 hrs/week</div><div class="vp-grid" style="grid-template-columns:repeat(7,1fr);gap:.4rem">'
-  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>';
+  +d.map(function(x){return'<div class="vp-card" style="border-color:'+x.c+'"><div class="vp-card-val" style="font-size:.65rem;color:'+x.c+'">'+x.d+'</div><div class="vp-card-lbl" style="text-transform:none;letter-spacing:0;font-size:.38rem;line-height:1.4">'+x.t+'</div></div>';}).join("")+'</div>'+SYSTEM_REVEAL_HTML;
 };
 SLIDE_VISUALS["briefing_de:Platform Stack"]=function(vp){
   vp.innerHTML='<div class="vp-title">Germany Platform Stack</div>'
