@@ -196,19 +196,10 @@ body::after{content:"";position:fixed;inset:0;background:url("data:image/svg+xml
 <body>
 <!-- Presenter nav — only visible inside a deck, hidden on selector -->
 <nav id="presenter-nav" data-nav="universal" style="position:fixed;top:0;left:0;right:0;height:36px;background:rgba(14,10,6,.97);border-bottom:1px solid rgba(180,83,9,.12);display:none;align-items:center;padding:0 14px;gap:8px;z-index:9999;backdrop-filter:blur(8px);font-family:'DM Sans',sans-serif;overflow-x:auto">
-<a href="pearl_prime_entry.html" style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#d97706;text-decoration:none;white-space:nowrap">Pearl Prime</a>
+<a href="presenter" style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#d97706;text-decoration:none;white-space:nowrap">Pearl Prime</a>
 <span style="width:1px;height:14px;background:rgba(180,83,9,.2);flex-shrink:0"></span>
-<a href="presenter" class="unav" style="color:var(--acc2);background:rgba(180,83,9,.1)">All Decks</a>
 <a href="presenter?deck=intro" class="unav">Intro</a>
 <a href="presenter?deck=marketing" class="unav">Marketing</a>
-<span class="unav" style="color:rgba(250,246,240,.15);pointer-events:none">|</span>
-<a href="presenter?deck=briefing_us" class="unav">US</a>
-<a href="presenter?deck=briefing_jp" class="unav">JP</a>
-<a href="presenter?deck=briefing_tw" class="unav">TW</a>
-<a href="presenter?deck=briefing_cn" class="unav">CN</a>
-<a href="presenter?deck=briefing_kr" class="unav">KR</a>
-<a href="presenter?deck=briefing_fr" class="unav">FR</a>
-<a href="presenter?deck=briefing_de" class="unav">DE</a>
 <a href="brand_admin.html" class="unav" style="color:#d97706;border:1px solid rgba(180,83,9,.25);margin-left:auto">Brand Admin</a>
 </nav>
 <style>.unav{font-family:'DM Mono',monospace;font-size:.625rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,246,240,.55);text-decoration:none;padding:3px 7px;border-radius:3px;transition:all .15s;white-space:nowrap}.unav:hover{color:rgba(250,246,240,.7);background:rgba(180,83,9,.08)}</style>
@@ -1010,9 +1001,12 @@ function stopActiveAudio() {
 // PRESENTER ENGINE
 // ══════════════════════════════════════════════════════════
 var synth = window.speechSynthesis;
-var langMap = {en:"en-US", jp:"ja-JP", "zh-tw":"zh-TW", "zh-cn":"zh-CN", ko:"ko-KR"};
-var lpClass = {en:"en", jp:"jp", "zh-tw":"ztw", "zh-cn":"zcn", ko:"ko"};
-var lpName  = {en:"EN", jp:"\u65E5\u672C\u8A9E", "zh-tw":"\u7E41\u4E2D", "zh-cn":"\u7B80\u4E2D", ko:"\uD55C\uAD6D\uC5B4"};
+var langMap = {en:"en-US", jp:"ja-JP", "zh-tw":"zh-TW", "zh-cn":"zh-CN", ko:"ko-KR", fr:"fr-FR", de:"de-DE", es:"es-ES", it:"it-IT", hu:"hu-HU"};
+var lpClass = {en:"en", jp:"jp", "zh-tw":"ztw", "zh-cn":"zcn", ko:"ko", fr:"fr", de:"de", es:"es", it:"it", hu:"hu"};
+var lpName  = {en:"EN", jp:"\u65E5\u672C\u8A9E", "zh-tw":"\u7E41\u4E2D", "zh-cn":"\u7B80\u4E2D", ko:"\uD55C\uAD6D\uC5B4", fr:"Fran\u00E7ais", de:"Deutsch", es:"Espa\u00F1ol", it:"Italiano", hu:"Magyar"};
+
+// Map lane param to TTS language for fallback voice selection
+var laneToLang = {us:"en-US", jp:"ja-JP", tw:"zh-TW", cn:"zh-CN", kr:"ko-KR", fr:"fr-FR", de:"de-DE", eu:"en-US"};
 
 var state = {
   playing: false,
@@ -1039,7 +1033,16 @@ function initChips() {
   if (!activeMeta) return;
   var el = document.getElementById("path-chips");
   el.innerHTML = "";
-  activeMeta.chips.forEach(function(c, i) {
+
+  // Guided flow: show only the user's market chip (no "All", no other markets)
+  // Applies to intro AND marketing when user arrived via guided path
+  var chips = activeMeta.chips;
+  if (paramLane && (activeDeck === "intro" || activeDeck === "marketing")) {
+    chips = chips.filter(function(c) { return c.p === paramLane; });
+    if (!chips.length) chips = [{p: paramLane, label: paramLane.toUpperCase()}];
+  }
+
+  chips.forEach(function(c, i) {
     var d = document.createElement("div");
     d.className = "chip" + (i === 0 ? " on" : "");
     d.dataset.p = c.p;
@@ -1170,8 +1173,11 @@ function speakLine(ln, li, session, cb) {
     a.play().catch(function() { _activeAudio = null; speakLineTTS(ln, li, session, cb); });
     return;
   }
-  // No MP3: non-English lines display text on screen, pause 2.5s, then advance
-  // (avoids bad browser TTS for Korean, French, German, etc.)
+  // No MP3: try browser TTS for supported languages, otherwise pause 2.5s
+  if (ln.lang && ln.lang !== "en" && langMap[ln.lang]) {
+    speakLineTTS(ln, li, session, cb);
+    return;
+  }
   if (ln.lang && ln.lang !== "en") {
     setTimeout(function() { if (session === state.session) cb(true); }, 2500);
     return;
@@ -1181,7 +1187,12 @@ function speakLine(ln, li, session, cb) {
 
 function speakLineTTS(ln, li, session, cb) {
   var u = new SpeechSynthesisUtterance(ln.text);
-  u.lang = langMap[ln.lang] || "en-US";
+  // Use line's own language; in guided flow, English lines use market's language voice
+  var lineLang = langMap[ln.lang] || "en-US";
+  if (paramLane && ln.lang === "en" && laneToLang[paramLane]) {
+    lineLang = laneToLang[paramLane];
+  }
+  u.lang = lineLang;
   u.rate = parseFloat(document.getElementById("spd").value);
   var wc = 0;
   u.onboundary = function(e) { if (e.name === "word" && session === state.session) hlWord(li, wc++); };
@@ -1392,6 +1403,14 @@ function endPrez() {
   html += '<div style="font-family:var(--serif);font-size:1.2rem;color:var(--acc2);margin-bottom:.3rem">\u2713 Path complete</div>';
   if (ctx) {
     html += '<div style="font-family:var(--mono);font-size:.625rem;letter-spacing:.06em;color:rgba(250,246,240,.4);margin-bottom:.8rem">' + ctx + ' \u2014 ' + total + ' sections reviewed</div>';
+  }
+
+  // Guided flow: auto-navigate from intro → marketing immediately
+  if (next && paramLane && activeDeck === "intro") {
+    var autoHref = next.urlOverride || ("?deck=" + next.id);
+    document.getElementById("sc-text").innerHTML = '<div style="text-align:center;padding:.8rem 0"><div style="font-family:var(--serif);font-size:1.1rem;color:var(--acc2)">Loading ' + next.label + '...</div></div>';
+    setTimeout(function() { window.location.href = autoHref; }, 1200);
+    return;
   }
 
   // Next path suggestion
