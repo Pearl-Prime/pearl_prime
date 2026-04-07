@@ -12,33 +12,38 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 body.presenter-active{overflow:hidden}
 :root{--acc:#b45309;--acc2:#d97706;--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace}
 
-/* ── DECK SELECTOR ───────────────────────────────────── */
-#deck-selector{width:100%;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:4rem 2rem 3rem;overflow-y:auto}
+/* ── PATH SELECTOR ───────────────────────────────────── */
+#deck-selector{width:100%;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow-y:auto}
 #deck-selector.hidden{display:none}
-.ds-header{text-align:center;margin-bottom:3rem}
-.ds-eyebrow{font-family:var(--mono);font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,246,240,.2);margin-bottom:.6rem}
-.ds-title{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:300;color:var(--acc2);letter-spacing:.03em}
-.ds-tagline{font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;color:rgba(250,246,240,.2);margin-top:.5rem}
-.ds-section{width:100%;max-width:960px;margin-bottom:2.5rem}
-.ds-section-label{font-family:var(--mono);font-size:.38rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(180,83,9,.45);margin-bottom:1rem;padding-left:.2rem}
-.ds-grid{display:grid;gap:1rem}
-.ds-grid-global{grid-template-columns:1fr 1fr}
-.ds-grid-markets{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-.ds-card{background:rgba(28,16,9,.5);border:1px solid rgba(180,83,9,.12);border-radius:6px;padding:1.4rem;cursor:pointer;transition:all .25s;text-decoration:none;color:inherit;position:relative;overflow:hidden}
-.ds-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(180,83,9,.2),transparent);opacity:0;transition:opacity .25s}
-.ds-card:hover{border-color:rgba(180,83,9,.35);background:rgba(180,83,9,.06);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.ds-card:hover::before{opacity:1}
-.ds-card.ds-global{padding:1.8rem;border-color:rgba(180,83,9,.2);background:rgba(28,16,9,.7)}
-.ds-card.ds-global:hover{border-color:var(--acc);background:rgba(180,83,9,.1)}
-.ds-card-badge{font-family:var(--mono);font-size:.34rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc2);border:1px solid rgba(180,83,9,.3);display:inline-block;padding:.12rem .5rem;border-radius:1px;margin-bottom:.8rem}
-.ds-card-flag{margin-bottom:.6rem}
-.ds-flag{font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.06em;color:var(--acc2);background:rgba(180,83,9,.12);border:1px solid rgba(180,83,9,.25);padding:.2rem .5rem;border-radius:2px;display:inline-block}
-.ds-card-name{font-family:var(--serif);font-size:1.05rem;font-weight:300;color:rgba(250,246,240,.85);margin-bottom:.35rem}
-.ds-native{font-size:.8rem;color:rgba(250,246,240,.35);margin-left:.3rem}
-.ds-card.ds-global .ds-card-name{font-family:var(--serif);font-size:1.2rem;color:var(--acc2)}
-.ds-card-desc{font-size:.68rem;font-weight:300;color:rgba(250,246,240,.35);line-height:1.6;margin-bottom:.6rem}
-.ds-card-meta{font-family:var(--mono);font-size:.36rem;letter-spacing:.06em;color:rgba(180,83,9,.4)}
-@media(max-width:600px){.ds-grid-global,.ds-grid-markets{grid-template-columns:1fr}}
+.ps-hero{text-align:center;padding:5rem 2rem 2rem;width:100%}
+.ps-eyebrow{font-family:var(--mono);font-size:.38rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(250,246,240,.15)}
+.ps-title{font-family:var(--serif);font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:300;color:rgba(250,246,240,.9);letter-spacing:.02em;margin:.5rem 0 .3rem}
+.ps-title em{font-style:normal;color:var(--acc2)}
+.ps-sub{font-family:var(--mono);font-size:.48rem;letter-spacing:.08em;color:rgba(250,246,240,.18);max-width:420px;margin:0 auto;line-height:1.8}
+.ps-paths{width:100%;max-width:1000px;padding:2rem 2rem 4rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem}
+.ps-card{position:relative;background:rgba(14,10,6,.7);border:1px solid rgba(180,83,9,.1);border-radius:8px;padding:2rem 1.6rem 1.8rem;cursor:pointer;transition:all .35s;text-decoration:none;color:inherit;overflow:hidden}
+.ps-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-glow,rgba(180,83,9,.15));opacity:0;transition:opacity .35s}
+.ps-card::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,var(--card-glow,rgba(180,83,9,.04)),transparent 70%);opacity:0;transition:opacity .35s}
+.ps-card:hover{border-color:rgba(180,83,9,.3);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
+.ps-card:hover::before,.ps-card:hover::after{opacity:1}
+.ps-card-flag{font-family:var(--mono);font-size:.65rem;font-weight:500;letter-spacing:.08em;color:var(--acc2);background:rgba(180,83,9,.1);border:1px solid rgba(180,83,9,.2);padding:.2rem .55rem;border-radius:2px;display:inline-block;margin-bottom:1rem}
+.ps-card-title{font-family:var(--serif);font-size:1.35rem;font-weight:300;color:rgba(250,246,240,.9);margin-bottom:.15rem}
+.ps-card-native{font-size:.85rem;color:rgba(250,246,240,.25);margin-left:.35rem}
+.ps-card-subtitle{font-family:var(--mono);font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin-bottom:.8rem}
+.ps-card-body{font-size:.72rem;font-weight:300;color:rgba(250,246,240,.3);line-height:1.7;margin-bottom:1rem}
+.ps-card-enter{font-family:var(--mono);font-size:.38rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(180,83,9,.4);transition:color .25s}
+.ps-card:hover .ps-card-enter{color:var(--acc2)}
+.ps-global{width:100%;max-width:1000px;padding:0 2rem;margin-bottom:1.5rem}
+.ps-global-label{font-family:var(--mono);font-size:.34rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,246,240,.1);margin-bottom:.8rem}
+.ps-global-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.ps-global-card{background:rgba(14,10,6,.5);border:1px solid rgba(180,83,9,.08);border-radius:6px;padding:1.2rem 1.4rem;cursor:pointer;transition:all .25s;text-decoration:none;color:inherit}
+.ps-global-card:hover{border-color:rgba(180,83,9,.25);background:rgba(180,83,9,.04)}
+.ps-global-name{font-family:var(--serif);font-size:.9rem;font-weight:300;color:var(--acc2);margin-bottom:.25rem}
+.ps-global-desc{font-size:.6rem;color:rgba(250,246,240,.2);line-height:1.5}
+.ps-divider{width:100%;max-width:1000px;padding:0 2rem;margin:1rem 0}
+.ps-divider-line{height:1px;background:linear-gradient(90deg,transparent,rgba(180,83,9,.12),transparent)}
+.ps-divider-label{font-family:var(--mono);font-size:.34rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,246,240,.1);text-align:center;margin-top:.8rem}
+@media(max-width:640px){.ps-paths{grid-template-columns:1fr}.ps-global-row{grid-template-columns:1fr}}
 
 /* ── PRESENTER APP ───────────────────────────────────── */
 #app{width:100%;height:100%;display:grid;grid-template-rows:1fr 210px}
@@ -166,79 +171,80 @@ body.presenter-active{overflow:hidden}
 
 
 <!-- ── DECK SELECTOR ──────────────────────────────────── -->
+<!-- ── PATH SELECTOR ──────────────────────────────────── -->
 <div id="deck-selector">
-  <div class="ds-header">
-    <div class="ds-eyebrow">Pearl Prime</div>
-    <div class="ds-title">Presenter</div>
-    <div class="ds-tagline">Nine decks. Four languages. One system.</div>
+  <div class="ps-hero">
+    <div class="ps-eyebrow">Pearl Prime</div>
+    <div class="ps-title">Choose Your <em>Path</em></div>
+    <div class="ps-sub">How will you engage with the system?</div>
   </div>
 
-  <div class="ds-section">
-    <div class="ds-section-label">Global</div>
-    <div class="ds-grid ds-grid-global">
-      <a class="ds-card ds-global" href="?deck=intro">
-        <div class="ds-card-badge">START HERE</div>
-        <div class="ds-card-name">Pearl Prime Intro</div>
-        <div class="ds-card-desc">Brand admin onboarding. Revenue, architecture, weekly OS. All five markets covered.</div>
-        <div class="ds-card-meta">25 slides &middot; ~38 min</div>
+  <div class="ps-paths">
+    <a class="ps-card" href="?deck=briefing_jp" style="--card-glow:rgba(220,38,38,.15)">
+      <div class="ps-card-flag">JP</div>
+      <div class="ps-card-title">Japan <span class="ps-card-native">日本</span></div>
+      <div class="ps-card-subtitle">Temple Network &amp; Lineage</div>
+      <div class="ps-card-body">Rooted in spiritual tradition. Activate teachings through temples, teachers, and sacred sites. Manga pipeline. Seiyuu narration. LINE and Piccoma distribution.</div>
+      <div class="ps-card-enter">Enter path &rarr;</div>
+    </a>
+    <a class="ps-card" href="?deck=briefing_us" style="--card-glow:rgba(59,130,246,.15)">
+      <div class="ps-card-flag">US</div>
+      <div class="ps-card-title">United States</div>
+      <div class="ps-card-subtitle">Media &amp; Youth Impact</div>
+      <div class="ps-card-body">Scale ideas through media. Reach youth globally through storytelling, audiobooks, and 48Social. KDP, Google Play, Apple Books, Findaway distribution.</div>
+      <div class="ps-card-enter">Enter path &rarr;</div>
+    </a>
+    <a class="ps-card" href="?deck=briefing_tw" style="--card-glow:rgba(37,99,235,.15)">
+      <div class="ps-card-flag">TW</div>
+      <div class="ps-card-title">Taiwan <span class="ps-card-native">台灣</span></div>
+      <div class="ps-card-subtitle">Cultural &amp; Technological Bridge</div>
+      <div class="ps-card-body">Connect East and West. Build systems that translate wisdom into modern infrastructure. Readmoo, Kobo TW, LINE TW. 身心靈 framing.</div>
+      <div class="ps-card-enter">Enter path &rarr;</div>
+    </a>
+    <a class="ps-card" href="?deck=briefing_cn" style="--card-glow:rgba(16,185,129,.15)">
+      <div class="ps-card-flag">CN</div>
+      <div class="ps-card-title">China <span class="ps-card-native">中国</span></div>
+      <div class="ps-card-subtitle">Scale &amp; Institutional Reach</div>
+      <div class="ps-card-body">Operate at scale. Ximalaya 345M users. WeChat Read. Douyin. Includes Hong Kong and Singapore delivery across local and international platforms.</div>
+      <div class="ps-card-enter">Enter path &rarr;</div>
+    </a>
+    <a class="ps-card" href="?deck=briefing_kr" style="--card-glow:rgba(168,85,247,.15)">
+      <div class="ps-card-flag">KR</div>
+      <div class="ps-card-title">Korea <span class="ps-card-native">한국</span></div>
+      <div class="ps-card-subtitle">Achievement &amp; Micro-Format</div>
+      <div class="ps-card-body">빨리빨리 culture meets therapeutic content. Naver at ₩70 CPC. Kakao Page. Millie's Library. K-beauty wellness crossover audience.</div>
+      <div class="ps-card-enter">Enter path &rarr;</div>
+    </a>
+    <a class="ps-card" href="?deck=briefing_fr" style="--card-glow:rgba(244,114,182,.15)">
+      <div class="ps-card-flag">FR</div>
+      <div class="ps-card-title">France</div>
+      <div class="ps-card-subtitle">Philosophy &amp; Cultural Influence</div>
+      <div class="ps-card-body">Shape ideas. #1 manga market in Europe. Philosophical framing resonates deeply. Izneo, Kobo FR, Babelio reviews.</div>
+      <div class="ps-card-enter">Enter path &rarr;</div>
+    </a>
+    <a class="ps-card" href="?deck=briefing_de" style="--card-glow:rgba(251,191,36,.15)">
+      <div class="ps-card-flag">DE</div>
+      <div class="ps-card-title">Germany <span class="ps-card-native">Deutschland</span></div>
+      <div class="ps-card-subtitle">Structure &amp; Evidence-Based Systems</div>
+      <div class="ps-card-body">Build precision systems. Wissenschaftlich fundiert. Audible DE. Thalia. Neuroscience framing only. No spiritual language.</div>
+      <div class="ps-card-enter">Enter path &rarr;</div>
+    </a>
+  </div>
+
+  <div class="ps-divider"><div class="ps-divider-line"></div><div class="ps-divider-label">Or start with the global overview</div></div>
+
+  <div class="ps-global">
+    <div class="ps-global-row">
+      <a class="ps-global-card" href="?deck=intro">
+        <div class="ps-global-name">Pearl Prime Intro</div>
+        <div class="ps-global-desc">Full system overview across all markets. Start here if you're new to Pearl Prime.</div>
       </a>
-      <a class="ds-card ds-global" href="?deck=marketing">
-        <div class="ds-card-badge">STRATEGY</div>
-        <div class="ds-card-name">Marketing Intelligence</div>
-        <div class="ds-card-desc">13 markets, ad ROI data, content audit, video strategy, fleet rollout plan.</div>
-        <div class="ds-card-meta">14 sections &middot; ~42 min</div>
+      <a class="ps-global-card" href="?deck=marketing">
+        <div class="ps-global-name">Marketing Intelligence</div>
+        <div class="ps-global-desc">13 markets, ad ROI, content audit, fleet rollout. Data-driven strategy.</div>
       </a>
     </div>
   </div>
-
-  <div class="ds-section">
-    <div class="ds-section-label">Market Briefings</div>
-    <div class="ds-grid ds-grid-markets">
-      <a class="ds-card" href="?deck=briefing_us">
-        <div class="ds-card-flag"><span class="ds-flag">US</span></div>
-        <div class="ds-card-name">United States</div>
-        <div class="ds-card-desc">KDP, Google Play, Apple Books, 48Social, freebie funnel.</div>
-        <div class="ds-card-meta">6 slides &middot; English</div>
-      </a>
-      <a class="ds-card" href="?deck=briefing_jp">
-        <div class="ds-card-flag"><span class="ds-flag">JP</span></div>
-        <div class="ds-card-name">Japan <span class="ds-native">日本</span></div>
-        <div class="ds-card-desc">Manga pipeline, LINE Manga, Piccoma, Audiobook.jp, 合同会社 setup.</div>
-        <div class="ds-card-meta">6 slides &middot; Japanese + English</div>
-      </a>
-      <a class="ds-card" href="?deck=briefing_tw">
-        <div class="ds-card-flag"><span class="ds-flag">TW</span></div>
-        <div class="ds-card-name">Taiwan <span class="ds-native">台灣</span></div>
-        <div class="ds-card-desc">Readmoo, Kobo TW, LINE TW, 身心靈 framing, 6 pilot brands.</div>
-        <div class="ds-card-meta">5 slides &middot; 繁體中文 + English</div>
-      </a>
-      <a class="ds-card" href="?deck=briefing_cn">
-        <div class="ds-card-flag"><span class="ds-flag">CN</span></div>
-        <div class="ds-card-name">China <span class="ds-native">中国</span></div>
-        <div class="ds-card-desc">Ximalaya 345M MAU, WeChat Read, Douyin. Includes HK + SG delivery.</div>
-        <div class="ds-card-meta">6 slides &middot; 简体中文 + English</div>
-      </a>
-      <a class="ds-card" href="?deck=briefing_kr">
-        <div class="ds-card-flag"><span class="ds-flag">KR</span></div>
-        <div class="ds-card-name">Korea <span class="ds-native">한국</span></div>
-        <div class="ds-card-desc">Naver ₩70 CPC, Kakao Page, Millie's Library, 빨리빨리 culture.</div>
-        <div class="ds-card-meta">4 slides &middot; 한국어 + English</div>
-      </a>
-      <a class="ds-card" href="?deck=briefing_fr">
-        <div class="ds-card-flag"><span class="ds-flag">FR</span></div>
-        <div class="ds-card-name">France</div>
-        <div class="ds-card-desc">#1 EU manga market. Izneo, Kobo FR, philosophical framing, Babelio.</div>
-        <div class="ds-card-meta">6 slides &middot; Français + English</div>
-      </a>
-      <a class="ds-card" href="?deck=briefing_de">
-        <div class="ds-card-flag"><span class="ds-flag">DE</span></div>
-        <div class="ds-card-name">Germany <span class="ds-native">Deutschland</span></div>
-        <div class="ds-card-desc">Audible DE, Thalia, wissenschaftlich fundiert, evidence-based only.</div>
-        <div class="ds-card-meta">6 slides &middot; Deutsch + English</div>
-      </a>
-    </div>
-  </div>
-  <p style="font-family:var(--mono);font-size:.48rem;letter-spacing:.08em;margin-top:1.2rem"><a href="content_inventory.html" style="color:var(--acc2);text-decoration:none">Content inventory</a> · built vs configured assets</p>
 </div>
 
 <!-- ── PRESENTER APP ──────────────────────────────────── -->
@@ -279,6 +285,9 @@ body.presenter-active{overflow:hidden}
       <button class="btn-back" onclick="location.href=location.pathname">&larr; All Decks</button>
     </div>
     <div id="script-area">
+      <div id="progress-spine" style="display:flex;gap:.3rem;margin-bottom:.4rem">
+        <!-- filled dynamically -->
+      </div>
       <div id="sc-label">Welcome</div>
       <div id="sc-text">Choose a market path and press <strong style="color:var(--acc2)">&#9654; Play</strong> to begin.</div>
     </div>
@@ -1030,6 +1039,19 @@ function updTL(i) {
   });
   document.getElementById("prog-fill").style.width =
     (state.filtered.length > 1 ? i / (state.filtered.length - 1) * 100 : 0) + "%";
+  updSpine();
+}
+function updSpine() {
+  var el = document.getElementById("progress-spine");
+  if (!el || !state.filtered.length) return;
+  var total = state.filtered.length;
+  var cur = state.curIdx;
+  var html = '';
+  for (var i = 0; i < total; i++) {
+    var color = i < cur ? 'var(--acc)' : i === cur ? 'var(--acc2)' : 'rgba(180,83,9,.15)';
+    html += '<div style="flex:1;height:3px;border-radius:1px;background:' + color + ';transition:background .3s"></div>';
+  }
+  el.innerHTML = html;
 }
 
 // ── FRAME NAV ─────────────────────────────────────────
@@ -1061,6 +1083,7 @@ function renderScript(s) {
     });
     if (li < s.lines.length - 1) { c.appendChild(document.createElement("br")); c.appendChild(document.createElement("br")); }
   });
+  updSpine();
 }
 function hlWord(li, wi) {
   var p = document.querySelector(".w.cur"); if (p) { p.classList.remove("cur"); p.classList.add("done"); }
