@@ -35,12 +35,16 @@ def _is_placeholder_text(text: str) -> bool:
     return bool(_PLACEHOLDER_RE.match((text or "").strip()))
 
 
+_CHAPTER_INDEX_TLS: int = 0  # Thread-local-ish chapter index for variant rotation
+
 def _pick_variant(options: list[str], *seed_parts: str) -> str:
     if not options:
         return ""
     seed = "||".join((part or "").strip().lower() for part in seed_parts if part)
     if not seed:
-        return options[0]
+        return options[_CHAPTER_INDEX_TLS % len(options)]
+    # Mix in chapter index so same content in different chapters gets different picks
+    seed = f"{seed}||ch{_CHAPTER_INDEX_TLS}"
     digest = hashlib.sha256(seed.encode("utf-8")).digest()
     idx = int.from_bytes(digest[:8], "big") % len(options)
     return options[idx]
@@ -50,7 +54,7 @@ def _pick_variant(options: list[str], *seed_parts: str) -> str:
 # Thesis derivation
 # ---------------------------------------------------------------------------
 
-def _derive_thesis(reflection: str) -> str:
+def _derive_thesis(reflection: str, chapter_index: int = 0) -> str:
     """Extract a one-line thesis claim from REFLECTION prose."""
     sents = _sentences(reflection)
     # Priority keywords for thesis extraction
@@ -66,13 +70,39 @@ def _derive_thesis(reflection: str) -> str:
         ("grief", "The point is that grief is not a problem to solve — it is a process to accompany."),
         ("spiral", "The point is that the spiral is a loop, not a descent — it returns to the same ground."),
         ("false alarm", "The point is that the alarm fires on prediction, not evidence."),
+        # Adi Da / contemplative teacher vocabulary
+        ("contraction", "The point is that the contraction is not who you are — it is what you do."),
+        ("bright", "The point is that what you are seeking is already present before you start looking."),
+        ("seeking", "The point is that seeking is the activity that obscures what is already here."),
+        ("recognition", "The point is that recognition replaces seeking — you stop looking and start seeing."),
+        ("separate self", "The point is that the separate self is an activity, not an entity."),
+        ("avoidance", "The point is that avoidance maps the edges of what you are not yet willing to see."),
+        ("relationship", "The point is that relationship is the mirror that reveals what you cannot see alone."),
+        ("prior freedom", "The point is that freedom does not need to be achieved — it needs to be recognized."),
+        ("vulnerability", "The point is that vulnerability is not the risk — the armor is."),
+        # Emotional / somatic vocabulary
+        ("nervous system", "The point is that your nervous system responds to predictions, not facts."),
+        ("body", "The point is that the body knows before the mind does — trust the body."),
+        ("holding", "The point is that what you are holding is costing more energy than you realize."),
+        ("pattern", "The point is that seeing the pattern is the beginning of freedom from it."),
+        ("rest", "The point is that rest is not earned — it is required."),
     ]
     reflection_lower = reflection.lower()
-    for marker, thesis in thesis_markers:
-        if marker in reflection_lower:
-            return thesis
-    # Fallback: generic but still thesis-shaped
-    return "The point is that you can act inside uncertainty without waiting for it to resolve."
+    # Collect ALL matching theses, then pick by chapter_index to rotate
+    matched = [thesis for marker, thesis in thesis_markers if marker in reflection_lower]
+    if matched:
+        return matched[chapter_index % len(matched)]
+    # Fallback: rotate across multiple generic theses using reflection hash + chapter_index
+    _fallback_theses = [
+        "The point is that you can act inside uncertainty without waiting for it to resolve.",
+        "The point is that seeing the pattern clearly is the first step toward not being run by it.",
+        "The point is that the feeling is real, but the story the feeling tells is often inaccurate.",
+        "The point is that awareness does not fix anything — it makes fixing unnecessary.",
+        "The point is that you have been working harder than you realize to stay contracted.",
+        "The point is that what you are protecting yourself from is often less dangerous than the protection.",
+        "The point is that ordinary moments carry the pattern more clearly than dramatic ones.",
+    ]
+    return _fallback_theses[(hash(reflection) + chapter_index) % len(_fallback_theses)]
 
 
 # ---------------------------------------------------------------------------
@@ -111,6 +141,16 @@ def _bridge_after_opening(thesis: str, opening: str = "", scene: str = "") -> st
         options = [
             "Stay with the moment a second longer. The pattern usually shows itself before the explanation does.",
             "That pause is doing more than slowing you down. It is showing you how the pattern enters, which means the chapter can name it before it hardens.",
+            "Before the mind starts explaining, the body has already registered something. Trust that registration.",
+            "The instinct to move past this moment quickly is itself data. Slow down and see what it protects.",
+            "Something just shifted in your chest or your throat. That shift is where the chapter actually begins.",
+            "Notice the impulse to understand before you have finished feeling. That impulse is the pattern defending itself.",
+            "The body already knows something the mind has not caught up with yet. Let it lead for a moment.",
+            "Right here is where the chapter earns its weight. Not in the concept, but in the felt registration.",
+            "What you just felt is not a distraction from the point. It is the point arriving ahead of language.",
+            "Hold this sensation without naming it. The name will come, but the sensation is more honest.",
+            "There is a micro-flinch the body makes before the mind builds its story. That flinch is the trailhead.",
+            "Do not skip ahead to the lesson. The body is still showing you where the lesson lives.",
         ]
     return _pick_variant(options, thesis, opening, scene)
 
@@ -137,6 +177,16 @@ def _bridge_before_story(thesis: str, reflection: str = "", story: str = "") -> 
         options = [
             "Here is where the chapter stops talking about the pattern and lets you watch it happen.",
             "For example, the quickest way to feel the mechanism is to watch it take hold in an ordinary moment.",
+            "What follows is not a metaphor. It is a report from someone who lived inside this pattern.",
+            "The explanation can only go so far. A story goes the rest of the way.",
+            "This is the turning point. Not a dramatic revelation. A quiet noticing.",
+            "The pattern gets clearest when you watch it operate in someone else's day before returning to your own.",
+            "Now watch what happens when the same pattern lands in a real body, in a real room.",
+            "Theory describes the shape. A story lets you feel the weight of it.",
+            "The next part is not instruction. It is evidence drawn from someone's lived experience.",
+            "Concepts dissolve under pressure. What remains is the story of how the pressure actually felt.",
+            "Here the chapter shifts from naming the pattern to witnessing it in motion.",
+            "Words about the pattern only go so far. What follows is the pattern caught in the act.",
         ]
     return _pick_variant(options, thesis, reflection, story)
 
@@ -153,6 +203,16 @@ def _bridge_before_exercise(thesis: str, reflection: str = "", story: str = "") 
         options = [
             "In practice, do not turn this into homework. Give the body one smaller, safer entry instead.",
             "So when the pattern surges, the next move is not to understand more. It is to make the first move cheaper.",
+            "Understanding without practice is just information. The body needs something to do with what it just learned.",
+            "The exercise that follows is not meant to fix anything. It is meant to make the pattern visible in your body.",
+            "You do not need to master this. You need to try it once and notice what happens.",
+            "Before moving on, give the body one concrete action. Insight without action evaporates by tomorrow.",
+            "Now bring this from concept into sensation. The next step is deliberately small.",
+            "The body learns through action, not agreement. Give it one move it can actually make right now.",
+            "Knowing the pattern is not enough. The next step asks you to meet it with your body, not your mind.",
+            "What follows is not a test. It is an invitation to feel the mechanism while it is still warm.",
+            "Let the practice be undersized. A small move completed is worth more than a large one imagined.",
+            "The shift from understanding to doing is where most chapters lose people. Stay with this one.",
         ]
     return _pick_variant(options, thesis, reflection, story)
 
@@ -163,6 +223,15 @@ def _bridge_before_integration(thesis: str, integration: str = "") -> str:
         "Now notice what shifted before your mind starts summarizing it.",
         "Let the chapter land in the body before it turns back into explanation.",
         "Stay with what changed. Even if it only changed by one degree.",
+        "Do not rush to the next thing. What just happened needs a few seconds to settle into the body.",
+        "The shift may be small. Small is not insignificant. Small is where lasting change begins.",
+        "Before the mind files this as 'done,' feel what is still open in the body. That openness is the real work.",
+        "Pause here. The body is still processing what the mind already moved past.",
+        "Give the landing a moment. The nervous system integrates slower than the reading eye.",
+        "Whatever just moved in you does not need to be understood yet. It needs to be felt.",
+        "Resist the urge to evaluate. Let the experience sit without a grade.",
+        "The body registers change in its own time. Give it that time before the next chapter begins.",
+        "Something loosened or something tightened. Either one is information worth keeping.",
     ]
     return _pick_variant(options, thesis, integration)
 
@@ -225,13 +294,16 @@ def _distill_mechanism(reflection: str, thesis: str) -> str:
             "loads the next without waiting for evidence. The chain moves from signal to catastrophe in seconds. "
             "But each link is a prediction, not a fact. The chain has never once been right about the final link."
         )
-    # Generic mechanism from thesis
+    # Generic mechanism from thesis — rotate to avoid repetition
     core = thesis.replace("The point is that ", "")
-    return (
-        f"Underneath the feeling is a simple mechanism: {core} "
-        "When the alarm runs the response, your nervous system treats uncertainty like danger and asks for "
-        "impossible certainty. That is why ordinary moments feel heavy."
-    )
+    variants = [
+        f"Underneath the feeling is a simple mechanism: {core} When the alarm runs the response, your nervous system treats uncertainty like danger and asks for impossible certainty. That is why ordinary moments feel heavy.",
+        f"Here is the mechanism: {core} The nervous system does not distinguish between real threat and imagined threat. Both receive the same emergency response. This is why knowing better rarely helps.",
+        f"The pattern underneath: {core} Your body responds to the prediction of danger with the same chemistry it would use for actual danger. That chemistry does not care whether the prediction is accurate.",
+        f"What drives this: {core} The system was built for physical threats in open landscapes. It now runs in offices, apartments, and group chats. The mismatch between threat model and actual environment is the source of most suffering.",
+        f"The core mechanism is this: {core} Once the nervous system flags a moment as dangerous, it narrows perception to confirm the danger. Counter-evidence gets filtered out. The feeling becomes self-reinforcing.",
+    ]
+    return variants[hash(thesis) % len(variants)]
 
 
 def _trim_reflection(reflection: str, max_sentences: int = 7) -> str:
@@ -347,7 +419,19 @@ def _exercise_setup_sentence(reflection: str, story: str) -> str:
         return "Start with the hand that hovered instead of moving. That freeze is the entry point."
     if "breath" in seed or "breathe" in seed:
         return "Start with the breath that shortened when the chapter turned."
-    return "Start with the place in your body that lifted while you were listening. That is where the practice begins."
+    setup_fallbacks = [
+        "Start with the place in your body that lifted while you were listening. That is where the practice begins.",
+        "Start where you feel the most tension right now. Not where you think the tension should be — where it actually is.",
+        "Begin with whatever your body is holding. You do not need to name it. Just locate it.",
+        "Find the part of you that tightened during this chapter. That is your entry point.",
+        "Notice where your body is bracing. Start there. Not with the thought — with the sensation.",
+        "Scan from your scalp to your feet. The first place that speaks up is where you begin.",
+        "Start with the part of you that wanted to look away during the last section.",
+        "Place one hand where the tension is loudest. That contact is the first move.",
+        "Begin where the weight settled. You will know the spot before you can explain it.",
+        "Start with the simplest true thing your body is telling you right now.",
+    ]
+    return setup_fallbacks[hash(f"{reflection}{story}") % len(setup_fallbacks)]
 
 
 def _shape_integration(integration: str) -> str:
@@ -406,6 +490,10 @@ def compose_chapter_prose(
 
     Returns the composed chapter text (no heading — caller adds 'Chapter N').
     """
+    # Set chapter index for variant rotation across all bridge/thesis functions
+    global _CHAPTER_INDEX_TLS
+    _CHAPTER_INDEX_TLS = chapter_index
+
     # Build slot_type → prose map (take first non-placeholder for each type)
     slot_map: dict[str, str] = {}
     for st, prose in zip(slot_types, slot_proses):
@@ -427,7 +515,7 @@ def compose_chapter_prose(
     compression_raw = slot_map.get("COMPRESSION", "")
 
     # Derive thesis from reflection content
-    thesis = _derive_thesis(reflection_raw) if not _is_placeholder_text(reflection_raw) else ""
+    thesis = _derive_thesis(reflection_raw, chapter_index) if not _is_placeholder_text(reflection_raw) else ""
 
     # Build composed chapter in argument order
     parts: list[str] = []

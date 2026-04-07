@@ -42,6 +42,49 @@ _LOC_VAR_FALLBACKS: dict[str, str] = {
     "commute_mode":     "the commute",
 }
 
+# Rotating variants per chapter to avoid identical scene text across chapters
+_LOC_VAR_ROTATIONS: dict[str, list[str]] = {
+    "weather_detail": [
+        "gray light through the window",
+        "morning sun cutting through the blinds",
+        "rain streaking the glass",
+        "fluorescent light humming overhead",
+        "late afternoon light slanting across the desk",
+        "a cloudy sky pressing against the window",
+        "cold air seeping through the window frame",
+    ],
+    "street_name": [
+        "the street below",
+        "the avenue outside",
+        "the sidewalk two floors down",
+        "the road past the parking lot",
+        "traffic moving on the highway",
+        "the crosswalk at the corner",
+    ],
+    "transit_line": [
+        "the train",
+        "the bus",
+        "the subway car",
+        "the commuter rail",
+        "the metro",
+        "the light rail",
+    ],
+    "coffee_shop": [
+        "a coffee shop",
+        "the cafe on the corner",
+        "a quiet booth at the back",
+        "the counter where you always sit",
+        "a table by the window",
+    ],
+}
+
+def _get_loc_var(var_name: str, chapter_index: int = 0) -> str:
+    """Get a location variable value, rotating per chapter for diversity."""
+    variants = _LOC_VAR_ROTATIONS.get(var_name)
+    if variants:
+        return variants[chapter_index % len(variants)]
+    return _LOC_VAR_FALLBACKS.get(var_name, var_name)
+
 _LOCATION_PROFILE_PATH = Path(__file__).resolve().parent.parent.parent / "config" / "localization" / "render_location_profiles.yaml"
 _LOCATION_PROFILE_CACHE: Optional[dict[str, dict[str, str]]] = None
 
@@ -125,15 +168,35 @@ def _infer_location_id(plan: Optional[dict[str, Any]]) -> str:
 
 def _resolve_loc_var_fallbacks(text: str, plan: Optional[dict[str, Any]] = None) -> str:
     """Replace known location variables with universal or location-aware fallbacks.
+
+    Splits by chapter markers so each chapter gets different location variants,
+    preventing identical scene text across chapters.
     Any {var} that remains after this is caught and hard-failed by delivery_contract_gate().
     """
-    fallbacks = dict(_LOC_VAR_FALLBACKS)
     location_id = _infer_location_id(plan)
-    if location_id:
-        fallbacks.update(_load_location_profiles().get(location_id, {}))
-    for var_name, fallback in fallbacks.items():
-        text = text.replace("{" + var_name + "}", fallback)
-    return text
+    profile = _load_location_profiles().get(location_id, {}) if location_id else {}
+
+    # Split into chapters for per-chapter variant rotation
+    import re as _re
+    chapter_splits = _re.split(r'(Chapter \d+)', text)
+
+    resolved_parts: list[str] = []
+    chapter_idx = 0
+    for part in chapter_splits:
+        if _re.match(r'Chapter \d+', part):
+            resolved_parts.append(part)
+            chapter_idx += 1
+            continue
+        # Resolve location vars — use profile first, then rotating fallbacks
+        for var_name in _LOC_VAR_FALLBACKS:
+            placeholder = "{" + var_name + "}"
+            if placeholder in part:
+                if var_name in profile:
+                    part = part.replace(placeholder, profile[var_name])
+                else:
+                    part = part.replace(placeholder, _get_loc_var(var_name, chapter_idx))
+        resolved_parts.append(part)
+    return "".join(resolved_parts)
 
 
 def _strip_scaffolding_lines(text: str) -> str:

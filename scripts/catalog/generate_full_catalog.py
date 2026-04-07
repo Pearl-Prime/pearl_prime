@@ -84,6 +84,20 @@ def load_catalog_config() -> dict:
     raise FileNotFoundError("catalog_generation_config.yaml not found")
 
 
+def load_teacher_profiles() -> dict:
+    """Load pen_name_teacher_profiles_full.json, indexed by teacher_id."""
+    path = _CONFIG_ROOT / "config/authoring/pen_name_teacher_profiles_full.json"
+    if not path.exists():
+        return {}
+    data = json.loads(path.read_text())
+    return {t["teacher_id"]: t for t in data} if isinstance(data, list) else {}
+
+
+def load_description_templates() -> dict:
+    path = _CONFIG_ROOT / "config/catalog_planning/description_templates.yaml"
+    return _load_yaml(path) if path.exists() else {}
+
+
 # ---------------------------------------------------------------------------
 # Deterministic catalog_id
 # ---------------------------------------------------------------------------
@@ -379,29 +393,92 @@ def pick_title_and_subtitle(
     return title, subtitle
 
 
-def make_description(topic: str, persona: str, content_type: str) -> str:
-    """Generate a 2-3 sentence platform description."""
+def make_description(
+    topic: str, persona: str, content_type: str,
+    catalog_id: str = "",
+    brand_data: dict | None = None,
+    teacher_data: dict | None = None,
+    desc_templates: dict | None = None,
+    runtime_format: str = "",
+    companion_type: str = "",
+) -> str:
+    """Generate a unique 3-4 sentence platform description using 4-layer composition."""
+    brand_data = brand_data or {}
+    teacher_data = teacher_data or {}
+    desc_templates = desc_templates or {}
+
     topic_d = TOPIC_DISPLAY.get(topic, topic.replace("_", " ").title())
     persona_d = PERSONA_DISPLAY.get(persona, persona.replace("_", " ").title())
+    h = hash(catalog_id) if catalog_id else 0
 
-    if content_type == "micro_book":
-        return (
-            f"A focused micro-guide to {topic_d.lower()} recovery using evidence-based "
-            f"somatic and nervous system techniques. Designed for {persona_d.lower()} "
-            f"who need practical tools in 15 minutes or less."
-        )
-    elif content_type == "deep_book":
-        return (
-            f"A comprehensive deep dive into {topic_d.lower()} through somatic healing, "
-            f"nervous system regulation, and evidence-based frameworks. Built for "
-            f"{persona_d.lower()} ready to do sustained inner work."
-        )
+    # Layer 1: Brand voice (5 sentence structures, rotated)
+    _openers = [
+        "From {b}, rooted in {t}.",
+        "{b} brings a {t}-grounded approach.",
+        "Published by {b}, drawing on {t}.",
+        "Published by {b}, informed by {t}.",
+        "{b} presents a {t}-based path.",
+    ]
+    brand_name = brand_data.get("display_name", "")
+    tradition = brand_data.get("tradition", "")
+    brand_focus = brand_data.get("brand_focus", "")
+    trad_short = tradition.split("/")[0].strip().lower() if tradition and "/" in tradition else (tradition.strip().lower() if tradition else "somatic healing")
+    if brand_name:
+        layer1 = _openers[abs(h) % len(_openers)].format(b=brand_name, t=trad_short)
+        if brand_focus and abs(h >> 3) % 2 == 0:
+            layer1 += f" {brand_focus.rstrip('.')}."
     else:
-        return (
-            f"A practical guide to {topic_d.lower()} recovery through body-based "
-            f"techniques and nervous system regulation. Written for {persona_d.lower()} "
-            f"seeking lasting change through evidence-based somatic approaches."
-        )
+        layer1 = ""
+
+    # Layer 2: Teacher method (5 intro variants × 5 method variants)
+    _t_intros = [
+        "Guided by {n}, {p}.",
+        "Written through the teachings of {n}, {p}.",
+        "{n} brings {p} to this work.",
+        "Drawing on the practice of {n}, {p}.",
+        "Informed by {n}'s approach — {p}.",
+    ]
+    _m_intros = [
+        "This {c} applies {m}.",
+        "Built on {m}.",
+        "Uses {m} to guide each chapter.",
+        "Grounded in {m}.",
+        "Structured around {m}.",
+    ]
+    ei = teacher_data.get("ei_profile", {})
+    teacher_name = teacher_data.get("display_name", "")
+    layer2 = ""
+    tradition_phrase = ei.get("tradition_phrase", "")
+    ei_one_liner = ei.get("ei_one_liner", "")
+    reader_benefit = ei.get("reader_benefit_phrase", "")
+    if teacher_name and tradition_phrase:
+        layer2 = _t_intros[abs(h >> 4) % len(_t_intros)].format(n=teacher_name, p=tradition_phrase)
+    if ei_one_liner:
+        ct_display = content_type.replace("_", " ")
+        layer2 += " " + _m_intros[abs(h >> 6) % len(_m_intros)].format(c=ct_display, m=ei_one_liner)
+    elif reader_benefit:
+        layer2 += f" {reader_benefit.rstrip('.')}."
+
+    # Layer 3: Topic hook (5 per topic, rotated by different hash bits)
+    hooks = desc_templates.get("topic_hooks", {}).get(topic, [])
+    if hooks:
+        layer3 = hooks[abs(h >> 8) % len(hooks)]
+    else:
+        layer3 = f"A practical exploration of {topic_d.lower()} through body-based and evidence-based approaches."
+
+    # Layer 4: Format + Persona + Companion
+    rt_descs = desc_templates.get("runtime_descriptions", {})
+    p_descs = desc_templates.get("persona_descriptions", {})
+    c_notes = desc_templates.get("companion_notes", {})
+    rt = rt_descs.get(runtime_format, f"A guide")
+    pd = p_descs.get(persona, persona_d.lower())
+    cn = c_notes.get(companion_type, "")
+    layer4 = f"{rt} for {pd}."
+    if cn:
+        layer4 += f" {cn}"
+
+    parts = [p for p in [layer1, layer2, layer3, layer4] if p.strip()]
+    return " ".join(parts).strip()
 
 
 def make_cover_brief(
@@ -561,6 +638,9 @@ def generate_catalog(
     teacher_map = load_teacher_brand_map()
     archetype_reg = load_archetype_registry()
     config = load_catalog_config()
+    teacher_profiles = load_teacher_profiles()
+    desc_templates = load_description_templates()
+    market_weights = desc_templates.get("market_topic_weights", {})
 
     # Index archetype data by brand_id
     archetype_index: dict[str, dict] = {}
@@ -588,6 +668,22 @@ def generate_catalog(
         arch = archetype_index.get(archetype_id, {})
         teacher_id = brand_data.get("teacher_id", "")
         teacher_mode = brand_data.get("teacher_mode", False)
+
+        # P2: Fill empty teacher_id from best-fit teacher profiles
+        # Brand registry uses locale-suffixed IDs (adhd_forge_en_us) but teacher
+        # profiles use base IDs (adhd_forge). Strip locale suffix for matching.
+        if not teacher_id and teacher_profiles:
+            base_brand = "_".join(brand_id.split("_")[:-2]) if brand_id.count("_") >= 2 else brand_id
+            best_score = -1
+            for tid, tprof in teacher_profiles.items():
+                if tprof.get("brand_id") == brand_id or tprof.get("brand_id") == base_brand:
+                    teacher_id = tid
+                    break
+                ts = tprof.get("topic_scores", {})
+                avg = sum(ts.get(t, 0) for t in brand_data.get("primary_topics", [])) / max(len(brand_data.get("primary_topics", [])), 1)
+                if avg > best_score:
+                    best_score = avg
+                    teacher_id = tid
 
         topics = brand_data.get("primary_topics", [])
         personas = brand_data.get("primary_personas", [])
@@ -640,7 +736,7 @@ def generate_catalog(
                             "catalog_id": cat_id,
                             "brand_id": brand_id,
                             "lane_id": lane_id,
-                            "teacher_id": teacher_id if teacher_mode else "",
+                            "teacher_id": teacher_id,
                             "topic_id": topic,
                             "persona_id": persona,
                             "format_id": fmt_id,
@@ -652,7 +748,15 @@ def generate_catalog(
                             "subtitle": subtitle,
                             "price_usd": compute_price(arch, "series_book", locale, config, is_series_book1=True),
                             "keywords": get_keywords(config, topic),
-                            "description": make_description(topic, persona, "series_book"),
+                            "description": make_description(
+                                topic, persona, "series_book",
+                                catalog_id=cat_id,
+                                brand_data=brand_data,
+                                teacher_data=teacher_profiles.get(teacher_id, {}),
+                                desc_templates=desc_templates,
+                                runtime_format=runtime_id,
+                                companion_type=companion_type,
+                            ),
                             "cover_brief": make_cover_brief(arch, cover_templates),
                             "companion_type": companion_type,
                             "freebie_slug": freebie_slug,
@@ -671,11 +775,24 @@ def generate_catalog(
                             _, sub_n = pick_title_and_subtitle(
                                 config, topic, persona, "series_book", 0, pos, seed_str=cat_id_n
                             )
+                            # P3: Subtitle diversity — add angle variation for pos > 1
+                            topic_d = TOPIC_DISPLAY.get(topic, topic.replace("_", " ").title())
+                            angle_variants = [
+                                f"Deeper Practices for {topic_d}",
+                                f"Advanced {topic_d} Recovery Strategies",
+                                f"Next Steps in {topic_d} Healing",
+                                f"Building on {topic_d} Foundations",
+                                f"Sustained {topic_d} Resilience",
+                            ]
+                            angle_rng = random.Random(f"{cat_id_n}|angle")
+                            angle_suffix = angle_rng.choice(angle_variants)
+                            if sub_n and not any(v in sub_n for v in angle_variants):
+                                sub_n = f"{sub_n} — {angle_suffix}"
                             brand_entries.append({
                                 "catalog_id": cat_id_n,
                                 "brand_id": brand_id,
                                 "lane_id": lane_id,
-                                "teacher_id": teacher_id if teacher_mode else "",
+                                "teacher_id": teacher_id,
                                 "topic_id": topic,
                                 "persona_id": persona,
                                 "format_id": fmt_id,
@@ -687,7 +804,15 @@ def generate_catalog(
                                 "subtitle": sub_n,
                                 "price_usd": compute_price(arch, "series_book", locale, config),
                                 "keywords": get_keywords(config, topic),
-                                "description": make_description(topic, persona, "series_book"),
+                                "description": make_description(
+                                    topic, persona, "series_book",
+                                    catalog_id=cat_id_n,
+                                    brand_data=brand_data,
+                                    teacher_data=teacher_profiles.get(teacher_id, {}),
+                                    desc_templates=desc_templates,
+                                    runtime_format=runtime_id,
+                                    companion_type=companion_type,
+                                ),
                                 "cover_brief": make_cover_brief(arch, cover_templates),
                                 "companion_type": companion_type,
                                 "freebie_slug": freebie_slug,
@@ -712,7 +837,7 @@ def generate_catalog(
                         "catalog_id": cat_micro,
                         "brand_id": brand_id,
                         "lane_id": lane_id,
-                        "teacher_id": teacher_id if teacher_mode else "",
+                        "teacher_id": teacher_id,
                         "topic_id": topic,
                         "persona_id": persona,
                         "format_id": micro_fmt,
@@ -724,7 +849,15 @@ def generate_catalog(
                         "subtitle": s_micro,
                         "price_usd": compute_price(arch, "micro_book", locale, config),
                         "keywords": get_keywords(config, topic),
-                        "description": make_description(topic, persona, "micro_book"),
+                        "description": make_description(
+                            topic, persona, "micro_book",
+                            catalog_id=cat_micro,
+                            brand_data=brand_data,
+                            teacher_data=teacher_profiles.get(teacher_id, {}),
+                            desc_templates=desc_templates,
+                            runtime_format=micro_runtime,
+                            companion_type="none",
+                        ),
                         "cover_brief": make_cover_brief(arch, cover_templates),
                         "companion_type": "none",
                         "freebie_slug": "",
@@ -751,7 +884,7 @@ def generate_catalog(
                             "catalog_id": cat_sa,
                             "brand_id": brand_id,
                             "lane_id": lane_id,
-                            "teacher_id": teacher_id if teacher_mode else "",
+                            "teacher_id": teacher_id,
                             "topic_id": topic,
                             "persona_id": persona,
                             "format_id": sa_fmt,
@@ -763,7 +896,15 @@ def generate_catalog(
                             "subtitle": s_sa,
                             "price_usd": compute_price(arch, "standalone", locale, config),
                             "keywords": get_keywords(config, topic),
-                            "description": make_description(topic, persona, "standalone"),
+                            "description": make_description(
+                                topic, persona, "standalone",
+                                catalog_id=cat_sa,
+                                brand_data=brand_data,
+                                teacher_data=teacher_profiles.get(teacher_id, {}),
+                                desc_templates=desc_templates,
+                                runtime_format=sa_runtime,
+                                companion_type=c_type,
+                            ),
                             "cover_brief": make_cover_brief(arch, cover_templates),
                             "companion_type": c_type,
                             "freebie_slug": c_slug,
