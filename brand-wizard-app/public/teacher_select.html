@@ -353,14 +353,14 @@ function chooseTeacher(){
   localStorage.setItem('phoenix_book_mode',JSON.stringify({
     mode:'teacher',teacher:t.id,teacherName:t.name,brand:t.brand,tradition:t.tradition
   }));
-  window.location.href='brand_admin.html?teacher='+t.id;
+  window.location.href='wizard.html?teacher='+t.id;
 }
 
 function chooseComposite(){
   localStorage.setItem('phoenix_book_mode',JSON.stringify({
     mode:'composite',teacher:null,teacherName:'Composite',brand:'All Traditions'
   }));
-  window.location.href='brand_admin.html?mode=composite';
+  window.location.href='wizard.html?mode=composite';
 }
 
 init();
