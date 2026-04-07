@@ -13,7 +13,8 @@ body.presenter-active{overflow:hidden}
 :root{--acc:#b45309;--acc2:#d97706;--gold:linear-gradient(135deg,#f5d0a9 0%,#d97706 40%,#b45309 100%);--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace}
 
 /* ── DEPTH + ATMOSPHERE ──────────────────────────── */
-body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 50% 20%,rgba(180,83,9,.04),transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(120,53,15,.03),transparent 50%);pointer-events:none;z-index:0}
+@keyframes ambientShift{0%{background-position:50% 20%}25%{background-position:55% 18%}50%{background-position:48% 22%}75%{background-position:52% 19%}100%{background-position:50% 20%}}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 50% 20%,rgba(180,83,9,.05),transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(120,53,15,.03),transparent 50%),radial-gradient(ellipse at 20% 50%,rgba(180,83,9,.02),transparent 40%);background-size:200% 200%;animation:ambientShift 20s ease-in-out infinite;pointer-events:none;z-index:0}
 body::after{content:"";position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.015'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
 
 /* ── CINEMATIC TRANSITIONS ───────────────────────── */
@@ -22,6 +23,16 @@ body::after{content:"";position:fixed;inset:0;background:url("data:image/svg+xml
 .slide-enter{animation:slideIn .4s ease}
 #visual-panel.active{animation:slideIn .35s ease}
 #sc-text{animation:slideIn .3s ease}
+
+/* ── CONFIDENCE BADGES ───────────────────────────── */
+.vp-badge{display:inline-block;font-family:var(--mono);font-size:.3rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .45rem;border-radius:1px;margin:.3rem .2rem 0 0}
+.vp-badge-green{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);color:#4ade80}
+.vp-badge-amber{background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.2);color:#d97706}
+.vp-badge-blue{background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:#60a5fa}
+
+/* ── HOVER REFINEMENT ────────────────────────────── */
+.ps-card,.ds-card,.vp-dbox{transition-delay:0ms;transition-duration:.25s}
+.ps-card:hover,.vp-card:hover{transition-delay:80ms}
 
 /* ── PATH SELECTOR ───────────────────────────────────── */
 #deck-selector{width:100%;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow-y:auto}
@@ -1688,7 +1699,7 @@ SLIDE_VISUALS["briefing_us:Platform Stack"]=function(vp){
   _activeCharts.push(c);
 };
 SLIDE_VISUALS["briefing_us:48Social"]=function(vp){
-  vp.innerHTML='<div class="vp-title">48Social + Email Integration</div>'
+  vp.innerHTML='<div class="vp-title">48Social + Email Integration</div><div style="text-align:center"><span class="vp-badge vp-badge-green">Zero additional cost</span><span class="vp-badge vp-badge-blue">Included in 4.8% share</span></div>'
   +'<div class="vp-grid g3"><div class="vp-card"><div class="vp-card-val">50</div><div class="vp-card-lbl">Posts / Book</div></div>'
   +'<div class="vp-card"><div class="vp-card-val">35%</div><div class="vp-card-lbl">Email Open Rate</div></div>'
   +'<div class="vp-card"><div class="vp-card-val">365</div><div class="vp-card-lbl">Assets / Year</div></div></div>'
@@ -1722,7 +1733,7 @@ SLIDE_VISUALS["briefing_us:Cold-Start"]=function(vp){
   +'<div class="vp-dbox"><div class="vp-dbox-title">Price Raise</div><div class="vp-dbox-sub">$3.99-$24.99</div></div></div>';
 };
 SLIDE_VISUALS["briefing_us:Revenue"]=function(vp){
-  vp.innerHTML='<div class="vp-title">US Revenue Projection</div>'
+  vp.innerHTML='<div class="vp-title">US Revenue Projection</div><div style="text-align:center"><span class="vp-badge vp-badge-green">Validated against indie benchmarks</span><span class="vp-badge vp-badge-amber">Cold-start numbers</span></div>'
   +'<table class="vp-table"><thead><tr><th>Period</th><th style="text-align:right">Range</th><th>Notes</th></tr></thead><tbody>'
   +'<tr><td>Month 1</td><td class="num">$0\u2013200</td><td>Account approvals</td></tr>'
   +'<tr><td>Month 6</td><td class="num">$500\u20131,500</td><td>Reviews growing</td></tr>'
@@ -1752,7 +1763,7 @@ SLIDE_VISUALS["briefing_jp:Platform Stack"]=function(vp){
   +'<div class="vp-card"><div class="vp-card-val">90.6%</div><div class="vp-card-lbl">You Keep</div></div></div>';
 };
 SLIDE_VISUALS["briefing_jp:Manga Distribution"]=function(vp){
-  vp.innerHTML='<div class="vp-title">Manga Distribution Pipeline</div>'
+  vp.innerHTML='<div class="vp-title">Manga Distribution Pipeline</div><div style="text-align:center"><span class="vp-badge vp-badge-green">First mover in therapeutic manga</span><span class="vp-badge vp-badge-amber">No competition at scale</span></div>'
   +'<div class="vp-diagram">'
   +'<div class="vp-dbox"><div class="vp-dbox-title">8 Archetypes</div><div class="vp-dbox-sub">JP visual culture</div></div><div class="vp-arrow">\u2192</div>'
   +'<div class="vp-dbox"><div class="vp-dbox-title">Somatic Pacing</div><div class="vp-dbox-sub">Vertical text timing</div></div><div class="vp-arrow">\u2192</div>'
@@ -1808,7 +1819,7 @@ SLIDE_VISUALS["briefing_kr:Platform Stack"]=function(vp){
   +'<div class="vp-card"><div class="vp-card-val">Spotify KR</div><div class="vp-card-lbl">+ Apple Books KR</div></div></div>';
 };
 SLIDE_VISUALS["briefing_kr:Naver Advertising"]=function(vp){
-  vp.innerHTML='<div class="vp-title">Naver Advertising</div>'
+  vp.innerHTML='<div class="vp-title">Naver Advertising</div><div style="text-align:center"><span class="vp-badge vp-badge-green">Cheapest CPC in 13-market study</span></div>'
   +'<div class="vp-grid g3"><div class="vp-card" style="border-color:#22c55e"><div class="vp-card-val">\u20a970</div><div class="vp-card-lbl">Min CPC ($0.054)</div></div>'
   +'<div class="vp-card"><div class="vp-card-val">$300/mo</div><div class="vp-card-lbl">Naver Allocation</div></div>'
   +'<div class="vp-card"><div class="vp-card-val">5,500</div><div class="vp-card-lbl">Clicks / Month</div></div></div>'
@@ -2018,7 +2029,7 @@ SLIDE_VISUALS["briefing_de:Platform Stack"]=function(vp){
   +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">Audible DE</div><div class="vp-card-lbl">Top Revenue Driver</div></div></div>';
 };
 SLIDE_VISUALS["briefing_de:Evidence"]=function(vp){
-  vp.innerHTML='<div class="vp-title">Evidence-Based Framing</div>'
+  vp.innerHTML='<div class="vp-title">Evidence-Based Framing</div><div style="text-align:center"><span class="vp-badge vp-badge-blue">Required for German market</span><span class="vp-badge vp-badge-amber">No spiritual language</span></div>'
   +'<div class="vp-grid g3"><div class="vp-card" style="border-color:#60a5fa"><div class="vp-card-val" style="font-size:.6rem">wissenschaftlich</div><div class="vp-card-lbl">Scientifically Grounded</div></div>'
   +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">Neuroscience</div><div class="vp-card-lbl">Not spiritual language</div></div>'
   +'<div class="vp-card"><div class="vp-card-val" style="font-size:.7rem">Measurable</div><div class="vp-card-lbl">Cite research always</div></div></div>'
