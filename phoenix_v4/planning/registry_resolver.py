@@ -3,8 +3,13 @@ Section Registry Resolver — the canonical content pipeline for Pearl Prime.
 
 Loads pre-authored section registries (registry/{topic}.yaml) and
 resolves a complete book by selecting one variant per section per chapter
-using deterministic hashing. Teacher atoms overlay TEACHER_DOCTRINE and
-EXERCISE sections when available.
+using deterministic hashing.
+
+Two enrichment modes:
+  Teacher mode: teacher atoms overlay HOOK, EXERCISE, INTEGRATION, PIVOT,
+    PERMISSION, TAKEAWAY, THREAD, TEACHER_DOCTRINE. SCENEs stay from registry.
+  Regular mode: persona atoms overlay HOOK, SCENE, STORY from
+    atoms/{persona}/{topic}/. REFLECTIONs and INTEGRATIONs stay from registry.
 
 This replaces the atom assembly path (pool_index + slot_resolver) as the
 sole content source for book production.
@@ -40,6 +45,26 @@ logger = logging.getLogger(__name__)
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 REGISTRY_ROOT = REPO_ROOT / "registry"
 TEACHER_BANKS_ROOT = REPO_ROOT / "SOURCE_OF_TRUTH" / "teacher_banks"
+ATOMS_ROOT = REPO_ROOT / "atoms"
+
+# Section types that get overlaid in teacher mode (everything except SCENE and REFLECTION)
+_TEACHER_OVERLAY_TYPES = frozenset({
+    "TEACHER_DOCTRINE", "HOOK", "EXERCISE", "INTEGRATION",
+    "PIVOT", "PERMISSION", "TAKEAWAY", "THREAD",
+})
+# Section types that get overlaid in regular/persona mode
+_PERSONA_OVERLAY_TYPES = frozenset({"HOOK", "SCENE", "STORY"})
+# Mapping from registry section type to teacher atom directory name
+_TEACHER_TYPE_MAP = {
+    "TEACHER_DOCTRINE": ["COMPRESSION", "REFLECTION"],
+    "HOOK": ["HOOK"],
+    "EXERCISE": ["EXERCISE"],
+    "INTEGRATION": ["INTEGRATION"],
+    "PIVOT": ["PIVOT"],
+    "PERMISSION": ["PERMISSION"],
+    "TAKEAWAY": ["TAKEAWAY"],
+    "THREAD": ["THREAD"],
+}
 
 try:
     import yaml
@@ -149,6 +174,99 @@ def _load_teacher_atoms(teacher_id: str) -> dict[str, list[dict]]:
 
 
 # ---------------------------------------------------------------------------
+# CANONICAL.txt parser (persona atoms)
+# ---------------------------------------------------------------------------
+
+def _parse_canonical_txt(path: Path) -> list[dict]:
+    """Parse atoms/persona/topic/TYPE/CANONICAL.txt into list of atom dicts.
+
+    Format:
+        ## TYPE vNN
+        ---
+        optional metadata
+        ---
+        prose body
+        ---
+    """
+    if not path.exists():
+        return []
+    text = path.read_text(encoding="utf-8")
+    blocks: list[dict] = []
+    current_id = ""
+    in_body = False
+    body_lines: list[str] = []
+    delimiter_count = 0
+
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("## "):
+            # Save previous block
+            if current_id and body_lines:
+                content = "\n".join(body_lines).strip()
+                if content:
+                    blocks.append({"atom_id": current_id, "content": content})
+            current_id = stripped.replace("## ", "").strip()
+            body_lines = []
+            in_body = False
+            delimiter_count = 0
+        elif stripped == "---":
+            delimiter_count += 1
+            if delimiter_count >= 2:
+                in_body = True
+        elif in_body:
+            body_lines.append(line)
+
+    # Last block
+    if current_id and body_lines:
+        content = "\n".join(body_lines).strip()
+        if content:
+            blocks.append({"atom_id": current_id, "content": content})
+
+    return blocks
+
+
+def _load_persona_atoms(persona_id: str, topic_id: str) -> dict[str, list[dict]]:
+    """Load persona-specific atoms from atoms/{persona}/{topic}/{type}/CANONICAL.txt.
+
+    Returns dict keyed by slot type (HOOK, SCENE, STORY, etc.) -> list of atom dicts.
+    """
+    persona_root = ATOMS_ROOT / persona_id / topic_id
+    if not persona_root.exists():
+        return {}
+
+    atoms: dict[str, list[dict]] = {}
+    for slot_dir in persona_root.iterdir():
+        if not slot_dir.is_dir():
+            continue
+        slot_type = slot_dir.name.upper()
+        canonical = slot_dir / "CANONICAL.txt"
+        if canonical.exists():
+            parsed = _parse_canonical_txt(canonical)
+            if parsed:
+                atoms[slot_type] = parsed
+
+    # Also check for engine-specific STORY atoms (atoms/persona/topic/engine/CANONICAL.txt)
+    # These are in subdirs like "grief", "shame", "comparison" under the topic dir
+    for sub in persona_root.iterdir():
+        if sub.is_dir() and (sub / "CANONICAL.txt").exists():
+            slot_type_upper = sub.name.upper()
+            # Skip if it's already a known slot type dir (HOOK, SCENE, etc.)
+            if slot_type_upper in atoms:
+                continue
+            # This is an engine dir — treat its atoms as STORY type
+            parsed = _parse_canonical_txt(sub / "CANONICAL.txt")
+            if parsed:
+                if "STORY" not in atoms:
+                    atoms["STORY"] = []
+                atoms["STORY"].extend(parsed)
+
+    if atoms:
+        logger.info("Loaded %d persona atom types for '%s/%s'",
+                     len(atoms), persona_id, topic_id)
+    return atoms
+
+
+# ---------------------------------------------------------------------------
 # Book resolution
 # ---------------------------------------------------------------------------
 
@@ -237,6 +355,22 @@ def resolve_book(
     """
     sections_data = registry.get("sections", {})
     teacher_atoms = _load_teacher_atoms(teacher_id) if teacher_id else {}
+    # Infer topic from registry filename or metadata
+    reg_topic = registry.get("topic", "")
+    if not reg_topic:
+        # Try to extract from sections metadata
+        for ch_data in sections_data.values():
+            for sec_data in ch_data.get("sections", {}).values():
+                meta = sec_data.get("metadata", {})
+                if meta.get("topic"):
+                    reg_topic = meta["topic"]
+                    break
+            if reg_topic:
+                break
+    # Always load persona atoms when persona_id is provided — even in teacher mode.
+    # Teacher mode = teacher overlay (doctrine, exercises) + persona overlay (hooks, scenes).
+    # Teachers speak TO personas — they don't replace them.
+    persona_atoms = _load_persona_atoms(persona_id, reg_topic) if persona_id and reg_topic else {}
 
     chapters: list[ResolvedChapter] = []
 
@@ -259,26 +393,48 @@ def resolve_book(
                 logger.warning("Section %s has no variants, skipping", sec_id)
                 continue
 
-            # Teacher overlay: replace TEACHER_DOCTRINE with teacher atoms
-            if sec_type == "TEACHER_DOCTRINE" and teacher_atoms:
-                doctrine_atoms = teacher_atoms.get("COMPRESSION", []) or \
-                                 teacher_atoms.get("REFLECTION", [])
-                if doctrine_atoms:
-                    # Pick teacher atom deterministically
-                    t_idx = _deterministic_index(
-                        f"{seed}:{ch_key}:{sec_key}:teacher", len(doctrine_atoms)
-                    )
-                    atom = doctrine_atoms[t_idx]
-                    resolved_sections.append(ResolvedSection(
-                        section_id=sec_id,
-                        section_type="TEACHER_DOCTRINE",
-                        variant_id=atom["atom_id"],
-                        content=atom["content"],
-                        purpose=purpose,
-                    ))
-                    continue
+            # ── OVERLAY PRIORITY ──
+            # 1. Teacher atoms for teacher-voiced sections (doctrine, exercises, etc.)
+            # 2. Persona atoms for persona-grounded sections (hooks, scenes, stories)
+            # Both can be active simultaneously — teacher speaks TO the persona.
+            overlay_content = None
+            overlay_id = None
 
-            # Standard variant selection
+            # Teacher overlay: doctrine, exercises, integration, pivot, permission, etc.
+            if teacher_atoms and sec_type in _TEACHER_OVERLAY_TYPES:
+                atom_pool: list[dict] = []
+                for dir_name in _TEACHER_TYPE_MAP.get(sec_type, [sec_type]):
+                    atom_pool = teacher_atoms.get(dir_name, [])
+                    if atom_pool:
+                        break
+                if atom_pool:
+                    t_idx = _deterministic_index(
+                        f"{seed}:{ch_key}:{sec_key}:teacher", len(atom_pool)
+                    )
+                    overlay_content = atom_pool[t_idx]["content"]
+                    overlay_id = atom_pool[t_idx]["atom_id"]
+
+            # Persona overlay: hooks, scenes, stories (even in teacher mode)
+            if not overlay_content and persona_atoms and sec_type in _PERSONA_OVERLAY_TYPES:
+                atom_pool = persona_atoms.get(sec_type, [])
+                if atom_pool:
+                    p_idx = _deterministic_index(
+                        f"{seed}:{ch_key}:{sec_key}:persona", len(atom_pool)
+                    )
+                    overlay_content = atom_pool[p_idx]["content"]
+                    overlay_id = atom_pool[p_idx]["atom_id"]
+
+            if overlay_content:
+                resolved_sections.append(ResolvedSection(
+                    section_id=sec_id,
+                    section_type=sec_type,
+                    variant_id=overlay_id or sec_id,
+                    content=overlay_content,
+                    purpose=purpose,
+                ))
+                continue
+
+            # ── DEFAULT: use registry variant ──
             v_idx = _deterministic_index(
                 f"{seed}:{ch_key}:{sec_key}", len(variants)
             )
