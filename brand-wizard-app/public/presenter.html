@@ -198,8 +198,9 @@ body::after{content:"";position:fixed;inset:0;background:url("data:image/svg+xml
 <nav id="presenter-nav" data-nav="universal" style="position:fixed;top:0;left:0;right:0;height:36px;background:rgba(14,10,6,.97);border-bottom:1px solid rgba(180,83,9,.12);display:none;align-items:center;padding:0 14px;gap:8px;z-index:9999;backdrop-filter:blur(8px);font-family:'DM Sans',sans-serif;overflow-x:auto">
 <a href="presenter" style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#d97706;text-decoration:none;white-space:nowrap">Pearl Prime</a>
 <span style="width:1px;height:14px;background:rgba(180,83,9,.2);flex-shrink:0"></span>
-<a href="presenter?deck=intro" class="unav">Intro</a>
-<a href="presenter?deck=marketing" class="unav">Marketing</a>
+<a id="nav-intro" href="presenter?deck=intro" class="unav">Intro</a>
+<a id="nav-marketing" href="presenter?deck=marketing" class="unav">Marketing</a>
+<a id="nav-workflow" href="presenter?deck=briefing_us" class="unav">Work Flow</a>
 <a href="brand_admin.html" class="unav" style="color:#d97706;border:1px solid rgba(180,83,9,.25);margin-left:auto">Brand Admin</a>
 </nav>
 <style>.unav{font-family:'DM Mono',monospace;font-size:.625rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,246,240,.55);text-decoration:none;padding:3px 7px;border-radius:3px;transition:all .15s;white-space:nowrap}.unav:hover{color:rgba(250,246,240,.7);background:rgba(180,83,9,.08)}</style>
@@ -1383,6 +1384,35 @@ if (paramLane && paramBriefing) {
     };
   }
 }
+
+// ── DYNAMIC NAV LINKS ────────────────────────────────────
+// Keep lane/briefing params in nav so guided flow stays intact
+(function() {
+  var carry = (paramLane || paramBriefing)
+    ? "&lane=" + paramLane + "&briefing=" + paramBriefing : "";
+  var ni = document.getElementById("nav-intro");
+  var nm = document.getElementById("nav-marketing");
+  var nw = document.getElementById("nav-workflow");
+  if (ni) ni.href = "presenter?deck=intro" + carry;
+  if (nm) nm.href = "presenter?deck=marketing" + carry;
+  if (nw && paramBriefing && paramBriefing !== "intro") {
+    nw.href = "presenter?deck=" + paramBriefing + (paramLane ? "&lane=" + paramLane : "");
+  } else if (nw && paramLane) {
+    // Fallback: use lane to guess briefing
+    var laneBriefing = {us:"briefing_us",jp:"briefing_jp",kr:"briefing_kr",tw:"briefing_tw",cn:"briefing_cn",fr:"briefing_fr",de:"briefing_de"};
+    if (laneBriefing[paramLane]) nw.href = "presenter?deck=" + laneBriefing[paramLane] + "&lane=" + paramLane;
+  }
+  // Highlight active nav item
+  if (activeDeck) {
+    var activeLink = activeDeck.indexOf("briefing_") === 0 ? nw
+      : activeDeck === "marketing" ? nm
+      : activeDeck === "intro" ? ni : null;
+    if (activeLink) {
+      activeLink.style.color = "var(--acc2)";
+      activeLink.style.background = "rgba(180,83,9,.1)";
+    }
+  }
+})();
 
 function endPrez() {
   state.playing = false;
