@@ -1046,10 +1046,19 @@ function updSpine() {
   if (!el || !state.filtered.length) return;
   var total = state.filtered.length;
   var cur = state.curIdx;
+  var framing = DECK_FRAMING[activeDeck];
+  var stages = framing && framing.stages;
   var html = '';
   for (var i = 0; i < total; i++) {
-    var color = i < cur ? 'var(--acc)' : i === cur ? 'var(--acc2)' : 'rgba(180,83,9,.15)';
-    html += '<div style="flex:1;height:3px;border-radius:1px;background:' + color + ';transition:background .3s"></div>';
+    var done = i < cur;
+    var active = i === cur;
+    var barColor = done ? 'var(--acc)' : active ? 'var(--acc2)' : 'rgba(180,83,9,.15)';
+    var lblColor = active ? 'var(--acc2)' : done ? 'rgba(180,83,9,.5)' : 'rgba(250,246,240,.12)';
+    var lbl = stages && stages[i] ? stages[i] : '';
+    html += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">'
+      + '<div style="width:100%;height:3px;border-radius:1px;background:' + barColor + ';transition:background .3s"></div>'
+      + (lbl ? '<div style="font-family:var(--mono);font-size:.28rem;letter-spacing:.06em;color:' + lblColor + ';transition:color .3s;white-space:nowrap">' + lbl + '</div>' : '')
+      + '</div>';
   }
   el.innerHTML = html;
 }
@@ -1232,6 +1241,46 @@ function goSlide(d) {
   userJump(state.curIdx + d);
 }
 
+// ── PER-MARKET FRAMING (context layer above system) ──
+var DECK_FRAMING = {
+  briefing_us: {
+    context: "How ideas scale through media",
+    stages: ["Rhythm","Platforms","Marketing","Growth","Launch","Revenue"]
+  },
+  briefing_jp: {
+    context: "How lineage becomes living transmission",
+    stages: ["Rhythm","Platforms","Manga","Discovery","Launch","Structure"]
+  },
+  briefing_kr: {
+    context: "Where achievement culture meets therapeutic content",
+    stages: ["Platforms","Advertising","Culture","Launch"]
+  },
+  briefing_tw: {
+    context: "How systems bridge culture and technology",
+    stages: ["Rhythm","Platforms","Culture","Launch","Revenue"]
+  },
+  briefing_cn: {
+    context: "How wisdom reaches 1.4 billion through local platforms",
+    stages: ["Rhythm","Platforms","Audio","HK + SG","Launch","Revenue"]
+  },
+  briefing_fr: {
+    context: "Where philosophy meets manga at scale",
+    stages: ["Rhythm","Platforms","Manga","Social","Launch","Revenue"]
+  },
+  briefing_de: {
+    context: "Where precision systems meet evidence-based wellness",
+    stages: ["Rhythm","Platforms","Evidence","Social","Launch","Revenue"]
+  },
+  intro: {
+    context: "Ancient wisdom. Enlightened intelligence. One system.",
+    stages: null
+  },
+  marketing: {
+    context: "312 brands. 13 markets. Data-driven strategy.",
+    stages: null
+  }
+};
+
 var DECK_NEXT = {
   intro: {id:"briefing_us",label:"US Briefing",desc:"Platform stack, upload guide, revenue projections."},
   marketing: {id:"briefing_us",label:"US Briefing",desc:"Start with the US market operating guide."},
@@ -1253,15 +1302,34 @@ function endPrez() {
   document.getElementById("sc-label").textContent = "Complete";
 
   var next = DECK_NEXT[activeDeck];
-  var html = '<div style="text-align:center;padding:1rem 0">'
-    + '<div style="font-family:var(--serif);font-size:1.1rem;color:var(--acc2);margin-bottom:.6rem">\u2713 Deck complete</div>';
-  if (next) {
-    html += '<div style="font-family:var(--mono);font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,240,.25);margin-bottom:.8rem">Up next</div>'
-      + '<a href="?deck=' + next.id + '" style="display:inline-block;background:rgba(180,83,9,.15);border:1px solid rgba(180,83,9,.3);border-radius:4px;padding:.8rem 1.4rem;text-decoration:none;color:inherit;transition:all .2s;max-width:320px">'
-      + '<div style="font-family:var(--serif);font-size:.9rem;color:var(--acc2)">' + next.label + '</div>'
-      + '<div style="font-size:.6rem;color:rgba(250,246,240,.35);margin-top:.3rem;line-height:1.5">' + next.desc + '</div></a>';
+  var framing = DECK_FRAMING[activeDeck];
+  var ctx = framing && framing.context ? framing.context : '';
+  var total = state.filtered ? state.filtered.length : 0;
+
+  var html = '<div style="text-align:center;padding:.8rem 0">';
+
+  // Completion confirmation with context
+  html += '<div style="font-family:var(--serif);font-size:1.2rem;color:var(--acc2);margin-bottom:.3rem">\u2713 Path complete</div>';
+  if (ctx) {
+    html += '<div style="font-family:var(--mono);font-size:.38rem;letter-spacing:.06em;color:rgba(250,246,240,.18);margin-bottom:.8rem">' + ctx + ' \u2014 ' + total + ' sections reviewed</div>';
   }
-  html += '<div style="margin-top:1rem"><a href="presenter" style="font-family:var(--mono);font-size:.38rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,246,240,.25);text-decoration:none">\u2190 All Decks</a></div></div>';
+
+  // Next path suggestion
+  if (next) {
+    html += '<div style="font-family:var(--mono);font-size:.36rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.2);margin-bottom:.6rem">Continue your journey</div>'
+      + '<a href="?deck=' + next.id + '" style="display:inline-block;background:rgba(180,83,9,.1);border:1px solid rgba(180,83,9,.25);border-radius:6px;padding:1rem 1.6rem;text-decoration:none;color:inherit;transition:all .25s;max-width:340px" onmouseover="this.style.borderColor=\'rgba(180,83,9,.5)\';this.style.background=\'rgba(180,83,9,.15)\'" onmouseout="this.style.borderColor=\'rgba(180,83,9,.25)\';this.style.background=\'rgba(180,83,9,.1)\'">'
+      + '<div style="font-family:var(--serif);font-size:.95rem;color:var(--acc2)">' + next.label + ' \u2192</div>'
+      + '<div style="font-size:.58rem;color:rgba(250,246,240,.3);margin-top:.3rem;line-height:1.6">' + next.desc + '</div></a>';
+  } else {
+    // Final deck in sequence
+    html += '<div style="font-family:var(--serif);font-size:.85rem;color:rgba(250,246,240,.5);margin-bottom:.4rem;font-style:italic">You have reviewed all market briefings.</div>';
+  }
+
+  html += '<div style="margin-top:1.2rem;display:flex;gap:1rem;justify-content:center">'
+    + '<a href="presenter" style="font-family:var(--mono);font-size:.36rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,246,240,.2);text-decoration:none;transition:color .2s" onmouseover="this.style.color=\'var(--acc2)\'" onmouseout="this.style.color=\'rgba(250,246,240,.2)\'">\u2190 All paths</a>'
+    + '<a href="brand_admin.html" style="font-family:var(--mono);font-size:.36rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(180,83,9,.35);text-decoration:none;transition:color .2s" onmouseover="this.style.color=\'var(--acc2)\'" onmouseout="this.style.color=\'rgba(180,83,9,.35)\'">Brand Admin \u2192</a>'
+    + '</div></div>';
+
   document.getElementById("sc-text").innerHTML = html;
 }
 
@@ -1971,11 +2039,14 @@ function showVisual(scriptItem){
   var dn=activeDeck||"intro";
   var found=false;
   var keys=Object.keys(SLIDE_VISUALS);
+  // context headline from framing layer
+  var framing=DECK_FRAMING[dn];
+  var ctxHtml=framing&&framing.context?'<div style="font-family:var(--mono);font-size:.36rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,240,.15);text-align:center;margin-bottom:.4rem">'+framing.context+'</div>':'';
   // exact deck:label match
   for(var k=0;k<keys.length;k++){
     var p=keys[k].split(":");
     if(p[0]===dn && label.indexOf(p[1])!==-1){
-      vp.innerHTML="";SLIDE_VISUALS[keys[k]](vp);
+      vp.innerHTML=ctxHtml;SLIDE_VISUALS[keys[k]](vp);
       vp.classList.add("active");hero.style.display="none";found=true;break;
     }
   }
@@ -1984,7 +2055,7 @@ function showVisual(scriptItem){
     for(var k2=0;k2<keys.length;k2++){
       var p2=keys[k2].split(":");
       if(label.indexOf(p2[1])!==-1){
-        vp.innerHTML="";SLIDE_VISUALS[keys[k2]](vp);
+        vp.innerHTML=ctxHtml;SLIDE_VISUALS[keys[k2]](vp);
         vp.classList.add("active");hero.style.display="none";found=true;break;
       }
     }
