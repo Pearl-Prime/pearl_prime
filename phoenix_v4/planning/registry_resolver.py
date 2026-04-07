@@ -1,7 +1,7 @@
 """
 Section Registry Resolver — the canonical content pipeline for Pearl Prime.
 
-Loads pre-authored section registries (registry/registry_{topic}.yaml) and
+Loads pre-authored section registries (registry/{topic}.yaml) and
 resolves a complete book by selecting one variant per section per chapter
 using deterministic hashing. Teacher atoms overlay TEACHER_DOCTRINE and
 EXERCISE sections when available.
@@ -72,7 +72,7 @@ def load_registry(topic: str, registry_path: Optional[Path] = None) -> dict:
     Args:
         topic: Topic ID (e.g., "grief", "anxiety", "burnout")
         registry_path: Explicit path override. If None, auto-discovers
-                       from registry/registry_{topic}.yaml
+                       from registry/{topic}.yaml
 
     Returns:
         Parsed registry dict with 'sections' key containing chapter data.
@@ -83,13 +83,13 @@ def load_registry(topic: str, registry_path: Optional[Path] = None) -> dict:
     if registry_path:
         path = Path(registry_path)
     else:
-        path = REGISTRY_ROOT / f"registry_{topic}.yaml"
+        path = REGISTRY_ROOT / f"{topic}.yaml"
 
     if not path.exists():
         raise FileNotFoundError(
             f"No section registry for topic '{topic}'. "
             f"Expected: {path}\n"
-            f"Create registry/registry_{topic}.yaml with 12 chapters × 10 sections × 5 variants."
+            f"Create registry/{topic}.yaml with 12 chapters × 10 sections × 5 variants."
         )
 
     data = _load_yaml(path)
@@ -106,8 +106,8 @@ def available_registries() -> list[str]:
     if not REGISTRY_ROOT.exists():
         return []
     return [
-        p.stem.replace("registry_", "")
-        for p in REGISTRY_ROOT.glob("registry_*.yaml")
+        p.stem
+        for p in REGISTRY_ROOT.glob("*.yaml")
     ]
 
 

@@ -45,7 +45,7 @@ The catalog planner generates 8,287 titles across 17 topics and 13 markets. But 
 
 ### 4. Registry creation unblocks topic
 
-When `registry/registry_{topic}.yaml` is created, the topic is automatically unblocked because the pipeline checks for file existence at runtime.
+When `registry/{topic}.yaml` is created, the topic is automatically unblocked because the pipeline checks for file existence at runtime.
 
 ## Available Registries Check
 
@@ -57,7 +57,7 @@ from phoenix_v4.planning.registry_resolver import available_registries
 
 ## Registry Template
 
-See `registry/registry_grief.yaml` — 12 chapters × 7-10 sections × 2-5 variants.
+See `registry/grief.yaml` — 12 chapters × 7-10 sections × 2-5 variants.
 
 Target per registry:
 - 12 chapters with authored titles

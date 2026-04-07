@@ -289,7 +289,7 @@ def main() -> int:
     # If you need legacy formats, use the legacy pipeline entry point, not run_pipeline.py.
     ap.add_argument("--input", default=None, help="YAML file with topic_id, persona_id, installment_number (Stage 2 input)")
     ap.add_argument("--arc", required=True, help="Path to Master Arc YAML (required; no arc = no compile)")
-    ap.add_argument("--registry", default=None, help="Section registry YAML path (auto-detected from registry/registry_{topic}.yaml if not supplied)")
+    ap.add_argument("--registry", default=None, help="Section registry YAML path (auto-detected from registry/{topic}.yaml if not supplied)")
     ap.add_argument("--teacher", default=None, help="Teacher id for Teacher Mode (validated against teacher_persona_matrix)")
     ap.add_argument("--author", default=None, help="Author id (pen-name; resolved from author_registry, sets author_positioning_profile)")
     ap.add_argument("--narrator", default=None, help="Narrator id (resolved from brand_narrator_assignments when not supplied; Writer Spec §23.5)")
@@ -883,7 +883,7 @@ def main() -> int:
     if registry_path:
         use_registry = True
     elif topic_id in available_registries():
-        registry_path = str(REGISTRY_ROOT / f"registry_{topic_id}.yaml")
+        registry_path = str(REGISTRY_ROOT / f"{topic_id}.yaml")
         use_registry = True
 
     if use_registry:
@@ -967,7 +967,7 @@ def main() -> int:
         "arc_path": str(arc_path),
         "timestamp": __import__("datetime").datetime.utcnow().isoformat(),
         "message": f"No section registry for topic '{topic_id}'. "
-                   f"Create registry/registry_{topic_id}.yaml (12 chapters × 10 sections × 5 variants).",
+                   f"Create registry/{topic_id}.yaml (12 chapters × 10 sections × 5 variants).",
         "available_registries": available_registries(),
         "action": "BLOCK_TOPIC_UNTIL_REGISTRY_EXISTS",
     }
@@ -987,9 +987,9 @@ def main() -> int:
         f"The section registry pipeline is the ONLY content mode.\n"
         f"Atom assembly has been removed.\n"
         f"\n"
-        f"To fix: Create registry/registry_{topic_id}.yaml\n"
+        f"To fix: Create registry/{topic_id}.yaml\n"
         f"Format: 12 chapters × 10 sections × 5 variants\n"
-        f"See registry/registry_grief.yaml as template.\n"
+        f"See registry/grief.yaml as template.\n"
         f"\n"
         f"Available registries: {', '.join(available_registries()) or 'grief only'}\n"
         f"{'='*60}\n"
