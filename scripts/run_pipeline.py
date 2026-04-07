@@ -955,22 +955,59 @@ def main() -> int:
 
         return 0
 
-    # ── ATOM ASSEMBLY PATH (deprecated — fallback only) ──────────
-    # Stage 3: CompiledBook (Arc-First: arc required)
-    # DEPRECATED: This path is retained for backward compatibility with topics
-    # that don't yet have section registries. New topics MUST use registries.
-    print(f"WARNING: No section registry for topic '{topic_id}'. Falling back to atom assembly (deprecated).")
-    print(f"  Create registry/registry_{topic_id}.yaml to use the canonical pipeline.")
-    require_full_resolution = bool(book_spec_for_compiler.get("teacher_mode")) and not teacher_story_fallback
-    from phoenix_v4.planning.assembly_compiler import compile_plan
-    compiled = compile_plan(
-        book_spec_for_compiler,
-        format_plan_dict,
-        arc_path=arc_path,
-        require_full_resolution=require_full_resolution,
-        atoms_root=atoms_root,
-        atoms_model=effective_atoms_model,
+    # ── NO REGISTRY = HARD FAIL ────────────────────────────────
+    # Section registry is the ONLY content path. Atom assembly is removed.
+    # Log the failure to EI v2 learning system so the planner never
+    # requests this topic again until a registry is built.
+    ei_v2_failure = {
+        "event": "REGISTRY_MISSING",
+        "topic_id": topic_id,
+        "persona_id": book_spec_for_compiler.get("persona_id", ""),
+        "teacher_id": book_spec_for_compiler.get("teacher_id", ""),
+        "arc_path": str(arc_path),
+        "timestamp": __import__("datetime").datetime.utcnow().isoformat(),
+        "message": f"No section registry for topic '{topic_id}'. "
+                   f"Create registry/registry_{topic_id}.yaml (12 chapters × 10 sections × 5 variants).",
+        "available_registries": available_registries(),
+        "action": "BLOCK_TOPIC_UNTIL_REGISTRY_EXISTS",
+    }
+
+    # Write to EI v2 learning log so catalog planner learns
+    ei_log_path = Path("artifacts/ei_v2/registry_failures.jsonl")
+    ei_log_path.parent.mkdir(parents=True, exist_ok=True)
+    import json as _json
+    with open(ei_log_path, "a") as _f:
+        _f.write(_json.dumps(ei_v2_failure) + "\n")
+    print(f"EI v2 learning event logged: {ei_log_path}")
+
+    raise SystemExit(
+        f"\n{'='*60}\n"
+        f"HARD FAIL: No section registry for topic '{topic_id}'.\n"
+        f"\n"
+        f"The section registry pipeline is the ONLY content mode.\n"
+        f"Atom assembly has been removed.\n"
+        f"\n"
+        f"To fix: Create registry/registry_{topic_id}.yaml\n"
+        f"Format: 12 chapters × 10 sections × 5 variants\n"
+        f"See registry/registry_grief.yaml as template.\n"
+        f"\n"
+        f"Available registries: {', '.join(available_registries()) or 'grief only'}\n"
+        f"{'='*60}\n"
     )
+
+    # Dead code below — atom assembly path removed.
+    # Retained commented for reference only during transition.
+    # require_full_resolution = bool(book_spec_for_compiler.get("teacher_mode")) and not teacher_story_fallback
+    # from phoenix_v4.planning.assembly_compiler import compile_plan
+    # compiled = compile_plan(
+    #     book_spec_for_compiler,
+    #     format_plan_dict,
+    #     arc_path=arc_path,
+    #     require_full_resolution=require_full_resolution,
+    #     atoms_root=atoms_root,
+    #     atoms_model=effective_atoms_model,
+    # )
+    compiled = None  # unreachable — SystemExit above
 
     # Part 3.1 / 3.3 validate compiled plan (structure)
     from phoenix_v4.qa.validate_compiled_plan import validate_compiled_plan
