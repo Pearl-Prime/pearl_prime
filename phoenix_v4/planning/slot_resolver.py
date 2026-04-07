@@ -1,3 +1,6 @@
+# DEPRECATED: Atom assembly path. Use section registry pipeline (registry_resolver.py).
+# Retained for backward compatibility with topics that lack registries.
+# New topics MUST use registry/registry_{topic}.yaml.
 """
 Part 3.1 slot resolver: deterministic selection per slot, no reuse in-book.
 Selector hash algorithm: SHA256(selector_key) -> first 16 bytes big-endian int -> modulo len(available).

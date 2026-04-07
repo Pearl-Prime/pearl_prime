@@ -1,3 +1,6 @@
+# DEPRECATED: Atom assembly path. Use section registry pipeline (registry_resolver.py).
+# Retained for backward compatibility with topics that lack registries.
+# New topics MUST use registry/registry_{topic}.yaml.
 """
 Pool index: atoms by slot type for (persona, topic).
 Used by capability check and slot resolver. Canonical layout: block-file pattern.

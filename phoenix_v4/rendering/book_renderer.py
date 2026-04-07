@@ -40,6 +40,13 @@ _LOC_VAR_FALLBACKS: dict[str, str] = {
     "store_name":       "a nearby store",
     "office_building":  "the office building",
     "commute_mode":     "the commute",
+    # Section registry location tokens (registry/registry_*.yaml)
+    "location.digital_space":       "your phone",
+    "location.daily_space":         "the kitchen table",
+    "location.high_stakes_space":   "the meeting room",
+    "location.learning_space":      "the quiet room",
+    "location.memory_space":        "the place where they used to be",
+    "location.social_gathering":    "the gathering",
 }
 
 # Rotating variants per chapter to avoid identical scene text across chapters

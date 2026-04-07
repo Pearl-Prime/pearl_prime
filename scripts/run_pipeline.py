@@ -289,6 +289,7 @@ def main() -> int:
     # If you need legacy formats, use the legacy pipeline entry point, not run_pipeline.py.
     ap.add_argument("--input", default=None, help="YAML file with topic_id, persona_id, installment_number (Stage 2 input)")
     ap.add_argument("--arc", required=True, help="Path to Master Arc YAML (required; no arc = no compile)")
+    ap.add_argument("--registry", default=None, help="Section registry YAML path (auto-detected from registry/registry_{topic}.yaml if not supplied)")
     ap.add_argument("--teacher", default=None, help="Teacher id for Teacher Mode (validated against teacher_persona_matrix)")
     ap.add_argument("--author", default=None, help="Author id (pen-name; resolved from author_registry, sets author_positioning_profile)")
     ap.add_argument("--narrator", default=None, help="Narrator id (resolved from brand_narrator_assignments when not supplied; Writer Spec §23.5)")
@@ -869,10 +870,97 @@ def main() -> int:
                     "Teacher coverage insufficient for required slots. See artifacts/teacher_coverage_report.json"
                 )
 
+    # ── SECTION REGISTRY PATH (canonical content mode) ─────────────
+    # If a section registry exists for this topic, use it instead of atom assembly.
+    # The registry provides 12 chapters × 10 sections × 5 variants of pre-authored prose.
+    # Teacher atoms overlay TEACHER_DOCTRINE sections when teacher_id is set.
+    from phoenix_v4.planning.registry_resolver import load_registry, resolve_book as registry_resolve_book, available_registries, REGISTRY_ROOT
+
+    registry_path = getattr(args, "registry", None)
+    topic_id = book_spec_for_compiler.get("topic_id", "")
+    use_registry = False
+
+    if registry_path:
+        use_registry = True
+    elif topic_id in available_registries():
+        registry_path = str(REGISTRY_ROOT / f"registry_{topic_id}.yaml")
+        use_registry = True
+
+    if use_registry:
+        print(f"Using section registry: {registry_path}")
+        reg_data = load_registry(topic_id, Path(registry_path) if registry_path else None)
+        teacher_id_for_reg = book_spec_for_compiler.get("teacher_id", "")
+        seed = f"{topic_id}:{book_spec_for_compiler.get('persona_id', '')}:{book_spec_for_compiler.get('installment_number', 1)}"
+
+        resolved_book = registry_resolve_book(
+            reg_data,
+            seed=seed,
+            teacher_id=teacher_id_for_reg or None,
+            persona_id=book_spec_for_compiler.get("persona_id"),
+        )
+
+        # Render to prose directly (skip atom assembly, skip Stage 3 compile)
+        prose = resolved_book.to_prose()
+
+        # Apply location variable rotation + delivery cleanup
+        from phoenix_v4.rendering.book_renderer import clean_for_delivery
+        prose = clean_for_delivery(prose)
+
+        # Write output
+        if args.out:
+            import json
+            plan_out = {
+                "plan_id": f"registry-{topic_id}-{seed}",
+                "topic_id": topic_id,
+                "persona_id": book_spec_for_compiler.get("persona_id", ""),
+                "teacher_id": teacher_id_for_reg,
+                "registry_path": registry_path,
+                "chapter_count": resolved_book.chapter_count,
+                "word_count": resolved_book.word_count,
+                "seed": seed,
+                "source": "section_registry",
+            }
+            out_path = Path(args.out)
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            out_path.write_text(json.dumps(plan_out, indent=2, ensure_ascii=False))
+            print(f"Wrote {args.out}")
+
+        if args.render_book:
+            render_dir = Path(args.render_dir) if args.render_dir else Path("artifacts/rendered") / f"registry-{topic_id}"
+            render_dir.mkdir(parents=True, exist_ok=True)
+            book_path = render_dir / "book.txt"
+            book_path.write_text(prose, encoding="utf-8")
+            print(f"Rendered book (txt): {book_path}")
+
+            # Budget report
+            budget_path = render_dir / "budget.json"
+            budget_path.write_text(json.dumps({
+                "word_count": resolved_book.word_count,
+                "chapter_count": resolved_book.chapter_count,
+                "chapters": [{"chapter": ch.chapter_index + 1, "title": ch.title, "words": ch.word_count} for ch in resolved_book.chapters],
+            }, indent=2))
+            print(f"Rendered book (budget): {budget_path}")
+
+            # Output contract
+            contract_path = render_dir / "output_contract.json"
+            contract_path.write_text(json.dumps({
+                "source": "section_registry",
+                "registry_path": registry_path,
+                "topic_id": topic_id,
+                "teacher_id": teacher_id_for_reg,
+                "word_count": resolved_book.word_count,
+                "chapter_count": resolved_book.chapter_count,
+            }, indent=2))
+            print(f"Output contract: {contract_path}")
+
+        return 0
+
+    # ── ATOM ASSEMBLY PATH (deprecated — fallback only) ──────────
     # Stage 3: CompiledBook (Arc-First: arc required)
-    # Teacher Mode: require_full_resolution=True so no placeholders are allowed (Gate A).
-    # Exception: when teacher_story_fallback is enabled, allow placeholders for non-STORY slots
-    # (they'll be filled from persona atoms at render time).
+    # DEPRECATED: This path is retained for backward compatibility with topics
+    # that don't yet have section registries. New topics MUST use registries.
+    print(f"WARNING: No section registry for topic '{topic_id}'. Falling back to atom assembly (deprecated).")
+    print(f"  Create registry/registry_{topic_id}.yaml to use the canonical pipeline.")
     require_full_resolution = bool(book_spec_for_compiler.get("teacher_mode")) and not teacher_story_fallback
     from phoenix_v4.planning.assembly_compiler import compile_plan
     compiled = compile_plan(
