@@ -140,22 +140,27 @@ body.presenter-active{overflow:hidden}
 </style>
 </head>
 <body>
-<!-- Phoenix Command Universal Nav -->
-<nav data-nav="universal" style="position:fixed;top:0;left:0;right:0;height:36px;background:rgba(14,10,6,.97);border-bottom:1px solid rgba(180,83,9,.12);display:flex;align-items:center;padding:0 14px;gap:8px;z-index:9999;backdrop-filter:blur(8px);font-family:'DM Sans',sans-serif;overflow-x:auto">
-<a href="pearl_prime_entry.html" style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#d97706;text-decoration:none;white-space:nowrap" data-i18n="nav.brand">Pearl Prime</a>
+<!-- Presenter nav — only visible inside a deck, hidden on selector -->
+<nav id="presenter-nav" data-nav="universal" style="position:fixed;top:0;left:0;right:0;height:36px;background:rgba(14,10,6,.97);border-bottom:1px solid rgba(180,83,9,.12);display:none;align-items:center;padding:0 14px;gap:8px;z-index:9999;backdrop-filter:blur(8px);font-family:'DM Sans',sans-serif;overflow-x:auto">
+<a href="pearl_prime_entry.html" style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#d97706;text-decoration:none;white-space:nowrap">Pearl Prime</a>
 <span style="width:1px;height:14px;background:rgba(180,83,9,.2);flex-shrink:0"></span>
-<a href="pearl_prime_entry.html" class="unav" data-i18n="nav.markets">Markets</a>
-<a href="teacher_select.html" class="unav" data-i18n="nav.teachers">Teachers</a>
-<a href="teacher_showcase.html" class="unav" data-i18n="nav.showcase">Showcase</a>
-<a href="presenter?deck=intro" class="unav" data-i18n="nav.intro">Intro</a>
-<a href="marketing_dashboard.html" class="unav" data-i18n="nav.marketing">Marketing</a>
-<a href="market_lane_matrix.html" class="unav" data-i18n="nav.matrix">Matrix</a>
-<a href="brand_admin.html" class="unav" style="color:#d97706;border:1px solid rgba(180,83,9,.25);margin-left:auto" data-i18n="nav.admin">Brand Admin</a>
+<a href="presenter" class="unav" style="color:var(--acc2);background:rgba(180,83,9,.1)">All Decks</a>
+<a href="presenter?deck=intro" class="unav">Intro</a>
+<a href="presenter?deck=marketing" class="unav">Marketing</a>
+<span class="unav" style="color:rgba(250,246,240,.15);pointer-events:none">|</span>
+<a href="presenter?deck=briefing_us" class="unav">US</a>
+<a href="presenter?deck=briefing_jp" class="unav">JP</a>
+<a href="presenter?deck=briefing_tw" class="unav">TW</a>
+<a href="presenter?deck=briefing_cn" class="unav">CN</a>
+<a href="presenter?deck=briefing_kr" class="unav">KR</a>
+<a href="presenter?deck=briefing_fr" class="unav">FR</a>
+<a href="presenter?deck=briefing_de" class="unav">DE</a>
+<a href="brand_admin.html" class="unav" style="color:#d97706;border:1px solid rgba(180,83,9,.25);margin-left:auto">Brand Admin</a>
 </nav>
 <style>.unav{font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,246,240,.3);text-decoration:none;padding:3px 7px;border-radius:3px;transition:all .15s;white-space:nowrap}.unav:hover{color:rgba(250,246,240,.7);background:rgba(180,83,9,.08)}</style>
-<div style="height:36px"></div>
+<div id="nav-spacer" style="height:36px;display:none"></div>
 <script src="assets/i18n.js"></script>
-<!-- /Universal Nav -->
+<!-- /Presenter Nav -->
 
 
 
@@ -163,7 +168,7 @@ body.presenter-active{overflow:hidden}
 <!-- ── DECK SELECTOR ──────────────────────────────────── -->
 <div id="deck-selector">
   <div class="ds-header">
-    <div class="ds-eyebrow">Pearl Prime Command</div>
+    <div class="ds-eyebrow">Pearl Prime</div>
     <div class="ds-title">Presenter</div>
     <div class="ds-tagline">Nine decks. Four languages. One system.</div>
   </div>
@@ -175,13 +180,13 @@ body.presenter-active{overflow:hidden}
         <div class="ds-card-badge">START HERE</div>
         <div class="ds-card-name">Pearl Prime Intro</div>
         <div class="ds-card-desc">Brand admin onboarding. Revenue, architecture, weekly OS. All five markets covered.</div>
-        <div class="ds-card-meta">25 slides &middot; EN &middot; JA &middot; ZH &middot; 38 min</div>
+        <div class="ds-card-meta">25 slides &middot; ~38 min</div>
       </a>
       <a class="ds-card ds-global" href="?deck=marketing">
         <div class="ds-card-badge">STRATEGY</div>
         <div class="ds-card-name">Marketing Intelligence</div>
         <div class="ds-card-desc">13 markets, ad ROI data, content audit, video strategy, fleet rollout plan.</div>
-        <div class="ds-card-meta">14 sections &middot; EN &middot; JA &middot; ZH &middot; 42 min</div>
+        <div class="ds-card-meta">14 sections &middot; ~42 min</div>
       </a>
     </div>
   </div>
@@ -193,43 +198,43 @@ body.presenter-active{overflow:hidden}
         <div class="ds-card-flag"><span class="ds-flag">US</span></div>
         <div class="ds-card-name">United States</div>
         <div class="ds-card-desc">KDP, Google Play, Apple Books, 48Social, freebie funnel.</div>
-        <div class="ds-card-meta">6 slides &middot; EN &middot; Mark/Cassidy</div>
+        <div class="ds-card-meta">6 slides &middot; English</div>
       </a>
       <a class="ds-card" href="?deck=briefing_jp">
         <div class="ds-card-flag"><span class="ds-flag">JP</span></div>
         <div class="ds-card-name">Japan <span class="ds-native">日本</span></div>
         <div class="ds-card-desc">Manga pipeline, LINE Manga, Piccoma, Audiobook.jp, 合同会社 setup.</div>
-        <div class="ds-card-meta">6 slides &middot; JA + EN &middot; Toshi/Yukiko</div>
+        <div class="ds-card-meta">6 slides &middot; Japanese + English</div>
       </a>
       <a class="ds-card" href="?deck=briefing_tw">
         <div class="ds-card-flag"><span class="ds-flag">TW</span></div>
         <div class="ds-card-name">Taiwan <span class="ds-native">台灣</span></div>
         <div class="ds-card-desc">Readmoo, Kobo TW, LINE TW, 身心靈 framing, 6 pilot brands.</div>
-        <div class="ds-card-meta">5 slides &middot; ZH-TW + EN &middot; Kevin Tu/Tiffy</div>
+        <div class="ds-card-meta">5 slides &middot; 繁體中文 + English</div>
       </a>
       <a class="ds-card" href="?deck=briefing_cn">
         <div class="ds-card-flag"><span class="ds-flag">CN</span></div>
         <div class="ds-card-name">China <span class="ds-native">中国</span></div>
         <div class="ds-card-desc">Ximalaya 345M MAU, WeChat Read, Douyin. Includes HK + SG delivery.</div>
-        <div class="ds-card-meta">6 slides &middot; ZH-CN + EN &middot; Liu Ping/Ziyu</div>
+        <div class="ds-card-meta">6 slides &middot; 简体中文 + English</div>
       </a>
       <a class="ds-card" href="?deck=briefing_kr">
         <div class="ds-card-flag"><span class="ds-flag">KR</span></div>
         <div class="ds-card-name">Korea <span class="ds-native">한국</span></div>
         <div class="ds-card-desc">Naver ₩70 CPC, Kakao Page, Millie's Library, 빨리빨리 culture.</div>
-        <div class="ds-card-meta">4 slides &middot; KR text + EN voice</div>
+        <div class="ds-card-meta">4 slides &middot; 한국어 + English</div>
       </a>
       <a class="ds-card" href="?deck=briefing_fr">
         <div class="ds-card-flag"><span class="ds-flag">FR</span></div>
         <div class="ds-card-name">France</div>
         <div class="ds-card-desc">#1 EU manga market. Izneo, Kobo FR, philosophical framing, Babelio.</div>
-        <div class="ds-card-meta">6 slides &middot; FR text + EN voice</div>
+        <div class="ds-card-meta">6 slides &middot; Français + English</div>
       </a>
       <a class="ds-card" href="?deck=briefing_de">
         <div class="ds-card-flag"><span class="ds-flag">DE</span></div>
         <div class="ds-card-name">Germany <span class="ds-native">Deutschland</span></div>
         <div class="ds-card-desc">Audible DE, Thalia, wissenschaftlich fundiert, evidence-based only.</div>
-        <div class="ds-card-meta">6 slides &middot; DE text + EN voice</div>
+        <div class="ds-card-meta">6 slides &middot; Deutsch + English</div>
       </a>
     </div>
   </div>
@@ -886,6 +891,8 @@ if (deckId && DECK_SCRIPTS[deckId]) {
   activeDeck = deckId;
   document.getElementById("deck-selector").classList.add("hidden");
   document.getElementById("app").classList.remove("hidden");
+  document.getElementById("presenter-nav").style.display = "flex";
+  document.getElementById("nav-spacer").style.display = "block";
   document.body.classList.add("presenter-active");
   document.title = "Pearl Prime \u2014 " + activeMeta.title;
 } else if (deckId) {
@@ -1202,14 +1209,37 @@ function goSlide(d) {
   userJump(state.curIdx + d);
 }
 
+var DECK_NEXT = {
+  intro: {id:"briefing_us",label:"US Briefing",desc:"Platform stack, upload guide, revenue projections."},
+  marketing: {id:"briefing_us",label:"US Briefing",desc:"Start with the US market operating guide."},
+  briefing_us: {id:"briefing_jp",label:"Japan Briefing",desc:"Manga pipeline, LINE, Piccoma, Audiobook.jp."},
+  briefing_jp: {id:"briefing_tw",label:"Taiwan Briefing",desc:"Readmoo, Kobo TW, 身心靈 framing."},
+  briefing_tw: {id:"briefing_cn",label:"China Briefing",desc:"Ximalaya, WeChat Read, HK + SG delivery."},
+  briefing_cn: {id:"briefing_kr",label:"Korea Briefing",desc:"Naver, Kakao, 빨리빨리 culture."},
+  briefing_kr: {id:"briefing_fr",label:"France Briefing",desc:"#1 EU manga market, philosophical framing."},
+  briefing_fr: {id:"briefing_de",label:"Germany Briefing",desc:"Evidence-based, Audible DE, long-form."},
+  briefing_de: null
+};
+
 function endPrez() {
   state.playing = false;
   stopClk();
   setBtns("stopped");
   updStatus("done");
   document.getElementById("prog-fill").style.width = "100%";
-  document.getElementById("sc-text").innerHTML = '<span style="color:var(--acc2)">\u2713 Complete.</span> Press \u25B6 Play to restart.';
   document.getElementById("sc-label").textContent = "Complete";
+
+  var next = DECK_NEXT[activeDeck];
+  var html = '<div style="text-align:center;padding:1rem 0">'
+    + '<div style="font-family:var(--serif);font-size:1.1rem;color:var(--acc2);margin-bottom:.6rem">\u2713 Deck complete</div>';
+  if (next) {
+    html += '<div style="font-family:var(--mono);font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,240,.25);margin-bottom:.8rem">Up next</div>'
+      + '<a href="?deck=' + next.id + '" style="display:inline-block;background:rgba(180,83,9,.15);border:1px solid rgba(180,83,9,.3);border-radius:4px;padding:.8rem 1.4rem;text-decoration:none;color:inherit;transition:all .2s;max-width:320px">'
+      + '<div style="font-family:var(--serif);font-size:.9rem;color:var(--acc2)">' + next.label + '</div>'
+      + '<div style="font-size:.6rem;color:rgba(250,246,240,.35);margin-top:.3rem;line-height:1.5">' + next.desc + '</div></a>';
+  }
+  html += '<div style="margin-top:1rem"><a href="presenter" style="font-family:var(--mono);font-size:.38rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,246,240,.25);text-decoration:none">\u2190 All Decks</a></div></div>';
+  document.getElementById("sc-text").innerHTML = html;
 }
 
 // ── UI HELPERS ────────────────────────────────────────
