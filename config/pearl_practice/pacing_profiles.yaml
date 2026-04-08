@@ -1,0 +1,173 @@
+# Pearl Practice — Topic-specific pacing profiles for guided therapeutic audio.
+# Each topic maps to voice settings, pause timing, and pointer frequency.
+# Authority: artifacts/research/therapeutic_audio_production_guide.md
+
+schema_version: "1.0.0"
+
+profiles:
+  grief:
+    speed: 0.70
+    micro_pause_s: 2
+    standard_pause_s: 5
+    processing_pause_s: 12
+    opening_pause_s: 8
+    closing_pause_s: 5
+    pointer_every_n_sentences: 3
+    voice_id: "EXAVITQu4vr4xnSDxMaL"  # Sarah — Mature, Reassuring
+    voice_stability: 0.92
+    voice_similarity: 0.65
+    voice_style: 0.02
+    ambient_temperature: cool
+    binaural_hz: 6  # theta
+
+  anxiety:
+    speed: 0.75
+    micro_pause_s: 1.5
+    standard_pause_s: 4
+    processing_pause_s: 8
+    opening_pause_s: 6
+    closing_pause_s: 4
+    pointer_every_n_sentences: 4
+    voice_id: "pjcYQlDFKMbcOUp6F5GD"  # Brittney — Meditation Voice
+    voice_stability: 0.90
+    voice_similarity: 0.70
+    voice_style: 0.05
+    ambient_temperature: cool
+    binaural_hz: 10  # alpha
+
+  somatic_healing:
+    speed: 0.70
+    micro_pause_s: 2
+    standard_pause_s: 5
+    processing_pause_s: 10
+    opening_pause_s: 8
+    closing_pause_s: 5
+    pointer_every_n_sentences: 2
+    voice_id: "SAz9YHcvj6GT2YYXdXww"  # River — Relaxed, Neutral
+    voice_stability: 0.93
+    voice_similarity: 0.60
+    voice_style: 0.01
+    ambient_temperature: neutral
+    binaural_hz: 5  # theta
+
+  burnout:
+    speed: 0.75
+    micro_pause_s: 1.5
+    standard_pause_s: 4
+    processing_pause_s: 8
+    opening_pause_s: 6
+    closing_pause_s: 4
+    pointer_every_n_sentences: 4
+    voice_id: "pjcYQlDFKMbcOUp6F5GD"  # Brittney
+    voice_stability: 0.88
+    voice_similarity: 0.70
+    voice_style: 0.05
+    ambient_temperature: cool
+    binaural_hz: 8  # theta-alpha
+
+  depression:
+    speed: 0.72
+    micro_pause_s: 2
+    standard_pause_s: 5
+    processing_pause_s: 10
+    opening_pause_s: 8
+    closing_pause_s: 5
+    pointer_every_n_sentences: 3
+    voice_id: "EXAVITQu4vr4xnSDxMaL"  # Sarah
+    voice_stability: 0.90
+    voice_similarity: 0.65
+    voice_style: 0.03
+    ambient_temperature: cool
+    binaural_hz: 7  # theta
+
+  compassion_fatigue:
+    speed: 0.72
+    micro_pause_s: 2
+    standard_pause_s: 5
+    processing_pause_s: 10
+    opening_pause_s: 7
+    closing_pause_s: 5
+    pointer_every_n_sentences: 3
+    voice_id: "EXAVITQu4vr4xnSDxMaL"  # Sarah
+    voice_stability: 0.90
+    voice_similarity: 0.68
+    voice_style: 0.03
+    ambient_temperature: cool
+    binaural_hz: 7
+
+  sleep_anxiety:
+    speed: 0.68
+    micro_pause_s: 2.5
+    standard_pause_s: 6
+    processing_pause_s: 12
+    opening_pause_s: 10
+    closing_pause_s: 8
+    pointer_every_n_sentences: 3
+    voice_id: "pjcYQlDFKMbcOUp6F5GD"  # Brittney
+    voice_stability: 0.95
+    voice_similarity: 0.60
+    voice_style: 0.00
+    ambient_temperature: warm
+    binaural_hz: 4  # delta-theta
+
+  courage:
+    speed: 0.82
+    micro_pause_s: 1
+    standard_pause_s: 3
+    processing_pause_s: 6
+    opening_pause_s: 4
+    closing_pause_s: 3
+    pointer_every_n_sentences: 5
+    voice_id: "CwhRBWXzGAHq8TQ4Fs17"  # Roger — Laid-Back
+    voice_stability: 0.75
+    voice_similarity: 0.75
+    voice_style: 0.15
+    ambient_temperature: warm
+    binaural_hz: 12  # alpha-beta
+
+  self_worth:
+    speed: 0.75
+    micro_pause_s: 1.5
+    standard_pause_s: 4
+    processing_pause_s: 8
+    opening_pause_s: 6
+    closing_pause_s: 4
+    pointer_every_n_sentences: 4
+    voice_id: "EXAVITQu4vr4xnSDxMaL"  # Sarah
+    voice_stability: 0.88
+    voice_similarity: 0.70
+    voice_style: 0.05
+    ambient_temperature: neutral
+    binaural_hz: 10
+
+  default:
+    speed: 0.75
+    micro_pause_s: 1.5
+    standard_pause_s: 4
+    processing_pause_s: 8
+    opening_pause_s: 6
+    closing_pause_s: 4
+    pointer_every_n_sentences: 4
+    voice_id: "pjcYQlDFKMbcOUp6F5GD"  # Brittney
+    voice_stability: 0.88
+    voice_similarity: 0.70
+    voice_style: 0.05
+    ambient_temperature: neutral
+    binaural_hz: 10
+
+# Emotional keywords that trigger processing pauses (longer silence)
+emotional_keywords:
+  - grief
+  - pain
+  - loss
+  - cry
+  - tears
+  - heart
+  - hurt
+  - feel
+  - heavy
+  - ache
+  - sorrow
+  - breaking
+  - letting go
+  - surrender

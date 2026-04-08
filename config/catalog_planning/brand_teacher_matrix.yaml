@@ -1,32 +1,139 @@
 # Brand × Teacher matrix for Teacher Mode portfolio planning.
 # Authority: specs/TEACHER_PORTFOLIO_PLANNING_SPEC.md
+#            config/catalog_planning/teacher_brand_lane_assignments.yaml
 #
-# Release: Week-by-week schedule (generate_weekly_schedule.py) is the source of when to upload.
-# Platform caps (safe_velocity.yaml) must not be exceeded; scheduler fails hard if they are.
-# The defaults below are FAIL-SAFE guardrails until scheduler enforcement is complete everywhere.
-# Do not remove them: they protect against schedule output that exceeds platform-safe ranges.
+# RULE: 1 primary teacher per brand per platform lane.
+# See teacher_brand_lane_assignments.yaml for full lane mapping.
+#
+# This file defines the GLOBAL WEST lane brands (the primary lane).
+# Each brand here has ONE primary teacher who gets all content.
 
 defaults:
-  # Per-wave cap (books in a single wave selection) — keep under platform weekly caps
   max_books_per_wave: 12
-  # Minimum days between releases for same brand (allocation interleaving)
   release_spacing_days: 14
-  # Per-brand monthly cap — must stay within strictest platform (e.g. Ximalaya 20–40/mo)
   max_books_per_brand_per_month: 40
+
+# ─── GLOBAL WEST BRANDS (1 teacher each) ─────────────────────────────────
+# These publish on: Google Play, Apple Books, Kobo, Spotify, KDP, Audible US
 
 brands:
   stillness_press:
-    teachers: [ahjan, ajahn_x]
-    # topic_focus / persona_focus optional
+    primary_teacher: ahjan
+    teachers: [ahjan]
+    topic_focus: [anxiety, self_worth, impermanence, alarm_systems, pausing]
+    content: [audiobooks, manga, video, exercises, freebies]
 
   cognitive_clarity:
-    teachers: [ahjan]
+    primary_teacher: joshin
+    teachers: [joshin]
+    topic_focus: [zen, direct_pointing, sitting, koans, self_inquiry]
+    content: [audiobooks, manga, video, exercises, freebies]
 
-# Per-teacher saturation (diversity guardrails only; release timing from weekly schedule)
+  norcal_dharma:
+    primary_teacher: ajahn_x
+    teachers: [ajahn_x]
+    topic_focus: [forest_refuge, simplicity, renunciation]
+    content: [audiobooks, manga, video, exercises, freebies]
+
+  somatic_wisdom:
+    primary_teacher: pamela_fellows
+    teachers: [pamela_fellows]
+    topic_focus: [perfectionism, performance_pressure, embodiment, burnout, polyvagal]
+    content: [audiobooks, manga, video, exercises, freebies]
+
+  qi_foundation:
+    primary_teacher: master_feung
+    teachers: [master_feung]
+    topic_focus: [qi_cultivation, stability, foundation, chronic_stress, taiji]
+    content: [audiobooks, manga, video, exercises, freebies]
+
+  digital_ground:
+    primary_teacher: miki
+    teachers: [miki]
+    topic_focus: [gen_z_grounding, digital_presence, identity, anxiety]
+    content: [audiobooks, manga, video, exercises, freebies]
+
+  heart_balance:
+    primary_teacher: maat
+    teachers: [maat]
+    topic_focus: [justice, balance, heart_weighing, grief, truth]
+    content: [audiobooks, manga, video, exercises, freebies]
+
+  relational_calm:
+    primary_teacher: junko
+    teachers: [junko]
+    topic_focus: [relational_harmony, shame, inner_security, belonging]
+    content: [audiobooks, manga, video, exercises, freebies]
+
+  warrior_calm:
+    primary_teacher: master_wu
+    teachers: [master_wu]
+    topic_focus: [panic_response, composure, warrior_calm, resilience]
+    content: [audiobooks, manga, video, exercises, freebies]
+
+  sleep_restoration:
+    primary_teacher: master_sha
+    teachers: [master_sha]
+    topic_focus: [sleep_repair, energy_medicine, restoration, fatigue]
+    content: [audiobooks, manga, video, exercises, freebies]
+
+  body_memory:
+    primary_teacher: omote
+    teachers: [omote]
+    topic_focus: [grief, body_memory, seasonal_healing, somatic]
+    content: [audiobooks, manga, video, exercises, freebies]
+
+  solar_return:
+    primary_teacher: ra
+    teachers: [ra]
+    topic_focus: [burnout, solar_return, fire_renewal, vitality]
+    content: [audiobooks, manga, video, exercises, freebies]
+
+  devotion_path:
+    primary_teacher: sai_ma
+    teachers: [sai_ma]
+    topic_focus: [compassion, devotion, surrender, unconditional_love]
+    content: [audiobooks, manga, video, exercises, freebies]
+
+# ─── PER-TEACHER SATURATION GUARDRAILS ───────────────────────────────────
+
 teacher_constraints:
   ahjan:
+    max_books_per_topic: 4
+    max_books_per_persona: 5
+  joshin:
     max_books_per_topic: 4
     max_books_per_persona: 5
   ajahn_x:
     max_books_per_topic: 4
     max_books_per_persona: 5
+  pamela_fellows:
+    max_books_per_topic: 4
+    max_books_per_persona: 5
+  master_feung:
+    max_books_per_topic: 3
+    max_books_per_persona: 4
+  miki:
+    max_books_per_topic: 4
+    max_books_per_persona: 5
+  maat:
+    max_books_per_topic: 4
+    max_books_per_persona: 5
+  junko:
+    max_books_per_topic: 3
+    max_books_per_persona: 4
+  master_wu:
+    max_books_per_topic: 3
+    max_books_per_persona: 4
+  master_sha:
+    max_books_per_topic: 3
+    max_books_per_persona: 4
+  omote:
+    max_books_per_topic: 3
+    max_books_per_persona: 4
+  ra:
+    max_books_per_topic: 3
+    max_books_per_persona: 4
+  sai_ma:
+    max_books_per_topic: 3
+    max_books_per_persona: 4

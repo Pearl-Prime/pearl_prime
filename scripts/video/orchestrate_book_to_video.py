@@ -1,359 +1,367 @@
 #!/usr/bin/env python3
-"""
-Video Orchestrator: Book/Manga Plan → 5 Platform Videos → Upload.
+"""Book → Audiobook → Video orchestrator.
 
-Takes a book plan JSON and produces platform-specific videos for:
-  YouTube (10 min, 16:9), YouTube Shorts (60s, 9:16), TikTok (30-60s, 9:16),
-  Instagram Reels (60s, 9:16), LINE (60-90s, 9:16).
-
-Each video gets: brand-specific animation, ElevenLabs voice, freebie CTA, platform metadata.
+Takes a book plan + audiobook MP3(s) and produces all video variants
+(long-form chapters, shorts, full audiobook) with a drip upload schedule
+that respects per-platform cadence limits.
 
 Usage:
-    # Produce all 5 formats (no upload)
-    python scripts/video/orchestrate_book_to_video.py \\
-        --plan artifacts/plan.json --brand-id stabilizer --channel-id ch_001
+    # From audiobook MP3 directory + transcript
+    python3 scripts/video/orchestrate_book_to_video.py \
+        --audio-dir artifacts/audiobooks/book_001/ \
+        --transcript artifacts/book_pass/book_001/book.txt \
+        --brand stillness_press --teacher ahjan \
+        -o artifacts/video/audiobook/book_001/
 
-    # Produce + upload (dry-run by default)
-    python scripts/video/orchestrate_book_to_video.py \\
-        --plan artifacts/plan.json --brand-id stabilizer --channel-id ch_001 \\
-        --upload
-
-    # Produce + live upload
-    python scripts/video/orchestrate_book_to_video.py \\
-        --plan artifacts/plan.json --brand-id stabilizer --channel-id ch_001 \\
-        --upload --no-dry-run
+    # Single chapter quick test
+    python3 scripts/video/orchestrate_book_to_video.py \
+        --audio chapter_01.mp3 --transcript chapter_01.txt \
+        --brand stillness_press --teacher ahjan \
+        -o test_output/
 """
 from __future__ import annotations
 
 import argparse
 import json
+import math
 import subprocess
 import sys
+from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Optional
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+FFPROBE = "/opt/homebrew/bin/ffprobe"
+
+sys.path.insert(0, str(REPO_ROOT))
 
 try:
     import yaml
 except ImportError:
-    print("pyyaml required: pip install pyyaml")
-    sys.exit(1)
+    yaml = None  # type: ignore
 
 
-def _load_yaml(p: Path) -> dict:
-    if not p.exists():
-        return {}
-    return yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+def _get_duration(audio: Path) -> float:
+    r = subprocess.run(
+        [FFPROBE, "-v", "quiet", "-print_format", "json", "-show_format", str(audio)],
+        capture_output=True, text=True,
+    )
+    return float(json.loads(r.stdout)["format"]["duration"])
 
 
-# ── Platform → format mapping ────────────────────────────────────
-PLATFORM_FORMAT_MAP = {
-    "youtube": "mid",              # 16:9 cinematic, 2-10 min
-    "youtube_shorts": "short",     # 9:16 portrait, 15-60s
-    "tiktok": "short",             # 9:16 portrait, 30-60s
-    "instagram": "short",          # 9:16 portrait, 30-60s
-    "line": "short",               # 9:16 portrait, 60-90s
-}
-
-ALL_PLATFORMS = ["youtube", "youtube_shorts", "tiktok", "instagram", "line"]
-
-
-def _resolve_freebie(plan: dict) -> dict:
-    """Extract freebie info from plan JSON (already resolved by run_pipeline.py)."""
-    freebie_bundle = plan.get("freebie_bundle") or []
-    freebie_slug = plan.get("freebie_slug") or ""
-    cta_template_id = plan.get("cta_template_id") or "workbook_forward"
-
-    # Determine workbook label
-    workbook_type = plan.get("companion_workbook_type") or "none"
-    if workbook_type == "full":
-        workbook_label = "workbook"
-    elif workbook_type == "light_guide":
-        workbook_label = "practice guide"
-    elif freebie_bundle:
-        workbook_label = "free guide"
-    else:
-        workbook_label = "free resource"
-
-    return {
-        "freebie_bundle": freebie_bundle,
-        "freebie_slug": freebie_slug,
-        "cta_template_id": cta_template_id,
-        "workbook_label": workbook_label,
-        "url": f"brand-admin-onboarding.pages.dev/free/{freebie_slug}" if freebie_slug else "",
-    }
+def _load_cadence() -> dict:
+    p = REPO_ROOT / "config" / "release_velocity" / "video_cadence.yaml"
+    if yaml and p.is_file():
+        return yaml.safe_load(p.read_text())
+    return {"book_video_drip": {
+        "long_form_chapters": {"release_interval_days": 1},
+        "shorts": {"release_interval_hours": 8, "start_offset_days": -3},
+        "full_audiobook": {"release_offset_days": 21},
+    }}
 
 
-def _resolve_cta_text(cta_templates: dict, platform: str, freebie: dict, plan: dict) -> dict:
-    """Resolve CTA text for a platform by substituting variables."""
-    platform_ctas = cta_templates.get(platform) or {}
-    brand_id = plan.get("brand_id") or plan.get("teacher_id") or "unknown"
-    topic_id = plan.get("topic_id") or (plan.get("book_spec") or {}).get("topic_id") or ""
-    topic_display = topic_id.replace("_", " ") if topic_id else "wellness"
+def _split_chapters_by_silence(audio: Path, min_silence_s: float = 2.0, threshold_db: float = -40) -> list[dict]:
+    """Detect chapter boundaries via silence detection."""
+    r = subprocess.run(
+        [FFPROBE, "-v", "quiet", "-print_format", "json", "-show_format", str(audio)],
+        capture_output=True, text=True,
+    )
+    total_dur = float(json.loads(r.stdout)["format"]["duration"])
 
-    resolved = {}
-    for cta_key, cta_spec in platform_ctas.items():
-        if not isinstance(cta_spec, dict):
-            continue
-        template = cta_spec.get("template") or cta_spec.get("template_en") or ""
-        text = template.replace("{workbook_label}", freebie["workbook_label"])
-        text = text.replace("{slug}", freebie["freebie_slug"])
-        text = text.replace("{brand_id}", brand_id)
-        text = text.replace("{topic_display}", topic_display)
-        text = text.replace("{url}", freebie["url"])
-        resolved[cta_key] = {**cta_spec, "resolved_text": text}
-    return resolved
+    # Use FFmpeg silencedetect
+    r = subprocess.run(
+        ["/opt/homebrew/bin/ffmpeg", "-i", str(audio),
+         "-af", f"silencedetect=noise={threshold_db}dB:d={min_silence_s}",
+         "-f", "null", "-"],
+        capture_output=True, text=True,
+    )
+
+    import re
+    silence_starts = [float(m.group(1)) for m in re.finditer(r"silence_start:\s*(\d+\.?\d*)", r.stderr)]
+    silence_ends = [float(m.group(1)) for m in re.finditer(r"silence_end:\s*(\d+\.?\d*)", r.stderr)]
+
+    # Build chapter boundaries from long silences (>3s = chapter break)
+    breaks = [0.0]
+    for s_start, s_end in zip(silence_starts, silence_ends):
+        gap = s_end - s_start
+        if gap >= 3.0 and s_start > 30:  # skip silence at very beginning
+            midpoint = (s_start + s_end) / 2
+            breaks.append(midpoint)
+    breaks.append(total_dur)
+
+    chapters = []
+    for i in range(len(breaks) - 1):
+        chapters.append({
+            "index": i,
+            "start": breaks[i],
+            "end": breaks[i + 1],
+            "duration": breaks[i + 1] - breaks[i],
+        })
+    return chapters
 
 
-def _extract_segments_from_plan(plan: dict, max_segments: int = 10) -> list[dict]:
-    """Extract narration segments from plan for video script."""
-    chapters = plan.get("chapter_slot_sequence") or []
-    atom_ids = plan.get("atom_ids") or []
-    topic_id = plan.get("topic_id") or ""
-    topic_display = topic_id.replace("_", " ").title() if topic_id else "Wellness"
+def _split_transcript(text: str, num_chapters: int) -> list[str]:
+    """Split transcript text into roughly equal chunks for chapters."""
+    paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+    if not paragraphs:
+        paragraphs = [text]
 
-    segments = []
-    idx = 0
-    for ch_idx, slots in enumerate(chapters):
-        if len(segments) >= max_segments:
+    per_chapter = max(1, len(paragraphs) // num_chapters)
+    chunks = []
+    for i in range(num_chapters):
+        start = i * per_chapter
+        end = start + per_chapter if i < num_chapters - 1 else len(paragraphs)
+        chunks.append("\n\n".join(paragraphs[start:end]))
+    return chunks
+
+
+def _find_best_clip(words: list[dict], target_dur: float = 45.0) -> tuple[float, float]:
+    """Find the best clip window for a short.
+
+    Prefers: sentence boundaries, emotional peaks (longer pauses before), middle third of chapter.
+    """
+    if not words:
+        return 0, target_dur
+
+    total_dur = words[-1]["end"]
+    # Prefer middle third
+    ideal_start = total_dur * 0.3
+    ideal_end = ideal_start + target_dur
+
+    # Snap to sentence boundary (period/question/exclamation)
+    best_start = ideal_start
+    for w in words:
+        if w["start"] >= ideal_start - 5 and w["word"].rstrip().endswith((".", "!", "?")):
+            # Start after this sentence
+            best_start = w["end"] + 0.2
             break
-        for slot_type in slots:
-            if idx >= len(atom_ids):
-                break
-            aid = atom_ids[idx]
-            idx += 1
-            # Use STORY, REFLECTION, INTEGRATION atoms as narration sources
-            if slot_type in ("STORY", "REFLECTION", "INTEGRATION") and "placeholder" not in aid:
-                segments.append({
-                    "segment_id": f"seg_{len(segments):03d}",
-                    "chapter": ch_idx + 1,
-                    "slot_type": slot_type,
-                    "atom_id": aid,
-                    "text": f"Chapter {ch_idx + 1}: {topic_display} — {slot_type.lower()}",
-                    "duration_s": 60 if slot_type == "STORY" else 30,
-                })
-    return segments[:max_segments]
+
+    best_end = best_start + target_dur
+    # Snap end to sentence boundary
+    for w in words:
+        if w["start"] >= best_end - 3 and w["word"].rstrip().endswith((".", "!", "?")):
+            best_end = w["end"] + 0.5
+            break
+
+    return max(0, best_start), min(total_dur, best_end)
 
 
-def _write_render_manifest(segments: list[dict], output_path: Path) -> Path:
-    """Write segments as render_manifest.json for the video pipeline."""
-    manifest = {
-        "schema_version": "1.0",
-        "segments": segments,
-    }
-    output_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
-    return output_path
-
-
-def produce_video(
-    plan: dict,
-    platform: str,
-    channel_id: str,
-    output_dir: Path,
-    assets_dir: Optional[Path] = None,
-    voice: bool = True,
-    freebie_cta: bool = True,
-    cta_config: Optional[dict] = None,
-) -> dict:
-    """Produce a single platform-format video from a book plan."""
-    fmt = PLATFORM_FORMAT_MAP.get(platform, "short")
-    plan_id = plan.get("plan_id") or plan.get("plan_hash") or "video"
-    video_plan_id = f"{plan_id}-{platform}"
-
-    video_dir = output_dir / platform
-    video_dir.mkdir(parents=True, exist_ok=True)
-
-    # Write render manifest
-    max_segs = 10 if fmt == "mid" else 3  # long = more segments
-    segments = _extract_segments_from_plan(plan, max_segments=max_segs)
-    manifest_path = _write_render_manifest(segments, video_dir / "render_manifest.json")
-
-    # Write CTA config for renderer
-    if freebie_cta and cta_config:
-        cta_path = video_dir / "cta_config.json"
-        cta_path.write_text(json.dumps(cta_config, indent=2), encoding="utf-8")
-
-    # Run video pipeline
-    cmd = [
-        sys.executable, str(REPO_ROOT / "scripts" / "video" / "run_pipeline.py"),
-        "--plan-id", video_plan_id,
-        "--format", fmt,
-        "--channel-id", channel_id,
-        "--render-manifest", str(manifest_path),
-    ]
-    if voice:
-        cmd.append("--voice")
-    if assets_dir and assets_dir.exists():
-        cmd.extend(["--assets-dir", str(assets_dir)])
-        cmd.append("--no-skip-render")
-
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=300, cwd=str(REPO_ROOT))
-
-    video_file = None
-    rendered_dir = REPO_ROOT / "artifacts" / "video" / video_plan_id / "rendered"
-    if rendered_dir.exists():
-        mp4s = list(rendered_dir.glob("*.mp4"))
-        if mp4s:
-            video_file = mp4s[0]
-
-    return {
-        "platform": platform,
-        "format": fmt,
-        "plan_id": video_plan_id,
-        "video_file": str(video_file) if video_file else None,
-        "success": result.returncode == 0,
-        "error": result.stderr[-500:] if result.returncode != 0 else None,
-    }
-
-
-def upload_video(
-    video_result: dict,
-    channel_id: str,
+def generate_upload_schedule(
+    videos: list[dict],
     brand_id: str,
-    cta_metadata: dict,
-    dry_run: bool = True,
+    teacher: str,
+    start_date: datetime | None = None,
 ) -> dict:
-    """Upload a produced video to its platform."""
-    if not video_result.get("video_file"):
-        return {"platform": video_result["platform"], "success": False, "error": "No video file"}
+    """Generate a drip upload schedule respecting platform cadence."""
+    cadence = _load_cadence()
+    drip = cadence.get("book_video_drip", {})
 
-    platform = video_result["platform"]
-    video_path = video_result["video_file"]
+    if start_date is None:
+        start_date = datetime.now() + timedelta(days=7)  # 1 week from now
 
-    # Build platform_variants.json for run_upload.py
-    variants = {
-        "video_id": video_result["plan_id"],
-        "plan_id": video_result["plan_id"],
-        "variants": [{
-            "platform": platform,
-            "title": cta_metadata.get("title", f"Wellness — {brand_id}"),
-            "description": cta_metadata.get("description", ""),
-            "tags": cta_metadata.get("tags", []),
-        }],
-    }
-    variants_path = Path(video_path).parent / "platform_variants.json"
-    variants_path.write_text(json.dumps(variants, indent=2), encoding="utf-8")
+    long_interval = drip.get("long_form_chapters", {}).get("release_interval_days", 1)
+    short_interval_h = drip.get("shorts", {}).get("release_interval_hours", 8)
+    short_offset = drip.get("shorts", {}).get("start_offset_days", -3)
+    full_offset = drip.get("full_audiobook", {}).get("release_offset_days", 21)
 
-    cmd = [
-        sys.executable, str(REPO_ROOT / "scripts" / "video" / "run_upload.py"),
-        str(variants_path),
-        "--channel-id", channel_id,
-        "--video-dir", str(Path(video_path).parent),
-    ]
-    if not dry_run:
-        cmd.append("--no-dry-run")
+    schedule = []
+    long_day = 0
+    short_day = short_offset
 
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, cwd=str(REPO_ROOT))
+    # Platform rotation for shorts
+    short_platforms = ["tiktok", "youtube_shorts", "instagram_reels"]
+    platform_idx = 0
+
+    for v in videos:
+        if v["type"] == "long":
+            schedule.append({
+                "day": long_day,
+                "date": (start_date + timedelta(days=long_day)).strftime("%Y-%m-%d"),
+                "platform": "youtube",
+                "type": "long",
+                "file": v["file"],
+                "chapter": v.get("chapter", 0),
+            })
+            long_day += long_interval
+
+        elif v["type"] == "short":
+            platform = short_platforms[platform_idx % len(short_platforms)]
+            platform_idx += 1
+            schedule.append({
+                "day": short_day,
+                "date": (start_date + timedelta(days=short_day)).strftime("%Y-%m-%d"),
+                "platform": platform,
+                "type": "short",
+                "file": v["file"],
+                "chapter": v.get("chapter", 0),
+            })
+            # Advance by interval (convert hours to fractional days)
+            short_day += short_interval_h / 24
+
+        elif v["type"] == "full":
+            schedule.append({
+                "day": full_offset,
+                "date": (start_date + timedelta(days=full_offset)).strftime("%Y-%m-%d"),
+                "platform": "youtube",
+                "type": "full_audiobook",
+                "file": v["file"],
+            })
+
+    # Sort by day
+    schedule.sort(key=lambda x: x["day"])
 
     return {
-        "platform": platform,
-        "success": result.returncode == 0,
-        "dry_run": dry_run,
-        "output": result.stdout[-300:] if result.returncode == 0 else None,
-        "error": result.stderr[-300:] if result.returncode != 0 else None,
+        "book_id": videos[0].get("book_id", "unknown") if videos else "unknown",
+        "brand_id": brand_id,
+        "teacher": teacher,
+        "total_videos": len(schedule),
+        "start_date": start_date.strftime("%Y-%m-%d"),
+        "end_date": (start_date + timedelta(days=max(s["day"] for s in schedule))).strftime("%Y-%m-%d") if schedule else start_date.strftime("%Y-%m-%d"),
+        "duration_days": int(max(s["day"] for s in schedule)) if schedule else 0,
+        "schedule": schedule,
     }
 
 
 def orchestrate(
-    plan_path: Path,
-    brand_id: str,
-    channel_id: str,
+    audio_files: list[Path],
+    transcript: str,
     output_dir: Path,
-    platforms: Optional[list[str]] = None,
-    assets_dir: Optional[Path] = None,
-    voice: bool = True,
-    upload: bool = False,
-    dry_run: bool = True,
+    brand_id: str = "stillness_press",
+    teacher: str = "ahjan",
+    style: str = "default",
+    quality: str = "standard",
+    whisper_model: str = "base",
+    book_id: str = "book_001",
 ) -> dict:
-    """
-    Full orchestration: book plan → 5 platform videos → optional upload.
-
-    Returns manifest dict with results per platform.
-    """
-    platforms = platforms or ALL_PLATFORMS
-    plan = json.loads(plan_path.read_text(encoding="utf-8"))
-    plan["brand_id"] = brand_id
-
-    # Resolve freebie
-    freebie = _resolve_freebie(plan)
-
-    # Load CTA templates
-    cta_templates = _load_yaml(REPO_ROOT / "config" / "video" / "video_cta_templates.yaml")
+    """Full orchestration: audio files + transcript → rendered videos + schedule."""
+    from scripts.video.render_audiobook import render_audiobook
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    results = {"plan_path": str(plan_path), "brand_id": brand_id, "freebie": freebie, "videos": {}}
+    videos = []
 
-    for platform in platforms:
-        print(f"  [{platform}] Producing video...")
-        cta_config = _resolve_cta_text(cta_templates, platform, freebie, plan)
-
-        video_result = produce_video(
-            plan, platform, channel_id, output_dir,
-            assets_dir=assets_dir, voice=voice,
-            freebie_cta=bool(freebie["freebie_slug"]),
-            cta_config=cta_config,
-        )
-        results["videos"][platform] = video_result
-
-        if video_result["success"]:
-            print(f"  [{platform}] ✅ Video: {video_result.get('video_file', 'N/A')}")
+    # If single audio file, try to split by silence
+    if len(audio_files) == 1:
+        print(f"Single audio file: {audio_files[0]}")
+        duration = _get_duration(audio_files[0])
+        if duration > 600:  # > 10 min = likely multi-chapter
+            print("  Detecting chapter boundaries...")
+            chapters = _split_chapters_by_silence(audio_files[0])
+            print(f"  Found {len(chapters)} chapters")
         else:
-            print(f"  [{platform}] ❌ Failed: {video_result.get('error', 'unknown')[:100]}")
+            chapters = [{"index": 0, "start": 0, "end": duration, "duration": duration}]
+    else:
+        chapters = [{"index": i, "start": 0, "end": _get_duration(f), "duration": _get_duration(f)}
+                     for i, f in enumerate(audio_files)]
 
-        # Upload if requested
-        if upload and video_result["success"]:
-            print(f"  [{platform}] Uploading ({'dry-run' if dry_run else 'LIVE'})...")
-            upload_result = upload_video(
-                video_result, channel_id, brand_id,
-                cta_metadata={"title": f"Wellness — {brand_id}", "tags": ["wellness", "selfhelp"]},
-                dry_run=dry_run,
-            )
-            results["videos"][platform]["upload"] = upload_result
+    # Split transcript
+    transcript_chunks = _split_transcript(transcript, len(chapters))
 
-    # Write manifest
-    manifest_path = output_dir / "video_manifest.json"
-    manifest_path.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"\nManifest: {manifest_path}")
+    for i, chapter in enumerate(chapters):
+        ch_num = i + 1
+        audio_file = audio_files[0] if len(audio_files) == 1 else audio_files[i]
+        ch_transcript = transcript_chunks[i] if i < len(transcript_chunks) else ""
 
-    return results
+        # Write chapter transcript to temp file
+        ch_txt = output_dir / f"ch{ch_num:02d}_transcript.txt"
+        ch_txt.write_text(ch_transcript, encoding="utf-8")
+
+        # Clip boundaries (for single-file multi-chapter)
+        clip_start = chapter["start"] if len(audio_files) == 1 else None
+        clip_end = chapter["end"] if len(audio_files) == 1 else None
+
+        # --- Long-form chapter video ---
+        long_out = output_dir / f"ch{ch_num:02d}_long.mp4"
+        print(f"\n--- Chapter {ch_num}/{len(chapters)} (long-form) ---")
+        render_audiobook(
+            audio=audio_file,
+            transcript=ch_txt,
+            output=long_out,
+            format_key="long",
+            style_name=style,
+            clip_start=clip_start,
+            clip_end=clip_end,
+            quality=quality,
+            whisper_model=whisper_model,
+        )
+        videos.append({
+            "type": "long", "file": long_out.name, "chapter": ch_num,
+            "book_id": book_id, "duration": chapter["duration"],
+        })
+
+        # --- Short clip ---
+        # Find best 45s window
+        short_start = (clip_start or 0) + chapter["duration"] * 0.3
+        short_end = short_start + 45
+        if short_end > (clip_end or chapter["end"]):
+            short_end = clip_end or chapter["end"]
+            short_start = max(clip_start or 0, short_end - 45)
+
+        short_out = output_dir / f"ch{ch_num:02d}_short.mp4"
+        print(f"\n--- Chapter {ch_num}/{len(chapters)} (short clip) ---")
+        render_audiobook(
+            audio=audio_file,
+            transcript=ch_txt,
+            output=short_out,
+            format_key="short",
+            style_name=style,
+            clip_start=short_start,
+            clip_end=short_end,
+            quality=quality,
+            whisper_model=whisper_model,
+        )
+        videos.append({
+            "type": "short", "file": short_out.name, "chapter": ch_num,
+            "book_id": book_id, "duration": short_end - short_start,
+        })
+
+    # Generate upload schedule
+    schedule = generate_upload_schedule(videos, brand_id, teacher)
+    schedule_path = output_dir / "upload_schedule.json"
+    schedule_path.write_text(json.dumps(schedule, indent=2, ensure_ascii=False))
+    print(f"\nUpload schedule: {schedule_path}")
+    print(f"  {schedule['total_videos']} videos over {schedule['duration_days']} days")
+
+    return schedule
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Orchestrate book plan → 5 platform videos → upload")
-    parser.add_argument("--plan", required=True, help="Path to book plan JSON")
-    parser.add_argument("--brand-id", required=True, help="Brand ID (e.g., stabilizer)")
-    parser.add_argument("--channel-id", required=True, help="Channel ID (e.g., ch_001)")
-    parser.add_argument("--output-dir", default="artifacts/video/orchestrated", help="Output directory")
-    parser.add_argument("--platforms", default=",".join(ALL_PLATFORMS), help="Comma-separated platforms")
-    parser.add_argument("--assets-dir", help="Image bank directory for rendering")
-    parser.add_argument("--no-voice", action="store_true", help="Skip ElevenLabs voice synthesis")
-    parser.add_argument("--upload", action="store_true", help="Upload after production")
-    parser.add_argument("--no-dry-run", action="store_true", help="Live upload (not dry-run)")
-    args = parser.parse_args()
+    ap = argparse.ArgumentParser(description="Book → Audiobook → Video orchestrator")
+    ap.add_argument("--audio", type=Path, help="Single audio file (MP3/WAV)")
+    ap.add_argument("--audio-dir", type=Path, help="Directory of chapter MP3s")
+    ap.add_argument("--transcript", required=True, type=Path, help="Transcript text file")
+    ap.add_argument("--brand", default="stillness_press", help="Brand ID")
+    ap.add_argument("--teacher", default="ahjan", help="Teacher name")
+    ap.add_argument("--book-id", default="book_001", help="Book identifier")
+    ap.add_argument("--style", default="default", help="Visual style preset")
+    ap.add_argument("--quality", default="standard", choices=["draft", "standard", "high"])
+    ap.add_argument("--whisper-model", default="base")
+    ap.add_argument("-o", "--output-dir", required=True, type=Path)
+    args = ap.parse_args()
 
-    platforms = [p.strip() for p in args.platforms.split(",")]
-    output_dir = Path(args.output_dir)
-    assets_dir = Path(args.assets_dir) if args.assets_dir else None
+    transcript = args.transcript.read_text(encoding="utf-8").strip()
 
-    print(f"Orchestrating: {args.plan} → {len(platforms)} platforms")
-    print(f"Brand: {args.brand_id} | Channel: {args.channel_id}")
+    if args.audio:
+        audio_files = [args.audio]
+    elif args.audio_dir:
+        audio_files = sorted(args.audio_dir.glob("*.mp3")) + sorted(args.audio_dir.glob("*.wav"))
+        if not audio_files:
+            print(f"No audio files found in {args.audio_dir}", file=sys.stderr)
+            return 1
+    else:
+        print("Provide --audio or --audio-dir", file=sys.stderr)
+        return 1
 
-    result = orchestrate(
-        plan_path=Path(args.plan),
-        brand_id=args.brand_id,
-        channel_id=args.channel_id,
-        output_dir=output_dir,
-        platforms=platforms,
-        assets_dir=assets_dir,
-        voice=not args.no_voice,
-        upload=args.upload,
-        dry_run=not args.no_dry_run,
+    orchestrate(
+        audio_files=audio_files,
+        transcript=transcript,
+        output_dir=args.output_dir,
+        brand_id=args.brand,
+        teacher=args.teacher,
+        book_id=args.book_id,
+        style=args.style,
+        quality=args.quality,
+        whisper_model=args.whisper_model,
     )
-
-    successes = sum(1 for v in result["videos"].values() if v.get("success"))
-    print(f"\nResults: {successes}/{len(platforms)} videos produced")
-    return 0 if successes == len(platforms) else 1
+    return 0
 
 
 if __name__ == "__main__":

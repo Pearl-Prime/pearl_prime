@@ -104,4 +104,55 @@ formats:
       - somatic_breathing_cues
     layer_mode: five_layer
 
+  presentation:
+    id: manga_presentation
+    duration_min_s: 60
+    duration_max_s: 600
+    resolution:
+      width: 1920
+      height: 1080
+    aspect: "16:9"
+    fps: 24
+    audio:
+      channels: stereo
+      codec_aac_kbps: 192
+    platforms_primary: [youtube, investor_deck]
+    therapeutic_mechanisms:
+      - slide_rhythm_entrainment
+    layer_mode: three_layer
+
+  audiobook:
+    id: audiobook_longform
+    duration_min_s: 300
+    duration_max_s: 5400
+    resolution:
+      width: 1920
+      height: 1080
+    aspect: "16:9"
+    fps: 24
+    audio:
+      channels: stereo
+      codec_aac_kbps: 256
+    platforms_primary: [youtube, bilibili]
+    therapeutic_mechanisms:
+      - sustained_parasympathetic_narration
+    layer_mode: text_waveform
+
+  audiobook_short:
+    id: audiobook_clip
+    duration_min_s: 30
+    duration_max_s: 60
+    resolution:
+      width: 1080
+      height: 1920
+    aspect: "9:16"
+    fps: 30
+    audio:
+      channels: stereo
+      codec_aac_kbps: 128
+    platforms_primary: [youtube_shorts, tiktok, instagram_reels]
+    therapeutic_mechanisms:
+      - hook_parasympathetic_compressed
+    layer_mode: text_waveform
+
 default_format_key: short

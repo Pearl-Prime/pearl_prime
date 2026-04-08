@@ -146,15 +146,18 @@ def test_chapter_runner_two_phase_resume(tmp_path: Path) -> None:
     assert stage_is_passed(ws, sid.CHAPTER_VISUAL)
     assert not stage_is_passed(ws, sid.CHAPTER_IMAGE_GEN)
 
+    # Build replay map dynamically from generated panel_prompts
+    pp = json.loads((ws / "panel_prompts.json").read_text(encoding="utf-8"))
     replay_dir = tmp_path / "replay"
     replay_dir.mkdir()
-    (replay_dir / "p_1_0.png").write_bytes(_MIN_PNG)
-    (replay_dir / "p_1_1.png").write_bytes(_MIN_PNG)
+    mapping: dict[str, str] = {}
+    for panel in pp.get("panels", []):
+        pid = panel["panel_id"]
+        fname = f"{pid}.png"
+        (replay_dir / fname).write_bytes(_MIN_PNG)
+        mapping[pid] = fname
     mmap = replay_dir / "map.json"
-    mmap.write_text(
-        json.dumps({"p_1_0": "p_1_0.png", "p_1_1": "p_1_1.png"}),
-        encoding="utf-8",
-    )
+    mmap.write_text(json.dumps(mapping), encoding="utf-8")
     backend = FixtureReplayImageBackend.from_json_file(mmap)
 
     r2 = run_chapter_dag(

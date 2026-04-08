@@ -30,6 +30,11 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
+try:
+    import requests  # type: ignore[import-untyped]
+except ImportError:
+    requests = None  # type: ignore[assignment]
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
@@ -200,6 +205,10 @@ def build_video_bank_manifest(
 
 # ── RunComfy API ──
 
+_MAX_RETRIES = 5
+_BASE_BACKOFF_S: float = 2.0  # mutable for test patching
+
+
 def _runcomfy_request(
     url: str,
     *,
@@ -208,21 +217,57 @@ def _runcomfy_request(
     data: dict | None = None,
     timeout: int = 120,
 ) -> dict[str, Any]:
-    """Make an authenticated request to RunComfy Serverless API."""
+    """Make an authenticated request to RunComfy Serverless API.
+
+    Retries with exponential backoff on transient errors (429 rate-limit,
+    5xx server errors, connection resets).
+    """
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
     }
-    body = json.dumps(data).encode("utf-8") if data else None
-    req = urllib.request.Request(url, data=body, headers=headers, method=method)
 
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            return json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        error_body = e.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"RunComfy API {e.code}: {error_body}") from e
+    last_err: Exception | None = None
+    for attempt in range(_MAX_RETRIES):
+        try:
+            if requests is not None:
+                if method == "POST":
+                    resp = requests.post(url, json=data, headers=headers, timeout=timeout)
+                else:
+                    resp = requests.get(url, headers=headers, timeout=timeout)
+
+                code = int(resp.status_code)
+                if code == 429 or code >= 500:
+                    # Retryable — back off and try again
+                    wait = _BASE_BACKOFF_S * (2 ** attempt)
+                    time.sleep(wait)
+                    last_err = RuntimeError(f"RunComfy API {code}: {resp.text[:200]}")
+                    continue
+                if code >= 400:
+                    raise RuntimeError(f"RunComfy API {resp.status_code}: {resp.text[:500]}")
+                return resp.json()
+
+            # Fallback: urllib
+            body = json.dumps(data).encode("utf-8") if data else None
+            req = urllib.request.Request(url, data=body, headers=headers, method=method)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.loads(r.read().decode("utf-8"))
+
+        except (ConnectionError, OSError, urllib.error.URLError) as e:
+            wait = _BASE_BACKOFF_S * (2 ** attempt)
+            time.sleep(wait)
+            last_err = e
+        except urllib.error.HTTPError as e:
+            code = e.code
+            if code == 429 or code >= 500:
+                wait = _BASE_BACKOFF_S * (2 ** attempt)
+                time.sleep(wait)
+                last_err = e
+                continue
+            error_body = e.read().decode("utf-8", errors="replace")
+            raise RuntimeError(f"RunComfy API {code}: {error_body}") from e
+
+    raise RuntimeError(f"RunComfy API failed after {_MAX_RETRIES} retries: {last_err}")
 
 
 def submit_inference(
@@ -288,13 +333,19 @@ def get_result(api_key: str, result_url: str) -> dict[str, Any]:
 def download_image(url: str, output_path: Path) -> Path:
     """Download a generated image from RunComfy output URL."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    req = urllib.request.Request(url)
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        output_path.write_bytes(resp.read())
+    if requests is not None:
+        resp = requests.get(url, timeout=60)
+        resp.raise_for_status()
+        output_path.write_bytes(resp.content)
+    else:
+        req = urllib.request.Request(url)
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            output_path.write_bytes(resp.read())
     return output_path
 
 
-# ── Manga-backend bridge (RunComfyImageBackend) ─────────────────────
+# ── Manga-backend bridge functions ──────────────────────────────────
+# Used by phoenix_v4.manga.image_backend.RunComfyImageBackend and tests.
 
 MAX_POLL_S: float = 300.0
 
@@ -309,11 +360,20 @@ def submit_workflow(
     deployment_id: str,
     workflow: dict[str, Any],
 ) -> str:
-    """Submit a workflow to RunComfy and return run_id (or request_id)."""
+    """Submit a workflow to RunComfy and return the run_id."""
     url = f"{_RUNCOMFY_API_BASE}/deployments/{deployment_id}/inference"
-    data = _runcomfy_request(url, api_key=api_key, method="POST", data={"workflow": workflow})
-    rid = data.get("run_id") or data.get("request_id")
-    return str(rid or "")
+    if requests is not None:
+        resp = requests.post(
+            url,
+            json={"workflow": workflow},
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+            timeout=120,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+    else:
+        data = _runcomfy_request(url, api_key=api_key, method="POST", data={"workflow": workflow})
+    return str(data.get("run_id", ""))
 
 
 def poll_run(
@@ -330,8 +390,17 @@ def poll_run(
     url = f"{_RUNCOMFY_API_BASE}/deployments/{deployment_id}/runs/{run_id}"
     start = time.time()
     while time.time() - start < max_wait:
-        data = _runcomfy_request(url, api_key=api_key)
-        status = str(data.get("status", "unknown")).lower()
+        if requests is not None:
+            resp = requests.get(
+                url,
+                headers={"Authorization": f"Bearer {api_key}"},
+                timeout=60,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+        else:
+            data = _runcomfy_request(url, api_key=api_key)
+        status = data.get("status", "unknown")
         if status in ("completed", "succeeded"):
             return data
         if status in ("failed", "error"):
@@ -341,13 +410,30 @@ def poll_run(
 
 
 def extract_image_url(result: dict[str, Any]) -> str | None:
-    """Extract the first image URL from a RunComfy result payload."""
+    """Extract the first image URL from a RunComfy result payload.
+
+    RunComfy outputs are keyed by node ID (e.g. ``"9"``), each containing
+    an ``images`` list. This function searches all output nodes.
+    """
     outputs = result.get("outputs", {})
+    # Direct images list (simple format)
     images = outputs.get("images", [])
-    if images and isinstance(images[0], dict):
-        return images[0].get("url")
-    if images and isinstance(images[0], str):
-        return images[0]
+    if images:
+        first = images[0]
+        if isinstance(first, dict):
+            return first.get("url")
+        if isinstance(first, str):
+            return first
+
+    # Node-keyed format: outputs.{node_id}.images[0].url
+    if isinstance(outputs, dict):
+        for node_id, node_out in outputs.items():
+            if isinstance(node_out, dict):
+                node_images = node_out.get("images", [])
+                if node_images and isinstance(node_images[0], dict):
+                    url = node_images[0].get("url")
+                    if url:
+                        return url
     return None
 
 
