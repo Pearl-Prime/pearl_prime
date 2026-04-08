@@ -396,7 +396,8 @@ def resolve_book(
             # ── OVERLAY PRIORITY ──
             # 1. Teacher atoms for teacher-voiced sections (doctrine, exercises, etc.)
             # 2. Persona atoms for persona-grounded sections (hooks, scenes, stories)
-            # Both can be active simultaneously — teacher speaks TO the persona.
+            # 3. Practice library for EXERCISE when atoms are thin (272 exercises with aha + integration)
+            # Both teacher + persona can be active simultaneously — teacher speaks TO the persona.
             overlay_content = None
             overlay_id = None
 
@@ -423,6 +424,22 @@ def resolve_book(
                     )
                     overlay_content = atom_pool[p_idx]["content"]
                     overlay_id = atom_pool[p_idx]["atom_id"]
+
+            # Practice library fallback for EXERCISE slots
+            if not overlay_content and sec_type == "EXERCISE":
+                try:
+                    from phoenix_v4.exercises.practice_library_loader import get_exercise_for_chapter
+                    composed = get_exercise_for_chapter(
+                        chapter_index=len(chapters),
+                        topic_id=reg_topic,
+                        persona_id=persona_id or "",
+                        seed=seed,
+                    )
+                    if composed:
+                        overlay_content = composed
+                        overlay_id = f"practice_library:ch{len(chapters)}"
+                except Exception:
+                    pass  # fall through to registry variant
 
             if overlay_content:
                 resolved_sections.append(ResolvedSection(

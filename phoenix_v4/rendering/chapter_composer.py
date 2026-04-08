@@ -561,7 +561,22 @@ def compose_chapter_prose(
     if compression_raw and not _is_placeholder_text(compression_raw):
         parts.append(compression_raw)
 
-    # 7. Exercise with bridge (component-aware when exercise_context is provided)
+    # 7. Exercise with bridge
+    # If exercise is placeholder or empty, try practice library (272 exercises with aha + integration)
+    if _is_placeholder_text(exercise_raw) or not exercise_raw:
+        try:
+            from phoenix_v4.exercises.practice_library_loader import get_exercise_for_chapter
+            composed = get_exercise_for_chapter(
+                chapter_index=chapter_index,
+                topic_id="",
+                persona_id="",
+                seed=f"ch{chapter_index}:{thesis[:20]}",
+            )
+            if composed:
+                exercise_raw = composed
+        except Exception:
+            pass
+
     if exercise_raw and not _is_placeholder_text(exercise_raw):
         if exercise_context is not None:
             # Use the component assembler for context-aware exercise rendering
