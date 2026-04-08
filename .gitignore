@@ -34,6 +34,9 @@ git_token.rtfc
 __pycache__/
 *.pyc
 artifacts/backup_logs/*.log
+# Showcase generated assets (large binary — regenerate via scripts)
+artifacts/showcase/video/
+artifacts/showcase/audio/
 artifacts/governance/repo_alignment/
 
 # Generated / temp directories

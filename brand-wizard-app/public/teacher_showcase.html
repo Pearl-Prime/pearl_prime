@@ -409,6 +409,12 @@ body {
   border-color: var(--brand-color, var(--amber));
   box-shadow: 0 0 24px rgba(245, 166, 35, 0.1);
 }
+
+    .video-container{border-radius:8px;padding:16px;text-align:center;border:1px solid var(--border-subtle, #333)}
+    .video-container.landscape{background:#111;aspect-ratio:16/9;display:flex;flex-direction:column;justify-content:center;align-items:center}
+    .video-container.portrait{background:#111;aspect-ratio:9/16;max-height:300px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+    .video-note{font-size:.7rem;color:var(--text-muted,#888);margin-top:8px;font-family:var(--mono)}
+    .video-meta{font-size:.65rem;color:var(--text-muted,#666);margin-top:4px}
 </style>
 </head>
 <body>
@@ -537,14 +543,32 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #F5A62333, #4A2C0077)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_ahjan_anxiety.png" alt="ahjan audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Inner Light Press</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #F5A62344, #4A2C0066)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/ahjan_front.png" alt="ahjan manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Inner Light Press</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/ahjan_front.png" alt="ahjan front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/ahjan_three_quarter.png" alt="ahjan 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/ahjan_profile.png" alt="ahjan profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -1463,14 +1487,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Burnout</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher ahjan</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/ahjan_self_worth_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Self Worth</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Depression</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/ahjan_depression_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -1507,14 +1539,32 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #E74C3C33, #2C000077)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_adi_da_self_worth.png" alt="adi_da audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Awakening Press</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #E74C3C44, #2C000066)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/adi_da_front.png" alt="adi_da manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Awakening Press</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/adi_da_front.png" alt="adi_da front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/adi_da_three_quarter.png" alt="adi_da 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/adi_da_profile.png" alt="adi_da profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -2592,14 +2642,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Courage</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher adi_da</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/adi_da_boundaries_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Boundaries</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Depression</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/adi_da_depression_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -2636,14 +2694,32 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #2ECC7133, #0A3D1E77)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_master_feung_burnout.png" alt="master_feung audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Vitality Path</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #2ECC7144, #0A3D1E66)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/master_feung_front.png" alt="master_feung manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Vitality Path</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/master_feung_front.png" alt="master_feung front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/master_feung_three_quarter.png" alt="master_feung 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/master_feung_profile.png" alt="master_feung profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -3175,14 +3251,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Somatic Healing</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher master_feung</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/master_feung_courage_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Courage</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Self Worth</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/master_feung_self_worth_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -3219,14 +3303,32 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #9B59B633, #2D1A3677)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_sai_ma_grief.png" alt="sai_ma audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Healing Ground Press</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #9B59B644, #2D1A3666)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/sai_ma_front.png" alt="sai_ma manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Healing Ground Press</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/sai_ma_front.png" alt="sai_ma front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/sai_ma_three_quarter.png" alt="sai_ma 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/sai_ma_profile.png" alt="sai_ma profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -3889,14 +3991,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Compassion Fatigue</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher sai_ma</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/sai_ma_depression_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Depression</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Boundaries</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/sai_ma_boundaries_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -3933,14 +4043,32 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #3498DB33, #0A1D3077)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_ra_imposter_syndrome.png" alt="ra audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Cosmic Edge</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #3498DB44, #0A1D3066)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/ra_front.png" alt="ra manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Cosmic Edge</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/ra_front.png" alt="ra front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/ra_three_quarter.png" alt="ra 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/ra_profile.png" alt="ra profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -4583,14 +4711,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Depression</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher ra</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/ra_courage_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Courage</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Self Worth</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/ra_self_worth_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -4627,7 +4763,7 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #1ABC9C33, #0A2E2877)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_junko_overthinking.png" alt="junko audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Zen Clarity</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
@@ -4635,6 +4771,24 @@ body {
           <img src="assets/manga_covers/junko_cover_sleep_anxiety.png" alt="junko manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Zen Clarity</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/junko_front.png" alt="junko front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/junko_three_quarter.png" alt="junko 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/junko_profile.png" alt="junko profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -5482,14 +5636,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Burnout</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher junko</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/junko_courage_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Courage</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Imposter Syndrome</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/junko_imposter_syndrome_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -5526,14 +5688,32 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #FF6B9D33, #3D002077)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_miki_imposter_syndrome.png" alt="miki audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Gen Spark</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #FF6B9D44, #3D002066)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/miki_front.png" alt="miki manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Gen Spark</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/miki_front.png" alt="miki front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/miki_three_quarter.png" alt="miki 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/miki_profile.png" alt="miki profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -6134,14 +6314,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Sleep Anxiety</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher miki</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/miki_anxiety_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Anxiety</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Compassion Fatigue</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/miki_compassion_fatigue_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -6178,7 +6366,7 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #95A5A633, #1A1A2E77)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_master_wu_courage.png" alt="master_wu audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Iron Will</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
@@ -6186,6 +6374,24 @@ body {
           <img src="assets/manga_covers/master_wu_cover_courage.png" alt="master_wu manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Iron Will</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/master_wu_front.png" alt="master_wu front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/master_wu_three_quarter.png" alt="master_wu 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/master_wu_profile.png" alt="master_wu profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -6721,14 +6927,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Burnout</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher master_wu</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/master_wu_boundaries_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Boundaries</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Self Worth</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/master_wu_self_worth_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -6765,14 +6979,32 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #E8B4B833, #2E141877)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_pamela_fellows_anxiety.png" alt="pamela_fellows audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Body Wisdom</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #E8B4B844, #2E141866)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/pamela_fellows_front.png" alt="pamela_fellows manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Body Wisdom</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/pamela_fellows_front.png" alt="pamela_fellows front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/pamela_fellows_three_quarter.png" alt="pamela_fellows 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/pamela_fellows_profile.png" alt="pamela_fellows profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -7583,14 +7815,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Somatic Healing</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher pamela_fellows</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/pamela_fellows_financial_anxiety_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Financial Anxiety</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Burnout</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/pamela_fellows_burnout_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -7627,7 +7867,7 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #4E7A5133, #1A2E1B77)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_joshin_anxiety.png" alt="joshin audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Still Forest</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
@@ -7635,6 +7875,24 @@ body {
           <img src="assets/manga_covers/joshin_cover_anxiety.png" alt="joshin manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Still Forest</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/joshin_front.png" alt="joshin front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/joshin_three_quarter.png" alt="joshin 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/joshin_profile.png" alt="joshin profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -8031,14 +8289,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Overthinking</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher joshin</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/joshin_burnout_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Burnout</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Sleep Anxiety</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/joshin_sleep_anxiety_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -8075,14 +8341,32 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #F39C1233, #3D250077)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_maat_boundaries.png" alt="maat audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Truth Compass</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #F39C1244, #3D250066)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/maat_front.png" alt="maat manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Truth Compass</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/maat_front.png" alt="maat front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/maat_three_quarter.png" alt="maat 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/maat_profile.png" alt="maat profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -8673,14 +8957,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Self Worth</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher maat</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/maat_social_anxiety_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Social Anxiety</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Courage</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/maat_courage_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -8717,14 +9009,32 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #5DADE233, #0A1E3077)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_omote_sleep_anxiety.png" alt="omote audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Gentle Wave</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #5DADE244, #0A1E3066)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/omote_front.png" alt="omote manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Gentle Wave</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/omote_front.png" alt="omote front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/omote_three_quarter.png" alt="omote 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/omote_profile.png" alt="omote profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -9260,14 +9570,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Self Worth</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher omote</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/omote_social_anxiety_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Social Anxiety</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Imposter Syndrome</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/omote_imposter_syndrome_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
@@ -9304,14 +9622,32 @@ body {
           <div class="cover-subtitle">Pocket Guide</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #8E44AD33, #1A0A2277)">
-          <div class="cover-icon">AUDIO</div>
+          <img src="assets/covers/audiobook/cover_master_sha_grief.png" alt="master_sha audiobook" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Soul Repair</div>
           <div class="cover-subtitle">Audiobook</div>
         </div>
         <div class="cover-card" style="background: linear-gradient(135deg, #8E44AD44, #1A0A2266)">
-          <div class="cover-icon">MANGA</div>
+          <img src="assets/manga_covers/master_sha_front.png" alt="master_sha manga" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
           <div class="cover-label">Soul Repair</div>
           <div class="cover-subtitle">Manga Edition</div>
+        </div>
+      </div>
+
+      <div class="content-grid" style="margin-top:12px">
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)22,var(--brand-dark,#111)88)">
+          <img src="assets/manga_covers/master_sha_front.png" alt="master_sha front" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Front Portrait</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)33,var(--brand-dark,#111)77)">
+          <img src="assets/manga_covers/master_sha_three_quarter.png" alt="master_sha 3/4 view" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">3/4 View</div>
+          <div class="cover-subtitle">Manga Character</div>
+        </div>
+        <div class="cover-card" style="background:linear-gradient(135deg,var(--brand-color,#333)44,var(--brand-dark,#111)66)">
+          <img src="assets/manga_covers/master_sha_profile.png" alt="master_sha profile" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+          <div class="cover-label">Profile View</div>
+          <div class="cover-subtitle">Manga Character</div>
         </div>
       </div>
 
@@ -9842,14 +10178,22 @@ body {
       </div>
 
       <div class="media-row">
-        <div class="video-placeholder landscape">
-          <div class="video-label">YouTube (10 min)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container landscape">
+          <div class="video-label">YouTube (10 min) — Somatic Healing</div>
+          <div class="video-meta" style="padding:8px;font-size:.75rem;color:#888">Full 10-min Descript-style audiobook video.<br>Run: <code>python3 scripts/video/generate_teacher_showcase_videos.py --teacher master_sha</code></div>
         </div>
-        <div class="video-placeholder portrait">
-          <div class="video-label">TikTok (90s)</div>
-          <div class="play-btn">PLAY</div>
+        <div class="video-container portrait" style="max-height:400px">
+          <video controls preload="metadata" style="width:100%;max-height:360px;border-radius:6px" poster="">
+            <source src="assets/video/tiktok/master_sha_depression_tiktok.mp4" type="video/mp4">
+          </video>
+          <div class="video-label" style="margin-top:4px">TikTok (90s) — Depression</div>
         </div>
+      </div>
+      <div style="margin:12px 0">
+        <div style="font-size:.85rem;color:#ccc;margin-bottom:6px">Audiobook Preview — Anxiety</div>
+        <audio controls preload="metadata" style="width:100%;border-radius:6px">
+          <source src="assets/audio/showcase/master_sha_anxiety_hook.mp3" type="audio/mpeg">
+        </audio>
       </div>
 
       <div class="style-row">
