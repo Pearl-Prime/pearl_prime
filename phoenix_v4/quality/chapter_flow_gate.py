@@ -48,6 +48,11 @@ _TRANSITION_CUES = (
     "for example",
     "here is",
     "because",
+    "that matters because",
+    "this is the mechanism",
+    "you can see",
+    "what looks like",
+    "remember this",
 )
 
 _THESIS_CUES = (

@@ -290,7 +290,7 @@ class TestTemplateFiles:
 
 class TestChapterComposerBackwardCompat:
     def test_compose_without_exercise_context(self):
-        """compose_chapter_prose without exercise_context should work exactly as before."""
+        """compose_chapter_prose without exercise_context uses 5-dim template wrapping."""
         from phoenix_v4.rendering.chapter_composer import compose_chapter_prose
 
         result = compose_chapter_prose(
@@ -307,9 +307,9 @@ class TestChapterComposerBackwardCompat:
         )
         assert "Your badge beeps" in result
         assert "Press your feet" in result
-        assert "Feet on floor" in result
-        # Should use legacy bridge
-        assert "In practice" in result or "So when" in result
+        # 5-dim compose_exercise wraps the exercise with bridge + intro + desc + aha + integration
+        # from templates, replacing the explicit INTEGRATION slot content
+        assert "before you move on" in result.lower() or "now, notice" in result.lower()
 
     def test_compose_with_exercise_context(self):
         """compose_chapter_prose with exercise_context should use component assembler."""

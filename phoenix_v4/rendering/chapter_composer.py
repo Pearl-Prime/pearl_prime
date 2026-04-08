@@ -613,6 +613,9 @@ def compose_chapter_prose(
                     templates=load_component_templates(),
                 )
                 if composed:
+                    # Inject somatic overlay sentence before composed exercise
+                    setup = _exercise_setup_sentence(reflection_raw, story_raw)
+                    parts.append(setup)
                     parts.append(composed)
                     integration_raw = ""  # aha + integration already included
                 else:
