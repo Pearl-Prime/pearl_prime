@@ -15,11 +15,15 @@ engines:
     voices:
       affirmations: "nova"
       default: "nova"
-  cosyvoice:
+  cosyvoice2:
     base_url_env: COSYVOICE_URL
-    languages: [zh-CN, zh-TW, zh-HK, ja, ko]
-    default_voice: null  # CosyVoice2 uses model default / zero-shot cloning
-    voices: {}
+    default_url: "http://192.168.1.112:9880"
+    supported_languages: [zh-CN, zh-TW, zh-HK, ja, ko, en]
+    voice_cache_endpoint: "/api/v3/voices/"
+    synthesis_endpoint: "/api/v3/cross-lingual/with-cache"
+    health_endpoint: "/api/v1/health"
+    built_in_voices: [chinese_female, chinese_male, japanese_male, cantonese_female, english_female, english_male, korean_female]
+    notes: "CosyVoice2 on Pearl Star. Zero-shot cloning via reference audio."
   edge_tts:
     api_key_env: null  # Free Microsoft service, no API key needed
     languages: [zh-CN, zh-TW, ja, ko, en, es, fr, de, id, pt-BR, hu]

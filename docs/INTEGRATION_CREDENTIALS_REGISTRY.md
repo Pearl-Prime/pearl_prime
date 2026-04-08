@@ -47,11 +47,30 @@ This reads the registry below and reports which env vars are set vs missing.
 | **Required vs optional** | `PEARL_STAR_IP` and `COMFYUI_URL` required; `COSYVOICE_URL` optional (CJK TTS) |
 | **Status** | Primary provider for image gen, CJK LLM, and CJK TTS |
 
+**SSH access (configured 2026-04-08):**
+- Host alias: `pearl_star` (in `~/.ssh/config`)
+- User: `ahjan108`
+- Key: `~/.ssh/id_ed25519_pearl_star`
+- Test: `ssh pearl_star hostname` → `pearlstar`
+
+**Hardware (verified 2026-04-08):**
+- GPU: NVIDIA GeForce RTX 5070 Ti (16 GB VRAM)
+- RAM: 64 GB (58 GB free at idle)
+- PyTorch: 2.11.0+cu130
+- ComfyUI: 0.18.1
+- Ollama: qwen3:14b (9.3 GB Q4_K_M)
+
 **Provider migration (2026-04-08):**
 - **Image generation:** ComfyUI on Pearl Star is now PRIMARY. RunComfy cloud is optional fallback.
 - **CJK LLM:** Ollama/Qwen3:14b on Pearl Star is now the default `QWEN_BASE_URL` target. DashScope is cloud fallback.
 - **CJK TTS:** CosyVoice2 on Pearl Star for zh/ja/ko. Edge-TTS is free fallback. ElevenLabs remains primary for EN.
 - **EN TTS:** ElevenLabs — NO CHANGE.
+
+**Keychain (macOS, for load_integration_env_from_keychain.py):**
+- `PEARL_STAR_IP` = 192.168.1.112
+- `COMFYUI_URL` = http://192.168.1.112:8188
+- `COSYVOICE_URL` = http://192.168.1.112:9880
+- `QWEN_BASE_URL` = http://192.168.1.112:11434/v1
 
 ### 1a. Together AI — LLM (preferred)
 

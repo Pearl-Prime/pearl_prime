@@ -47,12 +47,88 @@ narrators:
     disallowed_topics: []
     status: approved
 
-  # Example entries for multi-narrator use:
-  # ava_reed:
-  #   display_name: "Ava Reed"
-  #   brand_compatibility: [phoenix, phoenix_somatic]
-  #   persona_alignment: [gen_z_professionals]
-  #   pacing_profile: calm
-  #   voice_engine_id: elevenlabs_ava
-  #   disallowed_topics: []
-  #   status: approved
+  # ── CosyVoice2-backed narrators (CJK locales) ──
+
+  cosyvoice_ja_female_warm:
+    display_name: "Warm healing (JA female)"
+    brand_compatibility: [stillness_press_jp, somatic_wisdom_jp, devotion_path_jp]
+    persona_alignment: [mama_burnout_jp, senior_isolation_jp]
+    pacing_profile: calm
+    voice_engine_id: cosyvoice2
+    cosyvoice2_voice_id: ja_female_warm
+    locale: ja-JP
+    positioning: somatic_companion
+    disallowed_topics: []
+    status: approved
+
+  cosyvoice_ja_female_clear:
+    display_name: "Clear authority (JA female)"
+    brand_compatibility: [cognitive_clarity_jp, digital_ground_jp]
+    persona_alignment: [sarariiman_jp, 学生_pressure_jp]
+    pacing_profile: standard
+    voice_engine_id: cosyvoice2
+    cosyvoice2_voice_id: ja_female_clear
+    locale: ja-JP
+    positioning: research_guide
+    disallowed_topics: []
+    status: approved
+
+  cosyvoice_ja_male_elder:
+    display_name: "Elder wisdom (JA male)"
+    brand_compatibility: [norcal_dharma_jp, qi_foundation_jp, warrior_calm_jp]
+    persona_alignment: [sarariiman_jp, senior_isolation_jp]
+    pacing_profile: calm
+    voice_engine_id: cosyvoice2
+    cosyvoice2_voice_id: ja_male_elder
+    locale: ja-JP
+    positioning: elder_stabilizer
+    disallowed_topics: []
+    status: approved
+
+  cosyvoice_ko_female:
+    display_name: "Warm healing (KO female)"
+    brand_compatibility: [somatic_wisdom_kr, digital_ground_kr, heart_balance_kr, sleep_restoration_kr]
+    persona_alignment: [워킹맘_stress_kr, 취준생_anxiety_kr]
+    pacing_profile: calm
+    voice_engine_id: cosyvoice2
+    cosyvoice2_voice_id: korean_female
+    locale: ko-KR
+    positioning: somatic_companion
+    disallowed_topics: []
+    status: approved
+
+  cosyvoice_ko_male_warm:
+    display_name: "Warm empathetic (KO male)"
+    brand_compatibility: [stillness_press_kr, body_memory_kr]
+    persona_alignment: [직장인_burnout_kr, 은퇴_transition_kr]
+    pacing_profile: calm
+    voice_engine_id: cosyvoice2
+    cosyvoice2_voice_id: ko_male_warm
+    locale: ko-KR
+    positioning: somatic_companion
+    disallowed_topics: []
+    status: approved
+
+  cosyvoice_zh_female_intimate:
+    display_name: "Intimate warmth (ZH female)"
+    brand_compatibility: [stillness_press_cn, devotion_path_cn, digital_ground_cn]
+    persona_alignment: [996_tech_worker_cn, new_grad_cn]
+    pacing_profile: calm
+    voice_engine_id: cosyvoice2
+    cosyvoice2_voice_id: zh_female_intimate
+    locale: zh-CN
+    positioning: somatic_companion
+    disallowed_topics: []
+    status: approved
+
+  cosyvoice_yue_female:
+    display_name: "Cantonese healing (HK female)"
+    brand_compatibility: [stillness_press_hk, heart_balance_hk]
+    persona_alignment: [ifc_burnout_hk, sandwich_gen_hk]
+    pacing_profile: calm
+    voice_engine_id: cosyvoice2
+    cosyvoice2_voice_id: cantonese_female
+    locale: zh-HK
+    positioning: somatic_companion
+    disallowed_topics: []
+    status: approved

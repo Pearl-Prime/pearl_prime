@@ -43,7 +43,7 @@ locales:
     region: Mainland China
     script: Simplified Chinese
     direction: ltr
-    tts_provider: elevenlabs
+    tts_provider: cosyvoice2
     tts_fallback: google_neural2
     tts_locale_code: zh-CN
     elevenlabs_model: eleven_multilingual_v2
@@ -71,7 +71,7 @@ locales:
     region: Taiwan
     script: Traditional Chinese
     direction: ltr
-    tts_provider: elevenlabs
+    tts_provider: cosyvoice2
     tts_fallback: google_neural2
     tts_locale_code: zh-TW
     elevenlabs_model: eleven_multilingual_v2
@@ -93,7 +93,7 @@ locales:
     region: Hong Kong
     script: Traditional Chinese
     direction: ltr
-    tts_provider: elevenlabs
+    tts_provider: cosyvoice2
     tts_fallback: google_neural2
     tts_locale_code: zh-HK
     elevenlabs_model: eleven_multilingual_v2
@@ -116,7 +116,7 @@ locales:
     region: Singapore
     script: Simplified Chinese
     direction: ltr
-    tts_provider: elevenlabs
+    tts_provider: cosyvoice2
     tts_fallback: google_neural2
     tts_locale_code: zh-SG
     elevenlabs_model: eleven_multilingual_v2
@@ -142,7 +142,7 @@ locales:
     region: Japan
     script: Japanese (Kanji/Hiragana/Katakana)
     direction: ltr                      # horizontal modern; vertical in print only
-    tts_provider: elevenlabs
+    tts_provider: cosyvoice2
     tts_fallback: google_neural2
     tts_locale_code: ja-JP
     elevenlabs_model: eleven_multilingual_v2
@@ -170,7 +170,7 @@ locales:
     region: South Korea
     script: Hangul
     direction: ltr
-    tts_provider: elevenlabs
+    tts_provider: cosyvoice2
     tts_fallback: google_neural2
     tts_locale_code: ko-KR
     elevenlabs_model: eleven_multilingual_v2
