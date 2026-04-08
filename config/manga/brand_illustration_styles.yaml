@@ -1,0 +1,609 @@
+# Per-brand illustration style definitions for manga, covers, and visual content.
+# Each brand has a unique art style — NO sharing between brands.
+# Locale variants inherit base style with cultural adjustments.
+# Authority: brand_identity_system.yaml (palettes), teacher_character_prompts.yaml (base prompts).
+schema_version: 1
+last_updated: "2026-04-08"
+
+shared_negative: "low quality, blurry, deformed, extra fingers, bad anatomy, watermark, text overlay, logo, 3d render, photograph, stock photo"
+
+brands:
+  stillness_press:
+    teacher: ahjan
+    style_name: "Contemplative Ink Wash"
+    archetype_base: cozy_iyashikei
+    prompt_template: >
+      seinen manga, soft ink linework, warm earth-toned watercolor wash,
+      contemplative mood, generous negative space, paper texture grain,
+      Studio Ghibli meets Vagabond, {subject}
+    negative_prompt: "bright neon, harsh shadows, action lines, speed effects, chibi"
+    color_palette:
+      primary: ["#64748B", "#D4A574"]  # slate, warm gold
+      accent: "#B8860B"
+      background: "#F5F0E8"  # warm parchment
+    line_weight: medium
+    shading: watercolor_wash
+    background_treatment: atmospheric_gradient
+    typography_style: handwritten_serif
+    mood_reference: "Vagabond contemplative panels + watercolor landscapes"
+    locale_variants:
+      jp: { cultural_note: "standard manga conventions, right-to-left reading" }
+      kr: { cultural_note: "webtoon vertical scroll, left-to-right" }
+      fr: { cultural_note: "bande dessinée panel density, Franco-Belgian spacing" }
+
+  cognitive_clarity:
+    teacher: joshin
+    style_name: "Stark Zen Ink"
+    archetype_base: dark_psychological
+    prompt_template: >
+      seinen manga, sharp clean linework with selective warmth,
+      high contrast black and white, enso brush marks, minimal composition,
+      zen garden negative space, {subject}
+    negative_prompt: "colorful, pastel, busy backgrounds, cute, decorative"
+    color_palette:
+      primary: ["#1A1A1A", "#FFFFFF"]  # pure monochrome
+      accent: "#8B7355"  # warm sepia accent (rare)
+      background: "#FAFAFA"
+    line_weight: bold
+    shading: screen_tone_halftone
+    background_treatment: stark_white_with_ink_splash
+    typography_style: geometric_sans
+    mood_reference: "Vinland Saga clarity + Honey and Clover warmth in key panels"
+    locale_variants:
+      jp: { cultural_note: "calligraphy sound effects, traditional onomatopoeia" }
+
+  norcal_dharma:
+    teacher: ajahn_x
+    style_name: "Forest Naturalism"
+    archetype_base: dark_psychological
+    prompt_template: >
+      seinen manga, clean precise ink linework, earth-toned color wash,
+      forest canopy backgrounds, natural light filtering through trees,
+      Blade of the Immortal meets Mushishi, {subject}
+    negative_prompt: "urban, technology, neon, artificial lighting, crowds"
+    color_palette:
+      primary: ["#2D4A2A", "#8B7D6B"]  # forest green, bark brown
+      accent: "#D4A574"  # amber sap
+      background: "#F0EBE0"
+    line_weight: medium_precise
+    shading: crosshatch_organic
+    background_treatment: detailed_nature
+    typography_style: natural_brush
+    mood_reference: "Mushishi forest stillness + Blade of the Immortal precision"
+
+  somatic_wisdom:
+    teacher: pamela_fellows
+    style_name: "Soft Clinical"
+    archetype_base: webtoon_vertical_romance
+    prompt_template: >
+      josei manga, clean modern linework, warm neutral color palette,
+      soft gradient shading, anatomical detail for body awareness scenes,
+      Blue Period meets March Comes in Like a Lion, {subject}
+    negative_prompt: "harsh lines, dark horror, action violence, chibi comedy"
+    color_palette:
+      primary: ["#FFF5EE", "#D4A0A0"]  # cream, muted rose
+      accent: "#C1666B"
+      background: "#FFFAF5"
+    line_weight: thin_clean
+    shading: soft_gradient
+    background_treatment: minimal_warm
+    typography_style: modern_rounded
+    mood_reference: "Blue Period introspection + March Comes in Like a Lion emotional depth"
+    locale_variants:
+      jp: { cultural_note: "josei conventions, emotional close-ups" }
+      kr: { cultural_note: "webtoon scroll, modern UI overlays" }
+
+  qi_foundation:
+    teacher: master_feung
+    style_name: "Traditional Brushwork"
+    archetype_base: interactive_branching
+    prompt_template: >
+      xianxia cultivation manga, fine brushstroke linework,
+      traditional Chinese painting influence, flowing qi energy effects,
+      earth and gold tones, Kingdom meets The Ravages of Time, {subject}
+    negative_prompt: "modern technology, urban settings, western fantasy, anime eyes"
+    color_palette:
+      primary: ["#8B7355", "#D4A574"]  # earth brown, warm gold
+      accent: "#C5A03D"
+      background: "#F5ECD7"
+    line_weight: variable_brush
+    shading: ink_wash_gradient
+    background_treatment: traditional_landscape
+    typography_style: seal_script_accents
+    mood_reference: "Kingdom battle composure + Ravages of Time strategic depth"
+    locale_variants:
+      jp: { cultural_note: "wuxia tropes familiar to Japanese readers" }
+      kr: { cultural_note: "murim (Korean martial arts) conventions" }
+      china: { cultural_note: "manhua native style, simplified Chinese text" }
+
+  digital_ground:
+    teacher: miki
+    style_name: "Digital Minimalism"
+    archetype_base: cozy_iyashikei
+    prompt_template: >
+      iyashikei healing manga, soft rounded linework, digital-native aesthetic,
+      midnight blue and cyan palette, flat UI elements as background motifs,
+      smartphone era composition, Mushishi meets Yotsuba warmth, {subject}
+    negative_prompt: "traditional, medieval, painterly, heavy ink, dark horror"
+    color_palette:
+      primary: ["#1E293B", "#22D3EE"]  # midnight blue, cyan
+      accent: "#06B6D4"
+      background: "#F0F9FF"
+    line_weight: thin_rounded
+    shading: flat_cel
+    background_treatment: digital_gradient_with_ui_motifs
+    typography_style: clean_sans_rounded
+    mood_reference: "Yotsuba warmth in digital spaces + A Place Further Than the Universe"
+
+  heart_balance:
+    teacher: maat
+    style_name: "Geometric Mysticism"
+    archetype_base: power_progression
+    prompt_template: >
+      manga with Egyptian-inspired aesthetic, bold geometric linework,
+      indigo and gold color scheme, hieroglyphic motif borders,
+      JoJo dramatic poses meets Tezuka mythology, {subject}
+    negative_prompt: "cute, chibi, pastel, slice of life, modern urban"
+    color_palette:
+      primary: ["#312E81", "#D97706"]  # deep indigo, amber gold
+      accent: "#F59E0B"
+      background: "#1E1B4B"
+    line_weight: bold_geometric
+    shading: dramatic_contrast
+    background_treatment: geometric_patterns_with_depth
+    typography_style: angular_display
+    mood_reference: "JoJo Bizarre Adventure dramatic weight + Egyptian mythological grandeur"
+
+  relational_calm:
+    teacher: junko
+    style_name: "Wabi-Sabi Simplicity"
+    archetype_base: dark_psychological
+    prompt_template: >
+      manga in stark Zen aesthetic, bold decisive brushstrokes,
+      warm white and stone tones, maximum negative space,
+      asymmetric composition, Vagabond meets Ping Pong, {subject}
+    negative_prompt: "busy, cluttered, bright colors, decorative, ornamental"
+    color_palette:
+      primary: ["#F5F0E8", "#A0937D"]  # warm white, stone
+      accent: "#8B7D6B"
+      background: "#FDFBF7"
+    line_weight: decisive_brush
+    shading: minimal_sumi
+    background_treatment: empty_space_as_composition
+    typography_style: brush_calligraphy
+    mood_reference: "Ping Pong kinetic minimalism + Vagabond quiet panels"
+
+  warrior_calm:
+    teacher: master_wu
+    style_name: "Martial Ink"
+    archetype_base: interactive_branching
+    prompt_template: >
+      wuxia manga, fluid ink brushwork, charcoal and crimson palette,
+      dynamic martial arts poses with controlled stillness,
+      The Ravages of Time meets Feng Shen Ji, {subject}
+    negative_prompt: "cute, pastel, static, slice of life, modern urban"
+    color_palette:
+      primary: ["#36454F", "#DC143C"]  # charcoal, crimson
+      accent: "#8B0000"
+      background: "#F5F0E8"
+    line_weight: fluid_dynamic
+    shading: ink_splash_contrast
+    background_treatment: action_blur_with_stillness
+    typography_style: martial_brush
+    mood_reference: "Feng Shen Ji cosmic martial arts + Vagabond controlled violence"
+
+  sleep_restoration:
+    teacher: master_sha
+    style_name: "Luminous Night"
+    archetype_base: cozy_iyashikei
+    prompt_template: >
+      manga with Chinese healing lineage aesthetic, warm luminous linework,
+      deep night and violet palette, soft glowing energy effects,
+      Kingdom divine moments meets Saint Seiya, {subject}
+    negative_prompt: "harsh daylight, busy urban, action violence, angular harsh"
+    color_palette:
+      primary: ["#1A0033", "#8B5CF6"]  # deep night, soft violet
+      accent: "#A78BFA"
+      background: "#0F0720"
+    line_weight: luminous_soft
+    shading: soft_glow
+    background_treatment: starfield_with_energy
+    typography_style: elegant_script
+    mood_reference: "Saint Seiya cosmic energy + healing mandala stillness"
+
+  body_memory:
+    teacher: omote
+    style_name: "Textured Grief"
+    archetype_base: hyper_clean_cinematic
+    prompt_template: >
+      manga with Noh theater aesthetic, cinematic composition,
+      charcoal and terracotta palette, textured paper grain,
+      Blade of the Immortal weight meets Princess Kaguya beauty, {subject}
+    negative_prompt: "bright happy, chibi, comedy, modern pop, flat digital"
+    color_palette:
+      primary: ["#36454F", "#CD5C5C"]  # charcoal, terracotta
+      accent: "#A0522D"
+      background: "#F0E6D6"
+    line_weight: textured_heavy
+    shading: layered_texture
+    background_treatment: aged_paper_with_depth
+    typography_style: woodblock_print
+    mood_reference: "Princess Kaguya painterly beauty + Blade of the Immortal emotional weight"
+
+  solar_return:
+    teacher: ra
+    style_name: "Ember Abstraction"
+    archetype_base: dark_psychological
+    prompt_template: >
+      seinen manga, clean geometric linework, high contrast composition,
+      soot black and ember orange palette, cosmic geometry backgrounds,
+      Planetes meets Knights of Sidonia, {subject}
+    negative_prompt: "warm cozy, pastel, cute, organic shapes, fantasy medieval"
+    color_palette:
+      primary: ["#1A1410", "#EA580C"]  # soot, ember orange
+      accent: "#F97316"
+      background: "#0A0806"
+    line_weight: geometric_precise
+    shading: hard_edge_contrast
+    background_treatment: cosmic_geometry
+    typography_style: industrial_mono
+    mood_reference: "Planetes existential vastness + Knights of Sidonia stark geometry"
+
+  devotion_path:
+    teacher: sai_ma
+    style_name: "Flowing Warmth"
+    archetype_base: webtoon_vertical_romance
+    prompt_template: >
+      josei manga, soft flowing linework, warm color palette,
+      purple and blush tones, ornate borders with devotional motifs,
+      Nana emotional depth meets Bride Story craftsmanship, {subject}
+    negative_prompt: "harsh dark, horror, action violence, cold sterile, masculine heavy"
+    color_palette:
+      primary: ["#7C3AED", "#FBB6CE"]  # purple, blush
+      accent: "#A855F7"
+      background: "#FDF2F8"
+    line_weight: flowing_delicate
+    shading: soft_layered
+    background_treatment: ornate_borders_with_depth
+    typography_style: elegant_cursive
+    mood_reference: "Nana emotional intimacy + Bride Story ornamental beauty"
+
+  # ─── STANDARD BRANDS (no teacher character — pen-name author driven) ───
+
+  stabilizer:
+    style_name: "Clinical Harbor"
+    archetype_base: cozy_iyashikei
+    prompt_template: >
+      seinen manga, clean linework, slate and sky blue palette,
+      minimalist gradient backgrounds, clinical calm composition,
+      safe harbor atmosphere, {subject}
+    negative_prompt: "chaotic, dark horror, action violence, busy patterns"
+    color_palette: { primary: ["#64748B", "#F1F5F9"], accent: "#38BDF8", background: "#F8FAFC" }
+    line_weight: thin_clean
+    shading: soft_gradient
+    background_treatment: minimalist_gradient
+    typography_style: modern_serif
+    mood_reference: "Mushishi calm meets clinical precision"
+
+  optimizer:
+    style_name: "Electric Precision"
+    archetype_base: social_media_simulacra
+    prompt_template: >
+      modern manga, sharp geometric linework, charcoal and electric blue,
+      data visualization motifs, forward momentum composition, {subject}
+    negative_prompt: "soft, organic, watercolor, traditional, pastel"
+    color_palette: { primary: ["#1E293B", "#F8FAFC"], accent: "#3B82F6", background: "#F0F4FF" }
+    line_weight: sharp_geometric
+    shading: flat_cel
+    background_treatment: geometric_data_motifs
+    typography_style: geometric_sans
+    mood_reference: "Ghost in the Shell precision + Serial Experiments Lain digital"
+
+  night_reset:
+    style_name: "Nocturnal Hypnotic"
+    archetype_base: dark_psychological
+    prompt_template: >
+      seinen manga, soft-edged linework, deep night and indigo palette,
+      moon and starfield backgrounds, hypnotic dreamy composition, {subject}
+    negative_prompt: "bright daylight, harsh shadows, action, busy urban"
+    color_palette: { primary: ["#0F172A", "#1E293B"], accent: "#818CF8", background: "#0F0A2A" }
+    line_weight: soft_dreamy
+    shading: luminous_dark
+    background_treatment: starfield_with_moon
+    typography_style: elegant_script
+    mood_reference: "Goodnight Punpun atmosphere + Ergo Proxy night aesthetic"
+
+  career_lift:
+    style_name: "Purposeful Forward"
+    archetype_base: interactive_branching
+    prompt_template: >
+      seinen manga, bold clean linework, slate and amber palette,
+      office/urban backgrounds, forward movement composition, {subject}
+    negative_prompt: "fantasy, medieval, nature-only, chibi, pastel"
+    color_palette: { primary: ["#334155", "#FFFFFF"], accent: "#F59E0B", background: "#FFFBF0" }
+    line_weight: bold_clean
+    shading: structured_shadow
+    background_treatment: urban_professional
+    typography_style: bold_sans
+    mood_reference: "Blue Period career focus + Aggretsuko workplace reality"
+
+  adhd_forge:
+    style_name: "Electric Affirming"
+    archetype_base: meme_chaotic_humor
+    prompt_template: >
+      manga, energetic linework, teal and orange palette,
+      vibrant shapes, dynamic scattered composition,
+      lightning bolt motifs, affirming energy, {subject}
+    negative_prompt: "dark, heavy, somber, traditional, minimal"
+    color_palette: { primary: ["#134E4A", "#F0FDFA"], accent: "#F97316", background: "#F0FDFA" }
+    line_weight: energetic_varied
+    shading: vibrant_flat
+    background_treatment: scattered_shapes_and_sparks
+    typography_style: bold_rounded
+    mood_reference: "Mob Psycho 100 energy + FLCL chaos-as-clarity"
+
+  longevity_lab:
+    style_name: "Clinical Optimist"
+    archetype_base: social_media_simulacra
+    prompt_template: >
+      modern manga, precise clean linework, white and forest green,
+      scientific diagram motifs, laboratory clarity, {subject}
+    negative_prompt: "dark, gritty, fantasy, emotional, soft focus"
+    color_palette: { primary: ["#FFFFFF", "#166534"], accent: "#86EFAC", background: "#F0FDF4" }
+    line_weight: precise_thin
+    shading: clean_minimal
+    background_treatment: scientific_diagrams
+    typography_style: mono_technical
+    mood_reference: "Cells at Work clinical + Dr. Stone optimism"
+
+  creative_unfold:
+    style_name: "Whimsical Handmade"
+    archetype_base: cozy_iyashikei
+    prompt_template: >
+      manga, hand-drawn sketchy linework, warm cream and pink palette,
+      paper texture, craft materials motifs, permission-giving warmth, {subject}
+    negative_prompt: "digital perfection, dark, serious, high contrast, corporate"
+    color_palette: { primary: ["#FFFBEB", "#92400E"], accent: "#F472B6", background: "#FFFBEB" }
+    line_weight: sketchy_handmade
+    shading: watercolor_light
+    background_treatment: paper_texture_collage
+    typography_style: handwritten_casual
+    mood_reference: "Yotsuba playfulness + Barakamon creative joy"
+
+  resilient_parent:
+    style_name: "Tender Brief"
+    archetype_base: cozy_iyashikei
+    prompt_template: >
+      josei manga, soft rounded linework, cream and warm grey palette,
+      domestic backgrounds, brief stolen moments, tender composition, {subject}
+    negative_prompt: "action, violence, dark, corporate, fantasy"
+    color_palette: { primary: ["#FFF7ED", "#78716C"], accent: "#FB923C", background: "#FFF7ED" }
+    line_weight: soft_rounded
+    shading: warm_soft
+    background_treatment: domestic_warm
+    typography_style: rounded_serif
+    mood_reference: "Usagi Drop tenderness + Sweetness and Lightning warmth"
+
+  executive_calm:
+    style_name: "Granite Authority"
+    archetype_base: dark_psychological
+    prompt_template: >
+      seinen manga, precise sharp linework, near-black and bronze palette,
+      boardroom/skyline backgrounds, quiet power composition, {subject}
+    negative_prompt: "cute, pastel, casual, playful, fantasy"
+    color_palette: { primary: ["#1C1917", "#D4D4D8"], accent: "#B45309", background: "#1C1917" }
+    line_weight: precise_heavy
+    shading: dramatic_contrast
+    background_treatment: dark_architectural
+    typography_style: premium_serif
+    mood_reference: "Monster authority + Sanctuary power dynamics"
+
+  trauma_path:
+    style_name: "Safe Earth"
+    archetype_base: cozy_iyashikei
+    prompt_template: >
+      manga, gentle soft linework, cream and terracotta earth tones,
+      nest-like protective composition, no sharp edges, grounding, {subject}
+    negative_prompt: "harsh, sharp angles, dark horror, violence, neon"
+    color_palette: { primary: ["#FFFBEB", "#78716C"], accent: "#A3785E", background: "#FFFBEB" }
+    line_weight: gentle_soft
+    shading: earth_tone_wash
+    background_treatment: organic_protective
+    typography_style: warm_serif
+    mood_reference: "March Comes in Like a Lion safety + Natsume Yuujinchou gentleness"
+
+  spiritual_ground:
+    style_name: "Deep Well"
+    archetype_base: dark_psychological
+    prompt_template: >
+      seinen manga, layered detailed linework, deep indigo and soft purple,
+      concentric circle motifs, contemplative depth, {subject}
+    negative_prompt: "bright, casual, modern urban, comedy, surface-level"
+    color_palette: { primary: ["#1E1B4B", "#EEF2FF"], accent: "#A78BFA", background: "#1E1B4B" }
+    line_weight: layered_detailed
+    shading: deep_gradient
+    background_treatment: concentric_depth
+    typography_style: contemplative_serif
+    mood_reference: "Mushishi depth + Land of the Lustrous existential beauty"
+
+  focus_sprint:
+    style_name: "Launch Velocity"
+    archetype_base: power_progression
+    prompt_template: >
+      manga, dynamic clean linework, midnight and cyan palette,
+      ascending geometric shapes, velocity and launch energy, {subject}
+    negative_prompt: "slow, contemplative, organic, traditional, soft"
+    color_palette: { primary: ["#0F172A", "#F8FAFC"], accent: "#22D3EE", background: "#0F172A" }
+    line_weight: dynamic_clean
+    shading: flat_with_speed_lines
+    background_treatment: ascending_geometric
+    typography_style: geometric_sans
+    mood_reference: "Haikyuu launch energy + Run with the Wind forward drive"
+
+  hormone_reset:
+    style_name: "Cyclical Empowering"
+    archetype_base: webtoon_vertical_romance
+    prompt_template: >
+      josei manga, flowing organic linework, blush and deep rose palette,
+      wave/cycle motifs, body-honoring composition, {subject}
+    negative_prompt: "masculine heavy, dark horror, mechanical, angular"
+    color_palette: { primary: ["#FFF1F2", "#9F1239"], accent: "#FB7185", background: "#FFF1F2" }
+    line_weight: flowing_organic
+    shading: warm_gradient
+    background_treatment: wave_cycle_motifs
+    typography_style: elegant_rounded
+    mood_reference: "Princess Jellyfish body-positive + Chihayafuru cyclical rhythm"
+
+  stoic_edge:
+    style_name: "Forged Steel"
+    archetype_base: power_progression
+    prompt_template: >
+      seinen manga, hard angular linework, charcoal and grey palette,
+      anvil/forge motifs, no-excuses stark composition, {subject}
+    negative_prompt: "soft, pastel, cute, decorative, whimsical"
+    color_palette: { primary: ["#1C1917", "#F5F5F4"], accent: "#71717A", background: "#1C1917" }
+    line_weight: hard_angular
+    shading: high_contrast_minimal
+    background_treatment: industrial_stark
+    typography_style: condensed_bold
+    mood_reference: "Berserk forge + Vinland Saga stoic endurance"
+
+  calm_student:
+    style_name: "Campus Blue"
+    archetype_base: social_media_simulacra
+    prompt_template: >
+      manga, clean youthful linework, light blue and navy palette,
+      campus/study backgrounds, direct young energy, {subject}
+    negative_prompt: "dark horror, adult themes, corporate, traditional"
+    color_palette: { primary: ["#EFF6FF", "#1E40AF"], accent: "#60A5FA", background: "#EFF6FF" }
+    line_weight: clean_youthful
+    shading: flat_bright
+    background_treatment: campus_study
+    typography_style: bold_modern
+    mood_reference: "Blue Period student struggle + Assassination Classroom direct"
+
+  healing_ground:
+    style_name: "Midday Warmth"
+    archetype_base: cozy_iyashikei
+    prompt_template: >
+      manga, warm rounded linework, cream and warm yellow palette,
+      sunlit desk/break-room backgrounds, accessible quick warmth, {subject}
+    negative_prompt: "dark, night, complex, overwhelming, intense"
+    color_palette: { primary: ["#FFFBEB", "#92400E"], accent: "#FBBF24", background: "#FFFBEB" }
+    line_weight: warm_rounded
+    shading: sunlit_soft
+    background_treatment: bright_interior
+    typography_style: friendly_serif
+    mood_reference: "Tanaka-kun is Always Listless ease + Laid-Back Camp warmth"
+
+  bio_flow:
+    style_name: "Signal Pulse"
+    archetype_base: social_media_simulacra
+    prompt_template: >
+      manga, precise technical linework, white-green and forest palette,
+      waveform/data motifs, biometric visualization, {subject}
+    negative_prompt: "soft, emotional, organic, traditional, fantasy"
+    color_palette: { primary: ["#F0FDF4", "#14532D"], accent: "#4ADE80", background: "#F0FDF4" }
+    line_weight: precise_technical
+    shading: clean_digital
+    background_treatment: biometric_data_overlay
+    typography_style: mono_technical
+    mood_reference: "Ghost in the Shell data + Cells at Work biological precision"
+
+  confidence_core:
+    style_name: "Threshold Moment"
+    archetype_base: interactive_branching
+    prompt_template: >
+      manga, balanced clean linework, warm white and amber palette,
+      doorway/threshold motifs, gentle push composition, {subject}
+    negative_prompt: "harsh, dark, extreme, chaotic, aggressive"
+    color_palette: { primary: ["#FAFAF9", "#57534E"], accent: "#D97706", background: "#FAFAF9" }
+    line_weight: balanced_clean
+    shading: warm_minimal
+    background_treatment: threshold_doorway
+    typography_style: classic_serif
+    mood_reference: "A Silent Voice threshold + Your Lie in April courage"
+
+  relationship_clarity:
+    style_name: "Intimate Honest"
+    archetype_base: webtoon_vertical_romance
+    prompt_template: >
+      josei manga, expressive linework, cream and crimson palette,
+      two-person compositions, intimate conversation framing, {subject}
+    negative_prompt: "action, crowd, solo, dark horror, fantasy battle"
+    color_palette: { primary: ["#FFF7ED", "#44403C"], accent: "#E11D48", background: "#FFF7ED" }
+    line_weight: expressive_varied
+    shading: warm_intimate
+    background_treatment: two_person_focus
+    typography_style: warm_serif
+    mood_reference: "Wotakoi intimacy + Horimiya honest connection"
+
+  morning_momentum:
+    style_name: "Dawn Decisive"
+    archetype_base: power_progression
+    prompt_template: >
+      manga, bold decisive linework, cream and amber dawn palette,
+      sunrise/morning light, decisive forward energy, {subject}
+    negative_prompt: "night, dark, slow, contemplative, static"
+    color_palette: { primary: ["#FFFBEB", "#1C1917"], accent: "#F59E0B", background: "#FFFBEB" }
+    line_weight: bold_decisive
+    shading: dawn_light
+    background_treatment: sunrise_horizon
+    typography_style: bold_sans
+    mood_reference: "Haikyuu morning practice + Run with the Wind dawn starts"
+
+  minimal_mind:
+    style_name: "Crystal Clear"
+    archetype_base: cozy_iyashikei
+    prompt_template: >
+      manga, ultra-minimal linework, almost white and cyan palette,
+      maximum negative space, single water drop motifs, restful, {subject}
+    negative_prompt: "busy, cluttered, dark, complex, decorative, heavy"
+    color_palette: { primary: ["#F8FAFC", "#475569"], accent: "#06B6D4", background: "#F8FAFC" }
+    line_weight: ultra_minimal
+    shading: barely_there
+    background_treatment: pure_negative_space
+    typography_style: thin_sans
+    mood_reference: "Yokohama Kaidashi Kikou stillness + Aria clarity"
+
+  high_performer:
+    style_name: "Locked Sharp"
+    archetype_base: power_progression
+    prompt_template: >
+      seinen manga, sharp precise linework, black and red palette,
+      target/crosshair motifs, competitive intensity, {subject}
+    negative_prompt: "soft, gentle, pastoral, cute, relaxed"
+    color_palette: { primary: ["#18181B", "#FAFAFA"], accent: "#EF4444", background: "#18181B" }
+    line_weight: sharp_precise
+    shading: high_contrast_dramatic
+    background_treatment: target_focus
+    typography_style: condensed_impact
+    mood_reference: "One Outs strategic + Kaiji competitive edge"
+
+  gentle_growth:
+    style_name: "Tender Seedling"
+    archetype_base: cozy_iyashikei
+    prompt_template: >
+      manga, delicate thin linework, mint and green palette,
+      seedling/garden motifs, tender beginning composition, {subject}
+    negative_prompt: "dark, harsh, industrial, aggressive, mature"
+    color_palette: { primary: ["#F0FDF4", "#4ADE80"], accent: "#86EFAC", background: "#F0FDF4" }
+    line_weight: delicate_thin
+    shading: watercolor_light
+    background_treatment: garden_growth
+    typography_style: rounded_friendly
+    mood_reference: "Silver Spoon growth + Sweetness and Lightning tenderness"
+
+  legacy_builder:
+    style_name: "Second Mountain"
+    archetype_base: dark_psychological
+    prompt_template: >
+      seinen manga, dignified heavy linework, charcoal and warm taupe,
+      mountain/landscape backgrounds, earned wisdom gravitas, {subject}
+    negative_prompt: "youthful, bright, casual, playful, trendy"
+    color_palette: { primary: ["#1C1917", "#D6D3D1"], accent: "#78716C", background: "#1C1917" }
+    line_weight: dignified_heavy
+    shading: subtle_depth
+    background_treatment: mountain_landscape
+    typography_style: premium_serif
+    mood_reference: "Vagabond elder wisdom + Kingdom earned authority"

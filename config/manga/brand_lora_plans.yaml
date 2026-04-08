@@ -1,0 +1,262 @@
+# LoRA training plans for character and brand style consistency.
+# Each teacher gets a character LoRA; each brand gets a style LoRA.
+# Trained on Pearl Star ComfyUI (FLUX.1-dev base model).
+# Output: ~/content_bank/loras/{brand_id}/
+schema_version: 1
+last_updated: "2026-04-08"
+
+training_defaults:
+  base_model: "FLUX.1-dev"
+  vae: "ae.safetensors"
+  rank: 16
+  alpha: 16
+  learning_rate: 0.0001
+  optimizer: "AdamW8bit"
+  batch_size: 1
+  gradient_accumulation: 4
+  resolution: 1024
+  output_root: "~/content_bank/loras"
+
+trigger_word_convention: "{teacher_id}_{brand_suffix}"
+# Examples: ahjan_sp (Stillness Press), joshin_cc (Cognitive Clarity)
+
+brand_suffixes:
+  stillness_press: sp
+  cognitive_clarity: cc
+  norcal_dharma: nd
+  somatic_wisdom: sw
+  qi_foundation: qf
+  digital_ground: dg
+  heart_balance: hb
+  relational_calm: rc
+  warrior_calm: wc
+  sleep_restoration: sr
+  body_memory: bm
+  solar_return: so
+  devotion_path: dp
+
+# Per-teacher character LoRA (face/body consistency across all visual media)
+character_loras:
+  ahjan:
+    trigger_word: "ahjan_sp"
+    reference_images_needed:
+      - front_portrait
+      - three_quarter_view
+      - profile_view
+      - expression_sheet  # 4 expressions: neutral, contemplative, gentle_smile, teaching
+    training_steps: 1500
+    ip_adapter_weight: 0.85
+    style_ref: stillness_press  # inherits brand art style
+    notes: "South Asian male, warm expression, contemplative bearing"
+
+  joshin:
+    trigger_word: "joshin_cc"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.83
+    style_ref: cognitive_clarity
+    notes: "Japanese-American female, precise gaze, zen authority"
+
+  ajahn_x:
+    trigger_word: "ajahn_x_nd"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.85
+    style_ref: norcal_dharma
+    notes: "Thai-American male, forest monk bearing, weathered hands"
+
+  pamela_fellows:
+    trigger_word: "pamela_sw"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1800
+    ip_adapter_weight: 0.88
+    style_ref: somatic_wisdom
+    notes: "Caucasian female, clinical warmth, somatic awareness posture"
+
+  master_feung:
+    trigger_word: "feung_qf"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.82
+    style_ref: qi_foundation
+    notes: "Chinese male, elder presence, qigong practitioner posture"
+
+  miki:
+    trigger_word: "miki_dg"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.85
+    style_ref: digital_ground
+    notes: "Japanese-American female, Gen Z bearing, digital native energy"
+
+  maat:
+    trigger_word: "maat_hb"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.80
+    style_ref: heart_balance
+    notes: "Egyptian-coded female, regal bearing, shadow work intensity"
+
+  junko:
+    trigger_word: "junko_rc"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.82
+    style_ref: relational_calm
+    notes: "Japanese female, wabi-sabi simplicity, radical acceptance presence"
+
+  master_wu:
+    trigger_word: "wu_wc"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.82
+    style_ref: warrior_calm
+    notes: "Chinese male, martial composure, controlled power in stillness"
+
+  master_sha:
+    trigger_word: "sha_sr"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.84
+    style_ref: sleep_restoration
+    notes: "Chinese male, healing presence, luminous calm"
+
+  omote:
+    trigger_word: "omote_bm"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.83
+    style_ref: body_memory
+    notes: "Japanese male, Noh-influenced bearing, grief held in body"
+
+  ra:
+    trigger_word: "ra_so"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.80
+    style_ref: solar_return
+    notes: "Ambiguous ethnicity, post-burnout rebirth energy, ember warmth"
+
+  sai_ma:
+    trigger_word: "saima_dp"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1800
+    ip_adapter_weight: 0.85
+    style_ref: devotion_path
+    notes: "Indian female, bhakti devotion radiance, flowing presence"
+
+# Per-brand style LoRA (cohesive visual identity across all brand outputs)
+brand_style_loras:
+  stillness_press:
+    trigger_word: "style_sp"
+    training_images: 20  # curated brand-style exemplars
+    training_steps: 2000
+    notes: "Warm watercolor wash + ink line consistency"
+
+  cognitive_clarity:
+    trigger_word: "style_cc"
+    training_images: 20
+    training_steps: 2000
+    notes: "High contrast monochrome with selective warmth"
+
+  norcal_dharma:
+    trigger_word: "style_nd"
+    training_images: 20
+    training_steps: 2000
+    notes: "Earth-toned forest naturalism"
+
+  somatic_wisdom:
+    trigger_word: "style_sw"
+    training_images: 20
+    training_steps: 2000
+    notes: "Clean modern clinical warmth"
+
+  qi_foundation:
+    trigger_word: "style_qf"
+    training_images: 20
+    training_steps: 2000
+    notes: "Traditional Chinese brushwork influence"
+
+  digital_ground:
+    trigger_word: "style_dg"
+    training_images: 20
+    training_steps: 2000
+    notes: "Digital-native flat aesthetic with rounded forms"
+
+  heart_balance:
+    trigger_word: "style_hb"
+    training_images: 20
+    training_steps: 2000
+    notes: "Bold geometric Egyptian-influenced motifs"
+
+  relational_calm:
+    trigger_word: "style_rc"
+    training_images: 20
+    training_steps: 2000
+    notes: "Wabi-sabi minimalism, maximum negative space"
+
+  warrior_calm:
+    trigger_word: "style_wc"
+    training_images: 20
+    training_steps: 2000
+    notes: "Dynamic martial ink with controlled stillness"
+
+  sleep_restoration:
+    trigger_word: "style_sr"
+    training_images: 20
+    training_steps: 2000
+    notes: "Luminous night tones with soft energy glow"
+
+  body_memory:
+    trigger_word: "style_bm"
+    training_images: 20
+    training_steps: 2000
+    notes: "Textured aged paper with Noh theater weight"
+
+  solar_return:
+    trigger_word: "style_so"
+    training_images: 20
+    training_steps: 2000
+    notes: "Geometric cosmic soot and ember palette"
+
+  devotion_path:
+    trigger_word: "style_dp"
+    training_images: 20
+    training_steps: 2000
+    notes: "Flowing ornamental warmth with devotional motifs"
+
+  # ── Standard brands (style LoRAs only — no teacher character LoRAs) ──
+  stabilizer: { trigger_word: "style_stab", training_images: 20, training_steps: 2000, notes: "Clinical harbor, slate/sky blue gradient" }
+  optimizer: { trigger_word: "style_opt", training_images: 20, training_steps: 2000, notes: "Electric precision, charcoal/blue geometric" }
+  night_reset: { trigger_word: "style_nr", training_images: 20, training_steps: 2000, notes: "Nocturnal hypnotic, deep night/indigo" }
+  career_lift: { trigger_word: "style_cl", training_images: 20, training_steps: 2000, notes: "Purposeful forward, slate/amber bold" }
+  adhd_forge: { trigger_word: "style_af", training_images: 20, training_steps: 2000, notes: "Electric affirming, teal/orange vibrant" }
+  longevity_lab: { trigger_word: "style_ll", training_images: 20, training_steps: 2000, notes: "Clinical optimist, white/green precise" }
+  creative_unfold: { trigger_word: "style_cu", training_images: 20, training_steps: 2000, notes: "Whimsical handmade, cream/pink sketch" }
+  resilient_parent: { trigger_word: "style_rp", training_images: 20, training_steps: 2000, notes: "Tender brief, cream/grey domestic warm" }
+  executive_calm: { trigger_word: "style_ec", training_images: 20, training_steps: 2000, notes: "Granite authority, near-black/bronze power" }
+  trauma_path: { trigger_word: "style_tp", training_images: 20, training_steps: 2000, notes: "Safe earth, cream/terracotta protective" }
+  spiritual_ground: { trigger_word: "style_sg", training_images: 20, training_steps: 2000, notes: "Deep well, indigo/purple concentric depth" }
+  focus_sprint: { trigger_word: "style_fs", training_images: 20, training_steps: 2000, notes: "Launch velocity, midnight/cyan ascending" }
+  hormone_reset: { trigger_word: "style_hr", training_images: 20, training_steps: 2000, notes: "Cyclical empowering, blush/rose flowing" }
+  stoic_edge: { trigger_word: "style_se", training_images: 20, training_steps: 2000, notes: "Forged steel, charcoal/grey angular" }
+  calm_student: { trigger_word: "style_cs", training_images: 20, training_steps: 2000, notes: "Campus blue, light blue/navy youthful" }
+  healing_ground: { trigger_word: "style_hg", training_images: 20, training_steps: 2000, notes: "Midday warmth, cream/yellow sunlit" }
+  bio_flow: { trigger_word: "style_bf", training_images: 20, training_steps: 2000, notes: "Signal pulse, green/forest biometric" }
+  confidence_core: { trigger_word: "style_cc2", training_images: 20, training_steps: 2000, notes: "Threshold moment, white/amber balanced" }
+  relationship_clarity: { trigger_word: "style_rel", training_images: 20, training_steps: 2000, notes: "Intimate honest, cream/crimson two-person" }
+  morning_momentum: { trigger_word: "style_mm", training_images: 20, training_steps: 2000, notes: "Dawn decisive, cream/amber sunrise" }
+  minimal_mind: { trigger_word: "style_min", training_images: 20, training_steps: 2000, notes: "Crystal clear, white/cyan ultra-minimal" }
+  high_performer: { trigger_word: "style_hp", training_images: 20, training_steps: 2000, notes: "Locked sharp, black/red target focus" }
+  gentle_growth: { trigger_word: "style_gg", training_images: 20, training_steps: 2000, notes: "Tender seedling, mint/green delicate" }
+  legacy_builder: { trigger_word: "style_lb", training_images: 20, training_steps: 2000, notes: "Second mountain, charcoal/taupe dignified" }
+
+# Validation checklist (run after training)
+validation:
+  consistency_test_count: 20  # generate 20 images, check character recognizable
+  cross_format_test:
+    - cover_art
+    - manga_panel
+    - video_thumbnail
+    - social_media_post
+  acceptable_face_similarity: 0.85  # CLIP-based face similarity threshold
