@@ -603,10 +603,25 @@ def compose_chapter_prose(
                 parts.append(_exercise_setup_sentence(reflection_raw, story_raw))
                 parts.append(exercise_raw)
         else:
-            # Legacy path: hardcoded bridges (backward compatible)
-            parts.append(_bridge_before_exercise(thesis, reflection=reflection_raw, story=story_raw))
-            parts.append(_exercise_setup_sentence(reflection_raw, story_raw))
-            parts.append(exercise_raw)
+            # Wrap exercise with 5-dimension template (bridge + intro + desc + aha + integration)
+            try:
+                from phoenix_v4.exercises.practice_library_loader import compose_exercise, load_component_templates
+                composed = compose_exercise(
+                    exercise={"name": "Exercise", "text": exercise_raw, "exercise_type": "body_awareness"},
+                    chapter_index=chapter_index,
+                    seed=f"ch{chapter_index}:{thesis[:20]}",
+                    templates=load_component_templates(),
+                )
+                if composed:
+                    parts.append(composed)
+                    integration_raw = ""  # aha + integration already included
+                else:
+                    raise ValueError("empty compose")
+            except Exception:
+                # Final fallback: hardcoded bridges
+                parts.append(_bridge_before_exercise(thesis, reflection=reflection_raw, story=story_raw))
+                parts.append(_exercise_setup_sentence(reflection_raw, story_raw))
+                parts.append(exercise_raw)
 
     # 7a. PERMISSION (receive the reader — Writer Spec §4.8)
     # Short emotional permission statement placed near INTEGRATION. High-cost chapters only.
