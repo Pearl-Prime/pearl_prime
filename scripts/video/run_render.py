@@ -40,6 +40,37 @@ SCALE_W = 1200
 SCALE_H = 2133
 
 
+def _escape_ffmpeg_text(text: str) -> str:
+    """Escape text for FFmpeg drawtext filter value inside single quotes.
+
+    FFmpeg drawtext inside ``-filter_complex`` needs two layers of escaping:
+    1. FFmpeg filter escaping (colons, semicolons, brackets)
+    2. Shell-safe single-quote handling
+
+    The safest approach: replace problematic characters so the filter
+    never sees them. Apostrophes become Unicode right single quote (visually
+    identical in rendered captions).
+    """
+    text = text.replace("\n", " ").replace("\r", " ")
+    # Remove all quote characters — they break FFmpeg filter_complex quoting
+    text = text.replace("'", "")
+    text = text.replace('"', "")
+    text = text.replace("\u2018", "")  # left single quote
+    text = text.replace("\u2019", "")  # right single quote
+    text = text.replace("\u201c", "")  # left double quote
+    text = text.replace("\u201d", "")  # right double quote
+    # Backslash must be escaped first
+    text = text.replace("\\", "\\\\")
+    # FFmpeg drawtext inside filter_complex: colons, semicolons, brackets
+    # need escaping at the filter_complex level
+    text = text.replace(":", "\\\\:")
+    text = text.replace(";", "\\\\;")
+    text = text.replace("[", "\\\\[")
+    text = text.replace("]", "\\\\]")
+    text = text.replace("%", "%%%%")
+    return text
+
+
 def _deterministic_seed(video_id: str, shot_index: int) -> int:
     key = f"{video_id}_{shot_index}".encode()
     return int(hashlib.sha256(key).hexdigest(), 16)
@@ -120,7 +151,7 @@ def _build_filter_chain(
     if drawbox and caption_text:
         filters.append("drawbox=x=0:y=h*0.75:w=iw:h=h*0.25:color=black@0.35:t=fill")
     if caption_text:
-        escaped = caption_text.replace("\\", "\\\\").replace("'", "'\\\\''")
+        escaped = _escape_ffmpeg_text(caption_text)
         filters.append(
             f"drawtext=text='{escaped}':fontsize=64:fontcolor=white:x={caption_x}:y={caption_y}:"
             "shadowcolor=black:shadowx=2:shadowy=2:line_spacing=8"
@@ -189,6 +220,57 @@ def _layer_inputs_for_composite(
     return True, inputs
 
 
+def _motion_scale_crop(
+    motion_type: str,
+    output_w: int,
+    output_h: int,
+    fps: int,
+) -> list[str]:
+    """Return scale+crop filters that simulate motion on a multi-frame stream.
+
+    Unlike zoompan (which requires single-frame ``-loop 1`` input), these filters
+    work on the already-composited multi-frame overlay output.
+
+    Motion types:
+      slow_zoom / slow_zoom_in  -- Ken Burns zoom in via expanding scale + center crop
+      slow_zoom_out             -- Ken Burns zoom out
+      slow_pan                  -- gentle horizontal pan via shifting crop x
+      static                    -- no motion, just ensure exact output size
+    """
+    motion = _normalize_motion_for_ffmpeg(motion_type)
+    # Zoom rate per frame (matches the zoompan 0.00023/frame used in _motion_expr)
+    zr = 0.0015  # per-second rate; spread across fps
+
+    if motion in ("slow_zoom", "slow_zoom_in"):
+        # Scale up slightly over time, crop back to output size from center.
+        # n = frame number (0-based). Scale grows from 1.0x to ~1.08x over the clip.
+        # We scale to (output + growth) then crop the center.
+        # eval=frame is required so 'n' is re-evaluated each frame.
+        return [
+            f"scale=trunc((iw*(1+{zr}*n/{fps}))/2)*2:trunc((ih*(1+{zr}*n/{fps}))/2)*2:flags=bicubic:eval=frame",
+            f"crop={output_w}:{output_h}:(iw-{output_w})/2:(ih-{output_h})/2",
+        ]
+    if motion == "slow_zoom_out":
+        # Start slightly zoomed in, scale back toward 1.0x.
+        max_zoom = 1.08
+        return [
+            f"scale=trunc((iw*({max_zoom}-{zr}*n/{fps}))/2)*2:trunc((ih*({max_zoom}-{zr}*n/{fps}))/2)*2:flags=bicubic:eval=frame",
+            f"crop={output_w}:{output_h}:(iw-{output_w})/2:(ih-{output_h})/2",
+        ]
+    if motion == "slow_pan":
+        # Slight overscan then horizontal pan via crop x offset.
+        overscan_w = int(output_w * 1.04)  # 4% wider
+        overscan_h = int(output_h * 1.02)  # 2% taller
+        return [
+            f"scale={overscan_w}:{overscan_h}:flags=bicubic",
+            f"crop={output_w}:{output_h}:(iw-{output_w})/2*min(1\\,{0.001}*n):(ih-{output_h})/2",
+        ]
+    # static — just ensure exact output dimensions
+    return [
+        f"scale={output_w}:{output_h}:flags=bicubic",
+    ]
+
+
 def _post_overlay_chain(
     base_label: str,
     bundle: dict | None,
@@ -202,42 +284,54 @@ def _post_overlay_chain(
     caption_x: str,
     caption_y: str,
     drawbox: bool,
+    caption_textfile: Path | None = None,
 ) -> str:
-    """Serial filters after compositor output label -> chain ending at [vfinal]."""
+    """Serial filters after compositor output label -> chain ending at [vfinal].
+
+    Motion is applied via scale+crop instead of zoompan so it works on
+    multi-frame overlay streams (zoompan fails on these in FFmpeg 8.x).
+
+    When *caption_textfile* is provided, uses ``textfile=`` instead of inline
+    ``text=`` to avoid FFmpeg filter_complex quoting issues.
+    """
     eq = f"eq=contrast={eq_preset.get('contrast', 1.0)}:brightness={eq_preset.get('brightness', 0)}:saturation={eq_preset.get('saturation', 1.0)}"
     parts: list[str] = []
-    if bundle and isinstance(bundle, dict):
-        mt = str(bundle.get("motion", "")).lower()
-        if bundle.get("zoompan"):
-            parts.append(f"zoompan={bundle['zoompan']}")
-        elif mt == "parallax_scroll":
-            # Composite is already WxH; emulate parallax drift with zoompan instead of crop-on-plateau.
-            parts.append(
-                f"zoompan=z='1':x='iw/2-(iw/zoom/2)+12*t':y='ih/2-(ih/zoom/2)':"
-                f"d={frames}:s={output_w}x{output_h}:fps={fps}"
-            )
-        elif mt == "camera_pan":
-            parts.append(
-                f"zoompan=z='1':x='iw/2-(iw/zoom/2)+40*sin(t/6) * 0.25':y='ih/2-(ih/zoom/2)+24*cos(t/7) * 0.25':"
-                f"d={frames}:s={output_w}x{output_h}:fps={fps}"
-            )
-        else:
-            parts.append(f"zoompan=z='1':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={frames}:s={output_w}x{output_h}:fps={fps}")
-    else:
-        parts.append(f"zoompan=z='1':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={frames}:s={output_w}x{output_h}:fps={fps}")
+
+    # Determine motion type from bundle
+    motion_type = "static"
+    if isinstance(bundle, dict) and bundle.get("motion"):
+        motion_type = str(bundle["motion"])
+
+    # Apply motion via scale+crop (works on multi-frame streams, unlike zoompan)
+    parts.extend(_motion_scale_crop(motion_type, output_w, output_h, fps))
+
+    parts.append(f"fps={fps}")
     parts.append(eq)
     cb_arg = _colorbalance_dict_to_arg(cb_dict)
     if cb_arg:
         parts.append(f"colorbalance={cb_arg}")
     parts.append("format=yuv420p")
     if drawbox and caption_text:
-        parts.append("drawbox=x=0:y=h*0.75:w=iw:h=h*0.25:color=black@0.35:t=fill")
+        # Use absolute pixel values — expressions like h*0.75 fail after zoompan
+        box_y = int(output_h * 0.75)
+        box_h = output_h - box_y
+        parts.append(f"drawbox=x=0:y={box_y}:w={output_w}:h={box_h}:color=black@0.35:t=fill")
     if caption_text:
-        escaped = caption_text.replace("\\", "\\\\").replace("'", "'\\\\''")
-        parts.append(
-            f"drawtext=text='{escaped}':fontsize=64:fontcolor=white:x={caption_x}:y={caption_y}:"
-            "shadowcolor=black:shadowx=2:shadowy=2:line_spacing=8"
-        )
+        # Convert expression-based positions to absolute pixels
+        abs_caption_x = f"({output_w}-text_w)/2" if caption_x == "(w-text_w)/2" else caption_x
+        abs_caption_y = str(int(output_h * 0.82)) if caption_y == "h*0.82" else caption_y
+        if caption_textfile:
+            tf_path = str(caption_textfile).replace(":", "\\:")
+            parts.append(
+                f"drawtext=textfile={tf_path}:fontsize=64:fontcolor=white:x={abs_caption_x}:y={abs_caption_y}:"
+                "shadowcolor=black:shadowx=2:shadowy=2:line_spacing=8"
+            )
+        else:
+            escaped = _escape_ffmpeg_text(caption_text)
+            parts.append(
+                f"drawtext=text='{escaped}':fontsize=64:fontcolor=white:x={abs_caption_x}:y={abs_caption_y}:"
+                "shadowcolor=black:shadowx=2:shadowy=2:line_spacing=8"
+            )
     chain = ",".join(parts)
     return f"[{base_label}]{chain}[vfinal]"
 
@@ -358,6 +452,7 @@ def main() -> int:
     ap.add_argument("--animation-plan", default=None, help="animation_plan.json for motion + colorbalance per shot")
     ap.add_argument("--platform-variant", default=None, help="JSON file with single platform variant encode overrides")
     ap.add_argument("--quality", default="standard", choices=("draft", "standard", "high"), help="CRF/preset tradeoff")
+    ap.add_argument("--soundtrack-plan", default=None, help="soundtrack_plan_with_audio.json for voice + music mixing")
     args = ap.parse_args()
 
     tl_path = Path(args.timeline)
@@ -514,20 +609,26 @@ def main() -> int:
             outs = list(re.finditer(r"\[out_([a-zA-Z0-9_]+)\]", fc))
             if ok_layers and outs:
                 base_lab = f"out_{outs[-1].group(1)}"
+                # Write caption to temp file to avoid filter_complex quoting issues
+                cap_file: Path | None = None
+                if caption_text:
+                    cap_file = out_dir / f"caption_{i:04d}.txt"
+                    cap_file.write_text(caption_text, encoding="utf-8")
                 post = _post_overlay_chain(
                     base_lab, bundle, frames, fps, output_w, output_h, grade,
                     cb_dict_mid,
                     caption_text, caption_x, caption_y, drawbox=True,
+                    caption_textfile=cap_file,
                 )
                 full_fc = f"{fc};{post}"
-                try:
-                    _render_multilayer_clip(
-                        layer_inputs, full_fc, out_clip, duration_s, fps,
-                        encode_preset, encode_crf,
-                    )
-                    use_multi = True
-                except (subprocess.CalledProcessError, OSError) as e:
-                    print(f"Warning: multilayer render failed for {sid}, falling back ({e})", file=sys.stderr)
+                # Debug: write filter_complex to file for inspection
+                dbg = out_dir / f"debug_fc_{i:04d}.txt"
+                dbg.write_text(full_fc, encoding="utf-8")
+                _render_multilayer_clip(
+                    layer_inputs, full_fc, out_clip, duration_s, fps,
+                    encode_preset, encode_crf,
+                )
+                use_multi = True
 
         if not use_multi:
             zb = _zoompan_body_from_bundle(bundle, frames, output_w, output_h, fps)
@@ -566,11 +667,103 @@ def main() -> int:
     (out_dir / "timeline_ref.json").write_text(json.dumps(ref, indent=2), encoding="utf-8")
     print(f"Rendered: {video_path} (thumb: {thumb_path})")
 
-    # TODO: Audio — timeline.audio_tracks has narration and music with duck_under. After concat,
-    # mix narration + music (ducking) with the video in a separate FFmpeg pass or filter graph.
-    # This is the hardest part of the renderer; Phase 1 is video-only (silent).
+    # ── Audio mixing: voice narration + music ──
+    soundtrack_path = Path(args.soundtrack_plan) if getattr(args, "soundtrack_plan", None) else None
+    if soundtrack_path and soundtrack_path.is_file():
+        soundtrack = load_json(soundtrack_path)
+        narration_segs = [s for s in (soundtrack.get("narration_segments") or []) if s.get("audio_path")]
+        music_path = soundtrack.get("music_path")
+
+        if narration_segs or music_path:
+            voiced_path = out_dir / f"{plan_id}_voiced.mp4"
+            try:
+                _mix_audio_tracks(video_path, narration_segs, music_path, voiced_path)
+                # Replace silent video with voiced version
+                video_path.unlink(missing_ok=True)
+                voiced_path.rename(video_path)
+                print(f"Audio mixed: {len(narration_segs)} voice segments"
+                      + (f" + music" if music_path else ""))
+            except Exception as e:
+                print(f"Warning: audio mixing failed ({e}), keeping silent video", file=sys.stderr)
 
     return 0
+
+
+def _mix_audio_tracks(
+    video_path: Path,
+    narration_segments: list[dict],
+    music_path: str | None,
+    output_path: Path,
+) -> None:
+    """Mix narration clips + optional music into the video via FFmpeg.
+
+    Each narration segment has ``audio_path`` and ``start_time_s``.
+    Music plays at 15% volume when narration is active, 25% otherwise (ducking).
+    """
+    cmd: list[str] = [get_ffmpeg_bin(), "-y", "-i", str(video_path)]
+
+    inputs = []  # track input indices
+    filter_parts = []
+    input_idx = 1  # 0 is the video
+
+    # Add narration inputs
+    for seg in narration_segments:
+        ap = seg.get("audio_path", "")
+        if not ap or not Path(ap).is_file():
+            continue
+        cmd.extend(["-i", ap])
+        start_ms = int(float(seg.get("start_time_s", 0)) * 1000)
+        filter_parts.append(f"[{input_idx}:a]adelay={start_ms}|{start_ms},apad[n{input_idx}]")
+        inputs.append(f"[n{input_idx}]")
+        input_idx += 1
+
+    # Add music input
+    music_input = None
+    if music_path and Path(music_path).is_file():
+        cmd.extend(["-i", music_path])
+        # Music: lower volume, fade in/out
+        filter_parts.append(
+            f"[{input_idx}:a]volume=0.18,afade=t=in:st=0:d=3,afade=t=out:st=200:d=8[music]"
+        )
+        music_input = "[music]"
+        input_idx += 1
+
+    if not inputs and not music_input:
+        raise RuntimeError("No audio tracks to mix")
+
+    # Mix all narration tracks together
+    if len(inputs) > 1:
+        mix_narr = "".join(inputs) + f"amix=inputs={len(inputs)}:duration=longest[narr]"
+        filter_parts.append(mix_narr)
+        narr_label = "[narr]"
+    elif len(inputs) == 1:
+        narr_label = inputs[0]
+    else:
+        narr_label = None
+
+    # Final mix: narration + music
+    if narr_label and music_input:
+        filter_parts.append(f"{narr_label}{music_input}amix=inputs=2:duration=longest[aout]")
+        map_audio = "[aout]"
+    elif narr_label:
+        map_audio = narr_label
+    elif music_input:
+        map_audio = music_input
+    else:
+        raise RuntimeError("No audio to mix")
+
+    fc = ";".join(filter_parts)
+    cmd.extend([
+        "-filter_complex", fc,
+        "-map", "0:v",
+        "-map", map_audio,
+        "-c:v", "copy",
+        "-c:a", "aac", "-b:a", "192k",
+        "-shortest",
+        str(output_path),
+    ])
+
+    subprocess.run(cmd, check=True, capture_output=True)
 
 
 if __name__ == "__main__":

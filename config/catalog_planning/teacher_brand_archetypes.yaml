@@ -1,0 +1,316 @@
+# Teacher Mode Brand Archetypes — 13 brands, each owned by 1 teacher.
+# Authority: config/catalog_planning/teacher_brand_lane_assignments.yaml
+#            artifacts/research/teacher_market_validation_matrix_2026_04_04.md
+#
+# Same structure as brand_archetype_registry.yaml (24 standard brands).
+# These 13 + those 24 = 37 brands per lane.
+#
+# RULE: Each teacher brand has a UNIQUE persona × topic × emotional_job
+# grouping that does NOT overlap with any standard brand.
+# The teacher's tradition/background DEFINES their angle.
+
+schema_version: 1
+
+teacher_brand_archetypes:
+
+  # ── 01 STILLNESS PRESS (Ahjan) ─────────────────────────────────────────
+  - brand_id: stillness_press
+    teacher: ahjan
+    display_name: "Stillness Press"
+    tradition: "Contemplative Buddhism — inner light, karma yoga, Dharmakaya"
+    gtm_identity:
+      persona: trauma_sensitive_meditator
+      age_range: [28, 55]
+      emotional_job: "see the alarm for what it is"
+      functional_job: "nervous system literacy through contemplative practice"
+      primary_moment: panic_recognition
+    discovery_contract:
+      keyword_clusters:
+        primary: ["alarm system anxiety", "meditation for trauma", "inner light practice"]
+        secondary: ["impermanence acceptance", "contemplative grounding", "self-compassion meditation"]
+    unique_angle: >
+      The alarm is lying. Your nervous system learned to protect you, but now
+      it fires when there's no threat. Ahjan teaches you to SEE the alarm
+      without obeying it. Not mindfulness-as-relaxation — mindfulness as
+      recognition of the pattern you live inside.
+    anti_spam_differentiation:
+      vs_stabilizer: "Stabilizer calms the nervous system. Stillness Press teaches you to SEE the alarm — recognition before regulation."
+      vs_trauma_path: "Trauma Path is safety-first clinical. Stillness Press is contemplative Buddhist — the alarm is a teacher, not an enemy."
+      vs_spiritual_ground: "Spiritual Ground seeks connection. Stillness Press sees through the self that seeks."
+
+  # ── 02 COGNITIVE CLARITY (Joshin) ──────────────────────────────────────
+  - brand_id: cognitive_clarity
+    teacher: joshin
+    display_name: "Cognitive Clarity"
+    tradition: "Zen Buddhism — direct pointing, dropping the story, pure heart"
+    gtm_identity:
+      persona: overthinking_knowledge_worker
+      age_range: [25, 50]
+      emotional_job: "stop believing the thinker"
+      functional_job: "inquiry practice to dissolve thought loops"
+      primary_moment: thought_spiral
+    discovery_contract:
+      keyword_clusters:
+        primary: ["zen clarity", "stop overthinking", "inquiry meditation"]
+        secondary: ["dropping the story", "koans for modern life", "direct seeing"]
+    unique_angle: >
+      The problem isn't the thoughts. The problem is you believe them.
+      Joshin's Zen inquiry doesn't calm the mind — it shows you the mind
+      was never the problem. Direct pointing. No stories. Pure heart.
+    anti_spam_differentiation:
+      vs_optimizer: "Optimizer manages focus for productivity. Cognitive Clarity dissolves the thinker entirely."
+      vs_spiritual_ground: "Spiritual Ground explores. Cognitive Clarity cuts — direct, no frills, Zen."
+
+  # ── 03 NORCAL DHARMA (Ajahn X) ────────────────────────────────────────
+  - brand_id: norcal_dharma
+    teacher: ajahn_x
+    display_name: "NorCal Dharma"
+    tradition: "Thai Forest Buddhism — renunciation, simplicity, forest refuge"
+    gtm_identity:
+      persona: simplicity_seeker
+      age_range: [30, 65]
+      emotional_job: "find refuge in less"
+      functional_job: "stripping away to reveal what remains"
+      primary_moment: overwhelm_from_excess
+    discovery_contract:
+      keyword_clusters:
+        primary: ["forest meditation", "simple living", "letting go practice"]
+        secondary: ["monastic wisdom", "renunciation", "retreat at home"]
+    unique_angle: >
+      Everything you're adding is making it worse. Ajahn X teaches through
+      subtraction — what happens when you stop acquiring, stop performing,
+      stop building? The forest has one lesson: enough already exists.
+    anti_spam_differentiation:
+      vs_minimal_mind: "Minimal Mind is digital detox. NorCal Dharma is existential — renouncing the need itself."
+      vs_spiritual_ground: "Spiritual Ground explores traditions. NorCal Dharma commits to one: forest, silence, nothing extra."
+
+  # ── 04 SOMATIC WISDOM (Pamela Fellows) ─────────────────────────────────
+  - brand_id: somatic_wisdom
+    teacher: pamela_fellows
+    display_name: "Somatic Wisdom"
+    tradition: "Western Somatic Therapy — polyvagal, embodiment, nervous system science"
+    gtm_identity:
+      persona: high_functioning_perfectionist
+      age_range: [28, 50]
+      emotional_job: "trust the body's intelligence"
+      functional_job: "polyvagal-informed somatic exercises for perfectionists"
+      primary_moment: performance_collapse
+    discovery_contract:
+      keyword_clusters:
+        primary: ["polyvagal theory exercises", "somatic experiencing", "perfectionism recovery"]
+        secondary: ["embodiment practice", "nervous system reset science", "body-based therapy"]
+    unique_angle: >
+      Your body already knows the answer. Pamela teaches the science of why
+      your body holds what your mind won't touch. Polyvagal-informed, evidence-based,
+      designed for people who need to understand WHY before they can let go.
+    anti_spam_differentiation:
+      vs_stabilizer: "Stabilizer regulates. Somatic Wisdom educates — WHY the body holds it, not just HOW to release it."
+      vs_trauma_path: "Trauma Path prioritizes safety. Somatic Wisdom prioritizes understanding — for perfectionists who need the science."
+      vs_bio_flow: "Bio Flow optimizes. Somatic Wisdom heals — the body as teacher, not machine."
+
+  # ── 05 QI FOUNDATION (Master Feung) ────────────────────────────────────
+  - brand_id: qi_foundation
+    teacher: master_feung
+    display_name: "Qi Foundation"
+    tradition: "Chinese Internal Arts — Qigong, Taiji, meridian cultivation"
+    gtm_identity:
+      persona: energy_depleted_professional
+      age_range: [30, 60]
+      emotional_job: "rebuild from the root"
+      functional_job: "qi cultivation for chronic depletion"
+      primary_moment: chronic_fatigue_acceptance
+    discovery_contract:
+      keyword_clusters:
+        primary: ["qigong for energy", "qi cultivation", "taiji for stress"]
+        secondary: ["meridian healing", "dantian breathing", "internal arts"]
+    unique_angle: >
+      You're not tired because you work too hard. You're tired because your
+      foundation was never built. Master Feung teaches the architecture of
+      energy — root, center, flow. Qigong as infrastructure, not relaxation.
+    anti_spam_differentiation:
+      vs_longevity_lab: "Longevity Lab optimizes biology. Qi Foundation cultivates energy — the Chinese tradition, not the biohacker's."
+      vs_stabilizer: "Stabilizer calms. Qi Foundation builds — a foundation that doesn't need calming."
+
+  # ── 06 DIGITAL GROUND (Miki) ───────────────────────────────────────────
+  - brand_id: digital_ground
+    teacher: miki
+    display_name: "Digital Ground"
+    tradition: "Japanese Mindfulness — forest bathing, modern presence, digital-age awareness"
+    gtm_identity:
+      persona: doomscrolling_gen_z
+      age_range: [16, 28]
+      emotional_job: "exist without the phone"
+      functional_job: "presence practice for the always-online generation"
+      primary_moment: identity_through_feed
+    discovery_contract:
+      keyword_clusters:
+        primary: ["mindfulness for gen z", "digital anxiety", "forest bathing"]
+        secondary: ["phone addiction", "social media detox", "shinrin-yoku"]
+    unique_angle: >
+      Your identity isn't in the feed. Miki teaches Gen Z how to find ground
+      in a world designed to keep you scrolling. Japanese forest bathing meets
+      digital-age awareness. Not anti-tech — pro-presence.
+    anti_spam_differentiation:
+      vs_minimal_mind: "Minimal Mind is digital detox for adults. Digital Ground is identity work for Gen Z — who you are without the phone."
+      vs_calm_student: "Calm Student manages exam stress. Digital Ground addresses the deeper crisis — identity dissolution."
+
+  # ── 07 HEART BALANCE (Maat) ────────────────────────────────────────────
+  - brand_id: heart_balance
+    teacher: maat
+    display_name: "Heart Balance"
+    tradition: "Egyptian Wisdom — Ma'at, truth-speaking, feather of truth, shadow honored equally"
+    gtm_identity:
+      persona: shadow_work_seeker
+      age_range: [28, 55]
+      emotional_job: "speak what the heart knows"
+      functional_job: "truth-and-balance practice through shadow integration"
+      primary_moment: suppressed_truth_surfacing
+    discovery_contract:
+      keyword_clusters:
+        primary: ["shadow work practice", "inner truth", "balance and justice"]
+        secondary: ["ancestral wisdom", "grief honoring", "Egyptian spiritual wisdom"]
+    unique_angle: >
+      The heart already knows what you're afraid to say. Maat teaches the
+      Egyptian practice of weighing truth — your shadow honored equally with
+      your light. Not positivity. Not fixing. Balance.
+    anti_spam_differentiation:
+      vs_gentle_growth: "Gentle Growth explores safely. Heart Balance demands truth — the shadow doesn't wait for you to be ready."
+      vs_spiritual_ground: "Spiritual Ground seeks. Heart Balance weighs — the feather of truth, not the curiosity of the seeker."
+
+  # ── 08 RELATIONAL CALM (Junko) ─────────────────────────────────────────
+  - brand_id: relational_calm
+    teacher: junko
+    display_name: "Relational Calm"
+    tradition: "Japanese Zazen — radical acceptance, beginner's mind, wabi-sabi, relational harmony"
+    gtm_identity:
+      persona: shame_carrying_people_pleaser
+      age_range: [25, 50]
+      emotional_job: "stop performing okayness"
+      functional_job: "shame dissolution through radical acceptance"
+      primary_moment: relational_mask_exhaustion
+    discovery_contract:
+      keyword_clusters:
+        primary: ["shame healing", "people pleasing recovery", "radical acceptance"]
+        secondary: ["wabi-sabi living", "beginner's mind", "relational anxiety"]
+    unique_angle: >
+      You've been performing "fine" so long you forgot what real feels like.
+      Junko teaches through Zen's radical acceptance — this moment, including
+      your shame, is already complete. Nothing to fix. Spare, precise, no extra words.
+    anti_spam_differentiation:
+      vs_relationship_clarity: "Relationship Clarity repairs couples. Relational Calm heals the self-in-relationship — shame, not conflict."
+      vs_confidence_core: "Confidence Core builds showing up. Relational Calm stops performing — the mask itself is the problem."
+
+  # ── 09 WARRIOR CALM (Master Wu) ────────────────────────────────────────
+  - brand_id: warrior_calm
+    teacher: master_wu
+    display_name: "Warrior Calm"
+    tradition: "Chinese Martial/Spiritual — Wu Wei, composure under fire, warrior presence"
+    gtm_identity:
+      persona: high_stakes_performer
+      age_range: [22, 45]
+      emotional_job: "stay composed when everything is on fire"
+      functional_job: "martial-arts-derived composure under extreme pressure"
+      primary_moment: crisis_freeze_or_fight
+    discovery_contract:
+      keyword_clusters:
+        primary: ["panic attack composure", "crisis calm", "warrior mindset"]
+        secondary: ["wu wei", "tao of stress", "martial arts meditation"]
+    unique_angle: >
+      When the panic hits, your body goes to war. Master Wu teaches the
+      warrior's paradox — the fiercer the pressure, the stiller you become.
+      Not suppression. Not breathing exercises. Composure as martial art.
+    anti_spam_differentiation:
+      vs_executive_calm: "Executive Calm is boardroom steady. Warrior Calm is battlefield still — for when steady isn't enough."
+      vs_stoic_edge: "Stoic Edge builds mental toughness. Warrior Calm dissolves the fight — Wu Wei, not willpower."
+      vs_high_performer: "High Performer builds confidence. Warrior Calm builds composure — different thing entirely."
+
+  # ── 10 SLEEP RESTORATION (Master Sha) ──────────────────────────────────
+  - brand_id: sleep_restoration
+    teacher: master_sha
+    display_name: "Sleep Restoration"
+    tradition: "Chinese Healing — energy medicine, restoration, sleep as sacred repair"
+    gtm_identity:
+      persona: chronic_insomnia_sufferer
+      age_range: [30, 60]
+      emotional_job: "stop dreading the bed"
+      functional_job: "energy medicine approach to chronic sleep disruption"
+      primary_moment: midnight_dread
+    discovery_contract:
+      keyword_clusters:
+        primary: ["chronic insomnia natural", "sleep energy healing", "sleep restoration"]
+        secondary: ["TCM for sleep", "qi and sleep", "night energy practice"]
+    unique_angle: >
+      You don't have a sleep problem. You have an energy architecture problem.
+      Master Sha teaches that sleep is sacred repair — not something you force
+      but something your energy system enables when properly cultivated.
+    anti_spam_differentiation:
+      vs_night_reset: "Night Reset is hypnotic wind-down. Sleep Restoration rebuilds the energy architecture — fixing the system, not the symptom."
+
+  # ── 11 BODY MEMORY (Omote) ────────────────────────────────────────────
+  - brand_id: body_memory
+    teacher: omote
+    display_name: "Body Memory"
+    tradition: "Japanese Body Practice — Shiatsu, Noh theater, authentic presence, seasonal body"
+    gtm_identity:
+      persona: unprocessed_grief_carrier
+      age_range: [30, 65]
+      emotional_job: "let the body remember what the mind forgot"
+      functional_job: "body-centered grief processing through Japanese somatic tradition"
+      primary_moment: grief_stored_in_body
+    discovery_contract:
+      keyword_clusters:
+        primary: ["body grief processing", "somatic grief", "body memory healing"]
+        secondary: ["shiatsu therapy", "seasonal healing", "authentic presence"]
+    unique_angle: >
+      The grief lives in your shoulders. Your hips. Your jaw. Omote teaches
+      through Noh theater's principle — the body remembers what the mind erased.
+      Not talk therapy. Not meditation. The body itself as the archive of loss.
+    anti_spam_differentiation:
+      vs_trauma_path: "Trauma Path is clinical safety. Body Memory is Japanese body practice — the archive is in the flesh, not the narrative."
+      vs_somatic_wisdom: "Somatic Wisdom explains why. Body Memory listens to where — the body's geography of grief."
+
+  # ── 12 SOLAR RETURN (Ra) ──────────────────────────────────────────────
+  - brand_id: solar_return
+    teacher: ra
+    display_name: "Solar Return"
+    tradition: "Egyptian Solar Tradition — witnessing awareness, fire and renewal, burnout as initiation"
+    gtm_identity:
+      persona: burnout_survivor_rebuilding
+      age_range: [30, 50]
+      emotional_job: "find the fire that doesn't consume"
+      functional_job: "reframing burnout as initiation through solar wisdom"
+      primary_moment: post_burnout_emptiness
+    discovery_contract:
+      keyword_clusters:
+        primary: ["burnout recovery meaning", "post-burnout rebuilding", "finding purpose after burnout"]
+        secondary: ["witnessing awareness", "fire and renewal", "sacred burnout"]
+    unique_angle: >
+      Burnout wasn't failure. It was initiation. Ra teaches the Egyptian
+      solar cycle — the fire that burns you down is the same fire that
+      rebuilds you. Not recovery. Transformation. The ashes are the material.
+    anti_spam_differentiation:
+      vs_stabilizer: "Stabilizer recovers from burnout. Solar Return reframes it — burnout as initiation, not injury."
+      vs_career_lift: "Career Lift gets unstuck. Solar Return asks: what if being stuck was the beginning, not the problem?"
+
+  # ── 13 DEVOTION PATH (Sai Ma) ─────────────────────────────────────────
+  - brand_id: devotion_path
+    teacher: sai_ma
+    display_name: "Devotion Path"
+    tradition: "Indian Bhakti — devotion, divine feminine, surrender, unconditional love"
+    gtm_identity:
+      persona: love_exhausted_caregiver
+      age_range: [30, 60]
+      emotional_job: "receive the love you keep giving away"
+      functional_job: "devotional practice for caregivers who forgot to include themselves"
+      primary_moment: compassion_fatigue_break
+    discovery_contract:
+      keyword_clusters:
+        primary: ["compassion fatigue recovery", "self-devotion", "caregiver burnout spiritual"]
+        secondary: ["bhakti practice", "divine feminine", "surrender meditation"]
+    unique_angle: >
+      You've been giving love to everyone except yourself. Sai Ma teaches
+      the bhakti path — devotion turned inward. Not self-care as another task.
+      Surrender as the doorway to receiving what you've been pouring out.
+    anti_spam_differentiation:
+      vs_resilient_parent: "Resilient Parent builds coping. Devotion Path opens receiving — the problem isn't capacity, it's direction."
+      vs_spiritual_ground: "Spiritual Ground explores. Devotion Path surrenders — not seeking, but being found."

@@ -34,6 +34,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Run full video pipeline for a plan (VCE extended)")
     ap.add_argument("--plan-id", default="plan-therapeutic-001", help="Plan ID (used for naming)")
     ap.add_argument("--fixtures-dir", default=None, help="Dir with render_manifest.json")
+    ap.add_argument("--render-manifest", default=None, help="Direct path to render_manifest.json or .html file")
     ap.add_argument("--out-dir", default=None, help="Output dir (default: artifacts/video/<plan_id>)")
     ap.add_argument("--video-id", default=None, help="Video ID (default: video-<plan_id>)")
     ap.add_argument("--force", action="store_true", help="Overwrite existing artifacts at every stage")
@@ -48,6 +49,10 @@ def main() -> int:
     ap.add_argument("--title", default="When anxiety shows up", help="Stub/final title for distribution")
     ap.add_argument("--description", default="A short on noticing anxiety without fighting it.", help="Description")
     ap.add_argument("--tags", default="anxiety,mindfulness,therapeutic", help="Comma-separated tags")
+    ap.add_argument("--voice", action="store_true", help="Generate voice narration via ElevenLabs TTS")
+    ap.add_argument("--music", action="store_true", help="Generate background music via ElevenLabs (costs $)")
+    ap.add_argument("--music-bank", action="store_true", help="Select music from free music bank (recommended)")
+    ap.add_argument("--auto-generate", action="store_true", help="Auto-generate missing image assets via RunComfy")
     ap.add_argument("--upload", action="store_true", help="Run Stage 18 Upload/Publish after pipeline (dry-run by default)")
     ap.add_argument("--upload-live", action="store_true", help="Upload for real (requires --upload)")
     args = ap.parse_args()
@@ -59,11 +64,14 @@ def main() -> int:
     video_id = args.video_id or f"video-{args.plan_id}"
     out_root.mkdir(parents=True, exist_ok=True)
 
-    manifest_alt = fixtures / f"render_manifest_{args.plan_id}.json"
-    if manifest_alt.exists():
-        manifest_path = manifest_alt
+    if args.render_manifest:
+        manifest_path = Path(args.render_manifest)
     else:
-        manifest_path = fixtures / "render_manifest.json"
+        manifest_alt = fixtures / f"render_manifest_{args.plan_id}.json"
+        if manifest_alt.exists():
+            manifest_path = manifest_alt
+        else:
+            manifest_path = fixtures / "render_manifest.json"
     if not manifest_path.exists():
         print(f"Error: render manifest not found: {manifest_path}", file=sys.stderr)
         return 1
@@ -83,7 +91,9 @@ def main() -> int:
     steps = [
         ([py, str(scripts / "prepare_script_segments.py"), str(manifest_path), "-o", str(out_root / "script_segments.json")] + force_flag, "Script Preparer"),
         ([py, str(scripts / "run_shot_planner.py"), str(out_root / "script_segments.json"), "-o", str(out_root / "shot_plan.json")] + force_flag, "Shot Planner"),
-        ([py, str(scripts / "run_asset_resolver.py"), str(out_root / "shot_plan.json"), "-o", str(out_root / "resolved_assets.json")] + force_flag, "Asset Resolver"),
+        ([py, str(scripts / "run_asset_resolver.py"), str(out_root / "shot_plan.json"), "-o", str(out_root / "resolved_assets.json")]
+         + (["--auto-generate", "--auto-generate-dir", str(out_root / "generated_assets")] if args.auto_generate else [])
+         + force_flag, "Asset Resolver"),
         ([py, str(scripts / "run_timeline_builder.py"), str(out_root / "shot_plan.json"), str(out_root / "resolved_assets.json"),
           "-o", str(out_root / "timeline.json"), "--aspect", aspect_arg] + force_flag, "Timeline Builder"),
         ([py, str(scripts / "run_caption_adapter.py"), str(out_root / "timeline.json"), str(out_root / "script_segments.json"),
@@ -100,6 +110,52 @@ def main() -> int:
             print(f"Failed: {name}", file=sys.stderr)
             return 1
         print(f"OK: {name}")
+
+    # ── Music bank selection — free, no API cost ──
+    soundtrack_audio_path = out_root / "soundtrack_plan.json"  # default (no audio)
+    if args.music_bank:
+        try:
+            from scripts.music.select_and_edit import select_track, anti_spam_edit
+            soundtrack = json.loads((out_root / "soundtrack_plan.json").read_text(encoding="utf-8"))
+            duration = float(soundtrack.get("duration_s", 60))
+            track = select_track(topic="anxiety", mood="calm")
+            if track:
+                music_out = out_root / "audio" / "music_bank_track.mp3"
+                music_out.parent.mkdir(parents=True, exist_ok=True)
+                bank_src = REPO_ROOT / "assets" / "music_bank" / track["file"]
+                if bank_src.is_file():
+                    anti_spam_edit(bank_src, music_out, video_id, duration, ffmpeg_bin="ffmpeg")
+                    soundtrack["music_path"] = str(music_out)
+                    write_path = out_root / "audio" / "soundtrack_plan_with_audio.json"
+                    write_path.write_text(json.dumps(soundtrack, indent=2), encoding="utf-8")
+                    soundtrack_audio_path = write_path
+                    print(f"OK: Music Bank (track: {track['id']}, edited for {video_id})")
+                else:
+                    print(f"Warning: music bank track not found: {bank_src}", file=sys.stderr)
+            else:
+                print("Warning: no matching track in music bank", file=sys.stderr)
+        except Exception as e:
+            print(f"Warning: music bank failed ({e})", file=sys.stderr)
+
+    # ── Voice synthesis (ElevenLabs TTS) — opt-in via --voice ──
+    if args.voice or args.music:
+        voice_cmd = [
+            py, str(scripts / "run_voice_synthesis.py"),
+            str(out_root / "soundtrack_plan.json"),
+            "-o", str(out_root / "audio"),
+        ]
+        if args.music:
+            voice_cmd.append("--music")
+        if args.force:
+            voice_cmd.append("--force")
+        if not run(voice_cmd, REPO_ROOT):
+            print("Failed: Voice Synthesis", file=sys.stderr)
+            return 1
+        print("OK: Voice Synthesis")
+        # Use the updated plan with audio paths
+        audio_plan = out_root / "audio" / "soundtrack_plan_with_audio.json"
+        if audio_plan.exists():
+            soundtrack_audio_path = audio_plan
 
     timeline = json.loads((out_root / "timeline.json").read_text(encoding="utf-8"))
     duration_s = timeline.get("duration_s", 0)
@@ -165,6 +221,8 @@ def main() -> int:
         else:
             render_cmd.append("--placeholder")
         render_cmd.extend(["--quality", args.quality])
+        if soundtrack_audio_path.exists():
+            render_cmd.extend(["--soundtrack-plan", str(soundtrack_audio_path)])
         if not run(render_cmd, REPO_ROOT):
             print("Failed: Render", file=sys.stderr)
             return 1

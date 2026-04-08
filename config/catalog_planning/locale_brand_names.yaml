@@ -1,0 +1,547 @@
+# Locale-Specific Brand Display Names — 37 brands × 12 lanes
+# Authority: teacher_brand_lane_assignments.yaml, brand_identity_system.yaml
+#
+# NAMING RESEARCH:
+#   JP: suffix 社/出版/堂; kanji: 安心癒静穏和光泉森風
+#   KR: suffix 사/출판사/북스; words: 마음 치유 힐링 고요 빛 숲
+#   ZH-TW: suffix 出版/文化; chars: 心靈療癒安靜光泉圓和
+#   ZH-CN: suffix 出版/文化; chars: 心灵疗愈静心安心正念
+#   PT-BR: prefix Editora; words: pensamento consciência serenidade caminho luz
+#   DE: suffix Verlag; words: Seele Stille Heilung Ruhe Licht Quelle
+#   FR: prefix Editions; words: sérénité lumière souffle sagesse éveil
+#   ES: prefix Editorial; words: serenidad despertar sendero equilibrio
+#   IT: suffix Editore; words: serenità luce armonia respiro risveglio
+#   HU: suffix Kiadó; words: lélek csend fény béke forrás
+#   LATAM: prefix Editorial; neutral LATAM Spanish, not Castilian
+
+schema_version: 1
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  TEACHER MODE BRANDS — locale-native names
+# ═══════════════════════════════════════════════════════════════════════════
+
+teacher_brands:
+
+  stillness_press:  # ahjan — contemplative Buddhism, alarm recognition
+    english_global: "Stillness Press"
+    dach: "Stille Verlag"
+    france: "Éditions du Silence"
+    spain: "Editorial Quietud"
+    italy: "Edizioni Quiete"
+    latam: "Editorial Quietud"
+    brazil: "Editora Quietude"
+    japan: "静心社"            # Seishinsha — "still heart company"
+    korea: "고요한마음"         # Goyohan Maeum — "quiet heart/mind"
+    taiwan: "靜心出版"          # Jìngxīn Chūbǎn — "still heart publishing"
+    china: "静心文化"           # Jìngxīn Wénhuà — "still heart culture"
+    hungary: "Csend Kiadó"    # "Silence Publisher"
+
+  cognitive_clarity:  # joshin — Zen, dropping the story
+    english_global: "Clear Seeing Books"
+    dach: "Klarsicht Verlag"
+    france: "Éditions Claire Vue"
+    spain: "Editorial Mirada Clara"
+    italy: "Edizioni Sguardo Chiaro"
+    latam: "Editorial Mirada Clara"
+    brazil: "Editora Visão Clara"
+    japan: "直見堂"             # Chokuken-dō — "direct seeing hall"
+    korea: "맑은눈북스"          # Malgeun Nun Bukseu — "clear eyes books"
+    taiwan: "明見出版"           # Míngjiàn Chūbǎn — "bright seeing publishing"
+    china: "明见文化"            # Míngjiàn Wénhuà — "bright seeing culture"
+    hungary: "Tiszta Látás Kiadó"
+
+  norcal_dharma:  # ajahn_x — Thai Forest, simplicity
+    english_global: "NorCal Dharma Press"
+    dach: "Waldlicht Verlag"    # "forest light"
+    france: "Éditions de la Forêt"
+    spain: "Editorial del Bosque"
+    italy: "Edizioni del Bosco"
+    latam: "Editorial del Bosque"
+    brazil: "Editora da Floresta"
+    japan: "森林出版"            # Shinrin Shuppan — "forest publishing"
+    korea: "숲길북스"            # Supgil Bukseu — "forest path books"
+    taiwan: "林泉出版"           # Línquán Chūbǎn — "forest spring publishing"
+    china: "林泉文化"            # Línquán Wénhuà — "forest spring culture"
+    hungary: "Erdei Ösvény Kiadó" # "forest path"
+
+  somatic_wisdom:  # pamela_fellows — polyvagal, embodiment
+    english_global: "Felt Sense Publishing"
+    dach: "Körperwissen Verlag"   # "body wisdom"
+    france: "Éditions du Corps Sage"
+    spain: "Editorial Sentir"
+    italy: "Edizioni Corpo Saggio"
+    latam: "Editorial Sentir"
+    brazil: "Editora Sentir"
+    japan: "体知社"              # Taichi-sha — "body knowing company"
+    korea: "몸의지혜"            # Mom-ui Jihye — "body's wisdom"
+    taiwan: "身知出版"            # Shēnzhī Chūbǎn — "body knowing publishing"
+    china: "身知文化"             # Shēnzhī Wénhuà — "body knowing culture"
+    hungary: "Testbölcsesség Kiadó"
+
+  qi_foundation:  # master_feung — qigong, meridian cultivation
+    english_global: "Root & Meridian Press"
+    dach: "Qi-Quelle Verlag"     # "qi source"
+    france: "Éditions Racine & Méridien"
+    spain: "Editorial Raíz y Meridiano"
+    italy: "Edizioni Radice e Meridiano"
+    latam: "Editorial Raíz y Meridiano"
+    brazil: "Editora Raiz e Meridiano"
+    japan: "氣根社"              # Kikon-sha — "qi root company"
+    korea: "기의뿌리"            # Gi-ui Ppuri — "root of qi"
+    taiwan: "根脈出版"            # Gēnmài Chūbǎn — "root meridian publishing"
+    china: "根脉文化"             # Gēnmài Wénhuà — "root meridian culture"
+    hungary: "Gyökér és Forrás Kiadó" # "root and spring"
+
+  digital_ground:  # miki — Gen Z mindfulness, forest bathing
+    english_global: "Present Tense Books"
+    dach: "Jetzt Verlag"          # "now"
+    france: "Éditions Temps Présent"
+    spain: "Editorial Ahora"
+    italy: "Edizioni Tempo Presente"
+    latam: "Editorial Ahora"
+    brazil: "Editora Agora"
+    japan: "今此処社"             # Ima Koko Sha — "here now company"
+    korea: "지금여기북스"          # Jigeum Yeogi Bukseu — "now here books"
+    taiwan: "此刻出版"             # Cǐkè Chūbǎn — "this moment publishing"
+    china: "此刻文化"              # Cǐkè Wénhuà — "this moment culture"
+    hungary: "Most Kiadó"         # "now"
+
+  heart_balance:  # maat — Egyptian wisdom, shadow work
+    english_global: "Feather & Scale Press"
+    dach: "Feder & Waage Verlag"
+    france: "Éditions Plume et Balance"
+    spain: "Editorial Pluma y Balanza"
+    italy: "Edizioni Piuma e Bilancia"
+    latam: "Editorial Pluma y Balanza"
+    brazil: "Editora Pena e Balança"
+    japan: "羽と秤社"             # Hane to Hakari Sha — "feather and scale"
+    korea: "깃과저울"             # Git-gwa Jeoul — "feather and scale"
+    taiwan: "羽秤出版"             # Yǔchèng Chūbǎn — "feather scale publishing"
+    china: "羽秤文化"              # Yǔchèng Wénhuà
+    hungary: "Toll és Mérleg Kiadó"
+
+  relational_calm:  # junko — Zen radical acceptance, wabi-sabi
+    english_global: "Bare Form Books"
+    dach: "Nackte Form Verlag"
+    france: "Éditions Forme Nue"
+    spain: "Editorial Forma Desnuda"
+    italy: "Edizioni Forma Nuda"
+    latam: "Editorial Forma Pura"
+    brazil: "Editora Forma Pura"
+    japan: "素形堂"               # Sokei-dō — "bare form hall"
+    korea: "맨모습북스"            # Maen Moseup Bukseu — "bare form books"
+    taiwan: "素形出版"              # Sùxíng Chūbǎn — "bare form publishing"
+    china: "素形文化"               # Sùxíng Wénhuà
+    hungary: "Puszta Forma Kiadó"
+
+  warrior_calm:  # master_wu — Wu Wei, martial composure
+    english_global: "Iron Gate Press"
+    dach: "Eisernes Tor Verlag"
+    france: "Éditions Porte de Fer"
+    spain: "Editorial Puerta de Hierro"
+    italy: "Edizioni Porta di Ferro"
+    latam: "Editorial Puerta de Hierro"
+    brazil: "Editora Portão de Ferro"
+    japan: "鉄門社"                # Tetsumon-sha — "iron gate company"
+    korea: "철문북스"              # Cheolmun Bukseu — "iron gate books"
+    taiwan: "鐵門出版"              # Tiěmén Chūbǎn — "iron gate publishing"
+    china: "铁门文化"               # Tiěmén Wénhuà
+    hungary: "Vaskapu Kiadó"       # "iron gate" (also a real Hungarian place name)
+
+  sleep_restoration:  # master_sha — energy medicine, sleep
+    english_global: "Night Architecture Books"
+    dach: "Nachtwerk Verlag"       # "night work/architecture"
+    france: "Éditions Architecture de Nuit"
+    spain: "Editorial Arquitectura Nocturna"
+    italy: "Edizioni Architettura Notturna"
+    latam: "Editorial Arquitectura Nocturna"
+    brazil: "Editora Arquitetura da Noite"
+    japan: "夜の設計社"             # Yoru no Sekkei Sha — "night design company"
+    korea: "밤의건축"               # Bam-ui Geonchuk — "night architecture"
+    taiwan: "夜築出版"               # Yèzhù Chūbǎn — "night building publishing"
+    china: "夜筑文化"                # Yèzhù Wénhuà
+    hungary: "Éjszakai Építészet Kiadó"
+
+  body_memory:  # omote — Japanese body practice, grief
+    english_global: "Held Ground Press"
+    dach: "Getragener Boden Verlag"
+    france: "Éditions Terre Portée"
+    spain: "Editorial Suelo Firme"
+    italy: "Edizioni Terra Ferma"
+    latam: "Editorial Suelo Firme"
+    brazil: "Editora Chão Firme"
+    japan: "体記堂"                # Taiki-dō — "body memory hall"
+    korea: "몸의기억"               # Mom-ui Gieok — "body's memory"
+    taiwan: "身記出版"               # Shēnjì Chūbǎn — "body record publishing"
+    china: "身记文化"                # Shēnjì Wénhuà
+    hungary: "Tartott Föld Kiadó"
+
+  solar_return:  # ra — burnout as initiation
+    english_global: "Ember & Ash Publishing"
+    dach: "Glut & Asche Verlag"
+    france: "Éditions Braise et Cendre"
+    spain: "Editorial Brasa y Ceniza"
+    italy: "Edizioni Brace e Cenere"
+    latam: "Editorial Brasa y Ceniza"
+    brazil: "Editora Brasa e Cinza"
+    japan: "燼と灰社"               # Jin to Hai Sha — "ember and ash"
+    korea: "불씨와재"                # Bulssi-wa Jae — "ember and ash"
+    taiwan: "燼灰出版"                # Jìnhuī Chūbǎn
+    china: "烬灰文化"                 # Jìnhuī Wénhuà
+    hungary: "Parázs és Hamu Kiadó"
+
+  devotion_path:  # sai_ma — bhakti, surrender
+    english_global: "Open Vessel Press"
+    dach: "Offenes Gefäß Verlag"
+    france: "Éditions Vase Ouvert"
+    spain: "Editorial Vaso Abierto"
+    italy: "Edizioni Vaso Aperto"
+    latam: "Editorial Vaso Abierto"
+    brazil: "Editora Vaso Aberto"
+    japan: "開器社"                  # Kaiki-sha — "open vessel company"
+    korea: "열린그릇"                 # Yeollin Geureut — "open vessel"
+    taiwan: "開器出版"                 # Kāiqì Chūbǎn
+    china: "开器文化"                  # Kāiqì Wénhuà
+    hungary: "Nyitott Edény Kiadó"
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  STANDARD MODE BRANDS — locale-native names
+# ═══════════════════════════════════════════════════════════════════════════
+
+standard_brands:
+
+  stabilizer:
+    english_global: "Harbor Line Books"
+    dach: "Hafenlinie Verlag"
+    france: "Éditions Ligne du Port"
+    spain: "Editorial Línea del Puerto"
+    italy: "Edizioni Porto Sicuro"
+    latam: "Editorial Línea del Puerto"
+    brazil: "Editora Linha do Porto"
+    japan: "港線社"
+    korea: "항구선북스"
+    taiwan: "港線出版"
+    china: "港线文化"
+    hungary: "Kikötővonal Kiadó"
+
+  optimizer:
+    english_global: "Daybreak Editions"
+    dach: "Tagesanbruch Verlag"
+    france: "Éditions Point du Jour"
+    spain: "Editorial Alba"
+    italy: "Edizioni Prima Luce"
+    latam: "Editorial Alba"
+    brazil: "Editora Alvorada"
+    japan: "暁出版"
+    korea: "새벽북스"
+    taiwan: "曙光出版"
+    china: "曙光文化"
+    hungary: "Hajnalhasadás Kiadó"
+
+  night_reset:
+    english_global: "Still Hour Press"
+    dach: "Stille Stunde Verlag"
+    france: "Éditions de l'Heure Calme"
+    spain: "Editorial Hora Quieta"
+    italy: "Edizioni Ora Quieta"
+    latam: "Editorial Hora Quieta"
+    brazil: "Editora Hora Quieta"
+    japan: "静寂時社"
+    korea: "고요한시간"
+    taiwan: "靜時出版"
+    china: "静时文化"
+    hungary: "Csöndes Óra Kiadó"
+
+  career_lift:
+    english_global: "Next Chapter Press"
+    dach: "Nächstes Kapitel Verlag"
+    france: "Éditions Prochain Chapitre"
+    spain: "Editorial Próximo Capítulo"
+    italy: "Edizioni Prossimo Capitolo"
+    latam: "Editorial Próximo Capítulo"
+    brazil: "Editora Próximo Capítulo"
+    japan: "次章社"
+    korea: "다음장북스"
+    taiwan: "新章出版"
+    china: "新章文化"
+    hungary: "Következő Fejezet Kiadó"
+
+  adhd_forge:
+    english_global: "Livewire Books"
+    dach: "Funkenflug Verlag"       # "spark flight"
+    france: "Éditions Fil Vif"
+    spain: "Editorial Chispa Viva"
+    italy: "Edizioni Filo Vivo"
+    latam: "Editorial Chispa Viva"
+    brazil: "Editora Fio Vivo"
+    japan: "閃光社"
+    korea: "번개북스"
+    taiwan: "活線出版"
+    china: "活线文化"
+    hungary: "Szikra Kiadó"
+
+  longevity_lab:
+    english_global: "Long Arc Press"
+    dach: "Langer Bogen Verlag"
+    france: "Éditions Grand Arc"
+    spain: "Editorial Arco Largo"
+    italy: "Edizioni Arco Lungo"
+    latam: "Editorial Arco Largo"
+    brazil: "Editora Arco Longo"
+    japan: "長弧社"
+    korea: "긴호북스"
+    taiwan: "長弧出版"
+    china: "长弧文化"
+    hungary: "Hosszú Ív Kiadó"
+
+  creative_unfold:
+    english_global: "Blank Canvas Books"
+    dach: "Leere Leinwand Verlag"
+    france: "Éditions Toile Blanche"
+    spain: "Editorial Lienzo en Blanco"
+    italy: "Edizioni Tela Bianca"
+    latam: "Editorial Lienzo en Blanco"
+    brazil: "Editora Tela em Branco"
+    japan: "白布社"
+    korea: "빈캔버스"
+    taiwan: "白布出版"
+    china: "白布文化"
+    hungary: "Üres Vászon Kiadó"
+
+  resilient_parent:
+    english_global: "Stolen Moment Press"
+    dach: "Gestohlener Augenblick Verlag"
+    france: "Éditions Instant Volé"
+    spain: "Editorial Instante Robado"
+    italy: "Edizioni Attimo Rubato"
+    latam: "Editorial Instante Robado"
+    brazil: "Editora Instante Roubado"
+    japan: "盗まれた瞬間社"
+    korea: "훔친순간"
+    taiwan: "偷來的瞬間出版"
+    china: "偷来的瞬间文化"
+    hungary: "Lopott Pillanat Kiadó"
+
+  executive_calm:
+    english_global: "Granite Ridge Publishing"
+    dach: "Granitrücken Verlag"
+    france: "Éditions Crête de Granit"
+    spain: "Editorial Cresta de Granito"
+    italy: "Edizioni Cresta di Granito"
+    latam: "Editorial Cresta de Granito"
+    brazil: "Editora Crista de Granito"
+    japan: "花崗岩社"
+    korea: "화강암북스"
+    taiwan: "磐石出版"
+    china: "磐石文化"
+    hungary: "Gránit Gerinc Kiadó"
+
+  trauma_path:
+    english_global: "Soft Ground Books"
+    dach: "Weicher Boden Verlag"
+    france: "Éditions Sol Doux"
+    spain: "Editorial Suelo Suave"
+    italy: "Edizioni Terreno Morbido"
+    latam: "Editorial Suelo Suave"
+    brazil: "Editora Solo Macio"
+    japan: "柔地社"
+    korea: "부드러운땅"
+    taiwan: "柔地出版"
+    china: "柔地文化"
+    hungary: "Puha Föld Kiadó"
+
+  spiritual_ground:
+    english_global: "Deep Well Publishing"
+    dach: "Tiefer Brunnen Verlag"
+    france: "Éditions du Puits Profond"
+    spain: "Editorial Pozo Profundo"
+    italy: "Edizioni Pozzo Profondo"
+    latam: "Editorial Pozo Profundo"
+    brazil: "Editora Poço Profundo"
+    japan: "深泉社"
+    korea: "깊은샘"
+    taiwan: "深泉出版"
+    china: "深泉文化"
+    hungary: "Mély Kút Kiadó"
+
+  focus_sprint:
+    english_global: "Launchpad Press"
+    dach: "Startrampe Verlag"
+    france: "Éditions Rampe de Lancement"
+    spain: "Editorial Plataforma"
+    italy: "Edizioni Rampa di Lancio"
+    latam: "Editorial Plataforma"
+    brazil: "Editora Plataforma"
+    japan: "発射台社"
+    korea: "발사대북스"
+    taiwan: "發射台出版"
+    china: "发射台文化"
+    hungary: "Indítóállás Kiadó"
+
+  hormone_reset:
+    english_global: "Tide & Cycle Books"
+    dach: "Gezeiten Verlag"
+    france: "Éditions Marée et Cycle"
+    spain: "Editorial Marea y Ciclo"
+    italy: "Edizioni Marea e Ciclo"
+    latam: "Editorial Marea y Ciclo"
+    brazil: "Editora Maré e Ciclo"
+    japan: "潮汐社"
+    korea: "밀물과썰물"
+    taiwan: "潮汐出版"
+    china: "潮汐文化"
+    hungary: "Árapály Kiadó"
+
+  stoic_edge:
+    english_global: "Anvil Books"
+    dach: "Amboss Verlag"
+    france: "Éditions de l'Enclume"
+    spain: "Editorial Yunque"
+    italy: "Edizioni Incudine"
+    latam: "Editorial Yunque"
+    brazil: "Editora Bigorna"
+    japan: "鉄砧社"
+    korea: "모루북스"
+    taiwan: "鐵砧出版"
+    china: "铁砧文化"
+    hungary: "Üllő Kiadó"
+
+  calm_student:
+    english_global: "Blue Exam Press"
+    dach: "Blaue Prüfung Verlag"
+    france: "Éditions Examen Bleu"
+    spain: "Editorial Examen Azul"
+    italy: "Edizioni Esame Blu"
+    latam: "Editorial Examen Azul"
+    brazil: "Editora Exame Azul"
+    japan: "青試社"
+    korea: "파란시험"
+    taiwan: "藍考出版"
+    china: "蓝考文化"
+    hungary: "Kék Vizsga Kiadó"
+
+  healing_ground:
+    english_global: "Midday Press"
+    dach: "Mittagszeit Verlag"
+    france: "Éditions de Midi"
+    spain: "Editorial Mediodía"
+    italy: "Edizioni Mezzogiorno"
+    latam: "Editorial Mediodía"
+    brazil: "Editora Meio-Dia"
+    japan: "正午社"
+    korea: "한낮북스"
+    taiwan: "正午出版"
+    china: "正午文化"
+    hungary: "Dél Kiadó"
+
+  bio_flow:
+    english_global: "Signal Path Books"
+    dach: "Signalweg Verlag"
+    france: "Éditions Voie du Signal"
+    spain: "Editorial Señal y Flujo"
+    italy: "Edizioni Via del Segnale"
+    latam: "Editorial Señal y Flujo"
+    brazil: "Editora Via do Sinal"
+    japan: "信号路社"
+    korea: "신호길북스"
+    taiwan: "信號路出版"
+    china: "信号路文化"
+    hungary: "Jelút Kiadó"
+
+  confidence_core:
+    english_global: "Threshold Books"
+    dach: "Schwelle Verlag"
+    france: "Éditions du Seuil Intérieur"
+    spain: "Editorial Umbral"
+    italy: "Edizioni Soglia"
+    latam: "Editorial Umbral"
+    brazil: "Editora Limiar"
+    japan: "閾値社"
+    korea: "문턱북스"
+    taiwan: "門檻出版"
+    china: "门槛文化"
+    hungary: "Küszöb Kiadó"
+
+  relationship_clarity:
+    english_global: "Two Chairs Press"
+    dach: "Zwei Stühle Verlag"
+    france: "Éditions Deux Chaises"
+    spain: "Editorial Dos Sillas"
+    italy: "Edizioni Due Sedie"
+    latam: "Editorial Dos Sillas"
+    brazil: "Editora Duas Cadeiras"
+    japan: "二椅子社"
+    korea: "두의자"
+    taiwan: "雙椅出版"
+    china: "双椅文化"
+    hungary: "Két Szék Kiadó"
+
+  morning_momentum:
+    english_global: "First Light Publishing"
+    dach: "Erstes Licht Verlag"
+    france: "Éditions Première Lueur"
+    spain: "Editorial Primera Luz"
+    italy: "Edizioni Prima Luce"
+    latam: "Editorial Primera Luz"
+    brazil: "Editora Primeira Luz"
+    japan: "初光社"
+    korea: "첫빛북스"
+    taiwan: "初光出版"
+    china: "初光文化"
+    hungary: "Első Fény Kiadó"
+
+  minimal_mind:
+    english_global: "Clearwater Books"
+    dach: "Klarwasser Verlag"
+    france: "Éditions Eau Claire"
+    spain: "Editorial Agua Clara"
+    italy: "Edizioni Acqua Chiara"
+    latam: "Editorial Agua Clara"
+    brazil: "Editora Água Clara"
+    japan: "清水社"
+    korea: "맑은물"
+    taiwan: "清水出版"
+    china: "清水文化"
+    hungary: "Tiszta Víz Kiadó"
+
+  high_performer:
+    english_global: "Close Rate Press"
+    dach: "Abschlussquote Verlag"
+    france: "Éditions Taux de Clôture"
+    spain: "Editorial Cierre"
+    italy: "Edizioni Tasso di Chiusura"
+    latam: "Editorial Cierre"
+    brazil: "Editora Taxa de Fechamento"
+    japan: "成約社"
+    korea: "성사율북스"
+    taiwan: "成約出版"
+    china: "成约文化"
+    hungary: "Zárás Kiadó"
+
+  gentle_growth:
+    english_global: "Tender Root Books"
+    dach: "Zarte Wurzel Verlag"
+    france: "Éditions Racine Tendre"
+    spain: "Editorial Raíz Tierna"
+    italy: "Edizioni Radice Tenera"
+    latam: "Editorial Raíz Tierna"
+    brazil: "Editora Raiz Tenra"
+    japan: "若根社"
+    korea: "여린뿌리"
+    taiwan: "嫩根出版"
+    china: "嫩根文化"
+    hungary: "Zsenge Gyökér Kiadó"
+
+  legacy_builder:
+    english_global: "Second Mountain Press"
+    dach: "Zweiter Gipfel Verlag"
+    france: "Éditions Deuxième Sommet"
+    spain: "Editorial Segunda Cumbre"
+    italy: "Edizioni Seconda Vetta"
+    latam: "Editorial Segunda Cumbre"
+    brazil: "Editora Segundo Cume"
+    japan: "第二峰社"
+    korea: "두번째산"
+    taiwan: "二峰出版"
+    china: "二峰文化"
+    hungary: "Második Hegy Kiadó"

@@ -259,11 +259,13 @@ def compile_author_pic_prompt(
 def compile_panel_prompt(panel: dict[str, Any]) -> dict[str, str]:
     """Compile a single manga panel dict into positive/negative prompt strings.
 
-    Accepts a panel dict from a ``panel_prompts`` artifact and returns a flat
+    Accepts a panel dict from a ``panel_prompts`` artifact (which uses
+    ``prompt`` or ``visual_prompt`` for the main text) and returns a flat
     dict with ``panel_id``, ``positive``, and ``negative`` keys suitable for
     image-generation backends.
     """
-    visual = panel.get("visual_prompt", "")
+    # Accept both field names
+    visual = panel.get("prompt", "") or panel.get("visual_prompt", "")
     negative = panel.get("negative_prompt", "")
     composition = panel.get("composition_notes", "")
     tags = panel.get("continuity_tags", [])
@@ -271,18 +273,23 @@ def compile_panel_prompt(panel: dict[str, Any]) -> dict[str, str]:
 
     positive_parts: list[str] = []
     if visual:
-        positive_parts.append(visual)
+        positive_parts.append(str(visual))
     if composition:
-        positive_parts.append(composition)
+        if isinstance(composition, dict):
+            positive_parts.append(str(composition.get("summary", "")))
+        else:
+            positive_parts.append(str(composition))
     for tag in tags:
-        positive_parts.append(tag)
-    for k, v in sdf.items():
-        positive_parts.append(f"{k}: {v}")
+        if isinstance(tag, str):
+            positive_parts.append(tag)
+    for k, v in (sdf.items() if isinstance(sdf, dict) else []):
+        if isinstance(v, str):
+            positive_parts.append(f"{k}: {v}")
 
     return {
         "panel_id": panel.get("panel_id", ""),
-        "positive": ", ".join(positive_parts) if positive_parts else "",
-        "negative": negative,
+        "positive": ", ".join(p for p in positive_parts if p) if positive_parts else "",
+        "negative": str(negative) if negative else "",
     }
 
 

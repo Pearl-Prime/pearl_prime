@@ -6,8 +6,11 @@ import hashlib
 import json
 import logging
 import os
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from collections.abc import Mapping
+from threading import Semaphore
 from typing import Any, Protocol, runtime_checkable
 
 logger = logging.getLogger(__name__)
@@ -125,6 +128,10 @@ class RunComfyImageBackend:
     """
 
     _DEFAULT_DEPLOYMENT = "677edba8-ace0-4b2b-bad2-8e94b9959065"
+    _SUBMIT_SPACING_S = 2.0   # seconds between API submissions
+    _MAX_PANEL_RETRIES = 3
+    _RETRY_BASE_S = 2.0       # base backoff for retries (doubles each attempt)
+    _MAX_CONCURRENT = 4        # parallel API submissions
 
     def __init__(
         self,
@@ -158,98 +165,164 @@ class RunComfyImageBackend:
     # ------------------------------------------------------------------
 
     def generate(self, panel_prompts: Mapping[str, Any]) -> list[dict[str, Any]]:
-        """Generate images for all panels via RunComfy API (or dry-run)."""
+        """Generate images for all panels via RunComfy API (or dry-run).
+
+        Submits up to ``_MAX_CONCURRENT`` panels in parallel, with
+        ``_SUBMIT_SPACING_S`` between each submission (via semaphore) and
+        retries each panel up to ``_MAX_PANEL_RETRIES`` times.
+        """
         from scripts.image_generation.prompt_compiler import compile_panel_prompt
         from scripts.image_generation.image_qc import run_panel_qc
 
         panels = list(panel_prompts.get("panels") or [])
-        results: list[dict[str, Any]] = []
-        for p in panels:
-            pid = str(p["panel_id"])
-            try:
-                compiled = compile_panel_prompt(p)
-                if self.dry_run:
-                    results.append({
-                        "panel_id": pid,
-                        "status": "dry_run",
-                        "path": None,
-                        "width": 0,
-                        "height": 0,
-                        "compiled_prompt": compiled,
-                    })
-                    continue
+        total = len(panels)
 
-                # Submit to RunComfy API
-                image_path = self._generate_single(pid, compiled)
-
-                # Run QC gates
-                qc = run_panel_qc(image_path)
-                if not qc["passed"]:
-                    logger.warning("QC failed for panel %s: %s", pid, qc["checks"])
-                    results.append({
-                        "panel_id": pid,
-                        "status": "failed",
-                        "path": str(image_path),
-                        "width": qc.get("width", 0),
-                        "height": qc.get("height", 0),
-                        "qc_checks": qc["checks"],
-                    })
-                    continue
-
-                results.append({
-                    "panel_id": pid,
-                    "status": "ok",
-                    "path": str(image_path),
-                    "width": qc["width"],
-                    "height": qc["height"],
-                    "content_sha256": _sha256_file(image_path),
-                })
-            except Exception as exc:
-                logger.error("Panel %s generation failed: %s", pid, exc)
-                results.append({
-                    "panel_id": pid,
-                    "status": "failed",
+        # Fast path: dry-run (no API calls, no threading)
+        if self.dry_run:
+            return [
+                {
+                    "panel_id": str(p["panel_id"]),
+                    "status": "dry_run",
                     "path": None,
                     "width": 0,
                     "height": 0,
-                    "error": str(exc)[:500],
-                })
-        return results
+                    "compiled_prompt": compile_panel_prompt(p),
+                }
+                for p in panels
+            ]
+
+        rate_sem = Semaphore(1)  # serializes the spacing delay
+
+        def _process_one(idx: int, p: dict[str, Any]) -> dict[str, Any]:
+            pid = str(p["panel_id"])
+            try:
+                compiled = compile_panel_prompt(p)
+
+                # Rate-limit: only one thread enters the submit window at a time
+                with rate_sem:
+                    if idx > 0:
+                        time.sleep(self._SUBMIT_SPACING_S)
+
+                # Retry loop
+                image_path: Path | None = None
+                last_err = ""
+                for attempt in range(self._MAX_PANEL_RETRIES):
+                    try:
+                        image_path = self._generate_single(pid, compiled)
+                        break
+                    except Exception as retry_exc:
+                        last_err = str(retry_exc)[:500]
+                        wait = self._RETRY_BASE_S * (2 ** attempt)
+                        logger.warning(
+                            "Panel %s attempt %d/%d failed: %s — retrying in %.0fs",
+                            pid, attempt + 1, self._MAX_PANEL_RETRIES,
+                            last_err[:100], wait,
+                        )
+                        time.sleep(wait)
+
+                if image_path is None:
+                    return {"panel_id": pid, "status": "failed", "path": None,
+                            "width": 0, "height": 0, "error": last_err}
+
+                qc = run_panel_qc(image_path)
+                if not qc["passed"]:
+                    logger.warning("QC failed for panel %s: %s", pid, qc["checks"])
+                    return {"panel_id": pid, "status": "failed",
+                            "path": str(image_path),
+                            "width": qc.get("width", 0),
+                            "height": qc.get("height", 0),
+                            "qc_checks": qc["checks"]}
+
+                logger.info("Panel %s done (%d/%d)", pid, idx + 1, total)
+                return {"panel_id": pid, "status": "ok",
+                        "path": str(image_path),
+                        "width": qc["width"], "height": qc["height"],
+                        "content_sha256": _sha256_file(image_path)}
+
+            except Exception as exc:
+                logger.error("Panel %s generation failed: %s", pid, exc)
+                return {"panel_id": pid, "status": "failed", "path": None,
+                        "width": 0, "height": 0, "error": str(exc)[:500]}
+
+        workers = max(1, self._MAX_CONCURRENT)
+        if workers <= 1:
+            # Sequential mode (used in tests and single-panel runs)
+            return [_process_one(idx, p) for idx, p in enumerate(panels)]
+
+        # Parallel execution — submissions are rate-limited by the semaphore,
+        # but polling/downloading runs concurrently across panels.
+        result_map: dict[str, dict[str, Any]] = {}
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = {
+                pool.submit(_process_one, idx, p): str(p["panel_id"])
+                for idx, p in enumerate(panels)
+            }
+            for future in as_completed(futures):
+                pid = futures[future]
+                result_map[pid] = future.result()
+
+        # Return in original panel order
+        return [result_map[str(p["panel_id"])] for p in panels]
 
     # ------------------------------------------------------------------
     # Internal
     # ------------------------------------------------------------------
 
     def _generate_single(self, panel_id: str, compiled: dict[str, str]) -> Path:
-        """Submit one panel to RunComfy, poll, download, return local path."""
+        """Submit one panel to RunComfy via overrides, poll, download."""
         from scripts.image_generation.runcomfy_batch import (
             download_image,
             extract_image_url,
-            load_workflow,
-            poll_run,
-            submit_workflow,
+            get_result,
+            poll_request,
+            submit_inference,
         )
 
         if not self.api_key:
             raise RuntimeError("RUNCOMFY_API_KEY is not set")
 
-        workflow = load_workflow(self.workflow_path)
-        # Inject prompt placeholders into workflow
-        workflow_str = json.dumps(workflow)
-        workflow_str = workflow_str.replace("{{positive_prompt}}", compiled["positive"])
-        workflow_str = workflow_str.replace("{{negative_prompt}}", compiled["negative"])
-        workflow_str = workflow_str.replace("{{width}}", "512")
-        workflow_str = workflow_str.replace("{{height}}", "512")
-        workflow_str = workflow_str.replace("{{seed}}", "42")
-        workflow_str = workflow_str.replace("{{guidance}}", "3.5")
-        injected = json.loads(workflow_str)
+        # Submit via overrides (node 6 = positive prompt, node 3 = seed)
+        resp = submit_inference(
+            api_key=self.api_key,
+            deployment_id=self.deployment_id,
+            positive_prompt=compiled["positive"],
+            seed=hash(panel_id) % (2**31),
+        )
 
-        run_id = submit_workflow(self.api_key, self.deployment_id, injected)
-        result = poll_run(self.api_key, self.deployment_id, run_id)
-        image_url = extract_image_url(result)
+        from scripts.image_generation.runcomfy_batch import _RUNCOMFY_API_BASE
+
+        status_url = resp.get("status_url", "")
+        result_url = resp.get("result_url", "")
+        request_id = resp.get("request_id", resp.get("run_id", ""))
+        # Construct URLs from request_id if the API didn't return them directly
+        if not status_url and request_id:
+            status_url = f"{_RUNCOMFY_API_BASE}/deployments/{self.deployment_id}/requests/{request_id}/status"
+        if not result_url and request_id:
+            result_url = f"{_RUNCOMFY_API_BASE}/deployments/{self.deployment_id}/requests/{request_id}/result"
+        if not status_url:
+            raise RuntimeError(f"No status_url or request_id in submit response: {resp}")
+
+        # Poll until completed
+        poll_result = poll_request(self.api_key, status_url, max_wait=300)
+
+        # Get final result with image URLs
+        if result_url:
+            final = get_result(self.api_key, result_url)
+        else:
+            final = poll_result
+
+        # Extract image URL
+        image_url = extract_image_url(final)
         if not image_url:
-            raise RuntimeError(f"No image URL in RunComfy result for panel {panel_id}")
+            # Try outputs as list
+            outputs = final.get("outputs", [])
+            if isinstance(outputs, list) and outputs:
+                first = outputs[0]
+                image_url = first if isinstance(first, str) else first.get("url", "")
+            if not image_url:
+                raise RuntimeError(f"No image URL for panel {panel_id}: {final}")
 
+        self.output_dir.mkdir(parents=True, exist_ok=True)
         dest = self.output_dir / f"{panel_id}.png"
         download_image(image_url, dest)
         return dest

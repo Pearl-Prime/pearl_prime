@@ -1,0 +1,58 @@
+# Audiobook video visual style (matching Descript examples)
+# Authority: Joshin + Ahjan Descript audiobook reference videos
+
+styles:
+  default:
+    background_color: "#000000"
+    font_family: "Georgia"
+    font_size_16_9: 72
+    font_size_9_16: 52
+    text_color: "#FFFFFF"
+    text_color_past: "#666666"
+    text_margin_x_pct: 8
+    text_margin_y_pct: 8
+    max_words_per_screen: 6
+    waveform_height_pct: 15
+    waveform_color: "#AAAAAA"
+    waveform_mode: "cline"   # FFmpeg showwaves mode: point|line|p2p|cline
+
+  warm:
+    # For grief, depression, somatic healing
+    background_color: "#0A0A0A"
+    font_family: "Georgia"
+    font_size_16_9: 72
+    font_size_9_16: 52
+    text_color: "#F5E6D3"
+    text_color_past: "#5A4A3A"
+    text_margin_x_pct: 8
+    text_margin_y_pct: 8
+    max_words_per_screen: 6
+    waveform_height_pct: 15
+    waveform_color: "#6B5B4B"
+    waveform_mode: "cline"
+
+  cool:
+    # For anxiety, burnout, stress
+    background_color: "#050510"
+    font_family: "Georgia"
+    font_size_16_9: 72
+    font_size_9_16: 52
+    text_color: "#E0E8F0"
+    text_color_past: "#4A5060"
+    text_margin_x_pct: 8
+    text_margin_y_pct: 8
+    max_words_per_screen: 6
+    waveform_height_pct: 15
+    waveform_color: "#6070A0"
+    waveform_mode: "cline"
+
+# Topic → style mapping
+topic_style_map:
+  grief: warm
+  depression: warm
+  somatic_healing: warm
+  shame: warm
+  anxiety: cool
+  burnout: cool
+  financial_stress: cool
+  default: default
