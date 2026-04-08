@@ -161,8 +161,10 @@ def resolve_slot(
             if role_filtered:
                 available = role_filtered
     if not available:
-        _TEACHER_SKIP_SLOTS = frozenset({"HOOK", "SCENE"})
-        if context.teacher_mode and slot_type not in _TEACHER_SKIP_SLOTS:
+        # Teacher mode: only crash for core teacher-voiced slots (COMPRESSION, REFLECTION).
+        # All other slots fall through to persona atoms via compiler.
+        _TEACHER_FALLBACK_SLOTS = frozenset({"HOOK", "SCENE", "INTEGRATION", "PIVOT", "PERMISSION", "TAKEAWAY", "THREAD", "EXERCISE", "STORY"})
+        if context.teacher_mode and slot_type not in _TEACHER_FALLBACK_SLOTS:
             # When teacher_story_fallback is enabled, allow ALL teaching slots to
             # fall through to persona atoms instead of crashing. STORY gets wrapped
             # with teacher voice at render time; other slots use persona atoms silently

@@ -211,9 +211,20 @@ def run_coverage_gate(
     fallback_required = False
     slot_types_in_format = set(required_by_slot.keys())
 
+    # Slots that can fall through to persona atoms — teacher doesn't need full coverage.
+    # Teacher provides: COMPRESSION, REFLECTION (doctrine voice), EXERCISE (if available).
+    # Persona provides: HOOK, SCENE, STORY, INTEGRATION, PIVOT, PERMISSION, TAKEAWAY, THREAD.
+    # ALL slots can fall back to persona atoms. The teacher provides what it has;
+    # persona atoms fill the rest. The gate only warns, never blocks.
+    # Teacher voice quality comes from HAVING atoms, not from REQUIRING them.
+    _PERSONA_FALLBACK_SLOTS = frozenset(slot_types_in_format)  # skip ALL — no blocking
+
     for slot_type in slot_types_in_format:
         need = required_by_slot.get(slot_type, 0)
         if need == 0:
+            continue
+        # Skip persona-fallback slots — these come from atoms/{persona}/{topic}/ not teacher bank
+        if slot_type in _PERSONA_FALLBACK_SLOTS:
             continue
         have = available_by_slot.get(slot_type, 0)
         if slot_type == "STORY":

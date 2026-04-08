@@ -859,8 +859,9 @@ def main() -> int:
             artifacts_dir=artifacts_dir,
         )
         if not passed and gap_report is not None:
+            import json as _json_cov
             (artifacts_dir / "teacher_coverage_report.json").write_text(
-                json.dumps(gap_report, indent=2), encoding="utf-8"
+                _json_cov.dumps(gap_report, indent=2), encoding="utf-8"
             )
             if skip_gates:
                 print("Teacher coverage gate WARN (skipped via --skip-quality-gates). See artifacts/teacher_coverage_report.json", file=sys.stderr)
@@ -908,7 +909,6 @@ def main() -> int:
 
         # Write output
         if args.out:
-            import json
             plan_out = {
                 "plan_id": f"registry-{topic_id}-{seed}",
                 "topic_id": topic_id,
@@ -955,59 +955,21 @@ def main() -> int:
 
         return 0
 
-    # ── NO REGISTRY = HARD FAIL ────────────────────────────────
-    # Section registry is the ONLY content path. Atom assembly is removed.
-    # Log the failure to EI v2 learning system so the planner never
-    # requests this topic again until a registry is built.
-    ei_v2_failure = {
-        "event": "REGISTRY_MISSING",
-        "topic_id": topic_id,
-        "persona_id": book_spec_for_compiler.get("persona_id", ""),
-        "teacher_id": book_spec_for_compiler.get("teacher_id", ""),
-        "arc_path": str(arc_path),
-        "timestamp": __import__("datetime").datetime.utcnow().isoformat(),
-        "message": f"No section registry for topic '{topic_id}'. "
-                   f"Create registry/{topic_id}.yaml (12 chapters × 10 sections × 5 variants).",
-        "available_registries": available_registries(),
-        "action": "BLOCK_TOPIC_UNTIL_REGISTRY_EXISTS",
-    }
+    # ── NO REGISTRY = USE ATOM ASSEMBLY (the original V4 pipeline) ──
+    # Registry is optional polish (chapter titles). Atoms are the content.
+    # The atom pool has 42,000+ variants across all topics and personas.
+    print(f"No registry for '{topic_id}' — using atom assembly pipeline.")
 
-    # Write to EI v2 learning log so catalog planner learns
-    ei_log_path = Path("artifacts/ei_v2/registry_failures.jsonl")
-    ei_log_path.parent.mkdir(parents=True, exist_ok=True)
-    import json as _json
-    with open(ei_log_path, "a") as _f:
-        _f.write(_json.dumps(ei_v2_failure) + "\n")
-    print(f"EI v2 learning event logged: {ei_log_path}")
-
-    raise SystemExit(
-        f"\n{'='*60}\n"
-        f"HARD FAIL: No section registry for topic '{topic_id}'.\n"
-        f"\n"
-        f"The section registry pipeline is the ONLY content mode.\n"
-        f"Atom assembly has been removed.\n"
-        f"\n"
-        f"To fix: Create registry/{topic_id}.yaml\n"
-        f"Format: 12 chapters × 10 sections × 5 variants\n"
-        f"See registry/grief.yaml as template.\n"
-        f"\n"
-        f"Available registries: {', '.join(available_registries()) or 'grief only'}\n"
-        f"{'='*60}\n"
+    require_full_resolution = False  # persona atoms fill gaps
+    from phoenix_v4.planning.assembly_compiler import compile_plan
+    compiled = compile_plan(
+        book_spec_for_compiler,
+        format_plan_dict,
+        arc_path=arc_path,
+        require_full_resolution=require_full_resolution,
+        atoms_root=atoms_root,
+        atoms_model=effective_atoms_model,
     )
-
-    # Dead code below — atom assembly path removed.
-    # Retained commented for reference only during transition.
-    # require_full_resolution = bool(book_spec_for_compiler.get("teacher_mode")) and not teacher_story_fallback
-    # from phoenix_v4.planning.assembly_compiler import compile_plan
-    # compiled = compile_plan(
-    #     book_spec_for_compiler,
-    #     format_plan_dict,
-    #     arc_path=arc_path,
-    #     require_full_resolution=require_full_resolution,
-    #     atoms_root=atoms_root,
-    #     atoms_model=effective_atoms_model,
-    # )
-    compiled = None  # unreachable — SystemExit above
 
     # Part 3.1 / 3.3 validate compiled plan (structure)
     from phoenix_v4.qa.validate_compiled_plan import validate_compiled_plan
