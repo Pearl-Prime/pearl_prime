@@ -14,8 +14,8 @@ from __future__ import annotations
 # Canonical env var registry.
 REGISTRY: list[tuple[str, str, bool, str]] = [
     # --- LLM Providers ---
-    ("Qwen / DashScope", "QWEN_API_KEY", True, "Primary LLM - DashScope API key"),
-    ("Qwen / DashScope", "QWEN_BASE_URL", True, "DashScope endpoint URL"),
+    ("Qwen / DashScope", "QWEN_API_KEY", False, "DashScope API key (not needed for local Ollama)"),
+    ("Qwen / DashScope", "QWEN_BASE_URL", True, "LLM endpoint URL (Pearl Star Ollama :11434/v1 or DashScope cloud)"),
     ("Qwen / DashScope", "QWEN_MODEL", False, "Model override (default in scripts)"),
     ("Qwen / DashScope", "DASHSCOPE_API_KEY", False, "Alt env var for DashScope key"),
     ("Qwen / DashScope", "DASHSCOPE_BASE_URL", False, "Alt env var for DashScope URL"),
@@ -81,8 +81,12 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("Douyin", "DOUYIN_CLIENT_SECRET", False, "Douyin client secret (disabled, needs ICP)"),
     ("Douyin", "DOUYIN_ACCESS_TOKEN", False, "Douyin access token (disabled, needs ICP)"),
     ("SerpApi", "SERPAPI_KEY", False, "Trend checking (245 calls/month budget)"),
-    # Image generation (PRIMARY — RunComfy; Cloudflare FLUX is fallback)
-    ("RunComfy", "RUNCOMFY_API_KEY", True, "RunComfy API key (PRIMARY image gen — manga, video bank, author art)"),
+    # --- Pearl Star (local inference server) ---
+    ("Pearl Star", "PEARL_STAR_IP", True, "Pearl Star server LAN IP (ComfyUI, Ollama, CosyVoice2)"),
+    ("Pearl Star / ComfyUI", "COMFYUI_URL", True, "ComfyUI endpoint (e.g. http://${PEARL_STAR_IP}:8188)"),
+    ("Pearl Star / CosyVoice2", "COSYVOICE_URL", False, "CosyVoice2 TTS endpoint (e.g. http://${PEARL_STAR_IP}:9880)"),
+    # Image generation (PRIMARY — ComfyUI on Pearl Star; RunComfy is cloud fallback)
+    ("RunComfy", "RUNCOMFY_API_KEY", False, "RunComfy API key (FALLBACK image gen — cloud backup when ComfyUI unavailable)"),
     ("RunComfy", "RUNCOMFY_DEPLOYMENT_ID", False, "RunComfy deployment ID (default: 677edba8-ace0-4b2b-bad2-8e94b9959065)"),
 ]
 

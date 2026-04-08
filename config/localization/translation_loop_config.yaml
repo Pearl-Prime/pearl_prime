@@ -18,15 +18,17 @@ parallel:
   batch_timeout_seconds: 7200
 
 draft_model:
-  # Cloud mode (DASHSCOPE_API_KEY set): uses Dashscope endpoint
-  # Local mode: uses LM Studio at 127.0.0.1:1234
+  # Provider chain: Together AI → DashScope → Ollama → LM Studio
   cloud_model_id: qwen-plus
+  ollama_model_id: "qwen3:14b"
   temperature: 0.25
   max_output_tokens: 32000
   timeout_seconds: 300
 
 judge_model:
   cloud_model_id: qwen-max
+  cloud_judge_model_id: qwen-max
+  ollama_model_id: "qwen3:14b"
   temperature: 0.1
   max_output_tokens: 16384
   timeout_seconds: 180

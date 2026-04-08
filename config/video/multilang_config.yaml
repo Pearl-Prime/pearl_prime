@@ -17,21 +17,42 @@ supported_languages:
 voice_provider_default: elevenlabs
 voice_model_default: eleven_turbo_v2_5
 
+# Fallback chain: locale-specific primary → fallback → voice_provider_default
+voice_fallback_chain:
+  cosyvoice: [edge_tts, elevenlabs]
+  edge_tts: [elevenlabs]
+  elevenlabs: []
+
 # Per-locale voice synthesis hints (actual voice_id still comes from channel_registry + clone mapping)
 locale_voice_hints:
   en:
     provider: elevenlabs
   zh-CN:
-    provider: elevenlabs
+    provider: cosyvoice
+    fallback: edge_tts
+    cosyvoice_lang: "zh"
+    edge_tts_voice: "zh-CN-XiaoxiaoNeural"
     priority_platforms: [bilibili, douyin]
   zh-TW:
-    provider: elevenlabs
+    provider: cosyvoice
+    fallback: edge_tts
+    cosyvoice_lang: "zh"
+    edge_tts_voice: "zh-TW-HsiaoChenNeural"
   zh-HK:
-    provider: elevenlabs
+    provider: cosyvoice
+    fallback: edge_tts
+    cosyvoice_lang: "zh"
+    edge_tts_voice: "zh-HK-HiuGaaiNeural"
   ja:
-    provider: elevenlabs
+    provider: cosyvoice
+    fallback: edge_tts
+    cosyvoice_lang: "ja"
+    edge_tts_voice: "ja-JP-NanamiNeural"
   ko:
-    provider: elevenlabs
+    provider: cosyvoice
+    fallback: edge_tts
+    cosyvoice_lang: "ko"
+    edge_tts_voice: "ko-KR-SunHiNeural"
   es:
     provider: elevenlabs
   fr:

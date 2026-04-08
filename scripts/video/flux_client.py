@@ -1,7 +1,7 @@
-# DEMOTED: Cloudflare FLUX is fallback only. Primary image generation uses RunComfy (scripts/image_generation/runcomfy_batch.py)
+# DEMOTED: Cloudflare FLUX is fallback only. Primary image generation uses ComfyUI on Pearl Star.
 """
-Shared Cloudflare Workers AI FLUX client for video image bank and author cover art.
-Load credentials, build prompts from config, call FLUX API.
+Image generation client: ComfyUI (primary) or Cloudflare Workers AI FLUX (fallback).
+Load credentials, build prompts from config, call image gen API.
 Used by: run_flux_generate.py, run_flux_bank_build.py, generate_author_cover_art_flux.py.
 """
 from __future__ import annotations
@@ -171,3 +171,73 @@ def call_flux(
     if isinstance(result, str):
         return base64.b64decode(result)
     raise RuntimeError(f"Unexpected API response: {type(result)}")
+
+
+# ── ComfyUI (PRIMARY — local Pearl Star server) ──
+
+
+def get_image_provider() -> tuple[str, dict[str, str]]:
+    """Return (provider_name, params) based on environment.
+
+    Priority: COMFYUI_URL → comfyui, else → cloudflare.
+    Does NOT change load_credentials() signature for backward compatibility.
+    """
+    comfyui_url = os.environ.get("COMFYUI_URL", "").strip()
+    if comfyui_url:
+        return "comfyui", {"url": comfyui_url}
+    account_id, api_token = load_credentials()
+    return "cloudflare", {"account_id": account_id, "api_token": api_token}
+
+
+def call_comfyui(
+    comfyui_url: str,
+    prompt: str,
+    negative_prompt: str,
+    width: int = 576,
+    height: int = 1024,
+    steps: int = 25,
+    guidance: float = 3.0,
+    seed: int = 739204,
+) -> bytes:
+    """Submit prompt to ComfyUI and return image bytes."""
+    import time
+    import urllib.request
+
+    workflow_path = REPO_ROOT / "scripts" / "image_generation" / "comfyui_workflows" / "flux_video_bank.json"
+    workflow = json.loads(workflow_path.read_text(encoding="utf-8"))
+    full_prompt = f"{prompt}\n\nAvoid: {negative_prompt}" if negative_prompt else prompt
+    if "6" in workflow:
+        workflow["6"]["inputs"]["text"] = full_prompt
+    if "25" in workflow:
+        workflow["25"]["inputs"]["noise_seed"] = seed
+    elif "3" in workflow:
+        workflow["3"]["inputs"]["seed"] = seed
+
+    url = comfyui_url.rstrip("/")
+    payload = json.dumps({"prompt": workflow}).encode("utf-8")
+    req = urllib.request.Request(f"{url}/prompt", data=payload,
+                                headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        prompt_id = json.loads(resp.read())["prompt_id"]
+
+    deadline = time.monotonic() + 300
+    while time.monotonic() < deadline:
+        time.sleep(3)
+        hreq = urllib.request.Request(f"{url}/history/{prompt_id}")
+        with urllib.request.urlopen(hreq, timeout=15) as hresp:
+            history = json.loads(hresp.read())
+        if prompt_id in history:
+            outputs = history[prompt_id].get("outputs", {})
+            for node_out in outputs.values():
+                images = node_out.get("images", [])
+                if images:
+                    img = images[0]
+                    import urllib.parse
+                    params = urllib.parse.urlencode({
+                        "filename": img["filename"],
+                        "subfolder": img.get("subfolder", ""),
+                        "type": img.get("type", "output"),
+                    })
+                    with urllib.request.urlopen(f"{url}/view?{params}", timeout=60) as iresp:
+                        return iresp.read()
+    raise RuntimeError(f"ComfyUI prompt {prompt_id} timed out")

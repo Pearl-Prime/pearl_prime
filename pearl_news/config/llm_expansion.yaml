@@ -8,16 +8,18 @@ schema_version: 1
 # Set to true to run expansion when pipeline is invoked with --expand
 enabled: true
 
-# OpenAI-compatible API (Ollama OpenAI compat, self-hosted Qwen stack, or remote)
-base_url: "http://localhost:1234/v1"
-# Alternative: Ollama with OpenAI compat → "http://localhost:11434/v1"
-# GitHub / remote: set to your endpoint URL (e.g. https://your-runner.example.com/v1)
+# OpenAI-compatible API — default: Pearl Star Ollama endpoint.
+# Override via QWEN_BASE_URL env var for CI/production or DashScope cloud.
+base_url: "http://localhost:11434/v1"
+# LM Studio fallback: "http://localhost:1234/v1"
+# DashScope cloud: set QWEN_BASE_URL env var
 
-model: "qwen3-14b"
-# Must match GET /v1/models → data[].id for your server
+model: "qwen3:14b"
+# Ollama uses colon format (qwen3:14b). LM Studio uses dash (qwen3-14b).
+# Override via QWEN_MODEL env var.
 
-api_key: "lm-studio"
-# Local dev: often any non-empty placeholder. Ollama: often "ollama". Remote: your API key if required.
+api_key: "ollama"
+# Ollama accepts any non-empty string. LM Studio: "lm-studio". Cloud: set via QWEN_API_KEY.
 
 # Timeout per article (seconds). Uses httpx.Timeout so connect+read+write all respect
 # this value — not just the default 5s httpx socket timeout.

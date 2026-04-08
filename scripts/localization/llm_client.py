@@ -2,22 +2,18 @@
 """
 Shared LLM client for localization scripts.
 
-Supports two modes — chosen automatically based on environment:
+Provider chain (first match wins):
 
-  CLOUD MODE (priority):
-    Set DASHSCOPE_API_KEY environment variable.
-    Uses Alibaba Cloud Dashscope OpenAI-compatible endpoint with Qwen models.
-    Recommended for GitHub Actions and CI/CD pipelines.
-
-  LOCAL MODE (fallback):
-    No DASHSCOPE_API_KEY set.
-    Uses LM Studio at http://127.0.0.1:1234 (or config file base_url).
-    Recommended for local development.
+  1. TOGETHER AI (preferred):  Set TOGETHER_API_KEY.
+  2. DASHSCOPE (cloud):        Set DASHSCOPE_API_KEY.
+  3. OLLAMA (Pearl Star):      Set OLLAMA_HOST or QWEN_BASE_URL containing :11434.
+  4. LOCAL (LM Studio):        Fallback to http://127.0.0.1:1234.
 
 Environment variables:
+  TOGETHER_API_KEY    — Together AI key (enables Together mode)
   DASHSCOPE_API_KEY   — Dashscope API key (enables cloud mode)
-  DASHSCOPE_MODEL     — Override cloud model (default: qwen-plus)
-                        Options: qwen-plus, qwen-max, qwen-turbo, qwen-long
+  OLLAMA_HOST         — Ollama endpoint (enables Ollama mode)
+  QWEN_BASE_URL       — If contains :11434, treated as Ollama endpoint
 
 Usage:
   from scripts.localization.llm_client import call_llm, get_client_config
@@ -55,6 +51,14 @@ DASHSCOPE_BASE_URL = os.environ.get(
 #   qwen-max    → highest quality, higher cost (use for final eval/judge pass)
 #   qwen-turbo  → fastest/cheapest (use for dry-runs / structural validation)
 DASHSCOPE_DEFAULT_MODEL = "qwen-plus"
+
+
+def _is_ollama_endpoint() -> bool:
+    """Detect if environment points to an Ollama server."""
+    if os.environ.get("OLLAMA_HOST", "").strip():
+        return True
+    qwen_base = os.environ.get("QWEN_BASE_URL", "").strip()
+    return bool(qwen_base and ":11434" in qwen_base)
 
 
 # ─── CONFIG RESOLVER ─────────────────────────────────────────────────────────
@@ -123,6 +127,32 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
             "enable_thinking": False,
         }
         logger.debug("LLM client: DashScope mode, model=%s", cloud_model)
+
+    elif _is_ollama_endpoint():
+        # ── OLLAMA MODE (Pearl Star local server) ────────────────────────────
+        ollama_host = os.environ.get("OLLAMA_HOST", "").strip()
+        qwen_base = os.environ.get("QWEN_BASE_URL", "").strip()
+        base_url = ollama_host.rstrip("/") + "/v1" if ollama_host else qwen_base
+        if not base_url.endswith("/v1"):
+            base_url = base_url.rstrip("/") + "/v1"
+
+        ollama_model = (
+            os.environ.get("OLLAMA_MODEL", "").strip()
+            or model_cfg.get("ollama_model_id", "").strip()
+            or "qwen3:14b"
+        )
+
+        resolved = {
+            "base_url": base_url,
+            "api_key": "ollama",
+            "model_id": ollama_model,
+            "temperature": float(model_cfg.get("temperature", 0.6)),
+            "max_tokens": int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000))),
+            "timeout": float(model_cfg.get("timeout_seconds", model_cfg.get("timeout", 180))),
+            "mode": "ollama",
+            "enable_thinking": False,
+        }
+        logger.debug("LLM client: Ollama mode, base_url=%s, model=%s", base_url, ollama_model)
 
     else:
         # ── LOCAL MODE (LM Studio) ────────────────────────────────────────────
@@ -237,20 +267,34 @@ def preflight_check(cfg: dict[str, Any]) -> tuple[bool, str]:
     params = get_client_config(cfg)
     mode = params["mode"]
 
+    if mode == "together":
+        if params["api_key"]:
+            return True, f"together mode: TOGETHER_API_KEY set, model={params['model_id']}"
+        return False, "together mode: TOGETHER_API_KEY is empty"
+
     if mode == "cloud":
-        # For Dashscope, just verify the API key is non-empty
         if params["api_key"]:
             return True, f"cloud mode: DASHSCOPE_API_KEY set, model={params['model_id']}"
         return False, "cloud mode: DASHSCOPE_API_KEY is empty"
 
-    else:
-        # Local: ping /v1/models
+    if mode == "ollama":
         base_url = params["base_url"].rstrip("/v1").rstrip("/")
         try:
             req = urllib.request.Request(f"{base_url}/v1/models", method="GET")
             with urllib.request.urlopen(req, timeout=5) as resp:
                 if resp.status == 200:
-                    return True, f"local mode: LM Studio reachable at {base_url}"
-                return False, f"local mode: LM Studio returned HTTP {resp.status}"
+                    return True, f"ollama mode: reachable at {base_url}, model={params['model_id']}"
+                return False, f"ollama mode: HTTP {resp.status} from {base_url}"
         except Exception as e:
-            return False, f"local mode: LM Studio unreachable at {base_url} — {e}"
+            return False, f"ollama mode: unreachable at {base_url} — {e}"
+
+    # Local: ping /v1/models
+    base_url = params["base_url"].rstrip("/v1").rstrip("/")
+    try:
+        req = urllib.request.Request(f"{base_url}/v1/models", method="GET")
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            if resp.status == 200:
+                return True, f"local mode: LM Studio reachable at {base_url}"
+            return False, f"local mode: LM Studio returned HTTP {resp.status}"
+    except Exception as e:
+        return False, f"local mode: LM Studio unreachable at {base_url} — {e}"

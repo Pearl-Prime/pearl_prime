@@ -1,4 +1,4 @@
-"""Image generation backends: noop, fixture replay (CI), and RunComfy (live)."""
+"""Image generation backends: noop, fixture replay (CI), ComfyUI (local), and RunComfy (cloud)."""
 
 from __future__ import annotations
 
@@ -106,6 +106,169 @@ def _png_dimensions_if_simple(path: Path) -> tuple[int, int]:
         h = int.from_bytes(data[20:24], "big")
         return w, h
     return 512, 512
+
+
+class ComfyUIBackend:
+    """Submit panels to a local ComfyUI server via its native HTTP API.
+
+    Uses the same workflow JSON template as RunComfy but communicates directly
+    with ComfyUI at ``COMFYUI_URL`` (e.g. ``http://192.168.1.112:8188``).
+    """
+
+    _MAX_POLL_S = 300
+    _POLL_INTERVAL_S = 3.0
+    _MAX_CONCURRENT = 4
+    _MAX_PANEL_RETRIES = 3
+    _RETRY_BASE_S = 2.0
+
+    def __init__(
+        self,
+        comfyui_url: str | None = None,
+        workflow_path: Path | str | None = None,
+        output_dir: Path | str | None = None,
+        dry_run: bool = False,
+    ) -> None:
+        self.comfyui_url = (
+            comfyui_url or os.environ.get("COMFYUI_URL", "").strip()
+        ).rstrip("/")
+        if workflow_path is None:
+            self.workflow_path = (
+                Path(__file__).resolve().parent.parent.parent
+                / "scripts" / "image_generation" / "comfyui_workflows"
+                / "flux_video_bank.json"
+            )
+        else:
+            self.workflow_path = Path(workflow_path)
+        self.output_dir = Path(output_dir) if output_dir else Path.cwd() / "panel_images"
+        self.dry_run = dry_run
+
+    def generate(self, panel_prompts: Mapping[str, Any]) -> list[dict[str, Any]]:
+        from scripts.image_generation.prompt_compiler import compile_panel_prompt
+        from scripts.image_generation.image_qc import run_panel_qc
+
+        panels = list(panel_prompts.get("panels") or [])
+        total = len(panels)
+
+        if self.dry_run:
+            return [
+                {"panel_id": str(p["panel_id"]), "status": "dry_run",
+                 "path": None, "width": 0, "height": 0,
+                 "compiled_prompt": compile_panel_prompt(p)}
+                for p in panels
+            ]
+
+        rate_sem = Semaphore(1)
+
+        def _process_one(idx: int, p: dict[str, Any]) -> dict[str, Any]:
+            pid = str(p["panel_id"])
+            try:
+                compiled = compile_panel_prompt(p)
+                with rate_sem:
+                    if idx > 0:
+                        time.sleep(1.0)
+
+                image_path: Path | None = None
+                last_err = ""
+                for attempt in range(self._MAX_PANEL_RETRIES):
+                    try:
+                        image_path = self._generate_single(pid, compiled)
+                        break
+                    except Exception as retry_exc:
+                        last_err = str(retry_exc)[:500]
+                        wait = self._RETRY_BASE_S * (2 ** attempt)
+                        logger.warning("Panel %s attempt %d/%d failed: %s — retrying in %.0fs",
+                                       pid, attempt + 1, self._MAX_PANEL_RETRIES, last_err[:100], wait)
+                        time.sleep(wait)
+
+                if image_path is None:
+                    return {"panel_id": pid, "status": "failed", "path": None,
+                            "width": 0, "height": 0, "error": last_err}
+
+                qc = run_panel_qc(image_path)
+                if not qc["passed"]:
+                    return {"panel_id": pid, "status": "failed", "path": str(image_path),
+                            "width": qc.get("width", 0), "height": qc.get("height", 0),
+                            "qc_checks": qc["checks"]}
+
+                logger.info("Panel %s done (%d/%d)", pid, idx + 1, total)
+                return {"panel_id": pid, "status": "ok", "path": str(image_path),
+                        "width": qc["width"], "height": qc["height"],
+                        "content_sha256": _sha256_file(image_path)}
+            except Exception as exc:
+                logger.error("Panel %s generation failed: %s", pid, exc)
+                return {"panel_id": pid, "status": "failed", "path": None,
+                        "width": 0, "height": 0, "error": str(exc)[:500]}
+
+        workers = max(1, self._MAX_CONCURRENT)
+        if workers <= 1:
+            return [_process_one(idx, p) for idx, p in enumerate(panels)]
+
+        result_map: dict[str, dict[str, Any]] = {}
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = {pool.submit(_process_one, idx, p): str(p["panel_id"])
+                       for idx, p in enumerate(panels)}
+            for future in as_completed(futures):
+                result_map[futures[future]] = future.result()
+        return [result_map[str(p["panel_id"])] for p in panels]
+
+    def _generate_single(self, panel_id: str, compiled: dict[str, str]) -> Path:
+        """Submit one panel to ComfyUI: POST /prompt → poll /history → GET /view."""
+        import urllib.request
+
+        workflow = json.loads(self.workflow_path.read_text(encoding="utf-8"))
+        if "6" in workflow:
+            workflow["6"]["inputs"]["text"] = compiled["positive"]
+        if "25" in workflow:
+            workflow["25"]["inputs"]["noise_seed"] = hash(panel_id) % (2**31)
+        elif "3" in workflow:
+            workflow["3"]["inputs"]["seed"] = hash(panel_id) % (2**31)
+
+        payload = json.dumps({"prompt": workflow}).encode("utf-8")
+        req = urllib.request.Request(
+            f"{self.comfyui_url}/prompt",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            prompt_id = json.loads(resp.read())["prompt_id"]
+
+        # Poll /history/{prompt_id}
+        deadline = time.monotonic() + self._MAX_POLL_S
+        outputs: dict[str, Any] = {}
+        while time.monotonic() < deadline:
+            time.sleep(self._POLL_INTERVAL_S)
+            hreq = urllib.request.Request(f"{self.comfyui_url}/history/{prompt_id}")
+            with urllib.request.urlopen(hreq, timeout=15) as hresp:
+                history = json.loads(hresp.read())
+            if prompt_id in history:
+                outputs = history[prompt_id].get("outputs", {})
+                if outputs:
+                    break
+        if not outputs:
+            raise RuntimeError(f"ComfyUI prompt {prompt_id} timed out after {self._MAX_POLL_S}s")
+
+        # Find first image in outputs
+        for node_id, node_out in outputs.items():
+            images = node_out.get("images", [])
+            if images:
+                img = images[0]
+                filename = img["filename"]
+                subfolder = img.get("subfolder", "")
+                img_type = img.get("type", "output")
+                return self._download_output(filename, subfolder, img_type, panel_id)
+        raise RuntimeError(f"No images in ComfyUI outputs for prompt {prompt_id}")
+
+    def _download_output(self, filename: str, subfolder: str, img_type: str, panel_id: str) -> Path:
+        import urllib.request
+        import urllib.parse
+
+        params = urllib.parse.urlencode({"filename": filename, "subfolder": subfolder, "type": img_type})
+        url = f"{self.comfyui_url}/view?{params}"
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        dest = self.output_dir / f"{panel_id}.png"
+        with urllib.request.urlopen(url, timeout=60) as resp:
+            dest.write_bytes(resp.read())
+        return dest
 
 
 class RunComfyImageBackend:
@@ -359,3 +522,28 @@ def build_panel_images_manifest(
         "artifact_type": "panel_images_manifest",
         "panels": panels,
     }
+
+
+def get_default_image_backend(
+    *,
+    dry_run: bool = False,
+    workflow_path: Path | str | None = None,
+    output_dir: Path | str | None = None,
+) -> ImageBackend:
+    """Select image backend based on environment.
+
+    Priority: COMFYUI_URL → ComfyUIBackend, RUNCOMFY_API_KEY → RunComfyImageBackend,
+    else → NoopImageBackend.
+    """
+    comfyui_url = os.environ.get("COMFYUI_URL", "").strip()
+    if comfyui_url:
+        logger.info("Image backend: ComfyUI at %s", comfyui_url)
+        return ComfyUIBackend(comfyui_url=comfyui_url, workflow_path=workflow_path,
+                              output_dir=output_dir, dry_run=dry_run)
+    runcomfy_key = os.environ.get("RUNCOMFY_API_KEY", "").strip()
+    if runcomfy_key:
+        logger.info("Image backend: RunComfy (cloud fallback)")
+        return RunComfyImageBackend(api_key=runcomfy_key, workflow_path=workflow_path,
+                                    output_dir=output_dir, dry_run=dry_run)
+    logger.info("Image backend: Noop (no COMFYUI_URL or RUNCOMFY_API_KEY)")
+    return NoopImageBackend()

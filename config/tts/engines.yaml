@@ -15,6 +15,19 @@ engines:
     voices:
       affirmations: "nova"
       default: "nova"
+  cosyvoice:
+    base_url_env: COSYVOICE_URL
+    languages: [zh-CN, zh-TW, zh-HK, ja, ko]
+    default_voice: null  # CosyVoice2 uses model default / zero-shot cloning
+    voices: {}
+  edge_tts:
+    api_key_env: null  # Free Microsoft service, no API key needed
+    languages: [zh-CN, zh-TW, ja, ko, en, es, fr, de, id, pt-BR, hu]
+    voices:
+      zh-CN: "zh-CN-XiaoxiaoNeural"
+      zh-TW: "zh-TW-HsiaoChenNeural"
+      ja: "ja-JP-NanamiNeural"
+      ko: "ko-KR-SunHiNeural"
 
 mapping:
   guided_audio: elevenlabs
@@ -22,3 +35,11 @@ mapping:
   affirmations_audio: openai
   mini_audio: openai
   default: openai
+
+# CJK presenter audio routing (used by generate_presenter_audio.py)
+cjk_mapping:
+  briefing_jp: cosyvoice
+  briefing_kr: cosyvoice
+  briefing_cn: cosyvoice
+  briefing_tw: cosyvoice
+  cjk_fallback: edge_tts

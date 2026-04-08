@@ -35,6 +35,24 @@ This reads the registry below and reports which env vars are set vs missing.
 
 ## Service registry
 
+### 0. Pearl Star — Local Inference Server (PRIMARY)
+
+| Field | Value |
+|-------|-------|
+| **Server** | Ubuntu 24.04 at `PEARL_STAR_IP` (default: 192.168.1.112 LAN) |
+| **Services** | Ollama/Qwen3:14b (:11434), ComfyUI/FLUX.1-dev (:8188), CosyVoice2 (:9880) |
+| **Env vars** | `PEARL_STAR_IP`, `COMFYUI_URL`, `COSYVOICE_URL` |
+| **Consumed by** | `phoenix_v4/manga/image_backend.py`, `scripts/image_generation/runcomfy_batch.py`, `scripts/video/flux_client.py`, `scripts/audio/generate_presenter_audio.py`, `scripts/localization/llm_client.py`, `pearl_news/pipeline/llm_expand.py` |
+| **How to obtain** | See [docs/UBUNTU_PRODUCTION_SERVER_SETUP.md](./UBUNTU_PRODUCTION_SERVER_SETUP.md) |
+| **Required vs optional** | `PEARL_STAR_IP` and `COMFYUI_URL` required; `COSYVOICE_URL` optional (CJK TTS) |
+| **Status** | Primary provider for image gen, CJK LLM, and CJK TTS |
+
+**Provider migration (2026-04-08):**
+- **Image generation:** ComfyUI on Pearl Star is now PRIMARY. RunComfy cloud is optional fallback.
+- **CJK LLM:** Ollama/Qwen3:14b on Pearl Star is now the default `QWEN_BASE_URL` target. DashScope is cloud fallback.
+- **CJK TTS:** CosyVoice2 on Pearl Star for zh/ja/ko. Edge-TTS is free fallback. ElevenLabs remains primary for EN.
+- **EN TTS:** ElevenLabs — NO CHANGE.
+
 ### 1a. Together AI — LLM (preferred)
 
 | Field | Value |
@@ -57,8 +75,8 @@ This reads the registry below and reports which env vars are set vs missing.
 | **Consumed by** | `pearl_news/pipeline/llm_expand.py`, `pearl_news/pipeline/slot_provider_qwen.py`, `scripts/research/run_research.py`, `scripts/localization/llm_client.py`, `scripts/localization/run_locale_batches.py`, `scripts/translate_atoms_all_locales_cloud.py` |
 | **GitHub workflows** | `research-pipeline-run.yml`, `pearl-news-fill-qwen.yml`, `translate-atoms-qwen-matrix.yml` |
 | **How to obtain** | DashScope console: https://dashscope.console.aliyun.com/ — create API key under Access Key Management |
-| **Required vs optional** | Required for Pearl News, translation, research pipelines |
-| **Status** | Wired in CI and local scripts |
+| **Required vs optional** | Optional cloud fallback — local Ollama on Pearl Star is now default LLM target |
+| **Status** | DEMOTED to fallback (2026-04-08). Wired in CI and local scripts. |
 | **Detailed docs** | [docs/AGENT_QWEN_API_KEY_LANE.md](./AGENT_QWEN_API_KEY_LANE.md) |
 
 ### 2. Anthropic — LLM

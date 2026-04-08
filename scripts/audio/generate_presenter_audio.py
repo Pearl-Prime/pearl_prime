@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Generate ElevenLabs TTS audio for all presenter narration scripts.
+"""Generate TTS audio for all presenter narration scripts.
 
-Reads presenter.html, extracts all narration text from SCRIPTS_* arrays,
-and generates MP3 files using ElevenLabs API.
+CJK decks (briefing_jp, briefing_kr, briefing_cn, briefing_tw) use CosyVoice2
+on Pearl Star as primary, Edge-TTS as fallback, ElevenLabs as final fallback.
+All other decks use ElevenLabs (unchanged).
 
 Usage:
     python3 scripts/audio/generate_presenter_audio.py [--dry-run] [--deck intro] [--voice Daniel]
@@ -43,6 +44,71 @@ DECK_VOICE = {
 MODEL_ID = "eleven_multilingual_v2"
 
 OUTPUT_DIR = Path("artifacts/audio/presenter")
+
+# CJK decks → CosyVoice2 primary, Edge-TTS fallback, ElevenLabs final fallback
+CJK_DECKS = {"briefing_jp", "briefing_kr", "briefing_cn", "briefing_tw"}
+
+EDGE_TTS_CJK_VOICES = {
+    "ja": "ja-JP-NanamiNeural",
+    "ko": "ko-KR-SunHiNeural",
+    "zh": "zh-CN-XiaoxiaoNeural",
+    "zh-cn": "zh-CN-XiaoxiaoNeural",
+    "zh-tw": "zh-TW-HsiaoChenNeural",
+    "zh-hk": "zh-HK-HiuGaaiNeural",
+}
+
+
+def generate_audio_cosyvoice(cosyvoice_url, text, language, output_path, dry_run=False):
+    """Generate TTS via CosyVoice2 server (POST /tts)."""
+    if dry_run:
+        print(f"    [DRY-RUN] CosyVoice2 → {output_path.name}")
+        return True
+    import urllib.request
+    payload = json.dumps({"text": text, "lang": language}).encode("utf-8")
+    req = urllib.request.Request(
+        f"{cosyvoice_url.rstrip('/')}/tts",
+        data=payload,
+        headers={"Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            audio_bytes = resp.read()
+        output_path.write_bytes(audio_bytes)
+        size = output_path.stat().st_size
+        if size < 500:
+            print(f"    ERROR: CosyVoice2 returned small file ({size} bytes)")
+            output_path.unlink(missing_ok=True)
+            return False
+        print(f"    OK (CosyVoice2) {output_path.name} ({size:,} bytes)")
+        return True
+    except Exception as e:
+        print(f"    ERROR: CosyVoice2 failed: {e}")
+        return False
+
+
+def generate_audio_edge_tts(text, voice, output_path, dry_run=False):
+    """Generate TTS via edge-tts CLI (free Microsoft service)."""
+    if dry_run:
+        print(f"    [DRY-RUN] Edge-TTS ({voice}) → {output_path.name}")
+        return True
+    try:
+        result = subprocess.run(
+            ["edge-tts", "--text", text, "--voice", voice, "--write-media", str(output_path)],
+            capture_output=True, text=True, timeout=60,
+        )
+        if result.returncode != 0:
+            print(f"    ERROR: edge-tts failed: {result.stderr[:200]}")
+            return False
+        if output_path.exists() and output_path.stat().st_size > 500:
+            print(f"    OK (Edge-TTS) {output_path.name} ({output_path.stat().st_size:,} bytes)")
+            return True
+        return False
+    except FileNotFoundError:
+        print("    ERROR: edge-tts not installed (pip install edge-tts)")
+        return False
+    except Exception as e:
+        print(f"    ERROR: edge-tts failed: {e}")
+        return False
 
 
 def get_api_key():
@@ -202,8 +268,11 @@ def main():
 
     api_key = get_api_key()
 
+    cosyvoice_url = os.environ.get("COSYVOICE_URL", "").strip()
     print("=" * 60)
-    print("ElevenLabs Presenter Audio Generator")
+    print("Presenter Audio Generator")
+    print(f"  CJK provider: {'CosyVoice2 at ' + cosyvoice_url if cosyvoice_url else 'Edge-TTS fallback'}")
+    print(f"  EN provider:  ElevenLabs")
     print("=" * 60)
 
     # Extract scripts
@@ -275,11 +344,29 @@ def main():
                 success += 1
                 continue
 
-            ok = generate_audio(api_key, voice_id, seg['text'], output_path, dry_run=args.dry_run)
+            is_cjk = deck_name in CJK_DECKS
+            ok = False
+
+            if is_cjk:
+                # CJK: CosyVoice2 → Edge-TTS → ElevenLabs
+                lang = seg['lang'].lower()
+                if cosyvoice_url:
+                    ok = generate_audio_cosyvoice(cosyvoice_url, seg['text'], lang,
+                                                  output_path, dry_run=args.dry_run)
+                if not ok:
+                    edge_voice = EDGE_TTS_CJK_VOICES.get(lang, EDGE_TTS_CJK_VOICES.get(lang.split('-')[0], "zh-CN-XiaoxiaoNeural"))
+                    ok = generate_audio_edge_tts(seg['text'], edge_voice,
+                                                output_path, dry_run=args.dry_run)
+                if not ok:
+                    ok = generate_audio(api_key, voice_id, seg['text'], output_path,
+                                       dry_run=args.dry_run)
+            else:
+                ok = generate_audio(api_key, voice_id, seg['text'], output_path,
+                                   dry_run=args.dry_run)
+
             if ok:
                 success += 1
 
-            # Rate limiting: ElevenLabs allows ~10 req/s on paid plans
             if not args.dry_run:
                 time.sleep(0.5)
 

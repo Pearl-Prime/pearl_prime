@@ -166,6 +166,15 @@ def _load_config(config_root: Path) -> dict[str, Any]:
         data["model"] = os.environ.get("QWEN_MODEL", "").strip()
     if os.environ.get("QWEN_BASE_URL") and data.get("enabled") is not True:
         data["enabled"] = True
+
+    # Auto-detect Ollama: adjust model name and api_key
+    base_url = data.get("base_url", "")
+    if ":11434" in base_url or os.environ.get("OLLAMA_HOST", ""):
+        if not data.get("api_key") or data["api_key"] == "lm-studio":
+            data["api_key"] = "ollama"
+        if data.get("model", "") == "qwen3-14b":
+            data["model"] = "qwen3:14b"  # Ollama colon format
+
     return data
 
 

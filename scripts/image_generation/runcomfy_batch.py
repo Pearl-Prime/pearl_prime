@@ -548,6 +548,88 @@ def run_batch(
     return results
 
 
+# ── ComfyUI local backend ──
+
+
+def _run_batch_comfyui(
+    manifest: list[dict[str, Any]],
+    *,
+    comfyui_url: str,
+    output_dir: Path,
+) -> list[dict[str, Any]]:
+    """Execute batch via local ComfyUI API (POST /prompt → poll → download)."""
+    import urllib.request
+
+    workflow_raw = _WORKFLOW_PATH.read_text(encoding="utf-8") if _WORKFLOW_PATH.exists() else "{}"
+    results: list[dict[str, Any]] = []
+    total = len(manifest)
+    url = comfyui_url.rstrip("/")
+
+    for i, entry in enumerate(manifest):
+        prefix = entry.get("filename_prefix", f"img_{i:04d}")
+        positive = entry.get("positive_prompt", "")
+        seed = entry.get("seed", 739204)
+        print(f"[{i+1}/{total}] {prefix} — ComfyUI ...", end=" ", flush=True)
+
+        workflow = json.loads(workflow_raw)
+        if "6" in workflow:
+            workflow["6"]["inputs"]["text"] = positive
+        if "25" in workflow:
+            workflow["25"]["inputs"]["noise_seed"] = seed
+        elif "3" in workflow:
+            workflow["3"]["inputs"]["seed"] = seed
+
+        try:
+            payload = json.dumps({"prompt": workflow}).encode("utf-8")
+            req = urllib.request.Request(f"{url}/prompt", data=payload,
+                                        headers={"Content-Type": "application/json"})
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                prompt_id = json.loads(resp.read())["prompt_id"]
+
+            # Poll
+            deadline = time.monotonic() + 300
+            image_bytes: bytes | None = None
+            while time.monotonic() < deadline:
+                time.sleep(3)
+                hreq = urllib.request.Request(f"{url}/history/{prompt_id}")
+                with urllib.request.urlopen(hreq, timeout=15) as hresp:
+                    history = json.loads(hresp.read())
+                if prompt_id in history:
+                    outputs = history[prompt_id].get("outputs", {})
+                    for node_out in outputs.values():
+                        images = node_out.get("images", [])
+                        if images:
+                            img = images[0]
+                            import urllib.parse
+                            params = urllib.parse.urlencode({
+                                "filename": img["filename"],
+                                "subfolder": img.get("subfolder", ""),
+                                "type": img.get("type", "output"),
+                            })
+                            with urllib.request.urlopen(f"{url}/view?{params}", timeout=60) as iresp:
+                                image_bytes = iresp.read()
+                            break
+                    if image_bytes:
+                        break
+
+            if not image_bytes:
+                print("TIMEOUT")
+                results.append({"filename_prefix": prefix, "status": "timeout"})
+                continue
+
+            output_dir.mkdir(parents=True, exist_ok=True)
+            dest = output_dir / f"{prefix}.png"
+            dest.write_bytes(image_bytes)
+            print(f"OK ({len(image_bytes):,} bytes)")
+            results.append({"filename_prefix": prefix, "status": "completed",
+                            "path": str(dest), "size_bytes": len(image_bytes)})
+        except Exception as exc:
+            print(f"FAILED: {exc}")
+            results.append({"filename_prefix": prefix, "status": "failed", "error": str(exc)[:200]})
+
+    return results
+
+
 # ── CLI ──
 
 def main() -> int:
@@ -559,6 +641,8 @@ def main() -> int:
     parser.add_argument("--intent", nargs="*", default=None, help="Filter to specific visual intents")
     parser.add_argument("--dry-run", action="store_true", help="Generate manifest without running")
     parser.add_argument("--manifest-only", action="store_true", help="Write manifest JSON and exit")
+    parser.add_argument("--backend", choices=["comfyui", "runcomfy"], default=None,
+                        help="Image backend (default: comfyui if COMFYUI_URL set, else runcomfy)")
 
     args = parser.parse_args()
 
@@ -584,16 +668,28 @@ def main() -> int:
         print(f"\n[DRY-RUN] {len(results)} jobs planned")
         return 0
 
-    if not args.api_key:
-        print("Error: --api-key or RUNCOMFY_API_KEY required", file=sys.stderr)
-        return 1
+    # Select backend: comfyui (local) or runcomfy (cloud)
+    backend = args.backend
+    if backend is None:
+        backend = "comfyui" if os.environ.get("COMFYUI_URL", "").strip() else "runcomfy"
+    print(f"Image backend: {backend}")
 
-    results = run_batch(
-        manifest,
-        api_key=args.api_key,
-        deployment_id=args.deployment_id,
-        output_dir=args.output,
-    )
+    if backend == "comfyui":
+        comfyui_url = os.environ.get("COMFYUI_URL", "").strip()
+        if not comfyui_url:
+            print("Error: COMFYUI_URL required for comfyui backend", file=sys.stderr)
+            return 1
+        results = _run_batch_comfyui(manifest, comfyui_url=comfyui_url, output_dir=args.output)
+    elif not args.api_key:
+        print("Error: --api-key or RUNCOMFY_API_KEY required for runcomfy backend", file=sys.stderr)
+        return 1
+    else:
+        results = run_batch(
+            manifest,
+            api_key=args.api_key,
+            deployment_id=args.deployment_id,
+            output_dir=args.output,
+        )
 
     # Summary
     completed = sum(1 for r in results if r["status"] == "completed")
