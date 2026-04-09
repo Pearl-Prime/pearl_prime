@@ -1,0 +1,774 @@
+# Podcast Format Specification
+# Authority: Pearl_Architect — podcast render format for arc-first pipeline
+# Parallels config/video/format_specs.yaml for video formats
+#
+# DESIGN DECISION: Podcast is a RENDER FORMAT of the compiled book.
+# Same atoms, same arcs, same deterministic assembly — different output.
+# One chapter = one episode. One book = one season.
+
+schema_version: 1
+
+# ─── FORMAT DEFINITIONS ──────────────────────────────────────────────────────
+
+formats:
+
+  podcast_episode:
+    id: podcast_episode
+    description: >
+      Standard podcast episode. One book chapter → one episode.
+      15-25 minutes. The primary podcast format.
+    duration_range_s: [900, 1500]        # 15-25 min
+    audio:
+      format: audio/mp3
+      sample_rate: 44100
+      bitrate_kbps: 128
+      channels: mono                     # speech-optimized; stereo for music beds
+      loudness_target_lufs: -16          # Spotify/YouTube standard
+      loudness_range_lu: 8              # dynamic range for natural speech
+      true_peak_dbtp: -1.0
+    platforms:
+      - spotify
+      - apple_podcasts
+      - youtube_podcasts
+      - amazon_music
+      - google_podcasts
+    therapeutic_mechanisms:
+      - chapter_arc_complete              # full emotional curve per episode
+      - guided_somatic_practice           # from EXERCISE atom
+      - narrative_immersion               # from STORY atom
+    notes: >
+      Primary format. Maps 1:1 with book chapters. Each episode is a
+      self-contained therapeutic unit with hook, teaching, practice, integration.
+
+  podcast_short:
+    id: podcast_short
+    description: >
+      Daily micro-episode. 2-5 minutes. One atom extracted and expanded.
+      For meditation/mindfulness brands or daily practice reminders.
+    duration_range_s: [120, 300]          # 2-5 min
+    audio:
+      format: audio/mp3
+      sample_rate: 44100
+      bitrate_kbps: 128
+      channels: mono
+      loudness_target_lufs: -16
+      loudness_range_lu: 5               # tighter range for short content
+      true_peak_dbtp: -1.0
+    platforms:
+      - spotify
+      - apple_podcasts
+    therapeutic_mechanisms:
+      - single_practice                   # one exercise or reflection
+      - micro_dose_therapeutic            # quick nervous system intervention
+    notes: >
+      Micro format for daily drops. Best for meditation brands (Sleep Repair,
+      Stabilizer). Can be extracted from EXERCISE or REFLECTION atoms.
+
+  podcast_sleep:
+    id: podcast_sleep
+    description: >
+      Sleep episode. 25-45 minutes. Designed using Calm Sleep Stories
+      "inverse engagement curve" — content deliberately becomes less
+      interesting over time so listeners fall asleep. For Sleep Repair,
+      Stabilizer, and other nighttime brands.
+    duration_range_s: [1500, 2700]        # 25-45 min
+    audio:
+      format: audio/mp3
+      sample_rate: 44100
+      bitrate_kbps: 128
+      channels: mono
+      loudness_target_lufs: -18           # quieter than standard (-16)
+      loudness_range_lu: 10              # wider range for gradual fade
+      true_peak_dbtp: -2.0               # extra headroom for quiet playback
+    platforms:
+      - spotify
+      - apple_podcasts
+      - youtube_podcasts
+      - amazon_music
+    therapeutic_mechanisms:
+      - continuous_parasympathetic         # matches lofi video format
+      - inverse_engagement_curve           # NEW — designed to lose listener to sleep
+      - progressive_deceleration           # pacing slows throughout
+    notes: >
+      Based on Calm Sleep Stories model. NOT a standard podcast episode —
+      the goal is for the listener to fall asleep before the episode ends.
+      Voice drops in pitch and volume over the episode. Pauses lengthen.
+      Narrative becomes circular and plotless in final third. Continuous
+      ambient soundscape (rain, waves, forest) masks environmental noise.
+      Best brands: Sleep Repair, Stabilizer, Inner Security.
+    pacing_curve:
+      phase_1_opening:
+        duration_pct: 10                  # first 10% of episode
+        voice_energy: moderate
+        voice_pitch: normal
+        pause_between_sentences_ms: 800
+        description: "Scene establishment. Where are we? Sensory grounding."
+      phase_2_narrative:
+        duration_pct: 40                  # 10-50% of episode
+        voice_energy: gentle
+        voice_pitch: slightly_lower
+        pause_between_sentences_ms: 1200
+        description: >
+          Slow narrative progression. Descriptive, sensory-rich.
+          Story has minimal plot — focus on textures, sounds, warmth.
+      phase_3_deceleration:
+        duration_pct: 30                  # 50-80% of episode
+        voice_energy: very_gentle
+        voice_pitch: lower
+        pause_between_sentences_ms: 2000
+        description: >
+          Deliberately less interesting. Descriptions become repetitive
+          and circular. Same imagery returns with slight variation.
+          "The waves continue... one after another... each one softer
+          than the last..."
+      phase_4_fade:
+        duration_pct: 20                  # final 20% of episode
+        voice_energy: whisper_adjacent
+        voice_pitch: lowest
+        pause_between_sentences_ms: 3500
+        description: >
+          Near-whisper. Long pauses. Phrases become fragments.
+          Music bed gradually overtakes voice in mix level.
+          Episode ends with 60s of ambient sound only (no voice).
+    music_rules:
+      ambient_bed: continuous              # never stops
+      ambient_type: nature_or_atmospheric  # rain, waves, crickets, fireplace
+      ambient_level_start_db: -20          # starts subtle
+      ambient_level_end_db: -8            # ends prominent (overtakes voice)
+      voice_level_start_db: 0             # reference level
+      voice_level_end_db: -12             # voice fades to near-inaudible
+      crossfade_voice_to_ambient: true    # gradual over final 20%
+
+  podcast_trailer:
+    id: podcast_trailer
+    description: >
+      Season trailer. 3-5 minutes. Introduces the series/book.
+      Generated from book intro + arc emotional preview.
+    duration_range_s: [180, 300]          # 3-5 min
+    audio:
+      format: audio/mp3
+      sample_rate: 44100
+      bitrate_kbps: 128
+      channels: mono
+      loudness_target_lufs: -16
+      loudness_range_lu: 6
+      true_peak_dbtp: -1.0
+    platforms:
+      - spotify
+      - apple_podcasts
+      - youtube_podcasts
+      - amazon_music
+    therapeutic_mechanisms:
+      - preview_arc_shape                 # emotional curve preview
+    notes: >
+      Generated from book introduction. Previews what the season covers,
+      establishes teacher voice, sets therapeutic expectation.
+
+# ─── EPISODE STRUCTURE (SEGMENT MAPPING) ────────────────────────────────────
+
+# How atoms map to podcast segments within a standard episode.
+# This is the podcast equivalent of the video layer_mode system.
+
+episode_structure:
+
+  podcast_episode:
+    segments:
+      - segment: cold_open
+        source_atom: HOOK
+        duration_range_s: [30, 60]
+        description: "Body-first opening. Drop listener into sensation/moment."
+        music: null                       # raw voice, no music
+        notes: "Adapted from HOOK atom. Truncated to 30-60s podcast hook."
+
+      - segment: theme_intro
+        source_atom: null                 # branded asset, not from atoms
+        duration_range_s: [15, 30]
+        description: "Branded intro music + series/episode title."
+        music: brand_intro                # from brand_podcast_identity
+        notes: "Per-brand intro music. Teacher name, series title, episode number."
+
+      - segment: scene_setting
+        source_atom: SCENE
+        duration_range_s: [60, 120]
+        description: "Sensory scene. Where are we? What's happening in the body?"
+        music: ambient_bed_low            # subtle ambient underneath
+        notes: "From SCENE atom. Sets the therapeutic context."
+
+      - segment: teaching
+        source_atom: REFLECTION
+        duration_range_s: [180, 300]
+        description: "Core teaching. The mechanism, pattern, or insight."
+        music: null
+        notes: "From REFLECTION atom. The intellectual/emotional core."
+
+      - segment: story
+        source_atom: STORY
+        duration_range_s: [180, 300]
+        description: "Illustrative narrative. Character-driven, emotionally resonant."
+        music: ambient_bed_low
+        notes: "From STORY atom. Demonstrates the teaching through narrative."
+
+      - segment: guided_practice
+        source_atom: EXERCISE
+        duration_range_s: [120, 240]
+        description: "Listener does it. Breathing, somatic, visualization."
+        music: practice_bed               # ambient music bed throughout
+        notes: >
+          From EXERCISE atom. Pacing slowed for real-time practice.
+          Music bed is brand-specific (see brand_podcast_identity).
+
+      - segment: integration
+        source_atom: INTEGRATION
+        duration_range_s: [60, 120]
+        description: "What to carry forward. Bridge to daily life."
+        music: null
+        notes: "From INTEGRATION atom. Landing the episode."
+
+      - segment: thread_forward
+        source_atom: THREAD
+        duration_range_s: [20, 30]
+        description: "Preview of next episode."
+        music: null
+        notes: "From THREAD atom. Optional — omit for final episode."
+
+      - segment: outro
+        source_atom: null                 # branded asset
+        duration_range_s: [20, 30]
+        description: "Subscribe CTA, companion workbook mention, credits."
+        music: brand_outro
+        notes: "Per-brand outro. CTA for workbook freebie, subscribe, review."
+
+    # Total: ~15-25 min (sum of segment ranges)
+    total_duration_range_s: [900, 1500]
+
+    # Optional segments (inserted when atom is present in chapter):
+    optional_segments:
+      - segment: pivot
+        source_atom: PIVOT
+        insert_after: teaching
+        duration_range_s: [30, 60]
+        description: "Perspective shift. 'But here's what most people miss...'"
+
+      - segment: permission
+        source_atom: PERMISSION
+        insert_after: story
+        duration_range_s: [30, 60]
+        description: "Permission grant. 'It's okay to not be okay about this.'"
+
+      - segment: takeaway
+        source_atom: TAKEAWAY
+        insert_before: integration
+        duration_range_s: [30, 60]
+        description: "Single-sentence crystallization of the episode."
+
+  podcast_sleep:
+    segments:
+      - segment: sleep_soundscape_open
+        source_atom: null                 # branded ambient asset
+        duration_range_s: [30, 60]
+        description: "Ambient soundscape establishes setting. No voice yet."
+        music: sleep_ambient_continuous   # rain, waves, forest — plays entire episode
+        notes: "Listener settles in. Sound alone for 30-60s."
+
+      - segment: sleep_intro
+        source_atom: null
+        duration_range_s: [30, 60]
+        description: "Whispered-soft greeting. Minimal — just the brand and invitation."
+        music: sleep_ambient_continuous
+        voice_energy: gentle
+        notes: "'Welcome to Sleep Repair. Tonight, we're going somewhere quiet...'"
+
+      - segment: sleep_scene
+        source_atom: SCENE
+        duration_range_s: [180, 300]
+        description: >
+          Sensory-rich scene. Where are we tonight? A cabin, a coast, a garden.
+          Moderate pace, rich descriptive detail, grounding in the senses.
+        music: sleep_ambient_continuous
+        voice_energy: moderate
+        pacing: "800ms between sentences"
+        notes: >
+          From SCENE atom. Adapted for sleep: remove urgency, expand sensory
+          detail. Focus on warmth, safety, enclosure. Phase 1 of pacing curve.
+
+      - segment: sleep_story
+        source_atom: STORY
+        duration_range_s: [480, 720]
+        description: >
+          Deliberately plotless narrative. The story meanders. Descriptions
+          repeat with slight variations. Character does very little — walks,
+          sits, watches, breathes. This is the longest segment.
+        music: sleep_ambient_continuous
+        voice_energy: gentle_to_very_gentle
+        pacing: "1200ms → 2000ms between sentences (gradual deceleration)"
+        notes: >
+          From STORY atom. HEAVILY adapted: strip all conflict, tension,
+          and plot progression. Keep only sensory description and calm action.
+          "She walked along the path... the stones were smooth and warm
+          from the afternoon sun... each step slow... unhurried..."
+
+      - segment: sleep_reflection
+        source_atom: REFLECTION
+        duration_range_s: [180, 300]
+        description: >
+          Soft, circular reflection. Same ideas return gently. No new
+          information — just warm restatement. Pacing decelerates further.
+        music: sleep_ambient_continuous
+        voice_energy: very_gentle
+        pacing: "2000ms → 3000ms between sentences"
+        notes: >
+          From REFLECTION atom. Adapted: remove intellectual content.
+          Keep only the comforting core insight, restated in different
+          gentle phrasings. Phase 3 deceleration.
+
+      - segment: sleep_fade
+        source_atom: null                 # generated — breathing cues + fragments
+        duration_range_s: [300, 600]
+        description: >
+          Near-whisper sentence fragments. Long pauses. Breathing cues.
+          Voice gradually yields to ambient sound. Final 60s is ambient only.
+        music: sleep_ambient_continuous
+        voice_energy: whisper_adjacent
+        pacing: "3500ms+ between phrases"
+        notes: >
+          No atom source — generated from breathing cue templates.
+          Voice level fades from 0dB to -12dB. Ambient rises from -20dB
+          to -8dB. Episode ends with 60s of pure ambient (no voice).
+          Listener should be asleep before this segment ends.
+
+    total_duration_range_s: [1500, 2700]  # 25-45 min
+    brand_affinity:
+      - sleep_repair_tw
+      - sleep_repair_hk
+      - sleep_repair_cn
+      - stabilizer_tw
+      - stabilizer_hk
+      - stabilizer_cn
+      - inner_security_tw
+      - inner_security_hk
+      - inner_security_cn
+      # Plus any en-US sleep-focused brand
+
+  podcast_short:
+    segments:
+      - segment: micro_intro
+        source_atom: null
+        duration_range_s: [5, 10]
+        description: "Quick branded ident."
+        music: brand_sting                # 5s brand sound
+
+      - segment: practice
+        source_atom: EXERCISE             # or REFLECTION for teaching shorts
+        duration_range_s: [90, 250]
+        description: "Single guided practice or micro-teaching."
+        music: practice_bed
+
+      - segment: micro_outro
+        source_atom: null
+        duration_range_s: [5, 10]
+        description: "Brief sign-off."
+        music: null
+
+  podcast_trailer:
+    segments:
+      - segment: teaser_hook
+        source_atom: HOOK
+        duration_range_s: [15, 30]
+        description: "Compressed hook from episode 1."
+        music: brand_intro
+
+      - segment: series_overview
+        source_atom: null                 # generated from book intro + arc summary
+        duration_range_s: [120, 180]
+        description: "What this season covers. Arc emotional preview."
+        music: ambient_bed_low
+
+      - segment: episode_previews
+        source_atom: null                 # generated from chapter intents
+        duration_range_s: [30, 60]
+        description: "Brief preview of 2-3 key episodes."
+        music: null
+
+      - segment: cta
+        source_atom: null
+        duration_range_s: [15, 30]
+        description: "Subscribe and follow."
+        music: brand_outro
+
+# ─── SERIES STRUCTURE ────────────────────────────────────────────────────────
+
+# How a book maps to a podcast series/season.
+
+series_structure:
+  mapping: "1 book = 1 podcast season"
+  episode_source: "1 chapter = 1 episode"
+
+  components:
+    - type: trailer
+      format: podcast_trailer
+      source: "book intro + arc emotional_curve preview"
+      position: before_episode_1
+
+    - type: episodes
+      format: podcast_episode
+      source: "chapters 1-N"
+      count: "matches book chapter count (6-20)"
+
+    - type: bonus_qa
+      format: podcast_episode
+      source: "generated from persona pain_points + topic FAQ"
+      position: after_final_episode
+      optional: true
+      notes: "Q&A episode using persona-derived questions. Optional."
+
+    - type: bonus_behind
+      format: podcast_episode
+      source: "teacher perspective on the arc"
+      position: after_bonus_qa
+      optional: true
+      notes: "Behind-the-teaching. Optional for premium series."
+
+  # Emotional curve mapping to podcast pacing:
+  arc_pacing:
+    opening_episodes:
+      band: low_to_mid
+      podcast_strategy: "Accessible entry. Establish voice and trust."
+    rising_episodes:
+      band: mid_to_high
+      podcast_strategy: "Deepen engagement. Cliff-hanger hooks between episodes."
+    peak_episodes:
+      band: high
+      podcast_strategy: "Emotional peak. THREAD atom creates 'must listen next' urgency."
+    resolution_episodes:
+      band: high_to_low
+      podcast_strategy: "Landing. Integration. Forward projection to next season."
+
+# ─── MUSIC + SOUND DESIGN ───────────────────────────────────────────────────
+#
+# INTEGRATION: Podcasts wire into the EXISTING therapeutic music bank system.
+# Authority configs:
+#   config/music/exercise_music_mapping.yaml  — exercise type → music group
+#   config/music/brand_music_dna.yaml         — 24 brand FFmpeg transforms
+#   config/music/therapeutic_music_prompts.yaml — topic × temperature prompts
+#   config/video/music_policy.yaml            — arc → mood, SFX intensity
+#   scripts/music/select_and_edit.py          — track selection + anti-spam
+#   scripts/music/apply_brand_dna_batch.py    — brand-specific transforms
+#
+# The music bank already has:
+#   400+ base tracks (30s seamless loops) × 24 brand DNA transforms
+#   = ~9,600 unique rendered files on Cloudflare R2
+#   Organized by: music_group / topic / temperature / brand_id
+#
+# Podcasts consume this bank. NO SEPARATE music generation needed.
+
+audio_assets:
+
+  # ── EXISTING BANK ASSETS (reused from music bank) ─────────────────────────
+
+  music_bank_integration:
+    source: "assets/music_bank/ (local) or r2://music.phoenix-omega.com (CDN)"
+    selection_script: "scripts/music/select_and_edit.py"
+    brand_transform_script: "scripts/music/apply_brand_dna_batch.py"
+    index: "assets/music_bank/index.yaml"
+    r2_path_template: "exercises/{music_group}/{topic}/{temperature}/{brand_id}/track.mp3"
+
+    # Podcast segment → music_group mapping (from exercise_music_mapping.yaml):
+    segment_to_music_group:
+      scene_setting: grounding            # earthy, steady, anchoring (58-78 BPM)
+      teaching: null                      # NO music during teaching (clarity)
+      story: contemplative                # spacious ambient wash (40-80 BPM)
+      guided_practice: breath             # breath-synced swells (6/min cycle)
+      integration: grounding              # gentle forward motion (integration_bridges override)
+      sleep_scene: stillness              # pure drone, no rhythm (80-300 Hz)
+      sleep_story: stillness              # ultra-smooth continuous drone
+      sleep_reflection: stillness         # fading drone
+      sleep_fade: stillness               # drone yields to nature ambient
+
+    # Podcast uses the SAME mixing rules as exercise audio:
+    mixing_source: "config/music/exercise_music_mapping.yaml → mixing section"
+    mixing_rules:
+      music_volume_db: -18                # music sits well below voice
+      voice_volume_db: 0                  # reference level
+      ducking:
+        enabled: true
+        attack_ms: 200                    # fade music down when voice starts
+        release_ms: 800                   # fade music back up on pause
+        duck_amount_db: -6                # additional reduction during speech
+      fade_in_ms: 3000                    # music fades in at segment start
+      fade_out_ms: 5000                   # music fades out at segment end
+
+    # Topic modifiers apply automatically:
+    # anxiety episode → stillness group gets "theta 4-7 Hz, E minor"
+    # grief episode → contemplative group gets "per temperature profile"
+    # etc. — all from exercise_music_mapping.yaml topic_modifiers
+
+  # ── NEW ASSETS (podcast-specific, not in music bank) ──────────────────────
+
+  podcast_specific_assets:
+    notes: >
+      These are the ONLY new audio assets needed for podcasts.
+      Everything else comes from the existing music bank.
+
+    brand_intro:
+      description: "Per-brand podcast intro music (15s)"
+      duration_s: 15
+      format: wav
+      generation: "Extract + edit from brand DNA base track (scripts/music/select_and_edit.py)"
+      notes: >
+        NOT a new generation — select a base track for the brand, apply
+        brand_music_dna.yaml transforms, trim to 15s with fade-in/fade-out.
+        Same track used for all episodes of that brand = consistent identity.
+        FFmpeg: select → brand_dna_transform → trim 15s → fade_in 1s → fade_out 2s
+
+    brand_outro:
+      description: "Per-brand podcast outro music (15s)"
+      duration_s: 15
+      format: wav
+      generation: "Same base as brand_intro, different 15s section, slower fade"
+      notes: "Select different offset from same base track. Longer fade-out (3s)."
+
+    brand_sting:
+      description: "Short brand identifier for micro-episodes (5s)"
+      duration_s: 5
+      format: wav
+      generation: "Extract 5s peak from brand_intro track"
+      notes: "The recognizable sonic moment from the intro, compressed to 5s."
+
+    transition:
+      description: "Brief transition sound between segments (2s)"
+      duration_s: 2
+      format: wav
+      generation: "Select from SFX bank: resonant_tone category"
+      source: "config/video/sfx_bank_index.yaml → release.resonant_tone"
+      notes: >
+        Reuse SFX bank resonant_tone (singing bowl, chime) from video pipeline.
+        Apply brand DNA transform for sonic consistency.
+        Optional — some brands use silence transitions instead.
+
+    sleep_ambient_continuous:
+      description: >
+        Continuous nature soundscape for sleep episodes. 5-min seamless loop.
+        Plays entire episode. NOT from music bank — nature recordings only.
+      duration_s: 300                     # 5 min loop
+      format: wav
+      generation: "Download from FreePD nature library (scripts/music/download_music_bank.py)"
+      source: "assets/music_bank/nature/ (already exists in bank)"
+      loudness_rules:
+        start_db: -20
+        end_db: -8
+        crossfade_to_dominant: true
+      variants:
+        - rain_on_roof
+        - ocean_waves
+        - forest_night
+        - fireplace
+        - river_stream
+        - snow_silence
+      notes: >
+        Nature sounds from existing assets/music_bank/nature/ directory.
+        Apply crossfade looping via scripts/music/select_and_edit.py
+        (already supports loop_crossfade_ms parameter).
+        NO brand DNA transform — nature sounds are brand-neutral.
+        Brand differentiation comes from variant selection, not processing.
+
+  # ── FFMPEG ASSEMBLY CHAIN ─────────────────────────────────────────────────
+
+  podcast_audio_assembly:
+    description: >
+      How podcast audio gets assembled. Reuses existing FFmpeg filter chains
+      from brand_music_dna.yaml and exercise_music_mapping.yaml mixing rules.
+
+    step_1_tts:
+      description: "Generate narration per segment via ElevenLabs"
+      script: "scripts/audio/generate_presenter_audio.py (adapt for podcast)"
+      output: "per-segment WAV files"
+
+    step_2_music_select:
+      description: "Select music tracks per segment from bank"
+      script: "scripts/music/select_and_edit.py"
+      inputs:
+        - music_group (from segment_to_music_group mapping above)
+        - topic (from BookSpec)
+        - temperature (from arc emotional_curve band)
+        - brand_id (from BrandConfig)
+      output: "per-segment music WAV, brand-DNA-transformed, looped to segment duration"
+
+    step_3_mix:
+      description: "Mix voice + music per segment with ducking"
+      tool: ffmpeg
+      filter_chain: >
+        ffmpeg -i voice.wav -i music.wav
+        -filter_complex
+        "[1:a]volume={music_volume_db}dB[music];
+         [0:a]asplit[voice][sc];
+         [sc]aformat=channel_layouts=mono,
+         compand=attacks=0.2:decays=0.8:
+         points=-80/-80|-6/-6|0/0:soft-knee=6[sidechain];
+         [music][sidechain]sidechaincompress=
+         threshold=0.02:ratio=6:attack={ducking_attack_ms}:
+         release={ducking_release_ms}[ducked_music];
+         [voice][ducked_music]amix=inputs=2:weights=1 0.5"
+        -af "loudnorm=I={loudness_lufs}:TP={true_peak}:LRA={loudness_range}"
+        -codec:a libmp3lame -b:a 128k output.mp3
+      notes: >
+        Sidechain compression for ducking reuses the exact approach
+        from the video pipeline (config/video/music_policy.yaml).
+
+    step_4_concat:
+      description: "Concatenate all segments into final episode MP3"
+      tool: ffmpeg
+      filter: "concat=n={segment_count}:v=0:a=1"
+      post_process:
+        - "loudnorm to -16 LUFS (Spotify target)"
+        - "ID3 tag injection (title, artist, album, track, genre, artwork)"
+
+    step_5_validate:
+      description: "Validate output"
+      checks:
+        - "Duration within format range"
+        - "Loudness within ±1 LU of target"
+        - "No silence gaps > 3s (except guided_practice pauses)"
+        - "ID3 tags complete"
+
+  # ── WHAT'S TRULY NEW vs REUSED ────────────────────────────────────────────
+
+  reuse_summary:
+    fully_reused:
+      - "Music bank base tracks (400+ × 24 brands on R2)"
+      - "Brand DNA FFmpeg transforms (config/music/brand_music_dna.yaml)"
+      - "Music selection logic (scripts/music/select_and_edit.py)"
+      - "Exercise→music group mapping (config/music/exercise_music_mapping.yaml)"
+      - "Topic modifiers (key, BPM, frequency for all 15 topics)"
+      - "Mixing rules (ducking, volume, fade)"
+      - "SFX bank for transitions (config/video/sfx_bank_index.yaml)"
+      - "Nature sounds (assets/music_bank/nature/)"
+      - "ElevenLabs TTS infrastructure"
+      - "Cloudflare R2 CDN delivery"
+
+    new_required:
+      - "Brand intro/outro/sting extraction (15s/15s/5s from existing tracks)"
+      - "Podcast segment → music_group mapping (this config)"
+      - "Episode assembly script (scripts/podcast/assemble_podcast_episode.py)"
+      - "RSS feed generation (scripts/podcast/generate_podcast_feed.py)"
+      - "Loudness normalization pass to -16 LUFS"
+      - "ID3 tag injection"
+
+    not_needed:
+      - "Suno/Udio generation — music bank already has all needed tracks"
+      - "New music production — brand DNA transforms give uniqueness"
+      - "Separate ambient library — nature/ directory already exists"
+      - "Per-locale music — same tracks, different voice only"
+
+# ─── TOPIC MODIFIER WIRING (auto-applied per episode) ───────────────────────
+#
+# These modifiers come from config/music/exercise_music_mapping.yaml topic_modifiers.
+# They are NOT duplicated here — this section documents what happens automatically
+# when the podcast assembly script calls select_and_edit.py with a topic parameter.
+#
+# Example: An anxiety episode about social_anxiety uses:
+#   - scene_setting (grounding group) → A minor pentatonic, BPM -2
+#   - story (contemplative group) → per temperature profile
+#   - guided_practice (breath group) → E minor → F Lydian, 6 breaths/min swell
+#   - sleep variants (stillness group) → theta 5-7 Hz, C# minor
+#
+# The topic determines the KEY, BPM OFFSET, FREQUENCY EMPHASIS, and WARMTH
+# for every music-backed segment. This is deterministic — same topic + same
+# brand DNA = same sonic signature every time.
+
+topic_modifier_reference:
+  # Copied here READ-ONLY for podcast design reference.
+  # Authority: config/music/exercise_music_mapping.yaml (single source of truth)
+  anxiety:          { key: "E minor",              freq: "theta 4-7 Hz",      breath_rate: 6 }
+  grief:            { key: "Eb minor",             freq: "delta-theta 2-5 Hz", breath_rate: 5 }
+  burnout:          { key: "D minor pentatonic",   freq: "delta-theta 2-6 Hz", breath_rate: 5 }
+  depression:       { key: "Eb minor",             freq: "delta 1-4 Hz",       breath_rate: 5 }
+  sleep_anxiety:    { key: "F# minor",             freq: "theta 5-7 Hz",       breath_rate: 4 }
+  social_anxiety:   { key: "C# minor",             freq: "theta 5-7 Hz",       breath_rate: 6 }
+  boundaries:       { key: "B minor",              freq: "theta 5-7 Hz",       breath_rate: 6 }
+  self_worth:       { key: "C minor",              freq: "theta 4-7 Hz",       breath_rate: 6 }
+  compassion_fatigue: { key: "C minor",            freq: "delta-theta 3-6 Hz", breath_rate: 5 }
+  overthinking:     { key: "whole tone → C penta", freq: "theta 5-7 Hz",       breath_rate: 5 }
+  imposter_syndrome: { key: "B minor",             freq: "theta 5-7 Hz",       breath_rate: 6 }
+  financial_stress: { key: "C# minor",             freq: "theta 4-7 Hz",       breath_rate: 6 }
+  financial_anxiety: { key: "F# minor",            freq: "theta 5-7 Hz",       breath_rate: 6 }
+  courage:          { key: "E minor",              freq: "theta 5-7 Hz",       breath_rate: 7 }
+  somatic_healing:  { key: "A pentatonic minor",   freq: "delta-theta 3-6 Hz", breath_rate: 5 }
+
+  # How it flows at runtime:
+  # 1. Episode has topic=anxiety, brand=stillness_press
+  # 2. Segment scene_setting needs music_group=grounding
+  # 3. select_and_edit.py looks up: grounding + anxiety → bpm_offset: -2, key: "A minor pentatonic"
+  # 4. select_and_edit.py picks base track from R2: grounding/anxiety/{temperature}/base.mp3
+  # 5. apply_brand_dna applies ch_001 (stillness_press) FFmpeg transform
+  # 6. Result: grounded A minor pentatonic track, -2 BPM, warm EQ, Ghibli-esque
+  # 7. Same process for story (contemplative), guided_practice (breath), etc.
+  # 8. All deterministic. Same inputs = same output. Every time.
+
+# ─── VOICE CONFIGURATION ─────────────────────────────────────────────────────
+
+voice_strategy:
+  default_mode: solo_narrator
+  modes:
+    solo_narrator:
+      voices: 1
+      description: "Single narrator voice. Maps to brand voice from TTS config."
+      notes: >
+        Primary mode. Uses brand-assigned voice from brand_narrator_voice_map
+        (when it exists) or default ElevenLabs voice per locale.
+
+    host_plus_teacher:
+      voices: 2
+      description: "Narrator introduces, teacher voice teaches."
+      notes: >
+        Future mode. Requires 2 distinct voice IDs per brand per locale.
+        Not implemented in v1 — design only.
+
+  tts_priority:
+    - elevenlabs                          # primary for all locales
+    - cosyvoice2                          # Chinese locales — evaluate quality
+    - google_neural2                      # fallback
+
+  quality_requirements:
+    min_mos: 4.0                          # Mean Opinion Score (1-5 scale)
+    max_wer: 0.05                         # Word Error Rate < 5%
+    notes: >
+      Podcast TTS quality bar is HIGHER than audiobook because:
+      1. Podcasts compete with human-hosted shows
+      2. Intimate tone requires natural prosody
+      3. Guided practice segments need calming cadence
+      ElevenLabs eleven_multilingual_v2 meets this bar.
+      CosyVoice2 to be evaluated for zh-CN/zh-TW.
+
+# ─── TECHNICAL SPECS ─────────────────────────────────────────────────────────
+
+technical:
+  output_format: mp3
+  sample_rate: 44100
+  bitrate_kbps: 128                       # industry standard for speech
+  channels: mono                          # stereo only if music bed present
+  loudness:
+    spotify: -16                          # LUFS — Spotify target
+    apple: -16                            # Apple now aligns with Spotify
+    youtube: -14                          # YouTube slightly louder
+    target: -16                           # our default
+  silence_detection:
+    max_silence_ms: 3000                  # trim silences > 3s
+    practice_pause_max_ms: 10000          # allow 10s pauses in guided practice
+  id3_tags:
+    required: [title, artist, album, track_number, genre, year, artwork]
+    genre: "Health & Fitness"             # or "Self-Help" per platform
+    notes: "ID3 tags auto-populated from BookSpec + BrandConfig"
+
+  rss_feed:
+    spec: RSS 2.0 + iTunes podcast extensions
+    required_tags:
+      - itunes:author
+      - itunes:summary
+      - itunes:image
+      - itunes:category                   # Health & Fitness > Mental Health
+      - itunes:explicit                   # false for all Phoenix content
+      - itunes:language
+    enclosure_type: audio/mpeg
+    notes: >
+      RSS feed generated per series per brand per locale.
+      Not applicable for zh-CN (Ximalaya direct upload).

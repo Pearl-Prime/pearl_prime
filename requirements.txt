@@ -11,3 +11,8 @@ jsonschema>=4.0
 
 # Tests
 pytest>=7.0
+
+# Podcast pipeline (R2, Edge-TTS fallback, ID3)
+boto3>=1.28
+mutagen>=1.47
+edge-tts>=6.1

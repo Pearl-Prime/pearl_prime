@@ -9,6 +9,10 @@ Endpoints:
   GET  /api/v1/admin/catalog — list all titles for this brand
   GET  /api/v1/admin/weekly — list weekly packages
   GET  /api/v1/admin/weekly/{week}/{platform} — download platform ZIP
+  GET  /api/v1/admin/podcast — list podcast episodes
+  GET  /api/v1/admin/podcast/feed/{series_id} — RSS XML
+  GET  /api/v1/admin/podcast/download/{week} — podcast ZIP
+  GET  /api/v1/admin/podcast/platforms — platform hints
   GET  /api/v1/admin/performance — latest performance report
 """
 from __future__ import annotations
@@ -18,7 +22,7 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from fastapi import APIRouter, Cookie, HTTPException, Response
+from fastapi import APIRouter, Cookie, HTTPException, Query, Response
 from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
@@ -240,6 +244,99 @@ async def download_platform_package(week: str, platform: str, brand_session: str
         media_type="application/zip",
         headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )
+
+
+# ── Podcast ───────────────────────────────────────────────────────
+
+@router.get("/podcast")
+async def list_podcast_episodes(
+    brand_session: str = Cookie(default=""),
+    locale: str | None = Query(None),
+    week: str | None = Query(None),
+    fmt: str | None = Query(None, alias="format"),
+):
+    brand_id = _get_brand_from_session(brand_session)
+    base = REPO_ROOT / "artifacts" / "weekly_packages" / brand_id
+    if not base.exists():
+        return {"episodes": [], "total_count": 0, "total_duration_s": 0.0}
+
+    episodes: list[dict] = []
+    total_dur = 0.0
+    for meta in sorted(base.rglob("podcast/*.meta.json"), reverse=True):
+        try:
+            row = json.loads(meta.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            continue
+        wk = meta.parent.parent.name
+        if week and wk != week:
+            continue
+        if locale and row.get("locale") != locale:
+            continue
+        if fmt and row.get("format") != fmt:
+            continue
+        row["week"] = wk
+        episodes.append(row)
+        total_dur += float(row.get("duration_s") or 0)
+
+    return {"episodes": episodes, "total_count": len(episodes), "total_duration_s": total_dur}
+
+
+@router.get("/podcast/feed/{series_id}")
+async def get_podcast_feed(series_id: str, brand_session: str = Cookie(default="")):
+    brand_id = _get_brand_from_session(brand_session)
+    root = REPO_ROOT / "artifacts" / "weekly_packages" / brand_id
+    candidates = [p for p in root.rglob("podcast/feed.xml") if p.is_file()]
+    picks = [p for p in candidates if series_id in str(p)]
+    pool = picks or candidates
+    if not pool:
+        raise HTTPException(status_code=404, detail="No feed.xml found for this brand")
+    latest = max(pool, key=lambda p: p.stat().st_mtime)
+    xml = latest.read_text(encoding="utf-8")
+    return Response(content=xml, media_type="application/rss+xml")
+
+
+@router.get("/podcast/download/{week}")
+async def download_podcast_week(week: str, brand_session: str = Cookie(default="")):
+    brand_id = _get_brand_from_session(brand_session)
+    pod = REPO_ROOT / "artifacts" / "weekly_packages" / brand_id / week / "podcast"
+    if not pod.is_dir():
+        raise HTTPException(status_code=404, detail=f"No podcast output for week {week}")
+
+    import io
+    import zipfile
+
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        for p in pod.rglob("*"):
+            if p.is_file():
+                zf.write(p, p.relative_to(pod))
+    buf.seek(0)
+    return Response(
+        content=buf.getvalue(),
+        media_type="application/zip",
+        headers={"Content-Disposition": f'attachment; filename="{brand_id}_{week}_podcast.zip"'},
+    )
+
+
+@router.get("/podcast/platforms")
+async def podcast_platform_status(brand_session: str = Cookie(default="")):
+    brand_id = _get_brand_from_session(brand_session)
+    dist = _load_yaml(REPO_ROOT / "config" / "brand_management" / "platform_credential_fields.yaml")
+    podcast_platforms = dist.get("podcast_platforms") or {}
+    platforms: list[dict] = []
+    for name, block in podcast_platforms.items():
+        if not isinstance(block, dict):
+            continue
+        platforms.append(
+            {
+                "name": name,
+                "status": "not_connected",
+                "rss_url": None,
+                "submission_guide": block.get("note")
+                or "Submit self-hosted RSS URL from R2; see platform_distribution.yaml.",
+            }
+        )
+    return {"brand_id": brand_id, "platforms": platforms}
 
 
 # ── Performance ───────────────────────────────────────────────────

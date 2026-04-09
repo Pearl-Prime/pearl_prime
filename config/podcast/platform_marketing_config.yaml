@@ -1,0 +1,172 @@
+# Derived from brand_podcast_plans markets + public platform docs (see docs/PODCAST_PLATFORM_MARKETING_RESEARCH.md).
+schema_version: 1
+platforms:
+  spotify:
+    categories:
+      primary: Health & Fitness
+      secondary: Mental Health
+    description_max_chars: 4000
+    tags_enabled: false
+    chart_factors:
+    - completions
+    - follows
+    - consistency
+    docs: https://creators.spotify.com/resources/create/dos-donts-showart
+  apple:
+    categories:
+      primary: Health & Fitness
+      subcategory: Mental Health
+    description_max_chars: 4000
+    ratings_reviews: true
+    chart_factors:
+    - new_follows
+    - completions
+    - ratings
+    docs: https://podcasters.apple.com/support/5516-episode-art-template
+  youtube:
+    categories:
+    - Education
+    - People & Blogs
+    tags_enabled: true
+    chapter_markers: true
+    shorts_clips: true
+  ximalaya:
+    categories:
+    - 个人成长
+    - 情感生活
+    - 人文
+    pricing_tiers:
+    - free
+    - 9.9_cny
+    - 99_cny
+    - 199_cny
+    paid_model: knowledge_fee
+    tipping_enabled: true
+    note: 'Mainland compliance: disclose synthetic voices where required by platform/regulator.'
+locale_keywords:
+  es-US:
+    primary:
+    - es latam
+    - Bienestar y desarrollo personal. Not clinical — growth and healing journey.
+      "Cre
+    long_tail:
+    - podcast es_latam
+    - bienestar
+  pt-BR:
+    primary:
+    - pt br
+    - Saude mental, autoconhecimento, bem-estar, inteligencia emocional. Warm storytel
+    long_tail:
+    - podcast pt_br
+    - wellness
+  en-US:
+    primary:
+    - en us
+    - Normalized therapy culture. Science-backed, conversational, warm. Aspirational
+      s
+    long_tail:
+    - podcast en_us
+    - wellness
+  ko-KR:
+    primary:
+    - ko kr
+    - 힐링 (healing) framing. Warm, narrative-driven, personal storytelling. Burnout,
+      pe
+    long_tail:
+    - podcast ko_kr
+    - wellness
+  ja-JP:
+    primary:
+    - ja jp
+    - Frame as 自律神経 (autonomic nervous system) regulation, リラクゼーション, NOT メンタルヘルス.
+      Indi
+    long_tail:
+    - podcast ja_jp
+    - wellness
+  id-ID:
+    primary:
+    - id id
+    - Kesehatan mental, self-improvement. Inclusive, narrative-driven. Stigma reductio
+    long_tail:
+    - podcast id_id
+    - wellness
+  de-DE:
+    primary:
+    - de de
+    - Evidence-based, science-grounded. Stressbewältigung, Burnout, Achtsamkeit. Secul
+    long_tail:
+    - podcast de_de
+    - wellness
+  es-ES:
+    primary:
+    - es es
+    - Bienestar, desarrollo personal. Castilian Spanish distinct from LATAM. Video
+      pod
+    long_tail:
+    - podcast es_es
+    - bienestar
+  fr-FR:
+    primary:
+    - fr fr
+    - Développement personnel. Intellectual, philosophical framing accepted. Stoic/exi
+    long_tail:
+    - podcast fr_fr
+    - wellness
+  zh-CN:
+    primary:
+    - zh cn
+    - 个人成长 (personal growth), 情绪管理 (emotional management). 身心灵 (mind-body-spirit)
+      fram
+    long_tail:
+    - podcast zh_cn
+    - wellness
+  zh-TW:
+    primary:
+    - zh tw
+    - 身心靈 framing, influenced by Japanese self-care culture. Conversational, casual
+      to
+    long_tail:
+    - podcast zh_tw
+    - wellness
+  hu-HU:
+    primary:
+    - hu hu
+    - Wellness and self-development framing. NOT clinical mental health. Higher stigma
+    long_tail:
+    - podcast hu_hu
+    - wellness
+  zh-HK:
+    primary:
+    - zh hk
+    - Bilingual wellness. Mixes Western therapy + Chinese traditions. Cantonese-domina
+    long_tail:
+    - podcast zh_hk
+    - wellness
+title_formulas:
+  en-US: '{series_name} | {brand_name}'
+  ja-JP: '{series_name}【{brand_name}】'
+  ko-KR: '{series_name} | {brand_name}'
+  zh-CN: 「{series_name}」— {brand_name}
+  zh-TW: 《{series_name}》| {brand_name}
+  es-US: '{series_name} | {brand_name}'
+launch_playbook:
+  pre_launch:
+    weeks_before: 2
+    actions:
+    - submit_to_platforms
+    - publish_trailer
+    - seed_social_clips
+    trailer_duration_s:
+    - 180
+    - 300
+  launch_week:
+    episodes_to_drop: 3
+    timing:
+      en-US: Tuesday 5:00 AM EST
+      ja-JP: Monday 6:00 AM JST
+      ko-KR: Monday 7:00 AM KST
+  growth:
+    clips_per_episode:
+    - 3
+    - 5
+    cross_promo_after_week: 4

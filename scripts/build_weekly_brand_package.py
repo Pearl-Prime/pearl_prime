@@ -170,12 +170,72 @@ def build_package(
         else:
             result["books_failed"] += 1
 
+    manifest_rows = list(built_books)
+    if not dry_run and built_books:
+        try:
+            from scripts.podcast._lib import brand_has_podcast, podcast_locale_for_brand
+
+            if brand_has_podcast(brand_id):
+                book0 = Path(built_books[0]["path"])
+                ploc = podcast_locale_for_brand(brand_id, locale)
+                prc = subprocess.run(
+                    [
+                        sys.executable,
+                        str(REPO_ROOT / "scripts/podcast/run_podcast_pipeline.py"),
+                        "--brand-id",
+                        brand_id,
+                        "--locale",
+                        ploc,
+                        "--week",
+                        week,
+                        "--book-dir",
+                        str(book0),
+                        "--output-dir",
+                        str(pkg_dir),
+                        "--formats",
+                        "podcast_episode,podcast_short",
+                        "--skip-upload",
+                    ],
+                    cwd=str(REPO_ROOT),
+                    capture_output=True,
+                    text=True,
+                    timeout=7200,
+                )
+                result["podcast_pipeline_rc"] = prc.returncode
+                if prc.returncode != 0 and prc.stderr:
+                    result["podcast_pipeline_stderr"] = prc.stderr[-2000:]
+                pd = pkg_dir / "podcast"
+                if pd.is_dir():
+                    for mp3 in sorted(pd.glob("*.mp3")):
+                        manifest_rows.append(
+                            {
+                                "title": mp3.stem,
+                                "teacher": "",
+                                "words": "",
+                                "platform": "podcast",
+                                "path": str(mp3),
+                            }
+                        )
+                    feed = pd / "feed.xml"
+                    if feed.is_file():
+                        manifest_rows.append(
+                            {
+                                "title": "podcast_feed",
+                                "teacher": "",
+                                "words": "",
+                                "platform": "podcast",
+                                "path": str(feed),
+                            }
+                        )
+        except Exception as e:
+            result["podcast_error"] = str(e)
+
     # Write manifest CSV
     csv_path = pkg_dir / "upload_manifest.csv"
     with open(csv_path, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=["title", "teacher", "words", "platform", "path"])
         writer.writeheader()
-        for b in built_books:
+        for b in manifest_rows:
             writer.writerow(b)
 
     # Write README
@@ -187,6 +247,7 @@ def build_package(
         f"Books: {result['books_built']} built, {result['books_failed']} failed\n\n"
         f"Upload each book from the books/ directory to the appropriate platform.\n"
         f"See upload_manifest.csv for the full list with metadata.\n"
+        f"\nPodcast: if enabled for this brand, rendered audio is under podcast/ (MP3 + feed.xml).\n"
     )
 
     result["manifest_path"] = str(csv_path)

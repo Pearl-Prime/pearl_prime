@@ -15,6 +15,29 @@ weekly_mix:
   viable_standalones: 3       # testing new territory
   format_variations: 2        # same topic, different format (e.g., pocket guide of a standard book)
 
+# ── Podcast Weekly Output (additive — not counted in 15 titles) ────
+podcast_weekly:
+  podcast_episodes: 1
+  podcast_micro_episodes: 5
+  podcast_sleep_episodes: 1
+  notes: >
+    Podcast production is a post-compile render step. It consumes the same
+    compiled book that produces ebooks and video. Episodes do not count toward
+    the 15 titles/week cap. Pipeline: books → podcast render → RSS update.
+  cadence_source: "config/duration/serialization_cadence.yaml"
+  format_source: "config/podcast/podcast_format.yaml"
+  distribution_source: "config/podcast/platform_distribution.yaml"
+  sleep_brand_affinity:
+    - sleep_repair_tw
+    - sleep_repair_hk
+    - sleep_repair_cn
+    - stabilizer_tw
+    - stabilizer_hk
+    - stabilizer_cn
+    - inner_security_tw
+    - inner_security_hk
+    - inner_security_cn
+
 # ── Lane-Specific Weekly Mix Overrides ─────────────────────────────
 # Per global_manga_distribution_strategy.md:
 # ALL lanes include manga content. Manga sells on Amazon KDP as graphic novels.

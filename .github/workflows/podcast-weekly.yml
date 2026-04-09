@@ -1,0 +1,50 @@
+name: Podcast weekly production
+
+on:
+  schedule:
+    - cron: '0 10 * * 1'
+  workflow_dispatch:
+
+jobs:
+  produce-podcasts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Run podcast pipeline (smoke / pilot path)
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          COSYVOICE_URL: ${{ secrets.COSYVOICE_URL }}
+          PODCAST_PUBLIC_BASE_URL: ${{ vars.PODCAST_PUBLIC_BASE_URL }}
+        run: |
+          WEEK=$(date +%G-W%V)
+          OUT="artifacts/weekly_packages/stillness_press/${WEEK}"
+          python scripts/podcast/run_podcast_pipeline.py \
+            --brand-id stillness_press \
+            --locale es-US \
+            --week "${WEEK}" \
+            --book-dir artifacts/pipeline_examples/ahjan \
+            --output-dir "${OUT}" \
+            --formats podcast_episode,podcast_short \
+            --skip-upload
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: podcast-${{ github.run_id }}
+          path: artifacts/weekly_packages/*/podcast/
