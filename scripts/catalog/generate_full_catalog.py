@@ -3,7 +3,9 @@
 Phoenix Omega Full Catalog Generator
 =====================================
 Reads brand registry, archetype registry, format registry, and research data
-to produce ~800 high-confidence catalog entries with market-optimized metadata.
+to produce catalog entries on the 12×37 planning grid (12 lanes × 37 brands per
+`config/catalog_planning/teacher_brand_lane_assignments.yaml`), using registry rows
+when present and planning-driven fallbacks when a locale row is still pending.
 
 Usage:
     python scripts/catalog/generate_full_catalog.py --all-lanes --output artifacts/catalog/full_catalog.csv
@@ -96,6 +98,351 @@ def load_teacher_profiles() -> dict:
 def load_description_templates() -> dict:
     path = _CONFIG_ROOT / "config/catalog_planning/description_templates.yaml"
     return _load_yaml(path) if path.exists() else {}
+
+
+def load_teacher_brand_archetypes() -> dict:
+    return _load_yaml(_CONFIG_ROOT / "config/catalog_planning/teacher_brand_archetypes.yaml")
+
+
+def load_teacher_brand_lane_assignments() -> dict:
+    return _load_yaml(_CONFIG_ROOT / "config/catalog_planning/teacher_brand_lane_assignments.yaml")
+
+
+# 12 global lanes — regional blocks are nested under `english_global` in the YAML.
+NESTED_PLANNING_LANES = frozenset(
+    {
+        "dach",
+        "france",
+        "spain",
+        "italy",
+        "latam",
+        "brazil",
+        "japan",
+        "korea",
+        "taiwan",
+        "china",
+        "hungary",
+    }
+)
+
+# Registry keys use lowercase locale tokens (e.g. inner_light_press_de_de).
+PLANNING_LANE_TO_LOCALE_TOKEN: dict[str, str] = {
+    "english_global": "en_us",
+    "dach": "de_de",
+    "france": "fr_fr",
+    "spain": "es_es",
+    "italy": "it_it",
+    "latam": "es_us",
+    "brazil": "pt_br",
+    "japan": "ja_jp",
+    "korea": "ko_kr",
+    "taiwan": "zh_tw",
+    "china": "zh_cn",
+    "hungary": "hu_hu",
+}
+
+# Catalog CSV lane_id / locale routing (matches global_brand_registry lane_id).
+PLANNING_LANE_TO_CATALOG_LANE_ID: dict[str, str] = {
+    "english_global": "en_US",
+    "dach": "de_DE",
+    "france": "fr_FR",
+    "spain": "es_ES",
+    "italy": "it_IT",
+    "latam": "es_US",
+    "brazil": "pt_BR",
+    "japan": "ja_JP",
+    "korea": "ko_KR",
+    "taiwan": "zh_TW",
+    "china": "zh_CN",
+    "hungary": "hu_HU",
+}
+
+
+def _lane_instance_suffix(planning_lane: str, summary: dict) -> str:
+    """Suffix on planning teacher brand_instance_id (e.g. _de, _latam)."""
+    return str(summary.get("lane_suffixes", {}).get(planning_lane) or "")
+
+
+def build_planning_teacher_to_legacy_archetype() -> dict[str, str]:
+    """Map planning teacher brand_id (e.g. stillness_press) → teacher_brand_map key (e.g. inner_light_press)."""
+    arch = load_teacher_brand_archetypes()
+    tmap = load_teacher_brand_map()
+    brands = tmap.get("teacher_brands", {})
+    out: dict[str, str] = {}
+    for entry in arch.get("teacher_brand_archetypes", []):
+        pid = entry.get("brand_id")
+        tid = entry.get("teacher")
+        if not pid or not tid:
+            continue
+        legacy: str | None = None
+        for key, row in brands.items():
+            if row.get("teacher_id") == tid:
+                legacy = key
+                break
+        if legacy:
+            out[str(pid)] = legacy
+    return out
+
+
+def iter_teacher_planning_rows(assignments: dict) -> list[tuple[str, str, str]]:
+    """Yield (planning_lane, brand_instance_id, teacher_id) from lane assignments."""
+    root = assignments.get("english_global")
+    if not isinstance(root, dict):
+        return []
+    rows: list[tuple[str, str, str]] = []
+    for key, info in root.items():
+        if key in NESTED_PLANNING_LANES:
+            continue
+        if isinstance(info, dict) and info.get("teacher"):
+            rows.append(("english_global", str(key), str(info["teacher"])))
+    for lane in sorted(NESTED_PLANNING_LANES):
+        block = root.get(lane)
+        if not isinstance(block, dict):
+            continue
+        for bid, info in block.items():
+            if isinstance(info, dict) and info.get("teacher"):
+                rows.append((lane, str(bid), str(info["teacher"])))
+    return rows
+
+
+def _teacher_planning_archetype_index() -> dict[str, dict]:
+    data = load_teacher_brand_archetypes()
+    return {
+        str(e["brand_id"]): e
+        for e in data.get("teacher_brand_archetypes", [])
+        if e.get("brand_id")
+    }
+
+
+def _synthetic_teacher_planning_row(
+    instance_id: str,
+    teacher_id: str,
+    planning_lane: str,
+    planning_base: str,
+    tarch: dict,
+) -> dict:
+    lane_id = PLANNING_LANE_TO_CATALOG_LANE_ID[planning_lane]
+    gtm = tarch.get("gtm_identity") or {}
+    persona_raw = str(gtm.get("persona", ""))
+    persona = ARCH_GTM_PERSONA_TO_CATALOG.get(persona_raw, "corporate_managers")
+    return {
+        "brand_id": instance_id,
+        "brand_archetype_id": planning_base,
+        "lane_id": lane_id,
+        "teacher_id": teacher_id,
+        "teacher_mode": True,
+        "tradition": str(tarch.get("tradition", "")),
+        "brand_focus": str(gtm.get("functional_job", "")),
+        "primary_topics": _topics_from_archetype_keywords(tarch),
+        "primary_personas": [persona],
+    }
+
+
+def _resolve_teacher_brand_row(
+    planning_lane: str,
+    instance_id: str,
+    teacher_id: str,
+    planning_to_legacy: dict[str, str],
+    summary: dict,
+    all_brands: dict,
+    teacher_rows: dict,
+    tarch_by_planning: dict[str, dict],
+) -> tuple[str, dict] | None:
+    sfx = _lane_instance_suffix(planning_lane, summary)
+    base = instance_id[: -len(sfx)] if sfx and instance_id.endswith(sfx) else instance_id
+    legacy = planning_to_legacy.get(base)
+    loc_tok = PLANNING_LANE_TO_LOCALE_TOKEN.get(planning_lane)
+    if not loc_tok:
+        return None
+    if legacy:
+        reg_id = f"{legacy}_{loc_tok}"
+        bd = all_brands.get(reg_id)
+        if bd:
+            return instance_id, dict(bd)
+        trow = teacher_rows.get(legacy)
+        if trow:
+            lane_id = PLANNING_LANE_TO_CATALOG_LANE_ID[planning_lane]
+            return instance_id, {
+                "brand_id": instance_id,
+                "brand_archetype_id": legacy,
+                "lane_id": lane_id,
+                "teacher_id": teacher_id,
+                "teacher_mode": True,
+                "tradition": str(trow.get("tradition", "")),
+                "brand_focus": str(trow.get("brand_focus", "")),
+                "primary_topics": list(trow.get("primary_topics", [])),
+                "primary_personas": list(trow.get("primary_personas", [])),
+            }
+    tarch = tarch_by_planning.get(base)
+    if tarch:
+        return instance_id, _synthetic_teacher_planning_row(
+            instance_id, teacher_id, planning_lane, base, tarch
+        )
+    return None
+
+
+ARCH_GTM_PERSONA_TO_CATALOG: dict[str, str] = {
+    "trauma_sensitive_meditator": "millennial_women_professionals",
+    "overthinking_knowledge_worker": "corporate_managers",
+    "simplicity_seeker": "gen_x_sandwich",
+    "high_functioning_perfectionist": "corporate_managers",
+    "energy_depleted_professional": "working_parents",
+    "doomscrolling_gen_z": "gen_z_professionals",
+    "shadow_work_seeker": "millennial_women_professionals",
+    "shame_carrying_people_pleaser": "millennial_women_professionals",
+    "high_stakes_performer": "first_responders",
+    "chronic_insomnia_sufferer": "gen_x_sandwich",
+    "unprocessed_grief_carrier": "working_parents",
+    "burnout_survivor_rebuilding": "entrepreneurs",
+    "love_exhausted_caregiver": "healthcare_rns",
+    "burned_out_professional": "corporate_managers",
+    "high_efficiency_achiever": "tech_finance_burnout",
+    "insomniac_creative": "millennial_women_professionals",
+    "mid_career_stalled": "corporate_managers",
+    "neurodivergent_young_adult": "gen_z_professionals",
+    "longevity_seeker": "gen_x_sandwich",
+    "artistic_student": "gen_alpha_students",
+    "overwhelmed_parent": "working_parents",
+    "corporate_leader": "nyc_executives",
+    "trauma_recovery_adult": "healthcare_rns",
+    "spiritually_curious": "millennial_women_professionals",
+    "startup_founder": "entrepreneurs",
+    "women_35_plus": "millennial_women_professionals",
+    "young_male_growth": "gen_z_professionals",
+    "gen_z_student": "gen_z_student",
+    "chronic_stress_worker": "corporate_managers",
+    "biohacker": "entrepreneurs",
+    "socially_anxious": "gen_z_professionals",
+    "couples_repair": "working_parents",
+    "early_riser": "corporate_managers",
+    "digital_overwhelm": "tech_finance_burnout",
+    "competitive_sales": "nyc_executives",
+    "therapy_newcomer": "millennial_women_professionals",
+    "45_plus_reinventor": "gen_x_sandwich",
+}
+
+
+def _topics_from_archetype_keywords(arch: dict) -> list[str]:
+    clusters = (arch.get("discovery_contract") or {}).get("keyword_clusters") or {}
+    blob = " ".join(
+        [str(x) for x in clusters.get("primary", []) + clusters.get("secondary", [])]
+    ).lower()
+    out: list[str] = []
+    rules = [
+        ("anxiety", "anxiety"),
+        ("sleep", "sleep_anxiety"),
+        ("insomnia", "sleep_anxiety"),
+        ("burnout", "burnout"),
+        ("trauma", "somatic_healing"),
+        ("grief", "grief"),
+        ("worth", "self_worth"),
+        ("confidence", "self_worth"),
+        ("imposter", "imposter_syndrome"),
+        ("boundary", "boundaries"),
+        ("focus", "overthinking"),
+        ("courage", "courage"),
+        ("depression", "depression"),
+        ("relationship", "boundaries"),
+        ("longevity", "somatic_healing"),
+        ("healthspan", "burnout"),
+        ("student", "anxiety"),
+        ("performance", "imposter_syndrome"),
+    ]
+    for needle, topic in rules:
+        if needle in blob and topic not in out:
+            out.append(topic)
+    if not out:
+        out = ["anxiety", "burnout", "self_worth", "overthinking"]
+    return out[:5]
+
+
+def _archetype_index() -> dict[str, dict]:
+    data = load_archetype_registry()
+    return {
+        str(a["brand_id"]): a
+        for a in data.get("brand_archetypes", [])
+        if a.get("brand_id")
+    }
+
+
+def _synthetic_standard_brand_row(base: str, planning_lane: str, arch: dict) -> dict:
+    loc_tok = PLANNING_LANE_TO_LOCALE_TOKEN[planning_lane]
+    reg_id = f"{base}_{loc_tok}"
+    lane_id = PLANNING_LANE_TO_CATALOG_LANE_ID[planning_lane]
+    gtm = arch.get("gtm_identity") or {}
+    persona_raw = str(gtm.get("persona", ""))
+    persona = ARCH_GTM_PERSONA_TO_CATALOG.get(persona_raw, "corporate_managers")
+    return {
+        "brand_id": reg_id,
+        "brand_archetype_id": base,
+        "lane_id": lane_id,
+        "teacher_id": "",
+        "teacher_mode": False,
+        "tradition": "",
+        "brand_focus": str(gtm.get("functional_job", "")),
+        "primary_topics": _topics_from_archetype_keywords(arch),
+        "primary_personas": [persona],
+    }
+
+
+def _iter_standard_brand_targets(summary: dict, all_brands: dict) -> list[tuple[str, dict]]:
+    bases = summary.get("standard_mode_brands", {}).get("base_names", [])
+    lanes = ["english_global"] + sorted(NESTED_PLANNING_LANES)
+    arch_by_id = _archetype_index()
+    out: list[tuple[str, dict]] = []
+    for planning_lane in lanes:
+        loc_tok = PLANNING_LANE_TO_LOCALE_TOKEN.get(planning_lane)
+        if not loc_tok:
+            continue
+        for base in bases:
+            reg_id = f"{base}_{loc_tok}"
+            bd = all_brands.get(reg_id)
+            if bd:
+                out.append((str(bd.get("brand_id", reg_id)), dict(bd)))
+                continue
+            arch = arch_by_id.get(base)
+            if not arch:
+                continue
+            syn = _synthetic_standard_brand_row(base, planning_lane, arch)
+            out.append((syn["brand_id"], syn))
+    return out
+
+
+def build_12x37_brand_targets(all_brands: dict) -> list[tuple[str, dict]]:
+    """Planned 12 lanes × 37 brands: teacher IDs from planning YAML, rows from registry (or teacher map fallback)."""
+    assignments = load_teacher_brand_lane_assignments()
+    summary = assignments.get("summary") or {}
+    planning_to_legacy = build_planning_teacher_to_legacy_archetype()
+    teacher_rows = load_teacher_brand_map().get("teacher_brands", {})
+    tarch_by_planning = _teacher_planning_archetype_index()
+    targets: list[tuple[str, dict]] = []
+    seen: set[tuple[str, str]] = set()
+    for planning_lane, instance_id, tid in iter_teacher_planning_rows(assignments):
+        pair = _resolve_teacher_brand_row(
+            planning_lane,
+            instance_id,
+            tid,
+            planning_to_legacy,
+            summary,
+            all_brands,
+            teacher_rows,
+            tarch_by_planning,
+        )
+        if not pair:
+            continue
+        bid, data = pair
+        key = (bid, data.get("lane_id", ""))
+        if key in seen:
+            continue
+        seen.add(key)
+        targets.append((bid, data))
+    for bid, data in _iter_standard_brand_targets(summary, all_brands):
+        key = (bid, data.get("lane_id", ""))
+        if key in seen:
+            continue
+        seen.add(key)
+        targets.append((bid, data))
+    return targets
 
 
 # ---------------------------------------------------------------------------
@@ -632,7 +979,7 @@ def generate_catalog(
     lane_filter: str | None = None,
     brand_filter: str | None = None,
 ) -> list[dict]:
-    """Generate the full catalog, returning list of entry dicts."""
+    """Generate the full catalog (12×37 planning grid), returning list of entry dicts."""
 
     brand_reg = load_brand_registry()
     teacher_map = load_teacher_brand_map()
@@ -654,7 +1001,9 @@ def generate_catalog(
     entries: list[dict] = []
     seen_ids: set[str] = set()
 
-    for brand_id, brand_data in all_brands.items():
+    brand_targets = build_12x37_brand_targets(all_brands)
+
+    for brand_id, brand_data in brand_targets:
         lane_id = brand_data.get("lane_id", "")
         locale = lane_id
 
