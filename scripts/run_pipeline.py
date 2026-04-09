@@ -343,6 +343,8 @@ def main() -> int:
         default="production",
         help="Scene gate mode: production (blocking) or draft (warn only). Default: production.",
     )
+    ap.add_argument("--locale", default=None,
+                    help="Locale for book (e.g. zh-TW, ja-JP). Loads locale-specific atoms. Default: from brand config or en-US")
     ap.add_argument("--atoms-root", default=None, help="Atoms root (e.g. atoms/zh-TW). Default: repo atoms/")
     ap.add_argument(
         "--atoms-model",
@@ -526,6 +528,7 @@ def main() -> int:
         narrator_id=narrator_id,
         teacher_mode=teacher_mode,
         atoms_model=spec_atoms_model,
+        locale=args.locale,
     )
 
     if book_spec.angle_id.endswith("_general"):
@@ -1058,7 +1061,8 @@ def main() -> int:
                     atom_meta[a].pop("callback_id", None)
                     atom_meta[a].pop("callback_phase", None)
 
-        prose = resolve_prose_for_plan(plan_for_gate, atoms_root=atoms_root).prose_map
+        locale = out.get("locale") or args.locale
+        prose = resolve_prose_for_plan(plan_for_gate, atoms_root=atoms_root, locale=locale).prose_map
         book_pass = validate_book_pass(plan_for_gate, atom_meta, prose_map=prose)
 
         report_dir = REPO_ROOT / "artifacts" / "book_pass"
@@ -1170,28 +1174,39 @@ def main() -> int:
             _teacher_display = teacher_id.replace("_", " ").title()
         _topic_display = (book_spec_for_compiler.get("topic_id") or "").replace("_", " ")
         _persona_display = (book_spec_for_compiler.get("persona_id") or "").replace("_", " ")
+        # Locale-aware teacher pre-intro
+        _locale = book_spec_for_compiler.get("locale") or args.locale
+        try:
+            from phoenix_v4.rendering.locale_templates import translate_fstring as _tl
+        except ImportError:
+            def _tl(s, **kw): return s.format(**kw) if kw else s
+
         _pre_intro_paras = [
-            f"I was not a direct student of {_teacher_display}. I encountered their work "
-            f"through books, talks, and publicly available teachings. What follows is not "
-            f"an official interpretation of {_teacher_display}'s work — it is an application. "
-            f"I have done my best to honor the integrity of the original teachings while "
-            f"translating them into practical guidance for the challenges you may be facing.",
-            f"{_teacher_display}'s understanding of {_topic_display} reshaped the way I see "
-            f"this subject.{(' Their approach — rooted in ' + _teacher_tradition + ' — ') if _teacher_tradition else ' Their approach '}"
-            f"offers a lens that goes beyond conventional advice. It speaks to something "
-            f"deeper: the patterns beneath the surface, the quiet mechanisms that keep "
-            f"us stuck, and the often-overlooked pathways toward genuine relief.",
-            f"This book applies {_teacher_display}'s teachings to the specific experience "
-            f"of {_persona_display} navigating {_topic_display}. It does not replace the "
-            f"teacher's original work. Where I have adapted exercises or frameworks, I have "
-            f"done so with care and transparency. Any simplification is mine, not theirs.",
-            f"If something in these pages resonates with you, I encourage you to go to "
-            f"the source. Seek out {_teacher_display}'s own words — their talks, their "
-            f"writings, their direct teachings. What I offer here is a bridge, not a "
-            f"destination. The real work lives in the original.",
+            _tl("I was not a direct student of {teacher}. I encountered their work "
+                "through books, talks, and publicly available teachings. What follows is not "
+                "an official interpretation of {teacher}'s work — it is an application. "
+                "I have done my best to honor the integrity of the original teachings while "
+                "translating them into practical guidance for the challenges you may be facing.",
+                locale=_locale, teacher=_teacher_display),
+            _tl("{teacher}'s understanding of {topic} reshaped the way I see "
+                "this subject. Their approach offers a lens that goes beyond conventional advice. "
+                "It speaks to something deeper: the patterns beneath the surface, the quiet mechanisms "
+                "that keep us stuck, and the often-overlooked pathways toward genuine relief.",
+                locale=_locale, teacher=_teacher_display, topic=_topic_display),
+            _tl("This book applies {teacher}'s teachings to the specific experience "
+                "of {persona} navigating {topic}. It does not replace the "
+                "teacher's original work. Where I have adapted exercises or frameworks, I have "
+                "done so with care and transparency. Any simplification is mine, not theirs.",
+                locale=_locale, teacher=_teacher_display, persona=_persona_display, topic=_topic_display),
+            _tl("If something in these pages resonates with you, I encourage you to go to "
+                "the source. Seek out {teacher}'s own words — their talks, their "
+                "writings, their direct teachings. What I offer here is a bridge, not a "
+                "destination. The real work lives in the original.",
+                locale=_locale, teacher=_teacher_display),
         ]
+        _pre_intro_title = _tl("A Note on the Teachings of {teacher}", locale=_locale, teacher=_teacher_display)
         out["teacher_pre_intro_chapter"] = {
-            "title": f"A Note on the Teachings of {_teacher_display}",
+            "title": _pre_intro_title,
             "content": "\n\n".join(_pre_intro_paras),
         }
         _closing_paras = [
@@ -1739,7 +1754,7 @@ def main() -> int:
                 except Exception:
                     pass
 
-                prose_result = resolve_prose_for_plan(out, atoms_root=atoms_root)
+                prose_result = resolve_prose_for_plan(out, atoms_root=atoms_root, locale=out.get("locale"))
                 prose_map = prose_result.prose_map
 
                 book_thesis = f"{canonical_topic} for {canonical_persona}"

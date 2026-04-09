@@ -99,9 +99,14 @@ def load_practice_library() -> dict[str, list[dict]]:
     return library
 
 
-def load_component_templates() -> dict:
-    """Load the 5-dimension component template config."""
+def load_component_templates(locale: str | None = None) -> dict:
+    """Load the 5-dimension component template config. Locale-aware."""
     global _TEMPLATES_CACHE
+    # When locale is set, try locale-specific templates first
+    if locale and locale != "en-US":
+        locale_path = COMPONENT_TEMPLATES_PATH.parent / "locales" / locale / COMPONENT_TEMPLATES_PATH.name
+        if locale_path.exists():
+            return _load_yaml(locale_path)
     if _TEMPLATES_CACHE is not None:
         return _TEMPLATES_CACHE
     _TEMPLATES_CACHE = _load_yaml(COMPONENT_TEMPLATES_PATH)

@@ -317,11 +317,21 @@ def _bindings_topic_key(topic_slug: str) -> str:
     return topic_slug
 
 
+def _locale_atom_path(base_path: Path, locale: Optional[str]) -> Path:
+    """Return locale-specific atom path if exists, else base English path."""
+    if locale and locale != "en-US":
+        locale_path = base_path.parent / "locales" / locale / base_path.name
+        if locale_path.exists():
+            return locale_path
+    return base_path
+
+
 def _load_story_atoms_for_persona_topic(
     atoms_root: Path,
     persona_slug: str,
     topic_slug: str,
     bindings: dict,
+    locale: Optional[str] = None,
 ) -> list[dict[str, Any]]:
     """Load all STORY atoms for (persona, topic) across allowed engines. persona_slug/topic_slug must be canonical."""
     bkey = _bindings_topic_key(topic_slug)
@@ -331,6 +341,7 @@ def _load_story_atoms_for_persona_topic(
     out: list[dict[str, Any]] = []
     for engine in allowed:
         path = atoms_root / persona_slug / topic_slug / engine / "CANONICAL.txt"
+        path = _locale_atom_path(path, locale)
         try:
             for a in _parse_canonical_txt(path):
                 a["engine"] = engine
@@ -817,10 +828,12 @@ def compile_plan(
                 if slot_type:
                     required_slots_by_type[slot_type] = required_slots_by_type.get(slot_type, 0) + 1
 
+    locale = book_spec.get("locale")
     pool_index = PoolIndex(
         atoms_root=atoms_root,
         bindings_path=bindings_path,
         teacher_atoms_root=teacher_atoms_root,
+        locale=locale,
     )
     story_pool = pool_index.get_pool("STORY", persona_id, topic_id, format_plan)
     band_by_id: dict[str, int] = {

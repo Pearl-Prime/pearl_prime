@@ -1,0 +1,279 @@
+last_updated: '2026-04-09'
+locale: zh-TW
+locale_name: Traditional Chinese (Taiwan)
+schema_version: 1
+templates:
+  ? "\n    core = thesis.replace("
+  : 核心 = 論點.replace(
+  ? "\n    if chapter_index >= total_chapters - 1:\n        return "
+  : '如果 chapter_index >= total_chapters - 1: 返回'
+  ? "\n    options = [\n        "
+  : 選項 = [
+  ? "\n    reflection_lower = (reflection or "
+  : reflection_lower = (reflection or
+  ? "\n    setup_fallbacks = [\n        "
+  : setup_fallbacks = [
+  ? "  # Last chapter: no thread-forward\n    lower = thesis.lower()\n    if "
+  : "# 最後一章：不向前推進\n    lower = thesis.lower()\n    如果"
+  ? " in lower:\n        return "
+  : "在 lower:\n        返回"
+  ' in reflection_lower and ': 在 reflection_lower 中且
+  ' in reflection_lower or ': 在反思_lower 或
+  ? " in reflection_lower:\n        return (\n            "
+  : "在 reflection_lower 中:  \n        return ("
+  ? " in seed:\n        options = [\n            "
+  : "在種子中:  \n        選項 = ["
+  ? " in seed:\n        return "
+  : "在 seed:\n        返回"
+  ? ")\n    variants = [\n        f"
+  : ")  \n    variants = [  \n        f"
+  ) or low.startswith(: ) 或 low.startswith(
+  ? ").lower()\n    if "
+  : ").lower()  \n    如果"
+  ? ").strip()\n    if not text or _is_placeholder_text(text):\n        return text\n    sentences = _sentences(text)\n    kept: list[str] = []\n    for sentence in sentences:\n        low = sentence.lower()\n\
+    \        if low.startswith("
+  : ").strip()\n    如果 not text 或 _is_placeholder_text(text):\n        返回 text\n    sentences = _sentences(text)\n    kept: list[str] = []\n    for sentence in sentences:\n        low = sentence.lower()\n\
+    \        如果 low.startswith("
+  ? "):\n            continue\n        if len(re.findall(r"
+  : "):\n            繼續\n        如果 len(re.findall(r"
+  ', scene: str = ': ', scene: str ='
+  ? ", sentence))\n        if limited and total_words + sentence_word_count > 60:\n            break\n        limited.append(sentence)\n        total_words += sentence_word_count\n    return "
+  : ", sentence))\n        如果 limited 且 total_words + sentence_word_count > 60:\n            中斷\n        limited.append(sentence)\n        total_words += sentence_word_count\n    返回"
+  ', sentence)) <= 2 and low not in {': ', sentence)) <= 2 且 low 不在 {'
+  ', story: str = ': ', story: str ='
+  ? ", thread_raw, flags=re.I).strip()\n        cleaned = re.sub(r"
+  : 請提供需要翻譯的英文療癒/自我幫助文本內容，目前尚未見到具體需要翻譯的文字內容。
+  A Note on the Teachings of {teacher}: 關於{teacher}教導的說明
+  A companion {workbook_label} is available for this book at {url}. You may want to have it alongside you as you read.: 本書附有配套的 {workbook_label}，您可以在 {url} 獲取。建議在閱讀時一併使用。
+  Before moving on, give the body one concrete action. Insight without action evaporates by tomorrow.: "在繼續之前，給身體一個具體的行動。沒有行動的洞察力到明天就會蒸發。  \n---"
+  Before the mind files this as 'done,' feel what is still open in the body. That openness is the real work.: "在思維將其歸檔為「完成」之前，感受身體中仍開放的部分。這種開放感才是真正的功課。  \n---"
+  Before the mind starts explaining, the body has already registered something. Trust that registration.: "在心智開始解釋之前，身體已經記錄了某事。信任這個記錄。  \n---"
+  Before we talk about {topic}, I want you to feel something. Not think about it. Feel it.: "在談論{topic}之前，我想讓你先感受到某種東西。不是去思考它，而是去感受它。  \n---"
+  Before you go — if you want to take this further, a companion {workbook_label} is waiting for you at {url}.: 在您離開前——如果您想更深入探索，配套的 {workbook_label} 正在 {url} 等待著您。
+  Begin where the weight settled. You will know the spot before you can explain it.: "從重量沉澱的地方開始。你還來不及解釋，就會知道那個位置。  \n---"
+  Begin with whatever your body is holding. You do not need to name it. Just locate it.: "從你身體目前所承載的開始。你不需要為它命名，只需找到它。  \n---"
+  Bridge from EXERCISE → INTEGRATION.: "從 EXERCISE 連接到 INTEGRATION。  \n---"
+  Bridge from HOOK/SCENE → MECHANISM.: 從 HOOK/SCENE 過渡到 MECHANISM。
+  Bridge from REFLECTION → STORY.: "從反思 → 故事進行橋接。  \n---"
+  Bridge from STORY → EXERCISE.: "從{STORY} → {EXERCISE}的橋樑。  \n---"
+  But each link is a prediction, not a fact. The chain has never once been right about the final link.: "但每個連結都是一個預測，而非事實。這條鏈條從來沒有正確預測過最後一個連結。  \n---"
+  ? By the time you can explain the moment, the alarm has already chosen a meaning for it. That matters because the body is already obeying the prediction.
+  : 等到你能夠解釋這個時刻時，警報早已為其選擇了意義。這很重要，因為身體已經開始服從預測了。
+  Chapter {n}: "第{n}章  \n---"
+  Concepts dissolve under pressure. What remains is the story of how the pressure actually felt.: "概念在壓力下溶解。剩下的，是壓力實際感受的敘事。  \n---"
+  Derive a mechanism-explanation paragraph from REFLECTION content.: "從REFLECTION內容中衍生出一個機制解釋段落。  \n---"
+  Do not rush to the next thing. What just happened needs a few seconds to settle into the body.: "不要急於進行下一件事。剛發生的事需要幾秒鐘才能融入身體。  \n---"
+  Do not skip ahead to the lesson. The body is still showing you where the lesson lives.: "不要跳過到教訓本身。身體仍在向你展示教訓所在之處。  \n---"
+  Extract a one-line thesis claim from REFLECTION prose.: 從 REFLECTION 的散文中提取一個一線的主張。
+  Find the part of you that tightened during this chapter. That is your entry point.: "找到在這一章節中你身體緊繃的部分。那就是你的起點。  \n---"
+  Fix common loc-var fallback collisions in SCENE prose.: "修正 SCENE 文字敘述中常見的 loc-var 備用機制衝突。  \n---"
+  For example, the cost shows up fastest in a story. Watch how the prediction arrives before the fact does.: 例如，成本在故事中最快速地顯現。請觀察預測如何在事實到來之前就出現。
+  For example, the quickest way to feel the mechanism is to watch it take hold in an ordinary moment.: 例如，感受機制的最快方式，是觀察它如何在平凡的時刻佔據主導。
+  For example, watch where the sentence about identity gets written. It usually happens in a single beat.: 例如，觀察關於身分的句子是何時被寫下的。通常發生在一個節拍之內。
+  For example, you can watch the pattern more clearly in somebody else's body before you can bear it in your own.: "例如，你可能在觀察他人身體時，更能清楚看見這個模式，而在自己身上卻難以承受。  \n---"
+  Generate a takeaway when TAKEAWAY slot is missing/placeholder.: "當 TAKEAWAY 欄位遺漏/為預設值時，生成重點摘要。  \n---"
+  Generate a thread-forward when THREAD slot is missing/placeholder.: "當 THREAD 欄位遺漏/為預設值時，生成主題延伸。  \n---"
+  Give the landing a moment. The nervous system integrates slower than the reading eye.: "讓落點有片刻時間。神經系統的整合速度比閱讀的眼睛來得慢。  \n---"
+  ? 'Here is the mechanism: {core} The nervous system does not distinguish between real threat and imagined threat. Both receive the same emergency response. This is why knowing better rarely helps.'
+  : "這裡是機制：{core} 神經系統無法區分真實的威脅和想像中的威脅。兩者都會收到相同的緊急反應。這就是為什麼即使知道得更多也鮮少有幫助。  \n---"
+  Here is where the chapter stops talking about the pattern and lets you watch it happen.: 這裡是這一章節停止談論這個模式，並讓你親眼目睹其發生之處。
+  Here the chapter shifts from naming the pattern to witnessing it in motion.: "本書章節從命名模式轉向觀察其運動。  \n---"
+  Hold this sensation without naming it. The name will come, but the sensation is more honest.: "保持這種感覺，卻不命名它。名稱會來，但感覺更誠實。  \n---"
+  ? I was not a direct student of {teacher}. I encountered their work through books, talks, and publicly available teachings. What follows is not an official interpretation of {teacher}'s work — it is an
+    application.
+  : "我並非{teacher}的直接學生。我是透過書籍、演講和公開的教導接觸到他們的作品。以下內容並非對{teacher}作品的官方解釋——而是一種應用。  \n---"
+  ? I was not a direct student of {teacher}. I encountered their work through books, talks, and publicly available teachings. What follows is not an official interpretation of {teacher}'s work — it is an
+    application. I have done my best to honor the integrity of the original teachings while translating them into practical guidance for the challenges you may be facing.
+  : "我不是{teacher}的直接學生。我是透過書籍、演講和公開的教導接觸到他們的作品。以下內容並非對{teacher}作品的官方詮釋——而是一種應用。我已盡力忠實呈現原初教導的完整性，並將其轉化為針對您可能面臨的挑戰的實用指引。  \n---"
+  ? If something in these pages resonates with you, I encourage you to go to the source. Seek out {teacher}'s own words — their talks, their writings, their direct teachings. What I offer here is a bridge,
+    not a destination. The real work lives in the original.
+  : "如果書中某處內容與您產生共鳴，我鼓勵您回到源頭。尋找{teacher}自己的話語——他們的演講、著作和直接教導。我在此提供的僅是橋樑，而非終點。真正的實踐體現在原初的教導中。  \n---"
+  If something in these pages resonates with you, I encourage you to go to the source. Seek out {teacher}'s own words.: "如果這些頁面中的某些內容與你產生共鳴，我鼓勵你回到源頭。尋找{teacher}自己的話。  \n---"
+  ? If these ideas spoke to you, go deeper. Seek out {teacher}'s original works. Listen to their talks. Sit with their words directly. The bridge this book offers is meant to lead you to the source, not
+    to stand in its place.
+  : 如果這些觀點引起了您的共鳴，請深入探索。尋找 {teacher} 的原始著作，聆聽他們的講座，親自與他們的言辭對話。本書提供的橋樑旨在引導您回到源頭，而非取代源頭。
+  In practice, do not turn this into homework. Give the body one smaller, safer entry instead.: "在實踐中，不要將此轉成作業。給予身體一個更小、更安全的入口。  \n---"
+  In practice, start smaller than insight. Start where the body is still holding the chapter.: "在實踐中，以比洞察更小規模開始。從身體仍執持該章節之處開始。  \n---"
+  Introduction: "導論  \n---"
+  Knowing the pattern is not enough. The next step asks you to meet it with your body, not your mind.: "知道這個模式還不夠。下一步要求你用身體去接觸它，而非用腦子。  \n---"
+  Let the chapter land in the body before it turns back into explanation.: "讓這一章節先落實在身體裡，再轉回解釋。  \n---"
+  Let the practice be undersized. A small move completed is worth more than a large one imagined.: "讓實踐規模較小。一個完成的小動作，比一個想像中的大動作更有價值。  \n---"
+  Notice one place in your body that is holding tension right now. You do not need to release it. Just notice it.: 請注意身體中現在有緊張感的某個部位。您不需要釋放它，只需覺察它的存在。
+  Notice the impulse to understand before you have finished feeling. That impulse is the pattern defending itself.: 注意在你尚未完成感受之前就想理解的衝動。這個衝動就是模式在保護自己。
+  Notice where you are sitting. Notice the weight of this device in your hands, or the sound of this voice in your ears.: "注意你現在坐的位置。注意你手中的這個設備的重量，或你耳中聽到的這個聲音。  \n---"
+  Notice where your body is bracing. Start there. Not with the thought — with the sensation.: "注意你身體哪裡在支撐。從那裡開始。不是從想法，而是從感覺。  \n---"
+  Now bring this from concept into sensation. The next step is deliberately small.: "現在將這個從概念帶入感覺。下一步是刻意地微小。  \n---"
+  Now notice what shifted before your mind starts summarizing it.: "現在注意在你的思維開始總結之前發生了什麼改變。  \n---"
+  Now watch what happens when the same pattern lands in a real body, in a real room.: 現在觀察當相同的模式落在真實的身體上，出現在真實的房間中時會發生什麼。
+  Now, I want you to notice something. Notice where your mind went. That is useful information.: "現在，我想讓你注意某件事。注意你的思緒去了哪裡。這是有用的信息。  \n---"
+  Pause here. The body is still processing what the mind already moved past.: "在此停頓。身體仍在處理思維已經超越的部分。  \n---"
+  Place one hand where the tension is loudest. That contact is the first move.: "將一隻手放在張力最明顯的地方。這個接觸就是第一步。  \n---"
+  'Remember this: {core} That is not a philosophy. That is what happened in this chapter.': "請記住：{core} 那不是哲學。那是本章節發生的事。  \n---"
+  Resist the urge to evaluate. Let the experience sit without a grade.: "抵抗評估的衝動。讓經驗在沒有等級的情況下存在。  \n---"
+  Right here is where the chapter earns its weight. Not in the concept, but in the felt registration.: "此處正是這章節證明其價值之處。不在概念，而在被感受到的認同。  \n---"
+  Scan from your scalp to your feet. The first place that speaks up is where you begin.: "從頭頂掃描到腳底。第一個發聲的地方就是你開始的地方。  \n---"
+  Seen from the outside, the distortion gets harder to defend.: "從外在觀看，扭曲會變得更難辯護。  \n---"
+  'Shame always makes the same move first: it turns a moment into an identity sentence.': "羞恥總是先做出相同的動作：它將一個瞬間轉化為身份判決。  \n---"
+  Shutdown rarely begins at the task. It begins where your system starts counting cost.: "關閉很少從任務開始。它從你的系統開始計算成本的地方開始。  \n---"
+  So when the body tightens, do not solve the whole pattern here. Work with the place that braced first.: "因此，當身體緊繃時，不要在此解決整個模式。與最先支撐的地方合作。  \n---"
+  So when the pattern surges, the next move is not to understand more. It is to make the first move cheaper.: 因此，當模式湧現時，下一步不是去理解更多。而是讓第一步更輕鬆。
+  Something just shifted in your chest or your throat. That shift is where the chapter actually begins.: "剛剛有什麼東西在你的胸口或喉嚨裡移動了。這個改變就是篇章實際開始的地方。  \n---"
+  Something loosened or something tightened. Either one is information worth keeping.: "某樣東西鬆開了，或者某樣東西緊了。任一情況都是值得保留的信息。  \n---"
+  Start where you feel the most tension right now. Not where you think the tension should be — where it actually is.: 從你現在感到最緊張的地方開始。不是你認為緊張應該存在的地方——而是它實際存在的地方。
+  Start with the breath that shortened when the chapter turned.: 從當章節轉換時短促的呼吸開始。
+  Start with the hand that hovered instead of moving. That freeze is the entry point.: 從懸浮不動而非移動的手開始。那種凝滯就是進入點。
+  Start with the jaw that tightened while the story was unfolding.: 從故事進行時緊咬的下顎開始。
+  Start with the part of you that wanted to look away during the last section.: "從你上一節想要避開的部分開始。  \n---"
+  Start with the place in your body that lifted while you were listening. That is where the practice begins.: 從當你聆聽時身體中抬起的地方開始。那裡就是實踐的起點。
+  Start with the pressure under the sternum. That is the part still bracing.: 從胸骨下方的壓力開始。那是仍在支撐的部分。
+  Start with the shoulders that lifted before you even noticed the cost.: 從甚至在你察覺代價之前就抬起的肩膀開始。
+  Start with the simplest true thing your body is telling you right now.: "從你身體現在告訴你的最簡單真實的事實開始。  \n---"
+  Start with the throat that keeps rehearsing and swallowing the same sentence.: 從不斷重複並吞咽同樣句子的喉嚨開始。
+  Stay with the moment a second longer. The pattern usually shows itself before the explanation does.: "多留在當下一秒鐘。模式通常會在解釋之前顯現。  \n---"
+  Stay with what changed. Even if it only changed by one degree.: "專注於發生改變的部分。即使只改變了一度。  \n---"
+  That noticing — that is the entire method of this book.: "這種覺察——就是本書的全部方法。  \n---"
+  ? That pause is doing more than slowing you down. It is showing you how the pattern enters, which means the chapter can name it before it hardens.
+  : "這個停頓所做的不只是減緩你的速度。它顯示模式是如何進入的，這意味著篇章可以在它固化之前命名它。  \n---"
+  The afternoon light is flat and gray: 午後陽光平坦而灰暗
+  The body already knows something the mind has not caught up with yet. Let it lead for a moment.: "身體早已知道某件事，而心智尚未追上。讓它領先一時。  \n---"
+  The body is already behaving like the threat is real. This is where the chapter has to begin.: 身體已經表現得好像威脅是真實的。這就是這一章必須開始的地方。
+  The body learns through action, not agreement. Give it one move it can actually make right now.: "身體透過行動學習，而非同意。給它一個它現在實際能夠做出的動作。  \n---"
+  The body registers change in its own time. Give it that time before the next chapter begins.: "身體會以自己的時間記錄變化。在下一章開始之前，給予它那個時間。  \n---"
+  ? 'The core mechanism is this: {core} Once the nervous system flags a moment as dangerous, it narrows perception to confirm the danger. Counter-evidence gets filtered out. The feeling becomes self-reinforcing.'
+  : "核心機制是這樣的：{core} 一旦神經系統將某一刻標記為危險，它會縮窄感知以確認危險。反駁證據會被過濾掉。這種感受會自我強化。  \n---"
+  ? The danger here is not the moment itself. It is the meaning shame races to stamp onto it, which means the injury often lands after the event.
+  : "這裡的危險不在於瞬間本身，而在於羞恥急著蓋上的意義，這意味著傷害往往在事件之後才發生。  \n---"
+  The exercise that follows is not meant to fix anything. It is meant to make the pattern visible in your body.: "接下來的練習不是為了修復任何東西。而是讓這個模式在你的身體中變得明顯。  \n---"
+  The explanation can only go so far. A story goes the rest of the way.: 解釋只能到此為止，故事則會走完剩下的路。
+  The instinct to move past this moment quickly is itself data. Slow down and see what it protects.: "快速跨越這個時刻的直覺本身就是數據。放慢下來，看看它保護的是什麼。  \n---"
+  The next part is not instruction. It is evidence drawn from someone's lived experience.: "接下來的部分不是指導，而是從某人的親身經歷中得出的證據。  \n---"
+  'The next pressure point is harder to admit: what happens when someone else''s life starts writing your standards for you.': "下一個壓力點更難承認：當他人的人生開始為你制定標準時會發生什麼。  \n---"
+  The pattern gets clearest when you can see the price land on a real person.: 當你能看到代價落在真實的人身上時，這個模式會最清晰。
+  The pattern gets clearest when you watch it operate in someone else's day before returning to your own.: 當你觀察這個模式在他人的一天中運作，並在回到自己的之前，這個模式會最清晰。
+  ? 'The pattern underneath: {core} Your body responds to the prediction of danger with the same chemistry it would use for actual danger. That chemistry does not care whether the prediction is accurate.'
+  : "潛藏的模式是：{core} 你的身體會以處理實際危險相同的化學反應來應對危險的預測。這種化學反應不關心預測是否準確。  \n---"
+  The point is that anxiety predicts regret so loudly that it blocks useful decisions.: 重點在於焦慮預測歉疚的聲音如此之大，以至於阻礙了有用的決定。
+  The point is that avoidance maps the edges of what you are not yet willing to see.: "重點在於，迴避勾勒出你尚未願意看見之物的邊界。  \n---"
+  The point is that awareness does not fix anything — it makes fixing unnecessary.: 重點在於，覺察並不能解決任何問題——反而讓解決變得不必要。
+  The point is that comparison uses someone else's exterior to judge your interior.: 重點在於比較使用他人的外在來判斷你的內在。
+  The point is that freedom does not need to be achieved — it needs to be recognized.: 重點在於，自由不需要被實現——它需要被認知。
+  The point is that grief is not a problem to solve — it is a process to accompany.: 重點在於哀傷不是要解決的問題——而是要陪伴的過程。
+  The point is that ordinary moments carry the pattern more clearly than dramatic ones.: 重點在於，平凡時刻比戲劇性時刻更能清楚地體現模式。
+  The point is that overwhelm is a capacity signal, not a character flaw.: 重點在於壓垮是一種容量信號，而非性格缺陷。
+  The point is that perfection is not available, but movement is.: 重點在於完美並不可得，但行動卻是可能的。
+  The point is that recognition replaces seeking — you stop looking and start seeing.: "重點在於，認知取代了尋找——你停止尋找，開始看見。  \n---"
+  The point is that relationship is the mirror that reveals what you cannot see alone.: "重點在於，關係是那面鏡子，揭示你獨自無法看見之物。  \n---"
+  The point is that rest is not earned — it is required.: "重點在於，休息不是靠掙來的——而是必需的。  \n---"
+  The point is that seeing the pattern clearly is the first step toward not being run by it.: "重點在於，清楚看到模式是擺脫它的第一步。  \n---"
+  The point is that seeing the pattern is the beginning of freedom from it.: "重點在於，看到模式是擺脫它的自由的開始。  \n---"
+  The point is that seeking is the activity that obscures what is already here.: "重點在於，尋找是掩蓋已經存在之物的活動。  \n---"
+  The point is that shame says you are the problem, but shame is a pattern, not a verdict.: 重點在於羞恥說你就是問題，但羞恥是一種模式，而非判斷。
+  The point is that the alarm fires on prediction, not evidence.: "重點在於，警報是基於預測而非證據而觸發的。  \n---"
+  The point is that the alarm is information, not instruction.: 重點在於警報是資訊，而非指示。
+  The point is that the body knows before the mind does — trust the body.: "重點在於，身體比大腦先知道——信任身體。  \n---"
+  The point is that the contraction is not who you are — it is what you do.: "重點在於，收縮不是你是誰——而是你所做的事。  \n---"
+  The point is that the feeling is real, but the story the feeling tells is often inaccurate.: "重點在於，感覺是真實的，但感覺所敘述的故事往往不準確。  \n---"
+  The point is that the mechanism treats every decision like a permanent threat.: 重點在於這個機制將每個決定都視為永久的威脅。
+  The point is that the part of you that watches is not the part that decides.: 重點在於你觀察的部分並非做出決定的部分。
+  The point is that the separate self is an activity, not an entity.: "重點在於，獨立的自我是一種活動，而非實體。  \n---"
+  The point is that the spiral is a loop, not a descent — it returns to the same ground.: "重點在於，螺旋是一個循環，而非下降——它會回到相同的起點。  \n---"
+  The point is that vulnerability is not the risk — the armor is.: "重點在於，脆弱並不是風險——盔甲才是。  \n---"
+  The point is that what you are holding is costing more energy than you realize.: "重點在於，你所持有的東西所消耗的精力，比你意識到的還要多。  \n---"
+  The point is that what you are protecting yourself from is often less dangerous than the protection.: 重點在於，你所保護自己的對象，通常比保護本身更危險。
+  The point is that what you are seeking is already present before you start looking.: "重點在於，你所尋找的東西在你開始尋找之前已經存在。  \n---"
+  The point is that you can act inside uncertainty without waiting for it to resolve.: "重點在於，你可以在不確定中行動，而不需要等待它解決。  \n---"
+  The point is that you have been working harder than you realize to stay contracted.: 重點在於，你其實一直在努力維持合約，只是自己沒有意識到。
+  The point is that your nervous system responds to predictions, not facts.: "重點在於，你的神經系統對預測做出反應，而不是對事實。  \n---"
+  The recursion is infinite. Each layer creates a new layer to observe.: "遞歸是無限的。每一層都會創造出一層新的觀察層。  \n---"
+  The shift from understanding to doing is where most chapters lose people. Stay with this one.: 從理解到實踐的轉變，是大多數章節失去讀者的地方。請留在這一章。
+  The shift may be small. Small is not insignificant. Small is where lasting change begins.: "改變可能微小。微小並不意味無足輕重。持續改變的起點就在於微小之處。  \n---"
+  ? The sting is not just what you saw. It is how fast your system turned it into a verdict, which means the pain starts before you can question the math.
+  : 刺痛感不僅僅是你所看到的。而是你的系統多快將其轉化為判決，這意味著在你還能質疑數學之前，痛苦已經開始了。
+  Theory describes the shape. A story lets you feel the weight of it.: "理論描述形狀。故事讓你感受到它的重量。  \n---"
+  There is a micro-flinch the body makes before the mind builds its story. That flinch is the trailhead.: "在心智構建故事之前，身體會有一個微小的閃避。那個閃避是起點。  \n---"
+  'This audiobook has a companion {workbook_label} with all the exercises ': 這本有聲書有配套的 {workbook_label}，包含所有練習。
+  This audiobook has a companion {workbook_label} with all the exercises and reflection prompts.: 這本有聲書附有附屬的{workbook_label}，內含所有練習和反思提問。
+  ? This audiobook has a companion {workbook_label} with all the exercises and reflection prompts. You can get it free at {url}.
+  : 這本有聲書附有配套的 {workbook_label}，內含所有練習和反思提問。您可以在 {url} 免費下載。
+  This audiobook has a companion {workbook_label}...: "這本有聲書有配套的 {workbook_label}...  \n---"
+  This book applies {teacher}'s teachings to the specific experience of {persona} navigating {topic}.: "這本書將{teacher}的教導應用於{persona}在處理{topic}時的具體經驗。  \n---"
+  ? This book applies {teacher}'s teachings to the specific experience of {persona} navigating {topic}. It does not replace the teacher's original work. Where I have adapted exercises or frameworks, I have
+    done so with care and transparency. Any simplification is mine, not theirs.
+  : "本書將{teacher}的教導應用於{persona}應對{topic}的具體經驗。它並未取代老師原初的作品。我在調整練習或框架時，均以謹慎和透明的方式進行。任何簡化皆出自我，而非他們。  \n---"
+  ? This book drew from the teachings of {teacher} to offer you a practical path through {topic}. But what you have read here is only one application — shaped by my perspective and filtered through the
+    specific challenges of {persona}.
+  : 本書借鑒了 {teacher} 的教導，為您提供一條實踐 {topic} 的具體途徑。但您剛才所讀的內容僅為其中一種應用——受我的觀點影響，並經過 {persona} 特定挑戰的過濾。
+  ? This book drew from the teachings of {teacher} to offer you a practical path through {topic}. But what you have read here is only one application.
+  : "這本書借鑒了{teacher}的教導，為你提供穿越{topic}的實用途徑。但你在此處所讀到的僅僅是其中一個應用。  \n---"
+  This is Body Scan.: 這是身體掃描。
+  This is Breath Awareness.: 這是呼吸覺察。
+  This is Cellular Awareness.: 這是細胞覺察。
+  This is Conflict De-escalation.: 這是衝突降級。
+  This is Exercise.: 這是練習。
+  This is Grounding Practice.: 這是接地練習。
+  This is Journaling Prompt.: 這是日記提問。
+  This is Meditation.: 這是冥想。
+  This is Reflection.: 這是反思。
+  This is Self-Compassion Check.: 這是自我慈悲檢查。
+  This is the turning point. Not a dramatic revelation. A quiet noticing.: 這是轉折點。不是戲劇性的發現，而是一次安靜的察覺。
+  'This is where comparison does its quiet damage: it makes another person''s surface feel like evidence against you.': 這就是比較造成靜默傷害的地方：它會讓人覺得另個人的表面像是對你的證據。
+  'This is why the freeze starts earlier than the choice: loss becomes imaginable before the decision does.': 這就是為什麼凍結會比選擇更早開始：在決定做出之前，損失已經變得可以想像。
+  ? To go deeper and actually do the work from this book, download the companion {workbook_label} at {url}. You will find guided exercises, journaling pages, and tools you can return to again and again.
+    It is free — designed to go with exactly this book.
+  : 若要深入實踐本書的內容，請下載配套的 {workbook_label}，網址為 {url}。您將找到引導練習、日記頁面以及可反覆使用的工具。它是免費的——專為與這本書配套而設計。
+  Trim REFLECTION to the most thesis-relevant sentences.: "精簡 REFLECTION 至與論文主題最相關的句子。  \n---"
+  ? 'Underneath the feeling is a simple mechanism: {core} When the alarm runs the response, your nervous system treats uncertainty like danger and asks for impossible certainty. That is why ordinary moments
+    feel heavy.'
+  : "在這種感覺之下是一個簡單的機制：{core} 當警報引發反應時，你的神經系統會將不確定性視為危險，並要求不可能的確定性。這就是為什麼平凡的時刻會感到沉重。  \n---"
+  Understanding without practice is just information. The body needs something to do with what it just learned.: "沒有實踐的理解只是資訊。身體需要對剛學到的東西有所行動。  \n---"
+  We will go deeper. But it starts here, with what your body already knows.: "我們將會更深入。但這一切從這裡開始，從你的身體已經知道的東西開始。  \n---"
+  ? 'What drives this: {core} The system was built for physical threats in open landscapes. It now runs in offices, apartments, and group chats. The mismatch between threat model and actual environment
+    is the source of most suffering.'
+  : 驅動這一切的是：{core} 這個系統原本是為開放環境中的物理威脅而設計的。如今它運行在辦公室、公寓和群組聊天中。威脅模型與實際環境之間的不匹配是大多數痛苦的來源。
+  What follows is not a metaphor. It is a report from someone who lived inside this pattern.: 接下來的內容不是隱喻，而是來自曾身處此模式中的人的報告。
+  What follows is not a test. It is an invitation to feel the mechanism while it is still warm.: "接下來的不是測試。而是一個邀請，讓你在它還熱的時候去感受這個機制。  \n---"
+  ? What looks like indecision is usually grief arriving before the decision does. That matters because the body treats the prediction like fact.
+  : 看起來像是猶豫不決的，通常是悲傷在決定做出之前就到來了。這很重要，因為身體會將預測當作事實來處理。
+  ? What looks small on the screen can still feel expensive in the body. That matters because capacity gets spent before effort begins.
+  : "在螢幕上看起來微不足道的事物，仍可能在身體中感覺昂貴。這很重要，因為容量在努力開始之前就被消耗了。  \n---"
+  What remains is not more explanation. It is the next place this pattern asks for your life.: 剩下的不是更多解釋。而是這個模式要求你生命中的下一個地方。
+  'What remains is the harder part: how to choose when loss still feels louder than relief.': "剩下的問題更困難：當損失仍比緩解更響亮時，如何選擇。  \n---"
+  What remains is the moment after the alarm fires, when your body still wants to obey a prediction.: "剩下的問題是警報響起後的那一刻，當你的身體仍想遵循預測。  \n---"
+  'What remains is the quieter cost: what repeated overload teaches you to stop asking for.': 剩下的，是較為安靜的代價：重複的過載教會你停止索求的東西。
+  What remains is the sentence shame writes after the moment is over, when it tries to turn one event into identity.: 剩下的問題是那一刻結束後，羞恥寫下的句子，當它試圖將一個事件轉化為身份。
+  What remains is what the body remembers after the mind stops arguing.: "剩下的，是當心停止爭辯後，身體所記得的。  \n---"
+  What you just felt is not a distraction from the point. It is the point arriving ahead of language.: "你剛感受到的並非與重點無關的分心。那是重點在語言之前到達。  \n---"
+  Whatever just moved in you does not need to be understood yet. It needs to be felt.: 剛在你內心產生的變化，此刻尚無需理解。它需要被感受。
+  Words about the pattern only go so far. What follows is the pattern caught in the act.: "關於模式的言詞只能到此為止。接下來的是模式被逮個正著。  \n---"
+  You can see the mechanism better when it borrows someone else's future first.: 當它先借用他人的未來時，你會更清楚地看到機制。
+  You do not need to master this. You need to try it once and notice what happens.: "你不需要掌握這個。你需要試一次並注意發生了什麼。  \n---"
+  'You watch yourself performing, then watch yourself watching, then evaluate how well you stopped watching. ': 你看著自己表現，然後看著自己觀看，接著評估自己是否成功停止了觀看
+  \bIn the next chapter,\s*: \b在下一章,\s*
+  'brain starts mourning everything you did not choose. It tries to find a perfect option with zero loss, ': 大腦就會開始哀悼所有未選擇的東西。它試圖找到一個零損失的完美選項，
+  'but that option does not exist. Every path closes other paths. So the system freezes you, or lets you ': 但這樣的選項並不存在。每條路徑都會關閉其他路徑。因此系統會凍結你，或讓你
+  'character failing, not your discipline collapsing — the demand has exceeded what the system can process ': 是角色的失敗，而非自律的崩潰——當需求超過系統能處理的範圍時
+  choose and then punishes you for choosing.: 選擇後再懲罰你選擇。
+  competence. The assessment always finds you lacking because the database only contains evidence of lacking.: 評估始終會發現你有所不足，因為資料庫裡只包含證明你不足的證據
+  doing exactly what it should do when something significant has changed in the landscape.: 做當環境發生重大變化時應該做的事
+  'else''s visible output and measures it against your full interior experience. The comparison always ': 將他人可見的輸出與你完整的內在經驗進行比較。這種比較總是
+  is not lying about the stakes as it perceives them. It is using an old threat model in a new context.: 並沒有對潛在的風險說謊，而是將舊的威脅模型套用在新的情境中
+  'it as the only interpretation. It curates a database of your exposures and deletes evidence of ': 將其視為唯一的解釋。它會整理你接觸過的資料，並刪除證明你能力的證據
+  'loads the next without waiting for evidence. The chain moves from signal to catastrophe in seconds. ': 立即加載下一個，而不等待證據。鏈條從信號到災難只在幾秒內完成
+  'loses because it is rigged — you see their best against your worst. The mechanism is automatic and ': 因為它被操控了——你看到的是他們最好的一面對抗你最差的一面。這個機制是自動且無情的
+  'mapped. The neural pathways that expected the presence still fire. The mechanism is not broken — it is ': 已被映射。預期存在時的神經通路仍會發火。機制並未損壞——它正在
+  relentless. Understanding it does not stop it. But it lets you see the score as inaccurate.: 理解它並不會停止它。但它讓你看到這個分數是不準確的
+  right now. The mechanism treats this as emergency because, from the nervous system's perspective, it is.: 當前。機制將其視為緊急事件，因為從神經系統的角度來看，確實如此
+  'to make a useful decision. The mechanism is simple and brutal. The moment you choose one thing, your ': 做出有用的決定。機制簡單而殘忍。你一旦選擇某件事，你的
+  'treats anticipated social judgment with the same intensity it would treat physical danger. The alarm ': 以同樣的強度對待預期的社會判斷，就像對待身體的危險。警報
+  '{reflection} {story}': '{reflection} {story}'
+  '{reflection}{story}': '{reflection}{story}'
+  '{teacher}''s understanding of {topic} reshaped the way I see this subject.': "{teacher}對{topic}的理解重新塑造了我看待這個主題的方式。  \n---"
+  ? '{teacher}''s understanding of {topic} reshaped the way I see this subject. Their approach offers a lens that goes beyond conventional advice. It speaks to something deeper: the patterns beneath the
+    surface, the quiet mechanisms that keep us stuck, and the often-overlooked pathways toward genuine relief.'
+  : "{teacher}對{topic}的理解改變了我看待這個主題的方式。他們的方法提供了一種超越傳統建議的透鏡。它觸及更深層的事物：表面之下的模式、讓我們陷入困境的靜默機制，以及常被忽略的通往真正緩解的途徑。  \n---"
+  '{thesis} {opening} {scene}': '{thesis} {opening} {scene}'
+  '{thesis} {reflection} {story}': '{thesis} {reflection} {story}'
+  ? "}:\n            continue\n        kept.append(sentence)\n    if not kept:\n        kept = sentences[:3]\n    total_words = 0\n    limited: list[str] = []\n    for sentence in kept:\n        sentence_word_count\
+    \ = len(re.findall(r"
+  : "}:\n            繼續\n        kept.append(sentence)\n    如果 not kept:\n        kept = sentences[:3]\n    total_words = 0\n    limited: list[str] = []\n    for sentence in kept:\n        sentence_word_count\
+    \ = len(re.findall(r"

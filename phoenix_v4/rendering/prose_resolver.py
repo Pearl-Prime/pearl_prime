@@ -6,7 +6,10 @@ Normalized: placeholder/silence ids are not resolved; missing atoms yield empty 
 """
 from __future__ import annotations
 
+import logging
 import re
+
+logger = logging.getLogger(__name__)
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Optional
@@ -214,21 +217,54 @@ def _load_compression_prose(persona: str, topic: str) -> dict[str, str]:
     return out
 
 
-def _load_teacher_prose(teacher_atoms_root: Path, slot_type: str) -> dict[str, str]:
-    """Load teacher atom_id -> body from YAMLs under teacher_atoms_root/<slot_type>/*.yaml."""
+def _load_teacher_prose(teacher_atoms_root: Path, slot_type: str, locale: Optional[str] = None) -> dict[str, str]:
+    """Load teacher atom_id -> body from YAMLs under teacher_atoms_root/<slot_type>/*.yaml.
+
+    When locale is set, checks <slot_type>/locales/{locale}/*.yaml first,
+    falling back to <slot_type>/*.yaml for atoms without locale versions.
+    """
     slot_dir = teacher_atoms_root / slot_type
     if not slot_dir.exists():
         return {}
     out: dict[str, str] = {}
+
+    # Try locale-specific YAMLs first
+    if locale and locale != "en-US":
+        locale_dir = slot_dir / "locales" / locale
+        if locale_dir.exists():
+            for path in sorted(locale_dir.glob("*.yaml")):
+                data = _load_yaml(path)
+                if not data:
+                    continue
+                atom_id = data.get("atom_id") or path.stem
+                body = data.get("body")
+                if body is not None:
+                    out[atom_id] = body.strip() if isinstance(body, str) else str(body).strip()
+
+    # Fill in any atoms not found in locale dir from base (English)
     for path in sorted(slot_dir.glob("*.yaml")):
         data = _load_yaml(path)
         if not data:
             continue
         atom_id = data.get("atom_id") or path.stem
-        body = data.get("body")
-        if body is not None:
-            out[atom_id] = body.strip() if isinstance(body, str) else str(body).strip()
+        if atom_id not in out:  # Don't overwrite locale version
+            body = data.get("body")
+            if body is not None:
+                out[atom_id] = body.strip() if isinstance(body, str) else str(body).strip()
     return out
+
+
+def _locale_atom_path(base_path: Path, locale: Optional[str]) -> Path:
+    """Return locale-specific atom path if it exists, else base English path.
+
+    Convention: {slot_dir}/locales/{locale}/CANONICAL.txt takes priority over
+    {slot_dir}/CANONICAL.txt when locale is set and not en-US.
+    """
+    if locale and locale != "en-US":
+        locale_path = base_path.parent / "locales" / locale / base_path.name
+        if locale_path.exists():
+            return locale_path
+    return base_path
 
 
 def resolve_prose_for_plan(
@@ -237,12 +273,18 @@ def resolve_prose_for_plan(
     bindings_path: Optional[Path] = None,
     teacher_banks_root: Optional[Path] = None,
     compression_atoms_root: Optional[Path] = None,
+    locale: Optional[str] = None,
 ) -> RenderResult:
     """
     Resolve every real atom_id in plan to prose. Uses plan context (persona, topic, engines, teacher).
     Placeholder/silence ids are not in prose_map; missing real ids are listed in missing_ids.
+
+    When locale is set (e.g. 'zh-TW'), prefers atoms from locales/{locale}/CANONICAL.txt,
+    falling back to English CANONICAL.txt when locale version doesn't exist.
     """
     atoms_root = atoms_root or ATOMS_ROOT
+    if locale is None:
+        locale = plan.get("locale") or plan.get("book_spec", {}).get("locale")
     bindings_path = bindings_path or (CONFIG_ROOT / "topic_engine_bindings.yaml")
     teacher_banks_root = teacher_banks_root or TEACHER_BANKS_ROOT
     compression_atoms_root = compression_atoms_root or COMPRESSION_ATOMS_ROOT
@@ -252,9 +294,13 @@ def resolve_prose_for_plan(
     missing: list[str] = []
     placeholder_silence: list[tuple[str, str]] = []
 
-    # STORY: from atoms/<persona>/<topic>/<engine>/CANONICAL.txt
+    if locale and locale != "en-US":
+        logger.info("Prose resolver: locale=%s, using locale-specific atoms where available", locale)
+
+    # STORY: from atoms/<persona>/<topic>/<engine>/CANONICAL.txt (or locales/{locale}/ variant)
     for engine in ctx.engines:
         path = atoms_root / ctx.persona_id / ctx.topic_id / engine / "CANONICAL.txt"
+        path = _locale_atom_path(path, locale)
         prose_map.update(_parse_canonical_with_prose(path, ctx.persona_id, ctx.topic_id, engine))
 
     # Teacher Mode: override teaching/narrative slots with teacher_banks prose.
@@ -267,11 +313,12 @@ def resolve_prose_for_plan(
         if teacher_root.exists():
             for slot_type in ("STORY", "REFLECTION", "EXERCISE", "INTEGRATION",
                               "PIVOT", "TAKEAWAY", "THREAD", "PERMISSION", "COMPRESSION", "TEACHING"):
-                prose_map.update(_load_teacher_prose(teacher_root, slot_type))
+                prose_map.update(_load_teacher_prose(teacher_root, slot_type, locale=locale))
 
-    # Non-STORY canonical (REFLECTION, EXERCISE, HOOK, SCENE, INTEGRATION, PIVOT, TAKEAWAY, THREAD, PERMISSION) from atoms/<persona>/<topic>/<slot_type>/CANONICAL.txt
+    # Non-STORY canonical (REFLECTION, EXERCISE, HOOK, SCENE, etc.) — locale-aware
     for slot_type in ("REFLECTION", "EXERCISE", "HOOK", "SCENE", "INTEGRATION", "PIVOT", "TAKEAWAY", "THREAD", "PERMISSION"):
         path = atoms_root / ctx.persona_id / ctx.topic_id / slot_type / "CANONICAL.txt"
+        path = _locale_atom_path(path, locale)
         prose_map.update(_parse_block_file_with_prose(path, ctx.persona_id, ctx.topic_id, slot_type))
 
     # COMPRESSION from SOURCE_OF_TRUTH/compression_atoms/approved/<persona>/<topic>/*.yaml

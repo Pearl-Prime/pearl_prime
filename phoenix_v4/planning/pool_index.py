@@ -55,10 +55,11 @@ def _load_story_entries(
     persona_slug: str,
     topic_slug: str,
     bindings: dict,
+    locale: Optional[str] = None,
 ) -> list[AtomEntry]:
     """Load STORY atoms from engines allowed for topic (delegate to assembly_compiler)."""
     from phoenix_v4.planning.assembly_compiler import _load_story_atoms_for_persona_topic
-    raw = _load_story_atoms_for_persona_topic(atoms_root, persona_slug, topic_slug, bindings)
+    raw = _load_story_atoms_for_persona_topic(atoms_root, persona_slug, topic_slug, bindings, locale=locale)
     out: list[AtomEntry] = []
     narrative_keys = ("mechanism_depth", "cost_type", "cost_intensity", "identity_stage", "callback_id", "callback_phase")
     for a in raw:
@@ -184,6 +185,15 @@ def _load_teacher_pool(teacher_atoms_root: Path, slot_type: str) -> list[AtomEnt
     return entries
 
 
+def _locale_atom_path(base_path: Path, locale: Optional[str]) -> Path:
+    """Return locale-specific atom path if exists, else base English path."""
+    if locale and locale != "en-US":
+        locale_path = base_path.parent / "locales" / locale / base_path.name
+        if locale_path.exists():
+            return locale_path
+    return base_path
+
+
 class PoolIndex:
     """Index of approved atoms by (persona, topic, slot_type). Supports Teacher Mode via teacher_atoms_root."""
 
@@ -192,10 +202,12 @@ class PoolIndex:
         atoms_root: Optional[Path] = None,
         bindings_path: Optional[Path] = None,
         teacher_atoms_root: Optional[Path] = None,
+        locale: Optional[str] = None,
     ):
         self.atoms_root = atoms_root or ATOMS_ROOT
         self.bindings_path = bindings_path or (CONFIG_ROOT / "topic_engine_bindings.yaml")
         self.teacher_atoms_root = teacher_atoms_root
+        self.locale = locale
         self._bindings = _load_yaml(self.bindings_path)
 
     def get_pool(
@@ -234,7 +246,7 @@ class PoolIndex:
                     backstop = list(get_backstop_pool())
                 elif slot_type == "STORY" and _teacher_story_fallback:
                     # Load persona STORY atoms as fallback — wrapped with teacher voice at render
-                    backstop = list(_load_story_entries(self.atoms_root, persona_id, topic_id, self._bindings))
+                    backstop = list(_load_story_entries(self.atoms_root, persona_id, topic_id, self._bindings, locale=self.locale))
                     for entry in backstop:
                         if hasattr(entry, "metadata") and entry.metadata is not None:
                             entry.metadata["atom_source"] = "persona_fallback"
@@ -266,7 +278,7 @@ class PoolIndex:
             # Empty teacher pool: try persona fallback if enabled
             if _teacher_story_fallback and slot_type in _FALLBACK_SLOTS:
                 if slot_type == "STORY":
-                    return list(_load_story_entries(self.atoms_root, persona_id, topic_id, self._bindings))
+                    return list(_load_story_entries(self.atoms_root, persona_id, topic_id, self._bindings, locale=self.locale))
                 elif slot_type == "COMPRESSION":
                     return list(_load_compression_pool(persona_id, topic_id))
                 elif slot_type == "EXERCISE":
@@ -274,6 +286,7 @@ class PoolIndex:
                     return list(get_backstop_pool())
                 else:
                     path = self.atoms_root / persona_id / topic_id / slot_type / "CANONICAL.txt"
+                    path = _locale_atom_path(path, self.locale)
                     return list(_parse_block_file_canonical(path, persona_id, topic_id, slot_type))
             return []
         if slot_type == "STORY":
@@ -282,11 +295,13 @@ class PoolIndex:
                 persona_id,
                 topic_id,
                 self._bindings,
+                locale=self.locale,
             )
         if slot_type == "COMPRESSION":
             return _load_compression_pool(persona_id, topic_id)
-        # Non-STORY: single path atoms/<persona>/<topic>/<slot_type>/CANONICAL.txt
+        # Non-STORY: single path atoms/<persona>/<topic>/<slot_type>/CANONICAL.txt (locale-aware)
         path = self.atoms_root / persona_id / topic_id / slot_type / "CANONICAL.txt"
+        path = _locale_atom_path(path, self.locale)
         pool = _parse_block_file_canonical(path, persona_id, topic_id, slot_type)
         # EXERCISE backstop: when canonical missing/empty, fill from practice library
         if slot_type == "EXERCISE" and not pool:

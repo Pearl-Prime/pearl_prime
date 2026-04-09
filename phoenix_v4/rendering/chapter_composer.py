@@ -19,6 +19,11 @@ from typing import Optional
 
 from phoenix_v4.exercises.models import AssemblyContext
 
+try:
+    from phoenix_v4.rendering.locale_templates import get_template as _gt
+except ImportError:
+    def _gt(s, locale=None): return s
+
 
 # ---------------------------------------------------------------------------
 # Sentence utilities
@@ -37,17 +42,23 @@ def _is_placeholder_text(text: str) -> bool:
 
 _CHAPTER_INDEX_TLS: int = 0  # Thread-local-ish chapter index for variant rotation
 
+# Module-level locale for bridge functions (set by compose_chapter_prose)
+_LOCALE_TLS: str | None = None
+
 def _pick_variant(options: list[str], *seed_parts: str) -> str:
     if not options:
         return ""
     seed = "||".join((part or "").strip().lower() for part in seed_parts if part)
     if not seed:
-        return options[_CHAPTER_INDEX_TLS % len(options)]
-    # Mix in chapter index so same content in different chapters gets different picks
-    seed = f"{seed}||ch{_CHAPTER_INDEX_TLS}"
-    digest = hashlib.sha256(seed.encode("utf-8")).digest()
-    idx = int.from_bytes(digest[:8], "big") % len(options)
-    return options[idx]
+        picked = options[_CHAPTER_INDEX_TLS % len(options)]
+    else:
+        # Mix in chapter index so same content in different chapters gets different picks
+        seed = f"{seed}||ch{_CHAPTER_INDEX_TLS}"
+        digest = hashlib.sha256(seed.encode("utf-8")).digest()
+        idx = int.from_bytes(digest[:8], "big") % len(options)
+        picked = options[idx]
+    # Locale-aware: translate the picked English string if locale is set
+    return _gt(picked, locale=_LOCALE_TLS) if _LOCALE_TLS else picked
 
 
 # ---------------------------------------------------------------------------
@@ -296,14 +307,20 @@ def _distill_mechanism(reflection: str, thesis: str) -> str:
         )
     # Generic mechanism from thesis — rotate to avoid repetition
     core = thesis.replace("The point is that ", "")
-    variants = [
-        f"Underneath the feeling is a simple mechanism: {core} When the alarm runs the response, your nervous system treats uncertainty like danger and asks for impossible certainty. That is why ordinary moments feel heavy.",
-        f"Here is the mechanism: {core} The nervous system does not distinguish between real threat and imagined threat. Both receive the same emergency response. This is why knowing better rarely helps.",
-        f"The pattern underneath: {core} Your body responds to the prediction of danger with the same chemistry it would use for actual danger. That chemistry does not care whether the prediction is accurate.",
-        f"What drives this: {core} The system was built for physical threats in open landscapes. It now runs in offices, apartments, and group chats. The mismatch between threat model and actual environment is the source of most suffering.",
-        f"The core mechanism is this: {core} Once the nervous system flags a moment as dangerous, it narrows perception to confirm the danger. Counter-evidence gets filtered out. The feeling becomes self-reinforcing.",
+    templates = [
+        "Underneath the feeling is a simple mechanism: {core} When the alarm runs the response, your nervous system treats uncertainty like danger and asks for impossible certainty. That is why ordinary moments feel heavy.",
+        "Here is the mechanism: {core} The nervous system does not distinguish between real threat and imagined threat. Both receive the same emergency response. This is why knowing better rarely helps.",
+        "The pattern underneath: {core} Your body responds to the prediction of danger with the same chemistry it would use for actual danger. That chemistry does not care whether the prediction is accurate.",
+        "What drives this: {core} The system was built for physical threats in open landscapes. It now runs in offices, apartments, and group chats. The mismatch between threat model and actual environment is the source of most suffering.",
+        "The core mechanism is this: {core} Once the nervous system flags a moment as dangerous, it narrows perception to confirm the danger. Counter-evidence gets filtered out. The feeling becomes self-reinforcing.",
     ]
-    return variants[hash(thesis) % len(variants)]
+    picked = templates[hash(thesis) % len(templates)]
+    if _LOCALE_TLS:
+        picked = _gt(picked, locale=_LOCALE_TLS)
+    try:
+        return picked.format(core=core)
+    except (KeyError, IndexError):
+        return picked
 
 
 def _trim_reflection(reflection: str, max_sentences: int = 7) -> str:
@@ -384,7 +401,14 @@ def _polish_scene(scene: str) -> str:
 def _fallback_takeaway(thesis: str) -> str:
     """Generate a takeaway when TAKEAWAY slot is missing/placeholder."""
     core = thesis.replace("The point is that ", "")
-    return f"Remember this: {core} That is not a philosophy. That is what happened in this chapter."
+    template = "Remember this: {core} That is not a philosophy. That is what happened in this chapter."
+    if _LOCALE_TLS:
+        translated = _gt(template, locale=_LOCALE_TLS)
+        try:
+            return translated.format(core=core)
+        except (KeyError, IndexError):
+            return translated
+    return template.format(core=core)
 
 
 def _fallback_thread(thesis: str, chapter_index: int, total_chapters: int) -> str:
@@ -480,6 +504,7 @@ def compose_chapter_prose(
     total_chapters: int = 1,
     include_slot_labels_qa: bool = False,
     exercise_context: Optional[AssemblyContext] = None,
+    locale: Optional[str] = None,
 ) -> str:
     """
     Compose a single chapter's prose from its slot types and resolved prose strings.
@@ -493,6 +518,8 @@ def compose_chapter_prose(
     # Set chapter index for variant rotation across all bridge/thesis functions
     global _CHAPTER_INDEX_TLS
     _CHAPTER_INDEX_TLS = chapter_index
+    global _LOCALE_TLS
+    _LOCALE_TLS = locale
 
     # Build slot_type → prose map (take first non-placeholder for each type)
     slot_map: dict[str, str] = {}
@@ -650,4 +677,13 @@ def compose_chapter_prose(
 
     # Filter empty parts and join
     composed = "\n\n".join(p for p in parts if p and p.strip())
+
+    # Locale post-processing: replace English template strings with locale versions
+    if locale and locale != "en-US":
+        try:
+            from phoenix_v4.rendering.locale_templates import localize_rendered_text
+            composed = localize_rendered_text(composed, locale)
+        except ImportError:
+            pass
+
     return composed

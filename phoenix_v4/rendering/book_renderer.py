@@ -685,6 +685,7 @@ def chapter_flow_gate_report(
                 slot_proses=segment_proses,
                 chapter_index=ch,
                 total_chapters=len(chapter_slot_sequence),
+                locale=(plan or {}).get("locale"),
             )
             composed_chapters.append(composed)
             slot_names = [(s or "").strip().upper() for s in slots]
@@ -1125,6 +1126,7 @@ class TxtWriter:
                 chapter_index=ch,
                 total_chapters=total_chapters,
                 include_slot_labels_qa=self.options.include_slot_labels_qa,
+                locale=self.plan.get("locale"),
             )
 
             # Inject mechanism alias naming_moment once after Chapter 1 opening
@@ -1274,6 +1276,7 @@ def render_book(
         atoms_root=atoms_root,
         bindings_path=bindings_path,
         teacher_banks_root=teacher_banks_root,
+        locale=plan.get("locale"),
     )
 
     # Normalize edge cases: fail on placeholders or missing when not allowed
@@ -1323,6 +1326,15 @@ def render_book(
         writer = TxtWriter(plan, render_result.prose_map, render_result, options)
         out_path = output_dir / "book.txt"
         writer.write(out_path)
+
+        # Locale post-processing: replace English template strings with locale versions
+        locale = plan.get("locale")
+        if locale and locale != "en-US":
+            from phoenix_v4.rendering.locale_templates import localize_rendered_text
+            raw = out_path.read_text(encoding="utf-8")
+            localized = localize_rendered_text(raw, locale)
+            out_path.write_text(localized, encoding="utf-8")
+
         written["txt"] = out_path
 
         # Word-count gate + slot-level deficit report (always written, gate optional)
