@@ -178,14 +178,64 @@ def _load_config(config_root: Path) -> dict[str, Any]:
     return data
 
 
-def _load_system_prompt(prompts_root: Path) -> str:
+def _load_system_prompt(prompts_root: Path, system_prompt_rel: str | None = None) -> str:
+    rel = (system_prompt_rel or "").strip()
+    if rel:
+        rel_clean = rel.lstrip("/")
+        if rel_clean.startswith("prompts/"):
+            rel_clean = rel_clean[len("prompts/") :]
+        p = prompts_root / rel_clean
+        if p.exists():
+            return p.read_text(encoding="utf-8").strip()
     path = prompts_root / "expansion_system.txt"
     if path.exists():
         return path.read_text(encoding="utf-8").strip()
+    for fallback in ("expansion_system_cjk.txt", "expansion_system_en.txt"):
+        fp = prompts_root / fallback
+        if fp.exists():
+            return fp.read_text(encoding="utf-8").strip()
     return (
         "You are an editor for Pearl News. Expand the draft article to the target word count. "
         "Keep the same HTML structure and facts. Add detail by elaborating; do not invent. "
         "Output only the expanded HTML body, no preamble."
+    )
+
+
+def _render_teacher_block(teacher: dict[str, Any] | None, prompts_root: Path) -> str:
+    """Shared teacher injection template (expansion_teacher_block.txt) or legacy formatter."""
+    tpl_path = prompts_root / "expansion_teacher_block.txt"
+    if teacher and teacher.get("display_name") and teacher.get("atoms") and tpl_path.exists():
+        from pearl_news.pipeline.teacher_resolver import format_teacher_atoms_for_prompt
+
+        atoms = list(teacher.get("atoms") or [])[:3]
+        while len(atoms) < 3:
+            atoms.append("")
+        first = (teacher.get("display_name") or "Teacher").split()[0]
+        fmt = {
+            "display_name": teacher.get("display_name") or "",
+            "tradition": teacher.get("tradition") or "",
+            "attribution": teacher.get("attribution") or "",
+            "atom_1": str(atoms[0]).strip(),
+            "atom_2": str(atoms[1]).strip(),
+            "atom_3": str(atoms[2]).strip(),
+            "teacher_first": first,
+        }
+        text = tpl_path.read_text(encoding="utf-8").strip()
+        for key, val in fmt.items():
+            text = text.replace("{" + key + "}", str(val))
+        return text
+    if teacher and teacher.get("display_name") and teacher.get("atoms"):
+        from pearl_news.pipeline.teacher_resolver import format_teacher_atoms_for_prompt
+
+        return format_teacher_atoms_for_prompt(teacher)
+    return (
+        "Teacher: a teacher from the United Spiritual Leaders Forum\n"
+        "Tradition: interfaith\n"
+        "Attribution: A teacher from the United Spiritual Leaders Forum teaches that\n\n"
+        "Approved teachings:\n"
+        "  1. reflection and resilience in the face of uncertainty support youth well-being.\n"
+        "  2. ethical traditions speak to young people in times of change.\n"
+        "  3. one voice at a time allows readers to engage with a clear perspective."
     )
 
 
@@ -239,22 +289,10 @@ def expand_article_with_llm(
         return None
 
     root = Path(__file__).resolve().parent.parent
-    system_prompt = _load_system_prompt(root / "prompts")
+    prompts_root = root / "prompts"
+    system_prompt = _load_system_prompt(prompts_root, config.get("system_prompt"))
 
-    # --- Build teacher block ---
-    if teacher and teacher.get("display_name") and teacher.get("atoms"):
-        from pearl_news.pipeline.teacher_resolver import format_teacher_atoms_for_prompt
-        teacher_block = format_teacher_atoms_for_prompt(teacher)
-    else:
-        teacher_block = (
-            "Teacher: a teacher from the United Spiritual Leaders Forum\n"
-            "Tradition: interfaith\n"
-            "Attribution: A teacher from the United Spiritual Leaders Forum teaches that\n\n"
-            "Approved teachings:\n"
-            "  1. reflection and resilience in the face of uncertainty support youth well-being.\n"
-            "  2. ethical traditions speak to young people in times of change.\n"
-            "  3. one voice at a time allows readers to engage with a clear perspective."
-        )
+    teacher_block = _render_teacher_block(teacher, prompts_root)
 
     # --- Build research block ---
     if not research_excerpt:
@@ -266,6 +304,10 @@ def expand_article_with_llm(
         "en": ("English", "Gen Z (ages 15–28) and Gen Alpha (ages 10–15)", "English-speaking"),
         "ja": ("Japanese", "Gen Z (ages 15–28) and Gen Alpha (ages 10–15)", "Japan"),
         "zh-cn": ("Simplified Chinese", "Gen Z (ages 15–28) and Gen Alpha (ages 10–15)", "China"),
+        "ko": ("Korean", "Gen Z (ages 15–28) and Gen Alpha (ages 10–15)", "South Korea"),
+        "zh-tw": ("Traditional Chinese (Taiwan)", "Gen Z (ages 15–28) and Gen Alpha (ages 10–15)", "Taiwan"),
+        "zh-hk": ("Written Cantonese / Hong Kong", "Gen Z (ages 15–28) and Gen Alpha (ages 10–15)", "Hong Kong"),
+        "zh-sg": ("Singaporean Mandarin", "Gen Z (ages 15–28) and Gen Alpha (ages 10–15)", "Singapore"),
     }
     lang_label, audience_label, region_label = lang_labels.get(language.lower(), lang_labels["en"])
     if region:
@@ -347,86 +389,103 @@ Instructions:
 # Batch runner
 # ---------------------------------------------------------------------------
 
+def expand_one_item_qwen(
+    item: dict[str, Any],
+    config_root: Path,
+    config: dict[str, Any],
+    max_retries: int = 1,
+) -> None:
+    """Run Qwen (OpenAI-compatible) expansion for one item; mutates item."""
+    if not config.get("enabled", False):
+        return
+
+    content = item.get("content") or ""
+    if not content:
+        return
+
+    target = int(config.get("target_word_count") or 1000)
+    title = item.get("article_title") or item.get("title") or ""
+    topic = item.get("topic") or "partnerships"
+    primary_sdg = item.get("primary_sdg") or "17"
+    sdg_labels_map = item.get("sdg_labels") or {}
+    sdg_label = sdg_labels_map.get(primary_sdg) or "Partnerships for the Goals"
+    language = item.get("language") or "en"
+    template_id = item.get("template_id") or "hard_news_spiritual_response"
+    teacher = item.get("_teacher_resolved") or None
+    research_excerpt = item.get("_research_excerpt") or ""
+    rss_title = item.get("raw_title") or item.get("title") or title
+    rss_summary = item.get("raw_summary") or item.get("summary") or ""
+    rss_date = item.get("pub_date") or ""
+    rss_source_url = item.get("url") or ""
+
+    attempt = 0
+    expanded = None
+    while attempt <= max_retries and expanded is None:
+        try:
+            attempt_config = dict(config)
+            if attempt > 0:
+                attempt_config["temperature"] = min(
+                    0.9, float(config.get("temperature") or 0.5) + 0.1 * attempt
+                )
+                logger.info(
+                    "Retry %d for article %s (temp=%.1f)",
+                    attempt,
+                    item.get("id"),
+                    attempt_config["temperature"],
+                )
+            expanded = expand_article_with_llm(
+                content=content,
+                title=title,
+                topic=topic,
+                primary_sdg=primary_sdg,
+                sdg_label=sdg_label,
+                target_word_count=target,
+                config=attempt_config,
+                teacher=teacher,
+                language=language,
+                template_id=template_id,
+                rss_title=rss_title,
+                rss_summary=rss_summary,
+                rss_date=rss_date,
+                rss_source_url=rss_source_url,
+                research_excerpt=research_excerpt,
+            )
+        except Exception as e:
+            logger.warning("Expansion attempt %d failed for %s: %s", attempt, item.get("id"), e)
+        attempt += 1
+
+    if expanded:
+        item["content"] = expanded
+        item["_expansion_retries"] = attempt - 1
+        item["_expansion_provider"] = "qwen"
+        wc = len(expanded.split())
+        logger.info("Expanded article %s to ~%d words (retries=%d)", item.get("id"), wc, attempt - 1)
+    else:
+        item["_expansion_failed"] = True
+        logger.warning("Expansion failed after %d attempts for %s; keeping original", attempt, item.get("id"))
+
+
 def run_expansion(
     items: list[dict[str, Any]],
     config_root: Path | None = None,
     max_retries: int = 1,
+    merged_config: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """
     For each item, if LLM expansion is enabled, expand content toward target_word_count.
     v2: Injects teacher (resolved on item), research excerpt, language, audience.
     On failure: one retry (temperature +0.1), then keeps original.
+
+    If merged_config is set, it replaces file-based config (for provider routing).
     """
     root = Path(__file__).resolve().parent.parent
     config_root = config_root or (root / "config")
-    config = _load_config(config_root)
+    config = merged_config if merged_config is not None else _load_config(config_root)
     if not config.get("enabled", False):
         logger.info("LLM expansion disabled or config missing; skipping")
         return items
 
-    target = int(config.get("target_word_count") or 1000)
-
     for item in items:
-        content = item.get("content") or ""
-        if not content:
-            continue
-
-        title = item.get("article_title") or item.get("title") or ""
-        topic = item.get("topic") or "partnerships"
-        primary_sdg = item.get("primary_sdg") or "17"
-        sdg_labels_map = item.get("sdg_labels") or {}
-        sdg_label = sdg_labels_map.get(primary_sdg) or "Partnerships for the Goals"
-        language = item.get("language") or "en"
-        template_id = item.get("template_id") or "hard_news_spiritual_response"
-
-        # Teacher (should already be resolved and attached to item by run_article_pipeline)
-        teacher = item.get("_teacher_resolved") or None
-
-        # Research excerpt (from item or embedded KB)
-        research_excerpt = item.get("_research_excerpt") or ""
-
-        # RSS fields for user message context
-        rss_title = item.get("raw_title") or item.get("title") or title
-        rss_summary = item.get("raw_summary") or item.get("summary") or ""
-        rss_date = item.get("pub_date") or ""
-        rss_source_url = item.get("url") or ""
-
-        attempt = 0
-        expanded = None
-        while attempt <= max_retries and expanded is None:
-            try:
-                attempt_config = dict(config)
-                if attempt > 0:
-                    attempt_config["temperature"] = min(0.9, float(config.get("temperature") or 0.5) + 0.1 * attempt)
-                    logger.info("Retry %d for article %s (temp=%.1f)", attempt, item.get("id"), attempt_config["temperature"])
-                expanded = expand_article_with_llm(
-                    content=content,
-                    title=title,
-                    topic=topic,
-                    primary_sdg=primary_sdg,
-                    sdg_label=sdg_label,
-                    target_word_count=target,
-                    config=attempt_config,
-                    teacher=teacher,
-                    language=language,
-                    template_id=template_id,
-                    rss_title=rss_title,
-                    rss_summary=rss_summary,
-                    rss_date=rss_date,
-                    rss_source_url=rss_source_url,
-                    research_excerpt=research_excerpt,
-                )
-            except Exception as e:
-                logger.warning("Expansion attempt %d failed for %s: %s", attempt, item.get("id"), e)
-            attempt += 1
-
-        if expanded:
-            item["content"] = expanded
-            item["_expansion_retries"] = attempt - 1
-            wc = len(expanded.split())
-            logger.info("Expanded article %s to ~%d words (retries=%d)", item.get("id"), wc, attempt - 1)
-        else:
-            item["_expansion_failed"] = True
-            logger.warning("Expansion failed after %d attempts for %s; keeping original", attempt, item.get("id"))
+        expand_one_item_qwen(item, config_root, config, max_retries=max_retries)
 
     return items

@@ -1,39 +1,66 @@
-# Pearl News — LLM expansion to target word count (e.g. ~1000 words).
-# Uses OpenAI-compatible API: local Qwen (e.g. Ollama OpenAI compat) or GitHub/self-hosted/remote Qwen-compatible endpoint.
-# Aligns with llm_safety.yaml: expansion is an allowed use without full-article evaluation.
-# Run pipeline with: --expand
+# Pearl News — LLM expansion + routing (Qwen on Pearl Star for CJK6, Claude for English).
+# Aligns with docs/INTEGRATION_CREDENTIALS_REGISTRY.md (QWEN_BASE_URL, ANTHROPIC_API_KEY).
 
-schema_version: 1
+schema_version: 2
 
-# Set to true to run expansion when pipeline is invoked with --expand
 enabled: true
 
-# OpenAI-compatible API — default: Pearl Star Ollama endpoint.
-# Override via QWEN_BASE_URL env var for CI/production or DashScope cloud.
-base_url: "http://localhost:11434/v1"
-# LM Studio fallback: "http://localhost:1234/v1"
-# DashScope cloud: set QWEN_BASE_URL env var
-
+# Default Qwen target: Pearl Star Ollama (:11434). Override with QWEN_BASE_URL.
+base_url: "http://192.168.1.112:11434/v1"
 model: "qwen3:14b"
-# Ollama uses colon format (qwen3:14b). LM Studio uses dash (qwen3-14b).
-# Override via QWEN_MODEL env var.
-
 api_key: "ollama"
-# Ollama accepts any non-empty string. LM Studio: "lm-studio". Cloud: set via QWEN_API_KEY.
 
-# Timeout per article (seconds). Uses httpx.Timeout so connect+read+write all respect
-# this value — not just the default 5s httpx socket timeout.
 timeout: 360
-
-# Target word count for expanded body (overrides site.yaml target_word_count when set)
 target_word_count: 1000
-
-# Max tokens per call; 1200 lowers generation load vs 2048 for stability
-max_tokens: 1200
-
+max_tokens: 1500
 temperature: 0.5
-
-# Disable Qwen3 thinking mode (saves ~1200-1800 tokens and ~3-4 min per article).
-# Qwen3 enables <think> blocks by default; for article writing we don't need it.
-# Set to false only if you want reasoning traces (not recommended for production).
 disable_thinking: true
+
+# Optional legacy key (Claude path also reads CLAUDE_MODEL).
+claude_model: "claude-sonnet-4-20250514"
+
+routing:
+  default_provider: qwen
+  language_map:
+    en: claude
+    ja: qwen
+    ko: qwen
+    zh-cn: qwen
+    zh-tw: qwen
+    zh-hk: qwen
+    zh-sg: qwen
+  providers:
+    qwen:
+      engine: llm_expand
+      base_url_env: QWEN_BASE_URL
+      model_env: QWEN_MODEL
+      api_key_env: QWEN_API_KEY
+      system_prompt: expansion_system_cjk.txt
+      max_tokens: 1500
+      temperature: 0.5
+      disable_thinking: true
+    claude:
+      engine: llm_expand_claude
+      api_key_env: ANTHROPIC_API_KEY
+      model_env: CLAUDE_MODEL
+      system_prompt: expansion_system_en.txt
+      max_tokens: 2000
+      temperature: 0.4
+  fallback:
+    on_provider_error: retry_with_default
+    max_retries: 2
+
+ei_scoring:
+  enabled: true
+  default_persona: gen_z_professionals
+  safety_block_threshold: 0.5
+  tts_min_score: 0.3
+  stealth_block_threshold: 0.5
+  composite_warn: 0.4
+  composite_weights:
+    safety: 0.25
+    tts_readability: 0.2
+    domain_similarity: 0.2
+    stealth: 0.2
+    engagement: 0.15
+  recent_articles_corpus_path: ""

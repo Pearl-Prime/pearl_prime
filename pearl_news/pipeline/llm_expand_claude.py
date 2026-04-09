@@ -562,12 +562,23 @@ def expand_with_claude(
     items: list[dict[str, Any]],
     config_root: Path | None = None,
     simulate: bool = False,
+    provider_cfg: dict[str, Any] | None = None,
+    max_retries: int = 1,
 ) -> list[dict[str, Any]]:
     """
     For each item, generate article content slot-by-slot using Claude.
-    Replaces the Qwen-based expansion entirely.
+    When provider_cfg is set (from llm_expansion routing), it overrides
+    system prompt path, model env, temperature, and API key env.
+    max_retries reserved for slot-level policy (currently pass-through).
     """
-    api_key = _load_api_key()
+    _ = max_retries  # Claude path uses per-slot internal retries in _call_claude
+    root = Path(__file__).resolve().parent.parent
+    config_root = config_root or (root / "config")
+    prompts_root = root / "prompts"
+    prov = provider_cfg or {}
+
+    api_key_env_name = (prov.get("api_key_env") or "ANTHROPIC_API_KEY").strip()
+    api_key = os.environ.get(api_key_env_name, "").strip() or _load_api_key()
     if not api_key and not simulate:
         logger.error("No Anthropic API key found (ANTHROPIC_API_KEY or claude_api_key.rtf)")
         for item in items:
@@ -579,10 +590,18 @@ def expand_with_claude(
         logger.info("Running in SIMULATION mode (no API calls)")
         api_key = api_key or "sim"
 
-    root = Path(__file__).resolve().parent.parent
-    config_root = config_root or (root / "config")
-    prompts_root = root / "prompts"
-    system_prompt = _load_system_prompt(prompts_root)
+    sp_rel = (prov.get("system_prompt") or "").strip()
+    if sp_rel:
+        rel_clean = sp_rel.lstrip("/")
+        if rel_clean.startswith("prompts/"):
+            rel_clean = rel_clean[len("prompts/") :]
+        sp_path = prompts_root / rel_clean
+        if sp_path.exists():
+            system_prompt = sp_path.read_text(encoding="utf-8").strip()
+        else:
+            system_prompt = _load_system_prompt(prompts_root)
+    else:
+        system_prompt = _load_system_prompt(prompts_root)
 
     # Load config for model preference
     config_path = config_root / "llm_expansion.yaml"
@@ -591,8 +610,15 @@ def expand_with_claude(
         with open(config_path, "r", encoding="utf-8") as f:
             config = yaml.safe_load(f) or {}
 
-    model = os.environ.get("CLAUDE_MODEL") or config.get("claude_model") or "claude-sonnet-4-20250514"
-    temperature = float(config.get("temperature") or 0.5)
+    model_env_name = (prov.get("model_env") or "CLAUDE_MODEL").strip()
+    model = (
+        os.environ.get(model_env_name, "").strip()
+        or prov.get("model")
+        or config.get("claude_model")
+        or os.environ.get("CLAUDE_MODEL", "").strip()
+        or "claude-sonnet-4-20250514"
+    )
+    temperature = float(prov.get("temperature") if prov.get("temperature") is not None else config.get("temperature") or 0.5)
 
     logger.info("Claude expansion: model=%s, %d items", model, len(items))
     repo_root = Path(__file__).resolve().parents[2]
@@ -786,6 +812,7 @@ def expand_with_claude(
         item["_v52_slots"] = v52_slots
 
         item["_expansion_retries"] = 0
+        item["_expansion_provider"] = "claude"
         wc = len(item["content"].split())
         logger.info("Article %s: Claude wrote %d words across %d slots (%.1fs)",
                      article_id, wc, len([v for v in values.values() if v]), elapsed)

@@ -262,9 +262,25 @@ def run_validation(
             continue
 
         result = validate_article(content, primary_sdg=primary_sdg)
+        if item.get("_ei_hard_fail"):
+            failed = list(result.get("failed_gates") or [])
+            if "ei_v2_hard_fail" not in failed:
+                failed.append("ei_v2_hard_fail")
+            gates = dict(result.get("gates") or {})
+            gates["ei_v2_hard_fail"] = {"passed": False, "message": "EI v2 safety or stealth block"}
+            gc = int(result.get("gate_count") or 0) + 1
+            result = {
+                **result,
+                "passed": False,
+                "failed_gates": failed,
+                "gates": gates,
+                "retry_recommended": True,
+                "gate_count": gc,
+                "passed_count": max(0, gc - len(failed)),
+            }
         item["_validation"] = result
         item["_validation_failed"] = not result["passed"]
-        item["_needs_manual_review"] = not result["passed"]
+        item["_needs_manual_review"] = (not result["passed"]) or item.get("_needs_manual_review", False)
 
         if not result["passed"]:
             import logging

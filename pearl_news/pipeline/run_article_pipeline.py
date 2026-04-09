@@ -41,7 +41,8 @@ from pearl_news.pipeline.feed_ingest import ingest_feeds
 from pearl_news.pipeline.topic_sdg_classifier import classify_sdgs
 from pearl_news.pipeline.template_selector import select_templates
 from pearl_news.pipeline.article_assembler import assemble_articles
-from pearl_news.pipeline.llm_expand import run_expansion
+from pearl_news.pipeline.expansion_routing import run_routed_expansion
+from pearl_news.pipeline.ei_article_scorer import run_ei_article_scoring
 from pearl_news.pipeline.quality_gates import run_quality_gates
 from pearl_news.pipeline.qc_checklist import run_qc_checklist
 from pearl_news.pipeline.teacher_resolver import resolve_teacher
@@ -54,11 +55,15 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 # Supported languages
 # ---------------------------------------------------------------------------
-SUPPORTED_LANGUAGES = {"en", "ja", "zh-cn"}
+SUPPORTED_LANGUAGES = {"en", "ja", "zh-cn", "ko", "zh-tw", "zh-hk", "zh-sg"}
 LANGUAGE_LABELS = {
     "en": "English",
     "ja": "Japanese",
     "zh-cn": "Simplified Chinese",
+    "ko": "Korean",
+    "zh-tw": "Traditional Chinese (Taiwan)",
+    "zh-hk": "Cantonese / Hong Kong",
+    "zh-sg": "Singaporean Mandarin",
 }
 
 
@@ -98,7 +103,9 @@ def _build_manifest_item(item: dict[str, Any]) -> dict[str, Any]:
             "gate_count": validation.get("gate_count"),
             "passed_count": validation.get("passed_count"),
         },
-        "model_used": "lm_studio/qwen",
+        "model_used": item.get("_expansion_provider") or "qwen",
+        "ei_composite": item.get("_ei_composite"),
+        "ei_flags": item.get("_ei_flags") or [],
         "prompt_version": "expansion_system_v2",
         "qc_results": item.get("qc_results") or {},
         "signatures": {
@@ -127,7 +134,7 @@ def main() -> int:
         "--language",
         default="en",
         choices=sorted(SUPPORTED_LANGUAGES) + ["all"],
-        help="Article language: en (default), ja, zh-cn, or all (runs 3 language passes)",
+        help="Article language: en, ja, zh-cn, ko, zh-tw, zh-hk, zh-sg, or all",
     )
     ap.add_argument(
         "--limit",
@@ -270,11 +277,22 @@ def main() -> int:
         teacher = resolve_teacher(item, config_root=config_root, atoms_root=atoms_root)
         item["_teacher_resolved"] = teacher
 
-    # Step 4b: Optional LLM expansion (v2: injects teacher, research, language, audience)
-    if args.expand:
-        items = run_expansion(items, config_root=config_root)
+    # Step 4b: LLM expansion with language-based routing (CJK6 → Qwen, EN → Claude)
+    llm_yaml: dict = {}
+    if yaml and (config_root / "llm_expansion.yaml").exists():
+        with open(config_root / "llm_expansion.yaml", "r", encoding="utf-8") as _lf:
+            llm_yaml = yaml.safe_load(_lf) or {}
 
-    # Step 4c (NEW): Post-expansion validation gates
+    if args.expand:
+        fr = ((llm_yaml.get("routing") or {}).get("fallback") or {})
+        max_exp_retries = int(fr.get("max_retries") or 1)
+        items = run_routed_expansion(items, config_root=config_root, max_retries=max_exp_retries)
+
+    # Step 4b2: EI v2 article scoring (before hard validation)
+    if args.expand and llm_yaml.get("ei_scoring", {}).get("enabled"):
+        items = run_ei_article_scoring(items, pearl_cfg=llm_yaml)
+
+    # Step 4c: Post-expansion validation gates
     if args.validate and args.expand:
         items = run_validation(items)
         n_failed = sum(1 for i in items if i.get("_validation_failed"))
@@ -390,6 +408,9 @@ def main() -> int:
                 "passed": validation.get("passed"),
                 "failed_gates": validation.get("failed_gates", []),
             },
+            "ei_composite": item.get("_ei_composite"),
+            "ei_scores": item.get("_ei_scores"),
+            "ei_flags": item.get("_ei_flags") or [],
             "needs_manual_review": item.get("_needs_manual_review", False),
         }
         if featured_image:
@@ -421,6 +442,8 @@ def main() -> int:
             "topic": item.get("topic"),
             "failed_gates": (item.get("_validation") or {}).get("failed_gates", []),
             "expansion_failed": item.get("_expansion_failed", False),
+            "ei_flags": item.get("_ei_flags") or [],
+            "ei_composite": item.get("_ei_composite"),
             "queued_at": build_date,
         }
         for item in items

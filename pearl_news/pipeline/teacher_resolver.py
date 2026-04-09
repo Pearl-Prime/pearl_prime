@@ -94,7 +94,16 @@ def resolve_teacher(
 
     # Filter: only teachers that exist in both the atom file AND the roster,
     # and whose region_fit includes the article language (en / china / japan) or "global"
-    lang_map = {"en": "english", "zh-cn": "china", "ja": "japan", "zh": "china"}
+    lang_map = {
+        "en": "english",
+        "zh-cn": "china",
+        "ja": "japan",
+        "zh": "china",
+        "ko": "global",
+        "zh-tw": "global",
+        "zh-hk": "global",
+        "zh-sg": "global",
+    }
     region = lang_map.get(language, "global")
 
     candidates: list[dict[str, Any]] = []
