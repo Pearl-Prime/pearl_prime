@@ -111,17 +111,44 @@ def main() -> int:
             json.dumps(cr, indent=2) + "\n", encoding="utf-8"
         )
 
-        replay = ws / "_replay"
-        replay.mkdir()
-        (replay / "p_1_0.png").write_bytes(_MIN_PNG)
-        (replay / "p_1_1.png").write_bytes(_MIN_PNG)
-        (replay / "map.json").write_text(
-            json.dumps({"p_1_0": "p_1_0.png", "p_1_1": "p_1_1.png"}),
-            encoding="utf-8",
-        )
-
         cli = REPO / "scripts" / "manga" / "run_manga_chapter.py"
         env = {**os.environ, "PYTHONPATH": str(REPO)}
+        r0 = subprocess.run(
+            [
+                sys.executable,
+                str(cli),
+                "--workspace",
+                str(ws),
+                "--backend",
+                "noop",
+                "--to-stage",
+                "chapter_visual",
+            ],
+            cwd=str(REPO),
+            env=env,
+        )
+        if r0.returncode != 0:
+            print("smoke: noop chapter_visual failed", file=sys.stderr)
+            return r0.returncode
+
+        pp_path = ws / "panel_prompts.json"
+        if not pp_path.is_file():
+            print("smoke: panel_prompts.json not produced", file=sys.stderr)
+            return 1
+        panel_prompts = json.loads(pp_path.read_text(encoding="utf-8"))
+        replay = ws / "_replay"
+        replay.mkdir()
+        mapping: dict[str, str] = {}
+        for panel in panel_prompts.get("panels") or []:
+            pid = str(panel.get("panel_id") or "")
+            if not pid:
+                continue
+            fname = f"{pid}.png"
+            (replay / fname).write_bytes(_MIN_PNG)
+            mapping[pid] = fname
+        mmap = replay / "map.json"
+        mmap.write_text(json.dumps(mapping), encoding="utf-8")
+
         r = subprocess.run(
             [
                 sys.executable,
@@ -131,7 +158,9 @@ def main() -> int:
                 "--backend",
                 "replay",
                 "--replay-map",
-                str(replay / "map.json"),
+                str(mmap),
+                "--from-stage",
+                "chapter_image_gen",
             ],
             cwd=str(REPO),
             env=env,

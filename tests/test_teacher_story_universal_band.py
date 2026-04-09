@@ -13,7 +13,17 @@ class _DummyPoolIndex:
     def __init__(self, pool):
         self._pool = pool
 
-    def get_pool(self, slot_type, persona_id, topic_id, format_plan, required_count=None, teacher_exercise_fallback=False):
+    def get_pool(
+        self,
+        slot_type,
+        persona_id,
+        topic_id,
+        format_plan,
+        required_count=None,
+        teacher_exercise_fallback=False,
+        teacher_story_fallback=False,
+        **_kwargs,
+    ):
         return list(self._pool)
 
 

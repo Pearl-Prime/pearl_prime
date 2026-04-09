@@ -1,0 +1,1036 @@
+# Voice Clone Reference Library — CosyVoice2 zero-shot cloning sources
+# Authority: docs/VOICE_MEDIUM_PERSONA_TOPIC_RESEARCH.md (see worktree .claude/worktrees/fervent-goldwasser/docs/ if absent on main)
+# Date: 2026-04-09
+# CosyVoice2 server: 192.168.1.112:9880
+# Reference audio requirements: 3-10s clean single-speaker WAV/FLAC, 16kHz+, >60% active speech
+#
+# OPERATIONAL NOTE (2026-04-09): local_path clips are LibriSpeech dev-clean stand-ins (40 unique English
+# speakers, padded to 6s mono@16kHz) bound to stable reference_id labels. Replace with locale-native
+# audio from the catalog url / extraction_notes when licensing + disk pipelines are ready.
+
+schema_version: 1
+
+# ─── JAPANESE (ja-JP) — 10 reference voices ───────────────────────────────
+
+ja_jp_voices:
+
+- reference_id: ja_f_gentle_01
+  source: JVS Corpus (speaker jvs010)
+  url: 
+    https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus
+  language: ja-JP
+  gender: female
+  age_range: [25, 35]
+  characteristics: gentle, warm, clear enunciation, iyashikei quality
+  license: Free for research/personal; commercial requires permission from NII
+  extraction_notes: Download JVS corpus → jvs010/parallel100/ → select 3-10s WAV
+    utterances
+  positioning_fit: somatic_companion
+  medium_fit: [audiobook, exercise, manga_character]
+  topic_affinity: [anxiety, sleep_anxiety, somatic_healing, grief]
+  persona_affinity: [anxious_insomniac_jp, overwhelmed_caregiver_jp]
+  timbre_class: warm
+  pitch_range: [180, 240]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/ja_f_gentle_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 84
+- reference_id: ja_f_bright_01
+  source: JVS Corpus (speaker jvs025)
+  url: 
+    https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus
+  language: ja-JP
+  gender: female
+  age_range: [20, 28]
+  characteristics: bright, energetic, clear, youthful
+  license: Free for research/personal; commercial requires permission from NII
+  extraction_notes: Download JVS corpus → jvs025/parallel100/ → select energetic
+    utterances
+  positioning_fit: research_guide
+  medium_fit: [youtube, manga_character]
+  topic_affinity: [courage, imposter_syndrome, self_worth]
+  persona_affinity: [gen_z_jp]
+  timbre_class: bright
+  pitch_range: [220, 300]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/ja_f_bright_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 174
+- reference_id: ja_f_mature_01
+  source: JVS Corpus (speaker jvs042)
+  url: 
+    https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus
+  language: ja-JP
+  gender: female
+  age_range: [35, 50]
+  characteristics: mature, composed, nurturing warmth, oneesan quality
+  license: Free for research/personal; commercial requires permission from NII
+  extraction_notes: Download JVS corpus → jvs042/parallel100/ → select calm 
+    reading utterances
+  positioning_fit: elder_stabilizer
+  medium_fit: [audiobook, exercise]
+  topic_affinity: [compassion_fatigue, grief, burnout]
+  persona_affinity: [overwhelmed_caregiver_jp, salaryman_burnout_jp]
+  timbre_class: warm
+  pitch_range: [170, 220]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/ja_f_mature_01.wav
+  duration_s: 9.81
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 251
+- reference_id: ja_m_calm_01
+  source: JVS Corpus (speaker jvs060)
+  url: 
+    https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus
+  language: ja-JP
+  gender: male
+  age_range: [30, 45]
+  characteristics: calm, steady, polite, keigo-appropriate
+  license: Free for research/personal; commercial requires permission from NII
+  extraction_notes: Download JVS corpus → jvs060/parallel100/ → select measured 
+    reading utterances
+  positioning_fit: research_guide
+  medium_fit: [audiobook, presenter_deck, manga_character]
+  topic_affinity: [burnout, overthinking, financial_anxiety]
+  persona_affinity: [salaryman_burnout_jp]
+  timbre_class: clear
+  pitch_range: [100, 140]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/ja_m_calm_01.wav
+  duration_s: 20.22
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 422
+- reference_id: ja_m_deep_01
+  source: JVS Corpus (speaker jvs075)
+  url: 
+    https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus
+  language: ja-JP
+  gender: male
+  age_range: [40, 55]
+  characteristics: deep, authoritative, sensei quality, measured
+  license: Free for research/personal; commercial requires permission from NII
+  extraction_notes: Download JVS corpus → jvs075/parallel100/ → select slow, 
+    deep utterances
+  positioning_fit: elder_stabilizer
+  medium_fit: [audiobook, exercise, manga_character]
+  topic_affinity: [grief, depression, somatic_healing]
+  persona_affinity: [salaryman_burnout_jp, overwhelmed_caregiver_jp]
+  timbre_class: deep
+  pitch_range: [85, 120]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/ja_m_deep_01.wav
+  duration_s: 7.195
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 652
+- reference_id: ja_m_warm_01
+  source: Kokoro Speech Dataset (ekzemplaro)
+  url: https://github.com/kaiidams/Kokoro-Speech-Dataset
+  language: ja-JP
+  gender: male
+  age_range: [30, 40]
+  characteristics: warm, reading voice, Aozora Bunko narration style
+  license: Public domain
+  extraction_notes: Clone repo → run download script → select 3-10s clips from 
+    reading passages
+  positioning_fit: somatic_companion
+  medium_fit: [audiobook]
+  topic_affinity: [anxiety, self_worth, boundaries]
+  persona_affinity: [salaryman_burnout_jp, gen_z_jp]
+  timbre_class: warm
+  pitch_range: [110, 145]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/ja_m_warm_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 777
+- reference_id: ja_f_soft_01
+  source: JSUT Corpus
+  url: https://sites.google.com/site/shinnosuketakamichi/publication/jsut
+  language: ja-JP
+  gender: female
+  age_range: [25, 35]
+  characteristics: soft, neutral, clean reading, lab quality
+  license: CC BY-SA 4.0
+  extraction_notes: Download JSUT corpus (2.7GB WAV) → basic5000/ → select 3-10s
+    segments
+  positioning_fit: research_guide
+  medium_fit: [audiobook, presenter_deck]
+  topic_affinity: [overthinking, imposter_syndrome, burnout]
+  persona_affinity: [gen_z_jp, anxious_insomniac_jp]
+  timbre_class: clear
+  pitch_range: [200, 260]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/ja_f_soft_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 1272
+- reference_id: ja_m_energetic_01
+  source: JVS Corpus (speaker jvs088)
+  url: 
+    https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus
+  language: ja-JP
+  gender: male
+  age_range: [22, 30]
+  characteristics: energetic, upbeat, genki quality, young
+  license: Free for research/personal; commercial requires permission from NII
+  extraction_notes: Download JVS corpus → jvs088/parallel100/ → select lively 
+    utterances
+  positioning_fit: research_guide
+  medium_fit: [youtube, manga_character]
+  topic_affinity: [courage, imposter_syndrome]
+  persona_affinity: [gen_z_jp]
+  timbre_class: bright
+  pitch_range: [120, 165]
+  pace_class: fast
+
+  local_path: assets/tts/reference_clips/ja_m_energetic_01.wav
+  duration_s: 14.55
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 1462
+- reference_id: ja_f_compassionate_01
+  source: Mozilla Common Voice (ja-JP, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: ja-JP
+  gender: female
+  age_range: [35, 50]
+  characteristics: compassionate, patient, unhurried
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice ja → filter by gender=female, 
+    age=forties → select clean 3-10s clips
+  positioning_fit: elder_stabilizer
+  medium_fit: [exercise, audiobook]
+  topic_affinity: [grief, compassion_fatigue, depression]
+  persona_affinity: [overwhelmed_caregiver_jp]
+  timbre_class: warm
+  pitch_range: [175, 215]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/ja_f_compassionate_01.wav
+  duration_s: 14.675
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 1673
+- reference_id: ja_m_steady_01
+  source: Mozilla Common Voice (ja-JP, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: ja-JP
+  gender: male
+  age_range: [35, 45]
+  characteristics: steady, reliable, moderate authority
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice ja → filter by gender=male, 
+    age=thirties → select clear clips
+  positioning_fit: research_guide
+  medium_fit: [presenter_deck, youtube]
+  topic_affinity: [financial_anxiety, burnout, boundaries]
+  persona_affinity: [salaryman_burnout_jp]
+  timbre_class: clear
+  pitch_range: [105, 140]
+  pace_class: moderate
+
+# ─── KOREAN (ko-KR) — 8 reference voices ─────────────────────────────────
+
+  local_path: assets/tts/reference_clips/ja_m_steady_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 1919
+ko_kr_voices:
+
+- reference_id: ko_f_gentle_01
+  source: KSS Dataset (professional voice actress)
+  url: https://kaggle.com/bryanpark/korean-single-speaker-speech-dataset
+  language: ko-KR
+  gender: female
+  age_range: [25, 35]
+  characteristics: gentle, warm, clear, professional quality
+  license: Non-commercial (check Kaggle terms for commercial licensing)
+  extraction_notes: Download from Kaggle → select 3-10s WAV utterances from 
+    reading passages
+  positioning_fit: somatic_companion
+  medium_fit: [audiobook, exercise, manga_character]
+  topic_affinity: [anxiety, sleep_anxiety, somatic_healing]
+  persona_affinity: [anxious_student_kr, gen_z_kr]
+  timbre_class: warm
+  pitch_range: [190, 250]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/ko_f_gentle_01.wav
+  duration_s: 14.95
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 1988
+- reference_id: ko_f_soft_01
+  source: Zeroth Korean (speaker filtered for soft quality)
+  url: https://openslr.org/40/
+  language: ko-KR
+  gender: female
+  age_range: [25, 35]
+  characteristics: soft-spoken, ASMR-adjacent quality, intimate
+  license: CC BY 4.0
+  extraction_notes: Download Zeroth Korean (10GB) → filter female speakers → 
+    select soft-spoken utterances
+  positioning_fit: somatic_companion
+  medium_fit: [exercise, audiobook]
+  topic_affinity: [grief, depression, sleep_anxiety]
+  persona_affinity: [lonely_urban_professional_kr, anxious_student_kr]
+  timbre_class: breathy
+  pitch_range: [200, 260]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/ko_f_soft_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 1993
+- reference_id: ko_f_bright_01
+  source: Zeroth Korean (speaker filtered for bright quality)
+  url: https://openslr.org/40/
+  language: ko-KR
+  gender: female
+  age_range: [20, 28]
+  characteristics: bright, youthful, natural, peer register
+  license: CC BY 4.0
+  extraction_notes: Download Zeroth Korean → filter female speakers → select 
+    energetic utterances
+  positioning_fit: research_guide
+  medium_fit: [youtube, manga_character]
+  topic_affinity: [courage, imposter_syndrome, self_worth]
+  persona_affinity: [gen_z_kr]
+  timbre_class: bright
+  pitch_range: [220, 290]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/ko_f_bright_01.wav
+  duration_s: 9.02
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 2035
+- reference_id: ko_f_mature_01
+  source: Mozilla Common Voice (ko, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: ko-KR
+  gender: female
+  age_range: [35, 50]
+  characteristics: mature, nurturing, steady, compassionate
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice ko → filter by gender=female, 
+    age=forties → select warm clips
+  positioning_fit: elder_stabilizer
+  medium_fit: [audiobook, exercise]
+  topic_affinity: [compassion_fatigue, grief, burnout]
+  persona_affinity: [burned_out_professional_kr]
+  timbre_class: warm
+  pitch_range: [180, 230]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/ko_f_mature_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 2078
+- reference_id: ko_m_steady_01
+  source: Zeroth Korean (speaker filtered for steady quality)
+  url: https://openslr.org/40/
+  language: ko-KR
+  gender: male
+  age_range: [30, 40]
+  characteristics: steady, professional, jondaenmal register
+  license: CC BY 4.0
+  extraction_notes: Download Zeroth Korean → filter male speakers → select 
+    measured reading utterances
+  positioning_fit: research_guide
+  medium_fit: [audiobook, presenter_deck]
+  topic_affinity: [burnout, financial_anxiety, overthinking]
+  persona_affinity: [burned_out_professional_kr]
+  timbre_class: clear
+  pitch_range: [100, 140]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/ko_m_steady_01.wav
+  duration_s: 9.81
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 2086
+- reference_id: ko_m_warm_01
+  source: Zeroth Korean (speaker filtered for warm quality)
+  url: https://openslr.org/40/
+  language: ko-KR
+  gender: male
+  age_range: [30, 45]
+  characteristics: warm, empathetic, healing register
+  license: CC BY 4.0
+  extraction_notes: Download Zeroth Korean → filter male speakers → select 
+    warm-toned utterances
+  positioning_fit: somatic_companion
+  medium_fit: [audiobook, exercise, manga_character]
+  topic_affinity: [grief, somatic_healing, depression]
+  persona_affinity: [lonely_urban_professional_kr]
+  timbre_class: warm
+  pitch_range: [95, 130]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/ko_m_warm_01.wav
+  duration_s: 6.59
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 2277
+- reference_id: ko_m_deep_01
+  source: Mozilla Common Voice (ko, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: ko-KR
+  gender: male
+  age_range: [40, 55]
+  characteristics: deep, authoritative, grounding
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice ko → filter by gender=male, 
+    age=fifties → select deep-voiced clips
+  positioning_fit: elder_stabilizer
+  medium_fit: [audiobook, exercise]
+  topic_affinity: [grief, depression, somatic_healing]
+  persona_affinity: [burned_out_professional_kr]
+  timbre_class: deep
+  pitch_range: [85, 115]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/ko_m_deep_01.wav
+  duration_s: 9.915
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 2412
+- reference_id: ko_m_energetic_01
+  source: Zeroth Korean (speaker filtered for energetic quality)
+  url: https://openslr.org/40/
+  language: ko-KR
+  gender: male
+  age_range: [22, 30]
+  characteristics: energetic, young, peer register
+  license: CC BY 4.0
+  extraction_notes: Download Zeroth Korean → filter young male speakers → select
+    lively utterances
+  positioning_fit: research_guide
+  medium_fit: [youtube, manga_character]
+  topic_affinity: [courage, imposter_syndrome]
+  persona_affinity: [gen_z_kr, anxious_student_kr]
+  timbre_class: bright
+  pitch_range: [120, 160]
+  pace_class: fast
+
+# ─── MANDARIN CHINESE (zh-CN) — 8 reference voices ───────────────────────
+
+  local_path: assets/tts/reference_clips/ko_m_energetic_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 2428
+zh_cn_voices:
+
+- reference_id: cn_f_gentle_01
+  source: AISHELL-3 (speaker filtered for gentle quality)
+  url: https://www.openslr.org/93/
+  language: zh-CN
+  gender: female
+  age_range: [25, 35]
+  characteristics: gentle, clear Mandarin, bedtime-appropriate warmth
+  license: Apache 2.0
+  extraction_notes: Download AISHELL-3 (19GB) → filter female speakers → select 
+    gentle utterances 3-10s
+  positioning_fit: somatic_companion
+  medium_fit: [audiobook, exercise, manga_character]
+  topic_affinity: [anxiety, sleep_anxiety, somatic_healing]
+  persona_affinity: [anxious_student_cn, gen_z_cn]
+  timbre_class: warm
+  pitch_range: [190, 250]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/cn_f_gentle_01.wav
+  duration_s: 11.7
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 2803
+- reference_id: cn_f_bright_01
+  source: AISHELL-3 (speaker filtered for bright quality)
+  url: https://www.openslr.org/93/
+  language: zh-CN
+  gender: female
+  age_range: [20, 28]
+  characteristics: bright, youthful, natural, Bilibili-audience style
+  license: Apache 2.0
+  extraction_notes: Download AISHELL-3 → filter young female speakers → select 
+    clear energetic clips
+  positioning_fit: research_guide
+  medium_fit: [youtube, manga_character]
+  topic_affinity: [courage, imposter_syndrome, self_worth]
+  persona_affinity: [gen_z_cn]
+  timbre_class: bright
+  pitch_range: [220, 290]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/cn_f_bright_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 2902
+- reference_id: cn_f_mature_01
+  source: AISHELL-3 (speaker filtered for mature quality)
+  url: https://www.openslr.org/93/
+  language: zh-CN
+  gender: female
+  age_range: [35, 50]
+  characteristics: mature, composed, Ximalaya-quality narration
+  license: Apache 2.0
+  extraction_notes: Download AISHELL-3 → filter mature female speakers → select 
+    composed reading clips
+  positioning_fit: elder_stabilizer
+  medium_fit: [audiobook, exercise]
+  topic_affinity: [compassion_fatigue, grief, burnout]
+  persona_affinity: [new_middle_class_cn, burned_out_professional_cn]
+  timbre_class: warm
+  pitch_range: [175, 225]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/cn_f_mature_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 3000
+- reference_id: cn_f_clear_01
+  source: Mozilla Common Voice (zh-CN, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-CN
+  gender: female
+  age_range: [28, 38]
+  characteristics: clear, professional, news-anchor quality
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice zh-CN → filter female → select clear 
+    professional clips
+  positioning_fit: research_guide
+  medium_fit: [presenter_deck, youtube]
+  topic_affinity: [financial_anxiety, boundaries, burnout]
+  persona_affinity: [burned_out_professional_cn, new_middle_class_cn]
+  timbre_class: clear
+  pitch_range: [200, 255]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/cn_f_clear_01.wav
+  duration_s: 10.5
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 3081
+- reference_id: cn_m_steady_01
+  source: AISHELL-3 (speaker filtered for steady quality)
+  url: https://www.openslr.org/93/
+  language: zh-CN
+  gender: male
+  age_range: [30, 40]
+  characteristics: steady, authoritative, Dedao-audience quality
+  license: Apache 2.0
+  extraction_notes: Download AISHELL-3 → filter male speakers → select measured 
+    authoritative clips
+  positioning_fit: research_guide
+  medium_fit: [audiobook, presenter_deck]
+  topic_affinity: [burnout, financial_anxiety, overthinking]
+  persona_affinity: [burned_out_professional_cn, new_middle_class_cn]
+  timbre_class: clear
+  pitch_range: [100, 140]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/cn_m_steady_01.wav
+  duration_s: 27.99
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 3170
+- reference_id: cn_m_warm_01
+  source: AISHELL-3 (speaker filtered for warm quality)
+  url: https://www.openslr.org/93/
+  language: zh-CN
+  gender: male
+  age_range: [35, 50]
+  characteristics: warm, empathetic, calm
+  license: Apache 2.0
+  extraction_notes: Download AISHELL-3 → filter mature male speakers → select 
+    warm-toned clips
+  positioning_fit: somatic_companion
+  medium_fit: [audiobook, exercise, manga_character]
+  topic_affinity: [grief, somatic_healing, depression]
+  persona_affinity: [burned_out_professional_cn]
+  timbre_class: warm
+  pitch_range: [95, 130]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/cn_m_warm_01.wav
+  duration_s: 10.755
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 3536
+- reference_id: cn_m_deep_01
+  source: Mozilla Common Voice (zh-CN, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-CN
+  gender: male
+  age_range: [40, 55]
+  characteristics: deep, grounding, elder quality
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice zh-CN → filter male age 50+ → select 
+    deep-voiced clips
+  positioning_fit: elder_stabilizer
+  medium_fit: [audiobook, exercise]
+  topic_affinity: [grief, depression, somatic_healing]
+  persona_affinity: [new_middle_class_cn]
+  timbre_class: deep
+  pitch_range: [85, 115]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/cn_m_deep_01.wav
+  duration_s: 14.14
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 3576
+- reference_id: cn_m_energetic_01
+  source: AISHELL-3 (speaker filtered for energetic quality)
+  url: https://www.openslr.org/93/
+  language: zh-CN
+  gender: male
+  age_range: [22, 30]
+  characteristics: energetic, youthful, Bilibili-style
+  license: Apache 2.0
+  extraction_notes: Download AISHELL-3 → filter young male speakers → select 
+    lively clips
+  positioning_fit: research_guide
+  medium_fit: [youtube, manga_character]
+  topic_affinity: [courage, imposter_syndrome]
+  persona_affinity: [gen_z_cn]
+  timbre_class: bright
+  pitch_range: [120, 160]
+  pace_class: fast
+
+# ─── TAIWANESE MANDARIN (zh-TW) — 8 reference voices ─────────────────────
+
+  local_path: assets/tts/reference_clips/cn_m_energetic_01.wav
+  duration_s: 8.83
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 3752
+zh_tw_voices:
+
+- reference_id: tw_f_gentle_01
+  source: Mozilla Common Voice (zh-TW, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-TW
+  gender: female
+  age_range: [25, 35]
+  characteristics: gentle, warm, Taiwanese Mandarin intonation
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice zh-TW → filter female → select gentle 
+    warm clips
+  positioning_fit: somatic_companion
+  medium_fit: [audiobook, exercise, manga_character]
+  topic_affinity: [anxiety, sleep_anxiety, somatic_healing]
+  persona_affinity: [anxious_insomniac_tw, anxious_attacher_tw]
+  timbre_class: warm
+  pitch_range: [190, 250]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/tw_f_gentle_01.wav
+  duration_s: 9.48
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 3853
+- reference_id: tw_f_bright_01
+  source: Mozilla Common Voice (zh-TW, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-TW
+  gender: female
+  age_range: [20, 28]
+  characteristics: bright, clear, youthful
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice zh-TW → filter young female → select 
+    bright utterances
+  positioning_fit: research_guide
+  medium_fit: [youtube, manga_character]
+  topic_affinity: [courage, imposter_syndrome, self_worth]
+  persona_affinity: [gen_z_tw]
+  timbre_class: bright
+  pitch_range: [220, 285]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/tw_f_bright_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 5338
+- reference_id: tw_f_mature_01
+  source: Mozilla Common Voice (zh-TW, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-TW
+  gender: female
+  age_range: [35, 50]
+  characteristics: mature, compassionate, unhurried
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice zh-TW → filter mature female → select 
+    warm composed clips
+  positioning_fit: elder_stabilizer
+  medium_fit: [audiobook, exercise]
+  topic_affinity: [grief, compassion_fatigue, burnout]
+  persona_affinity: [bereaved_adult_tw, healthcare_worker_tw]
+  timbre_class: warm
+  pitch_range: [175, 225]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/tw_f_mature_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 5536
+- reference_id: tw_f_clear_01
+  source: Mozilla Common Voice (zh-TW, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-TW
+  gender: female
+  age_range: [28, 38]
+  characteristics: clear, professional, tech-sector pragmatic
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice zh-TW → filter female professional → 
+    select clear clips
+  positioning_fit: research_guide
+  medium_fit: [presenter_deck, youtube]
+  topic_affinity: [financial_anxiety, boundaries, burnout]
+  persona_affinity: [burned_out_professional_tw, healthcare_worker_tw]
+  timbre_class: clear
+  pitch_range: [200, 255]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/tw_f_clear_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 5694
+- reference_id: tw_m_steady_01
+  source: Mozilla Common Voice (zh-TW, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-TW
+  gender: male
+  age_range: [30, 40]
+  characteristics: steady, reliable, professional clarity
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice zh-TW → filter male → select steady 
+    measured clips
+  positioning_fit: research_guide
+  medium_fit: [audiobook, presenter_deck]
+  topic_affinity: [burnout, overthinking, financial_anxiety]
+  persona_affinity: [burned_out_professional_tw]
+  timbre_class: clear
+  pitch_range: [100, 140]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/tw_m_steady_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 5895
+- reference_id: tw_m_warm_01
+  source: Mozilla Common Voice (zh-TW, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-TW
+  gender: male
+  age_range: [35, 50]
+  characteristics: warm, calm, empathetic
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice zh-TW → filter mature male → select 
+    warm clips
+  positioning_fit: somatic_companion
+  medium_fit: [audiobook, exercise, manga_character]
+  topic_affinity: [grief, somatic_healing, depression]
+  persona_affinity: [bereaved_adult_tw]
+  timbre_class: warm
+  pitch_range: [95, 130]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/tw_m_warm_01.wav
+  duration_s: 9.27
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 6241
+- reference_id: tw_m_deep_01
+  source: Mozilla Common Voice (zh-TW, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-TW
+  gender: male
+  age_range: [40, 55]
+  characteristics: deep, grounding, elder quality
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice zh-TW → filter male age 50+ → select 
+    deep clips
+  positioning_fit: elder_stabilizer
+  medium_fit: [audiobook, exercise]
+  topic_affinity: [grief, depression, somatic_healing]
+  persona_affinity: [bereaved_adult_tw]
+  timbre_class: deep
+  pitch_range: [85, 115]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/tw_m_deep_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 6295
+- reference_id: tw_m_energetic_01
+  source: Mozilla Common Voice (zh-TW, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-TW
+  gender: male
+  age_range: [22, 30]
+  characteristics: energetic, youthful, casual
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice zh-TW → filter young male → select 
+    energetic clips
+  positioning_fit: research_guide
+  medium_fit: [youtube, manga_character]
+  topic_affinity: [courage, imposter_syndrome]
+  persona_affinity: [gen_z_tw]
+  timbre_class: bright
+  pitch_range: [120, 160]
+  pace_class: fast
+
+# ─── CANTONESE (zh-HK) — 6 reference voices ──────────────────────────────
+
+  local_path: assets/tts/reference_clips/tw_m_energetic_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 6313
+zh_hk_voices:
+
+- reference_id: hk_f_gentle_01
+  source: Mozilla Common Voice (yue, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-HK
+  gender: female
+  age_range: [25, 35]
+  characteristics: gentle, warm, native Cantonese
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice yue → filter female → select gentle 
+    warm clips
+  positioning_fit: somatic_companion
+  medium_fit: [audiobook, exercise, manga_character]
+  topic_affinity: [anxiety, sleep_anxiety, somatic_healing]
+  persona_affinity: [anxious_insomniac_hk, caregiver_hk]
+  timbre_class: warm
+  pitch_range: [190, 250]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/hk_f_gentle_01.wav
+  duration_s: 7.295
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 6319
+- reference_id: hk_f_clear_01
+  source: HKCanCor (radio programme segments)
+  url: https://github.com/fcbond/hkcancor
+  language: zh-HK
+  gender: female
+  age_range: [28, 40]
+  characteristics: clear, professional, broadcast quality
+  license: CC BY 4.0
+  extraction_notes: Clone HKCanCor → extract radio segments → select clean 
+    female single-speaker clips
+  positioning_fit: research_guide
+  medium_fit: [presenter_deck, youtube]
+  topic_affinity: [burnout, financial_anxiety, boundaries]
+  persona_affinity: [burned_out_professional_hk]
+  timbre_class: clear
+  pitch_range: [200, 260]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/hk_f_clear_01.wav
+  duration_s: 9.88
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 6345
+- reference_id: hk_f_mature_01
+  source: Mozilla Common Voice (yue, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-HK
+  gender: female
+  age_range: [35, 50]
+  characteristics: mature, compassionate, native Cantonese
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice yue → filter mature female → select 
+    composed clips
+  positioning_fit: elder_stabilizer
+  medium_fit: [audiobook, exercise]
+  topic_affinity: [grief, compassion_fatigue]
+  persona_affinity: [caregiver_hk]
+  timbre_class: warm
+  pitch_range: [175, 225]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/hk_f_mature_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 7850
+- reference_id: hk_m_steady_01
+  source: HKCanCor (radio programme segments)
+  url: https://github.com/fcbond/hkcancor
+  language: zh-HK
+  gender: male
+  age_range: [30, 45]
+  characteristics: steady, professional, clear Cantonese
+  license: CC BY 4.0
+  extraction_notes: Clone HKCanCor → extract radio segments → select clean male 
+    single-speaker clips
+  positioning_fit: research_guide
+  medium_fit: [audiobook, presenter_deck]
+  topic_affinity: [burnout, overthinking, financial_anxiety]
+  persona_affinity: [burned_out_professional_hk]
+  timbre_class: clear
+  pitch_range: [100, 140]
+  pace_class: moderate
+
+  local_path: assets/tts/reference_clips/hk_m_steady_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 7976
+- reference_id: hk_m_warm_01
+  source: Mozilla Common Voice (yue, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-HK
+  gender: male
+  age_range: [35, 50]
+  characteristics: warm, calm, grounding
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice yue → filter mature male → select warm
+    clips
+  positioning_fit: somatic_companion
+  medium_fit: [audiobook, exercise, manga_character]
+  topic_affinity: [grief, somatic_healing, depression]
+  persona_affinity: [gen_z_hk]
+  timbre_class: warm
+  pitch_range: [95, 130]
+  pace_class: slow
+
+  local_path: assets/tts/reference_clips/hk_m_warm_01.wav
+  duration_s: 6.0
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 8297
+- reference_id: hk_m_deep_01
+  source: Mozilla Common Voice (yue, filtered)
+  url: https://commonvoice.mozilla.org/en/datasets
+  language: zh-HK
+  gender: male
+  age_range: [40, 55]
+  characteristics: deep, elder quality, authoritative
+  license: CC0 (public domain dedication)
+  extraction_notes: Download Common Voice yue → filter male 50+ → select deep 
+    clips
+  positioning_fit: elder_stabilizer
+  medium_fit: [audiobook, exercise]
+  topic_affinity: [grief, depression]
+  persona_affinity: [burned_out_professional_hk]
+  timbre_class: deep
+  pitch_range: [85, 115]
+  pace_class: slow
+
+# ─── SUMMARY ──────────────────────────────────────────────────────────────
+
+  local_path: assets/tts/reference_clips/hk_m_deep_01.wav
+  duration_s: 9.71
+  sample_rate: 16000
+  acoustic_source: LibriSpeech dev-clean stand-in (English multi-speaker); 
+    replace with locale-matched clip per catalog url
+  libri_synthetic_speaker_id: 8842
+totals:
+  ja_JP: 10  # 5F + 5M
+  ko_KR: 8   # 4F + 4M
+  zh_CN: 8   # 4F + 4M
+  zh_TW: 8   # 4F + 4M
+  zh_HK: 6   # 3F + 3M
+  total: 40
+
+primary_sources:
+- name: JVS Corpus
+  voices_used: 6
+  license: Research/personal free; commercial requires NII permission
+- name: AISHELL-3
+  voices_used: 5
+  license: Apache 2.0 (commercial OK)
+- name: Zeroth Korean
+  voices_used: 5
+  license: CC BY 4.0 (commercial OK)
+- name: Mozilla Common Voice
+  voices_used: 16
+  license: CC0 (public domain — best license)
+- name: KSS Dataset
+  voices_used: 1
+  license: Non-commercial
+- name: Kokoro Speech Dataset
+  voices_used: 1
+  license: Public domain
+- name: JSUT Corpus
+  voices_used: 1
+  license: CC BY-SA 4.0
+- name: HKCanCor
+  voices_used: 2
+  license: CC BY 4.0
+- name: LibriVox
+  voices_used: 3
+  license: Public domain

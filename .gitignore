@@ -58,6 +58,9 @@ artifacts/video/test-*/
 artifacts/onboarding_audio/*.mp3
 artifacts/onboarding_audio/segments/
 artifacts/onboarding_audio/_ffmpeg_concat_list.txt
+# CosyVoice2 reference clips (local extraction; regenerate from voice_clone_reference_library.yaml)
+assets/tts/reference_clips/
+
 # Published copies for Pages (optional local deploy bundle)
 brand-wizard-app/public/onboarding/audio/*.mp3
 anxiety_hack/section-0001.mp3

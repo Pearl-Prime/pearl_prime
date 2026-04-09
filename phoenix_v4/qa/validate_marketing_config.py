@@ -50,6 +50,7 @@ REQUIRED_PERSONAS = {
     "healthcare_rns",
     "gen_alpha_students",
     "first_responders",
+    "gen_z_student",
 }
 
 TOPIC_FIELD_SPECS = {

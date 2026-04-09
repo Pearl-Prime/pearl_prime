@@ -24,6 +24,25 @@ from phoenix_v4.rendering.book_renderer import (
 )
 
 
+@pytest.fixture(autouse=True)
+def _isolate_book_renderer_module_caches() -> None:
+    """Clear process-wide renderer caches so earlier tests cannot flip flow-gate outcomes."""
+    from phoenix_v4.quality.ei_v2.config import invalidate_ei_v2_config_cache
+    from phoenix_v4.rendering import chapter_composer
+
+    invalidate_ei_v2_config_cache()
+    book_renderer_module._LOCATION_PROFILE_CACHE = None
+    book_renderer_module._FORMAT_REGISTRY_CACHE = None
+    book_renderer_module._MECHANISM_ALIAS_CACHE.clear()
+    chapter_composer._CHAPTER_INDEX_TLS = 0
+    yield
+    invalidate_ei_v2_config_cache()
+    book_renderer_module._LOCATION_PROFILE_CACHE = None
+    book_renderer_module._FORMAT_REGISTRY_CACHE = None
+    book_renderer_module._MECHANISM_ALIAS_CACHE.clear()
+    chapter_composer._CHAPTER_INDEX_TLS = 0
+
+
 def test_placeholder_silence_helpers() -> None:
     assert _is_placeholder_or_silence("placeholder:STORY:ch0:slot2") is True
     assert _is_placeholder_or_silence("silence:REFLECTION:ch1:slot3") is True
