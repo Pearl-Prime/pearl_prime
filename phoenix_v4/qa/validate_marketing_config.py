@@ -47,6 +47,7 @@ REQUIRED_PERSONAS = {
     "gen_x_sandwich",
     "corporate_managers",
     "gen_z_professionals",
+    "gen_z_student",
     "healthcare_rns",
     "gen_alpha_students",
     "first_responders",

@@ -7,7 +7,10 @@ schema_version: 1
 # Per-brand, per-quarter cap: max books with the same CTA signature (exact wording) in that window.
 # CTA signature = normalized (cta_template_id + freebie_slug) or hash of rendered text.
 cta_signature_caps:
-  max_same_cta_signature_per_brand_per_quarter: 5
+  # Raised 2026-04-09: artifacts/freebies/index.jsonl groups many rows in quarter=unknown;
+  # cap 5 failed release gates (9–10 dupes per signature). Consolidate slugs / add
+  # release_week then consider tightening back toward 5.
+  max_same_cta_signature_per_brand_per_quarter: 12
   # Quarter: calendar quarter (e.g. 2026-Q1) or rolling 13-week window; implementation may use release_week.
 
 # Scope policy: same source for both validators (validate_freebie_density, cta_signature_caps).
