@@ -2,7 +2,7 @@
 
 **Purpose:** Canonical index for documentation authority and navigation.  
 **Missing-file policy:** Only existing files are linked; planned or missing files are listed as backlog items (plain text or `path` with ⚠️ *file not present*).  
-**Last updated:** 2026-04-07
+**Last updated:** 2026-04-09
 
 **For developers: start here.** This index is your map. Use the **task table** below for "where to go" by task. **GitHub (PRs, merges, two repos, runners):** go to [GitHub Operations Framework](#github-operations-framework) and [docs/GITHUB_OPERATIONS_FRAMEWORK.md](./GITHUB_OPERATIONS_FRAMEWORK.md) — repo map, workflow matrix, canonical ownership, PR flow, merge to main, Qwen-Agent push/runner, recovery. **No-failure standard:** [docs/GITHUB_NO_FAILURE_FRAMEWORK.md](./GITHUB_NO_FAILURE_FRAMEWORK.md). **Tests / CI:** [Test suite (document all)](#test-suite-document-all). **Domain work:** use the task table and the "(document all)" subsections per domain.
 
@@ -224,6 +224,8 @@ Metadata-driven visual storytelling engine: script segments → Shot Planner →
 | **Post–first-video backlog** | [docs/VIDEO_PIPELINE_POST_FIRST_VIDEO_BACKLOG.md](./VIDEO_PIPELINE_POST_FIRST_VIDEO_BACKLOG.md) — pipeline_version, input refs, placeholder naming, timing log, QC expansion, FFmpeg params |
 | **Visual brief (image bank)** | [docs/VIDEO_PIPELINE_VISUAL_BRIEF.md](./VIDEO_PIPELINE_VISUAL_BRIEF.md) — hook types, composition targets, emotion–visual alignment; reference for prompt/composition only |
 | **FFmpeg reference (renderer)** | [docs/VIDEO_PIPELINE_FFMPEG_REFERENCE.md](./VIDEO_PIPELINE_FFMPEG_REFERENCE.md) — zoompan, eq, drawtext/drawbox, encoding presets; render-time params only |
+| **Narration (CJK / English), ambient + music bank** | [docs/VIDEO_NARRATION_CJK_AND_AMBIENT_WIRING.md](./VIDEO_NARRATION_CJK_AND_AMBIENT_WIRING.md) — CosyVoice2 vs Piper, narrator YAML, soundtrack mix, pacing config pointers |
+| **Session handoff (2026-04-09 presentation / plan-ahjan)** | [docs/SESSION_HANDOFF_2026_04_09_PRESENTATION.md](./SESSION_HANDOFF_2026_04_09_PRESENTATION.md) — repro command, evidence paths, PR #313 cross-link |
 | **FLUX/Shnell research (Workers AI)** | docs/flux_shnell_research.rtf (optional local reference; if file missing in a fork, treat as backlog item) — Cloudflare Workers AI FLUX API format, auth, request body, image size/aspect, prompt handling; use for video image bank generation (and any future T2I cover art) |
 | **FLUX credentials** | [docs/VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md](./VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md) — Cloudflare account/token setup for run_flux_generate.py; env or key file |
 | **Video color master system** | [docs/video-color-master-system.html](./video-color-master-system.html) — Canonical palette: 4 bands (Hook, Cool/Calm, Warm/Rise, Neutral/Root), per-topic hex, text-on-color previews, Shnell seed/guidance, per-band never rules; source for brand_style_tokens.yaml |
@@ -1856,6 +1858,8 @@ Single list of every **doc**, **spec**, **config**, and **script** referenced in
 | [BRANCH_PROTECTION_REQUIREMENTS.md](./BRANCH_PROTECTION_REQUIREMENTS.md) | Core system docs | ✓ |
 | [DISASTER_RECOVERY_DRILL_CHECKLIST.md](./DISASTER_RECOVERY_DRILL_CHECKLIST.md) | Core system docs | ✓ |
 | [VIDEO_PIPELINE_SPEC.md](./VIDEO_PIPELINE_SPEC.md) | Video pipeline | ✓ |
+| [VIDEO_NARRATION_CJK_AND_AMBIENT_WIRING.md](./VIDEO_NARRATION_CJK_AND_AMBIENT_WIRING.md) | Video pipeline (narration / audio) | ✓ |
+| [SESSION_HANDOFF_2026_04_09_PRESENTATION.md](./SESSION_HANDOFF_2026_04_09_PRESENTATION.md) | Video pipeline (session handoff) | ✓ |
 | [VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md](./VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md) | Video pipeline (FLUX) | ✓ |
 | [research/MARKETING_DEEP_RESEARCH_PROMPTS.md](./research/MARKETING_DEEP_RESEARCH_PROMPTS.md) | Marketing & deep research | ✓ |
 | [RESEARCH_INTEGRATION_DEV_SPEC.md](./RESEARCH_INTEGRATION_DEV_SPEC.md) | Marketing & deep research / research ops | ✓ — Orphaned research → config PRs; EI v2 KB flag; partial marketing provenance |

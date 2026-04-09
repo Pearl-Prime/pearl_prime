@@ -296,3 +296,5 @@ channels:
 - Video config: `../config/video/`
 - Golden fixtures: `../fixtures/video_pipeline/` (render_manifest, script_segments, shot_plan, timeline, distribution_manifest, video_provenance, image_bank_asset_example)
 - Pipeline scripts: `../scripts/video/` (prepare_script_segments, run_shot_planner, run_asset_resolver, run_timeline_builder, run_caption_adapter, run_qc, write_provenance, write_metadata, run_render, run_pipeline)
+- Narration / ambient / music bank: [VIDEO_NARRATION_CJK_AND_AMBIENT_WIRING.md](./VIDEO_NARRATION_CJK_AND_AMBIENT_WIRING.md)
+- Real-plan handoff: [SESSION_HANDOFF_2026_04_09_PRESENTATION.md](./SESSION_HANDOFF_2026_04_09_PRESENTATION.md)
