@@ -1,0 +1,246 @@
+{
+  "actual_catalog": {
+    "entry_count": 8287,
+    "brand_lane_pair_count": 309,
+    "distinct_lanes": [
+      "de_DE",
+      "en_US",
+      "es_ES",
+      "es_US",
+      "fr_FR",
+      "hu_HU",
+      "it_IT",
+      "ja_JP",
+      "ko_KR",
+      "zh_CN",
+      "zh_HK",
+      "zh_SG",
+      "zh_TW"
+    ],
+    "distinct_base_brand_count": 24,
+    "brand_counts_by_lane": {
+      "de_DE": 23,
+      "en_US": 24,
+      "es_ES": 24,
+      "es_US": 24,
+      "fr_FR": 24,
+      "hu_HU": 22,
+      "it_IT": 24,
+      "ja_JP": 24,
+      "ko_KR": 24,
+      "zh_CN": 24,
+      "zh_HK": 24,
+      "zh_SG": 24,
+      "zh_TW": 24
+    },
+    "title_rows_per_lane": {
+      "de_DE": 783,
+      "en_US": 828,
+      "es_ES": 552,
+      "es_US": 552,
+      "fr_FR": 828,
+      "hu_HU": 420,
+      "it_IT": 552,
+      "ja_JP": 828,
+      "ko_KR": 828,
+      "zh_CN": 552,
+      "zh_HK": 552,
+      "zh_SG": 460,
+      "zh_TW": 552
+    },
+    "topics_present": [
+      "adhd_focus",
+      "anxiety",
+      "boundaries",
+      "burnout",
+      "compassion_fatigue",
+      "courage",
+      "depression",
+      "financial_anxiety",
+      "financial_stress",
+      "grief",
+      "imposter_syndrome",
+      "mindfulness",
+      "overthinking",
+      "self_worth",
+      "sleep_anxiety",
+      "social_anxiety",
+      "somatic_healing"
+    ],
+    "personas_present": [
+      "corporate_managers",
+      "entrepreneurs",
+      "first_responders",
+      "gen_x_sandwich",
+      "gen_z_professionals",
+      "healthcare_rns",
+      "millennial_women_professionals",
+      "nyc_executives",
+      "tech_finance_burnout",
+      "working_parents"
+    ],
+    "runtime_formats_present": [
+      "micro_book_15",
+      "short_book_30",
+      "standard_book"
+    ],
+    "content_types_present": [
+      "micro_book",
+      "series_book",
+      "standalone"
+    ]
+  },
+  "planned_architecture": {
+    "planned_lane_count": 12,
+    "planned_brands_per_lane": 37,
+    "planned_brand_instances": 444
+  },
+  "coverage_gaps": {
+    "missing_topics_global": [],
+    "missing_personas_global": [
+      "gen_alpha_students",
+      "gen_z_student"
+    ],
+    "missing_runtime_formats_global": [
+      "deep_book_4h",
+      "deep_book_6h",
+      "extended_book_2h",
+      "micro_book_20"
+    ],
+    "missing_content_types_global": [
+      "deep_book"
+    ],
+    "missing_topics_by_lane": {
+      "de_DE": [],
+      "en_US": [],
+      "es_ES": [],
+      "es_US": [],
+      "fr_FR": [],
+      "hu_HU": [],
+      "it_IT": [],
+      "ja_JP": [],
+      "ko_KR": [],
+      "zh_CN": [],
+      "zh_HK": [],
+      "zh_SG": [],
+      "zh_TW": []
+    },
+    "missing_personas_by_lane": {
+      "de_DE": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "en_US": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "es_ES": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "es_US": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "fr_FR": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "hu_HU": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "it_IT": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "ja_JP": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "ko_KR": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "zh_CN": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "zh_HK": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "zh_SG": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ],
+      "zh_TW": [
+        "gen_alpha_students",
+        "gen_z_student"
+      ]
+    }
+  },
+  "architecture_drift": {
+    "planned_vs_actual_brand_lane_delta": 135,
+    "planned_vs_actual_base_brand_delta": 13,
+    "planned_teacher_brand_overlap": [],
+    "planned_teacher_brands_missing_from_legacy_generator": [
+      "body_memory",
+      "cognitive_clarity",
+      "devotion_path",
+      "digital_ground",
+      "heart_balance",
+      "norcal_dharma",
+      "qi_foundation",
+      "relational_calm",
+      "sleep_restoration",
+      "solar_return",
+      "somatic_wisdom",
+      "stillness_press",
+      "warrior_calm"
+    ],
+    "legacy_teacher_brands_not_in_new_12x37_plan": [
+      "awakening_press",
+      "body_wisdom",
+      "cosmic_edge",
+      "gen_spark",
+      "gentle_wave",
+      "healing_ground_press",
+      "inner_light_press",
+      "iron_will",
+      "soul_repair",
+      "still_forest",
+      "truth_compass",
+      "vitality_path",
+      "zen_clarity"
+    ],
+    "planned_brands_missing_from_actual_registry": [
+      "bio_flow",
+      "body_memory",
+      "calm_student",
+      "cognitive_clarity",
+      "devotion_path",
+      "digital_ground",
+      "focus_sprint",
+      "gentle_growth",
+      "healing_ground",
+      "heart_balance",
+      "high_performer",
+      "hormone_reset",
+      "longevity_lab",
+      "minimal_mind",
+      "morning_momentum",
+      "norcal_dharma",
+      "qi_foundation",
+      "relational_calm",
+      "sleep_restoration",
+      "solar_return",
+      "somatic_wisdom",
+      "spiritual_ground",
+      "stillness_press",
+      "stoic_edge",
+      "trauma_path",
+      "warrior_calm"
+    ]
+  }
+}
