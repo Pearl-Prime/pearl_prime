@@ -48,7 +48,8 @@
 | **Change observation / impact / synergy** | [Change observation and impact (document all)](#change-observation-and-impact-document-all) — System registry, add/change/drop detection, impact analysis, LLM synergy recommendations, running best; spec and asset list. |
 | **Implementation batch (d1–d6 + payouts)** | [Implementation batch (d1–d6 + payouts)](#implementation-batch-d1d6--payouts) — Traceability: freebies, change observation & impact, EI V2, translation, simulation/quality, video pipeline, payouts. |
 | **Cohesive bestseller tester** | [Rigorous system test & simulation (document all)](#rigorous-system-test--simulation-document-all) — 10k Pearl Prime + teacher-mode + EI v2; [llm_cohesive_bestseller_tester.py](../scripts/ci/llm_cohesive_bestseller_tester.py), [llm_bestseller_error_report.py](../scripts/ci/llm_bestseller_error_report.py); health score, severity, baseline, LLM; usage in [scripts/ci/README.md](../scripts/ci/README.md) § AI/LLM cohesive bestseller tester. |
-| **Run tests / understand test suite** | [Test suite (document all)](#test-suite-document-all): how to run (local + CI), markers, workflows, full file list (36 files, 222 tests), fixtures, [FULL_REPO_TEST_SUITE_PLAN.md](./FULL_REPO_TEST_SUITE_PLAN.md). |
+| **Run tests / understand test suite** | [Test suite (document all)](#test-suite-document-all): how to run (local + CI), markers, workflows, full file list (37 files, 224 tests), fixtures, [FULL_REPO_TEST_SUITE_PLAN.md](./FULL_REPO_TEST_SUITE_PLAN.md). |
+| **Regenerate catalog analysis bundle (12×37)** | [scripts/catalog/build_catalog_analysis_bundle.py](../scripts/catalog/build_catalog_analysis_bundle.py) — Runs `generate_full_catalog`, combo/gap/repurposing reports, ops health dashboard rollup; writes [docs/produced/full_catalog_analysis_report.md](./produced/full_catalog_analysis_report.md). Fast checks: [tests/test_build_catalog_analysis_bundle_smoke.py](../tests/test_build_catalog_analysis_bundle_smoke.py) (`sanity`). |
 | **Check for missing book content** | [How to check for missing book content](#how-to-check-for-missing-book-content) — Single report script, atoms + plan + teacher readiness; PhoenixControl Docs & Config tab shows results. |
 | **Audiobook pipeline** | [Qwen-Only Audiobook Pipeline (document all)](#qwen-only-audiobook-pipeline-document-all) — Fully automated Qwen comparator loop; 5 hard + 4 scored gates; parallel architecture; manual review queue; go-live checklist. |
 | **Go/no-go decision** | [SYSTEM_OWNER_VISION.md](../SYSTEM_OWNER_VISION.md) §6 Hard NOs. |
@@ -1257,7 +1258,7 @@ Single index: every test file, how to run, markers, CI workflows, and test infra
 
 | Command | What runs |
 |---------|-----------|
-| `PYTHONPATH=. python -m pytest tests/ -v --tb=short` | All tests (default: 222 collected). Run from repo root. |
+| `PYTHONPATH=. python -m pytest tests/ -v --tb=short` | All tests (default: 224 tests in documented inventory baseline; `pytest --collect-only` may report more from parametrization/subpackages). Run from repo root. |
 | `PYTHONPATH=. python -m pytest tests/ -m "not slow"` | Fast set only (excludes slow: atoms coverage, teacher E2E). Used by core-tests CI. |
 | `PYTHONPATH=. python -m pytest tests/ -m sanity` | Sanity checks only (config load, registry consistency); quick feedback. |
 | `PYTHONPATH=. python -m pytest tests/ -m "sanity or intelligent"` | Robust/intelligent tests only (no slow). See [ROBUST_INTELLIGENT_TESTING.md](./ROBUST_INTELLIGENT_TESTING.md). |
@@ -1313,6 +1314,7 @@ Single index: every test file, how to run, markers, CI workflows, and test infra
 | [tests/test_book_pass_gate.py](../tests/test_book_pass_gate.py) | Book-level pass gate (Tier 0 contract) |
 | [tests/test_book_renderer.py](../tests/test_book_renderer.py) | Renderer: clean_for_delivery, delivery_contract_gate, word_count_gate, placeholder/silence, plan context |
 | [tests/test_brand_identity_stability.py](../tests/test_brand_identity_stability.py) | Brand identity stability across builds |
+| [tests/test_build_catalog_analysis_bundle_smoke.py](../tests/test_build_catalog_analysis_bundle_smoke.py) | Catalog analysis bundle: import + `build_combo_dashboard` sanity (`sanity`) |
 | [tests/test_catalog_emotional_distribution.py](../tests/test_catalog_emotional_distribution.py) | Emotional distribution across catalog |
 | [tests/test_chapter_flow_gate.py](../tests/test_chapter_flow_gate.py) | Chapter-level flow gate |
 | [tests/test_creative_quality_v1.py](../tests/test_creative_quality_v1.py) | Creative quality gate v1 |
@@ -1345,7 +1347,7 @@ Single index: every test file, how to run, markers, CI workflows, and test infra
 | [tests/test_variation.py](../tests/test_variation.py) | Variation knob distribution |
 | [tests/test_wave_optimizer_constraint_solver.py](../tests/test_wave_optimizer_constraint_solver.py) | Wave optimizer constraint solver |
 
-**Count:** 36 test files (35 `test_*.py` + `teacher_arc_test.py`). Full run: 222 tests (as of 2026-03-04).
+**Count:** 37 test files (36 `test_*.py` + `teacher_arc_test.py`). Full run: 224 tests (as of 2026-04-09).
 
 ---
 
@@ -1404,6 +1406,7 @@ Single index: every test file, how to run, markers, CI workflows, and test infra
 | **Run production readiness gates** | [scripts/run_production_readiness_gates.py](../scripts/run_production_readiness_gates.py) — 19 conditions; Gate 16+16b freebie governance (both density + CTA caps, same index) |
 | **Run systems test** | [scripts/systems_test/run_systems_test.py](../scripts/systems_test/run_systems_test.py) — Phases 1–7 |
 | **Generate full catalog** | [scripts/generate_full_catalog.py](../scripts/generate_full_catalog.py) — Portfolio → BookSpec → compile → wave |
+| **Catalog analysis bundle** | [scripts/catalog/build_catalog_analysis_bundle.py](../scripts/catalog/build_catalog_analysis_bundle.py) — Regenerate CSV/JSON/MD under `artifacts/catalog/` + `docs/produced/full_catalog_analysis_report.md` |
 | **Story atom lint** | [phoenix_v4/quality/story_atom_lint.py](../phoenix_v4/quality/story_atom_lint.py) — STORY specificity, conflict, cost, pivot |
 | **Transformation heatmap** | [phoenix_v4/quality/transformation_heatmap.py](../phoenix_v4/quality/transformation_heatmap.py) — Per-chapter recognition/reframe/challenge |
 | **Memorable line detector** | [phoenix_v4/quality/memorable_line_detector.py](../phoenix_v4/quality/memorable_line_detector.py) — Highlight-density candidates |
@@ -1676,6 +1679,7 @@ All root-level `scripts/*.py` files confirmed present on disk.
 | [scripts/fill_non_story_coverage_gaps.py](../scripts/fill_non_story_coverage_gaps.py) | Fill missing HOOK/SCENE/REFLECTION/INTEGRATION/EXERCISE CANONICAL.txt files |
 | [scripts/generate_arcs_from_backlog.py](../scripts/generate_arcs_from_backlog.py) | Batch-generate arc YAMLs from arc backlog config |
 | [scripts/generate_author_cover_art_bases.py](../scripts/generate_author_cover_art_bases.py) | Author cover art base PNGs → assets/authors/cover_art/{author_id}_base.png (see Author cover art §) |
+| [scripts/catalog/build_catalog_analysis_bundle.py](../scripts/catalog/build_catalog_analysis_bundle.py) | Full catalog analysis bundle: CSV/JSON/MD artifacts + gap/repurposing reports; see DOCS_INDEX task table |
 | [scripts/generate_full_catalog.py](../scripts/generate_full_catalog.py) | Generate full 1,008-title US catalog plan JSON |
 | [scripts/generate_landing_pages.py](../scripts/generate_landing_pages.py) | Generate landing page HTML for each freebie |
 | [scripts/generate_teacher_gap_atoms.py](../scripts/generate_teacher_gap_atoms.py) | Generate candidate atoms for teachers with pool gaps |
