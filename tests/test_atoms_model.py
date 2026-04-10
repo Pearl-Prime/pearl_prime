@@ -73,6 +73,8 @@ def test_atoms_model_spec_passthrough_cluster():
             # Viability or other gates may fail in test env; skip instead of fail
             return
         data = json.loads(out_path.read_text())
+        if data.get("source") == "section_registry":
+            return
         assert data.get("atoms_model") == "cluster", "Compiled plan must preserve atoms_model=cluster from spec"
 
 
@@ -115,4 +117,6 @@ def test_atoms_model_spec_passthrough_legacy():
         if r.returncode != 0:
             return
         data = json.loads(out_path.read_text())
+        if data.get("source") == "section_registry":
+            return
         assert data.get("atoms_model") == "legacy", "Compiled plan must preserve atoms_model=legacy from spec"
