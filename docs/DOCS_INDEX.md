@@ -2,7 +2,7 @@
 
 **Purpose:** Canonical index for documentation authority and navigation.  
 **Missing-file policy:** Only existing files are linked; planned or missing files are listed as backlog items (plain text or `path` with ⚠️ *file not present*).  
-**Last updated:** 2026-04-09
+**Last updated:** 2026-04-10
 
 **For developers: start here.** This index is your map. Use the **task table** below for "where to go" by task. **GitHub (PRs, merges, two repos, runners):** go to [GitHub Operations Framework](#github-operations-framework) and [docs/GITHUB_OPERATIONS_FRAMEWORK.md](./GITHUB_OPERATIONS_FRAMEWORK.md) — repo map, workflow matrix, canonical ownership, PR flow, merge to main, Qwen-Agent push/runner, recovery. **No-failure standard:** [docs/GITHUB_NO_FAILURE_FRAMEWORK.md](./GITHUB_NO_FAILURE_FRAMEWORK.md). **Tests / CI:** [Test suite (document all)](#test-suite-document-all). **Domain work:** use the task table and the "(document all)" subsections per domain.
 
@@ -1380,7 +1380,7 @@ Single index: every test file, how to run, markers, CI workflows, and test infra
 | **First 10 books evaluation protocol** | [docs/FIRST_10_BOOKS_EVALUATION_PROTOCOL.md](./FIRST_10_BOOKS_EVALUATION_PROTOCOL.md) — Human checkpoint |
 | **Quality tools README** | [phoenix_v4/quality/README.md](../phoenix_v4/quality/README.md) — Story lint, heatmap, memorable lines, marketing assets |
 | **Release velocity and schedule** | [docs/RELEASE_VELOCITY_AND_SCHEDULE.md](./RELEASE_VELOCITY_AND_SCHEDULE.md) — Pacing; generate_weekly_schedule.py |
-| **Unified personas** | [unified_personas.md](../unified_personas.md) — 10 active personas, 12 active topics (canonical source) |
+| **Unified personas** | `unified_personas.md` (repo root) — ⚠️ *file not present in this repo checkout*; backlog until a canonical personas file is restored (previously: 10 active personas, 12 active topics). |
 
 ### Scripts (pipeline, asset, CI/QA, quality)
 

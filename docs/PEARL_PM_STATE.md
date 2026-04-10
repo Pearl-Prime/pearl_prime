@@ -1,6 +1,6 @@
 # Pearl_PM State
 
-Last verified: 2026-04-01
+Last verified: 2026-04-10
 Owner: Pearl_PM
 
 ## Purpose
@@ -35,6 +35,8 @@ Pearl_Architect resolves subsystem ownership, governing docs, required repo sour
 
 ## Workstream Status Summary
 
+Canonical row-level truth lives in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`. The table below mirrors that file as of **2026-04-10** for fast scanning.
+
 | workstream_id | status | owner | subsystem |
 |---------------|--------|-------|-----------|
 | ws_external_sweep_20260328 | completed | Pearl_PM / Pearl_GitHub | repo coordination |
@@ -51,14 +53,40 @@ Pearl_Architect resolves subsystem ownership, governing docs, required repo sour
 | ws_ei_v2_kb_activation_20260330 | completed | Pearl_GitHub | EI v2 |
 | ws_research_pipeline_activation_20260330 | blocked | Pearl_Research | research, artifacts |
 | ws_branch_consolidation_20260401 | completed | Pearl_GitHub | repo coordination |
+| ws_content_inventory_20260407 | completed | Pearl_PM / Pearl_Dev | content; observability; portal |
+| ws_brand_lane_architecture_20260407 | completed | Pearl_Dev / Pearl_GitHub | brand_admin; video_pipeline; teacher_mode; ei_v2; pearl_practice |
+| ws_voice_pipeline_activation_20260409 | completed | Pearl_Dev / Pearl_Research | integrations; video_pipeline; brand_admin |
+| ws_video_hardening_docs_20260409 | completed | Pearl_GitHub | video_pipeline |
+| ws_pearl_news_llm_routing_20260409 | completed | Pearl_Dev / Pearl_News / Pearl_Architect | pearl_news; ei_v2; integrations |
+| ws_branch_cleanup_20260408 | completed | Pearl_GitHub | repo coordination |
+| ws_podcast_pipeline_execution_20260409 | completed | Pearl_Dev + Pearl_Research | docs: research; config: podcast + platform_marketing; scripts/podcast; server/routes |
+| ws_pr_triage_20260409 | completed | Pearl_GitHub / Pearl_PM | repo coordination |
+| ws_agent_system_audit_20260409 | completed | Pearl_Architect / Pearl_PM | repo coordination |
+| ws_brand_admin_gap_analysis_20260409 | completed | Pearl_Marketing / Pearl_Prez / Pearl_Research | brand_admin, recommendations |
+| ws_topic_registries_20260409 | completed | Pearl_Prime / Pearl_Writer | core_pipeline;teacher_mode |
+| ws_full_funnel_system_20260410 | completed | Pearl_Marketing + Pearl_PM + Pearl_Dev | brand_admin;core_pipeline;recommendations |
+| ws_teacher_manga_triptych_20260410 | active | Pearl_Dev + Pearl_Video | manga_pipeline;brand_admin |
+| ws_unified_pipeline_jobs_20260410 | completed | Pearl_GitHub + Pearl_Dev + Pearl_Architect | core_pipeline;video_pipeline;manga_pipeline;podcast_pipeline |
+| ws_funnel_activation_20260410 | completed | Pearl_GitHub + Pearl_Dev + Pearl_Marketing | brand_admin;core_pipeline;integrations |
+| ws_p1_health_audit_20260410 | completed | Pearl_Architect + Pearl_PM + Pearl_GitHub | repo coordination |
+| ws_ci_fix_20260410 | completed | Pearl_Dev + Pearl_GitHub | core_pipeline |
+| ws_atom_gap_fill_20260410 | pending | Pearl_Editor + Pearl_Writer | atoms;teacher_mode |
+| ws_pipeline_verification_audit_20260410 | completed | Pearl_Architect | core_pipeline;video_pipeline;manga_pipeline;podcast_pipeline;audiobook |
+| ws_tts_provider_hardening_20260410 | active | Pearl_GitHub | video_pipeline |
 
 ## What Is Active
 
-1. **ws_research_citation_gaps_20260330** -- Batch 3 LOW done (audit items 19-20). Items 1-18 and 21-22 still open. Owner: Pearl_Research.
+1. **ws_research_citation_gaps_20260330** — Close remaining citation gaps per `docs/RESEARCH_CITATION_GAP_DEV_SPEC.md` (Batch 3 LOW done; §A 1–18 and 21–22 still open). Owner: Pearl_Research.
+2. **ws_teacher_manga_triptych_20260410** — Teacher showcase FLUX triptych (portrait, scene, symbolic), ComfyUI on Pearl Star, HTML grid. Owners: Pearl_Dev + Pearl_Video.
+3. **ws_tts_provider_hardening_20260410** — Narrow follow-up: soundtrack_plan ElevenLabs URL from `config/tts/locale_voice_routing.yaml` (no hardcoded host). Owner: Pearl_GitHub.
+
+## What Is Pending
+
+1. **ws_atom_gap_fill_20260410** — Fill P0 atom gaps from the P1 health audit (QUOTE+TEACHING atoms and persona×topic zero-atom combos). Owners: Pearl_Editor + Pearl_Writer. Evidence: `artifacts/audit/P1_NEXT_STEPS_2026_04_10.md`.
 
 ## What Is Blocked
 
-1. **ws_research_pipeline_activation_20260330** -- Blocked on ws_research_citation_gaps_20260330 completion. Cannot activate generational research pipeline until citation gaps are closed per RESEARCH_CITATION_GAP_DEV_SPEC section 3.
+1. **ws_research_pipeline_activation_20260330** — Blocked on `ws_research_citation_gaps_20260330` completion. Cannot activate the generational research pipeline until citation gaps are closed per RESEARCH_CITATION_GAP_DEV_SPEC section 3.
 
 ## Open Questions
 
@@ -67,10 +95,11 @@ Pearl_Architect resolves subsystem ownership, governing docs, required repo sour
 
 ## Priority Ordering (Next Actions)
 
-1. **Close remaining citation gaps** (ws_research_citation_gaps_20260330) -- audit items 1-18, 21-22. This unblocks the research pipeline.
-2. **Unblock research pipeline activation** (ws_research_pipeline_activation_20260330) -- becomes actionable once citation gaps close.
-3. **Evaluate old_chat_specs promotion** -- decide whether backlog items from old_chat_specs enter the scored queue or stay archived.
-4. **Governance file convergence** -- ensure all referenced governance files exist and are grounded (SUBSYSTEM_AUTHORITY_MAP.tsv, SESSION_UNITY_PROTOCOL.md, this file).
+1. **Close remaining citation gaps** (`ws_research_citation_gaps_20260330`) — audit items 1–18, 21–22. This unblocks the research pipeline.
+2. **Unblock research pipeline activation** (`ws_research_pipeline_activation_20260330`) — becomes actionable once citation gaps close.
+3. **Evaluate old_chat_specs promotion** — decide whether backlog items from old_chat_specs enter the scored queue or stay archived.
+4. **Governance file convergence** — keep this file, `SUBSYSTEM_AUTHORITY_MAP.tsv`, and `SESSION_UNITY_PROTOCOL.md` aligned with `ACTIVE_WORKSTREAMS.tsv` (this doc is a summary only; the TSV wins on conflict).
+5. **Atom gap fill** (`ws_atom_gap_fill_20260410`) — execute per `artifacts/audit/P1_NEXT_STEPS_2026_04_10.md` once Pearl_Editor + Pearl_Writer are queued.
 
 ## Canonical Sources
 
