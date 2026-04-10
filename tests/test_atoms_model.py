@@ -66,6 +66,7 @@ def test_atoms_model_spec_passthrough_cluster():
             "--arc", str(arc_path),
             "--out", str(out_path),
             "--no-generate-freebies",
+            "--no-job-check",
         ]
         r = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=120)
         if r.returncode != 0:
@@ -108,6 +109,7 @@ def test_atoms_model_spec_passthrough_legacy():
             "--arc", str(arc_path),
             "--out", str(out_path),
             "--no-generate-freebies",
+            "--no-job-check",
         ]
         r = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=120)
         if r.returncode != 0:

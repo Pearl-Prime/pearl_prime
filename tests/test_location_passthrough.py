@@ -85,6 +85,7 @@ def test_run_pipeline_persists_location_fields_when_build_succeeds() -> None:
             "--out",
             str(out_path),
             "--no-generate-freebies",
+            "--no-job-check",
         ]
         result = subprocess.run(
             cmd,
