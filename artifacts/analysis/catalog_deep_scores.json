@@ -1,0 +1,2032 @@
+{
+  "scored_at": "2026-04-09T22:53:16Z",
+  "scoring_method": "heuristic_15_dims",
+  "qwen_host": null,
+  "topics_scored": 15,
+  "personas_scored": 3,
+  "total_books": 45,
+  "total_elapsed_s": 9.23,
+  "errors": [],
+  "summary": {
+    "composite_mean": 0.4886,
+    "composite_target": 0.75,
+    "strongest_topic": "grief",
+    "strongest_composite": 0.6043,
+    "weakest_topic": "compassion_fatigue",
+    "weakest_composite": 0.4397,
+    "by_topic": {
+      "anxiety": 0.472,
+      "boundaries": 0.4857,
+      "burnout": 0.4977,
+      "compassion_fatigue": 0.4397,
+      "courage": 0.485,
+      "depression": 0.483,
+      "financial_anxiety": 0.4797,
+      "financial_stress": 0.4817,
+      "grief": 0.6043,
+      "imposter_syndrome": 0.476,
+      "overthinking": 0.467,
+      "self_worth": 0.469,
+      "sleep_anxiety": 0.521,
+      "social_anxiety": 0.491,
+      "somatic_healing": 0.476
+    },
+    "by_dimension": {
+      "safety_score": {
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0
+      },
+      "tts_readability": {
+        "mean": 0.5035,
+        "min": 0.284,
+        "max": 0.589,
+        "p25": 0.466,
+        "p50": 0.56,
+        "p75": 0.574
+      },
+      "domain_similarity": {
+        "mean": 0.2973,
+        "min": 0.0,
+        "max": 0.8,
+        "p25": 0.1,
+        "p50": 0.24,
+        "p75": 0.48
+      },
+      "emotion_arc": {
+        "mean": 0.5221,
+        "min": 0.5,
+        "max": 0.786,
+        "p25": 0.5,
+        "p50": 0.5,
+        "p75": 0.5
+      },
+      "content_uniqueness": {
+        "mean": 0.0311,
+        "min": 0.0,
+        "max": 0.467,
+        "p25": 0.0,
+        "p50": 0.0,
+        "p75": 0.0
+      },
+      "engagement": {
+        "mean": 0.7007,
+        "min": 0.258,
+        "max": 0.799,
+        "p25": 0.682,
+        "p50": 0.746,
+        "p75": 0.767
+      },
+      "somatic_precision": {
+        "mean": 0.0207,
+        "min": 0.01,
+        "max": 0.041,
+        "p25": 0.013,
+        "p50": 0.019,
+        "p75": 0.024
+      },
+      "listen_experience": {
+        "mean": 0.0163,
+        "min": 0.0,
+        "max": 0.048,
+        "p25": 0.0,
+        "p50": 0.012,
+        "p75": 0.031
+      },
+      "cohesion": {
+        "mean": 0.6012,
+        "min": 0.6,
+        "max": 0.618,
+        "p25": 0.6,
+        "p50": 0.6,
+        "p75": 0.6
+      },
+      "duration_fit": {
+        "mean": 0.8377,
+        "min": 0.753,
+        "max": 0.98,
+        "p25": 0.801,
+        "p50": 0.84,
+        "p75": 0.861
+      },
+      "opening_hook_strength": {
+        "mean": 0.27,
+        "min": 0.1,
+        "max": 0.85,
+        "p25": 0.15,
+        "p50": 0.2,
+        "p75": 0.35
+      },
+      "exercise_quality": {
+        "mean": 0.1824,
+        "min": 0.15,
+        "max": 0.636,
+        "p25": 0.15,
+        "p50": 0.15,
+        "p75": 0.15
+      },
+      "story_specificity": {
+        "mean": 0.7397,
+        "min": 0.346,
+        "max": 1.0,
+        "p25": 0.65,
+        "p50": 0.85,
+        "p75": 0.85
+      },
+      "topic_mechanism_clarity": {
+        "mean": 0.3667,
+        "min": 0.3,
+        "max": 0.9,
+        "p25": 0.3,
+        "p50": 0.3,
+        "p75": 0.3
+      },
+      "voice_consistency": {
+        "mean": 0.9813,
+        "min": 0.72,
+        "max": 1.0,
+        "p25": 1.0,
+        "p50": 1.0,
+        "p75": 1.0
+      }
+    },
+    "systemic_weaknesses": [
+      {
+        "dimension": "listen_experience",
+        "mean": 0.0163,
+        "fail_rate": 1.0
+      },
+      {
+        "dimension": "somatic_precision",
+        "mean": 0.0207,
+        "fail_rate": 1.0
+      },
+      {
+        "dimension": "content_uniqueness",
+        "mean": 0.0311,
+        "fail_rate": 1.0
+      },
+      {
+        "dimension": "exercise_quality",
+        "mean": 0.1824,
+        "fail_rate": 0.933
+      },
+      {
+        "dimension": "opening_hook_strength",
+        "mean": 0.27,
+        "fail_rate": 0.933
+      },
+      {
+        "dimension": "domain_similarity",
+        "mean": 0.2973,
+        "fail_rate": 0.8
+      },
+      {
+        "dimension": "topic_mechanism_clarity",
+        "mean": 0.3667,
+        "fail_rate": 0.867
+      }
+    ]
+  },
+  "books": [
+    {
+      "book_id": "millennial_women_professionals__anxiety",
+      "topic": "anxiety",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 4201,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.466,
+        "domain_similarity": 0.0,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.75,
+        "somatic_precision": 0.024,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.84,
+        "opening_hook_strength": 0.4,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.472,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "tts_readability",
+        "opening_hook_strength",
+        "topic_mechanism_clarity"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__anxiety",
+      "topic": "anxiety",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 4201,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.466,
+        "domain_similarity": 0.0,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.75,
+        "somatic_precision": 0.024,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.84,
+        "opening_hook_strength": 0.4,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.472,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "tts_readability",
+        "opening_hook_strength",
+        "topic_mechanism_clarity"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__anxiety",
+      "topic": "anxiety",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 4201,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.466,
+        "domain_similarity": 0.0,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.75,
+        "somatic_precision": 0.024,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.84,
+        "opening_hook_strength": 0.4,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.472,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "tts_readability",
+        "opening_hook_strength",
+        "topic_mechanism_clarity"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__boundaries",
+      "topic": "boundaries",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 4435,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.584,
+        "domain_similarity": 0.3,
+        "emotion_arc": 0.528,
+        "content_uniqueness": 0.0,
+        "engagement": 0.679,
+        "somatic_precision": 0.028,
+        "listen_experience": 0.012,
+        "cohesion": 0.6,
+        "duration_fit": 0.887,
+        "opening_hook_strength": 0.1,
+        "exercise_quality": 0.15,
+        "story_specificity": 1.0,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.489,
+      "strengths": [
+        "safety_score",
+        "story_specificity",
+        "voice_consistency"
+      ],
+      "weaknesses": [
+        "domain_similarity",
+        "topic_mechanism_clarity",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__boundaries",
+      "topic": "boundaries",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 4435,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.584,
+        "domain_similarity": 0.28,
+        "emotion_arc": 0.528,
+        "content_uniqueness": 0.0,
+        "engagement": 0.679,
+        "somatic_precision": 0.028,
+        "listen_experience": 0.012,
+        "cohesion": 0.6,
+        "duration_fit": 0.887,
+        "opening_hook_strength": 0.1,
+        "exercise_quality": 0.15,
+        "story_specificity": 1.0,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.487,
+      "strengths": [
+        "safety_score",
+        "story_specificity",
+        "voice_consistency"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "domain_similarity",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__boundaries",
+      "topic": "boundaries",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 4435,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.584,
+        "domain_similarity": 0.2,
+        "emotion_arc": 0.528,
+        "content_uniqueness": 0.0,
+        "engagement": 0.679,
+        "somatic_precision": 0.028,
+        "listen_experience": 0.012,
+        "cohesion": 0.6,
+        "duration_fit": 0.887,
+        "opening_hook_strength": 0.1,
+        "exercise_quality": 0.15,
+        "story_specificity": 1.0,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.481,
+      "strengths": [
+        "safety_score",
+        "story_specificity",
+        "voice_consistency"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "domain_similarity",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__burnout",
+      "topic": "burnout",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 4245,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.29,
+        "domain_similarity": 0.5,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.742,
+        "somatic_precision": 0.018,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.849,
+        "opening_hook_strength": 0.15,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.7,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.501,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "tts_readability",
+        "opening_hook_strength",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__burnout",
+      "topic": "burnout",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 4245,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.29,
+        "domain_similarity": 0.48,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.742,
+        "somatic_precision": 0.018,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.849,
+        "opening_hook_strength": 0.15,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.7,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.499,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "domain_similarity",
+        "tts_readability",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__burnout",
+      "topic": "burnout",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 4245,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.29,
+        "domain_similarity": 0.4,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.742,
+        "somatic_precision": 0.018,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.849,
+        "opening_hook_strength": 0.15,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.7,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.493,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "domain_similarity",
+        "tts_readability",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__compassion_fatigue",
+      "topic": "compassion_fatigue",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 4305,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.563,
+        "domain_similarity": 0.1,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.699,
+        "somatic_precision": 0.023,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.861,
+        "opening_hook_strength": 0.1,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.5,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.443,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "exercise_quality",
+        "domain_similarity"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__compassion_fatigue",
+      "topic": "compassion_fatigue",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 4305,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.563,
+        "domain_similarity": 0.08,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.699,
+        "somatic_precision": 0.023,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.861,
+        "opening_hook_strength": 0.1,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.5,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.441,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "exercise_quality",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__compassion_fatigue",
+      "topic": "compassion_fatigue",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 4305,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.563,
+        "domain_similarity": 0.0,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.699,
+        "somatic_precision": 0.023,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.861,
+        "opening_hook_strength": 0.1,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.5,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.435,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "exercise_quality",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__courage",
+      "topic": "courage",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 4105,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.572,
+        "domain_similarity": 0.2,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.767,
+        "somatic_precision": 0.024,
+        "listen_experience": 0.031,
+        "cohesion": 0.6,
+        "duration_fit": 0.821,
+        "opening_hook_strength": 0.35,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.65,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.485,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "opening_hook_strength",
+        "topic_mechanism_clarity",
+        "domain_similarity"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__courage",
+      "topic": "courage",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 4105,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.572,
+        "domain_similarity": 0.2,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.767,
+        "somatic_precision": 0.024,
+        "listen_experience": 0.031,
+        "cohesion": 0.6,
+        "duration_fit": 0.821,
+        "opening_hook_strength": 0.35,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.65,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.485,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "opening_hook_strength",
+        "topic_mechanism_clarity",
+        "domain_similarity"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__courage",
+      "topic": "courage",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 4105,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.572,
+        "domain_similarity": 0.2,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.767,
+        "somatic_precision": 0.024,
+        "listen_experience": 0.031,
+        "cohesion": 0.6,
+        "duration_fit": 0.821,
+        "opening_hook_strength": 0.35,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.65,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.485,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "opening_hook_strength",
+        "topic_mechanism_clarity",
+        "domain_similarity"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__depression",
+      "topic": "depression",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 4037,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.536,
+        "domain_similarity": 0.3,
+        "emotion_arc": 0.517,
+        "content_uniqueness": 0.0,
+        "engagement": 0.746,
+        "somatic_precision": 0.019,
+        "listen_experience": 0.024,
+        "cohesion": 0.6,
+        "duration_fit": 0.807,
+        "opening_hook_strength": 0.2,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.486,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "domain_similarity",
+        "topic_mechanism_clarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__depression",
+      "topic": "depression",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 4037,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.536,
+        "domain_similarity": 0.28,
+        "emotion_arc": 0.517,
+        "content_uniqueness": 0.0,
+        "engagement": 0.746,
+        "somatic_precision": 0.019,
+        "listen_experience": 0.024,
+        "cohesion": 0.6,
+        "duration_fit": 0.807,
+        "opening_hook_strength": 0.2,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.485,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "domain_similarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__depression",
+      "topic": "depression",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 4037,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.536,
+        "domain_similarity": 0.2,
+        "emotion_arc": 0.517,
+        "content_uniqueness": 0.0,
+        "engagement": 0.746,
+        "somatic_precision": 0.019,
+        "listen_experience": 0.024,
+        "cohesion": 0.6,
+        "duration_fit": 0.807,
+        "opening_hook_strength": 0.2,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.478,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "domain_similarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__financial_anxiety",
+      "topic": "financial_anxiety",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 4203,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.284,
+        "domain_similarity": 0.58,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.749,
+        "somatic_precision": 0.018,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.841,
+        "opening_hook_strength": 0.15,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.483,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "tts_readability",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__financial_anxiety",
+      "topic": "financial_anxiety",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 4203,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.284,
+        "domain_similarity": 0.56,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.749,
+        "somatic_precision": 0.018,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.841,
+        "opening_hook_strength": 0.15,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.481,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "tts_readability",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__financial_anxiety",
+      "topic": "financial_anxiety",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 4203,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.284,
+        "domain_similarity": 0.48,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.749,
+        "somatic_precision": 0.018,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.841,
+        "opening_hook_strength": 0.15,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.475,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "domain_similarity",
+        "topic_mechanism_clarity",
+        "tts_readability"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__financial_stress",
+      "topic": "financial_stress",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 4005,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.564,
+        "domain_similarity": 0.44,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.752,
+        "somatic_precision": 0.019,
+        "listen_experience": 0.024,
+        "cohesion": 0.6,
+        "duration_fit": 0.801,
+        "opening_hook_strength": 0.1,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.49,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "domain_similarity",
+        "topic_mechanism_clarity",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__financial_stress",
+      "topic": "financial_stress",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 4005,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.564,
+        "domain_similarity": 0.32,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.752,
+        "somatic_precision": 0.019,
+        "listen_experience": 0.024,
+        "cohesion": 0.6,
+        "duration_fit": 0.801,
+        "opening_hook_strength": 0.1,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.481,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "domain_similarity",
+        "topic_mechanism_clarity",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__financial_stress",
+      "topic": "financial_stress",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 4005,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.564,
+        "domain_similarity": 0.24,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.752,
+        "somatic_precision": 0.019,
+        "listen_experience": 0.024,
+        "cohesion": 0.6,
+        "duration_fit": 0.801,
+        "opening_hook_strength": 0.1,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.474,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "domain_similarity",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__grief",
+      "topic": "grief",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 7979,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.376,
+        "domain_similarity": 0.7,
+        "emotion_arc": 0.786,
+        "content_uniqueness": 0.467,
+        "engagement": 0.258,
+        "somatic_precision": 0.041,
+        "listen_experience": 0.019,
+        "cohesion": 0.618,
+        "duration_fit": 0.828,
+        "opening_hook_strength": 0.85,
+        "exercise_quality": 0.636,
+        "story_specificity": 0.346,
+        "topic_mechanism_clarity": 0.9,
+        "voice_consistency": 0.72
+      },
+      "composite": 0.602,
+      "strengths": [
+        "safety_score",
+        "topic_mechanism_clarity",
+        "opening_hook_strength"
+      ],
+      "weaknesses": [
+        "content_uniqueness",
+        "tts_readability",
+        "story_specificity"
+      ],
+      "enhancement_ideas": [
+        "Add 3+ concrete sensory details (place, object, sound) to every SCENE/STORY variant",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__grief",
+      "topic": "grief",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 7979,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.376,
+        "domain_similarity": 0.68,
+        "emotion_arc": 0.786,
+        "content_uniqueness": 0.467,
+        "engagement": 0.258,
+        "somatic_precision": 0.041,
+        "listen_experience": 0.019,
+        "cohesion": 0.618,
+        "duration_fit": 0.828,
+        "opening_hook_strength": 0.85,
+        "exercise_quality": 0.636,
+        "story_specificity": 0.346,
+        "topic_mechanism_clarity": 0.9,
+        "voice_consistency": 0.72
+      },
+      "composite": 0.601,
+      "strengths": [
+        "safety_score",
+        "topic_mechanism_clarity",
+        "opening_hook_strength"
+      ],
+      "weaknesses": [
+        "content_uniqueness",
+        "tts_readability",
+        "story_specificity"
+      ],
+      "enhancement_ideas": [
+        "Add 3+ concrete sensory details (place, object, sound) to every SCENE/STORY variant",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__grief",
+      "topic": "grief",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 7979,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.376,
+        "domain_similarity": 0.8,
+        "emotion_arc": 0.786,
+        "content_uniqueness": 0.467,
+        "engagement": 0.258,
+        "somatic_precision": 0.041,
+        "listen_experience": 0.019,
+        "cohesion": 0.618,
+        "duration_fit": 0.828,
+        "opening_hook_strength": 0.85,
+        "exercise_quality": 0.636,
+        "story_specificity": 0.346,
+        "topic_mechanism_clarity": 0.9,
+        "voice_consistency": 0.72
+      },
+      "composite": 0.61,
+      "strengths": [
+        "safety_score",
+        "topic_mechanism_clarity",
+        "opening_hook_strength"
+      ],
+      "weaknesses": [
+        "content_uniqueness",
+        "tts_readability",
+        "story_specificity"
+      ],
+      "enhancement_ideas": [
+        "Add 3+ concrete sensory details (place, object, sound) to every SCENE/STORY variant",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__imposter_syndrome",
+      "topic": "imposter_syndrome",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 3885,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.589,
+        "domain_similarity": 0.1,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.775,
+        "somatic_precision": 0.013,
+        "listen_experience": 0.048,
+        "cohesion": 0.6,
+        "duration_fit": 0.777,
+        "opening_hook_strength": 0.25,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.479,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "opening_hook_strength",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__imposter_syndrome",
+      "topic": "imposter_syndrome",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 3885,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.589,
+        "domain_similarity": 0.08,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.775,
+        "somatic_precision": 0.013,
+        "listen_experience": 0.048,
+        "cohesion": 0.6,
+        "duration_fit": 0.777,
+        "opening_hook_strength": 0.25,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.478,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "opening_hook_strength",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__imposter_syndrome",
+      "topic": "imposter_syndrome",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 3885,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.589,
+        "domain_similarity": 0.0,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.775,
+        "somatic_precision": 0.013,
+        "listen_experience": 0.048,
+        "cohesion": 0.6,
+        "duration_fit": 0.777,
+        "opening_hook_strength": 0.25,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.85,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.471,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "story_specificity"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "opening_hook_strength",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__overthinking",
+      "topic": "overthinking",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 4411,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.536,
+        "domain_similarity": 0.0,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.682,
+        "somatic_precision": 0.011,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.882,
+        "opening_hook_strength": 0.45,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.65,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.467,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "opening_hook_strength",
+        "topic_mechanism_clarity",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__overthinking",
+      "topic": "overthinking",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 4411,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.536,
+        "domain_similarity": 0.0,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.682,
+        "somatic_precision": 0.011,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.882,
+        "opening_hook_strength": 0.45,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.65,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.467,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "opening_hook_strength",
+        "topic_mechanism_clarity",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__overthinking",
+      "topic": "overthinking",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 4411,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.536,
+        "domain_similarity": 0.0,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.682,
+        "somatic_precision": 0.011,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.882,
+        "opening_hook_strength": 0.45,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.65,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.467,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "opening_hook_strength",
+        "topic_mechanism_clarity",
+        "exercise_quality"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__self_worth",
+      "topic": "self_worth",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 4277,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.56,
+        "domain_similarity": 0.24,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.704,
+        "somatic_precision": 0.023,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.855,
+        "opening_hook_strength": 0.2,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.65,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.469,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "domain_similarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__self_worth",
+      "topic": "self_worth",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 4277,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.56,
+        "domain_similarity": 0.24,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.704,
+        "somatic_precision": 0.023,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.855,
+        "opening_hook_strength": 0.2,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.65,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.469,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "domain_similarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__self_worth",
+      "topic": "self_worth",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 4277,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.56,
+        "domain_similarity": 0.24,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.704,
+        "somatic_precision": 0.023,
+        "listen_experience": 0.0,
+        "cohesion": 0.6,
+        "duration_fit": 0.855,
+        "opening_hook_strength": 0.2,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.65,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.469,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "domain_similarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__sleep_anxiety",
+      "topic": "sleep_anxiety",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 4899,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.472,
+        "domain_similarity": 0.6,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.639,
+        "somatic_precision": 0.01,
+        "listen_experience": 0.005,
+        "cohesion": 0.6,
+        "duration_fit": 0.98,
+        "opening_hook_strength": 0.35,
+        "exercise_quality": 0.15,
+        "story_specificity": 1.0,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.521,
+      "strengths": [
+        "safety_score",
+        "story_specificity",
+        "voice_consistency"
+      ],
+      "weaknesses": [
+        "tts_readability",
+        "opening_hook_strength",
+        "topic_mechanism_clarity"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__sleep_anxiety",
+      "topic": "sleep_anxiety",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 4899,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.472,
+        "domain_similarity": 0.6,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.639,
+        "somatic_precision": 0.01,
+        "listen_experience": 0.005,
+        "cohesion": 0.6,
+        "duration_fit": 0.98,
+        "opening_hook_strength": 0.35,
+        "exercise_quality": 0.15,
+        "story_specificity": 1.0,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.521,
+      "strengths": [
+        "safety_score",
+        "story_specificity",
+        "voice_consistency"
+      ],
+      "weaknesses": [
+        "tts_readability",
+        "opening_hook_strength",
+        "topic_mechanism_clarity"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__sleep_anxiety",
+      "topic": "sleep_anxiety",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 4899,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.472,
+        "domain_similarity": 0.6,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.639,
+        "somatic_precision": 0.01,
+        "listen_experience": 0.005,
+        "cohesion": 0.6,
+        "duration_fit": 0.98,
+        "opening_hook_strength": 0.35,
+        "exercise_quality": 0.15,
+        "story_specificity": 1.0,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.521,
+      "strengths": [
+        "safety_score",
+        "story_specificity",
+        "voice_consistency"
+      ],
+      "weaknesses": [
+        "tts_readability",
+        "opening_hook_strength",
+        "topic_mechanism_clarity"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__social_anxiety",
+      "topic": "social_anxiety",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 3913,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.587,
+        "domain_similarity": 0.48,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.769,
+        "somatic_precision": 0.013,
+        "listen_experience": 0.033,
+        "cohesion": 0.6,
+        "duration_fit": 0.783,
+        "opening_hook_strength": 0.25,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.5,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.491,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "domain_similarity",
+        "topic_mechanism_clarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__social_anxiety",
+      "topic": "social_anxiety",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 3913,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.587,
+        "domain_similarity": 0.48,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.769,
+        "somatic_precision": 0.013,
+        "listen_experience": 0.033,
+        "cohesion": 0.6,
+        "duration_fit": 0.783,
+        "opening_hook_strength": 0.25,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.5,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.491,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "domain_similarity",
+        "topic_mechanism_clarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__social_anxiety",
+      "topic": "social_anxiety",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 3913,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.587,
+        "domain_similarity": 0.48,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.769,
+        "somatic_precision": 0.013,
+        "listen_experience": 0.033,
+        "cohesion": 0.6,
+        "duration_fit": 0.783,
+        "opening_hook_strength": 0.25,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.5,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.491,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "duration_fit"
+      ],
+      "weaknesses": [
+        "domain_similarity",
+        "topic_mechanism_clarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "millennial_women_professionals__somatic_healing",
+      "topic": "somatic_healing",
+      "persona": "millennial_women_professionals",
+      "chapter_count": 12,
+      "total_words": 3765,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.574,
+        "domain_similarity": 0.24,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.799,
+        "somatic_precision": 0.027,
+        "listen_experience": 0.048,
+        "cohesion": 0.6,
+        "duration_fit": 0.753,
+        "opening_hook_strength": 0.15,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.7,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.476,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "engagement"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "domain_similarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "gen_z_professionals__somatic_healing",
+      "topic": "somatic_healing",
+      "persona": "gen_z_professionals",
+      "chapter_count": 12,
+      "total_words": 3765,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.574,
+        "domain_similarity": 0.24,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.799,
+        "somatic_precision": 0.027,
+        "listen_experience": 0.048,
+        "cohesion": 0.6,
+        "duration_fit": 0.753,
+        "opening_hook_strength": 0.15,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.7,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.476,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "engagement"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "domain_similarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    },
+    {
+      "book_id": "healthcare_rns__somatic_healing",
+      "topic": "somatic_healing",
+      "persona": "healthcare_rns",
+      "chapter_count": 12,
+      "total_words": 3765,
+      "dimensions": {
+        "safety_score": 1.0,
+        "tts_readability": 0.574,
+        "domain_similarity": 0.24,
+        "emotion_arc": 0.5,
+        "content_uniqueness": 0.0,
+        "engagement": 0.799,
+        "somatic_precision": 0.027,
+        "listen_experience": 0.048,
+        "cohesion": 0.6,
+        "duration_fit": 0.753,
+        "opening_hook_strength": 0.15,
+        "exercise_quality": 0.15,
+        "story_specificity": 0.7,
+        "topic_mechanism_clarity": 0.3,
+        "voice_consistency": 1.0
+      },
+      "composite": 0.476,
+      "strengths": [
+        "safety_score",
+        "voice_consistency",
+        "engagement"
+      ],
+      "weaknesses": [
+        "topic_mechanism_clarity",
+        "domain_similarity",
+        "opening_hook_strength"
+      ],
+      "enhancement_ideas": [
+        "Rewrite ch1 HOOK F1 to name specific behavior in 2nd person present with pattern-naming sentence",
+        "Add body part + time indicator (e.g., '3 breaths', '10 seconds') to all EXERCISE sections",
+        "Name the psychological mechanism in body terms in chapters 1-2",
+        "Increase body-word density (shoulder, breath, chest, jaw) — target 4+ body words per 100 words"
+      ]
+    }
+  ]
+}
