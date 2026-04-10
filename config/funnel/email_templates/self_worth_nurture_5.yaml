@@ -1,0 +1,105 @@
+sequence_id: self_worth_nurture_5
+topic: self_worth
+freebie_name: "The Worth Inventory"
+book_1_title: "The Enough Series: Worthy Without Proof"
+book_1_price: "$0.99"
+brand_voice: "direct, warm, grounded — no guru, no toxic positivity"
+total_emails: 5
+
+emails:
+  e1_download:
+    delay_hours: 0
+    subject: "Your Worth Inventory is ready"
+    preview_text: "Do this before the day starts"
+    body: |
+      Your Worth Inventory is ready — link below.
+
+      Before you dive in, one exercise to try right now. It's simple and it's probably harder than it sounds.
+
+      Write down three things about yourself that have nothing to do with what you produce.
+
+      Not "I'm good at my job." Not "I worked hard this week." Not anything that requires an output, an outcome, or someone else's approval. Three things that would still be true about you if you stopped performing entirely.
+
+      Most people stall on this. Not because there's nothing there — but because the muscle for recognizing non-productive value has been underused for a long time. We get very good at tracking output. We don't get much practice tracking existence.
+
+      The Inventory helps with this. It's structured to surface the patterns you've built around worth — where you feel it, what triggers the loss of it, what you've been chasing in its place.
+
+      Download it below and try to give it your first twenty minutes before the day's noise takes over.
+    cta:
+      text: "Open your Worth Inventory"
+      url_template: "{base_url}/free/worth-inventory/"
+
+  e2_mechanism:
+    delay_hours: 24
+    subject: "The comparison trap — and how to step out"
+    preview_text: "It's not a character flaw. It's a habit."
+    body: |
+      Comparison is automatic. Your brain is running social calculations constantly — where you rank, how you measure up, whether you're falling behind. This isn't a flaw in your character. It's a very old function that evolved to help you stay in the group and keep pace with threats.
+
+      The problem is that the comparison mechanism doesn't know the difference between a relevant benchmark and an irrelevant one. It will compare your salary to your colleague's, your body to a stranger's on a screen, your relationship to someone else's highlight reel. It assigns all of them the same weight, which means you're constantly losing races you didn't enter.
+
+      Knowing this doesn't stop the comparisons. But it creates a gap between the thought and the response.
+
+      Here's one practice to try today: catch one comparison thought. Just one. It might be about someone else's success, their appearance, the life they seem to have. When you catch it, name it — "there's a comparison" — and let it pass without adding a verdict about what it means about you.
+
+      You don't need to argue with it. Just don't hand it the gavel.
+    cta:
+      text: "Try this now"
+      url_template: "{base_url}/free/worth-inventory/#exercise2"
+
+  e3_story:
+    delay_hours: 96
+    subject: "She achieved everything and still felt like nothing"
+    preview_text: "The promotion didn't fix it. Here's what did."
+    body: |
+      Priya had the title, the apartment, the relationship. She'd been promoted twice in three years at a firm she'd worked very hard to get into. By her own accounting, she had everything she'd told herself she needed.
+
+      She also felt, most days, like she was one mistake away from being found out.
+
+      The promotion didn't touch it. Neither did the good performance review that followed, or the recognition from her manager at the all-hands. Each win would land for maybe 48 hours and then the baseline returned — slightly elevated vigilance, a low-grade sense that the ground wasn't fully solid.
+
+      She started noticing that her sense of worth had become entirely conditional. It spiked with external signals and drained in the absence of them. There was no internal reservoir — just a constant cycle of earning and losing.
+
+      She couldn't point to a single moment when things shifted. It was more gradual than that. She started paying attention to what felt solid inside a day that had nothing remarkable in it — not a win, not recognition, just an ordinary Tuesday. There were things there. Small ones. They'd just been invisible next to the bigger signals.
+
+      She didn't stop caring about her work. She just stopped needing it to tell her who she was.
+    cta:
+      text: "More on that Thursday →"
+      url_template: null
+
+  e4_offer:
+    delay_hours: 144
+    subject: "The full self-worth reset — $0.99"
+    preview_text: "12 chapters. One per layer of the worth pattern."
+    body: |
+      The book is called "Worthy Without Proof" and it's $0.99.
+
+      It has 12 chapters — each one targeting a specific layer of the worth pattern. Chapter 1 is about the conditional worth cycle: how you build a sense of value that depends entirely on external inputs. Chapter 4 covers the comparison mechanism from Email 2 in much more depth. Chapter 7 is specifically for the pattern where accomplishment stops landing — where you achieve something and feel nothing.
+
+      Chapter 10 is about the body component: what low worth feels like physically and why that matters for changing the pattern. Chapter 12 is the integration piece — what it looks like when worth stops being something you earn.
+
+      The book takes about 35 minutes to read. It's not a program with steps to complete. It's a set of lenses — ways of seeing the pattern more clearly so you can start working with it instead of running from it.
+
+      $0.99. No upsell at checkout.
+    cta:
+      text: "Get it for $0.99"
+      url_template: "{book_1_store_url}"
+
+  e5_series:
+    delay_hours: 312
+    subject: "Books 2–7: go deeper"
+    preview_text: "Each one targets a different layer of the pattern"
+    body: |
+      If "Worthy Without Proof" connected, the rest of the Enough Series covers specific dimensions of worth that the first book introduces but doesn't fully unpack.
+
+      Book 2: "The Approval Loop" — specifically for people whose worth runs through other people's reactions.
+      Book 3: "Enough at Rest" — worth when you're not producing or performing.
+      Book 4: "The Comparison Detox" — a deeper look at the social comparison mechanism and how to work with it.
+      Book 5: "The Perfectionism Bargain" — how perfectionism functions as a worth strategy and why it fails.
+      Book 6: "Visible" — worth in relationships and whether you let people actually see you.
+      Book 7: "The Long Enough" — building a durable internal sense of worth that doesn't require constant renewal.
+
+      Each is $0.99. Each stands alone.
+    cta:
+      text: "Explore the series"
+      url_template: "{base_url}/catalog/{brand_id}"

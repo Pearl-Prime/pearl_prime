@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Capacity Audit — Phoenix Omega</title>
+  <meta name="description" content="Find out where your capacity went. 10 questions. 2 minutes. No judgment.">
+  <meta property="og:title" content="The Capacity Audit — Find Out Where Your Capacity Went">
+  <meta property="og:description" content="10 questions. 2 minutes. No judgment. A free self-assessment from Phoenix Omega.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0A0A0F;
+      color: #F0EFE8;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 20px 60px;
+    }
+
+    .brand-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8B8A82;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 6vw, 52px);
+      font-weight: 500;
+      line-height: 1.15;
+      color: #F0EFE8;
+      margin-bottom: 16px;
+    }
+
+    .subhead {
+      color: #8B8A82;
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: #13131A;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      color: #8B8A82;
+      margin-bottom: 8px;
+      letter-spacing: 0.03em;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      background: #1A1A24;
+      border: 1px solid #2A2A3A;
+      color: #F0EFE8;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      border-color: #3B82F6;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn {
+      background: #3B82F6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    .btn:hover { background: #2563EB; }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #2A2A3A;
+      color: #F0EFE8;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .btn-secondary:hover { border-color: #3B82F6; }
+
+    #tool-section { display: none; }
+
+    .question-block {
+      border-bottom: 1px solid #1E1E28;
+      padding: 20px 0;
+    }
+
+    .question-block:last-of-type { border-bottom: none; }
+
+    .question-text {
+      font-size: 15px;
+      color: #F0EFE8;
+      margin-bottom: 14px;
+    }
+
+    .radio-group {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    @media (max-width: 480px) {
+      .radio-group { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .radio-option {
+      position: relative;
+    }
+
+    .radio-option input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .radio-option label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 4px;
+      background: #1A1A24;
+      border: 1px solid #2A2A3A;
+      border-radius: 6px;
+      font-size: 12px;
+      color: #8B8A82;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      min-height: 40px;
+    }
+
+    .radio-option input:checked + label {
+      background: #1E2D4A;
+      border-color: #3B82F6;
+      color: #F0EFE8;
+    }
+
+    .radio-option label:hover {
+      border-color: #3B82F6;
+      color: #F0EFE8;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      color: #F0EFE8;
+    }
+
+    .result-card {
+      background: #13131A;
+      border-radius: 12px;
+      padding: 32px;
+      margin: 24px 0;
+      border-left: 3px solid #3B82F6;
+    }
+
+    .result-score {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 500;
+      color: #3B82F6;
+      margin-bottom: 8px;
+    }
+
+    .result-label {
+      font-size: 13px;
+      color: #8B8A82;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .result-message {
+      font-size: 17px;
+      color: #F0EFE8;
+      line-height: 1.6;
+    }
+
+    .reflection-block {
+      margin-top: 28px;
+    }
+
+    .reflection-block p {
+      font-size: 14px;
+      color: #8B8A82;
+      margin-bottom: 10px;
+    }
+
+    .cta-banner {
+      background: linear-gradient(135deg, #13131A 0%, #1A1A2E 100%);
+      border: 1px solid #2A2A3A;
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .cta-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8B8A82;
+      margin-bottom: 12px;
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 500;
+      color: #F0EFE8;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .cta-subtitle {
+      color: #8B8A82;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: #3B82F6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+
+    .cta-btn:hover { background: #2563EB; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #1E1E28;
+      text-align: center;
+      font-size: 13px;
+      color: #8B8A82;
+    }
+
+    .error-msg {
+      color: #EF4444;
+      font-size: 13px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .progress-bar {
+      height: 2px;
+      background: #1E1E28;
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #3B82F6;
+      border-radius: 2px;
+      transition: width 0.3s;
+      width: 0%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="brand-tag">Phoenix Omega — Inner Light Press</div>
+
+    <h1>Find out where your capacity went.</h1>
+    <p class="subhead">10 questions. 2 minutes. No judgment.</p>
+
+    <!-- EMAIL CAPTURE -->
+    <div id="form-section" class="card">
+      <p style="font-size:15px; color:#8B8A82; margin-bottom:24px;">Get your results plus the full Capacity Audit framework.</p>
+      <div class="form-group">
+        <label for="name">First name</label>
+        <input type="text" id="name" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="your@email.com">
+      </div>
+      <p id="form-error" class="error-msg">Please enter your name and a valid email.</p>
+      <button class="btn" onclick="submitForm()">Access The Capacity Audit</button>
+    </div>
+
+    <!-- TOOL SECTION -->
+    <div id="tool-section">
+      <div class="card">
+        <div class="section-title">The Capacity Audit</div>
+        <p style="font-size:14px; color:#8B8A82; margin-bottom:24px;">Rate each statement honestly. There are no right answers.</p>
+        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+        <div id="questions-block">
+          <!-- Questions injected by JS -->
+        </div>
+
+        <div id="submit-block" style="margin-top:28px;">
+          <p id="audit-error" class="error-msg" style="display:none; margin-bottom:12px;">Please answer all 10 questions to see your results.</p>
+          <button class="btn" onclick="scoreAudit()">See My Results</button>
+        </div>
+      </div>
+
+      <div id="results-block" style="display:none;">
+        <div class="result-card">
+          <div class="result-score" id="result-score">0</div>
+          <div class="result-label">out of 30</div>
+          <div class="result-message" id="result-message"></div>
+        </div>
+
+        <div class="card">
+          <div class="reflection-block">
+            <p style="font-size:16px; color:#F0EFE8; margin-bottom:16px;">What one thing could you say no to this week?</p>
+            <p>This isn't rhetorical. Write it down.</p>
+            <textarea id="reflection" placeholder="One thing..." style="margin-top:12px;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-banner">
+        <div class="cta-label">Want the full system?</div>
+        <div class="cta-title">Empty Well Collection:<br>Caring Until There's Nothing Left</div>
+        <div class="cta-subtitle">Get Book 1 for $0.99</div>
+        <a href="#" class="cta-btn">Get the Book — $0.99</a>
+      </div>
+    </div>
+
+    <footer>A free tool from Phoenix Omega — Inner Light Press</footer>
+  </div>
+
+  <script>
+    const questions = [
+      "I feel drained after spending time with people I care about.",
+      "I think about other people's problems when I'm trying to rest.",
+      "I feel guilty when I take time for myself.",
+      "I have less patience than I used to.",
+      "I feel responsible for how other people feel.",
+      "I'm tired in a way that sleep doesn't fix.",
+      "I feel like I have nothing left to give but keep giving anyway.",
+      "I rarely ask for help — I'm usually the one giving it.",
+      "My feelings feel secondary to everyone else's.",
+      "I imagine what it would feel like to just disappear for a week."
+    ];
+
+    const options = ["Never", "Sometimes", "Often", "Always"];
+
+    function buildQuestions() {
+      const container = document.getElementById('questions-block');
+      questions.forEach((q, i) => {
+        const block = document.createElement('div');
+        block.className = 'question-block';
+        block.innerHTML = `
+          <div class="question-text">${i + 1}. ${q}</div>
+          <div class="radio-group">
+            ${options.map((opt, j) => `
+              <div class="radio-option">
+                <input type="radio" name="q${i}" id="q${i}_${j}" value="${j}" onchange="updateProgress()">
+                <label for="q${i}_${j}">${opt}</label>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(block);
+      });
+    }
+
+    function updateProgress() {
+      let answered = 0;
+      for (let i = 0; i < questions.length; i++) {
+        if (document.querySelector(`input[name="q${i}"]:checked`)) answered++;
+      }
+      document.getElementById('progress').style.width = `${(answered / questions.length) * 100}%`;
+    }
+
+    function submitForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!name || !emailRe.test(email)) {
+        document.getElementById('form-error').style.display = 'block';
+        return;
+      }
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('tool-section').style.display = 'block';
+      buildQuestions();
+    }
+
+    function scoreAudit() {
+      let total = 0;
+      let unanswered = false;
+      for (let i = 0; i < questions.length; i++) {
+        const checked = document.querySelector(`input[name="q${i}"]:checked`);
+        if (!checked) { unanswered = true; break; }
+        total += parseInt(checked.value);
+      }
+
+      if (unanswered) {
+        const errEl = document.getElementById('audit-error');
+        errEl.style.display = 'block';
+        return;
+      }
+
+      document.getElementById('questions-block').style.display = 'none';
+      document.getElementById('submit-block').style.display = 'none';
+      document.getElementById('results-block').style.display = 'block';
+      document.getElementById('result-score').textContent = total;
+
+      let message;
+      if (total <= 10) {
+        message = "Your capacity is holding. The audit is a check-in to keep it that way.";
+      } else if (total <= 20) {
+        message = "Your capacity is under real strain. Something needs to change before it runs out.";
+      } else {
+        message = "You're running on empty. This is your nervous system asking for something.";
+      }
+      document.getElementById('result-message').textContent = message;
+    }
+
+    buildQuestions();
+  </script>
+</body>
+</html>

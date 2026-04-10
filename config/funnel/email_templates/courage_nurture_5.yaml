@@ -1,0 +1,103 @@
+sequence_id: courage_nurture_5
+topic: courage
+freebie_name: "The Decision Map"
+book_1_title: "Fear to Fire Collection: Jump Scared"
+book_1_price: "$0.99"
+brand_voice: "direct, warm, grounded — no guru, no toxic positivity"
+total_emails: 5
+
+emails:
+  e1_download:
+    delay_hours: 0
+    subject: "Your Decision Map — name the thing you're avoiding"
+    preview_text: "Step 1 is already harder than it looks"
+    body: |
+      Your Decision Map is ready — link below.
+
+      One instruction before you open it: name the thing you've been avoiding.
+
+      Not a category. Not "my career situation" or "that conversation." The specific thing. The exact decision or action that you already know you need to make and keep not making.
+
+      Write it down. Or say it out loud if you're alone. Notice where you feel it in your body when you do — there's usually a location. Your chest, your stomach, somewhere in your throat. That physical sensation is not a problem. It's information about how much this matters.
+
+      The Map is structured to take you from naming the thing to understanding what's actually in the way — not the practical obstacles, but the specific fear underneath. Most people know what they should do. The question is what's making the cost of not doing it feel lower than the cost of doing it.
+
+      That's what the Map is for. Download it below.
+    cta:
+      text: "Open your Decision Map"
+      url_template: "{base_url}/free/decision-map/"
+
+  e2_mechanism:
+    delay_hours: 24
+    subject: "The moment right before you commit — what's actually happening"
+    preview_text: "Your body is doing its job. Your mind can still decide."
+    body: |
+      There's a specific moment that most people recognize: you're right at the edge of committing to something that matters, and your body fires an alarm. Heart rate goes up. Breathing changes. A wave of doubt or dread arrives, seemingly from nowhere.
+
+      This is not evidence that you're making the wrong choice. This is your threat system doing its job. It detected significance — something that could go wrong, something with consequences — and it activated. That's the system working as designed.
+
+      The important thing to understand is that fear at the threshold is not a veto. It's a signal. It's saying: this matters, and there's risk involved. Which is often exactly true of anything worth doing.
+
+      Your body fires the signal. Your mind still gets to decide.
+
+      Here's a practice for this week: describe in writing what it would look like to do the thing scared. Not confidently — scared. What would you actually do? What would the first 10 minutes look like? What would you say, where would you go, what would the practical sequence be?
+
+      Mapping the action in detail makes it more concrete and less abstract, which tends to reduce the alarm signal and make the decision feel more navigable.
+    cta:
+      text: "Try this now"
+      url_template: "{base_url}/free/decision-map/#exercise2"
+
+  e3_story:
+    delay_hours: 96
+    subject: "She stayed at the edge for two years before she jumped"
+    preview_text: "And what finally made her go"
+    body: |
+      Lena had been running her own consulting business as a side project for two years while keeping her full-time job. The side project was doing well — well enough that the numbers made the decision obvious. She looked at them every few months, saw the same thing, and kept not doing it.
+
+      She told herself she was waiting for the right moment. More savings, fewer variables, a sign that the conditions were right. The conditions kept improving. She kept waiting.
+
+      What she noticed, eventually, was that she'd spent two years constructing reasons to stay at the edge. Not because the business wasn't ready — but because the edge felt like a place she could still belong to both worlds. Once she jumped, she'd have to be the person who jumped. That was a different identity than the one she'd been holding.
+
+      The moment that changed things wasn't a realization or a breakthrough. It was a conversation with a client who mentioned, casually, that they assumed she did this full time. They'd assumed it for a year. She'd been the person who jumped in everyone else's mind already.
+
+      She gave her notice two weeks later. Not because the fear was gone — it wasn't — but because staying at the edge had stopped feeling like safety and started feeling like its own kind of loss.
+    cta:
+      text: "More on that Thursday →"
+      url_template: null
+
+  e4_offer:
+    delay_hours: 144
+    subject: "The full courage system — $0.99"
+    preview_text: "12 chapters. Built for the decision you keep not making."
+    body: |
+      The book is "Jump Scared" and it's $0.99.
+
+      12 chapters. Each one targets a specific pattern in the courage/fear dynamic — not the abstract version, but the practical one. What stops you at the threshold, why the alarm fires when the stakes are high, how to move before the fear resolves.
+
+      Chapter 1 is the mechanism: how fear works at the moment of commitment and why it's not evidence of the wrong choice. Chapter 4 is about the identity problem — why the decision isn't just about what you'll do but who you'll become, and why that's actually what makes it hard. Chapter 7 covers the aftermath: what happens after you go, and why people are often unprepared for that part.
+
+      Chapter 10 is about the edge — the place you can stay indefinitely because it feels like action without the risk of action. Chapter 12 is about the second decision: the one that comes after the first, when the fear doesn't disappear and you have to do the same thing again.
+
+      30 minutes to read. $0.99.
+    cta:
+      text: "Get it for $0.99"
+      url_template: "{book_1_store_url}"
+
+  e5_series:
+    delay_hours: 312
+    subject: "Books 2–7"
+    preview_text: "Each one covers a different kind of threshold"
+    body: |
+      If "Jump Scared" connected, the rest of the Fear to Fire Collection covers specific kinds of courage that the first book introduces but doesn't fully unpack.
+
+      Book 2: "The Identity Threshold" — specifically for decisions that require you to become a different version of yourself.
+      Book 3: "Visible Risk" — courage in contexts where other people will see if you fail.
+      Book 4: "The Long Commitment" — courage for decisions with no quick feedback loop, where you won't know for years.
+      Book 5: "Leaving" — the specific courage required to end something: a job, a relationship, a path.
+      Book 6: "The Second Jump" — what happens after the first courageous decision, when you have to do it again.
+      Book 7: "Calibrated Risk" — building a durable relationship with fear rather than managing it one threshold at a time.
+
+      Each is $0.99. Each stands alone.
+    cta:
+      text: "Explore the series"
+      url_template: "{base_url}/catalog/{brand_id}"

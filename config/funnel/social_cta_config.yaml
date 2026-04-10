@@ -1,0 +1,241 @@
+# config/funnel/social_cta_config.yaml
+# Per-topic CTA text for 48 Social post generation.
+# Consumed by: 48 Social content engine, manifest.json builder, caption generator
+# Authority: docs/FULL_FUNNEL_PLAN.md, docs/48_SOCIAL_GHL_BRAND_ADMIN_SPEC.md
+# Source of truth for CTAs: config/funnel/freebie_to_book_map.yaml → social_cta block
+# Last updated: 2026-04-10
+
+schema_version: 1
+
+# How 48 Social uses this config:
+# 1. For each book being repurposed, look up topic_id
+# 2. Pull the social_cta block for that topic
+# 3. Append CTA text to post caption (per post_type mapping below)
+# 4. Set bio link to freebie landing page URL
+# 5. Use platform-appropriate hashtag set
+
+base_freebie_url: "https://brand-admin-onboarding.pages.dev/free"
+
+# CTA text by post type (universal, overridden per topic below)
+post_type_cta_defaults:
+  quote_card:
+    caption_suffix: "Free guide in bio ↗"
+    image_overlay: "Free {freebie_name} → link in bio"
+  micro_practice:
+    caption_suffix: "Get the full practice free → link in bio"
+    image_overlay: "Free {freebie_name}"
+  hook_post:
+    caption_suffix: "This is from our new book. Free guide in bio ↗"
+    image_overlay: null
+  carousel:
+    last_slide_text: "Want the full guide? Free → link in bio"
+    caption_suffix: "Swipe to the end 👆 Free guide in bio"
+  video_clip:
+    caption_suffix: "Free {freebie_name} → link in bio 📖"
+    video_overlay_last_3s: "Link in bio 🔗"
+  story_reel:
+    caption_suffix: "Free guide → link in bio"
+    story_sticker: "Link in bio ↗"
+  thread:
+    final_post: "Full free guide: {freebie_url}"
+  engagement:
+    caption_suffix: "Which resonates? Free guide → bio"
+
+# Per-topic CTA overrides
+# Format: topic_id → CTA variations for different post types
+topic_ctas:
+
+  anxiety:
+    freebie_slug: anxiety-nervous-system-reset
+    freebie_name: "90-Second Nervous System Reset"
+    freebie_url: "{base_freebie_url}/anxiety-nervous-system-reset/"
+    short: "Free Reset Timer → link in bio"
+    medium: "Free Nervous System Reset → calm the alarm in 90 seconds → link in bio"
+    hashtags: ["nervoussystem", "anxietyrelief", "breathwork", "highfunctioninganxiety", "mentalhealth"]
+    platform_priority: ["tiktok", "instagram", "youtube_shorts"]
+    hook_examples:
+      - "Your body already knows what anxiety feels like. Your brain just hasn't caught up."
+      - "The alarm isn't broken. It's miscalibrated. Here's the fix."
+      - "You did everything right. Your chest hasn't gotten the memo."
+
+  burnout:
+    freebie_slug: burnout-energy-audit
+    freebie_name: "The 5-Minute Energy Audit"
+    freebie_url: "{base_freebie_url}/burnout-energy-audit/"
+    short: "Free Energy Audit → link in bio"
+    medium: "Free 5-Minute Energy Audit — see where it's leaking → link in bio"
+    hashtags: ["burnout", "burnoutrecovery", "hustle", "worktok", "nervousystemreset"]
+    platform_priority: ["linkedin", "instagram", "tiktok"]
+    hook_examples:
+      - "Burnout isn't just tired. It's soul-tired."
+      - "You can't sleep your way out of burnout. Here's what actually works."
+      - "Accomplished everything. Still feel empty. That's not a you problem."
+
+  self_worth:
+    freebie_slug: self-worth-inventory
+    freebie_name: "The Worth Inventory"
+    freebie_url: "{base_freebie_url}/self-worth-inventory/"
+    short: "Free worth inventory — 3 minutes → link in bio"
+    medium: "Free self-worth inventory — prove the voice wrong → link in bio"
+    hashtags: ["selfworth", "selflove", "enoughness", "innercritic", "mentalhealth"]
+    platform_priority: ["instagram", "tiktok", "pinterest"]
+    hook_examples:
+      - "You're enough exactly as you are right now. Your brain disagrees. Let's fix that."
+      - "Worth is not something you earn. Your brain just thinks it is."
+      - "The comparison trap is a habit. Habits can change."
+
+  imposter_syndrome:
+    freebie_slug: imposter-evidence-log
+    freebie_name: "The Evidence Log"
+    freebie_url: "{base_freebie_url}/imposter-evidence-log/"
+    short: "Free evidence log → proves the voice wrong → link in bio"
+    medium: "Free Evidence Log — counter the imposter voice with facts → link in bio"
+    hashtags: ["impostersyndrome", "impostor", "confidence", "worktok", "professionaldevelopment"]
+    platform_priority: ["linkedin", "instagram", "tiktok"]
+    hook_examples:
+      - "The higher you climb, the louder the voice that says you don't belong."
+      - "Everyone else seems to know what they're doing. They don't. Here's what helps."
+      - "Your doubt is louder than your evidence. That's a ratio problem."
+
+  boundaries:
+    freebie_slug: boundaries-script-kit
+    freebie_name: "The Boundary Script Kit"
+    freebie_url: "{base_freebie_url}/boundaries-script-kit/"
+    short: "Free boundary scripts — actual words to use → link in bio"
+    medium: "Free Boundary Script Kit — 8 scenarios, exact words → link in bio"
+    hashtags: ["boundaries", "peoplepleasing", "selfrespect", "sayingno", "mentalhealth"]
+    platform_priority: ["tiktok", "instagram", "facebook"]
+    hook_examples:
+      - "People pleasing is a full-time job nobody hired you for."
+      - "Saying no is a skill. Here are the exact words."
+      - "Setting a limit is an act of self-respect, not rejection."
+
+  depression:
+    freebie_slug: depression-momentum-kit
+    freebie_name: "The Momentum Kit"
+    freebie_url: "{base_freebie_url}/depression-momentum-kit/"
+    short: "Free momentum kit — starts at zero effort → link in bio"
+    medium: "Free Momentum Kit — micro-actions when everything is heavy → link in bio"
+    hashtags: ["depression", "mentalhealth", "smallsteps", "lowenergy", "selfhelp"]
+    platform_priority: ["tiktok", "instagram", "youtube_shorts"]
+    hook_examples:
+      - "Depression isn't sadness. It's static."
+      - "Nothing sounds good. That's not laziness. Here's what helps."
+      - "When everything is heavy, start with what costs nothing."
+
+  courage:
+    freebie_slug: courage-decision-map
+    freebie_name: "The Decision Map"
+    freebie_url: "{base_freebie_url}/courage-decision-map/"
+    short: "Free decision map → make the scary choice → link in bio"
+    medium: "Free Decision Map — 6 steps through the thing you're avoiding → link in bio"
+    hashtags: ["courage", "fear", "bravery", "personalgrowth", "selfhelp"]
+    platform_priority: ["tiktok", "instagram", "youtube"]
+    hook_examples:
+      - "You don't have to feel ready. You have to go anyway."
+      - "Courage is fear plus action. Not fear's absence."
+      - "The thing you're avoiding is waiting for a different version of you to show up."
+
+  overthinking:
+    freebie_slug: overthinking-thought-sorter
+    freebie_name: "The Thought Sorter"
+    freebie_url: "{base_freebie_url}/overthinking-thought-sorter/"
+    short: "Free thought sorter — 2 minutes → link in bio"
+    medium: "Free Thought Sorter — label the loop, break it → link in bio"
+    hashtags: ["overthinking", "anxietytips", "brainwontstop", "mentalhealth", "mindset"]
+    platform_priority: ["tiktok", "instagram", "twitter_x"]
+    hook_examples:
+      - "Your brain isn't broken. It got stuck in investigate mode."
+      - "The loop is looking for certainty you can't find. That's why it won't stop."
+      - "Replaying conversations from years ago at 2am. Not a you problem. A wiring problem."
+
+  compassion_fatigue:
+    freebie_slug: compassion-fatigue-audit
+    freebie_name: "The Capacity Audit"
+    freebie_url: "{base_freebie_url}/compassion-fatigue-audit/"
+    short: "Free capacity audit → see where yours went → link in bio"
+    medium: "Free Capacity Audit — find the drain before it runs out → link in bio"
+    hashtags: ["compassionfatigue", "empathburnout", "caregiver", "helperhealth", "mentalhealth"]
+    platform_priority: ["instagram", "linkedin", "tiktok"]
+    hook_examples:
+      - "Empathy without limits becomes exhaustion. That's not a character flaw."
+      - "You care about people. Your own oxygen mask comes first."
+      - "Being there for everyone means there's nothing for you. That ratio needs to change."
+
+  social_anxiety:
+    freebie_slug: social-anxiety-toolkit
+    freebie_name: "The Social Energy Toolkit"
+    freebie_url: "{base_freebie_url}/social-anxiety-toolkit/"
+    short: "Free social energy toolkit → link in bio"
+    medium: "Free Social Energy Toolkit — before, during, and after tools → link in bio"
+    hashtags: ["socialanxiety", "introvert", "awkward", "socialskills", "mentalhealth"]
+    platform_priority: ["tiktok", "instagram", "youtube_shorts"]
+    hook_examples:
+      - "You're not awkward. Your alarm system is just miscalibrated."
+      - "Rooms full of people make you want to disappear. There's a reason for that."
+      - "Small talk is torture. Your social alarm is working overtime."
+
+  sleep_anxiety:
+    freebie_slug: sleep-anxiety-wind-down
+    freebie_name: "The 8-Minute Wind-Down"
+    freebie_url: "{base_freebie_url}/sleep-anxiety-wind-down/"
+    short: "Free 8-minute wind-down → link in bio"
+    medium: "Free Wind-Down Protocol — timed, 3 phases, built for the midnight overthinker → link in bio"
+    hashtags: ["sleepanxiety", "cantsleep", "racingthoughts", "sleeptips", "mentalhealth"]
+    platform_priority: ["tiktok", "instagram", "youtube"]
+    hook_examples:
+      - "The anxiety about sleep is the thing keeping you awake."
+      - "Your brain is trying to solve tomorrow at midnight."
+      - "The second you close your eyes, your brain explodes. Here's the fix."
+
+  financial_anxiety:
+    freebie_slug: financial-anxiety-check-in
+    freebie_name: "The Money Check-In"
+    freebie_url: "{base_freebie_url}/financial-anxiety-check-in/"
+    short: "Free money check-in — understand the pattern → link in bio"
+    medium: "Free Money Check-In — the balance is one thing, the anxiety is another → link in bio"
+    hashtags: ["financialanxiety", "moneystress", "financialmindset", "moneyanxiety", "selfhelp"]
+    platform_priority: ["tiktok", "instagram", "linkedin"]
+    hook_examples:
+      - "Your bank account is fine. Your nervous system didn't get the update."
+      - "Making good money and still feeling broke. That's not about the numbers."
+      - "Checking your account like it will change. That's not a money problem."
+
+  financial_stress:
+    freebie_slug: financial-stress-audit
+    freebie_name: "The Financial Stress Audit"
+    freebie_url: "{base_freebie_url}/financial-stress-audit/"
+    short: "Free financial stress audit → 5 questions → link in bio"
+    medium: "Free Financial Stress Audit — the stress is rarely just about money → link in bio"
+    hashtags: ["financialstress", "moneyanxiety", "financialwellness", "budgeting", "selfhelp"]
+    platform_priority: ["tiktok", "instagram", "facebook"]
+    hook_examples:
+      - "You're not bad with money. You're wired for scarcity."
+      - "The stress about money started before your first paycheck."
+      - "Never enough, no matter how much you make. That's a pattern, not a number."
+
+  somatic_healing:
+    freebie_slug: somatic-body-scan
+    freebie_name: "The 4-Minute Body Scan"
+    freebie_url: "{base_freebie_url}/somatic-body-scan/"
+    short: "Free body scan — 4 minutes → link in bio"
+    medium: "Free 4-Minute Body Scan — your body's been trying to tell you something → link in bio"
+    hashtags: ["somatichealing", "bodyscan", "nervoussystem", "embodiment", "selfhelp"]
+    platform_priority: ["instagram", "tiktok", "youtube"]
+    hook_examples:
+      - "Your jaw. Your shoulders. The base of your skull. That's not stress — it's stored."
+      - "Your body has been keeping score longer than you've been paying attention."
+      - "Tension is information. Your body is smarter than your thoughts about what you need."
+
+  grief:
+    freebie_slug: grief-letter-template
+    freebie_name: "The Letter You Didn't Get to Send"
+    freebie_url: "{base_freebie_url}/grief-letter-template/"
+    short: "Free letter template — say what's left unsaid → link in bio"
+    medium: "Free letter template — structured space for what you didn't get to say → link in bio"
+    hashtags: ["grief", "grieving", "loss", "griefjourney", "mentalhealth"]
+    platform_priority: ["instagram", "facebook", "pinterest"]
+    hook_examples:
+      - "Grief doesn't have stages. It has waves."
+      - "Missing them in a way that physically hurts. That's not too much."
+      - "You don't want to move on because it feels like forgetting. It isn't."

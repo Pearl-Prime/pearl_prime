@@ -1,0 +1,104 @@
+sequence_id: sleep_anxiety_nurture_5
+topic: sleep_anxiety
+freebie_name: "The 8-Minute Wind-Down"
+book_1_title: "Quiet Night Collection: The Quiet Hour"
+book_1_price: "$0.99"
+brand_voice: "direct, warm, grounded — no guru, no toxic positivity"
+total_emails: 5
+
+emails:
+  e1_download:
+    delay_hours: 0
+    subject: "Your 8-Minute Wind-Down is ready — start with this tonight"
+    preview_text: "Before you close the laptop: write every open loop."
+    body: |
+      Your 8-Minute Wind-Down protocol is waiting for you. Download it below.
+
+      Tonight, before anything else in the protocol, do this first.
+
+      About 30 minutes before you want to be in bed: open a notebook or a blank document. Set a timer for five minutes. Write every open loop in your head. Every task that isn't done. Every thing you need to remember. Every worry that's sitting in your queue. Every "I should probably follow up on that."
+
+      Don't organize it. Don't prioritize it. Just get it out of your head and onto the page. When the timer goes off, close the notebook or the document. You're not solving anything tonight. You're just taking it out of active memory so your brain isn't on standby trying to hold it all.
+
+      This isn't glamorous. It doesn't feel like it should work. But your brain keeps open loops running in the background the same way a computer keeps tabs open — it takes up space, uses energy, and stays alert for the moment you might need it.
+
+      The mind dump closes the tabs. Everything else in the wind-down works better once that part is done.
+
+      Download the full protocol. Start tonight.
+    cta:
+      text: "Download The 8-Minute Wind-Down"
+      url_template: "{base_url}/free/8-minute-wind-down/"
+
+  e2_mechanism:
+    delay_hours: 24
+    subject: "Why your brain saves its biggest worries for the moment you lie down"
+    preview_text: "It's not random. Your brain picked that moment on purpose."
+    body: |
+      If you've noticed that your mind gets loudest the moment you try to sleep, you're not imagining it, and it's not a coincidence.
+
+      During the day, your brain has a constant stream of input — tasks, conversations, screens, stimulation. Problem-solving happens in the gaps, but the gaps are always being filled. When you lie down and close your eyes, the distractions stop. That's the first quiet your brain has had all day.
+
+      So it does what it was waiting to do: it runs the worry loop. The unresolved problems, the worst-case scenarios, the things you didn't get to. Your brain isn't malfunctioning. It's doing what problem-solving brains do when they finally get space — they work. The problem is that 11pm with no new information is a terrible time to solve things, and the loop doesn't know that.
+
+      The goal isn't to silence the loop through willpower. The goal is to give your body something to focus on that the loop can't compete with.
+
+      Tonight's exercise: progressive muscle release, just three muscle groups. Start with your feet. Tense them fully for five seconds, then release completely. Move to your hands. Then your jaw. That's it. The physical focus interrupts the mental loop without requiring you to fight it.
+
+      It's not magic. It's just a redirect. But it works.
+    cta:
+      text: "Get the full body release guide"
+      url_template: "{base_url}/free/8-minute-wind-down/#exercise2"
+
+  e3_story:
+    delay_hours: 96
+    subject: "She dreaded 9pm every night for a year. Here's what finally shifted."
+    preview_text: "Not a sleep hack. A different relationship with bedtime."
+    body: |
+      Claire was 34 and working in product management when bedtime stopped feeling like rest and started feeling like a task she was going to fail.
+
+      She'd be fine all day. Tired, even — genuinely looking forward to sleep. And then 9pm would arrive and something would shift. She'd find herself doing one more thing at her desk. Then another. She told herself she was finishing up. She knew, underneath that, she was avoiding the part where she lay in the dark and her brain started running.
+
+      She tried the standard things. Phone in another room. No caffeine after noon. Melatonin. A white noise machine. Some of it helped a little. None of it touched the core thing, which was that she'd started associating her bed with the feeling of lying there awake, frustrated, watching the minutes pass.
+
+      The shift happened when she stopped trying to fix the sleep and started addressing the bedtime dread directly. She made bed a place she went to wind down rather than a place she went to perform unconsciousness. She started earlier. She gave herself permission to read even when she was tired. She stopped tracking how long it took.
+
+      The vigilance softened when she stopped treating sleep as something she could fail at.
+
+      It took about three weeks before she noticed 9pm felt different.
+    cta:
+      text: "More on that Thursday →"
+      url_template: null
+
+  e4_offer:
+    delay_hours: 144
+    subject: "A book for the nights when quiet is the problem, not the solution"
+    preview_text: "When your brain turns on the moment your head hits the pillow."
+    body: |
+      There's a specific kind of exhaustion that comes from dreading the thing that's supposed to restore you. When bed stops being a place you want to be and becomes a stage for everything you haven't resolved, sleep stops being rest and starts being a test you keep failing.
+
+      "The Quiet Hour" is a short book about what happens in that space — why the mind gets loud at night, what the body is doing when it can't settle, and what actually helps when willpower and sleep hygiene tips aren't cutting it.
+
+      It's part of the Quiet Night Collection.
+
+      It's not a clinical sleep manual. It's written for people who are otherwise functioning fine and just can't turn off at night — and who are tired of being told to avoid blue light.
+
+      The book covers the worry loop, the performance anxiety around sleep itself, and what it looks like to rebuild a relationship with nighttime that doesn't feel adversarial.
+
+      $0.99. Most people read it in one sitting, often in the hour before bed, which seems fitting.
+    cta:
+      text: "Get it for $0.99"
+      url_template: "{book_1_store_url}"
+
+  e5_series:
+    delay_hours: 312
+    subject: "The rest of the Quiet Night Collection"
+    preview_text: "More books in the series, if any of them apply."
+    body: |
+      The Quiet Night Collection covers the range of experiences that make nighttime harder than it should be — racing thoughts, the worry loop, waking at 3am, the dread of another bad night.
+
+      Each book in the series is short, specific, and $0.99. They're written to be read without turning them into a project — just useful information for where you are.
+
+      If "The Quiet Hour" was relevant, the full catalog has more. Take whatever fits.
+    cta:
+      text: "Explore the series"
+      url_template: "{base_url}/catalog/{brand_id}"
