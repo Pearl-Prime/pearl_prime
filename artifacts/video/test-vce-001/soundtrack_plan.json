@@ -1,7 +1,7 @@
 {
   "plan_id": "plan-therapeutic-001",
   "channel_id": "ch_001",
-  "config_hash": "fb4b278a2fafb4d3",
+  "config_hash": "96d343956db3db73",
   "duration_s": 6.86,
   "narration_segments": [
     {
@@ -79,6 +79,112 @@
       }
     }
   ],
+  "sfx_events": [
+    {
+      "arc": "hook",
+      "layer": "primary",
+      "category": "nature_ambient",
+      "asset_id": "nat_forest_birds_01",
+      "file": "nature_ambient/forest_birds_01.mp3",
+      "start_s": 0.0,
+      "end_s": 1.03,
+      "level_db": -28,
+      "pitch_shift_pct": 0.0,
+      "fade_in_s": 2.0,
+      "fade_out_s": 2.0
+    },
+    {
+      "arc": "build",
+      "layer": "primary",
+      "category": "nature_ambient",
+      "asset_id": "nat_forest_birds_01",
+      "file": "nature_ambient/forest_birds_01.mp3",
+      "start_s": 1.03,
+      "end_s": 3.77,
+      "level_db": -26,
+      "pitch_shift_pct": 0.0,
+      "fade_in_s": 2.0,
+      "fade_out_s": 2.0
+    },
+    {
+      "arc": "build",
+      "layer": "secondary",
+      "category": "body_somatic",
+      "asset_id": "body_breath_slow_01",
+      "file": "body_somatic/breath_slow_01.mp3",
+      "start_s": 1.03,
+      "end_s": 3.77,
+      "level_db": -30,
+      "pitch_shift_pct": 0,
+      "fade_in_s": 3.0,
+      "fade_out_s": 3.0
+    },
+    {
+      "arc": "peak",
+      "layer": "primary",
+      "category": "tension_release",
+      "asset_id": "ten_hum_warm_01",
+      "file": "tension_release/hum_warm_01.mp3",
+      "start_s": 3.77,
+      "end_s": 4.8,
+      "level_db": -22,
+      "pitch_shift_pct": 3.0,
+      "fade_in_s": 2.0,
+      "fade_out_s": 2.0
+    },
+    {
+      "arc": "peak",
+      "layer": "secondary",
+      "category": "transition_marker",
+      "asset_id": "trans_sweep_warm_01",
+      "file": "transition_marker/sweep_warm_01.mp3",
+      "start_s": 3.77,
+      "end_s": 4.8,
+      "level_db": -26,
+      "pitch_shift_pct": 0,
+      "fade_in_s": 3.0,
+      "fade_out_s": 3.0
+    },
+    {
+      "arc": "release",
+      "layer": "primary",
+      "category": "resonant_tone",
+      "asset_id": "res_chime_single_01",
+      "file": "resonant_tone/chime_single_01.mp3",
+      "start_s": 4.8,
+      "end_s": 5.83,
+      "level_db": -24,
+      "pitch_shift_pct": 3.0,
+      "fade_in_s": 2.0,
+      "fade_out_s": 2.0
+    },
+    {
+      "arc": "release",
+      "layer": "secondary",
+      "category": "nature_ambient",
+      "asset_id": "nat_stream_water_01",
+      "file": "nature_ambient/stream_water_01.mp3",
+      "start_s": 4.8,
+      "end_s": 5.83,
+      "level_db": -28,
+      "pitch_shift_pct": 0,
+      "fade_in_s": 3.0,
+      "fade_out_s": 3.0
+    },
+    {
+      "arc": "resolve",
+      "layer": "primary",
+      "category": "resonant_tone",
+      "asset_id": "res_chime_single_01",
+      "file": "resonant_tone/chime_single_01.mp3",
+      "start_s": 5.83,
+      "end_s": 6.86,
+      "level_db": -26,
+      "pitch_shift_pct": 3.0,
+      "fade_in_s": 2.0,
+      "fade_out_s": 2.0
+    }
+  ],
   "mix_spec": {
     "tracks": [
       {
@@ -108,6 +214,19 @@
         "id": "therapeutic_subbass",
         "level_db_max": -18,
         "pan": "center",
+        "optional": true
+      },
+      {
+        "id": "sfx_primary",
+        "level_db": -26,
+        "pan": "stereo",
+        "optional": true,
+        "ducking": "voice_minus_4db_when_active"
+      },
+      {
+        "id": "sfx_secondary",
+        "level_db": -30,
+        "pan": "wide_stereo",
         "optional": true
       }
     ],

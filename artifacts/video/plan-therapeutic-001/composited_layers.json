@@ -1,7 +1,7 @@
 {
   "plan_id": "plan-therapeutic-001",
   "vce_format": "short",
-  "config_hash": "fb4b278a2fafb4d3",
+  "config_hash": "96d343956db3db73",
   "parallax_ratios": {
     "L1": 1.0,
     "L2": 1.3,
@@ -32,7 +32,12 @@
           "parallax": 1.6,
           "asset_key": "asset-1-001",
           "z": 2,
-          "input_index": 1
+          "input_index": 1,
+          "overlay_position": {
+            "x": 108,
+            "y": 864,
+            "rule": "medium_on_environment"
+          }
         },
         {
           "id": "L5",
@@ -95,7 +100,12 @@
           "parallax": 1.6,
           "asset_key": "asset-2-001",
           "z": 2,
-          "input_index": 1
+          "input_index": 1,
+          "overlay_position": {
+            "x": 108,
+            "y": 864,
+            "rule": "medium_on_environment"
+          }
         },
         {
           "id": "L5",

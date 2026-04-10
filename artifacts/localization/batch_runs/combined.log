@@ -5,13 +5,6 @@ Translated 1 pairs, failed 0 (dry-run)
 
 INFO translate_atoms [DRY RUN] Would translate 3 atoms for miki/climate -> ja-JP
 
-[translate:ja-JP/climate/ahjan] rc=0
-[1/1] ja-JP/climate/ahjan OK (0.0s)
-
-Translated 1 pairs, failed 0 (dry-run)
-
-INFO translate_atoms [DRY RUN] Would translate 3 atoms for ahjan/climate -> ja-JP
-
 [translate:zh-CN/climate/ahjan] rc=0
 [1/1] zh-CN/climate/ahjan OK (0.0s)
 
@@ -19,12 +12,26 @@ Translated 1 pairs, failed 0 (dry-run)
 
 INFO translate_atoms [DRY RUN] Would translate 3 atoms for ahjan/climate -> zh-CN
 
+[translate:ja-JP/climate/ahjan] rc=0
+[1/1] ja-JP/climate/ahjan OK (0.0s)
+
+Translated 1 pairs, failed 0 (dry-run)
+
+INFO translate_atoms [DRY RUN] Would translate 3 atoms for ahjan/climate -> ja-JP
+
 [translate:ja-JP/climate/maat] rc=0
 [1/1] ja-JP/climate/maat OK (0.0s)
 
 Translated 1 pairs, failed 0 (dry-run)
 
 INFO translate_atoms [DRY RUN] Would translate 3 atoms for maat/climate -> ja-JP
+
+[translate:zh-TW/climate/ahjan] rc=0
+[1/1] zh-TW/climate/ahjan OK (0.0s)
+
+Translated 1 pairs, failed 0 (dry-run)
+
+INFO translate_atoms [DRY RUN] Would translate 3 atoms for ahjan/climate -> zh-TW
 
 [translate:zh-CN/climate/miki] rc=0
 [1/1] zh-CN/climate/miki OK (0.0s)
@@ -47,13 +54,6 @@ Translated 1 pairs, failed 0 (dry-run)
 
 INFO translate_atoms [DRY RUN] Would translate 3 atoms for maat/climate -> zh-CN
 
-[translate:zh-TW/climate/ahjan] rc=0
-[1/1] zh-TW/climate/ahjan OK (0.0s)
-
-Translated 1 pairs, failed 0 (dry-run)
-
-INFO translate_atoms [DRY RUN] Would translate 3 atoms for ahjan/climate -> zh-TW
-
 [translate:zh-HK/climate/ahjan] rc=0
 [1/1] zh-HK/climate/ahjan OK (0.0s)
 
@@ -68,13 +68,6 @@ Translated 1 pairs, failed 0 (dry-run)
 
 INFO translate_atoms [DRY RUN] Would translate 3 atoms for maat/climate -> zh-TW
 
-[translate:zh-HK/climate/miki] rc=0
-[1/1] zh-HK/climate/miki OK (0.0s)
-
-Translated 1 pairs, failed 0 (dry-run)
-
-INFO translate_atoms [DRY RUN] Would translate 3 atoms for miki/climate -> zh-HK
-
 [translate:zh-HK/climate/maat] rc=0
 [1/1] zh-HK/climate/maat OK (0.0s)
 
@@ -82,12 +75,12 @@ Translated 1 pairs, failed 0 (dry-run)
 
 INFO translate_atoms [DRY RUN] Would translate 3 atoms for maat/climate -> zh-HK
 
-[translate:zh-SG/climate/ahjan] rc=0
-[1/1] zh-SG/climate/ahjan OK (0.0s)
+[translate:zh-HK/climate/miki] rc=0
+[1/1] zh-HK/climate/miki OK (0.0s)
 
 Translated 1 pairs, failed 0 (dry-run)
 
-INFO translate_atoms [DRY RUN] Would translate 3 atoms for ahjan/climate -> zh-SG
+INFO translate_atoms [DRY RUN] Would translate 3 atoms for miki/climate -> zh-HK
 
 [translate:zh-SG/climate/miki] rc=0
 [1/1] zh-SG/climate/miki OK (0.0s)
@@ -96,12 +89,12 @@ Translated 1 pairs, failed 0 (dry-run)
 
 INFO translate_atoms [DRY RUN] Would translate 3 atoms for miki/climate -> zh-SG
 
-[translate:zh-SG/climate/maat] rc=0
-[1/1] zh-SG/climate/maat OK (0.0s)
+[translate:zh-SG/climate/ahjan] rc=0
+[1/1] zh-SG/climate/ahjan OK (0.0s)
 
 Translated 1 pairs, failed 0 (dry-run)
 
-INFO translate_atoms [DRY RUN] Would translate 3 atoms for maat/climate -> zh-SG
+INFO translate_atoms [DRY RUN] Would translate 3 atoms for ahjan/climate -> zh-SG
 
 [translate:ko-KR/climate/ahjan] rc=0
 [1/1] ko-KR/climate/ahjan OK (0.0s)
@@ -110,12 +103,12 @@ Translated 1 pairs, failed 0 (dry-run)
 
 INFO translate_atoms [DRY RUN] Would translate 3 atoms for ahjan/climate -> ko-KR
 
-[translate:ko-KR/climate/maat] rc=0
-[1/1] ko-KR/climate/maat OK (0.0s)
+[translate:zh-SG/climate/maat] rc=0
+[1/1] zh-SG/climate/maat OK (0.0s)
 
 Translated 1 pairs, failed 0 (dry-run)
 
-INFO translate_atoms [DRY RUN] Would translate 3 atoms for maat/climate -> ko-KR
+INFO translate_atoms [DRY RUN] Would translate 3 atoms for maat/climate -> zh-SG
 
 [translate:ko-KR/climate/miki] rc=0
 [1/1] ko-KR/climate/miki OK (0.0s)
@@ -123,3 +116,10 @@ INFO translate_atoms [DRY RUN] Would translate 3 atoms for maat/climate -> ko-KR
 Translated 1 pairs, failed 0 (dry-run)
 
 INFO translate_atoms [DRY RUN] Would translate 3 atoms for miki/climate -> ko-KR
+
+[translate:ko-KR/climate/maat] rc=0
+[1/1] ko-KR/climate/maat OK (0.0s)
+
+Translated 1 pairs, failed 0 (dry-run)
+
+INFO translate_atoms [DRY RUN] Would translate 3 atoms for maat/climate -> ko-KR
