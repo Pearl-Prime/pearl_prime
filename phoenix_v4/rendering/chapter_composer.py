@@ -17,7 +17,7 @@ import hashlib
 import re
 from typing import Optional
 
-from phoenix_v4.exercises.models import AssemblyContext
+from phoenix_v4.exercises.models import AssemblyContext, EmotionalState
 
 try:
     from phoenix_v4.rendering.locale_templates import get_template as _gt
@@ -484,6 +484,45 @@ def _shape_integration(integration: str) -> str:
     return " ".join(limited or kept[:1])
 
 
+def _emotional_state_from_arc_role(role: str) -> EmotionalState:
+    r = (role or "").strip().lower()
+    if r == "destabilization":
+        return EmotionalState.HEAVY
+    if r == "integration":
+        return EmotionalState.CLOSE
+    if r == "reframe":
+        return EmotionalState.FLOW
+    return EmotionalState.NEUTRAL
+
+
+def _bump_exercise_stat(stats: dict | None, key: str) -> None:
+    if stats is None:
+        return
+    stats[key] = int(stats.get(key, 0)) + 1
+    stats["total"] = int(stats.get("total", 0)) + 1
+
+
+def _build_assembly_context(
+    chapter_index: int,
+    total_chapters: int,
+    emotional_role: str,
+    exercise_atom_id: str,
+    topic_id: str,
+    persona_id: str,
+    exercise_repeat_index: int,
+) -> AssemblyContext:
+    return AssemblyContext(
+        first_encounter=chapter_index == 0,
+        emotional_state=_emotional_state_from_arc_role(emotional_role),
+        repeat_count=exercise_repeat_index,
+        is_session_close=chapter_index >= max(total_chapters - 1, 0),
+        persona=persona_id or "",
+        exercise_id=exercise_atom_id or "",
+        chapter_index=chapter_index,
+        topic=topic_id or "",
+    )
+
+
 def _shape_thread(thread_raw: str, thesis: str, chapter_index: int, total_chapters: int) -> str:
     if thread_raw and not _is_placeholder_text(thread_raw):
         cleaned = re.sub(r"\bIn the next chapter,\s*", "", thread_raw, flags=re.I).strip()
@@ -505,6 +544,15 @@ def compose_chapter_prose(
     include_slot_labels_qa: bool = False,
     exercise_context: Optional[AssemblyContext] = None,
     locale: Optional[str] = None,
+    *,
+    topic_id: str = "",
+    persona_id: str = "",
+    emotional_role: str = "",
+    exercise_atom_id: str = "",
+    exercise_type_hint: str = "",
+    exercise_repeat_index: int = 0,
+    exercise_source_stats: Optional[dict] = None,
+    book_seed: str = "",
 ) -> str:
     """
     Compose a single chapter's prose from its slot types and resolved prose strings.
@@ -590,68 +638,89 @@ def compose_chapter_prose(
 
     # 7. Exercise with bridge
     # If exercise is placeholder or empty, try practice library (272 exercises with aha + integration)
+    exercise_from_library_34 = False
     if _is_placeholder_text(exercise_raw) or not exercise_raw:
         try:
             from phoenix_v4.exercises.practice_library_loader import get_exercise_for_chapter
+            seed = book_seed or f"ch{chapter_index}:{thesis[:20]}"
             composed = get_exercise_for_chapter(
                 chapter_index=chapter_index,
-                topic_id="",
-                persona_id="",
-                seed=f"ch{chapter_index}:{thesis[:20]}",
+                topic_id=topic_id,
+                persona_id=persona_id,
+                seed=seed,
             )
             if composed:
                 exercise_raw = composed
+                exercise_from_library_34 = True
         except Exception:
             pass
 
     if exercise_raw and not _is_placeholder_text(exercise_raw):
-        if exercise_context is not None:
-            # Use the component assembler for context-aware exercise rendering
-            try:
-                from phoenix_v4.exercises.component_assembler import (
-                    assemble_exercise_for_chapter,
-                )
-                composed_exercise = assemble_exercise_for_chapter(
-                    exercise_id=exercise_context.exercise_id,
-                    exercise_type="",  # resolved from templates
-                    description_text=exercise_raw,
-                    ctx=exercise_context,
-                    aha_text="",  # resolved from standards
-                    integration_text=integration_raw,
-                )
-                if composed_exercise.strip():
-                    parts.append(composed_exercise)
-                    # Skip the separate integration block below since it was
-                    # included in the component assembly
-                    integration_raw = ""
-            except Exception:
-                # Fallback to legacy hardcoded bridges on any import/runtime error
-                parts.append(_bridge_before_exercise(thesis, reflection=reflection_raw, story=story_raw))
-                parts.append(_exercise_setup_sentence(reflection_raw, story_raw))
-                parts.append(exercise_raw)
-        else:
-            # Wrap exercise with 5-dimension template (bridge + intro + desc + aha + integration)
+        eff_context = exercise_context or _build_assembly_context(
+            chapter_index=chapter_index,
+            total_chapters=total_chapters,
+            emotional_role=emotional_role,
+            exercise_atom_id=exercise_atom_id,
+            topic_id=topic_id,
+            persona_id=persona_id,
+            exercise_repeat_index=exercise_repeat_index,
+        )
+        assembled_ok = False
+        try:
+            from phoenix_v4.exercises.component_assembler import assemble_exercise_for_chapter
+
+            composed_exercise = assemble_exercise_for_chapter(
+                exercise_id=eff_context.exercise_id or exercise_atom_id,
+                exercise_type=exercise_type_hint,
+                description_text=exercise_raw,
+                ctx=eff_context,
+                aha_text="",
+                integration_text=integration_raw,
+            )
+            if composed_exercise.strip():
+                setup = _exercise_setup_sentence(reflection_raw, story_raw)
+                if setup:
+                    parts.append(setup)
+                parts.append(composed_exercise)
+                assembled_ok = True
+                if exercise_from_library_34:
+                    _bump_exercise_stat(exercise_source_stats, "library_34_fallback")
+                else:
+                    _bump_exercise_stat(exercise_source_stats, "registry")
+                integration_raw = ""
+        except Exception:
+            assembled_ok = False
+
+        if not assembled_ok:
+            # Legacy wrap: rotating bridges + Phoenix aha/integration via practice_library_loader
             try:
                 from phoenix_v4.exercises.practice_library_loader import compose_exercise, load_component_templates
+
                 composed = compose_exercise(
                     exercise={"name": "Exercise", "text": exercise_raw, "exercise_type": "body_awareness"},
                     chapter_index=chapter_index,
-                    seed=f"ch{chapter_index}:{thesis[:20]}",
+                    seed=book_seed or f"ch{chapter_index}:{thesis[:20]}",
                     templates=load_component_templates(),
                 )
                 if composed:
-                    # Inject somatic overlay sentence before composed exercise
                     setup = _exercise_setup_sentence(reflection_raw, story_raw)
                     parts.append(setup)
                     parts.append(composed)
-                    integration_raw = ""  # aha + integration already included
+                    integration_raw = ""
+                    if exercise_from_library_34:
+                        _bump_exercise_stat(exercise_source_stats, "library_34_fallback")
+                    else:
+                        _bump_exercise_stat(exercise_source_stats, "registry")
                 else:
                     raise ValueError("empty compose")
             except Exception:
-                # Final fallback: hardcoded bridges
                 parts.append(_bridge_before_exercise(thesis, reflection=reflection_raw, story=story_raw))
                 parts.append(_exercise_setup_sentence(reflection_raw, story_raw))
                 parts.append(exercise_raw)
+                if exercise_from_library_34:
+                    _bump_exercise_stat(exercise_source_stats, "library_34_fallback")
+                else:
+                    _bump_exercise_stat(exercise_source_stats, "registry")
 
     # 7a. PERMISSION (receive the reader — Writer Spec §4.8)
     # Short emotional permission statement placed near INTEGRATION. High-cost chapters only.

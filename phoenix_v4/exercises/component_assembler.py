@@ -8,6 +8,7 @@ with only the appropriate components at the right depth.
 """
 from __future__ import annotations
 
+import hashlib
 import re
 from pathlib import Path
 from typing import Any, Optional
@@ -32,6 +33,148 @@ BRIDGE_TEMPLATES_PATH = REPO_ROOT / "SOURCE_OF_TRUTH" / "exercises_v4" / "bridge
 INTRO_TEMPLATES_PATH = REPO_ROOT / "SOURCE_OF_TRUTH" / "exercises_v4" / "intro_templates.yaml"
 AHA_STANDARD_PATH = REPO_ROOT / "SOURCE_OF_TRUTH" / "exercises_v4" / "aha_noticing_phoenix_standard.yaml"
 INTEGRATION_STANDARD_PATH = REPO_ROOT / "SOURCE_OF_TRUTH" / "exercises_v4" / "integration_phoenix_standard.yaml"
+
+# Canonical exercise types (bridge/intro templates) — rotation fallback when type unknown.
+EXERCISE_TYPES_ROTATION: tuple[str, ...] = (
+    "00_breath_regulation",
+    "01_grounding_orientation",
+    "02_body_awareness_scan",
+    "03_somatic_release_discharge",
+    "04_nervous_system_downregulation",
+    "05_nervous_system_upregulation",
+    "06_vagal_stimulation_sound",
+    "07_self_contact_touch",
+    "08_emotional_processing_completion",
+    "09_embodied_intention_direction",
+    "10_integration_return_to_baseline",
+)
+
+# Pools of Phoenix-standard aha/integration keys (must exist in aha_noticing_phoenix_standard.yaml).
+AHA_POOL_BY_EXERCISE_TYPE: dict[str, tuple[str, ...]] = {
+    "00_breath_regulation": (
+        "physiological_sigh",
+        "cyclic_sighing",
+        "extended_exhale_breathing",
+        "coherent_breathing",
+        "nasal_breathing_reset",
+        "diaphragmatic_breathing",
+        "four_seven_eight_breathing",
+    ),
+    "01_grounding_orientation": (
+        "orienting_practice",
+        "five_four_three_two_one_sensory_reset",
+        "grounding_through_feet",
+        "eye_softening",
+        "slow_standing_transition",
+    ),
+    "02_body_awareness_scan": (
+        "body_scan",
+        "hand_temperature_awareness",
+        "neck_lengthening",
+        "shoulder_drop_reset",
+    ),
+    "03_somatic_release_discharge": (
+        "micro_shake_release",
+        "progressive_muscle_release",
+        "shoulder_drop_reset",
+        "jaw_release",
+    ),
+    "04_nervous_system_downregulation": (
+        "extended_exhale_breathing",
+        "physiological_sigh",
+        "coherent_breathing",
+        "nasal_breathing_reset",
+    ),
+    "05_nervous_system_upregulation": (
+        "cold_water_reset",
+        "wall_push_reset",
+        "slow_standing_transition",
+        "gentle_rocking",
+    ),
+    "06_vagal_stimulation_sound": (
+        "coherent_breathing",
+        "nasal_breathing_reset",
+        "extended_exhale_breathing",
+    ),
+    "07_self_contact_touch": (
+        "hand_temperature_awareness",
+        "open_chest_expansion",
+        "grounding_through_feet",
+    ),
+    "08_emotional_processing_completion": (
+        "body_scan",
+        "progressive_muscle_release",
+        "cross_body_tapping",
+        "gentle_rocking",
+    ),
+    "09_embodied_intention_direction": (
+        "open_chest_expansion",
+        "seated_forward_fold",
+        "slow_standing_transition",
+    ),
+    "10_integration_return_to_baseline": (
+        "slow_standing_transition",
+        "gentle_rocking",
+        "warmth_reset",
+        "coherent_breathing",
+    ),
+}
+
+
+def _stable_pool_index(seed: str, pool_size: int) -> int:
+    if pool_size <= 0:
+        return 0
+    digest = hashlib.sha256(seed.encode("utf-8")).digest()
+    return int.from_bytes(digest[:8], "big") % pool_size
+
+
+def infer_exercise_type(chapter_index: int, exercise_type: str) -> str:
+    et = (exercise_type or "").strip()
+    if et in AHA_POOL_BY_EXERCISE_TYPE:
+        return et
+    return EXERCISE_TYPES_ROTATION[chapter_index % len(EXERCISE_TYPES_ROTATION)]
+
+
+def pick_phoenix_standard_key(
+    chapter_index: int,
+    exercise_type: str,
+    resolution_seed: str,
+) -> str:
+    """Deterministic Phoenix-standard key for aha/integration YAML lookup."""
+    eff = infer_exercise_type(chapter_index, exercise_type)
+    pool = AHA_POOL_BY_EXERCISE_TYPE[eff]
+    idx = _stable_pool_index(f"{resolution_seed}:phoenix_std:{eff}:ch{chapter_index}", len(pool))
+    return pool[idx]
+
+
+# practice_library_loader categories → exercises_v4 template key
+_CATEGORY_TO_EXERCISE_TYPE: dict[str, str] = {
+    "breath_regulation": "00_breath_regulation",
+    "sensory_grounding": "01_grounding_orientation",
+    "body_awareness": "02_body_awareness_scan",
+    "meditations": "10_integration_return_to_baseline",
+}
+
+
+def phoenix_blocks_for_practice_category(
+    category: str,
+    chapter_index: int,
+    seed: str,
+) -> tuple[str, str]:
+    """Return (aha_text, integration_text) from Phoenix standards for library-compose path."""
+    ex_t = _CATEGORY_TO_EXERCISE_TYPE.get(category) or "00_breath_regulation"
+    key = pick_phoenix_standard_key(chapter_index, ex_t, seed)
+    aha_standards = _load_aha_standards()
+    integration_standards = _load_integration_standards()
+    aha = (
+        aha_standards.get(key, "")
+        or aha_standards.get("_default", "")
+    ).strip()
+    integration = (
+        integration_standards.get(key, "")
+        or integration_standards.get("_default", "")
+    ).strip()
+    return aha, integration
 
 
 def _load_yaml(p: Path) -> Any:
@@ -169,6 +312,8 @@ def resolve_exercise_components(
     description_text: str = "",
     aha_text: str = "",
     integration_text: str = "",
+    chapter_index: int = 0,
+    resolution_seed: str = "",
 ) -> ExerciseComponents:
     """
     Build ExerciseComponents from available sources.
@@ -183,8 +328,12 @@ def resolve_exercise_components(
     aha_standards = _load_aha_standards()
     integration_standards = _load_integration_standards()
 
+    eff_type = infer_exercise_type(chapter_index, exercise_type)
+    seed = resolution_seed or exercise_id or f"ch{chapter_index}"
+    std_key = pick_phoenix_standard_key(chapter_index, exercise_type, seed)
+
     # Bridge from templates
-    bt = bridge_templates.get(exercise_type) or bridge_templates.get("_default") or {}
+    bt = bridge_templates.get(eff_type) or bridge_templates.get("_default") or {}
     bridge = ComponentVariants(
         full=bt.get("full", ""),
         lean=bt.get("lean", ""),
@@ -192,7 +341,7 @@ def resolve_exercise_components(
     )
 
     # Intro from templates
-    it = intro_templates.get(exercise_type) or intro_templates.get("_default") or {}
+    it = intro_templates.get(eff_type) or intro_templates.get("_default") or {}
     intro = ComponentVariants(
         full=it.get("full", ""),
         lean=it.get("lean", ""),
@@ -204,15 +353,25 @@ def resolve_exercise_components(
         lean=_derive_lean(description_text, max_sentences=3) if description_text else "",
     )
 
-    # AHA: prefer passed text, fallback to standard
-    aha_full = aha_text or aha_standards.get(exercise_id, "")
+    # AHA: explicit text, then YAML keyed by atom/technique id, then Phoenix standard pool
+    aha_full = (
+        aha_text
+        or aha_standards.get(exercise_id, "")
+        or aha_standards.get(std_key, "")
+        or aha_standards.get("_default", "")
+    )
     aha = ComponentVariants(
         full=aha_full,
         lean=_derive_lean(aha_full) if aha_full else "",
     )
 
-    # Integration: prefer passed text, fallback to standard
-    int_full = integration_text or integration_standards.get(exercise_id, "")
+    # Integration: same precedence; integration file may only define a subset of keys
+    int_full = (
+        integration_text
+        or integration_standards.get(exercise_id, "")
+        or integration_standards.get(std_key, "")
+        or integration_standards.get("_default", "")
+    )
     integration = ComponentVariants(
         full=int_full,
         lean=_derive_lean(int_full) if int_full else "",
@@ -220,7 +379,7 @@ def resolve_exercise_components(
 
     return ExerciseComponents(
         exercise_id=exercise_id,
-        exercise_type=exercise_type,
+        exercise_type=eff_type,
         bridge=bridge,
         intro=intro,
         description=description,
@@ -336,6 +495,8 @@ def assemble_exercise_for_chapter(
             description_text=description_text,
             aha_text=aha_text,
             integration_text=integration_text,
+            chapter_index=ctx.chapter_index,
+            resolution_seed=exercise_id or description_text[:40],
         )
 
     selection = select_components(ctx, rules)

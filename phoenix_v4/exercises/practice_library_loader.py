@@ -177,6 +177,8 @@ def compose_exercise(
         "10_integration_return_to_baseline": "meditations",
     }
     category = type_map.get(ex_type, ex_type)
+    if category not in ("breath_regulation", "sensory_grounding", "body_awareness", "meditations"):
+        category = "body_awareness"
     mechanisms = templates.get("intro_mechanism", {}).get(category, ["Your body already knows."])
     mechanism = mechanisms[_deterministic_index(h + ":mech", len(mechanisms))]
     intro = f"This is {name}. {mechanism}"
@@ -184,19 +186,22 @@ def compose_exercise(
     # 3. Description (the exercise text itself)
     # Already in 'description'
 
-    # 4. Aha = "Now, notice {observation}. {permission}."
-    observations = templates.get("aha_observation", {}).get(category, ["what shifted"])
-    permissions = templates.get("aha_permission", ["Whatever came up is valid."])
-    obs = observations[_deterministic_index(h + ":obs", len(observations))]
-    perm = permissions[_deterministic_index(h + ":perm", len(permissions))]
-    aha = f"Now, notice {obs}. {perm}"
+    # 4–5. Aha + integration: Phoenix standards (books) instead of generic template pools.
+    try:
+        from phoenix_v4.exercises.component_assembler import phoenix_blocks_for_practice_category
 
-    # 5. Integration = "Before you move on, {takeaway}. {closing}."
-    takeaways = templates.get("integration_takeaway", {}).get(category, ["carry this with you"])
-    closings = templates.get("integration_closing", ["You can return to this anytime."])
-    takeaway = takeaways[_deterministic_index(h + ":take", len(takeaways))]
-    closing = closings[_deterministic_index(h + ":close", len(closings))] if closings else ""
-    integration = f"Before you move on, {takeaway}. {closing}".strip()
+        aha, integration = phoenix_blocks_for_practice_category(category, chapter_index, h)
+    except Exception:
+        observations = templates.get("aha_observation", {}).get(category, ["what shifted"])
+        permissions = templates.get("aha_permission", ["Whatever came up is valid."])
+        obs = observations[_deterministic_index(h + ":obs", len(observations))]
+        perm = permissions[_deterministic_index(h + ":perm", len(permissions))]
+        aha = f"Now, notice {obs}. {perm}"
+        takeaways = templates.get("integration_takeaway", {}).get(category, ["carry this with you"])
+        closings = templates.get("integration_closing", ["You can return to this anytime."])
+        takeaway = takeaways[_deterministic_index(h + ":take", len(takeaways))]
+        closing = closings[_deterministic_index(h + ":close", len(closings))] if closings else ""
+        integration = f"Before you move on, {takeaway}. {closing}".strip()
 
     return f"{bridge}\n\n{intro}\n\n{description}\n\n{aha}\n\n{integration}".strip()
 
@@ -225,6 +230,14 @@ def get_exercise_for_chapter(
 
     if not all_exercises:
         return None
+
+    logger.warning(
+        "EXERCISE FALLBACK: Using library_34 for chapter %d topic %s persona %s. "
+        "No registry or teacher exercise was available for this slot — add EXERCISE coverage upstream if this is unexpected.",
+        chapter_index,
+        topic_id or "(unknown)",
+        persona_id or "(unknown)",
+    )
 
     # Filter out already used
     available = [e for e in all_exercises if e.get("id") not in used]

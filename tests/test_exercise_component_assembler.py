@@ -307,9 +307,15 @@ class TestChapterComposerBackwardCompat:
         )
         assert "Your badge beeps" in result
         assert "Press your feet" in result
-        # 5-dim compose_exercise wraps the exercise with bridge + intro + desc + aha + integration
-        # from templates, replacing the explicit INTEGRATION slot content
-        assert "before you move on" in result.lower() or "now, notice" in result.lower()
+        # Assembler + Phoenix standards (aha/integration) or legacy template wrap
+        rl = result.lower()
+        assert (
+            "before you move on" in rl
+            or "now, notice" in rl
+            or "now, take a moment" in rl
+            or "now, pause" in rl
+            or "now, reflect" in rl
+        )
 
     def test_compose_with_exercise_context(self):
         """compose_chapter_prose with exercise_context should use component assembler."""

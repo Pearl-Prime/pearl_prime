@@ -671,21 +671,35 @@ def chapter_flow_gate_report(
         composed_chapters: list[str] = []
         slot_meta: list[tuple[list[str], list[str]]] = []
         idx = 0
+        topic_id = (plan or {}).get("topic_id") or ((plan or {}).get("book_spec") or {}).get("topic_id") or ""
+        persona_id = (plan or {}).get("persona_id") or ((plan or {}).get("book_spec") or {}).get("persona_id") or ""
+        roles = (plan or {}).get("emotional_role_sequence") or []
+        book_seed = str((plan or {}).get("plan_hash") or (plan or {}).get("seed") or "book")
         for ch, slots in enumerate(chapter_slot_sequence):
             segment_proses = []
-            for _ in slots:
+            ex_aid = ""
+            for st_slot in slots:
                 if idx < len(atom_ids):
                     aid = atom_ids[idx]
+                    if str(st_slot).strip().upper() == "EXERCISE":
+                        ex_aid = aid
                     segment_proses.append(clean_for_delivery(prose_map.get(aid, ""), plan=plan))
                 else:
                     segment_proses.append("")
                 idx += 1
+            emotional_role = roles[ch] if ch < len(roles) else ""
             composed = compose_chapter_prose(
                 slot_types=slots,
                 slot_proses=segment_proses,
                 chapter_index=ch,
                 total_chapters=len(chapter_slot_sequence),
                 locale=(plan or {}).get("locale"),
+                topic_id=topic_id,
+                persona_id=persona_id,
+                emotional_role=str(emotional_role),
+                exercise_atom_id=ex_aid,
+                exercise_repeat_index=_exercise_repeat_before_idx(chapter_slot_sequence, ch),
+                book_seed=book_seed,
             )
             composed_chapters.append(composed)
             slot_names = [(s or "").strip().upper() for s in slots]
@@ -850,6 +864,16 @@ def _build_deficit_report(
     }
 
 
+def _exercise_repeat_before_idx(chapter_sequences: list[list[str]], before_ch: int) -> int:
+    """How many prior chapters (0 .. before_ch-1) include an EXERCISE slot."""
+    n = 0
+    for i in range(max(before_ch, 0)):
+        row = chapter_sequences[i] if i < len(chapter_sequences) else []
+        if any(str(s).strip().upper() == "EXERCISE" for s in row):
+            n += 1
+    return n
+
+
 @dataclass
 class RenderOptions:
     """Options for Stage 6 rendering."""
@@ -859,6 +883,7 @@ class RenderOptions:
     include_slot_labels_qa: bool = False  # If True, emit [STORY] atom_id before prose (QA style)
     clean_output: bool = True         # Strip scaffolding + run delivery_contract_gate before write
     mechanism_alias: Optional[dict] = None  # Loaded alias dict for {{MA}} token resolution
+    exercise_source_stats: Optional[dict[str, int]] = None  # Mutated by compose_chapter_prose (registry / library_34_fallback / ab_tady / total)
 
 
 def _get_prose(
@@ -1102,11 +1127,14 @@ class TxtWriter:
             # ── Collect all slot types + prose for this chapter ──
             chapter_slot_types: list[str] = []
             chapter_slot_proses: list[str] = []
+            exercise_aid = ""
             for si, slot_type in enumerate(slots):
                 if idx >= len(atom_ids):
                     break
                 aid = atom_ids[idx]
                 slot_label = str(slot_type).strip()
+                if slot_label == "EXERCISE":
+                    exercise_aid = aid
                 prose = _get_prose(aid, slot_label, self.prose_map, self.render_result, self.options)
                 if atom_sources and idx < len(atom_sources):
                     if atom_sources[idx] == "practice_fallback" and slot_label == "EXERCISE":
@@ -1120,6 +1148,11 @@ class TxtWriter:
             # ── Bestseller composition (always-on) ──
             # Reorders slots into argued chapter: Opening → Bridge → Mechanism →
             # Bridge → Story → Bridge → Exercise → Integration → Takeaway
+            topic_id = self.plan.get("topic_id") or (self.plan.get("book_spec") or {}).get("topic_id") or ""
+            persona_id = self.plan.get("persona_id") or (self.plan.get("book_spec") or {}).get("persona_id") or ""
+            roles = self.plan.get("emotional_role_sequence") or []
+            emotional_role = roles[ch] if ch < len(roles) else ""
+            book_seed = str(self.plan.get("plan_hash") or self.plan.get("seed") or "book")
             composed = compose_chapter_prose(
                 slot_types=chapter_slot_types,
                 slot_proses=chapter_slot_proses,
@@ -1127,6 +1160,13 @@ class TxtWriter:
                 total_chapters=total_chapters,
                 include_slot_labels_qa=self.options.include_slot_labels_qa,
                 locale=self.plan.get("locale"),
+                topic_id=topic_id,
+                persona_id=persona_id,
+                emotional_role=str(emotional_role),
+                exercise_atom_id=exercise_aid,
+                exercise_repeat_index=_exercise_repeat_before_idx(chapter_slot_sequence, ch),
+                exercise_source_stats=self.options.exercise_source_stats,
+                book_seed=book_seed,
             )
 
             # Inject mechanism alias naming_moment once after Chapter 1 opening
@@ -1311,6 +1351,12 @@ def render_book(
     topic_id   = (plan.get("topic_id")   or (plan.get("book_spec") or {}).get("topic_id")   or "").strip()
     alias = _load_mechanism_alias(persona_id, topic_id)
 
+    exercise_source_stats: dict[str, int] = {
+        "registry": 0,
+        "ab_tady": 0,
+        "library_34_fallback": 0,
+        "total": 0,
+    }
     options = RenderOptions(
         allow_placeholders=allow_placeholders,
         on_missing=on_missing,
@@ -1318,6 +1364,7 @@ def render_book(
         include_slot_labels_qa=include_slot_labels_qa,
         clean_output=clean_output,
         mechanism_alias=alias,
+        exercise_source_stats=exercise_source_stats,
     )
     written: dict[str, Path] = {}
     runtime_format_id = (plan.get("runtime_format_id") or "").strip()
@@ -1360,9 +1407,34 @@ def render_book(
             )
 
         deficit_report = _build_deficit_report(plan, render_result.prose_map, runtime_format_id)
+        _tot_fb = int(exercise_source_stats.get("total", 0) or 0)
+        _lib_fb = int(exercise_source_stats.get("library_34_fallback", 0) or 0)
+        _fb_ratio = (_lib_fb / _tot_fb) if _tot_fb else 0.0
+        deficit_report["exercise_source"] = dict(exercise_source_stats)
+        deficit_report["exercise_fallback_ratio"] = round(_fb_ratio, 4)
+        if _tot_fb and _fb_ratio > 0.5:
+            deficit_report["exercise_fallback_quality_warning"] = (
+                f"More than 50% of exercises ({_lib_fb}/{_tot_fb}) used library_34 fallback — "
+                "prefer registry or teacher EXERCISE atoms for production books."
+            )
+            logger.warning(deficit_report["exercise_fallback_quality_warning"])
         budget_path = output_dir / "budget.json"
         budget_path.write_text(json.dumps(deficit_report, indent=2), encoding="utf-8")
         written["budget"] = budget_path
+
+        _qs_path = output_dir / "quality_summary.json"
+        _qs_path.write_text(
+            json.dumps(
+                {
+                    "exercise_source": dict(exercise_source_stats),
+                    "exercise_fallback_ratio": round(_fb_ratio, 4),
+                    "exercise_fallback_quality_warning": deficit_report.get("exercise_fallback_quality_warning"),
+                },
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        written["quality_summary"] = _qs_path
 
         if enforce_word_count and runtime_format_id:
             wc_metrics = word_count_gate(rendered_text, runtime_format_id, source_hint=str(out_path))
