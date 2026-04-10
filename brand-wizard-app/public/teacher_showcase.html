@@ -331,12 +331,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="ahjan_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_ahjan_anxiety.png" loading="lazy" alt="Ahjan Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/ahjan_ebook.png" loading="lazy" alt="Ahjan Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Stillness Press</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_ahjan_anxiety.png" loading="lazy" alt="Ahjan Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/ahjan_audiobook.png" loading="lazy" alt="Ahjan Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇺🇸 english_male · CosyVoice2</div>
           </div>
@@ -345,10 +345,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">iyashikei</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('ahjan')">
+            <img src="assets/covers/kdp/ahjan_podcast.png"
+                 loading="lazy" alt="Ahjan podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-ahjan" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-ahjan" preload="metadata"
+                   src="assets/audio/podcast/ahjan_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -1383,12 +1398,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="adi_da_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_adi_da_self_worth.png" loading="lazy" alt="Adi Da Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/adi_da_ebook.png" loading="lazy" alt="Adi Da Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Feather & Scale Press</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_adi_da_self_worth.png" loading="lazy" alt="Adi Da Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/adi_da_audiobook.png" loading="lazy" alt="Adi Da Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇺🇸 english_male · CosyVoice2</div>
           </div>
@@ -1397,10 +1412,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">seinen</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('adi_da')">
+            <img src="assets/covers/kdp/adi_da_podcast.png"
+                 loading="lazy" alt="Adi Da podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-adi_da" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-adi_da" preload="metadata"
+                   src="assets/audio/podcast/adi_da_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -2594,12 +2624,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="master_feung_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_master_feung_burnout.png" loading="lazy" alt="Master Feung Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/master_feung_ebook.png" loading="lazy" alt="Master Feung Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Root & Meridian Press</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_master_feung_burnout.png" loading="lazy" alt="Master Feung Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/master_feung_audiobook.png" loading="lazy" alt="Master Feung Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇨🇳 chinese_male · CosyVoice2</div>
           </div>
@@ -2608,10 +2638,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">wuxia</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('master_feung')">
+            <img src="assets/covers/kdp/master_feung_podcast.png"
+                 loading="lazy" alt="Master Feung podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-master_feung" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-master_feung" preload="metadata"
+                   src="assets/audio/podcast/master_feung_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -3259,12 +3304,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="sai_ma_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_sai_ma_grief.png" loading="lazy" alt="Sai Ma Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/sai_ma_ebook.png" loading="lazy" alt="Sai Ma Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Open Vessel Press</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_sai_ma_grief.png" loading="lazy" alt="Sai Ma Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/sai_ma_audiobook.png" loading="lazy" alt="Sai Ma Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇨🇳 chinese_female · CosyVoice2</div>
           </div>
@@ -3273,10 +3318,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">josei</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('sai_ma')">
+            <img src="assets/covers/kdp/sai_ma_podcast.png"
+                 loading="lazy" alt="Sai Ma podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-sai_ma" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-sai_ma" preload="metadata"
+                   src="assets/audio/podcast/sai_ma_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -4055,12 +4115,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="ra_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_ra_self_worth.png" loading="lazy" alt="Ra Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/ra_ebook.png" loading="lazy" alt="Ra Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Ember & Ash Publishing</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_ra_self_worth.png" loading="lazy" alt="Ra Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/ra_audiobook.png" loading="lazy" alt="Ra Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇺🇸 english_male · CosyVoice2</div>
           </div>
@@ -4069,10 +4129,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">seinen</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('ra')">
+            <img src="assets/covers/kdp/ra_podcast.png"
+                 loading="lazy" alt="Ra podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-ra" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-ra" preload="metadata"
+                   src="assets/audio/podcast/ra_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -4831,12 +4906,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="junko_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_junko_overthinking.png" loading="lazy" alt="Junko Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/junko_ebook.png" loading="lazy" alt="Junko Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Bare Form Books</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_junko_overthinking.png" loading="lazy" alt="Junko Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/junko_audiobook.png" loading="lazy" alt="Junko Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇯🇵 ja_female_warm · CosyVoice2</div>
           </div>
@@ -4845,10 +4920,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">seinen</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('junko')">
+            <img src="assets/covers/kdp/junko_podcast.png"
+                 loading="lazy" alt="Junko podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-junko" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-junko" preload="metadata"
+                   src="assets/audio/podcast/junko_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -5812,12 +5902,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="miki_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_miki_imposter_syndrome.png" loading="lazy" alt="Miki Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/miki_ebook.png" loading="lazy" alt="Miki Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Present Tense Books</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_miki_imposter_syndrome.png" loading="lazy" alt="Miki Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/miki_audiobook.png" loading="lazy" alt="Miki Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇯🇵 ja_m_calm_01 · CosyVoice2</div>
           </div>
@@ -5826,10 +5916,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">iyashikei</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('miki')">
+            <img src="assets/covers/kdp/miki_podcast.png"
+                 loading="lazy" alt="Miki podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-miki" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-miki" preload="metadata"
+                   src="assets/audio/podcast/miki_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -6546,12 +6651,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="master_wu_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_master_wu_courage.png" loading="lazy" alt="Master Wu Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/master_wu_ebook.png" loading="lazy" alt="Master Wu Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Iron Gate Press</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_master_wu_courage.png" loading="lazy" alt="Master Wu Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/master_wu_audiobook.png" loading="lazy" alt="Master Wu Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇨🇳 chinese_male · CosyVoice2</div>
           </div>
@@ -6560,10 +6665,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">wuxia</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('master_wu')">
+            <img src="assets/covers/kdp/master_wu_podcast.png"
+                 loading="lazy" alt="Master Wu podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-master_wu" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-master_wu" preload="metadata"
+                   src="assets/audio/podcast/master_wu_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -7215,12 +7335,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="pamela_fellows_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_pamela_fellows_burnout.png" loading="lazy" alt="Pamela Fellows Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/pamela_fellows_ebook.png" loading="lazy" alt="Pamela Fellows Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Felt Sense Publishing</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_pamela_fellows_burnout.png" loading="lazy" alt="Pamela Fellows Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/pamela_fellows_audiobook.png" loading="lazy" alt="Pamela Fellows Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇺🇸 english_female · CosyVoice2</div>
           </div>
@@ -7229,10 +7349,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">josei</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('pamela_fellows')">
+            <img src="assets/covers/kdp/pamela_fellows_podcast.png"
+                 loading="lazy" alt="Pamela Fellows podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-pamela_fellows" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-pamela_fellows" preload="metadata"
+                   src="assets/audio/podcast/pamela_fellows_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -8159,12 +8294,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="joshin_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_joshin_anxiety.png" loading="lazy" alt="Joshin Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/joshin_ebook.png" loading="lazy" alt="Joshin Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Clear Seeing Books</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_joshin_anxiety.png" loading="lazy" alt="Joshin Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/joshin_audiobook.png" loading="lazy" alt="Joshin Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇺🇸 english_male · CosyVoice2</div>
           </div>
@@ -8173,10 +8308,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">seinen</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('joshin')">
+            <img src="assets/covers/kdp/joshin_podcast.png"
+                 loading="lazy" alt="Joshin podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-joshin" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-joshin" preload="metadata"
+                   src="assets/audio/podcast/joshin_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -8689,12 +8839,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="maat_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_maat_boundaries.png" loading="lazy" alt="Maat Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/maat_ebook.png" loading="lazy" alt="Maat Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Feather & Scale Press</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_maat_boundaries.png" loading="lazy" alt="Maat Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/maat_audiobook.png" loading="lazy" alt="Maat Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇺🇸 english_male · CosyVoice2</div>
           </div>
@@ -8703,10 +8853,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">seinen</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('maat')">
+            <img src="assets/covers/kdp/maat_podcast.png"
+                 loading="lazy" alt="Maat podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-maat" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-maat" preload="metadata"
+                   src="assets/audio/podcast/maat_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -9413,12 +9578,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="omote_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_omote_sleep_anxiety.png" loading="lazy" alt="Omote Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/omote_ebook.png" loading="lazy" alt="Omote Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Held Ground Press</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_omote_sleep_anxiety.png" loading="lazy" alt="Omote Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/omote_audiobook.png" loading="lazy" alt="Omote Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇰🇷 ko_female_gentle · CosyVoice2</div>
           </div>
@@ -9427,10 +9592,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">seinen</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('omote')">
+            <img src="assets/covers/kdp/omote_podcast.png"
+                 loading="lazy" alt="Omote podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-omote" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-omote" preload="metadata"
+                   src="assets/audio/podcast/omote_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -10082,12 +10262,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <div id="master_sha_formats" class="collapsible" style="display:none">
         <div class="formats-grid">
           <div class="format-card">
-            <img src="assets/covers/cover_master_sha_grief.png" loading="lazy" alt="Master Sha Ebook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/master_sha_ebook.png" loading="lazy" alt="Master Sha Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Night Architecture Books</div>
           </div>
           <div class="format-card">
-            <img src="assets/covers/audiobook/cover_master_sha_grief.png" loading="lazy" alt="Master Sha Audiobook" onerror="this.style.display='none'">
+            <img src="assets/covers/kdp/master_sha_audiobook.png" loading="lazy" alt="Master Sha Audiobook" onerror="this.style.display='none'">
             <div class="format-label">Audiobook</div>
             <div class="format-meta">🇨🇳 chinese_male · CosyVoice2</div>
           </div>
@@ -10096,10 +10276,25 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Manga</div>
             <div class="format-meta">iyashikei</div>
           </div>
-          <div class="format-card format-coming">
-            <div class="format-placeholder">🎙️</div>
+          <div class="format-card podcast-playable"
+               style="cursor:pointer; position:relative"
+               onclick="togglePodcast('master_sha')">
+            <img src="assets/covers/kdp/master_sha_podcast.png"
+                 loading="lazy" alt="Master Sha podcast"
+                 onerror="this.style.display='none'"
+                 style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px; margin-bottom:8px">
+            <div class="play-overlay" id="play-master_sha" style="
+              position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+              width:44px; height:44px; border-radius:50%;
+              background:rgba(0,0,0,0.6); display:flex; align-items:center;
+              justify-content:center; pointer-events:none;
+            ">
+              <span style="color:white; font-size:1.1rem; margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Podcast</div>
-            <div class="format-meta">Coming soon</div>
+            <div class="format-meta">3 min · click to play</div>
+            <audio id="podcast-master_sha" preload="metadata"
+                   src="assets/audio/podcast/master_sha_podcast_3min.mp3"></audio>
           </div>
         </div>
       </div>
@@ -10819,6 +11014,41 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.3 });
 sections.forEach(section => observer.observe(section));
+</script>
+<script>
+/* Podcast click-to-play — only one plays at a time */
+const _pod = { el: null, tid: null };
+function togglePodcast(tid) {
+  const audio = document.getElementById('podcast-' + tid);
+  const overlay = document.getElementById('play-' + tid);
+  if (!audio || !overlay) return;
+  const span = overlay.querySelector('span');
+
+  if (_pod.el && _pod.tid !== tid) {
+    _pod.el.pause();
+    _pod.el.currentTime = 0;
+    const prev = document.getElementById('play-' + _pod.tid);
+    if (prev) prev.querySelector('span').innerHTML = '&#9654;';
+  }
+
+  if (audio.paused) {
+    audio.play();
+    span.innerHTML = '&#9646;&#9646;';
+    _pod.el = audio;
+    _pod.tid = tid;
+  } else {
+    audio.pause();
+    span.innerHTML = '&#9654;';
+    _pod.el = null;
+    _pod.tid = null;
+  }
+
+  audio.onended = () => {
+    span.innerHTML = '&#9654;';
+    _pod.el = null;
+    _pod.tid = null;
+  };
+}
 </script>
 </body>
 </html>
