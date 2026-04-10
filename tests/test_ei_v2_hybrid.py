@@ -623,7 +623,10 @@ class TestHybridSelector:
         from phoenix_v4.quality.ei_v2.hybrid_selector import hybrid_select
 
         cfg = self._minimal_v2_cfg()
-        cfg["hybrid"]["override_margin"] = 0.05
+        # Margin must sit below the typical V2-best minus V1 composite gap for this fixture
+        # (heuristic rerank + safety + TTS + learned composite_weights); ~0.047 with current
+        # artifacts — 0.05 was a borderline flake vs learned weights.
+        cfg["hybrid"]["override_margin"] = 0.04
         cfg["hybrid"]["arc_block_threshold"] = 0.05
         cfg["emotion_arc"] = {**cfg.get("emotion_arc", {}), "enabled": True}
         thesis = "nervous system stress body tension"

@@ -278,9 +278,11 @@ def hybrid_select(
         )
 
     learned: Optional[LearnedParams] = None
+    learned_from_explicit_path = False
     if learned_params_path is not None:
         if learned_params_path.is_file():
             learned = load_learned_params(learned_params_path)
+            learned_from_explicit_path = True
     else:
         default_lp = ei_v2_repo_root() / "artifacts" / "ei_v2" / "learned_params.json"
         if default_lp.is_file():
@@ -288,7 +290,14 @@ def hybrid_select(
 
     override_margin = float(hybrid_cfg.get("override_margin", 0.12))
     if learned is not None:
-        override_margin = float(learned.override_margin)
+        overlay_hybrid = (v2_cfg or {}).get("hybrid") or {}
+        # Explicit learned_params_path: learner wins (tuned runs, test_hybrid_respects_learned_*).
+        # Default artifact learned_params.json: only tune margin when the caller did not set
+        # hybrid.override_margin in v2_cfg — otherwise repo artifacts overwrite explicit margins
+        # and tests (see test_hybrid_v2_override_when_margin_exceeded).
+        use_learned_margin = learned_from_explicit_path or "override_margin" not in overlay_hybrid
+        if use_learned_margin:
+            override_margin = float(learned.override_margin)
 
     safety_block_threshold = float(hybrid_cfg.get("safety_block_threshold", 0.5))
     dedup_block_threshold = float(hybrid_cfg.get("dedup_block_threshold", 0.6))
