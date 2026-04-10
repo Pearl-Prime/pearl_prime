@@ -32,7 +32,9 @@ topics:
       catalog_id: CAT-E32709F72B72
       series_id: SER-279D9C44
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/anxiety-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       series_id: SER-279D9C44
       books_available: 7
@@ -66,7 +68,9 @@ topics:
       catalog_id: CAT-14B5C0D58EC1
       series_id: SER-61A56EC7
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/burnout-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       series_id: SER-61A56EC7
       books_available: 7
@@ -100,7 +104,9 @@ topics:
       catalog_id: CAT-65AE85E345C6
       series_id: SER-EEC7097A
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/self_worth-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       series_id: SER-EEC7097A
       books_available: 7
@@ -131,10 +137,12 @@ topics:
     entry_book:
       title: "Own Your Seat Collection: You're Not a Fraud"
       subtitle: "How to Stop Waiting to Be Exposed and Start Owning What You've Built"
-      catalog_id: null  # locate via topic=imposter_syndrome, price=0.99, series_position=1
-      series_id: null
+      catalog_id: CAT-3D46736D06F9
+      series_id: SER-D336EE82
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/imposter_syndrome-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       books_available: 7
       price_per_book: 4.99
@@ -164,10 +172,12 @@ topics:
     entry_book:
       title: "No with Grace Collection: The No That Saved Me"
       subtitle: "How to Set Boundaries Without Losing the People You Love"
-      catalog_id: null
-      series_id: null
+      catalog_id: CAT-6F997E15EC81
+      series_id: SER-21F36B63
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/boundaries-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       books_available: 7
       price_per_book: 4.99
@@ -200,7 +210,9 @@ topics:
       catalog_id: CAT-0CCEB8778D2C
       series_id: SER-384A183D
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/depression-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       series_id: SER-384A183D
       books_available: 7
@@ -231,10 +243,12 @@ topics:
     entry_book:
       title: "Fear to Fire Collection: Jump Scared"
       subtitle: "How to Move When Fear Is the Only Thing Stopping You"
-      catalog_id: null
-      series_id: null
+      catalog_id: CAT-7A399F390DBA
+      series_id: SER-92C54191
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/courage-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       books_available: 7
       price_per_book: 4.99
@@ -264,10 +278,12 @@ topics:
     entry_book:
       title: "Loop Breaker Collection: Your Brain Is Not the Boss"
       subtitle: "How to Stop Thinking in Circles and Start Moving Forward"
-      catalog_id: null
-      series_id: null
+      catalog_id: CAT-CD0893B57DA3
+      series_id: SER-1C448D8E
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/overthinking-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       books_available: 7
       price_per_book: 4.99
@@ -297,10 +313,12 @@ topics:
     entry_book:
       title: "Empty Well Collection: Caring Until There's Nothing Left"
       subtitle: "How to Give Without Running Dry"
-      catalog_id: null
-      series_id: null
+      catalog_id: CAT-2D9D3BA44B36
+      series_id: SER-C2F2EA5D
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/compassion_fatigue-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       books_available: 7
       price_per_book: 4.99
@@ -330,10 +348,12 @@ topics:
     entry_book:
       title: "The Brave Room Series: Brave Enough to Show Up"
       subtitle: "How to Walk Into Any Room Without the Dread"
-      catalog_id: null
-      series_id: null
+      catalog_id: CAT-9F43F71C337E
+      series_id: SER-E01644A4
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/social_anxiety-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       books_available: 7
       price_per_book: 4.99
@@ -363,10 +383,12 @@ topics:
     entry_book:
       title: "Quiet Night Collection: The Quiet Hour"
       subtitle: "How to Reclaim Sleep When Your Mind Won't Let You Rest"
-      catalog_id: null
-      series_id: null
+      catalog_id: CAT-F7F5688DBD50
+      series_id: SER-54F19D2D
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/sleep_anxiety-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       books_available: 7
       price_per_book: 4.99
@@ -396,10 +418,12 @@ topics:
     entry_book:
       title: "Worth Beyond Balance Collection: The Money Knot"
       subtitle: "Untangle the Anxiety Behind Your Money Worry"
-      catalog_id: null
-      series_id: null
+      catalog_id: CAT-F5229F211EF6
+      series_id: SER-011E1C44
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/financial_anxiety-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       books_available: 7
       price_per_book: 4.99
@@ -429,10 +453,12 @@ topics:
     entry_book:
       title: "The Money Peace Series: Worth More Than Your Balance"
       subtitle: "How to Stop Letting Money Stress Run Your Life"
-      catalog_id: null
-      series_id: null
+      catalog_id: CAT-409ADE12A9F3
+      series_id: SER-E9B764B2
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/financial_stress-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       books_available: 7
       price_per_book: 4.99
@@ -462,10 +488,12 @@ topics:
     entry_book:
       title: "The Body Knows Series: Held by the Body"
       subtitle: "A Somatic Guide to Releasing What You're Carrying"
-      catalog_id: null
-      series_id: null
+      catalog_id: CAT-A9154F426D59
+      series_id: SER-4E641AD5
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/somatic_healing-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       books_available: 7
       price_per_book: 4.99
@@ -495,10 +523,12 @@ topics:
     entry_book:
       title: "Still Standing Series: The Shape of Missing"
       subtitle: "A Guide to Grief for the People Who Are Still Here"
-      catalog_id: null
-      series_id: null
+      catalog_id: CAT-69C6B1006576
+      series_id: SER-24CF9913
       price: 0.99
-      store_url_placeholder: "https://play.google.com/store/books"
+      store_url: "https://brand-admin-onboarding.pages.dev/book/grief-series-book-1/"
+      store_url_status: "landing_redirect"
+      platforms_pending: [amazon_kdp, google_play, apple_books, kobo]
     series_upsell:
       books_available: 7
       price_per_book: 4.99

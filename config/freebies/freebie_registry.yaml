@@ -247,3 +247,97 @@ freebies:
 
 # Book type mapping (duration class): MIN < 60 min, SHORT 60–120, CORE 120+
 # Used by freebie_planner to apply Rule 1 (companion for 60+ min).
+
+# Registered funnel freebies — Gate 16 compliant. All 15 active slugs.
+# Last updated: 2026-04-10
+registered_freebies:
+  - slug: anxiety-nervous-system-reset
+    topic: anxiety
+    freebie_registry_id: breath_timer_v1
+    status: active
+    landing_path: /free/anxiety-nervous-system-reset/
+    email_sequence_id: anxiety_nurture_5
+  - slug: burnout-energy-audit
+    topic: burnout
+    freebie_registry_id: companion_core_v2
+    status: active
+    landing_path: /free/burnout-energy-audit/
+    email_sequence_id: burnout_nurture_5
+  - slug: self-worth-inventory
+    topic: self_worth
+    freebie_registry_id: identity_sheet_v1
+    status: active
+    landing_path: /free/self-worth-inventory/
+    email_sequence_id: self_worth_nurture_5
+  - slug: imposter-evidence-log
+    topic: imposter_syndrome
+    freebie_registry_id: accountability_partner_v1
+    status: active
+    landing_path: /free/imposter-evidence-log/
+    email_sequence_id: imposter_syndrome_nurture_5
+  - slug: boundaries-script-kit
+    topic: boundaries
+    freebie_registry_id: conversation_scripts_v1
+    status: active
+    landing_path: /free/boundaries-script-kit/
+    email_sequence_id: boundaries_nurture_5
+  - slug: depression-momentum-kit
+    topic: depression
+    freebie_registry_id: thirty_day_tracker_v1
+    status: active
+    landing_path: /free/depression-momentum-kit/
+    email_sequence_id: depression_nurture_5
+  - slug: courage-decision-map
+    topic: courage
+    freebie_registry_id: resistance_mapping_v1
+    status: active
+    landing_path: /free/courage-decision-map/
+    email_sequence_id: courage_nurture_5
+  - slug: overthinking-thought-sorter
+    topic: overthinking
+    freebie_registry_id: anxiety_assessment_v1
+    status: active
+    landing_path: /free/overthinking-thought-sorter/
+    email_sequence_id: overthinking_nurture_5
+  - slug: compassion-fatigue-audit
+    topic: compassion_fatigue
+    freebie_registry_id: burnout_checklist_v1
+    status: active
+    landing_path: /free/compassion-fatigue-audit/
+    email_sequence_id: compassion_fatigue_nurture_5
+  - slug: social-anxiety-toolkit
+    topic: social_anxiety
+    freebie_registry_id: emergency_kit_v1
+    status: active
+    landing_path: /free/social-anxiety-toolkit/
+    email_sequence_id: social_anxiety_nurture_5
+  - slug: sleep-anxiety-wind-down
+    topic: sleep_anxiety
+    freebie_registry_id: breath_timer_v1
+    status: active
+    landing_path: /free/sleep-anxiety-wind-down/
+    email_sequence_id: sleep_anxiety_nurture_5
+  - slug: financial-anxiety-check-in
+    topic: financial_anxiety
+    freebie_registry_id: anxiety_assessment_v1
+    status: active
+    landing_path: /free/financial-anxiety-check-in/
+    email_sequence_id: financial_anxiety_nurture_5
+  - slug: financial-stress-audit
+    topic: financial_stress
+    freebie_registry_id: journal_reflection_v1
+    status: active
+    landing_path: /free/financial-stress-audit/
+    email_sequence_id: financial_stress_nurture_5
+  - slug: somatic-body-scan
+    topic: somatic_healing
+    freebie_registry_id: breath_reset_structured_v1
+    status: active
+    landing_path: /free/somatic-body-scan/
+    email_sequence_id: somatic_healing_nurture_5
+  - slug: grief-letter-template
+    topic: grief
+    freebie_registry_id: journal_reflection_v1
+    status: active
+    landing_path: /free/grief-letter-template/
+    email_sequence_id: grief_nurture_5

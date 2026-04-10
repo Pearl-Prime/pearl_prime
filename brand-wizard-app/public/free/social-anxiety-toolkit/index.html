@@ -318,6 +318,23 @@
       display: none;
     }
   </style>
+  <!-- GA4 — owner: replace G-PLACEHOLDER with real measurement ID from Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+    // Capture UTM params for attribution
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+        if(params.get(k)) utm[k] = params.get(k);
+      });
+      if(Object.keys(utm).length) sessionStorage.setItem('funnel_utm', JSON.stringify(utm));
+    })();
+  </script>
 </head>
 <body>
   <div class="container">
@@ -443,7 +460,16 @@
         document.getElementById('form-error').style.display = 'block';
         return;
       }
-      document.getElementById('form-section').style.display = 'none';
+            // GA4 lead_submit
+      if (typeof gtag === 'function') {
+        gtag('event', 'lead_submit', {
+          event_category: 'funnel',
+          event_label: 'social-anxiety-toolkit',
+          topic: 'social_anxiety',
+          value: 0
+        });
+      }
+document.getElementById('form-section').style.display = 'none';
       document.getElementById('tool-section').style.display = 'block';
     }
 

@@ -299,6 +299,23 @@
       text-align: center;
     }
   </style>
+  <!-- GA4 — owner: replace G-PLACEHOLDER with real measurement ID from Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER');
+    // Capture UTM params for attribution
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+        if(params.get(k)) utm[k] = params.get(k);
+      });
+      if(Object.keys(utm).length) sessionStorage.setItem('funnel_utm', JSON.stringify(utm));
+    })();
+  </script>
 </head>
 <body>
 <div class="page-wrap">
@@ -347,6 +364,16 @@
 <script>
   document.getElementById('capture-form').addEventListener('submit', function(e) {
     e.preventDefault();
+    // GA4 lead_submit
+    if (typeof gtag === 'function') {
+      gtag('event', 'lead_submit', {
+        event_category: 'funnel',
+        event_label: 'depression-momentum-kit',
+        topic: 'depression',
+        value: 0
+      });
+    }
+
     document.getElementById('capture-section').style.display = 'none';
     document.getElementById('tool-section').classList.add('visible');
   });
