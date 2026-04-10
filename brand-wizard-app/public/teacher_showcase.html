@@ -73,7 +73,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 .collapsible { padding: 16px 0; }
 
 /* Formats Grid */
-.formats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.formats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
 .format-card { background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; transition: transform 0.2s; }
 .format-card:hover { transform: scale(1.02); }
 .format-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
@@ -324,7 +324,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('ahjan_formats')">
         <span class="toggle-arrow" id="arr_ahjan_formats">▸</span> Formats
       </div>
@@ -365,6 +365,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-ahjan" preload="metadata"
                    src="assets/audio/podcast/ahjan_podcast_3min.mp3"></audio>
           </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/ahjan_social.png" loading="lazy" alt="Ahjan Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
+          </div>
         </div>
       </div>
 
@@ -396,14 +401,18 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
-            <video controls preload="metadata" loading="lazy" style="width:100%; border-radius:6px" poster="assets/covers/cover_ahjan_anxiety.png">
+            <video controls preload="metadata" loading="lazy" style="width:100%; border-radius:6px" poster="assets/covers/kdp/ahjan_audiobook.png">
               <source src="assets/video/tiktok/ahjan_self_worth_tiktok.mp4" type="video/mp4">
             </video>
             <div class="video-label">TikTok (90s)</div>
+            <video controls preload="metadata" loading="lazy" style="width:100%; border-radius:6px; margin-top:12px" poster="assets/covers/kdp/ahjan_audiobook.png">
+              <source src="assets/video/tiktok/ahjan_self_worth_instagram_90s.mp4" type="video/mp4">
+            </video>
+            <div class="video-label">Instagram / Reels (90s)</div>
           </div>
         </div>
       </div>
@@ -414,31 +423,31 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="ahjan_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/ahjan/page_001.png" loading="lazy" onclick="openMangaReader('ahjan',0)" alt="Page 1">
-          <img src="assets/manga_panels/ahjan/page_002.png" loading="lazy" onclick="openMangaReader('ahjan',1)" alt="Page 2">
-          <img src="assets/manga_panels/ahjan/page_003.png" loading="lazy" onclick="openMangaReader('ahjan',2)" alt="Page 3">
-          <img src="assets/manga_panels/ahjan/page_004.png" loading="lazy" onclick="openMangaReader('ahjan',3)" alt="Page 4">
+          <img src="assets/manga_panels/ahjan/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('ahjan',0)" alt="Page 1">
+          <img src="assets/manga_panels/ahjan/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('ahjan',1)" alt="Page 2">
+          <img src="assets/manga_panels/ahjan/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('ahjan',2)" alt="Page 3">
+          <img src="assets/manga_panels/ahjan/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('ahjan',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/ahjan_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/ahjan_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/ahjan_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/ahjan_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/ahjan_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/ahjan_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/ahjan_portrait.png"
-                 loading="lazy" alt="Ahjan Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Ahjan Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/ahjan_scene.png"
-                 loading="lazy" alt="Ahjan Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Ahjan Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/ahjan_symbolic.png"
-                 loading="lazy" alt="Ahjan Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Ahjan Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
         </div>        <div class="manga-meta">iyashikei · Ahjan · Chapter 1: Anxiety</div>
@@ -1391,7 +1400,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('adi_da_formats')">
         <span class="toggle-arrow" id="arr_adi_da_formats">▸</span> Formats
       </div>
@@ -1432,6 +1441,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-adi_da" preload="metadata"
                    src="assets/audio/podcast/adi_da_podcast_3min.mp3"></audio>
           </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/adi_da_social.png" loading="lazy" alt="Adi Da Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
+          </div>
         </div>
       </div>
 
@@ -1463,7 +1477,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -1481,31 +1495,31 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="adi_da_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/adi_da/page_001.png" loading="lazy" onclick="openMangaReader('adi_da',0)" alt="Page 1">
-          <img src="assets/manga_panels/adi_da/page_002.png" loading="lazy" onclick="openMangaReader('adi_da',1)" alt="Page 2">
-          <img src="assets/manga_panels/adi_da/page_003.png" loading="lazy" onclick="openMangaReader('adi_da',2)" alt="Page 3">
-          <img src="assets/manga_panels/adi_da/page_004.png" loading="lazy" onclick="openMangaReader('adi_da',3)" alt="Page 4">
+          <img src="assets/manga_panels/adi_da/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('adi_da',0)" alt="Page 1">
+          <img src="assets/manga_panels/adi_da/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('adi_da',1)" alt="Page 2">
+          <img src="assets/manga_panels/adi_da/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('adi_da',2)" alt="Page 3">
+          <img src="assets/manga_panels/adi_da/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('adi_da',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/adi_da_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/adi_da_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/adi_da_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/adi_da_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/adi_da_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/adi_da_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/adi_da_portrait.png"
-                 loading="lazy" alt="Adi Da Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Adi Da Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/adi_da_scene.png"
-                 loading="lazy" alt="Adi Da Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Adi Da Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/adi_da_symbolic.png"
-                 loading="lazy" alt="Adi Da Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Adi Da Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
         </div>        <div class="manga-meta">seinen · Adi Da · Chapter 1: Self-Worth</div>
@@ -2617,7 +2631,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('master_feung_formats')">
         <span class="toggle-arrow" id="arr_master_feung_formats">▸</span> Formats
       </div>
@@ -2658,6 +2672,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-master_feung" preload="metadata"
                    src="assets/audio/podcast/master_feung_podcast_3min.mp3"></audio>
           </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/master_feung_social.png" loading="lazy" alt="Master Feung Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
+          </div>
         </div>
       </div>
 
@@ -2689,7 +2708,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -2707,31 +2726,31 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="master_feung_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/master_feung/page_001.png" loading="lazy" onclick="openMangaReader('master_feung',0)" alt="Page 1">
-          <img src="assets/manga_panels/master_feung/page_002.png" loading="lazy" onclick="openMangaReader('master_feung',1)" alt="Page 2">
-          <img src="assets/manga_panels/master_feung/page_003.png" loading="lazy" onclick="openMangaReader('master_feung',2)" alt="Page 3">
-          <img src="assets/manga_panels/master_feung/page_004.png" loading="lazy" onclick="openMangaReader('master_feung',3)" alt="Page 4">
+          <img src="assets/manga_panels/master_feung/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_feung',0)" alt="Page 1">
+          <img src="assets/manga_panels/master_feung/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_feung',1)" alt="Page 2">
+          <img src="assets/manga_panels/master_feung/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_feung',2)" alt="Page 3">
+          <img src="assets/manga_panels/master_feung/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_feung',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/master_feung_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/master_feung_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/master_feung_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/master_feung_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/master_feung_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/master_feung_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/master_feung_portrait.png"
-                 loading="lazy" alt="Master Feung Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Master Feung Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/master_feung_scene.png"
-                 loading="lazy" alt="Master Feung Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Master Feung Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/master_feung_symbolic.png"
-                 loading="lazy" alt="Master Feung Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Master Feung Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
         </div>        <div class="manga-meta">wuxia · Master Feung · Chapter 1: Burnout</div>
@@ -3297,7 +3316,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('sai_ma_formats')">
         <span class="toggle-arrow" id="arr_sai_ma_formats">▸</span> Formats
       </div>
@@ -3338,6 +3357,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-sai_ma" preload="metadata"
                    src="assets/audio/podcast/sai_ma_podcast_3min.mp3"></audio>
           </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/sai_ma_social.png" loading="lazy" alt="Sai Ma Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
+          </div>
         </div>
       </div>
 
@@ -3369,7 +3393,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -3387,31 +3411,31 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="sai_ma_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/sai_ma/page_001.png" loading="lazy" onclick="openMangaReader('sai_ma',0)" alt="Page 1">
-          <img src="assets/manga_panels/sai_ma/page_002.png" loading="lazy" onclick="openMangaReader('sai_ma',1)" alt="Page 2">
-          <img src="assets/manga_panels/sai_ma/page_003.png" loading="lazy" onclick="openMangaReader('sai_ma',2)" alt="Page 3">
-          <img src="assets/manga_panels/sai_ma/page_004.png" loading="lazy" onclick="openMangaReader('sai_ma',3)" alt="Page 4">
+          <img src="assets/manga_panels/sai_ma/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('sai_ma',0)" alt="Page 1">
+          <img src="assets/manga_panels/sai_ma/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('sai_ma',1)" alt="Page 2">
+          <img src="assets/manga_panels/sai_ma/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('sai_ma',2)" alt="Page 3">
+          <img src="assets/manga_panels/sai_ma/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('sai_ma',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/sai_ma_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/sai_ma_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/sai_ma_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/sai_ma_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/sai_ma_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/sai_ma_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/sai_ma_portrait.png"
-                 loading="lazy" alt="Sai Ma Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Sai Ma Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/sai_ma_scene.png"
-                 loading="lazy" alt="Sai Ma Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Sai Ma Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/sai_ma_symbolic.png"
-                 loading="lazy" alt="Sai Ma Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Sai Ma Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
         </div>        <div class="manga-meta">josei · Sai Ma · Chapter 1: Grief</div>
@@ -4108,7 +4132,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('ra_formats')">
         <span class="toggle-arrow" id="arr_ra_formats">▸</span> Formats
       </div>
@@ -4149,6 +4173,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-ra" preload="metadata"
                    src="assets/audio/podcast/ra_podcast_3min.mp3"></audio>
           </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/ra_social.png" loading="lazy" alt="Ra Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
+          </div>
         </div>
       </div>
 
@@ -4180,11 +4209,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
-            <video controls preload="metadata" loading="lazy" style="width:100%; border-radius:6px" poster="assets/covers/cover_ra_self_worth.png">
+            <video controls preload="metadata" loading="lazy" style="width:100%; border-radius:6px" poster="assets/covers/kdp/ra_audiobook.png">
               <source src="assets/video/tiktok/ra_courage_tiktok.mp4" type="video/mp4">
             </video>
             <div class="video-label">TikTok (90s)</div>
@@ -4198,31 +4227,31 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="ra_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/ra/page_001.png" loading="lazy" onclick="openMangaReader('ra',0)" alt="Page 1">
-          <img src="assets/manga_panels/ra/page_002.png" loading="lazy" onclick="openMangaReader('ra',1)" alt="Page 2">
-          <img src="assets/manga_panels/ra/page_003.png" loading="lazy" onclick="openMangaReader('ra',2)" alt="Page 3">
-          <img src="assets/manga_panels/ra/page_004.png" loading="lazy" onclick="openMangaReader('ra',3)" alt="Page 4">
+          <img src="assets/manga_panels/ra/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('ra',0)" alt="Page 1">
+          <img src="assets/manga_panels/ra/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('ra',1)" alt="Page 2">
+          <img src="assets/manga_panels/ra/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('ra',2)" alt="Page 3">
+          <img src="assets/manga_panels/ra/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('ra',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/ra_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/ra_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/ra_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/ra_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/ra_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/ra_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/ra_portrait.png"
-                 loading="lazy" alt="Ra Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Ra Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/ra_scene.png"
-                 loading="lazy" alt="Ra Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Ra Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/ra_symbolic.png"
-                 loading="lazy" alt="Ra Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Ra Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
         </div>        <div class="manga-meta">seinen · Ra · Chapter 1: Self-Worth</div>
@@ -4899,7 +4928,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('junko_formats')">
         <span class="toggle-arrow" id="arr_junko_formats">▸</span> Formats
       </div>
@@ -4916,7 +4945,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">🇯🇵 ja_female_warm · CosyVoice2</div>
           </div>
           <div class="format-card">
-            <img src="assets/manga_covers/junko_cover_overthinking.png" loading="lazy" alt="Junko Manga" onerror="this.style.display='none'">
+            <img src="assets/manga_covers/junko_cover_mindfulness.png" loading="lazy" alt="Junko Manga" onerror="this.style.display='none'">
             <div class="format-label">Manga</div>
             <div class="format-meta">seinen</div>
           </div>
@@ -4939,6 +4968,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">3 min · click to play</div>
             <audio id="podcast-junko" preload="metadata"
                    src="assets/audio/podcast/junko_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/junko_social.png" loading="lazy" alt="Junko Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
           </div>
         </div>
       </div>
@@ -4971,7 +5005,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -4989,34 +5023,39 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="junko_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/junko/page_001.png" loading="lazy" onclick="openMangaReader('junko',0)" alt="Page 1">
-          <img src="assets/manga_panels/junko/page_002.png" loading="lazy" onclick="openMangaReader('junko',1)" alt="Page 2">
-          <img src="assets/manga_panels/junko/page_003.png" loading="lazy" onclick="openMangaReader('junko',2)" alt="Page 3">
-          <img src="assets/manga_panels/junko/page_004.png" loading="lazy" onclick="openMangaReader('junko',3)" alt="Page 4">
+          <img src="assets/manga_panels/junko/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('junko',0)" alt="Page 1">
+          <img src="assets/manga_panels/junko/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('junko',1)" alt="Page 2">
+          <img src="assets/manga_panels/junko/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('junko',2)" alt="Page 3">
+          <img src="assets/manga_panels/junko/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('junko',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/junko_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/junko_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/junko_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/junko_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/junko_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/junko_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/junko_portrait.png"
-                 loading="lazy" alt="Junko Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Junko Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/junko_scene.png"
-                 loading="lazy" alt="Junko Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Junko Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/junko_symbolic.png"
-                 loading="lazy" alt="Junko Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Junko Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
-        </div>        <div class="manga-meta">seinen · Junko · Chapter 1: Overthinking</div>
+        </div>
+        <div class="manga-topic-extra" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <img src="assets/manga_covers/junko_cover_sleep_anxiety.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Sleep anxiety" style="height:200px;border-radius:4px;border:1px solid var(--border)">
+          <img src="assets/manga_covers/junko_cover_social_anxiety.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Social anxiety" style="height:200px;border-radius:4px;border:1px solid var(--border)">
+        </div>
+        <div class="manga-meta">seinen · Junko · Chapter 1: Overthinking</div>
       </div>
 
       <!-- READ BOOK -->
@@ -5895,7 +5934,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('miki_formats')">
         <span class="toggle-arrow" id="arr_miki_formats">▸</span> Formats
       </div>
@@ -5936,6 +5975,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-miki" preload="metadata"
                    src="assets/audio/podcast/miki_podcast_3min.mp3"></audio>
           </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/miki_social.png" loading="lazy" alt="Miki Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
+          </div>
         </div>
       </div>
 
@@ -5967,7 +6011,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -5985,31 +6029,31 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="miki_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/miki/page_001.png" loading="lazy" onclick="openMangaReader('miki',0)" alt="Page 1">
-          <img src="assets/manga_panels/miki/page_002.png" loading="lazy" onclick="openMangaReader('miki',1)" alt="Page 2">
-          <img src="assets/manga_panels/miki/page_003.png" loading="lazy" onclick="openMangaReader('miki',2)" alt="Page 3">
-          <img src="assets/manga_panels/miki/page_004.png" loading="lazy" onclick="openMangaReader('miki',3)" alt="Page 4">
+          <img src="assets/manga_panels/miki/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('miki',0)" alt="Page 1">
+          <img src="assets/manga_panels/miki/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('miki',1)" alt="Page 2">
+          <img src="assets/manga_panels/miki/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('miki',2)" alt="Page 3">
+          <img src="assets/manga_panels/miki/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('miki',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/miki_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/miki_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/miki_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/miki_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/miki_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/miki_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/miki_portrait.png"
-                 loading="lazy" alt="Miki Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Miki Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/miki_scene.png"
-                 loading="lazy" alt="Miki Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Miki Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/miki_symbolic.png"
-                 loading="lazy" alt="Miki Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Miki Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
         </div>        <div class="manga-meta">iyashikei · Miki · Chapter 1: Imposter Syndrome</div>
@@ -6644,7 +6688,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('master_wu_formats')">
         <span class="toggle-arrow" id="arr_master_wu_formats">▸</span> Formats
       </div>
@@ -6685,6 +6729,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-master_wu" preload="metadata"
                    src="assets/audio/podcast/master_wu_podcast_3min.mp3"></audio>
           </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/master_wu_social.png" loading="lazy" alt="Master Wu Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
+          </div>
         </div>
       </div>
 
@@ -6716,7 +6765,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -6734,34 +6783,39 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="master_wu_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/master_wu/page_001.png" loading="lazy" onclick="openMangaReader('master_wu',0)" alt="Page 1">
-          <img src="assets/manga_panels/master_wu/page_002.png" loading="lazy" onclick="openMangaReader('master_wu',1)" alt="Page 2">
-          <img src="assets/manga_panels/master_wu/page_003.png" loading="lazy" onclick="openMangaReader('master_wu',2)" alt="Page 3">
-          <img src="assets/manga_panels/master_wu/page_004.png" loading="lazy" onclick="openMangaReader('master_wu',3)" alt="Page 4">
+          <img src="assets/manga_panels/master_wu/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_wu',0)" alt="Page 1">
+          <img src="assets/manga_panels/master_wu/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_wu',1)" alt="Page 2">
+          <img src="assets/manga_panels/master_wu/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_wu',2)" alt="Page 3">
+          <img src="assets/manga_panels/master_wu/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_wu',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/master_wu_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/master_wu_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/master_wu_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/master_wu_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/master_wu_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/master_wu_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/master_wu_portrait.png"
-                 loading="lazy" alt="Master Wu Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Master Wu Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/master_wu_scene.png"
-                 loading="lazy" alt="Master Wu Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Master Wu Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/master_wu_symbolic.png"
-                 loading="lazy" alt="Master Wu Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Master Wu Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
-        </div>        <div class="manga-meta">wuxia · Master Wu · Chapter 1: Courage</div>
+        </div>
+        <div class="manga-topic-extra" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <img src="assets/manga_covers/master_wu_cover_boundaries.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Boundaries" style="height:200px;border-radius:4px;border:1px solid var(--border)">
+          <img src="assets/manga_covers/master_wu_cover_burnout.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Burnout" style="height:200px;border-radius:4px;border:1px solid var(--border)">
+        </div>
+        <div class="manga-meta">wuxia · Master Wu · Chapter 1: Courage</div>
       </div>
 
       <!-- READ BOOK -->
@@ -7328,7 +7382,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('pamela_fellows_formats')">
         <span class="toggle-arrow" id="arr_pamela_fellows_formats">▸</span> Formats
       </div>
@@ -7369,6 +7423,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-pamela_fellows" preload="metadata"
                    src="assets/audio/podcast/pamela_fellows_podcast_3min.mp3"></audio>
           </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/pamela_fellows_social.png" loading="lazy" alt="Pamela Fellows Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
+          </div>
         </div>
       </div>
 
@@ -7400,11 +7459,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
-            <video controls preload="metadata" loading="lazy" style="width:100%; border-radius:6px" poster="assets/covers/cover_pamela_fellows_burnout.png">
+            <video controls preload="metadata" loading="lazy" style="width:100%; border-radius:6px" poster="assets/covers/kdp/pamela_fellows_audiobook.png">
               <source src="assets/video/tiktok/pamela_fellows_financial_anxiety_tiktok.mp4" type="video/mp4">
             </video>
             <div class="video-label">TikTok (90s)</div>
@@ -7418,31 +7477,31 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="pamela_fellows_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/pamela_fellows/page_001.png" loading="lazy" onclick="openMangaReader('pamela_fellows',0)" alt="Page 1">
-          <img src="assets/manga_panels/pamela_fellows/page_002.png" loading="lazy" onclick="openMangaReader('pamela_fellows',1)" alt="Page 2">
-          <img src="assets/manga_panels/pamela_fellows/page_003.png" loading="lazy" onclick="openMangaReader('pamela_fellows',2)" alt="Page 3">
-          <img src="assets/manga_panels/pamela_fellows/page_004.png" loading="lazy" onclick="openMangaReader('pamela_fellows',3)" alt="Page 4">
+          <img src="assets/manga_panels/pamela_fellows/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('pamela_fellows',0)" alt="Page 1">
+          <img src="assets/manga_panels/pamela_fellows/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('pamela_fellows',1)" alt="Page 2">
+          <img src="assets/manga_panels/pamela_fellows/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('pamela_fellows',2)" alt="Page 3">
+          <img src="assets/manga_panels/pamela_fellows/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('pamela_fellows',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/pamela_fellows_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/pamela_fellows_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/pamela_fellows_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/pamela_fellows_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/pamela_fellows_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/pamela_fellows_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/pamela_fellows_portrait.png"
-                 loading="lazy" alt="Pamela Fellows Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Pamela Fellows Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/pamela_fellows_scene.png"
-                 loading="lazy" alt="Pamela Fellows Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Pamela Fellows Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/pamela_fellows_symbolic.png"
-                 loading="lazy" alt="Pamela Fellows Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Pamela Fellows Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
         </div>        <div class="manga-meta">josei · Pamela Fellows · Chapter 1: Burnout</div>
@@ -8287,7 +8346,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('joshin_formats')">
         <span class="toggle-arrow" id="arr_joshin_formats">▸</span> Formats
       </div>
@@ -8328,6 +8387,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-joshin" preload="metadata"
                    src="assets/audio/podcast/joshin_podcast_3min.mp3"></audio>
           </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/joshin_social.png" loading="lazy" alt="Joshin Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
+          </div>
         </div>
       </div>
 
@@ -8359,7 +8423,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -8377,34 +8441,39 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="joshin_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/joshin/page_001.png" loading="lazy" onclick="openMangaReader('joshin',0)" alt="Page 1">
-          <img src="assets/manga_panels/joshin/page_002.png" loading="lazy" onclick="openMangaReader('joshin',1)" alt="Page 2">
-          <img src="assets/manga_panels/joshin/page_003.png" loading="lazy" onclick="openMangaReader('joshin',2)" alt="Page 3">
-          <img src="assets/manga_panels/joshin/page_004.png" loading="lazy" onclick="openMangaReader('joshin',3)" alt="Page 4">
+          <img src="assets/manga_panels/joshin/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('joshin',0)" alt="Page 1">
+          <img src="assets/manga_panels/joshin/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('joshin',1)" alt="Page 2">
+          <img src="assets/manga_panels/joshin/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('joshin',2)" alt="Page 3">
+          <img src="assets/manga_panels/joshin/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('joshin',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/joshin_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/joshin_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/joshin_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/joshin_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/joshin_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/joshin_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/joshin_portrait.png"
-                 loading="lazy" alt="Joshin Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Joshin Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/joshin_scene.png"
-                 loading="lazy" alt="Joshin Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Joshin Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/joshin_symbolic.png"
-                 loading="lazy" alt="Joshin Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Joshin Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
-        </div>        <div class="manga-meta">seinen · Joshin · Chapter 1: Anxiety</div>
+        </div>
+        <div class="manga-topic-extra" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <img src="assets/manga_covers/joshin_cover_depression.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Depression" style="height:200px;border-radius:4px;border:1px solid var(--border)">
+          <img src="assets/manga_covers/joshin_cover_overthinking.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Overthinking" style="height:200px;border-radius:4px;border:1px solid var(--border)">
+        </div>
+        <div class="manga-meta">seinen · Joshin · Chapter 1: Anxiety</div>
       </div>
 
       <!-- READ BOOK -->
@@ -8832,7 +8901,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('maat_formats')">
         <span class="toggle-arrow" id="arr_maat_formats">▸</span> Formats
       </div>
@@ -8849,7 +8918,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">🇺🇸 english_male · CosyVoice2</div>
           </div>
           <div class="format-card">
-            <img src="assets/manga_covers/maat_cover_boundaries.png" loading="lazy" alt="Maat Manga" onerror="this.style.display='none'">
+            <img src="assets/manga_covers/maat_front.png" loading="lazy" alt="Maat Manga (character)" onerror="this.style.display='none'">
             <div class="format-label">Manga</div>
             <div class="format-meta">seinen</div>
           </div>
@@ -8872,6 +8941,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">3 min · click to play</div>
             <audio id="podcast-maat" preload="metadata"
                    src="assets/audio/podcast/maat_podcast_3min.mp3"></audio>
+          </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/maat_social.png" loading="lazy" alt="Maat Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
           </div>
         </div>
       </div>
@@ -8904,7 +8978,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -8922,31 +8996,31 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="maat_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/maat/page_001.png" loading="lazy" onclick="openMangaReader('maat',0)" alt="Page 1">
-          <img src="assets/manga_panels/maat/page_002.png" loading="lazy" onclick="openMangaReader('maat',1)" alt="Page 2">
-          <img src="assets/manga_panels/maat/page_003.png" loading="lazy" onclick="openMangaReader('maat',2)" alt="Page 3">
-          <img src="assets/manga_panels/maat/page_004.png" loading="lazy" onclick="openMangaReader('maat',3)" alt="Page 4">
+          <img src="assets/manga_panels/maat/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('maat',0)" alt="Page 1">
+          <img src="assets/manga_panels/maat/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('maat',1)" alt="Page 2">
+          <img src="assets/manga_panels/maat/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('maat',2)" alt="Page 3">
+          <img src="assets/manga_panels/maat/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('maat',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/maat_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/maat_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/maat_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/maat_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/maat_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/maat_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/maat_portrait.png"
-                 loading="lazy" alt="Maat Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Maat Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/maat_scene.png"
-                 loading="lazy" alt="Maat Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Maat Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/maat_symbolic.png"
-                 loading="lazy" alt="Maat Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Maat Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
         </div>        <div class="manga-meta">seinen · Maat · Chapter 1: Boundaries</div>
@@ -9571,7 +9645,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('omote_formats')">
         <span class="toggle-arrow" id="arr_omote_formats">▸</span> Formats
       </div>
@@ -9612,6 +9686,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-omote" preload="metadata"
                    src="assets/audio/podcast/omote_podcast_3min.mp3"></audio>
           </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/omote_social.png" loading="lazy" alt="Omote Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
+          </div>
         </div>
       </div>
 
@@ -9643,7 +9722,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -9661,31 +9740,31 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="omote_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/omote/page_001.png" loading="lazy" onclick="openMangaReader('omote',0)" alt="Page 1">
-          <img src="assets/manga_panels/omote/page_002.png" loading="lazy" onclick="openMangaReader('omote',1)" alt="Page 2">
-          <img src="assets/manga_panels/omote/page_003.png" loading="lazy" onclick="openMangaReader('omote',2)" alt="Page 3">
-          <img src="assets/manga_panels/omote/page_004.png" loading="lazy" onclick="openMangaReader('omote',3)" alt="Page 4">
+          <img src="assets/manga_panels/omote/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('omote',0)" alt="Page 1">
+          <img src="assets/manga_panels/omote/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('omote',1)" alt="Page 2">
+          <img src="assets/manga_panels/omote/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('omote',2)" alt="Page 3">
+          <img src="assets/manga_panels/omote/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('omote',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/omote_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/omote_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/omote_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/omote_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/omote_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/omote_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/omote_portrait.png"
-                 loading="lazy" alt="Omote Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Omote Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/omote_scene.png"
-                 loading="lazy" alt="Omote Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Omote Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/omote_symbolic.png"
-                 loading="lazy" alt="Omote Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Omote Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
         </div>        <div class="manga-meta">seinen · Omote · Chapter 1: Sleep Anxiety</div>
@@ -10255,7 +10334,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         </div>
       </div>
 
-      <!-- FORMATS ROW (4 covers) -->
+      <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('master_sha_formats')">
         <span class="toggle-arrow" id="arr_master_sha_formats">▸</span> Formats
       </div>
@@ -10296,6 +10375,11 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-master_sha" preload="metadata"
                    src="assets/audio/podcast/master_sha_podcast_3min.mp3"></audio>
           </div>
+          <div class="format-card">
+            <img src="assets/covers/kdp/master_sha_social.png" loading="lazy" alt="Master Sha Social" onerror="this.style.display='none'">
+            <div class="format-label">Social</div>
+            <div class="format-meta">Shorts / feeds</div>
+          </div>
         </div>
       </div>
 
@@ -10327,7 +10411,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
         <div class="watch-grid">
           <div class="watch-main">
             <div class="video-container landscape">
-              <div class="video-note">YouTube (5 min) — rendering in progress</div>
+              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -10345,31 +10429,31 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="master_sha_manga" class="collapsible" style="display:none">
         <div class="manga-gallery">
-          <img src="assets/manga_panels/master_sha/page_001.png" loading="lazy" onclick="openMangaReader('master_sha',0)" alt="Page 1">
-          <img src="assets/manga_panels/master_sha/page_002.png" loading="lazy" onclick="openMangaReader('master_sha',1)" alt="Page 2">
-          <img src="assets/manga_panels/master_sha/page_003.png" loading="lazy" onclick="openMangaReader('master_sha',2)" alt="Page 3">
-          <img src="assets/manga_panels/master_sha/page_004.png" loading="lazy" onclick="openMangaReader('master_sha',3)" alt="Page 4">
+          <img src="assets/manga_panels/master_sha/page_001.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_sha',0)" alt="Page 1">
+          <img src="assets/manga_panels/master_sha/page_002.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_sha',1)" alt="Page 2">
+          <img src="assets/manga_panels/master_sha/page_003.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_sha',2)" alt="Page 3">
+          <img src="assets/manga_panels/master_sha/page_004.png" loading="lazy" onerror="this.style.display='none'" onclick="openMangaReader('master_sha',3)" alt="Page 4">
         </div>
         <div class="manga-characters">
-          <img src="assets/manga_covers/master_sha_front.png" loading="lazy" alt="Front" title="Front view">
-          <img src="assets/manga_covers/master_sha_three_quarter.png" loading="lazy" alt="3/4 view" title="Three-quarter view">
-          <img src="assets/manga_covers/master_sha_profile.png" loading="lazy" alt="Profile" title="Profile view">
+          <img src="assets/manga_covers/master_sha_front.png" loading="lazy" onerror="this.style.display='none'" alt="Front" title="Front view">
+          <img src="assets/manga_covers/master_sha_three_quarter.png" loading="lazy" onerror="this.style.display='none'" alt="3/4 view" title="Three-quarter view">
+          <img src="assets/manga_covers/master_sha_profile.png" loading="lazy" onerror="this.style.display='none'" alt="Profile" title="Profile view">
         </div>
         <!-- Triptych: Character Portrait / Teaching Scene / Brand Essence -->
         <div class="manga-triptych">
           <div class="triptych-card">
             <img src="assets/manga_covers/master_sha_portrait.png"
-                 loading="lazy" alt="Master Sha Character Portrait">
+                 loading="lazy" onerror="this.style.display='none'" alt="Master Sha Character Portrait">
             <div class="triptych-label">Character Portrait</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/master_sha_scene.png"
-                 loading="lazy" alt="Master Sha Teaching Scene">
+                 loading="lazy" onerror="this.style.display='none'" alt="Master Sha Teaching Scene">
             <div class="triptych-label">Teaching Scene</div>
           </div>
           <div class="triptych-card">
             <img src="assets/manga_covers/master_sha_symbolic.png"
-                 loading="lazy" alt="Master Sha Brand Essence">
+                 loading="lazy" onerror="this.style.display='none'" alt="Master Sha Brand Essence">
             <div class="triptych-label">Brand Essence</div>
           </div>
         </div>        <div class="manga-meta">iyashikei · Master Sha · Chapter 1: Grief</div>
