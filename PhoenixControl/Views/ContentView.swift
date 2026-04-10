@@ -18,6 +18,8 @@ enum TabTag: String, CaseIterable, Identifiable {
     case mlLoop
     case docs
     case pearlPrimeWeb
+    case projections
+    case mangaStrategy
 
     var id: String { rawValue }
 
@@ -25,6 +27,7 @@ enum TabTag: String, CaseIterable, Identifiable {
         ("Core", [.dashboard, .pipeline, .contentInventory, .simulation]),
         ("Quality", [.tests, .gates, .observability, .teacher]),
         ("Content", [.pearlNews, .manualReview]),
+        ("Strategy", [.projections, .mangaStrategy]),
         ("Operations", [.ci, .credentials, .video, .localeParity, .mlLoop, .docs]),
         ("Web", [.pearlPrimeWeb]),
     ]
@@ -48,6 +51,8 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .mlLoop: return "ML Loop"
         case .docs: return "Docs & Config"
         case .pearlPrimeWeb: return "Pearl Prime Web"
+        case .projections: return "Projections"
+        case .mangaStrategy: return "Manga Strategy"
         }
     }
 
@@ -70,6 +75,8 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .mlLoop: return "brain"
         case .docs: return "doc.text"
         case .pearlPrimeWeb: return "globe.americas"
+        case .projections: return "chart.line.uptrend.xyaxis"
+        case .mangaStrategy: return "books.vertical.fill"
         }
     }
 
@@ -92,6 +99,8 @@ enum TabTag: String, CaseIterable, Identifiable {
         case .mlLoop: return "EI v2 machine learning loop. Monitor stem runs, knowledge base activation, and model feedback."
         case .docs: return "Browse and search repo docs and config files. Quick reference for specs, authority docs, and governance."
         case .pearlPrimeWeb: return "Open the deployed Pearl Prime web portal. Share with brand operators and investors."
+        case .projections: return "12-month revenue projections. Run planner + forecast from annual targets. Ties to investor DD numbers."
+        case .mangaStrategy: return "Manga series strategies for all 13 global brands — genre, cadence, topic allocation, platform cadence."
         }
     }
 }
@@ -229,6 +238,10 @@ struct ContentView: View {
                 DocsConfigView(state: state, artifactReader: artifactReader, scriptRunner: scriptRunner)
             case .pearlPrimeWeb:
                 PearlPrimeWebView()
+            case .projections:
+                ProjectionsView(state: state, artifactReader: artifactReader, scriptRunner: scriptRunner)
+            case .mangaStrategy:
+                MangaStrategyView(state: state, artifactReader: artifactReader)
             }
         }
     }

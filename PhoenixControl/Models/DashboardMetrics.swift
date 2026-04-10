@@ -117,3 +117,135 @@ struct BookPassResult: Identifiable {
     var passed: Bool?
     var path: String
 }
+
+// MARK: - Revenue Forecast (from artifacts/projections/revenue_forecast_{year}.json)
+
+struct RevenueForecast: Codable {
+    var year: Int
+    var generatedAt: String
+    var provenance: String
+    var brandsIncluded: Int
+    var totalTitlesProjected: Int
+    var totalProjectedRevenueLow: Double
+    var totalProjectedRevenueMid: Double
+    var totalProjectedRevenueHigh: Double
+    var blendedAsp: Double
+    var baselineConversionRate: Double
+    var monthly: [MonthlyRevenue]
+    var byLane: [String: LaneRevenue]
+    var byFormat: [String: FormatRevenue]
+
+    enum CodingKeys: String, CodingKey {
+        case year
+        case generatedAt = "generated_at"
+        case provenance
+        case brandsIncluded = "brands_included"
+        case totalTitlesProjected = "total_titles_projected"
+        case totalProjectedRevenueLow = "total_projected_revenue_low"
+        case totalProjectedRevenueMid = "total_projected_revenue_mid"
+        case totalProjectedRevenueHigh = "total_projected_revenue_high"
+        case blendedAsp = "blended_asp"
+        case baselineConversionRate = "baseline_conversion_rate"
+        case monthly
+        case byLane = "by_lane"
+        case byFormat = "by_format"
+    }
+}
+
+struct MonthlyRevenue: Codable, Identifiable {
+    var id: String { month }
+    var month: String
+    var monthNum: Int
+    var titlesPublished: Int
+    var revenueLow: Double
+    var revenueMid: Double
+    var revenueHigh: Double
+
+    enum CodingKeys: String, CodingKey {
+        case month
+        case monthNum = "month_num"
+        case titlesPublished = "titles_published"
+        case revenueLow = "revenue_low"
+        case revenueMid = "revenue_mid"
+        case revenueHigh = "revenue_high"
+    }
+}
+
+struct LaneRevenue: Codable {
+    var titles: Int
+    var revenueMid: Double
+    var brandsCount: Int
+    var marketMultiplier: Double
+
+    enum CodingKeys: String, CodingKey {
+        case titles
+        case revenueMid = "revenue_mid"
+        case brandsCount = "brands_count"
+        case marketMultiplier = "market_multiplier"
+    }
+}
+
+struct FormatRevenue: Codable {
+    var count: Int
+    var revenuePct: Double
+    var revenueWeight: Double
+
+    enum CodingKeys: String, CodingKey {
+        case count
+        case revenuePct = "revenue_pct"
+        case revenueWeight = "revenue_weight"
+    }
+}
+
+// MARK: - Manga Series Plan (from config/manga/manga_brand_series_plan.yaml via dump script)
+
+struct MangaBrandPlan: Identifiable, Codable {
+    var id: String { brandId }
+    var brandId: String
+    var teacher: String
+    var genre: String
+    var primaryLane: String
+    var activeSeriesTarget: Int
+    var newSeriesPerYear: Int
+    var chaptersPerSeriesPerMonth: Int
+    var maxChaptersBeforeVolume: Int
+    var volumesPerYearTarget: Int
+    var topicAllocation: [String: String]
+    var webtoonEnabled: Bool
+    var platformCadence: [String: String]
+    var maxDormantMonths: Int
+    var overlapNewOldWeeks: Int
+
+    enum CodingKeys: String, CodingKey {
+        case brandId = "brand_id"
+        case teacher
+        case genre
+        case primaryLane = "primary_lane"
+        case activeSeriesTarget = "active_series_target"
+        case newSeriesPerYear = "new_series_per_year"
+        case chaptersPerSeriesPerMonth = "chapters_per_series_per_month"
+        case maxChaptersBeforeVolume = "max_chapters_before_volume"
+        case volumesPerYearTarget = "volumes_per_year_target"
+        case topicAllocation = "topic_allocation"
+        case webtoonEnabled = "webtoon_enabled"
+        case platformCadence = "platform_cadence"
+        case maxDormantMonths = "max_dormant_months"
+        case overlapNewOldWeeks = "overlap_new_old_weeks"
+    }
+
+    /// Cadence label based on chapters per month.
+    var cadenceLabel: String {
+        switch chaptersPerSeriesPerMonth {
+        case 1: return "monthly"
+        case 2: return "bi-weekly"
+        case 3: return "tri-weekly"
+        case 4...: return "weekly"
+        default: return "\(chaptersPerSeriesPerMonth)×/mo"
+        }
+    }
+
+    /// Annual chapter output across all active series.
+    var annualChapters: Int {
+        chaptersPerSeriesPerMonth * 12 * activeSeriesTarget
+    }
+}

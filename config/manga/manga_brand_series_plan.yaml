@@ -1,0 +1,425 @@
+schema_version: 1
+# Manga Brand Series Plan — per-brand serialization strategy
+# Based on: docs/MANGA_SERIES_PORTFOLIO_RESEARCH.md industry benchmarks
+# Respects: config/catalog_planning/diversity_guards.yaml (max 30% per topic/persona)
+# Teachers per brand: config/catalog_planning/teacher_brand_lane_assignments.yaml
+
+# Industry baseline (from research):
+#   Weekly Shonen Jump: 18-22 active series simultaneously
+#   Small indie publisher: 4-6 active series
+#   Webtoon indie creator: 1-3 active series
+#   Survival rate: ~50% survive 30 chapters (1 year at weekly cadence)
+#   Our scale: 13 brands × ~3-5 active series each = ~52 active series at peak
+
+global_defaults:
+  # Per-brand portfolio sizing (small publisher benchmark)
+  active_series_target: 4          # maintain 4 active series simultaneously
+  new_series_per_year: 5           # launch 5, expect 3-4 to survive 30 chapters
+  survival_rate_target: 0.70       # 70% survival at 30-chapter mark (above indie avg)
+  min_chapters_before_decision: 10 # minimum viability window before cancellation
+  decision_point_chapters: 30      # full survival assessment at 30 chapters
+
+  # Chapter cadence (default: bi-weekly — sustainable for solo creator model)
+  chapters_per_series_per_month: 2  # bi-weekly
+  max_chapters_before_volume: 10    # collect 10 chapters → 1 volume
+  volumes_per_year_target: 6        # 3 series × 2 volumes = 6 volumes/year
+
+  # Series rotation
+  max_dormant_months: 3            # pause after 3 months if engagement drops; rotate in new series
+  overlap_new_old_weeks: 2         # new series starts 2 weeks before old wraps
+  max_active_series: 6             # hard cap — never run more than 6 simultaneously
+
+  # Simultaneous language release
+  simultaneous_languages: [english_global, japan, korea]  # launch same-day in all 3
+  language_rollout_delay_weeks: 4                          # other lanes follow 4 weeks later
+
+  # Diversity constraints (mirrors diversity_guards.yaml)
+  max_topic_concentration: 0.30    # no single topic > 30% of active chapters this week
+  max_series_per_topic: 2          # no more than 2 active series on same topic
+
+# ── BRAND SERIES PLANS ──────────────────────────────────────────────────────
+# Ordered by english_global teacher brand, then mapped to all lanes.
+# Lane-specific brands (stillness_press_de, etc.) inherit the same series plan
+# but start offset by 4 weeks from english_global launch.
+
+brands:
+  # ── 1. STILLNESS PRESS (teacher: ahjan) ──────────────────────────────────
+  stillness_press:
+    teacher: ahjan
+    primary_lane: english_global
+    genre: iyashikei          # healing/calming — highest breath_sequences (4+/chapter)
+    active_series_target: 3
+    new_series_per_year: 4
+    chapters_per_series_per_month: 2  # bi-weekly (sustainable, iyashikei readers patient)
+    max_chapters_before_volume: 10
+    volumes_per_year_target: 6
+
+    topic_allocation:
+      anxiety: 1 series          # primary: ahjan's core teaching
+      sleep_anxiety: 1 series    # secondary: strong platform search volume
+      somatic_healing: 1 series  # rotating third slot (somatic healing is iyashikei-native)
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        english_global: weekly    # Webtoon/Tapas US — weekly expected
+        japan: bi_weekly          # LINE Manga — bi-weekly acceptable for iyashikei
+        korea: weekly             # Naver/Kakao — weekly cadence expected
+
+    series_rotation:
+      max_dormant_months: 3
+      overlap_new_old_weeks: 2
+
+  # ── 2. COGNITIVE CLARITY (teacher: joshin) ───────────────────────────────
+  cognitive_clarity:
+    teacher: joshin
+    primary_lane: english_global
+    genre: seinen              # adult psychological depth — readers expect complexity
+    active_series_target: 4
+    new_series_per_year: 5
+    chapters_per_series_per_month: 3  # tri-weekly (seinen readers engage more frequently)
+    max_chapters_before_volume: 12
+    volumes_per_year_target: 8
+
+    topic_allocation:
+      overthinking: 1 series     # cognitive clarity flagship
+      imposter_syndrome: 1 series
+      burnout: 1 series
+      boundaries: 1 series       # rotating fourth slot
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        english_global: bi_weekly
+        japan: bi_weekly
+        korea: bi_weekly
+
+    series_rotation:
+      max_dormant_months: 2      # seinen readers churn faster — rotate sooner
+      overlap_new_old_weeks: 1
+
+  # ── 3. NORCAL DHARMA (teacher: ajahn_x) ─────────────────────────────────
+  norcal_dharma:
+    teacher: ajahn_x
+    primary_lane: english_global
+    genre: seinen
+    active_series_target: 3
+    new_series_per_year: 4
+    chapters_per_series_per_month: 2
+    max_chapters_before_volume: 10
+    volumes_per_year_target: 5
+
+    topic_allocation:
+      depression: 1 series
+      grief: 1 series
+      courage: 1 series
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        english_global: bi_weekly
+        japan: monthly            # grief/depression — slower cadence appropriate
+        korea: bi_weekly
+
+    series_rotation:
+      max_dormant_months: 4      # grief readers engage at slower pace
+      overlap_new_old_weeks: 2
+
+  # ── 4. SOMATIC WISDOM (teacher: pamela_fellows) ──────────────────────────
+  somatic_wisdom:
+    teacher: pamela_fellows
+    primary_lane: english_global
+    genre: shojo               # body-centered healing maps to shojo's emotional vulnerability
+    active_series_target: 3
+    new_series_per_year: 4
+    chapters_per_series_per_month: 2
+    max_chapters_before_volume: 10
+    volumes_per_year_target: 5
+
+    topic_allocation:
+      somatic_healing: 1 series  # flagship
+      compassion_fatigue: 1 series
+      self_worth: 1 series
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        english_global: bi_weekly
+        japan: bi_weekly
+        korea: weekly             # shojo audience strong on Naver/Kakao
+
+    series_rotation:
+      max_dormant_months: 3
+      overlap_new_old_weeks: 2
+
+  # ── 5. QI FOUNDATION (teacher: master_feung) ─────────────────────────────
+  qi_foundation:
+    teacher: master_feung
+    primary_lane: english_global
+    genre: cultivation         # xianxia/cultivation — long series, loyal readers
+    active_series_target: 3
+    new_series_per_year: 3     # cultivation: fewer new series, longer runs
+    chapters_per_series_per_month: 4  # weekly (cultivation readers expect frequency)
+    max_chapters_before_volume: 16
+    volumes_per_year_target: 6
+
+    topic_allocation:
+      burnout: 1 series
+      anxiety: 1 series
+      self_worth: 1 series
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        english_global: weekly
+        japan: weekly
+        korea: weekly
+        taiwan: weekly            # cultivation popular in Chinese-speaking markets
+
+    series_rotation:
+      max_dormant_months: 2      # cultivation readers abandon quickly if paused
+      overlap_new_old_weeks: 3
+
+  # ── 6. DIGITAL GROUND (teacher: miki) ────────────────────────────────────
+  digital_ground:
+    teacher: miki
+    primary_lane: english_global
+    genre: manhwa              # Korean/digital-native webtoon style
+    active_series_target: 4
+    new_series_per_year: 5
+    chapters_per_series_per_month: 4  # weekly (manhwa/webtoon standard)
+    max_chapters_before_volume: 14
+    volumes_per_year_target: 8
+
+    topic_allocation:
+      financial_anxiety: 1 series   # digital natives: money stress
+      financial_stress: 1 series
+      social_anxiety: 1 series
+      imposter_syndrome: 1 series
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        english_global: weekly
+        japan: weekly
+        korea: weekly             # manhwa home platform
+        taiwan: weekly
+
+    series_rotation:
+      max_dormant_months: 2      # manhwa readers drop fast without updates
+      overlap_new_old_weeks: 1
+
+  # ── 7. HEART BALANCE (teacher: maat) ─────────────────────────────────────
+  heart_balance:
+    teacher: maat
+    primary_lane: english_global
+    genre: shojo
+    active_series_target: 3
+    new_series_per_year: 4
+    chapters_per_series_per_month: 2
+    max_chapters_before_volume: 10
+    volumes_per_year_target: 5
+
+    topic_allocation:
+      self_worth: 1 series
+      boundaries: 1 series
+      compassion_fatigue: 1 series
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        english_global: bi_weekly
+        japan: bi_weekly
+        korea: weekly
+
+    series_rotation:
+      max_dormant_months: 3
+      overlap_new_old_weeks: 2
+
+  # ── 8. RELATIONAL CALM (teacher: junko) ──────────────────────────────────
+  relational_calm:
+    teacher: junko
+    primary_lane: japan          # Japan-primary — junko is JP native
+    genre: iyashikei
+    active_series_target: 4      # Japan-primary: higher active series (WSJ benchmark)
+    new_series_per_year: 5
+    chapters_per_series_per_month: 3  # tri-weekly for JP market
+    max_chapters_before_volume: 10
+    volumes_per_year_target: 8
+
+    topic_allocation:
+      anxiety: 1 series
+      social_anxiety: 1 series
+      burnout: 1 series          # karoshi/MH — high relevance in JP
+      sleep_anxiety: 1 series
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        japan: weekly             # LINE Manga weekly standard
+        english_global: bi_weekly
+        korea: bi_weekly
+
+    series_rotation:
+      max_dormant_months: 2      # JP market expects consistency
+      overlap_new_old_weeks: 2
+
+  # ── 9. WARRIOR CALM (teacher: master_wu) ─────────────────────────────────
+  warrior_calm:
+    teacher: master_wu
+    primary_lane: english_global
+    genre: cultivation
+    active_series_target: 3
+    new_series_per_year: 4
+    chapters_per_series_per_month: 4
+    max_chapters_before_volume: 16
+    volumes_per_year_target: 6
+
+    topic_allocation:
+      courage: 1 series
+      burnout: 1 series
+      self_worth: 1 series
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        english_global: weekly
+        japan: weekly
+        korea: weekly
+
+    series_rotation:
+      max_dormant_months: 2
+      overlap_new_old_weeks: 3
+
+  # ── 10. SLEEP RESTORATION (teacher: master_sha) ──────────────────────────
+  sleep_restoration:
+    teacher: master_sha
+    primary_lane: english_global
+    genre: iyashikei
+    active_series_target: 2      # sleep content: fewer series, slower cadence
+    new_series_per_year: 3
+    chapters_per_series_per_month: 2
+    max_chapters_before_volume: 8
+    volumes_per_year_target: 4
+
+    topic_allocation:
+      sleep_anxiety: 1 series    # flagship
+      somatic_healing: 1 series  # secondary: body-based sleep
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        english_global: bi_weekly
+        japan: monthly            # sleep content works at slower pace
+        korea: bi_weekly
+
+    series_rotation:
+      max_dormant_months: 4      # sleep readers less volatile
+      overlap_new_old_weeks: 2
+
+  # ── 11. BODY MEMORY (teacher: omote) ─────────────────────────────────────
+  body_memory:
+    teacher: omote
+    primary_lane: japan
+    genre: shojo
+    active_series_target: 3
+    new_series_per_year: 4
+    chapters_per_series_per_month: 2
+    max_chapters_before_volume: 10
+    volumes_per_year_target: 5
+
+    topic_allocation:
+      somatic_healing: 1 series
+      self_worth: 1 series
+      grief: 1 series
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        japan: bi_weekly
+        english_global: bi_weekly
+        korea: bi_weekly
+
+    series_rotation:
+      max_dormant_months: 3
+      overlap_new_old_weeks: 2
+
+  # ── 12. SOLAR RETURN (teacher: ra) ───────────────────────────────────────
+  solar_return:
+    teacher: ra
+    primary_lane: english_global
+    genre: isekai              # transformation narrative — isekai maps to self-growth
+    active_series_target: 3
+    new_series_per_year: 4
+    chapters_per_series_per_month: 3
+    max_chapters_before_volume: 12
+    volumes_per_year_target: 6
+
+    topic_allocation:
+      courage: 1 series
+      financial_anxiety: 1 series
+      depression: 1 series
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        english_global: weekly
+        japan: bi_weekly
+        korea: weekly
+
+    series_rotation:
+      max_dormant_months: 2
+      overlap_new_old_weeks: 2
+
+  # ── 13. DEVOTION PATH (teacher: sai_ma) ──────────────────────────────────
+  devotion_path:
+    teacher: sai_ma
+    primary_lane: english_global
+    genre: shonen              # devotion/discipline maps to shonen perseverance arc
+    active_series_target: 3
+    new_series_per_year: 4
+    chapters_per_series_per_month: 3
+    max_chapters_before_volume: 12
+    volumes_per_year_target: 6
+
+    topic_allocation:
+      courage: 1 series
+      imposter_syndrome: 1 series
+      burnout: 1 series
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        english_global: weekly
+        japan: weekly
+        korea: weekly
+
+    series_rotation:
+      max_dormant_months: 2
+      overlap_new_old_weeks: 2
+
+# ── PROJECTION WIRING ───────────────────────────────────────────────────────
+# The manga_chapters allocation in annual_projection_targets.yaml (e.g. 10% for
+# english_global, 25% for japan) is distributed across active series as follows:
+#
+#   weekly_manga_chapters_budget = annual_target × manga_chapters_pct / 52
+#
+#   Per-series allocation = budget / active_series_target
+#   (distributed round-robin across active series for the week)
+#
+#   Series arcs are tracked in projection_planner.py → series_plan[].
+#   The projection_planner assigns which series gets chapters each week
+#   based on: launch_week, run_weeks, dormancy schedule.
+#
+# This ensures:
+#   1. manga_chapters total matches annual target ±5%
+#   2. Each series gets consistent chapter pacing per its plan
+#   3. Topic diversity: diversity_guards.yaml max 30% per topic enforced
+#      across the weighted chapter count, not just title count
+
+projection_integration:
+  manga_chapters_split_method: round_robin_active_series
+  respect_diversity_guards: true
+  max_topic_pct_of_weekly_chapters: 0.30
+  dormant_series_receives_zero_chapters: true
+  new_series_launch_burst: 2         # 2 chapters in launch week (mirrors projection_planner.py)

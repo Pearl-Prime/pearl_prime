@@ -1,0 +1,208 @@
+schema_version: 1
+projection_year: 2026
+projection_start_week: W15
+
+global_defaults:
+  format_mix:
+    series_books: 0.35
+    standalone_books: 0.20
+    micro_books: 0.15
+    manga_chapters: 0.10
+    podcast_episodes: 0.10
+    format_variations: 0.05
+    video_audiobooks: 0.05
+
+  duration_mix:
+    five_min_practice: 0.15
+    pocket_guide: 0.25
+    daily_companion: 0.20
+    standard_book: 0.25
+    deep_dive: 0.15
+
+  annual_titles_per_brand: 780
+  annual_series_per_brand: 12
+  max_series_length: 8
+
+  blended_asp: 6.25
+  conversion_rate: 0.025
+
+lanes:
+  english_global:
+    format_mix:
+      series_books: 0.35
+      standalone_books: 0.25
+      micro_books: 0.15
+      manga_chapters: 0.05
+      podcast_episodes: 0.10
+      format_variations: 0.05
+      video_audiobooks: 0.05
+    seasonal_weights:
+      Q1: 1.15
+      Q2: 0.95
+      Q3: 0.85
+      Q4: 1.05
+
+  dach:
+    format_mix:
+      series_books: 0.30
+      standalone_books: 0.25
+      micro_books: 0.20
+      manga_chapters: 0.05
+      podcast_episodes: 0.10
+      format_variations: 0.05
+      video_audiobooks: 0.05
+    seasonal_weights:
+      Q1: 1.10
+      Q2: 1.00
+      Q3: 0.80
+      Q4: 1.10
+
+  france:
+    format_mix:
+      series_books: 0.30
+      standalone_books: 0.25
+      micro_books: 0.15
+      manga_chapters: 0.10
+      podcast_episodes: 0.10
+      format_variations: 0.05
+      video_audiobooks: 0.05
+    seasonal_weights:
+      Q1: 1.05
+      Q2: 1.00
+      Q3: 0.80
+      Q4: 1.15
+
+  spain:
+    format_mix:
+      series_books: 0.30
+      standalone_books: 0.20
+      micro_books: 0.15
+      manga_chapters: 0.08
+      podcast_episodes: 0.17
+      format_variations: 0.05
+      video_audiobooks: 0.05
+    seasonal_weights:
+      Q1: 1.05
+      Q2: 1.00
+      Q3: 0.80
+      Q4: 1.15
+
+  italy:
+    format_mix:
+      series_books: 0.30
+      standalone_books: 0.25
+      micro_books: 0.15
+      manga_chapters: 0.08
+      podcast_episodes: 0.12
+      format_variations: 0.05
+      video_audiobooks: 0.05
+    seasonal_weights:
+      Q1: 1.05
+      Q2: 1.00
+      Q3: 0.80
+      Q4: 1.15
+
+  latam:
+    format_mix:
+      series_books: 0.30
+      standalone_books: 0.20
+      micro_books: 0.15
+      manga_chapters: 0.08
+      podcast_episodes: 0.17
+      format_variations: 0.05
+      video_audiobooks: 0.05
+    seasonal_weights:
+      Q1: 1.00
+      Q2: 1.00
+      Q3: 0.95
+      Q4: 1.05
+
+  brazil:
+    format_mix:
+      series_books: 0.30
+      standalone_books: 0.20
+      micro_books: 0.15
+      manga_chapters: 0.08
+      podcast_episodes: 0.17
+      format_variations: 0.05
+      video_audiobooks: 0.05
+    seasonal_weights:
+      Q1: 1.00
+      Q2: 1.00
+      Q3: 0.95
+      Q4: 1.05
+
+  japan:
+    format_mix:
+      series_books: 0.25
+      standalone_books: 0.15
+      micro_books: 0.10
+      manga_chapters: 0.25
+      podcast_episodes: 0.10
+      format_variations: 0.05
+      video_audiobooks: 0.10
+    seasonal_weights:
+      Q1: 1.10
+      Q2: 1.00
+      Q3: 0.85
+      Q4: 1.05
+
+  korea:
+    format_mix:
+      series_books: 0.25
+      standalone_books: 0.15
+      micro_books: 0.10
+      manga_chapters: 0.20
+      podcast_episodes: 0.15
+      format_variations: 0.05
+      video_audiobooks: 0.10
+    seasonal_weights:
+      Q1: 1.10
+      Q2: 1.00
+      Q3: 0.85
+      Q4: 1.05
+
+  taiwan:
+    format_mix:
+      series_books: 0.25
+      standalone_books: 0.15
+      micro_books: 0.10
+      manga_chapters: 0.20
+      podcast_episodes: 0.10
+      format_variations: 0.05
+      video_audiobooks: 0.15
+    seasonal_weights:
+      Q1: 1.05
+      Q2: 1.00
+      Q3: 0.90
+      Q4: 1.05
+
+  china:
+    format_mix:
+      series_books: 0.30
+      standalone_books: 0.15
+      micro_books: 0.15
+      manga_chapters: 0.15
+      podcast_episodes: 0.15
+      format_variations: 0.05
+      video_audiobooks: 0.05
+    seasonal_weights:
+      Q1: 1.15
+      Q2: 0.90
+      Q3: 0.85
+      Q4: 1.10
+
+  hungary:
+    format_mix:
+      series_books: 0.35
+      standalone_books: 0.25
+      micro_books: 0.20
+      manga_chapters: 0.03
+      podcast_episodes: 0.10
+      format_variations: 0.05
+      video_audiobooks: 0.02
+    seasonal_weights:
+      Q1: 1.10
+      Q2: 1.00
+      Q3: 0.80
+      Q4: 1.10

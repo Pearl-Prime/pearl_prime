@@ -32,6 +32,10 @@ final class ScriptRunner: ObservableObject {
         "scripts/systems_test/run_systems_test.py",
         "scripts/audiobook_script/run_comparator_loop.py",
         "pearl_news/pipeline/run_article_pipeline.py",
+        "scripts/catalog/projection_planner.py",
+        "scripts/catalog/revenue_projector.py",
+        "scripts/catalog/marketing_feedback_adjuster.py",
+        "scripts/catalog/dump_manga_series_plan_json.py",
     ]
 
     /// Allowed executable for running Python scripts.

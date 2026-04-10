@@ -254,6 +254,40 @@ final class ArtifactReader {
         return sub.filter { $0.hasSuffix(".yaml") || $0.hasSuffix(".yml") }.sorted()
     }
 
+    // MARK: - Projections
+
+    /// Load revenue_forecast_{year}.json from artifacts/projections/.
+    func loadRevenueForecast(repoPath: String, year: Int = 2026) -> RevenueForecast? {
+        let path = repoURL(repoPath: repoPath)
+            .appendingPathComponent("artifacts/projections/revenue_forecast_\(year).json")
+        guard let data = try? Data(contentsOf: path) else { return nil }
+        return try? JSONDecoder().decode(RevenueForecast.self, from: data)
+    }
+
+    /// Scan artifacts/projections/ for all per-brand plan JSON files (not revenue_forecast).
+    func projectionPlanCount(repoPath: String, year: Int = 2026) -> Int {
+        let dir = repoURL(repoPath: repoPath).appendingPathComponent("artifacts/projections")
+        guard let contents = try? fileManager.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) else { return 0 }
+        return contents.filter {
+            $0.pathExtension == "json"
+            && !$0.lastPathComponent.hasPrefix("revenue_forecast")
+            && !$0.lastPathComponent.hasPrefix("adjustment_log")
+            && $0.lastPathComponent.hasSuffix("_\(year).json")
+        }.count
+    }
+
+    // MARK: - Manga Series Plan
+
+    /// Load manga series plan via dump_manga_series_plan_json.py → [MangaBrandPlan].
+    func loadMangaSeriesPlan(repoPath: String) -> [MangaBrandPlan] {
+        guard let data = runPythonScriptCaptureStdout(
+            repoPath: repoPath,
+            script: "scripts/catalog/dump_manga_series_plan_json.py",
+            arguments: []
+        ) else { return [] }
+        return (try? JSONDecoder().decode([MangaBrandPlan].self, from: data)) ?? []
+    }
+
     private func modDateDesc(_ a: URL, _ b: URL) -> Bool {
         let da = (try? a.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast
         let db = (try? b.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast

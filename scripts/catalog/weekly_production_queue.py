@@ -76,6 +76,74 @@ def load_weekly_queue_config() -> dict:
     raise FileNotFoundError("weekly_queue_config.yaml not found")
 
 
+def get_weekly_plan(brand_id: str, lane: str, week_id: str, year: int = 2026) -> Optional[dict]:
+    """
+    Read the projected weekly production plan for a brand/lane/week from the
+    rolling 12-month projection system (artifacts/projections/).
+
+    Returns the 'planned' dict {format: quantity} for the given week,
+    or None if no projection file exists (caller falls back to flat config mix).
+
+    Example return:
+        {"series_books": 5, "standalone_books": 4, "micro_books": 2,
+         "manga_chapters": 2, "podcast_episodes": 1, "format_variations": 1}
+    """
+    projection_path = REPO_ROOT / "artifacts" / "projections" / f"{brand_id}_{lane}_{year}.json"
+    if not projection_path.exists():
+        return None
+    try:
+        with open(projection_path, "r", encoding="utf-8") as fh:
+            projection = json.load(fh)
+        for w in projection.get("weeks", []):
+            if w.get("week") == week_id:
+                return w.get("planned")
+    except Exception:
+        pass
+    return None
+
+
+def _lane_id_to_projection_lane(lane_id: str) -> str:
+    """
+    Map legacy lane_id values (e.g. 'en_US', 'ja_JP') to projection lane keys
+    (e.g. 'english_global', 'japan') used in annual_projection_targets.yaml.
+    """
+    _mapping = {
+        "en_US": "english_global",
+        "en_GB": "english_global",
+        "en_AU": "english_global",
+        "de_DE": "dach",
+        "de_AT": "dach",
+        "de_CH": "dach",
+        "fr_FR": "france",
+        "es_ES": "spain",
+        "es_MX": "latam",
+        "es_CO": "latam",
+        "es_AR": "latam",
+        "pt_BR": "brazil",
+        "ja_JP": "japan",
+        "ko_KR": "korea",
+        "zh_TW": "taiwan",
+        "zh_HK": "taiwan",
+        "zh_CN": "china",
+        "hu_HU": "hungary",
+        "it_IT": "italy",
+        # Projection lane keys pass through unchanged
+        "english_global": "english_global",
+        "dach": "dach",
+        "france": "france",
+        "spain": "spain",
+        "italy": "italy",
+        "latam": "latam",
+        "brazil": "brazil",
+        "japan": "japan",
+        "korea": "korea",
+        "taiwan": "taiwan",
+        "china": "china",
+        "hungary": "hungary",
+    }
+    return _mapping.get(lane_id, lane_id)
+
+
 def load_catalog_config() -> dict:
     for root in [REPO_ROOT, _CONFIG_ROOT]:
         p = root / "config/catalog/catalog_generation_config.yaml"
@@ -978,23 +1046,40 @@ def generate_weekly_queue(brand_id: str, brand: dict, week_id: str,
     """
     target = queue_cfg.get("titles_per_brand_per_week", 15)
     lane_id = brand.get("lane_id", "en_US")
+    projection_lane = _lane_id_to_projection_lane(lane_id)
 
-    # Check for lane-specific weekly mix (manga-primary for JP)
-    lane_mix = queue_cfg.get("lane_weekly_mix", {}).get(lane_id)
-    if lane_mix:
-        # JP manga-primary mix
-        n_series = lane_mix.get("manga_series_installments", 3) + lane_mix.get("ebook_series_installments", 1)
-        n_strong_standalone = lane_mix.get("manga_standalone", 3) + lane_mix.get("ebook_standalone", 3)
-        n_strong_micro = lane_mix.get("manga_micro", 2) + lane_mix.get("ebook_micro", 1)
-        n_viable_standalone = 0  # all slots used by manga+ebook split
-        n_format_var = lane_mix.get("format_variations", 2)
+    # --- PROJECTION SYSTEM: read per-brand 52-week plan if available ---
+    projection_plan = get_weekly_plan(brand_id, projection_lane, week_id)
+    if projection_plan:
+        # Map projection format keys → queue slot counts
+        # Projection formats: series_books, standalone_books, micro_books,
+        #   manga_chapters, podcast_episodes, format_variations, video_audiobooks
+        n_series = projection_plan.get("series_books", 2) + projection_plan.get("manga_chapters", 0)
+        n_strong_standalone = projection_plan.get("standalone_books", 5)
+        n_strong_micro = projection_plan.get("micro_books", 3)
+        n_viable_standalone = max(0, target - n_series - n_strong_standalone - n_strong_micro
+                                  - projection_plan.get("format_variations", 2)
+                                  - projection_plan.get("podcast_episodes", 0))
+        n_format_var = projection_plan.get("format_variations", 2)
+        # Recalculate target from projection (may differ from flat 15)
+        target = sum(projection_plan.values())
     else:
-        mix = queue_cfg.get("weekly_mix", {})
-        n_series = mix.get("series_installments", 2)
-        n_strong_standalone = mix.get("strong_standalones", 5)
-        n_strong_micro = mix.get("strong_micros", 3)
-        n_viable_standalone = mix.get("viable_standalones", 3)
-        n_format_var = mix.get("format_variations", 2)
+        # Fallback: use flat config mix (original behavior preserved)
+        lane_mix = queue_cfg.get("lane_weekly_mix", {}).get(lane_id)
+        if lane_mix:
+            # JP manga-primary mix
+            n_series = lane_mix.get("manga_series_installments", 3) + lane_mix.get("ebook_series_installments", 1)
+            n_strong_standalone = lane_mix.get("manga_standalone", 3) + lane_mix.get("ebook_standalone", 3)
+            n_strong_micro = lane_mix.get("manga_micro", 2) + lane_mix.get("ebook_micro", 1)
+            n_viable_standalone = 0  # all slots used by manga+ebook split
+            n_format_var = lane_mix.get("format_variations", 2)
+        else:
+            mix = queue_cfg.get("weekly_mix", {})
+            n_series = mix.get("series_installments", 2)
+            n_strong_standalone = mix.get("strong_standalones", 5)
+            n_strong_micro = mix.get("strong_micros", 3)
+            n_viable_standalone = mix.get("viable_standalones", 3)
+            n_format_var = mix.get("format_variations", 2)
 
     strong_configs, viable_configs = get_brand_valid_configs(brand, queue_cfg)
 
