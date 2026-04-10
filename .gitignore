@@ -62,6 +62,18 @@ artifacts/onboarding_audio/_ffmpeg_concat_list.txt
 # CosyVoice2 reference clips (local extraction; regenerate from voice_clone_reference_library.yaml)
 assets/tts/reference_clips/
 
+# Root cleanup archive (local safety net — not tracked)
+archive/root_cleanup_2026_04_10/
+
+# Node modules (all projects)
+node_modules/
+
+# OS images and packages (never commit — see pearl_star/ incident)
+*.iso
+*.deb
+*.rpm
+pearl_star/
+
 # Published copies for Pages (optional local deploy bundle)
 brand-wizard-app/public/onboarding/audio/*.mp3
 anxiety_hack/section-0001.mp3
