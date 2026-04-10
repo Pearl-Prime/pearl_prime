@@ -66,3 +66,11 @@ Optional: `--teacher`, `--render-book`, `--render-dir`, `--generate-freebies`, l
 ## If validation fails
 
 Read STDERR gate names (chapter flow, book pass, bestseller craft, scene anti-genericity). Fix atoms/registry coverage or arc alignment; re-run with the same `--workspace` so `job.json` tracks the run.
+
+---
+
+## Cover packaging (EPUB embed vs storefront)
+
+- **EPUB embed:** `scripts/release/build_epub.py` calls `ebooklib` `set_cover` and also adds a cover XHTML page. When **Pillow** is installed, the embed is **normalized to 1600×2560** (KDP’s stated ideal height × width ratio 1.6:1) via letterboxing, so square source PNGs in `artifacts/pipeline_examples/` do not produce non-portrait interior covers. Use `--raw-cover` only if you must preserve exact source pixels inside the package.
+- **Separate storefront image:** Distributors still expect you to upload a cover in their UI (or as `*_frontcover.*` alongside bulk_EPUB per Google). Use production PNG/JPEG at platform specs — see [artifacts/release/COVER_PACKAGING_PLATFORM_AUDIT_2026_04_10.md](../artifacts/release/COVER_PACKAGING_PLATFORM_AUDIT_2026_04_10.md). **`generate_bestseller_covers.py`** and the audiobook showcase’s `cover_*_ebook.png` (1600×2560) are suitable storefront sources; **do not** reuse the square audiobook master for Kindle ebooks.
+- **KDP cover upload format:** Amazon’s help lists **JPEG or TIFF** for the *cover image file* you upload to KDP; keep a high-quality JPEG export for that field even when the EPUB embed is PNG ([KDP — eBook cover criteria](https://kdp.amazon.com/en_US/help/topic/G200645690)).

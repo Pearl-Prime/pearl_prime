@@ -60,3 +60,13 @@ PYTHONPATH=. python3 scripts/audiobook/generate_showcase_bundle.py all \
 ```
 
 Use `--no-job-check` only for CI smoke tests.
+
+---
+
+## Cover packaging (audiobook ≠ ebook)
+
+- **`covers` / `covers-catalog`:** Writes **square** `cover_*_audiobook.png` (3200×3200) and portrait **`cover_*_ebook.png` (1600×2560)** under `brand-wizard-app/public/assets/covers/audiobook/` — distinct roles; do not substitute one for the other.
+- **Manifest:** `manifest.json` includes `cover_audiobook_rel`, `cover_ebook_storefront_rel`, and `cover_role_notes` for upload routing.
+- **Distributors:** Google Play audiobooks want 1:1 covers (2400² recommended; min 1024). Voices by INaudio / Findaway-style specs require **square**, **minimum 2400×2400**, no letterboxing ([Cover art technical requirements](https://voicessupport.inaudio.com/en/articles/3219584)). ACX/Audible expectations are summarized in Amazon’s [Official Audible Cover Art Requirements (PDF)](https://images-na.ssl-images-amazon.com/images/G/01/Audible/en_US/acx/pdf/OfficialAudibleCover-ArtRequirements.pdf) — typically **2400×2400** RGB **JPG**; export from our PNG master as needed.
+- **Showcase badge:** Generated audiobook covers include an “AUDIOBOOK” ribbon for internal/teach marketing. Some distributors’ art rules discourage format callouts on cover art; use an unbadged variant for those uploads (manual or future script flag).
+- Canonical matrix: [artifacts/release/COVER_PACKAGING_PLATFORM_AUDIT_2026_04_10.md](../artifacts/release/COVER_PACKAGING_PLATFORM_AUDIT_2026_04_10.md).

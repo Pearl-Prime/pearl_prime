@@ -834,6 +834,11 @@ def build_manifest_rows() -> None:
                 "audio_rel": f"artifacts/audiobook_samples/{tid}_{topic}_ch1.mp3" if mp3.exists() else None,
                 "prose_rel": str(pr.relative_to(REPO_ROOT)) if pr.exists() else None,
                 "cover_audiobook_rel": f"brand-wizard-app/public/assets/covers/audiobook/cover_{tid}_{topic}_audiobook.png",
+                "cover_ebook_storefront_rel": f"brand-wizard-app/public/assets/covers/audiobook/cover_{tid}_{topic}_ebook.png",
+                "cover_role_notes": {
+                    "audiobook_square_png": "3200×3200; use for Google Play auto-narrated (1:1, 2400² recommended) and similar; ACX/Audible typically require 2400×2400 RGB JPG — export from this PNG.",
+                    "ebook_storefront_png": "1600×2560; KDP/Google/Apple storefront or optional *_frontcover companion; EPUB embed is normalized to this portrait in scripts/release/build_epub.py when Pillow is installed.",
+                },
                 "n_pen_name_authors_repo": n_authors,
                 "ecapa_pairwise_max_repo": round(ecapa_max, 4),
             }

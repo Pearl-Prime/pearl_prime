@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import logging
 import re
@@ -33,6 +34,10 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+# KDP ideal embedded / storefront portrait (height × width per Amazon Help G200645690)
+_EBOOK_COVER_W = 1600
+_EBOOK_COVER_H = 2560
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
@@ -168,6 +173,55 @@ p { margin-bottom: 1em; text-indent: 0; }
 """
 
 
+def prepare_embedded_ebook_cover(cover_path: Path, *, raw: bool = False) -> tuple[bytes, str]:
+    """Bytes + media-type for EPUB cover item.
+
+    When Pillow is available and ``raw`` is False, image is letterboxed to
+    :data:`_EBOOK_COVER_W` × :data:`_EBOOK_COVER_H` (1.6:1) so square or odd
+    storefront crops do not produce non-portrait EPUB embeds that fail common
+    distributor guidance. Output is always PNG for a single predictable spine item.
+    """
+    ext = cover_path.suffix.lower()
+    src_type = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}.get(ext, "image/png")
+    raw_bytes = cover_path.read_bytes()
+    if raw:
+        return raw_bytes, src_type
+    try:
+        from PIL import Image
+    except ImportError:
+        logger.warning(
+            "Pillow not installed; embedding %s without resize. Install Pillow for KDP-portrait-normalization.",
+            cover_path,
+        )
+        return raw_bytes, src_type
+
+    img = Image.open(io.BytesIO(raw_bytes)).convert("RGB")
+    w, h = img.size
+    tw, th = _EBOOK_COVER_W, _EBOOK_COVER_H
+    if abs(w - tw) <= 2 and abs(h - th) <= 2:
+        out = img
+    else:
+        scale = min(tw / w, th / h)
+        nw, nh = max(1, int(w * scale)), max(1, int(h * scale))
+        resized = img.resize((nw, nh), Image.Resampling.LANCZOS)
+        canvas = Image.new("RGB", (tw, th), (245, 245, 245))
+        x0 = (tw - nw) // 2
+        y0 = (th - nh) // 2
+        canvas.paste(resized, (x0, y0))
+        out = canvas
+        logger.info(
+            "Normalized EPUB cover %s from %d×%d → %d×%d (portrait embed).",
+            cover_path,
+            w,
+            h,
+            tw,
+            th,
+        )
+    buf = io.BytesIO()
+    out.save(buf, format="PNG", optimize=True)
+    return buf.getvalue(), "image/png"
+
+
 def text_to_html(text: str) -> str:
     """Convert plain text to simple HTML paragraphs."""
     paragraphs = text.split("\n\n")
@@ -195,6 +249,7 @@ def build_epub(
     cover_path: Path | None = None,
     output_path: Path,
     topic: str = "",
+    raw_cover: bool = False,
 ) -> Path:
     """Build a KDP-ready EPUB 3 from a book text file."""
     text = input_path.read_text(encoding="utf-8")
@@ -214,7 +269,7 @@ def build_epub(
 
     book.add_metadata("DC", "publisher", publisher)
     book.add_metadata("DC", "description",
-        f"{subtitle}. A therapeutic audiobook by {author}, published by {publisher}. "
+        f"{subtitle}. A therapeutic book by {author}, published by {publisher}. "
         f"Part of the Phoenix Omega series.")
     book.add_metadata("DC", "subject", topic.replace("_", " ").title())
     book.add_metadata("DC", "date", datetime.now(timezone.utc).strftime("%Y-%m-%d"))
@@ -224,11 +279,9 @@ def build_epub(
         "Text generated with AI assistance (Claude by Anthropic). "
         "All content reviewed and curated by human editors.")
 
-    # ── Cover ──
+    # ── Cover (embedded; storefront upload still uses separate file in distributor UI / our PNG exports) ──
     if cover_path and cover_path.exists():
-        cover_data = cover_path.read_bytes()
-        ext = cover_path.suffix.lower()
-        media_type = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}.get(ext, "image/png")
+        cover_data, _media_type = prepare_embedded_ebook_cover(cover_path, raw=raw_cover)
         book.set_cover("cover.png", cover_data, create_page=True)
 
     # ── Stylesheet ──
@@ -304,7 +357,7 @@ def build_epub(
 
 # ─── BATCH MODE ───────────────────────────────────────────────────────
 
-def build_all(dry_run: bool = False) -> list[dict[str, Any]]:
+def build_all(dry_run: bool = False, raw_cover: bool = False) -> list[dict[str, Any]]:
     """Build EPUBs for all 13 teacher books."""
     examples_dir = REPO_ROOT / "artifacts" / "pipeline_examples"
     epub_dir = REPO_ROOT / "artifacts" / "epub"
@@ -339,6 +392,7 @@ def build_all(dry_run: bool = False) -> list[dict[str, Any]]:
                 cover_path=cover_path if cover_path.exists() else None,
                 output_path=output_path,
                 topic=topic,
+                raw_cover=raw_cover,
             )
             size = path.stat().st_size
             print(f"  ✓ [{tid}] {book['title']} → {path.name} ({size:,} bytes)")
@@ -368,12 +422,17 @@ def main():
     parser.add_argument("--topic", default="", help="Topic for metadata")
     parser.add_argument("--batch", action="store_true", help="Build all 13 teacher books")
     parser.add_argument("--dry-run", action="store_true", help="Show what would be built")
+    parser.add_argument(
+        "--raw-cover",
+        action="store_true",
+        help="Embed the source cover file as-is (skip 1600×2560 letterbox normalization)",
+    )
 
     args = parser.parse_args()
 
     if args.batch:
         print(f"=== EPUB BATCH BUILD — {len(TEACHER_BOOKS)} BOOKS ===\n")
-        results = build_all(dry_run=args.dry_run)
+        results = build_all(dry_run=args.dry_run, raw_cover=args.raw_cover)
         ok = sum(1 for r in results if r["status"] == "ok")
         print(f"\n{'DRY-RUN: ' if args.dry_run else ''}{ok}/{len(results)} built")
         return
@@ -391,6 +450,7 @@ def main():
         cover_path=args.cover,
         output_path=args.output or Path(f"{args.input.stem}.epub"),
         topic=args.topic,
+        raw_cover=args.raw_cover,
     )
 
 
