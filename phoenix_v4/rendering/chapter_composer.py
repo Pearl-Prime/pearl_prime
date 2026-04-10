@@ -756,3 +756,33 @@ def compose_chapter_prose(
             pass
 
     return composed
+
+
+def compose_from_enriched_book(
+    enriched: "EnrichedBook",
+    quality_profile: str = "draft",
+) -> str:
+    """
+    Render an EnrichedBook to prose text.
+
+    New pipeline path:
+      Spine → Knobs → Beatmap → Enrichment → this → BookRender.
+
+    The legacy path (assembly_compiler → compose_chapter_prose) is unchanged.
+    Pilot behavior: concatenate slot bodies in beatmap order; skip visible gaps.
+
+    Args:
+        enriched: Output of phoenix_v4.planning.enrichment_select.select_enrichment
+        quality_profile: Reserved for future quality-specific polishing (unused in pilot).
+    """
+    del quality_profile  # pilot — reserved
+
+    chapters_prose: list[str] = []
+    for ch in enriched.chapters:
+        chapter_text = f"Chapter {ch.number}\n{ch.working_title}\n\n"
+        for slot in ch.slots:
+            if slot.content and not slot.content.startswith("[CONTENT GAP"):
+                chapter_text += slot.content + "\n\n"
+        chapters_prose.append(chapter_text.rstrip())
+
+    return "\n\n".join(chapters_prose)

@@ -1,0 +1,718 @@
+{
+  "schema_version": 1,
+  "stage": "enrichment_select",
+  "topic": "anxiety",
+  "teacher_id": "ahjan",
+  "persona_id": "gen_z_professionals",
+  "runtime_format": "standard_book",
+  "total_words": 2413,
+  "enrichment_audit": {
+    "total_slots": 51,
+    "slots_from_teacher": 27,
+    "slots_from_persona": 12,
+    "slots_from_registry": 12,
+    "slots_from_practice_library": 0,
+    "practice_library_warnings": 0,
+    "slots_empty": 0,
+    "total_words": 2413,
+    "total_target_words": 9996,
+    "gap_details": [],
+    "persona_id": "gen_z_professionals",
+    "teacher_id": "ahjan"
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "role": "recognition",
+      "working_title": "The Alarm That Won't Stop Ringing",
+      "thesis": "There is a part of you that is always scanning — and you've been so good at living inside that scan that you've mistaken it for just being the kind of person you are.\n",
+      "total_words": 184,
+      "source_breakdown": {
+        "teacher_atom": 2,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "The body knows truth that the mind argues about. When you place your attention\non breath, sensation, and presence, the thinking quiets. This is not escape. It is\nreturn.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_010",
+          "target_words": 278,
+          "actual_words": 29,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The kitchen light is fluorescent. The coffee machine finishes. Steam rises from the cup. {weather_detail} visible through the small window. Someone opens the refrigerator behind you. The seal sounds. You wrap both hands around the mug. The hallway outside is quiet. Your next meeting is in nine minutes. The mug is warm.",
+          "source": "persona_atom",
+          "source_id": "SCENE v06",
+          "target_words": 249,
+          "actual_words": 52,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Notice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried it? If you set it down right now, what\nwould be different? Not forever. Just for today. What changes when the story stops?",
+          "source": "registry",
+          "source_id": "ch01_sec05_reflection_f2",
+          "target_words": 167,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "teacher_voice"
+          ]
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Identify one belief you have about yourself that causes suffering. This week, assume\nit might not be entirely true. When the belief arises, notice it. Do not fight it.\nSimply hold it lightly and ask: is this actually true right now? Often the answer is\nno. Sometimes it is. Either way, you see the belief, not yourself.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_004",
+          "target_words": 139,
+          "actual_words": 57,
+          "enrichment_applied": [
+            "teacher_voice"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "role": "origin",
+      "working_title": "When The Alarm Made Sense",
+      "thesis": "The alarm didn't malfunction. It learned. At some point, staying alert was the correct strategy, and your nervous system became very, very good at it.\n",
+      "total_words": 183,
+      "source_breakdown": {
+        "teacher_atom": 2,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "The mind makes stories about itself all day long. These stories feel true because\nthey are familiar. You can learn to notice when a story is happening. This noticing\nis the beginning of change.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_003",
+          "target_words": 278,
+          "actual_words": 34,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your chair rolls back from the desk. You stand. Your back makes a sound. {street_name} is audible through the window. The ceiling is the same ceiling. You walk to the window and look out. {weather_detail} on the glass. A bus passes. Your reflection is faint in the glass. You stay there. Your phone is in your hand.",
+          "source": "persona_atom",
+          "source_id": "SCENE v09",
+          "target_words": 249,
+          "actual_words": 57,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Notice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried it? If you set it down right now, what\nwould be different? Not forever. Just for today. What changes when the story stops?",
+          "source": "registry",
+          "source_id": "ch02_sec03_reflection_f2",
+          "target_words": 167,
+          "actual_words": 46,
+          "enrichment_applied": []
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Pick one person in your life. This week, observe them without judgment. Notice\nthree things about them you never noticed before. Not to change them. Not to\nunderstand them better. Simply to see them. When you see another person clearly,\nlove grows naturally. Try this once.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_006",
+          "target_words": 139,
+          "actual_words": 46,
+          "enrichment_applied": []
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "role": "pattern_mapping",
+      "working_title": "The Pattern Running Your Nervous System",
+      "thesis": "The alarm does not run randomly. It runs a specific sequence — scan, flag, prepare, check — and once you can see the sequence, you can see where you are inside it at any moment.\n",
+      "total_words": 189,
+      "source_breakdown": {
+        "teacher_atom": 2,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Attachment grows in darkness. When you look directly at what you hold tight, you\nsee its fragility. This seeing is not cold. It is the beginning of freedom.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_006",
+          "target_words": 278,
+          "actual_words": 28,
+          "enrichment_applied": []
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "You are first on the call. The waiting room graphic rotates. {weather_detail} through your window. Your own face is in the corner of the screen. You look at it, then away. The room is quiet except the fan. {street_name} a floor below. Someone joins. Then two more. The call starts. You move your cursor off your own face.",
+          "source": "persona_atom",
+          "source_id": "SCENE v25",
+          "target_words": 249,
+          "actual_words": 58,
+          "enrichment_applied": []
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Where in your life do you run from what is difficult? Can you name one place where\nyou use busy-ness, distraction, or sleep to not feel something? Not to change it,\nbut to see it. What would happen if you stopped running for just five breaths?",
+          "source": "registry",
+          "source_id": "ch03_sec03_reflection_f1",
+          "target_words": 167,
+          "actual_words": 46,
+          "enrichment_applied": []
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, when you notice a strong emotion, ask: where is this in my body? Feel\ninto it without trying to change it. The emotion will likely shift. Not because you\nfought it, but because you felt it. Do this once. Document what happens. This is how\nyou learn that emotions are not solid. They are movement.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_008",
+          "target_words": 139,
+          "actual_words": 57,
+          "enrichment_applied": []
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "role": "mechanism",
+      "working_title": "What The Alarm Actually Does To Your Body",
+      "thesis": "The sensations you experience when the alarm runs — the tightness, the racing, the inability to think straight — are not signs that something is going wrong. They are the alarm doing exactly what it was designed to do.\n",
+      "total_words": 185,
+      "source_breakdown": {
+        "teacher_atom": 2,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Love and hate both arise from the same source in the mind. Neither is permanent.\nWhat changes them is not resistance, but clear seeing. This is why contemplation\nworks where force does not.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_009",
+          "target_words": 278,
+          "actual_words": 33,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "You are first on the call. The waiting room graphic rotates. {weather_detail} through your window. Your own face is in the corner of the screen. You look at it, then away. The room is quiet except the fan. {street_name} a floor below. Someone joins. Then two more. The call starts. You move your cursor off your own face.",
+          "source": "persona_atom",
+          "source_id": "SCENE v25",
+          "target_words": 249,
+          "actual_words": 58,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Notice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried it? If you set it down right now, what\nwould be different? Not forever. Just for today. What changes when the story stops?",
+          "source": "registry",
+          "source_id": "ch04_sec03_reflection_f2",
+          "target_words": 167,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "teacher_voice"
+          ]
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Choose one daily activity. Eating, walking, washing. Do it with full attention one\ntime this week. Notice the details. The texture. The temperature. The sensation.\nLet thoughts pass without following them. This is meditation embedded in life. You\ndon't need a cushion. You only need to pay attention.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_003",
+          "target_words": 139,
+          "actual_words": 48,
+          "enrichment_applied": [
+            "teacher_voice"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "role": "cost_exposure",
+      "working_title": "What Living On Alert Actually Costs",
+      "thesis": "The alarm has a fee. Staying alert full-time is not free, and the cost is not just exhaustion — it is a narrowed life, a shortened present, a set of decisions made by the alarm rather than by you.\n",
+      "total_words": 265,
+      "source_breakdown": {
+        "teacher_atom": 3,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Your thoughts are not facts about the world. They are the mind's habit. Once you\nsee this, your relationship to thinking changes. The same thought can pass through\nwithout catching you.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_008",
+          "target_words": 241,
+          "actual_words": 31,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The conference room is cold. Your hands rest on the table. Someone's laptop fan runs loud. {weather_detail} through the window behind the presenter. Your pen is in your hand. The slide changes. Your chair is slightly too low. {street_name} traffic is audible through the glass. Your pen has not moved.",
+          "source": "persona_atom",
+          "source_id": "SCENE v03",
+          "target_words": 217,
+          "actual_words": 50,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "What are you attached to that you pretend you are not? Look at it without judgment.\nWhy do you grip it? Is the thing itself the problem, or the story you built around\nhaving it? Can you hold it lightly and still have it? What happens then?",
+          "source": "registry",
+          "source_id": "ch05_sec03_reflection_f3",
+          "target_words": 145,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "teacher_voice"
+          ]
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "In this discourse, we propose a more profound definition of meditation: \"Meditation is stopping thought.\"The Essence of Meditation: Stopping ThoughtMeditation, at its core, is about transcending the incessant chatter of the mind. Imagine your mind as a clear lake with a treasure, represented by gold, hidden at its bottom. Thoughts are like waves on the surface of this lake. As long as these waves persist, the treasure remains obscured from view. The conventional approach to meditation often involves calming the waves slightly to catch glimpses of the treasure's reflection.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_046_mined",
+          "target_words": 109,
+          "actual_words": 89,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ]
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Sit quietly for five minutes. Do nothing. Fix nothing. Change nothing. When your\nmind pulls away, bring attention back. This is the entire practice. Five minutes.\nOne time this week. That is your integration. The rest of the week, continue as\nyou normally do. Notice if anything shifts.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_002",
+          "target_words": 121,
+          "actual_words": 48,
+          "enrichment_applied": [
+            "teacher_voice"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "role": "destabilization",
+      "working_title": "Letting The Alarm Ring",
+      "thesis": "Every strategy you've used to manage the alarm — avoiding, preparing, checking, reassurance-seeking — has kept the alarm in charge. The alarm doesn't go quiet because you've satisfied it. It goes quiet because nothing confirmed the threat. The only way to teach the alarm is to let it run.\n",
+      "total_words": 194,
+      "source_breakdown": {
+        "teacher_atom": 2,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "The teachings are not about becoming someone better. They are about seeing who you\nalready are when the noise stops. When you sit with this, the noise does stop. Not\nforever, but long enough to notice what remains.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_005",
+          "target_words": 278,
+          "actual_words": 38,
+          "enrichment_applied": []
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Your manager's door is open. You knock on the frame. They look up. You have a question prepared. {weather_detail} through the window behind their desk. The chair across from them is empty. They gesture toward it. You sit. The chair is lower than theirs. {street_name} is audible from here too. You ask the question.",
+          "source": "persona_atom",
+          "source_id": "SCENE v21",
+          "target_words": 249,
+          "actual_words": 54,
+          "enrichment_applied": []
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "What are you attached to that you pretend you are not? Look at it without judgment.\nWhy do you grip it? Is the thing itself the problem, or the story you built around\nhaving it? Can you hold it lightly and still have it? What happens then?",
+          "source": "registry",
+          "source_id": "ch06_sec03_reflection_f3",
+          "target_words": 167,
+          "actual_words": 47,
+          "enrichment_applied": []
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Write down one thing you hold tightly. One thing you are afraid of losing. This\nweek, practice releasing it mentally each morning. Not forever. Just for that day.\nFeel the freedom in release. At day's end, pick it back up if you choose. Notice\nthe pattern. Notice what happens when you are not always gripping.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_007",
+          "target_words": 139,
+          "actual_words": 55,
+          "enrichment_applied": []
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "role": "practical_interruption",
+      "working_title": "Small Exposures",
+      "thesis": "You do not have to start where the alarm is loudest. You start where the alarm is a seven, and you let it run, and you find out what actually happens.\n",
+      "total_words": 271,
+      "source_breakdown": {
+        "teacher_atom": 3,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Your thoughts are not facts about the world. They are the mind's habit. Once you\nsee this, your relationship to thinking changes. The same thought can pass through\nwithout catching you.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_008",
+          "target_words": 241,
+          "actual_words": 31,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Headphones on. The {transit_line} moves. Your playlist is the same playlist. {weather_detail} on the glass beside your face. The car is full. Someone's bag presses your arm. You shift left. The track curves. Your body leans with it. The next station name plays through the speaker. Three more stops.",
+          "source": "persona_atom",
+          "source_id": "SCENE v07",
+          "target_words": 217,
+          "actual_words": 49,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Where in your life do you run from what is difficult? Can you name one place where\nyou use busy-ness, distraction, or sleep to not feel something? Not to change it,\nbut to see it. What would happen if you stopped running for just five breaths?",
+          "source": "registry",
+          "source_id": "ch07_sec06_reflection_f1",
+          "target_words": 145,
+          "actual_words": 46,
+          "enrichment_applied": [
+            "teacher_voice"
+          ]
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "Through regular meditation practice, we can cultivate a heightened sense of empathy and an unwavering commitment to selfless giving.Empowering GivingSelfless giving is not merely about giving for the sake of it; it is about giving in a way that genuinely benefits others and uplifts their lives. Choosing our actions wisely and ensuring they contribute positively to others' well-being adds depth and meaning to our giving.Empowering giving is about making a conscious effort to address the real needs of others. It involves actively listening and empathizing with their struggles and challenges.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_035_mined",
+          "target_words": 109,
+          "actual_words": 90,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ]
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Write down one thing you hold tightly. One thing you are afraid of losing. This\nweek, practice releasing it mentally each morning. Not forever. Just for that day.\nFeel the freedom in release. At day's end, pick it back up if you choose. Notice\nthe pattern. Notice what happens when you are not always gripping.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_007",
+          "target_words": 121,
+          "actual_words": 55,
+          "enrichment_applied": [
+            "teacher_voice"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "role": "practice_under_pressure",
+      "working_title": "When The Alarm Screams",
+      "thesis": "There are moments when the alarm does not run at a manageable level. It screams. You can still stay present in those moments. Not comfortably — but present.\n",
+      "total_words": 177,
+      "source_breakdown": {
+        "teacher_atom": 2,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Every person carries the capacity for awakening. This capacity is not earned or\ngiven by another. It exists in you now. The work is simply to remove what covers it.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_011",
+          "target_words": 278,
+          "actual_words": 30,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Headphones on. The {transit_line} moves. Your playlist is the same playlist. {weather_detail} on the glass beside your face. The car is full. Someone's bag presses your arm. You shift left. The track curves. Your body leans with it. The next station name plays through the speaker. Three more stops.",
+          "source": "persona_atom",
+          "source_id": "SCENE v07",
+          "target_words": 249,
+          "actual_words": 49,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Where in your life do you run from what is difficult? Can you name one place where\nyou use busy-ness, distraction, or sleep to not feel something? Not to change it,\nbut to see it. What would happen if you stopped running for just five breaths?",
+          "source": "registry",
+          "source_id": "ch08_sec06_reflection_f1",
+          "target_words": 167,
+          "actual_words": 46,
+          "enrichment_applied": []
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, practice returning. When you lose presence, return to the breath. When\nyou lose clarity, return to silence. When you lose ground, return to the body. The\npath is not about achieving something new. It is about returning to what is already\nhere. Do this daily. This is the whole practice.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_011",
+          "target_words": 139,
+          "actual_words": 52,
+          "enrichment_applied": []
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "role": "somatic_legitimacy",
+      "working_title": "When Your Body Learns It's Safe",
+      "thesis": "The alarm does not update through understanding. It updates through experience — specifically, through the repeated experience of the alarm running and the catastrophe not arriving. You are not teaching your mind new facts. You are teaching your nervous system a new prediction.\n",
+      "total_words": 179,
+      "source_breakdown": {
+        "teacher_atom": 2,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "The body knows truth that the mind argues about. When you place your attention\non breath, sensation, and presence, the thinking quiets. This is not escape. It is\nreturn.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_010",
+          "target_words": 252,
+          "actual_words": 29,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "You clock out at 5:58. The hallway empties fast. Someone holds the elevator. You take the stairs. {weather_detail} hits when the door opens. {street_name} is full of people moving in all directions. Your bag is on one shoulder. Your headphones are in. The music starts. The crosswalk signal counts down. You wait.",
+          "source": "persona_atom",
+          "source_id": "SCENE v17",
+          "target_words": 228,
+          "actual_words": 52,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Notice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried it? If you set it down right now, what\nwould be different? Not forever. Just for today. What changes when the story stops?",
+          "source": "registry",
+          "source_id": "ch09_sec03_reflection_f2",
+          "target_words": 227,
+          "actual_words": 46,
+          "enrichment_applied": []
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, take one action knowing that you might fail. Do it anyway. Not with\nbravado. Simply do it. Notice that failure does not destroy you. Notice that the\nfear was larger than the actual cost. Do this once. Let this become evidence that\nyou are capable of more than you thought.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_010",
+          "target_words": 126,
+          "actual_words": 52,
+          "enrichment_applied": []
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "role": "reframe",
+      "working_title": "When The Alarm Comes Back",
+      "thesis": "The alarm will return. Not because you failed, not because you haven't done the work, but because the nervous system is responsive. The return of the alarm is information, not relapse.\n",
+      "total_words": 220,
+      "source_breakdown": {
+        "teacher_atom": 3,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Most people believe enlightenment requires leaving the world behind. The Buddha\ntaught something different: the path moves through ordinary life, not away from it.\nNotice where you are right now. This moment contains everything you need to begin.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_000",
+          "target_words": 222,
+          "actual_words": 38,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "The presentation clicker is in your hand. The room is full. Someone coughs near the back. {weather_detail} visible through the high windows. You advance to the next slide. The projector hums. Your mouth is dry. You take a step left. The laser pointer appears on the slide. {street_name} is twenty stories down. The room is quiet.",
+          "source": "persona_atom",
+          "source_id": "SCENE v16",
+          "target_words": 200,
+          "actual_words": 56,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "Notice a thought that repeats itself in your mind. Follow it back. Who told you\nthis was true? How long have you carried it? If you set it down right now, what\nwould be different? Not forever. Just for today. What changes when the story stops?",
+          "source": "registry",
+          "source_id": "ch10_sec03_reflection_f2",
+          "target_words": 200,
+          "actual_words": 46,
+          "enrichment_applied": []
+        },
+        {
+          "slot_type": "EXERCISE",
+          "content": "By integrating these experiences into our daily lives and practicing meditation and mindfulness, we can attain spiritual purity and a deeper understanding of our true nature.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_EXERCISE_025_mined",
+          "target_words": 100,
+          "actual_words": 26,
+          "enrichment_applied": [
+            "somatic_exercise"
+          ]
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, return to one moment of clarity you have already had. Not a huge insight.\nA small one. Something you saw clearly without doubt. Sit with it. Remember what\nthat clarity felt like in your body. You have already accessed the capacity you need.\nYou have done this before. Begin again from there.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_000",
+          "target_words": 111,
+          "actual_words": 54,
+          "enrichment_applied": []
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "role": "identity_fracture",
+      "working_title": "Living With The Alarm On Low",
+      "thesis": "You are not going to become a person without an alarm. You are going to become a person who knows when the alarm is running and has a say in what happens next. That is a different person than you were, and it requires updating who you think you are.\n",
+      "total_words": 182,
+      "source_breakdown": {
+        "teacher_atom": 2,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "The body knows truth that the mind argues about. When you place your attention\non breath, sensation, and presence, the thinking quiets. This is not escape. It is\nreturn.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_010",
+          "target_words": 252,
+          "actual_words": 29,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Someone stops at your desk. You take out one earbud. They ask a question. Your screen is behind you — open, visible. {weather_detail} through the office window above your monitor. You answer. They nod and walk away. You put the earbud back. {street_name} is there below. Your screen is still open behind you. You turn back to it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v29",
+          "target_words": 228,
+          "actual_words": 58,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "What are you attached to that you pretend you are not? Look at it without judgment.\nWhy do you grip it? Is the thing itself the problem, or the story you built around\nhaving it? Can you hold it lightly and still have it? What happens then?",
+          "source": "registry",
+          "source_id": "ch11_sec03_reflection_f3",
+          "target_words": 227,
+          "actual_words": 47,
+          "enrichment_applied": [
+            "teacher_voice"
+          ]
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "This week, practice one moment of complete acceptance. Something you usually resist.\nA feeling. A thought. A circumstance. Instead of pushing it away, say yes to it for\none minute. Notice what happens. Often the thing you resist becomes bearable the\nmoment you stop resisting. Test this once.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_009",
+          "target_words": 126,
+          "actual_words": 48,
+          "enrichment_applied": [
+            "teacher_voice"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "role": "integration",
+      "working_title": "The Life That's Possible Now",
+      "thesis": "This is not the chapter where everything gets better. This is the chapter where you understand what has actually changed, what the alarm is now, and what you can do with a life that is no longer run by it.\n",
+      "total_words": 184,
+      "source_breakdown": {
+        "teacher_atom": 2,
+        "persona_atom": 1,
+        "registry": 1
+      },
+      "slots": [
+        {
+          "slot_type": "HOOK",
+          "content": "Suffering is not a punishment. It is a signal. When you move toward what hurts,\nwithout flinching, you discover the mechanism beneath it. The path forward requires\nseeing this clearly, not escaping it.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_HOOK_002",
+          "target_words": 222,
+          "actual_words": 33,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "SCENE",
+          "content": "Someone stops at your desk. You take out one earbud. They ask a question. Your screen is behind you — open, visible. {weather_detail} through the office window above your monitor. You answer. They nod and walk away. You put the earbud back. {street_name} is there below. Your screen is still open behind you. You turn back to it.",
+          "source": "persona_atom",
+          "source_id": "SCENE v29",
+          "target_words": 200,
+          "actual_words": 58,
+          "enrichment_applied": [
+            "persona_alarm_behavior"
+          ]
+        },
+        {
+          "slot_type": "REFLECTION",
+          "content": "What are you attached to that you pretend you are not? Look at it without judgment.\nWhy do you grip it? Is the thing itself the problem, or the story you built around\nhaving it? Can you hold it lightly and still have it? What happens then?",
+          "source": "registry",
+          "source_id": "ch12_sec03_reflection_f3",
+          "target_words": 200,
+          "actual_words": 47,
+          "enrichment_applied": []
+        },
+        {
+          "slot_type": "INTEGRATION",
+          "content": "Pick one person in your life. This week, observe them without judgment. Notice\nthree things about them you never noticed before. Not to change them. Not to\nunderstand them better. Simply to see them. When you see another person clearly,\nlove grows naturally. Try this once.",
+          "source": "teacher_atom",
+          "source_id": "ahjan_INTEGRATION_006",
+          "target_words": 211,
+          "actual_words": 46,
+          "enrichment_applied": []
+        }
+      ]
+    }
+  ]
+}
