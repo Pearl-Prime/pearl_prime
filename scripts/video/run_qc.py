@@ -3,11 +3,17 @@
 QC: shot_plan, resolved_assets, timeline; optional VCE artifacts.
 VCE §11 BLOCKER/WARN/INFO. ITE-related: vt_stealth scan, score stubs.
 Usage: python scripts/video/run_qc.py <shot_plan> <resolved> <timeline> [-o qc_summary.json] ...
+
+P0 upgrade: --video-path enables richer post-render QC (frame count, corruption
+detection via ffprobe, keyframe interval check, and optional SSIM via
+ffmpeg-quality-metrics when a reference video is supplied via --reference-video).
 """
 from __future__ import annotations
 
 import argparse
+import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -15,6 +21,205 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.video._config import load_json, load_yaml, write_atomically
+
+
+# ── P0 video-level QC helpers ─────────────────────────────────────────────────
+
+
+def _ffprobe_format(video_path: Path) -> dict:
+    """Run ffprobe and return the format section as a dict (or empty dict on error)."""
+    try:
+        r = subprocess.run(
+            [
+                "ffprobe", "-v", "error",
+                "-show_entries", "format=nb_streams,duration,size,bit_rate",
+                "-of", "json",
+                str(video_path),
+            ],
+            capture_output=True, text=True, timeout=30,
+        )
+        return json.loads(r.stdout).get("format", {})
+    except Exception:
+        return {}
+
+
+def _ffprobe_video_stream(video_path: Path) -> dict:
+    """Return first video stream info dict from ffprobe (or empty dict on error)."""
+    try:
+        r = subprocess.run(
+            [
+                "ffprobe", "-v", "error",
+                "-select_streams", "v:0",
+                "-show_entries",
+                "stream=nb_frames,r_frame_rate,codec_name,width,height",
+                "-of", "json",
+                str(video_path),
+            ],
+            capture_output=True, text=True, timeout=30,
+        )
+        streams = json.loads(r.stdout).get("streams", [])
+        return streams[0] if streams else {}
+    except Exception:
+        return {}
+
+
+def _ffprobe_corruption_check(video_path: Path) -> list[str]:
+    """Run ffprobe with -v error to detect decoding errors.  Returns list of error lines."""
+    try:
+        r = subprocess.run(
+            [
+                "ffprobe", "-v", "error",
+                "-i", str(video_path),
+            ],
+            capture_output=True, text=True, timeout=60,
+        )
+        lines = [ln.strip() for ln in (r.stderr or "").splitlines() if ln.strip()]
+        return lines
+    except Exception as exc:
+        return [f"ffprobe_error: {exc}"]
+
+
+def _keyframe_interval_check(video_path: Path) -> dict:
+    """Probe keyframe positions and return stats (count, avg interval in seconds).
+
+    Uses ffprobe packet scan — may be slow on large files; skipped on error.
+    """
+    try:
+        r = subprocess.run(
+            [
+                "ffprobe", "-v", "error",
+                "-select_streams", "v:0",
+                "-skip_frame", "noref",
+                "-show_entries", "packet=pts_time,flags",
+                "-of", "csv=print_section=0",
+                str(video_path),
+            ],
+            capture_output=True, text=True, timeout=60,
+        )
+        kf_times: list[float] = []
+        for line in r.stdout.splitlines():
+            parts = line.strip().split(",")
+            if len(parts) >= 2 and "K" in parts[-1]:
+                try:
+                    kf_times.append(float(parts[0]))
+                except ValueError:
+                    pass
+        if len(kf_times) < 2:
+            return {"keyframe_count": len(kf_times), "avg_interval_s": None}
+        intervals = [kf_times[i + 1] - kf_times[i] for i in range(len(kf_times) - 1)]
+        avg = sum(intervals) / len(intervals)
+        return {"keyframe_count": len(kf_times), "avg_interval_s": round(avg, 2)}
+    except Exception:
+        return {"keyframe_count": None, "avg_interval_s": None}
+
+
+def run_video_qc(
+    video_path: Path,
+    reference_path: Path | None = None,
+    expected_duration_s: float | None = None,
+) -> dict:
+    """Run richer QC checks on a rendered video file.
+
+    Returns a dict with keys:
+      passed (bool), errors (list[str]), warnings (list[str]),
+      frame_count (int|None), corruption_errors (list[str]),
+      keyframe_stats (dict), ssim (float|None), duration_s (float|None).
+
+    *reference_path* — if provided and ffmpeg-quality-metrics is installed,
+    SSIM is measured between video_path and reference_path.  When no reference
+    is available, SSIM is skipped (ssim=None) but all other checks still run.
+    """
+    errors: list[str] = []
+    warnings: list[str] = []
+
+    if not video_path.exists():
+        return {
+            "passed": False,
+            "errors": [f"video file not found: {video_path}"],
+            "warnings": [],
+            "frame_count": None,
+            "corruption_errors": [],
+            "keyframe_stats": {},
+            "ssim": None,
+            "duration_s": None,
+        }
+
+    # 1. Format + duration check
+    fmt = _ffprobe_format(video_path)
+    duration_s: float | None = None
+    try:
+        raw_dur = fmt.get("duration")
+        if raw_dur is not None:
+            duration_s = float(raw_dur)
+    except (TypeError, ValueError):
+        pass
+
+    if duration_s is not None and duration_s <= 0:
+        errors.append(f"video duration_s={duration_s:.2f} is zero or negative")
+
+    if expected_duration_s is not None and duration_s is not None:
+        delta = abs(duration_s - expected_duration_s)
+        if delta > max(1.0, expected_duration_s * 0.05):  # 5% tolerance or 1s
+            warnings.append(
+                f"video duration {duration_s:.2f}s differs from expected "
+                f"{expected_duration_s:.2f}s by {delta:.2f}s"
+            )
+
+    # 2. Frame count from stream metadata
+    stream = _ffprobe_video_stream(video_path)
+    frame_count: int | None = None
+    try:
+        nb = stream.get("nb_frames")
+        if nb and str(nb).isdigit():
+            frame_count = int(nb)
+    except (TypeError, ValueError):
+        pass
+
+    if frame_count is not None and frame_count == 0:
+        errors.append("video has 0 frames")
+
+    # 3. Corruption detection via ffprobe -v error
+    corruption_errors = _ffprobe_corruption_check(video_path)
+    if corruption_errors:
+        warnings.append(f"ffprobe detected {len(corruption_errors)} potential error(s)")
+
+    # 4. Keyframe interval
+    keyframe_stats = _keyframe_interval_check(video_path)
+    avg_kf = keyframe_stats.get("avg_interval_s")
+    if avg_kf is not None and avg_kf > 10.0:
+        warnings.append(f"avg keyframe interval {avg_kf:.1f}s > 10s (may cause seek issues)")
+
+    # 5. SSIM (optional — requires ffmpeg-quality-metrics + reference video)
+    ssim: float | None = None
+    if reference_path and reference_path.exists():
+        try:
+            from ffmpeg_quality_metrics import FfmpegQualityMetrics  # type: ignore
+            fqm = FfmpegQualityMetrics(str(reference_path), str(video_path))
+            results = fqm.calculate(["ssim"])
+            ssim_vals = [row.get("ssim_avg", None) for row in (results.get("ssim") or []) if row.get("ssim_avg") is not None]
+            if ssim_vals:
+                ssim = round(sum(ssim_vals) / len(ssim_vals), 4)
+                if ssim < 0.85:
+                    warnings.append(f"SSIM {ssim:.4f} below 0.85 threshold vs reference")
+        except ImportError:
+            warnings.append(
+                "ffmpeg-quality-metrics not installed — SSIM skipped. "
+                "pip install ffmpeg-quality-metrics"
+            )
+        except Exception as exc:
+            warnings.append(f"SSIM measurement failed: {exc}")
+
+    passed = len(errors) == 0
+    return {
+        "passed": passed,
+        "errors": errors,
+        "warnings": warnings,
+        "frame_count": frame_count,
+        "corruption_errors": corruption_errors,
+        "keyframe_stats": keyframe_stats,
+        "ssim": ssim,
+        "duration_s": duration_s,
+    }
 
 FORBIDDEN_CONSUMER = re.compile(
     r"\b(therapy|psychotherapy|clinical\s+diagnosis|dsm-5)\b",
@@ -331,6 +536,9 @@ def main() -> int:
     ap.add_argument("--platforms", default="youtube", help="Comma-separated")
     ap.add_argument("--workspace", type=str, default=None, help="Directory containing job.json")
     ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
+    # P0 upgrade: richer video-level QC
+    ap.add_argument("--video-path", default=None, help="Rendered video file for post-render QC checks (frame count, corruption, keyframes)")
+    ap.add_argument("--reference-video", default=None, help="Reference video for SSIM comparison (optional; requires ffmpeg-quality-metrics)")
     args = ap.parse_args()
     if args.no_job_check:
         print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
@@ -382,16 +590,41 @@ def main() -> int:
     )
 
     passed = len(errors) == 0
+
+    # P0 upgrade: richer video-level QC
+    video_qc: dict | None = None
+    if args.video_path:
+        vp = Path(args.video_path)
+        ref_p = Path(args.reference_video) if args.reference_video else None
+        expected_dur = float(timeline.get("duration_s", 0)) or None
+        video_qc = run_video_qc(vp, reference_path=ref_p, expected_duration_s=expected_dur)
+        if not video_qc["passed"]:
+            errors.extend(video_qc["errors"])
+            passed = False
+        for w in video_qc["warnings"]:
+            warnings.append(f"video_qc: {w}")
+        print(
+            f"Video QC: frames={video_qc.get('frame_count')}, "
+            f"duration={video_qc.get('duration_s'):.2f}s, "
+            f"ssim={video_qc.get('ssim')}, "
+            f"corruption_lines={len(video_qc.get('corruption_errors', []))}"
+        )
+
     if args.out:
-        summary = {
+        summary: dict = {
             "passed": passed,
             "errors": errors,
             "warnings": warnings,
-            "checks": ["consecutive_asset_id", "duration", "resolution", "vce_gates"],
+            "checks": [
+                "consecutive_asset_id", "duration", "resolution", "vce_gates",
+                "frame_count", "corruption_detection", "keyframe_interval",
+            ],
             "vce_blockers": blockers,
             "vce_warns": warns,
             "vce_info": infos,
         }
+        if video_qc is not None:
+            summary["video_qc"] = video_qc
         write_atomically(Path(args.out), summary)
 
     if errors:

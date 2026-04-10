@@ -23,6 +23,10 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.video._config import get_ffmpeg_bin, load_json, load_yaml
 from scripts.video.vce_ffmpeg_builders import (
+    build_lut3d_filter,
+    build_noise_filter,
+    build_vignette_filter,
+    build_xfade_filter,
     color_temp_arc_anchors,
     interpolate_colorbalance_at_pct,
     parse_colorbalance_args,
@@ -403,19 +407,85 @@ def _render_multilayer_clip(
     subprocess.run(cmd, check=True, capture_output=True)
 
 
-def _concat_clips(clip_paths: list[Path], out_path: Path) -> None:
-    """Concat demuxer (hard cuts, no re-encode)."""
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
-        for p in clip_paths:
-            f.write(f"file '{p.absolute()}'\n")
-        list_path = Path(f.name)
+def _concat_clips(
+    clip_paths: list[Path],
+    out_path: Path,
+    xfade_cfg: dict | None = None,
+    fps: int = 24,
+) -> None:
+    """Concat clips with optional xfade transitions.
+
+    When *xfade_cfg* is None or ``enabled`` is False, falls back to the concat
+    demuxer (stream-copy, no re-encode) for maximum speed.
+
+    When xfade is enabled, encodes the concatenated output via libx264 to
+    apply the crossfade — this requires a re-encode pass but is still fast.
+    """
+    if not xfade_cfg or not xfade_cfg.get("enabled") or len(clip_paths) < 2:
+        # Fast path: concat demuxer (hard cuts)
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
+            for p in clip_paths:
+                f.write(f"file '{p.absolute()}'\n")
+            list_path = Path(f.name)
+        try:
+            subprocess.run(
+                [get_ffmpeg_bin(), "-y", "-f", "concat", "-safe", "0", "-i", str(list_path), "-c", "copy", str(out_path)],
+                check=True, capture_output=True,
+            )
+        finally:
+            list_path.unlink(missing_ok=True)
+        return
+
+    # xfade path: filter_complex with xfade transitions
+    transition = xfade_cfg.get("transition", "dissolve")
+    duration_s = float(xfade_cfg.get("duration_s", 0.5))
+    input_args, filter_parts = build_xfade_filter(clip_paths, transition, duration_s, fps)
+    if not filter_parts:
+        # Fallback if builder returned empty (e.g. single clip)
+        _concat_clips(clip_paths, out_path, xfade_cfg=None)
+        return
+    filter_complex = ";".join(filter_parts)
+    cmd = [
+        get_ffmpeg_bin(), "-y",
+        *input_args,
+        "-filter_complex", filter_complex,
+        "-map", "[vout]",
+        "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p",
+        str(out_path),
+    ]
+    subprocess.run(cmd, check=True, capture_output=True)
+
+
+def normalize_loudness(audio_path: Path, target_lufs: float = -16.0) -> Path:
+    """Normalise a WAV/PCM audio file to *target_lufs* integrated loudness.
+
+    Uses pyloudnorm (BSW loudness metering).  Returns *audio_path* unchanged if
+    pyloudnorm is not installed or the file is not a supported format.
+
+    The normalised file is written to ``<stem>_norm.wav`` alongside the input.
+    """
     try:
-        subprocess.run(
-            [get_ffmpeg_bin(), "-y", "-f", "concat", "-safe", "0", "-i", str(list_path), "-c", "copy", str(out_path)],
-            check=True, capture_output=True,
+        import soundfile as sf  # type: ignore
+        import pyloudnorm as pyln  # type: ignore
+    except ImportError:
+        print(
+            "Warning: pyloudnorm/soundfile not installed — skipping loudness normalisation. "
+            "pip install pyloudnorm soundfile",
+            file=sys.stderr,
         )
-    finally:
-        list_path.unlink(missing_ok=True)
+        return audio_path
+
+    try:
+        data, rate = sf.read(str(audio_path))
+        meter = pyln.Meter(rate)
+        loudness = meter.integrated_loudness(data)
+        normalised = pyln.normalize.loudness(data, loudness, target_lufs)
+        out_path = audio_path.parent / f"{audio_path.stem}_norm.wav"
+        sf.write(str(out_path), normalised, rate)
+        return out_path
+    except Exception as exc:
+        print(f"Warning: loudness normalisation failed ({exc}) — using original", file=sys.stderr)
+        return audio_path
 
 
 def _extract_thumbnail(video_path: Path, timestamp_s: float, thumb_path: Path) -> None:
@@ -488,6 +558,33 @@ def main() -> int:
 
     render_cfg = load_yaml("config/video/render_params.yaml")
     margin_pct = float(render_cfg.get("crop_margin_pct", 6))
+
+    # P0 upgrade config ───────────────────────────────────────────────────────
+    xfade_cfg: dict = render_cfg.get("xfade") or {}
+    noise_cfg: dict = render_cfg.get("noise") or {}
+    vignette_cfg: dict = render_cfg.get("vignette") or {}
+    loudness_cfg: dict = render_cfg.get("loudness") or {}
+
+    # lut3d config from color_grade_presets.yaml
+    lut3d_cfg: dict = color_cfg.get("lut3d") or {}
+
+    # Build post-final filter fragments (applied after concat or before encode in single-pass)
+    # These are appended as a post-processing vf chain on the final concatenated video.
+    _post_vf_parts: list[str] = []
+    if lut3d_cfg.get("enabled"):
+        _lut_path = str(lut3d_cfg.get("lut_path", "assets/luts/warm_therapeutic.cube"))
+        _lut_abs = REPO_ROOT / _lut_path if not Path(_lut_path).is_absolute() else Path(_lut_path)
+        if _lut_abs.exists():
+            _post_vf_parts.append(build_lut3d_filter(_lut_abs))
+        else:
+            print(f"Warning: lut3d enabled but LUT file not found: {_lut_abs}", file=sys.stderr)
+    _noise_filter = build_noise_filter(int(noise_cfg.get("intensity", 15))) if noise_cfg.get("enabled") else None
+    if _noise_filter:
+        _post_vf_parts.append(_noise_filter)
+    _vignette_filter = build_vignette_filter(vignette_cfg.get("angle", "PI/5")) if vignette_cfg.get("enabled") else None
+    if _vignette_filter:
+        _post_vf_parts.append(_vignette_filter)
+    # ─────────────────────────────────────────────────────────────────────────
 
     resolution = timeline.get("resolution") or {}
     output_w = resolution.get("width", DEFAULT_WIDTH)
@@ -667,9 +764,31 @@ def main() -> int:
         return 1
 
     video_path = out_dir / f"{plan_id}.mp4"
-    _concat_clips(clip_files, video_path)
+    _concat_clips(clip_files, video_path, xfade_cfg=xfade_cfg, fps=fps)
     for f in clip_files:
         f.unlink(missing_ok=True)
+
+    # P0: apply post-vf chain (lut3d, noise, vignette) if any filters active
+    if _post_vf_parts:
+        post_vf_path = out_dir / f"{plan_id}_graded.mp4"
+        vf_chain = ",".join(_post_vf_parts)
+        try:
+            subprocess.run(
+                [
+                    get_ffmpeg_bin(), "-y", "-i", str(video_path),
+                    "-vf", vf_chain,
+                    "-c:v", "libx264", "-preset", encode_preset, "-crf", str(encode_crf),
+                    "-pix_fmt", "yuv420p",
+                    "-c:a", "copy",
+                    str(post_vf_path),
+                ],
+                check=True, capture_output=True,
+            )
+            video_path.unlink(missing_ok=True)
+            post_vf_path.rename(video_path)
+            print(f"Post-grade applied: {', '.join(_post_vf_parts[:3])}")
+        except Exception as exc:
+            print(f"Warning: post-grade pass failed ({exc}), keeping ungraded video", file=sys.stderr)
 
     thumb_ref = timeline.get("thumbnail_frame_ref")
     ts = _timestamp_from_thumbnail_ref(timeline, thumb_ref, fps)
@@ -682,6 +801,12 @@ def main() -> int:
         "thumbnail_path": str(thumb_path),
         "colorbalance_sendcmd_files": cmd_paths,
         "encode": {"preset": encode_preset, "crf": encode_crf, "quality": args.quality},
+        "p0_effects": {
+            "xfade": xfade_cfg.get("enabled", False),
+            "lut3d": lut3d_cfg.get("enabled", False),
+            "noise": noise_cfg.get("enabled", False),
+            "vignette": vignette_cfg.get("enabled", False),
+        },
     }
     (out_dir / "timeline_ref.json").write_text(json.dumps(ref, indent=2), encoding="utf-8")
     print(f"Rendered: {video_path} (thumb: {thumb_path})")
@@ -694,6 +819,20 @@ def main() -> int:
         music_path = soundtrack.get("music_path")
 
         if narration_segs or music_path:
+            # P0: loudness normalisation — apply before mixing if enabled
+            if loudness_cfg.get("normalize_loudness"):
+                target_lufs = float(loudness_cfg.get("target_lufs", -16.0))
+                normalised_segs: list[dict] = []
+                for seg in narration_segs:
+                    ap_str = seg.get("audio_path", "")
+                    ap_p = Path(ap_str) if ap_str else None
+                    if ap_p and ap_p.is_file() and ap_p.suffix.lower() in (".wav", ".pcm", ".aif", ".aiff"):
+                        norm_p = normalize_loudness(ap_p, target_lufs)
+                        normalised_segs.append({**seg, "audio_path": str(norm_p)})
+                    else:
+                        normalised_segs.append(seg)
+                narration_segs = normalised_segs
+
             voiced_path = out_dir / f"{plan_id}_voiced.mp4"
             try:
                 _mix_audio_tracks(video_path, narration_segs, music_path, voiced_path)
@@ -701,7 +840,7 @@ def main() -> int:
                 video_path.unlink(missing_ok=True)
                 voiced_path.rename(video_path)
                 print(f"Audio mixed: {len(narration_segs)} voice segments"
-                      + (f" + music" if music_path else ""))
+                      + (" + music" if music_path else ""))
             except Exception as e:
                 print(f"Warning: audio mixing failed ({e}), keeping silent video", file=sys.stderr)
 

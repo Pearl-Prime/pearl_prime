@@ -26,3 +26,11 @@ presets:
 # Map emotional arc or content_type to preset name (renderer or timeline builder uses this).
 # emotional_arc: hope -> warm; reflection -> cool; default -> neutral
 default_preset: neutral
+
+# ── P0 lut3d color grading (item 2) ─────────────────────────────────────────
+# Set lut_path to a .cube file to apply lut3d grading on top of the eq preset.
+# lut3d requires RGB input; run_render.py handles the yuv420p→rgb→yuv chain automatically.
+# Leave lut_path as null or empty string to disable.
+lut3d:
+  enabled: false
+  lut_path: "assets/luts/warm_therapeutic.cube"

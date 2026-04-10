@@ -258,3 +258,117 @@ def validate_filter_complex_structure(s: str) -> tuple[bool, str]:
 
 def is_list_of_str(cmd: Iterable[str]) -> bool:
     return isinstance(cmd, list) and all(isinstance(x, str) for x in cmd)
+
+
+# ── P0 upgrade helpers ────────────────────────────────────────────────────────
+
+
+def build_xfade_filter(
+    clip_paths: list[Path],
+    transition: str = "dissolve",
+    duration_s: float = 0.5,
+    fps: int = 24,
+) -> tuple[list[str], list[str]]:
+    """Build an FFmpeg filter_complex and input list for xfade transitions between clips.
+
+    Returns (input_args, filter_complex_parts) suitable for combining into a full
+    FFmpeg command.  The caller must append ``-map "[vout]"`` (or last chain label)
+    and output path.
+
+    *clip_paths* — ordered list of clip files.
+    *transition* — any xfade transition name (dissolve, fade, wipeleft, …).
+    *duration_s* — crossfade overlap in seconds; must be shorter than the shortest clip.
+    *fps* — frame rate (used to compute offset in frames).
+
+    Returns empty lists if len(clip_paths) < 2 (caller falls back to concat demuxer).
+    """
+    if len(clip_paths) < 2:
+        return [], []
+
+    input_args: list[str] = []
+    for p in clip_paths:
+        input_args.extend(["-i", str(p)])
+
+    # We need the duration of each clip to compute xfade offset accurately.
+    # Fall back to probing via ffprobe; if unavailable use a rough estimate.
+    durations: list[float] = []
+    for p in clip_paths:
+        try:
+            import subprocess as _sp
+            r = _sp.run(
+                [
+                    "ffprobe", "-v", "error", "-select_streams", "v:0",
+                    "-show_entries", "format=duration",
+                    "-of", "default=noprint_wrappers=1:nokey=1",
+                    str(p),
+                ],
+                capture_output=True, text=True, timeout=10,
+            )
+            durations.append(float(r.stdout.strip()))
+        except Exception:
+            durations.append(5.0)  # safe fallback
+
+    n = len(clip_paths)
+    # Running cumulative offset in seconds (end of previous chain minus overlap)
+    offsets: list[float] = []
+    running = 0.0
+    for i in range(n - 1):
+        running += max(0.01, durations[i] - duration_s)
+        offsets.append(running)
+
+    parts: list[str] = []
+    # Label inputs
+    for i in range(n):
+        parts.append(f"[{i}:v]setpts=PTS-STARTPTS[v{i}]")
+
+    cur_label = "v0"
+    for i in range(n - 1):
+        next_label = f"v{i + 1}"
+        out_label = f"xf{i}" if i < n - 2 else "vout"
+        offset = offsets[i]
+        parts.append(
+            f"[{cur_label}][{next_label}]xfade=transition={transition}"
+            f":duration={duration_s:.3f}:offset={offset:.3f}[{out_label}]"
+        )
+        cur_label = out_label
+
+    return input_args, parts
+
+
+def build_lut3d_filter(lut_path: str | Path) -> str:
+    """Return FFmpeg filter fragment applying a 3D LUT with correct RGB chain.
+
+    FFmpeg lut3d requires RGB input.  This helper wraps the filter with the
+    necessary format conversions:  ``format=rgb24,lut3d=<path>,format=yuv420p``.
+
+    The caller inserts this fragment into a filter_complex or -vf chain after
+    the main video stream and before encoding.
+    """
+    safe_path = str(lut_path).replace("\\", "/")
+    # Escape colons (Windows paths, though Linux/macOS rarely need this)
+    safe_path = safe_path.replace(":", "\\:")
+    return f"format=rgb24,lut3d={safe_path},format=yuv420p"
+
+
+def build_noise_filter(intensity: int = 15) -> str | None:
+    """Return FFmpeg noise filter fragment for film grain effect.
+
+    *intensity* maps to ``c0s`` (luma noise strength).  ``c0f=t+u`` gives
+    temporal + uniform noise for organic grain texture.
+    Returns None when intensity <= 0 (disabled).
+    """
+    if intensity <= 0:
+        return None
+    return f"noise=c0s={intensity}:c0f=t+u"
+
+
+def build_vignette_filter(angle: str | float = "PI/5") -> str | None:
+    """Return FFmpeg vignette filter fragment.
+
+    *angle* is the cone half-angle string or float (radians).  FFmpeg accepts
+    expressions like ``PI/5`` directly.  Returns None when angle is 0 or "0".
+    """
+    a = str(angle).strip()
+    if a in ("0", "0.0", ""):
+        return None
+    return f"vignette={a}"

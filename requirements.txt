@@ -16,3 +16,11 @@ pytest>=7.0
 boto3>=1.28
 mutagen>=1.47
 edge-tts>=6.1
+
+# Video P0 upgrades (see docs/VIDEO_PIPELINE_COMPLETE_GUIDE.md § P0 Upgrades)
+# pyloudnorm: -16 LUFS normalisation for CosyVoice2 narration output
+# soundfile: WAV I/O required by pyloudnorm
+# ffmpeg-quality-metrics: SSIM / VMAF measurement in run_qc.py
+pyloudnorm>=0.1.0
+soundfile>=0.12.0
+ffmpeg-quality-metrics>=3.0.0
