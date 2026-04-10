@@ -755,7 +755,7 @@ def chapter_flow_gate_report(
         return {
             "chapter_count": len(chapter_reports),
             "failed_chapters": failed,
-            "status": "PASS" if failed == 0 else "FAIL",
+            "status": "PASS" if (failed == 0 and len(chapter_reports) > 0) else "FAIL",
             "chapters": chapter_reports,
             "dimension_gates_status": dg_status,
             "dimension_gates_blocks_delivery": dg_blocks,
@@ -794,7 +794,7 @@ def chapter_flow_gate_report(
     return {
         "chapter_count": len(chapters),
         "failed_chapters": failed,
-        "status": "PASS" if failed == 0 else "FAIL",
+        "status": "PASS" if (failed == 0 and len(chapters) > 0) else "FAIL",
         "chapters": chapter_reports,
         "dimension_gates_status": dg_status,
         "dimension_gates_blocks_delivery": dg_blocks,
