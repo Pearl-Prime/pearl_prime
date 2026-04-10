@@ -199,7 +199,17 @@ def main() -> int:
     ap.add_argument("--episode-number", type=int, default=1)
     ap.add_argument("--season-number", type=int, default=1)
     ap.add_argument("--output-dir", type=Path, required=True)
+    ap.add_argument("--workspace", type=Path, default=None, help="Directory containing job.json (default: --output-dir)")
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline.advance_stage import mark_complete
+    from scripts.pipeline.check_job import require_stage
+
+    ws = (args.workspace or args.output_dir).resolve()
+    if not args.no_job_check:
+        require_stage("assemble", ws)
 
     book_dir = args.book_dir.resolve()
     plan = load_video_plan(book_dir)
@@ -241,6 +251,8 @@ def main() -> int:
     out_path = args.output_dir / f"assembly_{ep_id}.json"
     out_path.write_text(json.dumps(assembly, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(out_path)
+    if not args.no_job_check:
+        mark_complete(ws, "assemble", output=out_path.name)
     return 0
 
 

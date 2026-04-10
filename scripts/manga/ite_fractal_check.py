@@ -24,14 +24,28 @@ def main() -> int:
     ap.add_argument("--chapter", type=Path, help="Optional chapter for categories / release gate")
     ap.add_argument("-o", "--out", required=True, type=Path)
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--workspace", type=Path, default=None)
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline.advance_stage import mark_complete, mark_failed
+    from scripts.pipeline.check_job import require_stage
+
+    ws = (args.workspace or args.out.parent).resolve()
+    if not args.no_job_check:
+        require_stage("ite_fractal", ws)
 
     if not args.paths.is_file():
+        if not args.no_job_check:
+            mark_failed(ws, "ite_fractal", error=f"missing {args.paths}")
         print(f"Not found: {args.paths}", file=sys.stderr)
         return 1
 
     if should_skip_output(args.out, ["artifact_type", "panels"], args.force):
         print(f"Skip (use --force): {args.out}")
+        if not args.no_job_check:
+            mark_complete(ws, "ite_fractal", output=args.out.name)
         return 0
 
     panel_paths = json.loads(args.paths.read_text(encoding="utf-8"))
@@ -44,6 +58,8 @@ def main() -> int:
     print(f"Wrote fractal report ({len(out.get('panels') or [])} panels) to {args.out}")
     if out.get("stub_mode"):
         print("Note: stub mode (PIL/numpy unavailable)", file=sys.stderr)
+    if not args.no_job_check:
+        mark_complete(ws, "ite_fractal", output=args.out.name)
     return 0
 
 

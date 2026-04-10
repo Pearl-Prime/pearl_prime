@@ -453,11 +453,24 @@ def main() -> int:
     ap.add_argument("--platform-variant", default=None, help="JSON file with single platform variant encode overrides")
     ap.add_argument("--quality", default="standard", choices=("draft", "standard", "high"), help="CRF/preset tradeoff")
     ap.add_argument("--soundtrack-plan", default=None, help="soundtrack_plan_with_audio.json for voice + music mixing")
+    ap.add_argument("--workspace", type=str, default=None, help="Directory containing job.json (default: --out-dir)")
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline._video_workspace import resolve_video_workspace
+    from scripts.pipeline.advance_stage import mark_complete, mark_failed
+    from scripts.pipeline.check_job import require_stage
+
+    ws = resolve_video_workspace(args, out_attr="out_dir")
+    if not args.no_job_check:
+        require_stage("render", ws)
 
     tl_path = Path(args.timeline)
     if not tl_path.exists():
         print(f"Error: not found: {tl_path}", file=sys.stderr)
+        if not args.no_job_check:
+            mark_failed(ws, "render", error=f"missing {tl_path}")
         return 1
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -543,11 +556,15 @@ def main() -> int:
         ref = {"timeline_path": str(tl_path), "video_path": str(video_path), "thumbnail_path": str(thumb_path)}
         (out_dir / "timeline_ref.json").write_text(json.dumps(ref, indent=2), encoding="utf-8")
         print(f"Placeholder: {video_path} (no FFmpeg)")
+        if not args.no_job_check:
+            mark_complete(ws, "render", output=str(video_path.name))
         return 0
 
     assets_dir = Path(args.assets_dir)
     clips = timeline.get("clips", [])
     if not clips:
+        if not args.no_job_check:
+            mark_failed(ws, "render", error="no clips in timeline")
         print("No clips in timeline", file=sys.stderr)
         return 1
 
@@ -644,6 +661,8 @@ def main() -> int:
         clip_files.append(out_clip)
 
     if not clip_files:
+        if not args.no_job_check:
+            mark_failed(ws, "render", error="no clips rendered")
         print("No clips rendered", file=sys.stderr)
         return 1
 
@@ -686,6 +705,8 @@ def main() -> int:
             except Exception as e:
                 print(f"Warning: audio mixing failed ({e}), keeping silent video", file=sys.stderr)
 
+    if not args.no_job_check:
+        mark_complete(ws, "render", output=str(video_path.name))
     return 0
 
 

@@ -854,8 +854,42 @@ def main() -> int:
         "command",
         choices=["prose", "tts", "tts-en", "covers", "covers-catalog", "investor", "manifest", "all"],
     )
+    ap.add_argument(
+        "--workspace",
+        type=Path,
+        default=None,
+        help="Directory containing job.json (default: artifacts/audiobook_samples)",
+    )
+    ap.add_argument(
+        "--no-job-check",
+        dest="no_job_check",
+        action="store_true",
+        help="Skip job.json enforcement (CI only)",
+    )
     args = ap.parse_args()
+    if args.no_job_check:
+        print(
+            "WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).",
+            file=sys.stderr,
+        )
+    ab_ws = (args.workspace or (REPO_ROOT / "artifacts/audiobook_samples")).resolve()
     cmd = args.command
+    from scripts.pipeline.advance_stage import mark_complete, mark_pipeline_finished
+    from scripts.pipeline.check_job import require_stage
+
+    if not args.no_job_check:
+        _require = {
+            "prose": "prose_gen",
+            "tts": "tts_render",
+            "tts-en": "tts_render",
+            "covers": "cover_gen",
+            "covers-catalog": "cover_gen",
+            "manifest": "manifest",
+            "all": "prose_gen",
+        }
+        rs = _require.get(cmd)
+        if rs:
+            require_stage(rs, ab_ws)
     if cmd == "tts-en":
         cmd = "tts"
     if cmd == "prose":
@@ -870,6 +904,8 @@ def main() -> int:
         run_investor()
     elif cmd == "manifest":
         build_manifest_rows()
+        if not args.no_job_check:
+            mark_complete(ab_ws, "manifest", output="manifest.json")
         return 0
     elif cmd == "all":
         run_generate_prose()
@@ -884,9 +920,21 @@ def main() -> int:
         except Exception as e:
             print(f"investor clips skipped: {e}", file=sys.stderr)
         build_manifest_rows()
+        if not args.no_job_check:
+            mark_pipeline_finished(ab_ws, "audiobook")
         return 0
     if cmd in ("prose", "tts", "covers", "covers-catalog", "investor"):
         build_manifest_rows()
+    if not args.no_job_check:
+        fin = {
+            "prose": "prose_gen",
+            "tts": "tts_render",
+            "tts-en": "tts_render",
+            "covers": "cover_gen",
+            "covers-catalog": "cover_gen",
+        }.get(cmd)
+        if fin:
+            mark_complete(ab_ws, fin, output=cmd)
     return 0
 
 

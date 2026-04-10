@@ -24,13 +24,25 @@ def main() -> int:
     ap.add_argument("--series-id", required=True)
     ap.add_argument("--week", required=True)
     ap.add_argument("--bucket", default=os.environ.get("R2_BUCKET", "phoenix-podcast"))
+    ap.add_argument("--workspace", type=Path, default=None, help="Directory containing job.json (default: --source-dir)")
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline.advance_stage import mark_complete, mark_failed
+    from scripts.pipeline.check_job import require_stage
+
+    ws = (args.workspace or args.source_dir).resolve()
+    if not args.no_job_check:
+        require_stage("upload", ws)
 
     account = os.environ.get("R2_ACCOUNT_ID", "").strip()
     key_id = os.environ.get("R2_ACCESS_KEY_ID", "").strip()
     secret = os.environ.get("R2_SECRET_ACCESS_KEY", "").strip()
     if not all([account, key_id, secret, args.bucket]):
         print("Set R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET", file=sys.stderr)
+        if not args.no_job_check:
+            mark_failed(ws, "upload", error="missing R2 credentials")
         return 1
 
     client = boto3.client(
@@ -77,6 +89,8 @@ def main() -> int:
     out = root / "upload_manifest.json"
     out.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print(out)
+    if not args.no_job_check:
+        mark_complete(ws, "upload", output=out.name)
     return 0
 
 

@@ -217,10 +217,23 @@ def main() -> int:
     ap.add_argument("--wpm", type=float, default=140.0, help="Words per minute for timing (default: 140)")
     ap.add_argument("--metadata", help="Optional JSON with segment_id -> { arc_role, emotional_band } or plan with atom metadata")
     ap.add_argument("--force", action="store_true", help="Overwrite output even if it already exists")
+    ap.add_argument("--workspace", type=str, default=None, help="Directory containing job.json (default: parent of --out)")
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline._video_workspace import resolve_video_workspace
+    from scripts.pipeline.check_job import require_stage
+    from scripts.pipeline.advance_stage import mark_complete, mark_failed
+
+    ws = resolve_video_workspace(args, out_attr="out")
+    if not args.no_job_check:
+        require_stage("script_prep", ws)
 
     path = Path(args.render_manifest)
     if not path.exists():
+        if not args.no_job_check:
+            mark_failed(ws, "script_prep", error=f"missing manifest: {path}")
         print(f"Error: not found: {path}", file=sys.stderr)
         return 1
 
@@ -233,6 +246,8 @@ def main() -> int:
         manifest = json.loads(path.read_text(encoding="utf-8"))
 
     if "plan_id" not in manifest or "segments" not in manifest:
+        if not args.no_job_check:
+            mark_failed(ws, "script_prep", error="manifest missing plan_id or segments")
         print("Error: render manifest must have plan_id and segments", file=sys.stderr)
         return 1
 
@@ -249,10 +264,14 @@ def main() -> int:
     out_path = Path(args.out)
     if should_skip_output(out_path, ["plan_id", "segments"], args.force):
         print(f"Skip (output exists, use --force to overwrite): {out_path}")
+        if not args.no_job_check:
+            mark_complete(ws, "script_prep", output=out_path.name)
         return 0
     result = prepare_segments(manifest, args.content_type, args.wpm, metadata_by_segment)
     write_atomically(out_path, result)
     print(f"Wrote {len(result['segments'])} segments to {out_path}")
+    if not args.no_job_check:
+        mark_complete(ws, "script_prep", output=out_path.name)
     return 0
 
 

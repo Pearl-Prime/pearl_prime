@@ -76,11 +76,24 @@ def main() -> int:
     ap.add_argument("-o", "--out", required=True, help="Output timeline JSON path")
     ap.add_argument("--aspect", default="16:9", help="Aspect ratio (16:9, 9:16, 1:1)")
     ap.add_argument("--force", action="store_true", help="Overwrite output even if it already exists")
+    ap.add_argument("--workspace", type=str, default=None, help="Directory containing job.json (default: parent of --out)")
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline._video_workspace import resolve_video_workspace
+    from scripts.pipeline.advance_stage import mark_complete, mark_failed
+    from scripts.pipeline.check_job import require_stage
+
+    ws = resolve_video_workspace(args, out_attr="out")
+    if not args.no_job_check:
+        require_stage("timeline", ws)
 
     plan_path = Path(args.shot_plan)
     res_path = Path(args.resolved_assets)
     if not plan_path.exists() or not res_path.exists():
+        if not args.no_job_check:
+            mark_failed(ws, "timeline", error="shot_plan or resolved_assets not found")
         print("Error: shot_plan or resolved_assets not found", file=sys.stderr)
         return 1
     shot_plan = json.loads(plan_path.read_text(encoding="utf-8"))
@@ -89,10 +102,14 @@ def main() -> int:
     out_path = Path(args.out)
     if should_skip_output(out_path, ["plan_id", "clips", "config_hash"], args.force, config_snapshot_hash()):
         print(f"Skip (output exists, use --force to overwrite): {out_path}")
+        if not args.no_job_check:
+            mark_complete(ws, "timeline", output=out_path.name)
         return 0
     timeline = build_timeline(shot_plan, resolved, args.aspect)
     write_atomically(out_path, timeline)
     print(f"Wrote timeline {args.aspect} to {out_path}")
+    if not args.no_job_check:
+        mark_complete(ws, "timeline", output=out_path.name)
     return 0
 
 

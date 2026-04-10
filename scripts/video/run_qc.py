@@ -329,10 +329,28 @@ def main() -> int:
     ap.add_argument("--qc-mode", choices=["plan", "publish"], default="plan")
     ap.add_argument("--vce-format", default="short")
     ap.add_argument("--platforms", default="youtube", help="Comma-separated")
+    ap.add_argument("--workspace", type=str, default=None, help="Directory containing job.json")
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline.advance_stage import mark_complete, mark_failed
+    from scripts.pipeline.check_job import require_stage
+
+    stage_nm = "qc_publish" if args.qc_mode == "publish" else "qc_plan"
+    if args.workspace:
+        ws = Path(args.workspace).resolve()
+    elif args.out:
+        ws = Path(args.out).resolve().parent
+    else:
+        ws = Path(args.shot_plan).resolve().parent
+    if not args.no_job_check:
+        require_stage(stage_nm, ws)
 
     paths = [Path(args.shot_plan), Path(args.resolved_assets), Path(args.timeline)]
     if not all(p.exists() for p in paths):
+        if not args.no_job_check:
+            mark_failed(ws, stage_nm, error="QC input not found")
         print("Error: one or more inputs not found", file=sys.stderr)
         return 1
 
@@ -385,6 +403,12 @@ def main() -> int:
 
     if passed:
         print("QC passed.")
+        if not args.no_job_check:
+            out_name = Path(args.out).name if args.out else "qc_summary.json"
+            mark_complete(ws, stage_nm, output=out_name)
+    else:
+        if not args.no_job_check:
+            mark_failed(ws, stage_nm, error="QC errors present")
     return 0 if passed else 1
 
 

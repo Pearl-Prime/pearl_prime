@@ -90,7 +90,17 @@ def main() -> int:
     ap.add_argument("--series-id", required=True)
     ap.add_argument("--base-url", required=True)
     ap.add_argument("--output", type=Path, required=True)
+    ap.add_argument("--workspace", type=Path, default=None, help="Directory containing job.json (default: --episodes-dir)")
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline.advance_stage import mark_complete
+    from scripts.pipeline.check_job import require_stage
+
+    ws = (args.workspace or args.episodes_dir).resolve()
+    if not args.no_job_check:
+        require_stage("feed", ws)
 
     meta_files = sorted(args.episodes_dir.glob("*.meta.json"))
     if not meta_files:
@@ -143,6 +153,8 @@ def main() -> int:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     tree.write(args.output, encoding="utf-8", xml_declaration=True, default_namespace=None)
     print(args.output)
+    if not args.no_job_check:
+        mark_complete(ws, "feed", output=args.output.name)
     return 0
 
 

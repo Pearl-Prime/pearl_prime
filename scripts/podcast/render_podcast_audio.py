@@ -551,14 +551,28 @@ def main() -> int:
     ap.add_argument("--output", type=Path, required=True)
     ap.add_argument("--voice-provider", default="auto")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--workspace", type=Path, default=None, help="Directory containing job.json (default: parent of --output)")
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline.advance_stage import mark_complete, mark_failed
+    from scripts.pipeline.check_job import require_stage
+
+    ws = (args.workspace or args.output.parent).resolve()
+    if not args.no_job_check:
+        require_stage("render_audio", ws)
 
     report = render(args.assembly.resolve(), args.output.resolve(), args.voice_provider, args.dry_run)
     if report.get("errors"):
         for e in report["errors"]:
             print("ERROR:", e, file=sys.stderr)
+        if not args.no_job_check:
+            mark_failed(ws, "render_audio", error="render errors")
         return 1
     print(json.dumps(report, indent=2))
+    if not args.no_job_check:
+        mark_complete(ws, "render_audio", output=args.output.name)
     return 0
 
 
