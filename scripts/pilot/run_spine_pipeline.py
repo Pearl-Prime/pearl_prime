@@ -12,6 +12,11 @@ import json
 import sys
 from pathlib import Path
 
+try:
+    import yaml
+except ImportError:  # pragma: no cover
+    yaml = None
+
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
 
@@ -31,6 +36,7 @@ def main() -> int:
     from phoenix_v4.planning.beatmap_compile import compile_beatmap, load_format_spec, load_topic_engines
     from phoenix_v4.planning.enrichment_select import (
         EnrichmentRequest,
+        apply_depth_pass,
         budget_from_enriched,
         dump_enriched_book_json,
         select_enrichment,
@@ -65,6 +71,13 @@ def main() -> int:
         seed=args.seed,
     )
     enriched = select_enrichment(req, REPO_ROOT)
+
+    depth_map_path = REPO_ROOT / "config" / "depth" / "depth_module_map.yaml"
+    if yaml is None:
+        raise RuntimeError("PyYAML is required for depth_module_map.yaml")
+    depth_map = yaml.safe_load(depth_map_path.read_text(encoding="utf-8"))
+    enriched = apply_depth_pass(enriched, depth_map, repo_root=REPO_ROOT)
+
     prose = compose_from_enriched_book(enriched, quality_profile="draft")
 
     (out_dir / "book.txt").write_text(prose, encoding="utf-8")

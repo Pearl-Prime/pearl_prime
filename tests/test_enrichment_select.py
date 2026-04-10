@@ -7,7 +7,11 @@ import pytest
 
 from phoenix_v4.planning.beatmap_compile import compile_beatmap, load_format_spec, load_topic_engines
 from phoenix_v4.planning.enrichment_select import (
+    EnrichedBook,
+    EnrichedChapter,
+    EnrichedSlot,
     EnrichmentRequest,
+    apply_depth_pass,
     budget_from_enriched,
     dump_enriched_book_json,
     enriched_book_to_jsonable,
@@ -313,3 +317,273 @@ def test_runtime_format_passthrough(fmt_std):
         )
     )
     assert book.runtime_format == bm.runtime_format
+
+
+def _repo_root():
+    from pathlib import Path
+
+    return Path(__file__).resolve().parent.parent
+
+
+def test_depth_pass_fills_thin_chapter(fmt_std):
+    """Thin chapter (large deficit) receives at least one DEPTH_* slot."""
+    slot = EnrichedSlot("HOOK", "short", "gap", "id", 2500, 1, [])
+    ch = EnrichedChapter(1, "r", "wt", "th", [slot], 1, {})
+    book = EnrichedBook(
+        1,
+        "enrichment_select",
+        "anxiety",
+        "ahjan",
+        "gen_z_professionals",
+        "standard_book",
+        [ch],
+        1,
+        {},
+    )
+    import yaml
+
+    depth_map = yaml.safe_load(
+        (_repo_root() / "config" / "depth" / "depth_module_map.yaml").read_text(encoding="utf-8")
+    )
+    out = apply_depth_pass(book, depth_map, repo_root=_repo_root())
+    depth_slots = [s for s in out.chapters[0].slots if s.slot_type.startswith("DEPTH_")]
+    assert depth_slots
+    assert out.enrichment_audit.get("depth_modules_added")
+
+
+def test_depth_pass_skips_full_chapter(fmt_std):
+    """When deficit <= 100, no depth slots are appended."""
+    slot = EnrichedSlot("HOOK", "word " * 40, "t", "id", 100, 40, [])
+    ch = EnrichedChapter(1, "r", "wt", "th", [slot], 40, {})
+    book = EnrichedBook(
+        1,
+        "enrichment_select",
+        "anxiety",
+        None,
+        "gen_z_professionals",
+        "standard_book",
+        [ch],
+        40,
+        {},
+    )
+    depth_map = {
+        "depth_modules": {
+            "recognition_depth": {
+                "chapter_affinity": "all",
+                "sources": [{"type": "teacher_atom", "slot_types": ["HOOK"]}],
+                "target_words_per_chapter": [200, 400],
+            }
+        },
+        "topic_overrides": {"anxiety": {"depth_priority_early": ["recognition_depth"]}},
+    }
+    out = apply_depth_pass(book, depth_map, repo_root=_repo_root())
+    assert not [s for s in out.chapters[0].slots if s.slot_type.startswith("DEPTH_")]
+
+
+def test_depth_pass_respects_banned(fmt_std):
+    """Grief early: banned_early blocks practice_scaffold."""
+    slot = EnrichedSlot("HOOK", "x", "t", "id", 3000, 1, [])
+    ch = EnrichedChapter(1, "r", "wt", "th", [slot], 1, {})
+    book = EnrichedBook(
+        1,
+        "enrichment_select",
+        "grief",
+        "ahjan",
+        "gen_z_professionals",
+        "standard_book",
+        [ch],
+        1,
+        {},
+    )
+    depth_map = {
+        "depth_modules": {
+            "practice_scaffold": {
+                "chapter_affinity": "all",
+                "sources": [{"type": "component_template", "pool": "bridge"}],
+                "target_words_per_chapter": [200, 400],
+            }
+        },
+        "topic_overrides": {
+            "grief": {
+                "depth_priority_early": ["practice_scaffold"],
+                "banned_early": ["practice_scaffold"],
+            }
+        },
+    }
+    out = apply_depth_pass(book, depth_map, repo_root=_repo_root())
+    assert not any("practice_scaffold" in s.slot_type.lower() for s in out.chapters[0].slots)
+
+
+def test_depth_pass_respects_affinity(fmt_std):
+    """Module with chapter_affinity excluding ch1 does not apply to chapter 1."""
+    slot = EnrichedSlot("HOOK", "x", "t", "id", 3000, 1, [])
+    ch = EnrichedChapter(1, "r", "wt", "th", [slot], 1, {})
+    book = EnrichedBook(
+        1,
+        "enrichment_select",
+        "anxiety",
+        "ahjan",
+        "gen_z_professionals",
+        "standard_book",
+        [ch],
+        1,
+        {},
+    )
+    depth_map = {
+        "depth_modules": {
+            "mechanism_depth": {
+                "chapter_affinity": [2, 3],
+                "sources": [{"type": "teacher_atom", "slot_types": ["REFLECTION"]}],
+                "target_words_per_chapter": [300, 600],
+            }
+        },
+        "topic_overrides": {"anxiety": {"depth_priority_early": ["mechanism_depth"]}},
+    }
+    out = apply_depth_pass(book, depth_map, repo_root=_repo_root())
+    assert not any("MECHANISM_DEPTH" in s.slot_type for s in out.chapters[0].slots)
+
+
+def test_depth_pass_respects_topic_restriction(fmt_std):
+    """witnessing_presence restricted to grief does not load for anxiety."""
+    slot = EnrichedSlot("HOOK", "x", "t", "id", 3000, 1, [])
+    ch = EnrichedChapter(1, "r", "wt", "th", [slot], 1, {})
+    book = EnrichedBook(
+        1,
+        "enrichment_select",
+        "anxiety",
+        "ahjan",
+        "gen_z_professionals",
+        "standard_book",
+        [ch],
+        1,
+        {},
+    )
+    depth_map = {
+        "depth_modules": {
+            "witnessing_presence": {
+                "chapter_affinity": [1, 2],
+                "topic_restriction": ["grief", "depression"],
+                "sources": [{"type": "teacher_atom", "slot_types": ["PERMISSION"]}],
+                "target_words_per_chapter": [200, 500],
+            }
+        },
+        "topic_overrides": {"anxiety": {"depth_priority_early": ["witnessing_presence"]}},
+    }
+    out = apply_depth_pass(book, depth_map, repo_root=_repo_root())
+    assert not any("WITNESSING" in s.slot_type for s in out.chapters[0].slots)
+
+
+def test_depth_pass_uses_alternate_variants(fmt_std):
+    """Registry depth path prefers F2+ variants over F1."""
+    from phoenix_v4.planning.enrichment_select import _load_depth_content
+
+    text = _load_depth_content(
+        {
+            "type": "registry_variant",
+            "section_types": ["HOOK"],
+            "variant_preference": ["F2", "F3", "F4"],
+        },
+        topic="anxiety",
+        teacher_id=None,
+        persona_id="gen_z_professionals",
+        chapter_number=1,
+        seed="depth:anxiety:1:recognition_depth",
+        repo_root=_repo_root(),
+    )
+    assert text
+    reg = __import__(
+        "phoenix_v4.planning.registry_resolver", fromlist=["load_registry"]
+    ).load_registry("anxiety")
+    f1 = reg["sections"]["chapter_01"]["sections"]["section_01"]["variants"][0]["content"]
+    assert text.strip() != f1.strip()
+
+
+def test_depth_pass_logs_audit(fmt_std):
+    slot = EnrichedSlot("HOOK", "short", "t", "id", 2500, 1, [])
+    ch = EnrichedChapter(1, "r", "wt", "th", [slot], 1, {})
+    book = EnrichedBook(
+        1,
+        "enrichment_select",
+        "anxiety",
+        "ahjan",
+        "gen_z_professionals",
+        "standard_book",
+        [ch],
+        1,
+        {},
+    )
+    import yaml
+
+    depth_map = yaml.safe_load(
+        (_repo_root() / "config" / "depth" / "depth_module_map.yaml").read_text(encoding="utf-8")
+    )
+    out = apply_depth_pass(book, depth_map, repo_root=_repo_root())
+    entries = out.enrichment_audit["depth_modules_added"]
+    assert entries
+    assert all("chapter" in e and "module" in e and "words_added" in e for e in entries)
+
+
+def test_depth_pass_stops_at_target(fmt_std):
+    """Truncates a long block so added words do not exceed deficit cap for one chunk."""
+    long_text = "word " * 500
+    slot = EnrichedSlot("HOOK", long_text, "t", "id", 600, 400, [])
+    ch = EnrichedChapter(1, "r", "wt", "th", [slot], 400, {})
+    book = EnrichedBook(
+        1,
+        "enrichment_select",
+        "anxiety",
+        "ahjan",
+        "gen_z_professionals",
+        "standard_book",
+        [ch],
+        400,
+        {},
+    )
+    depth_map = {
+        "depth_modules": {
+            "recognition_depth": {
+                "chapter_affinity": "all",
+                "sources": [{"type": "teacher_atom", "slot_types": ["HOOK"]}],
+                "target_words_per_chapter": [200, 120],
+            }
+        },
+        "topic_overrides": {"anxiety": {"depth_priority_early": ["recognition_depth"]}},
+    }
+    out = apply_depth_pass(book, depth_map, repo_root=_repo_root())
+    depth_slots = [s for s in out.chapters[0].slots if s.slot_type.startswith("DEPTH_")]
+    assert depth_slots
+    assert depth_slots[0].actual_words <= 120
+
+
+def test_depth_pass_banned_chapters_grief(fmt_std):
+    """banned_chapters blocks practice_scaffold in listed chapters."""
+    slot = EnrichedSlot("HOOK", "x", "t", "id", 3000, 1, [])
+    ch = EnrichedChapter(3, "r", "wt", "th", [slot], 1, {})
+    book = EnrichedBook(
+        1,
+        "enrichment_select",
+        "grief",
+        "ahjan",
+        "gen_z_professionals",
+        "standard_book",
+        [ch],
+        1,
+        {},
+    )
+    depth_map = {
+        "depth_modules": {
+            "practice_scaffold": {
+                "chapter_affinity": "all",
+                "sources": [{"type": "component_template", "pool": "bridge"}],
+                "target_words_per_chapter": [200, 400],
+            }
+        },
+        "topic_overrides": {
+            "grief": {
+                "depth_priority_mid": ["practice_scaffold"],
+                "banned_chapters": {"practice_scaffold": [1, 2, 3, 4, 5, 6, 7, 8]},
+            }
+        },
+    }
+    out = apply_depth_pass(book, depth_map, repo_root=_repo_root())
+    assert not any("practice_scaffold" in s.source for s in out.chapters[0].slots)
