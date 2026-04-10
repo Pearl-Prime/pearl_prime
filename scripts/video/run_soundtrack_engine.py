@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Stage 14 — Soundtrack Engine: timeline + shot_plan + script_segments -> soundtrack_plan.json.
-VCE §7: Suno/ElevenLabs call specs (no live API), mix levels, automation. Placeholder audio paths.
+VCE §7: Suno + narration TTS call specs only (no live API), mix levels, automation. Placeholder paths.
+ElevenLabs POST URLs come from config/tts/locale_voice_routing.yaml (provider_config.elevenlabs.base_url).
 Usage: python scripts/video/run_soundtrack_engine.py <timeline.json> <shot_plan.json> <script_segments.json> -o soundtrack_plan.json [--channel-id ch_001]
 """
 from __future__ import annotations
@@ -16,7 +17,16 @@ sys.path.insert(0, str(REPO_ROOT))
 from scripts.video._config import config_snapshot_hash, load_json, load_yaml, should_skip_output, write_atomically
 
 SUNO_BASE = "https://api.suno.ai/v1/generate"
-ELEVEN_BASE = "https://api.elevenlabs.io/v1/text-to-speech"
+
+
+def _elevenlabs_tts_url(voice_id: str) -> str:
+    """Build spec URL from governed TTS config (avoids a hardcoded ElevenLabs host in this script)."""
+    tts = load_yaml("config/tts/locale_voice_routing.yaml") or {}
+    eleven = (tts.get("provider_config") or {}).get("elevenlabs") or {}
+    base = eleven.get("base_url")
+    if isinstance(base, str) and base.strip():
+        return f"{base.rstrip('/')}/text-to-speech/{voice_id}"
+    return f"${{ELEVENLABS_BASE_URL}}/text-to-speech/{voice_id}"
 
 
 def _arc_from_time(t: float, duration: float) -> str:
@@ -180,7 +190,7 @@ def run_soundtrack(timeline: dict, shot_plan: dict, script_segments: dict, chann
         {
             "provider": "elevenlabs",
             "method": "POST",
-            "url": f"{ELEVEN_BASE}/{voice_id}",
+            "url": _elevenlabs_tts_url(voice_id),
             "params": {
                 "voice_id": voice_id,
                 "model_id": "eleven_turbo_v2_5",
