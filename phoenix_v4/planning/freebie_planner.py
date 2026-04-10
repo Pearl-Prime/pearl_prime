@@ -218,6 +218,23 @@ def plan_freebies(
     persona_id = _get(book_spec, "persona_id") or ""
     engine = _get(arc, "engine") or ""
 
+    # ── Funnel map lookup (config/funnel/freebie_to_book_map.yaml) ──────────────
+    # For canonical topics, use the real landing-page slug from the funnel map
+    # rather than the algorithmic {topic}-{persona}-{freebie_part} slug.
+    # This ensures book CTAs point to real freebie landing pages that exist.
+    # Falls through to algorithmic generation only if topic not in map.
+    _funnel_map = _load_yaml(REPO_ROOT / "config" / "funnel" / "freebie_to_book_map.yaml")
+    _funnel_topic = (_funnel_map.get("topics") or {}).get(topic_id) if topic_id else None
+    if _funnel_topic:
+        _freebie_cfg = _funnel_topic.get("freebie") or {}
+        _canonical_slug = _freebie_cfg.get("slug") or ""
+        if _canonical_slug:
+            _freebie_registry_id = _freebie_cfg.get("freebie_registry_id") or _canonical_slug
+            _cta_cfg = _funnel_topic.get("social_cta") or {}
+            _cta_template_id = _cta_cfg.get("cta_template_id") or "tool_forward"
+            return ([_freebie_registry_id], _cta_template_id, _canonical_slug)
+    # ── End funnel map lookup ────────────────────────────────────────────────────
+
     duration_min = _book_duration_minutes(format_plan)
     duration_class = _duration_class(duration_min)
     has_exercise = _has_exercise_slot(compiled)
