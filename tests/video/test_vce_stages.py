@@ -12,6 +12,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 FIX = REPO_ROOT / "fixtures" / "video_pipeline"
 VID = REPO_ROOT / "scripts" / "video"
 PY = sys.executable
+_NJC = ["--no-job-check"]
 
 
 @pytest.fixture
@@ -23,23 +24,23 @@ def tmp_video_plan(tmp_path):
     if not manifest.exists():
         pytest.skip("fixtures missing")
     r = subprocess.run(
-        [PY, str(VID / "prepare_script_segments.py"), str(manifest), "-o", str(out / "script_segments.json"), "--force"],
+        [PY, str(VID / "prepare_script_segments.py"), str(manifest), "-o", str(out / "script_segments.json"), "--force"] + _NJC,
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
     )
     assert r.returncode == 0, r.stderr
     subprocess.run(
-        [PY, str(VID / "run_shot_planner.py"), str(out / "script_segments.json"), "-o", str(out / "shot_plan.json"), "--force"],
+        [PY, str(VID / "run_shot_planner.py"), str(out / "script_segments.json"), "-o", str(out / "shot_plan.json"), "--force"] + _NJC,
         cwd=REPO_ROOT, check=True,
     )
     subprocess.run(
-        [PY, str(VID / "run_asset_resolver.py"), str(out / "shot_plan.json"), "-o", str(out / "resolved_assets.json"), "--force"],
+        [PY, str(VID / "run_asset_resolver.py"), str(out / "shot_plan.json"), "-o", str(out / "resolved_assets.json"), "--force"] + _NJC,
         cwd=REPO_ROOT, check=True,
     )
     subprocess.run(
         [PY, str(VID / "run_timeline_builder.py"), str(out / "shot_plan.json"), str(out / "resolved_assets.json"),
-         "-o", str(out / "timeline.json"), "--force"],
+         "-o", str(out / "timeline.json"), "--force"] + _NJC,
         cwd=REPO_ROOT, check=True,
     )
     return out
@@ -55,7 +56,7 @@ def test_layer_compositor_writes_json(tmp_video_plan):
     out = tmp_video_plan
     r = subprocess.run(
         [PY, str(VID / "run_layer_compositor.py"), str(out / "resolved_assets.json"), str(out / "shot_plan.json"),
-         "-o", str(out / "composited_layers.json"), "--force"],
+         "-o", str(out / "composited_layers.json"), "--force"] + _NJC,
         cwd=REPO_ROOT, capture_output=True, text=True,
     )
     assert r.returncode == 0, r.stderr
@@ -68,12 +69,12 @@ def test_animation_engine_writes_json(tmp_video_plan):
     out = tmp_video_plan
     subprocess.run(
         [PY, str(VID / "run_layer_compositor.py"), str(out / "resolved_assets.json"), str(out / "shot_plan.json"),
-         "-o", str(out / "composited_layers.json"), "--force"],
+         "-o", str(out / "composited_layers.json"), "--force"] + _NJC,
         cwd=REPO_ROOT, check=True,
     )
     r = subprocess.run(
         [PY, str(VID / "run_animation_engine.py"), str(out / "composited_layers.json"), str(out / "shot_plan.json"),
-         str(out / "timeline.json"), "-o", str(out / "animation_plan.json"), "--force"],
+         str(out / "timeline.json"), "-o", str(out / "animation_plan.json"), "--force"] + _NJC,
         cwd=REPO_ROOT, capture_output=True, text=True,
     )
     assert r.returncode == 0, r.stderr
@@ -84,12 +85,12 @@ def test_animation_engine_writes_json(tmp_video_plan):
 def test_soundtrack_engine_writes_json(tmp_video_plan):
     out = tmp_video_plan
     subprocess.run(
-        [PY, str(VID / "prepare_script_segments.py"), str(FIX / "render_manifest.json"), "-o", str(out / "script_segments.json"), "--force"],
+        [PY, str(VID / "prepare_script_segments.py"), str(FIX / "render_manifest.json"), "-o", str(out / "script_segments.json"), "--force"] + _NJC,
         cwd=REPO_ROOT, check=True,
     )
     subprocess.run(
         [PY, str(VID / "run_soundtrack_engine.py"), str(out / "timeline.json"), str(out / "shot_plan.json"),
-         str(out / "script_segments.json"), "-o", str(out / "soundtrack_plan.json"), "--force"],
+         str(out / "script_segments.json"), "-o", str(out / "soundtrack_plan.json"), "--force"] + _NJC,
         cwd=REPO_ROOT, check=True,
     )
     sp = json.loads((out / "soundtrack_plan.json").read_text(encoding="utf-8"))
@@ -108,31 +109,32 @@ def test_platform_and_multilang(tmp_video_plan):
         else:
             cmd += [str(out / "composited_layers.json"), str(out / "shot_plan.json"), str(out / "timeline.json"),
                     "-o", str(out / outp), "--force"]
+        cmd += _NJC
         subprocess.run(cmd, cwd=REPO_ROOT, check=True)
     subprocess.run(
-        [PY, str(VID / "prepare_script_segments.py"), str(FIX / "render_manifest.json"), "-o", str(out / "script_segments.json"), "--force"],
+        [PY, str(VID / "prepare_script_segments.py"), str(FIX / "render_manifest.json"), "-o", str(out / "script_segments.json"), "--force"] + _NJC,
         cwd=REPO_ROOT, check=True,
     )
     subprocess.run(
         [PY, str(VID / "run_soundtrack_engine.py"), str(out / "timeline.json"), str(out / "shot_plan.json"),
-         str(out / "script_segments.json"), "-o", str(out / "soundtrack_plan.json"), "--force"],
+         str(out / "script_segments.json"), "-o", str(out / "soundtrack_plan.json"), "--force"] + _NJC,
         cwd=REPO_ROOT, check=True,
     )
     stub = {"video_id": "v1", "plan_id": "plan-therapeutic-001", "title": "t", "description": "d", "tags": [], "primary_asset_ids": ["a"], "channel_id": "ch_001"}
     (out / "stub.json").write_text(json.dumps(stub), encoding="utf-8")
     subprocess.run(
         [PY, str(VID / "run_platform_adapter.py"), str(out / "timeline.json"), str(out / "stub.json"),
-         str(out / "animation_plan.json"), "-o", str(out / "platform_variants.json"), "--platforms", "youtube", "--force"],
+         str(out / "animation_plan.json"), "-o", str(out / "platform_variants.json"), "--platforms", "youtube", "--force"] + _NJC,
         cwd=REPO_ROOT, check=True,
     )
     subprocess.run(
         [PY, str(VID / "run_caption_adapter.py"), str(out / "timeline.json"), str(out / "script_segments.json"),
-         "-o", str(out / "captions.json"), "--force"],
+         "-o", str(out / "captions.json"), "--force"] + _NJC,
         cwd=REPO_ROOT, check=True,
     )
     subprocess.run(
         [PY, str(VID / "run_multilang_renderer.py"), str(out / "soundtrack_plan.json"), str(out / "platform_variants.json"),
-         str(out / "captions.json"), "-o", str(out / "multilang_plan.json"), "--languages", "en,zh-CN", "--force"],
+         str(out / "captions.json"), "-o", str(out / "multilang_plan.json"), "--languages", "en,zh-CN", "--force"] + _NJC,
         cwd=REPO_ROOT, check=True,
     )
     ml = json.loads((out / "multilang_plan.json").read_text(encoding="utf-8"))
@@ -156,7 +158,8 @@ def test_pipeline_test_vce_001():
         pytest.skip("fixture missing")
     r = subprocess.run(
         [PY, str(VID / "run_pipeline.py"), "--plan-id", "test-vce-001", "--fixtures-dir", str(FIX),
-         "--format", "short", "--platforms", "youtube,tiktok", "--languages", "en,zh-CN", "--force"],
+         "--format", "short", "--platforms", "youtube,tiktok", "--languages", "en,zh-CN", "--force",
+         "--no-job-check"],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
