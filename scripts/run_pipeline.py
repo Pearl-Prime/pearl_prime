@@ -352,7 +352,24 @@ def main() -> int:
         default=None,
         help="Atoms model: legacy (persona-specific) or cluster (core+overlay). Precedence: CLI > spec > config (legacy_personas).",
     )
+    ap.add_argument(
+        "--workspace",
+        default=None,
+        help="Directory containing job.json for unified pipeline job enforcement (see scripts/pipeline/).",
+    )
+    ap.add_argument(
+        "--no-job-check",
+        dest="no_job_check",
+        action="store_true",
+        help="Skip job.json enforcement (CI / emergency only).",
+    )
     args = ap.parse_args()
+
+    if getattr(args, "no_job_check", False):
+        print(
+            "WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).",
+            file=sys.stderr,
+        )
 
     # --- Quality profile resolution ---
     # --skip-quality-gates forces debug (no gates). --enforce-book-pass-gate implies at
@@ -431,6 +448,16 @@ def main() -> int:
     if not arc_path.exists():
         print(f"Error: arc file not found: {arc_path}", file=sys.stderr)
         return 1
+
+    ebook_job_ws = (
+        Path(args.workspace).resolve()
+        if getattr(args, "workspace", None)
+        else (Path(args.out).resolve().parent if args.out else Path.cwd())
+    )
+    if not getattr(args, "no_job_check", False):
+        from scripts.pipeline.check_job import require_stage
+
+        require_stage("preflight", ebook_job_ws)
 
     # Load arc early so we can align format plan to arc chapter_count (Arc-First)
     from phoenix_v4.planning.arc_loader import load_arc
@@ -956,6 +983,10 @@ def main() -> int:
             }, indent=2))
             print(f"Output contract: {contract_path}")
 
+        if not getattr(args, "no_job_check", False):
+            from scripts.pipeline.advance_stage import mark_pipeline_finished
+
+            mark_pipeline_finished(ebook_job_ws, "ebook")
         return 0
 
     # ── NO REGISTRY = USE ATOM ASSEMBLY (the original V4 pipeline) ──
@@ -1838,6 +1869,10 @@ def main() -> int:
                 print(f"EI V2 comparison failed (non-blocking): {exc}", file=sys.stderr)
     else:
         print(json.dumps(out, indent=2))
+    if not getattr(args, "no_job_check", False):
+        from scripts.pipeline.advance_stage import mark_pipeline_finished
+
+        mark_pipeline_finished(ebook_job_ws, "ebook")
     return 0
 
 

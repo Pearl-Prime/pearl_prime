@@ -55,9 +55,20 @@ def main() -> int:
     ap.add_argument("--auto-generate", action="store_true", help="Auto-generate missing image assets via RunComfy")
     ap.add_argument("--upload", action="store_true", help="Run Stage 18 Upload/Publish after pipeline (dry-run by default)")
     ap.add_argument("--upload-live", action="store_true", help="Upload for real (requires --upload)")
+    ap.add_argument(
+        "--no-job-check",
+        dest="no_job_check",
+        action="store_true",
+        help="Skip job.json enforcement on stage scripts (CI/testing only)",
+    )
     args = ap.parse_args()
 
     skip_render = args.skip_render and not args.no_skip_render
+    if args.no_job_check:
+        print(
+            "WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).",
+            file=sys.stderr,
+        )
 
     fixtures = Path(args.fixtures_dir or str(REPO_ROOT / "fixtures" / "video_pipeline"))
     out_root = Path(args.out_dir or str(REPO_ROOT / "artifacts" / "video" / args.plan_id))
@@ -79,6 +90,7 @@ def main() -> int:
     scripts = REPO_ROOT / "scripts" / "video"
     py = sys.executable
     force_flag = ["--force"] if args.force else []
+    job_flag = ["--no-job-check"] if args.no_job_check else []
 
     aspect = _format_to_aspect(args.format)
     if aspect == "9:16":
@@ -106,7 +118,7 @@ def main() -> int:
           str(out_root / "script_segments.json"), "-o", str(out_root / "soundtrack_plan.json"), "--channel-id", args.channel_id] + force_flag, "Soundtrack Engine"),
     ]
     for cmd, name in steps:
-        if not run(cmd, REPO_ROOT):
+        if not run(cmd + job_flag, REPO_ROOT):
             print(f"Failed: {name}", file=sys.stderr)
             return 1
         print(f"OK: {name}")
@@ -200,7 +212,7 @@ def main() -> int:
     ]
     ct = content_type
 
-    if not run(qc_cmd, REPO_ROOT):
+    if not run(qc_cmd + job_flag, REPO_ROOT):
         print("Failed: QC", file=sys.stderr)
         return 1
     print("OK: QC")
@@ -223,7 +235,7 @@ def main() -> int:
         render_cmd.extend(["--quality", args.quality])
         if soundtrack_audio_path.exists():
             render_cmd.extend(["--soundtrack-plan", str(soundtrack_audio_path)])
-        if not run(render_cmd, REPO_ROOT):
+        if not run(render_cmd + job_flag, REPO_ROOT):
             print("Failed: Render", file=sys.stderr)
             return 1
         print("OK: Render")
@@ -244,7 +256,7 @@ def main() -> int:
             "--platforms", args.platforms,
             "--content-type", ct,
         ]
-        if not run(qc_pub, REPO_ROOT):
+        if not run(qc_pub + job_flag, REPO_ROOT):
             print("Failed: QC (publish mode)", file=sys.stderr)
             return 1
         print("OK: QC (publish mode)")
@@ -256,7 +268,7 @@ def main() -> int:
         str(out_root / "animation_plan.json"),
         "-o", str(out_root / "platform_variants.json"),
         "--platforms", args.platforms,
-    ] + force_flag, REPO_ROOT):
+    ] + force_flag + job_flag, REPO_ROOT):
         print("Failed: Platform Adapter", file=sys.stderr)
         return 1
     print("OK: Platform Adapter")
@@ -268,7 +280,7 @@ def main() -> int:
         str(out_root / "captions.json"),
         "-o", str(out_root / "multilang_plan.json"),
         "--languages", args.languages,
-    ] + force_flag, REPO_ROOT):
+    ] + force_flag + job_flag, REPO_ROOT):
         print("Failed: Multi-Language Renderer", file=sys.stderr)
         return 1
     print("OK: Multi-Language Renderer")
@@ -335,6 +347,7 @@ def main() -> int:
             pass  # dry-run is the default
         else:
             upload_cmd.append("--no-dry-run")
+        upload_cmd.extend(job_flag)
         if not run(upload_cmd, REPO_ROOT):
             print("Failed: Upload/Publish", file=sys.stderr)
             return 1

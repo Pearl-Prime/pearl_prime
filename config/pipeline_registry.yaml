@@ -1,0 +1,76 @@
+schema_version: 1
+pipelines:
+  video:
+    guide: docs/VIDEO_PIPELINE_COMPLETE_GUIDE.md
+    entry_script: scripts/video/run_pipeline.py
+    gate_script: scripts/video/pipeline_gate.py
+    required_params: [teacher, topic, brand, format, locale]
+    stages:
+      - { name: script_prep, script: scripts/video/prepare_script_segments.py, required: true }
+      - { name: shot_plan, script: scripts/video/run_shot_planner.py, required: true }
+      - { name: asset_resolve, script: scripts/video/run_asset_resolver.py, required: true }
+      - { name: timeline, script: scripts/video/run_timeline_builder.py, required: true }
+      - { name: caption, script: scripts/video/run_caption_adapter.py, required: true }
+      - { name: layer_comp, script: scripts/video/run_layer_compositor.py, required: true }
+      - { name: animation, script: scripts/video/run_animation_engine.py, required: true }
+      - { name: soundtrack, script: scripts/video/run_soundtrack_engine.py, required: true }
+      - { name: qc_plan, script: scripts/video/run_qc.py, required: true }
+      - { name: render, script: scripts/video/run_render.py, required: true }
+      - { name: qc_publish, script: scripts/video/run_qc.py, required: true }
+      - { name: platform_adapt, script: scripts/video/run_platform_adapter.py, required: true }
+      - { name: multilang, script: scripts/video/run_multilang_renderer.py, required: true }
+      - { name: upload, script: scripts/video/run_upload.py, required: false }
+
+  ebook:
+    guide: docs/EBOOK_PIPELINE_COMPLETE_GUIDE.md
+    entry_script: scripts/run_pipeline.py
+    gate_script: scripts/pipeline/check_job.py
+    required_params: [topic, persona, arc_path, locale]
+    stages:
+      - { name: preflight, script: inline, required: true }
+      - { name: book_spec, script: inline, required: true }
+      - { name: format_plan, script: inline, required: true }
+      - { name: compile, script: inline, required: true }
+      - { name: prose_render, script: inline, required: true }
+      - { name: quality_gate, script: inline, required: true }
+      - { name: freebie_gen, script: inline, required: false }
+      - { name: epub_build, script: scripts/release/build_epub.py, required: false }
+      - { name: distribute, script: inline, required: false }
+
+  manga:
+    guide: docs/MANGA_PIPELINE_COMPLETE_GUIDE.md
+    entry_script: scripts/manga/run_chapter_production.py
+    gate_script: scripts/pipeline/check_job.py
+    required_params: [teacher, topic, brand, genre, locale]
+    stages:
+      - { name: chapter_production, script: scripts/manga/run_chapter_production.py, required: true }
+      - { name: ite_breath, script: scripts/manga/ite_panel_breath.py, required: true }
+      - { name: ite_gutter, script: scripts/manga/ite_gutter_therapy.py, required: true }
+      - { name: ite_color_arc, script: scripts/manga/ite_color_arc.py, required: true }
+      - { name: ite_fractal, script: scripts/manga/ite_fractal_check.py, required: true }
+      - { name: ite_qc, script: scripts/manga/ite_qc.py, required: true }
+      - { name: webtoon_pack, script: scripts/release/build_manga_webtoon.py, required: false }
+
+  podcast:
+    guide: docs/PODCAST_PIPELINE_COMPLETE_GUIDE.md
+    entry_script: scripts/podcast/run_podcast_pipeline.py
+    gate_script: scripts/pipeline/check_job.py
+    required_params: [brand_id, locale, week, book_dir]
+    stages:
+      - { name: assemble, script: scripts/podcast/assemble_podcast_episode.py, required: true }
+      - { name: render_audio, script: scripts/podcast/render_podcast_audio.py, required: true }
+      - { name: feed, script: scripts/podcast/generate_podcast_feed.py, required: true }
+      - { name: upload, script: scripts/podcast/upload_podcast_to_r2.py, required: false }
+
+  audiobook:
+    guide: docs/AUDIOBOOK_PIPELINE_COMPLETE_GUIDE.md
+    entry_script: scripts/audiobook/generate_showcase_bundle.py
+    gate_script: scripts/pipeline/check_job.py
+    required_params: [teacher, topic, brand, locale]
+    stages:
+      - { name: prose_gen, script: inline, required: true }
+      - { name: tts_render, script: inline, required: true }
+      - { name: cover_gen, script: inline, required: false }
+      - { name: video_render, script: scripts/video/render_audiobook.py, required: false }
+      - { name: manifest, script: inline, required: true }
+      - { name: distribute, script: inline, required: false }

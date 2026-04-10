@@ -75,9 +75,23 @@ def main() -> int:
     ap.add_argument("-o", "--out", required=True)
     ap.add_argument("--languages", default="en", help="Comma-separated BCP-47 style codes")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--workspace", type=str, default=None, help="Directory containing job.json (default: parent of --out)")
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline._video_workspace import resolve_video_workspace
+    from scripts.pipeline.advance_stage import mark_complete, mark_failed
+    from scripts.pipeline.check_job import require_stage
+
+    ws = resolve_video_workspace(args, out_attr="out")
+    if not args.no_job_check:
+        require_stage("multilang", ws)
+
     paths = [Path(args.soundtrack_plan), Path(args.platform_variants), Path(args.captions)]
     if not all(p.exists() for p in paths):
+        if not args.no_job_check:
+            mark_failed(ws, "multilang", error="input not found")
         print("Error: input not found", file=sys.stderr)
         return 1
     ss, pv, cap = load_json(paths[0]), load_json(paths[1]), load_json(paths[2])
@@ -86,10 +100,14 @@ def main() -> int:
     h = config_snapshot_hash()
     if should_skip_output(out, ["plan_id", "locales", "config_hash"], args.force, h):
         print(f"Skip (exists): {out}")
+        if not args.no_job_check:
+            mark_complete(ws, "multilang", output=out.name)
         return 0
     doc = run_multilang(ss, pv, cap, langs)
     write_atomically(out, doc)
     print(f"Wrote multilang_plan for {len(langs)} languages to {out}")
+    if not args.no_job_check:
+        mark_complete(ws, "multilang", output=out.name)
     return 0
 
 

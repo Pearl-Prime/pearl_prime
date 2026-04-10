@@ -66,10 +66,23 @@ def main() -> int:
     ap.add_argument("--base-url", default=os.environ.get("PODCAST_PUBLIC_BASE_URL", "https://cdn.example.com/podcast"))
     ap.add_argument("--skip-upload", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument(
+        "--workspace",
+        type=Path,
+        default=None,
+        help="Directory containing job.json (default: --output-dir)",
+    )
+    ap.add_argument(
+        "--no-job-check",
+        dest="no_job_check",
+        action="store_true",
+        help="Skip job.json enforcement for spawned stage scripts (CI only)",
+    )
     args = ap.parse_args()
 
     book_dir = args.book_dir.resolve()
     out_root = args.output_dir.resolve()
+    job_ws = str((args.workspace or out_root).resolve())
     podcast_dir = out_root / "podcast"
     podcast_dir.mkdir(parents=True, exist_ok=True)
     work = podcast_dir / "_work"
@@ -112,7 +125,11 @@ def main() -> int:
             args.series_slug,
             "--output-dir",
             str(asm_dir),
+            "--workspace",
+            job_ws,
         ]
+        if args.no_job_check:
+            cmd_ass.append("--no-job-check")
         if args.dry_run:
             print(" ".join(cmd_ass))
             print("(render would run after assemble for %s)" % fmt)
@@ -137,7 +154,11 @@ def main() -> int:
             str(mp3_path),
             "--voice-provider",
             "auto",
+            "--workspace",
+            job_ws,
         ]
+        if args.no_job_check:
+            cmd_render.append("--no-job-check")
         if not run_cmd(cmd_render):
             return 1
 
@@ -191,7 +212,11 @@ def main() -> int:
         args.base_url,
         "--output",
         str(podcast_dir / "feed.xml"),
+        "--workspace",
+        job_ws,
     ]
+    if args.no_job_check:
+        cmd_feed.append("--no-job-check")
     if args.dry_run:
         print(" ".join(cmd_feed))
     elif not run_cmd(cmd_feed):
@@ -210,7 +235,11 @@ def main() -> int:
             args.series_slug,
             "--week",
             args.week,
+            "--workspace",
+            job_ws,
         ]
+        if args.no_job_check:
+            cmd_up.append("--no-job-check")
         upload_status = "ok" if run_cmd(cmd_up) else "failed"
 
     report = {

@@ -41,10 +41,22 @@ def main() -> int:
     )
     ap.add_argument("--style-id", default="dark_psychological")
     ap.add_argument("--teacher-id", default="ahjan")
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline.advance_stage import mark_complete, mark_failed
+    from scripts.pipeline.check_job import require_stage
+
+    ws = args.workspace.resolve()
+    ws.mkdir(parents=True, exist_ok=True)
+    if not args.no_job_check:
+        require_stage("chapter_production", ws)
 
     path = args.chapter_script
     if not path.exists():
+        if not args.no_job_check:
+            mark_failed(ws, "chapter_production", error=f"missing {path}")
         print(f"Error: not found: {path}", file=sys.stderr)
         return 1
     raw = json.loads(path.read_text(encoding="utf-8"))
@@ -56,15 +68,14 @@ def main() -> int:
             print("--replay-map required for replay backend", file=sys.stderr)
             return 1
         backend = FixtureReplayImageBackend.from_json_file(args.replay_map)
-
-    ws = args.workspace.resolve()
-    ws.mkdir(parents=True, exist_ok=True)
     snap = config_snapshot_hash()
 
     final_out = None
     if args.compose_pages:
         final_out = ws / manga_paths.FINAL_PAGE_COMPOSITE_DIR
         if args.backend == "noop":
+            if not args.no_job_check:
+                mark_failed(ws, "chapter_production", error="compose-pages needs replay backend")
             print("compose-pages needs replay backend with real PNG paths", file=sys.stderr)
             return 1
 
@@ -78,6 +89,8 @@ def main() -> int:
             final_pages_out=final_out,
         )
     except Exception as e:
+        if not args.no_job_check:
+            mark_failed(ws, "chapter_production", error=str(e))
         print(f"Production failed: {e}", file=sys.stderr)
         return 1
 
@@ -90,6 +103,8 @@ def main() -> int:
     if final_out and bundle.get("final_page_paths"):
         for p in bundle["final_page_paths"]:
             print(f"  page composite: {p}")
+    if not args.no_job_check:
+        mark_complete(ws, "chapter_production", output="panel_prompts.json")
     return 0
 
 

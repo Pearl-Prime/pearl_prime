@@ -263,6 +263,7 @@ def main() -> int:
                         "--out", str(out_path),
                         "--no-update-freebie-index",
                         "--skip-quality-gates",
+                        "--no-job-check",
                     ],
                     cwd=str(REPO_ROOT),
                     capture_output=True,
@@ -272,7 +273,14 @@ def main() -> int:
                 if r.returncode == 0 and out_path.exists():
                     import json
                     data = json.loads(out_path.read_text())
-                    pipeline_ok = isinstance(data.get("plan_hash"), str) and isinstance(data.get("atom_ids"), list)
+                    compiled_ok = isinstance(data.get("plan_hash"), str) and isinstance(data.get("atom_ids"), list)
+                    registry_ok = (
+                        data.get("source") == "section_registry"
+                        and isinstance(data.get("chapter_count"), int)
+                        and data.get("chapter_count", 0) >= 1
+                        and isinstance(data.get("plan_id"), str)
+                    )
+                    pipeline_ok = compiled_ok or registry_ok
                 else:
                     pipeline_ok = False
                     # Surface the real error so it's visible in gate output

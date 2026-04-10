@@ -298,8 +298,18 @@ def main() -> int:
     parser.add_argument("--platforms", type=str, help="Comma-separated platform filter (e.g., youtube,tiktok)")
     parser.add_argument("--no-dry-run", action="store_true", help="Actually upload (default is dry-run)")
     parser.add_argument("-o", "--output", type=Path, help="Write results JSON to this path")
+    parser.add_argument("--workspace", type=str, default=None, help="Directory containing job.json (default: --video-dir)")
+    parser.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
 
     args = parser.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline.advance_stage import mark_complete, mark_failed
+    from scripts.pipeline.check_job import require_stage
+
+    ws = Path(args.workspace).resolve() if args.workspace else Path(args.video_dir).resolve()
+    if not args.no_job_check:
+        require_stage("upload", ws)
 
     logging.basicConfig(
         level=logging.INFO,
@@ -325,7 +335,11 @@ def main() -> int:
     failed = sum(1 for r in results if not r.get("success"))
     if failed > 0 and not dry_run:
         logger.error("%d uploads failed", failed)
+        if not args.no_job_check:
+            mark_failed(ws, "upload", error=f"{failed} uploads failed")
         return 1
+    if not args.no_job_check:
+        mark_complete(ws, "upload", output="upload_results.json")
     return 0
 
 

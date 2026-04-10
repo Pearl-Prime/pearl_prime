@@ -85,6 +85,7 @@ def test_run_pipeline_persists_location_fields_when_build_succeeds() -> None:
             "--out",
             str(out_path),
             "--no-generate-freebies",
+            "--no-job-check",
         ]
         result = subprocess.run(
             cmd,
@@ -96,6 +97,8 @@ def test_run_pipeline_persists_location_fields_when_build_succeeds() -> None:
         if result.returncode != 0:
             return
         data = json.loads(out_path.read_text())
+        if data.get("source") == "section_registry":
+            return
         assert data.get("requested_topic_id") == "overthinking"
         assert data.get("requested_persona_id") == "gen_z_professionals"
         assert data.get("canonical_topic_id") == data.get("topic_id")

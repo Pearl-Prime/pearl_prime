@@ -348,10 +348,23 @@ def main() -> int:
     ap.add_argument("-o", "--out", required=True, help="Output composited_layers.json")
     ap.add_argument("--format", default="short", help="VCE format key: short|mid|long|motion_comic|lofi|exercise")
     ap.add_argument("--force", action="store_true", help="Overwrite output")
+    ap.add_argument("--workspace", type=str, default=None, help="Directory containing job.json (default: parent of --out)")
+    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
     args = ap.parse_args()
+    if args.no_job_check:
+        print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
+    from scripts.pipeline._video_workspace import resolve_video_workspace
+    from scripts.pipeline.advance_stage import mark_complete, mark_failed
+    from scripts.pipeline.check_job import require_stage
+
+    ws = resolve_video_workspace(args, out_attr="out")
+    if not args.no_job_check:
+        require_stage("layer_comp", ws)
 
     rpath, spath = Path(args.resolved_assets), Path(args.shot_plan)
     if not rpath.exists() or not spath.exists():
+        if not args.no_job_check:
+            mark_failed(ws, "layer_comp", error="input not found")
         print("Error: input not found", file=sys.stderr)
         return 1
     resolved = load_json(rpath)
@@ -360,10 +373,14 @@ def main() -> int:
     exp_hash = config_snapshot_hash()
     if should_skip_output(out_path, ["plan_id", "shots", "config_hash"], args.force, exp_hash):
         print(f"Skip (exists): {out_path}")
+        if not args.no_job_check:
+            mark_complete(ws, "layer_comp", output=out_path.name)
         return 0
     doc = run_compositor(resolved, shot_plan, args.format)
     write_atomically(out_path, doc)
     print(f"Wrote composited_layers ({len(doc['shots'])} shots) to {out_path}")
+    if not args.no_job_check:
+        mark_complete(ws, "layer_comp", output=out_path.name)
     return 0
 
 

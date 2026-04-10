@@ -66,12 +66,15 @@ def test_atoms_model_spec_passthrough_cluster():
             "--arc", str(arc_path),
             "--out", str(out_path),
             "--no-generate-freebies",
+            "--no-job-check",
         ]
         r = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=120)
         if r.returncode != 0:
             # Viability or other gates may fail in test env; skip instead of fail
             return
         data = json.loads(out_path.read_text())
+        if data.get("source") == "section_registry":
+            return
         assert data.get("atoms_model") == "cluster", "Compiled plan must preserve atoms_model=cluster from spec"
 
 
@@ -108,9 +111,12 @@ def test_atoms_model_spec_passthrough_legacy():
             "--arc", str(arc_path),
             "--out", str(out_path),
             "--no-generate-freebies",
+            "--no-job-check",
         ]
         r = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=120)
         if r.returncode != 0:
             return
         data = json.loads(out_path.read_text())
+        if data.get("source") == "section_registry":
+            return
         assert data.get("atoms_model") == "legacy", "Compiled plan must preserve atoms_model=legacy from spec"

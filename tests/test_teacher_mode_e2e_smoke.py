@@ -59,6 +59,7 @@ def test_teacher_mode_compile_smoke(teacher_id: str, tmp_path: Path):
         "--arc", str(ARC_PATH),
         "--teacher", teacher_id,
         "--out", str(out_plan),
+        "--no-job-check",
     ]
     result = subprocess.run(cmd, cwd=REPO_ROOT, capture_output=True, text=True, timeout=120)
     if not _has_f006_coverage(teacher_id):
