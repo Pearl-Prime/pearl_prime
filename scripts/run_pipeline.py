@@ -250,6 +250,29 @@ def _run_post_render_quality_gates(
     return None
 
 
+def _extract_registry_chapters(prose: str) -> list[str]:
+    """Split registry-rendered prose into per-chapter text strings.
+
+    Registry prose uses plain "Chapter N" headings (not ## Chapter N).
+    Returns each chapter as a single string that includes the heading line.
+    """
+    lines = prose.splitlines()
+    chapters: list[str] = []
+    current_lines: list[str] = []
+    in_chapter = False
+    for line in lines:
+        if re.match(r"^\s*Chapter\s+\d+\s*$", line.strip()):
+            if in_chapter and current_lines:
+                chapters.append("\n".join(current_lines).strip())
+            current_lines = [line]
+            in_chapter = True
+        elif in_chapter:
+            current_lines.append(line)
+    if in_chapter and current_lines:
+        chapters.append("\n".join(current_lines).strip())
+    return chapters
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="BookSpec -> FormatPlan -> CompiledBook")
     ap.add_argument("--topic", default=None, help="Topic ID (e.g. relationship_anxiety)")
@@ -982,6 +1005,315 @@ def main() -> int:
                 "chapter_count": resolved_book.chapter_count,
             }, indent=2))
             print(f"Output contract: {contract_path}")
+
+            # ── REGISTRY QUALITY GATES ──────────────────────────────────────
+            # NOTE: book_pass_gate is SKIPPED — it requires atom metadata
+            # (atom_ids, chapter_slot_sequence, dominant_band_sequence) that
+            # only the atom-assembly path produces.
+            _quality_gate_failures: list[str] = []
+
+            # 1. Chapter flow gate
+            if gates_run:
+                try:
+                    from phoenix_v4.rendering.book_renderer import chapter_flow_gate_report
+                    _flow_report = chapter_flow_gate_report(prose)
+                    _flow_report_path = render_dir / "chapter_flow_report.json"
+                    _flow_report_path.write_text(
+                        json.dumps(_flow_report, indent=2), encoding="utf-8"
+                    )
+                    print(
+                        f"Chapter flow gate: {_flow_report['status']} "
+                        f"({_flow_report['failed_chapters']}/{_flow_report['chapter_count']} failed). "
+                        f"Report: {_flow_report_path}",
+                        file=sys.stderr,
+                    )
+                    if _flow_report["status"] != "PASS":
+                        for _ch in _flow_report.get("chapters", []):
+                            if _ch.get("status") != "PASS":
+                                print(
+                                    f"  Ch {_ch['chapter']}: {', '.join(_ch.get('errors', []))}",
+                                    file=sys.stderr,
+                                )
+                        if gates_hard:
+                            _quality_gate_failures.append("chapter_flow")
+                except Exception as _e:
+                    print(f"Chapter flow gate error (non-blocking): {_e}", file=sys.stderr)
+
+            # 2. Bestseller craft gate (ONTGP scoring — advisory only, never blocks)
+            if gates_run:
+                try:
+                    from phoenix_v4.quality.bestseller_craft_gate import evaluate_bestseller_craft
+                    _chapters_for_craft = _extract_registry_chapters(prose)
+                    _craft_results = []
+                    for _i, _ch_text in enumerate(_chapters_for_craft):
+                        _craft = evaluate_bestseller_craft(_ch_text)
+                        _craft_results.append({
+                            "chapter": _i + 1,
+                            "status": _craft.status,
+                            "move_scores": _craft.move_scores,
+                            "issues": _craft.issues,
+                            "remediation": _craft.remediation,
+                            "metrics": _craft.metrics,
+                        })
+                    _per_ch_means = []
+                    for _cr in _craft_results:
+                        _scores = _cr.get("move_scores", {})
+                        if _scores:
+                            _per_ch_means.append(sum(_scores.values()) / len(_scores))
+                    _overall_craft = (
+                        sum(_per_ch_means) / len(_per_ch_means) if _per_ch_means else 0.0
+                    )
+                    _craft_status = (
+                        "PASS" if _overall_craft >= 0.4
+                        else ("WARN" if _overall_craft >= 0.2 else "FAIL")
+                    )
+                    print(
+                        f"Bestseller craft gate (advisory): {_craft_status} — "
+                        f"overall ONTGP score {_overall_craft:.2f}",
+                        file=sys.stderr,
+                    )
+                    # Merge craft scores into the chapter flow report if present
+                    _flow_rpath = render_dir / "chapter_flow_report.json"
+                    if _flow_rpath.exists():
+                        _fr = json.loads(_flow_rpath.read_text(encoding="utf-8"))
+                        _fr["bestseller_craft"] = {
+                            "overall_score": round(_overall_craft, 4),
+                            "per_chapter": _craft_results,
+                        }
+                        _flow_rpath.write_text(json.dumps(_fr, indent=2), encoding="utf-8")
+                except Exception as _e:
+                    print(f"Bestseller craft gate error (non-blocking): {_e}", file=sys.stderr)
+
+            # 3. Scene anti-genericity gate
+            if args.enforce_scene_gate:
+                try:
+                    from phoenix_v4.qa.scene_anti_genericity_gate import (
+                        enforce_scene_gate as _enforce_scene_gate,
+                    )
+                    _scene_proses = _extract_registry_chapters(prose)
+                    if _scene_proses:
+                        _scene_result = _enforce_scene_gate(
+                            _scene_proses, mode=args.scene_gate_mode
+                        )
+                        _scene_report_dir = render_dir / "scene_gate"
+                        _scene_report_dir.mkdir(parents=True, exist_ok=True)
+                        _scene_report_path = _scene_report_dir / f"registry-{topic_id}.json"
+                        _scene_report_path.write_text(
+                            json.dumps({
+                                "status": _scene_result.status,
+                                "mode": _scene_result.mode,
+                                "blocking": _scene_result.blocking,
+                                "errors": _scene_result.report.errors,
+                                "warnings": _scene_result.report.warnings,
+                                "metrics": _scene_result.report.metrics,
+                            }, indent=2),
+                            encoding="utf-8",
+                        )
+                        if _scene_result.blocking:
+                            print(
+                                f"Scene anti-genericity gate FAILED. "
+                                f"Report: {_scene_report_path}",
+                                file=sys.stderr,
+                            )
+                            for _se in _scene_result.report.errors:
+                                print(f"  - {_se}", file=sys.stderr)
+                            _quality_gate_failures.append("scene_anti_genericity")
+                        else:
+                            for _sw in _scene_result.report.warnings:
+                                print(f"Scene gate warning: {_sw}", file=sys.stderr)
+                            print(
+                                f"Scene anti-genericity gate {_scene_result.status}. "
+                                f"Report: {_scene_report_path}",
+                                file=sys.stderr,
+                            )
+                    else:
+                        print(
+                            "Scene gate skipped: no chapters in registry prose.",
+                            file=sys.stderr,
+                        )
+                except Exception as _e:
+                    print(f"Scene anti-genericity gate error: {_e}", file=sys.stderr)
+                    _quality_gate_failures.append("scene_anti_genericity")
+
+            # 4. EI v2 comparison (advisory — V1 remains authoritative)
+            if args.ei_v2_compare:
+                try:
+                    from phoenix_v4.quality.ei_parallel_adapter import (
+                        compare_slot as _ei_compare_slot,
+                        build_pipeline_comparison as _ei_build_comparison,
+                        write_comparison_report as _ei_write_report,
+                    )
+                    from phoenix_v4.quality.ei_v2.config import load_ei_v2_config
+                    _v2_cfg = load_ei_v2_config()
+                    _v1_cfg: dict = {}
+                    _v1_cfg_path = (
+                        REPO_ROOT / "config" / "source_of_truth"
+                        / "enlightened_intelligence_registry.yaml"
+                    )
+                    if _v1_cfg_path.exists() and yaml:
+                        _v1_cfg = yaml.safe_load(
+                            _v1_cfg_path.read_text(encoding="utf-8")
+                        ) or {}
+                    _book_thesis = (
+                        f"{topic_id} for {book_spec_for_compiler.get('persona_id', '')}"
+                    )
+                    _teacher_mode_reg = bool(teacher_id_for_reg)
+                    _slot_comparisons = []
+                    for _ch_idx, _ch in enumerate(resolved_book.chapters):
+                        _chapter_text = "\n\n".join(
+                            s.content for s in _ch.sections if s.content.strip()
+                        )
+                        _arc_intent = {
+                            "chapter_index": _ch_idx,
+                            "chapter_thesis": _book_thesis,
+                        }
+                        for _si, _section in enumerate(_ch.sections):
+                            _candidates_raw = [{
+                                "id": (
+                                    f"registry:{topic_id}:ch{_ch_idx}:s{_si}"
+                                ),
+                                "text": _section.content,
+                                "meta": {},
+                            }]
+                            try:
+                                _slot_result = _ei_compare_slot(
+                                    slot=_section.section_type,
+                                    chapter_index=_ch_idx,
+                                    slot_index=_si,
+                                    candidates_raw=_candidates_raw,
+                                    persona_id=book_spec_for_compiler.get(
+                                        "persona_id", ""
+                                    ),
+                                    topic_id=topic_id,
+                                    thesis=_book_thesis,
+                                    v1_cfg=_v1_cfg,
+                                    v2_cfg=_v2_cfg,
+                                    selector_key=(
+                                        f"ei:{_section.section_type}:ch{_ch_idx}"
+                                        f":{book_spec_for_compiler.get('persona_id', '')}"
+                                        f":{topic_id}"
+                                    ),
+                                    teacher_mode=_teacher_mode_reg,
+                                    chapter_text=_chapter_text,
+                                    arc_intent=_arc_intent,
+                                )
+                                _slot_comparisons.append(_slot_result)
+                            except Exception as _exc:
+                                print(
+                                    f"EI V2 compare failed at "
+                                    f"ch{_ch_idx} {_section.section_type}: {_exc}",
+                                    file=sys.stderr,
+                                )
+                    if _slot_comparisons:
+                        _comparison = _ei_build_comparison(
+                            _slot_comparisons,
+                            plan_hash=f"registry-{topic_id}",
+                            persona_id=book_spec_for_compiler.get("persona_id", ""),
+                            topic_id=topic_id,
+                        )
+                        _ei_v2_dir = REPO_ROOT / "artifacts" / "ei_v2"
+                        _ei_report_path = _ei_write_report(_comparison, _ei_v2_dir)
+                        print(f"EI V2 comparison: {_ei_report_path}")
+                        print(
+                            f"  Slots compared: {_comparison.total_slots} | "
+                            f"Agreement: {_comparison.agreement_rate * 100:.0f}% | "
+                            f"Safety flags: {len(_comparison.v2_safety_flags)} | "
+                            f"TTS issues: {len(_comparison.v2_tts_issues)} | "
+                            f"Dedup flags: {len(_comparison.v2_dedup_flags)} | "
+                            f"Arc issues: {len(_comparison.v2_arc_issues)}"
+                        )
+                except Exception as _exc:
+                    print(
+                        f"EI V2 comparison failed (non-blocking): {_exc}",
+                        file=sys.stderr,
+                    )
+
+            # 5. Book pass gate — SKIPPED in registry mode
+            if gates_run:
+                print(
+                    "Book pass gate: SKIPPED (registry mode — requires atom_ids / "
+                    "chapter_slot_sequence / dominant_band_sequence).",
+                    file=sys.stderr,
+                )
+
+            # 6. Freebie generation (explicit --generate-freebies only;
+            #    registry mode has no compiled plan, so default-on is disabled)
+            if args.generate_freebies:
+                try:
+                    from phoenix_v4.freebies.freebie_renderer import (
+                        generate_freebies_for_book,
+                    )
+                    _freebie_plan = {
+                        "plan_id": f"registry-{topic_id}-{seed}",
+                        "topic_id": topic_id,
+                        "persona_id": book_spec_for_compiler.get("persona_id", ""),
+                        "teacher_id": teacher_id_for_reg,
+                        "freebie_slug": (
+                            f"{topic_id}-{book_spec_for_compiler.get('persona_id', '')}"
+                        ),
+                        "word_count": resolved_book.word_count,
+                        "source": "section_registry",
+                    }
+                    _formats_list = None
+                    if args.formats:
+                        _formats_list = [
+                            f.strip().lower()
+                            for f in args.formats.split(",")
+                            if f.strip()
+                        ]
+                    _publish_dir = (
+                        Path(args.publish_dir) if args.publish_dir else None
+                    )
+                    _asset_store = (
+                        Path(args.asset_store) if args.asset_store else None
+                    )
+                    _freebie_paths = generate_freebies_for_book(
+                        _freebie_plan,
+                        book_spec_for_compiler,
+                        include_pdf=bool(
+                            _formats_list and "pdf" in _formats_list
+                        ),
+                        formats=_formats_list,
+                        skip_audio=args.skip_audio,
+                        publish_dir=_publish_dir,
+                        asset_store_root=_asset_store,
+                    )
+                    if _freebie_paths:
+                        print(
+                            f"Generated freebie artifacts: "
+                            f"{len(_freebie_paths)} file(s) under artifacts/freebies/"
+                        )
+                except Exception as _e:
+                    print(f"Freebie generation failed (non-blocking): {_e}", file=sys.stderr)
+
+            # 7. Write quality summary
+            _qs_path = render_dir / "quality_summary.json"
+            _qs_path.write_text(
+                json.dumps({
+                    "source": "section_registry",
+                    "topic_id": topic_id,
+                    "persona_id": book_spec_for_compiler.get("persona_id", ""),
+                    "teacher_id": teacher_id_for_reg,
+                    "quality_profile": quality_profile,
+                    "gates_run": gates_run,
+                    "gates_hard": gates_hard,
+                    "gate_failures": _quality_gate_failures,
+                    "overall_status": "PASS" if not _quality_gate_failures else "FAIL",
+                    "book_pass_gate": "SKIPPED_REGISTRY_MODE",
+                }, indent=2),
+                encoding="utf-8",
+            )
+            print(f"Quality summary: {_qs_path}")
+
+            # 8. Gate enforcement — production hard-blocks only
+            if _quality_gate_failures and gates_hard:
+                print(
+                    f"BLOCKED: {len(_quality_gate_failures)} quality gate(s) failed "
+                    f"in production mode: {', '.join(_quality_gate_failures)}. "
+                    f"Use --skip-quality-gates or --quality-profile=draft to bypass.",
+                    file=sys.stderr,
+                )
+                return 1
 
         if not getattr(args, "no_job_check", False):
             from scripts.pipeline.advance_stage import mark_pipeline_finished
