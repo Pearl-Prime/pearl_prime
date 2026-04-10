@@ -3,14 +3,15 @@
 **Project:** `proj_state_convergence_20260328`  
 **Workstream:** `ws_full_funnel_system_20260410` (see `ACTIVE_WORKSTREAMS.tsv`)
 
-## Verified repo state
+As of verification on 2026-04-10, the funnel integration was landed by PR #350 (`e0412c7006e4138ff12d4690e53be24a85de8ac9`) and PR #352 (`a4cad9203eda2789255db57eb85e4888d6dfd7c6`), with coordination bookkeeping closed by PR #355 (`c3d7c4c8a42fba73e6a97d865f52c4ae24016bbe`). The `origin/main` tip may advance after this closeout; the PR numbers and merge SHAs above are the authoritative evidence for this work.
 
-| Item | Value |
-|------|--------|
-| `origin/main` tip | `c3d7c4c8a42fba73e6a97d865f52c4ae24016bbe` |
-| PR #350 (registry quality gates in `scripts/run_pipeline.py`) merged at | `e0412c7006e4138ff12d4690e53be24a85de8ac9` |
-| PR #352 (canonical funnel slugs in `phoenix_v4/planning/freebie_planner.py`) merged at | `a4cad9203eda2789255db57eb85e4888d6dfd7c6` |
-| PR #355 (coordination bookkeeping only) merged at | `c3d7c4c8a42fba73e6a97d865f52c4ae24016bbe` |
+## Merge reference (quick links)
+
+| PR | Change | Merge commit |
+|----|--------|----------------|
+| #350 | Registry quality gates in `scripts/run_pipeline.py` | `e0412c7006e4138ff12d4690e53be24a85de8ac9` |
+| #352 | Canonical funnel slugs in `phoenix_v4/planning/freebie_planner.py` | `a4cad9203eda2789255db57eb85e4888d6dfd7c6` |
+| #355 | Coordination: `ACTIVE_WORKSTREAMS.tsv` only | `c3d7c4c8a42fba73e6a97d865f52c4ae24016bbe` |
 
 **Summary:** PRs **#350** and **#352** carried the funnel integration work (registry-mode quality gates; planner → `config/funnel/freebie_to_book_map.yaml` slugs for all 15 canonical topics). **PR #355** changed **only** `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` to mark the workstream complete and record merge evidence.
 
