@@ -350,6 +350,18 @@ const SETUP=[
     creds:[{name:"d2d_email",label:"D2D Account Email",type:"email",req:true,help:"Email used for Draft2Digital or PublishDrive"}]}
 ];
 
+var FORMAT_SPECS={
+  podcast:{label:"Podcast RSS",specs:"Cover: 3000x3000. Category: Health & Fitness > Mental Health. Platforms: Spotify for Podcasters, Apple Podcasts Connect."},
+  yt_long:{label:"YouTube Long",specs:"16:9 1920x1080. Nature footage + text overlay = highest retention. Must add original element."},
+  yt_shorts:{label:"YouTube Shorts",specs:"9:16 1080x1920. 15-35s optimal. 85%+ completion = algorithm boost. 3-5/week."},
+  tiktok:{label:"TikTok",specs:"9:16 1080x1920. Up to 10min. Hook in 1-2s. Spark Ads recommended."},
+  reels:{label:"IG Reels",specs:"9:16 1080x1920. Up to 3min. Same content as Shorts with IG hashtags."},
+  webtoon:{label:"WEBTOON Canvas",specs:"Vertical scroll. Coin model. 90M+ monthly readers."},
+  line_manga:{label:"LINE Manga",specs:"R-to-L for JP manga. 130M+ users. Japan primary."},
+  piccoma:{label:"Piccoma",specs:"Wait-or-pay freemium. JP and KR markets."},
+  kakao:{label:"Kakao Page",specs:"Vertical scroll. Korean webtoon platform."}
+};
+
 // Upload platforms for Phase 2
 const UPLOADS=[
   {id:"u_kdp",n:"Amazon KDP",url:"https://kdp.amazon.com/bookshelf",titles:6,icon:"book",steps:["Log in to KDP Bookshelf","Click 'Create New Title' > Kindle eBook","Enter title, subtitle, author, description (use COPY buttons below)","Upload EPUB from KDP/ folder","Upload cover from KDP/ folder","Set price ($2.99-9.99 for 70% royalty) and publish","Repeat for each title"]},
@@ -542,6 +554,25 @@ function renderPhase0(){
   h+='<div style="font-size:.82rem;color:var(--mid);line-height:1.7">';
   h+='Every week you receive: <strong style="color:var(--hi)">15 titles</strong> (8 ebooks + 4 manga + 3 micro) with covers, metadata, and video &mdash; ready to upload.';
   h+='</div></div>';
+
+  // Unit Economics
+  h+='<div class="section-hdr" style="margin-top:28px">';
+  h+='<span class="pp-icon sm" data-icon="revenue"></span>';
+  h+='<span class="section-hdr-title">Unit Economics</span>';
+  h+='</div>';
+  h+='<div class="trust-board">';
+  h+='<div class="trust-metric"><div class="metric-val">$1.99&ndash;7.99</div><div class="metric-lbl">Micro Sessions</div></div>';
+  h+='<div class="trust-metric"><div class="metric-val">$3.99&ndash;6.99</div><div class="metric-lbl">Standard Books</div></div>';
+  h+='<div class="trust-metric"><div class="metric-val">$14.99&ndash;29.99</div><div class="metric-lbl">Deep Dives</div></div>';
+  h+='<div class="trust-metric"><div class="metric-val" style="color:var(--green)">$0</div><div class="metric-lbl">COGS Per Book</div></div>';
+  h+='</div>';
+  h+='<div class="trust-board" style="margin-top:10px">';
+  h+='<div class="trust-metric"><div class="metric-val">70%</div><div class="metric-lbl">Google Play Rev Share</div></div>';
+  h+='<div class="trust-metric"><div class="metric-val">80%</div><div class="metric-lbl">INaudio Net Revenue</div></div>';
+  h+='<div class="trust-metric"><div class="metric-val">70%</div><div class="metric-lbl">Apple Books via D2D</div></div>';
+  h+='<div class="trust-metric"><div class="metric-val">90.6%</div><div class="metric-lbl">You Keep (After Splits)</div></div>';
+  h+='</div>';
+  h+='<div class="note" style="margin-top:12px">Zero marginal cost: auto-narration pipeline (CosyVoice2 or Google Play TTS), deterministic assembly from human-authored atoms, 100% organic distribution. Platform fees already deducted from rev share.</div>';
 
   el.innerHTML=h;
   renderIcons(el);
@@ -779,6 +810,41 @@ function renderPhase3(){
     h+='</label></div>';
     h+='</div>';
   });
+  h+='</div>';
+
+  // Weekly KPIs + Escalation
+  h+='<div class="section-hdr" style="margin-top:28px">';
+  h+='<span class="pp-icon sm" data-icon="chart"></span>';
+  h+='<span class="section-hdr-title">Weekly KPIs (Saturday Review)</span>';
+  h+='</div>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">';
+  h+='<div style="padding:14px;background:var(--card);border:1px solid var(--border);border-radius:6px">';
+  h+='<div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:8px">Amazon KDP</div>';
+  h+='<div style="font-size:.72rem;color:var(--mid);line-height:1.7">Units sold (trend)<br>Page reads / KU (trend)<br>Reviews added &mdash; target: 10+ in 90 days<br>Rating &mdash; target: 3.3+ minimum</div>';
+  h+='</div>';
+  h+='<div style="padding:14px;background:var(--card);border:1px solid var(--border);border-radius:6px">';
+  h+='<div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:8px">Google Play Books</div>';
+  h+='<div style="font-size:.72rem;color:var(--mid);line-height:1.7">Views to purchases (conversion)<br>Auto-narration plays vs ebook<br>Search impression trend</div>';
+  h+='</div>';
+  h+='<div style="padding:14px;background:var(--card);border:1px solid var(--border);border-radius:6px">';
+  h+='<div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:8px">YouTube Analytics</div>';
+  h+='<div style="font-size:.72rem;color:var(--mid);line-height:1.7">Impressions to CTR &mdash; target: 6-10%<br>Avg view duration &mdash; target: 50%+<br>Subscriber growth this week</div>';
+  h+='</div>';
+  h+='<div style="padding:14px;background:var(--card);border:1px solid var(--border);border-radius:6px">';
+  h+='<div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:8px">Revenue Pulse</div>';
+  h+='<div style="font-size:.72rem;color:var(--mid);line-height:1.7">Weekly total across platforms<br>Highest-performing title (double down?)<br>Lowest-performing (kill at 90 days?)</div>';
+  h+='</div>';
+  h+='</div>';
+
+  h+='<div class="section-hdr" style="margin-top:24px">';
+  h+='<span class="pp-icon sm" data-icon="warning"></span>';
+  h+='<span class="section-hdr-title">Escalation Paths</span>';
+  h+='</div>';
+  h+='<div style="display:grid;gap:8px">';
+  h+='<div class="warn"><strong>Upload rejected</strong> &mdash; Check metadata against platform spec. Resubmit. If persists: screenshot error, verify AI disclosure compliance.</div>';
+  h+='<div class="warn"><strong>Review removed</strong> &mdash; Do NOT contact reviewer. Check Amazon review policy. If pattern: check for manipulation flags.</div>';
+  h+='<div class="warn"><strong style="color:var(--red)">Revenue drop &gt;50%</strong> &mdash; Check if listing suppressed. Verify metadata. Check competitor pricing. Review algorithm changes.</div>';
+  h+='<div class="warn"><strong style="color:var(--red)">Content package not received</strong> &mdash; Check delivery channel. Escalate to Pearl Prime ops. Do not proceed with stale content.</div>';
   h+='</div>';
 
   // Platform status recap

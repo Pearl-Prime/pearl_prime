@@ -442,6 +442,13 @@
     .dash-tabs { padding: .6rem 1rem; }
     .kpi-row { grid-template-columns: 1fr 1fr; }
   }
+
+/* Data provenance badges */
+.prov{font-family:var(--font-mono);font-size:.38rem;padding:2px 6px;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle;margin-left:4px;white-space:nowrap}
+.prov-repo{color:var(--green);background:rgba(76,175,80,.08);border:1px solid rgba(76,175,80,.15)}
+.prov-est{color:var(--yellow);background:rgba(255,193,7,.08);border:1px solid rgba(255,193,7,.15)}
+.prov-assum{color:var(--red);background:rgba(229,57,53,.08);border:1px solid rgba(229,57,53,.15)}
+.prov-ext{color:var(--blue);background:rgba(66,165,245,.08);border:1px solid rgba(66,165,245,.15)}
 </style>
 </head>
 <body>
@@ -494,10 +501,15 @@
     <span data-icon="distribution" class="pp-icon sm"></span>
     <span data-i18n="dashboard.tab.fleet">Fleet Planner</span>
   </button>
+  <button class="dash-tab" onclick="showTab('culture')"><span data-icon="globe" class="pp-icon sm"></span><span>Cultural Intel</span></button>
 </div>
 
 <!-- ═══════════════ TAB 1: AD SPEND SIMULATOR ═══════════════ -->
 <div id="tab-sim" class="tab-content active">
+<div style="padding:.5rem .75rem;background:rgba(66,165,245,.04);border:1px solid rgba(66,165,245,.08);border-radius:2px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem">
+<span class="prov prov-ext">EXTERNAL</span>
+<span style="font-size:.42rem;color:var(--text-dim);font-family:var(--font-mono);letter-spacing:.04em">CPC/CPM/CTR values from advertising_roi_research.md (2026-04-05). Market conditions vary.</span>
+</div>
 
   <!-- Controls card -->
   <div class="dash-card">
@@ -602,6 +614,10 @@
 
 <!-- ═══════════════ TAB 2: CONTENT HEATMAP ═══════════════ -->
 <div id="tab-heatmap" class="tab-content">
+<div style="padding:.5rem .75rem;background:rgba(229,57,53,.04);border:1px solid rgba(229,57,53,.08);border-radius:2px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem">
+<span class="prov prov-assum">SIMULATED</span>
+<span style="font-size:.42rem;color:var(--text-dim);font-family:var(--font-mono);letter-spacing:.04em">Heatmap data is procedurally generated for planning purposes, not measured performance.</span>
+</div>
   <div class="dash-card">
     <div class="dash-card-head">
       <span data-icon="chart" class="pp-icon"></span>
@@ -614,6 +630,10 @@
 
 <!-- ═══════════════ TAB 3: LANE COMPARISON ═══════════════ -->
 <div id="tab-lanes" class="tab-content">
+<div style="padding:.5rem .75rem;background:rgba(229,57,53,.04);border:1px solid rgba(229,57,53,.08);border-radius:2px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem">
+<span class="prov prov-assum">ASSUMPTION</span>
+<span style="font-size:.42rem;color:var(--text-dim);font-family:var(--font-mono);letter-spacing:.04em">All revenue projections are pre-revenue assumptions. CPC/CPM data sourced from market research (2026-04).</span>
+</div>
   <div class="grid-2">
     <div class="dash-card">
       <div class="dash-card-head">
@@ -700,6 +720,110 @@
   </div>
 </div>
 
+<div id="tab-culture" class="tab-content">
+<div class="dash-card">
+<div class="dash-card-head"><span data-icon="globe" class="pp-icon"></span><span class="dash-card-title">Per-Market Cultural Framing</span></div>
+<p style="font-size:.55rem;color:var(--text-medium);margin-bottom:1rem;line-height:1.6">What language works — and what doesn't — in each market. Sourced from market research (2026-04).</p>
+</div>
+
+<div class="grid-2" style="margin-bottom:1rem">
+<div class="pp-card">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.1rem">🇰🇷</span><span style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)">Korea (ko-KR)</span></div>
+<div style="font-size:.5rem;color:var(--red);margin-bottom:6px"><strong>NEVER:</strong> 정신건강 (mental health) — severe stigma, only 7% seek help</div>
+<div style="font-size:.5rem;color:var(--green);margin-bottom:6px"><strong>USE:</strong> 힐링 (healing), 번아웃 (burnout), 마음 건강, 신경계</div>
+<div style="font-size:.5rem;color:var(--amber);margin-bottom:6px"><strong>GAP:</strong> Polyvagal/vagus nerve — completely unoccupied</div>
+<div style="font-size:.42rem;color:var(--text-dim)">Ppalli-ppalli culture: micro-content (15-30 min) outperforms long-form</div>
+</div>
+
+<div class="pp-card">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.1rem">🇯🇵</span><span style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)">Japan (ja-JP)</span></div>
+<div style="font-size:.5rem;color:var(--red);margin-bottom:6px"><strong>NEVER:</strong> Direct "you will" language — use indirect ("you may notice")</div>
+<div style="font-size:.5rem;color:var(--green);margin-bottom:6px"><strong>USE:</strong> Keigo for narration. Seasonal framing. Secular/practical only.</div>
+<div style="font-size:.5rem;color:var(--amber);margin-bottom:6px"><strong>GAP:</strong> Commuter content (15-30 min) undersupplied</div>
+<div style="font-size:.42rem;color:var(--text-dim)">Creative/paradoxical titles culturally accepted and rewarded</div>
+</div>
+
+<div class="pp-card">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.1rem">🇩🇪</span><span style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)">Germany (de-DE)</span></div>
+<div style="font-size:.5rem;color:var(--red);margin-bottom:6px"><strong>NEVER:</strong> Emotional/hype language, vague wellness claims, spiritual framing</div>
+<div style="font-size:.5rem;color:var(--green);margin-bottom:6px"><strong>USE:</strong> "Wissenschaftlich fundiert" — THE selling keyword</div>
+<div style="font-size:.5rem;color:var(--amber);margin-bottom:6px"><strong>FRAME:</strong> Somatic as neuroscience, meditation as cognitive training</div>
+<div style="font-size:.42rem;color:var(--text-dim)">Cite research. Precise language. Long-form preferred. Opposite of US.</div>
+</div>
+
+<div class="pp-card">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.1rem">🇹🇼</span><span style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)">Taiwan (zh-TW)</span></div>
+<div style="font-size:.5rem;color:var(--green);margin-bottom:6px"><strong>KEYWORD:</strong> 身心靈 (body-mind-spirit) — THE discovery term</div>
+<div style="font-size:.5rem;color:var(--amber);margin-bottom:6px"><strong>ANGLES:</strong> Filial piety for parent topics; academic pressure + tech overwork</div>
+<div style="font-size:.42rem;color:var(--text-dim)">NT$200–350 sweet spot. Readmoo 100+ reading events/year.</div>
+</div>
+
+<div class="pp-card">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.1rem">🇨🇳</span><span style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)">China (zh-CN)</span></div>
+<div style="font-size:.5rem;color:var(--red);margin-bottom:6px"><strong>WARNING:</strong> ISBN required. MCN agent required. WeChat $7K+ minimum.</div>
+<div style="font-size:.5rem;color:var(--green);margin-bottom:6px"><strong>GAP:</strong> 内卷 (involution) coping content — high demand, low supply</div>
+<div style="font-size:.5rem;color:var(--amber);margin-bottom:6px"><strong>PLATFORM:</strong> Ximalaya 345M MAU. Douyin #1 discovery. WeChat Read 200M+.</div>
+<div style="font-size:.42rem;color:var(--text-dim)">Buddhist lifestyle content faces regulatory removal — use wellness framing.</div>
+</div>
+
+<div class="pp-card">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.1rem">🇫🇷</span><span style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)">France (fr-FR)</span></div>
+<div style="font-size:.5rem;color:var(--red);margin-bottom:6px"><strong>NEVER:</strong> Aggressive marketing — French readers distrust hard sells</div>
+<div style="font-size:.5rem;color:var(--green);margin-bottom:6px"><strong>USE:</strong> Philosophical/existentialist framing — uniquely effective</div>
+<div style="font-size:.5rem;color:var(--amber);margin-bottom:6px"><strong>GAP:</strong> #2 manga market globally — therapeutic manga unprecedented</div>
+<div style="font-size:.42rem;color:var(--text-dim)">Gov "Mon Soutien Psy" = institutional MH acceptance. Bande dessinee comfort.</div>
+</div>
+
+<div class="pp-card">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.1rem">🇺🇸</span><span style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)">United States (en-US)</span></div>
+<div style="font-size:.5rem;color:var(--green);margin-bottom:6px"><strong>KEYWORDS:</strong> Nervous system, vagus nerve, somatic — 5x growth since 2023</div>
+<div style="font-size:.5rem;color:var(--amber);margin-bottom:6px"><strong>BOOKTOK:</strong> #ADHD 60B+ views, #nervoussystem 2B+, #anxietybooks 200M+</div>
+<div style="font-size:.42rem;color:var(--text-dim)">$0.99 challenge → 10+ reviews → price normalize. 50+ reviews = ~2x sales.</div>
+</div>
+</div>
+
+<div class="dash-card" style="margin-top:1rem">
+<div class="dash-card-head"><span data-icon="search" class="pp-icon"></span><span class="dash-card-title">Title & SEO Strategy</span></div>
+
+<div class="pp-card narrative" style="margin-bottom:1rem">
+<div style="font-family:var(--font-mono);font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin-bottom:6px">Universal Title Formula</div>
+<div style="font-size:.72rem;color:var(--text-high);line-height:1.6"><strong>Creative Title</strong> (2-5 words, max 25 chars for thumbnail)<br>+ <strong>Keyword-Rich Subtitle</strong> (5-12 words, carries SEO)<br>= <strong>37% ranking lift</strong> on Amazon A10</div>
+<div style="font-family:var(--font-mono);font-size:.42rem;color:var(--text-dim);margin-top:8px">Total under 120 chars. Amazon limit: 200. Pain-state keywords outperform clinical terms.</div>
+</div>
+
+<div class="grid-2" style="margin-bottom:1rem">
+<div style="padding:12px;background:rgba(14,10,6,.6);border:1px solid rgba(180,83,9,.1);border-radius:4px">
+<div style="font-family:var(--font-mono);font-size:.42rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin-bottom:4px">🇺🇸 US / English</div>
+<div style="font-size:.5rem;color:var(--text-high)">Creative + keyword subtitle. BookTok shareability matters.</div>
+<div style="font-size:.42rem;color:var(--text-dim);margin-top:4px">Pain-state first: "can't sleep" &gt; "sleep anxiety"</div>
+</div>
+<div style="padding:12px;background:rgba(14,10,6,.6);border:1px solid rgba(180,83,9,.1);border-radius:4px">
+<div style="font-family:var(--font-mono);font-size:.42rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin-bottom:4px">🇯🇵 Japan</div>
+<div style="font-size:.5rem;color:var(--text-high)">Creative/paradoxical titles culturally rewarded.</div>
+<div style="font-size:.42rem;color:var(--text-dim);margin-top:4px">Obi-style subtitle carries keywords. Short 2-4 word main.</div>
+</div>
+<div style="padding:12px;background:rgba(14,10,6,.6);border:1px solid rgba(180,83,9,.1);border-radius:4px">
+<div style="font-family:var(--font-mono);font-size:.42rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin-bottom:4px">🇰🇷 Korea</div>
+<div style="font-size:.5rem;color:var(--text-high)">Emotional resonance wins. Healing essay format dominates.</div>
+<div style="font-size:.42rem;color:var(--text-dim);margin-top:4px">Poetic &gt; instructional. Market rewards feeling.</div>
+</div>
+<div style="padding:12px;background:rgba(14,10,6,.6);border:1px solid rgba(180,83,9,.1);border-radius:4px">
+<div style="font-family:var(--font-mono);font-size:.42rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin-bottom:4px">🇩🇪 Germany</div>
+<div style="font-size:.5rem;color:var(--text-high)">"Wissenschaftlich fundiert" + methodical subtitles.</div>
+<div style="font-size:.42rem;color:var(--text-dim);margin-top:4px">"Ein X-Schritte-Programm fur..." pattern.</div>
+</div>
+</div>
+
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<span style="padding:4px 10px;background:rgba(66,165,245,.08);border:1px solid rgba(66,165,245,.15);border-radius:2px;font-family:var(--font-mono);font-size:.38rem;letter-spacing:.04em;text-transform:uppercase;color:var(--blue)">#ADHD 60B+ views</span>
+<span style="padding:4px 10px;background:rgba(66,165,245,.08);border:1px solid rgba(66,165,245,.15);border-radius:2px;font-family:var(--font-mono);font-size:.38rem;letter-spacing:.04em;text-transform:uppercase;color:var(--blue)">#nervoussystem 2B+</span>
+<span style="padding:4px 10px;background:rgba(66,165,245,.08);border:1px solid rgba(66,165,245,.15);border-radius:2px;font-family:var(--font-mono);font-size:.38rem;letter-spacing:.04em;text-transform:uppercase;color:var(--blue)">#anxietybooks 200M+</span>
+<span style="padding:4px 10px;background:rgba(66,165,245,.08);border:1px solid rgba(66,165,245,.15);border-radius:2px;font-family:var(--font-mono);font-size:.38rem;letter-spacing:.04em;text-transform:uppercase;color:var(--blue)">#impostersyndrome 1.5B+</span>
+<span style="padding:4px 10px;background:rgba(66,165,245,.08);border:1px solid rgba(66,165,245,.15);border-radius:2px;font-family:var(--font-mono);font-size:.38rem;letter-spacing:.04em;text-transform:uppercase;color:var(--blue)">#burnout 500M+</span>
+</div>
+</div>
+</div>
+
 <!-- Detail modal -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
@@ -782,7 +906,7 @@ function showTab(id) {
   document.querySelectorAll('#nav .dash-tab').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
   const btns = document.querySelectorAll('#nav .dash-tab');
-  const tabMap = ['sim','heatmap','lanes','funnel','fleet'];
+  const tabMap = ['sim','heatmap','lanes','funnel','fleet','culture'];
   btns[tabMap.indexOf(id)].classList.add('active');
   // Lazy init charts
   if (id === 'lanes' && !window._lanesInit) initLanes();
