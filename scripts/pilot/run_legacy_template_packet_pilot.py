@@ -246,8 +246,9 @@ def main() -> int:
 
 ## Note
 
-V4 template directories are not extracted in-repo; expect **zero** legacy YAML hits
-unless `template_expand/_extracted/{args.legacy_library}/` is populated.
+Legacy scaffold hits depend on `config/templates/legacy_template_index.yaml` and extracted
+trees. Use `--legacy-library v2_somatic` when `template_expand2/_extracted/qaudiobook_template_v2_somatic/sections_somatic_v2/`
+is present (12×10×5 somatic YAML). Sparse V4 bootstrap trees only light a few slots.
 
 ## Measured (from this run)
 

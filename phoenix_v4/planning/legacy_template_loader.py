@@ -108,9 +108,14 @@ def _candidate_roots_for_library(
         roots.append(repo_root / rel)
     arch = spec.get("archive")
     if arch:
-        stem = Path(str(arch)).stem
-        roots.append(repo_root / "template_expand" / "_extracted" / stem)
+        arch_path = Path(str(arch))
+        stem = arch_path.stem
+        if str(arch_path).startswith("template_expand2/"):
+            roots.append(repo_root / "template_expand2" / "_extracted" / stem)
+        else:
+            roots.append(repo_root / "template_expand" / "_extracted" / stem)
     roots.append(repo_root / "template_expand" / "_extracted" / library_id)
+    roots.append(repo_root / "template_expand2" / "_extracted" / library_id)
 
     seen: set[str] = set()
     out: List[Path] = []
@@ -127,6 +132,48 @@ def _chapter_section_dir_names(chapter: int, section: int) -> tuple[List[str], L
     ch_dirs = [f"chapter_{chapter:02d}", f"chapter_{chapter}"]
     sec_dirs = [f"section_{section:02d}", f"section_{section}"]
     return ch_dirs, sec_dirs
+
+
+def _variant_f_filename(variant_family: str) -> tuple[str, str]:
+    """
+    Somatic v2 layout uses f1.yaml … f5.yaml (lowercase) under section_NN_type dirs.
+    """
+    fam = variant_family.strip().upper()
+    if fam.startswith("F") and fam[1:].isdigit():
+        n = int(fam[1:])
+        base = f"f{n}.yaml"
+        return base, f"f{n}.yml"
+    return "f1.yaml", "f1.yml"
+
+
+def _resolve_somatic_v2_section_path(
+    root: Path,
+    chapter: int,
+    section: int,
+    variant_family: str,
+) -> Optional[Path]:
+    """
+    Resolve sections_somatic_v2 layout:
+      chapter_NN/section_NN_<type>/fN.yaml
+    Section index 1..10 maps to the single directory whose name starts with section_NN_.
+    """
+    f_yaml, f_yml = _variant_f_filename(variant_family)
+    for ch_name in (f"chapter_{chapter:02d}", f"chapter_{chapter}"):
+        ch_dir = root / ch_name
+        if not ch_dir.is_dir():
+            continue
+        prefix = f"section_{section:02d}_"
+        matches = sorted(
+            p for p in ch_dir.iterdir() if p.is_dir() and p.name.startswith(prefix)
+        )
+        if not matches:
+            continue
+        sec_dir = matches[0]
+        for fn in (f_yaml, f_yml):
+            p = sec_dir / fn
+            if p.is_file():
+                return p
+    return None
 
 
 def _list_yaml_under_root(root: Path) -> List[Path]:
@@ -184,6 +231,10 @@ def _resolve_section_yaml_path(
                     if p.is_file():
                         return p, warnings
 
+        p2 = _resolve_somatic_v2_section_path(root, chapter, section, variant_family)
+        if p2 is not None:
+            return p2, warnings
+
     # Fallback: scan cached yaml list for chapter_NN/section_NN/variant_{fam}.*
     ch_tag = f"chapter_{chapter:02d}"
     sec_tag = f"section_{section:02d}"
@@ -201,6 +252,25 @@ def _resolve_section_yaml_path(
                 continue
             leaf = p.name.lower()
             if leaf.startswith("variant_") and fam_lower in leaf:
+                return p, warnings
+
+    # Somatic v2 fallback: chapter_NN/section_NN_*/fN.yaml
+    f_expect, _ = _variant_f_filename(variant_family)
+    f_expect_l = f_expect.lower()
+    sec_prefix = f"section_{section:02d}_"
+    for raw_root in _candidate_roots_for_library(library_id, spec, repo_root):
+        root = _unwrap_single_dir_root(raw_root)
+        if not root.is_dir():
+            continue
+        for p in _list_yaml_under_root(root):
+            parts_lower = [x.lower() for x in p.relative_to(root).parts]
+            try:
+                ci = parts_lower.index(ch_tag)
+            except ValueError:
+                continue
+            if not any(x.startswith(sec_prefix) for x in parts_lower[ci + 1 :]):
+                continue
+            if p.name.lower() == f_expect_l:
                 return p, warnings
 
     if primary and not primary.exists():
@@ -414,12 +484,13 @@ def estimate_legacy_library_words(
         w, _ = _walk_count_words(primary, frozenset({".md", ".yaml", ".yml", ".txt", ".py"}))
         return w
 
-    # Try _extracted/{library_id}
-    extracted = root / "template_expand" / "_extracted" / library_id
-    if extracted.is_dir():
-        w, _ = _walk_count_words(extracted, frozenset({".md", ".yaml", ".yml", ".txt"}))
-        if w:
-            return w
+    # Try _extracted/{library_id} under template_expand and template_expand2
+    for sub in ("template_expand", "template_expand2"):
+        extracted = root / sub / "_extracted" / library_id
+        if extracted.is_dir():
+            w, _ = _walk_count_words(extracted, frozenset({".md", ".yaml", ".yml", ".txt"}))
+            if w:
+                return w
 
     if rel and not primary.exists():
         warnings.append(f"path_missing:{rel}")

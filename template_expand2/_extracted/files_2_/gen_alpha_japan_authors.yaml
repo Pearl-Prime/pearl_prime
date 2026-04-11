@@ -1,0 +1,554 @@
+persona_id: gen_alpha_japan
+generated_at: '2025-01-30T00:00:00.000000'
+authors:
+- id: peer_yoshida_haruki
+  name: 吉田晴輝
+  display_name: 吉田晴輝
+  age: 16
+  bio_80w: 吉田晴輝16歳、大阪の高校1年生。中学時代に家庭内不和を経験。学業プレッシャー（高校受験後の適応、関西圏の競争）、家族関係の悩み（両親の不和、家庭内の緊張）、友人関係の悩み（転校、新しい環境への適応）に直面。地方都市で健全に成長する方法を学んでいる。
+  domains:
+    - peer
+    - lived_experience
+    - academic_stress
+    - family_conflict
+    - social_adjustment
+    - regional_life
+    - gen_alpha_experience
+    - osaka
+    - japan
+  tones:
+    - warm
+    - authentic
+    - resilient
+    - age_appropriate
+    - encouraging
+    - relatable
+  voice_profile_id: V_JA_M_YOUNG_01
+  pov: first
+  narrator: 吉田晴輝
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 16
+    location: "大阪"
+    school_level: "高校1年生"
+    living_situation: "両親と暮らす"
+    background: "公立高校、中学時代に家庭内不和を経験"
+    current: "学生、学業、家族関係、友人関係の課題に直面"
+    pronouns: "彼"
+    cultural_background: "日本人（関西）"
+    specific_struggles:
+      - "学業プレッシャー（高校受験後の適応）"
+      - "家族関係の悩み（両親の不和）"
+      - "友人関係の悩み（転校、新しい環境）"
+      - "家庭内不和の影響"
+    strengths:
+      - "レジリエンスがある"
+      - "適応力が高い"
+      - "思いやりがある"
+
+- id: peer_matsumoto_sakura
+  name: 松本さくら
+  display_name: 松本さくら
+  age: 15
+  bio_80w: 松本さくら15歳、福岡の中学3年生。小学校時代に転校を繰り返し。学業プレッシャー（高校受験、九州圏の競争）、社交不安（新しい環境への適応困難、友達作りの苦手）、自己肯定感の低さ（転校によるアイデンティティの揺らぎ）に直面。地方都市で自分らしく生きる方法を学んでいる。
+  domains:
+    - peer
+    - lived_experience
+    - academic_stress
+    - social_anxiety
+    - relocation_trauma
+    - self_esteem
+    - gen_alpha_experience
+    - fukuoka
+    - japan
+  tones:
+    - warm
+    - authentic
+    - gentle
+    - age_appropriate
+    - encouraging
+    - empathetic
+  voice_profile_id: V_JA_F_YOUNG_01
+  pov: first
+  narrator: 松本さくら
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 15
+    location: "福岡"
+    school_level: "中学3年生"
+    living_situation: "両親と暮らす"
+    background: "公立中学校、小学校時代に転校を繰り返し"
+    current: "学生、受験、社交不安、自己肯定感の課題に直面"
+    pronouns: "彼女"
+    cultural_background: "日本人（九州）"
+    specific_struggles:
+      - "学業プレッシャー（高校受験）"
+      - "社交不安（新しい環境への適応困難）"
+      - "自己肯定感の低さ（転校の影響）"
+      - "友達作りの困難"
+    strengths:
+      - "繊細"
+      - "思いやりがある"
+      - "適応力がある"
+
+- id: peer_nakamura_ren
+  name: 中村蓮
+  display_name: 中村蓮
+  age: 17
+  bio_80w: 中村蓮17歳、仙台の高校2年生。中学時代に東日本大震災のトラウマ。学業プレッシャー（大学受験、東北圏の教育格差）、トラウマの影響（災害不安、喪失感）、将来不安（地元に残るか東京に出るか）に直面。災害トラウマと向き合い、将来を見据える方法を学んでいる。
+  domains:
+    - peer
+    - lived_experience
+    - academic_stress
+    - disaster_trauma
+    - ptsd
+    - career_anxiety
+    - gen_alpha_experience
+    - sendai
+    - japan
+  tones:
+    - warm
+    - authentic
+    - resilient
+    - age_appropriate
+    - encouraging
+    - understanding
+  voice_profile_id: V_JA_M_YOUNG_01
+  pov: first
+  narrator: 中村蓮
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 17
+    location: "仙台"
+    school_level: "高校2年生"
+    living_situation: "両親と暮らす"
+    background: "公立高校、中学時代に東日本大震災のトラウマ"
+    current: "学生、受験、トラウマ、将来不安の課題に直面"
+    pronouns: "彼"
+    cultural_background: "日本人（東北）"
+    specific_struggles:
+      - "学業プレッシャー（大学受験、教育格差）"
+      - "トラウマの影響（災害不安、喪失感）"
+      - "将来不安（地元に残るか東京に出るか）"
+      - "東日本大震災のトラウマ"
+    strengths:
+      - "レジリエンスがある"
+      - "思いやりがある"
+      - "前向き"
+
+- id: peer_takahashi_aoi
+  name: 高橋葵
+  display_name: 高橋葵
+  age: 14
+  bio_80w: 高橋葵14歳、札幌の中学2年生。小学校時代にいじめを経験。学業プレッシャー（成績不安、北海道の教育環境）、社交不安（いじめのトラウマ、友達作りの恐怖）、自己肯定感の低さ（いじめの影響）に直面。いじめを乗り越え、自分を大切にする方法を学んでいる。
+  domains:
+    - peer
+    - lived_experience
+    - academic_stress
+    - bullying
+    - social_anxiety
+    - self_esteem
+    - gen_alpha_experience
+    - sapporo
+    - japan
+  tones:
+    - warm
+    - authentic
+    - gentle
+    - age_appropriate
+    - encouraging
+    - validating
+  voice_profile_id: V_JA_F_YOUNG_01
+  pov: first
+  narrator: 高橋葵
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 14
+    location: "札幌"
+    school_level: "中学2年生"
+    living_situation: "両親と暮らす"
+    background: "公立中学校、小学校時代にいじめを経験"
+    current: "学生、学業、社交不安、自己肯定感の課題に直面"
+    pronouns: "彼女"
+    cultural_background: "日本人（北海道）"
+    specific_struggles:
+      - "学業プレッシャー（成績不安）"
+      - "社交不安（いじめのトラウマ）"
+      - "自己肯定感の低さ（いじめの影響）"
+      - "友達作りの恐怖"
+    strengths:
+      - "繊細"
+      - "レジリエンスがある"
+      - "思いやりがある"
+
+- id: peer_suzuki_kaito
+  name: 鈴木海翔
+  display_name: 鈴木海翔
+  age: 16
+  bio_80w: 鈴木海翔16歳、名古屋の高校1年生。中学時代にゲーム依存を経験。学業プレッシャー（高校受験後の適応、愛知県の競争）、ゲーム/SNS依存（スクリーンタイム、生活リズムの乱れ）、友人関係の悩み（オンライン vs リアル）に直面。健全なデジタルとの付き合い方を学んでいる。
+  domains:
+    - peer
+    - lived_experience
+    - academic_stress
+    - digital_addiction
+    - sleep_issues
+    - social_relationships
+    - gen_alpha_experience
+    - nagoya
+    - japan
+  tones:
+    - warm
+    - authentic
+    - honest
+    - age_appropriate
+    - encouraging
+    - relatable
+  voice_profile_id: V_JA_M_YOUNG_01
+  pov: first
+  narrator: 鈴木海翔
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 16
+    location: "名古屋"
+    school_level: "高校1年生"
+    living_situation: "両親と暮らす"
+    background: "公立高校、中学時代にゲーム依存を経験"
+    current: "学生、学業、デジタル依存、友人関係の課題に直面"
+    pronouns: "彼"
+    cultural_background: "日本人（東海）"
+    specific_struggles:
+      - "学業プレッシャー（高校受験後の適応）"
+      - "ゲーム/SNS依存（スクリーンタイム）"
+      - "友人関係の悩み（オンライン vs リアル）"
+      - "生活リズムの乱れ"
+    strengths:
+      - "正直"
+      - "回復力がある"
+      - "自己認識がある"
+
+- id: peer_yamamoto_hana
+  name: 山本花
+  display_name: 山本花
+  age: 15
+  bio_80w: 山本花15歳、広島の中学3年生。小学校時代に容姿いじめを経験。学業プレッシャー（高校受験、広島圏の競争）、容姿不安（いじめのトラウマ、SNS比較）、自己肯定感の低さ（外見へのコンプレックス）に直面。自分の身体と心を大切にする方法を学んでいる。
+  domains:
+    - peer
+    - lived_experience
+    - academic_stress
+    - bullying
+    - body_image
+    - self_esteem
+    - gen_alpha_experience
+    - hiroshima
+    - japan
+  tones:
+    - warm
+    - authentic
+    - gentle
+    - age_appropriate
+    - encouraging
+    - compassionate
+  voice_profile_id: V_JA_F_YOUNG_01
+  pov: first
+  narrator: 山本花
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 15
+    location: "広島"
+    school_level: "中学3年生"
+    living_situation: "両親と暮らす"
+    background: "公立中学校、小学校時代に容姿いじめを経験"
+    current: "学生、受験、容姿不安、自己肯定感の課題に直面"
+    pronouns: "彼女"
+    cultural_background: "日本人（中国地方）"
+    specific_struggles:
+      - "学業プレッシャー（高校受験）"
+      - "容姿不安（いじめのトラウマ、SNS比較）"
+      - "自己肯定感の低さ（外見コンプレックス）"
+      - "過去のいじめ体験のトラウマ"
+    strengths:
+      - "繊細"
+      - "思いやりがある"
+      - "レジリエンスがある"
+
+- id: peer_watanabe_sota
+  name: 渡辺蒼太
+  display_name: 渡辺蒼太
+  age: 17
+  bio_80w: 渡辺蒼太17歳、金沢の高校2年生。中学時代に学習障害（LD）と診断。学業プレッシャー（大学受験、石川県の教育環境）、自己肯定感の低さ（学習障害による困難、劣等感）、進路不安（地方での選択肢の限定）に直面。自分のペースで成長する方法を学んでいる。
+  domains:
+    - peer
+    - lived_experience
+    - academic_stress
+    - learning_disability
+    - self_esteem
+    - career_anxiety
+    - gen_alpha_experience
+    - kanazawa
+    - japan
+  tones:
+    - warm
+    - authentic
+    - understanding
+    - age_appropriate
+    - encouraging
+    - patient
+  voice_profile_id: V_JA_M_YOUNG_01
+  pov: first
+  narrator: 渡辺蒼太
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 17
+    location: "金沢"
+    school_level: "高校2年生"
+    living_situation: "両親と暮らす"
+    background: "公立高校、中学時代に学習障害（LD）と診断"
+    current: "学生、受験、自己肯定感、進路の課題に直面"
+    pronouns: "彼"
+    cultural_background: "日本人（北陸）"
+    specific_struggles:
+      - "学業プレッシャー（大学受験）"
+      - "自己肯定感の低さ（学習障害による困難）"
+      - "進路不安（地方での選択肢の限定）"
+      - "学習障害による困難"
+    strengths:
+      - "粘り強い"
+      - "思いやりがある"
+      - "創造的"
+
+- id: peer_ito_mei
+  name: 伊藤芽衣
+  display_name: 伊藤芽衣
+  age: 14
+  bio_80w: 伊藤芽衣14歳、沖縄の中学2年生。小学校時代から不安障害を経験。学業プレッシャー（成績不安、沖縄の教育格差）、社交不安（クラスでの発表、友達作り）、家族関係の悩み（親の過干渉、経済的困難）に直面。不安と向き合い、島での生活を楽しむ方法を学んでいる。
+  domains:
+    - peer
+    - lived_experience
+    - academic_stress
+    - anxiety
+    - social_anxiety
+    - family_pressure
+    - gen_alpha_experience
+    - okinawa
+    - japan
+  tones:
+    - warm
+    - authentic
+    - gentle
+    - age_appropriate
+    - encouraging
+    - understanding
+  voice_profile_id: V_JA_F_YOUNG_01
+  pov: first
+  narrator: 伊藤芽衣
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 14
+    location: "沖縄"
+    school_level: "中学2年生"
+    living_situation: "両親と暮らす"
+    background: "公立中学校、小学校時代から不安障害"
+    current: "学生、学業、社交不安、家族関係の課題に直面"
+    pronouns: "彼女"
+    cultural_background: "日本人（沖縄）"
+    specific_struggles:
+      - "学業プレッシャー（成績不安、教育格差）"
+      - "社交不安（クラスでの発表）"
+      - "家族関係の悩み（親の過干渉、経済的困難）"
+      - "不安障害の症状"
+    strengths:
+      - "繊細"
+      - "思いやりがある"
+      - "真面目"
+
+- id: peer_kobayashi_yuki
+  name: 小林優希
+  display_name: 小林優希
+  age: 16
+  bio_80w: 小林優希16歳、京都の高校1年生。中学時代に摂食障害を経験。学業プレッシャー（進学校での適応、京都の競争）、容姿不安（体重、SNS比較）、友人関係の悩み（表面的な付き合い、本音を言えない）に直面。伝統文化の中で自分らしく生きる方法を学んでいる。
+  domains:
+    - peer
+    - lived_experience
+    - academic_stress
+    - eating_disorder
+    - body_image
+    - social_anxiety
+    - gen_alpha_experience
+    - kyoto
+    - japan
+  tones:
+    - warm
+    - authentic
+    - gentle
+    - age_appropriate
+    - encouraging
+    - compassionate
+  voice_profile_id: V_JA_M_YOUNG_01
+  pov: first
+  narrator: 小林優希
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 16
+    location: "京都"
+    school_level: "高校1年生"
+    living_situation: "両親と暮らす"
+    background: "進学校、中学時代に摂食障害を経験"
+    current: "学生、学業、容姿不安、友人関係の課題に直面"
+    pronouns: "彼"
+    cultural_background: "日本人（関西）"
+    specific_struggles:
+      - "学業プレッシャー（進学校での適応）"
+      - "容姿不安（体重、SNS比較）"
+      - "友人関係の悩み（表面的な付き合い）"
+      - "摂食障害からの回復"
+    strengths:
+      - "回復力がある"
+      - "思いやりがある"
+      - "自己認識がある"
+
+- id: peer_nakajima_riku
+  name: 中島陸
+  display_name: 中島陸
+  age: 15
+  bio_80w: 中島陸15歳、熊本の中学3年生。小学校時代にADHDと診断。学業プレッシャー（高校受験、熊本の教育環境）、自己肯定感の低さ（ADHDによる困難、周囲との比較）、友人関係の悩み（衝動性、誤解されやすさ）に直面。地方都市で自分の特性を理解し、強みを活かす方法を学んでいる。
+  domains:
+    - peer
+    - lived_experience
+    - academic_stress
+    - adhd
+    - self_esteem
+    - social_relationships
+    - gen_alpha_experience
+    - kumamoto
+    - japan
+  tones:
+    - warm
+    - authentic
+    - energetic
+    - age_appropriate
+    - encouraging
+    - understanding
+  voice_profile_id: V_JA_M_YOUNG_01
+  pov: first
+  narrator: 中島陸
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 15
+    location: "熊本"
+    school_level: "中学3年生"
+    living_situation: "両親と暮らす"
+    background: "公立中学校、小学校時代にADHDと診断"
+    current: "学生、受験、自己肯定感、友人関係の課題に直面"
+    pronouns: "彼"
+    cultural_background: "日本人（九州）"
+    specific_struggles:
+      - "学業プレッシャー（高校受験）"
+      - "自己肯定感の低さ（ADHDによる困難）"
+      - "友人関係の悩み（衝動性、誤解されやすさ）"
+      - "ADHDの特性による困難"
+    strengths:
+      - "エネルギッシュ"
+      - "創造的"
+      - "正直"
+
+- id: clinical_dr_taniguchi_hiroshi
+  name: 谷口博医師
+  display_name: 谷口博医師
+  age: 35
+  bio_80w: 谷口博医師35歳、児童精神科医。中学時代に不登校を経験。神戸大学医学部卒業、11年間日本全国（大阪、東京、地方都市）で子供と若者のメンタルヘルスに携わる。地方と都市部の子供のメンタルヘルス格差、青年期の不安、学校適応を専門とする。地域による違い、共通する課題、回復のプロセスについて執筆。年齢に適した内容と安全を重視。
+  domains:
+    - clinical
+    - child_adolescent
+    - anxiety
+    - depression
+    - school_refusal
+    - regional_differences
+    - lived_experience
+  tones:
+    - calm
+    - clinical
+    - reassuring
+    - age_appropriate
+    - compassionate
+    - evidence_based
+  voice_profile_id: V_JA_M_PROFESSIONAL_01
+  pov: first
+  narrator: 谷口博医師
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 35
+    location: "日本全国（拠点は大阪）"
+    background: "神戸大学医学部卒業、中学時代に不登校を経験"
+    current: "児童精神科医、11年間日本全国で子供と若者のメンタルヘルス"
+    credentials: "医学博士、神戸大学医学部、日本医師免許、日本児童青年精神医学会認定医"
+    lived_experience: "中学時代に不登校を経験"
+    specialization: "地方と都市部の子供のメンタルヘルス格差"
+
+- id: medical_dr_kimura_yui
+  name: 木村結衣医師
+  display_name: 木村結衣医師
+  age: 32
+  bio_80w: 木村結衣医師32歳、小児科医。高校時代に摂食障害を経験。広島大学医学部卒業、8年間日本全国（広島、福岡、東京）で子供と若者の健康に携わる。思春期の身体的・精神的健康、摂食障害、地域医療格差を専門とする。地域による健康格差、身体と心のつながり、健全な成長のサポート方法について執筆。年齢に適した内容と安全を重視。
+  domains:
+    - medical
+    - pediatric
+    - health
+    - eating_disorders
+    - body_image
+    - regional_healthcare
+    - lived_experience
+  tones:
+    - professional
+    - caring
+    - clinical
+    - age_appropriate
+    - compassionate
+    - understanding
+  voice_profile_id: V_JA_F_PROFESSIONAL_01
+  pov: first
+  narrator: 木村結衣医師
+  constraints:
+    crisis_ready: true
+    disclosure_ok: true
+    minor_safe: true
+  metadata:
+    age: 32
+    location: "日本全国（拠点は広島）"
+    background: "広島大学医学部卒業、高校時代に摂食障害を経験"
+    current: "小児科医、8年間日本全国で子供と若者の健康"
+    credentials: "医学博士、広島大学医学部、日本医師免許、日本小児科学会専門医"
+    lived_experience: "高校時代に摂食障害を経験"
+    specialization: "思春期の身体的・精神的健康、地域医療格差"

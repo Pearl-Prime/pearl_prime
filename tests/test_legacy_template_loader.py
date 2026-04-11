@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from phoenix_v4.planning.legacy_template_loader import (
+    clear_legacy_template_path_cache,
     estimate_legacy_library_words,
     load_chapter_bridge,
     load_legacy_section,
@@ -118,3 +119,19 @@ def test_v4_word_estimate_when_extracted():
         pytest.skip("no extracted v4 tree")
     w = estimate_legacy_library_words("v4_therapeutic", repo_root=REPO_ROOT)
     assert w > 50
+
+
+def test_v2_somatic_expand2_section_when_extracted():
+    ext = (
+        REPO_ROOT
+        / "template_expand2"
+        / "_extracted"
+        / "qaudiobook_template_v2_somatic"
+        / "sections_somatic_v2"
+    )
+    if not ext.is_dir():
+        pytest.skip("template_expand2 somatic tree not present")
+    clear_legacy_template_path_cache()
+    sec = load_legacy_section("v2_somatic", 1, 1, "F1", repo_root=REPO_ROOT)
+    assert sec.word_count > 50
+    assert not any("section_yaml_not_found" in w for w in sec.warnings)

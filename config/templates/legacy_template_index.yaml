@@ -1,7 +1,9 @@
 # Machine-readable legacy template inventory (repo-relative paths).
 # Zip archives exist on disk but extracted YAML trees are NOT present until unpacked.
+# template_expand2/ — vendor + persona batch drop (see artifacts/audit/TEMPLATE_EXPAND2_INGEST_AUDIT.md).
 schema_version: 1
 source_root: template_expand
+source_root_expand2: template_expand2
 
 libraries:
   v4_therapeutic:
@@ -41,6 +43,22 @@ libraries:
     recommended_use: style_reference
 
   v2_somatic:
+    path: template_expand2/_extracted/qaudiobook_template_v2_somatic/sections_somatic_v2
+    archive: template_expand2/qaudiobook_template_v2_somatic.zip
+    status: available
+    source_type: zip_imported
+    role: section_scaffold
+    chapters: 12
+    sections_per_chapter: 10
+    variants_per_section: 5
+    total_section_yaml_files: 600
+    file_format: yaml
+    naming_convention: sections_somatic_v2/chapter_{NN}/section_{NN}_<type>/fN.yaml with key content (block scalar)
+    avg_words_per_section: 153
+    total_words: 92325
+    recommended_use: section_packet_composer_primary
+
+  v2_somatic_template_expand_legacy:
     path: template_expand/audiobook_template_v2_SOMATIC
     archive: template_expand/audiobook_template_v2_somatic.zip
     status: missing
@@ -48,7 +66,7 @@ libraries:
     chapters: unknown_until_extracted
     sections_per_chapter: unknown_until_extracted
     variants_per_section: unknown_until_extracted
-    recommended_use: somatic_reference
+    recommended_use: legacy_path_placeholder_until_extracted
 
   v2_both:
     path: template_expand/audiobook_templates_v2_BOTH
@@ -59,6 +77,79 @@ libraries:
     sections_per_chapter: unknown_until_extracted
     variants_per_section: unknown_until_extracted
     recommended_use: reference_only
+
+  # Persona atom libraries (template_expand2) — reference inventory; not section YAML grids.
+  midlife_women_complete_atoms:
+    path: template_expand2/_extracted/midlife_women_complete
+    archive: template_expand2/midlife_women_complete.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 8
+    recommended_use: atom_import_source
+
+  midlife_women_520_atoms:
+    path: template_expand2/_extracted/midlife_women_520_atoms
+    archive: template_expand2/midlife_women_520_atoms.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 26
+    recommended_use: atom_import_source
+
+  nyc_executives_combined_atoms:
+    path: template_expand2/_extracted/nyc_executives_combined
+    archive: template_expand2/nyc_executives_combined.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 12
+    recommended_use: atom_import_source
+
+  parents_teens_complete_atoms:
+    path: template_expand2/_extracted/parents_teens_complete
+    archive: template_expand2/parents_teens_complete.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 26
+    recommended_use: atom_import_source
+
+  creatives_freelancers_complete_atoms:
+    path: template_expand2/_extracted/creatives_freelancers_complete
+    archive: template_expand2/creatives_freelancers_complete.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 26
+    recommended_use: atom_import_source
+
+  sf_founders_complete_atoms:
+    path: template_expand2/_extracted/sf_founders_complete
+    archive: template_expand2/sf_founders_complete.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 26
+    recommended_use: atom_import_source
+
+  smb_owners_complete_atoms:
+    path: template_expand2/_extracted/smb_owners_complete
+    archive: template_expand2/smb_owners_complete.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 4
+    recommended_use: atom_import_source
+
+  phase3_all_personas_atoms:
+    path: template_expand2/_extracted/phase3_all_personas
+    archive: template_expand2/phase3_all_personas.zip
+    status: available
+    source_type: zip_imported
+    role: persona_atom_library
+    files_on_disk: 50
+    recommended_use: atom_import_source
 
   integrated_chapters:
     path: template_expand/complete_chapters_integrated.md
@@ -125,6 +216,8 @@ six_hour_targets:
 
 on_disk_layout:
   note: >
-    Zip archives unpack under template_expand/_extracted/<zip_basename_without_suffix>/.
+    Zip archives unpack under template_expand/_extracted/<zip_basename_without_suffix>/ or
+    template_expand2/_extracted/<zip_basename_without_suffix>/.
     The loader resolves index path, then _extracted/<archive_stem>, then _extracted/<library_id>.
     Preferred section files: chapter_{NN}/section_{NN}/variant_{F*}.yaml (YAML body in text/content/body/prose).
+    Somatic v2 (v2_somatic): sections_somatic_v2/chapter_{NN}/section_{NN}_<type>/fN.yaml with key content.
