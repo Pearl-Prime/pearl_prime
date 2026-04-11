@@ -24,6 +24,8 @@
 2. **ElevenLabs API URL hardcoded** in `scripts/video/run_soundtrack_engine.py` (line 19: `ELEVEN_BASE = "https://api.elevenlabs.io/v1/text-to-speech"`) — not gated by config or env var; any soundtrack stage run that reaches this path will hit a live ElevenLabs endpoint regardless of operator intent.
 3. **qwen3:14b model references** in 6 files across config and scripts — model IDs differ from the documented qwen2.5-based production guidance; `generate_showcase_bundle.py` embeds it in its docstring as the authoritative default, creating an inconsistency with model governance.
 
+**Remediation (2026-04-10) for item 2:** [PR #354](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/354) (merge `cebd91c5ad3bec367f2561c5dad2c0e9ad51ed9b`) removes the hardcoded host from `scripts/video/run_soundtrack_engine.py` and resolves the ElevenLabs POST path from `config/tts/locale_voice_routing.yaml` (`provider_config.elevenlabs.base_url`). Full evidence, CI matrix, and deferred migration lane: [artifacts/coordination/TTS_PROVIDER_HARDENING_CLOSEOUT_2026_04_10.md](../coordination/TTS_PROVIDER_HARDENING_CLOSEOUT_2026_04_10.md).
+
 ---
 
 ## PHASE 1: Pipeline Correctness
