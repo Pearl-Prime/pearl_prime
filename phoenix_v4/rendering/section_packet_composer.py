@@ -16,6 +16,8 @@ except ImportError:  # pragma: no cover
         del plan
         return (text or "").strip()
 
+from phoenix_v4.planning.exercise_journey_planner import JOURNEY_INTROS
+
 
 _DOUBLE_BRACE_RE = re.compile(r"\{\{[^}]+\}\}")
 _SINGLE_BRACE_RE = re.compile(r"\{[a-zA-Z_][a-zA-Z0-9_]*\}")
@@ -64,6 +66,7 @@ def compose_section_packet(
     legacy_template_section: Optional[Dict[str, Any]] = None,
     bridge_text: Optional[str] = None,
     quality_profile: str = "draft",
+    exercise_phase: Optional[str] = None,
 ) -> dict:
     """
     Compose a single section packet from multiple sources.
@@ -92,6 +95,13 @@ def compose_section_packet(
             sources_used.append("legacy_template")
 
     core, depth_from_split = _enrichment_split(enrichment_slot)
+
+    if exercise_phase:
+        phase_key = str(exercise_phase).strip().lower()
+        intro = JOURNEY_INTROS.get(phase_key)
+        if intro:
+            blocks.append(intro)
+            sources_used.append("journey_transition")
 
     if core:
         blocks.append(core)

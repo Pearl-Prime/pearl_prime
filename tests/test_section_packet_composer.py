@@ -72,6 +72,22 @@ def test_empty_enrichment_still_works():
     assert out["sources_used"] == []
 
 
+def test_exercise_phase_prepends_journey_intro():
+    out = compose_section_packet(
+        chapter_index=1,
+        section_index=4,
+        section_type="EXERCISE",
+        target_words=200,
+        spine_context={},
+        beatmap_slot={},
+        enrichment_slot={"content": "Do the practice.", "source": "registry"},
+        exercise_phase="awareness",
+    )
+    assert "journey_transition" in out["sources_used"]
+    assert "notice what it's been holding" in out["text"]
+    assert "Do the practice." in out["text"]
+
+
 def test_bridge_text_prepended():
     out = compose_section_packet(
         chapter_index=2,

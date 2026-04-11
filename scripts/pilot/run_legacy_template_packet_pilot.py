@@ -41,6 +41,11 @@ def main() -> int:
         default="v4_therapeutic",
         help="library_id from config/templates/legacy_template_index.yaml",
     )
+    parser.add_argument(
+        "--exercise-journeys",
+        action="store_true",
+        help="Attach thesis-aligned exercise journeys after depth pass (enrichment_select)",
+    )
     args = parser.parse_args()
 
     if yaml is None:
@@ -51,6 +56,7 @@ def main() -> int:
     from phoenix_v4.planning.enrichment_select import (
         EnrichmentRequest,
         apply_depth_pass,
+        attach_exercise_journeys,
         budget_from_enriched,
         select_enrichment,
     )
@@ -95,6 +101,14 @@ def main() -> int:
     depth_map_path = REPO_ROOT / "config" / "depth" / "depth_module_map.yaml"
     depth_map = yaml.safe_load(depth_map_path.read_text(encoding="utf-8"))
     enriched = apply_depth_pass(enriched, depth_map, repo_root=REPO_ROOT)
+    if args.exercise_journeys:
+        journey_seed = f"{args.seed}:legacy_packet_journey"
+        enriched = attach_exercise_journeys(
+            enriched,
+            seed=journey_seed,
+            enabled=True,
+            repo_root=REPO_ROOT,
+        )
 
     audit_rows: List[Dict[str, Any]] = []
     chapter_words: Dict[int, int] = defaultdict(int)
@@ -160,6 +174,7 @@ def main() -> int:
                 "content": slot.content,
                 "source": slot.source,
                 "enrichment_applied": list(slot.enrichment_applied or []),
+                "exercise_phase": getattr(slot, "exercise_phase", None),
             }
             if slot.source not in ("gap",):
                 enrichment_hits += 1
@@ -181,6 +196,7 @@ def main() -> int:
                 legacy_template_section=legacy_dict,
                 bridge_text=bridge_text,
                 quality_profile="draft",
+                exercise_phase=getattr(slot, "exercise_phase", None),
             )
 
             body = packet["text"]

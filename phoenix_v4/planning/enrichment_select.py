@@ -58,6 +58,8 @@ class EnrichedSlot:
     target_words: int
     actual_words: int
     enrichment_applied: List[str]
+    exercise_phase: Optional[str] = None
+    journey_exercise_id: Optional[str] = None
 
 
 @dataclass
@@ -69,6 +71,7 @@ class EnrichedChapter:
     slots: List[EnrichedSlot]
     total_words: int
     source_breakdown: Dict[str, int]
+    exercise_journey: Optional[Dict[str, Any]] = None
 
 
 @dataclass
@@ -332,6 +335,7 @@ def select_enrichment(
                 slots=slots_out,
                 total_words=ch_words,
                 source_breakdown=dict(ch_breakdown),
+                exercise_journey=None,
             )
         )
 
@@ -377,6 +381,7 @@ def enriched_book_to_jsonable(book: EnrichedBook) -> Dict[str, Any]:
                 "total_words": ch.total_words,
                 "source_breakdown": ch.source_breakdown,
                 "slots": [asdict(s) for s in ch.slots],
+                "exercise_journey": ch.exercise_journey,
             }
             for ch in book.chapters
         ],
@@ -781,4 +786,118 @@ def apply_depth_pass(
 
     enriched_book.total_words = sum(ch.total_words for ch in enriched_book.chapters)
     enriched_book.enrichment_audit["total_words"] = enriched_book.total_words
+    return enriched_book
+
+
+def attach_exercise_journeys(
+    enriched_book: EnrichedBook,
+    *,
+    seed: str,
+    enabled: bool = True,
+    repo_root: Optional[Path] = None,
+) -> EnrichedBook:
+    """
+    After enrichment + depth pass: attach per-chapter exercise journeys to chapters and
+    EXERCISE slots at template sections (4 / 8 / 10). Logs warnings when thesis outcome
+    validation fails, prerequisites fail, or redundancy is detected.
+    """
+    if not enabled:
+        return enriched_book
+
+    from phoenix_v4.planning.exercise_journey_planner import (
+        plan_exercise_journey,
+        resolve_thesis_id,
+    )
+    from phoenix_v4.planning.exercise_registry_loader import (
+        load_exercise_registry,
+        load_journey_templates,
+        load_thesis_outcome_map,
+    )
+
+    root = repo_root or REPO_ROOT
+    exercises = load_exercise_registry(repo_root=root)
+    thesis_outcomes = load_thesis_outcome_map(repo_root=root)
+    templates = load_journey_templates(repo_root=root)
+
+    ej_audit: List[Dict[str, Any]] = []
+    topic = enriched_book.topic
+    runtime = enriched_book.runtime_format or "standard_book"
+
+    for chapter in enriched_book.chapters:
+        thesis_id = resolve_thesis_id(topic, chapter.number, seed)
+        journey = plan_exercise_journey(
+            chapter.number,
+            thesis_id,
+            runtime,
+            seed=seed,
+            exercise_registry=exercises,
+            thesis_outcomes=thesis_outcomes,
+            journey_templates=templates,
+        )
+
+        if not journey.outcome_ok:
+            logger.warning(
+                "Exercise journey outcome mismatch ch=%s thesis=%s violations=%s",
+                chapter.number,
+                thesis_id,
+                journey.outcome_violations,
+            )
+        if journey.prerequisite_violations:
+            logger.warning(
+                "Exercise journey prerequisites ch=%s violations=%s",
+                chapter.number,
+                journey.prerequisite_violations,
+            )
+        if journey.redundancy_warnings:
+            logger.warning(
+                "Exercise journey redundancy ch=%s warnings=%s",
+                chapter.number,
+                journey.redundancy_warnings,
+            )
+
+        chapter.exercise_journey = {
+            "journey_type": journey.journey_type,
+            "template_id": journey.template_id,
+            "aligned_with_thesis": journey.aligned_with_thesis,
+            "expected_outcome": journey.expected_outcome,
+            "outcome_ok": journey.outcome_ok,
+            "outcome_violations": list(journey.outcome_violations),
+            "prerequisite_violations": list(journey.prerequisite_violations),
+            "redundancy_warnings": list(journey.redundancy_warnings),
+            "phases": [
+                {
+                    "name": p.name,
+                    "target_section": p.target_section,
+                    "exercise_id": p.exercise_id,
+                    "intro": p.intro,
+                }
+                for p in journey.phases
+            ],
+        }
+
+        used_sections: Dict[int, str] = {}
+        for phase in journey.phases:
+            sec = int(phase.target_section)
+            for si, slot in enumerate(chapter.slots):
+                if si + 1 != sec:
+                    continue
+                if slot.slot_type.strip().upper() != "EXERCISE":
+                    continue
+                if sec in used_sections:
+                    continue
+                slot.exercise_phase = phase.name
+                slot.journey_exercise_id = phase.exercise_id
+                used_sections[sec] = phase.exercise_id
+                break
+
+        ej_audit.append(
+            {
+                "chapter": chapter.number,
+                "thesis_id": thesis_id,
+                "journey_type": journey.journey_type,
+                "exercise_ids": [p.exercise_id for p in journey.phases],
+            }
+        )
+
+    enriched_book.enrichment_audit["exercise_journeys"] = ej_audit
     return enriched_book
