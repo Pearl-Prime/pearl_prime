@@ -273,6 +273,16 @@ def _extract_registry_chapters(prose: str) -> list[str]:
     return chapters
 
 
+def _resolved_runtime_format_id(args: argparse.Namespace, format_plan_dict: dict) -> str:
+    """Unify CLI / plan runtime id. Stage-2 ``to_compiler_input()`` uses ``format_runtime_id``; some paths use ``runtime_format_id``."""
+    cli = (getattr(args, "runtime_format", None) or "").strip()
+    return (
+        cli
+        or (str(format_plan_dict.get("runtime_format_id") or "")).strip()
+        or (str(format_plan_dict.get("format_runtime_id") or "")).strip()
+    )
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="BookSpec -> FormatPlan -> CompiledBook")
     ap.add_argument("--topic", default=None, help="Topic ID (e.g. relationship_anxiety)")
@@ -953,6 +963,13 @@ def main() -> int:
             persona_id=book_spec_for_compiler.get("persona_id"),
         )
 
+        _reg_runtime = _resolved_runtime_format_id(args, format_plan_dict)
+        _reg_format_id = (
+            format_plan_dict.get("format_structural_id")
+            or format_plan_dict.get("format_id")
+            or ""
+        )
+
         # Render to prose directly (skip atom assembly, skip Stage 3 compile)
         prose = resolved_book.to_prose()
 
@@ -972,6 +989,8 @@ def main() -> int:
                 "word_count": resolved_book.word_count,
                 "seed": seed,
                 "source": "section_registry",
+                "format_id": _reg_format_id,
+                "runtime_format_id": _reg_runtime,
             }
             out_path = Path(args.out)
             out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -985,14 +1004,37 @@ def main() -> int:
             book_path.write_text(prose, encoding="utf-8")
             print(f"Rendered book (txt): {book_path}")
 
-            # Budget report
+            # Budget report (word_count matches delivered prose; enables word_count_gate)
+            _wc_prose = len(prose.split())
             budget_path = render_dir / "budget.json"
-            budget_path.write_text(json.dumps({
-                "word_count": resolved_book.word_count,
+            budget_payload: dict = {
+                "word_count": _wc_prose,
+                "runtime_format_id": _reg_runtime,
+                "format_id": _reg_format_id,
                 "chapter_count": resolved_book.chapter_count,
-                "chapters": [{"chapter": ch.chapter_index + 1, "title": ch.title, "words": ch.word_count} for ch in resolved_book.chapters],
-            }, indent=2))
+                "chapters": [
+                    {
+                        "chapter": ch.chapter_index + 1,
+                        "title": ch.title,
+                        "words": ch.word_count,
+                    }
+                    for ch in resolved_book.chapters
+                ],
+            }
+            budget_path.write_text(json.dumps(budget_payload, indent=2))
             print(f"Rendered book (budget): {budget_path}")
+
+            if not args.skip_word_count_gate and _reg_runtime:
+                try:
+                    from phoenix_v4.rendering.book_renderer import WordCountGateError, word_count_gate
+
+                    gate_metrics = word_count_gate(prose, _reg_runtime, source_hint=str(book_path))
+                    refresh = json.loads(budget_path.read_text(encoding="utf-8"))
+                    refresh["gate_result"] = gate_metrics
+                    budget_path.write_text(json.dumps(refresh, indent=2))
+                except WordCountGateError as wc_exc:
+                    print(str(wc_exc), file=sys.stderr)
+                    return 1
 
             # Output contract
             contract_path = render_dir / "output_contract.json"
@@ -1001,8 +1043,10 @@ def main() -> int:
                 "registry_path": registry_path,
                 "topic_id": topic_id,
                 "teacher_id": teacher_id_for_reg,
-                "word_count": resolved_book.word_count,
+                "word_count": _wc_prose,
                 "chapter_count": resolved_book.chapter_count,
+                "runtime_format_id": _reg_runtime,
+                "format_id": _reg_format_id,
             }, indent=2))
             print(f"Output contract: {contract_path}")
 
@@ -1251,8 +1295,10 @@ def main() -> int:
                         "freebie_slug": (
                             f"{topic_id}-{book_spec_for_compiler.get('persona_id', '')}"
                         ),
-                        "word_count": resolved_book.word_count,
+                        "word_count": _wc_prose,
                         "source": "section_registry",
+                        "format_id": _reg_format_id,
+                        "runtime_format_id": _reg_runtime,
                     }
                     _formats_list = None
                     if args.formats:
@@ -1294,6 +1340,8 @@ def main() -> int:
                     "topic_id": topic_id,
                     "persona_id": book_spec_for_compiler.get("persona_id", ""),
                     "teacher_id": teacher_id_for_reg,
+                    "format_id": _reg_format_id,
+                    "runtime_format_id": _reg_runtime,
                     "quality_profile": quality_profile,
                     "gates_run": gates_run,
                     "gates_hard": gates_hard,
@@ -1606,7 +1654,7 @@ def main() -> int:
     if compiled.slot_sig:
         out["slot_sig"] = compiled.slot_sig
     out["format_id"] = format_plan_dict.get("format_structural_id") or format_plan_dict.get("format_id") or ""
-    out["runtime_format_id"] = args.runtime_format or format_plan_dict.get("runtime_format_id") or ""
+    out["runtime_format_id"] = _resolved_runtime_format_id(args, format_plan_dict)
     if format_plan_dict.get("output_format_id"):
         out["output_format_id"] = format_plan_dict.get("output_format_id")
         out["output_format_name"] = format_plan_dict.get("output_format_name")
@@ -1690,7 +1738,7 @@ def main() -> int:
                 _ic_alias = book_spec_for_compiler["mechanism_alias"]
             _ic_ch_count = len(compiled.chapter_slot_sequence) if compiled.chapter_slot_sequence else None
             _ic_format_id = out.get("format_id") or format_plan_dict.get("format_structural_id") or None
-            _ic_runtime_id = out.get("runtime_format_id") or format_plan_dict.get("runtime_format_id") or None
+            _ic_runtime_id = (out.get("runtime_format_id") or "").strip() or _resolved_runtime_format_id(args, format_plan_dict) or None
 
             intro_resolved = resolve_introduction_chapter(
                 _ic_topic, _ic_persona, _ic_seed, brand_id=_ic_brand,
@@ -1906,7 +1954,7 @@ def main() -> int:
 
             # Load runtime format config for word_range
             _fmt_registry_path = REPO_ROOT / "config" / "format_selection" / "format_registry.yaml"
-            _runtime_fmt_id = out.get("runtime_format_id") or format_plan_dict.get("runtime_format_id") or ""
+            _runtime_fmt_id = (out.get("runtime_format_id") or "").strip() or _resolved_runtime_format_id(args, format_plan_dict)
             _fmt_cfg: dict = {}
             if _fmt_registry_path.exists() and yaml:
                 _all_fmts = yaml.safe_load(_fmt_registry_path.read_text(encoding="utf-8")) or {}
