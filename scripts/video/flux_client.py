@@ -10,6 +10,7 @@ import base64
 import json
 import os
 from pathlib import Path
+from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
@@ -55,12 +56,14 @@ def load_credentials() -> tuple[str, str]:
     return account_id, api_token
 
 
-def build_master_prompt(
+def _build_master_prompt_string(
     scene_description: str,
     palette_prompt_names: list[str],
     band_never_rules: list[str],
     no_adoration: list[str],
     shared_negatives: list[str],
+    *,
+    anchor_fragment: str | None = None,
 ) -> str:
     """Build positive prompt (foreground → Background: → Overall lighting:)."""
     palette_str = ", ".join(palette_prompt_names)
@@ -69,26 +72,84 @@ def build_master_prompt(
         f"in {palette_str}, soft brush texture, gentle paper-like grain, "
         "centered composition, generous negative space, no faces, contemplative mood."
     )
+    if anchor_fragment:
+        foreground = f"{foreground} Include {anchor_fragment}."
     background = (
         f"Background: an atmospheric abstract gradient of {palette_str}, "
-        "with soft blur, no sharp edges, ethereal haze."
+        "with gentle depth, clean edges, soft tonal separation."
     )
     lighting = (
-        "Overall lighting: soft diffused light from the window, quiet and undramatic, "
-        "subtle volumetric haze, 9:16, highly detailed but soft."
+        "Overall lighting: soft ambient light, quiet and undramatic, "
+        "no overexposure, grounded, 9:16, highly detailed but soft."
     )
     return f"{foreground}\n\n{background}\n\n{lighting}"
+
+
+def build_master_prompt(
+    *args: Any,
+    topic: str | None = None,
+    visual_intent: str | None = None,
+    anchor_fragment: str | None = None,
+) -> str | dict[str, str]:
+    """
+    Build the master positive prompt, or (when topic= is passed) return positive/negative dict.
+
+    Positional form (5 args): scene_description, palette_prompt_names, band_never_rules,
+    no_adoration, shared_negatives — returns a single positive string.
+
+    Keyword form: topic=..., visual_intent=... — loads scene from flux_bank_scenes.yaml and
+    returns {"positive", "negative", "guidance", "seed"}.
+    """
+    if topic is not None:
+        if args:
+            raise TypeError("build_master_prompt: use either positional (5 args) or topic=, not both")
+        return _build_master_prompt_dict(topic, visual_intent)
+    if len(args) != 5:
+        raise TypeError(
+            "build_master_prompt expects 5 positional arguments "
+            "(scene_description, palette_prompt_names, band_never_rules, no_adoration, shared_negatives) "
+            "or keyword arguments topic= and optional visual_intent="
+        )
+    scene_description, palette_prompt_names, band_never_rules, no_adoration, shared_negatives = args
+    return _build_master_prompt_string(
+        scene_description,
+        palette_prompt_names,
+        band_never_rules,
+        no_adoration,
+        shared_negatives,
+        anchor_fragment=anchor_fragment,
+    )
+
+
+def _build_master_prompt_dict(topic: str, visual_intent: str | None) -> dict[str, str]:
+    scenes_cfg = load_yaml("config/video/flux_bank_scenes.yaml")
+    intent_map = scenes_cfg.get("visual_intent_scenes") or {}
+    default_scene = scenes_cfg.get("default_scene") or (
+        "a contemplative moment, soft light, generous negative space, no faces"
+    )
+    intent_key = visual_intent or "HOOK_VISUAL"
+    scene = (intent_map.get(intent_key) or {}).get("scene") or default_scene
+    prompt, negative, guidance, seed = get_prompt_for_topic_scene(topic, scene)
+    return {
+        "positive": prompt,
+        "negative": negative,
+        "guidance": str(guidance),
+        "seed": str(seed),
+    }
 
 
 def build_negative_block(
     band_never_rules: list[str],
     no_adoration: list[str],
     shared_negatives: list[str],
+    extra_never: list[str] | None = None,
 ) -> str:
-    """Combine never_rules + no_adoration + shared_negatives."""
+    """Combine never_rules + no_adoration + shared_negatives + optional topic never list."""
     parts = list(band_never_rules)
     parts.extend(no_adoration)
     parts.extend(shared_negatives)
+    if extra_never:
+        parts.extend(extra_never)
     return ", ".join(parts)
 
 
@@ -113,14 +174,20 @@ def get_prompt_for_topic_scene(topic: str, scene_description: str) -> tuple[str,
     guidance = float(gen_spec.get("guidance", 3.0))
     no_adoration = constraints.get("no_adoration", [])
     shared_negatives = constraints.get("shared_negatives", [])
-    prompt = build_master_prompt(
+    prompt_rules = topic_cfg.get("prompt_rules") or {}
+    anchor_fragment = None
+    if prompt_rules.get("require_dark_anchor"):
+        anchor_fragment = prompt_rules.get("anchor_description", "").strip() or None
+    extra_never = list(prompt_rules.get("never") or [])
+    prompt = _build_master_prompt_string(
         scene_description,
         palette_prompt_names,
         band_never,
         no_adoration,
         shared_negatives,
+        anchor_fragment=anchor_fragment,
     )
-    negative = build_negative_block(band_never, no_adoration, shared_negatives)
+    negative = build_negative_block(band_never, no_adoration, shared_negatives, extra_never=extra_never)
     return prompt, negative, guidance, seed
 
 
@@ -205,9 +272,14 @@ def call_comfyui(
 
     workflow_path = REPO_ROOT / "scripts" / "image_generation" / "comfyui_workflows" / "flux_video_bank.json"
     workflow = json.loads(workflow_path.read_text(encoding="utf-8"))
-    full_prompt = f"{prompt}\n\nAvoid: {negative_prompt}" if negative_prompt else prompt
+    workflow = {k: v for k, v in workflow.items() if k != "_meta"}
+    if "5" in workflow:
+        workflow["5"]["inputs"]["width"] = int(width)
+        workflow["5"]["inputs"]["height"] = int(height)
     if "6" in workflow:
-        workflow["6"]["inputs"]["text"] = full_prompt
+        workflow["6"]["inputs"]["text"] = prompt
+    if "7" in workflow:
+        workflow["7"]["inputs"]["text"] = negative_prompt if negative_prompt else " "
     if "25" in workflow:
         workflow["25"]["inputs"]["noise_seed"] = seed
     elif "3" in workflow:

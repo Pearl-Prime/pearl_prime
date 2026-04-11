@@ -55,7 +55,15 @@ bands:
         palette:
           - { hex: "#7B8FA1", prompt_name: "slate blue grey" }
           - { hex: "#C5D1DB", prompt_name: "pale mist blue" }
-          - { hex: "#E8EDF1", prompt_name: "pale mist" }
+          - { hex: "#E8EDF2", prompt_name: "pale mist" }
+          - { hex: "#3A4A5C", prompt_name: "dark anchor" }
+        prompt_rules:
+          require_dark_anchor: true
+          anchor_description: "dark wooden surface, charcoal textile, or deep shadow area"
+          never:
+            - "all-white background"
+            - "pure mist"
+            - "nothing but light"
       depression:
         emotion_arc: "deep indigo to warm glow"
         palette:

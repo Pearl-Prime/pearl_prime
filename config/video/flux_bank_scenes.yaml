@@ -4,13 +4,13 @@
 
 visual_intent_scenes:
   HOOK_VISUAL:
-    scene: "a soft abstract moment of curiosity, gentle light and subtle movement, inviting pause"
+    scene: "a clear scroll-stopping moment, simple subject, strong readable silhouette, inviting pause"
   CHARACTER_EMOTION:
-    scene: "hands in a contemplative pose, soft focus, emotional resonance without faces"
+    scene: "hands in a contemplative pose, clear silhouette, emotional resonance without faces"
   SYMBOLIC_METAPHOR:
-    scene: "a single symbolic object in soft focus, metaphorical and open to interpretation"
+    scene: "a single symbolic object, readable shape, metaphorical and open to interpretation"
   ENVIRONMENT_ATMOSPHERE:
-    scene: "an atmospheric environment, soft gradient and haze, no figures, calm space"
+    scene: "a calm environment with gentle depth and solid surfaces, no figures, readable at thumbnail size"
 
 # Fallback when visual_intent not in map
 default_scene: "a contemplative moment, soft light, generous negative space, no faces"
