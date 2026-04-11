@@ -1,0 +1,100 @@
+name: Pearl News daily publish
+
+# 6 AM Taiwan (UTC+8) = 22:00 UTC previous day → morning cycle
+# 6 PM Taiwan (UTC+8) = 10:00 UTC              → evening cycle
+#
+# NOTE: QWEN_BASE_URL must be set to Pearl Star's address.
+# If Pearl Star (192.168.1.112) is on a local network unreachable from
+# GitHub Actions runners, CJK articles will fail on GitHub Actions —
+# use install_daily_cron.sh on the local machine instead for CJK.
+# English-only runs will work fine from GitHub Actions.
+
+on:
+  schedule:
+    - cron: '0 22 * * *'   # 6 AM Taiwan (UTC+8) — morning cycle
+    - cron: '0 10 * * *'   # 6 PM Taiwan (UTC+8) — evening cycle
+  workflow_dispatch:
+    inputs:
+      cycle:
+        description: 'Cycle to run: morning, evening, or full'
+        required: true
+        default: morning
+        type: choice
+        options:
+          - morning
+          - evening
+          - full
+      dry_run:
+        description: 'Dry run — generate but do not publish?'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+jobs:
+  publish-articles:
+    name: Publish Pearl News articles (${{ github.event.inputs.cycle || 'scheduled' }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    env:
+      WORDPRESS_SITE_URL: ${{ secrets.WORDPRESS_SITE_URL }}
+      WORDPRESS_USERNAME: ${{ secrets.WORDPRESS_USERNAME }}
+      WORDPRESS_APP_PASSWORD: ${{ secrets.WORDPRESS_APP_PASSWORD }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      # Set QWEN_BASE_URL to Pearl Star's address (may be local-only).
+      # If not reachable from GitHub runners, CJK articles will fall back
+      # to Claude via expansion_routing.py fallback or fail gracefully.
+      QWEN_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
+      QWEN_MODEL: qwen2.5:14b
+      CLAUDE_MODEL: claude-sonnet-4-20250514
+      PYTHONPATH: .
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Determine cycle from schedule
+        id: cycle
+        run: |
+          # workflow_dispatch: use input; scheduled: derive from UTC hour
+          INPUT_CYCLE="${{ github.event.inputs.cycle }}"
+          if [ -n "$INPUT_CYCLE" ]; then
+            echo "cycle=$INPUT_CYCLE" >> "$GITHUB_OUTPUT"
+          else
+            HOUR=$(date -u +%H)
+            # 22:00 UTC = morning (6AM Taiwan); 10:00 UTC = evening (6PM Taiwan)
+            if [ "$HOUR" -ge 21 ] || [ "$HOUR" -lt 3 ]; then
+              echo "cycle=morning" >> "$GITHUB_OUTPUT"
+            else
+              echo "cycle=evening" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+      - name: Run Pearl News daily cycle
+        run: |
+          CYCLE="${{ steps.cycle.outputs.cycle }}"
+          DRY="${{ github.event.inputs.dry_run }}"
+          FLAGS="--cycle $CYCLE"
+          [ "$DRY" = "true" ] && FLAGS="$FLAGS --dry-run"
+          echo "Running: python3 scripts/pearl_news/run_daily_news_cycle.py $FLAGS"
+          python3 scripts/pearl_news/run_daily_news_cycle.py $FLAGS
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pearl-news-cycle-${{ steps.cycle.outputs.cycle }}-${{ github.run_id }}
+          path: artifacts/pearl_news/
+          retention-days: 14

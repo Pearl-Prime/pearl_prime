@@ -7,7 +7,9 @@ enabled: true
 
 # Default Qwen target: Pearl Star Ollama (:11434). Override with QWEN_BASE_URL.
 base_url: "http://192.168.1.112:11434/v1"
-model: "qwen3:14b"
+# Pearl Star has qwen2.5:14b loaded. Do NOT change to qwen3.
+# Verified: curl http://192.168.1.112:11434/v1/models
+model: "qwen2.5:14b"
 api_key: "ollama"
 
 timeout: 360
