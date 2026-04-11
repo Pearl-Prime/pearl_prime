@@ -1,0 +1,442 @@
+{
+  "total_words": 6539,
+  "chapter_count": 12,
+  "chapters": [
+    {
+      "chapter": 1,
+      "working_title": "The Thing You're Not Doing",
+      "words": 833,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 35,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 54,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 400,
+          "actual_words": 400,
+          "source": "depth_module:recognition_depth:persona_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 344,
+          "actual_words": 37,
+          "source": "depth_module:recognition_depth:registry_variant"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 307,
+          "actual_words": 307,
+          "source": "depth_module:story_scene:persona_atom"
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "working_title": "Your Body Is Treating Your Goal Like a Threat",
+      "words": 833,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 33,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 54,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 400,
+          "actual_words": 400,
+          "source": "depth_module:recognition_depth:persona_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 346,
+          "actual_words": 37,
+          "source": "depth_module:recognition_depth:registry_variant"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 309,
+          "actual_words": 309,
+          "source": "depth_module:story_scene:persona_atom"
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "working_title": "The Alarm Was Wrong About the Cost",
+      "words": 833,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 33,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 54,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 400,
+          "actual_words": 400,
+          "source": "depth_module:recognition_depth:persona_atom"
+        },
+        {
+          "type": "DEPTH_RECOGNITION_DEPTH",
+          "target_words": 346,
+          "actual_words": 37,
+          "source": "depth_module:recognition_depth:registry_variant"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 309,
+          "actual_words": 309,
+          "source": "depth_module:story_scene:persona_atom"
+        }
+      ]
+    },
+    {
+      "chapter": 4,
+      "working_title": "Waiting for the Fear to Pass Is the Wrong Strategy",
+      "words": 616,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 31,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 48,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 500,
+          "actual_words": 500,
+          "source": "depth_module:story_scene:persona_atom"
+        },
+        {
+          "type": "DEPTH_STORY_SCENE",
+          "target_words": 254,
+          "actual_words": 37,
+          "source": "depth_module:story_scene:registry_variant"
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "working_title": "The Smallest Possible Version",
+      "words": 773,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 33,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 48,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 600,
+          "actual_words": 46,
+          "source": "depth_module:mechanism_depth:registry_variant"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 600,
+          "actual_words": 600,
+          "source": "depth_module:mechanism_depth:persona_atom"
+        },
+        {
+          "type": "DEPTH_CONSEQUENCE_EXPOSURE",
+          "target_words": 106,
+          "actual_words": 46,
+          "source": "depth_module:consequence_exposure:registry_variant"
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "working_title": "The Accumulation of Not-Doing",
+      "words": 759,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 30,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 52,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 600,
+          "actual_words": 46,
+          "source": "depth_module:mechanism_depth:registry_variant"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 600,
+          "actual_words": 600,
+          "source": "depth_module:mechanism_depth:persona_atom"
+        },
+        {
+          "type": "DEPTH_BRIDGE_TRANSITION",
+          "target_words": 105,
+          "actual_words": 31,
+          "source": "depth_module:bridge_transition:exercise_bridge"
+        }
+      ]
+    },
+    {
+      "chapter": 7,
+      "working_title": "Readiness Is a Feeling I'll Have When I'm Ready",
+      "words": 162,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 30,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 52,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_CONSEQUENCE_EXPOSURE",
+          "target_words": 400,
+          "actual_words": 46,
+          "source": "depth_module:consequence_exposure:registry_variant"
+        },
+        {
+          "type": "DEPTH_BRIDGE_TRANSITION",
+          "target_words": 120,
+          "actual_words": 34,
+          "source": "depth_module:bridge_transition:exercise_bridge"
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "working_title": "What Not-Doing Has Done to Your Relationships",
+      "words": 772,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 26,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 54,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 600,
+          "actual_words": 46,
+          "source": "depth_module:mechanism_depth:registry_variant"
+        },
+        {
+          "type": "DEPTH_MECHANISM_DEPTH",
+          "target_words": 600,
+          "actual_words": 600,
+          "source": "depth_module:mechanism_depth:persona_atom"
+        },
+        {
+          "type": "DEPTH_CONSEQUENCE_EXPOSURE",
+          "target_words": 107,
+          "actual_words": 46,
+          "source": "depth_module:consequence_exposure:registry_variant"
+        }
+      ]
+    },
+    {
+      "chapter": 9,
+      "working_title": "The Most Personal Version",
+      "words": 231,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 26,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 52,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_PRACTICE_SCAFFOLD",
+          "target_words": 400,
+          "actual_words": 51,
+          "source": "depth_module:practice_scaffold:phoenix_standard"
+        },
+        {
+          "type": "DEPTH_PRACTICE_SCAFFOLD",
+          "target_words": 400,
+          "actual_words": 51,
+          "source": "depth_module:practice_scaffold:phoenix_standard"
+        },
+        {
+          "type": "DEPTH_INTEGRATION_LANDING",
+          "target_words": 150,
+          "actual_words": 51,
+          "source": "depth_module:integration_landing:phoenix_standard"
+        }
+      ]
+    },
+    {
+      "chapter": 10,
+      "working_title": "The Alarm Was Wrong About the Cost",
+      "words": 223,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 34,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 52,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_PRACTICE_SCAFFOLD",
+          "target_words": 400,
+          "actual_words": 42,
+          "source": "depth_module:practice_scaffold:phoenix_standard"
+        },
+        {
+          "type": "DEPTH_PRACTICE_SCAFFOLD",
+          "target_words": 400,
+          "actual_words": 44,
+          "source": "depth_module:practice_scaffold:phoenix_standard"
+        },
+        {
+          "type": "DEPTH_INTEGRATION_LANDING",
+          "target_words": 150,
+          "actual_words": 51,
+          "source": "depth_module:integration_landing:phoenix_standard"
+        }
+      ]
+    },
+    {
+      "chapter": 11,
+      "working_title": "From Waiting to Acting",
+      "words": 276,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 37,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 52,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_PRACTICE_SCAFFOLD",
+          "target_words": 400,
+          "actual_words": 95,
+          "source": "depth_module:practice_scaffold:phoenix_standard"
+        },
+        {
+          "type": "DEPTH_PRACTICE_SCAFFOLD",
+          "target_words": 400,
+          "actual_words": 44,
+          "source": "depth_module:practice_scaffold:phoenix_standard"
+        },
+        {
+          "type": "DEPTH_INTEGRATION_LANDING",
+          "target_words": 150,
+          "actual_words": 48,
+          "source": "depth_module:integration_landing:phoenix_standard"
+        }
+      ]
+    },
+    {
+      "chapter": 12,
+      "working_title": "Acting Before Certainty: What This Makes Possible",
+      "words": 228,
+      "slots": [
+        {
+          "type": "HOOK",
+          "target_words": 555,
+          "actual_words": 27,
+          "source": "persona_atom"
+        },
+        {
+          "type": "INTEGRATION",
+          "target_words": 278,
+          "actual_words": 48,
+          "source": "registry"
+        },
+        {
+          "type": "DEPTH_PRACTICE_SCAFFOLD",
+          "target_words": 400,
+          "actual_words": 51,
+          "source": "depth_module:practice_scaffold:phoenix_standard"
+        },
+        {
+          "type": "DEPTH_PRACTICE_SCAFFOLD",
+          "target_words": 400,
+          "actual_words": 51,
+          "source": "depth_module:practice_scaffold:phoenix_standard"
+        },
+        {
+          "type": "DEPTH_INTEGRATION_LANDING",
+          "target_words": 150,
+          "actual_words": 51,
+          "source": "depth_module:integration_landing:phoenix_standard"
+        }
+      ]
+    }
+  ],
+  "source": "spine_pipeline",
+  "word_count": 6759,
+  "pre_depth_total_words": 995,
+  "post_depth_total_words": 6539
+}

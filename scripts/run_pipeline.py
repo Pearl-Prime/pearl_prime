@@ -283,6 +283,304 @@ def _resolved_runtime_format_id(args: argparse.Namespace, format_plan_dict: dict
     )
 
 
+def _run_spine_pipeline_mode(
+    *,
+    args: argparse.Namespace,
+    book_spec_for_compiler: dict,
+    quality_profile: str,
+    gates_run: bool,
+    gates_hard: bool,
+    ebook_job_ws: Path,
+    repo_root: Path,
+) -> int:
+    """
+    Spine → knobs → beatmap → enrichment + depth → compose_from_enriched_book → clean_for_delivery.
+    Registry fast-path is bypassed; atom assembly is not used.
+    """
+    from phoenix_v4.planning.beatmap_compile import compile_beatmap, load_format_spec, load_topic_engines
+    from phoenix_v4.planning.enrichment_select import (
+        EnrichmentRequest,
+        apply_depth_pass,
+        budget_from_enriched,
+        select_enrichment,
+    )
+    from phoenix_v4.planning.knob_apply import apply_knobs, load_knob_profile, load_spine
+    from phoenix_v4.rendering.book_renderer import chapter_flow_gate_report, clean_for_delivery
+    from phoenix_v4.rendering.chapter_composer import compose_from_enriched_book
+
+    topic_id = book_spec_for_compiler.get("topic_id", "")
+    persona_id = book_spec_for_compiler.get("persona_id", "")
+    _tid_raw = (book_spec_for_compiler.get("teacher_id") or "").strip()
+    teacher_for_enrich = None if not _tid_raw or _tid_raw == "default_teacher" else _tid_raw
+
+    runtime_fmt = (getattr(args, "runtime_format", None) or "standard_book").strip()
+
+    spine = load_spine(topic_id, repo_root)
+    knob_profile = load_knob_profile(topic_id, repo_root)
+    shaped_spine = apply_knobs(
+        spine,
+        knob_profile,
+        runtime_format=runtime_fmt,
+        persona_id=persona_id,
+        repo_root=repo_root,
+    )
+    engines_data = load_topic_engines(topic_id, repo_root)
+    fmt_spec = load_format_spec(runtime_fmt, repo_root)
+    beatmap = compile_beatmap(shaped_spine, engines_data, fmt_spec, repo_root)
+
+    seed = f"spine:{topic_id}:{persona_id}:{getattr(args, 'seed', '1')}"
+    enriched = select_enrichment(
+        EnrichmentRequest(
+            beatmap=beatmap,
+            teacher_id=teacher_for_enrich,
+            persona_id=persona_id,
+            topic_id=topic_id,
+            seed=seed,
+        ),
+        repo_root,
+    )
+    pre_depth_words = enriched.total_words
+    depth_map_path = repo_root / "config" / "depth" / "depth_module_map.yaml"
+    if depth_map_path.exists() and yaml:
+        depth_map = yaml.safe_load(depth_map_path.read_text(encoding="utf-8"))
+        enriched = apply_depth_pass(enriched, depth_map, repo_root=repo_root)
+    post_depth_words = enriched.total_words
+
+    prose = compose_from_enriched_book(enriched, quality_profile=quality_profile)
+    prose = clean_for_delivery(prose)
+
+    render_dir = Path(args.render_dir) if args.render_dir else Path("artifacts/rendered") / f"spine-{topic_id}"
+    render_dir.mkdir(parents=True, exist_ok=True)
+    _quality_gate_failures: list[str] = []
+
+    if gates_run:
+        try:
+            _flow_report = chapter_flow_gate_report(prose)
+            _flow_report_path = render_dir / "chapter_flow_report.json"
+            _flow_report_path.write_text(json.dumps(_flow_report, indent=2), encoding="utf-8")
+            print(
+                f"Chapter flow gate: {_flow_report['status']} "
+                f"({_flow_report['failed_chapters']}/{_flow_report['chapter_count']} failed). "
+                f"Report: {_flow_report_path}",
+                file=sys.stderr,
+            )
+            if _flow_report["status"] != "PASS":
+                for _ch in _flow_report.get("chapters", []):
+                    if _ch.get("status") != "PASS":
+                        print(
+                            f"  Ch {_ch['chapter']}: {', '.join(_ch.get('errors', []))}",
+                            file=sys.stderr,
+                        )
+                if gates_hard:
+                    _quality_gate_failures.append("chapter_flow")
+        except Exception as _e:
+            print(f"Chapter flow gate error (non-blocking): {_e}", file=sys.stderr)
+
+        try:
+            from phoenix_v4.quality.bestseller_craft_gate import evaluate_bestseller_craft
+
+            _chapters_for_craft = _extract_registry_chapters(prose)
+            _craft_results = []
+            for _i, _ch_text in enumerate(_chapters_for_craft):
+                _craft = evaluate_bestseller_craft(_ch_text)
+                _craft_results.append(
+                    {
+                        "chapter": _i + 1,
+                        "status": _craft.status,
+                        "move_scores": _craft.move_scores,
+                        "issues": _craft.issues,
+                        "remediation": _craft.remediation,
+                        "metrics": _craft.metrics,
+                    }
+                )
+            _per_ch_means = []
+            for _cr in _craft_results:
+                _scores = _cr.get("move_scores", {})
+                if _scores:
+                    _per_ch_means.append(sum(_scores.values()) / len(_scores))
+            _overall_craft = (
+                sum(_per_ch_means) / len(_per_ch_means) if _per_ch_means else 0.0
+            )
+            _craft_status = (
+                "PASS" if _overall_craft >= 0.4 else ("WARN" if _overall_craft >= 0.2 else "FAIL")
+            )
+            print(
+                f"Bestseller craft gate (advisory): {_craft_status} — "
+                f"overall ONTGP score {_overall_craft:.2f}",
+                file=sys.stderr,
+            )
+            _flow_rpath = render_dir / "chapter_flow_report.json"
+            if _flow_rpath.exists():
+                _fr = json.loads(_flow_rpath.read_text(encoding="utf-8"))
+                _fr["bestseller_craft"] = {
+                    "overall_score": round(_overall_craft, 4),
+                    "per_chapter": _craft_results,
+                }
+                _flow_rpath.write_text(json.dumps(_fr, indent=2), encoding="utf-8")
+        except Exception as _e:
+            print(f"Bestseller craft gate error (non-blocking): {_e}", file=sys.stderr)
+
+        if args.enforce_scene_gate:
+            try:
+                from phoenix_v4.qa.scene_anti_genericity_gate import enforce_scene_gate as _enforce_scene_gate
+
+                _scene_proses = _extract_registry_chapters(prose)
+                if _scene_proses:
+                    _scene_result = _enforce_scene_gate(_scene_proses, mode=args.scene_gate_mode)
+                    _scene_report_dir = render_dir / "scene_gate"
+                    _scene_report_dir.mkdir(parents=True, exist_ok=True)
+                    _scene_report_path = _scene_report_dir / f"spine-{topic_id}.json"
+                    _scene_report_path.write_text(
+                        json.dumps(
+                            {
+                                "status": _scene_result.status,
+                                "mode": _scene_result.mode,
+                                "blocking": _scene_result.blocking,
+                                "errors": _scene_result.report.errors,
+                                "warnings": _scene_result.report.warnings,
+                                "metrics": _scene_result.report.metrics,
+                            },
+                            indent=2,
+                        ),
+                        encoding="utf-8",
+                    )
+                    if _scene_result.blocking:
+                        print(
+                            f"Scene anti-genericity gate FAILED. Report: {_scene_report_path}",
+                            file=sys.stderr,
+                        )
+                        _quality_gate_failures.append("scene_anti_genericity")
+                    else:
+                        print(
+                            f"Scene anti-genericity gate {_scene_result.status}. Report: {_scene_report_path}",
+                            file=sys.stderr,
+                        )
+            except Exception as _e:
+                print(f"Scene anti-genericity gate error: {_e}", file=sys.stderr)
+                _quality_gate_failures.append("scene_anti_genericity")
+
+        if args.ei_v2_compare:
+            print(
+                "EI V2 compare: skipped in spine mode (no registry ResolvedBook slot structure).",
+                file=sys.stderr,
+            )
+
+        if gates_run:
+            print(
+                "Book pass gate: SKIPPED (spine mode — no compiled atom_ids / chapter_slot_sequence).",
+                file=sys.stderr,
+            )
+
+    word_count = len(prose.split())
+
+    if args.out:
+        plan_out = {
+            "source": "spine_pipeline",
+            "topic_id": topic_id,
+            "persona_id": persona_id,
+            "teacher_id": teacher_for_enrich or "",
+            "runtime_format": runtime_fmt,
+            "word_count": word_count,
+            "chapter_count": len(enriched.chapters),
+            "pre_depth_total_words": pre_depth_words,
+            "post_depth_total_words": post_depth_words,
+        }
+        out_path = Path(args.out)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(json.dumps(plan_out, indent=2, ensure_ascii=False))
+        print(f"Wrote {args.out}")
+
+    if args.render_book:
+        book_path = render_dir / "book.txt"
+        book_path.write_text(prose, encoding="utf-8")
+        print(f"Rendered book (spine mode): {book_path}")
+
+        budget_obj = budget_from_enriched(enriched)
+        budget_obj["source"] = "spine_pipeline"
+        budget_obj["word_count"] = word_count
+        budget_obj["pre_depth_total_words"] = pre_depth_words
+        budget_obj["post_depth_total_words"] = post_depth_words
+        (render_dir / "budget.json").write_text(
+            json.dumps(budget_obj, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        (render_dir / "enrichment_audit.json").write_text(
+            json.dumps(enriched.enrichment_audit, indent=2, default=str, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        _qs_path = render_dir / "quality_summary.json"
+        _qs_path.write_text(
+            json.dumps(
+                {
+                    "source": "spine_pipeline",
+                    "topic_id": topic_id,
+                    "persona_id": persona_id,
+                    "teacher_id": teacher_for_enrich or "",
+                    "quality_profile": quality_profile,
+                    "gates_run": gates_run,
+                    "gates_hard": gates_hard,
+                    "gate_failures": _quality_gate_failures,
+                    "overall_status": "PASS" if not _quality_gate_failures else "FAIL",
+                    "book_pass_gate": "SKIPPED_SPINE_MODE",
+                    "pre_depth_total_words": pre_depth_words,
+                    "post_depth_total_words": post_depth_words,
+                },
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        print(f"Quality summary: {_qs_path}")
+
+    if args.generate_freebies and args.render_book:
+        try:
+            from phoenix_v4.freebies.freebie_renderer import generate_freebies_for_book
+
+            _freebie_plan = {
+                "plan_id": f"spine-{topic_id}-{seed}",
+                "topic_id": topic_id,
+                "persona_id": persona_id,
+                "teacher_id": teacher_for_enrich or "",
+                "freebie_slug": f"{topic_id}-{persona_id}",
+                "word_count": word_count,
+                "source": "spine_pipeline",
+            }
+            _formats_list = None
+            if args.formats:
+                _formats_list = [f.strip().lower() for f in args.formats.split(",") if f.strip()]
+            _publish_dir = Path(args.publish_dir) if args.publish_dir else None
+            _asset_store = Path(args.asset_store) if args.asset_store else None
+            _freebie_paths = generate_freebies_for_book(
+                _freebie_plan,
+                book_spec_for_compiler,
+                include_pdf=bool(_formats_list and "pdf" in _formats_list),
+                formats=_formats_list,
+                skip_audio=args.skip_audio,
+                publish_dir=_publish_dir,
+                asset_store_root=_asset_store,
+            )
+            if _freebie_paths:
+                print(
+                    f"Generated freebie artifacts: {len(_freebie_paths)} file(s) under artifacts/freebies/"
+                )
+        except Exception as _e:
+            print(f"Freebie generation failed (non-blocking): {_e}", file=sys.stderr)
+
+    if _quality_gate_failures and gates_hard:
+        print(
+            f"BLOCKED: {len(_quality_gate_failures)} quality gate(s) failed in production mode: "
+            f"{', '.join(_quality_gate_failures)}. "
+            f"Use --skip-quality-gates or --quality-profile=draft to bypass.",
+            file=sys.stderr,
+        )
+        return 1
+
+    if not getattr(args, "no_job_check", False):
+        from scripts.pipeline.advance_stage import mark_pipeline_finished
+
+        mark_pipeline_finished(ebook_job_ws, "ebook")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="BookSpec -> FormatPlan -> CompiledBook")
     ap.add_argument("--topic", default=None, help="Topic ID (e.g. relationship_anxiety)")
@@ -305,7 +603,14 @@ def main() -> int:
         ),
     )
     ap.add_argument("--seed", default="pipeline_seed_001", help="Determinism seed")
-    ap.add_argument("--runtime-format", default=None, help="Force Stage 2 runtime (e.g. standard_book for 12 chapters)")
+    ap.add_argument(
+        "--runtime-format",
+        default=None,
+        help=(
+            "Stage 2 runtime hint (e.g. standard_book). Under V4 freeze, only allowed with "
+            "--pipeline-mode spine. Ignored for spine mode default (uses standard_book when omitted)."
+        ),
+    )
     ap.add_argument("--structural-format", default=None, help="Force Stage 2 structural format (e.g. F006 for 8-12 chapters)")
     ap.add_argument(
         "--output-format",
@@ -323,6 +628,15 @@ def main() -> int:
     ap.add_argument("--input", default=None, help="YAML file with topic_id, persona_id, installment_number (Stage 2 input)")
     ap.add_argument("--arc", required=True, help="Path to Master Arc YAML (required; no arc = no compile)")
     ap.add_argument("--registry", default=None, help="Section registry YAML path (auto-detected from registry/{topic}.yaml if not supplied)")
+    ap.add_argument(
+        "--pipeline-mode",
+        choices=["registry", "spine"],
+        default="registry",
+        help=(
+            "Pipeline mode: 'registry' (section-registry fast-path, default) or "
+            "'spine' (spine→knob→beatmap→enrichment+depth→compose; bypasses registry path)."
+        ),
+    )
     ap.add_argument("--teacher", default=None, help="Teacher id for Teacher Mode (validated against teacher_persona_matrix)")
     ap.add_argument("--author", default=None, help="Author id (pen-name; resolved from author_registry, sets author_positioning_profile)")
     ap.add_argument("--narrator", default=None, help="Narrator id (resolved from brand_narrator_assignments when not supplied; Writer Spec §23.5)")
@@ -417,29 +731,30 @@ def main() -> int:
     from pearl_prime.modular_format_freeze import (
         apply_output_format_to_plan,
         load_freeze_settings,
-        reject_legacy_format,
         require_valid_output_format,
     )
     freeze_settings = load_freeze_settings()
     freeze_enabled = bool(freeze_settings.enabled)  # V4 freeze is permanent — no bypass
+    _pipeline_mode = getattr(args, "pipeline_mode", "registry")
 
-    if freeze_enabled and (args.structural_format or args.runtime_format):
-        # Block legacy format flags entirely
+    if freeze_enabled and args.structural_format:
         print(
-            "Error: --structural-format/--runtime-format are blocked under V4 freeze. "
+            "Error: --structural-format is blocked under V4 freeze. "
             "Pearl Prime V4 only produces short therapeutic content. "
             "Use --output-format with: " + ", ".join(sorted(freeze_settings.formats.keys())),
             file=sys.stderr,
         )
         return 1
 
-    # Double-check: reject any legacy long-form runtime even if it somehow gets through
-    if freeze_enabled and args.runtime_format:
-        try:
-            reject_legacy_format(args.runtime_format, freeze_settings)
-        except ValueError as e:
-            print(f"Error: {e}", file=sys.stderr)
-            return 1
+    if freeze_enabled and args.runtime_format and _pipeline_mode != "spine":
+        print(
+            "Error: --runtime-format is blocked under V4 freeze for registry/atom paths. "
+            "Pearl Prime V4 only produces short therapeutic content. "
+            "Use --output-format with: " + ", ".join(sorted(freeze_settings.formats.keys()))
+            + ". For long-form spine→beatmap→enrichment, use --pipeline-mode spine (optional --runtime-format).",
+            file=sys.stderr,
+        )
+        return 1
 
     # Resolve input: CLI or YAML
     topic_id = args.topic
@@ -606,7 +921,9 @@ def main() -> int:
     from phoenix_v4.planning.format_selector import FormatSelector
     selector = FormatSelector()
     constraints = {}
-    if args.runtime_format:
+    # Spine mode applies --runtime-format only in knob/beatmap (not Stage 2), so forcing
+    # it here breaks FormatSelector validation against the arc's structural format.
+    if args.runtime_format and getattr(args, "pipeline_mode", "registry") != "spine":
         constraints["force_runtime_format"] = args.runtime_format
     if args.structural_format:
         constraints["force_structural_format"] = args.structural_format
@@ -949,6 +1266,17 @@ def main() -> int:
     elif topic_id in available_registries():
         registry_path = str(REGISTRY_ROOT / f"{topic_id}.yaml")
         use_registry = True
+
+    if getattr(args, "pipeline_mode", "registry") == "spine":
+        return _run_spine_pipeline_mode(
+            args=args,
+            book_spec_for_compiler=book_spec_for_compiler,
+            quality_profile=quality_profile,
+            gates_run=gates_run,
+            gates_hard=gates_hard,
+            ebook_job_ws=ebook_job_ws,
+            repo_root=REPO_ROOT,
+        )
 
     if use_registry:
         print(f"Using section registry: {registry_path}")
