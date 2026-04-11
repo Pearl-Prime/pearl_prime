@@ -1,0 +1,669 @@
+family_id: financial_stress
+family_name: "Financial Stress / The Weight of Real Pressure"
+adjacent_topics: [financial_anxiety, shame, overwhelm, anxiety]
+primary_mechanism: overwhelm
+allowed_engines: [overwhelm, spiral, shame]
+
+reader_starting_state: >
+  The reader is under real financial pressure. They may be behind on bills, carrying
+  debt, facing job threat or loss, or unable to reliably cover basic expenses. Their
+  financial situation is producing genuine threat responses — not misperceived threat,
+  but an accurate reading of real risk. They feel shame about the situation and believe
+  it reflects something about their intelligence, their worth, or their fundamental
+  adequacy as a person. They may be avoiding the full picture because seeing all of it
+  at once feels unsurvivable. The situation has a shape, but they cannot see it because
+  shame and overwhelm are hiding it. They need to be able to face the actual situation —
+  finite, even if difficult — without the shame blocking their capacity to think.
+
+reader_ending_state: >
+  The reader can face their financial situation with clarity — seeing its actual shape,
+  which is a specific and finite problem rather than an undifferentiated disaster.
+  They have separated their worth from their net worth. They have taken the smallest
+  possible action toward their situation. The shame no longer blocks their ability to
+  think clearly about money or to take the next practical step. They have not solved
+  the problem, but they can see it. And seeing it clearly is what makes any solution
+  possible.
+
+what_makes_this_family_different: >
+  The hardship is real. This is the structural distinction between financial_stress and
+  financial_anxiety: in financial_stress, the threat response is proportionate to an
+  actual threat. The reader is not misreading their situation — the pressure is
+  genuine. The book cannot minimize the stress or frame it as a perception problem.
+  At the same time, this is not a personal finance manual — it does not offer
+  budgeting templates, debt consolidation strategies, or investment advice. Its job
+  is to address the emotional obstacles (shame, overwhelm, avoidance) that prevent
+  the reader from being able to think clearly about their situation and take any
+  action at all. Emotional regulation is prerequisite to practical action, not a
+  supplement to it. Both must be addressed, in the right order.
+
+chapters:
+  chapter_01:
+    number: 1
+    role: recognition
+    working_title: "The Weight That Doesn't Go Away"
+    thesis: >
+      Financial stress has a specific physical and cognitive signature: the ambient
+      heaviness, the inability to fully enjoy anything, the way financial worry
+      occupies background cognitive bandwidth at all times. Naming this specific
+      experience — not as anxiety or worry in a generic sense, but as the particular
+      weight of real financial pressure — is what this chapter does.
+    emotional_job: >
+      Meet the reader exactly where they are. This is not a book about worrying too
+      much. The reader's stress is proportionate to a real situation. The chapter's
+      first job is to let them feel seen in that reality — not soothed, not
+      minimized, but recognized.
+    practical_job: >
+      Establish the terrain. Name the specific cognitive and physical experience of
+      carrying financial stress: the weight in the morning before the day starts,
+      the intrusive calculations, the diminished capacity for other things, the
+      way it colors everything adjacent to it.
+    what_changes: >
+      Before: "I'm stressed about money. Everyone is sometimes. I just need to figure out what to do."
+      After: "I can see the specific shape of what I'm carrying. It has a texture, a weight, a signature. That recognition is the beginning of something."
+    required_sections: [HOOK, SCENE, RECOGNITION]
+    forbidden_moves:
+      - Minimizing the real pressure ("it might not be as bad as you think")
+      - Offering practical solutions in chapter 1 before the weight has been fully named
+      - Treating financial stress as a form of anxiety disorder (this is not a clinical presentation)
+    recommended_enrichments:
+      - The specific experience of waking up in the morning and having the financial situation hit before you've fully surfaced into consciousness
+      - The way financial stress affects cognitive bandwidth: the calculations that run in the background during ostensibly unrelated activities
+    claim_someone_could_argue: >
+      Someone could argue: I should focus on solving the problem, not describing how
+      it feels. The chapter holds that naming the experience is not self-indulgence —
+      it is the prerequisite for being able to see the problem clearly enough to
+      address it.
+    why_this_chapter_exists: >
+      The recognition chapter earns the reader's trust and establishes the terms of
+      the book's honesty. Without it, the reader will read the rest of the book as
+      advice for a different kind of person than they are.
+    what_comes_next: >
+      The weight has been named. Chapter 2 establishes why it is in the body as
+      well as the mind — and why this is a legitimate response, not a weakness.
+
+  chapter_02:
+    number: 2
+    role: somatic_legitimacy
+    working_title: "The Body Is Not Overreacting"
+    thesis: >
+      Financial stress produces a genuine threat response in the body because
+      financial security is linked to survival. The body is not overreacting when
+      it runs a stress response to real financial pressure. This is not a
+      malfunction — it is an appropriate physiological response to a real threat.
+      The body cannot be argued out of this response with logic.
+    emotional_job: >
+      Remove the self-accusation that the reader is handling this worse than
+      they should. The body's response is appropriate. The reader is not weak
+      for feeling it physically. The problem is not that the body is responding —
+      it is that the response is sustained indefinitely without resolution.
+    practical_job: >
+      Describe the specific somatic signatures of financial stress: the adrenal
+      activation, the cognitive narrowing, the way sustained stress affects sleep,
+      concentration, digestion, and emotional range. Establish that these effects
+      are the direct consequence of sustained threat activation — not character
+      weakness.
+    what_changes: >
+      Before: "I'm a mess over this. I should be able to handle it better."
+      After: "My body is responding appropriately to a real threat. The response has consequences for my capacity. That is physiology, not failure."
+    required_sections: [SOMATIC_MAP, THREAT_RESPONSE_FRAME, SCENE]
+    forbidden_moves:
+      - Suggesting the somatic response is a choice or a habit that can be willpowered out of
+      - Clinical language that makes the body feel like a pathology
+      - Implying the reader should be able to manage this without physiological impact
+    recommended_enrichments:
+      - The specific way sustained financial stress narrows cognitive capacity: tunnel vision on the problem, diminished ability to see options
+      - The body's timeline: how long the stress response stays active and what that costs in energy
+    claim_someone_could_argue: >
+      Someone could argue: people deal with worse and function fine. So I must be
+      weaker than I should be. The chapter holds that individual variation in stress
+      response does not indicate weakness — and that comparing responses across
+      different people in different situations tells you nothing useful.
+    why_this_chapter_exists: >
+      Somatic legitimacy removes one layer of shame before the shame chapter arrives.
+      The reader who accepts that their body is responding appropriately to a real
+      threat is more able to look at shame as a constructed belief rather than an
+      accurate self-assessment.
+    what_comes_next: >
+      The body's response is legitimate. Now the shame chapter surfaces the belief
+      that the financial situation reflects personal worth.
+
+  chapter_03:
+    number: 3
+    role: identity_fracture
+    working_title: "What You Think This Says About You"
+    thesis: >
+      Financial shame is the belief that the situation is a verdict about who you
+      are: your intelligence, your discipline, your worth as a person. The belief
+      is pervasive in financial stress. It is also the primary obstacle to thinking
+      clearly about the situation. You cannot assess a situation clearly when you
+      believe that looking at it confirms your inadequacy.
+    emotional_job: >
+      This is the most vulnerable chapter in the book. The reader who carries
+      financial shame — and most readers of this book do — will need the chapter
+      to hold their experience with precision. The chapter must not rush to reassure.
+      It must first sit with what the shame actually is.
+    practical_job: >
+      Name the specific forms financial shame takes in real hardship: shame about
+      what happened, shame about what was spent or not saved, shame about needing
+      help, shame about not knowing more, shame about talking to people who seem to
+      have it together. Distinguish shame (self as inadequate) from guilt (action
+      as wrong) — they require different responses.
+    what_changes: >
+      Before: "My financial situation tells people — and me — something real about my inadequacy."
+      After: "The shame is a belief, not a fact. It has a history and a logic. It is not a verdict."
+    required_sections: [SHAME_MAP, BEING_VS_DOING, SCENE]
+    forbidden_moves:
+      - Resolving the shame in one chapter ("you are not your net worth!" delivered without weight)
+      - Dismissing shame as irrational without tracing where it came from
+      - Implying that naming shame makes it go away
+    recommended_enrichments:
+      - Where this specific shame came from: the cultural equation of financial worth and personal worth
+      - The specific experience of shame in the body when asked "how are things going?" by someone who doesn't know
+    claim_someone_could_argue: >
+      Someone could argue: some of my financial decisions were genuinely bad, so
+      the shame is deserved. The chapter holds that accountability for decisions is
+      different from shame about self — and that shame is actually what prevents
+      learning from and changing those decisions.
+    why_this_chapter_exists: >
+      Shame is the deepest obstruction in this family. Unless it is named and held
+      carefully, every practical suggestion will be filtered through the conviction
+      that looking at the situation means confirming the worst about yourself. The
+      shame chapter must come early because it is what makes everything else possible.
+    what_comes_next: >
+      Shame is named. The mechanism chapter follows, explaining why the financial
+      pile feels unsurvivable to look at as a whole.
+
+  chapter_04:
+    number: 4
+    role: mechanism
+    working_title: "Why the Pile Has No Shape"
+    thesis: >
+      Overwhelm in financial stress is not the same as having many financial problems.
+      It is the experience of financial reality as an undifferentiated mass — all of
+      it equally urgent, equally enormous, equally impossible to sequence. When shame
+      is running at the same time as overwhelm, the mind cannot triage because any
+      attempt to assess the situation also activates the self-condemnation loop.
+    emotional_job: >
+      Demystify the paralysis. The reader who cannot think clearly about their
+      financial situation has been interpreting this as stupidity or incompetence.
+      The chapter reframes it as a predictable consequence of shame-plus-overwhelm
+      running simultaneously.
+    practical_job: >
+      Explain the overwhelm architecture in the context of genuine hardship: why a
+      real pile of financial problems, seen through shame, becomes cognitively
+      incomprehensible. Map how shame raises activation, activation prevents
+      hierarchical thinking, and the result is every item feeling simultaneously
+      most important and most impossible.
+    what_changes: >
+      Before: "I don't even know where to start. Everything is equally impossible."
+      After: "The pile has no shape because overwhelm and shame together are preventing me from seeing it. There IS a shape. I just can't see it yet."
+    required_sections: [OVERWHELM_MECHANISM, SHAME_OVERWHELM_LOOP, SCENE]
+    forbidden_moves:
+      - Offering a prioritization framework in the mechanism chapter (premature; the shame is still blocking)
+      - Suggesting the pile is actually simple if the reader just organized it
+      - Pathologizing the reader's inability to think clearly under this dual load
+    recommended_enrichments:
+      - The specific experience of sitting down to look at finances and getting up twenty minutes later having done nothing, not from lack of trying but from genuine cognitive overload
+      - The way the pile grows when avoidance is running: not only in the actual situation but in imagination
+    claim_someone_could_argue: >
+      Someone could argue: I need practical steps, not explanations of why I'm
+      stuck. The chapter holds that without understanding what is actually producing
+      the paralysis, practical steps will continue to fail — as they have been.
+    why_this_chapter_exists: >
+      The mechanism chapter is the structural explanation for why the reader cannot
+      simply "deal with it." Without it, the practical interruption chapter will
+      feel like another accusation that they should be doing more than they are.
+    what_comes_next: >
+      The mechanism is clear. The hidden belief chapter surfaces what the reader
+      tells themselves about who they will be once they get out of this.
+
+  chapter_05:
+    number: 5
+    role: hidden_belief
+    working_title: "Once I'm Out of This, I'll Be Different"
+    thesis: >
+      Underneath the financial stress, many readers carry a belief that their worth
+      as a person is temporarily suspended — held in escrow until the situation
+      resolves. They will be themselves again when the debt is cleared, when the
+      job is stable, when the numbers are different. This belief ties identity to
+      financial state and makes the current situation feel like a verdict on the self.
+    emotional_job: >
+      Surface the belief with recognition rather than confrontation. The reader may
+      not have articulated this belief consciously, but they will recognize it when
+      it is named. The emotional job is to make the belief visible without making
+      the reader feel foolish for holding it.
+    practical_job: >
+      Name the specific forms the belief takes: "I'll feel like myself again when
+      the pressure lifts," "once this is resolved, I can actually live," "I can't
+      really be happy until this is different." Map how this belief makes the present
+      situation doubly unbearable: both the situation AND the loss of self.
+    what_changes: >
+      Before: "I'll be okay once this is resolved. Right now I'm not really myself."
+      After: "I am myself now. The situation is the situation, not a temporary state that suspends my personhood."
+    required_sections: [BELIEF_EXCAVATION, THE_ESCROW_SELF, SCENE]
+    forbidden_moves:
+      - Suggesting the belief is simply wrong and should be dropped
+      - Implying the reader should feel fine about the current situation
+      - Using positive psychology language about "choosing to be happy now"
+    recommended_enrichments:
+      - The specific experience of deferring things that matter until "when this is over" — and what that means for the current life being lived
+      - How this belief makes the shame worse: if worth is tied to financial state, the state becomes an unbearable indictment
+    claim_someone_could_argue: >
+      Someone could argue: of course I'll be different when I'm not under this pressure.
+      Pressure changes people. The chapter holds that the person under pressure is still
+      themselves — and that deferring personhood to a better financial state is a
+      form of self-abandonment in the present.
+    why_this_chapter_exists: >
+      The hidden belief about the escrow self is what makes the current situation
+      feel like more than hardship — it feels like a suspension of identity. Naming
+      it is necessary before the self_relation_shift chapter can do its work.
+    what_comes_next: >
+      The hidden belief is surfaced. The spiral chapter shows how it interacts with
+      the catastrophic projection loop.
+
+  chapter_06:
+    number: 6
+    role: relational_consequence
+    working_title: "The Real-Pressure Spiral"
+    thesis: >
+      When the financial threat is genuine, the catastrophic spiral is not irrational —
+      it is following the actual logic of the situation. The problem is that the
+      spiral does not stop at the actual risk: it runs through every possible
+      catastrophic outcome and lands at scenarios far beyond the realistic trajectory.
+      The spiral is not wrong about the first step; it is wrong about where the chain
+      necessarily ends.
+    emotional_job: >
+      Acknowledge the legitimacy of the spiral's starting point before challenging
+      its endpoint. The reader who is genuinely behind on rent is not irrational to
+      worry about housing stability. The chapter must honor that while showing how
+      the spiral's logic overjumps from present reality to worst-case scenario
+      without stopping at the probable midpoints.
+    practical_job: >
+      Map the specific architecture of the financial stress spiral: the trigger
+      (a bill, a balance, a conversation), the legitimate first projection, the
+      jump past intermediate scenarios, the terminus at maximum catastrophe, and
+      the exhaustion of having run the chain every night without it producing
+      any new information.
+    what_changes: >
+      Before: "If I can't cover this, then I lose that, then I lose everything. It's all connected and it's all going to collapse."
+      After: "The first step is real. The chain after that is probable, not inevitable — and the spiral is running me past the probable into the catastrophic without stopping at the likely."
+    required_sections: [SPIRAL_MAP, THE_LEGITIMATE_FIRST_STEP, PAST_THE_PROBABLE]
+    forbidden_moves:
+      - Dismissing the spiral's content as irrational or catastrophizing without acknowledging the real pressure underneath
+      - Implying the reader is weak for running the spiral under genuine stress
+      - Offering thought-stopping as if the spiral is simply a cognitive error
+    recommended_enrichments:
+      - The specific experience of the spiral running until the reader is exhausted at 3am, having arrived at the worst possible outcome, with no clarity about the next step
+      - The way the spiral keeps circling back to the same starting point, never producing new information, never generating a plan
+    claim_someone_could_argue: >
+      Someone could argue: but in my situation, the catastrophic outcome IS realistic.
+      The chapter holds that even in genuinely difficult situations, the spiral jumps
+      past intermediate scenarios — and the intermediate scenarios are where the
+      actual options live.
+    why_this_chapter_exists: >
+      The spiral chapter is different here than in financial_anxiety: the first step
+      is acknowledged as real. The chapter's job is not to dismiss the worry but to
+      show that the spiral is not useful risk assessment — it is a loop that burns
+      energy without producing traction.
+    what_comes_next: >
+      The spiral is named. The destabilization chapter shows how shame and avoidance
+      are keeping the pile from having a shape that can be worked with.
+
+  chapter_07:
+    number: 7
+    role: destabilization
+    working_title: "Shame and Avoidance Are Not Helping You Navigate"
+    thesis: >
+      Shame and avoidance in the context of genuine financial hardship are not only
+      painful — they are obstructive. They are keeping the pile from having a shape.
+      A pile with no shape cannot be worked with. The destabilization here is not
+      "your avoidance caused the problem" — it is "your shame and avoidance are
+      preventing you from being able to address the problem that exists."
+    emotional_job: >
+      Hold the reader while confronting them. This is the hardest chapter in the
+      book. The reader is already under real pressure — being told that their
+      emotional response is making it worse is a significant risk to the trust
+      that has been built. The chapter must distinguish between causing the
+      problem and obstructing the ability to address it.
+    practical_job: >
+      Map how shame and avoidance specifically obstruct navigation of a real
+      financial situation: delayed responses to correspondence, missed windows
+      for negotiation or assistance, inability to ask for help, financial
+      decisions made on incomplete information, the compounding of a manageable
+      situation into a crisis through non-engagement.
+    what_changes: >
+      Before: "I'm too overwhelmed to look at this. I'll deal with it when I can."
+      After: "The shame and avoidance are adding a structural layer of difficulty on top of the real situation. I can see that now. It changes what I need to do first."
+    required_sections: [THE_OBSTRUCTION, SCENE, WHAT_AVOIDANCE_COSTS_HERE]
+    forbidden_moves:
+      - Implying the reader caused the financial hardship through their avoidance
+      - Using the destabilization chapter as a motivational prod ("you really need to deal with this!")
+      - Minimizing the genuine difficulty of navigating real financial hardship
+    recommended_enrichments:
+      - The specific missed window: the bill that could have been negotiated before it went to collections, the benefit that required timely application
+      - The difference between a pile that is seen clearly (finite, with actual edges) and a pile obscured by shame (formless, unsurvivable)
+    claim_someone_could_argue: >
+      Someone could argue: I'm avoidant because I'm overwhelmed, not the other way
+      around. The chapter holds that both are true simultaneously — overwhelm
+      produces avoidance, and avoidance maintains overwhelm. Breaking either one
+      creates movement.
+    why_this_chapter_exists: >
+      Destabilization in this context is not about blame — it is about showing the
+      reader that the emotional layer and the practical layer are connected, and
+      that the emotional layer must be addressed for any practical action to be
+      possible.
+    what_comes_next: >
+      Avoidance has been shown to obstruct. The practical interruption offers the
+      smallest possible act of financial contact.
+
+  chapter_08:
+    number: 8
+    role: practical_interruption
+    working_title: "Making the Pile Finite"
+    thesis: >
+      The pile of financial problems is finite — it has a specific number of items,
+      each with a specific size and a specific urgency. The experience of it as
+      overwhelming and unsurvivable is the product of shame and avoidance, not a
+      property of the pile itself. Making the pile finite — giving it edges,
+      writing down the items, seeing the actual numbers — is the first act of
+      practical traction.
+    emotional_job: >
+      Make the act of making the pile finite feel like relief rather than terror.
+      The reader has been living with an infinite-feeling pile. Discovering that
+      it has edges — even if the edges are difficult — is a form of relief.
+    practical_job: >
+      Offer a specific protocol for making the pile finite: writing down every
+      financial obligation, every debt, every account in arrears, in a list — not
+      to solve it, not to budget it, but just to see its actual shape. Give the
+      reader explicit permission to stop after this one act and not immediately
+      proceed to a plan.
+    what_changes: >
+      Before: "Everything is overwhelming and I don't know what I'm dealing with."
+      After: "I can see the actual pile. It has X items. They have specific sizes. That is the actual situation, not the imagined one."
+    required_sections: [THE_PROTOCOL, MAKING_IT_FINITE, SCENE_AFTER]
+    forbidden_moves:
+      - Turning the list into a budgeting exercise (this is not a personal finance manual)
+      - Suggesting the list will make the reader feel in control
+      - Promising that making the pile finite will reveal that everything is actually manageable
+    recommended_enrichments:
+      - What the list might reveal: sometimes smaller than imagined; sometimes larger; always finite and specific
+      - The difference between "I'm in financial trouble" (formless) and "I owe X to Y, Z to W, am behind on A by B amount" (finite and workable)
+    claim_someone_could_argue: >
+      Someone could argue: making a list doesn't change anything. I still owe what
+      I owe. The chapter holds that seeing the actual shape of the problem is the
+      prerequisite for addressing it — and that the inability to see it clearly is
+      the most immediately tractable problem.
+    why_this_chapter_exists: >
+      The practical interruption in financial_stress is not a single look at one
+      number (as in financial_anxiety). It is making the pile finite — a slightly
+      larger act appropriate to a situation with real complexity. This is the
+      minimum viable act of engagement with the actual situation.
+    what_comes_next: >
+      The pile is finite. The cost exposure chapter now names what shame and
+      avoidance have cost beyond the money itself.
+
+  chapter_09:
+    number: 9
+    role: cost_exposure
+    working_title: "What the Shame Has Taken"
+    thesis: >
+      The cost of financial stress is not only financial. The shame and avoidance
+      attached to real hardship have costs that compound independently of the money:
+      missed opportunities for negotiation, assistance, or restructuring; relational
+      costs of secrecy and stress; and the cognitive cost of carrying the weight
+      alone, in silence, without the information that would make it more navigable.
+    emotional_job: >
+      Help the reader see what shame has specifically cost them — not to add guilt
+      to shame, but to show that shame is not just painful, it is obstructive in
+      ways that made the situation worse. This distinction is important: the chapter
+      is not saying "you did this to yourself." It is saying "the shame added an
+      avoidable layer of difficulty."
+    practical_job: >
+      Map the specific costs of shame in real financial hardship: missed windows
+      for assistance programs, inability to ask for restructuring, not asking
+      family or friends for help when help was available and would have been given,
+      decisions made from incomplete information, relationships strained by the
+      secrecy the shame required.
+    what_changes: >
+      Before: "The shame is uncomfortable but I'm dealing with it privately. It's not hurting anything."
+      After: "The shame has been adding costs to an already difficult situation. Those costs are real and specific. I can name them now."
+    required_sections: [COST_OF_SHAME, MISSED_WINDOWS, SCENE]
+    forbidden_moves:
+      - Making the cost inventory feel like an additional indictment
+      - Suggesting the costs were preventable if the reader had simply been less ashamed (as if shame is a choice)
+      - Minimizing the genuine difficulty of asking for help under financial shame
+    recommended_enrichments:
+      - The specific window that shame closed: the conversation not had, the program not applied for, the negotiation not attempted
+      - The relational cost: what carrying this alone in secrecy has done to intimate relationships
+    claim_someone_could_argue: >
+      Someone could argue: I had good reasons to keep this private. The shame
+      protected me from judgment. The chapter holds that the protection came at
+      a price — and the price is now visible.
+    why_this_chapter_exists: >
+      Cost exposure at this stage — after the practical interruption has already
+      been offered — helps the reader see that what is being asked of them (to
+      engage, to face it, to let some people know) is not just emotionally hard
+      but practically important. It creates forward motivation.
+    what_comes_next: >
+      The costs are named. The reframe chapter separates the situation from the
+      verdict about the self.
+
+  chapter_10:
+    number: 10
+    role: reframe
+    working_title: "The Situation Is Not a Sentence"
+    thesis: >
+      The financial situation is a situation. It says something about what happened —
+      decisions made, circumstances encountered, structures that did or did not hold.
+      It does not say something about the reader's worth, intelligence, or fundamental
+      adequacy. The situation is finite and specific. A verdict would be permanent
+      and general. These are different things.
+    emotional_job: >
+      Give the reader a way of holding their financial reality that does not require
+      defending themselves against it. The reframe is not "it's not that bad." It is
+      "the badness of the situation and your worth as a person are different variables."
+    practical_job: >
+      Provide the specific cognitive frame: situation versus verdict. Show how the
+      same financial fact reads differently when it is understood as a situation
+      rather than a self-evaluation. Distinguish between "I am in financial trouble"
+      (situation) and "I am someone who gets into trouble" (verdict). Give the reader
+      language for this distinction.
+    what_changes: >
+      Before: "My situation says something permanent and general about who I am."
+      After: "My situation is specific and finite. It says something about what happened. It is not a sentence."
+    required_sections: [SITUATION_VS_VERDICT, REFRAME, SCENE]
+    forbidden_moves:
+      - Toxic positivity: "everything happens for a reason" or "this is a learning experience"
+      - Minimizing the genuine difficulty of the situation
+      - Implying the reframe makes the situation easier to handle
+    recommended_enrichments:
+      - The specific experience of a reframe landing in the body: not the situation changing, but the relationship to it shifting
+      - Examples of situations that are genuinely hard AND do not reflect on the person's fundamental worth
+    claim_someone_could_argue: >
+      Someone could argue: my decisions contributed to this, so the situation does
+      say something about me. The chapter holds that decisions can be evaluated without
+      the person being condemned — and that condemnation is specifically what blocks
+      the ability to change the decisions.
+    why_this_chapter_exists: >
+      The reframe must come after the practical interruption and cost exposure —
+      otherwise it is theory, not reappraisal. At this stage, the reader has made
+      one small move and seen the cost of avoidance. The reframe now addresses the
+      deepest remaining obstacle: the equation of situation with self.
+    what_comes_next: >
+      The situation is the situation. The self_relation_shift chapter now addresses
+      what it means to separate worth from financial state — permanently, not just
+      in this moment.
+
+  chapter_11:
+    number: 11
+    role: self_relation_shift
+    working_title: "Worth Is Not Net Worth"
+    thesis: >
+      The belief that worth is net worth — that the financial situation determines
+      what the reader deserves, what relationships they merit, what quality of life
+      is appropriate for them — is the deepest structural belief in this family.
+      Separating worth from net worth is not a mantra. It is a slow change in
+      self-relation that becomes possible when the reframe is in place and the
+      practical interruption has already happened.
+    emotional_job: >
+      Invite the reader into a self-relation that is not contingent on their
+      financial state. Not by assertion — not "you are worthy regardless!" — but
+      by showing what the experience of non-contingent worth actually looks like
+      in small, specific moments that are already available to the reader.
+    practical_job: >
+      Describe the specific ways the self_relation_shift shows up in behavior:
+      not deferring the life that is available now, allowing the situation to be
+      discussed without shame-shutdown, asking for help from a position of
+      legitimate need rather than self-condemnation. Give the reader language for
+      worth that is not financial.
+    what_changes: >
+      Before: "I'll be able to hold my head up again when the finances are different."
+      After: "My worth is not on hold pending resolution. I am not diminished by the situation. The situation is real. I am also real, and separate from it."
+    required_sections: [WORTH_VS_NET_WORTH, NON_CONTINGENT_SELF, SCENE]
+    forbidden_moves:
+      - Delivering this as an affirmation ("you are worth it!")
+      - Implying the separation of worth from net worth is complete in one reading
+      - Suggesting the financial situation does not matter because worth is separate
+    recommended_enrichments:
+      - The small specific evidence of non-contingent worth that the reader already has access to: relationships that are not financial, contributions that are not monetary
+      - What asking for help looks like when it comes from need rather than shame
+    claim_someone_could_argue: >
+      Someone could argue: of course financial situation affects worth — socially,
+      practically, in every material way. The chapter holds that this is true at a
+      social level and irrelevant at the level of self-relation — and that the
+      equation of these two is the belief that produces the most damage.
+    why_this_chapter_exists: >
+      The self_relation_shift is the deepest change in this book. Without it, the
+      reader has coping skills but has not changed the fundamental frame through
+      which the situation is experienced. The shift to non-contingent worth is
+      what makes the change durable.
+    what_comes_next: >
+      Worth is separated from net worth. The integration chapter closes the arc:
+      what becomes possible when the reader can face the actual situation.
+
+  chapter_12:
+    number: 12
+    role: integration
+    working_title: "Facing the Actual Situation"
+    thesis: >
+      The reader who reaches this chapter has not solved their financial situation.
+      What has changed is their ability to face it — to see it with accuracy, to
+      think about it without shame blocking cognition, to act on it without the
+      overwhelm producing paralysis. Facing the actual situation is not a small
+      thing. It is what makes everything that comes next possible.
+    emotional_job: >
+      Close the arc honestly. The reader is not financially safe. They are not
+      out of stress. But they have a different relationship to the situation —
+      and that relationship is what determines what is possible from here. The
+      ending must be honest about what has changed and what has not.
+    practical_job: >
+      Describe what integration looks like in the context of ongoing financial
+      hardship: the specific capacity that has changed (can look, can think, can
+      act without shame shutdown), the situations that are now navigable (conversations,
+      applications, negotiations), and the ongoing nature of the work (not a finish
+      line but a different orientation).
+    what_changes: >
+      Before: "I am under real financial pressure and cannot face it clearly."
+      After: "I am under real financial pressure and I can face it. The pile has a shape. I am not my situation. I can act from here."
+    required_sections: [WHAT_HAS_CHANGED, THE_ONGOING_PRESSURE, CLOSING_SCENE]
+    forbidden_moves:
+      - Promising that the work is complete
+      - Implying the financial situation will resolve as a result of this reading
+      - Ending with a motivational note that adds performance pressure to the genuine difficulty of the situation
+    recommended_enrichments:
+      - The specific experience of facing the pile with clarity: not with ease, not with calm, but with the ability to see its actual shape
+      - What the next practical step looks like when shame is not blocking it
+    claim_someone_could_argue: >
+      Someone could argue: I still have the same problems I started with. How
+      is this progress? The chapter holds that the relationship to the problem
+      has changed — and in the domain of shame-and-avoidance, changing the
+      relationship is what makes practical movement possible.
+    why_this_chapter_exists: >
+      Integration does not close the problem — it closes the reader's arc. The
+      book's promise was not to solve the situation. It was to make the situation
+      faceable. Honoring that distinction is what earns the final chapter.
+    what_comes_next: >
+      The reader carries facing forward. The actual work of addressing the
+      situation — practical, financial, relational — is now possible in a way
+      it was not before. That is what this book was for.
+
+sequencing_rules:
+  must_come_before:
+    - somatic_legitimacy must precede shame (body is legitimate before shame is named)
+    - shame must precede mechanism (shame named before overwhelm mechanism explained)
+    - mechanism must precede hidden_belief (the structural explanation before the belief)
+    - destabilization must precede practical_interruption (the obstruction named before the act)
+    - reframe must precede self_relation_shift (situation vs. verdict before worth vs. net worth)
+  cannot_come_too_early:
+    - practical_interruption (ch08) — cannot arrive before shame and mechanism are addressed; reader cannot act while shame is blocking cognition
+    - reframe (ch10) — must follow practical interruption; cannot be theory, must be grounded in the reader's own experience of looking
+    - self_relation_shift (ch11) — requires reframe to be in place first
+  saved_for_late_book:
+    - integration (ch12) — cannot be earned before the full arc
+    - self_relation_shift (ch11) — the deepest change, requires everything before it
+    - cost_exposure (ch09) — positioned after practical interruption so it motivates continuation rather than deepening paralysis
+
+tone_and_pacing:
+  intensity_profile: [high, medium, high, medium, medium, high, high, medium, medium, medium, medium, low]
+  trust_curve: >
+    Trust must be established in chapter 1 by taking the real pressure seriously —
+    not minimizing it, not reframing it, just naming it with accuracy. This reader
+    has likely been told they are anxious, or overreacting, or that it will work
+    out. The book earns trust by refusing those moves. Chapters 2-3 sustain trust
+    through legitimacy and careful handling of shame. Chapter 7 (destabilization)
+    is the highest trust risk — it must be held with precision. By chapter 8,
+    the reader is ready to act.
+  action_timing: >
+    First practical act at chapter 8: making the pile finite. Nothing prescriptive
+    before that. Chapters 1-7 are establishing legitimacy, naming mechanisms, and
+    addressing the emotional obstacles that have been blocking action.
+  mechanism_timing: >
+    Overwhelm mechanism arrives at chapter 4. Shame arrives at chapter 3 (earlier
+    than in financial_anxiety because the real hardship makes shame more immediate).
+    Spiral arrives at chapter 6. The sequence shame → mechanism → spiral reflects
+    the layered structure of financial stress.
+  permission_timing: >
+    First permission ("your body is not overreacting") at chapter 2.
+    Second permission ("shame is a belief, not a verdict") at chapter 3.
+    Third permission ("the pile is finite; you can see it") at chapter 8.
+    Fourth permission ("your worth is not on hold") at chapter 11.
+
+prohibited_terms:
+  global:
+    - journey
+    - transform
+    - heal
+    - self-care
+    - wellness
+    - mindfulness
+    - empower
+    - empowering
+    - overcome
+    - conquer
+    - battle
+    - fight
+    - warrior
+    - survivor
+    - thrive
+    - manifest
+    - authentic self
+    - best self
+    - inner child
+    - trigger warning
+    - safe space
+    - toxic
+    - self-love
+    - you've got this
+    - be gentle with yourself
+  family_specific:
+    - abundance mindset
+    - money blocks
+    - financial freedom (as an affirmation or end state)
+    - wealth consciousness
+    - prosperity (as a mindset concept)
+    - manifest money
+    - it will all work out
+    - things happen for a reason
+    - this is a learning opportunity
+    - financial anxiety (do not reduce real stress to anxiety)
+    - just make a budget
