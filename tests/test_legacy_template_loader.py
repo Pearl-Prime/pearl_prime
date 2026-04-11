@@ -106,6 +106,15 @@ def test_word_estimate_hooks_code(monkeypatch: pytest.MonkeyPatch) -> None:
     assert w > 500
 
 
-def test_word_estimate_missing_v4():
-    w = estimate_legacy_library_words("v4_therapeutic", repo_root=REPO_ROOT)
+def test_word_estimate_missing_extracted_library():
+    """v4 may be present when zips are extracted; v2_full stays missing until unpacked."""
+    w = estimate_legacy_library_words("v2_full", repo_root=REPO_ROOT)
     assert w == 0
+
+
+def test_v4_word_estimate_when_extracted():
+    ext = REPO_ROOT / "template_expand" / "_extracted" / "audiobook_template_v4"
+    if not ext.is_dir():
+        pytest.skip("no extracted v4 tree")
+    w = estimate_legacy_library_words("v4_therapeutic", repo_root=REPO_ROOT)
+    assert w > 50

@@ -17,6 +17,9 @@ except ImportError:  # pragma: no cover
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
+# Per-library roots: cached list of .yaml/.yml paths for fallback resolution.
+_LIBRARY_YAML_CACHE: Dict[str, List[Path]] = {}
+
 _CHAPTER_HEADER_RE = re.compile(
     r"\*\*CHAPTER\s+(\d+)\s+-\s+BRIDGES\*\*",
     re.IGNORECASE,
@@ -73,6 +76,78 @@ def load_legacy_template_index(
     return data if isinstance(data, dict) else {"schema_version": 0, "error": "invalid_yaml"}
 
 
+def _unwrap_single_dir_root(root: Path) -> Path:
+    """
+    If the archive extracted as a single top-level folder (e.g. one wrapper dir),
+    descend so chapter_* lives directly under the effective root.
+    """
+    cur = root
+    for _ in range(4):
+        if not cur.is_dir():
+            return cur
+        subs = [p for p in cur.iterdir() if p.is_dir()]
+        files = [p for p in cur.iterdir() if p.is_file()]
+        if files or len(subs) != 1:
+            return cur
+        only = subs[0]
+        if only.name.startswith("chapter_"):
+            return cur
+        cur = only
+    return cur
+
+
+def _candidate_roots_for_library(
+    library_id: str,
+    spec: Dict[str, Any],
+    repo_root: Path,
+) -> List[Path]:
+    """Ordered search roots: index path, _extracted/<zip stem>, _extracted/<library_id>."""
+    roots: List[Path] = []
+    rel = str(spec.get("path") or "").strip()
+    if rel:
+        roots.append(repo_root / rel)
+    arch = spec.get("archive")
+    if arch:
+        stem = Path(str(arch)).stem
+        roots.append(repo_root / "template_expand" / "_extracted" / stem)
+    roots.append(repo_root / "template_expand" / "_extracted" / library_id)
+
+    seen: set[str] = set()
+    out: List[Path] = []
+    for r in roots:
+        key = str(r.resolve()) if r.exists() else str(r)
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(r)
+    return out
+
+
+def _chapter_section_dir_names(chapter: int, section: int) -> tuple[List[str], List[str]]:
+    ch_dirs = [f"chapter_{chapter:02d}", f"chapter_{chapter}"]
+    sec_dirs = [f"section_{section:02d}", f"section_{section}"]
+    return ch_dirs, sec_dirs
+
+
+def _list_yaml_under_root(root: Path) -> List[Path]:
+    key = str(root.resolve())
+    if key not in _LIBRARY_YAML_CACHE:
+        if not root.is_dir():
+            _LIBRARY_YAML_CACHE[key] = []
+        else:
+            _LIBRARY_YAML_CACHE[key] = [
+                p
+                for p in root.rglob("*")
+                if p.is_file() and p.suffix.lower() in (".yaml", ".yml")
+            ]
+    return list(_LIBRARY_YAML_CACHE[key])
+
+
+def clear_legacy_template_path_cache() -> None:
+    """Tests or extraction reruns may call this to drop cached scans."""
+    _LIBRARY_YAML_CACHE.clear()
+
+
 def _resolve_section_yaml_path(
     library_id: str,
     chapter: int,
@@ -88,36 +163,52 @@ def _resolve_section_yaml_path(
         warnings.append(f"unknown_library_id:{library_id}")
         return None, warnings
 
-    rel = spec.get("path") or ""
-    primary = repo_root / str(rel).strip()
     fam = variant_family.strip().upper()
     if not fam.startswith("F"):
         fam = f"F{fam}" if fam.isdigit() else fam
-    fname = f"variant_{fam}.yaml"
-    candidates: List[Path] = []
-    if primary.is_dir():
-        candidates.append(
-            primary
-            / f"chapter_{chapter:02d}"
-            / f"section_{section:02d}"
-            / fname
-        )
-    extracted_root = repo_root / "template_expand" / "_extracted" / library_id
-    candidates.append(
-        extracted_root
-        / f"chapter_{chapter:02d}"
-        / f"section_{section:02d}"
-        / fname
-    )
+    fname_yaml = f"variant_{fam}.yaml"
+    fname_yml = f"variant_{fam}.yml"
 
-    for c in candidates:
-        if c.is_file():
-            return c, warnings
+    rel = str(spec.get("path") or "").strip()
+    primary = repo_root / rel if rel else None
+    ch_names, sec_names = _chapter_section_dir_names(chapter, section)
 
-    if not primary.exists():
+    for raw_root in _candidate_roots_for_library(library_id, spec, repo_root):
+        root = _unwrap_single_dir_root(raw_root)
+        if not root.is_dir():
+            continue
+        for cd in ch_names:
+            for sd in sec_names:
+                for fn in (fname_yaml, fname_yml):
+                    p = root / cd / sd / fn
+                    if p.is_file():
+                        return p, warnings
+
+    # Fallback: scan cached yaml list for chapter_NN/section_NN/variant_{fam}.*
+    ch_tag = f"chapter_{chapter:02d}"
+    sec_tag = f"section_{section:02d}"
+    fam_lower = fam.lower()
+    for raw_root in _candidate_roots_for_library(library_id, spec, repo_root):
+        root = _unwrap_single_dir_root(raw_root)
+        if not root.is_dir():
+            continue
+        for p in _list_yaml_under_root(root):
+            parts_lower = [x.lower() for x in p.relative_to(root).parts]
+            try:
+                ci = parts_lower.index(ch_tag)
+                parts_lower.index(sec_tag, ci)
+            except ValueError:
+                continue
+            leaf = p.name.lower()
+            if leaf.startswith("variant_") and fam_lower in leaf:
+                return p, warnings
+
+    if primary and not primary.exists():
         warnings.append(f"library_path_missing:{rel}")
     else:
-        warnings.append(f"section_yaml_not_found:{library_id}:ch{chapter:02d}:sec{section:02d}:{fname}")
+        warnings.append(
+            f"section_yaml_not_found:{library_id}:ch{chapter:02d}:sec{section:02d}:{fname_yaml}"
+        )
     return None, warnings
 
 

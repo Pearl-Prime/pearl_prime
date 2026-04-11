@@ -5,13 +5,19 @@ source_root: template_expand
 
 libraries:
   v4_therapeutic:
-    path: template_expand/audiobook_template_v4
+    path: template_expand/_extracted/audiobook_template_v4
     archive: template_expand/audiobook_template_v4.zip
-    status: missing
+    status: available
+    source_type: zip_imported
     role: section_scaffold
-    chapters: 12
-    sections_per_chapter: 10
-    variants_per_section: 5
+    chapters: 2
+    sections_per_chapter: irregular
+    sections_present: 2
+    variants_per_section: 1
+    file_format: yaml
+    naming_convention: chapter_{NN}/section_{NN}/variant_{F*}.yaml with keys title and text (block scalar body)
+    avg_words_per_section: 81
+    total_words: 162
     recommended_use: section_packet_scaffold
 
   v2_full:
@@ -119,7 +125,6 @@ six_hour_targets:
 
 on_disk_layout:
   note: >
-    V4 YAML libraries, when available, should be extracted under
-    template_expand/_extracted/ with naming convention:
-    {library_id}/chapter_{NN}/section_{NN}/variant_{family}.yaml
-    The loader checks for this layout.
+    Zip archives unpack under template_expand/_extracted/<zip_basename_without_suffix>/.
+    The loader resolves index path, then _extracted/<archive_stem>, then _extracted/<library_id>.
+    Preferred section files: chapter_{NN}/section_{NN}/variant_{F*}.yaml (YAML body in text/content/body/prose).
