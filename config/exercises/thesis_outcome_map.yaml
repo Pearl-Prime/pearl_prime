@@ -1,0 +1,34 @@
+schema_version: 1
+description: >
+  Dimensional scores (0–1) for thesis-level outcomes referenced in journey templates.
+
+thesis_outcomes:
+  neck_up_problem:
+    awareness: 0.85
+    regulation: 0.35
+    integration: 0.25
+
+  unnamed_feeling:
+    awareness: 0.9
+    regulation: 0.45
+    integration: 0.4
+
+  nothing_worked_yet:
+    awareness: 0.7
+    regulation: 0.5
+    integration: 0.55
+
+  anxiety_spike:
+    awareness: 0.75
+    regulation: 0.85
+    integration: 0.45
+
+  emotional_overwhelm:
+    awareness: 0.65
+    regulation: 0.8
+    integration: 0.5
+
+  burnout_pattern:
+    awareness: 0.6
+    regulation: 0.55
+    integration: 0.7

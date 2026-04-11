@@ -1,0 +1,125 @@
+# Machine-readable legacy template inventory (repo-relative paths).
+# Zip archives exist on disk but extracted YAML trees are NOT present until unpacked.
+schema_version: 1
+source_root: template_expand
+
+libraries:
+  v4_therapeutic:
+    path: template_expand/audiobook_template_v4
+    archive: template_expand/audiobook_template_v4.zip
+    status: missing
+    role: section_scaffold
+    chapters: 12
+    sections_per_chapter: 10
+    variants_per_section: 5
+    recommended_use: section_packet_scaffold
+
+  v2_full:
+    path: template_expand/audiobook_template_v2_full
+    archive: template_expand/audiobook_template_v2_full.zip
+    status: missing
+    role: full_library_reference
+    chapters: unknown_until_extracted
+    sections_per_chapter: unknown_until_extracted
+    variants_per_section: unknown_until_extracted
+    recommended_use: reference_only
+
+  v2_bestseller:
+    path: template_expand/audiobook_template_v2_bestseller
+    archive: template_expand/audiobook_template_v2_bestseller.zip
+    status: missing
+    role: depth_style_library
+    chapters: unknown_until_extracted
+    sections_per_chapter: unknown_until_extracted
+    variants_per_section: unknown_until_extracted
+    recommended_use: style_reference
+
+  v2_somatic:
+    path: template_expand/audiobook_template_v2_SOMATIC
+    archive: template_expand/audiobook_template_v2_somatic.zip
+    status: missing
+    role: somatic_depth_library
+    chapters: unknown_until_extracted
+    sections_per_chapter: unknown_until_extracted
+    variants_per_section: unknown_until_extracted
+    recommended_use: somatic_reference
+
+  v2_both:
+    path: template_expand/audiobook_templates_v2_BOTH
+    archive: template_expand/audiobook_templates_v2_BOTH.zip
+    status: missing
+    role: combined_library_reference
+    chapters: unknown_until_extracted
+    sections_per_chapter: unknown_until_extracted
+    variants_per_section: unknown_until_extracted
+    recommended_use: reference_only
+
+  integrated_chapters:
+    path: template_expand/complete_chapters_integrated.md
+    status: available
+    role: stitched_baseline_reference
+    chapters: 12
+    sections_per_chapter: full_chapter_stitched
+    variants_per_section: 1
+    recommended_use: baseline_reference_not_slot_feed
+
+  chapter_bridges:
+    path: template_expand/chapter_bridges_all.md
+    status: available
+    role: bridge_library
+    chapters: 12
+    sections_per_chapter: 2
+    variants_per_section: 1
+    recommended_use: transition_snippets
+
+  hooks_code:
+    path: template_expand/01_hooks.py
+    status: available
+    role: code_embedded_variant_library
+    chapters: 12
+    sections_per_chapter: not_yaml
+    variants_per_section: 5
+    recommended_use: code_embedded_until_yaml_extracted
+
+  old_pose_chat:
+    path: old_chat_specs/old_chat_pose_book_template.txt
+    status: available
+    role: prompt_lineage_and_10_section_schema
+    chapters: n_a
+    sections_per_chapter: n_a
+    variants_per_section: n_a
+    recommended_use: historical_only
+
+  old_persona_chat:
+    path: old_chat_specs/old_claude_template_persona_stuff.txt
+    status: available
+    role: persona_depth_and_mechanism_lineage
+    chapters: n_a
+    sections_per_chapter: n_a
+    variants_per_section: n_a
+    recommended_use: historical_only
+
+section_roles:
+  section_01: hook
+  section_02: scene
+  section_03: reflection
+  section_04: exercise
+  section_05: scene
+  section_06: teacher_doctrine
+  section_07: reflection
+  section_08: exercise
+  section_09: scene
+  section_10: integration
+
+six_hour_targets:
+  chapters: 12
+  sections_per_chapter: 10
+  target_total_words: 54000
+  target_words_per_section: 450
+
+on_disk_layout:
+  note: >
+    V4 YAML libraries, when available, should be extracted under
+    template_expand/_extracted/ with naming convention:
+    {library_id}/chapter_{NN}/section_{NN}/variant_{family}.yaml
+    The loader checks for this layout.

@@ -1,0 +1,270 @@
+#!/usr/bin/env python3
+"""
+Pilot: Spine → KnobApply → BeatmapCompile → EnrichmentSelect + depth →
+legacy template slice + section_packet_composer → book.txt.
+
+Side pipeline — does not change run_pipeline defaults.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from collections import defaultdict
+from pathlib import Path
+from typing import Any, Dict, List
+
+try:
+    import yaml
+except ImportError:  # pragma: no cover
+    yaml = None
+
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+
+
+def main() -> int:
+    if str(REPO_ROOT) not in sys.path:
+        sys.path.insert(0, str(REPO_ROOT))
+
+    parser = argparse.ArgumentParser(description="Legacy template section packet pilot")
+    parser.add_argument("--topic", default="anxiety")
+    parser.add_argument("--persona", default="gen_z_professionals")
+    parser.add_argument("--teacher", default="ahjan")
+    parser.add_argument("--format", dest="runtime_format", default="standard_book")
+    parser.add_argument("--seed", default="legacy_packet_pilot_v1")
+    parser.add_argument(
+        "--output-dir",
+        default="artifacts/pilot/legacy_template_packet/anxiety",
+    )
+    parser.add_argument(
+        "--legacy-library",
+        default="v4_therapeutic",
+        help="library_id from config/templates/legacy_template_index.yaml",
+    )
+    args = parser.parse_args()
+
+    if yaml is None:
+        print("PyYAML required", file=sys.stderr)
+        return 1
+
+    from phoenix_v4.planning.beatmap_compile import compile_beatmap, load_format_spec, load_topic_engines
+    from phoenix_v4.planning.enrichment_select import (
+        EnrichmentRequest,
+        apply_depth_pass,
+        budget_from_enriched,
+        select_enrichment,
+    )
+    from phoenix_v4.planning.knob_apply import apply_knobs, load_knob_profile, load_spine
+    from phoenix_v4.planning.legacy_template_loader import (
+        load_legacy_section,
+        load_transition_bridge_for_chapter_start,
+    )
+    from phoenix_v4.rendering.section_packet_composer import compose_section_packet
+
+    topic = args.topic.strip()
+    persona = args.persona.strip()
+    teacher = args.teacher.strip() or None
+    out_dir = Path(args.output_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    spine = load_spine(topic, REPO_ROOT)
+    knobs = load_knob_profile(topic, REPO_ROOT)
+    shaped = apply_knobs(
+        spine,
+        knobs,
+        runtime_format=args.runtime_format,
+        persona_id=persona,
+        repo_root=REPO_ROOT,
+    )
+    ch_by_num = {ch.number: ch for ch in shaped.chapters}
+
+    engines = load_topic_engines(topic, REPO_ROOT)
+    fmt_spec = load_format_spec(args.runtime_format, REPO_ROOT)
+    beatmap = compile_beatmap(shaped, engines, fmt_spec, REPO_ROOT)
+    bm_ch_by_num = {ch.number: ch for ch in beatmap.chapters}
+
+    req = EnrichmentRequest(
+        beatmap=beatmap,
+        teacher_id=teacher,
+        persona_id=persona,
+        topic_id=topic,
+        seed=args.seed,
+    )
+    enriched = select_enrichment(req, REPO_ROOT)
+
+    depth_map_path = REPO_ROOT / "config" / "depth" / "depth_module_map.yaml"
+    depth_map = yaml.safe_load(depth_map_path.read_text(encoding="utf-8"))
+    enriched = apply_depth_pass(enriched, depth_map, repo_root=REPO_ROOT)
+
+    audit_rows: List[Dict[str, Any]] = []
+    chapter_words: Dict[int, int] = defaultdict(int)
+    total_w = 0
+    legacy_hits = 0
+    bridge_hits = 0
+    enrichment_hits = 0
+    depth_hits = 0
+    under_target_count = 0
+    thin_200 = 0
+    target_total = 54000
+    target_per_section_nominal = 450
+
+    book_parts: List[str] = []
+
+    for ech in enriched.chapters:
+        ch_num = ech.number
+        bm_ch = bm_ch_by_num.get(ch_num)
+        spine_ch = ch_by_num.get(ch_num)
+        thesis = getattr(spine_ch, "thesis", "") if spine_ch else ech.thesis
+        role = getattr(spine_ch, "role", "") if spine_ch else ech.role
+        emotional_job = getattr(spine_ch, "emotional_job", "") if spine_ch else ""
+
+        chapter_header = f"Chapter {ch_num}\n{ech.working_title}\n\n"
+        book_parts.append(chapter_header)
+
+        for slot_idx, slot in enumerate(ech.slots):
+            section_idx1 = slot_idx + 1
+            bridge_text = None
+            if slot_idx == 0 and ch_num > 1:
+                bridge_text = load_transition_bridge_for_chapter_start(ch_num, repo_root=REPO_ROOT)
+                if bridge_text:
+                    bridge_hits += 1
+
+            legacy = load_legacy_section(
+                args.legacy_library,
+                ch_num,
+                min(section_idx1, 10),
+                "F1",
+                repo_root=REPO_ROOT,
+            )
+            legacy_dict = None
+            if legacy.text.strip():
+                legacy_dict = {"text": legacy.text, "word_count": legacy.word_count}
+                legacy_hits += 1
+
+            spine_context = {
+                "thesis": thesis,
+                "role": role,
+                "emotional_job": emotional_job,
+                "working_title": ech.working_title,
+            }
+            beat_slot: Dict[str, Any] = {}
+            if bm_ch and slot_idx < len(bm_ch.slots):
+                s = bm_ch.slots[slot_idx]
+                beat_slot = {
+                    "slot_type": s.slot_type,
+                    "target_words": s.target_words,
+                    "weight": s.weight,
+                }
+
+            enr = {
+                "content": slot.content,
+                "source": slot.source,
+                "enrichment_applied": list(slot.enrichment_applied or []),
+            }
+            if slot.source not in ("gap",):
+                enrichment_hits += 1
+            if str(slot.source).startswith("depth_module:"):
+                depth_hits += 1
+
+            tw = beat_slot.get("target_words") if beat_slot else target_per_section_nominal
+            if not isinstance(tw, int) or tw <= 0:
+                tw = target_per_section_nominal
+
+            packet = compose_section_packet(
+                chapter_index=ch_num,
+                section_index=section_idx1,
+                section_type=slot.slot_type,
+                target_words=tw,
+                spine_context=spine_context,
+                beatmap_slot=beat_slot,
+                enrichment_slot=enr,
+                legacy_template_section=legacy_dict,
+                bridge_text=bridge_text,
+                quality_profile="draft",
+            )
+
+            body = packet["text"]
+            wc = int(packet["word_count"])
+            total_w += wc
+            chapter_words[ch_num] += wc
+            if packet["under_target"]:
+                under_target_count += 1
+            if wc < 200:
+                thin_200 += 1
+
+            book_parts.append(body + "\n\n")
+
+            audit_rows.append(
+                {
+                    "chapter": ch_num,
+                    "section_index": section_idx1,
+                    "slot_type": slot.slot_type,
+                    "word_count": wc,
+                    "target_words": tw,
+                    "under_target": packet["under_target"],
+                    "sources_used": packet["sources_used"],
+                    "legacy_warnings": legacy.warnings,
+                    "composer_warnings": packet["warnings"],
+                }
+            )
+
+    book_txt = "".join(book_parts).strip() + "\n"
+    (out_dir / "book.txt").write_text(book_txt, encoding="utf-8")
+    (out_dir / "section_packet_audit.json").write_text(
+        json.dumps(audit_rows, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    budget = budget_from_enriched(enriched)
+    budget["legacy_template_library"] = args.legacy_library
+    budget["packet_total_words"] = total_w
+    budget["chapter_words_from_packets"] = {str(k): v for k, v in sorted(chapter_words.items())}
+    (out_dir / "word_budget.json").write_text(
+        json.dumps(budget, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    n_sections = len(audit_rows)
+    avg = total_w / n_sections if n_sections else 0
+    at_400 = sum(1 for r in audit_rows if r["word_count"] >= 400)
+
+    readme = f"""# Legacy template packet pilot — {topic}
+
+## Parameters
+
+- topic: {topic}
+- persona: {persona}
+- teacher: {teacher or "(none)"}
+- runtime_format: {args.runtime_format}
+- seed: {args.seed}
+- legacy_library: {args.legacy_library}
+
+## Outputs
+
+- `book.txt` — stitched section packets
+- `section_packet_audit.json` — per-section sources and warnings
+- `word_budget.json` — beatmap/enrichment budget plus packet totals
+
+## Note
+
+V4 template directories are not extracted in-repo; expect **zero** legacy YAML hits
+unless `template_expand/_extracted/{args.legacy_library}/` is populated.
+
+## Measured (from this run)
+
+- Total words (packets): {total_w}
+- Sections: {n_sections}
+- Average words/section: {avg:.1f}
+- Sections with legacy scaffold text: {legacy_hits}
+- Bridge inserts (chapter starts >1): {bridge_hits}
+- Under beatmap target_words: {under_target_count}
+- Thin sections (<200 words): {thin_200}
+- Sections >=400 words: {at_400}
+"""
+    (out_dir / "README.md").write_text(readme, encoding="utf-8")
+
+    print(f"Wrote pilot outputs under {out_dir}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
