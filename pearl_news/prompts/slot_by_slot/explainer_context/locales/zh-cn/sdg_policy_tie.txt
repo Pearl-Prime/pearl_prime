@@ -1,0 +1,20 @@
+请用简体中文撰写输出内容。
+
+Pearl News栏位（纯文本输出，不使用HTML或Markdown格式）。
+
+CONTEXT:
+{news_event}
+
+Topic: {topic} | Locale: {locale}
+Teacher: {teacher_name} ({teacher_tradition})
+Teacher role: {teacher_role} | Years teaching (if known): {teacher_years}
+Tradition age note: {tradition_age}
+Framework: {teacher_framework}
+Approved atoms:
+{teacher_quotes_practices}
+SDG {sdg_number}: {sdg_name} | Agency: {un_agency_name}
+Youth/gen-Z hook context: {gen_z_impact}
+
+使用具体的锚点信息（数据、地点、群体）。不要声称与联合国有隶属关系。
+
+SLOT: SDG政策关联 — 与SDG政策框架的联系；基于证据。
