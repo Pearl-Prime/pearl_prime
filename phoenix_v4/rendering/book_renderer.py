@@ -17,7 +17,10 @@ from typing import Any, List, Optional
 
 logger = logging.getLogger(__name__)
 
-from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
+from phoenix_v4.quality.chapter_flow_gate import (
+    evaluate_chapter_flow,
+    flow_profile_for_runtime_format,
+)
 
 # ---------------------------------------------------------------------------
 # Delivery contract: forbidden patterns that must never reach output
@@ -643,6 +646,26 @@ def _extract_rendered_chapters(rendered_text: str) -> list[tuple[int, str]]:
 
 _GRAY_LIGHT_SCENE_RE = re.compile(r"gray\s+light\s+through\s+the\s+window", re.IGNORECASE)
 
+
+def _chapter_flow_profile_from_plan(plan: Optional[dict[str, Any]]) -> str:
+    if not plan:
+        return "standard"
+    rid = (
+        str(plan.get("runtime_format_id") or "")
+        or str((plan.get("book_spec") or {}).get("runtime_format_id") or "")
+    ).strip()
+    return flow_profile_for_runtime_format(rid)
+
+
+def _resolve_chapter_flow_profile(
+    plan: Optional[dict[str, Any]],
+    runtime_format_id: Optional[str] = None,
+) -> str:
+    rid = (runtime_format_id or "").strip()
+    if rid:
+        return flow_profile_for_runtime_format(rid)
+    return _chapter_flow_profile_from_plan(plan)
+
 _FLOW_GLUE_VARIANTS: tuple[str, ...] = (
     (
         "That moment is not random; it is information your body has been holding. "
@@ -696,6 +719,7 @@ def strengthen_chapter_flow_for_delivery(
     emotional_role: str = "",
     topic_id: str = "",
     plan: Optional[dict[str, Any]] = None,
+    flow_profile: Optional[str] = None,
 ) -> str:
     """Append a short cohesion paragraph when fixable chapter_flow checks fail (registry or spine)."""
     del emotional_role, topic_id
@@ -705,7 +729,8 @@ def strengthen_chapter_flow_for_delivery(
         return base
     base = clean_for_delivery(base, plan=plan)
 
-    result = evaluate_chapter_flow(base)
+    profile = flow_profile if flow_profile is not None else _chapter_flow_profile_from_plan(plan)
+    result = evaluate_chapter_flow(base, flow_profile=profile)
     if result.status == "PASS":
         return base
 
@@ -725,7 +750,12 @@ def strengthen_chapter_flow_for_delivery(
     return f"{base}\n\n{glue}"
 
 
-def strengthen_rendered_spine_manuscript(rendered_text: str, *, book_seed: str = "spine") -> str:
+def strengthen_rendered_spine_manuscript(
+    rendered_text: str,
+    *,
+    book_seed: str = "spine",
+    flow_profile: Optional[str] = None,
+) -> str:
     """Apply strengthen_chapter_flow_for_delivery per Chapter N block (enriched-book / spine output)."""
     text = (rendered_text or "").strip()
     if not text:
@@ -733,6 +763,7 @@ def strengthen_rendered_spine_manuscript(rendered_text: str, *, book_seed: str =
     chapters = _extract_rendered_chapters(text)
     if not chapters:
         return rendered_text
+    prof = flow_profile if flow_profile is not None else "standard"
     parts: list[str] = []
     for num, body in chapters:
         fixed = strengthen_chapter_flow_for_delivery(
@@ -740,6 +771,7 @@ def strengthen_rendered_spine_manuscript(rendered_text: str, *, book_seed: str =
             chapter_index=num - 1,
             book_seed=book_seed,
             plan=None,
+            flow_profile=prof,
         )
         parts.append(f"Chapter {num}\n{fixed}")
     return "\n\n".join(parts).strip()
@@ -750,6 +782,8 @@ def chapter_flow_gate_report(
     plan: Optional[dict[str, Any]] = None,
     prose_map: Optional[dict[str, str]] = None,
     ei_v2_config: Optional[dict[str, Any]] = None,
+    *,
+    runtime_format_id: Optional[str] = None,
 ) -> dict[str, Any]:
     """
     Evaluate each rendered chapter with chapter_flow_gate and return summary report.
@@ -769,6 +803,7 @@ def chapter_flow_gate_report(
             cfg_full = {}
     dg_cfg = (cfg_full or {}).get("dimension_gates") or {}
     dg_enabled = dg_cfg.get("enabled", True)
+    flow_profile = _resolve_chapter_flow_profile(plan, runtime_format_id=runtime_format_id)
 
     chapter_slot_sequence = (plan or {}).get("chapter_slot_sequence") or []
     atom_ids = (plan or {}).get("atom_ids") or []
@@ -813,6 +848,7 @@ def chapter_flow_gate_report(
                 emotional_role=str(emotional_role),
                 topic_id=topic_id,
                 plan=plan,
+                flow_profile=flow_profile,
             )
             composed_chapters.append(composed)
             slot_names = [(s or "").strip().upper() for s in slots]
@@ -824,7 +860,7 @@ def chapter_flow_gate_report(
             slot_names, segment_proses = slot_meta[ch]
             composed = composed_chapters[ch]
             other_composed = [composed_chapters[j] for j in range(len(composed_chapters)) if j != ch]
-            text_result = evaluate_chapter_flow(composed)
+            text_result = evaluate_chapter_flow(composed, flow_profile=flow_profile)
             errors = list(text_result.errors)
             for i, slot_name in enumerate(slot_names):
                 if slot_name == "TAKEAWAY":
@@ -892,7 +928,7 @@ def chapter_flow_gate_report(
     chapter_reports = []
     failed = 0
     for chapter_number, chapter_text in chapters:
-        res = evaluate_chapter_flow(chapter_text)
+        res = evaluate_chapter_flow(chapter_text, flow_profile=flow_profile)
         if res.status != "PASS":
             failed += 1
         entry: dict[str, Any] = {
@@ -1508,7 +1544,12 @@ def render_book(
 
         # Word-count gate + slot-level deficit report (always written, gate optional)
         rendered_text = out_path.read_text(encoding="utf-8")
-        flow_report = chapter_flow_gate_report(rendered_text, plan=plan, prose_map=render_result.prose_map)
+        flow_report = chapter_flow_gate_report(
+            rendered_text,
+            plan=plan,
+            prose_map=render_result.prose_map,
+            runtime_format_id=runtime_format_id or None,
+        )
         flow_path = output_dir / "chapter_flow_report.json"
         flow_path.write_text(json.dumps(flow_report, indent=2), encoding="utf-8")
         written["chapter_flow_report"] = flow_path

@@ -786,7 +786,11 @@ def compose_from_enriched_book(
         chapters_prose.append(chapter_text.rstrip())
 
     manuscript = "\n\n".join(chapters_prose)
+    from phoenix_v4.quality.chapter_flow_gate import flow_profile_for_runtime_format
     from phoenix_v4.rendering.book_renderer import strengthen_rendered_spine_manuscript
 
     spine_seed = f"spine:{enriched.persona_id}:{enriched.topic}:{enriched.runtime_format}"
-    return strengthen_rendered_spine_manuscript(manuscript, book_seed=spine_seed)
+    profile = flow_profile_for_runtime_format(enriched.runtime_format)
+    return strengthen_rendered_spine_manuscript(
+        manuscript, book_seed=spine_seed, flow_profile=profile
+    )

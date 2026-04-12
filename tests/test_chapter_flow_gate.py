@@ -80,6 +80,33 @@ def test_resolve_slot_thesis_bias_prefers_metadata_overlap(monkeypatch) -> None:
     assert result[0] == "atom_high"
 
 
+def test_short_form_flow_profile_skips_choppy_when_many_paragraphs() -> None:
+    """Short spine books break lines often; overlap stays low without being a real jump."""
+    # Token regex is [a-z']+ only — digits would fracture tokens and repeat short stems.
+    blobs = [
+        " ".join([f"blob{chr(ord('a') + i)}{chr(ord('a') + j)}unit" for j in range(12)]) + "."
+        for i in range(20)
+    ]
+    glue = (
+        "Because the pattern returns, which means you can name it. "
+        "In practice, for example, you slow one breath. "
+        "What this means is simple: you are allowed to feel this. Notice one breath and choose to stay."
+    )
+    text = "\n\n".join(blobs) + "\n\n" + glue
+    standard = evaluate_chapter_flow(text, flow_profile="standard")
+    short_form = evaluate_chapter_flow(text, flow_profile="short_form")
+    assert "CHOPPY_SECTION_JUMPS" in standard.errors
+    assert "CHOPPY_SECTION_JUMPS" not in short_form.errors
+    assert short_form.metrics.get("flow_profile") == "short_form"
+
+
+def test_flow_profile_for_runtime_format_maps_short_formats() -> None:
+    from phoenix_v4.quality.chapter_flow_gate import flow_profile_for_runtime_format
+
+    assert flow_profile_for_runtime_format("micro_book_15") == "short_form"
+    assert flow_profile_for_runtime_format("standard_book") == "standard"
+
+
 def test_chapter_flow_gate_flags_generic_overlay_scaffolding() -> None:
     bad = """
 You sit at the desk. gray light through the window on the glass.

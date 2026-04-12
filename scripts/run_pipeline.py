@@ -355,7 +355,9 @@ def _run_spine_pipeline_mode(
 
     if gates_run:
         try:
-            _flow_report = chapter_flow_gate_report(prose)
+            _flow_report = chapter_flow_gate_report(
+                prose, runtime_format_id=runtime_fmt
+            )
             _flow_report_path = render_dir / "chapter_flow_report.json"
             _flow_report_path.write_text(json.dumps(_flow_report, indent=2), encoding="utf-8")
             print(
@@ -1388,7 +1390,9 @@ def main() -> int:
             if gates_run:
                 try:
                     from phoenix_v4.rendering.book_renderer import chapter_flow_gate_report
-                    _flow_report = chapter_flow_gate_report(prose)
+                    _flow_report = chapter_flow_gate_report(
+                        prose, runtime_format_id=_reg_runtime or None
+                    )
                     _flow_report_path = render_dir / "chapter_flow_report.json"
                     _flow_report_path.write_text(
                         json.dumps(_flow_report, indent=2), encoding="utf-8"

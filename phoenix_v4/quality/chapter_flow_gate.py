@@ -8,6 +8,21 @@ import re
 import statistics
 from dataclasses import dataclass
 
+# Micro / short spine books use many line-broken paragraphs; adjacent token overlap
+# stays artificially low while transitions still read fine. Relax only for these
+# runtime formats — standard+ thresholds stay unchanged.
+SHORT_FORM_RUNTIME_FORMAT_IDS = frozenset(
+    {"micro_book_15", "micro_book_20", "short_book_30"},
+)
+
+
+def flow_profile_for_runtime_format(runtime_format_id: str) -> str:
+    return (
+        "short_form"
+        if (runtime_format_id or "").strip() in SHORT_FORM_RUNTIME_FORMAT_IDS
+        else "standard"
+    )
+
 
 @dataclass(frozen=True)
 class ChapterFlowResult:
@@ -83,9 +98,16 @@ def _token_set(text: str) -> set[str]:
     return set(re.findall(r"[a-z']+", text.lower()))
 
 
-def evaluate_chapter_flow(chapter_text: str) -> ChapterFlowResult:
+def evaluate_chapter_flow(
+    chapter_text: str,
+    *,
+    flow_profile: str = "standard",
+) -> ChapterFlowResult:
     errors: list[str] = []
     warnings: list[str] = []
+
+    profile = (flow_profile or "standard").strip() or "standard"
+    is_short_form = profile == "short_form"
 
     text = (chapter_text or "").strip()
     if not text:
@@ -93,8 +115,14 @@ def evaluate_chapter_flow(chapter_text: str) -> ChapterFlowResult:
 
     paragraphs = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
     sentences = _sentences(text)
-    if len(sentences) < 14:
-        errors.append("TOO_SHORT_FOR_AUDIO_FLOW")
+    min_sentences = 10 if is_short_form else 14
+    if len(sentences) < min_sentences:
+        # Micro/short books sometimes end with a brief closing beat; flow coherence
+        # heuristics are not meaningful below a few sentences.
+        if is_short_form and len(sentences) >= 2:
+            warnings.append("SHORT_TAIL_CHAPTER_FOR_MICRO_FORMAT")
+        else:
+            errors.append("TOO_SHORT_FOR_AUDIO_FLOW")
 
     for pat in _FORBIDDEN_PATTERNS:
         if pat.search(text):
@@ -121,7 +149,8 @@ def evaluate_chapter_flow(chapter_text: str) -> ChapterFlowResult:
         errors.append("ANNOUNCED_THREAD")
 
     transition_hits = sum(1 for cue in _TRANSITION_CUES if cue in lower)
-    if transition_hits < 3:
+    min_transitions = 2 if is_short_form else 3
+    if transition_hits < min_transitions:
         errors.append("WEAK_TRANSITIONS")
 
     thesis_hits = sum(1 for cue in _THESIS_CUES if cue in lower)
@@ -137,7 +166,16 @@ def evaluate_chapter_flow(chapter_text: str) -> ChapterFlowResult:
         jaccard = len(prev_tokens & curr_tokens) / max(1, len(prev_tokens | curr_tokens))
         overlaps.append(jaccard)
     avg_overlap = sum(overlaps) / len(overlaps) if overlaps else 0.0
-    if overlaps and avg_overlap < 0.05:
+    # Many short paragraphs (common in grief / TTS line breaks) deflate overlap
+    # without meaning the chapter lacks flow; skip this check for short_form when
+    # paragraph count is high.
+    choppy_threshold = 0.05
+    # Skip when many short line-break paragraphs *or* a very short tail (2–4 ¶)
+    # where overlap is not a useful signal.
+    skip_choppy = is_short_form and (
+        len(paragraphs) > 14 or len(paragraphs) <= 4
+    )
+    if overlaps and avg_overlap < choppy_threshold and not skip_choppy:
         errors.append("CHOPPY_SECTION_JUMPS")
 
     sentence_lengths = [len(re.findall(r"\b\w+\b", s)) for s in sentences]
@@ -164,6 +202,7 @@ def evaluate_chapter_flow(chapter_text: str) -> ChapterFlowResult:
         "sentence_len_std": round(std_len, 2),
         "aha_hits": aha_hits,
         "scaffold_hits": scaffold_hits,
+        "flow_profile": profile,
     }
     return ChapterFlowResult(status, score, errors, warnings, metrics)
 
@@ -171,6 +210,8 @@ def evaluate_chapter_flow(chapter_text: str) -> ChapterFlowResult:
 def evaluate_chapter_flow_with_slots(
     chapter_slots: list[str],
     segment_proses: list[str],
+    *,
+    flow_profile: str = "standard",
 ) -> ChapterFlowResult:
     """
     Same heuristics as evaluate_chapter_flow on concatenated text, plus:
@@ -185,7 +226,7 @@ def evaluate_chapter_flow_with_slots(
             {},
         )
     chapter_text = "\n\n".join(p.strip() for p in segment_proses if p and p.strip())
-    result = evaluate_chapter_flow(chapter_text)
+    result = evaluate_chapter_flow(chapter_text, flow_profile=flow_profile)
     errors = list(result.errors)
     for i, slot in enumerate(chapter_slots):
         slot_upper = (slot or "").strip().upper()
