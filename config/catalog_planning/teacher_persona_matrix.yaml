@@ -28,6 +28,7 @@ teachers:
       - coastal_california
     allowed_engines:
       - shame
+      - anxiety
       - false_alarm
       - overwhelm
       - spiral
@@ -63,24 +64,6 @@ teachers:
           - "dorm room"
           - "library desk"
           - "dining hall"
-
-  ajahn_x:
-    allowed_personas: []
-    disallowed_personas: []
-    preferred_locales: []
-    allowed_engines:
-      - shame
-      - anxiety
-      - false_alarm
-      - overwhelm
-      - spiral
-      - watcher
-      - grief
-      - comparison
-    constraints:
-      peak_intensity_limit: 5
-      identity_shift_allowed: false
-      min_tps_per_chapter: 5
 
   master_feung:
     allowed_personas: []

@@ -132,7 +132,7 @@
 4. `docs/JAPANESE_MARKET_SELFHELP_GUIDE.md`
 5. `docs/PAYOUT_PARTNER_METHODS.md`
 6. `docs/CHURCH_PAYOUT_AND_BANK_GOVERNANCE.md`
-7. `docs/norcal_dharma.yaml`
+7. Retired church compliance YAML path (distribution-only record consolidated; see `docs/church_docs/README.md`)
 8. `docs/EI_V2_ROLLOUT_PROOF_CHECKLIST.md`
 9. `docs/ei_v2_branch_protection_evidence.png`
 10. `specs/PHOENIX_CHURCHES_PAYOUT_SPEC.md`

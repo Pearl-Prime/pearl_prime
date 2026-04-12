@@ -11,7 +11,7 @@ Usage:
         --input artifacts/pipeline_examples/ahjan/book_ahjan_anxiety_15min.txt \
         --title "The Alarm Is Lying" \
         --subtitle "A Nervous System Guide to Anxiety Recovery" \
-        --author "Ajahn Ahjan" \
+        --author "Ahjan" \
         --publisher "Inner Light Press" \
         --cover artifacts/pipeline_examples/ahjan/cover_ahjan_anxiety.png \
         --output artifacts/epub/ahjan_anxiety.epub
@@ -54,7 +54,7 @@ except ImportError:
 # ─── BOOK MANIFEST ────────────────────────────────────────────────────
 
 TEACHER_BOOKS = [
-    {"id": "ahjan", "author": "Ajahn Ahjan", "publisher": "Inner Light Press",
+    {"id": "ahjan", "author": "Ahjan", "publisher": "Inner Light Press",
      "title": "The Alarm Is Lying", "subtitle": "A Nervous System Guide to Anxiety Recovery",
      "topic": "anxiety", "lang": "en"},
     {"id": "adi_da", "author": "Adi Da", "publisher": "Awakening Press",

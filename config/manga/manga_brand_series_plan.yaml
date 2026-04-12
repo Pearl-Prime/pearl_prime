@@ -9,7 +9,7 @@ schema_version: 1
 #   Small indie publisher: 4-6 active series
 #   Webtoon indie creator: 1-3 active series
 #   Survival rate: ~50% survive 30 chapters (1 year at weekly cadence)
-#   Our scale: 13 brands × ~3-5 active series each = ~52 active series at peak
+#   Our scale: 12 teacher brands × ~3-5 active series each ≈ 48 active series at peak
 
 global_defaults:
   # Per-brand portfolio sizing (small publisher benchmark)
@@ -58,6 +58,7 @@ brands:
       anxiety: 1 series          # primary: ahjan's core teaching
       sleep_anxiety: 1 series    # secondary: strong platform search volume
       somatic_healing: 1 series  # rotating third slot (somatic healing is iyashikei-native)
+      # Also rotates: boundaries, depression, grief, courage (forest-simplicity strands merged here)
 
     webtoon_format:
       enabled: true
@@ -98,34 +99,7 @@ brands:
       max_dormant_months: 2      # seinen readers churn faster — rotate sooner
       overlap_new_old_weeks: 1
 
-  # ── 3. NORCAL DHARMA (teacher: ajahn_x) ─────────────────────────────────
-  norcal_dharma:
-    teacher: ajahn_x
-    primary_lane: english_global
-    genre: seinen
-    active_series_target: 3
-    new_series_per_year: 4
-    chapters_per_series_per_month: 2
-    max_chapters_before_volume: 10
-    volumes_per_year_target: 5
-
-    topic_allocation:
-      depression: 1 series
-      grief: 1 series
-      courage: 1 series
-
-    webtoon_format:
-      enabled: true
-      platform_cadence:
-        english_global: bi_weekly
-        japan: monthly            # grief/depression — slower cadence appropriate
-        korea: bi_weekly
-
-    series_rotation:
-      max_dormant_months: 4      # grief readers engage at slower pace
-      overlap_new_old_weeks: 2
-
-  # ── 4. SOMATIC WISDOM (teacher: pamela_fellows) ──────────────────────────
+  # ── 3. SOMATIC WISDOM (teacher: pamela_fellows) ──────────────────────────
   somatic_wisdom:
     teacher: pamela_fellows
     primary_lane: english_global

@@ -11,9 +11,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DOCS = REPO_ROOT / "docs"
 
 # brand_id -> church YAML path (relative to repo root)
-CHURCH_BRAND_MAP: dict[str, Path] = {
-    "norcal_dharma": DOCS / "norcal_dharma.yaml",
-}
+# Empty until church compliance YAML files are checked in per imprint.
+CHURCH_BRAND_MAP: dict[str, Path] = {}
 
 
 def load_church(brand_id: str) -> dict[str, Any]:
@@ -31,7 +30,7 @@ def load_church(brand_id: str) -> dict[str, Any]:
     if not path.exists():
         raise FileNotFoundError(
             f"Church YAML not found for brand_id={brand_id!r}: {path}. "
-            "Ensure docs/norcal_dharma.yaml exists (Cooperative Church Compliance YAML Schema)."
+            "Add the file under docs/ and register it in CHURCH_BRAND_MAP."
         )
     try:
         import yaml

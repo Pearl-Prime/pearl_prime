@@ -20,19 +20,21 @@ brands:
   stillness_press:
     primary_teacher: ahjan
     teachers: [ahjan]
-    topic_focus: [anxiety, self_worth, impermanence, alarm_systems, pausing]
+    topic_focus:
+      - anxiety
+      - self_worth
+      - impermanence
+      - alarm_systems
+      - pausing
+      - forest_refuge
+      - simplicity
+      - renunciation
     content: [audiobooks, manga, video, exercises, freebies]
 
   cognitive_clarity:
     primary_teacher: joshin
     teachers: [joshin]
     topic_focus: [zen, direct_pointing, sitting, koans, self_inquiry]
-    content: [audiobooks, manga, video, exercises, freebies]
-
-  norcal_dharma:
-    primary_teacher: ajahn_x
-    teachers: [ajahn_x]
-    topic_focus: [forest_refuge, simplicity, renunciation]
     content: [audiobooks, manga, video, exercises, freebies]
 
   somatic_wisdom:
@@ -102,9 +104,6 @@ teacher_constraints:
     max_books_per_topic: 4
     max_books_per_persona: 5
   joshin:
-    max_books_per_topic: 4
-    max_books_per_persona: 5
-  ajahn_x:
     max_books_per_topic: 4
     max_books_per_persona: 5
   pamela_fellows:

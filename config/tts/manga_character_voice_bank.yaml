@@ -12,7 +12,7 @@
 
 schema_version: 1
 
-# ─── TEACHER CHARACTERS (13) ──────────────────────────────────────────────
+# ─── TEACHER CHARACTERS (12) ──────────────────────────────────────────────
 
 characters:
 
@@ -20,7 +20,7 @@ characters:
   ahjan:
     display_name: Ahjan
     style_archetype: wise_guide
-    manga_personality: calm, wise, compassionate, grounded authority
+    manga_personality: calm, wise, compassionate, grounded authority, nature-connected when teaching forest-refuge strands
     voice_slots:
       ja-JP:
         narrator: {provider: cosyvoice2, reference_id: ja_m_calm_01, edge_fallback: ja-JP-KeitaNeural}
@@ -78,38 +78,7 @@ characters:
         student_2: {provider: cosyvoice2, reference_id: cn_m_steady_01}
         inner_monologue: {provider: cosyvoice2, reference_id: cn_m_deep_01, prosody_override: {rate: 0.75, pitch: -8}}
 
-  # 03 — Ajahn X (forest monk)
-  ajahn_x:
-    display_name: Ajahn X
-    style_archetype: forest_monk
-    manga_personality: serene, grounded, nature-connected, gentle authority
-    voice_slots:
-      ja-JP:
-        narrator: {provider: cosyvoice2, reference_id: ja_m_calm_01, edge_fallback: ja-JP-KeitaNeural}
-        teacher_character: {provider: cosyvoice2, reference_id: ja_m_steady_01, notes: "serene monk voice"}
-        student_1: {provider: cosyvoice2, reference_id: ja_f_soft_01}
-        student_2: {provider: cosyvoice2, reference_id: ja_m_warm_01}
-        inner_monologue: {provider: cosyvoice2, reference_id: ja_m_steady_01, prosody_override: {rate: 0.80, pitch: -3}}
-      ko-KR:
-        narrator: {provider: cosyvoice2, reference_id: ko_m_steady_01, edge_fallback: ko-KR-InJoonNeural}
-        teacher_character: {provider: cosyvoice2, reference_id: ko_m_warm_01}
-        student_1: {provider: cosyvoice2, reference_id: ko_f_soft_01}
-        student_2: {provider: cosyvoice2, reference_id: ko_m_steady_01}
-        inner_monologue: {provider: cosyvoice2, reference_id: ko_m_warm_01, prosody_override: {rate: 0.80, pitch: -3}}
-      zh-TW:
-        narrator: {provider: cosyvoice2, reference_id: tw_m_steady_01, edge_fallback: zh-TW-YunJheNeural}
-        teacher_character: {provider: cosyvoice2, reference_id: tw_m_warm_01}
-        student_1: {provider: cosyvoice2, reference_id: tw_f_gentle_01}
-        student_2: {provider: cosyvoice2, reference_id: tw_m_steady_01}
-        inner_monologue: {provider: cosyvoice2, reference_id: tw_m_warm_01, prosody_override: {rate: 0.80, pitch: -3}}
-      zh-CN:
-        narrator: {provider: cosyvoice2, reference_id: cn_m_steady_01, edge_fallback: zh-CN-YunyangNeural}
-        teacher_character: {provider: cosyvoice2, reference_id: cn_m_warm_01}
-        student_1: {provider: cosyvoice2, reference_id: cn_f_gentle_01}
-        student_2: {provider: cosyvoice2, reference_id: cn_m_steady_01}
-        inner_monologue: {provider: cosyvoice2, reference_id: cn_m_warm_01, prosody_override: {rate: 0.80, pitch: -3}}
-
-  # 04 — Master Feung (martial arts master)
+  # 03 — Master Feung (martial arts master)
   master_feung:
     display_name: Master Feung
     style_archetype: martial_arts_master

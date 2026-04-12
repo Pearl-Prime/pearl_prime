@@ -52,15 +52,14 @@ A brand is a nonprofit publishing imprint. Each brand publishes content from exa
 
 **Why these lanes?** Each lane is an addressable market where catalog is isolated. Google Play is global (one lane), but Audible DE is separate from Audible US (different lane). China is completely isolated behind the Great Firewall (requires MCN agent). Korea's domestic platforms dominate over global ones. Each lane can have the same 37 brand names with a locale suffix.
 
-### The 37 Brands
+### The 36 Brands
 
-#### 13 Teacher Mode Brands (1 teacher each, gets ALL content)
+#### 12 Teacher Mode Brands (1 teacher each, gets ALL content)
 
 | Brand ID | Publisher Name | Teacher | Unique Angle |
 |----------|---------------|---------|--------------|
-| stillness_press | Stillness Press | Ahjan | Alarm recognition — "see the alarm for what it is" |
+| stillness_press | Stillness Press | Ahjan | Alarm recognition + forest-simplicity strands — "see the alarm" and "enough already exists" |
 | cognitive_clarity | Clear Seeing Books | Joshin | Zen inquiry — "stop believing the thinker" |
-| norcal_dharma | NorCal Dharma Press | Ajahn X | Forest simplicity — "enough already exists" |
 | somatic_wisdom | Felt Sense Publishing | Pamela Fellows | Polyvagal science — "the body already knows" |
 | qi_foundation | Root & Meridian Press | Master Feung | Qi cultivation — "rebuild from the root" |
 | digital_ground | Present Tense Books | Miki | Gen Z mindfulness — "exist without the phone" |
@@ -239,12 +238,12 @@ These brands have voice palettes and topic spreads but NO individual author prof
 | Gen Z/casual | 0.40-0.55 | 0.3-0.5 | Conversational |
 | Long-form nonfiction | 0.65-0.80 | 0.1-0.2 | Clean delivery |
 
-**Reference:** The 4 fully expanded brands (Stillness Press, Clear Seeing Books, NorCal Dharma, Felt Sense Publishing) in `teacher_brand_author_roster.yaml` show exactly how to do this.
+**Reference:** The fully expanded brands (Stillness Press, Clear Seeing Books, Felt Sense Publishing, …) in `teacher_brand_author_roster.yaml` show exactly how to do this.
 
 ### Priority 2: Register Brands in Existing Systems
 
 The new teacher brands need entries in:
-- `config/brand_registry.yaml` (add 10 new brands — stillness_press, cognitive_clarity, norcal_dharma already exist)
+- `config/brand_registry.yaml` (add locale brands — stillness_press, cognitive_clarity, etc.)
 - `config/brand_author_assignments.yaml` (add author pools per brand)
 - `config/brand_narrator_assignments.yaml` (add default narrator per brand)
 - `config/voice_author_lock_table.yaml` (add voice locks for all 91 authors)

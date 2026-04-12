@@ -41,7 +41,6 @@ PERSONA = "gen_z_professionals"
 TEACHER_ROWS: list[dict[str, str]] = [
     {"id": "ahjan", "topic": "anxiety", "brand": "stillness_press", "name": "Ahjan", "locale": "en-US", "cv_builtin": "english_male"},
     {"id": "joshin", "topic": "anxiety", "brand": "cognitive_clarity", "name": "Joshin", "locale": "en-US", "cv_builtin": "english_male"},
-    {"id": "ajahn_x", "topic": "boundaries", "brand": "norcal_dharma", "name": "Ajahn X", "locale": "en-US", "cv_builtin": "english_male"},
     {"id": "pamela_fellows", "topic": "burnout", "brand": "somatic_wisdom", "name": "Pamela Fellows", "locale": "en-US", "cv_builtin": "english_female"},
     {"id": "master_wu", "topic": "courage", "brand": "warrior_calm", "name": "Master Wu", "locale": "zh-CN", "cv_builtin": "chinese_male"},
     {"id": "miki", "topic": "imposter_syndrome", "brand": "digital_ground", "name": "Miki", "locale": "ja-JP", "cv_builtin": "ja_m_calm_01"},
@@ -91,9 +90,8 @@ TOPIC_MOOD = {
 }
 
 BRAND_AUTHOR_COUNT: dict[str, int] = {
-    "stillness_press": 7,
+    "stillness_press": 12,
     "cognitive_clarity": 6,
-    "norcal_dharma": 7,
     "somatic_wisdom": 7,
     "qi_foundation": 7,
     "digital_ground": 6,
@@ -520,17 +518,13 @@ def run_generate_prose() -> list[dict[str, Any]]:
         except RuntimeError:
             # Offline / CI: fall back to English atoms or teacher bank (documented).
             eng = arc_engine(arc)
-            if tid == "ajahn_x":
-                text = assemble_canonical_atoms(topic, eng)
-                provenance = "fallback_canonical_atoms_en:no_qwen"
+            bt = assemble_teacher_bank(tid)
+            if bt:
+                text = bt
+                provenance = "fallback_teacher_bank_en:no_qwen"
             else:
-                bt = assemble_teacher_bank(tid)
-                if bt:
-                    text = bt
-                    provenance = "fallback_teacher_bank_en:no_qwen"
-                else:
-                    text = assemble_canonical_atoms(topic, eng)
-                    provenance = f"fallback_canonical_atoms_en:{topic}:{eng}:no_qwen"
+                text = assemble_canonical_atoms(topic, eng)
+                provenance = f"fallback_canonical_atoms_en:{topic}:{eng}:no_qwen"
         pf = pdir / f"{tid}_{topic}_ch1.txt"
         pf.write_text(text, encoding="utf-8")
         spk, refp, sp_src = resolve_cosyvoice_speaker(tid, brand, locale, row=row)

@@ -32,7 +32,7 @@ Teacher Mode must **not** look like: "Anxiety Through Teacher A", "Anxiety Throu
 
 | Teacher   | Primary brand   | Topic focus        | Persona focus   |
 |-----------|------------------|--------------------|-----------------|
-| Ajahn X   | Stillness Press | shame, anxiety     | executives      |
+| Ahjan   | Stillness Press | shame, anxiety     | executives      |
 | Dr. Y     | Cognitive Clarity | overthinking     | Gen Z           |
 | Lama Z    | Presence Works  | grief              | caregivers      |
 

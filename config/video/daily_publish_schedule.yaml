@@ -45,10 +45,6 @@ brand_windows:
   cognitive_clarity:
     start_hour_utc: 14
     end_hour_utc: 19
-  norcal_dharma:
-    start_hour_utc: 20
-    end_hour_utc: 23
-
 # Cross-dedup enforcement (references config/video/cross_video_dedup.yaml)
 dedup:
   enforce_cross_video_dedup: true

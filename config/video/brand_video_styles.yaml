@@ -30,6 +30,16 @@ brands:
       color: "#F5F0E8"
       shadow: true
     colophon_animation: fade_in_hold  # 2s fade in, hold 3s
+    alternate_forest_mood:
+      intro_colors: ["#2D4A2A", "#D4A574"]
+      outro_colors: ["#D4A574", "#2D4A2A"]
+      title_font: "Lora"
+      thumbnail_style:
+        background: "#1A2A18"
+        accent_bar: "#2D4A2A"
+        text_color: "#F0EBE0"
+        teacher_overlay: true
+      subtitle_style: { font: "DM Sans", color: "#F0EBE0", shadow: true }
 
   cognitive_clarity:
     intro_colors: ["#1A1A1A", "#FFFFFF"]
@@ -44,20 +54,6 @@ brands:
       teacher_overlay: true
     subtitle_style: { font: "Montserrat", color: "#FFFFFF", shadow: true }
     colophon_animation: sharp_cut  # instant on, hold 3s
-
-  norcal_dharma:
-    intro_colors: ["#2D4A2A", "#D4A574"]
-    outro_colors: ["#D4A574", "#2D4A2A"]
-    title_font: "Lora"
-    title_color: "#D4A574"
-    b_roll_palette: cool_calm
-    thumbnail_style:
-      background: "#1A2A18"
-      accent_bar: "#2D4A2A"
-      text_color: "#F0EBE0"
-      teacher_overlay: true
-    subtitle_style: { font: "DM Sans", color: "#F0EBE0", shadow: true }
-    colophon_animation: fade_in_hold
 
   somatic_wisdom:
     intro_colors: ["#FFF5EE", "#C1666B"]

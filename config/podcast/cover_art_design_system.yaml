@@ -119,34 +119,6 @@ brand_templates:
     mood_overlay:
       blur_radius: 20
       overlay_opacity: 0.3
-  norcal_dharma:
-    background:
-      type: gradient
-      colors:
-      - '#2D3B2D'
-      - '#F5F0E8'
-      direction: 135deg
-    colophon:
-      asset: assets/brand/colophon/norcal_dharma.svg
-      placement: top-left
-      size_px: 200
-      opacity: 0.6
-    title:
-      font: Libre Baskerville
-      weight: 700
-      size_pt: 72
-      color: '#FFFFFF'
-      placement: center
-      max_lines: 2
-    subtitle:
-      font: Libre Baskerville
-      weight: 400
-      size_pt: 36
-      color: '#8B7355'
-      placement: below-title
-    mood_overlay:
-      blur_radius: 20
-      overlay_opacity: 0.3
   somatic_wisdom:
     background:
       type: gradient

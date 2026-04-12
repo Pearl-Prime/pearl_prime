@@ -26,6 +26,12 @@ brands:
     background_treatment: atmospheric_gradient
     typography_style: handwritten_serif
     mood_reference: "Vagabond contemplative panels + watercolor landscapes"
+    alternate_forest_mood:
+      prompt_addendum: "clean precise ink, forest canopy light, Mushishi-like atmosphere, earth-toned wash"
+      color_palette:
+        primary: ["#2D4A2A", "#8B7D6B"]
+        accent: "#D4A574"
+        background: "#F0EBE0"
     locale_variants:
       jp: { cultural_note: "standard manga conventions, right-to-left reading" }
       kr: { cultural_note: "webtoon vertical scroll, left-to-right" }
@@ -51,25 +57,6 @@ brands:
     mood_reference: "Vinland Saga clarity + Honey and Clover warmth in key panels"
     locale_variants:
       jp: { cultural_note: "calligraphy sound effects, traditional onomatopoeia" }
-
-  norcal_dharma:
-    teacher: ajahn_x
-    style_name: "Forest Naturalism"
-    archetype_base: dark_psychological
-    prompt_template: >
-      seinen manga, clean precise ink linework, earth-toned color wash,
-      forest canopy backgrounds, natural light filtering through trees,
-      Blade of the Immortal meets Mushishi, {subject}
-    negative_prompt: "urban, technology, neon, artificial lighting, crowds"
-    color_palette:
-      primary: ["#2D4A2A", "#8B7D6B"]  # forest green, bark brown
-      accent: "#D4A574"  # amber sap
-      background: "#F0EBE0"
-    line_weight: medium_precise
-    shading: crosshatch_organic
-    background_treatment: detailed_nature
-    typography_style: natural_brush
-    mood_reference: "Mushishi forest stillness + Blade of the Immortal precision"
 
   somatic_wisdom:
     teacher: pamela_fellows

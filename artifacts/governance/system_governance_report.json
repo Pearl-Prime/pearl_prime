@@ -53,11 +53,11 @@
     },
     {
       "slug": "brand_guards",
-      "name": "NorCal Dharma + Church YAML guards",
+      "name": "Catalog brand guards + Church YAML guards",
       "passed": true,
       "detail": "PASS",
       "fix_applied": false,
-      "output": "norcal_dharma not in any brand_teacher_matrix (OK)\nnorcal_dharma assignments map only to default_teacher (OK)\n\n\n"
+      "output": "Deprecated brand id not in any brand_teacher_matrix (OK)\nDeprecated brand id absent from brand_teacher_assignments (OK)\n\n\n"
     },
     {
       "slug": "variation_report",

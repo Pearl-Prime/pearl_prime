@@ -58,10 +58,26 @@ brands:
         search_intent: deep_dive
         primary_mechanism: nervous_system_safety
         panel_estimate: 140
+      series_d:
+        teacher_student_series: true
+        description: "Ahjan walks a student through the forest edge — learning where natural boundaries live"
+        title: "The Forest Edge"
+        topic: boundaries
+        angle_source: boundaries
+        episode_count: 8
+        band_curve: steady_build
+        search_intent: behavioral_change
+        primary_mechanism: overwhelm_containment
+        panel_estimate: 368
     medium_lanes:
       series_a:
         title: "The Alarm Within"
         topic: anxiety
+        episode_count: 6
+        panel_estimate: 276
+      series_b:
+        title: "The Forest Edge"
+        topic: boundaries
         episode_count: 6
         panel_estimate: 276
     light_lanes:
@@ -110,54 +126,6 @@ brands:
       series_a:
         title: "The Seeing Mind"
         topic: overthinking
-        episode_count: 6
-        panel_estimate: 276
-    light_lanes:
-      package: covers_plus_key_visuals
-      cover_count: 3
-      key_visual_count: 3
-
-  norcal_dharma:
-    teacher: ajahn_x
-    manga_mode: teacher
-    art_style_ref: norcal_dharma
-    primary_topic: boundaries
-    secondary_topic: depression
-    anthology_topic: courage
-    heavy_lanes:
-      series_a:
-        teacher_student_series: true
-        description: "Ajahn X walks a student through the forest edge — learning where natural boundaries live"
-        title: "The Forest Edge"
-        topic: boundaries
-        angle_source: boundaries
-        episode_count: 8
-        band_curve: steady_build
-        search_intent: behavioral_change
-        primary_mechanism: overwhelm_containment
-        panel_estimate: 368
-      series_b:
-        title: "Under the Canopy"
-        topic: depression
-        angle_source: depression
-        episode_count: 8
-        band_curve: crisis_landing
-        search_intent: crisis_management
-        primary_mechanism: grief_integration
-        panel_estimate: 368
-      series_c:
-        title: "First Steps"
-        topic: courage
-        angle_source: courage
-        episode_count: 5
-        band_curve: gentle_rise
-        search_intent: life_transition
-        primary_mechanism: false_alarm_reframe
-        panel_estimate: 140
-    medium_lanes:
-      series_a:
-        title: "The Forest Edge"
-        topic: boundaries
         episode_count: 6
         panel_estimate: 276
     light_lanes:

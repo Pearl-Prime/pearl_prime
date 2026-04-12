@@ -1,4 +1,4 @@
-# Teacher Brand Author Roster — 13 brands × 5-9 authors = 91 authors
+# Teacher Brand Author Roster — 12 brands × 5-9 authors = 91 authors
 # Authority: brand_identity_system.yaml, PEN_NAME_AUTHOR_SYSTEM.md
 #
 # Each author has:
@@ -28,7 +28,7 @@ schema_version: 1
 
 stillness_press:
   teacher: ahjan
-  author_count: 7
+  author_count: 12
 
   authors:
     - author_id: lena_thorne
@@ -136,6 +136,76 @@ stillness_press:
       portrait_preset: radiant
       cover_style: "Gold-to-slate gradient, clean Cormorant title, single line"
 
+    - author_id: tara_woodfield
+      display_name: "Tara Woodfield"
+      positioning: elder_stabilizer
+      voice_id: ThT5KcBeYPX3keUQqHPh
+      voice_settings: { stability: 0.70, similarity_boost: 0.75, style: 0.1 }
+      topics: [boundaries, burnout]
+      personas: [gen_x_sandwich, working_parents]
+      bio: >
+        Tara Woodfield lived at a forest monastery for six years before returning
+        to raise her daughter. She writes about renunciation as a parent — what
+        you can put down even when you can't leave.
+      portrait_preset: legacy_wisdom
+      cover_style: "Parchment base, forest green botanical line, bark brown serif"
+
+    - author_id: rowan_beck
+      display_name: "Rowan Beck"
+      positioning: research_guide
+      voice_id: onwK4e9ZLuTAKqWW03F9
+      voice_settings: { stability: 0.75, similarity_boost: 0.75, style: 0.1 }
+      topics: [anxiety, overthinking]
+      personas: [tech_finance_burnout, millennial_women_professionals]
+      bio: >
+        Rowan Beck is an environmental psychologist who studies why people feel
+        calmer in forests. His books translate forest-tradition principles into
+        evidence-based simplicity practices for overstimulated professionals.
+      portrait_preset: grounded
+      cover_style: "Deep forest background, parchment title band, pressed leaf motif"
+
+    - author_id: mae_rivers
+      display_name: "Mae Rivers"
+      positioning: somatic_companion
+      voice_id: oWAxZDx7w5VEj9dCyTzz
+      voice_settings: { stability: 0.60, similarity_boost: 0.75, style: 0.1 }
+      topics: [grief, compassion_fatigue]
+      personas: [healthcare_rns, first_responders]
+      bio: >
+        Mae Rivers is a former wildfire chaplain who found the forest tradition
+        after losing colleagues in the field. Her books are for people who
+        carry others' grief and forgot how to put it down.
+      portrait_preset: contemplative
+      cover_style: "Forest green gradient, single tree silhouette, parchment title"
+
+    - author_id: silas_grant
+      display_name: "Silas Grant"
+      positioning: elder_stabilizer
+      voice_id: ODq5zmih8GrVes37Dizd
+      voice_settings: { stability: 0.75, similarity_boost: 0.75, style: 0.05 }
+      topics: [self_worth, depression]
+      personas: [entrepreneurs, gen_x_sandwich]
+      bio: >
+        Silas Grant is a retired teacher who spent two decades walking before
+        dawn. He writes short books — sixty pages, maybe seventy — about what
+        remains when you stop trying to be more.
+      portrait_preset: legacy_wisdom
+      cover_style: "Parchment, bark brown small type, white space dominant"
+
+    - author_id: iris_tam
+      display_name: "Iris Tam"
+      positioning: somatic_companion
+      voice_id: LcfcDJNUP1GQjkzn1xUU
+      voice_settings: { stability: 0.60, similarity_boost: 0.75, style: 0.1 }
+      topics: [somatic_healing, sleep_anxiety]
+      personas: [millennial_women_professionals, working_parents]
+      bio: >
+        Iris Tam teaches body-based simplicity — contemplative approaches to
+        sleep, eating, and movement. Her books are for people who want less
+        but don't know where to start letting go.
+      portrait_preset: warm_intimate
+      cover_style: "Parchment, forest green accents, hand-drawn botanical border"
+
 # ═══════════════════════════════════════════════════════════════════════════
 #  02. CLEAR SEEING BOOKS — Joshin (Zen inquiry, dropping the story)
 #      Brand palette: near-black #1A1A2E + white #FFFFFF + steel #718096
@@ -232,88 +302,7 @@ clear_seeing_books:
       cover_style: "Dark grey, white condensed type, no imagery"
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  03. NORCAL DHARMA PRESS — Ajahn X (forest simplicity)
-#      Brand palette: forest #2D3B2D + parchment #F5F0E8 + bark #8B7355
-#      5 authors
-# ═══════════════════════════════════════════════════════════════════════════
-
-norcal_dharma:
-  teacher: ajahn_x
-  author_count: 5
-
-  authors:
-    - author_id: tara_woodfield
-      display_name: "Tara Woodfield"
-      positioning: elder_stabilizer
-      voice_id: ThT5KcBeYPX3keUQqHPh   # Dorothy — warm storytelling
-      voice_settings: { stability: 0.70, similarity_boost: 0.75, style: 0.1 }
-      topics: [boundaries, burnout]
-      personas: [gen_x_sandwich, working_parents]
-      bio: >
-        Tara Woodfield lived at a forest monastery for six years before returning
-        to raise her daughter. She writes about renunciation as a parent — what
-        you can put down even when you can't leave.
-      portrait_preset: legacy_wisdom
-      cover_style: "Parchment base, forest green botanical line, bark brown serif"
-
-    - author_id: rowan_beck
-      display_name: "Rowan Beck"
-      positioning: research_guide
-      voice_id: onwK4e9ZLuTAKqWW03F9   # Daniel — British calm
-      voice_settings: { stability: 0.75, similarity_boost: 0.75, style: 0.1 }
-      topics: [anxiety, overthinking]
-      personas: [tech_finance_burnout, millennial_women_professionals]
-      bio: >
-        Rowan Beck is an environmental psychologist who studies why people feel
-        calmer in forests. His books translate Thai Forest principles into
-        evidence-based simplicity practices for overstimulated professionals.
-      portrait_preset: grounded
-      cover_style: "Deep forest background, parchment title band, pressed leaf motif"
-
-    - author_id: mae_rivers
-      display_name: "Mae Rivers"
-      positioning: somatic_companion
-      voice_id: oWAxZDx7w5VEj9dCyTzz   # Grace — gentle
-      voice_settings: { stability: 0.60, similarity_boost: 0.75, style: 0.1 }
-      topics: [grief, compassion_fatigue]
-      personas: [healthcare_rns, first_responders]
-      bio: >
-        Mae Rivers is a former wildfire chaplain who found the forest tradition
-        after losing colleagues in the field. Her books are for people who
-        carry others' grief and forgot how to put it down.
-      portrait_preset: contemplative
-      cover_style: "Forest green gradient, single tree silhouette, parchment title"
-
-    - author_id: silas_grant
-      display_name: "Silas Grant"
-      positioning: elder_stabilizer
-      voice_id: ODq5zmih8GrVes37Dizd   # Patrick — older male
-      voice_settings: { stability: 0.75, similarity_boost: 0.75, style: 0.05 }
-      topics: [self_worth, depression]
-      personas: [entrepreneurs, gen_x_sandwich]
-      bio: >
-        Silas Grant is a retired teacher who spent two decades walking before
-        dawn. He writes short books — sixty pages, maybe seventy — about what
-        remains when you stop trying to be more.
-      portrait_preset: legacy_wisdom
-      cover_style: "Parchment, bark brown small type, white space dominant"
-
-    - author_id: iris_tam
-      display_name: "Iris Tam"
-      positioning: somatic_companion
-      voice_id: LcfcDJNUP1GQjkzn1xUU   # Emily — calm female
-      voice_settings: { stability: 0.60, similarity_boost: 0.75, style: 0.1 }
-      topics: [somatic_healing, sleep_anxiety]
-      personas: [millennial_women_professionals, working_parents]
-      bio: >
-        Iris Tam teaches body-based simplicity — the forest monk's approach
-        to sleep, eating, and movement. Her books are for people who want less
-        but don't know where to start letting go.
-      portrait_preset: warm_intimate
-      cover_style: "Parchment, forest green accents, hand-drawn botanical border"
-
-# ═══════════════════════════════════════════════════════════════════════════
-#  04. FELT SENSE PUBLISHING — Pamela Fellows (polyvagal, embodiment)
+#  03. FELT SENSE PUBLISHING — Pamela Fellows (polyvagal, embodiment)
 #      Brand palette: cream #F7F3EE + espresso #5C4A3A + dusty rose #C47A8A
 #      8 authors
 # ═══════════════════════════════════════════════════════════════════════════
@@ -512,12 +501,11 @@ open_vessel_press:
 # ═══════════════════════════════════════════════════════════════════════════
 
 summary:
-  total_teacher_brands: 13
+  total_teacher_brands: 12
   total_authors: 91
   authors_per_brand:
-    stillness_press: 7
+    stillness_press: 12
     clear_seeing_books: 6
-    norcal_dharma: 5
     felt_sense_publishing: 8
     root_and_meridian_press: 7
     present_tense_books: 6
@@ -547,6 +535,6 @@ summary:
     research_guide: 38      # ~42% — evidence/science authority
     elder_stabilizer: 18    # ~20% — wisdom, patience, long view
 
-  fully_expanded_brands: [stillness_press, clear_seeing_books, norcal_dharma, felt_sense_publishing]
+  fully_expanded_brands: [stillness_press, clear_seeing_books, felt_sense_publishing]
   skeleton_brands: [root_and_meridian_press, present_tense_books, feather_and_scale_press, bare_form_books, iron_gate_press, night_architecture_books, held_ground_press, ember_and_ash_publishing, open_vessel_press]
   next_sprint: "Expand skeleton brands to full author profiles (bio, portrait_preset, cover_style)"

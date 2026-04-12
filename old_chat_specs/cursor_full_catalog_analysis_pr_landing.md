@@ -303,13 +303,13 @@ Adding synthetic standard-brand rows from `brand_archetype_registry` when `globa
 
 | Piece | What it does |
 |--------|----------------|
-| **Teacher brands** | Planning `brand_id`s (e.g. `stillness_press`, `stillness_press_de`) are what appear in catalog rows. Rows resolve through `teacher_brand_archetypes.yaml` → `teacher_brand_map.yaml` → `global_brand_registry`; missing locale rows use `teacher_brand_map`; teachers not in the map (e.g. **NorCal Dharma / ajahn_x**) use archetype YAML + keyword/persona heuristics. |
+| **Teacher brands** | Planning `brand_id`s (e.g. `stillness_press`, `stillness_press_de`) are what appear in catalog rows. Rows resolve through `teacher_brand_archetypes.yaml` → `teacher_brand_map.yaml` → `global_brand_registry`; missing locale rows use `teacher_brand_map`; teachers not in the map use archetype YAML + keyword/persona heuristics. |
 | **Standard brands** | Same 24×12 grid; registry row wins; if `{base}_{locale}` is absent, **`brand_archetype_registry.yaml`** builds a synthetic row so the grid stays full. |
 
 ### Checks
 
 - `build_12x37_brand_targets(...)` → **444** brand targets  
-- `generate_catalog()` → **11 120** entries, **444** distinct `brand_id`s (e.g. `norcal_dharma_de` + `ajahn_x`, `stillness_press` planning id for EN)
+- `generate_catalog()` → **11 120** entries, **444** distinct `brand_id`s (e.g. `stillness_press`, `stillness_press_de` planning ids for EN)
 
 ### Landed
 

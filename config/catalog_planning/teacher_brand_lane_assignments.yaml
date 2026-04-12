@@ -5,13 +5,14 @@
 #
 # 1 TEACHER PER BRAND. Everywhere. No exceptions.
 #
-# On global_west: 13 brands, 1 teacher each.
-# On each regional lane: 13 brands, 1 teacher each.
+# On global_west: 12 teacher brands (+ 24 standard = 36 per lane).
+# On each regional lane: 12 teacher brands (+ 24 standard = 36 per lane).
 # Same brand name can appear in multiple lanes (e.g. stillness_press_tw),
 # but each brand-instance only ever promotes 1 teacher.
 #
-# This means regional lanes need up to 13 brands each.
+# This means regional lanes need up to 36 brands each (12 teacher + 24 standard).
 # That's fine — the brand admin for each handles promotion.
+# Former duplicate forest/simplicity brand merged into stillness_press (ahjan).
 #
 # Each brand's teacher gets ALL content:
 #   audiobooks, manga, video, exercises, freebies — everything.
@@ -27,8 +28,8 @@ schema_version: 2
 # ─── 12 GLOBAL BRAND LANES (addressable markets) ────────────────────────
 #
 # A "lane" = an addressable market where a brand can build audience.
-# 1 teacher per brand per lane. 13 brands per lane (1 per teacher).
-# 12 lanes × 13 brands = 156 total brand instances.
+# 1 teacher per brand per lane. 12 teacher brands + 24 standard = 36 brands per lane.
+# 12 lanes × 36 brands = 432 total brand instances.
 #
 # Sources: docs/LOCALE_CATALOG_MARKETING_PLAN.md,
 #          docs/GLOBAL_PERSONA_MARKETING_PLAN.md,
@@ -154,18 +155,17 @@ brand_lanes:
 # ─── ASSIGNMENTS ─────────────────────────────────────────────────────────
 #
 # GLOBAL WEST: 1 teacher per brand (strict anti-spam).
-# REGIONAL LANES: brands carry multiple teachers (platform is isolated).
+# REGIONAL LANES: same brand×teacher pairing with locale suffix on brand id.
 #
 # Structure:
-#   global_west → 13 brands, 1 teacher each
-#   regional   → fewer brands, multiple teachers each (max catalog per brand)
+#   english_global → 12 teacher brands + 24 standard, 1 teacher each per teacher brand
+#   regional → same pattern with locale suffix (e.g. stillness_press_de)
 
 # ── ENGLISH GLOBAL (Lane 1) ───────────────────────────────────────────────
 
 english_global:
   stillness_press:    { teacher: ahjan,           content: [audiobooks, manga, video, exercises, freebies] }
   cognitive_clarity:  { teacher: joshin,          content: [audiobooks, manga, video, exercises, freebies] }
-  norcal_dharma:      { teacher: ajahn_x,         content: [audiobooks, manga, video, exercises, freebies] }
   somatic_wisdom:     { teacher: pamela_fellows,   content: [audiobooks, manga, video, exercises, freebies] }
   qi_foundation:      { teacher: master_feung,     content: [audiobooks, manga, video, exercises, freebies] }
   digital_ground:     { teacher: miki,             content: [audiobooks, manga, video, exercises, freebies] }
@@ -177,16 +177,15 @@ english_global:
   solar_return:       { teacher: ra,               content: [audiobooks, manga, video, exercises, freebies] }
   devotion_path:      { teacher: sai_ma,           content: [audiobooks, manga, video, exercises, freebies] }
 
-# ── LANES 2-12: Same pattern — 13 brands, 1 teacher each ─────────────────
+# ── LANES 2-12: Same pattern — 12 teacher brands (+ 24 standard), 1 teacher each ─────────────────
 #
-# Every lane gets the same 13 brand names with a locale suffix.
+# Every lane gets the same teacher brand names with a locale suffix.
 # Brand naming: {base_brand}_{lane_suffix}
 # Content scope varies by market (manga strong in JP/KR/TW/FR, less in HU).
 
   dach:           # Lane 2
     stillness_press_de:     { teacher: ahjan }
     cognitive_clarity_de:   { teacher: joshin }
-    norcal_dharma_de:       { teacher: ajahn_x }
     somatic_wisdom_de:      { teacher: pamela_fellows }
     qi_foundation_de:       { teacher: master_feung }
     digital_ground_de:      { teacher: miki }
@@ -201,7 +200,6 @@ english_global:
   france:         # Lane 3
     stillness_press_fr:     { teacher: ahjan }
     cognitive_clarity_fr:   { teacher: joshin }
-    norcal_dharma_fr:       { teacher: ajahn_x }
     somatic_wisdom_fr:      { teacher: pamela_fellows }
     qi_foundation_fr:       { teacher: master_feung }
     digital_ground_fr:      { teacher: miki }
@@ -216,7 +214,6 @@ english_global:
   spain:          # Lane 4
     stillness_press_es:     { teacher: ahjan }
     cognitive_clarity_es:   { teacher: joshin }
-    norcal_dharma_es:       { teacher: ajahn_x }
     somatic_wisdom_es:      { teacher: pamela_fellows }
     qi_foundation_es:       { teacher: master_feung }
     digital_ground_es:      { teacher: miki }
@@ -231,7 +228,6 @@ english_global:
   italy:          # Lane 5
     stillness_press_it:     { teacher: ahjan }
     cognitive_clarity_it:   { teacher: joshin }
-    norcal_dharma_it:       { teacher: ajahn_x }
     somatic_wisdom_it:      { teacher: pamela_fellows }
     qi_foundation_it:       { teacher: master_feung }
     digital_ground_it:      { teacher: miki }
@@ -246,7 +242,6 @@ english_global:
   latam:          # Lane 6
     stillness_press_latam:     { teacher: ahjan }
     cognitive_clarity_latam:   { teacher: joshin }
-    norcal_dharma_latam:       { teacher: ajahn_x }
     somatic_wisdom_latam:      { teacher: pamela_fellows }
     qi_foundation_latam:       { teacher: master_feung }
     digital_ground_latam:      { teacher: miki }
@@ -261,7 +256,6 @@ english_global:
   brazil:         # Lane 7
     stillness_press_br:     { teacher: ahjan }
     cognitive_clarity_br:   { teacher: joshin }
-    norcal_dharma_br:       { teacher: ajahn_x }
     somatic_wisdom_br:      { teacher: pamela_fellows }
     qi_foundation_br:       { teacher: master_feung }
     digital_ground_br:      { teacher: miki }
@@ -276,7 +270,6 @@ english_global:
   japan:          # Lane 8
     stillness_press_jp:     { teacher: ahjan }
     cognitive_clarity_jp:   { teacher: joshin }
-    norcal_dharma_jp:       { teacher: ajahn_x }
     somatic_wisdom_jp:      { teacher: pamela_fellows }
     qi_foundation_jp:       { teacher: master_feung }
     digital_ground_jp:      { teacher: miki }
@@ -291,7 +284,6 @@ english_global:
   korea:          # Lane 9
     stillness_press_kr:     { teacher: ahjan }
     cognitive_clarity_kr:   { teacher: joshin }
-    norcal_dharma_kr:       { teacher: ajahn_x }
     somatic_wisdom_kr:      { teacher: pamela_fellows }
     qi_foundation_kr:       { teacher: master_feung }
     digital_ground_kr:      { teacher: miki }
@@ -306,7 +298,6 @@ english_global:
   taiwan:         # Lane 10
     stillness_press_tw:     { teacher: ahjan }
     cognitive_clarity_tw:   { teacher: joshin }
-    norcal_dharma_tw:       { teacher: ajahn_x }
     somatic_wisdom_tw:      { teacher: pamela_fellows }
     qi_foundation_tw:       { teacher: master_feung }
     digital_ground_tw:      { teacher: miki }
@@ -321,7 +312,6 @@ english_global:
   china:          # Lane 11 (mainland + HK + SG)
     stillness_press_cn:     { teacher: ahjan }
     cognitive_clarity_cn:   { teacher: joshin }
-    norcal_dharma_cn:       { teacher: ajahn_x }
     somatic_wisdom_cn:      { teacher: pamela_fellows }
     qi_foundation_cn:       { teacher: master_feung }
     digital_ground_cn:      { teacher: miki }
@@ -336,7 +326,6 @@ english_global:
   hungary:        # Lane 12
     stillness_press_hu:     { teacher: ahjan }
     cognitive_clarity_hu:   { teacher: joshin }
-    norcal_dharma_hu:       { teacher: ajahn_x }
     somatic_wisdom_hu:      { teacher: pamela_fellows }
     qi_foundation_hu:       { teacher: master_feung }
     digital_ground_hu:      { teacher: miki }
@@ -354,20 +343,19 @@ summary:
   rule: "1 teacher per brand. Everywhere. Simple."
 
   brand_lanes: 12
-  brands_per_lane: 37         # 24 standard-mode + 13 teacher-mode = 37
-  total_brand_instances: 444  # 12 lanes × 37 brands
+  brands_per_lane: 36         # 24 standard-mode + 12 teacher-mode = 36
+  total_brand_instances: 432  # 12 lanes × 36 brands
 
-  # ── TEACHER MODE BRANDS (13 per lane) ──────────────────────────────────
+  # ── TEACHER MODE BRANDS (12 per lane) ──────────────────────────────────
   # Each publishes content from ONE teacher. The brand IS that teacher's voice.
   # Each has a unique persona × topic × emotional_job grouping.
   # Full archetypes: config/catalog_planning/teacher_brand_archetypes.yaml
   teacher_mode_brands:
-    count_per_lane: 13
-    total: 156                # 12 lanes × 13
+    count_per_lane: 12
+    total: 144                # 12 lanes × 12
     base_names:
-      - stillness_press       # ahjan        — trauma_sensitive_meditator / alarm recognition
+      - stillness_press       # ahjan        — alarm recognition + forest simplicity / renunciation strands
       - cognitive_clarity     # joshin       — overthinking_knowledge_worker / zen inquiry
-      - norcal_dharma         # ajahn_x      — simplicity_seeker / forest renunciation
       - somatic_wisdom        # pamela_fellows — high_functioning_perfectionist / polyvagal science
       - qi_foundation         # master_feung — energy_depleted_professional / qi cultivation
       - digital_ground        # miki         — doomscrolling_gen_z / presence without phone
@@ -427,6 +415,6 @@ summary:
     hungary: "_hu"
 
   # Every teacher on every lane = maximum global reach
-  teacher_reach: "13 teachers × 12 lanes = 156 teacher-brand pairs"
+  teacher_reach: "12 teachers × 12 lanes = 144 teacher-brand pairs"
   standard_reach: "24 standard brands × 12 lanes = 288 standard-brand pairs"
-  total_reach: "37 brands × 12 lanes = 444 brand instances worldwide"
+  total_reach: "36 brands × 12 lanes = 432 brand instances worldwide"

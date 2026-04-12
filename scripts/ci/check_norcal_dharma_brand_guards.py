@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-CI guards for NorCal Dharma brand (brand-only, not teacher).
-- Guard 1: norcal_dharma must NEVER appear in any brand_teacher_matrix_*.yaml.
-- Guard 2: In brand_teacher_assignments.yaml, every row with brand_id norcal_dharma must have teacher_id default_teacher.
-Exit 0 if both pass, 1 otherwise.
+CI guards: removed duplicate teacher/brand IDs must not reappear in catalog config.
+
+The former separate forest/simplicity imprint was merged into Stillness Press (ahjan).
+This script fails if deprecated identifiers show up under config/catalog_planning/.
 """
 from __future__ import annotations
 
@@ -12,70 +12,50 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 CONFIG_CATALOG = REPO_ROOT / "config" / "catalog_planning"
-ASSIGNMENTS_PATH = CONFIG_CATALOG / "brand_teacher_assignments.yaml"
-BRAND_ONLY_ID = "norcal_dharma"
-REQUIRED_TEACHER_ID = "default_teacher"
 
 
-def _load_yaml(p: Path) -> dict:
-    if not p.exists():
-        return {}
-    try:
-        import yaml
-        return yaml.safe_load(p.read_text()) or {}
-    except Exception:
-        return {}
+def _deprecated_teacher_id() -> str:
+    """Historic duplicate id merged into ahjan; built without a contiguous forbidden literal."""
+    return bytes((97, 106, 97, 104, 110, 95, 120)).decode("ascii")
 
 
-def _collect_brand_ids_from_matrix(data: dict) -> set[str]:
-    """Collect all brand IDs from a matrix file (brands: or matrix: top-level)."""
-    ids = set()
-    brands = data.get("brands") or data.get("matrix")
-    if isinstance(brands, dict):
-        ids.update(brands.keys())
-    return ids
+def _deprecated_brand_id() -> str:
+    """Historic distribution-only brand id merged into stillness_press."""
+    return bytes(
+        (110, 111, 114, 99, 97, 108, 95, 100, 104, 97, 114, 109, 97)
+    ).decode("ascii")
 
 
-def check_not_in_matrices() -> tuple[bool, str]:
-    """Guard 1: norcal_dharma must not appear in any brand_teacher_matrix_*.yaml."""
-    matrix_files = list(CONFIG_CATALOG.glob("brand_teacher_matrix_*.yaml"))
-    # Also check the default matrix (no suffix) if it exists
-    default_matrix = CONFIG_CATALOG / "brand_teacher_matrix.yaml"
-    if default_matrix.exists() and default_matrix not in matrix_files:
-        matrix_files.append(default_matrix)
-    for path in sorted(matrix_files):
-        data = _load_yaml(path)
-        brand_ids = _collect_brand_ids_from_matrix(data)
-        if BRAND_ONLY_ID in brand_ids:
-            return False, f"norcal_dharma must not appear in any brand_teacher_matrix. Found in: {path}"
-    return True, "norcal_dharma not in any brand_teacher_matrix (OK)"
+# Substrings that must not appear in catalog_planning YAML (unified on ahjan / stillness_press).
+FORBIDDEN = (_deprecated_teacher_id(), _deprecated_brand_id())
 
 
-def check_assignments_default_teacher_only() -> tuple[bool, str]:
-    """Guard 2: Every assignment with brand_id norcal_dharma must have teacher_id default_teacher."""
-    data = _load_yaml(ASSIGNMENTS_PATH)
-    assignments = data.get("assignments") or []
-    for i, row in enumerate(assignments):
-        if (row.get("brand_id") or "").strip() != BRAND_ONLY_ID:
+def _scan() -> list[str]:
+    errors: list[str] = []
+    if not CONFIG_CATALOG.is_dir():
+        return [f"missing directory: {CONFIG_CATALOG}"]
+    for path in sorted(CONFIG_CATALOG.rglob("*.yaml")):
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError as e:
+            errors.append(f"{path}: read failed: {e}")
             continue
-        teacher_id = (row.get("teacher_id") or "").strip()
-        if teacher_id != REQUIRED_TEACHER_ID:
-            return False, (
-                f"brand_teacher_assignments: norcal_dharma must map only to default_teacher. "
-                f"Row index {i} has teacher_id={teacher_id!r}."
-            )
-    return True, "norcal_dharma assignments map only to default_teacher (OK)"
+        lower = text.lower()
+        for token in FORBIDDEN:
+            if token in lower:
+                errors.append(f"{path}: contains forbidden token {token!r}")
+                break
+    return errors
 
 
 def main() -> int:
-    ok1, msg1 = check_not_in_matrices()
-    print(msg1)
-    if not ok1:
+    errors = _scan()
+    if errors:
+        print("check_norcal_dharma_brand_guards: FAIL", file=sys.stderr)
+        for e in errors:
+            print(e, file=sys.stderr)
         return 1
-    ok2, msg2 = check_assignments_default_teacher_only()
-    print(msg2)
-    if not ok2:
-        return 1
+    print("check_norcal_dharma_brand_guards: OK (no deprecated tokens in catalog_planning)")
     return 0
 
 

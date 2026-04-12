@@ -1,32 +1,31 @@
 # Phoenix Omega Manga Catalog Plan
 
-**13 Teachers x 27 Brands x 10 Genres x 15 Topics = Full Catalog**
+**12 Teachers x 26 Brands x 10 Genres x 15 Topics = Full Catalog**
 
 ---
 
-## Teachers (13)
+## Teachers (12)
 
 | # | Teacher ID | Tradition | Primary Brands |
 |---|-----------|-----------|---------------|
-| 1 | ahjan | Buddhism (contemporary) | stillness_press, cognitive_clarity |
-| 2 | ajahn_x | Buddhism (Thai Forest) | stillness_press |
-| 3 | maat | Egyptian / Sufi | norcal_dharma |
-| 4 | ra | Egyptian solar | norcal_dharma |
-| 5 | joshin | Zen Buddhism | stillness_press |
-| 6 | junko | Japanese contemplative | inner_security_tw, inner_security_hk |
-| 7 | master_feung | Chinese internal arts | stabilizer_tw, stabilizer_hk, stabilizer_cn |
-| 8 | master_sha | Chinese healing | sleep_repair_tw, sleep_repair_hk, sleep_repair_cn, sleep_repair_sg |
-| 9 | master_wu | Chinese martial/spiritual | panic_first_aid_tw, panic_first_aid_hk, panic_first_aid_cn, panic_first_aid_sg |
-| 10 | miki | Japanese mindfulness | gen_z_grounding_tw, gen_z_grounding_hk, gen_z_grounding_cn, gen_z_grounding_sg |
-| 11 | omote | Japanese body practice | grief_companion_tw, grief_companion_hk, grief_companion_cn, grief_companion_sg |
-| 12 | pamela_fellows | Western somatic | cognitive_clarity |
-| 13 | sai_ma | Indian devotional | norcal_dharma |
+| 1 | ahjan | Buddhism (contemplative + forest-simplicity strands) | stillness_press |
+| 2 | joshin | Zen Buddhism | cognitive_clarity |
+| 3 | maat | Egyptian / Sufi | heart_balance |
+| 4 | ra | Egyptian solar | solar_return |
+| 5 | junko | Japanese contemplative | relational_calm |
+| 6 | master_feung | Chinese internal arts | qi_foundation |
+| 7 | master_sha | Chinese healing | sleep_restoration |
+| 8 | master_wu | Chinese martial/spiritual | warrior_calm |
+| 9 | miki | Japanese mindfulness | digital_ground |
+| 10 | omote | Japanese body practice | body_memory |
+| 11 | pamela_fellows | Western somatic | somatic_wisdom |
+| 12 | sai_ma | Indian devotional | devotion_path |
 
 ---
 
 ## Brand-Teacher-Genre Matrix (Manga Series per Brand)
 
-### 1. STILLNESS PRESS (en_US) — Teachers: ahjan, ajahn_x, joshin
+### 1. STILLNESS PRESS (en_US) — Teachers: ahjan, joshin
 **Families:** alarm_fear_systems, collapse_burnout, existential_void
 **Topics:** anxiety, burnout, depression, sleep_anxiety, somatic_healing, grief, compassion_fatigue, courage
 
@@ -246,16 +245,15 @@
 
 | Brand Group | Brands | Teachers | Series/Brand | Titles/Series | Total Series | Total Titles |
 |-------------|--------|----------|-------------|---------------|-------------|-------------|
-| Stillness Press | 1 | 3 | 24 | 80-100 | 24 | 1,970 |
+| Stillness Press | 1 | 2 | 36 | 80-100 | 36 | 2,955 |
 | Cognitive Clarity | 1 | 2 | 24 | 80-85 | 24 | 1,980 |
-| NorCal Dharma | 1 | 3 | 12 | 80-85 | 12 | 985 |
 | Stabilizer (4 locales) | 4 | 1 | 12 | 80-85 | 48 | 3,940 |
 | Sleep Repair (4 locales) | 4 | 1 | 12 | 80-85 | 48 | 3,940 |
 | Panic First Aid (4 locales) | 4 | 1 | 12 | 80-85 | 48 | 3,940 |
 | Gen Z Grounding (4 locales) | 4 | 1 | 12 | 80-85 | 48 | 3,940 |
 | Grief Companion (4 locales) | 4 | 1 | 12 | 80-85 | 48 | 3,960 |
 | Inner Security (4 locales) | 4 | 1 | 12 | 80-85 | 48 | 3,960 |
-| **TOTALS** | **27** | **13** | **12-24** | **80-100** | **348** | **28,615** |
+| **TOTALS** | **26** | **12** | **12-24** | **80-100** | **336** | **27,630** |
 
 ---
 

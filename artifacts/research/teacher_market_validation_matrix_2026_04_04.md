@@ -12,7 +12,7 @@
 |------|----------|-----------|
 | **Tier 1 — Launch-ready, broad market** | ahjan, master_feung, pamela_fellows, miki | Traditions map directly to proven consumer search language; low misunderstanding risk; multi-locale fit |
 | **Tier 2 — Strong fit, specific markets** | joshin, junko, master_wu, sai_ma, master_sha | Deep resonance in target locales; need careful positioning to avoid niche perception |
-| **Tier 3 — Niche/emerging, careful rollout** | omote, maat, ra, ajahn_x | Unique positioning but thinner existing market; higher education burden; selective locale launch |
+| **Tier 3 — Niche/emerging, careful rollout** | omote, maat, ra, ahjan | Unique positioning but thinner existing market; higher education burden; selective locale launch |
 
 ---
 
@@ -53,7 +53,7 @@
 
 ---
 
-### 2. Ajahn X (Thai Forest Buddhism)
+### 2. Ahjan (Thai Forest Buddhism)
 
 **Tradition:** Thai Forest Buddhist monasticism, Theravada meditation, renunciation practice.
 
@@ -432,7 +432,7 @@
 | Teacher | Best Markets | Consumer Language | Competition Level | Risk | Priority Launch Locales |
 |---------|-------------|-------------------|-------------------|------|------------------------|
 | **ahjan** | en-US, ja-JP, ko-KR, zh-TW | mindfulness, grounding, meditation, self-compassion | Medium (books) / Low (manga) | LOW | en-US > ja-JP > ko-KR > zh-TW |
-| **ajahn_x** | en-US, ja-JP | forest meditation, monastic wisdom, letting go | Low | LOW-MED | en-US > ja-JP |
+| **ahjan** | en-US, ja-JP | forest meditation, monastic wisdom, letting go | Low | LOW-MED | en-US > ja-JP |
 | **joshin** | ja-JP, en-US, ko-KR | zen clarity, dropping the story, inquiry | Medium (Zen books) / Low (manga) | LOW | ja-JP > en-US > ko-KR |
 | **junko** | ja-JP, en-US, de-DE | radical acceptance, beginner's mind, wabi-sabi | Medium (aesthetic books) / Low (manga) | LOW | ja-JP > en-US > de-DE |
 | **maat** | en-US, fr-FR | shadow work, truth practice, inner balance | Very Low | MED-HIGH | en-US > fr-FR |
@@ -469,7 +469,7 @@
 
 ### Careful Rollout Teachers (selective locales, higher education burden)
 
-10. **Ajahn X** — Niche but loyal Western Theravada audience. en-US primary.
+10. **Ahjan** — Niche but loyal Western Theravada audience. en-US primary.
 11. **Omote** — Unique "masks we wear" positioning. Requires consumer language bridge away from Noh theater framing. ja-JP and en-US.
 12. **Maat** — Genuine whitespace in Egyptian wisdom wellness. Shadow-work trend provides entry. en-US primary, fr-FR secondary. Monitor for market reception before expanding.
 13. **Ra** — Witnessing/awareness practice has audience overlap with existing teachers (Tolle, Mooji). "Ra" naming requires careful management. en-US and fr-FR only initially.

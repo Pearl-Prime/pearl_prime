@@ -80,7 +80,7 @@ Generated: 2026-04-04 | Sources: 4 Pearl_Research reports + full config audit
 
 | Teacher | Tradition | Best Markets | Risk |
 |---------|-----------|-------------|------|
-| **ajahn_x** | Thai Forest Buddhism | en_US | Loyal but niche Western Theravada audience |
+| **ahjan** | Buddhism (contemplative / forest-simplicity strands) | en_US | Same teacher as Stillness Press; forest tone is a *strand*, not a separate imprint |
 | **omote** | Japanese body practice | ja_JP, en_US | "Masks" positioning needs consumer language bridge |
 | **maat** | Egyptian/Sufi | en_US, fr_FR | Genuine whitespace but education burden |
 | **ra** | Egyptian solar | en_US, fr_FR | "Ra" naming risks Law of One association |
@@ -149,9 +149,9 @@ corporate_managers, educators, entrepreneurs, first_responders, gen_alpha_studen
 | Atom files | 6,162 | 172 persona×topic pairs, 166 with full 6-slot coverage |
 | Persona×topic combos with STORY atoms | 166 | Production-ready for compile |
 | Pen name authors designed | 452 | Only 4 committed to author_registry.yaml |
-| Brands (operational) | 3 | stillness_press, cognitive_clarity, norcal_dharma |
+| Brands (operational) | 2 | stillness_press, cognitive_clarity |
 | Brand archetypes (planned) | 24 | In brand_archetype_registry.yaml |
-| Teachers assigned to brands | 2 | ahjan, ajahn_x only |
+| Teachers assigned to brands | 2 | ahjan, joshin (Phase 1 showcase; full roster expands in later phases) |
 
 ### Title Counts
 
@@ -160,7 +160,7 @@ corporate_managers, educators, entrepreneurs, first_responders, gen_alpha_studen
 | **Per brand** | 15 topics × 10 personas × ~0.28 arc coverage | ~42 |
 | **Per locale (en_US)** | 24 brands × 42 titles | 1,008 |
 | **All 13 locales** | 1,008 × 13 | **13,104** |
-| **Pilot (Phase 1)** | 3 brands × 10 topics × ~12 arcs | **354** |
+| **Pilot (Phase 1)** | 2 brands × 10 topics × ~12 arcs | **~236** |
 | **Theoretical max** | 452 authors × 15 topics × 23 formats | 155,000+ |
 
 ### Teacher Mode vs Standard Mode
@@ -169,7 +169,7 @@ corporate_managers, educators, entrepreneurs, first_responders, gen_alpha_studen
 |------|-----------|--------|--------|
 | **Teacher Mode** | 1 teacher = 1 brand, teacher's wisdom atoms | stillness_press, cognitive_clarity | ~84 per teacher |
 | **Standard Mode** | Pen name authors, brand archetypes | 24 planned brands | ~42 per brand |
-| **Church Mode** | Distribution-only (NorCal Dharma) | norcal_dharma | ~42 |
+| **Church Mode** | Distribution-only export rows (no Teacher Mode); unified under Stillness Press | stillness_press | ~42 |
 
 ### Platform Distribution per Locale
 

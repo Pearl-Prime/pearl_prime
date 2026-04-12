@@ -1,4 +1,4 @@
-# Teacher manga character prompts — img2img style transfer for 13 core teachers.
+# Teacher manga character prompts — img2img style transfer for 12 core teachers.
 # Authority: config/manga/style_archetypes.yaml, SOURCE_OF_TRUTH/teacher_banks/
 # Used by: scripts/image_generation/manga_teacher_batch.py
 #
@@ -27,7 +27,8 @@ teachers:
       gentle eyes with depth and stillness, monastic simplicity, simple robes or
       clean modern clothing, expression is calm present quietly radiating warmth,
       subtle golden light aura around the figure, background soft bokeh of temple
-      garden or meditation hall, Studio Ghibli meets Vagabond contemplative scenes,
+      garden, meditation hall, or misty forest path with dappled light,
+      Studio Ghibli meets Vagabond contemplative scenes,
       high detail face, clean linework
     negative: >-
       chibi, exaggerated, action pose, bright neon, horror, dark shadows,
@@ -50,23 +51,6 @@ teachers:
     negative: >-
       cute, pastel, chibi, comedic, action battle, speed lines,
       flat colors, simple background
-
-  ajahn_x:
-    display_name: "Ajahn X"
-    style_archetype: dark_psychological
-    ip_adapter_weight: 0.85
-    img2img_denoise: 0.76
-    positive: >-
-      seinen manga character, clean precise ink linework, minimal screentone,
-      high white space, face is serene but alert eyes slightly narrowed in
-      gentle observation, simple monastic appearance, expression balances warmth
-      with quiet discipline, atmospheric ink wash background misty forest or
-      dawn mountain, style of Blade of the Immortal quiet moments meets Mushishi
-      contemplative framing, precise anatomical proportions detailed hands
-      clean manga linework
-    negative: >-
-      neon colors, exaggerated expressions, chibi, action pose, horror,
-      busy background, sparkles
 
   master_feung:
     display_name: "Master Feung"

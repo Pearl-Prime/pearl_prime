@@ -353,7 +353,6 @@ TEACHER_BOOKS = {
     "awakening_press": {"title": "The Fire That Sees", "subtitle": "Radical self-inquiry for the devoted seeker", "author": "Adi Da", "teacher_override": "adi_da", "topic": "self_worth", "colors_override": ["#4A1A2A", "#1A0A10"], "accent_override": "#FF6B35", "display_name_override": "Awakening Press"},
     "stillness_press": {"title": "The Alarm You Learned to Ignore", "subtitle": "Recognizing what your body already knows", "author": "Lena Thorne", "topic": "anxiety"},
     "cognitive_clarity": {"title": "The Seeing Mind", "subtitle": "When clarity arrives before the answer does", "author": "Ada Park", "topic": "anxiety"},
-    "norcal_dharma": {"title": "The Forest Edge", "subtitle": "Where your boundaries were all along", "author": "Rowan Beck", "topic": "boundaries"},
     "somatic_wisdom": {"title": "The Body Knows First", "subtitle": "A polyvagal guide to what you already feel", "author": "Claire Ashford", "topic": "anxiety"},
     "qi_foundation": {"title": "Root and Breath", "subtitle": "Qi cultivation for the overwhelmed system", "author": "Master Feung", "topic": "burnout"},
     "digital_ground": {"title": "Scroll Stop", "subtitle": "Digital-age calm for the always-on generation", "author": "Miki", "topic": "imposter_syndrome"},

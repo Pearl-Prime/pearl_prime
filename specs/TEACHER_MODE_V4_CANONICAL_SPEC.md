@@ -119,13 +119,13 @@ Example:
 
 ```yaml
 teachers:
-  ajahn_x:
-    display_name: "Ajahn X"
-    kb_id: "ajahn_x"
-    doctrine_profile: "theravada_minimalist"
+  ahjan:
+    display_name: "Ahjan"
+    kb_id: "ahjan"
+    doctrine_profile: "ahjan_contemplative"
     allowed_topics: [anxiety, shame, self_worth]
     disallowed_topics: [manifestation, get_rich_quick]
-    allowed_engines: [shame, anxiety]
+    allowed_engines: [shame, false_alarm, overwhelm, spiral, watcher, grief, comparison]
     allowed_resolution_types: [open_loop, internal_shift_only]
     identity_shift_allowed: false
     preferred_formats: [F006, standard_book]
@@ -184,7 +184,7 @@ Add optional fields to atom YAML:
 
 ```yaml
 teacher:
-  teacher_id: ajahn_x
+  teacher_id: ahjan
   source_refs:
     - doc_id: "raw/teachings_2019_retreat_01.txt"
       span: [1250, 1680]       # byte offsets or line range
@@ -283,7 +283,7 @@ Add:
 
 ```json
 {
-  "teacher_id": "ajahn_x",
+  "teacher_id": "ahjan",
   "topic": "self_worth",
   "persona": "nyc_executives",
   "format_id": "F006",
@@ -343,7 +343,7 @@ Add tool:
 
 Reuse approval tool pattern with a teacher scope:
 
-`tools/approval/approve_atoms.py --teacher ajahn_x ...`
+`tools/approval/approve_atoms.py --teacher ahjan ...`
 
 - Moves: teacher candidate → teacher approved
 - Adds approval metadata
@@ -389,7 +389,7 @@ Add exercise categories (if not already): breath, somatic scan, journaling promp
 ### 14.1 Build teacher KB
 
 ```bash
-python3 tools/teacher_mining/build_kb.py --teacher ajahn_x
+python3 tools/teacher_mining/build_kb.py --teacher ahjan
 ```
 
 ### 14.2 Report gaps for a planned book
@@ -398,7 +398,7 @@ python3 tools/teacher_mining/build_kb.py --teacher ajahn_x
 python3 phoenix_v4/qa/report_teacher_gaps.py \
   --plan artifacts/plan.json \
   --arc config/source_of_truth/master_arcs/...yaml \
-  --teacher ajahn_x \
+  --teacher ahjan \
   --out artifacts/gaps.json
 ```
 
@@ -406,16 +406,16 @@ python3 phoenix_v4/qa/report_teacher_gaps.py \
 
 ```bash
 python3 tools/teacher_mining/gap_fill.py \
-  --teacher ajahn_x \
+  --teacher ahjan \
   --gaps artifacts/gaps.json \
-  --out SOURCE_OF_TRUTH/teacher_banks/ajahn_x/candidate_atoms
+  --out SOURCE_OF_TRUTH/teacher_banks/ahjan/candidate_atoms
 ```
 
 ### 14.4 Approve
 
 ```bash
-python3 tools/approval/approve_atoms.py --teacher ajahn_x list
-python3 tools/approval/approve_atoms.py --teacher ajahn_x approve <atom_id>
+python3 tools/approval/approve_atoms.py --teacher ahjan list
+python3 tools/approval/approve_atoms.py --teacher ahjan approve <atom_id>
 ```
 
 ### 14.5 Compile (unchanged; teacher passed in BookSpec)
@@ -424,7 +424,7 @@ python3 tools/approval/approve_atoms.py --teacher ajahn_x approve <atom_id>
 python3 scripts/run_pipeline.py \
   --topic self_worth --persona nyc_executives --structural-format F006 \
   --arc config/source_of_truth/master_arcs/...yaml \
-  --teacher ajahn_x --teacher-mode \
+  --teacher ahjan --teacher-mode \
   --out artifacts/teacher_mode.plan.json
 ```
 

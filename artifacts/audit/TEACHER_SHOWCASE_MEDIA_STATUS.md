@@ -5,7 +5,7 @@
 **Page:** `brand-wizard-app/public/teacher_showcase.html`  
 **Showcase teachers (13):** ahjan, adi_da, joshin, junko, maat, master_feung, master_sha, master_wu, miki, omote, pamela_fellows, ra, sai_ma  
 
-**Note:** `ajahn_x` has pipeline assets under `assets/` (panels, audiobook ch1, audiobook cover) but **no** teacher section on this page — treated as **orphaned / out of scope** for the 13× matrix below.
+**Note:** `ahjan` has pipeline assets under `assets/` (panels, audiobook ch1, audiobook cover) but **no** teacher section on this page — treated as **orphaned / out of scope** for the 13× matrix below.
 
 ---
 
@@ -13,7 +13,7 @@
 
 | Bucket | Count / notes |
 |--------|----------------|
-| Legacy ebook PNGs (`covers/*.png`) | 12 files (no `ajahn_x` in root list) |
+| Legacy ebook PNGs (`covers/*.png`) | 12 files (no `ahjan` in root list) |
 | KDP covers (`covers/kdp/*.png`) | 13 teachers × 4 roles = 52 files |
 | Audiobook jackets (`covers/audiobook/`) | 13 files |
 | Manga character + topic PNGs | See tree; **maat** has no `maat_cover_*.png` |
@@ -105,7 +105,7 @@ Legend: **Disk** / **HTML** / **Visible** (collapsible OK).
 | B | Maat panels at wrong paths | Move into `manga_panels/maat/page_00N.png` |
 | C | YouTube landscape MP4s | None on disk; placeholder copy updated to “coming soon” |
 | C | Investor demo audio | No directory / files |
-| — | `ajahn_x` assets | Orphaned relative to this HTML (no section) |
+| — | `ahjan` assets | Orphaned relative to this HTML (no section) |
 
 ---
 
@@ -127,7 +127,7 @@ Legend: **Disk** / **HTML** / **Visible** (collapsible OK).
 
 1. **YouTube** 5‑minute landscape MP4s for each teacher — not present under `assets/video/youtube/`.
 2. **Maat** dedicated `maat_cover_*.png` topic cover — optional; formats currently use character front.
-3. **ajahn_x** — decide whether to add a 14th section or retire loose assets.
+3. **ahjan** — decide whether to add a 14th section or retire loose assets.
 4. **Investor demo** clips — separate surface; not part of teacher showcase.
 
 ---

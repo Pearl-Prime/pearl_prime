@@ -58,6 +58,11 @@ BRAND_PROMPTS = {
         "zen water and wind chime texture, natural ambient field recording with soft pad layer" + _LOOP_SUFFIX,
         "deep warm bass hum with soft overtones, therapeutic 6 BPM breath pacing embedded" + _LOOP_SUFFIX,
         "morning mist strings and harp harmonics, ethereal and weightless, slow tonal drift" + _LOOP_SUFFIX,
+        "singing bowl resonance layered with deep meditation drone, sacred space" + _LOOP_SUFFIX,
+        "temple bell decay stretched into infinite reverb, incense smoke atmosphere" + _LOOP_SUFFIX,
+        "earth frequency deep bass with subtle overtone singing, grounding" + _LOOP_SUFFIX,
+        "soft sitar drone with tanpura texture, warm devotional atmosphere" + _LOOP_SUFFIX,
+        "mountain wind through pine trees with distant monastery bell, solitude" + _LOOP_SUFFIX,
     ],
     "cognitive_clarity": [
         "clean electronic pad wash, bright focused energy, alpha wave frequency undertone" + _LOOP_SUFFIX,
@@ -65,13 +70,6 @@ BRAND_PROMPTS = {
         "subtle binaural texture, warm synth foundation, mental clarity atmosphere" + _LOOP_SUFFIX,
         "glass-like tones with soft granular texture, precision and space, clear thinking" + _LOOP_SUFFIX,
         "gentle electronic hum with slow filter sweep, productive calm energy" + _LOOP_SUFFIX,
-    ],
-    "norcal_dharma": [
-        "singing bowl resonance layered with deep meditation drone, sacred space" + _LOOP_SUFFIX,
-        "temple bell decay stretched into infinite reverb, incense smoke atmosphere" + _LOOP_SUFFIX,
-        "earth frequency deep bass with subtle overtone singing, grounding" + _LOOP_SUFFIX,
-        "soft sitar drone with tanpura texture, warm devotional atmosphere" + _LOOP_SUFFIX,
-        "mountain wind through pine trees with distant monastery bell, solitude" + _LOOP_SUFFIX,
     ],
     "zh_brands": [
         "guzheng harmonics with deep reverb, chinese ambient texture, contemplative" + _LOOP_SUFFIX,

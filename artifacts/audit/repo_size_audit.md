@@ -109,7 +109,7 @@ prune-packable: 2,810
 | 5.2 MB | artifacts/audiobook_samples/ra_self_worth_ch1.mp3 | .mp3 | YES |
 | 5.2 MB | artifacts/audiobook_samples/omote_sleep_anxiety_ch1.mp3 | .mp3 | YES |
 | 5.2 MB | artifacts/audiobook_samples/junko_overthinking_ch1.mp3 | .mp3 | YES |
-| 5.1 MB | artifacts/audiobook_samples/ajahn_x_boundaries_ch1.mp3 | .mp3 | YES |
+| 5.1 MB | artifacts/audiobook_samples/ahjan_boundaries_ch1.mp3 | .mp3 | YES |
 | 5.1 MB | artifacts/audiobook_samples/master_feung_burnout_ch1.mp3 | .mp3 | YES |
 | 5.0 MB | artifacts/audiobook_samples/pamela_fellows_burnout_ch1.mp3 | .mp3 | YES |
 | 4.9 MB | artifacts/audiobook_samples/master_sha_grief_ch1.mp3 | .mp3 | YES |

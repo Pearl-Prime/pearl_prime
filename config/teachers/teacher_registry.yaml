@@ -30,9 +30,11 @@ teachers:
       allow_generic_fallback_for_scene: true
 
   ahjan:
+    formal_name: "ahjan sensei"
     display_name: "Ahjan"
     kb_id: "ahjan"
     doctrine_profile: "ahjan_contemplative"
+    # The teacher's name is "ahjan" — not a Thai honorific. Short: ahjan; formal: ahjan sensei.
     allowed_topics: *all_topics
     disallowed_topics: [manifestation, get_rich_quick]
     allowed_engines: [shame, false_alarm, overwhelm, spiral, watcher, grief, comparison]

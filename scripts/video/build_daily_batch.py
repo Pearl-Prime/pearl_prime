@@ -226,7 +226,7 @@ def main() -> int:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
     ap = argparse.ArgumentParser(description="Build daily video publishing batch")
-    ap.add_argument("--brand", default=None, help="Brand filter (stillness_press, cognitive_clarity, norcal_dharma)")
+    ap.add_argument("--brand", default=None, help="Brand filter (stillness_press, cognitive_clarity, …)")
     ap.add_argument("--date", default=None, help="Target date YYYY-MM-DD (default: today UTC)")
     ap.add_argument("--dry-run", action="store_true", help="Preview selection without writing manifest")
     ap.add_argument("-o", "--output", default=None, help="Override output path for batch manifest")

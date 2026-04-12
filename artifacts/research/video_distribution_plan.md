@@ -28,8 +28,8 @@ Each of the 24 channels has an isolated image bank, unique visual style, dedicat
 | ch_011 | Sketchy/Rough | cognitive_clarity | bold_dynamic | warm_rise | en-AU-Neural2-B | profile_k (3.5s hold, crossfade, lower-third, 9:16-first) |
 | ch_012 | Retro 80s/90s | stillness_press | bold_dynamic | warm_rise | en-US-Neural2-H | profile_l (3.5s hold, zoom-dissolve, word-by-word, 9:16-first) |
 | ch_013 | Geometric/Abstract | cognitive_clarity | abstract_symbolic | neutral_root | en-US-Neural2-A | profile_m (3.0s hold, cut, no caption, 16:9-first) |
-| ch_014 | Ink Wash (Sumi-e) | norcal_dharma | abstract_symbolic | cool_calm | en-US-Neural2-C | profile_n (5.0s hold, dip-to-black, no caption, 16:9-first) |
-| ch_015 | Stained Glass | norcal_dharma | abstract_symbolic | cool_calm | en-GB-Wavenet-A | profile_o (4.5s hold, crossfade, lower-third, 1:1-first) |
+| ch_014 | Ink Wash (Sumi-e) | stillness_press | abstract_symbolic | cool_calm | en-US-Neural2-C | profile_n (5.0s hold, dip-to-black, no caption, 16:9-first) |
+| ch_015 | Stained Glass | stillness_press | abstract_symbolic | cool_calm | en-GB-Wavenet-A | profile_o (4.5s hold, crossfade, lower-third, 1:1-first) |
 | ch_016 | Glitch Art | cognitive_clarity | abstract_symbolic | neutral_root | en-US-Wavenet-D | profile_p (3.0s hold, cut+glitch, full-overlay, 9:16-first) |
 | ch_017 | Pointillism | stillness_press | abstract_symbolic | cool_calm | en-AU-Wavenet-C | profile_q (4.0s hold, dip-to-black, lower-third, 9:16-first) |
 | ch_018 | Collage | stillness_press | abstract_symbolic | neutral_root | en-GB-Neural2-F | profile_r (4.0s hold, crossfade, lower-third, 1:1-first) |
@@ -237,7 +237,6 @@ From upload_config.yaml `brand_platform_map`:
 |-------|------------------|---------|--------|--------|----------|------|
 | stillness_press | _SP | yes | yes | yes | yes | planned |
 | cognitive_clarity | _CC | yes | yes | yes | yes | planned |
-| norcal_dharma | _ND | yes | yes | yes | yes | planned |
 
 Env var pattern: `{PLATFORM_VAR}_{SUFFIX}` (e.g., `YT_CLIENT_ID_SP`, `TIKTOK_CLIENT_KEY_CC`)
 
@@ -388,7 +387,7 @@ UTM:  ?utm_source={platform}&utm_medium=video&utm_campaign={brand_id}
 Where:
   {slug} = {topic}-{persona}-{primary_freebie}
   {platform} = youtube | youtube_shorts | tiktok | instagram | line
-  {brand_id} = stillness_press | cognitive_clarity | norcal_dharma
+  {brand_id} = stillness_press | cognitive_clarity
 ```
 
 ### 4.4 CTA Delivery Mechanisms by Platform
@@ -537,7 +536,7 @@ Pearl_Int must wire:
 - [ ] Install `google-api-python-client`, `google-auth-oauthlib`
 - [ ] Set up OAuth2 credentials per brand:
   - `YT_CLIENT_ID_{suffix}`, `YT_CLIENT_SECRET_{suffix}`, `YT_REFRESH_TOKEN_{suffix}`
-  - Suffix: `_SP` (stillness_press), `_CC` (cognitive_clarity), `_ND` (norcal_dharma)
+  - Suffix: `_SP` (stillness_press), `_CC` (cognitive_clarity)
 - [ ] Implement resumable upload with 10MB chunks (already specified in upload_config)
 - [ ] Implement metadata setting: title, description, tags, category, privacy status
 - [ ] Implement chapter timestamps in description

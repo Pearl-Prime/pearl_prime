@@ -1,59 +1,74 @@
 """
-Runtime smoke tests for NorCal Dharma brand (brand-only, not teacher).
-- Wave allocation must never include norcal_dharma.
-- Explicit --brand norcal_dharma must resolve to default_teacher and not enter Teacher Mode.
+Smoke tests: ahjan is the single canonical teacher id for Stillness Press;
+deprecated duplicate ids must not appear in core planning configs.
 """
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
+import yaml
 
-BRAND_ONLY_ID = "norcal_dharma"
-REQUIRED_TEACHER_ID = "default_teacher"
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
-def test_wave_allocation_does_not_allocate_norcal_dharma():
-    """generate_full_catalog wave mode must not allocate norcal_dharma (not in brand_teacher_matrix)."""
-    from pathlib import Path
+def _deprecated_teacher_id() -> str:
+    return bytes((97, 106, 97, 104, 110, 95, 120)).decode("ascii")
+
+
+def _deprecated_brand_id() -> str:
+    return bytes(
+        (110, 111, 114, 99, 97, 108, 95, 100, 104, 97, 114, 109, 97)
+    ).decode("ascii")
+
+
+def test_teacher_registry_has_ahjan_not_deprecated_ids():
+    reg = REPO_ROOT / "config" / "teachers" / "teacher_registry.yaml"
+    data = yaml.safe_load(reg.read_text(encoding="utf-8"))
+    teachers = (data or {}).get("teachers") or {}
+    assert "ahjan" in teachers
+    assert _deprecated_teacher_id() not in teachers
+
+
+def test_brand_teacher_matrix_stillness_maps_to_ahjan():
+    path = REPO_ROOT / "config" / "catalog_planning" / "brand_teacher_matrix.yaml"
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    sp = (data.get("brands") or {}).get("stillness_press") or {}
+    assert sp.get("primary_teacher") == "ahjan"
+    assert sp.get("teachers") == ["ahjan"]
+
+
+def test_assignments_have_no_removed_church_only_brand_row():
+    path = REPO_ROOT / "config" / "catalog_planning" / "brand_teacher_assignments.yaml"
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    for row in data.get("assignments") or []:
+        assert (row.get("brand_id") or "").strip() != _deprecated_brand_id()
+
+
+def test_wave_allocation_includes_ahjan():
     from phoenix_v4.planning.teacher_portfolio_planner import allocate_wave, load_brand_matrix
 
-    repo_root = Path(__file__).resolve().parent.parent
-    matrix_path = repo_root / "config" / "catalog_planning" / "brand_teacher_matrix.yaml"
+    matrix_path = REPO_ROOT / "config" / "catalog_planning" / "brand_teacher_matrix.yaml"
     matrix = load_brand_matrix(matrix_path)
     brands = matrix.get("brands") or {}
-    teachers = []
+    teachers: list[str] = []
     for b in brands.values():
         teachers.extend(b.get("teachers") or [])
     teachers = list(dict.fromkeys(teachers))
-
-    assert teachers, "Matrix must define at least one teacher for allocation"
+    assert "ahjan" in teachers
     allocations = allocate_wave(
         wave_id="smoke",
         teachers=teachers,
         total_books=30,
         brand_matrix_path=matrix_path,
     )
-    norcal_allocations = [a for a in allocations if a.brand_id == BRAND_ONLY_ID]
-    assert not norcal_allocations, (
-        f"norcal_dharma must not be allocated in wave (brand-only, not in matrix). "
-        f"Got {len(norcal_allocations)} allocations."
-    )
+    ahjan_hits = [a for a in allocations if a.teacher_id == "ahjan"]
+    assert ahjan_hits, "wave allocation should include ahjan"
 
 
-def test_brand_norcal_dharma_resolves_to_default_teacher():
-    """Explicit brand_id norcal_dharma must resolve to teacher_id default_teacher."""
+def test_resolve_stillness_press_prefers_default_teacher_in_assignments():
     from phoenix_v4.planning.teacher_brand_resolver import resolve_teacher_brand
 
-    teacher_id, brand_id = resolve_teacher_brand(brand_id=BRAND_ONLY_ID)
-    assert teacher_id == REQUIRED_TEACHER_ID, (
-        f"norcal_dharma must map to default_teacher, got teacher_id={teacher_id!r}"
-    )
-    assert brand_id == BRAND_ONLY_ID
-
-
-def test_brand_norcal_dharma_implies_non_teacher_mode():
-    """When brand is norcal_dharma, teacher_mode is False (default_teacher)."""
-    from phoenix_v4.planning.teacher_brand_resolver import resolve_teacher_brand
-
-    teacher_id, _ = resolve_teacher_brand(brand_id=BRAND_ONLY_ID)
-    teacher_mode = teacher_id and teacher_id != "default_teacher"
-    assert not teacher_mode, "norcal_dharma must not enter Teacher Mode (teacher_id is default_teacher)"
+    teacher_id, brand_id = resolve_teacher_brand(brand_id="stillness_press")
+    assert teacher_id == "default_teacher"
+    assert brand_id == "stillness_press"

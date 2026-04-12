@@ -2122,7 +2122,7 @@ defaults:
 
 brands:
   stillness_press:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     # topic_focus / persona_focus optional
 
   cognitive_clarity:
@@ -2133,7 +2133,7 @@ teacher_constraints:
   ahjan:
     max_books_per_topic: 4
     max_books_per_persona: 5
-  ajahn_x:
+  ahjan:
     max_books_per_topic: 4
     max_books_per_persona: 5
 ```
@@ -2147,102 +2147,102 @@ teacher_constraints:
 brands:
   # zh-TW (6)
   sleep_repair_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   stabilizer_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   panic_first_aid_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   gen_z_grounding_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   grief_companion_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   inner_security_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   # zh-HK (6)
   sleep_repair_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   stabilizer_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   panic_first_aid_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   gen_z_grounding_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   grief_companion_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   inner_security_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   # zh-CN (6)
   sleep_repair_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   stabilizer_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   panic_first_aid_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   gen_z_grounding_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   grief_companion_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   inner_security_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   # zh-SG (6)
   sleep_repair_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   stabilizer_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   panic_first_aid_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   gen_z_grounding_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   grief_companion_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   inner_security_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
 
@@ -2250,7 +2250,7 @@ teacher_constraints:
   ahjan:
     max_books_per_topic: 42
     max_books_per_persona: 42
-  ajahn_x:
+  ahjan:
     max_books_per_topic: 42
     max_books_per_persona: 42
 ```
@@ -2279,7 +2279,7 @@ assignments:
 
   # Example: assign a specific teacher for a brand when needed
   # - brand_id: stillness_press
-  #   teacher_id: ajahn_x
+  #   teacher_id: ahjan
   #   topic_ids: [self_worth, shame]
   #   persona_ids: [nyc_executives]
 ```
@@ -2342,7 +2342,7 @@ teachers:
         default_angle: at_work
         preferred_story_style: narrative
 
-  ajahn_x:
+  ahjan:
     allowed_personas:
       - millennial_women_professionals
       - tech_finance_burnout
@@ -2394,9 +2394,9 @@ teachers:
       require_teacher_exercise: true
       allow_generic_fallback_for_scene: true
 
-  ajahn_x:
+  ahjan:
     display_name: "Ajahn X"
-    kb_id: "ajahn_x"
+    kb_id: "ahjan"
     doctrine_profile: "theravada_minimalist"
     allowed_topics: [anxiety, shame, self_worth]
     disallowed_topics: [manifestation, get_rich_quick]
@@ -7201,7 +7201,7 @@ defaults:
 
 brands:
   stillness_press:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     # topic_focus / persona_focus optional
 
   cognitive_clarity:
@@ -7212,7 +7212,7 @@ teacher_constraints:
   ahjan:
     max_books_per_topic: 4
     max_books_per_persona: 5
-  ajahn_x:
+  ahjan:
     max_books_per_topic: 4
     max_books_per_persona: 5
 ```
@@ -7226,102 +7226,102 @@ teacher_constraints:
 brands:
   # zh-TW (6)
   sleep_repair_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   stabilizer_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   panic_first_aid_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   gen_z_grounding_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   grief_companion_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   inner_security_tw:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   # zh-HK (6)
   sleep_repair_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   stabilizer_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   panic_first_aid_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   gen_z_grounding_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   grief_companion_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   inner_security_hk:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   # zh-CN (6)
   sleep_repair_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   stabilizer_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   panic_first_aid_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   gen_z_grounding_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   grief_companion_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   inner_security_cn:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   # zh-SG (6)
   sleep_repair_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   stabilizer_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   panic_first_aid_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   gen_z_grounding_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   grief_companion_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
   inner_security_sg:
-    teachers: [ahjan, ajahn_x]
+    teachers: [ahjan]
     max_books_per_topic: 42
     max_books_per_persona: 42
 
@@ -7329,7 +7329,7 @@ teacher_constraints:
   ahjan:
     max_books_per_topic: 42
     max_books_per_persona: 42
-  ajahn_x:
+  ahjan:
     max_books_per_topic: 42
     max_books_per_persona: 42
 ```
@@ -7358,7 +7358,7 @@ assignments:
 
   # Example: assign a specific teacher for a brand when needed
   # - brand_id: stillness_press
-  #   teacher_id: ajahn_x
+  #   teacher_id: ahjan
   #   topic_ids: [self_worth, shame]
   #   persona_ids: [nyc_executives]
 ```
@@ -7421,7 +7421,7 @@ teachers:
         default_angle: at_work
         preferred_story_style: narrative
 
-  ajahn_x:
+  ahjan:
     allowed_personas:
       - millennial_women_professionals
       - tech_finance_burnout
@@ -7473,9 +7473,9 @@ teachers:
       require_teacher_exercise: true
       allow_generic_fallback_for_scene: true
 
-  ajahn_x:
+  ahjan:
     display_name: "Ajahn X"
-    kb_id: "ajahn_x"
+    kb_id: "ahjan"
     doctrine_profile: "theravada_minimalist"
     allowed_topics: [anxiety, shame, self_worth]
     disallowed_topics: [manifestation, get_rich_quick]
@@ -8972,7 +8972,7 @@ Here’s what the repo shows:
 | Teacher   | STORY | EXERCISE | HOOK | REFLECTION | INTEGRATION | Notes |
 |----------|-------|----------|------|------------|-------------|--------|
 | **ahjan** | 11   | 65       | 0    | 0          | 0           | Only teacher with a bank |
-| **ajahn_x** | —  | —        | —    | —          | —           | No `approved_atoms` (no bank) |
+| **ahjan** | —  | —        | —    | —          | —           | No `approved_atoms` (no bank) |
 
 - **ahjan**
   - **EXERCISE:** Enough for a 12-ch book (e.g. F006 needs 12; we have 65).
@@ -8981,8 +8981,8 @@ Here’s what the repo shows:
     - No STORY in bands 1, 2, 4, 5 → any arc that requires those bands fails the coverage gate.
   - **HOOK / REFLECTION / INTEGRATION:** 0 → below F006’s k_min (12 each), so not 100% for those slot types.
 
-- **ajahn_x**  
-  No `SOURCE_OF_TRUTH/teacher_banks/ajahn_x/approved_atoms` → 0% coverage.
+- **ahjan**  
+  No `SOURCE_OF_TRUTH/teacher_banks/ahjan/approved_atoms` → 0% coverage.
 
 ### How “100%” is enforced
 
@@ -8998,9 +8998,9 @@ Here’s what the repo shows:
   - Total STORY count ≥ required STORY slots (e.g. 12 for 12-ch).
   - STORY counts per band ≥ what the arc’s `emotional_curve` requires per band.
 - **Exercises:** Same idea: EXERCISE count ≥ required EXERCISE slots (ahjan already has enough for 12-ch).
-- **ajahn_x:** Either add and approve a full bank (STORY + EXERCISE + any other required slot types) or don’t assign them to books until that’s done.
+- **ahjan:** Either add and approve a full bank (STORY + EXERCISE + any other required slot types) or don’t assign them to books until that’s done.
 
-I can next: (1) draft a small script that reports “required vs available” STORY/EXERCISE (and by band) per teacher for a given format/arc, or (2) summarize the exact gaps (e.g. “ahjan needs 1 more STORY and STORY in bands 1,2,4,5; ajahn_x needs a full bank”). Which do you want?
+I can next: (1) draft a small script that reports “required vs available” STORY/EXERCISE (and by band) per teacher for a given format/arc, or (2) summarize the exact gaps (e.g. “ahjan needs 1 more STORY and STORY in bands 1,2,4,5; ahjan needs a full bank”). Which do you want?
 
 ---
 
@@ -9869,7 +9869,7 @@ Checking how many arcs exist and what one book requires:
 
 ### 2. What’s actually true right now
 
-- **Teachers with banks:** Only **ahjan** has a teacher bank under `SOURCE_OF_TRUTH/teacher_banks/`. **ajahn_x** is in `config/teachers/teacher_registry.yaml` but has **no** `teacher_banks/ajahn_x/` (no approved atoms).
+- **Teachers with banks:** Only **ahjan** has a teacher bank under `SOURCE_OF_TRUTH/teacher_banks/`. **ahjan** is in `config/teachers/teacher_registry.yaml` but has **no** `teacher_banks/ahjan/` (no approved atoms).
 - **Ahjan’s inventory:** 11 STORY, 65 EXERCISE (plus QUOTE, TEACHING, etc.). A single F006 book can require e.g. **20 STORY** (one per chapter) with a specific band distribution (e.g. band_1, band_2, …, band_5). So **one** 20‑chapter book can already demand more STORY than ahjan has, and band mix may not match.
 - **Arcs:** There are **456** master arcs (persona × topic × engine × format). Even if ahjan is only allowed a subset (by `allowed_topics` / `allowed_engines`), that’s still many books. So “all stories and exercises for 100% book writing for all personas and topics” is **not** satisfied.
 
@@ -10504,7 +10504,7 @@ are all teacher 100% for books for all personas and topics?
 
 No. Teachers are not at 100% teacher-native coverage for all books across all personas and topics.
 
-- **Only one teacher has a bank:** `SOURCE_OF_TRUTH/teacher_banks/` has **ahjan** only. Anyone else in the registry (e.g. ajahn_x) has no approved/candidate atoms.
+- **Only one teacher has a bank:** `SOURCE_OF_TRUTH/teacher_banks/` has **ahjan** only. Anyone else in the registry (e.g. ahjan) has no approved/candidate atoms.
 - **Coverage is per book:** Each book is one arc (persona × topic × engine × format). “100% for all personas and topics” would mean every such arc that a teacher is allowed to serve has enough **teacher** STORY/EXERCISE (and other slots) so the **teacher-only** coverage gate passes. That’s not true today.
 - **Books can still be built:** We added **canonical fallback** in the pool: when a teacher doesn’t have enough atoms for a slot, the system fills from the same (persona, topic) pools as non-teacher books and tags those as `canonical_fallback`. So teacher books compile; they just use a mix of teacher-native and canonical content until you add more teacher atoms.
 

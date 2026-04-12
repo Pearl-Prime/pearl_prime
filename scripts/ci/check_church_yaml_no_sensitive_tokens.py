@@ -71,7 +71,7 @@ def main() -> int:
         church_docs = args.docs_dir / "church_docs"
         if church_docs.exists():
             paths.extend(church_docs.rglob("*.yaml"))
-    church_paths = [p for p in paths if "norcal_dharma" in p.name or "church" in str(p)]
+    church_paths = [p for p in paths if "stillness_press" in p.name or "church" in str(p)]
     if not church_paths:
         church_paths = [p for p in paths if p.name.endswith(".yaml")]
 

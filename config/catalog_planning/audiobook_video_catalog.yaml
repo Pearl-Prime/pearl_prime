@@ -16,9 +16,17 @@ schema_version: 1
 teacher_brand_channel_map:
   ahjan:
     brands: [stillness_press, cognitive_clarity]
-    primary_channels: [ch_001, ch_004, ch_006]
+    primary_channels: [ch_001, ch_004, ch_006, ch_014, ch_015]
     audiobook_style: default
-    topics: [anxiety, self_worth, impermanence, alarm_systems, pausing]
+    topics:
+      - anxiety
+      - self_worth
+      - impermanence
+      - alarm_systems
+      - pausing
+      - forest_refuge
+      - simplicity
+      - renunciation
 
   pamela_fellows:
     brands: [stillness_press]
@@ -86,12 +94,6 @@ teacher_brand_channel_map:
     audiobook_style: warm
     topics: [compassion, devotion, surrender]
 
-  ajahn_x:
-    brands: [stillness_press, norcal_dharma]
-    primary_channels: [ch_014, ch_015]
-    audiobook_style: default
-    topics: [forest_refuge, simplicity, renunciation]
-
 # ─── LOCALE LANE DEFINITIONS ─────────────────────────────────────────────
 #
 # Two independent production lanes. Video cadence is per-lane.
@@ -104,7 +106,7 @@ lanes:
     audio_platforms: [audible, findaway, spotify, apple_books]
     video_platforms: [youtube, tiktok, instagram_reels]
     trust_tier: new_imprint
-    brands: [stillness_press, cognitive_clarity, norcal_dharma]
+    brands: [stillness_press, cognitive_clarity]
     channels: [ch_001, ch_002, ch_003, ch_004, ch_005, ch_006, ch_007, ch_008,
                ch_009, ch_010, ch_011, ch_012, ch_013, ch_014, ch_015, ch_016,
                ch_017, ch_018, ch_019, ch_020, ch_021, ch_022, ch_023, ch_024]

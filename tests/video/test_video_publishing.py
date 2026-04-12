@@ -430,10 +430,10 @@ class TestEnvHelperSuffixResolution:
         uploader = YouTubeUploader({}, "cognitive_clarity", credential_suffix="_CC", dry_run=True)
         assert uploader._env("YT_CLIENT_SECRET") == "cc-secret-value"
 
-    def test_env_resolves_nd_suffix(self, monkeypatch):
-        monkeypatch.setenv("TIKTOK_ACCESS_TOKEN_ND", "nd-token-value")
-        uploader = TikTokUploader({}, "norcal_dharma", credential_suffix="_ND", dry_run=True)
-        assert uploader._env("TIKTOK_ACCESS_TOKEN") == "nd-token-value"
+    def test_env_resolves_sp_suffix_tiktok(self, monkeypatch):
+        monkeypatch.setenv("TIKTOK_ACCESS_TOKEN_SP", "sp-tt-token-value")
+        uploader = TikTokUploader({}, "stillness_press", credential_suffix="_SP", dry_run=True)
+        assert uploader._env("TIKTOK_ACCESS_TOKEN") == "sp-tt-token-value"
 
     def test_env_empty_suffix_uses_bare_key(self, monkeypatch):
         monkeypatch.setenv("YT_REFRESH_TOKEN", "bare-token")
@@ -484,8 +484,8 @@ class TestMissingCredentialError:
             uploader._env("BILI_SESSDATA")
 
     def test_douyin_missing_access_token_raises(self, monkeypatch):
-        monkeypatch.delenv("DOUYIN_ACCESS_TOKEN_ND", raising=False)
-        uploader = DouyinUploader({}, "norcal_dharma", credential_suffix="_ND", dry_run=False)
+        monkeypatch.delenv("DOUYIN_ACCESS_TOKEN_CC", raising=False)
+        uploader = DouyinUploader({}, "cognitive_clarity", credential_suffix="_CC", dry_run=False)
         with pytest.raises(EnvironmentError, match="Missing required credential"):
             uploader._env("DOUYIN_ACCESS_TOKEN")
 
@@ -502,11 +502,6 @@ class TestCredentialSuffixMapping:
         from scripts.video._config import load_yaml
         cfg = load_yaml("config/video/upload_config.yaml")
         assert cfg["brand_platform_map"]["cognitive_clarity"]["credential_suffix"] == "_CC"
-
-    def test_nd_suffix_in_config(self):
-        from scripts.video._config import load_yaml
-        cfg = load_yaml("config/video/upload_config.yaml")
-        assert cfg["brand_platform_map"]["norcal_dharma"]["credential_suffix"] == "_ND"
 
     def test_suffixes_are_all_unique(self):
         from scripts.video._config import load_yaml

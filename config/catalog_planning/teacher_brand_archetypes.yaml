@@ -1,9 +1,9 @@
-# Teacher Mode Brand Archetypes — 13 brands, each owned by 1 teacher.
+# Teacher Mode Brand Archetypes — 12 brands, each owned by 1 teacher.
 # Authority: config/catalog_planning/teacher_brand_lane_assignments.yaml
 #            artifacts/research/teacher_market_validation_matrix_2026_04_04.md
 #
 # Same structure as brand_archetype_registry.yaml (24 standard brands).
-# These 13 + those 24 = 37 brands per lane.
+# These 12 + those 24 = 36 brands per lane.
 #
 # RULE: Each teacher brand has a UNIQUE persona × topic × emotional_job
 # grouping that does NOT overlap with any standard brand.
@@ -27,16 +27,28 @@ teacher_brand_archetypes:
     discovery_contract:
       keyword_clusters:
         primary: ["alarm system anxiety", "meditation for trauma", "inner light practice"]
-        secondary: ["impermanence acceptance", "contemplative grounding", "self-compassion meditation"]
+        secondary:
+          - "impermanence acceptance"
+          - "contemplative grounding"
+          - "self-compassion meditation"
+          - "forest meditation"
+          - "simple living"
+          - "letting go practice"
+          - "monastic wisdom"
+          - "renunciation"
+          - "retreat at home"
     unique_angle: >
       The alarm is lying. Your nervous system learned to protect you, but now
       it fires when there's no threat. Ahjan teaches you to SEE the alarm
       without obeying it. Not mindfulness-as-relaxation — mindfulness as
-      recognition of the pattern you live inside.
+      recognition of the pattern you live inside. A parallel strand speaks to
+      simplicity and forest refuge: what remains when you stop adding — enough
+      already exists.
     anti_spam_differentiation:
       vs_stabilizer: "Stabilizer calms the nervous system. Stillness Press teaches you to SEE the alarm — recognition before regulation."
       vs_trauma_path: "Trauma Path is safety-first clinical. Stillness Press is contemplative Buddhist — the alarm is a teacher, not an enemy."
       vs_spiritual_ground: "Spiritual Ground seeks connection. Stillness Press sees through the self that seeks."
+      vs_minimal_mind: "Minimal Mind is digital detox. Stillness Press can speak to existential simplicity — renouncing the need to keep adding."
 
   # ── 02 COGNITIVE CLARITY (Joshin) ──────────────────────────────────────
   - brand_id: cognitive_clarity
@@ -61,30 +73,7 @@ teacher_brand_archetypes:
       vs_optimizer: "Optimizer manages focus for productivity. Cognitive Clarity dissolves the thinker entirely."
       vs_spiritual_ground: "Spiritual Ground explores. Cognitive Clarity cuts — direct, no frills, Zen."
 
-  # ── 03 NORCAL DHARMA (Ajahn X) ────────────────────────────────────────
-  - brand_id: norcal_dharma
-    teacher: ajahn_x
-    display_name: "NorCal Dharma"
-    tradition: "Thai Forest Buddhism — renunciation, simplicity, forest refuge"
-    gtm_identity:
-      persona: simplicity_seeker
-      age_range: [30, 65]
-      emotional_job: "find refuge in less"
-      functional_job: "stripping away to reveal what remains"
-      primary_moment: overwhelm_from_excess
-    discovery_contract:
-      keyword_clusters:
-        primary: ["forest meditation", "simple living", "letting go practice"]
-        secondary: ["monastic wisdom", "renunciation", "retreat at home"]
-    unique_angle: >
-      Everything you're adding is making it worse. Ajahn X teaches through
-      subtraction — what happens when you stop acquiring, stop performing,
-      stop building? The forest has one lesson: enough already exists.
-    anti_spam_differentiation:
-      vs_minimal_mind: "Minimal Mind is digital detox. NorCal Dharma is existential — renouncing the need itself."
-      vs_spiritual_ground: "Spiritual Ground explores traditions. NorCal Dharma commits to one: forest, silence, nothing extra."
-
-  # ── 04 SOMATIC WISDOM (Pamela Fellows) ─────────────────────────────────
+  # ── 03 SOMATIC WISDOM (Pamela Fellows) ─────────────────────────────────
   - brand_id: somatic_wisdom
     teacher: pamela_fellows
     display_name: "Somatic Wisdom"
@@ -108,7 +97,7 @@ teacher_brand_archetypes:
       vs_trauma_path: "Trauma Path prioritizes safety. Somatic Wisdom prioritizes understanding — for perfectionists who need the science."
       vs_bio_flow: "Bio Flow optimizes. Somatic Wisdom heals — the body as teacher, not machine."
 
-  # ── 05 QI FOUNDATION (Master Feung) ────────────────────────────────────
+  # ── 04 QI FOUNDATION (Master Feung) ────────────────────────────────────
   - brand_id: qi_foundation
     teacher: master_feung
     display_name: "Qi Foundation"
@@ -131,7 +120,7 @@ teacher_brand_archetypes:
       vs_longevity_lab: "Longevity Lab optimizes biology. Qi Foundation cultivates energy — the Chinese tradition, not the biohacker's."
       vs_stabilizer: "Stabilizer calms. Qi Foundation builds — a foundation that doesn't need calming."
 
-  # ── 06 DIGITAL GROUND (Miki) ───────────────────────────────────────────
+  # ── 05 DIGITAL GROUND (Miki) ───────────────────────────────────────────
   - brand_id: digital_ground
     teacher: miki
     display_name: "Digital Ground"
@@ -154,7 +143,7 @@ teacher_brand_archetypes:
       vs_minimal_mind: "Minimal Mind is digital detox for adults. Digital Ground is identity work for Gen Z — who you are without the phone."
       vs_calm_student: "Calm Student manages exam stress. Digital Ground addresses the deeper crisis — identity dissolution."
 
-  # ── 07 HEART BALANCE (Maat) ────────────────────────────────────────────
+  # ── 06 HEART BALANCE (Maat) ────────────────────────────────────────────
   - brand_id: heart_balance
     teacher: maat
     display_name: "Heart Balance"
@@ -177,7 +166,7 @@ teacher_brand_archetypes:
       vs_gentle_growth: "Gentle Growth explores safely. Heart Balance demands truth — the shadow doesn't wait for you to be ready."
       vs_spiritual_ground: "Spiritual Ground seeks. Heart Balance weighs — the feather of truth, not the curiosity of the seeker."
 
-  # ── 08 RELATIONAL CALM (Junko) ─────────────────────────────────────────
+  # ── 07 RELATIONAL CALM (Junko) ─────────────────────────────────────────
   - brand_id: relational_calm
     teacher: junko
     display_name: "Relational Calm"
@@ -200,7 +189,7 @@ teacher_brand_archetypes:
       vs_relationship_clarity: "Relationship Clarity repairs couples. Relational Calm heals the self-in-relationship — shame, not conflict."
       vs_confidence_core: "Confidence Core builds showing up. Relational Calm stops performing — the mask itself is the problem."
 
-  # ── 09 WARRIOR CALM (Master Wu) ────────────────────────────────────────
+  # ── 08 WARRIOR CALM (Master Wu) ────────────────────────────────────────
   - brand_id: warrior_calm
     teacher: master_wu
     display_name: "Warrior Calm"
@@ -224,7 +213,7 @@ teacher_brand_archetypes:
       vs_stoic_edge: "Stoic Edge builds mental toughness. Warrior Calm dissolves the fight — Wu Wei, not willpower."
       vs_high_performer: "High Performer builds confidence. Warrior Calm builds composure — different thing entirely."
 
-  # ── 10 SLEEP RESTORATION (Master Sha) ──────────────────────────────────
+  # ── 09 SLEEP RESTORATION (Master Sha) ──────────────────────────────────
   - brand_id: sleep_restoration
     teacher: master_sha
     display_name: "Sleep Restoration"
@@ -246,7 +235,7 @@ teacher_brand_archetypes:
     anti_spam_differentiation:
       vs_night_reset: "Night Reset is hypnotic wind-down. Sleep Restoration rebuilds the energy architecture — fixing the system, not the symptom."
 
-  # ── 11 BODY MEMORY (Omote) ────────────────────────────────────────────
+  # ── 10 BODY MEMORY (Omote) ────────────────────────────────────────────
   - brand_id: body_memory
     teacher: omote
     display_name: "Body Memory"
@@ -269,7 +258,7 @@ teacher_brand_archetypes:
       vs_trauma_path: "Trauma Path is clinical safety. Body Memory is Japanese body practice — the archive is in the flesh, not the narrative."
       vs_somatic_wisdom: "Somatic Wisdom explains why. Body Memory listens to where — the body's geography of grief."
 
-  # ── 12 SOLAR RETURN (Ra) ──────────────────────────────────────────────
+  # ── 11 SOLAR RETURN (Ra) ──────────────────────────────────────────────
   - brand_id: solar_return
     teacher: ra
     display_name: "Solar Return"
@@ -292,7 +281,7 @@ teacher_brand_archetypes:
       vs_stabilizer: "Stabilizer recovers from burnout. Solar Return reframes it — burnout as initiation, not injury."
       vs_career_lift: "Career Lift gets unstuck. Solar Return asks: what if being stuck was the beginning, not the problem?"
 
-  # ── 13 DEVOTION PATH (Sai Ma) ─────────────────────────────────────────
+  # ── 12 DEVOTION PATH (Sai Ma) ─────────────────────────────────────────
   - brand_id: devotion_path
     teacher: sai_ma
     display_name: "Devotion Path"

@@ -1,7 +1,7 @@
 # Phoenix Omega — Complete Brand Identity System
 # Authority: teacher_brand_lane_assignments.yaml, teacher_brand_archetypes.yaml
 #
-# 37 brands × 12 lanes = 444 brand instances worldwide.
+# 36 brands × 12 lanes = 432 brand instances worldwide (12 teacher + 24 standard per lane).
 # This file defines the English Global (base) identity for each brand.
 # Locale variants inherit base identity + locale suffix + translated tagline.
 #
@@ -18,7 +18,7 @@
 schema_version: 1
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  TEACHER MODE BRANDS (13)
+#  TEACHER MODE BRANDS (12)
 # ═══════════════════════════════════════════════════════════════════════════
 
 teacher_brands:
@@ -32,7 +32,8 @@ teacher_brands:
       Stillness Press publishes contemplative works rooted in Buddhist inner-light
       tradition. Every title teaches nervous system literacy — not relaxation, but
       recognition. Founded on Ahjan's principle that the alarm is information,
-      not an enemy.
+      not an enemy. Forest-refuge and simplicity strands (renunciation, enough
+      already exists) live here as alternate moods alongside the core alarm-recognition voice.
     brand_identity:
       colophon: "Bell silhouette (single stroke, no fill)"
       primary_colors: ["#4A5568", "#E2E8F0"]     # slate + cloud white
@@ -46,6 +47,13 @@ teacher_brands:
         Muted slate-to-white gradient. Single calligraphic element centered.
         Title in warm gold Cormorant Garamond. No photos. No faces.
         Feels like the moment after the bell stops ringing.
+      alternate_mood_options:
+        deep_forest_green: "#2D3B2D"
+        parchment: "#F5F0E8"
+        bark_brown_accent: "#8B7355"
+        secondary_texture: "pressed_leaf"
+        secondary_cover_template: "earth_tones"
+        secondary_mood: "Forest silence, monastic simplicity — optional palette for renunciation-themed titles"
 
   # ── 02 CLEAR SEEING BOOKS ─────────────────────────────────────────────
   cognitive_clarity:
@@ -70,31 +78,7 @@ teacher_brands:
         No imagery. No decoration. The cover IS the teaching — nothing to
         hold onto. Enso colophon small, bottom right.
 
-  # ── 03 NORCAL DHARMA PRESS ────────────────────────────────────────────
-  norcal_dharma:
-    teacher: ajahn_x
-    display_name: "NorCal Dharma Press"
-    tagline: "Enough already exists"
-    description: >
-      NorCal Dharma Press publishes Thai Forest tradition works on simplicity,
-      renunciation, and the sufficiency of what remains when you stop adding.
-      Ajahn X's teaching: the forest has one lesson — enough already exists.
-      Church-affiliated distribution channel.
-    brand_identity:
-      colophon: "Single tree silhouette (bodhi leaf shape)"
-      primary_colors: ["#2D3B2D", "#F5F0E8"]       # deep forest + parchment
-      accent_color: "#8B7355"                        # bark brown
-      display_font: "Libre Baskerville"
-      body_font: "Lora"
-      cover_template: "earth_tones"
-      texture: "pressed_leaf"
-      mood: "Forest silence, unadorned, monastic"
-      cover_style: >
-        Deep forest green or parchment base. Minimal botanical line drawing.
-        Title in Libre Baskerville, lowercase. Feels like a book you'd find
-        in a forest monastery library.
-
-  # ── 04 FELT SENSE PUBLISHING ──────────────────────────────────────────
+  # ── 03 FELT SENSE PUBLISHING ──────────────────────────────────────────
   somatic_wisdom:
     teacher: pamela_fellows
     display_name: "Felt Sense Publishing"
@@ -117,7 +101,7 @@ teacher_brands:
         rib cage) in fine line. Dusty rose accent. Playfair Display title.
         Feels like a therapy office bookshelf — not clinical, not woo.
 
-  # ── 05 ROOT & MERIDIAN PRESS ──────────────────────────────────────────
+  # ── 04 ROOT & MERIDIAN PRESS ──────────────────────────────────────────
   qi_foundation:
     teacher: master_feung
     display_name: "Root & Meridian Press"
@@ -141,7 +125,7 @@ teacher_brands:
         as geometric art. Gold accents. Noto Serif for cross-locale consistency.
         Feels like a practitioner's manual, not a coffee table book.
 
-  # ── 06 PRESENT TENSE BOOKS ────────────────────────────────────────────
+  # ── 05 PRESENT TENSE BOOKS ────────────────────────────────────────────
   digital_ground:
     teacher: miki
     display_name: "Present Tense Books"
@@ -165,7 +149,7 @@ teacher_brands:
         a moment. Cyan accent like a notification you actually want.
         Space Grotesk type. Feels native to the phone but pointing beyond it.
 
-  # ── 07 FEATHER & SCALE PRESS ──────────────────────────────────────────
+  # ── 06 FEATHER & SCALE PRESS ──────────────────────────────────────────
   heart_balance:
     teacher: maat
     display_name: "Feather & Scale Press"
@@ -188,7 +172,7 @@ teacher_brands:
         eye of truth. Cinzel capitals. Amber accents. Feels like opening a
         book that has been waiting for you specifically.
 
-  # ── 08 BARE FORM BOOKS ────────────────────────────────────────────────
+  # ── 07 BARE FORM BOOKS ────────────────────────────────────────────────
   relational_calm:
     teacher: junko
     display_name: "Bare Form Books"
@@ -211,7 +195,7 @@ teacher_brands:
         a crack, a single stroke, an off-center dot. Cormorant Infant in
         lowercase. Maximum 6 words visible. The emptiness is the design.
 
-  # ── 09 IRON GATE PRESS ────────────────────────────────────────────────
+  # ── 08 IRON GATE PRESS ────────────────────────────────────────────────
   warrior_calm:
     teacher: master_wu
     display_name: "Iron Gate Press"
@@ -234,7 +218,7 @@ teacher_brands:
         crimson. No soft edges. A single red element — a seal, a line,
         a character. Feels like something a warrior would carry.
 
-  # ── 10 NIGHT ARCHITECTURE BOOKS ───────────────────────────────────────
+  # ── 09 NIGHT ARCHITECTURE BOOKS ───────────────────────────────────────
   sleep_restoration:
     teacher: master_sha
     display_name: "Night Architecture Books"
@@ -258,7 +242,7 @@ teacher_brands:
         a doorway, an arch. DM Serif Display, slightly oversized.
         Feels like the book itself is lowering the lights.
 
-  # ── 11 HELD GROUND PRESS ──────────────────────────────────────────────
+  # ── 10 HELD GROUND PRESS ──────────────────────────────────────────────
   body_memory:
     teacher: omote
     display_name: "Held Ground Press"
@@ -282,7 +266,7 @@ teacher_brands:
         a shoulder line, a footprint. Terracotta accent. Literata serif.
         Feels like the book has weight and warmth in your hands.
 
-  # ── 12 EMBER & ASH PUBLISHING ─────────────────────────────────────────
+  # ── 11 EMBER & ASH PUBLISHING ─────────────────────────────────────────
   solar_return:
     teacher: ra
     display_name: "Ember & Ash Publishing"
@@ -305,7 +289,7 @@ teacher_brands:
         Single ember-orange element — a spark, a sun disk, a line of fire.
         Bitter typeface, weighted. Feels like holding something that survived.
 
-  # ── 13 OPEN VESSEL PRESS ──────────────────────────────────────────────
+  # ── 12 OPEN VESSEL PRESS ──────────────────────────────────────────────
   devotion_path:
     teacher: sai_ma
     display_name: "Open Vessel Press"

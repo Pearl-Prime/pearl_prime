@@ -23,7 +23,6 @@ trigger_word_convention: "{teacher_id}_{brand_suffix}"
 brand_suffixes:
   stillness_press: sp
   cognitive_clarity: cc
-  norcal_dharma: nd
   somatic_wisdom: sw
   qi_foundation: qf
   digital_ground: dg
@@ -47,7 +46,7 @@ character_loras:
     training_steps: 1500
     ip_adapter_weight: 0.85
     style_ref: stillness_press  # inherits brand art style
-    notes: "South Asian male, warm expression, contemplative bearing"
+    notes: "South Asian male, warm expression, contemplative bearing; forest-refuge scenes use same face with earth-tone wardrobe"
 
   joshin:
     trigger_word: "joshin_cc"
@@ -56,14 +55,6 @@ character_loras:
     ip_adapter_weight: 0.83
     style_ref: cognitive_clarity
     notes: "Japanese-American female, precise gaze, zen authority"
-
-  ajahn_x:
-    trigger_word: "ajahn_x_nd"
-    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
-    training_steps: 1500
-    ip_adapter_weight: 0.85
-    style_ref: norcal_dharma
-    notes: "Thai-American male, forest monk bearing, weathered hands"
 
   pamela_fellows:
     trigger_word: "pamela_sw"
@@ -151,19 +142,13 @@ brand_style_loras:
     trigger_word: "style_sp"
     training_images: 20  # curated brand-style exemplars
     training_steps: 2000
-    notes: "Warm watercolor wash + ink line consistency"
+    notes: "Warm watercolor wash + ink line consistency; include forest-naturalism plates for alternate covers"
 
   cognitive_clarity:
     trigger_word: "style_cc"
     training_images: 20
     training_steps: 2000
     notes: "High contrast monochrome with selective warmth"
-
-  norcal_dharma:
-    trigger_word: "style_nd"
-    training_images: 20
-    training_steps: 2000
-    notes: "Earth-toned forest naturalism"
 
   somatic_wisdom:
     trigger_word: "style_sw"

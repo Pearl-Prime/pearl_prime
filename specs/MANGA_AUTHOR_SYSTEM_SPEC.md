@@ -338,7 +338,7 @@ Each brand has preferred genres (from MANGA_BRAND_DNA_ANTI_SPAM_SPEC.md genre_af
 |-------|---------------|----------------------|---------------|
 | stillness_press | iyashikei, psychological, slice_of_life | lighthouse_keeper, gardener, season_counter | healing_apprenticeship, master_as_ghost |
 | cognitive_clarity | psychological, seinen, drama | mirror_maker, analyst, cartographer | surpassed_teacher, inverse_teaching |
-| norcal_dharma | philosophical, seinen | chronicler, path_tender | master_apprentice_chain |
+| stillness_press | philosophical, iyashikei / seinen | chronicler, path_tender | master_apprentice_chain |
 
 #### ZH_TW Brands
 

@@ -28,7 +28,6 @@ AUTHOR_PALETTES = {
     "pamela_fellows": ["#3D5A6C", "#2C4050", "#A8C5D8"],
     "joshin": ["#7B6B8C", "#5A4A6B", "#D4C8E8"],
     "maat": ["#5C4A3A", "#8B7355", "#C9B8A8"],
-    "ajahn_x": ["#4A5568", "#718096", "#E2E8F0"],
     "luna_hart": ["#7B6B8C", "#5A4A6B", "#D4C8E8"],
     "kai_nakamura": ["#3D5A6C", "#2C4050", "#A8C5D8"],
     "marcus_cole": ["#5D4E37", "#8B7355", "#C4B896"],

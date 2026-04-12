@@ -17,9 +17,8 @@
 #   The quota_manager enforces these cross-channel ceilings.
 #
 # Channel counts per brand (from channel_registry.yaml):
-#   stillness_press:   8 channels (ch_001,004,006,009,012,017,018,020,022) → actually 9
+#   stillness_press:   11 channels (adds ch_014, ch_015 ink wash + stained glass to stillness)
 #   cognitive_clarity: 12 channels (ch_002,003,005,007,008,010,011,013,016,019,021,023,024) → 13
-#   norcal_dharma:     2 channels (ch_014, ch_015)
 #
 # Platform daily quotas below are conservative and well within API ceilings:
 #   YouTube: 10,000 quota units/day (~6 uploads max); we cap at 6 for safety
@@ -39,14 +38,14 @@ generated_from:
 brands:
 
   # ---------------------------------------------------------------------------
-  # stillness_press — EN/US, calm & healing focus
+  # stillness_press — EN/US, calm & healing focus (includes former forest-style channels)
   # Channels: ch_001 (offset 0), ch_004 (3), ch_006 (5), ch_009 (8),
-  #           ch_012 (11), ch_017 (16), ch_018 (17), ch_020 (19), ch_022 (21)
+  #           ch_012 (11), ch_014 (13), ch_015 (14), ch_017 (16), ch_018 (17), ch_020 (19), ch_022 (21)
   # ---------------------------------------------------------------------------
   stillness_press:
     credential_suffix: "_SP"
     locale: en_US
-    channel_count: 9
+    channel_count: 11
 
     platforms:
       youtube:
@@ -83,9 +82,9 @@ brands:
         reason: "ICP requirements not met for EN brand"
 
     scheduling:
-      # stillness_press channels span offsets 0,3,5,8,11,16,17,19,21
+      # stillness_press channels span offsets 0,3,5,8,11,13,14,16,17,19,21
       # First window at base_hour_utc (06:00 UTC) + offset
-      preferred_publish_hours_utc: [6, 9, 11, 14, 17, 22, 23, 25, 27]  # 06:00+offset
+      preferred_publish_hours_utc: [6, 9, 11, 14, 17, 19, 20, 22, 23, 25, 27]  # 06:00+offset
       stagger_offset_minutes: 15
       timezone_hint: "America/Los_Angeles"  # Primary audience West Coast US
       retry_max: 3
@@ -140,57 +139,6 @@ brands:
       preferred_publish_hours_utc: [7, 8, 10, 12, 13, 15, 16, 18, 21, 0, 2, 4, 5]
       stagger_offset_minutes: 15
       timezone_hint: "America/New_York"  # Mixed East/West Coast audience
-      retry_max: 3
-
-  # ---------------------------------------------------------------------------
-  # norcal_dharma — EN/US, mindfulness/somatic healing, 2 channels
-  # Channels: ch_014 (offset 13), ch_015 (offset 14)
-  # Church-compliance brand — conservative quota, no short-form emphasis
-  # ---------------------------------------------------------------------------
-  norcal_dharma:
-    credential_suffix: "_ND"
-    locale: en_US
-    channel_count: 2
-
-    platforms:
-      youtube:
-        enabled: true
-        daily_quota: 3          # 2 channels × 1 upload safety margin
-        content_type: long_form
-        aspect_ratio: "16:9"
-        max_duration_s: 43200
-      youtube_shorts:
-        enabled: true
-        daily_quota: 2
-        content_type: short_vertical
-        aspect_ratio: "9:16"
-        max_duration_s: 60
-      tiktok:
-        enabled: true
-        daily_quota: 2
-        content_type: short_vertical
-        aspect_ratio: "9:16"
-        max_duration_s: 600
-      instagram_reels:
-        enabled: true
-        daily_quota: 2
-        content_type: short_vertical
-        aspect_ratio: "9:16"
-        max_duration_s: 90
-      bilibili:
-        enabled: false
-        daily_quota: 0
-        reason: "EN-only brand; no zh subtitle pipeline"
-      douyin:
-        enabled: false
-        daily_quota: 0
-        reason: "ICP requirements not met for EN brand"
-
-    scheduling:
-      # norcal_dharma channels at offsets 13, 14 → 19:00 and 20:00 UTC
-      preferred_publish_hours_utc: [19, 20]
-      stagger_offset_minutes: 30   # Wider stagger; only 2 channels, mindfulness pacing
-      timezone_hint: "America/Los_Angeles"
       retry_max: 3
 
   # ---------------------------------------------------------------------------
@@ -675,6 +623,6 @@ content_type_definitions:
 # Example: YT_CLIENT_ID + _SP → YT_CLIENT_ID_SP
 # See config/video/upload_config.yaml for base env var names.
 #
-# EN brands use 2-char suffixes (_SP, _CC, _ND).
+# EN brands use 2-char suffixes (_SP, _CC).
 # Locale brands use 4-6 char suffixes to avoid collisions.
 # All suffixes registered at: docs/credentials_registry.yaml

@@ -15,23 +15,22 @@
 
 ---
 
-## Teachers (13)
+## Teachers (12)
 
 | # | Teacher | Tradition | Teaching Core |
 |---|---------|-----------|--------------|
-| 1 | ahjan | Buddhism (contemporary/Theravada) | Alarm systems, impermanence, pausing |
-| 2 | ajahn_x | Thai Forest Buddhism | Forest refuge, simplicity, renunciation |
-| 3 | joshin | Zen Buddhism | Koans, sitting, direct pointing |
-| 4 | junko | Japanese contemplative / Shinto | Relational harmony, shame healing, inner security |
-| 5 | maat | Egyptian / Sufi heritage | Justice, balance, heart-weighing |
-| 6 | master_feung | Chinese internal arts (qigong/taiji) | Qi cultivation, stability, foundation building |
-| 7 | master_sha | Chinese healing traditions | Sleep repair, energy medicine, restoration |
-| 8 | master_wu | Chinese martial/spiritual | Panic response, composure under fire, warrior calm |
-| 9 | miki | Japanese mindfulness (modern) | Gen Z grounding, digital age presence, identity |
-| 10 | omote | Japanese body practice (shiatsu/somatic) | Grief, body memory, seasonal healing |
-| 11 | pamela_fellows | Western somatic therapy | Perfectionism, performance pressure, embodiment |
-| 12 | ra | Egyptian solar tradition | Burnout, solar return, fire and renewal |
-| 13 | sai_ma | Indian devotional (bhakti) | Compassion, devotion, surrender |
+| 1 | ahjan | Buddhism (contemporary + forest-simplicity strands, Stillness Press) | Alarm systems, impermanence, pausing; forest refuge and simplicity |
+| 2 | joshin | Zen Buddhism | Koans, sitting, direct pointing |
+| 3 | junko | Japanese contemplative / Shinto | Relational harmony, shame healing, inner security |
+| 4 | maat | Egyptian / Sufi heritage | Justice, balance, heart-weighing |
+| 5 | master_feung | Chinese internal arts (qigong/taiji) | Qi cultivation, stability, foundation building |
+| 6 | master_sha | Chinese healing traditions | Sleep repair, energy medicine, restoration |
+| 7 | master_wu | Chinese martial/spiritual | Panic response, composure under fire, warrior calm |
+| 8 | miki | Japanese mindfulness (modern) | Gen Z grounding, digital age presence, identity |
+| 9 | omote | Japanese body practice (shiatsu/somatic) | Grief, body memory, seasonal healing |
+| 10 | pamela_fellows | Western somatic therapy | Perfectionism, performance pressure, embodiment |
+| 11 | ra | Egyptian solar tradition | Burnout, solar return, fire and renewal |
+| 12 | sai_ma | Indian devotional (bhakti) | Compassion, devotion, surrender |
 
 ---
 
@@ -165,7 +164,7 @@ Each teacher appears in ALL 4 locations. Each location gets 12-24 series adapted
 
 ---
 
-## 2. AJAHN_X — Thai Forest Buddhism
+### Ahjan — forest simplicity strand (Stillness Press; merged duplicate planning id)
 
 ### en_US (18 series)
 
@@ -216,27 +215,27 @@ Each teacher appears in ALL 4 locations. Each location gets 12-24 series adapted
 ### zh_TW (18 series) + zh_CN (18 series)
 *(Same structure as en_US, titles translated to Traditional/Simplified Chinese respectively, locale-adapted author names)*
 
-**AJAHN_X TOTAL: 4 locations × 18 series = 72 series**
+**AHJAN forest-strand total: 4 locations × 18 series = 72 series**
 
 ---
 
-## 3–13. REMAINING TEACHERS (same structure)
+## 2–12. REMAINING TEACHERS (same structure)
 
 Each teacher follows the identical pattern. Here are the series counts:
 
 | # | Teacher | Tradition Focus | Series/Location | Locations | Total Series |
 |---|---------|----------------|----------------|-----------|-------------|
-| 3 | joshin | Zen koans, direct pointing | 18 | 4 | 72 |
-| 4 | junko | Relational harmony, shame | 20 | 4 | 80 |
-| 5 | maat | Balance, justice, heart-weighing | 16 | 4 | 64 |
-| 6 | master_feung | Qi cultivation, stability | 20 | 4 | 80 |
-| 7 | master_sha | Sleep repair, energy healing | 18 | 4 | 72 |
-| 8 | master_wu | Panic response, warrior calm | 16 | 4 | 64 |
-| 9 | miki | Gen Z grounding, digital presence | 24 | 4 | 96 |
-| 10 | omote | Grief, body memory, seasons | 18 | 4 | 72 |
-| 11 | pamela_fellows | Perfectionism, embodiment | 16 | 4 | 64 |
-| 12 | ra | Solar renewal, fire, burnout | 14 | 4 | 56 |
-| 13 | sai_ma | Devotion, compassion, surrender | 16 | 4 | 64 |
+| 2 | joshin | Zen koans, direct pointing | 18 | 4 | 72 |
+| 3 | junko | Relational harmony, shame | 20 | 4 | 80 |
+| 4 | maat | Balance, justice, heart-weighing | 16 | 4 | 64 |
+| 5 | master_feung | Qi cultivation, stability | 20 | 4 | 80 |
+| 6 | master_sha | Sleep repair, energy healing | 18 | 4 | 72 |
+| 7 | master_wu | Panic response, warrior calm | 16 | 4 | 64 |
+| 8 | miki | Gen Z grounding, digital presence | 24 | 4 | 96 |
+| 9 | omote | Grief, body memory, seasons | 18 | 4 | 72 |
+| 10 | pamela_fellows | Perfectionism, embodiment | 16 | 4 | 64 |
+| 11 | ra | Solar renewal, fire, burnout | 14 | 4 | 56 |
+| 12 | sai_ma | Devotion, compassion, surrender | 16 | 4 | 64 |
 
 ---
 
@@ -244,7 +243,7 @@ Each teacher follows the identical pattern. Here are the series counts:
 
 | Metric | Count |
 |--------|-------|
-| **Teachers** | 13 |
+| **Teachers** | 12 |
 | **Locations** | 4 (en_US, ja_JP, zh_TW, zh_CN) |
 | **Series per teacher per location** | 14-24 (avg 19) |
 | **Total series** | **980** |
@@ -265,7 +264,7 @@ Each teacher follows the identical pattern. Here are the series counts:
 
 | Teacher Type | Primary Genres | Secondary Genres |
 |-------------|---------------|-----------------|
-| Buddhist (ahjan, ajahn_x, joshin) | iyashikei, seinen | cultivation, shojo |
+| Buddhist (ahjan, ahjan, joshin) | iyashikei, seinen | cultivation, shojo |
 | Japanese contemplative (junko, miki, omote) | shojo, webtoon_romance, seinen | iyashikei, manhwa |
 | Chinese masters (feung, sha, wu) | cultivation, shonen | seinen, sports |
 | Egyptian/Sufi (maat, ra) | seinen, shonen | horror, cultivation |
@@ -301,4 +300,4 @@ Each teacher follows the identical pattern. Here are the series counts:
 ---
 
 *Generated: 2026-04-04 | Authority: specs/AI_MANGA_PIPELINE_SUMMARY.md*
-*Catalog: 13 teachers × 4 locations × ~19 series = 980 series, ~933K panel images*
+*Catalog: 12 teachers × 4 locations × ~19 series = 980 series, ~933K panel images*

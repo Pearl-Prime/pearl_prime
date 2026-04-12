@@ -138,20 +138,20 @@ def check_teacher_synthetic_governance(skip: set[str]) -> CheckResult:
 
 def check_brand_guards(skip: set[str]) -> CheckResult:
     if "brand_guards" in skip:
-        return CheckResult("brand_guards", "NorCal Dharma + Church YAML guards", True, "skipped", False, "")
-    norcal = REPO_ROOT / "scripts" / "ci" / "check_norcal_dharma_brand_guards.py"
+        return CheckResult("brand_guards", "Catalog brand guards + Church YAML guards", True, "skipped", False, "")
+    brand_guard_script = REPO_ROOT / "scripts" / "ci" / "check_norcal_dharma_brand_guards.py"
     church = REPO_ROOT / "scripts" / "ci" / "check_church_yaml_no_sensitive_tokens.py"
-    if not norcal.exists():
-        return CheckResult("brand_guards", "Brand guards", False, f"missing: {norcal.name}", False, "")
-    code1, out1, err1 = run_cmd(REPO_ROOT, [sys.executable, str(norcal)], timeout=30)
+    if not brand_guard_script.exists():
+        return CheckResult("brand_guards", "Brand guards", False, f"missing: {brand_guard_script.name}", False, "")
+    code1, out1, err1 = run_cmd(REPO_ROOT, [sys.executable, str(brand_guard_script)], timeout=30)
     if code1 != 0:
-        return CheckResult("brand_guards", "NorCal Dharma + Church YAML guards", False, (out1 + " " + err1).strip()[:500], False, out1 + "\n" + err1)
+        return CheckResult("brand_guards", "Catalog brand guards + Church YAML guards", False, (out1 + " " + err1).strip()[:500], False, out1 + "\n" + err1)
     if not church.exists():
-        return CheckResult("brand_guards", "Brand guards", True, "NorCal OK; church script missing", False, out1)
+        return CheckResult("brand_guards", "Brand guards", True, "catalog_planning guard OK; church script missing", False, out1)
     code2, out2, err2 = run_cmd(REPO_ROOT, [sys.executable, str(church)], timeout=30)
     passed = code2 == 0
     detail = (out2 + " " + err2).strip()[:500] or ("PASS" if passed else "FAIL")
-    return CheckResult("brand_guards", "NorCal Dharma + Church YAML guards", passed, detail, False, out1 + "\n" + out2 + "\n" + err2)
+    return CheckResult("brand_guards", "Catalog brand guards + Church YAML guards", passed, detail, False, out1 + "\n" + out2 + "\n" + err2)
 
 
 def report_variation_knobs(skip: set[str]) -> CheckResult:
