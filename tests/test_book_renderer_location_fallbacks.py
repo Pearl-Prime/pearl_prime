@@ -86,3 +86,12 @@ def test_location_grounding_report_fails_when_opening_is_not_location_specific(m
     assert report is not None
     assert report["status"] == "FAIL"
     assert report["errors"]
+
+
+def test_clean_for_delivery_strips_residual_brace_placeholders() -> None:
+    """Story-atom placeholders like {Street_name} should be stripped."""
+    raw = "The station is quiet. {Street_name} outside. {Weather_detail} on the glass."
+    cleaned = book_renderer.clean_for_delivery(raw)
+    assert "{Street_name}" not in cleaned
+    assert "{Weather_detail}" not in cleaned
+    assert "The station is quiet." in cleaned

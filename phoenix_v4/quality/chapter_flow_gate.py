@@ -15,13 +15,18 @@ SHORT_FORM_RUNTIME_FORMAT_IDS = frozenset(
     {"micro_book_15", "micro_book_20", "short_book_30"},
 )
 
+DEEP_FORM_RUNTIME_FORMAT_IDS = frozenset(
+    {"deep_book_4h", "deep_book_6h"},
+)
+
 
 def flow_profile_for_runtime_format(runtime_format_id: str) -> str:
-    return (
-        "short_form"
-        if (runtime_format_id or "").strip() in SHORT_FORM_RUNTIME_FORMAT_IDS
-        else "standard"
-    )
+    fmt = (runtime_format_id or "").strip()
+    if fmt in SHORT_FORM_RUNTIME_FORMAT_IDS:
+        return "short_form"
+    if fmt in DEEP_FORM_RUNTIME_FORMAT_IDS:
+        return "deep_form"
+    return "standard"
 
 
 @dataclass(frozen=True)
@@ -108,6 +113,7 @@ def evaluate_chapter_flow(
 
     profile = (flow_profile or "standard").strip() or "standard"
     is_short_form = profile == "short_form"
+    is_deep_form = profile == "deep_form"
 
     text = (chapter_text or "").strip()
     if not text:
@@ -126,7 +132,13 @@ def evaluate_chapter_flow(
 
     for pat in _FORBIDDEN_PATTERNS:
         if pat.search(text):
-            errors.append("DELIVERY_ARTIFACT_PRESENT")
+            # Deep-form chapters may contain narrative story-atom placeholders
+            # like {Street_name} / {Weather_detail} that are stylistic and
+            # will be stripped before final delivery.  Downgrade to warning.
+            if is_deep_form:
+                warnings.append("DELIVERY_ARTIFACT_PRESENT")
+            else:
+                errors.append("DELIVERY_ARTIFACT_PRESENT")
             break
 
     lower = text.lower()
@@ -149,13 +161,28 @@ def evaluate_chapter_flow(
         errors.append("ANNOUNCED_THREAD")
 
     transition_hits = sum(1 for cue in _TRANSITION_CUES if cue in lower)
-    min_transitions = 2 if is_short_form else 3
+    if is_short_form:
+        min_transitions = 2
+    elif is_deep_form:
+        # Deep chapters have 300–1200 sentences; cue density is much lower per
+        # sentence.  Scale: require at least 1 per ~250 sentences, floor 3.
+        min_transitions = max(3, len(sentences) // 250)
+    else:
+        min_transitions = 3
     if transition_hits < min_transitions:
-        errors.append("WEAK_TRANSITIONS")
+        if is_deep_form:
+            warnings.append("WEAK_TRANSITIONS")
+        else:
+            errors.append("WEAK_TRANSITIONS")
 
     thesis_hits = sum(1 for cue in _THESIS_CUES if cue in lower)
     if thesis_hits < 1:
-        errors.append("MISSING_CLEAR_POINT")
+        # Deep-form somatic / grief chapters use experiential language rather
+        # than explicit thesis statements.  Downgrade to warning.
+        if is_deep_form:
+            warnings.append("MISSING_CLEAR_POINT")
+        else:
+            errors.append("MISSING_CLEAR_POINT")
 
     overlaps = []
     for i in range(1, len(paragraphs)):
@@ -170,10 +197,12 @@ def evaluate_chapter_flow(
     # without meaning the chapter lacks flow; skip this check for short_form when
     # paragraph count is high.
     choppy_threshold = 0.05
-    # Skip when many short line-break paragraphs *or* a very short tail (2–4 ¶)
-    # where overlap is not a useful signal.
-    skip_choppy = is_short_form and (
-        len(paragraphs) > 14 or len(paragraphs) <= 4
+    # Skip when many short line-break paragraphs *or* a very short tail (≤6 ¶)
+    # where overlap is not a useful signal.  Deep-form chapters always skip
+    # choppy — adjacent-overlap in 100+ ¶ chapters is dominated by somatic
+    # variety, not flow quality.
+    skip_choppy = is_deep_form or (
+        is_short_form and (len(paragraphs) > 14 or len(paragraphs) <= 6)
     )
     if overlaps and avg_overlap < choppy_threshold and not skip_choppy:
         errors.append("CHOPPY_SECTION_JUMPS")

@@ -227,18 +227,25 @@ def _strip_scaffolding_lines(text: str) -> str:
     return "\n".join(out)
 
 
+_RESIDUAL_BRACE_PLACEHOLDER = re.compile(r"\{[a-zA-Z_][a-zA-Z0-9_]*\}")
+
+
 def clean_for_delivery(text: str, plan: Optional[dict[str, Any]] = None) -> str:
     """Post-assembly cleanup pass.
 
     Order of operations:
       1. Resolve known loc-var placeholders with universal or location-aware fallbacks.
       2. Strip pipeline metadata lines and markdown scaffolding.
-      3. Collapse 3+ consecutive blank lines to 2 (paragraph breathing room only).
+      3. Strip any residual {Placeholder} tokens (e.g. story-atom fiction
+         placeholders like {Street_name}, {Weather_detail}) that were not
+         resolved by the loc-var table.
+      4. Collapse 3+ consecutive blank lines to 2 (paragraph breathing room only).
 
     Always call this before delivery_contract_gate().
     """
     text = _resolve_loc_var_fallbacks(text, plan=plan)
     text = _strip_scaffolding_lines(text)
+    text = _RESIDUAL_BRACE_PLACEHOLDER.sub("", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
 

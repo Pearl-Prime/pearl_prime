@@ -192,3 +192,19 @@ def test_packet_word_cap_truncates_stacked_packet():
         enrichment_slot={"content": body, "source": "registry"},
     )
     assert out["word_count"] <= 25
+
+
+def test_slot_level_target_words_cap_truncates_output():
+    """When stacked layers exceed target_words, output is truncated (with 10% headroom)."""
+    body = " ".join(f"word{i}" for i in range(200))
+    out = compose_section_packet(
+        chapter_index=0,
+        section_index=0,
+        section_type="HOOK",
+        target_words=50,
+        spine_context={},
+        beatmap_slot={"target_words": 50},
+        enrichment_slot={"content": body, "source": "registry"},
+    )
+    # 50 * 1.10 = 55 word hard cap
+    assert out["word_count"] <= 55, f"Expected ≤55 words, got {out['word_count']}"

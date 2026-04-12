@@ -105,6 +105,55 @@ def test_flow_profile_for_runtime_format_maps_short_formats() -> None:
 
     assert flow_profile_for_runtime_format("micro_book_15") == "short_form"
     assert flow_profile_for_runtime_format("standard_book") == "standard"
+    assert flow_profile_for_runtime_format("deep_book_4h") == "deep_form"
+    assert flow_profile_for_runtime_format("deep_book_6h") == "deep_form"
+
+
+def test_deep_form_downgrades_transitions_and_thesis_to_warnings() -> None:
+    """Deep chapters with 300+ sentences should not hard-fail on transition/thesis density."""
+    # Build a long chapter with minimal transition cues (mimics real grief deep_book_6h)
+    filler = " ".join(["The body holds what the mind cannot name."] * 80)
+    body = filler + "\n\n" + filler + "\n\nNotice one breath. Exhale."
+    result_standard = evaluate_chapter_flow(body, flow_profile="standard")
+    result_deep = evaluate_chapter_flow(body, flow_profile="deep_form")
+    # Standard profile hard-fails on missing transitions and thesis
+    assert "WEAK_TRANSITIONS" in result_standard.errors or "MISSING_CLEAR_POINT" in result_standard.errors
+    # Deep profile downgrades to warnings
+    assert "WEAK_TRANSITIONS" not in result_deep.errors
+    assert "MISSING_CLEAR_POINT" not in result_deep.errors
+    assert result_deep.status == "PASS" or all(
+        e not in result_deep.errors for e in ["WEAK_TRANSITIONS", "MISSING_CLEAR_POINT"]
+    )
+
+
+def test_deep_form_downgrades_delivery_artifact_to_warning() -> None:
+    """Deep-form {placeholder} patterns should be warnings, not errors."""
+    text = (
+        "The station is quiet. {Street_name} outside. {Weather_detail}. "
+        + "That moment when the grief hits. " * 20
+        + "Notice. Breathe. Pause. "
+        + "Because the cost is real. Which means you carry it. "
+        + "In practice the point is to stay with the feeling."
+    )
+    result_std = evaluate_chapter_flow(text, flow_profile="standard")
+    result_deep = evaluate_chapter_flow(text, flow_profile="deep_form")
+    assert "DELIVERY_ARTIFACT_PRESENT" in result_std.errors
+    assert "DELIVERY_ARTIFACT_PRESENT" not in result_deep.errors
+    assert "DELIVERY_ARTIFACT_PRESENT" in result_deep.warnings
+
+
+def test_short_form_skips_choppy_for_5_paragraphs() -> None:
+    """Somatic short_book_30 with 5 paragraphs should skip choppy check."""
+    paras = [
+        "First paragraph about the body. Unique content here about sensation.",
+        "Completely different second paragraph about movement and gravity.",
+        "Third paragraph explores rhythm and proprioception awareness.",
+        "Fourth piece on thermal regulation and interoceptive signals.",
+        "Fifth closing paragraph. Breathe. Notice. The point is integration.",
+    ]
+    text = "\n\n".join(paras)
+    result = evaluate_chapter_flow(text, flow_profile="short_form")
+    assert "CHOPPY_SECTION_JUMPS" not in result.errors
 
 
 def test_chapter_flow_gate_flags_generic_overlay_scaffolding() -> None:

@@ -250,11 +250,21 @@ def compose_section_packet(
         _append_layer(blocks, sources_used, "depth_module", depth_text, seen_norms, min_words=11)
 
     raw_text = "\n\n".join(b for b in blocks if b)
+
+    # ── Slot-level word cap ──────────────────────────────────────────────────
+    # Honour beatmap target_words as a hard ceiling.  The legacy
+    # ``packet_word_cap`` key (never injected by any caller) is kept as a
+    # secondary override.
     _cap = spine_context.get("packet_word_cap")
+    if not (isinstance(_cap, int) and _cap > 0):
+        # Use beatmap target_words as the cap (with 10 % headroom so sentences
+        # don't get cut mid-thought).
+        _cap = int(target_words * 1.10) if target_words and target_words > 0 else 0
     if isinstance(_cap, int) and _cap > 0:
         _w = raw_text.split()
         if len(_w) > _cap:
             raw_text = " ".join(_w[:_cap]).strip()
+
     cleaned_placeholders, ph_warn = _strip_placeholders(raw_text)
     extra_warnings.extend(ph_warn)
 
