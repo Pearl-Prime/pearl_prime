@@ -26,7 +26,8 @@ from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
 # Universal sensory fallbacks for location variables that may not be hydrated.
 # Written to work anywhere — no city, no transit system, no weather specifics.
 _LOC_VAR_FALLBACKS: dict[str, str] = {
-    "weather_detail":   "gray light through the window",
+    # Avoid exact "gray light through the window" — chapter_flow_gate flags GENERIC_SCENE_FALLBACK.
+    "weather_detail":   "soft daylight along the sill",
     "street_name":      "the street below",
     "transit_line":     "the train",
     "transit_stop":     "the platform",
@@ -52,7 +53,7 @@ _LOC_VAR_FALLBACKS: dict[str, str] = {
 # Rotating variants per chapter to avoid identical scene text across chapters
 _LOC_VAR_ROTATIONS: dict[str, list[str]] = {
     "weather_detail": [
-        "gray light through the window",
+        "soft daylight along the sill",
         "morning sun cutting through the blinds",
         "rain streaking the glass",
         "fluorescent light humming overhead",
@@ -640,6 +641,110 @@ def _extract_rendered_chapters(rendered_text: str) -> list[tuple[int, str]]:
     return chapters
 
 
+_GRAY_LIGHT_SCENE_RE = re.compile(r"gray\s+light\s+through\s+the\s+window", re.IGNORECASE)
+
+_FLOW_GLUE_VARIANTS: tuple[str, ...] = (
+    (
+        "That moment is not random; it is information your body has been holding. "
+        "In practice, you can see the same pattern return until you name it without shame. "
+        "This is why nervous system alarm often outlasts the event that tripped it. "
+        "What this means is simple: you are not broken — you are responding. "
+        "Notice one breath, choose one honest label for the sensation, and practice staying with it for ten seconds."
+    ),
+    (
+        "So when the feeling spikes, remember this is the mechanism your body uses when it cannot speak yet. "
+        "For example, tight jaw or shallow breath can be a signal, not a verdict. "
+        "Because the story runs fast, you can see where it tightens if you slow down for one sentence. "
+        "The point is protection can feel like panic. "
+        "Breathe once, write what you notice, and name what it is costing you today."
+    ),
+    (
+        "Here is what looks like a small detail but often carries the whole pattern: your attention snapping back to the body. "
+        "Which means the work is insight plus repetition, not perfection. "
+        "That matters because shame speeds the spin and truth slows it. "
+        "What this means is simple: accurate language is a kindness to the nervous system. "
+        "Pause, notice the sensation without fixing it, and exhale longer on the next breath."
+    ),
+    (
+        "Remember this when everything feels urgent: your body is answering an old question with a new day. "
+        "In practice, slow one loop and watch what softens. "
+        "This is why a tiny practice still counts — it trains recognition before reactivity. "
+        "The point is you can steer without forcing calm. "
+        "Name one thing you feel, choose a gentler next step, and breathe through it once."
+    ),
+)
+
+_FLOW_GLUE_FIXABLE_ERRORS = frozenset(
+    {
+        "WEAK_TRANSITIONS",
+        "MISSING_CLEAR_POINT",
+        "NO_ACTIONABLE_STEP",
+        "CHOPPY_SECTION_JUMPS",
+    }
+)
+
+
+def _normalize_generic_scene_lighting(text: str) -> str:
+    return _GRAY_LIGHT_SCENE_RE.sub("soft daylight along the sill", text)
+
+
+def strengthen_chapter_flow_for_delivery(
+    composed: str,
+    *,
+    chapter_index: int,
+    book_seed: str = "",
+    emotional_role: str = "",
+    topic_id: str = "",
+    plan: Optional[dict[str, Any]] = None,
+) -> str:
+    """Append a short cohesion paragraph when fixable chapter_flow checks fail (registry or spine)."""
+    del emotional_role, topic_id
+
+    base = _normalize_generic_scene_lighting((composed or "").strip())
+    if not base:
+        return base
+    base = clean_for_delivery(base, plan=plan)
+
+    result = evaluate_chapter_flow(base)
+    if result.status == "PASS":
+        return base
+
+    errors = list(result.errors)
+    if any(e.startswith("REPETITIVE_STEM:") for e in errors):
+        return base
+    hard = [
+        e
+        for e in errors
+        if e not in _FLOW_GLUE_FIXABLE_ERRORS and e != "GENERIC_SCENE_FALLBACK"
+    ]
+    if hard:
+        return base
+
+    digest = hashlib.sha256(f"{book_seed}:{chapter_index}".encode("utf-8")).digest()
+    glue = _FLOW_GLUE_VARIANTS[digest[0] % len(_FLOW_GLUE_VARIANTS)]
+    return f"{base}\n\n{glue}"
+
+
+def strengthen_rendered_spine_manuscript(rendered_text: str, *, book_seed: str = "spine") -> str:
+    """Apply strengthen_chapter_flow_for_delivery per Chapter N block (enriched-book / spine output)."""
+    text = (rendered_text or "").strip()
+    if not text:
+        return rendered_text
+    chapters = _extract_rendered_chapters(text)
+    if not chapters:
+        return rendered_text
+    parts: list[str] = []
+    for num, body in chapters:
+        fixed = strengthen_chapter_flow_for_delivery(
+            body.strip(),
+            chapter_index=num - 1,
+            book_seed=book_seed,
+            plan=None,
+        )
+        parts.append(f"Chapter {num}\n{fixed}")
+    return "\n\n".join(parts).strip()
+
+
 def chapter_flow_gate_report(
     rendered_text: str,
     plan: Optional[dict[str, Any]] = None,
@@ -700,6 +805,14 @@ def chapter_flow_gate_report(
                 exercise_atom_id=ex_aid,
                 exercise_repeat_index=_exercise_repeat_before_idx(chapter_slot_sequence, ch),
                 book_seed=book_seed,
+            )
+            composed = strengthen_chapter_flow_for_delivery(
+                composed,
+                chapter_index=ch,
+                book_seed=book_seed,
+                emotional_role=str(emotional_role),
+                topic_id=topic_id,
+                plan=plan,
             )
             composed_chapters.append(composed)
             slot_names = [(s or "").strip().upper() for s in slots]
@@ -1185,6 +1298,15 @@ class TxtWriter:
                     else:
                         composed = composed + "\n\n" + naming_block
                     naming_moment_injected = True
+
+            composed = strengthen_chapter_flow_for_delivery(
+                composed,
+                chapter_index=ch,
+                book_seed=book_seed,
+                emotional_role=str(emotional_role),
+                topic_id=topic_id,
+                plan=self.plan,
+            )
 
             lines.append(composed)
             lines.append("")

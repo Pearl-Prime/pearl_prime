@@ -2,6 +2,9 @@
 Deterministic section packet assembly — bridge → journey → legacy → enrichment → teacher → depth.
 
 Stacks all available layers (no mutual exclusion). Same inputs produce the same output.
+
+Spine manuscripts apply manuscript-level flow cohesion via
+``book_renderer.strengthen_rendered_spine_manuscript`` after ``compose_from_enriched_book``.
 """
 from __future__ import annotations
 

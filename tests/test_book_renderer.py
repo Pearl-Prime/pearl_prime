@@ -129,6 +129,32 @@ def test_txt_writer_emits_missing_when_on_missing_placeholder() -> None:
     out.unlink(missing_ok=True)
 
 
+def test_strengthen_chapter_flow_for_delivery_repairs_spine_like_prose() -> None:
+    from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
+    from phoenix_v4.rendering.book_renderer import strengthen_chapter_flow_for_delivery
+
+    spine_like = (
+        "The desk is the same desk. The screen is bright. You read the subject line twice.\n\n"
+        "Your jaw does not relax when the tab closes. The next message is already there.\n\n"
+        "You tell yourself this is normal. The body is not convinced.\n\n"
+        "You drink water you do not taste. You return to the same paragraph.\n\n"
+        "Nothing is wrong on paper. Something is wrong in the chest.\n\n"
+        "You measure your tone in the reply. You measure your breath less carefully.\n\n"
+        "The afternoon light changes. The urgency does not leave with it.\n\n"
+        "You finish one thing and the list replaces it before you stand."
+    )
+    before = evaluate_chapter_flow(spine_like)
+    strengthened = strengthen_chapter_flow_for_delivery(
+        spine_like, chapter_index=3, book_seed="unit-test-strengthen"
+    )
+    after = evaluate_chapter_flow(strengthened)
+    assert before.status == "FAIL"
+    assert {"WEAK_TRANSITIONS", "MISSING_CLEAR_POINT", "NO_ACTIONABLE_STEP"}.issubset(
+        set(before.errors)
+    )
+    assert after.status == "PASS"
+
+
 def test_render_book_writes_chapter_flow_report(tmp_path: Path) -> None:
     plan = {
         "plan_hash": "flow_report_hash",
@@ -150,7 +176,12 @@ def test_render_book_writes_chapter_flow_report(tmp_path: Path) -> None:
     assert report["status"] in {"PASS", "FAIL"}
 
 
-def test_render_book_enforce_chapter_flow_raises(tmp_path: Path) -> None:
+def test_render_book_enforce_chapter_flow_raises(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        book_renderer_module,
+        "strengthen_chapter_flow_for_delivery",
+        lambda composed, **_: composed,
+    )
     plan = {
         "plan_hash": "flow_gate_fail_hash",
         "atom_ids": ["placeholder:HOOK:ch0:slot0", "placeholder:STORY:ch0:slot1"],
