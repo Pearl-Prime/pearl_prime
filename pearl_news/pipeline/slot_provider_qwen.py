@@ -129,6 +129,10 @@ def _load_config(config_root: Path | None = None) -> dict[str, Any]:
         data["base_url"] = "https://dashscope.aliyuncs.com/compatible-mode/v1"
     if api_key and not str(data.get("model") or "").strip():
         data["model"] = "qwen-plus"
+    # Ollama (Pearl Star) only has qwen2.5:14b — never send cloud model names
+    from pearl_news.pipeline.cjk_qwen_model import PEARL_STAR_CJK_MODEL, is_ollama_openai_base_url
+    if is_ollama_openai_base_url(data.get("base_url")):
+        data["model"] = PEARL_STAR_CJK_MODEL
     if os.environ.get("QWEN_BASE_URL") and data.get("enabled") is not True:
         data["enabled"] = True
 

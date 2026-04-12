@@ -139,7 +139,7 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
         ollama_model = (
             os.environ.get("OLLAMA_MODEL", "").strip()
             or model_cfg.get("ollama_model_id", "").strip()
-            or "qwen3:14b"
+            or "qwen2.5:14b"  # Pearl Star only has qwen2.5:14b
         )
 
         resolved = {

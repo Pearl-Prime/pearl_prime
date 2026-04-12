@@ -172,8 +172,10 @@ def _load_config(config_root: Path) -> dict[str, Any]:
     if ":11434" in base_url or os.environ.get("OLLAMA_HOST", ""):
         if not data.get("api_key") or data["api_key"] == "lm-studio":
             data["api_key"] = "ollama"
-        if data.get("model", "") == "qwen3-14b":
-            data["model"] = "qwen3:14b"  # Ollama colon format
+        # Ollama (Pearl Star) only has qwen2.5:14b — never send cloud model names
+        from pearl_news.pipeline.cjk_qwen_model import PEARL_STAR_CJK_MODEL, is_ollama_openai_base_url
+        if is_ollama_openai_base_url(base_url):
+            data["model"] = PEARL_STAR_CJK_MODEL
 
     return data
 
@@ -270,6 +272,11 @@ def expand_article_with_llm(
     base_url = (config.get("base_url") or "").strip()
     model = config.get("model") or "qwen3-14b"
     api_key = (config.get("api_key") or "lm-studio").strip()
+
+    # Final Ollama guard: never send cloud model names to Pearl Star
+    from pearl_news.pipeline.cjk_qwen_model import PEARL_STAR_CJK_MODEL, is_ollama_openai_base_url
+    if is_ollama_openai_base_url(base_url):
+        model = PEARL_STAR_CJK_MODEL
     timeout = float(config.get("timeout") or 360)
     max_tokens = int(config.get("max_tokens") or 2048)
     temperature = float(config.get("temperature") or 0.5)

@@ -56,6 +56,10 @@ def merge_qwen_provider(full_cfg: dict[str, Any], provider: dict[str, Any]) -> d
     if ":11434" in (merged.get("base_url") or "") or os.environ.get("OLLAMA_HOST", ""):
         if not merged.get("api_key") or merged["api_key"] == "lm-studio":
             merged["api_key"] = "ollama"
+        # Ollama (Pearl Star) only has qwen2.5:14b — never send cloud model names
+        from pearl_news.pipeline.cjk_qwen_model import PEARL_STAR_CJK_MODEL, is_ollama_openai_base_url
+        if is_ollama_openai_base_url(merged.get("base_url")):
+            merged["model"] = PEARL_STAR_CJK_MODEL
 
     merged["enabled"] = full_cfg.get("enabled", True)
     return merged
