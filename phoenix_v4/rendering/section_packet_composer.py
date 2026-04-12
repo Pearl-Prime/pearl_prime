@@ -250,6 +250,11 @@ def compose_section_packet(
         _append_layer(blocks, sources_used, "depth_module", depth_text, seen_norms, min_words=11)
 
     raw_text = "\n\n".join(b for b in blocks if b)
+    _cap = spine_context.get("packet_word_cap")
+    if isinstance(_cap, int) and _cap > 0:
+        _w = raw_text.split()
+        if len(_w) > _cap:
+            raw_text = " ".join(_w[:_cap]).strip()
     cleaned_placeholders, ph_warn = _strip_placeholders(raw_text)
     extra_warnings.extend(ph_warn)
 

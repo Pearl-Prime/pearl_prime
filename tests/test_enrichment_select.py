@@ -33,6 +33,16 @@ def _beatmap(topic: str, fmt_std):
     return compile_beatmap(shaped, load_topic_engines(topic), fmt_std)
 
 
+def _beatmap_rf(topic: str, runtime_format: str, repo_root=None):
+    from pathlib import Path
+
+    root = repo_root or Path(__file__).resolve().parent.parent
+    fmt = load_format_spec(runtime_format, root)
+    spine = load_spine(topic, root)
+    shaped = apply_knobs(spine, load_knob_profile(topic, root), runtime_format=runtime_format)
+    return compile_beatmap(shaped, load_topic_engines(topic, root), fmt, repo_root=root)
+
+
 def test_select_enrichment_returns_book(fmt_std):
     bm = _beatmap("anxiety", fmt_std)
     book = select_enrichment(
@@ -396,6 +406,57 @@ def _repo_root():
     from pathlib import Path
 
     return Path(__file__).resolve().parent.parent
+
+
+def test_short_format_does_not_exceed_word_range_max():
+    import yaml
+
+    root = _repo_root()
+    fmt = load_format_spec("micro_book_15")
+    wmax = int(fmt["word_range"][1])
+    bm = _beatmap_rf("grief", "micro_book_15")
+    book = select_enrichment(
+        EnrichmentRequest(
+            beatmap=bm,
+            teacher_id=None,
+            persona_id="gen_z_professionals",
+            topic_id="grief",
+            seed="short_word_cap",
+        ),
+        repo_root=root,
+    )
+    assert book.total_words <= wmax
+    depth_map = yaml.safe_load(
+        (root / "config" / "depth" / "depth_module_map.yaml").read_text(encoding="utf-8")
+    )
+    book2 = apply_depth_pass(book, depth_map, repo_root=root)
+    assert book2.total_words <= wmax
+
+
+def test_deep_book_6h_exceeds_40k_words():
+    import yaml
+
+    root = _repo_root()
+    fmt = load_format_spec("deep_book_6h")
+    wmin, wmax = int(fmt["word_range"][0]), int(fmt["word_range"][1])
+    floor_80 = int(wmin * 0.8)
+    bm = _beatmap_rf("somatic_healing", "deep_book_6h")
+    book = select_enrichment(
+        EnrichmentRequest(
+            beatmap=bm,
+            teacher_id=None,
+            persona_id="gen_z_professionals",
+            topic_id="somatic_healing",
+            seed="deep_six_floor",
+        ),
+        repo_root=root,
+    )
+    depth_map = yaml.safe_load(
+        (root / "config" / "depth" / "depth_module_map.yaml").read_text(encoding="utf-8")
+    )
+    book = apply_depth_pass(book, depth_map, repo_root=root)
+    assert book.total_words >= floor_80
+    assert wmin <= book.total_words <= wmax
 
 
 def test_depth_pass_fills_thin_chapter(fmt_std):

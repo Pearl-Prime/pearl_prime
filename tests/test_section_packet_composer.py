@@ -178,3 +178,17 @@ def test_depth_module_split():
     assert "depth_module" in out["sources_used"]
     assert "d0" in out["text"]
     assert out["text"] == out["text"].strip()
+
+
+def test_packet_word_cap_truncates_stacked_packet():
+    body = " ".join(f"w{i}" for i in range(80))
+    out = compose_section_packet(
+        chapter_index=1,
+        section_index=1,
+        section_type="HOOK",
+        target_words=500,
+        spine_context={"packet_word_cap": 25},
+        beatmap_slot={},
+        enrichment_slot={"content": body, "source": "registry"},
+    )
+    assert out["word_count"] <= 25

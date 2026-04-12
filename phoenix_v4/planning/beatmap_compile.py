@@ -662,6 +662,7 @@ def compile_beatmap(
         "forbidden_moves_applied": forbidden_hits,
         "minimum_word_overrides": all_min_overrides,
         "runtime_word_midpoint": mid_total,
+        "runtime_word_range": [int(wmin), int(wmax)],
         "somatic_ten_slot_grid": shaped_spine.runtime_format in SOMATIC_FULL_RUNTIME_FORMATS,
     }
 

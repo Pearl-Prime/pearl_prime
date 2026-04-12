@@ -40,6 +40,33 @@ logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
+def _load_runtime_word_bounds(
+    runtime_format: str,
+    repo_root: Path,
+) -> Optional[Tuple[int, int]]:
+    """Return (min_words, max_words) from config/format_selection/format_registry.yaml."""
+    rf = (runtime_format or "").strip()
+    if not rf:
+        return None
+    path = repo_root / "config" / "format_selection" / "format_registry.yaml"
+    if not path.exists():
+        return None
+    data = _load_yaml(path)
+    block = (data.get("runtime_formats") or {}).get(rf)
+    if not isinstance(block, dict):
+        return None
+    wr = block.get("word_range")
+    if not isinstance(wr, (list, tuple)) or len(wr) < 2:
+        return None
+    try:
+        lo = int(wr[0])
+        hi = int(wr[1])
+    except (TypeError, ValueError):
+        return None
+    if hi <= 0:
+        return None
+    return lo, hi
+
 
 @dataclass
 class EnrichmentRequest:
@@ -190,14 +217,58 @@ def _wc(text: str) -> int:
     return len((text or "").split())
 
 
+def _personas_with_topic(topic: str, repo_root: Path) -> List[str]:
+    atoms_root = repo_root / "atoms"
+    if not atoms_root.is_dir():
+        return []
+    out: List[str] = []
+    for p in sorted(atoms_root.iterdir()):
+        if p.is_dir() and (p / topic).is_dir():
+            out.append(p.name)
+    return out
+
+
+def _merged_persona_atoms_deep_6h(
+    primary_persona: str,
+    topic: str,
+    repo_root: Path,
+) -> Dict[str, List[dict]]:
+    """
+    HOOK / SCENE / STORY pools for deep_book_6h: primary persona first, then other personas
+    for the same topic (deduped by normalized body).
+    """
+    ids = _personas_with_topic(topic, repo_root)
+    if primary_persona in ids:
+        ordered = [primary_persona] + [x for x in ids if x != primary_persona]
+    else:
+        ordered = [primary_persona] + ids
+
+    merged: Dict[str, List[dict]] = {}
+    for st in _PERSONA_OVERLAY_TYPES:
+        seen: set[str] = set()
+        acc: List[dict] = []
+        for pid in ordered:
+            for atom in _load_persona_atoms(pid, topic).get(st, []):
+                txt = str(atom.get("content") or "").strip()
+                n = _norm_ws(txt)
+                if not n or n in seen:
+                    continue
+                seen.add(n)
+                aid = str(atom.get("atom_id") or f"{pid}_{len(acc)}")
+                acc.append({"atom_id": aid, "content": txt})
+        if acc:
+            merged[st] = acc
+    return merged
+
+
 def _max_extra_chunks_for_format(runtime_format: str, slot_target_words: int) -> int:
     """Cap additional registry/persona/teacher variants per slot (format + beatmap slot target)."""
     rf = (runtime_format or "").strip()
     tw = max(0, int(slot_target_words or 0))
     if rf in ("micro_book_15", "micro_book_20"):
-        base = 1
+        base = 0
     elif rf == "short_book_30":
-        base = 2
+        base = 1
     elif rf == "standard_book":
         base = 3
     elif rf == "extended_book_2h":
@@ -205,11 +276,11 @@ def _max_extra_chunks_for_format(runtime_format: str, slot_target_words: int) ->
     elif rf == "deep_book_4h":
         base = 7
     elif rf == "deep_book_6h":
-        base = 11
+        base = 18
     else:
         base = 3
     extra = max(0, tw - 320) // 160
-    return min(20, base + extra)
+    return min(24, base + extra)
 
 
 def _extra_registry_variant_bodies(
@@ -348,6 +419,7 @@ def peek_registry_content_for_beatmap_slot(
     teacher_id: Optional[str],
     persona_id: str,
     seed: str,
+    repo_root: Optional[Path] = None,
 ) -> str:
     """
     Registry variant text that would apply at this beatmap slot if teacher/persona/practice
@@ -369,10 +441,16 @@ def peek_registry_content_for_beatmap_slot(
     reg_lists = _registry_type_lists(ch_data)
     reg_counters: Dict[str, int] = defaultdict(int)
 
+    root = repo_root or REPO_ROOT
     teacher_atoms: Dict[str, List[dict]] = _load_teacher_atoms(tid) if tid else {}
-    persona_atoms: Dict[str, List[dict]] = (
-        _load_persona_atoms(persona_id, topic) if persona_id else {}
-    )
+    pid = (persona_id or "").strip()
+    rf = (beatmap.runtime_format or "").strip()
+    if rf == "deep_book_6h" and pid:
+        persona_atoms = _merged_persona_atoms_deep_6h(pid, topic, root)
+    elif pid:
+        persona_atoms = _load_persona_atoms(pid, topic)
+    else:
+        persona_atoms = {}
     chapter_index0 = chapter_number - 1
 
     for slot_i in range(slot_index):
@@ -421,9 +499,17 @@ def select_enrichment(
     reg = load_registry(topic)
     sections_root = reg.get("sections") or {}
     teacher_atoms: Dict[str, List[dict]] = _load_teacher_atoms(tid) if tid else {}
-    persona_atoms: Dict[str, List[dict]] = (
-        _load_persona_atoms(persona_id, topic) if persona_id else {}
-    )
+    pid = (persona_id or "").strip()
+    rf_bm = (bm.runtime_format or "").strip()
+    if rf_bm == "deep_book_6h" and pid:
+        persona_atoms = _merged_persona_atoms_deep_6h(pid, topic, root)
+    elif pid:
+        persona_atoms = _load_persona_atoms(pid, topic)
+    else:
+        persona_atoms = {}
+
+    format_bounds = _load_runtime_word_bounds(bm.runtime_format, root)
+    format_wmax: Optional[int] = format_bounds[1] if format_bounds else None
 
     audit_counts = {
         "total_slots": 0,
@@ -434,6 +520,7 @@ def select_enrichment(
         "practice_library_warnings": 0,
         "slots_empty": 0,
         "slots_format_scaled": 0,
+        "format_word_cap_max": format_wmax,
     }
     total_target_words = 0
     gap_details: List[Dict[str, Any]] = []
@@ -518,20 +605,34 @@ def select_enrichment(
                 source_id = "gap"
 
             if content and not content.startswith("[CONTENT GAP:"):
+                book_words_prior = (
+                    sum(c.total_words for c in enriched_chapters) + ch_words
+                )
                 tw_tgt = slot.target_words
                 max_x = _max_extra_chunks_for_format(bm.runtime_format, tw_tgt)
                 base_wc = _wc(content)
+                if format_wmax is not None:
+                    room_book = max(0, format_wmax - book_words_prior)
+                    if base_wc > room_book:
+                        content = _truncate_to_word_budget(content, room_book)
+                        base_wc = _wc(content)
                 shortfall = max(0, tw_tgt - base_wc)
                 extra_bodies: List[str] = []
                 if max_x > 0 and shortfall >= 100:
                     goal = min(shortfall, tw_tgt)
-                    if source == "registry" and reg_sec_meta is not None:
+                    if format_wmax is not None:
+                        room_after_base = max(0, format_wmax - book_words_prior - base_wc)
+                        goal = min(goal, room_after_base)
+                    if goal < 100:
+                        goal = 0
+                    if source == "registry" and reg_sec_meta is not None and goal >= 100:
                         sd, vi = reg_sec_meta
                         extra_bodies = _extra_registry_variant_bodies(
                             sd, vi, seed_key, goal, max_x
                         )
                     elif (
-                        source == "persona_atom"
+                        goal >= 100
+                        and source == "persona_atom"
                         and persona_expand_pool
                         and persona_primary_idx is not None
                         and len(persona_expand_pool) > 1
@@ -545,7 +646,8 @@ def select_enrichment(
                             max_x,
                         )
                     elif (
-                        source == "teacher_atom"
+                        goal >= 100
+                        and source == "teacher_atom"
                         and teacher_expand_pool
                         and teacher_primary_idx is not None
                         and len(teacher_expand_pool) > 1
@@ -566,6 +668,11 @@ def select_enrichment(
                         source_id = f"{source_id}+v{nx}"
                     else:
                         source_id = f"{source_id}+stack{nx}"
+
+                if format_wmax is not None:
+                    room_slot = max(0, format_wmax - book_words_prior)
+                    if _wc(content) > room_slot:
+                        content = _truncate_to_word_budget(content, room_slot)
 
             actual_w = len(content.split())
             ch_words += actual_w
@@ -957,92 +1064,107 @@ def apply_depth_pass(
     tid = enriched_book.teacher_id
     persona_id = enriched_book.persona_id
     chapter_count = len(enriched_book.chapters)
+    rf = (enriched_book.runtime_format or "").strip()
+    _bounds = _load_runtime_word_bounds(rf, root)
+    book_wmax: Optional[int] = _bounds[1] if _bounds else None
+    deficit_floor = 55 if rf == "deep_book_6h" else 100
 
     enriched_book.enrichment_audit.setdefault("depth_modules_added", [])
 
     for chapter in enriched_book.chapters:
-        target_words = sum(s.target_words for s in chapter.slots)
-        actual_words = chapter.total_words
-        deficit = target_words - actual_words
-        if deficit <= 100:
-            continue
-
-        phase = _chapter_phase(chapter.number, chapter_count)
-        priority_key = f"depth_priority_{phase}"
-        priority_list = list(topic_overrides.get(priority_key) or [])
-        if not priority_list:
-            priority_list = list(DEFAULT_DEPTH_PRIORITY)
-
-        for module_name in priority_list:
-            if _module_banned(module_name, chapter.number, phase, topic_overrides):
-                continue
-
-            module = modules.get(module_name)
-            if not module:
-                continue
-
-            if not _chapter_affinity_ok(module.get("chapter_affinity"), chapter.number):
-                continue
-
-            restriction = module.get("topic_restriction")
-            if restriction and topic not in restriction:
-                continue
-
-            tw_bounds = module.get("target_words_per_chapter") or [200, 400]
-            upper_cap = int(tw_bounds[1]) if len(tw_bounds) > 1 else 400
-
-            for source in module.get("sources", []):
-                if not isinstance(source, dict):
-                    continue
-                content = _load_depth_content(
-                    source=source,
-                    topic=topic,
-                    teacher_id=tid,
-                    persona_id=persona_id,
-                    chapter_number=chapter.number,
-                    seed=f"depth:{topic}:{chapter.number}:{module_name}",
-                    repo_root=root,
-                )
-                if not content:
-                    continue
-                word_list = content.split()
-                if len(word_list) <= 20:
-                    continue
-
-                max_chunk = min(deficit, upper_cap)
-                trimmed = _truncate_to_word_budget(content, max_chunk)
-                added_w = len(trimmed.split())
-                if added_w <= 0:
-                    continue
-
-                depth_slot = EnrichedSlot(
-                    slot_type=f"DEPTH_{module_name.upper()}",
-                    content=trimmed,
-                    source=f"depth_module:{module_name}:{source.get('type')}",
-                    source_id=f"depth_{module_name}_{chapter.number}",
-                    target_words=max_chunk,
-                    actual_words=added_w,
-                    enrichment_applied=[module_name],
-                )
-                chapter.slots.append(depth_slot)
-                chapter.total_words += added_w
-                deficit = sum(s.target_words for s in chapter.slots) - chapter.total_words
-
-                enriched_book.enrichment_audit["depth_modules_added"].append(
-                    {
-                        "chapter": chapter.number,
-                        "module": module_name,
-                        "source_type": source.get("type"),
-                        "words_added": added_w,
-                        "remaining_deficit": max(0, deficit),
-                    }
-                )
-
-                if deficit <= 100:
-                    break
-
-            if deficit <= 100:
+        depth_rounds = 3 if rf == "deep_book_6h" else 1
+        for _depth_round in range(depth_rounds):
+            target_words = sum(s.target_words for s in chapter.slots)
+            actual_words = chapter.total_words
+            deficit = target_words - actual_words
+            if deficit <= deficit_floor:
                 break
+
+            phase = _chapter_phase(chapter.number, chapter_count)
+            priority_key = f"depth_priority_{phase}"
+            priority_list = list(topic_overrides.get(priority_key) or [])
+            if not priority_list:
+                priority_list = list(DEFAULT_DEPTH_PRIORITY)
+
+            for module_name in priority_list:
+                if _module_banned(module_name, chapter.number, phase, topic_overrides):
+                    continue
+
+                module = modules.get(module_name)
+                if not module:
+                    continue
+
+                if not _chapter_affinity_ok(module.get("chapter_affinity"), chapter.number):
+                    continue
+
+                restriction = module.get("topic_restriction")
+                if restriction and topic not in restriction:
+                    continue
+
+                tw_bounds = module.get("target_words_per_chapter") or [200, 400]
+                upper_cap = int(tw_bounds[1]) if len(tw_bounds) > 1 else 400
+                if rf == "deep_book_6h":
+                    upper_cap = min(1400, max(upper_cap, int(round(upper_cap * 2.4))))
+
+                for source in module.get("sources", []):
+                    if not isinstance(source, dict):
+                        continue
+                    content = _load_depth_content(
+                        source=source,
+                        topic=topic,
+                        teacher_id=tid,
+                        persona_id=persona_id,
+                        chapter_number=chapter.number,
+                        seed=f"depth:{topic}:{chapter.number}:{module_name}:r{_depth_round}",
+                        repo_root=root,
+                    )
+                    if not content:
+                        continue
+                    word_list = content.split()
+                    if len(word_list) <= 20:
+                        continue
+
+                    max_chunk = min(deficit, upper_cap)
+                    if book_wmax is not None:
+                        current_book = sum(ch.total_words for ch in enriched_book.chapters)
+                        room = book_wmax - current_book
+                        if room <= 0:
+                            continue
+                        max_chunk = min(max_chunk, room)
+                    trimmed = _truncate_to_word_budget(content, max_chunk)
+                    added_w = len(trimmed.split())
+                    if added_w <= 0:
+                        continue
+
+                    depth_slot = EnrichedSlot(
+                        slot_type=f"DEPTH_{module_name.upper()}",
+                        content=trimmed,
+                        source=f"depth_module:{module_name}:{source.get('type')}",
+                        source_id=f"depth_{module_name}_{chapter.number}",
+                        target_words=max_chunk,
+                        actual_words=added_w,
+                        enrichment_applied=[module_name],
+                    )
+                    chapter.slots.append(depth_slot)
+                    chapter.total_words += added_w
+                    deficit = sum(s.target_words for s in chapter.slots) - chapter.total_words
+
+                    enriched_book.enrichment_audit["depth_modules_added"].append(
+                        {
+                            "chapter": chapter.number,
+                            "module": module_name,
+                            "source_type": source.get("type"),
+                            "words_added": added_w,
+                            "remaining_deficit": max(0, deficit),
+                            "depth_round": _depth_round,
+                        }
+                    )
+
+                    if deficit <= deficit_floor:
+                        break
+
+                if deficit <= deficit_floor:
+                    break
 
     enriched_book.total_words = sum(ch.total_words for ch in enriched_book.chapters)
     enriched_book.enrichment_audit["total_words"] = enriched_book.total_words
