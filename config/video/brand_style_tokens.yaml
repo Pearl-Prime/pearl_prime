@@ -143,3 +143,13 @@ bands:
           - { hex: "#3A7A5A", prompt_name: "deep forest green" }
           - { hex: "#5A9A7A", prompt_name: "emerald" }
           - { hex: "#A8D4BC", prompt_name: "soft sage" }
+
+# Optional: per-teacher thumbnail / hook palettes for YouTube packaging (extend as teachers are added).
+youtube_teacher_visual_profiles: {}
+
+# BrandWizard.jsx proof pack — curated bank + ComfyUI FLUX; see scripts/image_generation/generate_brand_wizard_visual_proof.py
+brand_wizard_visual_proof:
+  artifact_dir: artifacts/video/image_banks/wizard
+  public_web_path: /onboarding/proof/wizard
+  generator_script: scripts/image_generation/generate_brand_wizard_visual_proof.py
+  comfyui_url_env: COMFYUI_URL

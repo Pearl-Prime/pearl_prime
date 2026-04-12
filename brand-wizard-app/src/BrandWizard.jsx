@@ -190,15 +190,91 @@ const VISUAL_STYLES = [
   },
 ];
 
-/** Image Pack v1 visual-identity proof URLs — keep in sync with onboarding example_registry.json */
+/** Visual-identity proof — curated bank (styles) + FLUX wizard pack; assets in public/onboarding/proof/wizard/ */
 const VISUAL_IDENTITY_PROOF_URL = {
-  calm_minimal: "/onboarding/proof/generated/pack_v1_vi_calm_v1.png",
-  dark_intense: "/onboarding/proof/generated/pack_v1_vi_dark_v1.png",
-  earthy_organic: "/onboarding/proof/generated/pack_v1_vi_earthy_v1.png",
-  bold_modern: "/onboarding/proof/generated/pack_v1_vi_bold_v1.png",
-  premium_soft: "/onboarding/proof/generated/pack_v1_vi_premium_v1.png",
-  sacred_cosmic: "/onboarding/proof/generated/pack_v1_vi_mysterious_v1.png",
+  calm_minimal: "/onboarding/proof/wizard/style_calm_minimal.png",
+  dark_intense: "/onboarding/proof/wizard/style_dark_intense.png",
+  earthy_organic: "/onboarding/proof/wizard/style_earthy_organic.png",
+  bold_modern: "/onboarding/proof/wizard/style_bold_modern.png",
+  premium_soft: "/onboarding/proof/wizard/style_premium_soft.png",
+  sacred_cosmic: "/onboarding/proof/wizard/style_sacred_cosmic.png",
 };
+
+const ARCHETYPE_PROOF_URL = {
+  nervous_system: "/onboarding/proof/wizard/archetype_nervous_system.png",
+  identity_direction: "/onboarding/proof/wizard/archetype_identity_direction.png",
+  emotional_healing: "/onboarding/proof/wizard/archetype_emotional_healing.png",
+  performance_focus: "/onboarding/proof/wizard/archetype_performance_focus.png",
+  spiritual_awakening: "/onboarding/proof/wizard/archetype_spiritual_awakening.png",
+};
+
+const PERSONA_PROOF_URL = {
+  burned_out_pro: "/onboarding/proof/wizard/persona_burned_out_pro.png",
+  gen_z_seeker: "/onboarding/proof/wizard/persona_gen_z_seeker.png",
+  gen_alpha: "/onboarding/proof/wizard/persona_gen_alpha.png",
+  grief_carrier: "/onboarding/proof/wizard/persona_grief_carrier.png",
+  anxious_achiever: "/onboarding/proof/wizard/persona_anxious_achiever.png",
+  spiritual_returner: "/onboarding/proof/wizard/persona_spiritual_returner.png",
+  new_parent: "/onboarding/proof/wizard/persona_overwhelmed_parent.png",
+};
+
+const MOMENT_PROOF_URL = {
+  "2am_overthinking": "/onboarding/proof/wizard/moment_2am_overthinking.png",
+  after_breakup: "/onboarding/proof/wizard/moment_after_breakup.png",
+  burnout_cant_quit: "/onboarding/proof/wizard/moment_burnout_office.png",
+  feeling_behind: "/onboarding/proof/wizard/moment_comparison_scroll.png",
+  panic_spike: "/onboarding/proof/wizard/moment_panic_tight_space.png",
+  sunday_dread: "/onboarding/proof/wizard/moment_sunday_dread.png",
+};
+
+const EMOTION_PROOF_URL = {
+  "Finally calm": "/onboarding/proof/wizard/emotion_finally_calm.png",
+  "Safe in my body": "/onboarding/proof/wizard/emotion_safe_in_body.png",
+  "Clear-headed": "/onboarding/proof/wizard/emotion_clear_headed.png",
+  "In control": "/onboarding/proof/wizard/emotion_in_control.png",
+  "Permission to rest": "/onboarding/proof/wizard/emotion_permission_rest.png",
+  Energized: "/onboarding/proof/wizard/emotion_energized.png",
+  "Connected to purpose": "/onboarding/proof/wizard/emotion_connected_purpose.png",
+  Released: "/onboarding/proof/wizard/emotion_released.png",
+  "Less alone": "/onboarding/proof/wizard/emotion_less_alone.png",
+  Forgiven: "/onboarding/proof/wizard/emotion_forgiven.png",
+  Grounded: "/onboarding/proof/wizard/emotion_grounded.png",
+  Hopeful: "/onboarding/proof/wizard/emotion_hopeful.png",
+  Present: "/onboarding/proof/wizard/emotion_present.png",
+  Confident: "/onboarding/proof/wizard/emotion_confident.png",
+  Resilient: "/onboarding/proof/wizard/emotion_resilient.png",
+};
+
+const TOPIC_TAG_PROOF_URL = Object.fromEntries(
+  [
+    "anxiety-at-night",
+    "overthinking",
+    "panic-grounding",
+    "sunday-dread",
+    "burnout-recovery",
+    "nervous-system-reset",
+    "decision-fatigue",
+    "phone-addiction",
+    "grief-timeline",
+    "toxic-relationship-healing",
+    "intergenerational-trauma",
+    "heartbreak-recovery",
+    "emotional-numbness",
+    "feeling-behind",
+    "quarter-life-crisis",
+    "identity-rebuild",
+    "purpose-after-30",
+    "habit-building",
+    "ADHD-productivity",
+    "dopamine-detox",
+    "deep-work",
+    "meditation-beginners",
+    "meaning-after-loss",
+    "spiritual-no-religion",
+    "inner-peace-chaos",
+    "mindfulness-skeptics",
+  ].map((t) => [t, `/onboarding/proof/wizard/topic_${t.replace(/-/g, "_")}.png`]),
+);
 
 const PROVEN = {
   nervous_system: {
@@ -743,9 +819,18 @@ function ProgressBar({ step, total, labels }) {
 function ArchetypeCard({ arch, selected, onClick }) {
   const Icon = arch.icon;
   const isActive = selected === arch.id;
+  const proofSrc = ARCHETYPE_PROOF_URL[arch.id];
   return (
     <button onClick={() => onClick(arch.id)} className={`relative text-left p-5 rounded-2xl border-2 transition-all duration-300 ${isActive ? `${arch.activeBorder} ${arch.bg} shadow-lg scale-[1.02]` : `border-gray-200 bg-white hover:border-gray-300 hover:shadow-md hover:-translate-y-0.5`}`}>
-      {isActive && <div className="absolute top-3 right-3"><div className="w-6 h-6 rounded-full bg-gray-900 flex items-center justify-center"><Check size={14} className="text-white" /></div></div>}
+      {isActive && <div className="absolute top-3 right-3 z-10"><div className="w-6 h-6 rounded-full bg-gray-900 flex items-center justify-center"><Check size={14} className="text-white" /></div></div>}
+      <div className={`mb-3 overflow-hidden rounded-xl border bg-gray-100 aspect-video ${isActive ? "ring-2 ring-offset-2 ring-gray-900 border-gray-900/20" : "border-gray-100"}`}>
+        <img
+          src={proofSrc}
+          alt=""
+          className={`w-full h-full object-cover transition-transform duration-300 ${isActive ? "scale-[1.04]" : ""}`}
+          loading="lazy"
+        />
+      </div>
       <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${arch.gradient} flex items-center justify-center mb-3`}><Icon size={20} className="text-white" /></div>
       <h3 className="font-bold text-gray-900 text-sm">{arch.name}</h3>
       <p className="text-xs text-gray-500 mt-1 leading-relaxed">{arch.tagline}</p>
@@ -759,8 +844,17 @@ function ArchetypeCard({ arch, selected, onClick }) {
 
 function PersonaCard({ persona, selected, onClick }) {
   const isActive = selected === persona.id;
+  const proofSrc = PERSONA_PROOF_URL[persona.id];
   return (
-    <button onClick={() => onClick(persona.id)} className={`text-left p-4 rounded-xl border-2 transition-all duration-200 w-full ${isActive ? "border-gray-900 bg-gray-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}>
+    <button onClick={() => onClick(persona.id)} className={`text-left p-4 rounded-xl border-2 transition-all duration-200 w-full ${isActive ? "border-gray-900 bg-gray-50 shadow-md scale-[1.01]" : "border-gray-200 bg-white hover:border-gray-300"}`}>
+      <div className={`mb-2 overflow-hidden rounded-lg border bg-gray-100 aspect-video ${isActive ? "ring-2 ring-offset-1 ring-gray-900 border-gray-900/20" : "border-gray-100"}`}>
+        <img
+          src={proofSrc}
+          alt=""
+          className={`w-full h-full object-cover transition-transform duration-200 ${isActive ? "scale-105" : ""}`}
+          loading="lazy"
+        />
+      </div>
       <div className="flex items-start gap-3">
         <span className="text-2xl">{persona.emoji}</span>
         <div className="flex-1">
@@ -777,8 +871,17 @@ function PersonaCard({ persona, selected, onClick }) {
 
 function MomentCard({ moment, selected, onClick }) {
   const isActive = selected === moment.id;
+  const proofSrc = MOMENT_PROOF_URL[moment.id];
   return (
-    <button onClick={() => onClick(moment.id)} className={`text-left p-4 rounded-xl border-2 transition-all duration-200 w-full ${isActive ? "border-gray-900 bg-gray-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}>
+    <button onClick={() => onClick(moment.id)} className={`text-left p-4 rounded-xl border-2 transition-all duration-200 w-full ${isActive ? "border-gray-900 bg-gray-50 shadow-md scale-[1.01]" : "border-gray-200 bg-white hover:border-gray-300"}`}>
+      <div className={`mb-2 overflow-hidden rounded-lg border bg-gray-100 aspect-video ${isActive ? "ring-2 ring-offset-1 ring-gray-900 border-gray-900/20" : "border-gray-100"}`}>
+        <img
+          src={proofSrc}
+          alt=""
+          className={`w-full h-full object-cover transition-transform duration-200 ${isActive ? "scale-105" : ""}`}
+          loading="lazy"
+        />
+      </div>
       <div className="flex items-start gap-3">
         <span className="text-2xl">{moment.emoji}</span>
         <div className="flex-1">
@@ -1378,12 +1481,12 @@ function Step6VisualStyle({ state, update }) {
       <div className="grid grid-cols-2 gap-3 mb-4">
         {VISUAL_STYLES.map((vs) => (
           <button key={vs.id} onClick={() => handleVisual(vs.id)}
-            className={`p-4 rounded-xl border-2 text-left transition-all ${state.visualStyle === vs.id ? "border-gray-900 bg-gray-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}>
-            <div className="w-full max-h-32 aspect-[2/3] mb-2 rounded-lg overflow-hidden border border-gray-100 bg-gray-100">
+            className={`p-4 rounded-xl border-2 text-left transition-all duration-200 ${state.visualStyle === vs.id ? "border-gray-900 bg-gray-50 shadow-md scale-[1.01]" : "border-gray-200 bg-white hover:border-gray-300"}`}>
+            <div className={`w-full aspect-video mb-2 rounded-lg overflow-hidden border bg-gray-100 ${state.visualStyle === vs.id ? "ring-2 ring-offset-2 ring-gray-900 border-gray-900/20" : "border-gray-100"}`}>
               <img
                 src={VISUAL_IDENTITY_PROOF_URL[vs.id]}
                 alt=""
-                className="w-full h-full object-cover"
+                className={`w-full h-full object-cover transition-transform duration-300 ${state.visualStyle === vs.id ? "scale-105" : ""}`}
                 loading="lazy"
               />
             </div>
@@ -1422,7 +1525,22 @@ function Step6VisualStyle({ state, update }) {
       <div className="flex flex-wrap gap-2 mb-3">
         {allEmotions.map((e) => {
           const active = (state.emotions || []).includes(e);
-          return <button key={e} onClick={() => handleEmotion(e)} className={`text-xs px-3 py-1.5 rounded-full border transition-all ${active ? "bg-gray-900 text-white border-gray-900" : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"}`}>{e}</button>;
+          const eSrc = EMOTION_PROOF_URL[e];
+          return (
+            <button
+              key={e}
+              onClick={() => handleEmotion(e)}
+              className={`inline-flex items-center gap-2 text-xs px-2 py-1.5 rounded-full border transition-all duration-200 ${active ? "bg-gray-900 text-white border-gray-900 shadow-sm" : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"}`}
+            >
+              <img
+                src={eSrc}
+                alt=""
+                className={`w-8 h-8 rounded-full object-cover border flex-shrink-0 transition-transform duration-200 ${active ? "border-white/40 scale-110" : "border-gray-200"}`}
+                loading="lazy"
+              />
+              <span>{e}</span>
+            </button>
+          );
         })}
       </div>
 
@@ -1530,10 +1648,17 @@ function Step7Topics({ state, update }) {
             <div className="flex flex-wrap gap-2">
               {cat.tags.map((tag) => {
                 const active = selectedTopicTags.includes(tag);
+                const tSrc = TOPIC_TAG_PROOF_URL[tag];
                 return (
                   <button key={tag} onClick={() => toggleTopicTag(tag)}
-                    className={`text-[11px] px-3 py-1.5 rounded-full border transition-all ${active ? "bg-gray-900 text-white border-gray-900" : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"}`}>
-                    {tag.replace(/-/g, " ")}
+                    className={`inline-flex items-center gap-2 text-[11px] px-2 py-1.5 rounded-full border transition-all duration-200 ${active ? "bg-gray-900 text-white border-gray-900 scale-[1.02]" : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"}`}>
+                    <img
+                      src={tSrc}
+                      alt=""
+                      className={`w-7 h-7 rounded-md object-cover border flex-shrink-0 ${active ? "border-white/30 ring-1 ring-white/40" : "border-gray-200"}`}
+                      loading="lazy"
+                    />
+                    <span>{tag.replace(/-/g, " ")}</span>
                   </button>
                 );
               })}
