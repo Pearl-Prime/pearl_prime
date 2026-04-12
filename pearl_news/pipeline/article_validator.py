@@ -112,17 +112,35 @@ def _youth_section_text(content: str) -> str:
     return content[max(0, idx - 100): idx + 3000]
 
 
-def gate_six_sections_present(content: str) -> tuple[bool, str]:
+def _is_cjk_locale(language: str | None) -> bool:
+    l = (language or "en").strip().lower()
+    if l in {"ja", "ko", "zh-cn", "zh-tw", "zh-hk", "zh-sg", "vi", "zh"}:
+        return True
+    return l.startswith("zh-")
+
+
+def gate_six_sections_present(content: str, language: str | None = None) -> tuple[bool, str]:
     """Check that all 6 required sections are present (proxied by structural signals)."""
     lower = content.lower()
+    youth_ok = any(k in lower for k in ["youth", "young people", "gen z", "gen alpha", "adolescent"])
+    teacher_ok = any(k in lower for k in ["tradition", "teaches that", "teach", "teacher"])
+    forward_ok = any(
+        k in lower for k in ["upcoming", "next", "will", "deadline", "summit", "vote", "action", "can "]
+    )
+    source_ok = "source:" in lower
+    if _is_cjk_locale(language):
+        youth_ok = youth_ok or any(x in content for x in ("若者", "青年", "年轻人", "Z世代", "z世代", "世代"))
+        teacher_ok = teacher_ok or any(x in content for x in ("伝統", "教え", "老师", "教師", "스승"))
+        forward_ok = forward_ok or any(x in content for x in ("今後", "予定", "即将", "将", "来月", "다음", "예정"))
+        source_ok = source_ok or "出典" in content or "来源" in content
     checks = {
         "lede (<h1>)": _has_h1(content),
         "news_summary (≥2 <p>)": _count_paragraphs(content) >= 2,
-        "youth_impact": any(k in lower for k in ["youth", "young people", "gen z", "gen alpha", "adolescent"]),
-        "teacher_perspective": any(k in lower for k in ["tradition", "teaches that", "teach", "teacher"]),
+        "youth_impact": youth_ok,
+        "teacher_perspective": teacher_ok,
         "sdg_connection": bool(re.search(r"sdg\s*\d+", lower) or "sustainable development goal" in lower),
-        "forward_look": any(k in lower for k in ["upcoming", "next", "will", "deadline", "summit", "vote", "action", "can "]),
-        "source_line": "source:" in lower,
+        "forward_look": forward_ok,
+        "source_line": source_ok,
     }
     failed = [name for name, ok in checks.items() if not ok]
     if failed:
@@ -130,25 +148,35 @@ def gate_six_sections_present(content: str) -> tuple[bool, str]:
     return True, "all 6 sections present"
 
 
-def gate_named_teacher(content: str) -> tuple[bool, str]:
+def gate_named_teacher(content: str, language: str | None = None) -> tuple[bool, str]:
     """Teacher section must not be the generic placeholder."""
     lower = content.lower()
     for phrase in _GENERIC_TEACHER_PHRASES:
         if phrase in lower:
             return False, f"Generic teacher placeholder detected: '{phrase}'"
-    # Must have "tradition" + a proper noun (capitalized word near it)
     has_tradition = "tradition" in lower
     has_teaches = "teaches that" in lower
+    if _is_cjk_locale(language):
+        has_tradition = has_tradition or "伝統" in content or "传统" in content
+        has_teaches = has_teaches or "教え" in content or "教导" in content
     if not (has_tradition or has_teaches):
         return False, "No named teacher attribution found (missing 'tradition' or 'teaches that')"
     return True, "named teacher present"
 
 
-def gate_teacher_three_points(content: str) -> tuple[bool, str]:
+def gate_teacher_three_points(content: str, language: str | None = None) -> tuple[bool, str]:
     """Teacher section should have at least 3 substantive paragraphs."""
     teacher_text = _teacher_section_text(content)
     paras = re.findall(r"<p[^>]*>(.+?)</p>", teacher_text, re.IGNORECASE | re.DOTALL)
-    substantive = [p for p in paras if len(p.strip().split()) >= 20]
+    min_words = 20
+    if _is_cjk_locale(language):
+        substantive = [
+            p
+            for p in paras
+            if len(p.strip().split()) >= min_words or len(re.sub(r"<[^>]+>", "", p).strip()) >= 40
+        ]
+    else:
+        substantive = [p for p in paras if len(p.strip().split()) >= min_words]
     if len(substantive) < 3:
         return False, f"Teacher section has only {len(substantive)} substantive paragraphs (need ≥3)"
     return True, f"teacher has {len(substantive)} substantive paragraphs"
@@ -190,11 +218,14 @@ def gate_no_banned_phrases(content: str) -> tuple[bool, str]:
     return True, "no banned phrases"
 
 
-def gate_source_line(content: str) -> tuple[bool, str]:
-    """Source: line must be preserved at end."""
+def gate_source_line(content: str, language: str | None = None) -> tuple[bool, str]:
+    """Source: line must be preserved at end (localized labels allowed for CJK)."""
     lower = content.lower()
     if "source:" in lower or "<em>source:" in lower:
         return True, "Source line present"
+    if _is_cjk_locale(language):
+        if "出典" in content or "来源" in content:
+            return True, "Source line present (localized label)"
     return False, "Source line missing — was stripped during expansion"
 
 
@@ -206,6 +237,7 @@ def validate_article(
     content: str,
     primary_sdg: str = "17",
     strict: bool = True,
+    language: str | None = None,
 ) -> dict[str, Any]:
     """
     Run all validation gates on expanded article content.
@@ -219,14 +251,14 @@ def validate_article(
 
     # Run gates
     gates_to_run = [
-        ("six_sections_present", gate_six_sections_present(content)),
-        ("named_teacher", gate_named_teacher(content)),
-        ("teacher_three_points", gate_teacher_three_points(content)),
+        ("six_sections_present", gate_six_sections_present(content, language=language)),
+        ("named_teacher", gate_named_teacher(content, language=language)),
+        ("teacher_three_points", gate_teacher_three_points(content, language=language)),
         ("sdg_number", gate_sdg_number(content)),
         ("sdg_full_title", gate_sdg_full_title(content, primary_sdg)),
         ("youth_anchor", gate_youth_anchor(content)),
         ("no_banned_phrases", gate_no_banned_phrases(content)),
-        ("source_line", gate_source_line(content)),
+        ("source_line", gate_source_line(content, language=language)),
     ]
 
     for gate_name, (passed, message) in gates_to_run:
@@ -261,7 +293,11 @@ def run_validation(
             item["_needs_manual_review"] = True
             continue
 
-        result = validate_article(content, primary_sdg=primary_sdg)
+        result = validate_article(
+            content,
+            primary_sdg=primary_sdg,
+            language=str(item.get("language") or "en").lower(),
+        )
         if item.get("_ei_hard_fail"):
             failed = list(result.get("failed_gates") or [])
             if "ei_v2_hard_fail" not in failed:

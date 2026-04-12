@@ -1,5 +1,5 @@
-# Pearl News — LLM expansion + routing (Qwen on Pearl Star for CJK6, Claude for English).
-# Aligns with docs/INTEGRATION_CREDENTIALS_REGISTRY.md (QWEN_BASE_URL, ANTHROPIC_API_KEY).
+# Pearl News — LLM expansion + routing (slot engine: Claude for EN, Qwen-compatible for CJK).
+# Rollback CJK to single-pass: set routing.fallback.use_legacy_full_document_cjk: true
 
 schema_version: 2
 
@@ -7,8 +7,6 @@ enabled: true
 
 # Default Qwen target: Pearl Star Ollama (:11434). Override with QWEN_BASE_URL.
 base_url: "http://192.168.1.112:11434/v1"
-# Pearl Star has qwen2.5:14b loaded. Do NOT change to qwen3.
-# Verified: curl http://192.168.1.112:11434/v1/models
 model: "qwen2.5:14b"
 api_key: "ollama"
 
@@ -18,21 +16,63 @@ max_tokens: 1500
 temperature: 0.5
 disable_thinking: true
 
-# Optional legacy key (Claude path also reads CLAUDE_MODEL).
 claude_model: "claude-sonnet-4-20250514"
 
+# Global defaults; per-provider maps override by article language
+min_output_chars:
+  default: 1000
+  en: 1500
+  ja: 800
+  zh-cn: 600
+  zh-tw: 600
+  ko: 800
+  vi: 800
+
+thin_output_retry: true
+
 routing:
-  default_provider: qwen
+  default_provider: qwen_slots
   language_map:
-    en: claude
-    ja: qwen
-    ko: qwen
-    zh-cn: qwen
-    zh-tw: qwen
-    zh-hk: qwen
-    zh-sg: qwen
+    en: claude_slots
+    ja: qwen_slots
+    ko: qwen_slots
+    zh-cn: qwen_slots
+    zh-tw: qwen_slots
+    zh-hk: qwen_slots
+    zh-sg: qwen_slots
+    vi: qwen_slots
   providers:
-    qwen:
+    claude_slots:
+      engine: slot_expansion
+      slot_backend: anthropic
+      api_key_env: ANTHROPIC_API_KEY
+      model_env: CLAUDE_MODEL
+      system_prompt: expansion_system_en.txt
+      max_tokens: 2000
+      temperature: 0.4
+      thin_output_retry: true
+      min_output_chars:
+        en: 1500
+        default: 1200
+    qwen_slots:
+      engine: slot_expansion
+      slot_backend: openai_compatible
+      base_url_env: QWEN_BASE_URL
+      model_env: QWEN_MODEL
+      api_key_env: QWEN_API_KEY
+      system_prompt: expansion_system_cjk.txt
+      max_tokens: 1500
+      temperature: 0.5
+      disable_thinking: true
+      thin_output_retry: true
+      min_output_chars:
+        ja: 800
+        zh-cn: 600
+        zh-tw: 600
+        ko: 800
+        vi: 800
+        default: 1000
+    qwen_legacy:
       engine: llm_expand
       base_url_env: QWEN_BASE_URL
       model_env: QWEN_MODEL
@@ -41,16 +81,10 @@ routing:
       max_tokens: 1500
       temperature: 0.5
       disable_thinking: true
-    claude:
-      engine: llm_expand_claude
-      api_key_env: ANTHROPIC_API_KEY
-      model_env: CLAUDE_MODEL
-      system_prompt: expansion_system_en.txt
-      max_tokens: 2000
-      temperature: 0.4
   fallback:
     on_provider_error: retry_with_default
     max_retries: 2
+    use_legacy_full_document_cjk: false
 
 ei_scoring:
   enabled: true

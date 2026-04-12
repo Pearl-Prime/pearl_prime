@@ -87,6 +87,7 @@ def load_teacher_topic_pack(
     teacher_id: str,
     topic: str,
     template_id: str | None = None,
+    language: str = "en",
 ) -> dict[str, Any] | None:
     topic = _normalize_topic(topic)
     base_path = repo_root / PACKS_ROOT / "teachers" / teacher_id / f"{topic}.yaml"
@@ -99,6 +100,13 @@ def load_teacher_topic_pack(
         overlay = _load_yaml(overlay_path)
         if overlay:
             base = _deep_merge(base, overlay)
+
+    lang = (language or "en").strip().lower()
+    if lang not in ("en", ""):
+        locale_pack = repo_root / PACKS_ROOT / "locales" / lang / "teachers" / teacher_id / f"{topic}.yaml"
+        loc_overlay = _load_yaml(locale_pack)
+        if loc_overlay:
+            base = _deep_merge(base, loc_overlay)
     return base
 
 
@@ -392,6 +400,7 @@ def build_hard_news_deterministic_plan(
     repo_root: Path,
     *,
     forced_map_id: str | None = None,
+    language: str = "en",
 ) -> dict[str, Any] | None:
     teacher = item.get("_teacher_resolved") or {}
     teacher_id = teacher.get("teacher_id")
@@ -399,7 +408,9 @@ def build_hard_news_deterministic_plan(
     if not teacher_id or not topic:
         return None
 
-    pack = load_teacher_topic_pack(repo_root, teacher_id, topic, "hard_news_spiritual_response")
+    pack = load_teacher_topic_pack(
+        repo_root, teacher_id, topic, "hard_news_spiritual_response", language=language
+    )
     if not pack or not pack.get("active", True):
         return None
 
@@ -603,6 +614,7 @@ def build_commentary_deterministic_plan(
     repo_root: Path,
     *,
     forced_map_id: str | None = None,
+    language: str = "en",
 ) -> dict[str, Any] | None:
     teacher = item.get("_teacher_resolved") or {}
     teacher_id = teacher.get("teacher_id")
@@ -610,7 +622,7 @@ def build_commentary_deterministic_plan(
     if not teacher_id or not topic:
         return None
 
-    pack = load_teacher_topic_pack(repo_root, teacher_id, topic, "commentary")
+    pack = load_teacher_topic_pack(repo_root, teacher_id, topic, "commentary", language=language)
     if not pack or not pack.get("active", True):
         return None
 
@@ -884,6 +896,7 @@ def build_explainer_deterministic_plan(
     repo_root: Path,
     *,
     forced_map_id: str | None = None,
+    language: str = "en",
 ) -> dict[str, Any] | None:
     """Build deterministic plan for explainer_context from base pack + overlay.
 
@@ -896,7 +909,7 @@ def build_explainer_deterministic_plan(
     if not teacher_id or not topic:
         return None
 
-    pack = load_teacher_topic_pack(repo_root, teacher_id, topic, "explainer_context")
+    pack = load_teacher_topic_pack(repo_root, teacher_id, topic, "explainer_context", language=language)
     if not pack or not pack.get("active", True):
         return None
 
@@ -1115,6 +1128,7 @@ def build_youth_feature_deterministic_plan(
     repo_root: Path,
     *,
     forced_map_id: str | None = None,
+    language: str = "en",
 ) -> dict[str, Any] | None:
     """Build deterministic plan for youth_feature from base pack + overlay.
 
@@ -1128,7 +1142,7 @@ def build_youth_feature_deterministic_plan(
     if not teacher_id or not topic:
         return None
 
-    pack = load_teacher_topic_pack(repo_root, teacher_id, topic, "youth_feature")
+    pack = load_teacher_topic_pack(repo_root, teacher_id, topic, "youth_feature", language=language)
     if not pack or not pack.get("active", True):
         return None
 
