@@ -1,7 +1,7 @@
 """
-Deterministic section packet assembly — bridge → legacy → enrichment → depth.
+Deterministic section packet assembly — bridge → journey → legacy → enrichment → teacher → depth.
 
-No LLM calls. Same inputs produce the same output.
+Stacks all available layers (no mutual exclusion). Same inputs produce the same output.
 """
 from __future__ import annotations
 
@@ -43,6 +43,10 @@ def _word_count(text: str) -> int:
     return len(text.split()) if text else 0
 
 
+def _collapse_ws(text: str) -> str:
+    return " ".join((text or "").split())
+
+
 def _enrichment_split(enrichment_slot: Optional[Dict[str, Any]]) -> Tuple[str, str]:
     """Core body vs depth body based on source prefix."""
     if not enrichment_slot:
@@ -52,6 +56,39 @@ def _enrichment_split(enrichment_slot: Optional[Dict[str, Any]]) -> Tuple[str, s
     if src.startswith("depth_module:"):
         return "", body
     return body, ""
+
+
+def _exercise_phase_key(exercise_phase: Any) -> Optional[str]:
+    if exercise_phase is None:
+        return None
+    if isinstance(exercise_phase, dict):
+        p = exercise_phase.get("phase")
+        if p is None:
+            return None
+        s = str(p).strip().lower()
+        return s if s else None
+    s = str(exercise_phase).strip().lower()
+    return s if s else None
+
+
+def _append_layer(
+    blocks: List[str],
+    sources_used: List[str],
+    label: str,
+    text: str,
+    seen_norms: set[str],
+    *,
+    min_words: int = 11,
+) -> None:
+    raw = (text or "").strip()
+    if _word_count(raw) < min_words:
+        return
+    norm = _collapse_ws(raw)
+    if norm in seen_norms:
+        return
+    seen_norms.add(norm)
+    blocks.append(raw)
+    sources_used.append(label)
 
 
 def compose_section_packet(
@@ -66,57 +103,81 @@ def compose_section_packet(
     legacy_template_section: Optional[Dict[str, Any]] = None,
     bridge_text: Optional[str] = None,
     quality_profile: str = "draft",
-    exercise_phase: Optional[str] = None,
+    exercise_phase: Optional[Any] = None,
+    depth_module_content: Optional[str] = None,
+    teacher_atom_content: Optional[str] = None,
 ) -> dict:
     """
-    Compose a single section packet from multiple sources.
+    Stack all available layers into one section packet.
 
-    Assembly order:
-      1. Bridge snippet (optional)
-      2. Legacy template scaffold (optional)
-      3. Core enrichment content (non-depth_module sources)
-      4. Depth module content (depth_module source OR explicit depth in slot)
+    Order:
+      1. Bridge (optional)
+      2. Exercise journey intro (optional)
+      3. Legacy template scaffold (optional)
+      4. Core enrichment (registry / persona / practice / gap — not depth_module-only rows)
+      5. Teacher atom overlay (optional, separate from slot.content when passed explicitly)
+      6. Depth module expansion (explicit arg and/or depth_module:* enrichment source)
     """
     del beatmap_slot, spine_context, quality_profile  # reserved for future routing / parity
 
     sources_used: List[str] = []
     blocks: List[str] = []
     extra_warnings: List[str] = []
+    seen_norms: set[str] = set()
 
     if bridge_text and str(bridge_text).strip():
-        blocks.append(str(bridge_text).strip())
-        sources_used.append("bridge")
+        _append_layer(blocks, sources_used, "bridge", str(bridge_text), seen_norms, min_words=1)
+
+    phase_key = _exercise_phase_key(exercise_phase)
+    if phase_key:
+        intro = JOURNEY_INTROS.get(phase_key)
+        if intro:
+            _append_layer(
+                blocks,
+                sources_used,
+                f"journey_intro:{phase_key}",
+                intro,
+                seen_norms,
+                min_words=1,
+            )
 
     legacy_text = ""
     if legacy_template_section:
         legacy_text = str(legacy_template_section.get("text") or "").strip()
         if legacy_text:
-            blocks.append(legacy_text)
-            sources_used.append("legacy_template")
+            _append_layer(
+                blocks,
+                sources_used,
+                "legacy_template",
+                legacy_text,
+                seen_norms,
+                min_words=11,
+            )
 
-    core, depth_from_split = _enrichment_split(enrichment_slot)
-
-    if exercise_phase:
-        phase_key = str(exercise_phase).strip().lower()
-        intro = JOURNEY_INTROS.get(phase_key)
-        if intro:
-            blocks.append(intro)
-            sources_used.append("journey_transition")
+    core_from_slot, depth_from_slot = _enrichment_split(enrichment_slot)
+    core = core_from_slot.strip()
 
     if core:
-        blocks.append(core)
-        sources_used.append("enrichment")
+        gap = core.startswith("[CONTENT GAP:")
+        min_c = 1 if gap else 11
+        if _word_count(core) >= min_c and (
+            gap or _collapse_ws(core) != _collapse_ws(legacy_text)
+        ):
+            _append_layer(blocks, sources_used, "enrichment", core, seen_norms, min_words=min_c)
 
-    depth_body = depth_from_split
-    if not depth_body and enrichment_slot:
-        src = str(enrichment_slot.get("source") or "")
-        if src.startswith("depth_module:"):
-            depth_body = str(enrichment_slot.get("content") or "").strip()
+    if teacher_atom_content:
+        _append_layer(
+            blocks,
+            sources_used,
+            "teacher_atom",
+            str(teacher_atom_content),
+            seen_norms,
+            min_words=11,
+        )
 
-    if depth_body:
-        blocks.append(depth_body)
-        if "depth_module" not in sources_used:
-            sources_used.append("depth_module")
+    depth_text = (depth_module_content or "").strip() or depth_from_slot
+    if depth_text and _word_count(depth_text) >= 11:
+        _append_layer(blocks, sources_used, "depth_module", depth_text, seen_norms, min_words=11)
 
     raw_text = "\n\n".join(b for b in blocks if b)
     cleaned_placeholders, ph_warn = _strip_placeholders(raw_text)

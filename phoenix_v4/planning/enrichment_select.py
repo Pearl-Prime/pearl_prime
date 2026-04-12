@@ -206,6 +206,99 @@ def _try_registry_variant(
     return content, vid
 
 
+def _peek_registry_variant(
+    reg_lists: Dict[str, List[Dict[str, Any]]],
+    slot_type: str,
+    reg_counters: Dict[str, int],
+    seed_key: str,
+) -> Optional[Tuple[str, str]]:
+    """Same as _try_registry_variant but does not advance reg_counters."""
+    st = slot_type.strip().upper()
+    lst = reg_lists.get(st, [])
+    idx = reg_counters[st]
+    if idx >= len(lst):
+        return None
+    sec_data = lst[idx]
+    variants = sec_data.get("variants") or []
+    if not variants:
+        return None
+    v_idx = _deterministic_index(f"{seed_key}:registry", len(variants))
+    var = variants[v_idx]
+    content = str(var.get("content") or "").strip()
+    if not content:
+        return None
+    vid = str(var.get("variant_id") or f"v{v_idx}")
+    return content, vid
+
+
+def peek_registry_content_for_beatmap_slot(
+    *,
+    beatmap: Beatmap,
+    chapter_number: int,
+    slot_index: int,
+    topic_id: str,
+    teacher_id: Optional[str],
+    persona_id: str,
+    seed: str,
+) -> str:
+    """
+    Registry variant text that would apply at this beatmap slot if teacher/persona/practice
+    did not consume the slot — counters match select_enrichment() for prior slots.
+    Used to stack teacher (or persona) overlay with registry baseline without double-consuming.
+    """
+    topic = topic_id
+    tid = _norm_teacher_id(teacher_id)
+    bm_ch = next((c for c in beatmap.chapters if c.number == chapter_number), None)
+    if bm_ch is None or slot_index < 0 or slot_index >= len(bm_ch.slots):
+        return ""
+
+    reg = load_registry(topic)
+    sections_root = reg.get("sections") or {}
+    ch_key = _chapter_key(chapter_number)
+    ch_data = sections_root.get(ch_key)
+    if not isinstance(ch_data, dict):
+        ch_data = {}
+    reg_lists = _registry_type_lists(ch_data)
+    reg_counters: Dict[str, int] = defaultdict(int)
+
+    teacher_atoms: Dict[str, List[dict]] = _load_teacher_atoms(tid) if tid else {}
+    persona_atoms: Dict[str, List[dict]] = (
+        _load_persona_atoms(persona_id, topic) if persona_id else {}
+    )
+    chapter_index0 = chapter_number - 1
+
+    for slot_i in range(slot_index):
+        slot = bm_ch.slots[slot_i]
+        stype = slot.slot_type.strip().upper()
+        seed_key = f"{seed}:topic:{topic}:ch{bm_ch.number}:slot:{slot_i}:{stype}"
+        content: Optional[str] = None
+
+        if tid and teacher_atoms:
+            t_hit = _try_teacher_content(teacher_atoms, stype, seed_key)
+            if t_hit:
+                content = t_hit[0]
+
+        if not content and persona_atoms:
+            p_hit = _try_persona_content(persona_atoms, stype, seed_key)
+            if p_hit:
+                content = p_hit[0]
+
+        if not content and stype == "EXERCISE":
+            pl = _try_practice_library(chapter_index0, topic, persona_id, seed)
+            if pl:
+                content = pl[0]
+
+        if not content:
+            r_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
+            if r_hit:
+                content = r_hit[0]
+
+    stype = bm_ch.slots[slot_index].slot_type.strip().upper()
+    seed_key = f"{seed}:topic:{topic}:ch{bm_ch.number}:slot:{slot_index}:{stype}"
+    peek = _peek_registry_variant(reg_lists, stype, reg_counters, seed_key)
+    return peek[0] if peek else ""
+
+
 def select_enrichment(
     request: EnrichmentRequest,
     repo_root: Optional[Path] = None,

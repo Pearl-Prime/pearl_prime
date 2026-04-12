@@ -15,6 +15,7 @@ from phoenix_v4.planning.enrichment_select import (
     budget_from_enriched,
     dump_enriched_book_json,
     enriched_book_to_jsonable,
+    peek_registry_content_for_beatmap_slot,
     select_enrichment,
 )
 from phoenix_v4.planning.knob_apply import apply_knobs, load_knob_profile, load_spine
@@ -79,6 +80,32 @@ def test_teacher_atoms_preferred_for_hook(fmt_std):
     hooks = [s for s in book.chapters[0].slots if s.slot_type == "HOOK"]
     assert hooks
     assert hooks[0].source == "teacher_atom"
+
+
+def test_peek_registry_for_beatmap_slot_non_empty_under_teacher(fmt_std):
+    bm = _beatmap("anxiety", fmt_std)
+    seed = "teacher_hook"
+    book = select_enrichment(
+        EnrichmentRequest(
+            beatmap=bm,
+            teacher_id="ahjan",
+            persona_id="gen_z_professionals",
+            topic_id="anxiety",
+            seed=seed,
+        )
+    )
+    assert book.chapters[0].slots[0].source == "teacher_atom"
+    peek = peek_registry_content_for_beatmap_slot(
+        beatmap=bm,
+        chapter_number=1,
+        slot_index=0,
+        topic_id="anxiety",
+        teacher_id="ahjan",
+        persona_id="gen_z_professionals",
+        seed=seed,
+    )
+    assert len(peek.split()) > 10
+    assert peek.strip() != book.chapters[0].slots[0].content.strip()
 
 
 def test_deterministic_same_seed(fmt_std):

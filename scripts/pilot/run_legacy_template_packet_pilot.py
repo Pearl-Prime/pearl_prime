@@ -34,12 +34,12 @@ def main() -> int:
     parser.add_argument("--seed", default="legacy_packet_pilot_v1")
     parser.add_argument(
         "--output-dir",
-        default="artifacts/pilot/legacy_template_packet/anxiety",
+        default="artifacts/pilot/stacked_packet/anxiety",
     )
     parser.add_argument(
         "--legacy-library",
-        default="v4_therapeutic",
-        help="library_id from config/templates/legacy_template_index.yaml",
+        default="v2_somatic",
+        help="library_id from config/templates/legacy_template_index.yaml (v2_somatic = 12×10 somatic YAML)",
     )
     parser.add_argument(
         "--exercise-journeys",
@@ -58,6 +58,7 @@ def main() -> int:
         apply_depth_pass,
         attach_exercise_journeys,
         budget_from_enriched,
+        peek_registry_content_for_beatmap_slot,
         select_enrichment,
     )
     from phoenix_v4.planning.knob_apply import apply_knobs, load_knob_profile, load_spine
@@ -135,6 +136,8 @@ def main() -> int:
         chapter_header = f"Chapter {ch_num}\n{ech.working_title}\n\n"
         book_parts.append(chapter_header)
 
+        bm_slot_count = len(bm_ch.slots) if bm_ch else 0
+
         for slot_idx, slot in enumerate(ech.slots):
             section_idx1 = slot_idx + 1
             bridge_text = None
@@ -143,17 +146,18 @@ def main() -> int:
                 if bridge_text:
                     bridge_hits += 1
 
-            legacy = load_legacy_section(
-                args.legacy_library,
-                ch_num,
-                min(section_idx1, 10),
-                "F1",
-                repo_root=REPO_ROOT,
-            )
             legacy_dict = None
-            if legacy.text.strip():
-                legacy_dict = {"text": legacy.text, "word_count": legacy.word_count}
-                legacy_hits += 1
+            if bm_slot_count and slot_idx < bm_slot_count:
+                legacy = load_legacy_section(
+                    args.legacy_library,
+                    ch_num,
+                    min(section_idx1, 10),
+                    "F1",
+                    repo_root=REPO_ROOT,
+                )
+                if legacy.text.strip():
+                    legacy_dict = {"text": legacy.text, "word_count": legacy.word_count}
+                    legacy_hits += 1
 
             spine_context = {
                 "thesis": thesis,
@@ -170,8 +174,23 @@ def main() -> int:
                     "weight": s.weight,
                 }
 
+            teacher_layer = None
+            enrichment_body = slot.content
+            if bm_ch and slot_idx < bm_slot_count and slot.source == "teacher_atom":
+                teacher_layer = slot.content
+                reg_stack = peek_registry_content_for_beatmap_slot(
+                    beatmap=beatmap,
+                    chapter_number=ch_num,
+                    slot_index=slot_idx,
+                    topic_id=topic,
+                    teacher_id=teacher,
+                    persona_id=persona,
+                    seed=args.seed,
+                )
+                enrichment_body = reg_stack if reg_stack.strip() else ""
+
             enr = {
-                "content": slot.content,
+                "content": enrichment_body,
                 "source": slot.source,
                 "enrichment_applied": list(slot.enrichment_applied or []),
                 "exercise_phase": getattr(slot, "exercise_phase", None),
@@ -185,6 +204,10 @@ def main() -> int:
             if not isinstance(tw, int) or tw <= 0:
                 tw = target_per_section_nominal
 
+            ex_phase = getattr(slot, "exercise_phase", None)
+            if not (bm_slot_count and slot_idx < bm_slot_count):
+                ex_phase = None
+
             packet = compose_section_packet(
                 chapter_index=ch_num,
                 section_index=section_idx1,
@@ -196,7 +219,8 @@ def main() -> int:
                 legacy_template_section=legacy_dict,
                 bridge_text=bridge_text,
                 quality_profile="draft",
-                exercise_phase=getattr(slot, "exercise_phase", None),
+                exercise_phase=ex_phase,
+                teacher_atom_content=teacher_layer,
             )
 
             body = packet["text"]
@@ -262,9 +286,10 @@ def main() -> int:
 
 ## Note
 
-Legacy scaffold hits depend on `config/templates/legacy_template_index.yaml` and extracted
-trees. Use `--legacy-library v2_somatic` when `template_expand2/_extracted/qaudiobook_template_v2_somatic/sections_somatic_v2/`
-is present (12×10×5 somatic YAML). Sparse V4 bootstrap trees only light a few slots.
+Default `--legacy-library` is `v2_somatic` when `template_expand2/_extracted/.../sections_somatic_v2/`
+is present (12×10×5 somatic YAML). Use `--legacy-library v4_therapeutic` only for the sparse
+2-section bootstrap tree. **Stacking:** teacher slots use registry peek + `teacher_atom` layer;
+composer stacks bridge → journey → legacy → enrichment → teacher → depth.
 
 ## Measured (from this run)
 

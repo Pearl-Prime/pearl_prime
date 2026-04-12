@@ -121,6 +121,31 @@ def test_v4_word_estimate_when_extracted():
     assert w > 50
 
 
+def test_v2_somatic_descends_sections_somatic_v2_wrapper(tmp_path, monkeypatch):
+    """Index may point at zip wrapper; loader finds YAML under sections_somatic_v2/."""
+    wrap = tmp_path / "qaudiobook_template_v2_somatic"
+    sec_dir = wrap / "sections_somatic_v2" / "chapter_01" / "section_01_hook"
+    sec_dir.mkdir(parents=True)
+    (sec_dir / "f1.yaml").write_text(
+        "content: |\n  "
+        + " ".join(f"w{i}" for i in range(12))
+        + "\n",
+        encoding="utf-8",
+    )
+
+    def fake_index(*_a, **_k):
+        return {"libraries": {"v2_somatic": {"path": "qaudiobook_template_v2_somatic"}}}
+
+    monkeypatch.setattr(
+        "phoenix_v4.planning.legacy_template_loader.load_legacy_template_index",
+        fake_index,
+    )
+    clear_legacy_template_path_cache()
+    sec = load_legacy_section("v2_somatic", 1, 1, "F1", repo_root=tmp_path)
+    assert sec.word_count >= 12
+    assert not any("section_yaml_not_found" in w for w in sec.warnings)
+
+
 def test_v2_somatic_expand2_section_when_extracted():
     ext = (
         REPO_ROOT

@@ -76,6 +76,15 @@ def load_legacy_template_index(
     return data if isinstance(data, dict) else {"schema_version": 0, "error": "invalid_yaml"}
 
 
+def _maybe_descend_sections_somatic_v2(root: Path) -> Path:
+    """
+    When the index path is the zip wrapper (qaudiobook_template_v2_somatic/),
+    section YAML lives under sections_somatic_v2/. Descend if that child exists.
+    """
+    nested = root / "sections_somatic_v2"
+    return nested if nested.is_dir() else root
+
+
 def _unwrap_single_dir_root(root: Path) -> Path:
     """
     If the archive extracted as a single top-level folder (e.g. one wrapper dir),
@@ -221,7 +230,7 @@ def _resolve_section_yaml_path(
     ch_names, sec_names = _chapter_section_dir_names(chapter, section)
 
     for raw_root in _candidate_roots_for_library(library_id, spec, repo_root):
-        root = _unwrap_single_dir_root(raw_root)
+        root = _maybe_descend_sections_somatic_v2(_unwrap_single_dir_root(raw_root))
         if not root.is_dir():
             continue
         for cd in ch_names:
@@ -240,7 +249,7 @@ def _resolve_section_yaml_path(
     sec_tag = f"section_{section:02d}"
     fam_lower = fam.lower()
     for raw_root in _candidate_roots_for_library(library_id, spec, repo_root):
-        root = _unwrap_single_dir_root(raw_root)
+        root = _maybe_descend_sections_somatic_v2(_unwrap_single_dir_root(raw_root))
         if not root.is_dir():
             continue
         for p in _list_yaml_under_root(root):
@@ -259,7 +268,7 @@ def _resolve_section_yaml_path(
     f_expect_l = f_expect.lower()
     sec_prefix = f"section_{section:02d}_"
     for raw_root in _candidate_roots_for_library(library_id, spec, repo_root):
-        root = _unwrap_single_dir_root(raw_root)
+        root = _maybe_descend_sections_somatic_v2(_unwrap_single_dir_root(raw_root))
         if not root.is_dir():
             continue
         for p in _list_yaml_under_root(root):
