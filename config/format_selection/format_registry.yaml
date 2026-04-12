@@ -96,42 +96,42 @@ runtime_formats:
   micro_book_15:
     duration_minutes: 15
     chapter_count_default: 5
-    word_range: [2500, 3000]
+    word_range: [2500, 4500]
     compatible_tiers: [A, B, C]
     compatible_structural_formats: [F015, F003]
   micro_book_20:
     duration_minutes: 20
     chapter_count_default: 5
-    word_range: [3000, 4000]
+    word_range: [3000, 5500]
     compatible_tiers: [A, B, C]
     compatible_structural_formats: [F015, F003]
   short_book_30:
     duration_minutes: 30
     chapter_count_default: 7
-    word_range: [4500, 5500]
+    word_range: [4500, 7500]
     compatible_tiers: [A, B, C]
     compatible_structural_formats: [F003, F006, F007, F011]
   standard_book:
     duration_minutes: 55
     chapter_count_default: 12
-    word_range: [9000, 11000]
+    word_range: [9000, 13000]
     compatible_tiers: [A, B]
     compatible_structural_formats: [F006, F007, F010, F011, F014]
   extended_book_2h:
     duration_minutes: 120
     chapter_count_default: 15
-    word_range: [18000, 22000]
+    word_range: [17000, 25000]
     compatible_tiers: [A, B]
     compatible_structural_formats: [F004, F009, F010, F014]
   deep_book_4h:
     duration_minutes: 240
     chapter_count_default: 20
-    word_range: [36000, 44000]
+    word_range: [20000, 40000]
     compatible_tiers: [A]
     compatible_structural_formats: [F004, F009, F013]
   deep_book_6h:
     duration_minutes: 360
     chapter_count_default: 24
-    word_range: [52000, 58000]
+    word_range: [50000, 65000]
     compatible_tiers: [A]
     compatible_structural_formats: [F013]

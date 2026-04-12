@@ -182,6 +182,17 @@ def test_render_book_enforce_chapter_flow_raises(tmp_path: Path, monkeypatch: py
         "strengthen_chapter_flow_for_delivery",
         lambda composed, **_: composed,
     )
+    # Force the flow gate to see a hard FAIL by injecting a chapter that always
+    # evaluates as FAIL (empty chapter text → CHAPTER_EMPTY error).
+    from phoenix_v4.quality.chapter_flow_gate import ChapterFlowResult
+    monkeypatch.setattr(
+        book_renderer_module,
+        "evaluate_chapter_flow",
+        lambda text, **kw: ChapterFlowResult(
+            status="FAIL", score=0,
+            errors=["FORCED_TEST_FAILURE"], warnings=[], metrics={},
+        ),
+    )
     plan = {
         "plan_hash": "flow_gate_fail_hash",
         "atom_ids": ["placeholder:HOOK:ch0:slot0", "placeholder:STORY:ch0:slot1"],
