@@ -847,22 +847,17 @@ function PersonaCard({ persona, selected, onClick }) {
   const proofSrc = PERSONA_PROOF_URL[persona.id];
   return (
     <button onClick={() => onClick(persona.id)} className={`text-left p-4 rounded-xl border-2 transition-all duration-200 w-full ${isActive ? "border-gray-900 bg-gray-50 shadow-md scale-[1.01]" : "border-gray-200 bg-white hover:border-gray-300"}`}>
-      <div className={`mb-2 overflow-hidden rounded-lg border bg-gray-100 aspect-video ${isActive ? "ring-2 ring-offset-1 ring-gray-900 border-gray-900/20" : "border-gray-100"}`}>
+      <div className={`mb-2 overflow-hidden rounded-lg border bg-gray-100 ${isActive ? "ring-2 ring-offset-1 ring-gray-900 border-gray-900/20" : "border-gray-100"}`}>
         <img
           src={proofSrc}
           alt=""
-          className={`w-full h-full object-cover transition-transform duration-200 ${isActive ? "scale-105" : ""}`}
+          className={`w-3/4 mx-auto object-contain transition-transform duration-200 ${isActive ? "scale-105" : ""}`}
           loading="lazy"
         />
       </div>
-      <div className="flex items-start gap-3">
-        <span className="text-2xl">{persona.emoji}</span>
-        <div className="flex-1">
-          <h4 className="font-bold text-sm text-gray-900">{persona.label}</h4>
-          <p className="text-[11px] text-gray-500 mt-0.5">{persona.desc}</p>
-          <p className="text-[11px] text-gray-600 font-medium mt-1.5">Needs: {persona.needs}</p>
-          {isActive && <p className="text-[11px] text-indigo-600 mt-1.5 italic">{persona.impact}</p>}
-        </div>
+      <div className="flex items-center gap-2">
+        <span className="text-lg">{persona.emoji}</span>
+        <h4 className="font-bold text-sm text-white flex-1">{persona.label}</h4>
         {isActive && <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center flex-shrink-0"><Check size={12} className="text-white" /></div>}
       </div>
     </button>

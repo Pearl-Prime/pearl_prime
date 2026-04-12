@@ -1,0 +1,97 @@
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: 你仍想学习，也清楚在任务真正开始之前，体系已经浪费了你多少注意。
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: 教育压力不只是作业量，更是打断密集的体系对注意、自信与持续接触学习的能力做了什么。
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: Master Fan Jo（以艺术和身体实践教授道教修养的教师）在实修里见过教育压力对学生做了什么。他们往往还没动笔，就已精疲力竭。Master Fan见过他们不问学校是否重要，而问如何把散掉的注意从私人失败里拆出来。
+    - id: teacher_intro_02
+      line: Master Fan Jo（立足自然与古琴）在实修场所见过教育压力表现为碎裂的注意与自责。Master Fan见过年轻人不问如何更用功，而问如何让体系不要把打断变成身份。
+youth_somatic:
+  options:
+    - id: youth_somatic_01
+      line: |
+        你打开作业门户。专注断了。你切换标签页。你又回来，因为活还得做完。
+        LOOP_SEQUENCE: 打开门户。专注断。切标签。回来。
+    - id: youth_somatic_02
+      line: |
+        你坐下阅读。心思跳到群聊。你关掉它。你又打开阅读，因为截止不会动。
+        LOOP_SEQUENCE: 坐下。心思跳走。关聊天。再打开阅读。
+teacher_witness:
+  options:
+    - id: teacher_witness_01
+      line: Master Fan在学生身上见过这一序列——任务打开，注意碎裂，标签切换，然后在同一紧绷的体系里努力重启。
+    - id: teacher_witness_02
+      line: Master Fan在工作室也见过这一循环——打开、断掉、切换、回来。身体与设备在注意落地之前不断把它扯开。
+turnaround:
+  options:
+    - id: turnaround_01
+      stat_line_1: 410 workshops. 27 cities.
+      stat_line_2: 学生与青年教育者在组织工作坊、开展同伴辅导，并争取更利于注意的学习空间。
+    - id: turnaround_02
+      stat_line_1: 410 workshops. 27 cities.
+      stat_line_2: 青年在组织运动、记录注意失灵，并举办不以无限专注为前提的同伴辅导。
+bridge:
+  options:
+    - id: bridge_01
+      line: 410 workshops. 27 cities. 追踪器衡量师生已在改变什么，却没有一栏记录「又一天碎片化之后，何以回到课业」——让身体足够久地找到自然，使一件事落地、而不把打断当成身份的容量。打开门户又回来的学生需要它。Master Fan的传统有语言与实践：借呼吸、动作与一行诚实，修养那种容量。
+      hidden_capacity: 让身体足够久地找到自然以使一件事落地
+    - id: bridge_02
+      line: 教育追踪器统计项目与结果，却不统计在体系不断打散注意时仍能留在任务上的内在容量——那是身体不再强求、心仍能回应时所余之物。下一次自习需要它，回到门户的读者也需要它。Master Fan的修养实践旨在守护它。
+      hidden_capacity: 在体系打散注意时仍留在任务上
+teacher_perspective:
+  options:
+    - id: teacher_perspective_01
+      header: Master Fan所见
+      paragraphs:
+        - Master Fan先区分碎片化与身份。在道教语汇里，自然性是努力落下之后仍存之物。当学习环境不断扯开注意，问题不是学生坏了，而是条件对学习所要求的整全本身不友好。
+        - 此处的修养不是生产力话术，而是让身体带路——一息、一线、一次重心移动——使注意在一事上停留足够久以学习。山不刻意求稳。让身体自己找到回归。
+        - 再框架因此更精确：像「我坏了、错了」这种感受，常常是对从未为持续注意而设计的制度与结构的准确反应。修法是把此身作为回归之处，而非责备之处。
+    - id: teacher_perspective_02
+      header: Master Fan所见
+      paragraphs:
+        - Master Fan以自然性读教育压力。无法专注的学生并非有缺陷。此身、此刻仍可是专注回来的地方。传统不要求你离开身体去学习，只要求你松开一成紧张，把余下交给呼吸与地面。
+        - 由此转向修养。问题不是永不分心，而是门户与聊天把人扯开之后，如何让身体带路使下一段落成为可能。一线、一次重心移动——那种再对齐使下一段落成为可能。
+        - 在这一框架下，自责会软化。过错不在你——不是破碎的自我，不是糊涂的心。问题是机构与政策体系的设计前提是人无法持续的注意。自然性一点一点回来。
+practice:
+  options:
+    - id: practice_01
+      display_name: Mountain Stillness and Brush
+      announcement_line: Master Fan教授五分钟「Mountain Stillness and Brush」，用于门户与标签已打散注意的时刻。在侧栏，下次学习块之前或又一次中断之后都够用。
+      relief_lines:
+        - 压力不再给整个自我命名。
+        - 足够自然性回来，支撑下一次诚实行动。
+    - id: practice_02
+      display_name: Mountain Stillness and Brush
+      announcement_line: Master Fan教授五分钟「Mountain Stillness and Brush」，用于专注已断、课业仍在等待的时刻。在侧栏，计时并逐步说明。
+      relief_lines:
+        - 身体找到自己的静。
+        - 下一段落成为可能。
+sdg:
+  primary:
+    title: 优质教育
+    line: 联合国通过SDG 4及其优质教育与终身学习目标，为这一问题提供框架。
+  fallback_un_tie:
+    line: Pearl News是独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+    - id: cta_01
+      line: "Student Voice等青年主导教育网络提供倡导与同伴支持的入口。入口: https://www.stuvoice.org"
+    - id: cta_02
+      line: UNA-USA在地方到全球层面运营教育与SDG 4项目。入口：加入其网络。
+title_system:
+  headline_layer_1:
+    options:
+      - id: headline_layer_1_01
+        line: 教育压力不只是作业量的问题。
+  headline_layer_2:
+    options:
+      - id: headline_layer_2_01
+        line: 道教教师把散掉的注意与个人失败分开。
+      - id: headline_layer_2_02
+        line: 道教教师点出体系不断拉扯时，身体能做什么。

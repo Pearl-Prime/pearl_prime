@@ -1,0 +1,97 @@
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: 每一次排班变动都要求你把不确定当作成熟。你一直在扛，也清楚背后要费多少隐形力气。
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: 经济压力如今落在不稳定条件下的自我管理：保持可雇佣、保持弹性、保持冷静，并表现得像体系在公平回报努力。
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: Master Fan Jo（以艺术与古琴教授道教修养）在实修里见过年轻人把工作不稳当作对品格的判决。Master Fan见过他们不只问如何更拼，还问如何把波动从自责里拆出来，以及在班次不停变时如何让身体找到自然。
+    - id: teacher_intro_02
+      line: Master Fan Jo（立足自然与太极）在工作室实修里见过不稳定工作对年轻人的影响。Master Fan见过学生与劳动者不问努力是否仍有意义，而问在体系拒绝静止时如何仍能迈出下一手，以及在名单上心思打转时如何从心感知。
+youth_somatic:
+  options:
+    - id: youth_somatic_01
+      line: |
+        你查看排班应用。胃一沉。你再刷新。然后截图，免得班次在你相信所见之前就改掉。
+        LOOP_SEQUENCE: 查了应用。胃沉了。再刷新。截了图。
+    - id: youth_somatic_02
+      line: |
+        你打开排班表。下颌发紧。你刷新。然后截图，因为现实一直在动。
+        LOOP_SEQUENCE: 打开名单。下颌紧。刷新。截了图。
+teacher_witness:
+  options:
+    - id: teacher_witness_01
+      line: Master Fan在学生与年轻劳动者身上见过这一工作循环——查看、下沉、刷新、试图把片刻事实钉住的截图。
+    - id: teacher_witness_02
+      line: Master Fan在工作室也见过这一顺序——应用打开，身体反应，手指刷新，截图钉住体系不愿担保的东西。
+turnaround:
+  options:
+    - id: turnaround_01
+      stat_line_1: 1,240 cases. 32 cities.
+      stat_line_2: 年轻劳动者与学生工联盟在记录条件、提起诉讼并推动地方劳动规则改变。
+    - id: turnaround_02
+      stat_line_1: 1,240 cases. 32 cities.
+      stat_line_2: 青年在组织争取稳定班次、公平工资与不把波动当性格考验的条件，并举办相关工作坊。
+bridge:
+  options:
+    - id: bridge_01
+      line: 1,240 cases. 32 cities. 追踪器衡量年轻劳动者挑战了什么，却没有一栏记录「又一周不稳定之后，何以还能提出下一次申诉或协商班次」——不把不稳定当成身份、仍能稳到足以行动的容量。截图的人需要它。Master Fan的传统为条件变动之后仍存之物有名：自然性。借呼吸、动作与一行诚实在此身中守护它。
+      hidden_capacity: 不把不稳定当身份而仍能稳到足以行动
+    - id: bridge_02
+      line: 劳动追踪器统计案件与政策胜利，却不统计不把自我价值整个交给班次表、仍能面对下一班或下一场会的内在容量——那是身体不再强求、心仍能回应时所余之物。下一次申诉需要它，刷新应用的劳动者也需要它。Master Fan的修养实践旨在守护它。
+      hidden_capacity: 不把价值交给班次表仍能出面
+teacher_perspective:
+  options:
+    - id: teacher_perspective_01
+      header: Master Fan所见
+      paragraphs:
+        - Master Fan先区分不稳定与身份。在道教语汇里，自然性是努力落下之后仍存之物；不由稳定雇佣创造，也不由糟糕班次摧毁。把变动条件内化为个人失败的证明，苦就会长。
+        - 此处的修养不是死扛话术，而是世界一直在动时让身体带路——一息、一线、一次重心移动——使下一手仍可能而不把整个自我坍进波动。心的回应快于分析。先从心感知。
+        - 再框架因此更精确：像「我坏了、错了」这种感受，常常是对建立在不稳定之上的经济的准确反应。问题是制度与结构不断制造只能由个人独自背负的东西。修法是把此身作为自然性之所，而非责备之所。
+    - id: teacher_perspective_02
+      header: Master Fan所见
+      paragraphs:
+        - Master Fan以自然性读工作不稳定。找不到稳定的劳动者并非有缺陷。此身、此刻仍可是尊严与行动相遇之处，无论班次下一步如何。传统不为求安而叫你离开身体，只叫你松开一成紧张，把余下交给呼吸与地面。
+        - 由此转向修养。问题不是永不在应用更新时胃沉，而是身体带路时下一手仍属于你——起诉、上班，或只是画一线而不把波动写成身份。
+        - 在这一框架下，自责会软化。问题不是年轻人缺韧性，也不是你感到不稳定就错了。问题是经济作为体系不断把不稳定外包给个人的神经系统。自然性一点一点回来。让身体自己找到静。
+practice:
+  options:
+    - id: practice_01
+      display_name: Mountain Stillness and Brush
+      announcement_line: Master Fan教授五分钟「Mountain Stillness and Brush」，用于工作不稳开始覆盖明晰的时刻。在侧栏，下一班之前或又一次班次冲击之后都够用。
+      relief_lines:
+        - 压力不再给整个自我命名。
+        - 足够自然性回来，支撑下一次诚实行动。
+    - id: practice_02
+      display_name: Mountain Stillness and Brush
+      announcement_line: Master Fan教授五分钟「Mountain Stillness and Brush」，用于班次刚又变、身体尚未跟上的时刻。在侧栏，计时并逐步说明。
+      relief_lines:
+        - 身体找到自己的静。
+        - 下一手仍可能而不至于崩解。
+sdg:
+  primary:
+    title: 体面工作和经济增长
+    line: 联合国通过SDG 8及其体面工作与经济增长目标，为这一问题提供框架。
+  fallback_un_tie:
+    line: Pearl News是独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+    - id: cta_01
+      line: "国际劳工组织与青年劳动权利团体都提供进入这一工作的入口。入口: https://www.ilo.org/global/topics/youth-employment"
+    - id: cta_02
+      line: UNA-USA在地方到全球层面以同一框架推进体面工作与SDG 8。入口：加入其网络。
+title_system:
+  headline_layer_1:
+    options:
+      - id: headline_layer_1_01
+        line: 工作不稳定吞噬的不只是工资。
+  headline_layer_2:
+    options:
+      - id: headline_layer_2_01
+        line: 道教教师把经济不稳定与固有尊严分开。
+      - id: headline_layer_2_02
+        line: 道教教师点出班次不停变时，身体能做什么。

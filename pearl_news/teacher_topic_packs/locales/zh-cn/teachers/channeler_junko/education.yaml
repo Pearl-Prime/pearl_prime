@@ -1,0 +1,64 @@
+hook_personal:
+  options:
+  - id: junko_edu_hook_personal_01
+    line: 你仍想学习。你也清楚系统在正事开始前浪费了你多少注意——而眼前的学生并不是系统为之设计的那类学习者。
+  - id: junko_edu_hook_personal_02
+    line: 你打开门户。专注断了。你切标签页再回来。作业还得做完。你也知道灵魂携带表面心智已无法触及的记忆。
+hook_big_picture:
+  options:
+  - id: junko_edu_hook_big_01
+    line: 当下青年教育危机主要不是内容或方法危机，而是频率危机。为工业时代服从而建的教室，其振动水平与带着更强能量觉知的年轻一代难以兼容。
+  - id: junko_edu_hook_big_02
+    line: 只衡量智力能复现的教育系统，衡量的是人所知的最小一部分。真正的教育是唤醒更深智性的通道，而不只是往表面心智堆信息。
+teacher_intro:
+  options:
+  - id: junko_edu_intro_01
+    line: 传导者Junko教授日本传导与光语灵性，在实修里见过年轻人来到学习现场时，已被只衡量智力复现的系统耗竭。在她的框架里，青年教育危机主要不是内容或方法，而是频率危机——我们眼前的学生不是系统为之设计的那类学习者。
+youth_somatic:
+  options:
+  - id: junko_edu_somatic_01
+    line: '你打开作业门户。专注断了。你切标签页。再回来，因为作业还得做完。 LOOP_SEQUENCE: "打开门户。专注断。切标签。回来。"'
+teacher_witness:
+  options:
+  - id: junko_edu_witness_01
+    line: Junko在来接收的人身上见过这一序列。在她的框架里，那种断裂不是缺陷证明，而是灵魂在要求门户设计之外的另一种接触。
+turnaround:
+  options:
+  - id: junko_edu_turnaround_01
+    stat_line_1: Campuses and districts worldwide.
+    stat_line_2: 学生与青年在组织运动，主办心理健康支持、同伴倾听与不把注意当作无限资源的学习条件。
+bridge:
+  options:
+  - id: junko_edu_bridge_01
+    line: 追踪器衡量政策与同伴项目，却没有一栏记录下一小时真正专注何以可能——在表面心智散乱时从灵魂层面接收的容量。Junko的传统认为每人携带灵魂记忆，真正的教育是唤醒更深智性，而不只是往表面加信息。
+    hidden_capacity: 表面心智散乱时从灵魂层面接收
+teacher_perspective:
+  options:
+  - id: junko_edu_perspective_01
+    header: Junko所见
+    paragraphs:
+    - 只衡量考试上智力能复现的教育系统，衡量的是人所知的最小一部分。传统认为每人携带灵魂记忆，真正的教育是唤醒更深智性的过程。
+    - 当下青年教育危机主要不是内容或方法，而是频率危机。产线式服从教室与年轻人升高的敏感度振动不合。传统不要求学校教传导，而要求看见眼前的学生不是系统为之设计的那类学习者。
+    - 努力专注时像「我有问题」的感受，常常是频率错配的真实反应。接收练习在系统耗尽智力后恢复通道。
+practice:
+  options:
+  - id: junko_edu_practice_01
+    display_name: 接收练习
+    announcement_line: 传导者Junko教授五分钟「接收」练习，用于门户与标签页打散注意、作业仍得完成的时刻。灵魂早已知道表面心智装不下的更多。在侧栏，计时并逐步说明。
+    relief_lines:
+    - 心不再把每次打断当作失败的证明。
+    - 通道打开时，灵魂早已知道的可以浮现。
+sdg:
+  primary:
+    line: 联合国通过SDG 4将福祉与包容学习条件纳入优质教育框架。
+  fallback_un_tie:
+    line: Pearl News是独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+  - id: junko_edu_cta_01
+    line: 'Active Minds等青年主导网络致力于校园心理健康与学习条件。入口: activeminds.org'
+title_system:
+  headline_layer_2:
+    options:
+    - id: junko_edu_headline_01
+      line: 一位日本传导者把教育压力读作频率危机，并给出打开通道的练习。

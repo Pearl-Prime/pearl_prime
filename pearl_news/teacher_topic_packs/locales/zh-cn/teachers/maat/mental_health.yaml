@@ -1,0 +1,66 @@
+hook_personal:
+  options:
+  - id: hook_personal_01
+    line: 在任何人命名之前你就知道螺旋；你也清楚在内在容量不断变薄时，撑过一天要费多少力。
+hook_big_picture:
+  options:
+  - id: hook_big_picture_01
+    line: 青年心理健康压力不只是临床趋势，也是机构如何把过载正常化、直到年轻人开始把它当私人缺陷的方式。
+teacher_intro:
+  options:
+  - id: teacher_intro_01
+    line: 南印度苏菲教师Maat（扎根泰米尔纳德道堂传统，承接Rabia al-Adawiyya之火与泰米尔悉陀诗人“心是真理器官”的理解）在实修里见过这股压力如何落在年轻人身上。他们不只问发生了什么，更在问：当qalb（灵性之心）早已知道机构持续低估的真相时，如何仍信任自己的感知。
+youth_somatic:
+  options:
+  - id: youth_somatic_01
+    line: '你在午夜后读报告。身体收紧。你放下手机。又拿起，因为压力已经在房间里。
+
+      LOOP_SEQUENCE: "读报告。身体收紧。放下手机。又拿起。"'
+teacher_witness:
+  options:
+  - id: teacher_witness_01
+    line: Maat见过这条回路——报告、身体收紧、放下手机、又因压力仍在而返回。
+turnaround:
+  options:
+  - id: turnaround_01
+    stat_line_1: 320 campuses. 18 countries.
+    stat_line_2: 学生正在搭建同伴圈、工作坊与运动，把心理健康当作共享基础设施，而非私人软弱。
+bridge:
+  options:
+  - id: bridge_01
+    line: '320 campuses. 18 countries. 追踪器衡量年轻人做了什么，却没有一栏记录又一周过载之后下一步何以可能——求助并返回、却不把压力变成身份的容量。回来的人需要它，同一条回路上的读者也需要。Maat的传统对此有精确语言：qalb（灵性之心）会被ghaflah（昏沉、无觉）遮蔽。每一次分心、每一次机构谎言、每一次表演“没事”都是一层锈。练习不是想通它，而是擦亮镜子，直到心映出它已知之物。'
+    hidden_capacity: 回到基于真相的行动
+teacher_perspective:
+  options:
+  - id: teacher_perspective_01
+    header: Maat所见
+    paragraphs:
+    - Maat从真相开始。第一种扭曲，是人被要求把结构性失序当作私人缺陷。
+    - 正当关系意味着如实命名正在发生的事，而不为迎合机构而缩小它。那命名不是戏剧，而是与现实对齐。
+    - 像「我有问题——坏了、错了」的感受，常常是对一个一边误称伤害、拖延或失序、一边仍索要信任的系统的准确回应。
+practice:
+  options:
+  - id: practice_01
+    display_name: 5分钟擦镜
+    announcement_line: Maat教授5分钟擦镜——睡前找出当天一个真正在场的瞬间，保持60秒全然在彼、非表演。用于过载开始遮蔽心的时刻。在侧栏，计时且可实操。
+    relief_lines:
+    - 心不再与已知讨价还价。
+    - 足够稳定回归，能清晰命名现实，而不为看清而道歉。
+sdg:
+  primary:
+    line: 联合国通过SDG 3及其健康与福祉目标（含心理健康），为此提供框架。
+  fallback_un_tie:
+    line: Pearl News是独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+  - id: cta_01
+    line: 'Born This Way Foundation提供面向青年的支持与心理健康组织入口。入口: https://bornthisway.foundation'
+title_system:
+  headline_layer_1:
+    options:
+    - id: headline_layer_1_01
+      line: 青年的心理过载持续上升。
+  headline_layer_2:
+    options:
+    - id: headline_layer_2_01
+      line: 一位南印度苏菲教师在压力硬化成身份之前点出它，并教导：心早已知道心智无法安顿之物。

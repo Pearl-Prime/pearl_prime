@@ -1,0 +1,97 @@
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: 你比任何时候都在意地球，却也感到更难在下一个数字旁停留足够久以决定做什么。
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: 一代人可以既知情又严肃，却在每次更新都像制度拖延过久的证据时，失去日常功能。
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: Master Fan Jo（以艺术、动作与古琴教授道教修养）在工作室实修里见过气候新闻对年轻人做了什么。Master Fan见过学生不求「冷静」，而求在压力下身体不再僵死，使下一手仍可能。
+    - id: teacher_intro_02
+      line: Master Fan Jo（立足道教自然与太极）在实修里见过气候恐惧先以道德严肃出现，再以身体强求出现。Master Fan见过年轻人不问危机是否真实，而问在心思螺旋之前如何回到身体所知——呼吸、地面、一行诚实。
+youth_somatic:
+  options:
+    - id: climate_threshold_phone_01
+      line: |
+        你在群聊里读到更新。胸发紧。你关掉应用。你又打开，因为不看并不会让数字变假。
+        LOOP_SEQUENCE: 读更新。胸紧。关应用。又打开。
+    - id: climate_threshold_phone_02
+      line: |
+        你在课前看到新阈值。喉发紧。你把手机扣下。你又拿起，因为未来不会等你准备好。
+        LOOP_SEQUENCE: 见阈值。喉紧。扣下手机。又拿起。
+teacher_witness:
+  options:
+    - id: mirrored_loop_01
+      line: Master Fan今年在学生身上见过这一循环本身——读、紧、关、回。
+    - id: mirrored_loop_02
+      line: Master Fan在年轻人身上见过这一顺序反复——数字抵达，身体收缩，手机放下，心思仍回去，因为现实还在。
+turnaround:
+  options:
+    - id: youth_action_climate_01
+      stat_line_1: 2,666 cases. 51 jurisdictions.
+      stat_line_2: 学生与青年联盟在培训同伴、组织运动，并迫使当局回应公共目标与生活现实之间的落差。
+    - id: youth_action_climate_02
+      stat_line_1: 2,666 cases. 51 jurisdictions.
+      stat_line_2: 年轻组织者在国家跟不上热度时仍提起诉讼、举办工作坊并记录地方损失。
+bridge:
+  options:
+    - id: tracker_capacity_01
+      line: 2,666 cases. 51 jurisdictions. 追踪器衡量年轻人做了什么，却没有一栏记录「又一次拖延之后，何以还能提出下一次申诉」——在体系仍不回应时仍能足够机能化以再行动的容量。提起下一份诉状的组织者需要它。读更新、关应用又打开的人也需要它。Master Fan的传统数千年培育它：身体不再强求时回来的自然性。
+      hidden_capacity: 保持足够机能以再行动
+    - id: tracker_capacity_02
+      line: 气候追踪器统计案件、目标与阈值，却不统计又一次制度拖延之后仍能接触真相足够久以再行动的内在容量——那是努力落下之后仍存、身体能从心而动之物。下一位组织者需要它，再次打开应用的读者也需要它。Master Fan的修养实践旨在守护它。
+      hidden_capacity: 接触真相而不丧失功能
+teacher_perspective:
+  options:
+    - id: naturalness_cultivation_01
+      header: Master Fan所见
+      paragraphs:
+        - Master Fan从自然性开始——努力落下之后仍存的状态。在气候新闻下发紧的身体不是故障；它在准确感知安抚与现实的不匹配。传统不要求你硬拗平静，只叫你松开一成紧张，把余下交给呼吸与地面。
+        - Master Fan把它与修养并置：借艺术、动作、呼吸与注意打磨自身。当气候信息不断变成无力，出路不在想透，而在让身体带路——一息、一线、一次重心移动——于是行动再次可能。
+        - 这里的转折很重要：像「我坏了、错了」这种感受，常常是对被制度拖延塑造的制度与结构的准确反应。从心先感，身体就不再把自己叫成废物。心的回应快于分析且更诚实。信任所抵达之物。
+    - id: naturalness_cultivation_02
+      header: Master Fan所见
+      paragraphs:
+        - Master Fan以心的回应读气候恐慌——在心思分类之前从心感知。你感到的紧迫不是误报，而是对危险的最深智性回应。
+        - 由此到自然性。问题不是终日平静，而是身体找到自己的静，使下一手不是硬推而是对齐。山不刻意求稳。让身体向它学习。
+        - 在这一框架下，自责会软化。问题不是年轻人太在意，也不是你感到紧绷就错了。问题是制度与结构把难以忍受的拖延外包给个人的神经系统。借艺术与呼吸的修养把你带回一直在那里的自然性，使你再能行动。
+practice:
+  options:
+    - id: mountain_stillness_01
+      display_name: Mountain Stillness and Brush
+      announcement_line: Master Fan教授五分钟「Mountain Stillness and Brush」，用于气候信息不断把注意变成无力感的时刻。在侧栏，计时并逐步说明。
+      relief_lines:
+        - 心不再把每次更新都当作行动无意义的证明。
+        - 更稳的内在节奏回来，连同再行动的容量。
+    - id: mountain_stillness_02
+      display_name: Mountain Stillness and Brush
+      announcement_line: Master Fan教授五分钟「Mountain Stillness and Brush」，用于气候数字变成宕机的时刻。在侧栏，课前、刷屏后或下一会前都够用。
+      relief_lines:
+        - 身体不再把每次更新都翻译成全面崩溃。
+        - 足够自然性回来，支撑下一次真实行动。
+sdg:
+  primary:
+    title: 气候行动
+    line: 联合国通过SDG 13及其气候教育与韧性目标，为这一落差提供框架。
+  fallback_un_tie:
+    line: Pearl News是独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+    - id: youngo_01
+      line: "气候现实项目与YOUNGO都运营面向青年的入口。入口: https://youngoclimate.org"
+    - id: una_usa_01
+      line: 若下一步不是它们，UNA-USA在地方到全球层面以同一框架工作。入口：加入其网络。
+title_system:
+  headline_layer_1:
+    options:
+      - id: threshold_warning_01
+        line: 1.5°C不再只是警告。
+  headline_layer_2:
+    options:
+      - id: taoist_attention_01
+        line: 道教教师点出气候压力正对Z世代注意做什么，以及身体能做什么。
+      - id: taoist_naturalness_01
+        line: 道教教师以自然性与修养读气候痛苦，而非把它当作软弱证明。

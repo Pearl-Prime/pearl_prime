@@ -180,12 +180,28 @@ def _load_config(config_root: Path) -> dict[str, Any]:
     return data
 
 
-def _load_system_prompt(prompts_root: Path, system_prompt_rel: str | None = None) -> str:
+def _load_system_prompt(
+    prompts_root: Path,
+    system_prompt_rel: str | None = None,
+    *,
+    language: str = "en",
+) -> str:
     rel = (system_prompt_rel or "").strip()
+    lang = (language or "en").lower()
     if rel:
         rel_clean = rel.lstrip("/")
         if rel_clean.startswith("prompts/"):
             rel_clean = rel_clean[len("prompts/") :]
+        base_name = Path(rel_clean).name
+        if base_name == "expansion_system_cjk.txt":
+            if lang == "ja" or lang.startswith("ja-"):
+                ja_p = prompts_root / "expansion_system_ja.txt"
+                if ja_p.exists():
+                    return ja_p.read_text(encoding="utf-8").strip()
+            if lang.startswith("zh"):
+                zh_p = prompts_root / "expansion_system_zh_cn.txt"
+                if zh_p.exists():
+                    return zh_p.read_text(encoding="utf-8").strip()
         p = prompts_root / rel_clean
         if p.exists():
             return p.read_text(encoding="utf-8").strip()
@@ -297,7 +313,7 @@ def expand_article_with_llm(
 
     root = Path(__file__).resolve().parent.parent
     prompts_root = root / "prompts"
-    system_prompt = _load_system_prompt(prompts_root, config.get("system_prompt"))
+    system_prompt = _load_system_prompt(prompts_root, config.get("system_prompt"), language=language)
 
     teacher_block = _render_teacher_block(teacher, prompts_root)
 

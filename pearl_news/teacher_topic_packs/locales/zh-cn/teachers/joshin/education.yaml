@@ -1,0 +1,95 @@
+hook_personal:
+  options:
+  - id: hook_personal_01
+    line: 你仍想学习，也清楚在任务真正开始之前，体系已经浪费了你多少注意。
+hook_big_picture:
+  options:
+  - id: hook_big_picture_01
+    line: 教育压力不只是作业量，更是打断密集的体系对注意、自信与持续接触学习的能力做了什么。
+teacher_intro:
+  options:
+  - id: teacher_intro_01
+    line: Joshin Sensei（真言密教传承的真言教师）在实修里见过学生光是「待在任务上」就已精疲力竭。他们不问学校是否重要，而问如何把散掉的注意从私人失败里拆出来，如何把身、语、意收回同一动作让学业落地。
+  - id: teacher_intro_02
+    line: Joshin Sensei（真言佛教教师）见过教育压力在实修场所表现为碎裂的注意与自责。年轻人不问如何更用功，而问如何让体系不要把打断变成身份。
+youth_somatic:
+  options:
+  - id: youth_somatic_01
+    line: '你打开作业门户。专注断了。你切换标签页。你又回来，因为活还得做完。
+
+      LOOP_SEQUENCE: "打开门户。专注断。切标签。回来。"'
+  - id: youth_somatic_02
+    line: '你坐下阅读。心思跳到群聊。你关掉它。你又打开阅读，因为截止不会动。
+
+      LOOP_SEQUENCE: "坐下。心思跳走。关聊天。再打开阅读。"'
+teacher_witness:
+  options:
+  - id: teacher_witness_01
+    line: Joshin Sensei在学生身上见过这一序列——任务打开，注意碎裂，标签切换，然后在同一紧绷的体系里努力重启。
+  - id: teacher_witness_02
+    line: 他在实修场所见过这一循环——打开、断掉、切换、回来。身体与设备在注意落地之前不断把它扯开。
+turnaround:
+  options:
+  - id: turnaround_01
+    stat_line_1: 410 workshops. 27 cities.
+    stat_line_2: 学生与青年教育者在组织工作坊、开展同伴辅导，并争取更利于注意的学习空间。
+  - id: turnaround_02
+    stat_line_1: 410 workshops. 27 cities.
+    stat_line_2: 青年在组织争取更好设计的运动，记录注意失灵，并举办不以无限专注为前提的同伴辅导。
+bridge:
+  options:
+  - id: bridge_01
+    line: 410 workshops. 27 cities. 追踪器衡量师生已在改变什么，却没有一栏记录「又一天碎片化之后，何以回到课业」——把身、语、意对齐足够久让一件事落地、而不把打断当成身份的容量。打开门户又回来的学生需要它。Joshin Sensei所承真言传统有这种对齐的语言与修法。
+  - id: bridge_02
+    line: 教育追踪器统计项目与结果，却不统计在体系不断打散注意时仍能留在任务上的内在对齐——按真言称为三密（Sanmitsu）。下一次自习需要它，回到门户的读者也需要它。Joshin Sensei的传统已培育逾千年。
+teacher_perspective:
+  options:
+  - id: teacher_perspective_01
+    header: Joshin Sensei所见
+    paragraphs:
+    - Joshin先区分碎片化与身份。在真言中，身、语、意本当合一运作。当学习环境不断把它们扯开，问题不是学生坏了，而是条件对学习所要求的对齐本身不友好。
+    - 此处的三密不是生产力话术，而是把三密收回同一动作、使注意在一事上停留足够久以学习的纪律。此处的正精进不是死扛，而是切换标签后仍能返回、而不把返回当作失败证明的能力。
+    - '再框架因此更精确：像「我坏了、错了」这种感受，常常是对从未为持续注意而设计的制度与结构的准确反应。修法是把此身作为返回之处，而非责备之处。'
+  - id: teacher_perspective_02
+    header: Joshin Sensei所见
+    paragraphs:
+    - Joshin Sensei以即身成佛（Sokushin Jobutsu）读教育压力——就在此身成佛。无法专注的学生并非有缺陷。此身、此刻仍可是专注回来的地方。传统不要求你离开身体去学习，而要求你对齐它。
+    - 由此转向三密。问题不是永不分心，而是在门户与聊天把人扯开之后，如何把身、语、意收回同一动作。那种再对齐使下一段落成为可能。
+    - 在这一框架下，自责会软化。过错不在你——不是破碎的自我，不是糊涂的心。问题是机构与政策体系的设计前提是人无法持续的注意。真言给出在此身中守住底线的方法。
+practice:
+  options:
+  - id: practice_01
+    display_name: 五分钟三密找回专注
+    announcement_line: Joshin Sensei教授五分钟「三密找回专注」，用于门户与标签已打散注意的时刻。在侧栏，下次学习块之前或又一次中断之后都够用。
+    relief_lines:
+    - 压力不再给整个自我命名。
+    - 足够对齐回来，支撑下一次诚实行动。
+  - id: practice_02
+    display_name: 三密对齐
+    announcement_line: Joshin Sensei教授五分钟「三密对齐」，用于专注已断、课业仍在等待的时刻。在侧栏，计时并逐步说明。
+    relief_lines:
+    - 身、语、意回到同一动作。
+    - 下一段落成为可能。
+sdg:
+  primary:
+    title: 优质教育
+    line: 联合国通过SDG 4及其优质教育与终身学习目标，为这一问题提供框架。
+  fallback_un_tie:
+    line: Pearl News是独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+  - id: cta_01
+    line: 'Student Voice等青年主导教育网络提供倡导与同伴支持的入口。入口: https://www.stuvoice.org'
+  - id: cta_02
+    line: UNA-USA在地方到全球层面运营教育与SDG 4项目。入口：加入其网络。
+title_system:
+  headline_layer_1:
+    options:
+    - id: headline_layer_1_01
+      line: 教育压力不只是作业量的问题。
+  headline_layer_2:
+    options:
+    - id: headline_layer_2_01
+      line: Joshin Sensei把散掉的注意与个人失败分开。
+    - id: headline_layer_2_02
+      line: Joshin Sensei点出体系不断拉扯时，身、语、意能做什么。

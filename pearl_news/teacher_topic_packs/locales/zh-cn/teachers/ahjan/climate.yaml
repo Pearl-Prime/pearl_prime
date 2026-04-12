@@ -1,0 +1,98 @@
+hook_personal:
+  options:
+  - id: hook_personal_01
+    line: 你对地球比以往任何时候都更关心，却常常觉得没法把下一个数字看久一点，好决定该做什么。
+  - id: hook_personal_02
+    line: 你持续阅读气候更新，因为移开目光像是不诚实。你也清楚每一个新数字正在对你的身体做什么。
+hook_big_picture:
+  options:
+  - id: hook_big_picture_01
+    line: 一代人可以既见多识广、道德上严肃，又会在每一次更新都像证明「机构等得太久」时，失去日常运转的能力。
+  - id: hook_big_picture_02
+    line: 压力不再只是生态层面的。它关乎注意、情绪与公民性：年轻人如何在接触现实的同时，不被现实压垮？
+teacher_intro:
+  options:
+  - id: identity_observation_shift_01
+    line: Ahjan是上座部佛教教师，修行二十五年，在实修场所见过这对年轻人意味着什么。学生不再问如何保持热情，而是问在承诺的未来按日程消失时，如何还能运转。
+  - id: identity_observation_shift_02
+    line: Ahjan作为上座部佛教教师二十五年，见过气候恐惧先在实修里以道德严肃出现，再以功能流失出现。学生不问危机是否真实，而问在成年人等待过久的持续证据下，如何避免注意崩溃。
+youth_somatic:
+  options:
+  - id: climate_threshold_phone_01
+    line: '你在群聊里读到更新。胸口发紧。你关掉应用。你又打开，因为不看并不会让数字变得不真实。
+
+      LOOP_SEQUENCE: "读更新。胸口发紧。关应用。又打开。"'
+  - id: climate_threshold_phone_02
+    line: '你在课前看到新的阈值。喉咙发紧。你把手机扣在桌上。你又拿起来，因为未来不会等你准备好。
+
+      LOOP_SEQUENCE: "看到阈值。喉咙发紧。扣下手机。又拿起。"'
+teacher_witness:
+  options:
+  - id: mirrored_loop_01
+    line: Ahjan今年在学生身上见过这一整段循环——读、发紧、关掉、再回来。
+  - id: mirrored_loop_02
+    line: 他见过年轻人在重复这一序列——数字到来，身体收缩，手机放下，心思又回去，因为现实仍在。
+turnaround:
+  options:
+  - id: youth_action_climate_01
+    stat_line_1: 2,666 cases. 51 jurisdictions.
+    stat_line_2: 学生与青年联盟在培训同伴、开展运动，并推动官员回应公共目标与现实生活之间的落差。
+  - id: youth_action_climate_02
+    stat_line_1: 2,666 cases. 51 jurisdictions.
+    stat_line_2: 年轻组织者仍在立案、办工作坊并记录地方损失，即便国家政府的动作仍慢于升温。
+bridge:
+  options:
+  - id: tracker_capacity_01
+    line: 2,666 cases. 51 jurisdictions. 追踪器衡量年轻人做了什么，却没有一栏记录「又一次拖延之后，下一次提交何以可能」——在体系持续不回应时，仍能再次行动所需的运转力。提起下一案的组织者需要它；读了更新、关掉应用又打开的人也需要它。Ahjan所承传统为此培育了两千年。
+  - id: tracker_capacity_02
+    line: 气候追踪器统计案件、目标与阈值，却不统计让年轻人能在又一次制度拖延之后仍与真相保持接触、再次行动的内在容量。下一任组织者需要它，重新打开应用的读者也需要它。Ahjan所承传统有语言与修法来保护这种容量。
+teacher_perspective:
+  options:
+  - id: samvega_right_effort_01
+    header: Ahjan所见
+    paragraphs:
+    - 佛教修行对这种压力有精确的名称：samvega（悚惧），即认识到世界比你被教导的更脆弱时那种动摇。气候痛苦之所以耗竭，往往不是因为身体失灵，而是身体在准确感知官方安抚与物质现实之间的错位。
+    - Ahjan将其与正精进并提。这不是生产力话语，而是在仍能与真相接触之处运用能量的纪律。无法再看下一份报告的心，不是在证明个人软弱，而是在回应一个要求持续关注却拒绝相称回应的体系。
+    - 这里的转折很重要：像「我坏了、错了」这种私人缺陷感，常常是对一个要求持续关注却拒绝相称制度行动的体系的准确反应。当心灵看见真正的失序在外部时，便不再把自己叫作坏的。
+  - id: samvega_right_effort_02
+    header: Ahjan所见
+    paragraphs:
+    - Ahjan以samvega读气候恐慌：现实严重到无法否认、身体先于语言知道的那一刻。那种紧迫不是错误信号，而是与危险的真实接触。
+    - 由此转向正精进。问题不是如何全天振奋，而是如何把能量用在仍能与真相接触之处，以免注意被无助的重复耗尽。
+    - 在这一框架下，自责会软化。过错不在你——不是破碎的自我，不是错的反应。问题是机构与政策体系把难以承受的拖延外包给个人的神经系统。与其把自己命名为失败，不如终于看见产生压力的结构。
+practice:
+  options:
+  - id: steadying_01
+    announcement_line: Ahjan教授五分钟「安定练习」，用于气候信息不断把注意变成无助的时刻。在侧栏，计时并逐步说明。
+    relief_lines:
+    - 心不再把每一次更新都当作行动无用的证明。
+    - 更稳的内在节奏回来，随之是再次行动的能力。
+  - id: steadying_02
+    announcement_line: Ahjan教授五分钟「安定练习」，用于气候数字变成关闭的时刻。在侧栏，课前、刷完屏或下一场会前都够用。
+    relief_lines:
+    - 身体不再把每一次更新都变成全面崩溃。
+    - 足够稳定回来，支撑下一次真实行动。
+sdg:
+  primary:
+    line: 联合国通过SDG 13及其气候教育与韧性目标，为这一落差提供了框架。
+  fallback_un_tie:
+    line: Pearl News是独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+  - id: youngo_01
+    line: 'The Climate Reality Project与YOUNGO都面向青年提供入口。入口: https://youngoclimate.org'
+  - id: una_usa_01
+    line: 若下一步不是那边，UNA-USA在地方到全球层面有项目。入口：加入其网络。
+title_system:
+  headline_layer_1:
+    options:
+    - id: threshold_warning_01
+      line: 1.55C不再只是预警。
+    - id: threshold_warning_02
+      line: 阈值不再抽象。
+  headline_layer_2:
+    options:
+    - id: buddhist_attention_01
+      line: 一位佛教教师点出气候压力正对Z世代注意做什么。
+    - id: buddhist_function_01
+      line: 一位佛教教师把气候痛苦读作争取运转能力，而非软弱证明。

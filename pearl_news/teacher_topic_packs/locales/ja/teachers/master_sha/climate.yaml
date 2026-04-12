@@ -1,0 +1,68 @@
+hook_personal:
+  options:
+  - id: master_sha_climate_hook_personal_01
+    line: 地球のことは気にしている。それでも次の数字に十分とどまって行動する力が弱い──知っていることと行うことのあいだに何かが流れを塞いでいるように感じる。
+  - id: master_sha_climate_hook_personal_02
+    line: 目をそらすと不誠実に感じるから気候の更新を読み続ける。それぞれの新しい数字が身体に何をしているか──締まり、閉じ、戻り──も知っている。
+hook_big_picture:
+  options:
+  - id: master_sha_climate_hook_big_01
+    line: 世代は情報豊かで道徳的にも真摯なのに、機関が長く待ちすぎた証拠として各更新が届くとき、行動する容量を失うことがある。伝統には、その流れを塞ぐものの名がある。
+  - id: master_sha_climate_hook_big_02
+    line: 圧力はもはや生態だけではない。注意とエネルギーの問題でもある。若者は現実とつながったまま、恐れが次の一歩を麻痺させる閉塞に変わらずにいられるか。
+teacher_intro:
+  options:
+  - id: master_sha_climate_intro_01
+    line: ジー・ガン・シャ師（Dr. and Master Zhi Gang Sha）は、数十年にわたりTao SourceとSoulfulnessを教え、実践の場で若者が気候ニュースを道徳的真剣さと行動の流れを塞ぐものの両方として抱えるのを見てきた。惑星が危ういかどうかではない。恐れが閉塞になり次の動きを麻痺させないよう、真実とどう接触し続けるかを問うている。
+youth_somatic:
+  options:
+  - id: master_sha_climate_somatic_01
+    line: 'グループチャットで更新を読む。胸が締まった。アプリを閉じた。また開いた。数字がそれでも真実だから。
+
+      LOOP_SEQUENCE: "更新を読んだ。胸が締まった。アプリを閉じた。また開いた。"'
+teacher_witness:
+  options:
+  - id: master_sha_climate_witness_01
+    line: Master Shaは受講者のなかでこのループそのものを見てきた。読む、締まる、閉じる、戻る。彼の枠組みではそれは故障ではない。若者が知っていることとまだできることのあいだの流れの閉塞を、システムが正確に登録しているのだ。
+turnaround:
+  options:
+  - id: master_sha_climate_turnaround_01
+    stat_line_1: 2,666 cases. 51 jurisdictions.
+    stat_line_2: 学生と若者連帯が仲間を訓練し、キャンペーンをつくり、公的目標と生きた現実のギャップに当局が答えざるを得ないようにしている。
+bridge:
+  options:
+  - id: master_sha_climate_bridge_01
+    line: '2,666 cases. 51 jurisdictions. トラッカーは若者が何をしたかを測る。前回の遅延のあと次の申し立てを可能にしたもの──生きる場所に愛とコンパッションを向け、閉塞が意志を飲み込まない容量──の欄はない。次の案件を起こした組織者に要った。更新を読み、アプリを閉じ、また開いた人にも要る。Master Shaの伝統にはその閉塞を晴らす名がある：最大の愛、最大の許し、最大のコンパッション。まず自己に、次に地球に。'
+    hidden_capacity: 愛とコンパッションを向け、閉塞が行動の意志を飲み込まないようにする
+teacher_perspective:
+  options:
+  - id: master_sha_climate_perspective_01
+    header: Master Shaが見ていること
+    paragraphs:
+    - Tao Sourceの教えは、創造すべてが単一の源でつながれており、人類が地球にすることは比喩ではなくエネルギー的現実として自分自身にすることだと説く。気候破壊は人類と惑星のあいだの流れの閉塞である。
+    - あらゆる閉塞と同様、まずはっきり見え、つくったパターンの繰り返しではなく変容の実践で迎えられるときにしか扱えない。最大の愛、最大の許し、最大のコンパッション──地球そのものに向けること──は感傷ではなく、実践の枠組みである。
+    - 気候被害の規模に麻痺したように感じる若者は、住む場所の土、水、すぐそばの空気に愛とコンパッションを向ける実践から始められる。「自分が壊れている」に感じることは、誰一人では直せないシステムと制度的条件へのしばしば正確な応答だ。この実践は実践者だけでなく場そのものも変えると伝統は説く。
+practice:
+  options:
+  - id: master_sha_climate_practice_01
+    display_name: Tao Source ゴールデンライトの実践
+    announcement_line: Master Shaは5分間のTao Sourceゴールデンライトの実践を教える。気候情報が閉塞に変わった瞬間のため。Tao Sourceから黄金の光を身体を洗うように招き、地球に愛とコンパッションを向ける。サイドバーに時間どおりステップ付きで載せている。
+    relief_lines:
+    - 次の一歩を麻痺させる閉塞がやわらぐ。
+    - 源との明瞭なつながりから再び行動するだけの流れが戻る。
+sdg:
+  primary:
+    line: 国連はSDG 13の枠組みのなかで、気候教育とレジリエンスの目標を示している。
+  fallback_un_tie:
+    line: Pearl Newsは独立の非営利団体です。国連とは提携していません。
+cta:
+  options:
+  - id: master_sha_climate_cta_01
+    line: 'The Climate Reality ProjectとYOUNGOは若者向けの入口を運営している。入口: https://youngoclimate.org'
+  - id: master_sha_climate_cta_02
+    line: 次の一歩がそれでなければ、UNA-USAが同じ枠組みを地域からグローバルまで扱う。入口：ネットワーク参加。
+title_system:
+  headline_layer_2:
+    options:
+    - id: master_sha_climate_headline_01
+      line: Tao Sourceの教師が気候の麻痺を閉塞として読み、それを晴らす実践を名指す。

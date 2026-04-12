@@ -1,0 +1,66 @@
+hook_personal:
+  options:
+  - id: hook_personal_01
+    line: まだ学びたい。今のシステムが注意を散らし、努力を消耗に変えるのがどれほど速いかも知っている。
+hook_big_picture:
+  options:
+  - id: hook_big_picture_01
+    line: 教育の負担は量だけではない。学校がまだ、注意と学びが働く条件をつくれるかどうかの問題でもある。
+teacher_intro:
+  options:
+  - id: teacher_intro_01
+    line: 南インドのスーフィー教師Maat（タミル・ナードゥのダルガー伝統、ラビア・アル＝アダウィーヤの炎とタミル・シッダ詩人たちの「心は真理の器官」という理解を受け継ぐ）は、実践の場でこの圧が若者にどう降りるかを見てきた。何が起きているかだけでなく、機関が繰り返し過小評価する真実を、qalb（霊的な心）がすでに知っているとき、自分の知覚をどう信じるかを問うている。
+youth_somatic:
+  options:
+  - id: youth_somatic_01
+    line: '課題ポータルを開く。集中が切れる。別の画面に移る。また戻る。課題はまだそこにあるから。
+
+      LOOP_SEQUENCE: "ポータルを開いた。集中が切れた。移った。戻った。"'
+teacher_witness:
+  options:
+  - id: teacher_witness_01
+    line: Maatはこのループそのものを見てきた。ポータルを開く、集中の断裂、離れ、課題がまだ残っているからの戻り。
+turnaround:
+  options:
+  - id: turnaround_01
+    stat_line_1: 410 workshops. 27 cities.
+    stat_line_2: 学生と教育者が学び支え、より健全な時間割、注意を「無限資源」として扱わない教室改革をつくっている──キャンペーンを並べるだけではない。
+bridge:
+  options:
+  - id: bridge_01
+    line: '410 workshops. 27 cities. トラッカーは若者が何をしたかを測る。もう一週の散らばった注意のあと、次の一歩を可能にしたもの──散らばりを自己像に変えず課題に戻る容量──の欄はない。戻ってきた人に要った。同じループの読者にも要る。Maatの伝統はこれを正確に語る：nafs（エゴの自己）は七段階あり、命令する暴君的自己から、落ち着き信頼する魂まで。断片と戦うのではない。どのnafsが舞台を取っているかに気づき、その気づきから、心を本当に大事なものへ戻す。'
+    hidden_capacity: 真実ある行動へ戻る
+teacher_perspective:
+  options:
+  - id: teacher_perspective_01
+    header: Maatが見ていること
+    paragraphs:
+    - Maatはまず真実から始める。最初の歪みは、構造的な乱れを私的欠陥として扱わされるときに起きる。
+    - 正しい関係とは、機関の都合に縮めずに、実際に起きていることを名指すことだ。その名指しは芝居ではなく、現実との整列である。
+    - 「自分が壊れている、間違っている」と感じることは、害・遅延・乱れを誤名しつつ信頼を求め続けるシステムへの、しばしば正確な応答である。
+practice:
+  options:
+  - id: practice_01
+    display_name: 5分間のナフス点検
+    announcement_line: 'Maatは週一回の5分間「ナフス点検」を教える──アル＝ガザーリに根ざし、今週いちばん自分を動かしたのはどのエゴ自己か。nafs al-ammara（欲望と反応に支配）にいたか、nafs al-mutmainna（落ち着き信頼する自己）に触れたか。裁きではなく、ただ気づく。サイドバーに時間どおり実用的に載せている。'
+    relief_lines:
+    - 心は、すでに知っていることと取引するのをやめる。
+    - 十分な安定が戻り、はっきり見ることを謝らずに現実を名指せる。
+sdg:
+  primary:
+    line: 国連はSDG 4とその質の高い教育の目標を通じて、この問いの枠組みを示している。
+  fallback_un_tie:
+    line: Pearl Newsは独立の非営利団体です。国連とは提携していません。
+cta:
+  options:
+  - id: cta_01
+    line: 'UNESCO Global Education Coalitionがここへの公的入口になる。入口: https://www.unesco.org/en/education/globaleducationcoalition'
+title_system:
+  headline_layer_1:
+    options:
+    - id: headline_layer_1_01
+      line: 学生の集中は、システムが適応するより速く失われている。
+  headline_layer_2:
+    options:
+    - id: headline_layer_2_01
+      line: 南インドのスーフィー教師が、学びを可能に保つ闘いを名指し、成績ではなく心が真理の器官だと語る。

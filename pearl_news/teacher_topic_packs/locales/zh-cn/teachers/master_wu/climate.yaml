@@ -1,0 +1,67 @@
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: 你在意地球，却也感到更难在下一个数字旁停留足够久以决定做什么。
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: 气候压力不再只是环境议题，也是注意、情感与公民性：年轻人如何在现实中保持接触而不在其下丧失功能？
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: Master Wu（土地与修养教师）在实修里见过这种压力落在年轻人身上。学生不只问如何更努力，而问如何在不断训练碎片化的环境里保持稳定。
+youth_somatic:
+  options:
+    - id: youth_somatic_01
+      line: |
+        你读气候更新。身体发紧。你移开目光。你又回来，因为数字仍然为真。
+        LOOP_SEQUENCE: "读了更新。身体紧。移开目光。回来。"
+teacher_witness:
+  options:
+    - id: teacher_witness_01
+      line: Master Wu见过这一循环——更新、身体发紧、移开目光，以及因现实仍在而返回。
+turnaround:
+  options:
+    - id: turnaround_01
+      stat_line_1: 2,666 cases. 51 jurisdictions.
+      stat_line_2: 年轻气候组织者在提起诉讼、举办工作坊，并迫使机构回应公共承诺与生活现实之间的落差。
+bridge:
+  options:
+    - id: bridge_01
+      line: 2,666 cases. 51 jurisdictions. 追踪器衡量年轻人做了什么，却没有一栏记录「又一次拖延或失效回应之后，何以还能迈出下一步」——在体系仍不回应时，仍能接触真相足够久以再行动的容量。回来的人需要它，处于那一循环的读者也需要它。Master Wu的教导有语言守护那种容量。
+      hidden_capacity: 回到依真相的行动
+teacher_perspective:
+  options:
+    - id: teacher_perspective_01
+      header: Master Wu所见
+      paragraphs:
+        - Master Wu从场域开始。注意、调节与努力既由意志也由条件塑造。
+        - 当周围场域碎片化、不稳定或严酷时，首要错误是把那种失序翻成对人的评判。
+        - 像「我坏了、错了」这种感受，常常是对你周围设计不良或恶化条件——以及从未为它所要求之物而设计的制度与结构——的准确反应。
+practice:
+  options:
+    - id: practice_01
+      display_name: 5-minute Return-to-Ground Practice
+      announcement_line: Master Wu教授五分钟「Return-to-Ground Practice」，用于气候压力开始把注意变成无力感的时刻。在侧栏，计时且务实。
+      relief_lines:
+        - 身体不再把每一种要求都当作全面失序。
+        - 足够调节回来，支撑下一次诚实行动。
+sdg:
+  primary:
+    title: 气候行动
+    line: 联合国通过SDG 13及其气候教育与韧性目标，为这一落差提供框架。
+  fallback_un_tie:
+    line: Pearl News是独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+    - id: cta_01
+      line: "YOUNGO与青年气候团体在此提供公共入口。入口: https://youngoclimate.org"
+title_system:
+  headline_layer_1:
+    options:
+      - id: headline_layer_1_01
+        line: 气候阈值不再抽象。
+  headline_layer_2:
+    options:
+      - id: headline_layer_2_01
+        line: 一位教师点出气候压力正对Z世代与Alpha世代的注意做什么。

@@ -1,0 +1,64 @@
+hook_personal:
+  options:
+  - id: junko_mh_hook_personal_01
+    line: 在别人说出名字之前，你就认得那种螺旋。你一边撑过一天，一边越来越不确定头脑还能不能跟上这种节奏——你也清楚，摩擦在「别人说你该要的」和「灵魂早已知道的」之间。
+  - id: junko_mh_hook_personal_02
+    line: 你继续读更新，因为不看似乎更糟。你也知道治疗、算法和自助内容一直在对你说话，却没有缓解——而有些东西需要被接收，而不是被生产出来。
+hook_big_picture:
+  options:
+  - id: junko_mh_hook_big_01
+    line: 青年心理过载不只是症状问题。更是持续压力如何侵蚀注意、休息与保持人性的能力——以及表面期待与灵魂早已知道之间的摩擦。
+  - id: junko_mh_hook_big_02
+    line: 年轻人敏感度升高不是病理，而是再校准。传统并不轻视他们的痛苦；而是把它重新框定为旧意义结构正在溶解、新结构尚未到来时，保持清醒所付的代价。
+teacher_intro:
+  options:
+  - id: junko_mh_intro_01
+    line: 传导者Junko教授日本传导与光语灵性，在实修里见过年轻人如何把心理过载既当作真实痛苦，也当作传统能精确命名之物：被告知该要的与灵魂早已知道的之间的摩擦。在Junko的框架里，灵魂携带意识已无法触及的记忆，光语抵达语言够不到的部分。
+youth_somatic:
+  options:
+  - id: junko_mh_somatic_01
+    line: '你在深夜读更新。脑子加速。你放下手机。又拿起来，因为螺旋已经在跑。 LOOP_SEQUENCE: "读更新。脑子加速。放下。又拿起。"'
+teacher_witness:
+  options:
+  - id: junko_mh_witness_01
+    line: Junko在来接收的人身上见过这条回路。在她的框架里，那种压力不是品格问题，而是当智力耗尽时，灵魂要求被听见。
+turnaround:
+  options:
+  - id: junko_mh_turnaround_01
+    stat_line_1: 320 campuses. 18 countries.
+    stat_line_2: 青年组织者在办同伴小组、听众培训，并推动学校把心理支持当作基础设施，而非私人软弱。
+bridge:
+  options:
+  - id: junko_mh_bridge_01
+    line: 320 campuses. 18 countries. 追踪器衡量年轻人建的工作坊与同伴圈，却没有一栏记录下一次真诚伸手何以可能——在治疗、算法与自助内容把智力说到疲惫之后，仍能接收指引的容量。Junko的传统提供另一种接触：绕过耗尽的智力，直接对实际承载痛苦的身体能量说话。
+    hidden_capacity: 在智力耗尽时仍能接收指引
+teacher_perspective:
+  options:
+  - id: junko_mh_perspective_01
+    header: Junko所见
+    paragraphs:
+    - 灵魂携带意识已无法触及的记忆；年轻人许多焦虑或抑郁体验，是被告知该要的与更深本性早已知道的摩擦。疗愈始于更大的自我被承认，而不是被用药压成沉默。
+    - 光语通过振动共鸣而非概念意义工作，抵达语言够不到的地方。对被说到疲惫的年轻人，传统提供另一种接触，绕过耗尽的智力。
+    - 行星转型意味着年轻人敏感度升高不是病理而是再校准。这种再框定不消除痛苦，但卸下额外负担：不必在从未为这种要求设计的制度里，相信痛苦等于你有问题。
+practice:
+  options:
+  - id: junko_mh_practice_01
+    display_name: 接收练习
+    announcement_line: 传导者Junko教授五分钟「接收」练习，用于螺旋已转、头脑独自硬解的时刻。在侧栏，计时并逐步说明。
+    relief_lines:
+    - 心不再把每一次思绪涌动当作「坏了」的证明。
+    - 通道打开时，灵魂早已知道的可以浮现。
+sdg:
+  primary:
+    line: 联合国框架在SDG 3中包含心理健康与福祉。
+  fallback_un_tie:
+    line: Pearl News是独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+  - id: junko_mh_cta_01
+    line: '若你或你认识的人处于危机，Crisis Text Line提供免费24/7支持。发短信HOME到741741。入口：加入其网络。'
+title_system:
+  headline_layer_2:
+    options:
+    - id: junko_mh_headline_01
+      line: 一位日本传导者把心理过载命名为灵魂摩擦，并给出打开通道的练习。

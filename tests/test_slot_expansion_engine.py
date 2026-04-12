@@ -106,6 +106,69 @@ def test_deterministic_pack_without_overlay_returns_english(tmp_path: Path) -> N
     assert merged.get("x") == 1
 
 
+def test_locale_overlay_merges_options_by_id(tmp_path: Path) -> None:
+    from pearl_news.pipeline.deterministic_teacher_topic import load_teacher_topic_pack
+
+    packs = tmp_path / "pearl_news" / "teacher_topic_packs"
+    base = packs / "teachers" / "t1" / "climate.yaml"
+    base.parent.mkdir(parents=True)
+    base.write_text(
+        "active: true\n"
+        "hook_personal:\n"
+        "  options:\n"
+        "  - id: a1\n"
+        "    line: English one\n"
+        "    meta: keep\n"
+        "  - id: a2\n"
+        "    line: English two\n",
+        encoding="utf-8",
+    )
+    loc = packs / "locales" / "ja" / "teachers" / "t1" / "climate.yaml"
+    loc.parent.mkdir(parents=True)
+    loc.write_text(
+        "hook_personal:\n"
+        "  options:\n"
+        "  - id: a1\n"
+        "    line: 日本語\n",
+        encoding="utf-8",
+    )
+    merged = load_teacher_topic_pack(tmp_path, "t1", "climate", language="ja")
+    assert merged is not None
+    opts = (merged.get("hook_personal") or {}).get("options") or []
+    by_id = {o["id"]: o for o in opts if isinstance(o, dict) and "id" in o}
+    assert by_id["a1"]["line"] == "日本語"
+    assert by_id["a1"]["meta"] == "keep"
+    assert by_id["a2"]["line"] == "English two"
+
+
+def test_resolve_expansion_system_prompt_ja_zh_from_cjk_provider(tmp_path: Path) -> None:
+    from pearl_news.pipeline.slot_expansion_engine import resolve_expansion_system_prompt
+
+    root = tmp_path / "prompts"
+    root.mkdir(parents=True)
+    (root / "expansion_system_cjk.txt").write_text("GENERIC_CJK", encoding="utf-8")
+    (root / "expansion_system_ja.txt").write_text("JA_SPECIAL", encoding="utf-8")
+    (root / "expansion_system_zh_cn.txt").write_text("ZH_SPECIAL", encoding="utf-8")
+
+    prov = {"system_prompt": "expansion_system_cjk.txt"}
+    assert (
+        resolve_expansion_system_prompt(root, language="ja", provider_cfg=prov, config={}).strip()
+        == "JA_SPECIAL"
+    )
+    assert (
+        resolve_expansion_system_prompt(root, language="zh-cn", provider_cfg=prov, config={}).strip()
+        == "ZH_SPECIAL"
+    )
+    assert (
+        resolve_expansion_system_prompt(root, language="zh-tw", provider_cfg=prov, config={}).strip()
+        == "ZH_SPECIAL"
+    )
+    assert (
+        resolve_expansion_system_prompt(root, language="ko", provider_cfg=prov, config={}).strip()
+        == "GENERIC_CJK"
+    )
+
+
 @pytest.mark.skipif(
     not __import__("importlib").util.find_spec("openai"),
     reason="openai package not installed",

@@ -1,0 +1,67 @@
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: 仕事は柔軟さをますます求め、安定はますます与えません。スケジュールが認める前に、身体は代償を知っています。
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: 経済のストレスは今やアイデンティティの圧力として届きます。雇われ続けること、常に応答できること、不安定さが性格の試練であるかのように振る舞うこと。
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: Master Wu（土地と修練の教師）は、実践の場でこの圧力が若者に落ちるのを見てきました。学生はもっと頑張る方法だけを問うのではありません。断片化を訓練し続ける環境のなかでどう安定するかを問っています。
+youth_somatic:
+  options:
+    - id: youth_somatic_01
+      line: |
+        スケジュールアプリを確認します。胃が沈みます。また更新します。見たものを信じられる前にシフトが消えるかもしれないので、スクショします。
+        LOOP_SEQUENCE: "アプリを確認した。胃が沈んだ。また更新した。スクショした。"
+teacher_witness:
+  options:
+    - id: teacher_witness_01
+      line: Master Wuはこのループそのものを見てきました。アプリの確認、身体の沈み、更新、瞬間を止めようとするスクショです。
+turnaround:
+  options:
+    - id: turnaround_01
+      stat_line_1: 1,240 cases. 32 cities.
+      stat_line_2: 若い労働者が条件を記録し、賃金窃盗の案件を起こし、不安定な労働ルールを公的記録に引きずり出すキャンペーンを組織しています。
+bridge:
+  options:
+    - id: bridge_01
+      line: 1,240 cases. 32 cities. トラッカーは若者がしたことを測ります。もう一つの遅れか破綻した対応のあと、次の一歩を可能にしたもの──経済が不確実さを私的ストレスに変え続けるときに、再び十分機能して行動する容量──の欄はありません。戻ってきた人にはそれが要りました。そのループの読者にも要ります。Master Wuの教えには、その容量を守る言葉があります。
+      hidden_capacity: 真実に沿った行動へ戻る
+teacher_perspective:
+  options:
+    - id: teacher_perspective_01
+      header: Master Wuが見ていること
+      paragraphs:
+        - Master Wuはまず場から始めます。注意、調整、努力は意志だけでなく条件によって形づくられます。
+        - 周りの場が断片的で不安定、あるいは厳しいとき、最初の誤りはその混乱を人への判断に翻訳することです。
+        - 「自分が壊れている、間違っている」に感じることが、しばしば求めることのために設計されなかった制度・構造のまわりの、劣化した条件への正確な反応です。
+practice:
+  options:
+    - id: practice_01
+      display_name: 5-minute Return-to-Ground Practice
+      announcement_line: Master Wuは、仕事と経済の圧力が注意を無力感に変え始める瞬間のため、5分間のReturn-to-Ground Practiceを教えています。サイドバーに、時間どおり実用的に載せています。
+      relief_lines:
+        - 身体はあらゆる要求を全面の混乱だとするのをやめます。
+        - 次の正直な行動に足る調整が戻ります。
+sdg:
+  primary:
+    title: 働きがいのある経済成長と包摂的かつ持続可能な経済
+    line: 国連はSDG 8とその働きがいのある仕事の目標を通じて、これへの枠組みを示しています。
+  fallback_un_tie:
+    line: Pearl Newsは独立の非営利団体です。国連とは提携していません。
+cta:
+  options:
+    - id: cta_01
+      line: "ILOと若者労働者連合が、ここへの公的入口を提供しています。入口: https://www.ilo.org/global/topics/youth-employment"
+title_system:
+  headline_layer_1:
+    options:
+      - id: headline_layer_1_01
+        line: 若い労働者は賃金の裏に見えない不安定を背負っています。
+  headline_layer_2:
+    options:
+      - id: headline_layer_2_01
+        line: 教師が、不安定さの下で機能し続ける隠れた闘いを名指します。

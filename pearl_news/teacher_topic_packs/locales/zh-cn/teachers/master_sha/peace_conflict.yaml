@@ -1,0 +1,66 @@
+hook_personal:
+  options:
+  - id: master_sha_peace_hook_personal_01
+    line: 你能感到公共暴力通过一条通知进入私人生活。身体比语言更早知道，恐惧可变成再生伤害的淤塞。
+  - id: master_sha_peace_hook_personal_02
+    line: 你继续读，因为不看像是不诚实。你也清楚反复冲突新闻对身体在做什么——收紧、停住、再查一次。
+hook_big_picture:
+  options:
+  - id: master_sha_peace_hook_big_01
+    line: 冲突压力不再只是地缘政治，也以道德创伤到来，也以群体之间场域的淤塞到来。传统认为，唯有清理淤塞，回应才停止复制暴力。
+  - id: master_sha_peace_hook_big_02
+    line: 当恐惧、怨恨与未疗愈的创伤未经清理而堆积，就会表现为敌意乃至暴力。和平不是靠压制淤塞，而是靠清理。
+teacher_intro:
+  options:
+  - id: master_sha_peace_intro_01
+    line: Dr. and Master Zhi Gang Sha数十年教授Tao Source与Soulfulness，在实修里见过年轻人把冲突压力同时当作恐惧与责任。他们不问世界是否危险，而问如何在接触危险的同时，不让恐惧变成复制暴力的淤塞。
+youth_somatic:
+  options:
+  - id: master_sha_peace_somatic_01
+    line: '你读到冲突警报。胸收紧。你停了一秒。又查一次，因为危险是真实的。
+
+      LOOP_SEQUENCE: "读警报。胸收紧。停住。再查。"'
+teacher_witness:
+  options:
+  - id: master_sha_peace_witness_01
+    line: Master Sha在年轻人身上见过这条回路——警报落下、身体收缩、时间停一秒、注意又因现实仍在而返回。
+turnaround:
+  options:
+  - id: master_sha_peace_turnaround_01
+    stat_line_1: 148 youth peace networks. 22 regions.
+    stat_line_2: 青年在主导对话、组织修复性实践，并开展将冲突视为可用明晰与集体疗愈承接的运动。
+bridge:
+  options:
+  - id: master_sha_peace_bridge_01
+    line: 追踪器衡量停战与条约，却没有一栏记录下一次和平建设何以可能——清理恐惧与怨恨的淤塞，使回应不复制模式。Master Sha的传统认为，圣歌与集体发声恢复被暴力打碎的共享振动场。
+    hidden_capacity: 清理淤塞，使回应不复制暴力
+teacher_perspective:
+  options:
+  - id: master_sha_peace_perspective_01
+    header: Master Sha所见
+    paragraphs:
+    - 冲突之根是个人、社群与群体间场域中的淤塞。当恐惧、怨恨与未处理的历史创伤未经清理而堆积，就会表现为敌意乃至暴力。Tao Source教导：和平不是靠压制这些淤塞，而是靠最大的宽恕来清理。
+    - 最大的爱不是情绪而是实践。用于冲突时，意味着在认出对方也被阻碍、其暴力是淤塞的表达而非其真实本性之下靠近。这教导不要求年轻人原谅伤害；它要求足够清晰地看见起源，以便以不复制伤害的方式回应。
+    - 圣歌在多种文化中用作冲突后的集体疗愈。集体发声恢复被暴力打碎的共享振动场。像「我有问题——坏了、错了」的感受，常是对任何个人都无法独自修复的条件的准确回应。暴力后一起唱歌的年轻人，在做传统视为在从未为当下要求而设计的体制结构中必不可少之事。
+practice:
+  options:
+  - id: master_sha_peace_practice_01
+    display_name: 道源金光练习
+    announcement_line: Master Sha教授5分钟道源金光练习，用于冲突新闻变成淤塞、身体在恐惧周围收紧时。在侧栏，计时并逐步说明。
+    relief_lines:
+    - 把危险变成冻结或怒火的淤塞软化。
+    - 足够明晰回归，从连接而非复制伤害来回应。
+sdg:
+  primary:
+    line: 联合国SDG 16框架包含和平社会、司法获取与不复制暴力的机构。
+  fallback_un_tie:
+    line: Pearl News是独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+  - id: master_sha_peace_cta_01
+    line: '青年主导的和平建设与对话组织为希望以明晰与集体疗愈回应冲突的人提供入口。入口：加入青年和平网络或工作坊。'
+title_system:
+  headline_layer_2:
+    options:
+    - id: master_sha_peace_headline_01
+      line: 一位道源教师把冲突读作淤塞，并点出不复制伤害地清理它的练习。

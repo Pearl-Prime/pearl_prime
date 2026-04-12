@@ -1,0 +1,66 @@
+hook_personal:
+  options:
+  - id: hook_personal_01
+    line: 地球のことは気にしている。それでも次の数字に十分とどまって何をすべきか決められない感覚が残る。
+hook_big_picture:
+  options:
+  - id: hook_big_picture_01
+    line: 気候の圧力はもはや環境だけではない。注意・感情・市民性の問題でもある。若者は現実とつながったまま、それでも機能を失わずにいられるか。
+teacher_intro:
+  options:
+  - id: teacher_intro_01
+    line: 南インドのスーフィー教師Maat（タミル・ナードゥのダルガー伝統、ラビア・アル＝アダウィーヤの炎とタミル・シッダ詩人たちの「心は真理の器官」という理解を受け継ぐ）は、実践の場でこの圧が若者にどう降りるかを見てきた。何が起きているかだけでなく、機関が繰り返し過小評価する真実を、qalb（霊的な心）がすでに知っているとき、自分の知覚をどう信じるかを問うている。
+youth_somatic:
+  options:
+  - id: youth_somatic_01
+    line: '気候の更新を読む。身体が締まる。目をそらす。また戻る。数字はまだ真実だから。
+
+      LOOP_SEQUENCE: "更新を読んだ。身体が締まった。目をそらした。戻った。"'
+teacher_witness:
+  options:
+  - id: teacher_witness_01
+    line: Maatはこのループそのものを見てきた。更新、身体の締まり、そらし、そして現実がまだそこにあるからの戻り。
+turnaround:
+  options:
+  - id: turnaround_01
+    stat_line_1: 2,666 cases. 51 jurisdictions.
+    stat_line_2: 若い気候オーガナイザーは訴訟を起こし、ワークショップを開き、公的約束と生きた現実のあいだのギャップに機関が答えざるを得ないようにしている。
+bridge:
+  options:
+  - id: bridge_01
+    line: '2,666 cases. 51 jurisdictions. トラッカーは若者が何をしたかを測る。もう一つの遅延や裏切りのあと、次の一歩を可能にしたもの──システムが応答し続けないなかでも真実と十分長く接触し続けて再び行動する容量──の欄はない。戻ってきた人に要った。同じループの読者にも要る。Maatの伝統はこれを正確に語る：qalb（霊的な心）はghaflah（無自覚）で曇る。あらゆる気晴らし、機関の嘘、強迫的なスクロールは曇りの層だ。考えで切り抜けるのではない。鏡を磨き、心がすでに知っているものを映すまで。'
+    hidden_capacity: 真実ある行動へ戻る
+teacher_perspective:
+  options:
+  - id: teacher_perspective_01
+    header: Maatが見ていること
+    paragraphs:
+    - Maatはまず真実から始める。最初の歪みは、構造的な乱れを私的欠陥として扱わされるときに起きる。
+    - 正しい関係とは、機関の都合に縮めずに、実際に起きていることを名指すことだ。その名指しは芝居ではなく、現実との整列である。
+    - 「自分が壊れている、間違っている」と感じることは、害・遅延・乱れを誤名しつつ信頼を求め続けるシステムへの、しばしば正確な応答である。
+practice:
+  options:
+  - id: practice_01
+    display_name: 5分間の呼吸ディクル
+    announcement_line: Maatは5分間の呼吸ディクルを教える。吐くときに背負っているラベルすべてを「これではない、これではない」と感じて手放し、吸うときに「ただこれだけ」と純粋な在り──気候の圧が注意を無力感に変え始める瞬間のため。サイドバーに時間どおり実用的に載せている。
+    relief_lines:
+    - 心は、すでに知っていることと取引するのをやめる。
+    - 十分な安定が戻り、はっきり見ることを謝らずに現実を名指せる。
+sdg:
+  primary:
+    line: 国連はSDG 13の枠組みのなかで、気候教育とレジリエンスの目標を示している。
+  fallback_un_tie:
+    line: Pearl Newsは独立の非営利団体です。国連とは提携していません。
+cta:
+  options:
+  - id: cta_01
+    line: 'YOUNGOと若者の気候説明責任グループがここへの公的な入口になる。入口: https://youngoclimate.org'
+title_system:
+  headline_layer_1:
+    options:
+    - id: headline_layer_1_01
+      line: 気候のしきい値はもはや抽象ではない。
+  headline_layer_2:
+    options:
+    - id: headline_layer_2_01
+      line: 南インドのスーフィー教師が、気候の圧がZ世代とアルファ世代の注意に何をしているかを名指し、心を晴らす実践を示す。

@@ -61,10 +61,35 @@ def _load_yaml(path: Path) -> dict[str, Any]:
     return data if isinstance(data, dict) else {}
 
 
+def _merge_options_lists(base_opts: list[Any], override_opts: list[Any]) -> list[Any]:
+    """Merge YAML `options` arrays by option `id` so locale overlays can patch lines only."""
+    base_list = copy.deepcopy(base_opts) if base_opts else []
+    override_list = override_opts or []
+    by_id: dict[str, dict[str, Any]] = {}
+    order: list[str] = []
+    for item in base_list:
+        if isinstance(item, dict) and item.get("id") is not None:
+            oid = str(item["id"])
+            by_id[oid] = copy.deepcopy(item)
+            order.append(oid)
+    for item in override_list:
+        if not isinstance(item, dict) or item.get("id") is None:
+            continue
+        oid = str(item["id"])
+        if oid in by_id:
+            by_id[oid] = _deep_merge(by_id[oid], item)
+        else:
+            by_id[oid] = copy.deepcopy(item)
+            order.append(oid)
+    return [by_id[oid] for oid in order if oid in by_id]
+
+
 def _deep_merge(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
     merged = copy.deepcopy(base)
     for key, value in override.items():
-        if isinstance(value, dict) and isinstance(merged.get(key), dict):
+        if key == "options" and isinstance(value, list) and isinstance(merged.get("options"), list):
+            merged["options"] = _merge_options_lists(merged["options"], value)
+        elif isinstance(value, dict) and isinstance(merged.get(key), dict):
             merged[key] = _deep_merge(merged[key], value)
         else:
             merged[key] = copy.deepcopy(value)

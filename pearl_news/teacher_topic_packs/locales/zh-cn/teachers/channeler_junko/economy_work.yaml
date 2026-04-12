@@ -1,0 +1,64 @@
+hook_personal:
+  options:
+  - id: junko_econ_hook_personal_01
+    line: 每次换班都要求你把不确定演成成熟。你仍在往前，也知道背后藏了多少力气——你也清楚，摩擦在灵魂来此要做的事与排班应用要求的事之间。
+  - id: junko_econ_hook_personal_02
+    line: 你看排班应用。胃里一沉。你又刷新、截图。价值不由产出决定，系统却持续把人的价值压成生产力指标。
+hook_big_picture:
+  options:
+  - id: junko_econ_hook_big_01
+    line: 经济压力如今以自我管理落在不稳定之下：保持可雇、保持灵活、保持冷静。年轻人对不稳感到焦虑，一部分是灵魂层面对目的的理解与系统层面与目的无关的成功定义之间的摩擦。
+  - id: junko_econ_hook_big_02
+    line: 行星转型包含建立在榨取与稀缺上的经济结构的瓦解。经历不稳定的年轻劳动者正活在旧范式的溶解之中。传统不承诺新范式无痛到来，但坚持紧抓旧结构只会带来更多苦。
+teacher_intro:
+  options:
+  - id: junko_econ_intro_01
+    line: 传导者Junko教授日本传导与光语灵性，在实修里见过年轻人把工作不稳定当成对价值的判决。在她的框架里，对经济不稳的焦虑，一部分是灵魂认出系统的成功定义与目的无关。
+youth_somatic:
+  options:
+  - id: junko_econ_somatic_01
+    line: '你打开排班应用。胃里一沉。你又刷新。然后截图，免得班次在你相信所见之前就变。 LOOP_SEQUENCE: "看应用。胃沉。刷新。截图。"'
+teacher_witness:
+  options:
+  - id: junko_econ_witness_01
+    line: Junko在来接收的人身上见过这条确切的工作回路。在她的框架里，对稳定的需求不是软弱，而是灵魂在问：若工作朝向觉醒与贡献而非地位与安全，会是什么样子。
+turnaround:
+  options:
+  - id: junko_econ_turnaround_01
+    stat_line_1: Youth-led campaigns and coalitions.
+    stat_line_2: 年轻工人在组织工作坊，争取公平排班、透明度与不把波动当作品格考验的条件。
+bridge:
+  options:
+  - id: junko_econ_bridge_01
+    line: 追踪器衡量政策胜利与集体行动，却没有一栏记录下一天的工作何以可能——在把人的价值压成生产力指标的系统里灵魂耗尽时，仍能接收指引的容量。Junko的传统认为行星转型包含榨取型经济的瓦解。接收练习不修复经济，而是在下一条通知吞掉目的之前恢复通道。
+    hidden_capacity: 在生产力指标吞掉目的之前仍能接收指引
+teacher_perspective:
+  options:
+  - id: junko_econ_perspective_01
+    header: Junko所见
+    paragraphs:
+    - 灵魂转世不是为了优化职业路径；它来学习与觉醒、服务。被困在把人的价值压成生产力指标的经济里，传统给出激进再框定：价值不由产出决定，你对经济不稳的焦虑，一部分是灵魂层目的与系统成功定义（与目的无关）之间的摩擦。
+    - 行星转型包含建立在榨取与稀缺而非流动与丰盛上的经济结构的瓦解。经历不稳定的年轻劳动者正活在旧经济范式的溶解中。传统不承诺新范式无痛到来，但坚持旧结构只会更苦。
+    - 像「我有问题」的感受，常常是灵魂对从未问过「若工作朝向觉醒与贡献会是什么样」的系统的准确反应。接收练习在应用耗尽智力后恢复通道。
+practice:
+  options:
+  - id: junko_econ_practice_01
+    display_name: 接收练习
+    announcement_line: 传导者Junko教授五分钟「接收」练习，用于排班应用把价值绑到下一条通知、灵魂却在要另一种答案的时刻。在侧栏，计时并逐步说明。
+    relief_lines:
+    - 心不再把每次换班都转成对价值的判决。
+    - 通道打开时，灵魂对目的早已知道的可以浮现。
+sdg:
+  primary:
+    line: 联合国通过SDG 8将体面工作、公平雇佣与劳动者福祉保护纳入框架。
+  fallback_un_tie:
+    line: Pearl News是独立非营利机构，与联合国无隶属关系。
+cta:
+  options:
+  - id: junko_econ_cta_01
+    line: '青年主导的劳工与公平工作组织为排班与工作尊严提供集体行动入口。入口：通过地方分会与活动加入网络。'
+title_system:
+  headline_layer_2:
+    options:
+    - id: junko_econ_headline_01
+      line: 一位日本传导者把工作不稳读作灵魂与目的的摩擦，并给出打开通道的练习。

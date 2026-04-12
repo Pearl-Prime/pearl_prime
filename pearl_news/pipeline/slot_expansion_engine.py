@@ -106,22 +106,32 @@ def resolve_expansion_system_prompt(
 ) -> str:
     prov = provider_cfg or {}
     sp_rel = (prov.get("system_prompt") or "").strip()
+    lang = (language or "en").lower()
     if sp_rel:
         rel_clean = sp_rel.lstrip("/")
         if rel_clean.startswith("prompts/"):
             rel_clean = rel_clean[len("prompts/") :]
+        base_name = Path(rel_clean).name
+        # Shared CJK file: specialize register per language (ja / Chinese locales).
+        if base_name == "expansion_system_cjk.txt":
+            if lang == "ja" or lang.startswith("ja-"):
+                ja_path = prompts_root / "expansion_system_ja.txt"
+                if ja_path.exists():
+                    return ja_path.read_text(encoding="utf-8").strip()
+            if lang.startswith("zh"):
+                zh_path = prompts_root / "expansion_system_zh_cn.txt"
+                if zh_path.exists():
+                    return zh_path.read_text(encoding="utf-8").strip()
         sp_path = prompts_root / rel_clean
         if sp_path.exists():
             return sp_path.read_text(encoding="utf-8").strip()
-    lang = (language or "en").lower()
     if lang in ("en", ""):
         enp = prompts_root / "expansion_system_en.txt"
         if enp.exists():
             return enp.read_text(encoding="utf-8").strip()
-    else:
-        cjkp = prompts_root / "expansion_system_cjk.txt"
-        if cjkp.exists():
-            return cjkp.read_text(encoding="utf-8").strip()
+    cjkp = prompts_root / "expansion_system_cjk.txt"
+    if cjkp.exists():
+        return cjkp.read_text(encoding="utf-8").strip()
     return _load_legacy_docs_system_prompt(prompts_root)
 
 

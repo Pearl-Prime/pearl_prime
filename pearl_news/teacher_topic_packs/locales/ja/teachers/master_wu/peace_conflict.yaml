@@ -1,0 +1,67 @@
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: 見ないことは不誠実に感じるので読み続けます。同時に、繰り返される暴力が身体と信頼に何をしているかも知っています。
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: 紛争の圧力はもはや地政学だけではありません。道徳的傷害として、守れないと繰り返し裏切る制度への信頼の崩壊として届きます。
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: Master Wu（土地と修練の教師）は、実践の場でこの圧力が若者に落ちるのを見てきました。学生はもっと頑張る方法だけを問うのではありません。断片化を訓練し続ける環境のなかでどう安定するかを問っています。
+youth_somatic:
+  options:
+    - id: youth_somatic_01
+      line: |
+        最新の報告を読みます。胸が締め付けられます。目をそらします。また戻ります。良心はまだそこにあるからです。
+        LOOP_SEQUENCE: "報告を読んだ。胸が締まった。目をそらした。戻った。"
+teacher_witness:
+  options:
+    - id: teacher_witness_01
+      line: Master Wuはこのループそのものを見てきました。報告、身体の締まり、そらし、良心がまだあるからの戻りです。
+turnaround:
+  options:
+    - id: turnaround_01
+      stat_line_1: 143 youth coalitions. 28 countries.
+      stat_line_2: 若い平和構築者が被害を記録し、ワークショップを組み、避難した仲間を支援し、制度が停滞するなかでも信頼のネットワークを築いています。
+bridge:
+  options:
+    - id: bridge_01
+      line: 143 youth coalitions. 28 countries. トラッカーは若者がしたことを測ります。もう一つの遅れか破綻した対応のあと、次の一歩を可能にしたもの──無感覚や絶望に降参せず、再び人間として行動する容量──の欄はありません。戻ってきた人にはそれが要りました。そのループの読者にも要ります。Master Wuの教えには、その容量を守る言葉があります。
+      hidden_capacity: 真実に沿った行動へ戻る
+teacher_perspective:
+  options:
+    - id: teacher_perspective_01
+      header: Master Wuが見ていること
+      paragraphs:
+        - Master Wuはまず場から始めます。注意、調整、努力は意志だけでなく条件によって形づくられます。
+        - 周りの場が断片的で不安定、あるいは厳しいとき、最初の誤りはその混乱を人への判断に翻訳することです。
+        - 「自分が壊れている、間違っている」に感じることが、しばしば求めることのために設計されなかった制度・構造のまわりの、劣化した条件への正確な反応です。
+practice:
+  options:
+    - id: practice_01
+      display_name: 5-minute Return-to-Ground Practice
+      announcement_line: Master Wuは、平和・紛争の圧力が注意を無力感に変え始める瞬間のため、5分間のReturn-to-Ground Practiceを教えています。サイドバーに、時間どおり実用的に載せています。
+      relief_lines:
+        - 身体はあらゆる要求を全面の混乱だとするのをやめます。
+        - 次の正直な行動に足る調整が戻ります。
+sdg:
+  primary:
+    title: 平和と公正、そしてすべての人々のための機関
+    line: 国連はSDG 16とその平和、正義、制度への信頼の目標を通じて、これへの枠組みを示しています。
+  fallback_un_tie:
+    line: Pearl Newsは独立の非営利団体です。国連とは提携していません。
+cta:
+  options:
+    - id: cta_01
+      line: "国連ユースオフィスと若者平和構築ネットワークが、ここへの公的入口を提供しています。入口: https://www.un.org/youthenvoy/"
+title_system:
+  headline_layer_1:
+    options:
+      - id: headline_layer_1_01
+        line: 若者は紛争を道徳的傷害として背負っています。
+  headline_layer_2:
+    options:
+      - id: headline_layer_2_01
+        line: 教師が、繰り返される暴力と制度の失敗の下で人間であり続ける闘いを名指します。
