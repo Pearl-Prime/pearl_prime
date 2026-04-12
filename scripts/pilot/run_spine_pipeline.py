@@ -42,6 +42,7 @@ def main() -> int:
         select_enrichment,
     )
     from phoenix_v4.planning.knob_apply import apply_knobs, load_knob_profile, load_spine
+    from phoenix_v4.rendering.book_renderer import clean_for_delivery
     from phoenix_v4.rendering.chapter_composer import compose_from_enriched_book
 
     topic = args.topic.strip()
@@ -79,6 +80,8 @@ def main() -> int:
     enriched = apply_depth_pass(enriched, depth_map, repo_root=REPO_ROOT)
 
     prose = compose_from_enriched_book(enriched, quality_profile="draft")
+    # Match run_pipeline spine mode: full-manuscript clean (section-strip + cross-chapter dedup).
+    prose = clean_for_delivery(prose)
 
     (out_dir / "book.txt").write_text(prose, encoding="utf-8")
     (out_dir / "book_plan.json").write_text(dump_enriched_book_json(enriched), encoding="utf-8")

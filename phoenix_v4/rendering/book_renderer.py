@@ -119,6 +119,16 @@ _TITLE_META_RE = re.compile(r"^(Topic|Persona)\s*:", re.IGNORECASE)
 _DIVIDER_RE    = re.compile(r"^---\s*$")
 _CHAPTER_RE    = re.compile(r"^={5,}.*CHAPTER", re.IGNORECASE)
 
+# Markdown section headers leaked from assembly (e.g. ## HOOK v01) — not reader-facing prose.
+# HOOK/STORY/SCENE: whole heading line only (optional vNN), so "## Story of my life" is kept.
+_SECTION_VARIANT_RE = re.compile(
+    r"^#{1,3}\s+(?:"
+    r"(?:HOOK|STORY|SCENE)(?:\s+v\d+)?\s*"
+    r"|(?:MECHANISM_DEPTH|COST_TYPE|COST_INTENSITY|IDENTITY_STAGE|BAND)\s*"
+    r")$",
+    re.IGNORECASE,
+)
+
 
 class DeliveryContractError(ValueError):
     """Raised by delivery_contract_gate() when forbidden artifacts survive into prose output."""
@@ -221,10 +231,63 @@ def _strip_scaffolding_lines(text: str) -> str:
             or _TITLE_META_RE.match(stripped)
             or _DIVIDER_RE.match(stripped)
             or _CHAPTER_RE.match(stripped)
+            or _SECTION_VARIANT_RE.match(stripped)
         ):
             continue
         out.append(line)
     return "\n".join(out)
+
+
+def _dedup_repeated_blocks(
+    text: str,
+    min_words: int = 20,
+    *,
+    word_floor: int = 0,
+) -> str:
+    """Drop repeated long paragraphs (verbatim after normalization), keep first occurrence.
+
+    Paragraphs are split on blank-line runs. Paragraphs with fewer than ``min_words`` words
+    are always kept and do not participate in deduplication (short transitions may repeat).
+
+    When ``word_floor`` > 0 (from the runtime format's minimum word target), if deduplication
+    would shrink the text below that floor, the pre-dedup string is kept so thin registry
+    builds do not lose counted repetition that the word gate still expects.
+    """
+    if not (text or "").strip():
+        return text
+
+    pre_wc = len(text.split())
+    parts = re.split(r"\n{2,}", text)
+    seen: set[str] = set()
+    kept: list[str] = []
+
+    for raw in parts:
+        para = raw.strip()
+        if not para:
+            continue
+        wc = len(para.split())
+        if wc < min_words:
+            kept.append(para)
+            continue
+        fp = re.sub(r"[^\w\s]+", "", para.lower(), flags=re.UNICODE)
+        fp = re.sub(r"\s+", " ", fp).strip()
+        if fp in seen:
+            continue
+        seen.add(fp)
+        kept.append(para)
+
+    deduped = "\n\n".join(kept)
+    post_wc = len(deduped.split())
+    if word_floor > 0 and post_wc < word_floor:
+        logger.warning(
+            "Repeated-block dedup would shrink text from %s to %s words (below floor %s); "
+            "keeping pre-dedup text.",
+            pre_wc,
+            post_wc,
+            word_floor,
+        )
+        return text
+    return deduped
 
 
 _RESIDUAL_BRACE_PLACEHOLDER = re.compile(r"\{[a-zA-Z_][a-zA-Z0-9_]*\}")
@@ -236,15 +299,18 @@ def clean_for_delivery(text: str, plan: Optional[dict[str, Any]] = None) -> str:
     Order of operations:
       1. Resolve known loc-var placeholders with universal or location-aware fallbacks.
       2. Strip pipeline metadata lines and markdown scaffolding.
-      3. Strip any residual {Placeholder} tokens (e.g. story-atom fiction
+      3. Remove repeated long paragraphs (same normalized fingerprint), unless the plan's
+         runtime format word minimum would be violated (then pre-dedup text is kept).
+      4. Strip any residual {Placeholder} tokens (e.g. story-atom fiction
          placeholders like {Street_name}, {Weather_detail}) that were not
          resolved by the loc-var table.
-      4. Collapse 3+ consecutive blank lines to 2 (paragraph breathing room only).
+      5. Collapse 3+ consecutive blank lines to 2 (paragraph breathing room only).
 
     Always call this before delivery_contract_gate().
     """
     text = _resolve_loc_var_fallbacks(text, plan=plan)
     text = _strip_scaffolding_lines(text)
+    text = _dedup_repeated_blocks(text, word_floor=_delivery_word_floor_from_plan(plan))
     text = _RESIDUAL_BRACE_PLACEHOLDER.sub("", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
@@ -261,6 +327,7 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
       - Pipeline metadata keys: family:, voice_mode:, mode:, reframe_type:
       - Markdown dividers: ---
       - Chapter scaffold markers: ===...=== CHAPTER
+      - Assembly section headers: ## HOOK / ## STORY / ## SCENE / ## MECHANISM_DEPTH / …
     """
     violations: list[str] = []
     for lineno, line in enumerate(text.splitlines(), 1):
@@ -276,6 +343,10 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
             violations.append(f"  line {lineno}: markdown divider '---'")
         if _CHAPTER_RE.match(stripped):
             violations.append(f"  line {lineno}: chapter scaffold marker {stripped[:40]!r}")
+        if _SECTION_VARIANT_RE.match(stripped):
+            violations.append(
+                f"  line {lineno}: assembly section header leaked {stripped[:50]!r}"
+            )
 
     if violations:
         extra = (
@@ -554,6 +625,19 @@ def _runtime_word_range(runtime_format_id: str) -> Optional[tuple[int, int]]:
     if word_range and len(word_range) == 2:
         return (int(word_range[0]), int(word_range[1]))
     return None
+
+
+def _delivery_word_floor_from_plan(plan: Optional[dict[str, Any]]) -> int:
+    """Minimum word target from plan's runtime format, or 0 if unknown / no plan."""
+    if not plan:
+        return 0
+    rid = str(plan.get("runtime_format_id") or "").strip()
+    if not rid:
+        book_spec = plan.get("book_spec")
+        if isinstance(book_spec, dict):
+            rid = str(book_spec.get("runtime_format_id") or "").strip()
+    wr = _runtime_word_range(rid)
+    return int(wr[0]) if wr else 0
 
 
 class WordCountGateError(ValueError):

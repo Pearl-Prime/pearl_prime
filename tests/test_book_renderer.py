@@ -17,9 +17,12 @@ from phoenix_v4.rendering.prose_resolver import (
 )
 from phoenix_v4.rendering.book_renderer import (
     ChapterFlowGateError,
+    DeliveryContractError,
     DimensionGateBlockError,
     RenderOptions,
     TxtWriter,
+    clean_for_delivery,
+    delivery_contract_gate,
     render_book,
 )
 
@@ -291,6 +294,151 @@ def test_render_book_writes_location_grounding_report_when_location_present(
     report = json.loads((tmp_path / "location_grounding_report.json").read_text(encoding="utf-8"))
     assert report["status"] == "PASS"
     assert {hit["key"] for hit in report["signals_found"]} >= {"transit_line", "transit_stop"}
+
+
+def test_clean_for_delivery_strips_assembly_section_headers() -> None:
+    raw = (
+        "## HOOK v01\n"
+        "First line of hook.\n\n"
+        "## STORY v01\n"
+        "Story body.\n\n"
+        "## SCENE v01\n"
+        "Scene body.\n\n"
+        "## MECHANISM_DEPTH\n"
+        "Mechanism prose.\n"
+    )
+    out = clean_for_delivery(raw)
+    assert "## HOOK" not in out
+    assert "## STORY" not in out
+    assert "## SCENE" not in out
+    assert "## MECHANISM_DEPTH" not in out
+    assert "First line of hook." in out
+    assert "Story body." in out
+    delivery_contract_gate(out, source_hint="test")
+
+
+def test_clean_for_delivery_preserves_normal_markdown_chapter_headings() -> None:
+    raw = "## Chapter Title\n\nProse under a normal chapter-style heading.\n"
+    out = clean_for_delivery(raw)
+    assert "## Chapter Title" in out
+    assert "Prose under" in out
+    delivery_contract_gate(out, source_hint="test")
+
+
+def test_clean_for_delivery_preserves_story_word_in_prose_heading() -> None:
+    """STORY keyword alone must not strip real titles like '## Story of the river'."""
+    raw = "## Story of the river\n\nThe water moves anyway.\n"
+    out = clean_for_delivery(raw)
+    assert "## Story of the river" in out
+    delivery_contract_gate(out, source_hint="test")
+
+
+def test_delivery_contract_gate_flags_leaked_section_headers() -> None:
+    dirty = "## HOOK v01\n\nSome prose.\n"
+    with pytest.raises(DeliveryContractError) as exc:
+        delivery_contract_gate(dirty, source_hint="test")
+    assert "assembly section header" in str(exc.value).lower()
+
+
+def test_dedup_repeated_blocks_exact_duplicate_removes_second() -> None:
+    from phoenix_v4.rendering.book_renderer import _dedup_repeated_blocks
+
+    p = (
+        "This is a long enough paragraph that it should participate in the "
+        "deduplication fingerprint logic and be considered for removal when "
+        "it appears twice in the same manuscript body text."
+    )
+    text = f"{p}\n\n{p}\n\n"
+    out = _dedup_repeated_blocks(text)
+    assert out.count("deduplication fingerprint") == 1
+
+
+def test_dedup_repeated_blocks_near_duplicate_whitespace() -> None:
+    from phoenix_v4.rendering.book_renderer import _dedup_repeated_blocks
+
+    a = (
+        "Same words repeated with different spacing and punctuation here "
+        "so we verify normalization catches minor surface differences in "
+        "the duplicated block content across the manuscript."
+    )
+    b = (
+        "Same  words,, repeated\nwith different spacing and punctuation here "
+        "so we verify normalization catches minor surface differences in "
+        "the duplicated block content across the manuscript."
+    )
+    out = _dedup_repeated_blocks(f"{a}\n\n{b}")
+    assert "normalization" in out
+    assert out.count("Same") == 1
+
+
+def test_dedup_repeated_blocks_short_paragraphs_may_repeat() -> None:
+    from phoenix_v4.rendering.book_renderer import _dedup_repeated_blocks
+
+    short = "One two three four five."
+    text = f"{short}\n\n{short}\n\n"
+    out = _dedup_repeated_blocks(text)
+    assert out.count("One two three four five.") == 2
+
+
+def test_dedup_repeated_blocks_distinct_long_paragraphs_kept() -> None:
+    from phoenix_v4.rendering.book_renderer import _dedup_repeated_blocks
+
+    a = " ".join([f"alpha_{i}" for i in range(25)])
+    b = " ".join([f"beta_{i}" for i in range(25)])
+    out = _dedup_repeated_blocks(f"{a}\n\n{b}")
+    assert "alpha_0" in out and "beta_0" in out
+
+
+def test_dedup_four_count_breath_section_deduplicated() -> None:
+    from phoenix_v4.rendering.book_renderer import _dedup_repeated_blocks
+
+    breath = (
+        "Inhale for four counts. Hold for four counts. Exhale for four counts. "
+        "Hold empty for four counts. Repeat this cycle three times. Notice how "
+        "the body responds without forcing any particular outcome or judgment."
+    )
+    out = _dedup_repeated_blocks(f"{breath}\n\n{breath}\n\n")
+    assert out.count("Inhale for four counts") == 1
+
+
+def test_dedup_repeated_blocks_keeps_pre_dedup_when_below_word_floor() -> None:
+    from phoenix_v4.rendering.book_renderer import _dedup_repeated_blocks
+
+    p = (
+        "This paragraph is long enough to participate in deduplication logic and "
+        "will be fingerprinted so the second identical copy is normally removed "
+        "from the manuscript when no word floor is applied to the delivery pass."
+    )
+    text = f"{p}\n\n{p}\n"
+    shrunk = _dedup_repeated_blocks(text, word_floor=0)
+    assert shrunk.count("This paragraph is long enough") == 1
+    kept = _dedup_repeated_blocks(text, word_floor=5000)
+    assert kept.count("This paragraph is long enough") == 2
+
+
+def test_clean_for_delivery_dedup_respects_runtime_word_floor() -> None:
+    long_para = (
+        "This duplicate long paragraph is written for runtime word floor testing "
+        "with more than twenty words so dedup would normally remove the second copy "
+        "but the format floor requires keeping pre-dedup word count for thin books."
+    )
+    raw = f"{long_para}\n\n{long_para}\n"
+    out_no_plan = clean_for_delivery(raw)
+    assert out_no_plan.count("duplicate long paragraph") == 1
+    out_with_plan = clean_for_delivery(raw, plan={"runtime_format_id": "short_book_30"})
+    assert out_with_plan.count("duplicate long paragraph") == 2
+
+
+def test_clean_for_delivery_runs_dedup_after_strip_scaffolding() -> None:
+    long_para = (
+        "This duplicate long paragraph is written for clean_for_delivery integration "
+        "testing with more than twenty words so the deduplication threshold applies "
+        "and the second identical copy is removed after assembly headers are stripped."
+    )
+    raw = f"## STORY v01\n\n{long_para}\n\n{long_para}\n"
+    out = clean_for_delivery(raw)
+    assert "## STORY" not in out
+    assert out.count("second identical copy") == 1
 
 
 def test_parse_block_file_with_metadata_then_prose(tmp_path: Path) -> None:

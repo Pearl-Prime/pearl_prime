@@ -347,7 +347,7 @@ def _run_spine_pipeline_mode(
     post_depth_words = enriched.total_words
 
     prose = compose_from_enriched_book(enriched, quality_profile=quality_profile)
-    prose = clean_for_delivery(prose)
+    prose = clean_for_delivery(prose, plan={"runtime_format_id": runtime_fmt})
 
     render_dir = Path(args.render_dir) if args.render_dir else Path("artifacts/rendered") / f"spine-{topic_id}"
     render_dir.mkdir(parents=True, exist_ok=True)
@@ -1305,7 +1305,9 @@ def main() -> int:
 
         # Apply location variable rotation + delivery cleanup
         from phoenix_v4.rendering.book_renderer import clean_for_delivery
-        prose = clean_for_delivery(prose)
+
+        _reg_plan_for_clean = {"runtime_format_id": _reg_runtime} if _reg_runtime else None
+        prose = clean_for_delivery(prose, plan=_reg_plan_for_clean)
 
         # Write output
         if args.out:
