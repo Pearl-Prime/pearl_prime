@@ -43,6 +43,25 @@ def _word_count(text: str) -> int:
     return len(text.split()) if text else 0
 
 
+def _packet_injection_seed(spine_context: dict, chapter_index: int, section_index: int) -> str:
+    ctx = spine_context or {}
+    base = str(ctx.get("packet_seed") or ctx.get("seed") or "inject").strip() or "inject"
+    return f"{base}:inject:{chapter_index}:{section_index}"
+
+
+def _exercise_phase_dict_for_injection(
+    exercise_phase: Optional[Any],
+    enrichment_slot: Optional[dict],
+) -> Optional[dict]:
+    if isinstance(exercise_phase, dict):
+        return exercise_phase
+    if exercise_phase and enrichment_slot and isinstance(enrichment_slot, dict):
+        jid = enrichment_slot.get("journey_exercise_id")
+        if jid:
+            return {"phase": str(exercise_phase), "exercise_id": str(jid)}
+    return None
+
+
 def _collapse_ws(text: str) -> str:
     return " ".join((text or "").split())
 
@@ -118,7 +137,8 @@ def compose_section_packet(
       5. Teacher atom overlay (optional, separate from slot.content when passed explicitly)
       6. Depth module expansion (explicit arg and/or depth_module:* enrichment source)
     """
-    del beatmap_slot, spine_context, quality_profile  # reserved for future routing / parity
+    del beatmap_slot, quality_profile  # reserved for future routing / parity
+    spine_context = spine_context or {}
 
     sources_used: List[str] = []
     blocks: List[str] = []
@@ -145,6 +165,27 @@ def compose_section_packet(
     if legacy_template_section:
         legacy_text = str(legacy_template_section.get("text") or "").strip()
         if legacy_text:
+            from phoenix_v4.planning.injection_resolver import resolve_injections
+
+            inj_seed = _packet_injection_seed(spine_context, chapter_index, section_index)
+            ex_phase_dict = _exercise_phase_dict_for_injection(exercise_phase, enrichment_slot)
+            resolved = resolve_injections(
+                legacy_text,
+                chapter_index=chapter_index,
+                section_index=section_index,
+                section_type=section_type,
+                topic=str(spine_context.get("topic") or spine_context.get("topic_id") or ""),
+                persona_id=str(spine_context.get("persona_id") or ""),
+                teacher_id=spine_context.get("teacher_id"),
+                exercise_phase=ex_phase_dict,
+                seed=inj_seed,
+            )
+            legacy_text = str(resolved.get("text") or "").strip()
+            for src in resolved.get("sources_used") or []:
+                if src:
+                    sources_used.append(str(src))
+            for failed in resolved.get("injections_failed") or []:
+                extra_warnings.append(f"injection failed: {failed}")
             _append_layer(
                 blocks,
                 sources_used,
