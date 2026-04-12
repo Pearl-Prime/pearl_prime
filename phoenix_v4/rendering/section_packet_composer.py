@@ -125,6 +125,8 @@ def compose_section_packet(
     exercise_phase: Optional[Any] = None,
     depth_module_content: Optional[str] = None,
     teacher_atom_content: Optional[str] = None,
+    expand_thin_sections: bool = False,
+    teacher_voice: Optional[Any] = None,
 ) -> dict:
     """
     Stack all available layers into one section packet.
@@ -224,10 +226,47 @@ def compose_section_packet(
     cleaned_placeholders, ph_warn = _strip_placeholders(raw_text)
     extra_warnings.extend(ph_warn)
 
+    # ── Pearl_Writer thin-section expansion (spec: docs/PEARL_WRITER_EXPANSION_SPEC.md) ──
+    # Runs AFTER stacking, BEFORE clean_for_delivery.  Default OFF — must opt in.
+    expansion_result: Optional[dict] = None
+    if expand_thin_sections:
+        from phoenix_v4.rendering.pearl_writer_expand import expand_section, should_expand
+
+        _pre_packet = {
+            "text": cleaned_placeholders,
+            "word_count": _word_count(cleaned_placeholders),
+            "target_words": target_words,
+            "sources_used": list(sources_used),
+            "warnings": list(extra_warnings),
+            "section_type": section_type,
+            "chapter_index": chapter_index,
+            "section_index": section_index,
+        }
+        if should_expand(_pre_packet):
+            _ctx = dict(spine_context)
+            _seed = (
+                f"{_ctx.get('packet_seed') or _ctx.get('seed') or 'pw'}"
+                f":expand:{chapter_index}:{section_index}:expansion_v1"
+            )
+            _expand_req = {
+                "packet": _pre_packet,
+                "spine_context": _ctx,
+                "teacher_voice": teacher_voice,
+                "layer_preservation": list(sources_used),
+                "seed": _seed,
+            }
+            expansion_result = expand_section(_expand_req, dry_run=False)
+            if expansion_result.get("expanded"):
+                cleaned_placeholders = expansion_result["text"]
+                extra_warnings.extend(expansion_result.get("warnings") or [])
+                sources_used = list(sources_used) + (
+                    expansion_result.get("sources_used_delta") or []
+                )
+
     final_text = clean_for_delivery(cleaned_placeholders, plan=None)
     wc = _word_count(final_text)
 
-    return {
+    result: Dict[str, Any] = {
         "text": final_text,
         "word_count": wc,
         "sources_used": sources_used,
@@ -238,3 +277,10 @@ def compose_section_packet(
         "chapter_index": chapter_index,
         "section_index": section_index,
     }
+    if expansion_result is not None:
+        result["pearl_writer_expansion"] = {
+            "expanded": expansion_result.get("expanded", False),
+            "layer_map": expansion_result.get("layer_map"),
+            "sources_used_delta": expansion_result.get("sources_used_delta") or [],
+        }
+    return result
