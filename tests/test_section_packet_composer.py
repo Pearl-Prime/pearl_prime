@@ -142,6 +142,25 @@ def test_skips_enrichment_when_same_as_legacy():
     assert "legacy_template" in out["sources_used"]
 
 
+def test_beatmap_target_words_override_and_supplements():
+    long_a = " ".join(f"a{i}" for i in range(12))
+    long_b = " ".join(f"b{i}" for i in range(12))
+    out = compose_section_packet(
+        chapter_index=1,
+        section_index=1,
+        section_type="REFLECTION",
+        target_words=50,
+        spine_context={},
+        beatmap_slot={"target_words": 500},
+        enrichment_slot={"content": long_a, "source": "registry"},
+        supplemental_enrichment_blocks=[long_b],
+    )
+    assert out["target_words"] == 500
+    assert out["under_target"] is True
+    assert any(s.startswith("enrichment_supplement:") for s in out["sources_used"])
+    assert "a0" in out["text"] and "b0" in out["text"]
+
+
 def test_depth_module_split():
     long_depth = " ".join([f"d{i}" for i in range(12)])
     out = compose_section_packet(

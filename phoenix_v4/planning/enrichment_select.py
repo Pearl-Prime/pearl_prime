@@ -16,6 +16,7 @@ config/depth/depth_module_map.yaml — existing content only, no LLM generation.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 from collections import defaultdict
@@ -127,7 +128,7 @@ def _try_teacher_content(
     teacher_atoms: Dict[str, List[dict]],
     slot_type: str,
     seed_key: str,
-) -> Optional[Tuple[str, str]]:
+) -> Optional[Tuple[str, str, int]]:
     pool = _pick_teacher_pool(teacher_atoms, slot_type)
     if not pool:
         return None
@@ -137,14 +138,14 @@ def _try_teacher_content(
     if not content:
         return None
     aid = str(atom.get("atom_id") or f"auto_{idx}")
-    return content, aid
+    return content, aid, idx
 
 
 def _try_persona_content(
     persona_atoms: Dict[str, List[dict]],
     slot_type: str,
     seed_key: str,
-) -> Optional[Tuple[str, str]]:
+) -> Optional[Tuple[str, str, int]]:
     st = slot_type.strip().upper()
     if st not in _PERSONA_OVERLAY_TYPES:
         return None
@@ -156,7 +157,7 @@ def _try_persona_content(
     content = str(atom.get("content") or "").strip()
     if not content:
         return None
-    return content, str(atom.get("atom_id") or f"persona_{idx}")
+    return content, str(atom.get("atom_id") or f"persona_{idx}"), idx
 
 
 def _try_practice_library(
@@ -181,12 +182,119 @@ def _try_practice_library(
     return None
 
 
+def _norm_ws(text: str) -> str:
+    return " ".join((text or "").split())
+
+
+def _wc(text: str) -> int:
+    return len((text or "").split())
+
+
+def _max_extra_chunks_for_format(runtime_format: str, slot_target_words: int) -> int:
+    """Cap additional registry/persona/teacher variants per slot (format + beatmap slot target)."""
+    rf = (runtime_format or "").strip()
+    tw = max(0, int(slot_target_words or 0))
+    if rf in ("micro_book_15", "micro_book_20"):
+        base = 1
+    elif rf == "short_book_30":
+        base = 2
+    elif rf == "standard_book":
+        base = 3
+    elif rf == "extended_book_2h":
+        base = 5
+    elif rf == "deep_book_4h":
+        base = 7
+    elif rf == "deep_book_6h":
+        base = 11
+    else:
+        base = 3
+    extra = max(0, tw - 320) // 160
+    return min(20, base + extra)
+
+
+def _extra_registry_variant_bodies(
+    sec_data: Dict[str, Any],
+    primary_v_idx: int,
+    seed_key: str,
+    goal_extra_words: int,
+    max_chunks: int,
+) -> List[str]:
+    variants = sec_data.get("variants") or []
+    if not variants or goal_extra_words <= 0 or max_chunks <= 0:
+        return []
+    indices = [i for i in range(len(variants)) if i != primary_v_idx]
+    if not indices:
+        return []
+    indices.sort(
+        key=lambda i: hashlib.sha256(f"{seed_key}:rv:{i}".encode("utf-8")).hexdigest()
+    )
+    primary_norm = ""
+    if 0 <= primary_v_idx < len(variants):
+        pv = variants[primary_v_idx]
+        if isinstance(pv, dict):
+            primary_norm = _norm_ws(str(pv.get("content") or ""))
+    out: List[str] = []
+    seen: set[str] = set()
+    running = 0
+    for i in indices:
+        if running >= goal_extra_words or len(out) >= max_chunks:
+            break
+        v = variants[i]
+        if not isinstance(v, dict):
+            continue
+        txt = str(v.get("content") or "").strip()
+        if _wc(txt) < 11:
+            continue
+        norm = _norm_ws(txt)
+        if not norm or norm == primary_norm or norm in seen:
+            continue
+        seen.add(norm)
+        out.append(txt)
+        running += _wc(txt)
+    return out
+
+
+def _expand_atom_pool_blocks(
+    pool: List[dict],
+    primary_idx: int,
+    seed_key: str,
+    label: str,
+    goal_extra_words: int,
+    max_chunks: int,
+) -> List[str]:
+    if len(pool) <= 1 or goal_extra_words <= 0 or max_chunks <= 0:
+        return []
+    order = [i for i in range(len(pool)) if i != primary_idx]
+    order.sort(
+        key=lambda i: hashlib.sha256(f"{seed_key}:{label}:{i}".encode("utf-8")).hexdigest()
+    )
+    primary = pool[primary_idx]
+    primary_norm = _norm_ws(str(primary.get("content") or ""))
+    out: List[str] = []
+    seen: set[str] = {primary_norm} if primary_norm else set()
+    running = 0
+    for i in order:
+        if running >= goal_extra_words or len(out) >= max_chunks:
+            break
+        atom = pool[i]
+        txt = str(atom.get("content") or "").strip()
+        if _wc(txt) < 11:
+            continue
+        norm = _norm_ws(txt)
+        if not norm or norm in seen:
+            continue
+        seen.add(norm)
+        out.append(txt)
+        running += _wc(txt)
+    return out
+
+
 def _try_registry_variant(
     reg_lists: Dict[str, List[Dict[str, Any]]],
     slot_type: str,
     reg_counters: Dict[str, int],
     seed_key: str,
-) -> Optional[Tuple[str, str]]:
+) -> Optional[Tuple[str, str, Dict[str, Any], int]]:
     st = slot_type.strip().upper()
     lst = reg_lists.get(st, [])
     idx = reg_counters[st]
@@ -203,7 +311,7 @@ def _try_registry_variant(
     vid = str(var.get("variant_id") or f"v{v_idx}")
     if not content:
         return None
-    return content, vid
+    return content, vid, sec_data, v_idx
 
 
 def _peek_registry_variant(
@@ -325,6 +433,7 @@ def select_enrichment(
         "slots_from_practice_library": 0,
         "practice_library_warnings": 0,
         "slots_empty": 0,
+        "slots_format_scaled": 0,
     }
     total_target_words = 0
     gap_details: List[Dict[str, Any]] = []
@@ -354,21 +463,28 @@ def select_enrichment(
             source: str = ""
             source_id: str = ""
             hooks_fired: List[str] = []
+            reg_sec_meta: Optional[Tuple[Dict[str, Any], int]] = None
+            persona_expand_pool: Optional[List[dict]] = None
+            persona_primary_idx: Optional[int] = None
+            teacher_expand_pool: Optional[List[dict]] = None
+            teacher_primary_idx: Optional[int] = None
 
             # 1) Teacher
             if tid and teacher_atoms:
                 t_hit = _try_teacher_content(teacher_atoms, stype, seed_key)
                 if t_hit:
-                    content, source_id = t_hit
+                    content, source_id, teacher_primary_idx = t_hit
                     source = "teacher_atom"
+                    teacher_expand_pool = _pick_teacher_pool(teacher_atoms, stype)
                     audit_counts["slots_from_teacher"] += 1
 
             # 2) Persona
             if not content and persona_atoms:
                 p_hit = _try_persona_content(persona_atoms, stype, seed_key)
                 if p_hit:
-                    content, source_id = p_hit
+                    content, source_id, persona_primary_idx = p_hit
                     source = "persona_atom"
+                    persona_expand_pool = persona_atoms.get(stype, [])
                     audit_counts["slots_from_persona"] += 1
 
             # 3) EXERCISE — practice library before registry (matches registry_resolver)
@@ -384,7 +500,8 @@ def select_enrichment(
             if not content:
                 r_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
                 if r_hit:
-                    content, source_id = r_hit
+                    content, source_id, _sec_d, _v_i = r_hit
+                    reg_sec_meta = (_sec_d, _v_i)
                     source = "registry"
                     audit_counts["slots_from_registry"] += 1
 
@@ -399,6 +516,56 @@ def select_enrichment(
                 content = gap_msg
                 source = "gap"
                 source_id = "gap"
+
+            if content and not content.startswith("[CONTENT GAP:"):
+                tw_tgt = slot.target_words
+                max_x = _max_extra_chunks_for_format(bm.runtime_format, tw_tgt)
+                base_wc = _wc(content)
+                shortfall = max(0, tw_tgt - base_wc)
+                extra_bodies: List[str] = []
+                if max_x > 0 and shortfall >= 100:
+                    goal = min(shortfall, tw_tgt)
+                    if source == "registry" and reg_sec_meta is not None:
+                        sd, vi = reg_sec_meta
+                        extra_bodies = _extra_registry_variant_bodies(
+                            sd, vi, seed_key, goal, max_x
+                        )
+                    elif (
+                        source == "persona_atom"
+                        and persona_expand_pool
+                        and persona_primary_idx is not None
+                        and len(persona_expand_pool) > 1
+                    ):
+                        extra_bodies = _expand_atom_pool_blocks(
+                            persona_expand_pool,
+                            persona_primary_idx,
+                            seed_key,
+                            "persona_x",
+                            goal,
+                            max_x,
+                        )
+                    elif (
+                        source == "teacher_atom"
+                        and teacher_expand_pool
+                        and teacher_primary_idx is not None
+                        and len(teacher_expand_pool) > 1
+                    ):
+                        extra_bodies = _expand_atom_pool_blocks(
+                            teacher_expand_pool,
+                            teacher_primary_idx,
+                            seed_key,
+                            "teacher_x",
+                            goal,
+                            max_x,
+                        )
+                if extra_bodies:
+                    content = "\n\n".join([content] + extra_bodies)
+                    nx = len(extra_bodies)
+                    audit_counts["slots_format_scaled"] += 1
+                    if source == "registry":
+                        source_id = f"{source_id}+v{nx}"
+                    else:
+                        source_id = f"{source_id}+stack{nx}"
 
             actual_w = len(content.split())
             ch_words += actual_w
@@ -859,7 +1026,7 @@ def apply_depth_pass(
                 )
                 chapter.slots.append(depth_slot)
                 chapter.total_words += added_w
-                deficit -= added_w
+                deficit = sum(s.target_words for s in chapter.slots) - chapter.total_words
 
                 enriched_book.enrichment_audit["depth_modules_added"].append(
                     {

@@ -130,6 +130,7 @@ def compose_section_packet(
     teacher_atom_content: Optional[str] = None,
     expand_thin_sections: bool = False,
     teacher_voice: Optional[Any] = None,
+    supplemental_enrichment_blocks: Optional[List[str]] = None,
 ) -> dict:
     """
     Stack all available layers into one section packet.
@@ -139,11 +140,18 @@ def compose_section_packet(
       2. Exercise journey intro (optional)
       3. Legacy template scaffold (optional)
       4. Core enrichment (registry / persona / practice / gap — not depth_module-only rows)
-      5. Teacher atom overlay (optional, separate from slot.content when passed explicitly)
-      6. Depth module expansion (explicit arg and/or depth_module:* enrichment source)
+      5. Supplemental enrichment blocks (optional — multi-variant / format scaling)
+      6. Teacher atom overlay (optional, separate from slot.content when passed explicitly)
+      7. Depth module expansion (explicit arg and/or depth_module:* enrichment source)
+
+    When ``beatmap_slot`` includes ``target_words``, it overrides the ``target_words`` argument.
     """
-    del beatmap_slot, quality_profile  # reserved for future routing / parity
+    del quality_profile  # reserved for future routing / parity
     spine_context = spine_context or {}
+    bm_slot = beatmap_slot or {}
+    tw_slot = bm_slot.get("target_words")
+    if isinstance(tw_slot, int) and tw_slot > 0:
+        target_words = tw_slot
 
     sources_used: List[str] = []
     blocks: List[str] = []
@@ -210,6 +218,22 @@ def compose_section_packet(
             gap or _collapse_ws(core) != _collapse_ws(legacy_text)
         ):
             _append_layer(blocks, sources_used, "enrichment", core, seen_norms, min_words=min_c)
+
+    extra_blocks: List[str] = list(supplemental_enrichment_blocks or [])
+    slot_supp = bm_slot.get("supplemental_enrichment_blocks")
+    if isinstance(slot_supp, list):
+        for item in slot_supp:
+            if isinstance(item, str) and item.strip():
+                extra_blocks.append(item)
+    for bi, blk in enumerate(extra_blocks):
+        _append_layer(
+            blocks,
+            sources_used,
+            f"enrichment_supplement:{bi}",
+            blk,
+            seen_norms,
+            min_words=11,
+        )
 
     if teacher_atom_content:
         _append_layer(

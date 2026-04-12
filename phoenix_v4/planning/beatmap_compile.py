@@ -506,6 +506,7 @@ def compile_beatmap(
                     "emotional_temperature": ch.emotional_temperature,
                     "phase": ch.phase,
                     "chapter_role": ch.role,
+                    "runtime_format": shaped_spine.runtime_format,
                 }
                 hooks = _enrichment_hooks_for_slot(ch.enrichment_priority, st)
                 if st == "TEACHER_DOCTRINE" and "teacher_voice" not in hooks:
@@ -616,6 +617,7 @@ def compile_beatmap(
                 "emotional_temperature": ch.emotional_temperature,
                 "phase": ch.phase,
                 "chapter_role": ch.role,
+                "runtime_format": shaped_spine.runtime_format,
             }
             hooks = _enrichment_hooks_for_slot(ch.enrichment_priority, st)
             slots.append(

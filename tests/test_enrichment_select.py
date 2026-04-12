@@ -121,6 +121,52 @@ def test_deterministic_same_seed(fmt_std):
     assert a.chapters[0].slots[0].content == b.chapters[0].slots[0].content
 
 
+def test_runtime_format_scales_enriched_word_count():
+    """Longer runtime formats stack more registry/persona variants per slot."""
+    topic = "grief"
+    persona = "gen_z_professionals"
+    seed = "scaling_probe_v1"
+    spine = load_spine(topic)
+    knobs = load_knob_profile(topic)
+    engines = load_topic_engines(topic)
+    shaped_std = apply_knobs(spine, knobs, runtime_format="standard_book")
+    shaped_2h = apply_knobs(spine, knobs, runtime_format="extended_book_2h")
+    shaped_6 = apply_knobs(spine, knobs, runtime_format="deep_book_6h")
+    bm_std = compile_beatmap(shaped_std, engines, load_format_spec("standard_book"))
+    bm_2h = compile_beatmap(shaped_2h, engines, load_format_spec("extended_book_2h"))
+    bm_6 = compile_beatmap(shaped_6, engines, load_format_spec("deep_book_6h"))
+    b_std = select_enrichment(
+        EnrichmentRequest(
+            beatmap=bm_std,
+            teacher_id=None,
+            persona_id=persona,
+            topic_id=topic,
+            seed=seed,
+        )
+    )
+    b_2h = select_enrichment(
+        EnrichmentRequest(
+            beatmap=bm_2h,
+            teacher_id=None,
+            persona_id=persona,
+            topic_id=topic,
+            seed=seed,
+        )
+    )
+    b_6 = select_enrichment(
+        EnrichmentRequest(
+            beatmap=bm_6,
+            teacher_id=None,
+            persona_id=persona,
+            topic_id=topic,
+            seed=seed,
+        )
+    )
+    assert b_2h.total_words > b_std.total_words
+    assert b_6.total_words > b_2h.total_words
+    assert int(b_6.enrichment_audit.get("slots_format_scaled", 0)) >= 1
+
+
 def test_different_seed_can_change_content(fmt_std):
     bm = _beatmap("anxiety", fmt_std)
     a = select_enrichment(
