@@ -17,7 +17,13 @@ try:
 except ImportError:  # pragma: no cover
     yaml = None
 
-from phoenix_v4.planning.knob_apply import REPO_ROOT, ShapedChapter, ShapedSpine, load_spine
+from phoenix_v4.planning.knob_apply import (
+    REPO_ROOT,
+    ShapedChapter,
+    ShapedSpine,
+    SpineChapter,
+    load_spine,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -27,12 +33,74 @@ _SECTION_ALIASES = {
     "FORWARD": "INTEGRATION",
 }
 
+# Standard and deeper runtime formats use the full 10-slot somatic grid (V2 template 12×10).
+SOMATIC_FULL_RUNTIME_FORMATS = frozenset(
+    {"standard_book", "extended_book_2h", "deep_book_4h", "deep_book_6h"}
+)
+
+# Canonical slot types per V2 somatic section_01 … section_10.
+SOMATIC_10_SLOT_GRID = [
+    "HOOK",  # section_01
+    "SCENE",  # section_02
+    "REFLECTION",  # section_03
+    "EXERCISE",  # section_04 — awareness phase
+    "SCENE",  # section_05
+    "TEACHER_DOCTRINE",  # section_06 — mechanism / teacher voice
+    "REFLECTION",  # section_07
+    "EXERCISE",  # section_08 — regulation phase
+    "SCENE",  # section_09
+    "INTEGRATION",  # section_10
+]
+
+# Parallel budget keys (non-uniform six-hour baseline; scaled per chapter target).
+SOMATIC_BUDGET_KEYS = [
+    "HOOK",
+    "SCENE_A",
+    "REFLECTION_A",
+    "EXERCISE_A",
+    "SCENE_B",
+    "TEACHER_DOCTRINE",
+    "REFLECTION_B",
+    "EXERCISE_B",
+    "SCENE_C",
+    "INTEGRATION",
+]
+
+# Total baseline 4,520 words/chapter @ full scale (12 ch × ~4.5k ≈ six-hour book).
+SOMATIC_WORD_BUDGET: Dict[str, int] = {
+    "HOOK": 320,
+    "SCENE_A": 520,
+    "REFLECTION_A": 380,
+    "EXERCISE_A": 560,
+    "SCENE_B": 500,
+    "TEACHER_DOCTRINE": 460,
+    "REFLECTION_B": 380,
+    "EXERCISE_B": 620,
+    "SCENE_C": 460,
+    "INTEGRATION": 320,
+}
+
+# Beatmap slot index 0..9 → V2 somatic section index 1..10.
+SLOT_TO_SOMATIC_INDEX: Dict[int, int] = {
+    0: 1,
+    1: 2,
+    2: 3,
+    3: 4,
+    4: 5,
+    5: 6,
+    6: 7,
+    7: 8,
+    8: 9,
+    9: 10,
+}
+
 
 @dataclass
 class BeatmapSlot:
     slot_type: str
     weight: float
     target_words: int
+    somatic_section_index: int  # 1..10 for V2 somatic template; 0 = not used (short formats)
     atom_selection_criteria: Dict[str, Any]
     enrichment_hooks: List[str]
     emotional_temperature: str
@@ -158,7 +226,9 @@ def _slug_hooks(slug: str, slot_type: str) -> List[str]:
         "persona" in s or "open" in s or "alarm" in s or ("voice" in s and "teacher" not in s)
     ):
         hooks.append("persona_alarm_behavior")
-    if slot_type in ("REFLECTION", "INTEGRATION") and ("teacher" in s or "voice" in s or "integration" in s):
+    if slot_type in ("REFLECTION", "INTEGRATION", "TEACHER_DOCTRINE") and (
+        "teacher" in s or "voice" in s or "integration" in s or "mechanism" in s
+    ):
         hooks.append("teacher_voice")
     return hooks
 
@@ -186,6 +256,97 @@ def _slot_minimums() -> Dict[str, int]:
 
 def _default_min() -> int:
     return 50
+
+
+def _scale_budget(base_budget: Dict[str, int], target_chapter_words: int) -> Dict[str, int]:
+    total = sum(base_budget.values())
+    if total <= 0:
+        return {k: 0 for k in base_budget}
+    scale = target_chapter_words / total
+    return {k: int(v * scale) for k, v in base_budget.items()}
+
+
+def _reconcile_somatic_row_targets(
+    ordered: List[str],
+    budget_keys: List[str],
+    scaled: Dict[str, int],
+    chapter_target: int,
+) -> List[int]:
+    """Enforce per-slot floors then snap the row sum to chapter_target."""
+    mins = _slot_minimums()
+    dmin = _default_min()
+    out: List[int] = []
+    for st, bk in zip(ordered, budget_keys):
+        floor = mins.get(st, dmin)
+        out.append(max(floor, int(scaled.get(bk, floor))))
+    delta = chapter_target - sum(out)
+    if delta == 0:
+        return out
+    if delta > 0:
+        bump_order = sorted(range(len(out)), key=lambda j: -out[j])
+        k = 0
+        while delta > 0 and out:
+            out[bump_order[k % len(out)]] += 1
+            delta -= 1
+            k += 1
+        return out
+    neg = -delta
+    k = 0
+    while neg > 0 and k < 100000:
+        reducible = [
+            j
+            for j, st in enumerate(ordered)
+            if out[j] > mins.get(st, dmin)
+        ]
+        if not reducible:
+            break
+        j = max(reducible, key=lambda idx: out[idx])
+        out[j] -= 1
+        neg -= 1
+        k += 1
+    return out
+
+
+def _somatic_slot_weight(slot_type: str, wmap: Dict[str, float]) -> float:
+    st = slot_type.strip().upper()
+    if st == "TEACHER_DOCTRINE":
+        return max(
+            float(wmap.get("COMPRESSION", 0.0)),
+            float(wmap.get("REFLECTION", 0.0)) * 0.55,
+            0.35,
+        )
+    return float(wmap.get(st, 0.0))
+
+
+def _somatic_slot_required(slot_type: str, req_set: Set[str]) -> bool:
+    st = slot_type.strip().upper()
+    if st == "TEACHER_DOCTRINE":
+        return "COMPRESSION" in req_set or "REFLECTION" in req_set
+    if st in ("SCENE", "STORY"):
+        return "SCENE" in req_set or "STORY" in req_set
+    return st in req_set
+
+
+def resolve_slot_definitions(
+    shaped_chapter: ShapedChapter,
+    runtime_format: str,
+    orig: SpineChapter,
+) -> List[str]:
+    """
+    Ordered slot types for this chapter.
+
+    Standard and deeper runtime formats use the fixed 10-slot somatic grid so every
+    V2 somatic template section can be consumed. Short/micro formats are compiled via
+    the legacy candidate + canonical_order path in compile_beatmap (this function is
+    not used for those formats).
+    """
+    del shaped_chapter  # reserved for future per-chapter somatic tuning
+    if runtime_format in SOMATIC_FULL_RUNTIME_FORMATS:
+        return list(SOMATIC_10_SLOT_GRID)
+    required = [_normalize_slot(s) for s in (orig.required_sections or [])]
+    if required:
+        return required
+    return ["HOOK", "SCENE", "REFLECTION", "EXERCISE", "INTEGRATION"]
 
 
 def _allocate_words(
@@ -307,6 +468,77 @@ def compile_beatmap(
         for mv in forbidden:
             forbidden_hits.append({"chapter": ch.number, "slot": mv, "source": "forbidden_moves"})
 
+        ch_target = ch.target_word_count
+
+        if shaped_spine.runtime_format in SOMATIC_FULL_RUNTIME_FORMATS:
+            for r in required:
+                rw = wmap.get(r, 0.0)
+                if rw <= 0.0:
+                    msg = (
+                        f"required section {r} has zero weight for chapter {ch.number}; "
+                        "KnobApply should have caught this — bumping to 0.3 for BeatmapCompile"
+                    )
+                    logger.warning(msg)
+                    warnings.warn(msg, stacklevel=2)
+                    wmap[r] = 0.3
+                    all_min_overrides.append(
+                        {
+                            "chapter": ch.number,
+                            "slot": r,
+                            "reason": "required_section_zero_weight_recovery",
+                            "weight_applied": 0.3,
+                        }
+                    )
+
+            ordered = resolve_slot_definitions(ch, shaped_spine.runtime_format, orig)
+            scaled = _scale_budget(SOMATIC_WORD_BUDGET, ch_target)
+            tw_list = _reconcile_somatic_row_targets(
+                ordered, SOMATIC_BUDGET_KEYS, scaled, ch_target
+            )
+            req_set = set(required)
+            slots_somatic: List[BeatmapSlot] = []
+            for j, st in enumerate(ordered):
+                crit: Dict[str, Any] = {
+                    "topic": shaped_spine.topic,
+                    "persona": None,
+                    "engine": default_engine,
+                    "slot_type": st,
+                    "emotional_temperature": ch.emotional_temperature,
+                    "phase": ch.phase,
+                    "chapter_role": ch.role,
+                }
+                hooks = _enrichment_hooks_for_slot(ch.enrichment_priority, st)
+                if st == "TEACHER_DOCTRINE" and "teacher_voice" not in hooks:
+                    hooks = list(hooks)
+                    hooks.append("teacher_voice")
+                slots_somatic.append(
+                    BeatmapSlot(
+                        slot_type=st,
+                        weight=_somatic_slot_weight(st, wmap),
+                        target_words=tw_list[j],
+                        somatic_section_index=int(SLOT_TO_SOMATIC_INDEX.get(j, j + 1)),
+                        atom_selection_criteria=crit,
+                        enrichment_hooks=hooks,
+                        emotional_temperature=ch.emotional_temperature,
+                        is_required=_somatic_slot_required(st, req_set),
+                    )
+                )
+                sections_included += 1
+
+            chapters_out.append(
+                BeatmapChapter(
+                    number=ch.number,
+                    role=ch.role,
+                    working_title=ch.working_title,
+                    thesis=ch.thesis,
+                    phase=ch.phase,
+                    target_word_count=ch_target,
+                    slots=slots_somatic,
+                    slot_definitions=[s.slot_type for s in slots_somatic],
+                )
+            )
+            continue
+
         # Step 1: candidate inclusion by weight > 0
         candidates: Set[str] = set()
         for sec, wt in wmap.items():
@@ -369,14 +601,13 @@ def compile_beatmap(
             raise ValueError(f"No slots compiled for chapter {ch.number} (topic {shaped_spine.topic})")
 
         # Word allocation
-        ch_target = ch.target_word_count
         min_audit_chunk: List[Dict[str, Any]] = []
         word_by_slot = _allocate_words(ordered, wmap, ch_target, min_audit_chunk)
         all_min_overrides.extend([{**x, "chapter": ch.number} for x in min_audit_chunk])
 
         slots: List[BeatmapSlot] = []
         req_set = set(required)
-        for st in ordered:
+        for j, st in enumerate(ordered):
             crit: Dict[str, Any] = {
                 "topic": shaped_spine.topic,
                 "persona": None,
@@ -392,6 +623,7 @@ def compile_beatmap(
                     slot_type=st,
                     weight=float(wmap.get(st, 0.0)),
                     target_words=word_by_slot[st],
+                    somatic_section_index=min(j + 1, 10),
                     atom_selection_criteria=crit,
                     enrichment_hooks=hooks,
                     emotional_temperature=ch.emotional_temperature,
@@ -428,6 +660,7 @@ def compile_beatmap(
         "forbidden_moves_applied": forbidden_hits,
         "minimum_word_overrides": all_min_overrides,
         "runtime_word_midpoint": mid_total,
+        "somatic_ten_slot_grid": shaped_spine.runtime_format in SOMATIC_FULL_RUNTIME_FORMATS,
     }
 
     return Beatmap(

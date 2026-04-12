@@ -53,7 +53,7 @@ def test_compile_burnout_standard(fmt_std):
 def test_all_chapters_have_slots(fmt_std):
     for topic in ("anxiety", "grief", "burnout"):
         bm = _chain(topic, fmt_std)
-        assert all(len(ch.slots) > 0 for ch in bm.chapters)
+        assert all(len(ch.slots) == 10 for ch in bm.chapters)
 
 
 def test_slot_definitions_match_slots(fmt_std):
@@ -66,9 +66,10 @@ def test_slot_definitions_match_slots(fmt_std):
 
 
 def test_exercise_excluded_when_weight_zero(fmt_std):
+    """Somatic 10-slot grid retains EXERCISE slots (V2 sections 4+8) even when spine blocks practice."""
     bm = _chain("anxiety", fmt_std)
     ch1 = bm.chapters[0]
-    assert "EXERCISE" not in ch1.slot_definitions
+    assert ch1.slot_definitions.count("EXERCISE") == 2
 
 
 def test_required_section_survives_zero_weight(fmt_std, recwarn):
@@ -87,12 +88,14 @@ def test_required_section_survives_zero_weight(fmt_std, recwarn):
     )
 
 
-def test_forbidden_move_excludes_section(fmt_std):
+def test_forbidden_move_excludes_section():
+    """Legacy beatmap path (non-somatic formats) still drops forbidden slots."""
+    fmt_short = load_format_spec("short_book_30")
     spine = load_spine("anxiety")
-    shaped = apply_knobs(spine, load_knob_profile("anxiety"))
+    shaped = apply_knobs(spine, load_knob_profile("anxiety"), runtime_format="short_book_30")
     tampered = copy.deepcopy(shaped)
     tampered.chapters[0].shaped_section_weights["EXERCISE"] = 0.95
-    bm = compile_beatmap(tampered, load_topic_engines("anxiety"), fmt_std)
+    bm = compile_beatmap(tampered, load_topic_engines("anxiety"), fmt_short)
     ch1 = bm.chapters[0]
     assert "EXERCISE" not in ch1.slot_definitions
     assert any(
@@ -104,15 +107,16 @@ def test_forbidden_move_excludes_section(fmt_std):
 # --- Group 3: word budgets ---
 
 
-def test_word_budget_proportional_to_weights(fmt_std):
+def test_word_budget_non_uniform_somatic(fmt_std):
+    """Somatic grid uses scaled non-uniform baselines (second exercise > first)."""
     shaped = apply_knobs(load_spine("anxiety"), load_knob_profile("anxiety"))
     bm = compile_beatmap(shaped, load_topic_engines("anxiety"), fmt_std)
     ch6 = next(c for c in bm.chapters if c.number == 6)
-    wt = next(c for c in shaped.chapters if c.number == 6)
-    hook = next(s for s in ch6.slots if s.slot_type == "HOOK")
-    scn = next(s for s in ch6.slots if s.slot_type == "SCENE")
-    assert wt.shaped_section_weights["HOOK"] >= wt.shaped_section_weights["SCENE"]
-    assert hook.target_words >= scn.target_words
+    ex_a = ch6.slots[3]
+    ex_b = ch6.slots[7]
+    assert ex_a.slot_type == "EXERCISE"
+    assert ex_b.slot_type == "EXERCISE"
+    assert ex_b.target_words >= ex_a.target_words
 
 
 def test_hook_minimum_100_words(fmt_std):
@@ -141,12 +145,19 @@ def test_total_words_within_format_range(fmt_std):
 # --- Group 4: ordering ---
 
 
-def test_canonical_slot_order(fmt_std):
-    order = fmt_std["canonical_slot_order"]
+def test_somatic_ten_slot_grid_order(fmt_std):
+    from phoenix_v4.planning.beatmap_compile import SOMATIC_10_SLOT_GRID
+
     bm = _chain("anxiety", fmt_std)
     for ch in bm.chapters:
-        indices = [order.index(s.slot_type) for s in ch.slots]
-        assert indices == sorted(indices)
+        assert [s.slot_type for s in ch.slots] == SOMATIC_10_SLOT_GRID
+
+
+def test_somatic_section_indices(fmt_std):
+    bm = _chain("anxiety", fmt_std)
+    for ch in bm.chapters:
+        for i, s in enumerate(ch.slots):
+            assert s.somatic_section_index == i + 1
 
 
 def test_no_random_ordering(fmt_std):
@@ -190,7 +201,8 @@ def test_exercise_enrichment_on_exercise(fmt_std):
 
 def test_audit_records_exclusions(fmt_std):
     bm = _chain("anxiety", fmt_std)
-    assert bm.compile_audit["sections_excluded_total"] >= 1
+    assert bm.compile_audit.get("somatic_ten_slot_grid") is True
+    assert isinstance(bm.compile_audit["sections_excluded"], list)
 
 
 def test_audit_records_minimum_overrides(fmt_std):
@@ -244,13 +256,12 @@ def test_output_chapters_match_input(fmt_std):
 
 
 def test_topics_produce_distinct_beatmaps(fmt_std):
-    summaries = []
-    for topic in ("anxiety", "grief", "burnout"):
-        bm = _chain(topic, fmt_std)
-        ex = sum(1 for ch in bm.chapters for s in ch.slots if s.slot_type == "EXERCISE")
-        nslots = sum(len(ch.slots) for ch in bm.chapters)
-        summaries.append((ex, nslots))
-    assert len(set(summaries)) == 3
+    topics = ("anxiety", "grief", "burnout")
+    bms = [_chain(t, fmt_std) for t in topics]
+    assert len({bm.topic for bm in bms}) == 3
+    for bm in bms:
+        assert sum(len(ch.slots) for ch in bm.chapters) == 120
+        assert sum(1 for ch in bm.chapters for s in ch.slots if s.slot_type == "EXERCISE") == 24
 
 
 def test_load_topic_engines_includes_allowed_engines():
