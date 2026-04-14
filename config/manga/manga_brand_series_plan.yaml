@@ -9,12 +9,16 @@ schema_version: 1
 #   Small indie publisher: 4-6 active series
 #   Webtoon indie creator: 1-3 active series
 #   Survival rate: ~50% survive 30 chapters (1 year at weekly cadence)
-#   Our scale: 12 teacher brands × ~3-5 active series each ≈ 48 active series at peak
+#   Our scale: 12 global teacher brands × ~3-5 active series each ≈ 48 active series at peak;
+#   Taiwan adds one extra teacher-mode brand (Adi Da only) — see bright_presence_tw.
 
 global_defaults:
   # Per-brand portfolio sizing (small publisher benchmark)
   active_series_target: 4          # maintain 4 active series simultaneously
   new_series_per_year: 5           # launch 5, expect 3-4 to survive 30 chapters
+  # Long-run series catalog depth per teacher brand (owner band; simultaneous caps below).
+  target_series_catalog_min: 6
+  target_series_catalog_max: 18
   survival_rate_target: 0.70       # 70% survival at 30-chapter mark (above indie avg)
   min_chapters_before_decision: 10 # minimum viability window before cancellation
   decision_point_chapters: 30      # full survival assessment at 30 chapters
@@ -370,6 +374,33 @@ brands:
 
     series_rotation:
       max_dormant_months: 2
+      overlap_new_old_weeks: 2
+
+  # ── TAIWAN ONLY: BRIGHT PRESENCE (teacher: adi_da) ─────────────────────────
+  # Catalog exception: Adi Da manga is zh-TW lane only (not on english_global or other lanes).
+  bright_presence_tw:
+    teacher: adi_da
+    primary_lane: taiwan
+    genre: philosophical_dark   # distinct from global brands; aligns with dark_psychological visual baseline
+    active_series_target: 3
+    new_series_per_year: 4
+    chapters_per_series_per_month: 2
+    max_chapters_before_volume: 10
+    volumes_per_year_target: 5
+    max_active_series: 5
+
+    topic_allocation:
+      depression: 1 series       # prior freedom / end of the search — heavy interior arcs
+      grief: 1 series
+      courage: 1 series
+
+    webtoon_format:
+      enabled: true
+      platform_cadence:
+        taiwan: bi_weekly
+
+    series_rotation:
+      max_dormant_months: 3
       overlap_new_old_weeks: 2
 
 # ── PROJECTION WIRING ───────────────────────────────────────────────────────

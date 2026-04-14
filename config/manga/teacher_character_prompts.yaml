@@ -1,4 +1,4 @@
-# Teacher manga character prompts — img2img style transfer for 12 core teachers.
+# Teacher manga character prompts — img2img style transfer (registry-aligned teacher ids).
 # Authority: config/manga/style_archetypes.yaml, SOURCE_OF_TRUTH/teacher_banks/
 # Used by: scripts/image_generation/manga_teacher_batch.py
 #
@@ -69,7 +69,7 @@ teachers:
       anime sparkles, bright colors, chibi, exaggerated muscles, action battle,
       modern clothing, neon
 
-  sai_maa:
+  sai_ma:
     display_name: "Sai Maa"
     style_archetype: webtoon_vertical_romance
     ip_adapter_weight: 0.85

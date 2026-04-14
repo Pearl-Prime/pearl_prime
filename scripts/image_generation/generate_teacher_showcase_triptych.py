@@ -36,7 +36,8 @@ SHOWCASE_TEACHER_IDS: list[str] = [
     "ahjan", "adi_da", "master_feung", "sai_ma", "ra", "junko", "miki",
     "master_wu", "pamela_fellows", "joshin", "maat", "omote", "master_sha",
 ]
-YAML_KEY_TO_FILE_PREFIX: dict[str, str] = {"sai_maa": "sai_ma"}
+# Legacy output files may use older keys; map yaml teacher id -> filename prefix if they differ.
+YAML_KEY_TO_FILE_PREFIX: dict[str, str] = {}
 IMAGE_KINDS: tuple[str, ...] = ("portrait", "scene", "symbolic")
 ARCHETYPE_FLUX: dict[str, tuple[int, float]] = {
     "cozy_iyashikei": (20, 3.5),

@@ -5,6 +5,10 @@ Use this as the operational bridge between the spec suite and real code.
 
 **Authority:** [specs/AI_MANGA_PIPELINE_SUMMARY.md](/Users/ahjan/phoenix_omega/specs/AI_MANGA_PIPELINE_SUMMARY.md)
 
+## Series catalog band (6–18)
+
+`config/manga/manga_brand_series_plan.yaml` encodes **simultaneous** pacing via `active_series_target`, `max_active_series`, and `new_series_per_year`. For long-run portfolio depth, `global_defaults.target_series_catalog_min` / `target_series_catalog_max` (owner band **6–18** series per teacher brand over planning horizons) document the approved range; `scripts/manga/validate_manga_series_catalog_bounds.py` checks that per-brand caps stay consistent with that ceiling.
+
 ## System Shape
 
 The manga system is a two-mode pipeline:

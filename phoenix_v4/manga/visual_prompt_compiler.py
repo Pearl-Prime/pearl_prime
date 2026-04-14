@@ -9,7 +9,7 @@ from phoenix_v4.manga.config import load_panel_layouts, load_seed_atoms, load_st
 DEFAULT_CHARACTER_BLOCKS = {
     "ahjan": "young woman, dark hair, contemplative expression, simple dark clothing",
     "maat": "elegant woman, warm brown skin, flowing robes, wise gentle expression",
-    "sai_maa": "serene figure, light flowing garments, peaceful aura, soft features",
+    "sai_ma": "serene figure, light flowing garments, peaceful aura, soft features",
     "ra": "strong figure, commanding presence, golden accents, intense focused eyes",
     "master_wu": "elderly man, traditional robes, long beard, calm knowing expression",
 }

@@ -12,7 +12,7 @@
 
 schema_version: 1
 
-# ─── TEACHER CHARACTERS (12) ──────────────────────────────────────────────
+# ─── TEACHER CHARACTERS (registry ids) ───────────────────────────────────
 
 characters:
 
@@ -110,7 +110,7 @@ characters:
         inner_monologue: {provider: cosyvoice2, reference_id: cn_m_deep_01, prosody_override: {rate: 0.80, pitch: -5}}
 
   # 05 — Sai Maa (divine mother)
-  sai_maa:
+  sai_ma:
     display_name: Sai Maa
     style_archetype: divine_mother
     manga_personality: radiant, compassionate, expansive, loving authority

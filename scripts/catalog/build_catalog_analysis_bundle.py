@@ -374,7 +374,8 @@ def main() -> None:
     teacher_lane_cfg = load_yaml(ROOT / "config/catalog_planning/teacher_brand_lane_assignments.yaml")
     planning_counts = {
         "planned_lane_count": teacher_lane_cfg.get("summary", {}).get("brand_lanes", 0),
-        "planned_brands_per_lane": teacher_lane_cfg.get("summary", {}).get("brands_per_lane", 0),
+        "planned_brands_per_lane": teacher_lane_cfg.get("summary", {}).get("brands_per_lane_default")
+        or teacher_lane_cfg.get("summary", {}).get("brands_per_lane", 0),
         "planned_brand_instances": teacher_lane_cfg.get("summary", {}).get("total_brand_instances", 0),
     }
     planned_teacher_brand_ids = set(

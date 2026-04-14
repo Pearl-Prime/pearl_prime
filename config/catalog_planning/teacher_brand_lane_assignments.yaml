@@ -5,12 +5,12 @@
 #
 # 1 TEACHER PER BRAND. Everywhere. No exceptions.
 #
-# On global_west: 12 teacher brands (+ 24 standard = 36 per lane).
-# On each regional lane: 12 teacher brands (+ 24 standard = 36 per lane).
+# On english_global and lanes 2–9, 11–12: 12 teacher brands (+ 24 standard = 36 per lane).
+# Taiwan (lane 10): 13 teacher brands (+ 24 standard = 37) — extra brand bright_presence_tw (Adi Da only).
 # Same brand name can appear in multiple lanes (e.g. stillness_press_tw),
 # but each brand-instance only ever promotes 1 teacher.
 #
-# This means regional lanes need up to 36 brands each (12 teacher + 24 standard).
+# Regional lanes need 36 brands each (12 teacher + 24 standard), except Taiwan: 37 (13 + 24).
 # That's fine — the brand admin for each handles promotion.
 # Former duplicate forest/simplicity brand merged into stillness_press (ahjan).
 #
@@ -28,8 +28,9 @@ schema_version: 2
 # ─── 12 GLOBAL BRAND LANES (addressable markets) ────────────────────────
 #
 # A "lane" = an addressable market where a brand can build audience.
-# 1 teacher per brand per lane. 12 teacher brands + 24 standard = 36 brands per lane.
-# 12 lanes × 36 brands = 432 total brand instances.
+# 1 teacher per brand per lane. 12 teacher brands + 24 standard = 36 brands per lane
+# (Taiwan: 13 + 24 = 37 — see summary).
+# 11 lanes × 36 + 1 lane × 37 = 433 total brand instances.
 #
 # Sources: docs/LOCALE_CATALOG_MARKETING_PLAN.md,
 #          docs/GLOBAL_PERSONA_MARKETING_PLAN.md,
@@ -177,7 +178,8 @@ english_global:
   solar_return:       { teacher: ra,               content: [audiobooks, manga, video, exercises, freebies] }
   devotion_path:      { teacher: sai_ma,           content: [audiobooks, manga, video, exercises, freebies] }
 
-# ── LANES 2-12: Same pattern — 12 teacher brands (+ 24 standard), 1 teacher each ─────────────────
+# ── LANES 2-12: Same pattern — 12 teacher brands (+ 24 standard), 1 teacher each;
+# Taiwan adds bright_presence_tw (13th teacher brand). ───────────────────────
 #
 # Every lane gets the same teacher brand names with a locale suffix.
 # Brand naming: {base_brand}_{lane_suffix}
@@ -295,7 +297,7 @@ english_global:
     solar_return_kr:        { teacher: ra }
     devotion_path_kr:       { teacher: sai_ma }
 
-  taiwan:         # Lane 10
+  taiwan:         # Lane 10 (13 teacher-mode brands; Adi Da catalog exception)
     stillness_press_tw:     { teacher: ahjan }
     cognitive_clarity_tw:   { teacher: joshin }
     somatic_wisdom_tw:      { teacher: pamela_fellows }
@@ -308,6 +310,9 @@ english_global:
     body_memory_tw:         { teacher: omote }
     solar_return_tw:        { teacher: ra }
     devotion_path_tw:       { teacher: sai_ma }
+    bright_presence_tw:
+      teacher: adi_da
+      content: [audiobooks, manga, video, exercises, freebies]
 
   china:          # Lane 11 (mainland + HK + SG)
     stillness_press_cn:     { teacher: ahjan }
@@ -341,18 +346,23 @@ english_global:
 
 summary:
   rule: "1 teacher per brand. Everywhere. Simple."
+  taiwan_teacher_mode_exception: >
+    Taiwan (zh-TW) carries 13 teacher-mode brands: the usual 12 locale-suffixed rows
+    plus bright_presence_tw (Adi Da only). Adi Da does not appear on other lanes.
 
   brand_lanes: 12
-  brands_per_lane: 36         # 24 standard-mode + 12 teacher-mode = 36
-  total_brand_instances: 432  # 12 lanes × 36 brands
+  brands_per_lane_default: 36   # 24 standard + 12 teacher (non-Taiwan lanes)
+  brands_per_lane_taiwan: 37    # 24 standard + 13 teacher
+  total_brand_instances: 433    # 11 × 36 + 1 × 37
 
-  # ── TEACHER MODE BRANDS (12 per lane) ──────────────────────────────────
+  # ── TEACHER MODE BRANDS (12 per lane; 13 on Taiwan) ─────────────────────
   # Each publishes content from ONE teacher. The brand IS that teacher's voice.
   # Each has a unique persona × topic × emotional_job grouping.
   # Full archetypes: config/catalog_planning/teacher_brand_archetypes.yaml
   teacher_mode_brands:
-    count_per_lane: 12
-    total: 144                # 12 lanes × 12
+    count_per_lane_default: 12
+    count_per_lane_taiwan: 13
+    total: 145                  # 11 × 12 + 13
     base_names:
       - stillness_press       # ahjan        — alarm recognition + forest simplicity / renunciation strands
       - cognitive_clarity     # joshin       — overthinking_knowledge_worker / zen inquiry
@@ -366,6 +376,7 @@ summary:
       - body_memory           # omote        — unprocessed_grief_carrier / body-centered grief
       - solar_return          # ra           — burnout_survivor_rebuilding / fire as initiation
       - devotion_path         # sai_ma       — love_exhausted_caregiver / devotion turned inward
+      - bright_presence       # adi_da       — Taiwan lane only (locale row: bright_presence_tw)
 
   # ── STANDARD MODE BRANDS (24 per lane) ─────────────────────────────────
   # No teacher association. Persona/archetype-driven content.
@@ -414,7 +425,7 @@ summary:
     china: "_cn"
     hungary: "_hu"
 
-  # Every teacher on every lane = maximum global reach
-  teacher_reach: "12 teachers × 12 lanes = 144 teacher-brand pairs"
+  # Teacher-mode instances: 12 on each non-Taiwan lane; 13 on Taiwan (Adi Da extra).
+  teacher_reach: "145 teacher-mode brand rows (11 lanes × 12 + Taiwan × 13); Adi Da only on Taiwan"
   standard_reach: "24 standard brands × 12 lanes = 288 standard-brand pairs"
-  total_reach: "36 brands × 12 lanes = 432 brand instances worldwide"
+  total_reach: "433 brand instances worldwide (11×36 + Taiwan×37)"
