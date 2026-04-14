@@ -329,6 +329,7 @@ def _run_spine_pipeline_mode(
     beatmap = compile_beatmap(shaped_spine, engines_data, fmt_spec, repo_root)
 
     seed = f"spine:{topic_id}:{persona_id}:{getattr(args, 'seed', '1')}"
+    _frame = str(getattr(args, "frame", "somatic_first") or "somatic_first").strip()
     enriched = select_enrichment(
         EnrichmentRequest(
             beatmap=beatmap,
@@ -336,6 +337,7 @@ def _run_spine_pipeline_mode(
             persona_id=persona_id,
             topic_id=topic_id,
             seed=seed,
+            spine_context={"frame": _frame},
         ),
         repo_root,
     )
@@ -346,8 +348,17 @@ def _run_spine_pipeline_mode(
         enriched = apply_depth_pass(enriched, depth_map, repo_root=repo_root)
     post_depth_words = enriched.total_words
 
-    prose = compose_from_enriched_book(enriched, quality_profile=quality_profile)
-    prose = clean_for_delivery(prose, plan={"runtime_format_id": runtime_fmt})
+    _governance_report: dict = {}
+    prose = compose_from_enriched_book(
+        enriched,
+        quality_profile=quality_profile,
+        governance_report=_governance_report,
+    )
+    prose = clean_for_delivery(
+        prose,
+        plan={"runtime_format_id": runtime_fmt},
+        governance_report=_governance_report,
+    )
 
     render_dir = Path(args.render_dir) if args.render_dir else Path("artifacts/rendered") / f"spine-{topic_id}"
     render_dir.mkdir(parents=True, exist_ok=True)
@@ -511,26 +522,26 @@ def _run_spine_pipeline_mode(
             encoding="utf-8",
         )
         _qs_path = render_dir / "quality_summary.json"
-        _qs_path.write_text(
-            json.dumps(
-                {
-                    "source": "spine_pipeline",
-                    "topic_id": topic_id,
-                    "persona_id": persona_id,
-                    "teacher_id": teacher_for_enrich or "",
-                    "quality_profile": quality_profile,
-                    "gates_run": gates_run,
-                    "gates_hard": gates_hard,
-                    "gate_failures": _quality_gate_failures,
-                    "overall_status": "PASS" if not _quality_gate_failures else "FAIL",
-                    "book_pass_gate": "SKIPPED_SPINE_MODE",
-                    "pre_depth_total_words": pre_depth_words,
-                    "post_depth_total_words": post_depth_words,
-                },
-                indent=2,
-            ),
-            encoding="utf-8",
-        )
+        _qs_payload = {
+            "source": "spine_pipeline",
+            "topic_id": topic_id,
+            "persona_id": persona_id,
+            "teacher_id": teacher_for_enrich or "",
+            "quality_profile": quality_profile,
+            "gates_run": gates_run,
+            "gates_hard": gates_hard,
+            "gate_failures": _quality_gate_failures,
+            "overall_status": "PASS" if not _quality_gate_failures else "FAIL",
+            "book_pass_gate": "SKIPPED_SPINE_MODE",
+            "pre_depth_total_words": pre_depth_words,
+            "post_depth_total_words": post_depth_words,
+            "frame": _frame,
+            "exercise_slots_dropped": _governance_report.get("exercise_slots_dropped", []),
+            "chapter_contract_warnings": _governance_report.get("chapter_contract_warnings", []),
+            "frame_governance_chapters": _governance_report.get("frame_governance_chapters", []),
+            "recurrence_report": _governance_report.get("recurrence_report", []),
+        }
+        _qs_path.write_text(json.dumps(_qs_payload, indent=2), encoding="utf-8")
         print(f"Quality summary: {_qs_path}")
 
     if args.generate_freebies and args.render_book:
@@ -638,6 +649,12 @@ def main() -> int:
             "Pipeline mode: 'registry' (section-registry fast-path, default) or "
             "'spine' (spine→knob→beatmap→enrichment+depth→compose; bypasses registry path)."
         ),
+    )
+    ap.add_argument(
+        "--frame",
+        choices=["somatic_first", "spiritual_first"],
+        default="somatic_first",
+        help="Frame governance for spine composition (default: somatic_first).",
     )
     ap.add_argument("--teacher", default=None, help="Teacher id for Teacher Mode (validated against teacher_persona_matrix)")
     ap.add_argument("--author", default=None, help="Author id (pen-name; resolved from author_registry, sets author_positioning_profile)")

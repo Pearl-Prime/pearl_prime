@@ -129,6 +129,44 @@ _SECTION_VARIANT_RE = re.compile(
     re.IGNORECASE,
 )
 
+# Spine / template leakage: long lines concatenating many "## HOOK v01 --- --- prose" blocks.
+_HOOK_SCENE_LEAK = re.compile(
+    r"#+\s+(?:HOOK|SCENE)\s+v\d+(?:\s+\d+)?\s*(?:---\s*)+",
+    re.IGNORECASE,
+)
+_STORY_META_LEAK = re.compile(
+    r"#+\s+STORY\s+v\d+(?:\s+\d+)?\s*---\s*MECHANISM_DEPTH:[^#]+?---\s*",
+    re.IGNORECASE | re.DOTALL,
+)
+_STORY_SIMPLE_LEAK = re.compile(
+    r"#+\s+STORY\s+v\d+(?:\s+\d+)?\s*---\s*",
+    re.IGNORECASE,
+)
+
+
+def _scrub_inline_leaked_slot_markers(line: str) -> str:
+    """Remove concatenated assembly markers (## HOOK v01 --- ---) while keeping prose."""
+    if "##" not in line:
+        return line
+    s = line
+    for _ in range(5000):
+        ns = _HOOK_SCENE_LEAK.sub("", s)
+        if ns == s:
+            break
+        s = ns
+    for _ in range(5000):
+        ns = _STORY_META_LEAK.sub("", s)
+        if ns == s:
+            break
+        s = ns
+    for _ in range(5000):
+        ns = _STORY_SIMPLE_LEAK.sub("", s)
+        if ns == s:
+            break
+        s = ns
+    s = re.sub(r"\s{2,}", " ", s).strip()
+    return s
+
 
 class DeliveryContractError(ValueError):
     """Raised by delivery_contract_gate() when forbidden artifacts survive into prose output."""
@@ -224,7 +262,7 @@ def _strip_scaffolding_lines(text: str) -> str:
     """Remove lines that are pipeline control data or markdown scaffolding, not prose."""
     out: list[str] = []
     for line in text.splitlines():
-        stripped = line.strip()
+        stripped = _scrub_inline_leaked_slot_markers(line).strip()
         if (
             _METADATA_LINE_RE.match(stripped)
             or _METADATA_BLOCK_RE.match(stripped)
@@ -234,7 +272,7 @@ def _strip_scaffolding_lines(text: str) -> str:
             or _SECTION_VARIANT_RE.match(stripped)
         ):
             continue
-        out.append(line)
+        out.append(stripped)
     return "\n".join(out)
 
 
@@ -290,10 +328,95 @@ def _dedup_repeated_blocks(
     return deduped
 
 
+def _build_signature_phrase_index(
+    text: str,
+    min_words: int = 8,
+    top_n: int = 50,
+) -> dict[str, int]:
+    """Count sliding-window phrases of exactly ``min_words`` words; return top ``top_n`` by frequency."""
+    words = (text or "").split()
+    if len(words) < min_words:
+        return {}
+    counts: dict[str, int] = {}
+    for i in range(len(words) - min_words + 1):
+        phrase = " ".join(words[i : i + min_words])
+        counts[phrase] = counts.get(phrase, 0) + 1
+    ranked = sorted(counts.items(), key=lambda x: (-x[1], x[0]))
+    return dict(ranked[:top_n])
+
+
+def _remove_extra_phrase_occurrences(text: str, phrase_words: list[str], keep: int) -> str:
+    """Remove occurrences of an exact phrase (word sequence) beyond the first ``keep`` matches."""
+    if len(phrase_words) < 1 or keep < 0:
+        return text
+    pattern_str = r"\s+".join(re.escape(w) for w in phrase_words)
+    pattern = re.compile(pattern_str, re.IGNORECASE)
+    matches = list(pattern.finditer(text))
+    if len(matches) <= keep:
+        return text
+    out = text
+    for m in reversed(matches[keep:]):
+        out = out[: m.start()] + out[m.end() :]
+    out = re.sub(r"[ \t]{2,}", " ", out)
+    return out
+
+
+def _enforce_signature_recurrence_limit(
+    text: str,
+    max_recurrences: int = 3,
+    min_words: int = 8,
+) -> tuple[str, list[str]]:
+    """
+    For each min_words-length phrase that appears more than ``max_recurrences`` times,
+    trim extra occurrences (keep first ``max_recurrences``). Operates paragraph-by-paragraph
+    so chapter breaks are preserved.
+    """
+    removed: list[str] = []
+    blocks = (text or "").split("\n\n")
+    new_blocks: list[str] = []
+
+    for block in blocks:
+        work = block
+        while True:
+            words = work.split()
+            if len(words) < min_words:
+                break
+            counts: dict[str, int] = {}
+            for i in range(len(words) - min_words + 1):
+                phrase = " ".join(words[i : i + min_words])
+                counts[phrase] = counts.get(phrase, 0) + 1
+            offender: Optional[str] = None
+            offender_count = 0
+            for phrase, c in sorted(counts.items(), key=lambda x: (-x[1], -len(x[0]))):
+                if c > max_recurrences:
+                    offender = phrase
+                    offender_count = c
+                    break
+            if not offender:
+                break
+            pw = offender.split()
+            before = work
+            work = _remove_extra_phrase_occurrences(work, pw, max_recurrences)
+            if work == before:
+                break
+            removed.append(
+                f"reduced {min_words}-gram (count {offender_count}→{max_recurrences}): "
+                f"{offender[:100]}{'…' if len(offender) > 100 else ''}"
+            )
+        new_blocks.append(work)
+
+    return "\n\n".join(new_blocks).strip(), removed
+
+
 _RESIDUAL_BRACE_PLACEHOLDER = re.compile(r"\{[a-zA-Z_][a-zA-Z0-9_]*\}")
 
 
-def clean_for_delivery(text: str, plan: Optional[dict[str, Any]] = None) -> str:
+def clean_for_delivery(
+    text: str,
+    plan: Optional[dict[str, Any]] = None,
+    *,
+    governance_report: Optional[dict[str, Any]] = None,
+) -> str:
     """Post-assembly cleanup pass.
 
     Order of operations:
@@ -311,6 +434,28 @@ def clean_for_delivery(text: str, plan: Optional[dict[str, Any]] = None) -> str:
     text = _resolve_loc_var_fallbacks(text, plan=plan)
     text = _strip_scaffolding_lines(text)
     text = _dedup_repeated_blocks(text, word_floor=_delivery_word_floor_from_plan(plan))
+
+    mr_cfg: dict[str, Any] = {}
+    try:
+        from phoenix_v4.quality.ei_v2.config import load_ei_v2_config
+
+        mr_cfg = (load_ei_v2_config() or {}).get("manuscript_recurrence") or {}
+    except Exception:
+        mr_cfg = {}
+    if plan and isinstance(plan.get("manuscript_recurrence"), dict):
+        mr_cfg = {**mr_cfg, **plan["manuscript_recurrence"]}
+
+    if bool(mr_cfg.get("enabled", False)):
+        max_rep = int(mr_cfg.get("max_signature_recurrences") or 3)
+        min_pw = int(mr_cfg.get("min_phrase_words") or 8)
+        text, recurrence_removed = _enforce_signature_recurrence_limit(
+            text, max_recurrences=max_rep, min_words=min_pw
+        )
+        if governance_report is not None and recurrence_removed:
+            rr = governance_report.setdefault("recurrence_report", [])
+            if isinstance(rr, list):
+                rr.extend(recurrence_removed)
+
     text = _RESIDUAL_BRACE_PLACEHOLDER.sub("", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
@@ -346,6 +491,10 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
         if _SECTION_VARIANT_RE.match(stripped):
             violations.append(
                 f"  line {lineno}: assembly section header leaked {stripped[:50]!r}"
+            )
+        if re.search(r"#{1,3}\s+(?:HOOK|SCENE|STORY)\s+v\d+", stripped, re.IGNORECASE):
+            violations.append(
+                f"  line {lineno}: concatenated assembly slot marker leaked {stripped[:50]!r}"
             )
 
     if violations:
@@ -1245,6 +1394,7 @@ class TxtWriter:
         self.prose_map = prose_map
         self.render_result = render_result
         self.options = options
+        self.delivery_governance: dict[str, Any] = {}
 
     def write(self, out_path: Path) -> Path:
         chapter_slot_sequence = self.plan.get("chapter_slot_sequence") or []
@@ -1495,9 +1645,15 @@ class TxtWriter:
         # Resolve {{MA}}, {{MA_DEF}}, {{MA_FULL}} tokens before delivery gate
         full_text = _resolve_mechanism_alias_tokens(full_text, alias)
 
+        _delivery_governance: dict[str, Any] = {}
         if self.options.clean_output:
-            full_text = clean_for_delivery(full_text, plan=self.plan)
+            full_text = clean_for_delivery(
+                full_text, plan=self.plan, governance_report=_delivery_governance
+            )
+            self.delivery_governance = _delivery_governance
             delivery_contract_gate(full_text, source_hint=str(out_path))
+        else:
+            self.delivery_governance = {}
 
         out_path = Path(out_path)
         out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1677,17 +1833,16 @@ def render_book(
         written["budget"] = budget_path
 
         _qs_path = output_dir / "quality_summary.json"
-        _qs_path.write_text(
-            json.dumps(
-                {
-                    "exercise_source": dict(exercise_source_stats),
-                    "exercise_fallback_ratio": round(_fb_ratio, 4),
-                    "exercise_fallback_quality_warning": deficit_report.get("exercise_fallback_quality_warning"),
-                },
-                indent=2,
-            ),
-            encoding="utf-8",
-        )
+        _qs_base = {
+            "exercise_source": dict(exercise_source_stats),
+            "exercise_fallback_ratio": round(_fb_ratio, 4),
+            "exercise_fallback_quality_warning": deficit_report.get("exercise_fallback_quality_warning"),
+        }
+        _dg = getattr(writer, "delivery_governance", None)
+        if isinstance(_dg, dict):
+            for k, v in _dg.items():
+                _qs_base[k] = v
+        _qs_path.write_text(json.dumps(_qs_base, indent=2), encoding="utf-8")
         written["quality_summary"] = _qs_path
 
         if enforce_word_count and runtime_format_id:

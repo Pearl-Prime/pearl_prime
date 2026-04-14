@@ -75,6 +75,7 @@ class EnrichmentRequest:
     persona_id: str
     topic_id: str
     seed: str
+    spine_context: Optional[Dict[str, Any]] = None
 
 
 @dataclass
@@ -113,6 +114,7 @@ class EnrichedBook:
     chapters: List[EnrichedChapter]
     total_words: int
     enrichment_audit: Dict[str, Any]
+    spine_context: Dict[str, Any] = field(default_factory=dict)
 
 
 def _norm_teacher_id(teacher_id: Optional[str]) -> Optional[str]:
@@ -726,6 +728,7 @@ def select_enrichment(
         chapters=enriched_chapters,
         total_words=total_words,
         enrichment_audit=enrichment_audit,
+        spine_context=dict(request.spine_context or {}),
     )
 
 
@@ -739,6 +742,7 @@ def enriched_book_to_jsonable(book: EnrichedBook) -> Dict[str, Any]:
         "runtime_format": book.runtime_format,
         "total_words": book.total_words,
         "enrichment_audit": book.enrichment_audit,
+        "spine_context": dict(book.spine_context or {}),
         "chapters": [
             {
                 "number": ch.number,

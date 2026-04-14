@@ -429,6 +429,16 @@ def test_clean_for_delivery_dedup_respects_runtime_word_floor() -> None:
     assert out_with_plan.count("duplicate long paragraph") == 2
 
 
+def test_clean_for_delivery_strips_concatenated_spine_hook_lines() -> None:
+    raw = (
+        "## HOOK v01 --- --- First hook body. --- ## HOOK v02 --- --- Second hook body."
+    )
+    out = clean_for_delivery(raw)
+    assert "## HOOK" not in out
+    assert "First hook body" in out
+    assert "Second hook body" in out
+
+
 def test_clean_for_delivery_runs_dedup_after_strip_scaffolding() -> None:
     long_para = (
         "This duplicate long paragraph is written for clean_for_delivery integration "

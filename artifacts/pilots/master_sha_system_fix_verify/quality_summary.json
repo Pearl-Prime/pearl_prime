@@ -1,0 +1,325 @@
+{
+  "source": "spine_pipeline",
+  "topic_id": "anxiety",
+  "persona_id": "gen_z_professionals",
+  "teacher_id": "master_sha",
+  "quality_profile": "draft",
+  "gates_run": true,
+  "gates_hard": false,
+  "gate_failures": [],
+  "overall_status": "PASS",
+  "book_pass_gate": "SKIPPED_SPINE_MODE",
+  "pre_depth_total_words": 5663,
+  "post_depth_total_words": 13000,
+  "frame": "somatic_first",
+  "exercise_slots_dropped": [
+    {
+      "chapter": 1,
+      "chapter_index": 0,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 1,
+      "chapter_index": 0,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 2,
+      "chapter_index": 1,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 3,
+      "chapter_index": 2,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 4,
+      "chapter_index": 3,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 6,
+      "chapter_index": 5,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 7,
+      "chapter_index": 6,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 8,
+      "chapter_index": 7,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 10,
+      "chapter_index": 9,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 11,
+      "chapter_index": 10,
+      "slot_type": "EXERCISE",
+      "max_allowed": 1,
+      "contract_max_exercises": 1,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    },
+    {
+      "chapter": 12,
+      "chapter_index": 11,
+      "slot_type": "EXERCISE",
+      "max_allowed": 0,
+      "contract_max_exercises": 0,
+      "format_cap": 2
+    }
+  ],
+  "chapter_contract_warnings": [
+    "chapter 12: emotional_job 'resolution' matches previous chapter \u2014 escalation contract may be weak"
+  ],
+  "frame_governance_chapters": [
+    {
+      "chapter": 1,
+      "chapter_index": 0,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 1,
+          "excerpt": "The frequency of your heart determines the life you live. What frequency are you broadcasting right now?"
+        },
+        {
+          "type": "spiritual_before_entry_chapter",
+          "line": 1,
+          "detail": "spiritual lexicon before chapter_index >= 3",
+          "excerpt": "The frequency of your heart determines the life you live. What frequency are you broadcasting right now?"
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "love\\s+melts\\s+all",
+          "line": 11,
+          "excerpt": "Love melts all blockages. This is not sentimentality. It is the highest frequency available to a human being. Use it as "
+        },
+        {
+          "type": "spiritual_before_entry_chapter",
+          "line": 11,
+          "detail": "spiritual lexicon before chapter_index >= 3",
+          "excerpt": "Love melts all blockages. This is not sentimentality. It is the highest frequency available to a human being. Use it as "
+        },
+        {
+          "type": "spiritual_before_entry_chapter",
+          "line": 19,
+          "detail": "spiritual lexicon before chapter_index >= 3",
+          "excerpt": "Your frequency attracts your reality. Raise your frequency through love and gratitude."
+        },
+        {
+          "type": "spiritual_before_entry_chapter",
+          "line": 27,
+          "detail": "spiritual lexicon before chapter_index >= 3",
+          "excerpt": "Tom\u00e1s carries rage toward his father. The rage is old. It lives in his fists, in the way he grips a steering wheel, in t"
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "chapter_index": 1,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 9,
+          "excerpt": "Love Affirmation Chanting: Choose a simple affirmation that resonates with you: \"I am loved.\" \"Love flows through me.\" \""
+        },
+        {
+          "type": "spiritual_before_entry_chapter",
+          "line": 9,
+          "detail": "spiritual lexicon before chapter_index >= 3",
+          "excerpt": "Love Affirmation Chanting: Choose a simple affirmation that resonates with you: \"I am loved.\" \"Love flows through me.\" \""
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "\\bkarma\\b",
+          "line": 13,
+          "excerpt": "Karma is not punishment. It is curriculum. What returns to you is what you have not yet learned. Graduate the lesson and"
+        },
+        {
+          "type": "spiritual_before_entry_chapter",
+          "line": 13,
+          "detail": "spiritual lexicon before chapter_index >= 3",
+          "excerpt": "Karma is not punishment. It is curriculum. What returns to you is what you have not yet learned. Graduate the lesson and"
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 29,
+          "excerpt": "I worked with Bo, who struggles with self-worth so deep it feels ancestral, carried in the cells. He moves through the w"
+        },
+        {
+          "type": "spiritual_before_entry_chapter",
+          "line": 29,
+          "detail": "spiritual lexicon before chapter_index >= 3",
+          "excerpt": "I worked with Bo, who struggles with self-worth so deep it feels ancestral, carried in the cells. He moves through the w"
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "chapter_index": 2,
+      "violations": [
+        {
+          "type": "spiritual_before_entry_chapter",
+          "line": 21,
+          "detail": "spiritual lexicon before chapter_index >= 3",
+          "excerpt": "Your frequency attracts your reality. Raise your frequency through love and gratitude."
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "chapter_index": 4,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 9,
+          "excerpt": "Love Affirmation Chanting: Choose a simple affirmation that resonates with you: \"I am loved.\" \"Love flows through me.\" \""
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 47,
+          "excerpt": "Rui arrives at the practice with a mind full of lists. He has seventeen things to accomplish before noon. His shoulders "
+        },
+        {
+          "type": "spiritual_density",
+          "detail": "density 0.225 > max 0.200"
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "chapter_index": 5,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "every\\s+organ",
+          "line": 23,
+          "excerpt": "Frequency and vibration are not metaphors. Every organ has a frequency. Disease is dissonance. Healing is returning to t"
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "disease\\s+is",
+          "line": 23,
+          "excerpt": "Frequency and vibration are not metaphors. Every organ has a frequency. Disease is dissonance. Healing is returning to t"
+        }
+      ]
+    },
+    {
+      "chapter": 7,
+      "chapter_index": 6,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 9,
+          "excerpt": "Healing Light Visualization: Close your eyes. Imagine healing light \u2014 perhaps golden, perhaps white \u2014 entering your body"
+        },
+        {
+          "type": "spiritual_density",
+          "detail": "density 0.265 > max 0.200"
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "chapter_index": 7,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "every\\s+organ",
+          "line": 13,
+          "excerpt": "Frequency and vibration are not metaphors. Every organ has a frequency. Disease is dissonance. Healing is returning to t"
+        },
+        {
+          "type": "absolute_claim",
+          "pattern": "disease\\s+is",
+          "line": 13,
+          "excerpt": "Frequency and vibration are not metaphors. Every organ has a frequency. Disease is dissonance. Healing is returning to t"
+        },
+        {
+          "type": "spiritual_density",
+          "detail": "density 0.308 > max 0.200"
+        }
+      ]
+    },
+    {
+      "chapter": 10,
+      "chapter_index": 9,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "love\\s+melts\\s+all",
+          "line": 13,
+          "excerpt": "Love melts all blockages. This is not sentimentality. It is the highest frequency available to a human being. Use it as "
+        },
+        {
+          "type": "spiritual_density",
+          "detail": "density 0.254 > max 0.200"
+        }
+      ]
+    },
+    {
+      "chapter": 11,
+      "chapter_index": 10,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "frequency\\s+of",
+          "line": 9,
+          "excerpt": "Love Affirmation Chanting: Choose a simple affirmation that resonates with you: \"I am loved.\" \"Love flows through me.\" \""
+        },
+        {
+          "type": "spiritual_density",
+          "detail": "density 0.212 > max 0.200"
+        }
+      ]
+    }
+  ],
+  "recurrence_report": []
+}

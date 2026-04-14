@@ -241,3 +241,17 @@ learner:
   max_weight_delta: 0.05         # Max weight shift per cycle
   min_observations: 10           # Min before any adjustment
   auto_learn: true               # Run learn() after each catalog calibration
+
+# Whole-manuscript signature phrase recurrence (post dedup, warn-only telemetry)
+manuscript_recurrence:
+  enabled: true
+  max_signature_recurrences: 3
+  min_phrase_words: 8
+
+# Per-chapter EXERCISE caps (composed spine + registry chapter path uses planner contracts when wired)
+exercise_governance:
+  max_per_chapter_default: 2
+  override_per_format:
+    micro_book_15: 1
+    micro_book_20: 1
+    deep_book_6h: 3

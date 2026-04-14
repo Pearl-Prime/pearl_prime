@@ -326,7 +326,9 @@ class TestComposerIntegration:
         """Fat section above threshold: should_expand is False → no expansion key in result."""
         from phoenix_v4.rendering.section_packet_composer import compose_section_packet
 
-        fat_text = " ".join(["word"] * 400)
+        # Avoid 400× identical "word": clean_for_delivery manuscript_recurrence strips
+        # repeated 8-word phrases, which would collapse this fixture to a tiny word_count.
+        fat_text = " ".join(f"w{i % 500}" for i in range(400))
         kwargs = {k: v for k, v in self._base_kwargs().items() if k != "bridge_text"}
         result = compose_section_packet(
             **kwargs,

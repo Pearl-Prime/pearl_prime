@@ -14,8 +14,13 @@ Always-on for book renders. No opt-in flag required.
 from __future__ import annotations
 
 import hashlib
+import logging
 import re
-from typing import Optional
+from typing import Any, Optional
+
+logger = logging.getLogger(__name__)
+
+DEFAULT_MAX_EXERCISES_PER_CHAPTER = 2
 
 from phoenix_v4.exercises.models import AssemblyContext, EmotionalState
 
@@ -761,6 +766,8 @@ def compose_chapter_prose(
 def compose_from_enriched_book(
     enriched: "EnrichedBook",
     quality_profile: str = "draft",
+    *,
+    governance_report: Optional[dict[str, Any]] = None,
 ) -> str:
     """
     Render an EnrichedBook to prose text.
@@ -774,16 +781,115 @@ def compose_from_enriched_book(
     Args:
         enriched: Output of phoenix_v4.planning.enrichment_select.select_enrichment
         quality_profile: Reserved for future quality-specific polishing (unused in pilot).
+        governance_report: Optional mutable dict for warn-only telemetry
+            (exercise_slots_dropped, chapter_contract_warnings, frame_governance_chapters).
     """
     del quality_profile  # pilot — reserved
 
+    report = governance_report if governance_report is not None else {}
+    report.setdefault("exercise_slots_dropped", [])
+    report.setdefault("chapter_contract_warnings", [])
+    report.setdefault("frame_governance_chapters", [])
+
+    try:
+        from phoenix_v4.quality.ei_v2.config import load_ei_v2_config
+
+        ei_cfg = load_ei_v2_config() or {}
+    except Exception:
+        ei_cfg = {}
+    ex_gov = ei_cfg.get("exercise_governance") or {}
+    format_default = int(ex_gov.get("max_per_chapter_default", DEFAULT_MAX_EXERCISES_PER_CHAPTER))
+    overrides = ex_gov.get("override_per_format") or {}
+    rid = (enriched.runtime_format or "").strip()
+    format_cap = int(overrides[rid]) if rid in overrides else format_default
+
+    from phoenix_v4.planning.chapter_planner import assign_chapter_purpose_contracts
+
+    contracts = assign_chapter_purpose_contracts(
+        len(enriched.chapters),
+        enriched.runtime_format,
+    )
+
+    from phoenix_v4.quality.frame_governor import frame_governance_check, load_frame_registry
+
+    frame_registry = load_frame_registry()
+    frame = str((enriched.spine_context or {}).get("frame") or "somatic_first").strip()
+
     chapters_prose: list[str] = []
-    for ch in enriched.chapters:
-        chapter_text = f"Chapter {ch.number}\n{ch.working_title}\n\n"
+    for ch_idx, ch in enumerate(enriched.chapters):
+        contract = contracts[ch_idx] if ch_idx < len(contracts) else contracts[-1]
+        max_allowed = min(int(contract.max_exercises), format_cap)
+
+        ex_seen = 0
+        slots_out = []
         for slot in ch.slots:
+            st = str(slot.slot_type or "").strip().upper()
+            if st == "EXERCISE":
+                if ex_seen < max_allowed:
+                    slots_out.append(slot)
+                    ex_seen += 1
+                else:
+                    entry = {
+                        "chapter": ch.number,
+                        "chapter_index": ch_idx,
+                        "slot_type": st,
+                        "max_allowed": max_allowed,
+                        "contract_max_exercises": contract.max_exercises,
+                        "format_cap": format_cap,
+                    }
+                    if isinstance(report["exercise_slots_dropped"], list):
+                        report["exercise_slots_dropped"].append(entry)
+                    logger.warning(
+                        "Exercise governance: dropped EXERCISE slot in chapter %s (cap=%s).",
+                        ch.number,
+                        max_allowed,
+                    )
+            else:
+                slots_out.append(slot)
+
+        if ch_idx > 0 and contracts[ch_idx].emotional_job == contracts[ch_idx - 1].emotional_job:
+            msg = (
+                f"chapter {ch.number}: emotional_job {contracts[ch_idx].emotional_job!r} "
+                f"matches previous chapter — escalation contract may be weak"
+            )
+            if isinstance(report["chapter_contract_warnings"], list):
+                report["chapter_contract_warnings"].append(msg)
+            logger.warning("Chapter contract: %s", msg)
+
+        if contracts[ch_idx].emotional_job in contracts[ch_idx].forbidden_repeats:
+            msg = (
+                f"chapter {ch.number}: emotional_job {contracts[ch_idx].emotional_job!r} "
+                f"is listed in its own forbidden_repeats (YAML check)"
+            )
+            if isinstance(report["chapter_contract_warnings"], list):
+                report["chapter_contract_warnings"].append(msg)
+
+        chapter_text = f"Chapter {ch.number}\n{ch.working_title}\n\n"
+        chapter_body_parts: list[str] = []
+        for slot in slots_out:
             if slot.content and not slot.content.startswith("[CONTENT GAP"):
                 chapter_text += slot.content + "\n\n"
+                chapter_body_parts.append(slot.content)
         chapters_prose.append(chapter_text.rstrip())
+
+        ch_body = "\n\n".join(chapter_body_parts)
+        fg = frame_governance_check(
+            ch_body,
+            frame=frame,
+            chapter_index=ch_idx,
+            frame_registry=frame_registry,
+        )
+        if not fg.frame_compliant and fg.violations:
+            if isinstance(report["frame_governance_chapters"], list):
+                report["frame_governance_chapters"].append(
+                    {"chapter": ch.number, "chapter_index": ch_idx, "violations": fg.violations},
+                )
+            logger.warning(
+                "Frame governance (%s) chapter %s: %d violation(s) (warn-only).",
+                frame,
+                ch.number,
+                len(fg.violations),
+            )
 
     manuscript = "\n\n".join(chapters_prose)
     from phoenix_v4.quality.chapter_flow_gate import flow_profile_for_runtime_format

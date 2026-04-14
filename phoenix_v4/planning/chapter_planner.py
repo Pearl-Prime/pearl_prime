@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 POLICY_PATH = REPO_ROOT / "config" / "source_of_truth" / "chapter_planner_policies.yaml"
+CHAPTER_PURPOSE_CONTRACTS_PATH = REPO_ROOT / "config" / "source_of_truth" / "chapter_purpose_contracts.yaml"
 
 ROLE_MAP = {
     "recognition": "introduce",
@@ -52,6 +53,115 @@ BESTSELLER_STRUCTURES = [
     "letter",
 ]
 MAX_BESTSELLER_RUN = 3
+
+
+@dataclass
+class ChapterContract:
+    chapter_index: int
+    emotional_job: str
+    reader_promise: str
+    forbidden_repeats: list[str]
+    required_escalation: str
+    allowed_slot_types: list[str]
+    max_exercises: int
+
+
+def infer_purpose_tier_by_count(chapter_count: int) -> str:
+    """Map chapter count to purpose-contract arc tier (non-overlapping bands)."""
+    if chapter_count <= 5:
+        return "micro_book"
+    if chapter_count < 8:
+        return "short_book"
+    if chapter_count <= 12:
+        return "standard_book"
+    if chapter_count <= 18:
+        return "extended_book"
+    return "deep_book"
+
+
+def resolve_purpose_arc_key(arc_id: Optional[str], chapter_count: int) -> str:
+    """Resolve YAML arc key from runtime_format hint or chapter count."""
+    aid = (arc_id or "").strip().lower()
+    if not aid:
+        return infer_purpose_tier_by_count(chapter_count)
+    if "micro" in aid:
+        return "micro_book"
+    if "short" in aid and "standard" not in aid:
+        return "short_book"
+    if "extended" in aid:
+        return "extended_book"
+    if "deep" in aid or "6h" in aid:
+        return "deep_book"
+    if "standard" in aid:
+        return "standard_book"
+    return infer_purpose_tier_by_count(chapter_count)
+
+
+def _fallback_chapter_contracts(chapter_count: int) -> list[ChapterContract]:
+    """Uniform soft contracts when YAML is missing (warn-only path)."""
+    return [
+        ChapterContract(
+            chapter_index=i,
+            emotional_job="integration",
+            reader_promise="",
+            forbidden_repeats=[],
+            required_escalation="",
+            allowed_slot_types=[
+                "HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE",
+                "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE",
+            ],
+            max_exercises=2,
+        )
+        for i in range(chapter_count)
+    ]
+
+
+def assign_chapter_purpose_contracts(
+    chapter_count: int,
+    arc_id: Optional[str] = None,
+    *,
+    policy_path: Optional[Path] = None,
+) -> list[ChapterContract]:
+    """
+    Load chapter_purpose_contracts.yaml and return one ChapterContract per chapter.
+
+    Falls back to uniform contracts if YAML is missing or invalid (logs warning only).
+    """
+    path = policy_path or CHAPTER_PURPOSE_CONTRACTS_PATH
+    data = _load_yaml(path)
+    if not data:
+        logger.warning(
+            "chapter_purpose_contracts.yaml missing or unloadable; using fallback ChapterContract list.",
+        )
+        return _fallback_chapter_contracts(chapter_count)
+
+    arc_key = resolve_purpose_arc_key(arc_id, chapter_count)
+    arcs = data.get("arcs") or {}
+    arc = arcs.get(arc_key) or {}
+    jobs_raw = list(arc.get("jobs") or [])
+    if not jobs_raw:
+        logger.warning("chapter purpose arc %r has no jobs; using fallback.", arc_key)
+        return _fallback_chapter_contracts(chapter_count)
+
+    templates: list[dict[str, Any]] = [j for j in jobs_raw if isinstance(j, dict)]
+    templates.sort(key=lambda x: int(x.get("chapter_index", 0)))
+
+    out: list[ChapterContract] = []
+    for i in range(chapter_count):
+        src = templates[i] if i < len(templates) else templates[-1]
+        mx = src.get("max_exercises")
+        out.append(
+            ChapterContract(
+                chapter_index=i,
+                emotional_job=str(src.get("emotional_job") or "integration"),
+                reader_promise=str(src.get("reader_promise") or ""),
+                forbidden_repeats=[str(x) for x in (src.get("forbidden_repeats") or [])],
+                required_escalation=str(src.get("required_escalation") or ""),
+                allowed_slot_types=[str(x) for x in (src.get("allowed_slot_types") or [])],
+                max_exercises=int(mx) if mx is not None else 2,
+            )
+        )
+    return out
 
 
 def assign_bestseller_structures(chapter_count: int, selector_key_prefix: str) -> list[str]:

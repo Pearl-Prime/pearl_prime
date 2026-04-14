@@ -1,0 +1,18 @@
+# Frame governance for long-form delivery (somatic vs spiritual language balance).
+# Consumed by phoenix_v4.quality.frame_governor (warn-only in v1).
+version: 1
+
+frames:
+  somatic_first:
+    primary_layer: somatic_psychological
+    secondary_layer: spiritual_meaning
+    spiritual_entry_chapter_min: 3   # spiritual lexicon density only evaluated from this chapter index onward
+    spiritual_density_max: 0.20      # max share of chapter words flagged as spiritual/metaphysical
+    absolute_claim_ban: true
+
+  spiritual_first:
+    primary_layer: spiritual_meaning
+    secondary_layer: somatic_psychological
+    spiritual_entry_chapter_min: 0
+    spiritual_density_max: 1.0
+    absolute_claim_ban: false
