@@ -1,6 +1,6 @@
 # Frame governance for long-form delivery (somatic vs spiritual language balance).
-# Consumed by phoenix_v4.quality.frame_governor (warn-only in v1).
-version: 1
+# Consumed by phoenix_v4.quality.frame_governor.
+version: 2
 
 frames:
   somatic_first:
@@ -9,6 +9,8 @@ frames:
     spiritual_entry_chapter_min: 3   # spiritual lexicon density only evaluated from this chapter index onward
     spiritual_density_max: 0.20      # max share of chapter words flagged as spiritual/metaphysical
     absolute_claim_ban: true
+    # When a chapter carries TEACHER_DOCTRINE content, allow higher spiritual share before density warning fires.
+    doctrine_chapter_spiritual_density_max: 0.55
 
   spiritual_first:
     primary_layer: spiritual_meaning
@@ -16,3 +18,51 @@ frames:
     spiritual_entry_chapter_min: 0
     spiritual_density_max: 1.0
     absolute_claim_ban: false
+
+# Policy-controlled enforcement (v2). When enabled: rewrite prose per violation_policies; always emit telemetry.
+governance_v2:
+  enabled: true
+  violation_policies:
+    absolute_claim:
+      default: strip_sentence
+      doctrine_chapter: warn_only
+    spiritual_before_entry_chapter:
+      default: soften_in_place
+      doctrine_chapter: warn_only
+      allow_early_spiritual_contract: warn_only
+    spiritual_density:
+      default: warn_only
+      doctrine_chapter: warn_only
+  # If listed, any detected violation of that type raises FrameGovernanceHardFail (pipeline abort).
+  hard_fail_violation_types: []
+
+  # Regex → replacement for soften_in_place on absolute-claim patterns (after doctrine policy allows edit).
+  absolute_softeners:
+    - pattern_regex: "(?i)\\blove\\s+melts\\s+all\\b"
+      replacement: "Love can feel, for many people, like something that softens inner tightness"
+    - pattern_regex: "(?i)\\bevery\\s+organ\\b"
+      replacement: "the body's systems"
+    - pattern_regex: "(?i)\\bdisease\\s+is\\b"
+      replacement: "some teachings frame illness as"
+    - pattern_regex: "(?i)\\bfrequency\\s+of\\b"
+      replacement: "rhythm of"
+    - pattern_regex: "(?i)\\bvibration\\s+of\\b"
+      replacement: "felt sense of"
+    - pattern_regex: "(?i)\\bsoul\\s+contract\\b"
+      replacement: "a felt sense of obligation you did not choose"
+    - pattern_regex: "(?i)\\bkarma\\b"
+      replacement: "patterns some traditions describe as repeating"
+
+  # Whole-word (case-insensitive) replacements for early spiritual lexicon softening.
+  lexicon_softeners:
+    chakra: "the chest or belly area you notice when you breathe"
+    past life: "earlier chapter of your story"
+    akashic: "felt memory-like patterns"
+    ascension: "opening or relief"
+    manifestation: "what shows up in your lived experience"
+    energy field: "sensations around the body"
+    aura: "the sense of space around you"
+    divine timing: "timing you could not have planned"
+    cosmic: "larger-than-personal"
+    sacred geometry: "recurring shapes you notice"
+    light body: "subtle bodily sensations"

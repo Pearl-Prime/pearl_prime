@@ -539,6 +539,9 @@ def _run_spine_pipeline_mode(
             "exercise_slots_dropped": _governance_report.get("exercise_slots_dropped", []),
             "chapter_contract_warnings": _governance_report.get("chapter_contract_warnings", []),
             "frame_governance_chapters": _governance_report.get("frame_governance_chapters", []),
+            "frame_softened_sentences": _governance_report.get("frame_softened_sentences", []),
+            "frame_stripped_sentences": _governance_report.get("frame_stripped_sentences", []),
+            "frame_hard_fail_reasons": _governance_report.get("frame_hard_fail_reasons", []),
             "recurrence_report": _governance_report.get("recurrence_report", []),
         }
         _qs_path.write_text(json.dumps(_qs_payload, indent=2), encoding="utf-8")

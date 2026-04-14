@@ -5,6 +5,9 @@ Edge cases: placeholders → [Placeholder: TYPE], silence → [Silence: TYPE], m
 Teacher Mode: when atom_source == practice_fallback for EXERCISE, wrap with teacher intro/close templates (deterministic).
 Delivery: clean_for_delivery() strips scaffolding + resolves loc-var fallbacks.
           delivery_contract_gate() hard-fails build if forbidden artifacts survive into output.
+Frame: when clean_output, per-chapter frame enforcement (frame_governor.apply_frame_enforcement)
+       runs after strengthen_chapter_flow_for_delivery; spine/enriched path applies the same
+       stage inside chapter_composer.compose_from_enriched_book.
 """
 from __future__ import annotations
 
@@ -1505,6 +1508,35 @@ class TxtWriter:
         total_chapters = len(chapter_slot_sequence)
         highest_exercise_ch = -1  # track for mid-book CTA
 
+        _delivery_governance: dict[str, Any] = {}
+        _frame_registry: Any = None
+        _frame_ch_contracts: list[Any] = []
+        _frame = "somatic_first"
+        if self.options.clean_output:
+            _delivery_governance = {
+                "frame_governance_chapters": [],
+                "frame_softened_sentences": [],
+                "frame_stripped_sentences": [],
+                "frame_hard_fail_reasons": [],
+            }
+            from phoenix_v4.planning.chapter_planner import assign_chapter_purpose_contracts
+            from phoenix_v4.quality.frame_governor import load_frame_registry
+
+            _runtime_fmt = str(
+                self.plan.get("runtime_format_id")
+                or (self.plan.get("book_spec") or {}).get("runtime_format_id")
+                or ""
+            )
+            _frame_ch_contracts = assign_chapter_purpose_contracts(
+                total_chapters, _runtime_fmt
+            )
+            _frame_registry = load_frame_registry()
+            _plan_frame = self.plan.get("frame")
+            if _plan_frame is None:
+                _plan_frame = (self.plan.get("book_spec") or {}).get("frame")
+            _spine = self.plan.get("spine_context") or {}
+            _frame = str(_plan_frame or _spine.get("frame") or "somatic_first").strip()
+
         idx = 0
         for ch, slots in enumerate(chapter_slot_sequence):
             lines.append("")
@@ -1585,6 +1617,60 @@ class TxtWriter:
                 plan=self.plan,
             )
 
+            if self.options.clean_output and _frame_registry:
+                from phoenix_v4.quality.frame_governor import (
+                    FrameEnforcementContext,
+                    apply_frame_enforcement,
+                )
+
+                _fc = (
+                    _frame_ch_contracts[ch]
+                    if ch < len(_frame_ch_contracts)
+                    else _frame_ch_contracts[-1]
+                )
+                _doctrine = any(
+                    str(x).strip().upper() == "TEACHER_DOCTRINE"
+                    for x in chapter_slot_types
+                )
+                _fe_ctx = FrameEnforcementContext(
+                    chapter_index=ch,
+                    frame=_frame,
+                    doctrine_chapter=_doctrine,
+                    allow_early_spiritual=bool(_fc.allow_early_spiritual),
+                    emotional_job=str(_fc.emotional_job or ""),
+                )
+                composed, _fg = apply_frame_enforcement(
+                    composed, _fe_ctx, _frame_registry
+                )
+                _delivery_governance["frame_softened_sentences"].extend(
+                    _fg.softened_sentences
+                )
+                _delivery_governance["frame_stripped_sentences"].extend(
+                    _fg.stripped_sentences
+                )
+                _delivery_governance["frame_hard_fail_reasons"].extend(
+                    _fg.hard_fail_reasons
+                )
+                if (
+                    _fg.violations
+                    or _fg.softened_sentences
+                    or _fg.stripped_sentences
+                    or _fg.hard_fail_reasons
+                    or not _fg.frame_compliant
+                ):
+                    _delivery_governance["frame_governance_chapters"].append(
+                        {
+                            "chapter": ch + 1,
+                            "chapter_index": ch,
+                            "violations": _fg.violations,
+                            "softened": _fg.softened_sentences,
+                            "stripped": _fg.stripped_sentences,
+                            "hard_fail": _fg.hard_fail_reasons,
+                            "frame_compliant": _fg.frame_compliant,
+                            "spiritual_density": _fg.spiritual_density,
+                        }
+                    )
+
             lines.append(composed)
             lines.append("")
 
@@ -1645,7 +1731,6 @@ class TxtWriter:
         # Resolve {{MA}}, {{MA_DEF}}, {{MA_FULL}} tokens before delivery gate
         full_text = _resolve_mechanism_alias_tokens(full_text, alias)
 
-        _delivery_governance: dict[str, Any] = {}
         if self.options.clean_output:
             full_text = clean_for_delivery(
                 full_text, plan=self.plan, governance_report=_delivery_governance

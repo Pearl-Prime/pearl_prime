@@ -1,0 +1,84 @@
+{
+  "source": "frame_enforcement_v2_verify_fixture",
+  "frame": "somatic_first",
+  "frame_governance_chapters": [
+    {
+      "chapter": 1,
+      "chapter_index": 0,
+      "violations": [],
+      "softened": [],
+      "stripped": [
+        {
+          "chapter_index": 0,
+          "line": 1,
+          "type": "absolute_claim",
+          "pattern": "love\\s+melts\\s+all",
+          "original": "Love melts all blockages here."
+        }
+      ],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.0
+    },
+    {
+      "chapter": 2,
+      "chapter_index": 1,
+      "violations": [
+        {
+          "type": "absolute_claim",
+          "pattern": "love\\s+melts\\s+all",
+          "line": 1,
+          "excerpt": "In this lineage, love melts all blockages; the teaching is explicit."
+        }
+      ],
+      "softened": [],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.0
+    },
+    {
+      "chapter": 3,
+      "chapter_index": 2,
+      "violations": [],
+      "softened": [
+        {
+          "chapter_index": 2,
+          "line": 1,
+          "type": "spiritual_before_entry_chapter",
+          "keys": [
+            "chakra"
+          ],
+          "before": "Early chapter with chakra language before entry.",
+          "after": "Early chapter with the chest or belly area you notice when you breathe language before entry."
+        }
+      ],
+      "stripped": [],
+      "hard_fail": [],
+      "frame_compliant": true,
+      "spiritual_density": 0.0
+    }
+  ],
+  "frame_softened_sentences": [
+    {
+      "chapter_index": 2,
+      "line": 1,
+      "type": "spiritual_before_entry_chapter",
+      "keys": [
+        "chakra"
+      ],
+      "before": "Early chapter with chakra language before entry.",
+      "after": "Early chapter with the chest or belly area you notice when you breathe language before entry."
+    }
+  ],
+  "frame_stripped_sentences": [
+    {
+      "chapter_index": 0,
+      "line": 1,
+      "type": "absolute_claim",
+      "pattern": "love\\s+melts\\s+all",
+      "original": "Love melts all blockages here."
+    }
+  ],
+  "frame_hard_fail_reasons": []
+}

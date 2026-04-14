@@ -64,6 +64,8 @@ class ChapterContract:
     required_escalation: str
     allowed_slot_types: list[str]
     max_exercises: int
+    # When true, frame governance does not treat pre-entry spiritual lexicon as a blocking issue.
+    allow_early_spiritual: bool = False
 
 
 def infer_purpose_tier_by_count(chapter_count: int) -> str:
@@ -111,6 +113,7 @@ def _fallback_chapter_contracts(chapter_count: int) -> list[ChapterContract]:
                 "INTEGRATION", "COMPRESSION", "TEACHER_DOCTRINE",
             ],
             max_exercises=2,
+            allow_early_spiritual=False,
         )
         for i in range(chapter_count)
     ]
@@ -159,6 +162,7 @@ def assign_chapter_purpose_contracts(
                 required_escalation=str(src.get("required_escalation") or ""),
                 allowed_slot_types=[str(x) for x in (src.get("allowed_slot_types") or [])],
                 max_exercises=int(mx) if mx is not None else 2,
+                allow_early_spiritual=bool(src.get("allow_early_spiritual", False)),
             )
         )
     return out

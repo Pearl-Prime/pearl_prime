@@ -781,8 +781,9 @@ def compose_from_enriched_book(
     Args:
         enriched: Output of phoenix_v4.planning.enrichment_select.select_enrichment
         quality_profile: Reserved for future quality-specific polishing (unused in pilot).
-        governance_report: Optional mutable dict for warn-only telemetry
-            (exercise_slots_dropped, chapter_contract_warnings, frame_governance_chapters).
+        governance_report: Optional mutable dict for telemetry
+            (exercise_slots_dropped, chapter_contract_warnings, frame_governance_chapters,
+            frame_softened_sentences, frame_stripped_sentences, frame_hard_fail_reasons).
     """
     del quality_profile  # pilot — reserved
 
@@ -790,6 +791,9 @@ def compose_from_enriched_book(
     report.setdefault("exercise_slots_dropped", [])
     report.setdefault("chapter_contract_warnings", [])
     report.setdefault("frame_governance_chapters", [])
+    report.setdefault("frame_softened_sentences", [])
+    report.setdefault("frame_stripped_sentences", [])
+    report.setdefault("frame_hard_fail_reasons", [])
 
     try:
         from phoenix_v4.quality.ei_v2.config import load_ei_v2_config
@@ -810,7 +814,11 @@ def compose_from_enriched_book(
         enriched.runtime_format,
     )
 
-    from phoenix_v4.quality.frame_governor import frame_governance_check, load_frame_registry
+    from phoenix_v4.quality.frame_governor import (
+        FrameEnforcementContext,
+        apply_frame_enforcement,
+        load_frame_registry,
+    )
 
     frame_registry = load_frame_registry()
     frame = str((enriched.spine_context or {}).get("frame") or "somatic_first").strip()
@@ -864,32 +872,60 @@ def compose_from_enriched_book(
             if isinstance(report["chapter_contract_warnings"], list):
                 report["chapter_contract_warnings"].append(msg)
 
-        chapter_text = f"Chapter {ch.number}\n{ch.working_title}\n\n"
         chapter_body_parts: list[str] = []
         for slot in slots_out:
             if slot.content and not slot.content.startswith("[CONTENT GAP"):
-                chapter_text += slot.content + "\n\n"
                 chapter_body_parts.append(slot.content)
+        ch_body = "\n\n".join(chapter_body_parts)
+        has_doctrine = any(
+            str(s.slot_type or "").strip().upper() == "TEACHER_DOCTRINE" for s in slots_out
+        )
+        fe_ctx = FrameEnforcementContext(
+            chapter_index=ch_idx,
+            frame=frame,
+            doctrine_chapter=has_doctrine,
+            allow_early_spiritual=bool(contract.allow_early_spiritual),
+            emotional_job=str(contract.emotional_job or ""),
+        )
+        ch_body, fg = apply_frame_enforcement(ch_body, fe_ctx, frame_registry)
+        chapter_text = f"Chapter {ch.number}\n{ch.working_title}\n\n"
+        if ch_body.strip():
+            chapter_text += ch_body.strip() + "\n\n"
         chapters_prose.append(chapter_text.rstrip())
 
-        ch_body = "\n\n".join(chapter_body_parts)
-        fg = frame_governance_check(
-            ch_body,
-            frame=frame,
-            chapter_index=ch_idx,
-            frame_registry=frame_registry,
-        )
-        if not fg.frame_compliant and fg.violations:
+        if isinstance(report["frame_softened_sentences"], list):
+            report["frame_softened_sentences"].extend(fg.softened_sentences)
+        if isinstance(report["frame_stripped_sentences"], list):
+            report["frame_stripped_sentences"].extend(fg.stripped_sentences)
+        if isinstance(report["frame_hard_fail_reasons"], list):
+            report["frame_hard_fail_reasons"].extend(fg.hard_fail_reasons)
+        if (
+            fg.violations
+            or fg.softened_sentences
+            or fg.stripped_sentences
+            or fg.hard_fail_reasons
+            or not fg.frame_compliant
+        ):
             if isinstance(report["frame_governance_chapters"], list):
                 report["frame_governance_chapters"].append(
-                    {"chapter": ch.number, "chapter_index": ch_idx, "violations": fg.violations},
+                    {
+                        "chapter": ch.number,
+                        "chapter_index": ch_idx,
+                        "violations": fg.violations,
+                        "softened": fg.softened_sentences,
+                        "stripped": fg.stripped_sentences,
+                        "hard_fail": fg.hard_fail_reasons,
+                        "frame_compliant": fg.frame_compliant,
+                        "spiritual_density": fg.spiritual_density,
+                    },
                 )
-            logger.warning(
-                "Frame governance (%s) chapter %s: %d violation(s) (warn-only).",
-                frame,
-                ch.number,
-                len(fg.violations),
-            )
+            if fg.violations and not fg.softened_sentences and not fg.stripped_sentences:
+                logger.warning(
+                    "Frame governance (%s) chapter %s: %d open issue(s).",
+                    frame,
+                    ch.number,
+                    len(fg.violations),
+                )
 
     manuscript = "\n\n".join(chapters_prose)
     from phoenix_v4.quality.chapter_flow_gate import flow_profile_for_runtime_format
