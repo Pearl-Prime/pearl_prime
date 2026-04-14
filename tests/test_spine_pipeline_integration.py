@@ -20,6 +20,31 @@ ANXIETY_ARC = (
 )
 
 
+def _run_spine(out_dir: Path, plan_path: Path, *, quality_profile: str = "draft") -> subprocess.CompletedProcess[str]:
+    cmd = [
+        sys.executable,
+        str(RUN_PIPELINE),
+        "--topic",
+        "anxiety",
+        "--persona",
+        "gen_z_professionals",
+        "--arc",
+        str(ANXIETY_ARC),
+        "--pipeline-mode",
+        "spine",
+        "--render-book",
+        "--render-dir",
+        str(out_dir),
+        "--out",
+        str(plan_path),
+        "--quality-profile",
+        quality_profile,
+        "--no-job-check",
+        "--no-generate-freebies",
+    ]
+    return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=240)
+
+
 def test_run_pipeline_help_lists_pipeline_mode() -> None:
     """CLI documents --pipeline-mode spine."""
     r = subprocess.run(
@@ -47,28 +72,7 @@ def test_spine_mode_produces_book_and_audit(tmp_path: Path) -> None:
     """Spine mode run writes book.txt, enrichment_audit.json, budget.json."""
     out_dir = tmp_path / "spine_out"
     plan_path = tmp_path / "plan.json"
-    cmd = [
-        sys.executable,
-        str(RUN_PIPELINE),
-        "--topic",
-        "anxiety",
-        "--persona",
-        "gen_z_professionals",
-        "--arc",
-        str(ANXIETY_ARC),
-        "--pipeline-mode",
-        "spine",
-        "--render-book",
-        "--render-dir",
-        str(out_dir),
-        "--out",
-        str(plan_path),
-        "--quality-profile",
-        "draft",
-        "--no-job-check",
-        "--no-generate-freebies",
-    ]
-    r = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=180)
+    r = _run_spine(out_dir, plan_path, quality_profile="draft")
     assert r.returncode == 0, r.stderr + r.stdout
     book = out_dir / "book.txt"
     assert book.exists()
@@ -84,28 +88,7 @@ def test_spine_mode_budget_word_count_matches_book(tmp_path: Path) -> None:
     """budget.json word_count matches token count of book.txt (whitespace split)."""
     out_dir = tmp_path / "spine_out2"
     plan_path = tmp_path / "plan2.json"
-    cmd = [
-        sys.executable,
-        str(RUN_PIPELINE),
-        "--topic",
-        "anxiety",
-        "--persona",
-        "gen_z_professionals",
-        "--arc",
-        str(ANXIETY_ARC),
-        "--pipeline-mode",
-        "spine",
-        "--render-book",
-        "--render-dir",
-        str(out_dir),
-        "--out",
-        str(plan_path),
-        "--quality-profile",
-        "draft",
-        "--no-job-check",
-        "--no-generate-freebies",
-    ]
-    r = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=180)
+    r = _run_spine(out_dir, plan_path, quality_profile="draft")
     assert r.returncode == 0, r.stderr + r.stdout
     book_text = (out_dir / "book.txt").read_text(encoding="utf-8")
     budget = json.loads((out_dir / "budget.json").read_text(encoding="utf-8"))
@@ -151,3 +134,62 @@ def test_spine_mode_enrichment_audit_has_depth_key_when_ran() -> None:
         pytest.skip("batch artifact not present")
     data = json.loads(audit_path.read_text(encoding="utf-8"))
     assert "depth_modules_added" in data
+
+
+@pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
+def test_spine_produces_quality_summary_json(tmp_path: Path) -> None:
+    out_dir = tmp_path / "spine_quality_summary"
+    plan_path = tmp_path / "spine_quality_summary_plan.json"
+    r = _run_spine(out_dir, plan_path, quality_profile="draft")
+    assert r.returncode == 0, r.stderr + r.stdout
+    summary_path = out_dir / "quality_summary.json"
+    assert summary_path.exists()
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    gates = summary.get("gates", {})
+    expected = {
+        "chapter_flow",
+        "bestseller_craft",
+        "ei_v2",
+        "editorial",
+        "memorable_lines",
+        "transformation_arc",
+        "book_pass",
+    }
+    assert expected.issubset(set(gates.keys()))
+
+
+@pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
+def test_spine_ei_v2_not_skipped(tmp_path: Path) -> None:
+    out_dir = tmp_path / "spine_ei_v2"
+    plan_path = tmp_path / "spine_ei_v2_plan.json"
+    r = _run_spine(out_dir, plan_path, quality_profile="draft")
+    assert r.returncode == 0, r.stderr + r.stdout
+    summary = json.loads((out_dir / "quality_summary.json").read_text(encoding="utf-8"))
+    assert summary["gates"]["ei_v2"]["status"] != "SKIPPED"
+
+
+@pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
+def test_spine_editorial_report_exists(tmp_path: Path) -> None:
+    out_dir = tmp_path / "spine_editorial"
+    plan_path = tmp_path / "spine_editorial_plan.json"
+    r = _run_spine(out_dir, plan_path, quality_profile="draft")
+    assert r.returncode == 0, r.stderr + r.stdout
+    assert (out_dir / "editorial_report.json").exists()
+
+
+@pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
+def test_spine_gates_advisory_by_default(tmp_path: Path) -> None:
+    out_dir = tmp_path / "spine_advisory"
+    plan_path = tmp_path / "spine_advisory_plan.json"
+    r = _run_spine(out_dir, plan_path, quality_profile="draft")
+    assert r.returncode == 0, r.stderr + r.stdout
+    summary = json.loads((out_dir / "quality_summary.json").read_text(encoding="utf-8"))
+    assert summary.get("gates_hard") is False
+
+
+@pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
+def test_spine_gates_hard_blocks_on_failure(tmp_path: Path) -> None:
+    out_dir = tmp_path / "spine_hard"
+    plan_path = tmp_path / "spine_hard_plan.json"
+    r = _run_spine(out_dir, plan_path, quality_profile="production")
+    assert r.returncode != 0, r.stderr + r.stdout

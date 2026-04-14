@@ -250,6 +250,47 @@ def _run_post_render_quality_gates(
     return None
 
 
+def _apply_book_quality_gate(
+    *,
+    render_dir: Path,
+    prose: str,
+    runtime_format_id: str,
+    gates_hard: bool,
+    governance_report: dict | None = None,
+    slot_sequences: list | None = None,
+    frame: str = "somatic_first",
+    policy_override: bool = False,
+) -> tuple[list[str], dict]:
+    """Write book_quality_report.json; return (pipeline_failure_tags, summary_fragment)."""
+    from phoenix_v4.quality.book_quality_gate import evaluate_book_quality, write_book_quality_report
+
+    rep = evaluate_book_quality(
+        prose,
+        runtime_format_id=runtime_format_id or "",
+        governance_report=governance_report,
+        slot_sequences=slot_sequences,
+        frame=frame,
+        policy_override=policy_override,
+    )
+    out_path = render_dir / "book_quality_report.json"
+    write_book_quality_report(rep, out_path)
+    print(
+        f"Pearl Prime book quality gate: {rep.release_band} (fail={len(rep.fail_reasons)} "
+        f"hold={len(rep.hold_reasons)}) — {out_path}",
+        file=sys.stderr,
+    )
+    fragment = {
+        "release_band": rep.release_band,
+        "report_path": str(out_path),
+        "fail_reasons": rep.fail_reasons,
+        "hold_reasons": rep.hold_reasons,
+    }
+    failures: list[str] = []
+    if gates_hard and str(rep.release_band) == "Reject":
+        failures.append("book_quality_gate")
+    return failures, fragment
+
+
 def _extract_registry_chapters(prose: str) -> list[str]:
     """Split registry-rendered prose into per-chapter text strings.
 
@@ -362,15 +403,38 @@ def _run_spine_pipeline_mode(
 
     render_dir = Path(args.render_dir) if args.render_dir else Path("artifacts/rendered") / f"spine-{topic_id}"
     render_dir.mkdir(parents=True, exist_ok=True)
+    word_count = len(prose.split())
     _quality_gate_failures: list[str] = []
+    _chapter_flow_status = "SKIPPED"
+    _chapter_flow_report_name = "chapter_flow_report.json"
+    _craft_status = "SKIPPED"
+    _craft_overall = 0.0
+    _ei_status = "SKIPPED"
+    _ei_composite = 0.0
+    _editorial_status = "SKIPPED"
+    _memorable_status = "SKIPPED"
+    _memorable_quote_chapters = 0
+    _memorable_total_chapters = 0
+    _transform_status = "SKIPPED"
+    _book_pass_status = "SKIPPED"
+
+    def _write_gate_report(report_name: str, payload: dict) -> Path:
+        report_path = render_dir / report_name
+        report_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        return report_path
 
     if gates_run:
+        _chapters_for_quality = _extract_registry_chapters(prose)
+        _book_path_for_gates = render_dir / "book.txt"
+        _book_path_for_gates.write_text(prose, encoding="utf-8")
+
         try:
             _flow_report = chapter_flow_gate_report(
                 prose, runtime_format_id=runtime_fmt
             )
             _flow_report_path = render_dir / "chapter_flow_report.json"
             _flow_report_path.write_text(json.dumps(_flow_report, indent=2), encoding="utf-8")
+            _chapter_flow_status = str(_flow_report.get("status", "PASS"))
             print(
                 f"Chapter flow gate: {_flow_report['status']} "
                 f"({_flow_report['failed_chapters']}/{_flow_report['chapter_count']} failed). "
@@ -387,14 +451,18 @@ def _run_spine_pipeline_mode(
                 if gates_hard:
                     _quality_gate_failures.append("chapter_flow")
         except Exception as _e:
+            _chapter_flow_status = "SKIPPED"
             print(f"Chapter flow gate error (non-blocking): {_e}", file=sys.stderr)
+            _write_gate_report(
+                _chapter_flow_report_name,
+                {"status": "SKIPPED", "reason": f"chapter_flow gate error: {_e}"},
+            )
 
         try:
             from phoenix_v4.quality.bestseller_craft_gate import evaluate_bestseller_craft
 
-            _chapters_for_craft = _extract_registry_chapters(prose)
             _craft_results = []
-            for _i, _ch_text in enumerate(_chapters_for_craft):
+            for _i, _ch_text in enumerate(_chapters_for_quality):
                 _craft = evaluate_bestseller_craft(_ch_text)
                 _craft_results.append(
                     {
@@ -411,33 +479,34 @@ def _run_spine_pipeline_mode(
                 _scores = _cr.get("move_scores", {})
                 if _scores:
                     _per_ch_means.append(sum(_scores.values()) / len(_scores))
-            _overall_craft = (
+            _craft_overall = (
                 sum(_per_ch_means) / len(_per_ch_means) if _per_ch_means else 0.0
             )
             _craft_status = (
-                "PASS" if _overall_craft >= 0.4 else ("WARN" if _overall_craft >= 0.2 else "FAIL")
+                "PASS" if _craft_overall >= 0.4 else ("WARN" if _craft_overall >= 0.2 else "FAIL")
             )
             print(
                 f"Bestseller craft gate (advisory): {_craft_status} — "
-                f"overall ONTGP score {_overall_craft:.2f}",
+                f"overall ONTGP score {_craft_overall:.2f}",
                 file=sys.stderr,
             )
             _flow_rpath = render_dir / "chapter_flow_report.json"
             if _flow_rpath.exists():
                 _fr = json.loads(_flow_rpath.read_text(encoding="utf-8"))
                 _fr["bestseller_craft"] = {
-                    "overall_score": round(_overall_craft, 4),
+                    "overall_score": round(_craft_overall, 4),
                     "per_chapter": _craft_results,
                 }
                 _flow_rpath.write_text(json.dumps(_fr, indent=2), encoding="utf-8")
         except Exception as _e:
             print(f"Bestseller craft gate error (non-blocking): {_e}", file=sys.stderr)
+            _craft_status = "SKIPPED"
 
         if args.enforce_scene_gate:
             try:
                 from phoenix_v4.qa.scene_anti_genericity_gate import enforce_scene_gate as _enforce_scene_gate
 
-                _scene_proses = _extract_registry_chapters(prose)
+                _scene_proses = _chapters_for_quality
                 if _scene_proses:
                     _scene_result = _enforce_scene_gate(_scene_proses, mode=args.scene_gate_mode)
                     _scene_report_dir = render_dir / "scene_gate"
@@ -472,19 +541,298 @@ def _run_spine_pipeline_mode(
                 print(f"Scene anti-genericity gate error: {_e}", file=sys.stderr)
                 _quality_gate_failures.append("scene_anti_genericity")
 
-        if args.ei_v2_compare:
+        # EI V2 rigorous evaluation (spine mode: chapter prose direct evaluation)
+        try:
+            from scripts.ci.run_ei_v2_rigorous_eval import evaluate_chapter as _ei_eval_chapter
+
+            _ei_chapters = []
+            for _idx, _chapter_text in enumerate(_chapters_for_quality):
+                _ev = _ei_eval_chapter(
+                    _chapter_text,
+                    _idx,
+                    {},
+                    persona_id,
+                    topic_id,
+                    _chapters_for_quality,
+                )
+                _ei_chapters.append(
+                    {
+                        "chapter_index": _idx + 1,
+                        "word_count": _ev.word_count,
+                        "composite": round(_ev.composite, 4),
+                        "therapeutic_value": round(_ev.therapeutic_value, 4),
+                        "emotional_coherence": round(_ev.emotional_coherence, 4),
+                        "engagement": round(_ev.engagement, 4),
+                        "chapter_journey": round(_ev.chapter_journey, 4),
+                        "cohesion": round(_ev.cohesion, 4),
+                        "listen_experience": round(_ev.listen_experience, 4),
+                        "marketability": round(_ev.marketability, 4),
+                        "safety_compliance": round(_ev.safety_compliance, 4),
+                        "content_uniqueness": round(_ev.content_uniqueness, 4),
+                        "somatic_precision": round(_ev.somatic_precision, 4),
+                        "issues": _ev.issues,
+                    }
+                )
+            _ei_composite = (
+                sum(ch.get("composite", 0.0) for ch in _ei_chapters) / len(_ei_chapters)
+                if _ei_chapters
+                else 0.0
+            )
+            _ei_status = "PASS" if _ei_composite >= 0.55 else "FAIL"
+            _ei_payload = {
+                "source": "spine_pipeline",
+                "topic_id": topic_id,
+                "persona_id": persona_id,
+                "status": _ei_status,
+                "composite": round(_ei_composite, 4),
+                "chapter_count": len(_ei_chapters),
+                "chapters": _ei_chapters,
+            }
+            _ei_report_path = _write_gate_report("ei_v2_report.json", _ei_payload)
             print(
-                "EI V2 compare: skipped in spine mode (no registry ResolvedBook slot structure).",
+                f"EI V2: {_ei_status} — composite {_ei_composite:.2f}. Report: {_ei_report_path}",
+                file=sys.stderr,
+            )
+            if gates_hard and _ei_composite < 0.55:
+                _quality_gate_failures.append("ei_v2")
+        except Exception as _e:
+            _ei_status = "SKIPPED"
+            _ei_composite = 0.0
+            _ei_report_path = _write_gate_report(
+                "ei_v2_report.json",
+                {"status": "SKIPPED", "reason": f"ei_v2 evaluation error: {_e}"},
+            )
+            print(
+                f"EI V2: SKIPPED — {_e}. Report: {_ei_report_path}",
                 file=sys.stderr,
             )
 
-        if gates_run:
+        # Bestseller editorial + structured editorial report
+        try:
+            from phoenix_v4.qa.editorial_report import generate_editorial_report
+
+            spine_plan = {
+                "source": "spine_pipeline",
+                "topic_id": topic_id,
+                "persona_id": persona_id,
+                "teacher_id": teacher_for_enrich or "",
+                "runtime_format_id": runtime_fmt,
+                "chapter_count": len(enriched.chapters),
+            }
+            _prose_map = {f"chapter_{i}": text for i, text in enumerate(_chapters_for_quality)}
+            _editorial_obj = generate_editorial_report(
+                prose,
+                _chapters_for_quality,
+            )
+            _editorial_dict = _editorial_obj.to_dict()
+            _drift_count = sum(
+                1
+                for _chapter in _editorial_dict.get("chapter_assessments", [])
+                if not _chapter.get("thesis_aligned", True)
+            )
+            _flow_score = 1.0 if _chapter_flow_status == "PASS" else (0.6 if _chapter_flow_status == "WARN" else 0.0)
+            _editorial_status = (
+                "PASS"
+                if _editorial_obj.grade == "PASS"
+                else ("WARN" if _editorial_obj.grade == "NEEDS_REVISION" else "FAIL")
+            )
+            _editorial_report = {
+                "status": _editorial_status,
+                "spine_plan": spine_plan,
+                "prose_map": {"chapter_count": len(_prose_map)},
+                "grade": _editorial_obj.grade,
+                "thesis_drift_chapters": _drift_count,
+                "ontgp_score": round(_craft_overall, 4),
+                "flow_score": round(_flow_score, 4),
+                "editorial": _editorial_dict,
+            }
+            _editorial_path = _write_gate_report("editorial_report.json", _editorial_report)
             print(
-                "Book pass gate: SKIPPED (spine mode — no compiled atom_ids / chapter_slot_sequence).",
+                f"Editorial report: {_editorial_status} — thesis drift {_drift_count} chapters, "
+                f"ONTGP {_craft_overall:.2f}, flow {_flow_score:.2f}. Report: {_editorial_path}",
                 file=sys.stderr,
             )
+            if gates_hard and _editorial_status == "FAIL":
+                _quality_gate_failures.append("editorial")
+        except Exception as _e:
+            _editorial_status = "SKIPPED"
+            _editorial_path = _write_gate_report(
+                "editorial_report.json",
+                {"status": "SKIPPED", "reason": f"editorial gate error: {_e}"},
+            )
+            print(f"Editorial report: SKIPPED — {_e}. Report: {_editorial_path}", file=sys.stderr)
 
-    word_count = len(prose.split())
+        # Memorable line gate
+        try:
+            from phoenix_v4.quality.memorable_line_gate import evaluate_memorable_lines
+
+            _memorable_per_chapter = []
+            for _idx, _chapter in enumerate(_chapters_for_quality):
+                _res = evaluate_memorable_lines(_chapter)
+                _memorable_per_chapter.append(
+                    {
+                        "chapter": _idx + 1,
+                        "status": _res.status,
+                        "memorable_line_count": _res.memorable_line_count,
+                        "best_candidates": _res.best_candidates,
+                        "issues": _res.issues,
+                        "metrics": _res.metrics,
+                    }
+                )
+            _memorable_total_chapters = len(_memorable_per_chapter)
+            _memorable_quote_chapters = sum(
+                1 for _ch in _memorable_per_chapter if _ch.get("memorable_line_count", 0) >= 2
+            )
+            _memorable_status = (
+                "PASS"
+                if _memorable_total_chapters > 0 and _memorable_quote_chapters == _memorable_total_chapters
+                else ("WARN" if _memorable_quote_chapters > 0 else "FAIL")
+            )
+            _memorable_path = _write_gate_report(
+                "memorable_line_report.json",
+                {
+                    "status": _memorable_status,
+                    "chapters_with_two_or_more_quotable_lines": _memorable_quote_chapters,
+                    "chapter_count": _memorable_total_chapters,
+                    "chapters": _memorable_per_chapter,
+                },
+            )
+            print(
+                f"Memorable lines: {_memorable_quote_chapters} chapters with >=2 quotable lines / "
+                f"{_memorable_total_chapters}. Report: {_memorable_path}",
+                file=sys.stderr,
+            )
+        except Exception as _e:
+            _memorable_status = "SKIPPED"
+            _memorable_path = _write_gate_report(
+                "memorable_line_report.json",
+                {"status": "SKIPPED", "reason": f"memorable line gate error: {_e}"},
+            )
+            print(f"Memorable lines: SKIPPED — {_e}. Report: {_memorable_path}", file=sys.stderr)
+
+        # Transformation heatmap
+        try:
+            from phoenix_v4.quality.transformation_heatmap import run_heatmap_from_path
+
+            _heatmap = run_heatmap_from_path(_book_path_for_gates)
+            _transform_status_raw = str(_heatmap.get("status", "warn")).upper()
+            _transform_status = (
+                "PASS" if _transform_status_raw == "PASS" else ("WARN" if _transform_status_raw == "WARN" else "FAIL")
+            )
+            _transform_path = _write_gate_report(
+                "transformation_heatmap.json",
+                {
+                    "status": _transform_status,
+                    "heatmap": _heatmap,
+                },
+            )
+            print(
+                f"Transformation arc: {_transform_status}. Report: {_transform_path}",
+                file=sys.stderr,
+            )
+        except Exception as _e:
+            _transform_status = "SKIPPED"
+            _transform_path = _write_gate_report(
+                "transformation_heatmap.json",
+                {"status": "SKIPPED", "reason": f"transformation heatmap error: {_e}"},
+            )
+            print(f"Transformation arc: SKIPPED — {_e}. Report: {_transform_path}", file=sys.stderr)
+
+        # Book pass gate (spine-compatible fallback)
+        try:
+            from phoenix_v4.planning.enrichment_select import _load_runtime_word_bounds as _runtime_bounds_for_book_pass
+
+            _runtime_bounds = _runtime_bounds_for_book_pass(runtime_fmt, repo_root)
+            _budget_ok = True
+            if _runtime_bounds:
+                _budget_ok = _runtime_bounds[0] <= word_count <= _runtime_bounds[1]
+            _roles = [
+                str(getattr(_chapter, "role", "")).strip().lower()
+                for _chapter in enriched.chapters
+                if str(getattr(_chapter, "role", "")).strip()
+            ]
+            _distinct_roles = sorted(set(_roles))
+            _band_ok = len(_distinct_roles) >= 3 if len(_roles) >= 6 else len(_distinct_roles) >= 2
+
+            _audit_modules = []
+            for _entry in (enriched.enrichment_audit or {}).get("depth_modules_added", []):
+                if isinstance(_entry, dict):
+                    _module = str(_entry.get("module", "")).strip()
+                    if _module:
+                        _audit_modules.append(_module)
+            _identity_stage_tags = {
+                "recognition": any("recognition" in _m for _m in _audit_modules),
+                "mechanism": any("mechanism" in _m for _m in _audit_modules),
+                "integration": any("integration" in _m or "practice" in _m for _m in _audit_modules),
+            }
+            _identity_stage_count = sum(1 for _v in _identity_stage_tags.values() if _v)
+            _identity_ok = _identity_stage_count >= 2
+
+            _last_chapter = (_chapters_for_quality[-1] if _chapters_for_quality else "").lower()
+            _callback_ok = any(
+                _kw in _last_chapter
+                for _kw in ("from now on", "next", "choose", "practice", "still", "start")
+            )
+
+            _book_pass_checks = {
+                "word_budget": {
+                    "status": "PASS" if _budget_ok else "FAIL",
+                    "word_count": word_count,
+                    "target_range": list(_runtime_bounds) if _runtime_bounds else None,
+                },
+                "band_distribution": {
+                    "status": "PASS" if _band_ok else "FAIL",
+                    "distinct_roles": _distinct_roles,
+                    "distinct_count": len(_distinct_roles),
+                },
+                "identity_stages": {
+                    "status": "PASS" if _identity_ok else "FAIL",
+                    "stages": _identity_stage_tags,
+                    "stage_count": _identity_stage_count,
+                },
+                "callback_completion": {
+                    "status": "PASS" if _callback_ok else "FAIL",
+                },
+                "atom_metadata_subchecks": {
+                    "status": "SKIPPED",
+                    "reason": "spine mode has no compiled atom_ids/chapter_slot_sequence metadata gates",
+                },
+            }
+            _book_pass_failures = [
+                _name
+                for _name, _check in _book_pass_checks.items()
+                if _check.get("status") == "FAIL"
+            ]
+            _book_pass_status = "PASS" if not _book_pass_failures else "FAIL"
+            _book_pass_path = _write_gate_report(
+                "book_pass_report.json",
+                {
+                    "status": _book_pass_status,
+                    "source": "spine_pipeline",
+                    "checks": _book_pass_checks,
+                    "failures": _book_pass_failures,
+                },
+            )
+            print(f"Book pass gate: {_book_pass_status}. Report: {_book_pass_path}", file=sys.stderr)
+            if gates_hard and _book_pass_status == "FAIL":
+                _quality_gate_failures.append("book_pass")
+        except Exception as _e:
+            _book_pass_status = "SKIPPED"
+            _book_pass_path = _write_gate_report(
+                "book_pass_report.json",
+                {"status": "SKIPPED", "reason": f"book pass gate error: {_e}"},
+            )
+            print(f"Book pass gate: SKIPPED — {_e}. Report: {_book_pass_path}", file=sys.stderr)
+    else:
+        _write_gate_report(
+            _chapter_flow_report_name,
+            {"status": "SKIPPED", "reason": "quality gates disabled (--skip-quality-gates)"},
+        )
+        _write_gate_report("ei_v2_report.json", {"status": "SKIPPED", "reason": "quality gates disabled"})
+        _write_gate_report("editorial_report.json", {"status": "SKIPPED", "reason": "quality gates disabled"})
+        _write_gate_report("memorable_line_report.json", {"status": "SKIPPED", "reason": "quality gates disabled"})
+        _write_gate_report("transformation_heatmap.json", {"status": "SKIPPED", "reason": "quality gates disabled"})
+        _write_gate_report("book_pass_report.json", {"status": "SKIPPED", "reason": "quality gates disabled"})
 
     if args.out:
         plan_out = {
@@ -521,21 +869,84 @@ def _run_spine_pipeline_mode(
             json.dumps(enriched.enrichment_audit, indent=2, default=str, ensure_ascii=False),
             encoding="utf-8",
         )
+        _bq_fail, _bq_frag = _apply_book_quality_gate(
+            render_dir=render_dir,
+            prose=prose,
+            runtime_format_id=runtime_fmt,
+            gates_hard=gates_hard,
+            governance_report=_governance_report,
+            slot_sequences=None,
+            frame=_frame,
+            policy_override=bool(getattr(args, "book_quality_override", False)),
+        )
+        _quality_gate_failures.extend(_bq_fail)
+        _quality_fail_set = set(_quality_gate_failures)
+        _overall_status = "FAIL" if _quality_fail_set else (
+            "WARN"
+            if any(
+                _st == "WARN"
+                for _st in (
+                    _chapter_flow_status,
+                    _craft_status,
+                    _ei_status,
+                    _editorial_status,
+                    _memorable_status,
+                    _transform_status,
+                    _book_pass_status,
+                )
+            )
+            else "PASS"
+        )
         _qs_path = render_dir / "quality_summary.json"
         _qs_payload = {
             "source": "spine_pipeline",
             "topic_id": topic_id,
             "persona_id": persona_id,
             "teacher_id": teacher_for_enrich or "",
+            "runtime_format": runtime_fmt,
             "quality_profile": quality_profile,
             "gates_run": gates_run,
             "gates_hard": gates_hard,
-            "gate_failures": _quality_gate_failures,
-            "overall_status": "PASS" if not _quality_gate_failures else "FAIL",
-            "book_pass_gate": "SKIPPED_SPINE_MODE",
+            "gates": {
+                "chapter_flow": {
+                    "status": _chapter_flow_status,
+                    "report": _chapter_flow_report_name,
+                },
+                "bestseller_craft": {
+                    "status": _craft_status,
+                    "overall_score": round(_craft_overall, 4),
+                },
+                "ei_v2": {
+                    "status": _ei_status,
+                    "composite": round(_ei_composite, 4),
+                    "report": "ei_v2_report.json",
+                },
+                "editorial": {
+                    "status": _editorial_status,
+                    "report": "editorial_report.json",
+                },
+                "memorable_lines": {
+                    "status": _memorable_status,
+                    "chapters_with_two_or_more_quotable_lines": _memorable_quote_chapters,
+                    "chapter_count": _memorable_total_chapters,
+                    "report": "memorable_line_report.json",
+                },
+                "transformation_arc": {
+                    "status": _transform_status,
+                    "report": "transformation_heatmap.json",
+                },
+                "book_pass": {
+                    "status": _book_pass_status,
+                    "report": "book_pass_report.json",
+                },
+            },
+            "quality_gate_failures": sorted(_quality_fail_set),
+            "overall_status": _overall_status,
+            "book_quality_gate": _bq_frag,
             "pre_depth_total_words": pre_depth_words,
             "post_depth_total_words": post_depth_words,
             "frame": _frame,
+            "governance_report": _governance_report,
             "exercise_slots_dropped": _governance_report.get("exercise_slots_dropped", []),
             "chapter_contract_warnings": _governance_report.get("chapter_contract_warnings", []),
             "frame_governance_chapters": _governance_report.get("frame_governance_chapters", []),
@@ -695,6 +1106,11 @@ def main() -> int:
         "--enforce-book-pass-gate",
         action="store_true",
         help="Run book-pass quality gate (claim progression, non-shuffleability, ending transformation) and fail on errors. Redundant when --quality-profile=production (default).",
+    )
+    ap.add_argument(
+        "--book-quality-override",
+        action="store_true",
+        help="Allow book_quality_gate runtime_policy default_reject (micro_book_15/20) to pass when gates would otherwise reject on policy alone.",
     )
     ap.add_argument(
         "--ei-v2-compare",
@@ -1688,6 +2104,17 @@ def main() -> int:
 
             # 7. Write quality summary
             _qs_path = render_dir / "quality_summary.json"
+            _reg_bq_fail, _reg_bq_frag = _apply_book_quality_gate(
+                render_dir=render_dir,
+                prose=prose,
+                runtime_format_id=_reg_runtime or "",
+                gates_hard=gates_hard,
+                governance_report=None,
+                slot_sequences=None,
+                frame=str(getattr(args, "frame", "somatic_first") or "somatic_first"),
+                policy_override=bool(getattr(args, "book_quality_override", False)),
+            )
+            _quality_gate_failures.extend(_reg_bq_fail)
             _qs_path.write_text(
                 json.dumps({
                     "source": "section_registry",
@@ -1702,6 +2129,7 @@ def main() -> int:
                     "gate_failures": _quality_gate_failures,
                     "overall_status": "PASS" if not _quality_gate_failures else "FAIL",
                     "book_pass_gate": "SKIPPED_REGISTRY_MODE",
+                    "book_quality_gate": _reg_bq_frag,
                 }, indent=2),
                 encoding="utf-8",
             )
@@ -2426,6 +2854,28 @@ def main() -> int:
                 with open(_oc_path, "w", encoding="utf-8") as _ocf:
                     json.dump(_output_contract, _ocf, indent=2)
                 print(f"Output contract: {_oc_path}")
+
+                _txt_written = written.get("txt")
+                _atom_prose = ""
+                if _txt_written and Path(_txt_written).exists():
+                    _atom_prose = Path(_txt_written).read_text(encoding="utf-8")
+                _atom_rt = (args.runtime_format or out.get("runtime_format_id") or "").strip()
+                _atom_bq_fail, _atom_bq_frag = _apply_book_quality_gate(
+                    render_dir=render_dir,
+                    prose=_atom_prose,
+                    runtime_format_id=_atom_rt,
+                    gates_hard=gates_hard,
+                    governance_report=None,
+                    slot_sequences=out.get("chapter_slot_sequence"),
+                    frame=str(getattr(args, "frame", "somatic_first") or "somatic_first"),
+                    policy_override=bool(getattr(args, "book_quality_override", False)),
+                )
+                if _atom_bq_fail and gates_hard:
+                    print(
+                        "BLOCKED: book_quality_gate rejected manuscript (see book_quality_report.json).",
+                        file=sys.stderr,
+                    )
+                    return 1
             except ValueError as e:
                 print(f"Stage 6 render failed: {e}", file=sys.stderr)
                 return 1
@@ -2486,19 +2936,19 @@ def main() -> int:
                 print(f"Scene anti-genericity gate error: {e}", file=sys.stderr)
                 return 1
 
-            # --- Post-render quality gates (quality profile) ---
-            if gates_run:
-                _post_render_exit = _run_post_render_quality_gates(
-                    out=out,
-                    render_dir=render_dir,
-                    written=written,
-                    canonical_persona=canonical_persona,
-                    canonical_topic=canonical_topic,
-                    atoms_root=atoms_root,
-                    gates_hard=gates_hard,
-                )
-                if _post_render_exit is not None:
-                    return _post_render_exit
+        # --- Post-render quality gates (chapter flow summary, craft) ---
+        if args.out and args.render_book and gates_run:
+            _post_render_exit = _run_post_render_quality_gates(
+                out=out,
+                render_dir=render_dir,
+                written=written,
+                canonical_persona=canonical_persona,
+                canonical_topic=canonical_topic,
+                atoms_root=atoms_root,
+                gates_hard=gates_hard,
+            )
+            if _post_render_exit is not None:
+                return _post_render_exit
         # EI V2 parallel comparison (advisory; V1 remains authoritative)
         if args.ei_v2_compare:
             try:
