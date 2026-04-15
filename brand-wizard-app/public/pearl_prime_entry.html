@@ -16,14 +16,14 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 /* ── Screen 1 — Market picker ────────────────────── */
 #s1 h1{font-family:var(--serif);font-size:clamp(2.6rem,6vw,4rem);font-weight:300;letter-spacing:.04em;background:linear-gradient(135deg,#f5d0a9 0%,#e8a87c 50%,#d97706 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
 #s1 .sub{font-family:var(--mono);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,246,240,.25);margin-bottom:12px}
-.zone-label{font-family:var(--mono);font-size:.42rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.2);margin-bottom:6px}
+.zone-label{font-family:var(--mono);font-size:.42rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.5);margin-bottom:6px}
 .amber-rule{width:100%;max-width:860px;height:1px;background:linear-gradient(90deg,transparent,rgba(217,119,6,.2),transparent);margin-bottom:28px}
 .flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:14px;max-width:860px;width:100%}
 .flag-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 8px;border:1px solid rgba(180,83,9,.12);border-radius:4px;cursor:pointer;transition:all .25s;background:rgba(255,255,255,.02)}
 .flag-card:hover{border-color:var(--acc);background:rgba(180,83,9,.08);transform:translateY(-2px)}
 .flag-card .emoji{font-size:2.2rem;line-height:1}
-.flag-card .name{font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,246,240,.35)}
-.flag-card .lang{font-size:.45rem;color:rgba(250,246,240,.18);font-family:var(--mono)}
+.flag-card .name{font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,246,240,.5)}
+.flag-card .lang{font-size:.45rem;color:rgba(250,246,240,.5);font-family:var(--mono)}
 .flag-card:hover .name{color:var(--acc2)}
 
 /* ── Screen 2 — Learn / Start ────────────────────── */
@@ -74,8 +74,11 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 
 <!-- ═══ SCREEN 1 — Market Picker ═══ -->
 <div id="s1" class="screen active">
+  <div style="font-family:var(--serif);font-size:clamp(1rem,2.5vw,1.6rem);font-weight:300;letter-spacing:.04em;color:rgba(250,246,240,.5);margin-bottom:0">Welcome To</div>
   <h1 data-i18n="entry.title">Pearl Prime</h1>
-  <div class="sub" data-i18n="entry.subtitle">Choose Your Market</div>
+  <div class="sub" style="font-family:var(--serif);font-size:clamp(1rem,2.5vw,1.6rem);font-weight:300;letter-spacing:.04em;color:rgba(250,246,240,.5);margin-bottom:4px">Choose Your Market</div>
+  <div style="font-family:var(--serif);font-size:clamp(0.9rem,2.2vw,1.4rem);font-weight:300;letter-spacing:.04em;color:rgba(250,246,240,.5);margin-bottom:4px">市場を選択してください</div>
+  <div style="font-family:var(--serif);font-size:clamp(0.9rem,2.2vw,1.4rem);font-weight:300;letter-spacing:.04em;color:rgba(250,246,240,.5);margin-bottom:12px">选择您的市场</div>
   <div class="zone-label">Choose Your Market &middot; 13 Global Lanes</div>
   <div class="amber-rule"></div>
   <div class="flags" id="flag-grid"></div>
