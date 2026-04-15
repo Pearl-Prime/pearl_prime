@@ -3244,22 +3244,23 @@ function CompareBlock({ labelA, labelB, contentA, contentB, colorA, colorB }) {
 }
 
 function IntroWelcome({ onNext }) {
+  const { t } = useTranslation();
   const pillars = [
-    { icon: PenTool, label: "Voice", tint: "from-violet-500 to-indigo-600" },
-    { icon: Image, label: "Visual", tint: "from-fuchsia-500 to-pink-600" },
-    { icon: Users, label: "Reader", tint: "from-sky-500 to-blue-600" },
-    { icon: Layers, label: "Formats", tint: "from-emerald-500 to-teal-600" },
+    { icon: PenTool, label: t("ui", "Voice"), tint: "from-violet-500 to-indigo-600" },
+    { icon: Image, label: t("ui", "Visual"), tint: "from-fuchsia-500 to-pink-600" },
+    { icon: Users, label: t("ui", "Reader"), tint: "from-sky-500 to-blue-600" },
+    { icon: Layers, label: t("ui", "Formats"), tint: "from-emerald-500 to-teal-600" },
   ];
   return (
     <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-16">
         <div className="brand-studio-panel p-10 text-center sm:p-12">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-violet-200/80 bg-violet-50/80 px-4 py-1.5 text-xs font-semibold text-violet-800 backdrop-blur-sm">
-            <Sparkles size={12} /> Pearl Prime Brand Studio
+            <Sparkles size={12} /> {t("ui", "Pearl Prime Brand Studio")}
           </div>
-          <h1 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">Launch and shape your publishing brand</h1>
+          <h1 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">{t("ui", "Launch and shape your publishing brand")}</h1>
           <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white">
-            One guided session — voice, look, and proof aligned.
+            {t("ui", "One guided session — voice, look, and proof aligned.")}
           </p>
           <div className="mx-auto mt-10 grid max-w-md grid-cols-4 gap-3">
             {pillars.map(({ icon: I, label, tint }) => (
@@ -3277,7 +3278,7 @@ function IntroWelcome({ onNext }) {
               onClick={onNext}
               className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-slate-400/30 transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
-              Start building <ChevronRight size={18} />
+              {t("ui", "Start building")} <ChevronRight size={18} />
             </button>
           </div>
           <p className="mt-8 text-center text-xs">
@@ -3285,7 +3286,7 @@ function IntroWelcome({ onNext }) {
               href="https://729184d3.phoenix-command.pages.dev/"
               className="font-semibold text-orange-400 underline decoration-orange-300 underline-offset-2 hover:text-orange-300"
             >
-              Back To Start
+              {t("ui", "Back To Start")}
             </a>
           </p>
         </div>
@@ -3566,7 +3567,7 @@ export default function BrandWizard() {
           onClick={goToHowItWorks}
           className="mb-6 flex items-center gap-1 text-xs text-white transition-colors hover:text-gray-200"
         >
-          <ChevronLeft size={14} /> Back
+          <ChevronLeft size={14} /> {t("ui", "Back")}
         </button>
         <ProgressBar step={step} total={9} labels={tStepLabels} />
         <div className="brand-studio-panel p-6 sm:p-8 lg:p-10">
@@ -3575,7 +3576,7 @@ export default function BrandWizard() {
               {steps[step]}
               <div className="mt-8 flex items-center justify-between border-t border-gray-100/80 pt-6">
                 <button type="button" onClick={prevStep} className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:text-white">
-                  <ChevronLeft size={16} /> Back
+                  <ChevronLeft size={16} /> {t("ui", "Back")}
                 </button>
                 {step < 8 ? (
                   <button
@@ -3584,14 +3585,14 @@ export default function BrandWizard() {
                     disabled={!canNext}
                     className={`flex items-center gap-1.5 rounded-xl px-6 py-2.5 text-sm font-bold transition-all ${canNext ? "bg-gray-900 text-white shadow-md shadow-slate-300/40 hover:bg-gray-800" : "cursor-not-allowed bg-gray-200 text-white"}`}
                   >
-                    Continue <ChevronRight size={16} />
+                    {t("ui", "Continue")} <ChevronRight size={16} />
                   </button>
                 ) : null}
               </div>
             </div>
             <div className="hidden w-72 flex-shrink-0 lg:block">
               <div className="sticky top-8">
-                <div className="mb-3 text-[10px] font-bold uppercase tracking-wider text-violet-600/90">Studio insight</div>
+                <div className="mb-3 text-[10px] font-bold uppercase tracking-wider text-violet-600/90">{t("ui", "Studio insight")}</div>
                 <div className="rounded-2xl border border-gray-100/90 bg-white/60 p-1 shadow-inner backdrop-blur-sm">
                   <PersonaImpactPanel state={state} step={step} i18n={i18nData} />
                 </div>
