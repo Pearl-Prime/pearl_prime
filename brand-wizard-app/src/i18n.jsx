@@ -66,7 +66,7 @@ export function detectLocale() {
   if (fromParam && LOCALE_LOADERS[fromParam]) return fromParam;
 
   const path = window.location.pathname;
-  const match = path.match(/wizard-(ja|zh|tw)\./);
+  const match = path.match(/wizard-(ja|zh|tw)/);
   if (match) return match[1];
 
   return "en";
