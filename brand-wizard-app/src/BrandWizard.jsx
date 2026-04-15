@@ -3280,33 +3280,7 @@ function IntroWelcome({ onNext }) {
               Start building <ChevronRight size={18} />
             </button>
           </div>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-            <a
-              href="/wizard.html"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
-            >
-              🇺🇸 English
-            </a>
-            <a
-              href="/wizard-ja.html"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
-            >
-              🇯🇵 日本語
-            </a>
-            <a
-              href="/wizard-zh.html"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
-            >
-              🇨🇳 中文（简体）
-            </a>
-            <a
-              href="/wizard-tw.html"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
-            >
-              🇹🇼 繁體中文
-            </a>
-          </div>
-          <p className="mt-6 text-center text-xs">
+          <p className="mt-8 text-center text-xs">
             <a
               href="https://729184d3.phoenix-command.pages.dev/"
               className="font-semibold text-orange-400 underline decoration-orange-300 underline-offset-2 hover:text-orange-300"
