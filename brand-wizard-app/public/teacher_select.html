@@ -347,20 +347,28 @@ function loadBookContent(teacherId){
     });
 }
 
+function wizardFile(){
+  const loc=localStorage.getItem('pearl_prime_locale')||'en-US';
+  if(loc.startsWith('ja'))return'wizard-ja.html';
+  if(loc==='zh-TW')return'wizard-tw.html';
+  if(loc.startsWith('zh'))return'wizard-zh.html';
+  return'wizard.html';
+}
+
 function chooseTeacher(){
   const t=T.find(x=>x.id===cur);
   if(!t)return;
   localStorage.setItem('phoenix_book_mode',JSON.stringify({
     mode:'teacher',teacher:t.id,teacherName:t.name,brand:t.brand,tradition:t.tradition
   }));
-  window.location.href='wizard.html?teacher='+t.id;
+  window.location.href=wizardFile()+'?teacher='+t.id;
 }
 
 function chooseComposite(){
   localStorage.setItem('phoenix_book_mode',JSON.stringify({
     mode:'composite',teacher:null,teacherName:'Composite',brand:'All Traditions'
   }));
-  window.location.href='wizard.html?mode=composite';
+  window.location.href=wizardFile()+'?mode=composite';
 }
 
 init();
