@@ -44,3 +44,9 @@ brand-wizard-app/public/onboarding/proof/wizard/*.mp3 -filter -diff -merge text
 *.bin filter=lfs diff=lfs merge=lfs -text
 *.onnx filter=lfs diff=lfs merge=lfs -text
 *.pt filter=lfs diff=lfs merge=lfs -text
+
+# Cloudflare Pages wizard assets — must be regular git blobs (CF Pages does not pull LFS)
+# IMPORTANT: use -text to prevent CRLF normalization from corrupting binary PNG/MP3 data
+brand-wizard-app/public/onboarding/proof/wizard/*.png -filter -diff -merge -text
+brand-wizard-app/public/onboarding/proof/wizard/*.jpg -filter -diff -merge -text
+brand-wizard-app/public/onboarding/proof/wizard/*.mp3 -filter -diff -merge -text
