@@ -286,10 +286,10 @@ h1, h2, h3,
 }
 
 /* Inline style gradients on cover cards — nuclear */
-[style*="background: linear-gradient"],
-[style*="background:linear-gradient"],
-[style*="background-image: linear-gradient"],
-[style*="background-color: rgb"] {
+[style*="background: linear-gradient"]:not([data-bar]),
+[style*="background:linear-gradient"]:not([data-bar]),
+[style*="background-image: linear-gradient"]:not([data-bar]),
+[style*="background-color: rgb"]:not([data-bar]) {
   background: linear-gradient(135deg, rgba(180,83,9,.15), rgba(28,16,9,.7)) !important;
 }
 
@@ -326,6 +326,8 @@ input[type="range"] {
 
 input[type="text"],
 input[type="email"],
+input[type="tel"],
+select,
 textarea {
   background: rgba(0,0,0,.3) !important;
   border-color: var(--border) !important;

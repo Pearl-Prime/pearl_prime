@@ -1,4 +1,5 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useMemo } from "react";
+import { useTranslation } from "./useTranslation.jsx";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
@@ -136,10 +137,10 @@ const TRADITIONS = [
 ];
 
 const VOICE_SLIDERS = [
-  { id: "gentleDirect", left: "Gentle", right: "Direct", default: 40, color: "#6366f1", desc: "Controls sentence softness, permission language vs imperative commands" },
+  { id: "gentleDirect", left: "Gentle", right: "Direct", default: 50, color: "#6366f1", desc: "Controls sentence softness, permission language vs imperative commands" },
   { id: "simpleDeep", left: "Simple", right: "Deep", default: 50, color: "#059669", desc: "Controls vocabulary density, metaphor layers, conceptual complexity" },
-  { id: "emotionalLogical", left: "Emotional", right: "Logical", default: 35, color: "#f43f5e", desc: "Controls story-to-data ratio, vulnerability level, analytical framing" },
-  { id: "spiritualPractical", left: "Spiritual", right: "Practical", default: 45, color: "#7c3aed", desc: "Controls tradition references, sacred language, tool-first vs meaning-first" },
+  { id: "emotionalLogical", left: "Emotional", right: "Logical", default: 25, color: "#f43f5e", desc: "Controls story-to-data ratio, vulnerability level, analytical framing" },
+  { id: "spiritualPractical", left: "Spiritual", right: "Practical", default: 50, color: "#7c3aed", desc: "Controls tradition references, sacred language, tool-first vs meaning-first" },
 ];
 
 const VISUAL_STYLES = [
@@ -786,25 +787,31 @@ function StepHero({ eyebrow, title, subtitle, helper }) {
   return (
     <div className="mb-8">
       {eyebrow ? <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">{eyebrow}</p> : null}
-      <h2 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{title}</h2>
-      {subtitle ? <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-600">{subtitle}</p> : null}
-      {helper ? <p className="mt-2 text-xs text-gray-400">{helper}</p> : null}
+      <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">{title}</h2>
+      {subtitle ? <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white">{subtitle}</p> : null}
+      {helper ? <p className="mt-2 text-xs text-white">{helper}</p> : null}
     </div>
   );
 }
 
 function ProgressBar({ step, total, labels }) {
-  const pct = ((step + 1) / total) * 100;
+  const isComplete = step === total - 2; // step 7 ("Your Brand") only
+  const pct = isComplete ? 100 : ((step + 1) / total) * 100;
   return (
     <div className="brand-studio-panel mb-6 px-5 py-4 sm:mb-8">
+      {isComplete && (
+        <p className="text-center text-3xl font-extrabold mb-3" style={{ color: '#d97706', fontFamily: 'Cormorant Garamond, serif' }}>
+          Congratulations — Your Brand Is 100% Configured!
+        </p>
+      )}
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-wider text-violet-600">
-            Step {step + 1} of {total}
+            {isComplete ? 'Complete' : `Step ${step + 1} of ${total}`}
           </p>
-          <p className="text-sm font-bold text-gray-900">{labels[step]}</p>
+          <p className="text-sm font-bold text-white">{labels[step]}</p>
         </div>
-        <span className="text-xs font-semibold tabular-nums text-gray-400">{Math.round(pct)}%</span>
+        <span className="text-xs font-semibold tabular-nums text-white">{Math.round(pct)}%</span>
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-gray-100/90">
         <div
@@ -832,11 +839,11 @@ function ArchetypeCard({ arch, selected, onClick }) {
         />
       </div>
       <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${arch.gradient} flex items-center justify-center mb-3`}><Icon size={20} className="text-white" /></div>
-      <h3 className="font-bold text-gray-900 text-sm">{arch.name}</h3>
-      <p className="text-xs text-gray-500 mt-1 leading-relaxed">{arch.tagline}</p>
-      <p className="text-[11px] text-gray-400 mt-2 leading-relaxed italic">{arch.visionVibe}</p>
+      <h3 className="font-bold text-white text-sm">{arch.name}</h3>
+      <p className="text-xs text-white mt-1 leading-relaxed">{arch.tagline}</p>
+      <p className="text-[11px] text-white mt-2 leading-relaxed italic">{arch.visionVibe}</p>
       <div className="flex gap-1.5 mt-3 flex-wrap">
-        {arch.tags.map((t) => <span key={t} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${isActive ? 'bg-white/70 text-gray-700' : 'bg-gray-100 text-gray-500'}`}>{t}</span>)}
+        {arch.tags.map((t) => <span key={t} className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${isActive ? 'bg-white/70 text-white' : 'bg-gray-100 text-white'}`}>{t}</span>)}
       </div>
     </button>
   );
@@ -880,8 +887,8 @@ function MomentCard({ moment, selected, onClick }) {
       <div className="flex items-start gap-3">
         <span className="text-2xl">{moment.emoji}</span>
         <div className="flex-1">
-          <h4 className="font-bold text-sm text-gray-900">{moment.label}</h4>
-          <p className="text-[11px] text-gray-500 italic">{moment.scene}</p>
+          <h4 className="font-bold text-sm text-white">{moment.label}</h4>
+          <p className="text-[11px] text-white italic">{moment.scene}</p>
           {isActive && <p className="text-[11px] text-indigo-600 mt-1.5">{moment.hookStyle}</p>}
         </div>
         {isActive && <div className="w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center flex-shrink-0"><Check size={12} className="text-white" /></div>}
@@ -1053,8 +1060,8 @@ function SelectionFeedback({ systemEffect, emotionalBenefit, color = "#6366f1" }
             <Zap size={10} style={{ color }} />
           </div>
           <div>
-            <div className="text-[9px] font-bold uppercase text-gray-400 mb-0.5">In the System</div>
-            <p className="text-[11px] text-gray-600 leading-relaxed">{systemEffect}</p>
+            <div className="text-[9px] font-bold uppercase text-white mb-0.5">In the System</div>
+            <p className="text-[11px] text-white leading-relaxed">{systemEffect}</p>
           </div>
         </div>
         <div className="flex items-start gap-2">
@@ -1062,8 +1069,8 @@ function SelectionFeedback({ systemEffect, emotionalBenefit, color = "#6366f1" }
             <Heart size={10} style={{ color }} />
           </div>
           <div>
-            <div className="text-[9px] font-bold uppercase text-gray-400 mb-0.5">For Your Reader</div>
-            <p className="text-[11px] text-gray-700 leading-relaxed font-medium">{emotionalBenefit}</p>
+            <div className="text-[9px] font-bold uppercase text-white mb-0.5">For Your Reader</div>
+            <p className="text-[11px] text-white leading-relaxed font-medium">{emotionalBenefit}</p>
           </div>
         </div>
       </div>
@@ -1076,13 +1083,13 @@ function WhatThisChanges({ items }) {
   return (
     <div className="rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
       <button onClick={() => setOpen(!open)} className="w-full px-4 py-2.5 flex items-center gap-2 text-left">
-        <Sparkles size={14} className="text-gray-500" />
-        <span className="text-xs font-bold text-gray-600">What this changes</span>
-        <ChevronRight size={14} className={`text-gray-400 ml-auto transition-transform ${open ? "rotate-90" : ""}`} />
+        <Sparkles size={14} className="text-white" />
+        <span className="text-xs font-bold text-white">What this changes</span>
+        <ChevronRight size={14} className={`text-white ml-auto transition-transform ${open ? "rotate-90" : ""}`} />
       </button>
       {open && (
         <div className="px-4 pb-3 grid grid-cols-2 gap-1.5">
-          {items.map((item, i) => <div key={i} className="flex items-center gap-1.5"><div className="w-1 h-1 rounded-full bg-gray-400" /><span className="text-[11px] text-gray-600">{item}</span></div>)}
+          {items.map((item, i) => <div key={i} className="flex items-center gap-1.5"><div className="w-1 h-1 rounded-full bg-gray-400" /><span className="text-[11px] text-white">{item}</span></div>)}
         </div>
       )}
     </div>
@@ -1093,14 +1100,14 @@ function WhatThisChanges({ items }) {
 // PERSONA IMPACT PANEL (Right side)
 // ═══════════════════════════════════════════════════════════
 
-function PersonaImpactPanel({ state }) {
-  const arch = ARCHETYPES.find((a) => a.id === state.archetype);
-  const persona = PERSONAS.find((p) => p.id === state.persona);
-  const moment = MOMENTS.find((m) => m.id === state.moment);
-  const proven = PROVEN[state.archetype] || PROVEN.nervous_system;
-  const visual = VISUAL_STYLES.find((v) => v.id === state.visualStyle);
-  const selectionCount = [state.archetype, state.persona, state.moment, state.visualStyle, state.tradition, (state.emotions || []).length > 0, Object.keys(state.voiceSettings || {}).length > 0, state.formatFocus].filter(Boolean).length;
-  const completeness = Math.round((selectionCount / 8) * 100);
+function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
+  const { tArchetypes: _A = ARCHETYPES, tPersonas: _P = PERSONAS, tMoments: _M = MOMENTS, tVisualStyles: _V = VISUAL_STYLES, tProven: _PR = PROVEN, tSelectionFeedback: _SF = SELECTION_FEEDBACK, tEmotionCategories: _EC = EMOTION_CATEGORIES, tAngleFeedback: _AF = ANGLE_FEEDBACK } = i18n;
+  const arch = _A.find((a) => a.id === state.archetype);
+  const persona = _P.find((p) => p.id === state.persona);
+  const moment = _M.find((m) => m.id === state.moment);
+  const proven = _PR[state.archetype] || _PR.nervous_system;
+  const visual = _V.find((v) => v.id === state.visualStyle);
+  const completeness = step >= 7 ? 100 : Math.round(((step + 1) / 9) * 100);
 
   return (
     <div className="space-y-4">
@@ -1108,60 +1115,212 @@ function PersonaImpactPanel({ state }) {
         <div className="relative w-20 h-20 mx-auto mb-2">
           <svg viewBox="0 0 80 80" className="w-full h-full -rotate-90">
             <circle cx="40" cy="40" r="34" fill="none" stroke="#f3f4f6" strokeWidth="6" />
-            <circle cx="40" cy="40" r="34" fill="none" stroke="#1f2937" strokeWidth="6" strokeLinecap="round" strokeDasharray={`${completeness * 2.136} 213.6`} />
+            <circle cx="40" cy="40" r="34" fill="none" stroke="#e67e22" strokeWidth="6" strokeLinecap="round" strokeDasharray={`${completeness * 2.136} 213.6`} />
           </svg>
-          <div className="absolute inset-0 flex items-center justify-center"><span className="text-lg font-black text-gray-900">{completeness}%</span></div>
+          <div className="absolute inset-0 flex items-center justify-center"><span className="text-lg font-black text-white">{completeness}%</span></div>
         </div>
-        <p className="text-[10px] text-gray-500 font-semibold uppercase">Brand Defined</p>
+        <p className="text-[10px] text-white font-semibold uppercase">Brand Defined</p>
       </div>
-      {arch && (
+      {step === 0 && arch && (
         <div className={`rounded-xl p-3 ${arch.bg} border ${arch.border}`}>
           <div className="flex items-center gap-2">
             {(() => { const I = arch.icon; return <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${arch.gradient} flex items-center justify-center`}><I size={14} className="text-white" /></div>; })()}
-            <div><div className="font-bold text-xs text-gray-900">{arch.name}</div><div className="text-[10px] text-gray-500">{arch.tagline}</div></div>
+            <div><div className="font-bold text-xs text-white">{arch.name}</div><div className="text-[10px] text-white">{arch.tagline}</div></div>
           </div>
         </div>
       )}
-      {persona && (
-        <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-gray-400 mb-1">Primary Reader</div>
-          <div className="flex items-center gap-2"><span className="text-lg">{persona.emoji}</span><div><div className="text-xs font-bold text-gray-900">{persona.label}</div></div></div>
+      {step === 0 && arch && _SF.archetypes[arch.id] && (
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles size={14} className="text-violet-500" />
+            <span className="text-xs font-bold text-white">What This Activates</span>
+          </div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.archetypes[arch.id].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.archetypes[arch.id].emotionalBenefit}</div>
         </div>
       )}
-      {moment && (
-        <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-gray-400 mb-1">Trigger Moment</div>
-          <div className="flex items-center gap-2"><span className="text-lg">{moment.emoji}</span><div><div className="text-xs font-bold text-gray-900">{moment.label}</div></div></div>
+      {step === 1 && persona && _SF.personas[persona.id] && (
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles size={14} className="text-violet-500" />
+            <span className="text-xs font-bold text-white">What This Activates</span>
+          </div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.personas[persona.id].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.personas[persona.id].emotionalBenefit}</div>
         </div>
       )}
-      {arch && (
+      {step === 1 && persona && (
         <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-gray-400 mb-2">Revenue Personas</div>
-          {proven.personas.map((p, i) => <div key={i} className="flex items-start gap-1.5 mb-1.5"><TrendingUp size={10} className="text-emerald-500 flex-shrink-0 mt-0.5" /><span className="text-[10px] text-gray-600 leading-tight">{p}</span></div>)}
+          <div className="text-[9px] font-bold uppercase text-white mb-1">Primary Reader</div>
+          <div className="flex items-center gap-2"><span className="text-lg">{persona.emoji}</span><div><div className="text-xs font-bold text-white">{persona.label}</div></div></div>
         </div>
       )}
-      {Object.keys(state.voiceSettings || {}).length > 0 && (
+      {step === 1 && persona && (
         <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-gray-400 mb-2">Voice Profile</div>
+          <div className="text-[9px] font-bold uppercase text-white mb-2">Reader Profile</div>
+          <div className="text-[10px] text-white leading-tight mb-1.5">{persona.desc}</div>
+          <div className="text-[10px] text-white leading-tight mb-1.5"><strong>Needs:</strong> {persona.needs}</div>
+          <div className="text-[10px] text-white leading-tight"><strong>Impact:</strong> {persona.impact}</div>
+        </div>
+      )}
+      {step === 2 && moment && _SF.moments[moment.id] && (
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles size={14} className="text-violet-500" />
+            <span className="text-xs font-bold text-white">What This Activates</span>
+          </div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.moments[moment.id].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.moments[moment.id].emotionalBenefit}</div>
+        </div>
+      )}
+      {step >= 3 && Object.keys(state.voiceSettings || {}).length > 0 && (
+        <div className="bg-white rounded-xl p-3 border border-gray-200">
+          <div className="text-[9px] font-bold uppercase text-white mb-2">Voice Profile</div>
           {VOICE_SLIDERS.map((s) => { const val = state.voiceSettings?.[s.id] ?? s.default; return (
-            <div key={s.id} className="flex items-center gap-2 mb-1"><span className="text-[9px] text-gray-400 w-14">{s.left}</span><div className="flex-1 h-1.5 bg-gray-100 rounded-full"><div className="h-full bg-gray-700 rounded-full transition-all" style={{ width: `${val}%` }} /></div><span className="text-[9px] text-gray-400 w-14 text-right">{s.right}</span></div>
+            <div key={s.id} className="flex items-center gap-2 mb-1"><span className="text-[9px] text-white w-14">{s.left}</span><div className="flex-1 h-1.5 bg-gray-100 rounded-full"><div className="h-full bg-gray-700 rounded-full transition-all" style={{ width: `${val}%` }} /></div><span className="text-[9px] text-white w-14 text-right">{s.right}</span></div>
           ); })}
         </div>
       )}
-      {visual && (
+      {step === 4 && visual && (
         <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-gray-400 mb-2">Visual Style</div>
+          <div className="text-[9px] font-bold uppercase text-white mb-2">Visual Style</div>
           <div className="flex gap-1.5 mb-1.5">{visual.palette.map((c, i) => <div key={i} className="w-8 h-8 rounded-lg shadow-sm" style={{ backgroundColor: c }} />)}</div>
-          <div className="text-[10px] text-gray-600 font-medium">{visual.label}</div>
+          <div className="text-[10px] text-white font-medium">{visual.label}</div>
         </div>
       )}
-      {state.formatFocus && (
-        <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-gray-400 mb-1">Format</div>
-          <div className="text-xs font-bold text-gray-900">{state.formatFocus === "manga" ? "Manga / Visual" : "Traditional Books"}</div>
+      {step === 4 && state.visualStyle && _SF.visualStyles[state.visualStyle] && (
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles size={14} className="text-violet-500" />
+            <span className="text-xs font-bold text-white">What This Activates</span>
+          </div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.visualStyles[state.visualStyle].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.visualStyles[state.visualStyle].emotionalBenefit}</div>
         </div>
       )}
-      <WhatThisChanges items={["Book prose tone & rhythm", "Cover art palette", "Video pacing & mood", "Exercise depth", "Audience keywords", "Title hook strategy", "Social content style", "Format distribution"]} />
+      {step === 6 && (
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+          <div className="flex items-center gap-2 mb-3">
+            <Compass size={14} className="text-indigo-500" />
+            <span className="text-xs font-bold text-white">Content Angles</span>
+          </div>
+          <div className="space-y-2">
+            {TOPIC_CATEGORIES.map((cat) => {
+              const selectedTagId = (state.topicTags || []).find(t => cat.tags.some(ct => ct.id === t));
+              const selectedTag = selectedTagId ? cat.tags.find(ct => ct.id === selectedTagId) : null;
+              const angleInfo = selectedTag ? _AF[selectedTag.angle] : null;
+              return (
+                <div key={cat.label} className="rounded-lg p-2.5 border transition-all duration-200" style={{ borderColor: selectedTag ? cat.color + '40' : '#e5e7eb', backgroundColor: selectedTag ? cat.color + '08' : '#fff' }}>
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <span className="text-xs">{cat.icon}</span>
+                    <span className="text-[10px] font-bold text-white">{cat.label}</span>
+                  </div>
+                  {selectedTag ? (
+                    <>
+                      <div className="flex items-center gap-1 mb-1">
+                        <span className="text-[9px]">{angleInfo?.icon}</span>
+                        <span className="text-[9px] font-bold" style={{ color: cat.color }}>{angleInfo?.label}: {selectedTagId.replace(/-/g, " ")}</span>
+                      </div>
+                      <div className="flex items-start gap-1.5">
+                        <div className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: cat.color }} />
+                        <p className="text-[9px] text-white leading-relaxed">{selectedTag.bullet}</p>
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-[9px] text-white/70 italic">Pick a topic...</p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+      {step === 7 && (
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+          <div className="flex items-center gap-2 mb-3">
+            <Compass size={14} className="text-violet-500" />
+            <span className="text-xs font-bold text-white">Jump to Section</span>
+          </div>
+          <div className="space-y-0.5">
+            {[
+              { id: "rev-category", label: "True Category", icon: "🎯" },
+              { id: "rev-voice", label: "Voice Signature", icon: "🎙️" },
+              { id: "rev-positioning", label: "Positioning Map", icon: "📍" },
+              { id: "rev-visual", label: "Visual Identity", icon: "🎨" },
+              { id: "rev-emotion", label: "Emotional Staircase", icon: "📈" },
+              { id: "rev-topics", label: "Topic Strategy", icon: "🗂️" },
+              { id: "rev-engine", label: "Content Engine", icon: "⚙️" },
+              { id: "rev-loop", label: "Advantage Loop", icon: "🔄" },
+              { id: "rev-journey", label: "Reader Journey", icon: "🚶" },
+              { id: "rev-synergy", label: "Voice × Topic", icon: "🔗" },
+              { id: "rev-radar", label: "Brand Strength", icon: "📊" },
+              { id: "rev-synthesis", label: "Synthesis", icon: "✨" },
+            ].map(s => (
+              <button
+                key={s.id}
+                onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                className="flex items-center gap-2 w-full text-left rounded-lg px-2 py-1.5 text-[10px] text-white hover:bg-white hover:shadow-sm transition-all"
+              >
+                <span className="text-xs">{s.icon}</span>
+                <span>{s.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+      {step === 5 && (
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
+          <div className="flex items-center gap-2 mb-2">
+            <Heart size={14} className="text-rose-500" />
+            <span className="text-xs font-bold text-white">Emotional Profile</span>
+          </div>
+          <div className="bg-white rounded-lg border border-gray-100 p-3 mb-3">
+            <svg viewBox="0 0 240 140" className="w-full h-40">
+              {(() => {
+                const sides = 5;
+                const cx = 120, cy = 70, r = 55;
+                const catLabels = _EC.map(c => c.icon + " " + c.name.split(" ")[0]);
+                const emos = state.emotions || [];
+                const outerPts = [], innerPts = [];
+                for (let i = 0; i < sides; i++) {
+                  const angle = (Math.PI * 2 * i) / sides - Math.PI / 2;
+                  outerPts.push(`${cx + r * Math.cos(angle)},${cy + r * Math.sin(angle)}`);
+                  const cat = _EC[i];
+                  const selected = emos.find(e => cat.items.includes(e));
+                  const itemIdx = selected ? cat.items.indexOf(selected) : -1;
+                  const val = selected ? 0.4 + (itemIdx + 1) * 0.2 : 0.15;
+                  innerPts.push(`${cx + r * val * Math.cos(angle)},${cy + r * val * Math.sin(angle)}`);
+                }
+                return (<>
+                  <polygon fill="none" stroke="#e5e7eb" strokeWidth="1" points={outerPts.join(" ")} />
+                  <polygon fill="none" stroke="#e5e7eb" strokeWidth="0.5" strokeDasharray="3" points={outerPts.map((_, i) => { const a = (Math.PI * 2 * i) / sides - Math.PI / 2; return `${cx + r * 0.5 * Math.cos(a)},${cy + r * 0.5 * Math.sin(a)}`; }).join(" ")} />
+                  <polygon fill="#f43f5e" fillOpacity="0.15" stroke="#f43f5e" strokeWidth="2" points={innerPts.join(" ")} />
+                  {catLabels.map((l, i) => { const a = (Math.PI * 2 * i) / sides - Math.PI / 2; return <text key={l} x={cx + (r + 14) * Math.cos(a)} y={cy + (r + 14) * Math.sin(a)} textAnchor="middle" dominantBaseline="middle" fontSize="8" fill="#9ca3af">{l}</text>; })}
+                </>);
+              })()}
+            </svg>
+          </div>
+          <div className="space-y-2 mt-2">
+            {(state.emotions || []).map((e) => {
+              const cat = _EC.find(c => c.items.includes(e));
+              return (
+                <div key={e} className="bg-white rounded-lg p-2 border border-gray-100">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <span className="text-xs">{cat?.icon}</span>
+                    <span className="text-[10px] font-bold text-white">{e}</span>
+                  </div>
+                  {cat?.impacts?.[e] && (
+                    <div className="flex items-start gap-1.5">
+                      <div className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: cat.color }} />
+                      <p className="text-[9px] text-white leading-relaxed">{cat.impacts[e]}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1170,7 +1329,8 @@ function PersonaImpactPanel({ state }) {
 // WIZARD STEPS (11 steps)
 // ═══════════════════════════════════════════════════════════
 
-function Step1Archetype({ state, update }) {
+function Step1Archetype({ state, update, i18n = {} }) {
+  const { tArchetypes: _A = ARCHETYPES } = i18n;
   return (
     <div>
       <StepHero
@@ -1183,20 +1343,14 @@ function Step1Archetype({ state, update }) {
         <p className="text-xs font-medium text-indigo-900">This is the highest-leverage choice in the studio — everything else builds on the emotional territory you choose here.</p>
       </div>
       <div className="grid grid-cols-1 gap-3">
-        {ARCHETYPES.map((arch) => <ArchetypeCard key={arch.id} arch={arch} selected={state.archetype} onClick={(id) => update({ archetype: id })} />)}
+        {_A.map((arch) => <ArchetypeCard key={arch.id} arch={arch} selected={state.archetype} onClick={(id) => update({ archetype: id })} />)}
       </div>
-      {state.archetype && SELECTION_FEEDBACK.archetypes[state.archetype] && (
-        <SelectionFeedback
-          systemEffect={SELECTION_FEEDBACK.archetypes[state.archetype].systemEffect}
-          emotionalBenefit={SELECTION_FEEDBACK.archetypes[state.archetype].emotionalBenefit}
-          color={ARCHETYPES.find(a => a.id === state.archetype)?.coverColors?.[0] || "#6366f1"}
-        />
-      )}
     </div>
   );
 }
 
-function Step2PrimaryReader({ state, update }) {
+function Step2PrimaryReader({ state, update, i18n = {} }) {
+  const { tPersonas: _P = PERSONAS } = i18n;
   const laneChoices = [
     { key: "self_help", label: "Self-help books", hint: "Long-form titles and programs for deep transformation." },
     { key: "manga", label: "Manga / visual stories", hint: "Panel-first storytelling for youth and visual-native readers." },
@@ -1228,60 +1382,14 @@ function Step2PrimaryReader({ state, update }) {
         </p>
       </div>
       <div className="grid grid-cols-1 gap-2.5">
-        {PERSONAS.map((p) => <PersonaCard key={p.id} persona={p} selected={state.persona} onClick={(id) => update({ persona: id })} />)}
+        {_P.map((p) => <PersonaCard key={p.id} persona={p} selected={state.persona} onClick={(id) => update({ persona: id })} />)}
       </div>
-      {state.persona && SELECTION_FEEDBACK.personas[state.persona] && (
-        <SelectionFeedback
-          systemEffect={SELECTION_FEEDBACK.personas[state.persona].systemEffect}
-          emotionalBenefit={SELECTION_FEEDBACK.personas[state.persona].emotionalBenefit}
-          color="#3b82f6"
-        />
-      )}
-      {state.persona && (
-        <>
-          <div className="mt-6">
-            <h3 className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-violet-600">Your lane</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-              {laneChoices.map((lane) => (
-                <LaneChoiceCard
-                  key={lane.key}
-                  laneKey={lane.key}
-                  label={lane.label}
-                  hint={lane.hint}
-                  selected={selectedLane === lane.key}
-                  onSelect={(laneKey) => update({ onboardingLane: laneKey })}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="mt-6">
-            <h3 className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-violet-600">Your market</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
-              {marketChoices.map((mkt) => (
-                <MarketChoiceCard
-                  key={mkt.key}
-                  marketKey={mkt.key}
-                  label={mkt.label}
-                  hint={mkt.hint}
-                  selected={selectedMarket === mkt.key}
-                  onSelect={(marketKey) => update({ onboardingMarket: marketKey })}
-                />
-              ))}
-            </div>
-          </div>
-          <OutputProofStrip
-            wizardPersonaId={state.persona}
-            formatFocus={selectedFormatFocus}
-            market={selectedMarket}
-            onboardingLane={selectedLane}
-          />
-        </>
-      )}
     </div>
   );
 }
 
-function Step3TriggerMoment({ state, update }) {
+function Step3TriggerMoment({ state, update, i18n = {} }) {
+  const { tMoments: _M = MOMENTS } = i18n;
   return (
     <div>
       <StepHero
@@ -1289,28 +1397,72 @@ function Step3TriggerMoment({ state, update }) {
         title="The moment they reach for you"
         subtitle="Pick the scene where your reader is most open — titles, covers, and social hooks follow from here."
       />
-      <details className="mb-5 rounded-xl border border-amber-100/90 bg-amber-50/40 px-4 py-2 text-xs text-amber-900 backdrop-blur-sm open:pb-3">
+      <details open className="mb-5 rounded-xl border border-amber-100/90 bg-amber-50/40 px-4 py-2 text-xs text-amber-900 backdrop-blur-sm open:pb-3">
         <summary className="cursor-pointer font-semibold text-amber-900/90 outline-none">Why this matters</summary>
         <p className="mt-2 leading-relaxed text-amber-900/85">
           Strong brands speak to a <em>moment</em>, not only a demographic. This choice steers first lines, cover promise, and scroll-stopping hooks.
         </p>
       </details>
       <div className="grid grid-cols-1 gap-2.5">
-        {MOMENTS.map((m) => <MomentCard key={m.id} moment={m} selected={state.moment} onClick={(id) => update({ moment: id })} />)}
+        {_M.map((m) => <MomentCard key={m.id} moment={m} selected={state.moment} onClick={(id) => update({ moment: id })} />)}
       </div>
-      {state.moment && SELECTION_FEEDBACK.moments[state.moment] && (
-        <SelectionFeedback
-          systemEffect={SELECTION_FEEDBACK.moments[state.moment].systemEffect}
-          emotionalBenefit={SELECTION_FEEDBACK.moments[state.moment].emotionalBenefit}
-          color="#f59e0b"
-        />
-      )}
     </div>
   );
 }
 
-function Step4VoiceGraphs({ state, update }) {
-  const handleSlider = (id, val) => update({ voiceSettings: { ...state.voiceSettings, [id]: val } });
+const VOICE_5_STOPS = [1, 3, 6, 8, 10];
+const VOICE_5_VALUES = [0, 25, 50, 75, 100];
+const VOICE_AUDIO_SRC = {
+  gentleDirect: { 1: "/onboarding/proof/wizard/p1.mp3", 3: "/onboarding/proof/wizard/p3.mp3", 6: "/onboarding/proof/wizard/p6.mp3", 8: "/onboarding/proof/wizard/p8.mp3", 10: "/onboarding/proof/wizard/p10.mp3" },
+  simpleDeep: { 1: "/onboarding/proof/wizard/sd_p1.mp3", 3: "/onboarding/proof/wizard/sd_p3.mp3", 6: "/onboarding/proof/wizard/sd_p6.mp3", 8: "/onboarding/proof/wizard/sd_p8.mp3", 10: "/onboarding/proof/wizard/sd_p10.mp3" },
+  emotionalLogical: { 1: "/onboarding/proof/wizard/el_p1.mp3", 3: "/onboarding/proof/wizard/el_p3.mp3", 6: "/onboarding/proof/wizard/el_p6.mp3", 8: "/onboarding/proof/wizard/el_p8.mp3", 10: "/onboarding/proof/wizard/el_p10.mp3" },
+  spiritualPractical: { 1: "/onboarding/proof/wizard/sp_p1.mp3", 3: "/onboarding/proof/wizard/sp_p3.mp3", 6: "/onboarding/proof/wizard/sp_p6.mp3", 8: "/onboarding/proof/wizard/sp_p8.mp3", 10: "/onboarding/proof/wizard/sp_p10.mp3" },
+};
+const VOICE_AUDIO_SRC_JA = {
+  gentleDirect: { 1: "/onboarding/proof/wizard/ja_p1.mp3", 3: "/onboarding/proof/wizard/ja_p3.mp3", 6: "/onboarding/proof/wizard/ja_p6.mp3", 8: "/onboarding/proof/wizard/ja_p8.mp3", 10: "/onboarding/proof/wizard/ja_p10.mp3" },
+  simpleDeep: { 1: "/onboarding/proof/wizard/ja_sd_p1.mp3", 3: "/onboarding/proof/wizard/ja_sd_p3.mp3", 6: "/onboarding/proof/wizard/ja_sd_p6.mp3", 8: "/onboarding/proof/wizard/ja_sd_p8.mp3", 10: "/onboarding/proof/wizard/ja_sd_p10.mp3" },
+  emotionalLogical: { 1: "/onboarding/proof/wizard/ja_el_p1.mp3", 3: "/onboarding/proof/wizard/ja_el_p3.mp3", 6: "/onboarding/proof/wizard/ja_el_p6.mp3", 8: "/onboarding/proof/wizard/ja_el_p8.mp3", 10: "/onboarding/proof/wizard/ja_el_p10.mp3" },
+  spiritualPractical: { 1: "/onboarding/proof/wizard/ja_sp_p1.mp3", 3: "/onboarding/proof/wizard/ja_sp_p3.mp3", 6: "/onboarding/proof/wizard/ja_sp_p6.mp3", 8: "/onboarding/proof/wizard/ja_sp_p8.mp3", 10: "/onboarding/proof/wizard/ja_sp_p10.mp3" },
+};
+const VOICE_AUDIO_SRC_ZH = {
+  gentleDirect: { 1: "/onboarding/proof/wizard/zh_p1.mp3", 3: "/onboarding/proof/wizard/zh_p3.mp3", 6: "/onboarding/proof/wizard/zh_p6.mp3", 8: "/onboarding/proof/wizard/zh_p8.mp3", 10: "/onboarding/proof/wizard/zh_p10.mp3" },
+  simpleDeep: { 1: "/onboarding/proof/wizard/zh_sd_p1.mp3", 3: "/onboarding/proof/wizard/zh_sd_p3.mp3", 6: "/onboarding/proof/wizard/zh_sd_p6.mp3", 8: "/onboarding/proof/wizard/zh_sd_p8.mp3", 10: "/onboarding/proof/wizard/zh_sd_p10.mp3" },
+  emotionalLogical: { 1: "/onboarding/proof/wizard/zh_el_p1.mp3", 3: "/onboarding/proof/wizard/zh_el_p3.mp3", 6: "/onboarding/proof/wizard/zh_el_p6.mp3", 8: "/onboarding/proof/wizard/zh_el_p8.mp3", 10: "/onboarding/proof/wizard/zh_el_p10.mp3" },
+  spiritualPractical: { 1: "/onboarding/proof/wizard/zh_sp_p1.mp3", 3: "/onboarding/proof/wizard/zh_sp_p3.mp3", 6: "/onboarding/proof/wizard/zh_sp_p6.mp3", 8: "/onboarding/proof/wizard/zh_sp_p8.mp3", 10: "/onboarding/proof/wizard/zh_sp_p10.mp3" },
+};
+const VOICE_AUDIO_SRC_TW = {
+  gentleDirect: { 1: "/onboarding/proof/wizard/tw_p1.mp3", 3: "/onboarding/proof/wizard/tw_p3.mp3", 6: "/onboarding/proof/wizard/tw_p6.mp3", 8: "/onboarding/proof/wizard/tw_p8.mp3", 10: "/onboarding/proof/wizard/tw_p10.mp3" },
+  simpleDeep: { 1: "/onboarding/proof/wizard/tw_sd_p1.mp3", 3: "/onboarding/proof/wizard/tw_sd_p3.mp3", 6: "/onboarding/proof/wizard/tw_sd_p6.mp3", 8: "/onboarding/proof/wizard/tw_sd_p8.mp3", 10: "/onboarding/proof/wizard/tw_sd_p10.mp3" },
+  emotionalLogical: { 1: "/onboarding/proof/wizard/tw_el_p1.mp3", 3: "/onboarding/proof/wizard/tw_el_p3.mp3", 6: "/onboarding/proof/wizard/tw_el_p6.mp3", 8: "/onboarding/proof/wizard/tw_el_p8.mp3", 10: "/onboarding/proof/wizard/tw_el_p10.mp3" },
+  spiritualPractical: { 1: "/onboarding/proof/wizard/tw_sp_p1.mp3", 3: "/onboarding/proof/wizard/tw_sp_p3.mp3", 6: "/onboarding/proof/wizard/tw_sp_p6.mp3", 8: "/onboarding/proof/wizard/tw_sp_p8.mp3", 10: "/onboarding/proof/wizard/tw_sp_p10.mp3" },
+};
+
+function snap5(val) {
+  let best = 0;
+  let bestDist = Infinity;
+  VOICE_5_VALUES.forEach((v, i) => { const d = Math.abs(val - v); if (d < bestDist) { bestDist = d; best = i; } });
+  return best;
+}
+
+function Step4VoiceGraphs({ state, update, i18n = {} }) {
+  const audioRef = useRef(null);
+  const audioSrc = i18n.locale === "ja" ? VOICE_AUDIO_SRC_JA : i18n.locale === "zh" ? VOICE_AUDIO_SRC_ZH : i18n.locale === "tw" ? VOICE_AUDIO_SRC_TW : VOICE_AUDIO_SRC;
+  const playAudio = useCallback((sliderId, position) => {
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current.currentTime = 0; }
+    const src = audioSrc[sliderId]?.[position];
+    if (!src) return;
+    const a = new Audio(src);
+    audioRef.current = a;
+    a.play().catch(() => {});
+  }, [audioSrc]);
+
+  const handleSlider = (id, rawVal) => {
+    const idx = snap5(parseInt(rawVal));
+    const snappedVal = VOICE_5_VALUES[idx];
+    const pos = VOICE_5_STOPS[idx];
+    update({ voiceSettings: { ...state.voiceSettings, [id]: snappedVal } });
+    if (audioSrc[id]) playAudio(id, pos);
+  };
 
   const graphComponents = [PulseWaveGraph, SpectrumBarGraph, EmotionRadarGraph, EnergyGaugeGraph];
 
@@ -1321,26 +1473,27 @@ function Step4VoiceGraphs({ state, update }) {
         title="Shape your brand tone"
         subtitle="Four sliders — slide and watch the graphs move. Each axis changes how every sentence feels."
       />
-      <p className="mb-5 text-[11px] text-gray-400">Next step shows what each position does for your reader.</p>
+      <p className="mb-5 text-[11px] text-white">Next step shows what each position does for your reader.</p>
 
       <div className="space-y-6">
         {VOICE_SLIDERS.map((s, idx) => {
           const val = state.voiceSettings?.[s.id] ?? s.default;
-          const position = Math.max(1, Math.min(10, Math.round(val / 10) || 1));
+          const snapIdx = snap5(val);
+          const position = VOICE_5_STOPS[snapIdx];
           const toneData = VOICE_TONE_10[s.id][position - 1];
           const GraphComp = graphComponents[idx];
           return (
             <div key={s.id} className="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
               <div className="flex justify-between items-center mb-1">
-                <span className="text-sm font-bold text-gray-800">{s.left}</span>
-                <span className="text-[10px] text-gray-400 max-w-xs text-center">{s.desc}</span>
-                <span className="text-sm font-bold text-gray-800">{s.right}</span>
+                <span className="text-sm font-bold text-white">{s.left}</span>
+                <span className="text-[10px] text-white max-w-xs text-center">{s.desc}</span>
+                <span className="text-sm font-bold text-white">{s.right}</span>
               </div>
 
               <GraphComp position={position} color={s.color} />
 
-              <input type="range" min="0" max="100" value={val}
-                onChange={(e) => handleSlider(s.id, parseInt(e.target.value))}
+              <input type="range" min="0" max="100" step="25" value={VOICE_5_VALUES[snapIdx]}
+                onChange={(e) => handleSlider(s.id, e.target.value)}
                 className="w-full h-2.5 bg-gray-100 rounded-lg appearance-none cursor-pointer mt-2"
                 style={{ accentColor: s.color }}
               />
@@ -1350,11 +1503,19 @@ function Step4VoiceGraphs({ state, update }) {
                   <div className="w-3 h-3 rounded-full" style={{ backgroundColor: s.color }} />
                   <span className="text-xs font-bold" style={{ color: s.color }}>{toneData.label}</span>
                 </div>
-                <span className="text-[10px] text-gray-400">Position {position} of 10</span>
+                <span className="text-[10px] text-white">Position {position} of 10</span>
               </div>
 
+              {audioSrc[s.id] && (
+                <div className="mt-2 flex items-center gap-2">
+                  <button onClick={() => playAudio(s.id, position)} className="text-[10px] text-violet-600 hover:text-violet-800 flex items-center gap-1">
+                    <Play size={10} /> Listen to position {position}
+                  </button>
+                </div>
+              )}
+
               <div className="mt-3 bg-gray-50 rounded-lg p-3 border border-gray-100">
-                <p className="text-[11px] text-gray-700 leading-relaxed">{toneData.technique}</p>
+                <p className="text-[11px] text-white leading-relaxed">{toneData.technique}</p>
               </div>
             </div>
           );
@@ -1366,7 +1527,10 @@ function Step4VoiceGraphs({ state, update }) {
 
 function Step5VoiceEffects({ state, update }) {
   const graphComponents = [PulseWaveGraph, SpectrumBarGraph, EmotionRadarGraph, EnergyGaugeGraph];
-  const handleSlider = (id, val) => update({ voiceSettings: { ...state.voiceSettings, [id]: val } });
+  const handleSlider = (id, rawVal) => {
+    const idx = snap5(parseInt(rawVal));
+    update({ voiceSettings: { ...state.voiceSettings, [id]: VOICE_5_VALUES[idx] } });
+  };
 
   return (
     <div>
@@ -1378,20 +1542,20 @@ function Step5VoiceEffects({ state, update }) {
 
       <div className="mb-6 rounded-2xl border border-violet-100 bg-violet-50/50 px-4 py-3">
         <p className="text-[10px] font-bold uppercase tracking-wider text-violet-800">Narrator preview</p>
-        <p className="mt-1 text-[11px] leading-relaxed text-gray-600">
+        <p className="mt-1 text-[11px] leading-relaxed text-white">
           Same comfort passage, three Edge TTS pipeline-demo voices. Pair what you hear with the sliders above.
         </p>
         <div className="mt-3 space-y-2">
           <div>
-            <span className="text-[10px] font-semibold text-gray-800">Regulating / calm</span>
+            <span className="text-[10px] font-semibold text-white">Regulating / calm</span>
             <audio className="mt-1 block h-9 w-full" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_regulating_female.mp3" />
           </div>
           <div>
-            <span className="text-[10px] font-semibold text-gray-800">Warm empathetic</span>
+            <span className="text-[10px] font-semibold text-white">Warm empathetic</span>
             <audio className="mt-1 block h-9 w-full" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_warm_male.mp3" />
           </div>
           <div>
-            <span className="text-[10px] font-semibold text-gray-800">Direct / authority</span>
+            <span className="text-[10px] font-semibold text-white">Direct / authority</span>
             <audio className="mt-1 block h-9 w-full" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_direct_authority.mp3" />
           </div>
         </div>
@@ -1400,7 +1564,8 @@ function Step5VoiceEffects({ state, update }) {
       <div className="space-y-6">
         {VOICE_SLIDERS.map((s, idx) => {
           const val = state.voiceSettings?.[s.id] ?? s.default;
-          const position = Math.max(1, Math.min(10, Math.round(val / 10) || 1));
+          const snapIdx = snap5(val);
+          const position = VOICE_5_STOPS[snapIdx];
           const toneData = VOICE_TONE_10[s.id][position - 1];
           const GraphComp = graphComponents[idx];
 
@@ -1410,7 +1575,7 @@ function Step5VoiceEffects({ state, update }) {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full" style={{ backgroundColor: s.color }} />
-                    <span className="text-sm font-bold text-gray-900">{s.left} — {s.right}</span>
+                    <span className="text-sm font-bold text-white">{s.left} — {s.right}</span>
                   </div>
                   <span className="text-xs font-bold px-2.5 py-0.5 rounded-full" style={{ backgroundColor: s.color + '15', color: s.color }}>{toneData.label}</span>
                 </div>
@@ -1419,27 +1584,27 @@ function Step5VoiceEffects({ state, update }) {
               <div className="p-4">
                 <div className="bg-gray-50 rounded-xl p-3 mb-3 border border-gray-100">
                   <GraphComp position={position} color={s.color} />
-                  <input type="range" min="0" max="100" value={val}
-                    onChange={(e) => handleSlider(s.id, parseInt(e.target.value))}
+                  <input type="range" min="0" max="100" step="25" value={VOICE_5_VALUES[snapIdx]}
+                    onChange={(e) => handleSlider(s.id, e.target.value)}
                     className="w-full h-2.5 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-2"
                     style={{ accentColor: s.color }}
                   />
                   <div className="flex justify-between items-center mt-1.5">
                     <span className="text-[10px] font-semibold" style={{ color: s.color }}>{s.left}</span>
-                    <span className="text-[10px] text-gray-400">{position}/10</span>
+                    <span className="text-[10px] text-white">{position}/10</span>
                     <span className="text-[10px] font-semibold" style={{ color: s.color }}>{s.right}</span>
                   </div>
                 </div>
 
-                <details className="rounded-lg border border-gray-100 bg-gray-50/90 px-3 py-2 text-[11px] text-gray-700 open:pb-3">
-                  <summary className="cursor-pointer text-xs font-bold text-gray-800 outline-none">How this lands for readers</summary>
-                  <p className="mt-2 text-[11px] leading-relaxed text-gray-600">{s.desc}</p>
-                  <p className="mt-2 text-sm font-medium leading-relaxed text-gray-900">{toneData.technique}</p>
+                <details className="rounded-lg border border-gray-100 bg-gray-50/90 px-3 py-2 text-[11px] text-white open:pb-3">
+                  <summary className="cursor-pointer text-xs font-bold text-white outline-none">How this lands for readers</summary>
+                  <p className="mt-2 text-[11px] leading-relaxed text-white">{s.desc}</p>
+                  <p className="mt-2 text-sm font-medium leading-relaxed text-white">{toneData.technique}</p>
                   <div className="mt-3 space-y-2">
                     {toneData.benefits.map((benefit, i) => (
                       <div key={i} className="flex items-start gap-2">
                         <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 text-[9px] font-bold text-white" style={{ backgroundColor: s.color }}>{i + 1}</div>
-                        <p className="text-[11px] text-gray-700 leading-relaxed">{benefit}</p>
+                        <p className="text-[11px] text-white leading-relaxed">{benefit}</p>
                       </div>
                     ))}
                   </div>
@@ -1453,28 +1618,23 @@ function Step5VoiceEffects({ state, update }) {
   );
 }
 
-function Step6VisualStyle({ state, update }) {
+function Step5VisualStyle({ state, update, i18n = {} }) {
+  const { tVisualStyles: _V = VISUAL_STYLES } = i18n;
   const handleVisual = (id) => update({ visualStyle: id });
   const handleTradition = (val) => update({ tradition: val });
-  const handleEmotion = (emotion) => {
-    const current = state.emotions || [];
-    if (current.includes(emotion)) update({ emotions: current.filter((e) => e !== emotion) });
-    else if (current.length < 5) update({ emotions: [...current, emotion] });
-  };
-  const allEmotions = ["Finally calm", "Safe in my body", "Clear-headed", "In control", "Permission to rest", "Energized", "Connected to purpose", "Released", "Less alone", "Forgiven", "Grounded", "Hopeful", "Present", "Confident", "Resilient"];
-  const selectedVisual = VISUAL_STYLES.find((v) => v.id === state.visualStyle);
+  const selectedVisual = _V.find((v) => v.id === state.visualStyle);
 
   return (
     <div>
       <StepHero
         eyebrow="Look & feel"
-        title="Visual world and emotional promise"
-        subtitle="Pick a look, then the feelings you want readers to walk away with."
+        title="Visual world"
+        subtitle="Pick the visual identity your readers will associate with your brand — covers, social, and video all follow from here."
       />
 
       <div className="text-xs font-bold uppercase tracking-wider text-violet-600/90 mb-3">Visual style</div>
       <div className="grid grid-cols-2 gap-3 mb-4">
-        {VISUAL_STYLES.map((vs) => (
+        {_V.map((vs) => (
           <button key={vs.id} onClick={() => handleVisual(vs.id)}
             className={`p-4 rounded-xl border-2 text-left transition-all duration-200 ${state.visualStyle === vs.id ? "border-gray-900 bg-gray-50 shadow-md scale-[1.01]" : "border-gray-200 bg-white hover:border-gray-300"}`}>
             <div className={`w-full aspect-video mb-2 rounded-lg overflow-hidden border bg-gray-100 ${state.visualStyle === vs.id ? "ring-2 ring-offset-2 ring-gray-900 border-gray-900/20" : "border-gray-100"}`}>
@@ -1486,174 +1646,73 @@ function Step6VisualStyle({ state, update }) {
               />
             </div>
             <div className="flex gap-1.5 mb-2">{vs.palette.map((c, i) => <div key={i} className="w-6 h-6 rounded-md shadow-sm" style={{ backgroundColor: c }} />)}</div>
-            <div className="text-xs font-bold text-gray-900">{vs.label}</div>
-            <div className="text-[10px] text-gray-500 mt-0.5">{vs.desc}</div>
-            <div className="text-[10px] text-gray-400 mt-1 italic">{vs.mood}</div>
+            <div className="text-xs font-bold text-white">{vs.label}</div>
+            <div className="text-[10px] text-white mt-0.5">{vs.desc}</div>
+            <div className="text-[10px] text-white mt-1 italic">{vs.mood}</div>
           </button>
         ))}
       </div>
 
-      {selectedVisual && (
-        <>
-          <details className="mb-4 rounded-xl border border-gray-200 bg-gray-50/80 px-3 py-2 text-[11px] text-gray-700 open:pb-3">
-            <summary className="cursor-pointer font-semibold text-gray-800 outline-none">Image prompts (system)</summary>
-            <div className="mt-2 space-y-2">
-              <p className="italic text-gray-700">"{selectedVisual.imagePrompt}"</p>
-              <p className="italic text-gray-600">"{selectedVisual.emotionPrompt}"</p>
-            </div>
-          </details>
-          {SELECTION_FEEDBACK.visualStyles[state.visualStyle] && (
-            <SelectionFeedback
-              systemEffect={SELECTION_FEEDBACK.visualStyles[state.visualStyle].systemEffect}
-              emotionalBenefit={SELECTION_FEEDBACK.visualStyles[state.visualStyle].emotionalBenefit}
-              color={selectedVisual.palette[2] || "#7c3aed"}
-            />
-          )}
-          <div className="mb-4" />
-        </>
-      )}
-
-      <div className="text-xs font-bold uppercase tracking-wider text-violet-600/90 mb-2">
-        Emotional outcomes <span className="font-normal normal-case text-gray-400">(up to 5)</span>
-      </div>
-      <p className="text-[11px] text-gray-500 mb-3">Pick up to five outcomes — they anchor titles and CTAs.</p>
-      <div className="flex flex-wrap gap-2 mb-3">
-        {allEmotions.map((e) => {
-          const active = (state.emotions || []).includes(e);
-          const eSrc = EMOTION_PROOF_URL[e];
-          return (
-            <button
-              key={e}
-              onClick={() => handleEmotion(e)}
-              className={`inline-flex items-center gap-2 text-xs px-2 py-1.5 rounded-full border transition-all duration-200 ${active ? "bg-gray-900 text-white border-gray-900 shadow-sm" : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"}`}
-            >
-              <img
-                src={eSrc}
-                alt=""
-                className={`w-8 h-8 rounded-full object-cover border flex-shrink-0 transition-transform duration-200 ${active ? "border-white/40 scale-110" : "border-gray-200"}`}
-                loading="lazy"
-              />
-              <span>{e}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      {(state.emotions || []).length > 0 && (
-        <details className="mb-8 rounded-xl border border-gray-200 bg-gray-50/80 px-3 py-2 open:pb-3">
-          <summary className="cursor-pointer text-[10px] font-bold uppercase text-gray-500 outline-none">Prompt lines per outcome</summary>
-          <div className="mt-2 space-y-2">
-            {state.emotions.map((e) => (
-              <p key={e} className="text-[11px] text-gray-600 italic">
-                <span className="font-semibold not-italic text-gray-800">{e}: </span>
-                {`"Abstract visualization of '${e.toLowerCase()}' — soft light radiating from center, human silhouette in peaceful pose, ${VISUAL_STYLES.find((v) => v.id === state.visualStyle)?.mood?.toLowerCase() || "serene"} color palette, therapeutic art style, feeling of deep transformation and release"`}
-              </p>
-            ))}
-          </div>
-        </details>
-      )}
-
-      <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Spiritual foundation</div>
-      <p className="text-[11px] text-gray-500 mb-3">Optional — grounds vocabulary and references if you draw from a tradition.</p>
-      <select className="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-gray-500 focus:ring-2 focus:ring-gray-100 outline-none"
-        value={state.tradition || ""} onChange={(e) => handleTradition(e.target.value)}>
-        <option value="">Select primary tradition (optional)...</option>
-        {TRADITIONS.map((t) => <option key={t} value={t}>{t}</option>)}
-      </select>
     </div>
   );
 }
 
-function Step7Topics({ state, update }) {
-  const [selectedAngles, setSelectedAngles] = useState(state.angles || []);
-  const [selectedTopicTags, setSelectedTopicTags] = useState(state.topicTags || []);
+const EMOTION_CATEGORIES = [
+  { name: "Safety & Calm", icon: "🛡️", color: "#6366f1", items: ["Finally calm", "Safe in my body", "Permission to rest"], impacts: { "Finally calm": "Readers' nervous systems downregulate — they stop bracing and start absorbing", "Safe in my body": "Somatic trust builds from the first page, reducing fight-or-flight during reading", "Permission to rest": "Dissolves the guilt loop that keeps burned-out readers from engaging with self-help" } },
+  { name: "Clarity & Direction", icon: "🧭", color: "#059669", items: ["Clear-headed", "In control", "Connected to purpose"], impacts: { "Clear-headed": "Cuts through decision fatigue — readers feel the fog lift and start choosing", "In control": "Restores agency in readers who feel life is happening to them, not through them", "Connected to purpose": "Bridges the gap between 'what do I do' and 'why does it matter' — readers find momentum" } },
+  { name: "Energy & Confidence", icon: "⚡", color: "#f59e0b", items: ["Energized", "Confident", "Resilient"], impacts: { "Energized": "Transforms passive readers into action-takers — they close the book and move", "Confident": "Rebuilds self-trust that imposter syndrome and comparison culture eroded", "Resilient": "Readers develop bounce-back capacity — setbacks become data, not identity" } },
+  { name: "Release & Healing", icon: "🕊️", color: "#f43f5e", items: ["Released", "Forgiven", "Less alone"], impacts: { "Released": "Grief, resentment, and held tension finally have somewhere to go — readers exhale for real", "Forgiven": "Self-compassion replaces the inner critic — readers stop punishing themselves for being human", "Less alone": "Names the unnamed — readers discover their 'weird' pain is universal, breaking isolation" } },
+  { name: "Presence & Hope", icon: "✨", color: "#7c3aed", items: ["Grounded", "Hopeful", "Present"], impacts: { "Grounded": "Anchors readers in the body and the now — rumination and future-anxiety lose their grip", "Hopeful": "Reignites the belief that change is possible — the most powerful conversion driver in self-help", "Present": "Readers stop living in regret or anxiety and taste what being here actually feels like" } },
+];
 
-  const toggleAngle = (id) => { const next = selectedAngles.includes(id) ? selectedAngles.filter((a) => a !== id) : [...selectedAngles, id]; setSelectedAngles(next); update({ angles: next }); };
-  const toggleTopicTag = (tag) => { const next = selectedTopicTags.includes(tag) ? selectedTopicTags.filter((t) => t !== tag) : [...selectedTopicTags, tag]; setSelectedTopicTags(next); update({ topicTags: next }); };
-
-  const topicCategories = [
-    { label: "Sleep & Anxiety", tags: ["anxiety-at-night", "overthinking", "panic-grounding", "sunday-dread"] },
-    { label: "Burnout & Work", tags: ["burnout-recovery", "nervous-system-reset", "decision-fatigue", "phone-addiction"] },
-    { label: "Grief & Healing", tags: ["grief-timeline", "toxic-relationship-healing", "intergenerational-trauma", "heartbreak-recovery", "emotional-numbness"] },
-    { label: "Identity & Direction", tags: ["feeling-behind", "quarter-life-crisis", "identity-rebuild", "purpose-after-30"] },
-    { label: "Focus & Performance", tags: ["habit-building", "ADHD-productivity", "dopamine-detox", "deep-work"] },
-    { label: "Meaning & Spirituality", tags: ["meditation-beginners", "meaning-after-loss", "spiritual-no-religion", "inner-peace-chaos", "mindfulness-skeptics"] },
-  ];
+function Step6EmotionalOutcomes({ state, update, i18n = {} }) {
+  const { tEmotionCategories: _EC = EMOTION_CATEGORIES } = i18n;
+  const handleEmotion = (emotion, category) => {
+    const current = state.emotions || [];
+    const categoryEmotions = _EC.find(c => c.name === category)?.items || [];
+    const filtered = current.filter(e => !categoryEmotions.includes(e));
+    if (current.includes(emotion)) update({ emotions: filtered });
+    else update({ emotions: [...filtered, emotion] });
+  };
 
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Claim Your Search Territory</h2>
-      <p className="text-sm text-gray-500 mt-1 mb-2">This page defines what your brand is <em>about</em> — the topics people search for that lead them to your content, and the angles your books use to frame their message. Your topic selections feed directly into title generation, keyword targeting, series planning, and ad campaigns across all platforms.</p>
-      <p className="text-xs text-gray-400 mb-6 italic">Select generously — the system uses these as seeds to generate hundreds of specific title and keyword variations.</p>
-
-      <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Content Angles</div>
-      <p className="text-[11px] text-gray-500 mb-3">How your books open their argument. These framing modes determine whether your titles challenge, reveal, systematize, or reframe. Pick all that fit your brand voice.</p>
-      <div className="grid grid-cols-1 gap-2 mb-4">
-        {V4_ANGLES.map((angle) => {
-          const active = selectedAngles.includes(angle.id);
-          const Icon = angle.icon;
-          const angleFeedback = {
-            debunk: { systemEffect: "Titles open with contrarian hooks — 'What your therapist won't tell you.' Evidence-backed pivots that challenge mainstream advice.", emotionalBenefit: "Readers feel intellectually respected. The debunk angle validates their suspicion that conventional advice isn't working — giving them permission to try a different path without feeling naive." },
-            framework: { systemEffect: "Titles lead with structure — '5-step protocol for...' Content organized into repeatable systems readers can follow.", emotionalBenefit: "Overwhelmed readers exhale when they see a clear system. Frameworks reduce cognitive load and decision fatigue — transforming vague anxiety into concrete, manageable steps." },
-            reveal: { systemEffect: "Titles expose hidden truths — 'The real reason you can't sleep.' Content positions your brand as the insider source.", emotionalBenefit: "Readers experience the relief of finally understanding. The reveal angle creates 'aha moments' that rewrite their self-narrative — from 'something is wrong with me' to 'now I understand why.'" },
-            leverage: { systemEffect: "Titles reframe existing traits — 'Your anxiety is a superpower.' Content turns perceived weaknesses into strategic advantages.", emotionalBenefit: "Readers stop fighting themselves and start working with what they have. The leverage angle is profoundly healing — it says 'you're not broken, you're just using your gifts wrong.'" },
-            origin: { systemEffect: "Titles trace root causes — 'Where your pattern actually started.' Content builds narrative depth and causal understanding.", emotionalBenefit: "Readers experience the deep relief of understanding where their patterns began. Origin stories create compassion for their past selves — the first step to actual behavioral change." },
-          };
-          return (
-            <button key={angle.id} onClick={() => toggleAngle(angle.id)}
-              className={`flex items-start gap-3 p-4 rounded-xl border-2 text-left transition-all ${active ? "border-gray-900 bg-gray-50" : "border-gray-200 bg-white hover:border-gray-300"}`}>
-              <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${active ? "bg-gray-900" : "bg-gray-100"}`}>
-                <Icon size={16} className={active ? "text-white" : "text-gray-400"} />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-gray-900">{angle.label}</span>
-                  {active && <Check size={16} className="text-gray-900" />}
-                </div>
-                <p className="text-[11px] text-gray-500 mt-0.5">{angle.desc}</p>
-                {active && (
-                  <>
-                    <p className="text-[10px] text-indigo-600 mt-1 italic">Framing: {angle.framing}</p>
-                    <div className="mt-2 pt-2 border-t border-gray-200">
-                      <div className="flex items-start gap-1.5 mb-1">
-                        <Zap size={9} className="text-indigo-500 flex-shrink-0 mt-0.5" />
-                        <p className="text-[10px] text-gray-500">{angleFeedback[angle.id]?.systemEffect}</p>
-                      </div>
-                      <div className="flex items-start gap-1.5">
-                        <Heart size={9} className="text-rose-400 flex-shrink-0 mt-0.5" />
-                        <p className="text-[10px] text-gray-700 font-medium">{angleFeedback[angle.id]?.emotionalBenefit}</p>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            </button>
-          );
-        })}
+      <StepHero
+        eyebrow="Promise"
+        title="Emotional Outcomes"
+        subtitle="These are the feelings your reader walks away with — the transformation they can name. Every title, CTA, and marketing message points back to these promises."
+      />
+      <div className="mb-6 rounded-xl border border-rose-100/80 bg-rose-50/50 p-4 backdrop-blur-sm">
+        <p className="text-xs leading-relaxed text-rose-900">
+          <strong>Pick one for each category.</strong> Your choices become the emotional north star of your entire brand. Covers promise these feelings visually. Titles name them. Exercises deliver them. The system weaves your selections into every piece of content it generates.
+        </p>
       </div>
-
-      <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Topic Territory</div>
-      <p className="text-[11px] text-gray-500 mb-4">Select the search topics your brand will own. Organized by category — pick across multiple categories to build a well-rounded brand presence.</p>
-      <div className="space-y-5">
-        {topicCategories.map((cat) => (
-          <div key={cat.label}>
-            <div className="text-[11px] font-bold text-gray-700 mb-2 flex items-center gap-1.5">
-              <Hash size={12} className="text-gray-400" /> {cat.label}
+      <div className="space-y-4 mb-4">
+        {_EC.map((cat) => (
+          <div key={cat.name} className="rounded-xl border-2 p-4" style={{ borderColor: cat.color + '40', backgroundColor: cat.color + '08' }}>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-base">{cat.icon}</span>
+              <span className="text-xs font-bold text-white">{cat.name}</span>
+              <div className="flex-1 h-px" style={{ backgroundColor: cat.color + '30' }} />
             </div>
             <div className="flex flex-wrap gap-2">
-              {cat.tags.map((tag) => {
-                const active = selectedTopicTags.includes(tag);
-                const tSrc = TOPIC_TAG_PROOF_URL[tag];
+              {cat.items.map((e) => {
+                const active = (state.emotions || []).includes(e);
+                const eSrc = EMOTION_PROOF_URL[e];
                 return (
-                  <button key={tag} onClick={() => toggleTopicTag(tag)}
-                    className={`inline-flex items-center gap-2 text-[11px] px-2 py-1.5 rounded-full border transition-all duration-200 ${active ? "bg-gray-900 text-white border-gray-900 scale-[1.02]" : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"}`}>
+                  <button
+                    key={e}
+                    onClick={() => handleEmotion(e, cat.name)}
+                    className={`inline-flex items-center gap-2 text-xs px-3 py-2 rounded-lg border transition-all duration-200 ${active ? "bg-gray-900 text-white border-gray-900 shadow-md scale-[1.02]" : "bg-gray-50 text-white border-gray-200 hover:border-gray-400"}`}
+                  >
                     <img
-                      src={tSrc}
+                      src={eSrc}
                       alt=""
-                      className={`w-7 h-7 rounded-md object-cover border flex-shrink-0 ${active ? "border-white/30 ring-1 ring-white/40" : "border-gray-200"}`}
+                      className={`w-8 h-8 rounded-full object-cover border flex-shrink-0 transition-transform duration-200 ${active ? "border-white/40 scale-110" : "border-gray-200"}`}
                       loading="lazy"
                     />
-                    <span>{tag.replace(/-/g, " ")}</span>
+                    <span>{e}</span>
+                    {active && <Check size={12} className="text-white" />}
                   </button>
                 );
               })}
@@ -1662,11 +1721,173 @@ function Step7Topics({ state, update }) {
         ))}
       </div>
 
-      {selectedTopicTags.length > 0 && (
-        <div className="mt-4 bg-gray-50 rounded-xl p-3 border border-gray-200">
-          <span className="text-[10px] font-bold text-gray-500">{selectedTopicTags.length} topics selected</span>
-        </div>
-      )}
+    </div>
+  );
+}
+
+const TOPIC_CATEGORIES = [
+  { label: "Sleep & Anxiety", icon: "😰", color: "#6366f1", tags: [
+    { id: "anxiety-at-night", angle: "framework", bullet: "Delivers a pre-sleep anxiety protocol — 3 body scans that interrupt the cortisol loop before it spirals" },
+    { id: "overthinking", angle: "origin", bullet: "Traces the overthinking pattern to a childhood survival strategy — your brain learned to scan for danger and never stopped" },
+    { id: "panic-grounding", angle: "debunk", bullet: "Debunks 'just breathe through it' — panic needs somatic intervention first, cognitive tools second" },
+    { id: "sunday-dread", angle: "leverage", bullet: "Reframes Sunday dread as your nervous system's weekly forecast — the dread itself contains data about what needs to change" },
+  ]},
+  { label: "Burnout & Work", icon: "🔥", color: "#f59e0b", tags: [
+    { id: "burnout-recovery", angle: "debunk", bullet: "Debunks 'just take a vacation' — burnout is a nervous system state, not a scheduling problem" },
+    { id: "nervous-system-reset", angle: "framework", bullet: "Provides a 5-day vagal tone reset protocol backed by polyvagal research — structure readers can follow immediately" },
+    { id: "decision-fatigue", angle: "reveal", bullet: "Reveals that decision fatigue isn't about willpower — it's an overloaded prefrontal cortex running outdated threat software" },
+    { id: "phone-addiction", angle: "leverage", bullet: "Reframes the phone as a biofeedback tool — your scroll pattern reveals exactly what your nervous system is craving" },
+  ]},
+  { label: "Grief & Healing", icon: "🕊️", color: "#f43f5e", tags: [
+    { id: "grief-timeline", angle: "debunk", bullet: "Debunks the '5 stages' model — grief is nonlinear, and knowing this stops readers from pathologizing their own healing" },
+    { id: "toxic-relationship-healing", angle: "origin", bullet: "Traces the attraction pattern to early attachment wounds — understanding the origin breaks the repetition cycle" },
+    { id: "intergenerational-trauma", angle: "reveal", bullet: "Reveals how trauma transmits through epigenetics and family silence — readers understand their pain isn't 'just in their head'" },
+    { id: "heartbreak-recovery", angle: "framework", bullet: "Structures recovery into three phases: survive, stabilize, rebuild — giving the broken-hearted a map when they feel lost" },
+    { id: "emotional-numbness", angle: "leverage", bullet: "Reframes numbness as the nervous system's most sophisticated protection — not absence of feeling, but an excess of it" },
+  ]},
+  { label: "Identity & Direction", icon: "🧭", color: "#059669", tags: [
+    { id: "feeling-behind", angle: "debunk", bullet: "Debunks the comparison timeline — there is no 'behind' because everyone is building on completely different foundations" },
+    { id: "quarter-life-crisis", angle: "leverage", bullet: "Reframes the crisis as the identity system upgrading — the discomfort is proof you're outgrowing the old version" },
+    { id: "identity-rebuild", angle: "framework", bullet: "Provides a 4-phase identity reconstruction framework — from deconstruction through integration to authentic expression" },
+    { id: "purpose-after-30", angle: "origin", bullet: "Traces the purpose void to inherited career scripts — once you see whose dream you were living, yours becomes visible" },
+  ]},
+  { label: "Focus & Performance", icon: "⚡", color: "#0ea5e9", tags: [
+    { id: "habit-building", angle: "framework", bullet: "Systematizes habit formation into environment design + identity shift — structure that works even when motivation fails" },
+    { id: "ADHD-productivity", angle: "leverage", bullet: "Reframes ADHD hyperfocus as a strategic advantage — your brain isn't broken, the productivity advice was designed for someone else" },
+    { id: "dopamine-detox", angle: "debunk", bullet: "Debunks the viral dopamine detox trend — the real issue is reward sensitivity, and the fix is recalibration, not deprivation" },
+    { id: "deep-work", angle: "reveal", bullet: "Reveals that deep work for anxious minds requires nervous system resets between blocks — not just willpower and timers" },
+  ]},
+  { label: "Meaning & Spirituality", icon: "✨", color: "#7c3aed", tags: [
+    { id: "meditation-beginners", angle: "debunk", bullet: "Debunks 'clear your mind' — meditation is about noticing thoughts, not eliminating them. This reframe keeps beginners from quitting" },
+    { id: "meaning-after-loss", angle: "origin", bullet: "Traces meaning-making to the human need for narrative coherence — when loss shatters the story, rebuilding meaning is the healing" },
+    { id: "spiritual-no-religion", angle: "leverage", bullet: "Reframes spiritual hunger as a feature, not a gap — you don't need someone else's tradition to access depth and transcendence" },
+    { id: "inner-peace-chaos", angle: "reveal", bullet: "Reveals that inner peace isn't the absence of chaos but a different relationship to it — the noise doesn't stop, but you stop drowning" },
+    { id: "mindfulness-skeptics", angle: "framework", bullet: "Delivers a skeptic-friendly 5-minute practice backed by neuroscience data — no incense, no mantras, just measurable results" },
+  ]},
+];
+
+const ANGLE_FEEDBACK = {
+  debunk: { label: "Debunk", icon: "🔍", systemEffect: "Titles open with contrarian hooks — 'What your therapist won't tell you.'", emotionalBenefit: "Readers feel intellectually respected. Validates their suspicion that conventional advice isn't working." },
+  framework: { label: "Framework", icon: "🔧", systemEffect: "Titles lead with structure — '5-step protocol for...' Repeatable systems.", emotionalBenefit: "Overwhelmed readers exhale when they see a clear system. Transforms vague anxiety into concrete steps." },
+  reveal: { label: "Reveal", icon: "💡", systemEffect: "Titles expose hidden truths — 'The real reason you can't sleep.'", emotionalBenefit: "Readers experience 'aha moments' that rewrite their self-narrative from broken to understood." },
+  leverage: { label: "Leverage", icon: "🔄", systemEffect: "Titles reframe weaknesses — 'Your anxiety is a superpower.'", emotionalBenefit: "Readers stop fighting themselves. Says 'you're not broken, you're just using your gifts wrong.'" },
+  origin: { label: "Origin", icon: "🌱", systemEffect: "Titles trace root causes — 'Where your pattern actually started.'", emotionalBenefit: "Deep relief from understanding where patterns began. Creates compassion for their past selves." },
+};
+
+// ═══════════════════════════════════════════════════════════
+// MARKET DATA — Visual Identity & Topic/Angle research scores
+// ═══════════════════════════════════════════════════════════
+const VISUAL_MARKET = {
+  calm_minimal:      { shelf: 62, trust: 88, social: 70, premium: 78, rank: 5, demo: "30–55, F-lean", superpower: "Gets recommended by therapists and professionals — the 'credibility' choice" },
+  dark_intense:      { shelf: 84, trust: 68, social: 85, premium: 80, rank: 3, demo: "22–38, neutral", superpower: "Generates the most organic UGC — readers share it as an identity signal" },
+  earthy_organic:    { shelf: 65, trust: 82, social: 74, premium: 68, rank: 6, demo: "28–50, F-strong", superpower: "Builds deepest parasocial trust — readers feel the author is one of them" },
+  bold_modern:       { shelf: 88, trust: 72, social: 82, premium: 75, rank: 1, demo: "25–40, neutral", superpower: "Cuts through visual noise on any shelf or feed — the stop-scroll champion" },
+  premium_soft:      { shelf: 78, trust: 85, social: 76, premium: 92, rank: 2, demo: "30–50, F-slight", superpower: "Makes readers feel they're investing in themselves, not just buying a book" },
+  sacred_cosmic:     { shelf: 75, trust: 77, social: 79, premium: 83, rank: 4, demo: "28–45, F-slight", superpower: "Builds cult followings — readers who buy in become evangelists" },
+};
+
+const ANGLE_MARKET = {
+  debunk:    { viral: 88, trust: 45, conversion: 55, seo: 60, tip: "Best for top-of-funnel — controversy drives shares on cold audiences" },
+  framework: { viral: 55, trust: 82, conversion: 90, seo: 85, tip: "Best for mid-funnel — audiences ready to act need structure" },
+  reveal:    { viral: 80, trust: 65, conversion: 65, seo: 70, tip: "Best for email hooks — bridges curiosity into deeper content" },
+  leverage:  { viral: 75, trust: 70, conversion: 72, seo: 50, tip: "Best for reframing objections — turns resistance into buy-in" },
+  origin:    { viral: 50, trust: 92, conversion: 60, seo: 55, tip: "Best for long-form loyalty — deepens trust with existing audience" },
+};
+
+const TOPIC_MARKET = {
+  "Sleep & Anxiety":       { search: 95, competition: 88, monetization: 82, growth: 75, platform: "YouTube" },
+  "Burnout & Work":        { search: 80, competition: 75, monetization: 78, growth: 85, platform: "LinkedIn" },
+  "Grief & Healing":       { search: 55, competition: 40, monetization: 60, growth: 65, platform: "Podcasts" },
+  "Identity & Direction":  { search: 60, competition: 55, monetization: 70, growth: 80, platform: "TikTok" },
+  "Focus & Performance":   { search: 85, competition: 82, monetization: 88, growth: 70, platform: "YouTube" },
+  "Meaning & Spirituality":{ search: 50, competition: 45, monetization: 65, growth: 75, platform: "Books" },
+};
+
+// Ideal voice profiles per angle — from synergy research
+const ANGLE_IDEAL_VOICE = {
+  debunk:    { gentleDirect: 3, simpleDeep: 4, emotionalLogical: 4, spiritualPractical: 7 },
+  framework: { gentleDirect: 6, simpleDeep: 3, emotionalLogical: 7, spiritualPractical: 9 },
+  reveal:    { gentleDirect: 4, simpleDeep: 5, emotionalLogical: 2, spiritualPractical: 5 },
+  leverage:  { gentleDirect: 5, simpleDeep: 5, emotionalLogical: 4, spiritualPractical: 7 },
+  origin:    { gentleDirect: 2, simpleDeep: 5, emotionalLogical: 2, spiritualPractical: 4 },
+};
+const ANGLE_DIM_WEIGHTS = {
+  debunk:    { gentleDirect: 3.0, simpleDeep: 1.0, emotionalLogical: 1.5, spiritualPractical: 1.5 },
+  framework: { gentleDirect: 1.0, simpleDeep: 3.0, emotionalLogical: 1.5, spiritualPractical: 2.0 },
+  reveal:    { gentleDirect: 1.5, simpleDeep: 1.5, emotionalLogical: 3.0, spiritualPractical: 1.0 },
+  leverage:  { gentleDirect: 1.5, simpleDeep: 1.0, emotionalLogical: 2.0, spiritualPractical: 2.5 },
+  origin:    { gentleDirect: 3.0, simpleDeep: 1.5, emotionalLogical: 2.5, spiritualPractical: 1.0 },
+};
+
+function calcSynergyScore(voicePositions, angle) {
+  const ideal = ANGLE_IDEAL_VOICE[angle];
+  const weights = ANGLE_DIM_WEIGHTS[angle];
+  if (!ideal || !weights) return 50;
+  let actualDist = 0, maxDist = 0;
+  for (const dim of Object.keys(ideal)) {
+    const vp = voicePositions.find(v => v.id === dim);
+    const pos = vp ? vp.position : 5;
+    const w = weights[dim];
+    actualDist += w * Math.abs(pos - ideal[dim]);
+    maxDist += w * 9;
+  }
+  return Math.round(100 * (1 - actualDist / maxDist));
+}
+
+function Step7Topics({ state, update, i18n = {} }) {
+  const { tAngleFeedback: _AF = ANGLE_FEEDBACK } = i18n;
+  const handleTopicTag = (tagId, categoryLabel) => {
+    const current = state.topicTags || [];
+    const categoryTagIds = TOPIC_CATEGORIES.find(c => c.label === categoryLabel)?.tags.map(t => t.id) || [];
+    const filtered = current.filter(t => !categoryTagIds.includes(t));
+    if (current.includes(tagId)) update({ topicTags: filtered });
+    else update({ topicTags: [...filtered, tagId] });
+  };
+
+  return (
+    <div>
+      <StepHero
+        eyebrow="Territory"
+        title="Claim Your Search Territory"
+        subtitle="Pick one topic per category — each choice sets the content angle your brand uses to frame that territory. Watch the sidebar update as you choose."
+      />
+      <div className="mb-6 rounded-xl border border-indigo-100/80 bg-indigo-50/50 p-4 backdrop-blur-sm">
+        <p className="text-xs leading-relaxed text-indigo-900">
+          <strong>One per category.</strong> Each topic is paired with a content angle — debunk, framework, reveal, leverage, or origin. As you switch topics, the angle and strategy in the sidebar changes.
+        </p>
+      </div>
+      <div className="space-y-4">
+        {TOPIC_CATEGORIES.map((cat) => (
+          <div key={cat.label} className="rounded-xl border-2 p-4" style={{ borderColor: cat.color + '40', backgroundColor: cat.color + '08' }}>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-base">{cat.icon}</span>
+              <span className="text-xs font-bold text-white">{cat.label}</span>
+              <div className="flex-1 h-px" style={{ backgroundColor: cat.color + '30' }} />
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {cat.tags.map((tag) => {
+                const active = (state.topicTags || []).includes(tag.id);
+                const tSrc = TOPIC_TAG_PROOF_URL[tag.id];
+                const angleInfo = _AF[tag.angle];
+                return (
+                  <button key={tag.id} onClick={() => handleTopicTag(tag.id, cat.label)}
+                    className={`inline-flex items-center gap-2 text-[11px] px-3 py-2 rounded-lg border transition-all duration-200 ${active ? "bg-gray-900 text-white border-gray-900 shadow-md scale-[1.02]" : "bg-white/80 text-white border-gray-200 hover:border-gray-400"}`}>
+                    <img
+                      src={tSrc}
+                      alt=""
+                      className={`w-7 h-7 rounded-md object-cover border flex-shrink-0 ${active ? "border-white/30 ring-1 ring-white/40" : "border-gray-200"}`}
+                      loading="lazy"
+                    />
+                    <span>{tag.id.replace(/-/g, " ")}</span>
+                    {angleInfo && <span className="text-[9px] opacity-60">{angleInfo.icon}</span>}
+                    {active && <Check size={12} className="text-white" />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -1675,9 +1896,9 @@ function Step8MarketIntel({ state }) {
   const proven = PROVEN[state.archetype] || PROVEN.nervous_system;
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Market Intelligence</h2>
-      <p className="text-sm text-gray-500 mt-1 mb-2">Your creative vision is the soul of your brand. But soul alone doesn't pay rent. This page shows you how the system blends your unique direction with hard market data — real search volumes, proven buyer personas, and high-converting keyword territories — to ensure your catalog reaches the people who are already looking for what you're offering.</p>
-      <p className="text-xs text-gray-400 mb-6 italic">Nothing changes about your brand's voice or identity. We just make sure it shows up where the demand is.</p>
+      <h2 className="text-2xl font-extrabold text-white tracking-tight">Market Intelligence</h2>
+      <p className="text-sm text-white mt-1 mb-2">Your creative vision is the soul of your brand. But soul alone doesn't pay rent. This page shows you how the system blends your unique direction with hard market data — real search volumes, proven buyer personas, and high-converting keyword territories — to ensure your catalog reaches the people who are already looking for what you're offering.</p>
+      <p className="text-xs text-white mb-6 italic">Nothing changes about your brand's voice or identity. We just make sure it shows up where the demand is.</p>
 
       {/* Gen Z / Gen Alpha FIRST */}
       <div className="rounded-xl border border-violet-200 bg-violet-50 p-5 mb-6">
@@ -1696,8 +1917,8 @@ function Step8MarketIntel({ state }) {
           ].map(({ icon: I, label, desc }) => (
             <div key={label} className="bg-white rounded-lg p-2.5 text-center">
               <I size={16} className="text-violet-500 mx-auto mb-1" />
-              <div className="text-[10px] font-bold text-gray-900">{label}</div>
-              <div className="text-[9px] text-gray-500">{desc}</div>
+              <div className="text-[10px] font-bold text-white">{label}</div>
+              <div className="text-[9px] text-white">{desc}</div>
             </div>
           ))}
         </div>
@@ -1714,38 +1935,39 @@ function Step8MarketIntel({ state }) {
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-white rounded-lg p-3">
             <div className="text-[10px] font-bold text-emerald-700 uppercase mb-1">Your Direction</div>
-            <p className="text-[11px] text-gray-600">Archetype, voice, topics, angles, visual style — preserved as your brand's unique creative identity</p>
+            <p className="text-[11px] text-white">Archetype, voice, topics, angles, visual style — preserved as your brand's unique creative identity</p>
           </div>
           <div className="bg-white rounded-lg p-3">
             <div className="text-[10px] font-bold text-emerald-700 uppercase mb-1">Market Intelligence</div>
-            <p className="text-[11px] text-gray-600">Proven revenue personas, trending search terms, high-conversion keywords, and demand data matched to your archetype</p>
+            <p className="text-[11px] text-white">Proven revenue personas, trending search terms, high-conversion keywords, and demand data matched to your archetype</p>
           </div>
         </div>
       </div>
 
       <div className="rounded-xl border border-gray-200 bg-white p-5 mb-6">
-        <div className="text-xs font-bold text-gray-700 mb-3">Proven Revenue Personas for Your Archetype</div>
-        <p className="text-[11px] text-gray-500 mb-3">These are the audience segments with verified purchasing power in your emotional territory. The system ensures your catalog reaches all of them.</p>
+        <div className="text-xs font-bold text-white mb-3">Proven Revenue Personas for Your Archetype</div>
+        <p className="text-[11px] text-white mb-3">These are the audience segments with verified purchasing power in your emotional territory. The system ensures your catalog reaches all of them.</p>
         {proven.personas.map((p, i) => (
           <div key={i} className="flex items-start gap-2 mb-2.5">
             <Target size={12} className="text-indigo-500 flex-shrink-0 mt-0.5" />
-            <span className="text-[11px] text-gray-600">{p}</span>
+            <span className="text-[11px] text-white">{p}</span>
           </div>
         ))}
       </div>
 
       <div className="rounded-xl border border-gray-200 bg-white p-5">
-        <div className="text-xs font-bold text-gray-700 mb-3">High-Performing Search Topics</div>
-        <p className="text-[11px] text-gray-500 mb-3">These search terms have verified monthly volume and conversion rates. Your titles and keywords will be optimized around these terms alongside your custom selections.</p>
+        <div className="text-xs font-bold text-white mb-3">High-Performing Search Topics</div>
+        <p className="text-[11px] text-white mb-3">These search terms have verified monthly volume and conversion rates. Your titles and keywords will be optimized around these terms alongside your custom selections.</p>
         <div className="flex flex-wrap gap-2">
-          {proven.topics.map((t, i) => <span key={i} className="text-[11px] bg-gray-100 text-gray-700 px-3 py-1 rounded-full">{t}</span>)}
+          {proven.topics.map((t, i) => <span key={i} className="text-[11px] bg-gray-100 text-white px-3 py-1 rounded-full">{t}</span>)}
         </div>
       </div>
     </div>
   );
 }
 
-function Step9Formats({ state, update }) {
+function Step9Formats({ state, update, i18n = {} }) {
+  const { tSelectionFeedback: _SF = SELECTION_FEEDBACK } = i18n;
   const formatFocus = state.formatFocus || null;
   const channels = state.channels || [];
   const setFocus = (focus) => update({ formatFocus: focus });
@@ -1764,38 +1986,38 @@ function Step9Formats({ state, update }) {
 
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Format & Channel Choices</h2>
-      <p className="text-sm text-gray-500 mt-1 mb-2">Your format focus tells the catalog planner whether to optimize for visual-first short-form content or deep long-form books. Your channel selections determine where your brand publishes — each active channel adds content weight to the pipeline, meaning more formats, more variations, and more touchpoints with your audience.</p>
+      <h2 className="text-2xl font-extrabold text-white tracking-tight">Format & Channel Choices</h2>
+      <p className="text-sm text-white mt-1 mb-2">Your format focus tells the catalog planner whether to optimize for visual-first short-form content or deep long-form books. Your channel selections determine where your brand publishes — each active channel adds content weight to the pipeline, meaning more formats, more variations, and more touchpoints with your audience.</p>
 
-      <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3 mt-6">Primary Format Focus</div>
-      <p className="text-[11px] text-gray-500 mb-3">This is the most important format decision. It changes how the catalog planner distributes content across your entire brand.</p>
+      <div className="text-xs font-bold uppercase tracking-wider text-white mb-3 mt-6">Primary Format Focus</div>
+      <p className="text-[11px] text-white mb-3">This is the most important format decision. It changes how the catalog planner distributes content across your entire brand.</p>
       <div className="grid grid-cols-2 gap-3 mb-8">
         <button onClick={() => setFocus("manga")}
           className={`p-5 rounded-xl border-2 text-left transition-all ${formatFocus === "manga" ? "border-gray-900 bg-gray-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}>
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-purple-600 flex items-center justify-center mb-3"><Image size={24} className="text-white" /></div>
-          <div className="text-sm font-bold text-gray-900">Manga / Visual</div>
-          <p className="text-[11px] text-gray-500 mt-1 leading-relaxed">Illustrated panels, visual storytelling, manga-style layouts. Audiobooks default to short formats (15-30 min). Optimized for Gen Z and Gen Alpha visual-first consumption.</p>
+          <div className="text-sm font-bold text-white">Manga / Visual</div>
+          <p className="text-[11px] text-white mt-1 leading-relaxed">Illustrated panels, visual storytelling, manga-style layouts. Audiobooks default to short formats (15-30 min). Optimized for Gen Z and Gen Alpha visual-first consumption.</p>
           {formatFocus === "manga" && <div className="mt-2 bg-rose-50 rounded-lg p-2"><p className="text-[10px] text-rose-700">Catalog planner will prioritize short-form audiobooks, visual content, and illustration-heavy formats across all channels.</p></div>}
         </button>
         <button onClick={() => setFocus("book")}
           className={`p-5 rounded-xl border-2 text-left transition-all ${formatFocus === "book" ? "border-gray-900 bg-gray-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}>
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-3"><BookOpen size={24} className="text-white" /></div>
-          <div className="text-sm font-bold text-gray-900">Traditional Books</div>
-          <p className="text-[11px] text-gray-500 mt-1 leading-relaxed">Full-length narrative books, deep guided programs, comprehensive workbooks. Audiobooks in long formats (3-8 hrs). Optimized for depth-seeking readers.</p>
+          <div className="text-sm font-bold text-white">Traditional Books</div>
+          <p className="text-[11px] text-white mt-1 leading-relaxed">Full-length narrative books, deep guided programs, comprehensive workbooks. Audiobooks in long formats (3-8 hrs). Optimized for depth-seeking readers.</p>
           {formatFocus === "book" && <div className="mt-2 bg-amber-50 rounded-lg p-2"><p className="text-[10px] text-amber-700">Catalog planner will prioritize long-form books, complete programs, and in-depth series across all channels.</p></div>}
         </button>
       </div>
-      {formatFocus && SELECTION_FEEDBACK.formats[formatFocus] && (
+      {formatFocus && _SF.formats[formatFocus] && (
         <SelectionFeedback
-          systemEffect={SELECTION_FEEDBACK.formats[formatFocus].systemEffect}
-          emotionalBenefit={SELECTION_FEEDBACK.formats[formatFocus].emotionalBenefit}
+          systemEffect={_SF.formats[formatFocus].systemEffect}
+          emotionalBenefit={_SF.formats[formatFocus].emotionalBenefit}
           color={formatFocus === "manga" ? "#e11d48" : "#d97706"}
         />
       )}
       <div className="mb-4" />
 
-      <div className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Publishing Channels</div>
-      <p className="text-[11px] text-gray-500 mb-3">Select all channels you want your brand to publish through. Each channel generates dedicated content adapted for that platform's format, audience, and algorithm requirements.</p>
+      <div className="text-xs font-bold uppercase tracking-wider text-white mb-3">Publishing Channels</div>
+      <p className="text-[11px] text-white mb-3">Select all channels you want your brand to publish through. Each channel generates dedicated content adapted for that platform's format, audience, and algorithm requirements.</p>
       <div className="grid grid-cols-1 gap-2">
         {CHANNELS.map((ch) => {
           const active = channels.includes(ch.id);
@@ -1804,14 +2026,14 @@ function Step9Formats({ state, update }) {
             <button key={ch.id} onClick={() => toggleChannel(ch.id)}
               className={`flex items-start gap-3 p-3.5 rounded-xl border-2 text-left transition-all ${active ? "border-gray-900 bg-gray-50" : "border-gray-200 bg-white hover:border-gray-300"}`}>
               <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${active ? "bg-gray-900" : "bg-gray-100"}`}>
-                <Icon size={16} className={active ? "text-white" : "text-gray-400"} />
+                <Icon size={16} className={active ? "text-white" : "text-white"} />
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-gray-900">{ch.label}</span>
-                  {active && <Check size={14} className="text-gray-900" />}
+                  <span className="text-xs font-bold text-white">{ch.label}</span>
+                  {active && <Check size={14} className="text-white" />}
                 </div>
-                <p className="text-[10px] text-gray-500 mt-0.5">{ch.desc}</p>
+                <p className="text-[10px] text-white mt-0.5">{ch.desc}</p>
                 {active && ch.benefit && (
                   <div className="mt-1.5 flex items-start gap-1.5">
                     <Heart size={9} className="text-rose-400 flex-shrink-0 mt-0.5" />
@@ -1827,7 +2049,550 @@ function Step9Formats({ state, update }) {
   );
 }
 
-function Step10Blueprint({ state }) {
+function StepBrandReveal({ state, i18n = {} }) {
+  const { tArchetypes: _A = ARCHETYPES, tPersonas: _P = PERSONAS, tMoments: _M = MOMENTS, tVisualStyles: _V = VISUAL_STYLES, tEmotionCategories: _EC = EMOTION_CATEGORIES, tAngleFeedback: _AF = ANGLE_FEEDBACK, tSelectionFeedback: _SF = SELECTION_FEEDBACK, tProven: _PR = PROVEN } = i18n;
+  const arch = _A.find((a) => a.id === state.archetype);
+  const persona = _P.find((p) => p.id === state.persona);
+  const moment = _M.find((m) => m.id === state.moment);
+  const visual = _V.find((v) => v.id === state.visualStyle);
+  const emotions = state.emotions || [];
+  const topics = state.topicTags || [];
+
+  // Derive topic+angle pairs
+  const topicAnglePairs = topics.map(tagId => {
+    for (const cat of TOPIC_CATEGORIES) {
+      const found = cat.tags.find(t => t.id === tagId);
+      if (found) return { tagId, angle: found.angle, bullet: found.bullet, category: cat.label, catIcon: cat.icon, catColor: cat.color };
+    }
+    return null;
+  }).filter(Boolean);
+  const uniqueAngles = [...new Set(topicAnglePairs.map(p => p.angle))];
+
+  // Voice positions
+  const voicePositions = VOICE_SLIDERS.map(s => {
+    const val = state.voiceSettings?.[s.id] ?? s.default;
+    const snapIdx = snap5(val);
+    return { ...s, position: VOICE_5_STOPS[snapIdx] };
+  });
+
+  // Derive voice descriptors
+  const voiceDesc = voicePositions.map(v => {
+    const p = v.position;
+    if (v.id === "gentleDirect") return p <= 3 ? "permission-giving" : p >= 8 ? "commanding" : "balanced";
+    if (v.id === "simpleDeep") return p <= 3 ? "accessible" : p >= 8 ? "layered" : "mid-depth";
+    if (v.id === "emotionalLogical") return p <= 3 ? "story-led" : p >= 8 ? "data-driven" : "balanced";
+    if (v.id === "spiritualPractical") return p <= 3 ? "contemplative" : p >= 8 ? "tactical" : "blended";
+    return "";
+  });
+
+  // Generate true category statement
+  const trueCategory = arch && persona
+    ? `${arch.name} for ${persona.label}${moment ? ` — catching them at "${moment.label}"` : ""}`
+    : arch ? arch.name : "Your Brand";
+
+  // Content engine steps derived from voice + angle mix
+  const engineSteps = [
+    { step: "Name the Problem", desc: moment ? `Open with "${moment.scene}" — your reader's exact moment` : "Open with the reader's exact pain point", icon: "🎯" },
+    { step: "Reframe Identity", desc: `Use ${uniqueAngles.includes("debunk") ? "debunk" : uniqueAngles.includes("reveal") ? "reveal" : "origin"} angles to shift their self-story`, icon: "🪞" },
+    { step: "Give a Micro-Tool", desc: `Deliver ${uniqueAngles.includes("framework") ? "a framework they can use tonight" : "an actionable insight they can apply immediately"}`, icon: "🔧" },
+    { step: "Land in Emotion", desc: emotions.length > 0 ? `Every piece ends at: "${emotions[0]}"` : "Every piece ends in the promised feeling", icon: "💫" },
+  ];
+
+  // Unfair advantage loop
+  const loopSteps = [
+    { label: "Reframe", desc: "Break their old story", color: "#6366f1" },
+    { label: "Regulate", desc: "Calm the nervous system", color: "#059669" },
+    { label: "Restore", desc: "Rebuild from the body up", color: "#f59e0b" },
+    { label: "Reorient", desc: "Point toward new identity", color: "#f43f5e" },
+  ];
+
+  // Positioning map coords — Gentle↔Direct on X, Simple↔Deep on Y
+  const posX = voicePositions.find(v => v.id === "gentleDirect")?.position || 5;
+  const posY = voicePositions.find(v => v.id === "simpleDeep")?.position || 5;
+
+  // Emotional staircase — build ascending steps from trigger to each emotion
+  const staircaseSteps = [
+    { label: moment ? moment.label : "Pain Point", color: "#f43f5e", sub: "Where they start" },
+    ...emotions.slice(0, 5).map((e, i) => {
+      const cat = _EC.find(c => c.items.includes(e));
+      return { label: e, color: cat?.color || "#6366f1", sub: cat?.name || "" };
+    }),
+  ];
+
+  return (
+    <div>
+      <StepHero
+        eyebrow="Reveal"
+        title="Here is your brand"
+        subtitle=""
+      />
+
+      {/* ═══ 1. TRUE CATEGORY — gradient banner ═══ */}
+      {arch && (
+        <div id="rev-category" className={`mb-6 rounded-2xl border-2 p-6 bg-gradient-to-br ${arch.gradient} shadow-lg`}>
+          <div className="text-center">
+            <div className="text-white/70 text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Your True Category</div>
+            <div className="text-white text-xl font-extrabold mb-2">{trueCategory}</div>
+            <div className="text-white/80 text-sm leading-relaxed">{arch.tagline}</div>
+            {arch.visionVibe && <p className="mt-3 text-white/70 text-[11px] leading-relaxed max-w-md mx-auto italic">{arch.visionVibe}</p>}
+          </div>
+        </div>
+      )}
+
+      {/* ═══ 2. VOICE SIGNATURE — circular gauges ═══ */}
+      {Object.keys(state.voiceSettings || {}).length > 0 && (
+        <div id="rev-voice" className="mb-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Voice Signature</div>
+          <div className="grid grid-cols-4 gap-3">
+            {voicePositions.map((s) => {
+              const pct = (s.position / 10) * 100;
+              return (
+                <div key={s.id} className="text-center">
+                  <div className="relative mx-auto mb-2 w-14 h-14">
+                    <svg viewBox="0 0 64 64" className="w-full h-full -rotate-90">
+                      <circle cx="32" cy="32" r="26" fill="none" stroke="#f3f4f6" strokeWidth="5" />
+                      <circle cx="32" cy="32" r="26" fill="none" stroke={s.color} strokeWidth="5" strokeLinecap="round" strokeDasharray={`${pct * 1.63} 163`} />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-xs font-black text-white">{s.position}</span>
+                    </div>
+                  </div>
+                  <div className="text-[9px] font-bold text-white">{s.left}</div>
+                  <div className="text-[8px] text-white/80">{s.right}</div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-3 text-center text-[10px] text-white/80">
+            Your voice is <span className="text-white font-semibold">{voiceDesc.join(" · ")}</span>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ 2b. POSITIONING MAP — 2D quadrant ═══ */}
+      <div id="rev-positioning" className="mb-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Positioning Map</div>
+        <div className="text-[10px] text-white/70 mb-3 text-center">Where your voice sits in the market landscape</div>
+        <svg viewBox="0 0 300 300" className="w-full max-w-[280px] mx-auto">
+          {/* Quadrant background */}
+          <rect x="30" y="10" width="130" height="130" fill="#6366f115" rx="4" />
+          <rect x="160" y="10" width="130" height="130" fill="#05966915" rx="4" />
+          <rect x="30" y="140" width="130" height="130" fill="#f59e0b15" rx="4" />
+          <rect x="160" y="140" width="130" height="130" fill="#f43f5e15" rx="4" />
+          {/* Axes */}
+          <line x1="30" y1="140" x2="290" y2="140" stroke="#e5e7eb" strokeWidth="1" />
+          <line x1="160" y1="10" x2="160" y2="270" stroke="#e5e7eb" strokeWidth="1" />
+          {/* Axis labels */}
+          <text x="30" y="285" fontSize="9" fill="#9ca3af" fontWeight="bold">Gentle</text>
+          <text x="265" y="285" fontSize="9" fill="#9ca3af" fontWeight="bold">Direct</text>
+          <text x="5" y="15" fontSize="9" fill="#9ca3af" fontWeight="bold" transform="rotate(-90 10 15)">Deep</text>
+          <text x="5" y="275" fontSize="9" fill="#9ca3af" fontWeight="bold" transform="rotate(-90 10 275)">Simple</text>
+          {/* Quadrant labels */}
+          <text x="95" y="75" textAnchor="middle" fontSize="8" fill="#6366f1" fontWeight="600">Wise Guide</text>
+          <text x="225" y="75" textAnchor="middle" fontSize="8" fill="#059669" fontWeight="600">Expert Coach</text>
+          <text x="95" y="210" textAnchor="middle" fontSize="8" fill="#f59e0b" fontWeight="600">Warm Friend</text>
+          <text x="225" y="210" textAnchor="middle" fontSize="8" fill="#f43f5e" fontWeight="600">Bold Mentor</text>
+          {/* Brand dot */}
+          {(() => {
+            const dotX = 30 + (posX / 10) * 260;
+            const dotY = 270 - (posY / 10) * 260;
+            return (<>
+              <circle cx={dotX} cy={dotY} r="14" fill="#6366f1" fillOpacity="0.15" stroke="#6366f1" strokeWidth="2" />
+              <circle cx={dotX} cy={dotY} r="6" fill="#6366f1" />
+              <text x={dotX} y={dotY - 20} textAnchor="middle" fontSize="9" fill="#6366f1" fontWeight="bold">You</text>
+            </>);
+          })()}
+        </svg>
+      </div>
+
+      {/* ═══ 3. VISUAL IDENTITY + MARKET DATA ═══ */}
+      {visual && (() => {
+        const vm = VISUAL_MARKET[visual.id] || {};
+        const bars = [
+          { label: "Shelf Appeal", val: vm.shelf || 0, color: "#f59e0b" },
+          { label: "Trust Signal", val: vm.trust || 0, color: "#059669" },
+          { label: "Social Share", val: vm.social || 0, color: "#6366f1" },
+          { label: "Premium Feel", val: vm.premium || 0, color: "#7c3aed" },
+        ];
+        return (
+          <div id="rev-visual" className="mb-6 rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
+            <div className="flex items-center gap-0 border-b border-gray-100">
+              {visual.palette.map((col, i) => (
+                <div key={i} className="flex-1 h-12" style={{ backgroundColor: col }} />
+              ))}
+            </div>
+            <div className="p-4">
+              <div className="text-[10px] font-bold uppercase text-white">Visual Identity</div>
+              <div className="mt-1 text-base font-bold text-white">{visual.label}</div>
+              <p className="mt-1 text-[11px] text-white italic">{visual.mood}</p>
+            </div>
+            <div className="px-4 pb-4">
+              <div className="text-[9px] font-bold uppercase tracking-wider text-white mb-2">Market Scores</div>
+              <div className="space-y-2">
+                {bars.map(b => (
+                  <div key={b.label} className="flex items-center gap-2">
+                    <span className="text-[9px] text-white w-20 flex-shrink-0">{b.label}</span>
+                    <div className="flex-1 h-3 bg-gray-800/30 rounded-lg overflow-hidden">
+                      <div data-bar className="h-full rounded-lg transition-all duration-700" style={{ width: `${b.val}%`, backgroundColor: b.color }} />
+                    </div>
+                    <span className="text-[10px] font-bold w-7 text-right" style={{ color: b.color }}>{b.val}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-violet-100 text-white font-bold">Rank #{vm.rank || '—'}</span>
+                <span className="text-[9px] text-white/70">{vm.demo}</span>
+              </div>
+              <p className="mt-2 text-[10px] text-white/80 leading-relaxed italic">{vm.superpower}</p>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* ═══ 4. EMOTIONAL STAIRCASE ═══ */}
+      {staircaseSteps.length > 1 && (
+        <div id="rev-emotion" className="mb-6 rounded-2xl border border-rose-200/80 bg-gradient-to-br from-rose-50/60 to-white p-5 shadow-sm">
+          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Emotional Staircase</div>
+          <div className="text-[10px] text-white/70 mb-4">Your reader ascends from pain to promise — each step builds on the last</div>
+          <div className="flex items-end gap-2" style={{ height: "180px" }}>
+            {staircaseSteps.map((s, i) => {
+              const heightPx = 40 + (i / Math.max(staircaseSteps.length - 1, 1)) * 140;
+              return (
+                <div key={i} className="flex-1 flex flex-col items-center" style={{ height: "100%", justifyContent: "flex-end" }}>
+                  <div className="text-[9px] font-bold text-white text-center mb-1 leading-tight">{s.label}</div>
+                  <div className="w-full rounded-t-lg relative" style={{ height: `${heightPx}px`, backgroundColor: s.color + '30', borderLeft: `3px solid ${s.color}`, borderTop: `3px solid ${s.color}`, borderRight: `1px solid ${s.color}40` }}>
+                    <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-black text-white" style={{ backgroundColor: s.color }}>{i + 1}</div>
+                    <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 text-[7px] text-white/70 whitespace-nowrap">{s.sub}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-4 flex justify-center gap-3">
+            {_EC.map((cat) => {
+              const selected = emotions.find(e => cat.items.includes(e));
+              return (
+                <div key={cat.name} className={`text-center ${selected ? '' : 'opacity-20'}`}>
+                  <div className="text-base">{cat.icon}</div>
+                  <div className="text-[7px] text-white/70">{selected || '—'}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* ═══ 5. TOPIC ANGLE STRATEGY ═══ */}
+      {topicAnglePairs.length > 0 && (
+        <div id="rev-topics" className="mb-6 rounded-2xl border border-indigo-200/80 bg-gradient-to-br from-indigo-50/60 to-white p-5 shadow-sm">
+          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Topic × Angle Strategy</div>
+          <div className="space-y-4">
+            {topicAnglePairs.map(p => {
+              const af = _AF[p.angle];
+              const am = ANGLE_MARKET[p.angle] || {};
+              const tm = TOPIC_MARKET[p.category] || {};
+              const comboScore = Math.round(((am.viral || 0) + (am.conversion || 0) + (tm.search || 0) + (tm.monetization || 0)) / 4);
+              return (
+                <div key={p.tagId} className="rounded-xl p-3 border" style={{ borderColor: p.catColor + '30', backgroundColor: p.catColor + '06' }}>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-sm">{p.catIcon}</span>
+                    <span className="text-[11px] font-bold text-white flex-1">{p.tagId.replace(/-/g, " ")}</span>
+                    <span className="text-[9px] px-2 py-0.5 rounded-full font-bold" style={{ backgroundColor: p.catColor + '15', color: p.catColor }}>{af?.icon} {af?.label}</span>
+                  </div>
+                  <p className="text-[10px] text-white/70 leading-relaxed mb-2">{p.bullet}</p>
+                  {/* Market mini-bars */}
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+                    {[
+                      { label: "Viral", val: am.viral, color: "#f43f5e" },
+                      { label: "Search", val: tm.search, color: "#0ea5e9" },
+                      { label: "Convert", val: am.conversion, color: "#059669" },
+                      { label: "Growth", val: tm.growth, color: "#f59e0b" },
+                    ].map(b => (
+                      <div key={b.label} className="flex items-center gap-1.5">
+                        <span className="text-[8px] text-white/70 w-10 flex-shrink-0">{b.label}</span>
+                        <div className="flex-1 h-2 bg-gray-800/30 rounded-lg overflow-hidden">
+                          <div data-bar className="h-full rounded-lg" style={{ width: `${b.val || 0}%`, backgroundColor: b.color }} />
+                        </div>
+                        <span className="text-[8px] font-bold w-5 text-right" style={{ color: b.color }}>{b.val || 0}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-2 flex items-center gap-2">
+                    <span className="text-[9px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: comboScore >= 75 ? '#05966920' : comboScore >= 60 ? '#f59e0b20' : '#f43f5e20', color: comboScore >= 75 ? '#059669' : comboScore >= 60 ? '#f59e0b' : '#f43f5e' }}>
+                      Combo Score: {comboScore}
+                    </span>
+                    <span className="text-[8px] text-white/70">{tm.platform && `Best on ${tm.platform}`}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {uniqueAngles.map(a => {
+              const info = _AF[a];
+              return <span key={a} className="text-[9px] bg-indigo-100 text-white px-2 py-1 rounded-full font-semibold">{info?.icon} {info?.label}</span>;
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* ═══ 6. CONTENT ENGINE FORMULA — dashboard flow ═══ */}
+      <div id="rev-engine" className="mb-6 rounded-2xl border border-amber-200/80 bg-gradient-to-br from-amber-50/40 to-white p-5 shadow-sm">
+        <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-1">Content Engine Formula</div>
+        <div className="text-[10px] text-white/70 mb-5">Every piece of content follows this sequence — your unique flywheel</div>
+        {/* Horizontal flow */}
+        <div className="grid grid-cols-4 gap-0 relative">
+          {engineSteps.map((s, i) => (
+            <div key={i} className="relative flex flex-col items-center text-center">
+              {/* Connector line */}
+              {i < engineSteps.length - 1 && (
+                <div className="absolute top-5 left-[55%] w-[90%] h-0.5 z-0" style={{ background: 'linear-gradient(90deg, #b45309, #d9770640)' }} />
+              )}
+              {/* Number circle */}
+              <div className="relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-lg mb-2" style={{ backgroundColor: '#b4530920', border: '2px solid #b45309' }}>
+                {s.icon}
+              </div>
+              {/* Step number */}
+              <div className="text-[8px] font-bold uppercase tracking-widest text-white/50 mb-1">Step {i + 1}</div>
+              {/* Title */}
+              <div className="text-[11px] font-bold text-white leading-tight mb-1">{s.step}</div>
+              {/* Description */}
+              <div className="text-[9px] text-white/70 leading-relaxed px-1">{s.desc}</div>
+            </div>
+          ))}
+        </div>
+        {/* Repeat arrow */}
+        <div className="mt-4 flex items-center justify-center gap-2">
+          <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, #b4530940, transparent)' }} />
+          <span className="text-[9px] font-bold text-white/50 uppercase tracking-wider">↻ Repeat with every piece</span>
+          <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, #b4530940, transparent)' }} />
+        </div>
+      </div>
+
+      {/* ═══ 7. UNFAIR ADVANTAGE LOOP — circular diagram ═══ */}
+      <div id="rev-loop" className="mb-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Unfair Advantage Loop</div>
+        <div className="text-[10px] text-white/70 mb-4 text-center">Every piece of content feeds the next — each exit is an entrance to deeper transformation</div>
+        <svg viewBox="0 0 320 320" className="w-full max-w-[300px] mx-auto">
+          {/* Connecting arc arrows */}
+          <defs>
+            <marker id="loopArrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#6b7280" />
+            </marker>
+          </defs>
+          {/* Curved paths between nodes */}
+          <path d="M 205 68 Q 250 100 245 155" fill="none" stroke="#6b728040" strokeWidth="2" markerEnd="url(#loopArrow)" />
+          <path d="M 245 195 Q 250 250 205 270" fill="none" stroke="#6b728040" strokeWidth="2" markerEnd="url(#loopArrow)" />
+          <path d="M 115 270 Q 70 250 65 195" fill="none" stroke="#6b728040" strokeWidth="2" markerEnd="url(#loopArrow)" />
+          <path d="M 65 155 Q 70 100 115 68" fill="none" stroke="#6b728040" strokeWidth="2" markerEnd="url(#loopArrow)" />
+          {/* Center label */}
+          <text x="160" y="156" textAnchor="middle" fontSize="9" fill="#9ca3af" fontWeight="bold">↻ LOOP</text>
+          <text x="160" y="170" textAnchor="middle" fontSize="7" fill="#6b7280">repeats</text>
+          {/* Nodes */}
+          {loopSteps.map((s, i) => {
+            const positions = [
+              { x: 160, y: 52 },   // top
+              { x: 262, y: 168 },  // right
+              { x: 160, y: 280 },  // bottom
+              { x: 58, y: 168 },   // left
+            ];
+            const { x, y } = positions[i];
+            return (
+              <g key={i}>
+                <circle cx={x} cy={y} r="44" fill={s.color + '12'} stroke={s.color} strokeWidth="2.5" />
+                <circle cx={x} cy={y - 10} r="12" fill={s.color} />
+                <text x={x} y={y - 6} textAnchor="middle" fontSize="11" fontWeight="900" fill="white">{i + 1}</text>
+                <text x={x} y={y + 10} textAnchor="middle" fontSize="12" fontWeight="bold" fill={s.color}>{s.label}</text>
+                <text x={x} y={y + 24} textAnchor="middle" fontSize="8" fill="#9ca3af">{s.desc}</text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      {/* ═══ 8. AUDIENCE EXPERIENCE WALKTHROUGH ═══ */}
+      {persona && moment && (
+        <div id="rev-journey" className="mb-6 rounded-2xl border border-emerald-200/80 bg-gradient-to-br from-emerald-50/40 to-white p-5 shadow-sm">
+          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Audience Experience</div>
+          <div className="text-[10px] text-white/70 mb-3">How {persona.emoji} {persona.label} experiences your brand:</div>
+          <div className="flex flex-col items-center gap-1.5">
+            {[
+              { phase: "Trigger", desc: `${moment.emoji} ${moment.scene}`, color: "#f43f5e", bg: "bg-rose-50" },
+              { phase: "Discovery", desc: `They find your content — the hook names their exact pain`, color: "#f59e0b", bg: "bg-amber-50" },
+              { phase: "Trust", desc: `Your ${voiceDesc[0]} voice makes them feel ${voiceDesc[2]} — not lectured, understood`, color: "#3b82f6", bg: "bg-blue-50" },
+              { phase: "Shift", desc: emotions[0] ? `They start to feel: "${emotions[0]}"` : "The promised emotion lands", color: "#059669", bg: "bg-emerald-50" },
+              { phase: "Return", desc: `They come back because every piece delivers the same transformation at deeper levels`, color: "#7c3aed", bg: "bg-violet-50" },
+            ].reverse().map((p, i, arr) => {
+              const widthPct = 40 + ((arr.length - 1 - i) / (arr.length - 1)) * 60;
+              const stepNum = arr.length - i;
+              return (
+                <div key={i} className={`rounded-xl p-3 ${p.bg} border transition-all`} style={{ width: `${widthPct}%`, borderColor: p.color + '40' }}>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-black text-white" style={{ backgroundColor: p.color }}>{stepNum}</div>
+                    <span className="text-[10px] font-bold" style={{ color: p.color }}>{p.phase}</span>
+                  </div>
+                  <p className="text-[9px] text-white/70 mt-1 leading-relaxed">{p.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* ═══ 9. VOICE × TOPIC SYNERGY — research-scored ═══ */}
+      {topicAnglePairs.length > 0 && (
+        <div id="rev-synergy" className="mb-6 rounded-2xl border border-violet-200/80 bg-gradient-to-br from-violet-50/40 to-white p-5 shadow-sm">
+          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Voice × Topic Synergy</div>
+          <div className="text-[10px] text-white/70 mb-3">How well your voice tone amplifies each content angle</div>
+          <div className="space-y-3">
+            {topicAnglePairs.map((p, i) => {
+              const af = _AF[p.angle];
+              const score = calcSynergyScore(voicePositions, p.angle);
+              const multiplier = (0.5 + (score / 100) * 1.5).toFixed(1);
+              const barColor = p.catColor;
+              const gentlePos = voicePositions.find(v => v.id === "gentleDirect")?.position || 5;
+              const toneWord = gentlePos <= 3 ? "gently" : gentlePos >= 8 ? "directly" : "clearly";
+              return (
+                <div key={i} className="rounded-xl bg-white p-3 border border-violet-100">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm">{p.catIcon}</span>
+                    <span className="text-[10px] text-white flex-1">
+                      You <strong>{toneWord}</strong> {af?.label?.toLowerCase()} <strong>{p.tagId.replace(/-/g, " ")}</strong>
+                    </span>
+                    <span className="text-[9px]">{af?.icon}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-3 bg-gray-800/30 rounded-lg overflow-hidden">
+                      <div data-bar className="h-full rounded-lg transition-all duration-700" style={{ width: `${score}%`, backgroundColor: barColor }} />
+                    </div>
+                    <span className="text-[11px] font-black w-8 text-right" style={{ color: barColor }}>{score}</span>
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full" style={{ backgroundColor: barColor + '15', color: barColor }}>{multiplier}x</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          {/* Average synergy */}
+          {(() => {
+            const avgSynergy = Math.round(topicAnglePairs.reduce((s, p) => s + calcSynergyScore(voicePositions, p.angle), 0) / topicAnglePairs.length);
+            const avgColor = avgSynergy >= 75 ? '#059669' : avgSynergy >= 50 ? '#f59e0b' : '#f43f5e';
+            return (
+              <div className="mt-3 flex items-center justify-between rounded-lg bg-violet-50 border border-violet-100 p-2.5">
+                <span className="text-[10px] font-bold text-white">Overall Voice Fit</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-lg font-black" style={{ color: avgColor }}>{avgSynergy}</span>
+                  <span className="text-[9px] text-white/70">/100</span>
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+      )}
+
+
+
+
+      {/* ═══ 13. BRAND STRENGTH — research-scored ═══ */}
+      {(() => {
+        // Visual market scores
+        const vm = VISUAL_MARKET[visual?.id] || {};
+        const visualAvg = vm.shelf ? Math.round((vm.shelf + vm.trust + vm.social + vm.premium) / 4) : 0;
+
+        // Angle+topic combo scores — average across all selected pairs
+        const pairScores = topicAnglePairs.map(p => {
+          const am = ANGLE_MARKET[p.angle] || {};
+          const tm = TOPIC_MARKET[p.category] || {};
+          return {
+            viral: am.viral || 0, trust: am.trust || 0, conversion: am.conversion || 0, seo: am.seo || 0,
+            search: tm.search || 0, growth: tm.growth || 0, monetization: tm.monetization || 0,
+          };
+        });
+        const avg = (key) => pairScores.length ? Math.round(pairScores.reduce((s, p) => s + p[key], 0) / pairScores.length) : 0;
+
+        // 6-axis radar: Visual, Viral, Trust, Conversion, SEO, Growth
+        const dims = [
+          { label: "Visual", val: visualAvg, color: "#7c3aed" },
+          { label: "Viral", val: avg("viral"), color: "#f43f5e" },
+          { label: "Trust", val: avg("trust"), color: "#059669" },
+          { label: "Convert", val: avg("conversion"), color: "#f59e0b" },
+          { label: "SEO", val: avg("seo"), color: "#0ea5e9" },
+          { label: "Growth", val: avg("growth"), color: "#6366f1" },
+        ];
+        const overallScore = Math.round(dims.reduce((s, d) => s + d.val, 0) / dims.length);
+        const sides = 6, cx = 150, cy = 110, r = 75;
+
+        return (
+          <div id="rev-radar" className="mb-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+            <div className="flex items-center justify-between mb-3">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-white">Brand Strength</div>
+              <div className="flex items-center gap-2">
+                <span className={`text-lg font-black ${overallScore >= 75 ? 'text-emerald-500' : overallScore >= 55 ? 'text-amber-500' : 'text-rose-400'}`}>{overallScore}</span>
+                <span className="text-[9px] text-white/70">/100</span>
+              </div>
+            </div>
+            <svg viewBox="0 0 300 230" className="w-full" style={{ height: "220px" }}>
+              {(() => {
+                const outerPts = [], innerPts = [];
+                for (let i = 0; i < sides; i++) {
+                  const angle = (Math.PI * 2 * i) / sides - Math.PI / 2;
+                  outerPts.push(`${cx + r * Math.cos(angle)},${cy + r * Math.sin(angle)}`);
+                  const val = dims[i].val / 100;
+                  innerPts.push(`${cx + r * val * Math.cos(angle)},${cy + r * val * Math.sin(angle)}`);
+                }
+                return (<>
+                  <polygon fill="none" stroke="#e5e7eb" strokeWidth="1" points={outerPts.join(" ")} />
+                  <polygon fill="none" stroke="#e5e7eb" strokeWidth="0.5" strokeDasharray="3" points={outerPts.map((_, i) => { const a = (Math.PI * 2 * i) / sides - Math.PI / 2; return `${cx + r * 0.5 * Math.cos(a)},${cy + r * 0.5 * Math.sin(a)}`; }).join(" ")} />
+                  <polygon fill="#6366f1" fillOpacity="0.12" stroke="#6366f1" strokeWidth="2.5" points={innerPts.join(" ")} />
+                  {dims.map((d, i) => {
+                    const a = (Math.PI * 2 * i) / sides - Math.PI / 2;
+                    const lx = cx + (r + 22) * Math.cos(a);
+                    const ly = cy + (r + 22) * Math.sin(a);
+                    return (<g key={d.label}>
+                      <text x={lx} y={ly - 5} textAnchor="middle" dominantBaseline="middle" fontSize="10" fontWeight="bold" fill={d.color}>{d.val}</text>
+                      <text x={lx} y={ly + 7} textAnchor="middle" dominantBaseline="middle" fontSize="8" fontWeight="600" fill="#9ca3af">{d.label}</text>
+                    </g>);
+                  })}
+                  {dims.map((d, i) => { const a = (Math.PI * 2 * i) / sides - Math.PI / 2; const val = d.val / 100; return (<circle key={i} cx={cx + r * val * Math.cos(a)} cy={cy + r * val * Math.sin(a)} r="4" fill={d.color} stroke="white" strokeWidth="2" />); })}
+                </>);
+              })()}
+            </svg>
+            {/* Score breakdown bars */}
+            <div className="space-y-1.5 mt-2">
+              {dims.map(d => (
+                <div key={d.label} className="flex items-center gap-2">
+                  <span className="text-[8px] text-white/70 w-12 flex-shrink-0">{d.label}</span>
+                  <div className="flex-1 h-2 bg-gray-800/30 rounded-lg overflow-hidden">
+                    <div data-bar className="h-full rounded-lg transition-all duration-700" style={{ width: `${d.val}%`, backgroundColor: d.color }} />
+                  </div>
+                  <span className="text-[9px] font-bold w-6 text-right" style={{ color: d.color }}>{d.val}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* ═══ 14. ONE-SENTENCE SYNTHESIS ═══ */}
+      {arch && persona && (
+        <div id="rev-synthesis" className="rounded-2xl border-2 border-violet-300 bg-gradient-to-br from-violet-900 to-indigo-900 p-6 shadow-lg">
+          <div className="text-violet-300/70 text-[10px] font-bold uppercase tracking-[0.3em] mb-3 text-center">Brand Synthesis</div>
+          <p className="text-center text-white text-sm leading-relaxed font-medium">
+            You are <strong>{arch.name}</strong> — a {voiceDesc[0]}, {voiceDesc[1]} voice that catches{" "}
+            <strong>{persona.label}</strong>
+            {moment && <> at their <em>{moment.label.toLowerCase()}</em> moment</>},{" "}
+            {uniqueAngles.length > 0 && <>uses {uniqueAngles.map(a => _AF[a]?.label?.toLowerCase()).join(" + ")} angles to</>}{" "}
+            {emotions.length > 0
+              ? <>deliver one promise: <strong>"{emotions[0]}"</strong></>
+              : <>deliver transformation</>
+            }.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Step10Blueprint_UNUSED({ state }) {
   const arch = ARCHETYPES.find((a) => a.id === state.archetype);
   const persona = PERSONAS.find((p) => p.id === state.persona);
   const moment = MOMENTS.find((m) => m.id === state.moment);
@@ -1877,7 +2642,7 @@ function Step10Blueprint({ state }) {
 
       <div className="mb-6 rounded-2xl border border-indigo-100 bg-indigo-50/40 px-4 py-3">
         <p className="text-[10px] font-bold uppercase tracking-wider text-indigo-800">Audiobook voice — preview</p>
-        <p className="mt-1 text-[11px] text-gray-600">Regulating narrator on the comfort benchmark (registry: <span className="font-mono text-[10px]">cmp_voice_narrator_contrast_v1</span>).</p>
+        <p className="mt-1 text-[11px] text-white">Regulating narrator on the comfort benchmark (registry: <span className="font-mono text-[10px]">cmp_voice_narrator_contrast_v1</span>).</p>
         <audio className="mt-2 block h-9 w-full max-w-md" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_regulating_female.mp3" />
       </div>
 
@@ -1887,16 +2652,16 @@ function Step10Blueprint({ state }) {
           <div className="space-y-3">
             {arch ? (
               <div className={`rounded-2xl border-2 p-5 ${arch.bg} ${arch.border}`}>
-                <div className="text-[10px] font-bold uppercase text-gray-500">Emotional world</div>
-                <div className="mt-1 text-xl font-bold text-gray-900">{arch.name}</div>
-                <p className="mt-1 text-sm text-gray-700">{arch.tagline}</p>
+                <div className="text-[10px] font-bold uppercase text-white">Emotional world</div>
+                <div className="mt-1 text-xl font-bold text-white">{arch.name}</div>
+                <p className="mt-1 text-sm text-white">{arch.tagline}</p>
               </div>
             ) : null}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {persona ? (
                 <div className="rounded-2xl border border-violet-200/90 bg-white p-4 shadow-md ring-1 ring-violet-100/80">
                   <div className="text-[10px] font-bold uppercase text-violet-600/90">Primary reader</div>
-                  <div className="mt-1.5 text-base font-extrabold leading-snug text-gray-900 sm:text-lg">
+                  <div className="mt-1.5 text-base font-extrabold leading-snug text-white sm:text-lg">
                     {persona.emoji} {persona.label}
                   </div>
                 </div>
@@ -1904,15 +2669,15 @@ function Step10Blueprint({ state }) {
               {moment ? (
                 <div className="rounded-2xl border border-amber-200/90 bg-white p-4 shadow-md ring-1 ring-amber-100/80">
                   <div className="text-[10px] font-bold uppercase text-amber-700/90">Trigger moment</div>
-                  <div className="mt-1.5 text-base font-extrabold leading-snug text-gray-900 sm:text-lg">
+                  <div className="mt-1.5 text-base font-extrabold leading-snug text-white sm:text-lg">
                     {moment.emoji} {moment.label}
                   </div>
                 </div>
               ) : null}
               {state.tradition ? (
                 <div className="rounded-2xl border border-gray-200/90 bg-white/90 p-4 shadow-sm sm:col-span-2">
-                  <div className="text-[10px] font-bold uppercase text-gray-400">Tradition</div>
-                  <div className="mt-1 text-sm font-semibold text-gray-900">{state.tradition}</div>
+                  <div className="text-[10px] font-bold uppercase text-white">Tradition</div>
+                  <div className="mt-1 text-sm font-semibold text-white">{state.tradition}</div>
                 </div>
               ) : null}
             </div>
@@ -1931,9 +2696,9 @@ function Step10Blueprint({ state }) {
                 </div>
                 <div className="p-4">
                   <div className="text-[10px] font-bold uppercase text-violet-600">Visual style</div>
-                  <div className="mt-1 text-base font-bold text-gray-900">{visual.label}</div>
-                  <p className="mt-1 text-xs text-gray-600">{visual.desc}</p>
-                  <p className="mt-2 text-[11px] italic text-gray-500">{visual.mood}</p>
+                  <div className="mt-1 text-base font-bold text-white">{visual.label}</div>
+                  <p className="mt-1 text-xs text-white">{visual.desc}</p>
+                  <p className="mt-2 text-[11px] italic text-white">{visual.mood}</p>
                 </div>
               </div>
             ) : null}
@@ -1941,26 +2706,26 @@ function Step10Blueprint({ state }) {
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               {state.onboardingLane ? (
                 <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
-                  <div className="text-[8px] font-bold uppercase text-gray-400">Lane</div>
-                  <div className="mt-0.5 text-[11px] font-semibold text-gray-800">{state.onboardingLane.replace(/_/g, " ")}</div>
+                  <div className="text-[8px] font-bold uppercase text-white">Lane</div>
+                  <div className="mt-0.5 text-[11px] font-semibold text-white">{state.onboardingLane.replace(/_/g, " ")}</div>
                 </div>
               ) : null}
               {state.onboardingMarket ? (
                 <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
-                  <div className="text-[8px] font-bold uppercase text-gray-400">Market</div>
-                  <div className="mt-0.5 text-[11px] font-semibold text-gray-800">{state.onboardingMarket}</div>
+                  <div className="text-[8px] font-bold uppercase text-white">Market</div>
+                  <div className="mt-0.5 text-[11px] font-semibold text-white">{state.onboardingMarket}</div>
                 </div>
               ) : null}
               {state.formatFocus ? (
                 <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
-                  <div className="text-[8px] font-bold uppercase text-gray-400">Format</div>
-                  <div className="mt-0.5 text-[11px] font-semibold text-gray-800">{state.formatFocus === "manga" ? "Manga / visual" : "Books"}</div>
+                  <div className="text-[8px] font-bold uppercase text-white">Format</div>
+                  <div className="mt-0.5 text-[11px] font-semibold text-white">{state.formatFocus === "manga" ? "Manga / visual" : "Books"}</div>
                 </div>
               ) : null}
               {(state.channels || []).length > 0 ? (
                 <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
-                  <div className="text-[8px] font-bold uppercase text-gray-400">Channels</div>
-                  <div className="mt-0.5 text-[11px] font-semibold text-gray-800">{state.channels.length} active</div>
+                  <div className="text-[8px] font-bold uppercase text-white">Channels</div>
+                  <div className="mt-0.5 text-[11px] font-semibold text-white">{state.channels.length} active</div>
                 </div>
               ) : null}
             </div>
@@ -1986,10 +2751,10 @@ function Step10Blueprint({ state }) {
           ) : null}
           {(state.topicTags || []).length > 0 ? (
             <div className="mb-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-              <div className="text-[10px] font-bold uppercase text-gray-400">Topics ({state.topicTags.length})</div>
+              <div className="text-[10px] font-bold uppercase text-white">Topics ({state.topicTags.length})</div>
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {state.topicTags.map((t) => (
-                  <span key={t} className="rounded-full bg-gray-100 px-2.5 py-1 text-[10px] font-medium text-gray-800">
+                  <span key={t} className="rounded-full bg-gray-100 px-2.5 py-1 text-[10px] font-medium text-white">
                     {t.replace(/-/g, " ")}
                   </span>
                 ))}
@@ -1998,7 +2763,7 @@ function Step10Blueprint({ state }) {
           ) : null}
           {(state.angles || []).length > 0 ? (
             <div className="mb-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-              <div className="text-[10px] font-bold uppercase text-gray-400">Content angles</div>
+              <div className="text-[10px] font-bold uppercase text-white">Content angles</div>
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {state.angles.map((a) => {
                   const angle = V4_ANGLES.find((v) => v.id === a);
@@ -2023,7 +2788,7 @@ function Step10Blueprint({ state }) {
 
       {/* Demoted score strip — same numeric logic, after narrative sections */}
       <div className="mt-10 rounded-2xl border border-gray-100 bg-gray-50/60 px-3 py-3 opacity-90">
-        <div className="mb-2 text-center text-[9px] font-bold uppercase tracking-wider text-gray-400">Signal scores</div>
+        <div className="mb-2 text-center text-[9px] font-bold uppercase tracking-wider text-white">Signal scores</div>
         <div className="grid grid-cols-4 gap-2">
           {scores.map((s) => (
             <div key={s.label} className="rounded-lg bg-white/90 px-1 py-2 text-center shadow-sm">
@@ -2043,10 +2808,10 @@ function Step10Blueprint({ state }) {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xs font-black text-gray-800">{s.value}</span>
+                  <span className="text-xs font-black text-white">{s.value}</span>
                 </div>
               </div>
-              <div className="text-[8px] font-bold uppercase leading-tight text-gray-500">{s.label}</div>
+              <div className="text-[8px] font-bold uppercase leading-tight text-white">{s.label}</div>
             </div>
           ))}
         </div>
@@ -2055,7 +2820,8 @@ function Step10Blueprint({ state }) {
   );
 }
 
-function Step11Launch({ state, update }) {
+function Step11Launch({ state, update, i18n = {} }) {
+  const { tArchetypes: _A = ARCHETYPES, tPersonas: _P = PERSONAS, tMoments: _M = MOMENTS, tVisualStyles: _V = VISUAL_STYLES, tSelectionFeedback: _SF = SELECTION_FEEDBACK } = i18n;
   const handleField = (field, val) => update({ contact: { ...state.contact, [field]: val } });
   const c = state.contact || {};
   const isReady = c.firstName?.trim() && c.lastName?.trim() && c.email?.trim() && c.email?.includes("@");
@@ -2066,24 +2832,24 @@ function Step11Launch({ state, update }) {
   const handleLaunch = () => { setYamlOutput(generateYAML(state)); setSubmitted(true); };
 
   if (submitted) {
-    const arch = ARCHETYPES.find((a) => a.id === state.archetype);
-    const persona = PERSONAS.find((p) => p.id === state.persona);
-    const moment = MOMENTS.find((m) => m.id === state.moment);
-    const visual = VISUAL_STYLES.find((v) => v.id === state.visualStyle);
+    const arch = _A.find((a) => a.id === state.archetype);
+    const persona = _P.find((p) => p.id === state.persona);
+    const moment = _M.find((m) => m.id === state.moment);
+    const visual = _V.find((v) => v.id === state.visualStyle);
 
     const choiceAudit = [
-      arch && { label: "Emotional World", value: arch.name, icon: arch.icon, gradient: arch.gradient, systemEffect: SELECTION_FEEDBACK.archetypes[state.archetype]?.systemEffect, emotionalBenefit: SELECTION_FEEDBACK.archetypes[state.archetype]?.emotionalBenefit },
-      persona && { label: "Primary Reader", value: `${persona.emoji} ${persona.label}`, icon: Users, gradient: "from-blue-500 to-cyan-500", systemEffect: SELECTION_FEEDBACK.personas[state.persona]?.systemEffect, emotionalBenefit: SELECTION_FEEDBACK.personas[state.persona]?.emotionalBenefit },
-      moment && { label: "Trigger Moment", value: `${moment.emoji} ${moment.label}`, icon: Target, gradient: "from-amber-500 to-orange-500", systemEffect: SELECTION_FEEDBACK.moments[state.moment]?.systemEffect, emotionalBenefit: SELECTION_FEEDBACK.moments[state.moment]?.emotionalBenefit },
+      arch && { label: "Emotional World", value: arch.name, icon: arch.icon, gradient: arch.gradient, systemEffect: _SF.archetypes[state.archetype]?.systemEffect, emotionalBenefit: _SF.archetypes[state.archetype]?.emotionalBenefit },
+      persona && { label: "Primary Reader", value: `${persona.emoji} ${persona.label}`, icon: Users, gradient: "from-blue-500 to-cyan-500", systemEffect: _SF.personas[state.persona]?.systemEffect, emotionalBenefit: _SF.personas[state.persona]?.emotionalBenefit },
+      moment && { label: "Trigger Moment", value: `${moment.emoji} ${moment.label}`, icon: Target, gradient: "from-amber-500 to-orange-500", systemEffect: _SF.moments[state.moment]?.systemEffect, emotionalBenefit: _SF.moments[state.moment]?.emotionalBenefit },
       Object.keys(state.voiceSettings || {}).length > 0 && { label: "Voice Tone", value: `${Object.keys(state.voiceSettings).length} dimensions tuned`, icon: SlidersHorizontal, gradient: "from-indigo-500 to-violet-500", systemEffect: "All 4 voice dimensions calibrate prose rhythm, vocabulary register, sentence structure, and emotional temperature across every chapter, audiobook, and social post", emotionalBenefit: "Your reader experiences a voice that feels personally written for them — the exact blend of challenge and comfort they need. Every sentence lands because the tone matches their emotional readiness." },
-      visual && { label: "Visual Style", value: visual.label, icon: Palette, gradient: "from-rose-500 to-pink-500", systemEffect: SELECTION_FEEDBACK.visualStyles[state.visualStyle]?.systemEffect, emotionalBenefit: SELECTION_FEEDBACK.visualStyles[state.visualStyle]?.emotionalBenefit },
+      visual && { label: "Visual Style", value: visual.label, icon: Palette, gradient: "from-rose-500 to-pink-500", systemEffect: _SF.visualStyles[state.visualStyle]?.systemEffect, emotionalBenefit: _SF.visualStyles[state.visualStyle]?.emotionalBenefit },
       (state.emotions || []).length > 0 && { label: "Emotional Outcomes", value: state.emotions.join(", "), icon: Heart, gradient: "from-rose-400 to-red-500", systemEffect: `${state.emotions.length} transformation promises woven into every title, CTA, and marketing message`, emotionalBenefit: "These feelings become the north star of every piece of content — your reader knows exactly what transformation awaits them, creating hope before they read a single word." },
       state.tradition && { label: "Spiritual Foundation", value: state.tradition, icon: Sun, gradient: "from-amber-400 to-yellow-500", systemEffect: "Influences vocabulary, philosophical grounding, and tradition-specific references throughout all content", emotionalBenefit: "Readers with this tradition feel recognized and respected. The language carries the weight of authentic lineage rather than surface-level appropriation." },
       (state.angles || []).length > 0 && { label: "Content Angles", value: state.angles.map(a => V4_ANGLES.find(v => v.id === a)?.label).filter(Boolean).join(", "), icon: Layers, gradient: "from-purple-500 to-indigo-500", systemEffect: `${state.angles.length} framing modes active — every title opens with one of these argumentative strategies`, emotionalBenefit: "Each angle gives your reader a different doorway into healing. Multiple angles means your brand reaches people wherever they are in their readiness for change." },
       (state.topicTags || []).length > 0 && { label: "Search Territory", value: `${state.topicTags.length} topics claimed`, icon: Search, gradient: "from-emerald-500 to-teal-500", systemEffect: `${state.topicTags.length} search topics feed into title generation, keyword targeting, series planning, and ad campaigns`, emotionalBenefit: "Your content appears in the exact moment someone types their pain into a search bar. You're not marketing — you're answering a cry for help with exactly the right words." },
       state.onboardingLane && { label: "Onboarding Lane", value: state.onboardingLane.replace(/_/g, " "), icon: Layers, gradient: "from-fuchsia-500 to-purple-500", systemEffect: "Proof strip and registry matching now constrain to your selected lane so stakeholders preview the right output family early.", emotionalBenefit: "You can immediately see if the lane you want to lead with has convincing proof, reducing launch-time surprises." },
       state.onboardingMarket && { label: "Onboarding Market", value: state.onboardingMarket, icon: Globe, gradient: "from-sky-500 to-cyan-500", systemEffect: "Registry matches now use explicit market filtering during onboarding to avoid cross-market false confidence.", emotionalBenefit: "Your team reviews examples that actually match the market you plan to launch in." },
-      state.formatFocus && { label: "Format Focus", value: state.formatFocus === "manga" ? "Manga / Visual" : "Traditional Books", icon: BookOpen, gradient: "from-cyan-500 to-blue-500", systemEffect: SELECTION_FEEDBACK.formats[state.formatFocus]?.systemEffect, emotionalBenefit: SELECTION_FEEDBACK.formats[state.formatFocus]?.emotionalBenefit },
+      state.formatFocus && { label: "Format Focus", value: state.formatFocus === "manga" ? "Manga / Visual" : "Traditional Books", icon: BookOpen, gradient: "from-cyan-500 to-blue-500", systemEffect: _SF.formats[state.formatFocus]?.systemEffect, emotionalBenefit: _SF.formats[state.formatFocus]?.emotionalBenefit },
       (state.channels || []).length > 0 && { label: "Publishing Channels", value: `${state.channels.length} channels active`, icon: Globe, gradient: "from-violet-500 to-purple-500", systemEffect: `Content adapts to ${state.channels.length} platforms — each generates format-specific, algorithm-optimized variations`, emotionalBenefit: "Your reader discovers you wherever they already spend time. Whether it's a 3AM TikTok scroll or a Sunday audiobook walk — your brand is there, ready, in the right format." },
     ].filter(Boolean);
 
@@ -2114,8 +2880,8 @@ function Step11Launch({ state, update }) {
                 <circle cx="56" cy="56" r="50" fill="none" stroke="url(#congrats-ring)" strokeWidth="6" strokeLinecap="round" strokeDasharray={`${overallScore * 3.14} 314`} className="-rotate-90 origin-center" style={{ transition: "stroke-dasharray 1.5s ease-out" }} />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-2xl font-black text-gray-900">{overallScore}</span>
-                <span className="text-[8px] font-bold uppercase text-gray-400">Overall</span>
+                <span className="text-2xl font-black text-white">{overallScore}</span>
+                <span className="text-[8px] font-bold uppercase text-white">Overall</span>
               </div>
             </div>
 
@@ -2130,8 +2896,8 @@ function Step11Launch({ state, update }) {
             <h1 className="text-4xl font-black tracking-tight mb-2 bg-gradient-to-r from-purple-600 via-pink-500 to-amber-500 bg-clip-text text-transparent">
               Congratulations
             </h1>
-            <p className="text-lg font-bold text-gray-700 mb-1">Your brand universe is born.</p>
-            <p className="text-sm text-gray-500 max-w-md mx-auto leading-relaxed">
+            <p className="text-lg font-bold text-white mb-1">Your brand universe is born.</p>
+            <p className="text-sm text-white max-w-md mx-auto leading-relaxed">
               You've made {choiceAudit.length} defining choices that shape everything your brand creates — every book, audiobook, video, cover, and piece of social content. Here's what you've built and how it helps the people who need it most.
             </p>
           </div>
@@ -2151,17 +2917,17 @@ function Step11Launch({ state, update }) {
                   <circle cx="24" cy="24" r="20" fill="none" stroke="#f3f4f6" strokeWidth="4" />
                   <circle cx="24" cy="24" r="20" fill="none" stroke={s.color} strokeWidth="4" strokeLinecap="round" strokeDasharray={`${s.value * 1.257} 125.7`} />
                 </svg>
-                <div className="absolute inset-0 flex items-center justify-center"><span className="text-sm font-black text-gray-900">{s.value}</span></div>
+                <div className="absolute inset-0 flex items-center justify-center"><span className="text-sm font-black text-white">{s.value}</span></div>
               </div>
-              <div className="text-[9px] font-bold uppercase text-gray-400">{s.label}</div>
+              <div className="text-[9px] font-bold uppercase text-white">{s.label}</div>
             </div>
           ))}
         </div>
 
         {/* Choice Audit — every choice with what it does */}
         <div className="mb-8">
-          <h2 className="text-lg font-extrabold text-gray-900 mb-1">Your Brand Choices</h2>
-          <p className="text-xs text-gray-500 mb-4">Every choice you made, what it activates in the system, and how it helps your readers mentally and emotionally.</p>
+          <h2 className="text-lg font-extrabold text-white mb-1">Your Brand Choices</h2>
+          <p className="text-xs text-white mb-4">Every choice you made, what it activates in the system, and how it helps your readers mentally and emotionally.</p>
 
           <div className="space-y-3">
             {choiceAudit.map((choice, idx) => {
@@ -2173,8 +2939,8 @@ function Step11Launch({ state, update }) {
                       <Icon size={16} className="text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="text-[9px] font-bold uppercase text-gray-400">{choice.label}</div>
-                      <div className="text-sm font-bold text-gray-900 truncate">{choice.value}</div>
+                      <div className="text-[9px] font-bold uppercase text-white">{choice.label}</div>
+                      <div className="text-sm font-bold text-white truncate">{choice.value}</div>
                     </div>
                     <div className="text-[9px] font-bold text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full flex-shrink-0">Active</div>
                   </div>
@@ -2184,8 +2950,8 @@ function Step11Launch({ state, update }) {
                         <Zap size={8} className="text-indigo-500" />
                       </div>
                       <div>
-                        <span className="text-[9px] font-bold uppercase text-gray-400">System Effect </span>
-                        <p className="text-[11px] text-gray-600 leading-relaxed">{choice.systemEffect}</p>
+                        <span className="text-[9px] font-bold uppercase text-white">System Effect </span>
+                        <p className="text-[11px] text-white leading-relaxed">{choice.systemEffect}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
@@ -2193,8 +2959,8 @@ function Step11Launch({ state, update }) {
                         <Heart size={8} className="text-rose-400" />
                       </div>
                       <div>
-                        <span className="text-[9px] font-bold uppercase text-gray-400">Reader Benefit </span>
-                        <p className="text-[11px] text-gray-700 leading-relaxed font-medium">{choice.emotionalBenefit}</p>
+                        <span className="text-[9px] font-bold uppercase text-white">Reader Benefit </span>
+                        <p className="text-[11px] text-white leading-relaxed font-medium">{choice.emotionalBenefit}</p>
                       </div>
                     </div>
                   </div>
@@ -2211,7 +2977,7 @@ function Step11Launch({ state, update }) {
               <Crown size={16} className="text-purple-600" />
               <span className="text-sm font-bold text-purple-800">Your Brand in One Sentence</span>
             </div>
-            <p className="text-sm text-gray-800 leading-relaxed font-medium">
+            <p className="text-sm text-white leading-relaxed font-medium">
               A <span className="text-purple-700 font-bold">{arch.name}</span> brand that speaks to the <span className="text-blue-700 font-bold">{persona.label}</span>
               {moment ? <> in their <span className="text-amber-700 font-bold">{moment.label.toLowerCase()}</span> moment</> : ""},
               with a <span className="text-indigo-700 font-bold">{visual?.label || "distinctive"}</span> visual world
@@ -2225,10 +2991,10 @@ function Step11Launch({ state, update }) {
         <div className="rounded-xl border border-gray-200 overflow-hidden mb-6">
           <button onClick={() => setShowYaml(!showYaml)} className="w-full px-4 py-3 flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors">
             <div className="flex items-center gap-2">
-              <Download size={14} className="text-gray-500" />
-              <span className="text-xs font-bold text-gray-700">Brand Configuration (YAML)</span>
+              <Download size={14} className="text-white" />
+              <span className="text-xs font-bold text-white">Brand Configuration (YAML)</span>
             </div>
-            <ChevronRight size={14} className={`text-gray-400 transition-transform ${showYaml ? "rotate-90" : ""}`} />
+            <ChevronRight size={14} className={`text-white transition-transform ${showYaml ? "rotate-90" : ""}`} />
           </button>
           {showYaml && (
             <div className="bg-gray-900 p-4 overflow-auto max-h-96">
@@ -2242,7 +3008,7 @@ function Step11Launch({ state, update }) {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold mb-3">
             <Check size={12} /> Brand configuration saved
           </div>
-          <p className="text-sm text-gray-500 max-w-md mx-auto">
+          <p className="text-sm text-white max-w-md mx-auto">
             Your brand universe is ready. The Pearl Prime system will use every choice you've made to generate your catalog — books, audiobooks, manga, videos, and social content that changes lives.
           </p>
         </div>
@@ -2253,10 +3019,9 @@ function Step11Launch({ state, update }) {
   return (
     <div>
       <div className="mb-8 rounded-2xl border border-violet-200/80 bg-gradient-to-br from-violet-50/90 via-white to-fuchsia-50/30 px-5 py-6 text-center shadow-sm">
-        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">Completion</p>
-        <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">You now have a working brand</h2>
-        <p className="mx-auto mt-2 max-w-md text-sm text-gray-600">
-          Add your details to turn the studio output on — name, email, and optional channels.
+        <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl" style={{ color: '#d97706', fontFamily: 'Cormorant Garamond, serif' }}>Enter Contact Details And Click 'Activate'</h2>
+        <p className="mx-auto mt-3 max-w-md text-sm text-white/70">
+          You will immediately gain access to your brand catalog for posting
         </p>
       </div>
 
@@ -2278,10 +3043,10 @@ function Step11Launch({ state, update }) {
 
       <div className="mb-6 space-y-6">
         <section className="rounded-2xl border border-gray-200/90 bg-white/90 p-5 shadow-sm backdrop-blur-sm">
-          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">1 · Identity &amp; contact</h3>
+          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-white">1 · Identity &amp; contact</h3>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs font-semibold text-gray-600">First name *</label>
+              <label className="mb-1 block text-xs font-semibold text-white">First name *</label>
               <input
                 type="text"
                 placeholder="First name"
@@ -2291,7 +3056,7 @@ function Step11Launch({ state, update }) {
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-semibold text-gray-600">Last name *</label>
+              <label className="mb-1 block text-xs font-semibold text-white">Last name *</label>
               <input
                 type="text"
                 placeholder="Last name"
@@ -2303,7 +3068,7 @@ function Step11Launch({ state, update }) {
           </div>
           <div className="mt-3 grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs font-semibold text-gray-600">Email *</label>
+              <label className="mb-1 block text-xs font-semibold text-white">Email *</label>
               <input
                 type="email"
                 placeholder="you@example.com"
@@ -2313,24 +3078,48 @@ function Step11Launch({ state, update }) {
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-semibold text-gray-600">Phone</label>
-              <input
-                type="tel"
-                placeholder="+1 555 000 0000"
-                className="w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-gray-500"
-                value={c.phone || ""}
-                onChange={(e) => handleField("phone", e.target.value)}
-              />
+              <label className="mb-1 block text-xs font-semibold text-white">Phone</label>
+              <div className="flex rounded-xl border border-gray-200 overflow-hidden">
+                <select
+                  className="bg-transparent border-r border-gray-200 px-2 py-3 text-sm outline-none appearance-none cursor-pointer"
+                  value={c.phoneCode || "+1"}
+                  onChange={(e) => handleField("phoneCode", e.target.value)}
+                  style={{ background: 'rgba(0,0,0,.3)', color: 'rgba(250,246,240,.9)', borderColor: 'rgba(180,83,9,.18)' }}
+                >
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+66">🇹🇭 +66</option>
+                  <option value="+81">🇯🇵 +81</option>
+                  <option value="+82">🇰🇷 +82</option>
+                  <option value="+86">🇨🇳 +86</option>
+                  <option value="+91">🇮🇳 +91</option>
+                  <option value="+61">🇦🇺 +61</option>
+                  <option value="+49">🇩🇪 +49</option>
+                  <option value="+33">🇫🇷 +33</option>
+                  <option value="+971">🇦🇪 +971</option>
+                  <option value="+65">🇸🇬 +65</option>
+                  <option value="+55">🇧🇷 +55</option>
+                  <option value="+234">🇳🇬 +234</option>
+                  <option value="+27">🇿🇦 +27</option>
+                </select>
+                <input
+                  type="tel"
+                  placeholder="555 000 0000"
+                  className="flex-1 p-3 text-sm outline-none border-none"
+                  value={c.phone || ""}
+                  onChange={(e) => handleField("phone", e.target.value)}
+                />
+              </div>
             </div>
           </div>
         </section>
 
         <section className="rounded-2xl border border-gray-200/90 bg-white/90 p-5 shadow-sm backdrop-blur-sm">
-          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">2 · Messaging channels</h3>
-          <p className="mb-3 text-[11px] text-gray-500">Optional — how we reach you beyond email.</p>
+          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-white">2 · Messaging channels</h3>
+          <p className="mb-3 text-[11px] text-white">Optional — how we reach you beyond email.</p>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-[10px] font-semibold text-gray-400">LINE ID</label>
+              <label className="mb-1 block text-[10px] font-semibold text-white">LINE ID</label>
               <input
                 type="text"
                 placeholder="U..."
@@ -2340,7 +3129,7 @@ function Step11Launch({ state, update }) {
               />
             </div>
             <div>
-              <label className="mb-1 block text-[10px] font-semibold text-gray-400">WhatsApp</label>
+              <label className="mb-1 block text-[10px] font-semibold text-white">WhatsApp</label>
               <input
                 type="tel"
                 placeholder="+1..."
@@ -2350,7 +3139,7 @@ function Step11Launch({ state, update }) {
               />
             </div>
             <div>
-              <label className="mb-1 block text-[10px] font-semibold text-gray-400">WeChat ID</label>
+              <label className="mb-1 block text-[10px] font-semibold text-white">WeChat ID</label>
               <input
                 type="text"
                 className="w-full rounded-lg border border-gray-200 p-2.5 text-sm outline-none focus:border-gray-500"
@@ -2359,7 +3148,7 @@ function Step11Launch({ state, update }) {
               />
             </div>
             <div>
-              <label className="mb-1 block text-[10px] font-semibold text-gray-400">FB Messenger</label>
+              <label className="mb-1 block text-[10px] font-semibold text-white">FB Messenger</label>
               <input
                 type="text"
                 className="w-full rounded-lg border border-gray-200 p-2.5 text-sm outline-none focus:border-gray-500"
@@ -2369,7 +3158,7 @@ function Step11Launch({ state, update }) {
             </div>
           </div>
           <div className="mt-3">
-            <label className="mb-1 block text-[10px] font-semibold text-gray-400">Preferred channel</label>
+            <label className="mb-1 block text-[10px] font-semibold text-white">Preferred channel</label>
             <select
               className="w-full rounded-lg border border-gray-200 bg-white p-2.5 text-sm outline-none focus:border-gray-500"
               value={c.preferred || "email"}
@@ -2399,11 +3188,11 @@ function Step11Launch({ state, update }) {
         type="button"
         onClick={handleLaunch}
         disabled={!isReady}
-        className={`w-full rounded-2xl py-5 text-lg font-extrabold tracking-tight transition-all ${isReady ? "cursor-pointer bg-gradient-to-r from-violet-700 to-indigo-800 text-white shadow-lg shadow-violet-300/40 hover:from-violet-800 hover:to-indigo-900" : "cursor-not-allowed bg-gray-200 text-gray-400"}`}
+        className={`w-full rounded-2xl py-6 text-3xl font-black uppercase tracking-widest transition-all ${isReady ? "cursor-pointer bg-gradient-to-r from-violet-700 to-indigo-800 text-white shadow-lg shadow-violet-300/40 hover:from-violet-800 hover:to-indigo-900" : "cursor-not-allowed bg-gray-200 text-white"}`}
       >
-        {isReady ? "Activate my brand" : "Add name & email to activate"}
+        {isReady ? "ACTIVATE" : "Add name & email to activate"}
       </button>
-      {!isReady ? <p className="mt-2 text-center text-[11px] text-gray-400">First name, last name, and a valid email unlock activation.</p> : null}
+      {!isReady ? <p className="mt-2 text-center text-[11px] text-white">First name, last name, and a valid email unlock activation.</p> : null}
     </div>
   );
 }
@@ -2418,7 +3207,7 @@ function generateYAML(state) {
   const c = state.contact || {};
   const ts = new Date().toISOString().split("T")[0];
   let y = `# Brand Admin Application — ${ts}\n# Pearl Prime Brand Configuration\n\n`;
-  y += `brand_admin:\n  first_name: "${san(c.firstName)}"\n  last_name: "${san(c.lastName)}"\n  email: "${san(c.email)}"\n  phone: "${san(c.phone)}"\n\n`;
+  y += `brand_admin:\n  first_name: "${san(c.firstName)}"\n  last_name: "${san(c.lastName)}"\n  email: "${san(c.email)}"\n  phone: "${san((c.phoneCode || '+1') + ' ' + c.phone)}"\n\n`;
   y += `  messaging_channels:\n    line_id: "${san(c.line)}"\n    whatsapp: "${san(c.whatsapp)}"\n    wechat_id: "${san(c.wechat)}"\n    fb_messenger: "${san(c.messenger)}"\n    preferred_channel: "${c.preferred || "email"}"\n\n`;
   y += `  brand_positioning:\n    brand_angle: "${state.archetype}"\n    trigger_moment: "${state.moment}"\n    persona: "${state.persona}"\n\n`;
   y += `  voice_settings:\n`;
@@ -2446,8 +3235,8 @@ function CompareBlock({ labelA, labelB, contentA, contentB, colorA, colorB }) {
   return (
     <div className="rounded-2xl border border-gray-200 bg-white overflow-hidden">
       <div className="flex border-b border-gray-200">
-        <button onClick={() => setActive("a")} className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-all ${active === "a" ? `${colorA} bg-gray-50` : "text-gray-400"}`}>{labelA}</button>
-        <button onClick={() => setActive("b")} className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-all ${active === "b" ? `${colorB} bg-gray-50` : "text-gray-400"}`}>{labelB}</button>
+        <button onClick={() => setActive("a")} className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-all ${active === "a" ? `${colorA} bg-gray-50` : "text-white"}`}>{labelA}</button>
+        <button onClick={() => setActive("b")} className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-all ${active === "b" ? `${colorB} bg-gray-50` : "text-white"}`}>{labelB}</button>
       </div>
       <div className="p-5 min-h-[140px] transition-all duration-300">{active === "a" ? contentA : contentB}</div>
     </div>
@@ -2462,14 +3251,14 @@ function IntroWelcome({ onNext }) {
     { icon: Layers, label: "Formats", tint: "from-emerald-500 to-teal-600" },
   ];
   return (
-    <div className="brand-studio-bg min-h-screen text-gray-900">
+    <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-16">
         <div className="brand-studio-panel p-10 text-center sm:p-12">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-violet-200/80 bg-violet-50/80 px-4 py-1.5 text-xs font-semibold text-violet-800 backdrop-blur-sm">
             <Sparkles size={12} /> Pearl Prime Brand Studio
           </div>
-          <h1 className="text-4xl font-black leading-tight tracking-tight text-gray-900 sm:text-5xl">Launch and shape your publishing brand</h1>
-          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-gray-600">
+          <h1 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">Launch and shape your publishing brand</h1>
+          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white">
             One guided session — voice, look, and proof aligned.
           </p>
           <div className="mx-auto mt-10 grid max-w-md grid-cols-4 gap-3">
@@ -2478,7 +3267,7 @@ function IntroWelcome({ onNext }) {
                 <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${tint} shadow-lg shadow-slate-300/30`}>
                   <I size={22} className="text-white" />
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">{label}</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-white">{label}</span>
               </div>
             ))}
           </div>
@@ -2491,14 +3280,39 @@ function IntroWelcome({ onNext }) {
               Start building <ChevronRight size={18} />
             </button>
           </div>
-          <p className="mt-8 text-center text-xs text-gray-500">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
             <a
-              href="/brand_onboarding_hub.html"
-              className="font-semibold text-violet-600 underline decoration-violet-200 underline-offset-2 hover:text-violet-800"
+              href="/wizard.html"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
             >
-              Brand Onboarding Hub
+              🇺🇸 English
             </a>
-            <span className="text-gray-400"> — gallery, matrix, master spine, weekly OS</span>
+            <a
+              href="/wizard-ja.html"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+            >
+              🇯🇵 日本語
+            </a>
+            <a
+              href="/wizard-zh.html"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+            >
+              🇨🇳 中文（简体）
+            </a>
+            <a
+              href="/wizard-tw.html"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+            >
+              🇹🇼 繁體中文
+            </a>
+          </div>
+          <p className="mt-6 text-center text-xs">
+            <a
+              href="https://729184d3.phoenix-command.pages.dev/"
+              className="font-semibold text-orange-400 underline decoration-orange-300 underline-offset-2 hover:text-orange-300"
+            >
+              Back To Start
+            </a>
           </p>
         </div>
       </div>
@@ -2515,21 +3329,21 @@ function IntroJourney({ onNext, onBack }) {
     { step: "5", title: "Reveal", sub: "Blueprint & launch", color: "from-slate-600 to-gray-900" },
   ];
   return (
-    <div className="brand-studio-bg min-h-screen text-gray-900">
+    <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
-        <button type="button" onClick={onBack} className="mb-6 flex items-center gap-1 text-xs text-gray-500 transition-colors hover:text-gray-800">
+        <button type="button" onClick={onBack} className="mb-6 flex items-center gap-1 text-xs text-white transition-colors hover:text-white">
           <ChevronLeft size={14} /> Back
         </button>
         <div className="brand-studio-panel p-8 sm:p-10">
           <div className="text-center">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">How this works</p>
             <h1 className="mt-2 text-3xl font-black tracking-tight">Five beats, eleven choices</h1>
-            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-gray-600">
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white">
               Foundation → formats → blueprint → launch.
             </p>
           </div>
           <div className="relative mt-10">
-            <div className="absolute left-[18px] top-3 bottom-3 w-px bg-gradient-to-b from-violet-200 via-indigo-200 to-gray-200 sm:left-1/2 sm:top-12 sm:bottom-12 sm:h-auto sm:w-full sm:max-w-xl sm:-translate-x-1/2 sm:bg-gradient-to-r" aria-hidden />
+            <div className="absolute left-[18px] top-1 bottom-1 w-px bg-gradient-to-b from-violet-200 via-indigo-200 to-gray-200 sm:left-1/2 sm:top-[16px] sm:bottom-auto sm:h-1 sm:w-full sm:max-w-xl sm:-translate-x-1/2 sm:bg-gradient-to-r" aria-hidden />
             <div className="space-y-4 sm:grid sm:grid-cols-5 sm:gap-3 sm:space-y-0">
               {phases.map(({ step, title, sub, color }) => (
                 <div key={step} className="relative flex gap-3 sm:flex-col sm:items-center sm:text-center">
@@ -2537,21 +3351,21 @@ function IntroJourney({ onNext, onBack }) {
                     {step}
                   </div>
                   <div className="pt-0.5 sm:pt-2">
-                    <div className="text-sm font-bold text-gray-900">{title}</div>
-                    <div className="text-[11px] text-gray-500">{sub}</div>
+                    <div className="text-sm font-bold text-white">{title}</div>
+                    <div className="text-[11px] text-white">{sub}</div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <p className="mt-8 text-center text-xs text-gray-500">Next: a few concrete previews.</p>
+          <div className="mt-8" />
           <div className="mt-6 text-center">
             <button
               type="button"
               onClick={onNext}
               className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
-              See examples <ChevronRight size={18} />
+              Start building your brand <ArrowRight size={18} />
             </button>
           </div>
         </div>
@@ -2562,18 +3376,18 @@ function IntroJourney({ onNext, onBack }) {
 
 function ShowcaseProse({ onNext, onBack }) {
   return (
-    <div className="brand-studio-bg min-h-screen text-gray-900">
+    <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
-        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-gray-500 transition-colors hover:text-gray-800">
+        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-white transition-colors hover:text-white">
           <ChevronLeft size={14} /> Back
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-semibold mb-4"><PenTool size={12} /> Step 1 Preview — Writing Voice</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">Same topic. Completely different voice.</h1>
-        <p className="text-gray-500 mb-8">Two brands, one topic — feel the shift in prose and energy.</p>
+        <p className="text-white mb-8">Two brands, one topic — feel the shift in prose and energy.</p>
         <CompareBlock labelA="Stillness Lab" labelB="Clear Mind Lab" colorA="text-indigo-600" colorB="text-amber-600"
-          contentA={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #818cf8, #e0e7ff)" }} /><div><div className="text-[10px] text-gray-400 font-semibold uppercase">Stillness Lab</div><div className="text-sm font-bold text-gray-900">The Body Keeps the Score at 2AM</div></div></div><p className="text-sm text-gray-700 leading-relaxed italic border-l-2 border-indigo-300 pl-3">"Your body remembers what your mind tries to forget. Right now, your shoulders are holding yesterday's argument."</p><div className="mt-3 bg-indigo-50 rounded-lg p-3"><div className="text-[10px] font-bold text-indigo-600 uppercase mb-1">Exercise</div><p className="text-xs text-indigo-800">"Inhale for 4 counts. Hold for 7. Exhale slowly for 8."</p></div></div>}
-          contentB={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #d97706, #f59e0b, #fef3c7)" }} /><div><div className="text-[10px] text-gray-400 font-semibold uppercase">Clear Mind Lab</div><div className="text-sm font-bold text-gray-900">Your Phone Is Stealing Your Sleep</div></div></div><p className="text-sm text-gray-700 leading-relaxed italic border-l-2 border-amber-400 pl-3">"You're staring at the ceiling because your brain is running yesterday's argument on a loop."</p><div className="mt-3 bg-amber-50 rounded-lg p-3"><div className="text-[10px] font-bold text-amber-600 uppercase mb-1">Exercise</div><p className="text-xs text-amber-800">"Phone in another room. Lie flat. Breathe out longer than in. 90 seconds. Go."</p></div></div>}
+          contentA={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #818cf8, #e0e7ff)" }} /><div><div className="text-[10px] text-white font-semibold uppercase">Stillness Lab</div><div className="text-sm font-bold text-white">The Body Keeps the Score at 2AM</div></div></div><p className="text-sm text-white leading-relaxed italic border-l-2 border-indigo-300 pl-3">"Your body remembers what your mind tries to forget. Right now, your shoulders are holding yesterday's argument."</p><div className="mt-3 bg-indigo-50 rounded-lg p-3"><div className="text-[10px] font-bold text-indigo-600 uppercase mb-1">Exercise</div><p className="text-xs text-indigo-800">"Inhale for 4 counts. Hold for 7. Exhale slowly for 8."</p></div></div>}
+          contentB={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #d97706, #f59e0b, #fef3c7)" }} /><div><div className="text-[10px] text-white font-semibold uppercase">Clear Mind Lab</div><div className="text-sm font-bold text-white">Your Phone Is Stealing Your Sleep</div></div></div><p className="text-sm text-white leading-relaxed italic border-l-2 border-amber-400 pl-3">"You're staring at the ceiling because your brain is running yesterday's argument on a loop."</p><div className="mt-3 bg-amber-50 rounded-lg p-3"><div className="text-[10px] font-bold text-amber-600 uppercase mb-1">Exercise</div><p className="text-xs text-amber-800">"Phone in another room. Lie flat. Breathe out longer than in. 90 seconds. Go."</p></div></div>}
         />
         <div className="mt-8 text-center">
           <button type="button" onClick={onNext} className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-gray-800">
@@ -2588,22 +3402,22 @@ function ShowcaseProse({ onNext, onBack }) {
 
 function ShowcaseCovers({ onNext, onBack }) {
   return (
-    <div className="brand-studio-bg min-h-screen text-gray-900">
+    <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
-        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-gray-500 transition-colors hover:text-gray-800">
+        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-white transition-colors hover:text-white">
           <ChevronLeft size={14} /> Back
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-semibold mb-4"><Image size={12} /> Visual Style Preview</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">Your visual style shapes everything.</h1>
-        <p className="text-gray-500 mb-8">One choice ripples across covers and thumbnails.</p>
+        <p className="text-white mb-8">One choice ripples across covers and thumbnails.</p>
         <div className="grid grid-cols-3 gap-4 mb-8">
           {ARCHETYPES.slice(0, 3).map((arch) => (
             <div key={arch.id} className="text-center">
               <div className="w-full h-40 rounded-xl shadow-lg mb-2" style={{ background: `linear-gradient(135deg, ${arch.coverColors[0]}, ${arch.coverColors[1]}, ${arch.coverColors[2]})` }}>
-                <div className="flex flex-col items-center justify-end h-full p-3"><div className="text-[9px] font-bold text-white/90 text-center leading-tight">{arch.sampleTitle}</div><div className="text-[7px] text-white/60 mt-0.5">{arch.name}</div></div>
+                <div className="flex flex-col items-center justify-end h-full p-3"><div className="text-[9px] font-bold text-white/90 text-center leading-tight">{arch.sampleTitle}</div><div className="text-[7px] text-white/80 mt-0.5">{arch.name}</div></div>
               </div>
-              <div className="text-xs font-bold text-gray-900">{arch.name}</div><div className="text-[10px] text-gray-500">{arch.coverStyle}</div>
+              <div className="text-xs font-bold text-white">{arch.name}</div><div className="text-[10px] text-white">{arch.coverStyle}</div>
             </div>
           ))}
         </div>
@@ -2620,20 +3434,20 @@ function ShowcaseCovers({ onNext, onBack }) {
 
 function ShowcaseVideo({ onNext, onBack }) {
   return (
-    <div className="brand-studio-bg min-h-screen text-gray-900">
+    <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
-        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-gray-500 transition-colors hover:text-gray-800">
+        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-white transition-colors hover:text-white">
           <ChevronLeft size={14} /> Back
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-semibold mb-4"><Film size={12} /> Video & Social Preview</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">Daily content. Your signature look.</h1>
-        <p className="text-gray-500 mb-8">Short-form video inherits your palette and mood.</p>
+        <p className="text-white mb-8">Short-form video inherits your palette and mood.</p>
         <div className="grid grid-cols-2 gap-4 mb-8">
           {ARCHETYPES.slice(0, 4).map((arch) => (
             <div key={arch.id} className="rounded-xl overflow-hidden border border-gray-200">
-              <div className="h-32 flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${arch.coverColors[0]}88, ${arch.coverColors[1]}66)` }}><div className="text-center"><Play size={24} className="text-white/60 mx-auto mb-1" /><div className="text-[10px] text-white/80 font-bold">{arch.name}</div></div></div>
-              <div className="p-3 bg-white"><div className="text-xs font-bold text-gray-900">{arch.videoStyle}</div><div className="text-[10px] text-gray-500 mt-0.5">Daily across YouTube, TikTok, Instagram, Facebook, X</div></div>
+              <div className="h-32 flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${arch.coverColors[0]}88, ${arch.coverColors[1]}66)` }}><div className="text-center"><Play size={24} className="text-white/80 mx-auto mb-1" /><div className="text-[10px] text-white/80 font-bold">{arch.name}</div></div></div>
+              <div className="p-3 bg-white"><div className="text-xs font-bold text-white">{arch.videoStyle}</div><div className="text-[10px] text-white mt-0.5">Daily across YouTube, TikTok, Instagram, Facebook, X</div></div>
             </div>
           ))}
         </div>
@@ -2650,24 +3464,24 @@ function ShowcaseVideo({ onNext, onBack }) {
 
 function ShowcaseFormats({ onNext, onBack }) {
   return (
-    <div className="brand-studio-bg min-h-screen text-gray-900">
+    <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
-        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-gray-500 transition-colors hover:text-gray-800">
+        <button type="button" onClick={onBack} className="mb-4 flex items-center gap-1 text-xs text-white transition-colors hover:text-white">
           <ChevronLeft size={14} /> Back
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold mb-4"><Layers size={12} /> Format Diversity</div>
         <h1 className="text-3xl font-black tracking-tight mb-2">One brand. Infinite formats.</h1>
-        <p className="text-gray-500 mb-8">Same DNA — different containers.</p>
+        <p className="text-white mb-8">Same DNA — different containers.</p>
         <div className="grid grid-cols-3 gap-3 mb-8">
           {V4_FORMATS_STRUCTURAL.map((f) => (
             <div key={f.id} className="p-4 rounded-xl border border-gray-200 bg-white">
-              <div className="text-[10px] text-gray-400 font-mono mb-1">{f.id}</div><div className="text-xs font-bold text-gray-900">{f.label}</div><div className="text-[10px] text-gray-500 mt-0.5">{f.desc}</div>
-              <div className="mt-2 flex items-center gap-2"><span className="text-[9px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{f.chapters} ch</span><span className="text-[9px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{f.tier}</span></div>
+              <div className="text-[10px] text-white font-mono mb-1">{f.id}</div><div className="text-xs font-bold text-white">{f.label}</div><div className="text-[10px] text-white mt-0.5">{f.desc}</div>
+              <div className="mt-2 flex items-center gap-2"><span className="text-[9px] bg-gray-100 text-white px-2 py-0.5 rounded-full">{f.chapters} ch</span><span className="text-[9px] bg-gray-100 text-white px-2 py-0.5 rounded-full">{f.tier}</span></div>
             </div>
           ))}
         </div>
-        <div className="rounded-xl bg-gray-50 border border-gray-200 p-5 mb-8"><p className="text-xs text-gray-600 leading-relaxed">Manga, audio, courses, journals, video — adapted automatically from the same core.</p></div>
+        <div className="rounded-xl bg-gray-50 border border-gray-200 p-5 mb-8"><p className="text-xs text-white leading-relaxed">Manga, audio, courses, journals, video — adapted automatically from the same core.</p></div>
         <div className="mt-8 text-center">
           <button type="button" onClick={onNext} className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-gray-800">
             Start building your brand <ArrowRight size={18} />
@@ -2683,9 +3497,44 @@ function ShowcaseFormats({ onNext, onBack }) {
 // MAIN WIZARD
 // ═══════════════════════════════════════════════════════════
 
-const STEP_LABELS = ["Emotional World", "Primary Reader", "Trigger Moment", "Voice Graphs", "Voice Impact", "Visual & Emotions", "Topics", "Market Intel", "Formats", "Blueprint", "Launch"];
+const STEP_LABELS = ["Emotional World", "Primary Reader", "Trigger Moment", "Voice Tone", "Visual Style", "Emotional Outcomes", "Topics", "Your Brand", "Launch"];
 
 export default function BrandWizard() {
+  const { t, td, to, tv, locale, isEn } = useTranslation();
+
+  // ── Translated data constants ──
+  const tArchetypes = useMemo(() => td("archetypes", ARCHETYPES, ["name", "tagline", "sampleTitle", "sampleSubtitle", "sampleProse", "sampleExercise", "visionVibe", "tags", "coverStyle", "proseStyle", "videoStyle", "emotions"]), [locale]);
+  const tPersonas = useMemo(() => td("personas", PERSONAS, ["label", "desc", "needs", "impact"]), [locale]);
+  const tMoments = useMemo(() => td("moments", MOMENTS, ["label", "scene", "hookStyle"]), [locale]);
+  const tVisualStyles = useMemo(() => td("visualStyles", VISUAL_STYLES, ["label", "desc", "mood"]), [locale]);
+  const tEmotionCategories = useMemo(() => td("emotionCategories", EMOTION_CATEGORIES, ["name", "items"]), [locale]);
+  const tAngleFeedback = useMemo(() => {
+    const out = {};
+    for (const [k, v] of Object.entries(ANGLE_FEEDBACK)) {
+      out[k] = to("angleFeedback", v, ["label", "systemEffect", "emotionalBenefit"]);
+    }
+    return out;
+  }, [locale]);
+  const tSelectionFeedback = useMemo(() => {
+    const out = {};
+    for (const [section, entries] of Object.entries(SELECTION_FEEDBACK)) {
+      out[section] = {};
+      for (const [k, v] of Object.entries(entries)) {
+        out[section][k] = to("selectionFeedback", v, ["systemEffect", "emotionalBenefit"]);
+      }
+    }
+    return out;
+  }, [locale]);
+  const tProven = useMemo(() => {
+    const out = {};
+    for (const [k, v] of Object.entries(PROVEN)) {
+      out[k] = to("proven", v, ["personas", "topics", "keywords"]);
+    }
+    return out;
+  }, [locale]);
+  const tStepLabels = useMemo(() => STEP_LABELS.map(l => t("steps", l)), [locale]);
+  const tV4FormatsStructural = useMemo(() => td("formats", V4_FORMATS_STRUCTURAL, ["label", "desc"]), [locale]);
+
   const [phase, setPhase] = useState("intro");
   const [introPage, setIntroPage] = useState(0);
   const [step, setStep] = useState(0);
@@ -2695,25 +3544,22 @@ export default function BrandWizard() {
     tradition: "", angles: [], topicTags: [],
     formatFocus: null, channels: [],
     onboardingLane: "self_help", onboardingMarket: "us",
-    contact: { firstName: "", lastName: "", email: "", phone: "", line: "", whatsapp: "", wechat: "", messenger: "", preferred: "email" },
+    contact: { firstName: "", lastName: "", email: "", phoneCode: "+1", phone: "", line: "", whatsapp: "", wechat: "", messenger: "", preferred: "email" },
   });
 
   const update = useCallback((patch) => setState((prev) => ({ ...prev, ...patch })), []);
-  const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: "instant" });
   const nextIntro = () => { setIntroPage((p) => p + 1); scrollTop(); };
   const prevIntro = () => { if (introPage > 0) { setIntroPage((p) => p - 1); scrollTop(); } };
   const startWizard = () => { setPhase("wizard"); setStep(0); scrollTop(); };
-  const nextStep = () => { if (step < 10) { setStep((s) => s + 1); scrollTop(); } };
-  const prevStep = () => { if (step > 0) { setStep((s) => s - 1); scrollTop(); } else { setPhase("intro"); setIntroPage(5); scrollTop(); } };
+  const nextStep = () => { if (step < 8) { setStep((s) => s + 1); scrollTop(); } };
+  const prevStep = () => { if (step > 0) { setStep((s) => s - 1); scrollTop(); } else { setPhase("intro"); setIntroPage(1); scrollTop(); } };
+  const goToHowItWorks = () => { setPhase("intro"); setIntroPage(1); scrollTop(); };
 
-  // INTRO: 0=welcome, 1=journey, 2=prose, 3=covers, 4=video, 5=formats
+  // INTRO: 0=welcome, 1=journey → straight to wizard (preview pages removed)
   if (phase === "intro") {
     if (introPage === 0) return <IntroWelcome onNext={nextIntro} />;
-    if (introPage === 1) return <IntroJourney onNext={nextIntro} onBack={prevIntro} />;
-    if (introPage === 2) return <ShowcaseProse onNext={nextIntro} onBack={prevIntro} />;
-    if (introPage === 3) return <ShowcaseCovers onNext={nextIntro} onBack={prevIntro} />;
-    if (introPage === 4) return <ShowcaseVideo onNext={nextIntro} onBack={prevIntro} />;
-    if (introPage === 5) return <ShowcaseFormats onNext={startWizard} onBack={prevIntro} />;
+    if (introPage >= 1) return <IntroJourney onNext={startWizard} onBack={prevIntro} />;
   }
 
   const canNext = step === 0
@@ -2724,47 +3570,45 @@ export default function BrandWizard() {
         ? !!state.moment
         : true;
 
+  const i18nData = { tArchetypes, tPersonas, tMoments, tVisualStyles, tEmotionCategories, tAngleFeedback, tSelectionFeedback, tProven, tV4FormatsStructural, t };
+
   const steps = [
-    <Step1Archetype key={0} state={state} update={update} />,
-    <Step2PrimaryReader key={1} state={state} update={update} />,
-    <Step3TriggerMoment key={2} state={state} update={update} />,
-    <Step4VoiceGraphs key={3} state={state} update={update} />,
-    <Step5VoiceEffects key={4} state={state} update={update} />,
-    <Step6VisualStyle key={5} state={state} update={update} />,
-    <Step7Topics key={6} state={state} update={update} />,
-    <Step8MarketIntel key={7} state={state} />,
-    <Step9Formats key={8} state={state} update={update} />,
-    <Step10Blueprint key={9} state={state} />,
-    <Step11Launch key={10} state={state} update={update} />,
+    <Step1Archetype key={0} state={state} update={update} i18n={i18nData} />,
+    <Step2PrimaryReader key={1} state={state} update={update} i18n={i18nData} />,
+    <Step3TriggerMoment key={2} state={state} update={update} i18n={i18nData} />,
+    <Step4VoiceGraphs key={3} state={state} update={update} i18n={i18nData} />,
+    <Step5VisualStyle key={4} state={state} update={update} i18n={i18nData} />,
+    <Step6EmotionalOutcomes key={5} state={state} update={update} i18n={i18nData} />,
+    <Step7Topics key={6} state={state} update={update} i18n={i18nData} />,
+    <StepBrandReveal key={7} state={state} i18n={i18nData} />,
+    <Step11Launch key={8} state={state} update={update} i18n={i18nData} />,
   ];
 
   return (
     <div className="brand-studio-bg min-h-screen">
       <div className="mx-auto max-w-6xl px-4 py-8">
-        <p className="mb-3 text-center text-[11px] text-gray-500">
-          <a
-            href="/brand_onboarding_hub.html"
-            className="font-semibold text-violet-600 underline decoration-violet-200 underline-offset-2 hover:text-violet-800"
-          >
-            Brand Onboarding Hub
-          </a>
-          <span className="text-gray-400"> · static spine + proof tools</span>
-        </p>
-        <ProgressBar step={step} total={11} labels={STEP_LABELS} />
+        <button
+          type="button"
+          onClick={goToHowItWorks}
+          className="mb-6 flex items-center gap-1 text-xs text-white transition-colors hover:text-gray-200"
+        >
+          <ChevronLeft size={14} /> Back
+        </button>
+        <ProgressBar step={step} total={9} labels={tStepLabels} />
         <div className="brand-studio-panel p-6 sm:p-8 lg:p-10">
           <div className="flex gap-6 lg:gap-8">
             <div className="min-w-0 flex-1">
               {steps[step]}
               <div className="mt-8 flex items-center justify-between border-t border-gray-100/80 pt-6">
-                <button type="button" onClick={prevStep} className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-gray-500 transition-colors hover:text-gray-900">
+                <button type="button" onClick={prevStep} className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:text-white">
                   <ChevronLeft size={16} /> Back
                 </button>
-                {step < 10 ? (
+                {step < 8 ? (
                   <button
                     type="button"
                     onClick={nextStep}
                     disabled={!canNext}
-                    className={`flex items-center gap-1.5 rounded-xl px-6 py-2.5 text-sm font-bold transition-all ${canNext ? "bg-gray-900 text-white shadow-md shadow-slate-300/40 hover:bg-gray-800" : "cursor-not-allowed bg-gray-200 text-gray-400"}`}
+                    className={`flex items-center gap-1.5 rounded-xl px-6 py-2.5 text-sm font-bold transition-all ${canNext ? "bg-gray-900 text-white shadow-md shadow-slate-300/40 hover:bg-gray-800" : "cursor-not-allowed bg-gray-200 text-white"}`}
                   >
                     Continue <ChevronRight size={16} />
                   </button>
@@ -2775,7 +3619,7 @@ export default function BrandWizard() {
               <div className="sticky top-8">
                 <div className="mb-3 text-[10px] font-bold uppercase tracking-wider text-violet-600/90">Studio insight</div>
                 <div className="rounded-2xl border border-gray-100/90 bg-white/60 p-1 shadow-inner backdrop-blur-sm">
-                  <PersonaImpactPanel state={state} />
+                  <PersonaImpactPanel state={state} step={step} i18n={i18nData} />
                 </div>
               </div>
             </div>
