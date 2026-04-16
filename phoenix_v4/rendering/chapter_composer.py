@@ -60,9 +60,11 @@ _BOOK_BRIDGE_MEMORY_TLS: "BridgeMemory | None" = None
 _MECHANISM_THESIS_CACHE: dict[str, Any] | None = None
 _EXERCISE_WRAPPER_CACHE: dict[str, Any] | None = None
 _BRIDGE_TRANSITION_CACHE: dict[str, Any] | None = None
+_CHAPTER_THESIS_BANK_CACHE: dict | None = None
 _MECHANISM_THESIS_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "mechanism_thesis_families.yaml"
 _EXERCISE_WRAPPER_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "exercise_wrapper_families.yaml"
 _BRIDGE_TRANSITION_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "bridge_transition_families.yaml"
+_CHAPTER_THESIS_BANK_PATH = Path(__file__).resolve().parents[2] / "config" / "planning" / "chapter_thesis_bank.yaml"
 _EMOTIONAL_JOBS = {"recognition", "mechanism", "deepening", "reframe", "practice", "integration", "resolution"}
 _ROOT_CAP_4_CHAPTER_WINDOW = {
     "chapter",
@@ -143,6 +145,25 @@ def _load_bridge_transition_families() -> dict[str, Any]:
         loaded = {}
     _BRIDGE_TRANSITION_CACHE = loaded if isinstance(loaded, dict) else {}
     return _BRIDGE_TRANSITION_CACHE
+
+
+def _load_chapter_thesis_bank() -> dict:
+    """Load config/planning/chapter_thesis_bank.yaml (cached after first call)."""
+    global _CHAPTER_THESIS_BANK_CACHE
+    if _CHAPTER_THESIS_BANK_CACHE is not None:
+        return _CHAPTER_THESIS_BANK_CACHE
+    if yaml is None:
+        _CHAPTER_THESIS_BANK_CACHE = {}
+        return _CHAPTER_THESIS_BANK_CACHE
+    if _CHAPTER_THESIS_BANK_PATH.exists():
+        try:
+            data = yaml.safe_load(_CHAPTER_THESIS_BANK_PATH.read_text(encoding="utf-8")) or {}
+            _CHAPTER_THESIS_BANK_CACHE = data.get("intents") or {}
+        except Exception:
+            _CHAPTER_THESIS_BANK_CACHE = {}
+    else:
+        _CHAPTER_THESIS_BANK_CACHE = {}
+    return _CHAPTER_THESIS_BANK_CACHE
 
 
 def _recent_count(store: dict[int, dict[str, int]], key: str, chapter_index: int, window: int) -> int:
@@ -770,22 +791,59 @@ def _derive_thesis(
     *,
     emotional_job: str = "",
     thesis_memory: MechanismThesisMemory | None = None,
+    chapter_intent: str = "",
+    engine_type: str = "",
+    arc_thesis: str = "",
 ) -> str:
-    """Extract a one-line thesis claim from REFLECTION prose."""
+    """Extract a one-line thesis claim from REFLECTION prose.
+
+    Derivation chain (highest → lowest priority):
+      1. arc_thesis  — arc-provided thesis used directly if present
+      2. chapter_thesis_bank — lookup by (chapter_intent, engine_type)
+      3. mechanism_thesis_families.yaml — lookup by emotional_job
+      4. _derive_thesis_legacy — keyword extraction from prose
+    """
+    # 1. Arc-provided thesis takes priority
+    if arc_thesis and arc_thesis.strip():
+        return arc_thesis.strip()
+
+    # 2. Chapter Thesis Bank lookup by (chapter_intent, engine_type)
+    if chapter_intent and engine_type:
+        bank = _load_chapter_thesis_bank()
+        intent_key = chapter_intent.lower().replace("-", "_").replace(" ", "_")
+        engine_key = engine_type.lower().replace("-", "_").replace(" ", "_")
+        thesis = (bank.get(intent_key) or {}).get(engine_key, "")
+        if thesis:
+            return str(thesis).strip()
+        # Try engine aliases (watcher ↔ burnout, false_alarm ↔ anxiety)
+        engine_aliases = {
+            "burnout": "watcher",
+            "watcher": "burnout",
+            "anxiety": "false_alarm",
+            "false_alarm": "anxiety",
+        }
+        alt_engine = engine_aliases.get(engine_key, "")
+        if alt_engine:
+            thesis = (bank.get(intent_key) or {}).get(alt_engine, "")
+            if thesis:
+                return str(thesis).strip()
+
+    # 3. mechanism_thesis_families.yaml lookup by emotional_job
     job = _normalize_emotional_job(emotional_job)
-    if not job:
-        return _derive_thesis_legacy(reflection, chapter_index)
-    payload = _load_mechanism_thesis_families()
-    job_bank = (((payload.get("thesis_families") or {}).get(job)) or {})
-    candidates = _collect_text_entries(job_bank if isinstance(job_bank, dict) else {})
-    selected = _select_mechanism_thesis_candidate(
-        candidates,
-        chapter_index=chapter_index,
-        memory=thesis_memory,
-        kind="thesis",
-    )
-    if selected:
-        return str(selected.get("text", "")).strip()
+    if job:
+        payload = _load_mechanism_thesis_families()
+        job_bank = (((payload.get("thesis_families") or {}).get(job)) or {})
+        candidates = _collect_text_entries(job_bank if isinstance(job_bank, dict) else {})
+        selected = _select_mechanism_thesis_candidate(
+            candidates,
+            chapter_index=chapter_index,
+            memory=thesis_memory,
+            kind="thesis",
+        )
+        if selected:
+            return str(selected.get("text", "")).strip()
+
+    # 4. Legacy keyword extraction from prose
     return _derive_thesis_legacy(reflection, chapter_index)
 
 
@@ -1561,6 +1619,9 @@ def compose_chapter_prose(
     mechanism_memory: Optional[MechanismThesisMemory] = None,
     exercise_memory: Optional[ExerciseWrapperMemory] = None,
     bridge_memory: Optional[BridgeMemory] = None,
+    chapter_intent: str = "",
+    engine_type: str = "",
+    arc_thesis: str = "",
 ) -> str:
     """
     Compose a single chapter's prose from its slot types and resolved prose strings.
@@ -1605,9 +1666,12 @@ def compose_chapter_prose(
             chapter_index,
             emotional_job=emotional_role,
             thesis_memory=mechanism_memory,
+            chapter_intent=chapter_intent,
+            engine_type=engine_type,
+            arc_thesis=arc_thesis,
         )
         if not _is_placeholder_text(reflection_raw)
-        else ""
+        else arc_thesis.strip() if arc_thesis and arc_thesis.strip() else ""
     )
 
     # Build composed chapter in argument order
