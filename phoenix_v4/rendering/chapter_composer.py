@@ -799,6 +799,217 @@ def compose_chapter_prose(
     return composed
 
 
+# ---------------------------------------------------------------------------
+# Spine / enriched-book slot bridges (beatmap order preserved; inserts only)
+# ---------------------------------------------------------------------------
+# Approximate extra words per chapter when full matrix applies: ~40–120 words
+# (1–3 short bridges × ~15–40 words), micro formats ~20–50 when only exercise bridges fire.
+
+_MICRO_RUNTIME_FORMATS = frozenset({"micro_book_15", "micro_book_20"})
+
+_FULL_BRIDGE_PAIRS = frozenset(
+    {
+        ("SCENE", "REFLECTION"),
+        ("HOOK", "REFLECTION"),
+        ("REFLECTION", "EXERCISE"),
+        ("EXERCISE", "SCENE"),
+        ("SCENE", "TEACHER_DOCTRINE"),
+        ("TEACHER_DOCTRINE", "REFLECTION"),
+        ("STORY", "REFLECTION"),
+        ("STORY", "EXERCISE"),
+    }
+)
+
+_MICRO_BRIDGE_PAIRS = frozenset({("REFLECTION", "EXERCISE"), ("STORY", "EXERCISE")})
+
+_EXERCISE_TAIL_CUES = (
+    "before you",
+    "try this:",
+    "try this.",
+    "the practice below",
+    "take one breath",
+    "give your body",
+    "the exercise that follows",
+    "the next step asks",
+)
+
+_REFLECTION_TAIL_CUES = (
+    "what does this mean",
+    "what do you notice",
+    "ask yourself",
+    "here's what this means",
+    "here is what this means",
+    "what would it be like",
+)
+
+_SCENE_TAIL_CUES = (
+    "when you're back",
+    "when you are back",
+    "picture yourself",
+    "picture this",
+    "come back to the scene",
+    "return to the moment",
+    "step back into",
+)
+
+
+def _last_sentence_or_line(body: str) -> str:
+    body = (body or "").strip()
+    if not body:
+        return ""
+    sents = _sentences(body)
+    if sents:
+        return sents[-1].strip()
+    lines = [ln.strip() for ln in body.splitlines() if ln.strip()]
+    return lines[-1] if lines else ""
+
+
+def _tail_window_lower(body: str, width: int = 96) -> str:
+    tail = _last_sentence_or_line(body).lower()
+    return tail[-width:] if tail else ""
+
+
+def _should_skip_slot_bridge(prev_type: str, curr_type: str, prev_body: str) -> bool:
+    """Anti-repetition: skip bridge when the previous slot already signals the upcoming mode."""
+    p = prev_type.strip().upper()
+    c = curr_type.strip().upper()
+    tw = _tail_window_lower(prev_body)
+    if not tw:
+        return False
+    if c == "EXERCISE":
+        return any(cue in tw for cue in _EXERCISE_TAIL_CUES)
+    if c == "REFLECTION" and p in ("SCENE", "STORY", "HOOK"):
+        if tw.rstrip().endswith("?"):
+            return True
+        return any(cue in tw for cue in _REFLECTION_TAIL_CUES)
+    if c == "SCENE":
+        return any(cue in tw for cue in _SCENE_TAIL_CUES)
+    return False
+
+
+def _slot_bridge_paragraph(
+    prev_t: str,
+    curr_t: str,
+    thesis: str,
+    *,
+    prev_body: str,
+    chapter_index: int,
+    last_reflection: str,
+    last_story: str,
+) -> str:
+    """Return one bridge paragraph for a (prev_type, curr_type) pair, or empty string."""
+    pair = (prev_t.strip().upper(), curr_t.strip().upper())
+
+    if pair in {("SCENE", "REFLECTION"), ("HOOK", "REFLECTION")}:
+        opts = [
+            "Before the mind names it, pause and ask what your body is trying to protect.",
+            "Let the moment finish landing, then see what question rises next without forcing an answer.",
+            "Stay in the feeling a beat longer — inquiry works better when the body is still in the room.",
+        ]
+        return _pick_variant(opts, thesis, prev_body[:48], str(chapter_index), "hinge_body_reflection")
+
+    if pair == ("REFLECTION", "EXERCISE"):
+        return _bridge_before_exercise(thesis, reflection=prev_body, story=last_story)
+
+    if pair == ("STORY", "EXERCISE"):
+        return _bridge_before_exercise(thesis, reflection=last_reflection, story=prev_body)
+
+    if pair == ("EXERCISE", "SCENE"):
+        opts = [
+            "When you are ready, step back into the scene and let it move at normal speed again.",
+            "Picture the room again — same air, same light — and watch what your attention does with the practice still echoing.",
+            "Return to the moment as if nothing needs to be solved yet; just let the body remember the room.",
+        ]
+        return _pick_variant(opts, thesis, prev_body[:48], str(chapter_index), "return_scene")
+
+    if pair == ("SCENE", "TEACHER_DOCTRINE"):
+        opts = [
+            "From here the chapter widens into teaching — not to override the moment, but to situate it.",
+            "What follows names the frame the moment keeps testing, in plain language.",
+        ]
+        return _pick_variant(opts, thesis, prev_body[:48], str(chapter_index), "section_doctrine")
+
+    if pair == ("TEACHER_DOCTRINE", "REFLECTION"):
+        opts = [
+            "Before that teaching hardens into a rule, bring it back to your own day — one honest detail at a time.",
+            "Let the doctrine touch something concrete in you, not as a verdict, but as a question.",
+        ]
+        return _pick_variant(opts, thesis, prev_body[:48], str(chapter_index), "doctrine_reflection")
+
+    if pair == ("STORY", "REFLECTION"):
+        opts = [
+            "What you just watched is not a verdict on anyone — it is a mirror for a pattern you already carry.",
+            "Hold the story lightly, then ask what it would mean if the same move showed up in your week.",
+        ]
+        return _pick_variant(opts, thesis, prev_body[:48], str(chapter_index), "story_reflection")
+
+    return ""
+
+
+def _inject_slot_bridges(
+    slots: list[Any],
+    *,
+    chapter_index: int,
+    runtime_format: str,
+) -> str:
+    """Insert transition paragraphs between adjacent non-gap slots; order unchanged."""
+    global _CHAPTER_INDEX_TLS
+    _CHAPTER_INDEX_TLS = chapter_index
+
+    reflection_seed = ""
+    for s in slots:
+        st = (getattr(s, "slot_type", "") or "").strip().upper()
+        c = (getattr(s, "content", "") or "").strip()
+        if st == "REFLECTION" and c and not c.startswith("[CONTENT GAP"):
+            reflection_seed = c
+            break
+    thesis = _derive_thesis(reflection_seed, chapter_index) if reflection_seed else ""
+
+    rf = (runtime_format or "").strip()
+    use_micro = rf in _MICRO_RUNTIME_FORMATS
+
+    pieces: list[str] = []
+    prev: Any | None = None
+    last_bridge_norm = ""
+    last_reflection = ""
+    last_story = ""
+
+    for slot in slots:
+        content = (getattr(slot, "content", "") or "").strip()
+        if not content or content.startswith("[CONTENT GAP"):
+            continue
+        st = (getattr(slot, "slot_type", "") or "").strip().upper()
+
+        if prev is not None:
+            pt = (getattr(prev, "slot_type", "") or "").strip().upper()
+            want = (pt, st)
+            allowed = (want in _MICRO_BRIDGE_PAIRS) if use_micro else (want in _FULL_BRIDGE_PAIRS)
+            if allowed and not _should_skip_slot_bridge(pt, st, getattr(prev, "content", "") or ""):
+                br = _slot_bridge_paragraph(
+                    pt,
+                    st,
+                    thesis,
+                    prev_body=getattr(prev, "content", "") or "",
+                    chapter_index=chapter_index,
+                    last_reflection=last_reflection,
+                    last_story=last_story,
+                ).strip()
+                if br:
+                    bn = re.sub(r"\s+", " ", br.lower()).strip()
+                    if bn != last_bridge_norm:
+                        pieces.append(br)
+                        last_bridge_norm = bn
+
+        pieces.append(content)
+        if st == "REFLECTION":
+            last_reflection = content
+        if st == "STORY":
+            last_story = content
+        prev = slot
+
+    return "\n\n".join(pieces)
+
+
 def compose_from_enriched_book(
     enriched: "EnrichedBook",
     quality_profile: str = "draft",

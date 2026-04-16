@@ -337,7 +337,8 @@ def test_delivery_contract_gate_flags_leaked_section_headers() -> None:
     dirty = "## HOOK v01\n\nSome prose.\n"
     with pytest.raises(DeliveryContractError) as exc:
         delivery_contract_gate(dirty, source_hint="test")
-    assert "assembly section header" in str(exc.value).lower()
+    low = str(exc.value).lower()
+    assert "leaked" in low and ("assembly slot heading" in low or "assembly section header" in low)
 
 
 def test_dedup_repeated_blocks_exact_duplicate_removes_second() -> None:

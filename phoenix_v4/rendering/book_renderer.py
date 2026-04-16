@@ -123,14 +123,23 @@ _DIVIDER_RE    = re.compile(r"^---\s*$")
 _CHAPTER_RE    = re.compile(r"^={5,}.*CHAPTER", re.IGNORECASE)
 
 # Markdown section headers leaked from assembly (e.g. ## HOOK v01) — not reader-facing prose.
-# HOOK/STORY/SCENE: whole heading line only (optional vNN), so "## Story of my life" is kept.
+# MECHANISM_DEPTH / BAND / … : whole line only (case-insensitive for these tokens).
+# HOOK/STORY/SCENE: **case-sensitive** slot tokens so "## Story of my life" is kept but "## STORY v01 --- …" is stripped.
 _SECTION_VARIANT_RE = re.compile(
     r"^#{1,3}\s+(?:"
-    r"(?:HOOK|STORY|SCENE)(?:\s+v\d+)?\s*"
-    r"|(?:MECHANISM_DEPTH|COST_TYPE|COST_INTENSITY|IDENTITY_STAGE|BAND)\s*"
+    r"(?:MECHANISM_DEPTH|COST_TYPE|COST_INTENSITY|IDENTITY_STAGE|BAND)\s*"
     r")$",
     re.IGNORECASE,
 )
+
+# Any line beginning with ## + uppercase HOOK|STORY|SCENE (+ optional vNN) is assembly scaffolding,
+# including inline junk like "## HOOK v01 --- --- note".
+_ASSEMBLY_SLOT_HEADING_LINE_RE = re.compile(
+    r"^#{1,3}\s+(HOOK|STORY|SCENE)(?:\s+v\d+)?(?:\s+.*)?$"
+)
+
+# Python dict blobs accidentally pasted into prose (pipeline/debug).
+_INTRO_DICT_OPEN_RE = re.compile(r"\{(?:'intro'|\"intro\"):")
 
 # Spine / template leakage: long lines concatenating many "## HOOK v01 --- --- prose" blocks.
 _HOOK_SCENE_LEAK = re.compile(
@@ -261,8 +270,41 @@ def _resolve_loc_var_fallbacks(text: str, plan: Optional[dict[str, Any]] = None)
     return "".join(resolved_parts)
 
 
+def _strip_intro_dict_literals(text: str) -> str:
+    """Remove dict blobs starting with ``{'intro':`` / ``{\"intro\":`` (single- or multi-line).
+
+    Uses brace-depth only (no string-aware parsing) — conservative heuristic per delivery spec.
+    """
+    if not text:
+        return text
+    parts: list[str] = []
+    pos = 0
+    n = len(text)
+    while pos < n:
+        m = _INTRO_DICT_OPEN_RE.search(text, pos)
+        if not m:
+            parts.append(text[pos:])
+            break
+        parts.append(text[pos : m.start()])
+        depth = 0
+        j = m.start()
+        while j < n:
+            ch = text[j]
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    j += 1
+                    break
+            j += 1
+        pos = j
+    return "".join(parts)
+
+
 def _strip_scaffolding_lines(text: str) -> str:
     """Remove lines that are pipeline control data or markdown scaffolding, not prose."""
+    text = _strip_intro_dict_literals(text)
     out: list[str] = []
     for line in text.splitlines():
         stripped = _scrub_inline_leaked_slot_markers(line).strip()
@@ -272,6 +314,7 @@ def _strip_scaffolding_lines(text: str) -> str:
             or _TITLE_META_RE.match(stripped)
             or _DIVIDER_RE.match(stripped)
             or _CHAPTER_RE.match(stripped)
+            or _ASSEMBLY_SLOT_HEADING_LINE_RE.match(stripped)
             or _SECTION_VARIANT_RE.match(stripped)
         ):
             continue
@@ -477,7 +520,8 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
       - Pipeline metadata keys: family:, voice_mode:, mode:, reframe_type:
       - Markdown dividers: ---
       - Chapter scaffold markers: ===...=== CHAPTER
-      - Assembly section headers: ## HOOK / ## STORY / ## SCENE / ## MECHANISM_DEPTH / …
+      - Assembly section headers: ## HOOK / ## STORY / ## SCENE (case-sensitive slot tokens) / ## MECHANISM_DEPTH / …
+      - Python intro-dict blobs: ``{'intro':`` / ``{\"intro\":``
     """
     violations: list[str] = []
     for lineno, line in enumerate(text.splitlines(), 1):
@@ -493,9 +537,17 @@ def delivery_contract_gate(text: str, source_hint: str = "output") -> None:
             violations.append(f"  line {lineno}: markdown divider '---'")
         if _CHAPTER_RE.match(stripped):
             violations.append(f"  line {lineno}: chapter scaffold marker {stripped[:40]!r}")
+        if _ASSEMBLY_SLOT_HEADING_LINE_RE.match(stripped):
+            violations.append(
+                f"  line {lineno}: assembly slot heading leaked {stripped[:50]!r}"
+            )
         if _SECTION_VARIANT_RE.match(stripped):
             violations.append(
                 f"  line {lineno}: assembly section header leaked {stripped[:50]!r}"
+            )
+        if _INTRO_DICT_OPEN_RE.search(line):
+            violations.append(
+                f"  line {lineno}: intro-dict literal leaked {stripped[:50]!r}"
             )
         if re.search(r"#{1,3}\s+(?:HOOK|SCENE|STORY)\s+v\d+", stripped, re.IGNORECASE):
             violations.append(
