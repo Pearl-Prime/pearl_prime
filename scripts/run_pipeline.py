@@ -456,9 +456,8 @@ def _run_spine_pipeline_mode(
         f"{seed}:selector",
         _emotional_seq if _emotional_seq else None,
     )
-    _publishable_book = bool(getattr(args, "render_book", False)) and quality_profile in (
-        "production",
-        "draft",
+    _publishable_book = quality_profile in ("production",) or (
+        bool(getattr(args, "render_book", False)) and quality_profile in ("production", "draft")
     )
     enriched = select_enrichment(
         EnrichmentRequest(
@@ -478,6 +477,21 @@ def _run_spine_pipeline_mode(
         ),
         repo_root,
     )
+    # Post-enrichment gap audit: hard-fail in production if any gaps survived
+    if quality_profile == "production":
+        gap_slots = []
+        for ec in enriched.chapters:
+            for slot in ec.slots:
+                if slot.content and slot.content.startswith("[CONTENT GAP"):
+                    gap_slots.append(
+                        f"ch{ec.number} {slot.slot_type}: {slot.content[:80]}"
+                    )
+        if gap_slots:
+            raise SystemExit(
+                f"[PRODUCTION GATE] Content gaps found in enriched manuscript "
+                f"({len(gap_slots)} slots). Fix content banks or atom coverage before production run.\n"
+                + "\n".join(f"  - {s}" for s in gap_slots[:10])
+            )
     pre_depth_words = enriched.total_words
     depth_map_path = repo_root / "config" / "depth" / "depth_module_map.yaml"
     if depth_map_path.exists() and yaml:

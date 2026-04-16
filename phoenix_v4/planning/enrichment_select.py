@@ -881,7 +881,11 @@ def select_enrichment(
                     )
                 audit_counts["slots_empty"] += 1
                 gap_msg = f"[CONTENT GAP: {stype} for {topic} ch{bm_ch.number}]"
-                logger.error("Enrichment gap: %s (slot %d)", gap_msg, slot_i)
+                logger.error(
+                    "Enrichment gap: %s (slot %d) — PRODUCTION WILL FAIL. "
+                    "Add atoms or content bank entries for topic=%s slot_type=%s.",
+                    gap_msg, slot_i, topic, stype
+                )
                 gap_details.append(
                     {"chapter": bm_ch.number, "slot_index": slot_i, "slot_type": stype}
                 )
