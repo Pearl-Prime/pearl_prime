@@ -168,33 +168,85 @@ def assign_chapter_purpose_contracts(
     return out
 
 
+# Phase pools (1-indexed chapter numbers). Keys must match BESTSELLER_STRUCTURES entries.
+_PHASE_POOLS: dict[str, list[str]] = {
+    "opening":      ["gladwell_spiral", "zoom_lens", "van_der_kolk"],
+    "early_middle": ["promise_engine", "myth_killer", "case_file"],
+    "mid_book":     ["contrast_engine", "ancestor", "permission_slip"],
+    "late_middle":  ["atomic", "brene_brown", "case_file"],
+    "closing":      ["zoom_lens", "letter", "gladwell_spiral"],
+}
+
+
+def _phase_pool(chapter_1indexed: int, total_chapters: int) -> list[str]:
+    """Return the phase-appropriate structure pool for a chapter."""
+    pct = (chapter_1indexed - 1) / max(total_chapters - 1, 1)
+    if pct < 0.15:
+        return _PHASE_POOLS["opening"]
+    elif pct < 0.40:
+        return _PHASE_POOLS["early_middle"]
+    elif pct < 0.65:
+        return _PHASE_POOLS["mid_book"]
+    elif pct < 0.88:
+        return _PHASE_POOLS["late_middle"]
+    else:
+        return _PHASE_POOLS["closing"]
+
+
 def assign_bestseller_structures(chapter_count: int, selector_key_prefix: str) -> list[str]:
     """
     Assign one of the 12 Bestseller structures per chapter. Deterministic.
+
+    Uses phase-aware selection: each chapter draws from a pool matching its
+    narrative phase (opening / early-middle / mid-book / late-middle / closing)
+    as defined in docs/BESTSELLER_STRUCTURES.md.
+
     Never more than MAX_BESTSELLER_RUN (3) of the same structure in a row.
+    If the phase pool is exhausted due to the run constraint, falls back to
+    the global BESTSELLER_STRUCTURES list as secondary candidates.
     """
     result: list[str] = []
-    n = len(BESTSELLER_STRUCTURES)
+    global_n = len(BESTSELLER_STRUCTURES)
+
     for ch in range(chapter_count):
+        pool = _phase_pool(ch + 1, chapter_count)
+        pool_n = len(pool)
+
         seed = f"{selector_key_prefix}:bestseller:ch{ch}"
         h = hashlib.sha256(seed.encode("utf-8")).digest()
-        idx = int.from_bytes(h[:2], "big") % n
-        candidate = BESTSELLER_STRUCTURES[idx]
+        idx = int.from_bytes(h[:2], "big") % pool_n
+        candidate = pool[idx]
+
+        # Count current run length of the candidate
         run_len = 0
         for i in range(len(result) - 1, -1, -1):
             if result[i] == candidate:
                 run_len += 1
             else:
                 break
+
         if run_len >= MAX_BESTSELLER_RUN:
-            # Pick next distinct structure (deterministic)
+            # Structures used in the last MAX_BESTSELLER_RUN positions
             used = {result[i] for i in range(max(0, len(result) - MAX_BESTSELLER_RUN), len(result))}
-            for j in range(1, n):
-                next_idx = (idx + j) % n
-                alt = BESTSELLER_STRUCTURES[next_idx]
+
+            # Try phase pool first (deterministic rotation)
+            found = False
+            for j in range(1, pool_n):
+                alt = pool[(idx + j) % pool_n]
                 if alt not in used:
                     candidate = alt
+                    found = True
                     break
+
+            if not found:
+                # Phase pool fully blocked; fall back to global list
+                global_idx = int.from_bytes(h[2:4], "big") % global_n
+                for j in range(global_n):
+                    alt = BESTSELLER_STRUCTURES[(global_idx + j) % global_n]
+                    if alt not in used:
+                        candidate = alt
+                        break
+
         result.append(candidate)
     return result
 
