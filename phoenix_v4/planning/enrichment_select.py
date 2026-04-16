@@ -7,7 +7,8 @@ Priority (aligned with phoenix_v4.planning.registry_resolver.resolve_book):
   2. Persona atoms (HOOK, SCENE, STORY) from atoms/{persona}/{topic}/.
   3. For EXERCISE only: practice library before registry variant.
   4. Registry variant from registry/{topic}.yaml (nth section of that type per chapter).
-  5. Empty: visible CONTENT GAP marker + ERROR log.
+  5. Content bank fallbacks from config/content_banks/*.yaml (slot-type mapped bridges).
+  6. Empty: visible CONTENT GAP marker + ERROR log (or EnrichmentGapError when publishable_book).
 
 Practice library: logs WARNING via get_exercise_for_chapter when used.
 
@@ -26,6 +27,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from phoenix_v4.planning.beatmap_compile import Beatmap, BeatmapChapter, BeatmapSlot
+from phoenix_v4.planning.selection_allowlist import atom_passes_book_governance
+from phoenix_v4.planning.slot_resolver import _bestseller_metadata_score
 from phoenix_v4.planning.registry_resolver import (
     _TEACHER_TYPE_MAP,
     _TEACHER_OVERLAY_TYPES,
@@ -40,6 +43,84 @@ from phoenix_v4.planning.registry_resolver import (
 logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+
+# Registry beatmap slot type → content-bank slot_type values (enrichment_slot_fallback_bank.yaml).
+_ENRICH_BANK_SLOT_TYPES: Dict[str, Tuple[str, ...]] = {
+    "HOOK": ("FALLBACK_PROSE",),
+    "SCENE": ("FALLBACK_PROSE",),
+    "REFLECTION": ("MECHANISM_BRIDGE",),
+    "PIVOT": ("FLOW_GLUE",),
+    "INTEGRATION": ("INTEGRATION_LAND", "FLOW_GLUE"),
+    "THREAD": ("CHAPTER_PROPULSION",),
+    "TAKEAWAY": ("TAKEAWAY_PULL",),
+    "COMPRESSION": ("DOCTRINE_SECULAR_BRIDGE", "MECHANISM_BRIDGE"),
+    "TEACHER_DOCTRINE": ("DOCTRINE_SECULAR_BRIDGE", "MECHANISM_BRIDGE"),
+}
+
+
+class EnrichmentGapError(RuntimeError):
+    """Publishable-book runs must not ship visible [CONTENT GAP: ...] markers."""
+
+
+def _try_content_bank_fallback(
+    *,
+    reg: Any,
+    slot_type: str,
+    seed_key: str,
+    topic: str,
+    persona_id: str,
+    frame: str,
+    runtime_format: str,
+    chapter_index0: int,
+    seed: str,
+    chapter_targets: Dict[str, Any],
+) -> Optional[Tuple[str, str, str, Dict[str, Any]]]:
+    """Return (content, source, source_id, score_meta) or None."""
+    from phoenix_v4.content_banks.selector import FragmentContext, _collect_candidates
+
+    st = slot_type.strip().upper()
+    aliases = _ENRICH_BANK_SLOT_TYPES.get(st, ())
+    if not aliases:
+        return None
+    stems = list(reg.banks.keys())
+    if not stems:
+        return None
+    ctx = FragmentContext(
+        topic_id=topic,
+        persona_id=persona_id,
+        frame=frame,
+        runtime_format_id=runtime_format,
+        chapter_index=chapter_index0,
+        book_seed=seed,
+        slot_key=seed_key,
+    )
+    pool: List[dict[str, Any]] = []
+    for alias in aliases:
+        pool.extend(_collect_candidates(reg, stems, alias, ctx))
+    if not pool:
+        return None
+    pool.sort(key=lambda r: str(r.get("variant_id") or ""))
+    scored = sorted(
+        pool,
+        key=lambda r: (
+            -_bestseller_metadata_score(r, chapter_targets),
+            str(r.get("variant_id") or ""),
+        ),
+    )
+    digest = hashlib.sha256(seed_key.encode("utf-8")).digest()
+    idx = int.from_bytes(digest[:8], "big") % len(scored)
+    picked = scored[idx]
+    body = str(picked.get("body") or "").strip()
+    if len(body.split()) < 11:
+        return None
+    vid = str(picked.get("variant_id") or "")
+    bscore = _bestseller_metadata_score(picked, chapter_targets)
+    return (
+        body,
+        "content_bank",
+        vid,
+        {"bestseller_target_score": bscore, "content_bank_variant_id": vid},
+    )
 
 def _load_runtime_word_bounds(
     runtime_format: str,
@@ -78,6 +159,7 @@ class EnrichmentRequest:
     seed: str
     spine_context: Optional[Dict[str, Any]] = None
     publishable_book: bool = False
+    content_banks_dir: Optional[Path] = None
 
 
 @dataclass
@@ -91,6 +173,9 @@ class EnrichedSlot:
     enrichment_applied: List[str]
     exercise_phase: Optional[str] = None
     journey_exercise_id: Optional[str] = None
+    variant_id: str = ""
+    atom_id: str = ""
+    match_scores: Dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -159,8 +244,22 @@ def _try_teacher_content(
     teacher_atoms: Dict[str, List[dict]],
     slot_type: str,
     seed_key: str,
-) -> Optional[Tuple[str, str, int]]:
+    *,
+    topic_id: str = "",
+    persona_id: str = "",
+    book_frame: str = "somatic_first",
+) -> Optional[Tuple[str, str, int, Dict[str, Any]]]:
     pool = _pick_teacher_pool(teacher_atoms, slot_type)
+    pool = [
+        a
+        for a in pool
+        if atom_passes_book_governance(
+            a.get("metadata"),
+            topic_id=topic_id,
+            persona_id=persona_id,
+            book_frame=book_frame,
+        )
+    ]
     if not pool:
         return None
     idx = _deterministic_index(f"{seed_key}:teacher", len(pool))
@@ -169,18 +268,32 @@ def _try_teacher_content(
     if not content:
         return None
     aid = str(atom.get("atom_id") or f"auto_{idx}")
-    return content, aid, idx
+    meta = dict(atom.get("metadata") or {})
+    return content, aid, idx, meta
 
 
 def _try_persona_content(
     persona_atoms: Dict[str, List[dict]],
     slot_type: str,
     seed_key: str,
-) -> Optional[Tuple[str, str, int]]:
+    *,
+    topic_id: str = "",
+    persona_id: str = "",
+    book_frame: str = "somatic_first",
+) -> Optional[Tuple[str, str, int, Dict[str, Any]]]:
     st = slot_type.strip().upper()
     if st not in _PERSONA_OVERLAY_TYPES:
         return None
-    pool = persona_atoms.get(st, [])
+    pool = [
+        a
+        for a in (persona_atoms.get(st, []))
+        if atom_passes_book_governance(
+            a.get("metadata"),
+            topic_id=topic_id,
+            persona_id=persona_id,
+            book_frame=book_frame,
+        )
+    ]
     if not pool:
         return None
     idx = _deterministic_index(f"{seed_key}:persona", len(pool))
@@ -188,7 +301,8 @@ def _try_persona_content(
     content = str(atom.get("content") or "").strip()
     if not content:
         return None
-    return content, str(atom.get("atom_id") or f"persona_{idx}"), idx
+    meta = dict(atom.get("metadata") or {})
+    return content, str(atom.get("atom_id") or f"persona_{idx}"), idx, meta
 
 
 def _try_practice_library(
@@ -364,6 +478,57 @@ def _expand_atom_pool_blocks(
     return out
 
 
+def _slot_spec_for(
+    context: Dict[str, Any],
+    chapter_number: int,
+    slot_index: int,
+) -> Dict[str, Any]:
+    specs = (context or {}).get("atom_slot_specs") or {}
+    chapter_specs = specs.get(str(chapter_number)) or specs.get(chapter_number) or []
+    if isinstance(chapter_specs, list) and 0 <= slot_index < len(chapter_specs):
+        item = chapter_specs[slot_index]
+        return item if isinstance(item, dict) else {}
+    return {}
+
+
+def _atom_allowed_by_slot_spec(atom: dict, slot_spec: Dict[str, Any]) -> bool:
+    """Apply deterministic persona/topic/forbidden tag filters when metadata exists."""
+    if not slot_spec:
+        return True
+    metadata = atom.get("metadata") if isinstance(atom.get("metadata"), dict) else {}
+    tags = {
+        str(t).strip().lower()
+        for t in (
+            atom.get("tags")
+            or metadata.get("tags")
+            or metadata.get("topic_tags")
+            or []
+        )
+    }
+    forbidden = {str(t).strip().lower() for t in slot_spec.get("forbidden_tags") or []}
+    if tags and forbidden and tags & forbidden:
+        return False
+    text = str(atom.get("content") or "").lower()
+    for bad in forbidden:
+        if bad and bad not in {"clinical_dsm"} and bad.replace("_", " ") in text:
+            return False
+    personas = {str(p).strip() for p in slot_spec.get("persona_filter") or []}
+    atom_persona = str(atom.get("persona_id") or metadata.get("persona_id") or "").strip()
+    if atom_persona and personas and atom_persona not in personas:
+        return False
+    topics = {str(t).strip() for t in slot_spec.get("topic_filter") or []}
+    atom_topic = str(atom.get("topic_id") or metadata.get("topic_id") or "").strip()
+    if atom_topic and topics and atom_topic not in topics:
+        return False
+    return True
+
+
+def _filtered_pool(pool: List[dict], slot_spec: Dict[str, Any]) -> List[dict]:
+    if not slot_spec:
+        return pool
+    return [atom for atom in pool if _atom_allowed_by_slot_spec(atom, slot_spec)]
+
+
 def _try_registry_variant(
     reg_lists: Dict[str, List[Dict[str, Any]]],
     slot_type: str,
@@ -464,12 +629,26 @@ def peek_registry_content_for_beatmap_slot(
         content: Optional[str] = None
 
         if tid and teacher_atoms:
-            t_hit = _try_teacher_content(teacher_atoms, stype, seed_key)
+            t_hit = _try_teacher_content(
+                teacher_atoms,
+                stype,
+                seed_key,
+                topic_id=topic,
+                persona_id=persona_id,
+                book_frame="somatic_first",
+            )
             if t_hit:
                 content = t_hit[0]
 
         if not content and persona_atoms:
-            p_hit = _try_persona_content(persona_atoms, stype, seed_key)
+            p_hit = _try_persona_content(
+                persona_atoms,
+                stype,
+                seed_key,
+                topic_id=topic,
+                persona_id=persona_id,
+                book_frame="somatic_first",
+            )
             if p_hit:
                 content = p_hit[0]
 
@@ -512,6 +691,18 @@ def select_enrichment(
     else:
         persona_atoms = {}
 
+    from phoenix_v4.content_banks.loader import load_content_bank_registry
+
+    try:
+        cb_reg = load_content_bank_registry(banks_dir=request.content_banks_dir)
+    except Exception as e:
+        logger.warning("Content bank registry unavailable: %s", e)
+        cb_reg = None
+
+    _spine = request.spine_context or {}
+    _frame = str(_spine.get("book_frame") or _spine.get("frame") or "somatic_first").strip()
+    _sel_targets = list(_spine.get("chapter_selector_targets") or [])
+
     format_bounds = _load_runtime_word_bounds(bm.runtime_format, root)
     format_wmax: Optional[int] = format_bounds[1] if format_bounds else None
 
@@ -525,11 +716,13 @@ def select_enrichment(
         "slots_empty": 0,
         "slots_format_scaled": 0,
         "format_word_cap_max": format_wmax,
+        "slots_from_content_bank": 0,
     }
     total_target_words = 0
     gap_details: List[Dict[str, Any]] = []
 
     enriched_chapters: List[EnrichedChapter] = []
+    plan_context = dict(request.spine_context or {})
 
     for bm_ch in bm.chapters:
         ch_key = _chapter_key(bm_ch.number)
@@ -549,10 +742,17 @@ def select_enrichment(
             total_target_words += slot.target_words
             stype = slot.slot_type.strip().upper()
             seed_key = f"{seed}:topic:{topic}:ch{bm_ch.number}:slot:{slot_i}:{stype}"
+            slot_spec = _slot_spec_for(plan_context, bm_ch.number, slot_i)
+            ch_tgt = (
+                _sel_targets[chapter_index0] if chapter_index0 < len(_sel_targets) else {}
+            )
 
             content: str = ""
             source: str = ""
             source_id: str = ""
+            variant_id = ""
+            atom_id = ""
+            match_scores: Dict[str, Any] = {}
             hooks_fired: List[str] = []
             reg_sec_meta: Optional[Tuple[Dict[str, Any], int]] = None
             persona_expand_pool: Optional[List[dict]] = None
@@ -562,21 +762,68 @@ def select_enrichment(
 
             # 1) Teacher
             if tid and teacher_atoms:
-                t_hit = _try_teacher_content(teacher_atoms, stype, seed_key)
+                teacher_atoms_for_slot = dict(teacher_atoms)
+                for _k, _pool in list(teacher_atoms_for_slot.items()):
+                    teacher_atoms_for_slot[_k] = _filtered_pool(_pool, slot_spec)
+                t_hit = _try_teacher_content(
+                    teacher_atoms_for_slot,
+                    stype,
+                    seed_key,
+                    topic_id=topic,
+                    persona_id=persona_id,
+                    book_frame=_frame,
+                )
                 if t_hit:
-                    content, source_id, teacher_primary_idx = t_hit
+                    content, source_id, teacher_primary_idx, t_meta = t_hit
                     source = "teacher_atom"
-                    teacher_expand_pool = _pick_teacher_pool(teacher_atoms, stype)
+                    _raw_tp = _pick_teacher_pool(teacher_atoms_for_slot, stype)
+                    teacher_expand_pool = [
+                        a
+                        for a in _raw_tp
+                        if atom_passes_book_governance(
+                            a.get("metadata"),
+                            topic_id=topic,
+                            persona_id=persona_id,
+                            book_frame=_frame,
+                        )
+                    ]
                     audit_counts["slots_from_teacher"] += 1
+                    atom_id = source_id
+                    match_scores["bestseller_target_score"] = _bestseller_metadata_score(
+                        t_meta, ch_tgt
+                    )
 
             # 2) Persona
             if not content and persona_atoms:
-                p_hit = _try_persona_content(persona_atoms, stype, seed_key)
+                persona_pool = _filtered_pool(persona_atoms.get(stype, []), slot_spec)
+                persona_atoms_for_slot = dict(persona_atoms)
+                persona_atoms_for_slot[stype] = persona_pool
+                p_hit = _try_persona_content(
+                    persona_atoms_for_slot,
+                    stype,
+                    seed_key,
+                    topic_id=topic,
+                    persona_id=persona_id,
+                    book_frame=_frame,
+                )
                 if p_hit:
-                    content, source_id, persona_primary_idx = p_hit
+                    content, source_id, persona_primary_idx, p_meta = p_hit
                     source = "persona_atom"
-                    persona_expand_pool = persona_atoms.get(stype, [])
+                    persona_expand_pool = [
+                        a
+                        for a in persona_pool
+                        if atom_passes_book_governance(
+                            a.get("metadata"),
+                            topic_id=topic,
+                            persona_id=persona_id,
+                            book_frame=_frame,
+                        )
+                    ]
                     audit_counts["slots_from_persona"] += 1
+                    atom_id = source_id
+                    match_scores["bestseller_target_score"] = _bestseller_metadata_score(
+                        p_meta, ch_tgt
+                    )
 
             # 3) EXERCISE — practice library before registry (matches registry_resolver)
             if not content and stype == "EXERCISE":
@@ -586,6 +833,7 @@ def select_enrichment(
                     source = "practice_library"
                     audit_counts["slots_from_practice_library"] += 1
                     audit_counts["practice_library_warnings"] += 1
+                    match_scores["source"] = "practice_library"
 
             # 4) Registry
             if not content:
@@ -595,9 +843,42 @@ def select_enrichment(
                     reg_sec_meta = (_sec_d, _v_i)
                     source = "registry"
                     audit_counts["slots_from_registry"] += 1
+                    variant_id = source_id
+                    vars_ = _sec_d.get("variants") or []
+                    var_rec: Dict[str, Any] = {}
+                    if 0 <= _v_i < len(vars_) and isinstance(vars_[_v_i], dict):
+                        var_rec = vars_[_v_i]
+                    match_scores["bestseller_target_score"] = _bestseller_metadata_score(
+                        var_rec, ch_tgt
+                    )
 
-            # 5) Gap
+            # 5) Content bank (bridges / fallbacks)
+            if not content and cb_reg is not None:
+                b_hit = _try_content_bank_fallback(
+                    reg=cb_reg,
+                    slot_type=stype,
+                    seed_key=seed_key,
+                    topic=topic,
+                    persona_id=persona_id,
+                    frame=_frame,
+                    runtime_format=rf_bm,
+                    chapter_index0=chapter_index0,
+                    seed=seed,
+                    chapter_targets=ch_tgt,
+                )
+                if b_hit:
+                    content, source, source_id, extra_scores = b_hit
+                    variant_id = str(extra_scores.get("content_bank_variant_id") or source_id)
+                    match_scores.update(extra_scores)
+                    audit_counts["slots_from_content_bank"] += 1
+
+            # 6) Gap
             if not content:
+                if request.publishable_book:
+                    raise EnrichmentGapError(
+                        f"No enrichable content for slot {stype} "
+                        f"(topic={topic} chapter={bm_ch.number} slot_index={slot_i})"
+                    )
                 audit_counts["slots_empty"] += 1
                 gap_msg = f"[CONTENT GAP: {stype} for {topic} ch{bm_ch.number}]"
                 logger.error("Enrichment gap: %s (slot %d)", gap_msg, slot_i)
@@ -694,6 +975,9 @@ def select_enrichment(
                     target_words=slot.target_words,
                     actual_words=actual_w,
                     enrichment_applied=hooks_fired,
+                    variant_id=variant_id,
+                    atom_id=atom_id,
+                    match_scores=dict(match_scores),
                 )
             )
 
@@ -766,7 +1050,7 @@ def dump_enriched_book_json(book: EnrichedBook, indent: int = 2) -> str:
 
 
 def selected_content_variants_artifact(book: EnrichedBook) -> Dict[str, Any]:
-    """Render artifact describing selected content per enriched slot."""
+    """Render artifact: variant_id / atom_id / match_scores per enriched slot."""
     return {
         "schema_version": 1,
         "stage": "selected_content_variants",
@@ -780,8 +1064,8 @@ def selected_content_variants_artifact(book: EnrichedBook) -> Dict[str, Any]:
                 "slots": [
                     {
                         "slot_type": s.slot_type,
-                        "variant_id": s.source_id,
-                        "atom_id": s.source_id if s.source != "registry" else "",
+                        "variant_id": s.variant_id,
+                        "atom_id": s.atom_id,
                         "source": s.source,
                         "source_id": s.source_id,
                         "target_words": s.target_words,
@@ -789,7 +1073,7 @@ def selected_content_variants_artifact(book: EnrichedBook) -> Dict[str, Any]:
                         "enrichment_applied": list(s.enrichment_applied or []),
                         "exercise_phase": s.exercise_phase,
                         "journey_exercise_id": s.journey_exercise_id,
-                        "match_scores": {},
+                        "match_scores": dict(s.match_scores or {}),
                     }
                     for s in ch.slots
                 ],
