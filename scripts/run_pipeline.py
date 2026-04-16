@@ -419,6 +419,31 @@ def _run_spine_pipeline_mode(
     runtime_fmt = (getattr(args, "runtime_format", None) or "standard_book").strip()
     try:
         book_plan = load_book_structure_plan(topic_id, persona_id, runtime_fmt, repo_root)
+    except FileNotFoundError as exc:
+        logger.info(
+            "No pre-authored plan found for %s × %s × %s — generating auto-plan",
+            topic_id,
+            persona_id,
+            runtime_fmt,
+        )
+        print(f"Book planning layer: no YAML plan found ({exc}); generating auto-plan.", file=sys.stderr)
+        try:
+            from phoenix_v4.planning.book_structure_plan import generate_book_plan
+            _frame_for_plan = str(getattr(args, "frame", "somatic_first") or "somatic_first").strip()
+            _seed_for_plan = str(getattr(args, "seed", "") or "")
+            _teacher_for_plan = str(book_spec_for_compiler.get("teacher_id") or "default_teacher").strip()
+            book_plan = generate_book_plan(
+                topic_id=topic_id,
+                persona_id=persona_id,
+                runtime_format=runtime_fmt,
+                engine_type=_frame_for_plan,
+                seed=_seed_for_plan,
+                teacher_id=_teacher_for_plan,
+                repo_root=repo_root,
+            )
+        except Exception as gen_exc:
+            print(f"Book planning layer: FAIL (auto-generate) — {gen_exc}", file=sys.stderr)
+            return 1
     except Exception as exc:
         print(f"Book planning layer: FAIL — {exc}", file=sys.stderr)
         return 1
