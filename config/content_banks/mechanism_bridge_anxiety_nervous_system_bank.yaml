@@ -1,0 +1,289 @@
+---
+# mechanism_bridge_anxiety_nervous_system_bank.yaml
+# Authority: docs/CONTENT_FRAGMENT_VARIATION_WRITER_SPEC.md §7
+# Slot type: MECHANISM_BRIDGE
+# Minimum: 10 variants (3 depth-1 / 4 depth-2 / 3 depth-3)
+# ontgp_move: "turn" for all
+
+selector_note: >
+  Mechanism bridge variants explain the anxiety-nervous system link without
+  overclaiming, promising outcomes, or presenting as universal law. All claims
+  use tendency, pattern, or common-response language. No "you will feel" promises.
+  No miracle framing. Select by mechanism_depth to match the chapter's depth target.
+  Three sentence-structure patterns are used: simple (S), compound (C), inverted (I).
+  All three orderings of observation → mechanism → implication are present across the bank.
+
+variants:
+
+  # ── DEPTH 1: surface — observable pattern only ────────────────────────────────
+
+  - variant_id: mbn_001
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      Anxiety often turns uncertainty into urgency before enough information has arrived.
+      The body acts on possibility as though it were proximity.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical", "somatic"]
+    frame_blocklist: ["buddhist", "spiritual", "law_of_attraction", "manifestation", "trauma_processing"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      specificity: 0.8
+      engagement: 0.7
+      practical_transfer: 0.6
+    collision_family: urgency_from_uncertainty
+    sentence_structure: simple
+    ordering: observation_then_mechanism
+    signature_phrases: ["turns uncertainty into urgency before enough information has arrived"]
+    forbidden_terms: ["The nervous system does not distinguish between real threat and imagined threat", "This is why knowing better rarely helps"]
+    notes_for_selector: "Depth 1 / simple / observation→mechanism. Two-sentence. No implication clause."
+
+  - variant_id: mbn_002
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      A threat response does not wait for a final answer.
+      In many situations, this pattern fires in advance of any confirmed risk.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical", "somatic"]
+    frame_blocklist: ["buddhist", "spiritual", "law_of_attraction", "manifestation", "trauma_processing"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      specificity: 0.7
+      engagement: 0.7
+      practical_transfer: 0.5
+    collision_family: anticipatory_response
+    sentence_structure: simple
+    ordering: mechanism_then_observation
+    signature_phrases: ["threat response does not wait for a final answer", "fires in advance of any confirmed risk"]
+    forbidden_terms: ["The nervous system does not distinguish between real threat and imagined threat", "This is why knowing better rarely helps"]
+    notes_for_selector: "Depth 1 / simple / mechanism→observation. Two-sentence. Pattern stated as tendency."
+
+  - variant_id: mbn_003
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      When stakes feel social, the body can respond before logic catches up.
+      That is not a malfunction — it is a timing issue.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical", "somatic"]
+    frame_blocklist: ["buddhist", "spiritual", "law_of_attraction", "manifestation", "trauma_processing"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: turn
+    ei_v2_targets:
+      embodiment: 0.7
+      specificity: 0.8
+      engagement: 0.7
+    collision_family: social_stakes_body
+    sentence_structure: inverted
+    ordering: observation_then_implication
+    signature_phrases: ["when stakes feel social, the body can respond before logic catches up", "a timing issue"]
+    forbidden_terms: ["The nervous system does not distinguish between real threat and imagined threat", "This is why knowing better rarely helps"]
+    notes_for_selector: "Depth 1 / inverted / observation→implication. Reframe without mechanism clause."
+
+  # ── DEPTH 2: causal — names the mechanism ─────────────────────────────────────
+
+  - variant_id: mbn_004
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      Prediction is useful until it starts impersonating proof.
+      The alarm system learns from repetition, not from outcome — which means a pattern can persist
+      well past the original threat.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical", "somatic"]
+    frame_blocklist: ["buddhist", "spiritual", "law_of_attraction", "manifestation", "trauma_processing"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 2
+    ontgp_move: turn
+    ei_v2_targets:
+      specificity: 0.9
+      engagement: 0.8
+      practical_transfer: 0.7
+    collision_family: prediction_as_proof
+    sentence_structure: compound
+    ordering: mechanism_then_implication
+    signature_phrases: ["prediction is useful until it starts impersonating proof", "learns from repetition, not from outcome"]
+    forbidden_terms: ["The nervous system does not distinguish between real threat and imagined threat", "This is why knowing better rarely helps"]
+    notes_for_selector: "Depth 2 / compound / mechanism→implication. Three-sentence. Names learning-via-repetition."
+
+  - variant_id: mbn_005
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      Reassurance can quiet one loop while making the next one louder,
+      because the calming confirms the threat was real enough to need managing.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical", "somatic"]
+    frame_blocklist: ["buddhist", "spiritual", "law_of_attraction", "manifestation", "trauma_processing"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 3
+    intensity: 3
+    mechanism_depth: 2
+    ontgp_move: turn
+    ei_v2_targets:
+      specificity: 0.9
+      engagement: 0.8
+      practical_transfer: 0.7
+    collision_family: reassurance_paradox
+    sentence_structure: compound
+    ordering: observation_then_mechanism
+    signature_phrases: ["quieting one loop while making the next one louder", "calming confirms the threat was real enough"]
+    forbidden_terms: ["The nervous system does not distinguish between real threat and imagined threat", "This is why knowing better rarely helps"]
+    notes_for_selector: "Depth 2 / compound / observation→mechanism. One long sentence. Reassurance paradox."
+
+  - variant_id: mbn_006
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      Avoidance tends to work briefly.
+      It works by removing the signal, not by solving the pattern that generated it.
+      Each successful removal can teach the system that avoidance is the solution.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical", "somatic"]
+    frame_blocklist: ["buddhist", "spiritual", "law_of_attraction", "manifestation", "trauma_processing"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 2
+    ontgp_move: turn
+    ei_v2_targets:
+      specificity: 0.9
+      practical_transfer: 0.8
+      engagement: 0.7
+    collision_family: avoidance_reinforcement
+    sentence_structure: simple
+    ordering: observation_then_mechanism_then_implication
+    signature_phrases: ["removing the signal, not solving the pattern", "each successful removal can teach the system"]
+    forbidden_terms: ["The nervous system does not distinguish between real threat and imagined threat", "This is why knowing better rarely helps"]
+    notes_for_selector: "Depth 2 / simple / full three-part order. Three-sentence. Avoidance-as-training."
+
+  - variant_id: mbn_007
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      In many people, the alarm fires not at confirmed danger
+      but at the first cluster of signals that resembles a past danger.
+      Resemblance is enough.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical", "somatic"]
+    frame_blocklist: ["buddhist", "spiritual", "law_of_attraction", "manifestation", "trauma_processing"]
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 2
+    ontgp_move: turn
+    ei_v2_targets:
+      specificity: 0.9
+      engagement: 0.8
+      somatic_precision: 0.5
+    collision_family: pattern_matching_alarm
+    sentence_structure: inverted
+    ordering: mechanism_then_observation
+    signature_phrases: ["first cluster of signals that resembles a past danger", "resemblance is enough"]
+    forbidden_terms: ["The nervous system does not distinguish between real threat and imagined threat", "This is why knowing better rarely helps"]
+    notes_for_selector: "Depth 2 / inverted / mechanism→observation. Three-sentence including one-word closer."
+
+  # ── DEPTH 3: structural — explains why mechanism exists ───────────────────────
+
+  - variant_id: mbn_008
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      The alarm runs fast because speed was more valuable than accuracy in the environments
+      that shaped it. Missing a real threat cost more than overreacting to a false one.
+      That tradeoff is still running in a context it did not evolve for.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical", "somatic"]
+    frame_blocklist: ["buddhist", "spiritual", "law_of_attraction", "manifestation", "trauma_processing"]
+    runtime_allowlist: ["standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 3
+    intensity: 3
+    mechanism_depth: 3
+    ontgp_move: turn
+    ei_v2_targets:
+      specificity: 0.9
+      engagement: 0.8
+      practical_transfer: 0.6
+    collision_family: evolutionary_mismatch
+    sentence_structure: compound
+    ordering: mechanism_then_implication
+    signature_phrases: ["speed was more valuable than accuracy in the environments that shaped it", "tradeoff is still running in a context it did not evolve for"]
+    forbidden_terms: ["The nervous system does not distinguish between real threat and imagined threat", "This is why knowing better rarely helps"]
+    notes_for_selector: "Depth 3 / compound / mechanism→implication. Evolutionary context without pop-science overclaiming."
+
+  - variant_id: mbn_009
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      Anxious patterns often persist because they were once functional.
+      The system kept a strategy that worked once and has not had reason to retire it.
+      The pattern is not irrational — it is outdated.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical", "somatic"]
+    frame_blocklist: ["buddhist", "spiritual", "law_of_attraction", "manifestation", "trauma_processing"]
+    runtime_allowlist: ["standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 3
+    intensity: 3
+    mechanism_depth: 3
+    ontgp_move: turn
+    ei_v2_targets:
+      specificity: 0.8
+      engagement: 0.8
+      practical_transfer: 0.7
+    collision_family: learned_persistence
+    sentence_structure: simple
+    ordering: observation_then_mechanism_then_implication
+    signature_phrases: ["system kept a strategy that worked once and has not had reason to retire it", "not irrational — it is outdated"]
+    forbidden_terms: ["The nervous system does not distinguish between real threat and imagined threat", "This is why knowing better rarely helps"]
+    notes_for_selector: "Depth 3 / simple / full order. Three-sentence. Functional-strategy framing — destigmatizing."
+
+  - variant_id: mbn_010
+    slot_type: MECHANISM_BRIDGE
+    body: >
+      At the structural level, the goal of the alarm is not accuracy — it is survival margin.
+      Casting a wide net and catching false positives is acceptable to a system
+      that cannot afford to miss a real one.
+      This means many of the signals that feel like warnings are the cost of a wide net.
+    topic_allowlist: ["anxiety"]
+    topic_blocklist: []
+    persona_allowlist: ["gen_z_professionals", "millennial_professionals", "general_adult"]
+    frame_allowlist: ["secular", "nervous_system", "clinical", "somatic"]
+    frame_blocklist: ["buddhist", "spiritual", "law_of_attraction", "manifestation", "trauma_processing"]
+    runtime_allowlist: ["standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 3
+    intensity: 4
+    mechanism_depth: 3
+    ontgp_move: turn
+    ei_v2_targets:
+      specificity: 0.9
+      engagement: 0.8
+      practical_transfer: 0.6
+    collision_family: survival_margin_logic
+    sentence_structure: inverted
+    ordering: implication_then_mechanism_then_observation
+    signature_phrases: ["goal of the alarm is not accuracy — it is survival margin", "cost of a wide net"]
+    forbidden_terms: ["The nervous system does not distinguish between real threat and imagined threat", "This is why knowing better rarely helps"]
+    notes_for_selector: "Depth 3 / inverted / implication→mechanism→observation. Four-sentence. Net metaphor, no neuroscience overclaiming."

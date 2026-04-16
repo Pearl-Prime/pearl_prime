@@ -12,7 +12,7 @@ from __future__ import annotations
 import hashlib
 import re
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Optional, Tuple
+from typing import TYPE_CHECKING, Any, Optional, Tuple
 
 if TYPE_CHECKING:
     from phoenix_v4.planning.pool_index import AtomEntry, PoolIndex
@@ -47,6 +47,9 @@ class ResolverContext:
     # V4 Book Template: required STORY role per chapter (chapter_idx -> RECOGNITION|MECHANISM_PROOF|TURNING_POINT|EMBODIMENT).
     # Derived from arc emotional_role_sequence. Soft filter: falls back to band-filtered pool if no match.
     required_role_by_chapter: Optional[dict[int, str]] = None
+    # Governance + bestseller selection: book frame (e.g. somatic_first) and per-chapter target metadata (0-based index).
+    book_frame: str = "somatic_first"
+    chapter_selector_targets: Optional[dict[int, dict[str, Any]]] = None
 
 
 def _selector_index(selector_key: str, available_count: int) -> int:
@@ -80,6 +83,52 @@ _THESIS_STOPWORDS = frozenset({
 _WORD_RE = re.compile(r"[a-z]{4,}")
 
 
+def _norm_match(a: Any, b: Any) -> bool:
+    return str(a or "").strip().lower() == str(b or "").strip().lower()
+
+
+def _bestseller_metadata_score(metadata: dict, target: dict[str, Any]) -> float:
+    """Weighted overlap between atom metadata and chapter planner targets. Deterministic; missing target keys contribute 0."""
+    if not target:
+        return 0.0
+    m = metadata or {}
+    score = 0.0
+    pairs = [
+        ("reader_objection", 4.0),
+        ("proof_mode", 3.0),
+        ("tension_type", 3.0),
+        ("private_shame_type", 3.0),
+        ("propulsion_type", 2.5),
+        ("chapter_intent", 2.0),
+        ("callback_role", 2.5),
+    ]
+    for key, weight in pairs:
+        want = target.get(key)
+        if want is None or str(want).strip() == "":
+            continue
+        got = m.get(key)
+        if got is not None and _norm_match(got, want):
+            score += weight
+    ol = target.get("open_loop")
+    if ol and str(ol).strip():
+        g = m.get("open_loop")
+        if g:
+            a, b = str(ol).strip().lower(), str(g).strip().lower()
+            if a == b or a in b or b in a:
+                score += 2.0
+    sh = target.get("shareability")
+    if sh is not None and str(sh).strip() != "":
+        try:
+            wi = int(sh)
+            gi = m.get("shareability")
+            if gi is not None and int(gi) == wi:
+                score += 1.5
+        except (TypeError, ValueError):
+            if _norm_match(m.get("shareability"), sh):
+                score += 1.5
+    return score
+
+
 def _thesis_keyword_overlap(thesis: str, metadata: dict) -> float:
     """Score 0.0-1.0: how well an atom's metadata aligns with the chapter thesis."""
     if not thesis:
@@ -89,7 +138,18 @@ def _thesis_keyword_overlap(thesis: str, metadata: dict) -> float:
         return 0.0
     # Gather searchable text from metadata
     meta_text_parts = []
-    for key in ("description", "summary", "keywords", "semantic_family", "theme", "topic"):
+    for key in (
+        "description",
+        "summary",
+        "keywords",
+        "semantic_family",
+        "theme",
+        "topic",
+        "thesis_sentence",
+        "chapter_intent",
+        "reader_objection",
+        "open_loop",
+    ):
         val = metadata.get(key)
         if isinstance(val, str):
             meta_text_parts.append(val.lower())
@@ -129,11 +189,7 @@ def resolve_slot(
         teacher_story_fallback=teacher_story_fallback,
     )
     available = [e for e in pool if e.atom_id not in context.used_atom_ids]
-    # HOOK and SCENE carry location grounding, not emotional content.
-    # Allow reuse when pool is exhausted — semantic_family decay still applies.
     _REUSABLE_SLOTS = frozenset({"HOOK", "SCENE"})
-    if not available and pool and slot_type in _REUSABLE_SLOTS:
-        available = list(pool)  # allow full pool for reuse
     # Repetition decay: exclude atoms whose semantic_family was already used this book
     if context.used_semantic_families is not None:
         available = [
@@ -160,6 +216,26 @@ def resolve_slot(
             role_filtered = [e for e in available if (e.metadata or {}).get("role") == required_role]
             if role_filtered:
                 available = role_filtered
+
+    from phoenix_v4.planning.selection_allowlist import atom_passes_book_governance
+
+    def _governed(entries: list) -> list:
+        return [
+            e
+            for e in entries
+            if atom_passes_book_governance(
+                e.metadata,
+                topic_id=context.topic_id,
+                persona_id=context.persona_id,
+                book_frame=context.book_frame,
+            )
+        ]
+
+    available = _governed(available)
+    # HOOK/SCENE: allow reuse from the governed pool when unused entries are exhausted.
+    if not available and pool and slot_type in _REUSABLE_SLOTS:
+        available = _governed(list(pool))
+
     if not available:
         # Teacher mode: only crash for core teacher-voiced slots (COMPRESSION, REFLECTION).
         # All other slots fall through to persona atoms via compiler.
@@ -177,11 +253,34 @@ def resolve_slot(
                 "Coverage gate should have caught this; resolver must not return None in teacher mode."
             )
         return None
+    tgt = (context.chapter_selector_targets or {}).get(chapter_idx) or {}
+    thesis_key = chapter_idx + 1
+    th_map = context.chapter_thesis or {}
+    ch_thesis = th_map.get(thesis_key)
+    if ch_thesis is None:
+        ch_thesis = th_map.get(str(thesis_key))
+    thesis_text = str(ch_thesis or "").strip()
+    if tgt.get("thesis_sentence"):
+        thesis_text = str(tgt["thesis_sentence"]).strip() or thesis_text
+
+    def _base_rank(e: "AtomEntry") -> tuple:
+        m = e.metadata or {}
+        b = _bestseller_metadata_score(m, tgt)
+        ths = _thesis_keyword_overlap(thesis_text, m) if thesis_text else 0.0
+        return (-b, -ths, e.atom_id)
+
     # Angle Integration (V4.7): chapter 1 framing bias — rank by angle_bias.score_atom then atom_id; deterministic pick
     if chapter_idx == 0 and context.angle_context:
         from phoenix_v4.planning.angle_bias import score_atom
+
         def _key(e: "AtomEntry") -> tuple:
-            return (-score_atom(e.metadata, slot_type, context.angle_context), e.atom_id)
+            m = e.metadata or {}
+            return (
+                -score_atom(m, slot_type, context.angle_context),
+                *_base_rank(e)[0:2],
+                e.atom_id,
+            )
+
         available.sort(key=_key)
     # Intro/ending variation: final chapter INTEGRATION — soft bias by ending_style
     elif (
@@ -192,35 +291,23 @@ def resolve_slot(
         ending_style_id = (context.ending_context.get("integration_ending_style_id") or "").strip()
         if ending_style_id:
             from phoenix_v4.planning.angle_bias import score_ending_atom
+
             def _key_end(e: "AtomEntry") -> tuple:
-                return (-score_ending_atom(e.metadata, ending_style_id), e.atom_id)
+                m = e.metadata or {}
+                return (
+                    -score_ending_atom(m, ending_style_id),
+                    *_base_rank(e)[0:2],
+                    e.atom_id,
+                )
+
             available.sort(key=_key_end)
         else:
-            available.sort(key=lambda e: e.atom_id)
+            available.sort(key=_base_rank)
     # Thesis-aware ranking (V4.8): bias REFLECTION and STORY atoms toward chapter thesis.
-    # Keys follow arc/plan convention: 1-based chapter index (same as CompiledBook.chapter_thesis).
-    elif (
-        slot_type in ("REFLECTION", "STORY", "HOOK", "SCENE")
-        and context.chapter_thesis
-    ):
-        th_map = context.chapter_thesis
-        thesis_key = chapter_idx + 1
-        ch_thesis = th_map.get(thesis_key)
-        if ch_thesis is None:
-            ch_thesis = th_map.get(str(thesis_key))
-        if ch_thesis and str(ch_thesis).strip():
-            thesis_text = str(ch_thesis).strip()
-
-            def _key_thesis(e: "AtomEntry") -> tuple:
-                score = _thesis_keyword_overlap(thesis_text, e.metadata or {})
-                return (-score, e.atom_id)  # Higher overlap first, then deterministic tiebreak
-
-            available.sort(key=_key_thesis)
-        else:
-            available.sort(key=lambda e: e.atom_id)
+    elif slot_type in ("REFLECTION", "STORY", "HOOK", "SCENE") and thesis_text:
+        available.sort(key=_base_rank)
     else:
-        # Lexicographic sort by atom_id (raw UTF-8; no Unicode normalization)
-        available.sort(key=lambda e: e.atom_id)
+        available.sort(key=_base_rank)
 
 
     selector_key = f"{context.selector_key_prefix}:{slot_type}:ch{chapter_idx:02d}:s{slot_idx:02d}"

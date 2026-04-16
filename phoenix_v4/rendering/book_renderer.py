@@ -436,6 +436,8 @@ def clean_for_delivery(
     """
     text = _resolve_loc_var_fallbacks(text, plan=plan)
     text = _strip_scaffolding_lines(text)
+    text = re.sub(r"\s*\{['\"][^'\"]+['\"]\s*:\s*", " ", text)
+    text = re.sub(r"\s*\[\s*\{\s*['\"][^'\"]+['\"]\s*:\s*", " ", text)
     text = _dedup_repeated_blocks(text, word_floor=_delivery_word_floor_from_plan(plan))
 
     mr_cfg: dict[str, Any] = {}

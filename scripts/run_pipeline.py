@@ -262,7 +262,33 @@ def _apply_book_quality_gate(
     policy_override: bool = False,
 ) -> tuple[list[str], dict]:
     """Write book_quality_report.json; return (pipeline_failure_tags, summary_fragment)."""
-    from phoenix_v4.quality.book_quality_gate import evaluate_book_quality, write_book_quality_report
+    try:
+        from phoenix_v4.quality.book_quality_gate import evaluate_book_quality, write_book_quality_report
+    except (ImportError, ModuleNotFoundError) as _e:
+        # Restored in-tree gate should import; this path is for mis-packaged checkouts only.
+        out_path = render_dir / "book_quality_report.json"
+        payload = {
+            "status": "ERROR",
+            "reason": f"book_quality_gate module unavailable: {_e}",
+        }
+        out_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        print(
+            f"Pearl Prime book quality gate: ERROR (module missing) — {out_path}",
+            file=sys.stderr,
+        )
+        fragment = {
+            "release_band": "Error",
+            "report_path": str(out_path),
+            "fail_reasons": [str(_e)],
+            "hold_reasons": [],
+        }
+        if gates_hard:
+            return ["book_quality_gate"], fragment
+        print(
+            "Pearl Prime book quality gate: non-production profile — continuing without gate.",
+            file=sys.stderr,
+        )
+        return [], fragment
 
     rep = evaluate_book_quality(
         prose,
@@ -314,6 +340,33 @@ def _extract_registry_chapters(prose: str) -> list[str]:
     return chapters
 
 
+def _scene_anchor_density_violations(prose: str, cap: int) -> list[dict]:
+    """Find repeated >3-word phrases appearing in more paragraphs than the plan allows."""
+    if cap <= 0:
+        return []
+    chapters = _extract_registry_chapters(prose)
+    violations: list[dict] = []
+    phrase_re = re.compile(r"\b[\w']+\b")
+    for ch_idx, chapter in enumerate(chapters, start=1):
+        paras = [p.strip() for p in re.split(r"\n\s*\n", chapter) if p.strip()]
+        phrase_paras: dict[str, set[int]] = {}
+        for p_idx, para in enumerate(paras):
+            words = [w.lower() for w in phrase_re.findall(para)]
+            for n in range(4, min(8, len(words)) + 1):
+                for i in range(0, len(words) - n + 1):
+                    phrase = " ".join(words[i : i + n])
+                    phrase_paras.setdefault(phrase, set()).add(p_idx)
+        offenders = [
+            {"phrase": phrase, "paragraph_count": len(indices)}
+            for phrase, indices in phrase_paras.items()
+            if len(indices) > cap
+        ]
+        if offenders:
+            offenders.sort(key=lambda x: (-x["paragraph_count"], x["phrase"]))
+            violations.append({"chapter": ch_idx, "cap": cap, "offenders": offenders[:10]})
+    return violations
+
+
 def _resolved_runtime_format_id(args: argparse.Namespace, format_plan_dict: dict) -> str:
     """Unify CLI / plan runtime id. Stage-2 ``to_compiler_input()`` uses ``format_runtime_id``; some paths use ``runtime_format_id``."""
     cli = (getattr(args, "runtime_format", None) or "").strip()
@@ -345,8 +398,17 @@ def _run_spine_pipeline_mode(
         budget_from_enriched,
         select_enrichment,
     )
+    from phoenix_v4.planning.book_structure_plan import load_book_structure_plan
+    from phoenix_v4.planning.chapter_plan import render_atom_slot_spec
+    from phoenix_v4.planning.chapter_planner import derive_chapter_selector_targets
     from phoenix_v4.planning.knob_apply import apply_knobs, load_knob_profile, load_spine
-    from phoenix_v4.rendering.book_renderer import chapter_flow_gate_report, clean_for_delivery
+    from phoenix_v4.quality.chapter_flow_gate import flow_profile_for_runtime_format
+    from phoenix_v4.rendering.book_renderer import (
+        chapter_flow_gate_report,
+        clean_for_delivery,
+        strengthen_rendered_spine_manuscript,
+    )
+    from phoenix_v4.rendering.golden_chapter_synthesis import dedupe_scene_furniture_book
     from phoenix_v4.rendering.chapter_composer import compose_from_enriched_book
 
     topic_id = book_spec_for_compiler.get("topic_id", "")
@@ -355,6 +417,15 @@ def _run_spine_pipeline_mode(
     teacher_for_enrich = None if not _tid_raw or _tid_raw == "default_teacher" else _tid_raw
 
     runtime_fmt = (getattr(args, "runtime_format", None) or "standard_book").strip()
+    try:
+        book_plan = load_book_structure_plan(topic_id, persona_id, runtime_fmt, repo_root)
+    except Exception as exc:
+        print(f"Book planning layer: FAIL — {exc}", file=sys.stderr)
+        return 1
+    atom_slot_specs = {
+        str(ch.chapter_number): render_atom_slot_spec(ch)
+        for ch in book_plan.chapters
+    }
 
     spine = load_spine(topic_id, repo_root)
     knob_profile = load_knob_profile(topic_id, repo_root)
@@ -369,8 +440,26 @@ def _run_spine_pipeline_mode(
     fmt_spec = load_format_spec(runtime_fmt, repo_root)
     beatmap = compile_beatmap(shaped_spine, engines_data, fmt_spec, repo_root)
 
+    render_dir = Path(args.render_dir) if args.render_dir else Path("artifacts/rendered") / f"spine-{topic_id}"
+    render_dir.mkdir(parents=True, exist_ok=True)
+
     seed = f"spine:{topic_id}:{persona_id}:{getattr(args, 'seed', '1')}"
     _frame = str(getattr(args, "frame", "somatic_first") or "somatic_first").strip()
+    _book_frame = str(book_spec_for_compiler.get("book_frame") or _frame).strip()
+    _n_chapters = len(beatmap.chapters)
+    _emotional_seq = [
+        str(getattr(ch, "emotional_job", "") or "").strip().lower()
+        for ch in shaped_spine.chapters[:_n_chapters]
+    ]
+    _chapter_selector_targets = derive_chapter_selector_targets(
+        _n_chapters,
+        f"{seed}:selector",
+        _emotional_seq if _emotional_seq else None,
+    )
+    _publishable_book = bool(getattr(args, "render_book", False)) and quality_profile in (
+        "production",
+        "draft",
+    )
     enriched = select_enrichment(
         EnrichmentRequest(
             beatmap=beatmap,
@@ -378,7 +467,14 @@ def _run_spine_pipeline_mode(
             persona_id=persona_id,
             topic_id=topic_id,
             seed=seed,
-            spine_context={"frame": _frame},
+            spine_context={
+                "frame": _frame,
+                "book_frame": _book_frame,
+                "book_plan_id": book_plan.plan_id,
+                "atom_slot_specs": atom_slot_specs,
+                "chapter_selector_targets": _chapter_selector_targets,
+            },
+            publishable_book=_publishable_book,
         ),
         repo_root,
     )
@@ -394,15 +490,71 @@ def _run_spine_pipeline_mode(
         enriched,
         quality_profile=quality_profile,
         governance_report=_governance_report,
+        artifact_dir=render_dir,
     )
     prose = clean_for_delivery(
         prose,
-        plan={"runtime_format_id": runtime_fmt},
+        plan={"runtime_format_id": runtime_fmt, "book_plan_id": book_plan.plan_id},
         governance_report=_governance_report,
     )
-
-    render_dir = Path(args.render_dir) if args.render_dir else Path("artifacts/rendered") / f"spine-{topic_id}"
-    render_dir.mkdir(parents=True, exist_ok=True)
+    _flow_profile = flow_profile_for_runtime_format(runtime_fmt)
+    prose = strengthen_rendered_spine_manuscript(
+        prose,
+        book_seed=seed,
+        flow_profile=_flow_profile,
+    )
+    prose, _whole_book_dedupe_notes = dedupe_scene_furniture_book(prose)
+    if _whole_book_dedupe_notes:
+        _governance_report.setdefault("whole_book_dedupe_notes", []).extend(_whole_book_dedupe_notes)
+    prose = clean_for_delivery(
+        prose,
+        plan={"runtime_format_id": runtime_fmt, "book_plan_id": book_plan.plan_id},
+        governance_report=_governance_report,
+    )
+    prose = strengthen_rendered_spine_manuscript(
+        prose,
+        book_seed=seed,
+        flow_profile=_flow_profile,
+    )
+    scene_anchor_cap = min(
+        int((ch.scene_plan or {}).get("scene_anchor_cap", 2))
+        for ch in book_plan.chapters
+    )
+    scene_anchor_violations = _scene_anchor_density_violations(prose, scene_anchor_cap)
+    scene_anchor_report_path = render_dir / "scene_anchor_density_report.json"
+    if scene_anchor_violations:
+        scene_anchor_report_path.write_text(
+            json.dumps(
+                {
+                    "status": "FAIL",
+                    "book_plan_id": book_plan.plan_id,
+                    "scene_anchor_cap": scene_anchor_cap,
+                    "violations": scene_anchor_violations,
+                },
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        print(
+            f"Scene anchor density cap: FAIL — repeated >3-word phrases exceed cap {scene_anchor_cap}. "
+            f"Report: {scene_anchor_report_path}",
+            file=sys.stderr,
+        )
+        if gates_hard:
+            return 1
+    else:
+        scene_anchor_report_path.write_text(
+            json.dumps(
+                {
+                    "status": "PASS",
+                    "book_plan_id": book_plan.plan_id,
+                    "scene_anchor_cap": scene_anchor_cap,
+                    "violations": [],
+                },
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
     word_count = len(prose.split())
     _quality_gate_failures: list[str] = []
     _chapter_flow_status = "SKIPPED"
@@ -610,6 +762,7 @@ def _run_spine_pipeline_mode(
         # Bestseller editorial + structured editorial report
         try:
             from phoenix_v4.qa.editorial_report import generate_editorial_report
+            from phoenix_v4.rendering.book_renderer import _runtime_word_range as _editorial_runtime_word_range
 
             spine_plan = {
                 "source": "spine_pipeline",
@@ -619,10 +772,35 @@ def _run_spine_pipeline_mode(
                 "runtime_format_id": runtime_fmt,
                 "chapter_count": len(enriched.chapters),
             }
-            _prose_map = {f"chapter_{i}": text for i, text in enumerate(_chapters_for_quality)}
+            def _strip_rendered_chapter_heading(chapter_text: str) -> str:
+                _lines = (chapter_text or "").splitlines()
+                if _lines and re.match(r"^\s*Chapter\s+\d+\s*$", _lines[0].strip()):
+                    _lines = _lines[1:]
+                if _lines and _lines[0].strip() and not _lines[0].strip().endswith((".", "!", "?")):
+                    _lines = _lines[1:]
+                return "\n".join(_lines).strip()
+
+            _chapters_for_editorial = [
+                _strip_rendered_chapter_heading(_ch) for _ch in _chapters_for_quality
+            ]
+            _prose_map = {f"chapter_{i}": text for i, text in enumerate(_chapters_for_editorial)}
+            _editorial_runtime_bounds = _editorial_runtime_word_range(runtime_fmt)
+            if _editorial_runtime_bounds and _chapters_for_editorial:
+                _avg_min = _editorial_runtime_bounds[0] / max(1, len(_chapters_for_editorial))
+                _avg_max = _editorial_runtime_bounds[1] / max(1, len(_chapters_for_editorial))
+                # Short audio books intentionally use uneven chapter lengths.
+                # Score per-chapter budget as a runway around the format target,
+                # not as a longform 1,500-3,500w chapter requirement.
+                _editorial_word_min = max(120, int(_avg_min * 0.50))
+                _editorial_word_max = max(_editorial_word_min + 100, int(_avg_max * 1.80))
+            else:
+                _editorial_word_min = 1500
+                _editorial_word_max = 3500
             _editorial_obj = generate_editorial_report(
-                prose,
-                _chapters_for_quality,
+                "\n\n".join(_chapters_for_editorial),
+                _chapters_for_editorial,
+                word_target_min=_editorial_word_min,
+                word_target_max=_editorial_word_max,
             )
             _editorial_dict = _editorial_obj.to_dict()
             _drift_count = sum(
@@ -841,6 +1019,7 @@ def _run_spine_pipeline_mode(
             "persona_id": persona_id,
             "teacher_id": teacher_for_enrich or "",
             "runtime_format": runtime_fmt,
+            "book_plan_id": book_plan.plan_id,
             "word_count": word_count,
             "chapter_count": len(enriched.chapters),
             "pre_depth_total_words": pre_depth_words,
@@ -855,9 +1034,27 @@ def _run_spine_pipeline_mode(
         book_path = render_dir / "book.txt"
         book_path.write_text(prose, encoding="utf-8")
         print(f"Rendered book (spine mode): {book_path}")
+        _gcp = getattr(args, "golden_chapter_pilot", None)
+        if _gcp is not None:
+            try:
+                from phoenix_v4.rendering.golden_chapter_synthesis import (
+                    write_golden_chapter_pilot_artifacts,
+                )
+
+                _rp = write_golden_chapter_pilot_artifacts(
+                    manuscript_text=prose,
+                    enriched=enriched,
+                    chapter_number_1based=int(_gcp),
+                    out_dir=render_dir,
+                    topic_id=topic_id,
+                )
+                print(f"Golden chapter pilot report: {_rp}", file=sys.stderr)
+            except Exception as _gce:
+                print(f"Golden chapter pilot: FAIL — {_gce}", file=sys.stderr)
 
         budget_obj = budget_from_enriched(enriched)
         budget_obj["source"] = "spine_pipeline"
+        budget_obj["book_plan_id"] = book_plan.plan_id
         budget_obj["word_count"] = word_count
         budget_obj["pre_depth_total_words"] = pre_depth_words
         budget_obj["post_depth_total_words"] = post_depth_words
@@ -904,6 +1101,7 @@ def _run_spine_pipeline_mode(
             "persona_id": persona_id,
             "teacher_id": teacher_for_enrich or "",
             "runtime_format": runtime_fmt,
+            "book_plan_id": book_plan.plan_id,
             "quality_profile": quality_profile,
             "gates_run": gates_run,
             "gates_hard": gates_hard,
@@ -1069,6 +1267,16 @@ def main() -> int:
         choices=["somatic_first", "spiritual_first"],
         default="somatic_first",
         help="Frame governance for spine composition (default: somatic_first).",
+    )
+    ap.add_argument(
+        "--golden-chapter-pilot",
+        type=int,
+        default=None,
+        metavar="N",
+        help=(
+            "Spine mode + --render-book only: after render, write golden_chapter_report.json "
+            "and golden_chapter_N.txt for human chapter N (1-based) into --render-dir."
+        ),
     )
     ap.add_argument("--teacher", default=None, help="Teacher id for Teacher Mode (validated against teacher_persona_matrix)")
     ap.add_argument("--author", default=None, help="Author id (pen-name; resolved from author_registry, sets author_positioning_profile)")

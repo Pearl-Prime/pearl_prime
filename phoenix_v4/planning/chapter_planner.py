@@ -199,6 +199,68 @@ def assign_bestseller_structures(chapter_count: int, selector_key_prefix: str) -
     return result
 
 
+def derive_chapter_selector_targets(
+    chapter_count: int,
+    selector_key_prefix: str,
+    emotional_role_sequence: Optional[list[str]] = None,
+) -> list[dict[str, Any]]:
+    """
+    Deterministic per-chapter targets for bestseller metadata matching (selector + enrichment scoring).
+    """
+    proof_modes = ("data", "story", "diagnosis", "lived_experience", "framework")
+    tension_types = ("contradiction", "mystery", "stakes", "delayed_reveal", "moral")
+    objections = (
+        "selfishness",
+        "not_enough_time",
+        "already_tried",
+        "not_broken_enough",
+        "fear_of_relief",
+    )
+    shame_types = ("visibility", "incompetence", "burden", "comparison", "hypersensitivity")
+    propulsion = ("question", "image_return", "stakes_rise", "open_tab", "next_mechanism")
+    callback_roles = ("setup", "escalation", "return", "echo", "")
+    intents = ("recognition", "mechanism", "permission", "integration", "propulsion")
+
+    out: list[dict[str, Any]] = []
+    for ch in range(chapter_count):
+        seed = f"{selector_key_prefix}:ch_sel:{ch}"
+        h = hashlib.sha256(seed.encode("utf-8")).digest()
+        em = None
+        if emotional_role_sequence and ch < len(emotional_role_sequence):
+            em = str(emotional_role_sequence[ch]).strip().lower()
+        proof = proof_modes[h[0] % len(proof_modes)]
+        tension = tension_types[h[1] % len(tension_types)]
+        objection = objections[h[2] % len(objections)]
+        shame = shame_types[h[3] % len(shame_types)]
+        prop = propulsion[h[4] % len(propulsion)]
+        cb = callback_roles[h[5] % len(callback_roles)]
+        intent = intents[h[6] % len(intents)]
+        if em == "recognition":
+            intent = "recognition"
+        elif em in ("integration", "stabilization"):
+            intent = "integration"
+        share = int(h[7] % 4)
+        thesis_sentence = (
+            f"The chapter stresses {tension} tension with {proof} proof toward {intent}."
+        )
+        open_loop = f"What shifts if {objection} is not the final verdict?"
+        out.append(
+            {
+                "reader_objection": objection,
+                "proof_mode": proof,
+                "tension_type": tension,
+                "private_shame_type": shame,
+                "propulsion_type": prop,
+                "chapter_intent": intent,
+                "thesis_sentence": thesis_sentence,
+                "open_loop": open_loop,
+                "callback_role": cb,
+                "shareability": share,
+            }
+        )
+    return out
+
+
 def _augment_slots_for_bestseller_structure(
     base_row: list[str],
     structure_key: str,
@@ -290,6 +352,11 @@ class ChapterPlanResult:
     chapter_story_depths: list[str]
     warnings: list[str]
     chapter_bestseller_structures: Optional[list[str]] = None  # length == chapter_count
+    chapter_selector_targets: Optional[list[dict[str, Any]]] = None  # length == chapter_count
+
+
+# Alias for specs that refer to book-level structure planning output.
+BookStructurePlan = ChapterPlanResult
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:
@@ -414,6 +481,7 @@ def plan_chapters(
     """
     policy = _load_yaml(policy_path or POLICY_PATH)
     if not policy:
+        sel_t = derive_chapter_selector_targets(chapter_count, selector_key_prefix, emotional_role_sequence)
         return ChapterPlanResult(
             slot_definitions=slot_definitions,
             chapter_archetypes=["legacy_uniform"] * chapter_count,
@@ -421,6 +489,7 @@ def plan_chapters(
             chapter_reflection_weights=["standard"] * chapter_count,
             chapter_story_depths=["standard"] * chapter_count,
             warnings=["chapter_planner_policies missing; fallback to uniform slot plan"],
+            chapter_selector_targets=sel_t,
         )
 
     size = book_size or infer_book_size(chapter_count, policy)
@@ -429,6 +498,9 @@ def plan_chapters(
         raise ValueError("; ".join(warnings))
 
     chapter_bestseller_structures = assign_bestseller_structures(chapter_count, selector_key_prefix)
+    chapter_selector_targets = derive_chapter_selector_targets(
+        chapter_count, selector_key_prefix, emotional_role_sequence
+    )
 
     archetypes = (policy.get("archetypes") or {})
     quotas = (policy.get("quotas") or {}).get(size) or {}
@@ -554,4 +626,5 @@ def plan_chapters(
         chapter_story_depths=chapter_story_depths,
         warnings=warnings,
         chapter_bestseller_structures=chapter_bestseller_structures,
+        chapter_selector_targets=chapter_selector_targets,
     )

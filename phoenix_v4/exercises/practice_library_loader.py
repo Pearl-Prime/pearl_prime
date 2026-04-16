@@ -244,6 +244,16 @@ def get_exercise_for_chapter(
     if not available:
         available = all_exercises  # allow reuse if exhausted (272 > 12 chapters, shouldn't happen)
 
+    # Filter out exercises with spiritual/Sanskrit/yoga content (frame_mismatch)
+    secular_available = _filter_frame_mismatch(available)
+    if secular_available:
+        available = secular_available
+    else:
+        logger.warning(
+            "EXERCISE FRAME FILTER: all available exercises flagged as frame_mismatch — "
+            "using full pool as fallback. Check exercise bank for secular alternatives."
+        )
+
     # Select deterministically
     idx = _deterministic_index(f"{seed}:exercise_select:ch{chapter_index}", len(available))
     exercise = available[idx]
@@ -253,3 +263,72 @@ def get_exercise_for_chapter(
         used_exercise_ids.add(exercise.get("id", ""))
 
     return compose_exercise(exercise, chapter_index, seed, templates)
+
+
+# Sanskrit/yoga/spiritual terms that indicate frame mismatch for secular books.
+_FRAME_MISMATCH_TERMS: tuple[str, ...] = (
+    "pranayama",
+    "prana",
+    "asana",
+    "kundalini",
+    "namaste",
+    "dharana",
+    "dhyana",
+    "samadhi",
+    "chakra",
+    "mantra",
+    "yoga lineage",
+    "laughter yoga",
+    "dirga",
+    "nadi",
+    "mudra",
+    "bandha",
+    "svadhyaya",
+    "spiritual awakening",
+    "devotional",
+)
+
+
+def _exercise_has_frame_mismatch(exercise: dict) -> bool:
+    """Return True if an exercise contains spiritual/Sanskrit/yoga language
+    that would be a frame mismatch in a secular somatic book.
+
+    Logs the mismatch reason at DEBUG level so reviewers can audit which
+    exercises were excluded and why.
+    """
+    text = " ".join(
+        str(v)
+        for v in [
+            exercise.get("name", ""),
+            exercise.get("text", ""),
+            str(exercise.get("components", "")),
+            str(exercise.get("tags", "")),
+        ]
+    ).lower()
+
+    found_terms = [t for t in _FRAME_MISMATCH_TERMS if t in text]
+    if found_terms:
+        logger.debug(
+            "EXERCISE FRAME MISMATCH: id=%s name=%r — excluded terms: %s "
+            "(labels: frame_mismatch_spiritual, frame_mismatch_sanskrit)",
+            exercise.get("id", "?"),
+            exercise.get("name", "?"),
+            found_terms,
+        )
+        return True
+    return False
+
+
+def _filter_frame_mismatch(exercises: list[dict]) -> list[dict]:
+    """Remove exercises with spiritual/Sanskrit/yoga frame mismatches.
+
+    Returns the filtered list (may be empty if all exercises are flagged).
+    Logs each exclusion so auditors can track what was dropped.
+    """
+    secular = []
+    for ex in exercises:
+        if _exercise_has_frame_mismatch(ex):
+            pass  # already logged in _exercise_has_frame_mismatch
+        else:
+            secular.append(ex)
+    return secular

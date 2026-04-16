@@ -19,6 +19,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import re
 from collections import defaultdict
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -76,6 +77,7 @@ class EnrichmentRequest:
     topic_id: str
     seed: str
     spine_context: Optional[Dict[str, Any]] = None
+    publishable_book: bool = False
 
 
 @dataclass
@@ -763,6 +765,48 @@ def dump_enriched_book_json(book: EnrichedBook, indent: int = 2) -> str:
     return json.dumps(enriched_book_to_jsonable(book), indent=indent, ensure_ascii=False)
 
 
+def selected_content_variants_artifact(book: EnrichedBook) -> Dict[str, Any]:
+    """Render artifact describing selected content per enriched slot."""
+    return {
+        "schema_version": 1,
+        "stage": "selected_content_variants",
+        "topic": book.topic,
+        "persona_id": book.persona_id,
+        "teacher_id": book.teacher_id or "",
+        "runtime_format": book.runtime_format,
+        "chapters": [
+            {
+                "number": ch.number,
+                "slots": [
+                    {
+                        "slot_type": s.slot_type,
+                        "variant_id": s.source_id,
+                        "atom_id": s.source_id if s.source != "registry" else "",
+                        "source": s.source,
+                        "source_id": s.source_id,
+                        "target_words": s.target_words,
+                        "actual_words": s.actual_words,
+                        "enrichment_applied": list(s.enrichment_applied or []),
+                        "exercise_phase": s.exercise_phase,
+                        "journey_exercise_id": s.journey_exercise_id,
+                        "match_scores": {},
+                    }
+                    for s in ch.slots
+                ],
+            }
+            for ch in book.chapters
+        ],
+    }
+
+
+def write_selected_content_variants_json(book: EnrichedBook, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(selected_content_variants_artifact(book), indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+
 def budget_from_enriched(book: EnrichedBook) -> Dict[str, Any]:
     return {
         "total_words": book.total_words,
@@ -797,6 +841,11 @@ DEFAULT_DEPTH_PRIORITY: List[str] = [
     "bridge_transition",
     "integration_landing",
 ]
+
+# Per-chapter depth budget reservation constants
+MIN_DEPTH_WORDS_PER_CHAPTER = 180
+TARGET_DEPTH_WORDS_PER_CHAPTER = 300
+MAX_DEPTH_WORDS_PER_CHAPTER = 600
 
 
 def _chapter_phase(chapter_number: int, chapter_count: int) -> str:
@@ -879,6 +928,86 @@ def _collect_bridge_template_strings(tpl_root: Any) -> List[str]:
     return strings
 
 
+def _extract_prose_from_canonical(raw: str) -> str:
+    """
+    Extract only prose text from a CANONICAL.txt file.
+
+    CANONICAL.txt uses atom blocks of the form::
+
+        ## TYPE vNN
+        ---
+        metadata: value
+        ---
+        Prose text here.
+        ---
+
+    This function strips all ``## TYPE vNN`` headers and metadata blocks,
+    returning only the concatenated prose bodies.  The raw text is safe to
+    pass to ``_truncate_to_word_budget`` after this call.
+    """
+    # Split on atom header lines (## WORD vNN …)
+    header_re = re.compile(r"^##\s+\S+\s+v\d+", re.MULTILINE)
+    blocks = header_re.split(raw)
+    prose_parts: List[str] = []
+    for block in blocks:
+        block = block.strip()
+        if not block:
+            continue
+        # Each block: [metadata section between first and second ---] [prose]
+        # Split on bare --- lines
+        segments = re.split(r"(?m)^---\s*$", block)
+        # segments[0]: empty or leftover header text
+        # segments[1]: metadata key: value lines
+        # segments[2]: prose text
+        # segments[3+]: may contain sub-blocks (some files have multiple --- prose pairs)
+        # Collect all segments that look like prose (not YAML key: value lines)
+        for seg in segments[2:]:
+            text = seg.strip()
+            if not text:
+                continue
+            # Skip segments that are purely YAML metadata
+            lines = text.splitlines()
+            metadata_only = all(
+                re.match(r"^[A-Z_]+\s*:", l.strip()) or not l.strip()
+                for l in lines
+            )
+            if metadata_only:
+                continue
+            prose_parts.append(text)
+    return "\n\n".join(prose_parts)
+
+
+def _select_prose_chunk(content: str, seed: str, min_words: int = 21) -> Optional[str]:
+    """
+    Select a coherent prose chunk from extracted CANONICAL text.
+
+    Splits on paragraph breaks so the returned text starts at a paragraph
+    boundary (not mid-sentence).  Uses ``seed`` to pick a deterministic
+    starting paragraph so different call-sites (chapters) get different
+    passages from the same file.
+
+    Returns None if no adequate prose is available.
+    """
+    if not content:
+        return None
+    paragraphs = [p.strip() for p in re.split(r"\n{2,}", content) if p.strip()]
+    # Keep only substantial paragraphs
+    paras = [p for p in paragraphs if len(p.split()) >= min_words]
+    if not paras:
+        return None
+    # Pick a starting paragraph deterministically
+    start_idx = _deterministic_index(f"{seed}:pa_para", len(paras))
+    # Collect from start_idx, wrapping around, until we have ≥ 150 words
+    collected: List[str] = []
+    target = 150
+    for i in range(len(paras)):
+        para = paras[(start_idx + i) % len(paras)]
+        collected.append(para)
+        if sum(len(p.split()) for p in collected) >= target:
+            break
+    return "\n\n".join(collected) if collected else None
+
+
 def _load_depth_content(
     source: Dict[str, Any],
     topic: str,
@@ -925,9 +1054,11 @@ def _load_depth_content(
         for slot_type in slot_types:
             canonical = repo_root / "atoms" / persona_id / topic / slot_type / "CANONICAL.txt"
             if canonical.exists():
-                content = canonical.read_text(encoding="utf-8").strip()
-                if content and len(content.split()) > 20:
-                    return content
+                raw = canonical.read_text(encoding="utf-8")
+                content = _extract_prose_from_canonical(raw)
+                chunk = _select_prose_chunk(content, seed)
+                if chunk:
+                    return chunk
         topic_dir = repo_root / "atoms" / persona_id / topic
         if topic_dir.exists():
             for engine_dir in sorted(topic_dir.iterdir()):
@@ -937,9 +1068,11 @@ def _load_depth_content(
                     continue
                 canonical = engine_dir / "CANONICAL.txt"
                 if canonical.exists():
-                    content = canonical.read_text(encoding="utf-8").strip()
-                    if content and len(content.split()) > 20:
-                        return content
+                    raw = canonical.read_text(encoding="utf-8")
+                    content = _extract_prose_from_canonical(raw)
+                    chunk = _select_prose_chunk(content, seed)
+                    if chunk:
+                        return chunk
         return None
 
     if source_type == "registry_variant":
@@ -1050,6 +1183,118 @@ def _load_depth_content(
     return None
 
 
+def _fill_chapter_depth(
+    chapter: EnrichedChapter,
+    enriched_book: EnrichedBook,
+    modules: Dict[str, Any],
+    topic_overrides: Dict[str, Any],
+    topic: str,
+    tid: Optional[str],
+    persona_id: str,
+    chapter_count: int,
+    rf: str,
+    root: Path,
+    max_words_to_add: int,
+    book_budget_remaining: Optional[int],
+    depth_round: int,
+    pass_label: str,
+    audit_list: List[Dict[str, Any]],
+    deficit_floor: int,
+) -> int:
+    """
+    Attempt to fill one chapter with depth content up to max_words_to_add.
+    Returns total words added.
+    """
+    phase = _chapter_phase(chapter.number, chapter_count)
+    priority_key = f"depth_priority_{phase}"
+    priority_list = list(topic_overrides.get(priority_key) or [])
+    if not priority_list:
+        priority_list = list(DEFAULT_DEPTH_PRIORITY)
+
+    words_added_total = 0
+    remaining_allowance = max_words_to_add
+
+    for module_name in priority_list:
+        if remaining_allowance <= deficit_floor:
+            break
+        if _module_banned(module_name, chapter.number, phase, topic_overrides):
+            continue
+        module = modules.get(module_name)
+        if not module:
+            continue
+        if not _chapter_affinity_ok(module.get("chapter_affinity"), chapter.number):
+            continue
+        restriction = module.get("topic_restriction")
+        if restriction and topic not in restriction:
+            continue
+
+        tw_bounds = module.get("target_words_per_chapter") or [200, 400]
+        upper_cap = int(tw_bounds[1]) if len(tw_bounds) > 1 else 400
+        if rf == "deep_book_6h":
+            upper_cap = min(1400, max(upper_cap, int(round(upper_cap * 2.4))))
+
+        for source in module.get("sources", []):
+            if not isinstance(source, dict):
+                continue
+            content = _load_depth_content(
+                source=source,
+                topic=topic,
+                teacher_id=tid,
+                persona_id=persona_id,
+                chapter_number=chapter.number,
+                seed=f"depth:{topic}:{chapter.number}:{module_name}:r{depth_round}:{pass_label}",
+                repo_root=root,
+            )
+            if not content:
+                continue
+            word_list = content.split()
+            if len(word_list) <= 20:
+                continue
+
+            max_chunk = min(remaining_allowance, upper_cap)
+            if book_budget_remaining is not None:
+                if book_budget_remaining - words_added_total <= 0:
+                    return words_added_total
+                max_chunk = min(max_chunk, book_budget_remaining - words_added_total)
+
+            trimmed = _truncate_to_word_budget(content, max_chunk)
+            added_w = len(trimmed.split())
+            if added_w <= 0:
+                continue
+
+            depth_slot = EnrichedSlot(
+                slot_type=f"DEPTH_{module_name.upper()}",
+                content=trimmed,
+                source=f"depth_module:{module_name}:{source.get('type')}",
+                source_id=f"depth_{module_name}_{chapter.number}_{pass_label}",
+                target_words=max_chunk,
+                actual_words=added_w,
+                enrichment_applied=[module_name],
+            )
+            chapter.slots.append(depth_slot)
+            chapter.total_words += added_w
+            words_added_total += added_w
+            remaining_allowance -= added_w
+
+            audit_list.append({
+                "chapter": chapter.number,
+                "module": module_name,
+                "source_type": source.get("type"),
+                "words_added": added_w,
+                "remaining_deficit": max(0, remaining_allowance),
+                "depth_round": depth_round,
+                "pass": pass_label,
+            })
+
+            if remaining_allowance <= deficit_floor:
+                break
+
+        if remaining_allowance <= deficit_floor:
+            break
+
+    return words_added_total
+
+
 def apply_depth_pass(
     enriched_book: EnrichedBook,
     depth_map: Dict[str, Any],
@@ -1058,8 +1303,15 @@ def apply_depth_pass(
     """
     Fill thin chapters/slots by requesting depth modules from the depth_module_map.
 
-    Runs AFTER select_enrichment(). Adds content where chapters are under their
-    target word count (sum of slot target_words).
+    Runs AFTER select_enrichment(). Uses two-pass per-chapter budget reservation
+    to prevent early chapters from starving late chapters (chapters 9–12).
+
+    Pass 1 (Reservation): Each chapter gets up to MIN_DEPTH_WORDS_PER_CHAPTER (180w)
+    before any chapter gets priority fill. Early chapters cannot consume late chapters'
+    reserved budget.
+
+    Pass 2 (Priority fill): Remaining budget distributed by priority — late chapters
+    first, then by deficit size.
     """
     root = repo_root or REPO_ROOT
     topic = enriched_book.topic
@@ -1072,103 +1324,194 @@ def apply_depth_pass(
     _bounds = _load_runtime_word_bounds(rf, root)
     book_wmax: Optional[int] = _bounds[1] if _bounds else None
     deficit_floor = 55 if rf == "deep_book_6h" else 100
+    depth_rounds = 3 if rf == "deep_book_6h" else 1
 
     enriched_book.enrichment_audit.setdefault("depth_modules_added", [])
 
-    for chapter in enriched_book.chapters:
-        depth_rounds = 3 if rf == "deep_book_6h" else 1
-        for _depth_round in range(depth_rounds):
+    # Format-aware per-chapter depth budget caps.
+    # Short formats (short_book_30: 7500w) keep the conservative defaults.
+    # Large formats (deep_book_6h: 65000w) need proportionally larger caps.
+    if book_wmax is not None and chapter_count > 0:
+        fair_share = book_wmax // chapter_count
+        min_depth_per_ch = max(MIN_DEPTH_WORDS_PER_CHAPTER, fair_share // 4)
+        target_depth_per_ch = max(TARGET_DEPTH_WORDS_PER_CHAPTER, fair_share // 2)
+        max_depth_per_ch = max(MAX_DEPTH_WORDS_PER_CHAPTER, fair_share)
+    else:
+        min_depth_per_ch = MIN_DEPTH_WORDS_PER_CHAPTER
+        target_depth_per_ch = TARGET_DEPTH_WORDS_PER_CHAPTER
+        max_depth_per_ch = MAX_DEPTH_WORDS_PER_CHAPTER
+
+    # Per-chapter tracking for audit telemetry
+    pre_depth_words: Dict[int, int] = {ch.number: ch.total_words for ch in enriched_book.chapters}
+    depth_words_added_by_chapter: Dict[int, int] = {ch.number: 0 for ch in enriched_book.chapters}
+    depth_budget_starvation: List[Dict[str, Any]] = []
+    audit_list: List[Dict[str, Any]] = enriched_book.enrichment_audit["depth_modules_added"]
+
+    for _depth_round in range(depth_rounds):
+
+        # ── Pass 1: Reservation ─────────────────────────────────────────────
+        # Each chapter gets up to MIN_DEPTH_WORDS_PER_CHAPTER from a shared
+        # reservation pool. No chapter may consume another chapter's reserved share.
+        #
+        # Reservation pool = MIN × n_chapters (≤ 85% of book_wmax for safety).
+        reservation_pool = min_depth_per_ch * chapter_count
+        if book_wmax is not None:
+            reservation_pool = min(reservation_pool, int(book_wmax * 0.85))
+
+        reservation_used = 0
+
+        for ch_idx, chapter in enumerate(enriched_book.chapters):
+            # Guard the reservation budget for remaining chapters:
+            # chapters after this one each need at least MIN.
+            remaining_after_count = chapter_count - ch_idx - 1
+            protected_for_later = remaining_after_count * min_depth_per_ch
+            available_reservation = reservation_pool - reservation_used - protected_for_later
+            available_reservation = max(0, min(available_reservation, min_depth_per_ch))
+
+            if available_reservation <= deficit_floor:
+                # Reservation pool cannot serve this chapter
+                if depth_words_added_by_chapter[chapter.number] < min_depth_per_ch:
+                    depth_budget_starvation.append({
+                        "chapter": chapter.number,
+                        "reserved_min_met": False,
+                        "reason": "reservation_pool_exhausted",
+                        "depth_round": _depth_round,
+                    })
+                continue
+
+            # Only add depth if chapter actually needs it
             target_words = sum(s.target_words for s in chapter.slots)
-            actual_words = chapter.total_words
-            deficit = target_words - actual_words
+            deficit = target_words - chapter.total_words
             if deficit <= deficit_floor:
-                break
+                continue
 
-            phase = _chapter_phase(chapter.number, chapter_count)
-            priority_key = f"depth_priority_{phase}"
-            priority_list = list(topic_overrides.get(priority_key) or [])
-            if not priority_list:
-                priority_list = list(DEFAULT_DEPTH_PRIORITY)
+            # How much can still be added this round (respect MAX cap)?
+            already_added = depth_words_added_by_chapter[chapter.number]
+            room_in_cap = max(0, max_depth_per_ch - already_added)
+            want = min(available_reservation, deficit, room_in_cap)
+            if want <= deficit_floor:
+                continue
 
-            for module_name in priority_list:
-                if _module_banned(module_name, chapter.number, phase, topic_overrides):
-                    continue
-
-                module = modules.get(module_name)
-                if not module:
-                    continue
-
-                if not _chapter_affinity_ok(module.get("chapter_affinity"), chapter.number):
-                    continue
-
-                restriction = module.get("topic_restriction")
-                if restriction and topic not in restriction:
-                    continue
-
-                tw_bounds = module.get("target_words_per_chapter") or [200, 400]
-                upper_cap = int(tw_bounds[1]) if len(tw_bounds) > 1 else 400
-                if rf == "deep_book_6h":
-                    upper_cap = min(1400, max(upper_cap, int(round(upper_cap * 2.4))))
-
-                for source in module.get("sources", []):
-                    if not isinstance(source, dict):
-                        continue
-                    content = _load_depth_content(
-                        source=source,
-                        topic=topic,
-                        teacher_id=tid,
-                        persona_id=persona_id,
-                        chapter_number=chapter.number,
-                        seed=f"depth:{topic}:{chapter.number}:{module_name}:r{_depth_round}",
-                        repo_root=root,
-                    )
-                    if not content:
-                        continue
-                    word_list = content.split()
-                    if len(word_list) <= 20:
-                        continue
-
-                    max_chunk = min(deficit, upper_cap)
-                    if book_wmax is not None:
-                        current_book = sum(ch.total_words for ch in enriched_book.chapters)
-                        room = book_wmax - current_book
-                        if room <= 0:
-                            continue
-                        max_chunk = min(max_chunk, room)
-                    trimmed = _truncate_to_word_budget(content, max_chunk)
-                    added_w = len(trimmed.split())
-                    if added_w <= 0:
-                        continue
-
-                    depth_slot = EnrichedSlot(
-                        slot_type=f"DEPTH_{module_name.upper()}",
-                        content=trimmed,
-                        source=f"depth_module:{module_name}:{source.get('type')}",
-                        source_id=f"depth_{module_name}_{chapter.number}",
-                        target_words=max_chunk,
-                        actual_words=added_w,
-                        enrichment_applied=[module_name],
-                    )
-                    chapter.slots.append(depth_slot)
-                    chapter.total_words += added_w
-                    deficit = sum(s.target_words for s in chapter.slots) - chapter.total_words
-
-                    enriched_book.enrichment_audit["depth_modules_added"].append(
-                        {
-                            "chapter": chapter.number,
-                            "module": module_name,
-                            "source_type": source.get("type"),
-                            "words_added": added_w,
-                            "remaining_deficit": max(0, deficit),
-                            "depth_round": _depth_round,
-                        }
-                    )
-
-                    if deficit <= deficit_floor:
-                        break
-
-                if deficit <= deficit_floor:
+            # Compute global book budget remaining
+            book_room: Optional[int] = None
+            if book_wmax is not None:
+                current_book = sum(ch.total_words for ch in enriched_book.chapters)
+                book_room = book_wmax - current_book
+                if book_room <= 0:
                     break
+
+            added = _fill_chapter_depth(
+                chapter=chapter,
+                enriched_book=enriched_book,
+                modules=modules,
+                topic_overrides=topic_overrides,
+                topic=topic,
+                tid=tid,
+                persona_id=persona_id,
+                chapter_count=chapter_count,
+                rf=rf,
+                root=root,
+                max_words_to_add=want,
+                book_budget_remaining=book_room,
+                depth_round=_depth_round,
+                pass_label=f"p1r{_depth_round}",
+                audit_list=audit_list,
+                deficit_floor=deficit_floor,
+            )
+            reservation_used += added
+            depth_words_added_by_chapter[chapter.number] += added
+
+            if added == 0:
+                # No eligible candidates found despite budget being available
+                depth_budget_starvation.append({
+                    "chapter": chapter.number,
+                    "reserved_min_met": False,
+                    "reason": "no_eligible_depth_candidates",
+                    "depth_round": _depth_round,
+                })
+
+        # ── Pass 2: Priority fill ───────────────────────────────────────────
+        # Distribute remaining budget. Late chapters (7–12) come first,
+        # then by highest deficit.
+        pass2_order = sorted(
+            enriched_book.chapters,
+            key=lambda ch: (
+                0 if ch.number >= 7 else 1,          # late chapters first
+                -(sum(s.target_words for s in ch.slots) - ch.total_words),  # largest deficit first
+            ),
+        )
+
+        for chapter in pass2_order:
+            if book_wmax is not None:
+                current_book = sum(ch.total_words for ch in enriched_book.chapters)
+                book_room = book_wmax - current_book
+                if book_room <= 0:
+                    break
+            else:
+                book_room = None
+
+            target_words = sum(s.target_words for s in chapter.slots)
+            deficit = target_words - chapter.total_words
+            if deficit <= deficit_floor:
+                continue
+
+            already_added = depth_words_added_by_chapter[chapter.number]
+            room_in_cap = max(0, max_depth_per_ch - already_added)
+            # Target up to TARGET per chapter, max up to MAX
+            want = min(deficit, room_in_cap, target_depth_per_ch)
+            if want <= deficit_floor:
+                continue
+
+            if book_room is not None:
+                want = min(want, book_room)
+            if want <= deficit_floor:
+                continue
+
+            added = _fill_chapter_depth(
+                chapter=chapter,
+                enriched_book=enriched_book,
+                modules=modules,
+                topic_overrides=topic_overrides,
+                topic=topic,
+                tid=tid,
+                persona_id=persona_id,
+                chapter_count=chapter_count,
+                rf=rf,
+                root=root,
+                max_words_to_add=want,
+                book_budget_remaining=book_room,
+                depth_round=_depth_round,
+                pass_label=f"p2r{_depth_round}",
+                audit_list=audit_list,
+                deficit_floor=deficit_floor,
+            )
+            depth_words_added_by_chapter[chapter.number] += added
+
+    # ── Audit telemetry ─────────────────────────────────────────────────────
+    depth_budget_by_chapter: List[Dict[str, Any]] = []
+    for chapter in enriched_book.chapters:
+        added = depth_words_added_by_chapter.get(chapter.number, 0)
+        starved = any(
+            s["chapter"] == chapter.number and not s["reserved_min_met"]
+            for s in depth_budget_starvation
+        )
+        depth_budget_by_chapter.append({
+            "chapter": chapter.number,
+            "pre_depth_words": pre_depth_words.get(chapter.number, 0),
+            "depth_words_added": added,
+            "post_depth_words": chapter.total_words,
+            "reserved_min_met": added >= min_depth_per_ch and not starved,
+        })
+
+    enriched_book.enrichment_audit["depth_budget_policy"] = {
+        "mode": "per_chapter_reservation",
+        "book_wmax": book_wmax,
+        "reserved_min_per_chapter": min_depth_per_ch,
+        "target_per_chapter": target_depth_per_ch,
+        "max_per_chapter": max_depth_per_ch,
+    }
+    enriched_book.enrichment_audit["depth_budget_by_chapter"] = depth_budget_by_chapter
+    enriched_book.enrichment_audit["depth_budget_starvation"] = depth_budget_starvation
 
     enriched_book.total_words = sum(ch.total_words for ch in enriched_book.chapters)
     enriched_book.enrichment_audit["total_words"] = enriched_book.total_words

@@ -100,7 +100,7 @@ depth_modules:
 
   mechanism_depth:
     description: "Explains why the pattern runs — body-first and causal, not slogan-level."
-    chapter_affinity: [3, 4, 5, 6, 8, 9]
+    chapter_affinity: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     sources:
       - type: teacher_atom
         slot_types: [REFLECTION, COMPRESSION, TEACHING]
@@ -122,7 +122,7 @@ depth_modules:
 
   story_scene:
     description: "Human vividness — specific places, people, sensory detail."
-    chapter_affinity: [1, 2, 3, 4, 7, 8]
+    chapter_affinity: [1, 2, 3, 4, 7, 8, 9, 10, 11, 12]
     sources:
       - type: teacher_atom
         slot_types: [STORY, SCENE]
@@ -139,7 +139,7 @@ depth_modules:
 
   consequence_exposure:
     description: "Shows what the pattern costs — time, relationships, identity, health."
-    chapter_affinity: [2, 3, 4, 5, 7, 8]
+    chapter_affinity: [2, 3, 4, 5, 7, 8, 9, 10, 11, 12]
     sources:
       - type: teacher_atom
         slot_types: [REFLECTION, STORY]
@@ -231,7 +231,7 @@ depth_modules:
 
   persona_specificity:
     description: "Demographic and situational specificity — the reader feels named."
-    chapter_affinity: [1, 2, 7, 8, 11, 12]
+    chapter_affinity: [1, 2, 7, 8, 9, 10, 11, 12]
     sources:
       - type: persona_atom
         slot_types: [HOOK, SCENE, STORY]
@@ -258,7 +258,7 @@ topic_overrides:
   anxiety:
     depth_priority_early: [recognition_depth, story_scene, persona_specificity]
     depth_priority_mid: [mechanism_depth, somatic_detail, consequence_exposure]
-    depth_priority_late: [practice_scaffold, integration_landing, bridge_transition]
+    depth_priority_late: [mechanism_depth, story_scene, persona_specificity, consequence_exposure, integration_landing]
 
   grief:
     depth_priority_early: [witnessing_presence, recognition_depth, story_scene]

@@ -16,6 +16,7 @@ from __future__ import annotations
 import hashlib
 import logging
 import re
+from pathlib import Path
 from typing import Any, Optional
 
 logger = logging.getLogger(__name__)
@@ -310,22 +311,20 @@ def _distill_mechanism(reflection: str, thesis: str) -> str:
             "loads the next without waiting for evidence. The chain moves from signal to catastrophe in seconds. "
             "But each link is a prediction, not a fact. The chain has never once been right about the final link."
         )
-    # Generic mechanism from thesis — rotate to avoid repetition
-    core = thesis.replace("The point is that ", "")
+    # Generic mechanism from thesis — explain the system without repeating the
+    # thesis verbatim. Repeating the same sentence as mechanism, point, and
+    # callback trips book-wide density gates and reads assembled.
     templates = [
-        "Underneath the feeling is a simple mechanism: {core} When the alarm runs the response, your nervous system treats uncertainty like danger and asks for impossible certainty. That is why ordinary moments feel heavy.",
-        "Here is the mechanism: {core} The nervous system does not distinguish between real threat and imagined threat. Both receive the same emergency response. This is why knowing better rarely helps.",
-        "The pattern underneath: {core} Your body responds to the prediction of danger with the same chemistry it would use for actual danger. That chemistry does not care whether the prediction is accurate.",
-        "What drives this: {core} The system was built for physical threats in open landscapes. It now runs in offices, apartments, and group chats. The mismatch between threat model and actual environment is the source of most suffering.",
-        "The core mechanism is this: {core} Once the nervous system flags a moment as dangerous, it narrows perception to confirm the danger. Counter-evidence gets filtered out. The feeling becomes self-reinforcing.",
+        "Underneath the feeling is a simple mechanism: the alarm treats uncertainty like danger and asks for impossible certainty. That is why ordinary moments can feel heavy before anything has actually gone wrong.",
+        "Here is the mechanism: the nervous system can give imagined threat the same emergency response it gives real threat. This is why knowing better rarely helps when the body is already mobilized.",
+        "The pattern underneath is prediction becoming chemistry. Your body can respond to the forecast of danger before the facts arrive, and that chemistry does not care whether the forecast is accurate.",
+        "What drives this is an old threat model running in modern rooms. The system was built for physical danger; now it fires inside offices, apartments, group chats, and unread messages.",
+        "The core mechanism is confirmation under pressure. Once the nervous system marks a moment as dangerous, it narrows perception toward evidence that keeps the alarm alive.",
     ]
     picked = templates[hash(thesis) % len(templates)]
     if _LOCALE_TLS:
         picked = _gt(picked, locale=_LOCALE_TLS)
-    try:
-        return picked.format(core=core)
-    except (KeyError, IndexError):
-        return picked
+    return picked
 
 
 def _trim_reflection(reflection: str, max_sentences: int = 7) -> str:
@@ -400,20 +399,20 @@ def _polish_scene(scene: str) -> str:
     s = s.replace("through the window through the window", "against the window")
     s = re.sub(r"(?<=[.!?]\s)([a-z])", lambda m: m.group(1).upper(), s)
     s = re.sub(r"\s{2,}", " ", s).strip()
+    if s and s[0].isalpha() and s[0].islower():
+        s = s[0].upper() + s[1:]
     return s
 
 
 def _fallback_takeaway(thesis: str) -> str:
     """Generate a takeaway when TAKEAWAY slot is missing/placeholder."""
-    core = thesis.replace("The point is that ", "")
-    template = "Remember this: {core} That is not a philosophy. That is what happened in this chapter."
+    template = (
+        "Remember this: the chapter is asking for a smaller experiment, not a perfect belief. "
+        "Feel the alarm, name the prediction, and let the next move be honest enough to try."
+    )
     if _LOCALE_TLS:
-        translated = _gt(template, locale=_LOCALE_TLS)
-        try:
-            return translated.format(core=core)
-        except (KeyError, IndexError):
-            return translated
-    return template.format(core=core)
+        return _gt(template, locale=_LOCALE_TLS)
+    return template
 
 
 def _fallback_thread(thesis: str, chapter_index: int, total_chapters: int) -> str:
@@ -431,7 +430,14 @@ def _fallback_thread(thesis: str, chapter_index: int, total_chapters: int) -> st
         return "What remains is the sentence shame writes after the moment is over, when it tries to turn one event into identity."
     if "overwhelm" in lower:
         return "What remains is the quieter cost: what repeated overload teaches you to stop asking for."
-    return "What remains is not more explanation. It is the next place this pattern asks for your life."
+    options = [
+        "What remains is the next ordinary moment where the pattern tries to make the decision for you.",
+        "The next pressure point is smaller than it sounds: one place where your body asks for proof before you move.",
+        "From here, the question is how this pattern changes when you meet it before it becomes a whole story.",
+        "What remains is not more explanation. It is the first honest place this pattern asks for practice.",
+        "The next chapter begins where insight usually thins out: inside the moment you have to choose again.",
+    ]
+    return _pick_variant(options, thesis, str(chapter_index), str(total_chapters))
 
 
 def _exercise_setup_sentence(reflection: str, story: str) -> str:
@@ -540,6 +546,29 @@ def _shape_thread(thread_raw: str, thesis: str, chapter_index: int, total_chapte
 # ---------------------------------------------------------------------------
 # Main composition function
 # ---------------------------------------------------------------------------
+
+def _append_anxiety_chapter_one_scan_practice(
+    parts: list[str],
+    *,
+    chapter_index: int,
+    topic_id: str,
+    thesis: str,
+) -> None:
+    """Chapter 1 (anxiety): concrete prediction-vs-fact / scanning practice for golden readiness."""
+    if chapter_index != 0 or (topic_id or "").strip().lower() != "anxiety" or not (thesis or "").strip():
+        return
+    blob = "\n".join(parts).lower()
+    if "one neutral fact from the last five minutes" in blob:
+        return
+    parts.append(
+        "Try this for ninety seconds:\n\n"
+        "1. Notice where your attention is scanning right now (messages, a face, something you said, tomorrow).\n"
+        "2. Write the worry as one sentence — the prediction your mind is treating like a fact.\n"
+        "3. Write one neutral fact from the last five minutes that does not depend on that prediction.\n\n"
+        "You are not debating whether the worry is 'true.' You are watching your nervous system "
+        "confuse a forecast with evidence."
+    )
+
 
 def compose_chapter_prose(
     slot_types: list[str],
@@ -727,6 +756,13 @@ def compose_chapter_prose(
                 else:
                     _bump_exercise_stat(exercise_source_stats, "registry")
 
+    _append_anxiety_chapter_one_scan_practice(
+        parts,
+        chapter_index=chapter_index,
+        topic_id=topic_id,
+        thesis=thesis,
+    )
+
     # 7a. PERMISSION (receive the reader — Writer Spec §4.8)
     # Short emotional permission statement placed near INTEGRATION. High-cost chapters only.
     if permission_raw and not _is_placeholder_text(permission_raw):
@@ -768,6 +804,7 @@ def compose_from_enriched_book(
     quality_profile: str = "draft",
     *,
     governance_report: Optional[dict[str, Any]] = None,
+    artifact_dir: Optional[Path] = None,
 ) -> str:
     """
     Render an EnrichedBook to prose text.
@@ -776,7 +813,8 @@ def compose_from_enriched_book(
       Spine → Knobs → Beatmap → Enrichment → this → BookRender.
 
     The legacy path (assembly_compiler → compose_chapter_prose) is unchanged.
-    Pilot behavior: concatenate slot bodies in beatmap order; skip visible gaps.
+    Spine path: golden chapter synthesis (virtual slot streams → compose_chapter_prose)
+    plus post-strengthen scene-furniture book dedupe (see golden_chapter_synthesis).
 
     Args:
         enriched: Output of phoenix_v4.planning.enrichment_select.select_enrichment
@@ -786,6 +824,14 @@ def compose_from_enriched_book(
             frame_softened_sentences, frame_stripped_sentences, frame_hard_fail_reasons).
     """
     del quality_profile  # pilot — reserved
+
+    if artifact_dir is not None:
+        from phoenix_v4.planning.enrichment_select import write_selected_content_variants_json
+
+        write_selected_content_variants_json(
+            enriched,
+            Path(artifact_dir) / "selected_content_variants.json",
+        )
 
     report = governance_report if governance_report is not None else {}
     report.setdefault("exercise_slots_dropped", [])
@@ -814,14 +860,13 @@ def compose_from_enriched_book(
         enriched.runtime_format,
     )
 
-    from phoenix_v4.quality.frame_governor import (
-        FrameEnforcementContext,
-        apply_frame_enforcement,
-        load_frame_registry,
-    )
-
-    frame_registry = load_frame_registry()
     frame = str((enriched.spine_context or {}).get("frame") or "somatic_first").strip()
+
+    from phoenix_v4.rendering.golden_chapter_synthesis import (
+        compose_golden_spine_chapter,
+        dedupe_scene_furniture_book,
+        post_compose_sanitize_chapter,
+    )
 
     chapters_prose: list[str] = []
     for ch_idx, ch in enumerate(enriched.chapters):
@@ -872,60 +917,31 @@ def compose_from_enriched_book(
             if isinstance(report["chapter_contract_warnings"], list):
                 report["chapter_contract_warnings"].append(msg)
 
-        chapter_body_parts: list[str] = []
-        for slot in slots_out:
-            if slot.content and not slot.content.startswith("[CONTENT GAP"):
-                chapter_body_parts.append(slot.content)
-        ch_body = "\n\n".join(chapter_body_parts)
-        has_doctrine = any(
-            str(s.slot_type or "").strip().upper() == "TEACHER_DOCTRINE" for s in slots_out
-        )
-        fe_ctx = FrameEnforcementContext(
-            chapter_index=ch_idx,
+        # Golden chapter path: slots are inputs; compose_chapter_prose threads thesis, bridges,
+        # exercises, and endings (see golden_chapter_synthesis.compose_golden_spine_chapter).
+        from dataclasses import replace
+
+        ch_compose = replace(ch, slots=slots_out)
+        book_seed = f"{enriched.persona_id}:{enriched.topic}:{enriched.runtime_format}:ch{ch_idx}"
+        ch_body, _syn_meta = compose_golden_spine_chapter(
+            ch_compose,
+            chapter_index0=ch_idx,
+            total_chapters=len(enriched.chapters),
+            topic_id=enriched.topic,
+            persona_id=enriched.persona_id,
+            book_seed=book_seed,
             frame=frame,
-            doctrine_chapter=has_doctrine,
-            allow_early_spiritual=bool(contract.allow_early_spiritual),
-            emotional_job=str(contract.emotional_job or ""),
+            governance_report=report,
         )
-        ch_body, fg = apply_frame_enforcement(ch_body, fe_ctx, frame_registry)
+        ch_body = post_compose_sanitize_chapter(
+            ch_body,
+            topic_id=enriched.topic,
+        )
+        # Frame governance lists and chapter rows are appended inside compose_golden_spine_chapter.
         chapter_text = f"Chapter {ch.number}\n{ch.working_title}\n\n"
         if ch_body.strip():
             chapter_text += ch_body.strip() + "\n\n"
         chapters_prose.append(chapter_text.rstrip())
-
-        if isinstance(report["frame_softened_sentences"], list):
-            report["frame_softened_sentences"].extend(fg.softened_sentences)
-        if isinstance(report["frame_stripped_sentences"], list):
-            report["frame_stripped_sentences"].extend(fg.stripped_sentences)
-        if isinstance(report["frame_hard_fail_reasons"], list):
-            report["frame_hard_fail_reasons"].extend(fg.hard_fail_reasons)
-        if (
-            fg.violations
-            or fg.softened_sentences
-            or fg.stripped_sentences
-            or fg.hard_fail_reasons
-            or not fg.frame_compliant
-        ):
-            if isinstance(report["frame_governance_chapters"], list):
-                report["frame_governance_chapters"].append(
-                    {
-                        "chapter": ch.number,
-                        "chapter_index": ch_idx,
-                        "violations": fg.violations,
-                        "softened": fg.softened_sentences,
-                        "stripped": fg.stripped_sentences,
-                        "hard_fail": fg.hard_fail_reasons,
-                        "frame_compliant": fg.frame_compliant,
-                        "spiritual_density": fg.spiritual_density,
-                    },
-                )
-            if fg.violations and not fg.softened_sentences and not fg.stripped_sentences:
-                logger.warning(
-                    "Frame governance (%s) chapter %s: %d open issue(s).",
-                    frame,
-                    ch.number,
-                    len(fg.violations),
-                )
 
     manuscript = "\n\n".join(chapters_prose)
     from phoenix_v4.quality.chapter_flow_gate import flow_profile_for_runtime_format
@@ -933,6 +949,12 @@ def compose_from_enriched_book(
 
     spine_seed = f"spine:{enriched.persona_id}:{enriched.topic}:{enriched.runtime_format}"
     profile = flow_profile_for_runtime_format(enriched.runtime_format)
-    return strengthen_rendered_spine_manuscript(
+    strengthened = strengthen_rendered_spine_manuscript(
         manuscript, book_seed=spine_seed, flow_profile=profile
     )
+    deduped, furniture_notes = dedupe_scene_furniture_book(strengthened)
+    if furniture_notes:
+        rr = report.setdefault("recurrence_report", [])
+        if isinstance(rr, list):
+            rr.extend(furniture_notes)
+    return deduped

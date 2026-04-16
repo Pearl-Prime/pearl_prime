@@ -721,3 +721,238 @@ def test_depth_pass_banned_chapters_grief(fmt_std):
     }
     out = apply_depth_pass(book, depth_map, repo_root=_repo_root())
     assert not any("practice_scaffold" in s.source for s in out.chapters[0].slots)
+
+
+# ── Two-pass depth budget reservation tests ──────────────────────────────────
+
+def _make_fake_enriched_book(
+    n_chapters: int,
+    early_depth_candidates: int = 10,
+    late_depth_candidates: int = 5,
+    book_wmax: int = 3600,
+    runtime_format: str = "short_book_30",
+) -> tuple:
+    """
+    Build a fake EnrichedBook with n_chapters and a depth_map containing
+    enough candidates for early and late chapters.
+
+    Returns (enriched_book, depth_map).
+
+    Early chapters (1 .. n//2): get rich persona_atom content.
+    Late chapters (n//2+1 .. n): get registry_variant content.
+    We use a fake source_type "inline_text" that is handled below via monkeypatching,
+    so instead we use persona_atom with a known filesystem path check.
+
+    Actually, use a simpler approach: inject pre-built content via a custom source_type
+    that we handle with a local patch of _load_depth_content.
+    """
+    from phoenix_v4.planning.enrichment_select import (
+        EnrichedBook,
+        EnrichedChapter,
+        EnrichedSlot,
+        MIN_DEPTH_WORDS_PER_CHAPTER,
+    )
+
+    WORDS_PER_SLOT = 50  # thin slots so chapters are well below target
+
+    chapters = []
+    for i in range(1, n_chapters + 1):
+        slot = EnrichedSlot(
+            slot_type="HOOK",
+            content="word " * WORDS_PER_SLOT,
+            source="registry",
+            source_id=f"fake_{i}",
+            target_words=600,  # high target → large deficit
+            actual_words=WORDS_PER_SLOT,
+            enrichment_applied=[],
+        )
+        ch = EnrichedChapter(
+            number=i,
+            role="body",
+            working_title=f"Chapter {i}",
+            thesis=f"Thesis {i}",
+            slots=[slot],
+            total_words=WORDS_PER_SLOT,
+            source_breakdown={"registry": 1},
+        )
+        chapters.append(ch)
+
+    book = EnrichedBook(
+        schema_version=1,
+        stage="enrichment_select",
+        topic="anxiety",
+        teacher_id=None,
+        persona_id="gen_z_professionals",
+        runtime_format=runtime_format,
+        chapters=chapters,
+        total_words=n_chapters * WORDS_PER_SLOT,
+        enrichment_audit={"depth_modules_added": []},
+    )
+
+    # Depth map: all chapters eligible, affinity=all, uses persona_atom source
+    # We will monkeypatch _load_depth_content to return fake prose.
+    depth_map = {
+        "depth_modules": {
+            "recognition_depth": {
+                "chapter_affinity": "all",
+                "sources": [{"type": "persona_atom", "slot_types": ["HOOK"]}],
+                "target_words_per_chapter": [200, 400],
+            },
+            "story_scene": {
+                "chapter_affinity": "all",
+                "sources": [{"type": "persona_atom", "slot_types": ["SCENE"]}],
+                "target_words_per_chapter": [200, 400],
+            },
+        },
+        "topic_overrides": {},
+    }
+    return book, depth_map
+
+
+def _patch_load_depth_content(monkeypatch, word_count: int = 250):
+    """Monkeypatch _load_depth_content to return a fake prose block."""
+    import phoenix_v4.planning.enrichment_select as es
+
+    fake_prose = "word " * word_count  # always returns word_count-word block
+
+    monkeypatch.setattr(es, "_load_depth_content", lambda **kwargs: fake_prose)
+
+
+def test_apply_depth_pass_reserves_minimum_budget_per_chapter(monkeypatch):
+    """Every chapter gets at least MIN_DEPTH_WORDS_PER_CHAPTER added."""
+    from phoenix_v4.planning.enrichment_select import (
+        apply_depth_pass,
+        MIN_DEPTH_WORDS_PER_CHAPTER,
+    )
+
+    book, depth_map = _make_fake_enriched_book(
+        n_chapters=12,
+        book_wmax=7500,
+        runtime_format="short_book_30",
+    )
+    _patch_load_depth_content(monkeypatch, word_count=250)
+
+    out = apply_depth_pass(book, depth_map)
+
+    for ch in out.chapters:
+        added = out.enrichment_audit["depth_budget_by_chapter"][ch.number - 1]["depth_words_added"]
+        assert added >= MIN_DEPTH_WORDS_PER_CHAPTER, (
+            f"Ch{ch.number} got only {added}w depth — below MIN={MIN_DEPTH_WORDS_PER_CHAPTER}"
+        )
+
+
+def test_late_chapters_receive_depth_before_early_chapters_exhaust_budget(monkeypatch):
+    """
+    With a tight book_wmax that forces an allocation tradeoff,
+    all chapters 7–12 must still receive >= MIN_DEPTH_WORDS_PER_CHAPTER.
+    """
+    import phoenix_v4.planning.enrichment_select as es
+    from phoenix_v4.planning.enrichment_select import (
+        apply_depth_pass,
+        MIN_DEPTH_WORDS_PER_CHAPTER,
+    )
+
+    WMAX = 3600  # tight — greedy allocator would starve late chapters
+    book, depth_map = _make_fake_enriched_book(
+        n_chapters=12,
+        book_wmax=WMAX,
+        runtime_format="short_book_30",
+    )
+    _patch_load_depth_content(monkeypatch, word_count=300)
+    # Patch format bounds so apply_depth_pass enforces the test's tight budget
+    monkeypatch.setattr(es, "_load_runtime_word_bounds", lambda rf, root: (500, WMAX))
+
+    out = apply_depth_pass(book, depth_map)
+
+    for ch in out.chapters[6:]:  # chapters 7–12
+        added = out.enrichment_audit["depth_budget_by_chapter"][ch.number - 1]["depth_words_added"]
+        assert added >= MIN_DEPTH_WORDS_PER_CHAPTER, (
+            f"Ch{ch.number} starved: only {added}w added (MIN={MIN_DEPTH_WORDS_PER_CHAPTER})"
+        )
+
+
+def test_depth_budget_audit_reports_starved_chapters(monkeypatch):
+    """
+    When no depth content is available for a chapter, it must appear in
+    depth_budget_starvation with a reason — not silently zero out.
+    """
+    from phoenix_v4.planning.enrichment_select import apply_depth_pass
+    import phoenix_v4.planning.enrichment_select as es
+
+    book, depth_map = _make_fake_enriched_book(n_chapters=4, book_wmax=7500)
+
+    call_count = {"n": 0}
+
+    def fake_load(**kwargs):
+        # Return None for chapters 3 and 4 to simulate no candidates
+        if kwargs.get("chapter_number", 0) >= 3:
+            return None
+        call_count["n"] += 1
+        return "word " * 250
+
+    monkeypatch.setattr(es, "_load_depth_content", fake_load)
+
+    out = apply_depth_pass(book, depth_map)
+
+    starvation = out.enrichment_audit["depth_budget_starvation"]
+    starved_chapters = {s["chapter"] for s in starvation}
+    # Chapters 3 and 4 had no candidates — must be reported
+    assert 3 in starved_chapters or 4 in starved_chapters, (
+        f"Expected starved chapters in audit, got: {starvation}"
+    )
+    for entry in starvation:
+        assert "reason" in entry, "Starvation entry missing 'reason'"
+        assert entry["reserved_min_met"] is False
+
+
+def test_depth_reservation_respects_book_wmax(monkeypatch):
+    """Total words after depth pass must not exceed book_wmax."""
+    import phoenix_v4.planning.enrichment_select as es
+    from phoenix_v4.planning.enrichment_select import apply_depth_pass
+
+    WMAX = 2000
+    book, depth_map = _make_fake_enriched_book(
+        n_chapters=12,
+        book_wmax=WMAX,
+        runtime_format="short_book_30",
+    )
+    _patch_load_depth_content(monkeypatch, word_count=300)
+    # Patch format bounds so apply_depth_pass respects our test WMAX
+    monkeypatch.setattr(es, "_load_runtime_word_bounds", lambda rf, root: (500, WMAX))
+
+    out = apply_depth_pass(book, depth_map)
+
+    assert out.total_words <= WMAX, (
+        f"book_wmax={WMAX} violated: total_words={out.total_words}"
+    )
+    assert out.enrichment_audit["total_words"] <= WMAX
+
+
+def test_depth_reservation_preserves_existing_affinity_priority(monkeypatch):
+    """
+    A module with chapter_affinity=[1,2,3] must NOT be applied to chapters
+    outside that list, even under the reservation pass.
+    """
+    from phoenix_v4.planning.enrichment_select import apply_depth_pass
+    import phoenix_v4.planning.enrichment_select as es
+
+    book, _ = _make_fake_enriched_book(n_chapters=6, book_wmax=7500)
+    depth_map = {
+        "depth_modules": {
+            "recognition_depth": {
+                "chapter_affinity": [1, 2, 3],  # early chapters only
+                "sources": [{"type": "persona_atom", "slot_types": ["HOOK"]}],
+                "target_words_per_chapter": [200, 400],
+            }
+        },
+        "topic_overrides": {},
+    }
+    _patch_load_depth_content(monkeypatch, word_count=250)
+
+    out = apply_depth_pass(book, depth_map)
+
+    for ch in out.chapters[3:]:  # chapters 4–6
+        depth_slots = [s for s in ch.slots if s.slot_type.startswith("DEPTH_")]
+        assert not depth_slots, (
+            f"Ch{ch.number} received depth despite chapter_affinity=[1,2,3]: {depth_slots}"
+        )

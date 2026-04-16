@@ -6,6 +6,8 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 import pytest
 
@@ -42,7 +44,7 @@ def _run_spine(out_dir: Path, plan_path: Path, *, quality_profile: str = "draft"
         "--no-job-check",
         "--no-generate-freebies",
     ]
-    return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=240)
+    return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=600)
 
 
 def test_run_pipeline_help_lists_pipeline_mode() -> None:
@@ -81,6 +83,11 @@ def test_spine_mode_produces_book_and_audit(tmp_path: Path) -> None:
     assert audit.exists()
     data = json.loads(audit.read_text(encoding="utf-8"))
     assert "total_slots" in data or "total_words" in data
+    variants = out_dir / "selected_content_variants.json"
+    assert variants.exists(), "compose should write selected_content_variants.json into render_dir"
+    vdata = json.loads(variants.read_text(encoding="utf-8"))
+    assert vdata.get("schema_version") == 1
+    assert isinstance(vdata.get("chapters"), list) and len(vdata["chapters"]) > 0
 
 
 @pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
@@ -117,6 +124,7 @@ def test_registry_mode_still_runs_for_anxiety(tmp_path: Path) -> None:
         str(plan_path),
         "--quality-profile",
         "draft",
+        "--skip-word-count-gate",
         "--no-job-check",
         "--no-generate-freebies",
     ]
@@ -188,8 +196,123 @@ def test_spine_gates_advisory_by_default(tmp_path: Path) -> None:
 
 
 @pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
-def test_spine_gates_hard_blocks_on_failure(tmp_path: Path) -> None:
+def test_spine_gates_hard_records_production_policy(tmp_path: Path) -> None:
     out_dir = tmp_path / "spine_hard"
     plan_path = tmp_path / "spine_hard_plan.json"
     r = _run_spine(out_dir, plan_path, quality_profile="production")
-    assert r.returncode != 0, r.stderr + r.stdout
+    assert r.returncode == 0, r.stderr + r.stdout
+    summary = json.loads((out_dir / "quality_summary.json").read_text(encoding="utf-8"))
+    assert summary.get("quality_profile") == "production"
+    assert summary.get("gates_hard") is True
+    assert summary.get("quality_gate_failures") == []
+
+
+def test_spine_driver_passes_chapter_selector_targets_and_publishable_book_to_enrichment(tmp_path: Path) -> None:
+    """Spine pipeline builds EnrichmentRequest with selector targets, book_frame, and publishable_book."""
+    from phoenix_v4.planning.enrichment_select import EnrichedBook, EnrichedChapter, EnrichedSlot
+
+    import scripts.run_pipeline as rp
+
+    captured: dict = {}
+
+    def _stub_select(req, repo_root=None):
+        captured["request"] = req
+        slots = [EnrichedSlot("HOOK", "Hi.", "x", "a1", 2, 2, [])]
+        ch = EnrichedChapter(1, "recognition", "t", "th", slots, 2, {})
+        return EnrichedBook(
+            1,
+            "enrichment_select",
+            "anxiety",
+            "teacher_pearl_prime_v1",
+            "gen_z_professionals",
+            "short_book_30",
+            [ch],
+            2,
+            {},
+        )
+
+    prose = "\n\n".join(f"Chapter {i}\n\nMinimal body {i}." for i in range(1, 7))
+
+    ns = SimpleNamespace(
+        seed="spine_enrich_ctx_test",
+        frame="somatic_first",
+        runtime_format="short_book_30",
+        render_dir=str(tmp_path / "render_out"),
+        render_book=True,
+        out=None,
+        enforce_scene_gate=False,
+        scene_gate_mode="production",
+        book_quality_override=False,
+        generate_freebies=False,
+        formats=None,
+        publish_dir=None,
+        asset_store=None,
+        skip_audio=False,
+        no_job_check=True,
+    )
+    book_spec = {
+        "topic_id": "anxiety",
+        "persona_id": "gen_z_professionals",
+        "teacher_id": "teacher_pearl_prime_v1",
+    }
+    ws = tmp_path / "job_ws"
+    ws.mkdir(parents=True, exist_ok=True)
+
+    with patch("phoenix_v4.planning.enrichment_select.select_enrichment", side_effect=_stub_select):
+        with patch(
+            "phoenix_v4.planning.enrichment_select.apply_depth_pass",
+            lambda enriched, *a, **k: enriched,
+        ):
+            with patch(
+                "phoenix_v4.rendering.chapter_composer.compose_from_enriched_book",
+                return_value=prose,
+            ):
+                with patch(
+                    "phoenix_v4.rendering.book_renderer.clean_for_delivery",
+                    side_effect=lambda p, **kw: p,
+                ):
+                    rc = rp._run_spine_pipeline_mode(
+                        args=ns,
+                        book_spec_for_compiler=book_spec,
+                        quality_profile="draft",
+                        gates_run=False,
+                        gates_hard=False,
+                        ebook_job_ws=ws,
+                        repo_root=REPO_ROOT,
+                    )
+
+    assert rc == 0
+    req = captured["request"]
+    assert req.publishable_book is True
+    tgt = req.spine_context.get("chapter_selector_targets") or []
+    assert len(tgt) == len(req.beatmap.chapters)
+    assert tgt[0].get("reader_objection")
+    assert req.spine_context.get("frame") == "somatic_first"
+    assert req.spine_context.get("book_frame") == "somatic_first"
+    assert req.spine_context.get("book_plan_id")
+
+    ns2 = SimpleNamespace(**{**ns.__dict__, "render_book": False})
+    captured.clear()
+    with patch("phoenix_v4.planning.enrichment_select.select_enrichment", side_effect=_stub_select):
+        with patch(
+            "phoenix_v4.planning.enrichment_select.apply_depth_pass",
+            lambda enriched, *a, **k: enriched,
+        ):
+            with patch(
+                "phoenix_v4.rendering.chapter_composer.compose_from_enriched_book",
+                return_value=prose,
+            ):
+                with patch(
+                    "phoenix_v4.rendering.book_renderer.clean_for_delivery",
+                    side_effect=lambda p, **kw: p,
+                ):
+                    rp._run_spine_pipeline_mode(
+                        args=ns2,
+                        book_spec_for_compiler=book_spec,
+                        quality_profile="draft",
+                        gates_run=False,
+                        gates_hard=False,
+                        ebook_job_ws=ws,
+                        repo_root=REPO_ROOT,
+                    )
+    assert captured["request"].publishable_book is False

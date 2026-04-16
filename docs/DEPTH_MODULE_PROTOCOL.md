@@ -1,6 +1,6 @@
-# Depth module protocol — EnrichmentSelect (spec only)
+# Depth module protocol — EnrichmentSelect
 
-**Status:** Architecture and data contract. **No code changes** in `phoenix_v4/planning/enrichment_select.py` in this workstream — implementation is a follow-up.
+**Status:** Architecture, data contract, and live implementation notes for `phoenix_v4/planning/enrichment_select.py`.
 
 **Authority inputs:**
 
@@ -87,6 +87,50 @@ All paths are **repo-relative** and verified in `config/depth/depth_module_map.y
 - Practice library: `SOURCE_OF_TRUTH/practice_library/inbox/*_PRODUCTION_READY.json` via `practice_library_loader`.  
 - Components: `config/pearl_practice/component_templates.yaml`.  
 - Phoenix standards: `SOURCE_OF_TRUTH/exercises_v4/aha_noticing_phoenix_standard.yaml`, `integration_phoenix_standard.yaml`.
+
+---
+
+## Persona CANONICAL prose extraction
+
+`persona_atom` depth sources may point directly at `CANONICAL.txt` files under:
+
+```text
+atoms/{persona_id}/{topic_id}/{SLOT_TYPE}/CANONICAL.txt
+```
+
+The live loader contract in `phoenix_v4/planning/enrichment_select.py` is:
+
+- `_extract_prose_from_canonical()` extracts prose from parseable `## TYPE vNN` blocks.
+- `_select_prose_chunk()` chooses the selected block/chunk for delivery.
+- YAML/frontmatter/metadata lines must never be delivered as reader prose.
+- CANONICAL blocks must stay parseable as slot headers followed by prose.
+
+Valid:
+
+```text
+## STORY v31
+The prose body starts here...
+```
+
+Also valid for the matching slot/source:
+
+```text
+## HOOK v42
+The prose body starts here...
+```
+
+Invalid for depth delivery:
+
+```text
+--- variant:
+  body: Metadata-heavy YAML should not be delivered as prose.
+```
+
+If a CANONICAL file contains metadata around prose, the loader must strip the
+metadata before returning content to the composer. This is especially important
+for `persona_atom` depth modules, because those chunks are inserted late in the
+spine path and can otherwise leak YAML or selector scaffolding into the rendered
+chapter.
 
 ---
 
