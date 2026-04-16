@@ -62,6 +62,71 @@ class EnrichmentGapError(RuntimeError):
     """Publishable-book runs must not ship visible [CONTENT GAP: ...] markers."""
 
 
+# ---------------------------------------------------------------------------
+# ACT-007: Bestseller metadata field bonuses and collision_family dedup
+# ---------------------------------------------------------------------------
+
+def _metadata_field_bonus(metadata: Dict[str, Any], ch_tgt: Optional[Dict[str, Any]]) -> float:
+    """Additive bonus for atom metadata matching chapter targets.
+
+    Bonuses (additive, graceful fallback when field absent):
+      reader_objection match  → +0.15  (target-gated)
+      proof_mode match        → +0.10  (target-gated)
+      tension_type match      → +0.10  (target-gated)
+      propulsion_type match   → +0.08  (target-gated)
+      shareability >= 4       → +0.05  (unconditional — signals high-share atom)
+
+    Returns total bonus (0.0 when metadata absent or no fields present).
+    """
+    if not metadata:
+        return 0.0
+    m = metadata
+    ch_tgt_ = ch_tgt or {}
+    bonus = 0.0
+
+    def _eq(field: str) -> bool:
+        want = ch_tgt_.get(field)
+        if want is None or str(want).strip() == "":
+            return False
+        got = m.get(field)
+        if got is None:
+            return False
+        return str(got).strip().lower() == str(want).strip().lower()
+
+    if _eq("reader_objection"):
+        bonus += 0.15
+    if _eq("proof_mode"):
+        bonus += 0.10
+    if _eq("tension_type"):
+        bonus += 0.10
+    if _eq("propulsion_type"):
+        bonus += 0.08
+    try:
+        sh = m.get("shareability")
+        if sh is not None and int(sh) >= 4:
+            bonus += 0.05
+    except (TypeError, ValueError):
+        pass
+    return bonus
+
+
+def _collision_family_penalty(
+    metadata: Dict[str, Any],
+    recent_families: List[str],
+) -> float:
+    """Return -0.20 if collision_family matches any family in the recent window.
+
+    recent_families: collision_family values from the previous 2 chapters' selected atoms.
+    Returns 0.0 when field absent or no match.
+    """
+    cf = str(metadata.get("collision_family") or "").strip()
+    if not cf:
+        return 0.0
+    if cf in recent_families:
+        return -0.20
+    return 0.0
+
+
 def _try_content_bank_fallback(
     *,
     reg: Any,
@@ -724,6 +789,10 @@ def select_enrichment(
     enriched_chapters: List[EnrichedChapter] = []
     plan_context = dict(request.spine_context or {})
 
+    # ACT-007: collision_family dedup — track families used in last 2 chapters
+    # Each entry is a list of collision_family values for that chapter (0-based index).
+    _chapter_collision_families: List[List[str]] = []
+
     for bm_ch in bm.chapters:
         ch_key = _chapter_key(bm_ch.number)
         ch_data = sections_root.get(ch_key)
@@ -848,9 +917,23 @@ def select_enrichment(
                     var_rec: Dict[str, Any] = {}
                     if 0 <= _v_i < len(vars_) and isinstance(vars_[_v_i], dict):
                         var_rec = vars_[_v_i]
-                    match_scores["bestseller_target_score"] = _bestseller_metadata_score(
-                        var_rec, ch_tgt
-                    )
+                    # ACT-007: merge section-level metadata for bestseller field scoring
+                    _sec_meta: Dict[str, Any] = dict(_sec_d.get("metadata") or {})
+                    _sec_meta.update({k: v for k, v in var_rec.items() if k not in _sec_meta})
+                    _recent_fams: List[str] = [
+                        f
+                        for prev_fams in _chapter_collision_families[-2:]
+                        for f in prev_fams
+                    ]
+                    _base_score = _bestseller_metadata_score(_sec_meta, ch_tgt)
+                    _field_bonus = _metadata_field_bonus(_sec_meta, ch_tgt)
+                    _cf_penalty = _collision_family_penalty(_sec_meta, _recent_fams)
+                    match_scores["bestseller_target_score"] = _base_score + _field_bonus + _cf_penalty
+                    match_scores["metadata_field_bonus"] = _field_bonus
+                    match_scores["collision_family_penalty"] = _cf_penalty
+                    _cf_tag = str(_sec_meta.get("collision_family") or "").strip()
+                    if _cf_tag:
+                        match_scores["_collision_family"] = _cf_tag
 
             # 5) Content bank (bridges / fallbacks)
             if not content and cb_reg is not None:
@@ -984,6 +1067,14 @@ def select_enrichment(
                     match_scores=dict(match_scores),
                 )
             )
+
+        # ACT-007: record collision_families used in this chapter for dedup window
+        _ch_fams: List[str] = []
+        for _sl in slots_out:
+            _cf_val = str(_sl.match_scores.get("_collision_family") or "").strip()
+            if _cf_val:
+                _ch_fams.append(_cf_val)
+        _chapter_collision_families.append(_ch_fams)
 
         enriched_chapters.append(
             EnrichedChapter(
