@@ -16,6 +16,7 @@ from __future__ import annotations
 import hashlib
 import logging
 import re
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Optional
 
@@ -24,6 +25,11 @@ logger = logging.getLogger(__name__)
 DEFAULT_MAX_EXERCISES_PER_CHAPTER = 2
 
 from phoenix_v4.exercises.models import AssemblyContext, EmotionalState
+
+try:
+    import yaml
+except ImportError:  # pragma: no cover
+    yaml = None
 
 try:
     from phoenix_v4.rendering.locale_templates import get_template as _gt
@@ -50,6 +56,28 @@ _CHAPTER_INDEX_TLS: int = 0  # Thread-local-ish chapter index for variant rotati
 
 # Module-level locale for bridge functions (set by compose_chapter_prose)
 _LOCALE_TLS: str | None = None
+_BOOK_BRIDGE_MEMORY_TLS: "BridgeMemory | None" = None
+_MECHANISM_THESIS_CACHE: dict[str, Any] | None = None
+_EXERCISE_WRAPPER_CACHE: dict[str, Any] | None = None
+_BRIDGE_TRANSITION_CACHE: dict[str, Any] | None = None
+_MECHANISM_THESIS_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "mechanism_thesis_families.yaml"
+_EXERCISE_WRAPPER_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "exercise_wrapper_families.yaml"
+_BRIDGE_TRANSITION_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "bridge_transition_families.yaml"
+_EMOTIONAL_JOBS = {"recognition", "mechanism", "deepening", "reframe", "practice", "integration", "resolution"}
+_ROOT_CAP_4_CHAPTER_WINDOW = {
+    "chapter",
+    "pattern",
+    "body",
+    "point",
+    "moment",
+    "next",
+    "explanation",
+    "story",
+    "signal",
+    "practice",
+    "mind",
+    "cost",
+}
 
 def _pick_variant(options: list[str], *seed_parts: str) -> str:
     if not options:
@@ -67,14 +95,632 @@ def _pick_variant(options: list[str], *seed_parts: str) -> str:
     return _gt(picked, locale=_LOCALE_TLS) if _LOCALE_TLS else picked
 
 
+def _normalize_emotional_job(emotional_job: str) -> str:
+    job = (emotional_job or "").strip().lower()
+    return job if job in _EMOTIONAL_JOBS else ""
+
+
+def _load_mechanism_thesis_families() -> dict[str, Any]:
+    global _MECHANISM_THESIS_CACHE
+    if _MECHANISM_THESIS_CACHE is not None:
+        return _MECHANISM_THESIS_CACHE
+    if yaml is None:
+        _MECHANISM_THESIS_CACHE = {}
+        return _MECHANISM_THESIS_CACHE
+    try:
+        loaded = yaml.safe_load(_MECHANISM_THESIS_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        loaded = {}
+    _MECHANISM_THESIS_CACHE = loaded if isinstance(loaded, dict) else {}
+    return _MECHANISM_THESIS_CACHE
+
+
+def _load_exercise_wrapper_families() -> dict[str, Any]:
+    global _EXERCISE_WRAPPER_CACHE
+    if _EXERCISE_WRAPPER_CACHE is not None:
+        return _EXERCISE_WRAPPER_CACHE
+    if yaml is None:
+        _EXERCISE_WRAPPER_CACHE = {}
+        return _EXERCISE_WRAPPER_CACHE
+    try:
+        loaded = yaml.safe_load(_EXERCISE_WRAPPER_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        loaded = {}
+    _EXERCISE_WRAPPER_CACHE = loaded if isinstance(loaded, dict) else {}
+    return _EXERCISE_WRAPPER_CACHE
+
+
+def _load_bridge_transition_families() -> dict[str, Any]:
+    global _BRIDGE_TRANSITION_CACHE
+    if _BRIDGE_TRANSITION_CACHE is not None:
+        return _BRIDGE_TRANSITION_CACHE
+    if yaml is None:
+        _BRIDGE_TRANSITION_CACHE = {}
+        return _BRIDGE_TRANSITION_CACHE
+    try:
+        loaded = yaml.safe_load(_BRIDGE_TRANSITION_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        loaded = {}
+    _BRIDGE_TRANSITION_CACHE = loaded if isinstance(loaded, dict) else {}
+    return _BRIDGE_TRANSITION_CACHE
+
+
+def _recent_count(store: dict[int, dict[str, int]], key: str, chapter_index: int, window: int) -> int:
+    total = 0
+    for idx in range(max(0, chapter_index - window), chapter_index + 1):
+        total += store.get(idx, {}).get(key, 0)
+    return total
+
+
+@dataclass
+class MechanismThesisMemory:
+    """Tracks mechanism/thesis usage across chapters for anti-reuse."""
+
+    used_phrases_book: set[str] = field(default_factory=set)
+    stem_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    root_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    shape_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+
+    def phrase_used_book(self, phrase: str) -> bool:
+        return phrase.strip().lower() in self.used_phrases_book
+
+    def recent_stem_count(self, stem: str, chapter_index: int, window: int = 3) -> int:
+        return _recent_count(self.stem_usage_by_chapter, stem.strip().lower(), chapter_index, window)
+
+    def recent_root_count(self, root: str, chapter_index: int, window: int = 3) -> int:
+        return _recent_count(self.root_usage_by_chapter, root.strip().lower(), chapter_index, window)
+
+    def recent_shape_count(self, shape: str, chapter_index: int, window: int = 2) -> int:
+        return _recent_count(self.shape_usage_by_chapter, shape.strip().lower(), chapter_index, window)
+
+    def register(
+        self,
+        *,
+        chapter_index: int,
+        phrase: str,
+        shape: str,
+        stems: list[str],
+        roots: list[str],
+    ) -> None:
+        key_phrase = phrase.strip().lower()
+        if not key_phrase:
+            return
+        self.used_phrases_book.add(key_phrase)
+        shape_map = self.shape_usage_by_chapter.setdefault(chapter_index, {})
+        shape_key = shape.strip().lower()
+        if shape_key:
+            shape_map[shape_key] = shape_map.get(shape_key, 0) + 1
+        stem_map = self.stem_usage_by_chapter.setdefault(chapter_index, {})
+        for stem in stems:
+            k = stem.strip().lower()
+            if k:
+                stem_map[k] = stem_map.get(k, 0) + 1
+        root_map = self.root_usage_by_chapter.setdefault(chapter_index, {})
+        for root in roots:
+            k = root.strip().lower()
+            if k:
+                root_map[k] = root_map.get(k, 0) + 1
+
+
+@dataclass
+class ExerciseWrapperMemory:
+    """Tracks exercise wrapper usage across chapters for anti-reuse."""
+
+    used_phrases_book: set[str] = field(default_factory=set)
+    stem_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    root_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    shape_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    family_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+
+    def phrase_used_book(self, phrase: str) -> bool:
+        return phrase.strip().lower() in self.used_phrases_book
+
+    def recent_stem_count(self, stem: str, chapter_index: int, window: int = 3) -> int:
+        return _recent_count(self.stem_usage_by_chapter, stem.strip().lower(), chapter_index, window)
+
+    def recent_root_count(self, root: str, chapter_index: int, window: int = 3) -> int:
+        return _recent_count(self.root_usage_by_chapter, root.strip().lower(), chapter_index, window)
+
+    def recent_shape_count(self, shape: str, chapter_index: int, window: int = 2) -> int:
+        return _recent_count(self.shape_usage_by_chapter, shape.strip().lower(), chapter_index, window)
+
+    def recent_family_count(self, family: str, chapter_index: int, window: int = 1) -> int:
+        return _recent_count(self.family_usage_by_chapter, family.strip().lower(), chapter_index, window)
+
+    def register(
+        self,
+        *,
+        chapter_index: int,
+        phrase: str,
+        shape: str,
+        family: str,
+        stems: list[str],
+        roots: list[str],
+    ) -> None:
+        key_phrase = phrase.strip().lower()
+        if not key_phrase:
+            return
+        self.used_phrases_book.add(key_phrase)
+        shape_map = self.shape_usage_by_chapter.setdefault(chapter_index, {})
+        shape_key = shape.strip().lower()
+        if shape_key:
+            shape_map[shape_key] = shape_map.get(shape_key, 0) + 1
+        family_map = self.family_usage_by_chapter.setdefault(chapter_index, {})
+        family_key = family.strip().lower()
+        if family_key:
+            family_map[family_key] = family_map.get(family_key, 0) + 1
+        stem_map = self.stem_usage_by_chapter.setdefault(chapter_index, {})
+        for stem in stems:
+            k = stem.strip().lower()
+            if k:
+                stem_map[k] = stem_map.get(k, 0) + 1
+        root_map = self.root_usage_by_chapter.setdefault(chapter_index, {})
+        for root in roots:
+            k = root.strip().lower()
+            if k:
+                root_map[k] = root_map.get(k, 0) + 1
+
+
+@dataclass
+class BridgeMemory:
+    """Tracks bridge usage across chapter and book scope for anti-reuse."""
+
+    used_phrases_book: set[str] = field(default_factory=set)
+    used_phrases_by_chapter: dict[int, set[str]] = field(default_factory=dict)
+    stem_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    root_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    shape_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    family_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    last_shape_by_chapter: dict[int, str] = field(default_factory=dict)
+
+    def phrase_used_book(self, phrase: str) -> bool:
+        return phrase.strip().lower() in self.used_phrases_book
+
+    def phrase_used_chapter(self, chapter_index: int, phrase: str) -> bool:
+        return phrase.strip().lower() in self.used_phrases_by_chapter.get(chapter_index, set())
+
+    def recent_stem_count(self, stem: str, chapter_index: int, window: int = 3) -> int:
+        return _recent_count(self.stem_usage_by_chapter, stem.strip().lower(), chapter_index, window)
+
+    def recent_root_count(self, root: str, chapter_index: int, window: int = 3) -> int:
+        return _recent_count(self.root_usage_by_chapter, root.strip().lower(), chapter_index, window)
+
+    def recent_shape_count(self, shape: str, chapter_index: int, window: int = 2) -> int:
+        return _recent_count(self.shape_usage_by_chapter, shape.strip().lower(), chapter_index, window)
+
+    def recent_family_count(self, family: str, chapter_index: int, window: int = 2) -> int:
+        return _recent_count(self.family_usage_by_chapter, family.strip().lower(), chapter_index, window)
+
+    def register(
+        self,
+        *,
+        chapter_index: int,
+        phrase: str,
+        shape: str,
+        stems: list[str],
+        roots: list[str],
+        family_key: str,
+    ) -> None:
+        p = phrase.strip().lower()
+        if not p:
+            return
+        self.used_phrases_book.add(p)
+        chapter_set = self.used_phrases_by_chapter.setdefault(chapter_index, set())
+        chapter_set.add(p)
+        s_map = self.shape_usage_by_chapter.setdefault(chapter_index, {})
+        s_key = shape.strip().lower()
+        if s_key:
+            s_map[s_key] = s_map.get(s_key, 0) + 1
+            self.last_shape_by_chapter[chapter_index] = s_key
+        f_map = self.family_usage_by_chapter.setdefault(chapter_index, {})
+        f_key = family_key.strip().lower()
+        if f_key:
+            f_map[f_key] = f_map.get(f_key, 0) + 1
+        stem_map = self.stem_usage_by_chapter.setdefault(chapter_index, {})
+        for stem in stems:
+            k = stem.strip().lower()
+            if k:
+                stem_map[k] = stem_map.get(k, 0) + 1
+        root_map = self.root_usage_by_chapter.setdefault(chapter_index, {})
+        for root in roots:
+            k = root.strip().lower()
+            if k:
+                root_map[k] = root_map.get(k, 0) + 1
+
+
+def _chapter_position_bucket(chapter_index: int, total_chapters: int) -> str:
+    if total_chapters <= 1 or chapter_index >= total_chapters - 1:
+        return "final"
+    if chapter_index <= 2:
+        return "early"
+    if chapter_index <= 7:
+        return "middle"
+    return "late"
+
+
+def _collect_bridge_candidates(
+    *,
+    bridge_type: str,
+    emotional_job: str,
+    chapter_position: str,
+) -> list[dict[str, Any]]:
+    payload = _load_bridge_transition_families()
+    by_type = (payload.get("bridge_types") or {}).get(bridge_type) or {}
+    by_job = by_type.get(emotional_job) if isinstance(by_type, dict) else {}
+    if not isinstance(by_job, dict):
+        return []
+    out: list[dict[str, Any]] = []
+    for shape, entries in by_job.items():
+        if not isinstance(entries, list):
+            continue
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            text = str(entry.get("text") or "").strip()
+            if not text or re.search(r"\b(this chapter is about|the purpose of this section)\b", text, flags=re.I):
+                continue
+            pos = str(entry.get("position_bias") or "").strip().lower() or "any"
+            if pos not in {"any", chapter_position}:
+                continue
+            out.append(
+                {
+                    "text": text,
+                    "shape": str(shape).strip().lower(),
+                    "stems": [str(s).strip().lower() for s in (entry.get("stems") or []) if str(s).strip()],
+                    "roots": [str(r).strip().lower() for r in (entry.get("roots") or []) if str(r).strip()],
+                    "scene_bias": [str(k).strip().lower() for k in (entry.get("scene_bias") or []) if str(k).strip()],
+                    "position_bias": pos,
+                }
+            )
+    return out
+
+
+def _score_bridge_candidate(
+    candidate: dict[str, Any],
+    *,
+    chapter_index: int,
+    total_chapters: int,
+    bridge_memory: BridgeMemory,
+    bridge_family: str,
+    topic_keywords: set[str],
+) -> float:
+    text = str(candidate.get("text") or "").strip()
+    shape = str(candidate.get("shape") or "").strip().lower()
+    stems = [str(s).strip().lower() for s in candidate.get("stems", [])]
+    roots = [str(r).strip().lower() for r in candidate.get("roots", [])]
+    if bridge_memory.phrase_used_book(text) or bridge_memory.phrase_used_chapter(chapter_index, text):
+        return -10_000.0
+    if shape and bridge_memory.last_shape_by_chapter.get(chapter_index, "") == shape:
+        return -10_000.0
+    for stem in stems:
+        if bridge_memory.recent_stem_count(stem, chapter_index, window=3) >= 1:
+            return -10_000.0
+    for root in roots:
+        if root in _ROOT_CAP_4_CHAPTER_WINDOW and bridge_memory.recent_root_count(root, chapter_index, window=3) >= 3:
+            return -10_000.0
+
+    score = 0.0
+    shape_recent = bridge_memory.recent_shape_count(shape, chapter_index, window=2)
+    family_recent = bridge_memory.recent_family_count(bridge_family, chapter_index, window=2)
+    score -= max(0.0, float(shape_recent - 1) * 3.0)
+    score -= max(0.0, float(family_recent - 1) * 2.0)
+    for root in roots:
+        score -= min(2.5, bridge_memory.recent_root_count(root, chapter_index, window=3) * 0.7)
+    if shape_recent == 0:
+        score += 1.2
+    if any(k in topic_keywords for k in candidate.get("scene_bias", [])):
+        score += 1.6
+    if candidate.get("position_bias") == _chapter_position_bucket(chapter_index, total_chapters):
+        score += 2.0
+    elif candidate.get("position_bias") == "any":
+        score += 0.2
+    if all(bridge_memory.recent_root_count(root, chapter_index, window=3) == 0 for root in roots):
+        score += 0.8
+    return score
+
+
+def _select_bridge_candidate(
+    *,
+    bridge_type: str,
+    emotional_job: str,
+    chapter_index: int,
+    total_chapters: int,
+    bridge_memory: BridgeMemory | None,
+    context_text: str,
+) -> dict[str, Any] | None:
+    if bridge_memory is None:
+        bridge_memory = BridgeMemory()
+    chapter_position = _chapter_position_bucket(chapter_index, total_chapters)
+    candidates = _collect_bridge_candidates(
+        bridge_type=bridge_type,
+        emotional_job=emotional_job,
+        chapter_position=chapter_position,
+    )
+    if not candidates:
+        return None
+    topic_keywords = set(re.findall(r"[a-z]+", (context_text or "").lower()))
+    family = f"{bridge_type}|{emotional_job}"
+    best: dict[str, Any] | None = None
+    best_score = -10_000.0
+    for candidate in candidates:
+        score = _score_bridge_candidate(
+            candidate,
+            chapter_index=chapter_index,
+            total_chapters=total_chapters,
+            bridge_memory=bridge_memory,
+            bridge_family=family,
+            topic_keywords=topic_keywords,
+        )
+        if score > best_score:
+            best, best_score = candidate, score
+        elif score == best_score and best is not None:
+            tie_seed = f"{bridge_type}:{chapter_index}:{candidate.get('text','')}".encode("utf-8")
+            if int(hashlib.sha256(tie_seed).hexdigest()[:8], 16) % 2 == 0:
+                best = candidate
+    if best is None or best_score <= -9999.0:
+        return None
+    bridge_memory.register(
+        chapter_index=chapter_index,
+        phrase=str(best.get("text", "")),
+        shape=str(best.get("shape", "")),
+        stems=[str(s) for s in best.get("stems", [])],
+        roots=[str(r) for r in best.get("roots", [])],
+        family_key=family,
+    )
+    return best
+
+
+def _pick_legacy_bridge_with_memory(
+    options: list[str],
+    *,
+    chapter_index: int,
+    bridge_memory: BridgeMemory | None,
+    family_key: str,
+    seed_parts: tuple[str, ...],
+) -> str:
+    if not options:
+        return ""
+    filtered = options
+    if bridge_memory is not None:
+        deduped = [
+            opt
+            for opt in options
+            if not bridge_memory.phrase_used_book(opt)
+            and not bridge_memory.phrase_used_chapter(chapter_index, opt)
+        ]
+        if deduped:
+            filtered = deduped
+    picked = _pick_variant(filtered, *seed_parts)
+    if bridge_memory is not None and picked:
+        bridge_memory.register(
+            chapter_index=chapter_index,
+            phrase=picked,
+            shape="legacy",
+            stems=[],
+            roots=[],
+            family_key=family_key,
+        )
+    return picked
+
+
+def _collect_text_entries(shape_map: dict[str, Any]) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    for shape, entries in (shape_map or {}).items():
+        if not isinstance(entries, list):
+            continue
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            text = str(entry.get("text") or "").strip()
+            if not text:
+                continue
+            out.append(
+                {
+                    "text": text,
+                    "shape": str(shape).strip().lower(),
+                    "stems": [str(s).strip().lower() for s in (entry.get("stems") or []) if str(s).strip()],
+                    "roots": [str(r).strip().lower() for r in (entry.get("roots") or []) if str(r).strip()],
+                    "topic_keywords": [str(k).strip().lower() for k in (entry.get("topic_keywords") or []) if str(k).strip()],
+                }
+            )
+    return out
+
+
+def _score_mechanism_thesis_candidate(
+    candidate: dict[str, Any],
+    *,
+    chapter_index: int,
+    memory: MechanismThesisMemory,
+    kind: str,
+) -> float:
+    phrase = str(candidate.get("text") or "").strip()
+    shape = str(candidate.get("shape") or "").strip().lower()
+    stems = [str(s).strip().lower() for s in candidate.get("stems", [])]
+    roots = [str(r).strip().lower() for r in candidate.get("roots", [])]
+    if not phrase:
+        return -10_000.0
+    if memory.phrase_used_book(phrase):
+        return -10_000.0
+    for stem in stems:
+        if memory.recent_stem_count(stem, chapter_index, window=3) >= 1:
+            return -10_000.0
+    if shape and memory.recent_shape_count(shape, chapter_index, window=2) >= 2:
+        return -10_000.0
+    if kind == "thesis" and any("the point is that" in stem for stem in stems):
+        if sum(1 for p in memory.used_phrases_book if p.startswith("the point is that")) >= 2:
+            return -10_000.0
+    if kind == "mechanism":
+        for banned in ("here is the mechanism", "the pattern underneath", "what drives this"):
+            if any(banned in stem for stem in stems):
+                used = sum(1 for p in memory.used_phrases_book if p.startswith(banned))
+                if used >= 1:
+                    return -10_000.0
+    score = 5.0
+    score += 1.0 if shape and memory.recent_shape_count(shape, chapter_index, window=2) == 0 else 0.0
+    for root in roots:
+        score -= 0.4 * float(memory.recent_root_count(root, chapter_index, window=3))
+    return score
+
+
+def _select_mechanism_thesis_candidate(
+    candidates: list[dict[str, Any]],
+    *,
+    chapter_index: int,
+    memory: MechanismThesisMemory | None,
+    kind: str,
+) -> dict[str, Any] | None:
+    if not candidates:
+        return None
+    local_memory = memory or MechanismThesisMemory()
+    best: dict[str, Any] | None = None
+    best_score = -10_000.0
+    for cand in candidates:
+        score = _score_mechanism_thesis_candidate(
+            cand,
+            chapter_index=chapter_index,
+            memory=local_memory,
+            kind=kind,
+        )
+        if score > best_score:
+            best = cand
+            best_score = score
+    if best is None or best_score <= -9999.0:
+        return None
+    if memory is not None:
+        memory.register(
+            chapter_index=chapter_index,
+            phrase=str(best.get("text", "")),
+            shape=str(best.get("shape", "")),
+            stems=[str(x) for x in best.get("stems", [])],
+            roots=[str(x) for x in best.get("roots", [])],
+        )
+    return best
+
+
+def _score_exercise_candidate(
+    candidate: dict[str, Any],
+    *,
+    chapter_index: int,
+    memory: ExerciseWrapperMemory,
+    family_key: str,
+) -> float:
+    phrase = str(candidate.get("text") or "").strip()
+    shape = str(candidate.get("shape") or "").strip().lower()
+    stems = [str(s).strip().lower() for s in candidate.get("stems", [])]
+    roots = [str(r).strip().lower() for r in candidate.get("roots", [])]
+    if not phrase:
+        return -10_000.0
+    if memory.phrase_used_book(phrase):
+        return -10_000.0
+    for stem in stems:
+        if memory.recent_stem_count(stem, chapter_index, window=3) >= 1:
+            return -10_000.0
+    for stem_ban in ("before you continue", "just try it", "whatever happened", "useful information"):
+        if any(stem_ban in stem for stem in stems):
+            if sum(1 for p in memory.used_phrases_book if stem_ban in p) >= 1:
+                return -10_000.0
+    if shape and memory.recent_shape_count(shape, chapter_index, window=1) >= 1:
+        return -5_000.0
+    dominant_roots = {"body", "notice", "continue", "shift", "information"}
+    for root in roots:
+        if root in dominant_roots and memory.recent_root_count(root, chapter_index, window=3) >= 3:
+            return -10_000.0
+    score = 4.0
+    score -= 1.2 * float(memory.recent_family_count(family_key, chapter_index, window=1))
+    if shape and memory.recent_shape_count(shape, chapter_index, window=2) == 0:
+        score += 0.8
+    return score
+
+
+def _select_exercise_candidate(
+    candidates: list[dict[str, Any]],
+    *,
+    chapter_index: int,
+    memory: ExerciseWrapperMemory | None,
+    family_key: str,
+) -> dict[str, Any] | None:
+    if not candidates:
+        return None
+    local_memory = memory or ExerciseWrapperMemory()
+    best: dict[str, Any] | None = None
+    best_score = -10_000.0
+    for cand in candidates:
+        score = _score_exercise_candidate(
+            cand,
+            chapter_index=chapter_index,
+            memory=local_memory,
+            family_key=family_key,
+        )
+        if score > best_score:
+            best = cand
+            best_score = score
+    if best is None or best_score <= -9999.0:
+        return None
+    if memory is not None:
+        memory.register(
+            chapter_index=chapter_index,
+            phrase=str(best.get("text", "")),
+            shape=str(best.get("shape", "")),
+            family=family_key,
+            stems=[str(x) for x in best.get("stems", [])],
+            roots=[str(x) for x in best.get("roots", [])],
+        )
+    return best
+
+
+def _iter_wrapper_candidates(
+    *,
+    wrapper_type: str,
+    practice_type: str,
+    emotional_job: str,
+) -> list[dict[str, Any]]:
+    payload = _load_exercise_wrapper_families()
+    wrappers = payload.get("wrapper_types") or {}
+    wt_bank = wrappers.get(wrapper_type) or {}
+    if not isinstance(wt_bank, dict):
+        return []
+    practice_bank = wt_bank.get(practice_type) or {}
+    if not isinstance(practice_bank, dict):
+        return []
+    job_bank = practice_bank.get(emotional_job) or {}
+    if not isinstance(job_bank, dict):
+        return []
+    return _collect_text_entries(job_bank)
+
+
+def _resolve_practice_candidates(
+    *,
+    wrapper_type: str,
+    practice_type: str,
+    emotional_job: str,
+) -> list[dict[str, Any]]:
+    p = (practice_type or "").strip().lower()
+    ordered = [p]
+    if p == "body_awareness":
+        ordered.extend(["grounding", "body_scan"])
+    ordered.extend(["grounding", "integration_pause", "reflective_prompt"])
+    seen: set[str] = set()
+    out: list[dict[str, Any]] = []
+    for key in ordered:
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        out.extend(
+            _iter_wrapper_candidates(
+                wrapper_type=wrapper_type,
+                practice_type=key,
+                emotional_job=emotional_job,
+            )
+        )
+    return out
+
+
 # ---------------------------------------------------------------------------
 # Thesis derivation
 # ---------------------------------------------------------------------------
 
-def _derive_thesis(reflection: str, chapter_index: int = 0) -> str:
-    """Extract a one-line thesis claim from REFLECTION prose."""
-    sents = _sentences(reflection)
-    # Priority keywords for thesis extraction
+def _derive_thesis_legacy(reflection: str, chapter_index: int = 0) -> str:
+    """Backward-compatible thesis derivation without emotional-job families."""
     thesis_markers = [
         ("perfect choice", "The point is that perfection is not available, but movement is."),
         ("regret", "The point is that anxiety predicts regret so loudly that it blocks useful decisions."),
@@ -87,7 +733,6 @@ def _derive_thesis(reflection: str, chapter_index: int = 0) -> str:
         ("grief", "The point is that grief is not a problem to solve — it is a process to accompany."),
         ("spiral", "The point is that the spiral is a loop, not a descent — it returns to the same ground."),
         ("false alarm", "The point is that the alarm fires on prediction, not evidence."),
-        # Adi Da / contemplative teacher vocabulary
         ("contraction", "The point is that the contraction is not who you are — it is what you do."),
         ("bright", "The point is that what you are seeking is already present before you start looking."),
         ("seeking", "The point is that seeking is the activity that obscures what is already here."),
@@ -97,20 +742,17 @@ def _derive_thesis(reflection: str, chapter_index: int = 0) -> str:
         ("relationship", "The point is that relationship is the mirror that reveals what you cannot see alone."),
         ("prior freedom", "The point is that freedom does not need to be achieved — it needs to be recognized."),
         ("vulnerability", "The point is that vulnerability is not the risk — the armor is."),
-        # Emotional / somatic vocabulary
         ("nervous system", "The point is that your nervous system responds to predictions, not facts."),
         ("body", "The point is that the body knows before the mind does — trust the body."),
         ("holding", "The point is that what you are holding is costing more energy than you realize."),
         ("pattern", "The point is that seeing the pattern is the beginning of freedom from it."),
         ("rest", "The point is that rest is not earned — it is required."),
     ]
-    reflection_lower = reflection.lower()
-    # Collect ALL matching theses, then pick by chapter_index to rotate
+    reflection_lower = (reflection or "").lower()
     matched = [thesis for marker, thesis in thesis_markers if marker in reflection_lower]
     if matched:
         return matched[chapter_index % len(matched)]
-    # Fallback: rotate across multiple generic theses using reflection hash + chapter_index
-    _fallback_theses = [
+    fallback = [
         "The point is that you can act inside uncertainty without waiting for it to resolve.",
         "The point is that seeing the pattern clearly is the first step toward not being run by it.",
         "The point is that the feeling is real, but the story the feeling tells is often inaccurate.",
@@ -119,15 +761,62 @@ def _derive_thesis(reflection: str, chapter_index: int = 0) -> str:
         "The point is that what you are protecting yourself from is often less dangerous than the protection.",
         "The point is that ordinary moments carry the pattern more clearly than dramatic ones.",
     ]
-    return _fallback_theses[(hash(reflection) + chapter_index) % len(_fallback_theses)]
+    return fallback[(hash(reflection) + chapter_index) % len(fallback)]
+
+
+def _derive_thesis(
+    reflection: str,
+    chapter_index: int = 0,
+    *,
+    emotional_job: str = "",
+    thesis_memory: MechanismThesisMemory | None = None,
+) -> str:
+    """Extract a one-line thesis claim from REFLECTION prose."""
+    job = _normalize_emotional_job(emotional_job)
+    if not job:
+        return _derive_thesis_legacy(reflection, chapter_index)
+    payload = _load_mechanism_thesis_families()
+    job_bank = (((payload.get("thesis_families") or {}).get(job)) or {})
+    candidates = _collect_text_entries(job_bank if isinstance(job_bank, dict) else {})
+    selected = _select_mechanism_thesis_candidate(
+        candidates,
+        chapter_index=chapter_index,
+        memory=thesis_memory,
+        kind="thesis",
+    )
+    if selected:
+        return str(selected.get("text", "")).strip()
+    return _derive_thesis_legacy(reflection, chapter_index)
 
 
 # ---------------------------------------------------------------------------
 # Bridge sentences (connect slots into argument flow)
 # ---------------------------------------------------------------------------
 
-def _bridge_after_opening(thesis: str, opening: str = "", scene: str = "") -> str:
+def _bridge_after_opening(
+    thesis: str,
+    opening: str = "",
+    scene: str = "",
+    *,
+    emotional_job: str = "",
+    chapter_index: int = 0,
+    total_chapters: int = 1,
+    bridge_memory: BridgeMemory | None = None,
+) -> str:
     """Bridge from HOOK/SCENE → MECHANISM."""
+    job = _normalize_emotional_job(emotional_job)
+    if job:
+        selected = _select_bridge_candidate(
+            bridge_type="after_opening",
+            emotional_job=job,
+            chapter_index=chapter_index,
+            total_chapters=total_chapters,
+            bridge_memory=bridge_memory,
+            context_text=f"{thesis} {opening} {scene}",
+        )
+        if selected:
+            text = str(selected.get("text", "")).strip()
+            return _gt(text, locale=_LOCALE_TLS) if _LOCALE_TLS else text
     seed = f"{thesis} {opening} {scene}".lower()
     if "regret" in seed or "choice" in seed:
         options = [
@@ -169,11 +858,39 @@ def _bridge_after_opening(thesis: str, opening: str = "", scene: str = "") -> st
             "There is a micro-flinch the body makes before the mind builds its story. That flinch is the trailhead.",
             "Do not skip ahead to the lesson. The body is still showing you where the lesson lives.",
         ]
-    return _pick_variant(options, thesis, opening, scene)
+    return _pick_legacy_bridge_with_memory(
+        options,
+        chapter_index=chapter_index,
+        bridge_memory=bridge_memory,
+        family_key=f"after_opening|{job or 'legacy'}",
+        seed_parts=(thesis, opening, scene),
+    )
 
 
-def _bridge_before_story(thesis: str, reflection: str = "", story: str = "") -> str:
+def _bridge_before_story(
+    thesis: str,
+    reflection: str = "",
+    story: str = "",
+    *,
+    emotional_job: str = "",
+    chapter_index: int = 0,
+    total_chapters: int = 1,
+    bridge_memory: BridgeMemory | None = None,
+) -> str:
     """Bridge from REFLECTION → STORY."""
+    job = _normalize_emotional_job(emotional_job)
+    if job:
+        selected = _select_bridge_candidate(
+            bridge_type="before_story",
+            emotional_job=job,
+            chapter_index=chapter_index,
+            total_chapters=total_chapters,
+            bridge_memory=bridge_memory,
+            context_text=f"{thesis} {reflection} {story}",
+        )
+        if selected:
+            text = str(selected.get("text", "")).strip()
+            return _gt(text, locale=_LOCALE_TLS) if _LOCALE_TLS else text
     seed = f"{thesis} {reflection} {story}".lower()
     if "comparison" in seed:
         options = [
@@ -205,11 +922,43 @@ def _bridge_before_story(thesis: str, reflection: str = "", story: str = "") -> 
             "Here the chapter shifts from naming the pattern to witnessing it in motion.",
             "Words about the pattern only go so far. What follows is the pattern caught in the act.",
         ]
-    return _pick_variant(options, thesis, reflection, story)
+    return _pick_legacy_bridge_with_memory(
+        options,
+        chapter_index=chapter_index,
+        bridge_memory=bridge_memory,
+        family_key=f"before_story|{job or 'legacy'}",
+        seed_parts=(thesis, reflection, story),
+    )
 
 
-def _bridge_before_exercise(thesis: str, reflection: str = "", story: str = "") -> str:
+def _bridge_before_exercise(
+    thesis: str,
+    reflection: str = "",
+    story: str = "",
+    *,
+    emotional_job: str = "",
+    practice_type: str = "",
+    exercise_memory: ExerciseWrapperMemory | None = None,
+    chapter_index: int = 0,
+    total_chapters: int = 1,
+    bridge_memory: BridgeMemory | None = None,
+) -> str:
     """Bridge from STORY → EXERCISE."""
+    job = _normalize_emotional_job(emotional_job)
+    if job:
+        selected = _select_bridge_candidate(
+            bridge_type="before_exercise",
+            emotional_job=job,
+            chapter_index=chapter_index,
+            total_chapters=total_chapters,
+            bridge_memory=bridge_memory,
+            context_text=f"{thesis} {reflection} {story} {practice_type}",
+        )
+        if selected:
+            text = str(selected.get("text", "")).strip()
+            if _LOCALE_TLS:
+                return _gt(text, locale=_LOCALE_TLS)
+            return text
     seed = f"{thesis} {reflection} {story}".lower()
     if "jaw" in seed or "sternum" in seed or "throat" in seed:
         options = [
@@ -231,11 +980,53 @@ def _bridge_before_exercise(thesis: str, reflection: str = "", story: str = "") 
             "Let the practice be undersized. A small move completed is worth more than a large one imagined.",
             "The shift from understanding to doing is where most chapters lose people. Stay with this one.",
         ]
-    return _pick_variant(options, thesis, reflection, story)
+    return _pick_legacy_bridge_with_memory(
+        options,
+        chapter_index=chapter_index,
+        bridge_memory=bridge_memory,
+        family_key=f"before_exercise|{job or 'legacy'}",
+        seed_parts=(thesis, reflection, story),
+    )
 
 
-def _bridge_before_integration(thesis: str, integration: str = "") -> str:
+def _bridge_before_integration(
+    thesis: str,
+    integration: str = "",
+    *,
+    emotional_job: str = "",
+    practice_type: str = "",
+    exercise_memory: ExerciseWrapperMemory | None = None,
+    chapter_index: int = 0,
+    total_chapters: int = 1,
+    bridge_memory: BridgeMemory | None = None,
+) -> str:
     """Bridge from EXERCISE → INTEGRATION."""
+    job = _normalize_emotional_job(emotional_job)
+    # When no bridge_memory is supplied but exercise_memory is, synthesise a
+    # transient BridgeMemory seeded with the phrases already seen book-wide so
+    # the YAML candidate scorer can avoid re-selecting them.
+    effective_bridge_memory = bridge_memory
+    if effective_bridge_memory is None and exercise_memory is not None:
+        effective_bridge_memory = BridgeMemory()
+        effective_bridge_memory.used_phrases_book = set(exercise_memory.used_phrases_book)
+    if job:
+        selected = _select_bridge_candidate(
+            bridge_type="before_integration",
+            emotional_job=job,
+            chapter_index=chapter_index,
+            total_chapters=total_chapters,
+            bridge_memory=effective_bridge_memory,
+            context_text=f"{thesis} {integration} {practice_type}",
+        )
+        if selected:
+            text = str(selected.get("text", "")).strip()
+            # Propagate the newly used phrase back into exercise_memory so
+            # subsequent chapters know not to repeat it.
+            if exercise_memory is not None and text:
+                exercise_memory.used_phrases_book.add(text.strip().lower())
+            if _LOCALE_TLS:
+                return _gt(text, locale=_LOCALE_TLS)
+            return text
     options = [
         "Now notice what shifted before your mind starts summarizing it.",
         "Let the chapter land in the body before it turns back into explanation.",
@@ -250,15 +1041,21 @@ def _bridge_before_integration(thesis: str, integration: str = "") -> str:
         "The body registers change in its own time. Give it that time before the next chapter begins.",
         "Something loosened or something tightened. Either one is information worth keeping.",
     ]
-    return _pick_variant(options, thesis, integration)
+    return _pick_legacy_bridge_with_memory(
+        options,
+        chapter_index=chapter_index,
+        bridge_memory=effective_bridge_memory,
+        family_key=f"before_integration|{job or 'legacy'}",
+        seed_parts=(thesis, integration),
+    )
 
 
 # ---------------------------------------------------------------------------
 # Slot transforms
 # ---------------------------------------------------------------------------
 
-def _distill_mechanism(reflection: str, thesis: str) -> str:
-    """Derive a mechanism-explanation paragraph from REFLECTION content."""
+def _distill_mechanism_legacy(reflection: str, thesis: str) -> str:
+    """Backward-compatible mechanism derivation without emotional-job families."""
     reflection_lower = (reflection or "").lower()
     if "regret" in reflection_lower and "choice" in reflection_lower:
         return (
@@ -325,6 +1122,41 @@ def _distill_mechanism(reflection: str, thesis: str) -> str:
     if _LOCALE_TLS:
         picked = _gt(picked, locale=_LOCALE_TLS)
     return picked
+
+
+def _distill_mechanism(
+    reflection: str,
+    thesis: str,
+    *,
+    emotional_job: str = "",
+    mechanism_memory: MechanismThesisMemory | None = None,
+) -> str:
+    """Derive a mechanism-explanation paragraph from REFLECTION content."""
+    job = _normalize_emotional_job(emotional_job)
+    if not job:
+        return _distill_mechanism_legacy(reflection, thesis)
+    payload = _load_mechanism_thesis_families()
+    bank = ((payload.get("mechanism_families") or {}).get(job)) or {}
+    if not isinstance(bank, dict):
+        return _distill_mechanism_legacy(reflection, thesis)
+    candidates = _collect_text_entries(bank)
+    reflection_low = (reflection or "").lower()
+    topic_specific = [
+        c
+        for c in candidates
+        if c.get("topic_keywords")
+        and any(str(k).strip().lower() in reflection_low for k in c.get("topic_keywords", []))
+    ]
+    pool = topic_specific or candidates
+    selected = _select_mechanism_thesis_candidate(
+        pool,
+        chapter_index=_CHAPTER_INDEX_TLS,
+        memory=mechanism_memory,
+        kind="mechanism",
+    )
+    if selected:
+        return str(selected.get("text", "")).strip()
+    return _distill_mechanism_legacy(reflection, thesis)
 
 
 def _trim_reflection(reflection: str, max_sentences: int = 7) -> str:
@@ -404,21 +1236,68 @@ def _polish_scene(scene: str) -> str:
     return s
 
 
-def _fallback_takeaway(thesis: str) -> str:
+def _fallback_takeaway(
+    thesis: str,
+    *,
+    emotional_job: str = "",
+    chapter_index: int = 0,
+    total_chapters: int = 1,
+    bridge_memory: BridgeMemory | None = None,
+) -> str:
     """Generate a takeaway when TAKEAWAY slot is missing/placeholder."""
-    template = (
-        "Remember this: the chapter is asking for a smaller experiment, not a perfect belief. "
-        "Feel the alarm, name the prediction, and let the next move be honest enough to try."
-    )
+    job = _normalize_emotional_job(emotional_job)
+    if job:
+        selected = _select_bridge_candidate(
+            bridge_type="takeaway_fallback",
+            emotional_job=job,
+            chapter_index=chapter_index,
+            total_chapters=total_chapters,
+            bridge_memory=bridge_memory,
+            context_text=thesis,
+        )
+        if selected:
+            text = str(selected.get("text", "")).strip()
+            return _gt(text, locale=_LOCALE_TLS) if _LOCALE_TLS else text
+    core = thesis.replace("The point is that ", "")
+    options = [
+        "Remember this: {core} Keep it concrete long enough to test it in your next ordinary hour.",
+        "Carry this forward: {core} Let your next small action prove whether it is true.",
+        "Keep this close: {core} Insight counts only when it changes the next moment you are inside the pattern.",
+    ]
+    template = _pick_variant(options, thesis, str(chapter_index), str(total_chapters))
     if _LOCALE_TLS:
-        return _gt(template, locale=_LOCALE_TLS)
-    return template
+        translated = _gt(template, locale=_LOCALE_TLS)
+        try:
+            return translated.format(core=core)
+        except (KeyError, IndexError):
+            return translated
+    return template.format(core=core)
 
 
-def _fallback_thread(thesis: str, chapter_index: int, total_chapters: int) -> str:
+def _fallback_thread(
+    thesis: str,
+    chapter_index: int,
+    total_chapters: int,
+    *,
+    emotional_job: str = "",
+    bridge_memory: BridgeMemory | None = None,
+) -> str:
     """Generate a thread-forward when THREAD slot is missing/placeholder."""
     if chapter_index >= total_chapters - 1:
         return ""  # Last chapter: no thread-forward
+    job = _normalize_emotional_job(emotional_job)
+    if job:
+        selected = _select_bridge_candidate(
+            bridge_type="thread_fallback",
+            emotional_job=job,
+            chapter_index=chapter_index,
+            total_chapters=total_chapters,
+            bridge_memory=bridge_memory,
+            context_text=thesis,
+        )
+        if selected:
+            text = str(selected.get("text", "")).strip()
+            return _gt(text, locale=_LOCALE_TLS) if _LOCALE_TLS else text
     lower = thesis.lower()
     if "regret" in lower or "choice" in lower:
         return "What remains is the harder part: how to choose when loss still feels louder than relief."
@@ -440,7 +1319,14 @@ def _fallback_thread(thesis: str, chapter_index: int, total_chapters: int) -> st
     return _pick_variant(options, thesis, str(chapter_index), str(total_chapters))
 
 
-def _exercise_setup_sentence(reflection: str, story: str) -> str:
+def _exercise_setup_sentence(
+    reflection: str,
+    story: str,
+    *,
+    emotional_job: str = "",
+    practice_type: str = "",
+    exercise_memory: ExerciseWrapperMemory | None = None,
+) -> str:
     seed = f"{reflection} {story}".lower()
     if "sternum" in seed or "chest" in seed:
         return "Start with the pressure under the sternum. That is the part still bracing."
@@ -454,6 +1340,24 @@ def _exercise_setup_sentence(reflection: str, story: str) -> str:
         return "Start with the hand that hovered instead of moving. That freeze is the entry point."
     if "breath" in seed or "breathe" in seed:
         return "Start with the breath that shortened when the chapter turned."
+    job = _normalize_emotional_job(emotional_job)
+    if job:
+        candidates = _resolve_practice_candidates(
+            wrapper_type="setup_sentence",
+            practice_type=practice_type,
+            emotional_job=job,
+        )
+        selected = _select_exercise_candidate(
+            candidates,
+            chapter_index=_CHAPTER_INDEX_TLS,
+            memory=exercise_memory,
+            family_key=f"setup_sentence|{practice_type}|{job}",
+        )
+        if selected:
+            text = str(selected.get("text", "")).strip()
+            if _LOCALE_TLS:
+                return _gt(text, locale=_LOCALE_TLS)
+            return text
     setup_fallbacks = [
         "Start with the place in your body that lifted while you were listening. That is where the practice begins.",
         "Start where you feel the most tension right now. Not where you think the tension should be — where it actually is.",
@@ -495,6 +1399,59 @@ def _shape_integration(integration: str) -> str:
     return " ".join(limited or kept[:1])
 
 
+def _resolve_practice_type(exercise_type_hint: str, exercise_atom_id: str, exercise_text: str) -> str:
+    low = " ".join((exercise_type_hint or "", exercise_atom_id or "", exercise_text or "")).lower()
+    mapping = [
+        ("breath_regulation", ("breath", "box", "exhale", "inhale", "coherent")),
+        ("grounding", ("ground", "floor", "feet", "sensory", "orient")),
+        ("body_scan", ("body scan", "scan", "head-to-toe")),
+        ("somatic_discharge", ("shake", "discharge", "release", "tension", "move")),
+        ("visualization", ("visual", "imagine", "imagery", "picture")),
+        ("reflective_prompt", ("journal", "prompt", "write", "reflect", "question")),
+        ("attention_training", ("attention", "focus", "anchor", "concentration")),
+        ("vagus_stimulation", ("vagus", "hum", "gargle", "cold water", "sigh")),
+        ("integration_pause", ("integrat", "pause", "settle", "landing")),
+    ]
+    for practice, needles in mapping:
+        if any(n in low for n in needles):
+            return practice
+    return "body_awareness"
+
+
+def _post_practice_validation_sentence(
+    *,
+    emotional_job: str = "",
+    practice_type: str = "",
+    exercise_memory: ExerciseWrapperMemory | None = None,
+) -> str:
+    job = _normalize_emotional_job(emotional_job)
+    if not job:
+        options = [
+            "Whatever you noticed is enough.",
+            "Even a small shift is still a shift.",
+            "There is no wrong response here.",
+            "What just happened gave you useful information.",
+        ]
+        return _pick_variant(options, practice_type, emotional_job)
+    candidates = _resolve_practice_candidates(
+        wrapper_type="post_practice_validation",
+        practice_type=practice_type,
+        emotional_job=job,
+    )
+    selected = _select_exercise_candidate(
+        candidates,
+        chapter_index=_CHAPTER_INDEX_TLS,
+        memory=exercise_memory,
+        family_key=f"post_practice_validation|{practice_type}|{job}",
+    )
+    if selected:
+        text = str(selected.get("text", "")).strip()
+        if _LOCALE_TLS:
+            return _gt(text, locale=_LOCALE_TLS)
+        return text
+    return "Whatever you noticed is enough."
+
+
 def _emotional_state_from_arc_role(role: str) -> EmotionalState:
     r = (role or "").strip().lower()
     if r == "destabilization":
@@ -534,13 +1491,27 @@ def _build_assembly_context(
     )
 
 
-def _shape_thread(thread_raw: str, thesis: str, chapter_index: int, total_chapters: int) -> str:
+def _shape_thread(
+    thread_raw: str,
+    thesis: str,
+    chapter_index: int,
+    total_chapters: int,
+    *,
+    emotional_job: str = "",
+    bridge_memory: BridgeMemory | None = None,
+) -> str:
     if thread_raw and not _is_placeholder_text(thread_raw):
         cleaned = re.sub(r"\bIn the next chapter,\s*", "", thread_raw, flags=re.I).strip()
         cleaned = re.sub(r"\bThere is more to explore\b[. ]*", "", cleaned, flags=re.I).strip()
         if cleaned:
             return cleaned
-    return _fallback_thread(thesis, chapter_index, total_chapters)
+    return _fallback_thread(
+        thesis,
+        chapter_index,
+        total_chapters,
+        emotional_job=emotional_job,
+        bridge_memory=bridge_memory,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -587,6 +1558,9 @@ def compose_chapter_prose(
     exercise_repeat_index: int = 0,
     exercise_source_stats: Optional[dict] = None,
     book_seed: str = "",
+    mechanism_memory: Optional[MechanismThesisMemory] = None,
+    exercise_memory: Optional[ExerciseWrapperMemory] = None,
+    bridge_memory: Optional[BridgeMemory] = None,
 ) -> str:
     """
     Compose a single chapter's prose from its slot types and resolved prose strings.
@@ -602,6 +1576,7 @@ def compose_chapter_prose(
     _CHAPTER_INDEX_TLS = chapter_index
     global _LOCALE_TLS
     _LOCALE_TLS = locale
+    resolved_bridge_memory = bridge_memory if bridge_memory is not None else _BOOK_BRIDGE_MEMORY_TLS
 
     # Build slot_type → prose map (take first non-placeholder for each type)
     slot_map: dict[str, str] = {}
@@ -624,7 +1599,16 @@ def compose_chapter_prose(
     compression_raw = slot_map.get("COMPRESSION", "")
 
     # Derive thesis from reflection content
-    thesis = _derive_thesis(reflection_raw, chapter_index) if not _is_placeholder_text(reflection_raw) else ""
+    thesis = (
+        _derive_thesis(
+            reflection_raw,
+            chapter_index,
+            emotional_job=emotional_role,
+            thesis_memory=mechanism_memory,
+        )
+        if not _is_placeholder_text(reflection_raw)
+        else ""
+    )
 
     # Build composed chapter in argument order
     parts: list[str] = []
@@ -640,8 +1624,23 @@ def compose_chapter_prose(
 
     # 3. Bridge → Mechanism (derived from reflection)
     if thesis:
-        parts.append(_bridge_after_opening(thesis, opening=opening, scene=scene))
-        mechanism = _distill_mechanism(reflection_raw, thesis)
+        parts.append(
+            _bridge_after_opening(
+                thesis,
+                opening=opening,
+                scene=scene,
+                emotional_job=emotional_role,
+                chapter_index=chapter_index,
+                total_chapters=total_chapters,
+                bridge_memory=resolved_bridge_memory,
+            )
+        )
+        mechanism = _distill_mechanism(
+            reflection_raw,
+            thesis,
+            emotional_job=emotional_role,
+            mechanism_memory=mechanism_memory,
+        )
         parts.append(mechanism)
         parts.append(thesis)
 
@@ -653,7 +1652,17 @@ def compose_chapter_prose(
 
     # 5. STORY with optional QA label
     if story_raw and not _is_placeholder_text(story_raw):
-        parts.append(_bridge_before_story(thesis, reflection=reflection_raw, story=story_raw))
+        parts.append(
+            _bridge_before_story(
+                thesis,
+                reflection=reflection_raw,
+                story=story_raw,
+                emotional_job=emotional_role,
+                chapter_index=chapter_index,
+                total_chapters=total_chapters,
+                bridge_memory=resolved_bridge_memory,
+            )
+        )
         if include_slot_labels_qa:
             # Find the original atom_id for STORY
             for st, prose in zip(slot_types, slot_proses):
@@ -673,6 +1682,7 @@ def compose_chapter_prose(
     # 7. Exercise with bridge
     # If exercise is placeholder or empty, try practice library (272 exercises with aha + integration)
     exercise_from_library_34 = False
+    practice_type = _resolve_practice_type(exercise_type_hint, exercise_atom_id, exercise_raw)
     if _is_placeholder_text(exercise_raw) or not exercise_raw:
         try:
             from phoenix_v4.exercises.practice_library_loader import get_exercise_for_chapter
@@ -712,10 +1722,36 @@ def compose_chapter_prose(
                 integration_text=integration_raw,
             )
             if composed_exercise.strip():
-                setup = _exercise_setup_sentence(reflection_raw, story_raw)
+                parts.append(
+                    _bridge_before_exercise(
+                        thesis,
+                        reflection=reflection_raw,
+                        story=story_raw,
+                        emotional_job=emotional_role,
+                        practice_type=practice_type,
+                        exercise_memory=exercise_memory,
+                        chapter_index=chapter_index,
+                        total_chapters=total_chapters,
+                        bridge_memory=resolved_bridge_memory,
+                    )
+                )
+                setup = _exercise_setup_sentence(
+                    reflection_raw,
+                    story_raw,
+                    emotional_job=emotional_role,
+                    practice_type=practice_type,
+                    exercise_memory=exercise_memory,
+                )
                 if setup:
                     parts.append(setup)
                 parts.append(composed_exercise)
+                parts.append(
+                    _post_practice_validation_sentence(
+                        emotional_job=emotional_role,
+                        practice_type=practice_type,
+                        exercise_memory=exercise_memory,
+                    )
+                )
                 assembled_ok = True
                 if exercise_from_library_34:
                     _bump_exercise_stat(exercise_source_stats, "library_34_fallback")
@@ -737,9 +1773,35 @@ def compose_chapter_prose(
                     templates=load_component_templates(),
                 )
                 if composed:
-                    setup = _exercise_setup_sentence(reflection_raw, story_raw)
+                    parts.append(
+                        _bridge_before_exercise(
+                            thesis,
+                            reflection=reflection_raw,
+                            story=story_raw,
+                            emotional_job=emotional_role,
+                            practice_type=practice_type,
+                            exercise_memory=exercise_memory,
+                            chapter_index=chapter_index,
+                            total_chapters=total_chapters,
+                            bridge_memory=resolved_bridge_memory,
+                        )
+                    )
+                    setup = _exercise_setup_sentence(
+                        reflection_raw,
+                        story_raw,
+                        emotional_job=emotional_role,
+                        practice_type=practice_type,
+                        exercise_memory=exercise_memory,
+                    )
                     parts.append(setup)
                     parts.append(composed)
+                    parts.append(
+                        _post_practice_validation_sentence(
+                            emotional_job=emotional_role,
+                            practice_type=practice_type,
+                            exercise_memory=exercise_memory,
+                        )
+                    )
                     integration_raw = ""
                     if exercise_from_library_34:
                         _bump_exercise_stat(exercise_source_stats, "library_34_fallback")
@@ -748,9 +1810,36 @@ def compose_chapter_prose(
                 else:
                     raise ValueError("empty compose")
             except Exception:
-                parts.append(_bridge_before_exercise(thesis, reflection=reflection_raw, story=story_raw))
-                parts.append(_exercise_setup_sentence(reflection_raw, story_raw))
+                parts.append(
+                    _bridge_before_exercise(
+                        thesis,
+                        reflection=reflection_raw,
+                        story=story_raw,
+                        emotional_job=emotional_role,
+                        practice_type=practice_type,
+                        exercise_memory=exercise_memory,
+                        chapter_index=chapter_index,
+                        total_chapters=total_chapters,
+                        bridge_memory=resolved_bridge_memory,
+                    )
+                )
+                parts.append(
+                    _exercise_setup_sentence(
+                        reflection_raw,
+                        story_raw,
+                        emotional_job=emotional_role,
+                        practice_type=practice_type,
+                        exercise_memory=exercise_memory,
+                    )
+                )
                 parts.append(exercise_raw)
+                parts.append(
+                    _post_practice_validation_sentence(
+                        emotional_job=emotional_role,
+                        practice_type=practice_type,
+                        exercise_memory=exercise_memory,
+                    )
+                )
                 if exercise_from_library_34:
                     _bump_exercise_stat(exercise_source_stats, "library_34_fallback")
                 else:
@@ -770,18 +1859,48 @@ def compose_chapter_prose(
 
     # 8. Integration with bridge
     if integration_raw and not _is_placeholder_text(integration_raw):
-        parts.append(_bridge_before_integration(thesis, integration=integration_raw))
+        parts.append(
+            _bridge_before_integration(
+                thesis,
+                integration=integration_raw,
+                emotional_job=emotional_role,
+                practice_type=practice_type,
+                exercise_memory=exercise_memory,
+                chapter_index=chapter_index,
+                total_chapters=total_chapters,
+                bridge_memory=resolved_bridge_memory,
+            )
+        )
         parts.append(integration_raw)
     elif thesis:
         # Fallback takeaway when integration is missing
-        parts.append(_fallback_takeaway(thesis))
+        parts.append(
+            _fallback_takeaway(
+                thesis,
+                emotional_job=emotional_role,
+                chapter_index=chapter_index,
+                total_chapters=total_chapters,
+                bridge_memory=resolved_bridge_memory,
+            )
+        )
 
     # 9. Takeaway (explicit slot or fallback)
     if takeaway_raw and not _is_placeholder_text(takeaway_raw):
         parts.append(takeaway_raw)
 
     # 10. Thread-forward (explicit slot or fallback)
-    thread = _shape_thread(thread_raw, thesis, chapter_index, total_chapters) if thesis else ""
+    thread = (
+        _shape_thread(
+            thread_raw,
+            thesis,
+            chapter_index,
+            total_chapters,
+            emotional_job=emotional_role,
+            bridge_memory=resolved_bridge_memory,
+        )
+        if thesis
+        else ""
+    )
     if thread:
         parts.append(thread)
 
@@ -1079,6 +2198,12 @@ def compose_from_enriched_book(
         post_compose_sanitize_chapter,
     )
 
+    mechanism_memory = MechanismThesisMemory()
+    exercise_memory = ExerciseWrapperMemory()
+    bridge_memory = BridgeMemory()
+    global _BOOK_BRIDGE_MEMORY_TLS
+    _BOOK_BRIDGE_MEMORY_TLS = bridge_memory
+
     chapters_prose: list[str] = []
     for ch_idx, ch in enumerate(enriched.chapters):
         contract = contracts[ch_idx] if ch_idx < len(contracts) else contracts[-1]
@@ -1143,6 +2268,8 @@ def compose_from_enriched_book(
             book_seed=book_seed,
             frame=frame,
             governance_report=report,
+            mechanism_memory=mechanism_memory,
+            exercise_memory=exercise_memory,
         )
         ch_body = post_compose_sanitize_chapter(
             ch_body,
@@ -1168,4 +2295,5 @@ def compose_from_enriched_book(
         rr = report.setdefault("recurrence_report", [])
         if isinstance(rr, list):
             rr.extend(furniture_notes)
+    _BOOK_BRIDGE_MEMORY_TLS = None
     return deduped

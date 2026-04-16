@@ -1,0 +1,590 @@
+schema_version: 1
+
+thesis_families:
+  recognition:
+    direct_thesis:
+      - text: "The alarm fires on prediction, not evidence."
+        stems: ["alarm fires on prediction"]
+        roots: ["alarm", "prediction", "evidence"]
+    quiet_distillation:
+      - text: "What feels immediate is often only the body trying not to be caught off guard."
+        stems: ["body trying not to be caught off guard"]
+        roots: ["body", "guard"]
+    reframe_sentence:
+      - text: "What feels like proof is often only prediction wearing urgency."
+        stems: ["prediction wearing urgency"]
+        roots: ["prediction", "urgency"]
+    contrast_claim:
+      - text: "The feeling is real. The story attached to it may not be."
+        stems: ["feeling is real story may not be"]
+        roots: ["feeling", "story"]
+    identity_shift_claim:
+      - text: "You are not fragile. You are mobilized."
+        stems: ["you are mobilized"]
+        roots: ["mobilized"]
+    permission_inflected_claim:
+      - text: "You are allowed to act before certainty arrives."
+        stems: ["allowed to act before certainty"]
+        roots: ["act", "certainty"]
+    consequence_claim:
+      - text: "That is why ordinary situations can feel expensive before anything has actually gone wrong."
+        stems: ["ordinary situations feel expensive"]
+        roots: ["ordinary", "expensive"]
+    compression_claim:
+      - text: "The body has already decided the moment matters."
+        stems: ["body decided moment matters"]
+        roots: ["body", "moment"]
+  mechanism:
+    direct_thesis:
+      - text: "The system confuses social uncertainty with danger."
+        stems: ["system confuses uncertainty with danger"]
+        roots: ["system", "danger", "uncertainty"]
+    quiet_distillation:
+      - text: "The response is mechanical before it is personal."
+        stems: ["response is mechanical before personal"]
+        roots: ["response", "mechanical"]
+    reframe_sentence:
+      - text: "What looks dramatic is often only an old survival script running on new data."
+        stems: ["old survival script running on new data"]
+        roots: ["survival", "script", "data"]
+    contrast_claim:
+      - text: "Your reaction is not random. It is patterned."
+        stems: ["reaction is patterned"]
+        roots: ["reaction", "patterned"]
+    identity_shift_claim:
+      - text: "You are not defective. You are running a reliable loop."
+        stems: ["running a reliable loop"]
+        roots: ["loop"]
+    permission_inflected_claim:
+      - text: "You are allowed to treat this as physiology, not failure."
+        stems: ["treat this as physiology not failure"]
+        roots: ["physiology", "failure"]
+    consequence_claim:
+      - text: "That is why tiny cues can trigger oversized responses."
+        stems: ["tiny cues trigger oversized responses"]
+        roots: ["cues", "responses"]
+    compression_claim:
+      - text: "The loop begins before language catches up."
+        stems: ["loop begins before language"]
+        roots: ["loop", "language"]
+  deepening:
+    direct_thesis:
+      - text: "The hidden cost is how much life gets organized around prevention."
+        stems: ["life organized around prevention"]
+        roots: ["cost", "life", "prevention"]
+    quiet_distillation:
+      - text: "You pay most in anticipation, not impact."
+        stems: ["pay most in anticipation"]
+        roots: ["anticipation", "impact"]
+    reframe_sentence:
+      - text: "What feels like discipline is often exhaustion wearing duty."
+        stems: ["exhaustion wearing duty"]
+        roots: ["exhaustion", "duty"]
+    contrast_claim:
+      - text: "The pattern protects you and taxes you at the same time."
+        stems: ["pattern protects and taxes"]
+        roots: ["pattern", "protects", "taxes"]
+    identity_shift_claim:
+      - text: "You are not lazy. You are carrying invisible load."
+        stems: ["carrying invisible load"]
+        roots: ["load", "invisible"]
+    permission_inflected_claim:
+      - text: "You are allowed to count hidden costs as real costs."
+        stems: ["count hidden costs as real costs"]
+        roots: ["costs", "hidden"]
+    consequence_claim:
+      - text: "That is why small tasks can feel impossible on expensive days."
+        stems: ["small tasks feel impossible"]
+        roots: ["tasks", "impossible"]
+    compression_claim:
+      - text: "The burden grows in the background first."
+        stems: ["burden grows in background"]
+        roots: ["burden", "background"]
+  reframe:
+    direct_thesis:
+      - text: "The thing you call weakness is often protection under stress."
+        stems: ["weakness is protection under stress"]
+        roots: ["weakness", "protection", "stress"]
+    quiet_distillation:
+      - text: "The pattern is trying to save you with outdated math."
+        stems: ["pattern trying to save you with outdated math"]
+        roots: ["pattern", "save", "math"]
+    reframe_sentence:
+      - text: "What seemed like sabotage was often adaptation."
+        stems: ["seemed like sabotage was adaptation"]
+        roots: ["sabotage", "adaptation"]
+    contrast_claim:
+      - text: "The behavior is costly. The intention underneath it is protective."
+        stems: ["behavior costly intention protective"]
+        roots: ["behavior", "intention"]
+    identity_shift_claim:
+      - text: "You are not broken. You are patterned."
+        stems: ["you are patterned"]
+        roots: ["patterned"]
+    permission_inflected_claim:
+      - text: "You are allowed to respect the function before you revise it."
+        stems: ["respect function before revise"]
+        roots: ["function", "revise"]
+    consequence_claim:
+      - text: "That is why compassion can unlock changes force never could."
+        stems: ["compassion unlock changes force never could"]
+        roots: ["compassion", "changes"]
+    compression_claim:
+      - text: "The pattern made sense once."
+        stems: ["pattern made sense once"]
+        roots: ["pattern", "sense"]
+  practice:
+    direct_thesis:
+      - text: "Relief begins with one repeatable move."
+        stems: ["relief begins with one repeatable move"]
+        roots: ["relief", "move"]
+    quiet_distillation:
+      - text: "Practice is where explanation becomes choice."
+        stems: ["practice is where explanation becomes choice"]
+        roots: ["practice", "choice"]
+    reframe_sentence:
+      - text: "What changes first is not belief but behavior."
+        stems: ["changes first not belief but behavior"]
+        roots: ["belief", "behavior"]
+    contrast_claim:
+      - text: "Insight helps. Repetition rewires."
+        stems: ["insight helps repetition rewires"]
+        roots: ["insight", "repetition"]
+    identity_shift_claim:
+      - text: "You are someone who can practice before you feel ready."
+        stems: ["practice before ready"]
+        roots: ["practice", "ready"]
+    permission_inflected_claim:
+      - text: "You are allowed to start small and still count it."
+        stems: ["start small and count it"]
+        roots: ["small", "count"]
+    consequence_claim:
+      - text: "That is why one concrete action can lower the whole chapter's pressure."
+        stems: ["one concrete action lowers pressure"]
+        roots: ["action", "pressure"]
+    compression_claim:
+      - text: "Do less, on purpose, repeatedly."
+        stems: ["do less on purpose repeatedly"]
+        roots: ["less", "purpose", "repeatedly"]
+  integration:
+    direct_thesis:
+      - text: "Integration is evidence carried into ordinary hours."
+        stems: ["integration is evidence carried into hours"]
+        roots: ["integration", "evidence"]
+    quiet_distillation:
+      - text: "The shift is real even when it is quiet."
+        stems: ["shift is real even when quiet"]
+        roots: ["shift", "quiet"]
+    reframe_sentence:
+      - text: "Progress looks less dramatic and more durable."
+        stems: ["progress less dramatic more durable"]
+        roots: ["progress", "durable"]
+    contrast_claim:
+      - text: "Nothing magical happened. Something usable did."
+        stems: ["nothing magical something usable"]
+        roots: ["usable", "magical"]
+    identity_shift_claim:
+      - text: "You are becoming trustworthy to your own nervous system."
+        stems: ["becoming trustworthy to nervous system"]
+        roots: ["trustworthy", "nervous system"]
+    permission_inflected_claim:
+      - text: "You are allowed to call subtle change real change."
+        stems: ["call subtle change real change"]
+        roots: ["subtle", "change"]
+    consequence_claim:
+      - text: "That is why the same room can feel different this time."
+        stems: ["same room feels different this time"]
+        roots: ["room", "different"]
+    compression_claim:
+      - text: "The pattern still exists. It owns less of the day."
+        stems: ["pattern exists owns less of day"]
+        roots: ["pattern", "day"]
+  resolution:
+    direct_thesis:
+      - text: "Resolution is not certainty. It is steadiness under uncertainty."
+        stems: ["resolution is steadiness under uncertainty"]
+        roots: ["resolution", "steadiness", "uncertainty"]
+    quiet_distillation:
+      - text: "You can be unfinished and still be okay to proceed."
+        stems: ["unfinished and okay to proceed"]
+        roots: ["unfinished", "proceed"]
+    reframe_sentence:
+      - text: "What once demanded control can now be met with range."
+        stems: ["demanded control now met with range"]
+        roots: ["control", "range"]
+    contrast_claim:
+      - text: "The alarm may return. Panic no longer has to."
+        stems: ["alarm may return panic no longer has to"]
+        roots: ["alarm", "panic"]
+    identity_shift_claim:
+      - text: "You are no longer waiting for perfect conditions to live."
+        stems: ["no longer waiting for perfect conditions"]
+        roots: ["perfect", "conditions", "live"]
+    permission_inflected_claim:
+      - text: "You are allowed to end this chapter without ending the work."
+        stems: ["end chapter without ending work"]
+        roots: ["chapter", "work"]
+    consequence_claim:
+      - text: "That is why tomorrow can be approached, not avoided."
+        stems: ["tomorrow can be approached not avoided"]
+        roots: ["tomorrow", "approached", "avoided"]
+    compression_claim:
+      - text: "You have enough signal to continue."
+        stems: ["enough signal to continue"]
+        roots: ["signal", "continue"]
+
+mechanism_families:
+  recognition:
+    causal_explanation:
+      - text: "Once the nervous system marks a moment as dangerous, perception narrows toward confirming data."
+        stems: ["perception narrows toward confirming data"]
+        roots: ["nervous system", "perception", "data"]
+    systems_model:
+      - text: "The system was built for physical threats. It now runs in offices and group chats."
+        stems: ["system built for physical threats now runs in offices"]
+        roots: ["system", "threats", "offices"]
+    body_model:
+      - text: "The body responds to prediction with the same chemistry it uses for actual danger."
+        stems: ["body responds to prediction with same chemistry"]
+        roots: ["body", "prediction", "chemistry"]
+        topic_keywords: ["alarm", "false alarm"]
+    pattern_recognition:
+      - text: "Seeing the pattern clearly does not stop it. But it lets you choose a different response."
+        stems: ["seeing pattern clearly lets you choose response"]
+        roots: ["pattern", "choose", "response"]
+    cost_explanation:
+      - text: "The cost is not the moment itself. It is how much energy the system spends predicting the moment."
+        stems: ["cost is energy spent predicting"]
+        roots: ["cost", "energy", "predicting"]
+    reversal_explanation:
+      - text: "What looks like self-protection is often the pattern protecting itself from examination."
+        stems: ["pattern protecting itself from examination"]
+        roots: ["self-protection", "pattern"]
+    implication_line:
+      - text: "That means the body can mobilize before the facts arrive."
+        stems: ["body can mobilize before facts"]
+        roots: ["body", "facts", "mobilize"]
+    evidence_based_explanation:
+      - text: "You can see it most clearly where it lands in an ordinary hour."
+        stems: ["see it where it lands in ordinary hour"]
+        roots: ["ordinary", "hour"]
+    quiet_explanatory_compression:
+      - text: "The mechanism is automatic. Understanding it does not stop it. But it changes what obedience costs."
+        stems: ["mechanism automatic understanding changes obedience costs"]
+        roots: ["mechanism", "obedience", "costs"]
+  mechanism:
+    causal_explanation:
+      - text: "A trigger is interpreted, chemistry escalates, and attention narrows. The sequence is fast and repeatable."
+        stems: ["trigger interpreted chemistry escalates attention narrows"]
+        roots: ["trigger", "chemistry", "attention"]
+    systems_model:
+      - text: "An old survival model runs in modern social environments and misprices risk."
+        stems: ["old survival model runs in modern social environments"]
+        roots: ["survival", "social", "risk"]
+    body_model:
+      - text: "Muscle tension, breath shift, and vigilance rise before conscious interpretation catches up."
+        stems: ["tension breath shift vigilance rise before interpretation"]
+        roots: ["muscle", "breath", "vigilance"]
+    pattern_recognition:
+      - text: "The loop repeats because each alarmed response becomes new evidence for the next alarm."
+        stems: ["alarmed response becomes evidence for next alarm"]
+        roots: ["loop", "alarm", "evidence"]
+    cost_explanation:
+      - text: "Energy is spent on prevention, so less remains for connection, curiosity, and execution."
+        stems: ["energy spent on prevention less remains"]
+        roots: ["energy", "prevention", "connection"]
+    reversal_explanation:
+      - text: "Control attempts can intensify threat signals because the body reads forced control as danger."
+        stems: ["control attempts intensify threat signals"]
+        roots: ["control", "threat", "danger"]
+    implication_line:
+      - text: "So the fastest intervention is usually physiological, not argumentative."
+        stems: ["fastest intervention physiological not argumentative"]
+        roots: ["intervention", "physiological"]
+    evidence_based_explanation:
+      - text: "Notice how fast this pattern appears in inboxes, meetings, and unsent replies."
+        stems: ["pattern appears in inboxes meetings unsent replies"]
+        roots: ["inboxes", "meetings", "replies"]
+    quiet_explanatory_compression:
+      - text: "The mechanism is not mysterious. It is rehearsed."
+        stems: ["mechanism not mysterious it is rehearsed"]
+        roots: ["mechanism", "rehearsed"]
+  deepening:
+    causal_explanation:
+      - text: "Repeated anticipation trains the body to live in pre-impact mode."
+        stems: ["anticipation trains body to live in pre-impact mode"]
+        roots: ["anticipation", "body", "mode"]
+    systems_model:
+      - text: "The loop optimizes for avoiding social pain, not for preserving long-term capacity."
+        stems: ["loop optimizes for avoiding social pain"]
+        roots: ["loop", "social pain", "capacity"]
+    body_model:
+      - text: "Chronic bracing elevates baseline stress and narrows emotional range."
+        stems: ["chronic bracing elevates baseline stress"]
+        roots: ["bracing", "stress", "range"]
+    pattern_recognition:
+      - text: "The same protective move repeats across contexts and gets mistaken for personality."
+        stems: ["protective move repeats across contexts"]
+        roots: ["protective", "contexts", "personality"]
+    cost_explanation:
+      - text: "The tax accumulates in sleep, concentration, and social availability."
+        stems: ["tax accumulates in sleep concentration social availability"]
+        roots: ["tax", "sleep", "concentration"]
+        topic_keywords: ["overwhelm"]
+    reversal_explanation:
+      - text: "What feels like caution can become self-constriction when it never powers down."
+        stems: ["caution becomes self-constriction"]
+        roots: ["caution", "self-constriction"]
+    implication_line:
+      - text: "That is why relief can feel unfamiliar at first."
+        stems: ["relief can feel unfamiliar at first"]
+        roots: ["relief", "unfamiliar"]
+    evidence_based_explanation:
+      - text: "You can track the burden in small avoidance decisions throughout the day."
+        stems: ["track burden in small avoidance decisions"]
+        roots: ["burden", "avoidance", "day"]
+    quiet_explanatory_compression:
+      - text: "The pattern grows expensive quietly."
+        stems: ["pattern grows expensive quietly"]
+        roots: ["pattern", "expensive"]
+  reframe:
+    causal_explanation:
+      - text: "Protection strategies persist because they once reduced risk fast."
+        stems: ["protection strategies persist because once reduced risk"]
+        roots: ["protection", "risk"]
+    systems_model:
+      - text: "Adaptations built for one context keep running even after context changes."
+        stems: ["adaptations built for one context keep running"]
+        roots: ["adaptations", "context"]
+    body_model:
+      - text: "The body favors familiar stress over unfamiliar safety until safety is practiced."
+        stems: ["body favors familiar stress over unfamiliar safety"]
+        roots: ["body", "familiar", "safety"]
+    pattern_recognition:
+      - text: "Naming function before fault reduces shame and increases usable agency."
+        stems: ["naming function before fault reduces shame"]
+        roots: ["function", "fault", "shame"]
+    cost_explanation:
+      - text: "Without reframe, the same behavior gets interpreted as moral failure."
+        stems: ["without reframe behavior interpreted as moral failure"]
+        roots: ["reframe", "failure"]
+    reversal_explanation:
+      - text: "The loop is not evidence you cannot change. It is evidence the loop has been well-practiced."
+        stems: ["loop evidence it has been practiced"]
+        roots: ["loop", "change", "practiced"]
+    implication_line:
+      - text: "When function is visible, revision becomes possible."
+        stems: ["when function visible revision possible"]
+        roots: ["function", "revision"]
+    evidence_based_explanation:
+      - text: "Look for this in moments where judgment softens and options widen."
+        stems: ["moments where judgment softens options widen"]
+        roots: ["judgment", "options"]
+    quiet_explanatory_compression:
+      - text: "Understanding function creates room."
+        stems: ["understanding function creates room"]
+        roots: ["understanding", "function", "room"]
+  practice:
+    causal_explanation:
+      - text: "New responses become available only after repeated embodied reps."
+        stems: ["new responses available after repeated embodied reps"]
+        roots: ["responses", "repeated", "embodied"]
+    systems_model:
+      - text: "Practice updates prediction faster than explanation alone."
+        stems: ["practice updates prediction faster than explanation"]
+        roots: ["practice", "prediction", "explanation"]
+    body_model:
+      - text: "Small physiological shifts signal safety and reduce escalation velocity."
+        stems: ["small physiological shifts signal safety"]
+        roots: ["physiological", "safety", "escalation"]
+    pattern_recognition:
+      - text: "You are training interruption, not erasure."
+        stems: ["training interruption not erasure"]
+        roots: ["training", "interruption"]
+    cost_explanation:
+      - text: "Skipping reps preserves the old loop; tiny reps compound quickly."
+        stems: ["skipping reps preserves old loop"]
+        roots: ["reps", "loop", "compound"]
+    reversal_explanation:
+      - text: "Practice can look unimpressive while still being neurologically significant."
+        stems: ["practice unimpressive but neurologically significant"]
+        roots: ["practice", "neurologically"]
+    implication_line:
+      - text: "So consistency matters more than intensity."
+        stems: ["consistency matters more than intensity"]
+        roots: ["consistency", "intensity"]
+    evidence_based_explanation:
+      - text: "Measure change by recovery time, not by never being triggered."
+        stems: ["measure change by recovery time"]
+        roots: ["change", "recovery", "triggered"]
+    quiet_explanatory_compression:
+      - text: "Repetition teaches safety."
+        stems: ["repetition teaches safety"]
+        roots: ["repetition", "safety"]
+  integration:
+    causal_explanation:
+      - text: "Integration happens when new responses survive ordinary stressors."
+        stems: ["integration happens when responses survive stressors"]
+        roots: ["integration", "responses", "stressors"]
+    systems_model:
+      - text: "The loop is still present, but it no longer monopolizes interpretation."
+        stems: ["loop present no longer monopolizes interpretation"]
+        roots: ["loop", "interpretation"]
+    body_model:
+      - text: "Recovery curves shorten as the body learns quicker downshift paths."
+        stems: ["recovery curves shorten as body learns downshift"]
+        roots: ["recovery", "body", "downshift"]
+    pattern_recognition:
+      - text: "You notice earlier, interrupt earlier, and return faster."
+        stems: ["notice earlier interrupt earlier return faster"]
+        roots: ["notice", "interrupt", "return"]
+    cost_explanation:
+      - text: "Less anticipatory load frees attention for relationship and work."
+        stems: ["less anticipatory load frees attention"]
+        roots: ["anticipatory", "attention", "relationship"]
+    reversal_explanation:
+      - text: "Stability here is dynamic, not rigid."
+        stems: ["stability here dynamic not rigid"]
+        roots: ["stability", "dynamic", "rigid"]
+    implication_line:
+      - text: "So progress appears as easier recovery, not perfect calm."
+        stems: ["progress appears as easier recovery"]
+        roots: ["progress", "recovery", "calm"]
+    evidence_based_explanation:
+      - text: "You can verify this in how quickly everyday friction stops dominating the day."
+        stems: ["verify in quickly friction stops dominating day"]
+        roots: ["friction", "day", "verify"]
+    quiet_explanatory_compression:
+      - text: "Range increases. Reactivity reduces."
+        stems: ["range increases reactivity reduces"]
+        roots: ["range", "reactivity"]
+  resolution:
+    causal_explanation:
+      - text: "Resolution comes from reliable regulation plus realistic expectation."
+        stems: ["resolution from reliable regulation and expectation"]
+        roots: ["resolution", "regulation", "expectation"]
+    systems_model:
+      - text: "The system remains protective, but leadership shifts back to choice."
+        stems: ["system remains protective leadership shifts to choice"]
+        roots: ["system", "leadership", "choice"]
+    body_model:
+      - text: "The body still signals risk, but it no longer dictates every decision."
+        stems: ["body signals risk no longer dictates decision"]
+        roots: ["body", "risk", "decision"]
+    pattern_recognition:
+      - text: "The same cue now leads to pause instead of automatic obedience."
+        stems: ["same cue leads to pause not obedience"]
+        roots: ["cue", "pause", "obedience"]
+    cost_explanation:
+      - text: "Residual fear remains, but total life-cost drops as flexibility rises."
+        stems: ["residual fear remains total life-cost drops"]
+        roots: ["fear", "life-cost", "flexibility"]
+    reversal_explanation:
+      - text: "Completion here means workable, not flawless."
+        stems: ["completion means workable not flawless"]
+        roots: ["completion", "workable", "flawless"]
+    implication_line:
+      - text: "So tomorrow needs steadiness, not certainty."
+        stems: ["tomorrow needs steadiness not certainty"]
+        roots: ["tomorrow", "steadiness", "certainty"]
+    evidence_based_explanation:
+      - text: "You can see this in ordinary choices that no longer feel like emergencies."
+        stems: ["ordinary choices no longer feel like emergencies"]
+        roots: ["ordinary", "choices", "emergencies"]
+    quiet_explanatory_compression:
+      - text: "The pattern is known. The life is larger."
+        stems: ["pattern known life larger"]
+        roots: ["pattern", "life"]
+
+takeaway_fallback:
+  recognition:
+    - text: "Remember this: your body reacted to prediction, not proof."
+      shape: "remember_this"
+      stems: ["remember this your body reacted to prediction"]
+      roots: ["body", "prediction", "proof"]
+    - text: "Hold this: urgency can be loud before evidence exists."
+      shape: "hold_this"
+      stems: ["hold this urgency can be loud"]
+      roots: ["urgency", "evidence"]
+    - text: "Keep this close: the feeling is true; the interpretation may be provisional."
+      shape: "keep_this_close"
+      stems: ["keep this close interpretation may be provisional"]
+      roots: ["feeling", "interpretation"]
+  mechanism:
+    - text: "Take this forward: the loop is fast, patterned, and interruptible."
+      shape: "take_this_forward"
+      stems: ["take this forward loop patterned interruptible"]
+      roots: ["loop", "interruptible"]
+    - text: "One line to keep: the alarm is information, not command."
+      shape: "one_line_to_keep"
+      stems: ["one line to keep alarm is information not command"]
+      roots: ["alarm", "information", "command"]
+    - text: "Remember this mechanism: prediction recruits chemistry before analysis arrives."
+      shape: "remember_mechanism"
+      stems: ["remember this mechanism prediction recruits chemistry"]
+      roots: ["prediction", "chemistry", "analysis"]
+  deepening:
+    - text: "Remember the cost: prevention can spend the day before the day begins."
+      shape: "remember_cost"
+      stems: ["remember the cost prevention can spend day"]
+      roots: ["cost", "prevention", "day"]
+    - text: "Carry this: invisible load still counts as load."
+      shape: "carry_this"
+      stems: ["carry this invisible load still counts"]
+      roots: ["load", "invisible"]
+    - text: "Do not miss this: exhaustion is often math, not morality."
+      shape: "do_not_miss_this"
+      stems: ["do not miss this exhaustion is math"]
+      roots: ["exhaustion", "math", "morality"]
+  reframe:
+    - text: "Keep this reframe: what protected you can now be updated."
+      shape: "keep_reframe"
+      stems: ["keep this reframe protected you can be updated"]
+      roots: ["reframe", "protected", "updated"]
+    - text: "Remember this turn: function comes before blame."
+      shape: "remember_turn"
+      stems: ["remember this turn function comes before blame"]
+      roots: ["function", "blame"]
+    - text: "Hold this gently: adaptation is not indictment."
+      shape: "hold_this_gently"
+      stems: ["hold this gently adaptation is not indictment"]
+      roots: ["adaptation", "indictment"]
+  practice:
+    - text: "Takeaway: one repeatable action beats one perfect insight."
+      shape: "takeaway"
+      stems: ["one repeatable action beats one perfect insight"]
+      roots: ["repeatable", "action", "insight"]
+    - text: "Keep this practical: repetition builds safety faster than explanation."
+      shape: "practical"
+      stems: ["keep this practical repetition builds safety"]
+      roots: ["repetition", "safety", "explanation"]
+    - text: "Remember this move: small and done outruns large and imagined."
+      shape: "remember_move"
+      stems: ["remember this move small and done"]
+      roots: ["small", "done", "imagined"]
+  integration:
+    - text: "Remember this integration: subtle shifts still alter outcomes."
+      shape: "remember_integration"
+      stems: ["remember this integration subtle shifts alter outcomes"]
+      roots: ["integration", "subtle", "outcomes"]
+    - text: "Keep this: progress is measured by recovery speed."
+      shape: "keep_this"
+      stems: ["keep this progress measured by recovery speed"]
+      roots: ["progress", "recovery"]
+    - text: "Carry this forward: the same day can feel different with less prediction load."
+      shape: "carry_forward"
+      stems: ["carry this forward same day feel different"]
+      roots: ["day", "prediction", "load"]
+  resolution:
+    - text: "Remember this ending: workable beats flawless."
+      shape: "ending"
+      stems: ["remember this ending workable beats flawless"]
+      roots: ["workable", "flawless"]
+    - text: "Keep this final line: steadiness can lead where certainty cannot."
+      shape: "final_line"
+      stems: ["keep this final line steadiness can lead"]
+      roots: ["steadiness", "certainty"]
+    - text: "Hold this tomorrow: the alarm may speak, but choice can answer."
+      shape: "tomorrow"
+      stems: ["hold this tomorrow alarm may speak"]
+      roots: ["alarm", "choice", "tomorrow"]

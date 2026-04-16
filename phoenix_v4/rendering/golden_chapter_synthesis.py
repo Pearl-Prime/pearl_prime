@@ -931,6 +931,8 @@ def compose_golden_spine_chapter(
     book_seed: str,
     frame: str = "somatic_first",
     governance_report: Optional[dict[str, Any]] = None,
+    mechanism_memory: Any = None,
+    exercise_memory: Any = None,
 ) -> tuple[str, dict[str, Any]]:
     """
     Returns (chapter body without ``Chapter N`` heading, synthesis_meta).
@@ -967,6 +969,8 @@ def compose_golden_spine_chapter(
         persona_id=persona_id,
         emotional_role=emotional_role,
         book_seed=book_seed,
+        mechanism_memory=mechanism_memory,
+        exercise_memory=exercise_memory,
     )
 
     has_doctrine = any(

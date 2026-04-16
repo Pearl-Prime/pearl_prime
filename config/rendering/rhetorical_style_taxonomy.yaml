@@ -1,0 +1,128 @@
+schema_version: 1
+
+dimensions:
+  - name: shape
+    values:
+      - declarative
+      - interrogative
+      - imperative
+      - conditional
+      - participial
+      - fragment
+      - list
+      - metaphor_frame
+    description: Clause architecture or sentence frame used to deliver a line.
+  - name: register
+    values:
+      - clinical
+      - conversational
+      - poetic
+      - somatic
+      - instructional
+      - philosophical
+      - urgent
+    description: Voice register balancing precision, intimacy, and rhetorical pressure.
+  - name: movement
+    values:
+      - inward
+      - outward
+      - stillness
+      - tension_release
+      - building
+      - returning
+    description: Direction of emotional motion through a sentence or bridge.
+  - name: instruction_tone
+    values:
+      - gentle
+      - direct
+      - invitational
+      - challenge
+      - neutral
+    description: Coaching stance for directives and practice-oriented language.
+  - name: cadence
+    values:
+      - short_staccato
+      - medium_flowing
+      - long_immersive
+    description: Rhythmic length and pacing profile of the selected variant.
+  - name: abstraction_level
+    values:
+      - concrete_body
+      - concrete_scene
+      - mid_concept
+      - high_abstraction
+    description: Level of conceptual abstraction from sensory detail to theory.
+  - name: root_family
+    values:
+      - notice
+      - feel
+      - beneath
+      - remember
+      - pause
+      - allow
+      - hold
+      - return
+      - breathe
+      - land
+    description: Open lexical family used to monitor cross-layer rhetorical echo.
+
+emotional_job:
+  - recognition
+  - mechanism
+  - deepening
+  - reframe
+  - practice
+  - integration
+  - resolution
+
+root_families:
+  - family: notice
+    examples:
+      - notice
+      - noticing
+      - notice this
+  - family: feel
+    examples:
+      - feel
+      - feeling
+      - felt sense
+  - family: beneath
+    examples:
+      - beneath
+      - underneath
+      - below
+  - family: remember
+    examples:
+      - remember
+      - recall
+      - bring back
+  - family: pause
+    examples:
+      - pause
+      - stop for a beat
+      - hold still
+  - family: allow
+    examples:
+      - allow
+      - let this be
+      - permit
+  - family: hold
+    examples:
+      - hold
+      - stay with
+      - carry
+  - family: return
+    examples:
+      - return
+      - come back
+      - re-enter
+  - family: breathe
+    examples:
+      - breathe
+      - breath
+      - exhale
+  - family: land
+    examples:
+      - land
+      - settle
+      - arrive

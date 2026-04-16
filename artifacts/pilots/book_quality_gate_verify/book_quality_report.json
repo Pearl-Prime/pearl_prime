@@ -1,0 +1,247 @@
+{
+  "policy": "Reject Pearl Prime manuscript output if it contains any internal artifact leakage, any obvious broken prose, any repeated 25+ word block, or any chapter with more than two unresolved mode jumps. Hold for revision if artifact-clean but scene-furniture repetition, weak chapter function, unstable voice, or cyclical progression. Pass only when the book reads as one authored therapeutic experience with low repetition, clean transitions, clear chapter purpose, and felt progression from recognition to possibility.",
+  "policy_statement": "Reject Pearl Prime manuscript output if it contains any internal artifact leakage, any obvious broken prose, any repeated 25+ word block, or any chapter with more than two unresolved mode jumps. Hold for revision if artifact-clean but scene-furniture repetition, weak chapter function, unstable voice, or cyclical progression. Pass only when the book reads as one authored therapeutic experience with low repetition, clean transitions, clear chapter purpose, and felt progression from recognition to possibility.",
+  "runtime_format": "short_book_30",
+  "release_band": "Pass to editorial",
+  "config_version": 1,
+  "frame": "spiritual_first",
+  "hard_gates": {
+    "artifact_leakage": {
+      "status": "PASS",
+      "findings": []
+    },
+    "verbatim_duplicate_blocks": {
+      "status": "PASS",
+      "distinct_repeated_paragraphs": 0,
+      "max_allowed": 2
+    },
+    "broken_prose": {
+      "status": "PASS",
+      "findings": []
+    },
+    "chapter_function": {
+      "status": "PASS",
+      "stacked_modes_fail": false,
+      "voice_register_fail": false,
+      "chapters_over_jump_budget": 0,
+      "max_chapters_allowed_over_budget": 1
+    }
+  },
+  "soft_rubrics": {
+    "per_chapter": [
+      {
+        "chapter_index": 1,
+        "cohesive_flow": {
+          "opening_coherence": 1,
+          "mode_transitions": 2,
+          "progression_vs_prior_chapter": 2,
+          "ending_landing": 2,
+          "total": 7
+        },
+        "therapeutic_value": {
+          "non_shaming": 2,
+          "somatic_specificity": 1,
+          "practice_usability": 2,
+          "emotional_containment": 2,
+          "total": 7
+        },
+        "bestseller_readability": {
+          "voice": 2,
+          "momentum": 2,
+          "memorability": 2,
+          "freshness": 2,
+          "total": 8
+        },
+        "chapter": 1
+      },
+      {
+        "chapter_index": 2,
+        "cohesive_flow": {
+          "opening_coherence": 1,
+          "mode_transitions": 2,
+          "progression_vs_prior_chapter": 2,
+          "ending_landing": 2,
+          "total": 7
+        },
+        "therapeutic_value": {
+          "non_shaming": 2,
+          "somatic_specificity": 1,
+          "practice_usability": 2,
+          "emotional_containment": 2,
+          "total": 7
+        },
+        "bestseller_readability": {
+          "voice": 2,
+          "momentum": 2,
+          "memorability": 2,
+          "freshness": 2,
+          "total": 8
+        },
+        "chapter": 2
+      }
+    ]
+  },
+  "book_averages": {
+    "cohesive_flow": 7.0,
+    "therapeutic_value": 7.0,
+    "bestseller_readability": 8.0,
+    "freshness_avg": 2.0
+  },
+  "chapters": [
+    {
+      "chapter": 1,
+      "dominant_job": "recognition",
+      "unresolved_mode_jumps": 0,
+      "word_count": 115
+    },
+    {
+      "chapter": 2,
+      "dominant_job": "mechanism",
+      "unresolved_mode_jumps": 1,
+      "word_count": 126
+    }
+  ],
+  "repeated_blocks": [],
+  "scene_furniture": {
+    "findings": [
+      {
+        "stem": "window",
+        "raw_hits": 0,
+        "approx_per_window": 0.0,
+        "per_10k_words": 0.0,
+        "exceeds": false
+      },
+      {
+        "stem": "sill",
+        "raw_hits": 0,
+        "approx_per_window": 0.0,
+        "per_10k_words": 0.0,
+        "exceeds": false
+      },
+      {
+        "stem": "street below",
+        "raw_hits": 0,
+        "approx_per_window": 0.0,
+        "per_10k_words": 0.0,
+        "exceeds": false
+      },
+      {
+        "stem": "soft daylight along the sill",
+        "raw_hits": 0,
+        "approx_per_window": 0.0,
+        "per_10k_words": 0.0,
+        "exceeds": false
+      },
+      {
+        "stem": "task is open",
+        "raw_hits": 0,
+        "approx_per_window": 0.0,
+        "per_10k_words": 0.0,
+        "exceeds": false
+      },
+      {
+        "stem": "the train",
+        "raw_hits": 0,
+        "approx_per_window": 0.0,
+        "per_10k_words": 0.0,
+        "exceeds": false
+      },
+      {
+        "stem": "office window",
+        "raw_hits": 0,
+        "approx_per_window": 0.0,
+        "per_10k_words": 0.0,
+        "exceeds": false
+      },
+      {
+        "stem": "fluorescent",
+        "raw_hits": 0,
+        "approx_per_window": 0.0,
+        "per_10k_words": 0.0,
+        "exceeds": false
+      },
+      {
+        "stem": "conference room",
+        "raw_hits": 0,
+        "approx_per_window": 0.0,
+        "per_10k_words": 0.0,
+        "exceeds": false
+      },
+      {
+        "stem": "slack notification",
+        "raw_hits": 0,
+        "approx_per_window": 0.0,
+        "per_10k_words": 0.0,
+        "exceeds": false
+      }
+    ],
+    "stem_chapter_counts": {}
+  },
+  "mode_jump_findings": {
+    "chapters": [
+      {
+        "chapter": 1,
+        "unresolved_mode_jumps": 0,
+        "mode_jumps": [
+          "narration→reflection"
+        ],
+        "dominant_job": "recognition",
+        "structural_modes_observed": [
+          "narration",
+          "reflection"
+        ],
+        "word_count": 115
+      },
+      {
+        "chapter": 2,
+        "unresolved_mode_jumps": 1,
+        "mode_jumps": [
+          "narration→exercise",
+          "exercise→reflection"
+        ],
+        "dominant_job": "mechanism",
+        "structural_modes_observed": [
+          "exercise",
+          "narration",
+          "reflection"
+        ],
+        "word_count": 126
+      }
+    ]
+  },
+  "fail_reasons": [],
+  "hold_reasons": [],
+  "pass_reasons": [
+    "hard_gates_green",
+    "soft_thresholds_met"
+  ],
+  "thresholds_used": {
+    "soft_thresholds": {
+      "cohesive_flow": {
+        "per_chapter_min": 5,
+        "book_avg_min": 6.0,
+        "auto_fail_chapter_total": 2
+      },
+      "therapeutic_value": {
+        "per_chapter_min": 6,
+        "book_avg_min": 6.5,
+        "auto_fail_containment_zero": true
+      },
+      "bestseller_readability": {
+        "per_chapter_min": 5,
+        "book_avg_min": 6.0,
+        "auto_fail_book_freshness_avg_zero": true
+      }
+    },
+    "duplicate": {
+      "min_tokens": 25
+    },
+    "scene_furniture": {
+      "window_words": 10000,
+      "max_per_window": 3,
+      "max_chapters_same_pattern": 2
+    }
+  },
+  "policy_override": false,
+  "runtime_policy_block": false
+}
