@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from phoenix_v4.rendering.golden_chapter_synthesis import (
+    EnvironmentPhraseMemory,
     audit_artifact_leakage,
     collect_artifact_leakage_labels,
     dedupe_scene_furniture_book,
@@ -110,6 +111,22 @@ def test_resolve_location_placeholders_fixes_street_below_phrase() -> None:
     out = _resolve_location_placeholders(raw)
     assert "{" not in out
     assert "there below" not in out.lower()
+
+
+def test_resolve_location_placeholders_avoids_legacy_gray_phrase() -> None:
+    memory = EnvironmentPhraseMemory()
+    outputs = []
+    for idx, raw in enumerate(
+        (
+            "Desk glow. {weather_detail} by the screen.",
+            "Window edge. {weather_detail} near the glass.",
+            "Office hush. {weather_detail} in the room.",
+            "Hallway return. {weather_detail} over the frame.",
+        )
+    ):
+        outputs.append(_resolve_location_placeholders(raw, phrase_memory=memory, chapter_index=idx))
+    joined = " ".join(outputs).lower()
+    assert "gray daylight filters in" not in joined
 
 
 def test_artifact_audit_detects_section_header_leak() -> None:

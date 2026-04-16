@@ -11,6 +11,7 @@ Beat model authority: ``docs/GOLDEN_CHAPTER_WORKFLOW.md`` (derived from the
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from dataclasses import dataclass, field
@@ -59,41 +60,406 @@ _ARTIFACT_PATTERN_DEFS: tuple[tuple[str, str], ...] = (
 _CANONICAL_VARIANT_HEADER_RE = re.compile(r"##\s+(?:HOOK|SCENE)\s+v\d+", re.I)
 
 
-def _resolve_location_placeholders(text: str) -> str:
-    """Fill or remove spine location tokens before composition (avoids broken merge phrases)."""
+_ENV_FALLBACK_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "environment_fallback_families.yaml"
+_ENV_FAMILY_CACHE: Optional[dict[str, Any]] = None
+_BROKEN_STREET_MERGE_RE = re.compile(
+    r"(?i)(?:\{street_name\}\s+)?(?:the\s+street\s+)?(?:below\s+)?is\s+there\s+below",
+)
+_FALLBACK_PLACEHOLDER_RE = re.compile(r"\{weather_detail\}|\{street_name\}|\{transit_line\}")
+_PHASE_DEFAULTS: tuple[tuple[int, tuple[str, ...]], ...] = (
+    (3, ("object_grounding", "light_ambient", "window_reference")),
+    (8, ("object_grounding", "outside_sound", "interior_building")),
+    (12, ("interior_building", "window_reference", "outside_sound")),
+)
+_PLACEHOLDER_FAMILY_MAP: dict[str, tuple[str, ...]] = {
+    "{weather_detail}": ("light_ambient",),
+    "{street_name}": ("outside_sound", "window_reference"),
+    "{transit_line}": ("motion_transit",),
+}
+_CONTEXT_FAMILY_HINTS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
+    (("desk", "keyboard", "screen", "monitor", "cursor"), ("object_grounding", "light_ambient")),
+    (("window", "glass", "outside"), ("window_reference", "outside_sound")),
+    (("hallway", "elevator", "office", "carpet", "room"), ("interior_building",)),
+    (("ride", "doors", "platform", "movement"), ("motion_transit",)),
+)
+_BROKEN_MERGE_REPAIRS: tuple[tuple[re.Pattern[str], str], ...] = (
+    (re.compile(r"(?i)\bthrough the window through the window\b"), "through the window"),
+    (re.compile(r"(?i)\bat the window through the window\b"), "at the window"),
+    (re.compile(r"(?i)\bvisible through the glass visible\b"), "visible through the glass"),
+)
+_DEFAULT_ENV_FALLBACKS: dict[str, Any] = {
+    "families": {
+        "light_ambient": {
+            "entries": [
+                {
+                    "text": "Muted light settles by the window.",
+                    "shape": "sentence",
+                    "roots": ["light", "window"],
+                    "scene_bias": ["window", "glass"],
+                    "intensity": "low",
+                },
+                {
+                    "text": "with muted light along the glass",
+                    "shape": "embedded_clause",
+                    "roots": ["light", "glass"],
+                    "scene_bias": ["window", "glass"],
+                    "intensity": "low",
+                },
+            ],
+        },
+        "outside_sound": {
+            "entries": [
+                {
+                    "text": "soft outside noise below the window",
+                    "shape": "fragment",
+                    "roots": ["outside", "sound"],
+                    "scene_bias": ["outside", "window"],
+                    "intensity": "low",
+                },
+                {
+                    "text": "Outside noise drifts in without detail.",
+                    "shape": "sentence",
+                    "roots": ["outside", "sound"],
+                    "scene_bias": ["outside", "window"],
+                    "intensity": "low",
+                },
+            ],
+        },
+        "interior_building": {
+            "entries": [
+                {
+                    "text": "The hallway hum stays steady behind the door.",
+                    "shape": "sentence",
+                    "roots": ["room", "hallway"],
+                    "scene_bias": ["hallway", "office"],
+                    "intensity": "low",
+                }
+            ],
+        },
+        "motion_transit": {
+            "entries": [
+                {
+                    "text": "Route motion keeps a quiet pulse nearby.",
+                    "shape": "sentence",
+                    "roots": ["movement", "transit"],
+                    "scene_bias": ["ride", "platform"],
+                    "intensity": "medium",
+                }
+            ],
+        },
+        "object_grounding": {
+            "entries": [
+                {
+                    "text": "the cursor waiting where you left it",
+                    "shape": "fragment",
+                    "roots": ["object", "desk"],
+                    "scene_bias": ["desk", "screen"],
+                    "intensity": "low",
+                },
+                {
+                    "text": "The mug handle stays warm against your palm.",
+                    "shape": "object_led",
+                    "roots": ["object", "desk"],
+                    "scene_bias": ["desk", "screen"],
+                    "intensity": "low",
+                },
+            ],
+        },
+        "window_reference": {
+            "entries": [
+                {
+                    "text": "a pale reflection at the glass edge",
+                    "shape": "fragment",
+                    "roots": ["window", "glass"],
+                    "scene_bias": ["window", "outside"],
+                    "intensity": "low",
+                }
+            ],
+        },
+    }
+}
+
+
+def _load_environment_fallback_families() -> dict[str, Any]:
+    global _ENV_FAMILY_CACHE
+    if _ENV_FAMILY_CACHE is not None:
+        return _ENV_FAMILY_CACHE
+    loaded: dict[str, Any] | None = None
+    try:
+        import yaml  # type: ignore[import-untyped]
+
+        parsed = yaml.safe_load(_ENV_FALLBACK_PATH.read_text(encoding="utf-8"))
+        if isinstance(parsed, dict) and isinstance(parsed.get("families"), dict):
+            loaded = parsed
+    except Exception:
+        loaded = None
+    if loaded is None:
+        loaded = _DEFAULT_ENV_FALLBACKS
+    _ENV_FAMILY_CACHE = loaded
+    return loaded
+
+
+def _environment_shape_bonus(shape: str, chapter_index: int) -> float:
+    if chapter_index <= 2 and shape in {"object_led", "motion_led"}:
+        return 0.7
+    if 3 <= chapter_index <= 7 and shape in {"fragment", "sentence"}:
+        return 0.5
+    if chapter_index >= 8 and shape in {"environment_led", "embedded_clause"}:
+        return 0.9
+    return 0.0
+
+
+def _context_family_bias(context: str, chapter_index: int) -> tuple[str, ...]:
+    low = context.lower()
+    hinted: list[str] = []
+    for tokens, families in _CONTEXT_FAMILY_HINTS:
+        if any(tok in low for tok in tokens):
+            for fam in families:
+                if fam not in hinted:
+                    hinted.append(fam)
+    phase_bias: list[str] = []
+    for max_idx, families in _PHASE_DEFAULTS:
+        if chapter_index <= max_idx:
+            phase_bias.extend(families)
+            break
+    return tuple(dict.fromkeys(hinted + phase_bias))
+
+
+@dataclass
+class EnvironmentPhraseMemory:
+    """Tracks phrase usage across chapter and book scope for anti-reuse."""
+
+    used_phrases_book: set[str] = field(default_factory=set)
+    used_phrases_by_chapter: dict[int, set[str]] = field(default_factory=dict)
+    family_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    shape_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    root_usage_by_chapter: dict[int, dict[str, int]] = field(default_factory=dict)
+    family_usage_by_paragraph: dict[tuple[int, int], dict[str, int]] = field(default_factory=dict)
+
+    def _chapter_map(self, store: dict[int, dict[str, int]], chapter_index: int) -> dict[str, int]:
+        return store.setdefault(chapter_index, {})
+
+    def _chapter_phrases(self, chapter_index: int) -> set[str]:
+        return self.used_phrases_by_chapter.setdefault(chapter_index, set())
+
+    def register(
+        self,
+        *,
+        chapter_index: int,
+        paragraph_index: int,
+        family: str,
+        shape: str,
+        phrase: str,
+        roots: list[str],
+    ) -> None:
+        normalized = phrase.strip().lower()
+        if not normalized:
+            return
+        self.used_phrases_book.add(normalized)
+        self._chapter_phrases(chapter_index).add(normalized)
+        fam_map = self._chapter_map(self.family_usage_by_chapter, chapter_index)
+        fam_map[family] = fam_map.get(family, 0) + 1
+        shape_map = self._chapter_map(self.shape_usage_by_chapter, chapter_index)
+        shape_map[shape] = shape_map.get(shape, 0) + 1
+        root_map = self._chapter_map(self.root_usage_by_chapter, chapter_index)
+        for root in roots:
+            r = root.strip().lower()
+            if not r:
+                continue
+            root_map[r] = root_map.get(r, 0) + 1
+        para_key = (chapter_index, paragraph_index)
+        para_map = self.family_usage_by_paragraph.setdefault(para_key, {})
+        para_map[family] = para_map.get(family, 0) + 1
+
+    def phrase_seen_book(self, phrase: str) -> bool:
+        return phrase.strip().lower() in self.used_phrases_book
+
+    def phrase_seen_chapter(self, chapter_index: int, phrase: str) -> bool:
+        return phrase.strip().lower() in self._chapter_phrases(chapter_index)
+
+    def family_count_recent_chapters(self, family: str, chapter_index: int, window: int = 2) -> int:
+        total = 0
+        for idx in range(max(0, chapter_index - window), chapter_index + 1):
+            total += self.family_usage_by_chapter.get(idx, {}).get(family, 0)
+        return total
+
+    def root_count_recent_chapters(self, root: str, chapter_index: int, window: int = 3) -> int:
+        total = 0
+        for idx in range(max(0, chapter_index - window), chapter_index + 1):
+            total += self.root_usage_by_chapter.get(idx, {}).get(root, 0)
+        return total
+
+    def recent_shape_count(self, shape: str, chapter_index: int, window: int = 1) -> int:
+        total = 0
+        for idx in range(max(0, chapter_index - window), chapter_index + 1):
+            total += self.shape_usage_by_chapter.get(idx, {}).get(shape, 0)
+        return total
+
+    def family_seen_adjacent_paragraph(self, family: str, chapter_index: int, paragraph_index: int) -> bool:
+        prev_key = (chapter_index, max(0, paragraph_index - 1))
+        return self.family_usage_by_paragraph.get(prev_key, {}).get(family, 0) > 0
+
+    def score_candidate(
+        self,
+        *,
+        chapter_index: int,
+        paragraph_index: int,
+        family: str,
+        shape: str,
+        phrase: str,
+        roots: list[str],
+        context_bonus: float,
+        family_rank: int,
+    ) -> float:
+        score = 0.0
+        if self.phrase_seen_book(phrase):
+            score -= 40.0
+        if self.phrase_seen_chapter(chapter_index, phrase):
+            score -= 20.0
+        family_recent = self.family_count_recent_chapters(family, chapter_index, window=2)
+        if family_recent >= 2:
+            score -= 5.0 + family_recent
+        else:
+            score += 2.0 - family_recent
+        if self.family_seen_adjacent_paragraph(family, chapter_index, paragraph_index):
+            score -= 4.0
+        shape_recent = self.recent_shape_count(shape, chapter_index, window=1)
+        if shape_recent >= 2:
+            score -= 3.5
+        else:
+            score += 1.4
+        score += _environment_shape_bonus(shape, chapter_index)
+        for root in roots:
+            seen = self.root_count_recent_chapters(root, chapter_index, window=3)
+            if seen >= 3:
+                score -= 2.2
+            elif seen == 0:
+                score += 0.8
+        score += context_bonus
+        score += max(0.0, 2.0 - family_rank)
+        return score
+
+
+def _choose_environment_entry(
+    *,
+    families_payload: dict[str, Any],
+    family_candidates: tuple[str, ...],
+    context_text: str,
+    chapter_index: int,
+    paragraph_index: int,
+    memory: EnvironmentPhraseMemory,
+) -> dict[str, Any]:
+    phase_families = _context_family_bias(context_text, chapter_index)
+    seen = set()
+    ordered_families: list[str] = []
+    for fam in (*family_candidates, *phase_families):
+        if fam in families_payload and fam not in seen:
+            seen.add(fam)
+            ordered_families.append(fam)
+    if not ordered_families:
+        ordered_families = [f for f in families_payload.keys()]
+
+    best: dict[str, Any] | None = None
+    best_score = -10**9
+    for family_rank, fam in enumerate(ordered_families):
+        entries = families_payload.get(fam, {}).get("entries", [])
+        if not isinstance(entries, list):
+            continue
+        fam_context_bonus = 2.0 if fam in phase_families[:2] else (0.9 if fam in phase_families else 0.0)
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            phrase = str(entry.get("text", "")).strip()
+            if not phrase:
+                continue
+            shape = str(entry.get("shape", "fragment")).strip() or "fragment"
+            roots = [str(r).strip().lower() for r in entry.get("roots", []) if str(r).strip()]
+            if not roots:
+                roots = ["object"]
+            score = memory.score_candidate(
+                chapter_index=chapter_index,
+                paragraph_index=paragraph_index,
+                family=fam,
+                shape=shape,
+                phrase=phrase,
+                roots=roots,
+                context_bonus=fam_context_bonus,
+                family_rank=family_rank,
+            )
+            if score > best_score:
+                best_score = score
+                best = {"family": fam, "shape": shape, "text": phrase, "roots": roots}
+            elif score == best_score and best is not None:
+                tie_key = f"{chapter_index}:{paragraph_index}:{phrase}".encode("utf-8")
+                tie_hash = int(hashlib.sha256(tie_key).hexdigest()[:8], 16)
+                if tie_hash % 2 == 0:
+                    best = {"family": fam, "shape": shape, "text": phrase, "roots": roots}
+    if best is None:
+        return {
+            "family": "object_grounding",
+            "shape": "fragment",
+            "text": "the cursor waiting where you left it",
+            "roots": ["object", "desk"],
+        }
+    return best
+
+
+def _resolve_location_placeholders(
+    text: str,
+    *,
+    phrase_memory: EnvironmentPhraseMemory | None = None,
+    chapter_index: int = 0,
+) -> str:
+    """Fill location placeholders with ambient family phrases and anti-reuse memory."""
     t = text or ""
     if not t:
         return t
-    t = re.sub(
-        r"(?i)\{street_name\}\s+is there below",
-        "Traffic moves one floor down",
-        t,
-    )
-    replacements = {
-        "{weather_detail}": "Gray daylight filters in",
-        "{street_name}": "The street",
-        "{transit_line}": "train",
-    }
-    for k, v in replacements.items():
-        t = t.replace(k, v)
-    t = re.sub(r"(?i)\bthe street is there below\b", "traffic moves one floor down", t)
-    # Preserve newlines — do not use \s{2,} (collapses paragraph breaks into spaces).
+    chapter_index = max(0, int(chapter_index))
+    families_payload = _load_environment_fallback_families().get("families", {})
+    if not isinstance(families_payload, dict):
+        families_payload = _DEFAULT_ENV_FALLBACKS["families"]
+    memory = phrase_memory or EnvironmentPhraseMemory()
+    t = _BROKEN_STREET_MERGE_RE.sub("{street_name}", t)
+    paragraph_index = 0
+
+    while True:
+        match = _FALLBACK_PLACEHOLDER_RE.search(t)
+        if not match:
+            break
+        start = max(0, match.start() - 220)
+        end = min(len(t), match.end() + 220)
+        context = t[start:end]
+        paragraph_index = context.count("\n\n")
+        family_candidates = _PLACEHOLDER_FAMILY_MAP.get(match.group(0), ("object_grounding",))
+        chosen = _choose_environment_entry(
+            families_payload=families_payload,
+            family_candidates=family_candidates,
+            context_text=context,
+            chapter_index=chapter_index,
+            paragraph_index=paragraph_index,
+            memory=memory,
+        )
+        memory.register(
+            chapter_index=chapter_index,
+            paragraph_index=paragraph_index,
+            family=str(chosen["family"]),
+            shape=str(chosen["shape"]),
+            phrase=str(chosen["text"]),
+            roots=[str(r) for r in chosen.get("roots", [])],
+        )
+        t = t[: match.start()] + str(chosen["text"]) + t[match.end() :]
+
+    for pattern, repl in _BROKEN_MERGE_REPAIRS:
+        t = pattern.sub(repl, t)
+    t = re.sub(r"(?i)\bis there below\b", "is audible outside", t)
     t = re.sub(r"[ \t]{2,}", " ", t)
     t = re.sub(r"[ \t]+\.[ \t]+", ". ", t)
-    t = re.sub(
-        r"(?i)\bthe street below is there below\b",
-        "distant traffic rises and falls one floor down",
-        t,
-    )
-    t = re.sub(r"(?i)\bis there below\b", "is audible outside", t)
-    t = re.sub(r"(?i)\bthrough the window through the window\b", "through the window", t)
-    t = re.sub(r"(?i)\bat the window through the window\b", "at the window", t)
-    t = re.sub(r"(?i)\bvisible through the glass visible\b", "visible through the glass", t)
-    t = re.sub(r"(?i)\bthe street below traffic is audible through the glass\b", "traffic noise threads through the glass", t)
-    t = re.sub(r"(?i)\bthe street below traffic below your window is loud\b", "traffic pulls your attention toward the glass", t)
-    t = re.sub(r"(?i)\bthe street below traffic pulses below\b", "traffic pulses outside", t)
-    t = re.sub(r"(?i)\bthe street below is audible through the window\b", "the street noise is audible through the window", t)
+    t = re.sub(r"([.!?])\1+", r"\1", t)
+    t = re.sub(r"\s+,", ",", t)
+    t = re.sub(r"\(\s+", "(", t)
+    t = re.sub(r"\s+\)", ")", t)
     return t.strip()
+
 
 
 def _extract_single_body_from_depth_canonical_dump(text: str) -> str:
@@ -159,10 +525,19 @@ def _extract_single_body_from_depth_canonical_dump(text: str) -> str:
     return _resolve_location_placeholders(picked)
 
 
-def _strip_slot_artifacts(text: str) -> str:
+def _strip_slot_artifacts(
+    text: str,
+    *,
+    phrase_memory: EnvironmentPhraseMemory | None = None,
+    chapter_index: int = 0,
+) -> str:
     from phoenix_v4.rendering.book_renderer import _scrub_inline_leaked_slot_markers
 
-    t = _resolve_location_placeholders((text or "").strip())
+    t = _resolve_location_placeholders(
+        (text or "").strip(),
+        phrase_memory=phrase_memory,
+        chapter_index=chapter_index,
+    )
     if not t:
         return ""
     lines_out: list[str] = []
@@ -175,11 +550,20 @@ def _strip_slot_artifacts(text: str) -> str:
     return joined
 
 
-def _dedupe_paragraphs(blocks: list[str]) -> str:
+def _dedupe_paragraphs(
+    blocks: list[str],
+    *,
+    phrase_memory: EnvironmentPhraseMemory | None = None,
+    chapter_index: int = 0,
+) -> str:
     seen: set[str] = set()
     out: list[str] = []
     for b in blocks:
-        chunk = _strip_slot_artifacts(b)
+        chunk = _strip_slot_artifacts(
+            b,
+            phrase_memory=phrase_memory,
+            chapter_index=chapter_index,
+        )
         if not chunk:
             continue
         for para in re.split(r"\n\s*\n+", chunk):
@@ -241,8 +625,21 @@ def _bucket_slots(slots: list["EnrichedSlot"]) -> dict[str, list[str]]:
     return {"_depth_story": depth_story, "_depth_mech": depth_mech, **core}
 
 
-def _first_or_join(parts: list[str]) -> str:
-    cleaned = [_strip_slot_artifacts(p) for p in parts if _strip_slot_artifacts(p)]
+def _first_or_join(
+    parts: list[str],
+    *,
+    phrase_memory: EnvironmentPhraseMemory | None = None,
+    chapter_index: int = 0,
+) -> str:
+    cleaned: list[str] = []
+    for p in parts:
+        fixed = _strip_slot_artifacts(
+            p,
+            phrase_memory=phrase_memory,
+            chapter_index=chapter_index,
+        )
+        if fixed:
+            cleaned.append(fixed)
     if not cleaned:
         return ""
     if len(cleaned) == 1:
@@ -719,9 +1116,19 @@ def _strip_secular_violation_paragraphs(text: str, topic_id: str) -> str:
     return "\n\n".join(paras).strip()
 
 
-def post_compose_sanitize_chapter(text: str, *, topic_id: str = "") -> str:
+def post_compose_sanitize_chapter(
+    text: str,
+    *,
+    topic_id: str = "",
+    phrase_memory: EnvironmentPhraseMemory | None = None,
+    chapter_index: int = 0,
+) -> str:
     """Deterministic cleanup after chapter composition (not a substitute for rewrite)."""
-    t = _resolve_location_placeholders((text or "").strip())
+    t = _resolve_location_placeholders(
+        (text or "").strip(),
+        phrase_memory=phrase_memory,
+        chapter_index=chapter_index,
+    )
     if not t:
         return t
     # Inline spine/template joins often leak triple-dash runs inside a paragraph.
@@ -787,7 +1194,16 @@ def dedupe_scene_furniture_book(
     work = text or ""
     signatures = (
         "soft daylight along the sill",
-        "gray daylight filters in",
+        "muted light along the window",
+        "soft traffic noise from outside",
+        "outside noise drifts in without detail",
+        "a hallway hum carries through the corridor",
+        "route motion keeps the rhythm nearby",
+        "the cursor waits where you left it",
+        "a coffee ring stays on the coaster",
+        "your badge stays in your pocket",
+        "a pale reflection at the glass edge",
+        "a shifting reflection at the window",
         "the street below is visible through the glass",
         "the street below is visible",
         "the street below is",
@@ -906,7 +1322,13 @@ def write_golden_chapter_pilot_artifacts(
     ech = enriched.chapters[ch_idx]
     repair_notes: list[str] = []
     before = raw_chapter
-    cleaned = post_compose_sanitize_chapter(raw_chapter, topic_id=topic_id)
+    phrase_memory = EnvironmentPhraseMemory()
+    cleaned = post_compose_sanitize_chapter(
+        raw_chapter,
+        topic_id=topic_id,
+        phrase_memory=phrase_memory,
+        chapter_index=ch_idx,
+    )
     if cleaned != before:
         repair_notes.append("applied_post_compose_sanitize_chapter")
     deduped, furn = dedupe_scene_furniture_book(cleaned, max_each=2)
