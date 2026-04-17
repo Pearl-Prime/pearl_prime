@@ -450,13 +450,11 @@ def _run_spine_pipeline_mode(
     try:
         book_plan = load_book_structure_plan(topic_id, persona_id, runtime_fmt, repo_root)
     except FileNotFoundError as exc:
-        logger.info(
-            "No pre-authored plan found for %s × %s × %s — generating auto-plan",
-            topic_id,
-            persona_id,
-            runtime_fmt,
+        print(
+            f"Book planning layer: no pre-authored plan for {topic_id} x {persona_id} x {runtime_fmt} "
+            f"({exc}); generating auto-plan.",
+            file=sys.stderr,
         )
-        print(f"Book planning layer: no YAML plan found ({exc}); generating auto-plan.", file=sys.stderr)
         try:
             from phoenix_v4.planning.book_structure_plan import generate_book_plan
             _frame_for_plan = str(getattr(args, "frame", "somatic_first") or "somatic_first").strip()

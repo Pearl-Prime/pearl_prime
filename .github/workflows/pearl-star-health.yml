@@ -1,0 +1,60 @@
+# Pearl Star self-hosted runner heartbeat.
+# Dispatches a no-op job to the pearl-star-gpu runner every 30 minutes
+# during expected operating hours. If the runner is offline, the job queues
+# forever; a companion check on the GitHub-hosted runner records the outage
+# and surfaces it via GitHub Step Summary.
+name: Pearl Star runner health
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # Every 30 minutes. Schedule granularity on GitHub-hosted schedulers is
+    # best-effort; actual fires can drift a few minutes.
+    - cron: "*/30 * * * *"
+
+jobs:
+  probe:
+    name: Probe self-hosted runner
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Query runner registration
+        id: query
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RESP=$(gh api "/repos/${{ github.repository }}/actions/runners" \
+            --jq '.runners[] | select((.labels[].name) == "pearl-star-gpu") | {name,status,busy}')
+          if [ -z "$RESP" ]; then
+            echo "::warning::No runner with label pearl-star-gpu is registered."
+            echo "status=not_registered" >> $GITHUB_OUTPUT
+            echo "" > runner_state.json
+          else
+            echo "$RESP" > runner_state.json
+            STATUS=$(echo "$RESP" | head -1 | grep -oE "\"status\":\"[a-z]+\"" | head -1 | cut -d'"' -f4)
+            echo "status=${STATUS:-unknown}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Summarize health
+        if: always()
+        run: |
+          STATUS="${{ steps.query.outputs.status }}"
+          echo "## Pearl Star runner health" >> $GITHUB_STEP_SUMMARY
+          echo "Status: \`$STATUS\`" >> $GITHUB_STEP_SUMMARY
+          if [ -s runner_state.json ]; then
+            echo '```json' >> $GITHUB_STEP_SUMMARY
+            cat runner_state.json >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Fail if runner missing or offline during operating hours
+        run: |
+          STATUS="${{ steps.query.outputs.status }}"
+          # Operating hours: 06:00–22:00 UTC (adjust to local cadence).
+          HOUR=$(date -u +%H)
+          if [ "$HOUR" -ge 6 ] && [ "$HOUR" -lt 22 ]; then
+            if [ "$STATUS" = "not_registered" ] || [ "$STATUS" = "offline" ]; then
+              echo "::error::pearl-star-gpu runner is $STATUS during operating hours"
+              exit 1
+            fi
+          fi
