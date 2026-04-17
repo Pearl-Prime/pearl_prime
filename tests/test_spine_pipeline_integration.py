@@ -207,6 +207,47 @@ def test_spine_gates_hard_records_production_policy(tmp_path: Path) -> None:
     assert summary.get("quality_gate_failures") == []
 
 
+def test_block_on_fail_helper_routes_per_profile() -> None:
+    """The flagship profile blocks only on chapter_flow, book_quality_gate, scene_anti_genericity.
+    Production blocks on every gate. Draft/debug never block."""
+    from scripts.run_pipeline import FLAGSHIP_BLOCKING_GATES, _block_on_fail
+
+    assert FLAGSHIP_BLOCKING_GATES == frozenset(
+        {"chapter_flow", "book_quality_gate", "scene_anti_genericity"}
+    )
+    # production blocks on every gate
+    for gate in ("chapter_flow", "book_quality_gate", "scene_anti_genericity",
+                 "ei_v2", "editorial", "book_pass", "memorable_lines"):
+        assert _block_on_fail("production", gate) is True, gate
+    # flagship blocks ONLY on the 3 load-bearing gates
+    assert _block_on_fail("flagship", "chapter_flow") is True
+    assert _block_on_fail("flagship", "book_quality_gate") is True
+    assert _block_on_fail("flagship", "scene_anti_genericity") is True
+    assert _block_on_fail("flagship", "ei_v2") is False
+    assert _block_on_fail("flagship", "editorial") is False
+    assert _block_on_fail("flagship", "book_pass") is False
+    # draft and debug never block
+    for profile in ("draft", "debug"):
+        for gate in ("chapter_flow", "book_quality_gate", "scene_anti_genericity",
+                     "ei_v2", "editorial"):
+            assert _block_on_fail(profile, gate) is False, f"{profile}/{gate}"
+
+
+@pytest.mark.skipif(not ANXIETY_ARC.exists(), reason="fixture arc missing")
+def test_spine_flagship_profile_runs_and_records(tmp_path: Path) -> None:
+    """Flagship profile runs gates, records `quality_profile=flagship` in the summary,
+    and exits 0 when no flagship-blocking gate fails."""
+    out_dir = tmp_path / "spine_flagship"
+    plan_path = tmp_path / "spine_flagship_plan.json"
+    r = _run_spine(out_dir, plan_path, quality_profile="flagship")
+    assert r.returncode == 0, r.stderr + r.stdout
+    summary = json.loads((out_dir / "quality_summary.json").read_text(encoding="utf-8"))
+    assert summary.get("quality_profile") == "flagship"
+    # gates_hard tracks production-only semantics; flagship records its own profile.
+    assert summary.get("gates_hard") is False
+    assert summary.get("gates_run") is True
+
+
 def test_spine_driver_passes_chapter_selector_targets_and_publishable_book_to_enrichment(tmp_path: Path) -> None:
     """Spine pipeline builds EnrichmentRequest with selector targets, book_frame, and publishable_book."""
     from phoenix_v4.planning.enrichment_select import EnrichedBook, EnrichedChapter, EnrichedSlot

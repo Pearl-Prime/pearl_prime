@@ -250,6 +250,36 @@ def _run_post_render_quality_gates(
     return None
 
 
+# ---------------------------------------------------------------------------
+# Flagship profile gate routing
+#
+# Per docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md and the bestseller
+# drift analysis (artifacts/analysis/shortest_path_to_bestseller.md, P0.5),
+# the `flagship` profile is positioned between `draft` and `production`:
+# every gate runs (just like production), but only a small set of
+# load-bearing gates produce non-zero exits. The remaining gates stay
+# advisory so internal QA can iterate on the flagship anxiety+gen_z+ahjan
+# ladder without every gate's heuristic noise blocking the run.
+# ---------------------------------------------------------------------------
+FLAGSHIP_BLOCKING_GATES = frozenset(
+    {"chapter_flow", "book_quality_gate", "scene_anti_genericity"}
+)
+
+
+def _block_on_fail(quality_profile: str, gate_name: str) -> bool:
+    """Return True when a FAIL on ``gate_name`` should append to the failures list.
+
+    production: every gate blocks.
+    flagship:   only FLAGSHIP_BLOCKING_GATES block.
+    draft/debug: nothing blocks (caller checks ``gates_run`` upstream).
+    """
+    if quality_profile == "production":
+        return True
+    if quality_profile == "flagship" and gate_name in FLAGSHIP_BLOCKING_GATES:
+        return True
+    return False
+
+
 def _apply_book_quality_gate(
     *,
     render_dir: Path,
@@ -639,7 +669,7 @@ def _run_spine_pipeline_mode(
                             f"  Ch {_ch['chapter']}: {', '.join(_ch.get('errors', []))}",
                             file=sys.stderr,
                         )
-                if gates_hard:
+                if _block_on_fail(quality_profile, "chapter_flow"):
                     _quality_gate_failures.append("chapter_flow")
         except Exception as _e:
             _chapter_flow_status = "SKIPPED"
@@ -1109,7 +1139,7 @@ def _run_spine_pipeline_mode(
             render_dir=render_dir,
             prose=prose,
             runtime_format_id=runtime_fmt,
-            gates_hard=gates_hard,
+            gates_hard=_block_on_fail(quality_profile, "book_quality_gate"),
             governance_report=_governance_report,
             slot_sequences=None,
             frame=_frame,
@@ -1229,9 +1259,10 @@ def _run_spine_pipeline_mode(
         except Exception as _e:
             print(f"Freebie generation failed (non-blocking): {_e}", file=sys.stderr)
 
-    if _quality_gate_failures and gates_hard:
+    if _quality_gate_failures and (gates_hard or quality_profile == "flagship"):
+        _profile_label = "flagship" if quality_profile == "flagship" else "production"
         print(
-            f"BLOCKED: {len(_quality_gate_failures)} quality gate(s) failed in production mode: "
+            f"BLOCKED: {len(_quality_gate_failures)} quality gate(s) failed in {_profile_label} mode: "
             f"{', '.join(_quality_gate_failures)}. "
             f"Use --skip-quality-gates or --quality-profile=draft to bypass.",
             file=sys.stderr,
@@ -1335,11 +1366,13 @@ def main() -> int:
     ap.add_argument("--skip-budget-check", action="store_true", help="Skip pre-render word-budget sufficiency check (e.g. testing with sparse atom pools)")
     ap.add_argument(
         "--quality-profile",
-        choices=["production", "draft", "debug"],
+        choices=["production", "draft", "debug", "flagship"],
         default="production",
         help=(
             "Quality gate enforcement level (default: production). "
-            "production: chapter_flow_gate + book_pass_gate + bestseller_craft_gate run; failures exit 1. "
+            "production: all gates run; any failure exits 1. "
+            "flagship: all gates run; only chapter_flow, book_quality_gate, and "
+            "scene_anti_genericity_gate failures exit 1 (other gates stay advisory). "
             "draft: gates run but only warn (exit 0). "
             "debug: gates skipped entirely."
         ),
@@ -1406,11 +1439,19 @@ def main() -> int:
     # --- Quality profile resolution ---
     # --skip-quality-gates forces debug (no gates). --enforce-book-pass-gate implies at
     # least the book-pass portion even in draft/debug, but production already includes it.
-    quality_profile = args.quality_profile  # production | draft | debug
+    #
+    # Profile semantics:
+    #   production: gates_run=True; every gate failure exits 1.
+    #   flagship:   gates_run=True; only chapter_flow, book_quality_gate, and
+    #               scene_anti_genericity_gate failures exit 1. Other gates are advisory.
+    #   draft:      gates_run=True; failures only warn (exit 0).
+    #   debug:      gates skipped entirely.
+    quality_profile = args.quality_profile  # production | flagship | draft | debug
     if args.skip_quality_gates:
         quality_profile = "debug"
-    gates_run = quality_profile in ("production", "draft")
+    gates_run = quality_profile in ("production", "flagship", "draft")
     gates_hard = quality_profile == "production"
+    flagship_mode = quality_profile == "flagship"
 
     # V4 freeze settings: restrict pipeline outputs to modular formats unless explicitly disabled.
     from pearl_prime.modular_format_freeze import (
@@ -2095,7 +2136,7 @@ def main() -> int:
                                     f"  Ch {_ch['chapter']}: {', '.join(_ch.get('errors', []))}",
                                     file=sys.stderr,
                                 )
-                        if gates_hard:
+                        if _block_on_fail(quality_profile, "chapter_flow"):
                             _quality_gate_failures.append("chapter_flow")
                 except Exception as _e:
                     print(f"Chapter flow gate error (non-blocking): {_e}", file=sys.stderr)
@@ -2355,7 +2396,7 @@ def main() -> int:
                 render_dir=render_dir,
                 prose=prose,
                 runtime_format_id=_reg_runtime or "",
-                gates_hard=gates_hard,
+                gates_hard=_block_on_fail(quality_profile, "book_quality_gate"),
                 governance_report=None,
                 slot_sequences=None,
                 frame=str(getattr(args, "frame", "somatic_first") or "somatic_first"),
@@ -2382,11 +2423,15 @@ def main() -> int:
             )
             print(f"Quality summary: {_qs_path}")
 
-            # 8. Gate enforcement — production hard-blocks only
-            if _quality_gate_failures and gates_hard:
+            # 8. Gate enforcement — production blocks on any gate; flagship blocks
+            # only on FLAGSHIP_BLOCKING_GATES (chapter_flow, book_quality_gate,
+            # scene_anti_genericity), which are the only gates that even appended
+            # to _quality_gate_failures under flagship anyway.
+            if _quality_gate_failures and (gates_hard or quality_profile == "flagship"):
+                _profile_label = "flagship" if quality_profile == "flagship" else "production"
                 print(
                     f"BLOCKED: {len(_quality_gate_failures)} quality gate(s) failed "
-                    f"in production mode: {', '.join(_quality_gate_failures)}. "
+                    f"in {_profile_label} mode: {', '.join(_quality_gate_failures)}. "
                     f"Use --skip-quality-gates or --quality-profile=draft to bypass.",
                     file=sys.stderr,
                 )
@@ -3107,17 +3152,18 @@ def main() -> int:
                 if _txt_written and Path(_txt_written).exists():
                     _atom_prose = Path(_txt_written).read_text(encoding="utf-8")
                 _atom_rt = (args.runtime_format or out.get("runtime_format_id") or "").strip()
+                _bq_block = _block_on_fail(quality_profile, "book_quality_gate")
                 _atom_bq_fail, _atom_bq_frag = _apply_book_quality_gate(
                     render_dir=render_dir,
                     prose=_atom_prose,
                     runtime_format_id=_atom_rt,
-                    gates_hard=gates_hard,
+                    gates_hard=_bq_block,
                     governance_report=None,
                     slot_sequences=out.get("chapter_slot_sequence"),
                     frame=str(getattr(args, "frame", "somatic_first") or "somatic_first"),
                     policy_override=bool(getattr(args, "book_quality_override", False)),
                 )
-                if _atom_bq_fail and gates_hard:
+                if _atom_bq_fail and _bq_block:
                     print(
                         "BLOCKED: book_quality_gate rejected manuscript (see book_quality_report.json).",
                         file=sys.stderr,
