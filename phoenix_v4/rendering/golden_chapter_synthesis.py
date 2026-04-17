@@ -960,6 +960,14 @@ def compose_golden_spine_chapter(
     contract = contracts[chapter_index0] if chapter_index0 < len(contracts) else contracts[-1]
     emotional_role = str(getattr(contract, "emotional_job", "") or "")
 
+    # Forward EnrichedChapter.thesis as arc_thesis so the composer's 4-stage
+    # derivation chain (arc_thesis > chapter_thesis_bank > mechanism_thesis_families
+    # > legacy keyword extraction) can use the spine-authored thesis directly
+    # instead of re-deriving from REFLECTION prose. Without this hand-off the
+    # spine's chapter.thesis is dropped on the floor and every chapter falls
+    # through to mechanism_thesis_families lookup or the legacy keyword chain —
+    # the documented thesis-routing drift in the bestseller drift analysis.
+    chapter_arc_thesis = str(getattr(chapter, "thesis", "") or "").strip()
     composed = compose_chapter_prose(
         slot_types,
         slot_proses,
@@ -971,6 +979,7 @@ def compose_golden_spine_chapter(
         book_seed=book_seed,
         mechanism_memory=mechanism_memory,
         exercise_memory=exercise_memory,
+        arc_thesis=chapter_arc_thesis,
     )
 
     has_doctrine = any(
