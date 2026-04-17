@@ -549,4 +549,39 @@ If a writer asks, "What should I do differently tomorrow?" the short answer is:
 
 ---
 
+## Flagship Quality Profile (added 2026-04-17)
+
+The `flagship` quality profile is the canonical QA mode for bestseller
+verification. It is stricter than `draft` and narrower than `production`.
+
+**Blocking gates** (hard-fail, non-zero exit):
+- `chapter_flow`
+- `book_quality_gate`
+- `scene_anti_genericity`
+
+**Advisory gates** (recorded, not blocking):
+- `ei_v2`
+- `editorial`
+- `book_pass`
+- `memorable_lines`
+
+Invocation:
+
+```bash
+PYTHONPATH=. python3 scripts/run_pipeline.py \
+  --topic <topic> --persona <persona> \
+  --arc <arc.yaml> --pipeline-mode spine \
+  --runtime-format <format> \
+  --quality-profile flagship \
+  --no-job-check --render-book \
+  --render-dir <out_dir>
+```
+
+Use `flagship` when verifying that core structural gates hold on the three
+load-bearing dimensions (flow, book quality, scene originality). Use
+`production` when every gate must pass for a release. Use `draft` for
+development iteration.
+
+---
+
 *End of spec. This document is indexed in `docs/DOCS_INDEX.md`.*

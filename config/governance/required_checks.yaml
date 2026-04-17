@@ -7,11 +7,17 @@
 version: 2
 
 # Canonical required checks for PR merge to main.
+#
+# 2026-04-17: "Change impact" was removed after the workflow began failing
+# to spawn any jobs (returns `jobs: []` with no logs) for ~2 weeks, blocking
+# all PR merges. The "Protect main" ruleset now requires "Verify governance"
+# instead, which runs Pearl_PM + Pearl_Architect review and is healthy.
+# See docs/GITHUB_GOVERNANCE.md for ruleset history.
 required_checks:
   - "Core tests"
   - "Release gates"
   - "EI V2 gates"
-  - "Change impact"
+  - "Verify governance"
 
 # At least one of these must be required on main. Prefer non-path-filtered workflows.
 always_required:
@@ -29,6 +35,7 @@ non_blocking_checks:
 # Legacy required-check contexts that must not remain in active rulesets.
 forbidden_legacy_checks:
   - "change-impact"
+  - "Change impact"
 
 # Required contexts should come from GitHub Actions unless explicitly approved here.
 allowed_required_integrations:
