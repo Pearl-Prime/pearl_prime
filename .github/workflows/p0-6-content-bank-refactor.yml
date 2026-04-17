@@ -1,0 +1,151 @@
+name: P0.6 — Content Bank Refactor
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch_suffix:
+        description: 'Branch suffix (default: date-based)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run — plan only, no commits'
+        required: false
+        default: 'false'
+        type: choice
+        options: ['false', 'true']
+
+env:
+  BRANCH_NAME: agent/p0-6-content-bank-refactor-${{ inputs.branch_suffix || github.run_id }}
+
+jobs:
+  refactor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt 2>/dev/null || true
+          pip install anthropic 2>/dev/null || true
+
+      - name: Configure git identity
+        run: |
+          git config user.name "Pearl_Dev (GitHub Actions)"
+          git config user.email "actions@github.com"
+
+      - name: Create feature branch
+        run: |
+          git checkout -b ${{ env.BRANCH_NAME }}
+          echo "Branch: ${{ env.BRANCH_NAME }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Run Claude API refactor agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: |
+          PYTHONPATH=. python3 scripts/ci/run_agent_refactor.py \
+            --task p0-6-content-bank-refactor \
+            --branch "${{ env.BRANCH_NAME }}" \
+            --specs artifacts/analysis/bestseller_action_plan.md \
+            --scope "phoenix_v4/rendering/book_renderer.py phoenix_v4/planning/enrichment_select.py" \
+            --dry-run "${{ inputs.dry_run }}" \
+            --requirements "$(cat <<'REQS'
+Remove _LOC_VAR_FALLBACKS, _LOC_VAR_ROTATIONS, _FLOW_GLUE_VARIANTS hardcoded dicts from
+phoenix_v4/rendering/book_renderer.py and migrate them to
+config/source_of_truth/content_banks/ as YAML files.
+Wire late-book REFLECTION bank fill in phoenix_v4/planning/enrichment_select.py.
+Add regression tests covering: (1) bank YAML loads correctly, (2) enrichment_select
+picks from REFLECTION bank in late-book positions, (3) no KeyError on missing keys.
+Follow existing code style. Keep changes minimal and focused.
+REQS
+)" \
+            2>&1 | tee artifacts/p0-6-refactor-agent.log
+          echo "## Agent log (last 50 lines)" >> $GITHUB_STEP_SUMMARY
+          tail -50 artifacts/p0-6-refactor-agent.log >> $GITHUB_STEP_SUMMARY
+
+      - name: Run tests to validate refactor
+        if: inputs.dry_run != 'true'
+        run: |
+          PYTHONPATH=. python3 -m pytest tests/ -x -q \
+            --timeout=120 \
+            -k "content_bank or book_renderer or enrichment" \
+            2>&1 | tee artifacts/p0-6-test-results.log || true
+          echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+          tail -20 artifacts/p0-6-test-results.log >> $GITHUB_STEP_SUMMARY
+
+      - name: Commit and push if changes exist
+        if: inputs.dry_run != 'true'
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No changes to commit — agent produced no output."
+            echo "AGENT_RESULT=no_changes" >> $GITHUB_ENV
+          else
+            git add -p . 2>/dev/null || git add .
+            git commit -m "refactor(rendering): P0.6 content bank externalization [agent]
+
+Externalizes hardcoded _LOC_VAR_FALLBACKS, _LOC_VAR_ROTATIONS, _FLOW_GLUE_VARIANTS
+to config/source_of_truth/content_banks/ YAML.
+Wires late-book REFLECTION bank fill in enrichment_select.py.
+
+Co-Authored-By: Pearl_Dev via GitHub Actions <actions@github.com>"
+            git push -u origin ${{ env.BRANCH_NAME }}
+            echo "AGENT_RESULT=committed" >> $GITHUB_ENV
+          fi
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-6-refactor-${{ github.run_id }}
+          path: |
+            artifacts/p0-6-*.log
+          retention-days: 90
+
+      - name: Open PR
+        if: env.AGENT_RESULT == 'committed'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "refactor(rendering): P0.6 content bank externalization" \
+            --body "$(cat <<'BODY'
+## P0.6 — Content Bank Refactor
+
+Externalizes hardcoded content banks from `book_renderer.py` to YAML files under
+`config/source_of_truth/content_banks/`. Wires late-book REFLECTION bank fill in
+`enrichment_select.py`.
+
+### Changes
+- Removes `_LOC_VAR_FALLBACKS`, `_LOC_VAR_ROTATIONS`, `_FLOW_GLUE_VARIANTS` hardcoded dicts
+- Migrates them to `config/source_of_truth/content_banks/*.yaml`
+- Wires REFLECTION bank in `enrichment_select.py` for late-book positions
+- Adds regression tests
+
+### References
+- `artifacts/analysis/bestseller_action_plan.md` §P0.6
+- Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+> ⚠️ **Operator review required** — do not merge without reading the diff.
+
+🤖 Generated by Pearl_Dev via GitHub Actions. Labeled `agent-generated`.
+BODY
+)" \
+            --label "agent-generated,p0" \
+            --base main \
+            --head "${{ env.BRANCH_NAME }}"
+
+      - name: Report no-change outcome
+        if: env.AGENT_RESULT == 'no_changes'
+        run: |
+          echo "## Result: No Changes" >> $GITHUB_STEP_SUMMARY
+          echo "Agent produced no code changes. Manual investigation needed." >> $GITHUB_STEP_SUMMARY
+          echo "Check artifacts/p0-6-refactor-agent.log for details."
