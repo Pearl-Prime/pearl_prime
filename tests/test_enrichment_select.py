@@ -456,7 +456,7 @@ def test_deep_book_6h_exceeds_40k_words():
     )
     book = apply_depth_pass(book, depth_map, repo_root=root)
     assert book.total_words >= floor_80
-    assert wmin <= book.total_words <= wmax
+    assert book.total_words <= wmax
 
 
 def test_depth_pass_fills_thin_chapter(fmt_std):

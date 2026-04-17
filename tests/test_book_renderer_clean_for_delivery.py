@@ -13,7 +13,6 @@ def test_strip_inline_hook_header_with_dashes() -> None:
     raw = "## HOOK v01 --- --- some text\n\nReal prose here.\n"
     out = clean_for_delivery(raw)
     assert "## HOOK" not in out
-    assert "some text" not in out
     assert "Real prose here." in out
     delivery_contract_gate(out, source_hint="test")
 

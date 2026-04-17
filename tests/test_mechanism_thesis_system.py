@@ -121,14 +121,14 @@ def test_backward_compat_with_empty_emotional_job() -> None:
 
 
 def test_fallback_takeaway_varies() -> None:
-    memory = cc.MechanismThesisMemory()
+    memory = cc.BridgeMemory()
     outputs = [
         cc._fallback_takeaway(
             "The alarm fires on prediction, not evidence.",
             emotional_job=job,
             chapter_index=i,
             total_chapters=12,
-            mechanism_memory=memory,
+            bridge_memory=memory,
         )
         for i, job in enumerate(_jobs())
     ]
