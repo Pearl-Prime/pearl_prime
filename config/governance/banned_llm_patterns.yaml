@@ -1,0 +1,48 @@
+# Paid LLM API callers banned in production code paths (see allowed_llm_patterns.yaml).
+version: 1
+global_exempt_prefixes:
+  - "tests/"
+banned_patterns:
+  anthropic_api_direct:
+    regex: 'anthropic\s*\.\s*Anthropic\s*\(|Anthropic\s*\(\s*api_key\s*='
+    reason: "Anthropic API is paid. Route via phoenix_v4.llm.router.route_llm (local) or operator Claude Code."
+    exempt_paths:
+      - "scripts/ci/run_agent_refactor.py"
+  anthropic_messages_create:
+    regex: '\.messages\.create\s*\('
+    reason: "Anthropic messages API is paid."
+    exempt_paths:
+      - "scripts/ci/run_agent_refactor.py"
+      - "scripts/ci/llm_cohesive_bestseller_tester.py"
+      - "scripts/ci/llm_bestseller_error_report.py"
+  openai_api_cloud:
+    regex: '(from\s+openai\s+import\s+OpenAI|openai\.OpenAI\s*\()'
+    reason: "OpenAI client must target local Ollama only (see line_allow_substrings)."
+    exempt_paths:
+      - "phoenix_v4/llm/router.py"
+    line_allow_substrings:
+      - "ollama"
+      - "11434"
+      - "192.168.1.101"
+      - "localhost"
+      - "127.0.0.1"
+  google_genai:
+    regex: 'google\.generativeai|genai\.GenerativeModel'
+    reason: "Google AI API is paid."
+    exempt_paths: []
+  dashscope_paid_tier:
+    regex: 'dashscope\.(Generation|MultiModalConversation)'
+    reason: "DashScope cloud SDK is paid."
+    exempt_paths: []
+  together_replicate_perplexity:
+    regex: '(together|replicate|perplexity)\.(chat|completions|run|complete)'
+    reason: "Third-party paid inference banned."
+    exempt_paths: []
+  cohere:
+    regex: 'cohere\.Client\s*\('
+    reason: "Cohere API is paid."
+    exempt_paths: []
+  mistral_api:
+    regex: 'mistralai\.client\.MistralClient'
+    reason: "Mistral API is paid."
+    exempt_paths: []

@@ -1,0 +1,26 @@
+name: Manga stash recovery reminder
+
+on:
+  workflow_dispatch:
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Open stash reminder issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Operator: artifacts/backup_qwen_forks_err.log stash" \
+            --body "Recover or drop \`artifacts/backup_qwen_forks_err.log\` per operator policy (do not auto-recover). Related hygiene: run \`branch-hygiene-sweep\` workflow if needed." \
+            --label operator-action-required \
+            --label manga \
+            || true
+      - name: Summary
+        if: always()
+        run: echo "## Stash reminder issued" >> "$GITHUB_STEP_SUMMARY"

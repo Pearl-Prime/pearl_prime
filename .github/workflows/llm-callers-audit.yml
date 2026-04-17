@@ -1,0 +1,90 @@
+name: LLM Callers Audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      enforce:
+        description: 'full = scan entire repo and fail on violations; scoped = manga+phoenix narrow roots'
+        required: false
+        default: 'scoped'
+        type: choice
+        options: [scoped, full]
+  schedule:
+    - cron: '0 9 * * 5'
+  pull_request:
+    paths:
+      - '**/*.py'
+      - '**/*.yaml'
+      - '**/*.yml'
+      - '.github/workflows/**'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q pyyaml
+      - name: Scan for banned LLM callers
+        id: scan
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          OUT="artifacts/llm_audit_report.md"
+          EVENT="${{ github.event_name }}"
+          ENFORCE="${{ github.event.inputs.enforce }}"
+          FAIL_FLAG="--fail-on-violation"
+          ROOTS=(phoenix_v4 phoenix_v4/llm scripts/manga scripts/run_manga_pipeline.py scripts/weekly_manga_rollout.py)
+          if [ "$EVENT" = "schedule" ] || { [ "$EVENT" = "workflow_dispatch" ] && [ "$ENFORCE" = "full" ]; }; then
+            python3 scripts/ci/audit_llm_callers.py \
+              --banned-patterns-file config/governance/banned_llm_patterns.yaml \
+              --allowed-patterns-file config/governance/allowed_llm_patterns.yaml \
+              --output "$OUT" \
+              $FAIL_FLAG
+          else
+            python3 scripts/ci/audit_llm_callers.py \
+              --banned-patterns-file config/governance/banned_llm_patterns.yaml \
+              --allowed-patterns-file config/governance/allowed_llm_patterns.yaml \
+              --output "$OUT" \
+              --roots "${ROOTS[@]}" \
+              $FAIL_FLAG
+          fi
+      - name: Upload audit artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-audit-${{ github.run_id }}
+          path: artifacts/llm_audit_report.md
+          if-no-files-found: ignore
+          retention-days: 90
+      - name: PR comment on violation
+        if: failure() && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          test -f artifacts/llm_audit_report.md && gh pr comment ${{ github.event.pull_request.number }} --body-file artifacts/llm_audit_report.md || true
+      - name: Issue on violation (schedule / full scan)
+        if: failure() && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.enforce == 'full'))
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY="artifacts/llm_audit_report.md"
+          test -f "$BODY" || echo "# LLM audit failed (no report file)" > "$BODY"
+          gh issue create \
+            --title "LLM cost-control violation — $(date -u +%Y-%m-%d)" \
+            --body-file "$BODY" \
+            --label cost-control \
+            --label operator-action-required \
+            2>/dev/null || true
+      - name: Summary
+        if: always()
+        run: |
+          echo "## LLM audit — ${{ job.conclusion }}" >> "$GITHUB_STEP_SUMMARY"
+          test -f artifacts/llm_audit_summary.json && cat artifacts/llm_audit_summary.json >> "$GITHUB_STEP_SUMMARY" || true
