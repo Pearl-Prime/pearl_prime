@@ -333,9 +333,13 @@ def _dedup_repeated_blocks(
     Paragraphs are split on blank-line runs. Paragraphs with fewer than ``min_words`` words
     are always kept and do not participate in deduplication (short transitions may repeat).
 
-    When ``word_floor`` > 0 (from the runtime format's minimum word target), if deduplication
-    would shrink the text below that floor, the pre-dedup string is kept so thin registry
-    builds do not lose counted repetition that the word gate still expects.
+    Deduplication ALWAYS runs. The ``word_floor`` parameter is retained as a
+    diagnostic signal: when post-dedup word count falls below the runtime
+    format's floor, a structured warning is emitted so the operator can see
+    the repetition was masking insufficient unique content. The bypass that
+    previously kept pre-dedup text below the floor is removed — preserving
+    duplicates to hit a length target produces fake-length books and is the
+    documented dedup-floor regression in the bestseller drift report.
     """
     if not (text or "").strip():
         return text
@@ -362,15 +366,24 @@ def _dedup_repeated_blocks(
 
     deduped = "\n\n".join(kept)
     post_wc = len(deduped.split())
+    unique_ratio = (post_wc / pre_wc) if pre_wc else 1.0
     if word_floor > 0 and post_wc < word_floor:
         logger.warning(
-            "Repeated-block dedup would shrink text from %s to %s words (below floor %s); "
-            "keeping pre-dedup text.",
+            "dedup_below_floor nominal=%s deduped=%s floor=%s unique_ratio=%.3f — "
+            "deduped text returned (no longer retains duplicates to hit floor).",
             pre_wc,
             post_wc,
             word_floor,
+            unique_ratio,
         )
-        return text
+    elif unique_ratio < 0.7 and pre_wc >= 200:
+        logger.warning(
+            "dedup_low_unique_ratio nominal=%s deduped=%s unique_ratio=%.3f — "
+            "more than 30%% of text was repeated long-paragraph duplication.",
+            pre_wc,
+            post_wc,
+            unique_ratio,
+        )
     return deduped
 
 
