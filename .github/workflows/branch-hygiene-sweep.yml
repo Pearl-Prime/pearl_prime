@@ -1,4 +1,5 @@
 name: Branch Hygiene Sweep
+# dispatch-trigger: v2  # forces trigger re-read after type:choice fix
 
 on:
   workflow_dispatch:
