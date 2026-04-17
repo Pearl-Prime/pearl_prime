@@ -402,7 +402,11 @@ def test_dedup_four_count_breath_section_deduplicated() -> None:
     assert out.count("Inhale for four counts") == 1
 
 
-def test_dedup_repeated_blocks_keeps_pre_dedup_when_below_word_floor() -> None:
+def test_dedup_repeated_blocks_always_runs_regardless_of_word_floor(caplog) -> None:
+    """Dedup always returns the deduped text. The word_floor bypass that previously
+    retained duplicates to hit a length target is removed (fake-length regression)."""
+    import logging
+
     from phoenix_v4.rendering.book_renderer import _dedup_repeated_blocks
 
     p = (
@@ -413,21 +417,31 @@ def test_dedup_repeated_blocks_keeps_pre_dedup_when_below_word_floor() -> None:
     text = f"{p}\n\n{p}\n"
     shrunk = _dedup_repeated_blocks(text, word_floor=0)
     assert shrunk.count("This paragraph is long enough") == 1
-    kept = _dedup_repeated_blocks(text, word_floor=5000)
-    assert kept.count("This paragraph is long enough") == 2
+    with caplog.at_level(logging.WARNING):
+        deduped_below_floor = _dedup_repeated_blocks(text, word_floor=5000)
+    # Dedup runs regardless of floor — duplicates are removed.
+    assert deduped_below_floor.count("This paragraph is long enough") == 1
+    # A diagnostic warning is emitted when post-dedup text falls below the runtime floor.
+    assert any("dedup_below_floor" in r.message for r in caplog.records)
 
 
-def test_clean_for_delivery_dedup_respects_runtime_word_floor() -> None:
+def test_clean_for_delivery_dedup_always_removes_duplicates() -> None:
+    """clean_for_delivery dedup always removes long-paragraph duplicates regardless
+    of runtime word floor. The previous bypass (keep duplicates when post-dedup
+    falls below runtime word floor) is removed — duplicates were inflating
+    nominal length while the user saw fake-length books.
+    """
     long_para = (
         "This duplicate long paragraph is written for runtime word floor testing "
         "with more than twenty words so dedup would normally remove the second copy "
-        "but the format floor requires keeping pre-dedup word count for thin books."
+        "and the format floor no longer keeps pre-dedup duplicates for thin books."
     )
     raw = f"{long_para}\n\n{long_para}\n"
     out_no_plan = clean_for_delivery(raw)
     assert out_no_plan.count("duplicate long paragraph") == 1
     out_with_plan = clean_for_delivery(raw, plan={"runtime_format_id": "short_book_30"})
-    assert out_with_plan.count("duplicate long paragraph") == 2
+    # Dedup runs even under short_book_30 floor — duplicates are gone.
+    assert out_with_plan.count("duplicate long paragraph") == 1
 
 
 def test_clean_for_delivery_strips_concatenated_spine_hook_lines() -> None:
