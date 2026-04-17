@@ -1,0 +1,19 @@
+name: Manga Rollout Failure Notify
+
+on:
+  workflow_run:
+    workflows: ['Weekly Manga Rollout']
+    types: [completed]
+
+jobs:
+  notify_on_failure:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Record failure
+        run: |
+          echo "Weekly Manga Rollout FAILED — run ${{ github.event.workflow_run.id }}"
+          echo "URL: ${{ github.event.workflow_run.html_url }}"
+          echo "Wire SendGrid or PagerDuty here using repository secrets when operator routing is finalized."

@@ -1,0 +1,67 @@
+# Production manga lane: scheduled weekly + manual. Default config uses replay + image_bank
+# (no GPU). For Pearl Star ComfyUI, set image_backend to comfyui in config/weekly_rollout/manga_rollout.yaml
+# and use runs-on: [self-hosted, pearl-star-gpu].
+name: Weekly Manga Rollout
+
+on:
+  schedule:
+    - cron: '0 14 * * 1'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (no R2 upload; signed URL placeholders)'
+        required: false
+        default: 'false'
+        type: choice
+        options: ['false', 'true']
+
+jobs:
+  manga_rollout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r requirements-test.txt
+
+      - name: Run weekly rollout
+        env:
+          PYTHONPATH: .
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          CF_R2_ACCESS_KEY: ${{ secrets.CF_R2_ACCESS_KEY }}
+          CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          WEEKLY_ROLLOUT_OPERATOR_EMAIL: ${{ vars.WEEKLY_ROLLOUT_OPERATOR_EMAIL }}
+        run: |
+          FLAGS=""
+          DRY="${{ github.event.inputs.dry_run }}"
+          if [ "$DRY" = "true" ]; then
+            FLAGS="--dry-run"
+          fi
+          python3 scripts/weekly_manga_rollout.py $FLAGS 2>&1 | tee rollout.log
+
+      - name: Upload run log + digest draft
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-manga-rollout-${{ github.run_id }}
+          path: |
+            rollout.log
+            artifacts/weekly_digests/
+          retention-days: 90
+          if-no-files-found: ignore
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Weekly Manga Rollout — Run ${{ github.run_id }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          tail -50 rollout.log >> "$GITHUB_STEP_SUMMARY" || true

@@ -1,0 +1,81 @@
+# QA: one-shot manga book from catalog (replay backend uses image_bank; no GPU required).
+# When the pearl-star-gpu self-hosted runner is registered, change runs-on to:
+#   runs-on: [self-hosted, pearl-star-gpu]
+# and set inputs.backend to comfyui or runcomfy for live generation.
+name: Manga Smoke Test (QA)
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: 'Brand ID (e.g. stillness_press)'
+        required: true
+        default: 'stillness_press'
+      topic:
+        description: 'Topic (e.g. burnout)'
+        required: true
+        default: 'burnout'
+      genre:
+        description: 'Manga genre (shonen/shojo/seinen)'
+        required: true
+        default: 'shonen'
+        type: choice
+        options: [shonen, shojo, seinen]
+      persona:
+        description: 'Persona slug'
+        required: false
+        default: 'gen_z_professionals'
+      backend:
+        description: 'Image backend (replay = image_bank; comfyui = Pearl Star)'
+        required: false
+        default: 'replay'
+        type: choice
+        options: [replay, comfyui, runcomfy]
+
+jobs:
+  generate_manga:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r requirements-test.txt
+
+      - name: Optional ComfyUI ping (comfyui backend only)
+        if: ${{ inputs.backend == 'comfyui' }}
+        continue-on-error: true
+        run: |
+          COMFY="${COMFYUI_URL:-}"
+          if [ -n "$COMFY" ]; then
+            curl -sS "${COMFY%/}/system_stats" | head -c 200 || true
+          fi
+        env:
+          COMFYUI_URL: ${{ vars.COMFYUI_URL }}
+
+      - name: Generate manga (replay uses image_bank)
+        env:
+          PYTHONPATH: .
+        run: |
+          FLAGS="--brand ${{ inputs.brand }} --topic ${{ inputs.topic }} --genre ${{ inputs.genre }} --persona ${{ inputs.persona }} --render-book --output-dir artifacts/manga_smoke/ --backend ${{ inputs.backend }}"
+          if [ "${{ inputs.backend }}" != "comfyui" ]; then
+            FLAGS="$FLAGS --skip-pearl-star-check"
+          fi
+          python3 scripts/run_manga_pipeline.py $FLAGS
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manga-smoke-${{ inputs.brand }}-${{ inputs.topic }}-${{ inputs.genre }}
+          path: artifacts/manga_smoke/
+          retention-days: 30
+
+      - name: QA report summary
+        if: always()
+        run: |
+          cat artifacts/manga_smoke/QA_REPORT.md >> "$GITHUB_STEP_SUMMARY" || echo "No QA report"
