@@ -9,11 +9,9 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: 'Dry run (no R2 upload; signed URL placeholders)'
+        description: 'true | false — dry run (no R2 upload; placeholders only)'
         required: false
         default: 'false'
-        type: choice
-        options: ['false', 'true']
 
 jobs:
   manga_rollout:
