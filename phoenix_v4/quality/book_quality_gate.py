@@ -193,3 +193,11 @@ def write_book_quality_report(report: BookQualityReport, output_path: str | Path
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report.to_dict(), indent=2), encoding="utf-8")
+
+
+def load_book_quality_config() -> dict[str, Any]:
+    import yaml
+
+    path = Path(__file__).resolve().parents[2] / "config" / "quality" / "book_quality_gate.yaml"
+    with path.open("r", encoding="utf-8") as fh:
+        return yaml.safe_load(fh) or {}
