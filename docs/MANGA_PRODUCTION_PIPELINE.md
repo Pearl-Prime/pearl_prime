@@ -41,10 +41,13 @@ Signed URLs: `boto3` `generate_presigned_url` (default expiry 604800s), same cli
 
 ## GitHub Actions
 
-- `.github/workflows/manga-smoke-test.yml` — `workflow_dispatch`, default `ubuntu-latest` + `replay` for portable QA.
+- `.github/workflows/manga-smoke-test.yml` — `workflow_dispatch`, **replay** on `ubuntu-latest`; **comfyui/runcomfy** waits for `pearl-star-gpu` then runs on self-hosted. Optional `upload_to_r2` / `send_digest` (requires secrets + `WEEKLY_ROLLOUT_OPERATOR_EMAIL` var). See `docs/GITHUB_ACTIONS_BACKGROUND_AGENTS.md`.
 - `.github/workflows/weekly-manga-rollout.yml` — cron + manual; set secrets to match podcast R2.
 - `.github/workflows/manga-rollout-notify.yml` — failure hook placeholder.
-- `.github/workflows/pearl-star-health.yml` — optional runner label check (`workflow_dispatch`).
+- `.github/workflows/manga-operator-setup-verify.yml` — runner + secrets + operator email var (scheduled + manual).
+- `.github/workflows/manga-image-bank-build.yml` — long GPU job to fill Stillness `image_bank/` (opens PR when done).
+- `.github/workflows/manga-backend-flip.yml` — opens PR flipping weekly lane to `comfyui` + self-hosted (after operator confirmation).
+- `scripts/ci/wait_for_self_hosted_runner.py` — queue wait (smoke GPU path). `scripts/ci/check_pearl_star_runner_online.py` — instant check (operator verify).
 
 ## Credentials
 

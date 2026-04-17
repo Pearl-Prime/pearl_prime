@@ -208,6 +208,7 @@ def run_one_book(
     backend: str,
     skip_pearl_star_check: bool,
     render_book: bool,
+    chapter_id: str = "ch_smoke",
 ) -> dict[str, Any]:
     snap = config_snapshot_hash()
     bank_dir = repo_root / "image_bank" / brand_id / topic_id
@@ -251,7 +252,7 @@ def run_one_book(
         "schema_version": "1.0.0",
         "artifact_type": "chapter_request",
         "series_id": series_id,
-        "chapter_id": "ch_smoke",
+        "chapter_id": chapter_id,
         "arc_id": arc_id,
     }
     (ws / "chapter_request.json").write_text(json.dumps(chapter_request, indent=2) + "\n", encoding="utf-8")
@@ -290,7 +291,7 @@ def run_one_book(
     if render_book:
         exports_dir = output_dir / "exports"
         exports_dir.mkdir(parents=True, exist_ok=True)
-        slug = f"{topic_id}_{genre}_smoke"
+        slug = f"{topic_id}_{genre}_{chapter_id}_smoke"
         pdf = exports_dir / f"{slug}.pdf"
         cbz = exports_dir / f"{slug}.cbz"
         epub = exports_dir / f"{slug}.epub"
@@ -307,6 +308,7 @@ def run_one_book(
     return {
         "workspace": str(ws),
         "series_id": series_id,
+        "chapter_id": chapter_id,
         "image_bank_png_count": n_bank,
         "exports": exports,
     }
@@ -381,6 +383,12 @@ def main() -> int:
     ap.add_argument("--skip-pearl-star-check", action="store_true", help="Skip ComfyUI health check (CI only)")
     ap.add_argument("--render-book", action="store_true", help="Write PDF/CBZ/EPUB under output-dir/exports")
     ap.add_argument("--bubble-note", default="", help="Override QA bubble section text")
+    ap.add_argument(
+        "--chapter-count",
+        type=int,
+        default=1,
+        help="Run N sequential chapter smoke workspaces under output-dir/chapter_NNN/",
+    )
     args = ap.parse_args()
 
     bubble_default = (
@@ -389,30 +397,67 @@ def main() -> int:
     )
     bubble_note = args.bubble_note or bubble_default
 
+    if args.chapter_count < 1:
+        print("ERROR: --chapter-count must be >= 1", file=sys.stderr)
+        return 1
+
+    out_root = args.output_dir.resolve()
     try:
-        result = run_one_book(
-            repo_root=REPO_ROOT,
-            brand_id=args.brand,
-            topic_id=args.topic,
-            persona=args.persona,
-            genre=args.genre,
-            output_dir=args.output_dir.resolve(),
-            min_panel_images=args.min_panel_images,
-            backend=args.backend,
-            skip_pearl_star_check=args.skip_pearl_star_check,
-            render_book=args.render_book,
-        )
+        results: list[dict[str, Any]] = []
+        if args.chapter_count == 1:
+            results.append(
+                run_one_book(
+                    repo_root=REPO_ROOT,
+                    brand_id=args.brand,
+                    topic_id=args.topic,
+                    persona=args.persona,
+                    genre=args.genre,
+                    output_dir=out_root,
+                    min_panel_images=args.min_panel_images,
+                    backend=args.backend,
+                    skip_pearl_star_check=args.skip_pearl_star_check,
+                    render_book=args.render_book,
+                    chapter_id="ch_smoke",
+                )
+            )
+        else:
+            for i in range(1, args.chapter_count + 1):
+                cid = f"ch_smoke_{i}"
+                sub = out_root / f"chapter_{i:03d}"
+                results.append(
+                    run_one_book(
+                        repo_root=REPO_ROOT,
+                        brand_id=args.brand,
+                        topic_id=args.topic,
+                        persona=args.persona,
+                        genre=args.genre,
+                        output_dir=sub,
+                        min_panel_images=args.min_panel_images,
+                        backend=args.backend,
+                        skip_pearl_star_check=args.skip_pearl_star_check,
+                        render_book=args.render_book,
+                        chapter_id=cid,
+                    )
+                )
     except Exception as e:
         print(f"ERROR: {e}", file=sys.stderr)
         return 1
 
+    result = results[-1]
     write_qa_report(
-        out_path=args.output_dir / "QA_REPORT.md",
+        out_path=out_root / "QA_REPORT.md",
         result=result,
         bubble_note=bubble_note,
     )
+    if args.chapter_count > 1:
+        idx_path = out_root / "QA_REPORT_INDEX.md"
+        idx_lines = ["# Multi-chapter smoke index", "", f"- Chapters: **{args.chapter_count}**", ""]
+        for r in results:
+            idx_lines.append(f"- `{r.get('chapter_id')}` → `{r.get('workspace')}`")
+        idx_path.write_text("\n".join(idx_lines) + "\n", encoding="utf-8")
+        print("QA index:", idx_path)
     print(json.dumps(result, indent=2))
-    print("QA report:", args.output_dir / "QA_REPORT.md")
+    print("QA report:", out_root / "QA_REPORT.md")
     return 0
 
 

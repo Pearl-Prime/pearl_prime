@@ -1,0 +1,40 @@
+name: LLM Caller Migration
+
+on:
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q anthropic pyyaml
+      - name: Run Claude API refactor agent (budgeted one-shot)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: |
+          set -euo pipefail
+          export ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-${CLAUDE_API_KEY:-}}"
+          if [ -z "${ANTHROPIC_API_KEY:-}" ]; then echo "Missing ANTHROPIC_API_KEY or CLAUDE_API_KEY"; exit 2; fi
+          echo "::add-mask::$ANTHROPIC_API_KEY"
+          BRANCH="agent/llm-migration-to-local-$(date +%Y%m%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          python3 scripts/ci/run_agent_refactor.py \
+            --task llm-migration \
+            --branch "$BRANCH" \
+            --requirements "Identify paid LLM API usage in pearl_news/ and scripts/localization/llm_client.py. Replace with phoenix_v4.llm.router.route_llm where appropriate. Do NOT modify scripts/ci/run_agent_refactor.py. Add tests if needed." \
+            --max-cost-usd 5.00 \
+            --dry-run true
+      - name: Summary
+        if: always()
+        run: echo "## LLM migration — dry-run plan only (set dry-run false when operator approves spend)" >> "$GITHUB_STEP_SUMMARY"

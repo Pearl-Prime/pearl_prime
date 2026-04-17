@@ -1,0 +1,32 @@
+name: Manga quality forensic analysis
+
+on:
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q pyyaml
+      - name: Generate forensic stubs
+        run: python3 scripts/manga/forensic_quality_sprint.py
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manga-forensic-${{ github.run_id }}
+          path: artifacts/analysis/
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Forensic pack" >> "$GITHUB_STEP_SUMMARY"
+          cat artifacts/analysis/MANGA_QUALITY_GAP_PLAN.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true

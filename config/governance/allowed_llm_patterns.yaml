@@ -1,0 +1,9 @@
+# Documentation for operators (audit uses line_allow_substrings in banned rules).
+version: 1
+allowed_patterns:
+  gemma_via_ollama:
+    regex: 'ollama.*?(gemma|gemma2|gemma3)'
+    use_case: "English LLM — local on Pearl Star"
+  qwen_via_ollama:
+    regex: 'ollama.*?(qwen|qwen2|qwen3)'
+    use_case: "CJK6 LLM — local on Pearl Star"

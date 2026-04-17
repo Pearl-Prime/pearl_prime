@@ -12,7 +12,6 @@ from __future__ import annotations
 import logging
 import os
 import re
-import time
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
@@ -124,7 +123,7 @@ def _build_layer_map(text: str, sources_used: List[str]) -> Dict[str, str]:
     return result
 
 
-# ── Claude API call ───────────────────────────────────────────────────────────
+# ── Local LLM (Gemma on Pearl Star / Ollama) ─────────────────────────────────
 
 def _call_claude_api(
     *,
@@ -136,43 +135,24 @@ def _call_claude_api(
     api_key: Optional[str] = None,
 ) -> Optional[str]:
     """
-    Call Claude via the Anthropic SDK. Returns generated text or None on failure.
-    Mirrors the pattern in pearl_news/pipeline/llm_expand_claude.py.
+    Expand via ``phoenix_v4.llm.router.route_llm`` (English → Gemma on Ollama).
+
+    Parameters ``model``, ``timeout``, and ``api_key`` are kept for API
+    compatibility with older callers; routing honours ``GEMMA_*`` env vars.
     """
-    key = api_key or os.environ.get("ANTHROPIC_API_KEY") or ""
-    if not key:
-        logger.error("ANTHROPIC_API_KEY not set; cannot call Claude API")
-        return None
-
+    del model, timeout, api_key
     try:
-        from anthropic import Anthropic
-    except ImportError:
-        logger.error("anthropic package not installed: pip install anthropic")
+        from phoenix_v4.llm.router import route_llm
+    except ImportError as exc:
+        logger.error("router import failed: %s", exc)
         return None
-
-    client = Anthropic(api_key=key, timeout=timeout, max_retries=1)
-    for attempt in range(2):
-        try:
-            response = client.messages.create(
-                model=model,
-                max_tokens=max_tokens,
-                system=system_prompt,
-                messages=[{"role": "user", "content": user_prompt}],
-                temperature=0.4,  # low temp for determinism + voice fidelity
-            )
-            text = "".join(
-                block.text for block in response.content if hasattr(block, "text")
-            )
-            return text.strip() if text.strip() else None
-        except Exception as exc:
-            msg = str(exc)
-            if ("rate_limit_error" in msg or "429" in msg) and attempt == 0:
-                logger.warning("Claude API rate-limited; sleeping 65s before retry")
-                time.sleep(65)
-                continue
-            logger.warning("Claude API call failed: %s", exc)
-            return None
-    return None
+    combined = f"{system_prompt}\n\n---\n\n{user_prompt}"
+    try:
+        text = route_llm(combined, language="en", max_tokens=max_tokens, temperature=0.4)
+    except Exception as exc:
+        logger.warning("Local LLM expansion failed: %s", exc)
+        return None
+    return text.strip() if text.strip() else None
 
 
 # ── Word count ────────────────────────────────────────────────────────────────
