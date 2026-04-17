@@ -8,11 +8,9 @@ on:
         required: false
         default: ''
       dry_run:
-        description: 'Dry run — plan only, no commits'
+        description: 'Dry run — plan only, no commits (pass true or false)'
         required: false
         default: 'false'
-        type: choice
-        options: ['false', 'true']
 
 env:
   BRANCH_NAME: agent/p0-6-content-bank-refactor-${{ inputs.branch_suffix || github.run_id }}

@@ -7,8 +7,6 @@ on:
         description: 'Dry run — audit only, no commits'
         required: false
         default: 'false'
-        type: choice
-        options: ['false', 'true']
 
 env:
   BRANCH_NAME: agent/act-014-pearl-writer-audit-${{ github.run_id }}
