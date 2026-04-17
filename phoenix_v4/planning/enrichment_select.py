@@ -44,6 +44,42 @@ logger = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
+# ---------------------------------------------------------------------------
+# ACT-010: Doctrine quarantine — pre-selection filter for somatic_first frame
+# Synced from phoenix_v4/quality/frame_governor.py :: SPIRITUAL_LEXICON
+# ---------------------------------------------------------------------------
+_SOMATIC_QUARANTINE_TERMS: frozenset[str] = frozenset({
+    "soul contract",
+    "past life",
+    "karma",
+    "chakra",
+    "frequency",
+    "vibration",
+    "akashic",
+    "ascension",
+    "manifestation",
+    "energy field",
+    "aura",
+    "divine timing",
+    "cosmic",
+    "sacred geometry",
+    "light body",
+})
+
+
+def _is_doctrine_quarantined(atom_text: str, frame: str) -> bool:
+    """Return True if atom should be excluded from the candidate pool.
+
+    somatic_first (or unset/empty): block spiritual/doctrine terms.
+    spiritual_first: no quarantine — spiritual lexicon is permitted.
+    """
+    if frame == "spiritual_first":
+        return False
+    if not atom_text or not _SOMATIC_QUARANTINE_TERMS:
+        return False
+    text_lower = atom_text.lower()
+    return any(term in text_lower for term in _SOMATIC_QUARANTINE_TERMS)
+
 # Registry beatmap slot type → content-bank slot_type values (enrichment_slot_fallback_bank.yaml).
 _ENRICH_BANK_SLOT_TYPES: Dict[str, Tuple[str, ...]] = {
     "HOOK": ("FALLBACK_PROSE",),
@@ -833,7 +869,22 @@ def select_enrichment(
             if tid and teacher_atoms:
                 teacher_atoms_for_slot = dict(teacher_atoms)
                 for _k, _pool in list(teacher_atoms_for_slot.items()):
-                    teacher_atoms_for_slot[_k] = _filtered_pool(_pool, slot_spec)
+                    _filtered = _filtered_pool(_pool, slot_spec)
+                    # ACT-010: doctrine quarantine — exclude spiritual atoms in somatic_first
+                    _pre_q = len(_filtered)
+                    _filtered = [
+                        _a for _a in _filtered
+                        if not _is_doctrine_quarantined(
+                            str(_a.get("content") or ""), _frame
+                        )
+                    ]
+                    _q_removed = _pre_q - len(_filtered)
+                    if _q_removed:
+                        logger.info(
+                            "Doctrine quarantine ch%d teacher[%s]: removed %d atoms (frame=%s)",
+                            chapter_index0 + 1, _k, _q_removed, _frame,
+                        )
+                    teacher_atoms_for_slot[_k] = _filtered
                 t_hit = _try_teacher_content(
                     teacher_atoms_for_slot,
                     stype,
@@ -864,7 +915,21 @@ def select_enrichment(
 
             # 2) Persona
             if not content and persona_atoms:
-                persona_pool = _filtered_pool(persona_atoms.get(stype, []), slot_spec)
+                _raw_persona_pool = _filtered_pool(persona_atoms.get(stype, []), slot_spec)
+                # ACT-010: doctrine quarantine — exclude spiritual atoms in somatic_first
+                _pre_q_p = len(_raw_persona_pool)
+                persona_pool = [
+                    _a for _a in _raw_persona_pool
+                    if not _is_doctrine_quarantined(
+                        str(_a.get("content") or ""), _frame
+                    )
+                ]
+                _q_removed_p = _pre_q_p - len(persona_pool)
+                if _q_removed_p:
+                    logger.info(
+                        "Doctrine quarantine ch%d persona[%s]: removed %d atoms (frame=%s)",
+                        chapter_index0 + 1, stype, _q_removed_p, _frame,
+                    )
                 persona_atoms_for_slot = dict(persona_atoms)
                 persona_atoms_for_slot[stype] = persona_pool
                 p_hit = _try_persona_content(
@@ -907,6 +972,13 @@ def select_enrichment(
             # 4) Registry
             if not content:
                 r_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
+                # ACT-010: doctrine quarantine — skip quarantined registry variants in somatic_first
+                if r_hit and _is_doctrine_quarantined(r_hit[0], _frame):
+                    logger.info(
+                        "Doctrine quarantine ch%d registry[%s]: variant %s excluded (frame=%s)",
+                        chapter_index0 + 1, stype, r_hit[1], _frame,
+                    )
+                    r_hit = None
                 if r_hit:
                     content, source_id, _sec_d, _v_i = r_hit
                     reg_sec_meta = (_sec_d, _v_i)
@@ -949,6 +1021,13 @@ def select_enrichment(
                     seed=seed,
                     chapter_targets=ch_tgt,
                 )
+                # ACT-010: doctrine quarantine — skip quarantined content bank bodies in somatic_first
+                if b_hit and _is_doctrine_quarantined(b_hit[0], _frame):
+                    logger.info(
+                        "Doctrine quarantine ch%d content_bank[%s]: variant %s excluded (frame=%s)",
+                        chapter_index0 + 1, stype, b_hit[2], _frame,
+                    )
+                    b_hit = None
                 if b_hit:
                     content, source, source_id, extra_scores = b_hit
                     variant_id = str(extra_scores.get("content_bank_variant_id") or source_id)
