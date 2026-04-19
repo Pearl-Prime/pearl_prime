@@ -223,6 +223,14 @@ def build_revision_queue_for_chapter(
                     "stage_owner": "chapter_qc",
                     "description": f"Pacing gate check failed: {exc}",
                 })
+            try:
+                from phoenix_v4.manga.qc.restraint_gate import check_restraint_over_exposition
+                script_data = json.loads(script_p.read_text(encoding="utf-8"))
+                restraint_issue = check_restraint_over_exposition(script_data, manga_profile)
+                if restraint_issue:
+                    issues.append(restraint_issue)
+            except Exception:
+                pass  # gate errors are non-fatal
 
     blockers = [x for x in issues if x.get("severity") == "BLOCKER"]
     clearance = "pass" if not blockers else "hold"
