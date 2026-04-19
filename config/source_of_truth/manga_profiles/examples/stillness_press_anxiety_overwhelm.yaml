@@ -1,0 +1,92 @@
+# Manga Profile — Example 1: Iyashikei / Healing
+# Series: Anxiety & Overwhelm Vol 1 (Stillness Press)
+# Demonstrates: cozy_restoration emotional engine, iyashikei visual grammar,
+#               josei-sophisticated female-reader grammar, restrained pacing
+
+manga_profile_schema_version: "1.0.0"
+status: draft
+created_at: "2026-04-19"
+
+# --- core identity ---
+title_id: anxiety_overwhelm_vol1
+brand_id: stillness_press
+
+market_demo: josei
+# josei: adult women readers. expects emotional precision, not dramatic escalation.
+# grammar: grounded realism + restraint + earned emotional moments.
+
+genre_family: healing
+subgenre: "slice_of_life_anxiety_recovery"
+
+emotional_engine: cozy_restoration
+# cozy_restoration: reader returns to feel safe, restored, lighter.
+# NOT catharsis (too dramatic), NOT aspiration (too forward-pointing).
+# Each chapter leaves the reader calmer than when they arrived.
+
+reader_promise: "You will feel like someone finally understands what exhaustion really is."
+
+# --- serialization ---
+serialization_engine: mood_based
+# mood_based: chapters accumulate feeling, not plot momentum.
+# No cliffhangers. Chapters can be read out of order without confusion.
+# Each episode = one specific emotional territory explored slowly.
+
+chapter_hook_family: almost_confession
+# almost_confession: emotional disclosure stopped before completion.
+# The reader leans forward because something real was almost said.
+# Works for josei/iyashikei: tension without manufactured drama.
+
+# --- visual grammar ---
+visual_grammar: iyashikei_minimalism
+# iyashikei_minimalism: generous negative space, watercolor wash,
+# earth tones, soft ink linework. Maps to brand style "Contemplative Ink Wash".
+
+line_weight_profile: light
+# Light, fluid lines. No speed lines. No impact frames.
+
+black_fill_ratio: 0.06
+# Near-minimal black fill. Pages feel airy, open.
+
+screentone_profile: minimal
+# Selective tones for shadow only. No decorative patterns.
+
+# --- pacing contract ---
+words_per_page_target: 28
+# Very low word density. Space IS the content.
+# Dialogue is sparse, deliberate, each line considered.
+
+silent_panel_ratio: 0.42
+# 42% of panels are wordless. Silence is the primary emotional carrier.
+# Validates against MDLG-07 (silence_density gate).
+
+reaction_shot_frequency: medium
+# Medium reaction shots — emotional expression matters, but held back.
+# Restraint is the grammar. A single held expression does more than three reaction panels.
+
+spread_frequency: rare
+# Double-page spreads reserved for moments of breakthrough stillness only.
+# Overuse would break the quiet accumulation rhythm.
+
+narration_tolerance: minimal
+# No caption boxes. No internal monologue explaining what the reader should feel.
+# Show. Do not tell. This is the core josei/iyashikei grammar.
+# MDLG-11 (restraint_over_exposition) validates this series against this contract.
+
+# --- adaptation ---
+adaptation_targets:
+  - print
+  - webtoon
+# Print: right-to-left reading, traditional margins.
+# Webtoon: vertical scroll with extended silent sequences between dialogue panels.
+
+# --- operator notes ---
+series_notes: |
+  This series is for readers who have been told their anxiety is "not that bad."
+  The visual grammar does the work: long silent sequences + sparse dialogue +
+  restrained line work = the reader feels their own nervous system slow down.
+  Do not add dramatic chapter hooks. The mood_based engine is intentional.
+  The emotional engine (cozy_restoration) means readers finish each chapter
+  feeling safer, not more activated.
+
+compat_tags: []
+# No compat tags — this profile is fully genre-specific. Variants must match.

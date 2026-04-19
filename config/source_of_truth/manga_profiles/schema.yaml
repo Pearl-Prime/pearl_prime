@@ -1,0 +1,287 @@
+manga_profile_schema_version: "1.0.0"
+schema_id: manga_profile
+authority: config/source_of_truth/manga_profiles/schema.yaml
+created: "2026-04-19"
+status: draft
+
+description: |
+  A manga_profile is a title-level identity record that captures the genre,
+  visual grammar, pacing contract, and reader promise for a single manga series.
+  It is ASSIGNED by an operator at series setup time — not selected at runtime.
+  Downstream hash-seeded selection operates within the profile-defined constraints.
+
+  Profiles live in: config/source_of_truth/manga_profiles/
+  Loader: phoenix_v4/manga/series/profile_loader.py (to be created in PR-01)
+
+# --- core identity ---
+required_fields:
+  title_id:
+    type: string
+    pattern: "^[a-z][a-z0-9_]{3,63}$"
+    description: Unique series identifier. Must match series_id in pipeline inputs.
+
+  brand_id:
+    type: string
+    description: Brand from config/brand_registry.yaml. Controls visual DNA.
+    must_exist_in: "config/brand_registry.yaml brands.*"
+
+  market_demo:
+    type: enum
+    values: [shonen, shojo, seinen, josei, kodomo]
+    description: |
+      Primary reader demographic. Controls ITE profile selection and
+      structural embedding doctrine. shonen = aspiration/rivalry engine.
+      shojo = vulnerability/mirror engine. seinen = silence/subtext engine.
+      josei = grounded realism / emotional precision engine. kodomo = wonder engine.
+
+  genre_family:
+    type: enum
+    values:
+      - battle
+      - romance
+      - mystery
+      - healing
+      - horror
+      - sports
+      - school
+      - workplace
+      - historical
+      - fantasy
+      - sci_fi
+      - delinquent
+      - gag
+      - essay
+      - memoir
+      - food
+      - club_hobby
+      - procedural
+      - supernatural_everyday
+      - survival
+      - revenge
+      - social_issue
+    description: Primary genre. Maps to ITE profile in config/manga/genre_ite_profiles.yaml.
+
+  subgenre:
+    type: string
+    description: |
+      Freeform refinement within genre_family.
+      Examples: "magical_girl" (fantasy/shojo), "slice_of_life_anxiety" (healing/josei),
+      "tournament_arc_school" (sports/shonen), "gaslighting_workplace" (social_issue/josei)
+
+  emotional_engine:
+    type: enum
+    values:
+      - aspiration      # reader identifies with protagonist striving upward
+      - catharsis       # reader releases through character's emotional break
+      - tenderness      # reader feels seen through quiet emotional recognition
+      - dread           # reader is pulled forward by escalating threat
+      - obsession       # reader cannot stop because resolution is withheld
+      - wonder          # reader experiences world expansion through discovery
+      - grief           # reader processes loss alongside character
+      - cozy_restoration  # reader feels safe and restored by each chapter
+      - rivalry         # reader lives the push-pull of matched opponents
+      - longing         # reader aches for connection that hasn't arrived yet
+    description: |
+      Primary emotional mechanism driving reader engagement.
+      This is what makes readers come back — the feeling they are chasing.
+
+  reader_promise:
+    type: string
+    max_length: 120
+    description: |
+      One sentence. What will the reader feel if they trust this series?
+      Examples: "You will feel seen in your exhaustion."
+      "You will feel the specific ache of almost-love."
+      "You will feel your body get lighter page by page."
+
+# --- serialization behavior ---
+  serialization_engine:
+    type: enum
+    values:
+      - cliffhanger_driven       # every chapter ends on unresolved tension
+      - episodic                 # each chapter is self-contained
+      - arc_based                # multi-chapter arcs with clear start/end
+      - mood_based               # chapters accumulate feeling, not plot
+      - quest_based              # chapter = progress unit toward defined goal
+      - ensemble_progression     # rotating POV, ensemble cast development
+      - monster_of_week          # episodic with escalating threat register
+      - tournament_ladder        # bracket advancement drives structure
+      - relationship_escalation  # emotional intimacy as the only progress axis
+    description: |
+      How the series creates forward momentum across chapters.
+      This choice determines chapter_end_hook requirements.
+
+  chapter_hook_family:
+    type: enum
+    values:
+      - revelation           # truth about character/world disclosed
+      - interruption         # action stopped at worst possible moment
+      - betrayal             # trusted character acts against protagonist
+      - vow                  # protagonist commits to irreversible action
+      - arrival              # new character/force changes the equation
+      - almost_confession    # emotional disclosure stopped before completion
+      - new_rival            # a stronger/stranger opponent appears
+      - hidden_truth_glimpse # camera shows reader something protagonist missed
+      - ominous_image        # visual threat without explanation
+      - emotional_rupture    # relationship breaks in non-repairable way
+      - ambiguous_line       # final dialogue can be read two ways
+    description: |
+      The dominant hook pattern for this series' chapter endings.
+      chapter_end_hook freeform text must belong to this family.
+      MDLG-06 (chapter_addiction gate) validates against this field.
+
+# --- visual grammar ---
+  visual_grammar:
+    type: enum
+    values:
+      - kinetic_shonen           # speed lines, impact frames, dynamic angles
+      - soft_shojo_decorative    # flower overlays, sparkle effects, soft edges
+      - polished_seinen          # clean linework, cinematic framing, depth
+      - grounded_josei_realism   # realistic proportions, natural expressions
+      - iyashikei_minimalism     # generous negative space, watercolor wash
+      - chibi_deformation        # super-deformed comedy beats
+      - horror_contrast          # extreme black fill, distorted anatomy
+      - retro_gekiga             # dense crosshatching, harsh shadows, gritty realism
+      - sports_clarity           # high-contrast action, clean motion blur
+      - fantasy_ornate           # detailed backgrounds, elaborate costume design
+    description: |
+      Visual style archetype. Maps to a style_archetype in
+      config/manga/style_archetypes.yaml (some new archetypes may need adding).
+
+  line_weight_profile:
+    type: enum
+    values: [light, medium, heavy, variable]
+    description: |
+      Dominant line weight across the series.
+      light = shojo/iyashikei. medium = seinen. heavy = shonen/horror.
+      variable = expressive (weight shifts with emotional register).
+
+  black_fill_ratio:
+    type: float
+    range: [0.05, 0.40]
+    description: |
+      Approximate proportion of panel area filled with solid black.
+      0.05 = minimal (iyashikei). 0.20 = standard (seinen/shonen). 0.35+ = horror.
+
+  screentone_profile:
+    type: enum
+    values: [none, minimal, decorative, dense]
+    description: |
+      Screen tone / halftone usage pattern.
+      none = clean line art. minimal = selective shadows. decorative = shojo sparkle.
+      dense = heavy seinen/horror rendering.
+
+# --- pacing contract ---
+  words_per_page_target:
+    type: int
+    description: |
+      Target word count per manga page (dialogue + narration + SFX).
+      Battle shonen: 80-120. Seinen: 60-100. Shojo: 40-80.
+      Iyashikei: 20-40. Horror: 30-60. Used by Chapter Writer token budget gate.
+
+  silent_panel_ratio:
+    type: float
+    range: [0.0, 0.6]
+    description: |
+      Target ratio of panels with no dialogue.
+      Shonen: 0.10-0.15. Iyashikei: 0.30-0.50. Horror: 0.20-0.35.
+      MDLG-07 (silence_density gate) validates against this range.
+
+  reaction_shot_frequency:
+    type: enum
+    values: [low, medium, high]
+    description: |
+      How often character reaction shots appear.
+      high = shojo/josei (emotional expression is primary content).
+      low = seinen/iyashikei (restraint is the grammar).
+
+  spread_frequency:
+    type: enum
+    values: [rare, periodic, frequent]
+    description: |
+      How often double-page spreads appear.
+      rare = iyashikei/josei. periodic = seinen/shojo. frequent = battle shonen.
+
+  narration_tolerance:
+    type: enum
+    values: [minimal, moderate, generous]
+    description: |
+      How much internal narration/caption box text is acceptable.
+      minimal = pure visual storytelling (iyashikei, horror).
+      moderate = selective narration (seinen, shojo).
+      generous = caption-heavy exposition (Western literary influence acceptable here).
+      MDLG-11 (restraint_over_exposition) validates shojo/josei stays at minimal or moderate.
+
+# --- adaptation ---
+  adaptation_targets:
+    type: list
+    item_type: enum
+    item_values: [print, webtoon, motion_comic, vertical_teaser]
+    description: |
+      Intended delivery formats. Controls layout template selection.
+      webtoon = vertical scroll, left-to-right.
+      print = traditional right-to-left (Japanese convention) or left-to-right.
+      motion_comic = panel-by-panel video rendering.
+      vertical_teaser = short-form social clip.
+
+# --- optional fields ---
+optional_fields:
+  series_notes:
+    type: string
+    description: Free-form operator notes about this series' intent.
+
+  compat_tags:
+    type: list
+    item_type: string
+    description: |
+      Backward compat tags. Variants without compat_tags are treated as
+      genre-agnostic (they stay compatible with any market_demo).
+
+  created_at:
+    type: string
+    format: ISO 8601
+    description: Profile creation timestamp.
+
+  status:
+    type: enum
+    values: [draft, active, deprecated]
+    default: draft
+
+# --- determinism integration ---
+determinism_note: |
+  manga_profile_seed = sha256(title_id + ":" + brand_id)[:12]
+
+  This seed is used ONLY for downstream bank filtering (selecting from within
+  profile-filtered beat pools, setting banks, etc.).
+
+  The manga_profile itself is ASSIGNED by an operator at authoring time.
+  It is stored as a YAML file and loaded by profile_loader.py at runtime.
+  The profile does NOT change between renders for the same title_id.
+
+  Downstream render selection remains:
+    sha256(topic | persona | arc | chapter | role | title_id)[:8]
+
+  Profile fields narrow the pool; hash selection picks within the pool.
+  This preserves full determinism: same inputs always produce same outputs.
+
+# --- validation rules ---
+validation_rules:
+  - rule: chapter_hook_consistent_with_serialization_engine
+    description: |
+      cliffhanger_driven serialization_engine requires chapter_hook_family
+      in [revelation, interruption, betrayal, new_rival, hidden_truth_glimpse, ominous_image].
+      mood_based serialization_engine allows almost_confession, ambiguous_line, ominous_image.
+  - rule: visual_grammar_consistent_with_market_demo
+    description: |
+      soft_shojo_decorative and grounded_josei_realism should only appear with
+      market_demo in [shojo, josei]. kinetic_shonen should only appear with
+      market_demo in [shonen]. (Warn on mismatch, do not block — intentional subversion allowed.)
+  - rule: silent_panel_ratio_in_range
+    description: |
+      silent_panel_ratio must be within [0.0, 0.6].
+      iyashikei genre_family should be >= 0.25.
+      horror genre_family should be >= 0.15.
+  - rule: words_per_page_consistent_with_narration_tolerance
+    description: |
+      If narration_tolerance = minimal and words_per_page_target > 60, warn.
+      If narration_tolerance = generous and words_per_page_target < 80, warn.

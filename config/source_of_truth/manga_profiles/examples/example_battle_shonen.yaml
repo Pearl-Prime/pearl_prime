@@ -1,0 +1,96 @@
+# Manga Profile — Example 2: Battle Shonen
+# Series: Generic battle shonen template
+# Demonstrates: aspiration emotional engine, kinetic_shonen visual grammar,
+#               rivalry + tournament_ladder, cliffhanger-driven hooks
+
+manga_profile_schema_version: "1.0.0"
+status: draft
+created_at: "2026-04-19"
+
+# --- core identity ---
+title_id: battle_shonen_template_001
+brand_id: cognitive_clarity
+# cognitive_clarity brand = "Stark Zen Ink" archetype — high contrast, clean linework.
+# This maps cleanly to kinetic_shonen visual grammar.
+
+market_demo: shonen
+# shonen: teen male readers (and broad crossover appeal).
+# grammar: aspiration, escalation, sacrifice rituals, power progression.
+
+genre_family: battle
+subgenre: "tournament_arc_martial_arts"
+
+emotional_engine: aspiration
+# aspiration: reader lives through protagonist's upward striving.
+# Setbacks are fuel. Every loss leads to the next power level.
+# Reader positioned as peer of protagonist — discovering alongside them.
+
+reader_promise: "You will feel the specific electricity of someone becoming who they were always meant to be."
+
+# --- serialization ---
+serialization_engine: tournament_ladder
+# tournament_ladder: bracket advancement drives structure.
+# Each chapter = a match result + setup for the next challenge.
+# Stakes escalate via opponent strength, not narrative complexity.
+
+chapter_hook_family: new_rival
+# new_rival: a stronger/stranger opponent appears at chapter end.
+# The strongest hook driver for shonen readers — "who IS that?"
+# Drives next-chapter purchase compulsively.
+
+# --- visual grammar ---
+visual_grammar: kinetic_shonen
+# kinetic_shonen: speed lines, impact frames, dynamic angles, screen tone bursts.
+# Large slanted panels for impact moments. Close-ups on hands/eyes during techniques.
+
+line_weight_profile: heavy
+# Heavy, bold lines. Impact frames demand weight.
+# Variable weight on technique moments (line weight = power level).
+
+black_fill_ratio: 0.22
+# Medium-high black fill. Shadow on villains, negative space in power-up moments.
+
+screentone_profile: dense
+# Dense screen tones for emotional backgrounds, power auras, environmental texture.
+
+# --- pacing contract ---
+words_per_page_target: 95
+# Medium-high word density. Battle calls, observer reactions, internal monologue.
+# Technique names are single words but appear frequently.
+
+silent_panel_ratio: 0.12
+# Low silence ratio. Impact moments are silent; everything else drives forward.
+# Validates against MDLG-07 (silence_density gate).
+
+reaction_shot_frequency: high
+# High reaction shots — observer characters confirm power shifts for readers.
+# The ensemble exists to externalize what the protagonist is doing.
+
+spread_frequency: periodic
+# Double-page spreads for major power-up reveals and final technique panels.
+# Periodic = every 2-3 chapters in tournament arcs.
+
+narration_tolerance: moderate
+# Internal monologue during fights: tactical analysis, emotional revelation,
+# flashback triggers. "Sensei's words echo in my mind..."
+# Captions acceptable at turning points and training sequences.
+
+# --- adaptation ---
+adaptation_targets:
+  - print
+  - motion_comic
+  - vertical_teaser
+# print: standard right-to-left manga format.
+# motion_comic: panel-by-panel video with technique SFX.
+# vertical_teaser: highlight reel clips for social distribution.
+
+# --- operator notes ---
+series_notes: |
+  Standard tournament arc structure. 52 planned chapters, 4 arcs.
+  Chapter_end_hooks must be new_rival or revelation family (no soft close on weekly serialization).
+  The aspiration engine requires the protagonist to VISIBLY improve — power levels
+  must feel earned. Avoid power-up-via-emotion without shown training basis (Naruto
+  late-arc failure mode).
+  Observer dialogue ("Impossible...!") is load-bearing genre content, not noise.
+
+compat_tags: []
