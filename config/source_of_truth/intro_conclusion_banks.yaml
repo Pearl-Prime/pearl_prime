@@ -5,6 +5,10 @@
 # Variables: {topic_display}, {persona_display}, {mechanism_alias}, {chapter_count}
 # Anti-spam: SHA256 signature → 12% cap per brand/quarter + duplicate gate
 # Fallback: if template lacks the needed size, resolver falls back: lean → short → full → content
+#
+# manga_compat: optional field on templates. Entries without manga_compat
+# are AGNOSTIC (usable by any MangaProfile). See ProfileAwareSelector for usage.
+# See: config/source_of_truth/manga_profiles/schema.yaml for valid values.
 
 schema_version: "2.0"
 
@@ -89,6 +93,11 @@ introduction:
 
       - id: body_first
         title: "Introduction"
+        manga_compat:
+          allowed_market_demos: [josei, shojo, seinen]
+          allowed_emotional_engines: [cozy_restoration, restoration, quiet_recognition, tenderness, identity_rebuild, emotional_truth]
+          # Body-sensation / slow-noticing register matches iyashikei and josei grammar.
+          # Shonen/battle intro grammar is momentum-forward, not inward-turning.
         lean: >-
           Before we talk about {topic_display}, notice one place in your body holding tension right now. That noticing is the method.
         short: >-
@@ -208,6 +217,11 @@ introduction:
       templates:
         - id: exec_pattern
           title: "Introduction"
+          manga_compat:
+            allowed_market_demos: [seinen, josei]
+            allowed_emotional_engines: [competence, identity_rebuild, emotional_truth, obsession, responsibility]
+            # Corporate/performance-under-pressure register fits seinen and adult josei.
+            # The "you are good at your job" opening is alien to shonen/shojo grammar.
           content: |
             You are good at your job. That is part of the problem.
 
@@ -217,6 +231,10 @@ introduction:
 
         - id: exec_no_theory
           title: "Introduction"
+          manga_compat:
+            allowed_market_demos: [seinen, josei]
+            allowed_emotional_engines: [competence, identity_rebuild, emotional_truth, responsibility]
+            # Efficiency-first, anti-theory framing belongs to seinen/adult-josei registers.
           content: |
             You do not need another framework. You have frameworks. What you need is to feel what {topic_display} is doing in your body while you are in the middle of using those frameworks.
 

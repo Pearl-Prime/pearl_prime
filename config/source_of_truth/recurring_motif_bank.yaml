@@ -1,6 +1,10 @@
 # Structural Variation V4. Recurring motif bank.
 # One motif selected per book; injection: max 2 per chapter, max 12 per book, min word distance 250.
 # Content contract: 6 motifs x 3 variants minimum for production.
+#
+# manga_compat: optional field on motifs. Entries without manga_compat
+# are AGNOSTIC (usable by any MangaProfile). See ProfileAwareSelector for usage.
+# See: config/source_of_truth/manga_profiles/schema.yaml for valid values.
 
 schema_version: "1.0"
 
@@ -42,6 +46,11 @@ motifs:
     persona_tags: ["healthcare_rns", "nyc_executives"]
     topic_tags: ["anxiety", "boundaries", "self_worth"]
     arc_tags: []
+    manga_compat:
+      allowed_market_demos: [josei, shojo, seinen]
+      allowed_emotional_engines: [cozy_restoration, restoration, quiet_recognition, tenderness, longing, identity_rebuild]
+      # Body-awareness motifs resonate most in iyashikei/healing and josei registers.
+      # Shonen/battle readers encounter body knowledge differently (power, endurance).
     weights:
       default: 0.9
     variants:
@@ -74,6 +83,12 @@ motifs:
     persona_tags: ["educators", "healthcare_rns"]
     topic_tags: ["compassion_fatigue", "grief"]
     arc_tags: []
+    manga_compat:
+      allowed_market_demos: [josei, shojo, seinen]
+      allowed_emotional_engines: [tenderness, grief, quiet_recognition, cozy_restoration, restoration, emotional_truth]
+      # Witnessing/self-compassion motifs belong to emotional registers where
+      # vulnerability is the grammar. Shonen battle grammar frames self-awareness
+      # differently (resilience, never giving up) rather than witnessing.
     weights:
       default: 0.85
     variants:
