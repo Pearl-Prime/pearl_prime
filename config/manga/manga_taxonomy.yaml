@@ -1,5 +1,6 @@
 version: 1
 last_updated: 2026-04-19
+reconciliation_status: verified_2026-04-19
 purpose: >-
   Canonical taxonomy for manga-oriented catalog planning, generation, QA, and
   adaptation in Phoenix Omega. This file defines market demos, genre families,
@@ -67,6 +68,7 @@ market_demos:
 genre_families:
   - id: battle
     label: Battle
+    ite_profile_ref: shonen  # primary match; seinen also applicable for adult battle titles
     common_demos: [shonen, seinen]
     default_emotional_engines: [aspiration, rivalry, conviction]
     default_serialization_engines: [cliffhanger_escalation, tournament_ladder, quest_progression]
@@ -74,6 +76,7 @@ genre_families:
 
   - id: romance
     label: Romance
+    ite_profile_ref: webtoon_romance  # closest match; shojo also applicable for print romance
     common_demos: [shojo, josei, seinen]
     default_emotional_engines: [longing, tenderness, emotional_recognition]
     default_serialization_engines: [slow_burn_relationship, emotional_misread_chain]
@@ -81,6 +84,7 @@ genre_families:
 
   - id: slice_of_life
     label: Slice of Life
+    ite_profile_ref: null  # no direct match; iyashikei partially overlaps for healing subtype
     common_demos: [shojo, josei, seinen, kodomo]
     default_emotional_engines: [restoration, quiet_recognition, warmth]
     default_serialization_engines: [ritual_daily_life, episodic_comfort]
@@ -88,6 +92,7 @@ genre_families:
 
   - id: horror
     label: Horror
+    ite_profile_ref: horror  # direct match in genre_ite_profiles.yaml
     common_demos: [seinen, shonen, shojo]
     default_emotional_engines: [dread, obsession, helplessness]
     default_serialization_engines: [mystery_reveal_chain, dread_escalation]
@@ -95,6 +100,7 @@ genre_families:
 
   - id: mystery
     label: Mystery
+    ite_profile_ref: null  # no mystery-specific ITE profile; seinen closest demo match
     common_demos: [seinen, shonen, josei]
     default_emotional_engines: [curiosity, tension, suspicion]
     default_serialization_engines: [mystery_reveal_chain, procedural_case_loop]
@@ -102,6 +108,7 @@ genre_families:
 
   - id: sports
     label: Sports
+    ite_profile_ref: sports  # direct match in genre_ite_profiles.yaml
     common_demos: [shonen, seinen, shojo]
     default_emotional_engines: [rivalry, aspiration, team_belonging]
     default_serialization_engines: [tournament_ladder, training_payoff_cycle]
@@ -109,6 +116,7 @@ genre_families:
 
   - id: fantasy_adventure
     label: Fantasy Adventure
+    ite_profile_ref: isekai  # closest match (isekai covers portal/world-jump fantasy)
     common_demos: [shonen, shojo, seinen]
     default_emotional_engines: [wonder, aspiration, quest_bonding]
     default_serialization_engines: [quest_progression, ensemble_rotation]
@@ -116,6 +124,7 @@ genre_families:
 
   - id: workplace
     label: Workplace
+    ite_profile_ref: null  # no workplace-specific ITE profile; manhwa partially applicable
     common_demos: [josei, seinen]
     default_emotional_engines: [identity_rebuild, emotional_truth, quiet_recognition]
     default_serialization_engines: [procedural_case_loop, slow_burn_relationship, ensemble_rotation]
@@ -123,6 +132,7 @@ genre_families:
 
   - id: food
     label: Food
+    ite_profile_ref: null  # no food-specific ITE profile; cultivation partially applicable for craft
     common_demos: [seinen, josei, kodomo, shonen]
     default_emotional_engines: [comfort, craft_pride, connection]
     default_serialization_engines: [episodic_comfort, procedural_case_loop, training_payoff_cycle]
@@ -130,6 +140,7 @@ genre_families:
 
   - id: family
     label: Family
+    ite_profile_ref: null  # no family-specific ITE profile
     common_demos: [josei, seinen, kodomo, shojo]
     default_emotional_engines: [grief, warmth, repair, emotional_truth]
     default_serialization_engines: [ritual_daily_life, emotional_misread_chain]
@@ -137,6 +148,7 @@ genre_families:
 
   - id: procedural
     label: Procedural
+    ite_profile_ref: null  # no procedural-specific ITE profile
     common_demos: [seinen, josei, shonen]
     default_emotional_engines: [competence, tension, responsibility]
     default_serialization_engines: [procedural_case_loop, mystery_reveal_chain]
@@ -144,6 +156,7 @@ genre_families:
 
   - id: essay
     label: Essay / Reflective
+    ite_profile_ref: null  # no essay-specific ITE profile
     common_demos: [seinen, josei]
     default_emotional_engines: [reflection, emotional_truth, quiet_recognition]
     default_serialization_engines: [reflective_progression, episodic_comfort]
@@ -151,6 +164,7 @@ genre_families:
 
   - id: healing
     label: Healing / Iyashikei
+    ite_profile_ref: iyashikei  # direct match in genre_ite_profiles.yaml
     common_demos: [seinen, josei, shojo]
     default_emotional_engines: [restoration, tenderness, quiet_recognition]
     default_serialization_engines: [episodic_comfort, ritual_daily_life]
@@ -158,6 +172,7 @@ genre_families:
 
   - id: historical
     label: Historical
+    ite_profile_ref: null  # no historical-specific ITE profile
     common_demos: [seinen, shojo, josei, shonen]
     default_emotional_engines: [gravitas, wonder, loss, conviction]
     default_serialization_engines: [quest_progression, ensemble_rotation, political_escalation]
@@ -165,6 +180,7 @@ genre_families:
 
   - id: comedy
     label: Comedy
+    ite_profile_ref: null  # no comedy-specific ITE profile
     common_demos: [shonen, shojo, kodomo, seinen]
     default_emotional_engines: [play, absurdity, release]
     default_serialization_engines: [episodic_comfort, gag_reset_loop]
@@ -449,6 +465,7 @@ serialization_engines:
 visual_grammars:
   - id: kinetic_action
     label: Kinetic Action
+    style_archetype_ref: power_progression  # direct match in style_archetypes.yaml
     traits:
       - dynamic_panel_angles
       - speed_lines
@@ -457,6 +474,7 @@ visual_grammars:
 
   - id: impact_contrast
     label: Impact Contrast
+    style_archetype_ref: dark_psychological  # partial match; heavy B&W contrast, dark shadows
     traits:
       - black_white_extremes
       - explosive_moments
@@ -464,6 +482,7 @@ visual_grammars:
 
   - id: decorative_romance
     label: Decorative Romance
+    style_archetype_ref: webtoon_vertical_romance  # closest match; soft shading, romantic aesthetic
     traits:
       - emotional_ornament
       - gaze_emphasis
@@ -472,6 +491,7 @@ visual_grammars:
 
   - id: intimate_realism
     label: Intimate Realism
+    style_archetype_ref: hyper_clean_cinematic  # closest match; detailed, polished, cinematic
     traits:
       - body_language_precision
       - facial_microexpression
@@ -480,6 +500,7 @@ visual_grammars:
 
   - id: grounded_realism
     label: Grounded Realism
+    style_archetype_ref: null  # no direct archetype; closest is hyper_clean_cinematic but lacks gritty realism variant
     traits:
       - spatial_clarity
       - realistic_proportion
@@ -488,6 +509,7 @@ visual_grammars:
 
   - id: sparse_atmosphere
     label: Sparse Atmosphere
+    style_archetype_ref: cozy_iyashikei  # closest match; soft, minimal, healing aesthetic
     traits:
       - negative_space
       - quiet_beats
@@ -496,6 +518,7 @@ visual_grammars:
 
   - id: dread_contrast
     label: Dread Contrast
+    style_archetype_ref: dark_psychological  # direct match; high contrast, heavy ink, dark shadows
     traits:
       - unsettling_crops
       - harsh_shadows
@@ -504,6 +527,7 @@ visual_grammars:
 
   - id: body_horror_expressionism
     label: Body Horror Expressionism
+    style_archetype_ref: dark_psychological  # closest match; psychological, high contrast
     traits:
       - anatomical_instability
       - visual_discomfort
@@ -512,6 +536,7 @@ visual_grammars:
 
   - id: sports_motion_clarity
     label: Sports Motion Clarity
+    style_archetype_ref: power_progression  # closest match; dynamic action, speed lines
     traits:
       - readable_body_mechanics
       - momentum_traces
@@ -520,6 +545,7 @@ visual_grammars:
 
   - id: ornate_fantasy
     label: Ornate Fantasy
+    style_archetype_ref: null  # no fantasy-ornate archetype in style_archetypes.yaml (gap)
     traits:
       - worldbuilding_detail
       - costume_emphasis
@@ -528,6 +554,7 @@ visual_grammars:
 
   - id: sensory_closeup
     label: Sensory Closeup
+    style_archetype_ref: null  # no sensory/food-closeup archetype in style_archetypes.yaml (gap)
     traits:
       - texture_focus
       - appetite_or_craft_detail
@@ -536,6 +563,7 @@ visual_grammars:
 
   - id: everyday_warmth
     label: Everyday Warmth
+    style_archetype_ref: cozy_iyashikei  # close match; warm tones, rounded shapes, gentle
     traits:
       - approachable_faces
       - cozy_environments
@@ -544,6 +572,7 @@ visual_grammars:
 
   - id: symbolic_reflection
     label: Symbolic Reflection
+    style_archetype_ref: null  # no symbolic/essay archetype in style_archetypes.yaml (gap)
     traits:
       - metaphor_panels
       - inner_state_externalization
@@ -671,3 +700,102 @@ notes:
   - >-
     Reader promise is not decorative metadata. It should influence hooks,
     chapter-end logic, visual emphasis, and adaptation packaging.
+
+reconciliation_notes:
+  reconciled_at: "2026-04-19"
+  reconciled_against:
+    - config/manga/genre_ite_profiles.yaml
+    - config/manga/style_archetypes.yaml
+
+  genre_family_gaps:
+    # Genre families in manga_taxonomy.yaml with no matching ITE profile in genre_ite_profiles.yaml.
+    # These are candidates for new ITE profile creation.
+    - id: slice_of_life
+      note: >-
+        No slice-of-life ITE profile. Iyashikei partially covers healing subtype.
+        A general slice_of_life profile is needed for kodomo and shojo-everyday titles.
+    - id: mystery
+      note: >-
+        No mystery or psychological-thriller ITE profile. Seinen demo covers some overlap.
+        A mystery/suspense ITE profile should be created.
+    - id: workplace
+      note: >-
+        No workplace ITE profile. Manhwa covers some overlap but is format-keyed, not genre-keyed.
+        A josei-workplace ITE profile is needed for adult-female workplace titles.
+    - id: food
+      note: >-
+        No food ITE profile. Cultivation covers craft progression but not food specifically.
+        A food/culinary ITE profile is needed for shokugeki-style titles.
+    - id: family
+      note: >-
+        No family ITE profile. This is a significant gap given josei/seinen family stories.
+    - id: procedural
+      note: >-
+        No procedural ITE profile. Mystery covers some overlap. A procedural/case-loop
+        ITE profile is needed for medical drama and detective titles.
+    - id: essay
+      note: >-
+        No essay/reflective ITE profile. This is a niche but present category in josei/seinen.
+    - id: historical
+      note: >-
+        No historical ITE profile. Quest and political-escalation serialization engines
+        are covered by other profiles but without historical-specific ITE configuration.
+    - id: comedy
+      note: >-
+        No comedy ITE profile. Gag-reset-loop and episodic-comfort engines are covered
+        by other profiles but comedy-specific regulation is absent.
+
+  visual_grammar_gaps:
+    # Visual grammars in manga_taxonomy.yaml with no matching style archetype in style_archetypes.yaml.
+    - id: grounded_realism
+      note: >-
+        No grounded-realism archetype. Hyper_clean_cinematic is too polished; a
+        raw-ink-realism or seinen-grounded archetype is needed.
+    - id: ornate_fantasy
+      note: >-
+        No fantasy-ornate archetype. Power_progression is too battle-focused.
+        A world-building/ceremonial-fantasy archetype is needed.
+    - id: sensory_closeup
+      note: >-
+        No food/sensory-closeup archetype. A warm-ink-closeup archetype for food
+        and craft manga is needed.
+    - id: symbolic_reflection
+      note: >-
+        No symbolic/essay archetype. Cozy_iyashikei is the closest but lacks the
+        metaphor-panel and contemplative-spacing characteristics.
+    - id: comedic_deformation
+      note: >-
+        comedic_deformation is in manga_taxonomy.yaml visual_grammars list under comedy
+        genre_family but not defined as a standalone visual_grammar entry. Meme_chaotic_humor
+        is the closest style archetype but comedic_deformation needs a formal entry.
+
+  ite_profiles_in_config_not_in_taxonomy:
+    # Profiles in genre_ite_profiles.yaml that have no corresponding genre_family in taxonomy.
+    # These represent ITE profiles that need a taxonomy genre_family entry or are sub-profile variants.
+    - id: cultivation
+      note: >-
+        cultivation ITE profile exists but no cultivation genre_family in taxonomy.
+        Should be added as a genre_family (common in Chinese-origin manhwa/donghua).
+    - id: manhwa
+      note: >-
+        manhwa ITE profile exists but manhwa is a format/origin marker, not a genre_family.
+        Consider whether manhwa should become a market_demo modifier or separate taxonomy axis.
+    - id: webtoon_romance
+      note: >-
+        webtoon_romance ITE profile exists; taxonomy has romance genre_family but no
+        webtoon-format-specific variant. Consider a webtoon_romance subgenre entry.
+    - id: isekai
+      note: >-
+        isekai ITE profile exists; taxonomy has fantasy_adventure but no isekai subgenre.
+        Should be added as a subgenre under fantasy_adventure.
+
+  style_archetypes_in_config_not_in_taxonomy:
+    # Archetypes in style_archetypes.yaml that have no visual_grammar mapping in taxonomy.
+    - id: social_media_simulacra
+      note: >-
+        social_media_simulacra archetype (modern anime + UI elements + smartphone) has no
+        corresponding visual_grammar in taxonomy. Needs a new visual_grammar entry.
+    - id: interactive_branching
+      note: >-
+        interactive_branching archetype (visual novel style) has no visual_grammar in taxonomy.
+        Needs a new visual_grammar entry for VN/choice-based formats.
