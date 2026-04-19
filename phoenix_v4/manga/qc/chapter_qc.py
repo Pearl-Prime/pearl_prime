@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 
 from phoenix_v4.manga.chapter.visual_from_script import iter_panels_from_chapter_script
 from phoenix_v4.manga.models import paths as manga_paths
 from phoenix_v4.manga.models.validation import load_and_validate, validate_instance
+
+if TYPE_CHECKING:
+    from phoenix_v4.manga.series.profile_loader import MangaProfile
 
 
 def _lettering_by_panel(lettering: Mapping[str, Any]) -> dict[str, bool]:
@@ -37,6 +40,7 @@ def build_revision_queue_for_chapter(
     workspace: Path,
     *,
     schema_version: str = "1.0.0",
+    manga_profile: "MangaProfile | None" = None,
 ) -> dict[str, Any]:
     """Read chapter + series paths under ``workspace``; return validated revision_queue."""
     ws = Path(workspace).resolve()
@@ -183,6 +187,24 @@ def build_revision_queue_for_chapter(
                     "description": str(e),
                 }
             )
+
+    # Profile-dependent gates (only if profile is provided)
+    if manga_profile is not None:
+        from phoenix_v4.manga.qc.hook_gate import check_chapter_hook
+        if script_p.is_file():
+            try:
+                script_data = json.loads(script_p.read_text(encoding="utf-8"))
+                hook_issue = check_chapter_hook(script_data, manga_profile)
+                if hook_issue:
+                    issues.append(hook_issue)
+            except Exception as exc:
+                issues.append({
+                    "issue_code": "HOOK_GATE_ERROR",
+                    "gate_id": "MANGA.CHAPTER.HOOK",
+                    "severity": "MAJOR",
+                    "stage_owner": "chapter_qc",
+                    "description": f"Hook gate check failed: {exc}",
+                })
 
     blockers = [x for x in issues if x.get("severity") == "BLOCKER"]
     clearance = "pass" if not blockers else "hold"

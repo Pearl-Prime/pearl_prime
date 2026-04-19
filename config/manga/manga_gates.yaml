@@ -13,3 +13,7 @@ gates:
   - gate_id: "MANGA.SILENCE.STRUCTURE"
     severity: "BLOCKER"
     description: "Silent panel intent must remain machine-visible so silence-specific QC can run later."
+  - gate_id: "MANGA.CHAPTER.HOOK"
+    severity: "MAJOR"
+    description: "Chapter final beat should match the series profile's chapter_hook_family. Requires manga_profile to be loaded for the series."
+    stage_owner: "chapter_qc"
