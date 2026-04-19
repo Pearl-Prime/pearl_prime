@@ -29,3 +29,7 @@ gates:
     severity: "MAJOR"
     description: "Romance and josei/shojo chapters must show emotional moments through action/gesture/silence rather than narration-heavy exposition. Triggered for market_demo=josei|shojo or genre_family=romance."
     stage_owner: "chapter_qc"
+  - gate_id: "MANGA.CATALOG.HOMOGENEITY"
+    severity: "MAJOR"
+    description: "No two active manga_profiles may share (emotional_engine + chapter_hook_family). Run via scripts/manga/check_catalog_homogeneity.py."
+    stage_owner: "catalog_review"
