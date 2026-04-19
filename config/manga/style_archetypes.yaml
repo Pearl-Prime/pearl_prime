@@ -25,3 +25,18 @@ style_archetypes:
   interactive_branching:
     prompt: "anime, clean digital art, cel shaded, choice indicators, game UI elements, visual novel style"
     negative: "sketch, rough, painterly, dark"
+  grounded_realism:
+    prompt: "manga, thick ink lines, heavy blacks, expressive line weight, raw realistic style, seinen aesthetic, detailed backgrounds, emotional close-ups"
+    negative: "colorful, glossy, pastel, chibi, cute, digital smooth"
+  ornate_fantasy:
+    prompt: "manga, detailed architecture, elaborate costume design, ceremonial aesthetic, world-building panels, intricate linework, fantasy illustration"
+    negative: "modern, casual, sketch, rough, plain background"
+  sensory_closeup:
+    prompt: "manga, warm ink, food illustration style, sensory detail, steam, texture close-up, cozy kitchen aesthetic, soft tones, inviting"
+    negative: "dark, action, violence, cold, stark"
+  symbolic_reflection:
+    prompt: "manga, minimalist panels, symbolic imagery, contemplative spacing, essay-style illustration, metaphor visual, sparse line"
+    negative: "action, crowded, busy, high contrast, dark"
+  comedic_deformation:
+    prompt: "manga, 4-koma style, exaggerated reaction face, super-deformed, chibi burst, comedy timing panel, bold expression lines, sweat drops"
+    negative: "realistic, serious, dark, horror, cinematic"
