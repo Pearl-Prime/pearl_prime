@@ -191,6 +191,7 @@ def build_revision_queue_for_chapter(
     # Profile-dependent gates (only if profile is provided)
     if manga_profile is not None:
         from phoenix_v4.manga.qc.hook_gate import check_chapter_hook
+        from phoenix_v4.manga.qc.pacing_gates import check_silence_density, check_genre_authenticity
         if script_p.is_file():
             try:
                 script_data = json.loads(script_p.read_text(encoding="utf-8"))
@@ -204,6 +205,23 @@ def build_revision_queue_for_chapter(
                     "severity": "MAJOR",
                     "stage_owner": "chapter_qc",
                     "description": f"Hook gate check failed: {exc}",
+                })
+            try:
+                script_data = json.loads(script_p.read_text(encoding="utf-8"))
+                lettering_data = json.loads(lettering_p.read_text(encoding="utf-8")) if lettering_p.is_file() else {}
+                silence_issue = check_silence_density(script_data, lettering_data, manga_profile)
+                if silence_issue:
+                    issues.append(silence_issue)
+                genre_issue = check_genre_authenticity(script_data, manga_profile)
+                if genre_issue:
+                    issues.append(genre_issue)
+            except Exception as exc:
+                issues.append({
+                    "issue_code": "PACING_GATE_ERROR",
+                    "gate_id": "MANGA.GENRE.AUTHENTICITY",
+                    "severity": "MAJOR",
+                    "stage_owner": "chapter_qc",
+                    "description": f"Pacing gate check failed: {exc}",
                 })
 
     blockers = [x for x in issues if x.get("severity") == "BLOCKER"]
