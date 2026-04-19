@@ -334,8 +334,55 @@ def _stage_ite_qc(workspace: Path) -> None:
     )
 
 
-def _stage_qc(workspace: Path) -> None:
-    rq = build_revision_queue_for_chapter(workspace)
+def _resolve_manga_profile(
+    workspace: Path,
+    *,
+    brand_id: str | None = None,
+    genre_id: str | None = None,
+) -> "MangaProfile | None":
+    """Try to load a MangaProfile for this chapter. Returns None if unavailable (all profile gates skip)."""
+    try:
+        from phoenix_v4.manga.series.profile_loader import (
+            MangaProfile,
+            find_profile_for_brand_genre,
+            find_profile_for_series,
+        )
+
+        # Priority 1: explicit brand_id + genre_id params (caller-supplied)
+        if brand_id and genre_id:
+            p = find_profile_for_brand_genre(brand_id, genre_id)
+            if p is not None:
+                return p
+
+        # Priority 2: brand_id + genre_id in chapter_request.json
+        cr_path = workspace / manga_paths.CHAPTER_REQUEST
+        if cr_path.is_file():
+            try:
+                cr = json.loads(cr_path.read_text(encoding="utf-8"))
+                cr_brand = str(cr.get("brand_id") or "")
+                cr_genre = str(cr.get("genre_family") or "")
+                if cr_brand and cr_genre:
+                    p = find_profile_for_brand_genre(cr_brand, cr_genre)
+                    if p is not None:
+                        return p
+
+                # Priority 3: series_id lookup (exact title_id match in profiles dir)
+                series_id = str(cr.get("series_id") or "")
+                if series_id:
+                    p = find_profile_for_series(series_id)
+                    if p is not None:
+                        return p
+            except Exception:
+                pass
+
+        return None
+    except Exception:
+        return None
+
+
+def _stage_qc(workspace: Path, *, brand_id: str | None = None, genre_id: str | None = None) -> None:
+    manga_profile = _resolve_manga_profile(workspace, brand_id=brand_id, genre_id=genre_id)
+    rq = build_revision_queue_for_chapter(workspace, manga_profile=manga_profile)
     (workspace / manga_paths.REVISION_QUEUE).write_text(
         json.dumps(rq, indent=2) + "\n", encoding="utf-8"
     )
@@ -394,6 +441,8 @@ def run_chapter_dag(
     style_id: str = "dark_psychological",
     teacher_id: str = "ahjan",
     sdf_stub: bool = True,
+    brand_id: str | None = None,
+    genre_id: str | None = None,
 ) -> list[str]:
     """Execute DAG stages (skipping those already ``passed``). Returns stages executed."""
     ws = Path(workspace).resolve()
@@ -418,7 +467,7 @@ def run_chapter_dag(
         sid.ITE_COLOR_ARC: lambda: _stage_ite_color_arc(ws),
         sid.ITE_FRACTAL: lambda: _stage_ite_fractal(ws),
         sid.ITE_QC: lambda: _stage_ite_qc(ws),
-        sid.CHAPTER_QC: lambda: _stage_qc(ws),
+        sid.CHAPTER_QC: lambda: _stage_qc(ws, brand_id=brand_id, genre_id=genre_id),
         sid.SERIES_MEMORY_MERGE: lambda: _stage_memory(ws),
     }
 
@@ -464,6 +513,8 @@ def run_chapter_dag_with_auto_revision(
     style_id: str = "dark_psychological",
     teacher_id: str = "ahjan",
     sdf_stub: bool = True,
+    brand_id: str | None = None,
+    genre_id: str | None = None,
 ) -> tuple[list[str], int]:
     """On QC hold, clear manifests from earliest implicated stage and re-run (bounded).
 
@@ -491,6 +542,8 @@ def run_chapter_dag_with_auto_revision(
                 style_id=style_id,
                 teacher_id=teacher_id,
                 sdf_stub=sdf_stub,
+                brand_id=brand_id,
+                genre_id=genre_id,
             )
             all_ran.extend(ran)
             return all_ran, round_idx + 1
