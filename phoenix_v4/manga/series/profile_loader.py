@@ -65,6 +65,8 @@ VALID_VISUAL_GRAMMARS = frozenset([
     "body_horror_expressionism", "sports_motion_clarity", "ornate_fantasy",
     "sensory_closeup", "everyday_warmth", "symbolic_reflection",
     "healing_iyashikei",
+    # digital-native / platform styles
+    "social_media_simulacra",
 ])
 REQUIRED_FIELDS = (
     "title_id", "brand_id", "market_demo", "genre_family",
@@ -182,6 +184,27 @@ def load_profile(path: Path) -> MangaProfile:
         adaptation_targets=tuple(data.get("adaptation_targets") or []),
         _raw=data,
     )
+
+
+def find_profile_for_brand_genre(
+    brand_id: str,
+    genre_family: str,
+    profiles_dir: Path | None = None,
+) -> MangaProfile | None:
+    """Find the brand-genre lane template profile. Returns None if not found."""
+    root = repo_root()
+    brands_dir = (profiles_dir or (root / "config" / "source_of_truth" / "manga_profiles")) / "brands"
+    if not brands_dir.is_dir():
+        return None
+    for p in brands_dir.glob("*.yaml"):
+        try:
+            data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+            if (str(data.get("brand_id") or "") == brand_id and
+                    str(data.get("genre_family") or "") == genre_family):
+                return load_profile(p)
+        except Exception:
+            continue
+    return None
 
 
 def find_profile_for_series(series_id: str, profiles_dir: Path | None = None) -> MangaProfile | None:

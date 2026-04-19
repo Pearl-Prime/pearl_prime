@@ -29,6 +29,10 @@ def scan_profiles(profiles_dir: Path) -> list[MangaProfile]:
     for p in sorted(profiles_dir.glob("**/*.yaml")):
         if p.name.startswith("schema"):
             continue
+        # Skip reference examples — they are per-series demonstration files,
+        # not catalog lane templates, and should not be checked for collisions.
+        if "examples" in p.parts:
+            continue
         try:
             profiles.append(load_profile(p))
         except Exception as exc:

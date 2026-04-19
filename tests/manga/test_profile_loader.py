@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import pytest
-from phoenix_v4.manga.series.profile_loader import load_profile, MangaProfile
+from phoenix_v4.manga.series.profile_loader import load_profile, MangaProfile, find_profile_for_brand_genre
 from phoenix_v4.manga.models.validation import repo_root
 
 
@@ -53,6 +53,13 @@ def test_missing_required_field_raises():
     with pytest.raises(ValueError, match="missing required field"):
         load_profile(path)
     path.unlink(missing_ok=True)
+
+
+def test_find_profile_for_brand_genre():
+    profile = find_profile_for_brand_genre("stillness_press", "healing")
+    assert profile is not None
+    assert profile.brand_id == "stillness_press"
+    assert profile.emotional_engine == "cozy_restoration"
 
 
 def test_invalid_enum_raises():

@@ -1,0 +1,36 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-20"
+profile_type: brand_genre_lane
+# Profile type: brand-genre lane template. All series within this brand+genre
+# lane use this profile. Per-series variation comes from seed selection.
+
+title_id: warrior_calm_cultivation
+brand_id: warrior_calm
+teacher: master_wu
+
+market_demo: shonen
+genre_family: battle
+subgenre: "panic_composure_warrior"
+
+emotional_engine: rivalry
+reader_promise: "You will discover that calm is not weakness — it is the sharpest weapon."
+
+serialization_engine: tournament_ladder
+chapter_hook_family: new_rival
+
+visual_grammar: fantasy_ornate
+line_weight_profile: heavy
+black_fill_ratio: 0.30
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 110
+  silent_panel_ratio: 0.15
+  reaction_shot_frequency: high
+  spread_frequency: periodic
+
+narration_tolerance: minimal
+adaptation_targets:
+  - print
+  - webtoon
