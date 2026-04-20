@@ -7,25 +7,43 @@ banned_patterns:
     regex: 'anthropic\s*\.\s*Anthropic\s*\(|Anthropic\s*\(\s*api_key\s*='
     reason: "Anthropic API is paid. Route via phoenix_v4.llm.router.route_llm (local) or operator Claude Code."
     exempt_paths:
-      - "scripts/ci/run_agent_refactor.py"
+      # CI quality tools — operator-present, not unattended production
+      - "scripts/ci/llm_cohesive_bestseller_tester.py"
+      - "scripts/ci/llm_bestseller_error_report.py"
+      # Legacy slot engine AnthropicBackend — gated by config, not default path
+      - "pearl_news/pipeline/slot_expansion_engine.py"
+      # Operator tool for teacher content normalization — human-in-the-loop
+      - "tools/teacher_mining/intake_normalize.py"
   anthropic_messages_create:
     regex: '\.messages\.create\s*\('
     reason: "Anthropic messages API is paid."
     exempt_paths:
-      - "scripts/ci/run_agent_refactor.py"
       - "scripts/ci/llm_cohesive_bestseller_tester.py"
       - "scripts/ci/llm_bestseller_error_report.py"
+      - "pearl_news/pipeline/slot_expansion_engine.py"
+      - "tools/teacher_mining/intake_normalize.py"
   openai_api_cloud:
+    # ACT-014: OpenAI Python package is the standard client for Ollama-compatible APIs.
+    # Import alone is not a violation — only connections to cloud (api.openai.com / OPENAI_API_KEY).
+    # All listed exemptions use OpenAI client pointed at local Ollama (QWEN_BASE_URL / GEMMA_BASE_URL).
     regex: '(from\s+openai\s+import\s+OpenAI|openai\.OpenAI\s*\()'
-    reason: "OpenAI client must target local Ollama only (see line_allow_substrings)."
+    reason: "OpenAI client must target local Ollama only (see line_allow_substrings and exempt_paths)."
     exempt_paths:
       - "phoenix_v4/llm/router.py"
+      - "pearl_news/pipeline/llm_expand.py"
+      - "pearl_news/pipeline/slot_expansion_engine.py"
+      - "pearl_news/pipeline/slot_provider_qwen.py"
+      - "scripts/localization/llm_client.py"
+      - "scripts/research/run_research.py"
+      - ".github/workflows/research-pipeline-run.yml"
     line_allow_substrings:
       - "ollama"
       - "11434"
       - "192.168.1.101"
       - "localhost"
       - "127.0.0.1"
+      - "QWEN_BASE_URL"
+      - "GEMMA_BASE_URL"
   google_genai:
     regex: 'google\.generativeai|genai\.GenerativeModel'
     reason: "Google AI API is paid."

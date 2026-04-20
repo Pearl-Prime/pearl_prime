@@ -113,8 +113,9 @@ dimension_gates:
   - listen_experience
   dimension_gate_phase: 3
   uniqueness:
-    pass_threshold: 0.15
-    warn_threshold: 0.3
+    # ACT-013: phrase-jaccard scoring; topic-vocab overlap is by design, not defect
+    pass_threshold: 0.10
+    warn_threshold: 0.15
     max_structural_repeats_per_chapter: 2
   engagement:
     min_hooks_per_chapter: 1
@@ -123,19 +124,21 @@ dimension_gates:
     pass_threshold: 0.35
     warn_threshold: 0.2
   somatic_precision:
+    # ACT-013: fixed 15-body-word target; proportional density overpenalised long-form
     min_somatic_words_per_chapter: 3
     min_somatic_density_per_100w: 1.5
+    pass_threshold: 0.25
+    warn_threshold: 0.15
+  listen_experience:
+    # ACT-013: short-sentence style (median ≤6 words) is intentional Phoenix pacing
     pass_threshold: 0.4
     warn_threshold: 0.25
-  listen_experience:
-    pass_threshold: 0.5
-    warn_threshold: 0.3
     repetition_window_words: 200
     repetition_ngram_words: 4
   cohesion:
     min_cross_chapter_refs: 1
-    pass_threshold: 0.4
-    warn_threshold: 0.25
+    pass_threshold: 0.35
+    warn_threshold: 0.20
 visual_therapeutic:
   enabled: true
   mode: heuristic

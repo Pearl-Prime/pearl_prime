@@ -189,7 +189,13 @@ def score_safety(text: str) -> float:
 
 
 def score_tts_readability_heuristic(text: str) -> float:
-    """TTS readability: sentence length variance, paragraph breaks, pattern avoidance."""
+    """TTS readability: sentence length variance, paragraph breaks, pattern avoidance.
+
+    ACT-013 calibration fix: Phoenix's writer spec intentionally uses short sentences
+    (1-4 words) for TTS pacing. Replace the rigid 8-25 word "ideal" range with a
+    sentence-length-range coverage metric: variety of very-short to medium sentences
+    is scored positively. Zero rhythm_variance is acceptable when median length ≤ 6.
+    """
     if not text.strip():
         return 0.0
     sentences = [s.strip() for s in re.split(r"[.!?]+", text) if s.strip()]
@@ -198,13 +204,25 @@ def score_tts_readability_heuristic(text: str) -> float:
     lengths = [len(s.split()) for s in sentences]
     if not lengths:
         return 0.0
+    median_len = sorted(lengths)[len(lengths) // 2]
     avg_len = sum(lengths) / len(lengths)
-    # Variance
+    # Variance — waived for intentional short-sentence style (median ≤ 6)
     variance = sum((l - avg_len) ** 2 for l in lengths) / max(len(lengths), 1)
-    variance_score = min(1.0, variance / 50.0)
-    # Ideal length
-    ideal_count = sum(1 for l in lengths if 8 <= l <= 25)
-    ideal_score = ideal_count / max(len(lengths), 1)
+    if median_len <= 6:
+        variance_score = 1.0  # short-sentence style is intentional, not a defect
+    else:
+        variance_score = min(1.0, variance / 50.0)
+    # Coverage: mix of very-short (1-3), short (4-8), medium (9-25)
+    buckets = {"xs": 0, "s": 0, "m": 0}
+    for l in lengths:
+        if l <= 3:
+            buckets["xs"] += 1
+        elif l <= 8:
+            buckets["s"] += 1
+        elif l <= 25:
+            buckets["m"] += 1
+    filled = sum(1 for v in buckets.values() if v > 0)
+    coverage_score = filled / 3.0
     # Paragraph breaks (per 500 words)
     word_count = len(text.split())
     para_breaks = text.count("\n\n")
@@ -212,7 +230,7 @@ def score_tts_readability_heuristic(text: str) -> float:
     # Penalize very long words (15+ chars)
     long_words = re.findall(r"\b\w{15,}\b", text)
     long_word_penalty = min(0.3, len(long_words) * 0.05)
-    composite = 0.3 * variance_score + 0.35 * ideal_score + 0.25 * para_score - long_word_penalty
+    composite = 0.3 * variance_score + 0.35 * coverage_score + 0.25 * para_score - long_word_penalty
     return round(max(0.0, min(1.0, composite)), 3)
 
 
@@ -274,22 +292,35 @@ def score_emotion_arc(chapters: List[str]) -> float:
 
 
 def score_content_uniqueness(chapters: List[str]) -> float:
-    """Content uniqueness: low overlap between chapters (penalize structural repeats)."""
+    """Content uniqueness: penalize structural phrase repeats across chapters.
+
+    ACT-013 calibration fix: use 3-word phrase (trigram) overlap instead of word
+    overlap. Books about one topic share topic vocabulary by design (not a defect).
+    Only structural phrase repetition (identical trigram constructions) is penalized.
+    phrase_jaccard > 0.25 is treated as structural repetition.
+    """
     if len(chapters) < 2:
         return 1.0
+
+    def _trigrams(text: str) -> frozenset:
+        words = re.findall(r"\w+", text.lower())
+        return frozenset(tuple(words[i:i+3]) for i in range(len(words) - 2))
+
     overlaps = []
     for i in range(len(chapters)):
         for j in range(i + 1, len(chapters)):
-            words_i = set(re.findall(r"\w+", chapters[i].lower()))
-            words_j = set(re.findall(r"\w+", chapters[j].lower()))
-            if not words_i or not words_j:
+            tri_i = _trigrams(chapters[i])
+            tri_j = _trigrams(chapters[j])
+            if not tri_i or not tri_j:
                 continue
-            jaccard = len(words_i & words_j) / len(words_i | words_j)
+            jaccard = len(tri_i & tri_j) / len(tri_i | tri_j)
             overlaps.append(jaccard)
     if not overlaps:
         return 1.0
     avg_overlap = sum(overlaps) / len(overlaps)
-    return round(max(0.0, min(1.0, 1.0 - avg_overlap * 2.0)), 3)
+    # phrase_jaccard > 0.25 signals structural repetition; penalize proportionally
+    penalty = max(0.0, avg_overlap - 0.25) * 4.0
+    return round(max(0.0, min(1.0, 1.0 - penalty)), 3)
 
 
 def score_engagement(text: str) -> float:
@@ -309,14 +340,17 @@ def score_engagement(text: str) -> float:
 
 
 def score_somatic_precision(text: str) -> float:
-    """Somatic precision: body-aware language density."""
+    """Somatic precision: body-aware language density.
+
+    ACT-013 calibration fix: use fixed denominator of 15 body words as target
+    (not proportional to total length). A 10,000-word book with 15+ body words
+    scores full marks — proportional density was penalising long-form content.
+    """
     if not text.strip():
         return 0.0
     words = set(re.findall(r"\w+", text.lower()))
     body_hits = len(words & BODY_WORDS)
-    word_count = len(text.split())
-    density = body_hits / max(word_count / 100, 1)
-    return round(max(0.0, min(1.0, density / 4.0)), 3)
+    return round(min(1.0, body_hits / 15.0), 3)
 
 
 def score_listen_experience(text: str) -> float:

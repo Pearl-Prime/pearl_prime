@@ -1,0 +1,145 @@
+---
+# catalog_buying_trigger.yaml
+# Buying-trigger psychology per topic — maps topics to the primary desire and pain
+# the book is fulfilling in the reader's mind at purchase time.
+#
+# Sources: BESTSELLER_GAP_AUDIT.md §desire_type; BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md
+# Updated: ACT-015 (LLM two-tier migration sprint, 2026-04-18)
+#
+# desire_type values:
+#   relief       — "I need this to stop hurting"
+#   belonging    — "I need to know I'm not alone"
+#   certainty    — "I need to understand what's happening"
+#   rest         — "I need permission to stop / slow down"
+#   self-trust   — "I need to trust my own judgment again"
+#   visibility   — "I need to be seen / feel real"
+#   connection   — "I need to reconnect with myself or others"
+#   courage      — "I need to take the action I've been avoiding"
+
+topics:
+  anxiety:
+    desire_type: certainty
+    primary_pain: "the body is doing something and I don't understand why"
+    buying_trigger_phrase: "understand why this keeps happening to me"
+    recognition_hook: "You've been bracing for something you can't name."
+    bestseller_comps:
+      - "Dare (Barry McDonagh)"
+      - "Rewire Your Anxious Brain (Bengtson + Alcantara)"
+
+  boundaries:
+    desire_type: self-trust
+    primary_pain: "I can't say no and I don't know why I can't"
+    buying_trigger_phrase: "stop saying yes when I mean no"
+    recognition_hook: "Something happens in your body the moment you're about to say no."
+    bestseller_comps:
+      - "Set Boundaries, Find Peace (Nedra Tawwab)"
+
+  burnout:
+    desire_type: rest
+    primary_pain: "I have nothing left and I can't stop"
+    buying_trigger_phrase: "get my energy back without quitting everything"
+    recognition_hook: "You're still producing. The output is still there. But you are not."
+    bestseller_comps:
+      - "Burnout (Emily + Amelia Nagoski)"
+      - "Can't Even (Anne Helen Petersen)"
+
+  compassion_fatigue:
+    desire_type: relief
+    primary_pain: "I care too much and it's breaking me"
+    buying_trigger_phrase: "keep caring without losing myself"
+    recognition_hook: "You absorbed someone else's worst moment today. Again."
+    bestseller_comps:
+      - "Trauma Stewardship (Laura van Dernoot Lipsky)"
+
+  courage:
+    desire_type: courage
+    primary_pain: "I know what I need to do but I can't make myself do it"
+    buying_trigger_phrase: "stop waiting and start the thing I keep delaying"
+    recognition_hook: "The action is ready. Your body said stop."
+    bestseller_comps:
+      - "Feel the Fear and Do It Anyway (Susan Jeffers)"
+      - "The Big Leap (Gay Hendricks)"
+
+  depression:
+    desire_type: visibility
+    primary_pain: "I'm here but I can't feel it"
+    buying_trigger_phrase: "feel present in my own life again"
+    recognition_hook: "You see your life from a distance. Like watching through glass."
+    bestseller_comps:
+      - "The Mindful Way Through Depression (Williams et al.)"
+
+  financial_anxiety:
+    desire_type: certainty
+    primary_pain: "the numbers spiral and I can't make it stop"
+    buying_trigger_phrase: "stop panicking about money and think clearly"
+    recognition_hook: "Your chest tightens before you even open the app."
+    bestseller_comps:
+      - "I Will Teach You to Be Rich (Ramit Sethi)"
+
+  financial_stress:
+    desire_type: relief
+    primary_pain: "I'm overwhelmed by money pressure right now"
+    buying_trigger_phrase: "get through this without falling apart"
+    recognition_hook: "The numbers sit on your chest. That's not metaphor."
+    bestseller_comps:
+      - "The Total Money Makeover (Dave Ramsey)"
+
+  grief:
+    desire_type: belonging
+    primary_pain: "I'm in pain and no one understands what this is like"
+    buying_trigger_phrase: "feel less alone in this loss"
+    recognition_hook: "There's a sentence you've been saying since the loss."
+    bestseller_comps:
+      - "The Year of Magical Thinking (Joan Didion)"
+      - "It's OK That You're Not OK (Megan Devine)"
+
+  imposter_syndrome:
+    desire_type: self-trust
+    primary_pain: "I'm going to be found out"
+    buying_trigger_phrase: "stop feeling like a fraud at work"
+    recognition_hook: "The question underneath your competence: When will they realize?"
+    bestseller_comps:
+      - "Presence (Amy Cuddy)"
+      - "The Confidence Gap (Russ Harris)"
+
+  overthinking:
+    desire_type: certainty
+    primary_pain: "I can't stop the loop and it's exhausting"
+    buying_trigger_phrase: "quiet the mental noise and make a decision"
+    recognition_hook: "The loop runs. The thought produces a feeling. The feeling produces the next thought."
+    bestseller_comps:
+      - "Don't Believe Everything You Think (Joseph Nguyen)"
+
+  self_worth:
+    desire_type: self-trust
+    primary_pain: "I always end up back at 'I'm not enough'"
+    buying_trigger_phrase: "stop measuring my worth by outcomes"
+    recognition_hook: "Something happened. Your mind immediately ran the calculation: What does this say about me?"
+    bestseller_comps:
+      - "The Gifts of Imperfection (Brené Brown)"
+
+  sleep_anxiety:
+    desire_type: rest
+    primary_pain: "I'm exhausted but I can't sleep"
+    buying_trigger_phrase: "actually sleep without dreading bedtime"
+    recognition_hook: "The moment you're trying to sleep is the moment your nervous system decides to be most awake."
+    bestseller_comps:
+      - "Why We Sleep (Matthew Walker)"
+      - "Say Good Night to Insomnia (Gregg Jacobs)"
+
+  social_anxiety:
+    desire_type: belonging
+    primary_pain: "I want to connect but being around people is agony"
+    buying_trigger_phrase: "be around people without the constant scanning"
+    recognition_hook: "Before you've said a word, your nervous system is already running the scan."
+    bestseller_comps:
+      - "The Anxiety and Phobia Workbook (Edmund Bourne)"
+
+  somatic_healing:
+    desire_type: connection
+    primary_pain: "my body holds things my mind has been trying to forget"
+    buying_trigger_phrase: "release what's been held in my body for years"
+    recognition_hook: "Your body remembers what your mind has been trying to forget."
+    bestseller_comps:
+      - "The Body Keeps the Score (Bessel van der Kolk)"
+      - "Waking the Tiger (Peter Levine)"
