@@ -247,6 +247,95 @@ optional_fields:
     values: [draft, active, deprecated]
     default: draft
 
+# --- marketing & catalog fields (required for catalog_visibility dashboard) ---
+  series_title:
+    type: string
+    max_length: 60
+    description: |
+      Short display name, ≤6 words. Must derive from emotional_engine + reader_promise.
+      Do NOT use the title_id slug. Example: "After the Noise"
+
+  series_logline:
+    type: string
+    max_length: 200
+    description: |
+      One sentence, ≤20 words. Reader-benefit forward, not character-problem forward.
+      No clinical language. Example: "Read this when the world is still loud and
+      your body hasn't caught up yet."
+
+  series_description:
+    type: string
+    description: |
+      2-4 sentences. Expands the logline for catalog display. Alias: series_notes
+      is used as fallback if series_description is absent.
+
+  positioning:
+    type: string
+    description: |
+      Competitive framing. "For readers of [comp_title] who also want [unique angle]."
+      OR "The [comp genre] for [specific audience] who [specific situation]."
+
+  audience:
+    type: string
+    description: |
+      2-3 sentence persona description. Specifics over demographics.
+      What is this reader doing at 11pm?
+
+  comp_titles:
+    type: list
+    item_type: string
+    description: |
+      2-4 real published manga or books. At least one manga comp, one non-fiction comp.
+      Relevance: same emotional engine or reader promise.
+      Do NOT invent titles.
+
+  marketing_angle:
+    type: string
+    description: |
+      1-2 sentences. The "so what" for a marketing brief.
+      What makes this series different in its genre?
+      Must connect emotional_engine to visual_grammar.
+
+  hook_lines:
+    type: list
+    item_type: string
+    description: |
+      2-3 punchy lines for social/ads. ≤12 words each.
+      Active voice. Second person or imperative.
+      Must resonate with market_demo.
+
+  launch_priority:
+    type: enum
+    values: [P0, P1, P2, P3]
+    description: |
+      P0 = ship first (strongest marketing case or fills a gap).
+      P1 = strong candidate, ship after P0.
+      P2 = planned but not urgent.
+      P3 = backlog.
+      Assign based on: emotional engine clarity + reader promise strength
+                       + whether comp_titles have proven commercial sales.
+
+  main_character_name:
+    type: string
+    description: |
+      First name only. Gender-neutral preferred unless genre requires otherwise.
+      Must feel plausible for the market_demo.
+
+  main_character_role:
+    type: string
+    description: |
+      Archetype or job title. 3-5 words.
+      Must mirror the reader, not an aspirational figure.
+      Examples: "burned-out ER nurse", "first-gen college student",
+                "overachieving middle manager"
+
+  main_character_image_path:
+    type: string
+    nullable: true
+    description: |
+      Relative path to generated character reference image.
+      Set by RunComfy generation sprint (Phase E). Leave null until then.
+
 # --- determinism integration ---
 determinism_note: |
   manga_profile_seed = sha256(title_id + ":" + brand_id)[:12]
