@@ -187,7 +187,7 @@ def main() -> int:
     img_dir.mkdir(parents=True, exist_ok=True)
     vid_root.mkdir(parents=True, exist_ok=True)
 
-    account_id, api_token = load_credentials()
+    account_id, api_token = load_credentials(for_workers_ai_image=True)
     need_flux = not args.dry_run and not args.video_only and not args.placeholder_images
     if need_flux and (not account_id or not api_token):
         print(

@@ -12,6 +12,7 @@
 |----------|------------|-----|
 | **CLOUDFLARE_ACCOUNT_ID** | A 32-character hexadecimal string Cloudflare assigns to your account (e.g. `a1b2c3d4e5f6789012345678abcdef01`). | Your login email (e.g. Ahjansamvara@gmail.com). |
 | **CLOUDFLARE_API_TOKEN** | A long secret string from "Create Workers AI API Token" in the dashboard. Shown once; copy and store safely. | Your account password or email. |
+| **CLOUDFLARE_AI_API_TOKEN** *(optional but recommended)* | A second token scoped only to **Workers AI – Read** and **Workers AI – Edit**. If set, image scripts use it **before** `CLOUDFLARE_API_TOKEN`, so a generic Cloudflare token (Pages, DNS, etc.) does not produce **401** on `.../ai/run/@cf/...`. | Same as API token row — must be Workers AI–scoped. |
 
 ---
 

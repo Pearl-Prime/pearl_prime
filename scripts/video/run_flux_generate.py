@@ -47,9 +47,13 @@ def main() -> int:
         print(full[:2000] + ("..." if len(full) > 2000 else ""))
         return 0
 
-    account_id, api_token = load_credentials()
+    account_id, api_token = load_credentials(for_workers_ai_image=True)
     if not account_id or not api_token:
-        print("Set CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN (env, .env, or cloudflare_workers_ai.txt / 11.txt at repo root).", file=sys.stderr)
+        print(
+            "Set CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_AI_API_TOKEN (Workers AI) or CLOUDFLARE_API_TOKEN "
+            "(env, .env, or cloudflare_workers_ai.txt / 11.txt at repo root).",
+            file=sys.stderr,
+        )
         return 1
 
     print("Prompt (first 400 chars):", prompt[:400] + "..." if len(prompt) > 400 else prompt)

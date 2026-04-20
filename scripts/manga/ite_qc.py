@@ -7,6 +7,15 @@
     --fractal fractal_report.json \\
     --breath chapter_breath.json \\
     [-o ite_qc_report.json] [--force]
+
+Workspace shorthand (fills paths under ``<workspace>/debug/ite/``):
+
+  PYTHONPATH=. python3 scripts/manga/ite_qc.py --workspace artifacts/manga/my_run/
+
+Uses ``chapter_gutter.json``, ``color_arc.json``, ``fractal_report.json``,
+``chapter_breath.json`` when present, writes ``ite_qc_report.json`` next to them.
+If ``job.json`` is missing under the workspace, the pipeline job gate is skipped
+with a note (same effect as ``--no-job-check`` for that case only).
 """
 from __future__ import annotations
 
@@ -28,34 +37,101 @@ def _load(p: Path | None) -> dict | None:
     return json.loads(p.read_text(encoding="utf-8"))
 
 
+def _apply_workspace_defaults(ws: Path, args: argparse.Namespace) -> None:
+    """Resolve optional ITE artifact paths from a manga chapter workspace."""
+    ite = (ws / "debug" / "ite").resolve()
+    if args.chapter is None:
+        args.chapter = ite / "chapter_gutter.json"
+    if args.color_arc is None:
+        p = ite / "color_arc.json"
+        if p.is_file():
+            args.color_arc = p
+    if args.fractal is None:
+        p = ite / "fractal_report.json"
+        if p.is_file():
+            args.fractal = p
+    if args.breath is None:
+        p = ite / "chapter_breath.json"
+        if p.is_file():
+            args.breath = p
+    if args.soundtrack is None:
+        p = ite / "soundtrack.json"
+        if p.is_file():
+            args.soundtrack = p
+    if args.animation_plan is None:
+        p = ite / "animation_plan.json"
+        if p.is_file():
+            args.animation_plan = p
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="ITE therapeutic QC gates")
-    ap.add_argument("--chapter", required=True, type=Path, help="Gutter-enriched chapter JSON")
-    ap.add_argument("--color-arc", type=Path)
-    ap.add_argument("--fractal", type=Path)
-    ap.add_argument("--breath", type=Path)
-    ap.add_argument("--soundtrack", type=Path)
-    ap.add_argument("--animation-plan", type=Path)
+    ap.add_argument(
+        "--chapter",
+        type=Path,
+        default=None,
+        help="Gutter-enriched chapter JSON (default: <workspace>/debug/ite/chapter_gutter.json when --workspace is set)",
+    )
+    ap.add_argument("--color-arc", type=Path, default=None)
+    ap.add_argument("--fractal", type=Path, default=None)
+    ap.add_argument("--breath", type=Path, default=None)
+    ap.add_argument("--soundtrack", type=Path, default=None)
+    ap.add_argument("--animation-plan", type=Path, default=None)
     ap.add_argument("--sabido", type=Path, help="Optional sabido_map JSON")
     ap.add_argument("-o", "--out", type=Path, default=None)
     ap.add_argument("--force", action="store_true")
-    ap.add_argument("--workspace", type=Path, default=None)
-    ap.add_argument("--no-job-check", dest="no_job_check", action="store_true", help="Skip job.json enforcement (CI only)")
+    ap.add_argument(
+        "--workspace",
+        type=Path,
+        default=None,
+        help="Manga chapter workspace root; default ITE inputs from debug/ite/, default -o to debug/ite/ite_qc_report.json",
+    )
+    ap.add_argument(
+        "--no-job-check",
+        dest="no_job_check",
+        action="store_true",
+        help="Skip job.json enforcement (CI only)",
+    )
     args = ap.parse_args()
+
+    out_path = args.out
+    if args.workspace is not None:
+        ws_root = args.workspace.resolve()
+        _apply_workspace_defaults(ws_root, args)
+        if out_path is None:
+            out_path = ws_root / "debug" / "ite" / "ite_qc_report.json"
+    else:
+        ws_root = None
+        if out_path is None:
+            out_path = Path("ite_qc_report.json")
+
+    out_path = Path(out_path).resolve()
+    ws = ws_root if ws_root is not None else out_path.parent
+
     if args.no_job_check:
         print("WARNING: --no-job-check: pipeline job enforcement disabled (CI/testing only).", file=sys.stderr)
     from scripts.pipeline.advance_stage import mark_complete, mark_failed
     from scripts.pipeline.check_job import require_stage
+    from scripts.pipeline._job_io import job_file
 
-    out_path = args.out or Path("ite_qc_report.json")
-    ws = (args.workspace or out_path.parent).resolve()
+    if not args.no_job_check and args.workspace is not None and not job_file(ws).is_file():
+        print(
+            "NOTE: ite_qc: no job.json under workspace; skipping pipeline job gate.",
+            file=sys.stderr,
+        )
+        args.no_job_check = True
+
     if not args.no_job_check:
         require_stage("ite_qc", ws)
 
-    if not args.chapter.is_file():
+    if args.chapter is None or not args.chapter.is_file():
         if not args.no_job_check:
             mark_failed(ws, "ite_qc", error=f"missing {args.chapter}")
-        print(f"Not found: {args.chapter}", file=sys.stderr)
+        print(
+            "Not found: chapter gutter JSON. Pass --chapter or --workspace with "
+            "debug/ite/chapter_gutter.json present.",
+            file=sys.stderr,
+        )
         return 1
 
     ch = _load(args.chapter)

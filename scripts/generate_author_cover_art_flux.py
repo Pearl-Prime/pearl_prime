@@ -56,7 +56,7 @@ def main() -> int:
         print("No authors to process.", file=sys.stderr)
         return 1
 
-    account_id, api_token = load_credentials()
+    account_id, api_token = load_credentials(for_workers_ai_image=True)
     if not args.dry_run and (not account_id or not api_token):
         print("Set CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN. See docs/VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md.", file=sys.stderr)
         return 1

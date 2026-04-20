@@ -26,8 +26,16 @@ def load_yaml(rel_path: str) -> dict:
         raise RuntimeError("PyYAML required; pip install pyyaml")
 
 
-def load_credentials() -> tuple[str, str]:
-    """Load CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN from env, .env, or key file."""
+def load_credentials(*, for_workers_ai_image: bool = False) -> tuple[str, str]:
+    """Load CLOUDFLARE_ACCOUNT_ID and an API token from env, .env, or key file.
+
+    ``for_workers_ai_image=True`` (Workers AI / FLUX REST): prefer
+    ``CLOUDFLARE_AI_API_TOKEN`` when set, then ``CLOUDFLARE_API_TOKEN``.
+    This avoids using a generic Cloudflare API token (Pages/DNS/etc.) that
+    returns 401 on ``/accounts/.../ai/run/...``.
+
+    Default ``False``: prefer ``CLOUDFLARE_API_TOKEN`` for backward compatibility.
+    """
     try:
         from dotenv import load_dotenv
         load_dotenv(REPO_ROOT / ".env")
@@ -52,8 +60,24 @@ def load_credentials() -> tuple[str, str]:
                         os.environ[key] = val
                         break
     account_id = os.environ.get("CLOUDFLARE_ACCOUNT_ID", "").strip()
-    api_token = os.environ.get("CLOUDFLARE_API_TOKEN", os.environ.get("CLOUDFLARE_AI_API_TOKEN", "")).strip()
+    ai = os.environ.get("CLOUDFLARE_AI_API_TOKEN", "").strip()
+    general = os.environ.get("CLOUDFLARE_API_TOKEN", "").strip()
+    if for_workers_ai_image:
+        api_token = ai or general
+    else:
+        api_token = general or ai
     return account_id, api_token
+
+
+def _workers_ai_bearer_candidates(primary_token: str) -> list[str]:
+    """Ordered unique bearer tokens to try for Workers AI (401 fallback)."""
+    ai = os.environ.get("CLOUDFLARE_AI_API_TOKEN", "").strip()
+    general = os.environ.get("CLOUDFLARE_API_TOKEN", "").strip()
+    out: list[str] = []
+    for t in (primary_token.strip(), ai, general):
+        if t and t not in out:
+            out.append(t)
+    return out
 
 
 def _build_master_prompt_string(
@@ -204,12 +228,12 @@ def call_flux(
     model: str = "@cf/black-forest-labs/flux-2-dev",
 ) -> bytes:
     """POST to Cloudflare Workers AI FLUX; returns image bytes."""
+    import requests
+
+    if not account_id.strip() or not api_token.strip():
+        account_id, api_token = load_credentials(for_workers_ai_image=True)
     url = f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/{model}"
     full_prompt = f"{prompt}\n\nAvoid: {negative_prompt}" if negative_prompt else prompt
-    try:
-        import requests
-    except ImportError:
-        raise RuntimeError("requests required; pip install requests")
     payload = {
         "prompt": (None, full_prompt),
         "width": (None, str(width)),
@@ -218,14 +242,30 @@ def call_flux(
         "guidance": (None, str(guidance)),
         "seed": (None, str(seed)),
     }
-    resp = requests.post(
-        url,
-        headers={"Authorization": f"Bearer {api_token}"},
-        files=payload,
-        timeout=120,
-    )
-    resp.raise_for_status()
-    out = resp.content
+    candidates = _workers_ai_bearer_candidates(api_token)
+    if not candidates:
+        raise RuntimeError(
+            "Cloudflare FLUX: set CLOUDFLARE_AI_API_TOKEN (Workers AI) or CLOUDFLARE_API_TOKEN with Workers AI scope"
+        )
+    last_resp = None
+    out: bytes = b""
+    for bearer in candidates:
+        last_resp = requests.post(
+            url,
+            headers={"Authorization": f"Bearer {bearer}"},
+            files=payload,
+            timeout=120,
+        )
+        if last_resp.status_code == 401:
+            continue
+        last_resp.raise_for_status()
+        out = last_resp.content
+        break
+    else:
+        detail = ""
+        if last_resp is not None:
+            detail = f" last_http={last_resp.status_code} body={last_resp.text[:400]!r}"
+        raise RuntimeError(f"Cloudflare FLUX: all bearer token attempts failed.{detail}")
     try:
         obj = json.loads(out.decode("utf-8"))
     except Exception:
@@ -252,7 +292,7 @@ def get_image_provider() -> tuple[str, dict[str, str]]:
     comfyui_url = os.environ.get("COMFYUI_URL", "").strip()
     if comfyui_url:
         return "comfyui", {"url": comfyui_url}
-    account_id, api_token = load_credentials()
+    account_id, api_token = load_credentials(for_workers_ai_image=True)
     return "cloudflare", {"account_id": account_id, "api_token": api_token}
 
 

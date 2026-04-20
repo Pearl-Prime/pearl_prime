@@ -54,9 +54,13 @@ def main() -> int:
     default_scene = scenes_cfg.get("default_scene") or "a contemplative moment, soft light, no faces"
     intents = list(intent_map.keys()) or ["HOOK_VISUAL", "CHARACTER_EMOTION", "SYMBOLIC_METAPHOR", "ENVIRONMENT_ATMOSPHERE"]
 
-    account_id, api_token = load_credentials()
+    account_id, api_token = load_credentials(for_workers_ai_image=True)
     if not args.dry_run and (not account_id or not api_token):
-        print("Set CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN. See docs/VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md.", file=sys.stderr)
+        print(
+            "Set CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_AI_API_TOKEN (Workers AI) or CLOUDFLARE_API_TOKEN. "
+            "See docs/VIDEO_CLOUDFLARE_FLUX_CREDENTIALS.md.",
+            file=sys.stderr,
+        )
         return 1
 
     index_entries = []

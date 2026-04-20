@@ -1,0 +1,106 @@
+PEARL PRIME QA BATCH - 2026-04-16
+==================================
+30 books across 10 output formats
+13 personas x 15 topics x 7 engines x 6 teachers
+Quality profile: draft (warnings, not blocks)
+
+FORMAT COVERAGE:
+x five_min_practice (runs 01-03)
+x pocket_guide (runs 04-06)
+x ten_things_to_do (runs 07-09)
+x symptom_to_action_atlas (runs 10-12)
+x daily_text_audio_companion (runs 13-15)
+x crisis_cards (runs 16-18)
+x weekly_challenge_pack (runs 19-21)
+x faq_audiobook (runs 22-24)
+x myth_vs_mechanism (runs 25-27)
+x protocol_library (runs 28-30)
+
+PERSONA COVERAGE: corporate_managers, educators, entrepreneurs, first_responders, gen_z_professionals, gen_z_student, healthcare_rns, millennial_women_professionals, nyc_executives, tech_finance_burnout, working_parents
+TOPIC COVERAGE: anxiety, boundaries, burnout, compassion_fatigue, depression, financial_anxiety, grief, imposter_syndrome, overthinking, self_worth, social_anxiety
+ENGINE COVERAGE: comparison, false_alarm, grief, overwhelm, shame, spiral, watcher
+TEACHER COVERAGE: adi_da, ahjan, master_wu, none, sai_ma
+FRAME COVERAGE: somatic_first (default) + spiritual_first (runs 03, 21)
+ERRORS: 11 runs failed - see ERRORS.txt
+ARC SUBSTITUTIONS:
+- RUN 01: config/source_of_truth/master_arcs/nyc_executives__anxiety__watcher__F006.yaml -> config/source_of_truth/master_arcs/nyc_executives__anxiety__spiral__F015.yaml
+- RUN 07: config/source_of_truth/master_arcs/educators__overthinking__spiral__F006.yaml -> config/source_of_truth/master_arcs/educators__anxiety__overwhelm__F006.yaml
+- RUN 09: config/source_of_truth/master_arcs/gen_z_student__social_anxiety__false_alarm__F006.yaml -> config/source_of_truth/master_arcs/gen_alpha_students__social_anxiety__false_alarm__F006.yaml
+
+
+===============================================================
+RUN: 01_five_min_practice_anxiety_nyc
+===============================================================
+
+[No txt files found in render directory]
+
+
+===============================================================
+RUN: 02_five_min_practice_burnout_healthcare
+===============================================================
+
+[No txt files found in render directory]
+
+
+===============================================================
+RUN: 03_five_min_practice_selfworth_genz
+===============================================================
+
+[No txt files found in render directory]
+
+
+===============================================================
+RUN: 04_pocket_guide_depression_parents
+===============================================================
+
+[No txt files found in render directory]
+
+
+===============================================================
+RUN: 05_pocket_guide_boundaries_corporate
+===============================================================
+
+[No txt files found in render directory]
+
+
+===============================================================
+RUN: 06_pocket_guide_grief_millennial
+===============================================================
+
+[No txt files found in render directory]
+
+
+===============================================================
+RUN: 07_ten_things_overthinking_educators
+===============================================================
+
+[No txt files found in render directory]
+
+
+===============================================================
+RUN: 08_ten_things_imposter_techfin
+===============================================================
+
+[No txt files found in render directory]
+
+
+===============================================================
+RUN: 09_ten_things_socialanx_genzstudent
+===============================================================
+
+[No txt files found in render directory]
+
+
+===============================================================
+RUN: 10_symptom_atlas_compfatigue_firstresponders
+===============================================================
+
+[No txt files found in render directory]
+
+
+===============================================================
+RUN: 11_symptom_atlas_finanx_entrepreneurs
+===============================================================
+
+[No txt files found in render directory]
+

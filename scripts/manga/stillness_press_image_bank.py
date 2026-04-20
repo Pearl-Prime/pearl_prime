@@ -333,7 +333,7 @@ def cmd_generate(args: argparse.Namespace) -> int:
     elif args.backend == "cloudflare":
         from scripts.video.flux_client import load_credentials
 
-        account_id, api_token = load_credentials()
+        account_id, api_token = load_credentials(for_workers_ai_image=True)
         if not account_id or not api_token:
             print("Missing CLOUDFLARE_ACCOUNT_ID / CLOUDFLARE_API_TOKEN", file=sys.stderr)
             return 1
