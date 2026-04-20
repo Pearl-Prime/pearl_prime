@@ -148,11 +148,19 @@ def main() -> int:
 
             legacy_dict = None
             if bm_slot_count and slot_idx < bm_slot_count:
+                # Rotate variant families across chapters so each chapter gets distinct template text.
+                # v2_somatic has 5 variants (F1-F5) per section; cycling by chapter index ensures
+                # chapters 1-5 use F1-F5 respectively, chapters 6-10 cycle again, etc.
+                _variant_families = ["F1", "F2", "F3", "F4", "F5"]
+                _variant_family = _variant_families[(ch_num - 1) % len(_variant_families)]
+                # Only load template text for slots 1-10 (the somatic grid); depth slots beyond 10
+                # use depth_module content only and don't need a template scaffold.
+                _sec_idx = min(section_idx1, 10)
                 legacy = load_legacy_section(
                     args.legacy_library,
                     ch_num,
-                    min(section_idx1, 10),
-                    "F1",
+                    _sec_idx,
+                    _variant_family,
                     repo_root=REPO_ROOT,
                 )
                 if legacy.text.strip():
