@@ -102,3 +102,27 @@ def test_embed_json_escapes_script() -> None:
     s = _safe_embed_json({"x": "</script>"})
     assert "</script>" not in s
     assert "script" in s
+
+
+def test_build_dashboard_multibrand(tmp_path: Path) -> None:
+    """Omitting --brand produces a dashboard containing all brands."""
+    from scripts.catalog_visibility.build_dashboard import _filter_series, build_html
+
+    rows = [
+        {"brand_id": "stillness_press", "locale": "en_US", "series_id": "sp_1"},
+        {"brand_id": "cognitive_clarity", "locale": "en_US", "series_id": "cc_1"},
+        {"brand_id": "other_brand", "locale": "ja_JP", "series_id": "ot_1"},
+    ]
+    # No brand_id filter — locale en only
+    filtered = _filter_series(rows, brand_id=None, locale="en")
+    assert len(filtered) == 2, f"expected 2 en rows, got {len(filtered)}"
+
+    out = tmp_path / "us_eng_manga_dashboard.html"
+    # Build via build_html directly (template lives in repo)
+    html = build_html(series_slice=filtered, page_title="Test all brands")
+    out.write_text(html, encoding="utf-8")
+
+    content = out.read_text(encoding="utf-8")
+    assert out.exists()
+    assert "stillness_press" in content
+    assert "cognitive_clarity" in content

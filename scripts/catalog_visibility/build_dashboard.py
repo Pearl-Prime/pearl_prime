@@ -32,15 +32,16 @@ def _resolve_brand(brand_arg: str) -> str:
 def _filter_series(
     rows: list[dict[str, Any]],
     *,
-    brand_id: str,
+    brand_id: str | None,
     locale: str,
 ) -> list[dict[str, Any]]:
-    want_brand = _resolve_brand(brand_id)
     want_loc = _norm_locale(locale)
     out: list[dict[str, Any]] = []
     for row in rows:
-        if str(row.get("brand_id") or "") != want_brand:
-            continue
+        if brand_id is not None:
+            want_brand = _resolve_brand(brand_id)
+            if str(row.get("brand_id") or "") != want_brand:
+                continue
         row_loc = _norm_locale(row.get("locale"))
         if want_loc and row_loc != want_loc:
             continue
@@ -68,9 +69,14 @@ def build_html(
 def main() -> int:
     ap = argparse.ArgumentParser(description="Build catalog visibility HTML dashboard.")
     ap.add_argument("--index", type=Path, required=True)
-    ap.add_argument("--brand", type=str, required=True, help="brand_id or alias (e.g. brand1 → stillness_press)")
+    ap.add_argument(
+        "--brand",
+        type=str,
+        default=None,
+        help="brand_id or alias (e.g. brand1 → stillness_press). Omit to include all brands.",
+    )
     ap.add_argument("--locale", type=str, default="en", help="Primary language subtag match (en matches en_US)")
-    ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--out", type=Path, default=None)
     ap.add_argument(
         "--title",
         type=str,
@@ -82,11 +88,19 @@ def main() -> int:
     data = json.loads(args.index.read_text(encoding="utf-8"))
     rows = list(data.get("series") or [])
     filtered = _filter_series(rows, brand_id=args.brand, locale=args.locale)
-    resolved = _resolve_brand(args.brand)
-    title = args.title.strip() or f"Manga catalog — {resolved} ({args.locale})"
+
+    if args.brand is not None:
+        resolved = _resolve_brand(args.brand)
+        title = args.title.strip() or f"Manga catalog — {resolved} ({args.locale})"
+        default_out = args.index.parent / f"{resolved}_{args.locale}_manga_dashboard.html"
+    else:
+        title = args.title.strip() or f"Manga catalog — all brands ({args.locale})"
+        default_out = args.index.parent / f"{args.locale}_manga_dashboard.html"
+
+    out_path: Path = args.out if args.out is not None else default_out
     html = build_html(series_slice=filtered, page_title=title)
-    args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(html, encoding="utf-8")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
     return 0
 
 
