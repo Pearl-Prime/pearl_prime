@@ -1,0 +1,47 @@
+# Template routing matrix — topic_family × persona_tier × format → library
+# v2_somatic: template_expand2/ grid (12ch × 10sec × 5var = 600 files, confirmed)
+# spine_only: no template overlay; enrichment + spine drives structure
+# DO NOT route to legacy_v4 unless template_expand/audiobook_template_v4.zip
+# is confirmed on disk.
+version: "1.0"
+
+topic_families:
+  somatic:    [anxiety, grief, burnout, somatic_healing, sleep_anxiety]
+  cognitive:  [overthinking, imposter_syndrome, self_worth, depression]
+  relational: [boundaries, compassion_fatigue, social_anxiety, courage]
+  financial:  [financial_anxiety, financial_stress]
+
+persona_tiers:
+  gen_z:        [gen_z_professionals, gen_z_student]
+  professional: [burned_out_professional]
+  executive:    [nyc_executives]
+
+routing:
+  somatic:
+    gen_z:        {standard_book: v2_somatic, short_book_30: v2_somatic, micro_book_20: spine_only}
+    professional: {standard_book: v2_somatic, short_book_30: v2_somatic, micro_book_20: spine_only}
+    executive:    {standard_book: v2_somatic, short_book_30: spine_only,  micro_book_20: spine_only}
+  cognitive:
+    gen_z:        {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+    professional: {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+    executive:    {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+  relational:
+    gen_z:        {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+    professional: {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+    executive:    {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+  financial:
+    gen_z:        {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+    professional: {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+    executive:    {standard_book: spine_only, short_book_30: spine_only, micro_book_20: spine_only}
+
+fallback: spine_only
+
+rationale:
+  v2_somatic_scope: >
+    v2_somatic grid was authored for somatic/nervous-system topics.
+    Using it for cognitive or relational topics would be off-persona.
+    Routing cognitive/relational/financial to spine_only until matching
+    template banks exist.
+  executive_somatic_short: >
+    Executive voice does not match v2_somatic's nervous-system-reset
+    framing at short_book_30 length. spine_only gives cleaner results.

@@ -5,10 +5,13 @@ Never raises for missing content — returns structured dataclasses with warning
 """
 from __future__ import annotations
 
+import logging
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+logger = logging.getLogger(__name__)
 
 try:
     import yaml
@@ -59,6 +62,43 @@ class LegacyTemplateLibrary:
 
 def _word_count(text: str) -> int:
     return len(text.split()) if text else 0
+
+
+def resolve_template_library(
+    topic: str,
+    persona: str,
+    runtime_format: str,
+    routing_config_path: str = "config/templates/catalog_template_routing.yaml",
+) -> str:
+    """
+    Returns template library name for topic × persona × format.
+    Always returns a string. Falls back to 'spine_only' on any miss.
+    """
+    try:
+        import yaml as _yaml
+    except ImportError:
+        return "spine_only"
+    try:
+        cfg = _yaml.safe_load(open(routing_config_path))
+    except FileNotFoundError:
+        return "spine_only"
+
+    topic_family = next(
+        (fam for fam, topics in cfg["topic_families"].items()
+         if topic in topics), None)
+    persona_tier = next(
+        (tier for tier, personas in cfg["persona_tiers"].items()
+         if persona in personas), None)
+
+    if topic_family and persona_tier:
+        library = (cfg["routing"]
+                   .get(topic_family, {})
+                   .get(persona_tier, {})
+                   .get(runtime_format, cfg["fallback"]))
+    else:
+        library = cfg["fallback"]
+
+    return library or cfg["fallback"]
 
 
 def load_legacy_template_index(

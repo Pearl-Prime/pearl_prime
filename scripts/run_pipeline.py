@@ -447,6 +447,21 @@ def _run_spine_pipeline_mode(
     teacher_for_enrich = None if not _tid_raw or _tid_raw == "default_teacher" else _tid_raw
 
     runtime_fmt = (getattr(args, "runtime_format", None) or "standard_book").strip()
+
+    from phoenix_v4.planning.legacy_template_loader import resolve_template_library
+    _template_library = resolve_template_library(topic_id, persona_id, runtime_fmt)
+    if _template_library == "spine_only":
+        print(
+            f"Template routing: {topic_id}×{persona_id}×{runtime_fmt} → spine_only "
+            f"(no template overlay)",
+            file=sys.stderr,
+        )
+    else:
+        print(
+            f"Template routing: {topic_id}×{persona_id}×{runtime_fmt} → {_template_library}",
+            file=sys.stderr,
+        )
+
     try:
         book_plan = load_book_structure_plan(topic_id, persona_id, runtime_fmt, repo_root)
     except FileNotFoundError as exc:
