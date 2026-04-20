@@ -145,6 +145,65 @@ failure_classes:
     action: block_merge
     first_seen: "2026-04-18"
 
+  # ---------------------------------------------------------------------------
+  # Pearl News invariant failures — added 2026-04-19
+  # Contract: docs/PEARL_NEWS_CONTRACT.md
+  # Detectors: phoenix_v4/quality/regression_museum/pearl_news_detectors.py
+  # ---------------------------------------------------------------------------
+
+  pearl_news_multi_teacher_article:
+    description: "Pearl News article lists more than one teacher as author/subject in byline or metadata"
+    detection: html_structure_check
+    scope: pearl_news_output
+    action: block_merge
+    first_seen: "2026-04-19"
+    notes: >
+      Check: article JSON has teacher_id=None AND teacher_used.teacher_id=None (fallback group voice
+      in non-interfaith-dialogue template), OR content HTML has multiple distinct teacher names in
+      .pn-byline. Interfaith dialogue template (uslf_group_article_ratio ~5%) is exempt.
+
+  pearl_news_topic_duplication_in_run:
+    description: "Two or more articles in one Pearl News cycle share the same topic"
+    detection: run_level_check
+    scope: pearl_news_run
+    action: block_merge
+    first_seen: "2026-04-19"
+    notes: >
+      Check: scan all article_{id}.json files in the cycle output dir; collect topic values;
+      flag if any topic appears more than once. Exempt: explicitly flagged same-topic
+      two-perspectives runs (allow_topic_sharing=true in cycle manifest).
+
+  pearl_news_language_mismatch:
+    description: "Pearl News article language field does not match the teacher's assigned_language"
+    detection: config_vs_output_check
+    scope: article_vs_teacher_config
+    action: block_merge
+    first_seen: "2026-04-19"
+    notes: >
+      Check: article JSON language field vs TEACHER_LANGUAGE[teacher_id] in
+      scripts/pearl_news/run_daily_news_cycle.py (or teacher_language_map.yaml).
+      Mismatch → teacher's CJK articles were generated in English or vice versa.
+
+  pearl_news_missing_layout_shell:
+    description: "Pearl News article content is missing the byline block (.pn-byline)"
+    detection: html_structure_check
+    scope: pearl_news_output
+    action: block_merge
+    first_seen: "2026-04-19"
+    notes: >
+      Check: article JSON content field must contain class="pn-byline" with non-empty
+      teacher name. An article with only raw <h1>/<p> prose and no byline block fails.
+
+  pearl_news_missing_sidebar:
+    description: "Pearl News article content is missing the sidebar block (<aside class=\"pn-sidebar\">)"
+    detection: html_structure_check
+    scope: pearl_news_output
+    action: block_merge
+    first_seen: "2026-04-19"
+    notes: >
+      Check: article JSON content field must contain <aside class="pn-sidebar">.
+      Article JSON must also have a non-empty sidebar object with teacher_name field.
+
 # Detection implementations live in phoenix_v4/quality/regression_museum/
 # Each failure_class has a detector: detect_<class_name>(book, **kwargs) -> list[Violation]
 # Runner: phoenix_v4/quality/regression_museum/runner.py

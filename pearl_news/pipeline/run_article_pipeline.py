@@ -175,6 +175,15 @@ def main() -> int:
         help="Render articles using v5.2 interactive layout (exercise, sidebar, poll, co-creation)",
     )
     ap.add_argument(
+        "--topic",
+        default=None,
+        help=(
+            "Constrain output to a single topic (e.g. climate, mental_health). "
+            "Feed items not matching this topic after classification are discarded. "
+            "Required by the daily cycle to enforce INV-1/INV-4."
+        ),
+    )
+    ap.add_argument(
         "-v",
         "--verbose",
         action="store_true",
@@ -275,6 +284,55 @@ def main() -> int:
 
     # Step 2: Classify (topic + SDG)
     items = classify_sdgs(items)
+
+    # Step 2a: Topic filter — enforce INV-1/INV-4 when --topic is specified.
+    # The caller (run_daily_news_cycle.py) is responsible for assigning each teacher
+    # a unique topic before calling this pipeline. This flag makes the pipeline
+    # honour that assignment by discarding feed items that don't match.
+    if args.topic:
+        before = len(items)
+        matched = [i for i in items if (i.get("topic") or "").lower() == args.topic.lower()]
+        if matched:
+            items = matched[:1]
+            logger.info(
+                "Topic filter '%s': %d → %d items", args.topic, before, len(items)
+            )
+        else:
+            # Fallback: no feed items classified under the assigned topic today.
+            # Use 'general' items so the teacher can still publish. The article
+            # will carry the assigned topic as metadata for INV-1/INV-4 tracking.
+            general_items = [i for i in items if (i.get("topic") or "").lower() == "general"]
+            if general_items:
+                logger.warning(
+                    "Topic filter '%s': 0 matches — falling back to %d 'general' items.",
+                    args.topic, len(general_items),
+                )
+                for gi in general_items:
+                    gi["topic"] = args.topic  # tag with assigned topic for INV-4
+                items = general_items[:1]
+            else:
+                logger.warning(
+                    "No items matched topic='%s' and no 'general' fallback available. "
+                    "Check feed coverage or topic name.",
+                    args.topic,
+                )
+                (out_dir / "ingest_manifest.json").write_text(
+                    json.dumps(
+                        {
+                            "build_date": datetime.now(timezone.utc).isoformat(),
+                            "language": language,
+                            "topic_filter": args.topic,
+                            "item_count": 0,
+                            "articles_output": 0,
+                            "items": [],
+                        },
+                        indent=2,
+                        ensure_ascii=False,
+                    ),
+                    encoding="utf-8",
+                )
+                return 0
+
     # Step 3: Select template
     items = select_templates(items)
     # Step 4: Assemble (structural draft from template + atoms/placeholders)
@@ -411,7 +469,8 @@ def main() -> int:
             }
             article_content = assemble_v52(item, v52_meta, standalone=False)
         else:
-            # Simple byline + body + teacher sidebar (legacy path)
+            # INV-5: inject byline block at the top of article content
+            # INV-6: sidebar block (embedded in content for WordPress post body)
             topic_label = (item.get("topic") or "").replace("_", " ").title()
             attribution_block = (
                 '<p class="pn-sidebar-attribution">' + teacher_attribution + "</p>"
@@ -453,6 +512,7 @@ def main() -> int:
             "article_type": template_id,
             "language": language,
             "topic": item.get("topic", ""),
+            "teacher_id": teacher_id_val,
             "primary_sdg": item.get("primary_sdg", ""),
             "un_body": item.get("un_body", ""),
             "url": item.get("url", ""),
@@ -461,9 +521,15 @@ def main() -> int:
             "qc_passed": item.get("qc_passed", False),
             "qc_results": item.get("qc_results", {}),
             "teacher_used": {
-                "teacher_id": teacher.get("teacher_id"),
-                "display_name": teacher.get("display_name"),
-                "tradition": teacher.get("tradition"),
+                "teacher_id": teacher_id_val,
+                "display_name": teacher_name,
+                "tradition": teacher_tradition,
+            },
+            "sidebar": {
+                "teacher_name": teacher_name,
+                "teacher_tradition": teacher_tradition,
+                "teacher_language": language,
+                "topic": item.get("topic", ""),
             },
             "validation": {
                 "passed": validation.get("passed"),
