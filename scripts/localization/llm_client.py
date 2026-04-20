@@ -4,15 +4,18 @@ Shared LLM client for localization scripts.
 
 Provider chain (first match wins):
 
-  1. TOGETHER AI (preferred):  Set TOGETHER_API_KEY.
-  2. DASHSCOPE (cloud):        Set DASHSCOPE_API_KEY.
-  3. OLLAMA (Pearl Star):      Set OLLAMA_HOST or QWEN_BASE_URL containing :11434.
-  4. LOCAL (LM Studio):        Fallback to http://127.0.0.1:1234.
+  0. DEEPSEEK (preferred for CJK):  Set DEEPSEEK_API_KEY.
+  1. TOGETHER AI:                   Set TOGETHER_API_KEY.
+  2. DASHSCOPE (cloud):             Set DASHSCOPE_API_KEY.
+  3. OLLAMA (Pearl Star):           Set OLLAMA_HOST or QWEN_BASE_URL containing :11434.
+  4. LOCAL (LM Studio):             Fallback to http://127.0.0.1:1234.
 
 Environment variables:
+  DEEPSEEK_API_KEY    — DeepSeek API key (enables DeepSeek mode — preferred for zh-CN/zh-TW/ja-JP)
+  DEEPSEEK_MODEL      — Override DeepSeek model (default: deepseek-chat = DeepSeek V3)
   TOGETHER_API_KEY    — Together AI key (enables Together mode)
   DASHSCOPE_API_KEY   — Dashscope API key (enables cloud mode)
-  PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY — if 1/true: skip Together even when TOGETHER_API_KEY is set
+  PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY — if 1/true: skip DeepSeek+Together, use DashScope
   OLLAMA_HOST         — Ollama endpoint (enables Ollama mode)
   QWEN_BASE_URL       — If contains :11434, treated as Ollama endpoint
 
@@ -33,7 +36,11 @@ logger = logging.getLogger("llm_client")
 
 # ─── CLOUD CONSTANTS ──────────────────────────────────────────────────────────
 
-# Together AI (preferred — US-based, no Chinese identity verification).
+# DeepSeek (preferred for CJK — Chinese lab, first-class zh-CN/zh-TW/ja-JP quality).
+DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1"
+DEEPSEEK_DEFAULT_MODEL = "deepseek-chat"  # DeepSeek V3 — best cost/quality for CJK translation
+
+# Together AI (fallback — US-based, no Chinese identity verification).
 TOGETHER_BASE_URL = "https://api.together.xyz/v1"
 # Model mapping: Together AI model IDs for Qwen equivalents
 TOGETHER_MODELS = {
@@ -81,6 +88,7 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
     else:
         model_cfg = cfg.get("draft_model", cfg)
 
+    deepseek_key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
     together_key = os.environ.get("TOGETHER_API_KEY", "").strip()
     dashscope_key = os.environ.get("DASHSCOPE_API_KEY", "").strip()
     dashscope_only = os.environ.get("PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY", "").strip().lower() in (
@@ -89,8 +97,28 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
         "yes",
     )
 
-    if together_key and not dashscope_only:
-        # ── TOGETHER AI MODE (preferred) ─────────────────────────────────────
+    if deepseek_key and not dashscope_only:
+        # ── DEEPSEEK MODE (preferred for CJK) ────────────────────────────────
+        deepseek_model = (
+            os.environ.get("DEEPSEEK_MODEL", "").strip()
+            or DEEPSEEK_DEFAULT_MODEL
+        )
+        # DeepSeek V3 hard cap: max_tokens must not exceed 8192
+        raw_max = int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000)))
+        resolved = {
+            "base_url": DEEPSEEK_BASE_URL,
+            "api_key": deepseek_key,
+            "model_id": deepseek_model,
+            "temperature": float(model_cfg.get("temperature", 0.6)),
+            "max_tokens": min(raw_max, 8192),
+            "timeout": float(model_cfg.get("timeout_seconds", model_cfg.get("timeout", 180))),
+            "mode": "deepseek",
+            "enable_thinking": False,
+        }
+        logger.debug("LLM client: DeepSeek mode, model=%s, max_tokens=%d", deepseek_model, resolved["max_tokens"])
+
+    elif together_key and not dashscope_only:
+        # ── TOGETHER AI MODE ──────────────────────────────────────────────────
         together_model = (
             os.environ.get("TOGETHER_MODEL", "").strip()
             or TOGETHER_MODELS.get(role, TOGETHER_MODELS["draft"])
@@ -272,7 +300,7 @@ def call_llm(
     max_tokens: int | None = None,
 ) -> str:
     """
-    Call the LLM (cloud Qwen via Dashscope or local Qwen via LM Studio).
+    Call the LLM (DeepSeek / Together AI / DashScope / local).
 
     Args:
         system_prompt: System message content.
@@ -313,6 +341,11 @@ def preflight_check(cfg: dict[str, Any]) -> tuple[bool, str]:
 
     params = get_client_config(cfg)
     mode = params["mode"]
+
+    if mode == "deepseek":
+        if params["api_key"]:
+            return True, f"deepseek mode: DEEPSEEK_API_KEY set, model={params['model_id']}"
+        return False, "deepseek mode: DEEPSEEK_API_KEY is empty"
 
     if mode == "together":
         if params["api_key"]:

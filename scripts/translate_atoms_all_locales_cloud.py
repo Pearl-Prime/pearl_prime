@@ -589,8 +589,18 @@ def main() -> int:
         if loc not in LOCALE_NAMES:
             logger.warning("Unknown locale %r — proceeding (prompt uses raw code)", loc)
 
-    if not args.dry_run and not os.environ.get("DASHSCOPE_API_KEY", "").strip():
-        print("DASHSCOPE_API_KEY is required unless --dry-run", file=sys.stderr)
+    # Accept any of the supported providers; DeepSeek is now the preferred CJK provider.
+    _has_llm_key = (
+        os.environ.get("DEEPSEEK_API_KEY", "").strip()
+        or os.environ.get("DASHSCOPE_API_KEY", "").strip()
+        or os.environ.get("TOGETHER_API_KEY", "").strip()
+    )
+    if not args.dry_run and not _has_llm_key:
+        print(
+            "No LLM API key found. Set DEEPSEEK_API_KEY (preferred), "
+            "DASHSCOPE_API_KEY, or TOGETHER_API_KEY unless --dry-run.",
+            file=sys.stderr,
+        )
         return 2
 
     manifest = discover_atoms(
