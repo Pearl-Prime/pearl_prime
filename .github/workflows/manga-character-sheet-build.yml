@@ -1,0 +1,93 @@
+name: Manga character sheet build
+
+on:
+  workflow_dispatch:
+    inputs:
+      series_id:
+        description: 'Series slug / id'
+        required: true
+      character_ids:
+        description: 'Comma-separated character ids'
+        required: true
+
+jobs:
+  wait_runner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait up to 30m for pearl-star-gpu
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          MAX_WAIT_S: '1800'
+          INTERVAL_S: '30'
+        run: python3 scripts/ci/wait_for_self_hosted_runner.py
+
+  sheets:
+    needs: [wait_runner]
+    runs-on: [self-hosted, pearl-star-gpu]
+    timeout-minutes: 240
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Load operator env (optional)
+        continue-on-error: true
+        run: |
+          if [ -f "$HOME/.config/pearl-star/operator.env" ]; then
+            set -a && . "$HOME/.config/pearl-star/operator.env" && set +a
+          fi
+
+      - name: Verify Pearl Star endpoints
+        env:
+          COMFYUI_URL: ${{ secrets.COMFYUI_URL }}
+          PEARL_STAR_IP: ${{ secrets.PEARL_STAR_IP }}
+          RUNCOMFY_TOKEN: ${{ secrets.RUNCOMFY_TOKEN }}
+        run: |
+          if [ -n "${RUNCOMFY_TOKEN:-}" ]; then echo "::add-mask::$RUNCOMFY_TOKEN"; fi
+          BASE="${COMFYUI_URL:-}"
+          if [ -z "$BASE" ] && [ -n "${PEARL_STAR_IP:-}" ]; then BASE="http://${PEARL_STAR_IP}:8188"; fi
+          if [ -n "$BASE" ]; then curl -sfS "${BASE%/}/system_stats" | head -c 200 || true; fi
+          if [ -n "${PEARL_STAR_IP:-}" ]; then curl -sfS "http://${PEARL_STAR_IP}:11434/api/tags" | head -c 200 || true; fi
+
+      - name: Build character sheet tree (stub)
+        run: |
+          python3 scripts/manga/manga_character_sheet_stub.py \
+            --series-id "${{ inputs.series_id }}" \
+            --character-ids "${{ inputs.character_ids }}"
+
+      - name: Open PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          BRANCH=agent/manga-char-sheets-${{ github.run_id }}
+          git checkout -b "$BRANCH"
+          git add config/source_of_truth/manga_character_sheets/
+          git commit -m "feat(manga): character sheet stubs (${{ inputs.series_id }})" \
+            -m "Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>"
+          git push -u origin "$BRANCH"
+          gh label create agent-generated --color BFD4F2 --description "Agent-opened PRs" 2>/dev/null || true
+          gh pr create \
+            --title "feat(manga): character sheets — ${{ inputs.series_id }}" \
+            --label agent-generated \
+            --body "Character sheet tree (GPU renders TODO)."
+      - name: Upload on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manga-char-sheet-fail-${{ github.run_id }}
+          path: config/source_of_truth/manga_character_sheets/
+          if-no-files-found: ignore
+          retention-days: 30
+      - name: Summary
+        if: always()
+        run: echo "## Character sheet build — ${{ job.status }}" >> "$GITHUB_STEP_SUMMARY"

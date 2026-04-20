@@ -1,6 +1,4 @@
-# Production manga lane: scheduled weekly + manual. Default config uses replay + image_bank
-# (no GPU). For Pearl Star ComfyUI, set image_backend to comfyui in config/weekly_rollout/manga_rollout.yaml
-# and use runs-on: [self-hosted, pearl-star-gpu].
+# Production weekly manga lane. Cron Monday 14:00 UTC (~6am PT) + manual dry_run.
 name: Weekly Manga Rollout
 
 on:
@@ -14,9 +12,23 @@ on:
         default: 'false'
 
 jobs:
-  manga_rollout:
+  wait_runner:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait up to 30m for pearl-star-gpu
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          MAX_WAIT_S: '1800'
+          INTERVAL_S: '30'
+        run: python3 scripts/ci/wait_for_self_hosted_runner.py
+
+  manga_rollout:
+    needs: [wait_runner]
+    runs-on: [self-hosted, pearl-star-gpu]
+    timeout-minutes: 720
     steps:
       - uses: actions/checkout@v4
 
@@ -26,6 +38,29 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt -r requirements-test.txt
+
+      - name: Load operator env (optional)
+        continue-on-error: true
+        run: |
+          if [ -f "$HOME/.config/pearl-star/operator.env" ]; then
+            set -a && . "$HOME/.config/pearl-star/operator.env" && set +a
+          fi
+
+      - name: Mask secrets
+        env:
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          CF_R2_ACCESS_KEY: ${{ secrets.CF_R2_ACCESS_KEY }}
+          CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          RUNCOMFY_TOKEN: ${{ secrets.RUNCOMFY_TOKEN }}
+        run: |
+          set -euo pipefail
+          for x in "$R2_ACCESS_KEY_ID" "$R2_SECRET_ACCESS_KEY" "$R2_ACCOUNT_ID" "$CF_R2_ACCESS_KEY" "$CF_R2_SECRET_KEY" "$SENDGRID_API_KEY" "$CLAUDE_API_KEY" "$RUNCOMFY_TOKEN"; do
+            if [ -n "$x" ]; then echo "::add-mask::$x"; fi
+          done
 
       - name: Run weekly rollout
         env:
@@ -37,12 +72,18 @@ jobs:
           CF_R2_ACCESS_KEY: ${{ secrets.CF_R2_ACCESS_KEY }}
           CF_R2_SECRET_KEY: ${{ secrets.CF_R2_SECRET_KEY }}
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          RUNCOMFY_TOKEN: ${{ secrets.RUNCOMFY_TOKEN }}
           WEEKLY_ROLLOUT_OPERATOR_EMAIL: ${{ vars.WEEKLY_ROLLOUT_OPERATOR_EMAIL }}
         run: |
+          set -euo pipefail
           FLAGS=""
           DRY="${{ github.event.inputs.dry_run }}"
-          if [ "$DRY" = "true" ]; then
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] && [ "$DRY" = "true" ]; then
             FLAGS="--dry-run"
+          fi
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+            FLAGS=""
           fi
           python3 scripts/weekly_manga_rollout.py $FLAGS 2>&1 | tee rollout.log
 
@@ -54,6 +95,7 @@ jobs:
           path: |
             rollout.log
             artifacts/weekly_digests/
+            artifacts/weekly_manga_runs/
           retention-days: 90
           if-no-files-found: ignore
 

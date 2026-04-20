@@ -1,0 +1,49 @@
+# Validates manga-related workflow YAML on pull requests (syntax only).
+name: Manga workflows YAML validate
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/manga*.yml'
+      - '.github/workflows/weekly-manga-rollout.yml'
+      - '.github/workflows/manga-rollout-notify.yml'
+      - '.github/workflows/pearl-star-health.yml'
+
+jobs:
+  parse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Parse workflow YAML files
+        run: |
+          python3 -m pip install -q pyyaml
+          python3 <<'PY'
+          import sys
+          from pathlib import Path
+          import yaml
+          root = Path(".github/workflows")
+          extra = [
+              root / "weekly-manga-rollout.yml",
+              root / "manga-rollout-notify.yml",
+              root / "pearl-star-health.yml",
+          ]
+          paths = sorted(root.glob("manga*.yml")) + [p for p in extra if p.is_file()]
+          ok = True
+          for p in paths:
+              if not p.is_file():
+                  continue
+              try:
+                  yaml.safe_load(p.read_text(encoding="utf-8"))
+                  print("OK", p)
+              except Exception as e:
+                  print("FAIL", p, e, file=sys.stderr)
+                  ok = False
+          sys.exit(0 if ok else 1)
+          PY
+      - name: Summary
+        if: always()
+        run: echo "## Manga workflow YAML parse — ${{ job.status }}" >> "$GITHUB_STEP_SUMMARY"

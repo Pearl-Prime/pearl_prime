@@ -1,116 +1,53 @@
-# GitHub Actions background agents
+# GitHub Actions background agents (manga lane)
 
-Operator reference for the six new workflows in `.github/workflows/` that
-move long-running pipeline tasks off the laptop and into GitHub Actions.
+Pearl Star workloads use a **self-hosted** runner labeled `pearl-star-gpu`. Register the runner against this repository (or the org) in GitHub → **Settings → Actions → Runners → New self-hosted runner**, then start `run.sh` on the Pearl Star host. Apply the labels `self-hosted` and `pearl-star-gpu` so workflows in `.github/workflows/manga-smoke-test.yml` and `weekly-manga-rollout.yml` can schedule.
 
-## Workflows
+Optional operator env on the runner: `$HOME/.config/pearl-star/operator.env` (sourced by workflows) for `COMFYUI_URL`, `PEARL_STAR_IP`, and local paths.
 
-| File | Trigger | Runner | Timeout | Purpose |
-|---|---|---|---|---|
-| `book-flagship-qa-ladder.yml` | `workflow_dispatch` | ubuntu-latest | 180m | Run the spine pipeline across all runtime formats at the flagship quality profile; upload reports as artifacts. |
-| `single-book-smoke.yml` | `workflow_dispatch` | ubuntu-latest | 60m | One-off brand × topic × persona × format smoke test. |
-| `weekly-book-rollout.yml` | `workflow_dispatch` + weekly Sun 06:00 UTC | ubuntu-latest | 720m | Matrix over brands × topics × formats; writes per-combination reports. |
-| `manga-pipeline.yml` | `workflow_dispatch` | self-hosted `pearl-star-gpu` | 360m | Manga chapter render (ComfyUI + panel gen). Requires GPU. |
-| `nightly-regression.yml` | `workflow_dispatch` + daily 03:00 UTC | ubuntu-latest | 180m | Full pytest + governance + readiness gate on `main`. |
-| `pearl-star-health.yml` | `workflow_dispatch` + every 30m | ubuntu-latest | 10m | Heartbeat: checks `pearl-star-gpu` runner registration + status. |
+Related governance: see `docs/GITHUB_GOVERNANCE.md` and the **Verify governance** job (`github-governance-check.yml`). Do not bypass ruleset **Protect main** (required checks include **Core tests** and governance verifiers).
 
-## Trigger examples (gh CLI)
+## Operator cheat sheet (`gh workflow run`)
 
 ```bash
-# Flagship QA ladder (default params — anxiety / gen_z_professionals / 7 formats)
-gh workflow run book-flagship-qa-ladder.yml
+gh workflow run manga-operator-setup-verify.yml
 
-# Flagship QA ladder with custom topic/persona/arc
-gh workflow run book-flagship-qa-ladder.yml \
-  -f topic=grief \
-  -f persona=millennial_women_professionals \
-  -f arc=millennial_women_professionals__grief__watcher__F006.yaml
+gh workflow run manga-smoke-test.yml \
+  -f brand=stillness_press -f topic=anxiety -f genre=shojo \
+  -f persona=gen_z_professionals -f chapter_count=12 -f backend=replay
 
-# Single book smoke (fast sanity check)
-gh workflow run single-book-smoke.yml \
-  -f topic=anxiety -f persona=gen_z_professionals \
-  -f arc=gen_z_professionals__anxiety__overwhelm__F006.yaml \
-  -f runtime_format=standard_book -f quality_profile=draft
+gh workflow run manga-series-pitch.yml \
+  -f brand=stillness_press -f topic=grief -f genre=seinen -f persona=gen_z_professionals
 
-# Weekly rollout (multi-brand)
-gh workflow run weekly-book-rollout.yml \
-  -f brands="gen_z_professionals corporate_managers" \
-  -f topics="anxiety grief" \
-  -f formats="standard_book deep_book_4h"
+gh workflow run manga-character-sheet-build.yml \
+  -f series_id=the_garden_at_tidecalm -f character_ids=hana,mother,neighbor
 
-# Manga pipeline (GPU required)
-gh workflow run manga-pipeline.yml \
-  -f brand=gen_z_professionals -f topic=anxiety \
-  -f genre=shonen -f chapter_count=3
+gh workflow run manga-quality-forensic-analysis.yml
 
-# Nightly regression (manual invocation)
-gh workflow run nightly-regression.yml
+gh workflow run weekly-manga-rollout.yml -f dry_run=true
 
-# Health probe (manual ping)
-gh workflow run pearl-star-health.yml
+gh workflow run manga-fonts-acquire.yml
 ```
 
-Results appear in the Actions tab, with GitHub Step Summary at the top of
-each run. Artifacts are uploaded at the end of every run and retained for
-30–90 days depending on workflow.
-
-## Required GitHub secrets
-
-Configure via **Settings → Secrets and variables → Actions → New repository secret**.
-
-| Secret | Used by | Required for |
-|---|---|---|
-| `RUNCOMFY_TOKEN` | `manga-pipeline.yml` | ComfyUI API access |
-| `CF_R2_ACCESS_KEY` | `manga-pipeline.yml` | Cloudflare R2 asset upload |
-| `CF_R2_SECRET_KEY` | `manga-pipeline.yml` | Cloudflare R2 asset upload |
-| `SENDGRID_API_KEY` | (future) failure notifications | Email alerts |
-| `DASHSCOPE_API_KEY` | Qwen / Pearl Star flows | Atom translation / fill |
-| `ELEVENLABS_API_KEY` | Audiobook / podcast flows | TTS generation |
-
-`GITHUB_TOKEN` is provided automatically by Actions — no setup required.
-
-## Self-hosted runner (`pearl-star-gpu`)
-
-The `manga-pipeline.yml` workflow is pinned to `runs-on: [self-hosted, pearl-star-gpu]`
-and requires a registered runner with that label to be online.
-
-### Verify runner is registered
+Inspect runs:
 
 ```bash
-gh api /repos/Ahjan108/phoenix_omega_v4.8/actions/runners \
-  --jq '.runners[] | select(.labels[].name=="pearl-star-gpu")'
+gh run list --workflow=manga-smoke-test.yml
+gh run view <id>
+gh run download <id>
+gh issue list --label operator-action-required
+gh pr list --label agent-generated --state open
 ```
 
-If this returns nothing, the operator must register the runner on the Pearl Star
-machine following the standard GitHub self-hosted runner setup:
+## Required secrets (names only)
 
-1. **Settings → Actions → Runners → New self-hosted runner**
-2. Select Linux x64
-3. Run the install / configure / run commands GitHub provides
-4. When prompted for labels, add: `pearl-star-gpu`
-5. Start the runner as a service so it survives reboots:
-   ```bash
-   sudo ./svc.sh install
-   sudo ./svc.sh start
-   ```
+| Secret | Used by |
+| --- | --- |
+| `GITHUB_TOKEN` | implicit |
+| `CF_R2_ACCESS_KEY`, `CF_R2_SECRET_KEY` | weekly rollout, R2 uploads |
+| `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_ACCOUNT_ID`, `R2_BUCKET` | weekly rollout (legacy S3-compatible vars) |
+| `SENDGRID_API_KEY` | weekly digest / failure email |
+| `CLAUDE_API_KEY` | forensic + series pitch (optional until wired) |
+| `RUNCOMFY_TOKEN` | RunComfy / hybrid backends |
+| `COMFYUI_URL` or `PEARL_STAR_IP` | Pearl Star health checks on GPU workflows |
 
-### Health monitoring
-
-`pearl-star-health.yml` fires every 30 minutes:
-- If no runner with the `pearl-star-gpu` label is registered → warning only.
-- If the runner is offline during 06:00–22:00 UTC operating hours → job fails.
-
-The failure surfaces in the Actions tab as a red run; if the operator has
-configured GitHub notifications for workflow failures, they will be notified
-by email automatically (GitHub Settings → Notifications).
-
-## Scoping
-
-These workflows are additive. They do **not** replace:
-- `core-tests.yml` (runs on every PR)
-- `github-governance-check.yml` (ruleset required)
-- Any existing pipeline workflow (`catalog-book-pipeline.yml`, `manga-image-gen.yml`, etc.)
-
-Tasks that already have coverage (Core tests on PR, weekly catalog builds, etc.)
-continue via their existing workflows. These six new workflows fill the gap
-for operator-dispatched long-running tasks.
+Repository **Variables** (non-secret): e.g. `WEEKLY_ROLLOUT_OPERATOR_EMAIL`, `COMFYUI_URL` if preferred as variable.
