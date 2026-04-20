@@ -1,0 +1,828 @@
+# Manga Cover Font Registry
+# Extends fonts/manga/ for cover-specific typography
+# All fonts must be OFL or equivalent commercial-use-allowed
+# Last updated: 2026-04-18
+
+version: "1.0.0"
+updated: "2026-04-18"
+extends: "fonts/manga/FONT_REGISTRY.yaml"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# JAPANESE FONTS
+# ─────────────────────────────────────────────────────────────────────────────
+
+japanese:
+  display:
+    - id: dela_gothic_one
+      name: "Dela Gothic One"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Dela+Gothic+One"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [ja, "zh-Hant", "zh-Hans", ko, latin]
+      use_cases: [shonen_title, action_display, impact_header]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Ultra-heavy display. Excellent for shōnen title treatment. Counters fill at sizes below 48px — large-scale only."
+
+    - id: rampart_one
+      name: "Rampart One"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Rampart+One"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [ja, kn, latin]
+      use_cases: [fantasy_title, adventure_display, isekai_header]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Distinctive extruded/3D-adjacent quality. Strong medieval-castle energy. Single weight only. Excellent for fantasy isekai covers."
+
+    - id: rocknroll_one
+      name: "RocknRoll One"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/RocknRoll+One"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [ja, kn, latin]
+      use_cases: [casual_action, sports_secondary, music_manga]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Deliberate stroke irregularity gives pop energy without losing legibility. Single weight. Ideal for youth-targeted shōnen."
+
+    - id: dot_gothic_16
+      name: "DotGothic16"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/DotGothic16"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [ja, kn, latin]
+      use_cases: [retro_display, pixel_aesthetic, game_manga, isekai_game]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Pixel-grid-derived font. Communicates retro-game aesthetic immediately. Genre-specific — do not use outside retro/game contexts."
+
+    - id: zen_kaku_gothic_new
+      name: "Zen Kaku Gothic New"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Zen+Kaku+Gothic+New"
+      license: OFL-1.1
+      weights: [300, 400, 500, 700, 900]
+      scripts: [ja, kn, latin]
+      use_cases: [seinen_title, action_display, horror_title, professional_header, subtitle]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "More geometric and refined than Noto Sans JP. Full weight range (300-900). Excellent for a rigorous contemporary feeling. Black (900) for horror and seinen display."
+
+    - id: biz_udgothic
+      name: "BIZ UDGothic"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/BIZ+UDGothic"
+      license: OFL-1.1
+      weights: [400, 700]
+      scripts: [ja, kn, latin]
+      use_cases: [mixed_script_cover, volume_number, creator_credit]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Universal Design principles. Slightly wider proportions than M PLUS. Two weights only — not ideal for ultra-heavy title display but excellent for volume numbers and creator credits."
+
+  body:
+    - id: noto_sans_jp
+      name: "Noto Sans JP"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/noto/specimen/Noto+Sans+JP"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [ja, kn, latin]
+      use_cases: [shonen_title, action_display, volume_number, creator_credit, subtitle, universal_fallback]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Industry-standard CJK sans. Nine weights. Comprehensive character coverage (6,000+ JLPT-relevant glyphs). Black (900) for title display; Regular (400) for credits. The most reliable choice for production pipelines."
+
+    - id: mplus_1p
+      name: "M PLUS 1p"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/M+PLUS+1p"
+      license: OFL-1.1
+      weights: [100, 300, 400, 500, 700, 800, 900]
+      scripts: [ja, kn, latin]
+      use_cases: [iyashikei_title, slice_of_life_display, kodomomuke_title, warm_action]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Slightly softer gothic structure than Noto Sans JP. More open counters give breathing room at display sizes. Black (900) for iyashikei titles needing shelf presence. Highly recommended as primary shōnen/iyashikei cover title font."
+
+    - id: source_han_sans_jp
+      name: "Source Han Sans JP"
+      source: "Adobe Fonts (GitHub)"
+      url: "https://github.com/adobe-fonts/source-han-sans"
+      license: OFL-1.1
+      weights: [100, 200, 300, 350, 400, 500, 600, 700, 900]
+      scripts: [ja, kn, latin]
+      use_cases: [shonen_title, seinen_title, professional_display, universal_japanese]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Adobe's comprehensive Japanese sans. Nine weights including Heavy (900). OTF format — verify TTF alternate availability in your environment. Pairs consistently with Source Han Serif JP for mixed-weight systems."
+
+  calligraphic:
+    - id: klee_one
+      name: "Klee One"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Klee+One"
+      license: OFL-1.1
+      weights: [400, 600]
+      scripts: [ja, kn, latin]
+      use_cases: [shojo_title, iyashikei_display, bl_title, educational_manga, kodomomuke_secondary]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Semi-cursive font referencing educational handwriting models. Stroke entry and exit clearly defined — feels precise and warm. SemiBold (600) is the primary cover weight. Warmth and human presence — the emotional association is of someone writing thoughtfully."
+
+    - id: kosugi_maru
+      name: "Kosugi Maru"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Kosugi+Maru"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [ja, kn, latin]
+      use_cases: [kodomomuke_title, iyashikei_display, historical_warm, traditional_soft]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Clean round gothic. Single weight only — use size and color contrast to establish hierarchy. Reliable and well-hinted for screen use. Best for kodomomuke and gentle iyashikei covers."
+
+    - id: kosugi
+      name: "Kosugi"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Kosugi"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [ja, kn, latin]
+      use_cases: [horror_title, historical_display, calligraphic_adjacent, traditional_atmosphere]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Bridges formal gothic and brush calligraphy. Strokes show slight variation in weight. Single weight — apply Pillow stroke effect to artificially increase apparent weight if bold treatment is needed. Excellent for horror and historical genres."
+
+    - id: hina_mincho
+      name: "Hina Mincho"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Hina+Mincho"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [ja, kn, latin]
+      use_cases: [romantic_subtitle, shojo_secondary, bl_credit, iyashikei_tagline]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Extremely delicate brush-influenced mincho. Single weight, very light. Better for subtitles, creator credits, and furigana in romantic contexts than for primary title display. Use at 60-80px for subtitles."
+
+    - id: zen_old_mincho
+      name: "Zen Old Mincho"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Zen+Old+Mincho"
+      license: OFL-1.1
+      weights: [400, 500, 600, 700, 900]
+      scripts: [ja, kn, latin]
+      use_cases: [classical_display, historical_title, literary_calligraphic]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Captures stroke variation of traditional calligraphy in mincho form. The archaic forms give authenticity to historical covers. Black (900) weight has presence while maintaining classical character."
+
+  mincho:
+    - id: noto_serif_jp
+      name: "Noto Serif JP"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/noto/specimen/Noto+Serif+JP"
+      license: OFL-1.1
+      weights: [200, 300, 400, 500, 600, 700, 900]
+      scripts: [ja, kn, latin]
+      use_cases: [seinen_title, literary_display, josei_title, horror_restrained]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Excellent foundational mincho. Seven weights. ExtraBold (900) particularly strong for cover display. Recommended for literary seinen and josei covers requiring elegance and gravitas."
+
+    - id: shippori_mincho
+      name: "Shippori Mincho"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Shippori+Mincho"
+      license: OFL-1.1
+      weights: [400, 500, 600, 700, 800]
+      scripts: [ja, kn, latin]
+      use_cases: [seinen_display, literary_title, historical_literary]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Designed specifically for display and title use. Captures the aesthetic of 1960s-70s Japanese book typography. Particularly suited to literary contexts. ExtraBold (800) is the primary cover weight."
+
+    - id: source_han_serif_jp
+      name: "Source Han Serif JP"
+      source: "Adobe Fonts (GitHub)"
+      url: "https://github.com/adobe-fonts/source-han-serif"
+      license: OFL-1.1
+      weights: [250, 300, 350, 400, 500, 600, 700, 900]
+      scripts: [ja, kn, latin]
+      use_cases: [premium_literary, seinen_prestige, historical_premium]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Most technically comprehensive open-source Japanese serif. Pairs consistently with Source Han Sans JP. OTF format — check for TTF alternate in package if needed."
+
+    - id: kaisei_decol
+      name: "Kaisei Decol"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Kaisei+Decol"
+      license: OFL-1.1
+      weights: [400, 500, 700]
+      scripts: [ja, kn, latin]
+      use_cases: [shojo_display, romantic_title, josei_display]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Display-optimized mincho with romantic qualities. Variable stroke contrast creates an elegant impression. Bold (700) for cover title display. More formal than Klee One — suitable for josei and literary romance."
+
+    - id: kaisei_tokumin
+      name: "Kaisei Tokumin"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Kaisei+Tokumin"
+      license: OFL-1.1
+      weights: [400, 500, 700, 800]
+      scripts: [ja, kn, latin]
+      use_cases: [seinen_impact, literary_bold, heavy_mincho_display]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Extra-bold display mincho with very strong presence. ExtraBold (800) weight has the visual authority for literary seinen that needs to compete on a shelf with action titles."
+
+  round_gothic:
+    - id: rounded_mplus
+      name: "Rounded M+"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/M+PLUS+Rounded+1c"
+      license: OFL-1.1
+      weights: [100, 300, 400, 500, 700, 800, 900]
+      scripts: [ja, kn, latin]
+      use_cases: [kodomomuke_title, iyashikei_display, retro_manga, friendly_action]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "More character variation than Kosugi Maru. Excellent for authentic retro-manga feeling. Heavy weights (700-900) work well for kodomomuke title display while maintaining friendly rounded quality."
+
+    - id: zen_maru_gothic
+      name: "Zen Maru Gothic"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Zen+Maru+Gothic"
+      license: OFL-1.1
+      weights: [300, 400, 500, 700, 900]
+      scripts: [ja, kn, latin]
+      use_cases: [shojo_title, iyashikei_display, kodomomuke_secondary, bl_gentle]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Slightly more refined than Rounded M+. Works well in both title and body sizes. Full weight range (300-900) provides excellent design flexibility. Bold and Black weights maintain round quality even at heavy weights."
+
+    - id: mochiy_pop_one
+      name: "Mochiy Pop One"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Mochiy+Pop+One"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [ja, kn, latin]
+      use_cases: [kawaii_display, extreme_kodomomuke, decorative_title]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Extreme roundness. Very contemporary kawaii aesthetic. Single weight. Best for smaller, more decorative titles or kawaii-register covers. Not suitable as a primary display font for anything requiring authority."
+
+# ─────────────────────────────────────────────────────────────────────────────
+# LATIN / ENGLISH FONTS
+# ─────────────────────────────────────────────────────────────────────────────
+
+latin:
+  manga_style:
+    - id: bangers
+      name: "Bangers"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Bangers"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [latin]
+      use_cases: [shonen_title, action_display, sports_title, comedy_header]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Chunky condensed display. Slight italic lean suggests forward movement. Rounded terminals prevent aggression despite weight. Single weight — achieve heavier appearance via stroke rendering. Primary EN font for shōnen cover titles."
+
+    - id: anton
+      name: "Anton"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Anton"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [latin]
+      use_cases: [heavy_shonen, sports_display, dark_action, championship_title]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Extremely heavy condensed sans. Near-vertical stress. Monumental proportions — letters feel carved from stone. More gravitas than Bangers; Anton reads 'champion' where Bangers reads 'adventure'. Single weight."
+
+    - id: permanent_marker
+      name: "Permanent Marker"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Permanent+Marker"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [latin]
+      use_cases: [iyashikei_title, slice_of_life_display, comedy_casual, school_life]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Casual handwritten marker pen letterforms with significant stroke variation. Reads as informal, energetic, genuine. Single weight. Inappropriate for action or literary titles; excellent for slice-of-life and comedy covers."
+
+  display:
+    - id: bebas_neue
+      name: "Bebas Neue"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Bebas+Neue"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [latin]
+      use_cases: [seinen_title, action_display, sports_header, condensed_volume_number]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "All-caps condensed sans with clean geometric letterforms. No lowercase. High visual impact. Single weight. Very widely used in commercial design — consider pairing with less common second font. Works well complementing Japanese brush title treatment."
+
+    - id: oswald
+      name: "Oswald"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Oswald"
+      license: OFL-1.1
+      weights: [200, 300, 400, 500, 600, 700]
+      scripts: [latin]
+      use_cases: [seinen_display, volume_number, subtitle, creator_credit_display, french_title]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Narrow upright sans-serif with clean geometric structure. Six weights (ExtraLight through Bold). Professional and editorial. Excellent for seinen, josei, and literary manga. SemiBold (600) is the recommended cover weight."
+
+    - id: big_shoulders_display
+      name: "Big Shoulders Display"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Big+Shoulders+Display"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [latin]
+      use_cases: [horror_title, thriller_display, dystopian_header, crime_title]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Ultra-condensed display. Strong angular geometry with flat-cut diagonals. Industrial/architectural associations. Full weight range. Black (900) for maximum thriller impact; Thin (100) for atmospheric menacing text."
+
+    - id: cinzel
+      name: "Cinzel"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Cinzel"
+      license: OFL-1.1
+      weights: [400, 500, 600, 700, 800, 900]
+      scripts: [latin]
+      use_cases: [fantasy_title, high_fantasy_display, epic_mecha, historical_fantasy]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Inspired by classical Roman inscriptions. All-caps only. High contrast with pronounced serifs. The grandeur of ancient stone carving. Excellent for fantasy isekai, legendary heroes, ancient prophecies. Regular (400) gives elegance; Bold+ weights add power."
+
+    - id: barlow_condensed
+      name: "Barlow Condensed"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Barlow+Condensed"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [latin]
+      use_cases: [seinen_display, french_title, sports_header, industrial_manga]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Industrial/contemporary condensed sans. Nine weights. Excellent for long French titles (French text tends to be longer than Japanese originals due to grammatical structure). Black (900) for maximum impact action covers."
+
+    - id: montserrat
+      name: "Montserrat"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Montserrat"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [latin]
+      use_cases: [versatile_display, french_market, volume_number, creator_credit]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Geometric sans with rounded stems. Versatile across genres. Nine weights. Strong French design associations. Good for French market covers across a wide range of manga genres. Bold (700) for display; Medium (500) for volume numbers and credits."
+
+    - id: raleway
+      name: "Raleway"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Raleway"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [latin]
+      use_cases: [shojo_display, romantic_title, josei_header, french_elegant, iyashikei_title]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Elegant geometric sans. Excellent for shōjo/josei and romantic titles. Thin and Light weights give refined French editorial feeling. SemiBold (600) recommended for title display. Primary EN font for French manga publisher covers."
+
+    - id: work_sans
+      name: "Work Sans"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Work+Sans"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [latin]
+      use_cases: [seinen_subtitle, creator_credit, volume_number, neutral_secondary]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Optimized for screen but equally effective in print. Clean and neutral. Nine weights. Excellent for creator credits and volume numbers across all genres. SemiBold (600) recommended general-purpose cover weight."
+
+  literary:
+    - id: libre_baskerville
+      name: "Libre Baskerville"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Libre+Baskerville"
+      license: OFL-1.1
+      weights: [400, 700]
+      scripts: [latin]
+      use_cases: [literary_title, josei_display, bl_elegant, seinen_literary, historical_english]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Optimized Baskerville revival. High stroke contrast. Generous x-height for legibility. Strong vertical axis. Elegant italic variant. Bold (700) for display use. More neutral than Playfair Display — suitable for seinen as well as shōjo contexts."
+
+    - id: dm_serif_display
+      name: "DM Serif Display"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/DM+Serif+Display"
+      license: OFL-1.1
+      weights: [400]
+      scripts: [latin]
+      use_cases: [bl_prestige, josei_display, literary_romance, historical_prestige]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "High-contrast serif designed specifically for display sizes (48pt+). Pronounced thick-thin contrast reads elegantly at large scales. Glyphic (wedge) serifs. Strong classical proportions. Reads romantic and elevated simultaneously."
+
+    - id: playfair_display
+      name: "Playfair Display"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Playfair+Display"
+      license: OFL-1.1
+      weights: [400, 500, 600, 700, 800, 900]
+      scripts: [latin]
+      use_cases: [shojo_title, romantic_display, bl_title, josei_prestige]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "High-contrast display serif with elegant proportions. Available in regular, italic, and multiple weights. Excellent italic variant for romantic taglines. Bold (700) recommended for title display in shōjo and josei covers."
+
+    - id: nunito
+      name: "Nunito"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Nunito"
+      license: OFL-1.1
+      weights: [200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [latin]
+      use_cases: [iyashikei_title, kodomomuke_english, slice_of_life_display, gentle_romance]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Rounded terminal sans-serif. Warm, friendly personality. High legibility through rounded apertures. Eight weights. Latin equivalent of Klee One or M PLUS 1 — warmth and gentleness built into letterforms. Black (900) for iyashikei titles needing shelf impact."
+
+    - id: lato
+      name: "Lato"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Lato"
+      license: OFL-1.1
+      weights: [100, 300, 400, 700, 900]
+      scripts: [latin]
+      use_cases: [creator_credit, neutral_secondary, seinen_subtitle, clean_volume_number]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Clean humanist sans. Excellent for creator credits and neutral secondary text across all genres. Light (300) for whisper-register secondary text in horror covers. Black (900) for seinen impact when a more humanist feel than Bebas is needed."
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CJK EXTENDED
+# ─────────────────────────────────────────────────────────────────────────────
+
+cjk_extended:
+  traditional_chinese:
+    - id: noto_serif_tc
+      name: "Noto Serif TC"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/noto/specimen/Noto+Serif+TC"
+      license: OFL-1.1
+      weights: [200, 300, 400, 500, 600, 700, 900]
+      scripts: ["zh-Hant", latin]
+      use_cases: [tc_literary_title, tc_historical_display, tc_josei, tc_bl_title]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Comprehensive Traditional Chinese serif. Handles both Taiwan and HK character sets. Seven weights. The serif variant is excellent for literary/historical contexts — carries same formal/literary associations as Japanese mincho. Recommended primary TC serif for production pipelines."
+
+    - id: noto_sans_tc
+      name: "Noto Sans TC"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/noto/specimen/Noto+Sans+TC"
+      license: OFL-1.1
+      weights: [100, 300, 400, 500, 700, 900]
+      scripts: ["zh-Hant", latin]
+      use_cases: [tc_action_title, tc_shonen_display, tc_contemporary]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Traditional Chinese sans partner to Noto Serif TC. Black (900) for bold cover display. Reliable for action and contemporary genres. Pairs with Noto Sans JP for bilingual JP/TC covers."
+
+    - id: source_han_serif_tc
+      name: "Source Han Serif TC"
+      source: "Adobe Fonts (GitHub)"
+      url: "https://github.com/adobe-fonts/source-han-serif"
+      license: OFL-1.1
+      weights: [250, 300, 350, 400, 500, 600, 700, 900]
+      scripts: ["zh-Hant", "zh-Hans", ja, ko, latin]
+      use_cases: [tc_premium_literary, tc_historical_prestige, tc_seinen]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Premium literary Traditional Chinese serif. Slightly different design decisions from Noto Serif TC — both valid but may have minor glyph differences. Excellent for production pipelines requiring consistent quality across JP/TC elements."
+
+    - id: jf_open_huninn
+      name: "Jf Open Huninn"
+      source: "GitHub (justfont)"
+      url: "https://github.com/justfont/open-huninn-font"
+      license: OFL-1.1
+      weights: [400]
+      scripts: ["zh-Hant", latin]
+      use_cases: [tc_casual_display, tc_iyashikei, tc_kodomomuke, tc_shojo_friendly]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Community-created rounded display font (Traditional Chinese) specifically designed as free alternative to DFPop. Excellent for casual, friendly covers. Rounded terminals give warmth of DFPop without licensing issues. Version 2.0 includes expanded character set. Recommended primary TC round gothic for production use."
+
+  simplified_chinese:
+    - id: noto_sans_sc
+      name: "Noto Sans SC"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/noto/specimen/Noto+Sans+SC"
+      license: OFL-1.1
+      weights: [100, 300, 400, 500, 700, 900]
+      scripts: ["zh-Hans", latin]
+      use_cases: [sc_action_title, sc_contemporary_display, sc_universal]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "The baseline reliable choice for Simplified Chinese. Six weights. Comprehensive character coverage. Black (900) for bold cover display. Recommended primary SC sans for production pipelines serving mainland Chinese market."
+
+    - id: source_han_sans_cn
+      name: "Source Han Sans CN"
+      source: "Adobe Fonts (GitHub)"
+      url: "https://github.com/adobe-fonts/source-han-sans"
+      license: OFL-1.1
+      weights: [100, 200, 300, 350, 400, 500, 600, 700, 900]
+      scripts: ["zh-Hans", latin]
+      use_cases: [sc_premium_display, sc_action_title, sc_professional]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Same quality tier as Source Han Sans JP but with Simplified Chinese glyph set. Nine weights. OTF format — verify TTF alternate availability. Excellent for production pipelines requiring consistent quality across JP/SC bilingual cover elements."
+
+    - id: lxgw_wenkai
+      name: "LXGW WenKai"
+      source: "GitHub (lxgw)"
+      url: "https://github.com/lxgw/LxgwWenKai"
+      license: OFL-1.1
+      weights: [300, 400, 700]
+      scripts: ["zh-Hans", "zh-Hant", latin]
+      use_cases: [sc_iyashikei_subtitle, sc_romantic_tagline, sc_gentle_secondary]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Beautiful hand-writing-influenced kaiti (regular script) font. Covers both Simplified and Traditional Chinese character sets. Excellent for slice-of-life, romance, and iyashikei covers needing warmth and human quality. NOT suitable for bold display use — use for subtitles, credits, and taglines rather than primary title treatment."
+
+  korean:
+    - id: noto_sans_kr
+      name: "Noto Sans KR"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/noto/specimen/Noto+Sans+KR"
+      license: OFL-1.1
+      weights: [100, 300, 400, 500, 700, 900]
+      scripts: [ko, latin]
+      use_cases: [kr_universal_title, kr_action_display, kr_general_purpose]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Reliable comprehensive Korean sans. Six weights. The standard choice when license-clean alternatives are needed. Black (900) for cover title display. Pairs well with Latin fonts from the same Noto superfamily."
+
+    - id: nanum_gothic
+      name: "Nanum Gothic"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Nanum+Gothic"
+      license: OFL-1.1
+      weights: [400, 700, 800]
+      scripts: [ko, latin]
+      use_cases: [kr_action_title, kr_contemporary_display, kr_warm_gothic]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Designed by Sandoll for Naver. Slightly warmer than Noto Sans KR. ExtraBold (800) recommended for cover title display. Good for covers targeting a broad Korean readership. Three weights only — limited flexibility."
+
+    - id: nanum_myeongjo
+      name: "Nanum Myeongjo"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Nanum+Myeongjo"
+      license: OFL-1.1
+      weights: [400, 700, 800]
+      scripts: [ko, latin]
+      use_cases: [kr_literary_title, kr_josei_display, kr_bl_title]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Korean serif (myeongjo) carrying the same formal/literary associations as Japanese mincho. ExtraBold (800) for display use. Suitable for literary manga, josei, and BL covers in Korean editions."
+
+    - id: pretendard
+      name: "Pretendard"
+      source: "GitHub (orioncactus)"
+      url: "https://github.com/orioncactus/pretendard"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [ko, latin]
+      use_cases: [kr_universal_versatile, kr_digital_first, kr_bilingual_cover, kr_all_genres]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "The most versatile and recommended modern Korean OFL font. Nine weights. Excellent Korean/Latin harmonization makes it ideal for bilingual covers. Widely adopted in Korean digital design. Recommended as the default Korean font for production cover generation across all genres."
+
+    - id: suit_variable
+      name: "SUIT Variable"
+      source: "GitHub (sunn-us)"
+      url: "https://github.com/sunn-us/SUIT"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [ko, latin]
+      use_cases: [kr_digital_platform, kr_webtoon_cover, kr_contemporary]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Modern variable font optimized for contemporary UI/screen use. Nine weights. Excellent for covers targeting digital-first audiences (webtoon adaptations, digital manga platforms). The variable weight axis allows precise tuning without loading multiple font files."
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OTHER SCRIPTS
+# ─────────────────────────────────────────────────────────────────────────────
+
+other_scripts:
+  arabic:
+    - id: noto_sans_arabic
+      name: "Noto Sans Arabic"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/noto/specimen/Noto+Sans+Arabic"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [ar, latin]
+      use_cases: [ar_standard_title, ar_action_display, ar_general_purpose]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Standard reliable Arabic font for cover typography. Full weight range (100-900) makes it the most versatile OFL option. Bold (700) or ExtraBold (800) for title display. Requires arabic-reshaper + python-bidi preprocessing before Pillow rendering."
+
+    - id: cairo
+      name: "Cairo"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Cairo"
+      license: OFL-1.1
+      weights: [200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [ar, latin]
+      use_cases: [ar_contemporary_title, ar_all_genres, ar_bilingual_cover]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Genuinely excellent contemporary Arabic display font designed specifically for modern publishing. Includes harmonized Latin alongside Arabic. Eight weights. Recommended as primary choice for most manga cover contexts. Requires arabic-reshaper + python-bidi preprocessing."
+
+    - id: scheherazade_new
+      name: "Scheherazade New"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Scheherazade+New"
+      license: OFL-1.1
+      weights: [400, 700]
+      scripts: [ar]
+      use_cases: [ar_literary_title, ar_historical_display, ar_fantasy_cover]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Nastaliq-adjacent serif Arabic font with traditional calligraphic associations. Appropriate for historical and literary manga covers. The name references One Thousand and One Nights — carries appropriate cultural resonance for fantasy manga. Requires arabic-reshaper + python-bidi preprocessing."
+
+  thai:
+    - id: noto_sans_thai
+      name: "Noto Sans Thai"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/noto/specimen/Noto+Sans+Thai"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [th, latin]
+      use_cases: [th_standard_title, th_action_display, th_general_purpose]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Standard reliable Thai font. Nine weights. Comprehensive glyph coverage. Bold (700) or ExtraBold (800) for cover title display. Set generous leading (line-height ~1.6x) when multi-line to prevent vowel mark collision. Pairs with Noto Sans JP for bilingual JP/TH covers."
+
+    - id: sarabun
+      name: "Sarabun"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Sarabun"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800]
+      scripts: [th, latin]
+      use_cases: [th_literary_title, th_shojo_display, th_josei_cover, th_iyashikei]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Elegant proportioned Thai font designed for both display and body use. Eight weights. More refined feeling than Noto Sans Thai — preferred for shōjo, josei, and iyashikei covers. Bold (700) recommended for cover title display."
+
+    - id: kanit
+      name: "Kanit"
+      source: "Google Fonts"
+      url: "https://fonts.google.com/specimen/Kanit"
+      license: OFL-1.1
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+      scripts: [th, latin]
+      use_cases: [th_action_title, th_sports_display, th_shonen_cover, th_condensed]
+      pillow_compatible: true
+      flux_rendering: overlay_only
+      notes: "Geometric Thai sans with slightly condensed, contemporary feeling. Nine weights. Good for action and shōnen covers. The condensed quality helps accommodate long Thai titles in limited horizontal space. Bold (700) or ExtraBold (800) for primary title display."
+
+# ─────────────────────────────────────────────────────────────────────────────
+# TYPOGRAPHIC PAIRINGS
+# ─────────────────────────────────────────────────────────────────────────────
+
+pairings:
+  shonen:
+    title: dela_gothic_one
+    subtitle: zen_kaku_gothic_new
+    volume_number: noto_sans_jp
+    creator_credit: noto_sans_jp
+    title_en: anton
+    subtitle_en: oswald
+    volume_number_en: bebas_neue
+    notes: "High-energy impact pairing. Title weight dominates; all other elements subordinate. Volume number in colored badge element."
+
+  iyashikei:
+    title: klee_one
+    subtitle: mplus_1p
+    volume_number: mplus_1p
+    creator_credit: klee_one
+    title_en: nunito
+    subtitle_en: nunito
+    volume_number_en: nunito
+    notes: "Soft, natural, breathing-room friendly. No stroke on any element. Warm earth tones or gentle nature palette. Text floats rather than anchors."
+
+  seinen_literary:
+    title: zen_kaku_gothic_new
+    subtitle: noto_sans_jp
+    volume_number: noto_sans_jp
+    creator_credit: noto_sans_jp
+    title_en: libre_baskerville
+    subtitle_en: lato
+    volume_number_en: oswald
+    notes: "Medium weight, open tracking signals literary confidence. No glow or stroke. Monochromatic or very restrained palette."
+
+  horror:
+    title: kosugi
+    subtitle: noto_sans_jp
+    volume_number: noto_sans_jp
+    creator_credit: noto_sans_jp
+    title_en: big_shoulders_display
+    subtitle_en: big_shoulders_display
+    volume_number_en: big_shoulders_display
+    notes: "Irregular strokes at large scale suggest writing under duress. Absence of stroke emphasizes isolation. Secondary text barely present — whisper weight."
+
+  shojo:
+    title: klee_one
+    subtitle: kaisei_decol
+    volume_number: noto_serif_jp
+    creator_credit: hina_mincho
+    title_en: playfair_display
+    subtitle_en: libre_baskerville
+    volume_number_en: raleway
+    notes: "Warm calligraphic title with elegant mincho subtitle. Delicate furigana always included. Jewel tones or blush palette."
+
+  bl_romance:
+    title: klee_one
+    subtitle: noto_sans_jp
+    volume_number: noto_sans_jp
+    creator_credit: hina_mincho
+    title_en: dm_serif_display
+    subtitle_en: libre_baskerville
+    volume_number_en: lato
+    notes: "Romantic and elevated simultaneously. Soft outer glow on title. Jewel tone or amethyst palette. Volume number quietly understated."
+
+  isekai:
+    title: rampart_one
+    subtitle: zen_kaku_gothic_new
+    volume_number: noto_sans_jp
+    creator_credit: noto_sans_jp
+    title_en: cinzel
+    subtitle_en: oswald
+    volume_number_en: bebas_neue
+    notes: "Fantasy weight with forward momentum. Warm golden glow on title. Electric blue or gold palette. Subtitle identifies arc or volume theme."
+
+  historical:
+    title: kosugi_maru
+    subtitle: noto_sans_jp
+    volume_number: noto_serif_jp
+    creator_credit: noto_sans_jp
+    title_en: libre_baskerville
+    subtitle_en: lato
+    volume_number_en: oswald
+    notes: "Period-appropriate restraint. No contemporary glow or stroke effects. Aged ink black on paper cream. Volume number may use kanji numeral notation (dai-N-kan)."
+
+  sports:
+    title: zen_kaku_gothic_new
+    subtitle: noto_sans_jp
+    volume_number: noto_sans_jp
+    creator_credit: noto_sans_jp
+    title_en: bebas_neue
+    subtitle_en: oswald
+    volume_number_en: anton
+    notes: "Athletic condensed, monumental. Sport team colors. Horizontal motion-blur treatment on title characters to suggest speed."
+
+  kodomomuke:
+    title: rounded_mplus
+    subtitle: mplus_1p
+    volume_number: mplus_1p
+    creator_credit: mplus_1p
+    title_en: nunito
+    subtitle_en: nunito
+    volume_number_en: nunito
+    notes: "Maximum contrast, maximum size, maximum friendliness. White stroke 4pt on title. Furigana on all title kanji. Rounded rectangle badge for volume number. Nothing ambiguous."
+
+  psychological_thriller:
+    title: noto_sans_jp
+    subtitle: noto_sans_jp
+    volume_number: noto_sans_jp
+    creator_credit: noto_sans_jp
+    title_en: big_shoulders_display
+    subtitle_en: big_shoulders_display
+    volume_number_en: big_shoulders_display
+    notes: "Controlled, clinical, sparse. Light weight secondary text creates weight contrast. No decorative effects. Near-monochrome palette."
