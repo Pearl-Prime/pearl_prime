@@ -4,90 +4,59 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pearl Prime — Market × Lane Matrix</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/icons.css">
 <style>
+:root{--bg:#f9fafb;--white:#fff;--border:#e5e7eb;--accent:#7c3aed;--ad:#5b21b6;--green:#059669;--gl:#ecfdf5;--gold:#d97706;--gol:#fffbeb;--red:#dc2626;--rl:#fef2f2;--text:#111827;--muted:#6b7280;--r:12px}
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--acc:#b45309;--acc2:#d97706;--serif:"Cormorant Garamond",serif;--mono:"DM Mono",monospace;--bg:#0e0a06}
-body{font-family:"DM Sans",sans-serif;background:var(--bg);color:#faf6f0;line-height:1.6;font-size:14px}
-
-/* ── Hero ──────────────────────────────────── */
-.hero{text-align:center;padding:56px 18px 28px}
-.hero::after{content:"";display:block;width:100%;max-width:600px;height:1px;background:linear-gradient(90deg,transparent,rgba(180,83,9,.2),transparent);margin:20px auto 0}
-.hero h1{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2rem);font-weight:300;color:var(--acc2);letter-spacing:.02em}
-.hero p{font-family:var(--mono);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,240,.2);max-width:620px;margin:8px auto 0}
-
-/* ── Matrix container ──────────────────────── */
-.mx{max-width:1200px;margin:0 auto;padding:16px 16px 60px}
-.desc{color:rgba(250,246,240,.35);font-size:.72rem;margin:0 0 18px;max-width:720px;font-family:var(--mono);letter-spacing:.02em}
-
-/* ── Table ─────────────────────────────────── */
-table{width:100%;border-collapse:collapse;background:rgba(14,10,6,.5);border:1px solid rgba(180,83,9,.1);font-size:.72rem}
-th{background:rgba(180,83,9,.06);font-family:var(--mono);font-weight:400;font-size:.42rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(250,246,240,.3);padding:10px 12px;text-align:left;border-bottom:1px solid rgba(180,83,9,.15);position:sticky;top:36px;z-index:10}
-td{padding:10px 12px;border-bottom:1px solid rgba(180,83,9,.06);vertical-align:top;color:rgba(250,246,240,.5)}
-tr:hover td{background:rgba(180,83,9,.03)}
-
-/* ── Cell content ──────────────────────────── */
-.cel{display:flex;flex-direction:column;gap:3px}
-.mono{font-family:var(--mono);font-size:.6rem;letter-spacing:.04em;color:rgba(250,246,240,.3)}
-.n{font-family:var(--mono);font-size:.62rem;font-weight:400}
-.n0{color:rgba(250,246,240,.2)}
-.nok{color:#22c55e}
-.nwarn{color:var(--acc2)}
-.nmiss{color:#ef4444}
-
-/* ── Status badge ──────────────────────────── */
-.pill{display:inline-block;font-family:var(--mono);font-size:.38rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:1px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#22c55e}
-
-/* ── Lane preview ──────────────────────────── */
-.lane-preview{width:40px;height:40px;border-radius:3px;overflow:hidden;border:1px solid rgba(180,83,9,.1);background:rgba(14,10,6,.6);margin-top:4px;flex-shrink:0}
-.lane-preview img,.lane-preview video{width:100%;height:100%;object-fit:cover;display:block}
-.lane-preview .pv-ph{font-family:var(--mono);font-size:.38rem;padding:4px;text-align:center;line-height:1.2;color:rgba(250,246,240,.15)}
-
-/* ── Legend ─────────────────────────────────── */
-.legend{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 16px;font-family:var(--mono);font-size:.44rem;letter-spacing:.06em;color:rgba(250,246,240,.25)}
-.legend code{font-family:var(--mono);font-size:.42rem;color:rgba(180,83,9,.5);background:rgba(180,83,9,.06);padding:1px 4px;border-radius:1px}
-
-.foot{margin-top:28px;font-family:var(--mono);font-size:.44rem;color:rgba(250,246,240,.15);letter-spacing:.04em}
-
-/* ── Banner ────────────────────────────────── */
-.banner{display:none;max-width:1000px;margin:16px auto;padding:12px 16px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:3px;color:rgba(239,68,68,.7);font-size:.72rem}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:14px}
+.hero{text-align:center;padding:44px 18px 24px;background:linear-gradient(180deg,#f3f4f6,var(--bg));border-bottom:1px solid var(--border)}
+.hero h1{font-size:clamp(1.3rem,3vw,2rem);font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,#5b21b6,#0891b2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--muted);max-width:620px;margin:12px auto 0;font-size:.9rem}
+.nav-top{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.nav-top a{font-size:.75rem;font-weight:600;color:var(--ad);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--white)}
+.nav-top a.nav-wizard{border-color:var(--accent);background:#ede9fe;font-weight:700}
+.nav-top a.nav-wizard:hover{background:#ddd6fe}
+.banner{display:none;max-width:1000px;margin:16px auto;padding:12px 16px;background:var(--rl);border:1px solid #fecaca;border-radius:var(--r);color:#991b1b;font-size:.85rem}
 .banner.on{display:block}
+.mx{max-width:1100px;margin:0 auto;padding:24px 16px 40px}
+.desc{color:var(--muted);font-size:.88rem;margin:8px 0 18px;max-width:720px}
+table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;font-size:.78rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:#f3f4f6;font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+tr:last-child td{border-bottom:none}
+.mono{font-family:ui-monospace,monospace;font-size:.68rem}
+.cel{display:flex;flex-direction:column;gap:4px}
+.n{font-weight:700}
+.n0{color:var(--muted)}
+.nok{color:var(--green)}
+.nwarn{color:var(--gold)}
+.nmiss{color:var(--red)}
+.pill{display:inline-block;font-size:.58rem;padding:2px 6px;border-radius:999px;background:var(--gl);color:var(--green);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0;font-size:.72rem;color:var(--muted)}
+.lane-preview{width:40px;height:40px;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:#f3f4f6;margin-top:6px;flex-shrink:0}
+.lane-preview img,.lane-preview video{width:100%;height:100%;object-fit:cover;display:block}
+.lane-preview .pv-ph{font-size:.55rem;padding:4px;text-align:center;line-height:1.2;color:var(--muted)}
+.foot{margin-top:28px;font-size:.78rem;color:var(--muted)}
 </style>
 </head>
 <body>
-<!-- Phoenix Command Universal Nav -->
-<nav data-nav="universal" style="position:fixed;top:0;left:0;right:0;height:36px;background:rgba(14,10,6,.97);border-bottom:1px solid rgba(180,83,9,.12);display:flex;align-items:center;padding:0 14px;gap:8px;z-index:9999;backdrop-filter:blur(8px);font-family:'DM Sans',sans-serif;overflow-x:auto">
-<a href="pearl_prime_entry.html" style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:300;color:#d97706;text-decoration:none;white-space:nowrap" data-i18n="nav.brand">Pearl Prime</a>
-<span style="width:1px;height:14px;background:rgba(180,83,9,.2);flex-shrink:0"></span>
-<a href="pearl_prime_entry.html" class="unav" data-i18n="nav.markets">Markets</a>
-<a href="teacher_select.html" class="unav" data-i18n="nav.teachers">Teachers</a>
-<a href="teacher_showcase.html" class="unav" data-i18n="nav.showcase">Showcase</a>
-<a href="presenter.html?deck=intro" class="unav" data-i18n="nav.intro">Intro</a>
-<a href="presenter.html?deck=marketing" class="unav" data-i18n="nav.marketing">Marketing</a>
-<a href="marketing_dashboard.html" class="unav" data-i18n="nav.dashboard">Dashboard</a>
-<a href="market_lane_matrix.html" class="unav" style="color:var(--acc2)" data-i18n="nav.matrix">Matrix</a>
-<a href="brand_admin.html" class="unav" style="color:#d97706;border:1px solid rgba(180,83,9,.25);margin-left:auto" data-i18n="nav.admin">Brand Admin</a>
-</nav>
-<style>.unav{font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,246,240,.3);text-decoration:none;padding:3px 7px;border-radius:3px;transition:all .15s;white-space:nowrap}.unav:hover{color:rgba(250,246,240,.7);background:rgba(180,83,9,.08)}</style>
-<div style="height:36px"></div>
-<script src="assets/i18n.js"></script>
-<script src="assets/icons.js"></script>
-<!-- /Universal Nav -->
-
 <div class="hero">
-<h1 data-i18n="matrix.title">Market × Lane Matrix</h1>
-<p data-i18n="matrix.desc">Decision surface — what exists by market and lane, where proof is missing, which comparison sets touch each cell</p>
+<h1>Market × Lane Matrix</h1>
+<p>Decision surface: what exists by market and lane, where proof is missing, and which comparison sets touch each cell — derived from the example registry.</p>
+<div class="nav-top">
+<a href="brand_onboarding_hub.html">Hub</a>
+<a class="nav-wizard" href="https://brand-admin-onboarding.pages.dev" target="_blank" rel="noopener">Live wizard</a>
+<a href="lane_examples_gallery.html">Examples Gallery</a>
+<a href="brand_admin_master_onboarding.html">Master Onboarding</a>
+<a href="brand_admin_weekly_os.html">Weekly OS</a>
 </div>
-
+</div>
 <div id="err" class="banner">Load failed. Serve repo root over HTTP and ensure <code>config/onboarding/example_registry.json</code> exists.</div>
-
 <div class="mx" id="main" style="display:none">
-<div class="legend"><span class="pill">Ready</span> = status: ready. Sets = distinct comparison_set_id values. Empty = no registry rows.</div>
-<div id="table-wrap" style="overflow-x:auto"></div>
-<p class="foot">Explainer metadata lives in <code>config/onboarding/wizard_decision_explainer_data.json</code></p>
+<p class="desc"><strong>Pearl Marketing:</strong> Use this table before committing packaging budget — it links lanes and markets to concrete proof tiles and highlights gaps.</p>
+<div class="legend"><span class="pill">Ready</span> counts include only <code>status: ready</code>. Sets = distinct <code>comparison_set_id</code> values appearing in that cell. Empty cells = no registry rows yet.</div>
+<div id="table-wrap"></div>
+<p class="foot">Explainer metadata for “recommended for” copy lives in <code>config/onboarding/wizard_decision_explainer_data.json</code> (separate from this matrix).</p>
 </div>
-
 <script>
 (function(){
 var LANE_PREVIEW_ID={self_help:'pack_v1_vi_premium_v1',audiobook:'pack_v1_sys_audiobook_dominance_v1',manga:null,pearl_news:'pack_v1_mission_output_overview',breathwork_tools:'pack_v1_sys_eois_v1',tools:'pack_v1_sys_chaos_slot_v1',other:'pack_v1_mission_output_overview'};
@@ -101,7 +70,7 @@ function lanePreviewEl(lane, byId){
   if(r.status==='ready'&&r.asset_path){
     if(isVid(r.asset_path)){var v=document.createElement('video');v.src=resolveUrl(r.asset_path);v.muted=true;v.playsInline=true;v.setAttribute('preload','metadata');d.appendChild(v);}
     else{var im=document.createElement('img');im.alt='';im.src=resolveUrl(r.asset_path);d.appendChild(im);}
-  }else{var ph=el('div','pv-ph','Pending');d.appendChild(ph);}
+  }else{var ph=el('div','pv-ph','Preview pending');d.appendChild(ph);}
   return d;
 }
 function loadRegistryJson(){
@@ -121,8 +90,11 @@ loadRegistryJson().then(function(rows){
   document.getElementById('main').style.display='block';
 
   var byId={};rows.forEach(function(r){byId[r.id]=r;});
+
   var markets={};var lanes={};
-  rows.forEach(function(r){markets[r.market]=1;lanes[r.lane]=1;});
+  rows.forEach(function(r){
+    markets[r.market]=1;lanes[r.lane]=1;
+  });
   var mktList=Object.keys(markets).sort();
   var laneList=Object.keys(lanes).sort();
 
@@ -146,7 +118,7 @@ loadRegistryJson().then(function(rows){
     laneList.forEach(function(l){
       var k=m+'|'+l;var d=cell[k];
       var td=el('td');
-      if(!d){td.textContent='\u2014';td.style.color='rgba(250,246,240,.1)';tr.appendChild(td);return}
+      if(!d){td.textContent='—';td.style.color='var(--muted)';tr.appendChild(td);return}
       var wrap=el('div','cel');
       var setN=Object.keys(d.sets).length;
       wrap.appendChild(el('span','n '+clsReady(d.ready,d.total),String(d.ready)+' ready / '+d.total+' total'));
