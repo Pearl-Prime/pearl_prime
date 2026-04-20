@@ -201,6 +201,25 @@ def _stage_lettering(workspace: Path) -> None:
     )
 
 
+def _stage_bubble_render(workspace: Path) -> None:
+    from phoenix_v4.manga.chapter.bubble_render import render_bubbles_on_panels
+
+    script = _load_json(workspace / manga_paths.CHAPTER_SCRIPT_WRITER_HANDOFF)
+    lettering = _load_json(workspace / manga_paths.LETTERING_SPEC)
+    manifest = _load_json(workspace / manga_paths.PANEL_IMAGES_MANIFEST)
+    out_dir = workspace / manga_paths.BUBBLED_PANELS_DIR
+    updated = render_bubbles_on_panels(
+        chapter_script=script,
+        lettering_spec=lettering,
+        panel_images_manifest=manifest,
+        bubble_style_config=None,
+        out_dir=out_dir,
+    )
+    (workspace / manga_paths.PANEL_IMAGES_MANIFEST).write_text(
+        json.dumps(updated, indent=2) + "\n", encoding="utf-8"
+    )
+
+
 def _stage_layout(workspace: Path) -> None:
     from phoenix_v4.manga.chapter.page_compose import compose_final_page_pngs
 
@@ -461,6 +480,7 @@ def run_chapter_dag(
         ),
         sid.CHAPTER_IMAGE_GEN: lambda: _stage_image_gen(ws, image_backend),
         sid.CHAPTER_LETTERING: lambda: _stage_lettering(ws),
+        sid.CHAPTER_BUBBLE_RENDER: lambda: _stage_bubble_render(ws),
         sid.CHAPTER_LAYOUT: lambda: _stage_layout(ws),
         sid.ITE_BREATH: lambda: _stage_ite_breath(ws),
         sid.ITE_GUTTER: lambda: _stage_ite_gutter(ws),
