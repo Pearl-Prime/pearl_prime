@@ -25,7 +25,7 @@ brands:
         encoding="utf-8",
     )
     root = tmp_path / "manga_profiles"
-    series_dir = root / "examples"
+    series_dir = root / "series"
     series_dir.mkdir(parents=True)
     series_dir.joinpath("one.yaml").write_text(
         """
@@ -203,3 +203,76 @@ def test_build_dashboard_multibrand(tmp_path: Path) -> None:
     assert out.exists()
     assert "stillness_press" in content
     assert "cognitive_clarity" in content
+
+
+def test_examples_excluded_from_extraction(tmp_path: Path) -> None:
+    """Files under examples/ must not appear in extraction output."""
+    reg = tmp_path / "brand_registry.yaml"
+    reg.write_text(
+        "schema_version: 1\nbrands:\n  stillness_press:\n    catalog_id: en_us_core\n    locale: en_US\n",
+        encoding="utf-8",
+    )
+    root = tmp_path / "manga_profiles"
+
+    # Create a real series under series/
+    series_dir = root / "series"
+    series_dir.mkdir(parents=True)
+    series_dir.joinpath("sp_real.yaml").write_text(
+        "title_id: sp_real_001\nbrand_id: stillness_press\nprofile_type: series\n",
+        encoding="utf-8",
+    )
+
+    # Create an example file that should be excluded
+    examples_dir = root / "examples"
+    examples_dir.mkdir(parents=True)
+    examples_dir.joinpath("josei_workplace_romance_001.yaml").write_text(
+        "title_id: josei_workplace_romance_001\nbrand_id: stillness_press\n",
+        encoding="utf-8",
+    )
+
+    entries, errs = extract_all(root, reg)
+    assert not errs
+    ids = [e["series_id"] for e in entries]
+    assert "josei_workplace_romance_001" not in ids, "example file must be excluded"
+    assert "sp_real_001" in ids, "real series file must be present"
+
+
+def test_three_stillness_press_series_extracted() -> None:
+    """Production index must contain exactly 3 stillness_press series."""
+    from scripts.catalog_visibility.extract_manga_series_index import (
+        BRAND_REGISTRY_PATH,
+        BRAND_SERIES_PLAN_PATH,
+        MANGA_PROFILE_ROOT,
+    )
+
+    entries, errs = extract_all(MANGA_PROFILE_ROOT, BRAND_REGISTRY_PATH, BRAND_SERIES_PLAN_PATH)
+    sp_entries = [e for e in entries if e.get("brand_id") == "stillness_press"]
+    assert len(sp_entries) == 3, (
+        f"Expected 3 stillness_press series, got {len(sp_entries)}: "
+        f"{[e.get('series_id') for e in sp_entries]}"
+    )
+    sp_ids = {e["series_id"] for e in sp_entries}
+    assert "stillness_press_anxiety_vol1" in sp_ids
+    assert "stillness_press_sleep_vol1" in sp_ids
+    assert "stillness_press_somatic_vol1" in sp_ids
+
+
+def test_all_series_have_required_marketing_fields() -> None:
+    """Every series in the production index must have non-null marketing_angle and launch_priority."""
+    from scripts.catalog_visibility.extract_manga_series_index import (
+        BRAND_REGISTRY_PATH,
+        BRAND_SERIES_PLAN_PATH,
+        MANGA_PROFILE_ROOT,
+    )
+
+    entries, _errs = extract_all(MANGA_PROFILE_ROOT, BRAND_REGISTRY_PATH, BRAND_SERIES_PLAN_PATH)
+    for entry in entries:
+        sid = entry.get("series_id", "?")
+        angle = entry.get("marketing_angle")
+        priority = entry.get("launch_priority")
+        assert angle is not None and str(angle).strip(), (
+            f"series_id={sid} has null/empty marketing_angle"
+        )
+        assert priority is not None and str(priority).strip(), (
+            f"series_id={sid} has null/empty launch_priority"
+        )

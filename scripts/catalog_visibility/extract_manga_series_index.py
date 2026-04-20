@@ -152,6 +152,8 @@ def discover_profile_files(root: Path) -> list[Path]:
     for p in sorted(root.rglob("*.yaml")):
         if p.name == "schema.yaml":
             continue
+        if "examples" in p.parts:
+            continue
         paths.append(p)
     return paths
 
@@ -269,6 +271,9 @@ def extract_all(
             continue
         if "brand_id" not in raw:
             errors.append(f"{path}: missing brand_id — skipped")
+            continue
+        # Skip brand-genre lane templates — they are not production series
+        if raw.get("profile_type") == "brand_genre_lane":
             continue
         series.append(raw_doc_to_entry(raw, path, brands, plan_brands))
 
