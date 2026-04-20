@@ -234,7 +234,8 @@ def translate_file(
                 cfg,
                 role="draft",
                 temperature=0.25,
-                max_tokens=32000,
+                # Note: do NOT pass max_tokens here — let get_client_config() apply
+                # per-provider caps (e.g. DeepSeek V3 hard limit is 8192).
             )
             last_meta = meta
             return out, meta
