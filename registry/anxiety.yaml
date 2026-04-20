@@ -22,11 +22,24 @@ sections:
         - variant_id: ch01_sec01_hook_f1
           variant_number: 1
           variant_family: F1
-          content: You did everything they said to do. Your chest has not gotten the memo.
+          content: |
+            You did everything they said to do. Your chest has not gotten the memo.
+            
+            You breathed. You listed what you're grateful for. You asked yourself whether the worry was rational. It was not. You knew it was not. Your body didn't care.
+            
+            This is The Alarm. It fires whether or not there is a threat. It was built for a world where threats were immediate — where danger had teeth, and speed mattered. You are not in that world right now. The alarm doesn't know that.
+            
+            The alarm reads uncertainty as danger. It reads stillness as suspicious. It fires at emails, at silences, at the pause before someone speaks. It fires at nothing.
+            
+            You have tried to argue with it. The alarm is not listening. It does not process logic. It processes signals — and it has learned to find signals everywhere.
+            
+            This is not a flaw in your thinking. It is not weakness. It is a system doing exactly what it was built to do — in a context where that system no longer fits.
+            
+            The work ahead is not about silencing The Alarm. It's about understanding why it's still ringing.
           fingerprint:
-            char_count: 71
-            paragraph_count: 1
-            sentence_count: 2
+            char_count: 1041
+            paragraph_count: 7
+            sentence_count: 26
           location_tokens: []
         - variant_id: ch01_sec01_hook_f2
           variant_number: 2
@@ -72,12 +85,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: diagnosis
-          tension_type: identity_threat
-          propulsion_type: revelation
-          shareability: 4
-          collision_family: hypervigilance_pattern
       section_02:
         section_id: ch01_sec02
         section: 2
@@ -156,12 +163,6 @@ sections:
           scene_type: digital
           location_tokens:
           - '{location.digital_space}'
-          reader_objection: not_that_bad
-          proof_mode: lived_experience
-          tension_type: curiosity_gap
-          propulsion_type: image_return
-          shareability: 3
-          collision_family: hypervigilance_pattern
       section_03:
         section_id: ch01_sec03
         section: 3
@@ -240,12 +241,6 @@ sections:
           scene_type: relational
           location_tokens:
           - '{location.digital_space}'
-          reader_objection: not_that_bad
-          proof_mode: story
-          tension_type: curiosity_gap
-          propulsion_type: image_return
-          shareability: 3
-          collision_family: boundary_narrative
       section_04:
         section_id: ch01_sec04
         section: 4
@@ -324,12 +319,6 @@ sections:
           scene_type: social
           location_tokens:
           - '{location.social_gathering}'
-          reader_objection: not_that_bad
-          proof_mode: story
-          tension_type: curiosity_gap
-          propulsion_type: image_return
-          shareability: 3
-          collision_family: boundary_narrative
       section_05:
         section_id: ch01_sec05
         section: 5
@@ -344,10 +333,8 @@ sections:
           variant_number: 1
           variant_family: F1
           content: |
-            Where in your life do you run from what is difficult? Can you name one place where
-            you use busy-ness, distraction, or sleep to not feel something? Not to change it,
-            but to see it. What would happen if you stopped running for just five breaths?
-          fingerprint:
+            Your nervous system fires the alarm even when there's no threat. The alarm is real. The danger isn't. Your chest tightens. Your stomach clenches. Your throat closes slightly. This is the alarm running — not a verdict on your sanity or your capacity. It was built to protect you, and it can't always tell the difference between a predator and a deadline. The alarm fires. That's its job. Your job is to notice it's running — not to obey it.
+                    fingerprint:
             char_count: 244
             paragraph_count: 1
             sentence_count: 4
@@ -382,12 +369,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: lived_experience
-          tension_type: contradiction
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_06:
         section_id: ch01_sec06
         section: 6
@@ -454,12 +435,6 @@ sections:
           section_type: TEACHER_DOCTRINE
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: lived_experience
-          tension_type: curiosity_gap
-          propulsion_type: revelation
-          shareability: 4
-          collision_family: nervous_system_reset
       section_07:
         section_id: ch01_sec07
         section: 7
@@ -512,12 +487,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: lived_experience
-          tension_type: identity_threat
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_08:
         section_id: ch01_sec08
         section: 8
@@ -570,12 +539,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: lived_experience
-          tension_type: identity_threat
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_09:
         section_id: ch01_sec09
         section: 9
@@ -631,12 +594,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: nervous_system_reset
       section_10:
         section_id: ch01_sec10
         section: 10
@@ -692,12 +649,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: lived_experience
-          tension_type: curiosity_gap
-          propulsion_type: promise
-          shareability: 3
-          collision_family: nervous_system_reset
   chapter_02:
     chapter: 2
     title: When The Alarm Made Sense
@@ -765,12 +716,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: story
-          tension_type: mystery
-          propulsion_type: revelation
-          shareability: 4
-          collision_family: hypervigilance_pattern
       section_02:
         section_id: ch02_sec02
         section: 2
@@ -849,12 +794,6 @@ sections:
           scene_type: origin
           location_tokens:
           - '{location.memory_space}'
-          reader_objection: not_broken_enough
-          proof_mode: story
-          tension_type: mystery
-          propulsion_type: image_return
-          shareability: 3
-          collision_family: hypervigilance_pattern
       section_03:
         section_id: ch02_sec03
         section: 3
@@ -907,12 +846,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: lived_experience
-          tension_type: mystery
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_04:
         section_id: ch02_sec04
         section: 4
@@ -965,12 +898,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: lived_experience
-          tension_type: mystery
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_05:
         section_id: ch02_sec05
         section: 5
@@ -1023,12 +950,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: lived_experience
-          tension_type: mystery
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_06:
         section_id: ch02_sec06
         section: 6
@@ -1081,12 +1002,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: lived_experience
-          tension_type: mystery
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_07:
         section_id: ch02_sec07
         section: 7
@@ -1139,12 +1054,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: lived_experience
-          tension_type: mystery
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_08:
         section_id: ch02_sec08
         section: 8
@@ -1197,12 +1106,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: lived_experience
-          tension_type: mystery
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_09:
         section_id: ch02_sec09
         section: 9
@@ -1258,12 +1161,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: nervous_system_reset
   chapter_03:
     chapter: 3
     title: The Pattern Running Your Nervous System
@@ -1331,12 +1228,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: diagnosis
-          tension_type: contradiction
-          propulsion_type: revelation
-          shareability: 4
-          collision_family: hypervigilance_pattern
       section_02:
         section_id: ch03_sec02
         section: 2
@@ -1415,12 +1306,6 @@ sections:
           scene_type: internal
           location_tokens:
           - '{location.daily_space}'
-          reader_objection: already_tried
-          proof_mode: lived_experience
-          tension_type: contradiction
-          propulsion_type: image_return
-          shareability: 3
-          collision_family: hypervigilance_pattern
       section_03:
         section_id: ch03_sec03
         section: 3
@@ -1473,12 +1358,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: lived_experience
-          tension_type: contradiction
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_04:
         section_id: ch03_sec04
         section: 4
@@ -1531,12 +1410,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: lived_experience
-          tension_type: contradiction
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_05:
         section_id: ch03_sec05
         section: 5
@@ -1589,12 +1462,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: lived_experience
-          tension_type: contradiction
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_06:
         section_id: ch03_sec06
         section: 6
@@ -1647,12 +1514,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: lived_experience
-          tension_type: contradiction
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_07:
         section_id: ch03_sec07
         section: 7
@@ -1705,12 +1566,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: lived_experience
-          tension_type: contradiction
-          propulsion_type: question
-          shareability: 3
-          collision_family: thought_labeling
       section_08:
         section_id: ch03_sec08
         section: 8
@@ -1766,12 +1621,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: framework
-          tension_type: curiosity_gap
-          propulsion_type: promise
-          shareability: 3
-          collision_family: thought_labeling
   chapter_04:
     chapter: 4
     title: What The Alarm Actually Does To Your Body
@@ -1839,12 +1688,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: neuroscience
-          tension_type: curiosity_gap
-          propulsion_type: revelation
-          shareability: 4
-          collision_family: nervous_system_reset
       section_02:
         section_id: ch04_sec02
         section: 2
@@ -1923,12 +1766,6 @@ sections:
           scene_type: action
           location_tokens:
           - '{location.learning_space}'
-          reader_objection: not_that_bad
-          proof_mode: neuroscience
-          tension_type: curiosity_gap
-          propulsion_type: image_return
-          shareability: 3
-          collision_family: nervous_system_reset
       section_03:
         section_id: ch04_sec03
         section: 3
@@ -1981,12 +1818,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: neuroscience
-          tension_type: curiosity_gap
-          propulsion_type: question
-          shareability: 3
-          collision_family: body_scan
       section_04:
         section_id: ch04_sec04
         section: 4
@@ -2039,12 +1870,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: neuroscience
-          tension_type: curiosity_gap
-          propulsion_type: question
-          shareability: 3
-          collision_family: body_scan
       section_05:
         section_id: ch04_sec05
         section: 5
@@ -2097,12 +1922,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: neuroscience
-          tension_type: curiosity_gap
-          propulsion_type: question
-          shareability: 3
-          collision_family: body_scan
       section_06:
         section_id: ch04_sec06
         section: 6
@@ -2116,11 +1935,8 @@ sections:
         - variant_id: ch04_sec06_exercise_f1
           variant_number: 1
           variant_family: F1
-          content: Buddha's dialogue with Emperor Wu illustrates this point when he identified himself as "no one," beyond
-            the realm of self and identity.Recognizing the Teachings of Enlightenment:In Buddhism, it is crucial to be open
-            to the teachings of enlightenment, as they are often invisible to those trapped in negative states of mind. Spiritual
-            literature, compassionate practices, and meditation help individuals raise their consciousness and gain a deeper
-            understanding of universal truths.
+          content: |
+            Place one hand on your chest and one on your stomach. Right now, without changing anything, notice which one moves more when you breathe. Notice if there's tightness, buzzing, or held tension anywhere in that space. The alarm is somewhere in your body right now — not because something is wrong, but because your system is doing its job. You don't need to fix it. Just locate it. Stay here for 3 breaths. Notice what shifts.
           fingerprint:
             char_count: 481
             paragraph_count: 1
@@ -2157,12 +1973,6 @@ sections:
           section_type: EXERCISE
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: breathing_exercise
       section_07:
         section_id: ch04_sec07
         section: 7
@@ -2218,12 +2028,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: not_that_bad
-          proof_mode: neuroscience
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: nervous_system_reset
   chapter_05:
     chapter: 5
     title: What Living On Alert Actually Costs
@@ -2291,12 +2095,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: story
-          tension_type: stakes
-          propulsion_type: revelation
-          shareability: 4
-          collision_family: shame_recognition
       section_02:
         section_id: ch05_sec02
         section: 2
@@ -2375,12 +2173,6 @@ sections:
           scene_type: high-intensity
           location_tokens:
           - '{location.high_stakes_space}'
-          reader_objection: not_broken_enough
-          proof_mode: story
-          tension_type: stakes
-          propulsion_type: image_return
-          shareability: 3
-          collision_family: shame_recognition
       section_03:
         section_id: ch05_sec03
         section: 3
@@ -2433,12 +2225,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: lived_experience
-          tension_type: stakes
-          propulsion_type: question
-          shareability: 3
-          collision_family: shame_recognition
       section_04:
         section_id: ch05_sec04
         section: 4
@@ -2491,12 +2277,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: lived_experience
-          tension_type: stakes
-          propulsion_type: question
-          shareability: 3
-          collision_family: shame_recognition
       section_05:
         section_id: ch05_sec05
         section: 5
@@ -2549,12 +2329,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: lived_experience
-          tension_type: stakes
-          propulsion_type: question
-          shareability: 3
-          collision_family: shame_recognition
       section_06:
         section_id: ch05_sec06
         section: 6
@@ -2607,12 +2381,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: lived_experience
-          tension_type: stakes
-          propulsion_type: question
-          shareability: 3
-          collision_family: shame_recognition
       section_07:
         section_id: ch05_sec07
         section: 7
@@ -2668,12 +2436,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: not_broken_enough
-          proof_mode: framework
-          tension_type: stakes
-          propulsion_type: promise
-          shareability: 3
-          collision_family: shame_recognition
   chapter_06:
     chapter: 6
     title: Letting The Alarm Ring
@@ -2741,12 +2503,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: too_painful
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: revelation
-          shareability: 5
-          collision_family: shame_recognition
       section_02:
         section_id: ch06_sec02
         section: 2
@@ -2825,12 +2581,6 @@ sections:
           scene_type: memory
           location_tokens:
           - '{location.memory_space}'
-          reader_objection: too_painful
-          proof_mode: story
-          tension_type: relief_anticipation
-          propulsion_type: image_return
-          shareability: 4
-          collision_family: shame_recognition
       section_03:
         section_id: ch06_sec03
         section: 3
@@ -2883,12 +2633,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: too_painful
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: shame_recognition
       section_04:
         section_id: ch06_sec04
         section: 4
@@ -2941,12 +2685,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: too_painful
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: shame_recognition
       section_05:
         section_id: ch06_sec05
         section: 5
@@ -2999,12 +2737,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: too_painful
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: shame_recognition
       section_06:
         section_id: ch06_sec06
         section: 6
@@ -3057,12 +2789,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: too_painful
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: shame_recognition
       section_07:
         section_id: ch06_sec07
         section: 7
@@ -3118,12 +2844,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: too_painful
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 4
-          collision_family: nervous_system_reset
   chapter_07:
     chapter: 7
     title: Small Exposures
@@ -3191,12 +2911,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: framework
-          tension_type: curiosity_gap
-          propulsion_type: promise
-          shareability: 4
-          collision_family: nervous_system_reset
       section_02:
         section_id: ch07_sec02
         section: 2
@@ -3275,12 +2989,6 @@ sections:
           scene_type: action
           location_tokens:
           - '{location.learning_space}'
-          reader_objection: already_tried
-          proof_mode: story
-          tension_type: curiosity_gap
-          propulsion_type: image_return
-          shareability: 3
-          collision_family: nervous_system_reset
       section_03:
         section_id: ch07_sec03
         section: 3
@@ -3294,11 +3002,8 @@ sections:
         - variant_id: ch07_sec03_exercise_f1
           variant_number: 1
           variant_family: F1
-          content: Buddha's dialogue with Emperor Wu illustrates this point when he identified himself as "no one," beyond
-            the realm of self and identity.Recognizing the Teachings of Enlightenment:In Buddhism, it is crucial to be open
-            to the teachings of enlightenment, as they are often invisible to those trapped in negative states of mind. Spiritual
-            literature, compassionate practices, and meditation help individuals raise their consciousness and gain a deeper
-            understanding of universal truths.
+          content: |
+            Place your palm flat against your chest. Feel the warmth of your hand there. Don't try to slow anything down or breathe differently. Just let your hand rest on the tightness. Stay for 10 seconds. The alarm is running — that's okay. You're not fleeing it. You're staying with it, just for a moment. That's enough.
           fingerprint:
             char_count: 481
             paragraph_count: 1
@@ -3335,12 +3040,6 @@ sections:
           section_type: EXERCISE
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: nervous_system_reset
       section_04:
         section_id: ch07_sec04
         section: 4
@@ -3354,11 +3053,8 @@ sections:
         - variant_id: ch07_sec04_exercise_f1
           variant_number: 1
           variant_family: F1
-          content: Buddha's dialogue with Emperor Wu illustrates this point when he identified himself as "no one," beyond
-            the realm of self and identity.Recognizing the Teachings of Enlightenment:In Buddhism, it is crucial to be open
-            to the teachings of enlightenment, as they are often invisible to those trapped in negative states of mind. Spiritual
-            literature, compassionate practices, and meditation help individuals raise their consciousness and gain a deeper
-            understanding of universal truths.
+          content: |
+            Take a breath and aim it toward your stomach — not your chest. Let your belly expand outward as the air comes in. It may feel unnatural at first, especially if the alarm is running. Do this 3 breaths. Don't force it soft. Just let the breath go there. On the third exhale, notice what your stomach feels like. Let it land.
           fingerprint:
             char_count: 481
             paragraph_count: 1
@@ -3395,12 +3091,6 @@ sections:
           section_type: EXERCISE
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: nervous_system_reset
       section_05:
         section_id: ch07_sec05
         section: 5
@@ -3414,11 +3104,7 @@ sections:
         - variant_id: ch07_sec05_exercise_f1
           variant_number: 1
           variant_family: F1
-          content: Buddha's dialogue with Emperor Wu illustrates this point when he identified himself as "no one," beyond
-            the realm of self and identity.Recognizing the Teachings of Enlightenment:In Buddhism, it is crucial to be open
-            to the teachings of enlightenment, as they are often invisible to those trapped in negative states of mind. Spiritual
-            literature, compassionate practices, and meditation help individuals raise their consciousness and gain a deeper
-            understanding of universal truths.
+          content: Notice your hands right now. Are they gripping something? Pressed tight against each other? Curled inward? Let them rest — open, on your lap or at your sides. Feel the weight of them settle. The alarm doesn't need your hands to be ready. Let them be still for 10 seconds. That's one rep.
           fingerprint:
             char_count: 481
             paragraph_count: 1
@@ -3455,12 +3141,6 @@ sections:
           section_type: EXERCISE
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: nervous_system_reset
       section_06:
         section_id: ch07_sec06
         section: 6
@@ -3513,12 +3193,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: framework
-          tension_type: curiosity_gap
-          propulsion_type: promise
-          shareability: 3
-          collision_family: nervous_system_reset
       section_07:
         section_id: ch07_sec07
         section: 7
@@ -3574,12 +3248,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: nervous_system_reset
   chapter_08:
     chapter: 8
     title: When The Alarm Screams
@@ -3647,12 +3315,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: story
-          tension_type: stakes
-          propulsion_type: revelation
-          shareability: 4
-          collision_family: shame_recognition
       section_02:
         section_id: ch08_sec02
         section: 2
@@ -3731,12 +3393,6 @@ sections:
           scene_type: setback
           location_tokens:
           - '{location.daily_space}'
-          reader_objection: wont_work_for_me
-          proof_mode: story
-          tension_type: stakes
-          propulsion_type: image_return
-          shareability: 3
-          collision_family: shame_recognition
       section_03:
         section_id: ch08_sec03
         section: 3
@@ -3750,11 +3406,7 @@ sections:
         - variant_id: ch08_sec03_exercise_f1
           variant_number: 1
           variant_family: F1
-          content: Buddha's dialogue with Emperor Wu illustrates this point when he identified himself as "no one," beyond
-            the realm of self and identity.Recognizing the Teachings of Enlightenment:In Buddhism, it is crucial to be open
-            to the teachings of enlightenment, as they are often invisible to those trapped in negative states of mind. Spiritual
-            literature, compassionate practices, and meditation help individuals raise their consciousness and gain a deeper
-            understanding of universal truths.
+          content: Press both feet into the floor. Push down with your heels first, then the balls of your feet. Feel the floor push back. The alarm is loud right now — that's real. But the floor is here too. Press for 60 seconds. You don't have to go anywhere. Notice what shifts.
           fingerprint:
             char_count: 481
             paragraph_count: 1
@@ -3791,12 +3443,6 @@ sections:
           section_type: EXERCISE
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: body_scan
       section_04:
         section_id: ch08_sec04
         section: 4
@@ -3810,11 +3456,8 @@ sections:
         - variant_id: ch08_sec04_exercise_f1
           variant_number: 1
           variant_family: F1
-          content: Buddha's dialogue with Emperor Wu illustrates this point when he identified himself as "no one," beyond
-            the realm of self and identity.Recognizing the Teachings of Enlightenment:In Buddhism, it is crucial to be open
-            to the teachings of enlightenment, as they are often invisible to those trapped in negative states of mind. Spiritual
-            literature, compassionate practices, and meditation help individuals raise their consciousness and gain a deeper
-            understanding of universal truths.
+          content: |
+            Let your jaw drop slightly — just enough that your upper and lower teeth aren't touching. Notice what your face was doing a moment ago. Let your tongue rest away from the roof of your mouth. Stay here for 3 breaths. The alarm runs through the face and jaw. You're not stopping it. You're just loosening the grip. That's enough.
           fingerprint:
             char_count: 481
             paragraph_count: 1
@@ -3851,12 +3494,6 @@ sections:
           section_type: EXERCISE
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: body_scan
       section_05:
         section_id: ch08_sec05
         section: 5
@@ -3870,11 +3507,8 @@ sections:
         - variant_id: ch08_sec05_exercise_f1
           variant_number: 1
           variant_family: F1
-          content: Buddha's dialogue with Emperor Wu illustrates this point when he identified himself as "no one," beyond
-            the realm of self and identity.Recognizing the Teachings of Enlightenment:In Buddhism, it is crucial to be open
-            to the teachings of enlightenment, as they are often invisible to those trapped in negative states of mind. Spiritual
-            literature, compassionate practices, and meditation help individuals raise their consciousness and gain a deeper
-            understanding of universal truths.
+          content: |
+            When the alarm is loudest, take one exhale — long and slow, out through your mouth. Don't try to inhale first. Just let what's already there come out. Feel your chest and stomach empty slightly. The alarm may still be running. That's okay. You breathed through it, not away from it. Notice what shifts.
           fingerprint:
             char_count: 481
             paragraph_count: 1
@@ -3911,12 +3545,6 @@ sections:
           section_type: EXERCISE
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: body_scan
       section_06:
         section_id: ch08_sec06
         section: 6
@@ -3969,12 +3597,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: lived_experience
-          tension_type: stakes
-          propulsion_type: question
-          shareability: 3
-          collision_family: shame_recognition
       section_07:
         section_id: ch08_sec07
         section: 7
@@ -4030,12 +3652,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: framework
-          tension_type: stakes
-          propulsion_type: promise
-          shareability: 4
-          collision_family: shame_recognition
   chapter_09:
     chapter: 9
     title: When Your Body Learns It's Safe
@@ -4103,12 +3719,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: too_simple
-          proof_mode: neuroscience
-          tension_type: relief_anticipation
-          propulsion_type: revelation
-          shareability: 4
-          collision_family: nervous_system_reset
       section_02:
         section_id: ch09_sec02
         section: 2
@@ -4187,12 +3797,6 @@ sections:
           scene_type: integration
           location_tokens:
           - '{location.daily_space}'
-          reader_objection: not_that_bad
-          proof_mode: neuroscience
-          tension_type: curiosity_gap
-          propulsion_type: image_return
-          shareability: 3
-          collision_family: nervous_system_reset
       section_03:
         section_id: ch09_sec03
         section: 3
@@ -4245,12 +3849,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: too_simple
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: body_scan
       section_04:
         section_id: ch09_sec04
         section: 4
@@ -4303,12 +3901,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: too_simple
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: body_scan
       section_05:
         section_id: ch09_sec05
         section: 5
@@ -4361,12 +3953,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: too_simple
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: body_scan
       section_06:
         section_id: ch09_sec06
         section: 6
@@ -4419,12 +4005,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: too_simple
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: body_scan
       section_07:
         section_id: ch09_sec07
         section: 7
@@ -4480,12 +4060,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: too_simple
-          proof_mode: neuroscience
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 4
-          collision_family: nervous_system_reset
   chapter_10:
     chapter: 10
     title: When The Alarm Comes Back
@@ -4553,12 +4127,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: story
-          tension_type: contradiction
-          propulsion_type: revelation
-          shareability: 5
-          collision_family: shame_recognition
       section_02:
         section_id: ch10_sec02
         section: 2
@@ -4637,12 +4205,6 @@ sections:
           scene_type: setback
           location_tokens:
           - '{location.daily_space}'
-          reader_objection: wont_work_for_me
-          proof_mode: story
-          tension_type: contradiction
-          propulsion_type: image_return
-          shareability: 4
-          collision_family: shame_recognition
       section_03:
         section_id: ch10_sec03
         section: 3
@@ -4695,12 +4257,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: lived_experience
-          tension_type: contradiction
-          propulsion_type: question
-          shareability: 4
-          collision_family: thought_labeling
       section_04:
         section_id: ch10_sec04
         section: 4
@@ -4753,12 +4309,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: lived_experience
-          tension_type: contradiction
-          propulsion_type: question
-          shareability: 4
-          collision_family: thought_labeling
       section_05:
         section_id: ch10_sec05
         section: 5
@@ -4811,12 +4361,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: lived_experience
-          tension_type: contradiction
-          propulsion_type: question
-          shareability: 4
-          collision_family: thought_labeling
       section_06:
         section_id: ch10_sec06
         section: 6
@@ -4869,12 +4413,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: lived_experience
-          tension_type: contradiction
-          propulsion_type: question
-          shareability: 4
-          collision_family: thought_labeling
       section_07:
         section_id: ch10_sec07
         section: 7
@@ -4930,12 +4468,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 3
-          collision_family: nervous_system_reset
   chapter_11:
     chapter: 11
     title: Living With The Alarm On Low
@@ -5003,12 +4535,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: lived_experience
-          tension_type: identity_threat
-          propulsion_type: revelation
-          shareability: 5
-          collision_family: shame_recognition
       section_02:
         section_id: ch11_sec02
         section: 2
@@ -5087,12 +4613,6 @@ sections:
           scene_type: forward
           location_tokens:
           - '{location.learning_space}'
-          reader_objection: wont_work_for_me
-          proof_mode: story
-          tension_type: identity_threat
-          propulsion_type: image_return
-          shareability: 4
-          collision_family: shame_recognition
       section_03:
         section_id: ch11_sec03
         section: 3
@@ -5145,12 +4665,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: lived_experience
-          tension_type: identity_threat
-          propulsion_type: question
-          shareability: 4
-          collision_family: shame_recognition
       section_04:
         section_id: ch11_sec04
         section: 4
@@ -5203,12 +4717,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: lived_experience
-          tension_type: identity_threat
-          propulsion_type: question
-          shareability: 4
-          collision_family: shame_recognition
       section_05:
         section_id: ch11_sec05
         section: 5
@@ -5261,12 +4769,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: lived_experience
-          tension_type: identity_threat
-          propulsion_type: question
-          shareability: 4
-          collision_family: shame_recognition
       section_06:
         section_id: ch11_sec06
         section: 6
@@ -5319,12 +4821,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: lived_experience
-          tension_type: identity_threat
-          propulsion_type: question
-          shareability: 4
-          collision_family: shame_recognition
       section_07:
         section_id: ch11_sec07
         section: 7
@@ -5380,12 +4876,6 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: wont_work_for_me
-          proof_mode: framework
-          tension_type: identity_threat
-          propulsion_type: promise
-          shareability: 4
-          collision_family: shame_recognition
   chapter_12:
     chapter: 12
     title: What Opens When You Stop Waiting
@@ -5453,12 +4943,6 @@ sections:
           section_type: HOOK
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: diagnosis
-          tension_type: contradiction
-          propulsion_type: revelation
-          shareability: 4
-          collision_family: hypervigilance_pattern
       section_02:
         section_id: ch12_sec02
         section: 2
@@ -5537,12 +5021,6 @@ sections:
           scene_type: forward
           location_tokens:
           - '{location.learning_space}'
-          reader_objection: already_tried
-          proof_mode: story
-          tension_type: relief_anticipation
-          propulsion_type: image_return
-          shareability: 5
-          collision_family: boundary_narrative
       section_03:
         section_id: ch12_sec03
         section: 3
@@ -5595,12 +5073,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: boundary_narrative
       section_04:
         section_id: ch12_sec04
         section: 4
@@ -5653,12 +5125,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: boundary_narrative
       section_05:
         section_id: ch12_sec05
         section: 5
@@ -5711,12 +5177,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: boundary_narrative
       section_06:
         section_id: ch12_sec06
         section: 6
@@ -5769,12 +5229,6 @@ sections:
           section_type: REFLECTION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: lived_experience
-          tension_type: relief_anticipation
-          propulsion_type: question
-          shareability: 4
-          collision_family: boundary_narrative
       section_07:
         section_id: ch12_sec07
         section: 7
@@ -5830,9 +5284,3 @@ sections:
           section_type: INTEGRATION
           scene_type: null
           location_tokens: []
-          reader_objection: already_tried
-          proof_mode: framework
-          tension_type: relief_anticipation
-          propulsion_type: promise
-          shareability: 5
-          collision_family: boundary_narrative
