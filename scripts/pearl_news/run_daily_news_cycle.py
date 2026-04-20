@@ -203,6 +203,10 @@ def run_teacher(
                 status="publish",
                 slug=data.get("slug"),
                 author=data.get("author"),
+                meta={
+                    "pearl_news_layout": "sidebar",
+                    "pearl_news_template": "sidebar",
+                },
                 featured_image=data.get("featured_image"),
                 featured_image_url=data.get("featured_image_url"),
                 featured_image_path=(

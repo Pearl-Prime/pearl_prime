@@ -180,6 +180,33 @@ def _upload_media_from_file(
     return int(att_id)
 
 
+def update_post_meta(post_id: int, meta: dict[str, Any]) -> dict[str, Any]:
+    """PATCH a post's meta fields via the WP REST API.
+
+    Note: only meta keys registered with show_in_rest=True in WordPress are
+    writable this way. For Newspaper theme layout keys (td_post_template) that
+    are not REST-registered, this call silently no-ops on those keys.
+    Use this for any meta keys that ARE REST-registered.
+    """
+    if requests is None:
+        raise WordPressPublishError("Install requests: pip install requests")
+    site_url, username, app_password = _get_credentials()
+    url = f"{site_url}/wp-json/wp/v2/posts/{post_id}"
+    payload: dict[str, Any] = {"meta": meta}
+    headers = {**_auth_headers(username, app_password), "Content-Type": "application/json"}
+    response = requests.patch(url, headers=headers, json=payload, timeout=30)
+    if not response.ok:
+        try:
+            err = response.json()
+            code = err.get("code", "")
+            msg = err.get("message", str(err))
+            detail = f"WordPress API error {response.status_code}: {code or response.reason} — {msg}"
+        except Exception:
+            detail = f"WordPress API error {response.status_code}: {response.text or response.reason}"
+        raise WordPressPublishError(detail)
+    return response.json()
+
+
 def post_article(
     title: str,
     content: str,
@@ -189,6 +216,7 @@ def post_article(
     author: int | None = None,
     categories: list[int] | None = None,
     tags: list[int] | None = None,
+    meta: dict[str, Any] | None = None,
     append_disclaimer: bool = False,
     disclaimer_text: str | None = None,
     featured_image: dict[str, Any] | None = None,
@@ -237,6 +265,8 @@ def post_article(
     }
     if author is not None:
         payload["author"] = int(author)
+    if meta:
+        payload["meta"] = meta
     # Omit null slug so WP generates from title
     if payload["slug"] is None:
         del payload["slug"]

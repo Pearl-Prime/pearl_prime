@@ -48,6 +48,7 @@ from pearl_news.pipeline.qc_checklist import run_qc_checklist
 from pearl_news.pipeline.teacher_resolver import resolve_teacher
 from pearl_news.pipeline.article_validator import run_validation
 from pearl_news.pipeline.image_selector import run_image_selection
+from pearl_news.pipeline.assemble_v52 import assemble_v52
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s %(message)s")
 logger = logging.getLogger(__name__)
@@ -169,6 +170,11 @@ def main() -> int:
         help="Run rule-based featured image selection using image_catalog.yaml",
     )
     ap.add_argument(
+        "--v52",
+        action="store_true",
+        help="Render articles using v5.2 interactive layout (exercise, sidebar, poll, co-creation)",
+    )
+    ap.add_argument(
         "-v",
         "--verbose",
         action="store_true",
@@ -209,6 +215,8 @@ def main() -> int:
                 lang_args_list.append("--verbose")
             if args.no_filter_qc:
                 lang_args_list.append("--no-filter-qc")
+            if args.v52:
+                lang_args_list.append("--v52")
             import sys
             old_argv = sys.argv
             sys.argv = ["run_article_pipeline"] + lang_args_list
@@ -384,9 +392,62 @@ def main() -> int:
         teacher = item.get("_teacher_resolved") or {}
         validation = item.get("_validation") or {}
 
+        teacher_id_val = teacher.get("teacher_id")
+        teacher_name = teacher.get("display_name") or "a teacher from the United Spiritual Leaders Forum"
+        teacher_tradition = teacher.get("tradition") or "interfaith"
+        teacher_attribution = teacher.get("attribution") or ""
+        pub_date_display = (item.get("pub_date") or "")[:10]
+
+        if args.v52:
+            # v5.2 interactive layout: exercise sidebar, poll, co-creation, full design system
+            v52_meta = {
+                "teacher": teacher_id_val or "maat",
+                "topic": item.get("topic", "general"),
+                "sdg": item.get("primary_sdg", "3"),
+                "template": template_id,
+                "date": pub_date_display,
+                "news_event": item.get("title", ""),
+                "hero_image_url": featured_image_url or "",
+            }
+            article_content = assemble_v52(item, v52_meta, standalone=False)
+        else:
+            # Simple byline + body + teacher sidebar (legacy path)
+            topic_label = (item.get("topic") or "").replace("_", " ").title()
+            attribution_block = (
+                '<p class="pn-sidebar-attribution">' + teacher_attribution + "</p>"
+                if teacher_attribution else ""
+            )
+            byline_html = (
+                f'<div class="pn-byline">'
+                f'<span class="pn-byline-name">{teacher_name}</span>'
+                f' | <span class="pn-byline-tradition">{teacher_tradition}</span>'
+                f' | <span class="pn-byline-lang">{language.upper()}</span>'
+                f' | <time class="pn-byline-date">{pub_date_display}</time>'
+                f'</div>'
+            )
+            sidebar_html = (
+                '<aside class="pn-sidebar" data-teacher="' + (teacher_id_val or "") + '">'
+                '<section class="pn-sidebar-teacher">'
+                '<h3 class="pn-sidebar-teacher-name">' + teacher_name + "</h3>"
+                '<p class="pn-sidebar-tradition">' + teacher_tradition + "</p>"
+                '<p class="pn-sidebar-lang">Writing in: ' + language.upper() + "</p>"
+                + attribution_block
+                + "</section>"
+                '<section class="pn-sidebar-topic">'
+                '<p class="pn-sidebar-topic-label">Topic: ' + topic_label + "</p>"
+                "</section>"
+                '<section class="pn-sidebar-cta">'
+                "<p class=\"pn-sidebar-cta-text\">Follow this teacher's perspective on Pearl News</p>"
+                "</section>"
+                "</aside>"
+            )
+            raw_content = item.get("content", "")
+            article_content = byline_html + "\n" + raw_content + "\n" + sidebar_html
+
         article_payload = {
             "title": item.get("article_title") or item.get("title", ""),
-            "content": item.get("content", ""),
+            "content": article_content,
+            "teacher_id": teacher_id_val,
             "slug": article_id + lang_suffix,
             "author": author_id,
             "article_type": template_id,
@@ -412,6 +473,12 @@ def main() -> int:
             "ei_scores": item.get("_ei_scores"),
             "ei_flags": item.get("_ei_flags") or [],
             "needs_manual_review": item.get("_needs_manual_review", False),
+            "sidebar": {
+                "teacher_name": teacher_name,
+                "teacher_tradition": teacher_tradition,
+                "teacher_language": language,
+                "topic": item.get("topic", ""),
+            },
         }
         if featured_image:
             article_payload["featured_image"] = featured_image

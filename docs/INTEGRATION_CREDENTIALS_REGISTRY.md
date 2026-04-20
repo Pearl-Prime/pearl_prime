@@ -2,7 +2,7 @@
 
 **Purpose:** Single canonical reference for every external service credential in Phoenix Omega.
 **Owner:** Pearl_Int / Pearl_Architect
-**Last updated:** 2026-04-02 (Phase 1 + 2 scope banner; checker alignment)
+**Last updated:** 2026-04-19 (Added Groq, xAI/Grok, Together AI as Pearl News EN free-tier LLM providers)
 **Rule:** No actual secrets in this file. Only env var names, documentation, and pointers.
 
 ### Phase 1 + 2 scope (deliverables)
@@ -72,20 +72,45 @@ This reads the registry below and reports which env vars are set vs missing.
 - `COSYVOICE_URL` = http://192.168.1.112:9880
 - `QWEN_BASE_URL` = http://192.168.1.112:11434/v1
 
-### 1a. Together AI — LLM (preferred)
+### 1a. Together AI — LLM (preferred for Qwen translation; free fallback for Pearl News EN)
 
 | Field | Value |
 |-------|-------|
 | **Env vars** | `TOGETHER_API_KEY`, `TOGETHER_MODEL` |
-| **Consumed by** | `scripts/localization/llm_client.py` (auto-detected, takes priority over DashScope) |
+| **Consumed by** | `scripts/localization/llm_client.py` (auto-detected, takes priority over DashScope); `pearl_news/pipeline/slot_expansion.py` (`together_slots` fallback 2) |
 | **GitHub workflows** | `translate-bestseller-atoms.yml`, `generate-and-translate-atoms.yml` |
-| **How to obtain** | Together AI: https://api.together.ai/settings/api-keys — create key |
-| **Required vs optional** | Preferred for all Qwen LLM work (translation, research). Falls back to DashScope if not set. |
-| **Status** | Wired in CI and local scripts |
-| **Default models** | Draft: `Qwen/Qwen2.5-7B-Instruct-Turbo`, Judge: `Qwen/Qwen3-235B-A22B-Instruct-2507-tput` |
+| **How to obtain** | Together AI: https://api.together.ai/settings/api-keys — create free key |
+| **Required vs optional** | Preferred for all Qwen LLM work (translation, research). Falls back to DashScope if not set. Free tier: **1M tokens/month** |
+| **Status** | Wired in CI and local scripts; also Pearl News EN fallback 2 |
+| **Default models** | Draft: `Qwen/Qwen2.5-7B-Instruct-Turbo`, Judge: `Qwen/Qwen3-235B-A22B-Instruct-2507-tput`; Pearl News: `meta-llama/Llama-3.3-70B-Instruct-Turbo-Free` |
 | **Base URL** | `https://api.together.xyz/v1` (hardcoded, OpenAI-compatible) |
 
-### 1b. Qwen / DashScope (Alibaba Cloud) — LLM (fallback)
+### 1b. Groq — LLM (Pearl News EN default, free tier)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `GROQ_API_KEY` |
+| **Consumed by** | `pearl_news/pipeline/slot_expansion.py` (`groq_slots` — default provider for EN + non-CJK6) |
+| **GitHub workflows** | Pearl News fill workflows |
+| **How to obtain** | Groq Console: https://console.groq.com/keys — create free API key |
+| **Required vs optional** | **Preferred for Pearl News EN articles.** Free tier: ~14,400 req/day, 6,000 tokens/min |
+| **Status** | ⚠️ NOT YET IN KEYCHAIN — must add `GROQ_API_KEY` via `security add-generic-password` |
+| **Model** | `llama-3.3-70b-versatile` (free, fast) |
+| **Base URL** | `https://api.groq.com/openai/v1` (OpenAI-compatible) |
+
+### 1c. xAI (Grok) — LLM (Pearl News EN fallback 1, free credits)
+
+| Field | Value |
+|-------|-------|
+| **Env vars** | `XAI_API_KEY` |
+| **Consumed by** | `pearl_news/pipeline/slot_expansion.py` (`grok_slots` — fallback 1 when Groq fails) |
+| **How to obtain** | xAI Console: https://console.x.ai — create API key ($25/mo free credits auto-applied) |
+| **Required vs optional** | Optional fallback. Free tier: **$25/month free credits** |
+| **Status** | ⚠️ NOT YET IN KEYCHAIN — must add `XAI_API_KEY` via `security add-generic-password` |
+| **Model** | `grok-3-mini` (free) |
+| **Base URL** | `https://api.x.ai/v1` (OpenAI-compatible) |
+
+### 1d. Qwen / DashScope (Alibaba Cloud) — LLM (CJK6 primary; EN fallback)
 
 | Field | Value |
 |-------|-------|

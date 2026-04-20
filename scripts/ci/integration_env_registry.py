@@ -25,12 +25,18 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("OpenAI", "OPENAI_API_KEY", False, "OpenAI API key (TTS + fallback LLM)"),
     ("Ollama", "OLLAMA_HOST", False, "Local Ollama endpoint"),
     ("Ollama", "OLLAMA_MODEL", False, "Local Ollama model"),
+    # --- Free-tier LLM providers (EN / non-CJK article expansion) ---
+    ("Groq", "GROQ_API_KEY", False, "Free EN default: llama-3.3-70b-versatile. Get: console.groq.com/keys"),
+    ("xAI / Grok", "XAI_API_KEY", False, "Free EN fallback 1: grok-3-mini. $25/mo free credits. Get: console.x.ai"),
+    ("Together AI", "TOGETHER_API_KEY", False, "Free EN fallback 2: Llama-3.3-70B-Instruct-Turbo-Free. 1M tokens/mo. Get: api.together.ai"),
     # --- Media / TTS ---
     ("ElevenLabs", "ELEVENLABS_API_KEY", False, "TTS (guided audio, journal prompts)"),
     # --- Infrastructure ---
     ("Cloudflare", "CLOUDFLARE_ACCOUNT_ID", False, "Workers AI + Pages"),
     ("Cloudflare", "CLOUDFLARE_API_TOKEN", False, "Cloudflare API token"),
-    ("Cloudflare", "CLOUDFLARE_AI_API_TOKEN", False, "Workers AI alt token"),
+    ("Cloudflare", "CLOUDFLARE_AI_API_TOKEN", False, "Workers AI inference token"),
+    ("Cloudflare", "CLOUDFLARE_AI_BASE_URL", False, "Workers AI OpenAI-compat base URL (accounts/<ID>/ai/v1)"),
+    ("Cloudflare", "CLOUDFLARE_AI_MODEL", False, "Workers AI model name (e.g. @cf/google/gemma-3-12b-it)"),
     ("GitHub", "GITHUB_TOKEN", False, "GitHub API (auto in Actions)"),
     ("GitHub", "GITHUB_REPOSITORY", False, "owner/repo for API calls; auto in Actions"),
     # --- Publishing ---

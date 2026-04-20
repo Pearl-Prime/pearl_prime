@@ -131,8 +131,8 @@ def _render_article(
     item: dict[str, Any],
     atoms_root: Path,
     config_root: Path | None = None,
-) -> tuple[str, str]:
-    """Build full HTML content and plain title from template slots."""
+) -> tuple[str, str, dict]:
+    """Build full HTML content, plain title, and raw slots dict from template slots."""
     root = Path(__file__).resolve().parent.parent
     config_root = config_root or (root / "config")
     slots = template.get("section_slots") or []
@@ -143,6 +143,7 @@ def _render_article(
 
     parts = []
     title = ""
+    raw_slots: dict = {}
     for s in slots:
         slot_name = (s if isinstance(s, str) else s.get("slot")) or ""
         source = s.get("source", "generate") if isinstance(s, dict) else "generate"
@@ -153,6 +154,8 @@ def _render_article(
         content = _resolve_slot(
             slot_name, source, item, atoms_root, topic, primary_sdg, sdg_labels, un_body, config_root
         )
+        if slot_name:
+            raw_slots[slot_name] = content
         if not content and slot_name == "label" and "Commentary" in str(s):
             parts.append("<p><strong>Commentary</strong></p>")
             continue
@@ -171,7 +174,7 @@ def _render_article(
         display_url = url[:80] + "…" if len(url) > 80 else url
         body = body.rstrip() + "\n\n<p><em>Source: <a href=\"" + url + "\">" + display_url + "</a></em></p>"
     headline = title or item.get("title") or item.get("raw_title") or "Pearl News"
-    return headline, body
+    return headline, body, raw_slots
 
 
 def assemble_articles(
@@ -192,10 +195,11 @@ def assemble_articles(
         template_file = item.get("template_file") or f"{template_id}.yaml"
         template = _load_template(templates_dir, template_file)
 
-        headline, content = _render_article(template, item, atoms_root)
+        headline, content, raw_slots = _render_article(template, item, atoms_root)
 
         item["article_title"] = headline
         item["content"] = content
+        item["slots"] = raw_slots
         item["content_plain"] = headline + "\n\n" + content.replace("<p>", "\n").replace("</p>", "").replace("<h1>", "\n").replace("</h1>", "").replace("<h2>", "\n").replace("</h2>", "").strip()
 
         # Signatures for diversity/audit

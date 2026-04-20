@@ -1,22 +1,31 @@
-# Pearl News — LLM expansion + routing (slot engine: Claude for EN, Qwen-compatible for CJK).
-# Rollback CJK to single-pass: set routing.fallback.use_legacy_full_document_cjk: true
+# Pearl News — LLM expansion + routing
+#
+# CJK6 (ja, zh-cn, zh-tw, zh-hk, zh-sg, ko) → DashScope / qwen_slots (Qwen-plus, live key)
+# EN + all other languages → Groq / groq_slots (free tier, llama-3.3-70b-versatile)
+#   Fallback chain: groq_slots → grok_slots (xAI free credits) → together_slots (1M/mo free)
+# Cloudflare Workers AI → on-request only (not in production routing; daily quota too small)
+#
+# Keys needed in macOS Keychain (load via scripts/ci/load_integration_env_from_keychain.py):
+#   DASHSCOPE_API_KEY     — live, Singapore endpoint
+#   GROQ_API_KEY          — get free key at console.groq.com
+#   XAI_API_KEY           — get free key at console.x.ai ($25/mo free credits)
+#   TOGETHER_API_KEY      — get free key at api.together.ai (1M tokens/mo free)
+#   CLOUDFLARE_AI_API_TOKEN + CLOUDFLARE_ACCOUNT_ID — for on-request use only
 
 schema_version: 2
 
 enabled: true
 
-# Default Qwen target: Pearl Star Ollama (:11434). Override with QWEN_BASE_URL.
-base_url: "http://192.168.1.112:11434/v1"
-model: "qwen2.5:14b"
-api_key: "ollama"
+# Legacy top-level defaults (used by qwen_legacy engine only)
+base_url: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+model: "qwen-plus"
+api_key: "set_via_DASHSCOPE_API_KEY"
 
 timeout: 360
 target_word_count: 1000
 max_tokens: 1500
 temperature: 0.5
 disable_thinking: true
-
-claude_model: "claude-sonnet-4-20250514"
 
 # Global defaults; per-provider maps override by article language
 min_output_chars:
@@ -31,35 +40,77 @@ min_output_chars:
 thin_output_retry: true
 
 routing:
-  default_provider: qwen_slots
+  # EN + non-CJK → Groq (free, fast, llama-3.3-70b-versatile)
+  # CJK6 → DashScope Qwen (live key, CJK-optimised)
+  # Cloudflare → not in routing; use via on_request_provider only
+  default_provider: groq_slots
   language_map:
-    en: claude_slots
+    en: groq_slots
+    vi: groq_slots
+    # CJK6 → DashScope
     ja: qwen_slots
     ko: qwen_slots
     zh-cn: qwen_slots
     zh-tw: qwen_slots
     zh-hk: qwen_slots
     zh-sg: qwen_slots
-    vi: qwen_slots
+
   providers:
-    claude_slots:
+    # ── Free EN default ────────────────────────────────────────────────────────
+    groq_slots:
       engine: slot_expansion
-      slot_backend: anthropic
-      api_key_env: ANTHROPIC_API_KEY
-      model_env: CLAUDE_MODEL
-      system_prompt: expansion_system_en.txt
+      slot_backend: openai_compatible
+      base_url: "https://api.groq.com/openai/v1"
+      model: "llama-3.3-70b-versatile"
+      api_key_env: GROQ_API_KEY
       max_tokens: 2000
       temperature: 0.4
       thin_output_retry: true
       min_output_chars:
         en: 1500
-        default: 1200
+        default: 1000
+      # Free tier: ~14,400 req/day on free plan; 6,000 tokens/min
+      # Get key: https://console.groq.com/keys
+
+    # ── Free EN fallback 1: xAI Grok ──────────────────────────────────────────
+    grok_slots:
+      engine: slot_expansion
+      slot_backend: openai_compatible
+      base_url: "https://api.x.ai/v1"
+      model: "grok-3-mini"
+      api_key_env: XAI_API_KEY
+      max_tokens: 2000
+      temperature: 0.4
+      thin_output_retry: true
+      min_output_chars:
+        en: 1500
+        default: 1000
+      # Free tier: $25/mo free credits
+      # Get key: https://console.x.ai
+
+    # ── Free EN fallback 2: Together AI ───────────────────────────────────────
+    together_slots:
+      engine: slot_expansion
+      slot_backend: openai_compatible
+      base_url: "https://api.together.xyz/v1"
+      model: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free"
+      api_key_env: TOGETHER_API_KEY
+      max_tokens: 2000
+      temperature: 0.4
+      thin_output_retry: true
+      min_output_chars:
+        en: 1500
+        default: 1000
+      # Free tier: 1M tokens/month
+      # Get key: https://api.together.ai/settings/api-keys
+
+    # ── CJK6 default: DashScope Qwen ──────────────────────────────────────────
     qwen_slots:
       engine: slot_expansion
       slot_backend: openai_compatible
-      base_url_env: QWEN_BASE_URL
-      model_env: QWEN_MODEL
-      api_key_env: QWEN_API_KEY
+      base_url_env: DASHSCOPE_BASE_URL
+      model_env: DASHSCOPE_MODEL
+      api_key_env: DASHSCOPE_API_KEY
       system_prompt: expansion_system_cjk.txt
       max_tokens: 1500
       temperature: 0.5
@@ -72,18 +123,44 @@ routing:
         ko: 800
         vi: 800
         default: 1000
+
+    # ── On-request only: Cloudflare Workers AI ────────────────────────────────
+    # NOT in language_map. Use explicitly with --provider cloudflare_slots.
+    # Daily free quota: 10,000 neurons (~5 article expansions on Gemma 3 12B).
+    cloudflare_slots:
+      engine: slot_expansion
+      slot_backend: openai_compatible
+      base_url_env: CLOUDFLARE_AI_BASE_URL
+      model_env: CLOUDFLARE_AI_MODEL
+      api_key_env: CLOUDFLARE_AI_API_TOKEN
+      max_tokens: 2000
+      temperature: 0.4
+      thin_output_retry: true
+      min_output_chars:
+        en: 1500
+        ja: 800
+        zh-cn: 600
+        zh-tw: 600
+        ko: 800
+        default: 1000
+
+    # ── Legacy full-document Qwen (rollback only) ──────────────────────────────
     qwen_legacy:
       engine: llm_expand
-      base_url_env: QWEN_BASE_URL
-      model_env: QWEN_MODEL
-      api_key_env: QWEN_API_KEY
+      base_url_env: DASHSCOPE_BASE_URL
+      model_env: DASHSCOPE_MODEL
+      api_key_env: DASHSCOPE_API_KEY
       system_prompt: expansion_system_cjk.txt
       max_tokens: 1500
       temperature: 0.5
       disable_thinking: true
+
   fallback:
     on_provider_error: retry_with_default
     max_retries: 2
+    fallback_chain:
+      groq_slots: [grok_slots, together_slots]
+      grok_slots: [together_slots]
     use_legacy_full_document_cjk: false
 
 ei_scoring:

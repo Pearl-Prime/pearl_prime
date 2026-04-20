@@ -1152,7 +1152,7 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     )
 
     # ── ASSEMBLE HTML ──
-    return f'''<!DOCTYPE html>
+    _body_open = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1161,7 +1161,12 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
 {CSS_BLOCK}
 {_layout_css}
 </head>
-<body>
+<body>''' if standalone else f'''{CSS_BLOCK}
+{_layout_css}
+<div class="pn-article-root">'''
+
+    return _body_open + \
+        f'''
 <!-- ═══════ PILLAR NAVIGATION ═══════ -->
 <nav class="nav-pillars">
 {nav_links}
@@ -1343,8 +1348,7 @@ function toggleExercise() {{
   }} else if (paused) {{ resumeExercise(); }} else {{ pauseExercise(); }}
 }}
 </script>
-</body>
-</html>'''
+''' + ('</body>\n</html>' if standalone else '</div><!-- /.pn-article-root -->')
 
 
 # ── CSS BLOCK (extracted from v5.2 gold standard — identical across all articles) ──

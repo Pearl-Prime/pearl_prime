@@ -1,7 +1,7 @@
 # Pearl News Writer Spec
 
-**Last updated:** 2026-03-05
-**Authority:** This file governs all Pearl News article writing, expansion prompts, and atom authoring.
+**Last updated:** 2026-04-19  
+**Authority:** This file governs all Pearl News article writing, expansion prompts, and atom authoring.  
 **Related:** `pearl_news/prompts/expansion_system.txt`, `pearl_news/pipeline/quality_gates.py`, `pearl_news/config/editorial_firewall.yaml`, `docs/research/continue_gen_research3.md`, [PEARL_NEWS_GENERATIONAL_WRITER_SPEC.md](./PEARL_NEWS_GENERATIONAL_WRITER_SPEC.md), [PEARL_NEWS_GENERATIONAL_INTELLIGENCE_TECH_SPEC.md](./PEARL_NEWS_GENERATIONAL_INTELLIGENCE_TECH_SPEC.md)
 
 ---
@@ -344,3 +344,160 @@ When `pearl_news/pipeline/llm_expand.py` calls the expansion prompt, the model r
 - Preserve HTML structure exactly. Expand paragraph text only. Do not add sections or remove the Source line.
 
 The current expansion prompt (`pearl_news/prompts/expansion_system.txt`) should be updated to reference the specificity standard, the teacher integration rules, and the forward look standard from this spec.
+
+---
+
+## 13. Pearl_Writer — Direct Authoring Workflow
+
+Pearl_Writer is the direct-authoring workflow where Claude writes a complete article in-conversation for immediate user QA and WordPress publish. It does not use the pipeline (`run_article_pipeline.py`).
+
+**When to use Pearl_Writer (not the pipeline):**
+- User wants to QA before publish
+- LLM providers are unavailable (Cloudflare neuron cap, DashScope arrearage, etc.)
+- A specific teacher × topic × news event is requested directly
+- Manual editorial control is needed over teacher voice
+
+**Source of truth files to load before writing:**
+
+| File | Purpose |
+|------|---------|
+| `SOURCE_OF_TRUTH/teacher_banks/<teacher_id>/doctrine/doctrine.yaml` | Teacher tradition, tone, forbidden claims — authoritative |
+| `pearl_news/atoms/teacher_quotes_practices/topic_<topic>.yaml` | Pre-written teaching atoms — use verbatim or adapt closely |
+| `pearl_news/prompts/expansion_system_en.txt` | Article structure and voice rules |
+| `pearl_news/config/quality_gates.yaml` | Gates that must pass before publish |
+| `pearl_news/config/legal_boundary.yaml` | UN affiliation blocklist |
+
+### 13.1 Teacher × Tradition Reference
+
+All traditions sourced from `SOURCE_OF_TRUTH/teacher_banks/<id>/doctrine/doctrine.yaml`. Never infer tradition from the teacher's name or nationality.
+
+| Teacher ID | Display Name | Tradition |
+|------------|-------------|-----------|
+| `ahjan` | Ahjan | Tantric Buddhism; mysticism synthesis; Karma Yoga; Rama lineage |
+| `sai_ma` | Sai Maa | Hindu Vishnuswami lineage; Jagadguru; divine feminine; Shakti transmission |
+| `ra` | Ra | Nondual witnessing awareness; I AM consciousness inquiry; integrated awakening; Ra Netjer tradition |
+| `junko` | Junko | New Age; channeling; ascended masters; light language; cosmic guidance |
+| `miki` | Miki | Japanese light healing; starseed and ascended masters tradition; Kurama-yama sacred site lineage |
+| `joshin` | Joshin | Shingon Esoteric Buddhism (真言宗 / Mikkyo); Sokushin Jobutsu; Sanmitsu |
+| `pamela_fellows` | Pamela Fellows | Heartfulness Coaching; embodied awakening; heart-mind reconnection; beyond mindfulness |
+| `master_wu` | Master Wu | Taoist geomancy; Dragon Veins (Long Mai); earth meridian activation; Taiwanese heritage |
+| `master_feung` | Master Feung | Chinese wisdom traditions; Grand Painting teaching; Xi'an cultural center; Hua Shan pilgrimage |
+| `master_sha` | Master Sha | Tao Grandmaster; Tao Calligraphy healing field; Tao Transformative Technologies |
+| `maat` | Maat | Sufism; Naqshbandi Tariqat; path of the heart; fanaa; dhikr; Hazrat Inayat Khan lineage |
+| `omote` | Omote | Yamato-gokoro awakening; sacred geography; Project Phoenix lineage |
+
+### 13.2 Per-Teacher Doctrinal Safety (hard errors)
+
+Source: `doctrine.yaml` `forbidden_claims` and `prohibited_outcomes` for each teacher.
+
+| Teacher | Never write |
+|---------|------------|
+| **Junko** | Zen framing; Buddhist or Japanese contemplative framing; positioning as teacher in conventional sense; technique-first without transmission context |
+| **Ahjan** | Theravada Buddhist framing; separating spiritual practice from physical world; purely academic framing |
+| **Sai Maa** | Generic Hindu teacher framing; Buddhist or Zen framing; reducing Diksha to "a meditation technique" |
+| **Ra** | African spiritual / Nile Delta / solar consciousness framing; imposter syndrome as disease (it is mistaken identity); I AM inquiry as "positive thinking"; witness practice as detachment from structural reality |
+| **Master Wu** | Wu Wei philosophy framing (that is Master Feung's domain); public preacher positioning; Western feng shui superficial framing |
+| **Master Feung** | Martial arts teacher framing; confusing with Master Wu's geomancy; pure philosophy without embodied practice |
+| **Joshin** | Generic Japanese Buddhism; Zen framing; reducing Sanmitsu to mindfulness |
+| **Pamela Fellows** | Mindfulness teacher framing (she is *beyond* mindfulness); promising healing outcomes; technique-first without Heartfulness frame |
+| **Maat** | Egyptian mythology / cosmic scales / feather of truth framing (tradition is Sufi, not Egyptian); reducing fanaa to "detachment"; reducing dhikr to "mindfulness"; Islamic exclusivism (you do not have to be Muslim to be Sufi) |
+| **Miki** | Therapist framing; healing as transformation to new self (it is remembering original completeness); reducing Kurama-yama to "a nice mountain"; omitting starseed or ascended masters dimension |
+| **Master Sha** | Reducing Tao Calligraphy to art; omitting soul dimension; Western-only framing |
+| **Omote** | Generic "Japanese culture" framing; separating history from spiritual significance |
+
+### 13.3 Topic → Atom File Index
+
+| Topic key | File | SDG |
+|-----------|------|-----|
+| `mental_health` | `pearl_news/atoms/teacher_quotes_practices/topic_mental_health.yaml` | 3 |
+| `climate` | `pearl_news/atoms/teacher_quotes_practices/topic_climate.yaml` | 13 |
+| `economy_work` | `pearl_news/atoms/teacher_quotes_practices/topic_economy_work.yaml` | 8 |
+| `education` | `pearl_news/atoms/teacher_quotes_practices/topic_education.yaml` | 4 |
+| `inequality` | `pearl_news/atoms/teacher_quotes_practices/topic_inequality.yaml` | 10 |
+| `partnerships` | `pearl_news/atoms/teacher_quotes_practices/topic_partnerships.yaml` | 17 |
+| `peace_conflict` | `pearl_news/atoms/teacher_quotes_practices/topic_peace_conflict.yaml` | 16 |
+
+If the requested teacher is not in the topic's atom file, select the three most doctrine-aligned atoms from any topic file and adapt — treating `doctrine.yaml` as authoritative.
+
+### 13.4 Pearl_Writer Step-by-Step
+
+**Step 1 — Load context**
+```
+Read: SOURCE_OF_TRUTH/teacher_banks/<teacher_id>/doctrine/doctrine.yaml
+Read: pearl_news/atoms/teacher_quotes_practices/topic_<topic>.yaml
+```
+
+**Step 2 — Identify atoms**
+Extract the three atoms for the requested teacher from the topic atom file. Each atom is one paragraph of the Teacher Perspective section.
+
+**Step 3 — Write the article** (follows `expansion_system_en.txt`)
+```html
+<h1>[TITLE]</h1>
+<h2>News Summary</h2>
+[UN body / source, date, one key figure. Facts only.]
+<h2>Youth Impact</h2>
+[Contradiction test (§7). Behaviors not emotion labels. Anchors in every sentence.]
+<h2>Teacher Perspective</h2>
+[EXACTLY three paragraphs — one atom each.
+ Each paragraph names the teacher, cites tradition, ties to a story fact.]
+<h2>SDG Connection</h2>
+[SDG number + full title + specific target or mechanism — not a stamp.]
+<h2>Looking Ahead</h2>
+[Institution / deadline / report. Ends with a concrete statement, NOT a rhetorical question.]
+<p class="pn-source">Source: [attribution]</p>
+```
+
+**Step 4 — Doctrine check (internal before output)**
+- [ ] Tradition matches `doctrine.yaml` exactly
+- [ ] No forbidden claims from `doctrine.yaml`
+- [ ] No UN affiliation language
+- [ ] No promotional tone in news sections
+- [ ] Atoms tied to specific story facts (not floating spirituality)
+
+**Step 5 — Byline + sidebar injection**
+
+Every article published via `post_article()` wraps content with INV-5 (byline) and INV-6 (sidebar). The Newspaper theme `td_post_template` cannot be set via REST API; the two-column layout is injected as inline CSS:
+
+```python
+inline_css = """<style>
+.pn-article-grid { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+.pn-sidebar { background: #f8f8f8; padding: 1.5rem; border-radius: 4px; font-size: 0.9rem; }
+@media (max-width: 768px) { .pn-article-grid { grid-template-columns: 1fr; } }
+</style>"""
+
+article_content = (
+    byline_html
+    + "\n" + inline_css
+    + "\n<div class=\"pn-article-grid\">"
+    + "\n<main class=\"pn-main\">" + article_body + "</main>"
+    + "\n" + sidebar_html
+    + "\n</div>"
+)
+```
+
+**Step 6 — QA and publish**
+```python
+from pearl_news.publish.wordpress_client import post_article
+
+wp_result = post_article(
+    title=title,
+    content=article_content,
+    status="publish",
+    author=wp_author_id,  # from pearl_news/config/wordpress_authors.yaml
+    meta={"pearl_news_layout": "sidebar", "pearl_news_template": "sidebar"},
+)
+```
+
+### 13.5 Pearl_Writer vs Pipeline
+
+| Dimension | Pearl_Writer | Pipeline (`run_daily_news_cycle.py`) |
+|-----------|-------------|--------------------------------------|
+| Trigger | Manual (user request in chat) | Automated (cron) |
+| LLM | Claude in-conversation | Cloudflare Workers AI (primary) |
+| QA | Human QA before publish | Automated quality gates only |
+| Volume | 1 article per session | 20 articles/day (10 × 2 cycles) |
+| Languages | English only | EN + JA + ZH-CN |
+| Atom loading | Manual via Read tool | Auto by pipeline |
+| Publish | Direct `post_article()` in chat | Via `run_teacher()` in cycle runner |
+
+Both workflows use the same `post_article()` function and the same INV-5/INV-6 injection rules.
