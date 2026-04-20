@@ -1,0 +1,1728 @@
+# SHONEN STORY STRATEGIES v1.0.0
+# ─────────────────────────────────────────────────────────────────────────────
+# Each strategy is a 5-layer template. Combinatorial selection across layers
+# produces 3^5 = 243+ unique combinations per strategy, and 5 strategies
+# yields up to 1215 unique book outputs before persona/topic variation.
+#
+# Selection is hash-seeded from (series_id + arc_id + genre) via SHA-256.
+# See combinatorial_index.yaml for the exact seed formula.
+#
+# SHŌNEN GENRE CONTRACT:
+#   - External conflict externalizes internal growth (you fight to become)
+#   - Nakama (found family) is load-bearing — isolation is the villain's trap
+#   - Power is earned through suffering, never gifted
+#   - Dialogue carries motivation; silent pages carry awe, never grief
+#   - EI engines: overwhelm (primary), false_alarm, comparison, shame (secondary)
+# ─────────────────────────────────────────────────────────────────────────────
+
+schema_version: "1.0.0"
+genre: shonen
+strategy_count: 5
+
+selection_algorithm:
+  method: sha256_hash_seed
+  seed_components: [series_id, arc_id, genre]
+  layer_selection: |
+    For each layer 1-5, compute:
+      layer_idx = hash(seed + f":layer{n}") % len(layer_n_variants)
+    where seed = f"{series_id}:{arc_id}:{genre}"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# STRATEGY 01: TOURNAMENT ARC
+# Archetype: protagonist_vs_rival_cascade
+# Core loop: fight → lose OR barely win → grow → harder fight → final reckoning
+# ═════════════════════════════════════════════════════════════════════════════
+strategies:
+  strategy_01:
+    name: "Tournament Arc"
+    archetype_template: protagonist_vs_rival_cascade
+    description: >
+      A structured competition format that disguises inner growth as outer
+      ranking. Each opponent mirrors an unresolved aspect of the protagonist.
+      The rival is not the enemy — the protagonist's self-doubt is the enemy.
+
+    # ── LAYER 1: PLOT SKELETON ──────────────────────────────────────────────
+    # 10 beats. Each beat has: text, camera_hint, mood_hint, is_carrier.
+    # is_carrier = True means this beat must survive any condensation.
+    layer_1_plot_skeleton:
+      variant_label: "tournament_standard"
+      beat_count: 10
+      beats:
+        - beat: 1
+          text: >
+            {protagonist} arrives at the tournament grounds. The scale of it —
+            the crowd, the ranked competitors, the bracket board — lands like a
+            punch to the chest. They don't belong here. Not yet.
+          camera_hint: wide_establishing
+          mood_hint: overwhelm
+          is_carrier: true
+
+        - beat: 2
+          text: >
+            First match. An opponent who should be beatable. {protagonist}
+            nearly loses. They win ugly — not by skill but by desperation. No
+            one is impressed. Neither are they.
+          camera_hint: medium_action
+          mood_hint: shame
+          is_carrier: true
+
+        - beat: 3
+          text: >
+            {rival} dismantles their own opponent in the adjacent bracket.
+            Clean, effortless, inevitable. {protagonist} watches from across
+            the arena. The gap between them is not technique. It's something
+            harder to name.
+          camera_hint: cross_cut_contrast
+          mood_hint: comparison
+          is_carrier: true
+
+        - beat: 4
+          text: >
+            Between matches: a moment alone. {protagonist} replays the near-
+            loss. Identifies the flaw. Not in their body — in the story they
+            tell themselves mid-fight. "I'm not ready" is the wound, not the
+            opponent.
+          camera_hint: close_internal
+          mood_hint: introspection
+          is_carrier: true
+
+        - beat: 5
+          text: >
+            Second match. Harder opponent. {protagonist} applies nothing they
+            just learned — the crisis strips them back to raw instinct.
+            Then, one moment of stillness. The lesson surfaces through the body,
+            not the mind. They win cleanly for the first time.
+          camera_hint: escalating_panels
+          mood_hint: breakthrough
+          is_carrier: true
+
+        - beat: 6
+          text: >
+            {rival} acknowledges {protagonist} — not with warmth. With
+            recalibration. "You were better than I expected." This is not a
+            compliment. It's a warning shot.
+          camera_hint: over_shoulder_exchange
+          mood_hint: tense_recognition
+          is_carrier: false
+
+        - beat: 7
+          text: >
+            Semifinals. An opponent who uses {protagonist}'s own method against
+            them — who has studied, prepared, anticipated every move. The
+            familiar technique becomes a trap. {protagonist} must improvise or
+            lose everything.
+          camera_hint: dynamic_pivot
+          mood_hint: crisis
+          is_carrier: true
+
+        - beat: 8
+          text: >
+            {protagonist} improvises. It's messy. It's wrong by every standard.
+            But it's genuinely theirs — not copied, not inherited. The crowd
+            doesn't understand what they're seeing. It doesn't matter.
+          camera_hint: kinetic_chaos_to_clarity
+          mood_hint: self_discovery
+          is_carrier: true
+
+        - beat: 9
+          text: >
+            The final: {protagonist} vs {rival}. Everything that was
+            externalizing an internal question now stands across the arena.
+            This fight has nothing to do with the tournament.
+          camera_hint: ceremonial_wide
+          mood_hint: charged_stillness
+          is_carrier: true
+
+        - beat: 10
+          text: >
+            Outcome is secondary to the exchange. Win or lose, {protagonist}
+            is no longer the person who arrived. The bracket result is announced.
+            The reader barely registers it. What landed was something else.
+          camera_hint: close_face_aftermath
+          mood_hint: resolution_through_change
+          is_carrier: true
+
+    layer_1_variants:
+      - variant_label: "tournament_standard"
+        description: "Full 10-beat arc as above"
+      - variant_label: "tournament_compressed"
+        description: "Carrier beats only (beats 1, 2, 3, 4, 5, 7, 8, 9, 10) — 9 beats"
+      - variant_label: "tournament_expanded"
+        description: "Add pre-tournament qualifier arc (beats 0a, 0b) before beat 1 — 12 beats"
+
+    # ── LAYER 2: EMOTIONAL SKELETON ─────────────────────────────────────────
+    layer_2_emotional_skeleton:
+      variant_label: "overwhelm_primary"
+      ei_engine_hottest: overwhelm
+      chapter_emotional_map:
+        chapter_1:
+          emotional_job: "Reader feels the scale of what the protagonist has stepped into — overwhelm is the entry point, not excitement"
+          ei_dimension: overwhelm
+          intensity: 3  # scale 1-5
+        chapter_3:
+          emotional_job: "The gap between self-image and actual skill exposed — comparison with rival lands as motivating wound, not paralysis"
+          ei_dimension: comparison
+          intensity: 4
+        chapter_6:
+          emotional_job: "The false alarm of 'I'm ready' collapses under semifinal pressure — reader recognizes this from their own life"
+          ei_dimension: false_alarm
+          intensity: 4
+        chapter_climax:
+          emotional_job: "Winning or losing does not resolve the emotional arc — growth is not a prize. Reader feels this distinction."
+          ei_dimension: overwhelm
+          intensity: 5
+      progression_note: >
+        Overwhelm → Comparison → False Alarm → Overwhelm (resolved).
+        The emotional arc returns to its starting engine but at a different
+        register — the protagonist's overwhelm in ch1 is paralysis; in the
+        climax it's awe at their own capacity.
+
+    layer_2_variants:
+      - variant_label: "overwhelm_primary"
+        description: "Standard tournament emotional arc — overwhelm anchors start and end"
+      - variant_label: "shame_primary"
+        description: "Protagonist driven by public failure shame — comparison is absent, shame/false_alarm dominate"
+      - variant_label: "comparison_primary"
+        description: "Rival relationship is the emotional spine — all growth is measured against the rival's standard"
+
+    # ── LAYER 3: DIALOGUE SKELETON ──────────────────────────────────────────
+    layer_3_dialogue_skeleton:
+      variant_label: "escalating_declaration"
+      avg_words_per_bubble: 8-15
+      speech_atom_sequence:
+        - moment: "pre_fight_1"
+          atom_archetype: internal_doubt_leak
+          sample: "Just... don't embarrass yourself."
+          emotion: shame_adjacent
+          intensity: 2
+          delivery: whisper_thought_bubble
+
+        - moment: "mid_fight_1_crisis"
+          atom_archetype: demand_self
+          sample: "Move! WHY WON'T YOU MOVE!"
+          emotion: overwhelm_peak
+          intensity: 4
+          delivery: jagged_shout_bubble
+
+        - moment: "rival_acknowledge"
+          atom_archetype: rival_calibration
+          sample: "You're different from the registration footage."
+          emotion: neutral_assessment
+          intensity: 2
+          delivery: flat_rectangle_bubble
+
+        - moment: "internal_discovery"
+          atom_archetype: clarity_flash
+          sample: "...Oh. I see it now."
+          emotion: recognition
+          intensity: 3
+          delivery: small_soft_bubble
+
+        - moment: "improvised_technique"
+          atom_archetype: declaration_of_method
+          sample: "This move has no name. I just made it up."
+          emotion: reckless_confidence
+          intensity: 4
+          delivery: bold_irregular_bubble
+
+        - moment: "rival_final_acknowledgment"
+          atom_archetype: respect_without_warmth
+          sample: "That was real."
+          emotion: grudging_recognition
+          intensity: 3
+          delivery: minimal_clean_bubble
+
+        - moment: "post_climax"
+          atom_archetype: quiet_resolution
+          sample: "I'm not done. But I'm not the same either."
+          emotion: grounded_determination
+          intensity: 3
+          delivery: caption_box_not_bubble
+
+      escalation_pattern: "V-shape: starts low, spikes mid-arc, drops to quiet resolution"
+      key_signature_line: >
+        "I don't need to win this. I need to know who I am when I lose."
+        — delivered at lowest point before the improvised breakthrough
+
+    layer_3_variants:
+      - variant_label: "escalating_declaration"
+        description: "V-shape escalation with climactic declaration before quiet resolution"
+      - variant_label: "compressed_sparse"
+        description: "Minimal dialogue — the fight IS the conversation; max 3 spoken lines in final battle"
+      - variant_label: "rival_dialogue_heavy"
+        description: "Rival carries significant dialogue load; protagonist is mostly reactive until breakthrough"
+
+    # ── LAYER 4: VISUAL SKELETON ─────────────────────────────────────────────
+    layer_4_visual_skeleton:
+      variant_label: "high_energy_grid"
+      avg_panels_per_page: 5
+      dialogue_dense_pages:
+        - position: ch1_p3  # arrival, exposition context
+          bubble_density: dense
+          note: "Crowd noise, announcer lines, other competitors boasting"
+        - position: ch3_p2  # rival observation scene
+          bubble_density: medium
+          note: "Cross-court commentary and internal monologue interweave"
+      action_silent_pages:
+        - position: ch5_p4  # the breakthrough moment
+          bubble_density: none
+          note: "3 panels of pure movement — no text, no SFX, just motion lines"
+        - position: ch9_p1  # final match opening stance
+          bubble_density: none
+          note: "Double-page spread: two figures, one arena, no words"
+      splash_pages:
+        - position: ch5_p6
+          trigger: "First clean victory — improvised technique lands"
+          style: dynamic_impact_full_bleed
+        - position: ch9_p2
+          trigger: "Final match opening — rivals face each other"
+          style: ceremonial_symmetry_spread
+        - position: ch10_p5
+          trigger: "Result moment — less triumphant than expected"
+          style: quiet_aftermath_single_figure
+      bubble_density_curve:
+        # Per chapter phase: sparse / medium / dense / very_dense
+        ch1: dense          # World-building, many voices
+        ch2: medium         # First fight focus
+        ch3: medium         # Rival observation + internal
+        ch4: sparse         # Introspection beat
+        ch5: medium_to_none # Breakthrough fight — words fall away
+        ch6: medium         # Post-fight exchanges
+        ch7: dense          # Semifinals tension, strategy talk
+        ch8: sparse         # Improvisation — body takes over
+        ch9: very_sparse    # Final match — almost no words
+        ch10: medium        # Aftermath, earned reflection
+      recommended_bubble_styles:
+        setup_phase: rounded_standard
+        crisis_phase: jagged_impact
+        internal_monologue: soft_oval_thought
+        rival_speech: clean_rectangle_cold
+        breakthrough: bold_irregular_electric
+        resolution: caption_box_quiet
+
+    layer_4_variants:
+      - variant_label: "high_energy_grid"
+        description: "5 panels/page average, energetic layout, multiple splash pages"
+      - variant_label: "cinematic_widescreen"
+        description: "3-4 panels/page, horizontal wide panels, fewer splashes, more weight per panel"
+      - variant_label: "chaos_to_order"
+        description: "Early chapters 6-8 panels/page (overwhelming), final chapter 2-3 panels/page (earned stillness)"
+
+    # ── LAYER 5: PACING SKELETON ─────────────────────────────────────────────
+    layer_5_pacing_skeleton:
+      variant_label: "chapter_hook_cascade"
+      end_of_chapter_hooks:
+        ch1: revelation_hook       # Bracket draw reveals rival in opposite bracket — they'll only meet in finals
+        ch2: complication_hook     # Won, but someone saw a critical flaw — noted it
+        ch3: threat_hook           # Rival dispatches their semifinal opponent in 3 panels of effortless dominance
+        ch4: internal_shift_hook   # Protagonist realizes what they've been fighting isn't opponents — it's a belief
+        ch5: triumph_undercut_hook # Win celebrated briefly, then overshadowed by what's coming next
+        ch6: alliance_hook         # Unexpected exchange with rival — not warmth, but acknowledgment
+        ch7: cliffhanger_hook      # Mid-fight, protagonist's method utterly fails — page turn reveals they're down
+        ch8: reversal_hook         # The improvised move — cut to black before outcome lands
+        ch9: question_hook         # Final exchange before the last fight: "Why are you still here?"
+        ch10: open_resonance_hook  # Result stated without ceremony; final image is the change, not the victory
+
+      page_turn_reveals:
+        - chapter: 3
+          hidden_until_turn: "Rival's full fight — reader thinks it's a hard match. Turn reveals: over in seconds."
+        - chapter: 7
+          hidden_until_turn: "Protagonist falling — last page before turn shows them standing. Turn: they're on one knee."
+        - chapter: 9
+          hidden_until_turn: "Final splash — reader expects battle pose. Turn: two people talking quietly before the fight."
+
+      silence_to_dialogue_ratio:
+        setup_chapters: "30% silence / 70% dialogue"
+        rising_chapters: "50% silence / 50% dialogue"
+        climax_chapters: "70% silence / 30% dialogue"
+
+      climax_pacing_pattern: >
+        Rapid short panels (6-8 per page) during the improvised sequence →
+        sudden drop to single large panels (2-3 per page) at the decisive moment →
+        final chapter returns to medium pacing (4-5 per page) for aftermath.
+        The reader's breathing is forced to slow by the page layout change.
+
+    layer_5_variants:
+      - variant_label: "chapter_hook_cascade"
+        description: "Each chapter ends on a distinct hook type — no two adjacent chapters share the same hook form"
+      - variant_label: "slow_burn_reveals"
+        description: "Most chapters end on quiet beats; tension accumulates through restraint rather than cliffhangers"
+      - variant_label: "rapid_escalation"
+        description: "Every chapter ends on action cliffhanger; dialogue compression maximizes forward momentum"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# STRATEGY 02: TRAINING ARC
+# Archetype: weakness_to_mastery_via_mentor
+# Core loop: exposed flaw → reluctant acceptance of teaching → difficult training →
+#            internal resistance → breakthrough → test under pressure
+# ═════════════════════════════════════════════════════════════════════════════
+  strategy_02:
+    name: "Training Arc"
+    archetype_template: weakness_to_mastery_via_mentor
+    description: >
+      The protagonist's greatest obstacle is not an enemy but a gap in
+      themselves they cannot close alone. A mentor — often reluctant, often
+      damaged — holds the key. The training IS the story. The final test is
+      proof, not narrative climax.
+
+    layer_1_plot_skeleton:
+      variant_label: "mentor_arc_standard"
+      beat_count: 10
+      beats:
+        - beat: 1
+          text: >
+            A loss — decisive, public, humiliating. Not a near-thing. A
+            thorough dismantling. The specific flaw is identified by the opponent
+            mid-fight: "{protagonist} has no foundation." The words land in
+            the body, not the mind.
+          camera_hint: defeat_aftermath_ground_level
+          mood_hint: shame
+          is_carrier: true
+
+        - beat: 2
+          text: >
+            {mentor} is found — not sought. {protagonist} encounters them at
+            their lowest, doing something mundane. The mentor does not offer
+            help. {protagonist} must ask, and asking requires they admit what
+            the fight already proved.
+          camera_hint: medium_chance_encounter
+          mood_hint: vulnerability
+          is_carrier: true
+
+        - beat: 3
+          text: >
+            Training begins. It is not what {protagonist} expected. No sparring,
+            no power moves. Fundamentals. Boring. Humiliating in a different way.
+            "You can't build on a cracked base."
+          camera_hint: montage_fragments
+          mood_hint: frustration
+          is_carrier: false
+
+        - beat: 4
+          text: >
+            {protagonist} quits. Walks away. The reason is real — not laziness
+            but grief: this training forces them to become smaller before they
+            can become larger, and smaller feels like failure.
+          camera_hint: wide_empty_training_ground
+          mood_hint: grief
+          is_carrier: true
+
+        - beat: 5
+          text: >
+            {mentor} does not chase them. Does not call. {protagonist}, alone
+            with the silence, understands what the silence costs the mentor too.
+            Returns without words. Resumes position.
+          camera_hint: return_single_figure
+          mood_hint: resolution_through_choice
+          is_carrier: true
+
+        - beat: 6
+          text: >
+            The training breaks. Not {protagonist} — the old habit. The
+            moment where the body does the right thing without the mind's
+            permission. {mentor} sees it. Says nothing. But their posture changes.
+          camera_hint: close_subtle_reaction
+          mood_hint: quiet_breakthrough
+          is_carrier: true
+
+        - beat: 7
+          text: >
+            {mentor} reveals their own story — why they stopped. What training
+            cost them. This is not motivation speech. It is transfer of wound.
+            {protagonist} now carries something of the mentor's history.
+          camera_hint: still_two_figure_scene
+          mood_hint: transmission
+          is_carrier: true
+
+        - beat: 8
+          text: >
+            Pre-test: an unexpected encounter with a strong opponent outside
+            the formal test. {protagonist} does not win — but does not panic.
+            The foundation held. The new training is not armor. It's ground.
+          camera_hint: informal_fight_street_level
+          mood_hint: grounded_test
+          is_carrier: false
+
+        - beat: 9
+          text: >
+            The formal test. Against the opponent who exposed the original flaw,
+            or an equivalent. {protagonist} fights differently — not faster or
+            stronger, but rooted. The opponent is confused by what's changed.
+          camera_hint: return_to_original_ground
+          mood_hint: application_of_mastery
+          is_carrier: true
+
+        - beat: 10
+          text: >
+            Post-test: {mentor} and {protagonist}, the training ground empty.
+            Transfer is complete. What was given cannot be taken back. What was
+            learned cannot be unlearned. Parting is embedded in this moment even
+            if it hasn't happened yet.
+          camera_hint: quiet_two_figure_distance
+          mood_hint: bittersweet_completion
+          is_carrier: true
+
+    layer_1_variants:
+      - variant_label: "mentor_arc_standard"
+        description: "Full 10-beat standard mentor arc"
+      - variant_label: "solo_discovery"
+        description: "Mentor is absent or unavailable — protagonist must discover the fundamental through failure alone"
+      - variant_label: "rival_as_mentor"
+        description: "The mentor role is filled by the rival — training is adversarial, lessons delivered through repeated defeat"
+
+    layer_2_emotional_skeleton:
+      variant_label: "shame_to_grief_to_mastery"
+      ei_engine_hottest: shame
+      chapter_emotional_map:
+        chapter_1:
+          emotional_job: "The opening loss is felt as shame — public exposure of a gap the protagonist secretly feared was there"
+          ei_dimension: shame
+          intensity: 4
+        chapter_3:
+          emotional_job: "Training humiliation — overwhelm of having to go backwards, comparison to where they thought they were"
+          ei_dimension: overwhelm
+          intensity: 3
+        chapter_6:
+          emotional_job: "The quitting moment is grief, not weakness — mourning the version of themselves that thought they were already enough"
+          ei_dimension: grief
+          intensity: 5
+        chapter_climax:
+          emotional_job: "The final test proves not that shame was wrong but that it was a starting point, not a permanent address"
+          ei_dimension: shame
+          intensity: 2  # resolved, not absent
+      progression_note: >
+        Shame (acute) → Overwhelm (sustained) → Grief (the real depth charge) →
+        Shame (diminished, integrated). The emotional arc does not erase the
+        original wound — it changes the protagonist's relationship to it.
+
+    layer_2_variants:
+      - variant_label: "shame_to_grief_to_mastery"
+        description: "Standard training arc emotional progression — shame as entry, grief as depth"
+      - variant_label: "overwhelm_sustained"
+        description: "The training is primarily an overwhelm experience — too much too fast; grief is secondary"
+      - variant_label: "false_alarm_correction"
+        description: "Protagonist believed they were ready — training arc corrects a false security alarm"
+
+    layer_3_dialogue_skeleton:
+      variant_label: "mentor_sparse_weight"
+      avg_words_per_bubble: 8-15
+      speech_atom_sequence:
+        - moment: "defeat_moment"
+          atom_archetype: opponent_diagnosis
+          sample: "You fight like someone who was never taught the ground."
+          emotion: cold_accurate_assessment
+          intensity: 3
+          delivery: flat_clean_rectangle
+
+        - moment: "first_mentor_contact"
+          atom_archetype: reluctant_acknowledgment
+          sample: "You want to ask something. Ask it."
+          emotion: weary_permission
+          intensity: 2
+          delivery: small_oval_tired
+
+        - moment: "training_frustration"
+          atom_archetype: protest_against_method
+          sample: "This isn't training. This is punishment."
+          emotion: frustrated_accusation
+          intensity: 3
+          delivery: sharp_angular_bubble
+
+        - moment: "mentor_correction"
+          atom_archetype: reframe_without_comfort
+          sample: "Punishment is what you do to yourself. This is just work."
+          emotion: steady_unimpressed
+          intensity: 2
+          delivery: flat_wide_rectangle
+
+        - moment: "quit_point"
+          atom_archetype: honest_admission
+          sample: "I can't do this. Not because I'm weak. Because it's making me less."
+          emotion: grief_articulated
+          intensity: 4
+          delivery: broken_bubble_irregular
+
+        - moment: "mentor_history_reveal"
+          atom_archetype: wound_transfer
+          sample: "I stopped teaching because the last student I trained died in the ring. You needed to know that."
+          emotion: bare_fact_no_performance
+          intensity: 4
+          delivery: caption_quality_but_spoken
+
+        - moment: "test_during_fight"
+          atom_archetype: silent_application
+          sample: "[no dialogue — three panels of grounded stance]"
+          emotion: embodied_knowledge
+          intensity: 5
+          delivery: silent_panel_sequence
+
+      escalation_pattern: >
+        Steady incline — no dramatic spikes. Dialogue weight accumulates slowly.
+        The mentor's heaviest line (wound transfer) arrives at 70% of arc,
+        not at climax. Climax itself is mostly silent — the body speaks.
+      key_signature_line: >
+        "The ground doesn't care how strong you feel. It only cares if you're
+        standing on it." — mentor line, delivered mid-training, re-heard
+        internally during the final fight.
+
+    layer_3_variants:
+      - variant_label: "mentor_sparse_weight"
+        description: "Mentor dialogue is rare but load-bearing; each line carries outsized structural weight"
+      - variant_label: "mentor_verbose_teacher"
+        description: "Mentor teaches through extended explanation; protagonist learns by argument and pushback"
+      - variant_label: "training_internal_monologue"
+        description: "Most dialogue is protagonist's inner voice — mentor's lines are minimal, training visualized"
+
+    layer_4_visual_skeleton:
+      variant_label: "repetition_and_variation"
+      avg_panels_per_page: 5
+      dialogue_dense_pages:
+        - position: ch1_p2
+          bubble_density: medium
+          note: "Opponent's diagnosis and crowd reaction interweave"
+        - position: ch7_p3
+          bubble_density: dense
+          note: "Mentor's history reveal — long caption boxes, close two-shot"
+      action_silent_pages:
+        - position: ch3_p4
+          bubble_density: none
+          note: "Training montage — 8-panel grid of repeated failed movements"
+        - position: ch6_p2
+          bubble_density: none
+          note: "The breakthrough moment — body does the right thing. Three panels, no text."
+        - position: ch9_p3
+          bubble_density: none
+          note: "Final test — protagonist's grounded stance. Silent beat before engagement."
+      splash_pages:
+        - position: ch1_p1
+          trigger: "Opening loss — protagonist on the ground"
+          style: defeat_ground_angle_wide
+        - position: ch6_p3
+          trigger: "Breakthrough — the base solidifies"
+          style: quiet_mastery_not_flashy
+        - position: ch9_p4
+          trigger: "Final technique application — not the whole fight, just the moment the foundation holds"
+          style: grounded_power_clean
+      bubble_density_curve:
+        ch1: medium           # Defeat, crowd, initial encounter
+        ch2: medium           # First meeting with mentor
+        ch3: sparse           # Training begins — doing, not talking
+        ch4: dense            # Frustration argument with mentor
+        ch5: very_sparse      # Quitting / return — silence
+        ch6: none_to_sparse   # Breakthrough — almost wordless
+        ch7: dense            # Mentor history reveal
+        ch8: sparse           # Pre-test encounter
+        ch9: sparse_to_none   # Test — technique over words
+        ch10: medium          # Completion — quiet reflection
+      recommended_bubble_styles:
+        defeat_phase: fragmented_irregular
+        training_phase: small_functional
+        mentor_speech: wide_flat_authoritative
+        internal_doubt: oval_thought_small
+        breakthrough: none_or_single_small
+        wound_reveal: caption_box_weight
+
+    layer_4_variants:
+      - variant_label: "repetition_and_variation"
+        description: "Training visually shown as repetition — same panel composition repeated with subtle variation to show growth"
+      - variant_label: "body_focus"
+        description: "Heavy emphasis on hands, feet, posture — anatomy as progress metric"
+      - variant_label: "environment_as_character"
+        description: "Training location depicted across seasons or weather changes — time passing made visible"
+
+    layer_5_pacing_skeleton:
+      variant_label: "slow_build_earned_release"
+      end_of_chapter_hooks:
+        ch1: wound_statement_hook    # Opponent's diagnosis line, cold and clear
+        ch2: reluctant_acceptance    # Mentor's first real test of protagonist — not a fight, a stillness test
+        ch3: frustration_peak_hook   # Training chapter ends on protagonist's most frustrated moment
+        ch4: argument_left_open      # No resolution — mentor says nothing; protagonist walks out
+        ch5: silent_return           # Return to training ground — no words, pure visual hook
+        ch6: quiet_breakthrough      # Understated — reader may need second read to see the shift
+        ch7: history_weight          # Mentor's wound transfer line — hangs in the air
+        ch8: grounded_pre_test       # Informal encounter held off — small but confident. Cut.
+        ch9: test_underway           # Ends mid-fight — but no frantic cliffhanger, a composed pause
+        ch10: quiet_completion       # No celebration — simply: it was done
+
+      page_turn_reveals:
+        - chapter: 1
+          hidden_until_turn: "Protagonist mid-fight — turn reveals they're already losing, not warming up"
+        - chapter: 5
+          hidden_until_turn: "Empty training ground — reader thinks protagonist hasn't returned. Turn: they're already in position."
+        - chapter: 9
+          hidden_until_turn: "Opponent's move coming — turn reveals protagonist's grounded response, not panic"
+
+      silence_to_dialogue_ratio:
+        setup_chapters: "40% silence / 60% dialogue"
+        rising_chapters: "60% silence / 40% dialogue"
+        climax_chapters: "80% silence / 20% dialogue"
+
+      climax_pacing_pattern: >
+        Training arc climax deliberately subverts expectation — no rapid
+        panel explosion. Final fight paced 3-4 panels per page maximum.
+        The reader is forced to slow down and witness, not rush through.
+        Speed is what the protagonist overcame. The page layout proves it.
+
+    layer_5_variants:
+      - variant_label: "slow_build_earned_release"
+        description: "Restrained pacing — the climax feels earned because the setup was never rushed"
+      - variant_label: "montage_acceleration"
+        description: "Training shown as rapid visual montage; build to test is quick; test is long and detailed"
+      - variant_label: "failure_loop"
+        description: "Multiple false breakthroughs — protagonist thinks they've learned three times before they actually have"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# STRATEGY 03: WORLD-THREAT ARC
+# Archetype: nakama_assembled_for_impossible_task
+# Core loop: discovery of threat → protagonist cannot face it alone → bonds
+#            forged under pressure → one must be sacrificed → triumph at cost
+# ═════════════════════════════════════════════════════════════════════════════
+  strategy_03:
+    name: "World-Threat Arc"
+    archetype_template: nakama_assembled_for_impossible_task
+    description: >
+      The external threat is real and existential, but the story is about
+      what people choose to protect and why. The sacrifice moment is not
+      manipulation — it is the logical endpoint of who a character became
+      across the arc. Triumph without cost is hollow; this genre contract
+      demands the cost be paid in full.
+
+    layer_1_plot_skeleton:
+      variant_label: "world_threat_standard"
+      beat_count: 11
+      beats:
+        - beat: 1
+          text: >
+            Discovery: something has changed in the world that shouldn't be
+            possible. {protagonist} encounters it first — a symptom, not the
+            source. The scale is unclear. The wrongness is not.
+          camera_hint: wide_environment_anomaly
+          mood_hint: false_alarm_triggered
+          is_carrier: true
+
+        - beat: 2
+          text: >
+            The threat identified. It is larger than {protagonist} can address
+            alone — larger than any single person. This is not a boss fight.
+            This is a systems failure.
+          camera_hint: scale_reveal_wide
+          mood_hint: overwhelm
+          is_carrier: true
+
+        - beat: 3
+          text: >
+            First nakama bond forged under fire. Not friendship — necessity.
+            Two people who would not have chosen each other, pressed into the
+            same foxhole. The bond is real because neither had a choice.
+          camera_hint: two_figure_foxhole
+          mood_hint: forged_under_pressure
+          is_carrier: true
+
+        - beat: 4
+          text: >
+            The group assembles. Each member carries a reason to fight that
+            the others don't fully understand yet. The reasons matter. They
+            will surface at the worst moment.
+          camera_hint: group_shot_disparate
+          mood_hint: uneasy_alliance
+          is_carrier: false
+
+        - beat: 5
+          text: >
+            First full encounter with the threat. They are outmatched. Not
+            decisively — they survive — but the gap is obvious. Someone is
+            hurt protecting someone else. The debt is created.
+          camera_hint: combat_chaos_survival
+          mood_hint: tense_near_loss
+          is_carrier: true
+
+        - beat: 6
+          text: >
+            Internal fracture: the group fights each other. The pressure
+            surfaces what was hidden in each member's reason. {protagonist}
+            must hold the group together without having the authority to do so.
+          camera_hint: argument_interior
+          mood_hint: fracture_under_stress
+          is_carrier: true
+
+        - beat: 7
+          text: >
+            The plan. It is not a good plan. It is the only plan. One member
+            will have to stay behind / take the hit / cannot survive the role
+            they're assigned. Everyone can see this. No one says it.
+          camera_hint: planning_scene_weight
+          mood_hint: unspoken_knowledge
+          is_carrier: true
+
+        - beat: 8
+          text: >
+            The sacrifice. Not heroic in presentation — practical, fast,
+            without ceremony. The one who stays behind does so because of
+            the reason they fight. It makes complete sense. That is what
+            makes it unbearable.
+          camera_hint: sacrifice_close_functional
+          mood_hint: grief
+          is_carrier: true
+
+        - beat: 9
+          text: >
+            The remaining group fights with the weight of what was paid. Not
+            rage — weight. They are heavier now. The fight is harder because
+            they carry someone extra.
+          camera_hint: burdened_combat
+          mood_hint: carried_grief_in_motion
+          is_carrier: true
+
+        - beat: 10
+          text: >
+            The threat is ended. Not with a triumphant strike — with the
+            accumulated weight of everything paid. The victory is quiet
+            because everyone who won knows what it cost.
+          camera_hint: aftermath_cost_visible
+          mood_hint: hollow_triumph
+          is_carrier: true
+
+        - beat: 11
+          text: >
+            The empty space where someone stood. The world continues. The
+            surviving members carry the permanent gap. The reader is not
+            told how to feel. The gap is enough.
+          camera_hint: empty_space_composition
+          mood_hint: unresolved_grief
+          is_carrier: true
+
+    layer_1_variants:
+      - variant_label: "world_threat_standard"
+        description: "11-beat arc with sacrifice as structural load-bearing beat"
+      - variant_label: "no_sacrifice_variant"
+        description: "Sacrifice replaced by permanent injury or exile — group survives intact but changed"
+      - variant_label: "pyrrhic_world_threat"
+        description: "The threat is ended but the world is permanently altered — 'winning' includes living in a damaged world"
+
+    layer_2_emotional_skeleton:
+      variant_label: "overwhelm_grief_cascade"
+      ei_engine_hottest: overwhelm
+      chapter_emotional_map:
+        chapter_1:
+          emotional_job: "The discovery triggers false alarm — protagonist and reader both discount the scale; this is a calibration moment"
+          ei_dimension: false_alarm
+          intensity: 3
+        chapter_3:
+          emotional_job: "The overwhelm of the actual scale — reader realizes ch1's false alarm was itself the warning sign"
+          ei_dimension: overwhelm
+          intensity: 4
+        chapter_6:
+          emotional_job: "Internal fracture reveals comparison — each member measures their sacrifice against others'; who is carrying more?"
+          ei_dimension: comparison
+          intensity: 4
+        chapter_climax:
+          emotional_job: "Grief as load-bearing emotional weight — triumph is not possible without it; the grief IS the win's meaning"
+          ei_dimension: grief
+          intensity: 5
+      progression_note: >
+        False Alarm → Overwhelm → Comparison → Grief.
+        Uniquely: the EI engine hottest at the end (grief) was absent at the
+        start. The emotional arc gains its engine as the story progresses.
+
+    layer_2_variants:
+      - variant_label: "overwhelm_grief_cascade"
+        description: "Standard world-threat arc — overwhelm builds to grief at sacrifice"
+      - variant_label: "comparison_fracture"
+        description: "The group's internal conflict is the emotional spine; threat is the crucible, not the subject"
+      - variant_label: "watcher_distance"
+        description: "Protagonist begins as observer of others' sacrifice — watcher engine dominant; grief arrives late"
+
+    layer_3_dialogue_skeleton:
+      variant_label: "ensemble_burden"
+      avg_words_per_bubble: 10-15
+      speech_atom_sequence:
+        - moment: "first_discovery"
+          atom_archetype: alarmed_observation
+          sample: "This... shouldn't exist. This isn't supposed to be possible."
+          emotion: calibrated_alarm
+          intensity: 3
+          delivery: standard_oval
+
+        - moment: "scale_reveal"
+          atom_archetype: impossible_scope_named
+          sample: "If we can't stop it here, there won't be a 'here' to come back to."
+          emotion: weight_of_facts
+          intensity: 4
+          delivery: flat_wide_statement
+
+        - moment: "bond_forged"
+          atom_archetype: necessity_acknowledgment
+          sample: "I don't like you. But I'd rather have you at my back than no one."
+          emotion: reluctant_respect
+          intensity: 2
+          delivery: aside_half_turned
+
+        - moment: "group_fracture"
+          atom_archetype: buried_resentment_surfaces
+          sample: "You act like your grief is bigger than mine. Like your reason to fight is the only real one."
+          emotion: comparison_accusation
+          intensity: 4
+          delivery: jagged_confrontational
+
+        - moment: "unspoken_plan"
+          atom_archetype: silence_before_assignment
+          sample: "[no line — the one who knows they won't come back meets the protagonist's eye. One nod.]"
+          emotion: acknowledged_without_words
+          intensity: 5
+          delivery: silent_exchange_panel
+
+        - moment: "sacrifice_moment"
+          atom_archetype: final_instruction
+          sample: "Don't look back. Looking back is how they stop you."
+          emotion: practical_love
+          intensity: 5
+          delivery: urgent_but_quiet_bubble
+
+        - moment: "victory_aftermath"
+          atom_archetype: hollow_announcement
+          sample: '"It''s over." [pause] "Yeah."'
+          emotion: empty_relief
+          intensity: 2
+          delivery: small_flat_two_line_exchange
+
+      escalation_pattern: >
+        Slow incline through assembly → spike at fracture → sudden drop to
+        near-silence at sacrifice → hollow quiet at resolution.
+        The sacrifice scene is the LEAST wordy critical beat — silence is
+        what gives it weight.
+      key_signature_line: >
+        "Looking back is how they stop you." — spoken once, echoed in
+        protagonist's mind as they turn away from the sacrifice.
+
+    layer_3_variants:
+      - variant_label: "ensemble_burden"
+        description: "Dialogue distributed across group — no single character carries all the weight"
+      - variant_label: "protagonist_anchor"
+        description: "Protagonist is the dialogue spine; group members speak through their relationship to the protagonist"
+      - variant_label: "sacrifice_heavy_dialogue"
+        description: "The soon-to-sacrifice character has the most dialogue weight; their death is prepared by their voice"
+
+    layer_4_visual_skeleton:
+      variant_label: "scale_and_intimacy_contrast"
+      avg_panels_per_page: 5
+      dialogue_dense_pages:
+        - position: ch4_p2
+          bubble_density: very_dense
+          note: "Group assembly — overlapping voices, competing reasons surfacing simultaneously"
+        - position: ch6_p3
+          bubble_density: dense
+          note: "Fracture argument — multi-character confrontation, speech bubbles crossing"
+      action_silent_pages:
+        - position: ch8_p3
+          bubble_density: none
+          note: "Sacrifice moment — functional, fast, no dialogue, three panels"
+        - position: ch10_p5
+          bubble_density: none
+          note: "Empty space where someone stood — single image, no caption"
+      splash_pages:
+        - position: ch2_p1
+          trigger: "Full scale of threat revealed"
+          style: overwhelming_environment_scale
+        - position: ch5_p4
+          trigger: "First full group combat — survival not victory"
+          style: desperate_ensemble_action
+        - position: ch8_p3
+          trigger: "Sacrifice — not heroic pose, practical last act"
+          style: quiet_action_functional
+        - position: ch10_p6
+          trigger: "Empty space — the gap in the group composition"
+          style: deliberate_absence_composition
+      bubble_density_curve:
+        ch1: medium           # Discovery + false alarm calibration
+        ch2: sparse           # Scale reveal — let the image speak
+        ch3: medium           # Bond formation — awkward conversation
+        ch4: very_dense       # Group assembly — many voices
+        ch5: sparse           # Combat — action carries it
+        ch6: dense            # Fracture — high conflict dialogue
+        ch7: medium           # Planning — functional weight
+        ch8: none_to_sparse   # Sacrifice — almost wordless
+        ch9: sparse           # Burdened combat
+        ch10: very_sparse     # Hollow victory and empty space
+        ch11: none            # Final image — gap where someone stood
+      recommended_bubble_styles:
+        discovery: oval_cautious
+        scale_moment: wide_flat_weight
+        group_tension: overlapping_multiple
+        fracture: jagged_confrontational
+        sacrifice: none_or_minimal_urgent
+        hollow_victory: small_deflated
+
+    layer_4_variants:
+      - variant_label: "scale_and_intimacy_contrast"
+        description: "Wide establishing shots for threat; extreme close-ups for character moments — constant contrast of scale"
+      - variant_label: "ensemble_grid"
+        description: "Equal panel real estate for all group members — democratic visual storytelling"
+      - variant_label: "threat_architecture"
+        description: "Threat visualized architecturally — oppressive geometry rather than monster design"
+
+    layer_5_pacing_skeleton:
+      variant_label: "weight_accumulation"
+      end_of_chapter_hooks:
+        ch1: wrongness_hook        # Something is wrong but reader isn't sure what
+        ch2: scale_drop            # The reveal of actual scale — reader recalibrates
+        ch3: bond_uncertainty      # Alliance formed but unstable — will it hold?
+        ch4: group_question        # Who is this group really? Each person's reason hinted, not answered
+        ch5: debt_created          # Someone was protected — the protection cost is visible
+        ch6: fracture_unresolved   # Group argument left hanging — no one apologized
+        ch7: plan_weight           # The plan is stated; reader sees the gap in it; characters don't name it
+        ch8: sacrifice_landing     # Chapter ends immediately after sacrifice — no aftermath shown yet
+        ch9: burden_combat_peak    # Combat chapter ends at the decisive strike — weight of what was paid
+        ch10: hollow_victory_echo  # Victory announced flatly; final line is the name of who isn't there
+        ch11: absence_as_ending    # Final chapter: empty space composition, no resolution
+
+      page_turn_reveals:
+        - chapter: 2
+          hidden_until_turn: "Reader expects protagonist's reaction to threat. Turn reveals: threat is larger than the whole page."
+        - chapter: 7
+          hidden_until_turn: "Planning scene — each person nods. Turn: one face doesn't appear in the group shot."
+        - chapter: 8
+          hidden_until_turn: "Sacrifice sequence — turn reveals the moment itself, not the lead-up."
+
+      silence_to_dialogue_ratio:
+        setup_chapters: "35% silence / 65% dialogue"
+        rising_chapters: "50% silence / 50% dialogue"
+        climax_chapters: "75% silence / 25% dialogue"
+
+      climax_pacing_pattern: >
+        Ch8 sacrifice: three rapid panels, then full-page empty space.
+        Ch9 combat: medium pacing (4-5 panels/page) — weight, not speed.
+        Ch10-11 resolution: slowest pacing in the arc — 2-3 panels/page.
+        The arc decelerates into grief rather than accelerating through it.
+
+    layer_5_variants:
+      - variant_label: "weight_accumulation"
+        description: "Pacing slows as cost accumulates — reader forced to sit with what was paid"
+      - variant_label: "pressure_compression"
+        description: "Arc compressed into rapid succession — the threat moves faster than the characters; breathless pacing throughout"
+      - variant_label: "aftermath_expansion"
+        description: "Victory section deliberately long — the hollow triumph given space to fully land"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# STRATEGY 04: RIVAL REDEMPTION ARC
+# Archetype: enemy_becomes_ally_through_understanding
+# Core loop: adversarial first encounter → forced proximity reveals complexity →
+#            protagonist extends understanding → rival chooses different path →
+#            joint climax that neither could achieve alone
+# ═════════════════════════════════════════════════════════════════════════════
+  strategy_04:
+    name: "Rival Redemption Arc"
+    archetype_template: enemy_becomes_ally_through_understanding
+    description: >
+      The rival is not wrong — they are operating under a different set of
+      premises. The arc is about changing the premises, not winning the
+      argument. Redemption in shōnen is not moral reformation but alignment
+      of purpose. The joint climax is only possible because the rival became
+      themselves, not a better version of the protagonist.
+
+    layer_1_plot_skeleton:
+      variant_label: "rival_redemption_standard"
+      beat_count: 10
+      beats:
+        - beat: 1
+          text: >
+            {rival} and {protagonist} are cast as enemies by circumstance, not
+            by nature. Their first real encounter establishes the opposition —
+            but attentive readers will notice: their core conflict is identical,
+            their responses to it inverted.
+          camera_hint: parallel_composition_contrast
+          mood_hint: opposition_with_mirror
+          is_carrier: true
+
+        - beat: 2
+          text: >
+            {rival}'s origin context — delivered obliquely, not as backstory
+            dump. A detail that explains why they fight the way they fight.
+            Not sympathy. Understanding.
+          camera_hint: rival_alone_fragment
+          mood_hint: context_reveal
+          is_carrier: true
+
+        - beat: 3
+          text: >
+            Forced proximity: circumstances require {protagonist} and {rival}
+            to cooperate. Neither wants to. The cooperation is ugly,
+            inefficient, and reveals more about both of them than any fight.
+          camera_hint: reluctant_side_by_side
+          mood_hint: friction_as_data
+          is_carrier: true
+
+        - beat: 4
+          text: >
+            {protagonist} extends understanding — not forgiveness, not
+            acceptance, but recognition: "I see what shaped you." {rival}
+            rejects it. The rejection is not the end of the thread.
+          camera_hint: reaching_gesture_refused
+          mood_hint: overture_declined
+          is_carrier: true
+
+        - beat: 5
+          text: >
+            {rival} acts against their previous pattern — small, deniable,
+            but noticed by {protagonist}. They do not acknowledge it.
+            Neither does {rival}. The change is happening below the stated positions.
+          camera_hint: small_action_caught
+          mood_hint: unacknowledged_shift
+          is_carrier: true
+
+        - beat: 6
+          text: >
+            The external force that shaped {rival} is named — the system,
+            the person, the ideology that told them who to be. {protagonist}
+            sees it. {rival} is aware {protagonist} sees it. This is the
+            most vulnerable the rival has ever been.
+          camera_hint: exposure_close_rival
+          mood_hint: source_revealed
+          is_carrier: true
+
+        - beat: 7
+          text: >
+            Crisis that requires joint action. Neither can solve it alone.
+            The rival has two choices: fall back on the old pattern or
+            trust someone they've been fighting. The choice is made.
+          camera_hint: crisis_two_figure
+          mood_hint: decision_point
+          is_carrier: true
+
+        - beat: 8
+          text: >
+            Joint action. It works — not because they became compatible but
+            because their different approaches cover each other's blind spots.
+            The difference is the strength. Unity is not uniformity.
+          camera_hint: complementary_action
+          mood_hint: difference_as_strength
+          is_carrier: true
+
+        - beat: 9
+          text: >
+            Aftermath: the rival has not become good. Has not become warm.
+            Has become aligned with something {protagonist} also cares about.
+            The relationship is not friendship. It is alliance with clarity.
+          camera_hint: side_by_side_not_facing
+          mood_hint: earned_alliance
+          is_carrier: true
+
+        - beat: 10
+          text: >
+            Final note: {rival} returns to their own path. Different from
+            where they were, but not on {protagonist}'s path. The reader
+            understands: redemption is not absorption. It's finding your
+            own direction.
+          camera_hint: diverging_paths_composition
+          mood_hint: separation_with_weight
+          is_carrier: true
+
+    layer_1_variants:
+      - variant_label: "rival_redemption_standard"
+        description: "Full 10-beat rival redemption arc"
+      - variant_label: "incomplete_redemption"
+        description: "Rival makes the choice but the reader is not certain it will hold — ambiguous alignment"
+      - variant_label: "failed_redemption"
+        description: "Protagonist extends understanding; rival chooses the old path anyway; tragic endpoint"
+
+    layer_2_emotional_skeleton:
+      variant_label: "comparison_to_recognition"
+      ei_engine_hottest: comparison
+      chapter_emotional_map:
+        chapter_1:
+          emotional_job: "Reader and protagonist register the rival as 'opposite' — comparison engine activates the opposition"
+          ei_dimension: comparison
+          intensity: 3
+        chapter_3:
+          emotional_job: "Forced proximity reveals the comparison was wrong — they are more similar than different; this is unsettling"
+          ei_dimension: comparison
+          intensity: 4
+        chapter_6:
+          emotional_job: "The source of the rival's pattern is exposed — reader feels the shame of the rival's origin"
+          ei_dimension: shame
+          intensity: 4
+        chapter_climax:
+          emotional_job: "Joint action succeeds because difference is asset — comparison engine resolves into something new: complementarity"
+          ei_dimension: comparison
+          intensity: 2  # resolved
+      progression_note: >
+        Comparison (activated) → Comparison (deepened/troubled) → Shame (the rival's wound) →
+        Comparison (resolved into complementarity). The arc's emotional engine
+        doesn't change — it transforms.
+
+    layer_2_variants:
+      - variant_label: "comparison_to_recognition"
+        description: "Comparison engine throughout — it transforms from opposition to complementarity"
+      - variant_label: "shame_mirror"
+        description: "Both protagonist and rival carry shame of different origins — the arc is about recognizing the mirrored wound"
+      - variant_label: "watcher_sympathy"
+        description: "Protagonist as watcher of the rival's suffering — sympathy arc before alliance"
+
+    layer_3_dialogue_skeleton:
+      variant_label: "sparring_as_conversation"
+      avg_words_per_bubble: 8-15
+      speech_atom_sequence:
+        - moment: "first_opposition"
+          atom_archetype: clean_opposing_principle
+          sample: "You fight for people who don't know your name. That's not strength. That's a habit."
+          emotion: cold_ideological_challenge
+          intensity: 3
+          delivery: flat_confrontational
+
+        - moment: "forced_cooperation_friction"
+          atom_archetype: reluctant_direction
+          sample: "Left. Move left. Because I said so and we're on the same side right now."
+          emotion: grudging_coordination
+          intensity: 2
+          delivery: clipped_practical
+
+        - moment: "protagonist_understanding_offer"
+          atom_archetype: recognition_without_judgment
+          sample: "I know who told you that strength had to be solitary. I know what that cost."
+          emotion: steady_recognition
+          intensity: 4
+          delivery: careful_soft_bubble
+
+        - moment: "rival_rejection"
+          atom_archetype: deflection_through_aggression
+          sample: "You don't know anything. You haven't earned the right to understand me."
+          emotion: defensive_rejection
+          intensity: 4
+          delivery: sharp_angular_short
+
+        - moment: "unacknowledged_shift"
+          atom_archetype: action_without_words
+          sample: "[rival covers protagonist's blind spot without being asked]"
+          emotion: implicit_choice
+          intensity: 3
+          delivery: silent_panel
+
+        - moment: "joint_action_spoken"
+          atom_archetype: functional_trust_statement
+          sample: "I've got the right side. You take left. Don't waste it."
+          emotion: operational_trust
+          intensity: 3
+          delivery: short_direct
+
+        - moment: "post_climax_acknowledgment"
+          atom_archetype: minimal_completion
+          sample: '"You were useful." [pause] "Yeah. You too."'
+          emotion: understated_respect
+          intensity: 2
+          delivery: small_exchange_quiet
+
+      escalation_pattern: >
+        Opposed peaks early → sustained friction plateau → two spikes
+        (understanding offer / rival rejection) → rapid collapse to sparse
+        at joint action → minimal at resolution.
+      key_signature_line: >
+        "I'm not becoming what you are. But I can stop being what I was."
+        — rival's line, spoken during joint action, never acknowledged again.
+
+    layer_3_variants:
+      - variant_label: "sparring_as_conversation"
+        description: "Dialogue IS combat — verbal sparring mirrors and precedes physical sparring"
+      - variant_label: "rival_monologue_anchor"
+        description: "Rival given one extended monologue that recontextualizes everything; before and after are different stories"
+      - variant_label: "silence_converts"
+        description: "The rival's change is communicated entirely through action — no spoken acknowledgment of redemption"
+
+    layer_4_visual_skeleton:
+      variant_label: "mirror_composition_evolving"
+      avg_panels_per_page: 5
+      dialogue_dense_pages:
+        - position: ch1_p3
+          bubble_density: dense
+          note: "Initial opposition — both characters arguing their positions simultaneously"
+        - position: ch4_p2
+          bubble_density: dense
+          note: "Understanding offer and rejection — close emotional exchange"
+      action_silent_pages:
+        - position: ch5_p3
+          bubble_density: none
+          note: "The unacknowledged shift — rival's covering action, no narration"
+        - position: ch8_p2
+          bubble_density: none
+          note: "Joint action in perfect complement — two figures, one motion, no words"
+      splash_pages:
+        - position: ch1_p1
+          trigger: "Parallel composition establishing opposition — mirror-image panel"
+          style: opposed_parallel_symmetry
+        - position: ch8_p3
+          trigger: "Joint action success — different from symmetry; complementary not identical"
+          style: offset_complementary_dynamic
+        - position: ch10_p5
+          trigger: "Diverging paths — final panel showing two figures going different directions"
+          style: divergence_composition
+      bubble_density_curve:
+        ch1: dense           # Opposition and argument
+        ch2: medium          # Context fragments for rival
+        ch3: medium          # Friction during forced cooperation
+        ch4: dense           # Understanding offer/rejection
+        ch5: sparse          # Unacknowledged shift
+        ch6: medium          # Source revealed — quieter
+        ch7: sparse          # Decision point under pressure
+        ch8: none_to_sparse  # Joint action — bodies speaking
+        ch9: sparse          # Aftermath
+        ch10: medium         # Separation — earned weight
+      recommended_bubble_styles:
+        opposition_phase: rectangular_confrontational
+        cooperation_phase: standard_but_clipped
+        understanding_offer: soft_careful_oval
+        rival_rejection: sharp_angular
+        joint_action: none_or_single_word
+        resolution: small_quiet_exchange
+
+    layer_4_variants:
+      - variant_label: "mirror_composition_evolving"
+        description: "Visual language begins with mirror/opposition compositions; evolves toward offset complementary compositions"
+      - variant_label: "rival_pov_panels"
+        description: "Strategic POV panels from rival's perspective — reader sees protagonist as rival sees them"
+      - variant_label: "convergence_geometry"
+        description: "Panel compositions begin with characters on opposite sides; gradually move toward center as alliance forms"
+
+    layer_5_pacing_skeleton:
+      variant_label: "friction_to_complement"
+      end_of_chapter_hooks:
+        ch1: opposition_hook        # Established positions — reader expects a fight
+        ch2: context_fragment_hook  # One detail about rival's past — unexplained, lingering
+        ch3: friction_comedy_hook   # Cooperation failing but almost working — tense/funny
+        ch4: rejection_hanging      # Understanding refused — the thread is visible to reader but not resolved
+        ch5: action_not_words_hook  # Unacknowledged shift — reader sees it; characters don't name it
+        ch6: exposure_weight_hook   # Source of rival's pattern — reader now understands the origin
+        ch7: decision_cut           # Joint action needed — cut before rival answers
+        ch8: success_understated    # Joint win — no celebration; single exchange
+        ch9: earned_quiet_hook      # Alliance without fanfare — understated
+        ch10: divergence_hook       # Two paths — reader feels the space between them
+
+      page_turn_reveals:
+        - chapter: 2
+          hidden_until_turn: "Fragment of rival's context — turn reveals it's not what protagonist assumed"
+        - chapter: 5
+          hidden_until_turn: "Rival standing still — reader thinks they'll attack. Turn: they covered protagonist's blind spot."
+        - chapter: 7
+          hidden_until_turn: "Rival's face during decision — turn reveals the choice made before words"
+
+      silence_to_dialogue_ratio:
+        setup_chapters: "30% silence / 70% dialogue"
+        rising_chapters: "50% silence / 50% dialogue"
+        climax_chapters: "65% silence / 35% dialogue"
+
+      climax_pacing_pattern: >
+        Joint action sequence: medium-fast pacing (5-6 panels/page) →
+        decisive moment: two full panels opposite each other on spread →
+        aftermath: deliberately slower (3 panels/page) to force the
+        reader to sit with the earned alliance rather than rush past it.
+
+    layer_5_variants:
+      - variant_label: "friction_to_complement"
+        description: "Pacing mirrors the relationship — starts choppy and out-of-sync, resolves to smooth complementary rhythm"
+      - variant_label: "escalating_encounters"
+        description: "Each encounter between protagonist and rival is larger in scope — pacing accelerates with each chapter"
+      - variant_label: "quiet_resolution_extended"
+        description: "Final two chapters paced at half-speed — the arc's emotional payoff lives in the slowness"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# STRATEGY 05: ORIGIN/BACKSTORY ARC
+# Archetype: present_mystery_recontextualized_by_past
+# Core loop: present anomaly → flashback discovery → revelation changes
+#            present meaning → recontextualization reshapes protagonist's
+#            understanding of who they are
+# ═════════════════════════════════════════════════════════════════════════════
+  strategy_05:
+    name: "Origin/Backstory Arc"
+    archetype_template: present_mystery_recontextualized_by_past
+    description: >
+      The present is incomprehensible until the past is revealed. But this is
+      not a twist — it is a deepening. The protagonist does not discover they
+      were lied to. They discover they didn't have the full picture. The
+      revelation recontextualizes without invalidating. Who they became
+      while not knowing was also real.
+
+    layer_1_plot_skeleton:
+      variant_label: "origin_standard"
+      beat_count: 10
+      beats:
+        - beat: 1
+          text: >
+            An anomaly in the present: {protagonist} encounters something or
+            someone that doesn't fit their understanding of their own story.
+            A gap. A detail that contradicts the official version.
+          camera_hint: anomaly_close_present
+          mood_hint: low_level_unease
+          is_carrier: true
+
+        - beat: 2
+          text: >
+            {protagonist} pursues the thread. Not obsessively — but persistently.
+            Each pull reveals more loose ends. The past is not buried. It is
+            distributed across the present in fragments.
+          camera_hint: investigation_montage
+          mood_hint: growing_unease
+          is_carrier: false
+
+        - beat: 3
+          text: >
+            First flashback — partial, filtered. The protagonist is a child.
+            The scene shows something they remember differently or don't
+            remember at all. The past and the present version don't match.
+          camera_hint: flashback_soft_filter
+          mood_hint: disorientation
+          is_carrier: true
+
+        - beat: 4
+          text: >
+            A witness — someone who was there. They don't want to speak.
+            Their resistance tells {protagonist} something the truth hasn't
+            said yet: this will change you. Are you sure?
+          camera_hint: reluctant_witness_close
+          mood_hint: warned_before_revelation
+          is_carrier: true
+
+        - beat: 5
+          text: >
+            The witness speaks. The account is not dramatic. It's ordinary.
+            The past was not grand — it was human. The gap between the
+            mythology {protagonist} built and the reality of it is itself
+            the revelation.
+          camera_hint: testimony_still_scene
+          mood_hint: ordinary_weight
+          is_carrier: true
+
+        - beat: 6
+          text: >
+            {protagonist} processes alone. Not grief, exactly — recalibration.
+            Everything they built on the old understanding must be re-examined.
+            Not discarded. Re-examined.
+          camera_hint: alone_processing_interior
+          mood_hint: recalibration
+          is_carrier: true
+
+        - beat: 7
+          text: >
+            Second flashback — now that {protagonist} has the context, the
+            original anomaly is revisited. The same scene. Different meaning.
+            Neither version was wrong. Both were partial.
+          camera_hint: flashback_recontextualized
+          mood_hint: layered_understanding
+          is_carrier: true
+
+        - beat: 8
+          text: >
+            The present fight/challenge takes on new meaning. {protagonist}
+            now fights with the full weight of history — not as burden but as
+            context. They know why they are who they are.
+          camera_hint: present_action_informed_by_past
+          mood_hint: purposeful_grounding
+          is_carrier: true
+
+        - beat: 9
+          text: >
+            The thing that was hidden is acknowledged — not to the world,
+            not publicly. Internally. {protagonist} holds the full picture
+            for the first time. It is not resolution. It is completeness.
+          camera_hint: internal_stillness_close
+          mood_hint: integration
+          is_carrier: true
+
+        - beat: 10
+          text: >
+            Final present-day beat: {protagonist} acts from the integrated
+            self — the before-knowledge and after-knowledge merged.
+            Who they were while not knowing was also real. The arc
+            adds depth, not replacement.
+          camera_hint: forward_movement_grounded
+          mood_hint: grounded_continuity
+          is_carrier: true
+
+    layer_1_variants:
+      - variant_label: "origin_standard"
+        description: "Full 10-beat origin arc with two flashback sequences"
+      - variant_label: "single_flashback"
+        description: "One extended flashback instead of two partial ones — more immersive but less comparative"
+      - variant_label: "unreliable_witness"
+        description: "The witness account is partial or incorrect — protagonist must triangulate truth from multiple incomplete sources"
+
+    layer_2_emotional_skeleton:
+      variant_label: "watcher_to_integration"
+      ei_engine_hottest: watcher
+      chapter_emotional_map:
+        chapter_1:
+          emotional_job: "The anomaly triggers watcher engine — protagonist observes the gap between what they knew and what they see"
+          ei_dimension: watcher
+          intensity: 3
+        chapter_3:
+          emotional_job: "First flashback dissonance — the protagonist watches their own past self with the watcher's distance"
+          ei_dimension: watcher
+          intensity: 4
+        chapter_6:
+          emotional_job: "Post-revelation recalibration — grief for the simpler story, but not for the truth"
+          ei_dimension: grief
+          intensity: 4
+        chapter_climax:
+          emotional_job: "Integration — the watching distance collapses into being. Protagonist stops observing and starts inhabiting."
+          ei_dimension: watcher
+          intensity: 2  # resolved through inhabitation
+      progression_note: >
+        Watcher (activated) → Watcher (deepened by flashback) → Grief (for lost simplicity) →
+        Watcher (resolved — protagonist stops watching themselves and becomes).
+        The arc is about ending the distance the watcher engine creates.
+
+    layer_2_variants:
+      - variant_label: "watcher_to_integration"
+        description: "Watcher engine resolved through integration — protagonist stops observing and starts inhabiting"
+      - variant_label: "shame_origin"
+        description: "The past contains something shameful — the protagonist feared finding this; revelation changes shame's relationship"
+      - variant_label: "grief_for_myth"
+        description: "Protagonist grieves the simpler story they built; grief is the primary engine, not the discovery"
+
+    layer_3_dialogue_skeleton:
+      variant_label: "fragment_and_weight"
+      avg_words_per_bubble: 8-15
+      speech_atom_sequence:
+        - moment: "anomaly_observation"
+          atom_archetype: careful_noting
+          sample: "That's not how it was supposed to have happened."
+          emotion: quiet_noticing
+          intensity: 2
+          delivery: small_thought_adjacent
+
+        - moment: "investigation_query"
+          atom_archetype: persistent_question
+          sample: "You were there. I know you were there. I just need to know what you saw."
+          emotion: urgent_without_aggression
+          intensity: 3
+          delivery: standard_lean_in
+
+        - moment: "witness_warning"
+          atom_archetype: cautionary_gate
+          sample: "You should think carefully about whether you want this. Some things you can't un-know."
+          emotion: heavy_care
+          intensity: 3
+          delivery: slow_wide_rectangle
+
+        - moment: "testimony_delivery"
+          atom_archetype: plain_account
+          sample: "There was no grand moment. No decision point. It was just — one day, and then another day."
+          emotion: ordinary_weight
+          intensity: 4
+          delivery: caption_adjacent_spoken_slowly
+
+        - moment: "recalibration_alone"
+          atom_archetype: internal_revision
+          sample: "[no spoken dialogue — protagonist sits with the information]"
+          emotion: processing_silence
+          intensity: 4
+          delivery: caption_box_or_none
+
+        - moment: "present_action_informed"
+          atom_archetype: grounded_declaration
+          sample: "I know where this comes from now. That changes what I do with it."
+          emotion: purposeful_clarity
+          intensity: 4
+          delivery: clean_forward_looking_bubble
+
+        - moment: "integration_quiet"
+          atom_archetype: completion_acknowledgment
+          sample: "Both things were true. I think I can hold that."
+          emotion: integration_not_triumph
+          intensity: 3
+          delivery: small_quiet_caption
+
+      escalation_pattern: >
+        Gradual build from quiet observation to testimony weight →
+        silence at recalibration → purposeful clarity at resolution.
+        The highest emotional intensity is the silence AFTER testimony,
+        not the testimony itself. The reader sits with the protagonist.
+      key_signature_line: >
+        "Both things were true. I think I can hold that."
+        — protagonist's closing internal line; appears as caption or
+        thought bubble, never spoken aloud to another character.
+
+    layer_3_variants:
+      - variant_label: "fragment_and_weight"
+        description: "Dialogue arrives in fragments; weight accumulates through pacing not through volume"
+      - variant_label: "interview_structure"
+        description: "The witness testimony chapter is structured as an interview — question and answer, formal distance"
+      - variant_label: "letter_or_record"
+        description: "Past is delivered through a physical document rather than a witness — protagonist reads, not listens"
+
+    layer_4_visual_skeleton:
+      variant_label: "present_past_visual_contrast"
+      avg_panels_per_page: 4
+      dialogue_dense_pages:
+        - position: ch4_p2
+          bubble_density: medium
+          note: "Witness encounter — careful conversation, measured exchange"
+        - position: ch5_p3
+          bubble_density: medium
+          note: "Testimony delivery — slow wide panels, long caption boxes"
+      action_silent_pages:
+        - position: ch3_p2
+          bubble_density: none
+          note: "First flashback — purely visual, no dialogue, different ink weight"
+        - position: ch6_p1
+          bubble_density: none
+          note: "Recalibration silence — protagonist alone, no caption"
+        - position: ch9_p3
+          bubble_density: none
+          note: "Integration moment — still image, protagonist's face, no text"
+      splash_pages:
+        - position: ch3_p3
+          trigger: "First flashback scene — past world revealed"
+          style: memory_soft_wide_different_palette
+        - position: ch7_p2
+          trigger: "Second flashback — same scene, now with context"
+          style: recontextualized_same_composition_different_meaning
+        - position: ch10_p4
+          trigger: "Protagonist grounded in present — full integration"
+          style: present_forward_clean_grounded
+      bubble_density_curve:
+        ch1: medium           # Anomaly — present world, some dialogue
+        ch2: sparse           # Investigation — action-light, observation-heavy
+        ch3: none             # First flashback — pure visual
+        ch4: medium           # Witness encounter
+        ch5: medium           # Testimony
+        ch6: none             # Processing silence
+        ch7: sparse           # Second flashback (slightly more anchored)
+        ch8: medium           # Present action with new context
+        ch9: sparse           # Integration settling
+        ch10: medium          # Grounded forward movement
+      recommended_bubble_styles:
+        present_day: standard_clean
+        flashback: soft_irregular_memory_filter
+        witness_speech: wide_slow_deliberate
+        internal_processing: caption_box_not_bubble
+        testimony: adjacent_to_caption
+        integration: small_quiet_thought
+
+    layer_4_variants:
+      - variant_label: "present_past_visual_contrast"
+        description: "Distinct visual language for present vs flashback — different line weight, tone, panel border style"
+      - variant_label: "seamless_bleed"
+        description: "Past and present visually interweave — reader must orient themselves; disorientation is intentional"
+      - variant_label: "photo_document_style"
+        description: "Flashbacks rendered as flat documentary images — less immersive, more archival; emphasizes pastness"
+
+    layer_5_pacing_skeleton:
+      variant_label: "excavation_pace"
+      end_of_chapter_hooks:
+        ch1: anomaly_unresolved    # The gap identified but not pursued — reader's curiosity seeded
+        ch2: thread_tightens       # Each investigation lead connects — pattern emerging
+        ch3: flashback_dissonance  # First flashback ends without explanation — reader holds the image
+        ch4: warning_landed        # Witness's "are you sure?" hangs; chapter ends before protagonist answers
+        ch5: testimony_weight      # Chapter ends immediately after testimony — no reaction shown yet
+        ch6: silence_extended      # Processing chapter ends in silence — reader waits
+        ch7: recontextualization   # Same scene, different meaning — chapter ends on the changed interpretation
+        ch8: informed_action       # Present challenge tackled with new context — ends on decisive move
+        ch9: stillness_before_end  # Integration settling — almost-final quiet
+        ch10: continuity_hook      # Final: protagonist moving forward; reader understands both versions were real
+
+      page_turn_reveals:
+        - chapter: 3
+          hidden_until_turn: "Investigation hits a wall — turn reveals the witness was always nearby"
+        - chapter: 5
+          hidden_until_turn: "Testimony in progress — turn reveals the ordinary moment that changed everything"
+        - chapter: 7
+          hidden_until_turn: "Second flashback begins with same image as first — turn reveals it means something else now"
+
+      silence_to_dialogue_ratio:
+        setup_chapters: "45% silence / 55% dialogue"
+        rising_chapters: "60% silence / 40% dialogue"
+        climax_chapters: "70% silence / 30% dialogue"
+
+      climax_pacing_pattern: >
+        Origin arc climax is the slowest arc of the five — pacing at
+        3-4 panels/page throughout the final three chapters. The revelation
+        is not a battle; the integration is not a sprint. The reader is
+        held at the protagonist's pace, forced to process alongside them.
+        Speed would betray the arc's genre contract.
+
+    layer_5_variants:
+      - variant_label: "excavation_pace"
+        description: "Slow deliberate pacing throughout — mirrors the excavation of the past"
+      - variant_label: "revelation_acceleration"
+        description: "Arc pacing accelerates as fragments accumulate — reader speeds up with the protagonist's urgency"
+      - variant_label: "time_collapse"
+        description: "Final chapters collapse past and present into simultaneous pacing — two timelines in one reading experience"
+
+# ═════════════════════════════════════════════════════════════════════════════
+# ANTI-PATTERN RULES
+# Combinations that produce inauthentic or broken shōnen outputs
+# ═════════════════════════════════════════════════════════════════════════════
+anti_pattern_rules:
+  - rule_id: SH_AP_01
+    forbidden_combination:
+      strategy: strategy_03  # World-Threat Arc
+      layer_4_variant: zero_dialogue_or_very_sparse_throughout
+    reason: >
+      World-threat arcs require the reader to maintain protagonist anchor.
+      Ultra-low dialogue throughout severs the reader's connection to why
+      anyone is fighting. The sacrifice lands hollow without the voice of
+      the person sacrificed. Minimum: medium dialogue density in assembly
+      and fracture chapters.
+    severity: blocker
+
+  - rule_id: SH_AP_02
+    forbidden_combination:
+      strategy: strategy_01  # Tournament Arc
+      layer_5_variant: slow_burn_reveals
+    reason: >
+      Tournament arcs are structurally dependent on forward momentum.
+      Slow-burn pacing kills tension between fights. If momentum dies
+      between rounds, the bracket structure becomes burden rather than
+      scaffold. Use slow_burn only if the tournament is a framework,
+      not the spine.
+    severity: warning
+
+  - rule_id: SH_AP_03
+    forbidden_combination:
+      strategy: strategy_02  # Training Arc
+      layer_3_variant: rival_dialogue_heavy
+    reason: >
+      Training arcs require the mentor voice to dominate. If rival dialogue
+      outweighs mentor dialogue, the protagonist's growth has the wrong
+      teacher. A rival cannot provide the type of transmission that grounds
+      training arc emotional payoff.
+    severity: blocker
+
+  - rule_id: SH_AP_04
+    forbidden_combination:
+      strategy: strategy_04  # Rival Redemption Arc
+      layer_2_variant: no_ei_engine
+    reason: >
+      Rival redemption without an emotional intelligence engine produces
+      a plot event (enemy becomes ally) rather than a character arc.
+      The EI engine is what makes the shift feel like genuine change
+      rather than narrative convenience.
+    severity: blocker
+
+  - rule_id: SH_AP_05
+    forbidden_combination:
+      strategy: strategy_05  # Origin Arc
+      layer_5_variant: rapid_escalation
+    reason: >
+      Origin/backstory arcs require the reader to hold two timelines.
+      Rapid escalation pacing forces the reader through revelations
+      too quickly to integrate. The recontextualization is the climax —
+      if the reader is rushing, they miss it.
+    severity: warning
+
+  - rule_id: SH_AP_06
+    forbidden_combination:
+      strategy: any_shonen
+      layer_2_emotional_job: triumphant_shame_resolution_via_public_victory
+    reason: >
+      Shōnen shame arcs resolved through public triumph violate the
+      EI v2 shame engine constraints (see engines/shame.yaml).
+      Shame does not resolve through spectacle. Integration is internal.
+    severity: blocker
+
+  - rule_id: SH_AP_07
+    forbidden_combination:
+      strategy: strategy_03  # World-Threat Arc
+      sacrifice_beat: absent_or_optional
+    reason: >
+      World-threat arcs without a genuine cost marker produce hollow triumph.
+      The sacrifice does not have to be death — but it must be real and
+      irreversible. Optional sacrifice produces genre contract failure.
+    severity: warning

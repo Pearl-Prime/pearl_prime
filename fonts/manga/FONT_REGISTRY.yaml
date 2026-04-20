@@ -1,0 +1,142 @@
+# Manga Font Registry v1.0.0
+#
+# Lists open-source / freely-licensed fonts suitable for manga lettering.
+# The bubble_render.py engine loads .ttf / .otf files from this directory.
+# This registry documents metadata, license provenance, and intended usage.
+#
+# font_override enum (from lettering_spec schema):
+#   null               — system default (Pillow ImageFont.load_default)
+#   bold_action        — heavy weight, shouting / determination beats
+#   light_whisper      — thin / light weight, whisper / internal beats
+#   italic_internal    — italic, thought / narration beats
+#   all_caps_scream    — bold + uppercase rendering, scream_ultra bubbles
+#
+# To add a font file:
+#   1. Place the .ttf or .otf in fonts/manga/
+#   2. Add an entry here with full license / URL fields
+#   3. Re-run tests/test_manga_bubble_e2e.py to verify it loads cleanly
+#
+# Note: bubble_render.py falls back to Pillow's built-in bitmap font when
+# no .ttf / .otf files are present.  The pipeline is font-file-optional.
+# Production deployments should install at least one TTF per override class.
+
+schema_version: "1.0.0"
+
+font_overrides:
+  bold_action:
+    description: >
+      Heavy / bold weight font for action shouts, determination monologues,
+      and spiky_emphasis / scream_ultra bubbles.
+    recommended_families:
+      - Bangers          # Google Fonts, SIL OFL — comic-style bold caps
+      - Oswald-Bold      # Google Fonts, SIL OFL — condensed bold
+      - Permanent-Marker # Google Fonts, SIL OFL — hand-lettered bold
+    installation_notes: >
+      Download Bangers-Regular.ttf from fonts.google.com/specimen/Bangers
+      and place it in fonts/manga/ as `bangers_bold_action.ttf`.
+
+  light_whisper:
+    description: >
+      Thin / light weight font for whisper-intensity dialogue, dotless-tail
+      bubbles, and internal monologue in horror / grief contexts.
+    recommended_families:
+      - Lato-Light       # Google Fonts, SIL OFL
+      - Nunito-Light     # Google Fonts, SIL OFL
+      - AnonymousPro     # Google Fonts, SIL OFL — good for manga lettering
+    installation_notes: >
+      Download Lato-Light.ttf from fonts.google.com/specimen/Lato.
+
+  italic_internal:
+    description: >
+      Italic font for cloud_thought and square_narration bubbles;
+      interior monologue, narrator captions, and aside beats.
+    recommended_families:
+      - Lato-Italic      # Google Fonts, SIL OFL
+      - Merriweather-Italic # Google Fonts, SIL OFL — readable body italic
+    installation_notes: >
+      Download Lato-Italic.ttf from fonts.google.com/specimen/Lato.
+
+  all_caps_scream:
+    description: >
+      Bold + uppercase rendering for scream_ultra bubbles and full-panel
+      impact lines.  Should match or exceed bold_action weight.
+    recommended_families:
+      - Bangers          # Same as bold_action — uppercase by default
+      - Anton             # Google Fonts, SIL OFL — extreme condensed bold
+    installation_notes: >
+      A single Bangers-Regular.ttf serves both bold_action and all_caps_scream;
+      all_caps_scream applies text.upper() in the renderer.
+
+# ---------------------------------------------------------------------------
+# Bundled / built-in fallback
+# ---------------------------------------------------------------------------
+
+fallback:
+  engine: "pillow_load_default"
+  description: >
+    Pillow's built-in 8×13 bitmap font.  No license constraints.
+    Used when no .ttf / .otf file can be resolved for the requested override.
+    Sufficient for CI / tests.  Not suitable for production print output.
+
+# ---------------------------------------------------------------------------
+# Genre-specific guidance
+# ---------------------------------------------------------------------------
+
+genre_recommendations:
+  shonen:
+    primary: bold_action
+    secondary: light_whisper
+    notes: >
+      Use bold_action for all determination / anger beats.
+      light_whisper for grief / internal sequences.
+
+  shojo:
+    primary: light_whisper
+    secondary: italic_internal
+    notes: >
+      Prefer soft, thin fonts throughout.  Avoid bold_action except in
+      one-time climax beats.  shojo_soft bubbles look best with light_whisper.
+
+  seinen:
+    primary: italic_internal
+    secondary: light_whisper
+    notes: >
+      Square-narration heavy.  Narrator captions should use italic_internal.
+      Protagonist internal monologue in whisper_dashed uses light_whisper.
+
+  horror:
+    primary: light_whisper
+    secondary: bold_action
+    notes: >
+      Counter-intuitively, horror defaults to thin/quiet fonts — impact comes
+      from the bubble shape (drip_horror, whisper_dashed), not font weight.
+      bold_action reserved for monster / antagonist voice.
+
+  isekai:
+    primary: bold_action
+    secondary: italic_internal
+    notes: >
+      Protagonist meta-commentary should use italic_internal to signal
+      observational distance.  Action beats use bold_action.
+
+# ---------------------------------------------------------------------------
+# Open-source font sources
+# ---------------------------------------------------------------------------
+
+sources:
+  - name: Google Fonts
+    url: https://fonts.google.com
+    license: SIL Open Font License (OFL) 1.1
+    notes: All fonts listed above are available under OFL unless noted.
+
+  - name: Font Squirrel
+    url: https://www.fontsquirrel.com
+    license: Various (check individual fonts)
+    notes: Filter by "100% Free" for commercial-safe fonts.
+
+  - name: DaFont (Comic category)
+    url: https://www.dafont.com/theme.php?cat=109
+    license: Various (check individual fonts)
+    notes: >
+      Many comic/manga fonts here are free for personal use only.
+      Verify commercial licensing before production use.

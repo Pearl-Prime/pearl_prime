@@ -663,6 +663,49 @@ def run_ite_qc(
             "detail": "no compliant fractal nature panel in release/resolve tail",
         })
 
+    # ── MDLG gates (T-21 … T-25): manga dialogue quality ───────────
+    # These run after T-20 when lettering_spec_v2 is available in the enriched chapter.
+    lettering_spec_v2 = chapter_enriched.get("_lettering_spec_v2")
+    if lettering_spec_v2 and any(
+        not row.get("silence_confirmed", True)
+        for row in (lettering_spec_v2.get("lettering_panels") or [])
+    ):
+        try:
+            from phoenix_v4.quality.ei_v2.manga_dialogue_gates import run_manga_dialogue_gates
+            genre = str(chapter_enriched.get("genre") or "shonen")
+            chapter_contract = chapter_enriched.get("_chapter_contract")
+            series_history = chapter_enriched.get("_series_dialogue_history")
+            mdlg_report = run_manga_dialogue_gates(
+                chapter_enriched,
+                lettering_spec_v2,
+                genre=genre,
+                chapter_contract=chapter_contract,
+                series_history=series_history,
+            )
+            for mg in mdlg_report.get("gates") or []:
+                gates.append({
+                    "id": mg["id"],
+                    "level": mg["level"],
+                    "passed": mg["passed"],
+                    "detail": mg.get("detail", ""),
+                })
+                if not mg["passed"] and mg["level"] == "BLOCKER":
+                    blocking_failed += 1
+            # Store score for reporting
+            gates.append({
+                "id": "MDLG-COMPOSITE",
+                "level": "INFO",
+                "passed": mdlg_report.get("passed", True),
+                "detail": f"mdlg_score={mdlg_report.get('mdlg_score', 0.0)}",
+            })
+        except Exception as mdlg_exc:
+            gates.append({
+                "id": "MDLG-ERROR",
+                "level": "WARN",
+                "passed": True,
+                "detail": f"MDLG gates skipped: {str(mdlg_exc)[:80]}",
+            })
+
     overall_pass = blocking_failed == 0
     return {
         "schema_version": "1.0.0",

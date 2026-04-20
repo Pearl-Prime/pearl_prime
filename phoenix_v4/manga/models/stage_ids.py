@@ -10,6 +10,7 @@ CHAPTER_WRITER = "chapter_writer"
 CHAPTER_VISUAL = "chapter_visual"
 CHAPTER_IMAGE_GEN = "chapter_image_gen"
 CHAPTER_LETTERING = "chapter_lettering"
+CHAPTER_BUBBLE_RENDER = "chapter_bubble_render"
 CHAPTER_LAYOUT = "chapter_layout"
 CHAPTER_QC = "chapter_qc"
 SERIES_MEMORY_MERGE = "series_memory_merge"
@@ -30,6 +31,7 @@ ALL_STAGE_IDS: tuple[str, ...] = (
     CHAPTER_VISUAL,
     CHAPTER_IMAGE_GEN,
     CHAPTER_LETTERING,
+    CHAPTER_BUBBLE_RENDER,
     CHAPTER_LAYOUT,
     ITE_BREATH,
     ITE_GUTTER,

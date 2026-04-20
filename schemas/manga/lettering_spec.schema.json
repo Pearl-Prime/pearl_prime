@@ -15,7 +15,50 @@
             "required": ["panel_id"],
             "properties": {
               "panel_id": { "type": "string", "minLength": 1 },
-              "silence_confirmed": { "type": "boolean" }
+              "silence_confirmed": { "type": "boolean" },
+              "dialogue_lines": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["speaker", "text"],
+                  "properties": {
+                    "speaker": { "type": "string" },
+                    "text": { "type": "string" },
+                    "emotion": { "type": "string" },
+                    "intensity": {
+                      "type": "string",
+                      "enum": ["whisper", "calm", "normal", "excited", "shouting", "screaming", "internal"]
+                    },
+                    "bubble_style": {
+                      "type": "string",
+                      "enum": ["round_normal", "spiky_emphasis", "cloud_thought", "square_narration", "whisper_dashed", "scream_ultra", "electronic_sharp", "drip_horror", "shojo_soft"]
+                    },
+                    "font_override": {
+                      "type": ["string", "null"],
+                      "enum": ["bold_action", "light_whisper", "italic_internal", "all_caps_scream", null]
+                    },
+                    "tail_style": {
+                      "type": "string",
+                      "enum": ["pointer", "curved", "dotless", "broken"]
+                    },
+                    "position_hint": {
+                      "type": "string",
+                      "enum": ["top_left", "top_right", "top_center", "bottom_left", "bottom_right", "bottom_center", "center_left", "center_right"]
+                    },
+                    "speech_atom_id": { "type": ["string", "null"] }
+                  }
+                }
+              },
+              "sfx": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "narrator_caption": { "type": ["string", "null"] },
+              "estimated_bubble_coverage": {
+                "type": ["number", "null"],
+                "minimum": 0.0,
+                "maximum": 1.0
+              }
             }
           }
         }
