@@ -1,0 +1,484 @@
+{
+  "source_label": "internal_deep6h_ch07",
+  "persona": "gen_z_professionals",
+  "word_count": 3666,
+  "gates_requested": [
+    "chapter_flow",
+    "bestseller_craft",
+    "ei_v2",
+    "editorial",
+    "memorable_lines",
+    "transformation_arc",
+    "book_quality_gate",
+    "regression_museum"
+  ],
+  "chapter_flow": {
+    "status": "PASS",
+    "score": 100,
+    "errors": [],
+    "warnings": [],
+    "metrics": {
+      "paragraphs": 61,
+      "sentences": 481,
+      "transition_hits": 4,
+      "thesis_hits": 1,
+      "avg_adjacent_overlap": 0.108,
+      "sentence_len_std": 5.43,
+      "aha_hits": 5,
+      "scaffold_hits": {},
+      "flow_profile": "standard"
+    }
+  },
+  "bestseller_craft": {
+    "status": "WARN",
+    "move_scores": {
+      "orient": 0.758,
+      "name": 0.67,
+      "turn": 1.0,
+      "give": 0.825,
+      "pull": 0.32
+    },
+    "ontgp_composite": 0.7146,
+    "issues": [
+      "move_warn:pull",
+      "no_named_tension_or_question_in_closer"
+    ],
+    "remediation": [
+      "End with a named tension or sharp question — not a teaser slogan (overlay §7)."
+    ],
+    "metrics": {
+      "word_count": 3666,
+      "zones": {
+        "orient_words": 150,
+        "name_words": 1210,
+        "turn_words": 1320,
+        "give_words": 1907,
+        "pull_words": 100
+      },
+      "heuristic_scores": {
+        "orient": 0.758,
+        "name": 0.67,
+        "turn": 1.0,
+        "give": 0.825,
+        "pull": 0.32
+      },
+      "final_move_scores": {
+        "orient": 0.758,
+        "name": 0.67,
+        "turn": 1.0,
+        "give": 0.825,
+        "pull": 0.32
+      }
+    }
+  },
+  "memorable_lines": {
+    "status": "PASS",
+    "memorable_line_count": 10,
+    "issues": [],
+    "metrics": {
+      "block_on_violation": true,
+      "min_score_for_candidate": 4.0,
+      "min_score_for_great_tier": 5.75,
+      "max_words_per_candidate": 20,
+      "strength_levels_tracked": [
+        "good",
+        "great"
+      ],
+      "sentence_count": 464,
+      "raw_top_score": 4.75,
+      "candidate_count": 10,
+      "best_candidate_scores": [
+        {
+          "text": "Instead of pushing it away, say yes to it for\none minute.",
+          "score": 4.75
+        },
+        {
+          "text": "It's not just about what we do, but the intention behind our actions.",
+          "score": 4.75
+        },
+        {
+          "text": "Not\nforever, but long enough to notice what remains.",
+          "score": 4.75
+        }
+      ]
+    }
+  },
+  "transformation_arc": {
+    "chapter_signals": [
+      {
+        "chapter_index": 0,
+        "recognition": false,
+        "reframe": true,
+        "challenge": true,
+        "relief": false,
+        "identity_shift": false,
+        "hits": {
+          "recognition": 0,
+          "reframe": 6,
+          "challenge": 6,
+          "relief": 0,
+          "identity_shift": 0
+        }
+      }
+    ],
+    "ending_check": {
+      "ending_identity_shift_present": false,
+      "ending_reframe_present": true,
+      "ending_weak": true
+    },
+    "note_single_chapter": "Single-chapter sample: ending_check uses only this chapter; identity_shift in final chapter is often absent by construction."
+  },
+  "editorial": {
+    "chapter_assessments": [
+      {
+        "chapter_index": 0,
+        "hook_friction": "FAIL",
+        "scene_specificity": "PASS",
+        "aha_presence": "PASS",
+        "integration_variety": "PASS",
+        "thread_continuity": "PASS",
+        "word_budget": "ADEQUATE",
+        "location_grounding": "PASS",
+        "cadence_variety": "PASS",
+        "word_count": 3666,
+        "target_range": [
+          1500,
+          3500
+        ],
+        "thesis_aligned": true,
+        "thesis_coverage": 1.0,
+        "chapter_score": 13
+      }
+    ],
+    "book_level": {
+      "repetition_index": "PASS",
+      "repetition_excess_count": 0,
+      "vocabulary_diversity": "PASS",
+      "vocabulary_ratio": 0.3254,
+      "flat_middle": "PASS",
+      "flat_middle_overlap": 0.0,
+      "reward_spacing": "PASS",
+      "reward_max_gap": 0
+    },
+    "total_score": 21,
+    "max_score": 24,
+    "grade": "PASS",
+    "revision_notes": [
+      "Ch 1: Hook lacks cognitive friction."
+    ]
+  },
+  "book_quality_gate": {
+    "status": "PASS",
+    "release_band": "Pass",
+    "fail_reasons": [],
+    "hold_reasons": [],
+    "metrics": {
+      "runtime_format_id": "",
+      "word_count": 3668,
+      "word_range": null,
+      "chapter_count": 1,
+      "flow_profile": "standard",
+      "flow_failures": [],
+      "artifact_hits": [],
+      "repeated_phrase_violations": []
+    }
+  },
+  "ei_v2": {
+    "mode": "heuristic_plus_safety_plus_tts_readability",
+    "safety": {
+      "risk_score": 0.24,
+      "categories": {
+        "medical_claims": {
+          "score": 0.0,
+          "hits": 0,
+          "raw_hits": 0,
+          "excerpts": []
+        },
+        "clinical_language": {
+          "score": 1.0,
+          "hits": 9,
+          "excerpts": [
+            "medication",
+            "medication",
+            "medication"
+          ]
+        },
+        "promotional": {
+          "score": 0.0,
+          "hits": 0,
+          "excerpts": []
+        },
+        "reassurance_spam": {
+          "score": 0.0,
+          "hits": 0,
+          "density_per_100_words": 0.0,
+          "excerpts": []
+        },
+        "pathologizing": {
+          "score": 1.0,
+          "hits": 5,
+          "raw_hits": 6,
+          "excerpts": [
+            "Suffering",
+            "patient",
+            "patient"
+          ]
+        },
+        "marketing_compliance": {
+          "score": 1.0,
+          "hits": 0,
+          "excerpts": []
+        }
+      },
+      "reason_codes": [
+        "clinical_language_detected",
+        "pathologizing_detected"
+      ],
+      "mode": "heuristic_plus"
+    },
+    "tts_readability": {
+      "composite": 0.5104,
+      "dimensions": {
+        "sentence_length": 0.8691,
+        "rhythm_variance": 0.0,
+        "paragraph_breathing": 0.2722,
+        "tts_pattern_safety": 0.7,
+        "rhetorical_question_safety": 0.8909
+      },
+      "metrics": {
+        "total_sentences": 489,
+        "total_words": 3666,
+        "rhythm_cv": 0.5921,
+        "long_sentence_fraction": 0.0,
+        "short_sentence_fraction": 0.1636,
+        "tts_problematic_count": 2,
+        "paragraph_breaks": 60
+      },
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks",
+        "tts_problematic_patterns: 2 found"
+      ]
+    }
+  },
+  "regression_museum": {
+    "summary": {
+      "blocked": true,
+      "warned": true,
+      "summary": "29 violation(s): 26 blocking, 3 warnings",
+      "failure_classes": [
+        "doctrinal_exposition_inline",
+        "doubled_word",
+        "mid_paragraph_format_break",
+        "off_persona_vocabulary",
+        "repeated_scene_anchor"
+      ],
+      "violation_count": 29
+    },
+    "violations": [
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_11673",
+        "evidence": "f the physician's extension.\n\nYou're on the the train after work. You're standing in th",
+        "description": "Accidental word repetition: 'the the'"
+      },
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_14154",
+        "evidence": "w at rush hour. Traffic barely moves on the the train. She called twice while you were ",
+        "description": "Accidental word repetition: 'the the'"
+      },
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_17969",
+        "evidence": "ck at the loose thread on your sleeve.\n\nThe the train is delayed. The platform is crowd",
+        "description": "Accidental word repetition: 'The the'"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8773",
+        "evidence": "e Impact on Self and Society Practicing karma yoga transforms not just the individual but ",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9172",
+        "evidence": "sonal Needs with Selfless Service While karma yoga extols selflessness, it doesn't advocat",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9874",
+        "evidence": ".\n\nDharma and Duty: The Cornerstones of Karma Yoga At the heart of Karma Yoga is the conce",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9901",
+        "evidence": "nerstones of Karma Yoga At the heart of Karma Yoga is the concept of 'dharma' or duty. It'",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_10256",
+        "evidence": "rd. Selfless Service: The Ultimate Goal Karma Yoga elevates the act of selfless service to",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8773",
+        "evidence": "e Impact on Self and Society Practicing karma yoga transforms not just the individual but ",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9172",
+        "evidence": "sonal Needs with Selfless Service While karma yoga extols selflessness, it doesn't advocat",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9874",
+        "evidence": ".\n\nDharma and Duty: The Cornerstones of Karma Yoga At the heart of Karma Yoga is the conce",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9901",
+        "evidence": "nerstones of Karma Yoga At the heart of Karma Yoga is the concept of 'dharma' or duty. It'",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_10256",
+        "evidence": "rd. Selfless Service: The Ultimate Goal Karma Yoga elevates the act of selfless service to",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8145",
+        "evidence": "ear light of reality, also known as the Dharmakaya. By focusing on the inner light, in",
+        "description": "Off-persona term 'Dharma' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9837",
+        "evidence": "ds, some benign and others disruptive.\n\nDharma and Duty: The Cornerstones of Karma Yog",
+        "description": "Off-persona term 'Dharma' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9931",
+        "evidence": " heart of Karma Yoga is the concept of 'dharma' or duty. It's about aligning our actio",
+        "description": "Off-persona term 'Dharma' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_10516",
+        "evidence": "ct experience of light, as taught by an enlightened teacher or through meditation, this perception ",
+        "description": "Off-persona term 'enlightened teacher' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8556",
+        "evidence": "an access the luminous, spiritual light.Stopping thought during meditation allows you to pierce ",
+        "description": "Off-persona term 'stopping thought' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "mid_paragraph_format_break",
+        "severity": "warn",
+        "location": "chapter_1:char_14",
+        "evidence": "Small Exposures\n\nSuffering is not a punishment. It is a s",
+        "description": "Paragraph ends without terminal punctuation"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_22",
+        "evidence": "If something or someone consistently depletes energy, it may be wise to limit or eliminate that influence.Seeking Enlightenment: The Highest Form of Personal PowerIn Buddhism and various spiritual pra",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_23",
+        "evidence": "By consistently practicing mindfulness and letting go of negativity, individuals can elevate their state of mind and experience happiness in the simplicity of life.The inner way, which is considered m",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_2455",
+        "evidence": "s like it's caving inward.\nOutside, the soft daylight along the sill makes everything look thin.\nAnother car",
+        "description": "Scene anchor repeated 8× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_11739",
+        "evidence": "You're standing in the middle car. Damp soft daylight along the sill on everyone's coats. Your phone buzzes ",
+        "description": "Scene anchor repeated 8× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_12917",
+        "evidence": "nt it. Your voice wouldn't work anyway. soft daylight along the sill outside the conference room windows. Tw",
+        "description": "Scene anchor repeated 8× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_13465",
+        "evidence": "ard. The keys make the sound keys make. soft daylight along the sill against the building. The screen lights",
+        "description": "Scene anchor repeated 8× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_16267",
+        "evidence": ". A the train entrance is to your left. soft daylight along the sill clouds are moving fast. You pull out yo",
+        "description": "Scene anchor repeated 8× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_17147",
+        "evidence": "tens. Just checking. Not obsessing.\nThe soft daylight along the sill sun burns through the window.\nYou've re",
+        "description": "Scene anchor repeated 8× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_18050",
+        "evidence": " crowded. The board says eight minutes. soft daylight along the sill moves through the station entrance. You",
+        "description": "Scene anchor repeated 8× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_19287",
+        "evidence": " still visible through the clear glass. soft daylight along the sill hasn't changed. the train below continu",
+        "description": "Scene anchor repeated 8× in book (max 3)"
+      }
+    ]
+  }
+}

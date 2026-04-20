@@ -1,0 +1,657 @@
+{
+  "source_label": "internal_deep6h_ch09",
+  "persona": "gen_z_professionals",
+  "word_count": 4129,
+  "gates_requested": [
+    "chapter_flow",
+    "bestseller_craft",
+    "ei_v2",
+    "editorial",
+    "memorable_lines",
+    "transformation_arc",
+    "book_quality_gate",
+    "regression_museum"
+  ],
+  "chapter_flow": {
+    "status": "FAIL",
+    "score": 85,
+    "errors": [
+      "WEAK_TRANSITIONS"
+    ],
+    "warnings": [],
+    "metrics": {
+      "paragraphs": 74,
+      "sentences": 461,
+      "transition_hits": 2,
+      "thesis_hits": 1,
+      "avg_adjacent_overlap": 0.11,
+      "sentence_len_std": 7.69,
+      "aha_hits": 5,
+      "scaffold_hits": {},
+      "flow_profile": "standard"
+    }
+  },
+  "bestseller_craft": {
+    "status": "WARN",
+    "move_scores": {
+      "orient": 0.758,
+      "name": 0.67,
+      "turn": 1.0,
+      "give": 0.9667,
+      "pull": 0.32
+    },
+    "ontgp_composite": 0.7429,
+    "issues": [
+      "move_warn:pull",
+      "no_named_tension_or_question_in_closer"
+    ],
+    "remediation": [
+      "End with a named tension or sharp question — not a teaser slogan (overlay §7)."
+    ],
+    "metrics": {
+      "word_count": 4129,
+      "zones": {
+        "orient_words": 150,
+        "name_words": 1363,
+        "turn_words": 1486,
+        "give_words": 2148,
+        "pull_words": 100
+      },
+      "heuristic_scores": {
+        "orient": 0.758,
+        "name": 0.67,
+        "turn": 1.0,
+        "give": 0.9667,
+        "pull": 0.32
+      },
+      "final_move_scores": {
+        "orient": 0.758,
+        "name": 0.67,
+        "turn": 1.0,
+        "give": 0.9667,
+        "pull": 0.32
+      }
+    }
+  },
+  "memorable_lines": {
+    "status": "PASS",
+    "memorable_line_count": 7,
+    "issues": [],
+    "metrics": {
+      "block_on_violation": true,
+      "min_score_for_candidate": 4.0,
+      "min_score_for_great_tier": 5.75,
+      "max_words_per_candidate": 20,
+      "strength_levels_tracked": [
+        "good",
+        "great"
+      ],
+      "sentence_count": 452,
+      "raw_top_score": 4.75,
+      "candidate_count": 7,
+      "best_candidate_scores": [
+        {
+          "text": "Instead of pushing it away, say yes to it for\none minute.",
+          "score": 4.75
+        },
+        {
+          "text": "Not\nforever, but long enough to notice what remains.",
+          "score": 4.75
+        },
+        {
+          "text": "Not to change it,\nbut to see it.",
+          "score": 4.75
+        }
+      ]
+    }
+  },
+  "transformation_arc": {
+    "chapter_signals": [
+      {
+        "chapter_index": 0,
+        "recognition": false,
+        "reframe": true,
+        "challenge": true,
+        "relief": false,
+        "identity_shift": false,
+        "hits": {
+          "recognition": 0,
+          "reframe": 5,
+          "challenge": 7,
+          "relief": 0,
+          "identity_shift": 0
+        }
+      }
+    ],
+    "ending_check": {
+      "ending_identity_shift_present": false,
+      "ending_reframe_present": true,
+      "ending_weak": true
+    },
+    "note_single_chapter": "Single-chapter sample: ending_check uses only this chapter; identity_shift in final chapter is often absent by construction."
+  },
+  "editorial": {
+    "chapter_assessments": [
+      {
+        "chapter_index": 0,
+        "hook_friction": "FAIL",
+        "scene_specificity": "PASS",
+        "aha_presence": "PASS",
+        "integration_variety": "PASS",
+        "thread_continuity": "PASS",
+        "word_budget": "FAIL",
+        "location_grounding": "PASS",
+        "cadence_variety": "PASS",
+        "word_count": 4129,
+        "target_range": [
+          1500,
+          3500
+        ],
+        "thesis_aligned": true,
+        "thesis_coverage": 1.0,
+        "chapter_score": 12
+      }
+    ],
+    "book_level": {
+      "repetition_index": "PASS",
+      "repetition_excess_count": 0,
+      "vocabulary_diversity": "PASS",
+      "vocabulary_ratio": 0.3254,
+      "flat_middle": "PASS",
+      "flat_middle_overlap": 0.0,
+      "reward_spacing": "PASS",
+      "reward_max_gap": 0
+    },
+    "total_score": 20,
+    "max_score": 24,
+    "grade": "PASS",
+    "revision_notes": [
+      "Ch 1: Hook lacks cognitive friction.",
+      "Ch 1: Word count (4129) outside target [1500, 3500]."
+    ]
+  },
+  "book_quality_gate": {
+    "status": "FAIL",
+    "release_band": "Reject",
+    "fail_reasons": [
+      "chapter flow failed in 1 chapter(s)"
+    ],
+    "hold_reasons": [],
+    "metrics": {
+      "runtime_format_id": "",
+      "word_count": 4131,
+      "word_range": null,
+      "chapter_count": 1,
+      "flow_profile": "standard",
+      "flow_failures": [
+        {
+          "chapter": 1,
+          "errors": [
+            "WEAK_TRANSITIONS"
+          ]
+        }
+      ],
+      "artifact_hits": [],
+      "repeated_phrase_violations": []
+    }
+  },
+  "ei_v2": {
+    "mode": "heuristic_plus_safety_plus_tts_readability",
+    "safety": {
+      "risk_score": 0.2,
+      "categories": {
+        "medical_claims": {
+          "score": 0.0,
+          "hits": 0,
+          "raw_hits": 0,
+          "excerpts": []
+        },
+        "clinical_language": {
+          "score": 0.667,
+          "hits": 2,
+          "excerpts": [
+            "medication",
+            "medication"
+          ]
+        },
+        "promotional": {
+          "score": 0.0,
+          "hits": 0,
+          "excerpts": []
+        },
+        "reassurance_spam": {
+          "score": 0.0,
+          "hits": 0,
+          "density_per_100_words": 0.0,
+          "excerpts": []
+        },
+        "pathologizing": {
+          "score": 1.0,
+          "hits": 6,
+          "raw_hits": 8,
+          "excerpts": [
+            "Suffering",
+            "patient",
+            "patient"
+          ]
+        },
+        "marketing_compliance": {
+          "score": 1.0,
+          "hits": 0,
+          "excerpts": []
+        }
+      },
+      "reason_codes": [
+        "clinical_language_detected",
+        "pathologizing_detected"
+      ],
+      "mode": "heuristic_plus"
+    },
+    "tts_readability": {
+      "composite": 0.3849,
+      "dimensions": {
+        "sentence_length": 0.9072,
+        "rhythm_variance": 0.0,
+        "paragraph_breathing": 0.0534,
+        "tts_pattern_safety": 0.1,
+        "rhetorical_question_safety": 0.8827
+      },
+      "metrics": {
+        "total_sentences": 483,
+        "total_words": 4129,
+        "rhythm_cv": 0.6196,
+        "long_sentence_fraction": 0.0,
+        "short_sentence_fraction": 0.1159,
+        "tts_problematic_count": 6,
+        "paragraph_breaks": 73
+      },
+      "issues": [
+        "monotone_pacing: consecutive similar-length sentences",
+        "insufficient_paragraph_breaks",
+        "tts_problematic_patterns: 6 found"
+      ]
+    }
+  },
+  "regression_museum": {
+    "summary": {
+      "blocked": true,
+      "warned": true,
+      "summary": "52 violation(s): 40 blocking, 12 warnings",
+      "failure_classes": [
+        "doctrinal_exposition_inline",
+        "doubled_word",
+        "font_css_leak",
+        "mid_paragraph_format_break",
+        "off_persona_vocabulary",
+        "repeated_scene_anchor"
+      ],
+      "violation_count": 52
+    },
+    "violations": [
+      {
+        "failure_class": "font_css_leak",
+        "severity": "block",
+        "location": "chapter_1:char_8362",
+        "evidence": " and correctly to reap their benefits.\n\nHelvetica; ;; ;; Selfless giving, also known as Karma",
+        "description": "CSS/font directive leaked into prose"
+      },
+      {
+        "failure_class": "doubled_word",
+        "severity": "block",
+        "location": "chapter_1:char_3885",
+        "evidence": "calculated something.\nYou're sitting in the the street below coffee shop, laptop closed",
+        "description": "Accidental word repetition: 'the the'"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8870",
+        "evidence": "ent of divine love and enlightenment.In Bhakti Yoga's teachings, genuine love is stripped o",
+        "description": "Off-persona term 'Bhakti Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9123",
+        "evidence": "ine.Integration of Love in Everyday LifeBhakti Yoga is the practice of mindful awareness of",
+        "description": "Off-persona term 'Bhakti Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_18617",
+        "evidence": "usion: Love as the Path to EnlightenmentBhakti Yoga is the path of love, and love is the ul",
+        "description": "Off-persona term 'Bhakti Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_19354",
+        "evidence": "itual EnlightenmentThe focus of love in Bhakti Yoga is selflessness, an affection devoid of",
+        "description": "Off-persona term 'Bhakti Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8870",
+        "evidence": "ent of divine love and enlightenment.In Bhakti Yoga's teachings, genuine love is stripped o",
+        "description": "Off-persona term 'Bhakti yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9123",
+        "evidence": "ine.Integration of Love in Everyday LifeBhakti Yoga is the practice of mindful awareness of",
+        "description": "Off-persona term 'Bhakti yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_18617",
+        "evidence": "usion: Love as the Path to EnlightenmentBhakti Yoga is the path of love, and love is the ul",
+        "description": "Off-persona term 'Bhakti yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_19354",
+        "evidence": "itual EnlightenmentThe focus of love in Bhakti Yoga is selflessness, an affection devoid of",
+        "description": "Off-persona term 'Bhakti yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8410",
+        "evidence": "a; ;; ;; Selfless giving, also known as Karma Yoga, is a profound spiritual practice that ",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8620",
+        "evidence": "losophy of selflessness and compassion, Karma Yoga emphasizes performing actions without a",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9302",
+        "evidence": "he inherent state of being.\n\nConclusion Karma yoga offers a path to spiritual growth throu",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9548",
+        "evidence": "illment. By embracing the principles of karma yoga, one can find profound joy and purpose ",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9681",
+        "evidence": "e Impact on Self and Society Practicing karma yoga transforms not just the individual but ",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_10080",
+        "evidence": "sonal Needs with Selfless Service While karma yoga extols selflessness, it doesn't advocat",
+        "description": "Off-persona term 'Karma yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8410",
+        "evidence": "a; ;; ;; Selfless giving, also known as Karma Yoga, is a profound spiritual practice that ",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8620",
+        "evidence": "losophy of selflessness and compassion, Karma Yoga emphasizes performing actions without a",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9302",
+        "evidence": "he inherent state of being.\n\nConclusion Karma yoga offers a path to spiritual growth throu",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9548",
+        "evidence": "illment. By embracing the principles of karma yoga, one can find profound joy and purpose ",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9681",
+        "evidence": "e Impact on Self and Society Practicing karma yoga transforms not just the individual but ",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_10080",
+        "evidence": "sonal Needs with Selfless Service While karma yoga extols selflessness, it doesn't advocat",
+        "description": "Off-persona term 'Karma Yoga' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7561",
+        "evidence": ": EnlightenmentUltimately, the Wheel of Dharma and the Six Worlds teach us that we hav",
+        "description": "Off-persona term 'Dharma' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_19038",
+        "evidence": "ion, and embracing the teachings of the Dharma, individuals can elevate their consciou",
+        "description": "Off-persona term 'Dharma' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7511",
+        "evidence": "d move towards enlightenment.Beyond the Six Worlds: EnlightenmentUltimately, the Wheel of ",
+        "description": "Off-persona term 'Six Worlds' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_7576",
+        "evidence": "Ultimately, the Wheel of Dharma and the Six Worlds teach us that we have a choice in how w",
+        "description": "Off-persona term 'Six Worlds' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_19127",
+        "evidence": "ss and transcend the limitations of the Six Worlds.\n\nHis unconditional love not only allev",
+        "description": "Off-persona term 'Six Worlds' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_6639",
+        "evidence": " individuals navigate the inner way. An enlightened teacher can direct students toward the various ",
+        "description": "Off-persona term 'enlightened teacher' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8779",
+        "evidence": "verence a spiritual seeker holds for an enlightened teacher, recognizing them as an embodiment of d",
+        "description": "Off-persona term 'enlightened teacher' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_15408",
+        "evidence": "ess, meditation, and the guidance of an enlightened teacher, individuals can connect with their inn",
+        "description": "Off-persona term 'enlightened teacher' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_18125",
+        "evidence": " understood and practiced as the art of stopping thought, becomes a transformative journey. It t",
+        "description": "Off-persona term 'stopping thought' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_18941",
+        "evidence": "e states of mind through meditation and self-realization.By stilling the mind, practicing compas",
+        "description": "Off-persona term 'self-realization' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_8837",
+        "evidence": "r, recognizing them as an embodiment of divine love and enlightenment.In Bhakti Yoga's teac",
+        "description": "Off-persona term 'divine love' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "off_persona_vocabulary",
+        "severity": "block",
+        "location": "chapter_1:char_9030",
+        "evidence": "ty to elevate us beyond the confines of mundane existence, creating a connection with the divine.",
+        "description": "Off-persona term 'mundane existence' in 'gen_z_professionals' book"
+      },
+      {
+        "failure_class": "mid_paragraph_format_break",
+        "severity": "warn",
+        "location": "chapter_1:char_30",
+        "evidence": "When Your Body Learns It's Safe\n\nThe body knows truth that the mind argue",
+        "description": "Paragraph ends without terminal punctuation"
+      },
+      {
+        "failure_class": "mid_paragraph_format_break",
+        "severity": "warn",
+        "location": "chapter_1:char_10760",
+        "evidence": "out as one of the most direct pathways to\n\nThe observation checklist is on your des",
+        "description": "Paragraph ends without terminal punctuation"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_23",
+        "evidence": "Consequently, understanding the transient and dream-like nature of life is a significant step towards enlightenment.Seeking Higher States of Mind:Buddhist practitioners strive to attain higher states ",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_24",
+        "evidence": "Meditation is a powerful tool that allows practitioners to experience higher dimensions of awareness and move towards enlightenment.Beyond the Six Worlds: EnlightenmentUltimately, the Wheel of Dharma ",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_25",
+        "evidence": "It is a state of being beyond our ordinary concepts of good and bad, wants and aversions. True happiness and liberation are found when you transcend these worldly attachments.In the spiritual journey,",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_27",
+        "evidence": "It is also akin to the reverence a spiritual seeker holds for an enlightened teacher, recognizing them as an embodiment of divine love and enlightenment.In Bhakti Yoga's teachings, genuine love is str",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_50",
+        "evidence": "Meditation becomes a tool to enhance our selfless giving, empowering us to connect with our innermost essence.In the journey of selfless giving, we discover unity and connection with all beings, move ",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_52",
+        "evidence": "It is a 'left-handed path', implying its divergence from more conventional spiritual practices like meditation or asceticism. Tantra embraces all aspects of life, including those deemed non-spiritual ",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_53",
+        "evidence": "The younger brother's approach demonstrates the importance of applying willpower wisely, highlighting that personal power requires both strength and discernment.The Development of Personal PowerIn the",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_55",
+        "evidence": "However, upon realizing the enormity of this task, he fragmented into a thousand pieces. Out of compassion, he was reborn with a thousand arms, reaching out to alleviate the world's suffering. This na",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_56",
+        "evidence": "The key insight is that one has the capacity to move beyond these states of mind through meditation and self-realization.By stilling the mind, practicing compassion, and embracing the teachings of the",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "doctrinal_exposition_inline",
+        "severity": "warn",
+        "location": "chapter_1:paragraph_57",
+        "evidence": "His unconditional love not only alleviates the suffering of hell's inhabitants but also transforms the very nature of hell into a realm of joy and love.Selfless Love and Spiritual EnlightenmentThe foc",
+        "description": "Doctrinal exposition paragraph disconnected from narrative"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_3382",
+        "evidence": "ine finishes. Steam rises from the cup. soft daylight along the sill visible through the small window. Someo",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_4314",
+        "evidence": "g for the continuation of bad news.\nThe soft daylight along the sill outside makes everything look temporary",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_4558",
+        "evidence": "m is too warm. Your collar feels tight. soft daylight along the sill makes the windows humid. You type a res",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_12012",
+        "evidence": " clenches so tight your teeth ache.\nThe soft daylight along the sill sun blinds you through the window when ",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_13524",
+        "evidence": "nt it. Your voice wouldn't work anyway. soft daylight along the sill outside the conference room windows. Tw",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      },
+      {
+        "failure_class": "repeated_scene_anchor",
+        "severity": "block",
+        "location": "chapter_1:char_20668",
+        "evidence": "e hums. Your cubicle is the eighth one. soft daylight along the sill through the skylights above. Conversati",
+        "description": "Scene anchor repeated 6× in book (max 3)"
+      }
+    ]
+  }
+}
