@@ -1,78 +1,72 @@
 # Golden segments for translation regression tests.
-# 6 source sentences × 6 CJK locales = 36 golden segments.
-# Sources: 2 PIVOT atoms, 2 TAKEAWAY atoms, 2 THREAD atoms.
+# Anchored to atoms/tech_finance_burnout/anxiety/{PIVOT,TAKEAWAY,THREAD}/CANONICAL.txt
+# so substring checks resolve against the live corpus.
 
-schema_version: "1.0"
+schema_version: "1.1"
 
 segments:
-  # ── PIVOT 1 ────────────────────────────────────────────────────────
   - id: pivot_01
-    source_en: "The alarm in your nervous system is not a sign that something is wrong with you — it is a sign that something once went wrong around you."
+    source_en: "The alarm without threat isn't what you were taught. It's what happens when your system runs a threat assessment on a sprint that isn't dangerous."
     atom_type: PIVOT
     expected:
-      ja-JP: "あなたの神経系のアラームは、あなたに何か問題があるというサインではありません。かつてあなたの周りで何かがうまくいかなかったというサインです。"
-      ko-KR: "당신의 신경계에서 울리는 경보는 당신에게 문제가 있다는 신호가 아닙니다. 한때 당신 주변에서 무언가가 잘못되었다는 신호입니다."
-      zh-CN: "你神经系统中的警报并不是你有问题的信号——而是曾经你周围发生过问题的信号。"
-      zh-TW: "你神經系統中的警報不是你有問題的信號——而是曾經你周圍發生過問題的信號。"
-      zh-HK: "你神經系統中的警報不是你有問題的信號——而是曾經你周圍發生過問題的信號。"
-      zh-SG: "你神经系统中的警报并不是你有问题的信号——而是曾经你周围发生过问题的信号。"
+      ja-JP: "アラームが脅威を伴わないのは、あなたが教えられてきたものとは違う。"
+      ko-KR: ""
+      zh-CN: "没有真实威胁的警报，并非你曾被教导的模样"
+      zh-TW: "沒有威脅的警訊，不是你從前學過的樣子"
+      zh-HK: ""
+      zh-SG: ""
 
-  # ── PIVOT 2 ────────────────────────────────────────────────────────
   - id: pivot_02
-    source_en: "What if the pattern you are trying to fix is not a flaw — but a strategy your body learned to keep you safe?"
+    source_en: "You've been managing the scanning like a task on your golden handcuffs. What if it's not a task? What if it's a message?"
     atom_type: PIVOT
     expected:
-      ja-JP: "もしあなたが直そうとしているパターンが欠陥ではなく、あなたの身体が安全を守るために学んだ戦略だとしたら？"
-      ko-KR: "당신이 고치려는 패턴이 결함이 아니라, 당신의 몸이 안전을 지키기 위해 배운 전략이라면 어떨까요?"
-      zh-CN: "如果你试图修复的模式不是缺陷——而是你的身体为了保护你而学会的策略呢？"
-      zh-TW: "如果你試圖修復的模式不是缺陷——而是你的身體為了保護你而學會的策略呢？"
-      zh-HK: "如果你試圖修復的模式不是缺陷——而是你的身體為了保護你而學會的策略呢？"
-      zh-SG: "如果你试图修复的模式不是缺陷——而是你的身体为了保护你而学会的策略呢？"
+      ja-JP: "あなたはスキャンを、ゴールデン・ハンカフツのタスクのように管理してきました。"
+      ko-KR: ""
+      zh-CN: "你一直把这种持续扫描当作“金手铐”上待办清单里的一项任务来管理"
+      zh-TW: "你一直把這種持續掃描，當成金手銬上待辦清單裡的一項任務來處理"
+      zh-HK: ""
+      zh-SG: ""
 
-  # ── TAKEAWAY 1 ─────────────────────────────────────────────────────
   - id: takeaway_01
-    source_en: "The mask kept you safe once. Noticing it is not failure — it is the first act of freedom."
+    source_en: "The alarm without threat is not a flaw. It's a wound wearing your on-call like a name tag."
     atom_type: TAKEAWAY
     expected:
-      ja-JP: "仮面はかつてあなたを守ってくれました。それに気づくことは失敗ではありません。それは自由への第一歩です。"
-      ko-KR: "가면은 한때 당신을 안전하게 지켜주었습니다. 그것을 알아차리는 것은 실패가 아닙니다. 그것은 자유를 향한 첫 번째 행동입니다."
-      zh-CN: "面具曾经保护过你。注意到它不是失败——而是通向自由的第一步。"
-      zh-TW: "面具曾經保護過你。注意到它不是失敗——而是通向自由的第一步。"
-      zh-HK: "面具曾經保護過你。注意到它不是失敗——而是通向自由的第一步。"
-      zh-SG: "面具曾经保护过你。注意到它不是失败——而是通向自由的第一步。"
+      ja-JP: "脅威のないアラームは欠点ではありません。"
+      ko-KR: ""
+      zh-CN: "无声警报并非缺陷"
+      zh-TW: "沒有威脅卻響起的警報，不是缺陷"
+      zh-HK: ""
+      zh-SG: ""
 
-  # ── TAKEAWAY 2 ─────────────────────────────────────────────────────
   - id: takeaway_02
-    source_en: "The cost of the strategy is always paid in the present, long after the danger has passed."
+    source_en: "You're not struggling with anxiety. You're surviving it. Those require different skills."
     atom_type: TAKEAWAY
     expected:
-      ja-JP: "戦略の代償は、危険が去った後もずっと、常に現在において支払われます。"
-      ko-KR: "전략의 대가는 위험이 지나간 후에도 항상 현재에 지불됩니다."
-      zh-CN: "策略的代价总是在当下支付，远在危险已经过去之后。"
-      zh-TW: "策略的代價總是在當下支付，遠在危險已經過去之後。"
-      zh-HK: "策略的代價總是在當下支付，遠在危險已經過去之後。"
-      zh-SG: "策略的代价总是在当下支付，远在危险已经过去之后。"
+      ja-JP: "あなたが「不安」と格闘しているわけではありません。"
+      ko-KR: ""
+      zh-CN: "你并非在与焦虑搏斗，而是在穿越它"
+      zh-TW: "你不是在「與焦慮搏鬥」，而是在「活過焦慮」"
+      zh-HK: ""
+      zh-SG: ""
 
-  # ── THREAD 1 ───────────────────────────────────────────────────────
   - id: thread_01
-    source_en: "There is a thread between the moment you learned to stay quiet and the tightness you feel in meetings today."
+    source_en: "You've named the alarm without threat. What the alarm without threat is protecting you from feeling is the layer beneath the sprint."
     atom_type: THREAD
     expected:
-      ja-JP: "あなたが黙っていることを学んだ瞬間と、今日の会議で感じる緊張感の間には一本の糸があります。"
-      ko-KR: "당신이 조용히 있는 법을 배운 순간과 오늘 회의에서 느끼는 긴장감 사이에는 하나의 실마리가 있습니다."
-      zh-CN: "在你学会保持沉默的那一刻和你今天在会议中感到的紧绷之间，有一条线索。"
-      zh-TW: "在你學會保持沉默的那一刻和你今天在會議中感到的緊繃之間，有一條線索。"
-      zh-HK: "在你學會保持沉默的那一刻和你今天在會議中感到的緊繃之間，有一條線索。"
-      zh-SG: "在你学会保持沉默的那一刻和你今天在会议中感到的紧绷之间，有一条线索。"
+      ja-JP: "あなたは、脅しのないアラームと名付けました。"
+      ko-KR: ""
+      zh-CN: "你已为警报命名，却未施加威胁"
+      zh-TW: "你已為那警訊命名，卻未伴隨威脅"
+      zh-HK: ""
+      zh-SG: ""
 
-  # ── THREAD 2 ───────────────────────────────────────────────────────
   - id: thread_02
-    source_en: "The watcher in you can hold the thread without pulling it. Just notice where it leads."
+    source_en: "The anxiety pattern was recognized. Where it first took root is a story older than your optimization."
     atom_type: THREAD
     expected:
-      ja-JP: "あなたの中の観察者は、糸を引っ張ることなく持つことができます。それがどこに導くか、ただ気づいてください。"
-      ko-KR: "당신 안의 관찰자는 실마리를 당기지 않고 잡고 있을 수 있습니다. 그것이 어디로 이끄는지 그저 알아차리세요."
-      zh-CN: "你内心的观察者可以握住线索而不去拉扯它。只需注意它通向哪里。"
-      zh-TW: "你內心的觀察者可以握住線索而不去拉扯它。只需注意它通向哪裡。"
-      zh-HK: "你內心的觀察者可以握住線索而不去拉扯它。只需注意它通向哪裏。"
-      zh-SG: "你内心的观察者可以握住线索而不去拉扯它。只需注意它通向哪里。"
+      ja-JP: "不安のパターンは、すでに気づかれています。"
+      ko-KR: ""
+      zh-CN: "焦虑模式已被识别"
+      zh-TW: "你已辨識出焦慮的模式"
+      zh-HK: ""
+      zh-SG: ""

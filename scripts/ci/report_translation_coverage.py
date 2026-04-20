@@ -60,12 +60,19 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Translation coverage per locale")
     ap.add_argument("--json", action="store_true")
     ap.add_argument(
+        "--output",
+        type=Path,
+        default=None,
+        help="Write the same JSON as --json to this path (implies --json)",
+    )
+    ap.add_argument(
         "--locales",
         type=str,
         default=None,
         help="Comma-separated locales (default: en-US)",
     )
     args = ap.parse_args()
+    emit_json = bool(args.json)
 
     locales = (args.locales or "en-US").split(",")
     report: dict = {"locales": locales, "by_locale": {}}
@@ -101,19 +108,30 @@ def main() -> int:
             "has_atoms": count > 0,
         }
 
-    if args.json:
+    if args.output is not None:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+
+    if emit_json:
         print(json.dumps(report, indent=2))
         return 0
+
     for loc, data in report["by_locale"].items():
         print(f"  {loc}: {data['persona_topic_count']} CANONICAL.txt")
     bs = report["bestseller"]
     print(
         f"\nAll atoms ({len(ALL_ATOM_TYPES)} types, CJK6): {bs['english_source_files']} English source files"
     )
+    filter_locs: set[str] | None = None
+    if args.locales:
+        filter_locs = {x.strip() for x in args.locales.split(",") if x.strip()}
     for loc, row in bs["by_cjk_locale"].items():
+        if filter_locs is not None and loc not in filter_locs:
+            continue
+        rem = int(row["expected_files"]) - int(row["translated_files"])
         print(
             f"  {loc}: {row['translated_files']}/{row['expected_files']} "
-            f"({row['coverage_ratio']:.1%})"
+            f"({row['coverage_ratio']:.1%})  remaining={rem}"
         )
     return 0
 

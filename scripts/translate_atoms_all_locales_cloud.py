@@ -6,24 +6,31 @@ from English to CJK locales via Qwen on Alibaba Cloud Dashscope.
 Outputs: atoms/{persona}/{topic}/{SLOT}/locales/{locale}/CANONICAL.txt
 
 Requires DASHSCOPE_API_KEY for non-dry-run. Optional: DASHSCOPE_MODEL (default qwen-plus).
+
+DashScope-only (ignore Together when both keys exist): --dashscope-only or
+PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY=1
+
+Token spend estimate for --budget-cap-usd:
+  LOCALIZATION_BLEND_USD_PER_MILLION_TOKENS (default 2.0)
 """
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import os
 import re
 import sys
 import threading
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from pathlib import Path
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.localization.llm_client import call_llm  # noqa: E402
+from scripts.localization.llm_client import call_llm_with_meta  # noqa: E402
 
 logger = logging.getLogger("translate_atoms_cloud")
 
@@ -69,6 +76,10 @@ def _load_dotenv() -> None:
 
 
 _load_dotenv()
+
+
+def atom_key(persona: str, topic: str, slot_type: str) -> str:
+    return f"{persona}/{topic}/{slot_type}"
 
 
 def parse_canonical(text: str) -> list[tuple[str, str, str]]:
@@ -208,15 +219,16 @@ def translate_file(
     locale: str,
     cfg: dict[str, Any],
     max_retries: int = 3,
-) -> str:
-    """One API call per file; returns translated full file text."""
+) -> tuple[str, dict[str, Any]]:
+    """One API call per file; returns (translated full file text, last response meta)."""
     text = source_path.read_text(encoding="utf-8")
     sys_p = system_prompt(locale)
     last_err: Exception | None = None
+    last_meta: dict[str, Any] = {}
     # Initial try + max_retries with exponential backoff 2^n seconds (cap 60s)
     for attempt in range(max_retries + 1):
         try:
-            return call_llm(
+            out, meta = call_llm_with_meta(
                 sys_p,
                 text,
                 cfg,
@@ -224,6 +236,8 @@ def translate_file(
                 temperature=0.25,
                 max_tokens=32000,
             )
+            last_meta = meta
+            return out, meta
         except Exception as e:
             last_err = e
             status = getattr(e, "status_code", None) or getattr(
@@ -262,9 +276,74 @@ class RateLimiter:
             self._last = time.monotonic()
 
 
+class BudgetTracker:
+    """Thread-safe estimated spend from token usage."""
+
+    def __init__(self, cap_usd: float | None) -> None:
+        self.cap_usd = cap_usd
+        self.blend_per_million = float(
+            os.environ.get("LOCALIZATION_BLEND_USD_PER_MILLION_TOKENS", "2.0").strip() or "2.0"
+        )
+        self._lock = threading.Lock()
+        self.total_tokens = 0
+        self.estimated_usd = 0.0
+
+    def add_usage(self, usage: dict[str, Any]) -> float:
+        pt = int(usage.get("prompt_tokens") or 0)
+        ct = int(usage.get("completion_tokens") or 0)
+        tt_raw = usage.get("total_tokens")
+        tt = int(tt_raw) if tt_raw is not None else pt + ct
+        delta_usd = (float(tt) / 1_000_000.0) * self.blend_per_million
+        with self._lock:
+            self.total_tokens += int(tt)
+            self.estimated_usd += delta_usd
+        return delta_usd
+
+    def over_cap(self) -> bool:
+        if self.cap_usd is None or self.cap_usd <= 0:
+            return False
+        with self._lock:
+            return self.estimated_usd >= self.cap_usd
+
+
+def load_checkpoint_keys(path: Path | None, locale: str) -> set[str]:
+    if path is None or not path.is_file():
+        return set()
+    keys: set[str] = set()
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if row.get("locale") == locale and "key" in row:
+                keys.add(str(row["key"]))
+    return keys
+
+
+def append_checkpoint_line(path: Path | None, locale: str, key: str) -> None:
+    if path is None:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    rec = json.dumps({"locale": locale, "key": key}, ensure_ascii=False)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(rec + "\n")
+
+
+def append_log_line(path: Path | None, obj: dict[str, Any]) -> None:
+    if path is None:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(obj, ensure_ascii=False) + "\n")
+
+
 def should_resume(
     out_path: Path,
-    source_variants: list[tuple[str, str]],
+    source_variants: list[tuple[str, str, str] | tuple[str, str]],
 ) -> bool:
     if not out_path.is_file():
         return False
@@ -284,12 +363,32 @@ def run_job(
     resume: bool,
     limiter: RateLimiter,
     dry_run: bool,
+    budget: BudgetTracker | None,
+    halt: threading.Event | None,
+    checkpoint_path: Path | None,
+    log_path: Path | None,
+    ck_done: set[str],
+    ck_lock: threading.Lock,
 ) -> tuple[str, str, str, str]:
     """Returns (persona, topic, slot, status_message)."""
     persona, topic, slot_type, src = item
     out_path = output_path_for(atoms_root, persona, topic, slot_type, locale)
+    key = atom_key(persona, topic, slot_type)
+
     if dry_run:
         return persona, topic, slot_type, f"dry-run: would write {out_path}"
+
+    if halt is not None and halt.is_set():
+        return persona, topic, slot_type, "skip: halted (budget or operator)"
+    if budget is not None and budget.over_cap():
+        if halt is not None:
+            halt.set()
+        return persona, topic, slot_type, "skip: budget cap reached"
+
+    with ck_lock:
+        in_ck = key in ck_done
+    if in_ck and resume:
+        return persona, topic, slot_type, f"resume: skip checkpoint {key}"
 
     src_text = src.read_text(encoding="utf-8")
     source_variants = parse_canonical(src_text)
@@ -304,14 +403,87 @@ def run_job(
     if resume and should_resume(out_path, source_variants):
         return persona, topic, slot_type, f"resume: skip existing valid {out_path}"
 
+    if halt is not None and halt.is_set():
+        return persona, topic, slot_type, "skip: halted (budget or operator)"
+    if budget is not None and budget.over_cap():
+        if halt is not None:
+            halt.set()
+        return persona, topic, slot_type, "skip: budget cap reached"
+
     limiter.acquire()
-    raw = translate_file(src, locale, cfg)
+    if halt is not None and halt.is_set():
+        return persona, topic, slot_type, "skip: halted (budget or operator)"
+    if budget is not None and budget.over_cap():
+        if halt is not None:
+            halt.set()
+        return persona, topic, slot_type, "skip: budget cap reached"
+
+    try:
+        raw, meta = translate_file(src, locale, cfg)
+    except Exception as e:
+        append_log_line(
+            log_path,
+            {"event": "error", "locale": locale, "key": key, "error": str(e)},
+        )
+        return persona, topic, slot_type, f"error: {e}"
+
+    resp_model = (meta.get("model_response") or "").lower()
+    if "qwen3" in resp_model:
+        if halt is not None:
+            halt.set()
+        append_log_line(
+            log_path,
+            {
+                "event": "abort_wrong_model_family",
+                "locale": locale,
+                "key": key,
+                "model_response": meta.get("model_response"),
+            },
+        )
+        return persona, topic, slot_type, "abort: API returned qwen3 model (use qwen2.5 only)"
+
+    usage = meta.get("usage") or {}
+    delta_usd = 0.0
+    if budget is not None and isinstance(usage, dict):
+        delta_usd = budget.add_usage(usage)
+        if budget.over_cap() and halt is not None:
+            halt.set()
+
     ok, msg = validate_translation(source_variants, raw)
     if not ok:
+        append_log_line(
+            log_path,
+            {
+                "event": "validation_failed",
+                "locale": locale,
+                "key": key,
+                "message": msg,
+                "model_response": meta.get("model_response"),
+                "estimated_usd_delta": delta_usd,
+            },
+        )
         return persona, topic, slot_type, f"validation failed: {msg}"
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(raw, encoding="utf-8")
+
+    append_log_line(
+        log_path,
+        {
+            "event": "ok",
+            "locale": locale,
+            "key": key,
+            "path": str(out_path.relative_to(REPO_ROOT)),
+            "model_response": meta.get("model_response"),
+            "usage": usage,
+            "estimated_usd_delta": delta_usd,
+            "latency_s": meta.get("latency_s"),
+        },
+    )
+    append_checkpoint_line(checkpoint_path, locale, key)
+    with ck_lock:
+        ck_done.add(key)
+
     return persona, topic, slot_type, f"ok: {out_path}"
 
 
@@ -320,7 +492,13 @@ def main() -> int:
     ap = argparse.ArgumentParser(
         description="Translate bestseller atoms to CJK locales (Dashscope/Qwen)"
     )
-    ap.add_argument("--locale", help="Target locale (e.g. ja-JP)")
+    ap.add_argument("--locale", help="Single target locale (e.g. ja-JP)")
+    ap.add_argument(
+        "--locales",
+        nargs="+",
+        metavar="LOCALE",
+        help="One or more target locales (e.g. zh-CN zh-TW ja-JP)",
+    )
     ap.add_argument(
         "--all-locales",
         action="store_true",
@@ -335,12 +513,12 @@ def main() -> int:
     ap.add_argument(
         "--dry-run",
         action="store_true",
-        help="Show manifest, don't translate",
+        help="Show manifest summary only; no API calls; no files written",
     )
     ap.add_argument(
         "--resume",
         action="store_true",
-        help="Skip files that already have translations",
+        help="Skip files that already have valid translations",
     )
     ap.add_argument(
         "--batch-size",
@@ -349,22 +527,62 @@ def main() -> int:
         help="Concurrent API calls",
     )
     ap.add_argument(
+        "--workers",
+        type=int,
+        default=None,
+        help="Alias for --batch-size",
+    )
+    ap.add_argument(
         "--rate-limit",
         type=float,
         default=0.1,
-        help="Seconds between API calls",
+        help="Seconds between API calls (global throttle)",
+    )
+    ap.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Process at most N atoms from the manifest (after filters)",
+    )
+    ap.add_argument(
+        "--budget-cap-usd",
+        type=float,
+        default=None,
+        help="Stop new work past this estimated USD (token-based; see LOCALIZATION_BLEND_USD_PER_MILLION_TOKENS)",
+    )
+    ap.add_argument(
+        "--checkpoint-path",
+        type=Path,
+        default=None,
+        help="Append JSONL checkpoint lines (locale + persona/topic/slot key)",
+    )
+    ap.add_argument(
+        "--output-log",
+        type=Path,
+        default=None,
+        help="Append JSONL per atom (ok, error, validation_failed)",
+    )
+    ap.add_argument(
+        "--dashscope-only",
+        action="store_true",
+        help="Ignore TOGETHER_API_KEY (sets PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY)",
     )
     args = ap.parse_args()
+
+    if args.dashscope_only:
+        os.environ["PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY"] = "1"
 
     atoms_root = REPO_ROOT / "atoms"
 
     locales: list[str] = []
     if args.all_locales:
         locales = list(CJK6_LOCALES)
+    elif args.locales:
+        locales = list(args.locales)
     elif args.locale:
         locales = [args.locale]
     else:
-        print("Specify --locale or --all-locales", file=sys.stderr)
+        print("Specify --locale, --locales, or --all-locales", file=sys.stderr)
         return 2
 
     for loc in locales:
@@ -381,16 +599,23 @@ def main() -> int:
         topic=args.topic,
         slot=args.slot,
     )
-    total_files = len(manifest)
-    total_variants = total_files * 20
-    print(
-        f"Manifest: {total_files} files, {total_variants} variants "
-        f"(~{total_files * len(locales)} API calls for {len(locales)} locale(s))"
-    )
-    for row in manifest:
-        print(f"  {row[0]}/{row[1]}/{row[2]} -> {row[3]}")
+    if args.limit is not None and args.limit >= 0:
+        manifest = manifest[: args.limit]
 
+    total_files = len(manifest)
+    workers = args.workers if args.workers is not None else args.batch_size
+    workers = max(1, int(workers))
+
+    print(
+        f"Manifest: {total_files} files (~{total_files * len(locales)} API calls "
+        f"for {len(locales)} locale(s), workers={workers})"
+    )
     if args.dry_run:
+        for row in manifest[:50]:
+            print(f"  {row[0]}/{row[1]}/{row[2]} -> {row[3]}")
+        if total_files > 50:
+            print(f"  ... and {total_files - 50} more (omitted in dry-run preview)")
+        print("Dry-run: no API calls, no files written.")
         return 0
 
     cfg: dict[str, Any] = {
@@ -407,23 +632,59 @@ def main() -> int:
 
     for locale in locales:
         print(f"\n--- locale {locale} ---")
-        with ThreadPoolExecutor(max_workers=max(1, args.batch_size)) as ex:
-            futures = [
-                ex.submit(
-                    run_job,
-                    item,
-                    locale,
-                    atoms_root,
-                    cfg,
-                    args.resume,
-                    limiter,
-                    False,
+        budget_tracker: BudgetTracker | None = None
+        if args.budget_cap_usd is not None:
+            budget_tracker = BudgetTracker(cap_usd=float(args.budget_cap_usd))
+        halt = threading.Event()
+        ck_path = args.checkpoint_path
+        ck_done = load_checkpoint_keys(ck_path, locale)
+        ck_lock = threading.Lock()
+        pool: set[Any] = set()
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            for item in manifest:
+                pool.add(
+                    ex.submit(
+                        run_job,
+                        item,
+                        locale,
+                        atoms_root,
+                        cfg,
+                        args.resume,
+                        limiter,
+                        False,
+                        budget_tracker,
+                        halt,
+                        ck_path,
+                        args.output_log,
+                        ck_done,
+                        ck_lock,
+                    )
                 )
-                for item in manifest
-            ]
-            for fut in as_completed(futures):
-                p, t, s, msg = fut.result()
-                print(f"  [{p}/{t}/{s}] {msg}")
+            while pool:
+                done, pool = wait(pool, return_when=FIRST_COMPLETED)
+                for fut in done:
+                    p, t, s, msg = fut.result()
+                    print(f"  [{p}/{t}/{s}] {msg}")
+                    if budget_tracker is not None and budget_tracker.over_cap():
+                        print(
+                            f"BUDGET_CAP: estimated ${budget_tracker.estimated_usd:.4f} "
+                            f">= cap ${budget_tracker.cap_usd:.4f}; halting new work.",
+                            file=sys.stderr,
+                        )
+                        halt.set()
+                if halt.is_set() and budget_tracker is not None and budget_tracker.over_cap():
+                    for fut in pool:
+                        fut.cancel()
+                    pool.clear()
+                    break
+
+        if budget_tracker is not None:
+            print(
+                f"Locale {locale} budget summary: "
+                f"est_usd=${budget_tracker.estimated_usd:.4f} "
+                f"total_tokens={budget_tracker.total_tokens} "
+                f"(blend ${budget_tracker.blend_per_million}/1M tokens)"
+            )
 
     return 0
 

@@ -111,5 +111,6 @@ def test_dry_run_no_api(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureF
     out = capsys.readouterr().out
     n_files = len(tac.discover_atoms(REPO_ROOT / "atoms", persona="educators"))
     assert f"{n_files} files" in out
-    assert f"{n_files * 20} variants" in out
+    assert "API calls for 1 locale(s)" in out
+    assert "Dry-run: no API calls" in out
     assert "educators/anxiety/PIVOT" in out

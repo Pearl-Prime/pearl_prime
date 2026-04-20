@@ -12,6 +12,7 @@ Provider chain (first match wins):
 Environment variables:
   TOGETHER_API_KEY    — Together AI key (enables Together mode)
   DASHSCOPE_API_KEY   — Dashscope API key (enables cloud mode)
+  PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY — if 1/true: skip Together even when TOGETHER_API_KEY is set
   OLLAMA_HOST         — Ollama endpoint (enables Ollama mode)
   QWEN_BASE_URL       — If contains :11434, treated as Ollama endpoint
 
@@ -82,8 +83,13 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
 
     together_key = os.environ.get("TOGETHER_API_KEY", "").strip()
     dashscope_key = os.environ.get("DASHSCOPE_API_KEY", "").strip()
+    dashscope_only = os.environ.get("PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY", "").strip().lower() in (
+        "1",
+        "true",
+        "yes",
+    )
 
-    if together_key:
+    if together_key and not dashscope_only:
         # ── TOGETHER AI MODE (preferred) ─────────────────────────────────────
         together_model = (
             os.environ.get("TOGETHER_MODEL", "").strip()
@@ -107,14 +113,20 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
 
     elif dashscope_key:
         # ── DASHSCOPE MODE (fallback) ────────────────────────────────────────
-        cloud_model = (
-            os.environ.get("DASHSCOPE_MODEL", "").strip()
-            or model_cfg.get("cloud_model_id", "").strip()
-            or DASHSCOPE_DEFAULT_MODEL
-        )
-        # Judge role: prefer higher quality model in cloud mode
-        if role == "judge" and not os.environ.get("DASHSCOPE_MODEL"):
-            cloud_model = model_cfg.get("cloud_judge_model_id", cloud_model)
+        if role == "judge":
+            cloud_model = (
+                os.environ.get("DASHSCOPE_JUDGE_MODEL", "").strip()
+                or os.environ.get("DASHSCOPE_MODEL", "").strip()
+                or model_cfg.get("cloud_judge_model_id", "").strip()
+                or model_cfg.get("cloud_model_id", "").strip()
+                or DASHSCOPE_DEFAULT_MODEL
+            )
+        else:
+            cloud_model = (
+                os.environ.get("DASHSCOPE_MODEL", "").strip()
+                or model_cfg.get("cloud_model_id", "").strip()
+                or DASHSCOPE_DEFAULT_MODEL
+            )
 
         resolved = {
             "base_url": DASHSCOPE_BASE_URL,
@@ -175,32 +187,16 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
 
 # ─── CALL FUNCTION ────────────────────────────────────────────────────────────
 
-def call_llm(
+
+def call_llm_with_meta(
     system_prompt: str,
     user_prompt: str,
     cfg: dict[str, Any],
     role: str = "draft",
     temperature: float | None = None,
     max_tokens: int | None = None,
-) -> str:
-    """
-    Call the LLM (cloud Qwen via Dashscope or local Qwen via LM Studio).
-
-    Args:
-        system_prompt: System message content.
-        user_prompt:   User message content.
-        cfg:           Raw loaded YAML config dict.
-        role:          "draft" or "judge" — selects model tier.
-        temperature:   Override temperature (optional).
-        max_tokens:    Override max output tokens (optional).
-
-    Returns:
-        Model response text.
-
-    Raises:
-        RuntimeError:  If openai package not installed.
-        Exception:     Re-raises any OpenAI API errors after logging.
-    """
+) -> tuple[str, dict[str, Any]]:
+    """Returns (assistant text, meta) where meta includes model id, usage, latency."""
     try:
         import openai
     except ImportError:
@@ -220,7 +216,6 @@ def call_llm(
         timeout=params["timeout"],
     )
 
-    # Build extra body — only pass enable_thinking for local Qwen builds that support it
     extra_body: dict[str, Any] = {}
     if params["mode"] == "local":
         extra_body["enable_thinking"] = False
@@ -250,7 +245,59 @@ def call_llm(
         "LLM call OK in %.1fs [%s mode, model=%s]",
         elapsed, params["mode"], params["model_id"],
     )
-    return response.choices[0].message.content or ""
+    text = response.choices[0].message.content or ""
+    usage_obj = getattr(response, "usage", None)
+    usage: dict[str, int] = {}
+    if usage_obj is not None:
+        for k in ("prompt_tokens", "completion_tokens", "total_tokens"):
+            v = getattr(usage_obj, k, None)
+            if v is not None:
+                usage[k] = int(v)
+    meta: dict[str, Any] = {
+        "mode": params["mode"],
+        "model_requested": params["model_id"],
+        "model_response": getattr(response, "model", None) or "",
+        "latency_s": round(elapsed, 3),
+        "usage": usage,
+    }
+    return text, meta
+
+
+def call_llm(
+    system_prompt: str,
+    user_prompt: str,
+    cfg: dict[str, Any],
+    role: str = "draft",
+    temperature: float | None = None,
+    max_tokens: int | None = None,
+) -> str:
+    """
+    Call the LLM (cloud Qwen via Dashscope or local Qwen via LM Studio).
+
+    Args:
+        system_prompt: System message content.
+        user_prompt:   User message content.
+        cfg:           Raw loaded YAML config dict.
+        role:          "draft" or "judge" — selects model tier.
+        temperature:   Override temperature (optional).
+        max_tokens:    Override max output tokens (optional).
+
+    Returns:
+        Model response text.
+
+    Raises:
+        RuntimeError:  If openai package not installed.
+        Exception:     Re-raises any OpenAI API errors after logging.
+    """
+    text, _meta = call_llm_with_meta(
+        system_prompt,
+        user_prompt,
+        cfg,
+        role=role,
+        temperature=temperature,
+        max_tokens=max_tokens,
+    )
+    return text
 
 
 # ─── CONVENIENCE: preflight check ────────────────────────────────────────────
