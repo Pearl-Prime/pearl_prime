@@ -1,0 +1,33 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-19"
+profile_type: brand_genre_lane
+
+title_id: stabilizer_healing
+brand_id: stabilizer
+
+market_demo: seinen
+genre_family: healing
+subgenre: "anxiety_stabilization"
+
+emotional_engine: dread
+reader_promise: "You will learn to name the alarm before it takes over."
+
+serialization_engine: cliffhanger_driven
+chapter_hook_family: interruption
+
+visual_grammar: polished_seinen
+line_weight_profile: medium
+black_fill_ratio: 0.20
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 75
+  silent_panel_ratio: 0.25
+  reaction_shot_frequency: medium
+  spread_frequency: rare
+
+narration_tolerance: moderate
+adaptation_targets:
+  - print
+  - webtoon

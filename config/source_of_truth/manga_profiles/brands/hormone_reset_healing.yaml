@@ -1,0 +1,33 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-19"
+profile_type: brand_genre_lane
+
+title_id: hormone_reset_healing
+brand_id: hormone_reset
+
+market_demo: josei
+genre_family: healing
+subgenre: "hormonal_anxiety_somatic"
+
+emotional_engine: cozy_restoration
+reader_promise: "You will feel your body's cycle become something you live with rather than fight."
+
+serialization_engine: episodic
+chapter_hook_family: hidden_truth_glimpse
+
+visual_grammar: polished_seinen
+line_weight_profile: light
+black_fill_ratio: 0.10
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 40
+  silent_panel_ratio: 0.40
+  reaction_shot_frequency: low
+  spread_frequency: rare
+
+narration_tolerance: minimal
+adaptation_targets:
+  - print
+  - webtoon

@@ -1,0 +1,33 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-19"
+profile_type: brand_genre_lane
+
+title_id: adhd_forge_mystery
+brand_id: adhd_forge
+
+market_demo: shonen
+genre_family: mystery
+subgenre: "adhd_overthinking_spiral"
+
+emotional_engine: obsession
+reader_promise: "You will feel the live-wire mind finally find its direction."
+
+serialization_engine: cliffhanger_driven
+chapter_hook_family: revelation
+
+visual_grammar: kinetic_shonen
+line_weight_profile: heavy
+black_fill_ratio: 0.25
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 110
+  silent_panel_ratio: 0.10
+  reaction_shot_frequency: high
+  spread_frequency: periodic
+
+narration_tolerance: moderate
+adaptation_targets:
+  - print
+  - webtoon
