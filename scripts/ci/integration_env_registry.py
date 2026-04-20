@@ -14,14 +14,19 @@ from __future__ import annotations
 # Canonical env var registry.
 REGISTRY: list[tuple[str, str, bool, str]] = [
     # --- LLM Providers ---
+    # --- Tier 2 LLM (Pearl Star Ollama — unattended scheduled work only) ---
+    ("Pearl Star / Gemma", "GEMMA_BASE_URL", True, "Gemma Ollama endpoint (English Tier 2). Default: http://192.168.1.101:11434/v1"),
+    ("Pearl Star / Gemma", "GEMMA_MODEL", False, "Gemma model override (default: gemma2:9b)"),
+    ("Qwen / DashScope", "QWEN_BASE_URL", True, "Qwen Ollama endpoint (CJK6 Tier 2). Default: http://192.168.1.101:11434/v1"),
+    ("Qwen / DashScope", "QWEN_MODEL", False, "Qwen model override (default: qwen2.5:7b)"),
     ("Qwen / DashScope", "QWEN_API_KEY", False, "DashScope API key (not needed for local Ollama)"),
-    ("Qwen / DashScope", "QWEN_BASE_URL", True, "LLM endpoint URL (Pearl Star Ollama :11434/v1 or DashScope cloud)"),
-    ("Qwen / DashScope", "QWEN_MODEL", False, "Model override (default in scripts)"),
     ("Qwen / DashScope", "DASHSCOPE_API_KEY", False, "Alt env var for DashScope key"),
     ("Qwen / DashScope", "DASHSCOPE_BASE_URL", False, "Alt env var for DashScope URL"),
     ("Qwen / DashScope", "DASHSCOPE_MODEL", False, "Alt env var for DashScope model"),
-    ("Anthropic", "ANTHROPIC_API_KEY", False, "Claude API key (optional fallback LLM)"),
-    ("Anthropic", "CLAUDE_MODEL", False, "Claude model selection"),
+    # ANTHROPIC_API_KEY is BANNED from production code. Tier 1 = Claude Code session (subscription).
+    # This entry is kept so load_integration_env_from_keychain.py doesn't emit an error if present.
+    ("Anthropic", "ANTHROPIC_API_KEY", False, "NOT required for production — Tier 1 = Claude Code subscription"),
+    ("Anthropic", "CLAUDE_MODEL", False, "Claude model selection (local dev reference only)"),
     ("OpenAI", "OPENAI_API_KEY", False, "OpenAI API key (TTS + fallback LLM)"),
     ("Ollama", "OLLAMA_HOST", False, "Local Ollama endpoint"),
     ("Ollama", "OLLAMA_MODEL", False, "Local Ollama model"),

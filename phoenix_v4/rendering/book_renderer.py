@@ -29,71 +29,36 @@ from phoenix_v4.quality.chapter_flow_gate import (
 # Delivery contract: forbidden patterns that must never reach output
 # ---------------------------------------------------------------------------
 
-# Universal sensory fallbacks for location variables that may not be hydrated.
-# Written to work anywhere — no city, no transit system, no weather specifics.
-_LOC_VAR_FALLBACKS: dict[str, str] = {
-    # Avoid exact "gray light through the window" — chapter_flow_gate flags GENERIC_SCENE_FALLBACK.
-    "weather_detail":   "soft daylight along the sill",
-    "street_name":      "the street below",
-    "transit_line":     "the train",
-    "transit_stop":     "the platform",
-    "city_name":        "the city",
-    "neighborhood":     "the neighborhood",
-    "building_type":    "the building",
-    "local_landmark":   "a landmark nearby",
-    "park_name":        "the park",
-    "coffee_shop":      "a coffee shop",
-    "restaurant":       "a nearby restaurant",
-    "store_name":       "a nearby store",
-    "office_building":  "the office building",
-    "commute_mode":     "the commute",
-    # Section registry location tokens (registry/registry_*.yaml)
-    "location.digital_space":       "your phone",
-    "location.daily_space":         "the kitchen table",
-    "location.high_stakes_space":   "the meeting room",
-    "location.learning_space":      "the quiet room",
-    "location.memory_space":        "the place where they used to be",
-    "location.social_gathering":    "the gathering",
-}
+# Location variable config loaded lazily from config/content_banks/loc_var_render.yaml.
+# The YAML is the authoritative source; the dicts below are empty-by-default in-memory caches.
+_LOC_VAR_FALLBACKS: dict[str, str] = {}
+_LOC_VAR_ROTATIONS: dict[str, list[str]] = {}
+_LOC_VAR_LOADED: bool = False
 
-# Rotating variants per chapter to avoid identical scene text across chapters
-_LOC_VAR_ROTATIONS: dict[str, list[str]] = {
-    "weather_detail": [
-        "soft daylight along the sill",
-        "morning sun cutting through the blinds",
-        "rain streaking the glass",
-        "fluorescent light humming overhead",
-        "late afternoon light slanting across the desk",
-        "a cloudy sky pressing against the window",
-        "cold air seeping through the window frame",
-    ],
-    "street_name": [
-        "the street below",
-        "the avenue outside",
-        "the sidewalk two floors down",
-        "the road past the parking lot",
-        "traffic moving on the highway",
-        "the crosswalk at the corner",
-    ],
-    "transit_line": [
-        "the train",
-        "the bus",
-        "the subway car",
-        "the commuter rail",
-        "the metro",
-        "the light rail",
-    ],
-    "coffee_shop": [
-        "a coffee shop",
-        "the cafe on the corner",
-        "a quiet booth at the back",
-        "the counter where you always sit",
-        "a table by the window",
-    ],
-}
+_LOC_VAR_YAML = (
+    Path(__file__).resolve().parent.parent.parent
+    / "config" / "content_banks" / "loc_var_render.yaml"
+)
+
+
+def _load_loc_var_config() -> None:
+    global _LOC_VAR_FALLBACKS, _LOC_VAR_ROTATIONS, _LOC_VAR_LOADED
+    if _LOC_VAR_LOADED:
+        return
+    _LOC_VAR_LOADED = True
+    try:
+        import yaml as _yaml  # type: ignore[import]
+        with open(_LOC_VAR_YAML, encoding="utf-8") as fh:
+            data = _yaml.safe_load(fh) or {}
+        _LOC_VAR_FALLBACKS = dict(data.get("fallbacks") or {})
+        _LOC_VAR_ROTATIONS = {k: list(v) for k, v in (data.get("rotations") or {}).items()}
+    except Exception as exc:
+        logger.warning("loc_var_render.yaml load failed (%s); using empty tables", exc)
+
 
 def _get_loc_var(var_name: str, chapter_index: int = 0) -> str:
     """Get a location variable value, rotating per chapter for diversity."""
+    _load_loc_var_config()
     variants = _LOC_VAR_ROTATIONS.get(var_name)
     if variants:
         return variants[chapter_index % len(variants)]
@@ -259,6 +224,7 @@ def _resolve_loc_var_fallbacks(text: str, plan: Optional[dict[str, Any]] = None)
             chapter_idx += 1
             continue
         # Resolve location vars — use profile first, then rotating fallbacks
+        _load_loc_var_config()
         for var_name in _LOC_VAR_FALLBACKS:
             placeholder = "{" + var_name + "}"
             if placeholder in part:
@@ -976,7 +942,15 @@ def _resolve_chapter_flow_profile(
         return flow_profile_for_runtime_format(rid)
     return _chapter_flow_profile_from_plan(plan)
 
-_FLOW_GLUE_VARIANTS: tuple[str, ...] = (
+# Flow glue loaded lazily from config/content_banks/global_flow_glue_bank.yaml.
+# Fallback strings are kept inline so the renderer never silently drops glue on YAML load failure.
+_FLOW_GLUE_YAML = (
+    Path(__file__).resolve().parent.parent.parent
+    / "config" / "content_banks" / "global_flow_glue_bank.yaml"
+)
+_FLOW_GLUE_CACHE: Optional[tuple[str, ...]] = None
+
+_FLOW_GLUE_FALLBACK: tuple[str, ...] = (
     (
         "That moment is not random; it is information your body has been holding. "
         "In practice, you can see the same pattern return until you name it without shame. "
@@ -1006,6 +980,26 @@ _FLOW_GLUE_VARIANTS: tuple[str, ...] = (
         "Name one thing you feel, choose a gentler next step, and breathe through it once."
     ),
 )
+
+
+def _load_flow_glue_variants() -> tuple[str, ...]:
+    global _FLOW_GLUE_CACHE
+    if _FLOW_GLUE_CACHE is not None:
+        return _FLOW_GLUE_CACHE
+    try:
+        import yaml as _yaml  # type: ignore[import]
+        with open(_FLOW_GLUE_YAML, encoding="utf-8") as fh:
+            data = _yaml.safe_load(fh) or {}
+        bodies = [
+            " ".join(str(v.get("body") or "").split())
+            for v in (data.get("variants") or [])
+            if v.get("body") and len(str(v["body"]).split()) >= 10
+        ]
+        _FLOW_GLUE_CACHE = tuple(bodies) if bodies else _FLOW_GLUE_FALLBACK
+    except Exception as exc:
+        logger.warning("global_flow_glue_bank.yaml load failed (%s); using fallback", exc)
+        _FLOW_GLUE_CACHE = _FLOW_GLUE_FALLBACK
+    return _FLOW_GLUE_CACHE
 
 _FLOW_GLUE_FIXABLE_ERRORS = frozenset(
     {
@@ -1056,7 +1050,8 @@ def strengthen_chapter_flow_for_delivery(
         return base
 
     digest = hashlib.sha256(f"{book_seed}:{chapter_index}".encode("utf-8")).digest()
-    glue = _FLOW_GLUE_VARIANTS[digest[0] % len(_FLOW_GLUE_VARIANTS)]
+    variants = _load_flow_glue_variants()
+    glue = variants[digest[0] % len(variants)]
     return f"{base}\n\n{glue}"
 
 

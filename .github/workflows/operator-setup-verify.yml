@@ -32,7 +32,8 @@ jobs:
           [ -z "${{ secrets.RUNCOMFY_TOKEN }}" ]      && MISSING="$MISSING RUNCOMFY_TOKEN"
           [ -z "${{ secrets.CF_R2_ACCESS_KEY }}" ]    && MISSING="$MISSING CF_R2_ACCESS_KEY"
           [ -z "${{ secrets.CF_R2_SECRET_KEY }}" ]    && MISSING="$MISSING CF_R2_SECRET_KEY"
-          [ -z "${{ secrets.CLAUDE_API_KEY }}" ]      && MISSING="$MISSING CLAUDE_API_KEY"
+          [ -z "${{ secrets.GEMMA_BASE_URL }}" ]      && MISSING="$MISSING GEMMA_BASE_URL"
+          [ -z "${{ secrets.QWEN_BASE_URL }}" ]       && MISSING="$MISSING QWEN_BASE_URL"
           echo "## Secrets Status" >> $GITHUB_STEP_SUMMARY
           if [ -n "$MISSING" ]; then
             echo "- **MISSING:**$MISSING" >> $GITHUB_STEP_SUMMARY
@@ -40,6 +41,28 @@ jobs:
             exit 1
           fi
           echo "- All required secrets: **PRESENT**" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check Ollama model availability on Pearl Star
+        run: |
+          GEMMA_URL="${{ secrets.GEMMA_BASE_URL }}"
+          QWEN_URL="${{ secrets.QWEN_BASE_URL }}"
+          OLLAMA_ROOT="${GEMMA_URL%/v1}"
+          echo "## Pearl Star Ollama Models" >> $GITHUB_STEP_SUMMARY
+          if curl --silent --max-time 10 "${OLLAMA_ROOT}/api/tags" | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+models = [m['name'] for m in data.get('models', [])]
+has_gemma = any('gemma' in m.lower() for m in models)
+has_qwen  = any('qwen' in m.lower() for m in models)
+print('gemma:', has_gemma, '| qwen:', has_qwen)
+ok = has_gemma and has_qwen
+sys.exit(0 if ok else 1)
+" 2>&1; then
+            echo "- Gemma + Qwen: **PRESENT**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- Ollama unreachable or models missing — ensure Pearl Star is running gemma2:9b and qwen2.5:14b" >> $GITHUB_STEP_SUMMARY
+            echo "MISSING_SECRETS=${MISSING_SECRETS:-} OLLAMA_MODELS" >> $GITHUB_ENV
+          fi
 
       - name: Summarise readiness
         if: success()

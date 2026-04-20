@@ -3,6 +3,21 @@
 This branch is explicitly wired for **Pearl_GitHub**, the repo-native GitHub
 operations agent.
 
+## LLM Tier Policy (MANDATORY — read before touching any LLM code)
+
+**Tier 1 — Claude Code (subscription, operator-present):**
+- All refactors, features, analysis, research, prose generation (bestseller chapters, manga scripts)
+- Any task where a human will review the output before it ships
+
+**Tier 2 — Gemma (English) / Qwen (CJK6) on Pearl Star via Ollama (free, unattended):**
+- Scheduled pipelines only: weekly manga rollout, nightly regression, Pearl News daily, brand digest
+- Any pipeline step that fires when no operator is present
+
+**BANNED — paid LLM APIs (enforced by `.github/workflows/llm-policy-enforcement.yml`):**
+- `ANTHROPIC_API_KEY` / `CLAUDE_API_KEY` reads in repo code
+- OpenAI cloud, Google AI, DashScope cloud, Together, Replicate, Perplexity, Cohere, Mistral paid
+- Violations block PRs. Run `python3 scripts/ci/audit_llm_callers.py` before pushing.
+
 ## API Keys & Credentials — READ THIS FIRST
 
 All credentials are documented in `docs/INTEGRATION_CREDENTIALS_REGISTRY.md`. Read it before touching any API.

@@ -1,0 +1,60 @@
+---
+# loc_var_render.yaml
+# Location variable fallbacks and chapter-rotation variants for book_renderer.py.
+# Authoritative source for _LOC_VAR_FALLBACKS and _LOC_VAR_ROTATIONS.
+# Replaces hardcoded dicts in phoenix_v4/rendering/book_renderer.py.
+
+# Default fallback for each location token when no rotation available or chapter_index is 0.
+fallbacks:
+  weather_detail:    "soft daylight along the sill"
+  street_name:       "the street below"
+  transit_line:      "the train"
+  transit_stop:      "the platform"
+  city_name:         "the city"
+  neighborhood:      "the neighborhood"
+  building_type:     "the building"
+  local_landmark:    "a landmark nearby"
+  park_name:         "the park"
+  coffee_shop:       "a coffee shop"
+  restaurant:        "a nearby restaurant"
+  store_name:        "a nearby store"
+  office_building:   "the office building"
+  commute_mode:      "the commute"
+  location.digital_space:     "your phone"
+  location.daily_space:       "the kitchen table"
+  location.high_stakes_space: "the meeting room"
+  location.learning_space:    "the quiet room"
+  location.memory_space:      "the place where they used to be"
+  location.social_gathering:  "the gathering"
+
+# Per-chapter rotation variants (cycle by chapter_index).
+# Avoid repeating identical scene text across chapters.
+rotations:
+  weather_detail:
+    - "soft daylight along the sill"
+    - "morning sun cutting through the blinds"
+    - "rain streaking the glass"
+    - "fluorescent light humming overhead"
+    - "late afternoon light slanting across the desk"
+    - "a cloudy sky pressing against the window"
+    - "cold air seeping through the window frame"
+  street_name:
+    - "the street below"
+    - "the avenue outside"
+    - "the sidewalk two floors down"
+    - "the road past the parking lot"
+    - "traffic moving on the highway"
+    - "the crosswalk at the corner"
+  transit_line:
+    - "the train"
+    - "the bus"
+    - "the subway car"
+    - "the commuter rail"
+    - "the metro"
+    - "the light rail"
+  coffee_shop:
+    - "a coffee shop"
+    - "the cafe on the corner"
+    - "a quiet booth at the back"
+    - "the counter where you always sit"
+    - "a table by the window"

@@ -43,13 +43,12 @@ jobs:
       WORDPRESS_SITE_URL: ${{ secrets.WORDPRESS_SITE_URL }}
       WORDPRESS_USERNAME: ${{ secrets.WORDPRESS_USERNAME }}
       WORDPRESS_APP_PASSWORD: ${{ secrets.WORDPRESS_APP_PASSWORD }}
-      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-      # Set QWEN_BASE_URL to Pearl Star's address (may be local-only).
-      # If not reachable from GitHub runners, CJK articles will fall back
-      # to Claude via expansion_routing.py fallback or fail gracefully.
+      # Tier 2 routing: Gemma (EN) + Qwen (CJK) on Pearl Star via Ollama.
+      # No paid API keys — use self-hosted runner or set BASE_URLs to Pearl Star.
+      GEMMA_BASE_URL: ${{ secrets.GEMMA_BASE_URL }}
+      GEMMA_MODEL: gemma2:9b
       QWEN_BASE_URL: ${{ secrets.QWEN_BASE_URL }}
       QWEN_MODEL: qwen2.5:14b
-      CLAUDE_MODEL: claude-sonnet-4-20250514
       PYTHONPATH: .
 
     steps:

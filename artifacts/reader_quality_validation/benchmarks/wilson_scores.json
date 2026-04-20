@@ -1,0 +1,48 @@
+{
+  "runtime_format": "standard_book",
+  "chapters": [
+    {
+      "chapter_index": 0,
+      "word_count": 557,
+      "chapter_flow": {
+        "status": "FAIL",
+        "score": 55,
+        "errors": [
+          "WEAK_TRANSITIONS",
+          "MISSING_CLEAR_POINT",
+          "NO_ACTIONABLE_STEP"
+        ],
+        "warnings": []
+      },
+      "bestseller_craft": {
+        "status": "FAIL",
+        "ontgp": 0.424,
+        "move_scores": {
+          "orient": 0.651,
+          "name": 0.3,
+          "turn": 0.75,
+          "give": 0.1,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_fail:give",
+          "no_clear_imperatives_in_give_zone",
+          "no_named_tension_or_question_in_closer"
+        ]
+      },
+      "memorable_lines": {
+        "quotable_count": 0,
+        "lines": []
+      }
+    }
+  ],
+  "summary": {
+    "ontgp_mean": 0.424,
+    "ontgp_min": 0.424,
+    "ontgp_max": 0.424,
+    "flow_mean": 55.0,
+    "memorable_total": 0,
+    "chapters_with_quotables": 0
+  },
+  "num_chapters": 1
+}

@@ -253,7 +253,9 @@ class OpenAICompatibleBackend:
         self._disable_thinking = self._cfg.get("disable_thinking", True)
         from pearl_news.pipeline.cjk_qwen_model import PEARL_STAR_CJK_MODEL, is_ollama_openai_base_url
 
-        if is_ollama_openai_base_url(self._base_url):
+        # Allow providers to pin a specific Ollama model (e.g. gemma_slots → gemma2:9b)
+        # by setting disable_model_override: true in their provider config.
+        if is_ollama_openai_base_url(self._base_url) and not self._cfg.get("disable_model_override"):
             self._model = PEARL_STAR_CJK_MODEL
 
     @property

@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-"""Score a single chapter-sized text through deterministic Phoenix quality gates.
+"""
+score_external_text.py — Score a raw text file against the Phoenix gate stack.
 
-Wraps plain UTF-8 prose as a one-chapter book where needed (book_quality_gate),
-runs museum detectors on a minimal book dict, and writes JSON suitable for
-benchmark aggregation. No network calls; optional LLM hooks are never passed.
+Wraps raw chapter text in the minimal structure the heuristic gates expect,
+runs the deterministic (zero-API) gate stack, dumps a scores JSON.
 
 Usage:
-  PYTHONPATH=. python3 scripts/analysis/score_external_text.py \\
-    --input path/to/chapter.txt \\
-    --output artifacts/research/bestseller_benchmark/scores/foo.json \\
-    --persona gen_z_professionals \\
-    --gates all
+  PYTHONPATH=. python3 scripts/analysis/score_external_text.py \
+      --input path/to/chapter.txt \
+      --output path/to/scores.json \
+      [--gates chapter_flow,bestseller_craft,memorable_lines]
+      [--runtime-format standard_book]
+
+Exit: 0 PASS, 1 FAIL/WARN (see scores.json for detail).
 """
 from __future__ import annotations
 
@@ -18,242 +20,144 @@ import argparse
 import json
 import re
 import sys
-from dataclasses import asdict
 from pathlib import Path
-from typing import Any, Dict, List, Optional
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(REPO_ROOT))
 
-_DEFAULT_GATES = (
-    "chapter_flow",
-    "bestseller_craft",
-    "ei_v2",
-    "editorial",
-    "memorable_lines",
-    "transformation_arc",
-    "book_quality_gate",
-    "regression_museum",
-)
+SUPPORTED_GATES = ["chapter_flow", "bestseller_craft", "memorable_lines"]
 
 
-def _load_bestseller_craft_thresholds() -> dict:
-    try:
-        import yaml as _yaml_mod
-    except ImportError:
-        return {}
-    cfg_path = REPO_ROOT / "config" / "quality" / "bestseller_craft_gate.yaml"
-    if not cfg_path.exists():
-        return {}
-    try:
-        with open(cfg_path, "r", encoding="utf-8") as f:
-            data = _yaml_mod.safe_load(f) or {}
-        craft = data.get("bestseller_craft", {})
-        out: dict = {}
-        for key in (
-            "fail_below",
-            "warn_below",
-            "orient_word_span",
-            "pull_word_span",
-            "name_start_frac",
-            "name_end_frac",
-            "turn_start_frac",
-            "turn_end_frac",
-            "give_start_frac",
-        ):
-            if key in craft:
-                out[key] = craft[key]
-        return out
-    except Exception:
-        return {}
+def _split_chapters(text: str) -> list[str]:
+    """Split text on 'Chapter N' headings; if none, treat as single chapter."""
+    parts = re.split(r"\n?Chapter\s+\d+[^\n]*\n", text, flags=re.I)
+    chapters = [p.strip() for p in parts if p.strip()]
+    return chapters if chapters else [text.strip()]
 
 
-def _book_dict_for_museum(chapter_text: str, *, persona: str) -> dict:
-    return {
-        "persona": persona,
-        "chapters": [
-            {
-                "index": 1,
-                "text": chapter_text,
-                "exercise_atom_ids": [],
+def score_text(
+    text: str,
+    gates: list[str],
+    runtime_format: str = "standard_book",
+) -> dict:
+    results: dict = {"runtime_format": runtime_format, "chapters": [], "summary": {}}
+    chapters = _split_chapters(text)
+    results["num_chapters"] = len(chapters)
+
+    ontgp_scores: list[float] = []
+    flow_scores: list[float] = []
+    memorable_counts: list[int] = []
+
+    for i, chap in enumerate(chapters):
+        chap_result: dict = {"chapter_index": i, "word_count": len(chap.split())}
+
+        if "chapter_flow" in gates:
+            from phoenix_v4.quality.chapter_flow_gate import (
+                evaluate_chapter_flow,
+                flow_profile_for_runtime_format,
+            )
+            profile = flow_profile_for_runtime_format(runtime_format)
+            fr = evaluate_chapter_flow(chap, flow_profile=profile)
+            chap_result["chapter_flow"] = {
+                "status": fr.status,
+                "score": fr.score,
+                "errors": fr.errors,
+                "warnings": fr.warnings,
             }
-        ],
-    }
+            flow_scores.append(float(fr.score))
 
-
-def _violations_payload(violations: list) -> list[dict[str, Any]]:
-    out = []
-    for v in violations:
-        out.append(
-            {
-                "failure_class": v.failure_class,
-                "severity": v.severity,
-                "location": v.location,
-                "evidence": (v.evidence or "")[:800],
-                "description": v.description,
+        if "bestseller_craft" in gates:
+            from phoenix_v4.quality.bestseller_craft_gate import evaluate_bestseller_craft
+            cr = evaluate_bestseller_craft(chap)
+            ms = cr.move_scores or {}
+            ontgp = sum(ms.values()) / len(ms) if ms else 0.0
+            chap_result["bestseller_craft"] = {
+                "status": cr.status,
+                "ontgp": round(ontgp, 3),
+                "move_scores": {k: round(v, 3) for k, v in ms.items()},
+                "issues": cr.issues[:10],
             }
+            ontgp_scores.append(ontgp)
+
+        if "memorable_lines" in gates:
+            from phoenix_v4.quality.memorable_line_detector import detect_lines
+            ml = detect_lines(f"chapter_{i}", [chap])
+            quotable = [
+                ln["text"]
+                for ln in ml.get("candidates", [])
+                if ln.get("score", 0) >= 4.0
+            ]
+            chap_result["memorable_lines"] = {
+                "quotable_count": len(quotable),
+                "lines": quotable[:5],
+            }
+            memorable_counts.append(len(quotable))
+
+        results["chapters"].append(chap_result)
+
+    if ontgp_scores:
+        results["summary"]["ontgp_mean"] = round(sum(ontgp_scores) / len(ontgp_scores), 3)
+        results["summary"]["ontgp_min"] = round(min(ontgp_scores), 3)
+        results["summary"]["ontgp_max"] = round(max(ontgp_scores), 3)
+    if flow_scores:
+        results["summary"]["flow_mean"] = round(sum(flow_scores) / len(flow_scores), 1)
+    if memorable_counts:
+        results["summary"]["memorable_total"] = sum(memorable_counts)
+        results["summary"]["chapters_with_quotables"] = sum(
+            1 for c in memorable_counts if c >= 2
         )
-    return out
+
+    return results
 
 
-def _museum_summary(result: dict) -> dict[str, Any]:
-    violations = result.get("violations") or []
-    classes = sorted({v.failure_class for v in violations})
-    return {
-        "blocked": bool(result.get("blocked")),
-        "warned": bool(result.get("warned")),
-        "summary": result.get("summary", ""),
-        "failure_classes": classes,
-        "violation_count": len(violations),
-    }
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--input", required=True, help="Path to raw text file")
+    parser.add_argument("--output", required=True, help="Path to write scores JSON")
+    parser.add_argument(
+        "--gates",
+        default="chapter_flow,bestseller_craft,memorable_lines",
+        help="Comma-separated gates to run (default: all)",
+    )
+    parser.add_argument(
+        "--runtime-format",
+        default="standard_book",
+        help="Pipeline runtime format ID for thresholds (default: standard_book)",
+    )
+    args = parser.parse_args()
 
+    input_path = Path(args.input)
+    if not input_path.exists():
+        print(f"ERROR: input file not found: {input_path}", file=sys.stderr)
+        return 1
 
-def _craft_composite(move_scores: dict[str, float]) -> float:
-    if not move_scores:
-        return 0.0
-    vals = [float(v) for v in move_scores.values()]
-    return round(sum(vals) / max(1, len(vals)), 4)
+    text = input_path.read_text(encoding="utf-8")
+    gates = [g.strip() for g in args.gates.split(",") if g.strip()]
 
-
-def _parse_gates_arg(raw: str) -> List[str]:
-    s = (raw or "").strip().lower()
-    if s in ("", "all", "*"):
-        return list(_DEFAULT_GATES)
-    gates = [g.strip() for g in raw.split(",") if g.strip()]
-    unknown = [g for g in gates if g not in _DEFAULT_GATES]
+    unknown = [g for g in gates if g not in SUPPORTED_GATES]
     if unknown:
-        raise SystemExit(f"Unknown gates: {unknown}. Allowed: {', '.join(_DEFAULT_GATES)}")
-    return gates
+        print(f"ERROR: unknown gates: {unknown}. Supported: {SUPPORTED_GATES}", file=sys.stderr)
+        return 1
 
+    results = score_text(text, gates, runtime_format=args.runtime_format)
 
-def score_chapter_text(
-    chapter_text: str,
-    *,
-    persona: str,
-    gates: List[str],
-    source_label: str = "",
-) -> dict[str, Any]:
-    text = (chapter_text or "").strip()
-    wc = len(text.split())
-    out: dict[str, Any] = {
-        "source_label": source_label,
-        "persona": persona,
-        "word_count": wc,
-        "gates_requested": gates,
-    }
+    output_path = Path(args.output)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(results, indent=2), encoding="utf-8")
+    print(f"Scores written: {output_path}")
 
-    if "chapter_flow" in gates:
-        from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow
+    summary = results.get("summary", {})
+    print(f"  ONTGP mean:    {summary.get('ontgp_mean', 'n/a')}")
+    print(f"  Flow mean:     {summary.get('flow_mean', 'n/a')}")
+    print(f"  Memorable:     {summary.get('memorable_total', 'n/a')} lines across {results['num_chapters']} chapters")
 
-        cf = evaluate_chapter_flow(text, flow_profile="standard")
-        out["chapter_flow"] = {
-            "status": cf.status,
-            "score": cf.score,
-            "errors": cf.errors,
-            "warnings": cf.warnings,
-            "metrics": cf.metrics,
-        }
-
-    if "bestseller_craft" in gates:
-        from phoenix_v4.quality.bestseller_craft_gate import evaluate_bestseller_craft
-
-        thr = _load_bestseller_craft_thresholds()
-        craft = evaluate_bestseller_craft(text, thresholds=thr if thr else None)
-        out["bestseller_craft"] = {
-            "status": craft.status,
-            "move_scores": craft.move_scores,
-            "ontgp_composite": _craft_composite(craft.move_scores),
-            "issues": craft.issues,
-            "remediation": craft.remediation,
-            "metrics": craft.metrics,
-        }
-
-    if "memorable_lines" in gates:
-        from phoenix_v4.quality.memorable_line_gate import evaluate_memorable_lines
-
-        ml = evaluate_memorable_lines(text)
-        out["memorable_lines"] = {
-            "status": ml.status,
-            "memorable_line_count": ml.memorable_line_count,
-            "issues": ml.issues,
-            "metrics": ml.metrics,
-        }
-
-    if "transformation_arc" in gates:
-        from phoenix_v4.quality.transformation_heatmap import compute_signals, ending_check
-
-        sigs = compute_signals([text])
-        end = ending_check(sigs, last_n=2)
-        out["transformation_arc"] = {
-            "chapter_signals": [asdict(s) for s in sigs],
-            "ending_check": end,
-            "note_single_chapter": (
-                "Single-chapter sample: ending_check uses only this chapter; "
-                "identity_shift in final chapter is often absent by construction."
-            ),
-        }
-
-    if "editorial" in gates:
-        from phoenix_v4.qa.editorial_report import generate_editorial_report
-
-        ed = generate_editorial_report(text, [text])
-        out["editorial"] = ed.to_dict()
-
-    if "book_quality_gate" in gates:
-        from phoenix_v4.quality.book_quality_gate import evaluate_book_quality
-
-        wrapped = f"Chapter 1\n\n{text}" if not re.match(r"(?m)^Chapter\s+1\s*$", text) else text
-        bq = evaluate_book_quality(wrapped, runtime_format_id="")
-        out["book_quality_gate"] = bq.to_dict()
-
-    if "ei_v2" in gates:
-        from phoenix_v4.quality.ei_v2.safety_classifier import classify_safety
-        from phoenix_v4.quality.ei_v2.tts_readability import score_tts_readability
-
-        safety = classify_safety(text, cfg={"mode": "heuristic_plus"})
-        tts = score_tts_readability(text)
-        out["ei_v2"] = {
-            "mode": "heuristic_plus_safety_plus_tts_readability",
-            "safety": safety,
-            "tts_readability": tts,
-        }
-
-    if "regression_museum" in gates:
-        from phoenix_v4.quality.regression_museum import run_museum_gates
-
-        book = _book_dict_for_museum(text, persona=persona)
-        mres = run_museum_gates(book, persona=persona)
-        out["regression_museum"] = {
-            "summary": _museum_summary(mres),
-            "violations": _violations_payload(mres["violations"]),
-        }
-
-    return out
-
-
-def main(argv: Optional[list[str]] = None) -> int:
-    p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--input", required=True, help="UTF-8 chapter text file")
-    p.add_argument("--output", required=True, help="Write JSON scores here")
-    p.add_argument("--persona", default="gen_z_professionals")
-    p.add_argument("--gates", default="all", help=f"Comma list or 'all' ({', '.join(_DEFAULT_GATES)})")
-    p.add_argument("--label", default="", help="Optional string stored in JSON")
-    args = p.parse_args(argv)
-
-    path = Path(args.input)
-    if not path.is_file():
-        print(f"INPUT_NOT_FOUND: {path}", file=sys.stderr)
-        return 2
-
-    raw = path.read_text(encoding="utf-8", errors="replace")
-    gates = _parse_gates_arg(args.gates)
-    label = args.label or path.stem
-    payload = score_chapter_text(raw, persona=args.persona, gates=gates, source_label=label)
-
-    out_path = Path(args.output)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    return 0
+    fail = any(
+        ch.get("chapter_flow", {}).get("status") == "FAIL"
+        or ch.get("bestseller_craft", {}).get("status") == "FAIL"
+        for ch in results["chapters"]
+    )
+    return 1 if fail else 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())

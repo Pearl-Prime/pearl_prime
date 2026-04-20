@@ -1,0 +1,50 @@
+{
+  "runtime_format": "standard_book",
+  "chapters": [
+    {
+      "chapter_index": 0,
+      "word_count": 612,
+      "chapter_flow": {
+        "status": "FAIL",
+        "score": 70,
+        "errors": [
+          "WEAK_TRANSITIONS",
+          "MISSING_CLEAR_POINT"
+        ],
+        "warnings": []
+      },
+      "bestseller_craft": {
+        "status": "FAIL",
+        "ontgp": 0.378,
+        "move_scores": {
+          "orient": 0.705,
+          "name": 0.45,
+          "turn": 0.35,
+          "give": 0.067,
+          "pull": 0.32
+        },
+        "issues": [
+          "move_fail:give",
+          "few_reframe_or_contrast_markers",
+          "no_clear_imperatives_in_give_zone",
+          "no_named_tension_or_question_in_closer"
+        ]
+      },
+      "memorable_lines": {
+        "quotable_count": 1,
+        "lines": [
+          "You sleep badly, not because your life is bad, but because your mind won't stop running scenarios."
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "ontgp_mean": 0.378,
+    "ontgp_min": 0.378,
+    "ontgp_max": 0.378,
+    "flow_mean": 70.0,
+    "memorable_total": 1,
+    "chapters_with_quotables": 0
+  },
+  "num_chapters": 1
+}

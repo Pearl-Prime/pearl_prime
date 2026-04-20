@@ -183,6 +183,11 @@ def _try_content_bank_fallback(
     aliases = _ENRICH_BANK_SLOT_TYPES.get(st, ())
     if not aliases:
         return None
+    # Late-book REFLECTION (chapters 7–12, index ≥ 6): try REFLECTION slot type first
+    # so anxiety_genz_reflection_late_book_bank.yaml variants are prioritised before
+    # the generic MECHANISM_BRIDGE fallback.
+    if st == "REFLECTION" and chapter_index0 >= 6:
+        aliases = ("REFLECTION",) + tuple(aliases)
     stems = list(reg.banks.keys())
     if not stems:
         return None
@@ -261,6 +266,7 @@ class EnrichmentRequest:
     spine_context: Optional[Dict[str, Any]] = None
     publishable_book: bool = False
     content_banks_dir: Optional[Path] = None
+    ei_v2_config: Optional[Dict[str, Any]] = None  # P0.9: hybrid_select wiring
 
 
 @dataclass
@@ -932,32 +938,81 @@ def select_enrichment(
                     )
                 persona_atoms_for_slot = dict(persona_atoms)
                 persona_atoms_for_slot[stype] = persona_pool
-                p_hit = _try_persona_content(
-                    persona_atoms_for_slot,
-                    stype,
-                    seed_key,
-                    topic_id=topic,
-                    persona_id=persona_id,
-                    book_frame=_frame,
-                )
-                if p_hit:
-                    content, source_id, persona_primary_idx, p_meta = p_hit
-                    source = "persona_atom"
-                    persona_expand_pool = [
-                        a
-                        for a in persona_pool
-                        if atom_passes_book_governance(
-                            a.get("metadata"),
-                            topic_id=topic,
+
+                # P0.9: hybrid V1+V2 selector for persona atoms when ei_v2_config is wired.
+                _p_hit_hybrid = False
+                _ei_cfg = request.ei_v2_config
+                _hybrid_cfg = (_ei_cfg or {}).get("hybrid") or {}
+                if _ei_cfg and _hybrid_cfg.get("enabled") and persona_pool and stype in _PERSONA_OVERLAY_TYPES:
+                    try:
+                        from phoenix_v4.qa.bestseller_editor import hybrid_select_slot_production
+                        _candidates_raw = [
+                            {
+                                "atom_id": a.get("atom_id", f"persona_{_pi}"),
+                                **(a.get("metadata") or {}),
+                                "body": a.get("content", ""),
+                            }
+                            for _pi, a in enumerate(persona_pool)
+                        ]
+                        _decision = hybrid_select_slot_production(
+                            slot=stype,
+                            chapter_index=chapter_index0,
+                            slot_index=slot_i,
+                            candidates_raw=_candidates_raw,
                             persona_id=persona_id,
-                            book_frame=_frame,
+                            topic_id=topic,
+                            thesis=str(bm_ch.thesis or ""),
+                            ei_v2_config=_ei_cfg,
                         )
-                    ]
-                    audit_counts["slots_from_persona"] += 1
-                    atom_id = source_id
-                    match_scores["bestseller_target_score"] = _bestseller_metadata_score(
-                        p_meta, ch_tgt
+                        _chosen = next(
+                            (a for a in persona_pool
+                             if a.get("atom_id") == _decision.final_chosen_id),
+                            None,
+                        )
+                        if _chosen:
+                            content = str(_chosen.get("content") or "").strip()
+                            source_id = str(_chosen.get("atom_id") or f"persona_hybrid")
+                            p_meta = dict(_chosen.get("metadata") or {})
+                            _p_hit_hybrid = bool(content)
+                            if _p_hit_hybrid:
+                                source = "persona_atom"
+                                audit_counts["slots_from_persona"] += 1
+                                atom_id = source_id
+                                match_scores["hybrid_v2"] = True
+                                match_scores["bestseller_target_score"] = _bestseller_metadata_score(
+                                    p_meta, ch_tgt
+                                )
+                    except Exception as _hx:
+                        logger.warning("hybrid_select_slot_production failed at ch%d %s: %s",
+                                       chapter_index0 + 1, stype, _hx)
+
+                if not _p_hit_hybrid:
+                    p_hit = _try_persona_content(
+                        persona_atoms_for_slot,
+                        stype,
+                        seed_key,
+                        topic_id=topic,
+                        persona_id=persona_id,
+                        book_frame=_frame,
                     )
+                    if p_hit:
+                        content, source_id, persona_primary_idx, p_meta = p_hit
+                        source = "persona_atom"
+                        persona_expand_pool = [
+                            a
+                            for a in persona_pool
+                            if atom_passes_book_governance(
+                                a.get("metadata"),
+                                topic_id=topic,
+                                persona_id=persona_id,
+                                book_frame=_frame,
+                            )
+                        ]
+                        audit_counts["slots_from_persona"] += 1
+                        atom_id = source_id
+                        match_scores["bestseller_target_score"] = _bestseller_metadata_score(
+                            p_meta, ch_tgt
+                        )
 
             # 3) EXERCISE — practice library before registry (matches registry_resolver)
             if not content and stype == "EXERCISE":
