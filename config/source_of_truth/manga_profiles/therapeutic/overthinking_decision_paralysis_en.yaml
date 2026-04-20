@@ -1,0 +1,58 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-20"
+profile_type: brand_genre_lane
+therapeutic_lane: overthinking
+
+title_id: overthinking_decision_paralysis_en
+brand_id: overthinking_decision_paralysis
+locale_primary: en
+
+market_demo: seinen
+genre_family: graphic_medicine
+subgenre: "adhd_adjacent_decision_paralysis"
+
+emotional_engine: wonder
+reader_promise: "You will see your analysis loop from outside for the first time — and it will look different from there."
+
+serialization_engine: arc_based
+chapter_hook_family: revelation
+
+visual_grammar: polished_seinen
+line_weight_profile: medium
+black_fill_ratio: 0.18
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 95
+  silent_panel_ratio: 0.22
+  reaction_shot_frequency: medium
+  spread_frequency: rare
+
+narration_tolerance: moderate
+
+adaptation_targets:
+  - print
+  - webtoon
+
+series_notes: |
+  ADHD-adjacent decision paralysis — the analysis loop, the 47-tab research spiral.
+  Wonder engine: defamiliarize the loop so the reader can see it from outside.
+  Reframe craving: the same thing from a new angle that releases it.
+  Research basis: therapeutic_manga_wellness_market_research_2026_04_04.md §adhd §overthinking
+  Reader promise anchors to craving: Reframe (#13).
+  EN-first. Skeleton locales await localization sprint.
+
+locale_skeletons:
+  - {locale: ja_JP, status: skeleton_awaits_localization_sprint}
+  - {locale: ko_KR, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_TW, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_CN, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_HK, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_SG, status: skeleton_awaits_localization_sprint}
+  - {locale: de_DE, status: skeleton_awaits_localization_sprint}
+  - {locale: fr_FR, status: skeleton_awaits_localization_sprint}
+  - {locale: es_ES, status: skeleton_awaits_localization_sprint}
+  - {locale: es_US, status: skeleton_awaits_localization_sprint}
+  - {locale: it_IT, status: skeleton_awaits_localization_sprint}
+  - {locale: pt_BR, status: skeleton_awaits_localization_sprint}

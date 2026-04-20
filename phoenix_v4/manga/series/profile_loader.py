@@ -27,6 +27,8 @@ VALID_GENRE_FAMILIES = frozenset([
     "supernatural_everyday", "survival", "revenge", "social_issue",
     # taxonomy-derived additions
     "slice_of_life", "fantasy_adventure", "family", "historical", "comedy",
+    # therapeutic lane additions
+    "graphic_medicine",
 ])
 VALID_EMOTIONAL_ENGINES = frozenset([
     "aspiration", "catharsis", "tenderness", "dread", "obsession",
@@ -54,6 +56,8 @@ VALID_CHAPTER_HOOK_FAMILIES = frozenset([
     "ominous_image", "emotional_rupture", "ambiguous_line",
     # taxonomy-derived additions
     "confession_almost_happened", "what_did_that_mean", "impossible_task",
+    # therapeutic / essay lane additions
+    "loss_echo", "small_wonder",
 ])
 VALID_VISUAL_GRAMMARS = frozenset([
     "kinetic_shonen", "soft_shojo_decorative", "polished_seinen",

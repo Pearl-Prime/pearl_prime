@@ -8,12 +8,14 @@
 #             (teacher_student_series: true). Other series are regular.
 #   regular — brand has no teacher. All series are character-driven, no teacher figure.
 schema_version: 1
-last_updated: "2026-04-08"
+last_updated: "2026-04-20"
 
 lane_intensity:
   heavy: [japan, korea, france, china, taiwan]  # 3 series per brand
   medium: [latam, brazil, indonesia]             # 1 series + one-off art
-  light: [english_global, dach, spain, italy, hungary]  # one-off illustration packages
+  light: [english_global, dach, spain, italy, hungary, zh_HK, zh_SG]  # one-off illustration packages
+  # zh_HK + zh_SG: Phase 3 markets — conservative light rollout. High-margin bilingual
+  # audiences (see artifacts/research/global_manga_distribution_strategy.md §zh_HK §zh_SG).
 
 # Episode production estimates (for planning)
 panel_estimates:

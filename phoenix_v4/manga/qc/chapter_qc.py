@@ -231,6 +231,14 @@ def build_revision_queue_for_chapter(
                     issues.append(restraint_issue)
             except Exception:
                 pass  # gate errors are non-fatal
+            try:
+                from phoenix_v4.manga.qc.yearning_gate import check_yearning_pacing
+                script_data = json.loads(script_p.read_text(encoding="utf-8"))
+                yearning_issue = check_yearning_pacing(script_data, manga_profile)
+                if yearning_issue:
+                    issues.append(yearning_issue)
+            except Exception:
+                pass  # gate errors are non-fatal
 
     blockers = [x for x in issues if x.get("severity") == "BLOCKER"]
     clearance = "pass" if not blockers else "hold"

@@ -4,6 +4,29 @@ from __future__ import annotations
 
 from phoenix_v4.manga.models import stage_ids as sid
 
+# Format IDs must match keys in config/manga/format_adaptation_grammars.yaml
+_FORMAT_COMPOSITOR_MAP: dict[str, str] = {
+    "print": "PrintCompositor",
+    "webtoon": "WebtoonCompositor",
+    "motion_comic": "MotionComicCompositor",
+    "vertical_short_teaser": "VerticalTeaserCompositor",
+}
+
+
+def get_compositor_for_format(format_id: str) -> str:
+    """Return compositor class name for the given format_id.
+
+    Raises ValueError for unknown formats so callers fail loudly
+    rather than silently using the wrong compositor.
+    """
+    try:
+        return _FORMAT_COMPOSITOR_MAP[format_id]
+    except KeyError:
+        known = sorted(_FORMAT_COMPOSITOR_MAP)
+        raise ValueError(
+            f"Unknown format_id {format_id!r}. Known: {known}"
+        ) from None
+
 RUN_ORDER: tuple[str, ...] = (
     sid.TRANSMISSION_SPLIT,
     sid.CHAPTER_WRITER,

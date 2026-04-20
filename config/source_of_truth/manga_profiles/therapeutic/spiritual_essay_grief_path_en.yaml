@@ -1,0 +1,59 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-20"
+profile_type: brand_genre_lane
+therapeutic_lane: spiritual_essay
+
+title_id: spiritual_essay_grief_path_en
+brand_id: spiritual_essay_grief_path
+locale_primary: en
+
+market_demo: josei
+genre_family: essay
+subgenre: "grief_as_spiritual_transformation"
+
+emotional_engine: longing
+reader_promise: "You will feel the grief that cannot be fixed — only traveled — and find that the traveling itself is a form of love."
+
+serialization_engine: episodic
+chapter_hook_family: loss_echo
+
+visual_grammar: soft_shojo_decorative
+line_weight_profile: light
+black_fill_ratio: 0.09
+screentone_profile: decorative
+
+pacing:
+  words_per_page_target: 55
+  silent_panel_ratio: 0.38
+  reaction_shot_frequency: low
+  spread_frequency: rare
+
+narration_tolerance: generous
+
+adaptation_targets:
+  - print
+  - webtoon
+
+series_notes: |
+  Grief as spiritual path — the death that reorganizes you, the absence that becomes presence,
+  the way grief transforms into something that carries the shape of love.
+  Longing engine: the reader aches for what was lost and finds that ache has meaning.
+  Loss echo hook: reader enters through a sensory memory that triggers unexpected grief.
+  Research basis: therapeutic_manga_wellness_market_research_2026_04_04.md §grief §spiritual
+  Reader promise anchors to craving: Longing (#10) + Permission (#12).
+  EN-first. Skeleton locales await localization sprint.
+
+locale_skeletons:
+  - {locale: ja_JP, status: skeleton_awaits_localization_sprint}
+  - {locale: ko_KR, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_TW, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_CN, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_HK, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_SG, status: skeleton_awaits_localization_sprint}
+  - {locale: de_DE, status: skeleton_awaits_localization_sprint}
+  - {locale: fr_FR, status: skeleton_awaits_localization_sprint}
+  - {locale: es_ES, status: skeleton_awaits_localization_sprint}
+  - {locale: es_US, status: skeleton_awaits_localization_sprint}
+  - {locale: it_IT, status: skeleton_awaits_localization_sprint}
+  - {locale: pt_BR, status: skeleton_awaits_localization_sprint}

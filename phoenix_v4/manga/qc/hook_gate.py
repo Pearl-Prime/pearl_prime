@@ -21,6 +21,9 @@ _HOOK_SIGNALS: dict[str, list[str]] = {
     "ambiguous_line": ["what did you mean", "?", "—", "or did she", "or did he", "or was it"],
     "what_did_that_mean": ["what did you mean", "what did that mean", "?", "—", "or did she", "or did he"],
     "impossible_task": ["impossible", "can't be done", "no one has ever", "you'll never"],
+    # Therapeutic / essay hook families
+    "loss_echo": ["still", "remembered", "miss", "absence", "without", "gone", "used to", "echo"],
+    "small_wonder": ["noticed", "first time", "ordinary", "simple", "small", "just", "quietly", "always been"],
 }
 
 

@@ -1,0 +1,60 @@
+manga_profile_schema_version: "1.0.0"
+status: active
+created_at: "2026-04-20"
+profile_type: brand_genre_lane
+therapeutic_lane: spiritual_essay
+
+title_id: spiritual_essay_meditation_en
+brand_id: spiritual_essay_meditation
+locale_primary: en
+
+market_demo: josei
+genre_family: essay
+subgenre: "secular_contemplative_practice_essay"
+
+emotional_engine: wonder
+reader_promise: "You will feel the quality of stillness that exists between thoughts — and realize you have always been closer to it than you knew."
+
+serialization_engine: episodic
+chapter_hook_family: ambiguous_line
+
+visual_grammar: iyashikei_minimalism
+line_weight_profile: light
+black_fill_ratio: 0.07
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 40
+  silent_panel_ratio: 0.45
+  reaction_shot_frequency: low
+  spread_frequency: rare
+
+narration_tolerance: moderate
+
+adaptation_targets:
+  - print
+  - webtoon
+
+series_notes: |
+  Secular meditation and contemplative practice — the gap between thoughts, the body scan,
+  the moment of returning to breath. Non-religious but spiritually resonant.
+  Wonder engine: defamiliarize the stillness — the gap between breaths becomes observable
+  for the first time. The reader sees their own practice from outside and is surprised by it.
+  Ambiguous line hook: reader enters through a line that could be instruction or poetry.
+  Research basis: therapeutic_manga_wellness_market_research_2026_04_04.md §spiritual §mindfulness
+  Reader promise anchors to craving: Wonder (#6) + Permission (#12).
+  EN-first. Skeleton locales await localization sprint.
+
+locale_skeletons:
+  - {locale: ja_JP, status: skeleton_awaits_localization_sprint}
+  - {locale: ko_KR, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_TW, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_CN, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_HK, status: skeleton_awaits_localization_sprint}
+  - {locale: zh_SG, status: skeleton_awaits_localization_sprint}
+  - {locale: de_DE, status: skeleton_awaits_localization_sprint}
+  - {locale: fr_FR, status: skeleton_awaits_localization_sprint}
+  - {locale: es_ES, status: skeleton_awaits_localization_sprint}
+  - {locale: es_US, status: skeleton_awaits_localization_sprint}
+  - {locale: it_IT, status: skeleton_awaits_localization_sprint}
+  - {locale: pt_BR, status: skeleton_awaits_localization_sprint}
