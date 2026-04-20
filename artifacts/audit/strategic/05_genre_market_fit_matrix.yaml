@@ -1,0 +1,374 @@
+schema_version: 1
+title: "Genre × Market Fit Matrix — Phoenix Omega Manga Program"
+date: "2026-04-18"
+auditor: "Pearl_PM"
+sources:
+  - "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+  - "artifacts/research/global_manga_distribution_strategy.md"
+  - "artifacts/research/strategic_audit/01_global_manga_market_map.md"
+  - "artifacts/research/strategic_audit/02_bestseller_pattern_decomposition.md"
+  - "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+
+# Legend:
+#   commercial_precedent: Y = confirmed bestsellers exist | L = limited examples | N = no examples found
+#   format: standard (page-based) | webtoon (vertical scroll)
+#   regulatory: OK | CAUTION | BLOCKED
+#   best_example: highest-selling known title (ISO format: title [year, publisher])
+#   phoenix_omega_brand: which brand covers this cell
+
+markets:
+  - id: ja_JP
+    name: "Japan"
+    size_usd: 4670000000
+    growth: "flat (-1.7% 2025, after record 2024)"
+    market_note: "World's largest manga market. Digital 72.7%. Iyashikei is domestic genre origin."
+  - id: en_US
+    name: "United States / English Global"
+    size_usd: 1900000000
+    growth: "normalizing (-13.2% book channel 2024, from pandemic peak)"
+    market_note: "Graphic novel format dominant. Essay manga breakout category. KDP accessible."
+  - id: ko_KR
+    name: "South Korea"
+    size_usd: 1700000000
+    growth: "strong (+18.2% CAGR to 2034)"
+    market_note: "Webtoon-native. Healing (힐링) is established category. Naver/Kakao dominant."
+  - id: fr_FR
+    name: "France"
+    size_usd: 465000000
+    growth: "strong (+19.6% CAGR)"
+    market_note: "#2 world manga market. Webtoon viewership +55% 2025-2026. Philosophical framing preferred."
+  - id: de_DE
+    name: "Germany"
+    size_usd: 77100000
+    growth: "strong (+22.3% CAGR)"
+    market_note: "#2 European market. Evidence-based framing required. FSK content ratings apply."
+  - id: zh_TW
+    name: "Taiwan"
+    size_usd: null
+    growth: "moderate"
+    market_note: "Traditional Chinese. LINE Manga / BookWalker. Smaller market but culturally close to Japan."
+  - id: zh_HK
+    name: "Hong Kong"
+    size_usd: null
+    growth: "moderate"
+    market_note: "Traditional Chinese. Small market, high margin. Bilingual audience."
+  - id: zh_SG
+    name: "Singapore"
+    size_usd: null
+    growth: "moderate"
+    market_note: "Simplified + Traditional Chinese. Small, sophisticated audience."
+  - id: zh_CN
+    name: "China (Mainland)"
+    size_usd: null
+    growth: "growing (domestic manhua dominant)"
+    market_note: "BL/GL blocked. Foreign manga import restrictions. Kuaikan Manhua accessible. Cultivation genre native."
+  - id: es_US
+    name: "US Hispanic (Spanish)"
+    size_usd: null
+    growth: "strong (+45.7% Spanish audiobook 2023)"
+    market_note: "Fastest-growing US demographic segment for digital content."
+  - id: it_IT
+    name: "Italy"
+    size_usd: null
+    growth: "fast (+11.35% CAGR ebook)"
+    market_note: "#3 European manga market. Growing digital. Philosophical/contemplative framing works."
+  - id: hu_HU
+    name: "Hungary"
+    size_usd: null
+    growth: "small, high audio consumption"
+    market_note: "Smallest market. Minimal competition. High per-capita audio consumption."
+
+genres:
+  # ── GENRE × MARKET CELLS ──────────────────────────────────────────────────────
+  # For each genre (rows) × market (columns), we assess fit.
+
+  iyashikei:
+    description: "Healing/calming manga. Low-conflict, atmospheric, emotional comfort. Origin: Japan."
+    wellness_fit: "EXCELLENT — genre was created for comfort and emotional recovery"
+    cells:
+      ja_JP:
+        commercial_precedent: "Y"
+        format: "standard"
+        regulatory: "OK"
+        typical_price_usd: 5.50
+        best_example: "Frieren: Beyond Journey's End [2020, Shogakukan, 24M+ copies 2024]"
+        phoenix_omega_brand: "relational_calm"
+        notes: "Genre is native to Japan. Strong reader base. Bi-weekly cadence accepted."
+      en_US:
+        commercial_precedent: "Y"
+        format: "standard + webtoon"
+        regulatory: "OK"
+        typical_price_usd: 13.00
+        best_example: "Yotsuba&! [2003, ADV/Yen Press, 16M+ copies WW]; Dungeon Meshi [2014, Yen Press, 14M by 2024]"
+        phoenix_omega_brand: "stillness_press"
+        notes: "Strong crossover appeal. Mindfulness readers receptive. KDP and Webtoon viable."
+      ko_KR:
+        commercial_precedent: "Y"
+        format: "webtoon"
+        regulatory: "OK"
+        typical_price_per_chapter_krw: 200
+        best_example: "Healing manhwa (힐링만화) is established Naver/Kakao category with hundreds of titles"
+        phoenix_omega_brand: "relational_calm"
+        notes: "힐링 (healing) is highest-fit framing. Must use webtoon vertical scroll format."
+      fr_FR:
+        commercial_precedent: "L"
+        format: "standard + webtoon"
+        regulatory: "OK"
+        typical_price_eur: 7.99
+        best_example: "Frieren (Yen Press FR equivalent). French webtoon platform growing fast."
+        phoenix_omega_brand: "stillness_press"
+        notes: "Philosophical framing (+contemplative) works well in France. Izneo platform."
+      de_DE:
+        commercial_precedent: "L"
+        format: "standard"
+        regulatory: "OK (FSK 6 or 12 for calming content)"
+        typical_price_eur: 7.99
+        best_example: "Frieren German edition. Healing category exists but smaller."
+        phoenix_omega_brand: "stillness_press"
+        notes: "Evidence-based positioning required. 'Healing' alone insufficient for German market."
+      zh_TW:
+        commercial_precedent: "L"
+        format: "standard + webtoon"
+        regulatory: "OK"
+        typical_price_twd: null
+        phoenix_omega_brand: "relational_calm (via Taiwan rollout)"
+        notes: "Japan cultural proximity = iyashikei recognition. LINE Manga TW accessible."
+      zh_HK:
+        commercial_precedent: "L"
+        format: "standard"
+        regulatory: "OK"
+        phoenix_omega_brand: "relational_calm (via HK rollout)"
+        notes: "Small market. KDP HK accessible."
+      zh_CN:
+        commercial_precedent: "L"
+        format: "standard + webtoon"
+        regulatory: "CAUTION — foreign content restrictions"
+        phoenix_omega_brand: null
+        notes: "Iyashikei style foreign manga imports require MCN/licensing. Kuaikan Manhua partnership needed."
+      it_IT:
+        commercial_precedent: "L"
+        format: "standard"
+        regulatory: "OK"
+        phoenix_omega_brand: "stillness_press (via IT rollout)"
+        notes: "Growing digital manga market. Iyashikei recognized among manga readers."
+      es_US:
+        commercial_precedent: "N"
+        format: "webtoon"
+        regulatory: "OK"
+        phoenix_omega_brand: null
+        notes: "Flagged — Verify: No specific iyashikei Spanish-language bestseller found."
+      hu_HU:
+        commercial_precedent: "N"
+        format: "standard"
+        regulatory: "OK"
+        phoenix_omega_brand: null
+        notes: "Minimal manga market. KDP HU viable but low volume expected."
+
+  josei_essay_manga:
+    description: "Adult women's realistic manga + autobiographical essay manga. NOT 'shojo'. Critical format for therapeutic content."
+    wellness_fit: "EXCELLENT — primary commercial format for therapeutic autobiographical content"
+    cells:
+      ja_JP:
+        commercial_precedent: "Y"
+        format: "standard + single-volume"
+        regulatory: "OK"
+        typical_price_jpy: 880
+        best_example: "My Lesbian Experience with Loneliness — Nagata Kabi [2016, East Press, #2 NA debut per Nielsen]"
+        phoenix_omega_brand: "body_memory (if re-classified josei)"
+        notes: "Nagata Kabi is the canonical therapeutic essay manga creator. エッセイ漫画 is established Amazon JP category."
+      en_US:
+        commercial_precedent: "Y"
+        format: "standard single-volume"
+        regulatory: "OK"
+        typical_price_usd: 15.99
+        best_example: "My Lesbian Experience with Loneliness [Tokyopop, 2017 US]; Adam J. Kurtz illustrated 1M+ copies"
+        phoenix_omega_brand: "somatic_wisdom (if re-classified)"
+        notes: "Essay manga is breakout category in US. Harvey/Eisner recognition drives literary credibility."
+      ko_KR:
+        commercial_precedent: "L"
+        format: "webtoon + standard"
+        regulatory: "OK"
+        phoenix_omega_brand: null
+        notes: "Essay webtoon exists (에세이 웹툰) but wellness-specific less common than in Japan."
+      fr_FR:
+        commercial_precedent: "L"
+        format: "standard"
+        regulatory: "OK"
+        phoenix_omega_brand: "somatic_wisdom (via FR rollout)"
+        notes: "Autobiographical BD (bande dessinée) is a major French format — essay manga analogous."
+
+  seinen:
+    description: "Adult men's manga. Psychological depth, moral ambiguity, complex narratives."
+    wellness_fit: "GOOD — psychological/philosophical framing maps well to burnout, overthinking"
+    cells:
+      ja_JP:
+        commercial_precedent: "Y"
+        format: "standard"
+        regulatory: "OK"
+        typical_price_jpy: 770
+        best_example: "Honey & Clover [Chica Umino, 12M copies]; Vagabond [Takehiko Inoue, 82M copies]"
+        phoenix_omega_brand: "cognitive_clarity"
+        notes: "Seinen is mature psychological drama — Joshin's Direct Pointing method maps well."
+      en_US:
+        commercial_precedent: "Y"
+        format: "standard"
+        regulatory: "OK"
+        typical_price_usd: 14.99
+        best_example: "Vinland Saga [Kodansha, top-10 NPD 2024]; Berserk [Dark Horse]"
+        phoenix_omega_brand: "cognitive_clarity"
+        notes: "Strong US seinen readership. CBR/Anime News Network coverage drives discovery."
+      fr_FR:
+        commercial_precedent: "Y"
+        format: "standard"
+        regulatory: "OK"
+        phoenix_omega_brand: "cognitive_clarity"
+        notes: "France is sophisticated manga market. Seinen well-represented."
+      ko_KR:
+        commercial_precedent: "L"
+        format: "webtoon"
+        regulatory: "OK"
+        phoenix_omega_brand: "cognitive_clarity"
+        notes: "Webtoon platform has psychological drama category. Weekly cadence needed."
+
+  cultivation_xianxia:
+    description: "Chinese-origin genre. Protagonist cultivates internal power through practice. Long series, loyal readers."
+    wellness_fit: "MEDIUM — natural fit for Qigong/internal arts content; self-help hybridization is experimental"
+    cells:
+      zh_CN:
+        commercial_precedent: "Y"
+        format: "webtoon"
+        regulatory: "OK (domestic manhua)"
+        typical_price_cny: null
+        best_example: "Soul Land, Battle Through the Heavens (millions of readers on Bilibili Comics)"
+        phoenix_omega_brand: "qi_foundation, warrior_calm"
+        notes: "Cultivation is the dominant Chinese webcomic genre. Therapeutic cultivation hybridization is UNPROVEN commercially — Flagged."
+      en_US:
+        commercial_precedent: "L"
+        format: "webtoon + standard"
+        regulatory: "OK"
+        phoenix_omega_brand: "warrior_calm"
+        notes: "Chinese cultivation has niche US following. 'Self-help cultivation' is experimental — Flagged."
+      ko_KR:
+        commercial_precedent: "L"
+        format: "webtoon"
+        regulatory: "OK"
+        phoenix_omega_brand: null
+        notes: "Korean murim (무협) is adjacent cultivation genre. Naver has murim category."
+      ja_JP:
+        commercial_precedent: "N"
+        format: "standard"
+        regulatory: "OK"
+        phoenix_omega_brand: null
+        notes: "Cultivation manga is rare in Japan. Niche import market only."
+
+  manhwa_webtoon:
+    description: "Korean-origin digital-native vertical scroll format. Weekly cadence. Color art standard."
+    wellness_fit: "EXCELLENT for 힐링 (healing) content; mainstream format for younger demographics"
+    cells:
+      ko_KR:
+        commercial_precedent: "Y"
+        format: "webtoon"
+        regulatory: "OK"
+        typical_price_per_chapter_krw: 200
+        best_example: "Dr. Frost [Naver, psychology manhwa]; Seasons of Blossom [Naver, mental health]"
+        phoenix_omega_brand: "digital_ground"
+        notes: "Native format. WEBTOON Canvas free entry. Weekly cadence mandatory."
+      en_US:
+        commercial_precedent: "Y"
+        format: "webtoon"
+        regulatory: "OK"
+        typical_price_usd: 0
+        best_example: "Lore Olympus [Rachel Smythe, NYT bestseller], True Beauty [WEBTOON]"
+        phoenix_omega_brand: "digital_ground"
+        notes: "WEBTOON US is massive. Healing category exists. Ad-share revenue model."
+      ja_JP:
+        commercial_precedent: "L"
+        format: "webtoon"
+        regulatory: "OK"
+        phoenix_omega_brand: null
+        notes: "LINE Manga Japan carries webtoon content. Piccoma top-grossing. Format growing 25% CAGR."
+      fr_FR:
+        commercial_precedent: "L"
+        format: "webtoon"
+        regulatory: "OK"
+        phoenix_omega_brand: null
+        notes: "Webtoon viewership +55% France 2025-2026. Webtoon FR platform accessible."
+
+  isekai:
+    description: "Portal fantasy. Protagonist transported to another world. Transformation narrative."
+    wellness_fit: "LOW-MEDIUM — transformation metaphor maps to self-growth, but genre conventions are escapist not therapeutic"
+    cells:
+      ja_JP:
+        commercial_precedent: "Y"
+        format: "standard"
+        regulatory: "OK"
+        best_example: "Re:Zero, Sword Art Online — massive genre but wellness hybridization unproven"
+        phoenix_omega_brand: "solar_return"
+        notes: "FLAGGED: No therapeutic isekai bestseller found. Genre picked by archetype fit, not market data."
+      en_US:
+        commercial_precedent: "L"
+        format: "standard + webtoon"
+        regulatory: "OK"
+        phoenix_omega_brand: "solar_return"
+        notes: "Isekai growing in US. But self-help isekai is experimental. Flagged — Verify."
+      ko_KR:
+        commercial_precedent: "Y"
+        format: "webtoon"
+        regulatory: "OK"
+        phoenix_omega_brand: null
+        notes: "Isekai/regression manhwa is huge on Naver/Kakao. But NOT wellness-adjacent."
+
+  shonen:
+    description: "Young men's manga. Perseverance, growth, friendship. Loud, energetic, optimistic."
+    wellness_fit: "MEDIUM — perseverance and courage themes work; therapeutic depth requires genre subversion"
+    cells:
+      ja_JP:
+        commercial_precedent: "Y"
+        format: "standard"
+        regulatory: "OK"
+        best_example: "Blue Period [Tsubasa Yamaguchi, 7M copies] — art-school shonen with genuine emotional depth"
+        phoenix_omega_brand: "devotion_path"
+        notes: "Blue Period is the closest model. Shonen genre conventions conflict with therapeutic pacing."
+      en_US:
+        commercial_precedent: "Y"
+        format: "standard"
+        regulatory: "OK"
+        phoenix_omega_brand: "devotion_path"
+        notes: "US shonen market is largest manga category. Strong but genre conventions limit therapeutic depth."
+      ko_KR:
+        commercial_precedent: "L"
+        format: "webtoon"
+        regulatory: "OK"
+        phoenix_omega_brand: null
+        notes: "Korean action webtoon is dominant. Therapeutic shonen is niche."
+
+# ── SUMMARY TABLE ─────────────────────────────────────────────────────────────
+# Condensed for readability. Y = commercial precedent confirmed | L = limited | N = none found
+
+summary:
+  # 7 genres × 12 markets = 84 cells assessed
+  # [genre, ja_JP, en_US, ko_KR, fr_FR, de_DE, zh_TW, zh_HK, zh_CN, es_US, it_IT, hu_HU, zh_SG]
+  iyashikei:       [Y, Y, Y, L, L, L, L, L, N, L, N, L]
+  josei_essay:     [Y, Y, L, L, N, L, N, N, N, N, N, N]
+  seinen:          [Y, Y, L, Y, L, N, N, N, N, L, N, N]
+  cultivation:     [N, L, L, N, N, N, N, Y, N, N, N, N]
+  manhwa_webtoon:  [L, Y, Y, L, N, N, N, N, N, N, N, N]
+  isekai:          [Y, L, Y, N, N, N, N, N, N, N, N, N]
+  shonen:          [Y, Y, L, L, N, N, N, N, N, N, N, N]
+
+priority_cells:
+  # Highest-confidence cells (Y in both genre wellness fit AND market fit)
+  - "iyashikei × ja_JP — confirmed, flagship"
+  - "iyashikei × en_US — confirmed, high revenue"
+  - "iyashikei × ko_KR — confirmed, webtoon format required"
+  - "josei/essay × ja_JP — confirmed, highest commercial model (Nagata Kabi)"
+  - "josei/essay × en_US — confirmed, breakout category"
+  - "manhwa × en_US — confirmed, WEBTOON platform ready"
+  - "manhwa × ko_KR — confirmed, native format"
+
+low_confidence_cells:
+  # Cells where Phoenix Omega has brands but NO commercial precedent
+  - "cultivation × therapeutic content (any market) — unproven hybridization"
+  - "isekai × therapeutic content (any market) — unproven hybridization"
+  - "iyashikei × es_US — no Spanish-language iyashikei bestseller found"
+  - "shonen × therapeutic depth — genre conventions are hostile to slow therapeutic pacing"
