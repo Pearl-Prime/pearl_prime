@@ -1,0 +1,34 @@
+{
+  "canary_version": 1,
+  "pipeline_reference": "scripts/run_pipeline.py (EI slice: chapter prose + dimension gates + safety)",
+  "repo_root": "/Users/ahjan/phoenix_omega",
+  "gates_passed": [
+    "uniqueness",
+    "cohesion",
+    "listen_experience"
+  ],
+  "gates_blocked": [
+    "engagement",
+    "somatic_precision"
+  ],
+  "gates_missing": [],
+  "missing_modules": [],
+  "errors": [],
+  "overall_status": "FAIL",
+  "evidence_dir": "/Users/ahjan/phoenix_omega/artifacts/canary/20260420T084605Z",
+  "sentinel": {
+    "persona_id": "gen_z_professionals",
+    "topic_id": "overthinking",
+    "engine_id": "PERMISSION",
+    "format_id": "standard_20ch",
+    "atoms_canonical_path": "atoms/gen_z_professionals/overthinking/PERMISSION/CANONICAL.txt"
+  },
+  "dimension_gates_fail_mode": "block",
+  "dimension_gate_phase": 3,
+  "safety_classifier": {
+    "risk_score": 0.0,
+    "reason_codes": [],
+    "mode": "heuristic_plus"
+  },
+  "fatal_errors": []
+}

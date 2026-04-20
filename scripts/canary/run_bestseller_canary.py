@@ -124,7 +124,14 @@ def resolve_sentinel_tuple(
 
     topic_dir = repo_root / "atoms" / persona / topic
     engines = list_engine_candidates(topic_dir)
-    engine_used = preferred_engine if preferred_engine in engines else (engines[0] if engines else "")
+    # Case-insensitive match: config may say "reflection" but dir is "REFLECTION"
+    engines_lower = {e.lower(): e for e in engines}
+    if preferred_engine in engines:
+        engine_used = preferred_engine
+    elif preferred_engine.lower() in engines_lower:
+        engine_used = engines_lower[preferred_engine.lower()]
+    else:
+        engine_used = engines[0] if engines else ""
     if not engine_used:
         return persona, topic, "", fmt, Path(), ""
 

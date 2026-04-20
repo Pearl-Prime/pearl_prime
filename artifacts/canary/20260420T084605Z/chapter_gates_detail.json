@@ -1,0 +1,48 @@
+{
+  "gates": [
+    {
+      "dimension": "engagement",
+      "status": "WARN",
+      "score": 0.3,
+      "issues": [],
+      "remediation": [],
+      "implementation": true
+    },
+    {
+      "dimension": "somatic_precision",
+      "status": "WARN",
+      "score": 0.25,
+      "issues": [],
+      "remediation": [],
+      "implementation": true
+    },
+    {
+      "dimension": "uniqueness",
+      "status": "PASS",
+      "score": 1.0,
+      "issues": [],
+      "remediation": [],
+      "implementation": true
+    },
+    {
+      "dimension": "cohesion",
+      "status": "PASS",
+      "score": 1.0,
+      "issues": [],
+      "remediation": [],
+      "implementation": true
+    },
+    {
+      "dimension": "listen_experience",
+      "status": "PASS",
+      "score": 0.78,
+      "issues": [
+        "paragraph breaks too sparse or too choppy for breath pacing",
+        "insufficient_paragraph_breaks"
+      ],
+      "remediation": [],
+      "implementation": true
+    }
+  ],
+  "excerpt_word_count": 24
+}
