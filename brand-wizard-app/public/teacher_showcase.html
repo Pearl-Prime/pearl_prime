@@ -97,6 +97,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 .video-container.landscape::before { content: '\25B6'; font-size: 2.5rem; color: var(--amber); opacity: 0.3; }
 .video-label { font-family: var(--mono); font-size: 0.65rem; color: var(--text-muted); margin-top: 4px; text-align: center; }
 .video-note { font-family: var(--mono); font-size: 0.6rem; color: var(--text-muted); }
+.video-reel-wrap { max-width: min(100%, 360px); margin: 0 auto; aspect-ratio: 9 / 16; border-radius: 12px; overflow: hidden; background: #111; border: 1px solid var(--border); }
+.video-reel-wrap video { width: 100%; height: 100%; object-fit: contain; display: block; background: #000; }
 
 /* Manga Gallery */
 .manga-gallery { display: flex; gap: 8px; overflow-x: auto; padding: 8px 0; }
@@ -415,6 +417,19 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="video-label">Instagram / Reels (90s)</div>
           </div>
         </div>
+      </div>
+
+      <div class="section-toggle" onclick="toggleSection('ahjan_video_example')">
+        <span class="toggle-arrow" id="arr_ahjan_video_example">▸</span> Video — example reel
+      </div>
+      <div id="ahjan_video_example" class="collapsible" style="display:none">
+        <p class="listen-meta" style="margin:0 0 12px">Official teacher reel · 9:16 vertical</p>
+        <div class="video-reel-wrap">
+          <video controls playsinline preload="metadata" poster="assets/covers/kdp/ahjan_audiobook.png">
+            <source src="assets/video/teacher_reels/ahjan_reel.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-label" style="margin-top:8px">Teacher reel</div>
       </div>
 
       <!-- READ MANGA -->
@@ -1487,6 +1502,19 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="video-label">TikTok (90s)</div>
           </div>
         </div>
+      </div>
+
+      <div class="section-toggle" onclick="toggleSection('adi_da_video_example')">
+        <span class="toggle-arrow" id="arr_adi_da_video_example">▸</span> Video — example reel
+      </div>
+      <div id="adi_da_video_example" class="collapsible" style="display:none">
+        <p class="listen-meta" style="margin:0 0 12px">Official teacher reel · 9:16 vertical</p>
+        <div class="video-reel-wrap">
+          <video controls playsinline preload="metadata" poster="assets/covers/kdp/adi_da_audiobook.png">
+            <source src="assets/video/teacher_reels/adi_da_reel.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-label" style="margin-top:8px">Teacher reel</div>
       </div>
 
       <!-- READ MANGA -->
@@ -6775,6 +6803,19 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="video-label">TikTok (90s)</div>
           </div>
         </div>
+      </div>
+
+      <div class="section-toggle" onclick="toggleSection('master_wu_video_example')">
+        <span class="toggle-arrow" id="arr_master_wu_video_example">▸</span> Video — example reel
+      </div>
+      <div id="master_wu_video_example" class="collapsible" style="display:none">
+        <p class="listen-meta" style="margin:0 0 12px">Official teacher reel · 9:16 vertical</p>
+        <div class="video-reel-wrap">
+          <video controls playsinline preload="metadata" poster="assets/covers/cover_master_wu_courage.png">
+            <source src="assets/video/teacher_reels/wu_reel.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-label" style="margin-top:8px">Teacher reel</div>
       </div>
 
       <!-- READ MANGA -->
