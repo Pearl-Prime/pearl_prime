@@ -4,18 +4,21 @@ Shared LLM client for localization scripts.
 
 Provider chain (first match wins):
 
-  0. DEEPSEEK (preferred for CJK):  Set DEEPSEEK_API_KEY.
-  1. TOGETHER AI:                   Set TOGETHER_API_KEY.
-  2. DASHSCOPE (cloud):             Set DASHSCOPE_API_KEY.
-  3. OLLAMA (Pearl Star):           Set OLLAMA_HOST or QWEN_BASE_URL containing :11434.
-  4. LOCAL (LM Studio):             Fallback to http://127.0.0.1:1234.
+  0. DEEPSEEK (preferred for zh-CN/zh-TW): Set DEEPSEEK_API_KEY.
+  1. TOGETHER AI:                          Set TOGETHER_API_KEY.
+  2. GEMINI FLASH (free — ja-JP):          Set GOOGLE_AI_API_KEY.
+  3. DASHSCOPE (cloud):                    Set DASHSCOPE_API_KEY.
+  4. OLLAMA (Pearl Star):                  Set OLLAMA_HOST or QWEN_BASE_URL containing :11434.
+  5. LOCAL (LM Studio):                    Fallback to http://127.0.0.1:1234.
 
 Environment variables:
-  DEEPSEEK_API_KEY    — DeepSeek API key (enables DeepSeek mode — preferred for zh-CN/zh-TW/ja-JP)
+  DEEPSEEK_API_KEY    — DeepSeek API key (preferred for zh-CN/zh-TW — deepseek-chat V3)
   DEEPSEEK_MODEL      — Override DeepSeek model (default: deepseek-chat = DeepSeek V3)
   TOGETHER_API_KEY    — Together AI key (enables Together mode)
+  GOOGLE_AI_API_KEY   — Google AI Studio key (Gemini 2.0 Flash — free 1M tokens/day, use for ja-JP)
+  GEMINI_MODEL        — Override Gemini model (default: gemini-2.0-flash)
   DASHSCOPE_API_KEY   — Dashscope API key (enables cloud mode)
-  PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY — if 1/true: skip DeepSeek+Together, use DashScope
+  PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY — if 1/true: skip DeepSeek+Together+Gemini, use DashScope
   OLLAMA_HOST         — Ollama endpoint (enables Ollama mode)
   QWEN_BASE_URL       — If contains :11434, treated as Ollama endpoint
 
@@ -47,6 +50,18 @@ TOGETHER_MODELS = {
     "draft": "Qwen/Qwen2.5-7B-Instruct-Turbo",      # fast, cheap — equivalent to qwen-turbo
     "judge": "Qwen/Qwen3-235B-A22B-Instruct-2507-tput",  # best quality — equivalent to qwen-max
 }
+
+# Google AI Studio — Gemini 2.0 Flash (free 1M tokens/day; preferred for ja-JP).
+# OpenAI-compatible endpoint — works with the openai Python SDK directly.
+GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
+GEMINI_DEFAULT_MODEL = "gemini-2.0-flash"  # free tier: 15 RPM, 1M TPM, 1500 RPD
+GEMINI_MAX_TOKENS_CAP = 8192  # Gemini 2.0 Flash max output tokens
+
+# Cloudflare Workers AI — Gemma 3 12B (unlimited free tier; ultimate fallback).
+# Base URL comes from CLOUDFLARE_AI_BASE_URL env var (accounts/<ID>/ai/v1).
+# Implemented in pearl_news via PR #507; wired here for localization fallback.
+CLOUDFLARE_AI_DEFAULT_MODEL = "@cf/google/gemma-3-12b-it"
+CLOUDFLARE_AI_MAX_TOKENS_CAP = 8192
 
 # DashScope (fallback — Alibaba Cloud, requires active billing).
 DASHSCOPE_BASE_URL = os.environ.get(
@@ -90,7 +105,10 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
 
     deepseek_key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
     together_key = os.environ.get("TOGETHER_API_KEY", "").strip()
+    google_ai_key = os.environ.get("GOOGLE_AI_API_KEY", "").strip()
     dashscope_key = os.environ.get("DASHSCOPE_API_KEY", "").strip()
+    cf_ai_base = os.environ.get("CLOUDFLARE_AI_BASE_URL", "").strip()
+    cf_ai_token = os.environ.get("CLOUDFLARE_AI_API_TOKEN", "").strip()
     dashscope_only = os.environ.get("PHOENIX_TRANSLATION_USE_DASHSCOPE_ONLY", "").strip().lower() in (
         "1",
         "true",
@@ -138,6 +156,48 @@ def get_client_config(cfg: dict[str, Any], role: str = "draft") -> dict[str, Any
             "enable_thinking": False,
         }
         logger.debug("LLM client: Together AI mode, model=%s", together_model)
+
+    elif google_ai_key and not dashscope_only:
+        # ── GEMINI FLASH MODE (free 1M tokens/day — preferred for ja-JP) ────────
+        gemini_model = (
+            os.environ.get("GEMINI_MODEL", "").strip()
+            or GEMINI_DEFAULT_MODEL
+        )
+        raw_max = int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000)))
+        resolved = {
+            "base_url": GEMINI_BASE_URL,
+            "api_key": google_ai_key,
+            "model_id": gemini_model,
+            "temperature": float(model_cfg.get("temperature", 0.6)),
+            "max_tokens": min(raw_max, GEMINI_MAX_TOKENS_CAP),
+            "timeout": float(model_cfg.get("timeout_seconds", model_cfg.get("timeout", 180))),
+            "mode": "gemini",
+            "enable_thinking": False,
+        }
+        logger.debug("LLM client: Gemini Flash mode, model=%s, max_tokens=%d", gemini_model, resolved["max_tokens"])
+
+    elif cf_ai_base and cf_ai_token and not dashscope_only:
+        # ── CLOUDFLARE WORKERS AI MODE (unlimited free — Gemma 3 12B) ───────────
+        cf_model = (
+            os.environ.get("CLOUDFLARE_AI_MODEL", "").strip()
+            or CLOUDFLARE_AI_DEFAULT_MODEL
+        )
+        raw_max = int(model_cfg.get("max_output_tokens", model_cfg.get("max_tokens", 2000)))
+        # Ensure base URL ends with /v1 for OpenAI compat
+        base_url = cf_ai_base.rstrip("/")
+        if not base_url.endswith("/v1"):
+            base_url = base_url + "/v1"
+        resolved = {
+            "base_url": base_url,
+            "api_key": cf_ai_token,
+            "model_id": cf_model,
+            "temperature": float(model_cfg.get("temperature", 0.6)),
+            "max_tokens": min(raw_max, CLOUDFLARE_AI_MAX_TOKENS_CAP),
+            "timeout": float(model_cfg.get("timeout_seconds", model_cfg.get("timeout", 180))),
+            "mode": "cloudflare",
+            "enable_thinking": False,
+        }
+        logger.debug("LLM client: Cloudflare Workers AI mode, model=%s", cf_model)
 
     elif dashscope_key:
         # ── DASHSCOPE MODE (fallback) ────────────────────────────────────────
@@ -351,6 +411,16 @@ def preflight_check(cfg: dict[str, Any]) -> tuple[bool, str]:
         if params["api_key"]:
             return True, f"together mode: TOGETHER_API_KEY set, model={params['model_id']}"
         return False, "together mode: TOGETHER_API_KEY is empty"
+
+    if mode == "gemini":
+        if params["api_key"]:
+            return True, f"gemini mode: GOOGLE_AI_API_KEY set, model={params['model_id']}"
+        return False, "gemini mode: GOOGLE_AI_API_KEY is empty"
+
+    if mode == "cloudflare":
+        if params["api_key"]:
+            return True, f"cloudflare mode: CLOUDFLARE_AI_API_TOKEN set, model={params['model_id']}"
+        return False, "cloudflare mode: CLOUDFLARE_AI_API_TOKEN is empty"
 
     if mode == "cloud":
         if params["api_key"]:

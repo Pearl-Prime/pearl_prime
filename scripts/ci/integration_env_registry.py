@@ -31,8 +31,10 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("Ollama", "OLLAMA_HOST", False, "Local Ollama endpoint"),
     ("Ollama", "OLLAMA_MODEL", False, "Local Ollama model"),
     # --- CJK translation providers ---
-    ("DeepSeek", "DEEPSEEK_API_KEY", False, "CJK translation (zh-CN/zh-TW/ja-JP) — deepseek-chat (V3). Get: platform.deepseek.com/api_keys"),
+    ("DeepSeek", "DEEPSEEK_API_KEY", False, "zh-CN/zh-TW translation — deepseek-chat (V3). Get: platform.deepseek.com/api_keys"),
     ("DeepSeek", "DEEPSEEK_MODEL", False, "DeepSeek model override (default: deepseek-chat)"),
+    ("Google AI Studio", "GOOGLE_AI_API_KEY", False, "ja-JP translation — Gemini 2.0 Flash, 1M tokens/day free. Get: aistudio.google.com/apikey"),
+    ("Google AI Studio", "GEMINI_MODEL", False, "Gemini model override (default: gemini-2.0-flash)"),
     # --- Free-tier LLM providers (EN / non-CJK article expansion) ---
     ("Groq", "GROQ_API_KEY", False, "Free EN default: llama-3.3-70b-versatile. Get: console.groq.com/keys"),
     ("xAI / Grok", "XAI_API_KEY", False, "Free EN fallback 1: grok-3-mini. $25/mo free credits. Get: console.x.ai"),
