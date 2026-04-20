@@ -595,11 +595,14 @@ def main() -> int:
         os.environ.get("DEEPSEEK_API_KEY", "").strip()
         or os.environ.get("DASHSCOPE_API_KEY", "").strip()
         or os.environ.get("TOGETHER_API_KEY", "").strip()
+        or os.environ.get("GOOGLE_AI_API_KEY", "").strip()
+        or os.environ.get("CLOUDFLARE_AI_API_TOKEN", "").strip()
     )
     if not args.dry_run and not _has_llm_key:
         print(
             "No LLM API key found. Set DEEPSEEK_API_KEY (preferred), "
-            "DASHSCOPE_API_KEY, or TOGETHER_API_KEY unless --dry-run.",
+            "DASHSCOPE_API_KEY, TOGETHER_API_KEY, GOOGLE_AI_API_KEY, "
+            "or CLOUDFLARE_AI_API_TOKEN unless --dry-run.",
             file=sys.stderr,
         )
         return 2
