@@ -153,6 +153,51 @@
       border-radius: 6px; border: 1px solid var(--border); background: var(--panel); color: var(--text); cursor: pointer; font-size: 13px;
     }
     .drawer code.path { font-size: 11px; display: block; padding: 8px; background: #0b0d11; border-radius: 6px; border: 1px solid var(--border); word-break: break-all; }
+    /* ── Brand section header ── */
+    .brand-section { margin-bottom: 28px; }
+    .brand-header {
+      display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;
+      padding: 8px 0 6px; border-bottom: 2px solid var(--border); margin-bottom: 10px;
+    }
+    .brand-header h2 { margin: 0; font-size: 16px; font-weight: 700; }
+    .brand-stats {
+      display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px;
+      color: var(--muted); padding: 6px 10px; background: var(--panel);
+      border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px;
+    }
+    .brand-stats span { white-space: nowrap; }
+    .brand-stats b { color: var(--text); }
+    /* ── Topic chips ── */
+    .topic-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .topic-chip {
+      font-size: 11px; padding: 2px 9px; border-radius: 999px;
+      border: 1px solid; font-weight: 500;
+    }
+    .tc-somatic    { background: #0e3230; border-color: #2a9d8f; color: #7fe8df; }
+    .tc-cognitive  { background: #1a1a40; border-color: #4c4fc4; color: #b3b4ff; }
+    .tc-relational { background: #3d2800; border-color: #e7a31b; color: #ffe08a; }
+    .tc-financial  { background: #0d3320; border-color: #2d6a4f; color: #7ee8b0; }
+    .tc-default    { background: #222; border-color: var(--border); color: var(--muted); }
+    /* ── Platform cadence table in drawer ── */
+    .cadence-table { width: 100%; border-collapse: collapse; font-size: 12px; font-family: monospace; margin-top: 4px; }
+    .cadence-table td { padding: 3px 6px; border-bottom: 1px solid #1e2530; }
+    .cadence-table td:first-child { color: var(--muted); width: 55%; }
+    /* ── Research panel ── */
+    .research-panel {
+      border-top: 1px solid var(--border); background: #12161d;
+      padding: 0 16px;
+    }
+    .research-panel summary {
+      padding: 10px 0; cursor: pointer; font-size: 13px; color: var(--muted);
+      font-weight: 600; user-select: none; list-style: none;
+    }
+    .research-panel summary::before { content: "▸ "; }
+    .research-panel[open] summary::before { content: "▾ "; }
+    .research-panel ul { margin: 0 0 10px; padding-left: 18px; }
+    .research-panel li { font-size: 13px; padding: 3px 0; }
+    .research-panel a { color: var(--accent); text-decoration: none; cursor: pointer; }
+    .research-panel a:hover { text-decoration: underline; }
+    .research-notice { font-size: 11px; color: var(--muted); margin: 0 0 8px; font-style: italic; }
   </style>
 </head>
 <body>
@@ -167,6 +212,11 @@
       <div id="content"></div>
     </main>
   </div>
+  <details class="research-panel" id="research-panel">
+    <summary>Research &amp; Strategy</summary>
+    <p class="research-notice">Source research — not live links, open from repo root.</p>
+    <ul id="research-links-list"></ul>
+  </details>
   <div class="drawer-backdrop" id="backdrop"></div>
   <aside class="drawer" id="drawer"></aside>
   <script type="application/json" id="manga-data">[
@@ -175,9 +225,9 @@
     "catalog_id": "en_us_core",
     "locale": "en_US",
     "series_id": "cognitive_clarity_seinen",
-    "series_title": null,
-    "series_logline": null,
-    "series_description": null,
+    "series_title": "The Question That Stays",
+    "series_logline": "For the reader who suspects the story they've been telling themselves might not be the whole story.",
+    "series_description": "A cognitive_clarity seinen series for readers who have over-explained themselves\ninto exhaustion. Psychological mystery format — arc-based, hidden_truth_glimpse\nchapter hooks, polished seinen linework. The investigation is always the reader\nthemselves. No resolution is delivered; the wonder is the destination.",
     "market_demo": "seinen",
     "genre_family": "mystery",
     "subgenre": "psychological_self_inquiry",
@@ -185,26 +235,72 @@
     "serialization_engine": "arc_based",
     "visual_grammar": "polished_seinen",
     "reader_promise": "You will stop explaining yourself and discover what remains when the thought stops.",
-    "positioning": null,
-    "audience": null,
-    "comp_titles": null,
-    "marketing_angle": null,
-    "hook_lines": null,
-    "launch_priority": null,
+    "positioning": "For readers of Vagabond and Planetes who also want a series that asks better questions instead of offering answers.",
+    "audience": "He is 28-45, reads widely, thinks too much, and has noticed that thinking\nmore hasn't solved the thinking. At 11pm he is three browsers deep into a\nquestion that started with something small. He is ready for a series that\ndoesn't give him another framework — just the sensation of not needing one.",
+    "comp_titles": [
+      "Vagabond (Takehiko Inoue)",
+      "Planetes (Makoto Yukimura)",
+      "Ping Pong the Animation (Taiyo Matsumoto)",
+      "Flow: The Psychology of Optimal Experience (Mihaly Csikszentmihalyi)"
+    ],
+    "marketing_angle": "A psychological mystery series where the investigation is always the reader\nthemselves: arc-based structure with hidden_truth_glimpse chapter hooks and\npolished seinen linework deliver the experience of noticing that you've been\nthe unreliable narrator all along. No resolution — the wonder IS the point.",
+    "hook_lines": [
+      "The mystery is you. Work it out.",
+      "Every chapter shows you what you missed.",
+      "Stop explaining. See what's actually here."
+    ],
+    "launch_priority": "P1",
     "status": "active",
-    "main_character_name": null,
-    "main_character_role": null,
+    "main_character_name": "Kenji",
+    "main_character_role": "overqualified analyst questioning everything",
     "main_character_image_path": null,
-    "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/cognitive_clarity_seinen.yaml"
+    "plan_source_path": "config/source_of_truth/manga_profiles/brands/cognitive_clarity_seinen.yaml",
+    "teacher": "joshin",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 3,
+    "max_chapters_before_volume": 12,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "overthinking": "1 series",
+      "imposter_syndrome": "1 series",
+      "burnout": "1 series",
+      "boundaries": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "bi_weekly",
+      "japan": "bi_weekly",
+      "korea": "bi_weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
   },
   {
     "brand_id": "stillness_press",
     "catalog_id": "en_us_core",
     "locale": "en_US",
     "series_id": "stillness_press_iyashikei",
-    "series_title": null,
-    "series_logline": null,
-    "series_description": null,
+    "series_title": "The Alarm Still Rings",
+    "series_logline": "For when the anxiety hasn't stopped, and you need somewhere to be anyway.",
+    "series_description": "A stillness_press iyashikei series for josei readers living inside ongoing anxiety.\nNot a recovery story — a restoration practice. Long wordless sequences, earth-tone\nwatercolor space, and near-zero ink fill create a visual grammar the body responds\nto before the brain does. Each chapter leaves the reader quieter than when they arrived.",
     "market_demo": "josei",
     "genre_family": "healing",
     "subgenre": "anxiety_somatic_recovery",
@@ -212,17 +308,62 @@
     "serialization_engine": "mood_based",
     "visual_grammar": "iyashikei_minimalism",
     "reader_promise": "You will find your way back to stillness even when the alarm is still ringing.",
-    "positioning": null,
-    "audience": null,
-    "comp_titles": null,
-    "marketing_angle": null,
-    "hook_lines": null,
-    "launch_priority": null,
+    "positioning": "For readers of Mushishi and Laid-Back Camp who also want a series that offers stillness as something you practice, not achieve.",
+    "audience": "She is 25-42, her body knows things her brain hasn't caught up to yet —\nthe tight chest at the third email, the shoulder that doesn't drop.\nAt 11pm she is not reading about anxiety; she is in it.\nShe wants a series that does not explain what she already lives,\nbut sits with her in it.",
+    "comp_titles": [
+      "Mushishi (Yuki Urushibara)",
+      "Laid-Back Camp (Afro)",
+      "My Lesbian Experience With Loneliness (Nagata Kabi)",
+      "The Body Keeps the Score (Bessel van der Kolk)"
+    ],
+    "marketing_angle": "This series doesn't explain somatic healing — it practices it.\nNear-wordless pages (45% silent panels) and near-zero ink fill create\na visual grammar your body responds to before your brain does:\nthe pacing IS the restoration.",
+    "hook_lines": [
+      "Still counts as progress.",
+      "Your body already knows what you're carrying.",
+      "Read this until your shoulders drop."
+    ],
+    "launch_priority": "P0",
     "status": "active",
-    "main_character_name": null,
-    "main_character_role": null,
+    "main_character_name": "Sora",
+    "main_character_role": "freelance designer between projects",
     "main_character_image_path": null,
-    "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/stillness_press_iyashikei.yaml"
+    "plan_source_path": "config/source_of_truth/manga_profiles/brands/stillness_press_iyashikei.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
   },
   {
     "brand_id": "cognitive_clarity",
@@ -258,7 +399,44 @@
     "main_character_name": "Kai",
     "main_character_role": "first-generation martial arts student",
     "main_character_image_path": null,
-    "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/examples/example_battle_shonen.yaml"
+    "plan_source_path": "config/source_of_truth/manga_profiles/examples/example_battle_shonen.yaml",
+    "teacher": "joshin",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 3,
+    "max_chapters_before_volume": 12,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "overthinking": "1 series",
+      "imposter_syndrome": "1 series",
+      "burnout": "1 series",
+      "boundaries": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "bi_weekly",
+      "japan": "bi_weekly",
+      "korea": "bi_weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
   },
   {
     "brand_id": "stillness_press",
@@ -294,7 +472,43 @@
     "main_character_name": "Akari",
     "main_character_role": "overworked junior art director",
     "main_character_image_path": null,
-    "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/examples/example_josei_workplace.yaml"
+    "plan_source_path": "config/source_of_truth/manga_profiles/examples/example_josei_workplace.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
   },
   {
     "brand_id": "stillness_press",
@@ -330,7 +544,43 @@
     "main_character_name": "Nao",
     "main_character_role": "overextended project coordinator",
     "main_character_image_path": null,
-    "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/examples/stillness_press_anxiety_overwhelm.yaml"
+    "plan_source_path": "config/source_of_truth/manga_profiles/examples/stillness_press_anxiety_overwhelm.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
   }
 ]</script>
   <script>
@@ -534,13 +784,25 @@
       SERIES.forEach((r) => { if (!marketingGaps(r).length) fullM++; });
       const missM = n - fullM;
       const p0 = SERIES.filter((r) => lpKey(r.launch_priority) === "P0").length;
+      // Sum per-brand targets (deduplicate by brand_id so we count each brand once)
+      const brandsSeen = new Set();
+      let totalSeriesTarget = 0, totalVolTarget = 0;
+      SERIES.forEach((r) => {
+        if (r.brand_id && !brandsSeen.has(r.brand_id)) {
+          brandsSeen.add(r.brand_id);
+          if (r.active_series_target) totalSeriesTarget += r.active_series_target;
+          if (r.volumes_per_year_target) totalVolTarget += r.volumes_per_year_target;
+        }
+      });
       return ""
         + "<span class=\"pill\">Total series: <b>" + n + "</b></span>"
         + "<span class=\"pill green\">With character image: " + withImg + "</span>"
         + "<span class=\"pill amber\">Missing image: " + missImg + "</span>"
         + "<span class=\"pill green\">Full marketing metadata: " + fullM + "</span>"
         + "<span class=\"pill amber\">Marketing gaps: " + missM + "</span>"
-        + "<span class=\"pill\">P0 releases: " + p0 + "</span>";
+        + "<span class=\"pill\">P0 releases: " + p0 + "</span>"
+        + "<span class=\"pill\">Active series targets: <b>" + totalSeriesTarget + "</b></span>"
+        + "<span class=\"pill\">Volume targets/year: <b>" + totalVolTarget + "</b></span>";
     }
 
     function sortRows(rows) {
@@ -593,39 +855,94 @@
       return "lp-unset";
     }
 
-    function cardView(rows) {
-      let h = "<div class=\"grid\">";
-      rows.forEach((row) => {
-        const src = imgSrc(row);
-        const title = escHtml(row.series_title || row.series_id || "");
-        const logline = escHtml(row.series_logline || "");
-        const angle = escHtml(row.marketing_angle || "");
-        const comps = (row.comp_titles || []).map(escHtml).join(", ");
-        const hero = src
-          ? "<div class=\"hero\"><img src=\"" + escAttr(src) + "\" alt=\"\" /></div>"
-          : "<div class=\"hero\"><span class=\"badge-missing\">Missing in plan</span></div>";
-        h += "<article class=\"card\" data-id=\"" + escAttr(row.series_id) + "\">";
-        h += hero;
-        h += "<div class=\"body\">";
-        h += "<h3>" + title + "</h3>";
-        h += "<div class=\"logline\">" + logline + "</div>";
-        h += "<div class=\"tags\">";
-        if (row.genre_family) h += "<span class=\"tag\">" + escHtml(row.genre_family) + "</span>";
-        if (row.emotional_engine) h += "<span class=\"tag\">" + escHtml(row.emotional_engine) + "</span>";
-        if (row.reader_promise) h += "<span class=\"tag\">" + escHtml(row.reader_promise).slice(0, 40) + (row.reader_promise.length > 40 ? "…" : "") + "</span>";
-        h += "</div>";
-        h += "<div class=\"mini\">" + escHtml(angle).slice(0, 200) + "</div>";
-        if (comps) h += "<div class=\"mini\">Comp: " + comps + "</div>";
-        h += "<div class=\"badges-row\">";
-        if (row.audience || row.market_demo) h += "<span class=\"tag\">" + escHtml(row.audience || row.market_demo) + "</span>";
-        h += "<span class=\"" + lpClass(row.launch_priority) + "\">" + escHtml(lpKey(row.launch_priority)) + "</span>";
-        h += "<span class=\"tag\">" + escHtml(statusBucket(row.status)) + "</span>";
-        h += "</div>";
-        h += inlineBadges(row);
-        h += "<button type=\"button\" class=\"expand\" data-open=\"" + escAttr(row.series_id) + "\">Expand details →</button>";
-        h += "</div></article>";
+    // Map a topic slug to its family for chip coloring.
+    function topicFamily(topic) {
+      const t = topic.toLowerCase();
+      if (/financial/.test(t)) return "financial";
+      if (/somatic|sleep/.test(t)) return "somatic";
+      if (/relat|bound|compassion|social|grief|self_worth/.test(t)) return "relational";
+      return "cognitive";
+    }
+
+    function topicChipsHtml(topicAlloc) {
+      if (!topicAlloc || !Object.keys(topicAlloc).length) return "";
+      let h = "<div class=\"topic-chips\">";
+      Object.entries(topicAlloc).forEach(([topic, count]) => {
+        const fam = topicFamily(topic);
+        h += "<span class=\"topic-chip tc-" + fam + "\">" + escHtml(topic) + ": " + escHtml(String(count)) + "</span>";
       });
       h += "</div>";
+      return h;
+    }
+
+    function brandStatsHtml(row) {
+      const parts = [];
+      if (row.teacher) parts.push("Teacher: <b>" + escHtml(row.teacher) + "</b>");
+      if (row.primary_lane) parts.push("Lane: <b>" + escHtml(row.primary_lane) + "</b>");
+      if (row.active_series_target != null) parts.push("Active target: <b>" + row.active_series_target + "</b>");
+      if (row.new_series_per_year != null) parts.push("New/year: <b>" + row.new_series_per_year + "</b>");
+      if (row.chapters_per_month != null) parts.push("Cadence: <b>" + row.chapters_per_month + "ch/month</b>");
+      if (row.volumes_per_year_target != null) parts.push("Vol target: <b>" + row.volumes_per_year_target + "/year</b>");
+      if (row.max_dormant_months != null) parts.push("Max dormant: <b>" + row.max_dormant_months + "mo</b>");
+      if (!parts.length) return "";
+      return "<div class=\"brand-stats\">" + parts.map((p) => "<span>" + p + "</span>").join("") + "</div>";
+    }
+
+    function seriesCard(row) {
+      const src = imgSrc(row);
+      const title = escHtml(row.series_title || row.series_id || "");
+      const logline = escHtml(row.series_logline || "");
+      const angle = escHtml(row.marketing_angle || "");
+      const comps = (row.comp_titles || []).map(escHtml).join(", ");
+      const hero = src
+        ? "<div class=\"hero\"><img src=\"" + escAttr(src) + "\" alt=\"\" /></div>"
+        : "<div class=\"hero\"><span class=\"badge-missing\">Missing in plan</span></div>";
+      let h = "<article class=\"card\" data-id=\"" + escAttr(row.series_id) + "\">";
+      h += hero;
+      h += "<div class=\"body\">";
+      h += "<h3>" + title + "</h3>";
+      h += "<div class=\"logline\">" + logline + "</div>";
+      h += "<div class=\"tags\">";
+      if (row.genre_family) h += "<span class=\"tag\">" + escHtml(row.genre_family) + "</span>";
+      if (row.emotional_engine) h += "<span class=\"tag\">" + escHtml(row.emotional_engine) + "</span>";
+      if (row.reader_promise) h += "<span class=\"tag\">" + escHtml(row.reader_promise).slice(0, 40) + (row.reader_promise.length > 40 ? "…" : "") + "</span>";
+      h += "</div>";
+      h += "<div class=\"mini\">" + escHtml(angle).slice(0, 200) + "</div>";
+      if (comps) h += "<div class=\"mini\">Comp: " + comps + "</div>";
+      h += "<div class=\"badges-row\">";
+      if (row.audience || row.market_demo) h += "<span class=\"tag\">" + escHtml(row.audience || row.market_demo) + "</span>";
+      h += "<span class=\"" + lpClass(row.launch_priority) + "\">" + escHtml(lpKey(row.launch_priority)) + "</span>";
+      h += "<span class=\"tag\">" + escHtml(statusBucket(row.status)) + "</span>";
+      h += "</div>";
+      h += inlineBadges(row);
+      h += "<button type=\"button\" class=\"expand\" data-open=\"" + escAttr(row.series_id) + "\">Expand details →</button>";
+      h += "</div></article>";
+      return h;
+    }
+
+    function cardView(rows) {
+      // Group rows by brand_id; preserve insertion order of first occurrence.
+      const brandOrder = [];
+      const byBrand = {};
+      rows.forEach((row) => {
+        const bid = row.brand_id || "__none__";
+        if (!byBrand[bid]) { byBrand[bid] = []; brandOrder.push(bid); }
+        byBrand[bid].push(row);
+      });
+
+      let h = "";
+      brandOrder.forEach((bid) => {
+        const brandRows = byBrand[bid];
+        const rep = brandRows[0]; // representative row for brand-level plan fields
+        h += "<section class=\"brand-section\">";
+        h += "<div class=\"brand-header\"><h2>" + escHtml(bid === "__none__" ? "(no brand)" : bid) + "</h2></div>";
+        h += brandStatsHtml(rep);
+        h += topicChipsHtml(rep.topic_allocation);
+        h += "<div class=\"grid\">";
+        brandRows.forEach((row) => { h += seriesCard(row); });
+        h += "</div>";
+        h += "</section>";
+      });
       return h;
     }
 
@@ -688,11 +1005,13 @@
     }
 
     function drawerHtml(row) {
+      // Keys handled with custom rendering — skip in the generic dl loop.
+      const SKIP_GENERIC = new Set(["hook_lines", "comp_titles", "platform_cadence", "topic_allocation", "research_links"]);
       let h = "<h3>" + escHtml(row.series_title || row.series_id) + "</h3>";
       h += "<code class=\"path\">" + escHtml(row.plan_source_path || "") + "</code>";
       h += "<dl>";
       Object.keys(row).sort().forEach((k) => {
-        if (k === "hook_lines" || k === "comp_titles") return;
+        if (SKIP_GENERIC.has(k)) return;
         h += "<dt>" + escHtml(k) + "</dt><dd>" + escHtml(row[k] == null ? "" : (typeof row[k] === "object" ? JSON.stringify(row[k], null, 0) : String(row[k]))) + "</dd>";
       });
       h += "<dt>hook_lines</dt><dd><ul>";
@@ -702,7 +1021,25 @@
       h += "<dt>comp_titles</dt><dd>";
       (row.comp_titles || []).forEach((t) => { h += "<span class=\"tag\" style=\"display:inline-block;margin:2px\">" + escHtml(t) + "</span>"; });
       if (!(row.comp_titles || []).length) h += "<i>(none)</i>";
-      h += "</dd></dl>";
+      h += "</dd>";
+      // Topic allocation
+      if (row.topic_allocation && Object.keys(row.topic_allocation).length) {
+        h += "<dt>topic_allocation</dt><dd>" + topicChipsHtml(row.topic_allocation) + "</dd>";
+      }
+      // Platform cadence table
+      const cadence = row.platform_cadence || {};
+      h += "<dt>platform_cadence</dt><dd>";
+      if (Object.keys(cadence).length) {
+        h += "<table class=\"cadence-table\"><tbody>";
+        Object.entries(cadence).forEach(([locale, freq]) => {
+          h += "<tr><td>" + escHtml(locale) + "</td><td><b>" + escHtml(String(freq)) + "</b></td></tr>";
+        });
+        h += "</tbody></table>";
+      } else {
+        h += "<i>(none)</i>";
+      }
+      h += "</dd>";
+      h += "</dl>";
       const prompt = [
         row.main_character_name || "protagonist",
         row.genre_family || "",
@@ -761,6 +1098,29 @@
     }
 
     document.getElementById("backdrop").addEventListener("click", closeDrawer);
+
+    // Populate research links panel from first entry that has them.
+    (function () {
+      const entry = SERIES.find((r) => Array.isArray(r.research_links) && r.research_links.length);
+      const ul = document.getElementById("research-links-list");
+      if (ul && entry) {
+        entry.research_links.forEach((link) => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.textContent = link.label + " [open]";
+          a.title = link.path;
+          a.href = "#";
+          a.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            navigator.clipboard.writeText(link.path).catch(() => {});
+            a.textContent = link.label + " [path copied]";
+            setTimeout(() => { a.textContent = link.label + " [open]"; }, 2000);
+          });
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+      }
+    })();
 
     buildRail();
     SERIES.forEach((r) => {

@@ -26,7 +26,43 @@
       "main_character_name": null,
       "main_character_role": null,
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/body_memory_shojo.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/body_memory_shojo.yaml",
+      "teacher": "omote",
+      "primary_lane": "japan",
+      "active_series_target": 3,
+      "new_series_per_year": 4,
+      "chapters_per_month": 2,
+      "max_chapters_before_volume": 10,
+      "volumes_per_year_target": 5,
+      "topic_allocation": {
+        "somatic_healing": "1 series",
+        "self_worth": "1 series",
+        "grief": "1 series"
+      },
+      "platform_cadence": {
+        "japan": "bi_weekly",
+        "english_global": "bi_weekly",
+        "korea": "bi_weekly"
+      },
+      "max_dormant_months": 3,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "bright_presence_tw",
@@ -53,16 +89,50 @@
       "main_character_name": null,
       "main_character_role": null,
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/bright_presence_tw_seinen.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/bright_presence_tw_seinen.yaml",
+      "teacher": "adi_da",
+      "primary_lane": "taiwan",
+      "active_series_target": 3,
+      "new_series_per_year": 4,
+      "chapters_per_month": 2,
+      "max_chapters_before_volume": 10,
+      "volumes_per_year_target": 5,
+      "topic_allocation": {
+        "depression": "1 series",
+        "grief": "1 series",
+        "courage": "1 series"
+      },
+      "platform_cadence": {
+        "taiwan": "bi_weekly"
+      },
+      "max_dormant_months": 3,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "cognitive_clarity",
       "catalog_id": "en_us_core",
       "locale": "en_US",
       "series_id": "cognitive_clarity_seinen",
-      "series_title": null,
-      "series_logline": null,
-      "series_description": null,
+      "series_title": "The Question That Stays",
+      "series_logline": "For the reader who suspects the story they've been telling themselves might not be the whole story.",
+      "series_description": "A cognitive_clarity seinen series for readers who have over-explained themselves\ninto exhaustion. Psychological mystery format — arc-based, hidden_truth_glimpse\nchapter hooks, polished seinen linework. The investigation is always the reader\nthemselves. No resolution is delivered; the wonder is the destination.",
       "market_demo": "seinen",
       "genre_family": "mystery",
       "subgenre": "psychological_self_inquiry",
@@ -70,17 +140,63 @@
       "serialization_engine": "arc_based",
       "visual_grammar": "polished_seinen",
       "reader_promise": "You will stop explaining yourself and discover what remains when the thought stops.",
-      "positioning": null,
-      "audience": null,
-      "comp_titles": null,
-      "marketing_angle": null,
-      "hook_lines": null,
-      "launch_priority": null,
+      "positioning": "For readers of Vagabond and Planetes who also want a series that asks better questions instead of offering answers.",
+      "audience": "He is 28-45, reads widely, thinks too much, and has noticed that thinking\nmore hasn't solved the thinking. At 11pm he is three browsers deep into a\nquestion that started with something small. He is ready for a series that\ndoesn't give him another framework — just the sensation of not needing one.",
+      "comp_titles": [
+        "Vagabond (Takehiko Inoue)",
+        "Planetes (Makoto Yukimura)",
+        "Ping Pong the Animation (Taiyo Matsumoto)",
+        "Flow: The Psychology of Optimal Experience (Mihaly Csikszentmihalyi)"
+      ],
+      "marketing_angle": "A psychological mystery series where the investigation is always the reader\nthemselves: arc-based structure with hidden_truth_glimpse chapter hooks and\npolished seinen linework deliver the experience of noticing that you've been\nthe unreliable narrator all along. No resolution — the wonder IS the point.",
+      "hook_lines": [
+        "The mystery is you. Work it out.",
+        "Every chapter shows you what you missed.",
+        "Stop explaining. See what's actually here."
+      ],
+      "launch_priority": "P1",
       "status": "active",
-      "main_character_name": null,
-      "main_character_role": null,
+      "main_character_name": "Kenji",
+      "main_character_role": "overqualified analyst questioning everything",
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/cognitive_clarity_seinen.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/cognitive_clarity_seinen.yaml",
+      "teacher": "joshin",
+      "primary_lane": "english_global",
+      "active_series_target": 4,
+      "new_series_per_year": 5,
+      "chapters_per_month": 3,
+      "max_chapters_before_volume": 12,
+      "volumes_per_year_target": 8,
+      "topic_allocation": {
+        "overthinking": "1 series",
+        "imposter_syndrome": "1 series",
+        "burnout": "1 series",
+        "boundaries": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "bi_weekly",
+        "japan": "bi_weekly",
+        "korea": "bi_weekly"
+      },
+      "max_dormant_months": 2,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "devotion_path",
@@ -107,7 +223,43 @@
       "main_character_name": null,
       "main_character_role": null,
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/devotion_path_shonen.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/devotion_path_shonen.yaml",
+      "teacher": "sai_ma",
+      "primary_lane": "english_global",
+      "active_series_target": 3,
+      "new_series_per_year": 4,
+      "chapters_per_month": 3,
+      "max_chapters_before_volume": 12,
+      "volumes_per_year_target": 6,
+      "topic_allocation": {
+        "courage": "1 series",
+        "imposter_syndrome": "1 series",
+        "burnout": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "weekly",
+        "japan": "weekly",
+        "korea": "weekly"
+      },
+      "max_dormant_months": 2,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "digital_ground",
@@ -134,7 +286,45 @@
       "main_character_name": null,
       "main_character_role": null,
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/digital_ground_manhwa.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/digital_ground_manhwa.yaml",
+      "teacher": "miki",
+      "primary_lane": "english_global",
+      "active_series_target": 4,
+      "new_series_per_year": 5,
+      "chapters_per_month": 4,
+      "max_chapters_before_volume": 14,
+      "volumes_per_year_target": 8,
+      "topic_allocation": {
+        "financial_anxiety": "1 series",
+        "financial_stress": "1 series",
+        "social_anxiety": "1 series",
+        "imposter_syndrome": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "weekly",
+        "japan": "weekly",
+        "korea": "weekly",
+        "taiwan": "weekly"
+      },
+      "max_dormant_months": 2,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "heart_balance",
@@ -161,7 +351,43 @@
       "main_character_name": null,
       "main_character_role": null,
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/heart_balance_shojo.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/heart_balance_shojo.yaml",
+      "teacher": "maat",
+      "primary_lane": "english_global",
+      "active_series_target": 3,
+      "new_series_per_year": 4,
+      "chapters_per_month": 2,
+      "max_chapters_before_volume": 10,
+      "volumes_per_year_target": 5,
+      "topic_allocation": {
+        "self_worth": "1 series",
+        "boundaries": "1 series",
+        "compassion_fatigue": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "bi_weekly",
+        "japan": "bi_weekly",
+        "korea": "weekly"
+      },
+      "max_dormant_months": 3,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "qi_foundation",
@@ -188,7 +414,44 @@
       "main_character_name": null,
       "main_character_role": null,
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/qi_foundation_cultivation.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/qi_foundation_cultivation.yaml",
+      "teacher": "master_feung",
+      "primary_lane": "english_global",
+      "active_series_target": 3,
+      "new_series_per_year": 3,
+      "chapters_per_month": 4,
+      "max_chapters_before_volume": 16,
+      "volumes_per_year_target": 6,
+      "topic_allocation": {
+        "burnout": "1 series",
+        "anxiety": "1 series",
+        "self_worth": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "weekly",
+        "japan": "weekly",
+        "korea": "weekly",
+        "taiwan": "weekly"
+      },
+      "max_dormant_months": 2,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "relational_calm",
@@ -215,7 +478,44 @@
       "main_character_name": null,
       "main_character_role": null,
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/relational_calm_iyashikei.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/relational_calm_iyashikei.yaml",
+      "teacher": "junko",
+      "primary_lane": "japan",
+      "active_series_target": 4,
+      "new_series_per_year": 5,
+      "chapters_per_month": 3,
+      "max_chapters_before_volume": 10,
+      "volumes_per_year_target": 8,
+      "topic_allocation": {
+        "anxiety": "1 series",
+        "social_anxiety": "1 series",
+        "burnout": "1 series",
+        "sleep_anxiety": "1 series"
+      },
+      "platform_cadence": {
+        "japan": "weekly",
+        "english_global": "bi_weekly",
+        "korea": "bi_weekly"
+      },
+      "max_dormant_months": 2,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "sleep_restoration",
@@ -242,7 +542,42 @@
       "main_character_name": null,
       "main_character_role": null,
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/sleep_restoration_iyashikei.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/sleep_restoration_iyashikei.yaml",
+      "teacher": "master_sha",
+      "primary_lane": "english_global",
+      "active_series_target": 2,
+      "new_series_per_year": 3,
+      "chapters_per_month": 2,
+      "max_chapters_before_volume": 8,
+      "volumes_per_year_target": 4,
+      "topic_allocation": {
+        "sleep_anxiety": "1 series",
+        "somatic_healing": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "bi_weekly",
+        "japan": "monthly",
+        "korea": "bi_weekly"
+      },
+      "max_dormant_months": 4,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "solar_return",
@@ -269,7 +604,43 @@
       "main_character_name": null,
       "main_character_role": null,
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/solar_return_isekai.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/solar_return_isekai.yaml",
+      "teacher": "ra",
+      "primary_lane": "english_global",
+      "active_series_target": 3,
+      "new_series_per_year": 4,
+      "chapters_per_month": 3,
+      "max_chapters_before_volume": 12,
+      "volumes_per_year_target": 6,
+      "topic_allocation": {
+        "courage": "1 series",
+        "financial_anxiety": "1 series",
+        "depression": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "weekly",
+        "japan": "bi_weekly",
+        "korea": "weekly"
+      },
+      "max_dormant_months": 2,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "somatic_wisdom",
@@ -296,16 +667,52 @@
       "main_character_name": null,
       "main_character_role": null,
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/somatic_wisdom_shojo.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/somatic_wisdom_shojo.yaml",
+      "teacher": "pamela_fellows",
+      "primary_lane": "english_global",
+      "active_series_target": 3,
+      "new_series_per_year": 4,
+      "chapters_per_month": 2,
+      "max_chapters_before_volume": 10,
+      "volumes_per_year_target": 5,
+      "topic_allocation": {
+        "somatic_healing": "1 series",
+        "compassion_fatigue": "1 series",
+        "self_worth": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "bi_weekly",
+        "japan": "bi_weekly",
+        "korea": "weekly"
+      },
+      "max_dormant_months": 3,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "stillness_press",
       "catalog_id": "en_us_core",
       "locale": "en_US",
       "series_id": "stillness_press_iyashikei",
-      "series_title": null,
-      "series_logline": null,
-      "series_description": null,
+      "series_title": "The Alarm Still Rings",
+      "series_logline": "For when the anxiety hasn't stopped, and you need somewhere to be anyway.",
+      "series_description": "A stillness_press iyashikei series for josei readers living inside ongoing anxiety.\nNot a recovery story — a restoration practice. Long wordless sequences, earth-tone\nwatercolor space, and near-zero ink fill create a visual grammar the body responds\nto before the brain does. Each chapter leaves the reader quieter than when they arrived.",
       "market_demo": "josei",
       "genre_family": "healing",
       "subgenre": "anxiety_somatic_recovery",
@@ -313,17 +720,62 @@
       "serialization_engine": "mood_based",
       "visual_grammar": "iyashikei_minimalism",
       "reader_promise": "You will find your way back to stillness even when the alarm is still ringing.",
-      "positioning": null,
-      "audience": null,
-      "comp_titles": null,
-      "marketing_angle": null,
-      "hook_lines": null,
-      "launch_priority": null,
+      "positioning": "For readers of Mushishi and Laid-Back Camp who also want a series that offers stillness as something you practice, not achieve.",
+      "audience": "She is 25-42, her body knows things her brain hasn't caught up to yet —\nthe tight chest at the third email, the shoulder that doesn't drop.\nAt 11pm she is not reading about anxiety; she is in it.\nShe wants a series that does not explain what she already lives,\nbut sits with her in it.",
+      "comp_titles": [
+        "Mushishi (Yuki Urushibara)",
+        "Laid-Back Camp (Afro)",
+        "My Lesbian Experience With Loneliness (Nagata Kabi)",
+        "The Body Keeps the Score (Bessel van der Kolk)"
+      ],
+      "marketing_angle": "This series doesn't explain somatic healing — it practices it.\nNear-wordless pages (45% silent panels) and near-zero ink fill create\na visual grammar your body responds to before your brain does:\nthe pacing IS the restoration.",
+      "hook_lines": [
+        "Still counts as progress.",
+        "Your body already knows what you're carrying.",
+        "Read this until your shoulders drop."
+      ],
+      "launch_priority": "P0",
       "status": "active",
-      "main_character_name": null,
-      "main_character_role": null,
+      "main_character_name": "Sora",
+      "main_character_role": "freelance designer between projects",
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/stillness_press_iyashikei.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/stillness_press_iyashikei.yaml",
+      "teacher": "ahjan",
+      "primary_lane": "english_global",
+      "active_series_target": 3,
+      "new_series_per_year": 4,
+      "chapters_per_month": 2,
+      "max_chapters_before_volume": 10,
+      "volumes_per_year_target": 6,
+      "topic_allocation": {
+        "anxiety": "1 series",
+        "sleep_anxiety": "1 series",
+        "somatic_healing": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "weekly",
+        "japan": "bi_weekly",
+        "korea": "weekly"
+      },
+      "max_dormant_months": 3,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "warrior_calm",
@@ -350,7 +802,43 @@
       "main_character_name": null,
       "main_character_role": null,
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/brands/warrior_calm_cultivation.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/brands/warrior_calm_cultivation.yaml",
+      "teacher": "master_wu",
+      "primary_lane": "english_global",
+      "active_series_target": 3,
+      "new_series_per_year": 4,
+      "chapters_per_month": 4,
+      "max_chapters_before_volume": 16,
+      "volumes_per_year_target": 6,
+      "topic_allocation": {
+        "courage": "1 series",
+        "burnout": "1 series",
+        "self_worth": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "weekly",
+        "japan": "weekly",
+        "korea": "weekly"
+      },
+      "max_dormant_months": 2,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "cognitive_clarity",
@@ -386,7 +874,44 @@
       "main_character_name": "Kai",
       "main_character_role": "first-generation martial arts student",
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/examples/example_battle_shonen.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/examples/example_battle_shonen.yaml",
+      "teacher": "joshin",
+      "primary_lane": "english_global",
+      "active_series_target": 4,
+      "new_series_per_year": 5,
+      "chapters_per_month": 3,
+      "max_chapters_before_volume": 12,
+      "volumes_per_year_target": 8,
+      "topic_allocation": {
+        "overthinking": "1 series",
+        "imposter_syndrome": "1 series",
+        "burnout": "1 series",
+        "boundaries": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "bi_weekly",
+        "japan": "bi_weekly",
+        "korea": "bi_weekly"
+      },
+      "max_dormant_months": 2,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "stillness_press",
@@ -422,7 +947,43 @@
       "main_character_name": "Akari",
       "main_character_role": "overworked junior art director",
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/examples/example_josei_workplace.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/examples/example_josei_workplace.yaml",
+      "teacher": "ahjan",
+      "primary_lane": "english_global",
+      "active_series_target": 3,
+      "new_series_per_year": 4,
+      "chapters_per_month": 2,
+      "max_chapters_before_volume": 10,
+      "volumes_per_year_target": 6,
+      "topic_allocation": {
+        "anxiety": "1 series",
+        "sleep_anxiety": "1 series",
+        "somatic_healing": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "weekly",
+        "japan": "bi_weekly",
+        "korea": "weekly"
+      },
+      "max_dormant_months": 3,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     },
     {
       "brand_id": "stillness_press",
@@ -458,7 +1019,43 @@
       "main_character_name": "Nao",
       "main_character_role": "overextended project coordinator",
       "main_character_image_path": null,
-      "plan_source_path": "/Users/ahjan/phoenix_omega/.claude/worktrees/elated-bell-a3e9a4/config/source_of_truth/manga_profiles/examples/stillness_press_anxiety_overwhelm.yaml"
+      "plan_source_path": "config/source_of_truth/manga_profiles/examples/stillness_press_anxiety_overwhelm.yaml",
+      "teacher": "ahjan",
+      "primary_lane": "english_global",
+      "active_series_target": 3,
+      "new_series_per_year": 4,
+      "chapters_per_month": 2,
+      "max_chapters_before_volume": 10,
+      "volumes_per_year_target": 6,
+      "topic_allocation": {
+        "anxiety": "1 series",
+        "sleep_anxiety": "1 series",
+        "somatic_healing": "1 series"
+      },
+      "platform_cadence": {
+        "english_global": "weekly",
+        "japan": "bi_weekly",
+        "korea": "weekly"
+      },
+      "max_dormant_months": 3,
+      "research_links": [
+        {
+          "label": "Global Distribution Strategy",
+          "path": "artifacts/research/global_manga_distribution_strategy.md"
+        },
+        {
+          "label": "Revenue Strategy",
+          "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+        },
+        {
+          "label": "Therapeutic Wellness Market",
+          "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+        },
+        {
+          "label": "Genre Writing Styles",
+          "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+        }
+      ]
     }
   ]
 }

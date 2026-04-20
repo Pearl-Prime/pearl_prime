@@ -5,6 +5,10 @@ Phase-0 sources (verified 2026-04-20):
   - config/source_of_truth/manga_profiles/**/*.yaml (excluding schema.yaml)
   - brand metadata joined from config/brand_registry.yaml
 
+Layer-1 (2026-04-20):
+  - config/manga/manga_brand_series_plan.yaml (production plan per brand)
+  - static research links (Layer 2) added to every entry
+
 See stderr gap report + SUMMARY line.
 """
 
@@ -25,6 +29,7 @@ except ImportError as e:  # pragma: no cover
 
 BRAND_REGISTRY_PATH = REPO_ROOT / "config" / "brand_registry.yaml"
 MANGA_PROFILE_ROOT = REPO_ROOT / "config" / "source_of_truth" / "manga_profiles"
+BRAND_SERIES_PLAN_PATH = REPO_ROOT / "config" / "manga" / "manga_brand_series_plan.yaml"
 DEFAULT_OUT = REPO_ROOT / "artifacts" / "catalog_visibility" / "manga_series_index.json"
 
 # Fields treated as "required for marketing completeness" (dashboard amber pills + gap view).
@@ -35,7 +40,28 @@ MARKETING_REQUIRED = (
     "launch_priority",
 )
 
+# Static research links (Layer 2) — same for every entry; do not parse these files.
+RESEARCH_LINKS: list[dict[str, str]] = [
+    {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md",
+    },
+    {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md",
+    },
+    {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md",
+    },
+    {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md",
+    },
+]
+
 NORMALIZED_KEYS: tuple[str, ...] = (
+    # Layer 3 — series identity
     "brand_id",
     "catalog_id",
     "locale",
@@ -61,6 +87,19 @@ NORMALIZED_KEYS: tuple[str, ...] = (
     "main_character_role",
     "main_character_image_path",
     "plan_source_path",
+    # Layer 1 — production plan (from manga_brand_series_plan.yaml)
+    "teacher",
+    "primary_lane",
+    "active_series_target",
+    "new_series_per_year",
+    "chapters_per_month",
+    "max_chapters_before_volume",
+    "volumes_per_year_target",
+    "topic_allocation",
+    "platform_cadence",
+    "max_dormant_months",
+    # Layer 2 — research links (static paths, not parsed)
+    "research_links",
 )
 
 
@@ -80,6 +119,18 @@ def _list_str(v: Any) -> list[str] | None:
         out = [str(x).strip() for x in v if str(x).strip()]
         return out if out else None
     return None
+
+
+def load_brand_series_plan(path: Path) -> dict[str, dict[str, Any]]:
+    if not path.is_file():
+        return {}
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    brands = data.get("brands") or {}
+    out: dict[str, dict[str, Any]] = {}
+    for bid, meta in brands.items():
+        if isinstance(meta, dict):
+            out[str(bid)] = meta
+    return out
 
 
 def load_brand_registry(path: Path) -> dict[str, dict[str, Any]]:
@@ -112,7 +163,12 @@ def _plan_source_display(plan_path: Path) -> str:
         return str(plan_path)
 
 
-def raw_doc_to_entry(raw: dict[str, Any], plan_path: Path, brands: dict[str, dict[str, Any]]) -> dict[str, Any]:
+def raw_doc_to_entry(
+    raw: dict[str, Any],
+    plan_path: Path,
+    brands: dict[str, dict[str, Any]],
+    plan_brands: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     brand_id = _s(raw.get("brand_id"))
     title_id = _s(raw.get("title_id"))
     series_id = _s(raw.get("series_id")) or title_id
@@ -153,6 +209,27 @@ def raw_doc_to_entry(raw: dict[str, Any], plan_path: Path, brands: dict[str, dic
         "plan_source_path": _plan_source_display(plan_path),
     }
 
+    # Layer 1 — merge production plan fields by brand_id
+    plan = (plan_brands or {}).get(brand_id or "", {}) if brand_id else {}
+    wf = plan.get("webtoon_format") or {}
+    sr = plan.get("series_rotation") or {}
+
+    entry["teacher"] = _s(plan.get("teacher"))
+    entry["primary_lane"] = _s(plan.get("primary_lane"))
+    entry["active_series_target"] = plan.get("active_series_target")
+    entry["new_series_per_year"] = plan.get("new_series_per_year")
+    entry["chapters_per_month"] = plan.get("chapters_per_series_per_month")
+    entry["max_chapters_before_volume"] = plan.get("max_chapters_before_volume")
+    entry["volumes_per_year_target"] = plan.get("volumes_per_year_target")
+    entry["topic_allocation"] = dict(plan.get("topic_allocation") or {})
+    entry["platform_cadence"] = dict((wf.get("platform_cadence") or {}))
+    entry["max_dormant_months"] = (
+        sr.get("max_dormant_months") if sr else plan.get("max_dormant_months")
+    )
+
+    # Layer 2 — static research links (same for every entry)
+    entry["research_links"] = RESEARCH_LINKS
+
     for k in NORMALIZED_KEYS:
         if k not in entry:
             entry[k] = None
@@ -169,8 +246,13 @@ def marketing_gaps(entry: dict[str, Any]) -> list[str]:
     return missing
 
 
-def extract_all(profile_root: Path, brand_registry_path: Path) -> tuple[list[dict[str, Any]], list[str]]:
+def extract_all(
+    profile_root: Path,
+    brand_registry_path: Path,
+    plan_path: Path | None = None,
+) -> tuple[list[dict[str, Any]], list[str]]:
     brands = load_brand_registry(brand_registry_path)
+    plan_brands = load_brand_series_plan(plan_path or BRAND_SERIES_PLAN_PATH)
     series: list[dict[str, Any]] = []
     errors: list[str] = []
 
@@ -188,7 +270,7 @@ def extract_all(profile_root: Path, brand_registry_path: Path) -> tuple[list[dic
         if "brand_id" not in raw:
             errors.append(f"{path}: missing brand_id — skipped")
             continue
-        series.append(raw_doc_to_entry(raw, path, brands))
+        series.append(raw_doc_to_entry(raw, path, brands, plan_brands))
 
     return series, errors
 
@@ -249,9 +331,15 @@ def main() -> int:
         default=BRAND_REGISTRY_PATH,
         help="brand_registry.yaml path",
     )
+    ap.add_argument(
+        "--plan",
+        type=Path,
+        default=BRAND_SERIES_PLAN_PATH,
+        help="manga_brand_series_plan.yaml path",
+    )
     args = ap.parse_args()
 
-    entries, errs = extract_all(args.profile_root, args.brand_registry)
+    entries, errs = extract_all(args.profile_root, args.brand_registry, args.plan)
     for msg in errs:
         print(msg, file=sys.stderr)
 

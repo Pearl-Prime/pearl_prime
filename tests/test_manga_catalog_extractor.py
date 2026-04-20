@@ -104,6 +104,83 @@ def test_embed_json_escapes_script() -> None:
     assert "script" in s
 
 
+def test_production_plan_fields_present(tmp_path: Path) -> None:
+    """Layer-1 fields are merged from manga_brand_series_plan.yaml by brand_id."""
+    reg = tmp_path / "brand_registry.yaml"
+    reg.write_text(
+        "schema_version: 1\nbrands:\n  stillness_press:\n    catalog_id: en_us_core\n    locale: en_US\n",
+        encoding="utf-8",
+    )
+    plan = tmp_path / "manga_brand_series_plan.yaml"
+    plan.write_text(
+        """
+schema_version: 1
+brands:
+  stillness_press:
+    teacher: ahjan
+    primary_lane: english_global
+    active_series_target: 3
+    new_series_per_year: 4
+    chapters_per_series_per_month: 2
+    max_chapters_before_volume: 10
+    volumes_per_year_target: 6
+    topic_allocation:
+      anxiety: 1 series
+      sleep_anxiety: 1 series
+    webtoon_format:
+      platform_cadence:
+        english_global: weekly
+        japan: bi_weekly
+    series_rotation:
+      max_dormant_months: 3
+""".strip(),
+        encoding="utf-8",
+    )
+    root = tmp_path / "manga_profiles"
+    series_dir = root / "brands"
+    series_dir.mkdir(parents=True)
+    series_dir.joinpath("sp.yaml").write_text(
+        "title_id: sp_001\nbrand_id: stillness_press\n", encoding="utf-8"
+    )
+    entries, errs = extract_all(root, reg, plan)
+    assert not errs
+    assert len(entries) == 1
+    entry = entries[0]
+    assert entry["teacher"] == "ahjan"
+    assert entry["volumes_per_year_target"] == 6
+    assert "anxiety" in entry["topic_allocation"]
+    assert entry["platform_cadence"].get("english_global") == "weekly"
+    assert entry["max_dormant_months"] == 3
+
+
+def test_research_links_present(tmp_path: Path) -> None:
+    """Every entry carries the 4 static research links regardless of brand plan."""
+    reg = tmp_path / "brand_registry.yaml"
+    reg.write_text("schema_version: 1\nbrands: {}\n", encoding="utf-8")
+    raw = {"title_id": "x001", "brand_id": "any_brand"}
+    entry = raw_doc_to_entry(raw, Path("config/source_of_truth/manga_profiles/x.yaml"), {})
+    assert len(entry["research_links"]) == 4
+    assert any("distribution" in lnk["path"] for lnk in entry["research_links"])
+
+
+def test_no_plan_entry_graceful(tmp_path: Path) -> None:
+    """brand_id with no plan entry leaves Layer-1 fields null, no error."""
+    reg = tmp_path / "brand_registry.yaml"
+    reg.write_text("schema_version: 1\nbrands: {}\n", encoding="utf-8")
+    plan = tmp_path / "empty_plan.yaml"
+    plan.write_text("schema_version: 1\nbrands: {}\n", encoding="utf-8")
+    root = tmp_path / "profiles"
+    root.mkdir()
+    (root / "s.yaml").write_text("title_id: x\nbrand_id: ghost_brand\n", encoding="utf-8")
+    entries, errs = extract_all(root, reg, plan)
+    assert not errs
+    entry = entries[0]
+    assert entry["teacher"] is None
+    assert entry["volumes_per_year_target"] is None
+    assert entry["topic_allocation"] == {}
+    assert len(entry["research_links"]) == 4
+
+
 def test_build_dashboard_multibrand(tmp_path: Path) -> None:
     """Omitting --brand produces a dashboard containing all brands."""
     from scripts.catalog_visibility.build_dashboard import _filter_series, build_html
