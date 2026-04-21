@@ -242,10 +242,12 @@ def run_teacher(
         sys.executable, "-m", "pearl_news.pipeline.run_article_pipeline",
         "--language", language,
         "--topic", topic,
+        "--teacher", teacher_id,
         "--out-dir", str(teacher_out),
         "--expand",
         "--validate",
         "--select-image",
+        "--v52",
         "--limit", "20",
     ]
     logger.info("[%s/%s] Running pipeline (lang=%s topic=%s)", teacher_id, cycle, language, topic)

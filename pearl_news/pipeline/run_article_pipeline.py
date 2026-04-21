@@ -184,6 +184,15 @@ def main() -> int:
         ),
     )
     ap.add_argument(
+        "--teacher",
+        default=None,
+        help=(
+            "Force teacher ID for v5.2 sidebar (e.g. maat, ahjan). "
+            "Passed by the daily cycle to ensure one teacher per article. "
+            "Overrides teacher_resolver output in v5.2 metadata."
+        ),
+    )
+    ap.add_argument(
         "-v",
         "--verbose",
         action="store_true",
@@ -226,6 +235,8 @@ def main() -> int:
                 lang_args_list.append("--no-filter-qc")
             if args.v52:
                 lang_args_list.append("--v52")
+            if args.teacher:
+                lang_args_list.extend(["--teacher", args.teacher])
             import sys
             old_argv = sys.argv
             sys.argv = ["run_article_pipeline"] + lang_args_list
@@ -458,8 +469,10 @@ def main() -> int:
 
         if args.v52:
             # v5.2 interactive layout: exercise sidebar, poll, co-creation, full design system
+            # args.teacher (--teacher flag) takes priority; falls back to resolver output.
+            effective_teacher = args.teacher or teacher_id_val or "maat"
             v52_meta = {
-                "teacher": teacher_id_val or "maat",
+                "teacher": effective_teacher,
                 "topic": item.get("topic", "general"),
                 "sdg": item.get("primary_sdg", "3"),
                 "template": template_id,
@@ -507,6 +520,7 @@ def main() -> int:
             "title": item.get("article_title") or item.get("title", ""),
             "content": article_content,
             "teacher_id": teacher_id_val,
+            "template_id": template_id,
             "slug": article_id + lang_suffix,
             "author": author_id,
             "article_type": template_id,
