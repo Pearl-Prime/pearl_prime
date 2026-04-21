@@ -70,39 +70,49 @@ def _resolve_slot(
         )
 
     if source == "teacher_quotes_practices":
-        # Try atoms/teacher_quotes_practices/ (one teacher per topic when available)
-        teacher_dir = atoms_root / "teacher_quotes_practices"
+        # Use per-teacher pack system (deterministic_teacher_topic.py).
+        # Legacy flat atom files in atoms/teacher_quotes_practices/ are NOT used here.
         root = Path(__file__).resolve().parent.parent
         config_root = config_root or (root / "config")
-        use_group = _is_uslf_group_article(item, config_root)
-
-        if teacher_dir.exists():
-            # Prefer one teacher's content for this topic when not group
-            candidates = []
-            for f in teacher_dir.rglob("*"):
-                if f.suffix in (".md", ".txt", ".yaml"):
-                    try:
-                        text = f.read_text(encoding="utf-8")
-                        if topic in text.lower():
-                            candidates.append(text.strip())
-                    except Exception:
-                        continue
-            if candidates:
-                # Single-teacher: use one teacher's content. Group (5%): use group placeholder.
-                if not use_group:
-                    return candidates[0]
-                return "<p>Leaders from the United Spiritual Leaders Forum emphasize reflection and resilience in the face of uncertainty, in line with ethical frameworks that support youth well-being and global goals.</p>"
-
-        # No atoms: placeholders. 95% single-teacher (one teacher's insight + youth), 5% group USLF
-        if use_group:
+        if _is_uslf_group_article(item, config_root):
             return (
                 "<p>Leaders from the United Spiritual Leaders Forum emphasize reflection and resilience in the face of uncertainty, in line with ethical frameworks that support youth well-being and global goals.</p>\n\n"
                 "<p>Dialogue across traditions helps communities respond to crisis with clarity and compassion.</p>"
             )
+
+        teacher_id = item.get("teacher_id") or item.get("teacher") or ""
+        if teacher_id:
+            try:
+                from pearl_news.pipeline.deterministic_teacher_topic import (
+                    load_teacher_topic_pack,
+                    _render_teacher_perspective,
+                )
+
+                repo_root = Path(__file__).resolve().parents[2]
+                pack = load_teacher_topic_pack(
+                    repo_root,
+                    teacher_id,
+                    topic,
+                    item.get("template_id") or "hard_news_spiritual_response",
+                    item.get("language") or "en",
+                )
+                if pack:
+                    options = pack.get("teacher_perspective", {}).get("options") or []
+                    if options:
+                        return _render_teacher_perspective(options[0])
+            except Exception as exc:
+                logger.warning(
+                    "teacher_pack_load_failed teacher=%s topic=%s err=%s",
+                    teacher_id,
+                    topic,
+                    exc,
+                )
+
+        # Fallback: single teacher placeholder (never raw YAML)
         return (
-            "<p>A teacher from the United Spiritual Leaders Forum offers perspective on this topic and its relevance to youth: reflection and resilience in the face of uncertainty, in line with ethical frameworks that support youth well-being and global goals.</p>\n\n"
-            "<p>How spiritual and ethical traditions speak to young people in times of change—and how youth can draw on these insights for clarity and action—remains a focus of our coverage.</p>\n\n"
-            "<p>We aim to present one voice at a time, so readers can engage with a clear perspective before exploring further.</p>"
+            "<p>A teacher from the United Spiritual Leaders Forum offers perspective: "
+            "reflection and resilience in the face of uncertainty, drawing on the wisdom "
+            "of their tradition as it applies to this moment.</p>"
         )
 
     if source in ("sdg_ref", "sdg_framework", "sdg_un_tie", "sdg_alignment", "sdg_policy_tie", "sdg_reference"):
