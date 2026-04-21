@@ -179,12 +179,106 @@
     .tier-primary { color: var(--green); }
     .tier-secondary { color: var(--yellow); }
     .tier-tertiary { color: var(--muted); }
+
+    /* ── Phase 2 additions ────────────────────────��──── */
+    .control-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .console-out {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--cream);
+      white-space: pre-wrap;
+      max-height: 180px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .cli-ref {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 8px;
+      line-height: 1.8;
+    }
+    .cli-ref code {
+      font-family: var(--mono);
+      background: rgba(0,0,0,0.35);
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: var(--amber2);
+      display: inline-block;
+      margin: 1px 0;
+    }
+    .alert-red {
+      background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.4);
+      color: #fca5a5;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+    }
+    .alert-red.hidden { display: none; }
+
+    /* Teacher mode cards */
+    .teacher-mode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .teacher-mode-option { cursor: pointer; }
+    .teacher-mode-option input[type="radio"] { display: none; }
+    .teacher-mode-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      transition: border-color 0.15s;
+    }
+    .teacher-mode-option input:checked + .teacher-mode-card,
+    .teacher-mode-card.tm-selected {
+      border-color: var(--amber2);
+      background: rgba(180,83,9,0.1);
+    }
+    .teacher-mode-card:hover { border-color: var(--amber); }
+    .tm-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+    .tm-pct {
+      font-size: 0.72rem;
+      color: var(--amber2);
+      background: rgba(180,83,9,0.15);
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 4px;
+    }
+    .tm-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .tm-example {
+      font-size: 0.72rem;
+      font-family: var(--mono);
+      color: var(--amber2);
+      opacity: 0.75;
+    }
   </style>
 </head>
 <body>
 <header>
   <h1>Phoenix Omega — Executive Catalog Dashboard</h1>
-  <p>Big View Phase 1 · Last updated: 2026-04-22 · Source: config/catalog/market_catalog_registry.yaml + artifacts/inventory/</p>
+  <p>Big View Phase 2 · Last updated: 2026-04-22 · Source: config/catalog/market_catalog_registry.yaml + artifacts/inventory/</p>
   <nav class="nav-top">
     <a href="index.html">Home</a>
     <a href="content_inventory.html">Content Inventory</a>
@@ -231,20 +325,30 @@
   </div>
 
   <!-- Build Controls -->
-  <div class="section">
+  <div id="build-controls" class="section">
     <div class="section-title">Build Controls</div>
-    <div class="controls">
-      <button class="btn" onclick="runInventory()">Run Inventory Audit</button>
-      <button class="btn btn-outline" onclick="buildAllCatalogs()">Build All Catalogs</button>
-      <button class="btn btn-outline" onclick="runBestseller()">Run Bestseller Analysis <span style="font-size:0.7em;opacity:0.6">(Phase 2)</span></button>
-      <button class="btn btn-outline" onclick="loadAtomCoverage()">Load Coverage Data</button>
+    <div class="control-grid">
+      <button class="btn" onclick="runBuild('all')">&#x1F3D7; Build All Catalogs</button>
+      <button class="btn btn-outline" onclick="runBuild('market', 'us')">&#x1F1FA;&#x1F1F8; Build US</button>
+      <button class="btn btn-outline" onclick="runBuild('market', 'japan')">&#x1F1EF;&#x1F1F5; Build Japan</button>
+      <button class="btn btn-outline" onclick="runBuild('market', 'taiwan')">&#x1F1F9;&#x1F1FC; Build Taiwan</button>
+      <button class="btn btn-outline" onclick="runBuild('market', 'korea')">&#x1F1F0;&#x1F1F7; Build Korea</button>
+      <button class="btn btn-outline" onclick="runBuild('market', 'germany')">&#x1F1E9;&#x1F1EA; Build Germany</button>
+      <button class="btn btn-outline" onclick="runBuild('market', 'france')">&#x1F1EB;&#x1F1F7; Build France</button>
+      <button class="btn btn-outline" onclick="runBuild('market', 'china')">&#x1F1E8;&#x1F1F3; Build China</button>
+      <button class="btn btn-outline" onclick="runBuild('market', 'brazil')">&#x1F1E7;&#x1F1F7; Build Brazil</button>
+      <button class="btn btn-outline" onclick="runBuild('brand', 'stillness_press')">Build stillness_press</button>
+      <button class="btn btn-outline" onclick="loadAtomCoverage()">&#x1F50D; Refresh Atom Audit</button>
+      <button class="btn btn-outline" onclick="runAdminPackets()">&#x1F4E6; Build Admin Packets</button>
     </div>
-    <p class="placeholder">
-      Inventory: <span class="cmd">python3 scripts/inventory/atom_coverage_audit.py</span> →
-      outputs to <span class="cmd">artifacts/inventory/</span>.
-      Catalog build: <span class="cmd">python3 scripts/catalog/generate_full_catalog.py --lane en_US</span>.
-      Full --scope all flag planned for Phase 2.
-    </p>
+    <div id="build-status" class="console-out" style="display:none"></div>
+    <div class="cli-ref">
+      <strong>CLI equivalents:</strong><br>
+      <code>python3 scripts/catalog/generate_full_catalog.py --scope all --dry-run</code><br>
+      <code>python3 scripts/catalog/generate_full_catalog.py --scope market --market japan --dry-run</code><br>
+      <code>python3 scripts/catalog/generate_full_catalog.py --scope brand --brand stillness_press</code><br>
+      <code>python3 scripts/release/build_admin_packets.py --all --week current --dry-run</code>
+    </div>
   </div>
 
   <!-- Market Overview -->
@@ -294,13 +398,28 @@
     </table>
   </div>
 
-  <!-- QA Status -->
-  <div class="section">
-    <div class="section-title">QA Status <span class="phase-tag">Phase 2</span></div>
-    <p class="placeholder">
-      QA findings registry not yet connected. Gates exist in <span class="cmd">config/quality/</span>
-      (bestseller_craft_gate.yaml, book_pass_gate_thresholds.yaml, ei_v2_config.yaml, canary_config.yaml).
-      Phase 2 will wire a findings log to <span class="cmd">artifacts/qa/</span>.
+  <!-- QA & Regression Panel -->
+  <div id="qa-status" class="section">
+    <div class="section-title">QA Status</div>
+    <div id="regression-alert" class="alert-red hidden">&#x26A0;&#xFE0F; Regressions Detected — run <code>python3 scripts/qa/qa_findings_registry.py --check-regressions</code></div>
+    <div class="controls">
+      <button class="btn" onclick="runBestsellerAnalysis()">&#x25B6; Run Bestseller Analysis</button>
+      <button class="btn btn-outline" onclick="checkRegressions()">&#x1F50E; Check Regressions</button>
+      <button class="btn btn-outline" onclick="loadQAReport()">Load QA Report</button>
+    </div>
+    <div id="qa-results" class="console-out" style="display:none"></div>
+    <div class="cli-ref">
+      <strong>CLI equivalents:</strong><br>
+      <code>python3 scripts/qa/run_bestseller_analysis.py --scope all --dry-run</code><br>
+      <code>python3 scripts/qa/run_bestseller_analysis.py --market japan</code><br>
+      <code>python3 scripts/qa/qa_findings_registry.py --report</code><br>
+      <code>python3 scripts/qa/qa_findings_registry.py --check-regressions --since-hours 48</code>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:10px;">
+      Registry: <span class="cmd">artifacts/qa/findings_registry.jsonl</span>
+      · Gates: <span class="cmd">config/quality/bestseller_craft_gate.yaml</span>,
+      <span class="cmd">book_pass_gate_thresholds.yaml</span>,
+      <span class="cmd">ei_v2_config.yaml</span>
     </p>
   </div>
 
@@ -326,16 +445,47 @@
     </p>
   </div>
 
-  <!-- Teacher Mode -->
-  <div class="section">
-    <div class="section-title">Teacher Mode <span class="phase-tag">Phase 2</span></div>
-    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:8px;">
-      Current: named-teacher mode (1 primary teacher per brand per lane).
-      12 teacher brands × 12+ market locales = full teacher matrix configured.
+  <!-- Teacher Mode Controls -->
+  <div id="teacher-mode" class="section">
+    <div class="section-title">Teacher Mode</div>
+    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:12px;">
+      Controls how teacher attribution appears in generated content.
+      Config: <span class="cmd">config/catalog_planning/teacher_mode_config.yaml</span>
     </p>
-    <p class="placeholder">
-      Generalized teaching-first variant (uses teachings, not teacher name) — Phase 2.
-    </p>
+    <div class="teacher-mode-grid">
+      <label class="teacher-mode-option">
+        <input type="radio" name="teacher_mode" value="named" onchange="updateTeacherMode(this)">
+        <div class="teacher-mode-card">
+          <div class="tm-title">Named <span class="tm-pct">20%</span></div>
+          <div class="tm-desc">Explicit teacher name used throughout. Max 3/week/brand.</div>
+          <div class="tm-example">"According to [TEACHER_NAME]…"</div>
+        </div>
+      </label>
+      <label class="teacher-mode-option">
+        <input type="radio" name="teacher_mode" value="generalized" checked onchange="updateTeacherMode(this)">
+        <div class="teacher-mode-card tm-selected">
+          <div class="tm-title">Generalized <span class="tm-pct">70%</span></div>
+          <div class="tm-desc">Teachings used; teacher name NOT mentioned. Preferred mode.</div>
+          <div class="tm-example">"According to [Tradition]…"</div>
+        </div>
+      </label>
+      <label class="teacher-mode-option">
+        <input type="radio" name="teacher_mode" value="composite" onchange="updateTeacherMode(this)">
+        <div class="teacher-mode-card">
+          <div class="tm-title">Composite <span class="tm-pct">10%</span></div>
+          <div class="tm-desc">No specific teacher. Draws from multiple traditions.</div>
+          <div class="tm-example">"Across traditions and lineages…"</div>
+        </div>
+      </label>
+    </div>
+    <div id="teacher-mode-status" style="font-size:0.8rem;color:var(--muted);margin-top:10px;">
+      Active mode: <strong id="active-teacher-mode">generalized</strong>
+    </div>
+    <div class="cli-ref" style="margin-top:10px;">
+      <strong>Config files:</strong><br>
+      <code>config/catalog_planning/teacher_mode_config.yaml</code><br>
+      <code>config/catalog_planning/teacher_wrapper_templates.yaml</code>
+    </div>
   </div>
 </main>
 
@@ -465,26 +615,108 @@
     }
   }
 
-  // ── Build controls ─────────────────────────────────────────────────────────────
+  // ── Build controls (Phase 2) ───────────────────────────────────────────────────
+
+  function _showStatus(el, msg) {
+    el.textContent = msg;
+    el.style.display = "block";
+  }
+
+  function runBuild(scope, marketOrBrand) {
+    const statusEl = document.getElementById("build-status");
+    let cmd;
+    if (scope === "all") {
+      cmd = "python3 scripts/catalog/generate_full_catalog.py --scope all --dry-run";
+    } else if (scope === "market") {
+      cmd = `python3 scripts/catalog/generate_full_catalog.py --scope market --market ${marketOrBrand} --dry-run`;
+    } else if (scope === "brand") {
+      cmd = `python3 scripts/catalog/generate_full_catalog.py --scope brand --brand ${marketOrBrand} --dry-run`;
+    }
+    _showStatus(statusEl,
+      `[Build Controls]\nScope: ${scope}${marketOrBrand ? " / " + marketOrBrand : ""}\n\n` +
+      `Run in terminal:\n  ${cmd}\n\nRemove --dry-run to write output files to artifacts/catalog/.`
+    );
+  }
+
+  function runAdminPackets() {
+    const statusEl = document.getElementById("build-status");
+    _showStatus(statusEl,
+      "[Admin Packets]\n\n" +
+      "Run in terminal:\n" +
+      "  python3 scripts/release/build_admin_packets.py --all --week current --dry-run\n\n" +
+      "Output: artifacts/release/<YEAR>-W<WW>/<brand>/\n" +
+      "  google_play/metadata.csv + upload_instructions.md\n" +
+      "  amazon_kdp/metadata.csv + upload_instructions.md\n" +
+      "  rakuten_kobo/metadata.csv  (Japan/APAC markets)"
+    );
+  }
+
   function runInventory() {
-    alert(
-      "Run inventory audit:\n\n" +
-      "  python3 scripts/inventory/atom_coverage_audit.py\n\n" +
-      "Then click 'Load Coverage Data' to refresh this panel."
+    const statusEl = document.getElementById("build-status");
+    _showStatus(statusEl,
+      "[Inventory Audit]\n\n" +
+      "Run in terminal:\n  python3 scripts/inventory/atom_coverage_audit.py\n\n" +
+      "Then click 'Load Coverage Data' to refresh the atom coverage panel."
     );
   }
 
-  function buildAllCatalogs() {
-    alert(
-      "Build all catalogs (Phase 1 — by lane):\n\n" +
-      "  python3 scripts/catalog/generate_full_catalog.py --all-lanes\n\n" +
-      "--scope all / --market flags planned for Phase 2."
+  // ── QA controls (Phase 2) ─────────────────────────────────────────────────────
+
+  function runBestsellerAnalysis() {
+    const qaEl = document.getElementById("qa-results");
+    _showStatus(qaEl,
+      "[Bestseller Analysis at Scale]\n\n" +
+      "Run in terminal:\n" +
+      "  python3 scripts/qa/run_bestseller_analysis.py --scope all --dry-run\n\n" +
+      "Or for a single market:\n" +
+      "  python3 scripts/qa/run_bestseller_analysis.py --market japan\n\n" +
+      "Output: artifacts/qa/bestseller_analysis_<timestamp>.json\n" +
+      "Regressions logged to: artifacts/qa/findings_registry.jsonl"
     );
   }
 
-  function runBestseller() {
-    alert("Bestseller analysis integration planned for Phase 2.");
+  function checkRegressions() {
+    const qaEl = document.getElementById("qa-results");
+    const regAlert = document.getElementById("regression-alert");
+    _showStatus(qaEl,
+      "[Regression Check]\n\n" +
+      "Run in terminal:\n" +
+      "  python3 scripts/qa/qa_findings_registry.py --check-regressions\n\n" +
+      "Exits with code 1 if any regressions detected in the last 24h.\n" +
+      "Check a wider window:\n" +
+      "  python3 scripts/qa/qa_findings_registry.py --check-regressions --since-hours 72"
+    );
+    // Show the alert banner as a demo — in a real wired app, this would read findings_registry.jsonl
+    regAlert.classList.remove("hidden");
+    regAlert.textContent =
+      "⚠️ To check live regressions run: python3 scripts/qa/qa_findings_registry.py --check-regressions";
   }
+
+  function loadQAReport() {
+    const qaEl = document.getElementById("qa-results");
+    _showStatus(qaEl,
+      "[QA Report]\n\n" +
+      "Run in terminal:\n" +
+      "  python3 scripts/qa/qa_findings_registry.py --report\n\n" +
+      "Prints: total entries, PASS/FAIL/WARN counts, per-gate breakdown, recent regressions.\n" +
+      "Registry file: artifacts/qa/findings_registry.jsonl"
+    );
+  }
+
+  // ── Teacher mode (Phase 2) ────────────────────────────────────────────────────
+
+  function updateTeacherMode(radio) {
+    const label = document.getElementById("active-teacher-mode");
+    if (label) label.textContent = radio.value;
+    // Highlight selected card
+    document.querySelectorAll(".teacher-mode-card").forEach(c => c.classList.remove("tm-selected"));
+    const card = radio.closest(".teacher-mode-option").querySelector(".teacher-mode-card");
+    if (card) card.classList.add("tm-selected");
+  }
+
+  // Legacy stubs kept for backwards compat
+  function buildAllCatalogs() { runBuild("all"); }
+  function runBestseller() { runBestsellerAnalysis(); }
 
   // ── Init ───────────────────────────────────────────────────────────────────────
   initMarketTable();

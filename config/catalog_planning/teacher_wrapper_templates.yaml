@@ -1,0 +1,110 @@
+# Teacher Wrapper Templates
+# Slot variables: {TEACHER_NAME}, {TRADITION}, {TRADITION_SHORT},
+#                 {PRACTICE_NAME}, {TEACHING_LINEAGE}
+# Authority: Big View Phase 2
+# Used by: content atom wrapper injection, description_templates pipeline
+
+# ── Named mode ──────────────────────────────────────────────────────────────
+# Teacher name is used explicitly. Use when brand strategy allows named
+# attribution (≤3 named-teacher books per brand per week per platform).
+
+named:
+  intro_wrapper:
+    pattern: "According to {TEACHER_NAME}, {TEACHING_LINEAGE} teaches us..."
+    variants:
+      - "In {TEACHER_NAME}'s framework, the path begins with..."
+      - "Drawing on {TEACHER_NAME}'s {TEACHING_LINEAGE} approach..."
+      - "{TEACHER_NAME} describes this as the foundation of {TRADITION_SHORT}..."
+    slot_requirements: [TEACHER_NAME, TEACHING_LINEAGE]
+
+  exercise_wrapper:
+    pattern: "{TEACHER_NAME}'s {PRACTICE_NAME}"
+    variants:
+      - "A practice from {TEACHER_NAME}: {PRACTICE_NAME}"
+      - "{PRACTICE_NAME} (as taught by {TEACHER_NAME})"
+    slot_requirements: [TEACHER_NAME, PRACTICE_NAME]
+
+  conclusion_wrapper:
+    pattern: "As {TEACHER_NAME} reminds us, {TRADITION_SHORT} is not a destination..."
+    variants:
+      - "{TEACHER_NAME}'s {TEACHING_LINEAGE} points toward a single truth..."
+      - "The {TRADITION_SHORT} tradition, as {TEACHER_NAME} frames it, invites..."
+    slot_requirements: [TEACHER_NAME, TRADITION_SHORT, TEACHING_LINEAGE]
+
+# ── Generalized mode ─────────────────────────────────────────────────────────
+# Teacher name is NOT used. Use teachings and tradition.
+# Preferred for 65–70% of catalog output.
+#
+# Anti-patterns (never use in generalized mode):
+#   ✗ "Master X says…"
+#   ✗ "I came across this teacher"
+#   ✗ "According to [named individual]…"
+#
+# Required replacements:
+#   ✓ "According to [Tradition]…"
+#   ✓ "I came across the work of [Tradition]"
+#   ✓ "The [Tradition] tradition holds…"
+
+generalized:
+  intro_wrapper:
+    pattern: "According to {TRADITION}, the path begins with..."
+    variants:
+      - "The {TRADITION} tradition teaches that..."
+      - "Within the {TRADITION_SHORT} lineage, practitioners have long known..."
+      - "I came across the work of {TRADITION} at a time when..."
+      - "Rooted in {TRADITION}, this approach holds that..."
+    slot_requirements: [TRADITION]
+
+  exercise_wrapper:
+    pattern: "A practice from {TRADITION} tradition"
+    variants:
+      - "Drawn from {TRADITION_SHORT} practice: {PRACTICE_NAME}"
+      - "The {TRADITION} approach to {PRACTICE_NAME}"
+      - "A {TRADITION_SHORT} technique: {PRACTICE_NAME}"
+    slot_requirements: [TRADITION]
+
+  conclusion_wrapper:
+    pattern: "The {TRADITION} tradition invites us to return to what is essential..."
+    variants:
+      - "At the heart of {TRADITION_SHORT} is a simple, recurring invitation..."
+      - "{TRADITION} does not ask for perfection — only honest presence..."
+      - "What the {TRADITION} lineage keeps pointing toward is..."
+    slot_requirements: [TRADITION, TRADITION_SHORT]
+
+# ── Composite mode ───────────────────────────────────────────────────────────
+# No specific teacher, no specific tradition. Draws from multiple sources.
+# Use for ~10–15% of catalog — universal/cross-tradition books.
+
+composite:
+  intro_wrapper:
+    pattern: "Across traditions and lineages, one insight recurs..."
+    variants:
+      - "Whether rooted in Eastern or Western practice, the teaching is the same..."
+      - "From contemplative traditions worldwide, this principle emerges..."
+      - "The research, the ancient practices, and the lived experience all point here..."
+    slot_requirements: []
+
+  exercise_wrapper:
+    pattern: "A cross-tradition practice"
+    variants:
+      - "A practice found across many traditions"
+      - "An exercise drawn from contemplative and somatic research"
+    slot_requirements: []
+
+  conclusion_wrapper:
+    pattern: "What the evidence and traditions converge on is this..."
+    variants:
+      - "Across cultures and centuries, the invitation is the same..."
+      - "Whether ancient or modern, the path circles back here..."
+    slot_requirements: []
+
+# ── Slot registry ────────────────────────────────────────────────────────────
+# Maps teacher_id → default slot values for named mode.
+# Populated from brand_teacher_matrix.yaml at generation time.
+# Override per-book in catalog row or atom CANONICAL.txt.
+
+slot_defaults:
+  TRADITION: "contemplative"
+  TRADITION_SHORT: "contemplative"
+  TEACHING_LINEAGE: "mindfulness and somatic"
+  PRACTICE_NAME: "the practice"

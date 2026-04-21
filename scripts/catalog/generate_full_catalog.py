@@ -8,9 +8,18 @@ to produce catalog entries on the 12×37 planning grid (12 lanes × 37 brands pe
 when present and planning-driven fallbacks when a locale row is still pending.
 
 Usage:
+    # Legacy flags (still supported):
     python scripts/catalog/generate_full_catalog.py --all-lanes --output artifacts/catalog/full_catalog.csv
     python scripts/catalog/generate_full_catalog.py --lane en_US --output artifacts/catalog/en_us_catalog.csv
     python scripts/catalog/generate_full_catalog.py --brand stabilizer_en_us --output artifacts/catalog/stabilizer_catalog.csv
+
+    # Phase 2 --scope flags:
+    python scripts/catalog/generate_full_catalog.py --scope all --dry-run
+    python scripts/catalog/generate_full_catalog.py --scope market --market japan --dry-run
+    python scripts/catalog/generate_full_catalog.py --scope brand --brand stillness_press --dry-run
+    python scripts/catalog/generate_full_catalog.py --scope lane --market us --dry-run
+    python scripts/catalog/generate_full_catalog.py --scope all --format ebook
+    python scripts/catalog/generate_full_catalog.py --scope market --market taiwan --format audiobook
 """
 
 from __future__ import annotations
@@ -98,6 +107,60 @@ def load_teacher_profiles() -> dict:
 def load_description_templates() -> dict:
     path = _CONFIG_ROOT / "config/catalog_planning/description_templates.yaml"
     return _load_yaml(path) if path.exists() else {}
+
+
+def load_market_registry() -> dict:
+    """Load config/catalog/market_catalog_registry.yaml."""
+    for root in [REPO_ROOT, _CONFIG_ROOT]:
+        p = root / "config/catalog/market_catalog_registry.yaml"
+        if p.exists():
+            return _load_yaml(p)
+    return {}
+
+
+# ---------------------------------------------------------------------------
+# Market → locale/lane resolution (Phase 2)
+# ---------------------------------------------------------------------------
+
+# market_id → locale string (from market_catalog_registry.yaml)
+MARKET_TO_LOCALE: dict[str, str] = {
+    "us": "en_US",
+    "japan": "ja_JP",
+    "korea": "ko_KR",
+    "germany": "de_DE",
+    "france": "fr_FR",
+    "taiwan": "zh_TW",
+    "china": "zh_CN",
+    "hong_kong": "zh_HK",
+    "spain": "es_ES",
+    "latam": "es_US",
+    "brazil": "pt_BR",
+    "italy": "it_IT",
+    "singapore": "zh_SG",
+    "hungary": "hu_HU",
+}
+
+# format_id keyword → content_type tokens in catalog entries
+FORMAT_CONTENT_TYPES: dict[str, set] = {
+    "ebook": {"series_micro", "series_standard", "deep_book", "series_short"},
+    "manga": {"manga_chapter", "manga_volume", "manga"},
+    "audiobook": {"audio_series", "audiobook", "audio"},
+    "podcast": {"podcast_episode", "podcast"},
+}
+
+
+def _format_matches(entry: dict, fmt: str) -> bool:
+    """Return True if catalog entry matches the requested format filter."""
+    if fmt == "all":
+        return True
+    ct = (entry.get("content_type") or "").lower()
+    fmt_id = (entry.get("format_id") or "").lower()
+    for token in FORMAT_CONTENT_TYPES.get(fmt, set()):
+        if token in ct or token in fmt_id:
+            return True
+    # Fallback: runtime_format_id
+    rfi = (entry.get("runtime_format_id") or "").lower()
+    return fmt in rfi
 
 
 def load_teacher_brand_archetypes() -> dict:
@@ -1343,40 +1406,114 @@ def write_csv(rows: list[dict], path: Path, fields: list[str]) -> None:
 # ---------------------------------------------------------------------------
 def main():
     parser = argparse.ArgumentParser(description="Phoenix Omega Catalog Generator")
+
+    # ── Legacy flags (preserved for backwards compatibility) ──────────────────
     parser.add_argument("--all-lanes", action="store_true", help="Generate for all lanes")
     parser.add_argument("--lane", type=str, default=None, help="Generate for one lane (e.g. en_US)")
     parser.add_argument("--brand", type=str, default=None, help="Generate for one brand (e.g. stabilizer_en_us)")
+
+    # ── Phase 2 scope flags ───────────────────────────────────────────────────
+    parser.add_argument(
+        "--scope", choices=["all", "market", "brand", "lane"],
+        help="Build scope: all markets, one market, one brand, or one lane"
+    )
+    parser.add_argument(
+        "--market", type=str, default=None,
+        help="Market ID from market_catalog_registry.yaml (e.g. japan, us, taiwan)"
+    )
+    parser.add_argument(
+        "--format", choices=["ebook", "manga", "audiobook", "podcast", "all"],
+        default="all", help="Content format to build"
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true",
+        help="Print what would be built without writing output files"
+    )
+
+    # ── Output flags ─────────────────────────────────────────────────────────
     parser.add_argument("--output", type=str, default="artifacts/catalog/full_catalog.csv",
                         help="Output CSV path (relative to repo root)")
     parser.add_argument("--summary", type=str, default=None,
                         help="Summary CSV path (default: <output_dir>/catalog_summary.csv)")
     args = parser.parse_args()
 
-    if not args.all_lanes and not args.lane and not args.brand:
-        print("Specify --all-lanes, --lane <lane_id>, or --brand <brand_id>")
-        sys.exit(1)
+    # ── Resolve scope from Phase 2 flags or legacy flags ────────────────────
+    lane_filter: Optional[str] = None
+    brand_filter: Optional[str] = None
+    build_all = False
 
-    lane_filter = args.lane
-    brand_filter = args.brand
+    if args.scope:
+        scope = args.scope
+        if scope == "all":
+            build_all = True
+        elif scope == "market":
+            if not args.market:
+                print("--scope market requires --market <market_id>")
+                sys.exit(1)
+            market_id = args.market.lower()
+            # Look up locale from registry or built-in map
+            registry = load_market_registry()
+            markets = registry.get("markets", {}) if registry else {}
+            if market_id in markets:
+                lane_filter = markets[market_id].get("locale")
+            else:
+                lane_filter = MARKET_TO_LOCALE.get(market_id)
+            if not lane_filter:
+                print(f"Unknown market '{market_id}'. Known: {sorted(MARKET_TO_LOCALE.keys())}")
+                sys.exit(1)
+        elif scope == "brand":
+            if not args.brand:
+                print("--scope brand requires --brand <brand_id>")
+                sys.exit(1)
+            brand_filter = args.brand
+        elif scope == "lane":
+            if not args.market:
+                print("--scope lane requires --market <market_id> to resolve the lane locale")
+                sys.exit(1)
+            market_id = args.market.lower()
+            lane_filter = MARKET_TO_LOCALE.get(market_id)
+            if not lane_filter:
+                print(f"Unknown market '{market_id}'. Known: {sorted(MARKET_TO_LOCALE.keys())}")
+                sys.exit(1)
+    elif args.all_lanes:
+        build_all = True
+    elif args.lane:
+        lane_filter = args.lane
+    elif args.brand:
+        brand_filter = args.brand
+    else:
+        print("Specify --scope <all|market|brand|lane>, --all-lanes, --lane <id>, or --brand <id>")
+        sys.exit(1)
 
     print("Phoenix Omega Catalog Generator")
     print("=" * 50)
-    if args.all_lanes:
+    if build_all:
         print("Mode: All lanes")
     elif lane_filter:
-        print(f"Mode: Lane filter = {lane_filter}")
+        print(f"Mode: Lane/locale filter = {lane_filter}")
     elif brand_filter:
         print(f"Mode: Brand filter = {brand_filter}")
+    if args.format != "all":
+        print(f"Format filter: {args.format}")
+    if args.dry_run:
+        print("[DRY-RUN] — no files will be written")
 
     print("\nLoading registries...")
-    entries = generate_catalog(lane_filter=lane_filter, brand_filter=brand_filter)
+    lane_arg = None if build_all else lane_filter
+    entries = generate_catalog(lane_filter=lane_arg, brand_filter=brand_filter)
+
+    # Apply format filter
+    if args.format != "all":
+        before = len(entries)
+        entries = [e for e in entries if _format_matches(e, args.format)]
+        print(f"Format filter '{args.format}': {before} → {len(entries)} entries")
 
     print(f"\nGenerated {len(entries)} catalog entries")
 
     # Stats
-    by_type = {}
-    by_wave = {}
-    by_lane = {}
+    by_type: dict = {}
+    by_wave: dict = {}
+    by_lane: dict = {}
     for e in entries:
         by_type[e["content_type"]] = by_type.get(e["content_type"], 0) + 1
         by_wave[e["priority"]] = by_wave.get(e["priority"], 0) + 1
@@ -1393,6 +1530,11 @@ def main():
     print("\nBy lane (top 5):")
     for k, v in sorted(by_lane.items(), key=lambda x: -x[1])[:5]:
         print(f"  {k}: {v}")
+
+    if args.dry_run:
+        print(f"\n[DRY-RUN] Would write {len(entries)} entries to {args.output}")
+        print("[DRY-RUN] No files written.")
+        return
 
     # Write catalog CSV
     out_path = REPO_ROOT / args.output

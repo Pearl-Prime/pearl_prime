@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-21T22:42:53.977391Z",
+  "generated": "2026-04-21T23:17:48.051121Z",
   "personas": [
     "millennial_women_professionals",
     "tech_finance_burnout",
@@ -11,7 +11,9 @@
     "healthcare_rns",
     "gen_alpha_students",
     "first_responders",
-    "gen_z_student"
+    "gen_z_student",
+    "educators",
+    "midlife_women"
   ],
   "topics": [
     "anxiety",
@@ -28,7 +30,9 @@
     "self_worth",
     "sleep_anxiety",
     "social_anxiety",
-    "somatic_healing"
+    "somatic_healing",
+    "adhd_focus",
+    "mindfulness"
   ],
   "matrix": {
     "millennial_women_professionals": {
@@ -46,7 +50,9 @@
       "self_worth": "complete",
       "sleep_anxiety": "complete",
       "social_anxiety": "complete",
-      "somatic_healing": "complete"
+      "somatic_healing": "complete",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
     },
     "tech_finance_burnout": {
       "anxiety": "complete",
@@ -63,7 +69,9 @@
       "self_worth": "complete",
       "sleep_anxiety": "complete",
       "social_anxiety": "complete",
-      "somatic_healing": "complete"
+      "somatic_healing": "complete",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
     },
     "entrepreneurs": {
       "anxiety": "complete",
@@ -80,7 +88,9 @@
       "self_worth": "complete",
       "sleep_anxiety": "complete",
       "social_anxiety": "complete",
-      "somatic_healing": "complete"
+      "somatic_healing": "complete",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
     },
     "working_parents": {
       "anxiety": "complete",
@@ -97,7 +107,9 @@
       "self_worth": "complete",
       "sleep_anxiety": "complete",
       "social_anxiety": "complete",
-      "somatic_healing": "complete"
+      "somatic_healing": "complete",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
     },
     "gen_x_sandwich": {
       "anxiety": "complete",
@@ -114,7 +126,9 @@
       "self_worth": "complete",
       "sleep_anxiety": "complete",
       "social_anxiety": "complete",
-      "somatic_healing": "complete"
+      "somatic_healing": "complete",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
     },
     "corporate_managers": {
       "anxiety": "complete",
@@ -131,7 +145,9 @@
       "self_worth": "complete",
       "sleep_anxiety": "complete",
       "social_anxiety": "complete",
-      "somatic_healing": "complete"
+      "somatic_healing": "complete",
+      "adhd_focus": "complete",
+      "mindfulness": "missing"
     },
     "gen_z_professionals": {
       "anxiety": "complete",
@@ -148,7 +164,9 @@
       "self_worth": "complete",
       "sleep_anxiety": "complete",
       "social_anxiety": "complete",
-      "somatic_healing": "complete"
+      "somatic_healing": "complete",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
     },
     "healthcare_rns": {
       "anxiety": "complete",
@@ -165,7 +183,9 @@
       "self_worth": "complete",
       "sleep_anxiety": "complete",
       "social_anxiety": "complete",
-      "somatic_healing": "complete"
+      "somatic_healing": "complete",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
     },
     "gen_alpha_students": {
       "anxiety": "complete",
@@ -182,7 +202,9 @@
       "self_worth": "complete",
       "sleep_anxiety": "complete",
       "social_anxiety": "complete",
-      "somatic_healing": "complete"
+      "somatic_healing": "complete",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
     },
     "first_responders": {
       "anxiety": "complete",
@@ -199,7 +221,9 @@
       "self_worth": "complete",
       "sleep_anxiety": "complete",
       "social_anxiety": "complete",
-      "somatic_healing": "complete"
+      "somatic_healing": "complete",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
     },
     "gen_z_student": {
       "anxiety": "complete",
@@ -216,199 +240,267 @@
       "self_worth": "complete",
       "sleep_anxiety": "complete",
       "social_anxiety": "complete",
-      "somatic_healing": "complete"
+      "somatic_healing": "complete",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
+    },
+    "educators": {
+      "anxiety": "complete",
+      "boundaries": "complete",
+      "burnout": "missing",
+      "compassion_fatigue": "complete",
+      "courage": "complete",
+      "depression": "complete",
+      "financial_anxiety": "missing",
+      "financial_stress": "complete",
+      "grief": "complete",
+      "imposter_syndrome": "missing",
+      "overthinking": "missing",
+      "self_worth": "complete",
+      "sleep_anxiety": "missing",
+      "social_anxiety": "missing",
+      "somatic_healing": "missing",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
+    },
+    "midlife_women": {
+      "anxiety": "partial",
+      "boundaries": "partial",
+      "burnout": "missing",
+      "compassion_fatigue": "partial",
+      "courage": "missing",
+      "depression": "missing",
+      "financial_anxiety": "missing",
+      "financial_stress": "partial",
+      "grief": "missing",
+      "imposter_syndrome": "missing",
+      "overthinking": "missing",
+      "self_worth": "partial",
+      "sleep_anxiety": "missing",
+      "social_anxiety": "missing",
+      "somatic_healing": "missing",
+      "adhd_focus": "missing",
+      "mindfulness": "missing"
     }
   },
   "stats": {
-    "complete": 165,
-    "partial": 0,
-    "missing": 0
+    "complete": 174,
+    "partial": 5,
+    "missing": 42
   },
-  "coverage_pct": 100.0,
+  "coverage_pct": 78.7,
   "persona_summaries": {
     "millennial_women_professionals": {
       "complete": 15,
       "partial": 0,
-      "missing": 0,
-      "total": 15,
-      "pct": 100.0
+      "missing": 2,
+      "total": 17,
+      "pct": 88.2
     },
     "tech_finance_burnout": {
       "complete": 15,
       "partial": 0,
-      "missing": 0,
-      "total": 15,
-      "pct": 100.0
+      "missing": 2,
+      "total": 17,
+      "pct": 88.2
     },
     "entrepreneurs": {
       "complete": 15,
       "partial": 0,
-      "missing": 0,
-      "total": 15,
-      "pct": 100.0
+      "missing": 2,
+      "total": 17,
+      "pct": 88.2
     },
     "working_parents": {
       "complete": 15,
       "partial": 0,
-      "missing": 0,
-      "total": 15,
-      "pct": 100.0
+      "missing": 2,
+      "total": 17,
+      "pct": 88.2
     },
     "gen_x_sandwich": {
       "complete": 15,
       "partial": 0,
-      "missing": 0,
-      "total": 15,
-      "pct": 100.0
+      "missing": 2,
+      "total": 17,
+      "pct": 88.2
     },
     "corporate_managers": {
-      "complete": 15,
+      "complete": 16,
       "partial": 0,
-      "missing": 0,
-      "total": 15,
-      "pct": 100.0
+      "missing": 1,
+      "total": 17,
+      "pct": 94.1
     },
     "gen_z_professionals": {
       "complete": 15,
       "partial": 0,
-      "missing": 0,
-      "total": 15,
-      "pct": 100.0
+      "missing": 2,
+      "total": 17,
+      "pct": 88.2
     },
     "healthcare_rns": {
       "complete": 15,
       "partial": 0,
-      "missing": 0,
-      "total": 15,
-      "pct": 100.0
+      "missing": 2,
+      "total": 17,
+      "pct": 88.2
     },
     "gen_alpha_students": {
       "complete": 15,
       "partial": 0,
-      "missing": 0,
-      "total": 15,
-      "pct": 100.0
+      "missing": 2,
+      "total": 17,
+      "pct": 88.2
     },
     "first_responders": {
       "complete": 15,
       "partial": 0,
-      "missing": 0,
-      "total": 15,
-      "pct": 100.0
+      "missing": 2,
+      "total": 17,
+      "pct": 88.2
     },
     "gen_z_student": {
       "complete": 15,
       "partial": 0,
-      "missing": 0,
-      "total": 15,
-      "pct": 100.0
+      "missing": 2,
+      "total": 17,
+      "pct": 88.2
+    },
+    "educators": {
+      "complete": 8,
+      "partial": 0,
+      "missing": 9,
+      "total": 17,
+      "pct": 47.1
+    },
+    "midlife_women": {
+      "complete": 0,
+      "partial": 5,
+      "missing": 12,
+      "total": 17,
+      "pct": 0.0
     }
   },
   "topic_summaries": {
     "anxiety": {
-      "complete": 11,
-      "partial": 0,
+      "complete": 12,
+      "partial": 1,
       "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "total": 13,
+      "pct": 92.3
     },
     "boundaries": {
-      "complete": 11,
-      "partial": 0,
+      "complete": 12,
+      "partial": 1,
       "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "total": 13,
+      "pct": 92.3
     },
     "burnout": {
       "complete": 11,
       "partial": 0,
-      "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "missing": 2,
+      "total": 13,
+      "pct": 84.6
     },
     "compassion_fatigue": {
-      "complete": 11,
-      "partial": 0,
+      "complete": 12,
+      "partial": 1,
       "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "total": 13,
+      "pct": 92.3
     },
     "courage": {
-      "complete": 11,
+      "complete": 12,
       "partial": 0,
-      "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "missing": 1,
+      "total": 13,
+      "pct": 92.3
     },
     "depression": {
-      "complete": 11,
+      "complete": 12,
       "partial": 0,
-      "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "missing": 1,
+      "total": 13,
+      "pct": 92.3
     },
     "financial_anxiety": {
       "complete": 11,
       "partial": 0,
-      "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "missing": 2,
+      "total": 13,
+      "pct": 84.6
     },
     "financial_stress": {
-      "complete": 11,
-      "partial": 0,
+      "complete": 12,
+      "partial": 1,
       "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "total": 13,
+      "pct": 92.3
     },
     "grief": {
-      "complete": 11,
+      "complete": 12,
       "partial": 0,
-      "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "missing": 1,
+      "total": 13,
+      "pct": 92.3
     },
     "imposter_syndrome": {
       "complete": 11,
       "partial": 0,
-      "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "missing": 2,
+      "total": 13,
+      "pct": 84.6
     },
     "overthinking": {
       "complete": 11,
       "partial": 0,
-      "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "missing": 2,
+      "total": 13,
+      "pct": 84.6
     },
     "self_worth": {
-      "complete": 11,
-      "partial": 0,
+      "complete": 12,
+      "partial": 1,
       "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "total": 13,
+      "pct": 92.3
     },
     "sleep_anxiety": {
       "complete": 11,
       "partial": 0,
-      "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "missing": 2,
+      "total": 13,
+      "pct": 84.6
     },
     "social_anxiety": {
       "complete": 11,
       "partial": 0,
-      "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "missing": 2,
+      "total": 13,
+      "pct": 84.6
     },
     "somatic_healing": {
       "complete": 11,
       "partial": 0,
-      "missing": 0,
-      "total": 11,
-      "pct": 100.0
+      "missing": 2,
+      "total": 13,
+      "pct": 84.6
+    },
+    "adhd_focus": {
+      "complete": 1,
+      "partial": 0,
+      "missing": 12,
+      "total": 13,
+      "pct": 7.7
+    },
+    "mindfulness": {
+      "complete": 0,
+      "partial": 0,
+      "missing": 13,
+      "total": 13,
+      "pct": 0.0
     }
   }
 }

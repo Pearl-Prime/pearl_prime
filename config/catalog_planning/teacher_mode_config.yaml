@@ -1,0 +1,51 @@
+# Teacher Mode Configuration
+# Controls how teacher attribution appears in generated content.
+# Authority: Big View Phase 2
+# Used by: catalog generation pipeline, description_templates, content atoms
+
+modes:
+  named:
+    description: "Explicit teacher name and credential used throughout"
+    name_in_intro: true
+    name_in_exercises: true
+    name_in_conclusion: true
+    example_intro: "According to [TEACHER_NAME]..."
+    example_exercise: "[TEACHER_NAME]'s [PRACTICE_NAME]"
+
+  generalized:
+    description: "Teachings and philosophy used; teacher name NOT mentioned"
+    name_in_intro: false
+    name_in_exercises: false
+    name_in_conclusion: false
+    example_intro: "According to [TRADITION]..."
+    example_exercise: "A practice from [TRADITION] tradition"
+    attribution_style: tradition  # use tradition instead of teacher name
+
+  composite:
+    description: "No specific teacher; draws from multiple traditions"
+    name_in_intro: false
+    name_in_exercises: false
+    name_in_conclusion: false
+    attribution_style: none
+
+# Per-brand ratio defaults (can be overridden per brand in brand_teacher_matrix.yaml)
+default_catalog_mix:
+  named: 0.20        # 20% named-teacher books
+  generalized: 0.65  # 65% generalized-teacher (same teachings, no name)
+  composite: 0.15    # 15% composite / no-teacher
+
+# When teacher_mode flag is active in build, use this stricter mix
+teacher_mode_catalog_mix:
+  named: 0.20
+  generalized: 0.70
+  composite: 0.10
+
+# Platform spam-rule guidance
+# Applies to KDP, Google Play, Apple Books upload review policies
+platform_spam_notes:
+  named_max_per_week: 3       # cap on named-teacher books per brand per week
+  generalized_preferred: true
+  rationale: >
+    Platforms flag accounts that repeatedly publish books crediting the same named
+    teacher across many titles. Generalized mode uses the same underlying teachings
+    but attributes to tradition rather than individual, reducing spam-pattern risk.
