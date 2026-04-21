@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phoenix Omega — Executive Catalog Dashboard</title>
+  <style>
+    :root {
+      --bg: #0e0a06;
+      --card: #1a1410;
+      --border: rgba(180, 83, 9, 0.22);
+      --amber: #b45309;
+      --amber2: #d97706;
+      --cream: #faf6f0;
+      --muted: rgba(250, 246, 240, 0.45);
+      --green: #22c55e;
+      --yellow: #facc15;
+      --red: #ef4444;
+      --purple: #a78bfa;
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+      --mono: ui-monospace, "DM Mono", monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--cream);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      background: linear-gradient(180deg, #120c08, var(--bg));
+    }
+    header h1 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--amber2);
+      letter-spacing: 0.02em;
+    }
+    header p { color: var(--muted); font-size: 0.85rem; max-width: 52rem; margin-top: 0.35rem; }
+    .nav-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.85rem;
+    }
+    .nav-top a {
+      font-size: 0.72rem;
+      text-decoration: none;
+      color: var(--amber2);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      background: rgba(180, 83, 9, 0.08);
+    }
+    .nav-top a:hover { background: rgba(180, 83, 9, 0.18); }
+
+    main { max-width: 1400px; margin: 0 auto; padding: 1.25rem 1.5rem 3rem; }
+
+    /* KPI grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .kpi-card .label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .kpi-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--cream);
+    }
+    .kpi-card .sub { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+    /* Sections */
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--amber2);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .phase-tag {
+      font-size: 0.65rem;
+      background: rgba(180, 83, 9, 0.15);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 1px 6px;
+      font-weight: 400;
+    }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    th {
+      text-align: left;
+      padding: 7px 10px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    td { padding: 7px 10px; border-bottom: 1px solid rgba(180, 83, 9, 0.08); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(180, 83, 9, 0.05); }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .badge-green { background: rgba(34,197,94,0.15); color: var(--green); }
+    .badge-yellow { background: rgba(250,204,21,0.15); color: var(--yellow); }
+    .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-purple { background: rgba(167,139,250,0.15); color: var(--purple); }
+
+    /* Build controls */
+    .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .btn {
+      padding: 7px 14px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: var(--amber);
+      color: white;
+      transition: background 0.15s;
+    }
+    .btn:hover { background: var(--amber2); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-outline:hover { border-color: var(--amber); color: var(--amber2); }
+
+    .placeholder {
+      color: rgba(250, 246, 240, 0.3);
+      font-style: italic;
+      font-size: 0.82rem;
+      padding: 8px 0;
+    }
+    .cmd { font-family: var(--mono); font-size: 0.75rem; background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 3px; color: var(--amber2); }
+
+    /* Progress bar */
+    .progress-wrap { background: rgba(180,83,9,0.1); border-radius: 4px; height: 6px; margin-top: 4px; }
+    .progress-bar { height: 6px; border-radius: 4px; background: var(--green); }
+
+    /* Tier labels */
+    .tier-primary { color: var(--green); }
+    .tier-secondary { color: var(--yellow); }
+    .tier-tertiary { color: var(--muted); }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Phoenix Omega — Executive Catalog Dashboard</h1>
+  <p>Big View Phase 1 · Last updated: 2026-04-22 · Source: config/catalog/market_catalog_registry.yaml + artifacts/inventory/</p>
+  <nav class="nav-top">
+    <a href="index.html">Home</a>
+    <a href="content_inventory.html">Content Inventory</a>
+    <a href="market_lane_matrix.html">Market Lane Matrix</a>
+    <a href="brand_admin.html">Brand Admin</a>
+    <a href="marketing_dashboard.html">Marketing</a>
+    <a href="pearl_prime_entry.html">Pearl Prime</a>
+  </nav>
+</header>
+
+<main>
+  <!-- KPI Row -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="label">Markets</div>
+      <div class="value" id="market-count">14</div>
+      <div class="sub">global markets configured</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Teacher Brands</div>
+      <div class="value">12</div>
+      <div class="sub">global-west teacher brands</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">CJK Brands</div>
+      <div class="value">24</div>
+      <div class="sub">zh-specific (6 × 4 locales)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Atom Coverage</div>
+      <div class="value" id="atom-coverage-kpi">—</div>
+      <div class="sub">canonical persona × topic combos</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Total Atoms</div>
+      <div class="value">4,592</div>
+      <div class="sub">CANONICAL.txt files in atoms/</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Buildable Markets</div>
+      <div class="value" id="buildable-count">—</div>
+      <div class="sub">markets ready for English catalog build</div>
+    </div>
+  </div>
+
+  <!-- Build Controls -->
+  <div class="section">
+    <div class="section-title">Build Controls</div>
+    <div class="controls">
+      <button class="btn" onclick="runInventory()">Run Inventory Audit</button>
+      <button class="btn btn-outline" onclick="buildAllCatalogs()">Build All Catalogs</button>
+      <button class="btn btn-outline" onclick="runBestseller()">Run Bestseller Analysis <span style="font-size:0.7em;opacity:0.6">(Phase 2)</span></button>
+      <button class="btn btn-outline" onclick="loadAtomCoverage()">Load Coverage Data</button>
+    </div>
+    <p class="placeholder">
+      Inventory: <span class="cmd">python3 scripts/inventory/atom_coverage_audit.py</span> →
+      outputs to <span class="cmd">artifacts/inventory/</span>.
+      Catalog build: <span class="cmd">python3 scripts/catalog/generate_full_catalog.py --lane en_US</span>.
+      Full --scope all flag planned for Phase 2.
+    </p>
+  </div>
+
+  <!-- Market Overview -->
+  <div class="section">
+    <div class="section-title">Market Overview</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Market</th>
+          <th>Locale</th>
+          <th>Language</th>
+          <th>Tier</th>
+          <th>Brands</th>
+          <th>Tracks</th>
+          <th>Atom Coverage</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="market-tbody">
+        <!-- populated by JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Atom Inventory Coverage Panel -->
+  <div class="section">
+    <div class="section-title">Atom Inventory Coverage</div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-bottom:12px;">
+      Source: <span class="cmd">artifacts/inventory/atom_coverage_matrix.json</span>
+      · Run audit to refresh · 11 personas × 15 topics = 165 combos
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Persona</th>
+          <th>Topics</th>
+          <th>Complete</th>
+          <th>Partial</th>
+          <th>Missing</th>
+          <th>Coverage %</th>
+          <th>Buildable?</th>
+        </tr>
+      </thead>
+      <tbody id="atom-tbody">
+        <tr><td colspan="7" class="placeholder">Click "Load Coverage Data" to populate from atom_coverage_matrix.json</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- QA Status -->
+  <div class="section">
+    <div class="section-title">QA Status <span class="phase-tag">Phase 2</span></div>
+    <p class="placeholder">
+      QA findings registry not yet connected. Gates exist in <span class="cmd">config/quality/</span>
+      (bestseller_craft_gate.yaml, book_pass_gate_thresholds.yaml, ei_v2_config.yaml, canary_config.yaml).
+      Phase 2 will wire a findings log to <span class="cmd">artifacts/qa/</span>.
+    </p>
+  </div>
+
+  <!-- Research Impact -->
+  <div class="section">
+    <div class="section-title">Research Impact <span class="phase-tag">Phase 2</span></div>
+    <p class="placeholder">
+      Topic × market research signal (competitive_intel_apac_audio.yaml, catalog_buying_trigger.yaml)
+      not yet surfaced in UI. Phase 2.
+    </p>
+  </div>
+
+  <!-- Manga Production -->
+  <div class="section">
+    <div class="section-title">Manga Production <span class="phase-tag">Phase 3</span></div>
+    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:8px;">
+      Current: Stillness Press, Cognitive Clarity, Digital Ground manga series exist.
+      Japan dual-track configured (60% manga, 40% digital).
+    </p>
+    <p class="placeholder">
+      Phase 3: character-to-brand linkage for all 12 brands, background asset estimator,
+      layout system, manga asset pipeline beyond 3 current Stillness Press series.
+    </p>
+  </div>
+
+  <!-- Teacher Mode -->
+  <div class="section">
+    <div class="section-title">Teacher Mode <span class="phase-tag">Phase 2</span></div>
+    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:8px;">
+      Current: named-teacher mode (1 primary teacher per brand per lane).
+      12 teacher brands × 12+ market locales = full teacher matrix configured.
+    </p>
+    <p class="placeholder">
+      Generalized teaching-first variant (uses teachings, not teacher name) — Phase 2.
+    </p>
+  </div>
+</main>
+
+<script>
+  // ── Market data — sourced from config/catalog/market_catalog_registry.yaml ─────
+  const MARKETS = [
+    { id: "us",         name: "United States",      locale: "en_US", lang: "en",    tier: "primary",   brand_count: 12, tracks: ["ebook","audiobook","podcast","manga"], notes: "Primary English market" },
+    { id: "japan",      name: "Japan",              locale: "ja_JP", lang: "ja",    tier: "primary",   brand_count: 12, tracks: ["manga_partnership","digital_publishing"], notes: "Dual-track: 60% manga" },
+    { id: "korea",      name: "South Korea",        locale: "ko_KR", lang: "ko",    tier: "primary",   brand_count: 12, tracks: ["ebook","audiobook","webtoon"], notes: "" },
+    { id: "germany",    name: "Germany / DACH",     locale: "de_DE", lang: "de",    tier: "primary",   brand_count: 12, tracks: ["ebook","audiobook"], notes: "" },
+    { id: "france",     name: "France",             locale: "fr_FR", lang: "fr",    tier: "primary",   brand_count: 12, tracks: ["ebook","audiobook"], notes: "" },
+    { id: "taiwan",     name: "Taiwan",             locale: "zh_TW", lang: "zh-TW", tier: "secondary", brand_count: 18, tracks: ["ebook","audiobook"], notes: "6 zh-TW + 12 teacher brands" },
+    { id: "china",      name: "China Mainland",     locale: "zh_CN", lang: "zh-CN", tier: "secondary", brand_count: 18, tracks: ["ebook","audiobook"], notes: "Qwen/CJK6 pipeline" },
+    { id: "hong_kong",  name: "Hong Kong",          locale: "zh_HK", lang: "zh-HK", tier: "secondary", brand_count: 18, tracks: ["ebook","audiobook"], notes: "6 zh-HK + 12 teacher brands" },
+    { id: "spain",      name: "Spain",              locale: "es_ES", lang: "es-ES", tier: "secondary", brand_count: 12, tracks: ["ebook","audiobook"], notes: "" },
+    { id: "latam",      name: "Latin America",      locale: "es_US", lang: "es-LATAM", tier: "secondary", brand_count: 12, tracks: ["ebook","audiobook"], notes: "LATAM Spanish" },
+    { id: "brazil",     name: "Brazil",             locale: "pt_BR", lang: "pt-BR", tier: "secondary", brand_count: 12, tracks: ["ebook","audiobook"], notes: "" },
+    { id: "italy",      name: "Italy",              locale: "it_IT", lang: "it",    tier: "secondary", brand_count: 12, tracks: ["ebook","audiobook"], notes: "" },
+    { id: "singapore",  name: "Singapore",          locale: "zh_SG", lang: "zh-SG", tier: "tertiary",  brand_count: 18, tracks: ["ebook","audiobook"], notes: "6 zh-SG + 12 teacher brands" },
+    { id: "hungary",    name: "Hungary",            locale: "hu_HU", lang: "hu",    tier: "tertiary",  brand_count: 12, tracks: ["ebook","audiobook"], notes: "" },
+  ];
+
+  // ── Helpers ───────────────────────────────────────────────────────────────────
+  function badge(text, cls) {
+    return `<span class="badge badge-${cls}">${text}</span>`;
+  }
+
+  function coverageBadge(pct) {
+    if (pct >= 90) return badge("Ready", "green");
+    if (pct >= 60) return badge("Partial", "yellow");
+    return badge("Gaps", "red");
+  }
+
+  function tierClass(tier) {
+    return { primary: "tier-primary", secondary: "tier-secondary", tertiary: "tier-tertiary" }[tier] || "";
+  }
+
+  function buildable_label(pct) {
+    if (pct >= 90) return badge("Yes", "green");
+    if (pct >= 60) return badge("Partial", "yellow");
+    return badge("No", "red");
+  }
+
+  // ── Init market table ─────────────────────────────────────────────────────────
+  function initMarketTable() {
+    const tbody = document.getElementById("market-tbody");
+    // English markets have 100% English atoms. Non-English = partial (translation pipeline).
+    const atomReadyLocales = ["en_US"];
+    const cjkLocales = ["zh_TW","zh_CN","zh_HK","zh_SG"];
+    const mangaLocales = ["ja_JP","ko_KR"];
+
+    let buildableCount = 0;
+
+    tbody.innerHTML = MARKETS.map(m => {
+      let atomNote, statusBadge;
+      if (atomReadyLocales.includes(m.locale)) {
+        atomNote = "100% (165/165)";
+        statusBadge = badge("Ready", "green");
+        buildableCount++;
+      } else if (cjkLocales.includes(m.locale)) {
+        atomNote = "Qwen/CJK6 pipeline";
+        statusBadge = badge("CJK Pipeline", "purple");
+      } else if (mangaLocales.includes(m.locale)) {
+        atomNote = "EN atoms 100%; manga TBD";
+        statusBadge = badge("Partial", "yellow");
+      } else {
+        atomNote = "EN atoms 100%; translation needed";
+        statusBadge = badge("Translation", "yellow");
+      }
+
+      const trackStr = m.tracks.slice(0,3).join(", ") + (m.tracks.length > 3 ? "…" : "");
+
+      return `<tr>
+        <td><strong>${m.name}</strong>${m.notes ? `<br><small style="color:var(--muted)">${m.notes}</small>` : ""}</td>
+        <td><span class="cmd">${m.locale}</span></td>
+        <td>${m.lang}</td>
+        <td class="${tierClass(m.tier)}">${m.tier}</td>
+        <td>${m.brand_count}</td>
+        <td style="font-size:0.75rem">${trackStr}</td>
+        <td>${atomNote}</td>
+        <td>${statusBadge}</td>
+      </tr>`;
+    }).join("");
+
+    document.getElementById("market-count").textContent = MARKETS.length;
+    document.getElementById("buildable-count").textContent = buildableCount;
+  }
+
+  // ── Load atom coverage from JSON ──────────────────────────────────────────────
+  async function loadAtomCoverage() {
+    const tbody = document.getElementById("atom-tbody");
+    tbody.innerHTML = `<tr><td colspan="7" class="placeholder">Loading…</td></tr>`;
+    try {
+      const resp = await fetch("../../artifacts/inventory/atom_coverage_matrix.json");
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+
+      const personas = data.personas || [];
+      const topics = data.topics || [];
+      const matrix = data.matrix || {};
+      const summaries = data.persona_summaries || {};
+
+      // Update KPI
+      document.getElementById("atom-coverage-kpi").textContent = data.coverage_pct + "%";
+
+      tbody.innerHTML = personas.map(p => {
+        const s = summaries[p] || {};
+        const pct = s.pct || 0;
+        const colorStyle = pct >= 90 ? "color:var(--green)" : pct >= 60 ? "color:var(--yellow)" : "color:var(--red)";
+        return `<tr>
+          <td>${p}</td>
+          <td>${(s.complete || 0) + (s.partial || 0)} / ${topics.length}</td>
+          <td>${s.complete || 0}</td>
+          <td>${s.partial || 0}</td>
+          <td>${s.missing || 0}</td>
+          <td style="${colorStyle}">${pct}%
+            <div class="progress-wrap"><div class="progress-bar" style="width:${pct}%;background:${pct>=90?'var(--green)':pct>=60?'var(--yellow)':'var(--red)'}"></div></div>
+          </td>
+          <td>${buildable_label(pct)}</td>
+        </tr>`;
+      }).join("");
+    } catch (e) {
+      tbody.innerHTML = `<tr><td colspan="7" class="placeholder">
+        Could not load coverage data (${e.message}).<br>
+        Run: <span class="cmd">python3 scripts/inventory/atom_coverage_audit.py</span> then reload.
+      </td></tr>`;
+    }
+  }
+
+  // ── Build controls ─────────────────────────────────────────────────────────────
+  function runInventory() {
+    alert(
+      "Run inventory audit:\n\n" +
+      "  python3 scripts/inventory/atom_coverage_audit.py\n\n" +
+      "Then click 'Load Coverage Data' to refresh this panel."
+    );
+  }
+
+  function buildAllCatalogs() {
+    alert(
+      "Build all catalogs (Phase 1 — by lane):\n\n" +
+      "  python3 scripts/catalog/generate_full_catalog.py --all-lanes\n\n" +
+      "--scope all / --market flags planned for Phase 2."
+    );
+  }
+
+  function runBestseller() {
+    alert("Bestseller analysis integration planned for Phase 2.");
+  }
+
+  // ── Init ───────────────────────────────────────────────────────────────────────
+  initMarketTable();
+</script>
+</body>
+</html>
