@@ -154,11 +154,16 @@ resolver:
 
     imposter_syndrome:
       selected_mechanism:
+        # Prose variants (experiential, preferred for variety)
         - "the internal audit that discounts every credential the moment it's earned"
         - "attributing outcomes to luck precisely when competence most clearly caused them"
         - "the gap between external evidence and internal permission to believe it"
         - "the expectation of being found out held as a permanent background process"
         - "belonging treated as something that can be revoked at any moment for reasons you can't predict"
+        # Academic terms kept as valid variants — tfb atoms are pre-baked with these;
+        # included here so the pool is complete if atoms are later templated.
+        - "the imposter phenomenon"
+        - "attribution bias"
       selected_signal:
         - "You prepared twice as hard so no one would see that you weren't sure you should be there."
         - "The promotion arrived and the first thing you felt was that someone made a mistake."
