@@ -1,24 +1,32 @@
 {
   "date": "2026-04-22",
-  "cycle": "morning",
+  "cycle": "evening",
   "teachers_completed": [
-    "miki"
+    "master_wu",
+    "joshin",
+    "ra",
+    "ahjan",
+    "junko",
+    "pamela_fellows",
+    "sai_ma",
+    "master_feung"
   ],
   "teachers_failed": [
-    "master_wu"
+    "miki",
+    "maat"
   ],
-  "articles_published": 1,
-  "articles_failed": 1,
+  "articles_published": 8,
+  "articles_failed": 2,
   "topic_plan": {
-    "master_wu": "economy_work",
-    "sai_ma": "climate",
-    "ahjan": "peace_conflict",
     "ra": "mental_health",
-    "master_feung": "partnerships",
-    "pamela_fellows": "education",
-    "maat": "inequality",
+    "sai_ma": "peace_conflict",
+    "master_wu": "climate",
+    "miki": "education",
+    "master_feung": "inequality",
+    "maat": "economy_work",
+    "pamela_fellows": "partnerships",
     "junko": "mental_health",
     "joshin": "mental_health",
-    "miki": "climate"
+    "ahjan": "climate"
   }
 }
