@@ -25,6 +25,101 @@ from phoenix_v4.planning.exercise_journey_planner import JOURNEY_INTROS
 _DOUBLE_BRACE_RE = re.compile(r"\{\{[^}]+\}\}")
 _SINGLE_BRACE_RE = re.compile(r"\{[a-zA-Z_][a-zA-Z0-9_]*\}")
 
+# Location profile registry — loaded once from config/localization/render_location_profiles.yaml
+_location_profiles_cache: Optional[Dict[str, Any]] = None
+_DEFAULT_LOCATION_PROFILE = "generic_us_urban"
+
+# Per-persona default location profile (based on persona_aware_grounding_research.md)
+_PERSONA_LOCATION_DEFAULTS: Dict[str, str] = {
+    "corporate_managers":          "nyc_grand_central",
+    "millennial_women_professionals": "nyc_metro",
+    "tech_finance_burnout":        "generic_us_urban",
+    "gen_z_professionals":         "generic_us_urban",
+    "entrepreneurs":               "coastal_california",
+    "working_parents":             "generic_us_urban",
+    "healthcare_rns":              "generic_us_urban",
+    "first_responders":            "generic_us_urban",
+    "gen_x_sandwich":              "generic_us_urban",
+    "gen_alpha_students":          "generic_us_urban",
+}
+
+# Hard fallbacks used only when profile file is missing or a token has no profile entry.
+_LOCALE_TOKEN_HARDCODED_FALLBACKS: Dict[str, str] = {
+    "street_name":    "the street below",
+    "weather_detail": "the afternoon light",
+    "transit_line":   "the train",
+    "transit_stop":   "the platform",
+    "city_name":      "the city",
+    "neighborhood":   "the neighborhood",
+    "building_type":  "the building",
+    "local_landmark": "a landmark nearby",
+    "park_name":      "the park",
+    "coffee_shop":    "a coffee shop",
+    "commute_mode":   "the commute",
+    "restaurant":     "a nearby restaurant",
+    "store_name":     "a nearby store",
+    "office_building": "the office building",
+}
+
+
+def _load_location_profiles() -> Dict[str, Any]:
+    global _location_profiles_cache
+    if _location_profiles_cache is not None:
+        return _location_profiles_cache
+    try:
+        import yaml as _yaml
+        from pathlib import Path as _Path
+        _repo = _Path(__file__).resolve().parent.parent.parent
+        _path = _repo / "config" / "localization" / "render_location_profiles.yaml"
+        if _path.exists():
+            with open(_path, encoding="utf-8") as _f:
+                _data = _yaml.safe_load(_f) or {}
+            _location_profiles_cache = _data.get("profiles") or {}
+        else:
+            _location_profiles_cache = {}
+    except Exception:
+        _location_profiles_cache = {}
+    return _location_profiles_cache
+
+
+def _resolve_location_profile(spine_context: Dict[str, Any]) -> Dict[str, str]:
+    """
+    Return a {token_name: value} map for the book's location profile.
+    Priority: spine_context["location_profile"] > persona default > generic_us_urban.
+    Falls back to hardcoded strings if profile file is missing.
+    """
+    profiles = _load_location_profiles()
+    if not profiles:
+        return dict(_LOCALE_TOKEN_HARDCODED_FALLBACKS)
+
+    # Determine which profile to use
+    explicit = str(spine_context.get("location_profile") or "").strip().lower()
+    persona_id = str(spine_context.get("persona_id") or "").strip()
+    persona_default = _PERSONA_LOCATION_DEFAULTS.get(persona_id, _DEFAULT_LOCATION_PROFILE)
+    profile_key = explicit or persona_default
+
+    profile = profiles.get(profile_key) or profiles.get(_DEFAULT_LOCATION_PROFILE) or {}
+    result: Dict[str, str] = dict(_LOCALE_TOKEN_HARDCODED_FALLBACKS)
+    result.update({k: str(v) for k, v in profile.items() if k != "aliases" and v})
+    return result
+
+
+def _fill_locale_tokens(text: str, location_tokens: Optional[Dict[str, str]] = None) -> str:
+    """Replace {token_name} placeholders with resolved locale values.
+
+    Case-insensitive matching: handles both {weather_detail} and {Weather_detail}
+    (the latter appears in some first_responders and entrepreneurs atom files due
+    to an authoring inconsistency — treated as the same token).
+    """
+    tokens = location_tokens or _LOCALE_TOKEN_HARDCODED_FALLBACKS
+    for token_name, value in tokens.items():
+        # Exact match (lowercase, as authored in gen_z atoms)
+        text = text.replace(f"{{{token_name}}}", value)
+        # Title-case variant (first_responders, entrepreneurs, millennial_women atoms)
+        title_token = token_name[0].upper() + token_name[1:]
+        if title_token != token_name:
+            text = text.replace(f"{{{title_token}}}", value)
+    return text
 
 def _strip_placeholders(text: str) -> Tuple[str, List[str]]:
     warnings: List[str] = []
@@ -131,6 +226,8 @@ def compose_section_packet(
     expand_thin_sections: bool = False,
     teacher_voice: Optional[Any] = None,
     supplemental_enrichment_blocks: Optional[List[str]] = None,
+    story_schedule: Optional[Any] = None,
+    slot_tracker: Optional[Any] = None,
 ) -> dict:
     """
     Stack all available layers into one section packet.
@@ -138,11 +235,12 @@ def compose_section_packet(
     Order:
       1. Bridge (optional)
       2. Exercise journey intro (optional)
-      3. Legacy template scaffold (optional)
-      4. Core enrichment (registry / persona / practice / gap — not depth_module-only rows)
-      5. Supplemental enrichment blocks (optional — multi-variant / format scaling)
-      6. Teacher atom overlay (optional, separate from slot.content when passed explicitly)
-      7. Depth module expansion (explicit arg and/or depth_module:* enrichment source)
+      3. [HOOK only] Core enrichment first — recognition beat precedes somatic invitation
+      4. Legacy template scaffold (optional)
+      5. Core enrichment (all non-HOOK section types)
+      6. Supplemental enrichment blocks (optional — multi-variant / format scaling)
+      7. Teacher atom overlay — only when spine_context["teacher_id"] is set
+      8. Depth module expansion (explicit arg and/or depth_module:* enrichment source)
 
     When ``beatmap_slot`` includes ``target_words``, it overrides the ``target_words`` argument.
     """
@@ -174,6 +272,45 @@ def compose_section_packet(
                 min_words=1,
             )
 
+    core_from_slot, depth_from_slot = _enrichment_split(enrichment_slot)
+    core = core_from_slot.strip()
+
+    # ── HOOK: persona-specific recognition beat precedes the somatic template ────
+    # Priority: scene_recognition bank (persona+topic filtered, forbidden_terms enforced)
+    # → fall back to enrichment slot content if no bank entry found for this persona.
+    # The template's somatic invitation always follows.
+    is_hook = str(section_type).upper() == "HOOK"
+    if is_hook:
+        _hook_beat: Optional[str] = None
+        _hook_source: str = "enrichment"
+        try:
+            from phoenix_v4.planning.injection_resolver import _find_scene_content
+            _persona = str(spine_context.get("persona_id") or "")
+            _topic = str(spine_context.get("topic") or spine_context.get("topic_id") or "")
+            _hook_seed = _packet_injection_seed(spine_context, chapter_index, section_index)
+            try:
+                import importlib
+                _root = importlib.import_module("phoenix_v4.planning.injection_resolver").REPO_ROOT
+            except Exception:
+                from pathlib import Path as _Path
+                _root = _Path(__file__).resolve().parent.parent.parent
+            _scene = _find_scene_content(
+                _topic, _persona, _hook_seed, _root,
+                bank_type="recognition",
+                slot_tracker=slot_tracker,
+            )
+            if _scene and _word_count(str(_scene.get("text") or "")) >= 5:
+                _hook_beat = str(_scene["text"]).strip()
+                _hook_source = str(_scene.get("source") or "scene_recognition")
+        except Exception:
+            pass
+        # Fall back to enrichment slot content if no recognition bank hit
+        if not _hook_beat and core and not core.startswith("[CONTENT GAP:"):
+            _hook_beat = core
+        if _hook_beat:
+            _append_layer(blocks, sources_used, _hook_source, _hook_beat, seen_norms, min_words=5)
+        core = ""  # consumed for HOOK; skip post-template enrichment append below
+
     legacy_text = ""
     if legacy_template_section:
         legacy_text = str(legacy_template_section.get("text") or "").strip()
@@ -192,6 +329,8 @@ def compose_section_packet(
                 teacher_id=spine_context.get("teacher_id"),
                 exercise_phase=ex_phase_dict,
                 seed=inj_seed,
+                story_schedule=story_schedule,
+                slot_tracker=slot_tracker,
             )
             legacy_text = str(resolved.get("text") or "").strip()
             for src in resolved.get("sources_used") or []:
@@ -207,9 +346,6 @@ def compose_section_packet(
                 seen_norms,
                 min_words=11,
             )
-
-    core_from_slot, depth_from_slot = _enrichment_split(enrichment_slot)
-    core = core_from_slot.strip()
 
     if core:
         gap = core.startswith("[CONTENT GAP:")
@@ -235,7 +371,10 @@ def compose_section_packet(
             min_words=11,
         )
 
-    if teacher_atom_content:
+    # Teacher atom only appends in explicit teacher mode (teacher_id set in spine_context).
+    # Without a teacher_id the content has no owner, no wrapper, and no voice attribution.
+    _teacher_id = spine_context.get("teacher_id") or spine_context.get("teacher")
+    if teacher_atom_content and _teacher_id:
         _append_layer(
             blocks,
             sources_used,
@@ -265,6 +404,26 @@ def compose_section_packet(
         if len(_w) > _cap:
             raw_text = " ".join(_w[:_cap]).strip()
 
+    # Fill {selected_mechanism} / {selected_signal} before locale tokens and strip pass.
+    # These appear in REFLECTION atoms for tech_finance_burnout + millennial_women_professionals.
+    _mech_topic = str(spine_context.get("topic") or spine_context.get("topic_id") or "")
+    _mech_persona = str(spine_context.get("persona_id") or "")
+    _mech_seed = _packet_injection_seed(spine_context, chapter_index, section_index)
+    if _mech_topic and _mech_persona and (
+        "{selected_mechanism}" in raw_text or "{selected_signal}" in raw_text
+    ):
+        try:
+            from phoenix_v4.planning.injection_resolver import (
+                _fill_mechanism_tokens as _fmt,
+            )
+            from pathlib import Path as _Path
+            _mech_root = _Path(__file__).resolve().parent.parent.parent
+            raw_text = _fmt(raw_text, _mech_persona, _mech_topic, _mech_seed, _mech_root)
+        except Exception:
+            pass
+
+    _loc_tokens = _resolve_location_profile(spine_context)
+    raw_text = _fill_locale_tokens(raw_text, _loc_tokens)
     cleaned_placeholders, ph_warn = _strip_placeholders(raw_text)
     extra_warnings.extend(ph_warn)
 

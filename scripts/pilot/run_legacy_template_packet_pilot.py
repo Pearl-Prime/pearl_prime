@@ -66,6 +66,8 @@ def main() -> int:
         load_legacy_section,
         load_transition_bridge_for_chapter_start,
     )
+    from phoenix_v4.planning.injection_resolver import BookSlotTracker
+    from phoenix_v4.planning.story_planner import build_story_schedule, describe_schedule
     from phoenix_v4.rendering.section_packet_composer import compose_section_packet
 
     topic = args.topic.strip()
@@ -110,6 +112,21 @@ def main() -> int:
             enabled=True,
             repo_root=REPO_ROOT,
         )
+
+    # Build the full-book story schedule once: 3 full-arch stories per phase,
+    # each character's arc spread across their chapter's 3 SCENE slots.
+    story_schedule = build_story_schedule(
+        persona_id=persona,
+        topic=topic,
+        seed=args.seed,
+        repo_root=REPO_ROOT,
+        n_per_phase=3,
+    )
+    print(describe_schedule(story_schedule))
+
+    # One tracker per book: enforces no-repeat variant IDs and collision-family spread
+    # across all 12 chapters × all slot types (HOOK recognition, SCENE injection, etc.).
+    slot_tracker = BookSlotTracker()
 
     audit_rows: List[Dict[str, Any]] = []
     chapter_words: Dict[int, int] = defaultdict(int)
@@ -172,6 +189,11 @@ def main() -> int:
                 "role": role,
                 "emotional_job": emotional_job,
                 "working_title": ech.working_title,
+                "topic": topic,
+                "topic_id": topic,
+                "persona_id": persona,
+                "teacher_id": teacher,
+                "seed": args.seed,
             }
             beat_slot: Dict[str, Any] = {}
             if bm_ch and slot_idx < len(bm_ch.slots):
@@ -211,6 +233,11 @@ def main() -> int:
             tw = beat_slot.get("target_words") if beat_slot else target_per_section_nominal
             if not isinstance(tw, int) or tw <= 0:
                 tw = target_per_section_nominal
+            # Floor at nominal so beatmap standard_book small targets don't truncate injection.
+            # Also write back into beat_slot so the composer's bm_slot override uses the floored value.
+            tw = max(tw, target_per_section_nominal)
+            if beat_slot:
+                beat_slot["target_words"] = tw
 
             ex_phase = getattr(slot, "exercise_phase", None)
             if not (bm_slot_count and slot_idx < bm_slot_count):
@@ -229,6 +256,8 @@ def main() -> int:
                 quality_profile="draft",
                 exercise_phase=ex_phase,
                 teacher_atom_content=teacher_layer,
+                story_schedule=story_schedule,
+                slot_tracker=slot_tracker,
             )
 
             body = packet["text"]
@@ -266,6 +295,12 @@ def main() -> int:
     budget["legacy_template_library"] = args.legacy_library
     budget["packet_total_words"] = total_w
     budget["chapter_words_from_packets"] = {str(k): v for k, v in sorted(chapter_words.items())}
+    # Include variety stats from the BookSlotTracker so the audit shows collision-family spread.
+    budget["slot_tracker_variety"] = {
+        "unique_variants_used": len(slot_tracker._used_ids),
+        "collision_family_counts": dict(slot_tracker._family_counts),
+        "slot_history": {k: v for k, v in slot_tracker._slot_history.items()},
+    }
     (out_dir / "word_budget.json").write_text(
         json.dumps(budget, indent=2, ensure_ascii=False),
         encoding="utf-8",

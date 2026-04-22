@@ -568,11 +568,21 @@ def _run_spine_pipeline_mode(
     post_depth_words = enriched.total_words
 
     _governance_report: dict = {}
+    # BookSlotTracker enforces variety across HOOK recognition-bank picks for a full book.
+    # Created here so it is available when the spine path adopts section_packet_composer.
+    # The pilot path (run_legacy_template_packet_pilot.py) already uses it via injection_resolver.
+    try:
+        from phoenix_v4.planning.injection_resolver import BookSlotTracker
+
+        _book_slot_tracker = BookSlotTracker()
+    except Exception:
+        _book_slot_tracker = None  # type: ignore[assignment]
     prose = compose_from_enriched_book(
         enriched,
         quality_profile=quality_profile,
         governance_report=_governance_report,
         artifact_dir=render_dir,
+        slot_tracker=_book_slot_tracker,
     )
     prose = clean_for_delivery(
         prose,

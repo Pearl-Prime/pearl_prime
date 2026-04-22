@@ -1,0 +1,167 @@
+# selected_mechanism_resolver.yaml
+# Resolver config for {selected_mechanism} and {selected_signal} slots
+# in REFLECTION atoms for tech_finance_burnout and millennial_women_professionals.
+#
+# selected_mechanism: noun/gerund phrase that fits mid-sentence.
+#   "The mechanism is {selected_mechanism}."
+#   "What's underneath is {selected_mechanism}."
+#
+# selected_signal: complete sentence used as a closing punctuation beat.
+#   "{selected_signal}. The monitoring layer never gets a maintenance window."
+#
+# Voice: second-person, behavioral/systemic — no clinical labels.
+# Source: somatic experiencing (Levine), polyvagal (Porges), ACT, IFS,
+#         HRV/sleep research, imposter phenomenon literature, burnout studies.
+#
+# Selection: deterministic hash pick from the list using
+#   seed = "{book_seed}:{persona}:{topic}:mechanism:{chapter_index}"
+# so the same book always gets the same mechanism, but different books vary.
+
+---
+
+resolver:
+
+  tech_finance_burnout:
+
+    sleep_anxiety:
+      selected_mechanism:
+        - "hypervigilance reframed as competitive preparation"
+        - "the brain running post-mortem analysis on a day that isn't finished"
+        - "threat-scanning dressed up as strategic planning"
+        - "the production monitoring mindset applied to your own nervous system"
+        - "sleep treated as an optimization variable you haven't solved yet"
+      selected_signal:
+        - "The part of you that checks dashboards at midnight doesn't know how to go offline."
+        - "Your body is horizontal but the on-call rotation is still running."
+        - "Every time you close your eyes, the incident retrospective starts again."
+        - "The monitoring layer never gets a maintenance window."
+        - "You are the system that never gets a graceful shutdown."
+
+    overthinking:
+      selected_mechanism:
+        - "pre-mortem rehearsal loops mistaken for due diligence"
+        - "decision trees that branch faster than they resolve"
+        - "second-order consequence modeling with no terminal condition"
+        - "pattern-matching against worst-case scenarios as a form of control"
+        - "the analyst brain running simulations without a stop function"
+      selected_signal:
+        - "You have stress-tested a conversation that hasn't happened yet."
+        - "The model keeps running even after you've closed the tab."
+        - "Every variable has been weighted except the one where it turns out fine."
+        - "You've built the whole architecture before anyone asked for the spec."
+        - "The scenario you can't stop replaying has seventeen contingency branches."
+
+    social_anxiety:
+      selected_mechanism:
+        - "real-time performance review running in the background of every conversation"
+        - "reading the room as a data collection exercise with no clean output"
+        - "calibrating every statement against perceived status hierarchy"
+        - "the code review mindset applied to your own words after you've said them"
+        - "audience modeling that never reaches a confidence threshold"
+      selected_signal:
+        - "You debrief the meeting the way you debrief a bad deploy."
+        - "The post-call analysis starts before the call is over."
+        - "You flagged the thing you said in standup as a potential bug at 11pm."
+        - "Every room becomes a stack rank you're not sure where you place in."
+        - "The silence after you spoke is still being interpreted."
+
+    somatic_healing:
+      selected_mechanism:
+        - "the body treated as infrastructure to be maintained at minimum viable function"
+        - "physical signals routed through the cognitive layer before they're allowed to register"
+        - "performance metrics applied to recovery — sleep scores, HRV targets, readiness numbers"
+        - "the habit of overriding embodied cues in favor of schedule compliance"
+        - "sensation filtered through a cost-benefit analysis before it becomes information"
+      selected_signal:
+        - "You optimized your recovery stack before you learned to feel tired."
+        - "Your body has been submitting tickets you keep marking as low priority."
+        - "The tension in your shoulders is not a configuration error you can patch."
+        - "You have data on your stress response but you haven't met it yet."
+        - "There is a difference between tracking your body and inhabiting it."
+
+
+  millennial_women_professionals:
+
+    sleep_anxiety:
+      selected_mechanism:
+        - "the mental load inventory running its nightly audit"
+        - "the gap between who you had to be today and who you actually are"
+        - "care labor accounting — tallying what got done and what got deferred"
+        - "the performance layer not knowing it has permission to end"
+        - "vigilance carried from gendered workplaces into the body's rest state"
+      selected_signal:
+        - "The to-do list expands right as the room goes dark."
+        - "Your nervous system is still managing everyone else's emotional weather."
+        - "The version of you that had to hold it together is still holding it together."
+        - "Sleep requires putting down something you were never taught you could put down."
+        - "The part of you on-call for everyone else didn't get the memo about rest."
+
+    overthinking:
+      selected_mechanism:
+        - "anticipating how your words will be received before you say them"
+        - "tone-calibrating in real time across multiple relationships simultaneously"
+        - "the likeability-credibility tightrope run as a background process"
+        - "rehearsing assertiveness until it calcifies into silence"
+        - "managing perception as a form of emotional labor you didn't consent to"
+      selected_signal:
+        - "You edited the email into neutrality and then didn't send it anyway."
+        - "The thing you wanted to say got softened into something that meant nothing."
+        - "You've pre-apologized for an opinion you haven't voiced yet."
+        - "The right words exist and you've run out of safe contexts to say them in."
+        - "You've had the conversation fifteen times internally and zero times out loud."
+
+    social_anxiety:
+      selected_mechanism:
+        - "the double bind of being too much and not enough in the same room"
+        - "reading whether you're being seen as competent or difficult in real time"
+        - "managing visibility — when to speak, when shrinking is the safer move"
+        - "code-switching as a continuous tax on presence"
+        - "the awareness that your confidence will be read differently than his is"
+      selected_signal:
+        - "You made yourself smaller and no one noticed, and that somehow felt like the goal."
+        - "You scanned the room for who was annoyed before you finished your sentence."
+        - "Taking up space still requires a justification you shouldn't have to write."
+        - "You were the most prepared person there and still asked if it was okay to speak."
+        - "The exhaustion isn't from the room — it's from managing your presence in it."
+
+    somatic_healing:
+      selected_mechanism:
+        - "the chronic contraction of a body shaped by years of making itself acceptable"
+        - "holding softness as a liability and armoring up as a professional skill"
+        - "emotional competence performed for others at the cost of felt sense"
+        - "the freeze response misread as composure and rewarded for it"
+        - "the body as a site of other people's comfort rather than your own signal"
+      selected_signal:
+        - "You learned professional stillness before you learned what your body was actually saying."
+        - "The composure you were praised for was dissociation with better posture."
+        - "Your shoulders have been holding a conversation your mouth was never allowed to finish."
+        - "You have been deeply, thoroughly fine for years in a way that costs something."
+        - "The body keeps the score of every time you smiled through something that wasn't okay."
+
+    financial_anxiety:
+      selected_mechanism:
+        - "the constant mental accounting of contingency buffers that are never big enough"
+        - "money as the variable that determines whether you get to keep your life"
+        - "earning more while the gap between your income and your security feeling stays fixed"
+        - "the script that says your value is provisional until you can prove it financially"
+        - "carrying the weight of generational financial correction on a single salary"
+      selected_signal:
+        - "The number in your account doesn't match the feeling of scarcity you can't turn off."
+        - "You make more than you ever expected to and still check your balance with your eyes half closed."
+        - "Financial safety is a number that keeps moving just past where you are."
+        - "The spreadsheet is detailed and the dread is unaffected by it."
+        - "You are the emergency fund for people you love, and no one is yours."
+
+    imposter_syndrome:
+      selected_mechanism:
+        - "the internal audit that discounts every credential the moment it's earned"
+        - "attributing outcomes to luck precisely when competence most clearly caused them"
+        - "the gap between external evidence and internal permission to believe it"
+        - "the expectation of being found out held as a permanent background process"
+        - "belonging treated as something that can be revoked at any moment for reasons you can't predict"
+      selected_signal:
+        - "You prepared twice as hard so no one would see that you weren't sure you should be there."
+        - "The promotion arrived and the first thing you felt was that someone made a mistake."
+        - "You can recite every failure and none of the evidence that contradicts it."
+        - "The closer you get to the table, the more you're convinced you're about to be asked to leave."
+        - "You have never once felt as capable as your resume says you are."

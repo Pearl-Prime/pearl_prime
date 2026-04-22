@@ -2199,6 +2199,7 @@ def compose_from_enriched_book(
     *,
     governance_report: Optional[dict[str, Any]] = None,
     artifact_dir: Optional[Path] = None,
+    slot_tracker: Optional[Any] = None,
 ) -> str:
     """
     Render an EnrichedBook to prose text.
@@ -2216,8 +2217,12 @@ def compose_from_enriched_book(
         governance_report: Optional mutable dict for telemetry
             (exercise_slots_dropped, chapter_contract_warnings, frame_governance_chapters,
             frame_softened_sentences, frame_stripped_sentences, frame_hard_fail_reasons).
+        slot_tracker: Optional BookSlotTracker from injection_resolver. Held here for
+            future threading into compose_golden_spine_chapter when that path adopts
+            section_packet_composer. Currently accepted but not consumed.
     """
     del quality_profile  # pilot — reserved
+    del slot_tracker  # reserved — will be threaded into compose_golden_spine_chapter
 
     if artifact_dir is not None:
         from phoenix_v4.planning.enrichment_select import write_selected_content_variants_json
