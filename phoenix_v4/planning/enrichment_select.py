@@ -1568,8 +1568,8 @@ def _load_depth_content(
             canonical = repo_root / "atoms" / persona_id / topic / slot_type / "CANONICAL.txt"
             if canonical.exists():
                 raw = canonical.read_text(encoding="utf-8")
-                content = _extract_prose_from_canonical(raw)
-                chunk = _select_prose_chunk(content, seed)
+                prose = _extract_prose_from_canonical(raw)
+                chunk = _select_prose_chunk(prose, f"{seed}:ch{chapter_number}:{slot_type}")
                 if chunk:
                     return chunk
         topic_dir = repo_root / "atoms" / persona_id / topic
@@ -1582,8 +1582,8 @@ def _load_depth_content(
                 canonical = engine_dir / "CANONICAL.txt"
                 if canonical.exists():
                     raw = canonical.read_text(encoding="utf-8")
-                    content = _extract_prose_from_canonical(raw)
-                    chunk = _select_prose_chunk(content, seed)
+                    prose = _extract_prose_from_canonical(raw)
+                    chunk = _select_prose_chunk(prose, f"{seed}:ch{chapter_number}:{engine_dir.name}")
                     if chunk:
                         return chunk
         return None

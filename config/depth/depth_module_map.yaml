@@ -122,14 +122,14 @@ depth_modules:
 
   story_scene:
     description: "Human vividness — specific places, people, sensory detail."
-    chapter_affinity: [1, 2, 3, 4, 7, 8, 9, 10, 11, 12]
+    chapter_affinity: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     sources:
       - type: teacher_atom
         slot_types: [STORY, SCENE]
         total_available: 424
         avg_words: 120
       - type: persona_atom
-        slot_types: [SCENE, STORY]
+        slot_types: [STORY, SCENE]
         path_pattern: atoms/{persona_id}/{topic_id}/*/CANONICAL.txt
       - type: registry_variant
         section_types: [SCENE, HOOK]
@@ -257,7 +257,7 @@ topic_overrides:
 
   anxiety:
     depth_priority_early: [recognition_depth, story_scene, persona_specificity]
-    depth_priority_mid: [mechanism_depth, somatic_detail, consequence_exposure]
+    depth_priority_mid: [mechanism_depth, story_scene, somatic_detail, consequence_exposure]
     depth_priority_late: [mechanism_depth, story_scene, persona_specificity, consequence_exposure, integration_landing]
 
   grief:
