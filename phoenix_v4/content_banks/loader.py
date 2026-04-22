@@ -132,6 +132,11 @@ def _load_registry_from_dir(root: Path) -> ContentBankRegistry:
             quarantine_entries.extend(qe)
             secular_replacements.extend(sr)
             continue
+        # Skip non-bank config files that live in the same directory
+        # (loc_var_render.yaml uses fallbacks/rotations; selected_mechanism_resolver.yaml
+        # uses mechanisms — neither are variant banks).
+        if "fallbacks" in data or "rotations" in data or "mechanisms" in data:
+            continue
         variants = data.get("variants")
         if not isinstance(variants, list):
             merged: List[dict[str, Any]] = []
