@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phoenix Omega — Brand Admin Handoff</title>
+  <style>
+    :root {
+      --bg: #0e0a06;
+      --card: #1a1410;
+      --card2: #201810;
+      --border: rgba(180, 83, 9, 0.22);
+      --amber: #b45309;
+      --amber2: #d97706;
+      --cream: #faf6f0;
+      --muted: rgba(250, 246, 240, 0.45);
+      --green: #22c55e;
+      --yellow: #facc15;
+      --red: #ef4444;
+      --purple: #a78bfa;
+      --blue: #60a5fa;
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+      --mono: ui-monospace, "DM Mono", monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--cream); line-height: 1.5; min-height: 100vh; }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      background: linear-gradient(180deg, #120c08, var(--bg));
+      display: flex; align-items: center; gap: 1rem;
+    }
+    header h1 { font-size: 1.1rem; font-weight: 600; color: var(--amber2); }
+    header .subtitle { font-size: 0.75rem; color: var(--muted); font-family: var(--mono); }
+    .nav-links { margin-left: auto; display: flex; gap: 1rem; font-size: 0.75rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; }
+    .nav-links a:hover { color: var(--amber2); }
+
+    /* ── Layout ── */
+    .page { max-width: 1320px; margin: 0 auto; padding: 1.5rem; }
+    .top-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .top-bar h2 { font-size: 1rem; font-weight: 600; }
+    .week-badge {
+      font-family: var(--mono); font-size: 0.7rem; background: rgba(180,83,9,0.2);
+      color: var(--amber2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px;
+    }
+    .btn { padding: 6px 14px; border-radius: 5px; border: 1px solid var(--border); background: var(--card);
+           color: var(--cream); font-size: 0.75rem; cursor: pointer; transition: all .15s; }
+    .btn:hover { background: rgba(180,83,9,0.25); border-color: var(--amber2); }
+    .btn.primary { background: rgba(180,83,9,0.35); border-color: var(--amber2); color: var(--amber2); font-weight: 600; }
+    .btn.primary:hover { background: rgba(180,83,9,0.55); }
+    .btn.sm { padding: 3px 10px; font-size: 0.7rem; }
+
+    /* ── Brand selector ── */
+    .brand-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .brand-chip {
+      padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-family: var(--mono);
+      cursor: pointer; border: 1px solid var(--border); background: var(--card); color: var(--muted);
+      transition: all .15s;
+    }
+    .brand-chip:hover { border-color: var(--amber2); color: var(--cream); }
+    .brand-chip.active { background: rgba(180,83,9,0.3); border-color: var(--amber2); color: var(--amber2); }
+
+    /* ── KPI row ── */
+    .kpi-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .kpi-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .kpi-label { font-size: 0.65rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 6px; }
+    .kpi-val { font-size: 1.5rem; font-weight: 700; color: var(--amber2); font-family: var(--mono); }
+    .kpi-sub { font-size: 0.65rem; color: var(--muted); margin-top: 3px; }
+
+    /* ── Main grid ── */
+    .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+    .panel {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      overflow: hidden;
+    }
+    .panel.full { grid-column: 1 / -1; }
+    .panel-header {
+      padding: 12px 16px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px; justify-content: space-between;
+    }
+    .panel-title { font-size: 0.8rem; font-weight: 600; letter-spacing: .03em; }
+    .panel-body { padding: 16px; }
+
+    /* ── Upload slots ── */
+    .plat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .plat-card {
+      background: var(--card2); border: 1px solid var(--border); border-radius: 6px;
+      padding: 10px 12px;
+    }
+    .plat-name { font-size: 0.7rem; font-family: var(--mono); color: var(--amber2); margin-bottom: 6px; }
+    .plat-stat { font-size: 1.1rem; font-weight: 700; color: var(--cream); }
+    .plat-cap { font-size: 0.65rem; color: var(--muted); }
+    .plat-bar { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.08); margin-top: 8px; }
+    .plat-bar-fill { height: 4px; border-radius: 2px; background: var(--green); }
+
+    /* ── Title list ── */
+    .title-list { list-style: none; }
+    .title-list li {
+      padding: 8px 0; border-bottom: 1px solid rgba(180,83,9,0.1);
+      display: flex; align-items: center; gap: 8px; font-size: 0.75rem;
+    }
+    .title-list li:last-child { border-bottom: none; }
+    .title-num { font-family: var(--mono); color: var(--muted); font-size: 0.65rem; min-width: 18px; }
+    .title-text { flex: 1; }
+    .format-badge {
+      font-size: 0.6rem; font-family: var(--mono); padding: 1px 6px; border-radius: 10px;
+      border: 1px solid; white-space: nowrap;
+    }
+    .fmt-ebook { border-color: var(--blue); color: var(--blue); }
+    .fmt-manga { border-color: var(--purple); color: var(--purple); }
+    .fmt-audio { border-color: var(--yellow); color: var(--yellow); }
+
+    /* ── QA summary ── */
+    .qa-gate-row { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid rgba(180,83,9,0.1); font-size: 0.75rem; }
+    .qa-gate-row:last-child { border-bottom: none; }
+    .qa-gate-name { flex: 1; font-family: var(--mono); font-size: 0.7rem; }
+    .qa-pct { font-family: var(--mono); font-size: 0.75rem; }
+    .health-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .health-green { background: var(--green); }
+    .health-yellow { background: var(--yellow); }
+    .health-red { background: var(--red); }
+
+    /* ── Manga status ── */
+    .manga-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(180,83,9,0.1); align-items: center; font-size: 0.75rem; }
+    .manga-row:last-child { border-bottom: none; }
+    .manga-series { flex: 1; }
+    .manga-series-title { font-weight: 600; }
+    .manga-series-meta { font-size: 0.65rem; color: var(--muted); font-family: var(--mono); }
+    .ch-badge { font-family: var(--mono); font-size: 0.65rem; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
+    .ch-live { background: rgba(34,197,94,0.15); color: var(--green); }
+    .ch-review { background: rgba(250,204,21,0.15); color: var(--yellow); }
+    .ch-prod { background: rgba(96,165,250,0.15); color: var(--blue); }
+
+    /* ── Action checklist ── */
+    .action-list { list-style: none; }
+    .action-item { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid rgba(180,83,9,0.1); font-size: 0.75rem; }
+    .action-item:last-child { border-bottom: none; }
+    .action-icon { font-size: 0.9rem; margin-top: 1px; }
+    .action-body { flex: 1; }
+    .action-title { font-weight: 600; }
+    .action-cmd { font-family: var(--mono); font-size: 0.65rem; color: var(--amber2); background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 3px; margin-top: 4px; display: block; }
+    .priority-high { color: var(--red); }
+    .priority-med { color: var(--yellow); }
+    .priority-low { color: var(--muted); }
+
+    /* ── Download bar ── */
+    .download-bar {
+      background: rgba(180,83,9,0.12); border: 1px solid var(--border); border-radius: 8px;
+      padding: 14px 16px; display: flex; align-items: center; gap: 14px; margin-bottom: 1.5rem;
+    }
+    .download-bar .dl-icon { font-size: 1.5rem; }
+    .download-bar .dl-info { flex: 1; }
+    .download-bar .dl-title { font-size: 0.8rem; font-weight: 600; }
+    .download-bar .dl-sub { font-size: 0.7rem; color: var(--muted); font-family: var(--mono); }
+    .dl-btns { display: flex; gap: 8px; }
+
+    /* ── Status badges ── */
+    .badge { font-family: var(--mono); font-size: 0.65rem; padding: 2px 8px; border-radius: 10px; border: 1px solid; }
+    .badge-green { border-color: var(--green); color: var(--green); background: rgba(34,197,94,0.1); }
+    .badge-yellow { border-color: var(--yellow); color: var(--yellow); background: rgba(250,204,21,0.1); }
+    .badge-red { border-color: var(--red); color: var(--red); background: rgba(239,68,68,0.1); }
+    .badge-purple { border-color: var(--purple); color: var(--purple); background: rgba(167,139,250,0.1); }
+
+    /* ── CLI ref ── */
+    .cli-box {
+      background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 6px;
+      padding: 10px 14px; font-family: var(--mono); font-size: 0.7rem; color: var(--amber2); margin-top: 1.25rem;
+      white-space: pre-wrap; word-break: break-all;
+    }
+    .cli-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+
+    /* ── Empty / loading states ── */
+    .placeholder { color: var(--muted); font-size: 0.75rem; font-style: italic; }
+    .loading-shimmer { color: var(--muted); font-family: var(--mono); font-size: 0.75rem; padding: 12px 0; }
+  </style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Brand Admin Handoff</h1>
+    <div class="subtitle">phoenix_omega · weekly content packet</div>
+  </div>
+  <nav class="nav-links">
+    <a href="exec_catalog_dashboard.html">Exec Dashboard</a>
+    <a href="brand_admin.html">Brand Portal</a>
+  </nav>
+</header>
+
+<div class="page">
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <h2>Weekly Handoff</h2>
+    <span class="week-badge" id="week-label">—</span>
+    <span class="badge badge-green" id="overall-health">—</span>
+    <div style="margin-left:auto;display:flex;gap:8px">
+      <button class="btn" onclick="refreshAll()">↻ Refresh</button>
+      <button class="btn primary" onclick="downloadAll()">⬇ Download All Packets</button>
+    </div>
+  </div>
+
+  <!-- Brand selector -->
+  <div class="brand-bar" id="brand-bar">
+    <!-- populated by JS -->
+  </div>
+
+  <!-- Download bar -->
+  <div class="download-bar">
+    <div class="dl-icon">📦</div>
+    <div class="dl-info">
+      <div class="dl-title" id="packet-title">Loading packet…</div>
+      <div class="dl-sub" id="packet-sub">Run export to generate</div>
+    </div>
+    <div class="dl-btns">
+      <button class="btn sm" onclick="downloadJSON()">⬇ JSON</button>
+      <button class="btn sm" onclick="downloadCSV()">⬇ CSV</button>
+      <button class="btn sm primary" onclick="runExport()">▶ Re-export</button>
+    </div>
+  </div>
+
+  <!-- KPI row -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">This Week Titles</div>
+      <div class="kpi-val" id="kpi-titles">—</div>
+      <div class="kpi-sub">across all platforms</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">QA Pass Rate</div>
+      <div class="kpi-val" id="kpi-qa">—</div>
+      <div class="kpi-sub" id="kpi-qa-sub">gates checked</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Manga Chapters</div>
+      <div class="kpi-val" id="kpi-manga">—</div>
+      <div class="kpi-sub">live / in review / in prod</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Regressions</div>
+      <div class="kpi-val" id="kpi-regressions" style="color:var(--green)">—</div>
+      <div class="kpi-sub">last 48h</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Open Actions</div>
+      <div class="kpi-val" id="kpi-actions">—</div>
+      <div class="kpi-sub">required this week</div>
+    </div>
+  </div>
+
+  <!-- Main grid -->
+  <div class="main-grid">
+
+    <!-- Upload Slots panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">📤 Upload Slots</span>
+        <span class="badge badge-green" id="slots-badge">—</span>
+      </div>
+      <div class="panel-body">
+        <div class="plat-grid" id="plat-grid">
+          <div class="loading-shimmer">Loading platform data…</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- This Week's Titles panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">📚 This Week's Titles</span>
+        <button class="btn sm" onclick="toggleTitleFormat()">Toggle Format</button>
+      </div>
+      <div class="panel-body">
+        <ul class="title-list" id="title-list">
+          <li class="placeholder">Select a brand to load titles.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- QA Summary panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">✅ QA Summary</span>
+        <span class="badge" id="qa-health-badge">—</span>
+      </div>
+      <div class="panel-body">
+        <div id="qa-gates">
+          <div class="loading-shimmer">Loading QA data…</div>
+        </div>
+        <div class="cli-box">
+<span class="cli-label">Re-run QA</span>python3 scripts/qa/run_bestseller_analysis.py --brand &lt;brand_id&gt;
+python3 scripts/qa/qa_findings_registry.py --check-regressions</div>
+      </div>
+    </div>
+
+    <!-- Manga Status panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">🎌 Manga / Webtoon Status</span>
+        <span class="badge badge-purple" id="manga-badge">—</span>
+      </div>
+      <div class="panel-body">
+        <div id="manga-status-list">
+          <div class="loading-shimmer">Loading manga data…</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Checklist panel (full width) -->
+    <div class="panel full">
+      <div class="panel-header">
+        <span class="panel-title">📋 Action Checklist</span>
+        <span id="actions-remaining" class="badge badge-yellow">—</span>
+      </div>
+      <div class="panel-body">
+        <ul class="action-list" id="action-list">
+          <li class="placeholder">Select a brand to load actions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CLI Reference panel (full width) -->
+    <div class="panel full">
+      <div class="panel-header">
+        <span class="panel-title">⌨️ CLI Quick Reference</span>
+      </div>
+      <div class="panel-body">
+        <div class="plat-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;">
+          <div>
+            <div class="cli-label">Export Handoff Packet</div>
+            <div class="cli-box" id="cli-export">python3 scripts/release/export_brand_admin_data.py --brand &lt;id&gt; --week current</div>
+          </div>
+          <div>
+            <div class="cli-label">Build Platform Packets</div>
+            <div class="cli-box">python3 scripts/release/build_admin_packets.py --brand &lt;id&gt; --week current</div>
+          </div>
+          <div>
+            <div class="cli-label">Run QA Analysis</div>
+            <div class="cli-box">python3 scripts/qa/run_bestseller_analysis.py --brand &lt;id&gt;</div>
+          </div>
+          <div>
+            <div class="cli-label">Check Regressions</div>
+            <div class="cli-box">python3 scripts/qa/qa_findings_registry.py --check-regressions --since-hours 48</div>
+          </div>
+          <div>
+            <div class="cli-label">Build Manga Catalog</div>
+            <div class="cli-box">python3 scripts/manga/build_manga_catalog.py --brand &lt;id&gt;</div>
+          </div>
+          <div>
+            <div class="cli-label">Estimate Manga Assets</div>
+            <div class="cli-box">python3 scripts/manga/manga_asset_estimator.py --brand &lt;id&gt; --weeks 4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main-grid -->
+</div><!-- /page -->
+
+<script>
+"use strict";
+
+// ---------------------------------------------------------------------------
+// Statics
+// ---------------------------------------------------------------------------
+const BRANDS = [
+  {id:"stillness_press",    label:"Stillness Press",     market:"us"},
+  {id:"cognitive_clarity",  label:"Cognitive Clarity",   market:"us"},
+  {id:"somatic_wisdom",     label:"Somatic Wisdom",      market:"us"},
+  {id:"qi_foundation",      label:"Qi Foundation",       market:"japan"},
+  {id:"digital_ground",     label:"Digital Ground",      market:"us"},
+  {id:"heart_balance",      label:"Heart Balance",       market:"us"},
+  {id:"relational_calm",    label:"Relational Calm",     market:"us"},
+  {id:"warrior_calm",       label:"Warrior Calm",        market:"us"},
+  {id:"sleep_restoration",  label:"Sleep Restoration",   market:"us"},
+  {id:"body_memory",        label:"Body Memory",         market:"us"},
+  {id:"solar_return",       label:"Solar Return",        market:"us"},
+  {id:"devotion_path",      label:"Devotion Path",       market:"us"},
+  {id:"bright_presence_tw", label:"Bright Presence TW",  market:"taiwan"},
+];
+
+const PLATFORMS = [
+  {id:"google_play", label:"Google Play", cap:15},
+  {id:"amazon_kdp",  label:"Amazon KDP",  cap:10},
+  {id:"apple_books", label:"Apple Books", cap:10},
+  {id:"rakuten_kobo",label:"Rakuten Kobo",cap:5, apac:true},
+];
+
+const FORMATS = ["ebook","manga","audio"];
+let currentBrand = BRANDS[0];
+let showFormats = true;
+
+// ---------------------------------------------------------------------------
+// Week label
+// ---------------------------------------------------------------------------
+function currentWeekLabel() {
+  const d = new Date();
+  // ISO week number
+  const thu = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 3 - (d.getDay() + 6) % 7);
+  const week1 = new Date(thu.getFullYear(), 0, 4);
+  const wn = 1 + Math.round(((thu - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+  return `${thu.getFullYear()}-W${String(wn).padStart(2,"0")}`;
+}
+
+// ---------------------------------------------------------------------------
+// Stub packet generator (mirrors export_brand_admin_data.py output shape)
+// ---------------------------------------------------------------------------
+function stubPacket(brand) {
+  const isAPAC = ["japan","taiwan","korea","singapore","hong_kong"].includes(brand.market);
+  const week = currentWeekLabel();
+  const titles = [];
+  for (let i = 1; i <= 8; i++) {
+    titles.push({
+      title: `${brand.label}: Topic ${i} — A Mindful Journey`,
+      format: i <= 5 ? "ebook" : i === 6 ? "manga" : "audio",
+      platform: i <= 4 ? "google_play" : i <= 6 ? "amazon_kdp" : "apple_books",
+    });
+  }
+
+  const platforms = PLATFORMS.filter(p => !p.apac || isAPAC);
+  const upload_slots = {};
+  platforms.forEach(p => {
+    const pTitles = titles.filter(t => t.platform === p.id);
+    if (!pTitles.length) {
+      // add a few stubs
+      for (let i = 1; i <= 3; i++) pTitles.push({title: `${brand.label}: Stub ${i}`, format:"ebook", platform:p.id});
+    }
+    upload_slots[p.id] = {cap: p.cap, titles: pTitles.slice(0, p.cap)};
+  });
+
+  const passRate = 85 + Math.floor(Math.random() * 12);
+  const qaHealth = passRate >= 90 ? "green" : passRate >= 70 ? "yellow" : "red";
+
+  const mangaActive = isAPAC || brand.id === "qi_foundation" || brand.id === "somatic_wisdom";
+  const manga_status = mangaActive ? [
+    {series: `${brand.label} Vol.1`, genre:"slice-of-life", chapters_live:3, chapters_review:1, chapters_prod:2, next_publish:"Mon"},
+  ] : [];
+
+  const actions = [
+    {priority:"high", icon:"📤", title:"Upload titles to all platforms", cmd:`python3 scripts/release/build_admin_packets.py --brand ${brand.id} --week current`},
+    {priority:"med",  icon:"✅", title:"Run QA analysis and check regressions", cmd:`python3 scripts/qa/run_bestseller_analysis.py --brand ${brand.id}`},
+    {priority:"med",  icon:"📦", title:"Export handoff packet for review", cmd:`python3 scripts/release/export_brand_admin_data.py --brand ${brand.id} --week current`},
+  ];
+  if (mangaActive) {
+    actions.push({priority:"low", icon:"🎌", title:"Review manga chapters in production", cmd:`python3 scripts/manga/build_manga_catalog.py --brand ${brand.id}`});
+  }
+
+  return {
+    brand_id: brand.id,
+    brand_label: brand.label,
+    week,
+    qa_summary: {pass_rate: passRate, health: qaHealth, regressions_48h: 0, gates: [
+      {name:"bestseller_craft", pass_rate: passRate, health: qaHealth},
+      {name:"word_count",       pass_rate: 94,       health:"green"},
+    ]},
+    upload_slots,
+    this_week_titles: titles,
+    manga_status,
+    action_checklist: actions,
+    catalog_summary: {total_titles: titles.length, ebook: titles.filter(t=>t.format==="ebook").length, manga: titles.filter(t=>t.format==="manga").length, audio: titles.filter(t=>t.format==="audio").length},
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Render helpers
+// ---------------------------------------------------------------------------
+function healthBadgeClass(h) {
+  return h === "green" ? "badge-green" : h === "yellow" ? "badge-yellow" : "badge-red";
+}
+function healthDotClass(h) {
+  return h === "green" ? "health-green" : h === "yellow" ? "health-yellow" : "health-red";
+}
+
+function renderKPIs(pkt) {
+  const cs = pkt.catalog_summary;
+  document.getElementById("kpi-titles").textContent = cs.total_titles;
+  document.getElementById("kpi-qa").textContent = pkt.qa_summary.pass_rate + "%";
+  document.getElementById("kpi-qa-sub").textContent = `${pkt.qa_summary.gates.length} gates checked`;
+  const manga = pkt.manga_status;
+  const live = manga.reduce((a, m) => a + (m.chapters_live||0), 0);
+  const rev  = manga.reduce((a, m) => a + (m.chapters_review||0), 0);
+  const prod = manga.reduce((a, m) => a + (m.chapters_prod||0), 0);
+  document.getElementById("kpi-manga").textContent = `${live}/${rev}/${prod}`;
+  const reg = pkt.qa_summary.regressions_48h || 0;
+  const regEl = document.getElementById("kpi-regressions");
+  regEl.textContent = reg;
+  regEl.style.color = reg > 0 ? "var(--red)" : "var(--green)";
+  const actions = (pkt.action_checklist||[]).filter(a => a.priority !== "low").length;
+  document.getElementById("kpi-actions").textContent = actions;
+}
+
+function renderUploadSlots(pkt) {
+  const grid = document.getElementById("plat-grid");
+  const slots = pkt.upload_slots || {};
+  const entries = Object.entries(slots);
+  if (!entries.length) { grid.innerHTML = '<div class="placeholder">No upload slots for this brand.</div>'; return; }
+  grid.innerHTML = entries.map(([pid, data]) => {
+    const plat = PLATFORMS.find(p => p.id === pid) || {label: pid, cap: 10};
+    const count = (data.titles||[]).length;
+    const pct = Math.min(100, Math.round(count / plat.cap * 100));
+    return `<div class="plat-card">
+      <div class="plat-name">${plat.label}</div>
+      <div class="plat-stat">${count}<span style="font-size:.65rem;font-weight:400;color:var(--muted)"> titles</span></div>
+      <div class="plat-cap">cap: ${plat.cap}/week</div>
+      <div class="plat-bar"><div class="plat-bar-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join("");
+
+  const total = entries.reduce((a, [, d]) => a + (d.titles||[]).length, 0);
+  const slotsBadge = document.getElementById("slots-badge");
+  slotsBadge.textContent = total + " titles";
+  slotsBadge.className = "badge " + (total > 0 ? "badge-green" : "badge-yellow");
+}
+
+function renderTitles(pkt) {
+  const list = document.getElementById("title-list");
+  const titles = pkt.this_week_titles || [];
+  if (!titles.length) { list.innerHTML = '<li class="placeholder">No titles this week.</li>'; return; }
+  list.innerHTML = titles.map((t, i) => {
+    const fmtClass = t.format === "manga" ? "fmt-manga" : t.format === "audio" ? "fmt-audio" : "fmt-ebook";
+    const fmtBadge = showFormats ? `<span class="format-badge ${fmtClass}">${t.format}</span>` : "";
+    return `<li><span class="title-num">${i+1}.</span><span class="title-text">${t.title}</span>${fmtBadge}</li>`;
+  }).join("");
+}
+
+function renderQA(pkt) {
+  const qa = pkt.qa_summary || {};
+  const health = qa.health || "yellow";
+  const badge = document.getElementById("qa-health-badge");
+  badge.textContent = health.toUpperCase();
+  badge.className = "badge " + healthBadgeClass(health);
+
+  const gates = qa.gates || [];
+  document.getElementById("qa-gates").innerHTML = gates.length
+    ? gates.map(g => `<div class="qa-gate-row">
+        <div class="health-dot ${healthDotClass(g.health)}"></div>
+        <div class="qa-gate-name">${g.name}</div>
+        <div class="qa-pct" style="color:var(--${g.health === 'green' ? 'green' : g.health === 'yellow' ? 'yellow' : 'red'})">${g.pass_rate}%</div>
+      </div>`).join("")
+    : '<div class="placeholder">No gate data.</div>';
+}
+
+function renderManga(pkt) {
+  const manga = pkt.manga_status || [];
+  const badge = document.getElementById("manga-badge");
+  if (!manga.length) {
+    badge.textContent = "N/A";
+    badge.className = "badge badge-purple";
+    document.getElementById("manga-status-list").innerHTML = '<div class="placeholder">No manga pipeline for this brand.</div>';
+    return;
+  }
+  badge.textContent = manga.length + " series";
+  badge.className = "badge badge-purple";
+  document.getElementById("manga-status-list").innerHTML = manga.map(m => `
+    <div class="manga-row">
+      <div class="manga-series">
+        <div class="manga-series-title">${m.series}</div>
+        <div class="manga-series-meta">${m.genre || ""}</div>
+      </div>
+      <span class="ch-badge ch-live">${m.chapters_live||0} live</span>
+      <span class="ch-badge ch-review">${m.chapters_review||0} review</span>
+      <span class="ch-badge ch-prod">${m.chapters_prod||0} prod</span>
+    </div>`).join("");
+}
+
+function renderActions(pkt) {
+  const actions = pkt.action_checklist || [];
+  const remaining = actions.filter(a => a.priority !== "low").length;
+  const badge = document.getElementById("actions-remaining");
+  badge.textContent = remaining + " required";
+  badge.className = "badge " + (remaining > 0 ? "badge-yellow" : "badge-green");
+  document.getElementById("action-list").innerHTML = actions.length
+    ? actions.map(a => `<li class="action-item">
+        <div class="action-icon">${a.icon}</div>
+        <div class="action-body">
+          <div class="action-title priority-${a.priority}">${a.title}</div>
+          <code class="action-cmd">${a.cmd}</code>
+        </div>
+        <span class="badge ${a.priority === 'high' ? 'badge-red' : a.priority === 'med' ? 'badge-yellow' : ''}" style="border-color:var(--muted);color:var(--muted)">${a.priority}</span>
+      </li>`).join("")
+    : '<li class="placeholder">No actions for this brand.</li>';
+}
+
+function renderPacketInfo(pkt) {
+  document.getElementById("packet-title").textContent = `${pkt.brand_label} · ${pkt.week} · ${pkt.catalog_summary.total_titles} titles`;
+  document.getElementById("packet-sub").textContent = `artifacts/admin_handoff/${pkt.week}/${pkt.brand_id}/admin_data.json`;
+  document.getElementById("cli-export").textContent = `python3 scripts/release/export_brand_admin_data.py --brand ${pkt.brand_id} --week current`;
+}
+
+function renderAll(brand) {
+  const pkt = stubPacket(brand);
+  const week = currentWeekLabel();
+  document.getElementById("week-label").textContent = week;
+  const oh = document.getElementById("overall-health");
+  oh.textContent = pkt.qa_summary.health.toUpperCase();
+  oh.className = "badge " + healthBadgeClass(pkt.qa_summary.health);
+
+  renderKPIs(pkt);
+  renderUploadSlots(pkt);
+  renderTitles(pkt);
+  renderQA(pkt);
+  renderManga(pkt);
+  renderActions(pkt);
+  renderPacketInfo(pkt);
+}
+
+// ---------------------------------------------------------------------------
+// Brand bar
+// ---------------------------------------------------------------------------
+function initBrandBar() {
+  const bar = document.getElementById("brand-bar");
+  bar.innerHTML = BRANDS.map(b =>
+    `<button class="brand-chip ${b.id === currentBrand.id ? 'active' : ''}" onclick="selectBrand('${b.id}')">${b.label}</button>`
+  ).join("");
+}
+
+function selectBrand(id) {
+  currentBrand = BRANDS.find(b => b.id === id) || BRANDS[0];
+  document.querySelectorAll(".brand-chip").forEach(c => c.classList.remove("active"));
+  event.target.classList.add("active");
+  renderAll(currentBrand);
+}
+
+// ---------------------------------------------------------------------------
+// Actions
+// ---------------------------------------------------------------------------
+function refreshAll() { renderAll(currentBrand); }
+
+function toggleTitleFormat() {
+  showFormats = !showFormats;
+  const pkt = stubPacket(currentBrand);
+  renderTitles(pkt);
+}
+
+function downloadJSON() {
+  const pkt = stubPacket(currentBrand);
+  const blob = new Blob([JSON.stringify(pkt, null, 2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `admin_data_${pkt.brand_id}_${pkt.week}.json`;
+  a.click();
+}
+
+function downloadCSV() {
+  const pkt = stubPacket(currentBrand);
+  const rows = [["title","format","platform"]].concat(
+    (pkt.this_week_titles||[]).map(t => [t.title, t.format, t.platform])
+  );
+  const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const blob = new Blob([csv], {type:"text/csv"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `catalog_this_week_${pkt.brand_id}_${pkt.week}.csv`;
+  a.click();
+}
+
+function downloadAll() {
+  // Download current brand packet; in a real deployment this would zip all brands
+  downloadJSON();
+}
+
+function runExport() {
+  const cmd = `python3 scripts/release/export_brand_admin_data.py --brand ${currentBrand.id} --week current`;
+  alert(`Run in terminal:\n\n${cmd}\n\nOutput: artifacts/admin_handoff/${currentWeekLabel()}/${currentBrand.id}/`);
+}
+
+// ---------------------------------------------------------------------------
+// Init
+// ---------------------------------------------------------------------------
+initBrandBar();
+renderAll(currentBrand);
+</script>
+</body>
+</html>

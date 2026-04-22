@@ -278,12 +278,13 @@
 <body>
 <header>
   <h1>Phoenix Omega — Executive Catalog Dashboard</h1>
-  <p>Big View Phase 2 · Last updated: 2026-04-22 · Source: config/catalog/market_catalog_registry.yaml + artifacts/inventory/</p>
+  <p>Big View Phase 4 · Last updated: 2026-04-22 · Source: config/catalog/market_catalog_registry.yaml + artifacts/inventory/</p>
   <nav class="nav-top">
     <a href="index.html">Home</a>
     <a href="content_inventory.html">Content Inventory</a>
     <a href="market_lane_matrix.html">Market Lane Matrix</a>
     <a href="brand_admin.html">Brand Admin</a>
+    <a href="brand_handoff_dashboard.html">Handoff</a>
     <a href="marketing_dashboard.html">Marketing</a>
     <a href="pearl_prime_entry.html">Pearl Prime</a>
   </nav>
@@ -526,6 +527,63 @@
       <code>config/catalog_planning/teacher_wrapper_templates.yaml</code>
     </div>
   </div>
+
+  <!-- Brand-Admin Handoff -->
+  <div class="panel" id="handoff-panel">
+    <div class="panel-header">
+      <h2>Brand-Admin Handoff</h2>
+      <span class="badge badge-green">Phase 4</span>
+    </div>
+
+    <!-- KPI mini-row -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.75rem;margin-bottom:1.25rem">
+      <div class="kpi-card" style="padding:10px 14px">
+        <div class="label">Brands</div>
+        <div class="value" style="font-size:1.4rem">13</div>
+        <div class="sub">with handoff packets</div>
+      </div>
+      <div class="kpi-card" style="padding:10px 14px">
+        <div class="label">Platforms</div>
+        <div class="value" style="font-size:1.4rem">4</div>
+        <div class="sub">GP · KDP · Apple · Kobo</div>
+      </div>
+      <div class="kpi-card" style="padding:10px 14px">
+        <div class="label">Handoff Dashboard</div>
+        <div class="value" style="font-size:.85rem;color:var(--amber2)"><a href="brand_handoff_dashboard.html" style="color:var(--amber2)">Open →</a></div>
+        <div class="sub">per-brand packet viewer</div>
+      </div>
+      <div class="kpi-card" style="padding:10px 14px">
+        <div class="label">Brand Admin Portal</div>
+        <div class="value" style="font-size:.85rem;color:var(--amber2)"><a href="brand_admin.html" style="color:var(--amber2)">Open →</a></div>
+        <div class="sub">upload checklist UI</div>
+      </div>
+    </div>
+
+    <!-- Brand grid -->
+    <div id="handoff-brand-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:1.25rem">
+      <!-- populated by JS -->
+    </div>
+
+    <!-- Action buttons -->
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem">
+      <button class="btn" onclick="runHandoffExport('all')">▶ Export All Packets</button>
+      <button class="btn" onclick="runHandoffExport('single')">▶ Export Single Brand</button>
+      <button class="btn" onclick="runBuildPackets()">▶ Build Platform Packets</button>
+      <a href="brand_handoff_dashboard.html" class="btn primary" style="text-decoration:none">⬡ Open Handoff Dashboard</a>
+    </div>
+
+    <pre id="handoff-status" class="console-out" style="display:none"></pre>
+
+    <div class="cli-ref">
+      <strong>Scripts:</strong><br>
+      <code>python3 scripts/release/export_brand_admin_data.py --all --week current</code><br>
+      <code>python3 scripts/release/export_brand_admin_data.py --brand stillness_press --week current</code><br>
+      <code>python3 scripts/release/build_admin_packets.py --all --week current --dry-run</code><br>
+      <strong>Config:</strong><br>
+      <code>config/release/admin_handoff_config.yaml</code>
+    </div>
+  </div>
+
 </main>
 
 <script>
@@ -819,9 +877,75 @@
     );
   }
 
+  // ── Brand-Admin Handoff (Phase 4) ─────────────────────────────────────────────
+
+  const HANDOFF_BRANDS = [
+    {id:"stillness_press",    label:"Stillness Press",     market:"us"},
+    {id:"cognitive_clarity",  label:"Cognitive Clarity",   market:"us"},
+    {id:"somatic_wisdom",     label:"Somatic Wisdom",      market:"us"},
+    {id:"qi_foundation",      label:"Qi Foundation",       market:"japan"},
+    {id:"digital_ground",     label:"Digital Ground",      market:"us"},
+    {id:"heart_balance",      label:"Heart Balance",       market:"us"},
+    {id:"relational_calm",    label:"Relational Calm",     market:"us"},
+    {id:"warrior_calm",       label:"Warrior Calm",        market:"us"},
+    {id:"sleep_restoration",  label:"Sleep Restoration",   market:"us"},
+    {id:"body_memory",        label:"Body Memory",         market:"us"},
+    {id:"solar_return",       label:"Solar Return",        market:"us"},
+    {id:"devotion_path",      label:"Devotion Path",       market:"us"},
+    {id:"bright_presence_tw", label:"Bright Presence TW",  market:"taiwan"},
+  ];
+
+  function initHandoffBrandGrid() {
+    const grid = document.getElementById("handoff-brand-grid");
+    if (!grid) return;
+    grid.innerHTML = HANDOFF_BRANDS.map(b => {
+      const apac = ["japan","taiwan","korea","singapore","hong_kong"].includes(b.market);
+      return `<div style="background:var(--card2,#1a1410);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:.72rem">
+        <div style="font-family:var(--mono);color:var(--amber2);margin-bottom:4px;font-size:.65rem">${b.id}</div>
+        <div style="font-weight:600;margin-bottom:4px">${b.label}</div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap">
+          <span class="badge badge-green" style="font-size:.6rem">${b.market}</span>
+          ${apac ? '<span class="badge" style="border-color:var(--purple);color:var(--purple);background:rgba(167,139,250,.1);font-size:.6rem">kobo</span>' : ''}
+        </div>
+      </div>`;
+    }).join("");
+  }
+
+  function runHandoffExport(scope) {
+    const el = document.getElementById("handoff-status");
+    let cmd;
+    if (scope === "all") {
+      cmd = "python3 scripts/release/export_brand_admin_data.py --all --week current";
+    } else {
+      cmd = "python3 scripts/release/export_brand_admin_data.py --brand stillness_press --week current";
+    }
+    _showStatus(el,
+      `[Brand-Admin Handoff Export]\nScope: ${scope}\n\n` +
+      `Run in terminal:\n  ${cmd}\n\n` +
+      `Output: artifacts/admin_handoff/<YEAR>-W<WW>/<brand_id>/\n` +
+      `  admin_data.json\n  catalog_this_week.csv\n  qa_summary.json\n  manga_status.json\n  HANDOFF_README.md\n\n` +
+      `View in browser: brand_handoff_dashboard.html`
+    );
+  }
+
+  function runBuildPackets() {
+    const el = document.getElementById("handoff-status");
+    _showStatus(el,
+      "[Platform Delivery Packets]\n\n" +
+      "Run in terminal:\n  python3 scripts/release/build_admin_packets.py --all --week current --dry-run\n\n" +
+      "Remove --dry-run to write output:\n" +
+      "  artifacts/release/<YEAR>-W<WW>/<brand>/\n" +
+      "    google_play/metadata.csv + upload_instructions.md\n" +
+      "    amazon_kdp/metadata.csv  + upload_instructions.md\n" +
+      "    apple_books/metadata.csv + upload_instructions.md\n" +
+      "    rakuten_kobo/            (Japan/APAC markets only)"
+    );
+  }
+
   // ── Init ───────────────────────────────────────────────────────────────────────
   initMarketTable();
   initMangaBrandTable();
+  initHandoffBrandGrid();
 </script>
 </body>
 </html>

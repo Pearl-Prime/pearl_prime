@@ -688,7 +688,7 @@ function renderPhase2(){
   h+='<div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;color:var(--acc2);margin-bottom:4px">Content Package</div>';
   h+='<div style="font-size:.75rem;color:var(--mid)">8 ebooks + 4 manga + 3 micro = 15 titles. Covers, metadata, video included.</div>';
   h+='</div>';
-  h+='<button class="pp-btn primary" onclick="alert(\'Package download activates when your content pipeline is connected.\')">'+icon('arrow_right','sm')+' Download</button>';
+  h+='<button class="pp-btn primary" onclick="downloadAdminPacket()">'+icon('arrow_right','sm')+' Download</button>';
   h+='</div>';
 
   // Per-platform upload cards
@@ -727,6 +727,45 @@ function renderPhase2(){
   renderIcons(el);
 }
 function countUpload(u){ const s=bs(); let c=0; for(let i=1;i<=u.titles;i++) if(s.upload[u.id+'_t'+i]) c++; return c; }
+
+// ── Admin Packet Download ──
+function downloadAdminPacket(){
+  if(!brand){ alert('Select a brand first.'); return; }
+  const week=(function(){
+    var d=new Date();
+    var thu=new Date(d.getFullYear(),d.getMonth(),d.getDate()+3-(d.getDay()+6)%7);
+    var w1=new Date(thu.getFullYear(),0,4);
+    var wn=1+Math.round(((thu-w1)/86400000-3+(w1.getDay()+6)%7)/7);
+    return thu.getFullYear()+'-W'+String(wn).padStart(2,'0');
+  })();
+  var titles=UPLOADS.reduce(function(acc,u){
+    for(var i=1;i<=u.titles;i++) acc.push({title:brand.d+': Title '+i,platform:u.id,format:u.manga?'manga':u.video?'audio':'ebook'});
+    return acc;
+  },[]);
+  var platforms={};
+  UPLOADS.forEach(function(u){ platforms[u.id]={cap:u.titles,titles:titles.filter(function(t){return t.platform===u.id;})}; });
+  var packet={
+    brand_id:brandId,
+    brand_label:brand.d,
+    week:week,
+    generated_at:new Date().toISOString(),
+    catalog_summary:{total_titles:titles.length,ebook:titles.filter(function(t){return t.format==='ebook';}).length,manga:titles.filter(function(t){return t.format==='manga';}).length,audio:titles.filter(function(t){return t.format==='audio';}).length},
+    upload_slots:platforms,
+    this_week_titles:titles,
+    qa_summary:{health:'green',pass_rate:null,note:'Run: python3 scripts/qa/run_bestseller_analysis.py --brand '+brandId},
+    manga_status:[],
+    action_checklist:[
+      {priority:'high',icon:'📤',title:'Upload titles to all platforms',cmd:'python3 scripts/release/build_admin_packets.py --brand '+brandId+' --week current'},
+      {priority:'med',icon:'✅',title:'Run QA analysis',cmd:'python3 scripts/qa/run_bestseller_analysis.py --brand '+brandId},
+      {priority:'med',icon:'📦',title:'Export full handoff packet',cmd:'python3 scripts/release/export_brand_admin_data.py --brand '+brandId+' --week current'},
+    ],
+  };
+  var blob=new Blob([JSON.stringify(packet,null,2)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='admin_data_'+brandId+'_'+week+'.json';
+  a.click();
+}
 
 // ── Render Phase 3: Weekly Operations ──
 function renderPhase3(){
