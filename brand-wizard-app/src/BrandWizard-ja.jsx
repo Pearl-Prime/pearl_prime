@@ -19,161 +19,161 @@ import { MarketChoiceCard } from "./onboarding/MarketChoiceCard.jsx";
 
 const ARCHETYPES = [
   {
-    id: "nervous_system", name: "Stillness Lab",
-    tagline: "When the body won't stop screaming",
+    id: "nervous_system", name: "静けさラボ",
+    tagline: "身体の叫びが止まらないときに",
     icon: Shield, gradient: "from-indigo-500 to-blue-600",
     bg: "bg-gradient-to-br from-indigo-50 to-blue-50",
     accent: "text-indigo-600", border: "border-indigo-200", activeBorder: "border-indigo-500",
-    tags: ["Calm", "Somatic", "Regulation"],
-    coverStyle: "Soft gradients, muted tones, organic shapes",
-    proseStyle: "Gentle, paced, breath-aware",
-    videoStyle: "Slow motion nature, soft focus, ambient",
-    sampleTitle: "The Body Keeps the Score at 2AM",
-    sampleSubtitle: "A nervous system reset for minds that won't shut off",
-    sampleProse: "Your body remembers what your mind tries to forget. Right now, your shoulders are holding yesterday's argument. Your jaw is clenching around words you didn't say. This isn't a flaw — it's your nervous system doing exactly what it was designed to do.",
-    sampleExercise: "4-7-8 Breath Reset: Inhale for 4 counts. Hold for 7. Exhale slowly for 8. Three cycles. That's 57 seconds to shift your entire nervous system state.",
+    tags: ["落ち着き", "ソマティック", "調整"],
+    coverStyle: "柔らかなグラデーション、落ち着いたトーン、有機的な形",
+    proseStyle: "優しく、ペース感があり、呼吸に寄り添う",
+    videoStyle: "スローモーションの自然、柔らかなフォーカス、アンビエント",
+    sampleTitle: "身体は深夜2時でも記憶している",
+    sampleSubtitle: "止まらない心のための自律神経リセット",
+    sampleProse: "あなたの体は、心が忘れようとしていることを覚えています。今この瞬間、あなたの肩は昨日の言い争いを抱えています。あごは、言えなかった言葉を噛みしめています。これは欠点ではありません——あなたの神経系が、設計通りに機能しているだけです。",
+    sampleExercise: "4-7-8 呼吸リセット：4カウントで吸い、7カウント止め、8カウントでゆっくり吐く。3サイクル。たった57秒で、神経系全体の状態が変わります。",
     coverColors: ["#6366f1", "#818cf8", "#e0e7ff"],
-    emotions: ["Finally calm", "Safe in my body", "Released", "Grounded", "Permission to rest"],
-    visionVibe: "A world where silence isn't empty — it's full. Where the body is a compass, not a cage. Readers find safety not by escaping sensation but by finally listening to it.",
+    emotions: ["やっと落ち着ける", "自分の身体の中に安心していられる", "解放されている", "グラウンデッド", "休んでいいという許可"],
+    visionVibe: "沈黙が空虚ではなく、満ちている世界。体が檻ではなく、羅針盤となる世界。読者は感覚から逃げることではなく、それに耳を傾けることで、安心感を見つけます。",
   },
   {
-    id: "identity_direction", name: "Compass Studio",
-    tagline: "For those who feel lost but aren't broken",
+    id: "identity_direction", name: "コンパス・スタジオ",
+    tagline: "迷っているけれど、壊れてはいない人のために",
     icon: Compass, gradient: "from-emerald-500 to-teal-600",
     bg: "bg-gradient-to-br from-emerald-50 to-teal-50",
     accent: "text-emerald-600", border: "border-emerald-200", activeBorder: "border-emerald-500",
-    tags: ["Direction", "Identity", "Purpose"],
-    coverStyle: "Clean lines, compass motifs, open horizons",
-    proseStyle: "Direct, warm, forward-moving",
-    videoStyle: "Time-lapse journeys, dawn scenes, path imagery",
-    sampleTitle: "You're Not Behind — You're Building",
-    sampleSubtitle: "Finding direction when everyone else seems to have it figured out",
-    sampleProse: "Scroll through your feed and everyone's winning. They've got the career, the relationship, the apartment with the plants that don't die. And you're sitting here wondering what you're even doing.",
-    sampleExercise: "The Honest Audit: Write three things you chose this week — even small ones. A meal, a conversation, a boundary. Now write one thing you avoided. The pattern is your compass needle.",
+    tags: ["方向性", "アイデンティティ", "目的"],
+    coverStyle: "すっきりした線、コンパスのモチーフ、開けた地平線",
+    proseStyle: "直接的で、温かく、前向き",
+    videoStyle: "タイムラプスの旅、夜明けのシーン、道のイメージ",
+    sampleTitle: "遅れているのではなく、積み上げているんだ",
+    sampleSubtitle: "みんなが答えを持っているように見える中で、方向性を見つける",
+    sampleProse: "フィードをスクロールすると、みんな順調に見えます。キャリア、恋愛、枯れない観葉植物のある部屋。そして自分は、何をしているのかと途方に暮れている。",
+    sampleExercise: "正直な棚卸し：今週自分で選んだことを3つ書き出しましょう——ささいなことでも構いません。食事、会話、断ったこと。次に、避けたことを1つ書く。そのパターンが、あなたの羅針盤の針です。",
     coverColors: ["#059669", "#34d399", "#d1fae5"],
-    emotions: ["Clear-headed", "Connected to purpose", "Hopeful", "Confident", "Energized"],
-    visionVibe: "A world where not knowing isn't failure — it's the beginning. Where direction comes from honest self-observation, not external comparison. Readers build identity through small, brave choices.",
+    emotions: ["頭がすっきりしている", "目的とつながっている", "希望が持てる", "自信がある", "エネルギーが湧いている"],
+    visionVibe: "知らないことが失敗ではなく、始まりである世界。方向性は他者との比較ではなく、正直な自己観察から生まれる世界。読者は小さく勇気ある選択を通じて、自分のアイデンティティを築いていきます。",
   },
   {
-    id: "emotional_healing", name: "Soft Lantern",
-    tagline: "Grief doesn't follow a schedule",
+    id: "emotional_healing", name: "柔らかなランタン",
+    tagline: "悲しみは予定通りには進みません",
     icon: Heart, gradient: "from-rose-500 to-pink-600",
     bg: "bg-gradient-to-br from-rose-50 to-pink-50",
     accent: "text-rose-600", border: "border-rose-200", activeBorder: "border-rose-500",
-    tags: ["Healing", "Grief", "Tenderness"],
-    coverStyle: "Warm watercolors, soft light, intimate close-ups",
-    proseStyle: "Tender, witnessing, permission-giving",
-    videoStyle: "Intimate lighting, rain on windows, warm interiors",
-    sampleTitle: "It's Okay to Not Be Okay Right Now",
-    sampleSubtitle: "A companion for the grief nobody prepared you for",
-    sampleProse: "Nobody told you grief could feel like this — not the crying kind, but the numb kind. The kind where you forget why you walked into a room, where food has no taste, where your phone rings and you just watch it.",
-    sampleExercise: "The Witness Practice: Place one hand on your chest. Say out loud: 'This is hard. I'm allowed to feel this. I don't have to fix it right now.' Notice what shifts.",
+    tags: ["癒し", "悲嘆", "優しさ"],
+    coverStyle: "温かな水彩画、柔らかな光、親密なクローズアップ",
+    proseStyle: "優しく、寄り添い、許可を与える",
+    videoStyle: "親密な照明、窓の雨、温かなインテリア",
+    sampleTitle: "今、大丈夫じゃなくていい",
+    sampleSubtitle: "誰も準備してくれなかった悲嘆への伴走",
+    sampleProse: "悲しみがこんな形で訪れるとは、誰も教えてくれませんでした——泣くような悲しみではなく、感覚が消えていく悲しみ。部屋に入った理由を忘れ、食べ物に味を感じられず、電話が鳴っても眺めるだけ。",
+    sampleExercise: "観察者の実践：片手を胸に当てて。声に出して言いましょう：「これはつらい。この感情を感じていい。今すぐ解決しなくていい。」何かが変わるのを感じてみてください。",
     coverColors: ["#f43f5e", "#fb7185", "#ffe4e6"],
-    emotions: ["Less alone", "Forgiven", "Released", "Safe in my body", "Hopeful"],
-    visionVibe: "A world where pain doesn't have to be productive. Where grief is met with witness, not advice. Readers find healing not by being fixed but by finally being seen.",
+    emotions: ["孤独が和らいでいる", "許された気持ちになれる", "解放されている", "自分の身体の中に安心していられる", "希望が持てる"],
+    visionVibe: "痛みが「生産的」である必要のない世界。悲しみが、アドバイスではなく、ただ寄り添いで迎えられる世界。読者は「直されること」ではなく、ようやく「見てもらえること」で癒しを見つけます。",
   },
   {
-    id: "performance_focus", name: "Clear Mind Lab",
-    tagline: "Cut the noise. Execute what matters.",
+    id: "performance_focus", name: "クリアマインド・ラボ",
+    tagline: "雑音を切り捨てて。大事なことを実行する。",
     icon: Zap, gradient: "from-amber-500 to-orange-600",
     bg: "bg-gradient-to-br from-amber-50 to-orange-50",
     accent: "text-amber-600", border: "border-amber-200", activeBorder: "border-amber-500",
-    tags: ["Focus", "Discipline", "Execution"],
-    coverStyle: "Bold typography, sharp contrast, geometric",
-    proseStyle: "Direct, punchy, action-oriented",
-    videoStyle: "Fast cuts, dark backgrounds, kinetic text",
-    sampleTitle: "Your Phone Is Stealing Your Life",
-    sampleSubtitle: "A 21-day protocol for reclaiming deep focus",
-    sampleProse: "You checked your phone 47 times before noon. Not because you're undisciplined — because every app on that screen was engineered by teams of PhDs to hijack your dopamine system.",
-    sampleExercise: "The 90-Minute Block: Set one timer. Pick one task. Phone in another room. When the timer rings, you're done — even if it's not perfect. Ship it.",
+    tags: ["集中", "規律", "実行"],
+    coverStyle: "大胆なタイポグラフィ、シャープなコントラスト、幾何学的",
+    proseStyle: "直接的で、力強く、行動志向",
+    videoStyle: "速いカット、暗い背景、動くテキスト",
+    sampleTitle: "スマホがあなたの人生を奪っている",
+    sampleSubtitle: "深い集中を取り戻す21日プロトコル",
+    sampleProse: "昼になる前にスマートフォンを47回確認した。自制心がないからではありません——あの画面のすべてのアプリが、あなたのドーパミン系を乗っ取るために、博士号を持つチームによって設計されているからです。",
+    sampleExercise: "90分ブロック：タイマーを1つセット。タスクを1つ選ぶ。スマートフォンは別の部屋へ。タイマーが鳴ったら終了——完璧でなくても。それを世に出す。",
     coverColors: ["#d97706", "#f59e0b", "#fef3c7"],
-    emotions: ["In control", "Clear-headed", "Energized", "Confident", "Resilient"],
-    visionVibe: "A world where clarity is a weapon. Where action beats reflection. Readers cut through information overload and build systems that run without willpower.",
+    emotions: ["自分でコントロールできている", "頭がすっきりしている", "エネルギーが湧いている", "自信がある", "しなやかに立ち直れる"],
+    visionVibe: "明確さが武器になる世界。行動が熟考を上回る世界。読者は情報の洪水を切り抜け、意志力に頼らず動くシステムを構築します。",
   },
   {
-    id: "spiritual_awakening", name: "Phoenix Rising",
-    tagline: "The old you has to die for the real you to live",
+    id: "spiritual_awakening", name: "フェニックス・ライジング",
+    tagline: "本当の自分が生きるために、古い自分は死ななければならない",
     icon: Flame, gradient: "from-purple-500 to-violet-600",
     bg: "bg-gradient-to-br from-purple-50 to-violet-50",
     accent: "text-purple-600", border: "border-purple-200", activeBorder: "border-purple-500",
-    tags: ["Awakening", "Meaning", "Depth"],
-    coverStyle: "Sacred geometry, cosmic gradients, gold accents",
-    proseStyle: "Contemplative, layered, poetic",
-    videoStyle: "Cinematic nature, cosmic imagery, ritual movement",
-    sampleTitle: "The Silence Between Your Thoughts Is God",
-    sampleSubtitle: "Meditation for people who've tried everything and given up",
-    sampleProse: "You've read the books. Downloaded the apps. Sat on the cushion and waited for something to happen. Nothing did — except your grocery list showing up uninvited.",
-    sampleExercise: "The Gap Practice: Close your eyes. Take one breath. At the top of the inhale, before you exhale — notice the gap. Stay there. That's the door.",
+    tags: ["目覚め", "意味", "深み"],
+    coverStyle: "聖なる幾何学、宇宙的なグラデーション、ゴールドのアクセント",
+    proseStyle: "瞑想的で、層が深く、詩的",
+    videoStyle: "映画的な自然、宇宙的なイメージ、儀式的な動き",
+    sampleTitle: "思考と思考の間の沈黙が神だ",
+    sampleSubtitle: "すべてを試して諦めた人のための瞑想",
+    sampleProse: "本を読み、アプリをダウンロードし、クッションに座って何かが起きるのを待った。何も起きませんでした——買い物リストが勝手に頭に浮かんできたことを除いて。",
+    sampleExercise: "「間」の実践：目を閉じる。ひと息吸う。吸い込みの頂点で、息を吐く前に——その「間」に気づく。そこに留まる。それが扉です。",
     coverColors: ["#7c3aed", "#a78bfa", "#ede9fe"],
-    emotions: ["Present", "Connected to purpose", "Grounded", "Released", "Hopeful"],
-    visionVibe: "A world where the sacred lives in the ordinary. Where silence isn't empty but radiant. Readers discover that what they've been seeking has been seeking them.",
+    emotions: ["今ここにいられる", "目的とつながっている", "グラウンデッド", "解放されている", "希望が持てる"],
+    visionVibe: "日常の中に神聖なものが宿る世界。沈黙が空虚ではなく、輝いている世界。読者は、自分が探し求めていたものが、実は自分を探していたのだと気づきます。",
   },
 ];
 
 const PERSONAS = [
-  { id: "burned_out_pro", label: "Burned-Out Professional", emoji: "💼", desc: "Drained, numb, running on fumes", needs: "Reset, relief, permission to stop", impact: "Content hooks into 'Sunday dread' and workplace exhaustion narratives" },
-  { id: "gen_z_seeker", label: "Gen Z Navigator", emoji: "🧭", desc: "Overwhelmed, comparing, scrolling", needs: "Direction, validation, real tools", impact: "Short-form first, TikTok-native hooks, anti-hustle tone" },
-  { id: "gen_alpha", label: "Gen Alpha Explorer", emoji: "🌱", desc: "Growing up overstimulated, emotionally aware early", needs: "Age-appropriate tools, emotional vocabulary, safe guidance", impact: "Visual-heavy manga format, gamified exercises, guardian-safe" },
-  { id: "grief_carrier", label: "Grief Carrier", emoji: "🕯️", desc: "Loss, numbness, can't explain it", needs: "Witness, tenderness, not fixing", impact: "Permission-giving language, no toxic positivity, soft CTAs" },
-  { id: "anxious_achiever", label: "Anxious Achiever", emoji: "⚡", desc: "Succeeding outside, crumbling inside", needs: "Nervous system support, honesty", impact: "High-performance framing with vulnerability backdoor" },
-  { id: "spiritual_returner", label: "Spiritual Returner", emoji: "🌅", desc: "Tried everything, still searching", needs: "Depth, authenticity, no fluff", impact: "Dense contemplative prose, tradition-aware, anti-guru" },
-  { id: "new_parent", label: "Overwhelmed Parent", emoji: "👶", desc: "Lost identity, no time, guilt", needs: "Quick tools, self-compassion", impact: "Micro-format priority, guilt-free framing, practical exercises" },
+  { id: "burned_out_pro", label: "燃え尽きたプロフェッショナル", emoji: "💼", desc: "消耗しきって、感覚が鈍く、ガス欠寸前で回している", needs: "リセット、安らぎ、止まっていいという許可", impact: "「日曜の憂鬱」と職場疲弊のナラティブに響くコンテンツフック" },
+  { id: "gen_z_seeker", label: "Gen Z ナビゲーター", emoji: "🧭", desc: "圧倒されて、比較して、スクロールしてしまう", needs: "方向性、肯定感、実際に使えるツール", impact: "ショートフォームを優先、TikTokネイティブフック、脱ハッスルなトーン" },
+  { id: "gen_alpha", label: "Gen Alpha エクスプローラー", emoji: "🌱", desc: "刺激過多の中で育ち、早くから感情への理解がある", needs: "年齢に合ったツール、感情の語彙、安全なガイダンス", impact: "ビジュアル重視のマンガ形式、ゲーム化されたエクササイズ、保護者にも安心" },
+  { id: "grief_carrier", label: "悲嘆を抱える人", emoji: "🕯️", desc: "喪失、無感覚、うまく説明できない", needs: "寄り添い、優しさ、直そうとしないこと", impact: "許可を与える言葉、毒にならないポジティブさ、やわらかいCTA" },
+  { id: "anxious_achiever", label: "不安を抱えた達成者", emoji: "⚡", desc: "外では成功しているのに、中では崩れそう", needs: "自律神経のサポート、正直さ", impact: "ハイパフォーマンスの枠組みに脆弱性への裏口を設ける" },
+  { id: "spiritual_returner", label: "スピリチュアル・リターナー", emoji: "🌅", desc: "いろいろ試したのに、まだ探し続けている", needs: "深み、本物感、余計な飾りのないこと", impact: "濃密な内省的文体、伝統への敬意、グル否定のスタンス" },
+  { id: "new_parent", label: "いっぱいいっぱいの親", emoji: "👶", desc: "アイデンティティを見失い、時間がなく、罪悪感がある", needs: "すぐ使えるツール、セルフコンパッション", impact: "マイクロフォーマット優先、罪悪感なしの枠組み、実践的なエクササイズ" },
 ];
 
 const MOMENTS = [
-  { id: "2am_overthinking", label: "2AM — Can't stop thinking", scene: "Dark room, phone glow, racing mind", emoji: "🌙", hookStyle: "Opens with the sensation of lying awake, validates the spiral, offers one immediate grounding tool" },
-  { id: "after_breakup", label: "After a breakup or loss", scene: "Empty apartment, silence, numbness", emoji: "💔", hookStyle: "Names the specific flavor of grief — not sadness but numbness, the food-has-no-taste kind" },
-  { id: "burnout_cant_quit", label: "Burned out but can't quit", scene: "Office bathroom, deep breath, mask back on", emoji: "🔥", hookStyle: "Catches them in the mask-on moment, speaks to the gap between public performance and private collapse" },
-  { id: "feeling_behind", label: "Feeling behind in life", scene: "Scrolling feed, everyone winning, you stuck", emoji: "📱", hookStyle: "Targets comparison scrolling, reframes 'behind' as a construction, turns the phone into the trigger object" },
-  { id: "panic_spike", label: "Panic attack / anxiety spike", scene: "Chest tight, can't breathe, world shrinking", emoji: "😰", hookStyle: "Physical-first language, names body sensations before emotions, immediate somatic intervention" },
-  { id: "sunday_dread", label: "Sunday dread before Monday", scene: "Couch, clock ticking, stomach sinking", emoji: "⏰", hookStyle: "Taps the weekly cycle of anticipatory anxiety, validates the sinking feeling, reframes the Sunday as reclamation" },
+  { id: "2am_overthinking", label: "深夜2時 — 考えが止まらない", scene: "暗い部屋、スマートフォンの光、頭の中が止まらない", emoji: "🌙", hookStyle: "眠れない感覚から始まり、思考の渦を肯定し、即効性のあるグラウンディングツールを一つ提示する" },
+  { id: "after_breakup", label: "失恋や喪失のあと", scene: "空虚なアパート、静寂、感覚のなさ", emoji: "💔", hookStyle: "特定の悲しみの質感を言語化する——悲しみではなく麻痺感、食べ物に味がしないような感覚" },
+  { id: "burnout_cant_quit", label: "燃え尽きているのに辞められない", scene: "会社のトイレ、深呼吸、また仮面をつける", emoji: "🔥", hookStyle: "仮面をつける瞬間に寄り添い、外での演技と内なる崩壊のギャップに語りかける" },
+  { id: "feeling_behind", label: "人生で置いていかれている気がする", scene: "フィードをスクロール、みんな順調、自分だけ立ち止まっている", emoji: "📱", hookStyle: "比較スクロールを的確に捉え、「遅れている」を構造的な問題として再定義し、スマートフォン自体をトリガーとして転換する" },
+  { id: "panic_spike", label: "パニック発作／不安の急上昇", scene: "胸が締め付けられ、息ができず、世界が狭まっていく", emoji: "😰", hookStyle: "身体感覚から始まる言葉、感情より先に体の感覚を言語化し、即座のソマティック介入を行う" },
+  { id: "sunday_dread", label: "月曜前のサンデー・ドレッド", scene: "ソファ、時計の音、胃がずんと沈む", emoji: "⏰", hookStyle: "毎週繰り返される予期不安のサイクルに触れ、沈む感覚を肯定し、日曜日を取り戻す日として再定義する" },
 ];
 
 const TRADITIONS = [
-  "Zen Buddhism", "Sufi mysticism", "Vedanta", "Vajrayana", "Taoism",
-  "Stoicism", "Buddhist psychology", "Somatic therapy", "Polyvagal theory",
-  "Contemplative Christianity", "Indigenous wisdom", "Secular mindfulness",
-  "Breathwork science", "Depth psychology"
+  "禅仏教", "スーフィー神秘主義", "ヴェーダーンタ", "密教（Vajrayana）", "道教",
+  "ストア哲学", "仏教心理学", "ソマティック・セラピー", "ポリヴェーガル理論",
+  "観想のキリスト教", "先住民の叡智", "世俗的マインドフルネス",
+  "ブレスワーク科学", "深層心理学"
 ];
 
 const VOICE_SLIDERS = [
-  { id: "gentleDirect", left: "Gentle", right: "Direct", default: 50, color: "#6366f1", desc: "Controls sentence softness, permission language vs imperative commands" },
-  { id: "simpleDeep", left: "Simple", right: "Deep", default: 50, color: "#059669", desc: "Controls vocabulary density, metaphor layers, conceptual complexity" },
-  { id: "emotionalLogical", left: "Emotional", right: "Logical", default: 25, color: "#f43f5e", desc: "Controls story-to-data ratio, vulnerability level, analytical framing" },
-  { id: "spiritualPractical", left: "Spiritual", right: "Practical", default: 50, color: "#7c3aed", desc: "Controls tradition references, sacred language, tool-first vs meaning-first" },
+  { id: "gentleDirect", left: "やさしい", right: "直接的", default: 50, color: "#6366f1", desc: "文章の柔らかさ、許可の言語と命令的表現のバランスを調整する" },
+  { id: "simpleDeep", left: "シンプル", right: "深い", default: 50, color: "#059669", desc: "語彙の密度、メタファーの層、概念的な複雑さを調整する" },
+  { id: "emotionalLogical", left: "感情的", right: "論理的", default: 25, color: "#f43f5e", desc: "ストーリーとデータの比率、脆弱性のレベル、分析的な枠組みを調整する" },
+  { id: "spiritualPractical", left: "スピリチュアル", right: "実用的", default: 50, color: "#7c3aed", desc: "伝統への参照、神聖な言語、ツール優先と意味優先のバランスを調整する" },
 ];
 
 const VISUAL_STYLES = [
   {
-    id: "calm_minimal", label: "Calm / Minimal", desc: "Clean, airy, lots of white space",
-    palette: ["#f8fafc", "#e2e8f0", "#94a3b8", "#475569"], mood: "Serene, spacious, breathable",
+    id: "calm_minimal", label: "穏やか／ミニマル", desc: "すっきり、空気感があり、余白たっぷり",
+    palette: ["#f8fafc", "#e2e8f0", "#94a3b8", "#475569"], mood: "穏やか、広がり、呼吸できる感じ",
     imagePrompt: "Minimalist book cover with vast white space, single delicate ink wash element floating in center, soft grey gradient background, thin sans-serif typography, Japanese zen aesthetic, editorial photography style, muted tones, clean geometric border",
     emotionPrompt: "Abstract soft watercolor wash in pale blue and white, single drop of color expanding outward in calm ripples, zen garden raked sand pattern, misty morning light, feeling of deep exhale and release",
   },
   {
-    id: "dark_intense", label: "Dark / Intense", desc: "Moody, contrast-heavy, dramatic",
-    palette: ["#1e1b4b", "#312e81", "#6366f1", "#c7d2fe"], mood: "Powerful, immersive, cinematic",
+    id: "dark_intense", label: "ダーク／インテンス", desc: "ムーディ、コントラスト強め、ドラマチック",
+    palette: ["#1e1b4b", "#312e81", "#6366f1", "#c7d2fe"], mood: "力強い、没入感、映画的",
     imagePrompt: "Dramatic book cover with deep indigo and black, single shaft of violet light cutting through darkness, bold condensed typography, cinematic film grain, high contrast, moody atmospheric fog, Blade Runner color palette",
     emotionPrompt: "Person standing at edge of cliff at night, lightning illuminating the scene, dramatic cloud formations, deep indigo sky with electric violet lightning bolts, feeling of breakthrough power and transformation",
   },
   {
-    id: "earthy_organic", label: "Earthy / Organic", desc: "Natural textures, warm tones",
-    palette: ["#fef3c7", "#d97706", "#92400e", "#451a03"], mood: "Grounded, warm, textured",
+    id: "earthy_organic", label: "アーシー／オーガニック", desc: "自然なテクスチャ、温かいトーン",
+    palette: ["#fef3c7", "#d97706", "#92400e", "#451a03"], mood: "地に足がついた、温かみ、テクスチャ感",
     imagePrompt: "Book cover with handmade paper texture, warm amber and brown tones, dried botanical pressed flowers, hand-lettered serif typography, golden hour light, natural linen texture background, artisan craft aesthetic",
     emotionPrompt: "Hands cupping warm soil with a seedling sprouting, golden sunlight filtering through oak leaves, warm terracotta and amber palette, feeling of rootedness and connection to earth, morning garden dew",
   },
   {
-    id: "bold_modern", label: "Bold / Modern", desc: "Sharp typography, geometric",
-    palette: ["#fafafa", "#18181b", "#ef4444", "#fbbf24"], mood: "Energetic, decisive, striking",
+    id: "bold_modern", label: "大胆／モダン", desc: "シャープなタイポグラフィ、幾何学的",
+    palette: ["#fafafa", "#18181b", "#ef4444", "#fbbf24"], mood: "エネルギッシュ、決断的、印象的",
     imagePrompt: "Bold book cover with stark black and white contrast, oversized helvetica bold typography, single red geometric accent shape, Swiss design grid layout, Bauhaus influence, high energy, magazine editorial style",
     emotionPrompt: "Abstract geometric explosion of red and yellow shapes on white background, sharp angular forms radiating outward, feeling of decisive action and clarity, kinetic energy frozen in motion",
   },
   {
     id: "premium_soft",
-    label: "Premium / Geometric",
-    desc: "Refined, precise, luxury-positioned",
+    label: "プレミアム／ジオメトリック",
+    desc: "洗練、精密、ラグジュアリー寄りの位置づけ",
     palette: ["#fdf4ff", "#d8b4fe", "#7e22ce", "#3b0764"],
-    mood: "Elevated, geometric, timeless",
+    mood: "格調高い、幾何学的、時代を超える",
     imagePrompt:
       "Premium luxury nonfiction book cover with precise geometric layout, thin elegant serif or restrained sans typography, subtle gold line or foil accent, controlled lavender and deep purple planes, editorial grid discipline, aspirational transformation",
     emotionPrompt:
@@ -181,9 +181,9 @@ const VISUAL_STYLES = [
   },
   {
     id: "sacred_cosmic",
-    label: "Mysterious / Deep",
-    desc: "Atmospheric, contemplative, subtly luminous",
-    palette: ["#0f172a", "#7c3aed", "#f59e0b", "#fef3c7"], mood: "Intriguing, expansive, still commercial",
+    label: "神秘的／深み",
+    desc: "雰囲気があり、内省的で、ほのかに光が差す",
+    palette: ["#0f172a", "#7c3aed", "#f59e0b", "#fef3c7"], mood: "興味をそそる、広がりがある、それでも商業性は保つ",
     imagePrompt:
       "Premium mysterious nonfiction book cover, atmospheric deep navy and violet, subtle sacred geometry or soft nebula hint, contemplative spiritual-transformation adjacent, magnetic curiosity without horror, crisp typography zone, editorial finish",
     emotionPrompt:
@@ -229,27 +229,27 @@ const MOMENT_PROOF_URL = {
 };
 
 const EMOTION_PROOF_URL = {
-  "Finally calm": "/onboarding/proof/wizard/emotion_finally_calm.png",
-  "Safe in my body": "/onboarding/proof/wizard/emotion_safe_in_body.png",
-  "Clear-headed": "/onboarding/proof/wizard/emotion_clear_headed.png",
-  "In control": "/onboarding/proof/wizard/emotion_in_control.png",
-  "Permission to rest": "/onboarding/proof/wizard/emotion_permission_rest.png",
-  Energized: "/onboarding/proof/wizard/emotion_energized.png",
-  "Connected to purpose": "/onboarding/proof/wizard/emotion_connected_purpose.png",
-  Released: "/onboarding/proof/wizard/emotion_released.png",
-  "Less alone": "/onboarding/proof/wizard/emotion_less_alone.png",
-  Forgiven: "/onboarding/proof/wizard/emotion_forgiven.png",
-  Grounded: "/onboarding/proof/wizard/emotion_grounded.png",
-  Hopeful: "/onboarding/proof/wizard/emotion_hopeful.png",
-  Present: "/onboarding/proof/wizard/emotion_present.png",
-  Confident: "/onboarding/proof/wizard/emotion_confident.png",
-  Resilient: "/onboarding/proof/wizard/emotion_resilient.png",
+  "やっと落ち着ける": "/onboarding/proof/wizard/emotion_finally_calm.png",
+  "自分の身体の中に安心していられる": "/onboarding/proof/wizard/emotion_safe_in_body.png",
+  "頭がすっきりしている": "/onboarding/proof/wizard/emotion_clear_headed.png",
+  "自分でコントロールできている": "/onboarding/proof/wizard/emotion_in_control.png",
+  "休んでいいという許可": "/onboarding/proof/wizard/emotion_permission_rest.png",
+  "エネルギーが湧いている": "/onboarding/proof/wizard/emotion_energized.png",
+  "目的とつながっている": "/onboarding/proof/wizard/emotion_connected_purpose.png",
+  "解放されている": "/onboarding/proof/wizard/emotion_released.png",
+  "孤独が和らいでいる": "/onboarding/proof/wizard/emotion_less_alone.png",
+  "許された気持ちになれる": "/onboarding/proof/wizard/emotion_forgiven.png",
+  "グラウンデッド": "/onboarding/proof/wizard/emotion_grounded.png",
+  "希望が持てる": "/onboarding/proof/wizard/emotion_hopeful.png",
+  "今ここにいられる": "/onboarding/proof/wizard/emotion_present.png",
+  "自信がある": "/onboarding/proof/wizard/emotion_confident.png",
+  "しなやかに立ち直れる": "/onboarding/proof/wizard/emotion_resilient.png",
 };
 
 const TOPIC_TAG_PROOF_URL = Object.fromEntries(
   [
     "anxiety-at-night",
-    "overthinking",
+    "考えすぎ",
     "panic-grounding",
     "sunday-dread",
     "burnout-recovery",
@@ -281,22 +281,22 @@ const PROVEN = {
   nervous_system: {
     personas: ["Millennial women professionals 30-44 ($130-165M/yr)", "Tech/finance burnout pros 25-45 ($80-120M/yr)", "Working parents under-12 ($70-100M/yr)"],
     topics: ["anxiety that won't shut off at night", "burnout recovery without quitting", "nervous system regulation after work", "overthinking in bed", "panic attack grounding techniques"],
-    keywords: ["nervous system regulation audiobook", "burnout recovery", "stop overthinking at night", "anxiety before sleep", "polyvagal calm"],
+    keywords: ["nervous system regulation audiobook", "燃え尽きからの回復", "stop overthinking at night", "anxiety before sleep", "polyvagal calm"],
   },
   identity_direction: {
     personas: ["Gen Z navigating adulting 18-24 (fastest-growing segment)", "Millennial women career transition 30-44", "Identity rebuilders post-divorce 28-50"],
     topics: ["feeling behind compared to peers", "lost sense of purpose after 30", "quarter-life crisis", "rebuilding identity after breakup", "what to do with your life"],
-    keywords: ["feeling lost in life audiobook", "quarter life crisis", "finding purpose", "identity crisis self help", "what am I doing with my life"],
+    keywords: ["feeling lost in life audiobook", "クォーターライフクライシス", "finding purpose", "identity crisis self help", "what am I doing with my life"],
   },
   emotional_healing: {
     personas: ["Grief/loss navigators all ages ($70-100M/yr)", "Trauma-aware millennials body-based recovery", "Parents processing intergenerational patterns"],
-    topics: ["grief that doesn't follow a timeline", "healing after toxic relationship", "intergenerational trauma", "heartbreak recovery", "emotional numbness"],
+    topics: ["grief that doesn't follow a timeline", "healing after toxic relationship", "世代間トラウマ", "失恋からの回復", "感情の麻痺"],
     keywords: ["grief audiobook", "healing after breakup", "trauma recovery self help", "emotional healing", "letting go of past"],
   },
   performance_focus: {
     personas: ["Corporate middle managers 32-50 ($50-80M/yr)", "Entrepreneurs/solopreneurs 28-50 ($60-100M/yr)", "Tech workers seeking focus 25-40"],
-    topics: ["phone addiction destroying focus", "can't stick to habits", "decision fatigue as a manager", "ADHD-friendly productivity", "dopamine detox"],
-    keywords: ["focus audiobook", "productivity self help", "habit building", "ADHD focus techniques", "deep work practice"],
+    topics: ["phone addiction destroying focus", "can't stick to habits", "decision fatigue as a manager", "ADHD-friendly productivity", "ドーパミンデトックス"],
+    keywords: ["focus audiobook", "productivity self help", "習慣の構築", "ADHD focus techniques", "deep work practice"],
   },
   spiritual_awakening: {
     personas: ["Gen X wisdom seekers 45-58 ($165M/yr highest-spending)", "Contemplative professionals seeking meaning", "Post-crisis seekers finding new framework"],
@@ -307,21 +307,21 @@ const PROVEN = {
 
 // V4 Angles
 const V4_ANGLES = [
-  { id: "debunk", label: "Debunk", desc: "Challenge mainstream advice — 'What your therapist won't tell you'", framing: "Contrarian hook, evidence-backed pivot", icon: AlertTriangle },
-  { id: "framework", label: "Framework", desc: "Give them a system — '5-step protocol for...'", framing: "Structured, repeatable, tool-first", icon: Layers },
-  { id: "reveal", label: "Reveal", desc: "Expose hidden truth — 'The real reason you can't sleep'", framing: "Insider knowledge, 'nobody talks about this'", icon: Eye },
-  { id: "leverage", label: "Leverage", desc: "Use what they already have — 'Your anxiety is a superpower'", framing: "Reframe existing trait as advantage", icon: Zap },
-  { id: "origin", label: "Origin Story", desc: "Trace the root — 'Where your pattern actually started'", framing: "Narrative depth, causal chain, 'aha moment'", icon: Search },
+  { id: "debunk", label: "誤解を正す", desc: "主流の通説に挑む —「セラピストが教えてくれないこと」", framing: "逆張りフック、証拠に基づく転換", icon: AlertTriangle },
+  { id: "framework", label: "フレームワーク", desc: "システムを与える —「〇〇のための5ステップ」", framing: "構造的・反復可能・ツール優先", icon: Layers },
+  { id: "reveal", label: "お披露目", desc: "隠れた真実を暴く —「眠れない本当の理由」", framing: "インサイダーな知識、「誰も話さないこと」", icon: Eye },
+  { id: "leverage", label: "活用する", desc: "すでに持っているものを使う —「あなたの不安は超能力だ」", framing: "既存の特性を強みとして再定義", icon: Zap },
+  { id: "origin", label: "原点", desc: "根本を辿る —「あなたのパターンが始まった場所」", framing: "ナラティブの深さ、因果の連鎖、「気づき」の瞬間", icon: Search },
 ];
 
 // V4 Formats
 const V4_FORMATS_STRUCTURAL = [
-  { id: "F001", label: "Standard Self-Help", chapters: "12-16", tier: "full", desc: "Classic narrative arc with exercises woven in" },
-  { id: "F002", label: "Guided Program", chapters: "8-12", tier: "full", desc: "Step-by-step transformation protocol" },
-  { id: "F003", label: "Daily Journal", chapters: "30-90", tier: "micro", desc: "One page per day, reflection-heavy" },
-  { id: "F004", label: "Somatic Workbook", chapters: "10-14", tier: "full", desc: "Body-first exercises, minimal narrative" },
-  { id: "F005", label: "Narrative Journey", chapters: "14-20", tier: "full", desc: "Story-driven, deep emotional arc" },
-  { id: "F006", label: "Compressed Wisdom", chapters: "6-8", tier: "mini", desc: "Dense, high-impact, short read" },
+  { id: "F001", label: "スタンダード自己啓発", chapters: "12-16", tier: "full", desc: "演習を織り込んだクラシックな物語構成" },
+  { id: "F002", label: "ガイド付きプログラム", chapters: "8-12", tier: "full", desc: "ステップ・バイ・ステップの変容プロトコル" },
+  { id: "F003", label: "デイリー・ジャーナル", chapters: "30-90", tier: "micro", desc: "1日1ページ、内省中心" },
+  { id: "F004", label: "ソマティック・ワークブック", chapters: "10-14", tier: "full", desc: "身体優先の演習、最小限のナラティブ" },
+  { id: "F005", label: "ナラティブ・ジャーニー", chapters: "14-20", tier: "full", desc: "ストーリー主導、深い感情の弧" },
+  { id: "F006", label: "凝縮された知恵", chapters: "6-8", tier: "mini", desc: "密度が高く、インパクト大、短時間で読める" },
 ];
 
 // ═══════════════════════════════════════════════════════════
@@ -331,8 +331,8 @@ const V4_FORMATS_STRUCTURAL = [
 const VOICE_TONE_10 = {
   gentleDirect: [
     {
-      position: 1, label: "Ultra-Gentle",
-      technique: "Opens with 'You might notice...' — never commands, only observes alongside the reader",
+      position: 1, label: "超優しい",
+      technique: "'You might notice...' で始まる — 命令せず、読者と並んで観察するだけ",
       benefits: [
         "Creates immediate psychological safety — reader's nervous system downregulates on first page",
         "Disarms shame and self-criticism that blocks receptivity to new ideas",
@@ -342,8 +342,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 2, label: "Very Gentle",
-      technique: "Uses permission language: 'It's okay to...' and 'You're allowed to...'",
+      position: 2, label: "とても優しい",
+      technique: "許可の言語を使う：'It's okay to...'（〜していいんですよ）や'You're allowed to...'（〜が許されています）",
       benefits: [
         "Gives explicit permission to feel — many readers have never received this",
         "Counteracts internalized 'suck it up' messaging from family or culture",
@@ -353,30 +353,30 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 3, label: "Gentle",
-      technique: "Exercises framed as invitations, not instructions — 'If you'd like, try...'",
+      position: 3, label: "やさしい",
+      technique: "エクササイズは指示ではなく招待として提示 — 'If you'd like, try...'（よければ、試してみてください）",
       benefits: [
         "Respects reader autonomy — they choose to engage rather than being told to",
         "People with control-related trauma can participate without triggering resistance",
-        "Higher exercise completion rate — invitations feel safer than commands",
+        "エクササイズの完了率が高い — 招待は命令より安心感がある",
         "Builds intrinsic motivation rather than compliance-based engagement",
         "Reader feels like a collaborator, not a patient — preserves dignity",
       ],
     },
     {
-      position: 4, label: "Soft",
-      technique: "Slower sentence rhythm with intentional pauses and breath-aware pacing",
+      position: 4, label: "ソフト",
+      technique: "意図的な間と呼吸を意識したリズムによる、ゆったりとした文章テンポ",
       benefits: [
         "Reading pace mirrors meditation — the book itself becomes a calming practice",
         "Anxious readers' heart rate actually slows when prose rhythm is paced",
         "Creates space for emotional processing between concepts",
-        "Audiobook version works as a de-escalation tool during panic moments",
+        "オーディオブック版はパニック時の落ち着き手段として機能する",
         "Readers report feeling 'held' by the writing — attachment need met through text",
       ],
     },
     {
-      position: 5, label: "Balanced-Gentle",
-      technique: "Validation before direction — acknowledges feelings first, then offers a path",
+      position: 5, label: "バランス・やさしめ",
+      technique: "方向性を示す前に承認する — まず感情を認め、それから道を提示する",
       benefits: [
         "Mirrors ideal therapeutic rapport — feel understood, then open to change",
         "Both emotional and logical readers find their entry point",
@@ -386,8 +386,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 6, label: "Balanced-Direct",
-      technique: "Clear statements of truth with warmth — 'Here's what's actually happening'",
+      position: 6, label: "バランス・直接的",
+      technique: "温かみを持った明確な真実の表明 — 'Here's what's actually happening'（これが実際に起きていることです）",
       benefits: [
         "Readers get the 'real talk' they crave without feeling attacked",
         "Builds authority — readers trust a voice that tells them the truth kindly",
@@ -397,8 +397,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 7, label: "Firm",
-      technique: "Action-first sentences — leads with what to do, explains why after",
+      position: 7, label: "ファーム",
+      technique: "行動優先の文章構成 — まず何をすべきかを示し、理由はその後で説明する",
       benefits: [
         "Overwhelmed readers need fewer decisions — clear direction reduces cognitive load",
         "Performance-oriented readers respond to efficiency and structure",
@@ -408,8 +408,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 8, label: "Direct",
-      technique: "Short punchy sentences. No fluff. Every word earns its place.",
+      position: 8, label: "直接的",
+      technique: "短くて力強い文章。無駄なし。すべての言葉が役割を果たす。",
       benefits: [
         "ADHD-friendly — attention captured and held through rhythm and brevity",
         "Male-skewing audience feels respected — no unnecessary emotional padding",
@@ -419,8 +419,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 9, label: "Very Direct",
-      technique: "Confrontational honesty — 'You already know this. You're avoiding it.'",
+      position: 9, label: "かなり率直",
+      technique: "対立的な誠実さ — 'You already know this. You're avoiding it.'（あなたはすでに知っている。避けているだけだ。）",
       benefits: [
         "Breaks through denial — some readers need to be challenged, not comforted",
         "High-achiever audience respects the courage to say what others won't",
@@ -430,12 +430,12 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 10, label: "Ultra-Direct",
-      technique: "Commands and imperatives — 'Stop reading. Do this now. Then come back.'",
+      position: 10, label: "超率直",
+      technique: "命令形と指示 — 'Stop reading. Do this now. Then come back.'（読むのをやめろ。今すぐやれ。それから戻ってこい。）",
       benefits: [
         "Maximum behavior change — no ambiguity about what the reader should do",
         "Creates drill-sergeant loyalty in readers who respond to structure",
-        "Audiobook version works as a real-time coaching session",
+        "オーディオブック版はリアルタイムのコーチングセッションとして機能する",
         "Content repurposes perfectly into course modules and challenge formats",
         "Readers complete entire programs — the commanding voice maintains momentum",
       ],
@@ -443,30 +443,30 @@ const VOICE_TONE_10 = {
   ],
   simpleDeep: [
     {
-      position: 1, label: "Ultra-Simple",
-      technique: "5th-grade reading level — every sentence crystal clear, zero jargon",
+      position: 1, label: "超シンプル",
+      technique: "小学校5年生レベルの読みやすさ — すべての文が完全に明快で専門用語ゼロ",
       benefits: [
         "Accessible to ESL readers — opens international markets dramatically",
         "Gen Alpha and young Gen Z can engage without barrier",
         "Readers in emotional crisis can absorb content when cognition is impaired",
         "Widest possible market reach — no educational prerequisite",
-        "Audiobook comprehension highest — listener doesn't need to rewind",
+        "オーディオブックの理解度が最も高い — 巻き戻す必要がない",
       ],
     },
     {
-      position: 2, label: "Very Simple",
-      technique: "One concept per paragraph — builds understanding in small clear blocks",
+      position: 2, label: "とてもシンプル",
+      technique: "段落ごとに一つの概念 — 小さく明確なブロックで理解を積み上げる",
       benefits: [
         "ADHD readers can follow without losing the thread",
         "Each paragraph is a complete, usable unit — easy to highlight and save",
         "Works perfectly as TikTok carousel content — one slide per concept",
         "Readers feel smart and capable rather than intimidated",
-        "Higher exercise completion — instructions are impossible to misunderstand",
+        "エクササイズ完了率が高い — 指示が誤解不可能",
       ],
     },
     {
-      position: 3, label: "Simple",
-      technique: "Everyday metaphors — 'It's like clearing your browser tabs'",
+      position: 3, label: "シンプル",
+      technique: "日常的な比喩 — 'It's like clearing your browser tabs'（ブラウザのタブを閉じるようなもの）",
       benefits: [
         "Abstract concepts land instantly through familiar reference points",
         "Readers explain ideas to friends using your metaphors — organic word-of-mouth",
@@ -476,8 +476,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 4, label: "Accessible",
-      technique: "Clear explanations with occasional depth — introduces one new term per chapter",
+      position: 4, label: "アクセシブル",
+      technique: "時折深みを持つ明確な説明 — 章ごとに一つの新しい用語を導入する",
       benefits: [
         "Readers feel they're learning without being overwhelmed",
         "Builds vocabulary gradually — reader grows with the book",
@@ -487,19 +487,19 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 5, label: "Balanced",
-      technique: "Mix of plain language and richer concepts — 'simply put' bridges used",
+      position: 5, label: "バランス型",
+      technique: "平易な言葉と豊かな概念の混在 — 'simply put'（簡単に言えば）のような橋渡し表現を使用",
       benefits: [
         "Serves the widest range of educational backgrounds",
         "Book clubs can discuss at multiple levels — everyone finds something",
-        "Transitions work well in audiobook — narrator can signal shifts in depth",
+        "オーディオブックでの転換がスムーズ — ナレーターが深さの変化を伝えられる",
         "Strong review potential — readers feel both comforted and challenged",
         "Longest shelf life — doesn't feel too basic or too academic after rereading",
       ],
     },
     {
-      position: 6, label: "Thoughtful",
-      technique: "Multi-sentence idea development — builds arguments before arriving at insights",
+      position: 6, label: "思慮深い",
+      technique: "複数の文で考えを展開 — 洞察に至る前に論点を積み上げる",
       benefits: [
         "Intellectually curious readers feel respected and engaged",
         "Creates page-turner quality — readers want to see where the idea goes",
@@ -509,19 +509,19 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 7, label: "Rich",
-      technique: "Layered meaning — surface reading works, but rereading reveals more",
+      position: 7, label: "リッチ",
+      technique: "重層的な意味 — 表面的に読んでも成立するが、再読することでより深い意味が現れる",
       benefits: [
         "Books become reference texts readers return to — longer customer lifetime value",
         "Creates intellectual community — fans discuss hidden layers online",
-        "Audio version rewards re-listening — drives repeat engagement",
+        "音声版は繰り返し聴くことで報われる — リピートエンゲージメントを促進",
         "Attracts therapist and counselor audiences who recommend books to clients",
         "Content supports mastercourse format — enough depth for multi-week study",
       ],
     },
     {
-      position: 8, label: "Deep",
-      technique: "Philosophy and science woven together — references research without lecturing",
+      position: 8, label: "深い",
+      technique: "哲学と科学を織り交ぜる — 説教せずに研究を引用する",
       benefits: [
         "Positions author as genuine authority, not just a motivational speaker",
         "Attracts Gen X wisdom-seeker market — highest-spending demographic",
@@ -531,19 +531,19 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 9, label: "Very Deep",
-      technique: "Cross-disciplinary synthesis — connects neuroscience, philosophy, and practice",
+      position: 9, label: "かなり深い",
+      technique: "学際的な総合 — 神経科学、哲学、実践をつなぎ合わせる",
       benefits: [
         "Creates 'the book that changed my life' reactions — viral review potential",
         "Thought-leader positioning — author becomes known for original frameworks",
         "Academic and clinical citation potential — extends reach beyond consumer market",
-        "Premium audiobook pricing justified — substantive enough for long-form audio",
+        "プレミアムオーディオブック価格に見合う — 長時間音声に十分な内容",
         "International translation appeal — depth translates better than colloquialisms",
       ],
     },
     {
-      position: 10, label: "Ultra-Deep",
-      technique: "Graduate-level concepts, original frameworks, challenges reader to grow",
+      position: 10, label: "超深い",
+      technique: "大学院レベルの概念と独自のフレームワーク — 読者に成長を促す",
       benefits: [
         "Creates intellectual legacy — books referenced for decades",
         "Attracts high-income, high-education readers with strongest purchasing power",
@@ -555,19 +555,19 @@ const VOICE_TONE_10 = {
   ],
   emotionalLogical: [
     {
-      position: 1, label: "Ultra-Emotional",
-      technique: "Story-first chapters — every concept arrives through a lived experience narrative",
+      position: 1, label: "超感情的",
+      technique: "章はストーリーから始まる — すべての概念が実体験の語りを通して登場する",
       benefits: [
         "Mirror neurons activate — reader physically feels what characters feel",
         "Emotional memory encoding — readers remember content 6x longer than facts alone",
         "Creates the 'I cried reading this' reviews that drive viral sharing",
         "Deeply cathartic for readers carrying unprocessed emotion",
-        "Audiobook version becomes a companion — listeners form parasocial bond with narrator",
+        "オーディオブック版が伴侶になる — リスナーがナレーターと疑似社会的絆を形成する",
       ],
     },
     {
-      position: 2, label: "Very Emotional",
-      technique: "High vulnerability in prose — the author's own wounds are visible in the writing",
+      position: 2, label: "とても感情的",
+      technique: "文章に高い脆弱性 — 著者自身の傷が文章の中に見える",
       benefits: [
         "Readers feel less alone — 'someone else has been through this' is profoundly healing",
         "Dismantles the 'expert on a pedestal' barrier that blocks real connection",
@@ -577,8 +577,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 3, label: "Emotional",
-      technique: "Exercises include journaling and felt-sense work — 'Notice what arises'",
+      position: 3, label: "感情的",
+      technique: "エクササイズにはジャーナリングや体感作業が含まれる — 'Notice what arises'（何が湧き上がるかに気づいてください）",
       benefits: [
         "Develops reader's emotional intelligence — a lifelong skill beyond the book",
         "Somatic awareness exercises create real physiological change, not just insight",
@@ -588,19 +588,19 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 4, label: "Warm",
-      technique: "Reader addressed as 'you' in intimate tone — like a letter from a close friend",
+      position: 4, label: "温かみのある",
+      technique: "読者を 'you'（あなた）と親密な口調で呼ぶ — 親しい友人からの手紙のように",
       benefits: [
         "Attachment theory activation — reader feels securely 'held' by the text",
         "Reduces defensiveness — intimate tone bypasses intellectual resistance",
         "Highest read-through rates — readers don't want the 'conversation' to end",
-        "Audiobook feels like a private therapy session — deep personal connection",
+        "オーディオブックがプライベートなセラピーセッションのように感じられる — 深い個人的つながり",
         "Strong for grief and healing topics where clinical distance would feel cold",
       ],
     },
     {
-      position: 5, label: "Balanced",
-      technique: "Emotional opening, logical middle, integrative close — each chapter a journey",
+      position: 5, label: "バランス型",
+      technique: "感情的な導入、論理的な中盤、統合的な結末 — 各章がひとつの旅",
       benefits: [
         "Both heart and head readers feel served in every chapter",
         "Creates the most balanced reviews — 'moving AND practical' is the gold standard",
@@ -610,8 +610,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 6, label: "Reasoned",
-      technique: "Evidence-supported storytelling — stories illustrate data, not the reverse",
+      position: 6, label: "論理的",
+      technique: "エビデンスに支えられたストーリーテリング — データを説明するためにストーリーを使う（逆ではない）",
       benefits: [
         "Skeptical readers stay engaged — their 'prove it' need is met consistently",
         "Creates authority through substance — reviews mention 'well-researched'",
@@ -621,8 +621,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 7, label: "Analytical",
-      technique: "Structured arguments — claim, evidence, implication, action",
+      position: 7, label: "分析的",
+      technique: "構造化された論証 — 主張、証拠、示唆、行動",
       benefits: [
         "Engineering and tech-industry readers finally find self-help they respect",
         "Creates clear, quotable frameworks that get shared in professional contexts",
@@ -632,8 +632,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 8, label: "Logical",
-      technique: "Data-forward chapters — numbers, studies, and metrics anchor every claim",
+      position: 8, label: "論理的",
+      technique: "データ主導の章 — 数値・研究・指標がすべての主張の根拠となる",
       benefits: [
         "Positions brand in the 'evidence-based' category — premium market positioning",
         "Readers use the data to convince friends and family — built-in evangelism tool",
@@ -643,19 +643,19 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 9, label: "Very Logical",
-      technique: "Reader addressed as capable decision-maker — treated as intelligent adult",
+      position: 9, label: "かなり論理的",
+      technique: "読者を有能な意思決定者として扱う — 知性ある大人として接する",
       benefits: [
         "Respects reader's intelligence — builds loyalty through trust in their capacity",
         "Creates 'I recommend this to my smartest friends' word-of-mouth",
         "Strong for executive and leadership markets where emotional language feels weak",
-        "Content translates to keynote speaking — logical structure plays well on stage",
+        "コンテンツが基調講演に転用できる — 論理的構造がステージで映える",
         "Academic review potential — substantive enough to be cited in research",
       ],
     },
     {
-      position: 10, label: "Ultra-Logical",
-      technique: "Transformation framed as systematic skill acquisition with measurable outcomes",
+      position: 10, label: "超論理的",
+      technique: "変革を測定可能な成果を伴う体系的なスキル習得として位置づける",
       benefits: [
         "Appeals to quantified-self audience — the largest growth segment in wellness",
         "Creates trackable outcomes readers can measure — drives 5-star reviews",
@@ -667,8 +667,8 @@ const VOICE_TONE_10 = {
   ],
   spiritualPractical: [
     {
-      position: 1, label: "Ultra-Spiritual",
-      technique: "References to traditions, lineages, and sacred teachers woven throughout",
+      position: 1, label: "超スピリチュアル",
+      technique: "伝統、系譜、聖なる師への言及が随所に織り込まれる",
       benefits: [
         "Readers seeking meaning find it — existential anxiety addressed at the root",
         "Creates a sense of belonging to something ancient and larger than oneself",
@@ -678,19 +678,19 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 2, label: "Very Spiritual",
-      technique: "Sacred language: 'presence', 'awareness', 'witness', 'the great turning'",
+      position: 2, label: "とてもスピリチュアル",
+      technique: "神聖な言語：'presence'（存在）、'awareness'（気づき）、'witness'（目撃者）、'the great turning'（大いなる転換）",
       benefits: [
         "Creates transcendent reading experiences — readers report feeling 'transported'",
         "Poetry of language itself becomes healing — beauty as medicine",
-        "Audiobook version works as guided meditation — dual-use content",
+        "オーディオブック版がガイド付き瞑想として機能する — 二重用途コンテンツ",
         "Strong international appeal — spiritual language translates across cultures",
         "Builds devoted following — spiritual readers are the most loyal audience segment",
       ],
     },
     {
-      position: 3, label: "Spiritual",
-      technique: "Exercises include meditation, contemplation, and silence-based practices",
+      position: 3, label: "スピリチュアル",
+      technique: "エクササイズには瞑想、黙想、沈黙を基盤とした実践が含まれる",
       benefits: [
         "Develops reader's capacity for stillness — counterbalances digital overstimulation",
         "Meditation-based exercises create measurable neurological benefits",
@@ -700,8 +700,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 4, label: "Meaning-First",
-      technique: "Meaning-making is the primary goal — 'Why am I here?' addressed directly",
+      position: 4, label: "意味優先",
+      technique: "意味の創造が主要な目標 — 'Why am I here?'（私はなぜここにいるのか？）に正面から向き合う",
       benefits: [
         "Addresses the deepest human need — purpose and significance",
         "Readers in midlife transition find the existential grounding they're seeking",
@@ -711,8 +711,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 5, label: "Balanced",
-      technique: "Inner transformation connected to outer action — contemplation meets execution",
+      position: 5, label: "バランス型",
+      technique: "内なる変容を外の行動につなげる — 黙想が実行と出会う",
       benefits: [
         "Serves both spiritual seekers and practical doers in one book",
         "Creates the 'woo-meets-science' positioning that dominates bestseller lists",
@@ -722,8 +722,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 6, label: "Grounded",
-      technique: "Spiritual insights translated into daily habits and routines",
+      position: 6, label: "グラウンデッド",
+      technique: "精神的な洞察を日常の習慣やルーティンに落とし込む",
       benefits: [
         "Wisdom becomes usable — reader can start today, not 'when they're ready'",
         "Appeals to 'spiritual but practical' — the fastest-growing reader segment",
@@ -733,8 +733,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 7, label: "Applied",
-      technique: "Tool-first chapters — here's the technique, here's when to use it, here's why it works",
+      position: 7, label: "実践的",
+      technique: "ツール優先の章構成 — テクニックを提示し、使うべき場面を示し、なぜ機能するかを説明する",
       benefits: [
         "Readers take immediate action — exercises feel doable, not abstract",
         "Strong for pocket-guide format — tools are reference-able and compact",
@@ -744,8 +744,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 8, label: "Practical",
-      technique: "Functional language: 'system', 'protocol', 'technique' — zero tradition references",
+      position: 8, label: "実用的",
+      technique: "機能的な言語：'system'（システム）、'protocol'（プロトコル）、'technique'（テクニック）— 伝統への言及はゼロ",
       benefits: [
         "Opens the secular wellness market — readers who avoid 'spiritual' labels",
         "Strong for healthcare referrals — clinical professionals recommend secular content",
@@ -755,8 +755,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 9, label: "Very Practical",
-      technique: "Behavior change is the primary goal — measurable outcomes tracked",
+      position: 9, label: "かなり実用的",
+      technique: "行動変容が主要な目標 — 測定可能な成果を追跡する",
       benefits: [
         "Readers can prove the book worked — drives reviews with specific results",
         "Creates before/after narratives perfect for marketing and testimonials",
@@ -766,8 +766,8 @@ const VOICE_TONE_10 = {
       ],
     },
     {
-      position: 10, label: "Ultra-Practical",
-      technique: "Pure protocol — actionable with measurable outcomes, every chapter a system to install",
+      position: 10, label: "超実用的",
+      technique: "純粋なプロトコル — 測定可能な成果を伴う実行可能な内容、各章がインストールすべきシステム",
       benefits: [
         "Maximum behavior change — no ambiguity about what success looks like",
         "Creates the strongest 'before and after' transformation testimonials",
@@ -796,19 +796,19 @@ function StepHero({ eyebrow, title, subtitle, helper }) {
 }
 
 function ProgressBar({ step, total, labels, t }) {
-  const isComplete = step === total - 2; // step 7 ("Your Brand") only
+  const isComplete = step === total - 2; // step 7 ("あなたのブランド") only
   const pct = isComplete ? 100 : ((step + 1) / total) * 100;
   return (
     <div className="brand-studio-panel mb-6 px-5 py-4 sm:mb-8">
       {isComplete && (
         <p className="text-center text-3xl font-extrabold mb-3" style={{ color: '#d97706', fontFamily: 'Cormorant Garamond, serif' }}>
-          {t("ui", "Congratulations — Your Brand Is 100% Configured!")}
+          {t("ui", "おめでとうございます — ブランドが100%設定されました！")}
         </p>
       )}
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-wider text-violet-600">
-            {isComplete ? t("ui", "Complete") : t("ui", "Step {n} of {total}").replace("{n}", step + 1).replace("{total}", total)}
+            {isComplete ? t("ui", "完了") : t("ui", "ステップ {n} / {total}").replace("{n}", step + 1).replace("{total}", total)}
           </p>
           <p className="text-sm font-bold text-white">{labels[step]}</p>
         </div>
@@ -945,7 +945,7 @@ function SpectrumBarGraph({ position, color }) {
 function EmotionRadarGraph({ position, color }) {
   const sides = 6;
   const cx = 120, cy = 35, r = 30;
-  const labels = ["Feel", "Think", "Do", "Share", "Trust", "Return"];
+  const labels = ["感じる", "考える", "Do", "シェアする", "信頼", "リターン"];
   const outerPts = [], innerPts = [];
   for (let i = 0; i < sides; i++) {
     const angle = (Math.PI * 2 * i) / sides - Math.PI / 2;
@@ -996,54 +996,54 @@ function EnergyGaugeGraph({ position, color }) {
 const SELECTION_FEEDBACK = {
   archetypes: {
     nervous_system: {
-      systemEffect: "Sets prose to breath-aware pacing, somatic exercises, and regulation-first structure across all titles",
-      emotionalBenefit: "Your readers' nervous systems downregulate from the first paragraph. Content functions as a co-regulation tool — reducing cortisol, slowing heart rate, and giving permission to rest. Readers report feeling 'held' by the writing itself.",
+      systemEffect: "すべてのタイトルにわたり、呼吸を意識したペーシング、身体的エクササイズ、調整優先の構成を文体に設定する",
+      emotionalBenefit: "あなたの読者の神経系は最初の段落からダウンレギュレートする。コンテンツは共同調整ツールとして機能する——コルチゾールを下げ、心拍数を遅くし、休むことへの許可を与える。読者は文章そのものに「抱かれている」と感じると報告する。",
     },
     identity_direction: {
-      systemEffect: "Activates forward-moving prose, honest-audit exercises, and anti-comparison hook strategy",
-      emotionalBenefit: "Readers stop scrolling and start choosing. This transforms the paralysis of 'I don't know what I'm doing' into momentum. Each chapter rebuilds identity through small, brave decisions — counteracting the shame of feeling behind.",
+      systemEffect: "前進する文体、誠実な内省エクササイズ、反比較フック戦略を有効にする",
+      emotionalBenefit: "読者はスクロールをやめて選択し始める。これは「何をすべきか分からない」という麻痺をモメンタムへと変える。各章が小さく勇敢な決断を通じてアイデンティティを再構築する——遅れている恥を打ち消しながら。",
     },
     emotional_healing: {
-      systemEffect: "Enables tenderness-first language, witness-based exercises, and grief-literate content pacing",
-      emotionalBenefit: "Readers feel seen, not fixed. This meets grief and pain with presence — no toxic positivity, no timelines, no 'you should be over this.' It fills the role of the compassionate witness many readers never had.",
+      systemEffect: "優しさ優先の言語、証人ベースのエクササイズ、悲しみに精通したコンテンツペーシングを可能にする",
+      emotionalBenefit: "読者は「修正される」のではなく「見てもらえる」と感じる。これは悲しみと痛みに存在感をもって寄り添う——毒性のあるポジティブさもなく、タイムラインもなく、「もう乗り越えるべき」という言葉もない。多くの読者がかつて持てなかった、思いやりある証人の役割を果たす。",
     },
     performance_focus: {
-      systemEffect: "Engages action-first prose, protocol-based exercises, and noise-cutting hook strategy",
-      emotionalBenefit: "Readers cut through information overload and take their first real action in weeks. This reduces decision fatigue, builds systems that run on structure instead of willpower, and restores the feeling of being in control.",
+      systemEffect: "行動優先の文体、プロトコルベースのエクササイズ、ノイズカットフック戦略を取り入れる",
+      emotionalBenefit: "読者は情報過負荷を突き抜け、何週間かぶりに初めての本物の行動を取る。これは決断疲労を減らし、意志力ではなく構造で動くシステムを構築し、コントロールしている感覚を取り戻す。",
     },
     spiritual_awakening: {
-      systemEffect: "Activates contemplative prose layers, gap-awareness exercises, and meaning-seeking hook strategy",
-      emotionalBenefit: "Readers discover that what they've been chasing has been inside them all along. This creates space for depth in a world of surfaces — meeting spiritual seekers where intellectualized self-help couldn't reach.",
+      systemEffect: "瞑想的な文体の層、ギャップ認識エクササイズ、意味探求フック戦略を有効にする",
+      emotionalBenefit: "読者は追い求めてきたものがずっと自分の内側にあったと気づく。これは表面だけの世界に深みのための空間を作り出す——知的なセルフヘルプが届けなかった場所でスピリチュアルな探求者と出会う。",
     },
   },
   personas: {
-    burned_out_pro: { systemEffect: "Tunes titles around exhaustion hooks, 'Sunday dread' narratives, and recovery-without-quitting framing", emotionalBenefit: "Content reaches people in survival mode — no guilt, no 'just try harder.' Your brand becomes the first voice that says 'you're not lazy, you're depleted' and actually means it." },
-    gen_z_seeker: { systemEffect: "Optimizes for short-form hooks, TikTok-native language, anti-hustle tone, and scroll-stopping openings", emotionalBenefit: "Your brand meets Gen Z in their native language — authenticity-first. You become the trusted voice in a sea of performative wellness, offering real tools without the cringe." },
-    gen_alpha: { systemEffect: "Activates manga-first format, visual storytelling, gamified exercises, and guardian-safe content filters", emotionalBenefit: "You're building content for the first generation with emotional vocabulary from childhood. Visual formats give them tools their parents never had — age-appropriate and genuinely helpful." },
-    grief_carrier: { systemEffect: "Sets permission-giving language, soft CTAs, no toxic positivity, and witness-based exercise structure", emotionalBenefit: "Your brand becomes a companion through the unnamed grief — the kind nobody prepared them for. No fixing, no timelines. Just presence and the radical permission to not be okay." },
-    anxious_achiever: { systemEffect: "Bridges high-performance framing with vulnerability backdoors, nervous system support, and imposter syndrome hooks", emotionalBenefit: "You reach people who look fine outside and are crumbling inside. Your brand bridges achievement language with vulnerability — the backdoor to healing that achievers will actually walk through." },
-    spiritual_returner: { systemEffect: "Activates dense contemplative prose, tradition-aware references, anti-guru positioning, and depth-first hooks", emotionalBenefit: "Your brand speaks to people who've tried everything and are exhausted by shallow answers. Dense, authentic content that respects their intelligence and meets their depth." },
-    new_parent: { systemEffect: "Prioritizes micro-format delivery, guilt-free framing, quick-tool exercises, and naptime-length content", emotionalBenefit: "Your brand reaches parents in the stolen moments — 3AM feeds, naptime scrolls. Micro-format tools with zero guilt help them reclaim identity without adding to their overwhelm." },
+    burned_out_pro: { systemEffect: "疲弊フック、「日曜の恐怖」ナラティブ、辞めずに回復するフレーミングを中心にタイトルを調整する", emotionalBenefit: "コンテンツはサバイバルモードにある人々に届く——罪悪感もなく、「もっと頑張って」もない。あなたのブランドは「あなたは怠惰ではなく、消耗している」と言い、それを本当に意味する最初の声になる。" },
+    gen_z_seeker: { systemEffect: "ショートフォームフック、TikTokネイティブ言語、アンチハッスルトーン、スクロールを止めるオープニングのために最適化する", emotionalBenefit: "あなたのブランドはGen Zのネイティブ言語で出会う——真正性を最優先に。パフォーマティブなウェルネスの海の中で信頼される声となり、恥ずかしさのない本物のツールを提供する。" },
+    gen_alpha: { systemEffect: "マンガ優先フォーマット、ビジュアルストーリーテリング、ゲーミファイドなエクササイズ、保護者向け安全コンテンツフィルターを有効にする", emotionalBenefit: "幼少期から感情の語彙を持つ最初の世代のためのコンテンツを構築している。ビジュアルフォーマットは親世代が持てなかったツールを与える——年齢に適切で真に役立つものを。" },
+    grief_carrier: { systemEffect: "許可を与える言語、ソフトなCTA、毒性のあるポジティブさなし、証人ベースのエクササイズ構造を設定する", emotionalBenefit: "あなたのブランドは名前のない悲しみの中のコンパニオンになる——誰も彼らに備えさせなかった種類の悲しみの。修正もなく、タイムラインもない。ただ存在と、大丈夫でなくていいという根本的な許可だけ。" },
+    anxious_achiever: { systemEffect: "高パフォーマンスのフレーミングと脆弱性への裏口、神経系サポート、インポスター症候群フックを橋渡しする", emotionalBenefit: "外見は問題なく見えて内側が崩れている人々に届く。あなたのブランドは達成言語と脆弱性を橋渡しする——達成者が実際に歩む癒しへの裏口。" },
+    spiritual_returner: { systemEffect: "密度の高い瞑想的な文体、伝統を意識した引用、反グル的ポジショニング、深み優先フックを有効にする", emotionalBenefit: "あなたのブランドは何でも試して浅い答えに疲弊した人々に語りかける。彼らの知性を尊重し、その深みに応える、密度のある真正なコンテンツ。" },
+    new_parent: { systemEffect: "マイクロフォーマット配信、罪悪感なしのフレーミング、クイックツールエクササイズ、昼寝時間の長さのコンテンツを優先する", emotionalBenefit: "あなたのブランドは盗まれた瞬間の親たちに届く——深夜3時の授乳、昼寝中のスクロール。ゼロ罪悪感のマイクロフォーマットツールが、圧倒感を増やさずにアイデンティティを取り戻す助けをする。" },
   },
   moments: {
-    "2am_overthinking": { systemEffect: "Opens with sensation-based language, validates the spiral, offers immediate grounding tool within first 30 seconds", emotionalBenefit: "Content catches them in the exact moment of vulnerability — lying awake, phone glowing, mind racing. The hook lands because it describes what they're physically feeling right now." },
-    "after_breakup": { systemEffect: "Names the specific numbness flavor, avoids advice-giving, leads with somatic awareness of loss", emotionalBenefit: "You meet them in the numbness nobody talks about — not the crying kind, but the food-has-no-taste kind. Your brand names what they can't articulate, and that alone begins healing." },
-    "burnout_cant_quit": { systemEffect: "Catches the mask-on moment, speaks to public/private gap, frames recovery as a skill not a luxury", emotionalBenefit: "You speak to the moment between the bathroom mirror and the mask going back on. Content validates the gap between who they perform and who they are — permission to stop pretending." },
-    "feeling_behind": { systemEffect: "Targets comparison-scrolling behavior, reframes 'behind' as construction, turns phone into trigger object", emotionalBenefit: "You interrupt the comparison scroll with truth: they're not behind, they're building. The phone itself becomes the trigger object, transforming mindless scrolling into honest self-reflection." },
-    "panic_spike": { systemEffect: "Physical-first language, names body sensations before emotions, immediate somatic intervention within 10 seconds", emotionalBenefit: "Content uses body-first language when the mind has left the building. During panic, the body needs to hear 'I see you' before the mind can process anything. This saves real people in real moments." },
-    "sunday_dread": { systemEffect: "Taps weekly anxiety cycle, validates sinking feeling, reframes Sunday as reclamation rather than countdown", emotionalBenefit: "You name the weekly dread that millions feel but never articulate. Your brand reclaims Sunday from anxiety — transforming the sinking feeling into a ritual of preparation and self-compassion." },
+    "2am_overthinking": { systemEffect: "感覚ベースの言語で始まり、螺旋状の感覚を肯定し、最初の30秒以内に即座のグラウンディングツールを提供する", emotionalBenefit: "コンテンツは脆弱性のまさにその瞬間に届く——眠れずに横たわり、スマートフォンが光り、思考が駆け回る瞬間に。フックが刺さるのは、今まさに身体で感じていることを言い当てているからだ。" },
+    "after_breakup": { systemEffect: "特定の麻痺の種類に名前をつけ、アドバイスを避け、喪失の身体的認識でリードする", emotionalBenefit: "誰も語らない麻痺の中で出会う——泣くような麻痺ではなく、食べ物に味がしないような麻痺に。あなたのブランドは彼らが言葉にできないものに名前をつける、それだけで癒しが始まる。" },
+    "burnout_cant_quit": { systemEffect: "「仮面をつける瞬間」を捉え、公と私のギャップに語りかけ、回復をぜいたくではなくスキルとして位置づける", emotionalBenefit: "洗面台の鏡の前と仮面をつけ直す間の瞬間に語りかける。コンテンツはパフォーマンスしている自分と本当の自分のギャップを肯定する——ふりをやめることへの許可を与える。" },
+    "feeling_behind": { systemEffect: "比較スクロール行動をターゲットにし、「遅れている」を「構築中」として捉え直し、スマートフォンをトリガーオブジェクトに変える", emotionalBenefit: "比較スクロールを真実で中断する：彼らは遅れていない、構築中だ。スマートフォン自体がトリガーオブジェクトとなり、無意識のスクロールを誠実な自己省察へと変える。" },
+    "panic_spike": { systemEffect: "身体感覚から始まる言葉、感情より先に体の感覚を言語化し、即座のソマティック介入を行う within 10 seconds", emotionalBenefit: "心が離れてしまったとき、コンテンツは身体優先の言語を使う。パニックの中では、心が何かを処理できる前に、身体が「あなたを見ている」という言葉を必要としている。これは現実の瞬間に本物の人々を救う。" },
+    "sunday_dread": { systemEffect: "週次の不安サイクルに触れ、沈んでいく感覚を肯定し、日曜日をカウントダウンではなく取り戻しとして捉え直す", emotionalBenefit: "何百万人もが感じながらも言葉にできない週次の恐怖感に名前をつける。あなたのブランドは日曜日を不安から取り戻す——沈んでいく感覚を準備とセルフコンパッションの儀式へと変える。" },
   },
   visualStyles: {
-    calm_minimal: { systemEffect: "Generates covers with vast white space, soft ink wash, zen aesthetic, muted palettes", emotionalBenefit: "Readers experience visual relief — white space signals 'you can breathe here.' Covers feel like a meditation before the book is even opened. Reduces visual anxiety for overstimulated audiences." },
-    dark_intense: { systemEffect: "Generates covers with deep indigo/black, dramatic lighting, cinematic grain, high contrast", emotionalBenefit: "Readers feel the gravity of their own transformation. Dark aesthetics signal depth — this isn't gentle wellness, it's real work. Attracts readers who distrust soft-looking self-help." },
-    earthy_organic: { systemEffect: "Generates covers with handmade textures, botanical elements, warm amber tones, artisan aesthetic", emotionalBenefit: "Readers feel grounded before they read a word. Natural textures trigger biophilic calm — the brain interprets organic visuals as 'safe.' Powerful for somatic and nature-based healing." },
-    bold_modern: { systemEffect: "Generates covers with stark contrast, oversized typography, red geometric accents, Swiss design grid", emotionalBenefit: "Readers feel energized and decisive. Bold visuals cut through shelf noise and scroll fatigue. Signals 'this is different' — attracting action-oriented readers tired of pastel wellness." },
-    premium_soft: { systemEffect: "Generates covers with geometric structure, precise typography hierarchy, gold accent lines, disciplined luxury palettes", emotionalBenefit: "Readers feel they are holding something authoritative and intentional. Geometric premium signals craft and clarity — attracting buyers who want transformation with editorial credibility." },
-    sacred_cosmic: { systemEffect: "Generates mysterious atmospheric covers — deep blues and violets, subtle light, contemplative depth without horror", emotionalBenefit: "Readers feel curiosity and inward expansion. Mysterious visuals invite depth seekers without fantasy overload — magnetic on shelf and thumbnail." },
+    calm_minimal: { systemEffect: "広大な余白、柔らかなインクウォッシュ、禅的美学、ミュートパレットを持つ表紙を生成する", emotionalBenefit: "読者は視覚的な安堵を体験する——余白は「ここで息ができる」というシグナルを発する。表紙は本を開く前から瞑想のように感じられる。刺激過多な読者の視覚的不安を和らげる。" },
+    dark_intense: { systemEffect: "深いインディゴ／ブラック、ドラマチックな照明、シネマティックなグレイン、高コントラストを持つ表紙を生成する", emotionalBenefit: "読者は自分自身の変容の重力を感じる。ダークな美学が深みをシグナリングする——これは穏やかなウェルネスではなく、本物の作業だ。柔らかな見た目のセルフヘルプを信頼しない読者を引きつける。" },
+    earthy_organic: { systemEffect: "手作りテクスチャー、植物要素、温かいアンバートーン、職人的美学を持つ表紙を生成する", emotionalBenefit: "読者は一言も読む前にグラウンドされた感覚を覚える。自然のテクスチャーがバイオフィリックな落ち着きをトリガーする——脳はオーガニックなビジュアルを「安全」と解釈する。身体的・自然基盤の癒しに強力。" },
+    bold_modern: { systemEffect: "極端なコントラスト、特大タイポグラフィ、赤の幾何学的アクセント、スイスデザイングリッドを持つ表紙を生成する", emotionalBenefit: "読者は活力と決断力を感じる。大胆なビジュアルは棚のノイズとスクロール疲れを切り裂く。「これは違う」というシグナルを発し——パステルカラーのウェルネスに飽き飽きした行動指向の読者を引きつける。" },
+    premium_soft: { systemEffect: "幾何学的構造、精密なタイポグラフィ階層、ゴールドのアクセントライン、統制されたラグジュアリーパレットを持つ表紙を生成する", emotionalBenefit: "読者は権威あり意図的なものを手にしていると感じる。幾何学的プレミアムは技巧と明確さをシグナリングする——編集としての信頼性を持つ変容を求める購入者を引きつける。" },
+    sacred_cosmic: { systemEffect: "神秘的な雰囲気の表紙を生成する——深いブルーとバイオレット、繊細な光、ホラーなき瞑想的な深み", emotionalBenefit: "読者は好奇心と内なる広がりを感じる。神秘的なビジュアルはファンタジーの過負荷なく深みを求める人を惹きつける——棚上でもサムネイルでも磁力を持つ。" },
   },
   formats: {
-    manga: { systemEffect: "Catalog planner prioritizes illustrated panels, short-form audiobooks (15-30 min), visual storytelling across all channels", emotionalBenefit: "Visual-first readers process emotions through images faster than text. Manga reduces reading anxiety, engages Gen Z/Alpha natively, and makes complex psychological concepts accessible through story." },
-    book: { systemEffect: "Catalog planner prioritizes full-length narratives, deep programs, comprehensive workbooks, long-form audiobooks (3-8 hrs)", emotionalBenefit: "Deep readers crave immersion — long-form gives them permission to slow down and go deep. Full-length books become companions, building sustained attention that drives lasting transformation." },
+    manga: { systemEffect: "カタログプランナーはイラストパネル、ショートフォームオーディオブック（15〜30分）、全チャネルにわたるビジュアルストーリーテリングを優先する", emotionalBenefit: "ビジュアル優先の読者はテキストより速く画像を通じて感情を処理する。マンガは読書不安を和らげ、Gen Z／Alphaにネイティブに語りかけ、複雑な心理的概念をストーリーを通じてアクセス可能にする。" },
+    book: { systemEffect: "カタログプランナーはフルレングスのナラティブ、深いプログラム、包括的なワークブック、長形式のオーディオブック（3〜8時間）を優先する", emotionalBenefit: "深く読む読者は没入感を渇望する——長形式は彼らにスローダウンして深みに進む許可を与える。フルレングスの本はコンパニオンとなり、持続的な変容をもたらす集中力を育む。" },
   },
 };
 
@@ -1053,7 +1053,7 @@ function SelectionFeedback({ systemEffect, emotionalBenefit, color = "#6366f1" }
     <div className="mt-4 rounded-xl border overflow-hidden" style={{ borderColor: color + '30' }}>
       <div className="px-4 py-2.5 flex items-center gap-2" style={{ backgroundColor: color + '08' }}>
         <Sparkles size={13} style={{ color }} />
-        <span className="text-[11px] font-bold" style={{ color }}>What This Activates</span>
+        <span className="text-[11px] font-bold" style={{ color }}>これが有効化するもの</span>
       </div>
       <div className="px-4 py-3 bg-white">
         <div className="flex items-start gap-2 mb-2.5">
@@ -1061,7 +1061,7 @@ function SelectionFeedback({ systemEffect, emotionalBenefit, color = "#6366f1" }
             <Zap size={10} style={{ color }} />
           </div>
           <div>
-            <div className="text-[9px] font-bold uppercase text-white mb-0.5">In the System</div>
+            <div className="text-[9px] font-bold uppercase text-white mb-0.5">システム内で</div>
             <p className="text-[11px] text-white leading-relaxed">{systemEffect}</p>
           </div>
         </div>
@@ -1070,7 +1070,7 @@ function SelectionFeedback({ systemEffect, emotionalBenefit, color = "#6366f1" }
             <Heart size={10} style={{ color }} />
           </div>
           <div>
-            <div className="text-[9px] font-bold uppercase text-white mb-0.5">For Your Reader</div>
+            <div className="text-[9px] font-bold uppercase text-white mb-0.5">あなたの読者へ</div>
             <p className="text-[11px] text-white leading-relaxed font-medium">{emotionalBenefit}</p>
           </div>
         </div>
@@ -1085,7 +1085,7 @@ function WhatThisChanges({ items, label }) {
     <div className="rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
       <button onClick={() => setOpen(!open)} className="w-full px-4 py-2.5 flex items-center gap-2 text-left">
         <Sparkles size={14} className="text-white" />
-        <span className="text-xs font-bold text-white">{label || "What this changes"}</span>
+        <span className="text-xs font-bold text-white">{label || "これが変えること"}</span>
         <ChevronRight size={14} className={`text-white ml-auto transition-transform ${open ? "rotate-90" : ""}`} />
       </button>
       {open && (
@@ -1120,7 +1120,7 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
           </svg>
           <div className="absolute inset-0 flex items-center justify-center"><span className="text-lg font-black text-white">{completeness}%</span></div>
         </div>
-        <p className="text-[10px] text-white font-semibold uppercase">{_t("ui", "Brand Defined")}</p>
+        <p className="text-[10px] text-white font-semibold uppercase">{_t("ui", "ブランド確定")}</p>
       </div>
       {step === 0 && arch && (
         <div className={`rounded-xl p-3 ${arch.bg} border ${arch.border}`}>
@@ -1134,49 +1134,49 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles size={14} className="text-violet-500" />
-            <span className="text-xs font-bold text-white">What This Activates</span>
+            <span className="text-xs font-bold text-white">これが有効化するもの</span>
           </div>
-          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.archetypes[arch.id].systemEffect}</div>
-          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.archetypes[arch.id].emotionalBenefit}</div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>システム内で：</strong> {_SF.archetypes[arch.id].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>あなたの読者へ：</strong> {_SF.archetypes[arch.id].emotionalBenefit}</div>
         </div>
       )}
       {step === 1 && persona && _SF.personas[persona.id] && (
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles size={14} className="text-violet-500" />
-            <span className="text-xs font-bold text-white">What This Activates</span>
+            <span className="text-xs font-bold text-white">これが有効化するもの</span>
           </div>
-          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.personas[persona.id].systemEffect}</div>
-          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.personas[persona.id].emotionalBenefit}</div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>システム内で：</strong> {_SF.personas[persona.id].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>あなたの読者へ：</strong> {_SF.personas[persona.id].emotionalBenefit}</div>
         </div>
       )}
       {step === 1 && persona && (
         <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-white mb-1">Primary Reader</div>
+          <div className="text-[9px] font-bold uppercase text-white mb-1">読者</div>
           <div className="flex items-center gap-2"><span className="text-lg">{persona.emoji}</span><div><div className="text-xs font-bold text-white">{persona.label}</div></div></div>
         </div>
       )}
       {step === 1 && persona && (
         <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-white mb-2">Reader Profile</div>
+          <div className="text-[9px] font-bold uppercase text-white mb-2">読者プロフィール</div>
           <div className="text-[10px] text-white leading-tight mb-1.5">{persona.desc}</div>
-          <div className="text-[10px] text-white leading-tight mb-1.5"><strong>Needs:</strong> {persona.needs}</div>
-          <div className="text-[10px] text-white leading-tight"><strong>Impact:</strong> {persona.impact}</div>
+          <div className="text-[10px] text-white leading-tight mb-1.5"><strong>ニーズ：</strong> {persona.needs}</div>
+          <div className="text-[10px] text-white leading-tight"><strong>インパクト：</strong> {persona.impact}</div>
         </div>
       )}
       {step === 2 && moment && _SF.moments[moment.id] && (
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles size={14} className="text-violet-500" />
-            <span className="text-xs font-bold text-white">What This Activates</span>
+            <span className="text-xs font-bold text-white">これが有効化するもの</span>
           </div>
-          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.moments[moment.id].systemEffect}</div>
-          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.moments[moment.id].emotionalBenefit}</div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>システム内で：</strong> {_SF.moments[moment.id].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>あなたの読者へ：</strong> {_SF.moments[moment.id].emotionalBenefit}</div>
         </div>
       )}
       {step >= 3 && Object.keys(state.voiceSettings || {}).length > 0 && (
         <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-white mb-2">Voice Profile</div>
+          <div className="text-[9px] font-bold uppercase text-white mb-2">ボイスプロフィール</div>
           {VOICE_SLIDERS.map((s) => { const val = state.voiceSettings?.[s.id] ?? s.default; return (
             <div key={s.id} className="flex items-center gap-2 mb-1"><span className="text-[9px] text-white w-14">{s.left}</span><div className="flex-1 h-1.5 bg-gray-100 rounded-full"><div className="h-full bg-gray-700 rounded-full transition-all" style={{ width: `${val}%` }} /></div><span className="text-[9px] text-white w-14 text-right">{s.right}</span></div>
           ); })}
@@ -1184,7 +1184,7 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
       )}
       {step === 4 && visual && (
         <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-white mb-2">Visual Style</div>
+          <div className="text-[9px] font-bold uppercase text-white mb-2">ビジュアルスタイル</div>
           <div className="flex gap-1.5 mb-1.5">{visual.palette.map((c, i) => <div key={i} className="w-8 h-8 rounded-lg shadow-sm" style={{ backgroundColor: c }} />)}</div>
           <div className="text-[10px] text-white font-medium">{visual.label}</div>
         </div>
@@ -1193,17 +1193,17 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles size={14} className="text-violet-500" />
-            <span className="text-xs font-bold text-white">What This Activates</span>
+            <span className="text-xs font-bold text-white">これが有効化するもの</span>
           </div>
-          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.visualStyles[state.visualStyle].systemEffect}</div>
-          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.visualStyles[state.visualStyle].emotionalBenefit}</div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>システム内で：</strong> {_SF.visualStyles[state.visualStyle].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>あなたの読者へ：</strong> {_SF.visualStyles[state.visualStyle].emotionalBenefit}</div>
         </div>
       )}
       {step === 6 && (
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-3">
             <Compass size={14} className="text-indigo-500" />
-            <span className="text-xs font-bold text-white">Content Angles</span>
+            <span className="text-xs font-bold text-white">コンテンツアングル</span>
           </div>
           <div className="space-y-2">
             {TOPIC_CATEGORIES.map((cat) => {
@@ -1220,7 +1220,7 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
                     <>
                       <div className="flex items-center gap-1 mb-1">
                         <span className="text-[9px]">{angleInfo?.icon}</span>
-                        <span className="text-[9px] font-bold" style={{ color: cat.color }}>{angleInfo?.label}: {selectedTagId.replace(/-/g, " ")}</span>
+                        <span className="text-[9px] font-bold" style={{ color: cat.color }}>{angleInfo?.label}: {(cat.tags.find(t => t.id === selectedTagId)?.label) || selectedTagId.replace(/-/g, " ")}</span>
                       </div>
                       <div className="flex items-start gap-1.5">
                         <div className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: cat.color }} />
@@ -1228,7 +1228,7 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
                       </div>
                     </>
                   ) : (
-                    <p className="text-[9px] text-white/70 italic">Pick a topic...</p>
+                    <p className="text-[9px] text-white/70 italic">トピックを選ぶ…</p>
                   )}
                 </div>
               );
@@ -1240,22 +1240,22 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-3">
             <Compass size={14} className="text-violet-500" />
-            <span className="text-xs font-bold text-white">Jump to Section</span>
+            <span className="text-xs font-bold text-white">セクションへジャンプ</span>
           </div>
           <div className="space-y-0.5">
             {[
-              { id: "rev-category", label: "True Category", icon: "🎯" },
-              { id: "rev-voice", label: "Voice Signature", icon: "🎙️" },
-              { id: "rev-positioning", label: "Positioning Map", icon: "📍" },
-              { id: "rev-visual", label: "Visual Identity", icon: "🎨" },
-              { id: "rev-emotion", label: "Emotional Staircase", icon: "📈" },
-              { id: "rev-topics", label: "Topic Strategy", icon: "🗂️" },
-              { id: "rev-engine", label: "Content Engine", icon: "⚙️" },
-              { id: "rev-loop", label: "Advantage Loop", icon: "🔄" },
-              { id: "rev-journey", label: "Reader Journey", icon: "🚶" },
-              { id: "rev-synergy", label: "Voice × Topic", icon: "🔗" },
-              { id: "rev-radar", label: "Brand Strength", icon: "📊" },
-              { id: "rev-synthesis", label: "Synthesis", icon: "✨" },
+              { id: "rev-category", label: "真のカテゴリー", icon: "🎯" },
+              { id: "rev-voice", label: "ボイスシグネチャー", icon: "🎙️" },
+              { id: "rev-positioning", label: "ポジショニングマップ", icon: "📍" },
+              { id: "rev-visual", label: "ビジュアルアイデンティティ", icon: "🎨" },
+              { id: "rev-emotion", label: "感情の階段", icon: "📈" },
+              { id: "rev-topics", label: "トピック戦略", icon: "🗂️" },
+              { id: "rev-engine", label: "コンテンツエンジン", icon: "⚙️" },
+              { id: "rev-loop", label: "アドバンテージループ", icon: "🔄" },
+              { id: "rev-journey", label: "読者のジャーニー", icon: "🚶" },
+              { id: "rev-synergy", label: "声×トピック", icon: "🔗" },
+              { id: "rev-radar", label: "ブランド強度", icon: "📊" },
+              { id: "rev-synthesis", label: "シンセシス", icon: "✨" },
             ].map(s => (
               <button
                 key={s.id}
@@ -1273,7 +1273,7 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-2">
             <Heart size={14} className="text-rose-500" />
-            <span className="text-xs font-bold text-white">Emotional Profile</span>
+            <span className="text-xs font-bold text-white">感情プロフィール</span>
           </div>
           <div className="bg-white rounded-lg border border-gray-100 p-3 mb-3">
             <svg viewBox="0 0 240 140" className="w-full h-40">
@@ -1335,13 +1335,13 @@ function Step1Archetype({ state, update, i18n = {} }) {
   return (
     <div>
       <StepHero
-        eyebrow="Foundation"
-        title="Choose your emotional world"
-        subtitle="Your archetype is the feeling readers associate with you — across prose, covers, video, and social. Pick the worldview that matches how you want to show up."
-        helper="Each card includes a short vision of the world your brand invites readers into."
+        eyebrow="基盤"
+        title="感情の世界を選ぶ"
+        subtitle="アーキタイプとは、読者があなたに結びつける感情です——散文、表紙、動画、ソーシャルのすべてにわたって。自分がどう在りたいかに合ったワールドビューを選んでください。"
+        helper="各カードには、あなたのブランドが読者を招き入れる世界の短いビジョンが含まれています。"
       />
       <div className="mb-6 rounded-xl border border-indigo-100/80 bg-indigo-50/60 px-4 py-3 backdrop-blur-sm">
-        <p className="text-xs font-medium text-indigo-900">{useTranslation().t("steps", "This is the highest-leverage choice in the studio — everything else builds on the emotional territory you choose here.")}</p>
+        <p className="text-xs font-medium text-indigo-900">{useTranslation().t("steps", "これはスタジオで最も影響力の大きな選択です——他のすべては、ここで選ぶ感情的な領域の上に構築されます。")}</p>
       </div>
       <div className="grid grid-cols-1 gap-3">
         {_A.map((arch) => <ArchetypeCard key={arch.id} arch={arch} selected={state.archetype} onClick={(id) => update({ archetype: id })} />)}
@@ -1373,13 +1373,13 @@ function Step2PrimaryReader({ state, update, i18n = {} }) {
   return (
     <div>
       <StepHero
-        eyebrow="Audience"
-        title="Primary reader"
-        subtitle="Every strong brand has a protagonist — the reader you lead with. Your catalog still reaches every segment; this choice shapes voice, covers, and hooks first."
+        eyebrow="読者"
+        title="主要読者"
+        subtitle="強いブランドにはすべて主人公がいます——あなたが最初にリードする読者です。カタログはすべてのセグメントに届きますが、この選択がまず声、表紙、フックを形作ります。"
       />
       <div className="mb-6 rounded-xl border border-blue-100/80 bg-blue-50/50 p-4 backdrop-blur-sm">
         <p className="text-xs leading-relaxed text-blue-900">
-          {useTranslation().t("steps", "Still reaching everyone. We tune titles, packaging, and exercises to this reader first, then adapt across your archetype's other segments.")}
+          {useTranslation().t("steps", "すべての人に届き続けます。 まずこの読者に合わせてタイトル、パッケージ、エクササイズを調整し、その後アーキタイプの他のセグメントへと適応させます。")}
         </p>
       </div>
       <div className="grid grid-cols-1 gap-2.5">
@@ -1394,14 +1394,14 @@ function Step3TriggerMoment({ state, update, i18n = {} }) {
   return (
     <div>
       <StepHero
-        eyebrow="Hook"
-        title="The moment they reach for you"
-        subtitle="Pick the scene where your reader is most open — titles, covers, and social hooks follow from here."
+        eyebrow="フック"
+        title="彼らがあなたに手を伸ばす瞬間"
+        subtitle="読者が最も開かれているシーンを選んでください——タイトル、表紙、ソーシャルフックはここから生まれます。"
       />
       <details open className="mb-5 rounded-xl border border-amber-100/90 bg-amber-50/40 px-4 py-2 text-xs text-amber-900 backdrop-blur-sm open:pb-3">
-        <summary className="cursor-pointer font-semibold text-amber-900/90 outline-none">Why this matters</summary>
+        <summary className="cursor-pointer font-semibold text-amber-900/90 outline-none">なぜこれが重要なのか</summary>
         <p className="mt-2 leading-relaxed text-amber-900/85">
-          {useTranslation().t("steps", "Strong brands speak to a moment, not only a demographic. This choice steers first lines, cover promise, and scroll-stopping hooks.")}
+          {useTranslation().t("steps", "強いブランドはデモグラフィックだけでなく、瞬間に語りかけます。この選択が最初の一行、表紙の約束、スクロールを止めるフックを方向付けます。")}
         </p>
       </details>
       <div className="grid grid-cols-1 gap-2.5">
@@ -1447,7 +1447,7 @@ function snap5(val) {
 
 function Step4VoiceGraphs({ state, update, i18n = {} }) {
   const audioRef = useRef(null);
-  const audioSrc = i18n.locale === "ja" ? VOICE_AUDIO_SRC_JA : i18n.locale === "zh" ? VOICE_AUDIO_SRC_ZH : i18n.locale === "tw" ? VOICE_AUDIO_SRC_TW : VOICE_AUDIO_SRC;
+  const audioSrc = VOICE_AUDIO_SRC_JA;
   const playAudio = useCallback((sliderId, position) => {
     if (audioRef.current) { audioRef.current.pause(); audioRef.current.currentTime = 0; }
     const src = audioSrc[sliderId]?.[position];
@@ -1470,11 +1470,11 @@ function Step4VoiceGraphs({ state, update, i18n = {} }) {
   return (
     <div>
       <StepHero
-        eyebrow="Voice"
-        title="Shape your brand tone"
-        subtitle="Four sliders — slide and watch the graphs move. Each axis changes how every sentence feels."
+        eyebrow="声"
+        title="ブランドのトーンを形作る"
+        subtitle="4つのスライダー——スライドしてグラフが動くのを見てください。各軸がすべての文章の感触を変えます。"
       />
-      <p className="mb-5 text-[11px] text-white">Next step shows what each position does for your reader.</p>
+      <p className="mb-5 text-[11px] text-white">次のステップで、各ポジションが読者にどう作用するかを示します。</p>
 
       <div className="space-y-6">
         {VOICE_SLIDERS.map((s, idx) => {
@@ -1504,13 +1504,13 @@ function Step4VoiceGraphs({ state, update, i18n = {} }) {
                   <div className="w-3 h-3 rounded-full" style={{ backgroundColor: s.color }} />
                   <span className="text-xs font-bold" style={{ color: s.color }}>{toneData.label}</span>
                 </div>
-                <span className="text-[10px] text-white">Position {position} of 10</span>
+                <span className="text-[10px] text-white">ポジション {position} / 10</span>
               </div>
 
               {audioSrc[s.id] && (
                 <div className="mt-2 flex items-center gap-2">
                   <button onClick={() => playAudio(s.id, position)} className="text-[10px] text-violet-600 hover:text-violet-800 flex items-center gap-1">
-                    <Play size={10} /> Listen to position {position}
+                    <Play size={10} /> ポジション {position} を聴く
                   </button>
                 </div>
               )}
@@ -1536,27 +1536,27 @@ function Step5VoiceEffects({ state, update }) {
   return (
     <div>
       <StepHero
-        eyebrow="Impact"
-        title="What your tone does for readers"
-        subtitle="Slide, then open impact below if you want the full read."
+        eyebrow="インパクト"
+        title="あなたのトーンが読者にもたらすもの"
+        subtitle="スライドして、詳細を読みたい場合は下のインパクトを開いてください。"
       />
 
       <div className="mb-6 rounded-2xl border border-violet-100 bg-violet-50/50 px-4 py-3">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-violet-800">Narrator preview</p>
+        <p className="text-[10px] font-bold uppercase tracking-wider text-violet-800">ナレータープレビュー</p>
         <p className="mt-1 text-[11px] leading-relaxed text-white">
-          Same comfort passage, three Edge TTS pipeline-demo voices. Pair what you hear with the sliders above.
+          同じ安心の文章、3種類のEdge TTSデモ音声。上のスライダーと合わせてお試しください。
         </p>
         <div className="mt-3 space-y-2">
           <div>
-            <span className="text-[10px] font-semibold text-white">Regulating / calm</span>
+            <span className="text-[10px] font-semibold text-white">調整／落ち着き</span>
             <audio className="mt-1 block h-9 w-full" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_regulating_female.mp3" />
           </div>
           <div>
-            <span className="text-[10px] font-semibold text-white">Warm empathetic</span>
+            <span className="text-[10px] font-semibold text-white">温かみのある共感</span>
             <audio className="mt-1 block h-9 w-full" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_warm_male.mp3" />
           </div>
           <div>
-            <span className="text-[10px] font-semibold text-white">Direct / authority</span>
+            <span className="text-[10px] font-semibold text-white">直接的／権威感</span>
             <audio className="mt-1 block h-9 w-full" controls preload="metadata" src="/onboarding/audio/voice_cmp_comfort_voice_direct_authority.mp3" />
           </div>
         </div>
@@ -1598,7 +1598,7 @@ function Step5VoiceEffects({ state, update }) {
                 </div>
 
                 <details className="rounded-lg border border-gray-100 bg-gray-50/90 px-3 py-2 text-[11px] text-white open:pb-3">
-                  <summary className="cursor-pointer text-xs font-bold text-white outline-none">How this lands for readers</summary>
+                  <summary className="cursor-pointer text-xs font-bold text-white outline-none">読者へどう届くか</summary>
                   <p className="mt-2 text-[11px] leading-relaxed text-white">{s.desc}</p>
                   <p className="mt-2 text-sm font-medium leading-relaxed text-white">{toneData.technique}</p>
                   <div className="mt-3 space-y-2">
@@ -1628,12 +1628,12 @@ function Step5VisualStyle({ state, update, i18n = {} }) {
   return (
     <div>
       <StepHero
-        eyebrow="Look & feel"
-        title="Visual world"
-        subtitle="Pick the visual identity your readers will associate with your brand — covers, social, and video all follow from here."
+        eyebrow="見た目と雰囲気"
+        title="ビジュアルの世界"
+        subtitle="読者があなたのブランドに結びつけるビジュアルアイデンティティを選んでください——表紙、ソーシャル、動画のすべてがここから生まれます。"
       />
 
-      <div className="text-xs font-bold uppercase tracking-wider text-violet-600/90 mb-3">Visual style</div>
+      <div className="text-xs font-bold uppercase tracking-wider text-violet-600/90 mb-3">ビジュアルスタイル</div>
       <div className="grid grid-cols-2 gap-3 mb-4">
         {_V.map((vs) => (
           <button key={vs.id} onClick={() => handleVisual(vs.id)}
@@ -1659,11 +1659,11 @@ function Step5VisualStyle({ state, update, i18n = {} }) {
 }
 
 const EMOTION_CATEGORIES = [
-  { name: "Safety & Calm", icon: "🛡️", color: "#6366f1", items: ["Finally calm", "Safe in my body", "Permission to rest"], impacts: { "Finally calm": "Readers' nervous systems downregulate — they stop bracing and start absorbing", "Safe in my body": "Somatic trust builds from the first page, reducing fight-or-flight during reading", "Permission to rest": "Dissolves the guilt loop that keeps burned-out readers from engaging with self-help" } },
-  { name: "Clarity & Direction", icon: "🧭", color: "#059669", items: ["Clear-headed", "In control", "Connected to purpose"], impacts: { "Clear-headed": "Cuts through decision fatigue — readers feel the fog lift and start choosing", "In control": "Restores agency in readers who feel life is happening to them, not through them", "Connected to purpose": "Bridges the gap between 'what do I do' and 'why does it matter' — readers find momentum" } },
-  { name: "Energy & Confidence", icon: "⚡", color: "#f59e0b", items: ["Energized", "Confident", "Resilient"], impacts: { "Energized": "Transforms passive readers into action-takers — they close the book and move", "Confident": "Rebuilds self-trust that imposter syndrome and comparison culture eroded", "Resilient": "Readers develop bounce-back capacity — setbacks become data, not identity" } },
-  { name: "Release & Healing", icon: "🕊️", color: "#f43f5e", items: ["Released", "Forgiven", "Less alone"], impacts: { "Released": "Grief, resentment, and held tension finally have somewhere to go — readers exhale for real", "Forgiven": "Self-compassion replaces the inner critic — readers stop punishing themselves for being human", "Less alone": "Names the unnamed — readers discover their 'weird' pain is universal, breaking isolation" } },
-  { name: "Presence & Hope", icon: "✨", color: "#7c3aed", items: ["Grounded", "Hopeful", "Present"], impacts: { "Grounded": "Anchors readers in the body and the now — rumination and future-anxiety lose their grip", "Hopeful": "Reignites the belief that change is possible — the most powerful conversion driver in self-help", "Present": "Readers stop living in regret or anxiety and taste what being here actually feels like" } },
+  { name: "安心と穏やかさ", icon: "🛡️", color: "#6366f1", items: ["やっと落ち着ける", "自分の身体の中に安心していられる", "休んでいいという許可"], impacts: { "やっと落ち着ける": "読者の神経系が落ち着き、身構えるのをやめ、内容を吸収し始める", "自分の身体の中に安心していられる": "最初のページからソマティックな信頼が育まれ、読書中の闘争・逃走反応が和らぐ", "休んでいいという許可": "燃え尽きた読者がセルフヘルプと向き合えなくする罪悪感のループを解消する" } },
+  { name: "明確さと方向性", icon: "🧭", color: "#059669", items: ["頭がすっきりしている", "自分でコントロールできている", "目的とつながっている"], impacts: { "頭がすっきりしている": "決断疲れを打ち破り、霧が晴れるような感覚をもたらし、読者が選択を始める", "自分でコントロールできている": "人生に流されていると感じている読者に、主体性を取り戻させる", "目的とつながっている": "「何をすればいいか」と「なぜ重要なのか」の橋渡しをし、読者が推進力を見つける" } },
+  { name: "エネルギーと自信", icon: "⚡", color: "#f59e0b", items: ["エネルギーが湧いている", "自信がある", "しなやかに立ち直れる"], impacts: { "エネルギーが湧いている": "受動的な読者を行動する人へと変える——本を閉じて、動き出す", "自信がある": "インポスター症候群と比較文化によって傷ついた自己信頼を再構築する", "しなやかに立ち直れる": "読者が立ち直る力を養い、挫折がアイデンティティではなくデータになる" } },
+  { name: "解放と癒し", icon: "🕊️", color: "#f43f5e", items: ["解放されている", "許された気持ちになれる", "孤独が和らいでいる"], impacts: { "解放されている": "悲しみ、怒り、抱えた緊張が、ようやく行き場を見つける——読者は本当の意味で息を吐ける", "許された気持ちになれる": "自己批判に代わり自己慈悲が育まれ、人間であることへの自己罰が止まる", "孤独が和らいでいる": "名前のない感情を言語化し、「自分だけ」だと思っていた痛みが普遍的だと気づき、孤立が解ける" } },
+  { name: "今この瞬間にいることと希望", icon: "✨", color: "#7c3aed", items: ["グラウンデッド", "希望が持てる", "今ここにいられる"], impacts: { "グラウンデッド": "読者を体と現在に繋ぎ留め、反芻思考と未来への不安の力を弱める", "希望が持てる": "変化は可能だという信念を再点火する——セルフヘルプにおける最も強力な変革の起点", "今ここにいられる": "読者が後悔や不安の中で生きることをやめ、今ここにいるとはどういうことかを体感する" } },
 ];
 
 function Step6EmotionalOutcomes({ state, update, i18n = {} }) {
@@ -1679,13 +1679,13 @@ function Step6EmotionalOutcomes({ state, update, i18n = {} }) {
   return (
     <div>
       <StepHero
-        eyebrow="Promise"
-        title="Emotional Outcomes"
-        subtitle="These are the feelings your reader walks away with — the transformation they can name. Every title, CTA, and marketing message points back to these promises."
+        eyebrow="約束"
+        title="感情的な結果"
+        subtitle="これらは読者が持ち帰る感情——彼らが言葉にできる変容です。すべてのタイトル、CTA、マーケティングメッセージがこれらの約束を指し示します。"
       />
       <div className="mb-6 rounded-xl border border-rose-100/80 bg-rose-50/50 p-4 backdrop-blur-sm">
         <p className="text-xs leading-relaxed text-rose-900">
-          <strong>Pick one for each category.</strong> Your choices become the emotional north star of your entire brand. Covers promise these feelings visually. Titles name them. Exercises deliver them. The system weaves your selections into every piece of content it generates.
+          <strong>各カテゴリーから一つ選んでください。</strong> あなたの選択がブランド全体の感情的な北極星になります。表紙はこれらの感情をビジュアルで約束し、タイトルはそれを言葉にし、エクササイズがそれを届けます。システムはあなたの選択を、生成されるすべてのコンテンツに織り込みます。
         </p>
       </div>
       <div className="space-y-4 mb-4">
@@ -1727,81 +1727,81 @@ function Step6EmotionalOutcomes({ state, update, i18n = {} }) {
 }
 
 const TOPIC_CATEGORIES = [
-  { label: "Sleep & Anxiety", icon: "😰", color: "#6366f1", tags: [
-    { id: "anxiety-at-night", angle: "framework", bullet: "Delivers a pre-sleep anxiety protocol — 3 body scans that interrupt the cortisol loop before it spirals" },
-    { id: "overthinking", angle: "origin", bullet: "Traces the overthinking pattern to a childhood survival strategy — your brain learned to scan for danger and never stopped" },
-    { id: "panic-grounding", angle: "debunk", bullet: "Debunks 'just breathe through it' — panic needs somatic intervention first, cognitive tools second" },
-    { id: "sunday-dread", angle: "leverage", bullet: "Reframes Sunday dread as your nervous system's weekly forecast — the dread itself contains data about what needs to change" },
+  { label: "睡眠と不安", icon: "😰", color: "#6366f1", tags: [
+    { id: "anxiety-at-night", label: "夜の不安", angle: "framework", bullet: "就寝前の不安プロトコルを提供——コルチゾールの悪循環が始まる前に遮断する、3つのボディスキャン" },
+    { id: "考えすぎ", label: "考えすぎ", angle: "origin", bullet: "考えすぎのパターンを幼少期の生存戦略へと辿る——脳が危険を察知し続け、それを止められなかった理由" },
+    { id: "panic-grounding", label: "パニックグラウンディング", angle: "debunk", bullet: "「深呼吸すればいい」という通説を崩す——パニックにはまずソマティック介入、認知的ツールはその後" },
+    { id: "sunday-dread", label: "日曜の憂鬱", angle: "leverage", bullet: "日曜の憂鬱を神経系の週次予報として再定義——その憂鬱自体が、変える必要があることへのデータを含んでいる" },
   ]},
-  { label: "Burnout & Work", icon: "🔥", color: "#f59e0b", tags: [
-    { id: "burnout-recovery", angle: "debunk", bullet: "Debunks 'just take a vacation' — burnout is a nervous system state, not a scheduling problem" },
-    { id: "nervous-system-reset", angle: "framework", bullet: "Provides a 5-day vagal tone reset protocol backed by polyvagal research — structure readers can follow immediately" },
-    { id: "decision-fatigue", angle: "reveal", bullet: "Reveals that decision fatigue isn't about willpower — it's an overloaded prefrontal cortex running outdated threat software" },
-    { id: "phone-addiction", angle: "leverage", bullet: "Reframes the phone as a biofeedback tool — your scroll pattern reveals exactly what your nervous system is craving" },
+  { label: "燃え尽きと仕事", icon: "🔥", color: "#f59e0b", tags: [
+    { id: "burnout-recovery", label: "燃え尽き回復", angle: "debunk", bullet: "「休暇を取ればいい」という通説を崩す——燃え尽きはスケジュールの問題ではなく、神経系の状態" },
+    { id: "nervous-system-reset", label: "神経系リセット", angle: "framework", bullet: "ポリヴェーガル理論に基づく5日間の迷走神経トーンリセットプロトコルを提供——読者がすぐ実践できる構造" },
+    { id: "decision-fatigue", label: "決断疲れ", angle: "reveal", bullet: "決断疲れは意志力の問題ではないことを明かす——古い脅威ソフトウェアを走らせ続ける過負荷の前頭前野" },
+    { id: "phone-addiction", label: "スマホ依存", angle: "leverage", bullet: "スマートフォンをバイオフィードバックツールとして再定義——スクロールパターンが神経系の渇望を正確に示している" },
   ]},
-  { label: "Grief & Healing", icon: "🕊️", color: "#f43f5e", tags: [
-    { id: "grief-timeline", angle: "debunk", bullet: "Debunks the '5 stages' model — grief is nonlinear, and knowing this stops readers from pathologizing their own healing" },
-    { id: "toxic-relationship-healing", angle: "origin", bullet: "Traces the attraction pattern to early attachment wounds — understanding the origin breaks the repetition cycle" },
-    { id: "intergenerational-trauma", angle: "reveal", bullet: "Reveals how trauma transmits through epigenetics and family silence — readers understand their pain isn't 'just in their head'" },
-    { id: "heartbreak-recovery", angle: "framework", bullet: "Structures recovery into three phases: survive, stabilize, rebuild — giving the broken-hearted a map when they feel lost" },
-    { id: "emotional-numbness", angle: "leverage", bullet: "Reframes numbness as the nervous system's most sophisticated protection — not absence of feeling, but an excess of it" },
+  { label: "悲しみと癒し", icon: "🕊️", color: "#f43f5e", tags: [
+    { id: "grief-timeline", label: "悲しみのタイムライン", angle: "debunk", bullet: "「悲しみの5段階」モデルを覆す——悲しみは非線形であり、そのことを知れば読者は自分の癒しを病理化しなくなる" },
+    { id: "toxic-relationship-healing", label: "有害な関係からの癒し", angle: "origin", bullet: "惹かれるパターンを幼少期のアタッチメントの傷へと辿る——起源を理解することで繰り返しのサイクルが断ち切られる" },
+    { id: "intergenerational-trauma", label: "世代間トラウマ", angle: "reveal", bullet: "トラウマがエピジェネティクスと家族の沈黙を通じて伝わる仕組みを明かす——読者の痛みは「気のせい」ではないと理解する" },
+    { id: "heartbreak-recovery", label: "失恋からの回復", angle: "framework", bullet: "回復を三段階に整理する：生き延びる、安定する、再建する——道を見失った傷心者に地図を渡す" },
+    { id: "emotional-numbness", label: "感情の麻痺", angle: "leverage", bullet: "麻痺感を神経系の最も洗練された防衛として再定義——感情がないのではなく、感情が溢れすぎている" },
   ]},
-  { label: "Identity & Direction", icon: "🧭", color: "#059669", tags: [
-    { id: "feeling-behind", angle: "debunk", bullet: "Debunks the comparison timeline — there is no 'behind' because everyone is building on completely different foundations" },
-    { id: "quarter-life-crisis", angle: "leverage", bullet: "Reframes the crisis as the identity system upgrading — the discomfort is proof you're outgrowing the old version" },
-    { id: "identity-rebuild", angle: "framework", bullet: "Provides a 4-phase identity reconstruction framework — from deconstruction through integration to authentic expression" },
-    { id: "purpose-after-30", angle: "origin", bullet: "Traces the purpose void to inherited career scripts — once you see whose dream you were living, yours becomes visible" },
+  { label: "アイデンティティと方向性", icon: "🧭", color: "#059669", tags: [
+    { id: "feeling-behind", label: "遅れている感覚", angle: "debunk", bullet: "比較のタイムラインを覆す——「遅れている」などというものは存在せず、誰もがまったく異なる土台の上に構築している" },
+    { id: "quarter-life-crisis", label: "クォーターライフクライシス", angle: "leverage", bullet: "クライシスをアイデンティティシステムのアップグレードとして再定義——その不快感は、古い自分を超えつつある証拠" },
+    { id: "identity-rebuild", label: "アイデンティティの再構築", angle: "framework", bullet: "4段階のアイデンティティ再構築フレームワークを提供——解体から統合を経て、本物の自己表現へ" },
+    { id: "purpose-after-30", label: "30代以降の目的", angle: "origin", bullet: "目的の空白を、受け継いだキャリアの台本へと辿る——誰の夢を生きてきたかが見えれば、自分の夢も見えてくる" },
   ]},
-  { label: "Focus & Performance", icon: "⚡", color: "#0ea5e9", tags: [
-    { id: "habit-building", angle: "framework", bullet: "Systematizes habit formation into environment design + identity shift — structure that works even when motivation fails" },
-    { id: "ADHD-productivity", angle: "leverage", bullet: "Reframes ADHD hyperfocus as a strategic advantage — your brain isn't broken, the productivity advice was designed for someone else" },
-    { id: "dopamine-detox", angle: "debunk", bullet: "Debunks the viral dopamine detox trend — the real issue is reward sensitivity, and the fix is recalibration, not deprivation" },
-    { id: "deep-work", angle: "reveal", bullet: "Reveals that deep work for anxious minds requires nervous system resets between blocks — not just willpower and timers" },
+  { label: "集中力とパフォーマンス", icon: "⚡", color: "#0ea5e9", tags: [
+    { id: "habit-building", label: "習慣形成", angle: "framework", bullet: "習慣形成を環境デザインとアイデンティティの転換へと体系化——やる気が出ない時でも機能する構造" },
+    { id: "ADHD-productivity", label: "ADHD生産性", angle: "leverage", bullet: "ADHDの過集中を戦略的な強みとして再定義——あなたの脳は壊れていない、生産性のアドバイスが別の人向けに設計されているだけ" },
+    { id: "dopamine-detox", label: "ドーパミンデトックス", angle: "debunk", bullet: "バズったドーパミンデトックスのトレンドを覆す——本当の問題は報酬感受性であり、解決策は剥奪ではなく再調整" },
+    { id: "deep-work", label: "ディープワーク", angle: "reveal", bullet: "不安を抱えた人のディープワークには、意志力やタイマーだけでなく、ブロック間の神経系リセットが必要であることを明かす" },
   ]},
-  { label: "Meaning & Spirituality", icon: "✨", color: "#7c3aed", tags: [
-    { id: "meditation-beginners", angle: "debunk", bullet: "Debunks 'clear your mind' — meditation is about noticing thoughts, not eliminating them. This reframe keeps beginners from quitting" },
-    { id: "meaning-after-loss", angle: "origin", bullet: "Traces meaning-making to the human need for narrative coherence — when loss shatters the story, rebuilding meaning is the healing" },
-    { id: "spiritual-no-religion", angle: "leverage", bullet: "Reframes spiritual hunger as a feature, not a gap — you don't need someone else's tradition to access depth and transcendence" },
-    { id: "inner-peace-chaos", angle: "reveal", bullet: "Reveals that inner peace isn't the absence of chaos but a different relationship to it — the noise doesn't stop, but you stop drowning" },
-    { id: "mindfulness-skeptics", angle: "framework", bullet: "Delivers a skeptic-friendly 5-minute practice backed by neuroscience data — no incense, no mantras, just measurable results" },
+  { label: "意味とスピリチュアリティ", icon: "✨", color: "#7c3aed", tags: [
+    { id: "meditation-beginners", label: "瞑想入門", angle: "debunk", bullet: "「頭を空にする」という通説を覆す——瞑想は思考を消すのではなく、気づくこと。この再定義が初心者の挫折を防ぐ" },
+    { id: "meaning-after-loss", label: "喪失後の意味", angle: "origin", bullet: "意味の構築を、ナラティブの一貫性という人間の根本的な欲求へと辿る——喪失が物語を壊す時、意味を再構築することが癒しになる" },
+    { id: "spiritual-no-religion", label: "宗教なきスピリチュアリティ", angle: "leverage", bullet: "スピリチュアルな飢えを欠如ではなく、特性として再定義——深さと超越にアクセスするために、他者の伝統は必要ない" },
+    { id: "inner-peace-chaos", label: "混沌の中の内なる平和", angle: "reveal", bullet: "内なる平和は混沌の不在ではなく、混沌との関係性の変化であることを明かす——騒音はやまない、しかし溺れることをやめる" },
+    { id: "mindfulness-skeptics", label: "マインドフルネス懐疑派", angle: "framework", bullet: "神経科学のデータに裏付けられた懐疑派向けの5分間実践を提供——お香も詠唱も不要、ただ計測可能な結果だけ" },
   ]},
 ];
 
 const ANGLE_FEEDBACK = {
-  debunk: { label: "Debunk", icon: "🔍", systemEffect: "Titles open with contrarian hooks — 'What your therapist won't tell you.'", emotionalBenefit: "Readers feel intellectually respected. Validates their suspicion that conventional advice isn't working." },
-  framework: { label: "Framework", icon: "🔧", systemEffect: "Titles lead with structure — '5-step protocol for...' Repeatable systems.", emotionalBenefit: "Overwhelmed readers exhale when they see a clear system. Transforms vague anxiety into concrete steps." },
-  reveal: { label: "Reveal", icon: "💡", systemEffect: "Titles expose hidden truths — 'The real reason you can't sleep.'", emotionalBenefit: "Readers experience 'aha moments' that rewrite their self-narrative from broken to understood." },
-  leverage: { label: "Leverage", icon: "🔄", systemEffect: "Titles reframe weaknesses — 'Your anxiety is a superpower.'", emotionalBenefit: "Readers stop fighting themselves. Says 'you're not broken, you're just using your gifts wrong.'" },
-  origin: { label: "Origin", icon: "🌱", systemEffect: "Titles trace root causes — 'Where your pattern actually started.'", emotionalBenefit: "Deep relief from understanding where patterns began. Creates compassion for their past selves." },
+  debunk: { label: "誤解を正す", icon: "🔍", systemEffect: "タイトルは逆張りのフックで始まる——「セラピストが話してくれないこと」", emotionalBenefit: "読者は知的に尊重される感覚を得る。従来のアドバイスが効かないという疑念を肯定する。" },
+  framework: { label: "フレームワーク", icon: "🔧", systemEffect: "タイトルは構造で始まる——「〇〇のための5ステッププロトコル」。繰り返せるシステム。", emotionalBenefit: "明確なシステムを見た読者は、思わず息をつく。漠然とした不安を具体的なステップへと変換する。" },
+  reveal: { label: "お披露目", icon: "💡", systemEffect: "タイトルは隠された真実を暴く——「眠れない本当の理由」", emotionalBenefit: "読者は「そうか」という気づきを体験し、自分を「壊れている」から「わかってもらえた」へと書き換える。" },
+  leverage: { label: "活用する", icon: "🔄", systemEffect: "タイトルは弱みを再定義する——「あなたの不安は超能力だ」", emotionalBenefit: "読者は自分との戦いをやめる。「あなたは壊れていない、ただ才能の使い方が違うだけ」と伝える。" },
+  origin: { label: "起源", icon: "🌱", systemEffect: "タイトルは根本原因を辿る——「あなたのパターンが本当に始まった場所」", emotionalBenefit: "パターンがどこから始まったかを理解することで深い安堵が生まれる。過去の自分への慈悲が育まれる。" },
 };
 
 // ═══════════════════════════════════════════════════════════
 // MARKET DATA — Visual Identity & Topic/Angle research scores
 // ═══════════════════════════════════════════════════════════
 const VISUAL_MARKET = {
-  calm_minimal:      { shelf: 62, trust: 88, social: 70, premium: 78, rank: 5, demo: "30–55, F-lean", superpower: "Gets recommended by therapists and professionals — the 'credibility' choice" },
-  dark_intense:      { shelf: 84, trust: 68, social: 85, premium: 80, rank: 3, demo: "22–38, neutral", superpower: "Generates the most organic UGC — readers share it as an identity signal" },
-  earthy_organic:    { shelf: 65, trust: 82, social: 74, premium: 68, rank: 6, demo: "28–50, F-strong", superpower: "Builds deepest parasocial trust — readers feel the author is one of them" },
-  bold_modern:       { shelf: 88, trust: 72, social: 82, premium: 75, rank: 1, demo: "25–40, neutral", superpower: "Cuts through visual noise on any shelf or feed — the stop-scroll champion" },
-  premium_soft:      { shelf: 78, trust: 85, social: 76, premium: 92, rank: 2, demo: "30–50, F-slight", superpower: "Makes readers feel they're investing in themselves, not just buying a book" },
-  sacred_cosmic:     { shelf: 75, trust: 77, social: 79, premium: 83, rank: 4, demo: "28–45, F-slight", superpower: "Builds cult followings — readers who buy in become evangelists" },
+  calm_minimal:      { shelf: 62, trust: 88, social: 70, premium: 78, rank: 5, demo: "30–55, F-lean", superpower: "セラピストや専門家から推薦される——「信頼性」の選択" },
+  dark_intense:      { shelf: 84, trust: 68, social: 85, premium: 80, rank: 3, demo: "22–38, neutral", superpower: "最も多くのオーガニックUGCを生み出す——読者がアイデンティティシグナルとしてシェアする" },
+  earthy_organic:    { shelf: 65, trust: 82, social: 74, premium: 68, rank: 6, demo: "28–50, F-strong", superpower: "最も深いパラソーシャルな信頼を築く——読者が著者を「自分たちの一人」と感じる" },
+  bold_modern:       { shelf: 88, trust: 72, social: 82, premium: 75, rank: 1, demo: "25–40, neutral", superpower: "どんな棚やフィードでも視覚的な雑音を切り抜ける——スクロールを止める王者" },
+  premium_soft:      { shelf: 78, trust: 85, social: 76, premium: 92, rank: 2, demo: "30–50, 女性やや多め", superpower: "単に本を買うのではなく、自分自身に投資していると感じさせる" },
+  sacred_cosmic:     { shelf: 75, trust: 77, social: 79, premium: 83, rank: 4, demo: "28–45, 女性やや多め", superpower: "熱狂的なファンを育てる——購入した読者がエバンジェリストになる" },
 };
 
 const ANGLE_MARKET = {
-  debunk:    { viral: 88, trust: 45, conversion: 55, seo: 60, tip: "Best for top-of-funnel — controversy drives shares on cold audiences" },
-  framework: { viral: 55, trust: 82, conversion: 90, seo: 85, tip: "Best for mid-funnel — audiences ready to act need structure" },
-  reveal:    { viral: 80, trust: 65, conversion: 65, seo: 70, tip: "Best for email hooks — bridges curiosity into deeper content" },
-  leverage:  { viral: 75, trust: 70, conversion: 72, seo: 50, tip: "Best for reframing objections — turns resistance into buy-in" },
-  origin:    { viral: 50, trust: 92, conversion: 60, seo: 55, tip: "Best for long-form loyalty — deepens trust with existing audience" },
+  debunk:    { viral: 88, trust: 45, conversion: 55, seo: 60, tip: "ファネルの上部に最適——論争が冷たい読者のシェアを促進する" },
+  framework: { viral: 55, trust: 82, conversion: 90, seo: 85, tip: "ファネルの中段に最適——行動する準備ができている読者に構造が必要" },
+  reveal:    { viral: 80, trust: 65, conversion: 65, seo: 70, tip: "メールフックに最適——好奇心をより深いコンテンツへの橋渡しをする" },
+  leverage:  { viral: 75, trust: 70, conversion: 72, seo: 50, tip: "異議の再定義に最適——抵抗を賛同へと変える" },
+  origin:    { viral: 50, trust: 92, conversion: 60, seo: 55, tip: "ロングフォームの忠誠心に最適——既存読者との信頼を深める" },
 };
 
 const TOPIC_MARKET = {
-  "Sleep & Anxiety":       { search: 95, competition: 88, monetization: 82, growth: 75, platform: "YouTube" },
-  "Burnout & Work":        { search: 80, competition: 75, monetization: 78, growth: 85, platform: "LinkedIn" },
-  "Grief & Healing":       { search: 55, competition: 40, monetization: 60, growth: 65, platform: "Podcasts" },
-  "Identity & Direction":  { search: 60, competition: 55, monetization: 70, growth: 80, platform: "TikTok" },
-  "Focus & Performance":   { search: 85, competition: 82, monetization: 88, growth: 70, platform: "YouTube" },
-  "Meaning & Spirituality":{ search: 50, competition: 45, monetization: 65, growth: 75, platform: "Books" },
+  "睡眠と不安":       { search: 95, competition: 88, monetization: 82, growth: 75, platform: "YouTube" },
+  "燃え尽きと仕事":        { search: 80, competition: 75, monetization: 78, growth: 85, platform: "LinkedIn" },
+  "悲しみと癒し":       { search: 55, competition: 40, monetization: 60, growth: 65, platform: "Podcasts" },
+  "アイデンティティと方向性":  { search: 60, competition: 55, monetization: 70, growth: 80, platform: "TikTok" },
+  "集中力とパフォーマンス":   { search: 85, competition: 82, monetization: 88, growth: 70, platform: "YouTube" },
+  "意味とスピリチュアリティ":{ search: 50, competition: 45, monetization: 65, growth: 75, platform: "本" },
 };
 
 // Ideal voice profiles per angle — from synergy research
@@ -1848,13 +1848,13 @@ function Step7Topics({ state, update, i18n = {} }) {
   return (
     <div>
       <StepHero
-        eyebrow="Territory"
-        title="Claim Your Search Territory"
-        subtitle="Pick one topic per category — each choice sets the content angle your brand uses to frame that territory. Watch the sidebar update as you choose."
+        eyebrow="テリトリー"
+        title="検索テリトリーを確立する"
+        subtitle="カテゴリーごとに一つのトピックを選んでください——各選択がそのテリトリーを枠組みするブランドのコンテンツアングルを設定します。選ぶとサイドバーが更新されます。"
       />
       <div className="mb-6 rounded-xl border border-indigo-100/80 bg-indigo-50/50 p-4 backdrop-blur-sm">
         <p className="text-xs leading-relaxed text-indigo-900">
-          <strong>One per category.</strong> Each topic is paired with a content angle — debunk, framework, reveal, leverage, or origin. As you switch topics, the angle and strategy in the sidebar changes.
+          <strong>カテゴリーごとに一つ。</strong> 各トピックはコンテンツアングルとペアになっています——デバンク、フレームワーク、リビール、レバレッジ、またはオリジン。トピックを切り替えると、サイドバーのアングルと戦略が変わります。
         </p>
       </div>
       <div className="space-y-4">
@@ -1879,7 +1879,7 @@ function Step7Topics({ state, update, i18n = {} }) {
                       className={`w-7 h-7 rounded-md object-cover border flex-shrink-0 ${active ? "border-white/30 ring-1 ring-white/40" : "border-gray-200"}`}
                       loading="lazy"
                     />
-                    <span>{tag.id.replace(/-/g, " ")}</span>
+                    <span>{tag.label || tag.id.replace(/-/g, " ")}</span>
                     {angleInfo && <span className="text-[9px] opacity-60">{angleInfo.icon}</span>}
                     {active && <Check size={12} className="text-white" />}
                   </button>
@@ -1897,24 +1897,24 @@ function Step8MarketIntel({ state }) {
   const proven = PROVEN[state.archetype] || PROVEN.nervous_system;
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-white tracking-tight">Market Intelligence</h2>
-      <p className="text-sm text-white mt-1 mb-2">Your creative vision is the soul of your brand. But soul alone doesn't pay rent. This page shows you how the system blends your unique direction with hard market data — real search volumes, proven buyer personas, and high-converting keyword territories — to ensure your catalog reaches the people who are already looking for what you're offering.</p>
-      <p className="text-xs text-white mb-6 italic">Nothing changes about your brand's voice or identity. We just make sure it shows up where the demand is.</p>
+      <h2 className="text-2xl font-extrabold text-white tracking-tight">マーケット・インテリジェンス</h2>
+      <p className="text-sm text-white mt-1 mb-2">あなたのクリエイティブビジョンはブランドの魂です。しかし魂だけでは生計は立てられません。このページでは、システムがあなたのユニークな方向性を実際の市場データ——実際の検索ボリューム、実証済みのバイヤーペルソナ、高コンバージョンのキーワードテリトリー——とどのようにブレンドし、あなたのカタログがすでに求めているものを探している人々に届くかを示します。</p>
+      <p className="text-xs text-white mb-6 italic">ブランドの声やアイデンティティに変わるものは何もありません。ただ、需要がある場所に確実に現れるようにするだけです。</p>
 
       {/* Gen Z / Gen Alpha FIRST */}
       <div className="rounded-xl border border-violet-200 bg-violet-50 p-5 mb-6">
         <div className="flex items-center gap-2 mb-3">
           <Globe size={16} className="text-violet-600" />
-          <span className="text-sm font-bold text-violet-800">Youth Reach: Gen Z + Gen Alpha</span>
+          <span className="text-sm font-bold text-violet-800">若年層へのリーチ：Z世代＋α世代</span>
         </div>
         <p className="text-xs text-violet-700 leading-relaxed mb-3">
-          Every brand on Pearl Prime automatically serves Gen Z and Gen Alpha readers — no extra configuration needed. The system creates age-appropriate adaptations of your content: shorter formats tuned for mobile-first consumption, visual-first layouts optimized for scroll-based discovery, platform-native hooks for TikTok and YouTube Shorts, and fully illustrated manga-style editions for readers who think in images rather than paragraphs. Gen Alpha (born 2010-2025) is the first generation growing up with emotional vocabulary from day one — they're searching for mental health content at younger ages than any previous generation. Your brand meets them where they are.
+          パールプライムのすべてのブランドは、追加設定なしでZ世代とα世代の読者に自動的に対応します。システムはコンテンツの年齢適切な適応版を作成します：モバイルファースト消費に合わせたショートフォーマット、スクロール発見に最適化されたビジュアルファーストレイアウト、TikTokとYouTube Shortsのためのプラットフォームネイティブフック、そして段落ではなく画像で思考する読者向けのフルイラストマンガスタイル版。α世代（2010〜2025年生まれ）は初日から感情の語彙を持ちながら育つ最初の世代——以前のどの世代よりも若い年齢でメンタルヘルスコンテンツを検索しています。あなたのブランドは彼らのいる場所で彼らと出会います。
         </p>
         <div className="grid grid-cols-3 gap-2">
           {[
-            { icon: Smartphone, label: "Short-form first", desc: "TikTok, Reels, Shorts optimized" },
-            { icon: BookMarked, label: "Manga editions", desc: "Full illustrated visual format" },
-            { icon: Headphones, label: "Micro audiobooks", desc: "15-30 min listens for mobile" },
+            { icon: Smartphone, label: "ショートフォーム優先", desc: "TikTok、Reels、Shorts対応" },
+            { icon: BookMarked, label: "マンガ版", desc: "フルイラストビジュアル形式" },
+            { icon: Headphones, label: "マイクロオーディオブック", desc: "モバイル向け15〜30分のリスニング" },
           ].map(({ icon: I, label, desc }) => (
             <div key={label} className="bg-white rounded-lg p-2.5 text-center">
               <I size={16} className="text-violet-500 mx-auto mb-1" />
@@ -1928,26 +1928,26 @@ function Step8MarketIntel({ state }) {
       <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-5 mb-6">
         <div className="flex items-center gap-2 mb-3">
           <TrendingUp size={16} className="text-emerald-600" />
-          <span className="text-sm font-bold text-emerald-800">How the Blend Works</span>
+          <span className="text-sm font-bold text-emerald-800">ブレンドの仕組み</span>
         </div>
         <p className="text-xs text-emerald-700 leading-relaxed mb-4">
-          We combine your creative direction — archetype, voice, topics, and angles — with proven high-performing search terms, audience segments, and real-time market signals. Your brand identity stays completely intact while the system ensures your catalog targets the topics people are actively searching for. This means your books appear where demand already exists, your titles match what people actually type into search bars, and your content reaches buyer personas with verified spending power. The result: your unique voice reaches the largest possible audience.
+          あなたのクリエイティブな方向性——アーキタイプ、声、トピック、アングル——を、実証済みの高パフォーマンス検索語、読者セグメント、リアルタイムの市場シグナルと組み合わせます。システムがカタログを実際に検索されているトピックへと確実にターゲティングしながら、ブランドアイデンティティは完全に保たれます。つまり、あなたの本は需要がすでにある場所に現れ、タイトルは実際に検索バーに入力されることに合致し、コンテンツは購買力が確認されたバイヤーペルソナに届きます。結果：あなたのユニークな声が最大限の読者に届きます。
         </p>
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-white rounded-lg p-3">
-            <div className="text-[10px] font-bold text-emerald-700 uppercase mb-1">Your Direction</div>
-            <p className="text-[11px] text-white">Archetype, voice, topics, angles, visual style — preserved as your brand's unique creative identity</p>
+            <div className="text-[10px] font-bold text-emerald-700 uppercase mb-1">あなたの方向性</div>
+            <p className="text-[11px] text-white">アーキタイプ、声、トピック、アングル、ビジュアルスタイル——ブランドのユニークなクリエイティブアイデンティティとして保たれます</p>
           </div>
           <div className="bg-white rounded-lg p-3">
-            <div className="text-[10px] font-bold text-emerald-700 uppercase mb-1">Market Intelligence</div>
-            <p className="text-[11px] text-white">Proven revenue personas, trending search terms, high-conversion keywords, and demand data matched to your archetype</p>
+            <div className="text-[10px] font-bold text-emerald-700 uppercase mb-1">マーケット・インテリジェンス</div>
+            <p className="text-[11px] text-white">実証済みの収益ペルソナ、トレンド検索語、高コンバージョンキーワード、そしてあなたのアーキタイプにマッチした需要データ</p>
           </div>
         </div>
       </div>
 
       <div className="rounded-xl border border-gray-200 bg-white p-5 mb-6">
-        <div className="text-xs font-bold text-white mb-3">Proven Revenue Personas for Your Archetype</div>
-        <p className="text-[11px] text-white mb-3">These are the audience segments with verified purchasing power in your emotional territory. The system ensures your catalog reaches all of them.</p>
+        <div className="text-xs font-bold text-white mb-3">あなたのアーキタイプの実証済み収益ペルソナ</div>
+        <p className="text-[11px] text-white mb-3">これらは、あなたの感情的テリトリーで確認済みの購買力を持つ読者セグメントです。システムがカタログをすべてに確実に届けます。</p>
         {proven.personas.map((p, i) => (
           <div key={i} className="flex items-start gap-2 mb-2.5">
             <Target size={12} className="text-indigo-500 flex-shrink-0 mt-0.5" />
@@ -1957,8 +1957,8 @@ function Step8MarketIntel({ state }) {
       </div>
 
       <div className="rounded-xl border border-gray-200 bg-white p-5">
-        <div className="text-xs font-bold text-white mb-3">High-Performing Search Topics</div>
-        <p className="text-[11px] text-white mb-3">These search terms have verified monthly volume and conversion rates. Your titles and keywords will be optimized around these terms alongside your custom selections.</p>
+        <div className="text-xs font-bold text-white mb-3">高パフォーマンスの検索トピック</div>
+        <p className="text-[11px] text-white mb-3">これらの検索語は、確認済みの月間ボリュームとコンバージョン率を持っています。あなたのタイトルとキーワードは、カスタム選択と合わせてこれらの語を中心に最適化されます。</p>
         <div className="flex flex-wrap gap-2">
           {proven.topics.map((t, i) => <span key={i} className="text-[11px] bg-gray-100 text-white px-3 py-1 rounded-full">{t}</span>)}
         </div>
@@ -1975,37 +1975,37 @@ function Step9Formats({ state, update, i18n = {} }) {
   const toggleChannel = (ch) => { const next = channels.includes(ch) ? channels.filter((c) => c !== ch) : [...channels, ch]; update({ channels: next }); };
 
   const CHANNELS = [
-    { id: "audiobook", label: "Audiobook", icon: Headphones, desc: "Full narrated audiobooks on Audible, Spotify, Apple Books, and 40+ platforms worldwide", benefit: "Listeners heal during commutes, walks, and sleepless nights — your voice becomes a companion in their most vulnerable private moments" },
-    { id: "yt_channel", label: "YouTube Channel", icon: Tv, desc: "Daily video content — shorts, long-form talks, guided sessions, and visualized chapters", benefit: "Visual learners process emotion through moving images — your brand becomes a daily presence in their feed, building trust through consistent showing up" },
-    { id: "tiktok", label: "TikTok", icon: Smartphone, desc: "Platform-native short-form video with trending audio, text overlays, and hook-first editing", benefit: "You catch people mid-scroll in moments of vulnerability — a 30-second clip can be the first step toward a life change" },
-    { id: "pocket_guide", label: "Pocket Guide", icon: BookOpen, desc: "Condensed 30-50 page quick-reference editions — the essential takeaways in a weekend read", benefit: "Overwhelmed readers who can't commit to a full book get immediate relief — a weekend read that delivers the essential transformation" },
-    { id: "7_day_guide", label: "How to Do It in 7 Days", icon: Clock, desc: "Compressed transformation protocol — one chapter per day, clear daily actions, quick wins", benefit: "Structure reduces overwhelm — readers who've failed at 'read when you feel like it' thrive with daily assignments that build momentum" },
-    { id: "mastercourse", label: "Mastercourse Series", icon: GraduationCap, desc: "Multi-volume deep-dive series with progressive complexity — 4-8 books building on each other", benefit: "Committed readers go deep over months — each volume builds on the last, creating the sustained practice that drives real, lasting change" },
-    { id: "workbook", label: "Interactive Workbook", icon: PenTool, desc: "Exercise-heavy companion with fill-in sections, tracking sheets, and guided reflection spaces", benefit: "Writing activates different brain pathways than reading — workbooks turn passive consumption into active self-discovery and integration" },
-    { id: "daily_journal", label: "Daily Journal", icon: BookMarked, desc: "30-90 day guided journal — one prompt per day with space for writing and reflection", benefit: "Daily prompts build the self-awareness muscle — readers develop an ongoing relationship with their own inner world, one page at a time" },
+    { id: "audiobook", label: "オーディオブック", icon: Headphones, desc: "Audible、Spotify、Apple Booksおよび世界40以上のプラットフォームでのフルナレーションオーディオブック", benefit: "リスナーは通勤、散歩、眠れない夜に癒されます——あなたの声は、最も脆弱なプライベートな瞬間の伴走者になります" },
+    { id: "yt_channel", label: "YouTubeチャンネル", icon: Tv, desc: "毎日の動画コンテンツ——ショート動画、ロングフォームトーク、ガイドセッション、可視化されたチャプター", benefit: "ビジュアル学習者は動く画像を通じて感情を処理します——あなたのブランドは彼らのフィードに毎日存在し、一貫した出現を通じて信頼を積み上げます" },
+    { id: "tiktok", label: "TikTok", icon: Smartphone, desc: "トレンドオーディオ、テキストオーバーレイ、フック優先の編集を備えたプラットフォームネイティブなショートフォーム動画", benefit: "スクロールの合間、脆弱な瞬間に人々を捉えます——30秒のクリップが、人生の変化への最初の一歩になりうる" },
+    { id: "pocket_guide", label: "ポケットガイド", icon: BookOpen, desc: "30〜50ページに凝縮されたクイックリファレンス版——週末の読書で得られる本質的なエッセンス", benefit: "フルブックに取り組めない余裕のない読者に即座の安堵を提供——必須の変容を届ける週末の読み物" },
+    { id: "7_day_guide", label: "7日間でやり遂げる方法", icon: Clock, desc: "圧縮した変容プロトコル — 1日1章、明確な日々の行動、早い成功体験", benefit: "構造が圧倒感を軽減します——「気が向いた時に読む」に失敗した読者が、勢いをつける毎日の課題で成功できます" },
+    { id: "mastercourse", label: "マスターコースシリーズ", icon: GraduationCap, desc: "段階的に複雑さが増す複数巻の深堀りシリーズ——4〜8冊が互いの上に積み上がる", benefit: "コミットした読者が数ヶ月をかけて深く進みます——各巻が前の巻の上に積み上がり、本当の持続的な変化を駆動する継続的実践を生み出します" },
+    { id: "workbook", label: "インタラクティブ・ワークブック", icon: PenTool, desc: "記入欄、トラッキングシート、ガイドされた内省スペースを備えたエクササイズ重視の伴走書", benefit: "書くことは読むこととは異なる脳の経路を活性化します——ワークブックは受動的な消費を能動的な自己発見と統合へと変えます" },
+    { id: "daily_journal", label: "デイリー・ジャーナル", icon: BookMarked, desc: "30-90 day guided journal — one prompt per day with space for writing and reflection", benefit: "毎日のプロンプトが自己認識の筋肉を育てます——読者がページをめくるたびに、自分の内なる世界との継続的な関係が育まれます" },
   ];
 
   return (
     <div>
-      <h2 className="text-2xl font-extrabold text-white tracking-tight">Format & Channel Choices</h2>
-      <p className="text-sm text-white mt-1 mb-2">Your format focus tells the catalog planner whether to optimize for visual-first short-form content or deep long-form books. Your channel selections determine where your brand publishes — each active channel adds content weight to the pipeline, meaning more formats, more variations, and more touchpoints with your audience.</p>
+      <h2 className="text-2xl font-extrabold text-white tracking-tight">フォーマットとチャンネルの選択</h2>
+      <p className="text-sm text-white mt-1 mb-2">フォーマットフォーカスがカタログプランナーに、ビジュアル優先のショートフォームコンテンツか、深いロングフォームブックかのどちらに最適化するかを伝えます。チャンネル選択はブランドがどこで公開するかを決定します——各アクティブチャンネルがパイプラインにコンテンツの重みを追加し、より多くのフォーマット、バリエーション、読者とのタッチポイントをもたらします。</p>
 
-      <div className="text-xs font-bold uppercase tracking-wider text-white mb-3 mt-6">Primary Format Focus</div>
-      <p className="text-[11px] text-white mb-3">This is the most important format decision. It changes how the catalog planner distributes content across your entire brand.</p>
+      <div className="text-xs font-bold uppercase tracking-wider text-white mb-3 mt-6">主要フォーマットフォーカス</div>
+      <p className="text-[11px] text-white mb-3">これは最も重要なフォーマットの決断です。カタログプランナーがブランド全体にどのようにコンテンツを配分するかが変わります。</p>
       <div className="grid grid-cols-2 gap-3 mb-8">
         <button onClick={() => setFocus("manga")}
           className={`p-5 rounded-xl border-2 text-left transition-all ${formatFocus === "manga" ? "border-gray-900 bg-gray-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}>
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-purple-600 flex items-center justify-center mb-3"><Image size={24} className="text-white" /></div>
-          <div className="text-sm font-bold text-white">Manga / Visual</div>
-          <p className="text-[11px] text-white mt-1 leading-relaxed">Illustrated panels, visual storytelling, manga-style layouts. Audiobooks default to short formats (15-30 min). Optimized for Gen Z and Gen Alpha visual-first consumption.</p>
-          {formatFocus === "manga" && <div className="mt-2 bg-rose-50 rounded-lg p-2"><p className="text-[10px] text-rose-700">Catalog planner will prioritize short-form audiobooks, visual content, and illustration-heavy formats across all channels.</p></div>}
+          <div className="text-sm font-bold text-white">マンガ / ビジュアル</div>
+          <p className="text-[11px] text-white mt-1 leading-relaxed">イラストパネル、ビジュアルストーリーテリング、マンガスタイルのレイアウト。オーディオブックはデフォルトでショートフォーマット（15〜30分）。Z世代とα世代のビジュアル優先消費に最適化。</p>
+          {formatFocus === "manga" && <div className="mt-2 bg-rose-50 rounded-lg p-2"><p className="text-[10px] text-rose-700">カタログプランナーはすべてのチャンネルを通じて、ショートフォームオーディオブック、ビジュアルコンテンツ、イラスト重視のフォーマットを優先します。</p></div>}
         </button>
         <button onClick={() => setFocus("book")}
           className={`p-5 rounded-xl border-2 text-left transition-all ${formatFocus === "book" ? "border-gray-900 bg-gray-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}>
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-3"><BookOpen size={24} className="text-white" /></div>
-          <div className="text-sm font-bold text-white">Traditional Books</div>
-          <p className="text-[11px] text-white mt-1 leading-relaxed">Full-length narrative books, deep guided programs, comprehensive workbooks. Audiobooks in long formats (3-8 hrs). Optimized for depth-seeking readers.</p>
-          {formatFocus === "book" && <div className="mt-2 bg-amber-50 rounded-lg p-2"><p className="text-[10px] text-amber-700">Catalog planner will prioritize long-form books, complete programs, and in-depth series across all channels.</p></div>}
+          <div className="text-sm font-bold text-white">従来型書籍</div>
+          <p className="text-[11px] text-white mt-1 leading-relaxed">フルレングスのナラティブブック、深いガイドプログラム、包括的なワークブック。オーディオブックはロングフォーマット（3〜8時間）。深みを求める読者に最適化。</p>
+          {formatFocus === "book" && <div className="mt-2 bg-amber-50 rounded-lg p-2"><p className="text-[10px] text-amber-700">カタログプランナーはすべてのチャンネルを通じて、ロングフォームブック、完全なプログラム、深いシリーズを優先します。</p></div>}
         </button>
       </div>
       {formatFocus && _SF.formats[formatFocus] && (
@@ -2017,8 +2017,8 @@ function Step9Formats({ state, update, i18n = {} }) {
       )}
       <div className="mb-4" />
 
-      <div className="text-xs font-bold uppercase tracking-wider text-white mb-3">Publishing Channels</div>
-      <p className="text-[11px] text-white mb-3">Select all channels you want your brand to publish through. Each channel generates dedicated content adapted for that platform's format, audience, and algorithm requirements.</p>
+      <div className="text-xs font-bold uppercase tracking-wider text-white mb-3">パブリッシングチャンネル</div>
+      <p className="text-[11px] text-white mb-3">ブランドを通じて公開したいすべてのチャンネルを選択してください。各チャンネルがそのプラットフォームのフォーマット、読者、アルゴリズム要件に適応した専用コンテンツを生成します。</p>
       <div className="grid grid-cols-1 gap-2">
         {CHANNELS.map((ch) => {
           const active = channels.includes(ch.id);
@@ -2063,7 +2063,7 @@ function StepBrandReveal({ state, i18n = {} }) {
   const topicAnglePairs = topics.map(tagId => {
     for (const cat of TOPIC_CATEGORIES) {
       const found = cat.tags.find(t => t.id === tagId);
-      if (found) return { tagId, angle: found.angle, bullet: found.bullet, category: cat.label, catIcon: cat.icon, catColor: cat.color };
+      if (found) return { tagId, tagLabel: found.label || found.id.replace(/-/g, " "), angle: found.angle, bullet: found.bullet, category: cat.label, catIcon: cat.icon, catColor: cat.color };
     }
     return null;
   }).filter(Boolean);
@@ -2079,32 +2079,32 @@ function StepBrandReveal({ state, i18n = {} }) {
   // Derive voice descriptors
   const voiceDesc = voicePositions.map(v => {
     const p = v.position;
-    if (v.id === "gentleDirect") return p <= 3 ? "permission-giving" : p >= 8 ? "commanding" : "balanced";
-    if (v.id === "simpleDeep") return p <= 3 ? "accessible" : p >= 8 ? "layered" : "mid-depth";
-    if (v.id === "emotionalLogical") return p <= 3 ? "story-led" : p >= 8 ? "data-driven" : "balanced";
-    if (v.id === "spiritualPractical") return p <= 3 ? "contemplative" : p >= 8 ? "tactical" : "blended";
+    if (v.id === "gentleDirect") return p <= 3 ? "許可を与える" : p >= 8 ? "命令的" : "バランスのとれた";
+    if (v.id === "simpleDeep") return p <= 3 ? "親しみやすい" : p >= 8 ? "層のある" : "中程度の深さ";
+    if (v.id === "emotionalLogical") return p <= 3 ? "ストーリー主導" : p >= 8 ? "データ駆動" : "バランスのとれた";
+    if (v.id === "spiritualPractical") return p <= 3 ? "内省的" : p >= 8 ? "戦術的" : "ブレンドされた";
     return "";
   });
 
   // Generate true category statement
   const trueCategory = arch && persona
-    ? `${arch.name} for ${persona.label}${moment ? ` — catching them at "${moment.label}"` : ""}`
-    : arch ? arch.name : "Your Brand";
+    ? `${arch.name} for ${persona.label}${moment ? ` — ${moment.label}の瞬間を捉える` : ""}`
+    : arch ? arch.name : "あなたのブランド";
 
   // Content engine steps derived from voice + angle mix
   const engineSteps = [
-    { step: "Name the Problem", desc: moment ? `Open with "${moment.scene}" — your reader's exact moment` : "Open with the reader's exact pain point", icon: "🎯" },
-    { step: "Reframe Identity", desc: `Use ${uniqueAngles.includes("debunk") ? "debunk" : uniqueAngles.includes("reveal") ? "reveal" : "origin"} angles to shift their self-story`, icon: "🪞" },
-    { step: "Give a Micro-Tool", desc: `Deliver ${uniqueAngles.includes("framework") ? "a framework they can use tonight" : "an actionable insight they can apply immediately"}`, icon: "🔧" },
-    { step: "Land in Emotion", desc: emotions.length > 0 ? `Every piece ends at: "${emotions[0]}"` : "Every piece ends in the promised feeling", icon: "💫" },
+    { step: "問題を言語化する", desc: moment ? `「${moment.scene}」で始める — 読者のまさにその瞬間` : "読者のまさにその痛みのポイントで始める", icon: "🎯" },
+    { step: "アイデンティティを再定義する", desc: `${uniqueAngles.includes("debunk") ? "誤解を正す" : uniqueAngles.includes("reveal") ? "お披露目" : "根源を辿る"}のアングルで自己ナラティブを書き換える`, icon: "🪞" },
+    { step: "マイクロツールを渡す", desc: `${uniqueAngles.includes("framework") ? "今夜から使えるフレームワークを提供する" : "すぐ実践できる行動的な洞察を渡す"}`, icon: "🔧" },
+    { step: "感情に着地する", desc: emotions.length > 0 ? `最後は必ずこの感情に着地する：「${emotions[0]}」` : "すべてのコンテンツが約束した感情で終わる", icon: "💫" },
   ];
 
   // Unfair advantage loop
   const loopSteps = [
-    { label: "Reframe", desc: "Break their old story", color: "#6366f1" },
-    { label: "Regulate", desc: "Calm the nervous system", color: "#059669" },
-    { label: "Restore", desc: "Rebuild from the body up", color: "#f59e0b" },
-    { label: "Reorient", desc: "Point toward new identity", color: "#f43f5e" },
+    { label: "再定義", desc: "古い物語を壊す", color: "#6366f1" },
+    { label: "調整する", desc: "神経系を落ち着かせる", color: "#059669" },
+    { label: "回復する", desc: "体から再構築する", color: "#f59e0b" },
+    { label: "方向を定める", desc: "新しいアイデンティティへ向ける", color: "#f43f5e" },
   ];
 
   // Positioning map coords — Gentle↔Direct on X, Simple↔Deep on Y
@@ -2113,7 +2113,7 @@ function StepBrandReveal({ state, i18n = {} }) {
 
   // Emotional staircase — build ascending steps from trigger to each emotion
   const staircaseSteps = [
-    { label: moment ? moment.label : "Pain Point", color: "#f43f5e", sub: "Where they start" },
+    { label: moment ? moment.label : "ペインポイント", color: "#f43f5e", sub: "彼らの出発点" },
     ...emotions.slice(0, 5).map((e, i) => {
       const cat = _EC.find(c => c.items.includes(e));
       return { label: e, color: cat?.color || "#6366f1", sub: cat?.name || "" };
@@ -2123,8 +2123,8 @@ function StepBrandReveal({ state, i18n = {} }) {
   return (
     <div>
       <StepHero
-        eyebrow="Reveal"
-        title="Here is your brand"
+        eyebrow="お披露目"
+        title="あなたのブランドはこちらです"
         subtitle=""
       />
 
@@ -2132,7 +2132,7 @@ function StepBrandReveal({ state, i18n = {} }) {
       {arch && (
         <div id="rev-category" className={`mb-6 rounded-2xl border-2 p-6 bg-gradient-to-br ${arch.gradient} shadow-lg`}>
           <div className="text-center">
-            <div className="text-white/70 text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Your True Category</div>
+            <div className="text-white/70 text-[10px] font-bold uppercase tracking-[0.3em] mb-2">あなたの真のカテゴリー</div>
             <div className="text-white text-xl font-extrabold mb-2">{trueCategory}</div>
             <div className="text-white/80 text-sm leading-relaxed">{arch.tagline}</div>
             {arch.visionVibe && <p className="mt-3 text-white/70 text-[11px] leading-relaxed max-w-md mx-auto italic">{arch.visionVibe}</p>}
@@ -2143,7 +2143,7 @@ function StepBrandReveal({ state, i18n = {} }) {
       {/* ═══ 2. VOICE SIGNATURE — circular gauges ═══ */}
       {Object.keys(state.voiceSettings || {}).length > 0 && (
         <div id="rev-voice" className="mb-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Voice Signature</div>
+          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">ボイスシグネチャー</div>
           <div className="grid grid-cols-4 gap-3">
             {voicePositions.map((s) => {
               const pct = (s.position / 10) * 100;
@@ -2165,15 +2165,15 @@ function StepBrandReveal({ state, i18n = {} }) {
             })}
           </div>
           <div className="mt-3 text-center text-[10px] text-white/80">
-            Your voice is <span className="text-white font-semibold">{voiceDesc.join(" · ")}</span>
+            あなたの声は <span className="text-white font-semibold">{voiceDesc.join(" · ")}</span>
           </div>
         </div>
       )}
 
       {/* ═══ 2b. POSITIONING MAP — 2D quadrant ═══ */}
       <div id="rev-positioning" className="mb-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-        <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Positioning Map</div>
-        <div className="text-[10px] text-white/70 mb-3 text-center">Where your voice sits in the market landscape</div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">ポジショニングマップ</div>
+        <div className="text-[10px] text-white/70 mb-3 text-center">市場の中でのあなたの声の位置</div>
         <svg viewBox="0 0 300 300" className="w-full max-w-[280px] mx-auto">
           {/* Quadrant background */}
           <rect x="30" y="10" width="130" height="130" fill="#6366f115" rx="4" />
@@ -2184,15 +2184,15 @@ function StepBrandReveal({ state, i18n = {} }) {
           <line x1="30" y1="140" x2="290" y2="140" stroke="#e5e7eb" strokeWidth="1" />
           <line x1="160" y1="10" x2="160" y2="270" stroke="#e5e7eb" strokeWidth="1" />
           {/* Axis labels */}
-          <text x="30" y="285" fontSize="9" fill="#9ca3af" fontWeight="bold">Gentle</text>
-          <text x="265" y="285" fontSize="9" fill="#9ca3af" fontWeight="bold">Direct</text>
-          <text x="5" y="15" fontSize="9" fill="#9ca3af" fontWeight="bold" transform="rotate(-90 10 15)">Deep</text>
-          <text x="5" y="275" fontSize="9" fill="#9ca3af" fontWeight="bold" transform="rotate(-90 10 275)">Simple</text>
+          <text x="30" y="285" fontSize="9" fill="#9ca3af" fontWeight="bold">やさしい</text>
+          <text x="265" y="285" fontSize="9" fill="#9ca3af" fontWeight="bold">直接的</text>
+          <text x="5" y="15" fontSize="9" fill="#9ca3af" fontWeight="bold" transform="rotate(-90 10 15)">深い</text>
+          <text x="5" y="275" fontSize="9" fill="#9ca3af" fontWeight="bold" transform="rotate(-90 10 275)">シンプル</text>
           {/* Quadrant labels */}
-          <text x="95" y="75" textAnchor="middle" fontSize="8" fill="#6366f1" fontWeight="600">Wise Guide</text>
-          <text x="225" y="75" textAnchor="middle" fontSize="8" fill="#059669" fontWeight="600">Expert Coach</text>
-          <text x="95" y="210" textAnchor="middle" fontSize="8" fill="#f59e0b" fontWeight="600">Warm Friend</text>
-          <text x="225" y="210" textAnchor="middle" fontSize="8" fill="#f43f5e" fontWeight="600">Bold Mentor</text>
+          <text x="95" y="75" textAnchor="middle" fontSize="8" fill="#6366f1" fontWeight="600">賢明な案内者</text>
+          <text x="225" y="75" textAnchor="middle" fontSize="8" fill="#059669" fontWeight="600">エキスパートコーチ</text>
+          <text x="95" y="210" textAnchor="middle" fontSize="8" fill="#f59e0b" fontWeight="600">温かい友人</text>
+          <text x="225" y="210" textAnchor="middle" fontSize="8" fill="#f43f5e" fontWeight="600">大胆なメンター</text>
           {/* Brand dot */}
           {(() => {
             const dotX = 30 + (posX / 10) * 260;
@@ -2200,7 +2200,7 @@ function StepBrandReveal({ state, i18n = {} }) {
             return (<>
               <circle cx={dotX} cy={dotY} r="14" fill="#6366f1" fillOpacity="0.15" stroke="#6366f1" strokeWidth="2" />
               <circle cx={dotX} cy={dotY} r="6" fill="#6366f1" />
-              <text x={dotX} y={dotY - 20} textAnchor="middle" fontSize="9" fill="#6366f1" fontWeight="bold">You</text>
+              <text x={dotX} y={dotY - 20} textAnchor="middle" fontSize="9" fill="#6366f1" fontWeight="bold">あなた</text>
             </>);
           })()}
         </svg>
@@ -2210,10 +2210,10 @@ function StepBrandReveal({ state, i18n = {} }) {
       {visual && (() => {
         const vm = VISUAL_MARKET[visual.id] || {};
         const bars = [
-          { label: "Shelf Appeal", val: vm.shelf || 0, color: "#f59e0b" },
-          { label: "Trust Signal", val: vm.trust || 0, color: "#059669" },
-          { label: "Social Share", val: vm.social || 0, color: "#6366f1" },
-          { label: "Premium Feel", val: vm.premium || 0, color: "#7c3aed" },
+          { label: "棚での訴求力", val: vm.shelf || 0, color: "#f59e0b" },
+          { label: "信頼シグナル", val: vm.trust || 0, color: "#059669" },
+          { label: "ソーシャルシェア", val: vm.social || 0, color: "#6366f1" },
+          { label: "プレミアム感", val: vm.premium || 0, color: "#7c3aed" },
         ];
         return (
           <div id="rev-visual" className="mb-6 rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
@@ -2223,12 +2223,12 @@ function StepBrandReveal({ state, i18n = {} }) {
               ))}
             </div>
             <div className="p-4">
-              <div className="text-[10px] font-bold uppercase text-white">Visual Identity</div>
+              <div className="text-[10px] font-bold uppercase text-white">ビジュアルアイデンティティ</div>
               <div className="mt-1 text-base font-bold text-white">{visual.label}</div>
               <p className="mt-1 text-[11px] text-white italic">{visual.mood}</p>
             </div>
             <div className="px-4 pb-4">
-              <div className="text-[9px] font-bold uppercase tracking-wider text-white mb-2">Market Scores</div>
+              <div className="text-[9px] font-bold uppercase tracking-wider text-white mb-2">市場スコア</div>
               <div className="space-y-2">
                 {bars.map(b => (
                   <div key={b.label} className="flex items-center gap-2">
@@ -2241,7 +2241,7 @@ function StepBrandReveal({ state, i18n = {} }) {
                 ))}
               </div>
               <div className="mt-3 flex items-center gap-2">
-                <span className="text-[9px] px-2 py-0.5 rounded-full bg-violet-100 text-white font-bold">Rank #{vm.rank || '—'}</span>
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-violet-100 text-white font-bold">ランク #{vm.rank || '—'}</span>
                 <span className="text-[9px] text-white/70">{vm.demo}</span>
               </div>
               <p className="mt-2 text-[10px] text-white/80 leading-relaxed italic">{vm.superpower}</p>
@@ -2253,8 +2253,8 @@ function StepBrandReveal({ state, i18n = {} }) {
       {/* ═══ 4. EMOTIONAL STAIRCASE ═══ */}
       {staircaseSteps.length > 1 && (
         <div id="rev-emotion" className="mb-6 rounded-2xl border border-rose-200/80 bg-gradient-to-br from-rose-50/60 to-white p-5 shadow-sm">
-          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Emotional Staircase</div>
-          <div className="text-[10px] text-white/70 mb-4">Your reader ascends from pain to promise — each step builds on the last</div>
+          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">感情の階段</div>
+          <div className="text-[10px] text-white/70 mb-4">読者は痛みから約束へと登っていきます——各ステップが前のステップの上に積み上がる</div>
           <div className="flex items-end gap-2" style={{ height: "180px" }}>
             {staircaseSteps.map((s, i) => {
               const heightPx = 40 + (i / Math.max(staircaseSteps.length - 1, 1)) * 140;
@@ -2286,7 +2286,7 @@ function StepBrandReveal({ state, i18n = {} }) {
       {/* ═══ 5. TOPIC ANGLE STRATEGY ═══ */}
       {topicAnglePairs.length > 0 && (
         <div id="rev-topics" className="mb-6 rounded-2xl border border-indigo-200/80 bg-gradient-to-br from-indigo-50/60 to-white p-5 shadow-sm">
-          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Topic × Angle Strategy</div>
+          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">トピック×アングル戦略</div>
           <div className="space-y-4">
             {topicAnglePairs.map(p => {
               const af = _AF[p.angle];
@@ -2297,17 +2297,17 @@ function StepBrandReveal({ state, i18n = {} }) {
                 <div key={p.tagId} className="rounded-xl p-3 border" style={{ borderColor: p.catColor + '30', backgroundColor: p.catColor + '06' }}>
                   <div className="flex items-center gap-2 mb-1.5">
                     <span className="text-sm">{p.catIcon}</span>
-                    <span className="text-[11px] font-bold text-white flex-1">{p.tagId.replace(/-/g, " ")}</span>
+                    <span className="text-[11px] font-bold text-white flex-1">{p.tagLabel}</span>
                     <span className="text-[9px] px-2 py-0.5 rounded-full font-bold" style={{ backgroundColor: p.catColor + '15', color: p.catColor }}>{af?.icon} {af?.label}</span>
                   </div>
                   <p className="text-[10px] text-white/70 leading-relaxed mb-2">{p.bullet}</p>
                   {/* Market mini-bars */}
                   <div className="grid grid-cols-2 gap-x-3 gap-y-1">
                     {[
-                      { label: "Viral", val: am.viral, color: "#f43f5e" },
-                      { label: "Search", val: tm.search, color: "#0ea5e9" },
-                      { label: "Convert", val: am.conversion, color: "#059669" },
-                      { label: "Growth", val: tm.growth, color: "#f59e0b" },
+                      { label: "バイラル", val: am.viral, color: "#f43f5e" },
+                      { label: "検索", val: tm.search, color: "#0ea5e9" },
+                      { label: "コンバージョン", val: am.conversion, color: "#059669" },
+                      { label: "成長", val: tm.growth, color: "#f59e0b" },
                     ].map(b => (
                       <div key={b.label} className="flex items-center gap-1.5">
                         <span className="text-[8px] text-white/70 w-10 flex-shrink-0">{b.label}</span>
@@ -2320,9 +2320,9 @@ function StepBrandReveal({ state, i18n = {} }) {
                   </div>
                   <div className="mt-2 flex items-center gap-2">
                     <span className="text-[9px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: comboScore >= 75 ? '#05966920' : comboScore >= 60 ? '#f59e0b20' : '#f43f5e20', color: comboScore >= 75 ? '#059669' : comboScore >= 60 ? '#f59e0b' : '#f43f5e' }}>
-                      Combo Score: {comboScore}
+                      コンボスコア: {comboScore}
                     </span>
-                    <span className="text-[8px] text-white/70">{tm.platform && `Best on ${tm.platform}`}</span>
+                    <span className="text-[8px] text-white/70">{tm.platform && `${tm.platform} に最適`}</span>
                   </div>
                 </div>
               );
@@ -2339,8 +2339,8 @@ function StepBrandReveal({ state, i18n = {} }) {
 
       {/* ═══ 6. CONTENT ENGINE FORMULA — dashboard flow ═══ */}
       <div id="rev-engine" className="mb-6 rounded-2xl border border-amber-200/80 bg-gradient-to-br from-amber-50/40 to-white p-5 shadow-sm">
-        <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-1">Content Engine Formula</div>
-        <div className="text-[10px] text-white/70 mb-5">Every piece of content follows this sequence — your unique flywheel</div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-1">コンテンツエンジンの公式</div>
+        <div className="text-[10px] text-white/70 mb-5">すべてのコンテンツがこのシーケンスに従います——あなただけのフライホイール</div>
         {/* Horizontal flow */}
         <div className="grid grid-cols-4 gap-0 relative">
           {engineSteps.map((s, i) => (
@@ -2365,15 +2365,15 @@ function StepBrandReveal({ state, i18n = {} }) {
         {/* Repeat arrow */}
         <div className="mt-4 flex items-center justify-center gap-2">
           <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, #b4530940, transparent)' }} />
-          <span className="text-[9px] font-bold text-white/50 uppercase tracking-wider">↻ Repeat with every piece</span>
+          <span className="text-[9px] font-bold text-white/50 uppercase tracking-wider">↻ すべてのコンテンツで繰り返す</span>
           <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, #b4530940, transparent)' }} />
         </div>
       </div>
 
       {/* ═══ 7. UNFAIR ADVANTAGE LOOP — circular diagram ═══ */}
       <div id="rev-loop" className="mb-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-        <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Unfair Advantage Loop</div>
-        <div className="text-[10px] text-white/70 mb-4 text-center">Every piece of content feeds the next — each exit is an entrance to deeper transformation</div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">アンフェアアドバンテージループ</div>
+        <div className="text-[10px] text-white/70 mb-4 text-center">すべてのコンテンツが次のコンテンツを生み出す——各出口は、より深い変容への入口</div>
         <svg viewBox="0 0 320 320" className="w-full max-w-[300px] mx-auto">
           {/* Connecting arc arrows */}
           <defs>
@@ -2388,7 +2388,7 @@ function StepBrandReveal({ state, i18n = {} }) {
           <path d="M 65 155 Q 70 100 115 68" fill="none" stroke="#6b728040" strokeWidth="2" markerEnd="url(#loopArrow)" />
           {/* Center label */}
           <text x="160" y="156" textAnchor="middle" fontSize="9" fill="#9ca3af" fontWeight="bold">↻ LOOP</text>
-          <text x="160" y="170" textAnchor="middle" fontSize="7" fill="#6b7280">repeats</text>
+          <text x="160" y="170" textAnchor="middle" fontSize="7" fill="#6b7280">繰り返す</text>
           {/* Nodes */}
           {loopSteps.map((s, i) => {
             const positions = [
@@ -2414,15 +2414,15 @@ function StepBrandReveal({ state, i18n = {} }) {
       {/* ═══ 8. AUDIENCE EXPERIENCE WALKTHROUGH ═══ */}
       {persona && moment && (
         <div id="rev-journey" className="mb-6 rounded-2xl border border-emerald-200/80 bg-gradient-to-br from-emerald-50/40 to-white p-5 shadow-sm">
-          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Audience Experience</div>
-          <div className="text-[10px] text-white/70 mb-3">How {persona.emoji} {persona.label} experiences your brand:</div>
+          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">読者の体験</div>
+          <div className="text-[10px] text-white/70 mb-3">{persona.emoji} {persona.label} があなたのブランドを体験する流れ：</div>
           <div className="flex flex-col items-center gap-1.5">
             {[
-              { phase: "Trigger", desc: `${moment.emoji} ${moment.scene}`, color: "#f43f5e", bg: "bg-rose-50" },
-              { phase: "Discovery", desc: `They find your content — the hook names their exact pain`, color: "#f59e0b", bg: "bg-amber-50" },
-              { phase: "Trust", desc: `Your ${voiceDesc[0]} voice makes them feel ${voiceDesc[2]} — not lectured, understood`, color: "#3b82f6", bg: "bg-blue-50" },
-              { phase: "Shift", desc: emotions[0] ? `They start to feel: "${emotions[0]}"` : "The promised emotion lands", color: "#059669", bg: "bg-emerald-50" },
-              { phase: "Return", desc: `They come back because every piece delivers the same transformation at deeper levels`, color: "#7c3aed", bg: "bg-violet-50" },
+              { phase: "トリガー", desc: `${moment.emoji} ${moment.scene}`, color: "#f43f5e", bg: "bg-rose-50" },
+              { phase: "発見", desc: `読者はあなたのコンテンツを見つける——フックが彼らの痛みをそのまま言語化している`, color: "#f59e0b", bg: "bg-amber-50" },
+              { phase: "信頼", desc: `あなたの${voiceDesc[0]}な声が${voiceDesc[2]}と感じさせる — 説教ではなく、理解されていると感じる`, color: "#3b82f6", bg: "bg-blue-50" },
+              { phase: "変容", desc: emotions[0] ? `感じ始める：「${emotions[0]}」` : "約束された感情が届く", color: "#059669", bg: "bg-emerald-50" },
+              { phase: "リターン", desc: `すべてのコンテンツがより深いレベルで同じ変容を届けるから、読者は戻ってくる`, color: "#7c3aed", bg: "bg-violet-50" },
             ].reverse().map((p, i, arr) => {
               const widthPct = 40 + ((arr.length - 1 - i) / (arr.length - 1)) * 60;
               const stepNum = arr.length - i;
@@ -2443,8 +2443,8 @@ function StepBrandReveal({ state, i18n = {} }) {
       {/* ═══ 9. VOICE × TOPIC SYNERGY — research-scored ═══ */}
       {topicAnglePairs.length > 0 && (
         <div id="rev-synergy" className="mb-6 rounded-2xl border border-violet-200/80 bg-gradient-to-br from-violet-50/40 to-white p-5 shadow-sm">
-          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">Voice × Topic Synergy</div>
-          <div className="text-[10px] text-white/70 mb-3">How well your voice tone amplifies each content angle</div>
+          <div className="text-[10px] font-bold uppercase tracking-wider text-white mb-3">声×トピックのシナジー</div>
+          <div className="text-[10px] text-white/70 mb-3">あなたの声のトーンが各コンテンツアングルをどれだけ増幅させるか</div>
           <div className="space-y-3">
             {topicAnglePairs.map((p, i) => {
               const af = _AF[p.angle];
@@ -2452,13 +2452,13 @@ function StepBrandReveal({ state, i18n = {} }) {
               const multiplier = (0.5 + (score / 100) * 1.5).toFixed(1);
               const barColor = p.catColor;
               const gentlePos = voicePositions.find(v => v.id === "gentleDirect")?.position || 5;
-              const toneWord = gentlePos <= 3 ? "gently" : gentlePos >= 8 ? "directly" : "clearly";
+              const toneWord = gentlePos <= 3 ? "やさしく" : gentlePos >= 8 ? "直接的に" : "明確に";
               return (
                 <div key={i} className="rounded-xl bg-white p-3 border border-violet-100">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-sm">{p.catIcon}</span>
                     <span className="text-[10px] text-white flex-1">
-                      You <strong>{toneWord}</strong> {af?.label?.toLowerCase()} <strong>{p.tagId.replace(/-/g, " ")}</strong>
+                      あなたは<strong>{toneWord}</strong>{af?.label}する <strong>{p.tagLabel}</strong>
                     </span>
                     <span className="text-[9px]">{af?.icon}</span>
                   </div>
@@ -2479,7 +2479,7 @@ function StepBrandReveal({ state, i18n = {} }) {
             const avgColor = avgSynergy >= 75 ? '#059669' : avgSynergy >= 50 ? '#f59e0b' : '#f43f5e';
             return (
               <div className="mt-3 flex items-center justify-between rounded-lg bg-violet-50 border border-violet-100 p-2.5">
-                <span className="text-[10px] font-bold text-white">Overall Voice Fit</span>
+                <span className="text-[10px] font-bold text-white">総合ボイスフィット</span>
                 <div className="flex items-center gap-2">
                   <span className="text-lg font-black" style={{ color: avgColor }}>{avgSynergy}</span>
                   <span className="text-[9px] text-white/70">/100</span>
@@ -2512,12 +2512,12 @@ function StepBrandReveal({ state, i18n = {} }) {
 
         // 6-axis radar: Visual, Viral, Trust, Conversion, SEO, Growth
         const dims = [
-          { label: "Visual", val: visualAvg, color: "#7c3aed" },
-          { label: "Viral", val: avg("viral"), color: "#f43f5e" },
-          { label: "Trust", val: avg("trust"), color: "#059669" },
-          { label: "Convert", val: avg("conversion"), color: "#f59e0b" },
+          { label: "ビジュアル", val: visualAvg, color: "#7c3aed" },
+          { label: "バイラル", val: avg("viral"), color: "#f43f5e" },
+          { label: "信頼", val: avg("trust"), color: "#059669" },
+          { label: "コンバージョン", val: avg("conversion"), color: "#f59e0b" },
           { label: "SEO", val: avg("seo"), color: "#0ea5e9" },
-          { label: "Growth", val: avg("growth"), color: "#6366f1" },
+          { label: "成長", val: avg("growth"), color: "#6366f1" },
         ];
         const overallScore = Math.round(dims.reduce((s, d) => s + d.val, 0) / dims.length);
         const sides = 6, cx = 150, cy = 110, r = 75;
@@ -2525,7 +2525,7 @@ function StepBrandReveal({ state, i18n = {} }) {
         return (
           <div id="rev-radar" className="mb-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
             <div className="flex items-center justify-between mb-3">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-white">Brand Strength</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-white">ブランド強度</div>
               <div className="flex items-center gap-2">
                 <span className={`text-lg font-black ${overallScore >= 75 ? 'text-emerald-500' : overallScore >= 55 ? 'text-amber-500' : 'text-rose-400'}`}>{overallScore}</span>
                 <span className="text-[9px] text-white/70">/100</span>
@@ -2576,16 +2576,16 @@ function StepBrandReveal({ state, i18n = {} }) {
       {/* ═══ 14. ONE-SENTENCE SYNTHESIS ═══ */}
       {arch && persona && (
         <div id="rev-synthesis" className="rounded-2xl border-2 border-violet-300 bg-gradient-to-br from-violet-900 to-indigo-900 p-6 shadow-lg">
-          <div className="text-violet-300/70 text-[10px] font-bold uppercase tracking-[0.3em] mb-3 text-center">Brand Synthesis</div>
+          <div className="text-violet-300/70 text-[10px] font-bold uppercase tracking-[0.3em] mb-3 text-center">ブランドシンセシス</div>
           <p className="text-center text-white text-sm leading-relaxed font-medium">
-            You are <strong>{arch.name}</strong> — a {voiceDesc[0]}, {voiceDesc[1]} voice that catches{" "}
+            あなたは <strong>{arch.name}</strong> — {voiceDesc[0]}で{voiceDesc[1]}な声が、{" "}
             <strong>{persona.label}</strong>
-            {moment && <> at their <em>{moment.label.toLowerCase()}</em> moment</>},{" "}
-            {uniqueAngles.length > 0 && <>uses {uniqueAngles.map(a => _AF[a]?.label?.toLowerCase()).join(" + ")} angles to</>}{" "}
+            {moment && <>の<em>「{moment.label}」</em>の瞬間を捉え</>}、{" "}
+            {uniqueAngles.length > 0 && <>{uniqueAngles.map(a => _AF[a]?.label).join(" + ")}のアングルで</>}{" "}
             {emotions.length > 0
-              ? <>deliver one promise: <strong>"{emotions[0]}"</strong></>
-              : <>deliver transformation</>
-            }.
+              ? <>一つの約束を届ける：<strong>「{emotions[0]}」</strong></>
+              : <>変容を届ける</>
+            }。
           </p>
         </div>
       )}
@@ -2606,10 +2606,10 @@ function Step10Blueprint_UNUSED({ state }) {
   const reachScore = Math.min(Math.round(70 + Math.min((state.channels || []).length * 1.5, 6) + (state.formatFocus ? 4 : 0) + (state.archetype ? 8 : 0)), 95);
 
   const scores = [
-    { label: "Marketability", value: marketability, desc: "Alignment with proven market demand" },
-    { label: "Youth Reach", value: youthReach, desc: "Gen Z and Gen Alpha compatibility" },
-    { label: "Life Impact", value: lifeImpact, desc: "Transformation depth for your reader" },
-    { label: "Platform Reach", value: reachScore, desc: "Multi-channel distribution coverage" },
+    { label: "市場性", value: marketability, desc: "Alignment with proven market demand" },
+    { label: "若年層へのリーチ", value: youthReach, desc: "Gen Z and Gen Alpha compatibility" },
+    { label: "人生へのインパクト", value: lifeImpact, desc: "Transformation depth for your reader" },
+    { label: "プラットフォームリーチ", value: reachScore, desc: "Multi-channel distribution coverage" },
   ];
 
   const brandOneSentence = [
@@ -2622,16 +2622,16 @@ function Step10Blueprint_UNUSED({ state }) {
 
   const assessmentText =
     marketability >= 85
-      ? "Exceptional brand positioning. Your archetype, audience, and topic choices align powerfully with high-revenue market segments. This brand has strong commercial potential with deep reader impact."
+      ? "卓越したブランドポジショニング。アーキタイプ、読者、トピックの選択が、高収益市場セグメントと強力に一致しています。このブランドは深い読者インパクトを持つ、強い商業的潜在力を備えています。"
       : marketability >= 75
-        ? "Strong brand foundation. Your selections create a compelling identity with solid market alignment. A few more refinements could push this into exceptional territory."
-        : "Good starting point. Your brand identity is taking shape — consider adding more topic selections and channel coverage to strengthen your market position.";
+        ? "強固なブランド基盤。あなたの選択が、堅固な市場一致を持つ説得力のあるアイデンティティを生み出しています。あと少しの磨き込みで、卓越した領域へ押し上げることができます。"
+        : "良い出発点。ブランドアイデンティティが形作られています——市場ポジションを強化するために、さらにトピックの選択やチャンネルカバレッジの追加を検討してください。";
 
   return (
     <div>
       <StepHero
-        eyebrow="Reveal"
-        title="Here is your brand"
+        eyebrow="お披露目"
+        title="あなたのブランドはこちらです"
         subtitle="Your choices — distilled first, then grouped so you can read the arc at a glance."
       />
 
@@ -2661,7 +2661,7 @@ function Step10Blueprint_UNUSED({ state }) {
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {persona ? (
                 <div className="rounded-2xl border border-violet-200/90 bg-white p-4 shadow-md ring-1 ring-violet-100/80">
-                  <div className="text-[10px] font-bold uppercase text-violet-600/90">Primary reader</div>
+                  <div className="text-[10px] font-bold uppercase text-violet-600/90">主要読者</div>
                   <div className="mt-1.5 text-base font-extrabold leading-snug text-white sm:text-lg">
                     {persona.emoji} {persona.label}
                   </div>
@@ -2696,7 +2696,7 @@ function Step10Blueprint_UNUSED({ state }) {
                   ))}
                 </div>
                 <div className="p-4">
-                  <div className="text-[10px] font-bold uppercase text-violet-600">Visual style</div>
+                  <div className="text-[10px] font-bold uppercase text-violet-600">ビジュアルスタイル</div>
                   <div className="mt-1 text-base font-bold text-white">{visual.label}</div>
                   <p className="mt-1 text-xs text-white">{visual.desc}</p>
                   <p className="mt-2 text-[11px] italic text-white">{visual.mood}</p>
@@ -2707,25 +2707,25 @@ function Step10Blueprint_UNUSED({ state }) {
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               {state.onboardingLane ? (
                 <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
-                  <div className="text-[8px] font-bold uppercase text-white">Lane</div>
+                  <div className="text-[8px] font-bold uppercase text-white">レーン</div>
                   <div className="mt-0.5 text-[11px] font-semibold text-white">{state.onboardingLane.replace(/_/g, " ")}</div>
                 </div>
               ) : null}
               {state.onboardingMarket ? (
                 <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
-                  <div className="text-[8px] font-bold uppercase text-white">Market</div>
+                  <div className="text-[8px] font-bold uppercase text-white">市場</div>
                   <div className="mt-0.5 text-[11px] font-semibold text-white">{state.onboardingMarket}</div>
                 </div>
               ) : null}
               {state.formatFocus ? (
                 <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
-                  <div className="text-[8px] font-bold uppercase text-white">Format</div>
-                  <div className="mt-0.5 text-[11px] font-semibold text-white">{state.formatFocus === "manga" ? "Manga / visual" : "Books"}</div>
+                  <div className="text-[8px] font-bold uppercase text-white">フォーマット</div>
+                  <div className="mt-0.5 text-[11px] font-semibold text-white">{state.formatFocus === "manga" ? "漫画／ビジュアル" : "本"}</div>
                 </div>
               ) : null}
               {(state.channels || []).length > 0 ? (
                 <div className="rounded-xl border border-violet-100/90 bg-white/80 p-2.5 text-center opacity-90">
-                  <div className="text-[8px] font-bold uppercase text-white">Channels</div>
+                  <div className="text-[8px] font-bold uppercase text-white">チャンネル</div>
                   <div className="mt-0.5 text-[11px] font-semibold text-white">{state.channels.length} active</div>
                 </div>
               ) : null}
@@ -2780,7 +2780,7 @@ function Step10Blueprint_UNUSED({ state }) {
           <div className="rounded-2xl border border-emerald-200 bg-gradient-to-r from-emerald-50/90 to-teal-50/50 p-4">
             <div className="flex items-center gap-2">
               <Rocket size={16} className="text-emerald-600" />
-              <span className="text-xs font-bold text-emerald-900">Read on your direction</span>
+              <span className="text-xs font-bold text-emerald-900">あなたの方向性について読む</span>
             </div>
             <p className="mt-2 text-xs leading-relaxed text-emerald-900/90">{assessmentText}</p>
           </div>
@@ -2789,7 +2789,7 @@ function Step10Blueprint_UNUSED({ state }) {
 
       {/* Demoted score strip — same numeric logic, after narrative sections */}
       <div className="mt-10 rounded-2xl border border-gray-100 bg-gray-50/60 px-3 py-3 opacity-90">
-        <div className="mb-2 text-center text-[9px] font-bold uppercase tracking-wider text-white">Signal scores</div>
+        <div className="mb-2 text-center text-[9px] font-bold uppercase tracking-wider text-white">シグナルスコア</div>
         <div className="grid grid-cols-4 gap-2">
           {scores.map((s) => (
             <div key={s.label} className="rounded-lg bg-white/90 px-1 py-2 text-center shadow-sm">
@@ -2840,19 +2840,19 @@ function Step11Launch({ state, update, i18n = {} }) {
     const visual = _V.find((v) => v.id === state.visualStyle);
 
     const choiceAudit = [
-      arch && { label: "Emotional World", value: arch.name, icon: arch.icon, gradient: arch.gradient, systemEffect: _SF.archetypes[state.archetype]?.systemEffect, emotionalBenefit: _SF.archetypes[state.archetype]?.emotionalBenefit },
-      persona && { label: "Primary Reader", value: `${persona.emoji} ${persona.label}`, icon: Users, gradient: "from-blue-500 to-cyan-500", systemEffect: _SF.personas[state.persona]?.systemEffect, emotionalBenefit: _SF.personas[state.persona]?.emotionalBenefit },
-      moment && { label: "Trigger Moment", value: `${moment.emoji} ${moment.label}`, icon: Target, gradient: "from-amber-500 to-orange-500", systemEffect: _SF.moments[state.moment]?.systemEffect, emotionalBenefit: _SF.moments[state.moment]?.emotionalBenefit },
-      Object.keys(state.voiceSettings || {}).length > 0 && { label: "Voice Tone", value: `${Object.keys(state.voiceSettings).length} dimensions tuned`, icon: SlidersHorizontal, gradient: "from-indigo-500 to-violet-500", systemEffect: "All 4 voice dimensions calibrate prose rhythm, vocabulary register, sentence structure, and emotional temperature across every chapter, audiobook, and social post", emotionalBenefit: "Your reader experiences a voice that feels personally written for them — the exact blend of challenge and comfort they need. Every sentence lands because the tone matches their emotional readiness." },
-      visual && { label: "Visual Style", value: visual.label, icon: Palette, gradient: "from-rose-500 to-pink-500", systemEffect: _SF.visualStyles[state.visualStyle]?.systemEffect, emotionalBenefit: _SF.visualStyles[state.visualStyle]?.emotionalBenefit },
-      (state.emotions || []).length > 0 && { label: "Emotional Outcomes", value: state.emotions.join(", "), icon: Heart, gradient: "from-rose-400 to-red-500", systemEffect: `${state.emotions.length} transformation promises woven into every title, CTA, and marketing message`, emotionalBenefit: "These feelings become the north star of every piece of content — your reader knows exactly what transformation awaits them, creating hope before they read a single word." },
-      state.tradition && { label: "Spiritual Foundation", value: state.tradition, icon: Sun, gradient: "from-amber-400 to-yellow-500", systemEffect: "Influences vocabulary, philosophical grounding, and tradition-specific references throughout all content", emotionalBenefit: "Readers with this tradition feel recognized and respected. The language carries the weight of authentic lineage rather than surface-level appropriation." },
-      (state.angles || []).length > 0 && { label: "Content Angles", value: state.angles.map(a => V4_ANGLES.find(v => v.id === a)?.label).filter(Boolean).join(", "), icon: Layers, gradient: "from-purple-500 to-indigo-500", systemEffect: `${state.angles.length} framing modes active — every title opens with one of these argumentative strategies`, emotionalBenefit: "Each angle gives your reader a different doorway into healing. Multiple angles means your brand reaches people wherever they are in their readiness for change." },
-      (state.topicTags || []).length > 0 && { label: "Search Territory", value: `${state.topicTags.length} topics claimed`, icon: Search, gradient: "from-emerald-500 to-teal-500", systemEffect: `${state.topicTags.length} search topics feed into title generation, keyword targeting, series planning, and ad campaigns`, emotionalBenefit: "Your content appears in the exact moment someone types their pain into a search bar. You're not marketing — you're answering a cry for help with exactly the right words." },
-      state.onboardingLane && { label: "Onboarding Lane", value: state.onboardingLane.replace(/_/g, " "), icon: Layers, gradient: "from-fuchsia-500 to-purple-500", systemEffect: "Proof strip and registry matching now constrain to your selected lane so stakeholders preview the right output family early.", emotionalBenefit: "You can immediately see if the lane you want to lead with has convincing proof, reducing launch-time surprises." },
-      state.onboardingMarket && { label: "Onboarding Market", value: state.onboardingMarket, icon: Globe, gradient: "from-sky-500 to-cyan-500", systemEffect: "Registry matches now use explicit market filtering during onboarding to avoid cross-market false confidence.", emotionalBenefit: "Your team reviews examples that actually match the market you plan to launch in." },
-      state.formatFocus && { label: "Format Focus", value: state.formatFocus === "manga" ? "Manga / Visual" : "Traditional Books", icon: BookOpen, gradient: "from-cyan-500 to-blue-500", systemEffect: _SF.formats[state.formatFocus]?.systemEffect, emotionalBenefit: _SF.formats[state.formatFocus]?.emotionalBenefit },
-      (state.channels || []).length > 0 && { label: "Publishing Channels", value: `${state.channels.length} channels active`, icon: Globe, gradient: "from-violet-500 to-purple-500", systemEffect: `Content adapts to ${state.channels.length} platforms — each generates format-specific, algorithm-optimized variations`, emotionalBenefit: "Your reader discovers you wherever they already spend time. Whether it's a 3AM TikTok scroll or a Sunday audiobook walk — your brand is there, ready, in the right format." },
+      arch && { label: "アーキタイプ", value: arch.name, icon: arch.icon, gradient: arch.gradient, systemEffect: _SF.archetypes[state.archetype]?.systemEffect, emotionalBenefit: _SF.archetypes[state.archetype]?.emotionalBenefit },
+      persona && { label: "読者", value: `${persona.emoji} ${persona.label}`, icon: Users, gradient: "from-blue-500 to-cyan-500", systemEffect: _SF.personas[state.persona]?.systemEffect, emotionalBenefit: _SF.personas[state.persona]?.emotionalBenefit },
+      moment && { label: "きっかけの瞬間", value: `${moment.emoji} ${moment.label}`, icon: Target, gradient: "from-amber-500 to-orange-500", systemEffect: _SF.moments[state.moment]?.systemEffect, emotionalBenefit: _SF.moments[state.moment]?.emotionalBenefit },
+      Object.keys(state.voiceSettings || {}).length > 0 && { label: "声のトーン", value: `${Object.keys(state.voiceSettings).length} dimensions tuned`, icon: SlidersHorizontal, gradient: "from-indigo-500 to-violet-500", systemEffect: "4つすべての声の次元が、すべての章・オーディオブック・ソーシャル投稿にわたって、散文のリズム、語彙レベル、文章構造、感情温度を調整します", emotionalBenefit: "読者は、自分のために書かれたと感じる声を体験します——彼らが必要とする挑戦と安らぎのちょうどいいブレンド。トーンが彼らの感情的な準備状態に合致しているから、すべての文が届きます。" },
+      visual && { label: "ビジュアルスタイル", value: visual.label, icon: Palette, gradient: "from-rose-500 to-pink-500", systemEffect: _SF.visualStyles[state.visualStyle]?.systemEffect, emotionalBenefit: _SF.visualStyles[state.visualStyle]?.emotionalBenefit },
+      (state.emotions || []).length > 0 && { label: "感情的な結果", value: state.emotions.join(", "), icon: Heart, gradient: "from-rose-400 to-red-500", systemEffect: `${state.emotions.length} transformation promises woven into every title, CTA, and marketing message`, emotionalBenefit: "これらの感情が、すべてのコンテンツの北極星になります——読者は一言も読む前から、どんな変容が待っているかを正確に知り、希望が生まれます。" },
+      state.tradition && { label: "スピリチュアルの基盤", value: state.tradition, icon: Sun, gradient: "from-amber-400 to-yellow-500", systemEffect: "すべてのコンテンツを通じて、語彙、哲学的な基盤、伝統固有の参照に影響を与えます", emotionalBenefit: "この伝統を持つ読者は、認められ尊重されていると感じます。言語は表面的な流用ではなく、本物の系譜の重みを帯びています。" },
+      (state.angles || []).length > 0 && { label: "コンテンツアングル", value: state.angles.map(a => V4_ANGLES.find(v => v.id === a)?.label).filter(Boolean).join(", "), icon: Layers, gradient: "from-purple-500 to-indigo-500", systemEffect: `${state.angles.length} framing modes active — every title opens with one of these argumentative strategies`, emotionalBenefit: "各アングルは読者に癒しへの異なる入口を提供します。複数のアングルがあることで、変化への準備状態がどこにある人にも、あなたのブランドが届きます。" },
+      (state.topicTags || []).length > 0 && { label: "検索テリトリー", value: `${state.topicTags.length} トピックを確保`, icon: Search, gradient: "from-emerald-500 to-teal-500", systemEffect: `${state.topicTags.length} 検索トピックがタイトル生成、キーワードターゲティング、シリーズ計画、広告キャンペーンに反映されます`, emotionalBenefit: "誰かが検索バーに痛みを入力するまさにその瞬間に、あなたのコンテンツが現れます。これはマーケティングではありません——助けを求める叫びに、ちょうど正しい言葉で答えているのです。" },
+      state.onboardingLane && { label: "オンボーディングレーン", value: state.onboardingLane.replace(/_/g, " "), icon: Layers, gradient: "from-fuchsia-500 to-purple-500", systemEffect: "証明ストリップとレジストリのマッチングが選択レーンに制約されるようになり、ステークホルダーが早期に正しいアウトプットファミリーをプレビューできます。", emotionalBenefit: "リードしたいレーンに説得力のある証拠があるかどうかをすぐに確認でき、ローンチ時の予期せぬ事態が減ります。" },
+      state.onboardingMarket && { label: "オンボーディング市場", value: state.onboardingMarket, icon: Globe, gradient: "from-sky-500 to-cyan-500", systemEffect: "レジストリのマッチングがオンボーディング中に明示的な市場フィルタリングを使用するようになり、市場をまたいだ誤った自信を回避します。", emotionalBenefit: "あなたのチームが、実際にローンチ予定の市場にマッチした事例をレビューできます。" },
+      state.formatFocus && { label: "フォーマットフォーカス", value: state.formatFocus === "manga" ? "マンガ / ビジュアル" : "従来型書籍", icon: BookOpen, gradient: "from-cyan-500 to-blue-500", systemEffect: _SF.formats[state.formatFocus]?.systemEffect, emotionalBenefit: _SF.formats[state.formatFocus]?.emotionalBenefit },
+      (state.channels || []).length > 0 && { label: "パブリッシングチャンネル", value: `${state.channels.length} channels active`, icon: Globe, gradient: "from-violet-500 to-purple-500", systemEffect: `Content adapts to ${state.channels.length} platforms — each generates format-specific, algorithm-optimized variations`, emotionalBenefit: "読者はすでに時間を過ごしている場所でどこでもあなたを発見します。午前3時のTikTokスクロールでも、日曜日のオーディオブックウォークでも——あなたのブランドは、正しいフォーマットで、そこにあります。" },
     ].filter(Boolean);
 
     const baseScore = 72;
@@ -2883,7 +2883,7 @@ function Step11Launch({ state, update, i18n = {} }) {
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-2xl font-black text-white">{overallScore}</span>
-                <span className="text-[8px] font-bold uppercase text-white">Overall</span>
+                <span className="text-[8px] font-bold uppercase text-white">総合</span>
               </div>
             </div>
 
@@ -2898,7 +2898,7 @@ function Step11Launch({ state, update, i18n = {} }) {
             <h1 className="text-4xl font-black tracking-tight mb-2 bg-gradient-to-r from-purple-600 via-pink-500 to-amber-500 bg-clip-text text-transparent">
               Congratulations
             </h1>
-            <p className="text-lg font-bold text-white mb-1">Your brand universe is born.</p>
+            <p className="text-lg font-bold text-white mb-1">あなたのブランドの世界が誕生しました。</p>
             <p className="text-sm text-white max-w-md mx-auto leading-relaxed">
               You've made {choiceAudit.length} defining choices that shape everything your brand creates — every book, audiobook, video, cover, and piece of social content. Here's what you've built and how it helps the people who need it most.
             </p>
@@ -2908,10 +2908,10 @@ function Step11Launch({ state, update, i18n = {} }) {
         {/* Score Cards */}
         <div className="grid grid-cols-4 gap-2 mb-8">
           {[
-            { label: "Marketability", value: marketability, color: "#10b981" },
-            { label: "Youth Reach", value: youthReach, color: "#8b5cf6" },
-            { label: "Life Impact", value: lifeImpact, color: "#ec4899" },
-            { label: "Platform Reach", value: reachScore, color: "#3b82f6" },
+            { label: "市場性", value: marketability, color: "#10b981" },
+            { label: "若年層へのリーチ", value: youthReach, color: "#8b5cf6" },
+            { label: "人生へのインパクト", value: lifeImpact, color: "#ec4899" },
+            { label: "プラットフォームリーチ", value: reachScore, color: "#3b82f6" },
           ].map((s) => (
             <div key={s.label} className="text-center bg-white rounded-xl p-3 border border-gray-200 shadow-sm">
               <div className="relative w-12 h-12 mx-auto mb-1.5">
@@ -2928,8 +2928,8 @@ function Step11Launch({ state, update, i18n = {} }) {
 
         {/* Choice Audit — every choice with what it does */}
         <div className="mb-8">
-          <h2 className="text-lg font-extrabold text-white mb-1">Your Brand Choices</h2>
-          <p className="text-xs text-white mb-4">Every choice you made, what it activates in the system, and how it helps your readers mentally and emotionally.</p>
+          <h2 className="text-lg font-extrabold text-white mb-1">あなたのブランドの選択</h2>
+          <p className="text-xs text-white mb-4">あなたのすべての選択、システムで何を有効化するか、そして読者の精神面と感情面にどう役立つか。</p>
 
           <div className="space-y-3">
             {choiceAudit.map((choice, idx) => {
@@ -2944,7 +2944,7 @@ function Step11Launch({ state, update, i18n = {} }) {
                       <div className="text-[9px] font-bold uppercase text-white">{choice.label}</div>
                       <div className="text-sm font-bold text-white truncate">{choice.value}</div>
                     </div>
-                    <div className="text-[9px] font-bold text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full flex-shrink-0">Active</div>
+                    <div className="text-[9px] font-bold text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full flex-shrink-0">有効</div>
                   </div>
                   <div className="px-4 py-3 space-y-2.5">
                     <div className="flex items-start gap-2">
@@ -2977,7 +2977,7 @@ function Step11Launch({ state, update, i18n = {} }) {
           <div className="rounded-2xl bg-gradient-to-br from-purple-50 via-pink-50 to-amber-50 border border-purple-100 p-6 mb-8">
             <div className="flex items-center gap-2 mb-3">
               <Crown size={16} className="text-purple-600" />
-              <span className="text-sm font-bold text-purple-800">Your Brand in One Sentence</span>
+              <span className="text-sm font-bold text-purple-800">一文であなたのブランドを表すと</span>
             </div>
             <p className="text-sm text-white leading-relaxed font-medium">
               A <span className="text-purple-700 font-bold">{arch.name}</span> brand that speaks to the <span className="text-blue-700 font-bold">{persona.label}</span>
@@ -2994,7 +2994,7 @@ function Step11Launch({ state, update, i18n = {} }) {
           <button onClick={() => setShowYaml(!showYaml)} className="w-full px-4 py-3 flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors">
             <div className="flex items-center gap-2">
               <Download size={14} className="text-white" />
-              <span className="text-xs font-bold text-white">Brand Configuration (YAML)</span>
+              <span className="text-xs font-bold text-white">ブランド設定（YAML）</span>
             </div>
             <ChevronRight size={14} className={`text-white transition-transform ${showYaml ? "rotate-90" : ""}`} />
           </button>
@@ -3003,11 +3003,11 @@ function Step11Launch({ state, update, i18n = {} }) {
               <div className="flex gap-2 mb-3">
                 <button onClick={() => { navigator.clipboard.writeText(yamlOutput); setYamlCopied(true); setTimeout(() => setYamlCopied(false), 2000); }}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold transition-colors">
-                  <Check size={11} />{yamlCopied ? "Copied!" : "Copy"}
+                  <Check size={11} />{yamlCopied ? "コピーしました！" : "コピー"}
                 </button>
                 <button onClick={() => { const blob = new Blob([yamlOutput], {type: "text/yaml"}); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "brand-config.yaml"; a.click(); }}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold transition-colors">
-                  <Download size={11} />Download .yaml
+                  <Download size={11} />ダウンロード .yaml
                 </button>
               </div>
               <pre className="text-[11px] text-green-400 font-mono whitespace-pre-wrap">{yamlOutput}</pre>
@@ -3018,10 +3018,10 @@ function Step11Launch({ state, update, i18n = {} }) {
         {/* Final Message */}
         <div className="text-center py-4">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold mb-3">
-            <Check size={12} /> Brand configuration saved
+            <Check size={12} /> ブランド設定を保存しました
           </div>
           <p className="text-sm text-white max-w-md mx-auto">
-            Your brand universe is ready. The Pearl Prime system will use every choice you've made to generate your catalog — books, audiobooks, manga, videos, and social content that changes lives.
+            あなたのブランドの世界が完成しました。Pearl Primeシステムがすべての選択を使って、人生を変えるカタログを生成します。
           </p>
         </div>
       </div>
@@ -3031,9 +3031,9 @@ function Step11Launch({ state, update, i18n = {} }) {
   return (
     <div>
       <div className="mb-8 rounded-2xl border border-violet-200/80 bg-gradient-to-br from-violet-50/90 via-white to-fuchsia-50/30 px-5 py-6 text-center shadow-sm">
-        <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl" style={{ color: '#d97706', fontFamily: 'Cormorant Garamond, serif' }}>Enter Contact Details And Click 'Activate'</h2>
+        <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl" style={{ color: '#d97706', fontFamily: 'Cormorant Garamond, serif' }}>連絡先を入力して「アクティベート」をクリック</h2>
         <p className="mx-auto mt-3 max-w-md text-sm text-white/70">
-          You will immediately gain access to your brand catalog for posting
+          すぐにブランドカタログへのアクセスが付与され、投稿を始められます
         </p>
       </div>
 
@@ -3046,7 +3046,7 @@ function Step11Launch({ state, update, i18n = {} }) {
           <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> Brand direction set
         </span>
         <span className="inline-flex items-center gap-1.5 font-medium">
-          <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> Reader and market chosen
+          <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> 読者とマーケットを選択済み
         </span>
         <span className="inline-flex items-center gap-1.5 font-medium">
           <Check size={14} className="shrink-0 text-emerald-600" strokeWidth={2.5} /> Launch details ready
@@ -3058,20 +3058,20 @@ function Step11Launch({ state, update, i18n = {} }) {
           <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-white">1 · Identity &amp; contact</h3>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs font-semibold text-white">First name *</label>
+              <label className="mb-1 block text-xs font-semibold text-white">名 *</label>
               <input
                 type="text"
-                placeholder="First name"
+                placeholder="名"
                 className="w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-gray-500"
                 value={c.firstName || ""}
                 onChange={(e) => handleField("firstName", e.target.value)}
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-semibold text-white">Last name *</label>
+              <label className="mb-1 block text-xs font-semibold text-white">姓 *</label>
               <input
                 type="text"
-                placeholder="Last name"
+                placeholder="姓"
                 className="w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-gray-500"
                 value={c.lastName || ""}
                 onChange={(e) => handleField("lastName", e.target.value)}
@@ -3080,7 +3080,7 @@ function Step11Launch({ state, update, i18n = {} }) {
           </div>
           <div className="mt-3 grid grid-cols-2 gap-3">
             <div>
-              <label className="mb-1 block text-xs font-semibold text-white">Email *</label>
+              <label className="mb-1 block text-xs font-semibold text-white">メールアドレス *</label>
               <input
                 type="email"
                 placeholder="you@example.com"
@@ -3090,7 +3090,7 @@ function Step11Launch({ state, update, i18n = {} }) {
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-semibold text-white">Phone</label>
+              <label className="mb-1 block text-xs font-semibold text-white">電話番号</label>
               <div className="flex rounded-xl border border-gray-200 overflow-hidden">
                 <select
                   className="bg-transparent border-r border-gray-200 px-2 py-3 text-sm outline-none appearance-none cursor-pointer"
@@ -3127,8 +3127,8 @@ function Step11Launch({ state, update, i18n = {} }) {
         </section>
 
         <section className="rounded-2xl border border-gray-200/90 bg-white/90 p-5 shadow-sm backdrop-blur-sm">
-          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-white">2 · Messaging channels</h3>
-          <p className="mb-3 text-[11px] text-white">Optional — how we reach you beyond email.</p>
+          <h3 className="mb-4 text-[10px] font-bold uppercase tracking-[0.15em] text-white">2 · メッセージングチャンネル</h3>
+          <p className="mb-3 text-[11px] text-white">任意 — メール以外の連絡方法。</p>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="mb-1 block text-[10px] font-semibold text-white">LINE ID</label>
@@ -3170,13 +3170,13 @@ function Step11Launch({ state, update, i18n = {} }) {
             </div>
           </div>
           <div className="mt-3">
-            <label className="mb-1 block text-[10px] font-semibold text-white">Preferred channel</label>
+            <label className="mb-1 block text-[10px] font-semibold text-white">希望の連絡方法</label>
             <select
               className="w-full rounded-lg border border-gray-200 bg-white p-2.5 text-sm outline-none focus:border-gray-500"
               value={c.preferred || "email"}
               onChange={(e) => handleField("preferred", e.target.value)}
             >
-              <option value="email">Email only</option>
+              <option value="email">メールのみ</option>
               <option value="line">LINE</option>
               <option value="whatsapp">WhatsApp</option>
               <option value="wechat">WeChat</option>
@@ -3188,9 +3188,9 @@ function Step11Launch({ state, update, i18n = {} }) {
         <section className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 p-4">
           <Shield size={18} className="mt-0.5 flex-shrink-0 text-slate-500" />
           <div>
-            <div className="text-xs font-bold text-slate-800">Secure process</div>
+            <div className="text-xs font-bold text-slate-800">安全なプロセス</div>
             <p className="mt-1 text-[11px] leading-relaxed text-slate-600">
-              Tax ID (SSN/EIN) is collected through a separate secure step after approval. We do not collect sensitive financial data in this form.
+              税務番号（SSN/EIN）は承認後の別途安全なステップで収集します。このフォームでは金融の機密データを収集しません。
             </p>
           </div>
         </section>
@@ -3202,9 +3202,9 @@ function Step11Launch({ state, update, i18n = {} }) {
         disabled={!isReady}
         className={`w-full rounded-2xl py-6 text-3xl font-black uppercase tracking-widest transition-all ${isReady ? "cursor-pointer bg-gradient-to-r from-violet-700 to-indigo-800 text-white shadow-lg shadow-violet-300/40 hover:from-violet-800 hover:to-indigo-900" : "cursor-not-allowed bg-gray-200 text-white"}`}
       >
-        {isReady ? "ACTIVATE" : "Add name & email to activate"}
+        {isReady ? "有効化" : "名前とメールアドレスを入力して有効化"}
       </button>
-      {!isReady ? <p className="mt-2 text-center text-[11px] text-white">First name, last name, and a valid email unlock activation.</p> : null}
+      {!isReady ? <p className="mt-2 text-center text-[11px] text-white">名・姓・有効なメールアドレスで有効化できます。</p> : null}
     </div>
   );
 }
@@ -3258,21 +3258,21 @@ function CompareBlock({ labelA, labelB, contentA, contentB, colorA, colorB }) {
 function IntroWelcome({ onNext }) {
   const { t } = useTranslation();
   const pillars = [
-    { icon: PenTool, label: t("ui", "Voice"), tint: "from-violet-500 to-indigo-600" },
-    { icon: Image, label: t("ui", "Visual"), tint: "from-fuchsia-500 to-pink-600" },
-    { icon: Users, label: t("ui", "Reader"), tint: "from-sky-500 to-blue-600" },
-    { icon: Layers, label: t("ui", "Formats"), tint: "from-emerald-500 to-teal-600" },
+    { icon: PenTool, label: t("ui", "声"), tint: "from-violet-500 to-indigo-600" },
+    { icon: Image, label: t("ui", "ビジュアル"), tint: "from-fuchsia-500 to-pink-600" },
+    { icon: Users, label: t("ui", "読者"), tint: "from-sky-500 to-blue-600" },
+    { icon: Layers, label: t("ui", "フォーマット"), tint: "from-emerald-500 to-teal-600" },
   ];
   return (
     <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-16">
         <div className="brand-studio-panel p-10 text-center sm:p-12">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-violet-200/80 bg-violet-50/80 px-4 py-1.5 text-xs font-semibold text-violet-800 backdrop-blur-sm">
-            <Sparkles size={12} /> {t("ui", "Pearl Prime Brand Studio")}
+            <Sparkles size={12} /> {t("ui", "Pearl Prime ブランドスタジオ")}
           </div>
-          <h1 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">{t("ui", "Launch and shape your publishing brand")}</h1>
+          <h1 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">{t("ui", "出版ブランドを立ち上げ、形作る")}</h1>
           <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white">
-            {t("ui", "One guided session — voice, look, and proof aligned.")}
+            {t("ui", "一度のガイドセッション——声、外観、証拠が一致します。")}
           </p>
           <div className="mx-auto mt-10 grid max-w-md grid-cols-4 gap-3">
             {pillars.map(({ icon: I, label, tint }) => (
@@ -3290,7 +3290,7 @@ function IntroWelcome({ onNext }) {
               onClick={onNext}
               className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-slate-400/30 transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
-              {t("ui", "Start building")} <ChevronRight size={18} />
+              {t("ui", "構築を開始")} <ChevronRight size={18} />
             </button>
           </div>
           <p className="mt-8 text-center text-xs">
@@ -3298,7 +3298,7 @@ function IntroWelcome({ onNext }) {
               href="https://729184d3.phoenix-command.pages.dev/"
               className="font-semibold text-orange-400 underline decoration-orange-300 underline-offset-2 hover:text-orange-300"
             >
-              {t("ui", "Back To Start")}
+              {t("ui", "最初に戻る")}
             </a>
           </p>
         </div>
@@ -3310,24 +3310,24 @@ function IntroWelcome({ onNext }) {
 function IntroJourney({ onNext, onBack }) {
   const { t } = useTranslation();
   const phases = [
-    { step: "1", title: t("intro", "Foundation"), sub: t("intro", "Archetype & reader"), color: "from-indigo-500 to-violet-600" },
-    { step: "2", title: t("intro", "Voice"), sub: t("intro", "Tone & impact"), color: "from-violet-500 to-fuchsia-600" },
-    { step: "3", title: t("intro", "Look & topics"), sub: t("intro", "Visuals + territory"), color: "from-rose-500 to-orange-500" },
-    { step: "4", title: t("intro", "Formats"), sub: t("intro", "Channels & pipeline"), color: "from-sky-500 to-cyan-600" },
-    { step: "5", title: t("intro", "Reveal"), sub: t("intro", "Blueprint & launch"), color: "from-slate-600 to-gray-900" },
+    { step: "1", title: t("intro", "基盤"), sub: t("intro", "アーキタイプと読者"), color: "from-indigo-500 to-violet-600" },
+    { step: "2", title: t("intro", "声"), sub: t("intro", "トーンとインパクト"), color: "from-violet-500 to-fuchsia-600" },
+    { step: "3", title: t("intro", "外観とトピック"), sub: t("intro", "ビジュアル＋テリトリー"), color: "from-rose-500 to-orange-500" },
+    { step: "4", title: t("intro", "フォーマット"), sub: t("intro", "チャンネルとパイプライン"), color: "from-sky-500 to-cyan-600" },
+    { step: "5", title: t("intro", "お披露目"), sub: t("intro", "ブループリントとローンチ"), color: "from-slate-600 to-gray-900" },
   ];
   return (
     <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
         <button type="button" onClick={onBack} className="mb-6 flex items-center gap-1 text-xs text-white transition-colors hover:text-white">
-          <ChevronLeft size={14} /> {t("ui", "Back")}
+          <ChevronLeft size={14} /> {t("ui", "戻る")}
         </button>
         <div className="brand-studio-panel p-8 sm:p-10">
           <div className="text-center">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">{t("intro", "How this works")}</p>
-            <h1 className="mt-2 text-3xl font-black tracking-tight">{t("intro", "Five beats, eleven choices")}</h1>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">{t("intro", "使い方")}</p>
+            <h1 className="mt-2 text-3xl font-black tracking-tight">{t("intro", "5つのビート、11の選択")}</h1>
             <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white">
-              {t("intro", "Foundation → formats → blueprint → launch.")}
+              {t("intro", "基盤 → フォーマット → ブループリント → ローンチ")}
             </p>
           </div>
           <div className="relative mt-10">
@@ -3353,7 +3353,7 @@ function IntroJourney({ onNext, onBack }) {
               onClick={onNext}
               className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
-              {t("ui", "Start building your brand")} <ArrowRight size={18} />
+              {t("ui", "ブランド構築を開始")} <ArrowRight size={18} />
             </button>
           </div>
         </div>
@@ -3370,16 +3370,16 @@ function ShowcaseProse({ onNext, onBack }) {
           <ChevronLeft size={14} /> Back
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-semibold mb-4"><PenTool size={12} /> Step 1 Preview — Writing Voice</div>
-        <h1 className="text-3xl font-black tracking-tight mb-2">Same topic. Completely different voice.</h1>
-        <p className="text-white mb-8">Two brands, one topic — feel the shift in prose and energy.</p>
-        <CompareBlock labelA="Stillness Lab" labelB="Clear Mind Lab" colorA="text-indigo-600" colorB="text-amber-600"
-          contentA={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #818cf8, #e0e7ff)" }} /><div><div className="text-[10px] text-white font-semibold uppercase">Stillness Lab</div><div className="text-sm font-bold text-white">The Body Keeps the Score at 2AM</div></div></div><p className="text-sm text-white leading-relaxed italic border-l-2 border-indigo-300 pl-3">"Your body remembers what your mind tries to forget. Right now, your shoulders are holding yesterday's argument."</p><div className="mt-3 bg-indigo-50 rounded-lg p-3"><div className="text-[10px] font-bold text-indigo-600 uppercase mb-1">Exercise</div><p className="text-xs text-indigo-800">"Inhale for 4 counts. Hold for 7. Exhale slowly for 8."</p></div></div>}
-          contentB={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #d97706, #f59e0b, #fef3c7)" }} /><div><div className="text-[10px] text-white font-semibold uppercase">Clear Mind Lab</div><div className="text-sm font-bold text-white">Your Phone Is Stealing Your Sleep</div></div></div><p className="text-sm text-white leading-relaxed italic border-l-2 border-amber-400 pl-3">"You're staring at the ceiling because your brain is running yesterday's argument on a loop."</p><div className="mt-3 bg-amber-50 rounded-lg p-3"><div className="text-[10px] font-bold text-amber-600 uppercase mb-1">Exercise</div><p className="text-xs text-amber-800">"Phone in another room. Lie flat. Breathe out longer than in. 90 seconds. Go."</p></div></div>}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-semibold mb-4"><PenTool size={12} /> ステップ1プレビュー——ライティングボイス</div>
+        <h1 className="text-3xl font-black tracking-tight mb-2">同じトピック。まったく異なる声。</h1>
+        <p className="text-white mb-8">二つのブランド、一つのトピック——散文とエネルギーの変化を体感してください。</p>
+        <CompareBlock labelA="静けさラボ" labelB="クリアマインド・ラボ" colorA="text-indigo-600" colorB="text-amber-600"
+          contentA={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #818cf8, #e0e7ff)" }} /><div><div className="text-[10px] text-white font-semibold uppercase">静けさラボ</div><div className="text-sm font-bold text-white">身体は深夜2時でも記憶している</div></div></div><p className="text-sm text-white leading-relaxed italic border-l-2 border-indigo-300 pl-3">"Your body remembers what your mind tries to forget. Right now, your shoulders are holding yesterday's argument."</p><div className="mt-3 bg-indigo-50 rounded-lg p-3"><div className="text-[10px] font-bold text-indigo-600 uppercase mb-1">エクササイズ</div><p className="text-xs text-indigo-800">"Inhale for 4 counts. Hold for 7. Exhale slowly for 8."</p></div></div>}
+          contentB={<div><div className="flex gap-2 mb-3"><div className="w-14 h-20 rounded-lg shadow-md flex-shrink-0" style={{ background: "linear-gradient(135deg, #d97706, #f59e0b, #fef3c7)" }} /><div><div className="text-[10px] text-white font-semibold uppercase">クリアマインド・ラボ</div><div className="text-sm font-bold text-white">スマートフォンがあなたの睡眠を奪っている</div></div></div><p className="text-sm text-white leading-relaxed italic border-l-2 border-amber-400 pl-3">"天井を見つめているのは、脳が昨日の言い争いをループ再生しているからです。"</p><div className="mt-3 bg-amber-50 rounded-lg p-3"><div className="text-[10px] font-bold text-amber-600 uppercase mb-1">エクササイズ</div><p className="text-xs text-amber-800">"スマートフォンを別の部屋へ。仰向けに寝る。吸うより長く吐く。90秒。さあ。"</p></div></div>}
         />
         <div className="mt-8 text-center">
           <button type="button" onClick={onNext} className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-gray-800">
-            See cover differences <ChevronRight size={18} />
+            表紙の違いを見る <ChevronRight size={18} />
           </button>
         </div>
         </div>
@@ -3397,8 +3397,8 @@ function ShowcaseCovers({ onNext, onBack }) {
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-semibold mb-4"><Image size={12} /> Visual Style Preview</div>
-        <h1 className="text-3xl font-black tracking-tight mb-2">Your visual style shapes everything.</h1>
-        <p className="text-white mb-8">One choice ripples across covers and thumbnails.</p>
+        <h1 className="text-3xl font-black tracking-tight mb-2">あなたのビジュアルスタイルがすべてを形作る。</h1>
+        <p className="text-white mb-8">一つの選択が表紙とサムネイルに波及します。</p>
         <div className="grid grid-cols-3 gap-4 mb-8">
           {ARCHETYPES.slice(0, 3).map((arch) => (
             <div key={arch.id} className="text-center">
@@ -3428,14 +3428,14 @@ function ShowcaseVideo({ onNext, onBack }) {
           <ChevronLeft size={14} /> Back
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-semibold mb-4"><Film size={12} /> Video & Social Preview</div>
-        <h1 className="text-3xl font-black tracking-tight mb-2">Daily content. Your signature look.</h1>
-        <p className="text-white mb-8">Short-form video inherits your palette and mood.</p>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-xs font-semibold mb-4"><Film size={12} /> 動画とソーシャルのプレビュー</div>
+        <h1 className="text-3xl font-black tracking-tight mb-2">毎日のコンテンツ。あなたのシグネチャールック。</h1>
+        <p className="text-white mb-8">ショートフォーム動画があなたのパレットとムードを受け継ぎます。</p>
         <div className="grid grid-cols-2 gap-4 mb-8">
           {ARCHETYPES.slice(0, 4).map((arch) => (
             <div key={arch.id} className="rounded-xl overflow-hidden border border-gray-200">
               <div className="h-32 flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${arch.coverColors[0]}88, ${arch.coverColors[1]}66)` }}><div className="text-center"><Play size={24} className="text-white/80 mx-auto mb-1" /><div className="text-[10px] text-white/80 font-bold">{arch.name}</div></div></div>
-              <div className="p-3 bg-white"><div className="text-xs font-bold text-white">{arch.videoStyle}</div><div className="text-[10px] text-white mt-0.5">Daily across YouTube, TikTok, Instagram, Facebook, X</div></div>
+              <div className="p-3 bg-white"><div className="text-xs font-bold text-white">{arch.videoStyle}</div><div className="text-[10px] text-white mt-0.5">YouTube、TikTok、Instagram、Facebook、X で毎日</div></div>
             </div>
           ))}
         </div>
@@ -3459,8 +3459,8 @@ function ShowcaseFormats({ onNext, onBack }) {
         </button>
         <div className="brand-studio-panel p-6 sm:p-8">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold mb-4"><Layers size={12} /> Format Diversity</div>
-        <h1 className="text-3xl font-black tracking-tight mb-2">One brand. Infinite formats.</h1>
-        <p className="text-white mb-8">Same DNA — different containers.</p>
+        <h1 className="text-3xl font-black tracking-tight mb-2">一つのブランド。無限のフォーマット。</h1>
+        <p className="text-white mb-8">同じDNA——異なるコンテナ。</p>
         <div className="grid grid-cols-3 gap-3 mb-8">
           {V4_FORMATS_STRUCTURAL.map((f) => (
             <div key={f.id} className="p-4 rounded-xl border border-gray-200 bg-white">
@@ -3469,10 +3469,10 @@ function ShowcaseFormats({ onNext, onBack }) {
             </div>
           ))}
         </div>
-        <div className="rounded-xl bg-gray-50 border border-gray-200 p-5 mb-8"><p className="text-xs text-white leading-relaxed">Manga, audio, courses, journals, video — adapted automatically from the same core.</p></div>
+        <div className="rounded-xl bg-gray-50 border border-gray-200 p-5 mb-8"><p className="text-xs text-white leading-relaxed">マンガ、オーディオ、コース、ジャーナル、動画——同じコアから自動的に適応されます。</p></div>
         <div className="mt-8 text-center">
           <button type="button" onClick={onNext} className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-gray-800">
-            Start building your brand <ArrowRight size={18} />
+            ブランド構築を開始 <ArrowRight size={18} />
           </button>
         </div>
         </div>
@@ -3485,7 +3485,7 @@ function ShowcaseFormats({ onNext, onBack }) {
 // MAIN WIZARD
 // ═══════════════════════════════════════════════════════════
 
-const STEP_LABELS = ["Emotional World", "Primary Reader", "Trigger Moment", "Voice Tone", "Visual Style", "Emotional Outcomes", "Topics", "Your Brand", "Launch"];
+const STEP_LABELS = ["アーキタイプ", "読者", "きっかけの瞬間", "声のトーン", "ビジュアルスタイル", "感情的な結果", "トピック", "あなたのブランド", "ローンチ"];
 
 export default function BrandWizard() {
   const { t, td, to, tv, locale, isEn } = useTranslation();
@@ -3580,7 +3580,7 @@ export default function BrandWizard() {
           onClick={goToHowItWorks}
           className="mb-6 flex items-center gap-1 text-xs text-white transition-colors hover:text-gray-200"
         >
-          <ChevronLeft size={14} /> {t("ui", "Back")}
+          <ChevronLeft size={14} /> {t("ui", "戻る")}
         </button>
         <ProgressBar step={step} total={9} labels={tStepLabels} t={t} />
         <div className="brand-studio-panel p-6 sm:p-8 lg:p-10">
@@ -3589,7 +3589,7 @@ export default function BrandWizard() {
               {steps[step]}
               <div className="mt-8 flex items-center justify-between border-t border-gray-100/80 pt-6">
                 <button type="button" onClick={prevStep} className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:text-white">
-                  <ChevronLeft size={16} /> {t("ui", "Back")}
+                  <ChevronLeft size={16} /> {t("ui", "戻る")}
                 </button>
                 {step < 8 ? (
                   <button
@@ -3598,14 +3598,14 @@ export default function BrandWizard() {
                     disabled={!canNext}
                     className={`flex items-center gap-1.5 rounded-xl px-6 py-2.5 text-sm font-bold transition-all ${canNext ? "bg-gray-900 text-white shadow-md shadow-slate-300/40 hover:bg-gray-800" : "cursor-not-allowed bg-gray-200 text-white"}`}
                   >
-                    {t("ui", "Continue")} <ChevronRight size={16} />
+                    {t("ui", "次へ")} <ChevronRight size={16} />
                   </button>
                 ) : null}
               </div>
             </div>
             <div className="hidden w-72 flex-shrink-0 lg:block">
               <div className="sticky top-8">
-                <div className="mb-3 text-[10px] font-bold uppercase tracking-wider text-violet-600/90">{t("ui", "Studio insight")}</div>
+                <div className="mb-3 text-[10px] font-bold uppercase tracking-wider text-violet-600/90">{t("ui", "スタジオの洞察")}</div>
                 <div className="rounded-2xl border border-gray-100/90 bg-white/60 p-1 shadow-inner backdrop-blur-sm">
                   <PersonaImpactPanel state={state} step={step} i18n={i18nData} />
                 </div>
