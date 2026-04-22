@@ -1,24 +1,19 @@
 #!/usr/bin/env python3
 """
-Manga Asset Estimator
-======================
-Given brand / series / chapter counts, estimates:
-  - Panel count (min/opt/max) per chapter
-  - Background assets needed per chapter and per series
-  - Character view sheets needed
-  - Weekly/monthly art production hours
-  - Approximate cost (GPU compute + human review)
+Manga asset estimator — planning rollups from brand_series_plans + brand_identity_system.
 
-Sources:
-  config/manga/character_brand_registry.yaml   (backgrounds_per_chapter, character_views)
-  config/manga/manga_brand_series_plan.yaml    (chapters_per_series_per_month, active_series)
-  scripts/duration/plan_manga_pages.py         (GENRE_TABLE panel counts)
+Reads:
+  config/catalog_planning/brand_series_plans.yaml
+  config/catalog_planning/brand_identity_system.yaml
+
+Estimates per brand: panels/chapter (min/opt/max), backgrounds, character view count,
+GPU USD, human labor USD, scaled by --weeks (default 4 = one planning month block).
 
 Usage:
-    python3 scripts/manga/manga_asset_estimator.py --brand stillness_press
-    python3 scripts/manga/manga_asset_estimator.py --all
-    python3 scripts/manga/manga_asset_estimator.py --brand cognitive_clarity --weeks 12
-    python3 scripts/manga/manga_asset_estimator.py --all --output artifacts/manga/asset_estimate.json
+  python3 scripts/manga/manga_asset_estimator.py --all --weeks 4
+  python3 scripts/manga/manga_asset_estimator.py --brand stillness_press --weeks 8
+  python3 scripts/manga/manga_asset_estimator.py --all --dry-run
+  python3 scripts/manga/manga_asset_estimator.py --all --output artifacts/manga/asset_estimate.json
 """
 
 from __future__ import annotations
@@ -27,309 +22,272 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import Any
 
-_WORKTREE = Path(__file__).resolve().parents[2]
-_MAIN_REPO = Path("/Users/ahjan/phoenix_omega")
-_REPO_ROOT = _MAIN_REPO if _MAIN_REPO.exists() else _WORKTREE
-
-sys.path.insert(0, str(_REPO_ROOT))
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 try:
     import yaml
-    _HAS_YAML = True
-except ImportError:
-    _HAS_YAML = False
-
-# ---------------------------------------------------------------------------
-# Panel count table (mirrors scripts/duration/plan_manga_pages.py GENRE_TABLE)
-# ---------------------------------------------------------------------------
-GENRE_PANELS: dict[str, tuple[int, int, int]] = {
-    # (min_panels, opt_panels, max_panels) per chapter
-    "iyashikei":          (20, 28, 40),
-    "healing":            (20, 28, 40),
-    "seinen":             (30, 40, 55),
-    "shojo":              (18, 26, 38),
-    "cultivation":        (30, 42, 60),
-    "xianxia":            (30, 42, 60),
-    "manhwa":             (35, 50, 70),
-    "webtoon":            (35, 50, 70),
-    "shonen":             (25, 36, 50),
-    "isekai":             (28, 40, 58),
-    "philosophical_dark": (22, 32, 48),
-    "default":            (20, 30, 45),
-}
-
-# Background reuse rate — proportion of panels that need a NEW background
-# (vs reusing an existing asset from the same chapter)
-BG_REUSE_RATE: dict[str, float] = {
-    "iyashikei": 0.35,     # rich backgrounds but many reused
-    "seinen": 0.45,
-    "shojo": 0.30,
-    "cultivation": 0.40,
-    "manhwa": 0.50,
-    "shonen": 0.45,
-    "isekai": 0.55,        # new world = more new backgrounds
-    "philosophical_dark": 0.38,
-    "default": 0.40,
-}
-
-# ---------------------------------------------------------------------------
-# Cost model
-# ---------------------------------------------------------------------------
-# GPU compute cost per generated asset (USD, Pearl Star / RunComfy estimates)
-COST_PER_PANEL_GPU = 0.04          # ComfyUI FLUX panel rough render
-COST_PER_BACKGROUND_GPU = 0.12     # Higher-quality background render
-COST_PER_CHARACTER_VIEW_GPU = 0.08 # IP-Adapter character view
-
-# Human review time (minutes per asset type)
-REVIEW_MINS_PER_PANEL = 0.5        # quick QA pass
-REVIEW_MINS_PER_BG = 3.0           # background review + potential touch-up
-REVIEW_MINS_PER_CHARACTER_VIEW = 5.0
-REVIEW_MINS_PER_CHAPTER_PASS = 15.0  # full chapter narrative review
-
-HUMAN_HOURLY_RATE_USD = 25.0       # for cost roll-up
-
-# ---------------------------------------------------------------------------
-# Loaders
-# ---------------------------------------------------------------------------
-
-def _load_yaml(path: Path) -> dict:
-    if not _HAS_YAML:
-        raise ImportError("PyYAML required: pip install pyyaml")
-    with open(path, "r", encoding="utf-8") as fh:
-        return yaml.safe_load(fh) or {}
+except ImportError as e:  # pragma: no cover
+    raise SystemExit("PyYAML is required: pip install pyyaml") from e
 
 
-def _load_character_registry() -> dict:
-    for base in [_WORKTREE, _REPO_ROOT]:
-        p = base / "config/manga/character_brand_registry.yaml"
-        if p.exists():
-            return _load_yaml(p)
-    return {}
+def _load_yaml(path: Path) -> dict[str, Any]:
+    with path.open("r", encoding="utf-8") as fh:
+        data = yaml.safe_load(fh)
+    return data if isinstance(data, dict) else {}
 
 
-def _load_series_plan() -> dict:
-    for base in [_WORKTREE, _REPO_ROOT]:
-        p = base / "config/manga/manga_brand_series_plan.yaml"
-        if p.exists():
-            return _load_yaml(p)
-    return {}
+def _merge_identity_maps(identity: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    out: dict[str, dict[str, Any]] = {}
+    for key in ("teacher_brands", "standard_brands"):
+        block = identity.get(key) or {}
+        if isinstance(block, dict):
+            for bid, meta in block.items():
+                if isinstance(meta, dict):
+                    out[str(bid)] = meta
+    return out
 
 
-# ---------------------------------------------------------------------------
-# Estimator core
-# ---------------------------------------------------------------------------
+def _is_series_entry(obj: Any) -> bool:
+    if not isinstance(obj, dict):
+        return False
+    if "package" in obj and "title" not in obj:
+        return False
+    return "episode_count" in obj or "panel_estimate" in obj
 
-def estimate_brand(
+
+def _iter_lane_series(brand_plan: dict[str, Any]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for lane_name in ("heavy_lanes", "medium_lanes"):
+        lane = brand_plan.get(lane_name) or {}
+        if not isinstance(lane, dict):
+            continue
+        for slot_key, series in lane.items():
+            if not _is_series_entry(series):
+                continue
+            rows.append({"lane": lane_name, "slot": slot_key, **series})
+    return rows
+
+
+def _estimate_brand(
     brand_id: str,
-    brand_registry: dict,
-    series_plan: dict,
-    weeks: int = 4,
-) -> dict:
-    """Produce asset estimate for one brand over `weeks` weeks."""
-    reg_entry = brand_registry.get("brands", {}).get(brand_id, {})
-    plan_entry = series_plan.get("brands", {}).get(brand_id, {})
-    global_defaults = series_plan.get("global_defaults", {})
+    brand_plan: dict[str, Any],
+    panel_defaults: dict[str, Any],
+    identity: dict[str, dict[str, Any]],
+    weeks: int,
+) -> dict[str, Any]:
+    std_ep = int(panel_defaults.get("standard_episode") or 46)
+    short_ep = int(panel_defaults.get("short_episode") or 28)
 
-    genre = reg_entry.get("genre") or plan_entry.get("genre", "default")
-    panels = GENRE_PANELS.get(genre, GENRE_PANELS["default"])
-    panels_min, panels_opt, panels_max = panels
-    bg_rate = BG_REUSE_RATE.get(genre, BG_REUSE_RATE["default"])
+    series_rows = _iter_lane_series(brand_plan)
+    per_chapter: list[int] = []
+    total_panels = 0
+    total_episodes = 0
+    topics: set[str] = set()
 
-    # Series/chapter cadence from plan
-    chapters_per_month = plan_entry.get(
-        "chapters_per_series_per_month",
-        global_defaults.get("chapters_per_series_per_month", 2),
+    for s in series_rows:
+        ep = int(s.get("episode_count") or 0)
+        pe = s.get("panel_estimate")
+        if ep > 0 and pe is not None:
+            p = int(pe)
+            per_chapter.append(max(1, round(p / ep)))
+            total_panels += p
+            total_episodes += ep
+        elif ep > 0:
+            per_chapter.append(std_ep)
+            total_panels += std_ep * ep
+            total_episodes += ep
+        t = s.get("topic") or s.get("angle_source")
+        if t:
+            topics.add(str(t))
+
+    light = brand_plan.get("light_lanes") or {}
+    light_panels = 0
+    if isinstance(light, dict):
+        covers = int(light.get("cover_count") or 0)
+        kv = int(light.get("key_visual_count") or 0)
+        # Treat each cover/KV as ~short_episode worth of illustration work
+        light_panels = covers * short_ep + kv * max(short_ep // 2, 12)
+
+    if not per_chapter:
+        min_pc = short_ep
+        opt_pc = std_ep
+        max_pc = std_ep
+    else:
+        min_pc = min(per_chapter)
+        max_pc = max(per_chapter)
+        opt_pc = int(round(sum(per_chapter) / len(per_chapter)))
+
+    # Backgrounds: distinct story topics + recurring sets per series
+    backgrounds = max(6, len(topics) * 4 + len(series_rows) * 3)
+
+    manga_mode = str(brand_plan.get("manga_mode") or "regular")
+    teacher = brand_plan.get("teacher")
+    if manga_mode == "teacher" and teacher:
+        char_factor = 2.2  # teacher + student + recurring extras
+        protagonist = str(teacher)
+    else:
+        char_factor = 1.6
+        protagonist = "ensemble_cast"
+
+    # Character "views" = rough shot count across slate (establishing + reverses)
+    char_views = int(
+        round(
+            total_episodes * 10 * char_factor
+            + len(series_rows) * 24
+            + (light_panels / max(short_ep, 1)) * 4
+        )
     )
-    active_series = plan_entry.get(
-        "active_series_target",
-        global_defaults.get("active_series_target", 3),
-    )
-    chapters_per_month_total = chapters_per_month * active_series
-    chapters_in_window = round(chapters_per_month_total * (weeks / 4.0))
 
-    # Backgrounds from registry (per-chapter spec)
-    bg_per_chapter_spec = reg_entry.get("asset_notes", {}).get("backgrounds_per_chapter")
-    if bg_per_chapter_spec is None:
-        bg_per_chapter_spec = round(panels_opt * bg_rate)
+    panels_with_light = total_panels + light_panels
+    week_scale = max(weeks, 1) / 4.0
 
-    # Character views (one-time setup cost, amortised over first run)
-    char_views_list = reg_entry.get("asset_notes", {}).get("character_views_needed", [])
-    char_views_count = sum(
-        int(v.split("_")[-1]) if v.split("_")[-1].isdigit() else 1
-        for v in char_views_list
-    )
-    supporting_cast_count = len(reg_entry.get("supporting_cast", []))
-    total_char_views = char_views_count * (1 + supporting_cast_count)
+    # Heuristic economics (internal planning constants — not quotes)
+    usd_per_panel_gpu = 0.012
+    artist_hours_per_panel = 0.32
+    hourly_usd = 78.0
 
-    # Panel totals
-    total_panels_opt = panels_opt * chapters_in_window
-    total_panels_min = panels_min * chapters_in_window
-    total_panels_max = panels_max * chapters_in_window
+    gpu_cost = round(panels_with_light * usd_per_panel_gpu * week_scale, 2)
+    labor_hours = round(panels_with_light * artist_hours_per_panel * week_scale, 1)
+    labor_usd = round(labor_hours * hourly_usd, 2)
 
-    # Background totals
-    total_backgrounds = bg_per_chapter_spec * chapters_in_window
-
-    # Cost estimates
-    gpu_panels = total_panels_opt * COST_PER_PANEL_GPU
-    gpu_backgrounds = total_backgrounds * COST_PER_BACKGROUND_GPU
-    gpu_char_views = total_char_views * COST_PER_CHARACTER_VIEW_GPU
-    gpu_total = gpu_panels + gpu_backgrounds + gpu_char_views
-
-    human_mins = (
-        total_panels_opt * REVIEW_MINS_PER_PANEL
-        + total_backgrounds * REVIEW_MINS_PER_BG
-        + total_char_views * REVIEW_MINS_PER_CHARACTER_VIEW
-        + chapters_in_window * REVIEW_MINS_PER_CHAPTER_PASS
-    )
-    human_hours = human_mins / 60.0
-    human_cost = human_hours * HUMAN_HOURLY_RATE_USD
-    total_cost = gpu_total + human_cost
+    id_meta = identity.get(brand_id) or {}
+    display_name = id_meta.get("display_name") or brand_id
 
     return {
         "brand_id": brand_id,
-        "genre": genre,
-        "weeks": weeks,
-        "active_series": active_series,
-        "chapters_in_window": chapters_in_window,
-        "panels": {
-            "min": total_panels_min,
-            "opt": total_panels_opt,
-            "max": total_panels_max,
-            "per_chapter_opt": panels_opt,
-        },
-        "backgrounds": {
-            "total": total_backgrounds,
-            "per_chapter": bg_per_chapter_spec,
-        },
-        "character_views": {
-            "total": total_char_views,
-            "view_types": char_views_list,
-        },
-        "cost_usd": {
-            "gpu_panels": round(gpu_panels, 2),
-            "gpu_backgrounds": round(gpu_backgrounds, 2),
-            "gpu_character_views": round(gpu_char_views, 2),
-            "gpu_total": round(gpu_total, 2),
-            "human_hours": round(human_hours, 1),
-            "human_cost": round(human_cost, 2),
-            "total": round(total_cost, 2),
-        },
+        "display_name": display_name,
+        "manga_mode": manga_mode,
+        "protagonist_anchor": protagonist,
+        "weeks_horizon": weeks,
+        "series_count": len(series_rows),
+        "total_episodes": total_episodes,
+        "panels_total_estimated": int(panels_with_light),
+        "panels_heavy_medium": int(total_panels),
+        "panels_light_lane_equiv": int(light_panels),
+        "panels_per_chapter": {"min": min_pc, "opt": opt_pc, "max": max_pc},
+        "backgrounds_estimated": backgrounds,
+        "character_view_count_est": char_views,
+        "gpu_cost_usd_est": gpu_cost,
+        "human_labor_hours_est": labor_hours,
+        "human_labor_cost_usd_est": labor_usd,
     }
 
 
-def estimate_all(weeks: int = 4) -> dict:
-    """Estimate across all brands. Returns summary + per-brand breakdown."""
-    brand_reg = _load_character_registry()
-    series_plan = _load_series_plan()
+def _markdown_table(rows: list[dict[str, Any]]) -> str:
+    headers = [
+        "brand_id",
+        "panels/ch (min)",
+        "opt",
+        "max",
+        "bg",
+        "char_views",
+        "GPU $",
+        "labor $",
+    ]
+    lines = [
+        "| " + " | ".join(headers) + " |",
+        "|" + "|".join(["---"] * len(headers)) + "|",
+    ]
+    for r in rows:
+        ppc = r["panels_per_chapter"]
+        lines.append(
+            "| "
+            + " | ".join(
+                [
+                    r["brand_id"],
+                    str(ppc["min"]),
+                    str(ppc["opt"]),
+                    str(ppc["max"]),
+                    str(r["backgrounds_estimated"]),
+                    str(r["character_view_count_est"]),
+                    str(r["gpu_cost_usd_est"]),
+                    str(r["human_labor_cost_usd_est"]),
+                ]
+            )
+            + " |"
+        )
+    return "\n".join(lines)
 
-    brand_ids = list(brand_reg.get("brands", {}).keys())
-    results: list[dict] = []
 
-    for bid in brand_ids:
-        est = estimate_brand(bid, brand_reg, series_plan, weeks=weeks)
-        results.append(est)
+def main() -> int:
+    ap = argparse.ArgumentParser(description="Estimate manga asset load per brand.")
+    g = ap.add_mutually_exclusive_group(required=True)
+    g.add_argument("--brand", help="Single brand_id from brand_series_plans.yaml")
+    g.add_argument("--all", action="store_true", help="All brands in series plans")
+    ap.add_argument("--weeks", type=int, default=4, help="Planning horizon in weeks (default 4)")
+    ap.add_argument(
+        "--output",
+        type=Path,
+        default=REPO_ROOT / "artifacts/manga/asset_estimate.json",
+        help="JSON output path (default: artifacts/manga/asset_estimate.json)",
+    )
+    ap.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Print estimates but do not write --output",
+    )
+    args = ap.parse_args()
 
-    total_chapters = sum(r["chapters_in_window"] for r in results)
-    total_panels = sum(r["panels"]["opt"] for r in results)
-    total_backgrounds = sum(r["backgrounds"]["total"] for r in results)
-    total_char_views = sum(r["character_views"]["total"] for r in results)
-    total_gpu = sum(r["cost_usd"]["gpu_total"] for r in results)
-    total_human_hours = sum(r["cost_usd"]["human_hours"] for r in results)
-    total_cost = sum(r["cost_usd"]["total"] for r in results)
+    plans_path = REPO_ROOT / "config/catalog_planning/brand_series_plans.yaml"
+    identity_path = REPO_ROOT / "config/catalog_planning/brand_identity_system.yaml"
+    plans = _load_yaml(plans_path)
+    identity_raw = _load_yaml(identity_path)
+    identity = _merge_identity_maps(identity_raw)
 
-    return {
-        "weeks": weeks,
-        "brand_count": len(results),
-        "summary": {
-            "total_chapters": total_chapters,
-            "total_panels_opt": total_panels,
-            "total_backgrounds": total_backgrounds,
-            "total_character_views": total_char_views,
-            "total_gpu_cost_usd": round(total_gpu, 2),
-            "total_human_hours": round(total_human_hours, 1),
-            "total_cost_usd": round(total_cost, 2),
-            "cost_per_chapter_avg": round(total_cost / total_chapters, 2) if total_chapters else 0,
+    panel_defaults = plans.get("panel_estimates") or {}
+    brands_block = plans.get("brands") or {}
+    if not isinstance(brands_block, dict):
+        print("No brands block in brand_series_plans.yaml", file=sys.stderr)
+        return 1
+
+    brand_ids = sorted(
+        k
+        for k, v in brands_block.items()
+        if isinstance(v, dict) and k not in ("schema_version", "last_updated")
+    )
+    if args.brand:
+        if args.brand not in brand_ids:
+            print(f"Unknown brand {args.brand!r}. Known: {', '.join(brand_ids[:8])}…", file=sys.stderr)
+            return 1
+        selected = [args.brand]
+    else:
+        selected = brand_ids
+
+    estimates = [
+        _estimate_brand(bid, brands_block[bid], panel_defaults, identity, args.weeks) for bid in selected
+    ]
+
+    payload = {
+        "schema": "manga_asset_estimate_v1",
+        "sources": {
+            "brand_series_plans": str(plans_path.relative_to(REPO_ROOT)),
+            "brand_identity_system": str(identity_path.relative_to(REPO_ROOT)),
         },
-        "brands": results,
+        "weeks": args.weeks,
+        "brands": estimates,
+        "totals": {
+            "panels_total": sum(b["panels_total_estimated"] for b in estimates),
+            "gpu_cost_usd": round(sum(b["gpu_cost_usd_est"] for b in estimates), 2),
+            "human_labor_cost_usd": round(sum(b["human_labor_cost_usd_est"] for b in estimates), 2),
+        },
     }
 
+    print(json.dumps(payload, indent=2))
+    print()
+    print(_markdown_table(estimates))
 
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
-
-def _print_estimate(est: dict) -> None:
-    if "brands" in est:
-        # All-brands summary
-        s = est["summary"]
-        print(f"Manga Asset Estimate — {est['brand_count']} brands, {est['weeks']}w window")
-        print("=" * 55)
-        print(f"  Chapters total    : {s['total_chapters']}")
-        print(f"  Panels (opt)      : {s['total_panels_opt']:,}")
-        print(f"  Backgrounds       : {s['total_backgrounds']:,}")
-        print(f"  Character views   : {s['total_character_views']:,}")
-        print(f"  GPU cost          : ${s['total_gpu_cost_usd']:,.2f}")
-        print(f"  Human hours       : {s['total_human_hours']:,.1f}h")
-        print(f"  Total cost        : ${s['total_cost_usd']:,.2f}")
-        print(f"  Cost/chapter avg  : ${s['cost_per_chapter_avg']:.2f}")
-        print()
-        print(f"  {'Brand':<26} {'Chap':>5} {'Panels':>7} {'BGs':>5} {'GPU$':>8} {'Total$':>8}")
-        print(f"  {'-'*26} {'-'*5} {'-'*7} {'-'*5} {'-'*8} {'-'*8}")
-        for b in sorted(est["brands"], key=lambda x: -x["cost_usd"]["total"]):
-            print(f"  {b['brand_id']:<26} {b['chapters_in_window']:>5} "
-                  f"{b['panels']['opt']:>7,} {b['backgrounds']['total']:>5} "
-                  f"${b['cost_usd']['gpu_total']:>7.2f} ${b['cost_usd']['total']:>7.2f}")
-    else:
-        # Single brand
-        print(f"Manga Asset Estimate — {est['brand_id']} ({est['genre']}, {est['weeks']}w)")
-        print("=" * 50)
-        print(f"  Active series     : {est['active_series']}")
-        print(f"  Chapters in window: {est['chapters_in_window']}")
-        print(f"  Panels (opt)      : {est['panels']['opt']:,}  ({est['panels']['per_chapter_opt']}/chapter)")
-        print(f"  Backgrounds       : {est['backgrounds']['total']}  ({est['backgrounds']['per_chapter']}/chapter)")
-        print(f"  Character views   : {est['character_views']['total']}")
-        print()
-        c = est["cost_usd"]
-        print(f"  GPU panels        : ${c['gpu_panels']:,.2f}")
-        print(f"  GPU backgrounds   : ${c['gpu_backgrounds']:,.2f}")
-        print(f"  GPU char views    : ${c['gpu_character_views']:,.2f}")
-        print(f"  GPU total         : ${c['gpu_total']:,.2f}")
-        print(f"  Human review      : {c['human_hours']:.1f}h  (${c['human_cost']:.2f})")
-        print(f"  TOTAL             : ${c['total']:,.2f}")
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Manga Asset Estimator")
-    scope = parser.add_mutually_exclusive_group(required=True)
-    scope.add_argument("--brand", type=str, help="Single brand ID")
-    scope.add_argument("--all", action="store_true", help="All brands")
-    parser.add_argument("--weeks", type=int, default=4,
-                        help="Planning window in weeks (default: 4)")
-    parser.add_argument("--output", type=str, default=None,
-                        help="Write JSON output to this path (relative to repo root)")
-    args = parser.parse_args()
-
-    if args.all:
-        result = estimate_all(weeks=args.weeks)
-    else:
-        brand_reg = _load_character_registry()
-        series_plan = _load_series_plan()
-        result = estimate_brand(args.brand, brand_reg, series_plan, weeks=args.weeks)
-
-    _print_estimate(result)
-
-    if args.output:
-        for base in [_WORKTREE, _REPO_ROOT]:
-            out_path = base / args.output
-            if out_path.parent.exists():
-                break
+    out_path: Path = args.output
+    if not args.dry_run:
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(out_path, "w", encoding="utf-8") as fh:
-            json.dump(result, fh, indent=2)
-        print(f"\nJSON written: {out_path}")
+        out_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        print(f"\nWrote {out_path.relative_to(REPO_ROOT)}", file=sys.stderr)
+    else:
+        print("\n(dry-run: no JSON file written)", file=sys.stderr)
+
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -273,6 +273,19 @@
       color: var(--amber2);
       opacity: 0.75;
     }
+
+    /* Full pipeline launcher */
+    .pipeline-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 14px;
+    }
+    .pipeline-head .kpi-card {
+      flex: 1 1 200px;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -291,6 +304,32 @@
 </header>
 
 <main>
+  <!-- Full Pipeline (Phase 5) -->
+  <div id="full-pipeline" class="section">
+    <div class="section-title">&#x1F680; Full Pipeline <span class="phase-tag">Phase 5</span></div>
+    <div class="pipeline-head">
+      <div class="kpi-card" style="max-width:280px">
+        <div class="label">Last pipeline run</div>
+        <div class="value" id="pipeline-last-run" style="font-size:1.1rem">Never</div>
+        <div class="sub"><span class="cmd">artifacts/pipeline_last_run.json</span></div>
+      </div>
+    </div>
+    <div class="control-grid">
+      <button class="btn" onclick="runFullPipeline()">&#x1F680; Run Full Pipeline</button>
+      <button class="btn btn-outline" onclick="runHandoffExport('all', 'pipeline-status')">&#x1F4E4; Export All Brands</button>
+    </div>
+    <div id="pipeline-status" class="console-out" style="display:none"></div>
+    <div class="cli-ref">
+      <strong>Included CLIs:</strong><br>
+      <code>scripts/inventory/atom_coverage_audit.py</code> ·
+      <code>scripts/catalog/generate_full_catalog.py</code> ·
+      <code>scripts/qa/run_bestseller_analysis.py</code> ·
+      <code>scripts/release/build_admin_packets.py</code> ·
+      <code>scripts/manga/manga_asset_estimator.py</code> ·
+      <code>scripts/manga/build_manga_catalog.py</code>
+    </div>
+  </div>
+
   <!-- KPI Row -->
   <div class="kpi-grid">
     <div class="kpi-card">
@@ -626,6 +665,40 @@
     return badge("No", "red");
   }
 
+  // ── Full pipeline launcher (Phase 5) ─────────────────────────────────────────
+  async function refreshPipelineLastRun() {
+    const el = document.getElementById("pipeline-last-run");
+    if (!el) return;
+    try {
+      const resp = await fetch("../../artifacts/pipeline_last_run.json");
+      if (!resp.ok) throw new Error("missing");
+      const data = await resp.json();
+      const ts = data.last_run || data.timestamp || data.completed_at;
+      el.textContent = ts ? String(ts) : "Never";
+    } catch {
+      el.textContent = "Never";
+    }
+  }
+
+  function runFullPipeline() {
+    const statusEl = document.getElementById("pipeline-status");
+    _showStatus(
+      statusEl,
+      "[Full Pipeline — run in order from repo root]\n\n" +
+        "1. python3 scripts/inventory/atom_coverage_audit.py --output-dir artifacts/inventory/\n" +
+        "2. python3 scripts/catalog/generate_full_catalog.py --scope all\n" +
+        "3. python3 scripts/qa/run_bestseller_analysis.py --scope all\n" +
+        "4. python3 scripts/release/build_admin_packets.py --all --week current\n" +
+        "5. python3 scripts/manga/manga_asset_estimator.py --all --weeks 4\n" +
+        "6. python3 scripts/manga/build_manga_catalog.py --all\n\n" +
+        "After completion, write e.g.\n" +
+        '  echo \'{"last_run":"' +
+        new Date().toISOString() +
+        '"}\' > artifacts/pipeline_last_run.json\n' +
+        "then refresh this page to update the KPI."
+    );
+  }
+
   // ── Init market table ─────────────────────────────────────────────────────────
   function initMarketTable() {
     const tbody = document.getElementById("market-tbody");
@@ -911,8 +984,9 @@
     }).join("");
   }
 
-  function runHandoffExport(scope) {
-    const el = document.getElementById("handoff-status");
+  function runHandoffExport(scope, statusElementId) {
+    const el = document.getElementById(statusElementId || "handoff-status");
+    if (!el) return;
     let cmd;
     if (scope === "all") {
       cmd = "python3 scripts/release/export_brand_admin_data.py --all --week current";
@@ -946,6 +1020,7 @@
   initMarketTable();
   initMangaBrandTable();
   initHandoffBrandGrid();
+  refreshPipelineLastRun();
 </script>
 </body>
 </html>
