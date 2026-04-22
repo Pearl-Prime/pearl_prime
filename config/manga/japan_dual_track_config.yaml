@@ -1,0 +1,133 @@
+# Japan Dual-Track Pipeline Configuration
+# Authority: Big View Phase 3
+# Sources:
+#   config/catalog/market_catalog_registry.yaml  (japan market: 60% manga / 40% ebook)
+#   config/manga/character_brand_registry.yaml   (character↔brand linkage)
+#   config/manga/manga_brand_series_plan.yaml    (chapter cadence)
+#
+# Japan uses two parallel content tracks:
+#   Track A: Manga partnership lane (60%)  — manga chapters published via app partners
+#   Track B: Digital publishing lane (40%) — standard ebook + audiobook pipeline
+#
+# Each manga chapter ALSO generates an ebook atom equivalent so both tracks
+# share atom inventory. This file defines how that cross-pipeline wiring works.
+
+schema_version: "1.0"
+authority: "Big View Phase 3"
+
+market:
+  market_id: japan
+  locale: ja_JP
+  language: ja
+  currency: JPY
+
+# ── TRACK SPLIT ──────────────────────────────────────────────────────────────
+track_split:
+  manga_track_pct: 60
+  ebook_track_pct: 40
+
+# ── TRACK A: MANGA PARTNERSHIP LANE ─────────────────────────────────────────
+manga_track:
+  track_id: manga_partnership
+  platforms:
+    - id: manga_app_partners
+      notes: "Primary manga app distribution (e.g. Comic Walker, piccoma, LINE Manga)"
+    - id: physical_doujin
+      notes: "Physical doujinshi via Booth.pm at Comiket/events"
+    - id: booth_pm
+      notes: "Digital + physical via booth.pm storefront"
+
+  chapter_pipeline:
+    # Chapter generation → atom system bridge
+    atom_bridge_enabled: true
+    # Each manga chapter maps to one atom topic×persona combo
+    atom_mapping_strategy: chapter_to_atom
+    # Atom used for: ebook body extraction, keyword harvest, SEO metadata
+    atom_extraction_fields: [topic_id, persona_id, keywords, description_excerpt]
+
+    chapter_to_ebook_ratio: 10  # 10 chapters → 1 ebook volume equivalent
+    chapter_word_count_est: 800   # avg words in dialogue + narration per chapter
+    ebook_word_count_target: 8000 # ~10 chapters worth
+
+    # Chapter scheduling
+    cadence: bi_weekly
+    simultaneous_en_release_delay_weeks: 0  # same-day EN + JA for Japan market
+    translation_pipeline: qwen_cjk6  # Tier 2 — Qwen on Pearl Star
+
+    # Chapter metadata schema
+    chapter_metadata_required:
+      - chapter_number
+      - series_id
+      - brand_id
+      - teacher_id
+      - topic_id
+      - persona_id
+      - atom_id          # links to atoms/ dir
+      - title_ja
+      - title_en
+      - synopsis_ja
+      - synopsis_en
+      - page_count
+      - release_week
+
+  # Manga-first brands for Japan
+  primary_brands:
+    - stillness_press     # iyashikei — strongest Japanese genre fit
+    - cognitive_clarity   # seinen — well-established Japan readership
+    - qi_foundation       # cultivation — xianxia popular in Japan via isekai overlap
+    - digital_ground      # manhwa/webtoon — digital-native Japan readers
+
+  all_brands_eligible: true  # all 12 teacher brands can publish manga in Japan
+
+
+# ── TRACK B: DIGITAL PUBLISHING LANE ────────────────────────────────────────
+ebook_track:
+  track_id: digital_publishing
+  platforms:
+    - id: amazon_jp
+      url_hint: "https://kdp.amazon.co.jp/"
+    - id: rakuten_kobo
+      url_hint: "https://www.kobo.com/jp/ja"
+    - id: apple_books_jp
+    - id: google_play_jp
+
+  pipeline:
+    # Standard ebook generation — same atom system as en_US
+    atom_source: atoms/  # reads from atoms/<persona>/<topic>/CANONICAL.txt
+    translation_pipeline: qwen_cjk6
+    locale_override: ja_JP
+    price_multiplier: 1.2  # Japanese ebook pricing runs ~20% above USD equivalent
+    royalty_notes: "Amazon JP: 35% standard, 70% KDP Select (enroll only if strategy permits)"
+
+  weekly_cap: 8  # max new ebook titles per brand per week in Japan
+
+
+# ── ATOM-TO-MANGA BRIDGE ─────────────────────────────────────────────────────
+# How atoms map to manga chapters (bidirectional)
+atom_manga_bridge:
+  enabled: true
+
+  # Forward: atom → manga chapter spec
+  atom_to_chapter:
+    use_atom_topic: true      # manga chapter topic matches atom topic_id
+    use_atom_persona: true    # manga protagonist archetype matches atom persona_id
+    use_atom_keywords: true   # chapter dialogue seeded from atom keyword bank
+    use_atom_exercises: true  # manga "give" panels based on atom exercises
+
+  # Reverse: manga chapter → ebook atom enrichment
+  chapter_to_atom:
+    extract_dialogue_hooks: true     # memorable lines → atom hook candidates
+    extract_visual_metaphors: true   # scene descriptions → cover brief input
+    extract_breath_sequences: true   # breath/somatic panels → atom exercise count
+
+  # Coverage tracking
+  # Atom coverage audit (scripts/inventory/atom_coverage_audit.py) counts
+  # a combo as "covered" when EITHER an atom OR a manga chapter exists for it.
+  count_chapters_as_atoms: true
+
+
+# ── CONTENT MIX BY WEEK ──────────────────────────────────────────────────────
+weekly_production_target:
+  manga_chapters_per_brand: 2   # bi-weekly per active series
+  ebook_titles_per_brand: 2     # 2 ebook titles alongside manga
+  total_per_brand: 4            # 4 content pieces/brand/week (japan market)

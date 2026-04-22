@@ -1,0 +1,672 @@
+# Manga Character → Brand Registry
+# Authority: Big View Phase 3
+# Sources:
+#   config/manga/manga_brand_series_plan.yaml     (brand→teacher→genre)
+#   config/manga/teacher_character_prompts.yaml   (visual character specs)
+#   config/catalog_planning/brand_teacher_matrix.yaml
+#
+# Each brand entry defines:
+#   teacher_character: the primary teacher-derived manga protagonist
+#   supporting_cast:   recurring non-teacher characters (student, guide, foil)
+#   visual_style:      genre + style archetype (links to teacher_character_prompts.yaml)
+#   market_variants:   locale-specific name/design overrides
+
+schema_version: "1.0"
+generated: "2026-04-22"
+authority: "Big View Phase 3"
+
+# ── CHARACTER ARCHETYPES (shared across brands) ──────────────────────────────
+# Reusable supporting cast templates. Brand can instantiate with local names.
+
+supporting_archetypes:
+  student_seeker:
+    role: protagonist_learner
+    description: "Young adult (25-35) in burnout/transition. The reader stand-in."
+    design_notes: "Modern clothing, tired eyes that slowly gain clarity across the series."
+    emotional_arc: "overwhelm → encounter teacher → practice → integration"
+
+  skeptic_friend:
+    role: foil
+    description: "The protagonist's pragmatic friend who doubts the teachings."
+    design_notes: "Business attire, arms crossed posture early; opens up by vol 3."
+    emotional_arc: "resistance → grudging curiosity → quiet conversion"
+
+  elder_guide:
+    role: mentor_secondary
+    description: "An older character who bridges teacher wisdom and everyday life."
+    design_notes: "Warm, weathered face. Often found in domestic/nature settings."
+    emotional_arc: "stable throughout; the reader's comfort anchor"
+
+  community_member:
+    role: ensemble
+    description: "A recurring background character who shows parallel healing journey."
+    design_notes: "Diverse appearance. Background story revealed gradually."
+    emotional_arc: "mirrors protagonist arc with a one-chapter offset"
+
+
+# ── BRAND CHARACTER ENTRIES ──────────────────────────────────────────────────
+
+brands:
+
+  # ── 1. STILLNESS PRESS — teacher: ahjan — genre: iyashikei ──────────────
+  stillness_press:
+    brand_id: stillness_press
+    teacher_id: ahjan
+    genre: iyashikei
+    style_archetype: cozy_iyashikei  # from teacher_character_prompts.yaml
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#ahjan"
+
+    teacher_character:
+      character_id: ahjan_sensei
+      display_name: "Ahjan"
+      role: teacher_sage
+      design_ref: "config/manga/teacher_character_prompts.yaml#ahjan"
+      signature_elements:
+        - "simple robes or clean modern clothing"
+        - "warm earth-toned watercolor wash"
+        - "subtle golden light aura"
+        - "calm present expression"
+      setting_affinity: ["temple garden", "meditation hall", "misty forest path"]
+
+    supporting_cast:
+      - character_id: yuki_student
+        archetype: student_seeker
+        display_name: "Yuki"
+        design_notes: "Late 20s, office attire transitioning to looser clothing. Short dark hair."
+        topic_affinity: [burnout, anxiety, sleep_anxiety]
+      - character_id: haruto_friend
+        archetype: skeptic_friend
+        display_name: "Haruto"
+        design_notes: "Suit, cynical grin, phone always in hand."
+        topic_affinity: [overthinking, imposter_syndrome]
+      - character_id: obachan_guide
+        archetype: elder_guide
+        display_name: "Obāchan"
+        design_notes: "Elderly woman, traditional apron, warm eyes. Runs a small tea house near the dojo."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "阿闍梨"
+        student_display_name: "ゆき"
+        setting_notes: "Japanese temple architecture; cherry blossom and autumn maple accents."
+      zh_TW:
+        teacher_display_name: "阿闍梨"
+        student_display_name: "雪"
+      ko_KR:
+        teacher_display_name: "아잔"
+        student_display_name: "유키"
+
+    asset_notes:
+      backgrounds_per_chapter: 6
+      character_views_needed: [front, 3quarter, side, expression_sheet_6]
+      ip_adapter_weight: 0.85
+
+
+  # ── 2. COGNITIVE CLARITY — teacher: joshin — genre: seinen ──────────────
+  cognitive_clarity:
+    brand_id: cognitive_clarity
+    teacher_id: joshin
+    genre: seinen
+    style_archetype: sharp_psychological
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#joshin"
+
+    teacher_character:
+      character_id: joshin_sensei
+      display_name: "Joshin"
+      role: teacher_analyst
+      signature_elements:
+        - "sharp clean lines, high contrast"
+        - "modern professional or minimal robes"
+        - "penetrating but compassionate gaze"
+        - "often shown with books, diagrams, whiteboard"
+      setting_affinity: ["lecture room", "urban rooftop", "library", "coffee shop late night"]
+
+    supporting_cast:
+      - character_id: kenji_analyst
+        archetype: student_seeker
+        display_name: "Kenji"
+        design_notes: "30s tech worker, glasses, overloaded laptop bag."
+        topic_affinity: [overthinking, burnout, imposter_syndrome]
+      - character_id: mira_skeptic
+        archetype: skeptic_friend
+        display_name: "Mira"
+        design_notes: "Sharp bob, designer blazer. Works in finance."
+        topic_affinity: [boundaries, financial_anxiety]
+      - character_id: old_librarian
+        archetype: elder_guide
+        display_name: "Mr. Tanaka"
+        design_notes: "Quiet scholar type. Appears in library scenes with ancient texts."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "如心"
+        setting_notes: "Tokyo high-rise context; meticulous line-ruled aesthetics."
+      ko_KR:
+        teacher_display_name: "조신"
+
+    asset_notes:
+      backgrounds_per_chapter: 8
+      character_views_needed: [front, 3quarter, side, expression_sheet_6]
+      ip_adapter_weight: 0.80
+
+
+  # ── 3. SOMATIC WISDOM — teacher: pamela_fellows — genre: shojo ──────────
+  somatic_wisdom:
+    brand_id: somatic_wisdom
+    teacher_id: pamela_fellows
+    genre: shojo
+    style_archetype: soft_healing_shojo
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#pamela_fellows"
+
+    teacher_character:
+      character_id: pamela_sensei
+      display_name: "Pamela"
+      role: teacher_healer
+      signature_elements:
+        - "flowing hair, soft warm palette"
+        - "embodied presence — shown touching her own body (hand on heart, feet on ground)"
+        - "flower and water motifs in background"
+      setting_affinity: ["yoga studio", "forest clearing", "warm kitchen", "sunlit therapy room"]
+
+    supporting_cast:
+      - character_id: sara_learner
+        archetype: student_seeker
+        display_name: "Sara"
+        design_notes: "Early 30s healthcare worker, dark circles, scrubs → casual wear."
+        topic_affinity: [compassion_fatigue, somatic_healing, self_worth]
+      - character_id: dan_doubter
+        archetype: skeptic_friend
+        display_name: "Dan"
+        design_notes: "Partner/spouse. Sceptical but caring. Shown in domestic scenes."
+      - character_id: grandmother_healer
+        archetype: elder_guide
+        display_name: "Grandma Rose"
+        design_notes: "Garden scenes. Hands that garden and hold. Embodies embodied wisdom."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "パメラ先生"
+        setting_notes: "Shodo/tea ceremony visual vocabulary woven into somatic scenes."
+      ko_KR:
+        teacher_display_name: "파멜라"
+
+    asset_notes:
+      backgrounds_per_chapter: 7
+      character_views_needed: [front, 3quarter, expression_sheet_6, body_language_4]
+      ip_adapter_weight: 0.85
+
+
+  # ── 4. QI FOUNDATION — teacher: master_feung — genre: cultivation ────────
+  qi_foundation:
+    brand_id: qi_foundation
+    teacher_id: master_feung
+    genre: cultivation
+    style_archetype: xianxia_ink
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#master_feung"
+
+    teacher_character:
+      character_id: feung_sifu
+      display_name: "Master Feung"
+      role: teacher_ancient_master
+      signature_elements:
+        - "traditional Chinese master, hands in qigong position"
+        - "qi energy lines visible around hands (subtle)"
+        - "flowing ink-wash brushwork background"
+        - "ancient patience, eyes half-closed"
+      setting_affinity: ["bamboo grove", "mountain mist", "flowing river", "ancient courtyard"]
+
+    supporting_cast:
+      - character_id: lin_disciple
+        archetype: student_seeker
+        display_name: "Lin"
+        design_notes: "Young professional, secretly burned out. Finds Sifu through chance."
+        topic_affinity: [burnout, anxiety, self_worth]
+      - character_id: zhang_rival
+        archetype: skeptic_friend
+        display_name: "Zhang"
+        design_notes: "Lin's competitive colleague. Takes a parallel cultivation path."
+      - character_id: tea_master
+        archetype: elder_guide
+        display_name: "Tea Master Wei"
+        design_notes: "Runs a tea house. Philosophically challenges both Lin and Zhang."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "鳳師父"
+        setting_notes: "Chinese ink painting style dominant; bamboo and mountain mist."
+      zh_TW:
+        teacher_display_name: "鳳師父"
+      zh_CN:
+        teacher_display_name: "凤师父"
+      ko_KR:
+        teacher_display_name: "마스터 펑"
+
+    asset_notes:
+      backgrounds_per_chapter: 10
+      character_views_needed: [front, 3quarter, side, action_poses_4, expression_sheet_6]
+      ip_adapter_weight: 0.82
+
+
+  # ── 5. DIGITAL GROUND — teacher: miki — genre: manhwa ────────────────────
+  digital_ground:
+    brand_id: digital_ground
+    teacher_id: miki
+    genre: manhwa
+    style_archetype: webtoon_vertical_clean
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#miki"
+
+    teacher_character:
+      character_id: miki_sensei
+      display_name: "Miki"
+      role: teacher_digital_native
+      signature_elements:
+        - "modern minimal aesthetic"
+        - "often shown with phone/laptop but at peace with it"
+        - "clean webtoon linework, full colour"
+        - "expressive eyes conveying digital-era calm"
+      setting_affinity: ["café", "co-working space", "rooftop city view", "subway commute"]
+
+    supporting_cast:
+      - character_id: joon_burnout
+        archetype: student_seeker
+        display_name: "Joon"
+        design_notes: "Mid-20s startup founder, hoodie, permanent headphones around neck."
+        topic_affinity: [financial_anxiety, social_anxiety, imposter_syndrome]
+      - character_id: yena_realist
+        archetype: skeptic_friend
+        display_name: "Yena"
+        design_notes: "Finance analyst. Bright blazers. Pragmatic worldview."
+        topic_affinity: [financial_stress, boundaries]
+      - character_id: halmoni_offline
+        archetype: elder_guide
+        display_name: "Halmoni (Grandma)"
+        design_notes: "Appears during countryside scenes. Represents offline groundedness."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "ミキ先生"
+        setting_notes: "Tokyo digital district; pastel neon against quiet interiors."
+      ko_KR:
+        teacher_display_name: "미키"
+        setting_notes: "Seoul primary setting — Kakao/Naver first, webtoon-native."
+
+    asset_notes:
+      backgrounds_per_chapter: 9
+      character_views_needed: [front, 3quarter, expression_sheet_8]
+      ip_adapter_weight: 0.83
+
+
+  # ── 6. HEART BALANCE — teacher: maat — genre: shojo ──────────────────────
+  heart_balance:
+    brand_id: heart_balance
+    teacher_id: maat
+    genre: shojo
+    style_archetype: warm_relational_shojo
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#maat"
+
+    teacher_character:
+      character_id: maat_sensei
+      display_name: "Ma'at"
+      role: teacher_heart_guide
+      signature_elements:
+        - "golden amber tones, feather motif"
+        - "scale imagery (balance)"
+        - "warm radiant presence"
+        - "shown in circles of community"
+      setting_affinity: ["community circle", "riverside", "warm living room", "ceremonial fire"]
+
+    supporting_cast:
+      - character_id: amara_student
+        archetype: student_seeker
+        display_name: "Amara"
+        design_notes: "Late 20s, biracial, navigating family and work pressure."
+        topic_affinity: [self_worth, grief, boundaries]
+      - character_id: kai_partner
+        archetype: skeptic_friend
+        display_name: "Kai"
+        design_notes: "Non-binary partner. Supportive but stretched thin."
+      - character_id: elder_auntie
+        archetype: elder_guide
+        display_name: "Auntie Nadia"
+        design_notes: "Diaspora elder. Holds communal memory."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "マアト先生"
+      ko_KR:
+        teacher_display_name: "마아트"
+
+    asset_notes:
+      backgrounds_per_chapter: 7
+      character_views_needed: [front, 3quarter, expression_sheet_6, community_scene_ref]
+      ip_adapter_weight: 0.85
+
+
+  # ── 7. RELATIONAL CALM — teacher: junko — genre: iyashikei ───────────────
+  relational_calm:
+    brand_id: relational_calm
+    teacher_id: junko
+    genre: iyashikei
+    style_archetype: cozy_iyashikei
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#junko"
+
+    teacher_character:
+      character_id: junko_sensei
+      display_name: "Junko"
+      role: teacher_relational_healer
+      signature_elements:
+        - "warm linework, domestic cosiness"
+        - "often shown listening with full presence"
+        - "soft natural light, indoor scenes"
+        - "simple modern Japanese interior aesthetic"
+      setting_affinity: ["small therapy room", "café counter", "shared kitchen", "park bench"]
+
+    supporting_cast:
+      - character_id: nao_client
+        archetype: student_seeker
+        display_name: "Nao"
+        design_notes: "35, relationship difficulties post-divorce. Quiet, guarded posture."
+        topic_affinity: [boundaries, grief, social_anxiety]
+      - character_id: ryo_coworker
+        archetype: skeptic_friend
+        display_name: "Ryō"
+        design_notes: "Nao's office colleague. Extrovert who doesn't understand Nao's process."
+      - character_id: koba_san
+        archetype: elder_guide
+        display_name: "Koba-san"
+        design_notes: "Building landlord. Quiet wisdom via small gestures and meals left at door."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "純子先生"
+        setting_notes: "Japanese domestic interior as primary setting — wabi-sabi aesthetics."
+      ko_KR:
+        teacher_display_name: "준코"
+
+    asset_notes:
+      backgrounds_per_chapter: 5
+      character_views_needed: [front, 3quarter, expression_sheet_6]
+      ip_adapter_weight: 0.85
+
+
+  # ── 8. WARRIOR CALM — teacher: master_wu — genre: cultivation ────────────
+  warrior_calm:
+    brand_id: warrior_calm
+    teacher_id: master_wu
+    genre: cultivation
+    style_archetype: iron_gate_cultivation
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#master_wu"
+
+    teacher_character:
+      character_id: wu_sifu
+      display_name: "Master Wu"
+      role: teacher_martial_sage
+      signature_elements:
+        - "powerful yet still — mountain-like presence"
+        - "ink-wash linework, strong shadows"
+        - "iron and stone motifs"
+        - "shown in training, not battle — the stillness before the strike"
+      setting_affinity: ["iron gate dojo", "mountain training ground", "stone courtyard at dawn"]
+
+    supporting_cast:
+      - character_id: chen_trainee
+        archetype: student_seeker
+        display_name: "Chen"
+        design_notes: "Ex-military, PTSD, overcompensates with aggression."
+        topic_affinity: [anxiety, courage, somatic_healing]
+      - character_id: liu_rival
+        archetype: skeptic_friend
+        display_name: "Liu"
+        design_notes: "Chen's sparring partner. Represents force without wisdom."
+      - character_id: qing_medic
+        archetype: elder_guide
+        display_name: "Doctor Qing"
+        design_notes: "Field medic turned herbalist. Treats the body and the psyche."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "武師父"
+      zh_TW:
+        teacher_display_name: "武師父"
+      ko_KR:
+        teacher_display_name: "마스터 우"
+
+    asset_notes:
+      backgrounds_per_chapter: 10
+      character_views_needed: [front, 3quarter, side, action_poses_6, expression_sheet_6]
+      ip_adapter_weight: 0.80
+
+
+  # ── 9. SLEEP RESTORATION — teacher: master_sha — genre: iyashikei ────────
+  sleep_restoration:
+    brand_id: sleep_restoration
+    teacher_id: master_sha
+    genre: iyashikei
+    style_archetype: night_architecture_iyashikei
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#master_sha"
+
+    teacher_character:
+      character_id: sha_sensei
+      display_name: "Master Sha"
+      role: teacher_night_architect
+      signature_elements:
+        - "nocturnal palette — deep navy, silver moonlight, soft amber lamp glow"
+        - "architectural stillness — buildings, interiors at night"
+        - "shown in liminal moments — dusk, pre-dawn, 3am"
+        - "quiet precision in every gesture"
+      setting_affinity: ["bedroom threshold", "night kitchen", "moonlit garden", "hospital night shift corridor"]
+
+    supporting_cast:
+      - character_id: hana_insomniac
+        archetype: student_seeker
+        display_name: "Hana"
+        design_notes: "Night-shift nurse, 30s. Dark circles are her badge of honour and burden."
+        topic_affinity: [sleep_anxiety, burnout, anxiety]
+      - character_id: taro_husband
+        archetype: skeptic_friend
+        display_name: "Tarō"
+        design_notes: "Hana's partner. Sleeps fine; doesn't understand her struggle."
+      - character_id: night_watchman
+        archetype: elder_guide
+        display_name: "Old Sōichi"
+        design_notes: "Hospital night watchman. Has watched 10,000 sleepless nights. Holds space."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "沙先生"
+        setting_notes: "Japanese hospital night ward and residential neighbourhood as primary settings."
+      ko_KR:
+        teacher_display_name: "마스터 샤"
+
+    asset_notes:
+      backgrounds_per_chapter: 6
+      character_views_needed: [front, 3quarter, expression_sheet_6, night_lighting_variants_3]
+      ip_adapter_weight: 0.82
+
+
+  # ── 10. BODY MEMORY — teacher: omote — genre: shojo ─────────────────────
+  body_memory:
+    brand_id: body_memory
+    teacher_id: omote
+    genre: shojo
+    style_archetype: held_ground_shojo
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#omote"
+
+    teacher_character:
+      character_id: omote_sensei
+      display_name: "Omote"
+      role: teacher_somatic_witness
+      signature_elements:
+        - "grounded earthy tones — ochre, clay, forest green"
+        - "bare feet on earth imagery"
+        - "hands that hold and release"
+        - "stillness that communicates safety"
+      setting_affinity: ["barefoot on grass", "clay studio", "dojo with worn mats", "riverside rocks"]
+
+    supporting_cast:
+      - character_id: rei_survivor
+        archetype: student_seeker
+        display_name: "Rei"
+        design_notes: "Late 20s, trauma history held in the body. Hunched posture that slowly opens."
+        topic_affinity: [somatic_healing, grief, self_worth]
+      - character_id: yoshi_friend
+        archetype: skeptic_friend
+        display_name: "Yoshi"
+        design_notes: "Rei's childhood friend. Represents the part that wants to stay numb."
+      - character_id: midwife_elder
+        archetype: elder_guide
+        display_name: "Midwife Tomoko"
+        design_notes: "Elderly midwife. Embodied ancestral wisdom. Knows the body holds stories."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "表先生"
+        setting_notes: "Japanese nature settings dominant — forest, coast, earth."
+      ko_KR:
+        teacher_display_name: "오모테"
+
+    asset_notes:
+      backgrounds_per_chapter: 8
+      character_views_needed: [front, 3quarter, body_language_6, expression_sheet_6]
+      ip_adapter_weight: 0.85
+
+
+  # ── 11. SOLAR RETURN — teacher: ra — genre: isekai ───────────────────────
+  solar_return:
+    brand_id: solar_return
+    teacher_id: ra
+    genre: isekai
+    style_archetype: wildfire_isekai
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#ra"
+
+    teacher_character:
+      character_id: ra_guide
+      display_name: "Ra"
+      role: teacher_solar_guide
+      signature_elements:
+        - "solar gold, fire, transformation motifs"
+        - "shown at threshold moments — doorways, horizons, solstice light"
+        - "neither old nor young — ageless quality"
+        - "warmth that doesn't burn"
+      setting_affinity: ["sunrise horizon", "desert threshold", "fire circle", "golden field"]
+
+    supporting_cast:
+      - character_id: sol_traveller
+        archetype: student_seeker
+        display_name: "Sol"
+        design_notes: "Genderless protagonist. Isekai-transported from burnout modern life to a world of cycles."
+        topic_affinity: [burnout, imposter_syndrome, courage]
+      - character_id: shadow_twin
+        archetype: skeptic_friend
+        display_name: "Shadow Twin"
+        design_notes: "Sol's mirror self — what they left behind. Reappears at key arc moments."
+      - character_id: market_elder
+        archetype: elder_guide
+        display_name: "The Keeper"
+        design_notes: "Keeper of the threshold market. Knows all travellers' names."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "ラー"
+        setting_notes: "Isekai visual vocabulary with Japanese torii gate / kagura fire aesthetic."
+      ko_KR:
+        teacher_display_name: "라"
+
+    asset_notes:
+      backgrounds_per_chapter: 12
+      character_views_needed: [front, 3quarter, side, expression_sheet_8, transformation_sequence_4]
+      ip_adapter_weight: 0.78
+
+
+  # ── 12. DEVOTION PATH — teacher: sai_ma — genre: shonen ─────────────────
+  devotion_path:
+    brand_id: devotion_path
+    teacher_id: sai_ma
+    genre: shonen
+    style_archetype: open_heart_shonen
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#sai_ma"
+
+    teacher_character:
+      character_id: sai_ma_guru
+      display_name: "Sai Maa"
+      role: teacher_devotion_master
+      signature_elements:
+        - "rose gold, saffron, deep magenta palette"
+        - "radiant feminine presence"
+        - "unconditional love — shown in how she looks at the protagonist"
+        - "ornate but not heavy flowing fabrics"
+      setting_affinity: ["temple interior", "flower garden", "ashram courtyard", "festival light"]
+
+    supporting_cast:
+      - character_id: arjun_devotee
+        archetype: student_seeker
+        display_name: "Arjun"
+        design_notes: "Late 20s, searching. Grew up atheist, now at a threshold."
+        topic_affinity: [grief, self_worth, courage]
+      - character_id: priya_skeptic
+        archetype: skeptic_friend
+        display_name: "Priya"
+        design_notes: "Arjun's sister. Scientist. Warm-hearted but resists mysticism."
+      - character_id: village_grandmother
+        archetype: elder_guide
+        display_name: "Nani"
+        design_notes: "Arjun's grandmother. Devotion practitioner. Bridges old and new."
+
+    market_variants:
+      ja_JP:
+        teacher_display_name: "サイ・マー師"
+        setting_notes: "Indian + Japanese devotional visual mix — marigold and incense."
+      ko_KR:
+        teacher_display_name: "사이 마"
+
+    asset_notes:
+      backgrounds_per_chapter: 9
+      character_views_needed: [front, 3quarter, expression_sheet_8, devotion_poses_4]
+      ip_adapter_weight: 0.85
+
+
+  # ── 13. BRIGHT PRESENCE TW — teacher: adi_da — genre: philosophical_dark ─
+  bright_presence_tw:
+    brand_id: bright_presence_tw
+    teacher_id: adi_da
+    genre: philosophical_dark
+    style_archetype: dark_psychological  # from teacher_character_prompts.yaml
+    character_prompt_ref: "config/manga/teacher_character_prompts.yaml#adi_da"
+    markets: [zh_TW]
+
+    teacher_character:
+      character_id: adi_da_figure
+      display_name: "Adi Da"
+      role: teacher_radical_witness
+      signature_elements:
+        - "high contrast black and white with golden highlight"
+        - "intense piercing eyes"
+        - "seated authority — king on throne quality"
+        - "fierce compassion — not anger but absolute uncompromise"
+      setting_affinity: ["abstract radiant light breaking through darkness", "throne-like simple seat", "shadow and light threshold"]
+
+    supporting_cast:
+      - character_id: wei_seeker
+        archetype: student_seeker
+        display_name: "Wei"
+        design_notes: "30s Taiwanese professional. Intellectually sophisticated but spiritually starved."
+        topic_affinity: [self_worth, courage, overthinking]
+      - character_id: chen_rationalist
+        archetype: skeptic_friend
+        display_name: "Chen"
+        design_notes: "Philosopher friend. Debates Wei constantly."
+      - character_id: hermit_elder
+        archetype: elder_guide
+        display_name: "The Hermit"
+        design_notes: "Lives outside the city. Has met Adi Da. Never explains what changed."
+
+    market_variants:
+      zh_TW:
+        teacher_display_name: "阿迪達"
+      zh_HK:
+        teacher_display_name: "阿迪達"
+
+    asset_notes:
+      backgrounds_per_chapter: 8
+      character_views_needed: [front, 3quarter, expression_sheet_6, dramatic_lighting_variants_4]
+      ip_adapter_weight: 0.80

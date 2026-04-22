@@ -433,16 +433,55 @@
   </div>
 
   <!-- Manga Production -->
-  <div class="section">
-    <div class="section-title">Manga Production <span class="phase-tag">Phase 3</span></div>
-    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:8px;">
-      Current: Stillness Press, Cognitive Clarity, Digital Ground manga series exist.
-      Japan dual-track configured (60% manga, 40% digital).
+  <div id="manga-production" class="section">
+    <div class="section-title">Manga Production</div>
+    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:12px;">
+      13 brands · 9 manga markets · dual-track (Japan 60% manga / Korea 30% webtoon)
     </p>
-    <p class="placeholder">
-      Phase 3: character-to-brand linkage for all 12 brands, background asset estimator,
-      layout system, manga asset pipeline beyond 3 current Stillness Press series.
-    </p>
+
+    <!-- Character × Brand status table -->
+    <table id="manga-brand-table">
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Teacher</th>
+          <th>Genre</th>
+          <th>Protagonist</th>
+          <th>Cast</th>
+          <th>BG/Ch</th>
+          <th>Style</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="manga-brand-tbody">
+        <!-- populated by JS -->
+      </tbody>
+    </table>
+
+    <!-- Asset estimate controls -->
+    <div class="controls" style="margin-top:14px;">
+      <button class="btn" onclick="runAssetEstimate('all')">&#x1F4CA; Estimate All Assets (4w)</button>
+      <button class="btn btn-outline" onclick="runAssetEstimate('stillness_press')">Estimate stillness_press</button>
+      <button class="btn btn-outline" onclick="buildMangaCatalog('all')">&#x1F4C4; Build Manga Catalog</button>
+      <button class="btn btn-outline" onclick="buildMangaCatalog('japan')">&#x1F1EF;&#x1F1F5; Japan Manga Catalog</button>
+      <button class="btn btn-outline" onclick="buildMangaCatalog('korea')">&#x1F1F0;&#x1F1F7; Korea Webtoon Catalog</button>
+    </div>
+    <div id="manga-status" class="console-out" style="display:none"></div>
+
+    <div class="cli-ref">
+      <strong>CLI equivalents:</strong><br>
+      <code>python3 scripts/manga/manga_asset_estimator.py --all --weeks 4</code><br>
+      <code>python3 scripts/manga/manga_asset_estimator.py --brand stillness_press --weeks 12</code><br>
+      <code>python3 scripts/manga/build_manga_catalog.py --all --dry-run</code><br>
+      <code>python3 scripts/manga/build_manga_catalog.py --market japan</code><br>
+      <code>python3 scripts/manga/build_manga_catalog.py --market korea</code>
+    </div>
+
+    <div style="font-size:0.78rem;color:var(--muted);margin-top:10px;">
+      Configs: <span class="cmd">config/manga/character_brand_registry.yaml</span>
+      · <span class="cmd">config/manga/japan_dual_track_config.yaml</span>
+      · <span class="cmd">config/manga/korea_webtoon_config.yaml</span>
+    </div>
   </div>
 
   <!-- Teacher Mode Controls -->
@@ -718,8 +757,71 @@
   function buildAllCatalogs() { runBuild("all"); }
   function runBestseller() { runBestsellerAnalysis(); }
 
+  // ── Manga Production (Phase 3) ────────────────────────────────────────────────
+
+  const MANGA_BRANDS = [
+    { id:"stillness_press",  teacher:"ahjan",          genre:"iyashikei",         protagonist:"Yuki",   cast:3, bg_ch:6,  style:"cozy_iyashikei",      status:"active"  },
+    { id:"cognitive_clarity",teacher:"joshin",         genre:"seinen",            protagonist:"Kenji",  cast:3, bg_ch:8,  style:"sharp_psychological", status:"active"  },
+    { id:"somatic_wisdom",   teacher:"pamela_fellows", genre:"shojo",             protagonist:"Sara",   cast:3, bg_ch:7,  style:"soft_healing_shojo",  status:"planned" },
+    { id:"qi_foundation",    teacher:"master_feung",   genre:"cultivation",       protagonist:"Lin",    cast:3, bg_ch:10, style:"xianxia_ink",         status:"planned" },
+    { id:"digital_ground",   teacher:"miki",           genre:"manhwa",            protagonist:"Joon",   cast:3, bg_ch:9,  style:"webtoon_vertical",    status:"active"  },
+    { id:"heart_balance",    teacher:"maat",           genre:"shojo",             protagonist:"Amara",  cast:3, bg_ch:7,  style:"warm_relational",     status:"planned" },
+    { id:"relational_calm",  teacher:"junko",          genre:"iyashikei",         protagonist:"Nao",    cast:3, bg_ch:5,  style:"cozy_iyashikei",      status:"planned" },
+    { id:"warrior_calm",     teacher:"master_wu",      genre:"cultivation",       protagonist:"Chen",   cast:3, bg_ch:10, style:"iron_gate",           status:"planned" },
+    { id:"sleep_restoration",teacher:"master_sha",     genre:"iyashikei",         protagonist:"Hana",   cast:3, bg_ch:6,  style:"night_architecture",  status:"planned" },
+    { id:"body_memory",      teacher:"omote",          genre:"shojo",             protagonist:"Rei",    cast:3, bg_ch:8,  style:"held_ground_shojo",   status:"planned" },
+    { id:"solar_return",     teacher:"ra",             genre:"isekai",            protagonist:"Sol",    cast:3, bg_ch:12, style:"wildfire_isekai",     status:"planned" },
+    { id:"devotion_path",    teacher:"sai_ma",         genre:"shonen",            protagonist:"Arjun",  cast:3, bg_ch:9,  style:"open_heart_shonen",   status:"planned" },
+    { id:"bright_presence_tw",teacher:"adi_da",        genre:"philosophical_dark",protagonist:"Wei",    cast:3, bg_ch:8,  style:"dark_psychological",  status:"planned" },
+  ];
+
+  function initMangaBrandTable() {
+    const tbody = document.getElementById("manga-brand-tbody");
+    if (!tbody) return;
+    tbody.innerHTML = MANGA_BRANDS.map(b => {
+      const statusBadge = b.status === "active"
+        ? `<span class="badge badge-green">Active</span>`
+        : `<span class="badge badge-yellow">Planned</span>`;
+      return `<tr>
+        <td>${b.id}</td>
+        <td style="color:var(--amber2)">${b.teacher}</td>
+        <td>${b.genre}</td>
+        <td>${b.protagonist}</td>
+        <td style="text-align:center">${b.cast}</td>
+        <td style="text-align:center">${b.bg_ch}</td>
+        <td style="font-size:0.72rem;color:var(--muted)">${b.style}</td>
+        <td>${statusBadge}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  function runAssetEstimate(brandOrAll) {
+    const el = document.getElementById("manga-status");
+    const cmd = brandOrAll === "all"
+      ? "python3 scripts/manga/manga_asset_estimator.py --all --weeks 4"
+      : `python3 scripts/manga/manga_asset_estimator.py --brand ${brandOrAll} --weeks 12`;
+    _showStatus(el,
+      `[Asset Estimator]\n\nRun in terminal:\n  ${cmd}\n\n` +
+      `Outputs: panels (min/opt/max), backgrounds/chapter, character views, GPU + human cost.\n` +
+      `Add --output artifacts/manga/asset_estimate.json to save results.`
+    );
+  }
+
+  function buildMangaCatalog(scope) {
+    const el = document.getElementById("manga-status");
+    const cmd = scope === "all"
+      ? "python3 scripts/manga/build_manga_catalog.py --all --dry-run"
+      : `python3 scripts/manga/build_manga_catalog.py --market ${scope} --dry-run`;
+    _showStatus(el,
+      `[Manga Catalog Builder]\n\nRun in terminal:\n  ${cmd}\n\n` +
+      `Remove --dry-run to write artifacts/catalog/manga_catalog.csv.\n` +
+      `Sources: character_brand_registry.yaml + manga_brand_series_plan.yaml + market_catalog_registry.yaml`
+    );
+  }
+
   // ── Init ───────────────────────────────────────────────────────────────────────
   initMarketTable();
+  initMangaBrandTable();
 </script>
 </body>
 </html>
