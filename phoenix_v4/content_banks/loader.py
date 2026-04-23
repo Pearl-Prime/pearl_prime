@@ -134,8 +134,13 @@ def _load_registry_from_dir(root: Path) -> ContentBankRegistry:
             continue
         # Skip non-bank config files that live in the same directory
         # (loc_var_render.yaml uses fallbacks/rotations; selected_mechanism_resolver.yaml
-        # uses mechanisms — neither are variant banks).
-        if "fallbacks" in data or "rotations" in data or "mechanisms" in data:
+        # uses a top-level `resolver:` mapping — neither are variant banks).
+        if (
+            "fallbacks" in data
+            or "rotations" in data
+            or "mechanisms" in data
+            or "resolver" in data
+        ):
             continue
         variants = data.get("variants")
         if not isinstance(variants, list):
