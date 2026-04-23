@@ -7,6 +7,8 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+pytest.importorskip("openai")  # skip entire module if openai not in test env
+
 from phoenix_v4.llm.router import _detect_language, _resolve_target, health_check, route_llm
 
 

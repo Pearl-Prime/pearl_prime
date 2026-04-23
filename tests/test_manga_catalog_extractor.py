@@ -238,7 +238,7 @@ def test_examples_excluded_from_extraction(tmp_path: Path) -> None:
 
 
 def test_three_stillness_press_series_extracted() -> None:
-    """Production index must contain exactly 3 stillness_press series."""
+    """Production index must contain the 3 original stillness_press series (catalog may grow)."""
     from scripts.catalog_visibility.extract_manga_series_index import (
         BRAND_REGISTRY_PATH,
         BRAND_SERIES_PLAN_PATH,
@@ -247,8 +247,8 @@ def test_three_stillness_press_series_extracted() -> None:
 
     entries, errs = extract_all(MANGA_PROFILE_ROOT, BRAND_REGISTRY_PATH, BRAND_SERIES_PLAN_PATH)
     sp_entries = [e for e in entries if e.get("brand_id") == "stillness_press"]
-    assert len(sp_entries) == 3, (
-        f"Expected 3 stillness_press series, got {len(sp_entries)}: "
+    assert len(sp_entries) >= 3, (
+        f"Expected at least 3 stillness_press series, got {len(sp_entries)}: "
         f"{[e.get('series_id') for e in sp_entries]}"
     )
     sp_ids = {e["series_id"] for e in sp_entries}
