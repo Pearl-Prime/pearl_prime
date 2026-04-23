@@ -290,7 +290,9 @@ class OpenAICompatibleBackend:
 
         client = OpenAI(base_url=self._base_url, api_key=self._api_key, timeout=http_timeout)
         extra_body: dict[str, Any] = {}
-        if self._disable_thinking:
+        # enable_thinking=False is a DashScope/Qwen-specific param — do NOT send to Groq/xAI/Together
+        _is_dashscope = "dashscope" in self._base_url or "aliyuncs" in self._base_url
+        if self._disable_thinking and _is_dashscope:
             extra_body["enable_thinking"] = False
         t0 = time.monotonic()
         try:
