@@ -5,11 +5,14 @@ from phoenix_v4.rendering.section_packet_composer import compose_section_packet
 
 
 def test_compose_returns_audit_fields():
+    # Use SCENE not HOOK: since PR #575, HOOK sections consume the enrichment
+    # slot into the scene_recognition flow (replacing the source name), which
+    # hides the generic "enrichment" source. SCENE exercises the default path.
     long_enr = " ".join([f"w{i}" for i in range(12)])
     out = compose_section_packet(
         chapter_index=1,
         section_index=1,
-        section_type="HOOK",
+        section_type="SCENE",
         target_words=100,
         spine_context={},
         beatmap_slot={},
@@ -27,11 +30,14 @@ def test_compose_returns_audit_fields():
 
 
 def test_placeholder_warning():
+    # Use SCENE not HOOK: PR #575 routes HOOK enrichment through
+    # scene_recognition, bypassing the placeholder-check path. SCENE keeps
+    # the enrichment slot content that this test targets.
     pad = " ".join([f"p{i}" for i in range(12)])
     out = compose_section_packet(
         chapter_index=1,
         section_index=2,
-        section_type="HOOK",
+        section_type="SCENE",
         target_words=500,
         spine_context={},
         beatmap_slot={},
@@ -92,11 +98,14 @@ def test_exercise_phase_prepends_journey_intro():
 
 
 def test_bridge_text_prepended():
+    # Use SCENE not HOOK: PR #575 replaces HOOK enrichment with
+    # scene_recognition bank content, so the "b0" enrichment marker gets
+    # consumed. SCENE preserves the enrichment-alongside-bridge contract.
     long_body = " ".join([f"b{i}" for i in range(12)])
     out = compose_section_packet(
         chapter_index=2,
         section_index=1,
-        section_type="HOOK",
+        section_type="SCENE",
         target_words=400,
         spine_context={},
         beatmap_slot={},
@@ -109,14 +118,18 @@ def test_bridge_text_prepended():
 
 
 def test_stacks_teacher_and_enrichment_without_duplicating_identical():
+    # Use SCENE not HOOK (PR #575 scene_recognition replaces enrichment), and
+    # provide teacher_id in spine_context — the composer only appends
+    # teacher_atom in explicit teacher mode (see composer comment: "Without a
+    # teacher_id the content has no owner, no wrapper, and no voice attribution.").
     long_reg = " ".join([f"r{i}" for i in range(12)])
     long_teacher = " ".join([f"t{i}" for i in range(12)])
     out = compose_section_packet(
         chapter_index=1,
         section_index=1,
-        section_type="HOOK",
+        section_type="SCENE",
         target_words=500,
-        spine_context={},
+        spine_context={"teacher_id": "ahjan"},
         beatmap_slot={},
         enrichment_slot={"content": long_reg, "source": "registry"},
         teacher_atom_content=long_teacher,
