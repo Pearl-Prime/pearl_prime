@@ -1,0 +1,74 @@
+manga_profile_schema_version: "1.0.0"
+status: planned
+created_at: "2026-04-22"
+profile_type: series
+
+title_id: stillness_jp_02
+brand_id: stillness_press
+locale: ja_JP
+teacher: ahjan
+
+market_demo: seinen
+genre_family: healing
+subgenre: "iyashikei_therapy_adjacent"
+
+emotional_engine: cozy_restoration
+reader_promise: "You will understand why the cat stays."
+
+serialization_engine: episodic
+chapter_hook_family: arrival
+
+visual_grammar: iyashikei_minimalism
+line_weight_profile: light
+black_fill_ratio: 0.08
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 35
+  silent_panel_ratio: 0.40
+  reaction_shot_frequency: low
+  spread_frequency: rare
+
+narration_tolerance: moderate
+adaptation_targets:
+  - print
+  - webtoon
+
+series_title: "猫のいる診察室"
+series_title_en: "The Clinic with a Cat"
+
+series_logline: >-
+  A therapist's quiet office. A stray cat. A different person's gentle story each chapter.
+
+series_description: |
+  In a small countryside clinic, a therapist sees patients one by one. A stray cat
+  has taken up residence in the waiting room. Each chapter follows a different patient —
+  their anxiety, their grief, the thing they can't say out loud. The cat watches. The
+  sessions end. Nothing is resolved. Something shifts. Mental health awareness through
+  quiet narrative, not clinical explanation.
+
+marketing_angle: |
+  Mental health manga without clinical framing — the therapeutic process rendered as
+  lived experience. ComicWalker (free-to-read) as discovery platform; tankobon collect
+  for library and purchase market. Comp: A Man and His Cat (warm, adult, quiet).
+
+comp_titles:
+  - "A Man and His Cat (Umi Sakurai)"
+  - "Mushishi (Yuki Urushibara) — register, not topic"
+
+platform_primary: "ComicWalker"
+platform_secondary: "LINE Manga"
+format_note: "Free-to-read initial chapters. Tankobon volumes collect 5–6 chapters."
+
+launch_priority: P2
+
+main_character_name: "先生" # Sensei (unnamed therapist)
+main_character_name_romanized: Sensei
+main_character_role: "therapist in countryside clinic"
+main_character_image_path: null
+
+topic_mapping:
+  - anxiety
+  - somatic_healing
+
+plan_source_path: docs/CJK_CATALOG_PLAN.md

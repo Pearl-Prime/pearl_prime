@@ -1,0 +1,78 @@
+manga_profile_schema_version: "1.0.0"
+status: planned
+created_at: "2026-04-22"
+profile_type: series
+
+title_id: stillness_jp_05
+brand_id: stillness_press
+locale: ja_JP
+teacher: ahjan
+
+market_demo: josei
+genre_family: healing
+subgenre: "therapy_manga_direct"
+
+emotional_engine: recognition
+reader_promise: "You will realize the voice that says you're not enough has a name and a history."
+
+serialization_engine: arc_based
+chapter_hook_family: almost_confession
+
+visual_grammar: iyashikei_minimalism
+line_weight_profile: light
+black_fill_ratio: 0.10
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 55
+  silent_panel_ratio: 0.30
+  reaction_shot_frequency: medium
+  spread_frequency: rare
+
+narration_tolerance: generous
+adaptation_targets:
+  - print
+  - webtoon
+
+series_title: "そのままでいい"
+series_title_en: "You're Fine Just As You Are"
+
+series_logline: >-
+  A direct therapy manga, co-created with a clinical psychologist, for the reader
+  who has never believed the reassurance.
+
+series_description: |
+  A young woman has heard it her whole life — "you're fine, you're doing great" — and
+  never believed it. This series uses 4-koma panels interspersed with explanatory pages
+  (written in the voice of a psychologist) to trace the imposter schema: where it comes
+  from, what it protects, how it keeps running after the reason is gone. Not a workbook.
+  Not a lecture. A manga where someone finally maps the exact feeling. Direct comp:
+  "I'm Enough" (Hosokawa + Dr. Mizushima, Last Gasp).
+
+marketing_angle: |
+  The only manga in the stillness_press lineup with explicit clinical co-author framing.
+  4-koma hybrid + explanatory interludes — formats the insight for readers who want
+  understanding, not just feeling. Standalone tankobon format + LINE digital.
+  Comp credibility: positions as Japanese equivalent of "I'm Enough" for the domestic market.
+
+comp_titles:
+  - "I'm Enough (Tenten Hosokawa + Dr. Hiroko Mizushima)"
+  - "My Lesbian Experience With Loneliness (Nagata Kabi)"
+
+platform_primary: "standalone tankobon + LINE Manga"
+platform_secondary: "ComicWalker"
+format_note: "One collected volume. Clinical co-author credit on cover."
+
+launch_priority: P0
+# P0: most direct market comp. Validates the therapy-manga direct format for JP market.
+
+main_character_name: "ほのか" # Honoka
+main_character_name_romanized: Honoka
+main_character_role: "office worker, late 20s, high achiever who cannot accept she is enough"
+main_character_image_path: null
+
+topic_mapping:
+  - imposter_syndrome
+  - self_worth
+
+plan_source_path: docs/CJK_CATALOG_PLAN.md

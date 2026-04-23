@@ -1,0 +1,76 @@
+manga_profile_schema_version: "1.0.0"
+status: planned
+created_at: "2026-04-23"
+profile_type: series
+
+# --- core identity ---
+title_id: cogclar_jp_07
+brand_id: cognitive_clarity
+locale: ja_JP
+teacher: ahjan
+
+market_demo: seinen
+genre_family: psychological_thriller
+subgenre: "overthinking_thriller"
+
+emotional_engine: paranoia_resolution
+reader_promise: "The pattern you keep seeing is real. The question is whether it means what you think."
+
+serialization_engine: arc_based
+chapter_hook_family: pattern
+
+visual_grammar: seinen_thriller
+line_weight_profile: medium
+black_fill_ratio: 0.30
+screentone_profile: moderate
+
+pacing:
+  words_per_page_target: 50
+  silent_panel_ratio: 0.20
+  reaction_shot_frequency: high
+  spread_frequency: rare
+
+narration_tolerance: high
+adaptation_targets:
+  - print
+
+# --- marketing & catalog ---
+series_title: "偽りの分析家"
+series_title_en: "The Analyst's False Self"
+
+series_logline: >-
+  He spots every pattern in the market. He cannot stop spotting the same pattern in himself.
+
+series_description: |
+  A securities analyst realizes the catastrophic patterns he sees in financial data are mirrors
+  of his own cognitive loops. The series is a psychological thriller about overthinking, imposter
+  syndrome, and the difference between analysis and paranoia. The therapy content (cognitive
+  distortions, pattern-interruption, reality-testing) embedded entirely inside a financial
+  thriller. Comp: Liar Game's intellectual tension applied to internal psychological state.
+
+marketing_angle: |
+  Psychological thriller for the seinen reader who uses analysis as a defense mechanism. The
+  overthinking content is the mystery mechanics — never announced. Positioned for
+  Monthly Afternoon.
+
+comp_titles:
+  - "Liar Game (Shinobu Kaitani)"
+  - "Kaiji (Nobuyuki Fukumoto) — pressure register"
+  - "Homunculus (Hideo Yamamoto) — interior psychology"
+
+platform_primary: "Monthly Afternoon"
+platform_secondary: "ComicWalker"
+format_note: "Print-first. Tankobon collect in 180–200pp volumes."
+
+launch_priority: P2
+
+main_character_name: null
+main_character_name_romanized: null
+main_character_role: "securities analyst, pattern-recognition specialist"
+main_character_image_path: null
+
+topic_mapping:
+  - overthinking
+  - imposter_syndrome
+
+plan_source_path: docs/CJK_CATALOG_PLAN.md

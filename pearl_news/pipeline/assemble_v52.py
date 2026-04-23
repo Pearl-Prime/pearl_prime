@@ -199,31 +199,30 @@ TEACHER_DB: dict[str, dict[str, Any]] = {
         "micro_action": "72-hour micro-action: Once each day, close your eyes for one minute and imagine golden light washing through your body from crown to feet. Let it carry one blockage away.",
     },
     "master_feung": {
-        "tradition": "Taoist cultivation through art and embodied practice",
-        "tradition_short": "the Taoist artistic cultivation tradition",
-        "credential": "Chinese cultivation master, painter, and Guqin practitioner",
+        "tradition": "Chinese wisdom traditions; Grand Painting teaching; Xi'an cultural center; Hua Shan pilgrimage",
+        "tradition_short": "the Grand Painting tradition of Xi'an",
+        "credential": "Master Feung teaches the Grand Painting tradition from his cultural center in Xi'an",
         "key_terms": {
-            "naturalness": "the state that remains when striving falls away — not laziness, but the deepest kind of ease, aligned with the Tao",
-            "cultivation": "the practice of refining the self through art, movement, breath, and attention — not producing results, but becoming more natural",
-            "heart response": "sensing from the heart before the mind categorises — a faster and more honest intelligence that lives below thought",
+            "Grand Painting": "humanity as a vast painting — each person, each conflict, each moment exactly where it needs to be for the whole to be complete",
+            "irreversible stroke": "the brush stroke cannot be undone — the teaching that full presence now is the only actual ground of peace and action",
+            "being yourself": "bringing the full distinctiveness of one's tradition and perspective — the stroke that is fully itself creates more with the adjacent stroke than the stroke that accommodates toward compatibility",
         },
-        "practice_name": "Mountain Stillness & Brush",
+        "practice_name": "The Irreversible Stroke",
         "practice_duration": "5 min",
-        "practice_description": "From Master Fan's teaching on naturalness, Tai Chi, and art as cultivation. Designed for when the body is tight and the mind is forcing.",
+        "practice_description": "From Master Feung's Grand Painting teaching at Xi'an. Designed for when the mind circles the past or grasps at control.",
         "exercise_steps": [
-            {"phase": "Step 1 of 7 · Stand", "duration": 30, "instruction": "Stand with feet shoulder-width apart. Soften the knees. Let the arms hang. Feel the ground through the soles of the feet. This is standing root — the foundation of Tai Chi and all cultivation."},
-            {"phase": "Step 2 of 7 · Breathe", "duration": 35, "instruction": "Breathe naturally. Do not change the rhythm. Just notice where the breath goes — chest, belly, throat. The breath tells the truth about what the body is carrying. Let it speak.", "breathe": True},
-            {"phase": "Step 3 of 7 · Settle", "duration": 40, "instruction": "Release ten per cent of the tension in your shoulders, jaw, and hands. Not all of it — just ten per cent. Naturalness arrives in increments. The mountain does not try to be stable. Let the body find its own stillness."},
-            {"phase": "Step 4 of 7 · Sense", "duration": 35, "instruction": "Place a hand on your chest. Ask: what does the heart sense right now? Not think — sense. Wait three seconds. Heart response is faster and more honest than analysis. Trust what arrives."},
-            {"phase": "Step 5 of 7 · Move", "duration": 40, "instruction": "Slowly shift your weight to one foot. Then back. Then to the other. Feel the ground rise to meet you. This is Tai Chi's first lesson: the body moves, the mind observes. Let the body lead."},
-            {"phase": "Step 6 of 7 · Draw", "duration": 35, "instruction": "If a pen is near, draw one slow line on paper. If not, trace a line in the air with your finger. Let the movement coordinate with the exhale. The line is a record of your breath. Let it be honest, not perfect."},
-            {"phase": "Step 7 of 7 · Return", "duration": 30, "instruction": "Stand still again. Feel what has shifted. The body is slightly more settled. The breath is slightly more natural. This is cultivation — not dramatic, not loud, just one degree closer to naturalness."},
-            {"phase": "Complete", "duration": 0, "instruction": "The practice is done. Carry the stillness with you. The mountain does not leave the mountain. You do not have to leave this calm.", "final": True},
+            {"phase": "Step 1 of 6 · Arrive", "duration": 30, "instruction": "Sit or stand. Feel where you are. Master Feung's teaching begins with place — Xi'an, where the Silk Road began, where traditions met without needing to win. You are somewhere right now. That somewhere is part of the Grand Painting."},
+            {"phase": "Step 2 of 6 · Name the stroke", "duration": 40, "instruction": "What just happened that cannot be undone? Name it plainly — not as a wound, not as a failure. Just as a stroke that has been made. 'That conversation happened.' 'That decision was made.' 'That moment has passed.' The brush stroke is in the painting now."},
+            {"phase": "Step 3 of 6 · Look at the painting", "duration": 45, "instruction": "Ask: where does this stroke sit in the larger picture? Not what it means — what it is next to. What strokes surround it? The Grand Painting tradition does not ask whether the stroke was perfect. It asks where it lives.", "breathe": True},
+            {"phase": "Step 4 of 6 · Feel the fullness", "duration": 35, "instruction": "Place a hand on the chest. Master Feung teaches that the brushstroke made from full presence — from being completely yourself in that moment — creates more than the stroke made from accommodation. What would full presence have looked like? Notice without judgment."},
+            {"phase": "Step 5 of 6 · The next stroke", "duration": 40, "instruction": "The question is not how to return to before the last stroke. The question is: what is the next stroke? Made from now, not from the story about then. Breathe once. Ask: what does the painting need next from me?"},
+            {"phase": "Step 6 of 6 · Mark it", "duration": 30, "instruction": "If a pen is near, make one mark on paper. Let it be complete in itself — not beautiful, not correct. Just present. This mark is now part of your Grand Painting. Let it stand."},
+            {"phase": "Complete", "duration": 0, "instruction": "The practice is done. The brush stroke cannot be undone — and that is not a limitation. It is the teaching. You are in the painting now. Act from here.", "final": True},
         ],
-        "cta_practice_label": "Start The Mountain Stillness & Brush Practice",
-        "cta_regulation_text": "Settle First, Then Move",
-        "cta_body": "The body knows before the mind. Cultivation through art, breath, and stillness returns you to what was always there — naturalness. Begin now.",
-        "micro_action": "72-hour micro-action: Once each day, draw one slow line on paper. Let the breath coordinate with the stroke. Notice what the line teaches the hand.",
+        "cta_practice_label": "Start The Irreversible Stroke Practice",
+        "cta_regulation_text": "Act from Now, Not from Then",
+        "cta_body": "The brush stroke cannot be undone. Master Feung's Grand Painting teaching: the only actual ground of peace is full presence now — not the restoration of a previous stroke. Begin the practice.",
+        "micro_action": "72-hour micro-action: Once each day, make one decision from full presence — not from what should have been done before. Notice the difference in what becomes possible.",
     },
     "joshin": {
         "tradition": "Mainstream Shingon Buddhism (Mikkyo)",
@@ -439,9 +438,12 @@ TOPIC_TO_PILLAR = {
 SDG_DB = {
     "3": {"name": "Good Health & Well-Being", "target": "3.4", "color": "#4C9F38"},
     "4": {"name": "Quality Education", "target": "4.7", "color": "#C5192D"},
+    "5": {"name": "Gender Equality", "target": "5.1", "color": "#FF3A21"},
+    "8": {"name": "Decent Work & Economic Growth", "target": "8.3", "color": "#A21942"},
     "10": {"name": "Reduced Inequalities", "target": "10.3", "color": "#DD1367"},
     "13": {"name": "Climate Action", "target": "13.3", "color": "#3F7E44"},
     "16": {"name": "Peace, Justice & Strong Institutions", "target": "16.7", "color": "#00689D"},
+    "17": {"name": "Partnerships for the Goals", "target": "17.17", "color": "#19486A"},
 }
 
 # ── ARTICLE TYPE MAPPING ─────────────────────────────────────────────────────
@@ -529,16 +531,30 @@ def _esc(text: str) -> str:
     return html.escape(text)
 
 
+def _strip_html_tags(text: str) -> str:
+    """Remove HTML tags from text so slot content can be re-wrapped by v52."""
+    import re as _re
+    return _re.sub(r"<[^>]+>", "", text).strip()
+
+
 def _paragraphs_to_html(text: str, css_class: str = "") -> str:
-    """Split text on double newlines into <p> tags."""
+    """Split text on double newlines into <p> tags. Strips HTML first."""
     cls = f' class="{css_class}"' if css_class else ""
-    paras = [p.strip() for p in text.strip().split("\n\n") if p.strip()]
+    clean = _strip_html_tags(text)
+    paras = [p.strip() for p in clean.strip().split("\n\n") if p.strip()]
+    if not paras:
+        # Fallback: single newlines
+        paras = [p.strip() for p in clean.strip().split("\n") if p.strip()]
     return "\n".join(f"    <p{cls}>{_esc(p)}</p>" for p in paras)
 
 
 def _split_into_paragraphs(text: str) -> list[str]:
-    """Split text into paragraph strings."""
-    return [p.strip() for p in text.strip().split("\n\n") if p.strip()]
+    """Split text into paragraph strings. Strips HTML tags first."""
+    clean = _strip_html_tags(text)
+    paras = [p.strip() for p in clean.strip().split("\n\n") if p.strip()]
+    if not paras:
+        paras = [p.strip() for p in clean.strip().split("\n") if p.strip()]
+    return paras
 
 
 def _infer_pillar(topic: str) -> str:

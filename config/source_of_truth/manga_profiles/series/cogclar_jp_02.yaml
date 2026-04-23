@@ -1,0 +1,75 @@
+manga_profile_schema_version: "1.0.0"
+status: planned
+created_at: "2026-04-22"
+profile_type: series
+
+title_id: cogclar_jp_02
+brand_id: cognitive_clarity
+locale: ja_JP
+teacher: joshin
+
+market_demo: seinen
+genre_family: healing
+subgenre: "overthinking_4koma_hybrid"
+
+emotional_engine: recognition
+reader_promise: "You will recognize the loop and finally watch it from outside."
+
+serialization_engine: episodic
+chapter_hook_family: hidden_truth_glimpse
+
+visual_grammar: polished_seinen
+line_weight_profile: medium
+black_fill_ratio: 0.15
+screentone_profile: minimal
+
+pacing:
+  words_per_page_target: 90
+  silent_panel_ratio: 0.25
+  reaction_shot_frequency: medium
+  spread_frequency: rare
+
+narration_tolerance: generous
+adaptation_targets:
+  - print
+  - webtoon
+
+series_title: "考えすぎてしまうあなたへ"
+series_title_en: "For You Who Thinks Too Much"
+
+series_logline: >-
+  Dialogue-heavy therapy manga for the reader whose brain will not stop running scenarios.
+
+series_description: |
+  Protagonist overthinks everything. This series maps the mechanism with precision —
+  4-koma strips that demonstrate specific cognitive loops (pre-mortem rehearsal, second-
+  order consequence modeling, status-threat scanning) followed by brief essay interludes
+  from the perspective of a clinical psychologist who consults on the series. CBT-
+  informed but never clinical in register. Target: Pixiv Comics free chapters as
+  discovery, tankobon for library and purchase.
+
+marketing_angle: |
+  Hybrid 4-koma + explanatory essay — the overthinking recognition bank made visual.
+  Highly shareable individual strips. The CBT techniques embedded in narrative, not
+  explained. Pixiv as discovery platform for the male overthinking demographic.
+
+comp_titles:
+  - "Berserk (Kentaro Miura) — visual intensity for internal states, not topic"
+  - "Flow: Optimal Experience (Csikszentmihalyi) — reader type"
+
+platform_primary: "Pixiv Comics"
+platform_secondary: "ComicWalker"
+format_note: "Free initial chapters. Tankobon collected volumes."
+
+launch_priority: P2
+
+main_character_name: "翔" # Sho
+main_character_name_romanized: Sho
+main_character_role: "product manager, 29, sees a therapist for the first time"
+main_character_image_path: null
+
+topic_mapping:
+  - overthinking
+  - social_anxiety
+
+plan_source_path: docs/CJK_CATALOG_PLAN.md

@@ -1,0 +1,78 @@
+manga_profile_schema_version: "1.0.0"
+status: planned
+created_at: "2026-04-23"
+profile_type: series
+
+# --- core identity ---
+title_id: stillness_jp_07
+brand_id: stillness_press
+locale: ja_JP
+teacher: ahjan
+
+market_demo: josei
+genre_family: dark_fantasy
+subgenre: "somatic_fantasy"
+
+emotional_engine: grief_restoration
+reader_promise: "You will feel yourself returning to your body, one chapter at a time."
+
+serialization_engine: episodic
+chapter_hook_family: sensation
+
+visual_grammar: expressive_josei
+line_weight_profile: medium
+black_fill_ratio: 0.25
+screentone_profile: atmospheric
+
+pacing:
+  words_per_page_target: 35
+  silent_panel_ratio: 0.35
+  reaction_shot_frequency: medium
+  spread_frequency: occasional
+
+narration_tolerance: moderate
+adaptation_targets:
+  - print
+  - webtoon
+
+# --- marketing & catalog ---
+series_title: "魂の森で目醒める"
+series_title_en: "Awakening in the Soul Forest"
+
+series_logline: >-
+  A woman burned out so completely she dissolved into the forest. The series is about returning.
+
+series_description: |
+  A woman burned out to the point of dissolution wanders a spirit forest as something between
+  human and nature. Each chapter she recovers one small physical sensation — cold water, rough
+  bark, the weight of sleep. The wellness content (somatic healing, body reoccupation after
+  burnout) travels entirely inside a dark fantasy shell. No clinical language. No therapist
+  character. The forest is the therapist.
+
+marketing_angle: |
+  Positioned as dark fantasy / supernatural healing manga for josei adult market. Comp: Mushishi
+  emotional register meets Berserk visual weight. The psychological content (somatic healing,
+  burnout recovery) is never named — readers process it as "a story about a woman returning
+  to herself."
+
+comp_titles:
+  - "Mushishi (Yuki Urushibara)"
+  - "Princess Mononoke (Hayao Miyazaki)"
+  - "Berserk (Kentaro Miura) — tone, not topic"
+
+platform_primary: "LINE Manga"
+platform_secondary: "ComicWalker"
+format_note: "Digital-first. Tankobon collect in 180–200pp volumes."
+
+launch_priority: P2
+
+main_character_name: null
+main_character_name_romanized: null
+main_character_role: "burnout survivor, between human and forest spirit"
+main_character_image_path: null
+
+topic_mapping:
+  - somatic_healing
+  - burnout
+
+plan_source_path: docs/CJK_CATALOG_PLAN.md
