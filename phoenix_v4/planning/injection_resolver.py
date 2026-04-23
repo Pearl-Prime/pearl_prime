@@ -161,24 +161,77 @@ def _strip_known_marks(text: str) -> str:
     )
 
 
-# Locale token fallbacks — same defaults as book_renderer.py so packet-stage
-# output reads cleanly even when the full renderer hasn't run.
-# Keys are lowercase; title-case variants are also replaced (see note in _fill_locale_tokens).
-_LOCALE_FALLBACKS = {
-    "street_name":    "traffic",
-    "weather_detail": "condensation",
-    "transit_line":   "the train",
+# Locale token fallbacks — loaded lazily from config/content_banks/loc_var_render.yaml
+# so packet-stage output matches book_renderer resolution (one source of truth).
+# Covers both flat tokens ({street_name}) and dotted tokens ({location.digital_space}).
+_LOCALE_FALLBACKS_CACHE: Optional[Dict[str, str]] = None
+
+# Hardcoded last-resort fallbacks used if loc_var_render.yaml is missing/unreadable.
+_LOCALE_HARDCODED = {
+    "street_name":              "the street below",
+    "weather_detail":           "soft daylight along the sill",
+    "transit_line":             "the train",
+    "location.digital_space":   "a quiet moment",
+    "location.daily_space":     "the kitchen table",
+    "location.high_stakes_space": "the meeting room",
+    "location.learning_space":  "the quiet room",
+    "location.memory_space":    "the place where they used to be",
+    "location.social_gathering": "the gathering",
 }
 
 
+def _load_locale_fallbacks() -> Dict[str, str]:
+    global _LOCALE_FALLBACKS_CACHE
+    if _LOCALE_FALLBACKS_CACHE is not None:
+        return _LOCALE_FALLBACKS_CACHE
+    path = REPO_ROOT / "config" / "content_banks" / "loc_var_render.yaml"
+    merged = dict(_LOCALE_HARDCODED)
+    if path.is_file():
+        try:
+            data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+            merged.update({str(k): str(v) for k, v in (data.get("fallbacks") or {}).items()})
+        except Exception:
+            pass
+    _LOCALE_FALLBACKS_CACHE = merged
+    return merged
+
+
+import re as _re
+_LOC_SENTENCE_START_RE = _re.compile(r'(^|[.!?]\s+|\n\s*)(\{[A-Za-z_][A-Za-z_0-9.]*\})')
+
+
 def _fill_locale_tokens(text: str) -> str:
-    """Replace locale tokens — handles both lowercase and title-case variants."""
-    for token_name, fallback in _LOCALE_FALLBACKS.items():
-        text = text.replace(f"{{{token_name}}}", fallback)
-        # Title-case variant (some atom files use {Weather_detail} etc.)
-        title = token_name[0].upper() + token_name[1:]
-        if title != token_name:
-            text = text.replace(f"{{{title}}}", fallback)
+    """Replace locale tokens with sentence-start capitalization.
+
+    Handles flat tokens ({street_name}), dotted tokens ({location.digital_space}),
+    and title-case variants ({Weather_detail}). Tokens at sentence start are
+    capitalized so ". {street_name}" → ". The street below" (not ". the street below").
+    """
+    tokens = _load_locale_fallbacks()
+
+    def _lookup(name: str) -> Optional[str]:
+        if name in tokens:
+            return tokens[name]
+        # title-case variant → lowercase lookup
+        alt = name[0].lower() + name[1:]
+        return tokens.get(alt)
+
+    def _cap_start(m) -> str:
+        prefix, token_braced = m.group(1), m.group(2)
+        name = token_braced[1:-1]
+        value = _lookup(name)
+        if not value:
+            return m.group(0)
+        return f"{prefix}{value[0].upper()}{value[1:]}"
+
+    text = _LOC_SENTENCE_START_RE.sub(_cap_start, text)
+
+    # Mid-sentence replacements (lowercase value).
+    for name, value in tokens.items():
+        text = text.replace(f"{{{name}}}", value)
+        if name and name[0].islower():
+            title = name[0].upper() + name[1:]
+            text = text.replace(f"{{{title}}}", value)
     return text
 
 

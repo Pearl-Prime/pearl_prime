@@ -20,7 +20,7 @@ fallbacks:
   store_name:        "a nearby store"
   office_building:   "the office building"
   commute_mode:      "the commute"
-  location.digital_space:     "your phone"
+  location.digital_space:     "a quiet moment"   # v2: replaced "your phone" which read as literal noun in dangling suffixes ("in your phone"). "a quiet moment" parses cleanly in all sentence positions.
   location.daily_space:       "the kitchen table"
   location.high_stakes_space: "the meeting room"
   location.learning_space:    "the quiet room"

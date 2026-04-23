@@ -104,18 +104,38 @@ def _resolve_location_profile(spine_context: Dict[str, Any]) -> Dict[str, str]:
     return result
 
 
+_SENTENCE_START_RE = re.compile(r'(^|[.!?]\s+|\n\s*)(\{[A-Za-z_][A-Za-z_0-9.]*\})')
+
+
 def _fill_locale_tokens(text: str, location_tokens: Optional[Dict[str, str]] = None) -> str:
     """Replace {token_name} placeholders with resolved locale values.
 
     Case-insensitive matching: handles both {weather_detail} and {Weather_detail}
     (the latter appears in some first_responders and entrepreneurs atom files due
     to an authoring inconsistency — treated as the same token).
+
+    Sentence-start capitalization: when a token appears after a period/newline,
+    the substitution is capitalized so ". {street_name}" → ". Traffic" (not ". traffic").
+    Fixes the 1,926 lowercase-after-period bugs found in ch1_sprint_v2.
     """
     tokens = location_tokens or _LOCALE_TOKEN_HARDCODED_FALLBACKS
+
+    # First: capitalize values whose {token} lands at sentence start.
+    def _cap_start(m: re.Match[str]) -> str:
+        prefix, token_braced = m.group(1), m.group(2)
+        token_name = token_braced[1:-1]
+        # Look up value (handles title-case authoring variant)
+        value = tokens.get(token_name) or tokens.get(token_name[0].lower() + token_name[1:])
+        if not value:
+            return m.group(0)  # unknown token — leave for fallback pass
+        capped = value[0].upper() + value[1:] if value else value
+        return f"{prefix}{capped}"
+
+    text = _SENTENCE_START_RE.sub(_cap_start, text)
+
+    # Second: replace remaining (mid-sentence) occurrences with the lowercase value.
     for token_name, value in tokens.items():
-        # Exact match (lowercase, as authored in gen_z atoms)
         text = text.replace(f"{{{token_name}}}", value)
-        # Title-case variant (first_responders, entrepreneurs, millennial_women atoms)
         title_token = token_name[0].upper() + token_name[1:]
         if title_token != token_name:
             text = text.replace(f"{{{title_token}}}", value)
@@ -142,9 +162,17 @@ def _word_count(text: str) -> int:
 
 
 def _packet_injection_seed(spine_context: dict, chapter_index: int, section_index: int) -> str:
+    """Seed must be scoped by (topic, persona, book_seed) so different books never pick
+    the same HOOK variant deterministically. Previously used only args.seed, which caused
+    all 195 ch1_sprint_v2 books to open chapter 1 with the identical Elena passage.
+    """
     ctx = spine_context or {}
     base = str(ctx.get("packet_seed") or ctx.get("seed") or "inject").strip() or "inject"
-    return f"{base}:inject:{chapter_index}:{section_index}"
+    topic = str(ctx.get("topic") or ctx.get("topic_id") or "").strip()
+    persona = str(ctx.get("persona_id") or "").strip()
+    teacher = str(ctx.get("teacher_id") or "").strip()
+    scope = ":".join(p for p in (topic, persona, teacher) if p) or "global"
+    return f"{base}:{scope}:inject:{chapter_index}:{section_index}"
 
 
 def _exercise_phase_dict_for_injection(
@@ -199,6 +227,10 @@ def _append_layer(
 ) -> None:
     raw = (text or "").strip()
     if _word_count(raw) < min_words:
+        return
+    # Defense in depth: never let CONTENT GAP sentinels into the final prose,
+    # regardless of which code path produced them.
+    if raw.startswith("[CONTENT GAP:") or "[CONTENT GAP:" in raw:
         return
     norm = _collapse_ws(raw)
     if norm in seen_norms:
@@ -348,12 +380,15 @@ def compose_section_packet(
             )
 
     if core:
-        gap = core.startswith("[CONTENT GAP:")
-        min_c = 1 if gap else 11
-        if _word_count(core) >= min_c and (
-            gap or _collapse_ws(core) != _collapse_ws(legacy_text)
+        # NEVER append CONTENT GAP sentinels to prose — they were leaking into 100% of
+        # books (3,031 occurrences in ch1_sprint_v2). Gap is a signal, not content.
+        if core.startswith("[CONTENT GAP:"):
+            extra_warnings.append(f"enrichment_gap_suppressed: {core[:80]}")
+        elif (
+            _word_count(core) >= 11
+            and _collapse_ws(core) != _collapse_ws(legacy_text)
         ):
-            _append_layer(blocks, sources_used, "enrichment", core, seen_norms, min_words=min_c)
+            _append_layer(blocks, sources_used, "enrichment", core, seen_norms, min_words=11)
 
     extra_blocks: List[str] = list(supplemental_enrichment_blocks or [])
     slot_supp = bm_slot.get("supplemental_enrichment_blocks")
