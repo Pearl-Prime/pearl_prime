@@ -339,4 +339,7 @@ class TestComposerIntegration:
 
         # Threshold = min(350, 450-100) = 350; 400 words > 350 → no expansion attempted
         assert "pearl_writer_expansion" not in result
-        assert result["word_count"] == 400
+        # HOOK section_type triggers scene_recognition bank injection (~12-17 extra words)
+        # per PR #575 (BookSlotTracker + HOOK scene-recognition routing). Accept the overhead
+        # while still confirming the 400-word fat bridge dominates and expansion was skipped.
+        assert result["word_count"] >= 400
