@@ -542,6 +542,7 @@ def _run_spine_pipeline_mode(
                 "chapter_selector_targets": _chapter_selector_targets,
             },
             publishable_book=_publishable_book,
+            additive_enrichment=getattr(args, "additive_enrichment", False),
         ),
         repo_root,
     )
@@ -567,16 +568,15 @@ def _run_spine_pipeline_mode(
         enriched = apply_depth_pass(enriched, depth_map, repo_root=repo_root)
     post_depth_words = enriched.total_words
 
+    # Exercise journeys: attach thesis-aligned exercises to EXERCISE slots (opt-in).
+    if getattr(args, "exercise_journeys", False):
+        from phoenix_v4.planning.enrichment_select import attach_exercise_journeys
+        enriched = attach_exercise_journeys(enriched, seed=seed, enabled=True, repo_root=repo_root)
+
     _governance_report: dict = {}
-    # NOTE — BookSlotTracker variety enforcement is currently NOT wired into this
-    # pipeline. The main spine path (compose_from_enriched_book → compose_golden_
-    # spine_chapter → compose_chapter_prose) does not route through
-    # injection_resolver.resolve_injections, which is the only consumer of the
-    # tracker. Only the pilot path (scripts/pilot/run_legacy_template_packet_
-    # pilot.py → compose_section_packet) benefits from the tracker today. Wiring
-    # here is blocked on the spine path adopting section_packet_composer — a
-    # larger refactor, not a small diff. Do not re-add a dead `slot_tracker=`
-    # kwarg here until that migration lands.
+    # BookSlotTracker + resolve_injections are now wired inside select_enrichment().
+    # Story schedule (named-character 4-arc arcs) fills SCENE slots at indices 2/5/9.
+    # See enrichment_select.py: _story_schedule + _book_tracker instantiated before chapter loop.
     prose = compose_from_enriched_book(
         enriched,
         quality_profile=quality_profile,
@@ -1157,6 +1157,12 @@ def _run_spine_pipeline_mode(
             json.dumps(enriched.enrichment_audit, indent=2, default=str, ensure_ascii=False),
             encoding="utf-8",
         )
+        _spa = enriched.enrichment_audit.get("section_packet_audit")
+        if _spa:
+            (render_dir / "section_packet_audit.json").write_text(
+                json.dumps(_spa, indent=2, default=str, ensure_ascii=False),
+                encoding="utf-8",
+            )
         _bq_fail, _bq_frag = _apply_book_quality_gate(
             render_dir=render_dir,
             prose=prose,
@@ -1449,6 +1455,16 @@ def main() -> int:
         dest="no_job_check",
         action="store_true",
         help="Skip job.json enforcement (CI / emergency only).",
+    )
+    ap.add_argument(
+        "--additive-enrichment",
+        action="store_true",
+        help="Layer all sources per slot: persona first → registry always → teacher third (additive, not waterfall)",
+    )
+    ap.add_argument(
+        "--exercise-journeys",
+        action="store_true",
+        help="Attach thesis-aligned exercise journeys to EXERCISE slots after depth pass.",
     )
     args = ap.parse_args()
 

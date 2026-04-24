@@ -27,8 +27,10 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from phoenix_v4.planning.beatmap_compile import Beatmap, BeatmapChapter, BeatmapSlot
+from phoenix_v4.planning.injection_resolver import BookSlotTracker, resolve_injections
 from phoenix_v4.planning.selection_allowlist import atom_passes_book_governance
 from phoenix_v4.planning.slot_resolver import _bestseller_metadata_score
+from phoenix_v4.planning.story_planner import SCENE_SECTION_INDICES, StorySchedule, build_story_schedule
 from phoenix_v4.planning.registry_resolver import (
     _TEACHER_TYPE_MAP,
     _TEACHER_OVERLAY_TYPES,
@@ -267,6 +269,7 @@ class EnrichmentRequest:
     publishable_book: bool = False
     content_banks_dir: Optional[Path] = None
     ei_v2_config: Optional[Dict[str, Any]] = None  # P0.9: hybrid_select wiring
+    additive_enrichment: bool = False  # Layer all sources per slot: persona → registry → teacher
 
 
 @dataclass
@@ -282,6 +285,7 @@ class EnrichedSlot:
     journey_exercise_id: Optional[str] = None
     variant_id: str = ""
     atom_id: str = ""
+    teacher_content: str = ""
     match_scores: Dict[str, Any] = field(default_factory=dict)
 
 
@@ -835,6 +839,19 @@ def select_enrichment(
     # Each entry is a list of collision_family values for that chapter (0-based index).
     _chapter_collision_families: List[List[str]] = []
 
+    # Story schedule + BookSlotTracker: additive mode only.
+    # In standard waterfall mode these are inactive (empty schedule → no SCENE overrides;
+    # tracker created but record() calls are gated) to preserve existing quality gates.
+    _story_schedule: StorySchedule = (
+        build_story_schedule(persona_id=persona_id, topic=topic, seed=seed, repo_root=root)
+        if request.additive_enrichment
+        else StorySchedule()
+    )
+    _book_tracker = BookSlotTracker()
+
+    # Section packet audit: per-slot source detail (written to enrichment_audit at end).
+    _slot_audit: List[Dict[str, Any]] = []
+
     for bm_ch in bm.chapters:
         ch_key = _chapter_key(bm_ch.number)
         ch_data = sections_root.get(ch_key)
@@ -863,6 +880,7 @@ def select_enrichment(
             source_id: str = ""
             variant_id = ""
             atom_id = ""
+            teacher_content_val: str = ""
             match_scores: Dict[str, Any] = {}
             hooks_fired: List[str] = []
             reg_sec_meta: Optional[Tuple[Dict[str, Any], int]] = None
@@ -871,8 +889,101 @@ def select_enrichment(
             teacher_expand_pool: Optional[List[dict]] = None
             teacher_primary_idx: Optional[int] = None
 
-            # 1) Teacher
-            if tid and teacher_atoms:
+            # 0) Story schedule: named-character arcs replace SCENE slots at section indices 2/5/9.
+            # section_index is 1-based (slot_i + 1). StorySchedule keys: (chapter_number, section_index).
+            _sec_idx = slot_i + 1
+            if stype == "SCENE" and _sec_idx in SCENE_SECTION_INDICES:
+                _sched_slot = _story_schedule.get(bm_ch.number, _sec_idx)
+                if _sched_slot is not None and _sched_slot.text:
+                    content = _sched_slot.text
+                    source = "story_plan"
+                    source_id = _sched_slot.source
+                    atom_id = _sched_slot.source
+                    audit_counts["slots_from_persona"] += 1  # story atoms count as persona-class
+
+            # --- Additive mode: persona → registry → teacher (+ practice lib for EXERCISE) ---
+            if not content and request.additive_enrichment:
+                _add_pieces: List[str] = []
+                _add_sources: List[str] = []
+                _add_ids: List[str] = []
+
+                # 1) persona (unrestricted slot types in additive mode)
+                _ap_pool = [
+                    _a for _a in (persona_atoms.get(stype) or [])
+                    if not _is_doctrine_quarantined(str(_a.get("content") or ""), _frame)
+                    and atom_passes_book_governance(
+                        _a.get("metadata"),
+                        topic_id=topic,
+                        persona_id=persona_id,
+                        book_frame=_frame,
+                    )
+                ]
+                if _ap_pool:
+                    _ap_idx = _deterministic_index(f"{seed_key}:persona", len(_ap_pool))
+                    _ap_atom = _ap_pool[_ap_idx]
+                    _ap_content = str(_ap_atom.get("content") or "").strip()
+                    if _ap_content:
+                        _add_pieces.append(_ap_content)
+                        _add_sources.append("persona_atom")
+                        _add_ids.append(str(_ap_atom.get("atom_id") or f"persona_{_ap_idx}"))
+                        audit_counts["slots_from_persona"] += 1
+
+                # 2) registry (always — baseline)
+                _ar_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
+                if _ar_hit and not _is_doctrine_quarantined(_ar_hit[0], _frame):
+                    _add_pieces.append(_ar_hit[0])
+                    _add_sources.append("registry")
+                    _add_ids.append(_ar_hit[1])
+                    reg_sec_meta = (_ar_hit[2], _ar_hit[3])
+                    variant_id = _ar_hit[1]
+                    audit_counts["slots_from_registry"] += 1
+                    if request.additive_enrichment:
+                        _book_tracker.record(_ar_hit[1], slot_type=stype)
+
+                # 3) teacher (respects _TEACHER_OVERLAY_TYPES via _try_teacher_content)
+                if tid and teacher_atoms:
+                    _at_for_slot = {
+                        _k: [
+                            _a for _a in _pool
+                            if not _is_doctrine_quarantined(str(_a.get("content") or ""), _frame)
+                        ]
+                        for _k, _pool in teacher_atoms.items()
+                    }
+                    _at_hit = _try_teacher_content(
+                        _at_for_slot,
+                        stype,
+                        seed_key,
+                        topic_id=topic,
+                        persona_id=persona_id,
+                        book_frame=_frame,
+                    )
+                    if _at_hit:
+                        from phoenix_v4.rendering.teacher_wrapper import apply_wrapper as _aw
+                        _at_raw = _at_hit[0]
+                        _at_content = _aw(_at_raw, teacher_id=tid, section_type=stype, seed=seed_key, spine_context=plan_context)
+                        _add_pieces.append(_at_content)
+                        _add_sources.append("teacher_atom")
+                        _add_ids.append(_at_hit[1])
+                        teacher_content_val = _at_content
+                        audit_counts["slots_from_teacher"] += 1
+
+                # 4) practice library (EXERCISE only)
+                if stype == "EXERCISE":
+                    _apl = _try_practice_library(chapter_index0, topic, persona_id, seed)
+                    if _apl:
+                        _add_pieces.append(_apl[0])
+                        _add_sources.append("practice_library")
+                        _add_ids.append("practice_library")
+                        audit_counts["slots_from_practice_library"] += 1
+
+                if _add_pieces:
+                    content = "\n\n".join(_add_pieces)
+                    source = "+".join(_add_sources)
+                    source_id = "+".join(_add_ids)
+                    atom_id = _add_ids[0] if _add_ids else ""
+
+            # 1) Teacher (waterfall mode only — additive mode handles above)
+            if not content and not request.additive_enrichment and tid and teacher_atoms:
                 teacher_atoms_for_slot = dict(teacher_atoms)
                 for _k, _pool in list(teacher_atoms_for_slot.items()):
                     _filtered = _filtered_pool(_pool, slot_spec)
@@ -902,6 +1013,7 @@ def select_enrichment(
                 if t_hit:
                     content, source_id, teacher_primary_idx, t_meta = t_hit
                     source = "teacher_atom"
+                    teacher_content_val = content
                     _raw_tp = _pick_teacher_pool(teacher_atoms_for_slot, stype)
                     teacher_expand_pool = [
                         a
@@ -918,6 +1030,12 @@ def select_enrichment(
                     match_scores["bestseller_target_score"] = _bestseller_metadata_score(
                         t_meta, ch_tgt
                     )
+                    # Registry peek: only in additive mode. In waterfall mode teacher wins outright.
+                    if request.additive_enrichment:
+                        _wf_peek = _peek_registry_variant(reg_lists, stype, reg_counters, seed_key)
+                        if _wf_peek and not _is_doctrine_quarantined(_wf_peek[0], _frame):
+                            content = _wf_peek[0] + "\n\n" + content
+                            source = "registry+teacher_atom"
 
             # 2) Persona
             if not content and persona_atoms:
@@ -1110,6 +1228,55 @@ def select_enrichment(
                 source = "gap"
                 source_id = "gap"
 
+            # Record registry/story picks in BookSlotTracker (additive mode only).
+            if request.additive_enrichment:
+                if variant_id:
+                    _book_tracker.record(variant_id, slot_type=stype)
+                if source == "story_plan":
+                    _book_tracker.record(source_id, slot_type=stype)
+
+            # Resolve injection markers and locale/mechanism tokens if present.
+            _INJECTION_MARKS = (
+                "[STORY_INJECTION_POINT]",
+                "[EXERCISE_INJECTION_POINT]",
+                "[SCENE_INJECTION_POINT]",
+                "[INTEGRATION_SCENE_POINT]",
+            )
+            if content and not content.startswith("[CONTENT GAP:") and (
+                any(m in content for m in _INJECTION_MARKS) or "{" in content
+            ):
+                try:
+                    _ri_result = resolve_injections(
+                        content,
+                        chapter_index=bm_ch.number,
+                        section_index=_sec_idx,
+                        section_type=stype,
+                        topic=topic,
+                        persona_id=persona_id,
+                        teacher_id=tid,
+                        exercise_phase=None,
+                        seed=seed_key,
+                        repo_root=root,
+                        story_schedule=_story_schedule,
+                        slot_tracker=_book_tracker,
+                    )
+                    content = _ri_result["text"]
+                    if _ri_result.get("injections_resolved"):
+                        source_id = source_id + ":resolved"
+                except Exception as _ri_err:
+                    logger.warning("resolve_injections ch%d slot%d: %s", bm_ch.number, slot_i, _ri_err)
+
+            # Section packet audit: record per-slot source provenance.
+            _slot_audit.append({
+                "chapter": bm_ch.number,
+                "slot_index": slot_i,
+                "slot_type": stype,
+                "source": source,
+                "source_id": source_id,
+                "variant_id": variant_id,
+                "words": len(content.split()),
+            })
+
             if content and not content.startswith("[CONTENT GAP:"):
                 book_words_prior = (
                     sum(c.total_words for c in enriched_chapters) + ch_words
@@ -1198,6 +1365,7 @@ def select_enrichment(
                     enrichment_applied=hooks_fired,
                     variant_id=variant_id,
                     atom_id=atom_id,
+                    teacher_content=teacher_content_val,
                     match_scores=dict(match_scores),
                 )
             )
@@ -1231,6 +1399,8 @@ def select_enrichment(
         "gap_details": gap_details,
         "persona_id": persona_id,
         "teacher_id": tid or "",
+        "section_packet_audit": _slot_audit,
+        "book_slot_tracker_used_ids": list(_book_tracker._used_ids),
     }
 
     return EnrichedBook(
@@ -1774,6 +1944,11 @@ def _fill_chapter_depth(
             added_w = len(trimmed.split())
             if added_w <= 0:
                 continue
+
+            if source.get("type") == "teacher_atom" and tid:
+                from phoenix_v4.rendering.teacher_wrapper import apply_wrapper as _aw
+                _depth_seed = f"depth:{topic}:{chapter.number}:{module_name}"
+                trimmed = _aw(trimmed, teacher_id=tid, section_type=module_name, seed=_depth_seed, spine_context=enriched_book.spine_context)
 
             depth_slot = EnrichedSlot(
                 slot_type=f"DEPTH_{module_name.upper()}",
