@@ -1,0 +1,415 @@
+---
+# Phoenix Omega — B&W Page Manga vs Color Vertical Webtoon Production Weight
+# Decision Matrix — drives Phase B/C catalog rebuild
+
+schema_version: 1
+decision_date: "2026-04-25"
+researcher: "Pearl_Research"
+branch: "agent/manga-vs-webtoon-research-20260425"
+companion_synthesis_doc: "artifacts/research/manga_vs_webtoon_economics_2026-04-25.md"
+authority: "web_research_step_1_through_6 + internal_pipeline_audit"
+
+supersedes:
+  - "The current 100%-wellness Phase C plan (1,001 en_US books, all genre-wrapped) should be frozen and regenerated with format-aware weightings from this matrix."
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 1. PER-MARKET PRODUCTION WEIGHT
+# ─────────────────────────────────────────────────────────────────────────────
+
+production_weight_recommendation:
+
+  en_US:
+    color_vertical_webtoon_pct: 60
+    bw_traditional_manga_pct: 20
+    color_page_manga_pct: 15
+    direct_self_help_illustrated_pct: 5
+    rationale: |
+      WEBTOON Canvas 170M MAU + unified global CANVAS 2026 (EN + 6 other languages)
+      is the fastest-growing accessible lane. Canvas AI policy is ambiguous but not
+      banned (unlike Tapas). Amazon KDP is the AI-friendly collected-volume lane
+      with 70% royalty at $2.99-$9.99 and KU $0.0045-0.0050/page bonus. Hollywood
+      (WB Nov 2025, Ron Howard / LuckyChap) + Disney (Aug 2025 + Jan 2026 equity)
+      are investing adaptation dollars into color vertical source IP — this is a
+      forward-looking signal that dwarfs lagging revenue data. Direct self-help
+      illustrated slice sized at 5% matches proven Adam J. Kurtz / Mari Andrew /
+      Gemma Correll illustrated-self-help market without over-betting on a lane
+      where manga-format has zero existing commercial precedent.
+    primary_platforms:
+      - "Amazon KDP Comics & Graphic Novels (primary — AI disclosed, 70% royalty)"
+      - "WEBTOON Canvas (primary serialization, 170M MAU)"
+      - "GlobalComix (secondary distribution, Kodansha deal 2025)"
+      - "Google Play Books via PublishDrive aggregator"
+    blocked_platforms:
+      - "Tapas — AI BANNED since 23 Jan 2023, policy still in force"
+      - "Shueisha / Viz / Yen Press submission channels — AI-hostile"
+    year_1_revenue_estimate_usd: "30_000 to 120_000 across 20-40 active series"
+
+  ja_JP:
+    color_vertical_webtoon_pct: 40
+    bw_traditional_manga_pct: 45
+    color_page_manga_pct: 13
+    direct_self_help_illustrated_pct: 2
+    rationale: |
+      Japan is the ONLY market where dual-format per series is commercially
+      justified. Oricon top sellers remain overwhelmingly B&W page manga (Jujutsu
+      Kaisen, ONE PIECE vol. 108 = 1.55M copies in 2024 ranking year alone;
+      Frieren 4.99M in 2024). Simultaneously, Piccoma (~¥105B sales 2024, #1 app
+      2 consecutive years) and LINE Manga ($418M, #3 app 2024) are grossing-chart
+      leaders — both cross-format. The strongest forward signal is Shueisha's
+      JUMP TOON (29 May 2024) placing ONE PIECE editor Takanori Asada on a
+      full-color vertical platform; KADOKAWA × Piccoma Dec 2024 alliance funnels
+      KADOKAWA page-manga IP INTO Piccoma vertical distribution. Conclusion:
+      produce dual-format per series — B&W tankōbon for Amazon KDP Japan +
+      Comic C'moA (AI already accepted at #1 in Jan 2026) AND color vertical
+      SMARTOON for LINE Manga Indies. Direct self-help slice is small (2%)
+      because essay manga IS the Japanese direct-self-help-in-manga lane.
+    primary_platforms:
+      - "Amazon KDP Japan (KDP Select for 70% royalty in JP marketplace)"
+      - "Comic C'moA — AI-manga already reached #1 (My Dear Wife…, Jan 2026)"
+      - "LINE Manga Indies — accepts both B&W page and color vertical"
+    partner_path_only:
+      - "Piccoma (Kakao) — licensed content only, target after audience built"
+      - "Bookwalker (Kadokawa) — aggregator distribution only"
+    blocked_platforms:
+      - "Shueisha MangaPlus / JUMP TOON submission — AI-hostile (Feb 2026 disqualification)"
+      - "Viz Media — Shueisha-affiliated, AI-hostile"
+    year_1_revenue_estimate_jpy: "4_000_000 to 15_000_000 across 20-40 active series"
+    year_1_revenue_estimate_usd_equiv: "27_000 to 100_000"
+
+  ko_KR:
+    color_vertical_webtoon_pct: 85
+    bw_traditional_manga_pct: 3
+    color_page_manga_pct: 7
+    direct_self_help_illustrated_pct: 5
+    rationale: |
+      Webtoon-native market. B&W page manga is Japanese-import-licensed content
+      only — no accessible self-pub path. Korean webtoon industry $1.7B 2024
+      (KOCCA). 힐링 (healing) is an established Naver/Kakao genre tag. Korea AI
+      Basic Act effective 22 Jan 2026 requires disclosure but does NOT ban AI
+      content (one-year grace period). Community sentiment is strongly anti-AI;
+      ramp slowly with transparent disclosure. Self-help slice sized at 5%
+      because 자기계발 (self-development) is an established robust category on
+      Naver Books / Millie's Library, and 2023 saw "unprecedented rise of
+      self-help books" in Korea (driven by younger readers per The New
+      Publishing Standard).
+    primary_platforms:
+      - "WEBTOON Canvas Korean-language (Naver)"
+      - "Naver Books for direct-self-help illustrated slice"
+      - "Yes24 / Aladin for print supplementary distribution"
+    blocked_platforms:
+      - "Tapas (Kakao-owned) — AI BANNED"
+    partner_path_only:
+      - "KakaoPage — licensed content only, via aggregator/publisher"
+    year_1_revenue_estimate_krw: "5_000_000 to 50_000_000 across 15-30 active series"
+    year_1_revenue_estimate_usd_equiv: "3_700 to 37_000"
+    notes: |
+      KOCCA 2024 median serialized webtoon artist income ₩38M (~$28K)/yr — an
+      AI-assisted catalog of 30 series should track above long-tail median but
+      well below top 1% (₩280M featured, ₩1.4B+ top creator).
+
+  zh_TW:
+    color_vertical_webtoon_pct: 50
+    bw_traditional_manga_pct: 40
+    color_page_manga_pct: 7
+    direct_self_help_illustrated_pct: 3
+    rationale: |
+      Tong Li Publishing dominates traditional B&W tankōbon market (128×182mm,
+      perfect-bound, vertical-text spine). LINE Manga TW carries vertical
+      webtoon content — vertical format growing. Taiwan manga market
+      $132.67M 2024 → $259.17M 2033 (CAGR 7.73%). Japan cultural proximity
+      means iyashikei recognition is immediate; seinen psychological also
+      performs. Direct self-help slice 3% — contemplative/philosophical
+      framing is stigma-free in Taiwan.
+    primary_platforms:
+      - "LINE Manga TW"
+      - "Amazon KDP (TW buyers purchase from .com, no dedicated TW store)"
+      - "Kobo Taiwan"
+      - "BookWalker Taiwan (aggregator path)"
+    year_1_revenue_estimate_twd: "300_000 to 1_500_000 across 15-30 active series"
+    year_1_revenue_estimate_usd_equiv: "10_000 to 50_000"
+
+  zh_CN:
+    # CONTINGENT — requires owner decision + Chinese MCN/entity partnership
+    contingent: true
+    contingent_on: "Phoenix Omega decision to pursue zh_CN market + local partnership"
+    color_vertical_webtoon_pct: 70
+    bw_traditional_manga_pct: 10
+    color_page_manga_pct: 18
+    direct_self_help_illustrated_pct: 2
+    rationale: |
+      Bilibili Comics (claimed 340M users, ~$1.75B revenue — upper-bound
+      estimate only), Kuaikan Manhua (AI-forward, claims 30% production cost
+      reduction), and Tencent Comics are color-vertical-native. Cultivation /
+      xianxia genre dominant — Soul Land, Battle Through the Heavens at
+      millions-of-readers scale. Foreign manga imports regulated. BL/GL content
+      blocked. Health/wellness claims subject to regulatory caution. Direct
+      self-help reduced to 2% — 自我修养 (self-cultivation) framing absorbs
+      most self-help energy via cultivation genre.
+    primary_platforms_partner_required:
+      - "Bilibili Comics (requires Chinese MCN/entity)"
+      - "Kuaikan Manhua (requires Chinese MCN/entity)"
+      - "WeChat Read (book channel)"
+    blocked_content:
+      - "BL / GL (yaoi/yuri) — blocked under content regulations"
+      - "Mental-health / wellness medical claims — restricted without certification"
+    year_1_revenue_estimate_cny: "0 to 150_000 contingent on partnership"
+    year_1_revenue_estimate_usd_equiv: "0 to 20_000 without partner; materially higher with partner"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 2. AGGREGATE CATALOG-WIDE WEIGHTS (averaged across all markets)
+# ─────────────────────────────────────────────────────────────────────────────
+
+catalog_wide_aggregate_weight:
+  color_vertical_webtoon_pct: 58
+  bw_page_manga_pct: 24
+  color_page_manga_pct: 14
+  direct_self_help_illustrated_pct: 4
+  note: |
+    Weighted by 132 unique series × 4 markets (528 production units for the
+    en_US + ja_JP + zh_TW + ko_KR rollout). zh_CN excluded pending owner
+    decision.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 3. PER-GENRE WEIGHTING UNDER EACH FORMAT
+# ─────────────────────────────────────────────────────────────────────────────
+# Percentages within each format bucket. Anchored in Phoenix catalog
+# MANGA_FULL_CATALOG_PLAN.md genre distribution, adjusted for format fit.
+
+genre_weight_per_format:
+
+  color_vertical_webtoon:
+    romance_fantasy_pct: 20
+    action_fantasy_pct: 18
+    iyashikei_color_pct: 15
+    josei_essay_webtoon_pct: 10
+    melodrama_pct: 8
+    horror_vertical_pct: 8
+    isekai_regression_pct: 8
+    shojo_webtoon_pct: 7
+    cultivation_webtoon_pct: 6
+    notes: |
+      Romance-fantasy is the highest-grossing vertical genre on Piccoma + LINE
+      Manga + WEBTOON. Action-fantasy (Solo Leveling tier) is second. Iyashikei
+      translates well into color vertical ONLY when pacing is slowed — fast
+      vertical scroll fights iyashikei tonality; solve via extended breathing
+      panels + environmental beats. Josei/essay webtoon is the direct-therapeutic
+      format. Cultivation weighted moderately — primary for zh_CN, niche in en_US.
+
+  bw_traditional_manga:
+    seinen_psychological_pct: 30
+    iyashikei_bw_pct: 25
+    shonen_pct: 15
+    horror_bw_pct: 12
+    cultivation_bw_pct: 7
+    josei_essay_manga_pct: 11
+    notes: |
+      B&W seinen is the highest-revenue lane on KDP + Japan Comic C'moA +
+      Bookwalker for contemplative Phoenix content. Iyashikei in B&W is the
+      canonical format (Frieren, Dungeon Meshi, Yotsuba&! — all B&W page).
+      Shonen is mandatory inclusion despite lower therapeutic fit (Blue Period
+      is the genre subversion model — 7M copies). Essay manga maps to Nagata
+      Kabi precedent (#2 NA debut week).
+
+  color_page_manga:
+    iyashikei_color_pct: 30
+    shojo_pct: 25
+    josei_essay_pct: 20
+    horror_pct: 15
+    cultivation_pct: 10
+    notes: |
+      Color page manga is niche — mostly useful for premium collected volumes
+      (Kindle Fire / iPad color reader) and limited-edition physical pulls.
+      Iyashikei + shojo dominate because color reinforces emotional register;
+      don't over-invest here (only 14% of total catalog production).
+
+  direct_self_help_illustrated:
+    illustrated_journal_prompt_book_pct: 35
+    single_panel_affirmation_pct: 25
+    essay_short_strip_pct: 20
+    comic_based_workbook_pct: 20
+    notes: |
+      Adam J. Kurtz (Things Are What You Make of Them — 1M+ copies, 20
+      languages) + Mari Andrew (Am I There Yet? — NYT bestseller) + Gemma
+      Correll (Where to Start — Penguin/Mental Health America April 2024)
+      define the proven formats. Cap aggregate at 4% of total catalog
+      production (5% en_US, 5% ko_KR, 3% zh_TW, 2% ja_JP, 2% zh_CN). No manga
+      format analog for direct self-help has a confirmed commercial bestseller
+      so this is a measured hypothesis, not an established market.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 4. PLATFORM UPLOAD PRIORITY (Phase 0 of catalog connector buildout)
+# ─────────────────────────────────────────────────────────────────────────────
+
+platform_priority:
+
+  phase_0_must_ship:
+    - platform: "Amazon KDP Comics & Graphic Novels"
+      rationale: "AI-friendly with disclosure. 70% royalty. 13 Kindle marketplaces from one account. KU bonus. Already-documented integration in kdp_global_ebook_strategy_2026_03_23.md. Covers primary en_US + ja_JP + zh_TW economics."
+      reach_markets: ["en_US", "ja_JP", "zh_TW (via .com)", "de_DE", "fr_FR", "it_IT", "es_ES"]
+      effort: "medium (Kindle Comic Creator tool + AI disclosure workflow)"
+    - platform: "WEBTOON Canvas (Naver)"
+      rationale: "170M MAU. 7-language unified CANVAS platform from 2026. Primary color-vertical serialization surface. $25 payout threshold. Reward Ads up to 6 episodes. AI policy ambiguous — manageable with disclosure per Korea AI Basic Act."
+      reach_markets: ["en_US", "ko_KR", "ja_JP", "zh_TW (limited)", "es_US", "id_ID", "th_TH"]
+      effort: "medium (vertical-scroll panel formatter + Canvas upload API)"
+
+  phase_1_secondary:
+    - platform: "GlobalComix"
+      rationale: "Signed Kodansha distribution deal 2025. AI-neutral. Free to publish."
+      effort: "low (simple uploader)"
+    - platform: "Google Play Books (via PublishDrive / StreetLib aggregator)"
+      rationale: "Google Play supports manga + comics, vertical scroll mode. No exclusivity."
+      effort: "low (aggregator integration)"
+    - platform: "Comic C'moA (Japan)"
+      rationale: "AI manga already reached #1 on platform (Jan 2026). Direct validation of AI-tolerance."
+      effort: "medium (Japanese publisher account + JPY payment routing)"
+
+  phase_2_partner_required:
+    - platform: "LINE Manga Indies (Japan)"
+      rationale: "Accepts both B&W and vertical. Part of ja_JP dual-format strategy."
+      effort: "high (Japanese entity + localization quality bar)"
+    - platform: "Piccoma (Kakao Japan)"
+      rationale: "#1 Japan app, but licensed-only. Target after 20+ active series with proven Japan audience."
+      effort: "very high (publisher partnership required)"
+    - platform: "Bilibili Comics / Kuaikan Manhua (China)"
+      rationale: "zh_CN only viable path. Requires Chinese MCN/entity."
+      effort: "very high (entity setup + regulatory compliance)"
+
+  do_not_pursue:
+    - platform: "Tapas"
+      rationale: "AI BANNED 23 Jan 2023. Policy still enforced. Zero path for Phoenix pipeline."
+    - platform: "Shueisha MangaPlus / Shueisha JUMP Rookie / JUMP TOON submission"
+      rationale: "AI-hostile. Feb 2026 disqualification of #1-ranked AI manga from Jump Rookie contest."
+    - platform: "Viz Originals submissions"
+      rationale: "Shueisha-affiliated. AI-hostile. Low acceptance rate for unsolicited content."
+    - platform: "Yen Press / Kodansha USA direct submission"
+      rationale: "Agented submissions only. Build audience on KDP + Canvas first, approach with metrics."
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 5. ACTION ITEMS (implementation order for Phase B/C rebuild)
+# ─────────────────────────────────────────────────────────────────────────────
+
+action_items:
+
+  immediate_pivot:
+    - id: "AI-1"
+      action: "Freeze current 100%-wellness Phase C plan (1,001 en_US books, all genre-wrapped)."
+      owner_decision: true
+      blocking: "No further Phase C book plans should be rendered until format weighting is applied."
+    - id: "AI-2"
+      action: "Add `format` field to book plan YAML schema with allowed values: {color_vertical_webtoon, bw_page_manga, color_page_manga, direct_self_help_illustrated}. Regenerate Phase C plans applying this matrix's per-market weights."
+      dependencies: ["AI-1"]
+    - id: "AI-3"
+      action: "Add format-aware panel-layout templates to the Phoenix Omega pipeline. Vertical webtoon uses ~30–50 tall panels/episode; B&W page uses ~18–22 pages/chapter with right-to-left flow for ja_JP + zh_TW."
+      dependencies: ["AI-2"]
+    - id: "AI-4"
+      action: "Ship WEBTOON Canvas upload connector + Amazon KDP Comics connector as Phase 0 platform pipeline. These cover ~80% of projected Year 1 revenue."
+      dependencies: ["AI-3"]
+    - id: "AI-5"
+      action: "For en_US: shift the 289-portrait rendering queue to produce color-vertical-webtoon-ready outputs first. Existing contemplative-ink-wash portraits reused as character refs; color-vertical format maps directly to iyashikei native style."
+      dependencies: ["AI-3"]
+    - id: "AI-6"
+      action: "For ja_JP: build DUAL-format pipeline — each series produces both a B&W tankōbon version (for KDP JP + Comic C'moA) AND a color vertical SMARTOON version (for LINE Manga Indies). No other market justifies this cost."
+      dependencies: ["AI-3"]
+
+  followup_within_phase_b3_c:
+    - id: "FU-1"
+      action: "Create dedicated `direct_self_help_illustrated` series plans for en_US (5% of catalog) and ko_KR (5%). Model on Gemma Correll Where to Start (Penguin/Mental Health America, April 2024) + Adam J. Kurtz Things Are What You Make of Them (1M+ copies, 20 languages)."
+    - id: "FU-2"
+      action: "Add Korea AI Basic Act disclosure to every Korean-language upload (effective 22 Jan 2026, one-year grace period)."
+    - id: "FU-3"
+      action: "Investigate zh_CN partnership channels (Bilibili Comics MCN, Kuaikan Manhua). Do NOT produce zh_CN content until partnership path confirmed."
+    - id: "FU-4"
+      action: "Monitor Piccoma FR expansion status — shut down Sept 2024 means EU webtoon is underserved, but also signals caution."
+    - id: "FU-5"
+      action: "Verify the 'Kakao Pixie acquisition' reference in prior Phoenix planning docs — no public source found. Possibly confused with Pikalo (pixiv × LOCKER ROOM × KADOKAWA). Correct or drop."
+
+  blockers_surfaced:
+    - id: "BL-1"
+      blocker: "VRAM blocker PR #623 prevents full FLUX LoRA training at 16GB on RTX 5070 Ti"
+      impact: "B&W manga specialist LoRA quality ceiling is below what full-param training would achieve. IP-Adapter + img2img reuse pattern is viable workaround."
+      severity: "medium"
+    - id: "BL-2"
+      blocker: "Tapas AI ban"
+      impact: "Zero production cycles for Tapas. Removes a 61K+ creator marketplace from Phoenix addressable surface."
+      severity: "low (other platforms cover the market)"
+    - id: "BL-3"
+      blocker: "Shueisha / Viz / Yen Press AI hostility"
+      impact: "No agented-publisher path for the next 3-5 years. KDP + Canvas is the end-to-end surface."
+      severity: "low (matches current strategy)"
+    - id: "BL-4"
+      blocker: "Chinese market entry without partner"
+      impact: "zh_CN catalog cannot ship without Chinese MCN/entity. Phase B/C zh_CN plans should be drafted but not rendered until partnership confirmed."
+      severity: "medium"
+    - id: "BL-5"
+      blocker: "WEBTOON Canvas AI policy ambiguity"
+      impact: "Never put >50% of any market's production behind WEBTOON alone. KDP is the hedge."
+      severity: "medium"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6. CONFIDENCE SCORING
+# ─────────────────────────────────────────────────────────────────────────────
+
+confidence:
+  market_size_data:
+    level: "high"
+    rationale: "Internal docs cite ICv2, KOCCA 2024-2025, Statista, IMARC, Grand View with cross-confirmation. Variance within 2× across firms is expected."
+  per_episode_revenue:
+    level: "medium"
+    rationale: "Top-tier creator income publicly disclosed (Korea Herald KOCCA 2024). Mid-tier $1,000/ep is WEBTOON-illustrative (s-morishitastudio + taddy.org); actual contracts under NDA. Long-tail median inferred from creator community reports."
+  investment_signals:
+    level: "high"
+    rationale: "Public press releases + IR filings + announced partnerships + named individuals (Takanori Asada). WB + Disney + LINE + Shueisha + KADOKAWA + Kakao all aligned on color vertical direction."
+  pearl_star_infra_fit:
+    level: "high"
+    rationale: "Direct knowledge of Phoenix pipeline (289 portraits, FLUX-schnell-fp8, IP-Adapter + img2img reuse, translation pipeline operational)."
+  self_help_slice_sizing:
+    level: "medium"
+    rationale: "Proxy data via Kurtz / Andrew / Correll + essay manga precedent. No public cross-buying panel. Treat slice % as MVP hypothesis subject to A/B validation at 10% of launch volume."
+  per_market_production_weights:
+    level: "medium_high"
+    rationale: "Follows from above sections with conservative anchors. en_US + ja_JP weights are strongest; ko_KR + zh_TW reasoned from format nativity; zh_CN is contingent."
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 7. WHAT HAPPENS NEXT
+# ─────────────────────────────────────────────────────────────────────────────
+
+next_action_path:
+  - "Owner reviews this decision matrix + companion synthesis MD."
+  - "If approved: Phase B/C catalog rebuild proceeds with these production weights instead of current 100%-wellness Phase C plan."
+  - "Catalog regeneration per AI-2 action item applies format field to every series plan."
+  - "Phase 0 platform connectors (KDP + WEBTOON Canvas) ship BEFORE any further Phase C rendering cycles."
+  - "A/B validation at 10% of launch volume for direct-self-help slice (5% en_US, 5% ko_KR) to confirm/refute the hypothesis."
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 8. PROVENANCE
+# ─────────────────────────────────────────────────────────────────────────────
+
+evidence_provenance:
+  internal_docs_read:
+    - "artifacts/manga/MANGA_FULL_CATALOG_PLAN.md"
+    - "artifacts/research/strategic_audit/02_bestseller_pattern_decomposition.md"
+    - "artifacts/research/global_manga_distribution_strategy.md"
+    - "artifacts/research/manga_publishing_revenue_strategy.md"
+    - "artifacts/research/kdp_global_ebook_strategy_2026_03_23.md"
+    - "artifacts/audit/strategic/05_genre_market_fit_matrix.yaml"
+    - "artifacts/research/manga_cover_design/03_global_markets.md"
+    - "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+    - "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+    - "artifacts/research/strategic_audit/01_global_manga_market_map.md"
+  external_sources_count: 40
+  external_sources_representative:
+    - "https://www.sec.gov/Archives/edgar/data/1997859/000119312524151708/d396527ds1.htm (WBTN S-1)"
+    - "https://deadline.com/2025/11/webtoon-warner-bros-animation-webcomic-adaptations-1236615781/"
+    - "https://kcomicsbeat.com/2024/05/29/shueisha-launches-jump-toon-vertical-scrolling-comics-platform/"
+    - "https://group.kadokawa.co.jp/global/information/news_release/2024121101_en.html"
+    - "https://www.japantimes.co.jp/business/2025/01/16/sk-webtoon-japan-manga-investment/"
+    - "https://www.koreaherald.com/article/1782346 (KOCCA 2024)"
+    - "https://www.webtoons.com/en/notice/detail?noticeNo=2805"
+    - "https://en.sedaily.com/technology/2026/03/04/webtoon-entertainment-narrows-operating-loss-37-percent-in"
+    - "https://www.animenewsnetwork.com/news/2025-01-17/webtoon-platform-piccoma-named-japan-top-consumer-spending-app-for-2024/.220135"
+    - "https://www.mordorintelligence.com/industry-reports/webtoons-market"
+    - "https://deepmarketinsights.com/vista/insights/manga-market/taiwan"
+    - "https://dibbly.com/amazon-kdp-royalty-changes-2025-what-to-know-do/"
+    - "https://anifusion.ai/articles/self-publish-manga-make-money/"
+    - "Plus 25+ additional citations fully enumerated in companion synthesis MD footnotes"
+  full_footnotes_in: "artifacts/research/manga_vs_webtoon_economics_2026-04-25.md §10"
