@@ -1,0 +1,174 @@
+## RECOGNITION v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/recognition/micro/v01.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+ノーラのポケベルが午前2時に鳴る。目がスクリーンに焦点を合わせる前に、体はもう動いている。心拍数が上がり、靴に手が伸び、アドレナリンが全身に流れ込む。読む時間は数秒：緊急でない検査の折り返し電話。緊急でない。でも体は心停止に備えていた。体はポケベルの音を聞いたとき、検査の折り返しと心停止の区別をしない。ノーラは検査室に電話する。検査内容を調整する。休憩室に戻る。心拍数が正常に戻るまで20分かかる。ポケベルは体に全ての音を緊急事態として扱うよう学習させた。全ての音がそれに応じる。
+
+---
+
+## RECOGNITION v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/recognition/micro/v02.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+トマスはICU全体から人工呼吸器のアラーム音を聞く。胸が締まる。意識的に音を認識する前に、体は患者のいる部屋に向かって動いている。アラーム音は機械の自己修正による圧力変動で、彼が到着する前に既に解決している。でも体はそれを知らない。体は機械のちょっとした不具合のために完全な緊急対応を実行した。患者は静かに眠ったままで、彼自身のコルチゾールは危機的なレベルにある。シフトにはまだ8時間残っている。この後、人工呼吸器のアラームはおよそ40回以上鳴る。体はそれぞれを最後の通知かのように扱う。
+
+---
+
+## RECOGNITION v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/recognition/micro/v03.txt
+BAND: 2
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: pre_awareness
+---
+アイーシャは患者のバイタルをチェックする。全て安定している。数値は良好だ。20分後にもう一度チェックする。やはり安定している。15分後にまたチェックする。このチェックはプロトコルではない。プロトコルは1時間ごとだ。このチェックは安定した数値の下で鳴っている警報で、突然安定が危機に変わるかもしれないと主張している。警報は正しい。それは変わる可能性がある。でも警報は「可能性がある」と「起こるだろう」の違いを区別できない。その区別ができれば、シフトごとに12回余分なチェックを減らせる。警報は区別をしない。警報は警戒をするのだ。
+
+---
+
+## RECOGNITION v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/recognition/micro/v04.txt
+BAND: 3
+MECHANISM_DEPTH: 1
+COST_TYPE: social
+COST_INTENSITY: 3
+IDENTITY_STAGE: pre_awareness
+---
+クレアの患者の心拍数が出産中に58に低下する。分娩中としては正常範囲内。クレアは手すりを握る。訓練では：監視せよ。警報では：対応せよ。訓練と警報の間のギャップは、体が我慢できない20拍の余裕だ。モニターを見る。心拍数は68に戻る。正常。握力は緩むがつかむのをやめない。警報は出産の全時間にわたって高いまま。2時間以上、問題なく進む出産のために危機的強度の警戒が続く。
+
+---
+
+## RECOGNITION v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/recognition/micro/v05.txt
+BAND: 4
+MECHANISM_DEPTH: 1
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: pre_awareness
+---
+デレクは家で目覚める。休みの日だ。携帯がなる。パートナーからの買い物についてのテキストメッセージ。体は病院のアラームのように反応する。胃が落ち、胸が締まり、完全な活性化プロセスが始まる。テキストを読む：「牛乳が必要」。警報は仕事のアラームと買い物リストの違いを区別しない。音がトリガーだ。どの機器からのどんな音でも緊急プロトコルを起動する。パートナーに「OK」と打ちながら、別の種類のメッセージのために設定されていたアドレナリンで手が震える。
+
+---
+
+## MECHANISM_PROOF v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/mechanism_proof/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+ノーラは1シフト中の警報反応を追跡する。47回の警報起動。そのうち3回が実際の緊急事態。44回は誤検知だ。自己修正する機器、日常的な調整、緊急でないページ。体は47回全て完全な緊急プロトコルを実行した。本当に必要だったのは3回。精度は6.4%。もし医学的検査の精度が6.4%なら、廃止されるだろう。彼女の神経系の検査は6.4%の精度で走っていて、廃止できない。3つの本当の緊急事態が警報の必要性を保証している。44の誤検知がその代償だ。
+
+---
+
+## MECHANISM_PROOF v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/mechanism_proof/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 2
+COST_TYPE: opportunity
+COST_INTENSITY: 2
+IDENTITY_STAGE: destabilization
+---
+トマスはエネルギー予算を計算する。誤検知1回はおよそ10分間のコルチゾール上昇がかかる。1シフト40回の誤検知。400分。ほぼ7時間の生化学的緊急状態が12時間シフトの中にある。残りの5時間の非緊急時間は前の警報からの回復か次の警報を待つことに費やされる。彼にはベースラインの時間がない。シフトは警報か警報からの回復のどちらかだ。警報と警報の間に起こる患者ケアは、決して休息しない体によって提供される。ケアは適切だ。体は疲弊している。
+
+---
+
+## MECHANISM_PROOF v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/mechanism_proof/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: destabilization
+---
+アイーシャはチェックに矛盾を発見する。安定を確認するそれぞれの余分なチェックは警報を減らすはずだ。代わりに、安定を確認するそれぞれのチェックが警報に栄養を与える。ほら、チェックして良かったでしょう。もしチェックしなかったら？チェック自体が証拠になる。チェックして安定を見つければ、警報は言う。よかった、チェックしたね。チェックして変化を見つければ、警報は言う。ほら、もっとチェックが必要。どちらの結果も追加チェックを強化する。システムには自分の活動を減らすインプットがない。それは自己持続するループで、シフトの時間を消費する。
+
+---
+
+## MECHANISM_PROOF v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/mechanism_proof/micro/v04.txt
+BAND: 4
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 4
+IDENTITY_STAGE: destabilization
+---
+クレアは警報が神経系の中で仕事と非仕事の区別を消してしまったことに気づく。病院では警報は最大。そこでの危険性を考えると適切だ。家では警報は最小であるべき。体には最小設定がない。患者を守る警報は今、子どもの熱、パートナーの頭痛、窓を通して聞こえるすべてのサイレンで発火している。自分の台所でトリアージを実行している。娘が頭をぶつけて、クレアの反応は臨床的で即座で、非常に不釣り合いだ。娘は大丈夫だ。クレアの副腎系はそうではない。
+
+---
+
+## MECHANISM_PROOF v05
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/mechanism_proof/micro/v05.txt
+BAND: 2
+MECHANISM_DEPTH: 2
+COST_TYPE: internal
+COST_INTENSITY: 2
+IDENTITY_STAGE: destabilization
+---
+デレクは警報が3年かけてより大きくなったことに気づく。1年目：ポケベルの音は適切なアラート感をもたらした。2年目：ポケベルの音はアドレナリンをもたらした。3年目：家での携帯の振動は、コード・ブルーのページと同じアドレナリンをもたらす。警報はオリエンテーション以来、再調整されていない。唯一知っている音量は最大だ。その音量は彼の許可なしに、彼の気づきなしに、それを下げるメカニズムなしに上昇した。携帯には音量ノブがある。神経系には音量ノブがない。
+
+---
+
+## TURNING_POINT v01
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/turning_point/micro/v01.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: experimentation
+---
+ノーラは練習を始める。ポケベルが鳴ったら、動く前に、表示を読む。2秒。警報は叫ぶ。今すぐ動け。彼女は先に読む。緊急でない検査の折り返し。彼女は走る代わりに歩く。歩くことは警報にとって耐え難い。歩くペースの各ステップが怠慢に感じられる。電話に着く。電話をかける。患者の結果は走った場合と同じだ。2秒の読みと歩くことで、彼女は1回の不要なアドレナリン急上昇を避けた。1回だ。シフト全体に広げるとその貯蓄は複合する。警報は2秒を嫌う。その2秒は彼女の唯一のレバーだ。
+
+---
+
+## TURNING_POINT v02
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/turning_point/micro/v02.txt
+BAND: 2
+MECHANISM_DEPTH: 3
+COST_TYPE: social
+COST_INTENSITY: 2
+IDENTITY_STAGE: experimentation
+---
+トマスは別のICU看護師に言う。「毎回のベント警報に反応する。自己修正するものでさえ」。看護師は彼を見る。「同じだ。自分だけかと思ってた」。2人のICU看護師、同じ警報パターン、同じ疲労、それについての同じ沈黙。分かち合うことは警報を直すわけではない。分かち合うことは警報をシステムの特性として正常化する。個人的な失敗ではなく。警報はトマスの弱さに感じられる。警報はユニットの危険だ。ICUのすべての看護師は同じ6.4%の精度で走っている。認識は集合的だ。解決策もそうかもしれない。
+
+---
+
+## TURNING_POINT v03
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/turning_point/micro/v03.txt
+BAND: 3
+MECHANISM_DEPTH: 3
+COST_TYPE: internal
+COST_INTENSITY: 3
+IDENTITY_STAGE: experimentation
+CALLBACK_ID: extra_checks
+CALLBACK_PHASE: setup
+---
+アイーシャはプロトコルに従う。1時間ごとのチェック。15分ごとではなく。警報は1時間の間叫ぶ。何かが変わったら、見逃したら、もしも。彼女はそれに叫ばせる。看護師ステーションに座り、警報が走ったまま、プロトコルが守られたまま。1時間が過ぎる。チェックする。患者は安定。その1時間は4回チェックしたか1回チェックしたか関係なく同じだった。結果は同じだった。警報の緊迫感は根拠がなかった60分中45分。彼女は警報をオーバーライドしない。彼女はそれに耐える。耐えることはコード・ブルーより難しい。耐えることは転換点だ。
+
+---
+
+## TURNING_POINT v04
+---
+path: story_atoms/healthcare_rns/anchored/anxiety/false_alarm/turning_point/micro/v04.txt
