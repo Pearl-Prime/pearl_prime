@@ -1,0 +1,76 @@
+book_plan_schema: "1.0.0"
+created_at: "2026-04-24"
+book_id: somatic_wisdom__pamela_fellows__first_responders__self_worth__spiral
+series_plan: config/source_of_truth/series_plans_en_us/somatic_wisdom__pamela_fellows__first_responders__self_worth.yaml
+
+installment_number: 3
+engine: spiral
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+
+target_word_range:
+  - 9000
+  - 12000
+target_audio_minutes: 70
+
+title: "The Thought That Keeps Tightening: A Self Worth Book"
+subtitle: "For First Responders: Working with the spiral that won't let go"
+cover_tagline: "You can't stop thinking about what might happen."
+
+description:
+  short_blurb: >
+    You can't stop thinking about what might happen. stop measuring my worth by outcomes.
+  long_description: |
+    You can't stop thinking about what might happen.
+    
+    This book is for paramedic / firefighter / EMSs who I always end up back at 'I'm not enough'. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
+    
+    Chapter by chapter, you'll work with why the mind loops back to the same thought and how to break the tightening. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    
+    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
+    
+    Book 3 of the Somatic Wisdom self worth series.
+
+keywords:
+  primary:
+    - "self-worth"
+    - "self-esteem book"
+    - "enough"
+    - "self-compassion"
+    - "inner critic"
+    - "worthiness"
+    - "self-acceptance"
+  secondary:
+    - "first responders"
+    - "spiral self worth"
+    - "the thought that keeps tightening"
+
+bisac_codes:
+  - SEL036000
+  - SEL027000
+  - MED003000
+
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+
+author_positioning:
+  teacher: pamela_fellows
+  brand: somatic_wisdom
+
+comp_titles:
+  - "The Gifts of Imperfection (Brown)"
+  - "Radical Acceptance (Brach)"
+  - "The Mountain Is You (Wiest)"
+
+main_character_name: Jessie
+main_character_lora_id: jessie_sw_us
+
+confidence:
+  pricing: low   # Phase A decision 3 — ratification deferred to Phase F
+  title: medium  # Generated from engine framing; refine per series
+  comps: high    # From series_plan verified comps
+
+plan_source_path: config/manga/manga_brand_series_plan.yaml

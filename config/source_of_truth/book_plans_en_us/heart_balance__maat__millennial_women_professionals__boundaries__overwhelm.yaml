@@ -1,0 +1,76 @@
+book_plan_schema: "1.0.0"
+created_at: "2026-04-24"
+book_id: heart_balance__maat__millennial_women_professionals__boundaries__overwhelm
+series_plan: config/source_of_truth/series_plans_en_us/heart_balance__maat__millennial_women_professionals__boundaries.yaml
+
+installment_number: 2
+engine: overwhelm
+duration: standard_book_60min
+runtime_format_id: standard_book_60min
+structural_format_id: F006
+
+target_word_range:
+  - 9000
+  - 12000
+target_audio_minutes: 70
+
+title: "When the Day Doesn't Fit: A Boundaries Book"
+subtitle: "For Millennial Women at Work: Capacity, saturation, and the mechanism of too much"
+cover_tagline: "You have more on your plate than fits in your hours."
+
+description:
+  short_blurb: >
+    You have more on your plate than fits in your hours. stop saying yes when I mean no.
+  long_description: |
+    You have more on your plate than fits in your hours.
+    
+    This book is for senior manager + primary household planners who I can't say no and I don't know why I can't. It doesn't promise to make the feeling stop. It names what's happening in language you can use the next time it happens.
+    
+    Chapter by chapter, you'll work with how input accumulates past capacity and what happens in your body when it does. Not through exposure or worksheets or morning routines — through recognition, descent, and integration. The practice the book asks for can happen on a subway, between meetings, or at 3am.
+    
+    You'll walk away knowing what your body is doing and why it makes sense. Not fixed. Not healed in any final sense. But no longer alone with the pattern.
+    
+    Book 2 of the Heart Balance boundaries series.
+
+keywords:
+  primary:
+    - "boundaries book"
+    - "healthy boundaries"
+    - "saying no"
+    - "codependency"
+    - "people pleasing"
+    - "relational boundaries"
+    - "boundary setting"
+  secondary:
+    - "millennial women professionals"
+    - "overwhelm boundaries"
+    - "when the day doesn't fit"
+
+bisac_codes:
+  - SEL027000
+  - SOC028000
+  - SEL045000
+
+target_price:
+  ebook_usd: 4.99
+  audible_usd: 9.99
+  paperback_usd: 12.99
+
+author_positioning:
+  teacher: maat
+  brand: heart_balance
+
+comp_titles:
+  - "Set Boundaries, Find Peace (Tawwab)"
+  - "Boundaries (Cloud & Townsend)"
+  - "The Book of Boundaries (Hartwig)"
+
+main_character_name: Eliana
+main_character_lora_id: eliana_hb_us
+
+confidence:
+  pricing: low   # Phase A decision 3 — ratification deferred to Phase F
+  title: medium  # Generated from engine framing; refine per series
+  comps: high    # From series_plan verified comps
+
+plan_source_path: config/manga/manga_brand_series_plan.yaml
