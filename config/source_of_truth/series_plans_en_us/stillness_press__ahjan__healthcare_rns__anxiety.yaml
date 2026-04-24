@@ -1,0 +1,120 @@
+series_plan_schema: "1.0.0"
+created_at: "2026-04-24"
+locale: en_US
+book_id_prefix: stillness_press__ahjan__healthcare_rns__anxiety
+
+brand: stillness_press
+teacher: ahjan
+persona: healthcare_rns
+topic: anxiety
+
+# ── Arc: 7 books across engines — nurses get the full spectrum ─────────────
+# Healthcare anxiety is distinct from gen_z anxiety: it has a moral-injury
+# undercurrent, witnesses-of-suffering framing, and a body that's learned to
+# override its own signals. The voice shifts accordingly.
+
+arc:
+  installment_1:
+    book_id: stillness_press__ahjan__healthcare_rns__anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+    focus: "Recognition — the nervous system that never left shift"
+    reader_before: "My hands shake when the pager goes off at home. I don't even work nights anymore."
+    reader_after:  "My body is still on shift. I can notice that without shaming myself for it."
+
+  installment_2:
+    book_id: stillness_press__ahjan__healthcare_rns__anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+    focus: "Mechanism — capacity bankruptcy after 12-hour witnessing"
+
+  installment_3:
+    book_id: stillness_press__ahjan__healthcare_rns__anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+    focus: "Mechanism — the did-I-chart-it, did-I-miss-it loop"
+
+  installment_4:
+    book_id: stillness_press__ahjan__healthcare_rns__anxiety__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__shame__F006.yaml
+    duration: standard_book_60min
+    focus: "Integration — the near-miss that lives in your body forever"
+
+  installment_5:
+    book_id: stillness_press__ahjan__healthcare_rns__anxiety__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__grief__F006.yaml
+    duration: standard_book_60min
+    focus: "Integration — the patient you remember 15 years later"
+
+  installment_6:
+    book_id: stillness_press__ahjan__healthcare_rns__anxiety__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__comparison__F006.yaml
+    duration: standard_book_60min
+    focus: "Integration — the nurse who seems to handle it better than you"
+
+  installment_7:
+    book_id: stillness_press__ahjan__healthcare_rns__anxiety__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/healthcare_rns__anxiety__watcher__F006.yaml
+    duration: standard_book_60min
+    focus: "Integration — noticing without going into assessment mode"
+
+reader_promise_family: >
+  Your body learned to override its own signals to help other people. That's
+  not a flaw — it was survival. You can learn to hear it again without losing
+  the capacity that makes you good at your job.
+
+bestseller_hook_family: witness_recognition
+emotional_engine: professional_witness_anxious_recognition
+
+comp_series:
+  - "Being Mortal (Atul Gawande) — medical witnessing voice"
+  - "Between Two Kingdoms (Suleika Jaouad) — illness adjacent, body-witness register"
+  - "What Doesn't Kill Us (Stephen Joseph) — post-traumatic framing, clinical-adjacent"
+
+platform_strategy:
+  primary: [kdp_ebook, audible]
+  secondary: [apple_books, hospital_library_kits, nursing_conferences_content]
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+
+reader_avatar:
+  age: "28–45"
+  where_they_are: >
+    Off-shift but still on call in her body. Just finished a run of nights.
+    Hasn't slept more than 4 hours straight in weeks. Drinks coffee at 7pm.
+    Reads between shifts in the break room or on the bus home.
+  what_they_need: >
+    Someone who names what nursing does to a nervous system without
+    pathologizing it. Language she can use with her team or her therapist.
+  what_they_avoid: >
+    Self-care framing. Bubble baths. Hero narratives.
+    Anyone who says "you need to take care of yourself" like it's new information.
+
+series_voice_markers:
+  register: "peer-voice, clinical-adjacent but not clinical"
+  sentence_rhythm: "short at recognition, longer at integration — mirrors patient assessment rhythms"
+  metaphor_family: "body, weather, water, animals — NEVER machinery, NEVER war"
+  second_person_default: true
+  taboo:
+    - "No 'heroes of healthcare' language"
+    - "No burnout framing as individual failure"
+    - "No therapist-recommendation as the ending"
+    - "No medication discussion — that's between reader and their clinician"
+
+# ── Shares Hana's style-space but distinct character — nurse protagonist ───
+main_character_name: Maya
+main_character_role: "floor RN on a cardiac unit, 6 years in"
+main_character_image_path: null
+main_character_lora_id: maya_sp_us
+main_character_trigger_word: maya_sp_us
+
+plan_source_path: config/manga/manga_brand_series_plan.yaml
