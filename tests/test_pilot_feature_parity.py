@@ -130,7 +130,7 @@ def test_select_enrichment_produces_section_packet_audit(tmp_path):
 
     req = EnrichmentRequest(
         beatmap=beatmap,
-        teacher_id=None,
+        teacher_id="ahjan",
         persona_id="gen_z_professionals",
         topic_id="anxiety",
         seed="test_parity",
@@ -170,10 +170,12 @@ def test_injection_marker_resolution():
 
 
 # ---------------------------------------------------------------------------
-# Additive enrichment defaults False
+# Additive enrichment default — PR #612 flipped to True (only mode)
 # ---------------------------------------------------------------------------
 
-def test_additive_enrichment_defaults_false():
+def test_additive_enrichment_defaults_true():
+    # PR #612: additive stacking is the only mode. The field is a no-op kept
+    # for backward-compat with older callers but the default is True.
     from phoenix_v4.planning.enrichment_select import EnrichmentRequest
     from phoenix_v4.planning.beatmap_compile import Beatmap
     req = EnrichmentRequest(
@@ -183,4 +185,4 @@ def test_additive_enrichment_defaults_false():
         topic_id="anxiety",
         seed="test",
     )
-    assert req.additive_enrichment is False
+    assert req.additive_enrichment is True

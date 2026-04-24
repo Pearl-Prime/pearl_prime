@@ -31,7 +31,7 @@ def main() -> int:
     parser.add_argument("--format", dest="runtime_format", default="standard_book")
     parser.add_argument("--seed", default="pilot_v1", help="Deterministic selection seed")
     parser.add_argument("--output-dir", required=True, help="Directory for artifacts")
-    parser.add_argument("--additive-enrichment", action="store_true", help="Layer all sources per slot: persona first → registry always → teacher third")
+    # --additive-enrichment removed in PR #612: additive stacking is the only mode.
     args = parser.parse_args()
 
     from phoenix_v4.planning.beatmap_compile import compile_beatmap, load_format_spec, load_topic_engines
@@ -71,7 +71,7 @@ def main() -> int:
         persona_id=persona,
         topic_id=topic,
         seed=args.seed,
-        additive_enrichment=args.additive_enrichment,
+        # PR #612: additive_enrichment is the only mode (no-op in EnrichmentRequest).
     )
     enriched = select_enrichment(req, REPO_ROOT)
 

@@ -558,7 +558,7 @@ def _run_spine_pipeline_mode(
                 "chapter_selector_targets": _chapter_selector_targets,
             },
             publishable_book=_publishable_book,
-            additive_enrichment=getattr(args, "additive_enrichment", False),
+            # PR #612: additive_enrichment is the only mode (no-op in EnrichmentRequest).
         ),
         repo_root,
     )
@@ -1541,11 +1541,7 @@ def main() -> int:
         action="store_true",
         help="Skip job.json enforcement (CI / emergency only).",
     )
-    ap.add_argument(
-        "--additive-enrichment",
-        action="store_true",
-        help="Layer all sources per slot: persona first → registry always → teacher third (additive, not waterfall)",
-    )
+    # --additive-enrichment removed in PR #612: additive stacking is the only mode.
     ap.add_argument(
         "--exercise-journeys",
         action="store_true",

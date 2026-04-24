@@ -266,10 +266,13 @@ class EnrichmentRequest:
     topic_id: str
     seed: str
     spine_context: Optional[Dict[str, Any]] = None
-    publishable_book: bool = False
     content_banks_dir: Optional[Path] = None
     ei_v2_config: Optional[Dict[str, Any]] = None  # P0.9: hybrid_select wiring
-    additive_enrichment: bool = False  # Layer all sources per slot: persona → registry → teacher
+    # Legacy flags preserved as no-ops for backward-compat with older callers.
+    # additive_enrichment is the ONLY mode (PR #612). publishable_book is implicit —
+    # gap always raises EnrichmentGapError.
+    publishable_book: bool = True  # no-op — kept to avoid breaking callers
+    additive_enrichment: bool = True  # no-op — stacking is the only mode
 
 
 @dataclass
@@ -839,13 +842,10 @@ def select_enrichment(
     # Each entry is a list of collision_family values for that chapter (0-based index).
     _chapter_collision_families: List[List[str]] = []
 
-    # Story schedule + BookSlotTracker: additive mode only.
-    # In standard waterfall mode these are inactive (empty schedule → no SCENE overrides;
-    # tracker created but record() calls are gated) to preserve existing quality gates.
-    _story_schedule: StorySchedule = (
-        build_story_schedule(persona_id=persona_id, topic=topic, seed=seed, repo_root=root)
-        if request.additive_enrichment
-        else StorySchedule()
+    # Story schedule + BookSlotTracker: unconditional as of PR #612.
+    # Additive stacking is the only mode; waterfall no longer exists.
+    _story_schedule: StorySchedule = build_story_schedule(
+        persona_id=persona_id, topic=topic, seed=seed, repo_root=root
     )
     _book_tracker = BookSlotTracker()
 
@@ -901,80 +901,117 @@ def select_enrichment(
                     atom_id = _sched_slot.source
                     audit_counts["slots_from_persona"] += 1  # story atoms count as persona-class
 
-            # --- Additive mode: persona → registry → teacher (+ practice lib for EXERCISE) ---
-            if not content and request.additive_enrichment:
+            # --- PR #612: additive is the ONLY mode. Two code paths:
+            #   EXERCISE slots: teacher → practice_library → FAIL (no persona, no registry)
+            #     Persona atoms and registry templates are NOT real exercises — they're short
+            #     reflections. Using them as EXERCISE content shipped bad books pre-#612.
+            #   All other slots: persona + registry + teacher stacked
+            if not content:
                 _add_pieces: List[str] = []
                 _add_sources: List[str] = []
                 _add_ids: List[str] = []
 
-                # 1) persona (unrestricted slot types in additive mode)
-                _ap_pool = [
-                    _a for _a in (persona_atoms.get(stype) or [])
-                    if not _is_doctrine_quarantined(str(_a.get("content") or ""), _frame)
-                    and atom_passes_book_governance(
-                        _a.get("metadata"),
-                        topic_id=topic,
-                        persona_id=persona_id,
-                        book_frame=_frame,
-                    )
-                ]
-                if _ap_pool:
-                    _ap_idx = _deterministic_index(f"{seed_key}:persona", len(_ap_pool))
-                    _ap_atom = _ap_pool[_ap_idx]
-                    _ap_content = str(_ap_atom.get("content") or "").strip()
-                    if _ap_content:
-                        _add_pieces.append(_ap_content)
-                        _add_sources.append("persona_atom")
-                        _add_ids.append(str(_ap_atom.get("atom_id") or f"persona_{_ap_idx}"))
-                        audit_counts["slots_from_persona"] += 1
+                if stype == "EXERCISE":
+                    # EXERCISE-slot rule (PR #612): teacher exercise wins; else practice_library;
+                    # else fall through to hard-fail gap raise below.
+                    _at_hit_ex = None
+                    if tid and teacher_atoms:
+                        _at_for_slot_ex = {
+                            _k: [
+                                _a for _a in _pool
+                                if not _is_doctrine_quarantined(str(_a.get("content") or ""), _frame)
+                            ]
+                            for _k, _pool in teacher_atoms.items()
+                        }
+                        _at_hit_ex = _try_teacher_content(
+                            _at_for_slot_ex,
+                            stype,
+                            seed_key,
+                            topic_id=topic,
+                            persona_id=persona_id,
+                            book_frame=_frame,
+                        )
+                    if _at_hit_ex:
+                        from phoenix_v4.rendering.teacher_wrapper import apply_wrapper as _aw
+                        _at_content_ex = _aw(
+                            _at_hit_ex[0], teacher_id=tid, section_type=stype,
+                            seed=seed_key, spine_context=plan_context,
+                        )
+                        _add_pieces.append(_at_content_ex)
+                        _add_sources.append("teacher_atom")
+                        _add_ids.append(_at_hit_ex[1])
+                        teacher_content_val = _at_content_ex
+                        audit_counts["slots_from_teacher"] += 1
+                    else:
+                        _apl = _try_practice_library(chapter_index0, topic, persona_id, seed)
+                        if _apl:
+                            _add_pieces.append(_apl[0])
+                            _add_sources.append("practice_library")
+                            _add_ids.append("practice_library")
+                            audit_counts["slots_from_practice_library"] += 1
+                else:
+                    # Non-EXERCISE: stack persona + registry + teacher
+                    # 1) persona
+                    _ap_pool = [
+                        _a for _a in (persona_atoms.get(stype) or [])
+                        if not _is_doctrine_quarantined(str(_a.get("content") or ""), _frame)
+                        and atom_passes_book_governance(
+                            _a.get("metadata"),
+                            topic_id=topic,
+                            persona_id=persona_id,
+                            book_frame=_frame,
+                        )
+                    ]
+                    if _ap_pool:
+                        _ap_idx = _deterministic_index(f"{seed_key}:persona", len(_ap_pool))
+                        _ap_atom = _ap_pool[_ap_idx]
+                        _ap_content = str(_ap_atom.get("content") or "").strip()
+                        if _ap_content:
+                            _add_pieces.append(_ap_content)
+                            _add_sources.append("persona_atom")
+                            _add_ids.append(str(_ap_atom.get("atom_id") or f"persona_{_ap_idx}"))
+                            audit_counts["slots_from_persona"] += 1
 
-                # 2) registry (always — baseline)
-                _ar_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
-                if _ar_hit and not _is_doctrine_quarantined(_ar_hit[0], _frame):
-                    _add_pieces.append(_ar_hit[0])
-                    _add_sources.append("registry")
-                    _add_ids.append(_ar_hit[1])
-                    reg_sec_meta = (_ar_hit[2], _ar_hit[3])
-                    variant_id = _ar_hit[1]
-                    audit_counts["slots_from_registry"] += 1
-                    if request.additive_enrichment:
+                    # 2) registry (baseline)
+                    _ar_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
+                    if _ar_hit and not _is_doctrine_quarantined(_ar_hit[0], _frame):
+                        _add_pieces.append(_ar_hit[0])
+                        _add_sources.append("registry")
+                        _add_ids.append(_ar_hit[1])
+                        reg_sec_meta = (_ar_hit[2], _ar_hit[3])
+                        variant_id = _ar_hit[1]
+                        audit_counts["slots_from_registry"] += 1
                         _book_tracker.record(_ar_hit[1], slot_type=stype)
 
-                # 3) teacher (respects _TEACHER_OVERLAY_TYPES via _try_teacher_content)
-                if tid and teacher_atoms:
-                    _at_for_slot = {
-                        _k: [
-                            _a for _a in _pool
-                            if not _is_doctrine_quarantined(str(_a.get("content") or ""), _frame)
-                        ]
-                        for _k, _pool in teacher_atoms.items()
-                    }
-                    _at_hit = _try_teacher_content(
-                        _at_for_slot,
-                        stype,
-                        seed_key,
-                        topic_id=topic,
-                        persona_id=persona_id,
-                        book_frame=_frame,
-                    )
-                    if _at_hit:
-                        from phoenix_v4.rendering.teacher_wrapper import apply_wrapper as _aw
-                        _at_raw = _at_hit[0]
-                        _at_content = _aw(_at_raw, teacher_id=tid, section_type=stype, seed=seed_key, spine_context=plan_context)
-                        _add_pieces.append(_at_content)
-                        _add_sources.append("teacher_atom")
-                        _add_ids.append(_at_hit[1])
-                        teacher_content_val = _at_content
-                        audit_counts["slots_from_teacher"] += 1
-
-                # 4) practice library (EXERCISE only)
-                if stype == "EXERCISE":
-                    _apl = _try_practice_library(chapter_index0, topic, persona_id, seed)
-                    if _apl:
-                        _add_pieces.append(_apl[0])
-                        _add_sources.append("practice_library")
-                        _add_ids.append("practice_library")
-                        audit_counts["slots_from_practice_library"] += 1
+                    # 3) teacher (respects _TEACHER_OVERLAY_TYPES)
+                    if tid and teacher_atoms:
+                        _at_for_slot = {
+                            _k: [
+                                _a for _a in _pool
+                                if not _is_doctrine_quarantined(str(_a.get("content") or ""), _frame)
+                            ]
+                            for _k, _pool in teacher_atoms.items()
+                        }
+                        _at_hit = _try_teacher_content(
+                            _at_for_slot,
+                            stype,
+                            seed_key,
+                            topic_id=topic,
+                            persona_id=persona_id,
+                            book_frame=_frame,
+                        )
+                        if _at_hit:
+                            from phoenix_v4.rendering.teacher_wrapper import apply_wrapper as _aw
+                            _at_raw = _at_hit[0]
+                            _at_content = _aw(
+                                _at_raw, teacher_id=tid, section_type=stype,
+                                seed=seed_key, spine_context=plan_context,
+                            )
+                            _add_pieces.append(_at_content)
+                            _add_sources.append("teacher_atom")
+                            _add_ids.append(_at_hit[1])
+                            teacher_content_val = _at_content
+                            audit_counts["slots_from_teacher"] += 1
 
                 if _add_pieces:
                     content = "\n\n".join(_add_pieces)
@@ -982,254 +1019,26 @@ def select_enrichment(
                     source_id = "+".join(_add_ids)
                     atom_id = _add_ids[0] if _add_ids else ""
 
-            # 1) Teacher (waterfall mode only — additive mode handles above)
-            if not content and not request.additive_enrichment and tid and teacher_atoms:
-                teacher_atoms_for_slot = dict(teacher_atoms)
-                for _k, _pool in list(teacher_atoms_for_slot.items()):
-                    _filtered = _filtered_pool(_pool, slot_spec)
-                    # ACT-010: doctrine quarantine — exclude spiritual atoms in somatic_first
-                    _pre_q = len(_filtered)
-                    _filtered = [
-                        _a for _a in _filtered
-                        if not _is_doctrine_quarantined(
-                            str(_a.get("content") or ""), _frame
-                        )
-                    ]
-                    _q_removed = _pre_q - len(_filtered)
-                    if _q_removed:
-                        logger.info(
-                            "Doctrine quarantine ch%d teacher[%s]: removed %d atoms (frame=%s)",
-                            chapter_index0 + 1, _k, _q_removed, _frame,
-                        )
-                    teacher_atoms_for_slot[_k] = _filtered
-                t_hit = _try_teacher_content(
-                    teacher_atoms_for_slot,
-                    stype,
-                    seed_key,
-                    topic_id=topic,
-                    persona_id=persona_id,
-                    book_frame=_frame,
-                )
-                if t_hit:
-                    content, source_id, teacher_primary_idx, t_meta = t_hit
-                    source = "teacher_atom"
-                    teacher_content_val = content
-                    _raw_tp = _pick_teacher_pool(teacher_atoms_for_slot, stype)
-                    teacher_expand_pool = [
-                        a
-                        for a in _raw_tp
-                        if atom_passes_book_governance(
-                            a.get("metadata"),
-                            topic_id=topic,
-                            persona_id=persona_id,
-                            book_frame=_frame,
-                        )
-                    ]
-                    audit_counts["slots_from_teacher"] += 1
-                    atom_id = source_id
-                    match_scores["bestseller_target_score"] = _bestseller_metadata_score(
-                        t_meta, ch_tgt
-                    )
-                    # Registry peek: only in additive mode. In waterfall mode teacher wins outright.
-                    if request.additive_enrichment:
-                        _wf_peek = _peek_registry_variant(reg_lists, stype, reg_counters, seed_key)
-                        if _wf_peek and not _is_doctrine_quarantined(_wf_peek[0], _frame):
-                            content = _wf_peek[0] + "\n\n" + content
-                            source = "registry+teacher_atom"
-
-            # 2) Persona
-            if not content and persona_atoms:
-                _raw_persona_pool = _filtered_pool(persona_atoms.get(stype, []), slot_spec)
-                # ACT-010: doctrine quarantine — exclude spiritual atoms in somatic_first
-                _pre_q_p = len(_raw_persona_pool)
-                persona_pool = [
-                    _a for _a in _raw_persona_pool
-                    if not _is_doctrine_quarantined(
-                        str(_a.get("content") or ""), _frame
-                    )
-                ]
-                _q_removed_p = _pre_q_p - len(persona_pool)
-                if _q_removed_p:
-                    logger.info(
-                        "Doctrine quarantine ch%d persona[%s]: removed %d atoms (frame=%s)",
-                        chapter_index0 + 1, stype, _q_removed_p, _frame,
-                    )
-                persona_atoms_for_slot = dict(persona_atoms)
-                persona_atoms_for_slot[stype] = persona_pool
-
-                # P0.9: hybrid V1+V2 selector for persona atoms when ei_v2_config is wired.
-                _p_hit_hybrid = False
-                _ei_cfg = request.ei_v2_config
-                _hybrid_cfg = (_ei_cfg or {}).get("hybrid") or {}
-                if _ei_cfg and _hybrid_cfg.get("enabled") and persona_pool and stype in _PERSONA_OVERLAY_TYPES:
-                    try:
-                        from phoenix_v4.qa.bestseller_editor import hybrid_select_slot_production
-                        _candidates_raw = [
-                            {
-                                "atom_id": a.get("atom_id", f"persona_{_pi}"),
-                                **(a.get("metadata") or {}),
-                                "body": a.get("content", ""),
-                            }
-                            for _pi, a in enumerate(persona_pool)
-                        ]
-                        _decision = hybrid_select_slot_production(
-                            slot=stype,
-                            chapter_index=chapter_index0,
-                            slot_index=slot_i,
-                            candidates_raw=_candidates_raw,
-                            persona_id=persona_id,
-                            topic_id=topic,
-                            thesis=str(bm_ch.thesis or ""),
-                            ei_v2_config=_ei_cfg,
-                        )
-                        _chosen = next(
-                            (a for a in persona_pool
-                             if a.get("atom_id") == _decision.final_chosen_id),
-                            None,
-                        )
-                        if _chosen:
-                            content = str(_chosen.get("content") or "").strip()
-                            source_id = str(_chosen.get("atom_id") or f"persona_hybrid")
-                            p_meta = dict(_chosen.get("metadata") or {})
-                            _p_hit_hybrid = bool(content)
-                            if _p_hit_hybrid:
-                                source = "persona_atom"
-                                audit_counts["slots_from_persona"] += 1
-                                atom_id = source_id
-                                match_scores["hybrid_v2"] = True
-                                match_scores["bestseller_target_score"] = _bestseller_metadata_score(
-                                    p_meta, ch_tgt
-                                )
-                    except Exception as _hx:
-                        logger.warning("hybrid_select_slot_production failed at ch%d %s: %s",
-                                       chapter_index0 + 1, stype, _hx)
-
-                if not _p_hit_hybrid:
-                    p_hit = _try_persona_content(
-                        persona_atoms_for_slot,
-                        stype,
-                        seed_key,
-                        topic_id=topic,
-                        persona_id=persona_id,
-                        book_frame=_frame,
-                    )
-                    if p_hit:
-                        content, source_id, persona_primary_idx, p_meta = p_hit
-                        source = "persona_atom"
-                        persona_expand_pool = [
-                            a
-                            for a in persona_pool
-                            if atom_passes_book_governance(
-                                a.get("metadata"),
-                                topic_id=topic,
-                                persona_id=persona_id,
-                                book_frame=_frame,
-                            )
-                        ]
-                        audit_counts["slots_from_persona"] += 1
-                        atom_id = source_id
-                        match_scores["bestseller_target_score"] = _bestseller_metadata_score(
-                            p_meta, ch_tgt
-                        )
-
-            # 3) EXERCISE — practice library before registry (matches registry_resolver)
-            if not content and stype == "EXERCISE":
-                pl = _try_practice_library(chapter_index0, topic, persona_id, seed)
-                if pl:
-                    content, source_id = pl
-                    source = "practice_library"
-                    audit_counts["slots_from_practice_library"] += 1
-                    audit_counts["practice_library_warnings"] += 1
-                    match_scores["source"] = "practice_library"
-
-            # 4) Registry
+            # PR #612: hard-fail on missing content. No waterfall fallbacks.
+            # No content_bank fallback. No [CONTENT GAP: ...] string placeholder.
+            # If the additive block above produced nothing, the book can't ship.
             if not content:
-                r_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
-                # ACT-010: doctrine quarantine — skip quarantined registry variants in somatic_first
-                if r_hit and _is_doctrine_quarantined(r_hit[0], _frame):
-                    logger.info(
-                        "Doctrine quarantine ch%d registry[%s]: variant %s excluded (frame=%s)",
-                        chapter_index0 + 1, stype, r_hit[1], _frame,
-                    )
-                    r_hit = None
-                if r_hit:
-                    content, source_id, _sec_d, _v_i = r_hit
-                    reg_sec_meta = (_sec_d, _v_i)
-                    source = "registry"
-                    audit_counts["slots_from_registry"] += 1
-                    variant_id = source_id
-                    vars_ = _sec_d.get("variants") or []
-                    var_rec: Dict[str, Any] = {}
-                    if 0 <= _v_i < len(vars_) and isinstance(vars_[_v_i], dict):
-                        var_rec = vars_[_v_i]
-                    # ACT-007: merge section-level metadata for bestseller field scoring
-                    _sec_meta: Dict[str, Any] = dict(_sec_d.get("metadata") or {})
-                    _sec_meta.update({k: v for k, v in var_rec.items() if k not in _sec_meta})
-                    _recent_fams: List[str] = [
-                        f
-                        for prev_fams in _chapter_collision_families[-2:]
-                        for f in prev_fams
-                    ]
-                    _base_score = _bestseller_metadata_score(_sec_meta, ch_tgt)
-                    _field_bonus = _metadata_field_bonus(_sec_meta, ch_tgt)
-                    _cf_penalty = _collision_family_penalty(_sec_meta, _recent_fams)
-                    match_scores["bestseller_target_score"] = _base_score + _field_bonus + _cf_penalty
-                    match_scores["metadata_field_bonus"] = _field_bonus
-                    match_scores["collision_family_penalty"] = _cf_penalty
-                    _cf_tag = str(_sec_meta.get("collision_family") or "").strip()
-                    if _cf_tag:
-                        match_scores["_collision_family"] = _cf_tag
-
-            # 5) Content bank (bridges / fallbacks)
-            if not content and cb_reg is not None:
-                b_hit = _try_content_bank_fallback(
-                    reg=cb_reg,
-                    slot_type=stype,
-                    seed_key=seed_key,
-                    topic=topic,
-                    persona_id=persona_id,
-                    frame=_frame,
-                    runtime_format=rf_bm,
-                    chapter_index0=chapter_index0,
-                    seed=seed,
-                    chapter_targets=ch_tgt,
-                )
-                # ACT-010: doctrine quarantine — skip quarantined content bank bodies in somatic_first
-                if b_hit and _is_doctrine_quarantined(b_hit[0], _frame):
-                    logger.info(
-                        "Doctrine quarantine ch%d content_bank[%s]: variant %s excluded (frame=%s)",
-                        chapter_index0 + 1, stype, b_hit[2], _frame,
-                    )
-                    b_hit = None
-                if b_hit:
-                    content, source, source_id, extra_scores = b_hit
-                    variant_id = str(extra_scores.get("content_bank_variant_id") or source_id)
-                    match_scores.update(extra_scores)
-                    audit_counts["slots_from_content_bank"] += 1
-
-            # 6) Gap
-            if not content:
-                if request.publishable_book:
-                    raise EnrichmentGapError(
-                        f"No enrichable content for slot {stype} "
-                        f"(topic={topic} chapter={bm_ch.number} slot_index={slot_i})"
-                    )
                 audit_counts["slots_empty"] += 1
-                gap_msg = f"[CONTENT GAP: {stype} for {topic} ch{bm_ch.number}]"
-                logger.error(
-                    "Enrichment gap: %s (slot %d) — PRODUCTION WILL FAIL. "
-                    "Add atoms or content bank entries for topic=%s slot_type=%s.",
-                    gap_msg, slot_i, topic, stype
-                )
                 gap_details.append(
                     {"chapter": bm_ch.number, "slot_index": slot_i, "slot_type": stype}
                 )
-                content = gap_msg
-                source = "gap"
-                source_id = "gap"
+                raise EnrichmentGapError(
+                    f"No enrichable content for slot {stype} "
+                    f"(topic={topic} chapter={bm_ch.number} slot_index={slot_i}). "
+                    f"Sources tried: persona={bool(persona_atoms.get(stype) if persona_atoms else False)}, "
+                    f"registry={bool(reg_lists.get(stype))}, "
+                    f"teacher={bool(tid and teacher_atoms)}"
+                    + (f", practice_library (EXERCISE slot)" if stype == 'EXERCISE' else "")
+                    + ". Add atoms upstream."
+                )
 
-            # Record registry/story picks in BookSlotTracker (additive mode only).
-            if request.additive_enrichment:
+            # Record registry/story picks in BookSlotTracker (unconditional as of PR #612).
+            if True:
                 if variant_id:
                     _book_tracker.record(variant_id, slot_type=stype)
                 if source == "story_plan":
