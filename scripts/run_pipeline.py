@@ -446,7 +446,23 @@ def _run_spine_pipeline_mode(
     _tid_raw = (book_spec_for_compiler.get("teacher_id") or "").strip()
     teacher_for_enrich = None if not _tid_raw or _tid_raw == "default_teacher" else _tid_raw
 
-    runtime_fmt = (getattr(args, "runtime_format", None) or "standard_book").strip()
+    # V4 freeze: when --output-format is explicitly passed, derive runtime from it so beatmap/word
+    # budget are sized for the modular format (e.g. pocket_guide → short_book_30) instead of the
+    # freeze-prohibited "standard_book". When --output-format is absent, keep legacy default behavior
+    # so existing spine tests/pipelines are not silently re-routed to a different runtime.
+    from pearl_prime.modular_format_freeze import load_freeze_settings as _load_freeze_settings
+    _freeze = _load_freeze_settings()
+    _cli_runtime = (getattr(args, "runtime_format", None) or "").strip()
+    _cli_output_format = (getattr(args, "output_format", None) or "").strip()
+    _selected_output_format = _cli_output_format or (
+        _freeze.default_output_format if _freeze.enabled else ""
+    )
+    _freeze_runtime = ""
+    if _cli_output_format and _freeze.enabled and _cli_output_format in _freeze.formats:
+        _freeze_runtime = str(
+            _freeze.formats[_cli_output_format].get("runtime_format_id") or ""
+        ).strip()
+    runtime_fmt = _cli_runtime or _freeze_runtime or "standard_book"
 
     from phoenix_v4.planning.legacy_template_loader import resolve_template_library
     _template_library = resolve_template_library(topic_id, persona_id, runtime_fmt)
@@ -568,6 +584,35 @@ def _run_spine_pipeline_mode(
         enriched = apply_depth_pass(enriched, depth_map, repo_root=repo_root)
     post_depth_words = enriched.total_words
 
+    # V4 freeze: apply modular output format to derive per-chapter word cap and slot template.
+    # Registry mode calls apply_output_format_to_plan on its Stage-2 format_plan_dict; spine mode
+    # has no such dict, so we call it on a stub plan and apply the resulting target_word_range as
+    # a per-chapter cap on the composed prose. Without this, modular formats (pocket_guide, etc.)
+    # consistently overshoot their target ranges because runtime_fmt alone (e.g. short_book_30)
+    # permits a wider budget than the modular format allows.
+    _spine_format_applied: dict | None = None
+    _per_chapter_word_cap: int | None = None
+    if _freeze.enabled and _cli_output_format and _cli_output_format in _freeze.formats:
+        try:
+            from pearl_prime.modular_format_freeze import apply_output_format_to_plan as _apply_fmt
+            _spine_format_applied = _apply_fmt(
+                {"format_runtime_id": runtime_fmt, "chapter_count": len(enriched.chapters)},
+                output_format_id=_cli_output_format,
+                chapter_count=len(enriched.chapters),
+                settings=_freeze,
+            )
+            _twr = _spine_format_applied.get("target_word_range")
+            if isinstance(_twr, list) and len(_twr) == 2:
+                _per_chapter_word_cap = int(_twr[1])
+            print(
+                f"Spine output format applied: {_cli_output_format} "
+                f"(per-chapter cap {_per_chapter_word_cap}w × {len(enriched.chapters)} chapters, "
+                f"runtime={runtime_fmt})",
+                file=sys.stderr,
+            )
+        except ValueError as _fe:
+            print(f"Spine output format application WARN: {_fe}", file=sys.stderr)
+
     # Exercise journeys: attach thesis-aligned exercises to EXERCISE slots (opt-in).
     if getattr(args, "exercise_journeys", False):
         from phoenix_v4.planning.enrichment_select import attach_exercise_journeys
@@ -607,6 +652,43 @@ def _run_spine_pipeline_mode(
         book_seed=seed,
         flow_profile=_flow_profile,
     )
+    # Apply per-chapter word cap from modular output format (see apply_output_format_to_plan above).
+    # Preserves the "Chapter N" heading line and paragraph structure so downstream gates can
+    # still parse chapters via _extract_registry_chapters; only the body is truncated by words.
+    if _per_chapter_word_cap:
+        _chs = _extract_registry_chapters(prose)
+        if _chs:
+            _pre_cap_words = sum(len(c.split()) for c in _chs)
+            _capped: list[str] = []
+            for _ch in _chs:
+                _lines = _ch.splitlines()
+                _heading = _lines[0] if _lines else ""
+                _body = "\n".join(_lines[1:])
+                _body_words = _body.split()
+                if len(_body_words) > _per_chapter_word_cap:
+                    _paras = re.split(r"\n\s*\n", _body)
+                    _kept: list[str] = []
+                    _used = 0
+                    for _p in _paras:
+                        _pw = len(_p.split())
+                        if _used + _pw <= _per_chapter_word_cap:
+                            _kept.append(_p)
+                            _used += _pw
+                        else:
+                            _remain = _per_chapter_word_cap - _used
+                            if _remain > 0:
+                                _kept.append(" ".join(_p.split()[:_remain]))
+                                _used = _per_chapter_word_cap
+                            break
+                    _body = "\n\n".join(_kept).strip()
+                _capped.append(f"{_heading}\n\n{_body}".strip() if _body else _heading)
+            prose = "\n\n".join(_capped)
+            _post_cap_words = sum(len(c.split()) for c in _capped)
+            print(
+                f"Per-chapter word cap applied: {_pre_cap_words} → {_post_cap_words} words "
+                f"(cap {_per_chapter_word_cap}w/chapter)",
+                file=sys.stderr,
+            )
     scene_anchor_cap = min(
         int((ch.scene_plan or {}).get("scene_anchor_cap", 2))
         for ch in book_plan.chapters
@@ -1110,6 +1192,9 @@ def _run_spine_pipeline_mode(
             "persona_id": persona_id,
             "teacher_id": teacher_for_enrich or "",
             "runtime_format": runtime_fmt,
+            "output_format_id": _cli_output_format or None,
+            "target_word_range": (_spine_format_applied or {}).get("target_word_range"),
+            "format_structural_id": (_spine_format_applied or {}).get("format_structural_id"),
             "book_plan_id": book_plan.plan_id,
             "word_count": word_count,
             "chapter_count": len(enriched.chapters),
