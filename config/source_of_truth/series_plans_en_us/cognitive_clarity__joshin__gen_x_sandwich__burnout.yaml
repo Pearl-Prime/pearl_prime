@@ -1,0 +1,72 @@
+series_plan_schema: "1.0.0"
+created_at: "2026-04-24"
+locale: en_US
+book_id_prefix: cognitive_clarity__joshin__gen_x_sandwich__burnout
+
+brand: cognitive_clarity
+teacher: joshin
+persona: gen_x_sandwich
+topic: burnout
+
+teacher_topic_score: 0.85
+teacher_persona_score: 0.65
+composite_fit: 0.75
+
+arc:
+  installment_1:
+    book_id: cognitive_clarity__joshin__gen_x_sandwich__burnout__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__burnout__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: cognitive_clarity__joshin__gen_x_sandwich__burnout__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__burnout__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: cognitive_clarity__joshin__gen_x_sandwich__burnout__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_x_sandwich__burnout__spiral__F006.yaml
+    duration: standard_book_60min
+
+reader_promise_family: >
+  3 books across engines of burnout via the zen-ink, direct-pointing, cognitive disruption voice.
+
+bestseller_hook_family: recognition_descent
+emotional_engine: burnout_recognition
+
+comp_series:
+  - "Burnout: Secret to Unlocking Stress Cycle (Nagoski)"
+  - "Laziness Does Not Exist (Price)"
+  - "Do Nothing (Headlee)"
+
+platform_strategy:
+  primary: [kdp_ebook, audible]
+  secondary: [apple_books, google_play, spotify_audiobooks]
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+
+reader_avatar:
+  age: "47–62"
+  where_they_are: >
+    After a phone call with mom's doctor. Kid's tuition bill on counter.
+  what_they_need: >
+    Acknowledges compression of being responsible for generations.
+  what_they_avoid: >
+    Mindfulness-for-beginners.
+
+series_voice_markers:
+  register: "zen-ink, direct-pointing, cognitive disruption"
+  sentence_rhythm: "short, unadorned, paradoxical turns"
+  metaphor_family: "enso, empty cup, cracked vessel"
+  second_person_default: true
+
+main_character_name: Howard
+main_character_role: "manager + parent + caregiver to aging parent"
+main_character_image_path: null
+main_character_lora_id: howard_cc_us
+main_character_trigger_word: howard_cc_us
+
+plan_source_path: config/manga/manga_brand_series_plan.yaml

@@ -1,0 +1,92 @@
+series_plan_schema: "1.0.0"
+created_at: "2026-04-24"
+locale: en_US
+book_id_prefix: somatic_wisdom__pamela_fellows__working_parents__somatic_healing
+
+brand: somatic_wisdom
+teacher: pamela_fellows
+persona: working_parents
+topic: somatic_healing
+
+teacher_topic_score: 0.95
+teacher_persona_score: 0.8
+composite_fit: 0.88
+
+arc:
+  installment_1:
+    book_id: somatic_wisdom__pamela_fellows__working_parents__somatic_healing__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/working_parents__somatic_healing__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: somatic_wisdom__pamela_fellows__working_parents__somatic_healing__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__somatic_healing__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: somatic_wisdom__pamela_fellows__working_parents__somatic_healing__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/working_parents__somatic_healing__spiral__F006.yaml
+    duration: standard_book_60min
+  installment_4:
+    book_id: somatic_wisdom__pamela_fellows__working_parents__somatic_healing__shame
+    engine: shame
+    master_arc: config/source_of_truth/master_arcs/working_parents__somatic_healing__shame__F006.yaml
+    duration: standard_book_60min
+  installment_5:
+    book_id: somatic_wisdom__pamela_fellows__working_parents__somatic_healing__grief
+    engine: grief
+    master_arc: config/source_of_truth/master_arcs/working_parents__somatic_healing__grief__F006.yaml
+    duration: standard_book_60min
+  installment_6:
+    book_id: somatic_wisdom__pamela_fellows__working_parents__somatic_healing__comparison
+    engine: comparison
+    master_arc: config/source_of_truth/master_arcs/working_parents__somatic_healing__comparison__F006.yaml
+    duration: standard_book_60min
+  installment_7:
+    book_id: somatic_wisdom__pamela_fellows__working_parents__somatic_healing__watcher
+    engine: watcher
+    master_arc: config/source_of_truth/master_arcs/working_parents__somatic_healing__watcher__F006.yaml
+    duration: standard_book_60min
+
+reader_promise_family: >
+  7 books across engines of somatic_healing via the soft-clinical josei, warm without sentiment voice.
+
+bestseller_hook_family: recognition_descent
+emotional_engine: somatic_healing_recognition
+
+comp_series:
+  - "The Body Keeps the Score (van der Kolk)"
+  - "Waking the Tiger (Levine)"
+  - "My Grandmother's Hands (Menakem)"
+
+platform_strategy:
+  primary: [kdp_ebook, audible]
+  secondary: [apple_books, google_play, spotify_audiobooks]
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+
+reader_avatar:
+  age: "30–45"
+  where_they_are: >
+    Bedtime routine done. Kid asleep, dishes undone, sitting in dark.
+  what_they_need: >
+    Doesn't call this 'a season' or ask them to be present more.
+  what_they_avoid: >
+    Mom-guilt meta-discourse.
+
+series_voice_markers:
+  register: "soft-clinical josei, warm without sentiment"
+  sentence_rhythm: "measured, body-paced, sensation-anchored"
+  metaphor_family: "body weather, tides, seasonal bodies"
+  second_person_default: true
+
+main_character_name: Hannah
+main_character_role: "working parent of young kids"
+main_character_image_path: null
+main_character_lora_id: hannah_sw_us
+main_character_trigger_word: hannah_sw_us
+
+plan_source_path: config/manga/manga_brand_series_plan.yaml

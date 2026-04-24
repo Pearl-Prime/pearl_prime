@@ -1,0 +1,72 @@
+series_plan_schema: "1.0.0"
+created_at: "2026-04-24"
+locale: en_US
+book_id_prefix: solar_return__ra__gen_z_student__financial_anxiety
+
+brand: solar_return
+teacher: ra
+persona: gen_z_student
+topic: financial_anxiety
+
+teacher_topic_score: 0.85
+teacher_persona_score: 0.7
+composite_fit: 0.77
+
+arc:
+  installment_1:
+    book_id: solar_return__ra__gen_z_student__financial_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__financial_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: solar_return__ra__gen_z_student__financial_anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__financial_anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: solar_return__ra__gen_z_student__financial_anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/gen_z_student__financial_anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+
+reader_promise_family: >
+  3 books across engines of financial_anxiety via the cosmic-grounded, transformation-urgent-calm voice.
+
+bestseller_hook_family: recognition_descent
+emotional_engine: financial_anxiety_recognition
+
+comp_series:
+  - "Mind Over Money (Klontz)"
+  - "Your Money or Your Life (Robin/Dominguez)"
+  - "The Soul of Money (Twist)"
+
+platform_strategy:
+  primary: [kdp_ebook, audible]
+  secondary: [apple_books, google_play, spotify_audiobooks]
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+
+reader_avatar:
+  age: "18–24"
+  where_they_are: >
+    1am between assignments. Too wired to sleep, too tired to keep working.
+  what_they_need: >
+    Takes them seriously without mothering them.
+  what_they_avoid: >
+    'You'll figure it out.'
+
+series_voice_markers:
+  register: "cosmic-grounded, transformation-urgent-calm"
+  sentence_rhythm: "ember-rhythm — spark then breath"
+  metaphor_family: "fire, phoenix, dawn, cycle"
+  second_person_default: true
+
+main_character_name: Bennett
+main_character_role: "university undergrad"
+main_character_image_path: null
+main_character_lora_id: bennett_so_us
+main_character_trigger_word: bennett_so_us
+
+plan_source_path: config/manga/manga_brand_series_plan.yaml

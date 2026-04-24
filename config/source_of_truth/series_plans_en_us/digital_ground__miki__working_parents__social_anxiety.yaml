@@ -1,0 +1,72 @@
+series_plan_schema: "1.0.0"
+created_at: "2026-04-24"
+locale: en_US
+book_id_prefix: digital_ground__miki__working_parents__social_anxiety
+
+brand: digital_ground
+teacher: miki
+persona: working_parents
+topic: social_anxiety
+
+teacher_topic_score: 0.9
+teacher_persona_score: 0.6
+composite_fit: 0.75
+
+arc:
+  installment_1:
+    book_id: digital_ground__miki__working_parents__social_anxiety__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/working_parents__social_anxiety__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: digital_ground__miki__working_parents__social_anxiety__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__social_anxiety__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: digital_ground__miki__working_parents__social_anxiety__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/working_parents__social_anxiety__spiral__F006.yaml
+    duration: standard_book_60min
+
+reader_promise_family: >
+  3 books across engines of social_anxiety via the gen-z native, screen-literate, ironic without cynical voice.
+
+bestseller_hook_family: recognition_descent
+emotional_engine: social_anxiety_recognition
+
+comp_series:
+  - "How to Be Yourself (Hendriksen)"
+  - "Untamed (Doyle)"
+  - "Self-Compassion (Neff)"
+
+platform_strategy:
+  primary: [kdp_ebook, audible]
+  secondary: [apple_books, google_play, spotify_audiobooks]
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+
+reader_avatar:
+  age: "30–45"
+  where_they_are: >
+    Bedtime routine done. Kid asleep, dishes undone, sitting in dark.
+  what_they_need: >
+    Doesn't call this 'a season' or ask them to be present more.
+  what_they_avoid: >
+    Mom-guilt meta-discourse.
+
+series_voice_markers:
+  register: "gen-z native, screen-literate, ironic without cynical"
+  sentence_rhythm: "short, direct, screen-paced"
+  metaphor_family: "interface, signal, glow"
+  second_person_default: true
+
+main_character_name: Reed
+main_character_role: "working parent of young kids"
+main_character_image_path: null
+main_character_lora_id: reed_dg_us
+main_character_trigger_word: reed_dg_us
+
+plan_source_path: config/manga/manga_brand_series_plan.yaml

@@ -1,0 +1,72 @@
+series_plan_schema: "1.0.0"
+created_at: "2026-04-24"
+locale: en_US
+book_id_prefix: solar_return__ra__working_parents__depression
+
+brand: solar_return
+teacher: ra
+persona: working_parents
+topic: depression
+
+teacher_topic_score: 0.85
+teacher_persona_score: 0.65
+composite_fit: 0.75
+
+arc:
+  installment_1:
+    book_id: solar_return__ra__working_parents__depression__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/working_parents__depression__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: solar_return__ra__working_parents__depression__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/working_parents__depression__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: solar_return__ra__working_parents__depression__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/working_parents__depression__spiral__F006.yaml
+    duration: standard_book_60min
+
+reader_promise_family: >
+  3 books across engines of depression via the cosmic-grounded, transformation-urgent-calm voice.
+
+bestseller_hook_family: recognition_descent
+emotional_engine: depression_recognition
+
+comp_series:
+  - "Lost Connections (Hari)"
+  - "Feeling Good (Burns)"
+  - "The Upward Spiral (Korb)"
+
+platform_strategy:
+  primary: [kdp_ebook, audible]
+  secondary: [apple_books, google_play, spotify_audiobooks]
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+
+reader_avatar:
+  age: "30–45"
+  where_they_are: >
+    Bedtime routine done. Kid asleep, dishes undone, sitting in dark.
+  what_they_need: >
+    Doesn't call this 'a season' or ask them to be present more.
+  what_they_avoid: >
+    Mom-guilt meta-discourse.
+
+series_voice_markers:
+  register: "cosmic-grounded, transformation-urgent-calm"
+  sentence_rhythm: "ember-rhythm — spark then breath"
+  metaphor_family: "fire, phoenix, dawn, cycle"
+  second_person_default: true
+
+main_character_name: Naomi
+main_character_role: "working parent of young kids"
+main_character_image_path: null
+main_character_lora_id: naomi_so_us
+main_character_trigger_word: naomi_so_us
+
+plan_source_path: config/manga/manga_brand_series_plan.yaml

@@ -1,0 +1,72 @@
+series_plan_schema: "1.0.0"
+created_at: "2026-04-24"
+locale: en_US
+book_id_prefix: devotion_path__sai_ma__corporate_managers__courage
+
+brand: devotion_path
+teacher: sai_ma
+persona: corporate_managers
+topic: courage
+
+teacher_topic_score: 0.9
+teacher_persona_score: 0.65
+composite_fit: 0.78
+
+arc:
+  installment_1:
+    book_id: devotion_path__sai_ma__corporate_managers__courage__false_alarm
+    engine: false_alarm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__courage__false_alarm__F006.yaml
+    duration: standard_book_60min
+  installment_2:
+    book_id: devotion_path__sai_ma__corporate_managers__courage__overwhelm
+    engine: overwhelm
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__courage__overwhelm__F006.yaml
+    duration: standard_book_60min
+  installment_3:
+    book_id: devotion_path__sai_ma__corporate_managers__courage__spiral
+    engine: spiral
+    master_arc: config/source_of_truth/master_arcs/corporate_managers__courage__spiral__F006.yaml
+    duration: standard_book_60min
+
+reader_promise_family: >
+  3 books across engines of courage via the flowing-warmth shonen, devotional earnest voice.
+
+bestseller_hook_family: recognition_descent
+emotional_engine: courage_recognition
+
+comp_series:
+  - "Daring Greatly (Brené Brown)"
+  - "Big Magic (Gilbert)"
+  - "The War of Art (Pressfield)"
+
+platform_strategy:
+  primary: [kdp_ebook, audible]
+  secondary: [apple_books, google_play, spotify_audiobooks]
+  launch_platform: kdp_ebook
+  cadence:
+    release_spacing_days: 14
+    max_books_per_brand_per_month: 2
+
+reader_avatar:
+  age: "35–52"
+  where_they_are: >
+    On a delayed flight. Laptop open, email half-composed.
+  what_they_need: >
+    Names what the role does to a body without pathologizing.
+  what_they_avoid: >
+    Productivity reframing.
+
+series_voice_markers:
+  register: "flowing-warmth shonen, devotional earnest"
+  sentence_rhythm: "ardent but unhurried"
+  metaphor_family: "flame-as-offering, ornamental borders, hands"
+  second_person_default: true
+
+main_character_name: Theron
+main_character_role: "mid-level manager running a cross-functional team"
+main_character_image_path: null
+main_character_lora_id: theron_dp_us
+main_character_trigger_word: theron_dp_us
+
+plan_source_path: config/manga/manga_brand_series_plan.yaml
