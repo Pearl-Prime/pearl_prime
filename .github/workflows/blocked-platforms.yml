@@ -1,0 +1,50 @@
+# AI-policy blocked-platforms CI guard.
+# Runs on every PR to prevent accidentally targeting platforms that ban or
+# disqualify AI-generated manga (Tapas, Shueisha/MangaPlus, JUMP TOON, Viz,
+# Yen Press, Shogakukan, Piccoma direct, Kakao Page).
+#
+# Source of truth: config/publishing/ai_policy_blockers.yaml
+# Authority:        artifacts/research/manga_vs_webtoon_economics_2026-04-25.md (PR #626)
+# Audit report:     artifacts/research/ai_policy_blocker_audit_2026-04-25.md (PR #628)
+name: Blocked platforms guard
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'config/publishing/ai_policy_blockers.yaml'
+      - 'scripts/ci/check_blocked_platforms.py'
+      - 'scripts/publish/**'
+      - 'scripts/manga/**_upload*.py'
+      - 'scripts/manga/**_publish*.py'
+      - 'scripts/manga/**_submit*.py'
+      - 'scripts/release/**_upload*.py'
+      - '.github/workflows/blocked-platforms.yml'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'config/publishing/ai_policy_blockers.yaml'
+      - 'scripts/ci/check_blocked_platforms.py'
+      - 'scripts/publish/**'
+      - 'scripts/manga/**_upload*.py'
+      - 'scripts/manga/**_publish*.py'
+      - 'scripts/manga/**_submit*.py'
+      - 'scripts/release/**_upload*.py'
+      - '.github/workflows/blocked-platforms.yml'
+
+jobs:
+  blocked-platforms:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PyYAML
+        run: pip install -q pyyaml
+      - name: Validate ai_policy_blockers.yaml parses
+        run: |
+          python -c "import yaml; yaml.safe_load(open('config/publishing/ai_policy_blockers.yaml'))"
+      - name: Scan uploader/submitter scripts for blocked-platform targets
+        run: |
+          python scripts/ci/check_blocked_platforms.py
