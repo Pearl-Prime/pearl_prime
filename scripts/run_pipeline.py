@@ -568,21 +568,20 @@ def _run_spine_pipeline_mode(
     post_depth_words = enriched.total_words
 
     _governance_report: dict = {}
-    # BookSlotTracker enforces variety across HOOK recognition-bank picks for a full book.
-    # Created here so it is available when the spine path adopts section_packet_composer.
-    # The pilot path (run_legacy_template_packet_pilot.py) already uses it via injection_resolver.
-    try:
-        from phoenix_v4.planning.injection_resolver import BookSlotTracker
-
-        _book_slot_tracker = BookSlotTracker()
-    except Exception:
-        _book_slot_tracker = None  # type: ignore[assignment]
+    # NOTE — BookSlotTracker variety enforcement is currently NOT wired into this
+    # pipeline. The main spine path (compose_from_enriched_book → compose_golden_
+    # spine_chapter → compose_chapter_prose) does not route through
+    # injection_resolver.resolve_injections, which is the only consumer of the
+    # tracker. Only the pilot path (scripts/pilot/run_legacy_template_packet_
+    # pilot.py → compose_section_packet) benefits from the tracker today. Wiring
+    # here is blocked on the spine path adopting section_packet_composer — a
+    # larger refactor, not a small diff. Do not re-add a dead `slot_tracker=`
+    # kwarg here until that migration lands.
     prose = compose_from_enriched_book(
         enriched,
         quality_profile=quality_profile,
         governance_report=_governance_report,
         artifact_dir=render_dir,
-        slot_tracker=_book_slot_tracker,
     )
     prose = clean_for_delivery(
         prose,

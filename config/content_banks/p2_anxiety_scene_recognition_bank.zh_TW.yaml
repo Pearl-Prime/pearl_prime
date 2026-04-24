@@ -1,0 +1,1392 @@
+locale: zh_TW
+anxiety_healthcare_rns_scene_recognition:
+
+- variant_id: hrasr_001
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你站在護理站的電腦前,游標在同一個欄位裡閃了兩分鐘。你手放在滑鼠上,卻什麼也沒點。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.8
+    engagement: 0.7
+  collision_family: charting_pause
+  signature_phrases: ["cursor has been blinking in the same field", "hand is on the mouse"]
+  forbidden_terms: []
+  notes_for_selector: "Night-shift charting station. Micro-freeze at the keyboard — behavioral observation, no diagnosis."
+
+- variant_id: hrasr_002
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你在交班,語速比你的呼吸還快。下一班的護理師點著頭,你腦子裡早已跑到兩個病人之後。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.8
+    somatic_precision: 0.8
+    engagement: 0.8
+  collision_family: handoff_rush
+  signature_phrases: ["voice is running faster than your breath", "two patients ahead of where you are talking"]
+  forbidden_terms: []
+  notes_for_selector: "Handoff report setting. Breath-speech mismatch — somatic observation, no advice."
+
+- variant_id: hrasr_003
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    凌晨三點,休息室的販賣機吃掉你九十塊,你站在那裡等一包等下也不會嚐到味道的餅乾。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.9
+    engagement: 0.7
+  collision_family: break_room_depletion
+  signature_phrases: ["three dollars and it is 3am", "chips you will not taste"]
+  forbidden_terms: []
+  notes_for_selector: "Break-room at 3am. Depleted-body observation — ends on sensory non-registration."
+
+- variant_id: hrasr_004
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    這一夜急救車已經第三次把你擋在外面,再按指紋的時候你的手指有點在抖。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.9
+    somatic_precision: 0.9
+    engagement: 0.7
+  collision_family: pyxis_lockout
+  signature_phrases: ["Pyxis locked you out for the third time", "thumbprint is shaking a little"]
+  forbidden_terms: []
+  notes_for_selector: "Med-dispense setting. Fine-motor tremor under lockout — somatic observation, no reframe."
+
+- variant_id: hrasr_005
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    病人的女兒問了一個你還沒辦法回答的問題,你把病歷夾在胸前,像是它可以擋住什麼。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.8
+    engagement: 0.9
+  collision_family: family_question
+  signature_phrases: ["question you cannot answer yet", "chart in front of you like it is protecting something"]
+  forbidden_terms: []
+  notes_for_selector: "Bedside family interaction. Posture observation — no interpretation, no advice."
+
+- variant_id: hrasr_006
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你回到家,還穿著刷手服坐在床邊,想不起來離開前有沒有把電腦登出。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.9
+    engagement: 0.7
+  collision_family: post_shift_replay
+  signature_phrases: ["still in scrubs on the edge of the bed", "whether you signed out of the computer"]
+  forbidden_terms: []
+  notes_for_selector: "Home post-shift setting. Unable to cross the threshold — replay observation, no label."
+
+- variant_id: hrasr_007
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你打開給藥紀錄再看一次。你已經看過兩次,你知道上面寫什麼。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: checking_loop
+  signature_phrases: ["open the MAR and check it again", "you know what it says"]
+  forbidden_terms: []
+  notes_for_selector: "Medication record setting. Verification loop observation — behavioral, no diagnosis."
+
+- variant_id: hrasr_008
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    兩層樓下有人叫了急救。你的肩膀已經先拉起來,腦袋才跟上那是不是在你這個病房。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.9
+    somatic_precision: 0.8
+    engagement: 0.8
+  collision_family: alarm_startle
+  signature_phrases: ["code just got called two floors down", "shoulders went up before your mind caught up"]
+  forbidden_terms: []
+  notes_for_selector: "Hospital code setting. Somatic priming — body faster than cognition."
+
+- variant_id: hrasr_009
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    住院醫師已經被你呼叫三次,電話在你手上,你盯著它等它出聲。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.6
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: unanswered_page
+  signature_phrases: ["paged the resident three times", "waiting for it to do something"]
+  forbidden_terms: []
+  notes_for_selector: "Phone page setting. Dependent-on-response waiting loop — behavioral."
+
+- variant_id: hrasr_010
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你走進儲藏室,把門關上,再過九十秒才會有人發現你不見。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: hideaway_breath
+  signature_phrases: ["stepped into the supply closet and closed the door", "ninety seconds before anyone notices"]
+  forbidden_terms: []
+  notes_for_selector: "Supply closet setting. Stolen micro-regulation moment — situational, no reframe."
+
+- variant_id: hrasr_011
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    四號房的呼叫鈴已經響了九分鐘,另一床病人的點滴也開始在嗶了。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.6
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: split_demand
+  signature_phrases: ["call light has been on in room four for nine minutes", "other patient's IV just started beeping"]
+  forbidden_terms: []
+  notes_for_selector: "Floor setting. Two demands, one body — situational observation, no prioritization advice."
+
+- variant_id: hrasr_012
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你刷完手,覺得這雙手離你比一小時前更遠了。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.9
+    somatic_precision: 0.9
+    engagement: 0.6
+  collision_family: body_distance
+  signature_phrases: ["scrubbed in", "hands feel further away than they did an hour ago"]
+  forbidden_terms: []
+  notes_for_selector: "Scrub-in setting. Somatic depersonalization noticing — no clinical label."
+
+- variant_id: hrasr_013
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    護理長剛問你能不能再多收一床,話還沒在你腦中講完,你已經聽見自己說好。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.6
+    engagement: 0.8
+    specificity: 0.8
+  collision_family: reflex_yes
+  signature_phrases: ["charge nurse just asked if you can take one more", "heard yourself say yes before you had finished the sentence"]
+  forbidden_terms: []
+  notes_for_selector: "Assignment setting. Automatic yes — behavioral observation, no advice to say no."
+
+- variant_id: hrasr_014
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你在寫一份跌倒紀錄——因為你及時到了,跌倒其實沒發生——可是筆壓得比需要的還要用力。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.8
+    somatic_precision: 0.8
+    engagement: 0.7
+  collision_family: near_miss_tension
+  signature_phrases: ["fall that did not happen", "pen is pressing harder than it needs to"]
+  forbidden_terms: []
+  notes_for_selector: "Post-near-miss charting. Residual grip tension — somatic observation."
+
+- variant_id: hrasr_015
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    這個時間走廊比平常安靜,你因為這樣走得更慢,不是更快。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.8
+    engagement: 0.7
+  collision_family: unit_quiet
+  signature_phrases: ["hallway is quieter than it should be", "walking slower because of it, not faster"]
+  forbidden_terms: []
+  notes_for_selector: "Hallway setting. Hypervigilant quiet — behavioral observation, no interpretation."
+
+- variant_id: hrasr_016
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    膀胱已經叫了你兩個小時,你還是把廁所拖到下一輪給藥之後。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.9
+    somatic_precision: 0.8
+    engagement: 0.6
+  collision_family: body_override
+  signature_phrases: ["bladder has been telling you for two hours", "postponing the bathroom until the next med pass"]
+  forbidden_terms: []
+  notes_for_selector: "Floor setting. Bodily need override — somatic observation, no advice."
+
+- variant_id: hrasr_017
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    病歷系統又閒置登出了,你手掌上的小抄被汗浸開,墨水在滲。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.8
+    somatic_precision: 0.8
+    engagement: 0.8
+  collision_family: charting_pause
+  signature_phrases: ["charting computer timed out again", "ink bleeding where you sweat through them"]
+  forbidden_terms: []
+  notes_for_selector: "Charting setting, second variant. Ink on palm detail — high specificity, somatic sweat marker."
+
+- variant_id: hrasr_018
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你在治療室把水龍頭關掉,才發現它一直開著。你不記得自己什麼時候轉開的。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.8
+    engagement: 0.7
+  collision_family: attention_gap
+  signature_phrases: ["turned off the tap in the med room", "do not remember turning it on"]
+  forbidden_terms: []
+  notes_for_selector: "Med room setting. Attention dropout observation — no clinical labeling."
+
+- variant_id: hrasr_019
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    下班後你坐在車裡,已經過了十一分鐘,你還沒發動引擎。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.6
+    specificity: 0.9
+    engagement: 0.7
+  collision_family: post_shift_replay
+  signature_phrases: ["sat in the car at the end of the shift", "eleven minutes and you have not started the engine yet"]
+  forbidden_terms: []
+  notes_for_selector: "Parking lot setting. Decompression pause — second post-shift variant, outside the house."
+
+- variant_id: hrasr_020
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    新病人二十分鐘後就到,病房還沒準備好,你洗手的時間比規定的再長一點。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["healthcare_rns"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.8
+    engagement: 0.7
+  collision_family: hideaway_breath
+  signature_phrases: ["admit is rolling up in twenty minutes", "washing your hands for longer than the policy requires"]
+  forbidden_terms: []
+  notes_for_selector: "Pre-admit sink setting. Second hideaway — behavioral micro-delay, somatic observation."
+
+
+# ── ANXIETY / CORPORATE_MANAGERS ───────────────────────────────────────────────
+
+anxiety_corporate_managers_scene_recognition:
+
+- variant_id: cmasr_001
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    董事會簡報開在第二台螢幕上,封面頁還是模板預設的樣子。今天早上你打開過四次,什麼都沒動。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: deck_avoidance
+  signature_phrases: ["cover slide is still the template version", "opened it four times this morning"]
+  forbidden_terms: []
+  notes_for_selector: "Board deck setting. Opening-without-progress loop — behavioral observation, no advice."
+
+- variant_id: cmasr_002
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    財務長在差異那一行打了標記,底下只寫一句話。那句話你看了六遍,回覆框裡的游標還是一片空白。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.9
+  collision_family: variance_flag
+  signature_phrases: ["CFO flagged the variance line", "cursor on the reply is still blank"]
+  forbidden_terms: []
+  notes_for_selector: "P&L variance setting. Reply-paralysis observation — behavioral, no reframe."
+
+- variant_id: cmasr_003
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    部屬剛傳了「可以聊一下嗎」沒有任何前後文,你胸口裡的下午已經先重排過一次,行事曆還沒跟上。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.8
+    somatic_precision: 0.8
+    engagement: 0.9
+  collision_family: ambiguous_ask
+  signature_phrases: ["can we talk", "afternoon rearranged itself in your chest before the calendar did"]
+  forbidden_terms: []
+  notes_for_selector: "Report-ping setting. Somatic-before-cognitive response — embodiment high."
+
+- variant_id: cmasr_004
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    那個Slack頻道你禮拜一就靜音了,之後你還是點開它九次,只是想看一下。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: mute_and_check
+  signature_phrases: ["muted that Slack channel on Monday", "opened it nine times since, just to see"]
+  forbidden_terms: []
+  notes_for_selector: "Slack setting. Mute-bypass loop — behavioral observation, no interpretation."
+
+- variant_id: cmasr_005
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    Q3預測開著,這個小時裡你把Q4的數字往下調了兩次,又調回來,又往下。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: forecast_fiddle
+  signature_phrases: ["nudged the Q4 number down twice this hour", "then back up, and then down again"]
+  forbidden_terms: []
+  notes_for_selector: "Forecast setting. Micro-adjustment loop observation — behavioral, no advice."
+
+- variant_id: cmasr_006
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    高層那串信往下走了三封,副本裡都沒有你的名字,你正在往上捲,想確認一開始到底有沒有掛你。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.9
+  collision_family: cc_exclusion
+  signature_phrases: ["three replies without your name in the cc", "scrolling up to check whether it was ever there"]
+  forbidden_terms: []
+  notes_for_selector: "Exec email setting. Exclusion check observation — no interpretation of intent."
+
+- variant_id: cmasr_007
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    一對一結束十分鐘了,你還坐在位子上,一遍一遍重播你給出去、對方沒接住的那段回饋。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.8
+    engagement: 0.8
+  collision_family: post_1on1_replay
+  signature_phrases: ["1:1 ended ten minutes ago", "feedback you gave did not land"]
+  forbidden_terms: []
+  notes_for_selector: "Post-1:1 setting. Cognitive replay — behavioral, no self-assessment."
+
+- variant_id: cmasr_008
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    行事曆上那段時間寫著全大寫的FOCUS,你把它拿來重新整理同樣三個分頁。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: focus_block_failed
+  signature_phrases: ["calendar block is labeled FOCUS in all caps", "refreshing the same three tabs"]
+  forbidden_terms: []
+  notes_for_selector: "Calendar setting. Protected time misuse — behavioral observation, no advice."
+
+- variant_id: cmasr_009
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    業績檢討是明天早上九點,同一列你已經重新打過四次,數字一個也沒改。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: forecast_fiddle
+  signature_phrases: ["pipeline review is tomorrow at nine", "rewrote the same row four times without changing the number"]
+  forbidden_terms: []
+  notes_for_selector: "Pipeline review eve. Second forecast-fiddle — pre-meeting variant."
+
+- variant_id: cmasr_010
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    人資寄了一封沒有議程的會議邀請,從那時起你開了三封信草稿,一封都沒寫完。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.9
+    engagement: 0.9
+  collision_family: ambiguous_ask
+  signature_phrases: ["HR sent the calendar invite with no agenda", "started three emails since, and finished none"]
+  forbidden_terms: []
+  notes_for_selector: "HR invite setting. Second ambiguous-ask — no-agenda meeting variant."
+
+- variant_id: cmasr_011
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    人員精簡的決定在你桌上,你一遍遍讀著那幾個名字。你其實已經知道會是哪一個。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.6
+    specificity: 0.8
+    engagement: 0.9
+  collision_family: headcount_weight
+  signature_phrases: ["headcount decision is on your desk", "already know which one it is going to be"]
+  forbidden_terms: []
+  notes_for_selector: "Headcount setting. Decision-known-avoided observation — no advice to decide."
+
+- variant_id: cmasr_012
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你八點把筆電闔上,十點半又把它打開,只為了確認那件你睡前已經看過兩次的事。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.8
+    engagement: 0.8
+  collision_family: after_hours_check
+  signature_phrases: ["closed your laptop at eight and opened it again at ten-thirty", "one thing you already checked twice before bed"]
+  forbidden_terms: []
+  notes_for_selector: "Evening home setting. After-hours reopen — behavioral loop, no interpretation."
+
+- variant_id: cmasr_013
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    執行長越級把自己加進明天的會議,通知還沒看完,你的下巴就先咬緊了。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.9
+    somatic_precision: 0.8
+    engagement: 0.8
+  collision_family: escalation_trigger
+  signature_phrases: ["CEO skip-level added themselves", "jaw found the clench before you finished reading"]
+  forbidden_terms: []
+  notes_for_selector: "Escalation setting. Somatic-first response — jaw specificity."
+
+- variant_id: cmasr_014
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    這份簡報已經存到第14版,從13到14改的地方,除了你之外沒有人看得出來。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: deck_avoidance
+  signature_phrases: ["saved as version 14", "none of the changes from 13 are visible to anyone but you"]
+  forbidden_terms: []
+  notes_for_selector: "Deck setting, second variant. Over-revision observation — behavioral."
+
+- variant_id: cmasr_015
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    會議上你把那個數字唸出來,聽起來沒問題。會掛掉之後,你的手還停在靜音鍵上方。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    somatic_precision: 0.7
+    engagement: 0.8
+  collision_family: post_call_hover
+  signature_phrases: ["said the number out loud in the call", "hand is still hovering over the mute button"]
+  forbidden_terms: []
+  notes_for_selector: "Post-call setting. Residual posture observation — somatic, no reframe."
+
+- variant_id: cmasr_016
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    備忘錄裡有十七行是你本來想在會議上講的話,會結束一個小時後,你正在加第十八行。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: post_1on1_replay
+  signature_phrases: ["seventeen lines of what you meant to say", "adding an eighteenth an hour afterward"]
+  forbidden_terms: []
+  notes_for_selector: "Post-meeting setting. Second replay variant — notes-app artifact, behavioral."
+
+- variant_id: cmasr_017
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    法務的信4:47到,4:48你就有了那種星期五的感覺。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.6
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: escalation_trigger
+  signature_phrases: ["legal email arrived at 4:47", "Friday feeling at 4:48"]
+  forbidden_terms: []
+  notes_for_selector: "End-of-week setting. Second escalation variant — time-stamp specificity."
+
+- variant_id: cmasr_018
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    大主管在全員大會上當眾誇獎你,你已經在腦中草擬要怎麼發一封信,解釋你其實沒做到。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.8
+    engagement: 0.9
+  collision_family: credit_correction
+  signature_phrases: ["praised you in the all-hands", "drafting the email about what you did not actually do"]
+  forbidden_terms: []
+  notes_for_selector: "All-hands setting. Correction reflex observation — behavioral, no reframe."
+
+- variant_id: cmasr_019
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    收件匣顯示312封未讀,你挑最好回的那封在回,真正重要的那三封還頂在最上面,寄件人名字都是粗體。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: inbox_triage_avoid
+  signature_phrases: ["replying to the easiest one", "three that matter sit at the top with bolded sender names"]
+  forbidden_terms: []
+  notes_for_selector: "Inbox setting. Triage-avoidance observation — behavioral, no advice."
+
+- variant_id: cmasr_020
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    禮拜天晚上,下一週的行事曆預覽你沒點就自己載出來,你還沒說出為什麼,呼吸就先變淺了一些。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["corporate_managers"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.9
+    somatic_precision: 0.8
+    engagement: 0.8
+  collision_family: after_hours_check
+  signature_phrases: ["Sunday evening calendar preview loaded without you asking", "breath got a little shorter before you named why"]
+  forbidden_terms: []
+  notes_for_selector: "Sunday evening setting. Second after-hours variant — anticipatory somatic response."
+
+
+# ── ANXIETY / WORKING_PARENTS ──────────────────────────────────────────────────
+
+anxiety_working_parents_scene_recognition:
+
+- variant_id: wpasr_001
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    10:47,校護的號碼在你螢幕上跳出來,你所在的那個空間,在你還沒接起來之前就已經變安靜。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.9
+    engagement: 0.9
+  collision_family: school_call
+  signature_phrases: ["school nurse's number shows up on your screen at 10:47", "room you are in goes quieter"]
+  forbidden_terms: []
+  notes_for_selector: "Midday work setting. School ID on phone — perceptual observation, no interpretation."
+
+- variant_id: wpasr_002
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    托嬰中心的語音訊息總長一分四十四秒,你還沒按下播放。手機平平地躺在你掌心。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.9
+    engagement: 0.9
+  collision_family: voicemail_hover
+  signature_phrases: ["one minute and forty-four seconds long", "holding the phone flat in your palm"]
+  forbidden_terms: []
+  notes_for_selector: "Daycare voicemail setting. Hover-before-play observation — behavioral."
+
+- variant_id: wpasr_003
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    小孩在做一題你已經不記得怎麼算的數學,你一邊對著作業本點頭,一邊在手機上滑那一個單元。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.8
+    engagement: 0.8
+  collision_family: homework_gap
+  signature_phrases: ["math you do not remember how to do", "nodding at the page while you scroll for the unit"]
+  forbidden_terms: []
+  notes_for_selector: "Homework table setting. Competence gap — behavioral observation, no self-judgment."
+
+- variant_id: wpasr_004
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    老師的信開頭是「想先跟您提一下」,那句話你讀了兩遍,想知道自己是不是惹上了麻煩。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.9
+    engagement: 0.9
+  collision_family: teacher_tone
+  signature_phrases: ["I wanted to flag", "reading the rest of the sentence twice"]
+  forbidden_terms: []
+  notes_for_selector: "Teacher email setting. Tone-parsing observation — no interpretation."
+
+- variant_id: wpasr_005
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    哄睡流程本來二十分鐘就結束,今晚已經四十五分鐘,你還卡在第二本繪本。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.6
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: bedtime_drift
+  signature_phrases: ["used to take twenty minutes", "forty-five and you are still on the second book"]
+  forbidden_terms: []
+  notes_for_selector: "Bedtime setting. Routine stretch observation — situational, no advice."
+
+- variant_id: wpasr_006
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    早上8:12你打開便當袋,才發現三明治還留在家裡的流理台上。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: logistics_miss
+  signature_phrases: ["opened the lunchbox at 8:12am", "sandwich was still on the counter at home"]
+  forbidden_terms: []
+  notes_for_selector: "Morning drop-off setting. Logistics miss — behavioral observation, no self-judgment."
+
+- variant_id: wpasr_007
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你晚了八分鐘才到安親班接小孩,他沒提這件事,從那之後,這個「沒提」你就一直在想。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.9
+  collision_family: pickup_late
+  signature_phrases: ["eight minutes late for pickup", "thinking about the not-mentioning since"]
+  forbidden_terms: []
+  notes_for_selector: "Pickup setting. Silence parsing — cognitive observation, no interpretation of the child."
+
+- variant_id: wpasr_008
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    小孩在客廳地板上睡著了,卡通還在播,你站在門口,不確定該不該現在把他抱去床上。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 1
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.6
+    specificity: 0.9
+    engagement: 0.7
+  collision_family: doorway_pause
+  signature_phrases: ["asleep on the living room floor with the cartoon still playing", "standing in the doorway not sure whether to move them yet"]
+  forbidden_terms: []
+  notes_for_selector: "Evening living room setting. Threshold pause — situational observation."
+
+- variant_id: wpasr_009
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    另一半只傳了一個「好」,你讀了三遍,想聽出你以為聽得到的那種語氣。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.9
+  collision_family: flat_text
+  signature_phrases: ["text just says okay", "reading it three times looking for the tone"]
+  forbidden_terms: []
+  notes_for_selector: "Text setting. Ambiguity-parsing observation — no interpretation assigned."
+
+- variant_id: wpasr_010
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    洗衣機的提示聲在一小時十五分鐘前響過。你知道。你有聽到,只是繼續在做你原本在做的事。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.8
+    engagement: 0.7
+  collision_family: household_backlog
+  signature_phrases: ["laundry timer went off an hour and fifteen minutes ago", "heard it and you kept doing the thing you were doing"]
+  forbidden_terms: []
+  notes_for_selector: "Home evening setting. Backlog-awareness observation — behavioral, no advice."
+
+- variant_id: wpasr_011
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    家長群組累積了47則未讀,你沒點開,因為你已經知道大家接下來會拜託什麼。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: group_text_avoid
+  signature_phrases: ["47 unread", "have not opened it because you know what the ask will be"]
+  forbidden_terms: []
+  notes_for_selector: "Parent group text setting. Avoidance observation — behavioral."
+
+- variant_id: wpasr_012
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    家長同意書從禮拜二就貼在冰箱上,今天是禮拜四,你一次又一次經過它,沒停下來簽。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: logistics_miss
+  signature_phrases: ["permission slip is on the fridge", "Tuesday", "today is Thursday and you keep walking past it"]
+  forbidden_terms: []
+  notes_for_selector: "Kitchen setting. Second logistics variant — recurring walk-past, behavioral."
+
+- variant_id: wpasr_013
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你上線開工作會議、靜音著,小孩一聲不吭就走進房間,你一邊指著耳機一邊對他笑,那個笑讓你的臉有點痛。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.8
+    somatic_precision: 0.7
+    engagement: 0.8
+  collision_family: role_collide
+  signature_phrases: ["work call on mute", "smiling in a way that hurts your face"]
+  forbidden_terms: []
+  notes_for_selector: "Home-office setting. Role collision — somatic facial observation."
+
+- variant_id: wpasr_014
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    小兒科打來,留了一支號碼,你已經連續兩天把回電這件事往後拖。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.4
+    specificity: 0.8
+    engagement: 0.9
+  collision_family: voicemail_hover
+  signature_phrases: ["pediatrician's office called", "put off calling it back for two days in a row"]
+  forbidden_terms: []
+  notes_for_selector: "Post-voicemail setting. Second hover variant — multi-day postponement."
+
+- variant_id: wpasr_015
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你開車回家,腦子裡又把學校發生的事跑了一遍,結果錯過了你已經轉了四年的那個路口。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: evening_transition
+  signature_phrases: ["ran through what happened at school in your head", "missed the turn you have been making for four years"]
+  forbidden_terms: []
+  notes_for_selector: "Commute home setting. Attention-dropout observation — behavioral."
+
+- variant_id: wpasr_016
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    你一進門,小孩跟你說了一句,你答錯了,因為你人還留在剛才那通會議裡。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.8
+    engagement: 0.9
+  collision_family: evening_transition
+  signature_phrases: ["answered the wrong thing", "still on the last call in your head"]
+  forbidden_terms: []
+  notes_for_selector: "Doorway transition setting. Second evening-transition — mental residue observation."
+
+- variant_id: wpasr_017
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    學校App跳出通知只寫「您有一則新訊息」,你還沒點開,因為你還在開會。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.5
+    specificity: 0.9
+    engagement: 0.9
+  collision_family: school_call
+  signature_phrases: ["school app sent a notification that just says New Message", "not opening it yet because you are still in the meeting"]
+  forbidden_terms: []
+  notes_for_selector: "Work-meeting setting. Second school-call variant — push notification, containment."
+
+- variant_id: wpasr_018
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    晚上10:38,你在準備明天的書包,想保持很安靜,但其實並沒有真的安靜。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.8
+    engagement: 0.7
+  collision_family: late_prep
+  signature_phrases: ["packing backpacks at 10:38pm", "trying to be very quiet in a way that is not actually quiet"]
+  forbidden_terms: []
+  notes_for_selector: "Late evening prep setting. Effortful-quiet observation — somatic, no advice."
+
+- variant_id: wpasr_019
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    表格上紅字寫著「今日截止」,你一手在爐上顧著滾的醬,一手在手機上填。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 2
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.7
+    specificity: 0.9
+    engagement: 0.8
+  collision_family: late_prep
+  signature_phrases: ["form said due today in red", "filling it out on your phone with one hand while the sauce is boiling"]
+  forbidden_terms: []
+  notes_for_selector: "Kitchen dinner setting. Second late-prep variant — split-attention observation."
+
+- variant_id: wpasr_020
+  slot_type: SCENE_RECOGNITION
+  body: >-
+    小孩終於睡著,屋裡安靜下來,你坐在沙發邊緣,沒有往後靠。
+  topic_allowlist: ["anxiety"]
+  topic_blocklist: []
+  persona_allowlist: ["working_parents"]
+  frame_allowlist: ["secular", "nervous_system", "workplace", "clinical"]
+  frame_blocklist: ["buddhist", "christian", "law_of_attraction", "manifestation", "spiritual_bypassing", "trauma_focused"]
+  runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+  band: 1
+  intensity: 2
+  mechanism_depth: 0
+  ontgp_move: orient
+  ei_v2_targets:
+    embodiment: 0.8
+    somatic_precision: 0.8
+    engagement: 0.7
+  collision_family: doorway_pause
+  signature_phrases: ["finally fell asleep and the apartment is quiet", "sitting on the edge of the couch instead of leaning back"]
+  forbidden_terms: []
+  notes_for_selector: "Post-bedtime setting. Second doorway-pause variant — posture observation, somatic."

@@ -242,23 +242,36 @@ def _fill_locale_tokens(text: str) -> str:
 # same book always gets the same mechanism; different seeds produce variety.
 
 _MECHANISM_RESOLVER_PATH = "config/content_banks/selected_mechanism_resolver.yaml"
-_mechanism_resolver_cache: Optional[Dict[str, Any]] = None
+_mechanism_resolver_cache: Optional[Dict[str, Dict[str, Any]]] = None
 
 
-def _load_mechanism_resolver(repo_root: Path) -> Dict[str, Any]:
+def _load_mechanism_resolver(repo_root: Path) -> Dict[str, Dict[str, Any]]:
+    """Return a dict with keys ``resolver`` (persona→topic→token→[str]) and
+    ``defaults`` (token→[str]). Safe to call when the YAML is missing — returns
+    empty maps so callers can fall through without crashing."""
     global _mechanism_resolver_cache
     if _mechanism_resolver_cache is not None:
         return _mechanism_resolver_cache
+    empty: Dict[str, Dict[str, Any]] = {"resolver": {}, "defaults": {}}
     path = repo_root / _MECHANISM_RESOLVER_PATH
     if not path.is_file():
-        _mechanism_resolver_cache = {}
-        return {}
+        _mechanism_resolver_cache = empty
+        return empty
     try:
         data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-        _mechanism_resolver_cache = data.get("resolver") or {}
+        _mechanism_resolver_cache = {
+            "resolver": data.get("resolver") or {},
+            "defaults": data.get("defaults") or {},
+        }
     except Exception:
-        _mechanism_resolver_cache = {}
+        _mechanism_resolver_cache = empty
     return _mechanism_resolver_cache
+
+
+def _reset_mechanism_resolver_cache() -> None:
+    """Test hook — clear the module-level cache so a fresh load happens next call."""
+    global _mechanism_resolver_cache
+    _mechanism_resolver_cache = None
 
 
 def _fill_mechanism_tokens(
@@ -268,30 +281,39 @@ def _fill_mechanism_tokens(
     seed: str,
     repo_root: Path,
 ) -> str:
-    """Replace {selected_mechanism} and {selected_signal} using the resolver config.
+    """Replace ``{selected_mechanism}`` and ``{selected_signal}`` using the resolver.
 
-    Only fires when both tokens exist in text AND a resolver entry exists for
-    this persona × topic. Silently skips if config is missing (text passes
-    through unchanged; _strip_placeholders will warn about leftover tokens).
+    Resolution order, per token, deterministic on ``seed``:
+      1. ``resolver[persona_id][topic][token]``
+      2. ``defaults[token]`` (used when no combo-specific pool exists)
+      3. strip the token (empty string) — last resort so braces never leak.
+
+    Callers should only invoke when the text contains a token; the guard is
+    kept here for safety. Never raises on bank load errors.
     """
     if "{selected_mechanism}" not in text and "{selected_signal}" not in text:
         return text
 
-    resolver = _load_mechanism_resolver(repo_root)
-    persona_data = resolver.get(persona_id, {})
-    topic_data = persona_data.get(topic, {})
-    if not topic_data:
-        return text  # no resolver entry — leave for _strip_placeholders to flag
+    bank = _load_mechanism_resolver(repo_root)
+    resolver = bank.get("resolver") or {}
+    defaults = bank.get("defaults") or {}
+    persona_data = resolver.get(persona_id, {}) if isinstance(resolver, dict) else {}
+    topic_data = persona_data.get(topic, {}) if isinstance(persona_data, dict) else {}
 
     for token_name in ("selected_mechanism", "selected_signal"):
-        if f"{{{token_name}}}" not in text:
+        placeholder = f"{{{token_name}}}"
+        if placeholder not in text:
             continue
-        pool = topic_data.get(token_name) or []
+        pool = (topic_data or {}).get(token_name) or []
         if not pool:
+            pool = defaults.get(token_name) or []
+        if not pool:
+            # No combo entry and no defaults — strip the token to avoid leaking braces.
+            text = text.replace(placeholder, "")
             continue
         pick_seed = f"{seed}:{persona_id}:{topic}:{token_name}"
         idx = _deterministic_index(pick_seed, len(pool))
-        text = text.replace(f"{{{token_name}}}", pool[idx])
+        text = text.replace(placeholder, pool[idx])
 
     return text
 

@@ -1,0 +1,112 @@
+# Teacher Wrapper Templates — zh_TW（台灣繁體中文）在地化版本
+# 槽位變數：{TEACHER_NAME}、{TRADITION}、{TRADITION_SHORT}、
+#           {PRACTICE_NAME}、{TEACHING_LINEAGE}
+# 權威來源：Big View Phase 2
+# 使用者：內容 atom wrapper 注入、description_templates 管線
+
+locale: zh_TW
+
+# ── 具名模式（named）────────────────────────────────────────────────────────
+# 會直接寫出教師姓名。僅在品牌策略允許具名標註時使用
+# （每個品牌、每個平台、每週最多 3 本具名教師書）。
+
+named:
+  intro_wrapper:
+    pattern: "根據 {TEACHER_NAME} 的說法，{TEACHING_LINEAGE} 告訴我們……"
+    variants:
+      - "在 {TEACHER_NAME} 的架構裡，這條路的起點是……"
+      - "借鑑 {TEACHER_NAME} 的 {TEACHING_LINEAGE} 取徑……"
+      - "{TEACHER_NAME} 將這一點描述為 {TRADITION_SHORT} 的根基……"
+    slot_requirements: [TEACHER_NAME, TEACHING_LINEAGE]
+
+  exercise_wrapper:
+    pattern: "{TEACHER_NAME} 的 {PRACTICE_NAME}"
+    variants:
+      - "來自 {TEACHER_NAME} 的一項練習：{PRACTICE_NAME}"
+      - "{PRACTICE_NAME}（依 {TEACHER_NAME} 所教）"
+    slot_requirements: [TEACHER_NAME, PRACTICE_NAME]
+
+  conclusion_wrapper:
+    pattern: "正如 {TEACHER_NAME} 所提醒的，{TRADITION_SHORT} 不是一個終點……"
+    variants:
+      - "{TEACHER_NAME} 的 {TEACHING_LINEAGE}，指向的是同一個核心真相……"
+      - "{TEACHER_NAME} 所詮釋的 {TRADITION_SHORT} 傳統，邀請我們……"
+    slot_requirements: [TEACHER_NAME, TRADITION_SHORT, TEACHING_LINEAGE]
+
+# ── 通用模式（generalized）──────────────────────────────────────────────────
+# 不使用教師姓名。改以教導內容與傳統本身作為依據。
+# 建議佔目錄產出的 65–70%。
+#
+# 禁用句型（通用模式絕對不要使用）：
+#   ✗ 「某某大師說……」
+#   ✗ 「我遇到過一位老師……」
+#   ✗ 「根據〔具名個人〕……」
+#
+# 必須改寫為：
+#   ✓ 「根據〔某某傳統〕……」
+#   ✓ 「我遇見了〔某某傳統〕的工作」
+#   ✓ 「〔某某傳統〕認為……」
+
+generalized:
+  intro_wrapper:
+    pattern: "根據 {TRADITION}，這條路的起點是……"
+    variants:
+      - "{TRADITION} 傳統告訴我們……"
+      - "在 {TRADITION_SHORT} 的傳承中，修習者長久以來就明白……"
+      - "我是在一個特別的時刻，遇見了 {TRADITION} 的工作……"
+      - "這個取徑根植於 {TRADITION}，其核心主張是……"
+    slot_requirements: [TRADITION]
+
+  exercise_wrapper:
+    pattern: "來自 {TRADITION} 傳統的一項練習"
+    variants:
+      - "取自 {TRADITION_SHORT} 的修習：{PRACTICE_NAME}"
+      - "{TRADITION} 面對 {PRACTICE_NAME} 的取徑"
+      - "一項 {TRADITION_SHORT} 的技巧：{PRACTICE_NAME}"
+    slot_requirements: [TRADITION]
+
+  conclusion_wrapper:
+    pattern: "{TRADITION} 傳統邀請我們，回到那些真正重要的事物……"
+    variants:
+      - "{TRADITION_SHORT} 的核心，是一個簡單而反覆出現的邀請……"
+      - "{TRADITION} 不要求完美——只要求誠實的臨在……"
+      - "{TRADITION} 傳承一再指向的，是……"
+    slot_requirements: [TRADITION, TRADITION_SHORT]
+
+# ── 綜合模式（composite）────────────────────────────────────────────────────
+# 不指定教師、也不指定單一傳統，取材自多方來源。
+# 適用於約 10–15% 的目錄——跨傳統／通用主題書籍。
+
+composite:
+  intro_wrapper:
+    pattern: "跨越各種傳統與傳承，有一個洞見不斷重複出現……"
+    variants:
+      - "無論是根植於東方或西方的修行，這個教導是一致的……"
+      - "從世界各地的默觀傳統中，浮現出同一條原則……"
+      - "研究結果、古老修行，以及真實生活中的經驗，全都指向這裡……"
+    slot_requirements: []
+
+  exercise_wrapper:
+    pattern: "一項跨傳統的練習"
+    variants:
+      - "一項在許多傳統中都能見到的練習"
+      - "一項取自默觀與身體研究的練習"
+    slot_requirements: []
+
+  conclusion_wrapper:
+    pattern: "科學證據與各家傳統最終匯聚到的一點是……"
+    variants:
+      - "跨越文化與世代，那份邀請始終是同一個……"
+      - "無論是古老或當代，這條路最後都繞回這裡……"
+    slot_requirements: []
+
+# ── 槽位登錄（slot registry）────────────────────────────────────────────────
+# 將 teacher_id 對應到具名模式的預設槽位值。
+# 產出時自 brand_teacher_matrix.yaml 載入。
+# 可在目錄列或 atom CANONICAL.txt 中，以單書為單位覆寫。
+
+slot_defaults:
+  TRADITION: "默觀"
+  TRADITION_SHORT: "默觀"
+  TEACHING_LINEAGE: "正念與身體取向"
+  PRACTICE_NAME: "此一練習"

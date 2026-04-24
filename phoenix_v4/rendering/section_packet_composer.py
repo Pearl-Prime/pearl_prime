@@ -410,11 +410,29 @@ def compose_section_packet(
     # Without a teacher_id the content has no owner, no wrapper, and no voice attribution.
     _teacher_id = spine_context.get("teacher_id") or spine_context.get("teacher")
     if teacher_atom_content and _teacher_id:
+        from phoenix_v4.rendering.teacher_wrapper import resolve_wrapper
+
+        _wrap_seed = _packet_injection_seed(spine_context, chapter_index, section_index)
+        _prefix, _suffix = resolve_wrapper(
+            teacher_id=str(_teacher_id),
+            section_type=section_type,
+            seed=_wrap_seed,
+            spine_context=spine_context,
+        )
+        _tw_content = str(teacher_atom_content).strip()
+        if _prefix or _suffix:
+            _parts: List[str] = []
+            if _prefix:
+                _parts.append(_prefix)
+            _parts.append(_tw_content)
+            if _suffix:
+                _parts.append(_suffix)
+            _tw_content = "\n\n".join(_parts)
         _append_layer(
             blocks,
             sources_used,
             "teacher_atom",
-            str(teacher_atom_content),
+            _tw_content,
             seen_norms,
             min_words=11,
         )
@@ -451,11 +469,12 @@ def compose_section_packet(
             from phoenix_v4.planning.injection_resolver import (
                 _fill_mechanism_tokens as _fmt,
             )
+        except ImportError:
+            _fmt = None  # resolver unavailable — leave _strip_placeholders to scrub
+        if _fmt is not None:
             from pathlib import Path as _Path
             _mech_root = _Path(__file__).resolve().parent.parent.parent
             raw_text = _fmt(raw_text, _mech_persona, _mech_topic, _mech_seed, _mech_root)
-        except Exception:
-            pass
 
     _loc_tokens = _resolve_location_profile(spine_context)
     raw_text = _fill_locale_tokens(raw_text, _loc_tokens)

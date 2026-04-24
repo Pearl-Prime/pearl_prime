@@ -79,6 +79,34 @@ resolver:
         - "You have data on your stress response but you haven't met it yet."
         - "There is a difference between tracking your body and inhabiting it."
 
+    financial_anxiety:
+      selected_mechanism:
+        - "the threat-detection model trained on equity volatility and applied to a stable paycheck"
+        - "net-worth tracking run as a continuous liveness check on your own safety"
+        - "the gap between FAANG comp and the feeling of enough that never quite closes"
+        - "runway math performed nightly on a balance sheet that doesn't need it"
+        - "scarcity code inherited from a previous generation running inside a six-figure income"
+      selected_signal:
+        - "You refreshed your brokerage tab the way you used to refresh production dashboards."
+        - "The spreadsheet is immaculate and the dread is unmoved by it."
+        - "Your vest schedule is memorized and your nervous system still acts like the next paycheck is a rumor."
+        - "You built the model that says you're safe and you don't trust the model."
+        - "Every bonus arrives and the baseline of not-enough resets right where it was."
+
+    imposter_syndrome:
+      selected_mechanism:
+        - "the internal code review of every promotion that keeps flagging phantom bugs"
+        - "pattern-matching your resume against a failure mode that only exists in your head"
+        - "the gap between your shipped work and your sense of having earned the title"
+        - "credentialing treated as a deployment that never actually went to production"
+        - "the running audit that discounts every win the moment it clears"
+      selected_signal:
+        - "You can recite every incident you caused and none of the systems you kept running."
+        - "The offer letter arrived and your first thought was that HR had miscalibrated the rubric."
+        - "You prep twice as hard for every review so no one sees the margin you think you're missing."
+        - "The engineers you mentor quote you to each other and you still feel junior in the room."
+        - "Your staff promo packet reads like someone else's career and you can't quite claim it."
+
 
   millennial_women_professionals:
 
@@ -170,3 +198,21 @@ resolver:
         - "You can recite every failure and none of the evidence that contradicts it."
         - "The closer you get to the table, the more you're convinced you're about to be asked to leave."
         - "You have never once felt as capable as your resume says you are."
+
+
+# ── Defaults ────────────────────────────────────────────────────────────────
+# Used when a (persona, topic) combo has no specific entry above.
+# Voice stays generic-somatic so it reads naturally across any context.
+defaults:
+  selected_mechanism:
+    - "the elevated baseline your body has quietly learned to live with"
+    - "a nervous system that mistook chronic load for a permanent setting"
+    - "the vigilance that keeps running long after the thing it was watching ended"
+    - "protective bracing inherited from a context you no longer inhabit"
+    - "the gap between what you managed to get through and what your body is still metabolizing"
+  selected_signal:
+    - "The small tells your nervous system keeps offering even after the shift is over."
+    - "Your shoulders knew before your calendar did."
+    - "Rest keeps arriving as a task item instead of a state."
+    - "The breath you haven't taken fully in longer than you'd like to admit."
+    - "You are fluent in the language of holding it together and still learning the one underneath."
