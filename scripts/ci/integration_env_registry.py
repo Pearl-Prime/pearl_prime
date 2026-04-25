@@ -47,6 +47,8 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("Cloudflare", "CLOUDFLARE_AI_API_TOKEN", False, "Workers AI inference token"),
     ("Cloudflare", "CLOUDFLARE_AI_BASE_URL", False, "Workers AI OpenAI-compat base URL (accounts/<ID>/ai/v1)"),
     ("Cloudflare", "CLOUDFLARE_AI_MODEL", False, "Workers AI model name (e.g. @cf/google/gemma-3-12b-it)"),
+    ("Cloudflare R2", "R2_ACCESS_KEY_ID", False, "R2 S3-compatible access key (bucket-scoped to phoenix-omega-artifacts). Get: dash.cloudflare.com → R2 → Manage R2 API Tokens"),
+    ("Cloudflare R2", "R2_SECRET_ACCESS_KEY", False, "R2 S3-compatible secret (shown once when access key created)"),
     ("GitHub", "GITHUB_TOKEN", False, "GitHub API (auto in Actions)"),
     ("GitHub", "GITHUB_REPOSITORY", False, "owner/repo for API calls; auto in Actions"),
     # --- Publishing ---
