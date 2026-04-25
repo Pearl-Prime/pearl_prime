@@ -1,19 +1,223 @@
-# Manga bubble / lettering font registry (paths relative to fonts/manga/).
-version: 1
+# Phoenix Omega — Manga Font Registry
+# Single source of truth for fonts used by lettering / bubble rendering / SFX.
+# Paths relative to fonts/manga/.
+#
+# Per PR #631 Decision 3: CJK-first rebuild (Source Han Sans family + Klee One
+# + LxgwWenKai) so ja_JP / zh_TW / zh_CN / ko_KR plans can render without
+# missing-glyph boxes. Without these fonts, 90 of the 132 series_plans
+# (everything non-en_US) is production-blocked.
+#
+# Install all fonts: bash scripts/manga/install_manga_fonts.sh
+# License compliance: docs/MANGA_FONT_REGISTRY.md
+
+version: 2
+schema_authority: docs/MANGA_FONT_REGISTRY.md
+
 fonts:
-  - id: bangers_display
+  # ── CJK BODY FONTS — Source Han Sans family (Adobe + Google) ─────────────
+  - id: source_han_sans_jp
+    family: "Source Han Sans"
+    variant: Japanese
+    weights: [Regular, Bold, Heavy]
     license: OFL
+    source_url: "https://github.com/adobe-fonts/source-han-sans/releases"
+    canonical_release: "2.004"
+    locale_targets: [ja_JP]
+    roles: [body, dialogue]
+    path: otf/SourceHanSansJP-Regular.otf
+    fallback_for_glyphs:
+      - "Hiragana"
+      - "Katakana"
+      - "Kanji (Joyo + Jinmeiyo)"
+    status: pending
+    notes: |
+      Japanese dialogue body font. Industry-standard for AI-rendered manga
+      (cited by Comic C'moA + Bookwalker creator guides). Pair with Klee One
+      for display/handwritten feel.
+
+  - id: source_han_sans_tc
+    family: "Source Han Sans"
+    variant: Traditional Chinese (Taiwan/Hong Kong)
+    weights: [Regular, Bold, Heavy]
+    license: OFL
+    source_url: "https://github.com/adobe-fonts/source-han-sans/releases"
+    canonical_release: "2.004"
+    locale_targets: [zh_TW]
+    roles: [body, dialogue]
+    path: otf/SourceHanSansTC-Regular.otf
+    fallback_for_glyphs:
+      - "Traditional Chinese (Big5 + CNS 11643)"
+    status: pending
+    notes: |
+      Taiwan + Hong Kong publication standard. Higher-stroke-count glyphs
+      need this; SC variants drop them.
+
+  - id: source_han_sans_sc
+    family: "Source Han Sans"
+    variant: Simplified Chinese (Mainland)
+    weights: [Regular, Bold, Heavy]
+    license: OFL
+    source_url: "https://github.com/adobe-fonts/source-han-sans/releases"
+    canonical_release: "2.004"
+    locale_targets: [zh_CN]
+    roles: [body, dialogue]
+    path: otf/SourceHanSansSC-Regular.otf
+    fallback_for_glyphs:
+      - "Simplified Chinese (GB18030)"
+    status: pending
+    notes: |
+      Required for zh_CN catalog plans. Note: Bilibili Comics + Kuaikan
+      partnerships are still gated (per PR #631), so this font is needed
+      for zh_CN to ship via Amazon KDP global storefront.
+
+  - id: source_han_sans_kr
+    family: "Source Han Sans"
+    variant: Korean
+    weights: [Regular, Bold, Heavy]
+    license: OFL
+    source_url: "https://github.com/adobe-fonts/source-han-sans/releases"
+    canonical_release: "2.004"
+    locale_targets: [ko_KR]
+    roles: [body, dialogue]
+    path: otf/SourceHanSansKR-Regular.otf
+    fallback_for_glyphs:
+      - "Hangul Syllables"
+      - "Hangul Jamo"
+    status: pending
+    notes: |
+      Reserved for future ko_KR catalog plans (current MANGA_FULL_CATALOG_PLAN
+      doesn't include ko_KR, but Naver Webtoon Korea connector is on the
+      Phase 2 roadmap per PR #631).
+
+  # ── CJK DISPLAY / HANDWRITTEN ─────────────────────────────────────────────
+  - id: klee_one_jp
+    family: Klee One
+    variant: Japanese
+    weights: [Regular, SemiBold]
+    license: OFL
+    source_url: "https://fonts.google.com/specimen/Klee+One"
+    locale_targets: [ja_JP]
+    roles: [display, handwritten_feel, narration]
+    path: ttf/KleeOne-Regular.ttf
+    status: pending
+    notes: |
+      Handwritten brush-stroke feel. Iyashikei + josei essay manga signature
+      look. Avoid for action / shonen — too soft.
+
+  - id: lxgw_wenkai
+    family: LXGW WenKai
+    variant: Pan-CJK (Klee derivative for Chinese)
+    weights: [Regular, Bold]
+    license: OFL
+    source_url: "https://github.com/lxgw/LxgwWenKai/releases"
+    locale_targets: [zh_TW, zh_CN]
+    roles: [display, handwritten_feel]
+    path: ttf/LXGWWenKai-Regular.ttf
+    status: pending
+    notes: |
+      Klee-derivative for Chinese. Same handwritten feel as Klee One JP but
+      covers TC + SC glyph sets. Use for iyashikei + healing zh_TW/zh_CN.
+
+  # ── LATIN DIALOGUE / SFX ──────────────────────────────────────────────────
+  - id: anime_ace_dialogue
+    family: Anime Ace 2.0
+    weights: [Regular, Italic, Bold, Bold-Italic]
+    license: "Free for personal and commercial use (Blambot)"
+    license_url: "https://blambot.com/products/anime-ace-2-0-bb"
+    source_url: "https://blambot.com/products/anime-ace-2-0-bb"
+    locale_targets: [en_US]
+    roles: [dialogue]
+    path: ttf/AnimeAce2.0BB.ttf
+    status: pending
+    notes: |
+      Industry-standard Latin manga dialogue font. Replaces Comic Sans for
+      English manga. Free for commercial use per Blambot's terms.
+
+  - id: badaboom_sfx
+    family: Badaboom BB
+    weights: [Regular]
+    license: "Free for personal and commercial use (Blambot)"
+    license_url: "https://blambot.com/products/badaboom-bb"
+    source_url: "https://blambot.com/products/badaboom-bb"
+    locale_targets: [en_US, zh_TW, zh_CN]
+    roles: [sfx, impact]
+    path: ttf/BadaboomBB.ttf
+    status: pending
+    notes: |
+      Latin SFX/impact font. Use for BANG / WHAM / CRASH overlays.
+      For Japanese onomatopoeia (ドキドキ etc), keep glyphs in Source Han
+      Sans JP at high weight + skew transform — Latin SFX font can't render.
+
+  # ── EXISTING (kept) ───────────────────────────────────────────────────────
+  - id: bangers_display
+    family: Bangers
+    weights: [Regular]
+    license: OFL
+    source_url: "https://fonts.google.com/specimen/Bangers"
+    locale_targets: [en_US]
+    roles: [display, sfx_secondary]
     path: ttf/Bangers-Regular.ttf
     status: pending
+
   - id: patrick_hand_handwritten
+    family: Patrick Hand
+    weights: [Regular]
     license: OFL
+    source_url: "https://fonts.google.com/specimen/Patrick+Hand"
+    locale_targets: [en_US]
+    roles: [handwritten_feel, note]
     path: ttf/PatrickHand-Regular.ttf
     status: pending
+
   - id: architects_daughter_note
+    family: Architects Daughter
+    weights: [Regular]
     license: OFL
+    source_url: "https://fonts.google.com/specimen/Architects+Daughter"
+    locale_targets: [en_US]
+    roles: [handwritten_feel, note]
     path: ttf/ArchitectsDaughter-Regular.ttf
     status: pending
+
   - id: noto_sans_jp_body
+    family: Noto Sans JP
+    weights: [Regular, Bold]
     license: OFL
+    source_url: "https://fonts.google.com/noto/specimen/Noto+Sans+JP"
+    locale_targets: [ja_JP]
+    roles: [body, fallback]
     path: ttf/NotoSansJP-Regular.otf
     status: pending
+    notes: |
+      Fallback for Source Han Sans JP. Adobe and Google ship the same
+      typeface under two names (Source Han Sans JP = Noto Sans CJK JP);
+      keeping both registered for tooling compatibility.
+
+# ── Locale → required-fonts coverage map ────────────────────────────────────
+# Tooling uses this to confirm a target locale has at least one body font
+# registered before greenlighting render.
+locale_coverage_required:
+  en_US:
+    body: anime_ace_dialogue
+    sfx: badaboom_sfx
+    display: bangers_display
+    handwritten: patrick_hand_handwritten
+  ja_JP:
+    body: source_han_sans_jp
+    handwritten: klee_one_jp
+    fallback: noto_sans_jp_body
+  zh_TW:
+    body: source_han_sans_tc
+    handwritten: lxgw_wenkai
+  zh_CN:
+    body: source_han_sans_sc
+    handwritten: lxgw_wenkai
+  ko_KR:
+    body: source_han_sans_kr
+    # Korean handwritten font: tracked, not yet registered (follow-up)
+
+# ── Statuses ─────────────────────────────────────────────────────────────
+# pending  — declared but not yet downloaded
+# installed — file present at path, sha256 not yet verified
+# verified  — file present + sha256 matches expected_sha256
+# blocked   — license issue, do not use
