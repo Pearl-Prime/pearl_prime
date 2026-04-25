@@ -53,6 +53,13 @@ VALID_GENRES = (
 
 _RE_TEACHER_HEADING = re.compile(r"^## \d+\.\s+([A-Z_]+)\s*—", re.IGNORECASE)
 _RE_LOCALE_HEADING = re.compile(r"^### (en_US|ja_JP|zh_TW|zh_CN)\b")
+# Strand sub-heading captures secondary catalog sections like
+# "### Ahjan — forest simplicity strand (Stillness Press; ...)".
+# When a strand heading appears under a teacher, subsequent rows are tagged
+# with the strand slug so series_ids don't collide with the main section.
+_RE_STRAND_HEADING = re.compile(
+    r"^###\s+([A-Z][A-Za-z]+)\s*—\s*([^()\n]+?)\s*(?:\([^)]*\))?\s*$"
+)
 _RE_TABLE_ROW = re.compile(
     r"^\|\s*(\d+)\s*\|"           # row number
     r"\s*([^|]+?)\s*\|"            # title
@@ -71,20 +78,30 @@ def _slugify(text: str) -> str:
 
 
 def parse_catalog(path: Path) -> list[dict[str, Any]]:
-    """Yield one row per catalog entry: teacher / locale / title / genre / style / author / topic / chapters."""
+    """Yield one row per catalog entry: teacher / locale / strand / title / genre / style / author / topic / chapters."""
     rows: list[dict[str, Any]] = []
     cur_teacher: str | None = None
     cur_locale: str | None = None
+    cur_strand: str | None = None  # None = main section, otherwise slug
 
     for line in path.read_text(encoding="utf-8").splitlines():
         m = _RE_TEACHER_HEADING.match(line)
         if m:
             cur_teacher = m.group(1).lower()
             cur_locale = None
+            cur_strand = None
             continue
+        # Locale heading must be checked before strand heading because
+        # `### en_US (24 series)` would also match strand pattern otherwise.
         m = _RE_LOCALE_HEADING.match(line)
         if m:
             cur_locale = m.group(1)
+            continue
+        # Strand heading like "### Ahjan — forest simplicity strand (...)".
+        m = _RE_STRAND_HEADING.match(line)
+        if m and cur_teacher and m.group(1).lower() == cur_teacher:
+            cur_strand = _slugify(m.group(2))
+            cur_locale = None  # locale resets per strand
             continue
         m = _RE_TABLE_ROW.match(line)
         if not m:
@@ -95,13 +112,13 @@ def parse_catalog(path: Path) -> list[dict[str, Any]]:
         idx, title, genre, style, author, topic, chapters = m.groups()
         genre = genre.strip()
         if genre not in VALID_GENRES:
-            # Skip rows with unknown genre — keeps the generator strict.
             continue
 
         rows.append(
             {
                 "teacher_id": cur_teacher,
                 "locale": cur_locale,
+                "strand": cur_strand,                  # None for main section
                 "row_number": int(idx),
                 "title": title.strip(),
                 "genre": genre,
@@ -186,12 +203,19 @@ def build_series_id(row: dict[str, Any]) -> str:
 
     Falls back to ``row{N}`` when the title has no Latin chars (e.g. ja_JP / zh titles)
     so the series_id stays valid filename + ASCII.
+
+    When the row is from a strand sub-section (e.g. "Ahjan — forest simplicity"),
+    the strand slug is appended to keep series_ids unique across sections of the
+    same teacher in the same locale.
     """
     brand = derive_brand_id(row["teacher_id"])
     title_slug = _slugify(row["title"])[:40]
     if not title_slug:
         title_slug = f"row{row['row_number']:02d}"
-    return f"{brand}__{row['teacher_id']}__{row['locale']}__{row['topic']}__{title_slug}"
+    sid = f"{brand}__{row['teacher_id']}__{row['locale']}__{row['topic']}__{title_slug}"
+    if row.get("strand"):
+        sid += f"__{row['strand']}"
+    return sid
 
 
 def build_plan(row: dict[str, Any], routing: dict[str, Any]) -> dict[str, Any]:
