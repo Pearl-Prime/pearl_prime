@@ -1,0 +1,54 @@
+# Panel layout template — Color Page Manga (Western graphic novel + premium JP)
+# Per Phoenix Omega catalog format-aware production (PR #626 §production_weight).
+# Niche slice (~14% aggregate, 13-18% per market) — collected color volumes for
+# en_US graphic novel shelf + premium JP / TW print editions.
+
+schema_version: "1.0.0"
+template_id: "color_page"
+format: "color_page_manga"
+
+# ── Page geometry ───────────────────────────────────────────────────────────
+trim_size_inches: [6.625, 10.25]        # US graphic novel standard
+trim_size_mm_alternate: [170, 260]      # JP A5 premium edition
+bleed_mm: 3
+safe_zone_mm: 5
+page_aspect: "approx_2:3"
+print_dpi: 300
+
+# ── Panel composition ───────────────────────────────────────────────────────
+pages_per_chapter_target: [16, 22]
+panels_per_page: [3, 6]
+silent_panel_ratio_default: 0.18
+spread_frequency: "occasional"           # color spreads more impactful
+
+# ── Color + render ──────────────────────────────────────────────────────────
+color_mode: "full_color"
+render_backend: "flux_schnell"
+character_consistency: "ip_adapter_or_lora"
+
+# ── Reading direction ──────────────────────────────────────────────────────
+reading_direction: "left_to_right_horizontal"   # Western convention
+# (For premium JP color editions, override per-series to right_to_left)
+
+# ── Compatible target platforms ────────────────────────────────────────────
+compatible_platforms:
+  - amazon_kdp_comics
+  - globalcomix
+  - bookwalker
+  - line_manga_indies
+incompatible_platforms:
+  - webtoon_canvas
+
+# ── Genre fit ──────────────────────────────────────────────────────────────
+strong_genre_fit:
+  - shojo
+  - iyashikei
+  - manhwa
+medium_genre_fit:
+  - seinen
+  - shonen
+
+notes: |
+  Premium color page — uses where color carries the experience but format
+  is page-based not vertical (e.g. illustrated essay manga or shojo
+  collected volumes). Lower-volume slice; do not weight heavy.

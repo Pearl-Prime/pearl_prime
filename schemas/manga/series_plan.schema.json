@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/series_plan.schema.json",
+  "title": "Manga Series Plan",
+  "description": "Per-series catalog plan. Drives format-aware production (color vertical webtoon vs B&W page manga vs color page manga vs direct self-help illustrated). Source-of-truth: artifacts/manga/MANGA_FULL_CATALOG_PLAN.md (PR #624). Format weights: artifacts/research/manga_vs_webtoon_decision_matrix_2026-04-25.yaml (PR #626).",
+  "type": "object",
+  "required": [
+    "series_plan_schema",
+    "series_id",
+    "brand_id",
+    "teacher_id",
+    "locale",
+    "format",
+    "panel_layout_template",
+    "target_platforms"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "series_plan_schema": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "series_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable unique ID (e.g. 'stillness_press__ahjan__gen_z_professionals__anxiety')"
+    },
+    "brand_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Must match a brand in config/manga/brand_lora_plans.yaml"
+    },
+    "teacher_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Teacher canonical id (ahjan, joshin, etc.)"
+    },
+    "locale": {
+      "type": "string",
+      "enum": ["en_US", "ja_JP", "ko_KR", "zh_TW", "zh_CN"]
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "color_vertical_webtoon",
+        "bw_page_manga",
+        "color_page_manga",
+        "direct_self_help_illustrated"
+      ],
+      "description": "Production format. Drives panel_layout_template + render queue + target_platforms compatibility."
+    },
+    "panel_layout_template": {
+      "type": "string",
+      "pattern": "^config/manga/panel_layout_templates/[a-z_]+\\.yaml$",
+      "description": "Path to layout template (vertical_scroll_webtoon.yaml | bw_page_rtl.yaml | color_page.yaml | self_help_illustrated.yaml)"
+    },
+    "target_platforms": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "description": "Platform id from config/publishing/ai_policy_blockers.yaml (e.g. 'webtoon_canvas', 'amazon_kdp_comics'). Validator confirms each is ALLOWED or ALLOWED_GREY status."
+      },
+      "description": "Where this series ships. Must be a subset of ALLOWED + ALLOWED_GREY platforms in ai_policy_blockers.yaml."
+    },
+    "title": {
+      "type": "string",
+      "description": "Genre-led title from MANGA_FULL_CATALOG_PLAN (e.g. 'The 3am Mind' for horror sleep_anxiety)"
+    },
+    "genre": {
+      "type": "string",
+      "enum": [
+        "iyashikei",
+        "seinen",
+        "shonen",
+        "shojo",
+        "horror",
+        "cultivation",
+        "manhwa",
+        "webtoon_romance",
+        "isekai",
+        "josei_essay_manga"
+      ],
+      "description": "Marketing genre. NOT 'self-help' — wellness substrate goes in topic field, never as the genre wrapper."
+    },
+    "topic": {
+      "type": "string",
+      "description": "Wellness topic substrate (anxiety, sleep_anxiety, burnout, etc.). Hidden from marketing, drives content."
+    },
+    "manga_author": {
+      "type": "string",
+      "description": "EI character author per MANGA_FULL_CATALOG_PLAN (Hana Tidecalm, Yuki Nighthollow, Brook Hearthlight, etc.)"
+    },
+    "main_character_name": { "type": "string" },
+    "main_character_role": { "type": "string" },
+    "main_character_lora_id": { "type": "string" },
+    "main_character_image_path": {
+      "type": "string",
+      "description": "Path to rendered portrait under assets/manga_catalog/, or null until rendered"
+    },
+    "chapters_target": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Target chapter count from MANGA_FULL_CATALOG_PLAN (typically 12-16)"
+    },
+    "comp_titles": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Real bestseller comp titles in same genre (e.g. 'Frieren', 'Vinland Saga'). Wellness book comps forbidden — those belong in Pearl Prime catalog."
+    },
+    "ai_disclosure_required": {
+      "type": "boolean",
+      "description": "Computed from target_platforms (true if any platform requires disclosure)"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phoenix-omega.dev/schemas/manga/book_plan.schema.json",
+  "title": "Manga Book / Episode Plan",
+  "description": "Per-book (page manga) or per-episode (webtoon) plan. Inherits format + target_platforms from parent series_plan but can override per book/episode.",
+  "type": "object",
+  "required": [
+    "book_plan_schema",
+    "book_id",
+    "series_id",
+    "format"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "book_plan_schema": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "book_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique per-book/per-episode id"
+    },
+    "series_id": {
+      "type": "string",
+      "description": "Parent series_id from series_plan"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "color_vertical_webtoon",
+        "bw_page_manga",
+        "color_page_manga",
+        "direct_self_help_illustrated"
+      ]
+    },
+    "panel_layout_template": {
+      "type": "string",
+      "pattern": "^config/manga/panel_layout_templates/[a-z_]+\\.yaml$",
+      "description": "Inherits from series_plan unless overridden"
+    },
+    "target_platforms": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "Per-book platform list (defaults to series_plan target_platforms)"
+    },
+    "title": { "type": "string" },
+    "subtitle": { "type": "string" },
+    "engine": {
+      "type": "string",
+      "description": "Narrative engine (false_alarm, overwhelm, spiral, shame, grief, comparison, watcher) — drives content, NOT marketing"
+    },
+    "chapter_target_count": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "For page manga: number of chapters in the volume. For webtoon: episodes per arc."
+    },
+    "page_target_count": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "For page manga: target page count per chapter (typically 18-22 per genre conventions). For webtoon: vertical strip segments per episode (typically 30-50)."
+    },
+    "main_character_lora_id": { "type": "string" },
+    "ai_disclosure_required": { "type": "boolean" }
+  }
+}
