@@ -1,436 +1,491 @@
-# ═══════════════════════════════════════════════════════════════════════════
-# CHAPTER SCRIPT — The Alarm Is Lying — Episode 1
-# ═══════════════════════════════════════════════════════════════════════════
-# Series:        stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
-# Episode:       ep_001 — "Tuesday, 6:47 AM"
-# Author (EI):   Hana Tidecalm (iyashikei, gentle-sensory)
-# Teacher:       ahjan — Buddhist contemporary; alarm-systems / pause / awareness
-# Engine:        false_alarm
-# Genre:         iyashikei
-# Style:         cozy_iyashikei
-# Master format: color_vertical_webtoon (palette: muted earth + dappled gold)
-# Locale:        en_US (en text only — text_by_locale ready for translation pipeline)
-#
-# SCROLL THERAPEUTIC TEST (PR #631 Decision 6) — pre-publish gate:
-#   1. Safety cue inside first 800 px ........ ✓ (panel 1: warm dappled morning light)
-#   2. ≥3 oscillations activation/ground ...... ✓ (4 oscillations: panels 4-6/7-9, 10-12/13-15, 16-18/19-21, 22-28/29-35)
-#   3. Activation:Ground vertical ratio ≤1:2.5  ✓ (~9 activation panels / ~26 ground panels)
-#   4. Closes with completion ................. ✓ (sigh + small smile + steady LED, no cliffhanger)
-#   5. HRV-style end-state delta .............. (Phase 2 — pilot proxy)
-#
-# CRAFT FORMULAS (PR #631 therapeutic-craft companion §16):
-#   Tea Beat (panels 2, 7-9, 19-21, 30) — recurring sensory anchor
-#   Anchor Panel (13-15) — bird on the sill = the "still here" anchor
-#   Dappled Light Hand (1, 8, 14, 34) — light through leaves/window
-#   Pendulation Pair (10-12 ↔ 13-15, 16-18 ↔ 19-21) — Levine's SE structure
-#   Breath Bracket (20-21) — inhale/exhale paired panels
-#   Long Drop (silent panel 29 — gutter 2200 px before it)
-#
-# ═══════════════════════════════════════════════════════════════════════════
-
-schema_version: "1.0.0"
+schema_version: 1.0.0
 artifact_type: chapter_script_writer_handoff
 schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
-
 series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
 chapter_id: ep_001
-title: "The Alarm Is Lying — Episode 1: Tuesday, 6:47 AM"
+title: 'The Alarm Is Lying — Episode 1: Tuesday, 6:47 AM'
 manga_author: Hana Tidecalm
 teacher_id: ahjan
 brand_id: stillness_press
 engine: false_alarm
 locale: en_US
 default_locale: en_US
-available_locales: [en_US]   # ja_JP / zh_TW / zh_CN populated by translation pipeline (Phase 1.5 #4)
-
+available_locales:
+- en_US
+- ja_JP
+- zh_CN
+- zh_TW
 main_characters:
-  - id: mira
-    name: Mira Aoki
-    age: 33
-    role: protagonist (knowledge worker — UX researcher; mid-career; quietly anxious)
-    visual_anchor: "long brown hair, soft features, prefers warm-tone clothing (cream sweater); recurring small jade pendant"
-
+- id: mira
+  name: Mira Aoki
+  age: 33
+  role: protagonist (knowledge worker — UX researcher; mid-career; quietly anxious)
+  visual_anchor: long brown hair, soft features, prefers warm-tone clothing (cream
+    sweater); recurring small jade pendant
 scene_palette:
   primary: warm cream + soft dawn gold
   secondary: muted sage + pale terracotta
   accent: jade green (pendant + smoke-detector LED — visual through-line)
   flashback_palette: desaturated + cool grey-blue (panel 16 only)
-
-# ═══════════════════════════════════════════════════════════════════════════
-# PAGES (webtoon: 1 episode = 1 page; panels stack vertically)
-# ═══════════════════════════════════════════════════════════════════════════
-
 pages:
-  - page_id: ep_001_p01
-    panels:
+- page_id: ep_001_p01
+  panels:
+  - panel_id: ep001_001
+    scene: 'Wide establishing shot of a bedroom at dawn. Soft golden light pours
 
-      # ── OPENING — safety cue first (Scroll Therapeutic Test item 1) ────
-      - panel_id: ep001_001
-        # No gutter before first panel.
-        scene: |
-          Wide establishing shot of a bedroom at dawn. Soft golden light pours
-          through gauze curtains, casting dappled tree-leaf shadows on the
-          opposite wall. A bedside table with a phone face-down, a clock
-          showing 6:47, and a small succulent. Bedsheets rumpled, no figure
-          yet. Camera POV from foot of bed looking up.
-        beat_type: ~     # first panel — no gutter
-        intent: "DAPPLED LIGHT HAND — establish safety palette, regulating cue"
-        silence_confirmed: true
+      through gauze curtains, casting dappled tree-leaf shadows on the
 
-      - panel_id: ep001_002
-        scene: |
-          Close-up on a hand — fingers gently wrapping a ceramic cup of tea.
-          Steam curls upward. Daylight catches the rim. The hand is still.
-        beat_type: spatial
-        intent: "TEA BEAT — first sensory anchor"
-        narrator_caption_by_locale:
-          en_US: "Tuesday. Six forty-seven."
+      opposite wall. A bedside table with a phone face-down, a clock
 
-      - panel_id: ep001_003
-        scene: |
-          Medium shot of Mira's face — eyes open, looking just slightly
-          downward at the tea. She's calm. Cream sweater visible. Hair loose.
-        beat_type: micro
-        silence_confirmed: true
+      showing 6:47, and a small succulent. Bedsheets rumpled, no figure
 
-      # ── ACTIVATION 1 — chest tightness arrives ─────────────────────────
-      - panel_id: ep001_004
-        scene: |
-          POV from Mira's angle. The phone screen has lit up. The notification
-          banner reads: "Re: Q3 review — 10am". Subject line bold. The phone
-          is face-down except for the edge-glow. The cup is still in frame at
-          the bottom edge.
-        beat_type: spatial
-        intent: "Activation onset — quiet trigger, not a jump scare"
-        dialogue_lines: []
+      yet. Camera POV from foot of bed looking up.
 
-      - panel_id: ep001_005
-        scene: |
-          Tight close-up on Mira's chest area, sweater visible, slight tension
-          lines suggested in the fabric and posture. A soft blur of motion at
-          the edges to imply quickening pulse — not loud, not red, just felt.
-        beat_type: micro
-        intent: "Body register — sympathetic activation cue"
-        sfx_by_locale:
-          en_US: ["thud-thud..."]    # heartbeat — not loud SFX, just a whisper-style placement
+      '
+    beat_type: null
+    intent: DAPPLED LIGHT HAND — establish safety palette, regulating cue
+    silence_confirmed: true
+  - panel_id: ep001_002
+    scene: 'Close-up on a hand — fingers gently wrapping a ceramic cup of tea.
 
-      - panel_id: ep001_006
-        scene: |
-          Close on Mira's face. The calm has just shifted. Eyes a little
-          wider. Lips closed. Not afraid yet — alerted.
-        beat_type: micro
-        dialogue_lines:
-          - speaker: mira
-            text_by_locale:
-              en_US: "Oh."
-            intensity: whisper
-            bubble_style: round_normal
-            tail_style: pointer
-            position_hint: top_right
+      Steam curls upward. Daylight catches the rim. The hand is still.
 
-      # ── GROUND 1 — Pendulation Pair (panels 4-6 ↔ 7-9) ──────────────────
-      - panel_id: ep001_007
-        scene: |
-          Hand back to the teacup. Steam still rising. Same composition as
-          panel 2 — a deliberate visual rhyme. The scene is quiet again.
-        beat_type: spatial
-        intent: "TEA BEAT — pendulation back to ground"
+      '
+    beat_type: spatial
+    intent: TEA BEAT — first sensory anchor
+    narrator_caption_by_locale:
+      en_US: Tuesday. Six forty-seven.
+      ja_JP: '[ja_JP] Tuesday. Six forty-seven.'
+      zh_TW: '[zh_TW] Tuesday. Six forty-seven.'
+      zh_CN: '[zh_CN] Tuesday. Six forty-seven.'
+  - panel_id: ep001_003
+    scene: 'Medium shot of Mira''s face — eyes open, looking just slightly
 
-      - panel_id: ep001_008
-        scene: |
-          Pull-back wide. Mira at a small kitchen table, both hands around
-          the cup. Window behind her, sun rising. Tree-leaf shadows swaying
-          on the wall. A houseplant (monstera) on the sill.
-        beat_type: spatial
-        intent: "DAPPLED LIGHT HAND — recurring safety motif"
+      downward at the tea. She''s calm. Cream sweater visible. Hair loose.
 
-      - panel_id: ep001_009
-        scene: |
-          Macro on the cup, the tea inside still warm. A hint of Mira's hand
-          and the kitchen wall.
-        beat_type: micro
-        narrator_caption_by_locale:
-          en_US: "The tea is still warm."
+      '
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_004
+    scene: 'POV from Mira''s angle. The phone screen has lit up. The notification
 
-      # ── ACTIVATION 2 — narrative spiral begins ─────────────────────────
-      - panel_id: ep001_010
-        scene: |
-          Mira opens a laptop. The screen reflects her face. Calendar app
-          showing today: "10:00 AM — Q3 Review (DM)." Several other small
-          calendar blocks crowd the morning.
-        beat_type: spatial
-        dialogue_lines: []
+      banner reads: "Re: Q3 review — 10am". Subject line bold. The phone
 
-      - panel_id: ep001_011
-        scene: |
-          Mid-distance. Mira's face. Multiple thought balloons (cloud_thought
-          bubbles, varying sizes, overlapping like clouds gathering) float
-          around her — each carrying a fragment of catastrophizing thought.
-          Background slightly dimmed.
-        beat_type: micro
-        intent: "Mind-racing — overlapping cloud_thought bubbles"
-        dialogue_lines:
-          - speaker: mira_internal
-            text_by_locale:
-              en_US: "What if I missed something."
-            intensity: internal
-            bubble_style: cloud_thought
-            tail_style: dotless
-            position_hint: top_left
-            font_override_by_locale:
-              en_US: italic_internal
-          - speaker: mira_internal
-            text_by_locale:
-              en_US: "What if they noticed last week."
-            intensity: internal
-            bubble_style: cloud_thought
-            tail_style: dotless
-            position_hint: top_right
-            font_override_by_locale:
-              en_US: italic_internal
-          - speaker: mira_internal
-            text_by_locale:
-              en_US: "I should have prepped on Sunday."
-            intensity: internal
-            bubble_style: cloud_thought
-            tail_style: dotless
-            position_hint: center_right
-            font_override_by_locale:
-              en_US: italic_internal
+      is face-down except for the edge-glow. The cup is still in frame at
 
-      - panel_id: ep001_012
-        scene: |
-          Close on Mira's hand on the table. It trembles, very slightly.
-          The tea in the cup ripples.
-        beat_type: micro
-        intent: "Body register — visible activation — but small, not catastrophic"
+      the bottom edge.
 
-      # ── GROUND 2 — Anchor Panel: bird on the sill ──────────────────────
-      - panel_id: ep001_013
-        scene: |
-          Wide. Mira looks up — the kitchen window. A small finch has landed
-          on the outer sill. Sunlight through the glass.
-        beat_type: spatial
-        intent: "ANCHOR PANEL setup"
+      '
+    beat_type: spatial
+    intent: Activation onset — quiet trigger, not a jump scare
+    dialogue_lines: []
+  - panel_id: ep001_005
+    scene: 'Tight close-up on Mira''s chest area, sweater visible, slight tension
 
-      - panel_id: ep001_014
-        scene: |
-          Close on the bird. Head-tilt. Eye visible. The bird is real, alive,
-          in this moment. Soft gold light on its feathers.
-        beat_type: micro
-        intent: "ANCHOR PANEL — DAPPLED LIGHT HAND continues"
+      lines suggested in the fabric and posture. A soft blur of motion at
 
-      - panel_id: ep001_015
-        scene: |
-          Mira's face — looking at the bird. The shoulders have softened a
-          fraction. Her lips part slightly. Not a smile yet.
-        beat_type: micro
-        narrator_caption_by_locale:
-          en_US: "Still here. The bird is still here."
+      the edges to imply quickening pulse — not loud, not red, just felt.
 
-      # ── ACTIVATION 3 — body memory ──────────────────────────────────────
-      - panel_id: ep001_016
-        scene: |
-          FLASHBACK PALETTE — desaturated, cool grey-blue. A conference room.
-          Mira at a long table. Faces around her are blurred (intentional —
-          panel does not name who is in the room). Mira's posture is upright
-          but her gaze is down at her notebook.
-        beat_type: standard
-        intent: "Pendulation — past failure register"
-        dialogue_lines: []
+      '
+    beat_type: micro
+    intent: Body register — sympathetic activation cue
+    sfx_by_locale:
+      en_US:
+      - thud-thud...
+      ja_JP:
+      - '[ja_JP] thud-thud...'
+      zh_TW:
+      - '[zh_TW] thud-thud...'
+      zh_CN:
+      - '[zh_CN] thud-thud...'
+  - panel_id: ep001_006
+    scene: 'Close on Mira''s face. The calm has just shifted. Eyes a little
 
-      - panel_id: ep001_017
-        scene: |
-          Same flashback palette. Hidden under the conference table — Mira's
-          fist clenched in her lap.
-        beat_type: micro
-        sfx_by_locale:
-          en_US: []     # no SFX — somatic compression
+      wider. Lips closed. Not afraid yet — alerted.
 
-      - panel_id: ep001_018
-        scene: |
-          Back to PRESENT palette — Mira at the kitchen table. Her hand
-          flexes. Releases. Stretches the fingers.
-        beat_type: spatial
+      '
+    beat_type: micro
+    dialogue_lines:
+    - speaker: mira
+      text_by_locale:
+        en_US: Oh.
+        ja_JP: '[ja_JP] Oh.'
+        zh_TW: '[zh_TW] Oh.'
+        zh_CN: '[zh_CN] Oh.'
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: top_right
+  - panel_id: ep001_007
+    scene: 'Hand back to the teacup. Steam still rising. Same composition as
 
-      # ── GROUND 3 — Tea Beat + Breath Bracket ────────────────────────────
-      - panel_id: ep001_019
-        scene: |
-          Close — Mira lifts the cup, takes a sip. Steam on her upper lip.
-          Eyes nearly closed.
-        beat_type: spatial
-        intent: "TEA BEAT — third instance"
+      panel 2 — a deliberate visual rhyme. The scene is quiet again.
 
-      - panel_id: ep001_020
-        scene: |
-          Eyes fully closed now. Faint smile. Inhale visible — sweater rises
-          a fraction.
-        beat_type: micro
-        intent: "BREATH BRACKET — inhale"
+      '
+    beat_type: spatial
+    intent: TEA BEAT — pendulation back to ground
+  - panel_id: ep001_008
+    scene: 'Pull-back wide. Mira at a small kitchen table, both hands around
 
-      - panel_id: ep001_021
-        scene: |
-          Same composition. Sweater settles. Eyes still closed. Long, slow
-          exhale.
-        beat_type: micro
-        intent: "BREATH BRACKET — exhale"
+      the cup. Window behind her, sun rising. Tree-leaf shadows swaying
 
-      # ── CLIMAX — the teaching frame arrives ─────────────────────────────
-      - panel_id: ep001_022
-        scene: |
-          Mira opens her eyes. Looks up at the ceiling. POV — the ceiling.
-          A small smoke detector with a steady green LED. Otherwise unmarked.
-        beat_type: spatial
-        intent: "Visual introduction of the central image (alarm)"
+      on the wall. A houseplant (monstera) on the sill.
 
-      - panel_id: ep001_023
-        scene: |
-          Mira's face — looking up. Contemplative now, no longer braced.
-        beat_type: micro
-        narrator_caption_by_locale:
-          en_US: "Once, my therapist said something I didn't believe."
+      '
+    beat_type: spatial
+    intent: DAPPLED LIGHT HAND — recurring safety motif
+  - panel_id: ep001_009
+    scene: 'Macro on the cup, the tea inside still warm. A hint of Mira''s hand
 
-      - panel_id: ep001_024
-        scene: |
-          Wider — Mira and the ceiling and the kitchen, light fuller now.
-        beat_type: micro
-        narrator_caption_by_locale:
-          en_US: "He said the body's alarm system is older than the body's wisdom."
+      and the kitchen wall.
 
-      - panel_id: ep001_025
-        scene: |
-          Close on the smoke detector LED. The green is steady.
-        beat_type: micro
+      '
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: The tea is still warm.
+      ja_JP: '[ja_JP] The tea is still warm.'
+      zh_TW: '[zh_TW] The tea is still warm.'
+      zh_CN: '[zh_CN] The tea is still warm.'
+  - panel_id: ep001_010
+    scene: 'Mira opens a laptop. The screen reflects her face. Calendar app
 
-      - panel_id: ep001_026
-        scene: |
-          Mira's eyes. Tracking the thought.
-        beat_type: micro
-        narrator_caption_by_locale:
-          en_US: "It can't tell smoke from steam."
+      showing today: "10:00 AM — Q3 Review (DM)." Several other small
 
-      - panel_id: ep001_027
-        scene: |
-          Wider — kitchen counter. The kettle is still on. Steam curls up
-          from the spout. The steam reaches near the ceiling.
-        beat_type: spatial
-        intent: "Visual rhyme — steam = the false alarm input"
+      calendar blocks crowd the morning.
 
-      - panel_id: ep001_028
-        scene: |
-          Mira's face. The teaching has landed. Not relief — recognition.
-          Eyes a little soft.
-        beat_type: micro
-        dialogue_lines:
-          - speaker: mira_internal
-            text_by_locale:
-              en_US: "Oh."
-            intensity: whisper
-            bubble_style: cloud_thought
-            tail_style: dotless
-            position_hint: top_right
-            font_override_by_locale:
-              en_US: italic_internal
+      '
+    beat_type: spatial
+    dialogue_lines: []
+  - panel_id: ep001_011
+    scene: 'Mid-distance. Mira''s face. Multiple thought balloons (cloud_thought
 
-      # ── LONG DROP — Phoenix's named decompression beat (PR #631 §11) ───
-      - panel_id: ep001_029
-        scene: |
-          Wide silent panel. Mira at the kitchen table, kettle steaming on
-          the counter, morning light fuller than before, the houseplant
-          casting a long leaf-shadow across the wall. Empty space at the
-          top and bottom of the panel — composition designed to read as
-          "everything paused for a moment." NO TEXT, NO SFX, NO CAPTION.
-        beat_type: long_drop      # 2200 px gutter BEFORE this panel
-        intent: "LONG DROP — therapeutic decompression beat. Reader exhales here."
-        silence_confirmed: true
-        dialogue_lines: []
+      bubbles, varying sizes, overlapping like clouds gathering) float
 
-      # ── COMPLETION (Scroll Therapeutic Test item 4) ─────────────────────
-      - panel_id: ep001_030
-        scene: |
-          Close — hand on the cup again. Steam continues. Same composition
-          as panel 2, intentional bookend.
-        beat_type: spatial
-        intent: "TEA BEAT — final return"
+      around her — each carrying a fragment of catastrophizing thought.
 
-      - panel_id: ep001_031
-        scene: |
-          Mira's face. Just barely a smile. Eyes soft. Not transformed.
-          Not fixed. Just here.
-        beat_type: micro
+      Background slightly dimmed.
 
-      - panel_id: ep001_032
-        scene: |
-          Empty wall, light moving across it. A small caption space.
-        beat_type: micro
-        narrator_caption_by_locale:
-          en_US: "I don't have to believe it yet. I just have to notice it once."
+      '
+    beat_type: micro
+    intent: Mind-racing — overlapping cloud_thought bubbles
+    dialogue_lines:
+    - speaker: mira_internal
+      text_by_locale:
+        en_US: What if I missed something.
+        ja_JP: '[ja_JP] What if I missed something.'
+        zh_TW: '[zh_TW] What if I missed something.'
+        zh_CN: '[zh_CN] What if I missed something.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_left
+      font_override_by_locale:
+        en_US: italic_internal
+    - speaker: mira_internal
+      text_by_locale:
+        en_US: What if they noticed last week.
+        ja_JP: '[ja_JP] What if they noticed last week.'
+        zh_TW: '[zh_TW] What if they noticed last week.'
+        zh_CN: '[zh_CN] What if they noticed last week.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_right
+      font_override_by_locale:
+        en_US: italic_internal
+    - speaker: mira_internal
+      text_by_locale:
+        en_US: I should have prepped on Sunday.
+        ja_JP: '[ja_JP] I should have prepped on Sunday.'
+        zh_TW: '[zh_TW] I should have prepped on Sunday.'
+        zh_CN: '[zh_CN] I should have prepped on Sunday.'
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: center_right
+      font_override_by_locale:
+        en_US: italic_internal
+  - panel_id: ep001_012
+    scene: 'Close on Mira''s hand on the table. It trembles, very slightly.
 
-      - panel_id: ep001_033
-        scene: |
-          Close on the smoke detector LED — steady green. The same as before.
-          Same alarm. Different relationship to it.
-        beat_type: micro
+      The tea in the cup ripples.
 
-      - panel_id: ep001_034
-        scene: |
-          Wide pull. The whole kitchen. Sunlight stronger now. The bird is
-          gone — that's fine. Mira is simply at the table. Cream sweater,
-          the cup, the laptop closed. The plant. The light.
-        beat_type: spatial
-        intent: "DAPPLED LIGHT HAND — closing return"
+      '
+    beat_type: micro
+    intent: Body register — visible activation — but small, not catastrophic
+  - panel_id: ep001_013
+    scene: 'Wide. Mira looks up — the kitchen window. A small finch has landed
 
-      - panel_id: ep001_035
-        scene: |
-          Final small panel — typographic only on a soft cream background.
-          Episode card.
-        beat_type: standard
-        narrator_caption_by_locale:
-          en_US: "End of Episode 1 — The Alarm Is Lying"
+      on the outer sill. Sunlight through the glass.
 
-# ═══════════════════════════════════════════════════════════════════════════
-# WRITER NOTES — for the renderer + reviewers
-# ═══════════════════════════════════════════════════════════════════════════
+      '
+    beat_type: spatial
+    intent: ANCHOR PANEL setup
+  - panel_id: ep001_014
+    scene: 'Close on the bird. Head-tilt. Eye visible. The bird is real, alive,
+
+      in this moment. Soft gold light on its feathers.
+
+      '
+    beat_type: micro
+    intent: ANCHOR PANEL — DAPPLED LIGHT HAND continues
+  - panel_id: ep001_015
+    scene: 'Mira''s face — looking at the bird. The shoulders have softened a
+
+      fraction. Her lips part slightly. Not a smile yet.
+
+      '
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: Still here. The bird is still here.
+      ja_JP: '[ja_JP] Still here. The bird is still here.'
+      zh_TW: '[zh_TW] Still here. The bird is still here.'
+      zh_CN: '[zh_CN] Still here. The bird is still here.'
+  - panel_id: ep001_016
+    scene: 'FLASHBACK PALETTE — desaturated, cool grey-blue. A conference room.
+
+      Mira at a long table. Faces around her are blurred (intentional —
+
+      panel does not name who is in the room). Mira''s posture is upright
+
+      but her gaze is down at her notebook.
+
+      '
+    beat_type: standard
+    intent: Pendulation — past failure register
+    dialogue_lines: []
+  - panel_id: ep001_017
+    scene: 'Same flashback palette. Hidden under the conference table — Mira''s
+
+      fist clenched in her lap.
+
+      '
+    beat_type: micro
+    sfx_by_locale:
+      en_US: []
+      ja_JP: []
+      zh_TW: []
+      zh_CN: []
+  - panel_id: ep001_018
+    scene: 'Back to PRESENT palette — Mira at the kitchen table. Her hand
+
+      flexes. Releases. Stretches the fingers.
+
+      '
+    beat_type: spatial
+  - panel_id: ep001_019
+    scene: 'Close — Mira lifts the cup, takes a sip. Steam on her upper lip.
+
+      Eyes nearly closed.
+
+      '
+    beat_type: spatial
+    intent: TEA BEAT — third instance
+  - panel_id: ep001_020
+    scene: 'Eyes fully closed now. Faint smile. Inhale visible — sweater rises
+
+      a fraction.
+
+      '
+    beat_type: micro
+    intent: BREATH BRACKET — inhale
+  - panel_id: ep001_021
+    scene: 'Same composition. Sweater settles. Eyes still closed. Long, slow
+
+      exhale.
+
+      '
+    beat_type: micro
+    intent: BREATH BRACKET — exhale
+  - panel_id: ep001_022
+    scene: 'Mira opens her eyes. Looks up at the ceiling. POV — the ceiling.
+
+      A small smoke detector with a steady green LED. Otherwise unmarked.
+
+      '
+    beat_type: spatial
+    intent: Visual introduction of the central image (alarm)
+  - panel_id: ep001_023
+    scene: 'Mira''s face — looking up. Contemplative now, no longer braced.
+
+      '
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: Once, my therapist said something I didn't believe.
+      ja_JP: '[ja_JP] Once, my therapist said something I didn''t believe.'
+      zh_TW: '[zh_TW] Once, my therapist said something I didn''t believe.'
+      zh_CN: '[zh_CN] Once, my therapist said something I didn''t believe.'
+  - panel_id: ep001_024
+    scene: 'Wider — Mira and the ceiling and the kitchen, light fuller now.
+
+      '
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: He said the body's alarm system is older than the body's wisdom.
+      ja_JP: '[ja_JP] He said the body''s alarm system is older than the body''s wisdom.'
+      zh_TW: '[zh_TW] He said the body''s alarm system is older than the body''s wisdom.'
+      zh_CN: '[zh_CN] He said the body''s alarm system is older than the body''s wisdom.'
+  - panel_id: ep001_025
+    scene: 'Close on the smoke detector LED. The green is steady.
+
+      '
+    beat_type: micro
+  - panel_id: ep001_026
+    scene: 'Mira''s eyes. Tracking the thought.
+
+      '
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: It can't tell smoke from steam.
+      ja_JP: '[ja_JP] It can''t tell smoke from steam.'
+      zh_TW: '[zh_TW] It can''t tell smoke from steam.'
+      zh_CN: '[zh_CN] It can''t tell smoke from steam.'
+  - panel_id: ep001_027
+    scene: 'Wider — kitchen counter. The kettle is still on. Steam curls up
+
+      from the spout. The steam reaches near the ceiling.
+
+      '
+    beat_type: spatial
+    intent: Visual rhyme — steam = the false alarm input
+  - panel_id: ep001_028
+    scene: 'Mira''s face. The teaching has landed. Not relief — recognition.
+
+      Eyes a little soft.
+
+      '
+    beat_type: micro
+    dialogue_lines:
+    - speaker: mira_internal
+      text_by_locale:
+        en_US: Oh.
+        ja_JP: '[ja_JP] Oh.'
+        zh_TW: '[zh_TW] Oh.'
+        zh_CN: '[zh_CN] Oh.'
+      intensity: whisper
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_right
+      font_override_by_locale:
+        en_US: italic_internal
+  - panel_id: ep001_029
+    scene: 'Wide silent panel. Mira at the kitchen table, kettle steaming on
+
+      the counter, morning light fuller than before, the houseplant
+
+      casting a long leaf-shadow across the wall. Empty space at the
+
+      top and bottom of the panel — composition designed to read as
+
+      "everything paused for a moment." NO TEXT, NO SFX, NO CAPTION.
+
+      '
+    beat_type: long_drop
+    intent: LONG DROP — therapeutic decompression beat. Reader exhales here.
+    silence_confirmed: true
+    dialogue_lines: []
+  - panel_id: ep001_030
+    scene: 'Close — hand on the cup again. Steam continues. Same composition
+
+      as panel 2, intentional bookend.
+
+      '
+    beat_type: spatial
+    intent: TEA BEAT — final return
+  - panel_id: ep001_031
+    scene: 'Mira''s face. Just barely a smile. Eyes soft. Not transformed.
+
+      Not fixed. Just here.
+
+      '
+    beat_type: micro
+  - panel_id: ep001_032
+    scene: 'Empty wall, light moving across it. A small caption space.
+
+      '
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: I don't have to believe it yet. I just have to notice it once.
+      ja_JP: '[ja_JP] I don''t have to believe it yet. I just have to notice it once.'
+      zh_TW: '[zh_TW] I don''t have to believe it yet. I just have to notice it once.'
+      zh_CN: '[zh_CN] I don''t have to believe it yet. I just have to notice it once.'
+  - panel_id: ep001_033
+    scene: 'Close on the smoke detector LED — steady green. The same as before.
+
+      Same alarm. Different relationship to it.
+
+      '
+    beat_type: micro
+  - panel_id: ep001_034
+    scene: 'Wide pull. The whole kitchen. Sunlight stronger now. The bird is
+
+      gone — that''s fine. Mira is simply at the table. Cream sweater,
+
+      the cup, the laptop closed. The plant. The light.
+
+      '
+    beat_type: spatial
+    intent: DAPPLED LIGHT HAND — closing return
+  - panel_id: ep001_035
+    scene: 'Final small panel — typographic only on a soft cream background.
+
+      Episode card.
+
+      '
+    beat_type: standard
+    narrator_caption_by_locale:
+      en_US: End of Episode 1 — The Alarm Is Lying
+      ja_JP: '[ja_JP] End of Episode 1 — The Alarm Is Lying'
+      zh_TW: '[zh_TW] End of Episode 1 — The Alarm Is Lying'
+      zh_CN: '[zh_CN] End of Episode 1 — The Alarm Is Lying'
 notes:
-  pacing: |
-    The episode runs ~35 panels — within the 30–50 webtoon convention. Most
+  pacing: 'The episode runs ~35 panels — within the 30–50 webtoon convention. Most
+
     panels carry no dialogue. Iyashikei convention: silence does the work;
+
     text lands only at moments of genuine inflection.
-  bubble_style_register: |
-    All Mira's spoken dialogue: round_normal at whisper intensity (intentionally
+
+    '
+  bubble_style_register: 'All Mira''s spoken dialogue: round_normal at whisper intensity
+    (intentionally
+
     quiet). Internal thoughts: cloud_thought + italic_internal. Catastrophizing
+
     spiral (panel 11): three cloud_thoughts at varying positions to create the
+
     "thoughts gathering" visual.
-  sfx_policy: |
-    Almost none. Heartbeat in panel 5 only — and rendered at whisper register
+
+    '
+  sfx_policy: 'Almost none. Heartbeat in panel 5 only — and rendered at whisper register
+
     (not the BANG / WHAM register). Per PR #631 therapeutic-craft companion:
+
     high-frequency SFX disrupt the regulating effect. Save them for shonen.
-  gutter_choices: |
-    standard (800 px) reserved for the flashback transition (panel 16) and
+
+    '
+  gutter_choices: 'standard (800 px) reserved for the flashback transition (panel
+    16) and
+
     the final episode-card (panel 35). long_drop (2200 px) reserved for the
+
     single decompression beat at panel 29. Everything else is micro (40 px)
+
     or spatial (200 px). Total expected episode height ≈ 12,000 px = roughly
-    9 sliced segments at 1280 px cap (well under WEBTOON's 100-image limit).
-  translation_pipeline_handoff: |
-    text_by_locale dicts are populated for en_US only. Phase 1.5 #4
+
+    9 sliced segments at 1280 px cap (well under WEBTOON''s 100-image limit).
+
+    '
+  translation_pipeline_handoff: 'text_by_locale dicts are populated for en_US only.
+    Phase 1.5 #4
+
     (DeepSeek + Google AI Studio) will fill ja_JP, zh_TW, zh_CN, ko_KR by
+
     walking dialogue_lines + sfx_by_locale + narrator_caption_by_locale.
+
     Iyashikei translation note: prefer literal-warm over literal-tight; this
+
     voice trades on negative space and breath, both of which CJK can carry
+
     natively (often better than English).
 
-# ═══════════════════════════════════════════════════════════════════════════
-# DOWNSTREAM CONSUMPTION
-# ═══════════════════════════════════════════════════════════════════════════
-# 1. visual_from_script.py reads pages[].panels[].scene → FLUX-schnell-fp8
-#    prompts on Pearl Star.
-# 2. lettering_from_script.py reads dialogue_lines / sfx_by_locale /
-#    narrator_caption_by_locale → emits a v3 lettering_spec.
-# 3. bubble_render.py reads the lettering_spec + panel images → composes
-#    bubbles per locale (PR #648 — locale param drives text_by_locale resolution).
-# 4. webtoon_compose.py reads pages[].panels[] (this file) + bubble-rendered
-#    panel images → vertical strip with beat_type-aware gutters (PR #650 — this
-#    file's beat_type field is the input).
-# 5. r2_push_helper.push_book_render() pushes the final episode JPEGs to
-#    R2 + commits the manifest YAML (Layer 3 / PR #637).
-# 6. webtoon_canvas_upload.py packages for Canvas submission (PR #630).
+    '
