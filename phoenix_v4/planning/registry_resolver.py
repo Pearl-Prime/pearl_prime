@@ -225,44 +225,63 @@ def _parse_canonical_txt(path: Path) -> list[dict]:
     return blocks
 
 
+_KNOWN_SLOT_DIRS = frozenset({
+    "HOOK", "SCENE", "STORY", "REFLECTION", "EXERCISE", "INTEGRATION",
+    "TEACHER_DOCTRINE", "COMPRESSION", "PERMISSION", "PIVOT",
+    "TAKEAWAY", "THREAD",
+})
+
+
 def _load_persona_atoms(persona_id: str, topic_id: str) -> dict[str, list[dict]]:
     """Load persona-specific atoms from atoms/{persona}/{topic}/{type}/CANONICAL.txt.
 
     Returns dict keyed by slot type (HOOK, SCENE, STORY, etc.) -> list of atom dicts.
+
+    Engine-bank atoms (atoms/{persona}/{topic}/{engine}/CANONICAL.txt with named-character
+    content) are PREPENDED to atoms["STORY"] before generic atoms/{persona}/{topic}/STORY/
+    CANONICAL.txt content. Selection in enrichment_select._try_persona_content uses a
+    seeded-pseudorandom index over the merged pool (not pure list order), but because
+    engine atoms typically outnumber generic STORY atoms ~7:1 (7 engines × ~20-50 variants
+    vs ~20 generic), the probabilistic bias still favors named-character engine content
+    for all 14 personas with engine-dir coverage. Closes the engine-bank-to-grid wiring
+    chain started by PR #669 (which changed SOMATIC_10_SLOT_GRID sec 2/5/9 to STORY).
+
+    Engine dirs are detected by exclusion against _KNOWN_SLOT_DIRS — this fixes the prior
+    bug where midlife_women's UPPERCASE engine names (COMPARISON, GRIEF, OVERWHELM, SHAME)
+    were treated as separate slot-type keys instead of STORY content.
     """
     persona_root = ATOMS_ROOT / persona_id / topic_id
     if not persona_root.exists():
         return {}
 
     atoms: dict[str, list[dict]] = {}
-    for slot_dir in persona_root.iterdir():
-        if not slot_dir.is_dir():
-            continue
-        slot_type = slot_dir.name.upper()
-        canonical = slot_dir / "CANONICAL.txt"
-        if canonical.exists():
-            parsed = _parse_canonical_txt(canonical)
-            if parsed:
-                atoms[slot_type] = parsed
+    engine_story_atoms: list[dict] = []
 
-    # Also check for engine-specific STORY atoms (atoms/persona/topic/engine/CANONICAL.txt)
-    # These are in subdirs like "grief", "shame", "comparison" under the topic dir
     for sub in persona_root.iterdir():
-        if sub.is_dir() and (sub / "CANONICAL.txt").exists():
-            slot_type_upper = sub.name.upper()
-            # Skip if it's already a known slot type dir (HOOK, SCENE, etc.)
-            if slot_type_upper in atoms:
-                continue
-            # This is an engine dir — treat its atoms as STORY type
-            parsed = _parse_canonical_txt(sub / "CANONICAL.txt")
-            if parsed:
-                if "STORY" not in atoms:
-                    atoms["STORY"] = []
-                atoms["STORY"].extend(parsed)
+        if not sub.is_dir():
+            continue
+        canonical = sub / "CANONICAL.txt"
+        if not canonical.exists():
+            continue
+        slot_type_upper = sub.name.upper()
+        parsed = _parse_canonical_txt(canonical)
+        if not parsed:
+            continue
+        if slot_type_upper in _KNOWN_SLOT_DIRS:
+            atoms[slot_type_upper] = parsed
+        else:
+            # Engine dir (e.g. overwhelm, grief, shame, OVERWHELM, EMBODIMENT_V01_*) —
+            # collect into a single bucket and prepend to STORY at the end.
+            engine_story_atoms.extend(parsed)
+
+    if engine_story_atoms:
+        atoms["STORY"] = engine_story_atoms + atoms.get("STORY", [])
 
     if atoms:
-        logger.info("Loaded %d persona atom types for '%s/%s'",
-                     len(atoms), persona_id, topic_id)
+        logger.info(
+            "Loaded %d persona atom types for '%s/%s' (engine-bank STORY atoms: %d)",
+            len(atoms), persona_id, topic_id, len(engine_story_atoms),
+        )
     return atoms
 
 
