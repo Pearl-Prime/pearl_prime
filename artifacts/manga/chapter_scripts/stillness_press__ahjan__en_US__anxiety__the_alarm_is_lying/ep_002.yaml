@@ -1,0 +1,445 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# CHAPTER SCRIPT — The Alarm Is Lying — Episode 2
+# ═══════════════════════════════════════════════════════════════════════════
+# Series:        stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+# Episode:       ep_002 — "The Same Tuesday, 9:48 AM"
+# Author (EI):   Hana Tidecalm
+# Teacher:       ahjan (Buddhist contemporary; alarm-systems / pause)
+# Engine:        false_alarm
+# Genre:         iyashikei
+# Style:         cozy_iyashikei
+#
+# Continuity from ep_001:
+#   Same Tuesday. Same Mira Aoki. Same cream sweater (slightly different
+#   moment — work jacket over it now). The teaching landed quietly at
+#   home. Q3 review is in 12 minutes.
+#
+# Episode arc — applying the teaching live:
+#   activation (real, persistent) → ground (smaller, steadier this time)
+#   → climax (the review actually happens, partial application, not perfect)
+#   → Long Drop (post-meeting decompression on the rooftop)
+#   → completion (home, kettle bookend, "I noticed it once. That's enough.")
+#
+# SCROLL THERAPEUTIC TEST (PR #631 Decision 6):
+#   1. Safety cue inside first 800 px ........ ✓ panel 1 (warm sunlight + tea cup memory beat)
+#   2. ≥3 oscillations activation/ground ...... ✓ 4 oscillations
+#   3. Activation:Ground ≤ 1:2.5 .............. ✓ ~10 activation / ~22 ground panels
+#   4. Closes with completion ................. ✓ panels 30-32 settle
+#   5. HRV-style end-state delta .............. (Phase 2)
+#
+# CRAFT FORMULAS (different mix from ep_001 — avoid repetition):
+#   Tea Beat (panels 1-2 callback, 32 closing)
+#   Anchor Panel — NEW anchor (lobby plant, panels 9-10)
+#   Awe-Pullback (panel 14 — office window city skyline, once-per-arc cousin)
+#   Pendulation Pair (5-7 ↔ 8-11, 12-15 ↔ 16-19, 20-22 ↔ 23-25)
+#   Long Drop (panel 29 — rooftop wide silent)
+#   Continuity callback: smoke detector image returns once (panel 18)
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_002
+title: "The Alarm Is Lying — Episode 2: The Same Tuesday, 9:48 AM"
+manga_author: Hana Tidecalm
+teacher_id: ahjan
+brand_id: stillness_press
+engine: false_alarm
+locale: en_US
+default_locale: en_US
+available_locales: [en_US]   # populated by translation pipeline (PR #652)
+
+main_characters:
+  - id: mira
+    name: Mira Aoki
+    age: 33
+    role: protagonist (UX researcher; mid-career; quietly anxious)
+    visual_anchor: "long brown hair, soft features, cream sweater under a slim charcoal jacket today; jade pendant visible at neckline"
+  - id: dr_morimoto
+    name: Dr. Morimoto
+    role: "research director (speaks 3 lines total, never close-up — the 'boss' archetype but iyashikei — no menace, just a person)"
+    visual_anchor: "early 50s, warm glasses, soft beige jacket, neutral expression"
+
+scene_palette:
+  primary: warm cream + soft afternoon gold
+  secondary: cool office grey + pale terracotta
+  accent: jade green (continuity through-line — pendant + lobby plant + rooftop sky-glow)
+  meeting_palette: cool office daylight, less warm than morning
+  rooftop_palette: late-afternoon amber + city silhouette
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PAGES (32 panels — slightly tighter than ep_001 to vary cadence)
+# ═══════════════════════════════════════════════════════════════════════════
+
+pages:
+  - page_id: ep_002_p01
+    panels:
+
+      # ── OPENING — Tea Beat callback (continuity from ep_001) ──────────
+      - panel_id: ep002_001
+        scene: |
+          Close-up — empty teacup on kitchen table, single drop of liquid
+          glinting at the bottom. Soft late-morning light. Same composition
+          as ep_001 panel 30, but now empty — the morning has passed.
+        beat_type: ~     # first panel
+        intent: "TEA BEAT callback — continuity anchor"
+        silence_confirmed: true
+
+      - panel_id: ep002_002
+        scene: |
+          Wider — Mira at the table, finishing a folder of notes. Cream
+          sweater. The slim charcoal jacket draped over the back of the
+          chair. A laptop closed beside her. Sunlight through the kitchen
+          window — fuller now, mid-morning.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "9:48 AM. Twelve minutes."
+
+      - panel_id: ep002_003
+        scene: |
+          Close — Mira's hand picks up the jade pendant from the table,
+          fastens it around her neck. Soft motion blur on the chain.
+        beat_type: micro
+        intent: "Continuity through-line accent"
+
+      # ── ACTIVATION 1 — walking out, the body knows the meeting is coming
+      - panel_id: ep002_004
+        scene: |
+          Wide — Mira stepping out of her apartment building. City sidewalk,
+          late-morning Tuesday energy: a few commuters, a delivery e-bike,
+          a coffee shop's open door. She's pulling on the charcoal jacket.
+          Sunlight strong from camera-left.
+        beat_type: standard
+        intent: "Scene transition — apartment → street"
+
+      - panel_id: ep002_005
+        scene: |
+          Mid-shot — Mira walking. Her right hand briefly touches the
+          jade pendant at her neckline. Eyes forward.
+        beat_type: spatial
+        intent: "Subtle somatic register — she notices her body"
+
+      - panel_id: ep002_006
+        scene: |
+          Tight close — Mira's chest area through the open jacket. Slight
+          tension lines in the sweater. Same somatic activation as
+          ep_001 panel 5, but smaller, more familiar.
+        beat_type: micro
+        intent: "Activation — recognized faster this time"
+        sfx_by_locale:
+          en_US: ["thud-thud..."]
+
+      - panel_id: ep002_007
+        scene: |
+          Mira's face, walking. A flicker of something — recognition. She
+          notes the chest tightness without alarm. Small exhale visible.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira_internal
+            text_by_locale:
+              en_US: "There it is."
+            intensity: whisper
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: top_right
+            font_override_by_locale:
+              en_US: italic_internal
+
+      # ── GROUND 1 — Pendulation pair: the lobby plant (NEW anchor) ─────
+      - panel_id: ep002_008
+        scene: |
+          Wide — Mira entering an office lobby. Cool concrete and glass.
+          A reception desk. To her right, a tall potted monstera plant —
+          jade-green leaves catching the slanted light from the front
+          window.
+        beat_type: spatial
+        intent: "Setting transition — first sight of new ANCHOR PANEL subject"
+
+      - panel_id: ep002_009
+        scene: |
+          Close on the monstera leaf. The veins. The exact green. Same
+          jade tone as Mira's pendant — visual rhyme.
+        beat_type: micro
+        intent: "ANCHOR PANEL subject — the lobby plant"
+
+      - panel_id: ep002_010
+        scene: |
+          Mira's face, looking briefly at the plant as she walks past.
+          Just a glance. Shoulders soften half a degree.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "Still here. The leaves are still here."
+
+      # ── ACTIVATION 2 — the elevator + waiting ─────────────────────────
+      - panel_id: ep002_011
+        scene: |
+          Tight interior — elevator. Mira and one other person (back to
+          camera, faceless extra). The numbers ticking up. Mira's jaw
+          tightens fractionally.
+        beat_type: spatial
+        dialogue_lines: []
+
+      - panel_id: ep002_012
+        scene: |
+          Mid-distance — a small waiting area outside a meeting room.
+          Mira sitting on a bench. Her hands clasped on her lap, knuckles
+          slightly pale. The meeting room door is shut.
+        beat_type: standard
+        intent: "Activation 2 — waiting is harder than walking"
+
+      - panel_id: ep002_013
+        scene: |
+          Close — Mira's hands. Fingers interlocked. A tiny tremble.
+          Camera tilts up to her face. Eyes closed, half-smile that is
+          mostly stoic. Trying.
+        beat_type: micro
+
+      # ── AWE-PULLBACK — once-per-arc cousin ────────────────────────────
+      - panel_id: ep002_014
+        scene: |
+          Wide pullback. We see the office floor's window wall behind
+          Mira — sky, the city skyline, pale clouds. The single bench is
+          a small element in a vast space. Light from the window. The
+          panel is almost too wide for one frame; intentional excess of
+          space.
+        beat_type: miyazaki_ma
+        intent: "AWE-PULLBACK — vast space rendering Mira small but held"
+
+      # ── GROUND 2 — Pendulation: breath and pendant ─────────────────────
+      - panel_id: ep002_015
+        scene: |
+          Back to medium distance. Mira's hand at her throat, two fingers
+          on the jade pendant. A slow inhale visible.
+        beat_type: spatial
+        intent: "BREATH BRACKET — inhale, ground via pendant"
+
+      # ── CLIMAX — the meeting itself ───────────────────────────────────
+      - panel_id: ep002_016
+        scene: |
+          Inside the meeting room. Mira at a small round table opposite
+          Dr. Morimoto (early 50s, warm glasses, soft beige jacket — visible
+          but expression neutral, not severe). A laptop between them. Light
+          from the side window. Cool meeting-palette.
+        beat_type: standard
+        intent: "Activation 3 — the meeting starts; alarm runs continuously"
+
+      - panel_id: ep002_017
+        scene: |
+          Close on Dr. Morimoto. Speaking. Calm, professional. Not warm,
+          not cold.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: dr_morimoto
+            text_by_locale:
+              en_US: "Walk me through what we learned about the onboarding flow."
+            intensity: calm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      - panel_id: ep002_018
+        scene: |
+          Mira's POV — her hand on the laptop trackpad. Beyond the laptop
+          on the wall: a small smoke detector with a green LED. Same image
+          as ep_001 panel 22 — the visual frame returns. Mira sees it.
+        beat_type: micro
+        intent: "Continuity callback — the teaching image"
+
+      - panel_id: ep002_019
+        scene: |
+          Mira's face. Eyes flick from the smoke detector back to Dr.
+          Morimoto. Something settles. She begins to speak.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "Three things came up. The first one we expected."
+            intensity: calm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      # ── ACTIVATION 4 — mid-meeting wobble ─────────────────────────────
+      - panel_id: ep002_020
+        scene: |
+          Time-jump (subtle palette shift — slightly cooler). Same room.
+          Mira mid-explanation, hands moving — but eyes have a slight
+          glaze. The body's still firing but she's continuing.
+        beat_type: spatial
+        intent: "Realistic mid-meeting wobble"
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "...and the third — sorry. Give me one second."
+            intensity: calm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_center
+
+      - panel_id: ep002_021
+        scene: |
+          Mira's hand reaches for her water glass on the table. Slow,
+          deliberate motion. Sip. Eyes briefly closed.
+        beat_type: micro
+        intent: "Pause — operator-permission to pause"
+
+      - panel_id: ep002_022
+        scene: |
+          Dr. Morimoto across the table. Not impatient. Just waiting.
+          Soft beige jacket, glasses catching the window light.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: dr_morimoto
+            text_by_locale:
+              en_US: "Take your time."
+            intensity: calm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: top_left
+
+      # ── GROUND 3 — internal anchor: the smoke detector frame applied ─
+      - panel_id: ep002_023
+        scene: |
+          Close on Mira's eyes — open now. Soft. The internal monologue
+          isn't shown as a thought balloon — just on the next caption strip.
+        beat_type: micro
+
+      - panel_id: ep002_024
+        scene: |
+          Black panel — ALMOST black, very thin frame of light at the edges.
+          Caption strip across the middle.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "It's not danger. It's just steam."
+
+      - panel_id: ep002_025
+        scene: |
+          Back to Mira's face. Slightly steadier. She continues, voice a
+          tone clearer.
+        beat_type: micro
+        dialogue_lines:
+          - speaker: mira
+            text_by_locale:
+              en_US: "The third thing was the surprise — the drop-off at step five wasn't where we predicted."
+            intensity: calm
+            bubble_style: round_normal
+            tail_style: pointer
+            position_hint: bottom_right
+
+      # ── POST-MEETING — hallway, body still humming ────────────────────
+      - panel_id: ep002_026
+        scene: |
+          Wider — Mira walking down a corridor. The meeting is over. She
+          carries the laptop loosely under her arm. Her shoulders are not
+          relaxed yet.
+        beat_type: standard
+        intent: "Scene transition — meeting → after"
+
+      - panel_id: ep002_027
+        scene: |
+          Mira stepping into a stairwell, choosing it instead of the
+          elevator. Going UP. The fluorescent light is harsh; she squints.
+        beat_type: spatial
+        intent: "Choosing the stairs — sensory regulation choice"
+
+      - panel_id: ep002_028
+        scene: |
+          A door pushes open — late-afternoon golden light spills onto
+          her face. ROOFTOP. Wind in her hair. The city sprawl below.
+          Pale clouds. A few HVAC units in the background.
+        beat_type: standard
+        intent: "Reveal — the rooftop"
+
+      # ── LONG DROP — the decompression beat (silent) ───────────────────
+      - panel_id: ep002_029
+        scene: |
+          Wide silent panel. Mira at the rooftop railing, not at the edge,
+          back-three-quarter view. The city beyond — small, hazy, gold-
+          lit. Wind. Her hair lifting slightly. NO TEXT, NO CAPTION,
+          NO SFX. Composition includes deliberate empty sky above her.
+        beat_type: long_drop
+        intent: "LONG DROP — post-meeting decompression. Reader exhales here."
+        silence_confirmed: true
+        dialogue_lines: []
+
+      # ── COMPLETION — home, kettle, the bookend ────────────────────────
+      - panel_id: ep002_030
+        scene: |
+          Cut to evening. Mira's kitchen. Same window as ep_001, now in
+          dusk — tree shadows still on the wall but now soft purple.
+          She's in just the cream sweater again, jacket draped on a chair.
+          Lighting a small candle on the table.
+        beat_type: standard
+        intent: "Scene transition — back to the safe space"
+
+      - panel_id: ep002_031
+        scene: |
+          Close on the kettle on the stove, beginning to steam. Same kettle
+          as ep_001. The visual rhyme is the point.
+        beat_type: spatial
+        intent: "TEA BEAT bookend — closing the circuit"
+
+      - panel_id: ep002_032
+        scene: |
+          Final panel — Mira's face, sitting at the table with a fresh
+          cup of tea. Soft smile, eyes a little tired, peaceful. Caption
+          strip below.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "I noticed it. That's enough for today."
+        dialogue_lines: []
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WRITER NOTES
+# ═══════════════════════════════════════════════════════════════════════════
+notes:
+  arc_position: |
+    Episode 2 of 14. The teaching is no longer abstract — Mira applies it
+    in a real-stakes context (work review). She doesn't apply it perfectly.
+    She wobbles at panel 20. She recovers via the smoke-detector image
+    callback at panels 18+24 + the rooftop decompression at 29. Iyashikei
+    convention: small shifts only. The reader leaves the episode with a
+    slightly more regulated nervous system, not with Mira "fixed."
+  pacing_vs_ep001: |
+    32 panels (vs ep_001's 35). Slightly tighter. ep_001 used the slow
+    morning to introduce the frame; ep_002 covers more time (morning to
+    evening) with similar panel count, so each panel carries more.
+    Different anchor (lobby plant) and different decompression site
+    (rooftop) keep visual texture distinct from ep_001's kitchen-only
+    setting.
+  continuity_callbacks: |
+    - Tea cup (panel 1, 31, 32) — bookends both episodes
+    - Jade pendant (panel 3, 5, 15) — visual through-line as PR #631 §16
+      "color anchor" recommends per-character signature
+    - Smoke detector image (panel 18) — the teaching frame from ep_001
+      returns at the climax of ep_002
+    - Cream sweater + Mira's hair (every panel) — character lock-in for
+      visual_from_script_v3
+  dr_morimoto_handling: |
+    Three lines total, never close-up. Per iyashikei convention: the
+    "boss" archetype is humanized but doesn't dominate the frame. The
+    palette of his side of the room is cool office daylight, slightly
+    less warm than Mira's — visible difference, not a threat cue.
+  long_drop_position: |
+    ep_001's Long Drop was BEFORE the teaching landed (panel 29). ep_002's
+    Long Drop is AFTER the climax (panel 29 — rooftop). Same beat-type
+    field, different narrative position. The composer (PR #650) treats
+    them identically — gutter 2200 px before the panel.
+  translation_handoff: |
+    Same as ep_001 — text_by_locale dicts populated for en_US only.
+    Run scripts/manga/translate_chapter_script.py to fill ja_JP / zh_TW /
+    zh_CN. Locked terminology in iyashikei_glossary.py covers the new
+    "still here" + "the leaves are still here" callbacks.
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DOWNSTREAM CONSUMPTION (same pipeline as ep_001)
+# ═══════════════════════════════════════════════════════════════════════════
+# 1. visual_from_script_v3 → FLUX prompts (PR #655)
+# 2. lettering_from_script → v3 lettering_spec
+# 3. bubble_render with locale → per-market bubbles (PR #648)
+# 4. webtoon_compose → vertical strip (PR #650)
+# 5. r2_push_helper.push_book_render() (PR #637)
+# 6. webtoon_canvas_upload package (PR #630)
