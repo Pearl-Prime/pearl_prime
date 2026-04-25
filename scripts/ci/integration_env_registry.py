@@ -49,6 +49,8 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("Cloudflare", "CLOUDFLARE_AI_MODEL", False, "Workers AI model name (e.g. @cf/google/gemma-3-12b-it)"),
     ("Cloudflare R2", "R2_ACCESS_KEY_ID", False, "R2 S3-compatible access key (bucket-scoped to phoenix-omega-artifacts). Get: dash.cloudflare.com → R2 → Manage R2 API Tokens"),
     ("Cloudflare R2", "R2_SECRET_ACCESS_KEY", False, "R2 S3-compatible secret (shown once when access key created)"),
+    ("Cloudflare R2", "R2_ACCOUNT_ID", False, "R2 account ID for S3 endpoint URL (same value as CLOUDFLARE_ACCOUNT_ID; scoped separately for r2_sync.py + setup_r2.sh consumers)"),
+    ("Cloudflare R2", "R2_BUCKET", False, "R2 bucket name (default: phoenix-omega-artifacts)"),
     ("GitHub", "GITHUB_TOKEN", False, "GitHub API (auto in Actions)"),
     ("GitHub", "GITHUB_REPOSITORY", False, "owner/repo for API calls; auto in Actions"),
     # --- Publishing ---
