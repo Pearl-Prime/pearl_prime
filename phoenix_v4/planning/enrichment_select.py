@@ -179,7 +179,11 @@ def _try_content_bank_fallback(
     chapter_targets: Dict[str, Any],
 ) -> Optional[Tuple[str, str, str, Dict[str, Any]]]:
     """Return (content, source, source_id, score_meta) or None."""
-    from phoenix_v4.content_banks.selector import FragmentContext, _collect_candidates
+    from phoenix_v4.content_banks.selector import (
+        FragmentContext,
+        _collect_candidates,
+        reflection_band_window,
+    )
 
     st = slot_type.strip().upper()
     aliases = _ENRICH_BANK_SLOT_TYPES.get(st, ())
@@ -193,6 +197,10 @@ def _try_content_bank_fallback(
     stems = list(reg.banks.keys())
     if not stems:
         return None
+    # Wire band window for REFLECTION: ch7/8 → bands {2,3}, ch9+ → {3,4}, earlier → None.
+    # Fixes self_worth/grief ch7/ch8 CONTENT GAP — atoms exist in pool but were not
+    # reaching the enrichment path because allowed_bands was never set on FragmentContext.
+    _bands = reflection_band_window(chapter_index0 + 1) if st == "REFLECTION" else None
     ctx = FragmentContext(
         topic_id=topic,
         persona_id=persona_id,
@@ -201,6 +209,7 @@ def _try_content_bank_fallback(
         chapter_index=chapter_index0,
         book_seed=seed,
         slot_key=seed_key,
+        allowed_bands=_bands,
     )
     pool: List[dict[str, Any]] = []
     for alias in aliases:

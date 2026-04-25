@@ -1,0 +1,307 @@
+# anxiety_healthcare_rns_scene_recognition_bank.yaml — healthcare_rns × anxiety scene recognition bank
+# 40 variants — collision_family distribution: handoff_threshold (7), patient_at_home (7), midnight_charting (6), attending_question (5), family_disconnect (7), post_shift_walk (8)
+bank_type: recognition
+persona: healthcare_rns
+topic: anxiety
+
+variants:
+  - variant_id: ahrn_001
+    collision_family: handoff_threshold
+    body: |
+      The handoff is in seven minutes and you are scanning the chart for the thing
+      you might have missed.
+      Not because you think you missed something.
+      Because you need to be certain before the responsibility transfers.
+
+  - variant_id: ahrn_002
+    collision_family: handoff_threshold
+    body: |
+      You have given this handoff a hundred times.
+      You know the format, the sequence, what matters.
+      Your voice is steady and you are watching their face to see if they look concerned
+      about the thing you are still uncertain about.
+
+  - variant_id: ahrn_003
+    collision_family: handoff_threshold
+    body: |
+      You documented everything correctly.
+      You are standing at the station reading it again
+      because correct and complete are two different things
+      and you want both before you leave.
+
+  - variant_id: ahrn_004
+    collision_family: handoff_threshold
+    body: |
+      The oncoming nurse is someone you trust.
+      You have already told her the relevant things.
+      You are still in the hallway.
+      You have not walked to the elevator yet.
+
+  - variant_id: ahrn_005
+    collision_family: handoff_threshold
+    body: |
+      You flagged it in the notes.
+      You flagged it verbally.
+      On the drive home you are thinking about whether the flag was specific enough.
+
+  - variant_id: ahrn_006
+    collision_family: handoff_threshold
+    body: |
+      The shift ended half an hour ago.
+      You are in the parking garage.
+      You are reviewing the handoff in your head without having decided to.
+
+  - variant_id: ahrn_007
+    collision_family: handoff_threshold
+    body: |
+      You asked about the patient before you clocked out.
+      They said stable.
+      You believe stable.
+      You are also parked outside the hospital at 7:22 pm and have not started the car yet.
+
+  - variant_id: ahrn_008
+    collision_family: patient_at_home
+    body: |
+      You are home.
+      The patient you are thinking about is not in crisis.
+      You know this because you checked before you left.
+      You are thinking about them anyway, in the way that does not respond to facts.
+
+  - variant_id: ahrn_009
+    collision_family: patient_at_home
+    body: |
+      They were nervous when you left.
+      You explained the plan.
+      They nodded.
+      Somewhere between the hospital and your front door, their face followed you home.
+
+  - variant_id: ahrn_010
+    collision_family: patient_at_home
+    body: |
+      It was a routine day for everyone except the patient in room four.
+      For them it was not routine.
+      You are eating dinner and their face is there, at the edge of the meal.
+
+  - variant_id: ahrn_011
+    collision_family: patient_at_home
+    body: |
+      You did not make an error.
+      You advocated correctly.
+      The outcome was acceptable.
+      You are awake at midnight holding the version where it could have gone differently.
+
+  - variant_id: ahrn_012
+    collision_family: patient_at_home
+    body: |
+      They were alone.
+      There was no one in the chair beside the bed.
+      You stayed an extra few minutes and you are not sure if it was enough
+      and you are home now and it is too late to know.
+
+  - variant_id: ahrn_013
+    collision_family: patient_at_home
+    body: |
+      The patient asked you a question and you gave them the right answer.
+      You are in your kitchen and you are wondering if the right answer was the answer they needed.
+
+  - variant_id: ahrn_014
+    collision_family: patient_at_home
+    body: |
+      You did not get to check back before the end of your shift.
+      You intended to.
+      The unit was busy.
+      The intention is what is with you now.
+
+  - variant_id: ahrn_015
+    collision_family: midnight_charting
+    body: |
+      It is eleven-forty and you are on the third chart of the night.
+      The words are correct.
+      Your eyes are scanning for the thing you already documented, just to be sure it is there.
+
+  - variant_id: ahrn_016
+    collision_family: midnight_charting
+    body: |
+      The charting should have taken twenty minutes.
+      It has taken longer because you keep rereading the entries
+      to confirm they reflect what actually happened, not just what you remember happening.
+
+  - variant_id: ahrn_017
+    collision_family: midnight_charting
+    body: |
+      You are documenting the night in a quiet station and the unit is calm.
+      You are still running through the decisions you made in the busy part of the shift,
+      checking each one against the documentation.
+
+  - variant_id: ahrn_018
+    collision_family: midnight_charting
+    body: |
+      You have not made an error.
+      You are charting as though preparing for the possibility that someone will look for one.
+      That is how you chart every time.
+
+  - variant_id: ahrn_019
+    collision_family: midnight_charting
+    body: |
+      The notes are thorough.
+      You added a line that probably did not need to be there
+      just to close the small gap between what was done and what you can verify was done.
+
+  - variant_id: ahrn_020
+    collision_family: midnight_charting
+    body: |
+      Your hands are still moving through the documentation.
+      The rest of you is still in the moment three hours ago
+      when three things were happening at once and you were choosing which one first.
+
+  - variant_id: ahrn_021
+    collision_family: attending_question
+    body: |
+      You knew the answer to the question before you called.
+      When you got on the phone you were less certain than you were before you dialed.
+      You said what you knew.
+      After the call you went back to check.
+
+  - variant_id: ahrn_022
+    collision_family: attending_question
+    body: |
+      You had a clinical concern.
+      You are allowed to call with clinical concerns.
+      You spent four minutes deciding whether this concern was substantial enough
+      before picking up the phone.
+
+  - variant_id: ahrn_023
+    collision_family: attending_question
+    body: |
+      The attending was not dismissive.
+      They listened, they responded, they gave an order.
+      You are still replaying the first three seconds of the call
+      trying to determine what their tone meant.
+
+  - variant_id: ahrn_024
+    collision_family: attending_question
+    body: |
+      You had a question.
+      You wrote it down.
+      By the time you were in front of them, you had already prepared for the possibility
+      that the question would seem obvious and they would wonder why you were asking.
+
+  - variant_id: ahrn_025
+    collision_family: attending_question
+    body: |
+      You asked and they answered.
+      On the walk back to the station you are running their answer
+      through every version of what you might have missed.
+
+  - variant_id: ahrn_026
+    collision_family: family_disconnect
+    body: |
+      They asked a question you answered three times today.
+      You answered it a fourth time.
+      They are scared and the information is not the thing they need
+      and the information is all you have to give.
+
+  - variant_id: ahrn_027
+    collision_family: family_disconnect
+    body: |
+      They think the plan is not enough.
+      The plan is appropriate for what is happening.
+      You have explained this twice.
+      Their fear is louder than your explanation and you are trying not to let that feel like failure.
+
+  - variant_id: ahrn_028
+    collision_family: family_disconnect
+    body: |
+      The family member is angry.
+      The anger is not about you.
+      You know this.
+      Your body received it like it was about you and you are still carrying it three hours into the shift.
+
+  - variant_id: ahrn_029
+    collision_family: family_disconnect
+    body: |
+      You gave them the update.
+      They wanted a different update.
+      You stayed present for their response.
+      On your walk to the next room your chest is tight in a way that started with that conversation.
+
+  - variant_id: ahrn_030
+    collision_family: family_disconnect
+    body: |
+      They keep asking to speak to the doctor.
+      You have called the doctor.
+      You are the one standing in the room.
+      You are doing the thing and being told you are not the right person to be doing the thing.
+
+  - variant_id: ahrn_031
+    collision_family: family_disconnect
+    body: |
+      You stayed with them longer than the task required because they were alone with something large.
+      You do not have infinite time.
+      You used some of it there.
+      You are now behind on everything else and you would do it the same way again.
+
+  - variant_id: ahrn_032
+    collision_family: family_disconnect
+    body: |
+      You were kind when you could not give them what they wanted.
+      That did not make the conversation easier.
+      You are at the nurses station now and that conversation is still in your shoulders.
+
+  - variant_id: ahrn_033
+    collision_family: post_shift_walk
+    body: |
+      You are in the parking lot and the shift is done.
+      Your feet have stopped moving and your mind is still inside.
+      The car keys are in your hand.
+
+  - variant_id: ahrn_034
+    collision_family: post_shift_walk
+    body: |
+      The unit doors closed behind you and something in you expected to feel lighter.
+      The weight is the same outside the building as it was inside.
+      You are walking to the car and it is with you.
+
+  - variant_id: ahrn_035
+    collision_family: post_shift_walk
+    body: |
+      You said goodbye to the next team.
+      You signed out.
+      You are fifty steps from the exit and you are already thinking about tomorrow's assignment.
+
+  - variant_id: ahrn_036
+    collision_family: post_shift_walk
+    body: |
+      The drive home is twenty minutes and you have used all of it most days.
+      Tonight you are in the driveway and the car is off
+      and you have not gone inside yet.
+
+  - variant_id: ahrn_037
+    collision_family: post_shift_walk
+    body: |
+      You called no one on the drive home.
+      The silence in the car felt like the only space where the shift was not required of you yet.
+      You sat in it until your driveway.
+
+  - variant_id: ahrn_038
+    collision_family: post_shift_walk
+    body: |
+      The shift was a bad one.
+      Not catastrophic — manageable, documented, handled.
+      You are at the kitchen table now and your hands are still.
+      The rest of you has not caught up to the stillness yet.
+
+  - variant_id: ahrn_039
+    collision_family: post_shift_walk
+    body: |
+      You changed out of scrubs and stood in the hallway for a minute.
+      Not exhausted enough to explain the pause.
+      Not fine enough to not need it.
+
+  - variant_id: ahrn_040
+    collision_family: post_shift_walk
+    body: |
+      You promised yourself you would decompress tonight.
+      You are lying down.
+      You are reviewing the shift in order, beginning to end,
+      checking your own work the way you check the chart.
