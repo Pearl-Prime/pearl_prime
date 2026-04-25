@@ -14,7 +14,39 @@
   "properties": {
     "book_plan_schema": {
       "type": "string",
-      "const": "1.0.0"
+      "enum": ["1.0.0", "2.0.0"],
+      "description": "1.0.0 = original Phase 0 schema (PR #632). 2.0.0 = adds master_format, flatten_exports, localized_titles per PR #631."
+    },
+    "master_format": {
+      "type": "string",
+      "enum": [
+        "color_vertical_webtoon",
+        "bw_page_manga",
+        "color_page_manga",
+        "direct_self_help_illustrated"
+      ],
+      "description": "v2 — single layered source format. Inherited from parent series_plan unless overridden."
+    },
+    "flatten_exports": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["bw_page_manga", "color_page_manga", "direct_self_help_illustrated"]
+      },
+      "uniqueItems": true,
+      "description": "v2 — additional flatten-export formats. Inherited from parent series_plan unless overridden."
+    },
+    "localized_titles": {
+      "type": "object",
+      "patternProperties": {
+        "^(en_US|ja_JP|ko_KR|zh_TW|zh_CN)$": { "type": "string" }
+      },
+      "additionalProperties": false,
+      "description": "v2 — per-locale book/episode title."
+    },
+    "render_manifest": {
+      "type": "string",
+      "description": "v2 — path to R2 artifact manifest (artifacts/manifests/manga_rendered_books/<series_id>/<book_id>.yaml) once rendered. Layer 2 cloud-native pattern."
     },
     "book_id": {
       "type": "string",

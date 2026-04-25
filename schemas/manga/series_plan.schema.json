@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://phoenix-omega.dev/schemas/manga/series_plan.schema.json",
   "title": "Manga Series Plan",
-  "description": "Per-series catalog plan. Drives format-aware production (color vertical webtoon vs B&W page manga vs color page manga vs direct self-help illustrated). Source-of-truth: artifacts/manga/MANGA_FULL_CATALOG_PLAN.md (PR #624). Format weights: artifacts/research/manga_vs_webtoon_decision_matrix_2026-04-25.yaml (PR #626).",
+  "description": "Per-series catalog plan. Drives format-aware production. v2 adds localized titles, master/flatten format split (per PR #631 — webtoon as master, B&W as flatten-export), and three-connector-lane targeting (unified CANVAS / LINE Manga Indies / Naver KR). Source-of-truth: artifacts/manga/MANGA_FULL_CATALOG_PLAN.md (PR #624). Format weights: artifacts/research/manga_vs_webtoon_decision_matrix_2026-04-25.yaml (PR #626). Connector lanes: artifacts/research/webtoon_master_reference_2026-04-25.md (PR #631).",
   "type": "object",
   "required": [
     "series_plan_schema",
@@ -18,12 +18,13 @@
   "properties": {
     "series_plan_schema": {
       "type": "string",
-      "const": "1.0.0"
+      "enum": ["1.0.0", "2.0.0"],
+      "description": "1.0.0 = original Phase 0 schema (PR #632). 2.0.0 = adds localized_titles, master_format, flatten_exports, connector_lane (PR #631 refinements)."
     },
     "series_id": {
       "type": "string",
       "minLength": 1,
-      "description": "Stable unique ID (e.g. 'stillness_press__ahjan__gen_z_professionals__anxiety')"
+      "description": "Stable unique ID (e.g. 'stillness_press__ahjan__en_US__anxiety__alarm_is_lying')"
     },
     "brand_id": {
       "type": "string",
@@ -39,6 +40,19 @@
       "type": "string",
       "enum": ["en_US", "ja_JP", "ko_KR", "zh_TW", "zh_CN"]
     },
+    "default_locale": {
+      "type": "string",
+      "enum": ["en_US", "ja_JP", "ko_KR", "zh_TW", "zh_CN"],
+      "description": "v2 — primary authoring locale. Defaults to `locale` if absent. Used by lettering pipeline to know which locale's text is canonical when localized variants are missing."
+    },
+    "localized_titles": {
+      "type": "object",
+      "patternProperties": {
+        "^(en_US|ja_JP|ko_KR|zh_TW|zh_CN)$": { "type": "string" }
+      },
+      "additionalProperties": false,
+      "description": "v2 — title in each market. Lets one layered source ship to multiple markets without re-rendering. Per PR #631 Decision 1: 50–99× cost reduction across 5 markets vs re-render-per-locale."
+    },
     "format": {
       "type": "string",
       "enum": [
@@ -47,7 +61,37 @@
         "color_page_manga",
         "direct_self_help_illustrated"
       ],
-      "description": "Production format. Drives panel_layout_template + render queue + target_platforms compatibility."
+      "description": "Production format declared in v1. In v2, this should equal master_format (kept for backward-compat)."
+    },
+    "master_format": {
+      "type": "string",
+      "enum": [
+        "color_vertical_webtoon",
+        "bw_page_manga",
+        "color_page_manga",
+        "direct_self_help_illustrated"
+      ],
+      "description": "v2 — the single layered source format. Per PR #631 Decision 4: webtoon is master; B&W is downstream flatten-export. Saves ~40% of page-manga production cost."
+    },
+    "flatten_exports": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["bw_page_manga", "color_page_manga", "direct_self_help_illustrated"]
+      },
+      "uniqueItems": true,
+      "description": "v2 — additional formats this layered source is exported as via downstream flatten passes. Empty for webtoon-only series."
+    },
+    "connector_lane": {
+      "type": "string",
+      "enum": [
+        "unified_canvas",
+        "line_manga_indies",
+        "naver_webtoon_kr",
+        "print_only",
+        "partner_required"
+      ],
+      "description": "v2 — which WEBTOON connector this series uses (per PR #631: three connectors needed, not one). unified_canvas covers en/es/fr/id/th/zh-TW/de. line_manga_indies covers ja_JP. naver_webtoon_kr covers ko_KR. print_only = KDP/Bookwalker/Comic C'moA path. partner_required = Piccoma/Bilibili/Kakao (no self-pub path)."
     },
     "panel_layout_template": {
       "type": "string",
@@ -59,13 +103,19 @@
       "minItems": 1,
       "items": {
         "type": "string",
-        "description": "Platform id from config/publishing/ai_policy_blockers.yaml (e.g. 'webtoon_canvas', 'amazon_kdp_comics'). Validator confirms each is ALLOWED or ALLOWED_GREY status."
+        "description": "Platform id from config/publishing/ai_policy_blockers.yaml. Validator confirms each is ALLOWED or ALLOWED_GREY status."
       },
       "description": "Where this series ships. Must be a subset of ALLOWED + ALLOWED_GREY platforms in ai_policy_blockers.yaml."
     },
+    "pending_partner_targets": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "v2 — PARTNER_ONLY platforms (Piccoma, Bilibili Comics, Kuaikan, Kakao Page) this series WOULD ship to once partnership lands. Not validated against ALLOWED list. Documents intent without unblocking."
+    },
     "title": {
       "type": "string",
-      "description": "Genre-led title from MANGA_FULL_CATALOG_PLAN (e.g. 'The 3am Mind' for horror sleep_anxiety)"
+      "description": "Genre-led title in `locale`. v2: also store in localized_titles.<locale> for cross-market shipping."
     },
     "genre": {
       "type": "string",
@@ -83,6 +133,10 @@
       ],
       "description": "Marketing genre. NOT 'self-help' — wellness substrate goes in topic field, never as the genre wrapper."
     },
+    "style": {
+      "type": "string",
+      "description": "Visual style tag from MANGA_FULL_CATALOG_PLAN (cozy_iyashikei, dark_psychological, power_progression, hyper_clean_cinematic, social_media_simulacra, webtoon_vertical_romance)."
+    },
     "topic": {
       "type": "string",
       "description": "Wellness topic substrate (anxiety, sleep_anxiety, burnout, etc.). Hidden from marketing, drives content."
@@ -96,7 +150,11 @@
     "main_character_lora_id": { "type": "string" },
     "main_character_image_path": {
       "type": "string",
-      "description": "Path to rendered portrait under assets/manga_catalog/, or null until rendered"
+      "description": "Path to rendered portrait under assets/manga_catalog/, or null until rendered. v2: prefer R2 manifest reference via main_character_manifest."
+    },
+    "main_character_manifest": {
+      "type": "string",
+      "description": "v2 — path to R2 artifact manifest (artifacts/manifests/manga_portraits/<character_id>.yaml). Replaces main_character_image_path for cloud-native flow per Layer 2 (PR #635)."
     },
     "chapters_target": {
       "type": "integer",

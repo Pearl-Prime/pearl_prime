@@ -1,0 +1,166 @@
+# Phoenix Omega — Format routing for the catalog rebuild generator.
+# Maps (locale, genre, style) → (master_format, flatten_exports, target_platforms,
+#                                  connector_lane, panel_layout_template).
+#
+# Source-of-truth refs:
+#   - artifacts/research/manga_vs_webtoon_decision_matrix_2026-04-25.yaml (PR #626 weights)
+#   - artifacts/research/webtoon_master_reference_2026-04-25.md (PR #631 — three connectors,
+#     webtoon-as-master)
+#   - config/publishing/ai_policy_blockers.yaml (only ALLOWED + ALLOWED_GREY platforms surface here)
+#
+# Used by scripts/manga/generate_series_plans_from_catalog.py.
+
+schema_version: "1.0.0"
+authority_doc: "artifacts/research/webtoon_master_reference_2026-04-25.md"
+
+# ── Default format per (locale, genre) — covers most cases ─────────────────
+# Per PR #631 Decision 4: webtoon is master, B&W is flatten-export.
+# So master_format defaults to color_vertical_webtoon for nearly every cell;
+# flatten_exports adds bw_page_manga where the genre has a strong B&W tradition.
+defaults_by_locale_genre:
+  en_US:
+    iyashikei:        { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    seinen:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    shonen:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    shojo:            { master: color_vertical_webtoon, flatten: [] }
+    horror:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    cultivation:      { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    manhwa:           { master: color_vertical_webtoon, flatten: [] }
+    webtoon_romance:  { master: color_vertical_webtoon, flatten: [] }
+    isekai:           { master: color_vertical_webtoon, flatten: [] }
+    josei_essay_manga: { master: direct_self_help_illustrated, flatten: [] }
+
+  ja_JP:
+    # JP is the only market where B&W is genuinely co-equal commercially.
+    # Per PR #626: 40% color webtoon / 45% B&W / 13% color page / 2% self-help.
+    # We still default to webtoon as master (cheaper to flatten) but flatten_exports
+    # is denser here.
+    iyashikei:        { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    seinen:           { master: bw_page_manga, flatten: [] }   # seinen psychological is print-first
+    shonen:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    shojo:            { master: color_vertical_webtoon, flatten: [color_page_manga] }
+    horror:           { master: bw_page_manga, flatten: [] }   # horror works strongest in B&W in JP
+    cultivation:      { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    manhwa:           { master: color_vertical_webtoon, flatten: [] }
+    webtoon_romance:  { master: color_vertical_webtoon, flatten: [] }
+    isekai:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    josei_essay_manga: { master: bw_page_manga, flatten: [] }
+
+  zh_TW:
+    iyashikei:        { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    seinen:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    shonen:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    shojo:            { master: color_vertical_webtoon, flatten: [] }
+    horror:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    cultivation:      { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    manhwa:           { master: color_vertical_webtoon, flatten: [] }
+    webtoon_romance:  { master: color_vertical_webtoon, flatten: [] }
+    isekai:           { master: color_vertical_webtoon, flatten: [] }
+    josei_essay_manga: { master: direct_self_help_illustrated, flatten: [] }
+
+  zh_CN:
+    # zh_CN catalog plans are documented but NOT rendered until partnership lands.
+    # Per PR #631: produce zh_CN catalog plans; do not include in Phase 0 connector buildout.
+    # Generator emits these with target_platforms = [amazon_kdp_comics] (global) and
+    # pending_partner_targets = [bilibili_comics, kuaikan_manhua].
+    iyashikei:        { master: color_vertical_webtoon, flatten: [] }
+    seinen:           { master: color_vertical_webtoon, flatten: [] }
+    shonen:           { master: color_vertical_webtoon, flatten: [] }
+    shojo:            { master: color_vertical_webtoon, flatten: [] }
+    horror:           { master: color_vertical_webtoon, flatten: [] }
+    cultivation:      { master: color_vertical_webtoon, flatten: [] }
+    manhwa:           { master: color_vertical_webtoon, flatten: [] }
+    webtoon_romance:  { master: color_vertical_webtoon, flatten: [] }
+    isekai:           { master: color_vertical_webtoon, flatten: [] }
+    josei_essay_manga: { master: color_vertical_webtoon, flatten: [] }
+
+# ── target_platforms by (locale, master_format) ────────────────────────────
+# Only ALLOWED + ALLOWED_GREY platforms surface here. PARTNER_ONLY platforms
+# go to pending_partner_targets[] for documentation, not target_platforms[].
+target_platforms_by_locale_format:
+  en_US:
+    color_vertical_webtoon: [webtoon_canvas, amazon_kdp_comics, globalcomix]
+    bw_page_manga:          [amazon_kdp_comics, globalcomix]
+    color_page_manga:       [amazon_kdp_comics, globalcomix, kobo, apple_books]
+    direct_self_help_illustrated: [amazon_kdp_comics, kobo, apple_books, google_play_books]
+
+  ja_JP:
+    color_vertical_webtoon: [line_manga_indies, bookwalker]
+    bw_page_manga:          [bookwalker, comic_cmoa, line_manga_indies, amazon_kdp_comics]
+    color_page_manga:       [bookwalker, amazon_kdp_comics]
+    direct_self_help_illustrated: [bookwalker, amazon_kdp_comics, kobo, apple_books]
+
+  zh_TW:
+    color_vertical_webtoon: [webtoon_canvas, line_manga_indies, bookwalker]
+    bw_page_manga:          [bookwalker, amazon_kdp_comics]
+    color_page_manga:       [bookwalker, amazon_kdp_comics]
+    direct_self_help_illustrated: [bookwalker, amazon_kdp_comics, kobo, apple_books]
+
+  zh_CN:
+    # No native Chinese platform is ALLOWED — all PARTNER_ONLY.
+    # KDP Comics is ALLOWED globally (Amazon ships kindle to mainland with limitations).
+    color_vertical_webtoon: [amazon_kdp_comics]
+    bw_page_manga:          [amazon_kdp_comics]
+    color_page_manga:       [amazon_kdp_comics]
+    direct_self_help_illustrated: [amazon_kdp_comics, kobo]
+
+# ── pending_partner_targets by locale (documented intent only) ─────────────
+pending_partner_targets_by_locale:
+  en_US: []
+  ja_JP: [piccoma_smartoon, line_manga_originals]
+  zh_TW: [line_manga_originals]
+  zh_CN: [bilibili_comics, kuaikan_manhua]
+
+# ── connector_lane by (locale, master_format) ─────────────────────────────
+# Per PR #631 Decision 1.1: three WEBTOON connectors needed, not one.
+connector_lane_by_locale_format:
+  en_US:
+    color_vertical_webtoon: unified_canvas
+    bw_page_manga:          print_only
+    color_page_manga:       print_only
+    direct_self_help_illustrated: print_only
+
+  ja_JP:
+    color_vertical_webtoon: line_manga_indies
+    bw_page_manga:          print_only
+    color_page_manga:       print_only
+    direct_self_help_illustrated: print_only
+
+  zh_TW:
+    color_vertical_webtoon: unified_canvas    # zh-TW IS in unified CANVAS
+    bw_page_manga:          print_only
+    color_page_manga:       print_only
+    direct_self_help_illustrated: print_only
+
+  zh_CN:
+    color_vertical_webtoon: partner_required
+    bw_page_manga:          partner_required
+    color_page_manga:       partner_required
+    direct_self_help_illustrated: print_only
+
+# ── panel_layout_template by master_format ────────────────────────────────
+panel_layout_template_by_format:
+  color_vertical_webtoon:        config/manga/panel_layout_templates/vertical_scroll_webtoon.yaml
+  bw_page_manga:                 config/manga/panel_layout_templates/bw_page_rtl.yaml
+  color_page_manga:              config/manga/panel_layout_templates/color_page.yaml
+  direct_self_help_illustrated:  config/manga/panel_layout_templates/self_help_illustrated.yaml
+
+# ── style → master_format override (when style strongly suggests a format) ─
+# Style tags from MANGA_FULL_CATALOG_PLAN.md "Style" column.
+style_overrides:
+  cozy_iyashikei:                 # cozy iyashikei works in both; prefer webtoon master
+    keep_default: true
+  dark_psychological:             # seinen psychological is print-first in JP, webtoon-OK elsewhere
+    locale_specific:
+      ja_JP: bw_page_manga
+      en_US: color_vertical_webtoon
+      zh_TW: color_vertical_webtoon
+      zh_CN: color_vertical_webtoon
+  power_progression:              # Solo Leveling tier — webtoon master always
+    force_master: color_vertical_webtoon
+  hyper_clean_cinematic:          # premium color webtoon
+    force_master: color_vertical_webtoon
+  webtoon_vertical_romance:       # definitionally vertical
+    force_master: color_vertical_webtoon
+  social_media_simulacra:         # mobile-native
+    force_master: color_vertical_webtoon
