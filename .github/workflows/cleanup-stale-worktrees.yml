@@ -1,0 +1,109 @@
+name: Cleanup stale agent branches
+
+# Phoenix Omega cloud-native migration — Layer 1.
+# Nightly job that prunes agent/* branches whose PR has been merged or
+# closed for more than the retention window. Prevents the disk-full
+# pattern that motivated the cloud-native migration (32 GB of stale
+# .claude/worktrees from never-cleaned agent branches).
+
+on:
+  schedule:
+    # 03:17 UTC daily — off-peak for both US and JP
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+    inputs:
+      retention_days:
+        description: "Days after PR merge/close before deletion"
+        type: number
+        default: 7
+      dry_run:
+        description: "Print what would be deleted without deleting"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    env:
+      PHOENIX_OMEGA_REMOTE: github-actions
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set inputs
+        id: inputs
+        run: |
+          echo "retention_days=${{ inputs.retention_days || 7 }}" >> "$GITHUB_OUTPUT"
+          echo "dry_run=${{ inputs.dry_run || 'false' }}" >> "$GITHUB_OUTPUT"
+
+      - name: Prune merged/closed agent branches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RETENTION_DAYS: ${{ steps.inputs.outputs.retention_days }}
+          DRY_RUN: ${{ steps.inputs.outputs.dry_run }}
+        run: |
+          set -euo pipefail
+          echo "═══ Phoenix Omega — Stale Agent Branch Cleanup ═══"
+          echo "Retention: ${RETENTION_DAYS}d   Dry-run: ${DRY_RUN}"
+          echo ""
+
+          cutoff_iso=$(date -u -d "${RETENTION_DAYS} days ago" +%Y-%m-%dT%H:%M:%SZ)
+          echo "Cutoff: ${cutoff_iso}"
+          echo ""
+
+          deleted=0
+          skipped=0
+
+          # Enumerate remote agent/* branches
+          git ls-remote --heads origin 'agent/*' | awk '{print $2}' | sed 's|refs/heads/||' | while read -r branch; do
+            # Find the most recent PR for this branch (any state)
+            pr=$(gh pr list --state all --head "$branch" \
+                   --json number,state,mergedAt,closedAt --limit 1 \
+                   --jq '.[0]')
+            if [ -z "$pr" ] || [ "$pr" = "null" ]; then
+              echo "skip  ${branch}: no PR ever opened"
+              skipped=$((skipped+1))
+              continue
+            fi
+
+            state=$(echo "$pr" | jq -r '.state')
+            merged_at=$(echo "$pr" | jq -r '.mergedAt')
+            closed_at=$(echo "$pr" | jq -r '.closedAt')
+
+            # When did this PR finish? Pick mergedAt if merged, closedAt if closed
+            finished_at=""
+            if [ "$state" = "MERGED" ] && [ "$merged_at" != "null" ]; then
+              finished_at="$merged_at"
+            elif [ "$state" = "CLOSED" ] && [ "$closed_at" != "null" ]; then
+              finished_at="$closed_at"
+            else
+              echo "skip  ${branch}: PR is OPEN"
+              skipped=$((skipped+1))
+              continue
+            fi
+
+            # Compare finished_at vs cutoff_iso lexically (ISO 8601 sorts correctly)
+            if [ "$finished_at" \< "$cutoff_iso" ]; then
+              if [ "$DRY_RUN" = "true" ]; then
+                echo "would-delete  ${branch} (state=${state} finished=${finished_at})"
+              else
+                echo "delete  ${branch} (state=${state} finished=${finished_at})"
+                git push origin --delete "$branch" 2>&1 | grep -v "^$" || true
+              fi
+              deleted=$((deleted+1))
+            else
+              echo "keep  ${branch} (within retention, finished=${finished_at})"
+              skipped=$((skipped+1))
+            fi
+          done
+
+          echo ""
+          echo "═══ Summary ═══"
+          echo "Deleted: ${deleted}"
+          echo "Skipped: ${skipped}"
