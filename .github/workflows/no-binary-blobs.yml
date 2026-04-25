@@ -1,0 +1,89 @@
+name: No binary blobs
+
+# Phoenix Omega cloud-native migration — Layer 2.
+# Reject PRs that add binary blobs >1 MB to the repo. Forces use of
+# Cloudflare R2 (via scripts/artifacts/r2_sync.py) for binary artifacts.
+# See docs/CLOUD_NATIVE_AGENTS_LAYER2.md for the manifest pattern.
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    env:
+      MAX_BYTES: 1048576       # 1 MB
+      ALLOWED_PATHS_REGEX: ^(\\.git/|tests/fixtures/|docs/img/|skills/.+/img/)
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve base
+        id: base
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          echo "base=${base}" >> "$GITHUB_OUTPUT"
+
+      - name: Scan for new large binary blobs
+        env:
+          BASE_SHA: ${{ steps.base.outputs.base }}
+        run: |
+          set -euo pipefail
+          echo "Scanning diff vs ${BASE_SHA} for binary blobs > ${MAX_BYTES} bytes"
+          echo ""
+
+          # List ADDED files only (status A in name-status output)
+          mapfile -t added < <(git diff --name-status "${BASE_SHA}"...HEAD | awk '$1=="A"{print $2}')
+
+          if [ ${#added[@]} -eq 0 ]; then
+            echo "✓ No new files added — pass."
+            exit 0
+          fi
+
+          violations=()
+          for f in "${added[@]}"; do
+            [ -f "$f" ] || continue
+
+            # Allowlist (small fixtures, doc images, skill assets)
+            if [[ "$f" =~ ${ALLOWED_PATHS_REGEX} ]]; then
+              continue
+            fi
+
+            size=$(wc -c < "$f" | tr -d ' ')
+            if [ "$size" -le "${MAX_BYTES}" ]; then
+              continue
+            fi
+
+            # Heuristic binary detection: NUL byte in first 8 KB, or known
+            # binary extension. Text files >1 MB still allowed.
+            if head -c 8192 "$f" | LC_ALL=C grep -q $'\\0' \
+               || [[ "$f" =~ \\.(png|jpg|jpeg|webp|pdf|epub|mp3|m4a|wav|mp4|mov|psd|zip|tar|gz|bz2|xz|woff|woff2|ttf|otf)$ ]]; then
+              violations+=("${f} (${size} bytes)")
+            fi
+          done
+
+          if [ ${#violations[@]} -gt 0 ]; then
+            echo "❌ ${#violations[@]} binary blob(s) > ${MAX_BYTES} bytes added to the repo:"
+            printf '   - %s\\n' "${violations[@]}"
+            echo ""
+            echo "Phoenix Omega Layer 2 policy: binary artifacts live in"
+            echo "Cloudflare R2, not in the repo. Use:"
+            echo ""
+            echo "  python scripts/artifacts/r2_sync.py push \\\\"
+            echo "    --namespace <namespace> --src <dir> --series-id ... --book-id ..."
+            echo ""
+            echo "and commit the generated manifest YAML instead. See"
+            echo "docs/CLOUD_NATIVE_AGENTS_LAYER2.md for details."
+            exit 1
+          fi
+
+          echo "✓ No oversize binary blobs in this PR."
