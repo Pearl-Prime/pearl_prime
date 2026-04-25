@@ -480,6 +480,8 @@ def render_bubbles_onto_panel(
     bubble_style_config: dict[str, Any] | None = None,
     out_path: Path | None = None,
     coverage_limit: float = 0.30,
+    locale: str = "en_US",
+    default_locale: str = "en_US",
 ) -> dict[str, Any]:
     """Composite speech bubbles, SFX, and captions onto a single panel PNG.
 
@@ -491,17 +493,30 @@ def render_bubbles_onto_panel(
     panel_image_path : Path
         Source panel PNG.
     dialogue_lines : list[dict]
-        Normalised dialogue line dicts from lettering_spec_v2.
+        Normalised dialogue line dicts from lettering_spec (v2 or v3). For
+        v3 specs the per-line ``text_by_locale`` dict is consulted for the
+        active ``locale`` via ``locale_resolver``; v2 specs (single ``text``
+        field) work unchanged.
     sfx : list[str]
-        Sound-effect labels (rendered directly on art, not in bubbles).
+        Sound-effect labels — already locale-resolved by the caller.
+        Render-direct on art (no bubble wrapper).
     narrator_caption : str | None
-        Narrator caption text (rendered as a full-width strip at top or bottom).
+        Narrator caption — already locale-resolved by the caller. Rendered
+        as a full-width strip at top.
     bubble_style_config : dict, optional
         Genre-level style overrides (not yet used in v1 — reserved).
     out_path : Path, optional
-        Output path.  Defaults to ``{stem}_bubbled.png`` beside the source.
+        Output path. Defaults to ``{stem}_bubbled.png`` beside the source.
     coverage_limit : float
         Fraction of panel area that bubbles may occupy (default 0.30).
+    locale : str
+        Active locale for text resolution (e.g. ``"ja_JP"``). Per PR #631
+        Decision 1: dialogue text is composed AT compose-time per market
+        — same render, multiple locales, 50–99× cost saving across 5 markets.
+    default_locale : str
+        Fallback locale when ``text_by_locale[locale]`` is absent. Defaults
+        to ``"en_US"``. v2 specs without ``text_by_locale`` fall back to
+        their ``text`` field regardless.
 
     Returns
     -------
@@ -543,8 +558,17 @@ def render_bubbles_onto_panel(
         layout_records.append({"type": "caption", "bbox": cap_bbox, "text": narrator_caption})
 
     # ── Dialogue bubbles ────────────────────────────────────────────
+    # Locale-aware text resolution (PR #631 Decision 1 / lettering v3).
+    from phoenix_v4.manga.chapter.locale_resolver import (  # type: ignore
+        resolve_dialogue_text,
+        resolve_font_override,
+    )
+
     for line in dialogue_lines:
-        text: str = str(line.get("text") or "").strip()
+        text_value = resolve_dialogue_text(
+            line, locale=locale, default_locale=default_locale
+        )
+        text: str = (text_value or "").strip()
         if not text:
             continue
 
@@ -552,7 +576,9 @@ def render_bubbles_onto_panel(
         bubble_style: str = str(line.get("bubble_style") or "round_normal")
         position_hint: str = str(line.get("position_hint") or zone_seq[zone_idx % len(zone_seq)])
         tail_style: str = str(line.get("tail_style") or "pointer")
-        font_override: Any = line.get("font_override")
+        font_override: Any = resolve_font_override(
+            line, locale=locale, default_locale=default_locale
+        )
 
         # Font
         bold = intensity in ("excited", "shouting", "screaming") or font_override == "bold_action"
@@ -664,6 +690,8 @@ def render_bubbles_on_panels(
     panel_images_manifest: Mapping[str, Any],
     bubble_style_config: Mapping[str, Any] | None,
     out_dir: Path,
+    *,
+    locale: str | None = None,
 ) -> dict[str, Any]:
     """Render speech bubbles for all non-silent panels; return updated manifest.
 
@@ -672,21 +700,36 @@ def render_bubbles_on_panels(
     chapter_script : dict
         The chapter_script writer handoff artifact.
     lettering_spec : dict
-        lettering_spec v2 artifact (schema_version "2.0.0" preferred; falls
-        back gracefully if v1 with empty dialogue_lines).
+        lettering_spec artifact. v2 specs (single ``text`` per line) work
+        unchanged. v3 specs (``text_by_locale`` + ``sfx_by_locale`` + ...)
+        are composed per-locale at this stage — same render, multiple
+        locales (PR #631 Decision 1).
     panel_images_manifest : dict
         Existing panel_images_manifest artifact.
     bubble_style_config : dict or None
         Genre-level style config (reserved for v2 — pass None for defaults).
     out_dir : Path
         Directory to write ``*_bubbled.png`` files.
+    locale : str, optional
+        Active locale to compose for. Defaults to
+        ``lettering_spec["default_locale"]`` or ``"en_US"``. Pass an
+        explicit locale (e.g. ``"ja_JP"``) to render the same panels for
+        a different market.
 
     Returns
     -------
     dict  Updated panel_images_manifest with bubbled panel paths where applied.
     """
+    from phoenix_v4.manga.chapter.locale_resolver import (  # type: ignore
+        resolve_narrator_caption,
+        resolve_sfx,
+    )
+
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    default_locale = str(lettering_spec.get("default_locale") or "en_US")
+    active_locale = str(locale or default_locale)
 
     # Index lettering spec by panel_id
     lettering_by_pid: dict[str, dict[str, Any]] = {}
@@ -714,8 +757,13 @@ def render_bubbles_on_panels(
             continue
 
         dialogue_lines: list[dict[str, Any]] = list(letter.get("dialogue_lines") or [])
-        sfx: list[str] = list(letter.get("sfx") or [])
-        narrator_caption: str | None = letter.get("narrator_caption")
+        # Locale-aware sfx + narrator_caption resolution (v3) with v2 fallback.
+        sfx: list[str] = list(
+            resolve_sfx(letter, locale=active_locale, default_locale=default_locale)
+        )
+        narrator_caption: str | None = resolve_narrator_caption(
+            letter, locale=active_locale, default_locale=default_locale
+        )
 
         if not dialogue_lines and not sfx and not narrator_caption:
             continue
@@ -728,6 +776,8 @@ def render_bubbles_on_panels(
             narrator_caption,
             bubble_style_config=dict(bubble_style_config or {}),
             out_path=bubbled_path,
+            locale=active_locale,
+            default_locale=default_locale,
         )
         # Update the manifest entry to point to the bubbled PNG
         panel_entry["path"] = str(bubbled_path)
