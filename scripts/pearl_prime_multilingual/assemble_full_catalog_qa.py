@@ -204,6 +204,7 @@ def assemble_book(item: dict, render_dir: Path, locale: str, quality_profile: st
         "--atoms-root", atoms_root,
         "--locale", locale,
         "--pipeline-mode", "spine",
+        "--exercise-journeys",
         "--render-book",
         "--render-dir", str(render_dir),
         "--quality-profile", quality_profile,
