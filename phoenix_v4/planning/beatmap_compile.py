@@ -41,14 +41,14 @@ SOMATIC_FULL_RUNTIME_FORMATS = frozenset(
 # Canonical slot types per V2 somatic section_01 … section_10.
 SOMATIC_10_SLOT_GRID = [
     "HOOK",  # section_01
-    "SCENE",  # section_02
+    "STORY",  # section_02 — RECOGNITION arc-position; engine bank via persona_atoms["STORY"]
     "REFLECTION",  # section_03
     "EXERCISE",  # section_04 — awareness phase
-    "SCENE",  # section_05
+    "STORY",  # section_05 — MECHANISM_PROOF arc-position; engine bank via persona_atoms["STORY"]
     "TEACHER_DOCTRINE",  # section_06 — mechanism / teacher voice
     "REFLECTION",  # section_07
     "EXERCISE",  # section_08 — regulation phase
-    "SCENE",  # section_09
+    "STORY",  # section_09 — TURNING_POINT arc-position; engine bank via persona_atoms["STORY"]
     "INTEGRATION",  # section_10
 ]
 

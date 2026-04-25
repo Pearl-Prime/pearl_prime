@@ -898,10 +898,13 @@ def select_enrichment(
             teacher_expand_pool: Optional[List[dict]] = None
             teacher_primary_idx: Optional[int] = None
 
-            # 0) Story schedule: named-character arcs replace SCENE slots at section indices 2/5/9.
+            # 0) Story schedule: named-character arcs replace SCENE/STORY slots at section indices 2/5/9.
             # section_index is 1-based (slot_i + 1). StorySchedule keys: (chapter_number, section_index).
+            # STORY check added 2026-04-26 alongside SOMATIC_10_SLOT_GRID sec 2/5/9 SCENE→STORY change:
+            # preserves story_schedule routing for personas with story_atoms/anchored coverage (gen_z_professionals × anxiety today);
+            # personas without coverage fall through to persona_atoms["STORY"] waterfall (engine bank + generic 859-bank merged).
             _sec_idx = slot_i + 1
-            if stype == "SCENE" and _sec_idx in SCENE_SECTION_INDICES:
+            if stype in ("SCENE", "STORY") and _sec_idx in SCENE_SECTION_INDICES:
                 _sched_slot = _story_schedule.get(bm_ch.number, _sec_idx)
                 if _sched_slot is not None and _sched_slot.text:
                     content = _sched_slot.text
