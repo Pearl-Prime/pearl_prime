@@ -1,13 +1,48 @@
+arc_id: gen_z_student_anxiety_spiral_F003_gen
 persona: gen_z_student
 topic: anxiety
 engine: spiral
-format_id: F003
-arc_shape: descent_ascent
+format: F003
 chapter_count: 6
-engine_angle: recursive thought loops, mental replay, cognitive circles
-grounding_environment: campus
-opening_intensity: 2
-peak_intensity: 4
-closing_intensity: 1
-somatic_density: 0.6
-teacher_chapter_probability: 0.3
+emotional_curve:
+- 1
+- 2
+- 3
+- 4
+- 5
+- 2
+emotional_temperature_curve:
+  1: cool
+  2: cool
+  3: warm
+  4: warm
+  5: hot
+  6: hot
+chapter_intent:
+  1: establish_mask
+  2: expose_cost
+  3: destabilize_strategy
+  4: reveal_hidden_belief
+  5: confrontation
+  6: embodied_identity
+emotional_role_sequence:
+- recognition
+- destabilization
+- reframe
+- reframe
+- destabilization
+- integration
+reflection_strategy_sequence:
+- didactic
+- socratic
+- narrative_embedded
+- didactic
+- socratic
+- narrative_embedded
+cost_chapter_index: 4
+resolution_type: internal_shift_only
+motif:
+  primary_symbol: alarm
+  recurring_image: chest_and_phone
+  recurring_question: What is your body trying to tell you?
+  tonal_signature: restrained_clarity
