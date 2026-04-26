@@ -78,6 +78,52 @@ def test_dry_run_against_live_strategic_docs():
     assert "parsed" in proc.stdout.lower()
 
 
+def test_brand_metadata_affinity_picks_up_brand_id_tags():
+    """warrior_calm_cultivation must pick up `cultivation` tag from brand_id."""
+    mod = _import_module()
+    tags = mod.derive_brand_tags("Burnout · Inner Peace · Shonen", "warrior_calm_cultivation")
+    assert "cultivation" in tags
+    assert "warrior" in tags
+    assert "burnout" in tags
+    assert "shonen" in tags
+
+
+def test_distribute_with_spread_flagship_covers_all_15_genres():
+    """Per operator directive: flagship target=16 must produce 1 series in every genre + 1 surplus."""
+    mod = _import_module()
+    strategic = {"iyashikei": 30.0, "dark_fantasy": 25.0, "psychological_horror": 20.0}
+    affinity = {g: 0.5 for g in mod.VALID_GENRES}
+    affinity["iyashikei"] = 1.0  # primary
+    counts = mod.distribute_with_spread(
+        target_series=16, strategic_alloc=strategic,
+        metadata_affinity=affinity, tier="flagship",
+    )
+    assert sum(counts.values()) == 16
+    nonzero = sum(1 for c in counts.values() if c > 0)
+    assert nonzero == 15, f"expected all 15 genres represented; got {nonzero}"
+    # Primary genre must have ≥2 (the surplus)
+    assert counts["iyashikei"] >= 2
+
+
+def test_distribute_with_spread_niche_concentrates_to_top_5():
+    """Niche target=5 should distribute to the top-5 genres by combined weight."""
+    mod = _import_module()
+    strategic = {"action_battle": 35.0, "historical_period": 30.0}
+    affinity = {g: 0.0 for g in mod.VALID_GENRES}
+    affinity["action_battle"] = 1.0
+    affinity["historical_period"] = 0.8
+    affinity["dark_fantasy"] = 0.5
+    counts = mod.distribute_with_spread(
+        target_series=5, strategic_alloc=strategic,
+        metadata_affinity=affinity, tier="niche",
+    )
+    assert sum(counts.values()) == 5
+    nonzero = sum(1 for c in counts.values() if c > 0)
+    assert nonzero == 5, f"niche target=5 should fill exactly 5 genres; got {nonzero}"
+    # Top weight should be in the primary genre
+    assert counts["action_battle"] >= 1
+
+
 def test_emit_against_fixtures():
     """Generator must emit a catalog plan with the auto-generated banner header."""
     mod = _import_module()

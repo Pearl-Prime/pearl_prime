@@ -97,6 +97,204 @@ DISPLAY_TO_SLUG = {
 }
 
 
+# ─── brand-metadata → genre affinity ───────────────────────────────────────
+#
+# Per operator directive: every brand × every genre × every locale should
+# produce ≥1 series_plan with a brand-metadata-weighted distribution.
+# Strategic %-allocation from GENRE_PORTFOLIO_PLAN is the anchor; brand
+# description tags add affinity adjustments; uniform baseline ensures every
+# genre gets at least a small share.
+#
+# Tag → genre affinity weights derived from brand description keywords. Each
+# brand's description (e.g. "Anxiety · Somatic · Sleep · Josei adult women")
+# tokenizes into tags; tags map to genre boosts (additive). Used as the
+# "metadata affinity" leg of distribute_genres() below.
+
+# How much each strategy leg contributes to the final per-genre weight.
+# Sum to 1.0. Flagship tier gets more weight on uniform baseline (more spread);
+# niche tier gets more weight on strategic anchor (more concentration).
+DISTRIBUTION_WEIGHTS = {
+    "flagship": {"strategic": 0.55, "metadata": 0.30, "baseline": 0.15},
+    "core":     {"strategic": 0.65, "metadata": 0.25, "baseline": 0.10},
+    "niche":    {"strategic": 0.75, "metadata": 0.20, "baseline": 0.05},
+    "unknown":  {"strategic": 0.60, "metadata": 0.30, "baseline": 0.10},
+}
+
+# Tag → per-genre affinity scores (0.0–1.0). Strict mapping from brand
+# description keywords to genre relevance. Multiple tags per brand sum.
+# Genres not listed for a tag get 0.0 contribution from that tag.
+TAG_GENRE_AFFINITY = {
+    # Wellness / topic tags
+    "anxiety":            {"iyashikei": 0.7, "psychological_horror": 0.6, "supernatural_mystery": 0.4, "psychological_thriller": 0.3, "school_coming_of_age": 0.3},
+    "somatic":            {"iyashikei": 0.7, "supernatural_mystery": 0.4, "dark_fantasy": 0.3, "romance_josei_drama": 0.2},
+    "sleep":              {"iyashikei": 0.6, "supernatural_mystery": 0.5, "psychological_horror": 0.4, "psychological_thriller": 0.2},
+    "burnout":            {"workplace_drama": 0.7, "sci_fi_cyberpunk": 0.5, "isekai": 0.5, "iyashikei": 0.3},
+    "overthinking":       {"psychological_thriller": 0.8, "sci_fi_cyberpunk": 0.4, "psychological_horror": 0.3, "supernatural_mystery": 0.2},
+    "psychology":         {"psychological_thriller": 0.7, "psychological_horror": 0.5, "supernatural_mystery": 0.3, "dark_fantasy": 0.3},
+    "trauma":             {"dark_fantasy": 0.6, "psychological_horror": 0.5, "romance_josei_drama": 0.4, "historical_period": 0.3},
+    "grief":              {"dark_fantasy": 0.6, "supernatural_mystery": 0.6, "iyashikei": 0.3, "historical_period": 0.4, "romance_josei_drama": 0.3},
+    "social_anxiety":     {"romance_josei_drama": 0.5, "iyashikei": 0.4, "school_coming_of_age": 0.5, "supernatural_mystery": 0.3, "workplace_drama": 0.3},
+    "relationships":      {"romance_josei_drama": 0.7, "iyashikei": 0.3, "workplace_drama": 0.3, "school_coming_of_age": 0.3},
+    "boundaries":         {"romance_josei_drama": 0.5, "workplace_drama": 0.4, "psychological_thriller": 0.3, "iyashikei": 0.3},
+    "self_worth":         {"romance_josei_drama": 0.4, "isekai": 0.5, "school_coming_of_age": 0.4, "action_battle": 0.4, "historical_period": 0.3},
+    "imposter_syndrome":  {"workplace_drama": 0.6, "psychological_thriller": 0.5, "isekai": 0.5, "school_coming_of_age": 0.4, "sports_competition": 0.4},
+    "courage":            {"action_battle": 0.7, "dark_fantasy": 0.5, "historical_period": 0.5, "sports_competition": 0.5, "isekai": 0.4},
+    "purpose":            {"historical_period": 0.5, "action_battle": 0.4, "dark_fantasy": 0.4, "isekai": 0.3, "iyashikei": 0.3},
+    "spiritual":          {"supernatural_mystery": 0.6, "cultivation_martial": 0.5, "iyashikei": 0.4, "historical_period": 0.3},
+    "mindfulness":        {"iyashikei": 0.7, "supernatural_mystery": 0.3, "cultivation_martial": 0.3},
+    "trauma_path":        {"dark_fantasy": 0.6, "psychological_horror": 0.5, "supernatural_mystery": 0.4, "iyashikei": 0.3},
+    "performance":        {"sports_competition": 0.7, "workplace_drama": 0.5, "action_battle": 0.4, "psychological_thriller": 0.3},
+    "adhd":               {"sports_competition": 0.6, "psychological_thriller": 0.4, "school_coming_of_age": 0.4, "supernatural_mystery": 0.3},
+    "focus":              {"sports_competition": 0.5, "psychological_thriller": 0.4, "iyashikei": 0.4, "cultivation_martial": 0.4},
+    "financial":          {"workplace_drama": 0.6, "sports_competition": 0.4, "historical_period": 0.3},
+    "motivation":         {"sports_competition": 0.5, "action_battle": 0.5, "isekai": 0.4, "school_coming_of_age": 0.4},
+    "memoir":             {"iyashikei": 0.4, "historical_period": 0.5, "romance_josei_drama": 0.4, "supernatural_mystery": 0.3},
+    "legacy":             {"historical_period": 0.6, "dark_fantasy": 0.4, "action_battle": 0.4},
+    "tech":               {"sci_fi_cyberpunk": 0.8, "workplace_drama": 0.5, "psychological_thriller": 0.4, "isekai": 0.3},
+    "digital":            {"sci_fi_cyberpunk": 0.7, "workplace_drama": 0.4, "supernatural_mystery": 0.3},
+    "warrior":            {"action_battle": 0.7, "cultivation_martial": 0.6, "historical_period": 0.5, "dark_fantasy": 0.4, "mecha": 0.3},
+    "battle":             {"action_battle": 0.8, "dark_fantasy": 0.5, "cultivation_martial": 0.5, "mecha": 0.4, "historical_period": 0.3},
+    "cultivation":        {"cultivation_martial": 0.9, "action_battle": 0.4, "historical_period": 0.4, "supernatural_mystery": 0.3},
+    "qi":                 {"cultivation_martial": 0.8, "iyashikei": 0.3, "supernatural_mystery": 0.3},
+    "stoic":              {"historical_period": 0.5, "dark_fantasy": 0.4, "action_battle": 0.4, "psychological_thriller": 0.3},
+    "longevity":          {"iyashikei": 0.5, "historical_period": 0.4, "supernatural_mystery": 0.3, "romance_josei_drama": 0.3},
+    "biology":            {"sci_fi_cyberpunk": 0.5, "iyashikei": 0.4, "supernatural_mystery": 0.3},
+    "isekai":             {"isekai": 0.9, "dark_fantasy": 0.4, "action_battle": 0.3, "school_coming_of_age": 0.3},
+    "supernatural":       {"supernatural_mystery": 0.8, "psychological_horror": 0.4, "dark_fantasy": 0.4, "cultivation_martial": 0.3},
+    "devotion":           {"supernatural_mystery": 0.5, "cultivation_martial": 0.4, "iyashikei": 0.4, "historical_period": 0.3},
+    "spiritual_grounding": {"supernatural_mystery": 0.6, "iyashikei": 0.4, "cultivation_martial": 0.4},
+    # Demographic / register tags
+    "josei":              {"romance_josei_drama": 0.4, "iyashikei": 0.4, "supernatural_mystery": 0.3, "psychological_thriller": 0.2, "workplace_drama": 0.3},
+    "shojo":              {"romance_josei_drama": 0.5, "school_coming_of_age": 0.4, "supernatural_mystery": 0.3},
+    "seinen":             {"psychological_thriller": 0.4, "dark_fantasy": 0.4, "sci_fi_cyberpunk": 0.3, "historical_period": 0.3, "workplace_drama": 0.3, "mecha": 0.3},
+    "shonen":             {"action_battle": 0.5, "sports_competition": 0.4, "isekai": 0.4, "school_coming_of_age": 0.3, "cultivation_martial": 0.3},
+    "manhwa":             {"sci_fi_cyberpunk": 0.4, "romance_josei_drama": 0.4, "isekai": 0.4, "action_battle": 0.4},
+    "webtoon":            {"romance_josei_drama": 0.4, "isekai": 0.4, "action_battle": 0.4, "psychological_horror": 0.3},
+    "tech_worker":        {"sci_fi_cyberpunk": 0.7, "workplace_drama": 0.6, "psychological_thriller": 0.4},
+    "workplace":          {"workplace_drama": 0.8, "psychological_thriller": 0.3, "romance_josei_drama": 0.3, "sports_competition": 0.2},
+}
+
+
+def derive_brand_tags(brand_desc: str, brand_id: str = "") -> list[str]:
+    """Tokenize a brand description + brand_id into matchable tag keys.
+
+    Both description and brand_id are scanned so brands like
+    `warrior_calm_cultivation` pick up "cultivation" + "warrior" tags from
+    their slug even when the description only says "Burnout · Inner Peace · Shonen".
+
+    Example: "Anxiety · Somatic · Sleep · Josei adult women" + "stillness_press"
+      → ["anxiety", "somatic", "sleep", "josei"]
+    """
+    haystack = (brand_desc + " " + brand_id.replace("_", " ")).lower()
+    # Split on common separators
+    tokens: list[str] = []
+    for sep in ["·", "•", ",", "/", "—", "-", "_"]:
+        haystack = haystack.replace(sep, "|")
+    seen = set()
+    for chunk in haystack.split("|"):
+        chunk = chunk.strip()
+        if not chunk:
+            continue
+        # Match longest tag first
+        for tag in sorted(TAG_GENRE_AFFINITY.keys(), key=len, reverse=True):
+            if tag.replace("_", " ") in chunk or tag in chunk.replace(" ", "_"):
+                if tag not in seen:
+                    tokens.append(tag)
+                    seen.add(tag)
+                break
+    # Also do a whole-haystack pass to catch tags that span chunk boundaries
+    for tag in TAG_GENRE_AFFINITY.keys():
+        if tag in seen:
+            continue
+        if tag in haystack or tag.replace("_", " ") in haystack:
+            tokens.append(tag)
+            seen.add(tag)
+    return tokens
+
+
+def compute_metadata_affinity(brand_desc: str, brand_id: str = "") -> dict[str, float]:
+    """Compute per-genre affinity score from brand description + brand_id tags."""
+    tags = derive_brand_tags(brand_desc, brand_id)
+    raw = {g: 0.0 for g in VALID_GENRES}
+    for tag in tags:
+        for genre, score in TAG_GENRE_AFFINITY.get(tag, {}).items():
+            if genre in raw:
+                raw[genre] += score
+    peak = max(raw.values()) if raw else 0
+    if peak <= 0:
+        return {g: 1.0 / len(VALID_GENRES) for g in VALID_GENRES}
+    return {g: v / peak for g, v in raw.items()}
+
+
+
+
+def distribute_with_spread(
+    target_series: int,
+    strategic_alloc: dict[str, float],
+    metadata_affinity: dict[str, float],
+    tier: str,
+) -> dict[str, int]:
+    """Compute per-genre series count given strategic + metadata + baseline weights.
+
+    Operator directive: every brand × every genre should produce ≥1 series
+    where target_series ≥ 15. For smaller targets (core/niche), some genres
+    will get 0 — distribution is concentrated by combined weight.
+    """
+    weights = DISTRIBUTION_WEIGHTS.get(tier, DISTRIBUTION_WEIGHTS["unknown"])
+
+    # 1. Build combined weight per genre (sum ≈ 1.0 by construction)
+    combined: dict[str, float] = {g: 0.0 for g in VALID_GENRES}
+
+    # Strategic anchor — listed genres get their pct (sums to ≤1.0); rest get 0
+    strat_total = sum(strategic_alloc.values()) or 100.0
+    for g, pct in strategic_alloc.items():
+        if g in combined:
+            combined[g] += weights["strategic"] * (pct / strat_total)
+
+    # Metadata affinity — already normalized to [0,1]; scale by sum so it's
+    # comparable to strategic
+    meta_total = sum(metadata_affinity.values()) or 1.0
+    for g, score in metadata_affinity.items():
+        combined[g] += weights["metadata"] * (score / meta_total)
+
+    # Uniform baseline — every genre gets equal share of baseline budget
+    baseline_per_genre = weights["baseline"] / len(VALID_GENRES)
+    for g in combined:
+        combined[g] += baseline_per_genre
+
+    # 2. Convert to integer series counts via largest-remainder method
+    n_genres = len(VALID_GENRES)
+
+    # If target ≥ 15, force every genre to ≥1; the remainder distributes by weight.
+    # If target < 15, top-N-by-weight genres get 1, rest get 0.
+    if target_series >= n_genres:
+        # Reserve 1 per genre as the floor (15 series), then distribute surplus
+        floors = {g: 1 for g in VALID_GENRES}
+        surplus = target_series - n_genres
+        # Distribute surplus by weighted remainder
+        weighted = sorted(combined.items(), key=lambda kv: -kv[1])
+        # Each surplus point goes to the highest-weight genre, by ranked order
+        for i in range(surplus):
+            g = weighted[i % len(weighted)][0]
+            # Cap at a reasonable max to prevent over-concentration
+            if floors[g] < 6:
+                floors[g] += 1
+            else:
+                # If a genre is at cap, find next genre that isn't capped
+                for fallback_g, _ in weighted:
+                    if floors[fallback_g] < 6:
+                        floors[fallback_g] += 1
+                        break
+        return floors
+
+    # target < 15: top-target genres get 1, rest 0
+    weighted = sorted(combined.items(), key=lambda kv: -kv[1])
+    floors = {g: 0 for g in VALID_GENRES}
+    for g, _ in weighted[:target_series]:
+        floors[g] = 1
+    return floors
+
+
 # ─── data model ─────────────────────────────────────────────────────────────
 
 
@@ -109,8 +307,12 @@ class BrandAllocation:
     target_series: int  # midpoint of tier range
     description: str  # one-line tagline
     genre_pct: dict[str, float] = field(default_factory=dict)  # slug → %
+    spread_counts: dict[str, int] = field(default_factory=dict)  # slug → series-count after distribute_with_spread
 
     def series_per_genre(self, genre_slug: str) -> int:
+        # Prefer spread distribution if computed; fall back to strategic %
+        if self.spread_counts:
+            return self.spread_counts.get(genre_slug, 0)
         return round(self.target_series * (self.genre_pct.get(genre_slug, 0.0) / 100.0))
 
 
@@ -405,8 +607,24 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 3
 
+    # Apply brand-metadata-weighted distribution: every brand gets a spread
+    # across all 15 genres, biased by strategic %-allocation + description tags.
+    # Per operator directive (2026-04-26): ALL brands get genre spread; some
+    # get a little more, some a little less, based on metadata.
+    for brand in brands:
+        affinity = compute_metadata_affinity(brand.description, brand.brand_id)
+        brand.spread_counts = distribute_with_spread(
+            target_series=brand.target_series,
+            strategic_alloc=brand.genre_pct,
+            metadata_affinity=affinity,
+            tier=brand.tier,
+        )
+
     if args.dry_run:
+        # Report distribution stats
+        spread_total = sum(sum(b.spread_counts.values()) for b in brands)
         print(f"dry-run: parsed {len(brands)} brands × {len(locales)} locales OK")
+        print(f"dry-run: spread distribution = {spread_total} series per locale × 5 locales = {spread_total * 5} localized rows")
         return 0
 
     output = emit_catalog_plan(brands, locales)
