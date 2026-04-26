@@ -180,10 +180,10 @@ def _write_book_plan(out_root: Path, series_id: str, plan: dict[str, Any]) -> Pa
     return out_path
 
 
-def iter_series_plans() -> Iterable[Path]:
-    if not SERIES_ROOT.exists():
+def iter_series_plans(series_root: Path = SERIES_ROOT) -> Iterable[Path]:
+    if not series_root.exists():
         return
-    for locale_dir in sorted(SERIES_ROOT.iterdir()):
+    for locale_dir in sorted(series_root.iterdir()):
         if not locale_dir.is_dir() or locale_dir.name == "_samples":
             continue
         yield from sorted(locale_dir.glob("*.yaml"))
@@ -211,11 +211,23 @@ def main() -> int:
     p.add_argument("--series-id", help="Generate only this series' book_plans")
     p.add_argument("--locale", help="Restrict to this locale")
     p.add_argument("--dry-run", action="store_true")
+    p.add_argument(
+        "--series-root",
+        type=Path,
+        default=SERIES_ROOT,
+        help=f"Root directory of series_plan YAMLs (default: {SERIES_ROOT.relative_to(REPO)})",
+    )
+    p.add_argument(
+        "--book-root",
+        type=Path,
+        default=BOOK_ROOT,
+        help=f"Output root directory for book_plan YAMLs (default: {BOOK_ROOT.relative_to(REPO)})",
+    )
     args = p.parse_args()
 
-    series_paths = list(iter_series_plans())
+    series_paths = list(iter_series_plans(args.series_root))
     if not series_paths:
-        print(f"No series_plans found under {SERIES_ROOT}")
+        print(f"No series_plans found under {args.series_root}")
         return 0
 
     if args.locale:
@@ -231,7 +243,7 @@ def main() -> int:
         return 0
 
     schema = json.loads(BOOK_SCHEMA.read_text(encoding="utf-8"))
-    out_root = SAMPLE_ROOT if args.samples_only else BOOK_ROOT
+    out_root = SAMPLE_ROOT if args.samples_only else args.book_root
 
     written = 0
     failed: list[tuple[str, list[str]]] = []

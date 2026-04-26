@@ -72,9 +72,11 @@ DISPLAY_TO_SLUG = {
     "sci_fi / cyberpunk": "sci_fi_cyberpunk",
     "cyberpunk": "sci_fi_cyberpunk",
     "psychological thriller": "psychological_thriller",
+    "psychological thriller / mystery": "psychological_thriller",
     "thriller": "psychological_thriller",
     "romance": "romance_josei_drama",
     "romance / josei drama": "romance_josei_drama",
+    "romance / drama": "romance_josei_drama",
     "josei drama": "romance_josei_drama",
     "shojo": "romance_josei_drama",
     "workplace drama": "workplace_drama",
@@ -85,6 +87,7 @@ DISPLAY_TO_SLUG = {
     "battle": "action_battle",
     "sports": "sports_competition",
     "sports / competition": "sports_competition",
+    "sports / competition (anchor)": "sports_competition",
     "historical": "historical_period",
     "historical / period drama": "historical_period",
     "historical / period": "historical_period",
@@ -279,6 +282,146 @@ def compute_metadata_affinity(brand_desc: str, brand_id: str = "") -> dict[str, 
 
 
 
+def distribute_strategic_strict(
+    target_series: int,
+    strategic_alloc: dict[str, float],
+) -> dict[str, int]:
+    """Spec-compliant per-genre series count for one brand.
+
+    Distributes ``target_series`` across exactly the genres listed in
+    ``strategic_alloc`` (which is the brand's per-genre %-allocation parsed
+    from GENRE_PORTFOLIO_PLAN.md). Genres NOT in the spec table get 0
+    series — no uniform fallback, no metadata bleed-through, no market
+    revenue tilt.
+
+    Uses the largest-remainder method (a.k.a. Hare quota) to ensure the
+    integer counts sum to exactly ``target_series`` even when raw shares
+    don't round cleanly. This gives every spec-listed genre a deterministic
+    floor based on the documented %, and distributes any leftover seats to
+    the genres with the largest fractional remainder.
+
+    Special case: if a genre has %>0 in spec but rounds to 0 series at the
+    given target, it still gets 1 series (so a "10%" line in the spec
+    yields ≥1 series even if the brand has only 4 series total). The
+    surplus is then trimmed from the largest-share genres.
+
+    Args:
+        target_series: total series count for this brand (e.g. 16 for
+            stillness_press, 9 for sleep_restoration_iyashikei).
+        strategic_alloc: dict mapping genre_slug → percentage (e.g.
+            {"iyashikei": 30.0, "dark_fantasy": 25.0, ...}). Sum should be
+            ~100. Genres not in this dict get 0 series.
+
+    Returns:
+        dict mapping genre_slug → integer series count. Sum equals
+        ``target_series``. Only contains keys that are in
+        ``strategic_alloc`` (no extra genres are introduced).
+
+    Examples:
+        >>> # stillness_press: 16 series, spec says 30/25/20/15/10
+        >>> distribute_strategic_strict(16, {
+        ...     "iyashikei": 30.0, "dark_fantasy": 25.0,
+        ...     "psychological_horror": 20.0, "supernatural_mystery": 15.0,
+        ...     "isekai": 10.0,
+        ... })
+        {'iyashikei': 5, 'dark_fantasy': 4, 'psychological_horror': 3,
+         'supernatural_mystery': 2, 'isekai': 2}
+    """
+    if not strategic_alloc:
+        return {}
+    if target_series <= 0:
+        return {g: 0 for g in strategic_alloc}
+
+    # Normalize % so totals don't depend on whether spec sums to 100, 95, or 105
+    total_pct = sum(strategic_alloc.values()) or 100.0
+
+    # Step 1 — raw fractional share per genre
+    raw_share: dict[str, float] = {
+        g: target_series * (pct / total_pct) for g, pct in strategic_alloc.items()
+    }
+
+    # Step 2 — floors (integer part)
+    floors: dict[str, int] = {g: int(s) for g, s in raw_share.items()}
+
+    # Step 3 — promote any %>0 genre with floor 0 to 1 (every spec genre seats ≥1).
+    # Track which were promoted so we can compensate by trimming.
+    promoted = []
+    for g, pct in strategic_alloc.items():
+        if pct > 0 and floors[g] == 0:
+            floors[g] = 1
+            promoted.append(g)
+
+    seated = sum(floors.values())
+
+    # Step 4 — distribute remaining seats by largest fractional remainder
+    if seated < target_series:
+        remainders = sorted(
+            ((g, raw_share[g] - int(raw_share[g])) for g in strategic_alloc if g not in promoted),
+            key=lambda kv: -kv[1],
+        )
+        i = 0
+        while seated < target_series and remainders:
+            g = remainders[i % len(remainders)][0]
+            floors[g] += 1
+            seated += 1
+            i += 1
+
+    # Step 5 — if over-seated (because of promotions), trim from the genres with
+    # the largest absolute count, but never below 1.
+    while seated > target_series:
+        # Trim from the genre with highest current count
+        ranked = sorted(floors.items(), key=lambda kv: -kv[1])
+        for g, cnt in ranked:
+            if cnt > 1:
+                floors[g] -= 1
+                seated -= 1
+                break
+        else:
+            break  # safety — every genre at 1; can't trim further
+
+    return floors
+
+
+def validate_brand_allocations(
+    brands: list["BrandAllocation"],
+    canonical_brand_ids: list[str] | None = None,
+) -> tuple[bool, list[str]]:
+    """Spec-compliance check before regen runs.
+
+    Per operator directive: STOP and surface if any brand in the canonical
+    list lacks a %-allocation table (or has one with <3 genres or sums
+    outside 95-105%).
+
+    Returns (ok, issues) where ``ok`` is True iff every canonical brand has
+    a valid spec entry. ``issues`` is a human-readable list.
+    """
+    issues: list[str] = []
+    parsed_ids = {b.brand_id for b in brands}
+
+    if canonical_brand_ids:
+        missing = [b for b in canonical_brand_ids if b not in parsed_ids]
+        if missing:
+            issues.append(
+                f"BRANDS WITHOUT %-TABLES (need spec authoring): "
+                f"{', '.join(sorted(missing))}"
+            )
+
+    for b in brands:
+        s = sum(b.genre_pct.values())
+        if s < 95 or s > 105:
+            issues.append(
+                f"{b.brand_id}: %-table sums to {s} (must be 95-105). "
+                f"Genres: {list(b.genre_pct.keys())}"
+            )
+        if len(b.genre_pct) < 3:
+            issues.append(
+                f"{b.brand_id}: only {len(b.genre_pct)} genres parsed "
+                f"(min 3 required). Got: {list(b.genre_pct.keys())}"
+            )
+
+    return (len(issues) == 0, issues)
+
+
 def distribute_with_spread(
     target_series: int,
     strategic_alloc: dict[str, float],
@@ -395,8 +538,27 @@ _RE_TIER_HEADING = re.compile(
     r"^###\s+(?P<tier>Flagship|Core|Niche)(?:\s+/\s+\w+)?\s+Brands\b.*?\((?P<low>\d+)[–-](?P<high>\d+)\s+series.*\)?",
     re.IGNORECASE,
 )
+# Per-brand table header carries the authoritative target_series count, e.g.
+#   "| Genre | % | Series (of 14) | Primary Wellness Embed |"
+# This is more specific than the tier midpoint (e.g. flagship tier says
+# 14–18, but `cognitive_clarity` is specifically "of 14"). Parser uses this
+# when present; falls back to tier midpoint otherwise.
+_RE_TABLE_HEADER_TARGET = re.compile(
+    r"^\|\s*Genre\s*\|\s*%\s*\|\s*Series\s*\(of\s+(?P<target>\d+)\)\s*\|"
+)
+# Match a genre/% table row. The "count" column may be:
+#   - integer ("5")
+#   - integer range with em-dash, en-dash, or ASCII-dash ("3–4", "2-3", "1—2")
+#   - placeholder dash for "0" ("—" / "-")
+#   - empty
+# We don't actually use the count value for distribution — the % is
+# authoritative — but the regex must accept all forms or rows are silently
+# dropped. Pre-fix the regex required a single integer, which silently dropped
+# every range row in GENRE_PORTFOLIO_PLAN.md (~24 rows, ~20 brands affected).
 _RE_TABLE_ROW = re.compile(
-    r"^\|\s*(?P<genre>[^|]+?)\s*\|\s*(?P<pct>\d+(?:\.\d+)?)\s*%\s*\|\s*(?P<count>\d+)?\s*(?:\(of\s+(?P<of>\d+)\))?\s*\|"
+    r"^\|\s*(?P<genre>[^|]+?)\s*\|\s*(?P<pct>\d+(?:\.\d+)?)\s*%\s*\|"
+    r"\s*(?P<count>(?:\d+(?:\s*[–—-]\s*\d+)?)|—|-)?"
+    r"\s*(?:\(of\s+(?P<of>\d+)\))?\s*\|"
 )
 
 
@@ -435,6 +597,13 @@ def parse_genre_portfolio(text: str) -> list[BrandAllocation]:
             continue
 
         if cur_brand is None:
+            continue
+
+        # Per-brand table header overrides the tier-midpoint target.
+        # Look for `| Genre | % | Series (of N) |` and use N.
+        m_target = _RE_TABLE_HEADER_TARGET.match(line)
+        if m_target:
+            cur_brand.target_series = int(m_target.group("target"))
             continue
 
         m_row = _RE_TABLE_ROW.match(line)

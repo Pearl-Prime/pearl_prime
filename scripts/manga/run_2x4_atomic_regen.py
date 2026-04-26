@@ -1,33 +1,52 @@
 #!/usr/bin/env python3
 """
-Phase 2X.4 atomic regeneration.
+Phase 2X.4 atomic regeneration — spec-compliant per-brand × per-genre %.
 
-Per specs/MANGA_CATALOG_RECONCILIATION_SPEC.md §6.1.A + D-20:
-  - Schema flip already applied (series_plan_schema 2.1.0 with 23-entry
-    genre enum, demographic + locale_origin + distribution_status fields,
-    nullable teacher_id).
-  - This script generates the new ~1,410 slug-only series_plan YAMLs.
-  - Title is "TBD" per operator path-d directive (titles authored separately).
-  - One existing series is preserved verbatim: stillness_press × en_US ×
-    iyashikei × anxiety = "the_alarm_is_lying" (production-active ep_001).
+Per specs/MANGA_CATALOG_RECONCILIATION_SPEC.md §6.1.A + D-20 AND the
+operator-approved 2026-04-27 spec-compliance correction (Path A regen):
+  - Schema 2.1.0 (23-entry genre enum, demographic + locale_origin +
+    distribution_status, nullable teacher_id) — same as before.
+  - **Distribution is now STRICT against GENRE_PORTFOLIO_PLAN.md.** Each
+    brand's per-genre allocation is exactly the spec's % table — no
+    uniform-1-per-genre fallback, no metadata bleed-through, no market-
+    revenue tilt. Genres with 0% in a brand's spec table get NO series.
+  - Result: total catalog ~272 series per locale (vs previous 282 per
+    locale that smeared across all 15 genres uniformly).
+  - One existing production series is preserved verbatim: stillness_press ×
+    en_US × iyashikei × anxiety = "the_alarm_is_lying" (ep_001 rendered).
 
-Run: PYTHONPATH=. python3 scripts/manga/run_2x4_atomic_regen.py
+Run:
+    # Smoke test — 3 flagship brands → /tmp/catalog_regen_smoke/
+    PYTHONPATH=. python3 scripts/manga/run_2x4_atomic_regen.py \\
+        --out-root /tmp/catalog_regen_smoke \\
+        --brand stillness_press --brand cognitive_clarity --brand digital_ground
+
+    # Full regen → /tmp staging dir
+    PYTHONPATH=. python3 scripts/manga/run_2x4_atomic_regen.py \\
+        --out-root /tmp/catalog_regen_full
+
+    # Production regen to repo path (default)
+    PYTHONPATH=. python3 scripts/manga/run_2x4_atomic_regen.py
 
 Steps performed:
-  1. Read strategic plans + apply revenue-weighted distribution
-  2. Load format_routing.yaml for per-locale-genre format defaults
-  3. For each (brand, locale, genre) cell with count > 0, emit count YAMLs
-  4. Preserve 1 known production series: the_alarm_is_lying
-  5. Write all YAMLs to config/source_of_truth/manga_series_plans/{locale}/
+  1. Parse GENRE_PORTFOLIO_PLAN.md → 37 brand × per-genre %-tables
+  2. Validate every canonical brand has %-table with 95-105% sum + ≥3 genres
+     (STOP if any brand fails — surfaces brand IDs needing spec authoring)
+  3. For each brand, distribute target_series across spec-listed genres via
+     largest-remainder method (counts sum to target_series exactly)
+  4. Load format_routing.yaml for per-locale-genre format defaults
+  5. For each (brand, locale, genre) cell with count > 0, emit count YAMLs
+  6. Preserve known production series: the_alarm_is_lying
+  7. Write all YAMLs to <out-root>/{locale}/
 
 This script does NOT delete stale YAMLs — that happens via `git rm` in the
 PR commit. This script also does NOT regenerate book_plans (those are
-derivative; will land in a follow-up 2X.4b PR per spec §7.7).
+derivative; landed by generate_book_plans_from_series.py per spec §7.7).
 """
 from __future__ import annotations
 
+import argparse
 import importlib.util
-import json
 import sys
 from pathlib import Path
 from typing import Any
@@ -160,41 +179,113 @@ def emit_series_plan_yaml(
     return plan
 
 
-def main() -> int:
+def load_canonical_brand_ids() -> list[str]:
+    """Read 37-brand canonical list. Used for spec-compliance validation."""
+    path = REPO / "config" / "manga" / "canonical_brand_list.yaml"
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    return list(data.get("brands", {}).keys())
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n\n", 1)[0])
+    parser.add_argument(
+        "--out-root",
+        type=Path,
+        default=OUTPUT_ROOT,
+        help=(
+            f"Root directory for emitted series_plan YAMLs (default: "
+            f"{OUTPUT_ROOT.relative_to(REPO)}). Use /tmp/... for smoke or "
+            f"staging runs."
+        ),
+    )
+    parser.add_argument(
+        "--brand",
+        action="append",
+        dest="brands_filter",
+        default=None,
+        help="Restrict regen to specific brand_id (repeat for multiple). Used for smoke tests.",
+    )
+    parser.add_argument(
+        "--locale",
+        action="append",
+        dest="locales_filter",
+        default=None,
+        help="Restrict regen to specific locale (e.g. en_US). Used for smoke tests.",
+    )
+    parser.add_argument(
+        "--skip-validation",
+        action="store_true",
+        help="Skip the spec-compliance validation (sums 95-105%%, ≥3 genres per brand).",
+    )
+    args = parser.parse_args(argv)
+
+    out_root: Path = args.out_root
+
     # Load the catalog generator + compute brand allocations
     catalog_mod = load_module(CATALOG_GEN)
     portfolio_text = (REPO / "docs" / "GENRE_PORTFOLIO_PLAN.md").read_text(encoding="utf-8")
-    cjk_text = (REPO / "docs" / "CJK_CATALOG_PLAN.md").read_text(encoding="utf-8")
 
     brands = catalog_mod.parse_genre_portfolio(portfolio_text)
-    locales = catalog_mod.parse_locale_formats(cjk_text)
 
     if not brands:
         print("error: parsed 0 brands", file=sys.stderr)
         return 2
 
-    # Apply brand-metadata-weighted distribution (same as preview)
+    # ── Spec-compliance validation ─────────────────────────────────────────
+    # STOP and surface if any canonical brand lacks %-table or has malformed
+    # entries. Operator directive: brands without spec coverage need spec
+    # authoring before regen can run.
+    if not args.skip_validation:
+        canon = load_canonical_brand_ids()
+        ok, issues = catalog_mod.validate_brand_allocations(brands, canonical_brand_ids=canon)
+        if not ok:
+            print("\nERROR: spec-compliance validation FAILED", file=sys.stderr)
+            for issue in issues:
+                print(f"  {issue}", file=sys.stderr)
+            print(
+                "\nResolve the above by editing docs/GENRE_PORTFOLIO_PLAN.md "
+                "and re-running. Use --skip-validation to bypass (not "
+                "recommended for production regen).",
+                file=sys.stderr,
+            )
+            return 3
+        print(f"validation OK: {len(brands)} brands, all %-tables 95-105%, ≥3 genres each")
+
+    # ── Apply STRICT per-brand × per-genre %-allocation ───────────────────
+    # Each brand gets exactly target_series across the genres listed in its
+    # spec table. No uniform fallback. Genres at 0% in spec get 0 series.
     for brand in brands:
-        affinity = catalog_mod.compute_metadata_affinity(brand.description, brand.brand_id)
-        brand.spread_counts = catalog_mod.distribute_with_spread(
+        brand.spread_counts = catalog_mod.distribute_strategic_strict(
             target_series=brand.target_series,
             strategic_alloc=brand.genre_pct,
-            metadata_affinity=affinity,
-            tier=brand.tier,
         )
+
+    # Apply filters (used for smoke tests)
+    if args.brands_filter:
+        brands = [b for b in brands if b.brand_id in args.brands_filter]
+        if not brands:
+            print(
+                f"error: no brands matched filter {args.brands_filter}",
+                file=sys.stderr,
+            )
+            return 2
+    locales_to_emit = args.locales_filter or list(catalog_mod.VALID_LOCALES)
 
     routing = load_routing()
 
     total_emitted = 0
-    by_locale_count: dict[str, int] = {lc: 0 for lc in catalog_mod.VALID_LOCALES}
+    by_locale_count: dict[str, int] = {lc: 0 for lc in locales_to_emit}
+    by_brand_summary: list[tuple[str, str, int, int]] = []  # (brand, tier, target, total_emitted)
 
     for brand in brands:
         teacher_id = BRAND_TEACHER_MAP.get(brand.brand_id)
-        for locale in catalog_mod.VALID_LOCALES:
-            for genre in catalog_mod.VALID_GENRES:
-                count = brand.spread_counts.get(genre, 0)
+        brand_emitted = 0
+        for locale in locales_to_emit:
+            for genre, count in brand.spread_counts.items():
                 if count <= 0:
                     continue
+                # Note: distribute_strategic_strict only includes genres in
+                # the spec table; no zero-keys to filter.
                 preserve = PRESERVE_BRAND_LOCALE_GENRE.get((brand.brand_id, locale, genre), [])
                 for i in range(count):
                     if i < len(preserve):
@@ -219,19 +310,17 @@ def main() -> int:
                         plan["manga_author"] = "Hana Tidecalm"
                         plan["style"] = "cozy_iyashikei"
 
-                    # Validate against schema in dry-run mode
-                    # (full validation happens in pytest, not in regen script)
-
-                    out_dir = OUTPUT_ROOT / locale
+                    out_dir = out_root / locale
                     out_dir.mkdir(parents=True, exist_ok=True)
                     out_path = out_dir / f"{plan['series_id']}.yaml"
 
                     header = (
                         "# Auto-generated by scripts/manga/run_2x4_atomic_regen.py — do not hand-edit.\n"
-                        "# Source: docs/GENRE_PORTFOLIO_PLAN.md + docs/CJK_CATALOG_PLAN.md + docs/US_CATALOG_PLAN.md\n"
+                        "# Source: docs/GENRE_PORTFOLIO_PLAN.md (per-brand × per-genre %)\n"
                         "# Routing: config/manga/format_routing.yaml\n"
                         "# Schema: schemas/manga/series_plan.schema.json (v2.1.0)\n"
                         "# Per: specs/MANGA_CATALOG_RECONCILIATION_SPEC.md Phase 2X.4 atomic\n"
+                        "# Distribution: distribute_strategic_strict (operator-approved 2026-04-27 Path A)\n"
                         "\n"
                     )
                     body = yaml.safe_dump(plan, sort_keys=False, allow_unicode=True, width=120)
@@ -239,11 +328,23 @@ def main() -> int:
 
                     total_emitted += 1
                     by_locale_count[locale] += 1
+                    brand_emitted += 1
+        by_brand_summary.append((brand.brand_id, brand.tier, brand.target_series, brand_emitted))
 
-    print(f"\n2X.4 atomic regen complete:")
+    print(f"\n2X.4 atomic regen complete (out-root: {out_root}):")
     print(f"  Total series_plan YAMLs emitted: {total_emitted}")
+    print(f"  Brands processed: {len(brands)}")
+    print(f"  Locales emitted: {len(locales_to_emit)}")
     for locale, n in by_locale_count.items():
         print(f"    {locale}: {n}")
+    print()
+    print(f"  Per-brand totals (target × locales = total emitted):")
+    for bid, tier, target, emitted in by_brand_summary[:20]:
+        expected = target * len(locales_to_emit)
+        marker = "✓" if emitted == expected else "✗"
+        print(f"    {marker} {bid:40s} {tier:9s} target={target:2d}  emitted={emitted:3d} (expected {expected})")
+    if len(by_brand_summary) > 20:
+        print(f"    ... ({len(by_brand_summary) - 20} more brands)")
 
     return 0
 
