@@ -147,11 +147,34 @@ def slow_classify(repo: Path, path: str) -> tuple[str, str, str]:
 
 
 def last_commit_date(path: str) -> str:
+    """Single-file fallback (use build_last_commit_date_map for bulk)."""
     try:
         out = run(["git", "log", "-n", "1", "--format=%ad", "--date=short", "--", path])
         return out.strip()
     except subprocess.CalledProcessError:
         return ""
+
+
+def build_last_commit_date_map() -> dict[str, str]:
+    """Bulk path → last-commit-date map via single git log invocation.
+
+    PR-19 (2026-04-27) perf fix: prior per-file `git log -n 1` × 19,696 files
+    was dominating runtime (script died around 1,684 rows). One pass over the
+    full history is O(commit-count), not O(file-count). Mirrors the pattern
+    in build_full_repo_inventory.py.
+    """
+    out = run([
+        "git", "log", "--all", "--no-renames",
+        "--pretty=format:COMMIT|%ad", "--date=short", "--name-only",
+    ])
+    last: dict[str, str] = {}
+    cur_date = ""
+    for line in out.splitlines():
+        if line.startswith("COMMIT|"):
+            cur_date = line.split("|", 1)[1]
+        elif line.strip() and cur_date and line not in last:
+            last[line] = cur_date
+    return last
 
 
 def main() -> int:
@@ -172,6 +195,10 @@ def main() -> int:
     paths = list_doc_files()
     print(f"enumerated {len(paths):,} doc-like files", file=sys.stderr)
 
+    print("building bulk last-commit-date map (single git log invocation)...", file=sys.stderr)
+    date_map = build_last_commit_date_map()
+    print(f"date map covers {len(date_map):,} paths", file=sys.stderr)
+
     with out_path.open("w") as g:
         w = csv.writer(g, delimiter="\t", quoting=csv.QUOTE_MINIMAL)
         w.writerow([
@@ -186,12 +213,12 @@ def main() -> int:
                 cls_, subsys, note = fast
                 title = path.rsplit("/", 1)[-1]
                 lc = "-1"
-                date_ = last_commit_date(path)
+                date_ = date_map.get(path, "")
                 w.writerow([path, tla, subsys, title, lc, date_, cls_, "-1", "-1", "", note])
             else:
                 cls_, title, lc = slow_classify(REPO_ROOT, path)
                 subsys = infer_subsystem(path)
-                date_ = last_commit_date(path)
+                date_ = date_map.get(path, "")
                 w.writerow([path, tla, subsys, title, lc, date_, cls_, "0", "0", "", ""])
 
     print(f"wrote {out_path}", file=sys.stderr)
