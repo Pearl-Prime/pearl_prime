@@ -15,6 +15,20 @@ Per-lane style bibles for 48-volume series planning and deterministic panel-leve
 9. **[graphic_novel_us_literary](graphic_novel_us_literary.md)** — Western literary memoir graphic novels (Fun Home, Persepolis, This One Summer). Essayistic captions, non-linear memory, single-book completeness.
 10. **[kodomomuke_educational](kodomomuke_educational.md)** — Children's encouragement + somatic-literacy (Doraemon, Chi's Sweet Home). Warm resolution per chapter, named body-feelings, caregiver-friendly read-aloud register.
 
+### Phase 2X.3 strategic-shell additions (per spec §4.1 + OQ-1/OQ-2 resolutions)
+
+11. **[dark_fantasy](dark_fantasy.md)** — Berserk / Frieren register (Genre Shell #2; Mega tier per `GENRE_PORTFOLIO_PLAN.md`). Carries grief, trauma recovery, perseverance, identity under extreme pressure, meaning-making. Adult seinen primary; josei crossover (Frieren-tent).
+12. **[psychological_thriller](psychological_thriller.md)** — Death Note / Monster / Mob Psycho register (Genre Shell #7). Carries overthinking-as-paranoia, unreliable narrator = imposter syndrome, obsession loops. `cognitive_clarity` brand persona.
+13. **[supernatural_mystery](supernatural_mystery.md)** — Mushishi / xxxHOLiC / Natsume's Book of Friends register (Genre Shell #4). Carries grief (unfinished business), generational trauma, spirit/human boundary. `stillness_press` brand carries somatic content inside this shell.
+14. **[sci_fi_cyberpunk](sci_fi_cyberpunk.md)** — Akira / Ghost in the Shell / BLAME! register (Genre Shell #6). Carries burnout (machine-body metaphors), digital anxiety, identity (human vs system). `digital_ground` persona — "the developer who optimized everything except themselves."
+15. **[workplace_drama](workplace_drama.md)** — Aggretsuko / Wotakoi register (Genre Shell #9). Carries burnout, imposter syndrome, social anxiety, financial anxiety. 6 workplace brands live here (`career_lift`, `high_performer`, `executive_calm`, `morning_momentum`, `optimizer`, `focus_sprint`).
+16. **[action_battle](action_battle.md)** — Naruto / Demon Slayer / Vinland Saga register (Genre Shell #10; renamed from former `shonen` slug — demographic ≠ genre). Carries courage, resilience, somatic body-as-tool, perseverance.
+17. **[sports_competition](sports_competition.md)** — Slam Dunk / Haikyuu register (Genre Shell #11). Carries ADHD hyperfocus, performance anxiety, imposter syndrome at peak moments, financial pressure around athletic careers.
+18. **[historical_period](historical_period.md)** — Vinland Saga / Vagabond / Bride's Story register (Genre Shell #12). Carries grief across time, legacy and self-worth, courage in context, honor vs authenticity. Viking is a setting flavor inside this genre, not its own.
+19. **[mecha](mecha.md)** — Evangelion / Gundam / Knights of Sidonia register (Genre Shell #15; mega-example tier per spec D-9; Evangelion $16B franchise). Carries depression-as-mecha, scale-as-mortality, identity vs machine. `cognitive_clarity` brand 15% allocation.
+
+(Note: `school_coming_of_age` (#14) bible deferred to a future PR; pacing covered via existing `school` row in `manga_pacing_by_genre.yaml`.)
+
 ## How to use
 
 - **For 48-volume pre-planning:** read Section 7 of the relevant lane first; each lane gives a concrete 48-volume arc shape.
