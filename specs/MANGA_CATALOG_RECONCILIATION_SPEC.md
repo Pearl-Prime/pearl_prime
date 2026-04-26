@@ -1,11 +1,17 @@
 # Manga Catalog Reconciliation Spec
 
-**Version:** 1.0.0
+**Version:** 1.1.0 (refresh — incorporates OQ-1..OQ-9 resolutions; locale scope expanded 4→5; deletion sequence collapsed to atomic per OQ-4)
 **Authority:** Pearl_Architect (synthesis) — supersedes the operational layer of `artifacts/manga/MANGA_FULL_CATALOG_PLAN.md` (Apr 7–12) and aligns the planner / schema / taxonomy / config / generated YAMLs with the strategic refresh in `docs/GENRE_PORTFOLIO_PLAN.md` (Apr 23).
-**Date:** 2026-04-26
-**Status:** Draft awaiting operator approval before any execution PR opens.
-**Inputs:** [docs/MANGA_PIPELINE_AUDIT_2026-04-26.md](../docs/MANGA_PIPELINE_AUDIT_2026-04-26.md) (Phase 1 audit findings); [docs/GENRE_PORTFOLIO_PLAN.md](../docs/GENRE_PORTFOLIO_PLAN.md) (strategic refresh, PR #583); [docs/CJK_CATALOG_PLAN.md](../docs/CJK_CATALOG_PLAN.md) + [docs/US_CATALOG_PLAN.md](../docs/US_CATALOG_PLAN.md) (per-locale strategic plans); [docs/MANGA_SERIES_PORTFOLIO_RESEARCH.md](../docs/MANGA_SERIES_PORTFOLIO_RESEARCH.md) (research feeder).
-**Out-of-scope inputs:** `docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md` and `docs/AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md` are **audiobook** plans, not manga. Not touched by this spec.
+**Date:** 2026-04-26 (v1.1 refresh)
+**Status:** Operator-approved through OQ-9. Phase 2X.1 atomic PR ready to author when Pearl_Dev capacity opens.
+**Inputs:** [docs/MANGA_PIPELINE_AUDIT_2026-04-26.md](../docs/MANGA_PIPELINE_AUDIT_2026-04-26.md) (Phase 1 audit findings); [docs/GENRE_PORTFOLIO_PLAN.md](../docs/GENRE_PORTFOLIO_PLAN.md) (strategic refresh, PR #583); [docs/CJK_CATALOG_PLAN.md](../docs/CJK_CATALOG_PLAN.md) + [docs/US_CATALOG_PLAN.md](../docs/US_CATALOG_PLAN.md) (per-locale strategic plans); [docs/MANGA_SERIES_PORTFOLIO_RESEARCH.md](../docs/MANGA_SERIES_PORTFOLIO_RESEARCH.md) (research feeder); [docs/MANGA_MODE_STRATEGY.md](../docs/MANGA_MODE_STRATEGY.md) (business strategy + market analysis, migrated from docx per OQ-7).
+**Out-of-scope inputs:** `docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md` and `docs/AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md` are **audiobook** plans, not manga. Not touched by this spec. (Naming aligned to AUDIOBOOK_ prefix per OQ-9 PR #686.)
+
+**Changelog:**
+- **v1.0.0** (2026-04-26) — Initial spec landed via PR #682.
+- **v1.0.1** (2026-04-26) — D-16 amended; stale `coordination/` refs corrected per OQ-8 disposition (iii) PR #685.
+- **v1.0.2** (2026-04-26) — Audiobook doc references updated to AUDIOBOOK_ prefix per OQ-9 PR #686.
+- **v1.1.0** (2026-04-26) — Refresh incorporating OQ-1..OQ-6 operator resolutions: mecha = own genre (OQ-1 a), school_coming_of_age = own genre (OQ-2 a), brand wins teacher-as-attribute (OQ-3 a), hard cutover with delete-old-stuff (OQ-4 c), ko_KR added as 5th locale rendered+held (OQ-5 b), zh_CN gray-zone distribution with full AI disclosure (OQ-6 c). Deletion sequence collapsed: 2X.1+2X.6+2X.7 fold into one atomic PR. New D-18, D-19, D-20 added.
 
 ---
 
@@ -99,9 +105,9 @@ The following rulings are made by this spec. They become governance-binding on m
 |---|---|---|
 | D-1 | **`docs/GENRE_PORTFOLIO_PLAN.md` is the canonical strategic catalog plan.** | Authored Apr 23; explicit supersession of pre-correction operational catalog. |
 | D-2 | **`docs/CJK_CATALOG_PLAN.md` and `docs/US_CATALOG_PLAN.md` are canonical per-locale views.** | Same authoring date; per-locale specialization of D-1. |
-| D-3 | **`artifacts/manga/MANGA_FULL_CATALOG_PLAN.md` is RETIRED.** | Explicitly superseded; cannot remain authoritative. Replacement in §7.1. |
-| D-4 | **The 132 `series_plan.yaml`s are RETIRED.** | Generated from the retired plan. Re-generation in §7.6. |
-| D-5 | **The 716 `book_plan.yaml`s are RETIRED.** | Generated from the retired series plans. Re-generation in §7.7. |
+| D-3 | **`artifacts/manga/MANGA_FULL_CATALOG_PLAN.md` is RETIRED.** | Explicitly superseded; cannot remain authoritative. Replacement in §7.1. Deleted atomically in 2X.1 per D-20. |
+| D-4 | **The 132 `series_plan.yaml`s are RETIRED and atomically replaced.** | Generated from the retired plan. Re-generation in §7.6 — folded into 2X.1 atomic PR per D-20. New count: ~1,110 series (37 brands × 5 locales × ~6 series/locale). |
+| D-5 | **The 716 `book_plan.yaml`s are RETIRED and atomically replaced.** | Generated from the retired series plans. Re-generation in §7.7 — folded into 2X.1 atomic PR per D-20. |
 | D-6 | **Brand is the catalog allocation unit.** | Per §2.3. Series belong to brands; teacher is an attribute. |
 | D-7 | **Genre is the strategic shell, not the marketing-gift-card label.** | Per §2.2. Each series has exactly one `genre` (one of the 12 shells). The `topic` field carries the wellness substrate, never the genre label. |
 | D-8 | **Genre allow-list expands from 10 to 12 strategic shells (plus bonuses), with the planner-internal label normalized.** | See §4. `manhwa` is removed (regional, not genre); `josei_essay_manga` is consolidated into Romance/Josei Drama; new shells added. |
@@ -114,6 +120,9 @@ The following rulings are made by this spec. They become governance-binding on m
 | D-15 | **PR #678 (`fix(manga): lettering_from_script v3-schema awareness`) is the immediate gating merge** before this spec's Phase 2 work can ramp. | Per audit §5.5. ep_002 and the entire CJK6 lettering pipeline depend on it. |
 | D-16 | **Coordination layer is at `artifacts/coordination/`, NOT bare `coordination/`. Spec execution updates the layer in place.** | Per audit §8 OQ-2 corrected + OQ-8 disposition (iii) executed 2026-04-26. The audit's original claim that `coordination/` did not exist was a path-mismatch error — the actual directory is `artifacts/coordination/` (referenced by `pr_governance_review.py:43,68`). Workstream rows for every Phase 2X.* PR are added to `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`; project state lives in `artifacts/coordination/ACTIVE_PROJECTS.tsv` under `proj_manga_catalog_reconciliation_20260426`. |
 | D-17 | **`MANGA_FULL_CATALOG_PLAN.md` is replaced by an auto-derived artifact** generated from `GENRE_PORTFOLIO_PLAN.md` + `CJK_CATALOG_PLAN.md` + `US_CATALOG_PLAN.md`. | The catalog stops being a hand-edited Markdown table and becomes the deterministic projection of the strategic docs. Per §7.1. |
+| D-18 | **ko_KR is added as the 5th locale, rendered now, distribution held pending Korea AI Act enforcement clarity.** Routing matrix grows from 4×15=60 cells to **5×15=75 cells**. | Per OQ-5 disposition (b). Translation pipeline (Tier-2 Qwen) and CJK font registry already support KR. Render-and-hold uses sunk-cost compute; ready-to-ship the moment Korea AI Act rules clarify (post-Jan 2027 enforcement window). `distribution_status: hold_pending_market_clearance` flag added to schema. |
+| D-19 | **zh_CN distribution is GRAY-ZONE-WITH-DISCLOSURE, not held.** zh_CN series push to Bilibili Comics + Kuaikan Manhua + Tencent Comics with explicit AI-disclosure metadata. | Per OQ-6 disposition (c). Adds `R-zh_CN-distribution: HIGH` to risk register: account termination possible under PRC Generative AI Service Measures (2023; algorithm filing + watermarking + identity verification required). New scripts `scripts/publish/zh_cn_release_*.py` per platform. Per-account standing tracking required. Operator accepts platform-termination risk for 400M+ reader reach. |
+| D-20 | **Deletion sequence is ATOMIC** — 2X.1 (schema/planner) + 2X.6 (132 series_plan deletion) + 2X.7 (716 book_plan deletion) collapse into a single atomic PR. No backwards-compatibility window. | Per OQ-4 disposition (c) "hard cutover with delete-old-stuff". Avoids 5-week red-CI window that backwards-compat (option a) would have caused; operator chose strict typing over CI tolerance. Schema flips strict the moment YAMLs regenerate. |
 
 ---
 
@@ -204,8 +213,12 @@ The strategic plan defines:
 - **Niche** (4–6 series each, 13+ brands): `trauma_path_healing`, `resilient_parent_social`, `confidence_core_romance`, `relationship_clarity_romance`, `adhd_forge_mystery`, `devotion_path_shonen`, `stoic_edge_battle`, `warrior_calm_cultivation`, `spiritual_ground_supernatural`, `solar_return_isekai`, `legacy_builder_memoir`, `bio_flow_healing`, `longevity_lab_healing`
 
 **Total target series count (strategic):** 3×16 + 14×9 + 13×5 = 48 + 126 + 65 = **~239 series** (one snapshot midpoint).
-For 4 locales: ~239 × 4 = **~956 localized series.**
-For 14 chapters/series: ~956 × 14 = **~13,384 chapters.**
+For **5 locales** (en_US + ja_JP + zh_TW + zh_CN + ko_KR per D-18): ~239 × 5 = **~1,195 localized series.**
+For 14 chapters/series: ~1,195 × 14 = **~16,730 chapters.**
+
+Distribution-state breakdown (per D-18 + D-19):
+- **Distributed**: ~239 × 4 (en_US + ja_JP + zh_TW + zh_CN) = ~956 localized series. zh_TW + zh_CN both push (zh_CN gray-zone with disclosure per D-19). en_US KDP + Canvas-when-policy-clear; ja_JP KDP + LINE Manga Indies.
+- **Rendered + held**: ~239 × 1 (ko_KR) = ~239 localized series. Held until Korea AI Act enforcement posture clarifies (post-Jan 2027). `distribution_status: hold_pending_market_clearance`.
 
 ### §5.2 — Teacher-as-attribute, not as catalog axis
 
@@ -243,17 +256,17 @@ The new generated `MANGA_FULL_CATALOG_PLAN.md` (or its replacement; see §7.1) i
 
 Per CLAUDE.md governance: any single PR deleting >50 files needs explicit owner approval. The 132 + 716 = 848 generated YAMLs cross that threshold by 17×. Operator approval of *this spec* is the explicit owner approval; **but the deletions still segment into batches** to keep each PR reviewable and reversible.
 
-### §6.1 — Deletion segments
+### §6.1 — Deletion segments (collapsed per D-20)
 
-| Segment | Files | Count | PR title |
-|---|---|---|---|
-| **6.1.A — Stale operational catalog plan** | `artifacts/manga/MANGA_FULL_CATALOG_PLAN.md` | 1 | `chore(manga): retire stale operational catalog plan (Apr 7-12) per reconciliation spec` |
-| **6.1.B — Retire 3 zero-ref specs** | `specs/MANGA_MODE_SYSTEM_SPEC.md`, `specs/MANGA_BRAND_DNA_ANTI_SPAM_SPEC.md` *(MOVE not delete; reframed in §7.10)*, `specs/MANGA_AUTHOR_SYSTEM_SPEC.md` | 2 deletes + 1 move | `chore(manga): archive 2 zero-ref specs + reframe BRAND_DNA spec` |
-| **6.1.C — 132 stale series_plan YAMLs** | `config/source_of_truth/manga_series_plans/*.yaml` (excluding `_samples/`) | 132 | `chore(manga): retire 132 stale series_plan YAMLs (regenerate per reconciliation spec)` — owner-approved per this spec |
-| **6.1.D — 716 stale book_plan YAMLs** | `config/source_of_truth/manga_book_plans/<dir>/*.yaml` | 716 | `chore(manga): retire 716 stale book_plan YAMLs (regenerate per reconciliation spec)` — owner-approved per this spec |
-| **6.1.E — Truly orphan code (post-migration only)** | per audit Phase 2A; only after callers are migrated | 2–4 | `chore(manga): prune migrated-orphan scripts (audit Phase 2A — final)` |
+Per OQ-4 disposition (c) hard cutover, segments 6.1.A + 6.1.C + 6.1.D **collapse into a single atomic PR (2X.1)**. The schema/planner flip and the YAML deletion happen in the same commit so CI never sees a stale-YAML/new-schema mismatch.
 
-**Total deletions across all segments: ~853 files.** All driven by the catalog reconciliation; none ad hoc.
+| Segment | Files | Count | PR | Notes |
+|---|---|---|---|---|
+| **6.1.A — ATOMIC: stale catalog plan + 132 series_plans + 716 book_plans + schema flip** | `artifacts/manga/MANGA_FULL_CATALOG_PLAN.md` (stale; replaced) + `config/source_of_truth/manga_series_plans/*.yaml` (excluding `_samples/`; 132 deleted, ~1,110 created) + `config/source_of_truth/manga_book_plans/<dir>/*.yaml` (716 deleted, ~16,730 created) + `scripts/manga/generate_series_plans_from_catalog.py` (VALID_GENRES 10→15) + `schemas/manga/series_plan.schema.json` (genre.enum + demographic + locale_origin + distribution_status) + `phoenix_v4/manga/models/validation.py` + `tests/test_manga_schemas.py` | 849 deletes + ~17,840 creates | **2X.1** | `feat(manga): catalog reconciliation atomic — schema/planner flip + 848 stale YAML retire + regenerate (5 locales × 15 genres)` — owner-approved per this spec D-3/D-4/D-5/D-20 |
+| **6.1.B — Archive 2 zero-ref specs + reframe BRAND_DNA** | `specs/MANGA_MODE_SYSTEM_SPEC.md` (moved to specs/archive/), `specs/MANGA_AUTHOR_SYSTEM_SPEC.md` (moved), `specs/MANGA_BRAND_DNA_ANTI_SPAM_SPEC.md` (updated, kept) | 2 moves + 1 update + 1 new index | **2X.5** (renumbered) | `chore(manga): archive 2 zero-ref specs + reframe BRAND_DNA spec` |
+| **6.1.C — Truly orphan code (post-migration only)** | per audit Phase 2A; only after callers are migrated | 2–4 | (future, post-2X) | `chore(manga): prune migrated-orphan scripts (audit Phase 2A — final)` |
+
+**Total deletions in atomic 2X.1: ~849 files.** All driven by the catalog reconciliation; none ad hoc. CLAUDE.md mass-deletion rule satisfied via D-20 + this spec acting as explicit owner approval.
 
 ### §6.2 — Files NOT deleted (defended explicitly)
 
@@ -316,17 +329,19 @@ Per §4.4:
 - `config/manga/manga_pacing_by_genre.yaml` — add pacing rows per `manga_dialogue_system/02:656` table.
 - `config/manga/genre_ite_profiles.yaml` — add ITE profile entries per genre.
 
-### §7.6 — Re-generate 132 → ~239 (or per-locale ~956) series_plan YAMLs
+### §7.6 — Re-generate 132 → ~1,195 series_plan YAMLs (atomic per D-20)
 
-After §6.1.C deletes the 132 stale, run `generate_series_plans_from_catalog.py` against the regenerated `MANGA_FULL_CATALOG_PLAN.md` from §7.1. Outputs the new strategic-aligned series_plan YAMLs.
+**Folded into the 2X.1 atomic PR per D-20.** After deleting the 132 stale, run `generate_series_plans_from_catalog.py` against the regenerated `MANGA_FULL_CATALOG_PLAN.md` from §7.1. Outputs the new strategic-aligned series_plan YAMLs.
 
 **Naming convention update** (per §5.2):
 - Old: `{brand}__{teacher}__{locale}__{topic}__{series_slug}.yaml`
 - New: `{brand}__{locale}__{genre}__{topic}__{series_slug}.yaml` (teacher captured inside the YAML's `teacher_id` field, may be null)
 
-### §7.7 — Re-generate 716 → corresponding book_plan YAMLs
+**Locale fan-out per D-18:** ko_KR is included from regen day one. ko_KR series get `distribution_status: hold_pending_market_clearance` automatically; zh_CN series get `distribution_status: gray_zone_disclosed` per D-19.
 
-Run `generate_book_plans_from_series.py` against the new series_plan set. Outputs the new book_plan YAMLs.
+### §7.7 — Re-generate 716 → ~16,730 book_plan YAMLs (atomic per D-20)
+
+**Folded into the 2X.1 atomic PR per D-20.** Run `generate_book_plans_from_series.py` against the new series_plan set. Outputs the new book_plan YAMLs (5 locales × ~239 brands × ~14 chapters/series).
 
 ### §7.8 — Add 9 new craft bibles (per §4.4)
 
@@ -378,97 +393,96 @@ Add the canonical-anchor tags:
 
 ---
 
-## §8 — Migration sequence (PR-by-PR)
+## §8 — Migration sequence (PR-by-PR) — collapsed to 7 PRs per D-20
 
-The work is sequenced to be reversible at each step. Each PR has a single responsibility.
+The work is sequenced to be reversible at each step. Each PR has a single responsibility, except the atomic 2X.4 which is intentionally non-reversible (per OQ-4 hard cutover; D-20).
 
-### Phase 2X.0 — Spec lands (this PR)
-
-| PR | Owner | Scope | Files |
-|---|---|---|---|
-| **2X.0** | Pearl_Architect | This spec lands. No code/config changes. | 1 file: `specs/MANGA_CATALOG_RECONCILIATION_SPEC.md` |
-
-### Phase 2X.1 — Schema + planner expansion (no deletions yet)
+### Phase 2X.0 — Spec lands (already merged: PR #682; refresh in this v1.1 PR)
 
 | PR | Owner | Scope | Files |
 |---|---|---|---|
-| **2X.1** | Pearl_Dev | Open the genre allow-list + schema enum + add `demographic` and `locale_origin` fields. Backwards-compatible: old genre slugs still validate (transitional). | `scripts/manga/generate_series_plans_from_catalog.py`, `schemas/manga/series_plan.schema.json`, `phoenix_v4/manga/models/validation.py`, `tests/test_manga_schemas.py` |
+| **2X.0** | Pearl_Architect | v1.0 spec landed at PR #682 (7d93ae6c); v1.0.1 corrections at PR #685 (8a8578ba); v1.0.2 audiobook ref updates at PR #686 (1f4f8a28); v1.1 refresh (this PR) — incorporates OQ-1..OQ-9 resolutions and collapses sequence per D-20. | `specs/MANGA_CATALOG_RECONCILIATION_SPEC.md` |
 
-### Phase 2X.2 — Taxonomy + routing + pacing expansion
+### Phase 2X.1 — Build catalog plan generator (was old 2X.4)
 
 | PR | Owner | Scope | Files |
 |---|---|---|---|
-| **2X.2** | Pearl_Dev | Update `manga_taxonomy.yaml`, `format_routing.yaml`, `manga_pacing_by_genre.yaml`, `genre_ite_profiles.yaml` for the 15-genre allow-list. | 4 config files |
+| **2X.1** | Pearl_Dev | Add `scripts/manga/generate_catalog_plan_from_strategic.py` per §7.1. Add `.github/workflows/manga-catalog-plan-regen-check.yml` CI gate. Tests against fixture strategic-doc inputs. **Generator must NOT yet write** `artifacts/manga/MANGA_FULL_CATALOG_PLAN.md` — that happens in 2X.4 atomic. This PR builds the tool only. | 1 new script + 1 GHA workflow + tests |
+
+**Workstream:** `ws_manga_phase_2x_4_catalog_generator` (proposed; ID kept stable per coordination convention even though phase number renumbered v1.0→v1.1).
+
+### Phase 2X.2 — Taxonomy + routing + pacing config (5 locales × 15 genres = 75 routing cells)
+
+| PR | Owner | Scope | Files |
+|---|---|---|---|
+| **2X.2** | Pearl_Dev | Update `config/manga/manga_taxonomy.yaml`, `config/manga/format_routing.yaml`, `config/manga/manga_pacing_by_genre.yaml`, `config/manga/genre_ite_profiles.yaml` for the 15-genre allow-list across **5 locales** (en_US/ja_JP/zh_TW/zh_CN/ko_KR per D-18). Adds `distribution_status` semantics: `distributed` (default) / `gray_zone_disclosed` (zh_CN per D-19) / `hold_pending_market_clearance` (ko_KR per D-18). | 4 config files |
+
+**Workstream:** `ws_manga_phase_2x_2_taxonomy_routing_pacing` (proposed).
 
 ### Phase 2X.3 — Add 9 new craft bibles
 
 | PR | Owner | Scope | Files |
 |---|---|---|---|
-| **2X.3** | Pearl_Research | Synthesize the 9 new craft bibles from existing research (per §7.8 source map). Update `manga_craft/index.md`. | 10 files in `docs/research/manga_craft/` |
+| **2X.3** | Pearl_Research | Synthesize the 9 new craft bibles from existing research (per §7.8 source map). Update `docs/research/manga_craft/index.md`. Independent of 2X.1/2X.2/2X.4 (docs-only; doesn't gate anything). | 10 files in `docs/research/manga_craft/` |
 
-### Phase 2X.4 — Build the new catalog plan generator
+**Workstream:** `ws_manga_phase_2x_3_craft_bibles` (proposed).
 
-| PR | Owner | Scope | Files |
-|---|---|---|---|
-| **2X.4** | Pearl_Dev | Add `scripts/manga/generate_catalog_plan_from_strategic.py` per §7.1. CI gate to enforce regeneration. | 1 new script + 1 GHA workflow + tests |
-
-### Phase 2X.5 — Retire stale operational catalog (single-file delete)
-
-| PR | Owner | Scope | Files |
-|---|---|---|---|
-| **2X.5** | Pearl_GitHub | Run the new generator. Output replaces `artifacts/manga/MANGA_FULL_CATALOG_PLAN.md` (effectively a one-step delete + recreate as auto-generated). | 1 file replaced |
-
-### Phase 2X.6 — Retire stale series_plans (132 deletes + regenerate)
+### Phase 2X.4 — ATOMIC: schema flip + replace catalog plan + delete 848 stale YAMLs + regenerate (was old 2X.1+2X.5+2X.6+2X.7)
 
 | PR | Owner | Scope | Files | Owner-approval |
 |---|---|---|---|---|
-| **2X.6** | Pearl_GitHub | `git rm` the 132 stale `series_plan.yaml`s. Re-run `generate_series_plans_from_catalog.py` against the new catalog plan. Commit the new YAMLs. | 132 deletions + ~239 (or ~956 if per-locale) creations | **Operator approval = approval of this spec.** The PR must reference `specs/MANGA_CATALOG_RECONCILIATION_SPEC.md` §6.1.C in its body. |
+| **2X.4** | Pearl_Dev | **Single atomic PR per D-20.** (a) Flip `VALID_GENRES` 10→15 in `scripts/manga/generate_series_plans_from_catalog.py:45–49`. (b) Flip `genre.enum` + add `demographic` + `locale_origin` + `distribution_status` in `schemas/manga/series_plan.schema.json`. (c) Update `phoenix_v4/manga/models/validation.py`. (d) Run `generate_catalog_plan_from_strategic.py` (from 2X.1) to produce new `artifacts/manga/MANGA_FULL_CATALOG_PLAN.md`. (e) `git rm` 132 stale series_plan YAMLs + 716 stale book_plan YAMLs. (f) Run `generate_series_plans_from_catalog.py` against new catalog plan to emit ~1,195 series_plans. (g) Run `generate_book_plans_from_series.py` to emit ~16,730 book_plans. (h) Update `tests/test_manga_schemas.py` for new shape. All in **one commit**. | 4 code files + 1 catalog plan replaced + 132+716 = 848 YAMLs deleted + ~1,195 + ~16,730 = ~17,925 YAMLs created | **Operator approval = approval of this spec D-3/D-4/D-5/D-20.** PR must reference `specs/MANGA_CATALOG_RECONCILIATION_SPEC.md` §3 D-20 + §6.1.A in its body. **Will trigger CLAUDE.md mass-deletion rule (>50 files); spec acts as explicit owner approval.** |
 
-### Phase 2X.7 — Retire stale book_plans (716 deletes + regenerate)
+**Workstream:** `ws_manga_phase_2x_1_schema_atomic` (proposed; ID kept stable from v1.0 spec; phase number renumbered to 2X.4).
 
-| PR | Owner | Scope | Files | Owner-approval |
-|---|---|---|---|---|
-| **2X.7** | Pearl_GitHub | `git rm` the 716 stale `book_plan.yaml`s. Re-run `generate_book_plans_from_series.py`. Commit the new YAMLs. | 716 deletions + N creations | **Operator approval = approval of this spec.** PR must reference `§6.1.D`. |
+**Why this is non-reversible:** Per OQ-4 disposition (c), the operator chose strict typing over CI tolerance. Once 2X.4 lands, the legacy 4-locale × 10-genre shape is gone. Any pre-2X.4 branch with old-shape YAMLs becomes unmergeable to main without rebasing onto post-2X.4. This is the intended design.
 
-### Phase 2X.8 — Archive 2 zero-ref specs + reframe BRAND_DNA
+### Phase 2X.5 — Archive 2 zero-ref specs + reframe BRAND_DNA (was old 2X.8)
 
 | PR | Owner | Scope | Files |
 |---|---|---|---|
-| **2X.8** | Pearl_Architect | Move `MANGA_MODE_SYSTEM_SPEC.md` and `MANGA_AUTHOR_SYSTEM_SPEC.md` to `specs/archive/` with a `DEFERRED_2026_04_26.md` index file. Update `MANGA_BRAND_DNA_ANTI_SPAM_SPEC.md` per §7.10 (reframing — kept). | 2 moves + 1 update + 1 new index file |
+| **2X.5** | Pearl_Architect | Move `specs/MANGA_MODE_SYSTEM_SPEC.md` and `specs/MANGA_AUTHOR_SYSTEM_SPEC.md` to `specs/archive/` with a `specs/archive/DEFERRED_2026_04_26.md` index file. Update `specs/MANGA_BRAND_DNA_ANTI_SPAM_SPEC.md` per §7.10 (reframing — kept; aligned to GENRE_PORTFOLIO_PLAN per-brand %-allocation as anti-homogeneity mechanism). | 2 moves + 1 update + 1 new index file |
 
-### Phase 2X.9 — Update onboarding + docs index
+**Workstream:** `ws_manga_phase_2x_8_archive_specs` (proposed).
+
+### Phase 2X.6 — Update onboarding + docs index (was old 2X.9)
 
 | PR | Owner | Scope | Files |
 |---|---|---|---|
-| **2X.9** | Pearl_Architect | Update `MANGA_PIPELINE_ONBOARDING.md` and `DOCS_INDEX.md` per §7.11 + §7.12. | 2 doc files |
+| **2X.6** | Pearl_Architect | Update `docs/MANGA_PIPELINE_ONBOARDING.md` (15 genres + new fields + 5-locale brand model + distribution_status semantics) and `docs/DOCS_INDEX.md` (CANONICAL tags for GENRE_PORTFOLIO_PLAN + CJK_CATALOG_PLAN + US_CATALOG_PLAN + this spec + MANGA_MODE_STRATEGY.md). | 2 doc files |
+
+**Workstream:** `ws_manga_phase_2x_9_onboarding_docs_index` (proposed).
 
 ### Sequence summary
 
 ```
-PR 2X.0 — spec lands (this PR)
+PR 2X.0 — v1.0 spec landed PR #682 → v1.1 refresh (this PR)
    ↓
-PR 2X.1 — schema/planner opens new genres (backwards-compat)
+PR 2X.1 — catalog plan generator built (Pearl_Dev)
    ↓
-PR 2X.2 — config (taxonomy/routing/pacing) supports new genres
+PR 2X.2 — taxonomy/routing/pacing for 15 genres × 5 locales (Pearl_Dev)
    ↓
-PR 2X.3 — craft bibles added (research → source-of-truth for prompt compilation)
+PR 2X.3 — 9 craft bibles added (Pearl_Research; can run in parallel with 2X.2)
    ↓
-PR 2X.4 — new catalog plan generator built
+PR 2X.4 — ATOMIC: schema/planner + 848 YAML deletes + regen 17,925 YAMLs (Pearl_Dev)
    ↓
-PR 2X.5 — operational catalog plan replaced (1-file)
+PR 2X.5 — specs archived + BRAND_DNA reframed (Pearl_Architect)
    ↓
-PR 2X.6 — series_plans retired + regenerated (132 → new count)
-   ↓
-PR 2X.7 — book_plans retired + regenerated (716 → new count)
-   ↓
-PR 2X.8 — specs archived + BRAND_DNA reframed
-   ↓
-PR 2X.9 — onboarding + docs index updated
+PR 2X.6 — onboarding + docs index updated (Pearl_Architect)
 ```
 
-**Total:** 10 PRs over Phase 2X. Estimated ~40–80 hours engineering, distributed.
+**Total:** 7 PRs over Phase 2X (1 spec + 6 execution). Estimated ~40–80 hours engineering, distributed.
 
-**Critical constraint:** PR 2X.1 must be backwards-compatible (old genres + new genres both validate) so PR 2X.6 can flip the YAMLs without an intermediate broken state. Once 2X.6 lands, PR 2X.10 (out of this spec's scope, future hardening) can remove the legacy genre slugs from the allow-list.
+**Critical constraint:** 2X.1 (generator) and 2X.2 (config) must both land before 2X.4 (atomic). 2X.4 is non-reversible per D-20. No backwards-compat window — schema flip and YAML regen happen in the same commit; CI never sees a stale-YAML/new-schema mismatch because the deletion + regeneration are atomic.
+
+**Workstream ID note:** the 7 pre-staged workstream rows in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (added in PR #685) keep their original IDs for stability. The phase numbers in this spec section refer to merge-order-when-executed, not to the workstream ID. The mapping is:
+- `ws_manga_phase_2x_1_schema_atomic` → spec phase 2X.4 (atomic)
+- `ws_manga_phase_2x_2_taxonomy_routing_pacing` → spec phase 2X.2
+- `ws_manga_phase_2x_3_craft_bibles` → spec phase 2X.3
+- `ws_manga_phase_2x_4_catalog_generator` → spec phase 2X.1
+- `ws_manga_phase_2x_5_replace_catalog_plan` → ABSORBED into spec phase 2X.4 atomic; row will be marked completed when 2X.4 merges
+- `ws_manga_phase_2x_8_archive_specs` → spec phase 2X.5
+- `ws_manga_phase_2x_9_onboarding_docs_index` → spec phase 2X.6
 
 ---
 
@@ -501,45 +515,65 @@ The reconciliation is complete when **all** of the following hold on `origin/mai
 
 ---
 
-## §10 — Open questions for operator
+## §10 — Open questions for operator — ALL 9 RESOLVED 2026-04-26
 
-These decisions are not made by this spec; the operator picks before the relevant PR opens.
+All 9 open questions from v1.0 of this spec have been answered by the operator. OQ-7, OQ-8, OQ-9 were executed via PRs #684, #685, #686. OQ-1..OQ-6 are captured here as decisions that the Phase 2X execution PRs (2X.1..2X.6) implement.
 
-### OQ-1 — Mecha as 13th genre or sub-shell?
+### OQ-1 — Mecha as 13th genre or sub-shell? — RESOLVED (a) own genre
 
-The 12 strategic genre shells in `GENRE_PORTFOLIO_PLAN.md` cite Evangelion's $16B as the highest-leverage example but do not include mecha as one of the 12. This spec D-9 promotes mecha to its own genre slug. Alternatives:
-- (a) Mecha is its own genre. (Spec recommendation; aligns with research depth.)
-- (b) Mecha is a sub-genre under sci-fi/cyberpunk (e.g., `sci_fi_cyberpunk` with `style: mecha_cinematic`).
-- (c) Mecha is a sub-genre under action_battle.
+**Disposition:** **(a) Mecha is its own genre.** Promoted to slot #15 in `VALID_GENRES` per §4.1. Spec D-9 stands.
 
-### OQ-2 — Is `school_coming_of_age` a 14th genre or a sub-shell?
+**Rationale:** the strategic plan cites Evangelion ($16B franchise) as the highest revenue-tier exemplar precisely because the mecha shell does distinctive work. Folding it into sci-fi/cyberpunk would lose the Genre Shell Revenue Gap signal. Cost (one routing cell per locale + one craft bible) is small.
 
-`GENRE_PORTFOLIO_PLAN.md` lists School / Coming-of-Age as a "bonus genre used by specific brands." This spec D-9 promotes it. Alternatives: (a) own genre, (b) demographic (`demographic: shonen` + `style: school_setting`), (c) absorb into romance_josei_drama for romance-school crossovers.
+**Implementation:** carried into 2X.4 atomic + 2X.3 craft bible (`docs/research/manga_craft/mecha.md`).
 
-### OQ-3 — How aggressive is the brand-vs-teacher reconciliation?
+### OQ-2 — School / Coming-of-Age as own genre or sub-shell? — RESOLVED (a) own genre
 
-`GENRE_PORTFOLIO_PLAN.md` defines 37 brands; `MANGA_FULL_CATALOG_PLAN.md` defines 12 teachers. This spec D-6 makes brand the catalog axis and teacher an attribute. Alternatives:
-- (a) Drop teacher entirely from series_plan; keep teacher only in `manga_profiles`. (Spec recommendation.)
-- (b) Maintain dual-axis modeling with brand as primary, teacher as secondary axis (12 × 37 grid with empty cells where no teacher anchors).
-- (c) Reduce brand list; merge brands that are essentially the same teacher × different topic.
+**Disposition:** **(a) `school_coming_of_age` is its own genre.** Promoted to slot #14 in `VALID_GENRES` per §4.1.
 
-### OQ-4 — When to flip the per-genre `demographic` semantics
+**Rationale:** operator chose the explicit-genre treatment over the orthogonal-`life_stage`-modifier alternative (b). Means brands that target formative-anxiety contexts get a clean catalog cell; cost is one more routing cell per locale + one more craft bible.
 
-`shonen` and `josei` are currently genre slugs in the planner; this spec moves them to `demographic`. Alternatives:
-- (a) Flip in PR 2X.1 (backwards-compat: old `genre: shonen` validates as `genre: action_battle, demographic: shonen` via translation map). (Spec recommendation.)
-- (b) Leave existing slugs as-is; add demographic-as-attribute only for new series. (Creates ongoing dual-modeling burden.)
+**Implementation:** carried into 2X.4 atomic + 2X.3 craft bible (`docs/research/manga_craft/school_coming_of_age.md`).
 
-### OQ-5 — ko_KR as 5th locale?
+### OQ-3 — Brand-vs-teacher reconciliation aggressiveness — RESOLVED (a) brand wins
 
-Per audit §8 OQ-1. The strategic CJK_CATALOG_PLAN explicitly maps KR. This spec defers — assumes 4 locales — but the moment ko_KR is added, the per-locale × 15-genre routing matrix grows from 60 to 75 entries. Operator picks now or in Phase 2X.2.
+**Disposition:** **(a) brand wins; 37 brands as the catalog allocation unit; teacher becomes a body attribute (`teacher_id` field, may be `null`).** Spec D-6 stands.
 
-### OQ-6 — zh_CN distribution stance
+**Rationale:** filenames drop teacher from path, gaining `ls config/source_of_truth/manga_series_plans/{brand}__*` discoverability. Teacher attribution stays canonical via `teacher_id` in YAML body. Brands without teacher anchors (e.g., `legacy_builder_memoir`, `bio_flow_healing`) get `teacher_id: null` cleanly.
 
-Per audit §8 OQ-4. Plans render but distribution is BLOCKED. Spec recommendation: render zh_CN series, hold in `artifacts/manga/` until partnership lands, do not attempt upload. Confirm.
+**Implementation:** carried into 2X.4 atomic. Filename convention: `{brand}__{locale}__{genre}__{topic}__{slug}.yaml`.
 
-### OQ-7 — `docs/MANGA_MODE_STRATEGY.docx` migration
+### OQ-4 — Demographic flip timing — RESOLVED (c) hard cutover
 
-Per audit §8 OQ-11. Binary docx; not auditable. Recommendation: migrate to Markdown in Phase 2X.9, then potentially prune as redundant with `MANGA_MODE_SYSTEM_SPEC.md` (which §6.1.B archives). Confirm.
+**Disposition:** **(c) hard cutover with delete-old-stuff. No backwards-compatibility window.** D-20 codifies this. Schema flip + 132+716 YAML deletion + regenerate happen in **one atomic PR (2X.4)** — no intermediate state where old-shape YAMLs exist alongside new-shape schema.
+
+**Rationale:** operator chose strict typing over CI stability. Original spec recommended (a) backwards-compat with a 5-week migration window; operator overrode with stricter approach. Atomic deletion sidesteps the red-CI period.
+
+**Implementation:** the 10-PR sequence in v1.0 spec collapses to 7 PRs in v1.1; old 2X.1 (schema, no deletes) + 2X.5 (catalog plan replace) + 2X.6 (132 deletes + regen) + 2X.7 (716 deletes + regen) all fold into the single atomic 2X.4 per D-20.
+
+### OQ-5 — ko_KR as 5th locale? — RESOLVED (b) render + hold distribution
+
+**Disposition:** **(b) ko_KR added as 5th locale; rendered now, distribution held pending Korea AI Act enforcement clarity (post-Jan 2027).** D-18 codifies. Routing matrix grows 4×15=60 cells → **5×15=75 cells**.
+
+**Rationale:** translation pipeline (Tier-2 Qwen) and CJK fonts already support KR. Render-and-hold uses sunk-cost compute; ready-to-ship the moment Korea AI Act rules clarify. Not aggressive Path A (which would risk AI Act enforcement); not (c) skip (which would abandon the 170M-MAU webtoon-native audience).
+
+**Implementation:** ko_KR added to `VALID_LOCALES` + format_routing.yaml (2X.2) + atomic regen includes ko_KR (2X.4). New `distribution_status: hold_pending_market_clearance` flag.
+
+### OQ-6 — zh_CN distribution stance — RESOLVED (c) gray-zone with full AI disclosure
+
+**Disposition:** **(c) zh_CN distribution attempts via Bilibili Comics + Kuaikan Manhua + Tencent Comics with full AI-disclosure metadata.** D-19 codifies.
+
+**Rationale:** operator chose maximum reach (~400M Mandarin readers) over conservative render-and-hold. Accepts platform-termination risk under PRC Generative AI Service Measures (2023; algorithm filing + watermarking + identity verification required).
+
+**New risk:** `R-zh_CN-distribution: HIGH` added to risk register. Mitigations: per-platform account-standing tracking; graceful re-routing if a platform terminates; explicit `distribution_disclosure: ai_assisted_full` on every series.
+
+**Implementation:** zh_CN series get `distribution_status: gray_zone_disclosed` (2X.2 config) + new operational scripts `scripts/publish/bilibili_comics_release.py`, `scripts/publish/kuaikan_release.py`, `scripts/publish/tencent_comics_release.py` (out-of-spec; future workstreams under this project but not part of 2X.1..2X.6).
+
+### OQ-7 — `MANGA_MODE_STRATEGY.docx` migration — RESOLVED (a) executed via PR #684
+
+**Disposition:** **(a) Migrated to `docs/MANGA_MODE_STRATEGY.md`** (343 lines / 20.7 KB; 9 tables / 68 rows preserved inline). Verdict: KEEP as strategic complement to `specs/MANGA_MODE_SYSTEM_SPEC.md` — NOT redundant. The two documents are explicitly cross-referenced; docx covers business strategy + market analysis (market opportunity, regional strategy, Gen Z/Alpha demographics, monetization tiers, archetype × teacher fit, risk register), spec covers technical architecture.
+
+**Status:** ✅ DONE PR #684 merge SHA `8aaa46aafd81046fe9c5b1702f803e2bbab61c6e`.
 
 ### OQ-8 — Coordination layer — RESOLVED 2026-04-26
 
@@ -552,9 +586,11 @@ Per audit §8 OQ-11. Binary docx; not auditable. Recommendation: migrate to Mark
 - D-16 amended in §3 (this spec)
 - Stale `coordination/` references in this spec and in `docs/MANGA_PIPELINE_AUDIT_2026-04-26.md` corrected in place
 
-### OQ-9 — Audiobook-named docs that landed in `docs/`
+### OQ-9 — Audiobook-named docs in `docs/` — RESOLVED (a) executed via PR #686
 
-`docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md` (117 KB, audiobook) and `docs/AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md` (audiobook) sit in `docs/` adjacent to manga docs. They are out of scope for this spec but the naming collision is confusing. Operator may want a separate hygiene PR to rename or move them under `docs/audiobook/`. Not done here.
+**Disposition:** **(a) Renamed in place with `AUDIOBOOK_` prefix.** `docs/LOCALE_CATALOG_MARKETING_PLAN.md` → `docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md`; `docs/TITLE_AND_CATALOG_MARKETING_SYSTEM.md` → `docs/AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md`. Plus 12 inbound reference updates (56 total replacements across specs/, docs/, config/) using negative lookbehind to avoid double-prefixing. Frozen historical context in `de_chats_to_analyze/`, `old_chat_specs/`, `artifacts/research/`, `artifacts/audit/` left untouched.
+
+**Status:** ✅ DONE PR #686 merge SHA `1f4f8a28fc0e09163b4a88653074114c337ca1ea`.
 
 ---
 
@@ -563,18 +599,20 @@ Per audit §8 OQ-11. Binary docx; not auditable. Recommendation: migrate to Mark
 This spec does not:
 
 - ~~Modify `coordination/` (does not exist; D-16).~~ **AMENDED 2026-04-26:** The coordination layer at `artifacts/coordination/` is updated by this spec's execution per OQ-8 disposition (iii). See D-16 (amended) and §10 OQ-8 (resolved).
-- Add a live LLM writer in `chapter_runner` (per audit §7.9 OQ-9 — Tier-1 policy decision).
+- Add a live LLM writer in `chapter_runner` (per audit §7.9 — Tier-1 policy decision; separate workstream).
 - Implement the QC gate runner (audit §7.2; separate sprint).
 - Implement MQG-01, MQG-03..08 (audit §7.3; separate sprint).
 - Implement MDLG-01..05 dialogue gates (audit §7.4; separate sprint).
-- Implement the cover pipeline (audit §7.5; deferred per OQ-8).
+- Implement the cover pipeline (audit §7.5; deferred per audit-§8 OQ-8).
 - Touch any audiobook artifact (`docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md`, `docs/AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md`, `phoenix_v4/audiobook/`, `scripts/audiobook/`).
 - Touch any video artifact (`phoenix_v4/video/`, `scripts/video/`).
 - Touch the existing ep_001 production artifact in `artifacts/manga/ep_001/`.
 - Merge PR #678 (gating but separate; tracked in audit §5.5).
-- ~~Open new workstreams in `coordination/workstreams.tsv` (the coordination layer is out of scope).~~ **AMENDED 2026-04-26:** Workstreams are tracked in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`; this spec's execution backfills completed workstreams (PRs #680/#682/#684) and pre-stages Phase 2X.1..2X.9 PROPOSED rows. See D-16 (amended).
-- Add ko_KR as a 5th locale (deferred to OQ-5).
+- ~~Open new workstreams in `coordination/workstreams.tsv` (the coordination layer is out of scope).~~ **AMENDED 2026-04-26:** Workstreams are tracked in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`; this spec's execution backfills completed workstreams (PRs #680/#682/#684/#685/#686) and pre-stages Phase 2X workstream rows. See D-16 (amended) + §10 OQ-8 (resolved).
+- ~~Add ko_KR as a 5th locale (deferred to OQ-5).~~ **AMENDED 2026-04-26 v1.1:** ko_KR IS added as 5th locale per D-18 (OQ-5 resolved (b) render+hold). Routing matrix grows to 5×15=75 cells.
 - Implement BRAND_DNA_ANTI_SPAM (reframed in §7.10; implementation is post-reconciliation).
+- Build zh_CN distribution scripts (`scripts/publish/bilibili_comics_release.py`, `scripts/publish/kuaikan_release.py`, `scripts/publish/tencent_comics_release.py`). Per D-19 / §10 OQ-6 (c), zh_CN gray-zone distribution is approved-in-direction but operational tooling lands in **separate workstreams** under `proj_manga_catalog_reconciliation_20260426`, not as part of 2X.1..2X.6.
+- Add cover gate execution timing decision (per audit §7.5 + spec §10 OQ-7 from v1.0; deferred until cover pipeline workstream opens).
 
 ---
 
