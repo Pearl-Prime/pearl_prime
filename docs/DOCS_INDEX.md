@@ -1602,7 +1602,7 @@ Translation and validation pipeline: parallel sharded translation (atoms + exerc
 | **Locale personas** | [docs/LOCALE_PERSONAS.md](./LOCALE_PERSONAS.md) — 40 persona definitions across 11 non-en-US locales (anxious_insomniac_tw, burned_out_professional_tw, etc.) |
 | **All-locale catalog marketing plan** | [docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) — Per-locale positioning, go-live checklists, readiness tracker for all 13 locales (incl. it-IT EU catalogue) |
 | **zh-CN distribution plan** | [docs/ZH_CN_DISTRIBUTION_PLAN.md](./ZH_CN_DISTRIBUTION_PLAN.md) — Local platform pipeline (Ximalaya, NetEase, WeChat Read, Dedao); Phase 5 prerequisite checklist |
-| **Locale strategy (rollout phases)** | [del_location_plan/locale_strategy.md](../del_location_plan/locale_strategy.md) — One brand = one locale; Phase 1–5 rollout; distribution routing; CI gate #49 |
+| **Locale strategy (rollout phases)** | `del_location_plan/locale_strategy.md` ⚠️ *file removed in PR #706 (2026-04-26 D1 cluster delete); content was: One brand = one locale; Phase 1–5 rollout; distribution routing; CI gate #49 — recover from git history if needed* |
 | **Locale prose & prompting** | `docs/LOCALE_PROSE_AND_PROMPTING.md` ⚠️ *file not present* |
 | **Multilingual architecture** | `docs/MULTILINGUAL_ARCHITECTURE.md` ⚠️ *file not present* |
 | **Korean market & prose** | `docs/KOREA_MARKET_AND_PROSE.md` ⚠️ *file not present* |
