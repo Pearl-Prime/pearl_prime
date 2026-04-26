@@ -89,9 +89,11 @@
         "line_manga_indies",
         "naver_webtoon_kr",
         "print_only",
-        "partner_required"
+        "partner_required",
+        "gray_zone_with_disclosure",
+        "hold_pending_market_clearance"
       ],
-      "description": "v2 — which WEBTOON connector this series uses (per PR #631: three connectors needed, not one). unified_canvas covers en/es/fr/id/th/zh-TW/de. line_manga_indies covers ja_JP. naver_webtoon_kr covers ko_KR. print_only = KDP/Bookwalker/Comic C'moA path. partner_required = Piccoma/Bilibili/Kakao (no self-pub path)."
+      "description": "v2 — which WEBTOON connector this series uses (per PR #631: three connectors needed, not one). unified_canvas covers en/es/fr/id/th/zh-TW/de. line_manga_indies covers ja_JP. naver_webtoon_kr covers ko_KR. print_only = KDP/Bookwalker/Comic C'moA path. partner_required = Piccoma/Bilibili/Kakao (no self-pub path). v2.1 (Phase 2X.2 per CATALOG_RECONCILIATION_SPEC D-18 + D-19): gray_zone_with_disclosure = zh_CN platforms (Bilibili/Kuaikan/Tencent) with full AI-disclosure metadata; hold_pending_market_clearance = ko_KR rendered + held until Korea AI Act enforcement clarifies."
     },
     "panel_layout_template": {
       "type": "string",

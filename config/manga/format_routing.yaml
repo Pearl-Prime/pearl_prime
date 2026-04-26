@@ -19,6 +19,7 @@ authority_doc: "artifacts/research/webtoon_master_reference_2026-04-25.md"
 # flatten_exports adds bw_page_manga where the genre has a strong B&W tradition.
 defaults_by_locale_genre:
   en_US:
+    # Legacy 10-slug allow-list (kept until 2X.4 atomic flip per spec D-20).
     iyashikei:        { master: color_vertical_webtoon, flatten: [bw_page_manga] }
     seinen:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
     shonen:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
@@ -29,12 +30,26 @@ defaults_by_locale_genre:
     webtoon_romance:  { master: color_vertical_webtoon, flatten: [] }
     isekai:           { master: color_vertical_webtoon, flatten: [] }
     josei_essay_manga: { master: direct_self_help_illustrated, flatten: [] }
+    # NEW per spec §4.1 — strategic 13 additions to support 15-slug allow-list.
+    dark_fantasy:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    psychological_horror:   { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    supernatural_mystery:   { master: color_vertical_webtoon, flatten: [] }
+    sci_fi_cyberpunk:       { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    psychological_thriller: { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    romance_josei_drama:    { master: color_vertical_webtoon, flatten: [] }
+    workplace_drama:        { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    action_battle:          { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    sports_competition:     { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    historical_period:      { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    cultivation_martial:    { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    school_coming_of_age:   { master: color_vertical_webtoon, flatten: [] }
+    mecha:                  { master: color_vertical_webtoon, flatten: [bw_page_manga] }
 
   ja_JP:
     # JP is the only market where B&W is genuinely co-equal commercially.
     # Per PR #626: 40% color webtoon / 45% B&W / 13% color page / 2% self-help.
     # We still default to webtoon as master (cheaper to flatten) but flatten_exports
-    # is denser here.
+    # is denser here. Legacy 10 slugs retained until 2X.4 atomic.
     iyashikei:        { master: color_vertical_webtoon, flatten: [bw_page_manga] }
     seinen:           { master: bw_page_manga, flatten: [] }   # seinen psychological is print-first
     shonen:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
@@ -45,8 +60,23 @@ defaults_by_locale_genre:
     webtoon_romance:  { master: color_vertical_webtoon, flatten: [] }
     isekai:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
     josei_essay_manga: { master: bw_page_manga, flatten: [] }
+    # NEW per spec §4.1 — JP B&W-heavy weighting maintained for new strategic genres.
+    dark_fantasy:           { master: bw_page_manga, flatten: [] }   # Berserk/Vagabond register — print-first
+    psychological_horror:   { master: bw_page_manga, flatten: [] }
+    supernatural_mystery:   { master: bw_page_manga, flatten: [color_vertical_webtoon] }
+    sci_fi_cyberpunk:       { master: bw_page_manga, flatten: [color_vertical_webtoon] }   # Akira/GitS register — print-first
+    psychological_thriller: { master: bw_page_manga, flatten: [] }   # Death Note/Monster register
+    romance_josei_drama:    { master: color_vertical_webtoon, flatten: [color_page_manga] }
+    workplace_drama:        { master: bw_page_manga, flatten: [color_vertical_webtoon] }
+    action_battle:          { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    sports_competition:     { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    historical_period:      { master: bw_page_manga, flatten: [] }   # Vinland Saga register — print-first
+    cultivation_martial:    { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    school_coming_of_age:   { master: color_vertical_webtoon, flatten: [color_page_manga] }
+    mecha:                  { master: bw_page_manga, flatten: [] }   # Evangelion/Gundam register — print-first
 
   zh_TW:
+    # Legacy 10 slugs retained until 2X.4 atomic.
     iyashikei:        { master: color_vertical_webtoon, flatten: [bw_page_manga] }
     seinen:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
     shonen:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
@@ -57,12 +87,26 @@ defaults_by_locale_genre:
     webtoon_romance:  { master: color_vertical_webtoon, flatten: [] }
     isekai:           { master: color_vertical_webtoon, flatten: [] }
     josei_essay_manga: { master: direct_self_help_illustrated, flatten: [] }
+    # NEW per spec §4.1 — TW cultivation/historical bias per OQ-3 mapping.
+    dark_fantasy:           { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    psychological_horror:   { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    supernatural_mystery:   { master: color_vertical_webtoon, flatten: [] }
+    sci_fi_cyberpunk:       { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    psychological_thriller: { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    romance_josei_drama:    { master: color_vertical_webtoon, flatten: [] }
+    workplace_drama:        { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    action_battle:          { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    sports_competition:     { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    historical_period:      { master: color_vertical_webtoon, flatten: [bw_page_manga] }
+    cultivation_martial:    { master: color_vertical_webtoon, flatten: [bw_page_manga] }   # TW primary
+    school_coming_of_age:   { master: color_vertical_webtoon, flatten: [] }
+    mecha:                  { master: color_vertical_webtoon, flatten: [bw_page_manga] }
 
   zh_CN:
-    # zh_CN catalog plans are documented but NOT rendered until partnership lands.
-    # Per PR #631: produce zh_CN catalog plans; do not include in Phase 0 connector buildout.
-    # Generator emits these with target_platforms = [amazon_kdp_comics] (global) and
-    # pending_partner_targets = [bilibili_comics, kuaikan_manhua].
+    # zh_CN now: GRAY-ZONE distribution per spec D-19 (OQ-6 c) — push to
+    # Bilibili Comics + Kuaikan Manhua + Tencent Comics with full AI-disclosure
+    # metadata. Adds R-zh_CN-distribution=HIGH risk per spec.
+    # Legacy 10 slugs retained until 2X.4 atomic.
     iyashikei:        { master: color_vertical_webtoon, flatten: [] }
     seinen:           { master: color_vertical_webtoon, flatten: [] }
     shonen:           { master: color_vertical_webtoon, flatten: [] }
@@ -73,6 +117,50 @@ defaults_by_locale_genre:
     webtoon_romance:  { master: color_vertical_webtoon, flatten: [] }
     isekai:           { master: color_vertical_webtoon, flatten: [] }
     josei_essay_manga: { master: color_vertical_webtoon, flatten: [] }
+    # NEW per spec §4.1 — CN cultivation/xianxia primary; webtoon-vertical-romance secondary.
+    dark_fantasy:           { master: color_vertical_webtoon, flatten: [] }
+    psychological_horror:   { master: color_vertical_webtoon, flatten: [] }
+    supernatural_mystery:   { master: color_vertical_webtoon, flatten: [] }
+    sci_fi_cyberpunk:       { master: color_vertical_webtoon, flatten: [] }
+    psychological_thriller: { master: color_vertical_webtoon, flatten: [] }
+    romance_josei_drama:    { master: color_vertical_webtoon, flatten: [] }
+    workplace_drama:        { master: color_vertical_webtoon, flatten: [] }
+    action_battle:          { master: color_vertical_webtoon, flatten: [] }
+    sports_competition:     { master: color_vertical_webtoon, flatten: [] }
+    historical_period:      { master: color_vertical_webtoon, flatten: [] }
+    cultivation_martial:    { master: color_vertical_webtoon, flatten: [] }   # CN primary
+    school_coming_of_age:   { master: color_vertical_webtoon, flatten: [] }
+    mecha:                  { master: color_vertical_webtoon, flatten: [] }
+
+  ko_KR:
+    # ko_KR is webtoon-native (Naver/Kakao). Per spec D-18 (OQ-5 b):
+    # render now, distribution_status=hold_pending_market_clearance pending
+    # Korea AI Act enforcement clarity (post-Jan 2027). All genres are
+    # color_vertical_webtoon master; no flatten exports needed (KR readers
+    # consume webtoon-native; print is irrelevant).
+    iyashikei:              { master: color_vertical_webtoon, flatten: [] }
+    seinen:                 { master: color_vertical_webtoon, flatten: [] }
+    shonen:                 { master: color_vertical_webtoon, flatten: [] }
+    shojo:                  { master: color_vertical_webtoon, flatten: [] }
+    horror:                 { master: color_vertical_webtoon, flatten: [] }
+    cultivation:            { master: color_vertical_webtoon, flatten: [] }
+    manhwa:                 { master: color_vertical_webtoon, flatten: [] }
+    webtoon_romance:        { master: color_vertical_webtoon, flatten: [] }
+    isekai:                 { master: color_vertical_webtoon, flatten: [] }
+    josei_essay_manga:      { master: color_vertical_webtoon, flatten: [] }
+    dark_fantasy:           { master: color_vertical_webtoon, flatten: [] }
+    psychological_horror:   { master: color_vertical_webtoon, flatten: [] }
+    supernatural_mystery:   { master: color_vertical_webtoon, flatten: [] }
+    sci_fi_cyberpunk:       { master: color_vertical_webtoon, flatten: [] }
+    psychological_thriller: { master: color_vertical_webtoon, flatten: [] }
+    romance_josei_drama:    { master: color_vertical_webtoon, flatten: [] }
+    workplace_drama:        { master: color_vertical_webtoon, flatten: [] }
+    action_battle:          { master: color_vertical_webtoon, flatten: [] }
+    sports_competition:     { master: color_vertical_webtoon, flatten: [] }
+    historical_period:      { master: color_vertical_webtoon, flatten: [] }
+    cultivation_martial:    { master: color_vertical_webtoon, flatten: [] }
+    school_coming_of_age:   { master: color_vertical_webtoon, flatten: [] }
+    mecha:                  { master: color_vertical_webtoon, flatten: [] }
 
 # ── target_platforms by (locale, master_format) ────────────────────────────
 # Only ALLOWED + ALLOWED_GREY platforms surface here. PARTNER_ONLY platforms
@@ -97,19 +185,31 @@ target_platforms_by_locale_format:
     direct_self_help_illustrated: [bookwalker, amazon_kdp_comics, kobo, apple_books]
 
   zh_CN:
-    # No native Chinese platform is ALLOWED — all PARTNER_ONLY.
-    # KDP Comics is ALLOWED globally (Amazon ships kindle to mainland with limitations).
-    color_vertical_webtoon: [amazon_kdp_comics]
+    # zh_CN per D-19 (OQ-6 c): GRAY-ZONE distribution with full AI disclosure.
+    # KDP Comics is ALLOWED globally; Bilibili/Kuaikan/Tencent are GRAY (pushed
+    # with AI disclosure metadata; account termination risk under PRC Generative
+    # AI Service Measures 2023). R-zh_CN-distribution=HIGH risk in spec.
+    color_vertical_webtoon: [amazon_kdp_comics, bilibili_comics, kuaikan_manhua, tencent_comics]
     bw_page_manga:          [amazon_kdp_comics]
     color_page_manga:       [amazon_kdp_comics]
     direct_self_help_illustrated: [amazon_kdp_comics, kobo]
+
+  ko_KR:
+    # ko_KR per D-18 (OQ-5 b): rendered + held pending Korea AI Act clarity.
+    # No distribution targets until policy resolves. Pre-staged platforms in
+    # pending_partner_targets_by_locale below for ready-to-ship state.
+    color_vertical_webtoon: []
+    bw_page_manga:          []
+    color_page_manga:       []
+    direct_self_help_illustrated: []
 
 # ── pending_partner_targets by locale (documented intent only) ─────────────
 pending_partner_targets_by_locale:
   en_US: []
   ja_JP: [piccoma_smartoon, line_manga_originals]
   zh_TW: [line_manga_originals]
-  zh_CN: [bilibili_comics, kuaikan_manhua]
+  zh_CN: [tencent_comics_premium, kuaikan_premium]   # gray-zone primary push (above) is preferred over premium-only deals
+  ko_KR: [naver_webtoon, kakao_webtoon, line_webtoon_kr]   # held per D-18; ready when AI Act clarifies
 
 # ── connector_lane by (locale, master_format) ─────────────────────────────
 # Per PR #631 Decision 1.1: three WEBTOON connectors needed, not one.
@@ -133,9 +233,18 @@ connector_lane_by_locale_format:
     direct_self_help_illustrated: print_only
 
   zh_CN:
-    color_vertical_webtoon: partner_required
+    # Per D-19 GRAY-ZONE: gray_zone_with_disclosure connector lane added.
+    # AI-disclosure metadata required per series.
+    color_vertical_webtoon: gray_zone_with_disclosure
     bw_page_manga:          partner_required
     color_page_manga:       partner_required
+    direct_self_help_illustrated: print_only
+
+  ko_KR:
+    # Per D-18 RENDER+HOLD: no active connector until Korea AI Act resolution.
+    color_vertical_webtoon: hold_pending_market_clearance
+    bw_page_manga:          print_only
+    color_page_manga:       print_only
     direct_self_help_illustrated: print_only
 
 # ── panel_layout_template by master_format ────────────────────────────────

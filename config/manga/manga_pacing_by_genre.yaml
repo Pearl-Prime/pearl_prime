@@ -340,6 +340,119 @@ genre_pacing:
       - "Azumanga Daioh"
       - "Daily Lives of High School Boys"
 
+  # ── Phase 2X.2 strategic-shell additions per spec §4.1 + §7.5 ──────────────
+  # Pacing rows for the 5 net-new strategic genre shells (mecha + dark_fantasy
+  # + sci_fi_cyberpunk + historical_period + cultivation_martial). The other
+  # strategic genres (psychological_horror, supernatural_mystery, romance_josei_drama,
+  # workplace_drama, action_battle, sports_competition, school_coming_of_age)
+  # already have pacing coverage via existing rows + aliases below.
+
+  dark_fantasy:
+    label: "Dark fantasy (Berserk/Frieren register)"
+    words_per_page_range: [40, 120]
+    words_per_balloon_max: 22
+    silent_panel_ratio_range: [0.25, 0.40]
+    reaction_shot_frequency: medium
+    spread_frequency: periodic
+    page_turn_triggers:
+      - cost_reveal
+      - philosophical_provocation
+      - irreversible_loss
+      - antagonist_clarity
+      - environmental_breath
+    narration_tolerance: high
+    sfx_usage: restrained_impact
+    background_density: dense_atmospheric
+    reference_corpus:
+      - "Berserk"
+      - "Vagabond"
+      - "Vinland Saga"
+      - "Frieren: Beyond Journey's End"
+
+  mecha:
+    label: "Mecha (Evangelion/Gundam register)"
+    words_per_page_range: [5, 25]
+    words_per_balloon_max: 18
+    silent_panel_ratio_range: [0.20, 0.30]
+    reaction_shot_frequency: high
+    spread_frequency: rare_climactic
+    page_turn_triggers:
+      - mecha_launch
+      - cockpit_crisis
+      - scale_reveal
+      - aftermath_cost
+    narration_tolerance: high
+    sfx_usage: heavy_mechanical
+    background_density: heavy_machine_detail
+    reference_corpus:
+      - "Neon Genesis Evangelion"
+      - "Mobile Suit Gundam: The Origin"
+      - "Knights of Sidonia"
+      - "Eureka Seven"
+
+  sci_fi_cyberpunk:
+    label: "Sci-Fi / Cyberpunk (Akira/Ghost in the Shell register)"
+    words_per_page_range: [50, 130]
+    words_per_balloon_max: 25
+    silent_panel_ratio_range: [0.15, 0.25]
+    reaction_shot_frequency: medium
+    spread_frequency: periodic
+    page_turn_triggers:
+      - system_anomaly
+      - tech_mirror
+      - existential_beat
+      - ui_data_reveal
+    narration_tolerance: very_high
+    sfx_usage: mechanical_environmental
+    background_density: very_high
+    reference_corpus:
+      - "Akira"
+      - "Ghost in the Shell"
+      - "BLAME!"
+      - "Battle Angel Alita"
+
+  historical_period:
+    label: "Historical / Period (Vinland Saga/Bride's Story register)"
+    words_per_page_range: [50, 100]
+    words_per_balloon_max: 22
+    silent_panel_ratio_range: [0.20, 0.35]
+    reaction_shot_frequency: medium
+    spread_frequency: periodic_era_defining
+    page_turn_triggers:
+      - era_hook
+      - political_advance
+      - personal_reveal
+      - grief_beat
+    narration_tolerance: very_high
+    sfx_usage: restrained_environmental
+    background_density: very_high
+    reference_corpus:
+      - "Vinland Saga"
+      - "Vagabond"
+      - "Bride's Story"
+      - "Cesare"
+      - "Innocent"
+
+  cultivation_martial:
+    label: "Cultivation / Martial Arts (Battle Through the Heavens register)"
+    words_per_page_range: [60, 110]
+    words_per_balloon_max: 18
+    silent_panel_ratio_range: [0.15, 0.25]
+    reaction_shot_frequency: high
+    spread_frequency: periodic
+    page_turn_triggers:
+      - cultivation_breakthrough
+      - rival_challenge
+      - sect_revelation
+      - inner_realm_descent
+    narration_tolerance: medium
+    sfx_usage: heavy_kinetic
+    background_density: medium
+    reference_corpus:
+      - "Battle Through the Heavens"
+      - "Tales of Demons and Gods"
+      - "Soul Land"
+
 # Aliases — map manga_profile.genre_family values to pacing keys
 # Any genre_family NOT listed here is treated as unmapped (no pacing contract enforced).
 genre_family_aliases:
@@ -359,11 +472,29 @@ genre_family_aliases:
   graphic_medicine: graphic_medicine
   gag: gag
   # The following use the closest genre alias
-  sci_fi: mystery          # closest in pacing (detective/discovery pattern)
+  sci_fi: sci_fi_cyberpunk  # NEW per 2X.2 — proper standalone entry now exists
   procedural: workplace    # workplace pacing with episodic structure
   club_hobby: healing      # iyashikei adjacent
   food: healing            # healing + sensory close-ups
-  historical: battle_internal  # philosophical/contemplative arc pacing
+  historical: historical_period  # NEW per 2X.2 — proper standalone entry now exists
   survival: battle         # high-stakes, kinetic
   revenge: mystery         # tension-escalation pattern
   delinquent: battle       # escalation + rival pattern
+
+  # ── Phase 2X.2 strategic-shell aliases — map new strategic slugs to proper pacing keys
+  dark_fantasy: dark_fantasy
+  mecha: mecha
+  sci_fi_cyberpunk: sci_fi_cyberpunk
+  historical_period: historical_period
+  cultivation_martial: cultivation_martial
+  # Pre-existing pacing rows cover these strategic slugs; alias for explicit mapping
+  psychological_horror: horror
+  supernatural_mystery: supernatural_everyday
+  psychological_thriller: mystery
+  romance_josei_drama: romance
+  workplace_drama: workplace
+  action_battle: battle
+  sports_competition: sports
+  school_coming_of_age: school
+  iyashikei: healing
+  isekai: fantasy

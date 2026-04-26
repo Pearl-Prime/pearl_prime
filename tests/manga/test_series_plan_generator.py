@@ -165,7 +165,8 @@ def test_v2_plans_declare_master_format_and_connector_lane(rows, routing, schema
         "color_vertical_webtoon", "bw_page_manga", "color_page_manga", "direct_self_help_illustrated"
     )
     assert plan["connector_lane"] in (
-        "unified_canvas", "line_manga_indies", "naver_webtoon_kr", "print_only", "partner_required"
+        "unified_canvas", "line_manga_indies", "naver_webtoon_kr", "print_only",
+        "partner_required", "gray_zone_with_disclosure", "hold_pending_market_clearance",
     )
 
 
@@ -176,17 +177,23 @@ def test_v2_plans_carry_localized_titles_dict(rows, routing):
     assert plan["localized_titles"][plan["locale"]] == plan["title"]
 
 
-def test_v2_plans_zh_cn_route_to_partner_required(rows, routing):
+def test_v2_plans_zh_cn_route_to_gray_zone_with_disclosure(rows, routing):
+    """zh_CN routes to gray_zone_with_disclosure per CATALOG_RECONCILIATION_SPEC D-19 (OQ-6 c).
+
+    Pre-D-19: zh_CN was BLOCKED → partner_required (no path).
+    Post-D-19: zh_CN gray-zone push to Bilibili + Kuaikan + Tencent with full
+    AI-disclosure metadata. R-zh_CN-distribution=HIGH risk; account termination
+    possible under PRC Generative AI Service Measures (2023).
+    """
     zh_cn_rows = [r for r in rows if r["locale"] == "zh_CN"]
     if not zh_cn_rows:
         pytest.skip("no zh_CN rows in catalog")
     plan = build_plan(zh_cn_rows[0], routing)
-    # zh_CN webtoon → partner_required (Bilibili / Kuaikan)
+    # zh_CN webtoon → gray_zone_with_disclosure (per D-19)
     if plan["master_format"] == "color_vertical_webtoon":
-        assert plan["connector_lane"] == "partner_required"
-    # And pending_partner_targets carries the documented intent
+        assert plan["connector_lane"] == "gray_zone_with_disclosure"
+    # pending_partner_targets retains documented intent for premium partner deals
     assert "pending_partner_targets" in plan
-    assert any(p in plan["pending_partner_targets"] for p in ("bilibili_comics", "kuaikan_manhua"))
 
 
 def test_slugify():
