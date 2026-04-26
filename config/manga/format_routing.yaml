@@ -63,11 +63,11 @@ defaults_by_locale_genre:
     # NEW per spec §4.1 — JP B&W-heavy weighting maintained for new strategic genres.
     dark_fantasy:           { master: bw_page_manga, flatten: [] }   # Berserk/Vagabond register — print-first
     psychological_horror:   { master: bw_page_manga, flatten: [] }
-    supernatural_mystery:   { master: bw_page_manga, flatten: [color_vertical_webtoon] }
-    sci_fi_cyberpunk:       { master: bw_page_manga, flatten: [color_vertical_webtoon] }   # Akira/GitS register — print-first
+    supernatural_mystery:   { master: color_vertical_webtoon, flatten: [bw_page_manga] }   # JP supernatural traditionally B&W-heavy → webtoon-master + bw flatten
+    sci_fi_cyberpunk:       { master: color_vertical_webtoon, flatten: [bw_page_manga] }   # Akira/GitS register heritage → webtoon-master + bw flatten
     psychological_thriller: { master: bw_page_manga, flatten: [] }   # Death Note/Monster register
     romance_josei_drama:    { master: color_vertical_webtoon, flatten: [color_page_manga] }
-    workplace_drama:        { master: bw_page_manga, flatten: [color_vertical_webtoon] }
+    workplace_drama:        { master: color_vertical_webtoon, flatten: [bw_page_manga] }
     action_battle:          { master: color_vertical_webtoon, flatten: [bw_page_manga] }
     sports_competition:     { master: color_vertical_webtoon, flatten: [bw_page_manga] }
     historical_period:      { master: bw_page_manga, flatten: [] }   # Vinland Saga register — print-first

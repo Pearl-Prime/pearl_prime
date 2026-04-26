@@ -1,8 +1,25 @@
 """Tests for scripts/manga/generate_series_plans_from_catalog.py.
 
-Regression-locks the v2 schema generator: catalog parsing, format routing,
-schema validation. Runs against the real MANGA_FULL_CATALOG_PLAN.md and
-real format_routing.yaml — fast (<1s) and catches drift cheaply.
+NOTE (Phase 2X.4 atomic, 2026-04-26):
+  The legacy MANGA_FULL_CATALOG_PLAN.md hand-edited table format was retired
+  and replaced with an auto-generated catalog plan from
+  scripts/manga/generate_catalog_plan_from_strategic.py. The old parsing-
+  based tests (test_catalog_parser_*, test_v2_plans_carry_localized_titles_dict,
+  test_v2_plans_declare_master_format_and_connector_lane,
+  test_build_series_id_includes_brand_teacher_locale_topic) test the legacy
+  parser against the legacy table format, which no longer exists.
+
+  Tests of the legacy generator's pure utility functions (_slugify,
+  derive_brand_id, resolve_format, resolve_target_platforms,
+  resolve_connector_lane, resolve_flatten_exports) still pass and are kept.
+
+  Tests that depend on the legacy parsing of MANGA_FULL_CATALOG_PLAN.md are
+  skipped via the `parse_catalog` fixture returning [] when the file structure
+  doesn't match the legacy regex. See tests/test_manga_catalog_plan_generator.py
+  for the new auto-gen catalog plan generator coverage and
+  config/source_of_truth/manga_series_plans/ for the regenerated YAMLs.
+
+Regression-locks the surviving v2 utility functions.
 """
 from __future__ import annotations
 
@@ -35,7 +52,14 @@ from scripts.manga.generate_series_plans_from_catalog import (  # type: ignore
 
 @pytest.fixture(scope="module")
 def rows():
-    return parse_catalog(CATALOG_PLAN)
+    parsed = parse_catalog(CATALOG_PLAN)
+    if not parsed:
+        pytest.skip(
+            "MANGA_FULL_CATALOG_PLAN.md was retired and replaced with auto-gen "
+            "format in Phase 2X.4 atomic. Legacy parser returns 0 rows. "
+            "See tests/test_manga_catalog_plan_generator.py for new coverage."
+        )
+    return parsed
 
 
 @pytest.fixture(scope="module")

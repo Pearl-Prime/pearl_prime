@@ -1,303 +1,1699 @@
-# Phoenix Omega — Full Manga Catalog Plan
+<!-- AUTO-GENERATED — do not hand-edit. -->
+<!-- Source: scripts/manga/generate_catalog_plan_from_strategic.py -->
+<!-- Inputs: docs/GENRE_PORTFOLIO_PLAN.md + docs/CJK_CATALOG_PLAN.md + docs/US_CATALOG_PLAN.md -->
+<!-- Per specs/MANGA_CATALOG_RECONCILIATION_SPEC.md §7.1 + D-17 -->
 
-**Every teacher. Every location. 12-24 series each. Every series has its own style, characters, and genre.**
+# Phoenix Omega — Manga Full Catalog Plan
 
----
+Auto-generated from the strategic-tier plans. To update this file, edit the source
+strategic docs and re-run the generator.
 
-## Locations & Languages
+## Locales (per D-18, 5-locale matrix)
 
-| Code | Location | Language | Script |
-|------|----------|----------|--------|
-| en_US | United States | English | Latin |
-| ja_JP | Japan | Japanese | Kanji/Hiragana/Katakana |
-| zh_TW | Taiwan | Traditional Chinese | 繁體中文 |
-| zh_CN | China | Simplified Chinese | 简体中文 |
+| Locale | Primary format | Platform(s) | Distribution status |
+|---|---|---|---|
+| en_US | Two paths — do NOT mix: (A) manga digest 5"×7.5" B&W for manga aisle OR (B) western doodle/cartoon for mainstream self-help shelf | Bookstores, Amazon, direct | distributed |
+| ja_JP | Traditional B&W manga pages; tankobon + digital | LINE Manga, ComicWalker, Pixiv Comics | distributed |
+| zh_TW | Hybrid: manga page layout, atmospheric rendering | LINE Comics TW, standalone print | distributed |
+| zh_CN | Vertical-scroll tiáomàn (条漫), full color | Kuaikan Manhua, Bilibili Comics | gray_zone_disclosed |
+| ko_KR | Vertical-scroll webtoon, full color | Naver Webtoon, LINE Global, Kakao | hold_pending_market_clearance |
 
----
+## Brand portfolio (37 brands per `GENRE_PORTFOLIO_PLAN.md`)
 
-## Teachers (12)
+| Brand | Tier | Series target | Genre mix |
+|---|---|---|---|
+| `cognitive_clarity` | flagship | 16 | psychological_thriller 35%, dark_fantasy 20%, sci_fi_cyberpunk 20%, supernatural_mystery 15%, workplace_drama 10% |
+| `digital_ground` | flagship | 16 | sci_fi_cyberpunk 35%, workplace_drama 25%, psychological_horror 20%, isekai 15%, iyashikei 5% |
+| `stillness_press` | flagship | 16 | iyashikei 30%, dark_fantasy 25%, psychological_horror 20%, supernatural_mystery 15%, isekai 10% |
+| `body_memory_shojo` | core | 9 | dark_fantasy 20%, supernatural_mystery 20% |
+| `career_lift_workplace` | core | 9 | workplace_drama 35%, supernatural_mystery 20%, iyashikei 15% |
+| `executive_calm_workplace` | core | 9 | sci_fi_cyberpunk 25%, dark_fantasy 15% |
+| `focus_sprint_workplace` | core | 9 | action_battle 25%, workplace_drama 20%, psychological_thriller 15% |
+| `gentle_growth_healing` | core | 9 | iyashikei 25%, supernatural_mystery 20%, dark_fantasy 20% |
+| `healing_ground_healing` | core | 9 | dark_fantasy 35%, iyashikei 25%, supernatural_mystery 25%, psychological_thriller 15% |
+| `heart_balance_shojo` | core | 9 | iyashikei 25%, workplace_drama 20%, supernatural_mystery 15% |
+| `high_performer_workplace` | core | 9 | psychological_thriller 25%, dark_fantasy 25%, historical_period 20% |
+| `minimal_mind_healing` | core | 9 | iyashikei 40%, psychological_thriller 25%, sci_fi_cyberpunk 20%, supernatural_mystery 15% |
+| `morning_momentum_workplace` | core | 9 | workplace_drama 25%, isekai 15% |
+| `night_reset_healing` | core | 9 | iyashikei 40%, supernatural_mystery 20%, dark_fantasy 10% |
+| `optimizer_workplace` | core | 9 | psychological_thriller 35%, workplace_drama 25%, sports_competition 10% |
+| `relational_calm_iyashikei` | core | 9 | iyashikei 30%, supernatural_mystery 20%, psychological_thriller 15% |
+| `sleep_restoration_iyashikei` | core | 9 | psychological_horror 30%, supernatural_mystery 20% |
+| `somatic_wisdom_shojo` | core | 9 | iyashikei 30%, dark_fantasy 20% |
+| `stabilizer_healing` | core | 9 | iyashikei 35%, workplace_drama 25%, sci_fi_cyberpunk 20%, dark_fantasy 20% |
+| `adhd_forge_mystery` | niche | 5 | action_battle 30%, sports_competition 25%, isekai 20% |
+| `bio_flow_healing` | niche | 5 | sci_fi_cyberpunk 35%, historical_period 20% |
+| `bright_presence_tw_seinen` | niche | 5 | historical_period 25% |
+| `calm_student_school` | niche | 5 | supernatural_mystery 25% |
+| `confidence_core_romance` | niche | 5 | iyashikei 20% |
+| `creative_unfold_social` | niche | 5 | supernatural_mystery 25%, action_battle 25%, school_coming_of_age 20% |
+| `devotion_path_shonen` | niche | 5 | dark_fantasy 35%, action_battle 30% |
+| `hormone_reset_healing` | niche | 5 | supernatural_mystery 30% |
+| `legacy_builder_memoir` | niche | 5 | historical_period 40%, psychological_thriller 25%, iyashikei 15% |
+| `longevity_lab_healing` | niche | 5 | sci_fi_cyberpunk 20%, supernatural_mystery 15% |
+| `qi_foundation_cultivation` | niche | 5 | dark_fantasy 30%, action_battle 20% |
+| `relationship_clarity_romance` | niche | 5 | psychological_thriller 20%, supernatural_mystery 15% |
+| `resilient_parent_social` | niche | 5 | iyashikei 30%, dark_fantasy 20% |
+| `solar_return_isekai` | niche | 5 | isekai 50%, dark_fantasy 25%, action_battle 25% |
+| `spiritual_ground_supernatural` | niche | 5 | dark_fantasy 30%, iyashikei 20% |
+| `stoic_edge_battle` | niche | 5 | action_battle 35%, historical_period 30% |
+| `trauma_path_healing` | niche | 5 | dark_fantasy 35%, psychological_horror 30%, iyashikei 20%, historical_period 15% |
+| `warrior_calm_cultivation` | niche | 5 | action_battle 30%, dark_fantasy 30%, iyashikei 15% |
 
-| # | Teacher | Tradition | Teaching Core |
-|---|---------|-----------|--------------|
-| 1 | ahjan | Buddhism (contemporary + forest-simplicity strands, Stillness Press) | Alarm systems, impermanence, pausing; forest refuge and simplicity |
-| 2 | joshin | Zen Buddhism | Koans, sitting, direct pointing |
-| 3 | junko | Japanese contemplative / Shinto | Relational harmony, shame healing, inner security |
-| 4 | maat | Egyptian / Sufi heritage | Justice, balance, heart-weighing |
-| 5 | master_feung | Chinese internal arts (qigong/taiji) | Qi cultivation, stability, foundation building |
-| 6 | master_sha | Chinese healing traditions | Sleep repair, energy medicine, restoration |
-| 7 | master_wu | Chinese martial/spiritual | Panic response, composure under fire, warrior calm |
-| 8 | miki | Japanese mindfulness (modern) | Gen Z grounding, digital age presence, identity |
-| 9 | omote | Japanese body practice (shiatsu/somatic) | Grief, body memory, seasonal healing |
-| 10 | pamela_fellows | Western somatic therapy | Perfectionism, performance pressure, embodiment |
-| 11 | ra | Egyptian solar tradition | Burnout, solar return, fire and renewal |
-| 12 | sai_ma | Indian devotional (bhakti) | Compassion, devotion, surrender |
+## Catalog rows (brand × locale × genre)
 
----
+Total brands parsed: **37**.
+Total locales: **5** (per D-18).
+Total genre slugs in allow-list: **15** (per §4.1).
 
-# CATALOG BY TEACHER × LOCATION
+Each row below represents one brand × locale slice. The series count is
+the integer round of `target_series × genre_pct` for each genre slug.
 
-Each teacher appears in ALL 4 locations. Each location gets 12-24 series adapted to that locale's genre preferences and cultural context. Each series has its own unique manga author (EI character), visual style, and genre.
+### `adhd_forge_mystery` (niche — 5 series target)
+> ADHD · Focus · Shonen
 
----
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-## 1. AHJAN — Buddhist Contemporary
+### `bio_flow_healing` (niche — 5 series target)
+> Body / Biology · Healing · Seinen
 
-### en_US (24 series)
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | sci_fi_cyberpunk | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | historical_period | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | sci_fi_cyberpunk | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | historical_period | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | sci_fi_cyberpunk | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | historical_period | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | sci_fi_cyberpunk | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | historical_period | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | sci_fi_cyberpunk | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | historical_period | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-| # | Series Title | Genre | Style | Manga Author | Topic | Chapters/Title |
-|---|-------------|-------|-------|-------------|-------|----------------|
-| 1 | The Alarm Is Lying | iyashikei | cozy_iyashikei | Hana Tidecalm | anxiety | 14 |
-| 2 | The Room Full of People | seinen | dark_psychological | Brook Hearthlight | social_anxiety | 16 |
-| 3 | The False Emergency | shonen | power_progression | Kai Thunderstep | anxiety | 12 |
-| 4 | After the Flame | iyashikei | cozy_iyashikei | Sora Dewfield | burnout | 14 |
-| 5 | The Weight Without a Name | seinen | dark_psychological | Ren Ashford | depression | 16 |
-| 6 | The 3am Mind | horror | dark_psychological | Yuki Nighthollow | sleep_anxiety | 12 |
-| 7 | What the Body Remembers | iyashikei | cozy_iyashikei | Hana Tidecalm | somatic_healing | 14 |
-| 8 | The Boy Who Stopped Running | seinen | hyper_clean_cinematic | Ren Ashford | burnout | 14 |
-| 9 | The Cost of Caring | shojo | cozy_iyashikei | Mina Softheart | compassion_fatigue | 14 |
-| 10 | The Thing You Won't Say | shonen | power_progression | Kai Thunderstep | courage | 12 |
-| 11 | The Thought That Won't Leave | seinen | dark_psychological | Brook Hearthlight | overthinking | 16 |
-| 12 | The Line You Never Drew | seinen | hyper_clean_cinematic | Ren Ashford | boundaries | 14 |
-| 13 | The Seat You Earned | shonen | power_progression | Kai Thunderstep | imposter_syndrome | 12 |
-| 14 | The Voice That Says Not Enough | shojo | webtoon_vertical_romance | Mina Softheart | self_worth | 14 |
-| 15 | The Number in Your Head | seinen | social_media_simulacra | Brook Hearthlight | financial_anxiety | 14 |
-| 16 | The Paycheck Pressure | manhwa | social_media_simulacra | Jin Quicksilver | financial_stress | 12 |
-| 17 | The Absence | seinen | dark_psychological | Ren Ashford | grief | 16 |
-| 18 | Grieving Someone Still Here | shojo | cozy_iyashikei | Mina Softheart | grief | 14 |
-| 19 | The Thing You Hide at Work | seinen | hyper_clean_cinematic | Brook Hearthlight | self_worth | 14 |
-| 20 | Breath and Bone | iyashikei | cozy_iyashikei | Hana Tidecalm | somatic_healing | 14 |
-| 21 | The Anchor | iyashikei | cozy_iyashikei | Sora Dewfield | courage | 12 |
-| 22 | Before Dawn | webtoon_romance | webtoon_vertical_romance | Lila Moonpetal | anxiety | 14 |
-| 23 | Hollow | horror | dark_psychological | Yuki Nighthollow | depression | 12 |
-| 24 | The Fire Sermon | cultivation | hyper_clean_cinematic | Dharma Ashwalker | burnout | 14 |
+### `body_memory_shojo` (core — 9 series target)
+> Somatic Healing · Trauma · Josei
 
-**Manga Authors (8 unique):** Hana Tidecalm (iyashikei), Brook Hearthlight (seinen), Kai Thunderstep (shonen), Ren Ashford (seinen cinematic), Mina Softheart (shojo), Yuki Nighthollow (horror), Jin Quicksilver (manhwa), Lila Moonpetal (webtoon), Sora Dewfield (iyashikei), Dharma Ashwalker (cultivation)
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-### ja_JP (24 series)
+### `bright_presence_tw_seinen` (niche — 5 series target)
+> Social Anxiety · TW market · Seinen
 
-| # | Series Title (JP) | Genre | Style | Manga Author | Topic | Ch |
-|---|------------------|-------|-------|-------------|-------|----|
-| 1 | 嘘をつくアラーム | iyashikei | cozy_iyashikei | 潮凪ハナ (Shionagi Hana) | anxiety | 14 |
-| 2 | 人でいっぱいの部屋 | seinen | dark_psychological | 灰谷レン (Haitani Ren) | social_anxiety | 16 |
-| 3 | 偽りの緊急事態 | shonen | power_progression | 雷歩カイ (Raiho Kai) | anxiety | 12 |
-| 4 | 炎のあとに | iyashikei | cozy_iyashikei | 露野ソラ (Tsuyuno Sora) | burnout | 14 |
-| 5 | 名前のない重さ | seinen | dark_psychological | 灰谷レン | depression | 16 |
-| 6 | 午前三時の心 | horror | dark_psychological | 夜窪ユキ (Yokubi Yuki) | sleep_anxiety | 12 |
-| 7 | 身体が覚えていること | iyashikei | cozy_iyashikei | 潮凪ハナ | somatic_healing | 14 |
-| 8 | 走るのをやめた少年 | seinen | hyper_clean_cinematic | 灰谷レン | burnout | 14 |
-| 9 | 思いやりの代償 | shojo | cozy_iyashikei | 柔心ミナ (Nyuushin Mina) | compassion_fatigue | 14 |
-| 10 | 言えないこと | shonen | power_progression | 雷歩カイ | courage | 12 |
-| 11 | 離れない思考 | seinen | dark_psychological | 灰谷レン | overthinking | 16 |
-| 12 | 引けなかった線 | seinen | hyper_clean_cinematic | 灰谷レン | boundaries | 14 |
-| 13 | 自分の席 | shonen | power_progression | 雷歩カイ | imposter_syndrome | 12 |
-| 14 | まだ足りない声 | shojo | webtoon_vertical_romance | 柔心ミナ | self_worth | 14 |
-| 15 | 頭の中の数字 | seinen | social_media_simulacra | 灰谷レン | financial_anxiety | 14 |
-| 16 | 給料日の重圧 | manhwa | social_media_simulacra | 銀速ジン (Ginsoku Jin) | financial_stress | 12 |
-| 17 | 不在 | seinen | dark_psychological | 灰谷レン | grief | 16 |
-| 18 | まだここにいる人を悼む | shojo | cozy_iyashikei | 柔心ミナ | grief | 14 |
-| 19 | 職場で隠すもの | seinen | hyper_clean_cinematic | 灰谷レン | self_worth | 14 |
-| 20 | 息と骨 | iyashikei | cozy_iyashikei | 潮凪ハナ | somatic_healing | 14 |
-| 21 | 碇 | iyashikei | cozy_iyashikei | 露野ソラ | courage | 12 |
-| 22 | 夜明け前 | webtoon_romance | webtoon_vertical_romance | 月花リラ (Tsukihana Rira) | anxiety | 14 |
-| 23 | 虚ろ | horror | dark_psychological | 夜窪ユキ | depression | 12 |
-| 24 | 火の説法 | cultivation | hyper_clean_cinematic | 法灰歩 (Houkaibou) | burnout | 14 |
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | historical_period | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | historical_period | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | historical_period | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | historical_period | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | historical_period | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-### zh_TW (24 series)
+### `calm_student_school` (niche — 5 series target)
+> Anxiety · Study · Shojo
 
-| # | Series Title (TW) | Genre | Style | Manga Author | Topic | Ch |
-|---|------------------|-------|-------|-------------|-------|----|
-| 1 | 警報在說謊 | iyashikei | cozy_iyashikei | 潮靜花 (Cháo Jìng Huā) | anxiety | 14 |
-| 2 | 滿是人的房間 | seinen | dark_psychological | 灰谷蓮 (Huī Gǔ Lián) | social_anxiety | 16 |
-| 3 | 虛假的緊急 | shonen | power_progression | 雷步凱 (Léi Bù Kǎi) | anxiety | 12 |
-| 4 | 火焰之後 | iyashikei | cozy_iyashikei | 露野空 (Lù Yě Kōng) | burnout | 14 |
-| 5 | 無名之重 | seinen | dark_psychological | 灰谷蓮 | depression | 16 |
-| 6 | 凌晨三點的心 | horror | dark_psychological | 夜窪雪 (Yè Wā Xuě) | sleep_anxiety | 12 |
-| 7 | 身體記得的事 | iyashikei | cozy_iyashikei | 潮靜花 | somatic_healing | 14 |
-| 8 | 停止奔跑的少年 | seinen | hyper_clean_cinematic | 灰谷蓮 | burnout | 14 |
-| 9 | 關懷的代價 | shojo | cozy_iyashikei | 柔心美奈 (Róu Xīn Měi Nài) | compassion_fatigue | 14 |
-| 10 | 說不出口的話 | shonen | power_progression | 雷步凱 | courage | 12 |
-| 11 | 揮不去的念頭 | seinen | dark_psychological | 灰谷蓮 | overthinking | 16 |
-| 12 | 從未畫過的界線 | seinen | hyper_clean_cinematic | 灰谷蓮 | boundaries | 14 |
-| 13 | 你贏得的位子 | shonen | power_progression | 雷步凱 | imposter_syndrome | 12 |
-| 14 | 不夠好的聲音 | shojo | webtoon_vertical_romance | 柔心美奈 | self_worth | 14 |
-| 15 | 腦中的數字 | seinen | social_media_simulacra | 灰谷蓮 | financial_anxiety | 14 |
-| 16 | 薪資壓力 | manhwa | social_media_simulacra | 銀速仁 (Yín Sù Rén) | financial_stress | 12 |
-| 17 | 缺席 | seinen | dark_psychological | 灰谷蓮 | grief | 16 |
-| 18 | 思念還在的人 | shojo | cozy_iyashikei | 柔心美奈 | grief | 14 |
-| 19 | 職場上的秘密 | seinen | hyper_clean_cinematic | 灰谷蓮 | self_worth | 14 |
-| 20 | 呼吸與骨 | iyashikei | cozy_iyashikei | 潮靜花 | somatic_healing | 14 |
-| 21 | 錨 | iyashikei | cozy_iyashikei | 露野空 | courage | 12 |
-| 22 | 黎明之前 | webtoon_romance | webtoon_vertical_romance | 月花莉拉 (Yuè Huā Lì Lā) | anxiety | 14 |
-| 23 | 空洞 | horror | dark_psychological | 夜窪雪 | depression | 12 |
-| 24 | 火之說法 | cultivation | hyper_clean_cinematic | 法灰步 (Fǎ Huī Bù) | burnout | 14 |
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-### zh_CN (24 series)
+### `career_lift_workplace` (core — 9 series target)
+> Imposter Syndrome · Workplace · Josei
 
-| # | Series Title (CN) | Genre | Style | Manga Author | Topic | Ch |
-|---|------------------|-------|-------|-------------|-------|----|
-| 1 | 警报在说谎 | iyashikei | cozy_iyashikei | 潮静花 | anxiety | 14 |
-| 2 | 满是人的房间 | seinen | dark_psychological | 灰谷莲 | social_anxiety | 16 |
-| 3 | 虚假的紧急 | shonen | power_progression | 雷步凯 | anxiety | 12 |
-| 4 | 火焰之后 | iyashikei | cozy_iyashikei | 露野空 | burnout | 14 |
-| 5 | 无名之重 | seinen | dark_psychological | 灰谷莲 | depression | 16 |
-| 6 | 凌晨三点的心 | horror | dark_psychological | 夜洼雪 | sleep_anxiety | 12 |
-| 7 | 身体记得的事 | iyashikei | cozy_iyashikei | 潮静花 | somatic_healing | 14 |
-| 8 | 停止奔跑的少年 | seinen | hyper_clean_cinematic | 灰谷莲 | burnout | 14 |
-| 9 | 关怀的代价 | shojo | cozy_iyashikei | 柔心美奈 | compassion_fatigue | 14 |
-| 10 | 说不出口的话 | shonen | power_progression | 雷步凯 | courage | 12 |
-| 11 | 挥不去的念头 | seinen | dark_psychological | 灰谷莲 | overthinking | 16 |
-| 12 | 从未画过的界线 | seinen | hyper_clean_cinematic | 灰谷莲 | boundaries | 14 |
-| 13 | 你赢得的位子 | shonen | power_progression | 雷步凯 | imposter_syndrome | 12 |
-| 14 | 不够好的声音 | shojo | webtoon_vertical_romance | 柔心美奈 | self_worth | 14 |
-| 15 | 脑中的数字 | seinen | social_media_simulacra | 灰谷莲 | financial_anxiety | 14 |
-| 16 | 薪资压力 | manhwa | social_media_simulacra | 银速仁 | financial_stress | 12 |
-| 17 | 缺席 | seinen | dark_psychological | 灰谷莲 | grief | 16 |
-| 18 | 思念还在的人 | shojo | cozy_iyashikei | 柔心美奈 | grief | 14 |
-| 19 | 职场上的秘密 | seinen | hyper_clean_cinematic | 灰谷莲 | self_worth | 14 |
-| 20 | 呼吸与骨 | iyashikei | cozy_iyashikei | 潮静花 | somatic_healing | 14 |
-| 21 | 锚 | iyashikei | cozy_iyashikei | 露野空 | courage | 12 |
-| 22 | 黎明之前 | webtoon_romance | webtoon_vertical_romance | 月花莉拉 | anxiety | 14 |
-| 23 | 空洞 | horror | dark_psychological | 夜洼雪 | depression | 12 |
-| 24 | 火之说法 | cultivation | hyper_clean_cinematic | 法灰步 | burnout | 14 |
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | workplace_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | workplace_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | workplace_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | workplace_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | workplace_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-**AHJAN TOTAL: 4 locations × 24 series = 96 series**
+### `cognitive_clarity` (flagship — 16 series target)
+> Overthinking · Psychology · CBT-adjacent · Seinen adult men
 
----
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | sci_fi_cyberpunk | 1 | distributed |
+| en_US | psychological_thriller | 2 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | workplace_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | historical_period | 1 | distributed |
+| en_US | cultivation_martial | 1 | distributed |
+| en_US | school_coming_of_age | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | sci_fi_cyberpunk | 1 | distributed |
+| ja_JP | psychological_thriller | 2 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | workplace_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | historical_period | 1 | distributed |
+| ja_JP | cultivation_martial | 1 | distributed |
+| ja_JP | school_coming_of_age | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | sci_fi_cyberpunk | 1 | distributed |
+| zh_TW | psychological_thriller | 2 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | workplace_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | historical_period | 1 | distributed |
+| zh_TW | cultivation_martial | 1 | distributed |
+| zh_TW | school_coming_of_age | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | sci_fi_cyberpunk | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 2 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | workplace_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | historical_period | 1 | gray_zone_disclosed |
+| zh_CN | cultivation_martial | 1 | gray_zone_disclosed |
+| zh_CN | school_coming_of_age | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | sci_fi_cyberpunk | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 2 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | workplace_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | historical_period | 1 | hold_pending_market_clearance |
+| ko_KR | cultivation_martial | 1 | hold_pending_market_clearance |
+| ko_KR | school_coming_of_age | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-### Ahjan — forest simplicity strand (Stillness Press; merged duplicate planning id)
+### `confidence_core_romance` (niche — 5 series target)
+> Imposter Syndrome · Self-Worth · Shojo
 
-### en_US (18 series)
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-| # | Series Title | Genre | Style | Manga Author | Topic | Ch |
-|---|-------------|-------|-------|-------------|-------|----|
-| 1 | The Forest Path | iyashikei | cozy_iyashikei | Sati Greenleaf | anxiety | 14 |
-| 2 | The Monk's Alarm | seinen | dark_psychological | Vira Shadowpine | anxiety | 16 |
-| 3 | When the Candle Burns Out | iyashikei | cozy_iyashikei | Sati Greenleaf | burnout | 14 |
-| 4 | The Unspoken Vow | seinen | hyper_clean_cinematic | Vira Shadowpine | boundaries | 14 |
-| 5 | Walking Toward Nothing | iyashikei | cozy_iyashikei | Sati Greenleaf | depression | 14 |
-| 6 | The Night Watch | horror | dark_psychological | Kiri Moonbark | sleep_anxiety | 12 |
-| 7 | Leaves That Fall Twice | shojo | cozy_iyashikei | Nami Gentlerain | grief | 14 |
-| 8 | The Worn Path | seinen | hyper_clean_cinematic | Vira Shadowpine | somatic_healing | 14 |
-| 9 | The Still Pool | iyashikei | cozy_iyashikei | Sati Greenleaf | overthinking | 14 |
-| 10 | The Empty Bowl | seinen | dark_psychological | Vira Shadowpine | compassion_fatigue | 14 |
-| 11 | The First Step Back | shonen | power_progression | Tavi Fireroost | courage | 12 |
-| 12 | The Forest Is Listening | iyashikei | cozy_iyashikei | Sati Greenleaf | somatic_healing | 14 |
-| 13 | The Hermit's Question | seinen | dark_psychological | Vira Shadowpine | self_worth | 16 |
-| 14 | Under the Bodhi | cultivation | hyper_clean_cinematic | Dhamma Rootwalker | burnout | 14 |
-| 15 | Rain on the Roof | iyashikei | cozy_iyashikei | Nami Gentlerain | anxiety | 14 |
-| 16 | The Teacher's Silence | seinen | dark_psychological | Vira Shadowpine | grief | 16 |
-| 17 | The Clearing | iyashikei | cozy_iyashikei | Sati Greenleaf | courage | 12 |
-| 18 | Roots Before Branches | shonen | power_progression | Tavi Fireroost | imposter_syndrome | 12 |
+### `creative_unfold_social` (niche — 5 series target)
+> Social Anxiety · Creativity · Shojo
 
-### ja_JP (18 series)
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | school_coming_of_age | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | school_coming_of_age | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | school_coming_of_age | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | school_coming_of_age | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | school_coming_of_age | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-| # | Series Title | Genre | Style | Manga Author | Topic | Ch |
-|---|-------------|-------|-------|-------------|-------|----|
-| 1 | 森の道 | iyashikei | cozy_iyashikei | 緑葉サティ (Midoriba Sati) | anxiety | 14 |
-| 2 | 僧侶の警報 | seinen | dark_psychological | 影松ヴィラ (Kagematsu Vira) | anxiety | 16 |
-| 3 | 蝋燭が消えた時 | iyashikei | cozy_iyashikei | 緑葉サティ | burnout | 14 |
-| 4 | 語られない誓い | seinen | hyper_clean_cinematic | 影松ヴィラ | boundaries | 14 |
-| 5 | 無へ歩く | iyashikei | cozy_iyashikei | 緑葉サティ | depression | 14 |
-| 6 | 夜の番人 | horror | dark_psychological | 月皮キリ (Tsukikawa Kiri) | sleep_anxiety | 12 |
-| 7 | 二度散る葉 | shojo | cozy_iyashikei | 優雨ナミ (Yuuame Nami) | grief | 14 |
-| 8 | 古い道 | seinen | hyper_clean_cinematic | 影松ヴィラ | somatic_healing | 14 |
-| 9 | 静かな池 | iyashikei | cozy_iyashikei | 緑葉サティ | overthinking | 14 |
-| 10 | 空の器 | seinen | dark_psychological | 影松ヴィラ | compassion_fatigue | 14 |
-| 11 | 戻る一歩 | shonen | power_progression | 火巣タヴィ (Hisu Tavi) | courage | 12 |
-| 12 | 森は聴いている | iyashikei | cozy_iyashikei | 緑葉サティ | somatic_healing | 14 |
-| 13 | 隠者の問い | seinen | dark_psychological | 影松ヴィラ | self_worth | 16 |
-| 14 | 菩提の下で | cultivation | hyper_clean_cinematic | 法根歩 (Houkonpo) | burnout | 14 |
-| 15 | 屋根の雨 | iyashikei | cozy_iyashikei | 優雨ナミ | anxiety | 14 |
-| 16 | 師の沈黙 | seinen | dark_psychological | 影松ヴィラ | grief | 16 |
-| 17 | 開けた場所 | iyashikei | cozy_iyashikei | 緑葉サティ | courage | 12 |
-| 18 | 枝の前に根を | shonen | power_progression | 火巣タヴィ | imposter_syndrome | 12 |
+### `devotion_path_shonen` (niche — 5 series target)
+> Spiritual · Courage · Shonen
 
-### zh_TW (18 series) + zh_CN (18 series)
-*(Same structure as en_US, titles translated to Traditional/Simplified Chinese respectively, locale-adapted author names)*
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-**AHJAN forest-strand total: 4 locations × 18 series = 72 series**
+### `digital_ground` (flagship — 16 series target)
+> Burnout · Tech Worker · Digital Identity · Manhwa/Webtoon
 
----
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | sci_fi_cyberpunk | 2 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | workplace_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | historical_period | 1 | distributed |
+| en_US | cultivation_martial | 1 | distributed |
+| en_US | school_coming_of_age | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | sci_fi_cyberpunk | 2 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | workplace_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | historical_period | 1 | distributed |
+| ja_JP | cultivation_martial | 1 | distributed |
+| ja_JP | school_coming_of_age | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | sci_fi_cyberpunk | 2 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | workplace_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | historical_period | 1 | distributed |
+| zh_TW | cultivation_martial | 1 | distributed |
+| zh_TW | school_coming_of_age | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | sci_fi_cyberpunk | 2 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | workplace_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | historical_period | 1 | gray_zone_disclosed |
+| zh_CN | cultivation_martial | 1 | gray_zone_disclosed |
+| zh_CN | school_coming_of_age | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | sci_fi_cyberpunk | 2 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | workplace_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | historical_period | 1 | hold_pending_market_clearance |
+| ko_KR | cultivation_martial | 1 | hold_pending_market_clearance |
+| ko_KR | school_coming_of_age | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-## 2–12. REMAINING TEACHERS (same structure)
+### `executive_calm_workplace` (core — 9 series target)
+> Burnout · Overthinking · Seinen
 
-Each teacher follows the identical pattern. Here are the series counts:
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | sci_fi_cyberpunk | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | sci_fi_cyberpunk | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | sci_fi_cyberpunk | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | sci_fi_cyberpunk | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | sci_fi_cyberpunk | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-| # | Teacher | Tradition Focus | Series/Location | Locations | Total Series |
-|---|---------|----------------|----------------|-----------|-------------|
-| 2 | joshin | Zen koans, direct pointing | 18 | 4 | 72 |
-| 3 | junko | Relational harmony, shame | 20 | 4 | 80 |
-| 4 | maat | Balance, justice, heart-weighing | 16 | 4 | 64 |
-| 5 | master_feung | Qi cultivation, stability | 20 | 4 | 80 |
-| 6 | master_sha | Sleep repair, energy healing | 18 | 4 | 72 |
-| 7 | master_wu | Panic response, warrior calm | 16 | 4 | 64 |
-| 8 | miki | Gen Z grounding, digital presence | 24 | 4 | 96 |
-| 9 | omote | Grief, body memory, seasons | 18 | 4 | 72 |
-| 10 | pamela_fellows | Perfectionism, embodiment | 16 | 4 | 64 |
-| 11 | ra | Solar renewal, fire, burnout | 14 | 4 | 56 |
-| 12 | sai_ma | Devotion, compassion, surrender | 16 | 4 | 64 |
+### `focus_sprint_workplace` (core — 9 series target)
+> ADHD · Focus · Seinen
 
----
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | workplace_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | workplace_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | workplace_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | workplace_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | workplace_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-## GRAND TOTAL
+### `gentle_growth_healing` (core — 9 series target)
+> Self-Worth · Imposter Syndrome · Shojo
 
-| Metric | Count |
-|--------|-------|
-| **Teachers** | 12 |
-| **Locations** | 4 (en_US, ja_JP, zh_TW, zh_CN) |
-| **Series per teacher per location** | 14-24 (avg 19) |
-| **Total series** | **980** |
-| **Chapters per series** | 12-16 (avg 14) |
-| **Pages per chapter** | 15-19 (avg 17) |
-| **Panels per page** | 3-8 (avg 4) |
-| **Total chapters** | ~13,720 |
-| **Total pages** | ~233,240 |
-| **Total panel images** | ~932,960 |
-| **Genres used** | 10 (shonen, seinen, shojo, sports, horror, iyashikei, cultivation, manhwa, webtoon_romance, isekai) |
-| **Visual styles** | 8 (dark_psychological, cozy_iyashikei, hyper_clean_cinematic, power_progression, webtoon_vertical_romance, social_media_simulacra, meme_chaotic_humor, interactive_branching) |
-| **Unique manga authors** | ~130 (10 per teacher, locale-adapted names) |
-| **Topics covered** | 15 |
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
----
+### `healing_ground_healing` (core — 9 series target)
+> Grief · General Healing · Josei
 
-## Genre Distribution by Teacher Tradition
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-| Teacher Type | Primary Genres | Secondary Genres |
-|-------------|---------------|-----------------|
-| Buddhist (ahjan, ahjan, joshin) | iyashikei, seinen | cultivation, shojo |
-| Japanese contemplative (junko, miki, omote) | shojo, webtoon_romance, seinen | iyashikei, manhwa |
-| Chinese masters (feung, sha, wu) | cultivation, shonen | seinen, sports |
-| Egyptian/Sufi (maat, ra) | seinen, shonen | horror, cultivation |
-| Indian devotional (sai_ma) | iyashikei, shojo | cultivation, webtoon_romance |
-| Western somatic (pamela_fellows) | seinen, sports | shojo, webtoon_romance |
+### `heart_balance_shojo` (core — 9 series target)
+> Social Anxiety · Relationships · Josei
 
----
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | workplace_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | workplace_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | workplace_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | workplace_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | workplace_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-## Production Pipeline Per Title
+### `high_performer_workplace` (core — 9 series target)
+> Burnout · Financial Anxiety · Seinen
 
-```
-1. Series Setup (once per series)
-   → style_bible, character_model_sheets, genre_blueprint, story_architecture
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | historical_period | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | historical_period | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | historical_period | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | historical_period | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | historical_period | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-2. Chapter Production (12-16x per title)
-   → 13 DAG stages: transmission_split → writer → visual → image_gen →
-     lettering → layout → ITE(5) → QC → memory
+### `hormone_reset_healing` (niche — 5 series target)
+> Somatic · Hormonal · Josei
 
-3. Image Generation
-   → RunComfy FLUX API, ~68 panels/chapter × 14 chapters = ~950 images/title
-   → LoRA character consistency, style-locked prompts
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
-4. Assembly
-   → PDF per chapter, CBZ per volume
-   → Multilingual lettering adaptation per locale
+### `legacy_builder_memoir` (niche — 5 series target)
+> Self-Worth · Purpose · Seinen
 
-5. QC
-   → 30 gates (structural, visual, silence, lettering, transmission)
-   → Cold read test (human verification)
-   → Series memory continuity check
-```
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | historical_period | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | historical_period | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | historical_period | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | historical_period | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | historical_period | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
 
----
+### `longevity_lab_healing` (niche — 5 series target)
+> Health · Aging · Seinen
 
-*Generated: 2026-04-04 | Authority: specs/AI_MANGA_PIPELINE_SUMMARY.md*
-*Catalog: 12 teachers × 4 locations × ~19 series = 980 series, ~933K panel images*
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | sci_fi_cyberpunk | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | sci_fi_cyberpunk | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | sci_fi_cyberpunk | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | sci_fi_cyberpunk | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | sci_fi_cyberpunk | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `minimal_mind_healing` (core — 9 series target)
+> Overthinking · Mindfulness · Seinen
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | sci_fi_cyberpunk | 1 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | sci_fi_cyberpunk | 1 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | sci_fi_cyberpunk | 1 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | sci_fi_cyberpunk | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | sci_fi_cyberpunk | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `morning_momentum_workplace` (core — 9 series target)
+> Burnout · Motivation · Shonen
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | workplace_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | workplace_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | workplace_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | workplace_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | workplace_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `night_reset_healing` (core — 9 series target)
+> Sleep · Rest · Night Routines · Josei
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `optimizer_workplace` (core — 9 series target)
+> Overthinking · Productivity · Seinen
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | workplace_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | workplace_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | workplace_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | workplace_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | workplace_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `qi_foundation_cultivation` (niche — 5 series target)
+> Somatic (Eastern) · Cultivation · Seinen
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `relational_calm_iyashikei` (core — 9 series target)
+> Social Anxiety · Relationships · Josei
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `relationship_clarity_romance` (niche — 5 series target)
+> Social Anxiety · Boundaries · Josei
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `resilient_parent_social` (niche — 5 series target)
+> Burnout · Self-Worth · Josei
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `sleep_restoration_iyashikei` (core — 9 series target)
+> Sleep · Night · Rest · Josei
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `solar_return_isekai` (niche — 5 series target)
+> Self-Worth · Isekai framing · Shonen
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `somatic_wisdom_shojo` (core — 9 series target)
+> Somatic Healing · Body Memory · Josei
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `spiritual_ground_supernatural` (niche — 5 series target)
+> Grief · Devotion · Josei
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `stabilizer_healing` (core — 9 series target)
+> Burnout Recovery · Seinen
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | sci_fi_cyberpunk | 1 | distributed |
+| en_US | workplace_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | sci_fi_cyberpunk | 1 | distributed |
+| ja_JP | workplace_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | sci_fi_cyberpunk | 1 | distributed |
+| zh_TW | workplace_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | sci_fi_cyberpunk | 1 | gray_zone_disclosed |
+| zh_CN | workplace_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | sci_fi_cyberpunk | 1 | hold_pending_market_clearance |
+| ko_KR | workplace_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `stillness_press` (flagship — 16 series target)
+> Anxiety · Somatic · Sleep · Josei adult women
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 2 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | supernatural_mystery | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | sci_fi_cyberpunk | 1 | distributed |
+| en_US | psychological_thriller | 1 | distributed |
+| en_US | romance_josei_drama | 1 | distributed |
+| en_US | workplace_drama | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | sports_competition | 1 | distributed |
+| en_US | historical_period | 1 | distributed |
+| en_US | cultivation_martial | 1 | distributed |
+| en_US | school_coming_of_age | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 2 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | supernatural_mystery | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | sci_fi_cyberpunk | 1 | distributed |
+| ja_JP | psychological_thriller | 1 | distributed |
+| ja_JP | romance_josei_drama | 1 | distributed |
+| ja_JP | workplace_drama | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | sports_competition | 1 | distributed |
+| ja_JP | historical_period | 1 | distributed |
+| ja_JP | cultivation_martial | 1 | distributed |
+| ja_JP | school_coming_of_age | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 2 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | supernatural_mystery | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | sci_fi_cyberpunk | 1 | distributed |
+| zh_TW | psychological_thriller | 1 | distributed |
+| zh_TW | romance_josei_drama | 1 | distributed |
+| zh_TW | workplace_drama | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | sports_competition | 1 | distributed |
+| zh_TW | historical_period | 1 | distributed |
+| zh_TW | cultivation_martial | 1 | distributed |
+| zh_TW | school_coming_of_age | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 2 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | supernatural_mystery | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | sci_fi_cyberpunk | 1 | gray_zone_disclosed |
+| zh_CN | psychological_thriller | 1 | gray_zone_disclosed |
+| zh_CN | romance_josei_drama | 1 | gray_zone_disclosed |
+| zh_CN | workplace_drama | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | sports_competition | 1 | gray_zone_disclosed |
+| zh_CN | historical_period | 1 | gray_zone_disclosed |
+| zh_CN | cultivation_martial | 1 | gray_zone_disclosed |
+| zh_CN | school_coming_of_age | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 2 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | supernatural_mystery | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | sci_fi_cyberpunk | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_thriller | 1 | hold_pending_market_clearance |
+| ko_KR | romance_josei_drama | 1 | hold_pending_market_clearance |
+| ko_KR | workplace_drama | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | sports_competition | 1 | hold_pending_market_clearance |
+| ko_KR | historical_period | 1 | hold_pending_market_clearance |
+| ko_KR | cultivation_martial | 1 | hold_pending_market_clearance |
+| ko_KR | school_coming_of_age | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `stoic_edge_battle` (niche — 5 series target)
+> Courage · Resilience · Seinen
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | historical_period | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | historical_period | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | historical_period | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | historical_period | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | historical_period | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `trauma_path_healing` (niche — 5 series target)
+> Grief · Trauma · Josei
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | psychological_horror | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | psychological_horror | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | psychological_horror | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | psychological_horror | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | psychological_horror | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+### `warrior_calm_cultivation` (niche — 5 series target)
+> Burnout · Inner Peace · Shonen
+
+| Locale | Genre | Series count | Distribution status |
+|---|---|---|---|
+| en_US | iyashikei | 1 | distributed |
+| en_US | dark_fantasy | 1 | distributed |
+| en_US | isekai | 1 | distributed |
+| en_US | action_battle | 1 | distributed |
+| en_US | mecha | 1 | distributed |
+| ja_JP | iyashikei | 1 | distributed |
+| ja_JP | dark_fantasy | 1 | distributed |
+| ja_JP | isekai | 1 | distributed |
+| ja_JP | action_battle | 1 | distributed |
+| ja_JP | mecha | 1 | distributed |
+| zh_TW | iyashikei | 1 | distributed |
+| zh_TW | dark_fantasy | 1 | distributed |
+| zh_TW | isekai | 1 | distributed |
+| zh_TW | action_battle | 1 | distributed |
+| zh_TW | mecha | 1 | distributed |
+| zh_CN | iyashikei | 1 | gray_zone_disclosed |
+| zh_CN | dark_fantasy | 1 | gray_zone_disclosed |
+| zh_CN | isekai | 1 | gray_zone_disclosed |
+| zh_CN | action_battle | 1 | gray_zone_disclosed |
+| zh_CN | mecha | 1 | gray_zone_disclosed |
+| ko_KR | iyashikei | 1 | hold_pending_market_clearance |
+| ko_KR | dark_fantasy | 1 | hold_pending_market_clearance |
+| ko_KR | isekai | 1 | hold_pending_market_clearance |
+| ko_KR | action_battle | 1 | hold_pending_market_clearance |
+| ko_KR | mecha | 1 | hold_pending_market_clearance |
+
+## Summary
+
+- **Brands**: 37
+- **Locales**: 5
+- **Genres**: 15
+- **Total localized series rows**: 1410
+- **Estimated chapters at 14/series**: 19740
+
+Per spec D-20, this catalog plan is materialized to disk by Phase 2X.4
+atomic PR (schema flip + 132+716 stale YAML deletion + regenerate).
+

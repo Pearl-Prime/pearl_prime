@@ -73,9 +73,9 @@
     },
     "target_platforms": {
       "type": "array",
-      "minItems": 1,
+      "minItems": 0,
       "items": { "type": "string" },
-      "description": "Per-book platform list (defaults to series_plan target_platforms)"
+      "description": "Per-book platform list (defaults to series_plan target_platforms). v2.1 (Phase 2X.4): minItems relaxed to 0 to support distribution_status=hold_pending_market_clearance series (ko_KR per D-18) where target_platforms is intentionally empty until policy clarifies."
     },
     "title": { "type": "string" },
     "subtitle": { "type": "string" },
