@@ -1,17 +1,30 @@
-# SpiritualTech Systems: Brand DNA & Anti-Spam Specification
+# Manga Brand DNA & Anti-Spam Specification
 
-**Version:** 1.0
-**Date:** March 2026
+**Version:** 1.1 (Phase 2X.5 reframe)
+**Date:** March 2026 (v1.0); reframed 2026-04-26 (v1.1)
 **Audience:** Product Engineering, QA, Brand Partners
 **Classification:** Confidential
+
+> **2026-04-26 reframe (Phase 2X.5):** This spec was NOT archived (per operator OQ-10 disposition). It is **kept and reframed** to align with the strategic catalog reconciliation in [specs/MANGA_CATALOG_RECONCILIATION_SPEC.md](MANGA_CATALOG_RECONCILIATION_SPEC.md). Anti-homogeneity is now anchored in the **per-brand %-by-genre allocation** documented in [docs/GENRE_PORTFOLIO_PLAN.md](../docs/GENRE_PORTFOLIO_PLAN.md): each of the 37 brands has a unique genre portfolio (e.g., stillness_press = 30% iyashikei + 25% dark_fantasy + 20% psych_horror + 15% supernatural_mystery + 10% isekai); cross-brand divergence emerges naturally from these weighted distributions plus brand-metadata-affinity scoring.
+>
+> **Implementation deferred to post-reconciliation Phase 4.** Detection / scoring logic is not yet built; will operate on the per-brand genre-mix divergence (catalog level) + per-genre style/topic divergence (series level) + per-locale variance (a brand's en_US portfolio should differ in tone from its zh_CN portfolio per the locale guidance in [specs/MANGA_CATALOG_RECONCILIATION_SPEC.md §2.4](MANGA_CATALOG_RECONCILIATION_SPEC.md)).
+>
+> **The 30-brand reference below is now 37-brand** post-Phase 2X.4 atomic. Brand IDs and tier assignments live in [docs/GENRE_PORTFOLIO_PLAN.md](../docs/GENRE_PORTFOLIO_PLAN.md).
 
 ---
 
 ## Executive Summary
 
-The Brand DNA & Anti-Spam system ensures that each of the 30 therapeutic brands produces visually and narratively distinct manga across all production runs. Brand DNA is NOT story content governance—it is the visual and production DNA that makes a book unmistakably recognizable as belonging to a specific therapeutic brand, locale, and production context.
+The Brand DNA & Anti-Spam system ensures that each of the **37 therapeutic brands** (3 flagship + 16 core + 18 niche per [docs/GENRE_PORTFOLIO_PLAN.md](../docs/GENRE_PORTFOLIO_PLAN.md)) produces visually and narratively distinct manga across all production runs. Brand DNA is NOT story content governance—it is the visual and production DNA that makes a book unmistakably recognizable as belonging to a specific therapeutic brand, locale, and production context.
 
-Each brand receives a unique "fingerprint" composed of visual style parameters, lettering conventions, production constraints, and anti-spam safeguards. This prevents visual duplication, content homogenization, and replication attacks while preserving therapeutic integrity.
+Each brand receives a unique "fingerprint" composed of:
+- **Per-brand genre portfolio %** (the strategic anchor — defined in `GENRE_PORTFOLIO_PLAN.md`)
+- **Visual style parameters** (palette, character design, screentone density)
+- **Lettering conventions** (bubble shape, font, SFX vocabulary)
+- **Production constraints** (master_format per locale, flatten_exports, distribution_status)
+- **Anti-spam safeguards** (cross-brand divergence scoring; per-locale variance check)
+
+This prevents visual duplication, content homogenization, and replication attacks while preserving therapeutic integrity.
 
 ---
 
