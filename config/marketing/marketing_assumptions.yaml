@@ -1,0 +1,136 @@
+schema_version: 1
+last_updated: 2026-04-27
+authority: docs/FULL_REPO_IMPLEMENTATION_GAP_PLAN_2026-04-26.md G5
+
+# ──────────────────────────────────────────────────────────────────────────
+# Marketing-funnel lower-average assumptions.
+#
+# Single source of truth for all funnel models, revenue projections,
+# brand-admin dashboards, and presentation HTMLs.
+#
+# These are the LOWER-AVERAGE / conservative end of industry-published
+# ranges, NOT optimistic high-end. When in doubt, prefer the lower number.
+# Forward-looking projections that quote a number that is more aggressive
+# than the value here MUST cite a source and override explicitly.
+#
+# Historical / factual claims (e.g. "Amazon Ads industry conversion is
+# 2 to 5%") are NOT governed by this file — only forward-looking
+# projections about Phoenix Omega's own funnel performance.
+# ──────────────────────────────────────────────────────────────────────────
+
+conversion_rates:
+  # Visitor -> freebie claim (landing page opt-in). 2.5% is the lower bound
+  # of typical landing-page averages (Unbounce industry benchmarks). Earlier
+  # internal projections used 5-8%, which is top-quartile only.
+  visitor_to_freebie: 0.025          # 2.5%
+
+  # Freebie claimer -> first welcome email open. 40% is conservative across
+  # the major ESPs (Mailchimp, ConvertKit) for opt-in welcome flows; first-
+  # touch opens often run higher but drop fast.
+  freebie_to_email: 0.40             # 40%
+
+  # Email subscriber -> paid purchase per campaign. 1.5% is the lower-avg
+  # for self-help / non-fiction author lists; "5-15%" figures are
+  # exceptional launches with deep relationship + warm list, not steady
+  # state.
+  email_to_purchase: 0.015           # 1.5%
+
+  # Audiobook listener -> additional unit purchase (cross-sell within
+  # Audible / Apple Books). 0.8% is the conservative cross-sell rate for
+  # mid-list non-fiction.
+  audiobook_listener_to_purchase: 0.008   # 0.8%
+
+  # Podcast subscriber -> paid purchase (book / course / membership tied to
+  # the show). 0.5% is the conservative per-episode CTA conversion baseline
+  # across self-help and personal-growth podcasts.
+  podcast_subscriber_to_purchase: 0.005   # 0.5%
+
+  # Pre-purchase conversion lift attributable to clear transformation
+  # promise on listing copy. Earlier internal claim was +35%; the lower-
+  # average lift reported across A/B tests on storefront copy is +12%.
+  transformation_promise_lift: 0.12       # +12% (was +35% optimistic)
+
+  # Audiobook sample -> purchase lift from improved sample quality / first-
+  # 60-seconds production. Earlier internal claim was 10-15%; lower-avg is
+  # +6%.
+  audiobook_sample_lift: 0.06             # +6% (was 10-15% optimistic)
+
+  # Audiobook narrator-fit lift (matching narrator voice to persona).
+  # Earlier internal claim was 15-25%; lower-avg is +9%.
+  audiobook_narrator_fit_lift: 0.09       # +9% (was 15-25% optimistic)
+
+ltv:
+  # Average units sold per buyer over their lifetime. Most non-fiction
+  # buyers buy a single book; some buy 2-3 across a backlist. 1.4 is the
+  # blended average pulled from Author Earnings + Bookstat panels.
+  ebook_avg_units_per_buyer: 1.4
+
+  # Audiobook buyers tend to be more genre-loyal but still skew toward one
+  # purchase; 1.2 reflects the lower bound.
+  audiobook_avg_units_per_buyer: 1.2
+
+  # Podcast subscription lifetime in months for memberships / Patreon /
+  # Supercast. 6 months is the lower-avg retention for self-help shows.
+  podcast_subscription_lifetime_months: 6
+
+revenue_per_unit:
+  # KDP US: $9.99 list at 70% royalty = ~$6.99 per unit. Use $6.99 as the
+  # blended ASP for forward projections that don't have per-title pricing.
+  ebook_kdp_us: 6.99                 # USD
+
+  # KDP Japan: ¥1,400 list at 70% royalty = ~¥980. Use ¥980 as the blended
+  # JP ASP for forward projections.
+  ebook_kdp_japan: 980               # JPY
+
+  # ACX US: $24.95 list at exclusive 40% royalty = $9.98 to author; the
+  # $14.95 figure is the consumer-side benchmark used in revenue cards.
+  # Use the per-unit royalty (ACX exclusive) for revenue projections.
+  audiobook_acx_us: 14.95            # USD list / model assumption
+  audiobook_acx_us_royalty: 9.98     # USD per-unit royalty (ACX exclusive)
+
+  # Audible Japan list: ¥3,500; per-unit royalty (Audible JP exclusive
+  # model) ~¥2,200.
+  audiobook_audible_japan: 2200      # JPY per-unit royalty
+
+  # Webtoon Canvas / similar UGC manga platforms — ad-share revenue per
+  # view. $0.02 is the conservative per-view revenue at low ad fill.
+  manga_webtoon_canvas: 0.02         # USD per view ad share
+
+# ──────────────────────────────────────────────────────────────────────────
+# Sources
+# ──────────────────────────────────────────────────────────────────────────
+sources:
+  - url: https://about.kdp.amazon.com/en_US/help/topic/G201834340
+    note: KDP US royalty schedule (70% tier requires $2.99-$9.99 list)
+  - url: https://acx.com/help/royalties/200484520
+    note: ACX royalty schedule (40% exclusive / 25% non-exclusive)
+  - url: https://unbounce.com/conversion-benchmark-report/
+    note: Unbounce landing-page conversion benchmark (industry medians by category)
+  - url: https://mailchimp.com/resources/email-marketing-benchmarks/
+    note: Mailchimp email benchmarks (open / CTR / conversion by industry)
+  - url: https://www.convertkit.com/reports/state-of-the-creator-economy
+    note: ConvertKit creator-economy benchmarks (creator email lists)
+  - url: https://authorearnings.com/
+    note: Author Earnings panels (units-per-buyer for non-fiction)
+  - url: (operator-supplied research)
+    note: Lower-avg conversion ranges per Pearl_Research deep-dive — operator to
+      replace this placeholder with the specific Pearl_Research artifact path
+      before publish.
+
+# ──────────────────────────────────────────────────────────────────────────
+# Consumers
+# ──────────────────────────────────────────────────────────────────────────
+# Files / scripts that should read from this YAML (rather than inlining
+# their own assumptions). Keep this list updated as new consumers are wired.
+#
+# - scripts/catalog/revenue_projector.py (consumes conversion_rate via
+#   config/catalog/annual_projection_targets.yaml, which is itself sourced
+#   from these lower-avg defaults — verified 2026-04-27)
+# - brand-wizard-app/public/presenter.html and locale variants (presenter-
+#   ja/tw/zh.html) — forward-looking phase-ramp revenue cards should cite
+#   this file in their accompanying tooltip / footnote.
+# - us_brand_admin_v32_briefing.html, brand_onboarding_hub.html — the
+#   "+35% transformation promise" claim is downgraded to +12% (see
+#   transformation_promise_lift above) and these HTMLs are patched in the
+#   same PR.
+# ──────────────────────────────────────────────────────────────────────────

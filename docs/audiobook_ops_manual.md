@@ -802,7 +802,7 @@ CTR < 2% or sales decline > 30%
 Description rewrite
 Every 6 months
 Sample-to-buy < 8%
-10–15% conversion lift
+~6% conversion lift (lower-avg; see config/marketing/marketing_assumptions.yaml audiobook_sample_lift)
 Cover refresh
 Every 12 months
 CTR decline or visual trend shift
@@ -818,7 +818,7 @@ Variable — test before committing
 Sample chapter swap
 Every 6 months
 Sample-to-buy < 8%
-15–25% conversion lift
+~9% conversion lift (lower-avg; see config/marketing/marketing_assumptions.yaml audiobook_narrator_fit_lift)
 Narrator voice update
 As new voices become available
 Completion < 25% or quality complaints

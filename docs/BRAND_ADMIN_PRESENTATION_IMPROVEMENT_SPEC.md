@@ -41,7 +41,7 @@ brand_onboarding_hub.html:
 | YoY audiobook growth | 25%+ | EXTERNAL |
 | BookTok 2024 sales | 59M | EXTERNAL |
 | V3.2 titles/quarter | 2.7x | ASSUMPTION |
-| Pre-purchase conversion | +35% | ASSUMPTION |
+| Pre-purchase conversion | +12% | ASSUMPTION (lower-avg, sourced from `config/marketing/marketing_assumptions.yaml` `transformation_promise_lift`; was +35% optimistic) |
 
 us_brand_admin_v32_briefing.html (all 7 system metrics × 3 each = ~21 metrics):
 - All V3.2 system metrics (+42%, +28%, +31%, etc.): ASSUMPTION

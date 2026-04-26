@@ -77,12 +77,48 @@ def _try_load_yaml(path: Path) -> dict:
         return {}
 
 
+def load_marketing_assumptions() -> dict:
+    """Load lower-avg marketing assumptions (single source of truth).
+
+    See config/marketing/marketing_assumptions.yaml. Authority:
+    docs/FULL_REPO_IMPLEMENTATION_GAP_PLAN_2026-04-26.md G5.
+    """
+    for root in [REPO_ROOT, _CONFIG_ROOT]:
+        p = root / "config/marketing/marketing_assumptions.yaml"
+        if p.exists():
+            return _try_load_yaml(p)
+    return {}
+
+
 def load_targets() -> dict:
+    """Load annual projection targets, backstopped by lower-avg marketing assumptions.
+
+    Order of precedence for `conversion_rate` / `blended_asp` defaults when
+    `annual_projection_targets.yaml` is missing or incomplete:
+      1. config/catalog/annual_projection_targets.yaml (per-lane / global)
+      2. config/marketing/marketing_assumptions.yaml (lower-avg defaults)
+      3. hard-coded fallback (lower-avg conservative)
+    """
+    targets: dict = {}
     for root in [REPO_ROOT, _CONFIG_ROOT]:
         p = root / "config/catalog/annual_projection_targets.yaml"
         if p.exists():
-            return _try_load_yaml(p)
-    return {"global_defaults": {"blended_asp": 6.25, "conversion_rate": 0.025}}
+            targets = _try_load_yaml(p)
+            break
+
+    # Backstop missing global_defaults from marketing_assumptions.yaml.
+    if not targets.get("global_defaults", {}).get("conversion_rate"):
+        ma = load_marketing_assumptions()
+        # Use email_to_purchase as the primary funnel-stage conversion baseline
+        # (lower-avg 1.5%); fallback to visitor_to_freebie (2.5%) if missing.
+        cr = (ma.get("conversion_rates", {}) or {}).get("email_to_purchase")
+        if cr is None:
+            cr = (ma.get("conversion_rates", {}) or {}).get("visitor_to_freebie", 0.025)
+        targets.setdefault("global_defaults", {})
+        targets["global_defaults"].setdefault("blended_asp", 6.25)
+        targets["global_defaults"].setdefault("conversion_rate", cr)
+
+    return targets or {"global_defaults": {"blended_asp": 6.25, "conversion_rate": 0.025}}
 
 
 def week_to_month(week_num: int, year: int = 2026) -> int:
