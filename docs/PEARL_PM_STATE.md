@@ -107,6 +107,14 @@ Carried over from earlier:
 
 10. **ws_tts_provider_hardening_20260410** — Narrow follow-up: soundtrack_plan ElevenLabs URL from `config/tts/locale_voice_routing.yaml` (no hardcoded host). Owner: Pearl_GitHub.
 
+Tier-3 deferred items now operator-approved 2026-04-27 (audit follow-up second-round decisions):
+
+11. **ws_teacher_manga_triptych_20260410** *(operator-approved push to completion 2026-04-27, decision 5a)* — already-active triptych ws gets push-to-completion mandate. Operator coordinates Pearl Star ComfyUI access for the remaining 9 of 12 teachers' portrait + scene + symbolic FLUX renders. Owners: Pearl_Dev + Pearl_Video.
+12. **ws_audiobook_ja_jp_rollout_20260427** *(proposed)* — Audiobook 5-locale rollout phase 1 (decision 6a 2026-04-27). Single-locale push: ja_JP first via Apple Books / Audible JP onboarding; tooling exists but rollout pending. Owner: Pearl_Dev. Gates: platform credentials needed.
+13. **ws_marketing_buildout_initiative_20260427** *(proposed)* — Multi-week Pearl_Marketing initiative (decision 7a 2026-04-27). LTV/conversion API ingestion (Spotify/Apple/Google Play/ACX) + `platform_marketing/` directory scaffold + `somatic_exercise_freebee_apps/` revival. Owner: Pearl_Marketing. Gates: platform credentials + operator priority decisions on launch order.
+
+Pearl Prime SCENE wiring (decision 1a, originally Tier 2 #3) — operator approved spawn in audit-followup session 2026-04-27, but recommend handoff to a focused Pearl_Dev session due to subtle pipeline-regression risk. See \"Priority Ordering\" below for sequencing.
+
 ## What Is Pending
 
 1. **ws_atom_gap_fill_20260410** — Fill P0 atom gaps from the P1 health audit (QUOTE+TEACHING atoms and persona×topic zero-atom combos). Owners: Pearl_Editor + Pearl_Writer. Evidence: `artifacts/audit/P1_NEXT_STEPS_2026_04_10.md`.
