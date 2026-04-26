@@ -109,7 +109,7 @@ Carried over from earlier:
 
 Tier-3 deferred items now operator-approved 2026-04-27 (audit follow-up second-round decisions):
 
-11. **ws_teacher_manga_triptych_20260410** *(operator-approved push to completion 2026-04-27, decision 5a)* — already-active triptych ws gets push-to-completion mandate. Operator coordinates Pearl Star ComfyUI access for the remaining 9 of 12 teachers' portrait + scene + symbolic FLUX renders. Owners: Pearl_Dev + Pearl_Video.
+11. **ws_teacher_manga_triptych_20260410** *(operator-approved push to completion 2026-04-27, decision 5a — CLOSED-AS-ALREADY-DONE 2026-04-27 PR-20)* — verification 2026-04-27 found all 13 showcase teachers (ahjan, adi_da, master_feung, sai_ma, ra, junko, miki, master_wu, pamela_fellows, joshin, maat, omote, master_sha) already have full triptych (portrait + scene + symbolic) at `brand-wizard-app/public/assets/manga_covers/{teacher}_{portrait,scene,symbolic}.png`. Operator-attended Pearl Star ComfyUI runs landed earlier (pre-audit). Audit GAP-T2 finding was stale. ws marked completed in `ACTIVE_WORKSTREAMS.tsv`. No further action needed.
 12. **ws_audiobook_ja_jp_rollout_20260427** *(proposed)* — Audiobook 5-locale rollout phase 1 (decision 6a 2026-04-27). Single-locale push: ja_JP first via Apple Books / Audible JP onboarding; tooling exists but rollout pending. Owner: Pearl_Dev. Gates: platform credentials needed.
 13. **ws_marketing_buildout_initiative_20260427** *(proposed)* — Multi-week Pearl_Marketing initiative (decision 7a 2026-04-27). LTV/conversion API ingestion (Spotify/Apple/Google Play/ACX) + `platform_marketing/` directory scaffold + `somatic_exercise_freebee_apps/` revival. Owner: Pearl_Marketing. Gates: platform credentials + operator priority decisions on launch order.
 
