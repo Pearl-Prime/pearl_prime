@@ -1,0 +1,449 @@
+schema_version: 1.0.0
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+series_id: warrior_calm_cultivation__master_wu__en_US__burnout__the_chassis_is_listening
+chapter_id: ep_001
+title: 'The Chassis Is Listening — Episode 1: Pre-Launch, 04:12'
+manga_author: Ren Iwami
+teacher_id: master_wu
+brand_id: warrior_calm_cultivation
+engine: OVERWHELM
+locale: en_US
+default_locale: en_US
+available_locales:
+- en_US
+- ja_JP
+- zh_CN
+- zh_TW
+main_characters:
+- id: kaede
+  name: Kaede Sorano
+  age: 27
+  role: protagonist (mecha pilot — third tour; quietly burned out; high-performer who has never failed an op)
+  visual_anchor: short black hair pinned at the nape, faint dark crescents under the eyes, charcoal flightsuit with a hand-knit
+    oatmeal-colored glove pad on the left palm (gift from her late aunt), thin steel ID tag at the collar
+- id: ito
+  name: Lt. Ito (radio voice / co-pilot observer in the launch bay tower)
+  age: 41
+  role: co-pilot observer; mission-control voice; the one watching telemetry while Kaede sits in the cockpit; gentle, undramatic
+  visual_anchor: only seen briefly through cockpit feed — wire-rim glasses, headset, calm hands; mostly a voice in the radio
+- id: master_wu
+  name: Master Wu (private channel / off-grid radio voice)
+  age: unspecified — read as elder
+  role: pilot_anchor program advisor (geomantic engineer who designed the chassis-pilot resonance system); speaks only on
+    the unofficial private band; appears as voice and a single hands-only insert
+  visual_anchor: never face-shown; visual presence = a pair of weathered hands on a worn map of Long Mai (dragon vein) lines
+    spread across a lacquered wooden desk; brass calipers, a small pearl on a black cord
+- id: chassis_unit_07
+  name: Unit-07 ("Anchor")
+  age: chassis-as-character (not a vehicle — the resonance partner)
+  role: the mecha; silent character; expresses state through cockpit telemetry, posture, latency, and the sound of its hydraulics;
+    has been "listening" to Kaede's body for 14 months
+  visual_anchor: 14-meter resonance frame; matte slate-grey armor with brass meridian lines hand-traced down the spine plating;
+    oversized pauldrons; a single warm cockpit-amber lamp inside an otherwise dim cockpit; the unit reads as old-craftsman
+    work, NOT polished consumer mecha — closer to Patlabor / 86 / Bokurano than Gundam
+scene_palette:
+  primary: cool industrial slate-grey + matte hangar steel
+  secondary: warm cockpit-amber (single internal lamp) + oatmeal cream (the knit glove pad)
+  accent: brass meridian-line tracery on chassis spine (visual through-line — these are the "Long Mai" the mecha carries)
+  flashback_palette: desaturated pre-dawn blue-grey (panel 17 only — Kaede's last mission)
+pages:
+- page_id: ep_001_p01
+  panels:
+  - panel_id: ep001_001
+    scene: 'Wide establishing shot of Hangar Bay 3 at 04:12. Cathedral-scale industrial space. Unit-07 stands docked at full
+      height, dwarfing the catwalks around it. Overhead floods are off; only standby work-lights cast long shadows across
+      the slate-grey armor. Brass meridian-line tracery on the chassis spine catches what little light there is — thin warm
+      threads on a cold body. No figure visible yet. '
+    beat_type: null
+    intent: CHASSIS-AS-LANDSCAPE establishment — the mecha is the cathedral, not the soldier
+    silence_confirmed: true
+  - panel_id: ep001_002
+    scene: 'Close-up on a hand inside a charcoal flightsuit, palm down on a pre-flight checklist tablet. The left palm wears
+      an oatmeal-colored hand-knit glove pad. Steam from a small thermos is faintly visible at the edge of the panel. The
+      hand is still. The checklist scrolls slowly. '
+    beat_type: spatial
+    intent: KNIT GLOVE HAND — first iyashikei-meta anchor, signals the human inside the machine
+    narrator_caption_by_locale:
+      en_US: Pre-launch. Oh-four-twelve.
+      ja_JP: ''
+      zh_TW: ''
+      zh_CN: ''
+  - panel_id: ep001_003
+    scene: 'Medium shot of Kaede strapped into the cockpit harness. Her face is lit only by the warm amber of the single cockpit
+      lamp. Eyes open, fixed forward at the dim HUD. She is calm in the way over-trained people are calm — the calm that is
+      actually freeze. '
+    beat_type: micro
+    silence_confirmed: true
+  - panel_id: ep001_004
+    scene: 'Tight close on Kaede''s jaw and throat. The masseter is set hard. A single tendon stands in her neck. Body-tension
+      cataloging cue — show, do not narrate. '
+    beat_type: micro
+    intent: SOMATIC INVENTORY (jaw clench) — first body register of the burnout pattern
+  - panel_id: ep001_005
+    scene: 'Extreme close on Kaede''s left hand on the joystick. The oatmeal glove pad is visible. Her fingers are not gripping
+      — they are stiff, slightly hovering, a freeze-grip rather than a hold. '
+    beat_type: micro
+    intent: SOMATIC INVENTORY (frozen hand) — burnout shown as held-breath in the muscle
+    sfx_by_locale:
+      en_US:
+      - hum...
+      ja_JP: []
+      zh_TW: []
+      zh_CN: []
+  - panel_id: ep001_006
+    scene: 'POV from inside the cockpit looking up at the chassis''s internal ceiling — the brass meridian lines also run
+      on the inside of the unit, converging behind Kaede''s seat. They are thin and warm against the slate. They look like
+      the back of a body she is sitting inside. '
+    beat_type: spatial
+    intent: LONG MAI INTERIOR — the mecha is a body; Kaede is the heart sitting in its chest cavity
+  - panel_id: ep001_007
+    scene: 'Close on the cockpit lamp itself. A single warm filament glow. Soft. The only kind thing in the frame. '
+    beat_type: micro
+    intent: COCKPIT-AMBER HAND — recurring warm-anchor in a cold scene
+- page_id: ep_001_p02
+  panels:
+  - panel_id: ep001_008
+    scene: 'Pull-back wide. The radio crackles — the official band light blinks pale green. Kaede''s shoulders register the
+      sound (the smallest tilt forward). Outside the cockpit window, the hangar floor is a long way down. '
+    beat_type: spatial
+    intent: ALARM ONSET (the routine kind, not the catastrophic kind)
+    dialogue_lines:
+    - speaker: ito
+      text_by_locale:
+        en_US: Anchor, this is Tower. Telemetry warm. We are go for routine patrol.
+        ja_JP: ''
+        zh_TW: ''
+        zh_CN: ''
+      intensity: normal
+      bubble_style: radio_box
+      tail_style: radio_zigzag
+      position_hint: top_right
+  - panel_id: ep001_009
+    scene: 'Close on Kaede''s lips. She speaks without unclenching her jaw — a well-trained mouth. '
+    beat_type: micro
+    dialogue_lines:
+    - speaker: kaede
+      text_by_locale:
+        en_US: Anchor copies. Going green.
+        ja_JP: ''
+        zh_TW: ''
+        zh_CN: ''
+      intensity: whisper
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: center_right
+  - panel_id: ep001_010
+    scene: 'Wide exterior shot — Unit-07 lifts one foot. The motion is half a beat slow. Steam vents from the joint plating.
+      Brass meridian-line tracery on the spine flickers under load — the warm threads strain. '
+    beat_type: spatial
+    intent: CHASSIS LATENCY — the unit is sluggish; the chassis has started mirroring her freeze
+    sfx_by_locale:
+      en_US:
+      - kssshhhhh
+      ja_JP: []
+      zh_TW: []
+      zh_CN: []
+  - panel_id: ep001_011
+    scene: 'Inside the cockpit. The HUD blinks an amber advisory: SUBSYSTEM LATENCY +0.4s. Not a hard fault. The kind of warning
+      a tired pilot learns to ignore. '
+    beat_type: micro
+    intent: PHANTOM WARNING — the chassis is starting to speak in the only language it has
+  - panel_id: ep001_012
+    scene: 'Mid-distance. Kaede''s face. Three soft cloud_thought bubbles drift around her — overlapping like exhaust. Each
+      carries a fragment of the old script. '
+    beat_type: micro
+    intent: Mind-racing — overlapping cloud_thought bubbles (master_wu doctrine — blockages clamoring)
+    dialogue_lines:
+    - speaker: kaede_internal
+      text_by_locale:
+        en_US: It''s tuned warm. Push through.
+        ja_JP: ''
+        zh_TW: ''
+        zh_CN: ''
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_left
+      font_override_by_locale:
+        en_US: italic_internal
+    - speaker: kaede_internal
+      text_by_locale:
+        en_US: Three months and you''re tired? Embarrassing.
+        ja_JP: ''
+        zh_TW: ''
+        zh_CN: ''
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_right
+      font_override_by_locale:
+        en_US: italic_internal
+    - speaker: kaede_internal
+      text_by_locale:
+        en_US: The unit is fine. The unit is always fine.
+        ja_JP: ''
+        zh_TW: ''
+        zh_CN: ''
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: center_right
+      font_override_by_locale:
+        en_US: italic_internal
+  - panel_id: ep001_013
+    scene: 'Close on Kaede''s left hand again. The fingers tighten — the freeze-grip finally closes around the joystick. The
+      oatmeal glove pad creases. '
+    beat_type: micro
+    intent: BODY OVERRIDE — pushing through the freeze; the old pattern fires
+  - panel_id: ep001_014
+    scene: 'Wide exterior. Unit-07 takes its first full step out of dock. The chassis''s right shoulder dips a fraction further
+      than spec — tiny, but visible to anyone watching the frame, not the manuals. '
+    beat_type: spatial
+    intent: CHASSIS MIRRORING — the unit is carrying her tension in its shoulder line
+    sfx_by_locale:
+      en_US:
+      - ka-thunk
+      ja_JP: []
+      zh_TW: []
+      zh_CN: []
+- page_id: ep_001_p03
+  panels:
+  - panel_id: ep001_015
+    scene: 'Cockpit interior. The HUD throws another advisory: COCKPIT BIOSIGN DRIFT — HEART 112, RESP SHALLOW. The numbers
+      are not red. Just amber. '
+    beat_type: micro
+    intent: REVEAL SETUP — the unit reads her body, not just hers
+  - panel_id: ep001_016
+    scene: 'Tight close on Kaede''s eyes. They drop to the biosign reading. Recognition is starting — the smallest furrow. '
+    beat_type: micro
+    dialogue_lines:
+    - speaker: kaede_internal
+      text_by_locale:
+        en_US: It''s reading me.
+        ja_JP: ''
+        zh_TW: ''
+        zh_CN: ''
+      intensity: internal
+      bubble_style: cloud_thought
+      tail_style: dotless
+      position_hint: top_right
+      font_override_by_locale:
+        en_US: italic_internal
+  - panel_id: ep001_017
+    scene: 'FLASHBACK PALETTE — desaturated pre-dawn blue-grey. Kaede in this same cockpit, three weeks ago. Same posture.
+      The advisory is on. She is ignoring it. A half-eaten ration bar sits on the console. The chassis''s brass meridian lines
+      on this panel are visibly DIMMER — the warm threads already starting to fade from neglect. '
+    beat_type: standard
+    intent: PENDULATION — the past failure register; this is not the first time
+    dialogue_lines: []
+  - panel_id: ep001_018
+    scene: 'Back to PRESENT palette. Kaede''s eyes widen by the smallest fraction. Her free hand goes to her sternum — a flat
+      palm pressed against the flightsuit, over the breastbone. Her own pulse, found. '
+    beat_type: micro
+    intent: SOMATIC ARRIVAL — the body locating itself
+  - panel_id: ep001_019
+    scene: 'POV — Kaede''s palm on her sternum, fingers slightly spread. The knit glove pad on the OTHER hand is soft in the
+      foreground. Two textures in one frame: military-issue suit, hand-knit kindness. '
+    beat_type: micro
+    intent: KNIT GLOVE HAND — second beat, lands on the somatic anchor
+  - panel_id: ep001_020
+    scene: 'Cockpit interior, wider. Kaede reaches up with two fingers and switches the radio band off the official channel
+      — to a low band marked simply with a brushwork ideogram (脈, "pulse / vein"). The pilot_anchor private band. Her hand
+      trembles, faintly. '
+    beat_type: spatial
+    intent: PRIVATE BAND — the gateway to master_wu; the unsanctioned channel
+    sfx_by_locale:
+      en_US:
+      - click.
+      ja_JP: []
+      zh_TW: []
+      zh_CN: []
+  - panel_id: ep001_021
+    scene: 'Insert panel — somewhere off-grid. A pair of weathered hands rest on a worn lacquered desk. A hand-drawn map of
+      dragon-vein lines spreads across the wood. Brass calipers. A small white pearl on a black cord lies beside the calipers.
+      Master Wu''s hands only. Never face-shown. '
+    beat_type: standard
+    intent: MASTER WU PRESENCE — the geomantic engineer at his work, not his pulpit
+  - panel_id: ep001_022
+    scene: 'Cockpit interior. The private band hums softly. Master Wu''s voice enters — a radio bubble, low intensity. The
+      amber lamp flickers warm across Kaede''s face as she listens. '
+    beat_type: micro
+    intent: TEACHING ARRIVES — not preachy, lands as observation
+    dialogue_lines:
+    - speaker: master_wu
+      text_by_locale:
+        en_US: The chassis has been listening to you for fourteen months, pilot. It is not malfunctioning. It is faithful.
+        ja_JP: ''
+        zh_TW: ''
+        zh_CN: ''
+      intensity: normal
+      bubble_style: radio_box
+      tail_style: radio_zigzag
+      position_hint: top_right
+- page_id: ep_001_p04
+  panels:
+  - panel_id: ep001_023
+    scene: 'Close on Kaede''s eyes. The widening has stopped. Something has arrived behind them. The braced look softens by
+      a hair — not relief. Recognition. '
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: It is not malfunctioning. It is faithful.
+      ja_JP: ''
+      zh_TW: ''
+      zh_CN: ''
+  - panel_id: ep001_024
+    scene: 'Wider — Kaede in the cockpit, the amber lamp on her face, the brass meridian lines on the cockpit interior visible
+      behind her. The lines run from the floor up the seat-back and converge above her head. '
+    beat_type: micro
+    intent: VISUAL TEACHING — the pilot is sitting INSIDE the dragon vein she has been overworking
+    dialogue_lines:
+    - speaker: master_wu
+      text_by_locale:
+        en_US: The body teaches the machine what to feel. You have been teaching it to brace. Watch what happens when you
+          do not.
+        ja_JP: ''
+        zh_TW: ''
+        zh_CN: ''
+      intensity: normal
+      bubble_style: radio_box
+      tail_style: radio_zigzag
+      position_hint: top_left
+  - panel_id: ep001_025
+    scene: 'Close on the cockpit HUD. The amber LATENCY advisory is still on. The biosign block still reads HEART 112. Nothing
+      has changed yet. '
+    beat_type: micro
+    intent: HONEST PHYSICS — the body has not let go yet; the work has not begun
+  - panel_id: ep001_026
+    scene: 'Close on Kaede''s jaw. The masseter is still set. Then — visibly — it unclenches. A single vertical line of relaxation
+      passes through the muscle. Her lips part the smallest fraction. '
+    beat_type: micro
+    intent: SOMATIC SHIFT (jaw release) — the choice point begins in the body
+  - panel_id: ep001_027
+    scene: 'Close on her left hand on the joystick. The freeze-grip releases. The fingers go from rigid to merely resting.
+      The oatmeal glove pad uncrumples. '
+    beat_type: micro
+    intent: SOMATIC SHIFT (hand release) — second body register
+  - panel_id: ep001_028
+    scene: 'Cockpit interior wide. Kaede toggles the official radio back on with her thumb. Her shoulders are visibly lower.
+      Her free palm is still flat on her sternum. '
+    beat_type: spatial
+    intent: CHOICE POINT — she will tell the tower the truth, not push through
+    dialogue_lines:
+    - speaker: kaede
+      text_by_locale:
+        en_US: Tower. Anchor. I am scrubbing the patrol. Pilot fatigue. Bringing her home.
+        ja_JP: ''
+        zh_TW: ''
+        zh_CN: ''
+      intensity: normal
+      bubble_style: round_normal
+      tail_style: pointer
+      position_hint: bottom_right
+  - panel_id: ep001_029
+    scene: 'Close on the radio''s green band light. A pause — the kind of pause a tower operator takes when a high-performer
+      says something unexpected. Then the light steadies. '
+    beat_type: spatial
+    intent: WITNESSED — Ito does not argue
+    dialogue_lines:
+    - speaker: ito
+      text_by_locale:
+        en_US: Tower copies. Bring her home, Anchor. We''ll keep the bay warm.
+        ja_JP: ''
+        zh_TW: ''
+        zh_CN: ''
+      intensity: normal
+      bubble_style: radio_box
+      tail_style: radio_zigzag
+      position_hint: top_right
+- page_id: ep_001_p05
+  panels:
+  - panel_id: ep001_030
+    scene: 'Wide exterior. Unit-07 lowers its weight back into the dock cradle. The motion is heavy and honest. Steam vents
+      — long this time, like an exhale. The brass meridian lines on the spine plating glow a fraction WARMER than at launch.
+      Cold metal carrying a held breath that has finally let go. '
+    beat_type: long_drop
+    intent: LONG DROP — therapeutic decompression beat. The chassis exhales when she does.
+    silence_confirmed: true
+    dialogue_lines: []
+  - panel_id: ep001_031
+    scene: 'Cockpit interior. The HUD advisories are clearing one by one. LATENCY: green. BIOSIGN: HEART 88, RESP STEADY.
+      Amber down to soft. Kaede''s eyes are nearly closed. Her palm is still on her sternum. '
+    beat_type: micro
+    intent: HONEST PHYSICS — the unit''s readings track her body, in both directions
+  - panel_id: ep001_032
+    scene: 'Close on Kaede''s face. Just barely a smile — the way someone smiles when they have stopped lying to themselves
+      about being fine. Eyes soft. Not transformed. Not fixed. Grounded. '
+    beat_type: micro
+    narrator_caption_by_locale:
+      en_US: I do not have to be fine. I just have to be here.
+      ja_JP: ''
+      zh_TW: ''
+      zh_CN: ''
+  - panel_id: ep001_033
+    scene: 'POV out the cockpit window. Dawn is starting — the hangar bay door is half-open and a strip of cool blue-into-warm-gold
+      morning is visible above the slate-grey skyline. The first actual outside light in the entire episode. '
+    beat_type: spatial
+    intent: COCKPIT-AMBER → DAWN HAND-OFF — interior warmth meets exterior dawn; iyashikei breath
+  - panel_id: ep001_034
+    scene: 'Insert again — Master Wu''s hands. The pearl on the black cord has been moved. It now rests directly on the dragon-vein
+      map, on a single junction marked in his hand: ANCHOR-07. He is annotating, not proclaiming. A geomantic engineer at
+      his desk. '
+    beat_type: spatial
+    intent: MASTER WU CLOSE — the work continues; the pilot is one node in a longer pattern
+    dialogue_lines:
+    - speaker: master_wu
+      text_by_locale:
+        en_US: The chassis was listening. It always was. Courage is a body that keeps showing up — and learns, slowly, that
+          showing up is not the same as bracing.
+        ja_JP: ''
+        zh_TW: ''
+        zh_CN: ''
+      intensity: normal
+      bubble_style: radio_box
+      tail_style: radio_zigzag
+      position_hint: bottom_left
+  - panel_id: ep001_035
+    scene: 'Final small panel — typographic only on a soft cool slate-grey background, brass meridian-line motif at the top
+      edge. Episode card. '
+    beat_type: standard
+    narrator_caption_by_locale:
+      en_US: End of Episode 1 — The Chassis Is Listening
+      ja_JP: ''
+      zh_TW: ''
+      zh_CN: ''
+notes:
+  pacing: 'The episode runs 35 panels — within the 30–50 webtoon convention and aligned to mecha genre pacing (silent_panel_ratio
+    0.20–0.30). Iyashikei-meta mecha hybrid: most panels carry no dialogue. Mechanical SFX is restrained (hum, kssshhhhh,
+    ka-thunk, click) — closer to Patlabor / 86 / Bokurano than Gundam-action register. The cockpit is the kitchen-table of
+    this story; the chassis is the weather. '
+  bubble_style_register: 'Kaede''s spoken dialogue: round_normal at whisper-to-normal intensity. Internal thoughts: cloud_thought
+    + italic_internal. Catastrophizing loop (panel 12): three cloud_thoughts to create the "exhaust gathering" visual. Master
+    Wu and Lt. Ito both speak through radio_box bubbles with radio_zigzag tails — they are voice-only presences in the cockpit. '
+  sfx_policy: 'Restrained mechanical-environmental rather than heavy_mechanical. Per pacing config, mecha allows heavy SFX,
+    but this is iyashikei-mecha hybrid — high-frequency BANG / WHAM register would break the somatic teaching. Save those
+    for an action episode. The hydraulics here are a held breath. '
+  gutter_choices: 'standard (800 px) reserved for the flashback transition (panel 17), the master_wu hands inserts (panels
+    21, 34), and the final episode-card (panel 35). long_drop (2200 px) reserved for the single decompression beat at panel
+    30 — the chassis exhaling with the pilot. Everything else is micro (40 px) or spatial (200 px). Total expected episode
+    height ≈ 12,000 px. '
+  master_wu_voice_note: 'Master Wu''s on-page voice is delivered through the private radio band (脈 — pulse/vein). His doctrinal
+    frame (Long Mai / Dragon Vein geomancy, earth-energy-flow, blockage-clearing as ritual practice) maps directly onto this
+    episode''s metaphor: the chassis IS a Long Mai, the cockpit is a xue (energy accumulation point), and the pilot''s body
+    is the qi the vessel carries. Burnout = blocked flow. The teaching never leaves his geomantic register — he names the
+    chassis''s faithfulness, not the pilot''s failure. Forbidden frames (per doctrine.yaml): no Wu Wei / effortless-action
+    language, no public-preacher posture, no individual-only framing detached from the earth-system context. '
+  translation_pipeline_handoff: 'text_by_locale dicts are populated for en_US only; ja_JP / zh_TW / zh_CN keys are present
+    with empty values. The Qwen translation pipeline (Pearl Star, scheduled / unattended) will fill the CJK locales by walking
+    dialogue_lines + sfx_by_locale + narrator_caption_by_locale. Translation note: master_wu''s lines should prefer literal-warm
+    over literal-tight; "脈" (pulse/vein) is the canonical translation hinge for the private band ideogram and should not be
+    westernized into "frequency" or "channel." '
+  iyashikei_meta_anchors: 'Three small kind details anchor the sublime in the human, mirroring stillness_press''s tea + bird
+    + houseplant pattern: (1) the oatmeal hand-knit glove pad on Kaede''s left palm — gift from her late aunt, only mentioned
+    in main_characters, never narrated (2) the small thermos at panel 002, edge-of-frame, never named (3) the cockpit-amber
+    lamp — the only kind thing in a cold scene, recurring as visual anchor. '
+  out_of_scope: 'Render the panels (operator runs ComfyUI on Pearl Star using the produced JSON). Translate to ja_JP / zh_TW
+    / zh_CN (deferred to Qwen pipeline). ep_002+ (this is ep_001 only). Brand registry entry for pilot_anchor_mecha (Pearl_Brand
+    PR #722 owns this). '
+audience: shonen
+genre: cultivation_mecha_crossover
