@@ -111,13 +111,64 @@ DISPLAY_TO_SLUG = {
 # "metadata affinity" leg of distribute_genres() below.
 
 # How much each strategy leg contributes to the final per-genre weight.
-# Sum to 1.0. Flagship tier gets more weight on uniform baseline (more spread);
-# niche tier gets more weight on strategic anchor (more concentration).
+# Sum to 1.0. Per operator directive 2026-04-26 ("the spread of genres needs to
+# be for all genres based on market %"): market_revenue is the DOMINANT leg
+# (70%). Strategic anchor (20%) only colors brand identity at the margin;
+# metadata (5%) and baseline (5%) are minor adjustments. Result: catalog
+# totals approximate the documented per-genre market share.
 DISTRIBUTION_WEIGHTS = {
-    "flagship": {"strategic": 0.55, "metadata": 0.30, "baseline": 0.15},
-    "core":     {"strategic": 0.65, "metadata": 0.25, "baseline": 0.10},
-    "niche":    {"strategic": 0.75, "metadata": 0.20, "baseline": 0.05},
-    "unknown":  {"strategic": 0.60, "metadata": 0.30, "baseline": 0.10},
+    "flagship": {"strategic": 0.20, "metadata": 0.05, "market_revenue": 0.70, "baseline": 0.05},
+    "core":     {"strategic": 0.20, "metadata": 0.05, "market_revenue": 0.70, "baseline": 0.05},
+    "niche":    {"strategic": 0.20, "metadata": 0.05, "market_revenue": 0.70, "baseline": 0.05},
+    "unknown":  {"strategic": 0.20, "metadata": 0.05, "market_revenue": 0.70, "baseline": 0.05},
+}
+
+# Per-genre market-revenue weights, derived from documented top-title sales:
+#   - Mecha: Evangelion $16B franchise (unique tier — spec D-9 mega-example)
+#   - Action/Battle: One Piece 530M + Naruto 250M + Dragon Ball 260M + Demon
+#     Slayer 150M + MHA — ~1.2B combined sales tier
+#   - Dark Fantasy: Berserk 70M + Frieren 30M (4.99M in 2024 alone) + Tokyo Ghoul
+#     47M (overlapping psych_horror) — Mega tier per GENRE_PORTFOLIO_PLAN
+#   - Isekai: Solo Leveling, Re:Zero, Slime, SAO — Mega (digital) per plan
+#   - Psychological Horror: Tokyo Ghoul 47M; CAGR 18.74% (Large-growing)
+#   - Supernatural Mystery: Mushishi 6M + Natsume 17M + xxxHOLiC 14M (Large)
+#   - Romance/Josei Drama: broad-base ubiquitous (Large)
+#   - Sports/Competition: Slam Dunk + Haikyuu + Ace of Diamond (Large)
+#   - Sci-Fi/Cyberpunk: Akira + GitS (Mid; iconic, slower commercial pace)
+#   - Psychological Thriller: Death Note 30M + Monster (Mid)
+#   - Workplace Drama: Aggretsuko, Wotakoi (Mid; broad-but-not-mega)
+#   - Historical/Period: Vinland Saga 7M, Vagabond, Bride's Story (Mid)
+#   - Cultivation/Martial: huge in CN/TW; mid globally
+#   - School/Coming-of-Age: broad-but-not-mega
+#   - Iyashikei: Anchor tier (loyalty-builder; 3M ceiling without genre shell
+#     per CJK_CATALOG_PLAN.md §1)
+MARKET_REVENUE_WEIGHTS = {
+    # Mega-of-mega tier — genres with single franchises ≥ $10B or aggregate sales ≥ 500M
+    "action_battle":          1.50,  # One Piece 530M + Naruto 250M + Dragon Ball 260M + Demon Slayer 150M = 1.2B+ tier
+    "mecha":                  1.40,  # Evangelion $16B franchise (single — spec D-9 mega-example)
+
+    # Mega tier — multi-decade-bestseller franchises
+    "dark_fantasy":           1.10,  # Mega per plan (Berserk 70M, Frieren 30M, Vinland 7M)
+    "isekai":                 1.00,  # Mega (digital) per plan (Solo Leveling, Re:Zero, SAO, Slime)
+
+    # Large-growing tier — high CAGR markets
+    "psychological_horror":   0.85,  # Large-growing (Tokyo Ghoul 47M; CAGR 18.74%)
+
+    # Large tier — broad-base or steady mid-millions sellers
+    "supernatural_mystery":   0.65,  # Large (Mushishi 6M, Natsume 17M, xxxHOLiC 14M)
+    "romance_josei_drama":    0.65,  # Large (broad-base; Heartstopper-tier ubiquity)
+    "sports_competition":     0.65,  # Large (Slam Dunk, Haikyuu, Eyeshield)
+
+    # Mid tier — iconic but slower commercial pace
+    "sci_fi_cyberpunk":       0.50,  # Mid (Akira, Ghost in the Shell — classic prestige)
+    "psychological_thriller": 0.50,  # Mid (Death Note 30M, Monster)
+    "historical_period":      0.45,  # Mid (Vinland Saga, Vagabond, Bride's Story)
+    "cultivation_martial":    0.45,  # Mid (huge in CN/TW; smaller global)
+    "workplace_drama":        0.35,  # Mid (Aggretsuko, Wotakoi)
+    "school_coming_of_age":   0.35,  # Mid (broad)
+
+    # Anchor tier — loyalty-builder, not revenue
+    "iyashikei":              0.25,  # Anchor (3M ceiling without genre shell per CJK_CATALOG_PLAN.md §1)
 }
 
 # Tag → per-genre affinity scores (0.0–1.0). Strict mapping from brand
@@ -257,7 +308,15 @@ def distribute_with_spread(
     for g, score in metadata_affinity.items():
         combined[g] += weights["metadata"] * (score / meta_total)
 
-    # Uniform baseline — every genre gets equal share of baseline budget
+    # Market revenue — weights derived from documented top-title sales tiers
+    # (per GENRE_PORTFOLIO_PLAN.md tier table + manga_genre_writing_styles
+    # corpus citations). Mega-tier mecha/action/dark_fantasy/isekai get
+    # proportionally more share; iyashikei (anchor tier) gets less.
+    revenue_total = sum(MARKET_REVENUE_WEIGHTS.values())
+    for g in combined:
+        combined[g] += weights["market_revenue"] * (MARKET_REVENUE_WEIGHTS.get(g, 0.5) / revenue_total)
+
+    # Uniform baseline — every genre gets equal share of remaining budget
     baseline_per_genre = weights["baseline"] / len(VALID_GENRES)
     for g in combined:
         combined[g] += baseline_per_genre

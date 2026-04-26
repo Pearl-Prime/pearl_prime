@@ -89,7 +89,13 @@ def test_brand_metadata_affinity_picks_up_brand_id_tags():
 
 
 def test_distribute_with_spread_flagship_covers_all_15_genres():
-    """Per operator directive: flagship target=16 must produce 1 series in every genre + 1 surplus."""
+    """Flagship target=16 must produce 1 series in every genre + 1 surplus.
+
+    Under pure-market-share distribution (operator directive 2026-04-26), the
+    surplus goes to the highest combined-weight genre — typically a mega-tier
+    market genre (mecha, action_battle, dark_fantasy) rather than the brand's
+    strategic-allocation primary.
+    """
     mod = _import_module()
     strategic = {"iyashikei": 30.0, "dark_fantasy": 25.0, "psychological_horror": 20.0}
     affinity = {g: 0.5 for g in mod.VALID_GENRES}
@@ -101,8 +107,13 @@ def test_distribute_with_spread_flagship_covers_all_15_genres():
     assert sum(counts.values()) == 16
     nonzero = sum(1 for c in counts.values() if c > 0)
     assert nonzero == 15, f"expected all 15 genres represented; got {nonzero}"
-    # Primary genre must have ≥2 (the surplus)
-    assert counts["iyashikei"] >= 2
+    # Surplus goes to a mega-tier market genre (action_battle, mecha,
+    # dark_fantasy, or isekai) under pure-market-share distribution.
+    surplus_winners = {g for g, c in counts.items() if c >= 2}
+    mega_tier = {"action_battle", "mecha", "dark_fantasy", "isekai"}
+    assert surplus_winners & mega_tier, (
+        f"expected surplus to land on a mega-tier genre; got winners {surplus_winners}"
+    )
 
 
 def test_distribute_with_spread_niche_concentrates_to_top_5():
