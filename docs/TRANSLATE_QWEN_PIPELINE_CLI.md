@@ -28,7 +28,7 @@ All locales below are **system languages** for translation and prompt pipelines.
 | **it-IT**| **Italian**            | **Italy**         | **✓**        |
 | hu-HU    | Hungarian              | Hungary           | ✓            |
 
-**EU catalogue locales:** de-DE, es-ES, fr-FR, it-IT, hu-HU (see [LOCALE_CATALOG_MARKETING_PLAN.md](./LOCALE_CATALOG_MARKETING_PLAN.md)).
+**EU catalogue locales:** de-DE, es-ES, fr-FR, it-IT, hu-HU (see [AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md)).
 
 ---
 
@@ -72,7 +72,7 @@ You can run the same pipeline from forks [Ahjan108/Qwen](https://github.com/Ahja
 
 - **Locale registry:** [config/localization/locale_registry.yaml](../config/localization/locale_registry.yaml)
 - **Content roots (per locale):** [config/localization/content_roots_by_locale.yaml](../config/localization/content_roots_by_locale.yaml)
-- **EU catalogue & marketing:** [LOCALE_CATALOG_MARKETING_PLAN.md](./LOCALE_CATALOG_MARKETING_PLAN.md)
+- **EU catalogue & marketing:** [AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md)
 - **Pearl News scheduling (Qwen):** [PEARL_NEWS_GITHUB_SCHEDULING.md](./PEARL_NEWS_GITHUB_SCHEDULING.md)
 - **Translation, validation & multilingual:** [DOCS_INDEX.md](./DOCS_INDEX.md) § Translation, validation & multilingual
 - **New language onboarding:** [NEW_LANGUAGE_LOCATION_ONBOARDING.md](./NEW_LANGUAGE_LOCATION_ONBOARDING.md)

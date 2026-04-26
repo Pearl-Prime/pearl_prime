@@ -221,7 +221,7 @@ Expected output:
 
 - [LOCALE_PERSONAS.md](./LOCALE_PERSONAS.md) — 46 personas across 12 locales
 - [NEW_LANGUAGE_LOCATION_ONBOARDING.md](./NEW_LANGUAGE_LOCATION_ONBOARDING.md) — Onboarding framework for new locales
-- [LOCALE_CATALOG_MARKETING_PLAN.md](./LOCALE_CATALOG_MARKETING_PLAN.md) — Phased rollout and locale strategy
+- [AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) — Phased rollout and locale strategy
 - `config/catalog_planning/brand_archetype_registry.yaml` — 24 EN brand archetypes
 - `config/localization/brand_registry_locale_extension.yaml` — Locale brand definitions
 - `config/marketing/platform_antispam_rules.yaml` — Platform anti-spam rules

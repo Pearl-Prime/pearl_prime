@@ -237,7 +237,7 @@ Do deep research on marketing and titles for self-help/wellness audiobooks in {t
 5. **Pricing and discount**
    - Price bands (local currency) for micro / mid / deep formats; discount psychology; bundle rules if applicable.
 
-Output: gtm_identity and discovery_contract per brand; emotional_vocabulary with allowed_tokens and forbidden_title_tokens; pricing_posture; compliance notes. Format for brand_registry_locale_extension and brand_archetype_registry. Ensure no conflict with TITLE_AND_CATALOG_MARKETING_SYSTEM.md.
+Output: gtm_identity and discovery_contract per brand; emotional_vocabulary with allowed_tokens and forbidden_title_tokens; pricing_posture; compliance notes. Format for brand_registry_locale_extension and brand_archetype_registry. Ensure no conflict with AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md.
 ```
 
 ---
@@ -389,7 +389,7 @@ provenance:
 
 - **[MARKETING_DEEP_RESEARCH_PROMPTS.md](MARKETING_DEEP_RESEARCH_PROMPTS.md)** — US/English master and sub-prompts; extend with locale-specific runs from this doc.
 - **[LOCALE_PERSONAS.md](LOCALE_PERSONAS.md)** — Authority for locale-specific personas; add new locale sections from §3.2 output.
-- **[LOCALE_CATALOG_MARKETING_PLAN.md](LOCALE_CATALOG_MARKETING_PLAN.md)** — Catalog and brand rollout per locale.
+- **[AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md)** — Catalog and brand rollout per locale.
 - **[del_location_plan/locale_strategy.md](../del_location_plan/locale_strategy.md)** — One brand = one locale; rollout phases; distribution routing.
-- **[TITLE_AND_CATALOG_MARKETING_SYSTEM.md](TITLE_AND_CATALOG_MARKETING_SYSTEM.md)** — Title philosophy, validation rules, deep research integration.
+- **[AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md](AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md)** — Title philosophy, validation rules, deep research integration.
 - **Config:** `config/localization/locale_registry.yaml`, `content_roots_by_locale.yaml`, `brand_registry_locale_extension.yaml`; `config/catalog_planning/canonical_topics.yaml`, `canonical_personas.yaml`; `config/author_registry.yaml`, `config/authoring/author_positioning_profiles.yaml`.

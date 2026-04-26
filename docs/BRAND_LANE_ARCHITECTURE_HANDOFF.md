@@ -313,7 +313,7 @@ The `render_audiobook.py` works standalone. It needs to be wired into:
 | `docs/VOICE_ARCHITECTURE_PLAN.md` | ElevenLabs voice layering: teacher voices, channel voices, manga voices, locale voices. |
 | `docs/authoring/AUTHOR_COVER_ART_SYSTEM.md` | How cover art bases work. Author→PNG→palette tokens→KDP covers. |
 | `docs/authoring/AUTHOR_ASSET_WORKBOOK.md` | Required assets per author: bio, why_this_book, authority_position, audiobook_pre_intro. |
-| `docs/LOCALE_CATALOG_MARKETING_PLAN.md` | All 13 locale marketing strategies, invisible scripts, platform positioning. |
+| `docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md` | All 13 locale marketing strategies, invisible scripts, platform positioning. |
 | `docs/GLOBAL_PERSONA_MARKETING_PLAN.md` | 10 personas × 12 locales × 12 topics market fit matrix. |
 | `docs/PHOENIX_24_BRAND_GOVERNANCE_ARCHITECTURE.md` | Governance at scale: anti-duplication, brand separation, KPI sentinels. |
 | `docs/RELEASE_VELOCITY_AND_SCHEDULE.md` | Release velocity ramp, platform caps, scheduling. |

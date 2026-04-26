@@ -5,7 +5,7 @@
 **Date:** 2026-04-26
 **Status:** Draft awaiting operator approval before any execution PR opens.
 **Inputs:** [docs/MANGA_PIPELINE_AUDIT_2026-04-26.md](../docs/MANGA_PIPELINE_AUDIT_2026-04-26.md) (Phase 1 audit findings); [docs/GENRE_PORTFOLIO_PLAN.md](../docs/GENRE_PORTFOLIO_PLAN.md) (strategic refresh, PR #583); [docs/CJK_CATALOG_PLAN.md](../docs/CJK_CATALOG_PLAN.md) + [docs/US_CATALOG_PLAN.md](../docs/US_CATALOG_PLAN.md) (per-locale strategic plans); [docs/MANGA_SERIES_PORTFOLIO_RESEARCH.md](../docs/MANGA_SERIES_PORTFOLIO_RESEARCH.md) (research feeder).
-**Out-of-scope inputs:** `docs/LOCALE_CATALOG_MARKETING_PLAN.md` and `docs/TITLE_AND_CATALOG_MARKETING_SYSTEM.md` are **audiobook** plans, not manga. Not touched by this spec.
+**Out-of-scope inputs:** `docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md` and `docs/AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md` are **audiobook** plans, not manga. Not touched by this spec.
 
 ---
 
@@ -271,8 +271,8 @@ The Phase 2A verification revealed these earlier-flagged candidates as load-bear
 | `scripts/manga/run_prompt_compiler.py` | Documented in onboarding; safer to leave until onboarding is updated. |
 | `phoenix_v4/manga/chapter/visual_from_script.py` (v2) | `lettering_from_script.py` imports it for v2 compat. Re-evaluate after PR #678. |
 | `docs/MANGA_MODE_STRATEGY.docx` | Binary; out of scope until §10 OQ-7 (docx → md migration) is decided. |
-| `docs/LOCALE_CATALOG_MARKETING_PLAN.md` | **Audiobook plan, not manga.** Out of scope. |
-| `docs/TITLE_AND_CATALOG_MARKETING_SYSTEM.md` | **Audiobook plan, not manga.** Out of scope. |
+| `docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md` | **Audiobook plan, not manga.** Out of scope. |
+| `docs/AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md` | **Audiobook plan, not manga.** Out of scope. |
 | `docs/MANGA_SERIES_PORTFOLIO_RESEARCH.md` | Research feeder for the strategic plan; current. |
 | `docs/MANGA_FONT_REGISTRY.md`, `docs/MANGA_CJK_SHAPING.md`, `docs/MANGA_GTM_PLAN.md`, `docs/MANGA_PIPELINE_ONBOARDING.md`, `docs/MANGA_PIPELINE_COMPLETE_GUIDE.md`, `docs/MANGA_IMPLEMENTATION_OUTLINE.md`, `docs/MANGA_CATALOG_VOLUME_AND_ASSETS_HANDOFF_2026_04_17.md` | All KEEP per audit §2.2. |
 | All Cohort 1 and Cohort 2 specs not listed above | Per audit §2.3 — most are LIVE or PARTIAL; reframing happens in §7, not deletion. |
@@ -554,7 +554,7 @@ Per audit §8 OQ-11. Binary docx; not auditable. Recommendation: migrate to Mark
 
 ### OQ-9 — Audiobook-named docs that landed in `docs/`
 
-`docs/LOCALE_CATALOG_MARKETING_PLAN.md` (117 KB, audiobook) and `docs/TITLE_AND_CATALOG_MARKETING_SYSTEM.md` (audiobook) sit in `docs/` adjacent to manga docs. They are out of scope for this spec but the naming collision is confusing. Operator may want a separate hygiene PR to rename or move them under `docs/audiobook/`. Not done here.
+`docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md` (117 KB, audiobook) and `docs/AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md` (audiobook) sit in `docs/` adjacent to manga docs. They are out of scope for this spec but the naming collision is confusing. Operator may want a separate hygiene PR to rename or move them under `docs/audiobook/`. Not done here.
 
 ---
 
@@ -568,7 +568,7 @@ This spec does not:
 - Implement MQG-01, MQG-03..08 (audit §7.3; separate sprint).
 - Implement MDLG-01..05 dialogue gates (audit §7.4; separate sprint).
 - Implement the cover pipeline (audit §7.5; deferred per OQ-8).
-- Touch any audiobook artifact (`docs/LOCALE_CATALOG_MARKETING_PLAN.md`, `docs/TITLE_AND_CATALOG_MARKETING_SYSTEM.md`, `phoenix_v4/audiobook/`, `scripts/audiobook/`).
+- Touch any audiobook artifact (`docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md`, `docs/AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md`, `phoenix_v4/audiobook/`, `scripts/audiobook/`).
 - Touch any video artifact (`phoenix_v4/video/`, `scripts/video/`).
 - Touch the existing ep_001 production artifact in `artifacts/manga/ep_001/`.
 - Merge PR #678 (gating but separate; tracked in audit §5.5).

@@ -4,7 +4,7 @@
 
 **Audience:** Ops, marketing, content, distribution, and localization teams.
 
-**Authority:** Extends [TITLE_AND_CATALOG_MARKETING_SYSTEM.md](./TITLE_AND_CATALOG_MARKETING_SYSTEM.md) (US title philosophy) and [locale_strategy.md](../del_location_plan/locale_strategy.md) (rollout phases). References [locale_registry.yaml](../config/localization/locale_registry.yaml) (technical definitions) and [PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md](../specs/PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md) (invisible script research).
+**Authority:** Extends [AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md](./AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md) (US title philosophy) and [locale_strategy.md](../del_location_plan/locale_strategy.md) (rollout phases). References [locale_registry.yaml](../config/localization/locale_registry.yaml) (technical definitions) and [PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md](../specs/PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md) (invisible script research).
 
 **Last updated:** 2026-03-23
 
@@ -1469,7 +1469,7 @@ This section provides guidance on how to operationalize the marketing strategy a
 
 ### Title Philosophy Scaling
 
-The title philosophy defined in TITLE_AND_CATALOG_MARKETING_SYSTEM.md (US baseline) scales to other locales with these modifications:
+The title philosophy defined in AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md (US baseline) scales to other locales with these modifications:
 
 **US baseline (en-US):** Owns a search keyword (consumer language, not internal slug); names the invisible script precisely; carries brand voice (Calm vs Edge vs Rise vs Root); includes locale when city-specific.
 

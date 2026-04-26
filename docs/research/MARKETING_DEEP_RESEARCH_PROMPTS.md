@@ -222,7 +222,7 @@ Before merging research output into config, all of the following must pass:
 | Gate | Check | Owner |
 |------|-------|-------|
 | **Schema-valid output** | Output conforms to target schema (YAML parses; required fields present; types correct). Run `validate_brand_archetype_registry.py` for registry changes. | Ops |
-| **No contradiction with canonical specs** | No conflict with `unified_personas.md`, `BRAND_ARCHETYPE_VALIDATOR_SPEC.md`, `TITLE_AND_CATALOG_MARKETING_SYSTEM.md`. Persona/topic IDs match. | Ops |
+| **No contradiction with canonical specs** | No conflict with `unified_personas.md`, `BRAND_ARCHETYPE_VALIDATOR_SPEC.md`, `AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md`. Persona/topic IDs match. | Ops |
 | **A/B sanity test passed** | For title/vocabulary changes: generate 10–20 sample titles with new config; human review confirms no spam patterns, no clinical terms, brand voice preserved. | Marketing |
 | **Owner sign-off** | Marketing + Ops both approve merge. Provenance block complete (date, model, sources, confidence, reviewer). | Marketing, Ops |
 
@@ -242,7 +242,7 @@ Before merging research output into config, all of the following must pass:
 
 - [DOCS_INDEX.md](DOCS_INDEX.md) — Full doc index; this file is in [Marketing & deep research (document all)](DOCS_INDEX.md#marketing--deep-research-document-all)
 - [NEW_LANGUAGE_LOCATION_ONBOARDING.md](NEW_LANGUAGE_LOCATION_ONBOARDING.md) — **Locale onboarding:** Process and deep research prompts for adding a new language/location/topic/persona; market-driven; personas + topics (topic families) + authors + platforms + metadata + stories + writing spec + book titles.
-- [TITLE_AND_CATALOG_MARKETING_SYSTEM.md](TITLE_AND_CATALOG_MARKETING_SYSTEM.md)
+- [AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md](AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md)
 - [PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md](../specs/PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md)
 - [unified_personas.md](../unified_personas.md)
 - [config/catalog_planning/brand_archetype_registry.yaml](../config/catalog_planning/brand_archetype_registry.yaml)

@@ -565,8 +565,8 @@ Single index: every doc, spec, script, and config that uses or is fed by marketi
 | **Research audit 2026-03-30** | [artifacts/research/RESEARCH_AUDIT_2026_03_30.md](../artifacts/research/RESEARCH_AUDIT_2026_03_30.md) — Section A uncited claims; Section B orphaned files, partial sub-deliverables, pipeline not run, KB disabled. |
 | **Research integration (PM / GitHub)** | [docs/RESEARCH_INTEGRATION_DEV_SPEC.md](./RESEARCH_INTEGRATION_DEV_SPEC.md) — PR-RI-001–006, PR-RI-KB, partial marketing extraction, workstreams, merge order. |
 | **Research citation gap (Pearl_Research)** | [docs/RESEARCH_CITATION_GAP_DEV_SPEC.md](./RESEARCH_CITATION_GAP_DEV_SPEC.md) — RCG/RPA tasks, prompt completion, EI v2 KB activation (research lane), dependency graph. |
-| **Title & catalog marketing system** | [docs/TITLE_AND_CATALOG_MARKETING_SYSTEM.md](./TITLE_AND_CATALOG_MARKETING_SYSTEM.md) — Title philosophy (search keyword, invisible script, brand voice); deep research integration; ops-manual dimensions (templates, imprints, validation); title engine v2→v4. Authority: [PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC](../specs/PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md). |
-| **Locale catalog marketing plan** | [docs/LOCALE_CATALOG_MARKETING_PLAN.md](./LOCALE_CATALOG_MARKETING_PLAN.md) — Per-locale positioning, go-live checklists, invisible script per locale; extends title philosophy; references deep research briefs. |
+| **Title & catalog marketing system** | [docs/AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md](./AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md) — Title philosophy (search keyword, invisible script, brand voice); deep research integration; ops-manual dimensions (templates, imprints, validation); title engine v2→v4. Authority: [PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC](../specs/PHOENIX_DEEP_RESEARCH_INTEGRATION_SPEC.md). |
+| **Locale catalog marketing plan** | [docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) — Per-locale positioning, go-live checklists, invisible script per locale; extends title philosophy; references deep research briefs. |
 | **New language/location onboarding** | [docs/NEW_LANGUAGE_LOCATION_ONBOARDING.md](./NEW_LANGUAGE_LOCATION_ONBOARDING.md) — Market-driven process and deep research prompts for onboarding a new language, location, topic, or persona. Covers personas, topics (topic families), authors, platforms, metadata, marketing, writing spec, book titles, stories. Use when adding a new locale or expanding persona/topic in a locale. |
 | **Brand admin onboarding (pages + checklist + deploy)** | [docs/BRAND_ADMIN_ONBOARDING_PAGES_SPEC.md](./BRAND_ADMIN_ONBOARDING_PAGES_SPEC.md) (spine HTML spec), [docs/ONBOARDING_EXAMPLE_PRODUCTION_CHECKLIST.md](./ONBOARDING_EXAMPLE_PRODUCTION_CHECKLIST.md) (proof asset phases), [docs/BRAND_ADMIN_ONBOARDING_CLOUDFLARE_DEPLOYMENT.md](./BRAND_ADMIN_ONBOARDING_CLOUDFLARE_DEPLOYMENT.md) (Pages vs pearl-prime worker), [docs/ONBOARDING_PROOF_FIDELITY_UPGRADE_LANE.md](./ONBOARDING_PROOF_FIDELITY_UPGRADE_LANE.md) (demo → production-export upgrades), [docs/ONBOARDING_POST_MERGE_HYGIENE.md](./ONBOARDING_POST_MERGE_HYGIENE.md) (post-merge cleanup). Specs: [specs/BRAND_ADMIN_MEDIA_GENERATION_SPEC.md](../specs/BRAND_ADMIN_MEDIA_GENERATION_SPEC.md) (**Brand Admin Media Generation — START HERE for media pipeline**), [specs/BRAND_ADMIN_ONBOARDING_TTS_SPEC.md](../specs/BRAND_ADMIN_ONBOARDING_TTS_SPEC.md) (wizard-aligned briefing audio, ElevenLabs / SSML), [specs/ONBOARDING_OUTPUT_PROOF_SYSTEM.md](../specs/ONBOARDING_OUTPUT_PROOF_SYSTEM.md), [specs/BRAND_ADMIN_ONBOARDING_WIZARD_SPEC.md](../specs/BRAND_ADMIN_ONBOARDING_WIZARD_SPEC.md), [specs/ONBOARDING_REAL_EXAMPLE_GENERATION_SPEC.md](../specs/ONBOARDING_REAL_EXAMPLE_GENERATION_SPEC.md). Config: `config/onboarding/example_registry.json`, `wizard_decision_explainer_data.json`, `config/onboarding/tts/`. Governance: [BRAND_ADMIN_CANONICAL_PACKAGE.md](../BRAND_ADMIN_CANONICAL_PACKAGE.md). |
 | **Generational deep research (Pearl News)** | [docs/research/continue_gen_research3.md](./research/continue_gen_research3.md) — Master spec: generational intelligence engine for Gen Z/Gen Alpha; three core layers (Psychology, Problems/Aspirations, Event Impact); two-pass YAML fix; Contradiction Audit, Persona Switching; local Qwen3 only (no Gemini). Buildable spec for pipeline. |
@@ -1357,7 +1357,7 @@ Single index: every test file, how to run, markers, CI workflows, and test infra
 
 - [docs/TUPLE_VIABILITY_AND_COVERAGE_HEALTH_SPEC.md](./TUPLE_VIABILITY_AND_COVERAGE_HEALTH_SPEC.md) — Tuple viability and coverage health (preflight gate, weekly report)
 - [docs/COVERAGE_HEALTH_JSON_SCHEMA.md](./COVERAGE_HEALTH_JSON_SCHEMA.md) — Coverage health JSON dashboard schema
-- [docs/TITLE_AND_CATALOG_MARKETING_SYSTEM.md](./TITLE_AND_CATALOG_MARKETING_SYSTEM.md) — Title and catalog marketing system
+- [docs/AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md](./AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md) — Title and catalog marketing system
 - [docs/PHASE_13_C_WAVE_OPTIMIZER.md](./PHASE_13_C_WAVE_OPTIMIZER.md) — Phase 13 C wave optimizer
 - [docs/V4_FEATURES_SCALE_AND_KNOBS.md](./V4_FEATURES_SCALE_AND_KNOBS.md) — V4 features, scale, and knobs
 
@@ -1578,7 +1578,7 @@ Translation and validation pipeline: parallel sharded translation (atoms + exerc
 
 | Dimension | Status |
 |-----------|--------|
-| **Docs/planning readiness** | **High** — content_roots_by_locale.yaml, LOCALE_PERSONAS.md, LOCALE_CATALOG_MARKETING_PLAN.md, ZH_CN_DISTRIBUTION_PLAN.md exist |
+| **Docs/planning readiness** | **High** — content_roots_by_locale.yaml, LOCALE_PERSONAS.md, AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md, ZH_CN_DISTRIBUTION_PLAN.md exist |
 | **All-locale runtime production readiness** | **Not 100% yet** |
 
 **Remaining: translation infrastructure + execution pending:**
@@ -1593,7 +1593,7 @@ Translation and validation pipeline: parallel sharded translation (atoms + exerc
 |------|----------|
 | **Translate/prompt via Qwen pipeline CLI** | [docs/TRANSLATE_QWEN_PIPELINE_CLI.md](./TRANSLATE_QWEN_PIPELINE_CLI.md) — All system languages; translate/prompt via Qwen GitHub pipeline CLI; EU catalogue (incl. it-IT) |
 | **Locale personas** | [docs/LOCALE_PERSONAS.md](./LOCALE_PERSONAS.md) — 40 persona definitions across 11 non-en-US locales (anxious_insomniac_tw, burned_out_professional_tw, etc.) |
-| **All-locale catalog marketing plan** | [docs/LOCALE_CATALOG_MARKETING_PLAN.md](./LOCALE_CATALOG_MARKETING_PLAN.md) — Per-locale positioning, go-live checklists, readiness tracker for all 13 locales (incl. it-IT EU catalogue) |
+| **All-locale catalog marketing plan** | [docs/AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) — Per-locale positioning, go-live checklists, readiness tracker for all 13 locales (incl. it-IT EU catalogue) |
 | **zh-CN distribution plan** | [docs/ZH_CN_DISTRIBUTION_PLAN.md](./ZH_CN_DISTRIBUTION_PLAN.md) — Local platform pipeline (Ximalaya, NetEase, WeChat Read, Dedao); Phase 5 prerequisite checklist |
 | **Locale strategy (rollout phases)** | [del_location_plan/locale_strategy.md](../del_location_plan/locale_strategy.md) — One brand = one locale; Phase 1–5 rollout; distribution routing; CI gate #49 |
 | **Locale prose & prompting** | `docs/LOCALE_PROSE_AND_PROMPTING.md` ⚠️ *file not present* |
@@ -1940,7 +1940,7 @@ Single list of every **doc**, **spec**, **config**, and **script** referenced in
 | [TUPLE_VIABILITY_AND_COVERAGE_HEALTH_SPEC.md](./TUPLE_VIABILITY_AND_COVERAGE_HEALTH_SPEC.md) | Coverage & ops | ✓ |
 | [CONTENT_COVERAGE_ANALYSIS.md](./CONTENT_COVERAGE_ANALYSIS.md) | How to check for missing book content | ✓ — Analysis of atoms/teacher/plan coverage tooling; single-report script |
 | [COVERAGE_HEALTH_JSON_SCHEMA.md](./COVERAGE_HEALTH_JSON_SCHEMA.md) | Coverage & ops | ✓ |
-| [TITLE_AND_CATALOG_MARKETING_SYSTEM.md](./TITLE_AND_CATALOG_MARKETING_SYSTEM.md) | Coverage & ops | ✓ |
+| [AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md](./AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md) | Coverage & ops | ✓ |
 | [PHASE_13_C_WAVE_OPTIMIZER.md](./PHASE_13_C_WAVE_OPTIMIZER.md) | Coverage & ops | ✓ |
 | [V4_FEATURES_SCALE_AND_KNOBS.md](./V4_FEATURES_SCALE_AND_KNOBS.md) | Coverage & ops | ✓ |
 | [email_sequences/README.md](./email_sequences/README.md) | Email sequences | ✓ |
@@ -1958,7 +1958,7 @@ Single list of every **doc**, **spec**, **config**, and **script** referenced in
 | [SCHEMA_CHANGELOG.md](./SCHEMA_CHANGELOG.md) | Schema & audit | ✓ |
 | [AUDIT_OLD_CHAT_SPECS_VS_V4.md](./AUDIT_OLD_CHAT_SPECS_VS_V4.md) | Schema & audit | ✓ |
 | [LOCALE_PERSONAS.md](./LOCALE_PERSONAS.md) | Locale personas | ✓ — 40 persona definitions across non-en-US locales (zh-TW, zh-HK, zh-CN, zh-SG, ja-JP, ko-KR, es-US, es-ES, fr-FR, de-DE, it-IT, hu-HU) |
-| [LOCALE_CATALOG_MARKETING_PLAN.md](./LOCALE_CATALOG_MARKETING_PLAN.md) | All-locale marketing plan | ✓ — Per-locale positioning, go-live checklists, readiness tracker for all 13 locales (incl. it-IT EU catalogue) |
+| [AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md](./AUDIOBOOK_LOCALE_CATALOG_MARKETING_PLAN.md) | All-locale marketing plan | ✓ — Per-locale positioning, go-live checklists, readiness tracker for all 13 locales (incl. it-IT EU catalogue) |
 | [TRANSLATE_QWEN_PIPELINE_CLI.md](./TRANSLATE_QWEN_PIPELINE_CLI.md) | Translate/prompt via Qwen pipeline CLI | ✓ — All system languages; Qwen GitHub pipeline CLI; EU catalogue (it-IT) |
 | [AUDIOBOOK_PIPELINE_SPEC.md](./AUDIOBOOK_PIPELINE_SPEC.md) | Qwen-Only Audiobook Pipeline | ✓ — Full spec: flow, gates, patch injection, parallel architecture, artifact contract, manual review, gap tracker |
 | [GO_LIVE_FINAL_CHECKLIST.md](./GO_LIVE_FINAL_CHECKLIST.md) | Audiobook pipeline go-live | ✓ — 10-item sign-off gate; per-gate operator runbook; locked design decisions |

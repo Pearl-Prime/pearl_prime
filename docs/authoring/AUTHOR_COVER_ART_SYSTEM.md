@@ -67,7 +67,7 @@ Outputs one gradient PNG per author into `assets/authors/cover_art/`. Palettes a
 
 **Pipeline output:** [scripts/run_pipeline.py](../../scripts/run_pipeline.py) writes to every plan JSON: `cover_art_base`, `cover_art_style_hint`, `cover_art_palette_tokens`, `cover_variant_id` for export/storefront and CTR tracking by `cover_variant_id`.
 
-**Cover renderer / freebie:** Use plan fields when compositing; see [TITLE_AND_CATALOG_MARKETING_SYSTEM.md](../TITLE_AND_CATALOG_MARKETING_SYSTEM.md) and [PHOENIX_FREEBIE_SYSTEM_SPEC.md](../../specs/PHOENIX_FREEBIE_SYSTEM_SPEC.md).
+**Cover renderer / freebie:** Use plan fields when compositing; see [AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md](../AUDIOBOOK_TITLE_AND_CATALOG_MARKETING_SYSTEM.md) and [PHOENIX_FREEBIE_SYSTEM_SPEC.md](../../specs/PHOENIX_FREEBIE_SYSTEM_SPEC.md).
 
 ---
 
