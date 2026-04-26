@@ -126,9 +126,10 @@ PR #604 (`be8f5dc8538bb4153b71143fc57fc2618a28f53b` "feat(pilot-parity): port 7 
 
 **No new governing spec introduced; the previously-projected `PEARL_PRIME_BESTSELLER_PIPELINE_DEFAULT_SPEC.md` remains retired (Phase 2 is wiring-only follow-up; the bestseller contract is already in `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md`).**
 
-### BR-CANON-01 — Brand-count canon = 37 per PR #682 spec (decision 7c approved 2026-04-27)
+### BR-CANON-01 — Brand-count canon = 37 per PR #682 spec (decision 7c approved 2026-04-27) — REFRAMED BY PATH X
 
-**Status:** **ratified** (operator decision 2026-04-27).
+**Status:** **ratified, then reframed by Path X (2026-04-27).** This entry's "37 is canonical for ALL brand counting" framing is **superseded** by the Path X cap entry below: **37 governs MANGA only; 24 archetypes × 13 lanes = 312 governs the BOOK pipeline; both are legitimate canons on different axes.** Keep this entry for archaeology; route to the Path X cap entry for current truth.
+
 **Context:** Audit finding C-1 in `docs/FULL_REPO_SYSTEM_AUDIT_2026-04-26.md` surfaced a fractured brand-count canon — configs disagree:
 
 - `config/brand_registry.yaml` — 28 brands
@@ -214,13 +215,15 @@ PR #604 (`be8f5dc8538bb4153b71143fc57fc2618a28f53b` "feat(pilot-parity): port 7 
 
 **Anti-drift check:** Adding `dashboard` under Pearl_Brand (which already governs brand-admin surfaces) consolidates ownership, doesn't fragment it. Not drift.
 
-### BR-CANON-01 update — 312 = expanded view of 37 (decision 3a approved 2026-04-27)
+### BR-CANON-01 update — 312 = expanded view of 37 (decision 3a approved 2026-04-27) — SUPERSEDED BY PATH X
 
-**Update to BR-CANON-01 above:** operator decision 3a approved 2026-04-27 confirms:
+**Status:** **superseded by Path X (2026-04-27)** — see BR-CANON-01 Path X cap entry below.
+
+**Update to BR-CANON-01 above:** operator decision 3a approved 2026-04-27 originally framed:
 
 **312 entries in `config/brand_management/global_brand_registry.yaml` are the EXPANDED VIEW** of 37 brands × ~8.4 lane derivatives (24 archetypes × 13 lanes ≈ 312, derivable from the 37-row seed). NOT a separate registry.
 
-**Pearl_Brand reconciliation pattern under `ws_brand_count_canon_reconciliation_20260427`:**
+**Pearl_Brand reconciliation pattern (originally proposed) under `ws_brand_count_canon_reconciliation_20260427`:**
 
 1. **Authoritative source**: `config/brand_registry.yaml` (currently 28 rows; expand to 37 per PR #682 spec)
 2. **Derived view**: `config/brand_management/global_brand_registry.yaml` (re-derive 312 from the 37-row seed via deterministic generator)
@@ -228,6 +231,49 @@ PR #604 (`be8f5dc8538bb4153b71143fc57fc2618a28f53b` "feat(pilot-parity): port 7 
 4. **Generator script** (NEW): `scripts/brand_management/derive_global_registry.py` reads the 37-row seed + the 24×13 archetype × lane matrix and emits 312 entries; runs in CI to detect drift
 
 **Pearl_Brand handoff is now unblocked**: operator inputs to BR-CANON-01 + DASH-02 give Pearl_Brand everything needed to start.
+
+**Why superseded:** Pearl_Brand re-investigated 2026-04-27 and surfaced that the 3a framing ("312 is the expanded view of 37") is mathematically tidy (24 × 13 = 312; 37 × 8.4 ≈ 312) but architecturally misleading. The 24 in `config/brand_management/global_brand_registry.yaml` are *spiritual archetypes* (inner_light_press / contemplative + karma yoga; etc.) whereas the 37 in `docs/GENRE_PORTFOLIO_PLAN.md` are *manga genre/demographic brands* (stillness_press iyashikei josei; cognitive_clarity seinen psychological; etc.). They are not the same axis. Operator surfaced the framing question and chose **Path X — keep them distinct** (decision Q1 = yes distinct, Q4 = split BRAND_ADMIN_CANONICAL_PACKAGE into book + manga sections, Q2/Q3 N/A).
+
+### BR-CANON-01 Path X cap entry — 37 = MANGA canon; 24×13=312 = BOOK pipeline; both legitimate (decision Path X approved 2026-04-27)
+
+**Status:** **ratified — Path X separation** (operator decision 2026-04-27).
+
+**Decision:** **Manga and book pipelines ARE intentionally distinct.** No convergence. No shared registry. The two canons govern different content, different distribution channels, and different revenue tiers:
+
+| Pipeline | Canonical brand count | Authoritative registry | Owner |
+|---|---:|---|---|
+| **Book** (Pearl_Prime) | 24 archetypes × 13 lanes = **312** | `config/brand_registry.yaml` (28-row seed) → `config/brand_management/global_brand_registry.yaml` (312 derived) | Pearl_Prime |
+| **Manga** (Pearl_Brand) | **37** brands | `config/manga/canonical_brand_list.yaml` (NEW under this entry) | Pearl_Brand |
+
+The 37 are genre × demographic × wellness-anchor brands derived from market analysis (`docs/GENRE_PORTFOLIO_PLAN.md`); they govern the manga catalog reconciliation (`specs/MANGA_CATALOG_RECONCILIATION_SPEC.md`, PR #682). They are NOT a subset, superset, or transform of the 24 spiritual archetypes that govern Pearl_Prime's book pipeline.
+
+**Operator decisions 2026-04-27:**
+
+- Q1: yes, distinct (manga and book brand canons are intentionally separate)
+- Q4: split `BRAND_ADMIN_CANONICAL_PACKAGE.md` into a book section (24 × 90 = 2,160) and a new manga section (37, with cross-links to `config/manga/canonical_brand_list.yaml` and the manga reconciliation spec)
+- Q2/Q3: not applicable under Path X (no convergence; no merged registry)
+
+**Anti-drift check:** Path X rejects the 3a framing's implicit pressure to make 312 = 37 × N for some N. That math holds (37 × 8.4 ≈ 312) but it is a coincidence; the underlying axes (spiritual archetype × locale lane vs. genre × demographic × wellness anchor) are distinct. Forcing convergence would require redesigning either the book pipeline's archetypes or the manga pipeline's genre allocation. Operator chose to preserve both.
+
+**Action items (this PR):**
+
+1. **NEW:** `config/manga/canonical_brand_list.yaml` — 37 manga brands enumerated from `docs/GENRE_PORTFOLIO_PLAN.md` ##### headers; each entry has `tier` (flagship/core/niche), `demographic` (josei/seinen/shonen/shojo/manhwa), `primary_topic`, `secondary_topics`, `notes`.
+2. **EDIT:** `BRAND_ADMIN_CANONICAL_PACKAGE.md` — split into a book section (24 × 90 = 2,160) and a new manga section (37, with cross-links to `config/manga/canonical_brand_list.yaml` and `specs/MANGA_CATALOG_RECONCILIATION_SPEC.md`); note Pearl_Brand also owns dashboard surfaces per DASH-02.
+3. **EDIT:** this state doc — mark the 3a "expanded view" entry SUPERSEDED; add this Path X cap entry.
+4. **DEFERRED:** `scripts/manga/derive_manga_lane_table.py` — manga lane semantics are NOT the book pipeline's 24×13 (manga distribution channels align differently). Pearl_Brand surfaces this as an open question rather than sketching speculative lane primitives. Open Question documented in `BRAND_ADMIN_CANONICAL_PACKAGE.md` manga section.
+
+**Files NOT modified under Path X (load-bearing book-pipeline canon):**
+
+- `config/brand_registry.yaml` (28-row Pearl_Prime book registry — UNCHANGED)
+- `config/brand_management/global_brand_registry.yaml` (312-entry book × locale matrix — UNCHANGED)
+- `scripts/brand_management/generate_global_registry.py` (book-side generator — UNCHANGED)
+
+**Handoffs:**
+
+- Pearl_Brand (THIS PR): land the canonical list + doc edits; surface the manga lane semantics open question; do NOT touch book-pipeline files.
+- Pearl_Prime: no action — book pipeline registry continues unchanged.
+- Pearl_PM: close `ws_brand_count_canon_reconciliation_20260427` after this PR merges; the original convergence framing is retired in favor of Path X separation.
+- Pearl_Brand (FOLLOW-UP, operator-gated): once manga lane semantics are decided (genre × demographic × distribution-channel? × locale?), open a sibling ws to author `scripts/manga/derive_manga_lane_table.py` and any downstream manga lane table consumers.
 
 ### BG-PR-09 — Phase 2 = COMPLETED-BY-PR-#669 (cap entry 2026-04-27)
 
