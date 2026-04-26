@@ -1,8 +1,64 @@
 # Manga Pipeline Onboarding
 
 **Purpose:** Get new developers and agents running the manga pipeline end-to-end.
-**Authority:** `specs/AI_MANGA_PIPELINE_SUMMARY.md`, `docs/MANGA_IMPLEMENTATION_OUTLINE.md`
-**Last updated:** 2026-04-01
+**Authority:** `specs/AI_MANGA_PIPELINE_SUMMARY.md` (chapter pipeline), `specs/MANGA_CATALOG_RECONCILIATION_SPEC.md` (catalog/portfolio governance), `docs/MANGA_IMPLEMENTATION_OUTLINE.md`
+**Last updated:** 2026-04-26 (Phase 2X.6)
+
+---
+
+## Phase 2X.4 Catalog Reconciliation (2026-04-26)
+
+The catalog/portfolio side of this pipeline was reconciled in Phase 2X. Read `specs/MANGA_CATALOG_RECONCILIATION_SPEC.md` for the full set of decisions (D-1..D-20). Quick map for what changed and where it lives:
+
+| Concern | Where it lives | Notes |
+|---|---|---|
+| Strategic genre allow-list | `docs/GENRE_PORTFOLIO_PLAN.md` (CANONICAL) | 15 strategic shells — drives series_plan `genre.enum` |
+| Per-locale catalog plans | `docs/CJK_CATALOG_PLAN.md`, `docs/US_CATALOG_PLAN.md` (CANONICAL) | Locale-specific format mix + platform routing |
+| Mode strategy (mode definitions) | `docs/MANGA_MODE_STRATEGY.md` (CANONICAL) | Migrated from docx; 9 tables / 68 rows of mode rules |
+| Brand portfolio (37 brands) | `docs/GENRE_PORTFOLIO_PLAN.md` § brand table | 3 flagship × 16 + 16 core × 9 + 18 niche × 5 = 1,410 series |
+| Catalog plan generator | `scripts/manga/generate_catalog_plan_from_strategic.py` | Brand-metadata × pure-market-share weighting (4-leg) |
+| Catalog plan output (auto-gen) | `artifacts/manga/MANGA_FULL_CATALOG_PLAN.md` | **AUTO-GENERATED — do NOT hand-edit.** Re-run the generator after editing strategic-tier inputs. |
+| Series plan YAMLs | `config/source_of_truth/manga_series_plans/{locale}/` | 1,410 YAMLs across 5 locales |
+| Book plan YAMLs | `config/source_of_truth/manga_book_plans/{series_id}/ep_NN.yaml` | 19,740 YAMLs (one per book/episode) |
+| Series plan generator | `scripts/manga/generate_series_plans_from_catalog.py` | Consumes catalog plan + format_routing.yaml |
+| Atomic regen entry | `scripts/manga/run_2x4_atomic_regen.py` | PRESERVE map honors production-active series |
+
+### New schema fields (series_plan v2.1.0)
+
+`schemas/manga/series_plan.schema.json` v2.1.0 added:
+
+- **`genre.enum`** — extended from 10 → 23 entries (10 legacy + 13 strategic). Strategic shells include `dark_fantasy`, `psychological_thriller`, `supernatural_mystery`, `sci_fi_cyberpunk`, `mecha`, `action_battle`, `sports_competition`, `workplace_drama`, `historical_period`, `cultivation_martial`. Add a new genre by editing this enum + adding a craft bible to `docs/research/manga_craft/{genre}.md` + adding pacing rows to `config/manga/manga_pacing_by_genre.yaml`.
+- **`demographic`** — `kodomo|shonen|shojo|seinen|josei|general`
+- **`locale_origin`** — `jp|kr|tw|cn|us` (origin convention for the genre, separate from the runtime locale)
+- **`distribution_status`** — `distributed|gray_zone_disclosed|hold_pending_market_clearance` (D-18 + D-19)
+- **`teacher_id`** — now nullable (brand wins; teacher is a body attribute per OQ-3 disposition)
+- **`target_platforms.minItems`** — relaxed from 1 → 0 to support `hold_pending_market_clearance` (ko_KR per D-18)
+- **`connector_lane.enum`** — added `gray_zone_with_disclosure`, `hold_pending_market_clearance`
+
+### 5-locale matrix (D-18, D-19)
+
+| Locale | Master format | Distribution status |
+|---|---|---|
+| en_US | dual path: bw_page_manga (manga aisle) OR direct_self_help_illustrated (mainstream) | `distributed` |
+| ja_JP | bw_page_manga | `distributed` |
+| zh_TW | bw_page_manga (hybrid) | `distributed` |
+| zh_CN | color_vertical_webtoon | `gray_zone_disclosed` (push to Bilibili/Kuaikan/Tencent with full AI-disclosure metadata; R-zh_CN-distribution=HIGH per PRC Generative AI Service Measures 2023) |
+| ko_KR | color_vertical_webtoon | `hold_pending_market_clearance` (rendered now, distribution paused; `target_platforms` intentionally empty) |
+
+### Craft bibles (per-genre)
+
+`docs/research/manga_craft/` — one bible per strategic genre. The 9 added in Phase 2X.3:
+`dark_fantasy.md`, `psychological_thriller.md`, `supernatural_mystery.md`, `sci_fi_cyberpunk.md`, `workplace_drama.md`, `action_battle.md`, `sports_competition.md`, `historical_period.md`, `mecha.md`. Use these when authoring panel prompts, pacing decisions, and lettering profiles for a strategic-shell genre.
+
+### Brand vs teacher (OQ-3 resolution)
+
+- **Brand is the catalog allocation unit** (37 brands × tier-specific series counts = 1,410 series).
+- **Teacher is a body attribute** carried in `teacher_id` (nullable). A brand can have multiple authors/teachers attached at the body level; series identity is brand-first.
+- **Anti-homogeneity** is now enforced via the per-brand %-allocation in `GENRE_PORTFOLIO_PLAN.md`, not via a separate brand-DNA enforcement layer (`MANGA_BRAND_DNA_ANTI_SPAM_SPEC.md` was reframed in Phase 2X.5 to point at the strategic plan rather than implement its own mechanism).
+
+### Archived specs (Phase 2X.5)
+
+`specs/archive/DEFERRED_2026_04_26.md` indexes specs that had zero code references and were deferred (not deleted): `MANGA_MODE_SYSTEM_SPEC.md` and `MANGA_AUTHOR_SYSTEM_SPEC.md`. See that index for reactivation criteria.
 
 ---
 
