@@ -1222,6 +1222,19 @@ def select_enrichment(
         "teacher_id": tid or "",
         "section_packet_audit": _slot_audit,
         "book_slot_tracker_used_ids": list(_book_tracker._used_ids),
+        # OQ-3 (PR-18 2026-04-27): top-level story_schedule key. Per-slot
+        # source_id is already discoverable via section_packet_audit; this
+        # makes the structural schedule directly queryable for downstream
+        # auditors. Text intentionally omitted (already in slot.content).
+        "story_schedule": [
+            {
+                "chapter_index": ch_i,
+                "section_index": sec_i,
+                "arc_position": slot.arc_position,
+                "source": slot.source,
+            }
+            for (ch_i, sec_i), slot in sorted(_story_schedule.assignments.items())
+        ],
     }
 
     return EnrichedBook(
