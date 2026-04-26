@@ -12,11 +12,13 @@ Tier 1; no LLM calls.
 from __future__ import annotations
 
 import argparse
+import ast
 import csv
 import datetime as _dt
 import re
 import subprocess
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -125,6 +127,66 @@ def last_commit(path: str) -> tuple[str, str]:
     return "", ""
 
 
+def _module_keys(rel_path: str) -> set[str]:
+    """Return the set of import-name keys that resolve to this file.
+
+    For phoenix_v4/manga/visual_from_script_v3.py the keys are:
+      - phoenix_v4.manga.visual_from_script_v3   (full dotted)
+      - visual_from_script_v3                    (basename, for `from .X import` cases)
+    """
+    parts = rel_path.removesuffix(".py").split("/")
+    if not parts:
+        return set()
+    keys = {".".join(parts), parts[-1]}
+    # also a "package" key when this file is __init__.py
+    if parts[-1] == "__init__":
+        keys.add(".".join(parts[:-1]))
+        if len(parts) > 1:
+            keys.add(parts[-2])
+    return keys
+
+
+def build_imported_by_index(py_files: list[str]) -> dict[str, set[str]]:
+    """Walk every .py file once via AST; return key→set(importing_files).
+
+    AST captures both `import X` and `from X import Y`. Pattern grep would miss
+    relative imports + nested submodule references — see PHX-V4-ORPHAN-01 (#708).
+    """
+    importers: dict[str, set[str]] = defaultdict(set)
+    for path in py_files:
+        full = REPO_ROOT / path
+        if not full.exists():
+            continue
+        try:
+            text = full.read_text(errors="ignore")
+            tree = ast.parse(text, filename=path)
+        except (OSError, SyntaxError):
+            continue
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    name = alias.name
+                    importers[name].add(path)
+                    # also add tail token so `import a.b.c` registers c
+                    importers[name.rsplit(".", 1)[-1]].add(path)
+            elif isinstance(node, ast.ImportFrom):
+                if node.module:
+                    importers[node.module].add(path)
+                    importers[node.module.rsplit(".", 1)[-1]].add(path)
+                for alias in node.names:
+                    importers[alias.name].add(path)
+    return importers
+
+
+def imported_by_count(rel_path: str, importers: dict[str, set[str]]) -> int:
+    """How many files import this module (excluding self)?"""
+    refs: set[str] = set()
+    for key in _module_keys(rel_path):
+        refs |= importers.get(key, set())
+    refs.discard(rel_path)
+    return len(refs)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", default=None)
@@ -149,6 +211,10 @@ def main() -> int:
 
     py_files = list_python_files()
     print(f"enumerated {len(py_files):,} .py files", file=sys.stderr)
+
+    print("building AST-based import index (one pass over all .py)...", file=sys.stderr)
+    importers = build_imported_by_index(py_files)
+    print(f"import index covers {len(importers):,} module keys", file=sys.stderr)
 
     with out_path.open("w") as g:
         w = csv.writer(g, delimiter="\t", quoting=csv.QUOTE_MINIMAL)
@@ -189,14 +255,22 @@ def main() -> int:
             has_tests = 1 if (REPO_ROOT / "tests" / f"test_{Path(path).stem}.py").exists() else 0
             tla = path.split("/", 1)[0] if "/" in path else "(root)"
             date_, author = last_commit(path)
-            status = "live" if has_main or path.startswith("tests/") else "module"
-            row_type = "module"
-            if lc < 50 and not has_main:
+            ibc = imported_by_count(path, importers)
+            # status: live = entry point or actively imported; helper = imported but no main;
+            # test = under tests/; stub = tiny + no main + no imports; orphan = none of the above
+            if path.startswith("tests/") or path.split("/")[-1].startswith("test_"):
+                status = "test"
+            elif has_main or ibc > 0:
+                status = "live" if has_main else "helper"
+            elif lc < 50:
                 status = "stub"
+            else:
+                status = "orphan"
+            row_type = "orphan_module" if status == "orphan" else "module"
             w.writerow([
                 row_type, path, "", status, date_, "",
                 "", "", "", "", "", "",
-                tla, str(lc), str(ic), "0", str(has_main), str(has_tests), author,
+                tla, str(lc), str(ic), str(ibc), str(has_main), str(has_tests), author,
                 "", "", "", "",
             ])
 

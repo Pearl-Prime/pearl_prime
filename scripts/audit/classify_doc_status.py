@@ -27,12 +27,19 @@ DOC_PATTERNS = ("*.md", "*.txt", "*.docx", "*.rst", "*.adoc", "README", "AGENTS.
 # Path-pattern fast classifier (covers ~94% of repo). Order matters.
 FAST_RULES: list[tuple[str, str, str, str]] = [
     # (path-prefix, classification, subsystem, note)
+    # GAP-G8 (PR-12 2026-04-27): specs/*.md were mis-classified as "unknown"
+    # by an earlier audit pass; specs/ are subsystem authority docs by definition.
+    ("specs/",                      "canonical",          "unknown",        "subsystem authority spec (subsystem inferred from filename)"),
     ("atoms/",                      "generated_artifact", "atoms",          "atom registry entry"),
     ("template_expand2/",           "fixture",            "teacher_mode",   "template expansion fixture"),
     ("brand-wizard-app/",           "current_support",    "brand_admin",    "brand wizard internal asset"),
     ("SOURCE_OF_TRUTH/teacher_banks/", "fixture",         "teacher_mode",   "teacher bank source"),
     ("SOURCE_OF_TRUTH/story_atoms/",   "fixture",         "core_pipeline",  "story atom source"),
     ("image_bank/",                 "fixture",            "brand_admin",    "image bank metadata"),
+    # GAP-G9 (PR-12 2026-04-27): repo_coordination was an overweight catch-all
+    # (116 of 154 canonicals). Sub-bucketed by audience: pm/architect/github/
+    # session-protocol files belong to repo_coordination; subsystem-specific
+    # coord docs route via SUBSYSTEM_HINTS instead.
     ("artifacts/coordination/",     "current_support",    "repo_coordination", "coordination registry"),
     ("artifacts/inventory/",        "current_support",    "repo_coordination", "audit inventory"),
     ("artifacts/",                  "generated_artifact", "unknown",        "build/audit artifact"),
@@ -44,19 +51,27 @@ FAST_RULES: list[tuple[str, str, str, str]] = [
 ]
 
 SUBSYSTEM_HINTS: list[tuple[re.Pattern, str]] = [
+    # Order matters: more-specific patterns first.
     (re.compile(r"(?i)pearl[_-]?prime|bestseller|story_atoms"), "pearl_prime"),
     (re.compile(r"(?i)pearl[_-]?news|news_writer"),            "pearl_news"),
     (re.compile(r"(?i)manga|catalog_reconciliation|webtoon"),   "manga_pipeline"),
+    (re.compile(r"(?i)audiobook"),                              "audiobook_pipeline"),
+    (re.compile(r"(?i)podcast"),                                "podcast_pipeline"),
     (re.compile(r"(?i)teacher|engine|writer_overlay"),          "teacher_mode"),
     (re.compile(r"(?i)brand[_-]?(wizard|admin|registry)"),      "brand_admin"),
-    (re.compile(r"(?i)integration|env_registry|secrets"),       "integrations"),
-    (re.compile(r"(?i)video|render|tts"),                       "video_pipeline"),
-    (re.compile(r"(?i)translation|locale|i18n"),                "translation"),
-    (re.compile(r"(?i)podcast"),                                "podcast"),
-    (re.compile(r"(?i)audiobook"),                              "audiobook"),
-    (re.compile(r"(?i)marketing|funnel|freebee"),               "marketing"),
     (re.compile(r"(?i)dashboard"),                              "dashboard"),
-    (re.compile(r"(?i)session_unity|pearl_pm|pearl_architect"), "repo_coordination"),
+    (re.compile(r"(?i)integration|env_registry|secrets|credential"), "integrations"),
+    (re.compile(r"(?i)video|render|flux"),                      "video_pipeline"),
+    (re.compile(r"(?i)\btts\b|voice_routing|speech"),           "video_pipeline"),
+    (re.compile(r"(?i)translation|locale|i18n|cjk"),            "translation"),
+    (re.compile(r"(?i)marketing|funnel|freebee|conversion|ltv"), "marketing"),
+    (re.compile(r"(?i)trend_feed|reddit_feed"),                 "trend_feeds"),
+    (re.compile(r"(?i)quality_gate|ei_v2|effortful_imag"),      "ei_v2"),
+    # GAP-G9 sub-buckets for what was previously catch-all repo_coordination
+    (re.compile(r"(?i)github_govern|branch_protect|pr_review|pearl_github"), "pearl_devops"),
+    (re.compile(r"(?i)pearl_pm|active_workstreams|active_projects|session_unity"), "repo_coordination"),
+    (re.compile(r"(?i)pearl_architect|subsystem_authority|architecture_health"), "repo_coordination"),
+    (re.compile(r"(?i)session_handoff|closeout_receipt|startup_receipt"), "repo_coordination"),
 ]
 
 CANONICAL_SIGNALS = re.compile(
