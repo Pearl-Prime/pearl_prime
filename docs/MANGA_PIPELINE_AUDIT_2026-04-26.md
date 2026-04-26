@@ -235,7 +235,7 @@ Per-corpus tables; verdicts: **KEEP** (governs future work), **KEEP-NICHE** (sti
 | `artifacts/manga/anxiety_series/` | 18 dirs (older test outputs — possibly archive candidate, see §4). |
 | `artifacts/manga/stillness_press_qa_run/` | QA artifacts from 2026-04-24. |
 
-**Coordination state (`coordination/`):** **Directory does not exist** in this branch. CLAUDE.md mentions `coordination/projects.tsv` and `coordination/workstreams.tsv`; subagent E confirmed they are not in the repo tree. **See §8 OQ-2** for whether to surface this as missing infrastructure or whether the coordination layer lives elsewhere.
+**Coordination state:** **The coordination layer lives at `artifacts/coordination/`, not the bare `coordination/` path.** This was a verification miss in the original audit; subagent E searched `coordination/` (root) and reported it absent. The actual location holds `ACTIVE_PROJECTS.tsv` (11 columns), `ACTIVE_WORKSTREAMS.tsv` (15 columns), and `SUBSYSTEM_AUTHORITY_MAP.tsv` (5 columns); `pr_governance_review.py:43,68` reads from this layer. The manga subsystem is mapped here (`manga_pipeline` row in SUBSYSTEM_AUTHORITY_MAP); `proj_manga_first_ship_20260425` is an active project here. **Correction applied 2026-04-26 per OQ-8 disposition (iii).** §8 OQ-2 is RESOLVED accordingly.
 
 **Counts summary:**
 - Research files: ~26–30 (13+ in subdirs alone)
@@ -747,11 +747,11 @@ Each question is tagged with the §-reference where it surfaced. Operator picks 
 - **Why it matters:** ko_KR is WEBTOON Canvas native (170M MAU). Skipping it leaves the largest webtoon audience on the table. But Korea AI Act enforcement is "post-Jan 2027" per `SESSION_HANDOFF_2026-04-25.md` risk register — by the time Phase 3.2 ships, Korea may be the riskiest locale.
 - **Audit recommendation:** Stay 4-locale through end of 2026. Re-evaluate ko_KR in Q1 2027 once AI Act enforcement posture is clear.
 
-### OQ-2 — Where does the coordination layer live?
+### OQ-2 — Where does the coordination layer live? — RESOLVED 2026-04-26
 - **Surfaced:** §2.5
-- **Context:** `CLAUDE.md` references `coordination/projects.tsv` and `coordination/workstreams.tsv` for project + workstream tracking, but `coordination/` directory does not exist in the repo.
-- **Why it matters:** Without coordination TSVs, project state lives in artifact mtimes + commit history, which is brittle. Audit found `proj_manga_first_ship_20260425` referenced but no canonical state file.
-- **Audit recommendation:** Either (a) bootstrap `coordination/` with the projects.tsv + workstreams.tsv per CLAUDE.md, or (b) clarify that coordination lives elsewhere (Notion / external) and update CLAUDE.md to point there.
+- **Original context (incorrect):** Audit subagent E searched the bare `coordination/` path and reported absence; the audit then suggested bootstrapping or pointing CLAUDE.md to an external coordination home.
+- **Correction (2026-04-26 per OQ-8 disposition iii):** The coordination layer **exists at `artifacts/coordination/`**, not `coordination/`. It contains `ACTIVE_PROJECTS.tsv` (11 cols), `ACTIVE_WORKSTREAMS.tsv` (15 cols), `SUBSYSTEM_AUTHORITY_MAP.tsv` (5 cols), `BRANCH_INVENTORY_*.tsv`, `BRANCH_TRIAGE_*.md`, `HANDOFF_*.md`, and `PEARL_*_ITE_PROMPT.md`. `pr_governance_review.py:43,68` reads from it. The `manga_pipeline` subsystem is mapped (`specs/AI_MANGA_PIPELINE_SUMMARY.md;docs/MANGA_IMPLEMENTATION_OUTLINE.md` authority; `config/manga/gate_registry.yaml;schemas/manga/` config; Pearl_Dev owner). `proj_manga_first_ship_20260425` is an active project there.
+- **Resolution:** No bootstrap needed. Workstream rows for PRs #680/#682/#684 retroactively backfilled in the same PR that records this resolution; `proj_manga_catalog_reconciliation_20260426` created; Phase 2X.1..2X.9 pre-staged as PROPOSED.
 
 ### OQ-3 — How do we ship to WEBTOON Canvas given no public API?
 - **Surfaced:** §5.4, §6.6
@@ -817,7 +817,7 @@ Each question is tagged with the §-reference where it surfaced. Operator picks 
 ## §9 — Audit limitations and caveats
 
 - Subagent A returned with the 4 research subdirs (`manga_quality_bar`, `manga_dialogue_system`, `manga_cover_design`, `strategic_audit`) **partially unread** due to its token budget. Headings + line counts + dates have been captured by direct inspection (per-subdir line counts in §2.1), but the full content of those 13 files (~600 KB) has not been indexed in detail. **Recommendation:** when §7.5 (cover pipeline) opens, the cover-design research subdirs should be fully read by the implementing agent before code work begins.
-- Subagent E reported `coordination/` does not exist; verified in §2.5. If coordination state is canonical elsewhere, this audit underrepresents it.
+- ~~Subagent E reported `coordination/` does not exist; verified in §2.5. If coordination state is canonical elsewhere, this audit underrepresents it.~~ **CORRECTION (2026-04-26 per OQ-8 disposition iii):** subagent E's search was bound to the bare `coordination/` path; the actual coordination layer is at `artifacts/coordination/` and is fully populated (`ACTIVE_PROJECTS.tsv`, `ACTIVE_WORKSTREAMS.tsv`, `SUBSYSTEM_AUTHORITY_MAP.tsv`). §2.5 + §8 OQ-2 corrected in place.
 - The `MANGA_MODE_STRATEGY.docx` was not opened (binary). See §8 OQ-11.
 - ep_002 panel_prompts and renders do not exist; subagent E + verification confirmed. PR #678 unblocks.
 - Code calls were not exhaustively grep-validated for orphan status — subagent D's "ORPHAN" verdicts are based on import-graph signals, not exhaustive callsite enumeration. The §4 prune list reflects "high confidence" candidates; before any deletion, run a final `grep -r '<basename>' phoenix_v4/ scripts/ tests/ .github/` per file.

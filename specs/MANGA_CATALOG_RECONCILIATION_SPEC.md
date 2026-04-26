@@ -112,7 +112,7 @@ The following rulings are made by this spec. They become governance-binding on m
 | D-13 | **`MANGA_BRAND_DNA_ANTI_SPAM_SPEC.md` is REFRAMED — kept and updated to align with the 37-brand × 12-shell anti-homogeneity model.** | Catalog homogeneity is a real risk at 132+ series; the GENRE_PORTFOLIO_PLAN's per-brand %-allocation IS the anti-spam mechanism. The spec should be updated, not retired. Reframing in §7.10. |
 | D-14 | **`MANGA_AUTHOR_SYSTEM_SPEC.md` is ARCHIVED — moved to `specs/archive/` with a `DEFERRED_2026_04_26.md` index file.** | Per audit §4 + §8 OQ-10. Not core to current pipeline. Operator can revive when multi-author UI becomes priority. |
 | D-15 | **PR #678 (`fix(manga): lettering_from_script v3-schema awareness`) is the immediate gating merge** before this spec's Phase 2 work can ramp. | Per audit §5.5. ep_002 and the entire CJK6 lettering pipeline depend on it. |
-| D-16 | **Coordination layer is out of scope for this spec.** | Per audit §8 OQ-2. `coordination/projects.tsv` does not exist; this spec does not create it. Operator decides separately. |
+| D-16 | **Coordination layer is at `artifacts/coordination/`, NOT bare `coordination/`. Spec execution updates the layer in place.** | Per audit §8 OQ-2 corrected + OQ-8 disposition (iii) executed 2026-04-26. The audit's original claim that `coordination/` did not exist was a path-mismatch error — the actual directory is `artifacts/coordination/` (referenced by `pr_governance_review.py:43,68`). Workstream rows for every Phase 2X.* PR are added to `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`; project state lives in `artifacts/coordination/ACTIVE_PROJECTS.tsv` under `proj_manga_catalog_reconciliation_20260426`. |
 | D-17 | **`MANGA_FULL_CATALOG_PLAN.md` is replaced by an auto-derived artifact** generated from `GENRE_PORTFOLIO_PLAN.md` + `CJK_CATALOG_PLAN.md` + `US_CATALOG_PLAN.md`. | The catalog stops being a hand-edited Markdown table and becomes the deterministic projection of the strategic docs. Per §7.1. |
 
 ---
@@ -541,9 +541,16 @@ Per audit §8 OQ-4. Plans render but distribution is BLOCKED. Spec recommendatio
 
 Per audit §8 OQ-11. Binary docx; not auditable. Recommendation: migrate to Markdown in Phase 2X.9, then potentially prune as redundant with `MANGA_MODE_SYSTEM_SPEC.md` (which §6.1.B archives). Confirm.
 
-### OQ-8 — Coordination layer
+### OQ-8 — Coordination layer — RESOLVED 2026-04-26
 
-Per audit §8 OQ-2. `coordination/` does not exist. This spec D-16 leaves it out of scope. If operator decides to bootstrap `coordination/projects.tsv` + `coordination/workstreams.tsv`, that's a separate PR independent of this spec.
+**Original framing (incorrect):** Per audit §8 OQ-2, `coordination/` does not exist; spec D-16 left it out of scope.
+
+**Correction (2026-04-26 disposition iii):** The coordination layer **exists at `artifacts/coordination/`**, not the bare `coordination/` path. The audit's docs-subagent search was bound to the wrong path. Resolution executed in the same PR that records this correction:
+- `proj_manga_catalog_reconciliation_20260426` added to `artifacts/coordination/ACTIVE_PROJECTS.tsv`
+- 4 completed workstream rows backfilled in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` for PRs #680/#682/#684 and the coordination-sync PR itself
+- 7 proposed workstream rows pre-staged for Phase 2X.1..2X.9 (OQ-4 hard-cutover collapses 2X.1+2X.6+2X.7 into one atomic PR; 2X.6 and 2X.7 do not appear as separate workstreams)
+- D-16 amended in §3 (this spec)
+- Stale `coordination/` references in this spec and in `docs/MANGA_PIPELINE_AUDIT_2026-04-26.md` corrected in place
 
 ### OQ-9 — Audiobook-named docs that landed in `docs/`
 
@@ -555,7 +562,7 @@ Per audit §8 OQ-2. `coordination/` does not exist. This spec D-16 leaves it out
 
 This spec does not:
 
-- Modify `coordination/` (does not exist; D-16).
+- ~~Modify `coordination/` (does not exist; D-16).~~ **AMENDED 2026-04-26:** The coordination layer at `artifacts/coordination/` is updated by this spec's execution per OQ-8 disposition (iii). See D-16 (amended) and §10 OQ-8 (resolved).
 - Add a live LLM writer in `chapter_runner` (per audit §7.9 OQ-9 — Tier-1 policy decision).
 - Implement the QC gate runner (audit §7.2; separate sprint).
 - Implement MQG-01, MQG-03..08 (audit §7.3; separate sprint).
@@ -565,7 +572,7 @@ This spec does not:
 - Touch any video artifact (`phoenix_v4/video/`, `scripts/video/`).
 - Touch the existing ep_001 production artifact in `artifacts/manga/ep_001/`.
 - Merge PR #678 (gating but separate; tracked in audit §5.5).
-- Open new workstreams in `coordination/workstreams.tsv` (the coordination layer is out of scope).
+- ~~Open new workstreams in `coordination/workstreams.tsv` (the coordination layer is out of scope).~~ **AMENDED 2026-04-26:** Workstreams are tracked in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`; this spec's execution backfills completed workstreams (PRs #680/#682/#684) and pre-stages Phase 2X.1..2X.9 PROPOSED rows. See D-16 (amended).
 - Add ko_KR as a 5th locale (deferred to OQ-5).
 - Implement BRAND_DNA_ANTI_SPAM (reframed in §7.10; implementation is post-reconciliation).
 
