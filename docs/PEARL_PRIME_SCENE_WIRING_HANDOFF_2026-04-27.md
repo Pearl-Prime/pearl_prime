@@ -1,5 +1,19 @@
 # Pearl Prime SCENE Wiring — Handoff Context for Pearl_Dev
 
+> ## ⚠️ SUPERSEDED 2026-04-27
+>
+> **This handoff doc is based on a stale BG-PR-09 framing.** PR #669 (`cbfbe14c39`, merged 2026-04-26 03:16) had ALREADY landed the canonical-CLI's SCENE wiring before this doc was authored, but via a different architectural path (upstream substitution in `enrichment_select.py:907` after `beatmap_compile.py` slot-grid edit, NOT the predicted port of `compose_section_packet` into `compose_from_enriched_book`).
+>
+> **No wiring PR is needed.** Phase 2 is closed-as-completed-by-PR-#669.
+>
+> See `docs/PEARL_ARCHITECT_STATE.md` BG-PR-09 cap entry (2026-04-27) for the full discovery + verification (12 named-character hits + 72 `story_plan/HARDSHIP` audit JSON matches + 36/36 tests + canary PASS, all reproduced on `origin/main` HEAD `99a926a9b7` with zero code changes).
+>
+> **Doc retained for archaeological reference** — shows what the BG-PR-09 framing predicted vs what PR #669 actually shipped. Do NOT use as a current execution brief.
+
+---
+
+(Original handoff content below — superseded.)
+
 **Decision**: 1b approved 2026-04-27 (downgraded from 1a). Pearl Prime SCENE wiring (BG-PR-09 Phase 2) is approved but routed to a **fresh focused Pearl_Dev session** rather than spawned as a subagent in the audit-followup session, due to subtle pipeline-regression risk.
 
 **Workstream**: `ws_bestseller_pipeline_default_path_b_20260425`
