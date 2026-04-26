@@ -12,3 +12,7 @@ recommendations	config/recommender/;docs/DOCS_INDEX.md	config/recommender/scorin
 brand_admin	docs/OLD_CHAT_AND_HOME_PROMOTION_SPEC.md;BRAND_ADMIN_CANONICAL_PACKAGE.md	config/brand_registry.yaml;config/brand_author_assignments.yaml	Pearl_Prez	active
 ite	phoenix_v4/manga/ite_pipeline.py;docs/DOCS_INDEX.md	config/manga/gate_registry.yaml	Pearl_Dev	active
 integrations	docs/INTEGRATION_CREDENTIALS_REGISTRY.md;skills/pearl-int/SKILL.md	skills/pearl-int/references/integration_registry.md	Pearl_Int	active
+pearl_devops	docs/GITHUB_OPERATIONS_FRAMEWORK.md;docs/GITHUB_GOVERNANCE.md;docs/BRANCH_PROTECTION_REQUIREMENTS.md;CLAUDE.md	.github/workflows/;scripts/ci/;scripts/git/	Pearl_DevOps	active
+audiobook_pipeline	docs/AUDIOBOOK_OPS_MANUAL.md;docs/AUDIOBOOK_PIPELINE_SPEC.md	scripts/audiobook/;config/audiobook/;config/video/audiobook_style.yaml	Pearl_Dev	active
+marketing	docs/OLD_CHAT_AND_HOME_PROMOTION_SPEC.md;marketing_deep_research/	funnel/;platform_marketing/;somatic_exercise_freebee_apps/	Pearl_Marketing	active
+podcast_pipeline	docs/PODCAST_PIPELINE_INTEGRATION_SPEC.md;pearl_news/research/podcast/	scripts/podcast/;config/integrations/podcast_credentials.yaml	Pearl_Prime	proposed
