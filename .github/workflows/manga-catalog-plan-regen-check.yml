@@ -1,0 +1,53 @@
+name: manga-catalog-plan-regen-check
+
+# Per specs/MANGA_CATALOG_RECONCILIATION_SPEC.md Phase 2X.1.
+# Validates that the strategic-tier inputs (GENRE_PORTFOLIO_PLAN, CJK_CATALOG_PLAN,
+# US_CATALOG_PLAN) parse cleanly into the new catalog-plan generator.
+#
+# 2X.1 mode: dry-run only (parses without writing). Once 2X.4 atomic lands and
+# materializes artifacts/manga/MANGA_FULL_CATALOG_PLAN.md, this workflow will be
+# extended to enforce regeneration freshness (the auto-generated catalog plan
+# must match the checked-in version).
+
+on:
+  pull_request:
+    paths:
+      - "docs/GENRE_PORTFOLIO_PLAN.md"
+      - "docs/CJK_CATALOG_PLAN.md"
+      - "docs/US_CATALOG_PLAN.md"
+      - "scripts/manga/generate_catalog_plan_from_strategic.py"
+      - "tests/test_manga_catalog_plan_generator.py"
+      - ".github/workflows/manga-catalog-plan-regen-check.yml"
+  push:
+    branches: [main]
+
+jobs:
+  regen-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pytest + repo conftest deps
+        run: pip install --no-cache-dir pytest pyyaml jsonschema
+
+      - name: Run generator dry-run
+        run: |
+          python3 scripts/manga/generate_catalog_plan_from_strategic.py --dry-run
+
+      - name: Run generator and capture stdout (smoke)
+        run: |
+          python3 scripts/manga/generate_catalog_plan_from_strategic.py \
+            > /tmp/catalog_plan_preview.md
+          test -s /tmp/catalog_plan_preview.md
+          grep -q "AUTO-GENERATED" /tmp/catalog_plan_preview.md
+          grep -q "Total localized series rows" /tmp/catalog_plan_preview.md
+          echo "Preview head:"
+          head -40 /tmp/catalog_plan_preview.md
+
+      - name: Run generator unit tests
+        run: |
+          python3 -m pytest tests/test_manga_catalog_plan_generator.py -v
