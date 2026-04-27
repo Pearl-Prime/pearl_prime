@@ -9,9 +9,18 @@ declares load-bearing for the 5-variants-per-section rule:
    This validator asserts ``len(variants) >= min_variants_required`` per section.
 
 2. Persona atom side — ``atoms/<persona>/<topic>/<section_type>/CANONICAL.txt``.
-   Variants are concatenated inside ``CANONICAL.txt`` under ``## <SECTION_TYPE> vNN``
-   headers. This validator counts those headers and asserts ``>= min_variants``
-   per required (persona × topic × section_type) tuple.
+   Variants are concatenated inside ``CANONICAL.txt`` under one of two header
+   conventions in active use across the repo:
+
+       ``## <SECTION_TYPE> vNN``   (~96% of variant headers; canonical going forward)
+       ``--- variant: vNN``        (~4%; legacy format, primarily gen_z_professionals
+                                    + 10 other personas; superset includes the rare
+                                    ``--- variant: <TYPE> vNN`` typed dash form)
+
+   This validator counts both header conventions and asserts ``>= min_variants``
+   per required (persona × topic × section_type) tuple. Reconciling the two
+   formats to a single canonical convention is a separate Pearl_Architect routing
+   decision tracked outside this validator's scope.
 
 Required section_types (spec §3.1 SOMATIC_10_SLOT_GRID + §3.3 beat overlay):
 
@@ -66,7 +75,10 @@ REQUIRED_SECTION_TYPES: tuple[str, ...] = (
     "COMPRESSION",
 )
 
-VARIANT_HEADER_RE = re.compile(r"^##\s+([A-Z_]+)\s+v\d+", re.MULTILINE)
+VARIANT_HEADER_RE = re.compile(
+    r"^(?:##\s+[A-Z_]+\s+v\d+|---\s+variant:\s+(?:[A-Z_]+\s+)?v\d+)",
+    re.MULTILINE,
+)
 DEFAULT_MIN_VARIANTS = 5
 
 

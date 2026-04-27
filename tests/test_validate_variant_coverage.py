@@ -80,6 +80,48 @@ def test_count_atom_variants_returns_zero_for_missing(tmp_path: Path) -> None:
     assert count_atom_variants(tmp_path / "nope.txt") == 0
 
 
+def test_count_atom_variants_handles_dash_variant_format(tmp_path: Path) -> None:
+    """Legacy `--- variant: vNN` headers (used by gen_z_professionals + 10
+    other personas; ~4% of repo variant headers) must count."""
+    path = tmp_path / "CANONICAL.txt"
+    path.write_text(
+        "--- variant: v01\nbody one\n\n--- variant: v02\nbody two\n\n--- variant: v03\nbody three\n"
+    )
+    assert count_atom_variants(path) == 3
+
+
+def test_count_atom_variants_handles_typed_dash_variant_format(tmp_path: Path) -> None:
+    """Rare `--- variant: TYPE vNN` typed dash form (~9 instances repo-wide)
+    must also count under the same regex."""
+    path = tmp_path / "CANONICAL.txt"
+    path.write_text(
+        "--- variant: EMBODIMENT v01\nbody one\n\n"
+        "--- variant: MECHANISM_PROOF v02\nbody two\n"
+    )
+    assert count_atom_variants(path) == 2
+
+
+def test_count_atom_variants_handles_mixed_formats(tmp_path: Path) -> None:
+    """A single CANONICAL.txt with both header conventions should sum cleanly."""
+    path = tmp_path / "CANONICAL.txt"
+    path.write_text(
+        "## HOOK v01\nbody one\n\n"
+        "--- variant: v02\nbody two\n\n"
+        "## HOOK v03\nbody three\n"
+    )
+    assert count_atom_variants(path) == 3
+
+
+def test_count_atom_variants_ignores_non_variant_dash_lines(tmp_path: Path) -> None:
+    """Loose `---` separators inside `## TYPE vNN` blocks must not be counted
+    as variants. They are a separator convention, not a header."""
+    path = tmp_path / "CANONICAL.txt"
+    path.write_text(
+        "## HOOK v01\n---\nbody\n---\n## HOOK v02\n---\nbody\n---\n"
+    )
+    assert count_atom_variants(path) == 2
+
+
 def test_check_registry_passes_when_variants_meet_min(tmp_path: Path) -> None:
     registry = tmp_path / "registry"
     _write_registry(registry, "anxiety", [("HOOK", 5), ("STORY", 6), ("REFLECTION", 5)])
