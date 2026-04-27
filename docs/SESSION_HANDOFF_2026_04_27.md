@@ -209,8 +209,131 @@ From prior session, unchanged:
 
 ---
 
-## §7 — Next session entry point
+## §7 — Continuation (operator catalog directives — same session, PM)
 
-1. Merge PR #733 if checks pass.
-2. Merge this handoff PR.
-3. Triage the queued work in §5 — recommended next concrete action: clarify "800/brand" vs the real numbers, then either codify a corrected target (Pearl_Architect doc PR) or pick the next queued item.
+After this doc was first written, the operator issued five concrete directives. All five executed in-session.
+
+### §7.1 — The "800/brand" finding (resolves §4 item 2)
+
+The "800 books per brand" mental model the prior session referenced is shorthand for the **HIGH-CONFIDENCE configuration tier** in [artifacts/research/full_content_audit.md:65](../artifacts/research/full_content_audit.md):
+
+| Tier | Count | Description |
+|---|---|---|
+| **HIGH CONFIDENCE (market-validated)** | **~800** | Brand × primary topic × primary persona × proven format × top-5 locales (en-US, de-DE, ja-JP, ko-KR, fr-FR) |
+| MEDIUM (plausible) | ~2,500 | Valid constraints but secondary combos/locales |
+| LOW (questionable) | ~3,000 | Edge-case topics, smaller locales, niche formats |
+| INVALID (should never build) | ~3,300 | Constraint violations, cultural/market mismatches |
+
+> "~800 high-confidence configurations should drive 80% of catalog planning. Not 7 million."
+> — `artifacts/research/full_content_audit.md:70`
+
+**$-maker keywords/topics** (per `artifacts/research/bestseller_titles_seo_covers_research.md` §4 + `full_content_audit.md` §2):
+- Anxiety + Corporate/Professional Adults — "nervous system regulation" breakout keyword; market 20%+ YoY
+- Burnout + Healthcare/First Responders — two-thirds of workers report burnout
+- Sleep Anxiety — $65.8B sleep market; insomnia segment $6.8B at 9.6% CAGR
+- Imposter Syndrome + Gen Z/Millennial Professionals — 62% prevalence in healthcare
+- Social Anxiety + Gen Z/Gen Alpha — "The Anxious Generation" 2M+ copy bestseller
+- Burnout + Entrepreneurs/Tech — "founder burnout" / "startup stress"
+- Somatic Healing — WHO endorsement; Polyvagal theory boom
+- Financial Anxiety + Millennials/Gen Z — "Financial Anxiety Solution" niche
+
+Saved to memory: [project_800_high_confidence_configs.md](https://) so this finding persists across sessions. The `~800` is the planning anchor, not a per-brand book count.
+
+### §7.2 — Stale constants verified + fixed (resolves §4 item 3)
+
+Confirmed: `scripts/manga/generate_series_plans_from_catalog.py:44-49` had stale `VALID_LOCALES = 4` (no ko_KR) + `VALID_GENRES = 10` legacy slugs. Schema was already 5 locales / 23 genres → mismatch caused silent row-skipping at line 114 (`if genre not in VALID_GENRES: continue`).
+
+Shipped as **PR [#737](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/737)** — `fix(manga): align generate_series_plans_from_catalog constants with v2.1 schema` (1 file, +7/-2). MERGED.
+
+### §7.3 — Catalog generators extended 5 → 8 markets (resolves "build catalog plans for all 8 markets")
+
+Shipped as **PR [#738](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/738)** — `feat(manga): extend catalog generators 5 → 8 markets (es_LA, hu_HU, zh_HK)`. MERGED.
+
+| File | Change |
+|---|---|
+| [scripts/manga/generate_catalog_plan_from_strategic.py:55](../scripts/manga/generate_catalog_plan_from_strategic.py:55) | `VALID_LOCALES` 5 → 8 |
+| [scripts/manga/generate_series_plans_from_catalog.py:44](../scripts/manga/generate_series_plans_from_catalog.py:44) | `VALID_LOCALES` 5 → 8 |
+| [scripts/manga/generate_series_plans_from_catalog.py:60](../scripts/manga/generate_series_plans_from_catalog.py:60) | `_RE_LOCALE_HEADING` regex extended |
+| [schemas/manga/series_plan.schema.json](../schemas/manga/series_plan.schema.json) | `locale` + `default_locale` enums extended (3 places); `localized_titles` patternProperties extended; `schema_version` bumped 2.1.0 → 2.2.0 (additive, backwards-compatible) |
+| [docs/CJK_CATALOG_PLAN.md](CJK_CATALOG_PLAN.md) | `zh_HK` row added to "Format and Art Style by Locale" + addendum |
+| [docs/LATAM_CATALOG_PLAN.md](LATAM_CATALOG_PLAN.md) | NEW scaffold for `es_LA` |
+| [docs/EUROPE_CATALOG_PLAN.md](EUROPE_CATALOG_PLAN.md) | NEW scaffold for `hu_HU` + reserved future slots for `de_DE`/`fr_FR`/`it_IT`/`es_ES` |
+| [tests/test_manga_catalog_plan_generator.py:54](../tests/test_manga_catalog_plan_generator.py:54) | Test updated to assert 8 expected locales |
+
+**Backwards compatibility:** the existing 1,350 series_plan YAMLs (5-locale) remain schema-valid. Pre-2X.4 inputs still accepted. No deletions. Generator will accept new-locale rows once format-routing entries land in `config/manga/format_routing.yaml`.
+
+### §7.4 — 5-variants + bestseller beat wiring spec (resolves "i need this wired")
+
+The operator's directive: *"each chapter has 10 sections and 5 variations per section. Use 1 of them always. The inserted stories and exercises and PIVOT/PERMISSION/TAKEAWAY/THREAD/COMPRESSION beats and bestseller injections are added to it."*
+
+Today only 10-section grid + STORY-at-2/5/9 + bestseller-structure assignment are HARD-enforced. Two gaps remain (per §3 of this handoff):
+
+1. **No registry minimum of 5 variants per family.** Selector picks 1 deterministically from however many exist; if a family has 1 variant, all books reuse it.
+2. **`BookSlotTracker` is a no-op placeholder** per [docs/BESTSELLER_ATOM_ROUTING.md:98-99](BESTSELLER_ATOM_ROUTING.md). Beat steps inject SLOT placeholders but no atom-level routing fills them with PIVOT/PERMISSION/TAKEAWAY/THREAD/COMPRESSION content.
+
+Shipped as **PR [#739](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/739)** — `spec: 5-variants-per-section + bestseller beat injection wiring` ([specs/SPEC_5_VARIANTS_AND_BESTSELLER_BEAT_WIRING.md](../specs/SPEC_5_VARIANTS_AND_BESTSELLER_BEAT_WIRING.md)). MERGED.
+
+The spec defines a 6-phase Pearl_Dev implementation:
+
+| Phase | Scope | Estimated PR size |
+|---|---|---|
+| 1 | `scripts/registry/validate_variant_coverage.py` + CI gate (`Variant coverage gate (≥5 per section)`) | small |
+| 2 | Per-persona atom authoring — ~14 personas × 12 topics × 5 section types × 5 variants = ~4,200 atoms (Tier-1 hero personas, Tier-2 Qwen for CJK6 non-hero) | LARGE, multi-PR |
+| 3 | `phoenix_v4/planning/beat_overlay.py` + real `BookSlotTracker` (replace no-op placeholder) | MEDIUM |
+| 4 | Per-beat-type atom authoring — 5 beats × ~14 personas × 12 topics × 5 atoms = ~4,200 beat atoms | LARGE, multi-PR |
+| 5 | 4 new gates in `scripts/canary/run_bestseller_canary.py` (variant coverage / beat overlay applied / story overlay applied / no silent fallback) | small |
+| 6 | Regen all artifacts + Move 4 30-book sweep ≥90% pass | medium |
+
+**Acceptance criteria:** every chapter's `budget.json` has `beat_overlays_applied >= 1` and `story_overlays_applied == 3`; canary passes all 4 new gates; Move 4 sweep maintains ≥90% pass rate.
+
+### §7.5 — Locale Extension agent (operator question)
+
+Pearl_Dev's offer to spawn a separate Locale Extension agent for `es_LA` + `hu_HU` + `zh_HK` was answered in-session by PR #738 — the locale slots are wired, schema accepts them, scaffold docs created. The follow-up Pearl_Research deep-research authoring (per-locale revenue weights, brand allocations, format-routing config entries) is what remains.
+
+---
+
+## §8 — Final PR roster (this session)
+
+| # | Title | State | What it did |
+|---|---|---|---|
+| [#733](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/733) | docs(session-unity): add universal router prompt section | ✅ MERGED | Resolved broken anchor in `docs/agent_brief.txt:8` |
+| [#735](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/735) | docs(handoff): 2026-04-27 — universal router anchor + catalog/pipeline truth audit | ✅ MERGED | This file (initial draft) |
+| [#737](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/737) | fix(manga): sync generate_series_plans_from_catalog constants to v2.1 schema | ✅ MERGED | Stale constants fix (5 locales / 23 genres) |
+| [#738](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/738) | feat(manga): extend catalog generators 5 → 8 markets (es_LA, hu_HU, zh_HK) | ✅ MERGED | 8-market catalog scaffold |
+| [#739](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/739) | spec: 5-variants-per-section + bestseller beat injection wiring | ✅ MERGED | Pearl_Architect spec for the next big implementation arc |
+| (this PR) | docs(handoff): extend 2026-04-27 handoff with PM-session catalog work | open | Continuation appended to this file |
+
+**Deliberately NOT touched** (parallel agents' work, requires operator policy decisions):
+- [#732](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/732) — Pearl News teacher truth resolver (operator review of Junko/Ahjan/Ma'at/Master Wu mappings)
+- [#734](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/734) — TTS free-tier policy (decision: ban ElevenLabs?)
+- [#736](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/736) — LLM freemium policy (decision: allow freemium LLMs up to free cap?)
+
+---
+
+## §9 — Updated queued work (priority order, post-merge state)
+
+1. **Pearl_Dev: implement spec [#739](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/739)** in 6 phases (validate gate → ~4,200 atom authoring → beat_overlay.py + real BookSlotTracker → ~4,200 beat-atom authoring → 4 new canary gates → Move 4 90% sweep)
+2. **Pearl_Research: per-locale strategic doc authoring** — fill the LATAM + EUROPE scaffolds with revenue weights, brand allocations, format-routing config entries
+3. **Pearl_Dev: format-routing entries** for `es_LA`, `hu_HU`, `zh_HK` in `config/manga/format_routing.yaml` (gates new-locale row emission)
+4. **Operator policy decisions** on PRs from parallel agents: [#732](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/732), [#734](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/734), [#736](https://github.com/Ahjan108/phoenix_omega_v4.8/pull/736)
+5. **Pearl_Dev**: B2 backend pivot, teacher photo avatars, wizard-teacher.html, AGENTS.md (carried from prior session)
+6. **Operator**: WEBTOON Canvas creator account + series setup for ep_001 manual upload
+7. **Pearl_Localization**: Move 5 rolling enhancement
+8. **Pearl_Prime**: midlife_women master_arcs authoring (`ws_midlife_women_arc_authoring_20260427`)
+
+---
+
+## §10 — Closeout receipt
+
+```
+CLOSEOUT_RECEIPT
+AGENT:          Pearl_GitHub
+TASK:           Universal router anchor + catalog/pipeline truth audit + 8-market extension + 5-variants spec
+PROJECT_ID:     none (cross-cutting hygiene + planning)
+SUBSYSTEMS:     docs/SESSION_UNITY_PROTOCOL · scripts/manga/* · schemas/manga · docs/CATALOG_PLAN.md docs · specs/
+COMMIT_SHAS:    6858f64fc0 (PR #733) · 3e5f786b23 (PR #735) · edeb123f1a (PR #737) · 9ddb9b4e16 (PR #738) · 37aea99375 (PR #739)
+FILES_WRITTEN:  docs/SESSION_UNITY_PROTOCOL.md (+9/-1) · docs/SESSION_HANDOFF_2026_04_27.md (NEW + this extension) · scripts/manga/generate_series_plans_from_catalog.py (+12/-2 across 2 PRs) · scripts/manga/generate_catalog_plan_from_strategic.py (+7/-2) · schemas/manga/series_plan.schema.json (+8/-4) · docs/CJK_CATALOG_PLAN.md (+3/-0) · docs/LATAM_CATALOG_PLAN.md (NEW) · docs/EUROPE_CATALOG_PLAN.md (NEW) · specs/SPEC_5_VARIANTS_AND_BESTSELLER_BEAT_WIRING.md (NEW) · tests/test_manga_catalog_plan_generator.py (+5/-2)
+STATUS:         completed (all 5 PRs merged)
+HANDOFF_TO:     Pearl_Dev (spec #739 implementation, queued work item 1) · Pearl_Research (per-locale authoring, item 2) · operator (policy decisions on #732/#734/#736)
+NEXT_ACTION:    Triage queued work §9 in priority order. Recommended start: Phase 1 of spec #739 (validate_variant_coverage gate) since it's small and unblocks the rest of the variant-authoring arc.
+```
