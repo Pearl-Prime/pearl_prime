@@ -9,9 +9,15 @@ Phase 1 ships warn-only per spec §6 risk row 2. Strict mode (CI fail on gap) is
 - minimum variants per section: **3**
 - registry sections passing: **1287**
 - registry sections failing: **63**
-- atom (persona × topic × section_type) tuples passing: **1682**
-- atom tuples failing: **628**
-- total gaps: **691**
+- atom (persona × topic × section_type) tuples passing: **1921**
+  - via persona-atom canonical: **1682**
+  - via alternative source: **239**
+    - `teacher_banks/approved_atoms/EXERCISE`: 29
+    - `teacher_banks/doctrine`: 210
+- atom tuples failing: **389**
+- total gaps: **452**
+
+_Alternative-source coverage_ — `TEACHER_DOCTRINE` resolves from `SOURCE_OF_TRUTH/teacher_banks/<teacher>/doctrine/` (the pipeline picks a teacher per book at runtime per `phoenix_v4/planning/injection_resolver.py`). `EXERCISE` resolves per `specs/PHOENIX_V4_5_WRITER_SPEC.md` §4.5 three-source rule: `atoms/<persona>/<topic>/EXERCISE/CANONICAL.txt` → `teacher_banks/<teacher>/approved_atoms/EXERCISE/*.yaml` → `SOURCE_OF_TRUTH/practice_library/store/practice_items.jsonl`. Other section types remain persona-atom-only per ws_spec_739_validator_teacher_banks_awareness_20260428 scope discipline; multi-source awareness for `HOOK / STORY / REFLECTION / INTEGRATION / COMPRESSION / PIVOT / PERMISSION / TAKEAWAY / THREAD` is a separate Pearl_Architect routing decision tracked in `docs/PEARL_ARCHITECT_STATE.md`.
 
 ## Registry gaps
 
@@ -204,47 +210,36 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 
 | persona | missing tuples |
 |---|---:|
-| corporate_managers | 15 |
-| educators | 85 |
-| entrepreneurs | 15 |
-| first_responders | 15 |
-| gen_alpha_students | 15 |
-| gen_x_sandwich | 15 |
-| gen_z_professionals | 15 |
-| gen_z_student | 33 |
-| healthcare_rns | 15 |
-| midlife_women | 165 |
-| millennial_women_professionals | 15 |
-| nyc_executives | 85 |
-| tech_finance_burnout | 15 |
-| working_parents | 15 |
+| educators | 63 |
+| gen_z_student | 18 |
+| midlife_women | 135 |
+| nyc_executives | 63 |
 
 ### Missing tuples by topic
 
 | topic | missing tuples |
 |---|---:|
-| anxiety | 24 |
-| boundaries | 24 |
-| burnout | 44 |
-| compassion_fatigue | 30 |
-| courage | 24 |
-| depression | 24 |
-| financial_anxiety | 50 |
-| financial_stress | 30 |
-| grief | 24 |
-| imposter_syndrome | 44 |
-| overthinking | 44 |
-| self_worth | 24 |
-| sleep_anxiety | 44 |
-| social_anxiety | 44 |
-| somatic_healing | 44 |
+| anxiety | 9 |
+| boundaries | 9 |
+| burnout | 27 |
+| compassion_fatigue | 15 |
+| courage | 9 |
+| depression | 9 |
+| financial_anxiety | 33 |
+| financial_stress | 15 |
+| grief | 9 |
+| imposter_syndrome | 27 |
+| overthinking | 27 |
+| self_worth | 9 |
+| sleep_anxiety | 27 |
+| social_anxiety | 27 |
+| somatic_healing | 27 |
 
 ### Missing tuples by section_type
 
 | section_type | missing tuples |
 |---|---:|
 | COMPRESSION | 32 |
-| EXERCISE | 29 |
 | HOOK | 29 |
 | INTEGRATION | 29 |
 | PERMISSION | 32 |
@@ -252,32 +247,13 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | REFLECTION | 29 |
 | STORY | 32 |
 | TAKEAWAY | 32 |
-| TEACHER_DOCTRINE | 210 |
 | THREAD | 32 |
 
 ### Full missing tuple list
 
 | persona | topic | section_type |
 |---|---|---|
-| corporate_managers | anxiety | TEACHER_DOCTRINE |
-| corporate_managers | boundaries | TEACHER_DOCTRINE |
-| corporate_managers | burnout | TEACHER_DOCTRINE |
-| corporate_managers | compassion_fatigue | TEACHER_DOCTRINE |
-| corporate_managers | courage | TEACHER_DOCTRINE |
-| corporate_managers | depression | TEACHER_DOCTRINE |
-| corporate_managers | financial_anxiety | TEACHER_DOCTRINE |
-| corporate_managers | financial_stress | TEACHER_DOCTRINE |
-| corporate_managers | grief | TEACHER_DOCTRINE |
-| corporate_managers | imposter_syndrome | TEACHER_DOCTRINE |
-| corporate_managers | overthinking | TEACHER_DOCTRINE |
-| corporate_managers | self_worth | TEACHER_DOCTRINE |
-| corporate_managers | sleep_anxiety | TEACHER_DOCTRINE |
-| corporate_managers | social_anxiety | TEACHER_DOCTRINE |
-| corporate_managers | somatic_healing | TEACHER_DOCTRINE |
-| educators | anxiety | TEACHER_DOCTRINE |
-| educators | boundaries | TEACHER_DOCTRINE |
 | educators | burnout | COMPRESSION |
-| educators | burnout | EXERCISE |
 | educators | burnout | HOOK |
 | educators | burnout | INTEGRATION |
 | educators | burnout | PERMISSION |
@@ -285,13 +261,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | educators | burnout | REFLECTION |
 | educators | burnout | STORY |
 | educators | burnout | TAKEAWAY |
-| educators | burnout | TEACHER_DOCTRINE |
 | educators | burnout | THREAD |
-| educators | compassion_fatigue | TEACHER_DOCTRINE |
-| educators | courage | TEACHER_DOCTRINE |
-| educators | depression | TEACHER_DOCTRINE |
 | educators | financial_anxiety | COMPRESSION |
-| educators | financial_anxiety | EXERCISE |
 | educators | financial_anxiety | HOOK |
 | educators | financial_anxiety | INTEGRATION |
 | educators | financial_anxiety | PERMISSION |
@@ -299,12 +270,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | educators | financial_anxiety | REFLECTION |
 | educators | financial_anxiety | STORY |
 | educators | financial_anxiety | TAKEAWAY |
-| educators | financial_anxiety | TEACHER_DOCTRINE |
 | educators | financial_anxiety | THREAD |
-| educators | financial_stress | TEACHER_DOCTRINE |
-| educators | grief | TEACHER_DOCTRINE |
 | educators | imposter_syndrome | COMPRESSION |
-| educators | imposter_syndrome | EXERCISE |
 | educators | imposter_syndrome | HOOK |
 | educators | imposter_syndrome | INTEGRATION |
 | educators | imposter_syndrome | PERMISSION |
@@ -312,10 +279,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | educators | imposter_syndrome | REFLECTION |
 | educators | imposter_syndrome | STORY |
 | educators | imposter_syndrome | TAKEAWAY |
-| educators | imposter_syndrome | TEACHER_DOCTRINE |
 | educators | imposter_syndrome | THREAD |
 | educators | overthinking | COMPRESSION |
-| educators | overthinking | EXERCISE |
 | educators | overthinking | HOOK |
 | educators | overthinking | INTEGRATION |
 | educators | overthinking | PERMISSION |
@@ -323,11 +288,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | educators | overthinking | REFLECTION |
 | educators | overthinking | STORY |
 | educators | overthinking | TAKEAWAY |
-| educators | overthinking | TEACHER_DOCTRINE |
 | educators | overthinking | THREAD |
-| educators | self_worth | TEACHER_DOCTRINE |
 | educators | sleep_anxiety | COMPRESSION |
-| educators | sleep_anxiety | EXERCISE |
 | educators | sleep_anxiety | HOOK |
 | educators | sleep_anxiety | INTEGRATION |
 | educators | sleep_anxiety | PERMISSION |
@@ -335,10 +297,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | educators | sleep_anxiety | REFLECTION |
 | educators | sleep_anxiety | STORY |
 | educators | sleep_anxiety | TAKEAWAY |
-| educators | sleep_anxiety | TEACHER_DOCTRINE |
 | educators | sleep_anxiety | THREAD |
 | educators | social_anxiety | COMPRESSION |
-| educators | social_anxiety | EXERCISE |
 | educators | social_anxiety | HOOK |
 | educators | social_anxiety | INTEGRATION |
 | educators | social_anxiety | PERMISSION |
@@ -346,10 +306,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | educators | social_anxiety | REFLECTION |
 | educators | social_anxiety | STORY |
 | educators | social_anxiety | TAKEAWAY |
-| educators | social_anxiety | TEACHER_DOCTRINE |
 | educators | social_anxiety | THREAD |
 | educators | somatic_healing | COMPRESSION |
-| educators | somatic_healing | EXERCISE |
 | educators | somatic_healing | HOOK |
 | educators | somatic_healing | INTEGRATION |
 | educators | somatic_healing | PERMISSION |
@@ -357,133 +315,26 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | educators | somatic_healing | REFLECTION |
 | educators | somatic_healing | STORY |
 | educators | somatic_healing | TAKEAWAY |
-| educators | somatic_healing | TEACHER_DOCTRINE |
 | educators | somatic_healing | THREAD |
-| entrepreneurs | anxiety | TEACHER_DOCTRINE |
-| entrepreneurs | boundaries | TEACHER_DOCTRINE |
-| entrepreneurs | burnout | TEACHER_DOCTRINE |
-| entrepreneurs | compassion_fatigue | TEACHER_DOCTRINE |
-| entrepreneurs | courage | TEACHER_DOCTRINE |
-| entrepreneurs | depression | TEACHER_DOCTRINE |
-| entrepreneurs | financial_anxiety | TEACHER_DOCTRINE |
-| entrepreneurs | financial_stress | TEACHER_DOCTRINE |
-| entrepreneurs | grief | TEACHER_DOCTRINE |
-| entrepreneurs | imposter_syndrome | TEACHER_DOCTRINE |
-| entrepreneurs | overthinking | TEACHER_DOCTRINE |
-| entrepreneurs | self_worth | TEACHER_DOCTRINE |
-| entrepreneurs | sleep_anxiety | TEACHER_DOCTRINE |
-| entrepreneurs | social_anxiety | TEACHER_DOCTRINE |
-| entrepreneurs | somatic_healing | TEACHER_DOCTRINE |
-| first_responders | anxiety | TEACHER_DOCTRINE |
-| first_responders | boundaries | TEACHER_DOCTRINE |
-| first_responders | burnout | TEACHER_DOCTRINE |
-| first_responders | compassion_fatigue | TEACHER_DOCTRINE |
-| first_responders | courage | TEACHER_DOCTRINE |
-| first_responders | depression | TEACHER_DOCTRINE |
-| first_responders | financial_anxiety | TEACHER_DOCTRINE |
-| first_responders | financial_stress | TEACHER_DOCTRINE |
-| first_responders | grief | TEACHER_DOCTRINE |
-| first_responders | imposter_syndrome | TEACHER_DOCTRINE |
-| first_responders | overthinking | TEACHER_DOCTRINE |
-| first_responders | self_worth | TEACHER_DOCTRINE |
-| first_responders | sleep_anxiety | TEACHER_DOCTRINE |
-| first_responders | social_anxiety | TEACHER_DOCTRINE |
-| first_responders | somatic_healing | TEACHER_DOCTRINE |
-| gen_alpha_students | anxiety | TEACHER_DOCTRINE |
-| gen_alpha_students | boundaries | TEACHER_DOCTRINE |
-| gen_alpha_students | burnout | TEACHER_DOCTRINE |
-| gen_alpha_students | compassion_fatigue | TEACHER_DOCTRINE |
-| gen_alpha_students | courage | TEACHER_DOCTRINE |
-| gen_alpha_students | depression | TEACHER_DOCTRINE |
-| gen_alpha_students | financial_anxiety | TEACHER_DOCTRINE |
-| gen_alpha_students | financial_stress | TEACHER_DOCTRINE |
-| gen_alpha_students | grief | TEACHER_DOCTRINE |
-| gen_alpha_students | imposter_syndrome | TEACHER_DOCTRINE |
-| gen_alpha_students | overthinking | TEACHER_DOCTRINE |
-| gen_alpha_students | self_worth | TEACHER_DOCTRINE |
-| gen_alpha_students | sleep_anxiety | TEACHER_DOCTRINE |
-| gen_alpha_students | social_anxiety | TEACHER_DOCTRINE |
-| gen_alpha_students | somatic_healing | TEACHER_DOCTRINE |
-| gen_x_sandwich | anxiety | TEACHER_DOCTRINE |
-| gen_x_sandwich | boundaries | TEACHER_DOCTRINE |
-| gen_x_sandwich | burnout | TEACHER_DOCTRINE |
-| gen_x_sandwich | compassion_fatigue | TEACHER_DOCTRINE |
-| gen_x_sandwich | courage | TEACHER_DOCTRINE |
-| gen_x_sandwich | depression | TEACHER_DOCTRINE |
-| gen_x_sandwich | financial_anxiety | TEACHER_DOCTRINE |
-| gen_x_sandwich | financial_stress | TEACHER_DOCTRINE |
-| gen_x_sandwich | grief | TEACHER_DOCTRINE |
-| gen_x_sandwich | imposter_syndrome | TEACHER_DOCTRINE |
-| gen_x_sandwich | overthinking | TEACHER_DOCTRINE |
-| gen_x_sandwich | self_worth | TEACHER_DOCTRINE |
-| gen_x_sandwich | sleep_anxiety | TEACHER_DOCTRINE |
-| gen_x_sandwich | social_anxiety | TEACHER_DOCTRINE |
-| gen_x_sandwich | somatic_healing | TEACHER_DOCTRINE |
-| gen_z_professionals | anxiety | TEACHER_DOCTRINE |
-| gen_z_professionals | boundaries | TEACHER_DOCTRINE |
-| gen_z_professionals | burnout | TEACHER_DOCTRINE |
-| gen_z_professionals | compassion_fatigue | TEACHER_DOCTRINE |
-| gen_z_professionals | courage | TEACHER_DOCTRINE |
-| gen_z_professionals | depression | TEACHER_DOCTRINE |
-| gen_z_professionals | financial_anxiety | TEACHER_DOCTRINE |
-| gen_z_professionals | financial_stress | TEACHER_DOCTRINE |
-| gen_z_professionals | grief | TEACHER_DOCTRINE |
-| gen_z_professionals | imposter_syndrome | TEACHER_DOCTRINE |
-| gen_z_professionals | overthinking | TEACHER_DOCTRINE |
-| gen_z_professionals | self_worth | TEACHER_DOCTRINE |
-| gen_z_professionals | sleep_anxiety | TEACHER_DOCTRINE |
-| gen_z_professionals | social_anxiety | TEACHER_DOCTRINE |
-| gen_z_professionals | somatic_healing | TEACHER_DOCTRINE |
-| gen_z_student | anxiety | TEACHER_DOCTRINE |
-| gen_z_student | boundaries | TEACHER_DOCTRINE |
-| gen_z_student | burnout | TEACHER_DOCTRINE |
 | gen_z_student | compassion_fatigue | COMPRESSION |
 | gen_z_student | compassion_fatigue | PERMISSION |
 | gen_z_student | compassion_fatigue | PIVOT |
 | gen_z_student | compassion_fatigue | STORY |
 | gen_z_student | compassion_fatigue | TAKEAWAY |
-| gen_z_student | compassion_fatigue | TEACHER_DOCTRINE |
 | gen_z_student | compassion_fatigue | THREAD |
-| gen_z_student | courage | TEACHER_DOCTRINE |
-| gen_z_student | depression | TEACHER_DOCTRINE |
 | gen_z_student | financial_anxiety | COMPRESSION |
 | gen_z_student | financial_anxiety | PERMISSION |
 | gen_z_student | financial_anxiety | PIVOT |
 | gen_z_student | financial_anxiety | STORY |
 | gen_z_student | financial_anxiety | TAKEAWAY |
-| gen_z_student | financial_anxiety | TEACHER_DOCTRINE |
 | gen_z_student | financial_anxiety | THREAD |
 | gen_z_student | financial_stress | COMPRESSION |
 | gen_z_student | financial_stress | PERMISSION |
 | gen_z_student | financial_stress | PIVOT |
 | gen_z_student | financial_stress | STORY |
 | gen_z_student | financial_stress | TAKEAWAY |
-| gen_z_student | financial_stress | TEACHER_DOCTRINE |
 | gen_z_student | financial_stress | THREAD |
-| gen_z_student | grief | TEACHER_DOCTRINE |
-| gen_z_student | imposter_syndrome | TEACHER_DOCTRINE |
-| gen_z_student | overthinking | TEACHER_DOCTRINE |
-| gen_z_student | self_worth | TEACHER_DOCTRINE |
-| gen_z_student | sleep_anxiety | TEACHER_DOCTRINE |
-| gen_z_student | social_anxiety | TEACHER_DOCTRINE |
-| gen_z_student | somatic_healing | TEACHER_DOCTRINE |
-| healthcare_rns | anxiety | TEACHER_DOCTRINE |
-| healthcare_rns | boundaries | TEACHER_DOCTRINE |
-| healthcare_rns | burnout | TEACHER_DOCTRINE |
-| healthcare_rns | compassion_fatigue | TEACHER_DOCTRINE |
-| healthcare_rns | courage | TEACHER_DOCTRINE |
-| healthcare_rns | depression | TEACHER_DOCTRINE |
-| healthcare_rns | financial_anxiety | TEACHER_DOCTRINE |
-| healthcare_rns | financial_stress | TEACHER_DOCTRINE |
-| healthcare_rns | grief | TEACHER_DOCTRINE |
-| healthcare_rns | imposter_syndrome | TEACHER_DOCTRINE |
-| healthcare_rns | overthinking | TEACHER_DOCTRINE |
-| healthcare_rns | self_worth | TEACHER_DOCTRINE |
-| healthcare_rns | sleep_anxiety | TEACHER_DOCTRINE |
-| healthcare_rns | social_anxiety | TEACHER_DOCTRINE |
-| healthcare_rns | somatic_healing | TEACHER_DOCTRINE |
 | midlife_women | anxiety | COMPRESSION |
-| midlife_women | anxiety | EXERCISE |
 | midlife_women | anxiety | HOOK |
 | midlife_women | anxiety | INTEGRATION |
 | midlife_women | anxiety | PERMISSION |
@@ -491,10 +342,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | anxiety | REFLECTION |
 | midlife_women | anxiety | STORY |
 | midlife_women | anxiety | TAKEAWAY |
-| midlife_women | anxiety | TEACHER_DOCTRINE |
 | midlife_women | anxiety | THREAD |
 | midlife_women | boundaries | COMPRESSION |
-| midlife_women | boundaries | EXERCISE |
 | midlife_women | boundaries | HOOK |
 | midlife_women | boundaries | INTEGRATION |
 | midlife_women | boundaries | PERMISSION |
@@ -502,10 +351,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | boundaries | REFLECTION |
 | midlife_women | boundaries | STORY |
 | midlife_women | boundaries | TAKEAWAY |
-| midlife_women | boundaries | TEACHER_DOCTRINE |
 | midlife_women | boundaries | THREAD |
 | midlife_women | burnout | COMPRESSION |
-| midlife_women | burnout | EXERCISE |
 | midlife_women | burnout | HOOK |
 | midlife_women | burnout | INTEGRATION |
 | midlife_women | burnout | PERMISSION |
@@ -513,10 +360,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | burnout | REFLECTION |
 | midlife_women | burnout | STORY |
 | midlife_women | burnout | TAKEAWAY |
-| midlife_women | burnout | TEACHER_DOCTRINE |
 | midlife_women | burnout | THREAD |
 | midlife_women | compassion_fatigue | COMPRESSION |
-| midlife_women | compassion_fatigue | EXERCISE |
 | midlife_women | compassion_fatigue | HOOK |
 | midlife_women | compassion_fatigue | INTEGRATION |
 | midlife_women | compassion_fatigue | PERMISSION |
@@ -524,10 +369,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | compassion_fatigue | REFLECTION |
 | midlife_women | compassion_fatigue | STORY |
 | midlife_women | compassion_fatigue | TAKEAWAY |
-| midlife_women | compassion_fatigue | TEACHER_DOCTRINE |
 | midlife_women | compassion_fatigue | THREAD |
 | midlife_women | courage | COMPRESSION |
-| midlife_women | courage | EXERCISE |
 | midlife_women | courage | HOOK |
 | midlife_women | courage | INTEGRATION |
 | midlife_women | courage | PERMISSION |
@@ -535,10 +378,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | courage | REFLECTION |
 | midlife_women | courage | STORY |
 | midlife_women | courage | TAKEAWAY |
-| midlife_women | courage | TEACHER_DOCTRINE |
 | midlife_women | courage | THREAD |
 | midlife_women | depression | COMPRESSION |
-| midlife_women | depression | EXERCISE |
 | midlife_women | depression | HOOK |
 | midlife_women | depression | INTEGRATION |
 | midlife_women | depression | PERMISSION |
@@ -546,10 +387,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | depression | REFLECTION |
 | midlife_women | depression | STORY |
 | midlife_women | depression | TAKEAWAY |
-| midlife_women | depression | TEACHER_DOCTRINE |
 | midlife_women | depression | THREAD |
 | midlife_women | financial_anxiety | COMPRESSION |
-| midlife_women | financial_anxiety | EXERCISE |
 | midlife_women | financial_anxiety | HOOK |
 | midlife_women | financial_anxiety | INTEGRATION |
 | midlife_women | financial_anxiety | PERMISSION |
@@ -557,10 +396,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | financial_anxiety | REFLECTION |
 | midlife_women | financial_anxiety | STORY |
 | midlife_women | financial_anxiety | TAKEAWAY |
-| midlife_women | financial_anxiety | TEACHER_DOCTRINE |
 | midlife_women | financial_anxiety | THREAD |
 | midlife_women | financial_stress | COMPRESSION |
-| midlife_women | financial_stress | EXERCISE |
 | midlife_women | financial_stress | HOOK |
 | midlife_women | financial_stress | INTEGRATION |
 | midlife_women | financial_stress | PERMISSION |
@@ -568,10 +405,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | financial_stress | REFLECTION |
 | midlife_women | financial_stress | STORY |
 | midlife_women | financial_stress | TAKEAWAY |
-| midlife_women | financial_stress | TEACHER_DOCTRINE |
 | midlife_women | financial_stress | THREAD |
 | midlife_women | grief | COMPRESSION |
-| midlife_women | grief | EXERCISE |
 | midlife_women | grief | HOOK |
 | midlife_women | grief | INTEGRATION |
 | midlife_women | grief | PERMISSION |
@@ -579,10 +414,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | grief | REFLECTION |
 | midlife_women | grief | STORY |
 | midlife_women | grief | TAKEAWAY |
-| midlife_women | grief | TEACHER_DOCTRINE |
 | midlife_women | grief | THREAD |
 | midlife_women | imposter_syndrome | COMPRESSION |
-| midlife_women | imposter_syndrome | EXERCISE |
 | midlife_women | imposter_syndrome | HOOK |
 | midlife_women | imposter_syndrome | INTEGRATION |
 | midlife_women | imposter_syndrome | PERMISSION |
@@ -590,10 +423,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | imposter_syndrome | REFLECTION |
 | midlife_women | imposter_syndrome | STORY |
 | midlife_women | imposter_syndrome | TAKEAWAY |
-| midlife_women | imposter_syndrome | TEACHER_DOCTRINE |
 | midlife_women | imposter_syndrome | THREAD |
 | midlife_women | overthinking | COMPRESSION |
-| midlife_women | overthinking | EXERCISE |
 | midlife_women | overthinking | HOOK |
 | midlife_women | overthinking | INTEGRATION |
 | midlife_women | overthinking | PERMISSION |
@@ -601,10 +432,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | overthinking | REFLECTION |
 | midlife_women | overthinking | STORY |
 | midlife_women | overthinking | TAKEAWAY |
-| midlife_women | overthinking | TEACHER_DOCTRINE |
 | midlife_women | overthinking | THREAD |
 | midlife_women | self_worth | COMPRESSION |
-| midlife_women | self_worth | EXERCISE |
 | midlife_women | self_worth | HOOK |
 | midlife_women | self_worth | INTEGRATION |
 | midlife_women | self_worth | PERMISSION |
@@ -612,10 +441,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | self_worth | REFLECTION |
 | midlife_women | self_worth | STORY |
 | midlife_women | self_worth | TAKEAWAY |
-| midlife_women | self_worth | TEACHER_DOCTRINE |
 | midlife_women | self_worth | THREAD |
 | midlife_women | sleep_anxiety | COMPRESSION |
-| midlife_women | sleep_anxiety | EXERCISE |
 | midlife_women | sleep_anxiety | HOOK |
 | midlife_women | sleep_anxiety | INTEGRATION |
 | midlife_women | sleep_anxiety | PERMISSION |
@@ -623,10 +450,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | sleep_anxiety | REFLECTION |
 | midlife_women | sleep_anxiety | STORY |
 | midlife_women | sleep_anxiety | TAKEAWAY |
-| midlife_women | sleep_anxiety | TEACHER_DOCTRINE |
 | midlife_women | sleep_anxiety | THREAD |
 | midlife_women | social_anxiety | COMPRESSION |
-| midlife_women | social_anxiety | EXERCISE |
 | midlife_women | social_anxiety | HOOK |
 | midlife_women | social_anxiety | INTEGRATION |
 | midlife_women | social_anxiety | PERMISSION |
@@ -634,10 +459,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | social_anxiety | REFLECTION |
 | midlife_women | social_anxiety | STORY |
 | midlife_women | social_anxiety | TAKEAWAY |
-| midlife_women | social_anxiety | TEACHER_DOCTRINE |
 | midlife_women | social_anxiety | THREAD |
 | midlife_women | somatic_healing | COMPRESSION |
-| midlife_women | somatic_healing | EXERCISE |
 | midlife_women | somatic_healing | HOOK |
 | midlife_women | somatic_healing | INTEGRATION |
 | midlife_women | somatic_healing | PERMISSION |
@@ -645,27 +468,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | midlife_women | somatic_healing | REFLECTION |
 | midlife_women | somatic_healing | STORY |
 | midlife_women | somatic_healing | TAKEAWAY |
-| midlife_women | somatic_healing | TEACHER_DOCTRINE |
 | midlife_women | somatic_healing | THREAD |
-| millennial_women_professionals | anxiety | TEACHER_DOCTRINE |
-| millennial_women_professionals | boundaries | TEACHER_DOCTRINE |
-| millennial_women_professionals | burnout | TEACHER_DOCTRINE |
-| millennial_women_professionals | compassion_fatigue | TEACHER_DOCTRINE |
-| millennial_women_professionals | courage | TEACHER_DOCTRINE |
-| millennial_women_professionals | depression | TEACHER_DOCTRINE |
-| millennial_women_professionals | financial_anxiety | TEACHER_DOCTRINE |
-| millennial_women_professionals | financial_stress | TEACHER_DOCTRINE |
-| millennial_women_professionals | grief | TEACHER_DOCTRINE |
-| millennial_women_professionals | imposter_syndrome | TEACHER_DOCTRINE |
-| millennial_women_professionals | overthinking | TEACHER_DOCTRINE |
-| millennial_women_professionals | self_worth | TEACHER_DOCTRINE |
-| millennial_women_professionals | sleep_anxiety | TEACHER_DOCTRINE |
-| millennial_women_professionals | social_anxiety | TEACHER_DOCTRINE |
-| millennial_women_professionals | somatic_healing | TEACHER_DOCTRINE |
-| nyc_executives | anxiety | TEACHER_DOCTRINE |
-| nyc_executives | boundaries | TEACHER_DOCTRINE |
 | nyc_executives | burnout | COMPRESSION |
-| nyc_executives | burnout | EXERCISE |
 | nyc_executives | burnout | HOOK |
 | nyc_executives | burnout | INTEGRATION |
 | nyc_executives | burnout | PERMISSION |
@@ -673,13 +477,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | nyc_executives | burnout | REFLECTION |
 | nyc_executives | burnout | STORY |
 | nyc_executives | burnout | TAKEAWAY |
-| nyc_executives | burnout | TEACHER_DOCTRINE |
 | nyc_executives | burnout | THREAD |
-| nyc_executives | compassion_fatigue | TEACHER_DOCTRINE |
-| nyc_executives | courage | TEACHER_DOCTRINE |
-| nyc_executives | depression | TEACHER_DOCTRINE |
 | nyc_executives | financial_anxiety | COMPRESSION |
-| nyc_executives | financial_anxiety | EXERCISE |
 | nyc_executives | financial_anxiety | HOOK |
 | nyc_executives | financial_anxiety | INTEGRATION |
 | nyc_executives | financial_anxiety | PERMISSION |
@@ -687,12 +486,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | nyc_executives | financial_anxiety | REFLECTION |
 | nyc_executives | financial_anxiety | STORY |
 | nyc_executives | financial_anxiety | TAKEAWAY |
-| nyc_executives | financial_anxiety | TEACHER_DOCTRINE |
 | nyc_executives | financial_anxiety | THREAD |
-| nyc_executives | financial_stress | TEACHER_DOCTRINE |
-| nyc_executives | grief | TEACHER_DOCTRINE |
 | nyc_executives | imposter_syndrome | COMPRESSION |
-| nyc_executives | imposter_syndrome | EXERCISE |
 | nyc_executives | imposter_syndrome | HOOK |
 | nyc_executives | imposter_syndrome | INTEGRATION |
 | nyc_executives | imposter_syndrome | PERMISSION |
@@ -700,10 +495,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | nyc_executives | imposter_syndrome | REFLECTION |
 | nyc_executives | imposter_syndrome | STORY |
 | nyc_executives | imposter_syndrome | TAKEAWAY |
-| nyc_executives | imposter_syndrome | TEACHER_DOCTRINE |
 | nyc_executives | imposter_syndrome | THREAD |
 | nyc_executives | overthinking | COMPRESSION |
-| nyc_executives | overthinking | EXERCISE |
 | nyc_executives | overthinking | HOOK |
 | nyc_executives | overthinking | INTEGRATION |
 | nyc_executives | overthinking | PERMISSION |
@@ -711,11 +504,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | nyc_executives | overthinking | REFLECTION |
 | nyc_executives | overthinking | STORY |
 | nyc_executives | overthinking | TAKEAWAY |
-| nyc_executives | overthinking | TEACHER_DOCTRINE |
 | nyc_executives | overthinking | THREAD |
-| nyc_executives | self_worth | TEACHER_DOCTRINE |
 | nyc_executives | sleep_anxiety | COMPRESSION |
-| nyc_executives | sleep_anxiety | EXERCISE |
 | nyc_executives | sleep_anxiety | HOOK |
 | nyc_executives | sleep_anxiety | INTEGRATION |
 | nyc_executives | sleep_anxiety | PERMISSION |
@@ -723,10 +513,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | nyc_executives | sleep_anxiety | REFLECTION |
 | nyc_executives | sleep_anxiety | STORY |
 | nyc_executives | sleep_anxiety | TAKEAWAY |
-| nyc_executives | sleep_anxiety | TEACHER_DOCTRINE |
 | nyc_executives | sleep_anxiety | THREAD |
 | nyc_executives | social_anxiety | COMPRESSION |
-| nyc_executives | social_anxiety | EXERCISE |
 | nyc_executives | social_anxiety | HOOK |
 | nyc_executives | social_anxiety | INTEGRATION |
 | nyc_executives | social_anxiety | PERMISSION |
@@ -734,10 +522,8 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | nyc_executives | social_anxiety | REFLECTION |
 | nyc_executives | social_anxiety | STORY |
 | nyc_executives | social_anxiety | TAKEAWAY |
-| nyc_executives | social_anxiety | TEACHER_DOCTRINE |
 | nyc_executives | social_anxiety | THREAD |
 | nyc_executives | somatic_healing | COMPRESSION |
-| nyc_executives | somatic_healing | EXERCISE |
 | nyc_executives | somatic_healing | HOOK |
 | nyc_executives | somatic_healing | INTEGRATION |
 | nyc_executives | somatic_healing | PERMISSION |
@@ -745,36 +531,5 @@ Each missing tuple means `atoms/<persona>/<topic>/<section_type>/CANONICAL.txt` 
 | nyc_executives | somatic_healing | REFLECTION |
 | nyc_executives | somatic_healing | STORY |
 | nyc_executives | somatic_healing | TAKEAWAY |
-| nyc_executives | somatic_healing | TEACHER_DOCTRINE |
 | nyc_executives | somatic_healing | THREAD |
-| tech_finance_burnout | anxiety | TEACHER_DOCTRINE |
-| tech_finance_burnout | boundaries | TEACHER_DOCTRINE |
-| tech_finance_burnout | burnout | TEACHER_DOCTRINE |
-| tech_finance_burnout | compassion_fatigue | TEACHER_DOCTRINE |
-| tech_finance_burnout | courage | TEACHER_DOCTRINE |
-| tech_finance_burnout | depression | TEACHER_DOCTRINE |
-| tech_finance_burnout | financial_anxiety | TEACHER_DOCTRINE |
-| tech_finance_burnout | financial_stress | TEACHER_DOCTRINE |
-| tech_finance_burnout | grief | TEACHER_DOCTRINE |
-| tech_finance_burnout | imposter_syndrome | TEACHER_DOCTRINE |
-| tech_finance_burnout | overthinking | TEACHER_DOCTRINE |
-| tech_finance_burnout | self_worth | TEACHER_DOCTRINE |
-| tech_finance_burnout | sleep_anxiety | TEACHER_DOCTRINE |
-| tech_finance_burnout | social_anxiety | TEACHER_DOCTRINE |
-| tech_finance_burnout | somatic_healing | TEACHER_DOCTRINE |
-| working_parents | anxiety | TEACHER_DOCTRINE |
-| working_parents | boundaries | TEACHER_DOCTRINE |
-| working_parents | burnout | TEACHER_DOCTRINE |
-| working_parents | compassion_fatigue | TEACHER_DOCTRINE |
-| working_parents | courage | TEACHER_DOCTRINE |
-| working_parents | depression | TEACHER_DOCTRINE |
-| working_parents | financial_anxiety | TEACHER_DOCTRINE |
-| working_parents | financial_stress | TEACHER_DOCTRINE |
-| working_parents | grief | TEACHER_DOCTRINE |
-| working_parents | imposter_syndrome | TEACHER_DOCTRINE |
-| working_parents | overthinking | TEACHER_DOCTRINE |
-| working_parents | self_worth | TEACHER_DOCTRINE |
-| working_parents | sleep_anxiety | TEACHER_DOCTRINE |
-| working_parents | social_anxiety | TEACHER_DOCTRINE |
-| working_parents | somatic_healing | TEACHER_DOCTRINE |
 

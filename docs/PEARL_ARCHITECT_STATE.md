@@ -350,3 +350,39 @@ Both architectural paths produce identical bestseller-grade output. PR #669 chos
 - Pearl_PM (PRIMARY, post-merge): backfill `ws_spec_739_threshold_reconciliation_20260428` row in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (status=completed; cite this PR + this cap entry); update `ws_spec_739_phase_2_persona_atom_authoring_20260427` `task` + `next_action` to reflect the 110-tuple scope shrink; mark `ws_spec_739_arch_min_variants_review_20260427` as resolved-by-SPEC-739-THRESHOLD-01; open `ws_spec_739_validator_teacher_banks_awareness_20260428` for the TEACHER_DOCTRINE structural followup (Pearl_Dev, no prereqs).
 - Pearl_Dev (FOLLOWUP, NOT this PR): TEACHER_DOCTRINE teacher_banks-awareness in `scripts/registry/validate_variant_coverage.py` `check_atoms` per item 1 above.
 - Pearl_Editor + Pearl_Writer (FOLLOWUP, NOT this PR): Phase 2 authoring against the 110 below-threshold tuples in `artifacts/qa/variant_coverage_gap_2026-04-28.md` once Pearl_PM updates the Phase 2 ws.
+
+### SPEC-739-VALIDATOR-MULTISOURCE-01 — Validator alt-source awareness (TEACHER_DOCTRINE + EXERCISE per spec §4.5); other 9 section types deferred (decision 2026-04-28)
+
+**Status:** **ratified** (operator decision 2026-04-28).
+
+**Context:** SPEC-739-THRESHOLD-01 cap entry surfaced TEACHER_DOCTRINE missing-file phantom gaps as a deferred Pearl_Dev followup. Investigation under `ws_spec_739_validator_teacher_banks_awareness_20260428` confirmed that `scripts/registry/validate_variant_coverage.py` measured only ONE of the spec-canonical content sources for atom resolution. `specs/PHOENIX_V4_5_WRITER_SPEC.md` §4.5 declares EXERCISE has THREE sources: `atoms/<persona>/<topic>/EXERCISE/CANONICAL.txt` → `teacher_banks/<teacher>/approved_atoms/EXERCISE/*.yaml` → `SOURCE_OF_TRUTH/practice_library/store/practice_items.jsonl`. TEACHER_DOCTRINE has zero `atoms/<persona>/<topic>/TEACHER_DOCTRINE/CANONICAL.txt` files repo-wide by design — the pipeline pulls TEACHER_DOCTRINE from `teacher_banks/<teacher>/doctrine/` (verified via `phoenix_v4/planning/injection_resolver.py` runtime reads + `phoenix_v4/rendering/prose_resolver.py` Stage-6 docstring). Empirical evidence shows the same multi-source pattern in pipeline runtime for STORY/HOOK/REFLECTION/INTEGRATION/COMPRESSION/PIVOT/PERMISSION/TAKEAWAY/THREAD via `teacher_banks/<teacher>/approved_atoms/<TYPE>/` (200 atoms per type per teacher across 13 teachers), but the spec only formalizes it for EXERCISE.
+
+**Decision:** Implement validator awareness for the **two spec-codified cases** (TEACHER_DOCTRINE via `teacher_banks/<teacher>/doctrine/`; EXERCISE per spec §4.5 three-source rule). **Defer** the other 9 section types as a separate Pearl_Architect routing question — extending validator awareness there is *pipeline-canonical* via `prose_resolver.py` but *spec-uncodified*, and broadening validator semantics without spec authority would be drift.
+
+**Effect on gap report (verified empirically against `origin/main` at e0dd7c08ef):**
+
+| Metric | BEFORE (e0dd7c08ef) | AFTER (this PR) | Delta |
+|---|---:|---:|---|
+| atom_passed | 1,682 | 1,921 | +239 |
+| - via persona-atom canonical | 1,682 | 1,682 | unchanged |
+| - via alt source: `teacher_banks/doctrine` | 0 | 210 | +210 (TEACHER_DOCTRINE phantom gaps eliminated) |
+| - via alt source: `teacher_banks/approved_atoms/EXERCISE` | 0 | 29 | +29 (EXERCISE phantom gaps eliminated) |
+| atom_gaps total | 628 | 389 | −239 |
+| - below_threshold | 110 | 110 | unchanged (real Phase 2 backlog) |
+| - missing_file | 518 | 279 | −239 (deferred 9 section types remain at ~29-32 each) |
+| **total gaps reported** | **691** | **452** | **−239 (−35%)** |
+
+**mwp anchor:** BEFORE 22 (7 below_threshold + 15 missing_file all TEACHER_DOCTRINE). AFTER 7 (7 below_threshold + 0 missing_file) — every mwp missing-file tuple was TEACHER_DOCTRINE; all resolve via `teacher_banks/doctrine`.
+
+**Scope-discipline anchor:** A regression test (`test_other_section_types_remain_persona_atom_only_per_scope`) explicitly seeds `teacher_banks/<teacher>/approved_atoms/<TYPE>/` for HOOK / STORY / REFLECTION / INTEGRATION / COMPRESSION / PIVOT / PERMISSION / TAKEAWAY / THREAD and asserts the validator does NOT silently broaden multi-source awareness to those types. Future Pearl_Architect routing decision required to extend (or hold).
+
+**Anti-drift check:** Implementing the spec's explicit §4.5 EXERCISE three-source rule + TEACHER_DOCTRINE's by-design teacher_banks resolution is anti-drift (validator now matches what spec + pipeline already declare). Extending to the other 9 section types without spec authority WOULD be drift; correctly deferred.
+
+**Open routing question (NOT decided this PR):** Should validator multi-source awareness extend to STORY/HOOK/REFLECTION/INTEGRATION/COMPRESSION/PIVOT/PERMISSION/TAKEAWAY/THREAD via `teacher_banks/<teacher>/approved_atoms/<TYPE>/` per `prose_resolver.py` pipeline-canonical Stage-6 sources? Pros: gap report becomes pipeline-accurate; remaining 279 missing_file gaps resolve. Cons: dilutes the persona-voiced authoring requirement (spec §3.1 R-1 mandates persona-specific variants at production floor); broadens validator semantics beyond spec authority. Pearl_Architect to rule when scheduled.
+
+**Resolves:** `ws_spec_739_validator_teacher_banks_awareness_20260428` (proposed by SPEC-739-THRESHOLD-01 cap entry as a Pearl_Dev followup for the 518 missing_file tuples). Decision: **partial resolution** — TEACHER_DOCTRINE + EXERCISE done; other 9 section types deferred as named open routing question above. Pearl_PM should mark this ws as **completed** when updating the workstream TSV (the 279 still-missing tuples are not this ws's responsibility — they're scope-deferred to the open routing question's eventual ws).
+
+**Handoffs:**
+- Pearl_PM (post-merge): mark `ws_spec_739_validator_teacher_banks_awareness_20260428` as **completed** in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (cite this PR + this cap entry); update the proj `next_action` to reflect that the gap-report numbers are now `691 → 452 (−35%)` for the canonical reference.
+- Pearl_Architect (FUTURE, when scheduled): rule on extending validator multi-source awareness to the other 9 section types per the open routing question above. Open `ws_spec_739_validator_alt_source_extension_<DATE>` if the answer is yes.
+- Pearl_Editor + Pearl_Writer (Phase 2 restart, separate session): the corrected gap report at `artifacts/qa/variant_coverage_gap_2026-04-28.md` is now pipeline-accurate for TEACHER_DOCTRINE + EXERCISE; remaining 110 below_threshold tuples are the real Phase 2 backlog. Hero persona = `millennial_women_professionals` (7 mwp gaps total post-fix).

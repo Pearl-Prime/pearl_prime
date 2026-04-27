@@ -58,6 +58,10 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_REGISTRY_DIR = REPO_ROOT / "registry"
 DEFAULT_ATOMS_DIR = REPO_ROOT / "atoms"
+DEFAULT_TEACHER_BANKS_DIR = REPO_ROOT / "SOURCE_OF_TRUTH" / "teacher_banks"
+DEFAULT_PRACTICE_LIBRARY_PATH = (
+    REPO_ROOT / "SOURCE_OF_TRUTH" / "practice_library" / "store" / "practice_items.jsonl"
+)
 DEFAULT_REPORT_PATH = (
     REPO_ROOT
     / "artifacts"
@@ -118,10 +122,109 @@ class CoverageResult:
     registry_gaps: list[RegistryGap] = field(default_factory=list)
     atom_passed: int = 0
     atom_gaps: list[AtomGap] = field(default_factory=list)
+    # Per ws_spec_739_validator_teacher_banks_awareness_20260428: tuples that pass via
+    # alternative content sources (teacher_banks/<teacher>/doctrine for TEACHER_DOCTRINE;
+    # teacher_banks/<teacher>/approved_atoms/EXERCISE or practice_library for EXERCISE per
+    # specs/PHOENIX_V4_5_WRITER_SPEC.md §4.5 three-source rule). Counts are mapped by
+    # source label ("teacher_banks/doctrine", "teacher_banks/approved_atoms/EXERCISE",
+    # "practice_library") and surfaced in render_report so future readers see the
+    # difference between persona-atom passing and alternative-source coverage.
+    atom_passed_via_alt_source: dict[str, int] = field(default_factory=dict)
 
     @property
     def total_gaps(self) -> int:
         return len(self.registry_gaps) + len(self.atom_gaps)
+
+
+# --- Alternative-source resolvers (ws_spec_739_validator_teacher_banks_awareness_20260428) ---
+#
+# These functions answer "is this section_type covered by a non-persona-atom source?"
+# Pipeline-canonical resolution paths are documented in:
+#   - specs/PHOENIX_V4_5_WRITER_SPEC.md §4.5 (EXERCISE three-source rule — explicit spec authority)
+#   - phoenix_v4/rendering/prose_resolver.py module docstring (Stage 6 sources)
+#   - phoenix_v4/planning/injection_resolver.py (teacher_banks/<tid>/approved_atoms/{STORY,EXERCISE} reads)
+#
+# In-scope for this PR: TEACHER_DOCTRINE + EXERCISE only. Other section types use
+# persona-atom-only validation per scope discipline; pipeline-canonical multi-source
+# for those is a separate Pearl_Architect routing decision.
+
+
+def _has_yaml_in_dir(directory: Path) -> bool:
+    """Return True if the directory contains at least one .yaml or .yml file."""
+    if not directory.is_dir():
+        return False
+    for path in directory.iterdir():
+        if path.is_file() and path.suffix in (".yaml", ".yml"):
+            return True
+    return False
+
+
+def _teacher_banks_has_doctrine(teacher_banks_dir: Path) -> bool:
+    """TEACHER_DOCTRINE coverage: any teacher with doctrine YAML satisfies any persona×topic.
+
+    The pipeline picks a teacher per book at runtime and pulls TEACHER_DOCTRINE from
+    teacher_banks/<teacher_id>/doctrine/. The validator therefore treats the slot as
+    covered as long as at least one teacher has doctrine — pipeline can route any
+    persona×topic to that teacher.
+    """
+    if not teacher_banks_dir.is_dir():
+        return False
+    for teacher_dir in teacher_banks_dir.iterdir():
+        if not teacher_dir.is_dir():
+            continue
+        if _has_yaml_in_dir(teacher_dir / "doctrine"):
+            return True
+    return False
+
+
+def _teacher_banks_has_approved_atoms(teacher_banks_dir: Path, section_type: str) -> bool:
+    """approved_atoms/<section_type>/*.yaml across teachers (e.g. EXERCISE per spec §4.5)."""
+    if not teacher_banks_dir.is_dir():
+        return False
+    for teacher_dir in teacher_banks_dir.iterdir():
+        if not teacher_dir.is_dir():
+            continue
+        if _has_yaml_in_dir(teacher_dir / "approved_atoms" / section_type):
+            return True
+    return False
+
+
+def _practice_library_has_items(practice_library_path: Path) -> bool:
+    """SOURCE_OF_TRUTH/practice_library/store/practice_items.jsonl — EXERCISE backstop per spec §4.5."""
+    if not practice_library_path.is_file():
+        return False
+    try:
+        with practice_library_path.open() as fh:
+            for line in fh:
+                if line.strip():
+                    return True
+    except OSError:
+        return False
+    return False
+
+
+def _resolve_alternative_source(
+    section_type: str,
+    teacher_banks_dir: Path,
+    practice_library_path: Path,
+) -> str | None:
+    """Return alt-source label if the section_type is covered by a non-persona-atom source.
+
+    Scope per ws_spec_739_validator_teacher_banks_awareness_20260428:
+      - TEACHER_DOCTRINE → teacher_banks/<teacher>/doctrine/
+      - EXERCISE → teacher_banks/<teacher>/approved_atoms/EXERCISE/ OR practice_library
+      - All other section types → None (deliberate scope discipline; pipeline-canonical
+        multi-source for these is deferred to a separate Pearl_Architect routing decision)
+    """
+    if section_type == "TEACHER_DOCTRINE":
+        if _teacher_banks_has_doctrine(teacher_banks_dir):
+            return "teacher_banks/doctrine"
+    elif section_type == "EXERCISE":
+        if _teacher_banks_has_approved_atoms(teacher_banks_dir, "EXERCISE"):
+            return "teacher_banks/approved_atoms/EXERCISE"
+        if _practice_library_has_items(practice_library_path):
+            return "practice_library"
+    return None
 
 
 def discover_personas(atoms_dir: Path) -> list[str]:
@@ -192,30 +295,47 @@ def check_atoms(
     topics: list[str],
     section_types: tuple[str, ...],
     min_variants: int,
-) -> tuple[int, list[AtomGap]]:
+    teacher_banks_dir: Path | None = None,
+    practice_library_path: Path | None = None,
+) -> tuple[int, list[AtomGap], dict[str, int]]:
+    """Walk persona × topic × section_type tuples and classify each as passing or gap.
+
+    Resolution order per tuple:
+      1. atoms/<persona>/<topic>/<section_type>/CANONICAL.txt with ≥ min_variants variants
+         → passing via canonical persona-atom path
+      2. Else if section_type has a registered alternative source (TEACHER_DOCTRINE,
+         EXERCISE per ws_spec_739_validator_teacher_banks_awareness_20260428 scope)
+         AND that alt source has content → passing via alternative source
+      3. Else if canonical exists but is below threshold → gap (reason="below_threshold")
+      4. Else → gap (reason="missing_file")
+
+    Returns:
+        (total_passed, gaps, alt_source_counts)
+        alt_source_counts maps the alt-source label (e.g. "teacher_banks/doctrine")
+        to the number of tuples that pass via that source. Used by render_report.
+    """
+    teacher_banks_dir = teacher_banks_dir or DEFAULT_TEACHER_BANKS_DIR
+    practice_library_path = practice_library_path or DEFAULT_PRACTICE_LIBRARY_PATH
+
     passed = 0
     gaps: list[AtomGap] = []
+    alt_source_counts: dict[str, int] = {}
+
     for persona in personas:
         for topic in topics:
             base = atoms_dir / persona / topic
             for section_type in section_types:
                 canonical = base / section_type / "CANONICAL.txt"
-                if not canonical.is_file():
-                    gaps.append(
-                        AtomGap(
-                            persona=persona,
-                            topic=topic,
-                            section_type=section_type,
-                            have=0,
-                            need=min_variants,
-                            reason="missing_file",
-                        )
-                    )
-                    continue
-                count = count_atom_variants(canonical)
-                if count >= min_variants:
-                    passed += 1
-                else:
+
+                # Path 1: canonical persona-atom path with ≥ threshold
+                if canonical.is_file():
+                    count = count_atom_variants(canonical)
+                    if count >= min_variants:
+                        passed += 1
+                        continue
+                    # Below threshold — production-floor authoring not met. Still flag
+                    # as a gap even if alt sources cover the slot, because R-1 §3.1
+                    # requires persona-voiced atoms at the production floor.
                     gaps.append(
                         AtomGap(
                             persona=persona,
@@ -226,7 +346,29 @@ def check_atoms(
                             reason="below_threshold",
                         )
                     )
-    return passed, gaps
+                    continue
+
+                # Path 2: canonical missing — check alternative sources
+                alt_label = _resolve_alternative_source(
+                    section_type, teacher_banks_dir, practice_library_path
+                )
+                if alt_label is not None:
+                    passed += 1
+                    alt_source_counts[alt_label] = alt_source_counts.get(alt_label, 0) + 1
+                    continue
+
+                # Path 3: truly missing
+                gaps.append(
+                    AtomGap(
+                        persona=persona,
+                        topic=topic,
+                        section_type=section_type,
+                        have=0,
+                        need=min_variants,
+                        reason="missing_file",
+                    )
+                )
+    return passed, gaps, alt_source_counts
 
 
 def render_report(result: CoverageResult, min_variants: int, today: str | None = None) -> str:
@@ -250,9 +392,32 @@ def render_report(result: CoverageResult, min_variants: int, today: str | None =
     lines.append(
         f"- atom (persona × topic × section_type) tuples passing: **{result.atom_passed}**"
     )
+    if result.atom_passed_via_alt_source:
+        total_alt = sum(result.atom_passed_via_alt_source.values())
+        lines.append(
+            f"  - via persona-atom canonical: **{result.atom_passed - total_alt}**"
+        )
+        lines.append(f"  - via alternative source: **{total_alt}**")
+        for source_label, count in sorted(result.atom_passed_via_alt_source.items()):
+            lines.append(f"    - `{source_label}`: {count}")
     lines.append(f"- atom tuples failing: **{len(result.atom_gaps)}**")
     lines.append(f"- total gaps: **{result.total_gaps}**")
     lines.append("")
+    if result.atom_passed_via_alt_source:
+        lines.append(
+            "_Alternative-source coverage_ — `TEACHER_DOCTRINE` resolves from "
+            "`SOURCE_OF_TRUTH/teacher_banks/<teacher>/doctrine/` (the pipeline picks "
+            "a teacher per book at runtime per `phoenix_v4/planning/injection_resolver.py`). "
+            "`EXERCISE` resolves per `specs/PHOENIX_V4_5_WRITER_SPEC.md` §4.5 three-source "
+            "rule: `atoms/<persona>/<topic>/EXERCISE/CANONICAL.txt` → "
+            "`teacher_banks/<teacher>/approved_atoms/EXERCISE/*.yaml` → "
+            "`SOURCE_OF_TRUTH/practice_library/store/practice_items.jsonl`. Other section "
+            "types remain persona-atom-only per ws_spec_739_validator_teacher_banks_awareness_20260428 "
+            "scope discipline; multi-source awareness for "
+            "`HOOK / STORY / REFLECTION / INTEGRATION / COMPRESSION / PIVOT / PERMISSION / TAKEAWAY / THREAD` "
+            "is a separate Pearl_Architect routing decision tracked in `docs/PEARL_ARCHITECT_STATE.md`."
+        )
+        lines.append("")
 
     lines.append("## Registry gaps")
     lines.append("")
@@ -398,7 +563,7 @@ def main(argv: list[str] | None = None) -> int:
     if not args.skip_atoms:
         personas = args.persona or discover_personas(args.atoms_dir)
         topics = args.topic or discover_topics(args.registry_dir)
-        passed, gaps = check_atoms(
+        passed, gaps, alt_source_counts = check_atoms(
             args.atoms_dir,
             personas,
             topics,
@@ -407,6 +572,7 @@ def main(argv: list[str] | None = None) -> int:
         )
         result.atom_passed = passed
         result.atom_gaps = gaps
+        result.atom_passed_via_alt_source = alt_source_counts
 
     print(
         f"variant-coverage: registry passed={result.registry_passed} "
