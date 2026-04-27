@@ -1,6 +1,6 @@
 # Session Unity Protocol
 
-Last updated: 2026-04-01
+Last updated: 2026-04-27
 Owner: Pearl_PM / Pearl_Architect
 
 ## Purpose
@@ -120,3 +120,11 @@ NEXT_ACTION:    <what the next agent should do>
 | PM state and priorities | docs/PEARL_PM_STATE.md |
 | Navigation map | docs/DOCS_INDEX.md |
 | Ownership boundaries | docs/OWNERSHIP_MATRIX.md |
+
+---
+
+## Universal router prompt (prompt-building chats)
+
+Use this in chats whose job is to **build the next agent's startup prompt** rather than do the work themselves. The router reads the coordination TSVs and authority docs, then returns one paste-ready startup prompt for the next agent chat — it does not solve the task.
+
+**Canonical full text:** [./agent_brief.txt](./agent_brief.txt) — paste-ready, single source of truth. Do not duplicate the template here; edit `agent_brief.txt` and let this section continue to point at it to prevent drift.
