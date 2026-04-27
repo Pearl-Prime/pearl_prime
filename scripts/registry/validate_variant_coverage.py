@@ -2,10 +2,14 @@
 """Spec #739 Phase 1 — variant coverage validator.
 
 Walks two coverage axes that spec ``specs/SPEC_5_VARIANTS_AND_BESTSELLER_BEAT_WIRING.md``
-declares load-bearing for the 5-variants-per-section rule:
+declares load-bearing for the variant-coverage rule (production floor = 3 per
+SPEC-739-THRESHOLD-01 cap entry, reconciled 2026-04-28 from the original ≥5;
+the spec retains its historical filename for stable cross-references):
 
 1. Topic registry side — ``registry/<topic>.yaml``.
-   Every section declares ``min_variants_required`` (the universal generator emits 5).
+   Every section declares ``min_variants_required`` (the universal generator
+   emits 5; per-section overrides above the production floor of 3 are honored
+   verbatim — the validator never lowers a per-section requirement).
    This validator asserts ``len(variants) >= min_variants_required`` per section.
 
 2. Persona atom side — ``atoms/<persona>/<topic>/<section_type>/CANONICAL.txt``.
@@ -79,7 +83,13 @@ VARIANT_HEADER_RE = re.compile(
     r"^(?:##\s+[A-Z_]+\s+v\d+|---\s+variant:\s+(?:[A-Z_]+\s+)?v\d+)",
     re.MULTILINE,
 )
-DEFAULT_MIN_VARIANTS = 5
+# Production floor per SPEC-739-THRESHOLD-01 cap entry (2026-04-28). Matches the
+# curated authoring tradition established by PR #178 commit 4725390b29 and
+# sibling PRs #174/#176/#177 — 3 high-quality persona-voiced variants per slot.
+# 5 remains an optional ceiling: sections may declare `min_variants_required: 5`
+# in their registry YAML to enforce the higher target; check_registry honors that
+# override at line 153 (`section.get("min_variants_required") or min_variants`).
+DEFAULT_MIN_VARIANTS = 3
 
 
 @dataclass
@@ -340,7 +350,11 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--min-variants", default=DEFAULT_MIN_VARIANTS, type=int,
-        help="Minimum variants per section/tuple. Spec §3.1 requires 5.",
+        help=(
+            "Minimum variants per section/tuple. Production floor = 3 (spec §3.1, "
+            "reconciled 2026-04-28 from ≥5 per SPEC-739-THRESHOLD-01 cap entry). "
+            "Per-section `min_variants_required` overrides upward when declared."
+        ),
     )
     parser.add_argument(
         "--strict", action="store_true",

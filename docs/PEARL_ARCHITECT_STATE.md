@@ -304,3 +304,49 @@ Both architectural paths produce identical bestseller-grade output. PR #669 chos
 - Pearl_PM: no ws state-change required (path_b ws never opened).
 
 **Optional follow-up (NOT done in this PR; OQ-3 from Pearl_Dev report):** `enrichment_select.py:1216` could emit `story_schedule` as a top-level audit JSON key (currently only present per-slot via `source_id`). ~5-line patch. Not required for functionality; defer unless an audit consumer needs the top-level handle.
+
+### SPEC-739-THRESHOLD-01 — Variant coverage threshold = 3 floor; 5 = optional expansion (decision 2026-04-28)
+
+**Status:** **ratified** (operator decision 2026-04-28).
+
+**Context:** PR #178 (commit `4725390b29bf5cee81874c811d4f86ad627952fb`, merged 2026-04-01) and sibling PRs #174 (healthcare_rns + first_responders, 124 files), #176 (tech_finance_burnout + gen_alpha_students, 716 files), #177 (gen_x_sandwich + working_parents, 124 files), #178 (entrepreneurs + millennial_women_professionals, 128 files) established a 3-variant persona-voiced authoring tradition across 8 personas × 16 topics × 4 slots ≈ 1,092 files between 2026-04-01 and 2026-04-02 — replacing auto-generated 20-variant template content (originally seeded by PR #138, 588 files across 12 personas) with curated 3-variant slots in the `--- variant: vNN` format. Spec #739 (`specs/SPEC_5_VARIANTS_AND_BESTSELLER_BEAT_WIRING.md`, landed 2026-04-27 in PR #743) declared a ≥5-variant gate without reconciling against this established tradition. Phase 1 validator (PR #743) + Phase 1.5 format fix (PR #746) faithfully reported the contradiction as **1,168 "gaps"** in `artifacts/qa/variant_coverage_gap_2026-04-27.md` (63 registry sections + 1,105 atom tuples). On inspection these were design-tradition artifacts, not coverage gaps — 477 of the atom tuples (have=3: 454 + have=4: 23) represented curated production content already meeting the established floor.
+
+**Framing nuance (recorded so future-you doesn't redo the analysis):** The original task brief described "Sibling PRs #138/#174/#176/#177 followed the same 3-variant authoring tradition." PR #138's commit message actually says "All 588 files created with 20 variants each" — it was the *auto-generated baseline* that PRs #174/#176/#177/#178 *replaced* with 3-variant curated content for 8 personas. The remaining 4 personas (educators, gen_z_professionals, corporate_managers, healthcare_rns gap-fill) are largely still on the 20-variant baseline from PR #138. The "3 = production floor" framing holds because (a) the curated 3-variant content is the lowest count of authored production-grade material and (b) personas still on the 20-variant baseline are 20 ≥ 3 = comfortably above the floor. Lowering the floor to 3 unblocks the 8 rewritten personas while leaving headroom for the 4 not-yet-rewritten personas to be rewritten at 3 in the future without failing the gate.
+
+**Decision:** Lower spec #739 threshold to 3. Frame as production floor, not quality ceiling. Preserve 5 as optional future expansion target via per-section `min_variants_required: 5` override in `registry/<topic>.yaml` (already in use at `registry/grief.yaml` chapter_01 section_10 INTEGRATION + chapter_12 section_07 INTEGRATION; the validator's `check_registry` line 153 honors per-section overrides verbatim — `need = int(section.get("min_variants_required") or min_variants)`). The 477-tuple swing in the gap report is the load-bearing evidence that the threshold (not the authoring backlog) was the dominant variable in the contradiction.
+
+**Verified gap-count delta (this PR's regenerated `artifacts/qa/variant_coverage_gap_2026-04-28.md`):**
+
+| Axis | BEFORE (threshold ≥5) | AFTER (threshold ≥3) | Delta |
+|---|---:|---:|---|
+| Registry sections passing | 1,287 | 1,287 | unchanged (per-section overrides preserve authoring intent) |
+| Registry sections failing | 63 | 63 | unchanged (all are have=1 grief sections that fail at need=3 too) |
+| Atom tuples passing | 1,205 | 1,682 | +477 (have=3: 454 + have=4: 23) — the curated authoring tradition |
+| Atom tuples failing — below_threshold | 587 | 110 | -477 (have=0: 10 + have=1: 97 + have=2: 3 remain as real Phase 2 backlog) |
+| Atom tuples failing — missing_file | 518 | 518 | unchanged (TEACHER_DOCTRINE-dominated; structural — see followup below) |
+| **Total gaps reported** | **1,168** | **691** | **-477 (-41% raw)** |
+| Real gaps (excluding scope-deferred missing_file) | 650 | 173 | -477 (-73%) |
+| Threshold-axis gaps (excluding missing_file + grief have=1 registry rows) | 587 | 110 | -477 (-81%) |
+
+**mwp-specific delta (anchor sample):** BEFORE 89 atom gaps (74 below_threshold = 67 have=3 + 7 have=1; 15 missing_file TEACHER_DOCTRINE). AFTER 22 atom gaps (7 have=1 below_threshold + 15 missing_file TEACHER_DOCTRINE). The 67 have=3 tuples flip from "gap" to "passing" — exactly what the threshold flip predicts.
+
+**Anti-drift check:** Aligning with the established 2026-04-01 authoring tradition is anti-drift. Preserving the spec at ≥5 would have been the drift — it would have either (a) pressured Phase 2 authoring sessions to overwrite curated 3-variant persona-voiced content with auto-generated 5-variant slop, or (b) left the validator perpetually red on intentional production content. The spec retains its historical filename for stable cross-references; the threshold value is now the load-bearing field, not the filename.
+
+**Out of scope for this PR (deferred handoffs):**
+
+1. **TEACHER_DOCTRINE missing-file gaps (518 tuples repo-wide; 15 mwp-specific).** The validator currently flags `atoms/<persona>/<topic>/TEACHER_DOCTRINE/CANONICAL.txt` as missing whenever the file does not exist. By design, TEACHER_DOCTRINE content lives in `teacher_banks/<teacher>/doctrine/` rather than the persona × topic atom tree (the doctrine is teacher-keyed, not persona-keyed; see `docs/SYSTEMS_V4.md` teacher mode and `SOURCE_OF_TRUTH/teacher_banks/`). The validator flagging is structural, not a Phase 2 authoring task. **Followup ws (NOT spawned by this PR):** Pearl_Dev to add teacher_banks-awareness to `check_atoms` so TEACHER_DOCTRINE either resolves to the teacher bank's doctrine path or is excluded from the (persona × topic × section_type) axis. Pearl_PM to open `ws_spec_739_validator_teacher_banks_awareness_20260428` (or rename per Pearl_PM convention) when this work is scheduled. Until then, the 518 missing_file gaps remain in the report as known structural artifacts.
+
+2. **Spec filename rename (`SPEC_5_VARIANTS_AND_BESTSELLER_BEAT_WIRING.md` → `SPEC_3_VARIANTS_AND_BESTSELLER_BEAT_WIRING.md`).** Touches too many cross-references (handoff docs, ws rows, PR descriptions, this cap entry). Spec §1 now carries a one-line historical-filename note acknowledging the threshold was reconciled while the filename was preserved for stable references. Filename rename is NOT scheduled.
+
+3. **5-as-optional-expansion path scheduling.** This cap entry confirms the 5-ceiling is available via per-section `min_variants_required: 5` override (already used at 2 grief INTEGRATION sections). When/whether to opt more sections into the 5-ceiling is a separate decision per topic/persona; not scheduled by this entry.
+
+4. **Phase 2 authoring scope-shrink execution.** With the threshold reconciled, `ws_spec_739_phase_2_persona_atom_authoring_20260427`'s scope drops from "~4,200-atom ceiling" to "110 below-threshold tuples" (real Phase 2 backlog). Pearl_PM to update the ws's `task` and `next_action` columns post-PR-merge to reflect the new scope. NOT done in this PR.
+
+5. **Format reconciliation `## TYPE vNN` vs `--- variant: vNN`.** Phase 1.5 (PR #746) made the validator format-agnostic. Reconciling the two header conventions to a single canonical form is a separate Pearl_Architect routing decision; untouched by this PR.
+
+**Resolves:** `ws_spec_739_arch_min_variants_review_20260427` (the proposed Pearl_Architect ws asking "lift `registry/grief.yaml` `min_variants_required: 3` → 5 vs accept per-section minimum?"). Decision: **accept the per-section minimum** as legitimate. The registry-side per-section overrides (61 grief sections at need=3, 29 grief sections at need=5) are intentional authoring decisions, not "set assuming 5" drift; they remain unchanged. Pearl_PM should mark this ws as **resolved-by SPEC-739-THRESHOLD-01** when updating the workstream TSV.
+
+**Handoffs:**
+- Pearl_PM (PRIMARY, post-merge): backfill `ws_spec_739_threshold_reconciliation_20260428` row in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (status=completed; cite this PR + this cap entry); update `ws_spec_739_phase_2_persona_atom_authoring_20260427` `task` + `next_action` to reflect the 110-tuple scope shrink; mark `ws_spec_739_arch_min_variants_review_20260427` as resolved-by-SPEC-739-THRESHOLD-01; open `ws_spec_739_validator_teacher_banks_awareness_20260428` for the TEACHER_DOCTRINE structural followup (Pearl_Dev, no prereqs).
+- Pearl_Dev (FOLLOWUP, NOT this PR): TEACHER_DOCTRINE teacher_banks-awareness in `scripts/registry/validate_variant_coverage.py` `check_atoms` per item 1 above.
+- Pearl_Editor + Pearl_Writer (FOLLOWUP, NOT this PR): Phase 2 authoring against the 110 below-threshold tuples in `artifacts/qa/variant_coverage_gap_2026-04-28.md` once Pearl_PM updates the Phase 2 ws.

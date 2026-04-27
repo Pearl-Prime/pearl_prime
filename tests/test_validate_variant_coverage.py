@@ -12,6 +12,7 @@ import pytest
 import yaml
 
 from scripts.registry.validate_variant_coverage import (
+    DEFAULT_MIN_VARIANTS,
     REQUIRED_SECTION_TYPES,
     AtomGap,
     RegistryGap,
@@ -181,6 +182,20 @@ def test_required_section_types_cover_grid_and_beats() -> None:
     assert grid <= set(REQUIRED_SECTION_TYPES)
     assert beats <= set(REQUIRED_SECTION_TYPES)
     assert len(REQUIRED_SECTION_TYPES) == 11
+
+
+def test_default_min_variants_is_three_per_spec_739_threshold_01() -> None:
+    """Production floor = 3 per SPEC-739-THRESHOLD-01 cap entry (2026-04-28).
+
+    Reconciled from ≥5 to ≥3 to match the curated authoring tradition
+    established by PR #178 (commit 4725390b29) and sibling PRs #174/#176/#177
+    which replaced auto-generated 20-variant template content with 3
+    high-quality persona-voiced variants per slot. 5 remains an optional
+    ceiling: registry sections may declare ``min_variants_required: 5`` to
+    enforce the higher target, and the validator's per-section override path
+    at ``check_registry`` line 153 honors that without lowering it to 3.
+    """
+    assert DEFAULT_MIN_VARIANTS == 3
 
 
 def test_render_report_contains_summary_and_gap_tables() -> None:
