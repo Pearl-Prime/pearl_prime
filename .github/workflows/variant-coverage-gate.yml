@@ -1,0 +1,59 @@
+name: Variant coverage gate
+
+# Spec #739 Phase 1 — variant coverage gate (warn-only).
+#
+# Walks registry/<topic>.yaml + atoms/<persona>/<topic>/<section_type>/CANONICAL.txt
+# and asserts >=5 variants per section per spec
+# specs/SPEC_5_VARIANTS_AND_BESTSELLER_BEAT_WIRING.md §3.1.
+#
+# Phase 1 ships warn-only per spec §6 risk row 2: this job uploads the
+# coverage report as an artifact but does not fail the PR. Phase 2 atom
+# authoring will close the inventory; once gaps reach zero, this workflow
+# can flip to --strict (exit non-zero on gap).
+
+on:
+  pull_request:
+    paths:
+      - 'registry/**/*.yaml'
+      - 'atoms/**/CANONICAL.txt'
+      - 'scripts/registry/validate_variant_coverage.py'
+      - 'tests/test_validate_variant_coverage.py'
+      - '.github/workflows/variant-coverage-gate.yml'
+  workflow_dispatch:
+
+jobs:
+  variant-coverage:
+    name: Variant coverage gate (>=5 per section, warn-only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyyaml pytest
+
+      - name: Run validator unit tests
+        run: PYTHONPATH=. python3 -m pytest tests/test_validate_variant_coverage.py -v
+
+      - name: Run variant coverage validator (warn-only)
+        run: |
+          mkdir -p artifacts/qa
+          PYTHONPATH=. python3 scripts/registry/validate_variant_coverage.py \
+            --report-out "artifacts/qa/variant_coverage_gap_$(date -u +%Y-%m-%d).md"
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: variant-coverage-report
+          path: artifacts/qa/variant_coverage_gap_*.md
+          if-no-files-found: warn
+          retention-days: 30
