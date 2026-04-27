@@ -9,13 +9,13 @@ Phase 1 ships warn-only per spec §6 risk row 2. Strict mode (CI fail on gap) is
 - minimum variants per section: **3**
 - registry sections passing: **1287**
 - registry sections failing: **63**
-- atom (persona × topic × section_type) tuples passing: **1928**
-  - via persona-atom canonical: **1689**
+- atom (persona × topic × section_type) tuples passing: **1929**
+  - via persona-atom canonical: **1690**
   - via alternative source: **239**
     - `teacher_banks/approved_atoms/EXERCISE`: 29
     - `teacher_banks/doctrine`: 210
-- atom tuples failing: **382**
-- total gaps: **445**
+- atom tuples failing: **381**
+- total gaps: **444**
 
 _Alternative-source coverage_ — `TEACHER_DOCTRINE` resolves from `SOURCE_OF_TRUTH/teacher_banks/<teacher>/doctrine/` (the pipeline picks a teacher per book at runtime per `phoenix_v4/planning/injection_resolver.py`). `EXERCISE` resolves per `specs/PHOENIX_V4_5_WRITER_SPEC.md` §4.5 three-source rule: `atoms/<persona>/<topic>/EXERCISE/CANONICAL.txt` → `teacher_banks/<teacher>/approved_atoms/EXERCISE/*.yaml` → `SOURCE_OF_TRUTH/practice_library/store/practice_items.jsonl`. Other section types remain persona-atom-only per ws_spec_739_validator_teacher_banks_awareness_20260428 scope discipline; multi-source awareness for `HOOK / STORY / REFLECTION / INTEGRATION / COMPRESSION / PIVOT / PERMISSION / TAKEAWAY / THREAD` is a separate Pearl_Architect routing decision tracked in `docs/PEARL_ARCHITECT_STATE.md`.
 
@@ -104,7 +104,6 @@ _Alternative-source coverage_ — `TEACHER_DOCTRINE` resolves from `SOURCE_OF_TR
 | entrepreneurs | sleep_anxiety | COMPRESSION | 1 | 3 |
 | entrepreneurs | social_anxiety | COMPRESSION | 1 | 3 |
 | entrepreneurs | somatic_healing | COMPRESSION | 1 | 3 |
-| first_responders | compassion_fatigue | COMPRESSION | 1 | 3 |
 | gen_alpha_students | burnout | COMPRESSION | 1 | 3 |
 | gen_alpha_students | financial_anxiety | COMPRESSION | 1 | 3 |
 | gen_alpha_students | imposter_syndrome | COMPRESSION | 1 | 3 |
