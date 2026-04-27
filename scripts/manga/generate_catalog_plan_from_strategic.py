@@ -51,8 +51,14 @@ VALID_GENRES = (
     "mecha",
 )
 
-# Per spec D-18: 5 locales (added ko_KR for render+hold)
-VALID_LOCALES = ("en_US", "ja_JP", "zh_TW", "zh_CN", "ko_KR")
+# Per spec D-18: 5 locales (added ko_KR for render+hold).
+# Per operator 2026-04-27: extended to 8 markets — added es_LA (Latin America),
+# hu_HU (Hungary), zh_HK (Hong Kong). Per-locale strategic plans are scaffolds
+# until Pearl_Research deep-research authors fill the format-mix + revenue tables.
+VALID_LOCALES = (
+    "en_US", "ja_JP", "zh_TW", "zh_CN", "ko_KR",
+    "es_LA", "hu_HU", "zh_HK",
+)
 
 # Mapping from GENRE_PORTFOLIO_PLAN's natural-language genre column headings to
 # our 15-slug canonical allow-list. The strategic plan uses display names like

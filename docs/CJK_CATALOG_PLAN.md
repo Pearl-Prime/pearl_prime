@@ -63,7 +63,10 @@ US illustrated self-help is **text-first** (Brené Brown, James Clear) or **West
 | **KR** | Vertical-scroll webtoon, full color | Korean beauty aesthetic, pastel + vibrant | Naver Webtoon, LINE Global, Kakao |
 | **TW** | Hybrid: manga page layout, atmospheric rendering | Muted literary palette; French BD influence | LINE Comics TW, standalone print |
 | **CN** | Vertical-scroll tiáomàn (条漫), full color | Soft pastels, Korean-influenced | Kuaikan Manhua, Bilibili Comics |
+| **HK** | Hybrid same as TW (manga page layout, atmospheric rendering) — Traditional Chinese, distribution via TW connectors + Cantonese metadata layer | Same palette as TW; literary register | LINE Comics TW (cross-market), local print partners |
 | **US** | Two paths — do NOT mix: (A) manga digest 5"×7.5" B&W for manga aisle OR (B) western doodle/cartoon for mainstream self-help shelf | Cartoon/doodle (Correll style) for mainstream; iyashikei minimalism for manga aisle | Bookstores, Amazon, direct |
+
+**HK addendum (2026-04-27):** Hong Kong (`zh_HK`) shares Traditional Chinese script with TW, so DeepSeek translation provider covers both. Format mix and brand portfolio default to TW; per-locale strategic divergence (Cantonese metadata, HK-specific platform partners, local cultural content) is a follow-up Pearl_Research deep-research task tracked under the manga catalog reconciliation spec.
 
 ---
 

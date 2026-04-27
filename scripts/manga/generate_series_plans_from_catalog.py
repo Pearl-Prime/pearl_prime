@@ -41,7 +41,10 @@ ROUTING_CFG = REPO / "config" / "manga" / "format_routing.yaml"
 OUT_ROOT = REPO / "config" / "source_of_truth" / "manga_series_plans"
 SAMPLE_ROOT = REPO / "config" / "source_of_truth" / "manga_series_plans" / "_samples"
 
-VALID_LOCALES = ("en_US", "ja_JP", "ko_KR", "zh_TW", "zh_CN")
+VALID_LOCALES = (
+    "en_US", "ja_JP", "ko_KR", "zh_TW", "zh_CN",
+    "es_LA", "hu_HU", "zh_HK",
+)
 VALID_GENRES = (
     "iyashikei", "seinen", "shonen", "shojo", "horror",
     "cultivation", "manhwa", "webtoon_romance", "isekai", "josei_essay_manga",
@@ -57,7 +60,7 @@ VALID_GENRES = (
 
 
 _RE_TEACHER_HEADING = re.compile(r"^## \d+\.\s+([A-Z_]+)\s*—", re.IGNORECASE)
-_RE_LOCALE_HEADING = re.compile(r"^### (en_US|ja_JP|ko_KR|zh_TW|zh_CN)\b")
+_RE_LOCALE_HEADING = re.compile(r"^### (en_US|ja_JP|ko_KR|zh_TW|zh_CN|es_LA|hu_HU|zh_HK)\b")
 # Strand sub-heading captures secondary catalog sections like
 # "### Ahjan — forest simplicity strand (Stillness Press; ...)".
 # When a strand heading appears under a teacher, subsequent rows are tagged
