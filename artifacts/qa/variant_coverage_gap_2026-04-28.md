@@ -9,13 +9,13 @@ Phase 1 ships warn-only per spec §6 risk row 2. Strict mode (CI fail on gap) is
 - minimum variants per section: **3**
 - registry sections passing: **1287**
 - registry sections failing: **63**
-- atom (persona × topic × section_type) tuples passing: **1921**
-  - via persona-atom canonical: **1682**
+- atom (persona × topic × section_type) tuples passing: **1928**
+  - via persona-atom canonical: **1689**
   - via alternative source: **239**
     - `teacher_banks/approved_atoms/EXERCISE`: 29
     - `teacher_banks/doctrine`: 210
-- atom tuples failing: **389**
-- total gaps: **452**
+- atom tuples failing: **382**
+- total gaps: **445**
 
 _Alternative-source coverage_ — `TEACHER_DOCTRINE` resolves from `SOURCE_OF_TRUTH/teacher_banks/<teacher>/doctrine/` (the pipeline picks a teacher per book at runtime per `phoenix_v4/planning/injection_resolver.py`). `EXERCISE` resolves per `specs/PHOENIX_V4_5_WRITER_SPEC.md` §4.5 three-source rule: `atoms/<persona>/<topic>/EXERCISE/CANONICAL.txt` → `teacher_banks/<teacher>/approved_atoms/EXERCISE/*.yaml` → `SOURCE_OF_TRUTH/practice_library/store/practice_items.jsonl`. Other section types remain persona-atom-only per ws_spec_739_validator_teacher_banks_awareness_20260428 scope discipline; multi-source awareness for `HOOK / STORY / REFLECTION / INTEGRATION / COMPRESSION / PIVOT / PERMISSION / TAKEAWAY / THREAD` is a separate Pearl_Architect routing decision tracked in `docs/PEARL_ARCHITECT_STATE.md`.
 
@@ -180,13 +180,6 @@ _Alternative-source coverage_ — `TEACHER_DOCTRINE` resolves from `SOURCE_OF_TR
 | healthcare_rns | sleep_anxiety | COMPRESSION | 0 | 3 |
 | healthcare_rns | social_anxiety | COMPRESSION | 1 | 3 |
 | healthcare_rns | somatic_healing | COMPRESSION | 1 | 3 |
-| millennial_women_professionals | burnout | COMPRESSION | 1 | 3 |
-| millennial_women_professionals | financial_anxiety | COMPRESSION | 1 | 3 |
-| millennial_women_professionals | imposter_syndrome | COMPRESSION | 1 | 3 |
-| millennial_women_professionals | overthinking | COMPRESSION | 1 | 3 |
-| millennial_women_professionals | sleep_anxiety | COMPRESSION | 1 | 3 |
-| millennial_women_professionals | social_anxiety | COMPRESSION | 1 | 3 |
-| millennial_women_professionals | somatic_healing | COMPRESSION | 1 | 3 |
 | tech_finance_burnout | burnout | COMPRESSION | 1 | 3 |
 | tech_finance_burnout | financial_anxiety | COMPRESSION | 1 | 3 |
 | tech_finance_burnout | imposter_syndrome | COMPRESSION | 1 | 3 |
