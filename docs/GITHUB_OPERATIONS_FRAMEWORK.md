@@ -145,6 +145,8 @@ If a workflow in this repo uses a Qwen-compatible endpoint on self-hosted infras
 3. Commit, push branch: `git add -A && git commit -m "<type>: <scope>" && git push -u origin codex/<topic>`
 4. Open PR to main; wait for the canonical required checks (Core tests, Release gates, EI V2 gates, Change impact); merge. Cloudflare preview noise such as `Workers Builds: pearl-prime` is not a merge requirement.
 
+**Merge command:** Use `gh pr merge <N> --squash` for routine merges. **`--admin` is not required when the live-ruleset required check (currently `Verify governance`) is green**, regardless of `mergeStateStatus: UNSTABLE` from non-required failing checks (e.g. `Workers Builds: pearl-prime`). Reserve `--admin` for genuine ruleset blocks. See [artifacts/audits/workers_builds_pearl_prime_audit_2026-04-27.md](../artifacts/audits/workers_builds_pearl_prime_audit_2026-04-27.md) §1 for the premise correction.
+
 See [GITHUB_SUPPORT_SYSTEM_SPEC.md](./GITHUB_SUPPORT_SYSTEM_SPEC.md) §5–6.
 
 ### Merge to main when local main is behind
