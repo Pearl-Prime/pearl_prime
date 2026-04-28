@@ -173,6 +173,17 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
   .watch-side { max-width: 100%; }
   .marketing-grid { grid-template-columns: 1fr; }
 }
+
+  .teacher-cta-row { display:flex; gap:12px; flex-wrap:wrap; margin:24px 0 8px; padding:16px;
+    background:rgba(180,83,9,.04); border:1px solid rgba(180,83,9,.15); border-radius:6px;
+    align-items:center; justify-content:flex-start; }
+  .teacher-cta { display:inline-flex; align-items:center; gap:8px; padding:10px 18px;
+    background:rgba(217,119,6,.12); border:1px solid rgba(217,119,6,.4); border-radius:4px;
+    color:#f5d0a9; font-family:'DM Sans',sans-serif; font-size:.78rem; font-weight:500;
+    text-decoration:none; transition:all .18s; cursor:pointer; }
+  .teacher-cta:hover { background:rgba(217,119,6,.22); border-color:#d97706; color:#faf6f0;
+    transform:translateY(-1px); box-shadow:0 2px 6px rgba(217,119,6,.2); }
+  .cta-anchor { display:block; height:1px; visibility:hidden; }
 </style>
 </head>
 <body>
@@ -1400,6 +1411,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#ahjan_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('ahjan_book'); if(s.style.display==='none') toggleSection('ahjan_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-ahjan" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-ahjan" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-ahjan" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-ahjan" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="adi_da" class="teacher-section" style="--brand-color:#E74C3C; --brand-dark:#4A1010">
@@ -2644,6 +2664,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#adi_da_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('adi_da_book'); if(s.style.display==='none') toggleSection('adi_da_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-adi_da" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-adi_da" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-adi_da" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-adi_da" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="master_feung" class="teacher-section" style="--brand-color:#2ECC71; --brand-dark:#0A3D1F">
@@ -3329,6 +3358,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#master_feung_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('master_feung_book'); if(s.style.display==='none') toggleSection('master_feung_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-master_feung" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-master_feung" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-master_feung" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-master_feung" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="sai_ma" class="teacher-section" style="--brand-color:#9B59B6; --brand-dark:#2D1A35">
@@ -4145,6 +4183,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#sai_ma_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('sai_ma_book'); if(s.style.display==='none') toggleSection('sai_ma_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-sai_ma" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-sai_ma" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-sai_ma" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-sai_ma" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="ra" class="teacher-section" style="--brand-color:#3498DB; --brand-dark:#0F2940">
@@ -4941,6 +4988,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#ra_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('ra_book'); if(s.style.display==='none') toggleSection('ra_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-ra" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-ra" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-ra" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-ra" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="junko" class="teacher-section" style="--brand-color:#1ABC9C; --brand-dark:#0A3D32">
@@ -5947,6 +6003,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#junko_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('junko_book'); if(s.style.display==='none') toggleSection('junko_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-junko" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-junko" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-junko" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-junko" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="miki" class="teacher-section" style="--brand-color:#FF6B9D; --brand-dark:#401A2D">
@@ -6701,6 +6766,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#miki_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('miki_book'); if(s.style.display==='none') toggleSection('miki_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-miki" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-miki" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-miki" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-miki" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="master_wu" class="teacher-section" style="--brand-color:#95A5A6; --brand-dark:#2D3436">
@@ -7408,6 +7482,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#master_wu_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('master_wu_book'); if(s.style.display==='none') toggleSection('master_wu_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-master_wu" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-master_wu" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-master_wu" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-master_wu" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="pamela_fellows" class="teacher-section" style="--brand-color:#E8B4B8; --brand-dark:#3D2A2C">
@@ -8372,6 +8455,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#pamela_fellows_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('pamela_fellows_book'); if(s.style.display==='none') toggleSection('pamela_fellows_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-pamela_fellows" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-pamela_fellows" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-pamela_fellows" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-pamela_fellows" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="joshin" class="teacher-section" style="--brand-color:#4E7A51; --brand-dark:#1A2D1B">
@@ -8927,6 +9019,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#joshin_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('joshin_book'); if(s.style.display==='none') toggleSection('joshin_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-joshin" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-joshin" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-joshin" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-joshin" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="maat" class="teacher-section" style="--brand-color:#F39C12; --brand-dark:#3D2700">
@@ -9671,6 +9772,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#maat_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('maat_book'); if(s.style.display==='none') toggleSection('maat_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-maat" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-maat" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-maat" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-maat" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="omote" class="teacher-section" style="--brand-color:#5DADE2; --brand-dark:#1A3040">
@@ -10360,6 +10470,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#omote_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('omote_book'); if(s.style.display==='none') toggleSection('omote_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-omote" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-omote" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-omote" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-omote" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
     <section id="master_sha" class="teacher-section" style="--brand-color:#8E44AD; --brand-dark:#2D1540">
@@ -11044,6 +11163,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="marketing-item"><span class="marketing-label">Production Cost</span>$0 (Pearl Star)</div>
         </div>
       </div>
+
+      <!-- TODO(#778 PR-C): replace placeholder anchors with real Amazon ASIN / Audible / Podcast URLs -->
+      <div class="teacher-cta-row">
+        <a href="#master_sha_book" class="teacher-cta" onclick="event.preventDefault(); var s=document.getElementById('master_sha_book'); if(s.style.display==='none') toggleSection('master_sha_book'); s.scrollIntoView({behavior:'smooth',block:'start'})">📖 Read Free Guide</a>
+        <a href="#book-master_sha" class="teacher-cta">📚 Get the Book</a>
+        <a href="#audio-master_sha" class="teacher-cta">🎧 Listen / Podcast</a>
+      </div>
+      <a id="book-master_sha" class="cta-anchor" aria-hidden="true"></a>
+      <a id="audio-master_sha" class="cta-anchor" aria-hidden="true"></a>
     </section>
 
 </main>
