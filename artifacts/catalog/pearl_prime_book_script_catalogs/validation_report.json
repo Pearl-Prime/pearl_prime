@@ -1,0 +1,1233 @@
+{
+  "locales": {
+    "en_US": {
+      "row_count": 1600,
+      "status_breakdown": {
+        "blocked_score": 556,
+        "ready": 1044
+      },
+      "column_check": "OK",
+      "locked_field_violations": {},
+      "unique_brand_count": 12,
+      "brands": [
+        "body_memory",
+        "cognitive_clarity",
+        "devotion_path",
+        "digital_ground",
+        "heart_balance",
+        "qi_foundation",
+        "relational_calm",
+        "sleep_restoration",
+        "solar_return",
+        "somatic_wisdom",
+        "stillness_press",
+        "warrior_calm"
+      ],
+      "top_10_strongest": [
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "Bold Enough",
+          "subtitle": "How to Find Courage in Anxious Times",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "The Quiet Hour",
+          "subtitle": "Reclaiming Sleep from Sleep Anxiety and Overthinking",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "The Shape of Missing",
+          "subtitle": "A Grief Recovery Companion for the Worst Days",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "Held by the Body",
+          "subtitle": "A Somatic Healing Guide for Stress, Trauma, and Anxiety",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "cognitive_clarity",
+          "topic": "overthinking",
+          "persona": "tech_finance_burnout",
+          "teacher": "joshin",
+          "title": "The Loop Breaker",
+          "subtitle": "How to Stop Overthinking and Quiet Your Racing Mind",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "somatic_wisdom",
+          "topic": "somatic_healing",
+          "persona": "millennial_women_professionals",
+          "teacher": "pamela_fellows",
+          "title": "The Body Remembers the Way Out",
+          "subtitle": "Somatic Healing and Nervous System Recovery",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "somatic_wisdom",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "pamela_fellows",
+          "title": "Unlock the Freeze",
+          "subtitle": "A Somatic Guide to Nervous System Reset and Trauma Release",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_anxiety",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "Broke and Breathing",
+          "subtitle": "A Somatic Guide to Financial Anxiety Recovery",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_anxiety",
+          "persona": "gen_z_student",
+          "teacher": "miki",
+          "title": "Worth More Than Your Balance",
+          "subtitle": "Healing Financial Anxiety and Money Shame",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_stress",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "Worth More Than Your Balance",
+          "subtitle": "Healing Financial Stress and Money Shame",
+          "status": "ready"
+        }
+      ],
+      "distinct_titles": 42,
+      "most_duplicated_titles": [
+        [
+          "Before You Break",
+          47
+        ],
+        [
+          "You Were Always Enough",
+          46
+        ],
+        [
+          "The Alarm Is Lying",
+          43
+        ],
+        [
+          "Safe Enough",
+          43
+        ],
+        [
+          "Still Here Without You",
+          41
+        ],
+        [
+          "Worthy Without Proof",
+          41
+        ],
+        [
+          "Running on Fumes",
+          40
+        ],
+        [
+          "The No That Saved Me",
+          39
+        ],
+        [
+          "The Collapse You Earned",
+          39
+        ],
+        [
+          "The Shape of Missing",
+          39
+        ]
+      ],
+      "distinct_title_subtitle_pairs": 45,
+      "most_duplicated_title_subtitle": [
+        {
+          "title": "Before You Break",
+          "subtitle": "Escaping Burnout and Rebuilding Your Energy",
+          "count": 47
+        },
+        {
+          "title": "You Were Always Enough",
+          "subtitle": "Rebuilding Self-Esteem and Reclaiming Your Worth",
+          "count": 46
+        },
+        {
+          "title": "The Alarm Is Lying",
+          "subtitle": "A Nervous System Guide to Anxiety Recovery",
+          "count": 43
+        },
+        {
+          "title": "Safe Enough",
+          "subtitle": "How to Calm Anxiety and Reclaim Your Nervous System",
+          "count": 43
+        },
+        {
+          "title": "Still Here Without You",
+          "subtitle": "Finding Your Way Through Grief and Heartbreak",
+          "count": 41
+        }
+      ],
+      "blank_title_rows": 252,
+      "ready_rows_with_titles": 1044,
+      "ready_rows_with_cjk_titles": 0,
+      "sample_ready_titles": [
+        "Safe Enough",
+        "Safe Enough",
+        "The Alarm Is Lying",
+        "Safe Enough",
+        "The Line You Draw"
+      ],
+      "brand_distinct_topic_persona_teacher": {
+        "body_memory": 120,
+        "cognitive_clarity": 107,
+        "devotion_path": 133,
+        "digital_ground": 128,
+        "heart_balance": 130,
+        "qi_foundation": 119,
+        "relational_calm": 152,
+        "sleep_restoration": 133,
+        "solar_return": 148,
+        "somatic_wisdom": 127,
+        "stillness_press": 196,
+        "warrior_calm": 107
+      }
+    },
+    "ja_JP": {
+      "row_count": 1600,
+      "status_breakdown": {
+        "blocked_score": 556,
+        "ready": 1044
+      },
+      "column_check": "OK",
+      "locked_field_violations": {},
+      "unique_brand_count": 12,
+      "brands": [
+        "body_memory",
+        "cognitive_clarity",
+        "devotion_path",
+        "digital_ground",
+        "heart_balance",
+        "qi_foundation",
+        "relational_calm",
+        "sleep_restoration",
+        "solar_return",
+        "somatic_wisdom",
+        "stillness_press",
+        "warrior_calm"
+      ],
+      "top_10_strongest": [
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "cognitive_clarity",
+          "topic": "overthinking",
+          "persona": "tech_finance_burnout",
+          "teacher": "joshin",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "somatic_wisdom",
+          "topic": "somatic_healing",
+          "persona": "millennial_women_professionals",
+          "teacher": "pamela_fellows",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "somatic_wisdom",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "pamela_fellows",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_anxiety",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_anxiety",
+          "persona": "gen_z_student",
+          "teacher": "miki",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_stress",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        }
+      ],
+      "distinct_titles": 0,
+      "most_duplicated_titles": [],
+      "distinct_title_subtitle_pairs": 0,
+      "most_duplicated_title_subtitle": [],
+      "blank_title_rows": 1600,
+      "ready_rows_with_titles": 0,
+      "ready_rows_with_cjk_titles": 0,
+      "sample_ready_titles": [],
+      "brand_distinct_topic_persona_teacher": {
+        "body_memory": 120,
+        "cognitive_clarity": 107,
+        "devotion_path": 133,
+        "digital_ground": 128,
+        "heart_balance": 130,
+        "qi_foundation": 119,
+        "relational_calm": 152,
+        "sleep_restoration": 133,
+        "solar_return": 148,
+        "somatic_wisdom": 127,
+        "stillness_press": 196,
+        "warrior_calm": 107
+      }
+    },
+    "zh_TW": {
+      "row_count": 2964,
+      "status_breakdown": {
+        "blocked_score": 1676,
+        "ready": 1288
+      },
+      "column_check": "OK",
+      "locked_field_violations": {},
+      "unique_brand_count": 19,
+      "brands": [
+        "body_memory",
+        "bright_presence_tw",
+        "cognitive_clarity",
+        "devotion_path",
+        "digital_ground",
+        "gen_z_grounding_tw",
+        "grief_companion_tw",
+        "heart_balance",
+        "inner_security_tw",
+        "panic_first_aid_tw",
+        "qi_foundation",
+        "relational_calm",
+        "sleep_repair_tw",
+        "sleep_restoration",
+        "solar_return",
+        "somatic_wisdom",
+        "stabilizer_tw",
+        "stillness_press",
+        "warrior_calm"
+      ],
+      "top_10_strongest": [
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "cognitive_clarity",
+          "topic": "overthinking",
+          "persona": "tech_finance_burnout",
+          "teacher": "joshin",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "somatic_wisdom",
+          "topic": "somatic_healing",
+          "persona": "millennial_women_professionals",
+          "teacher": "pamela_fellows",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "somatic_wisdom",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "pamela_fellows",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_anxiety",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_anxiety",
+          "persona": "gen_z_student",
+          "teacher": "miki",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_stress",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        }
+      ],
+      "distinct_titles": 0,
+      "most_duplicated_titles": [],
+      "distinct_title_subtitle_pairs": 0,
+      "most_duplicated_title_subtitle": [],
+      "blank_title_rows": 2964,
+      "ready_rows_with_titles": 0,
+      "ready_rows_with_cjk_titles": 0,
+      "sample_ready_titles": [],
+      "brand_distinct_topic_persona_teacher": {
+        "body_memory": 120,
+        "bright_presence_tw": 188,
+        "cognitive_clarity": 107,
+        "devotion_path": 133,
+        "digital_ground": 128,
+        "gen_z_grounding_tw": 196,
+        "grief_companion_tw": 196,
+        "heart_balance": 130,
+        "inner_security_tw": 196,
+        "panic_first_aid_tw": 196,
+        "qi_foundation": 119,
+        "relational_calm": 152,
+        "sleep_repair_tw": 196,
+        "sleep_restoration": 133,
+        "solar_return": 148,
+        "somatic_wisdom": 127,
+        "stabilizer_tw": 196,
+        "stillness_press": 196,
+        "warrior_calm": 107
+      }
+    },
+    "zh_CN": {
+      "row_count": 2776,
+      "status_breakdown": {
+        "blocked_score": 1516,
+        "ready": 1260
+      },
+      "column_check": "OK",
+      "locked_field_violations": {},
+      "unique_brand_count": 18,
+      "brands": [
+        "body_memory",
+        "cognitive_clarity",
+        "devotion_path",
+        "digital_ground",
+        "gen_z_grounding_cn",
+        "grief_companion_cn",
+        "heart_balance",
+        "inner_security_cn",
+        "panic_first_aid_cn",
+        "qi_foundation",
+        "relational_calm",
+        "sleep_repair_cn",
+        "sleep_restoration",
+        "solar_return",
+        "somatic_wisdom",
+        "stabilizer_cn",
+        "stillness_press",
+        "warrior_calm"
+      ],
+      "top_10_strongest": [
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "cognitive_clarity",
+          "topic": "overthinking",
+          "persona": "tech_finance_burnout",
+          "teacher": "joshin",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "somatic_wisdom",
+          "topic": "somatic_healing",
+          "persona": "millennial_women_professionals",
+          "teacher": "pamela_fellows",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "somatic_wisdom",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "pamela_fellows",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_anxiety",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_anxiety",
+          "persona": "gen_z_student",
+          "teacher": "miki",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_stress",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "(blank)",
+          "subtitle": "(blank)",
+          "status": "ready"
+        }
+      ],
+      "distinct_titles": 0,
+      "most_duplicated_titles": [],
+      "distinct_title_subtitle_pairs": 0,
+      "most_duplicated_title_subtitle": [],
+      "blank_title_rows": 2776,
+      "ready_rows_with_titles": 0,
+      "ready_rows_with_cjk_titles": 0,
+      "sample_ready_titles": [],
+      "brand_distinct_topic_persona_teacher": {
+        "body_memory": 120,
+        "cognitive_clarity": 107,
+        "devotion_path": 133,
+        "digital_ground": 128,
+        "gen_z_grounding_cn": 196,
+        "grief_companion_cn": 196,
+        "heart_balance": 130,
+        "inner_security_cn": 196,
+        "panic_first_aid_cn": 196,
+        "qi_foundation": 119,
+        "relational_calm": 152,
+        "sleep_repair_cn": 196,
+        "sleep_restoration": 133,
+        "solar_return": 148,
+        "somatic_wisdom": 127,
+        "stabilizer_cn": 196,
+        "stillness_press": 196,
+        "warrior_calm": 107
+      }
+    }
+  },
+  "global": {
+    "cross_locale_market_fit": {
+      "en_US": {
+        "spine_ready": 1044,
+        "title_ready": 1044,
+        "listing_ready": 1044,
+        "titles_verbatim_english": 1044,
+        "titles_with_cjk_chars": 0,
+        "spine_ready_without_title": 0
+      },
+      "ja_JP": {
+        "spine_ready": 1044,
+        "title_ready": 0,
+        "listing_ready": 0,
+        "titles_verbatim_english": 0,
+        "titles_with_cjk_chars": 0,
+        "spine_ready_without_title": 1044
+      },
+      "zh_TW": {
+        "spine_ready": 1288,
+        "title_ready": 0,
+        "listing_ready": 0,
+        "titles_verbatim_english": 0,
+        "titles_with_cjk_chars": 0,
+        "spine_ready_without_title": 1288
+      },
+      "zh_CN": {
+        "spine_ready": 1260,
+        "title_ready": 0,
+        "listing_ready": 0,
+        "titles_verbatim_english": 0,
+        "titles_with_cjk_chars": 0,
+        "spine_ready_without_title": 1260
+      }
+    },
+    "top_50_launch_ready": [
+      {
+        "composite": 0.95,
+        "locale": "en_US",
+        "brand": "warrior_calm",
+        "topic": "courage",
+        "persona": "first_responders",
+        "teacher": "master_wu",
+        "title": "Bold Enough",
+        "subtitle": "How to Find Courage in Anxious Times"
+      },
+      {
+        "composite": 0.95,
+        "locale": "en_US",
+        "brand": "sleep_restoration",
+        "topic": "sleep_anxiety",
+        "persona": "healthcare_rns",
+        "teacher": "master_sha",
+        "title": "The Quiet Hour",
+        "subtitle": "Reclaiming Sleep from Sleep Anxiety and Overthinking"
+      },
+      {
+        "composite": 0.95,
+        "locale": "en_US",
+        "brand": "body_memory",
+        "topic": "grief",
+        "persona": "healthcare_rns",
+        "teacher": "omote",
+        "title": "The Shape of Missing",
+        "subtitle": "A Grief Recovery Companion for the Worst Days"
+      },
+      {
+        "composite": 0.95,
+        "locale": "en_US",
+        "brand": "body_memory",
+        "topic": "somatic_healing",
+        "persona": "healthcare_rns",
+        "teacher": "omote",
+        "title": "Held by the Body",
+        "subtitle": "A Somatic Healing Guide for Stress, Trauma, and Anxiety"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "cognitive_clarity",
+        "topic": "overthinking",
+        "persona": "tech_finance_burnout",
+        "teacher": "joshin",
+        "title": "The Loop Breaker",
+        "subtitle": "How to Stop Overthinking and Quiet Your Racing Mind"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "somatic_wisdom",
+        "topic": "somatic_healing",
+        "persona": "millennial_women_professionals",
+        "teacher": "pamela_fellows",
+        "title": "The Body Remembers the Way Out",
+        "subtitle": "Somatic Healing and Nervous System Recovery"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "somatic_wisdom",
+        "topic": "somatic_healing",
+        "persona": "healthcare_rns",
+        "teacher": "pamela_fellows",
+        "title": "Unlock the Freeze",
+        "subtitle": "A Somatic Guide to Nervous System Reset and Trauma Release"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "financial_anxiety",
+        "persona": "gen_z_professionals",
+        "teacher": "miki",
+        "title": "Broke and Breathing",
+        "subtitle": "A Somatic Guide to Financial Anxiety Recovery"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "financial_anxiety",
+        "persona": "gen_z_student",
+        "teacher": "miki",
+        "title": "Worth More Than Your Balance",
+        "subtitle": "Healing Financial Anxiety and Money Shame"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "financial_stress",
+        "persona": "gen_z_professionals",
+        "teacher": "miki",
+        "title": "Worth More Than Your Balance",
+        "subtitle": "Healing Financial Stress and Money Shame"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "financial_stress",
+        "persona": "gen_z_student",
+        "teacher": "miki",
+        "title": "Worth More Than Your Balance",
+        "subtitle": "Healing Financial Stress and Money Shame"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "imposter_syndrome",
+        "persona": "gen_z_professionals",
+        "teacher": "miki",
+        "title": "The Proof Was Always You",
+        "subtitle": "An Imposter Syndrome Recovery Guide for Professionals"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "imposter_syndrome",
+        "persona": "gen_z_student",
+        "teacher": "miki",
+        "title": "The Proof Was Always You",
+        "subtitle": "An Imposter Syndrome Recovery Guide for Professionals"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "social_anxiety",
+        "persona": "gen_z_professionals",
+        "teacher": "miki",
+        "title": "The Script Nobody Gave You",
+        "subtitle": "How to Navigate Social Anxiety with Confidence"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "social_anxiety",
+        "persona": "gen_z_student",
+        "teacher": "miki",
+        "title": "The Script Nobody Gave You",
+        "subtitle": "How to Navigate Social Anxiety with Confidence"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "relational_calm",
+        "topic": "social_anxiety",
+        "persona": "millennial_women_professionals",
+        "teacher": "junko",
+        "title": "The Script Nobody Gave You",
+        "subtitle": "How to Navigate Social Anxiety with Confidence"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "relational_calm",
+        "topic": "social_anxiety",
+        "persona": "gen_z_professionals",
+        "teacher": "junko",
+        "title": "The Script Nobody Gave You",
+        "subtitle": "How to Navigate Social Anxiety with Confidence"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "sleep_restoration",
+        "topic": "sleep_anxiety",
+        "persona": "first_responders",
+        "teacher": "master_sha",
+        "title": "Permission to Rest",
+        "subtitle": "How to Calm Racing Thoughts and Finally Sleep"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "sleep_restoration",
+        "topic": "sleep_anxiety",
+        "persona": "working_parents",
+        "teacher": "master_sha",
+        "title": "Permission to Rest",
+        "subtitle": "How to Calm Racing Thoughts and Finally Sleep"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "body_memory",
+        "topic": "grief",
+        "persona": "gen_x_sandwich",
+        "teacher": "omote",
+        "title": "The Weight of Gone",
+        "subtitle": "A Gentle Guide to Grief, Loss, and Healing"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "body_memory",
+        "topic": "somatic_healing",
+        "persona": "gen_x_sandwich",
+        "teacher": "omote",
+        "title": "Held by the Body",
+        "subtitle": "A Somatic Healing Guide for Stress, Trauma, and Anxiety"
+      },
+      {
+        "composite": 0.93,
+        "locale": "en_US",
+        "brand": "devotion_path",
+        "topic": "courage",
+        "persona": "healthcare_rns",
+        "teacher": "sai_ma",
+        "title": "The Fear That Built You",
+        "subtitle": "Finding Courage When Everything Feels Uncertain"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "cognitive_clarity",
+        "topic": "imposter_syndrome",
+        "persona": "tech_finance_burnout",
+        "teacher": "joshin",
+        "title": "Belonging at the Table",
+        "subtitle": "Silencing Imposter Syndrome and Claiming Your Place"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "cognitive_clarity",
+        "topic": "overthinking",
+        "persona": "gen_z_professionals",
+        "teacher": "joshin",
+        "title": "Thought Traffic",
+        "subtitle": "Breaking Free from Overthinking, Worry, and Analysis Paralysis"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "somatic_wisdom",
+        "topic": "compassion_fatigue",
+        "persona": "millennial_women_professionals",
+        "teacher": "pamela_fellows",
+        "title": "The Empty Well",
+        "subtitle": "Healing Compassion Fatigue and Emotional Exhaustion"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "somatic_wisdom",
+        "topic": "compassion_fatigue",
+        "persona": "healthcare_rns",
+        "teacher": "pamela_fellows",
+        "title": "Caring Until There's Nothing Left",
+        "subtitle": "A Compassion Fatigue Recovery Guide for Helpers"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "somatic_wisdom",
+        "topic": "somatic_healing",
+        "persona": "gen_z_professionals",
+        "teacher": "pamela_fellows",
+        "title": "Unlock the Freeze",
+        "subtitle": "A Somatic Guide to Nervous System Reset and Trauma Release"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "somatic_wisdom",
+        "topic": "somatic_healing",
+        "persona": "first_responders",
+        "teacher": "pamela_fellows",
+        "title": "The Body Remembers the Way Out",
+        "subtitle": "Somatic Healing and Nervous System Recovery"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "anxiety",
+        "persona": "gen_z_professionals",
+        "teacher": "miki",
+        "title": "Safe Enough",
+        "subtitle": "How to Calm Anxiety and Reclaim Your Nervous System"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "anxiety",
+        "persona": "gen_z_student",
+        "teacher": "miki",
+        "title": "The Emergency That Never Comes",
+        "subtitle": "Breaking Free from High-Functioning Anxiety"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "overthinking",
+        "persona": "gen_z_professionals",
+        "teacher": "miki",
+        "title": "Thought Traffic",
+        "subtitle": "Breaking Free from Overthinking, Worry, and Analysis Paralysis"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "overthinking",
+        "persona": "gen_z_student",
+        "teacher": "miki",
+        "title": "Thought Traffic",
+        "subtitle": "Breaking Free from Overthinking, Worry, and Analysis Paralysis"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "self_worth",
+        "persona": "gen_z_professionals",
+        "teacher": "miki",
+        "title": "You Were Always Enough",
+        "subtitle": "Rebuilding Self-Esteem and Reclaiming Your Worth"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "digital_ground",
+        "topic": "self_worth",
+        "persona": "gen_z_student",
+        "teacher": "miki",
+        "title": "The Mirror Lied",
+        "subtitle": "A Self-Love Guide to Healing Low Self-Esteem"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "relational_calm",
+        "topic": "anxiety",
+        "persona": "millennial_women_professionals",
+        "teacher": "junko",
+        "title": "The Alarm Is Lying",
+        "subtitle": "A Nervous System Guide to Anxiety Recovery"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "relational_calm",
+        "topic": "anxiety",
+        "persona": "gen_z_professionals",
+        "teacher": "junko",
+        "title": "The Emergency That Never Comes",
+        "subtitle": "Breaking Free from High-Functioning Anxiety"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "relational_calm",
+        "topic": "boundaries",
+        "persona": "millennial_women_professionals",
+        "teacher": "junko",
+        "title": "Stop Pouring from an Empty Cup",
+        "subtitle": "Boundaries for People Pleasers and Overgivers"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "relational_calm",
+        "topic": "boundaries",
+        "persona": "gen_z_professionals",
+        "teacher": "junko",
+        "title": "The Line You Draw",
+        "subtitle": "How to Set Boundaries Without Guilt or Fear"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "relational_calm",
+        "topic": "social_anxiety",
+        "persona": "gen_z_student",
+        "teacher": "junko",
+        "title": "The Room Isn't Watching",
+        "subtitle": "A Social Anxiety Recovery Guide for Quiet People"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "warrior_calm",
+        "topic": "anxiety",
+        "persona": "first_responders",
+        "teacher": "master_wu",
+        "title": "Safe Enough",
+        "subtitle": "How to Calm Anxiety and Reclaim Your Nervous System"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "warrior_calm",
+        "topic": "courage",
+        "persona": "healthcare_rns",
+        "teacher": "master_wu",
+        "title": "Bold Enough",
+        "subtitle": "How to Find Courage in Anxious Times"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "sleep_restoration",
+        "topic": "burnout",
+        "persona": "healthcare_rns",
+        "teacher": "master_sha",
+        "title": "Running on Fumes",
+        "subtitle": "A Recovery Guide for Burnout and Work Exhaustion"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "sleep_restoration",
+        "topic": "sleep_anxiety",
+        "persona": "tech_finance_burnout",
+        "teacher": "master_sha",
+        "title": "The Quiet Hour",
+        "subtitle": "Reclaiming Sleep from Sleep Anxiety and Overthinking"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "sleep_restoration",
+        "topic": "sleep_anxiety",
+        "persona": "gen_x_sandwich",
+        "teacher": "master_sha",
+        "title": "The 3 AM Mind",
+        "subtitle": "A Guide to Overcoming Insomnia and Sleep Anxiety"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "sleep_restoration",
+        "topic": "somatic_healing",
+        "persona": "healthcare_rns",
+        "teacher": "master_sha",
+        "title": "Held by the Body",
+        "subtitle": "A Somatic Healing Guide for Stress, Trauma, and Anxiety"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "body_memory",
+        "topic": "compassion_fatigue",
+        "persona": "healthcare_rns",
+        "teacher": "omote",
+        "title": "Who Heals the Healer",
+        "subtitle": "Compassion Fatigue Recovery for Nurses and Caregivers"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "body_memory",
+        "topic": "grief",
+        "persona": "millennial_women_professionals",
+        "teacher": "omote",
+        "title": "Still Here Without You",
+        "subtitle": "Finding Your Way Through Grief and Heartbreak"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "body_memory",
+        "topic": "grief",
+        "persona": "first_responders",
+        "teacher": "omote",
+        "title": "The Shape of Missing",
+        "subtitle": "A Grief Recovery Companion for the Worst Days"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "body_memory",
+        "topic": "somatic_healing",
+        "persona": "millennial_women_professionals",
+        "teacher": "omote",
+        "title": "Unlock the Freeze",
+        "subtitle": "A Somatic Guide to Nervous System Reset and Trauma Release"
+      },
+      {
+        "composite": 0.9,
+        "locale": "en_US",
+        "brand": "body_memory",
+        "topic": "somatic_healing",
+        "persona": "first_responders",
+        "teacher": "omote",
+        "title": "Held by the Body",
+        "subtitle": "A Somatic Healing Guide for Stress, Trauma, and Anxiety"
+      }
+    ]
+  }
+}

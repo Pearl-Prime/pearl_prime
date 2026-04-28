@@ -1,0 +1,902 @@
+# Brand × Genre Portfolio Allocation Matrix
+#
+# Materialization of plan §2.1 (en_US) and §2.2 (ja_JP) from
+# docs/MANGA_CATALOG_PLAN_EN_US_JA_JP_ZH_TW_ZH_CN_2026-04-28.md.
+#
+# Each brand row sums to 100%. Cells are percentages of the brand's manga
+# portfolio that targets that genre lane. Per the plan §3 reconciliation
+# (option C — Coexist):
+#   - mono-genre profile (config/source_of_truth/manga_profiles/brands/*.yaml)
+#     remains the brand's TENTPOLE / signature series authority.
+#   - this matrix is the brand-level PORTFOLIO mix.
+#
+# The Primary cell (highest percentage) is normally the tentpole genre.
+# Where Primary ≠ tentpole (e.g. ja_JP warrior_calm primary is BATTLE 25%
+# but tentpole is CULTIVATION per warrior_calm_cultivation.yaml), the
+# generator emits a `tentpole_mismatch` note on the affected rows so it
+# can be surfaced for owner decision.
+#
+# Genre ids resolve through config/manga/canonical_genre_list.yaml.
+# Locales ja_JP / zh_TW / zh_CN matrices intentionally omit zh_TW/zh_CN
+# in this materialization — only en_US + ja_JP per current task scope.
+
+schema_version: "1.0"
+last_updated: "2026-04-28"
+upstream_authorities:
+  - docs/MANGA_CATALOG_PLAN_EN_US_JA_JP_ZH_TW_ZH_CN_2026-04-28.md
+  - config/manga/canonical_genre_list.yaml
+  - config/source_of_truth/manga_profiles/brands/
+
+# ── Tentpole map (from mono-genre profile filename + genre_family field) ────
+# Used to flag is_tentpole on the row whose genre matches the brand's tentpole.
+brand_tentpole:
+  stillness_press:    healing
+  cognitive_clarity:  essay
+  somatic_wisdom:     romance
+  qi_foundation:      cultivation
+  digital_ground:     supernatural_everyday
+  heart_balance:      romance
+  relational_calm:    healing
+  warrior_calm:       cultivation
+  sleep_restoration:  healing
+  body_memory:        romance
+  solar_return:       fantasy_adventure
+  devotion_path:      battle
+
+# ── en_US matrix (12 teacher brands × non-zero genre cells) ─────────────────
+# Per plan §2.1. Locale bias: ebook-primary; demo-bound JP genres suppressed.
+allocations:
+  en_US:
+    stillness_press:
+      healing: 40
+      essay: 12
+      slice_of_life: 10
+      memoir: 8
+      supernatural_everyday: 5
+      graphic_medicine: 5
+      school: 4
+      family: 4
+      romance: 3
+      comedy: 3
+      mystery: 3
+      workplace: 3
+    cognitive_clarity:
+      essay: 35
+      mystery: 12
+      battle_internal: 10
+      memoir: 8
+      workplace: 7
+      graphic_medicine: 6
+      slice_of_life: 5
+      healing: 5
+      social_issue: 4
+      romance: 3
+      comedy: 3
+      supernatural_everyday: 2
+    somatic_wisdom:
+      romance: 30
+      healing: 14
+      essay: 10
+      graphic_medicine: 10
+      slice_of_life: 8
+      school: 6
+      family: 5
+      workplace: 5
+      memoir: 4
+      comedy: 4
+      supernatural_everyday: 2
+      battle_internal: 2
+    qi_foundation:
+      cultivation: 35
+      healing: 15
+      fantasy_adventure: 10
+      battle_internal: 8
+      historical: 8
+      essay: 7
+      memoir: 5
+      slice_of_life: 4
+      mystery: 3
+      supernatural_everyday: 3
+      graphic_medicine: 2
+    digital_ground:
+      supernatural_everyday: 30
+      slice_of_life: 14
+      school: 10
+      essay: 10
+      romance: 8
+      comedy: 7
+      mystery: 6
+      fantasy_adventure: 5
+      horror: 4
+      memoir: 3
+      sci_fi_cyberpunk: 3
+    heart_balance:
+      romance: 30
+      essay: 12
+      family: 10
+      healing: 10
+      memoir: 8
+      slice_of_life: 6
+      graphic_medicine: 6
+      social_issue: 5
+      school: 5
+      mystery: 4
+      comedy: 2
+      supernatural_everyday: 2
+    relational_calm:
+      healing: 35
+      slice_of_life: 14
+      family: 12
+      romance: 8
+      essay: 8
+      supernatural_everyday: 6
+      comedy: 5
+      school: 5
+      graphic_medicine: 3
+      memoir: 2
+      food: 2
+    warrior_calm:
+      cultivation: 30
+      battle_internal: 15
+      battle: 12
+      fantasy_adventure: 10
+      historical: 8
+      mystery: 6
+      essay: 5
+      mecha: 4
+      sports: 4
+      dark_fantasy: 3
+      healing: 3
+    sleep_restoration:
+      healing: 45
+      slice_of_life: 15
+      supernatural_everyday: 10
+      essay: 8
+      memoir: 5
+      graphic_medicine: 4
+      family: 4
+      romance: 3
+      school: 3
+      comedy: 2
+      mystery: 1
+    body_memory:
+      romance: 28
+      graphic_medicine: 12
+      memoir: 10
+      essay: 10
+      healing: 8
+      social_issue: 7
+      family: 6
+      slice_of_life: 5
+      school: 5
+      battle_internal: 4
+      mystery: 3
+      comedy: 2
+    solar_return:
+      fantasy_adventure: 30
+      dark_fantasy: 12
+      cultivation: 10
+      battle: 10
+      historical: 8
+      essay: 7
+      battle_internal: 6
+      romance: 5
+      mystery: 4
+      sci_fi_cyberpunk: 4
+      mecha: 2
+      supernatural_everyday: 2
+    devotion_path:
+      battle: 25
+      fantasy_adventure: 13
+      battle_internal: 12
+      cultivation: 10
+      essay: 9
+      romance: 7
+      historical: 6
+      dark_fantasy: 5
+      family: 5
+      memoir: 3
+      supernatural_everyday: 3
+      mystery: 2
+
+  # ── ja_JP matrix (12 teacher brands × non-zero genre cells) ──────────────
+  # Per plan §2.2. Locale bias: manga-primary; demo-bound genres lift.
+  ja_JP:
+    stillness_press:
+      healing: 45
+      slice_of_life: 12
+      supernatural_everyday: 10
+      essay: 8
+      school: 6
+      family: 5
+      memoir: 4
+      romance: 3
+      comedy: 3
+      graphic_medicine: 2
+      mystery: 2
+    cognitive_clarity:
+      essay: 30
+      mystery: 14
+      battle_internal: 12
+      graphic_medicine: 10
+      memoir: 8
+      workplace: 6
+      social_issue: 6
+      slice_of_life: 5
+      healing: 4
+      supernatural_everyday: 3
+      school: 2
+    somatic_wisdom:
+      romance: 28
+      school: 14
+      graphic_medicine: 10
+      essay: 10
+      healing: 8
+      social_issue: 7
+      slice_of_life: 6
+      family: 5
+      comedy: 4
+      memoir: 3
+      battle_internal: 3
+      supernatural_everyday: 2
+    qi_foundation:
+      cultivation: 32
+      historical: 14
+      fantasy_adventure: 10
+      battle_internal: 10
+      dark_fantasy: 8
+      healing: 8
+      essay: 7
+      memoir: 4
+      mystery: 3
+      supernatural_everyday: 3
+      food: 1
+    digital_ground:
+      supernatural_everyday: 32
+      school: 14
+      slice_of_life: 10
+      essay: 8
+      romance: 8
+      comedy: 6
+      mystery: 6
+      fantasy_adventure: 5
+      mecha: 4
+      horror: 4
+      sci_fi_cyberpunk: 3
+    heart_balance:
+      romance: 32
+      essay: 12
+      family: 10
+      healing: 10
+      school: 7
+      graphic_medicine: 6
+      memoir: 5
+      slice_of_life: 5
+      social_issue: 5
+      mystery: 4
+      comedy: 2
+      supernatural_everyday: 2
+    relational_calm:
+      healing: 38
+      slice_of_life: 14
+      family: 12
+      supernatural_everyday: 8
+      romance: 7
+      school: 6
+      essay: 5
+      comedy: 4
+      memoir: 3
+      graphic_medicine: 2
+      food: 1
+    warrior_calm:
+      battle: 25
+      cultivation: 15
+      battle_internal: 14
+      fantasy_adventure: 10
+      historical: 8
+      mecha: 8
+      mystery: 5
+      essay: 5
+      dark_fantasy: 5
+      sports: 4
+      healing: 1
+    sleep_restoration:
+      healing: 50
+      slice_of_life: 15
+      supernatural_everyday: 10
+      essay: 6
+      memoir: 4
+      graphic_medicine: 4
+      family: 4
+      romance: 3
+      school: 2
+      comedy: 1
+      mystery: 1
+    body_memory:
+      romance: 26
+      graphic_medicine: 14
+      memoir: 12
+      essay: 10
+      healing: 8
+      social_issue: 7
+      family: 6
+      school: 5
+      slice_of_life: 4
+      battle_internal: 4
+      mystery: 2
+      comedy: 2
+    solar_return:
+      fantasy_adventure: 32
+      dark_fantasy: 14
+      battle: 10
+      cultivation: 10
+      historical: 8
+      battle_internal: 7
+      mecha: 5
+      essay: 4
+      romance: 4
+      mystery: 3
+      sci_fi_cyberpunk: 2
+      supernatural_everyday: 1
+    devotion_path:
+      battle: 30
+      fantasy_adventure: 14
+      battle_internal: 12
+      cultivation: 10
+      historical: 8
+      romance: 6
+      dark_fantasy: 5
+      essay: 5
+      family: 4
+      memoir: 2
+      supernatural_everyday: 2
+      mystery: 2
+
+  # ── zh_TW matrix ─────────────────────────────────────────────────────────
+  # 19 brands = 12 teacher brands + 6 zh-specific (teacher_mode=false in catalog)
+  # + 1 Adi Da Taiwan-only (bright_presence_tw, teacher_mode=true).
+  # Per plan §2.3: same shape as en_US §2.1 with +CUL/+HIS bias absorbed
+  # from ESS+MEM (TW market matches Chinese-tradition cultivation/historical
+  # lineage natively). Cell-level rebalances:
+  #   - HIS lifted +5–6% per brand
+  #   - CUL added +5–8% per brand archetype-fit
+  #   - ESS / MEM proportionally reduced
+  zh_TW:
+    stillness_press:
+      healing: 38
+      essay: 10
+      slice_of_life: 10
+      memoir: 6
+      historical: 6
+      supernatural_everyday: 5
+      graphic_medicine: 5
+      school: 4
+      family: 4
+      romance: 3
+      comedy: 3
+      mystery: 3
+      workplace: 3
+    cognitive_clarity:
+      essay: 32
+      mystery: 12
+      battle_internal: 10
+      memoir: 8
+      historical: 7
+      workplace: 6
+      graphic_medicine: 5
+      slice_of_life: 5
+      healing: 4
+      social_issue: 4
+      romance: 3
+      comedy: 2
+      supernatural_everyday: 2
+    somatic_wisdom:
+      romance: 28
+      healing: 13
+      essay: 10
+      graphic_medicine: 9
+      slice_of_life: 8
+      school: 6
+      family: 5
+      workplace: 5
+      memoir: 4
+      comedy: 4
+      historical: 4
+      supernatural_everyday: 2
+      battle_internal: 2
+    qi_foundation:
+      cultivation: 40
+      historical: 14
+      healing: 10
+      fantasy_adventure: 10
+      battle_internal: 8
+      essay: 6
+      memoir: 4
+      slice_of_life: 3
+      mystery: 2
+      supernatural_everyday: 2
+      graphic_medicine: 1
+    digital_ground:
+      supernatural_everyday: 28
+      slice_of_life: 13
+      school: 10
+      essay: 9
+      romance: 8
+      comedy: 7
+      mystery: 6
+      fantasy_adventure: 5
+      horror: 4
+      historical: 4
+      memoir: 3
+      sci_fi_cyberpunk: 3
+    heart_balance:
+      romance: 28
+      essay: 12
+      family: 10
+      healing: 9
+      memoir: 7
+      slice_of_life: 6
+      graphic_medicine: 6
+      historical: 5
+      social_issue: 5
+      school: 5
+      mystery: 4
+      comedy: 2
+      supernatural_everyday: 1
+    relational_calm:
+      healing: 32
+      slice_of_life: 14
+      family: 12
+      romance: 7
+      essay: 7
+      supernatural_everyday: 6
+      comedy: 5
+      school: 5
+      historical: 4
+      graphic_medicine: 3
+      memoir: 3
+      food: 2
+    warrior_calm:
+      cultivation: 35
+      battle_internal: 14
+      battle: 11
+      historical: 10
+      fantasy_adventure: 8
+      mystery: 6
+      essay: 4
+      mecha: 4
+      sports: 3
+      dark_fantasy: 3
+      healing: 2
+    sleep_restoration:
+      healing: 45
+      slice_of_life: 15
+      supernatural_everyday: 10
+      essay: 7
+      memoir: 5
+      historical: 4
+      graphic_medicine: 3
+      family: 3
+      romance: 3
+      school: 3
+      comedy: 1
+      mystery: 1
+    body_memory:
+      romance: 26
+      graphic_medicine: 11
+      memoir: 10
+      essay: 9
+      healing: 8
+      social_issue: 7
+      family: 6
+      historical: 5
+      slice_of_life: 5
+      school: 5
+      battle_internal: 4
+      mystery: 2
+      comedy: 2
+    solar_return:
+      fantasy_adventure: 28
+      dark_fantasy: 12
+      cultivation: 12
+      historical: 10
+      battle: 8
+      essay: 6
+      battle_internal: 6
+      romance: 5
+      mystery: 4
+      sci_fi_cyberpunk: 4
+      mecha: 3
+      supernatural_everyday: 2
+    devotion_path:
+      battle: 22
+      fantasy_adventure: 13
+      battle_internal: 12
+      cultivation: 12
+      historical: 8
+      essay: 7
+      romance: 6
+      dark_fantasy: 5
+      family: 5
+      memoir: 3
+      supernatural_everyday: 3
+      mystery: 2
+      comedy: 2
+    # ── 6 zh-specific standard brands (teacher_mode=false; ahjan-anchored) ──
+    sleep_repair_tw:
+      healing: 50
+      slice_of_life: 15
+      supernatural_everyday: 10
+      essay: 8
+      memoir: 5
+      graphic_medicine: 4
+      family: 4
+      romance: 2
+      school: 1
+      comedy: 1
+    stabilizer_tw:
+      healing: 35
+      slice_of_life: 12
+      essay: 10
+      family: 8
+      memoir: 7
+      romance: 6
+      supernatural_everyday: 5
+      graphic_medicine: 5
+      social_issue: 4
+      mystery: 3
+      school: 3
+      comedy: 2
+    panic_first_aid_tw:
+      battle_internal: 25
+      horror: 15
+      healing: 12
+      essay: 10
+      mystery: 8
+      graphic_medicine: 7
+      supernatural_everyday: 6
+      social_issue: 5
+      memoir: 4
+      romance: 3
+      slice_of_life: 3
+      family: 2
+    gen_z_grounding_tw:
+      school: 28
+      social_issue: 14
+      supernatural_everyday: 10
+      romance: 8
+      essay: 8
+      comedy: 7
+      slice_of_life: 6
+      mystery: 5
+      horror: 4
+      family: 4
+      battle_internal: 3
+      memoir: 3
+    grief_companion_tw:
+      memoir: 28
+      family: 14
+      graphic_medicine: 12
+      essay: 10
+      healing: 9
+      social_issue: 7
+      romance: 5
+      slice_of_life: 5
+      mystery: 3
+      battle_internal: 3
+      school: 2
+      comedy: 2
+    inner_security_tw:
+      essay: 28
+      healing: 12
+      memoir: 10
+      family: 9
+      romance: 8
+      slice_of_life: 7
+      graphic_medicine: 6
+      social_issue: 5
+      school: 5
+      supernatural_everyday: 4
+      mystery: 3
+      comedy: 3
+    # ── Adi Da Taiwan-only teacher-mode brand ───────────────────────────────
+    # Per plan §2.3: only mecha-tentpole brand in any locale.
+    # Excludes ROM, COM, FOO, SCH, FAM, SOL, SPO (incompatible with archetype).
+    bright_presence_tw:
+      mecha: 30
+      sci_fi_cyberpunk: 14
+      battle_internal: 10
+      essay: 10
+      dark_fantasy: 8
+      horror: 8
+      mystery: 6
+      historical: 6
+      battle: 4
+      memoir: 2
+      supernatural_everyday: 2
+
+  # ── zh_CN matrix ─────────────────────────────────────────────────────────
+  # 18 brands = 12 teacher brands + 6 zh-specific.
+  # bright_presence_tw NOT included (Adi Da brand restricted to TW per
+  # config/manga/manga_brand_series_plan.yaml:13,381).
+  # Per plan §2.4: en_US baseline + HIS +2% / CUL +3% absorbed from ESS.
+  # zh-specific brands: same shape as zh_TW with locale-specific lifts/dips
+  # for regulatory sensitivity (HOR -3, SOC -2, GRM -2 vs TW).
+  # Note: lane content mix has manga at 0% in zh_CN per
+  # catalog_generation_config.yaml; this matrix documents design intent for
+  # if/when local-entity market access is established.
+  zh_CN:
+    stillness_press:
+      healing: 40
+      slice_of_life: 10
+      memoir: 8
+      essay: 7
+      supernatural_everyday: 5
+      graphic_medicine: 5
+      school: 4
+      family: 4
+      cultivation: 3
+      romance: 3
+      comedy: 3
+      mystery: 3
+      workplace: 3
+      historical: 2
+    cognitive_clarity:
+      essay: 30
+      mystery: 12
+      battle_internal: 10
+      memoir: 8
+      workplace: 7
+      graphic_medicine: 6
+      slice_of_life: 5
+      healing: 5
+      social_issue: 4
+      romance: 3
+      comedy: 3
+      cultivation: 3
+      supernatural_everyday: 2
+      historical: 2
+    somatic_wisdom:
+      romance: 30
+      healing: 14
+      graphic_medicine: 10
+      slice_of_life: 8
+      school: 6
+      essay: 5
+      family: 5
+      workplace: 5
+      memoir: 4
+      comedy: 4
+      cultivation: 3
+      supernatural_everyday: 2
+      battle_internal: 2
+      historical: 2
+    qi_foundation:
+      cultivation: 38
+      healing: 15
+      historical: 10
+      fantasy_adventure: 10
+      battle_internal: 8
+      memoir: 5
+      essay: 4
+      slice_of_life: 4
+      mystery: 3
+      graphic_medicine: 2
+      supernatural_everyday: 1
+    digital_ground:
+      supernatural_everyday: 30
+      slice_of_life: 14
+      school: 10
+      romance: 8
+      comedy: 7
+      mystery: 6
+      essay: 5
+      fantasy_adventure: 5
+      horror: 4
+      memoir: 3
+      sci_fi_cyberpunk: 3
+      cultivation: 3
+      historical: 2
+    heart_balance:
+      romance: 30
+      family: 10
+      healing: 10
+      memoir: 8
+      essay: 7
+      slice_of_life: 6
+      graphic_medicine: 6
+      social_issue: 5
+      school: 5
+      mystery: 4
+      cultivation: 3
+      comedy: 2
+      supernatural_everyday: 2
+      historical: 2
+    relational_calm:
+      healing: 35
+      slice_of_life: 14
+      family: 12
+      romance: 8
+      supernatural_everyday: 6
+      comedy: 5
+      school: 5
+      essay: 3
+      cultivation: 3
+      graphic_medicine: 3
+      memoir: 2
+      food: 2
+      historical: 2
+    warrior_calm:
+      cultivation: 33
+      battle_internal: 15
+      battle: 12
+      historical: 10
+      fantasy_adventure: 10
+      mystery: 6
+      essay: 5
+      mecha: 3
+      sports: 3
+      dark_fantasy: 2
+      healing: 1
+    sleep_restoration:
+      healing: 45
+      slice_of_life: 15
+      supernatural_everyday: 10
+      memoir: 5
+      graphic_medicine: 4
+      family: 4
+      essay: 3
+      romance: 3
+      cultivation: 3
+      school: 3
+      historical: 2
+      comedy: 2
+      mystery: 1
+    body_memory:
+      romance: 28
+      graphic_medicine: 12
+      memoir: 10
+      healing: 8
+      social_issue: 7
+      family: 6
+      essay: 5
+      slice_of_life: 5
+      school: 5
+      battle_internal: 4
+      cultivation: 3
+      mystery: 3
+      comedy: 2
+      historical: 2
+    solar_return:
+      fantasy_adventure: 30
+      cultivation: 13
+      dark_fantasy: 12
+      historical: 10
+      battle: 10
+      battle_internal: 6
+      romance: 5
+      mystery: 4
+      sci_fi_cyberpunk: 4
+      essay: 2
+      mecha: 2
+      supernatural_everyday: 2
+    devotion_path:
+      battle: 25
+      fantasy_adventure: 13
+      cultivation: 13
+      battle_internal: 12
+      historical: 8
+      romance: 7
+      dark_fantasy: 5
+      family: 5
+      essay: 4
+      memoir: 3
+      supernatural_everyday: 3
+      mystery: 2
+    # ── 6 zh-specific standard brands (teacher_mode=false; ahjan-anchored) ──
+    sleep_repair_cn:
+      healing: 50
+      slice_of_life: 15
+      supernatural_everyday: 10
+      essay: 8
+      memoir: 5
+      graphic_medicine: 4
+      family: 4
+      romance: 2
+      school: 1
+      comedy: 1
+    stabilizer_cn:
+      healing: 35
+      slice_of_life: 12
+      essay: 10
+      family: 8
+      memoir: 7
+      romance: 6
+      supernatural_everyday: 5
+      graphic_medicine: 5
+      social_issue: 4
+      mystery: 3
+      school: 3
+      comedy: 2
+    panic_first_aid_cn:
+      battle_internal: 25
+      healing: 14
+      horror: 12  # suppressed -3 vs TW (regulatory sensitivity)
+      essay: 10
+      mystery: 8
+      graphic_medicine: 7
+      supernatural_everyday: 6
+      social_issue: 5
+      memoir: 4
+      romance: 4
+      slice_of_life: 3
+      family: 2
+    gen_z_grounding_cn:
+      school: 25
+      social_issue: 12  # suppressed -2 vs TW
+      supernatural_everyday: 10
+      romance: 10
+      essay: 8
+      comedy: 8
+      slice_of_life: 6
+      mystery: 5
+      horror: 4
+      family: 4
+      battle_internal: 4
+      memoir: 4
+    grief_companion_cn:
+      memoir: 26
+      family: 14
+      essay: 12
+      graphic_medicine: 10  # suppressed -2 vs TW (graphic-medicine market thinner)
+      healing: 10
+      social_issue: 7
+      romance: 5
+      slice_of_life: 5
+      mystery: 3
+      battle_internal: 3
+      school: 3
+      comedy: 2
+    inner_security_cn:
+      essay: 28
+      healing: 12
+      memoir: 10
+      family: 9
+      romance: 8
+      slice_of_life: 7
+      graphic_medicine: 6
+      social_issue: 5
+      school: 5
+      supernatural_everyday: 4
+      mystery: 3
+      comedy: 3
+
+# ── zh-specific brand teacher map ────────────────────────────────────────────
+# These 13 brands are NOT in teacher_brand_archetypes.yaml (which only covers
+# the 12 global teacher brands). They resolve via brand_teacher_matrix_zh.yaml,
+# all anchored to ahjan with teacher_mode=false. bright_presence_tw is the
+# only Adi Da teacher-mode brand.
+zh_specific_brand_teacher:
+  sleep_repair_tw:    {teacher: ahjan,  teacher_mode: false}
+  stabilizer_tw:      {teacher: ahjan,  teacher_mode: false}
+  panic_first_aid_tw: {teacher: ahjan,  teacher_mode: false}
+  gen_z_grounding_tw: {teacher: ahjan,  teacher_mode: false}
+  grief_companion_tw: {teacher: ahjan,  teacher_mode: false}
+  inner_security_tw:  {teacher: ahjan,  teacher_mode: false}
+  bright_presence_tw: {teacher: adi_da, teacher_mode: true}
+  sleep_repair_cn:    {teacher: ahjan,  teacher_mode: false}
+  stabilizer_cn:      {teacher: ahjan,  teacher_mode: false}
+  panic_first_aid_cn: {teacher: ahjan,  teacher_mode: false}
+  gen_z_grounding_cn: {teacher: ahjan,  teacher_mode: false}
+  grief_companion_cn: {teacher: ahjan,  teacher_mode: false}
+  inner_security_cn:  {teacher: ahjan,  teacher_mode: false}
+
+# ── Series count rule ────────────────────────────────────────────────────────
+# Per (brand, genre) cell with allocation > 0%, the materializer emits
+# series_count rows where:
+#   series_count = max(1, round(allocation_pct / 10))
+# Examples:
+#   45% → 5 series; 30% → 3 series; 14-15% → 1-2 series; 5-9% → 1 series; 1-4% → 1 series
+series_count_rule:
+  formula: "max(1, round(allocation_pct / 10))"
+  rounding: standard  # 0.5 rounds to even per Python round()

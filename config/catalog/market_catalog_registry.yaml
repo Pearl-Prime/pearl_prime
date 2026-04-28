@@ -201,7 +201,12 @@ markets:
       - body_memory           # (TBD)
       - solar_return          # (TBD)
       - devotion_path         # (TBD)
-    brand_count: 18  # 6 zh-specific + 12 teacher brands
+      # Taiwan-only Adi Da teacher-mode brand (per config/manga/manga_brand_series_plan.yaml:13,381
+      # and config/manga/canonical_brand_list.yaml:309 bright_presence_tw_seinen).
+      # Added 2026-04-28 for Pearl Prime book script catalog so Taiwan reflects the
+      # full 19-brand surface (12 teacher + 6 zh-specific + 1 Adi Da Taiwan-only).
+      - bright_presence_tw    # 朗在出版 (Adi Da, Taiwan exclusive teacher-mode brand)
+    brand_count: 19  # 6 zh-specific + 12 teacher + 1 Adi Da Taiwan-exclusive
     business_tracks: [ebook, audiobook]
     platform_strategy: [readmoo, google_play, apple_books_tw, amazon_tw]
     content_mix:
