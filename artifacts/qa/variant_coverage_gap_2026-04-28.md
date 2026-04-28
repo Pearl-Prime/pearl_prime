@@ -9,13 +9,13 @@ Phase 1 ships warn-only per spec §6 risk row 2. Strict mode (CI fail on gap) is
 - minimum variants per section: **3**
 - registry sections passing: **1287**
 - registry sections failing: **63**
-- atom (persona × topic × section_type) tuples passing: **1935**
-  - via persona-atom canonical: **1696**
+- atom (persona × topic × section_type) tuples passing: **2031**
+  - via persona-atom canonical: **1792**
   - via alternative source: **239**
     - `teacher_banks/approved_atoms/EXERCISE`: 29
     - `teacher_banks/doctrine`: 210
-- atom tuples failing: **375**
-- total gaps: **438**
+- atom tuples failing: **279**
+- total gaps: **342**
 
 _Alternative-source coverage_ — `TEACHER_DOCTRINE` resolves from `SOURCE_OF_TRUTH/teacher_banks/<teacher>/doctrine/` (the pipeline picks a teacher per book at runtime per `phoenix_v4/planning/injection_resolver.py`). `EXERCISE` resolves per `specs/PHOENIX_V4_5_WRITER_SPEC.md` §4.5 three-source rule: `atoms/<persona>/<topic>/EXERCISE/CANONICAL.txt` → `teacher_banks/<teacher>/approved_atoms/EXERCISE/*.yaml` → `SOURCE_OF_TRUTH/practice_library/store/practice_items.jsonl`. Other section types remain persona-atom-only per ws_spec_739_validator_teacher_banks_awareness_20260428 scope discipline; multi-source awareness for `HOOK / STORY / REFLECTION / INTEGRATION / COMPRESSION / PIVOT / PERMISSION / TAKEAWAY / THREAD` is a separate Pearl_Architect routing decision tracked in `docs/PEARL_ARCHITECT_STATE.md`.
 
@@ -89,104 +89,7 @@ _Alternative-source coverage_ — `TEACHER_DOCTRINE` resolves from `SOURCE_OF_TR
 
 ## Atom gaps — below threshold
 
-| persona | topic | section_type | have | need |
-|---|---|---|---:|---:|
-| entrepreneurs | burnout | COMPRESSION | 1 | 3 |
-| entrepreneurs | financial_anxiety | COMPRESSION | 1 | 3 |
-| entrepreneurs | imposter_syndrome | COMPRESSION | 1 | 3 |
-| entrepreneurs | overthinking | COMPRESSION | 1 | 3 |
-| entrepreneurs | sleep_anxiety | COMPRESSION | 1 | 3 |
-| entrepreneurs | social_anxiety | COMPRESSION | 1 | 3 |
-| entrepreneurs | somatic_healing | COMPRESSION | 1 | 3 |
-| gen_alpha_students | burnout | COMPRESSION | 1 | 3 |
-| gen_alpha_students | financial_anxiety | COMPRESSION | 1 | 3 |
-| gen_alpha_students | imposter_syndrome | COMPRESSION | 1 | 3 |
-| gen_alpha_students | overthinking | COMPRESSION | 0 | 3 |
-| gen_alpha_students | sleep_anxiety | COMPRESSION | 0 | 3 |
-| gen_alpha_students | social_anxiety | COMPRESSION | 1 | 3 |
-| gen_alpha_students | somatic_healing | COMPRESSION | 1 | 3 |
-| gen_x_sandwich | burnout | COMPRESSION | 1 | 3 |
-| gen_x_sandwich | financial_anxiety | COMPRESSION | 1 | 3 |
-| gen_x_sandwich | imposter_syndrome | COMPRESSION | 1 | 3 |
-| gen_x_sandwich | overthinking | COMPRESSION | 0 | 3 |
-| gen_x_sandwich | sleep_anxiety | COMPRESSION | 0 | 3 |
-| gen_x_sandwich | social_anxiety | COMPRESSION | 1 | 3 |
-| gen_x_sandwich | somatic_healing | COMPRESSION | 1 | 3 |
-| gen_z_student | anxiety | INTEGRATION | 1 | 3 |
-| gen_z_student | anxiety | PERMISSION | 1 | 3 |
-| gen_z_student | anxiety | TAKEAWAY | 1 | 3 |
-| gen_z_student | anxiety | THREAD | 1 | 3 |
-| gen_z_student | boundaries | INTEGRATION | 1 | 3 |
-| gen_z_student | boundaries | PERMISSION | 1 | 3 |
-| gen_z_student | boundaries | TAKEAWAY | 1 | 3 |
-| gen_z_student | boundaries | THREAD | 1 | 3 |
-| gen_z_student | burnout | INTEGRATION | 1 | 3 |
-| gen_z_student | burnout | PERMISSION | 1 | 3 |
-| gen_z_student | burnout | TAKEAWAY | 1 | 3 |
-| gen_z_student | burnout | THREAD | 1 | 3 |
-| gen_z_student | compassion_fatigue | INTEGRATION | 1 | 3 |
-| gen_z_student | compassion_fatigue | REFLECTION | 2 | 3 |
-| gen_z_student | courage | INTEGRATION | 1 | 3 |
-| gen_z_student | courage | PERMISSION | 1 | 3 |
-| gen_z_student | courage | TAKEAWAY | 1 | 3 |
-| gen_z_student | courage | THREAD | 1 | 3 |
-| gen_z_student | depression | INTEGRATION | 1 | 3 |
-| gen_z_student | depression | PERMISSION | 1 | 3 |
-| gen_z_student | depression | TAKEAWAY | 1 | 3 |
-| gen_z_student | depression | THREAD | 1 | 3 |
-| gen_z_student | financial_anxiety | INTEGRATION | 1 | 3 |
-| gen_z_student | financial_anxiety | REFLECTION | 2 | 3 |
-| gen_z_student | financial_stress | INTEGRATION | 1 | 3 |
-| gen_z_student | financial_stress | REFLECTION | 2 | 3 |
-| gen_z_student | grief | INTEGRATION | 1 | 3 |
-| gen_z_student | grief | PERMISSION | 1 | 3 |
-| gen_z_student | grief | TAKEAWAY | 1 | 3 |
-| gen_z_student | grief | THREAD | 1 | 3 |
-| gen_z_student | imposter_syndrome | INTEGRATION | 1 | 3 |
-| gen_z_student | imposter_syndrome | PERMISSION | 1 | 3 |
-| gen_z_student | imposter_syndrome | TAKEAWAY | 1 | 3 |
-| gen_z_student | imposter_syndrome | THREAD | 1 | 3 |
-| gen_z_student | overthinking | INTEGRATION | 1 | 3 |
-| gen_z_student | overthinking | PERMISSION | 1 | 3 |
-| gen_z_student | overthinking | TAKEAWAY | 1 | 3 |
-| gen_z_student | overthinking | THREAD | 1 | 3 |
-| gen_z_student | self_worth | INTEGRATION | 1 | 3 |
-| gen_z_student | self_worth | PERMISSION | 1 | 3 |
-| gen_z_student | self_worth | TAKEAWAY | 1 | 3 |
-| gen_z_student | self_worth | THREAD | 1 | 3 |
-| gen_z_student | sleep_anxiety | INTEGRATION | 1 | 3 |
-| gen_z_student | sleep_anxiety | PERMISSION | 1 | 3 |
-| gen_z_student | sleep_anxiety | TAKEAWAY | 1 | 3 |
-| gen_z_student | sleep_anxiety | THREAD | 1 | 3 |
-| gen_z_student | social_anxiety | INTEGRATION | 1 | 3 |
-| gen_z_student | social_anxiety | PERMISSION | 1 | 3 |
-| gen_z_student | social_anxiety | TAKEAWAY | 1 | 3 |
-| gen_z_student | social_anxiety | THREAD | 1 | 3 |
-| gen_z_student | somatic_healing | INTEGRATION | 1 | 3 |
-| gen_z_student | somatic_healing | PERMISSION | 1 | 3 |
-| gen_z_student | somatic_healing | TAKEAWAY | 1 | 3 |
-| gen_z_student | somatic_healing | THREAD | 1 | 3 |
-| healthcare_rns | burnout | COMPRESSION | 1 | 3 |
-| healthcare_rns | financial_anxiety | COMPRESSION | 1 | 3 |
-| healthcare_rns | imposter_syndrome | COMPRESSION | 1 | 3 |
-| healthcare_rns | overthinking | COMPRESSION | 0 | 3 |
-| healthcare_rns | sleep_anxiety | COMPRESSION | 0 | 3 |
-| healthcare_rns | social_anxiety | COMPRESSION | 1 | 3 |
-| healthcare_rns | somatic_healing | COMPRESSION | 1 | 3 |
-| tech_finance_burnout | burnout | COMPRESSION | 1 | 3 |
-| tech_finance_burnout | financial_anxiety | COMPRESSION | 1 | 3 |
-| tech_finance_burnout | imposter_syndrome | COMPRESSION | 1 | 3 |
-| tech_finance_burnout | overthinking | COMPRESSION | 1 | 3 |
-| tech_finance_burnout | sleep_anxiety | COMPRESSION | 1 | 3 |
-| tech_finance_burnout | social_anxiety | COMPRESSION | 1 | 3 |
-| tech_finance_burnout | somatic_healing | COMPRESSION | 1 | 3 |
-| working_parents | burnout | COMPRESSION | 1 | 3 |
-| working_parents | financial_anxiety | COMPRESSION | 1 | 3 |
-| working_parents | imposter_syndrome | COMPRESSION | 1 | 3 |
-| working_parents | overthinking | COMPRESSION | 0 | 3 |
-| working_parents | sleep_anxiety | COMPRESSION | 0 | 3 |
-| working_parents | social_anxiety | COMPRESSION | 1 | 3 |
-| working_parents | somatic_healing | COMPRESSION | 1 | 3 |
+_None — every present `CANONICAL.txt` has ≥ threshold variants._
 
 ## Atom gaps — missing files
 
