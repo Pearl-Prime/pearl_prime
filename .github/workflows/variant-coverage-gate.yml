@@ -6,8 +6,9 @@ name: Variant coverage gate
 # and asserts >=3 variants per section per spec
 # specs/SPEC_5_VARIANTS_AND_BESTSELLER_BEAT_WIRING.md §3.1 + SPEC-739-THRESHOLD-01.
 #
-# Phase 3: gaps reached zero (PR #767). Gate flipped to --strict per spec §6.
-# Any new section with < 3 variants now blocks the PR.
+# Phase 3: gaps reached zero (PR #767 atoms + PR #769 registry grief).
+# Gate flipped to full --strict (registry + atoms). Any new section with
+# < 3 variants now blocks the PR.
 
 on:
   pull_request:
@@ -46,7 +47,6 @@ jobs:
           mkdir -p artifacts/qa
           PYTHONPATH=. python3 scripts/registry/validate_variant_coverage.py \
             --strict \
-            --skip-registry \
             --report-out "artifacts/qa/variant_coverage_gap_$(date -u +%Y-%m-%d).md"
 
       - name: Upload coverage report
