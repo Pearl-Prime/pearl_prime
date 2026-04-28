@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-04-28T21:14:43.206090+00:00",
+  "generated_at_utc": "2026-04-28T21:34:07.973492+00:00",
   "source_csvs": [
     "artifacts/catalog/pearl_prime_book_script_catalogs/en_US_catalog.csv",
     "artifacts/catalog/pearl_prime_book_script_catalogs/ja_JP_catalog.csv",
@@ -407,23 +407,236 @@
         "solar_return": 140,
         "devotion_path": 122
       },
-      "distinct_titles_in_ready": 0,
-      "distinct_title_subtitle_in_ready": 0,
-      "distinct_brand_title_subtitle_in_ready": 0,
-      "ready_rows_with_blank_title": 1478,
-      "ready_rows_with_blank_subtitle": 1478,
-      "title_duplication_top": [],
+      "distinct_titles_in_ready": 699,
+      "distinct_title_subtitle_in_ready": 1478,
+      "distinct_brand_title_subtitle_in_ready": 1478,
+      "ready_rows_with_blank_title": 0,
+      "ready_rows_with_blank_subtitle": 0,
+      "title_duplication_top": [
+        {
+          "title": "お金への不安を超えて、静かな日々へ",
+          "count": 8
+        },
+        {
+          "title": "やわらかな睡眠の不安との対話",
+          "count": 6
+        },
+        {
+          "title": "やすらかな考えすぎ回復の歩み",
+          "count": 6
+        },
+        {
+          "title": "抑うつを超えて、抱きしめる日々へ",
+          "count": 6
+        },
+        {
+          "title": "燃え尽きを超えて、明るい日々へ",
+          "count": 6
+        },
+        {
+          "title": "明るいお金への不安との対話",
+          "count": 6
+        },
+        {
+          "title": "静かな勇気の手当て",
+          "count": 5
+        },
+        {
+          "title": "静かなインポスター症候群の手当て",
+          "count": 5
+        },
+        {
+          "title": "静かなインポスター症候群との対話",
+          "count": 5
+        },
+        {
+          "title": "睡眠の不安を超えて、静かな日々へ",
+          "count": 5
+        },
+        {
+          "title": "静かな身体の癒しとの対話",
+          "count": 5
+        },
+        {
+          "title": "澄んだ燃え尽き回復の歩み",
+          "count": 5
+        },
+        {
+          "title": "からだに宿る不安の手当て",
+          "count": 5
+        },
+        {
+          "title": "からだに宿る身体の癒し回復の歩み",
+          "count": 5
+        },
+        {
+          "title": "燃え尽きのあとに、根づいた日々",
+          "count": 5
+        }
+      ],
       "title_subtitle_duplication_top": [],
-      "subtitle_duplication_top": [],
+      "subtitle_duplication_top": [
+        {
+          "subtitle": "自己肯定回復のための、しずかな歩み — 起業家へ",
+          "count": 7
+        },
+        {
+          "subtitle": "マインドフルネス回復のための、しずかな歩み — テック・金融で働く人へ",
+          "count": 6
+        },
+        {
+          "subtitle": "不安回復のための、しずかな歩み — Z世代の働き手へ",
+          "count": 5
+        },
+        {
+          "subtitle": "喪失とかなしみ回復のための、しずかな歩み — 現場の最前線へ",
+          "count": 5
+        },
+        {
+          "subtitle": "抑うつ回復のための、しずかな歩み — テック・金融で働く人へ",
+          "count": 4
+        },
+        {
+          "subtitle": "燃え尽き回復のための、しずかな歩み — ミレニアル世代の女性へ",
+          "count": 4
+        },
+        {
+          "subtitle": "抑うつ回復のための、しずかな歩み — Z世代の働き手へ",
+          "count": 4
+        },
+        {
+          "subtitle": "集中の困難回復のための、しずかな歩み — 教える人へ",
+          "count": 4
+        },
+        {
+          "subtitle": "燃え尽き回復のための、しずかな歩み — テック・金融で働く人へ",
+          "count": 4
+        },
+        {
+          "subtitle": "燃え尽き回復のための、しずかな歩み — Z世代の働き手へ",
+          "count": 4
+        },
+        {
+          "subtitle": "不安回復のための、しずかな歩み — 現場の最前線へ",
+          "count": 3
+        },
+        {
+          "subtitle": "燃え尽き回復のための、しずかな歩み — 働く親へ",
+          "count": 3
+        },
+        {
+          "subtitle": "抑うつ回復のための、しずかな歩み — 教える人へ",
+          "count": 3
+        },
+        {
+          "subtitle": "抑うつ回復のための、しずかな歩み — 働く親へ",
+          "count": 3
+        },
+        {
+          "subtitle": "考えすぎ回復のための、しずかな歩み — 働く親へ",
+          "count": 3
+        }
+      ],
       "weak_title_count": 1478,
       "weak_subtitle_count": 1478,
       "weak_title_reason_counts": {
-        "blank": 1478
+        "ultra_short_title": 1478
       },
       "weak_subtitle_reason_counts": {
-        "blank": 1478
+        "too_short": 1478
       },
-      "top_10_strongest_distinct": [],
+      "top_10_strongest_distinct": [
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "抱きしめる喪失とかなしみとの対話",
+          "subtitle": "喪失とかなしみのあとに、抱きしめる静けさを取り戻す — 医療従事者へ"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "身体の癒しのあとに、抱きしめる日々",
+          "subtitle": "抱きしめる暮らしへの、身体の癒し回復の手引き — 医療従事者へ"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "やすらかな睡眠の不安の手当て",
+          "subtitle": "睡眠の不安を抜けるための、やすらかな日々への手引き — 医療従事者へ"
+        },
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "ゆるがぬ勇気の手当て",
+          "subtitle": "勇気を抜けるための、ゆるがぬ日々への手引き — 現場の最前線へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "喪失とかなしみのあとに、抱きしめる日々",
+          "subtitle": "抱きしめる暮らしへの、喪失とかなしみ回復の手引き — サンドイッチ世代へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "身体の癒しのあとに、抱きしめる日々",
+          "subtitle": "抱きしめる暮らしへの、身体の癒し回復の手引き — サンドイッチ世代へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "cognitive_clarity",
+          "topic": "overthinking",
+          "persona": "tech_finance_burnout",
+          "teacher": "joshin",
+          "title": "澄んだ考えすぎの手当て",
+          "subtitle": "考えすぎを抜けるための、澄んだ日々への手引き — テック・金融で働く人へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "devotion_path",
+          "topic": "courage",
+          "persona": "healthcare_rns",
+          "teacher": "sai_ma",
+          "title": "ささげる勇気との対話",
+          "subtitle": "勇気のあとに、ささげる静けさを取り戻す — 医療従事者へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "financial_anxiety",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "お金への不安のあとに、落ち着いた日々",
+          "subtitle": "落ち着いた暮らしへの、お金への不安回復の手引き — Z世代の働き手へ"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "imposter_syndrome",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "インポスター症候群のあとに、落ち着いた日々",
+          "subtitle": "落ち着いた暮らしへの、インポスター症候群回復の手引き — Z世代の働き手へ"
+        }
+      ],
       "all_brands": [
         "body_memory",
         "cognitive_clarity",
@@ -471,7 +684,7 @@
         "tech_finance_burnout",
         "working_parents"
       ],
-      "needs_title_synthesis_locale_native": 1478,
+      "needs_title_synthesis_locale_native": 0,
       "needs_title_synthesis_en_only": 0,
       "high_potential_blocked_total_at_or_above_0_65": 0
     },
@@ -773,23 +986,175 @@
         "devotion_path": 122,
         "bright_presence_tw": 28
       },
-      "distinct_titles_in_ready": 0,
-      "distinct_title_subtitle_in_ready": 0,
-      "distinct_brand_title_subtitle_in_ready": 0,
-      "ready_rows_with_blank_title": 2658,
-      "ready_rows_with_blank_subtitle": 2658,
-      "title_duplication_top": [],
+      "distinct_titles_in_ready": 1187,
+      "distinct_title_subtitle_in_ready": 2658,
+      "distinct_brand_title_subtitle_in_ready": 2658,
+      "ready_rows_with_blank_title": 0,
+      "ready_rows_with_blank_subtitle": 0,
+      "title_duplication_top": [
+        {
+          "title": "穿越睡眠焦慮，走向悲傷陪伴的時光",
+          "count": 7
+        },
+        {
+          "title": "安睡的步調，走出倦怠",
+          "count": 7
+        },
+        {
+          "title": "穿越界限，走向睡眠修復的時光",
+          "count": 6
+        },
+        {
+          "title": "睡眠修復的經濟壓力的同行",
+          "count": 6
+        },
+        {
+          "title": "Z 世代踏實的悲傷的同行",
+          "count": 6
+        },
+        {
+          "title": "穿越想太多，走向Z 世代踏實的時光",
+          "count": 6
+        },
+        {
+          "title": "Z 世代踏實的步調，走出社交焦慮",
+          "count": 6
+        },
+        {
+          "title": "悲傷陪伴的專注困難的同行",
+          "count": 6
+        },
+        {
+          "title": "悲傷陪伴的經濟壓力的同行",
+          "count": 6
+        },
+        {
+          "title": "冒牌者症候群之後，悲傷陪伴的日子",
+          "count": 6
+        },
+        {
+          "title": "悲傷陪伴的想太多指引",
+          "count": 6
+        },
+        {
+          "title": "平衡的自我價值指引",
+          "count": 6
+        },
+        {
+          "title": "溫柔的睡眠焦慮的同行",
+          "count": 6
+        },
+        {
+          "title": "明亮的冒牌者症候群的同行",
+          "count": 6
+        },
+        {
+          "title": "穿越倦怠，走向睡眠修復的時光",
+          "count": 5
+        }
+      ],
       "title_subtitle_duplication_top": [],
       "subtitle_duplication_top": [],
       "weak_title_count": 2658,
-      "weak_subtitle_count": 2658,
+      "weak_subtitle_count": 2056,
       "weak_title_reason_counts": {
-        "blank": 2658
+        "ultra_short_title": 2658
       },
       "weak_subtitle_reason_counts": {
-        "blank": 2658
+        "too_short": 2056
       },
-      "top_10_strongest_distinct": [],
+      "top_10_strongest_distinct": [
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "承接的步調，走出悲傷",
+          "subtitle": "當悲傷停不下來時的承接的指引 — 寫給醫療人員"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "承接的身體療癒指引",
+          "subtitle": "走出身體療癒，邁向承接的日子 — 寫給醫療人員"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "安睡的步調，走出睡眠焦慮",
+          "subtitle": "當睡眠焦慮停不下來時的安睡的指引 — 寫給醫療人員"
+        },
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "勇氣之後，穩定的日子",
+          "subtitle": "穩定的生活，勇氣復原的同行者 — 寫給第一線救援人員"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "悲傷之後，承接的日子",
+          "subtitle": "承接的生活，悲傷復原的同行者 — 寫給夾心世代"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "承接的身體療癒指引",
+          "subtitle": "走出身體療癒，邁向承接的日子 — 寫給夾心世代"
+        },
+        {
+          "composite": 0.93,
+          "brand": "cognitive_clarity",
+          "topic": "overthinking",
+          "persona": "tech_finance_burnout",
+          "teacher": "joshin",
+          "title": "想太多之後，清明的日子",
+          "subtitle": "清明的生活，想太多復原的同行者 — 寫給科技與金融工作者"
+        },
+        {
+          "composite": 0.93,
+          "brand": "devotion_path",
+          "topic": "courage",
+          "persona": "healthcare_rns",
+          "teacher": "sai_ma",
+          "title": "穿越勇氣，走向皈依的時光",
+          "subtitle": "勇氣復原途中的皈依的陪伴 — 寫給醫療人員"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "imposter_syndrome",
+          "persona": "gen_z_student",
+          "teacher": "miki",
+          "title": "穿越冒牌者症候群，走向踏實的時光",
+          "subtitle": "冒牌者症候群復原途中的踏實的陪伴 — 寫給 Z 世代學生"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "social_anxiety",
+          "persona": "gen_z_student",
+          "teacher": "miki",
+          "title": "穿越社交焦慮，走向踏實的時光",
+          "subtitle": "社交焦慮復原途中的踏實的陪伴 — 寫給 Z 世代學生"
+        }
+      ],
       "all_brands": [
         "body_memory",
         "bright_presence_tw",
@@ -844,7 +1209,7 @@
         "tech_finance_burnout",
         "working_parents"
       ],
-      "needs_title_synthesis_locale_native": 2818,
+      "needs_title_synthesis_locale_native": 0,
       "needs_title_synthesis_en_only": 0,
       "high_potential_blocked_total_at_or_above_0_65": 40
     },
@@ -914,23 +1279,175 @@
         "solar_return": 140,
         "devotion_path": 122
       },
-      "distinct_titles_in_ready": 0,
-      "distinct_title_subtitle_in_ready": 0,
-      "distinct_brand_title_subtitle_in_ready": 0,
-      "ready_rows_with_blank_title": 2630,
-      "ready_rows_with_blank_subtitle": 2630,
-      "title_duplication_top": [],
+      "distinct_titles_in_ready": 1178,
+      "distinct_title_subtitle_in_ready": 2630,
+      "distinct_brand_title_subtitle_in_ready": 2630,
+      "ready_rows_with_blank_title": 0,
+      "ready_rows_with_blank_subtitle": 0,
+      "title_duplication_top": [
+        {
+          "title": "睡眠修复的社交焦虑指南",
+          "count": 7
+        },
+        {
+          "title": "恐慌急救的节奏，走出焦虑",
+          "count": 7
+        },
+        {
+          "title": "悲伤陪伴的身体疗愈指南",
+          "count": 7
+        },
+        {
+          "title": "内在安稳的节奏，走出过度思虑",
+          "count": 7
+        },
+        {
+          "title": "止息的节奏，走出悲伤",
+          "count": 7
+        },
+        {
+          "title": "正念之后，恐慌急救的日子",
+          "count": 6
+        },
+        {
+          "title": "恐慌急救的睡眠焦虑指南",
+          "count": 6
+        },
+        {
+          "title": "恐慌急救的社交焦虑指南",
+          "count": 6
+        },
+        {
+          "title": "自我价值之后，Z 世代安身的日子",
+          "count": 6
+        },
+        {
+          "title": "倦怠之后，内在安稳的日子",
+          "count": 6
+        },
+        {
+          "title": "穿越冒名顶替综合征，走向内在安稳的日子",
+          "count": 6
+        },
+        {
+          "title": "自我价值之后，承接的日子",
+          "count": 6
+        },
+        {
+          "title": "明亮的节奏，走出金钱焦虑",
+          "count": 6
+        },
+        {
+          "title": "穿越边界，走向睡眠修复的日子",
+          "count": 5
+        },
+        {
+          "title": "穿越睡眠焦虑，走向睡眠修复的日子",
+          "count": 5
+        }
+      ],
       "title_subtitle_duplication_top": [],
       "subtitle_duplication_top": [],
       "weak_title_count": 2630,
-      "weak_subtitle_count": 2630,
+      "weak_subtitle_count": 2037,
       "weak_title_reason_counts": {
-        "blank": 2630
+        "ultra_short_title": 2630
       },
       "weak_subtitle_reason_counts": {
-        "blank": 2630
+        "too_short": 2037
       },
-      "top_10_strongest_distinct": [],
+      "top_10_strongest_distinct": [
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "承接的悲伤指南",
+          "subtitle": "走出悲伤，迈向承接的日子 — 写给医疗从业者"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "承接的身体疗愈的同行",
+          "subtitle": "身体疗愈恢复期的承接的日子 — 写给医疗从业者"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "安睡的节奏，走出睡眠焦虑",
+          "subtitle": "当睡眠焦虑无法停止时的安睡的指引 — 写给医疗从业者"
+        },
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "穿越勇气，走向稳定的日子",
+          "subtitle": "勇气恢复期的稳定的陪伴 — 写给一线响应人员"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "承接的节奏，走出悲伤",
+          "subtitle": "当悲伤无法停止时的承接的指引 — 写给夹心一代"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "穿越身体疗愈，走向承接的日子",
+          "subtitle": "身体疗愈恢复期的承接的陪伴 — 写给夹心一代"
+        },
+        {
+          "composite": 0.93,
+          "brand": "cognitive_clarity",
+          "topic": "overthinking",
+          "persona": "tech_finance_burnout",
+          "teacher": "joshin",
+          "title": "清明的过度思虑指南",
+          "subtitle": "走出过度思虑，迈向清明的日子 — 写给科技与金融从业者"
+        },
+        {
+          "composite": 0.93,
+          "brand": "devotion_path",
+          "topic": "courage",
+          "persona": "healthcare_rns",
+          "teacher": "sai_ma",
+          "title": "勇气之后，皈依的日子",
+          "subtitle": "皈依的生活，勇气恢复的同行者 — 写给医疗从业者"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "imposter_syndrome",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "穿越冒名顶替综合征，走向踏实的日子",
+          "subtitle": "冒名顶替综合征恢复期的踏实的陪伴 — 写给 Z 世代职场人"
+        },
+        {
+          "composite": 0.93,
+          "brand": "digital_ground",
+          "topic": "social_anxiety",
+          "persona": "gen_z_professionals",
+          "teacher": "miki",
+          "title": "踏实的社交焦虑的同行",
+          "subtitle": "社交焦虑恢复期的踏实的日子 — 写给 Z 世代职场人"
+        }
+      ],
       "all_brands": [
         "body_memory",
         "cognitive_clarity",
@@ -984,7 +1501,7 @@
         "tech_finance_burnout",
         "working_parents"
       ],
-      "needs_title_synthesis_locale_native": 2630,
+      "needs_title_synthesis_locale_native": 0,
       "needs_title_synthesis_en_only": 0,
       "high_potential_blocked_total_at_or_above_0_65": 0
     }
@@ -1042,15 +1559,15 @@
     },
     "listing_ready_per_locale": {
       "en_US": 1478,
-      "ja_JP": 0,
-      "zh_TW": 0,
-      "zh_CN": 0
+      "ja_JP": 1478,
+      "zh_TW": 2658,
+      "zh_CN": 2630
     },
     "distinct_listing_units_per_locale": {
       "en_US": 1478,
-      "ja_JP": 0,
-      "zh_TW": 0,
-      "zh_CN": 0
+      "ja_JP": 1478,
+      "zh_TW": 2658,
+      "zh_CN": 2630
     }
   },
   "ready_threshold": 0.7

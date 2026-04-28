@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-28T21:14:42Z",
-  "generator_version": "45d27ba41972",
+  "generated_at": "2026-04-28T21:33:36Z",
+  "generator_version": "5ef8ceb4c305",
   "totals": {
     "en_US": {
       "rows": 1478,
@@ -8,6 +8,31 @@
       "blocked": 0,
       "by_status": {
         "ready": 1478
+      }
+    },
+    "ja_JP": {
+      "rows": 1478,
+      "ready": 1478,
+      "blocked": 0,
+      "by_status": {
+        "ready": 1478
+      }
+    },
+    "zh_TW": {
+      "rows": 2818,
+      "ready": 2658,
+      "blocked": 160,
+      "by_status": {
+        "blocked_score": 160,
+        "ready": 2658
+      }
+    },
+    "zh_CN": {
+      "rows": 2630,
+      "ready": 2630,
+      "blocked": 0,
+      "by_status": {
+        "ready": 2630
       }
     }
   },
@@ -23,7 +48,7 @@
     },
     {
       "path": "config/catalog/catalog_generation_config.yaml",
-      "sha256": "a454030b167edd6a5fa2643d91bf87b001416349c721019fc97ca8481cce20c7"
+      "sha256": "91adb1d0b8fdf7be8d5dc5b4b525beae2c971b8a266abdb3c3d18483e07b7e0c"
     },
     {
       "path": "config/catalog_planning/canonical_topics.yaml",

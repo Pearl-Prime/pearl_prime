@@ -244,57 +244,94 @@ def pick_title_subtitle(catalog_config: dict, topic: str, persona: str,
                         locale: str, brand: str,
                         teacher_mode: str = "", runtime_format: str = "") -> tuple[str, str, str]:
     """
-    Deterministic pick from English title_templates for English locales only.
-    Non-English locales return blank with needs_title_synthesis (no LLM fallback).
+    Deterministic per-locale title + subtitle synthesis. No LLM fallback.
     Returns (title, subtitle, note).
 
-    B2 (#786 / PR #790) — Composition: per-row title + subtitle now compose
-        title    = "{brand_voice_prefix} {base_title}".strip()
-        subtitle = "{base_subtitle_pattern} — {persona_signal}".strip()
-    Brand voice prefix and persona signal come from
-    catalog_config.brand_voice_modifiers and .persona_subtitle_modifiers.
-    Selection is fully deterministic: SHA256(locale|brand|topic|persona|
-    teacher_mode|runtime_format) indexes the base template; brand + persona
-    modifiers are pure lookups. Per #786 §5+§6: "deterministic per-(brand,
-    persona) salting using brand archetype + persona label" — no random or
-    time-based salts.
+    Two paths:
 
-    Supersedes the flagship_set + variant_title_subtitle scheme from PR #788
-    per operator decision 2026-04-29 ("use #790 as canonical B2 PR").
+    en_US (B2, PR #790 architecture — unchanged):
+        templates  = catalog_config.title_templates[topic]                 (5–6 per topic)
+        base_title = templates[idx].title                                  (idx by SHA-256 seed)
+        title      = "{voice_prefix} {base_title}".strip()
+        subtitle   = "{base_subtitle} — {persona_signal}".strip()
+        Selection deterministic by SHA256(locale|brand|topic|persona|teacher_mode|runtime_format).
+        voice_prefix from brand_voice_modifiers[brand].voice_prefix.
+        persona_signal from persona_subtitle_modifiers[persona].signal.
+
+    ja_JP / zh_TW / zh_CN (B1, on top of #790):
+        templates  = catalog_config.title_templates_{locale}              (5 formula templates)
+        title_pat  = templates[idx].title    (placeholders: {voice_prefix} {topic})
+        sub_pat    = templates[idx].subtitle_pattern
+        title      = title_pat with {voice_prefix} ← brand_voice_modifiers[brand].voice_prefix_{locale}
+                                  and {topic} ← topic_displays_{locale}[topic]
+        subtitle   = sub_pat   with same interpolations + persona_signal_{locale} appended
+                                  (joiner: " — " for en_US, " — " for non-en too — keeps Amazon-search compatibility)
+
+    en_US output is byte-identical to PR #790's; the new path only fires for non-en.
     """
-    if locale not in ENGLISH_TITLE_LOCALES:
-        return ("", "", "needs_title_synthesis_locale_native")
+    # ── Resolve locale-specific keys ─────────────────────────────────
+    is_en = (locale == "en_US")
+    template_key = "title_templates" if is_en else f"title_templates_{locale}"
+    voice_prefix_key = "voice_prefix" if is_en else f"voice_prefix_{locale}"
+    signal_key = "signal" if is_en else f"signal_{locale}"
 
-    templates = (catalog_config.get("title_templates") or {}).get(topic) or []
+    # ── Pick template ────────────────────────────────────────────────
+    if is_en:
+        templates = (catalog_config.get(template_key) or {}).get(topic) or []
+    else:
+        templates = catalog_config.get(template_key) or []
     if not templates:
-        return ("", "", "needs_title_synthesis")
-    # B2 (#786 §6): include teacher_mode + runtime_format in salt so two rows
-    # that share (brand, topic, persona) but differ in format/mode pick
-    # different templates — spreads cluster sizes below the 6-cap.
+        return ("", "", "needs_title_synthesis_locale_native"
+                if not is_en else "needs_title_synthesis")
+
+    # B2 §6 salt: include teacher_mode + runtime_format. Same hash shape
+    # for all locales so deterministic + reproducible.
     seed = f"{locale}|{brand}|{topic}|{persona}|{teacher_mode}|{runtime_format}".encode("utf-8")
     idx = int(hashlib.sha256(seed).hexdigest(), 16) % len(templates)
     tpl = templates[idx]
-    base_title = tpl.get("title", "") or ""
+    title_pat = tpl.get("title", "") or ""
     sub_pat = tpl.get("subtitle_pattern", "") or ""
-    topic_disp = topic.replace("_", " ").title()
-    base_subtitle = sub_pat.replace("{topic}", topic_disp)
 
-    # B2 brand voice prefix
+    # ── Topic display ────────────────────────────────────────────────
+    if is_en:
+        topic_disp = topic.replace("_", " ").title()
+    else:
+        topic_disp_map = catalog_config.get(f"topic_displays_{locale}") or {}
+        topic_disp = topic_disp_map.get(topic) or topic.replace("_", " ").title()
+
+    # ── Brand voice prefix (locale-aware) ────────────────────────────
     brand_mods = (catalog_config.get("brand_voice_modifiers") or {})
     voice_entry = brand_mods.get(brand) or brand_mods.get("_default") or {}
-    voice_prefix = (voice_entry.get("voice_prefix") or "").strip()
-    title = f"{voice_prefix} {base_title}".strip() if voice_prefix else base_title
+    voice_prefix = (voice_entry.get(voice_prefix_key) or "").strip()
+    # Fallback: if a non-en row's brand has no locale-specific prefix
+    # registered, leave it empty rather than leaking en_US into a CJK title.
 
-    # B2 persona subtitle signal
+    # ── Compose base title + subtitle ────────────────────────────────
+    if is_en:
+        # en_US (#790): "{voice_prefix} {base_title}" — preserved exactly.
+        base_title = title_pat
+        title = f"{voice_prefix} {base_title}".strip() if voice_prefix else base_title
+        base_subtitle = sub_pat.replace("{topic}", topic_disp)
+    else:
+        # Non-en formula templates carry {voice_prefix} and {topic} placeholders.
+        title = (title_pat
+                 .replace("{voice_prefix}", voice_prefix)
+                 .replace("{topic}", topic_disp))
+        base_subtitle = (sub_pat
+                         .replace("{voice_prefix}", voice_prefix)
+                         .replace("{topic}", topic_disp))
+
+    # ── Persona subtitle signal (locale-aware) ───────────────────────
     persona_mods = (catalog_config.get("persona_subtitle_modifiers") or {})
     persona_entry = persona_mods.get(persona) or persona_mods.get("_default") or {}
-    persona_signal = (persona_entry.get("signal") or "").strip()
+    persona_signal = (persona_entry.get(signal_key) or "").strip()
     if persona_signal and base_subtitle:
         subtitle = f"{base_subtitle} — {persona_signal}"
     else:
         subtitle = base_subtitle
 
-    note = "" if (title and subtitle) else "needs_title_synthesis"
+    note = "" if (title and subtitle) else (
+        "needs_title_synthesis" if is_en else "needs_title_synthesis_locale_native")
     return (title, subtitle, note)
 
 

@@ -329,36 +329,262 @@ title_templates:
 # (brand, topic, persona) tuples produce visually distinct titles
 # without random salts.
 brand_voice_modifiers:
-  stillness_press:    { voice_prefix: "Quiet" }
-  cognitive_clarity:  { voice_prefix: "Clear" }
-  digital_ground:     { voice_prefix: "Grounded" }
-  warrior_calm:       { voice_prefix: "Steady" }
-  somatic_wisdom:     { voice_prefix: "Embodied" }
-  relational_calm:    { voice_prefix: "Together" }
-  sleep_restoration:  { voice_prefix: "Restful" }
-  heart_balance:      { voice_prefix: "Whole" }
-  devotion_path:      { voice_prefix: "Devoted" }
-  solar_return:       { voice_prefix: "Bright" }
-  body_memory:        { voice_prefix: "Held" }
-  qi_foundation:      { voice_prefix: "Rooted" }
-  _default:           { voice_prefix: "" }
+  # B1 (locale-native titles, on top of #790's #786 architecture):
+  # `voice_prefix` is en_US default. `voice_prefix_{locale}` per non-en
+  # locale is consumed by the generator when locale != en_US.
+  stillness_press:
+    voice_prefix:        "Quiet"
+    voice_prefix_ja_JP:  "静かな"
+    voice_prefix_zh_TW:  "靜默的"
+    voice_prefix_zh_CN:  "止息的"
+  cognitive_clarity:
+    voice_prefix:        "Clear"
+    voice_prefix_ja_JP:  "澄んだ"
+    voice_prefix_zh_TW:  "清明的"
+    voice_prefix_zh_CN:  "清明的"
+  digital_ground:
+    voice_prefix:        "Grounded"
+    voice_prefix_ja_JP:  "落ち着いた"
+    voice_prefix_zh_TW:  "踏實的"
+    voice_prefix_zh_CN:  "踏实的"
+  warrior_calm:
+    voice_prefix:        "Steady"
+    voice_prefix_ja_JP:  "ゆるがぬ"
+    voice_prefix_zh_TW:  "穩定的"
+    voice_prefix_zh_CN:  "稳定的"
+  somatic_wisdom:
+    voice_prefix:        "Embodied"
+    voice_prefix_ja_JP:  "からだに宿る"
+    voice_prefix_zh_TW:  "身體的"
+    voice_prefix_zh_CN:  "身体的"
+  relational_calm:
+    voice_prefix:        "Together"
+    voice_prefix_ja_JP:  "やわらかな"
+    voice_prefix_zh_TW:  "溫柔的"
+    voice_prefix_zh_CN:  "温柔的"
+  sleep_restoration:
+    voice_prefix:        "Restful"
+    voice_prefix_ja_JP:  "やすらかな"
+    voice_prefix_zh_TW:  "安睡的"
+    voice_prefix_zh_CN:  "安睡的"
+  heart_balance:
+    voice_prefix:        "Whole"
+    voice_prefix_ja_JP:  "ととのう"
+    voice_prefix_zh_TW:  "平衡的"
+    voice_prefix_zh_CN:  "平衡的"
+  devotion_path:
+    voice_prefix:        "Devoted"
+    voice_prefix_ja_JP:  "ささげる"
+    voice_prefix_zh_TW:  "皈依的"
+    voice_prefix_zh_CN:  "皈依的"
+  solar_return:
+    voice_prefix:        "Bright"
+    voice_prefix_ja_JP:  "明るい"
+    voice_prefix_zh_TW:  "明亮的"
+    voice_prefix_zh_CN:  "明亮的"
+  body_memory:
+    voice_prefix:        "Held"
+    voice_prefix_ja_JP:  "抱きしめる"
+    voice_prefix_zh_TW:  "承接的"
+    voice_prefix_zh_CN:  "承接的"
+  qi_foundation:
+    voice_prefix:        "Rooted"
+    voice_prefix_ja_JP:  "根づいた"
+    voice_prefix_zh_TW:  "扎根的"
+    voice_prefix_zh_CN:  "扎根的"
+  # zh-specific standard brands (zh_TW + zh_CN) — added in B1 so non-en
+  # rows under these brands have voice_prefix coverage.
+  gen_z_grounding_tw:
+    voice_prefix_zh_TW:  "Z 世代踏實的"
+  grief_companion_tw:
+    voice_prefix_zh_TW:  "悲傷陪伴的"
+  inner_security_tw:
+    voice_prefix_zh_TW:  "內在安穩的"
+  panic_first_aid_tw:
+    voice_prefix_zh_TW:  "恐慌急救的"
+  sleep_repair_tw:
+    voice_prefix_zh_TW:  "睡眠修復的"
+  stabilizer_tw:
+    voice_prefix_zh_TW:  "神經安穩的"
+  bright_presence_tw:
+    voice_prefix_zh_TW:  "明朗臨在的"
+  gen_z_grounding_cn:
+    voice_prefix_zh_CN:  "Z 世代安身的"
+  grief_companion_cn:
+    voice_prefix_zh_CN:  "悲伤陪伴的"
+  inner_security_cn:
+    voice_prefix_zh_CN:  "内在安稳的"
+  panic_first_aid_cn:
+    voice_prefix_zh_CN:  "恐慌急救的"
+  sleep_repair_cn:
+    voice_prefix_zh_CN:  "睡眠修复的"
+  stabilizer_cn:
+    voice_prefix_zh_CN:  "神经稳定的"
+  _default:
+    voice_prefix:        ""
 
 # persona_subtitle_modifiers appends a persona signal to the base subtitle,
 # producing distinct (title, subtitle) tuples per persona slot.
 persona_subtitle_modifiers:
-  corporate_managers:              { signal: "for mid-level leaders" }
-  millennial_women_professionals:  { signal: "for millennial women professionals" }
-  gen_z_professionals:             { signal: "for Gen Z professionals" }
-  gen_z_student:                   { signal: "for Gen Z students" }
-  gen_alpha_students:              { signal: "for younger students" }
-  gen_x_sandwich:                  { signal: "for the sandwich generation" }
-  working_parents:                 { signal: "for working parents" }
-  entrepreneurs:                   { signal: "for founders" }
-  first_responders:                { signal: "for frontline workers" }
-  educators:                       { signal: "for teachers and educators" }
-  healthcare_rns:                  { signal: "for healthcare workers" }
-  tech_finance_burnout:            { signal: "for tech and finance pros" }
-  _default:                        { signal: "" }
+  # B1: `signal` is en_US. `signal_{locale}` per non-en locale.
+  corporate_managers:
+    signal:        "for mid-level leaders"
+    signal_ja_JP:  "管理職のために"
+    signal_zh_TW:  "寫給中階主管"
+    signal_zh_CN:  "写给中层管理者"
+  millennial_women_professionals:
+    signal:        "for millennial women professionals"
+    signal_ja_JP:  "ミレニアル世代の女性へ"
+    signal_zh_TW:  "寫給千禧世代女性"
+    signal_zh_CN:  "写给千禧一代女性"
+  gen_z_professionals:
+    signal:        "for Gen Z professionals"
+    signal_ja_JP:  "Z世代の働き手へ"
+    signal_zh_TW:  "寫給 Z 世代專業工作者"
+    signal_zh_CN:  "写给 Z 世代职场人"
+  gen_z_student:
+    signal:        "for Gen Z students"
+    signal_ja_JP:  "Z世代の学生へ"
+    signal_zh_TW:  "寫給 Z 世代學生"
+    signal_zh_CN:  "写给 Z 世代学生"
+  gen_alpha_students:
+    signal:        "for younger students"
+    signal_ja_JP:  "若い学生へ"
+    signal_zh_TW:  "寫給年幼學生"
+    signal_zh_CN:  "写给年幼学生"
+  gen_x_sandwich:
+    signal:        "for the sandwich generation"
+    signal_ja_JP:  "サンドイッチ世代へ"
+    signal_zh_TW:  "寫給夾心世代"
+    signal_zh_CN:  "写给夹心一代"
+  working_parents:
+    signal:        "for working parents"
+    signal_ja_JP:  "働く親へ"
+    signal_zh_TW:  "寫給在職父母"
+    signal_zh_CN:  "写给在职父母"
+  entrepreneurs:
+    signal:        "for founders"
+    signal_ja_JP:  "起業家へ"
+    signal_zh_TW:  "寫給創業者"
+    signal_zh_CN:  "写给创业者"
+  first_responders:
+    signal:        "for frontline workers"
+    signal_ja_JP:  "現場の最前線へ"
+    signal_zh_TW:  "寫給第一線救援人員"
+    signal_zh_CN:  "写给一线响应人员"
+  educators:
+    signal:        "for teachers and educators"
+    signal_ja_JP:  "教える人へ"
+    signal_zh_TW:  "寫給教師與教育工作者"
+    signal_zh_CN:  "写给教师与教育工作者"
+  healthcare_rns:
+    signal:        "for healthcare workers"
+    signal_ja_JP:  "医療従事者へ"
+    signal_zh_TW:  "寫給醫療人員"
+    signal_zh_CN:  "写给医疗从业者"
+  tech_finance_burnout:
+    signal:        "for tech and finance pros"
+    signal_ja_JP:  "テック・金融で働く人へ"
+    signal_zh_TW:  "寫給科技與金融工作者"
+    signal_zh_CN:  "写给科技与金融从业者"
+  _default:
+    signal:        ""
+
+# ── B1 (locale-native titles, on top of #790's #786 architecture) ───
+# Non-en locales use formula-based templates (with `{voice_prefix}` and
+# `{topic}` placeholders) instead of fixed base titles. Each locale has 5
+# formula templates; combined with 12 brand voice prefixes × 17 topics ×
+# 12 personas, this yields enough diversity to hold cap-3 per cluster.
+#
+# Tonal anchors per rubric:
+#   - ja_JP: contemplative, understated. Hiragana-rich, 体言止め.
+#   - zh_TW: emotional clarity, human tone. Traditional characters.
+#   - zh_CN: structured, outcome-oriented. Simplified characters.
+#
+# Best-effort drafts authored without a native-fluency reviewer; revise
+# entries by index if needed (no code change required).
+
+title_templates_ja_JP:
+  - { title: "{voice_prefix}{topic}の手当て",          subtitle_pattern: "{topic}を抜けるための、{voice_prefix}日々への手引き" }
+  - { title: "{topic}を超えて、{voice_prefix}日々へ",  subtitle_pattern: "{topic}回復のための、しずかな歩み" }
+  - { title: "{voice_prefix}{topic}回復の歩み",        subtitle_pattern: "{topic}が止まらないときの、{voice_prefix}手引き" }
+  - { title: "{voice_prefix}{topic}との対話",          subtitle_pattern: "{topic}のあとに、{voice_prefix}静けさを取り戻す" }
+  - { title: "{topic}のあとに、{voice_prefix}日々",    subtitle_pattern: "{voice_prefix}暮らしへの、{topic}回復の手引き" }
+
+title_templates_zh_TW:
+  - { title: "{voice_prefix}{topic}指引",             subtitle_pattern: "走出{topic}，邁向{voice_prefix}日子" }
+  - { title: "穿越{topic}，走向{voice_prefix}時光",   subtitle_pattern: "{topic}復原途中的{voice_prefix}陪伴" }
+  - { title: "{voice_prefix}步調，走出{topic}",       subtitle_pattern: "當{topic}停不下來時的{voice_prefix}指引" }
+  - { title: "{voice_prefix}{topic}的同行",           subtitle_pattern: "{topic}復原中的{voice_prefix}日子" }
+  - { title: "{topic}之後，{voice_prefix}日子",       subtitle_pattern: "{voice_prefix}生活，{topic}復原的同行者" }
+
+title_templates_zh_CN:
+  - { title: "{voice_prefix}{topic}指南",             subtitle_pattern: "走出{topic}，迈向{voice_prefix}日子" }
+  - { title: "穿越{topic}，走向{voice_prefix}日子",   subtitle_pattern: "{topic}恢复期的{voice_prefix}陪伴" }
+  - { title: "{voice_prefix}节奏，走出{topic}",       subtitle_pattern: "当{topic}无法停止时的{voice_prefix}指引" }
+  - { title: "{voice_prefix}{topic}的同行",           subtitle_pattern: "{topic}恢复期的{voice_prefix}日子" }
+  - { title: "{topic}之后，{voice_prefix}日子",       subtitle_pattern: "{voice_prefix}生活，{topic}恢复的同行者" }
+
+# Locale-native topic display strings (used in title/subtitle interpolation).
+# en_US intentionally omitted — generator falls back to topic.replace("_", " ").title()
+# preserving byte-identical en_US output.
+
+topic_displays_ja_JP:
+  anxiety: "不安"
+  burnout: "燃え尽き"
+  sleep_anxiety: "睡眠の不安"
+  imposter_syndrome: "インポスター症候群"
+  social_anxiety: "対人不安"
+  self_worth: "自己肯定"
+  boundaries: "境界線"
+  grief: "喪失とかなしみ"
+  overthinking: "考えすぎ"
+  somatic_healing: "身体の癒し"
+  depression: "抑うつ"
+  courage: "勇気"
+  compassion_fatigue: "共感疲労"
+  financial_anxiety: "お金への不安"
+  financial_stress: "経済的なストレス"
+  adhd_focus: "集中の困難"
+  mindfulness: "マインドフルネス"
+
+topic_displays_zh_TW:
+  anxiety: "焦慮"
+  burnout: "倦怠"
+  sleep_anxiety: "睡眠焦慮"
+  imposter_syndrome: "冒牌者症候群"
+  social_anxiety: "社交焦慮"
+  self_worth: "自我價值"
+  boundaries: "界限"
+  grief: "悲傷"
+  overthinking: "想太多"
+  somatic_healing: "身體療癒"
+  depression: "憂鬱"
+  courage: "勇氣"
+  compassion_fatigue: "同理疲勞"
+  financial_anxiety: "金錢焦慮"
+  financial_stress: "經濟壓力"
+  adhd_focus: "專注困難"
+  mindfulness: "正念"
+
+topic_displays_zh_CN:
+  anxiety: "焦虑"
+  burnout: "倦怠"
+  sleep_anxiety: "睡眠焦虑"
+  imposter_syndrome: "冒名顶替综合征"
+  social_anxiety: "社交焦虑"
+  self_worth: "自我价值"
+  boundaries: "边界"
+  grief: "悲伤"
+  overthinking: "过度思虑"
+  somatic_healing: "身体疗愈"
+  depression: "抑郁"
+  courage: "勇气"
+  compassion_fatigue: "共情疲劳"
+  financial_anxiety: "金钱焦虑"
+  financial_stress: "经济压力"
+  adhd_focus: "注意力困难"
+  mindfulness: "正念"
 
 # ── Cover Brief Templates ────────────────────────────────────────────
 cover_brief_templates:

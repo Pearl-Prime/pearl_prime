@@ -1,19 +1,19 @@
 # Pearl Prime Book Script Catalogs — Bestseller / Launch Readiness Report
 
-Generated: 2026-04-28 21:14 UTC  
+Generated: 2026-04-28 21:34 UTC  
 Source: `artifacts/catalog/pearl_prime_book_script_catalogs/{en_US,ja_JP,zh_TW,zh_CN}_catalog.csv`  
 Generator: `scripts/catalog/analyze_bestseller_readiness.py` (no LLM, deterministic)
 
-> **Verdict, in one line:** the catalog is structurally complete but **not launch-ready**. Remaining blockers: (1) non-en titles still blank in ja_JP / zh_TW / zh_CN (listing-ready = 0).
+> **Verdict, in one line:** the catalog is structurally complete and every locale has ≥1 listing-ready entry; remaining work is title quality / cannibalization polish, not coverage.
 
 ## 1. Ready vs blocked_score by locale
 
 | Locale | Rows | Ready | Blocked (score) | Ready % | **Listing-ready** (ready ∧ title) | **Distinct listing units** (brand+title+subtitle) |
 |---|---:|---:|---:|---:|---:|---:|
 | en_US | 1,478 | 1,478 | 0 | 100.0% | **1,478** | **1478** |
-| ja_JP | 1,478 | 1,478 | 0 | 100.0% | **0** | **0** |
-| zh_TW | 2,818 | 2,658 | 160 | 94.3% | **0** | **0** |
-| zh_CN | 2,630 | 2,630 | 0 | 100.0% | **0** | **0** |
+| ja_JP | 1,478 | 1,478 | 0 | 100.0% | **1,478** | **1478** |
+| zh_TW | 2,818 | 2,658 | 160 | 94.3% | **2,658** | **2658** |
+| zh_CN | 2,630 | 2,630 | 0 | 100.0% | **2,630** | **2630** |
 
 **Reading the table:**
 
@@ -53,15 +53,48 @@ Generator: `scripts/catalog/analyze_bestseller_readiness.py` (no LLM, determinis
 
 ### ja_JP
 
-_No distinct title+subtitle pairs in ready rows. Locale has no listing-ready entries._
+| # | Composite | Brand | Topic | Persona | Title | Subtitle |
+|---:|---:|---|---|---|---|---|
+| 1 | 0.95 | body_memory | grief | healthcare_rns | 抱きしめる喪失とかなしみとの対話 | 喪失とかなしみのあとに、抱きしめる静けさを取り戻す — 医療従事者へ |
+| 2 | 0.95 | body_memory | somatic_healing | healthcare_rns | 身体の癒しのあとに、抱きしめる日々 | 抱きしめる暮らしへの、身体の癒し回復の手引き — 医療従事者へ |
+| 3 | 0.95 | sleep_restoration | sleep_anxiety | healthcare_rns | やすらかな睡眠の不安の手当て | 睡眠の不安を抜けるための、やすらかな日々への手引き — 医療従事者へ |
+| 4 | 0.95 | warrior_calm | courage | first_responders | ゆるがぬ勇気の手当て | 勇気を抜けるための、ゆるがぬ日々への手引き — 現場の最前線へ |
+| 5 | 0.93 | body_memory | grief | gen_x_sandwich | 喪失とかなしみのあとに、抱きしめる日々 | 抱きしめる暮らしへの、喪失とかなしみ回復の手引き — サンドイッチ世代へ |
+| 6 | 0.93 | body_memory | somatic_healing | gen_x_sandwich | 身体の癒しのあとに、抱きしめる日々 | 抱きしめる暮らしへの、身体の癒し回復の手引き — サンドイッチ世代へ |
+| 7 | 0.93 | cognitive_clarity | overthinking | tech_finance_burnout | 澄んだ考えすぎの手当て | 考えすぎを抜けるための、澄んだ日々への手引き — テック・金融で働く人へ |
+| 8 | 0.93 | devotion_path | courage | healthcare_rns | ささげる勇気との対話 | 勇気のあとに、ささげる静けさを取り戻す — 医療従事者へ |
+| 9 | 0.93 | digital_ground | financial_anxiety | gen_z_professionals | お金への不安のあとに、落ち着いた日々 | 落ち着いた暮らしへの、お金への不安回復の手引き — Z世代の働き手へ |
+| 10 | 0.93 | digital_ground | imposter_syndrome | gen_z_professionals | インポスター症候群のあとに、落ち着いた日々 | 落ち着いた暮らしへの、インポスター症候群回復の手引き — Z世代の働き手へ |
 
 ### zh_TW
 
-_No distinct title+subtitle pairs in ready rows. Locale has no listing-ready entries._
+| # | Composite | Brand | Topic | Persona | Title | Subtitle |
+|---:|---:|---|---|---|---|---|
+| 1 | 0.95 | body_memory | grief | healthcare_rns | 承接的步調，走出悲傷 | 當悲傷停不下來時的承接的指引 — 寫給醫療人員 |
+| 2 | 0.95 | body_memory | somatic_healing | healthcare_rns | 承接的身體療癒指引 | 走出身體療癒，邁向承接的日子 — 寫給醫療人員 |
+| 3 | 0.95 | sleep_restoration | sleep_anxiety | healthcare_rns | 安睡的步調，走出睡眠焦慮 | 當睡眠焦慮停不下來時的安睡的指引 — 寫給醫療人員 |
+| 4 | 0.95 | warrior_calm | courage | first_responders | 勇氣之後，穩定的日子 | 穩定的生活，勇氣復原的同行者 — 寫給第一線救援人員 |
+| 5 | 0.93 | body_memory | grief | gen_x_sandwich | 悲傷之後，承接的日子 | 承接的生活，悲傷復原的同行者 — 寫給夾心世代 |
+| 6 | 0.93 | body_memory | somatic_healing | gen_x_sandwich | 承接的身體療癒指引 | 走出身體療癒，邁向承接的日子 — 寫給夾心世代 |
+| 7 | 0.93 | cognitive_clarity | overthinking | tech_finance_burnout | 想太多之後，清明的日子 | 清明的生活，想太多復原的同行者 — 寫給科技與金融工作者 |
+| 8 | 0.93 | devotion_path | courage | healthcare_rns | 穿越勇氣，走向皈依的時光 | 勇氣復原途中的皈依的陪伴 — 寫給醫療人員 |
+| 9 | 0.93 | digital_ground | imposter_syndrome | gen_z_student | 穿越冒牌者症候群，走向踏實的時光 | 冒牌者症候群復原途中的踏實的陪伴 — 寫給 Z 世代學生 |
+| 10 | 0.93 | digital_ground | social_anxiety | gen_z_student | 穿越社交焦慮，走向踏實的時光 | 社交焦慮復原途中的踏實的陪伴 — 寫給 Z 世代學生 |
 
 ### zh_CN
 
-_No distinct title+subtitle pairs in ready rows. Locale has no listing-ready entries._
+| # | Composite | Brand | Topic | Persona | Title | Subtitle |
+|---:|---:|---|---|---|---|---|
+| 1 | 0.95 | body_memory | grief | healthcare_rns | 承接的悲伤指南 | 走出悲伤，迈向承接的日子 — 写给医疗从业者 |
+| 2 | 0.95 | body_memory | somatic_healing | healthcare_rns | 承接的身体疗愈的同行 | 身体疗愈恢复期的承接的日子 — 写给医疗从业者 |
+| 3 | 0.95 | sleep_restoration | sleep_anxiety | healthcare_rns | 安睡的节奏，走出睡眠焦虑 | 当睡眠焦虑无法停止时的安睡的指引 — 写给医疗从业者 |
+| 4 | 0.95 | warrior_calm | courage | first_responders | 穿越勇气，走向稳定的日子 | 勇气恢复期的稳定的陪伴 — 写给一线响应人员 |
+| 5 | 0.93 | body_memory | grief | gen_x_sandwich | 承接的节奏，走出悲伤 | 当悲伤无法停止时的承接的指引 — 写给夹心一代 |
+| 6 | 0.93 | body_memory | somatic_healing | gen_x_sandwich | 穿越身体疗愈，走向承接的日子 | 身体疗愈恢复期的承接的陪伴 — 写给夹心一代 |
+| 7 | 0.93 | cognitive_clarity | overthinking | tech_finance_burnout | 清明的过度思虑指南 | 走出过度思虑，迈向清明的日子 — 写给科技与金融从业者 |
+| 8 | 0.93 | devotion_path | courage | healthcare_rns | 勇气之后，皈依的日子 | 皈依的生活，勇气恢复的同行者 — 写给医疗从业者 |
+| 9 | 0.93 | digital_ground | imposter_syndrome | gen_z_professionals | 穿越冒名顶替综合征，走向踏实的日子 | 冒名顶替综合征恢复期的踏实的陪伴 — 写给 Z 世代职场人 |
+| 10 | 0.93 | digital_ground | social_anxiety | gen_z_professionals | 踏实的社交焦虑的同行 | 社交焦虑恢复期的踏实的日子 — 写给 Z 世代职场人 |
 
 ## 3. Duplicate / cannibalization issues
 
