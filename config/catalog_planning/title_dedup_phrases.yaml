@@ -1,0 +1,205 @@
+# Title-dedup phrase tables — B2 / Issue #777 follow-up
+#
+# Used by `scripts/catalog/generate_pearl_prime_book_script_catalog.py` when
+# a row is NOT the per-(locale, topic, template_idx) flagship. Cap rule:
+# at most 1 flagship row per (locale, topic, template_idx) keeps the existing
+# template title. All other rows synthesize a variant title from the tables
+# below using a deterministic SHA-256 seed of (locale|brand|topic|persona).
+#
+# Title formula:
+#     title    = "{brand_voice_phrases[brand][i]}, {persona_signal_phrases[persona][j]}"
+#     subtitle = subtitle_pattern (brand-tinted, topic-injected)
+#
+# Indices i, j derived from sha256(seed) — see generator.
+#
+# All phrases authored deterministically (no LLM). Each phrase is a complete
+# noun-clause that can sit as the first or second half of a two-clause title.
+# Tonal anchors come from each brand's archetype (`brand_archetype_registry.yaml`)
+# and each persona's lived context.
+#
+# Authority: this file. Schema-version pinned. Do not delete entries; add
+# behind a new index to preserve deterministic seed → phrase mapping.
+
+schema_version: "1.0"
+
+brand_voice_phrases:
+  # 12 teacher brands × 5 phrases each — combo count now 5×4=20 per (brand,
+  # persona) pair, comfortably above the 17 topics so per-title use ≤ 3 rows.
+  stillness_press:           # ahjan — sanctuary, the held breath
+    - "The Held Breath"
+    - "After the Quiet"
+    - "Before the Pause"
+    - "The Sanctuary Door"
+    - "The Hour of Rest"
+  body_memory:               # omote — somatic memory, embodied carrying
+    - "What the Body Carried"
+    - "Held in the Skin"
+    - "The Bone-Deep Knowing"
+    - "The Memory in Muscle"
+    - "What the Spine Remembers"
+  cognitive_clarity:         # joshin — stark zen ink, the clear pause
+    - "The Clear Pause"
+    - "Past the Loop"
+    - "When Thinking Stops"
+    - "The Quiet Mind"
+    - "After the Spiral"
+  heart_balance:             # maat — heart-weighing, justice, balance
+    - "The Heart's Weight"
+    - "What the Scale Holds"
+    - "Balance Before the Fall"
+    - "The Steady Heart"
+    - "When the Scales Settle"
+  somatic_wisdom:            # pamela_fellows — embodied knowing
+    - "The Body Knew First"
+    - "What the Tissue Said"
+    - "The Wisdom Below Words"
+    - "The Body's Slow Truth"
+    - "What the Breath Was Holding"
+  qi_foundation:             # master_feung — cultivation, qi, breath
+    - "The Long Breath"
+    - "Where Qi Returns"
+    - "The Cultivation"
+    - "The Slow Current"
+    - "When the Energy Lands"
+  digital_ground:            # miki — digital wellness, ground in tech-noise
+    - "Off the Feed"
+    - "Past the Pixel"
+    - "When the Screen Goes Dark"
+    - "Beyond the Notification"
+    - "After the Last Tab"
+  warrior_calm:              # master_wu — wuxia stillness-in-motion
+    - "The Sword Lowered"
+    - "Stillness in Motion"
+    - "After the Charge"
+    - "The Steady Stance"
+    - "When the Stance Holds"
+  sleep_restoration:         # master_sha — luminous night
+    - "The Quiet Hour"
+    - "When the Night Forgives"
+    - "Before First Light"
+    - "The Long Recovery"
+    - "The Hour Before Dawn"
+  relational_calm:           # junko — wabi-sabi, iyashikei
+    - "The Soft Approach"
+    - "What the Tea Heard"
+    - "Wabi-Sabi Hands"
+    - "The Quiet Room"
+    - "What the Garden Knew"
+  solar_return:              # ra — ember, transformation, return
+    - "The Ember Returns"
+    - "Past the Long Dark"
+    - "When the Sun Came Back"
+    - "The First Warmth"
+    - "After the Long Cold"
+  devotion_path:             # sai_ma — bhakti, surrender, the heart's path
+    - "The Heart's Path"
+    - "Where Devotion Begins"
+    - "The Surrender"
+    - "The Open Hands"
+    - "When the Heart Yields"
+
+persona_signal_phrases:
+  # 12 personas × 4 phrases each — increased from 3 (see brand_voice_phrases
+  # comment). Phrases reference the persona's lived context (the work, the
+  # day, the pressure surface) so the title's second clause feels embodied.
+  tech_finance_burnout:
+    - "After the Code"
+    - "Past the Deadline"
+    - "Off the Screen"
+    - "Beyond the Sprint"
+  healthcare_rns:
+    - "After the Shift"
+    - "Between Rounds"
+    - "Before the Call"
+    - "Past the Last Patient"
+  educators:
+    - "After the Bell"
+    - "Past the Lesson"
+    - "When the Classroom Empties"
+    - "After the Last Plan"
+  first_responders:
+    - "Beyond the Last Call"
+    - "After the Siren"
+    - "Past the Badge"
+    - "When the Radio Quiets"
+  entrepreneurs:
+    - "Past the Pitch"
+    - "After the Launch"
+    - "Beyond the Build"
+    - "When the Round Closes"
+  corporate_managers:
+    - "After the Quarter"
+    - "Past the Headcount"
+    - "Beyond the Review"
+    - "When the Standup Ends"
+  working_parents:
+    - "After Bedtime"
+    - "Past the School Run"
+    - "Between the Calls"
+    - "When the House Quiets"
+  gen_z_professionals:
+    - "Past the Inbox"
+    - "After the Slack"
+    - "Beyond the Feed"
+    - "When the Standup Lands"
+  gen_z_student:
+    - "Past the Syllabus"
+    - "After the Group Chat"
+    - "Beyond the Cohort"
+    - "When the Final Drops"
+  millennial_women_professionals:
+    - "Past the Performance"
+    - "After the Calendar"
+    - "Beyond the Plate"
+    - "When the Mute Lifts"
+  gen_alpha_students:
+    - "Past the Notification"
+    - "After the Last Period"
+    - "Beyond the Ping"
+    - "When the Tablet Sleeps"
+  gen_x_sandwich:
+    - "Past Both Generations"
+    - "After the Caregiving"
+    - "Between the Two"
+    - "When the Quiet Comes"
+
+# Subtitle patterns for variant rows (when no flagship template subtitle).
+# Indexed deterministically by sha256(seed). {topic} is interpolated from
+# the catalog's topic field (display-cased).
+variant_subtitle_patterns:
+  - "A {brand_descriptor} Path Through {topic}"
+  - "{brand_descriptor} Practice for {topic} Recovery"
+  - "How {brand_descriptor} Works When {topic} Won't Stop"
+  - "A Guide to {topic} for {persona_descriptor}"
+  - "{topic} Recovery for {persona_descriptor}"
+  - "When {topic} Meets {brand_descriptor}"
+
+# Brand descriptors — short noun phrases used in subtitle interpolation.
+brand_descriptors:
+  stillness_press: "Stillness"
+  body_memory: "Somatic Memory"
+  cognitive_clarity: "Clear Mind"
+  heart_balance: "Heart-Weighing"
+  somatic_wisdom: "Somatic Wisdom"
+  qi_foundation: "Qi Cultivation"
+  digital_ground: "Digital Grounding"
+  warrior_calm: "Warrior-Calm"
+  sleep_restoration: "Sleep-Restoration"
+  relational_calm: "Wabi-Sabi"
+  solar_return: "Solar-Return"
+  devotion_path: "Devotional"
+
+# Persona descriptors — used in subtitle interpolation when pattern requests.
+persona_descriptors:
+  tech_finance_burnout: "Tech and Finance Professionals"
+  healthcare_rns: "Nurses and Caregivers"
+  educators: "Teachers and Educators"
+  first_responders: "First Responders"
+  entrepreneurs: "Founders and Entrepreneurs"
+  corporate_managers: "Corporate Managers"
+  working_parents: "Working Parents"
+  gen_z_professionals: "Gen-Z Professionals"
+  gen_z_student: "Gen-Z Students"
+  millennial_women_professionals: "Millennial Professionals"
+  gen_alpha_students: "Gen-Alpha Students"
+  gen_x_sandwich: "Gen-X Sandwich Generation"

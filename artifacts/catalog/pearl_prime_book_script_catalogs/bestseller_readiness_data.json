@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-04-28T20:01:57.553989+00:00",
+  "generated_at_utc": "2026-04-28T20:43:00.320518+00:00",
   "source_csvs": [
     "artifacts/catalog/pearl_prime_book_script_catalogs/en_US_catalog.csv",
     "artifacts/catalog/pearl_prime_book_script_catalogs/ja_JP_catalog.csv",
@@ -67,224 +67,191 @@
         "solar_return": 140,
         "devotion_path": 122
       },
-      "distinct_titles_in_ready": 42,
-      "distinct_title_subtitle_in_ready": 45,
-      "distinct_brand_title_subtitle_in_ready": 416,
-      "ready_rows_with_blank_title": 201,
-      "ready_rows_with_blank_subtitle": 201,
+      "distinct_titles_in_ready": 1149,
+      "distinct_title_subtitle_in_ready": 1478,
+      "distinct_brand_title_subtitle_in_ready": 1478,
+      "ready_rows_with_blank_title": 0,
+      "ready_rows_with_blank_subtitle": 0,
       "title_duplication_top": [
         {
-          "title": "Before You Break",
-          "count": 47
+          "title": "The Sanctuary Door, After the Shift",
+          "count": 5
         },
         {
-          "title": "You Were Always Enough",
-          "count": 46
+          "title": "The Hour of Rest, After the Last Plan",
+          "count": 5
         },
         {
-          "title": "Safe Enough",
-          "count": 43
+          "title": "The Hour of Rest, After the Quarter",
+          "count": 5
         },
         {
-          "title": "The Alarm Is Lying",
-          "count": 42
+          "title": "The Sanctuary Door, Past the Inbox",
+          "count": 4
         },
         {
-          "title": "Still Here Without You",
-          "count": 41
+          "title": "The Held Breath, When the Round Closes",
+          "count": 4
         },
         {
-          "title": "Worthy Without Proof",
-          "count": 41
+          "title": "The Quiet Room, Past the Headcount",
+          "count": 4
         },
         {
-          "title": "Running on Fumes",
-          "count": 40
+          "title": "The Surrender, After the Calendar",
+          "count": 4
         },
         {
-          "title": "The No That Saved Me",
-          "count": 39
+          "title": "The Heart's Path, Between the Calls",
+          "count": 4
         },
         {
-          "title": "The Collapse You Earned",
-          "count": 38
+          "title": "The Heart's Path, After the Siren",
+          "count": 4
         },
         {
-          "title": "The Mirror Lied",
-          "count": 37
+          "title": "The Held Breath, When the Standup Ends",
+          "count": 3
         },
         {
-          "title": "The Shape of Missing",
-          "count": 36
+          "title": "The Sanctuary Door, After the Siren",
+          "count": 3
         },
         {
-          "title": "The Proof Was Always You",
-          "count": 35
+          "title": "The Sanctuary Door, When the Classroom Empties",
+          "count": 3
         },
         {
-          "title": "Color Returns",
-          "count": 34
+          "title": "The Hour of Rest, After the Group Chat",
+          "count": 3
         },
         {
-          "title": "The Line You Draw",
-          "count": 33
+          "title": "The Sanctuary Door, When the Radio Quiets",
+          "count": 3
         },
         {
-          "title": "Caring Until There's Nothing Left",
-          "count": 33
+          "title": "Before the Pause, Past Both Generations",
+          "count": 3
         }
       ],
-      "title_subtitle_duplication_top": [
-        {
-          "title": "Before You Break",
-          "subtitle": "Escaping Burnout and Rebuilding Your Energy",
-          "count": 47
-        },
-        {
-          "title": "You Were Always Enough",
-          "subtitle": "Rebuilding Self-Esteem and Reclaiming Your Worth",
-          "count": 46
-        },
-        {
-          "title": "Safe Enough",
-          "subtitle": "How to Calm Anxiety and Reclaim Your Nervous System",
-          "count": 43
-        },
-        {
-          "title": "The Alarm Is Lying",
-          "subtitle": "A Nervous System Guide to Anxiety Recovery",
-          "count": 42
-        },
-        {
-          "title": "Still Here Without You",
-          "subtitle": "Finding Your Way Through Grief and Heartbreak",
-          "count": 41
-        },
-        {
-          "title": "Worthy Without Proof",
-          "subtitle": "How to Build Unshakable Self Worth and Confidence",
-          "count": 41
-        },
-        {
-          "title": "Running on Fumes",
-          "subtitle": "A Recovery Guide for Burnout and Work Exhaustion",
-          "count": 40
-        },
-        {
-          "title": "The No That Saved Me",
-          "subtitle": "A Practical Guide to Setting Boundaries and Finding Peace",
-          "count": 39
-        },
-        {
-          "title": "The Collapse You Earned",
-          "subtitle": "Burnout Recovery for People Who Can't Stop",
-          "count": 38
-        },
-        {
-          "title": "The Mirror Lied",
-          "subtitle": "A Self-Love Guide to Healing Low Self-Esteem",
-          "count": 37
-        },
-        {
-          "title": "The Shape of Missing",
-          "subtitle": "A Grief Recovery Companion for the Worst Days",
-          "count": 36
-        },
-        {
-          "title": "The Proof Was Always You",
-          "subtitle": "An Imposter Syndrome Recovery Guide for Professionals",
-          "count": 35
-        },
-        {
-          "title": "Color Returns",
-          "subtitle": "How to Move Through Depression One Day at a Time",
-          "count": 34
-        },
-        {
-          "title": "The Line You Draw",
-          "subtitle": "How to Set Boundaries Without Guilt or Fear",
-          "count": 33
-        },
-        {
-          "title": "Caring Until There's Nothing Left",
-          "subtitle": "A Compassion Fatigue Recovery Guide for Helpers",
-          "count": 33
-        }
-      ],
+      "title_subtitle_duplication_top": [],
       "subtitle_duplication_top": [
         {
-          "subtitle": "Escaping Burnout and Rebuilding Your Energy",
-          "count": 47
+          "subtitle": "How Somatic Wisdom Works When Somatic Healing Won't Stop",
+          "count": 6
         },
         {
-          "subtitle": "Rebuilding Self-Esteem and Reclaiming Your Worth",
-          "count": 46
+          "subtitle": "How Devotional Works When Burnout Won't Stop",
+          "count": 6
         },
         {
-          "subtitle": "How to Calm Anxiety and Reclaim Your Nervous System",
-          "count": 43
+          "subtitle": "A Devotional Path Through Grief",
+          "count": 6
         },
         {
-          "subtitle": "A Nervous System Guide to Anxiety Recovery",
-          "count": 42
+          "subtitle": "Stillness Practice for Burnout Recovery",
+          "count": 5
         },
         {
-          "subtitle": "Finding Your Way Through Grief and Heartbreak",
-          "count": 41
+          "subtitle": "Mindfulness Recovery for Tech and Finance Professionals",
+          "count": 5
         },
         {
-          "subtitle": "How to Build Unshakable Self Worth and Confidence",
-          "count": 41
+          "subtitle": "How Stillness Works When Somatic Healing Won't Stop",
+          "count": 5
         },
         {
-          "subtitle": "A Recovery Guide for Burnout and Work Exhaustion",
-          "count": 40
+          "subtitle": "Compassion Fatigue Recovery for Working Parents",
+          "count": 5
         },
         {
-          "subtitle": "A Practical Guide to Setting Boundaries and Finding Peace",
-          "count": 39
+          "subtitle": "How Digital Grounding Works When Social Anxiety Won't Stop",
+          "count": 5
         },
         {
-          "subtitle": "Burnout Recovery for People Who Can't Stop",
-          "count": 38
+          "subtitle": "How Heart-Weighing Works When Mindfulness Won't Stop",
+          "count": 5
         },
         {
-          "subtitle": "A Self-Love Guide to Healing Low Self-Esteem",
-          "count": 37
+          "subtitle": "Wabi-Sabi Practice for Burnout Recovery",
+          "count": 5
         },
         {
-          "subtitle": "A Grief Recovery Companion for the Worst Days",
-          "count": 36
+          "subtitle": "A Sleep-Restoration Path Through Overthinking",
+          "count": 5
         },
         {
-          "subtitle": "An Imposter Syndrome Recovery Guide for Professionals",
-          "count": 35
+          "subtitle": "When Somatic Healing Meets Sleep-Restoration",
+          "count": 5
         },
         {
-          "subtitle": "How to Move Through Depression One Day at a Time",
-          "count": 34
+          "subtitle": "When Courage Meets Solar-Return",
+          "count": 5
         },
         {
-          "subtitle": "How to Set Boundaries Without Guilt or Fear",
-          "count": 33
+          "subtitle": "Solar-Return Practice for Mindfulness Recovery",
+          "count": 5
         },
         {
-          "subtitle": "A Compassion Fatigue Recovery Guide for Helpers",
-          "count": 33
+          "subtitle": "How Devotional Works When Courage Won't Stop",
+          "count": 5
         }
       ],
-      "weak_title_count": 383,
-      "weak_subtitle_count": 541,
+      "weak_title_count": 3,
+      "weak_subtitle_count": 241,
       "weak_title_reason_counts": {
-        "blank": 201,
-        "ultra_short_title": 182
+        "ultra_short_title": 3
       },
       "weak_subtitle_reason_counts": {
-        "blank": 201,
-        "starts_with::how to": 261,
-        "starts_with::a guide to": 79
+        "starts_with::a guide to": 237,
+        "starts_with::how to": 4
       },
       "top_10_strongest_distinct": [
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "Held in the Skin, After the Shift",
+          "subtitle": "A Somatic Memory Path Through Somatic Healing"
+        },
+        {
+          "composite": 0.95,
+          "brand": "body_memory",
+          "topic": "grief",
+          "persona": "healthcare_rns",
+          "teacher": "omote",
+          "title": "The Bone-Deep Knowing, Between Rounds",
+          "subtitle": "Grief Recovery for Nurses and Caregivers"
+        },
+        {
+          "composite": 0.95,
+          "brand": "sleep_restoration",
+          "topic": "sleep_anxiety",
+          "persona": "healthcare_rns",
+          "teacher": "master_sha",
+          "title": "The Quiet Hour, Past the Last Patient",
+          "subtitle": "How Sleep-Restoration Works When Sleep Anxiety Won't Stop"
+        },
+        {
+          "composite": 0.95,
+          "brand": "warrior_calm",
+          "topic": "courage",
+          "persona": "first_responders",
+          "teacher": "master_wu",
+          "title": "Stillness in Motion, Past the Badge",
+          "subtitle": "A Guide to Courage for First Responders"
+        },
+        {
+          "composite": 0.93,
+          "brand": "body_memory",
+          "topic": "somatic_healing",
+          "persona": "gen_x_sandwich",
+          "teacher": "omote",
+          "title": "Held in the Skin, Between the Two",
+          "subtitle": "Somatic Healing Recovery for Gen-X Sandwich Generation"
+        },
         {
           "composite": 0.93,
           "brand": "body_memory",
@@ -300,8 +267,17 @@
           "topic": "overthinking",
           "persona": "tech_finance_burnout",
           "teacher": "joshin",
-          "title": "The Loop Breaker",
-          "subtitle": "How to Stop Overthinking and Quiet Your Racing Mind"
+          "title": "When Thinking Stops, Off the Screen",
+          "subtitle": "When Overthinking Meets Clear Mind"
+        },
+        {
+          "composite": 0.93,
+          "brand": "devotion_path",
+          "topic": "courage",
+          "persona": "healthcare_rns",
+          "teacher": "sai_ma",
+          "title": "Where Devotion Begins, Before the Call",
+          "subtitle": "How Devotional Works When Courage Won't Stop"
         },
         {
           "composite": 0.93,
@@ -309,71 +285,17 @@
           "topic": "imposter_syndrome",
           "persona": "gen_z_professionals",
           "teacher": "miki",
-          "title": "The Proof Was Always You",
-          "subtitle": "An Imposter Syndrome Recovery Guide for Professionals"
+          "title": "After the Last Tab, When the Standup Lands",
+          "subtitle": "A Digital Grounding Path Through Imposter Syndrome"
         },
         {
           "composite": 0.93,
-          "brand": "relational_calm",
+          "brand": "digital_ground",
           "topic": "social_anxiety",
-          "persona": "millennial_women_professionals",
-          "teacher": "junko",
-          "title": "The Script Nobody Gave You",
-          "subtitle": "How to Navigate Social Anxiety with Confidence"
-        },
-        {
-          "composite": 0.93,
-          "brand": "sleep_restoration",
-          "topic": "sleep_anxiety",
-          "persona": "first_responders",
-          "teacher": "master_sha",
-          "title": "Permission to Rest",
-          "subtitle": "How to Calm Racing Thoughts and Finally Sleep"
-        },
-        {
-          "composite": 0.9,
-          "brand": "body_memory",
-          "topic": "somatic_healing",
-          "persona": "millennial_women_professionals",
-          "teacher": "omote",
-          "title": "Unlock the Freeze",
-          "subtitle": "A Somatic Guide to Nervous System Reset and Trauma Release"
-        },
-        {
-          "composite": 0.9,
-          "brand": "cognitive_clarity",
-          "topic": "overthinking",
           "persona": "gen_z_professionals",
-          "teacher": "joshin",
-          "title": "Thought Traffic",
-          "subtitle": "Breaking Free from Overthinking, Worry, and Analysis Paralysis"
-        },
-        {
-          "composite": 0.9,
-          "brand": "devotion_path",
-          "topic": "compassion_fatigue",
-          "persona": "healthcare_rns",
-          "teacher": "sai_ma",
-          "title": "Caring Until There's Nothing Left",
-          "subtitle": "A Compassion Fatigue Recovery Guide for Helpers"
-        },
-        {
-          "composite": 0.9,
-          "brand": "devotion_path",
-          "topic": "imposter_syndrome",
-          "persona": "healthcare_rns",
-          "teacher": "sai_ma",
-          "title": "The Proof Was Always You",
-          "subtitle": "An Imposter Syndrome Recovery Guide for Professionals"
-        },
-        {
-          "composite": 0.9,
-          "brand": "devotion_path",
-          "topic": "grief",
-          "persona": "healthcare_rns",
-          "teacher": "sai_ma",
-          "title": "The Weight of Gone",
-          "subtitle": "A Gentle Guide to Grief, Loss, and Healing"
+          "teacher": "miki",
+          "title": "Beyond the Notification, Beyond the Feed",
+          "subtitle": "Social Anxiety Recovery for Gen-Z Professionals"
         }
       ],
       "all_brands": [
@@ -424,7 +346,7 @@
         "working_parents"
       ],
       "needs_title_synthesis_locale_native": 0,
-      "needs_title_synthesis_en_only": 201,
+      "needs_title_synthesis_en_only": 0,
       "high_potential_blocked_total_at_or_above_0_65": 0
     },
     "ja_JP": {
@@ -1121,13 +1043,13 @@
       "zh_CN": 100.0
     },
     "listing_ready_per_locale": {
-      "en_US": 1277,
+      "en_US": 1478,
       "ja_JP": 0,
       "zh_TW": 0,
       "zh_CN": 0
     },
     "distinct_listing_units_per_locale": {
-      "en_US": 416,
+      "en_US": 1478,
       "ja_JP": 0,
       "zh_TW": 0,
       "zh_CN": 0

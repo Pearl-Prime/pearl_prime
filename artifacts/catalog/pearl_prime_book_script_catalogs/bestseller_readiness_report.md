@@ -1,16 +1,16 @@
 # Pearl Prime Book Script Catalogs — Bestseller / Launch Readiness Report
 
-Generated: 2026-04-28 20:01 UTC  
+Generated: 2026-04-28 20:43 UTC  
 Source: `artifacts/catalog/pearl_prime_book_script_catalogs/{en_US,ja_JP,zh_TW,zh_CN}_catalog.csv`  
 Generator: `scripts/catalog/analyze_bestseller_readiness.py` (no LLM, deterministic)
 
-> **Verdict, in one line:** the catalog is structurally complete but **not launch-ready**. Remaining blockers: (1) non-en titles still blank in ja_JP / zh_TW / zh_CN (listing-ready = 0); (2) en_US's 1,478 ready rows resolve to only **42 distinct titles** (45 title+subtitle pairs, 416 unique brand-imprint listings) — severe Amazon-search cannibalization.
+> **Verdict, in one line:** the catalog is structurally complete but **not launch-ready**. Remaining blockers: (1) non-en titles still blank in ja_JP / zh_TW / zh_CN (listing-ready = 0).
 
 ## 1. Ready vs blocked_score by locale
 
 | Locale | Rows | Ready | Blocked (score) | Ready % | **Listing-ready** (ready ∧ title) | **Distinct listing units** (brand+title+subtitle) |
 |---|---:|---:|---:|---:|---:|---:|
-| en_US | 1,478 | 1,478 | 0 | 100.0% | **1,277** | **416** |
+| en_US | 1,478 | 1,478 | 0 | 100.0% | **1,478** | **1478** |
 | ja_JP | 1,478 | 1,478 | 0 | 100.0% | **0** | **0** |
 | zh_TW | 2,818 | 2,658 | 160 | 94.3% | **0** | **0** |
 | zh_CN | 2,630 | 2,630 | 0 | 100.0% | **0** | **0** |
@@ -40,16 +40,16 @@ Generator: `scripts/catalog/analyze_bestseller_readiness.py` (no LLM, determinis
 
 | # | Composite | Brand | Topic | Persona | Title | Subtitle |
 |---:|---:|---|---|---|---|---|
-| 1 | 0.93 | body_memory | grief | gen_x_sandwich | The Weight of Gone | A Gentle Guide to Grief, Loss, and Healing |
-| 2 | 0.93 | cognitive_clarity | overthinking | tech_finance_burnout | The Loop Breaker | How to Stop Overthinking and Quiet Your Racing Mind |
-| 3 | 0.93 | digital_ground | imposter_syndrome | gen_z_professionals | The Proof Was Always You | An Imposter Syndrome Recovery Guide for Professionals |
-| 4 | 0.93 | relational_calm | social_anxiety | millennial_women_professionals | The Script Nobody Gave You | How to Navigate Social Anxiety with Confidence |
-| 5 | 0.93 | sleep_restoration | sleep_anxiety | first_responders | Permission to Rest | How to Calm Racing Thoughts and Finally Sleep |
-| 6 | 0.9 | body_memory | somatic_healing | millennial_women_professionals | Unlock the Freeze | A Somatic Guide to Nervous System Reset and Trauma Release |
-| 7 | 0.9 | cognitive_clarity | overthinking | gen_z_professionals | Thought Traffic | Breaking Free from Overthinking, Worry, and Analysis Paralysis |
-| 8 | 0.9 | devotion_path | compassion_fatigue | healthcare_rns | Caring Until There's Nothing Left | A Compassion Fatigue Recovery Guide for Helpers |
-| 9 | 0.9 | devotion_path | imposter_syndrome | healthcare_rns | The Proof Was Always You | An Imposter Syndrome Recovery Guide for Professionals |
-| 10 | 0.9 | devotion_path | grief | healthcare_rns | The Weight of Gone | A Gentle Guide to Grief, Loss, and Healing |
+| 1 | 0.95 | body_memory | somatic_healing | healthcare_rns | Held in the Skin, After the Shift | A Somatic Memory Path Through Somatic Healing |
+| 2 | 0.95 | body_memory | grief | healthcare_rns | The Bone-Deep Knowing, Between Rounds | Grief Recovery for Nurses and Caregivers |
+| 3 | 0.95 | sleep_restoration | sleep_anxiety | healthcare_rns | The Quiet Hour, Past the Last Patient | How Sleep-Restoration Works When Sleep Anxiety Won't Stop |
+| 4 | 0.95 | warrior_calm | courage | first_responders | Stillness in Motion, Past the Badge | A Guide to Courage for First Responders |
+| 5 | 0.93 | body_memory | somatic_healing | gen_x_sandwich | Held in the Skin, Between the Two | Somatic Healing Recovery for Gen-X Sandwich Generation |
+| 6 | 0.93 | body_memory | grief | gen_x_sandwich | The Weight of Gone | A Gentle Guide to Grief, Loss, and Healing |
+| 7 | 0.93 | cognitive_clarity | overthinking | tech_finance_burnout | When Thinking Stops, Off the Screen | When Overthinking Meets Clear Mind |
+| 8 | 0.93 | devotion_path | courage | healthcare_rns | Where Devotion Begins, Before the Call | How Devotional Works When Courage Won't Stop |
+| 9 | 0.93 | digital_ground | imposter_syndrome | gen_z_professionals | After the Last Tab, When the Standup Lands | A Digital Grounding Path Through Imposter Syndrome |
+| 10 | 0.93 | digital_ground | social_anxiety | gen_z_professionals | Beyond the Notification, Beyond the Feed | Social Anxiety Recovery for Gen-Z Professionals |
 
 ### ja_JP
 
@@ -70,48 +70,38 @@ _No distinct title+subtitle pairs in ready rows. Locale has no listing-ready ent
 ### en_US headline numbers
 
 - Ready rows: **1,478**
-- Distinct titles: **42** → average **35.2 ready rows per title**
-- Distinct title+subtitle pairs: **45** → average **32.8 ready rows per pair**
-- Distinct brand+title+subtitle: **416** (the actual unique-listing count)
+- Distinct titles: **1149** → average **1.3 ready rows per title**
+- Distinct title+subtitle pairs: **1478** → average **1.0 ready rows per pair**
+- Distinct brand+title+subtitle: **1478** (the actual unique-listing count)
 
 ### Top duplicated titles in en_US ready set
 
 | Title | Times reused |
 |---|---:|
-| Before You Break | 47 |
-| You Were Always Enough | 46 |
-| Safe Enough | 43 |
-| The Alarm Is Lying | 42 |
-| Still Here Without You | 41 |
-| Worthy Without Proof | 41 |
-| Running on Fumes | 40 |
-| The No That Saved Me | 39 |
-| The Collapse You Earned | 38 |
-| The Mirror Lied | 37 |
-| The Shape of Missing | 36 |
-| The Proof Was Always You | 35 |
-| Color Returns | 34 |
-| The Line You Draw | 33 |
-| Caring Until There's Nothing Left | 33 |
+| The Sanctuary Door, After the Shift | 5 |
+| The Hour of Rest, After the Last Plan | 5 |
+| The Hour of Rest, After the Quarter | 5 |
+| The Sanctuary Door, Past the Inbox | 4 |
+| The Held Breath, When the Round Closes | 4 |
+| The Quiet Room, Past the Headcount | 4 |
+| The Surrender, After the Calendar | 4 |
+| The Heart's Path, Between the Calls | 4 |
+| The Heart's Path, After the Siren | 4 |
+| The Held Breath, When the Standup Ends | 3 |
+| The Sanctuary Door, After the Siren | 3 |
+| The Sanctuary Door, When the Classroom Empties | 3 |
+| The Hour of Rest, After the Group Chat | 3 |
+| The Sanctuary Door, When the Radio Quiets | 3 |
+| Before the Pause, Past Both Generations | 3 |
 
 ### Top duplicated title+subtitle pairs in en_US ready set
 
 | Title | Subtitle | Times reused |
 |---|---|---:|
-| Before You Break | Escaping Burnout and Rebuilding Your Energy | 47 |
-| You Were Always Enough | Rebuilding Self-Esteem and Reclaiming Your Worth | 46 |
-| Safe Enough | How to Calm Anxiety and Reclaim Your Nervous System | 43 |
-| The Alarm Is Lying | A Nervous System Guide to Anxiety Recovery | 42 |
-| Still Here Without You | Finding Your Way Through Grief and Heartbreak | 41 |
-| Worthy Without Proof | How to Build Unshakable Self Worth and Confidence | 41 |
-| Running on Fumes | A Recovery Guide for Burnout and Work Exhaustion | 40 |
-| The No That Saved Me | A Practical Guide to Setting Boundaries and Finding Peace | 39 |
-| The Collapse You Earned | Burnout Recovery for People Who Can't Stop | 38 |
-| The Mirror Lied | A Self-Love Guide to Healing Low Self-Esteem | 37 |
 
-**Why this is happening.** The generator reuses a small pool of human-authored title templates per topic. Once a `(topic)` is selected, the template lookup is deterministic — every `(brand, persona, teacher)` triple sharing that topic collapses onto the same title. Net effect: 12 brands × 17 topics × ~5 personas converge to 42 unique titles.
+**Why this is happening.** The generator reuses a small pool of human-authored title templates per topic. Once a `(topic)` is selected, the template lookup is deterministic — every `(brand, persona, teacher)` triple sharing that topic collapses onto the same title. Net effect: 12 brands × 17 topics × ~5 personas converge to 1149 unique titles.
 
-**Commercial impact.** If shipped as-is, **47 different ASINs would compete for "Before You Break"** in Amazon search. Even when each brand-imprint is treated as its own listing (collapsing duplicates within a brand), the catalog still surfaces only 416 unique brand+title+subtitle units across 1,478 ready rows — search-rank suppression and KDP duplicate-content review are likely outcomes.
+**Commercial impact.** If shipped as-is, **5 different ASINs would compete for "The Sanctuary Door, After the Shift"** in Amazon search. Even when each brand-imprint is treated as its own listing (collapsing duplicates within a brand), the catalog still surfaces only 1478 unique brand+title+subtitle units across 1,478 ready rows — search-rank suppression and KDP duplicate-content review are likely outcomes.
 
 ### Non-en locales: total title cannibalization
 
@@ -125,13 +115,11 @@ Heuristics applied to the en_US ready set (ja_JP / zh_TW / zh_CN have no titles 
 
 | Signal | Count (en_US ready) | Notes |
 |---|---:|---|
-| Weak titles total | 383 | Match any heuristic below |
-| ↳ blank | 201 | |
-| ↳ ultra_short_title | 182 | |
-| Weak subtitles total | 541 | |
-| ↳ starts_with::how to | 261 | |
-| ↳ blank | 201 | |
-| ↳ starts_with::a guide to | 79 | |
+| Weak titles total | 3 | Match any heuristic below |
+| ↳ ultra_short_title | 3 | |
+| Weak subtitles total | 241 | |
+| ↳ starts_with::a guide to | 237 | |
+| ↳ starts_with::how to | 4 | |
 
 **Heuristic definitions:**
 
@@ -203,8 +191,8 @@ Ranked by commercial impact × cost-to-fix.
 
 ### B2 — Catastrophic title cannibalization in en_US (CRITICAL)
 
-- 1,044 ready rows → only **42 distinct titles** (45 distinct title+subtitle pairs).
-- Top duplicate title ("Before You Break") appears **47 times**.
+- 1,044 ready rows → only **1149 distinct titles** (1478 distinct title+subtitle pairs).
+- Top duplicate title ("The Sanctuary Door, After the Shift") appears **5 times**.
 - Root cause: title template pool is per-topic, not per-(brand, topic, persona). Once a topic is matched, the template lookup is deterministic and ignores brand/persona signal.
 - **Fix paths (pick one before scaling):**
   - (a) Expand `config/catalog_planning/title_templates.yaml` from 51 → 153+ entries with brand-conditioning (e.g., `body_memory × grief` ≠ `cognitive_clarity × grief`). Phase 2 T0 pre-work.

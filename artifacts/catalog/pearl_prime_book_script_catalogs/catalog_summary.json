@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-28T19:59:48Z",
-  "generator_version": "1c7cd876ad01",
+  "generated_at": "2026-04-28T20:41:14Z",
+  "generator_version": "db8504affc82",
   "totals": {
     "en_US": {
       "rows": 1478,
@@ -81,6 +81,10 @@
     {
       "path": "config/manga/canonical_genre_list.yaml",
       "sha256": "08cc01e2d786a3c0c5747078f5edc39545b1868be61d67504601d45416afe3f5"
+    },
+    {
+      "path": "config/catalog_planning/title_dedup_phrases.yaml",
+      "sha256": "4a118bfd0b7826ed341f99a4e3abba8d796357dc1aced9faa7d9843468f6e4c5"
     }
   ]
 }
