@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-28T20:41:14Z",
-  "generator_version": "db8504affc82",
+  "generated_at": "2026-04-28T21:14:42Z",
+  "generator_version": "45d27ba41972",
   "totals": {
     "en_US": {
       "rows": 1478,
@@ -8,31 +8,6 @@
       "blocked": 0,
       "by_status": {
         "ready": 1478
-      }
-    },
-    "ja_JP": {
-      "rows": 1478,
-      "ready": 1478,
-      "blocked": 0,
-      "by_status": {
-        "ready": 1478
-      }
-    },
-    "zh_TW": {
-      "rows": 2818,
-      "ready": 2658,
-      "blocked": 160,
-      "by_status": {
-        "blocked_score": 160,
-        "ready": 2658
-      }
-    },
-    "zh_CN": {
-      "rows": 2630,
-      "ready": 2630,
-      "blocked": 0,
-      "by_status": {
-        "ready": 2630
       }
     }
   },
@@ -48,7 +23,7 @@
     },
     {
       "path": "config/catalog/catalog_generation_config.yaml",
-      "sha256": "270db9b69175600027468b9e5d45b84121d085b276c4479bc8d27c23dba15cfd"
+      "sha256": "a454030b167edd6a5fa2643d91bf87b001416349c721019fc97ca8481cce20c7"
     },
     {
       "path": "config/catalog_planning/canonical_topics.yaml",
@@ -81,10 +56,6 @@
     {
       "path": "config/manga/canonical_genre_list.yaml",
       "sha256": "08cc01e2d786a3c0c5747078f5edc39545b1868be61d67504601d45416afe3f5"
-    },
-    {
-      "path": "config/catalog_planning/title_dedup_phrases.yaml",
-      "sha256": "4a118bfd0b7826ed341f99a4e3abba8d796357dc1aced9faa7d9843468f6e4c5"
     }
   ]
 }

@@ -131,7 +131,6 @@ def load_all_inputs() -> dict:
         "locale_brand_names": "config/catalog_planning/locale_brand_names.yaml",
         "format_registry":   "config/format_selection/format_registry.yaml",
         "canonical_genres":  "config/manga/canonical_genre_list.yaml",
-        "title_dedup_phrases": "config/catalog_planning/title_dedup_phrases.yaml",
     }
     return {k: {"data": _load_yaml(v), "sha256": _sha256(v), "path": v}
             for k, v in sources.items()}
@@ -241,127 +240,62 @@ def composite_score(scores: dict, teacher_id: str, topic: str, persona: str
 ENGLISH_TITLE_LOCALES = {"en_US"}
 
 
-def _seeded_idx(seed_str: str, modulus: int) -> int:
-    """Stable mod-N index from sha256(seed). Used for both template-idx
-    and variant-phrase pick."""
-    return int(hashlib.sha256(seed_str.encode("utf-8")).hexdigest(), 16) % modulus
-
-
-def compute_flagship_set(locale: str, brand_ids: list[str], active_topics: list[str],
-                         active_personas: list[str], catalog_config: dict) -> set[tuple]:
-    """B2 dedup helper.
-
-    For each (locale, topic, template_idx), select exactly ONE flagship
-    `(brand, persona)` pair — the lexicographically smallest pair among
-    all pairs whose seed-hash maps to that template_idx. Cap of 1 per
-    template_idx means each existing template title appears at most
-    once per (locale, topic). All other rows fall back to deterministic
-    brand+persona variant titles.
-
-    Returns a set of `(locale, brand, topic, persona)` flagship tuples.
-    """
-    flagship: set[tuple] = set()
-    title_templates = catalog_config.get("title_templates") or {}
-    for topic in active_topics:
-        templates = title_templates.get(topic) or []
-        n = len(templates)
-        if n == 0:
-            continue
-        by_template: dict[int, list[tuple[str, str]]] = {}
-        for brand in brand_ids:
-            for persona in active_personas:
-                idx = _seeded_idx(f"{locale}|{brand}|{topic}|{persona}", n)
-                by_template.setdefault(idx, []).append((brand, persona))
-        for idx, pairs in by_template.items():
-            if pairs:
-                b, p = sorted(pairs)[0]   # lex-smallest pair = flagship
-                flagship.add((locale, b, topic, p))
-    return flagship
-
-
-def variant_title_subtitle(dedup: dict, brand: str, persona: str, topic: str,
-                            locale: str) -> tuple[str, str]:
-    """B2 deterministic brand+persona variant title.
-
-    Title formula: "{brand_voice_phrase}, {persona_signal_phrase}"
-    Phrase indices derived from sha256 of (locale|brand|topic|persona).
-    Subtitle formula: brand-tinted, topic-injected pattern from
-    `variant_subtitle_patterns`.
-    """
-    brand_phrases = (dedup.get("brand_voice_phrases") or {}).get(brand) or []
-    persona_phrases = (dedup.get("persona_signal_phrases") or {}).get(persona) or []
-    sub_patterns = dedup.get("variant_subtitle_patterns") or []
-    brand_descs = dedup.get("brand_descriptors") or {}
-    persona_descs = dedup.get("persona_descriptors") or {}
-
-    if not brand_phrases or not persona_phrases or not sub_patterns:
-        return ("", "")  # fall through to needs_title_synthesis
-
-    seed_a = f"{locale}|{brand}|{topic}|{persona}|brand"
-    seed_b = f"{locale}|{brand}|{topic}|{persona}|persona"
-    seed_c = f"{locale}|{brand}|{topic}|{persona}|sub"
-
-    bi = _seeded_idx(seed_a, len(brand_phrases))
-    pi = _seeded_idx(seed_b, len(persona_phrases))
-    si = _seeded_idx(seed_c, len(sub_patterns))
-
-    title = f"{brand_phrases[bi]}, {persona_phrases[pi]}"
-    sub_pat = sub_patterns[si]
-    topic_disp = topic.replace("_", " ").title()
-    brand_desc = brand_descs.get(brand, brand.replace("_", " ").title())
-    persona_desc = persona_descs.get(persona, persona.replace("_", " ").title())
-    subtitle = (sub_pat
-                .replace("{topic}", topic_disp)
-                .replace("{brand_descriptor}", brand_desc)
-                .replace("{persona_descriptor}", persona_desc))
-    return (title, subtitle)
-
-
 def pick_title_subtitle(catalog_config: dict, topic: str, persona: str,
                         locale: str, brand: str,
-                        flagship_set: set[tuple] | None = None,
-                        dedup_phrases: dict | None = None) -> tuple[str, str, str]:
+                        teacher_mode: str = "", runtime_format: str = "") -> tuple[str, str, str]:
     """
-    Deterministic title+subtitle synthesis with B2 dedup applied.
-
-    Selection order (en_US only — non-en still blank pending B1 templates):
-      1. If `(locale, brand, topic, persona)` is the flagship for its
-         template_idx, return the existing English template title+subtitle
-         from `catalog_generation_config.title_templates`.
-      2. Otherwise (or if no template exists for this topic), synthesize
-         a brand+persona variant title via `variant_title_subtitle()`.
-      3. If no variant tables and no template either, return blank with
-         `needs_title_synthesis`.
-
+    Deterministic pick from English title_templates for English locales only.
+    Non-English locales return blank with needs_title_synthesis (no LLM fallback).
     Returns (title, subtitle, note).
+
+    B2 (#786 / PR #790) — Composition: per-row title + subtitle now compose
+        title    = "{brand_voice_prefix} {base_title}".strip()
+        subtitle = "{base_subtitle_pattern} — {persona_signal}".strip()
+    Brand voice prefix and persona signal come from
+    catalog_config.brand_voice_modifiers and .persona_subtitle_modifiers.
+    Selection is fully deterministic: SHA256(locale|brand|topic|persona|
+    teacher_mode|runtime_format) indexes the base template; brand + persona
+    modifiers are pure lookups. Per #786 §5+§6: "deterministic per-(brand,
+    persona) salting using brand archetype + persona label" — no random or
+    time-based salts.
+
+    Supersedes the flagship_set + variant_title_subtitle scheme from PR #788
+    per operator decision 2026-04-29 ("use #790 as canonical B2 PR").
     """
     if locale not in ENGLISH_TITLE_LOCALES:
         return ("", "", "needs_title_synthesis_locale_native")
 
     templates = (catalog_config.get("title_templates") or {}).get(topic) or []
-    is_flagship = (flagship_set is not None
-                   and (locale, brand, topic, persona) in flagship_set)
+    if not templates:
+        return ("", "", "needs_title_synthesis")
+    # B2 (#786 §6): include teacher_mode + runtime_format in salt so two rows
+    # that share (brand, topic, persona) but differ in format/mode pick
+    # different templates — spreads cluster sizes below the 6-cap.
+    seed = f"{locale}|{brand}|{topic}|{persona}|{teacher_mode}|{runtime_format}".encode("utf-8")
+    idx = int(hashlib.sha256(seed).hexdigest(), 16) % len(templates)
+    tpl = templates[idx]
+    base_title = tpl.get("title", "") or ""
+    sub_pat = tpl.get("subtitle_pattern", "") or ""
+    topic_disp = topic.replace("_", " ").title()
+    base_subtitle = sub_pat.replace("{topic}", topic_disp)
 
-    # Path 1: flagship rows keep the existing English template title.
-    if is_flagship and templates:
-        n = len(templates)
-        idx = _seeded_idx(f"{locale}|{brand}|{topic}|{persona}", n)
-        tpl = templates[idx]
-        title = tpl.get("title", "") or ""
-        sub_pat = tpl.get("subtitle_pattern", "") or ""
-        topic_disp = topic.replace("_", " ").title()
-        subtitle = sub_pat.replace("{topic}", topic_disp)
-        note = "" if (title and subtitle) else "needs_title_synthesis"
-        return (title, subtitle, note)
+    # B2 brand voice prefix
+    brand_mods = (catalog_config.get("brand_voice_modifiers") or {})
+    voice_entry = brand_mods.get(brand) or brand_mods.get("_default") or {}
+    voice_prefix = (voice_entry.get("voice_prefix") or "").strip()
+    title = f"{voice_prefix} {base_title}".strip() if voice_prefix else base_title
 
-    # Path 2: variant title from brand-voice + persona-signal phrase tables.
-    if dedup_phrases:
-        v_title, v_sub = variant_title_subtitle(dedup_phrases, brand, persona, topic, locale)
-        if v_title and v_sub:
-            return (v_title, v_sub, "")
+    # B2 persona subtitle signal
+    persona_mods = (catalog_config.get("persona_subtitle_modifiers") or {})
+    persona_entry = persona_mods.get(persona) or persona_mods.get("_default") or {}
+    persona_signal = (persona_entry.get("signal") or "").strip()
+    if persona_signal and base_subtitle:
+        subtitle = f"{base_subtitle} — {persona_signal}"
+    else:
+        subtitle = base_subtitle
 
-    # Path 3: nothing to fall back to — leave blank with note.
-    return ("", "", "needs_title_synthesis")
+    note = "" if (title and subtitle) else "needs_title_synthesis"
+    return (title, subtitle, note)
 
 
 # ── Kill-list filter ────────────────────────────────────────────────────────
@@ -425,15 +359,9 @@ def build_rows_for_locale(locale: str, inputs: dict,
     active_personas = [p for p in cfg_personas if p in set(personas)] or cfg_personas
 
     scores = inputs["scores"]["data"]
-    dedup_phrases = (inputs.get("title_dedup_phrases") or {}).get("data") or {}
-
-    # Pre-compute flagship set once per locale (B2 dedup): each (locale, topic,
-    # template_idx) admits exactly one (brand, persona) pair as the row that
-    # keeps the existing template title; everything else gets a brand+persona
-    # variant title.
-    flagship_set = compute_flagship_set(
-        locale, brand_ids, active_topics, active_personas, catalog_config
-    )
+    # B2 (PR #790, supersedes #788): no flagship_set / dedup_phrases needed —
+    # title composition uses brand_voice_modifiers + persona_subtitle_modifiers
+    # baked into catalog_generation_config.yaml. See pick_title_subtitle().
 
     rows: list[dict] = []
     status_counts: dict[str, int] = {}
@@ -473,7 +401,7 @@ def build_rows_for_locale(locale: str, inputs: dict,
                     rows.append(_row(
                         locale, market_id, brand, teacher_id, teacher_mode,
                         topic, persona, comp,
-                        catalog_config, locale_names, flagship_set, dedup_phrases,
+                        catalog_config, locale_names,
                         readiness="blocked_score",
                         blockers="needs_score",
                         notes=(
@@ -494,7 +422,7 @@ def build_rows_for_locale(locale: str, inputs: dict,
                 rows.append(_row(
                     locale, market_id, brand, teacher_id, teacher_mode,
                     topic, persona, comp,
-                    catalog_config, locale_names, flagship_set, dedup_phrases,
+                    catalog_config, locale_names,
                     readiness="ready",
                     blockers="",
                     notes=f"composite={comp:.2f}",
@@ -507,11 +435,12 @@ def build_rows_for_locale(locale: str, inputs: dict,
 def _row(locale: str, market_id: str, brand: str, teacher_id: str,
          teacher_mode: bool, topic: str, persona: str, composite: float,
          catalog_config: dict, locale_names: dict[str, str],
-         flagship_set: set[tuple], dedup_phrases: dict,
          readiness: str, blockers: str, notes: str) -> dict:
     title, subtitle, title_note = pick_title_subtitle(
         catalog_config, topic, persona, locale, brand,
-        flagship_set=flagship_set, dedup_phrases=dedup_phrases)
+        teacher_mode=("teacher" if teacher_mode else "voice"),
+        runtime_format=DEFAULT_RUNTIME_FORMAT,
+    )
     extra_notes = "; ".join(x for x in (notes, title_note) if x)
     if title_note and readiness == "ready":
         # Title synthesis missing is a soft block — surface it but keep readiness ready

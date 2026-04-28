@@ -567,16 +567,38 @@ def render_markdown(per_locale: dict, cross: dict) -> str:
     w("- Root cause: no locale-native title templates exist on `origin/main`. Phase 2 plans address this; Phase 1 ships en_US-only or all-blank-non-en.")
     w("- **Fix path:** author `config/catalog_planning/title_templates.{ja_JP,zh_TW,zh_CN}.yaml` (deterministic templates, no LLM) — this is precisely Phase 2 T2. Catalog regenerates with no code change.")
     w()
-    w("### B2 — Catastrophic title cannibalization in en_US (CRITICAL)")
-    w()
     en = per_locale["en_US"]
-    w(f"- 1,044 ready rows → only **{en['distinct_titles_in_ready']} distinct titles** ({en['distinct_title_subtitle_in_ready']} distinct title+subtitle pairs).")
-    w(f"- Top duplicate title (\"{en['title_duplication_top'][0]['title']}\") appears **{en['title_duplication_top'][0]['count']} times**.")
-    w("- Root cause: title template pool is per-topic, not per-(brand, topic, persona). Once a topic is matched, the template lookup is deterministic and ignores brand/persona signal.")
-    w("- **Fix paths (pick one before scaling):**")
-    w("  - (a) Expand `config/catalog_planning/title_templates.yaml` from 51 → 153+ entries with brand-conditioning (e.g., `body_memory × grief` ≠ `cognitive_clarity × grief`). Phase 2 T0 pre-work.")
-    w("  - (b) Add a deterministic per-(brand, persona) salt that picks among template variants — keeps templates single-purpose but produces unique titles per row. Smaller change, weaker quality.")
-    w("  - (c) Accept the duplication and ship one en_US listing per (title, subtitle) pair — collapses the catalog from 1,044 rows to 45 units. Realistic short-term but throws away the brand×persona segmentation work.")
+    en_ready = en["row_count"]
+    en_distinct_titles = en.get("distinct_titles_in_ready", 0)
+    en_distinct_pairs = en.get("distinct_title_subtitle_in_ready", 0)
+    avg_per_title = (en_ready / en_distinct_titles) if en_distinct_titles else 0
+    top_dup_title = en.get("title_duplication_top", [{"count": 0, "title": "(none)"}])[0]
+    # Per #786 §3: criterion is exact (title, subtitle) pair >3, NOT title-only.
+    top_dup_pair = en.get("title_subtitle_duplication_top", [{"count": 0}])
+    top_dup_pair = top_dup_pair[0] if top_dup_pair else {"count": 0}
+    b2_passed = (
+        avg_per_title <= 3.0
+        and top_dup_pair.get("count", 0) <= 3
+        and en_distinct_titles > 0
+    )
+    if b2_passed:
+        w("### B2 — Title cannibalization (RESOLVED — PR #786 B2)")
+        w()
+        w(f"- {en_ready:,} ready rows → **{en_distinct_titles:,} distinct titles** ({en_distinct_pairs:,} distinct title+subtitle pairs).")
+        w(f"- **Avg ready rows per distinct title: {avg_per_title:.2f}** (acceptance: ≤3.0 ✅).")
+        w(f"- **Top exact (title, subtitle) repeat: {top_dup_pair.get('count', 0)}** (acceptance: ≤3 ✅). Title-only top repeat is informational only (current: {top_dup_title.get('count', 0)} for \"{top_dup_title.get('title', '?')}\" — different subtitles per persona).")
+        w("- Fix shipped: brand-conditioned title composition + persona-conditioned subtitle signal + per-topic template expansion (3→5-6 templates) + new templates for `mindfulness` and `adhd_focus`. Deterministic per-(brand, topic, persona, teacher_mode) hash.")
+        w("- See full delta + cluster report at `artifacts/audits/title_cluster_report_2026-04-29.after.md`.")
+    else:
+        w("### B2 — Catastrophic title cannibalization in en_US (CRITICAL)")
+        w()
+        w(f"- {en_ready:,} ready rows → only **{en_distinct_titles} distinct titles** ({en_distinct_pairs} distinct title+subtitle pairs).")
+        w(f"- Top duplicate title (\"{top_dup_title.get('title', '?')}\") appears **{top_dup_title.get('count', 0)} times**.")
+        w("- Root cause: title template pool is per-topic, not per-(brand, topic, persona). Once a topic is matched, the template lookup is deterministic and ignores brand/persona signal.")
+        w("- **Fix paths (pick one before scaling):**")
+        w("  - (a) Expand `config/catalog_planning/title_templates.yaml` from 51 → 153+ entries with brand-conditioning (e.g., `body_memory × grief` ≠ `cognitive_clarity × grief`). Phase 2 T0 pre-work.")
+        w("  - (b) Add a deterministic per-(brand, persona) salt that picks among template variants — keeps templates single-purpose but produces unique titles per row. Smaller change, weaker quality.")
+        w("  - (c) Accept the duplication and ship one en_US listing per (title, subtitle) pair — collapses the catalog from 1,044 rows to 45 units. Realistic short-term but throws away the brand×persona segmentation work.")
     w()
     w("### B3 — Score-gate gap blocks 4,304 high-potential rows (HIGH)")
     w()
