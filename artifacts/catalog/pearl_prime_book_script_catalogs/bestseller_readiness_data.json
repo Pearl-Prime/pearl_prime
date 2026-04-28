@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-04-28T08:31:36.222703+00:00",
+  "generated_at_utc": "2026-04-28T20:01:57.553989+00:00",
   "source_csvs": [
     "artifacts/catalog/pearl_prime_book_script_catalogs/en_US_catalog.csv",
     "artifacts/catalog/pearl_prime_book_script_catalogs/ja_JP_catalog.csv",
@@ -8,513 +8,281 @@
   ],
   "per_locale": {
     "en_US": {
-      "row_count": 1600,
+      "row_count": 1478,
       "status_breakdown": {
-        "blocked_score": 556,
-        "ready": 1044
+        "ready": 1478
       },
-      "blocked_composite_bands": {
-        "0.50_no_signal": 160,
-        "0.55_to_0.65": 244,
-        "0.66_to_0.69_just_below": 85,
-        "ge_0.70": 67
-      },
+      "blocked_composite_bands": {},
       "ready_composite_bands": {
-        "ge_0.70": 1044
+        "ge_0.70": 1478
       },
-      "high_potential_blocked": [
-        {
-          "composite": 0.72,
-          "brand": "body_memory",
-          "topic": "grief",
-          "persona": "educators",
-          "teacher": "omote",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "body_memory",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "omote",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "body_memory",
-          "topic": "somatic_healing",
-          "persona": "educators",
-          "teacher": "omote",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "cognitive_clarity",
-          "topic": "overthinking",
-          "persona": "educators",
-          "teacher": "joshin",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "adhd_focus",
-          "persona": "gen_z_professionals",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "adhd_focus",
-          "persona": "gen_z_student",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "mindfulness",
-          "persona": "gen_z_professionals",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "mindfulness",
-          "persona": "gen_z_student",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "relational_calm",
-          "topic": "social_anxiety",
-          "persona": "educators",
-          "teacher": "junko",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "sleep_restoration",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "master_sha",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "sleep_restoration",
-          "topic": "sleep_anxiety",
-          "persona": "educators",
-          "teacher": "master_sha",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "somatic_wisdom",
-          "topic": "somatic_healing",
-          "persona": "educators",
-          "teacher": "pamela_fellows",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "adhd_focus",
-          "persona": "first_responders",
-          "teacher": "master_wu",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "courage",
-          "persona": "educators",
-          "teacher": "master_wu",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "mindfulness",
-          "persona": "first_responders",
-          "teacher": "master_wu",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "body_memory",
-          "topic": "mindfulness",
-          "persona": "gen_x_sandwich",
-          "teacher": "omote",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "adhd_focus",
-          "persona": "tech_finance_burnout",
-          "teacher": "joshin",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "imposter_syndrome",
-          "persona": "educators",
-          "teacher": "joshin",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "mindfulness",
-          "persona": "tech_finance_burnout",
-          "teacher": "joshin",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "adhd_focus",
-          "persona": "first_responders",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "adhd_focus",
-          "persona": "working_parents",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "courage",
-          "persona": "educators",
-          "teacher": "sai_ma",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
-          "persona": "first_responders",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
-          "persona": "working_parents",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        }
-      ],
-      "topics_zero_ready": [
-        "adhd_focus",
-        "mindfulness"
-      ],
-      "personas_zero_ready": [
-        "educators"
-      ],
+      "high_potential_blocked": [],
+      "topics_zero_ready": [],
+      "personas_zero_ready": [],
       "brands_zero_ready": [],
       "topic_ready_counts": {
-        "anxiety": 95,
-        "boundaries": 85,
-        "burnout": 107,
-        "compassion_fatigue": 66,
-        "courage": 77,
-        "depression": 81,
-        "financial_stress": 25,
-        "grief": 83,
-        "self_worth": 106,
-        "financial_anxiety": 21,
-        "imposter_syndrome": 76,
-        "overthinking": 49,
-        "sleep_anxiety": 59,
-        "social_anxiety": 57,
-        "somatic_healing": 57
+        "adhd_focus": 86,
+        "anxiety": 113,
+        "boundaries": 101,
+        "burnout": 125,
+        "compassion_fatigue": 78,
+        "courage": 92,
+        "depression": 96,
+        "financial_anxiety": 34,
+        "financial_stress": 34,
+        "grief": 98,
+        "imposter_syndrome": 95,
+        "mindfulness": 115,
+        "overthinking": 65,
+        "self_worth": 124,
+        "sleep_anxiety": 77,
+        "social_anxiety": 73,
+        "somatic_healing": 72
       },
       "persona_ready_counts": {
-        "millennial_women_professionals": 122,
-        "tech_finance_burnout": 115,
-        "gen_z_professionals": 112,
-        "healthcare_rns": 124,
-        "corporate_managers": 88,
-        "entrepreneurs": 84,
-        "gen_x_sandwich": 102,
-        "working_parents": 99,
-        "gen_z_student": 68,
-        "first_responders": 97,
-        "gen_alpha_students": 33
+        "corporate_managers": 123,
+        "millennial_women_professionals": 150,
+        "tech_finance_burnout": 143,
+        "gen_z_professionals": 140,
+        "first_responders": 129,
+        "educators": 136,
+        "working_parents": 133,
+        "entrepreneurs": 117,
+        "gen_z_student": 96,
+        "healthcare_rns": 140,
+        "gen_x_sandwich": 127,
+        "gen_alpha_students": 44
       },
       "brand_ready_counts": {
-        "stillness_press": 36,
-        "cognitive_clarity": 71,
-        "somatic_wisdom": 91,
-        "qi_foundation": 83,
-        "digital_ground": 92,
-        "heart_balance": 94,
-        "relational_calm": 116,
-        "warrior_calm": 71,
-        "sleep_restoration": 97,
-        "body_memory": 84,
-        "solar_return": 112,
-        "devotion_path": 97
+        "stillness_press": 192,
+        "cognitive_clarity": 94,
+        "somatic_wisdom": 118,
+        "qi_foundation": 107,
+        "digital_ground": 115,
+        "heart_balance": 122,
+        "relational_calm": 144,
+        "warrior_calm": 92,
+        "sleep_restoration": 123,
+        "body_memory": 109,
+        "solar_return": 140,
+        "devotion_path": 122
       },
       "distinct_titles_in_ready": 42,
       "distinct_title_subtitle_in_ready": 45,
-      "distinct_brand_title_subtitle_in_ready": 386,
-      "ready_rows_with_blank_title": 0,
-      "ready_rows_with_blank_subtitle": 0,
+      "distinct_brand_title_subtitle_in_ready": 416,
+      "ready_rows_with_blank_title": 201,
+      "ready_rows_with_blank_subtitle": 201,
       "title_duplication_top": [
         {
           "title": "Before You Break",
-          "count": 41
-        },
-        {
-          "title": "Safe Enough",
-          "count": 38
+          "count": 47
         },
         {
           "title": "You Were Always Enough",
-          "count": 38
+          "count": 46
         },
         {
-          "title": "The Collapse You Earned",
-          "count": 35
-        },
-        {
-          "title": "Worthy Without Proof",
-          "count": 34
-        },
-        {
-          "title": "The Mirror Lied",
-          "count": 34
+          "title": "Safe Enough",
+          "count": 43
         },
         {
           "title": "The Alarm Is Lying",
-          "count": 33
-        },
-        {
-          "title": "The Shape of Missing",
-          "count": 33
+          "count": 42
         },
         {
           "title": "Still Here Without You",
-          "count": 32
+          "count": 41
         },
         {
-          "title": "The No That Saved Me",
-          "count": 31
+          "title": "Worthy Without Proof",
+          "count": 41
         },
         {
           "title": "Running on Fumes",
-          "count": 31
+          "count": 40
         },
         {
-          "title": "The Fear That Built You",
-          "count": 30
+          "title": "The No That Saved Me",
+          "count": 39
         },
         {
-          "title": "The Light You Forgot",
-          "count": 30
+          "title": "The Collapse You Earned",
+          "count": 38
         },
         {
-          "title": "The Line You Draw",
-          "count": 29
+          "title": "The Mirror Lied",
+          "count": 37
+        },
+        {
+          "title": "The Shape of Missing",
+          "count": 36
+        },
+        {
+          "title": "The Proof Was Always You",
+          "count": 35
         },
         {
           "title": "Color Returns",
-          "count": 27
+          "count": 34
+        },
+        {
+          "title": "The Line You Draw",
+          "count": 33
+        },
+        {
+          "title": "Caring Until There's Nothing Left",
+          "count": 33
         }
       ],
       "title_subtitle_duplication_top": [
         {
           "title": "Before You Break",
           "subtitle": "Escaping Burnout and Rebuilding Your Energy",
-          "count": 41
-        },
-        {
-          "title": "Safe Enough",
-          "subtitle": "How to Calm Anxiety and Reclaim Your Nervous System",
-          "count": 38
+          "count": 47
         },
         {
           "title": "You Were Always Enough",
           "subtitle": "Rebuilding Self-Esteem and Reclaiming Your Worth",
-          "count": 38
+          "count": 46
         },
         {
-          "title": "The Collapse You Earned",
-          "subtitle": "Burnout Recovery for People Who Can't Stop",
-          "count": 35
-        },
-        {
-          "title": "Worthy Without Proof",
-          "subtitle": "How to Build Unshakable Self Worth and Confidence",
-          "count": 34
-        },
-        {
-          "title": "The Mirror Lied",
-          "subtitle": "A Self-Love Guide to Healing Low Self-Esteem",
-          "count": 34
+          "title": "Safe Enough",
+          "subtitle": "How to Calm Anxiety and Reclaim Your Nervous System",
+          "count": 43
         },
         {
           "title": "The Alarm Is Lying",
           "subtitle": "A Nervous System Guide to Anxiety Recovery",
-          "count": 33
-        },
-        {
-          "title": "The Shape of Missing",
-          "subtitle": "A Grief Recovery Companion for the Worst Days",
-          "count": 33
+          "count": 42
         },
         {
           "title": "Still Here Without You",
           "subtitle": "Finding Your Way Through Grief and Heartbreak",
-          "count": 32
+          "count": 41
         },
         {
-          "title": "The No That Saved Me",
-          "subtitle": "A Practical Guide to Setting Boundaries and Finding Peace",
-          "count": 31
+          "title": "Worthy Without Proof",
+          "subtitle": "How to Build Unshakable Self Worth and Confidence",
+          "count": 41
         },
         {
           "title": "Running on Fumes",
           "subtitle": "A Recovery Guide for Burnout and Work Exhaustion",
-          "count": 31
+          "count": 40
         },
         {
-          "title": "The Fear That Built You",
-          "subtitle": "Finding Courage When Everything Feels Uncertain",
-          "count": 30
+          "title": "The No That Saved Me",
+          "subtitle": "A Practical Guide to Setting Boundaries and Finding Peace",
+          "count": 39
         },
         {
-          "title": "The Light You Forgot",
-          "subtitle": "A Gentle Guide to Healing Depression and Finding Hope",
-          "count": 30
+          "title": "The Collapse You Earned",
+          "subtitle": "Burnout Recovery for People Who Can't Stop",
+          "count": 38
         },
         {
-          "title": "The Line You Draw",
-          "subtitle": "How to Set Boundaries Without Guilt or Fear",
-          "count": 29
+          "title": "The Mirror Lied",
+          "subtitle": "A Self-Love Guide to Healing Low Self-Esteem",
+          "count": 37
+        },
+        {
+          "title": "The Shape of Missing",
+          "subtitle": "A Grief Recovery Companion for the Worst Days",
+          "count": 36
+        },
+        {
+          "title": "The Proof Was Always You",
+          "subtitle": "An Imposter Syndrome Recovery Guide for Professionals",
+          "count": 35
         },
         {
           "title": "Color Returns",
           "subtitle": "How to Move Through Depression One Day at a Time",
-          "count": 27
+          "count": 34
+        },
+        {
+          "title": "The Line You Draw",
+          "subtitle": "How to Set Boundaries Without Guilt or Fear",
+          "count": 33
+        },
+        {
+          "title": "Caring Until There's Nothing Left",
+          "subtitle": "A Compassion Fatigue Recovery Guide for Helpers",
+          "count": 33
         }
       ],
       "subtitle_duplication_top": [
         {
           "subtitle": "Escaping Burnout and Rebuilding Your Energy",
-          "count": 41
-        },
-        {
-          "subtitle": "How to Calm Anxiety and Reclaim Your Nervous System",
-          "count": 38
+          "count": 47
         },
         {
           "subtitle": "Rebuilding Self-Esteem and Reclaiming Your Worth",
-          "count": 38
+          "count": 46
         },
         {
-          "subtitle": "Burnout Recovery for People Who Can't Stop",
-          "count": 35
-        },
-        {
-          "subtitle": "How to Build Unshakable Self Worth and Confidence",
-          "count": 34
-        },
-        {
-          "subtitle": "A Self-Love Guide to Healing Low Self-Esteem",
-          "count": 34
+          "subtitle": "How to Calm Anxiety and Reclaim Your Nervous System",
+          "count": 43
         },
         {
           "subtitle": "A Nervous System Guide to Anxiety Recovery",
-          "count": 33
-        },
-        {
-          "subtitle": "A Grief Recovery Companion for the Worst Days",
-          "count": 33
+          "count": 42
         },
         {
           "subtitle": "Finding Your Way Through Grief and Heartbreak",
-          "count": 32
+          "count": 41
         },
         {
-          "subtitle": "A Practical Guide to Setting Boundaries and Finding Peace",
-          "count": 31
+          "subtitle": "How to Build Unshakable Self Worth and Confidence",
+          "count": 41
         },
         {
           "subtitle": "A Recovery Guide for Burnout and Work Exhaustion",
-          "count": 31
+          "count": 40
         },
         {
-          "subtitle": "Finding Courage When Everything Feels Uncertain",
-          "count": 30
+          "subtitle": "A Practical Guide to Setting Boundaries and Finding Peace",
+          "count": 39
         },
         {
-          "subtitle": "A Gentle Guide to Healing Depression and Finding Hope",
-          "count": 30
+          "subtitle": "Burnout Recovery for People Who Can't Stop",
+          "count": 38
         },
         {
-          "subtitle": "How to Set Boundaries Without Guilt or Fear",
-          "count": 29
+          "subtitle": "A Self-Love Guide to Healing Low Self-Esteem",
+          "count": 37
+        },
+        {
+          "subtitle": "A Grief Recovery Companion for the Worst Days",
+          "count": 36
+        },
+        {
+          "subtitle": "An Imposter Syndrome Recovery Guide for Professionals",
+          "count": 35
         },
         {
           "subtitle": "How to Move Through Depression One Day at a Time",
-          "count": 27
+          "count": 34
+        },
+        {
+          "subtitle": "How to Set Boundaries Without Guilt or Fear",
+          "count": 33
+        },
+        {
+          "subtitle": "A Compassion Fatigue Recovery Guide for Helpers",
+          "count": 33
         }
       ],
-      "weak_title_count": 148,
-      "weak_subtitle_count": 273,
+      "weak_title_count": 383,
+      "weak_subtitle_count": 541,
       "weak_title_reason_counts": {
-        "ultra_short_title": 148
+        "blank": 201,
+        "ultra_short_title": 182
       },
       "weak_subtitle_reason_counts": {
-        "starts_with::how to": 210,
-        "starts_with::a guide to": 63
+        "blank": 201,
+        "starts_with::how to": 261,
+        "starts_with::a guide to": 79
       },
       "top_10_strongest_distinct": [
         {
@@ -656,318 +424,84 @@
         "working_parents"
       ],
       "needs_title_synthesis_locale_native": 0,
-      "needs_title_synthesis_en_only": 252,
-      "high_potential_blocked_total_at_or_above_0_65": 220
+      "needs_title_synthesis_en_only": 201,
+      "high_potential_blocked_total_at_or_above_0_65": 0
     },
     "ja_JP": {
-      "row_count": 1600,
+      "row_count": 1478,
       "status_breakdown": {
-        "blocked_score": 556,
-        "ready": 1044
+        "ready": 1478
       },
-      "blocked_composite_bands": {
-        "0.50_no_signal": 160,
-        "0.55_to_0.65": 244,
-        "0.66_to_0.69_just_below": 85,
-        "ge_0.70": 67
-      },
+      "blocked_composite_bands": {},
       "ready_composite_bands": {
-        "ge_0.70": 1044
+        "ge_0.70": 1478
       },
-      "high_potential_blocked": [
-        {
-          "composite": 0.72,
-          "brand": "body_memory",
-          "topic": "grief",
-          "persona": "educators",
-          "teacher": "omote",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "body_memory",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "omote",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "body_memory",
-          "topic": "somatic_healing",
-          "persona": "educators",
-          "teacher": "omote",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "cognitive_clarity",
-          "topic": "overthinking",
-          "persona": "educators",
-          "teacher": "joshin",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "adhd_focus",
-          "persona": "gen_z_professionals",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "adhd_focus",
-          "persona": "gen_z_student",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "mindfulness",
-          "persona": "gen_z_professionals",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "mindfulness",
-          "persona": "gen_z_student",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "relational_calm",
-          "topic": "social_anxiety",
-          "persona": "educators",
-          "teacher": "junko",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "sleep_restoration",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "master_sha",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "sleep_restoration",
-          "topic": "sleep_anxiety",
-          "persona": "educators",
-          "teacher": "master_sha",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "somatic_wisdom",
-          "topic": "somatic_healing",
-          "persona": "educators",
-          "teacher": "pamela_fellows",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "adhd_focus",
-          "persona": "first_responders",
-          "teacher": "master_wu",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "courage",
-          "persona": "educators",
-          "teacher": "master_wu",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "mindfulness",
-          "persona": "first_responders",
-          "teacher": "master_wu",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "body_memory",
-          "topic": "mindfulness",
-          "persona": "gen_x_sandwich",
-          "teacher": "omote",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "adhd_focus",
-          "persona": "tech_finance_burnout",
-          "teacher": "joshin",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "imposter_syndrome",
-          "persona": "educators",
-          "teacher": "joshin",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "mindfulness",
-          "persona": "tech_finance_burnout",
-          "teacher": "joshin",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "adhd_focus",
-          "persona": "first_responders",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "adhd_focus",
-          "persona": "working_parents",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "courage",
-          "persona": "educators",
-          "teacher": "sai_ma",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
-          "persona": "first_responders",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
-          "persona": "working_parents",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        }
-      ],
-      "topics_zero_ready": [
-        "adhd_focus",
-        "mindfulness"
-      ],
-      "personas_zero_ready": [
-        "educators"
-      ],
+      "high_potential_blocked": [],
+      "topics_zero_ready": [],
+      "personas_zero_ready": [],
       "brands_zero_ready": [],
       "topic_ready_counts": {
-        "anxiety": 95,
-        "boundaries": 85,
-        "burnout": 107,
-        "compassion_fatigue": 66,
-        "courage": 77,
-        "depression": 81,
-        "financial_stress": 25,
-        "grief": 83,
-        "self_worth": 106,
-        "financial_anxiety": 21,
-        "imposter_syndrome": 76,
-        "overthinking": 49,
-        "sleep_anxiety": 59,
-        "social_anxiety": 57,
-        "somatic_healing": 57
+        "adhd_focus": 86,
+        "anxiety": 113,
+        "boundaries": 101,
+        "burnout": 125,
+        "compassion_fatigue": 78,
+        "courage": 92,
+        "depression": 96,
+        "financial_anxiety": 34,
+        "financial_stress": 34,
+        "grief": 98,
+        "imposter_syndrome": 95,
+        "mindfulness": 115,
+        "overthinking": 65,
+        "self_worth": 124,
+        "sleep_anxiety": 77,
+        "social_anxiety": 73,
+        "somatic_healing": 72
       },
       "persona_ready_counts": {
-        "millennial_women_professionals": 122,
-        "tech_finance_burnout": 115,
-        "gen_z_professionals": 112,
-        "healthcare_rns": 124,
-        "corporate_managers": 88,
-        "entrepreneurs": 84,
-        "gen_x_sandwich": 102,
-        "working_parents": 99,
-        "gen_z_student": 68,
-        "first_responders": 97,
-        "gen_alpha_students": 33
+        "corporate_managers": 123,
+        "millennial_women_professionals": 150,
+        "tech_finance_burnout": 143,
+        "gen_z_professionals": 140,
+        "first_responders": 129,
+        "educators": 136,
+        "working_parents": 133,
+        "entrepreneurs": 117,
+        "gen_z_student": 96,
+        "healthcare_rns": 140,
+        "gen_x_sandwich": 127,
+        "gen_alpha_students": 44
       },
       "brand_ready_counts": {
-        "stillness_press": 36,
-        "cognitive_clarity": 71,
-        "somatic_wisdom": 91,
-        "qi_foundation": 83,
-        "digital_ground": 92,
-        "heart_balance": 94,
-        "relational_calm": 116,
-        "warrior_calm": 71,
-        "sleep_restoration": 97,
-        "body_memory": 84,
-        "solar_return": 112,
-        "devotion_path": 97
+        "stillness_press": 192,
+        "cognitive_clarity": 94,
+        "somatic_wisdom": 118,
+        "qi_foundation": 107,
+        "digital_ground": 115,
+        "heart_balance": 122,
+        "relational_calm": 144,
+        "warrior_calm": 92,
+        "sleep_restoration": 123,
+        "body_memory": 109,
+        "solar_return": 140,
+        "devotion_path": 122
       },
       "distinct_titles_in_ready": 0,
       "distinct_title_subtitle_in_ready": 0,
       "distinct_brand_title_subtitle_in_ready": 0,
-      "ready_rows_with_blank_title": 1044,
-      "ready_rows_with_blank_subtitle": 1044,
+      "ready_rows_with_blank_title": 1478,
+      "ready_rows_with_blank_subtitle": 1478,
       "title_duplication_top": [],
       "title_subtitle_duplication_top": [],
       "subtitle_duplication_top": [],
-      "weak_title_count": 1044,
-      "weak_subtitle_count": 1044,
+      "weak_title_count": 1478,
+      "weak_subtitle_count": 1478,
       "weak_title_reason_counts": {
-        "blank": 1044
+        "blank": 1478
       },
       "weak_subtitle_reason_counts": {
-        "blank": 1044
+        "blank": 1478
       },
       "top_10_strongest_distinct": [],
       "all_brands": [
@@ -1017,326 +551,323 @@
         "tech_finance_burnout",
         "working_parents"
       ],
-      "needs_title_synthesis_locale_native": 1600,
+      "needs_title_synthesis_locale_native": 1478,
       "needs_title_synthesis_en_only": 0,
-      "high_potential_blocked_total_at_or_above_0_65": 220
+      "high_potential_blocked_total_at_or_above_0_65": 0
     },
     "zh_TW": {
-      "row_count": 2964,
+      "row_count": 2818,
       "status_breakdown": {
-        "blocked_score": 1676,
-        "ready": 1288
+        "ready": 2658,
+        "blocked_score": 160
       },
       "blocked_composite_bands": {
-        "0.50_no_signal": 586,
-        "0.55_to_0.65": 634,
-        "0.66_to_0.69_just_below": 293,
-        "ge_0.70": 163
+        "0.50_no_signal": 60,
+        "0.55_to_0.65": 84,
+        "0.66_to_0.69_just_below": 16
       },
       "ready_composite_bands": {
-        "ge_0.70": 1288
+        "ge_0.70": 2658
       },
       "high_potential_blocked": [
         {
-          "composite": 0.72,
-          "brand": "body_memory",
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "corporate_managers",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "first_responders",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "educators",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "working_parents",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "entrepreneurs",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "gen_x_sandwich",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "gen_alpha_students",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "anxiety",
+          "persona": "gen_z_student",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "corporate_managers",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "first_responders",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
           "topic": "grief",
           "persona": "educators",
-          "teacher": "omote",
+          "teacher": "adi_da",
           "topic_explicit": true,
           "persona_explicit": false
         },
         {
-          "composite": 0.72,
-          "brand": "body_memory",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "omote",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "body_memory",
-          "topic": "somatic_healing",
-          "persona": "educators",
-          "teacher": "omote",
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "working_parents",
+          "teacher": "adi_da",
           "topic_explicit": true,
           "persona_explicit": false
         },
         {
-          "composite": 0.72,
-          "brand": "cognitive_clarity",
-          "topic": "overthinking",
-          "persona": "educators",
-          "teacher": "joshin",
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "entrepreneurs",
+          "teacher": "adi_da",
           "topic_explicit": true,
           "persona_explicit": false
         },
         {
-          "composite": 0.72,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "adhd_focus",
-          "persona": "gen_z_professionals",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "adhd_focus",
-          "persona": "gen_z_student",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "mindfulness",
-          "persona": "gen_z_professionals",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "mindfulness",
-          "persona": "gen_z_student",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "relational_calm",
-          "topic": "social_anxiety",
-          "persona": "educators",
-          "teacher": "junko",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "sleep_restoration",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "master_sha",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "sleep_restoration",
-          "topic": "sleep_anxiety",
-          "persona": "educators",
-          "teacher": "master_sha",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "somatic_wisdom",
-          "topic": "somatic_healing",
-          "persona": "educators",
-          "teacher": "pamela_fellows",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "adhd_focus",
-          "persona": "first_responders",
-          "teacher": "master_wu",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "courage",
-          "persona": "educators",
-          "teacher": "master_wu",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "mindfulness",
-          "persona": "first_responders",
-          "teacher": "master_wu",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "body_memory",
-          "topic": "mindfulness",
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
           "persona": "gen_x_sandwich",
-          "teacher": "omote",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "adhd_focus",
-          "persona": "tech_finance_burnout",
-          "teacher": "joshin",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "imposter_syndrome",
-          "persona": "educators",
-          "teacher": "joshin",
+          "teacher": "adi_da",
           "topic_explicit": true,
           "persona_explicit": false
         },
         {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "mindfulness",
-          "persona": "tech_finance_burnout",
-          "teacher": "joshin",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "adhd_focus",
-          "persona": "first_responders",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "adhd_focus",
-          "persona": "working_parents",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "courage",
-          "persona": "educators",
-          "teacher": "sai_ma",
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "gen_alpha_students",
+          "teacher": "adi_da",
           "topic_explicit": true,
           "persona_explicit": false
         },
         {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
-          "persona": "first_responders",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
+          "composite": 0.68,
+          "brand": "bright_presence_tw",
+          "topic": "grief",
+          "persona": "gen_z_student",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
         },
         {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "corporate_managers",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "first_responders",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "educators",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
           "persona": "working_parents",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "entrepreneurs",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "gen_x_sandwich",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "gen_alpha_students",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "boundaries",
+          "persona": "gen_z_student",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
+        },
+        {
+          "composite": 0.65,
+          "brand": "bright_presence_tw",
+          "topic": "overthinking",
+          "persona": "corporate_managers",
+          "teacher": "adi_da",
+          "topic_explicit": true,
+          "persona_explicit": false
         }
       ],
-      "topics_zero_ready": [
-        "adhd_focus",
-        "mindfulness"
-      ],
-      "personas_zero_ready": [
-        "educators"
-      ],
+      "topics_zero_ready": [],
+      "personas_zero_ready": [],
       "brands_zero_ready": [],
       "topic_ready_counts": {
-        "anxiety": 123,
-        "boundaries": 113,
-        "burnout": 134,
-        "compassion_fatigue": 91,
-        "courage": 102,
-        "depression": 108,
-        "financial_stress": 49,
-        "grief": 111,
-        "self_worth": 134,
-        "financial_anxiety": 21,
-        "imposter_syndrome": 76,
-        "overthinking": 53,
-        "sleep_anxiety": 59,
-        "social_anxiety": 57,
-        "somatic_healing": 57
+        "adhd_focus": 140,
+        "anxiety": 189,
+        "boundaries": 177,
+        "burnout": 194,
+        "compassion_fatigue": 133,
+        "courage": 165,
+        "depression": 165,
+        "financial_anxiety": 100,
+        "financial_stress": 100,
+        "grief": 174,
+        "imposter_syndrome": 167,
+        "mindfulness": 181,
+        "overthinking": 141,
+        "self_worth": 200,
+        "sleep_anxiety": 149,
+        "social_anxiety": 145,
+        "somatic_healing": 138
       },
       "persona_ready_counts": {
-        "millennial_women_professionals": 183,
-        "tech_finance_burnout": 176,
-        "gen_z_professionals": 175,
-        "healthcare_rns": 183,
-        "corporate_managers": 88,
-        "entrepreneurs": 84,
-        "gen_x_sandwich": 102,
-        "working_parents": 99,
-        "gen_z_student": 68,
-        "first_responders": 97,
-        "gen_alpha_students": 33
+        "corporate_managers": 225,
+        "millennial_women_professionals": 259,
+        "tech_finance_burnout": 252,
+        "gen_z_professionals": 251,
+        "first_responders": 231,
+        "educators": 238,
+        "working_parents": 235,
+        "entrepreneurs": 213,
+        "gen_z_student": 192,
+        "healthcare_rns": 241,
+        "gen_x_sandwich": 223,
+        "gen_alpha_students": 98
       },
       "brand_ready_counts": {
-        "sleep_repair_tw": 36,
-        "stabilizer_tw": 36,
-        "panic_first_aid_tw": 36,
-        "gen_z_grounding_tw": 36,
-        "grief_companion_tw": 36,
-        "inner_security_tw": 36,
-        "stillness_press": 36,
-        "cognitive_clarity": 71,
-        "somatic_wisdom": 91,
-        "qi_foundation": 83,
-        "digital_ground": 92,
-        "heart_balance": 94,
-        "relational_calm": 116,
-        "warrior_calm": 71,
-        "sleep_restoration": 97,
-        "body_memory": 84,
-        "solar_return": 112,
-        "devotion_path": 97,
+        "sleep_repair_tw": 192,
+        "stabilizer_tw": 192,
+        "panic_first_aid_tw": 192,
+        "gen_z_grounding_tw": 192,
+        "grief_companion_tw": 192,
+        "inner_security_tw": 192,
+        "stillness_press": 192,
+        "cognitive_clarity": 94,
+        "somatic_wisdom": 118,
+        "qi_foundation": 107,
+        "digital_ground": 115,
+        "heart_balance": 122,
+        "relational_calm": 144,
+        "warrior_calm": 92,
+        "sleep_restoration": 123,
+        "body_memory": 109,
+        "solar_return": 140,
+        "devotion_path": 122,
         "bright_presence_tw": 28
       },
       "distinct_titles_in_ready": 0,
       "distinct_title_subtitle_in_ready": 0,
       "distinct_brand_title_subtitle_in_ready": 0,
-      "ready_rows_with_blank_title": 1288,
-      "ready_rows_with_blank_subtitle": 1288,
+      "ready_rows_with_blank_title": 2658,
+      "ready_rows_with_blank_subtitle": 2658,
       "title_duplication_top": [],
       "title_subtitle_duplication_top": [],
       "subtitle_duplication_top": [],
-      "weak_title_count": 1288,
-      "weak_subtitle_count": 1288,
+      "weak_title_count": 2658,
+      "weak_subtitle_count": 2658,
       "weak_title_reason_counts": {
-        "blank": 1288
+        "blank": 2658
       },
       "weak_subtitle_reason_counts": {
-        "blank": 1288
+        "blank": 2658
       },
       "top_10_strongest_distinct": [],
       "all_brands": [
@@ -1393,325 +924,91 @@
         "tech_finance_burnout",
         "working_parents"
       ],
-      "needs_title_synthesis_locale_native": 2964,
+      "needs_title_synthesis_locale_native": 2818,
       "needs_title_synthesis_en_only": 0,
-      "high_potential_blocked_total_at_or_above_0_65": 758
+      "high_potential_blocked_total_at_or_above_0_65": 40
     },
     "zh_CN": {
-      "row_count": 2776,
+      "row_count": 2630,
       "status_breakdown": {
-        "blocked_score": 1516,
-        "ready": 1260
+        "ready": 2630
       },
-      "blocked_composite_bands": {
-        "0.50_no_signal": 526,
-        "0.55_to_0.65": 550,
-        "0.66_to_0.69_just_below": 277,
-        "ge_0.70": 163
-      },
+      "blocked_composite_bands": {},
       "ready_composite_bands": {
-        "ge_0.70": 1260
+        "ge_0.70": 2630
       },
-      "high_potential_blocked": [
-        {
-          "composite": 0.72,
-          "brand": "body_memory",
-          "topic": "grief",
-          "persona": "educators",
-          "teacher": "omote",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "body_memory",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "omote",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "body_memory",
-          "topic": "somatic_healing",
-          "persona": "educators",
-          "teacher": "omote",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "cognitive_clarity",
-          "topic": "overthinking",
-          "persona": "educators",
-          "teacher": "joshin",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "adhd_focus",
-          "persona": "gen_z_professionals",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "adhd_focus",
-          "persona": "gen_z_student",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "mindfulness",
-          "persona": "gen_z_professionals",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "digital_ground",
-          "topic": "mindfulness",
-          "persona": "gen_z_student",
-          "teacher": "miki",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "relational_calm",
-          "topic": "social_anxiety",
-          "persona": "educators",
-          "teacher": "junko",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "sleep_restoration",
-          "topic": "mindfulness",
-          "persona": "healthcare_rns",
-          "teacher": "master_sha",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "sleep_restoration",
-          "topic": "sleep_anxiety",
-          "persona": "educators",
-          "teacher": "master_sha",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "somatic_wisdom",
-          "topic": "somatic_healing",
-          "persona": "educators",
-          "teacher": "pamela_fellows",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "adhd_focus",
-          "persona": "first_responders",
-          "teacher": "master_wu",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "courage",
-          "persona": "educators",
-          "teacher": "master_wu",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.72,
-          "brand": "warrior_calm",
-          "topic": "mindfulness",
-          "persona": "first_responders",
-          "teacher": "master_wu",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "body_memory",
-          "topic": "mindfulness",
-          "persona": "gen_x_sandwich",
-          "teacher": "omote",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "adhd_focus",
-          "persona": "tech_finance_burnout",
-          "teacher": "joshin",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "imposter_syndrome",
-          "persona": "educators",
-          "teacher": "joshin",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.7,
-          "brand": "cognitive_clarity",
-          "topic": "mindfulness",
-          "persona": "tech_finance_burnout",
-          "teacher": "joshin",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "adhd_focus",
-          "persona": "first_responders",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "adhd_focus",
-          "persona": "working_parents",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "courage",
-          "persona": "educators",
-          "teacher": "sai_ma",
-          "topic_explicit": true,
-          "persona_explicit": false
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
-          "persona": "first_responders",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        },
-        {
-          "composite": 0.7,
-          "brand": "devotion_path",
-          "topic": "mindfulness",
-          "persona": "working_parents",
-          "teacher": "sai_ma",
-          "topic_explicit": false,
-          "persona_explicit": true
-        }
-      ],
-      "topics_zero_ready": [
-        "adhd_focus",
-        "mindfulness"
-      ],
-      "personas_zero_ready": [
-        "educators"
-      ],
+      "high_potential_blocked": [],
+      "topics_zero_ready": [],
+      "personas_zero_ready": [],
       "brands_zero_ready": [],
       "topic_ready_counts": {
-        "anxiety": 119,
-        "boundaries": 109,
-        "burnout": 131,
-        "compassion_fatigue": 90,
-        "courage": 101,
-        "depression": 105,
-        "financial_stress": 49,
-        "grief": 107,
-        "self_worth": 130,
-        "financial_anxiety": 21,
-        "imposter_syndrome": 76,
-        "overthinking": 49,
-        "sleep_anxiety": 59,
-        "social_anxiety": 57,
-        "somatic_healing": 57
+        "adhd_focus": 140,
+        "anxiety": 185,
+        "boundaries": 173,
+        "burnout": 191,
+        "compassion_fatigue": 132,
+        "courage": 164,
+        "depression": 162,
+        "financial_anxiety": 100,
+        "financial_stress": 100,
+        "grief": 170,
+        "imposter_syndrome": 167,
+        "mindfulness": 181,
+        "overthinking": 137,
+        "self_worth": 196,
+        "sleep_anxiety": 149,
+        "social_anxiety": 145,
+        "somatic_healing": 138
       },
       "persona_ready_counts": {
-        "millennial_women_professionals": 176,
-        "tech_finance_burnout": 169,
-        "gen_z_professionals": 166,
-        "healthcare_rns": 178,
-        "corporate_managers": 88,
-        "entrepreneurs": 84,
-        "gen_x_sandwich": 102,
-        "working_parents": 99,
-        "gen_z_student": 68,
-        "first_responders": 97,
-        "gen_alpha_students": 33
+        "corporate_managers": 225,
+        "millennial_women_professionals": 252,
+        "tech_finance_burnout": 245,
+        "gen_z_professionals": 242,
+        "first_responders": 231,
+        "educators": 238,
+        "working_parents": 235,
+        "entrepreneurs": 213,
+        "gen_z_student": 192,
+        "healthcare_rns": 236,
+        "gen_x_sandwich": 223,
+        "gen_alpha_students": 98
       },
       "brand_ready_counts": {
-        "sleep_repair_cn": 36,
-        "stabilizer_cn": 36,
-        "panic_first_aid_cn": 36,
-        "gen_z_grounding_cn": 36,
-        "grief_companion_cn": 36,
-        "inner_security_cn": 36,
-        "stillness_press": 36,
-        "cognitive_clarity": 71,
-        "somatic_wisdom": 91,
-        "qi_foundation": 83,
-        "digital_ground": 92,
-        "heart_balance": 94,
-        "relational_calm": 116,
-        "warrior_calm": 71,
-        "sleep_restoration": 97,
-        "body_memory": 84,
-        "solar_return": 112,
-        "devotion_path": 97
+        "sleep_repair_cn": 192,
+        "stabilizer_cn": 192,
+        "panic_first_aid_cn": 192,
+        "gen_z_grounding_cn": 192,
+        "grief_companion_cn": 192,
+        "inner_security_cn": 192,
+        "stillness_press": 192,
+        "cognitive_clarity": 94,
+        "somatic_wisdom": 118,
+        "qi_foundation": 107,
+        "digital_ground": 115,
+        "heart_balance": 122,
+        "relational_calm": 144,
+        "warrior_calm": 92,
+        "sleep_restoration": 123,
+        "body_memory": 109,
+        "solar_return": 140,
+        "devotion_path": 122
       },
       "distinct_titles_in_ready": 0,
       "distinct_title_subtitle_in_ready": 0,
       "distinct_brand_title_subtitle_in_ready": 0,
-      "ready_rows_with_blank_title": 1260,
-      "ready_rows_with_blank_subtitle": 1260,
+      "ready_rows_with_blank_title": 2630,
+      "ready_rows_with_blank_subtitle": 2630,
       "title_duplication_top": [],
       "title_subtitle_duplication_top": [],
       "subtitle_duplication_top": [],
-      "weak_title_count": 1260,
-      "weak_subtitle_count": 1260,
+      "weak_title_count": 2630,
+      "weak_subtitle_count": 2630,
       "weak_title_reason_counts": {
-        "blank": 1260
+        "blank": 2630
       },
       "weak_subtitle_reason_counts": {
-        "blank": 1260
+        "blank": 2630
       },
       "top_10_strongest_distinct": [],
       "all_brands": [
@@ -1767,21 +1064,21 @@
         "tech_finance_burnout",
         "working_parents"
       ],
-      "needs_title_synthesis_locale_native": 2776,
+      "needs_title_synthesis_locale_native": 2630,
       "needs_title_synthesis_en_only": 0,
-      "high_potential_blocked_total_at_or_above_0_65": 718
+      "high_potential_blocked_total_at_or_above_0_65": 0
     }
   },
   "cross_locale": {
     "triples_per_locale": {
-      "en_US": 1600,
-      "ja_JP": 1600,
-      "zh_TW": 2964,
-      "zh_CN": 2776
+      "en_US": 1478,
+      "ja_JP": 1478,
+      "zh_TW": 2818,
+      "zh_CN": 2630
     },
-    "triples_common_to_all_4": 1600,
+    "triples_common_to_all_4": 1478,
     "triples_en_only_vs_zh": 0,
-    "triples_zh_unique": 2540,
+    "triples_zh_unique": 2492,
     "universal_brands": [
       "body_memory",
       "cognitive_clarity",
@@ -1818,19 +1115,19 @@
       ]
     },
     "ready_rate_per_locale": {
-      "en_US": 65.2,
-      "ja_JP": 65.2,
-      "zh_TW": 43.5,
-      "zh_CN": 45.4
+      "en_US": 100.0,
+      "ja_JP": 100.0,
+      "zh_TW": 94.3,
+      "zh_CN": 100.0
     },
     "listing_ready_per_locale": {
-      "en_US": 1044,
+      "en_US": 1277,
       "ja_JP": 0,
       "zh_TW": 0,
       "zh_CN": 0
     },
     "distinct_listing_units_per_locale": {
-      "en_US": 386,
+      "en_US": 416,
       "ja_JP": 0,
       "zh_TW": 0,
       "zh_CN": 0

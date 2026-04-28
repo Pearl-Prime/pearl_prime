@@ -1,41 +1,38 @@
 {
-  "generated_at": "2026-04-28T04:45:00Z",
-  "generator_version": "ffe79d3f2b75",
+  "generated_at": "2026-04-28T19:59:48Z",
+  "generator_version": "1c7cd876ad01",
   "totals": {
     "en_US": {
-      "rows": 1600,
-      "ready": 1044,
-      "blocked": 556,
+      "rows": 1478,
+      "ready": 1478,
+      "blocked": 0,
       "by_status": {
-        "blocked_score": 556,
-        "ready": 1044
+        "ready": 1478
       }
     },
     "ja_JP": {
-      "rows": 1600,
-      "ready": 1044,
-      "blocked": 556,
+      "rows": 1478,
+      "ready": 1478,
+      "blocked": 0,
       "by_status": {
-        "blocked_score": 556,
-        "ready": 1044
+        "ready": 1478
       }
     },
     "zh_TW": {
-      "rows": 2964,
-      "ready": 1288,
-      "blocked": 1676,
+      "rows": 2818,
+      "ready": 2658,
+      "blocked": 160,
       "by_status": {
-        "blocked_score": 1676,
-        "ready": 1288
+        "blocked_score": 160,
+        "ready": 2658
       }
     },
     "zh_CN": {
-      "rows": 2776,
-      "ready": 1260,
-      "blocked": 1516,
+      "rows": 2630,
+      "ready": 2630,
+      "blocked": 0,
       "by_status": {
-        "blocked_score": 1516,
-        "ready": 1260
+        "ready": 2630
       }
     }
   },
@@ -63,7 +60,7 @@
     },
     {
       "path": "config/catalog_planning/teacher_topic_persona_scores.yaml",
-      "sha256": "eaa013514d15bf55e154f6c067574253249ce29e0798c33915253172c5951167"
+      "sha256": "4033f149eb5bd650692162baee27f943135284afc06b39d56af179ebbddb7a9c"
     },
     {
       "path": "config/catalog_planning/teacher_brand_archetypes.yaml",
@@ -83,7 +80,7 @@
     },
     {
       "path": "config/manga/canonical_genre_list.yaml",
-      "sha256": "939415bb0e5893e76a1faffa7952fcfa3611f1f942e5a3dc8628add45a2c1c28"
+      "sha256": "08cc01e2d786a3c0c5747078f5edc39545b1868be61d67504601d45416afe3f5"
     }
   ]
 }

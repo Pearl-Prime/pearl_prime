@@ -349,8 +349,35 @@ def render_markdown(per_locale: dict, cross: dict) -> str:
     distinct_pair = en["distinct_title_subtitle_in_ready"]
     distinct_brand_pair = en["distinct_brand_title_subtitle_in_ready"]
     ready_en = en["status_breakdown"].get("ready", 0)
-    top_dup = en["title_duplication_top"][0] if en["title_duplication_top"] else None
-    w(f"> **Verdict, in one line:** the catalog is structurally complete but **not launch-ready**. Three blockers must close before scaling: (1) all non-en titles are blank — listing-ready = 0 in ja_JP / zh_TW / zh_CN, (2) en_US's {ready_en:,} ready rows resolve to only **{distinct_t} distinct titles** ({distinct_pair} title+subtitle pairs, {distinct_brand_pair} unique brand-imprint listings) — Amazon-search cannibalization is severe even after deduping by brand, (3) two mainstream commercial topics (`adhd_focus`, `mindfulness`) have zero ready rows in any locale.")
+    # Data-driven verdict — recomputed each run so it tracks reality after backfills.
+    blank_locales = [loc for loc in ("ja_JP", "zh_TW", "zh_CN")
+                     if cross["listing_ready_per_locale"][loc] == 0]
+    zero_ready_topics_any = sorted({
+        t for t in en["all_topics"]
+        if all(per_locale[loc]["topic_ready_counts"].get(t, 0) == 0 for loc in LOCALES)
+    })
+    cannibalization_ratio = ready_en // max(distinct_t, 1) if distinct_t else 0
+    blockers = []
+    if blank_locales:
+        blockers.append(f"non-en titles still blank in {' / '.join(blank_locales)} (listing-ready = 0)")
+    if distinct_t and cannibalization_ratio >= 5:
+        blockers.append(
+            f"en_US's {ready_en:,} ready rows resolve to only **{distinct_t} distinct titles** "
+            f"({distinct_pair} title+subtitle pairs, {distinct_brand_pair} unique brand-imprint listings) "
+            f"— severe Amazon-search cannibalization"
+        )
+    if zero_ready_topics_any:
+        blockers.append(
+            f"topics with zero ready rows in **any** locale: "
+            f"{', '.join(f'`{t}`' for t in zero_ready_topics_any)}"
+        )
+    if blockers:
+        bullets = "; ".join(f"({i+1}) {b}" for i, b in enumerate(blockers))
+        w(f"> **Verdict, in one line:** the catalog is structurally complete but **not launch-ready**. "
+          f"Remaining blockers: {bullets}.")
+    else:
+        w("> **Verdict, in one line:** the catalog is structurally complete and every locale has "
+          "≥1 listing-ready entry; remaining work is title quality / cannibalization polish, not coverage.")
     w()
 
     # ------------------------------------------------------------------

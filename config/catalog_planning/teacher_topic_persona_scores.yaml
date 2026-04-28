@@ -30,6 +30,15 @@ teachers:
       financial_stress: 0.8
       burnout: 0.7
       # ... other topics default to 0.5
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.74    # P0 — focus practice fits stillness, mainstream-topic conservative band
+      financial_anxiety: 0.78    # P1 — anxiety extension; stillness brand handles anxiety subtypes
+      imposter_syndrome: 0.78    # P1 — self-worth (existing 0.9) adjacent
+      mindfulness: 0.85    # P0 — stillness IS mindfulness (canonical for stillness_press brand)
+      overthinking: 0.85    # P1 — canonical stillness territory (anxiety 0.9 anchor)
+      sleep_anxiety: 0.78    # P1 — anxiety extension
+      social_anxiety: 0.78    # P1 — anxiety extension
+      somatic_healing: 0.72    # P1 — adjacent (somatic_healing is more pamela_fellows/omote canonical)
     persona_scores:
       tech_finance_burnout: 0.85
       healthcare_rns: 0.8
@@ -37,6 +46,15 @@ teachers:
       millennial_women_professionals: 0.8
       # ... other personas default to 0.5
 
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      corporate_managers: 0.78    # P1 — high-stress demographic, stillness brand fit
+      educators: 0.78    # P0 — high-stress professional fit (general wellness)
+      entrepreneurs: 0.78    # P1 — high-stress demographic
+      first_responders: 0.78    # P1 — high-stress; stillness has frontline applications
+      gen_alpha_students: 0.62    # P1 — weak fit (younger demographic), allow strong-topic crossover only
+      gen_x_sandwich: 0.78    # P1 — high-stress sandwich-generation demographic
+      gen_z_student: 0.78    # P1 — mirrors gen_z_professionals (existing 0.85), slightly lower for student
+      working_parents: 0.78    # P1 — high-stress parent demographic
   # ── maat / heart_balance (shojo+mythological, geometric Egyptian mysticism) ─
   # Authority: brand_plan (self_worth, boundaries, compassion_fatigue) + signature
   #   (justice, balance, heart_weighing) + shojo+mythological register
@@ -69,6 +87,9 @@ teachers:
       somatic_healing: 0.55
       embodiment: 0.55
       performance_pressure: 0.65
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.72    # P0 — heart-weighing supports focus; balance frame
+      mindfulness: 0.78    # P0 — heart_balance mythological-contemplative practice
     persona_scores:
       # Strong — reflective + justice-oriented personas
       millennial_women_professionals: 0.85  # shojo+ target demo, values-work fit
@@ -86,6 +107,8 @@ teachers:
       nyc_executives: 0.6
       gen_alpha_students: 0.4                # mythological register needs maturity
 
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      educators: 0.74    # P0 — justice/balance frame moderate for educator workload
   adi_da:
     topic_scores:
       anxiety: 0.85       # contraction observation directly addresses anxiety
@@ -143,6 +166,9 @@ teachers:
       somatic_healing: 0.4         # joshin's voice is cognitive, not somatic
       courage: 0.6                 # zen equanimity register
       # Other signature topics (other teachers) default to 0.5
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.78    # P0 — cognitive_clarity ↔ focus is the closest brand-topic alignment
+      mindfulness: 0.82    # P0 — cognitive mindfulness near-canonical for cognitive_clarity
     persona_scores:
       # Strong — cognitive-overload personas
       tech_finance_burnout: 0.9    # explicit cognitive-burnout register match
@@ -160,6 +186,8 @@ teachers:
       gen_z_student: 0.6           # cognitive anxiety yes; seinen register may skew old
       gen_alpha_students: 0.35     # too young for seinen register
 
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      educators: 0.8     # P0 — overthinking is occupational hazard for educators
   # ── pamela_fellows / somatic_wisdom (josei, soft clinical) ───────────────
   # Authority: brand_plan allocation (somatic_healing, compassion_fatigue, self_worth)
   #   + signature vocab (perfectionism, performance_pressure, embodiment)
@@ -190,6 +218,9 @@ teachers:
       financial_anxiety: 0.4          # off-register
       financial_stress: 0.4
       courage: 0.5
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.74    # P0 — somatic regulation helps adhd indirectly
+      mindfulness: 0.78    # P0 — somatic mindfulness fits somatic_wisdom
     persona_scores:
       # Strong — body-aware, reflective personas
       millennial_women_professionals: 0.9   # josei target demo, embodiment register fit
@@ -207,6 +238,8 @@ teachers:
       gen_z_student: 0.65
       gen_alpha_students: 0.4               # too young for clinical josei register
 
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      educators: 0.78    # P0 — somatic stress release fits educator body-strain
   # ── master_feung / qi_foundation (cultivation, traditional Chinese brushwork) ─
   # Authority: brand_plan (burnout, anxiety, self_worth) + signature vocab
   #   (qi_cultivation, stability, foundation, chronic_stress) + cultivation genre
@@ -240,6 +273,9 @@ teachers:
       financial_stress: 0.4
       perfectionism: 0.55
       performance_pressure: 0.6
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.72    # P0 — cultivation discipline supports focus, conservative
+      mindfulness: 0.74    # P0 — qi_foundation cultivation has contemplative dimension
     persona_scores:
       # Strong — practitioners + stress-chronic personas
       tech_finance_burnout: 0.85      # chronic-overextension match
@@ -257,6 +293,8 @@ teachers:
       gen_z_student: 0.55
       gen_alpha_students: 0.3         # cultivation needs maturity
 
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      educators: 0.74    # P0 — qi cultivation moderate for educator stress
   # ── miki / digital_ground (manhwa_webtoon, digital minimalism) ───────────
   # Authority: brand_plan (financial_anxiety, financial_stress, social_anxiety, imposter_syndrome)
   #   + signature (gen_z_grounding, digital_presence, identity, anxiety)
@@ -288,6 +326,9 @@ teachers:
       courage: 0.55
       somatic_healing: 0.4            # miki is screen-body disconnect, not somatic
       embodiment: 0.4
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.78    # P0 — digital_ground addresses tech-overwhelm (modern adhd driver)
+      mindfulness: 0.74    # P0 — mindful tech-use angle
     persona_scores:
       # Strong — gen z + early millennial digital-native
       gen_z_professionals: 0.95       # prime demo, perfect register fit
@@ -305,6 +346,8 @@ teachers:
       healthcare_rns: 0.5
       first_responders: 0.4           # action-register, not reflection
 
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      educators: 0.72    # P0 — digital_ground less direct for educators (though screen-strain applies)
   # ── master_wu / warrior_calm (wuxia, martial ink) ────────────────────────
   # Authority: brand_plan (courage, burnout, self_worth) + signature
   #   (panic_response, composure, warrior_calm) + wuxia genre
@@ -336,6 +379,9 @@ teachers:
       somatic_healing: 0.6            # martial body-practice crosses
       perfectionism: 0.6
       performance_pressure: 0.75      # perform-under-pressure match
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.72    # P0 — warrior discipline ↔ focus, but combat frame is less mainstream
+      mindfulness: 0.74    # P0 — wuxia stillness-in-motion has mindful frame
     persona_scores:
       # Strong — high-pressure-performance personas
       first_responders: 0.95          # exact match — panic-response profession
@@ -353,6 +399,8 @@ teachers:
       gen_z_student: 0.55
       gen_alpha_students: 0.45
 
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      educators: 0.72    # P0 — courage frame helps but indirect for classroom stress
   # ── master_sha / sleep_restoration (iyashikei, luminous night) ───────────
   # Authority: brand_plan (sleep_anxiety, somatic_healing) + signature
   #   (sleep_repair, energy_medicine, restoration) + iyashikei night-register
@@ -384,6 +432,9 @@ teachers:
       courage: 0.45
       perfectionism: 0.55
       performance_pressure: 0.6
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.72    # P0 — sleep restoration helps adhd indirectly via sleep regulation
+      mindfulness: 0.74    # P0 — pre-sleep mindfulness practice
     persona_scores:
       # Strong — chronic-sleep-disrupted personas
       healthcare_rns: 0.95            # shift-work-sleep-disruption flagship
@@ -401,6 +452,8 @@ teachers:
       gen_z_student: 0.65
       gen_alpha_students: 0.55
 
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      educators: 0.78    # P0 — educators have notable sleep struggles (prep work, anxiety)
   # ── omote / body_memory (josei, textured grief) — JP-primary ─────────────
   # Authority: brand_plan (somatic_healing, self_worth, grief) + signature
   #   (grief, body_memory, seasonal_healing, somatic) + josei grief-register
@@ -432,6 +485,9 @@ teachers:
       courage: 0.65                   # courage-of-grief-witnessed
       financial_anxiety: 0.35
       financial_stress: 0.35
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.74    # P0 — body_memory somatic regulation supports attention
+      mindfulness: 0.78    # P0 — body-mindfulness fits josei textured grief register
     persona_scores:
       # Strong — grief-demographic + body-holders
       millennial_women_professionals: 0.85   # body-grief josei target
@@ -449,6 +505,8 @@ teachers:
       gen_z_student: 0.7                      # gen-z grief register rising
       gen_alpha_students: 0.5
 
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      educators: 0.78    # P0 — body memory of accumulated classroom stress
   # ── ra / solar_return (isekai, ember abstraction) ────────────────────────
   # Authority: brand_plan (courage, financial_anxiety, depression) + signature
   #   (burnout, solar_return, fire_renewal) + isekai genre
@@ -479,6 +537,9 @@ teachers:
       somatic_healing: 0.55
       perfectionism: 0.55
       performance_pressure: 0.65
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.72    # P0 — qi cultivation supports focus, isekai frame is metaphorical
+      mindfulness: 0.78    # P0 — qi cultivation as mindfulness (isekai → present moment)
     persona_scores:
       # Strong — transformation-arc personas
       tech_finance_burnout: 0.9       # burnout-rebuild core demo
@@ -496,6 +557,8 @@ teachers:
       gen_z_student: 0.7
       gen_alpha_students: 0.55
 
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      educators: 0.74    # P0 — qi for energy management moderate fit
   # ── sai_ma / devotion_path (shonen, flowing warmth) ──────────────────────
   # Authority: brand_plan (courage, imposter_syndrome, burnout) + signature
   #   (compassion, devotion, surrender) + shonen genre
@@ -527,6 +590,9 @@ teachers:
       somatic_healing: 0.55
       perfectionism: 0.6
       performance_pressure: 0.6
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.72    # P0 — devotional focus has attentional discipline
+      mindfulness: 0.78    # P0 — devotion_path contemplative practice
     persona_scores:
       # Strong — caregiver + service-register personas
       healthcare_rns: 0.95            # service-as-profession match
@@ -544,6 +610,8 @@ teachers:
       gen_z_student: 0.65
       gen_alpha_students: 0.55
 
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      educators: 0.74    # P0 — devotional caregiver frame moderate for educators
   # ── junko / relational_calm (iyashikei, wabi-sabi simplicity) — JP-primary ─
   # Authority: brand_plan (anxiety, social_anxiety, burnout, sleep_anxiety)
   #   + signature (relational_harmony, shame, inner_security)
@@ -574,6 +642,9 @@ teachers:
       financial_anxiety: 0.4
       financial_stress: 0.4
       performance_pressure: 0.55
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      adhd_focus: 0.72    # P0 — relational_calm has indirect attentional benefit
+      mindfulness: 0.72    # P0 — minimum ready; iyashikei is gentle mindfulness adjacent
     persona_scores:
       # Strong — relational-anxiety personas
       millennial_women_professionals: 0.9   # iyashikei + relational fit
@@ -590,3 +661,6 @@ teachers:
       nyc_executives: 0.6
       first_responders: 0.6                  # action-register dilutes relational
       gen_alpha_students: 0.7                # social-anxiety early emergence
+
+      # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
+      educators: 0.78    # P0 — educators are relational professionals, relational_calm fits
