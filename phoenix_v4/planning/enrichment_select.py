@@ -100,6 +100,15 @@ class EnrichmentGapError(RuntimeError):
     """Publishable-book runs must not ship visible [CONTENT GAP: ...] markers."""
 
 
+class InsufficientVariantsError(RuntimeError):
+    """Runtime mirror of the CI --strict variant-coverage gate (SPEC-739-THRESHOLD-01).
+
+    Raised when a persona/topic section type has fewer than DEFAULT_MIN_VARIANTS (3)
+    atom variants loaded — the same condition that causes validate_variant_coverage.py
+    --strict to exit non-zero.  Author atoms upstream to resolve.
+    """
+
+
 # ---------------------------------------------------------------------------
 # ACT-007: Bestseller metadata field bonuses and collision_family dedup
 # ---------------------------------------------------------------------------
@@ -813,6 +822,16 @@ def select_enrichment(
         persona_atoms = _load_persona_atoms(pid, topic)
     else:
         persona_atoms = {}
+
+    # SPEC-739-THRESHOLD-01: runtime mirror of CI --strict gate.
+    _MIN_VARIANTS = 3
+    for _stype, _stype_atoms in persona_atoms.items():
+        if len(_stype_atoms) < _MIN_VARIANTS:
+            raise InsufficientVariantsError(
+                f"atom inventory too thin: {pid}/{topic}/{_stype} has "
+                f"{len(_stype_atoms)} variant(s), need >= {_MIN_VARIANTS} "
+                "(SPEC-739-THRESHOLD-01). Author atoms upstream."
+            )
 
     from phoenix_v4.content_banks.loader import load_content_bank_registry
 

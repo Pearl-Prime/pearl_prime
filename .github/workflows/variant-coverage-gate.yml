@@ -1,15 +1,13 @@
 name: Variant coverage gate
 
-# Spec #739 Phase 1 — variant coverage gate (warn-only).
+# Spec #739 Phase 3 — variant coverage gate (strict).
 #
 # Walks registry/<topic>.yaml + atoms/<persona>/<topic>/<section_type>/CANONICAL.txt
-# and asserts >=5 variants per section per spec
-# specs/SPEC_5_VARIANTS_AND_BESTSELLER_BEAT_WIRING.md §3.1.
+# and asserts >=3 variants per section per spec
+# specs/SPEC_5_VARIANTS_AND_BESTSELLER_BEAT_WIRING.md §3.1 + SPEC-739-THRESHOLD-01.
 #
-# Phase 1 ships warn-only per spec §6 risk row 2: this job uploads the
-# coverage report as an artifact but does not fail the PR. Phase 2 atom
-# authoring will close the inventory; once gaps reach zero, this workflow
-# can flip to --strict (exit non-zero on gap).
+# Phase 3: gaps reached zero (PR #767). Gate flipped to --strict per spec §6.
+# Any new section with < 3 variants now blocks the PR.
 
 on:
   pull_request:
@@ -23,7 +21,7 @@ on:
 
 jobs:
   variant-coverage:
-    name: Variant coverage gate (>=5 per section, warn-only)
+    name: Variant coverage gate (>=3 per section)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -43,10 +41,12 @@ jobs:
       - name: Run validator unit tests
         run: PYTHONPATH=. python3 -m pytest tests/test_validate_variant_coverage.py -v
 
-      - name: Run variant coverage validator (warn-only)
+      - name: Run variant coverage validator (strict)
         run: |
           mkdir -p artifacts/qa
           PYTHONPATH=. python3 scripts/registry/validate_variant_coverage.py \
+            --strict \
+            --skip-registry \
             --report-out "artifacts/qa/variant_coverage_gap_$(date -u +%Y-%m-%d).md"
 
       - name: Upload coverage report
