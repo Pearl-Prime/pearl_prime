@@ -4,8 +4,6 @@ import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette,
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
 import { LaneChoiceCard } from "./onboarding/LaneChoiceCard.jsx";
 import { MarketChoiceCard } from "./onboarding/MarketChoiceCard.jsx";
-import { TeacherSelectStep } from "./TeacherSelectStep.jsx";
-import { WIZARD_TEACHERS } from "./teacherCatalog.js";
 
 // ─────────────────────────────────────────────────────────────
 // PEARL PRIME — BRAND CREATION WIZARD v2.1
@@ -1104,14 +1102,13 @@ function WhatThisChanges({ items, label }) {
 // ═══════════════════════════════════════════════════════════
 
 function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
-  const { tArchetypes: _A = ARCHETYPES, tPersonas: _P = PERSONAS, tMoments: _M = MOMENTS, tVisualStyles: _V = VISUAL_STYLES, tProven: _PR = PROVEN, tSelectionFeedback: _SF = SELECTION_FEEDBACK, tEmotionCategories: _EC = EMOTION_CATEGORIES, tAngleFeedback: _AF = ANGLE_FEEDBACK, t: _t = (c, k) => k, isEn: panelIsEn = true } = i18n;
+  const { tArchetypes: _A = ARCHETYPES, tPersonas: _P = PERSONAS, tMoments: _M = MOMENTS, tVisualStyles: _V = VISUAL_STYLES, tProven: _PR = PROVEN, tSelectionFeedback: _SF = SELECTION_FEEDBACK, tEmotionCategories: _EC = EMOTION_CATEGORIES, tAngleFeedback: _AF = ANGLE_FEEDBACK, t: _t = (c, k) => k } = i18n;
   const arch = _A.find((a) => a.id === state.archetype);
   const persona = _P.find((p) => p.id === state.persona);
   const moment = _M.find((m) => m.id === state.moment);
   const proven = _PR[state.archetype] || _PR.nervous_system;
   const visual = _V.find((v) => v.id === state.visualStyle);
-  const completeness = step >= 8 ? 100 : Math.round(((step + 1) / 10) * 100);
-  const teacherRow = WIZARD_TEACHERS.find((r) => r.id === state.primaryTeacher);
+  const completeness = step >= 7 ? 100 : Math.round(((step + 1) / 9) * 100);
 
   return (
     <div className="space-y-4">
@@ -1123,22 +1120,9 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
           </svg>
           <div className="absolute inset-0 flex items-center justify-center"><span className="text-lg font-black text-white">{completeness}%</span></div>
         </div>
-        <p className="text-[10px] text-white font-semibold uppercase">{_t("ui", "Brand Defined")}</p>
+        <p className="text-[10px] text-white font-semibold uppercase">{_t("ui", "品牌已定义")}</p>
       </div>
-      {step === 0 && state.teacherUseDefault && (
-        <div className="rounded-xl border border-amber-200/40 bg-amber-950/20 p-3">
-          <div className="text-[9px] font-bold uppercase text-amber-200/90 mb-1">{_t("ui", "Primary teacher")}</div>
-          <p className="text-[10px] text-white/90 leading-relaxed">{_t("ui", "System default — mixed teacher rotation")}</p>
-        </div>
-      )}
-      {step === 0 && !state.teacherUseDefault && teacherRow && (
-        <div className="rounded-xl border border-violet-200/40 bg-violet-950/20 p-3">
-          <div className="text-[9px] font-bold uppercase text-violet-200/90 mb-1">{_t("ui", "Primary teacher")}</div>
-          <p className="text-xs font-bold text-white">{panelIsEn ? teacherRow.enName : _t("teacher", teacherRow.tName)}</p>
-          <p className="text-[10px] text-white/80 mt-0.5">{panelIsEn ? teacherRow.enTrad : _t("teacher", teacherRow.tTrad)}</p>
-        </div>
-      )}
-      {step === 1 && arch && (
+      {step === 0 && arch && (
         <div className={`rounded-xl p-3 ${arch.bg} border ${arch.border}`}>
           <div className="flex items-center gap-2">
             {(() => { const I = arch.icon; return <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${arch.gradient} flex items-center justify-center`}><I size={14} className="text-white" /></div>; })()}
@@ -1146,80 +1130,80 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
           </div>
         </div>
       )}
-      {step === 1 && arch && _SF.archetypes[arch.id] && (
+      {step === 0 && arch && _SF.archetypes[arch.id] && (
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles size={14} className="text-violet-500" />
-            <span className="text-xs font-bold text-white">What This Activates</span>
+            <span className="text-xs font-bold text-white">这将激活的内容</span>
           </div>
-          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.archetypes[arch.id].systemEffect}</div>
-          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.archetypes[arch.id].emotionalBenefit}</div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>系统效果：</strong> {_SF.archetypes[arch.id].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>读者感受：</strong> {_SF.archetypes[arch.id].emotionalBenefit}</div>
         </div>
       )}
-      {step === 2 && persona && _SF.personas[persona.id] && (
+      {step === 1 && persona && _SF.personas[persona.id] && (
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles size={14} className="text-violet-500" />
-            <span className="text-xs font-bold text-white">What This Activates</span>
+            <span className="text-xs font-bold text-white">这将激活的内容</span>
           </div>
-          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.personas[persona.id].systemEffect}</div>
-          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.personas[persona.id].emotionalBenefit}</div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>系统效果：</strong> {_SF.personas[persona.id].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>读者感受：</strong> {_SF.personas[persona.id].emotionalBenefit}</div>
         </div>
       )}
-      {step === 2 && persona && (
+      {step === 1 && persona && (
         <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-white mb-1">Primary Reader</div>
+          <div className="text-[9px] font-bold uppercase text-white mb-1">读者</div>
           <div className="flex items-center gap-2"><span className="text-lg">{persona.emoji}</span><div><div className="text-xs font-bold text-white">{persona.label}</div></div></div>
         </div>
       )}
-      {step === 2 && persona && (
+      {step === 1 && persona && (
         <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-white mb-2">Reader Profile</div>
+          <div className="text-[9px] font-bold uppercase text-white mb-2">读者画像</div>
           <div className="text-[10px] text-white leading-tight mb-1.5">{persona.desc}</div>
-          <div className="text-[10px] text-white leading-tight mb-1.5"><strong>Needs:</strong> {persona.needs}</div>
-          <div className="text-[10px] text-white leading-tight"><strong>Impact:</strong> {persona.impact}</div>
+          <div className="text-[10px] text-white leading-tight mb-1.5"><strong>需求：</strong> {persona.needs}</div>
+          <div className="text-[10px] text-white leading-tight"><strong>影响：</strong> {persona.impact}</div>
         </div>
       )}
-      {step === 3 && moment && _SF.moments[moment.id] && (
+      {step === 2 && moment && _SF.moments[moment.id] && (
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles size={14} className="text-violet-500" />
-            <span className="text-xs font-bold text-white">What This Activates</span>
+            <span className="text-xs font-bold text-white">这将激活的内容</span>
           </div>
-          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.moments[moment.id].systemEffect}</div>
-          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.moments[moment.id].emotionalBenefit}</div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>系统效果：</strong> {_SF.moments[moment.id].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>读者感受：</strong> {_SF.moments[moment.id].emotionalBenefit}</div>
         </div>
       )}
-      {step >= 4 && Object.keys(state.voiceSettings || {}).length > 0 && (
+      {step >= 3 && Object.keys(state.voiceSettings || {}).length > 0 && (
         <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-white mb-2">Voice Profile</div>
+          <div className="text-[9px] font-bold uppercase text-white mb-2">声音画像</div>
           {VOICE_SLIDERS.map((s) => { const val = state.voiceSettings?.[s.id] ?? s.default; return (
             <div key={s.id} className="flex items-center gap-2 mb-1"><span className="text-[9px] text-white w-14">{s.left}</span><div className="flex-1 h-1.5 bg-gray-100 rounded-full"><div className="h-full bg-gray-700 rounded-full transition-all" style={{ width: `${val}%` }} /></div><span className="text-[9px] text-white w-14 text-right">{s.right}</span></div>
           ); })}
         </div>
       )}
-      {step === 5 && visual && (
+      {step === 4 && visual && (
         <div className="bg-white rounded-xl p-3 border border-gray-200">
-          <div className="text-[9px] font-bold uppercase text-white mb-2">Visual Style</div>
+          <div className="text-[9px] font-bold uppercase text-white mb-2">影响</div>
           <div className="flex gap-1.5 mb-1.5">{visual.palette.map((c, i) => <div key={i} className="w-8 h-8 rounded-lg shadow-sm" style={{ backgroundColor: c }} />)}</div>
           <div className="text-[10px] text-white font-medium">{visual.label}</div>
         </div>
       )}
-      {step === 5 && state.visualStyle && _SF.visualStyles[state.visualStyle] && (
+      {step === 4 && state.visualStyle && _SF.visualStyles[state.visualStyle] && (
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles size={14} className="text-violet-500" />
-            <span className="text-xs font-bold text-white">What This Activates</span>
+            <span className="text-xs font-bold text-white">这将激活的内容</span>
           </div>
-          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>In the System:</strong> {_SF.visualStyles[state.visualStyle].systemEffect}</div>
-          <div className="text-[10px] text-white leading-relaxed"><strong>For Your Reader:</strong> {_SF.visualStyles[state.visualStyle].emotionalBenefit}</div>
+          <div className="text-[10px] text-white leading-relaxed mb-2"><strong>系统效果：</strong> {_SF.visualStyles[state.visualStyle].systemEffect}</div>
+          <div className="text-[10px] text-white leading-relaxed"><strong>读者感受：</strong> {_SF.visualStyles[state.visualStyle].emotionalBenefit}</div>
         </div>
       )}
-      {step === 7 && (
+      {step === 6 && (
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-3">
             <Compass size={14} className="text-indigo-500" />
-            <span className="text-xs font-bold text-white">Content Angles</span>
+            <span className="text-xs font-bold text-white">内容角度</span>
           </div>
           <div className="space-y-2">
             {TOPIC_CATEGORIES.map((cat) => {
@@ -1236,7 +1220,7 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
                     <>
                       <div className="flex items-center gap-1 mb-1">
                         <span className="text-[9px]">{angleInfo?.icon}</span>
-                        <span className="text-[9px] font-bold" style={{ color: cat.color }}>{angleInfo?.label}: {selectedTagId.replace(/-/g, " ")}</span>
+                        <span className="text-[9px] font-bold" style={{ color: cat.color }}>{angleInfo?.label}: {(cat.tags.find(t => t.id === selectedTagId)?.label) || selectedTagId.replace(/-/g, " ")}</span>
                       </div>
                       <div className="flex items-start gap-1.5">
                         <div className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: cat.color }} />
@@ -1244,7 +1228,7 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
                       </div>
                     </>
                   ) : (
-                    <p className="text-[9px] text-white/70 italic">Pick a topic...</p>
+                    <p className="text-[9px] text-white/70 italic">选择话题…</p>
                   )}
                 </div>
               );
@@ -1252,26 +1236,26 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
           </div>
         </div>
       )}
-      {step === 8 && (
+      {step === 7 && (
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-3">
             <Compass size={14} className="text-violet-500" />
-            <span className="text-xs font-bold text-white">Jump to Section</span>
+            <span className="text-xs font-bold text-white">跳转到章节</span>
           </div>
           <div className="space-y-0.5">
             {[
-              { id: "rev-category", label: "True Category", icon: "🎯" },
-              { id: "rev-voice", label: "Voice Signature", icon: "🎙️" },
-              { id: "rev-positioning", label: "Positioning Map", icon: "📍" },
-              { id: "rev-visual", label: "Visual Identity", icon: "🎨" },
-              { id: "rev-emotion", label: "Emotional Staircase", icon: "📈" },
-              { id: "rev-topics", label: "Topic Strategy", icon: "🗂️" },
-              { id: "rev-engine", label: "Content Engine", icon: "⚙️" },
-              { id: "rev-loop", label: "Advantage Loop", icon: "🔄" },
-              { id: "rev-journey", label: "Reader Journey", icon: "🚶" },
-              { id: "rev-synergy", label: "Voice × Topic", icon: "🔗" },
-              { id: "rev-radar", label: "Brand Strength", icon: "📊" },
-              { id: "rev-synthesis", label: "Synthesis", icon: "✨" },
+              { id: "rev-category", label: "真实类别", icon: "🎯" },
+              { id: "rev-voice", label: "声音特征", icon: "🎙️" },
+              { id: "rev-positioning", label: "定位图", icon: "📍" },
+              { id: "rev-visual", label: "视觉身份", icon: "🎨" },
+              { id: "rev-emotion", label: "情感阶梯", icon: "📈" },
+              { id: "rev-topics", label: "话题策略", icon: "🗂️" },
+              { id: "rev-engine", label: "内容引擎", icon: "⚙️" },
+              { id: "rev-loop", label: "优势循环", icon: "🔄" },
+              { id: "rev-journey", label: "读者旅程", icon: "🚶" },
+              { id: "rev-synergy", label: "声音 × 话题", icon: "🔗" },
+              { id: "rev-radar", label: "品牌实力", icon: "📊" },
+              { id: "rev-synthesis", label: "综合", icon: "✨" },
             ].map(s => (
               <button
                 key={s.id}
@@ -1285,11 +1269,11 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
           </div>
         </div>
       )}
-      {step === 6 && (
+      {step === 5 && (
         <div className="rounded-xl border border-gray-200 bg-gray-50 p-3">
           <div className="flex items-center gap-2 mb-2">
             <Heart size={14} className="text-rose-500" />
-            <span className="text-xs font-bold text-white">Emotional Profile</span>
+            <span className="text-xs font-bold text-white">情感画像</span>
           </div>
           <div className="bg-white rounded-lg border border-gray-100 p-3 mb-3">
             <svg viewBox="0 0 240 140" className="w-full h-40">
@@ -3237,7 +3221,7 @@ function generateYAML(state) {
   let y = `# Brand Admin Application — ${ts}\n# Pearl Prime Brand Configuration\n\n`;
   y += `brand_admin:\n  first_name: "${san(c.firstName)}"\n  last_name: "${san(c.lastName)}"\n  email: "${san(c.email)}"\n  phone: "${san((c.phoneCode || '+1') + ' ' + c.phone)}"\n\n`;
   y += `  messaging_channels:\n    line_id: "${san(c.line)}"\n    whatsapp: "${san(c.whatsapp)}"\n    wechat_id: "${san(c.wechat)}"\n    fb_messenger: "${san(c.messenger)}"\n    preferred_channel: "${c.preferred || "email"}"\n\n`;
-  y += `  brand_positioning:\n    brand_angle: "${state.archetype}"\n    primary_teacher: "${state.teacherUseDefault ? "system_default" : (state.primaryTeacher || "")}"\n    teacher_mode: "${state.teacherUseDefault ? "default_rotation" : "primary"}"\n    trigger_moment: "${state.moment}"\n    persona: "${state.persona}"\n\n`;
+  y += `  brand_positioning:\n    brand_angle: "${state.archetype}"\n    trigger_moment: "${state.moment}"\n    persona: "${state.persona}"\n\n`;
   y += `  voice_settings:\n`;
   Object.entries(state.voiceSettings || {}).forEach(([k, v]) => { y += `    ${k}: ${v}\n`; });
   y += `\n  visual_style: "${state.visualStyle}"\n  tradition: "${state.tradition}"\n  emotional_outcomes: [${(state.emotions || []).map((e) => `"${e}"`).join(", ")}]\n\n`;
@@ -3326,30 +3310,29 @@ function IntroWelcome({ onNext }) {
 function IntroJourney({ onNext, onBack }) {
   const { t } = useTranslation();
   const phases = [
-    { step: "1", title: t("intro", "Teacher"), sub: t("intro", "Lineage & primary voice"), color: "from-amber-500 to-orange-600" },
-    { step: "2", title: t("intro", "Foundation"), sub: t("intro", "Archetype & reader"), color: "from-indigo-500 to-violet-600" },
-    { step: "3", title: t("intro", "Voice"), sub: t("intro", "Tone & impact"), color: "from-violet-500 to-fuchsia-600" },
-    { step: "4", title: t("intro", "Look & topics"), sub: t("intro", "Visuals + territory"), color: "from-rose-500 to-orange-500" },
-    { step: "5", title: t("intro", "Formats"), sub: t("intro", "Channels & pipeline"), color: "from-sky-500 to-cyan-600" },
-    { step: "6", title: t("intro", "Reveal"), sub: t("intro", "Blueprint & launch"), color: "from-slate-600 to-gray-900" },
+    { step: "1", title: t("intro", "基础"), sub: t("intro", "原型与读者"), color: "from-indigo-500 to-violet-600" },
+    { step: "2", title: t("intro", "声音"), sub: t("intro", "基调与影响"), color: "from-violet-500 to-fuchsia-600" },
+    { step: "3", title: t("intro", "视觉与话题"), sub: t("intro", "视觉 + 领域"), color: "from-rose-500 to-orange-500" },
+    { step: "4", title: t("intro", "格式"), sub: t("intro", "渠道与流水线"), color: "from-sky-500 to-cyan-600" },
+    { step: "5", title: t("intro", "揭晓"), sub: t("intro", "蓝图与启动"), color: "from-slate-600 to-gray-900" },
   ];
   return (
     <div className="brand-studio-bg min-h-screen text-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
         <button type="button" onClick={onBack} className="mb-6 flex items-center gap-1 text-xs text-white transition-colors hover:text-white">
-          <ChevronLeft size={14} /> {t("ui", "Back")}
+          <ChevronLeft size={14} /> {t("ui", "返回")}
         </button>
         <div className="brand-studio-panel p-8 sm:p-10">
           <div className="text-center">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">{t("intro", "How this works")}</p>
-            <h1 className="mt-2 text-3xl font-black tracking-tight">{t("intro", "Six steps from teacher to launch")}</h1>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">{t("intro", "工作原理")}</p>
+            <h1 className="mt-2 text-3xl font-black tracking-tight">{t("intro", "五个节拍，十一个选择")}</h1>
             <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white">
-              {t("intro", "Teacher → foundation → voice → look → topics → launch.")}
+              {t("intro", "基础 → 格式 → 蓝图 → 启动。")}
             </p>
           </div>
           <div className="relative mt-10">
             <div className="absolute left-[18px] top-1 bottom-1 w-px bg-gradient-to-b from-violet-200 via-indigo-200 to-gray-200 sm:left-1/2 sm:top-[16px] sm:bottom-auto sm:h-1 sm:w-full sm:max-w-xl sm:-translate-x-1/2 sm:bg-gradient-to-r" aria-hidden />
-            <div className="space-y-4 sm:grid sm:grid-cols-6 sm:gap-2 sm:space-y-0">
+            <div className="space-y-4 sm:grid sm:grid-cols-5 sm:gap-3 sm:space-y-0">
               {phases.map(({ step, title, sub, color }) => (
                 <div key={step} className="relative flex gap-3 sm:flex-col sm:items-center sm:text-center">
                   <div className={`relative z-[1] flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${color} text-xs font-bold text-white shadow-md`}>
@@ -3370,7 +3353,7 @@ function IntroJourney({ onNext, onBack }) {
               onClick={onNext}
               className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
-              {t("ui", "Start building your brand")} <ArrowRight size={18} />
+              {t("ui", "开始构建你的品牌")} <ArrowRight size={18} />
             </button>
           </div>
         </div>
@@ -3502,7 +3485,7 @@ function ShowcaseFormats({ onNext, onBack }) {
 // MAIN WIZARD
 // ═══════════════════════════════════════════════════════════
 
-const STEP_LABELS = ["教师", "原型", "读者", "时刻", "语气", "影响", "视觉", "主题", "蓝图", "启动"];
+const STEP_LABELS = ["原型", "读者", "时刻", "语气", "影响", "视觉", "主题", "蓝图", "启动"];
 
 export default function BrandWizard() {
   const { t, td, to, tv, locale, isEn } = useTranslation();
@@ -3544,7 +3527,6 @@ export default function BrandWizard() {
   const [introPage, setIntroPage] = useState(0);
   const [step, setStep] = useState(0);
   const [state, setState] = useState({
-    primaryTeacher: null, teacherUseDefault: false,
     archetype: null, persona: null, moment: null,
     voiceSettings: {}, visualStyle: null, emotions: [],
     tradition: "", angles: [], topicTags: [],
@@ -3558,7 +3540,7 @@ export default function BrandWizard() {
   const nextIntro = () => { setIntroPage((p) => p + 1); scrollTop(); };
   const prevIntro = () => { if (introPage > 0) { setIntroPage((p) => p - 1); scrollTop(); } };
   const startWizard = () => { setPhase("wizard"); setStep(0); scrollTop(); };
-  const nextStep = () => { if (step < 9) { setStep((s) => s + 1); scrollTop(); } };
+  const nextStep = () => { if (step < 8) { setStep((s) => s + 1); scrollTop(); } };
   const prevStep = () => { if (step > 0) { setStep((s) => s - 1); scrollTop(); } else { setPhase("intro"); setIntroPage(1); scrollTop(); } };
   const goToHowItWorks = () => { setPhase("intro"); setIntroPage(1); scrollTop(); };
 
@@ -3569,19 +3551,16 @@ export default function BrandWizard() {
   }
 
   const canNext = step === 0
-    ? (state.teacherUseDefault || !!state.primaryTeacher)
+    ? !!state.archetype
     : step === 1
-      ? !!state.archetype
+      ? !!state.persona && !!state.onboardingLane && !!state.onboardingMarket
       : step === 2
-        ? !!state.persona && !!state.onboardingLane && !!state.onboardingMarket
-        : step === 3
-          ? !!state.moment
-          : true;
+        ? !!state.moment
+        : true;
 
-  const i18nData = { tArchetypes, tPersonas, tMoments, tVisualStyles, tEmotionCategories, tAngleFeedback, tSelectionFeedback, tProven, tV4FormatsStructural, t, isEn, locale };
+  const i18nData = { tArchetypes, tPersonas, tMoments, tVisualStyles, tEmotionCategories, tAngleFeedback, tSelectionFeedback, tProven, tV4FormatsStructural, t };
 
   const steps = [
-    <TeacherSelectStep key="t0" state={state} update={update} />,
     <Step1Archetype key={0} state={state} update={update} i18n={i18nData} />,
     <Step2PrimaryReader key={1} state={state} update={update} i18n={i18nData} />,
     <Step3TriggerMoment key={2} state={state} update={update} i18n={i18nData} />,
@@ -3601,32 +3580,32 @@ export default function BrandWizard() {
           onClick={goToHowItWorks}
           className="mb-6 flex items-center gap-1 text-xs text-white transition-colors hover:text-gray-200"
         >
-          <ChevronLeft size={14} /> {t("ui", "Back")}
+          <ChevronLeft size={14} /> {t("ui", "返回")}
         </button>
-        <ProgressBar step={step} total={10} labels={tStepLabels} t={t} />
+        <ProgressBar step={step} total={9} labels={tStepLabels} t={t} />
         <div className="brand-studio-panel p-6 sm:p-8 lg:p-10">
           <div className="flex gap-6 lg:gap-8">
             <div className="min-w-0 flex-1">
               {steps[step]}
               <div className="mt-8 flex items-center justify-between border-t border-gray-100/80 pt-6">
                 <button type="button" onClick={prevStep} className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:text-white">
-                  <ChevronLeft size={16} /> {t("ui", "Back")}
+                  <ChevronLeft size={16} /> {t("ui", "返回")}
                 </button>
-                {step < 9 ? (
+                {step < 8 ? (
                   <button
                     type="button"
                     onClick={nextStep}
                     disabled={!canNext}
                     className={`flex items-center gap-1.5 rounded-xl px-6 py-2.5 text-sm font-bold transition-all ${canNext ? "bg-gray-900 text-white shadow-md shadow-slate-300/40 hover:bg-gray-800" : "cursor-not-allowed bg-gray-200 text-white"}`}
                   >
-                    {t("ui", "Continue")} <ChevronRight size={16} />
+                    {t("ui", "下一步")} <ChevronRight size={16} />
                   </button>
                 ) : null}
               </div>
             </div>
             <div className="hidden w-72 flex-shrink-0 lg:block">
               <div className="sticky top-8">
-                <div className="mb-3 text-[10px] font-bold uppercase tracking-wider text-violet-600/90">{t("ui", "Studio insight")}</div>
+                <div className="mb-3 text-[10px] font-bold uppercase tracking-wider text-violet-600/90">{t("ui", "工作室洞察")}</div>
                 <div className="rounded-2xl border border-gray-100/90 bg-white/60 p-1 shadow-inner backdrop-blur-sm">
                   <PersonaImpactPanel state={state} step={step} i18n={i18nData} />
                 </div>
