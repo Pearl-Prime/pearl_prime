@@ -1,14 +1,14 @@
 {
     "_meta": {
         "name": "Phoenix Omega — FLUX IP-Adapter Manga Teacher Character",
-        "description": "Face-preserving manga style transfer using IP-Adapter FaceID + FLUX. Takes reference photo as input, outputs manga-style character portrait.",
-        "version": "1.0.0",
+        "description": "Face-preserving manga style transfer using IP-Adapter FaceID + FLUX. Takes reference photo as input, outputs manga-style character portrait. Uses flux1-dev with dpmpp_2m/karras; schnell (4-step distilled) is incompatible with steps>=8 and cfg>1 and silently degraded outputs prior to v1.1.0.",
+        "version": "1.1.0",
         "author": "Phoenix Omega"
     },
     "1": {
         "class_type": "CheckpointLoaderSimple",
         "inputs": {
-            "ckpt_name": "flux1-schnell-fp8.safetensors"
+            "ckpt_name": "flux1-dev-fp8.safetensors"
         }
     },
     "2": {
@@ -63,10 +63,10 @@
         "class_type": "KSampler",
         "inputs": {
             "seed": 42,
-            "steps": 20,
-            "cfg": 4.5,
-            "sampler_name": "euler",
-            "scheduler": "normal",
+            "steps": 28,
+            "cfg": 3.5,
+            "sampler_name": "dpmpp_2m",
+            "scheduler": "karras",
             "denoise": 1.0,
             "model": ["4", 0],
             "positive": ["5", 0],

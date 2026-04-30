@@ -1,12 +1,12 @@
 {
     "_meta": {
         "name": "Phoenix Omega — FLUX txt2img Manga Triptych",
-        "description": "EmptyLatent + KSampler denoise 1.0. Generator replaces {{positive_prompt}} / {{negative_prompt}}.",
-        "version": "1.0.0"
+        "description": "EmptyLatent + KSampler denoise 1.0. Generator replaces {{positive_prompt}} / {{negative_prompt}}. Uses flux1-dev (full guidance) with dpmpp_2m/karras at steps=28 cfg=3.5; schnell (4-step distilled) is incompatible with steps>=8 and cfg>1 and silently degraded outputs prior to v1.1.0.",
+        "version": "1.1.0"
     },
     "1": {
         "class_type": "CheckpointLoaderSimple",
-        "inputs": {"ckpt_name": "flux1-schnell-fp8.safetensors"}
+        "inputs": {"ckpt_name": "flux1-dev-fp8.safetensors"}
     },
     "2": {
         "class_type": "CLIPTextEncode",
@@ -24,10 +24,10 @@
         "class_type": "KSampler",
         "inputs": {
             "seed": 42,
-            "steps": 24,
-            "cfg": 4.0,
-            "sampler_name": "euler",
-            "scheduler": "normal",
+            "steps": 28,
+            "cfg": 3.5,
+            "sampler_name": "dpmpp_2m",
+            "scheduler": "karras",
             "denoise": 1.0,
             "model": ["1", 0],
             "positive": ["2", 0],

@@ -1,14 +1,14 @@
 {
     "_meta": {
         "name": "Phoenix Omega — FLUX img2img Manga Teacher Character",
-        "description": "Standard img2img style transfer: encode reference photo to latent, denoise at 0.78 toward manga style prompt. Preserves face structure through latent space.",
-        "version": "1.0.0",
+        "description": "Standard img2img style transfer: encode reference photo to latent, denoise at 0.78 toward manga style prompt. Preserves face structure through latent space. Uses flux1-dev with dpmpp_2m/karras; schnell (4-step distilled) is incompatible with steps>=8 and cfg>1 and silently degraded outputs prior to v1.1.0.",
+        "version": "1.1.0",
         "author": "Phoenix Omega"
     },
     "1": {
         "class_type": "CheckpointLoaderSimple",
         "inputs": {
-            "ckpt_name": "flux1-schnell-fp8.safetensors"
+            "ckpt_name": "flux1-dev-fp8.safetensors"
         }
     },
     "2": {
@@ -52,10 +52,10 @@
         "class_type": "KSampler",
         "inputs": {
             "seed": 42,
-            "steps": 20,
-            "cfg": 4.5,
-            "sampler_name": "euler",
-            "scheduler": "normal",
+            "steps": 28,
+            "cfg": 3.5,
+            "sampler_name": "dpmpp_2m",
+            "scheduler": "karras",
             "denoise": 0.78,
             "model": ["1", 0],
             "positive": ["5", 0],

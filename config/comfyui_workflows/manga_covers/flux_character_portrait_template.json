@@ -1,12 +1,12 @@
 {
     "_meta": {
         "name": "Manga catalog — FLUX character portrait (template)",
-        "description": "Template aligned with scripts/image_generation/comfyui_workflows/flux_txt2img_manga.json. RunComfy serverless uses deployment overrides; local tooling may substitute {{positive_prompt}}.",
-        "version": "1.0.0"
+        "description": "Template aligned with scripts/image_generation/comfyui_workflows/flux_txt2img_manga.json. RunComfy serverless uses deployment overrides; local tooling may substitute {{positive_prompt}}. Uses flux1-dev (full guidance) at steps=28 cfg=3.5 with dpmpp_2m/karras — schnell (4-step distilled) is incompatible with steps>=8 and cfg>1, which silently degraded mecha/dark_fantasy/fantasy_adventure outputs (see docs/PHOENIX_OMEGA_PRODUCTION_AUDIT_2026-04-29.md drift autopsy).",
+        "version": "1.1.0"
     },
     "1": {
         "class_type": "CheckpointLoaderSimple",
-        "inputs": {"ckpt_name": "flux1-schnell-fp8.safetensors"}
+        "inputs": {"ckpt_name": "flux1-dev-fp8.safetensors"}
     },
     "2": {
         "class_type": "CLIPTextEncode",
@@ -24,10 +24,10 @@
         "class_type": "KSampler",
         "inputs": {
             "seed": 42,
-            "steps": 24,
-            "cfg": 4.0,
-            "sampler_name": "euler",
-            "scheduler": "normal",
+            "steps": 28,
+            "cfg": 3.5,
+            "sampler_name": "dpmpp_2m",
+            "scheduler": "karras",
             "denoise": 1.0,
             "model": ["1", 0],
             "positive": ["2", 0],
