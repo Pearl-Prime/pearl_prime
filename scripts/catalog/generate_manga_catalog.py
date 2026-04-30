@@ -312,6 +312,8 @@ def build_rows_for_locale(locale: str, inputs: dict) -> tuple[list[dict], dict]:
              .get("allocations") or {}).get(locale) or {}
     tentpole_map = (inputs["allocation"]["data"]
                     .get("brand_tentpole") or {})
+    divergence_policy = (inputs["allocation"]["data"]
+                         .get("tentpole_divergence_policy") or {})
 
     genre_index = index_genres(inputs["canonical_genres"]["data"])
     family_index = index_taxonomy_families(inputs["manga_taxonomy"]["data"])
@@ -366,8 +368,21 @@ def build_rows_for_locale(locale: str, inputs: dict) -> tuple[list[dict], dict]:
             if is_tentpole:
                 notes_parts.append("tentpole_match")
             elif tentpole_genre and pct == max(cells.values()):
-                # This row is the matrix Primary but doesn't match the tentpole
-                notes_parts.append(f"tentpole_mismatch:matrix_primary={genre},tentpole={tentpole_genre}")
+                # This row is the matrix Primary but doesn't match the tentpole.
+                # Check the divergence policy: if the (brand, locale) is registered
+                # as `coexist`, the divergence is intentional and we emit a
+                # different (non-blocking) tag.
+                policy_decision = (divergence_policy.get(brand, {})
+                                   .get(locale, {})
+                                   .get("decision"))
+                if policy_decision == "coexist":
+                    notes_parts.append(
+                        f"intentional_portfolio_divergence:matrix_primary={genre},tentpole={tentpole_genre}"
+                    )
+                else:
+                    notes_parts.append(
+                        f"tentpole_mismatch:matrix_primary={genre},tentpole={tentpole_genre}"
+                    )
             notes_parts.append("needs_title_synthesis_locale_native")
 
             for idx in range(1, n_series + 1):

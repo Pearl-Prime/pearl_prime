@@ -13,8 +13,14 @@
 # The Primary cell (highest percentage) is normally the tentpole genre.
 # Where Primary ≠ tentpole (e.g. ja_JP warrior_calm primary is BATTLE 25%
 # but tentpole is CULTIVATION per warrior_calm_cultivation.yaml), the
-# generator emits a `tentpole_mismatch` note on the affected rows so it
-# can be surfaced for owner decision.
+# generator consults `tentpole_divergence_policy` below:
+#   - If the (brand, locale) is registered with policy `coexist`, the
+#     divergence is intentional (per the operator decision documented
+#     there) and the generator emits `intentional_portfolio_divergence`
+#     instead of `tentpole_mismatch`. No owner action required.
+#   - If the (brand, locale) is unregistered, the generator emits the
+#     legacy `tentpole_mismatch` tag for owner decision (Option A
+#     rebalance / Option B re-author / Option C coexist).
 #
 # Genre ids resolve through config/manga/canonical_genre_list.yaml.
 # Locales ja_JP / zh_TW / zh_CN matrices intentionally omit zh_TW/zh_CN
@@ -26,6 +32,38 @@ upstream_authorities:
   - docs/MANGA_CATALOG_PLAN_EN_US_JA_JP_ZH_TW_ZH_CN_2026-04-28.md
   - config/manga/canonical_genre_list.yaml
   - config/source_of_truth/manga_profiles/brands/
+
+# ── Tentpole divergence policy (P0.4 — operator decision per master brief) ──
+# Brands where the matrix Primary genre intentionally differs from the brand's
+# mono-genre tentpole. Operator-decided; the divergence is a feature, not a bug.
+#
+# decision: "coexist"   → mono-genre profile is the brand SPINE / signature
+#                         series authority; matrix Primary is the AUDIENCE-FACING
+#                         volume bet. They are intentionally different.
+# decision: "rebalance" → matrix should be re-weighted so Primary == tentpole
+#                         (handled at YAML edit time, no policy needed)
+# decision: "reauthor"  → mono-genre file should be re-authored to match Primary
+#                         (handled at brand profile edit time, no policy needed)
+#
+# Only "coexist" needs a policy entry — the other two resolve the divergence
+# at source, leaving nothing for the generator to filter.
+tentpole_divergence_policy:
+  warrior_calm:
+    ja_JP:
+      decision: coexist
+      decided_on: "2026-04-30"
+      decided_by: operator
+      rationale: |
+        Mono-genre tentpole is CULTIVATION (warrior_calm_cultivation.yaml) — the
+        brand SPINE: serialised cultivation cycles, master-disciple lineage, the
+        signature property. ja_JP matrix Primary is BATTLE (25%) — the
+        AUDIENCE-FACING volume bet for a market where shōnen / battle pacing
+        outsells cultivation in absolute volume. Both are correct simultaneously:
+        the spine ships as cultivation tankōbon; the volume bet ships as battle
+        serials. Same brand voice anchors, different audience entry surfaces.
+      affected_series_ids:
+        - warrior_calm_battle_01
+        - warrior_calm_battle_02
 
 # ── Tentpole map (from mono-genre profile filename + genre_family field) ────
 # Used to flag is_tentpole on the row whose genre matches the brand's tentpole.
