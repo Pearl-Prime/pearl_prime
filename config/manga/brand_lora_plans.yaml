@@ -286,7 +286,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/cognitive_clarity/cogclar_jp_01/lora_refs/
     lora_output_path: "~/content_bank/loras/cognitive_clarity/daisuke_cc_jp.safetensors"
     portrait_output_path: "assets/manga_catalog/cognitive_clarity/cogclar_jp_01/main_character.png"
@@ -326,7 +326,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/cognitive_clarity/cogclar_jp_02/lora_refs/
     lora_output_path: "~/content_bank/loras/cognitive_clarity/sho_cc_jp.safetensors"
     portrait_output_path: "assets/manga_catalog/cognitive_clarity/cogclar_jp_02/main_character.png"
@@ -366,7 +366,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/cognitive_clarity/cogclar_jp_04/lora_refs/
     lora_output_path: "~/content_bank/loras/cognitive_clarity/ren_cc_jp.safetensors"
     portrait_output_path: "assets/manga_catalog/cognitive_clarity/cogclar_jp_04/main_character.png"
@@ -406,7 +406,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/digital_ground/digground_kr_01/lora_refs/
     lora_output_path: "~/content_bank/loras/digital_ground/jieun_dg_kr.safetensors"
     portrait_output_path: "assets/manga_catalog/digital_ground/digground_kr_01/main_character.png"
@@ -446,7 +446,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/digital_ground/digground_kr_02/lora_refs/
     lora_output_path: "~/content_bank/loras/digital_ground/junhyeok_dg_kr.safetensors"
     portrait_output_path: "assets/manga_catalog/digital_ground/digground_kr_02/main_character.png"
@@ -486,7 +486,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/digital_ground/digground_kr_03/lora_refs/
     lora_output_path: "~/content_bank/loras/digital_ground/sumin_dg_kr.safetensors"
     portrait_output_path: "assets/manga_catalog/digital_ground/digground_kr_03/main_character.png"
@@ -526,7 +526,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/stillness_press/stillness_jp_01/lora_refs/
     lora_output_path: "~/content_bank/loras/stillness_press/saki_sp_jp.safetensors"
     portrait_output_path: "assets/manga_catalog/stillness_press/stillness_jp_01/main_character.png"
@@ -566,7 +566,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/stillness_press/stillness_jp_02/lora_refs/
     lora_output_path: "~/content_bank/loras/stillness_press/sensei_sp_jp.safetensors"
     portrait_output_path: "assets/manga_catalog/stillness_press/stillness_jp_02/main_character.png"
@@ -606,7 +606,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/stillness_press/stillness_jp_03/lora_refs/
     lora_output_path: "~/content_bank/loras/stillness_press/ken_sp_jp.safetensors"
     portrait_output_path: "assets/manga_catalog/stillness_press/stillness_jp_03/main_character.png"
@@ -646,7 +646,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/stillness_press/stillness_jp_05/lora_refs/
     lora_output_path: "~/content_bank/loras/stillness_press/honoka_sp_jp.safetensors"
     portrait_output_path: "assets/manga_catalog/stillness_press/stillness_jp_05/main_character.png"
@@ -686,7 +686,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/stillness_press/stillness_jp_06/lora_refs/
     lora_output_path: "~/content_bank/loras/stillness_press/ai_sp_jp.safetensors"
     portrait_output_path: "assets/manga_catalog/stillness_press/stillness_jp_06/main_character.png"
@@ -726,7 +726,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/stillness_press/stillness_press_anxiety_vol1/lora_refs/
     lora_output_path: "~/content_bank/loras/stillness_press/hana_sp_us.safetensors"
     portrait_output_path: "assets/manga_catalog/stillness_press/stillness_press_anxiety_vol1/main_character.png"
@@ -766,7 +766,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/stillness_press/stillness_press_sleep_vol1/lora_refs/
     lora_output_path: "~/content_bank/loras/stillness_press/yuki_sp_us.safetensors"
     portrait_output_path: "assets/manga_catalog/stillness_press/stillness_press_sleep_vol1/main_character.png"
@@ -806,7 +806,7 @@ protagonist_loras:
     training_steps: 1500
     rank: 16
     alpha: 16
-    base_model: flux1-schnell-fp8
+    base_model: flux1-dev-fp8
     ref_images_dir: assets/manga_catalog/stillness_press/stillness_press_somatic_vol1/lora_refs/
     lora_output_path: "~/content_bank/loras/stillness_press/mei_sp_us.safetensors"
     portrait_output_path: "assets/manga_catalog/stillness_press/stillness_press_somatic_vol1/main_character.png"
