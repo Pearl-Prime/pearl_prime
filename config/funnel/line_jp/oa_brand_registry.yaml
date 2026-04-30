@@ -1,0 +1,255 @@
+# Japan LINE OA — Brand Registry & Orchestration
+#
+# PRIMARY MODEL — per_brand_12_oas (research-recommended)
+# FALLBACK MODEL — hybrid_3_hubs (only if operator cannot fund 12 Standard accounts at launch)
+#
+# Recommendation flipped from hybrid 3-hub to per-brand 12-OA after Pearl_Research review
+# (artifacts/research/japan_line_freebie_funnel_market_research_2026-04-29.md §7.5).
+# Reasons: per-brand voice integrity, narrower friend-add CPA, 12-list throttling hedge,
+# rich-menu real estate per brand. Cost floor ~¥180k/mo combined at Standard tier.
+#
+# Authority: docs/JAPAN_LINE_FREEBIE_FUNNEL_PLAN_2026-04-29.md §6
+# Brand source of truth: config/catalog_planning/locale_brand_names.yaml
+# Topic source of truth:  config/catalog/market_catalog_registry.yaml (japan)
+
+schema_version: 2
+locale: ja_JP
+generated: "2026-04-29"
+primary_orchestration_model: per_brand_12_oas
+fallback_orchestration_model: hybrid_3_hubs
+
+# ===========================================================================
+# PRIMARY MODEL — 12 separate Official Accounts, one per brand
+# ===========================================================================
+brands:
+
+  # ── Iyashikei / healing register ─────────────────────────────────────────
+  - brand_id: stillness_press
+    ja_name: "静心社"
+    romanization: "Seishinsha"
+    gloss: "still heart company"
+    voice_anchor: "contemplative, alarm-recognition, spacious"
+    primary_topic: somatic
+    priority: tier_1_flagship
+    line_oa_tier_target: standard
+    fallback_hub: iyashikei
+    full_slot_authoring: true
+
+  - brand_id: somatic_wisdom
+    ja_name: "体知社"
+    romanization: "Taichi-sha"
+    gloss: "body knowing company"
+    voice_anchor: "polyvagal, body-first, gentle"
+    primary_topic: somatic
+    priority: tier_1_flagship
+    line_oa_tier_target: standard
+    fallback_hub: iyashikei
+    full_slot_authoring: true
+
+  - brand_id: body_memory
+    ja_name: "体記堂"
+    romanization: "Taiki-dō"
+    gloss: "body memory hall"
+    voice_anchor: "tender, somatic, grief-informed"
+    # Note: market_catalog_registry.yaml line 71 comment says '持地社 Mochi Chi Sha'
+    # — that comment conflicts with canonical locale_brand_names.yaml (line 159 = 体記堂).
+    # Locale file is authoritative; flag for separate cleanup.
+    primary_topic: somatic
+    priority: tier_1_flagship
+    line_oa_tier_target: standard
+    fallback_hub: iyashikei
+    full_slot_authoring: true
+
+  - brand_id: sleep_restoration
+    ja_name: "夜の設計社"
+    romanization: "Yoru no Sekkei Sha"
+    gloss: "night design company"
+    voice_anchor: "hushed, considered, evening register"
+    primary_topic: sleep
+    priority: tier_1_flagship
+    line_oa_tier_target: standard
+    fallback_hub: iyashikei
+    full_slot_authoring: true
+
+  - brand_id: relational_calm
+    ja_name: "素形堂"
+    romanization: "Sokei-dō"
+    gloss: "bare form hall"
+    voice_anchor: "simple, grounded, social-anxiety-aware"
+    primary_topic: social_anxiety
+    priority: tier_2_core
+    line_oa_tier_target: standard
+    fallback_hub: iyashikei
+    full_slot_authoring: false
+
+  # ── Cognitive / clarity register ─────────────────────────────────────────
+  - brand_id: cognitive_clarity
+    ja_name: "直見堂"
+    romanization: "Chokuken-dō"
+    gloss: "direct seeing hall"
+    voice_anchor: "Zen-influenced, dropping the story, unsentimental"
+    primary_topic: overthinking
+    priority: tier_1_flagship
+    line_oa_tier_target: standard
+    fallback_hub: cognitive
+    full_slot_authoring: true
+
+  - brand_id: digital_ground
+    ja_name: "今此処社"
+    romanization: "Ima Koko Sha"
+    gloss: "here now company"
+    voice_anchor: "contemporary, clean, presence-anchored"
+    primary_topic: burnout_tech_worker
+    priority: tier_1_flagship
+    line_oa_tier_target: standard
+    fallback_hub: cognitive
+    full_slot_authoring: true
+
+  - brand_id: heart_balance
+    ja_name: "羽と秤社"
+    romanization: "Hane to Hakari Sha"
+    gloss: "feather and scale"
+    voice_anchor: "poetic, balance-oriented, light"
+    primary_topic: emotional_regulation
+    priority: tier_2_core
+    line_oa_tier_target: standard
+    fallback_hub: cognitive
+    full_slot_authoring: false
+
+  - brand_id: qi_foundation
+    ja_name: "氣根社"
+    romanization: "Kikon-sha"
+    gloss: "qi root company"
+    voice_anchor: "rooted, ancient register, somatic-Eastern"
+    primary_topic: somatic_eastern
+    priority: tier_2_core
+    line_oa_tier_target: standard
+    fallback_hub: cognitive
+    full_slot_authoring: true
+
+  # ── Transformation / path register ───────────────────────────────────────
+  - brand_id: warrior_calm
+    ja_name: "鉄門社"
+    romanization: "Tetsumon-sha"
+    gloss: "iron gate company"
+    voice_anchor: "firm, kind, disciplined"
+    primary_topic: courage
+    priority: tier_3_niche
+    line_oa_tier_target: standard
+    fallback_hub: transformation
+    full_slot_authoring: false
+
+  - brand_id: solar_return
+    ja_name: "燼と灰社"
+    romanization: "Jin to Hai Sha"
+    gloss: "ember and ash company"
+    voice_anchor: "burnout-as-initiation; spent-fire register, quiet endurance"
+    # Note: market_catalog_registry.yaml line 72 comment says '炎転社 (Honten-sha)';
+    # canonical locale_brand_names.yaml line 173 = 燼と灰社. Locale file is authoritative.
+    primary_topic: burnout_recovery
+    priority: tier_3_niche
+    line_oa_tier_target: standard
+    fallback_hub: transformation
+    full_slot_authoring: false
+
+  - brand_id: devotion_path
+    ja_name: "開器社"
+    romanization: "Kaiki-sha"
+    gloss: "open vessel company"
+    voice_anchor: "bhakti, surrender, openhearted devotion register"
+    # Note: market_catalog_registry.yaml line 73 comment says '開心堂 (Kaishin-dō)';
+    # canonical locale_brand_names.yaml line 187 = 開器社. Locale file is authoritative.
+    primary_topic: devotion
+    priority: tier_3_niche
+    line_oa_tier_target: standard
+    fallback_hub: transformation
+    full_slot_authoring: false
+
+# ===========================================================================
+# Cost budget — primary 12-OA model
+# ===========================================================================
+cost_budget_jpy_per_month:
+  primary_model:
+    description: "12 brands × LINE OA Standard tier"
+    monthly_combined_floor: 180000              # research §1 cites Standard ~¥15k/OA
+    sticker_set_one_time_per_brand: 6400        # 12 × ¥6,400 = ¥76,800 launch
+    sticker_set_total_one_time: 76800
+    notes: |
+      Standard tier required (per research §1) for any brand with ≥3 broadcast
+      messages/week. Light tier (¥5k/mo) is too constrained — caps broadcast at
+      ~15k/mo per OA, which is hit quickly once a brand's friend list grows past
+      ~5k. Standard tier offers expanded quota and is the working assumption.
+      Premium / Pro tiers exist for very high-volume; not needed at launch.
+  fallback_model:
+    description: "3 hub OAs × Standard tier (only if 12-OA budget unavailable)"
+    monthly_combined_floor: 45000
+    sticker_set_one_time_per_hub: 6400
+    sticker_set_total_one_time: 19200
+    cost_savings_vs_primary: 0.75
+    rationale_loss: |
+      75% cost saving. Costs: brand voice fidelity (per-brand variants required in
+      messages.ja_JP.yaml; reader sees one OA persona, not 12); friend-list pooling
+      (cross-brand intent-segmentation harder); rich-menu real estate (1 menu serving
+      4–5 brands' tools). Acceptable bridge; not the recommended end state.
+
+# ===========================================================================
+# FALLBACK MODEL — Hybrid 3-hub (kept for reference + degraded-launch path)
+# ===========================================================================
+# Brands' `fallback_hub` field above maps each brand to a hub. Use this section
+# only if launching in fallback mode.
+fallback_hubs:
+  - hub_id: iyashikei
+    oa_display_name_ja: "やわらぐ毎日"
+    oa_display_name_en: "Yawaragu Mainichi"
+    oa_bio_variant_default: bio_v3_quiet
+    rich_menu_id: rich_menu_iyashikei_v1
+    line_oa_tier_target: standard
+    primary_topics: [sleep, somatic, burnout_recovery, grief]
+    member_brands: [stillness_press, somatic_wisdom, body_memory, sleep_restoration, relational_calm]
+
+  - hub_id: cognitive
+    oa_display_name_ja: "あたまの整え方"
+    oa_display_name_en: "Atama no Totonoekata"
+    oa_bio_variant_default: bio_v2_direct
+    rich_menu_id: rich_menu_cognitive_v1
+    line_oa_tier_target: standard
+    primary_topics: [overthinking, imposter_syndrome, burnout_tech_worker, boundaries]
+    member_brands: [cognitive_clarity, digital_ground, heart_balance, qi_foundation]
+
+  - hub_id: transformation
+    oa_display_name_ja: "ひとつ前へ"
+    oa_display_name_en: "Hitotsu Mae E"
+    oa_bio_variant_default: bio_v5_inviting
+    rich_menu_id: rich_menu_transformation_v1
+    line_oa_tier_target: standard
+    primary_topics: [self_worth, courage, devotion, inner_peace]
+    member_brands: [warrior_calm, solar_return, devotion_path]
+
+# ===========================================================================
+# Routing — friend-add → brand assignment (primary 12-OA model)
+# ===========================================================================
+routing_primary:
+  description: "Each OA is brand-pure — friend-add metadata only confirms entry-point analytics. No cross-brand routing decision needed."
+  primary_signal: oa_channel_id                  # the channel the user added IS the brand
+  attribution: utm_source / utm_medium / utm_campaign on entry-point URL
+
+# ===========================================================================
+# Routing — friend-add → hub + brand assignment (fallback hybrid model)
+# ===========================================================================
+routing_fallback:
+  primary_signal: entry_point_metadata           # ad / QR / referral source
+  fallback_signal: liff_quiz_postback_data       # if user takes the LIFF quiz, brand affinity is captured
+  hub_default_signal: rich_menu_first_tap        # if neither, infer from first rich-menu tap
+
+# ===========================================================================
+# Cross-brand handoff (primary model)
+# ===========================================================================
+# A reader on 静心社 may show 直見堂 interest. Soft consent recommendation only:
+# m6b_cross_sell can include a single rich message suggesting another brand's
+# add-friend QR. Do NOT auto-share userId across OAs (LINE OA TOS prohibits
+# without explicit consent).
+cross_brand_handoff:
+  trigger: m6b_cross_sell
+  mechanism: rich_message_with_brand_oa_friend_add_qr
+  consent_required: true
+  attribution_carryover: utm_source=line_oa_${source_brand}
