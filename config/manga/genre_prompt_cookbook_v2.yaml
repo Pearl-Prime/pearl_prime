@@ -35,15 +35,21 @@
 # which targets sequential-art register for stillness_press manga panels.
 # Different surface, different prompt rules.
 
-schema_version: 2
-last_updated: "2026-05-02"
+schema_version: 3
+last_updated: "2026-04-30"
 
 authority:
   - "PR #802: docs/COMFYUI_FLUX_MANGA_PROMPTING_RESEARCH_2026-04-29.md (negation rule §8, sampler §2.4, weight syntax §2.3)"
   - "R1: artifacts/research/kdp_bestseller_cover_analysis_2026-05-02.md §12 (per-genre archetypes, lock-in tokens, no-figure rule)"
+  - "R4: artifacts/research/bestseller_composition_templates_2026-05-03.md §11 (aspect-ratio-aware imagery prompts; type-dominant FLUX bypass)"
   - "PR #807: H1=A engine config — flux1-dev fp8 / 28 steps / cfg 3.5 / dpmpp_2m / karras"
 
-# Engine config (operator-facing reminder; not consumed by compose helper)
+# Engine config (operator-facing reminder; not consumed by compose helper).
+# R5 (2026-04-30): Per-genre `imagery_aspect_ratio` is the FLUX canvas aspect
+# for the imagery patch — it matches the imagery_zone bbox in
+# `config/publishing/bestseller_templates.yaml`, NOT the 1600x2560 final
+# cover. Type-dominant genres set imagery_aspect_ratio: null and bypass
+# FLUX entirely (rendered as flat color by render_kdp_cover.py).
 engine:
   base_model: "flux1-dev-fp8.safetensors"
   sampler: "dpmpp_2m"
@@ -52,6 +58,16 @@ engine:
   cfg: 3.5
   width: 1600
   height: 2560
+  imagery_aspect_ratio:
+    anxiety:           "1.40:1"   # 1216x870
+    sleep_anxiety:     "1.04:1"   # 640x614 (square-ish)
+    grief:             "0.75:1"   # 384x512 (slightly portrait)
+    boundaries:        null       # FLUX-bypassed (type-dominant)
+    self_worth:        null       # FLUX-bypassed (type-dominant)
+    overthinking:      "1.82:1"   # 1120x614 (wide)
+    imposter_syndrome: null       # FLUX-bypassed (type-dominant)
+    burnout:           "0.85:1"   # 480x563 (slightly portrait)
+    courage:           "2.40:1"   # 1600x666 (wide horizontal)
 
 # ---------------------------------------------------------------------------
 # Universal layout register — applied after every genre's subject + style
@@ -109,11 +125,14 @@ genres:
       single hand emerging from soft shadow at lower-center, fingers
       relaxed, light catching the edge; vast open negative space above
       for title overlay; minimalist editorial framing
+    # R5 (2026-04-30): rewritten per R4 §11. Aspect-ratio aware: FLUX
+    # canvas is the imagery_zone bbox (1216x870 = 1.40:1), NOT 5:8.
     subject_prompt: >-
-      single hand emerging from soft shadow, fingers softly relaxed,
-      catching a single shaft of cool morning light, surrounded by
-      generous quiet negative space, low-key editorial photography
-      composition, calm minimalist still life
+      single open hand emerging from soft indigo shadow at lower edge of
+      frame, hand fills lower 60% of frame, cream-cool-blue palette,
+      painterly cinematic illustration, soft directional light from upper
+      left, contemplative still life register, generous negative cream
+      space at top of frame
     style_modifiers: >-
       low-key editorial book cover photography, soft volumetric morning
       light, cool blue and cream palette, minimalist contemporary
@@ -131,11 +150,14 @@ genres:
       single crescent moon high in upper-third of frame on a deep indigo
       field, soft halated glow, vast quiet sky below for title overlay
       placement; balanced atmospheric still composition
+    # R5 (2026-04-30): rewritten per R4 §11. Imagery zone is square-ish
+    # (640x614 = 1.04:1) — moon centered upper third of the small zone,
+    # with a faint star scatter to fill the otherwise sparse square.
     subject_prompt: >-
-      single crescent moon on a deep indigo field, soft pale glow
-      surrounding it, midnight palette, quiet atmospheric night
-      composition, soft natural light, vast still sky, minimalist editorial
-      book cover photography
+      single luminous crescent moon centered upper third of square frame,
+      deep indigo gradient field, painterly cinematic illustration, soft
+      pale gold glow around crescent, faint star scatter, calm midnight
+      register, no horizon line, fills 50% of frame
     style_modifiers: >-
       atmospheric night photography aesthetic, deep navy to cream
       gradient, soft moonlit glow, quiet luminous register, restful
@@ -153,11 +175,16 @@ genres:
       single small still object (feather, leaf, or smooth stone) resting
       on cream or dusty sage field, soft natural overhead light, quiet
       shadow; generous calm negative space; atmospheric still life
+    # R5 (2026-04-30): rewritten per R4 §11. Imagery zone is small and
+    # slightly portrait (384x512 = 0.75:1), so the feather is small and
+    # intentional within the zone — the bulk of the cream cream-field
+    # comes from the canvas background outside the imagery zone.
     subject_prompt: >-
-      single feather resting on a cream field, soft natural overhead
-      light, gentle quiet shadow, atmospheric still life photography,
-      contemplative palette of cream and dusty sage, minimalist editorial
-      book cover composition
+      single small dusty-sage feather resting at lower-center of cream
+      off-white field, feather is small and intentional within generous
+      empty space, painterly still life illustration, soft natural light,
+      low chroma, literary contemplative register, feather fills 40% of
+      frame width
     style_modifiers: >-
       atmospheric still life photography, soft natural light, dusty sage
       and off-white palette, low chroma contemplative register, minimal
@@ -176,11 +203,11 @@ genres:
       geometric line dividing the field horizontally, generous negative
       space at top and bottom for title overlay; type-dominant editorial
       graphic
-    subject_prompt: >-
-      bold flat color field of terracotta and cream, single thin clean
-      geometric line dividing the canvas, editorial graphic design
-      composition, high contrast typographic poster aesthetic, fully
-      saturated solid color block, flat solid tone throughout
+    # R5 (2026-04-30): FLUX-bypassed; rendered as flat color via R5
+    # renderer. Per R4 §11 + bestseller_templates.yaml:templates.boundaries
+    # imagery_zone is null → render_kdp_cover.py paints palette.primary.hex
+    # over the full canvas and composites type only.
+    subject_prompt: null
     style_modifiers: >-
       editorial graphic design, high contrast flat color treatment,
       premium minimalist poster aesthetic, clean vector-flat color
@@ -199,11 +226,9 @@ genres:
       warm earth tone field filling the canvas, soft golden-hour light
       gradient from upper area, generous negative space throughout for
       title takeover; humanist minimalist composition
-    subject_prompt: >-
-      warm earth tone background of terracotta and ochre, soft
-      golden-hour light from upper canvas, premium minimalist composition,
-      humanist warmth, generous negative space, editorial book cover
-      photography aesthetic
+    # R5 (2026-04-30): FLUX-bypassed; rendered as flat color via R5
+    # renderer (templates.self_worth.imagery_zone is null).
+    subject_prompt: null
     style_modifiers: >-
       premium minimalist editorial photography, warm earth tone palette,
       soft golden-hour gradient, humanist warmth, generous negative
@@ -222,11 +247,17 @@ genres:
       curve in the lower-half, single warm accent at the resolution
       point, vast negative space framing; editorial line illustration
       register
+    # R5 (2026-04-30): rewritten per R4 §11. Imagery zone is wide
+    # (1120x614 = 1.82:1) — line begins as tangled knot at left and
+    # resolves into clean horizontal sweep at right. Single small
+    # electric-blue accent dot near the resolution point.
     subject_prompt: >-
-      single tangled abstract line resolving into a clean curve, editorial
-      line illustration on cool gray and off-white field, single warm
-      accent at the resolution point, minimalist clean composition,
-      generous negative space framing
+      single continuous black ink line on cool gray off-white field,
+      line begins as tangled knot at left and resolves into clean
+      horizontal sweep at right, monochrome editorial line illustration,
+      single small electric-blue accent dot near the resolution point,
+      generous negative space, painterly minimalist register, line fills
+      70% of frame width
     style_modifiers: >-
       editorial line illustration, minimalist clean register, cool gray
       and off-white palette, single warm accent, contemporary self-help
@@ -245,11 +276,9 @@ genres:
       bold geometric mark or clean shape, generous negative space
       throughout for confident type takeover; high-energy editorial
       graphic
-    subject_prompt: >-
-      hot coral flat color field, single bold geometric mark, premium
-      feminist palette, high-energy editorial graphic design, fully
-      saturated solid color, confident composition, flat solid tone
-      throughout
+    # R5 (2026-04-30): FLUX-bypassed; rendered as flat color via R5
+    # renderer (templates.imposter_syndrome.imagery_zone is null).
+    subject_prompt: null
     style_modifiers: >-
       premium editorial graphic design, hot coral or magenta saturated
       palette, high-energy bestseller register, clean vector-flat
@@ -270,11 +299,15 @@ genres:
       single small wilting still object (leaf, dimmed bulb, half-empty
       teacup) at lower-center on muted dusty field, soft natural light,
       vast quiet negative space above; still quiet recovery composition
+    # R5 (2026-04-30): rewritten per R4 §11. Imagery zone is small and
+    # slightly portrait (480x563 = 0.85:1) — leaf hangs from a thin stem
+    # with a single amber highlight on the leaf tip.
     subject_prompt: >-
-      single wilting leaf at lower-center on muted dusty rose field,
-      soft natural light, gentle shadow, atmospheric still life
-      photography, low chroma palette, quiet restorative composition,
-      generous negative space framing
+      single small wilting leaf hanging from a thin stem, dusty-rose
+      and cream palette, painterly still life illustration, soft
+      directional light from upper right, low-energy contemplative
+      register, leaf fills 50% of frame, generous negative space,
+      single amber highlight on the leaf tip
     style_modifiers: >-
       atmospheric still life photography, muted dusty palette, soft
       natural light, low-energy quiet register, restorative recovery
@@ -294,10 +327,17 @@ genres:
       single mountain silhouette OR open horizon line in the lower-third,
       warm golden-hour light gradient above, vast quiet sky for title
       takeover; grounded composition with clear directional implication
+    # R5 (2026-04-30): rewritten per R4 §11. Imagery zone is full-width
+    # wide horizontal (1600x666 = 2.40:1) — mountain silhouette runs
+    # across the full lower frame with a distant single sun-mark above
+    # the highest peak.
     subject_prompt: >-
-      single mountain silhouette in lower-third on warm earth-tone field,
-      golden-hour light gradient above, terracotta and amber palette,
-      humanist warmth, grounded landscape composition, generous quiet sky
+      wide horizontal mountain silhouette across full lower frame,
+      terracotta and cream palette, painterly cinematic landscape
+      illustration, soft golden hour glow above the ridgeline, distant
+      single small sun-mark above the highest peak, grounded humanist
+      register, mountain fills 60% of frame height in lower portion,
+      generous warm cream sky above
     style_modifiers: >-
       cinematic editorial landscape photography, warm earth-tone palette,
       golden-hour glow, grounded humanist register, modern resilience

@@ -35,6 +35,12 @@ defaults:
     serif: "assets/fonts/kdp_overlay/eb_garamond/EBGaramond-VariableFont_wght.ttf"
     sans_serif: "assets/fonts/kdp_overlay/inter/Inter-VariableFont_opsz_wght.ttf"
     display: "assets/fonts/kdp_overlay/playfair_display/PlayfairDisplay-VariableFont_wght.ttf"
+    # R5 (2026-04-30): Caveat (OFL, Google Fonts) bundled for imposter_syndrome
+    # subtitle accent. Pacifico was an alternative; Caveat picked because its
+    # informal hand-marker feel pairs better with the genre's "I'm not an
+    # imposter — I just look casual about it" register, vs. Pacifico's heavier
+    # 1950s-poster aesthetic which would compete with a 24%-canvas-height title.
+    script: "assets/fonts/kdp_overlay/caveat/Caveat-VariableFont_wght.ttf"
   default_author_zone:
     position: "bottom"
     anchor: "centered"
@@ -198,8 +204,10 @@ genres:
       prefer_light_text_if_dark_zone: true
       hex_palette_fallback: ["#111827", "#F3F4F6"]
 
-  # R1: bold sans-serif (+ script accent — script font deferred to v2.1),
-  # center 60%, 24-30% block, cream/black on hot coral.
+  # R5 (2026-04-30): script accent landed via Caveat (OFL). Subtitle uses
+  # Caveat regular for the "I'm not an imposter" hand-marker accent. Title
+  # remains the bold sans-serif takeover. Center 60%, 24-30% block,
+  # cream/black on hot coral.
   imposter_syndrome:
     title_zone:
       position: "center"
@@ -216,10 +224,10 @@ genres:
       color: "auto"
       shadow: { offset_px: [0, 4], blur_px: 12, color_alpha: 0.30 }
     subtitle_style:
-      font_family: "sans_serif"
+      font_family: "script"
       font_weight: "regular"
-      size_px_at_1600x2560: 60
-      tracking_pct: 2
+      size_px_at_1600x2560: 72
+      tracking_pct: 0
       case: "title"
       color: "auto"
       shadow: { offset_px: [0, 2], blur_px: 6, color_alpha: 0.28 }

@@ -323,3 +323,67 @@ before mass regen.
 
 Tests in [`tests/test_cookbook_v2_loader.py`](../../tests/test_cookbook_v2_loader.py)
 pin the schema and enforce the no-negations-in-positive rule at CI time.
+
+## 13. R5 — template-based two-stage flow (added 2026-04-30)
+
+PR #837 (R4) landed
+[`config/publishing/bestseller_templates.yaml`](../../config/publishing/bestseller_templates.yaml),
+which declares per-genre **non-overlapping pixel zones** for imagery,
+title, subtitle, and author. R5 (this PR) rewrote
+[`scripts/publish/render_kdp_cover.py`](../../scripts/publish/render_kdp_cover.py)
+to consume that contract and added a Stage-1 imagery script,
+[`scripts/publish/render_imagery_for_template.py`](../../scripts/publish/render_imagery_for_template.py).
+The result is a clean two-stage flow that replaces the R3
+"render anything → bolt text on top → matte hack" architecture.
+
+### The flow
+
+```bash
+# Stage 1 — FLUX renders imagery patches at each genre's
+# imagery_zone aspect ratio (1.04:1 for sleep_anxiety,
+# 2.40:1 for courage, etc.). Type-dominant genres
+# (boundaries / self_worth / imposter_syndrome) are skipped:
+# they have imagery_zone == null and never call FLUX.
+python3 scripts/publish/render_imagery_for_template.py --batch \
+    --config dev --i-have-confirmed-pearl-star
+
+# Stage 2 — Composite the imagery patch into the canvas at the
+# template's pixel coordinates, paint palette.primary.hex into
+# the rest of the canvas, and composite type into title /
+# subtitle / author zones (which never overlap imagery_zone
+# by template construction). Also handles the type-dominant
+# flat-canvas path.
+PYTHONPATH=. python3 scripts/publish/render_kdp_cover.py --batch
+
+# Gate — KDP validator must pass.
+python3 scripts/publish/validate_epub.py --batch artifacts/epub/
+```
+
+### Why it works (where R3 failed)
+
+* **No more text-on-imagery overlap.** R4's templates declare
+  `overlap_rule: no_overlap` and the renderer enforces zone
+  boundaries at render time. Title/subtitle/author each occupy
+  their own non-overlapping pixel rectangles.
+* **No more matte/backdrop band-aids.** Those R3 layers patched
+  text-over-imagery contrast; with strict zones they are
+  unnecessary and have been deleted.
+* **Type-dominant genres bypass FLUX.** `boundaries`,
+  `self_worth`, and `imposter_syndrome` are pure-typography
+  bestsellers; the renderer paints `palette.primary.hex` over
+  the canvas and composites type only.
+* **Aspect-aware FLUX prompts.** Cookbook v2 (R5-rewritten per
+  R4 §11) prompts FLUX at the imagery_zone aspect, not at the
+  full 5:8 canvas. A 2.40:1 mountain prompt no longer comes back
+  as a portrait crop with cliff-faces baked into the title region.
+
+### Authority
+
+* [`config/publishing/bestseller_templates.yaml`](../../config/publishing/bestseller_templates.yaml)
+  — R4's contract; the source of truth for layout zones, palette,
+  and type ratios.
+* [`artifacts/research/bestseller_composition_templates_2026-05-03.md`](../../artifacts/research/bestseller_composition_templates_2026-05-03.md)
+  §11 (per-genre FLUX prompts) and §10 (cross-genre rules).
+* [`config/publishing/kdp_cover_typography.yaml`](../../config/publishing/kdp_cover_typography.yaml)
+  — owns per-genre fonts (kept; R5 added Caveat for
+  imposter_syndrome's script accent).
