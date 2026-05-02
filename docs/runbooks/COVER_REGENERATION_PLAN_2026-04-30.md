@@ -266,3 +266,60 @@ the quality upgrade once Session 5 unblocks it.
 
 This document. **No code changes. No new EPUBs. No render budget spent.**
 The plan is the deliverable; the actions inside it are operator + future-session work.
+
+## 12. Cookbook v2 — corrected per-genre prompts (added 2026-05-02)
+
+Stage 2 (Path C, native re-render via RunComfy) now sources its per-book
+FLUX prompts from
+[`config/manga/genre_prompt_cookbook_v2.yaml`](../../config/manga/genre_prompt_cookbook_v2.yaml).
+
+The v2 cookbook supersedes the thin per-genre prompt fragments that lived
+inside the prior `cover_regen_manifest.yaml`. The single most important
+change is the **negation-rule fix from PR #802 §8**:
+
+> Move all negations into a real negative-prompt slot. Stop appending
+> `no text, no typography, no letters` to the positive. Either send them
+> in the deployment's negative-prompt node, or drop them — appending them
+> inline is actively harmful.
+
+The prior fragments violated this; cookbook v2 does not. Every per-genre
+`subject_prompt` and `style_modifiers` block in v2 is **pure positive
+tokens**, and ALL negations are consolidated in the cookbook's
+`universal_negative` field, which is piped to the deployment's negative
+CLIPTextEncode slot by the (forthcoming) Stage-2 regen script.
+
+### How Stage 2 will use the cookbook
+
+The future `scripts/publish/regen_covers.py` (per §6 above) consumes
+cookbook v2 via the helper script:
+
+```bash
+# Compose the FLUX positive prompt for a single book
+python3 scripts/manga/cookbook_v2_compose_prompt.py --book ahjan_anxiety
+
+# Also emit the negative for the negative-slot CLIPTextEncode override
+python3 scripts/manga/cookbook_v2_compose_prompt.py \
+    --book maat_boundaries --negative
+```
+
+Library API for the regen script: `compose_positive(book_id) -> str` and
+`compose_negative() -> str` from
+[`scripts/manga/cookbook_v2_compose_prompt.py`](../../scripts/manga/cookbook_v2_compose_prompt.py).
+
+### Coverage and revisit gates
+
+Cookbook v2 covers all 9 genres represented in the 13-book inventory:
+`anxiety`, `sleep_anxiety`, `grief`, `boundaries`, `self_worth`,
+`overthinking`, `imposter_syndrome`, `burnout`, `courage`. At first issue
+every genre carries `revisit_after_r1: true` because R1's bestseller
+archetype analysis
+(`artifacts/research/kdp_bestseller_cover_analysis_2026-05-02.md`) had
+not yet landed when the cookbook was authored. The cookbook is correct on
+the negation rule and shippable as-is; the operator should refine each
+genre's `archetype` / `palette` / `subject_prompt` against R1's findings
+before mass regen.
+
+### Loader and shape gates
+
+Tests in [`tests/test_cookbook_v2_loader.py`](../../tests/test_cookbook_v2_loader.py)
+pin the schema and enforce the no-negations-in-positive rule at CI time.
