@@ -1,0 +1,292 @@
+# KDP Cover Typography Rules — per-genre layouts for `scripts/publish/render_kdp_cover.py`.
+#
+# Schema (per genre):
+#   title_zone:
+#     position:            top | center | bottom
+#     anchor:              left | centered | right
+#     max_width_pct:       int (% of canvas width)
+#     max_height_pct:      int (% of canvas height for the title block)
+#     vertical_offset_pct: int (offset from top edge of zone, % of canvas height)
+#   title_style / subtitle_style / author_style:
+#     font_family:         serif | sans_serif | display | script
+#     font_weight:         regular | bold | extra_bold
+#     size_px_at_1600x2560: int
+#     tracking_pct:        int (letter-spacing as % of em)
+#     case:                title | upper | lower
+#     color:               auto | "#hexcolor"  (auto = high-contrast pick from illustration zone)
+#     shadow:              { offset_px: [x, y], blur_px: int, color_alpha: float }
+#   palette_hints:
+#     prefer_light_text_if_dark_zone: bool
+#     hex_palette_fallback: [list of hex colors used if illustration sampling fails]
+#
+# All entries are marked `# REVISIT_AFTER_R1` until R1's
+# `artifacts/research/kdp_bestseller_cover_analysis_2026-05-02.md` lands and the
+# operator can replace defaults with R1-derived per-genre rules.
+
+defaults:
+  canvas_w: 1600
+  canvas_h: 2560
+  fonts:
+    serif: "assets/fonts/kdp_overlay/eb_garamond/EBGaramond-VariableFont_wght.ttf"
+    sans_serif: "assets/fonts/kdp_overlay/inter/Inter-VariableFont_opsz_wght.ttf"
+    display: "assets/fonts/kdp_overlay/playfair_display/PlayfairDisplay-VariableFont_wght.ttf"
+  # Author block — placed at bottom of every genre layout unless overridden.
+  default_author_zone:
+    position: "bottom"
+    anchor: "centered"
+    max_width_pct: 70
+    max_height_pct: 6
+    vertical_offset_pct: 90  # 90% from top → near bottom edge
+  default_author_style:
+    font_family: "sans_serif"
+    font_weight: "bold"
+    size_px_at_1600x2560: 64
+    tracking_pct: 8
+    case: "upper"
+    color: "auto"
+    shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
+
+genres:
+
+  anxiety:  # REVISIT_AFTER_R1
+    title_zone:
+      position: "top"
+      anchor: "centered"
+      max_width_pct: 86
+      max_height_pct: 24
+      vertical_offset_pct: 6
+    title_style:
+      font_family: "serif"
+      font_weight: "bold"
+      size_px_at_1600x2560: 150
+      tracking_pct: 0
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.38 }
+    subtitle_style:
+      font_family: "serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 56
+      tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#FFFFFF", "#0F172A"]
+
+  self_worth:  # REVISIT_AFTER_R1
+    title_zone:
+      position: "top"
+      anchor: "centered"
+      max_width_pct: 86
+      max_height_pct: 24
+      vertical_offset_pct: 8
+    title_style:
+      font_family: "display"
+      font_weight: "bold"
+      size_px_at_1600x2560: 158
+      tracking_pct: 0
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.35 }
+    subtitle_style:
+      font_family: "serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 54
+      tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#FFFFFF", "#1E1B4B"]
+
+  overthinking:  # REVISIT_AFTER_R1
+    title_zone:
+      position: "top"
+      anchor: "centered"
+      max_width_pct: 84
+      max_height_pct: 22
+      vertical_offset_pct: 6
+    title_style:
+      font_family: "sans_serif"
+      font_weight: "extra_bold"
+      size_px_at_1600x2560: 148
+      tracking_pct: -1
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 12, color_alpha: 0.35 }
+    subtitle_style:
+      font_family: "sans_serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 52
+      tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 6, color_alpha: 0.28 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#FFFFFF", "#111827"]
+
+  boundaries:  # REVISIT_AFTER_R1
+    title_zone:
+      position: "top"
+      anchor: "centered"
+      max_width_pct: 86
+      max_height_pct: 24
+      vertical_offset_pct: 7
+    title_style:
+      font_family: "sans_serif"
+      font_weight: "extra_bold"
+      size_px_at_1600x2560: 156
+      tracking_pct: 0
+      case: "upper"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.38 }
+    subtitle_style:
+      font_family: "serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 54
+      tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#FFFFFF", "#7F1D1D"]
+
+  burnout:  # REVISIT_AFTER_R1
+    title_zone:
+      position: "top"
+      anchor: "centered"
+      max_width_pct: 86
+      max_height_pct: 24
+      vertical_offset_pct: 6
+    title_style:
+      font_family: "serif"
+      font_weight: "bold"
+      size_px_at_1600x2560: 148
+      tracking_pct: 0
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.35 }
+    subtitle_style:
+      font_family: "serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 52
+      tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#FFFFFF", "#7C2D12"]
+
+  grief:  # REVISIT_AFTER_R1
+    title_zone:
+      position: "center"
+      anchor: "centered"
+      max_width_pct: 80
+      max_height_pct: 22
+      vertical_offset_pct: 38
+    title_style:
+      font_family: "serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 142
+      tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 16, color_alpha: 0.40 }
+    subtitle_style:
+      font_family: "serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 50
+      tracking_pct: 4
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#FFFFFF", "#1E293B"]
+
+  courage:  # REVISIT_AFTER_R1
+    title_zone:
+      position: "top"
+      anchor: "centered"
+      max_width_pct: 88
+      max_height_pct: 26
+      vertical_offset_pct: 5
+    title_style:
+      font_family: "display"
+      font_weight: "bold"
+      size_px_at_1600x2560: 162
+      tracking_pct: 0
+      case: "upper"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.40 }
+    subtitle_style:
+      font_family: "serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 54
+      tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#FFFFFF", "#7F1D1D"]
+
+  imposter_syndrome:  # REVISIT_AFTER_R1
+    title_zone:
+      position: "top"
+      anchor: "centered"
+      max_width_pct: 86
+      max_height_pct: 24
+      vertical_offset_pct: 6
+    title_style:
+      font_family: "sans_serif"
+      font_weight: "extra_bold"
+      size_px_at_1600x2560: 150
+      tracking_pct: -1
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 12, color_alpha: 0.35 }
+    subtitle_style:
+      font_family: "sans_serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 52
+      tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 6, color_alpha: 0.28 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#FFFFFF", "#0C4A6E"]
+
+  sleep_anxiety:  # REVISIT_AFTER_R1
+    title_zone:
+      position: "top"
+      anchor: "centered"
+      max_width_pct: 84
+      max_height_pct: 22
+      vertical_offset_pct: 6
+    title_style:
+      font_family: "serif"
+      font_weight: "bold"
+      size_px_at_1600x2560: 146
+      tracking_pct: 0
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.38 }
+    subtitle_style:
+      font_family: "serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 52
+      tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#FFFFFF", "#1E1B4B"]
