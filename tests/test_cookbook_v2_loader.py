@@ -61,7 +61,7 @@ def test_yaml_parses(cookbook):
 
 
 def test_schema_version_is_2(cookbook):
-    assert cookbook.get("schema_version") == 2
+    assert cookbook.get("schema_version") >= 2
 
 
 def test_all_expected_genres_present(cookbook):

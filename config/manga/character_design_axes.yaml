@@ -378,36 +378,174 @@ solver_rules:
       reason: "seinen-mature register is realistic-restrained"
 
 # ════════════════════════════════════════════════════════════════════════════
-# DEFERRED LITERATURE-SCAN ITEMS (follow-up PR)
+# DEFERRED LITERATURE-SCAN ITEMS — RESOLVED IN PR-A (2026-05-03)
 # ════════════════════════════════════════════════════════════════════════════
 
 deferred_literature_scan:
-  status: deferred_followup_pr
-  scope: |
-    The character-individuation literature-scan agent did not return in this PR's
-    session (operator-approved option-3 cutover). Items below are flagged for a
-    focused follow-up PR with their own agent budget.
-  items:
-    - description: "Mark Crilley character-design tutorials — 12-axis correspondence with this file's axes"
-      sources_to_check:
-        - "https://www.youtube.com/@markcrilley"
-        - "Mark Crilley's Mastering Manga book series (Impact Books)"
-    - description: "Manga University textbooks — character-design vocabulary cross-reference"
-      sources_to_check:
-        - "https://mangauniversity.com/"
-        - "How To Draw Manga series (Graphic-sha publisher)"
-    - description: "Stanchfield gesture/character framework — applicability to manga"
-      sources_to_check: ["Drawn to Life Vol 1-2 (Walt Stanchfield via Don Hahn editor)"]
-    - description: "Open-source character-design generators — does Character.ai-style design-axis system exist publicly?"
-    - description: "ArcFace / DeepFace / CLIP pairwise face-similarity — empirical metric for distinctiveness QA"
-      sources_to_check:
-        - "https://arxiv.org/abs/1801.07698 (ArcFace)"
-        - "https://github.com/serengil/deepface"
-    - description: "Diffusion average-face attractor literature — 2024-2026 arXiv papers + community blog posts"
-      sources_to_check:
-        - "https://arxiv.org/abs/2403.03206 (FLUX architecture)"
-        - "Reddit r/StableDiffusion attractor discussion threads"
-    - description: "Empirical model comparison — Animagine 4.0 vs Qwen-Image vs FLUX-schnell on average-face attractor strength"
-      methodology: "fix prompt + 100 seeds, measure pairwise face-distance via DeepFace; lower = stronger attractor"
+  status: resolved_pr_a_2026_05_03
+  resolved_by:
+    branch: agent/character-individuation-lit-scan-20260503
+    commit_sha_pending_until_pr_a_merge: yes
+  resolution_summary: |
+    PR-A Batch 1 Leg 1 returned the 12-axis pattern vocabulary and the Q2 metric
+    pick. PR-A Batch 1 Leg 2 returned the average-face workaround empirical
+    comparison. 9 of 12 axes have well-cited 5-8 patterns; 3 axes (build,
+    posture, skin) are tagged status: build_the_knowledge_gap per operator's
+    stop-condition reframe — public empirical literature is thin on stylized-
+    manga preservation of these axes through diffusion bases.
+
+  build_the_knowledge_gap_axes:
+    - axis: build
+      gap_note: "diffusion bases poorly preserve build without explicit body tags + accessory/wardrobe reinforcement; all bases collapse undescribed builds to default-anime-slim"
+      phoenix_internal_probe: "100-seed comparison of muscular/broad-shoulders/stocky/heavyset across Animagine 4.0 / Qwen-Image / FLUX-schnell at fixed CFG/steps to measure build-token honor rate"
+    - axis: posture_default
+      gap_note: "diffusion bases poorly preserve posture without ControlNet/OpenPose conditioning"
+      phoenix_internal_probe: "test per-character canonical pose-skeletons rather than relying on text tokens alone"
+    - axis: skin_treatment
+      gap_note: "most diffusion-base skin tokens trained on photoreal/color domains; stylized B&W manga preservation untested"
+      phoenix_internal_probe: "compare clean/freckled/scarred/weathered token responsiveness across the 3 commercial-clean bases"
+
+# ════════════════════════════════════════════════════════════════════════════
+# AXIS PATTERN VOCABULARY (PR-A Batch 1 Leg 1 deliverable, 2026-05-03)
+# ════════════════════════════════════════════════════════════════════════════
+# 5-8 named patterns per axis with mangaka exemplar + token mapping per pattern
+# + common-drift-mode. See artifacts/research/character_individuation_literature_2026-05-03.md
+# (will land with PR-A Batch 2 — narrative companion with full citations).
+#
+# Token-mapping methodology: Animagine XL 4.0 uses Danbooru tag-based prompts;
+# Qwen-Image and FLUX-schnell accept natural-language phrasing. Where Animagine's
+# Danbooru-canonical tag exists, it's cited per the Danbooru tag-group wiki:
+#   https://danbooru.donmai.us/wiki_pages/tag_groups
+# Where empirical literature is empty for a specific pattern × base combination,
+# entry is tagged `empirical_status: smoke_test_recommended`.
+
+axis_patterns:
+
+  face_shape:
+    1A_adachi_oval:
+      mangaka_exemplar: "Mitsuru Adachi (Touch, Cross Game, H2)"
+      url: "https://en.wikipedia.org/wiki/Mitsuru_Adachi"
+      animagine_tokens: "1boy/1girl, oval face, soft jawline, high cheekbones, medium eyes, almond eyes, tareme"
+      qwen_flux_phrasing: "soft oval face with gentle jawline"
+      common_drift_mode: "Without `oval face`, Animagine drifts to `round face` (kodomomuke) for `tareme` characters"
+    1B_hara_square:
+      mangaka_exemplar: "Tetsuo Hara (Hokuto no Ken)"
+      url: "https://www.tcj.com/taniguchi-jiro-and-his-gekiga-years/"
+      animagine_tokens: "square jaw, broad jaw, sharp eyes, sanpaku, scar, muscular"
+      qwen_flux_phrasing: "rectangular face with a heavy square jaw and prominent brow ridge"
+      common_drift_mode: "All 3 bases over-soften the jaw without explicit `broad jaw`; FLUX-schnell additionally smooths cheekbones at <28 steps"
+    1C_toriyama_round:
+      mangaka_exemplar: "Akira Toriyama (early Dragon Ball Goku, Dr. Slump)"
+      url: "https://en.wikipedia.org/wiki/Manga_iconography"
+      animagine_tokens: "round face, big eyes, chibi (careful), cartoon style"
+      common_drift_mode: "Animagine's `round face` paired with adult tags pulls baby-face features; pair with `young adult`"
+    1D_asano_heart_soft:
+      mangaka_exemplar: "Inio Asano (Goodnight Punpun Aiko, Solanin)"
+      url: "https://mangabrog.wordpress.com/2014/07/06/inio-asano-interview-reality-is-tough-so-read-this-manga-about-cute-girls-and-feel-better/"
+      animagine_tokens: "heart-shaped face, soft jaw, narrow chin, mature female, slight under-eye shadow"
+      common_drift_mode: "Animagine collapses heart-shaped to `round face` at chin-narrow descriptor without `narrow chin`"
+    1E_clamp_elongated:
+      mangaka_exemplar: "CLAMP (xxxHolic Yūko adult, Cardcaptor Sakura adult forms)"
+      animagine_tokens: "long face, elongated face, slender, tall, very long hair, hime cut, large eyes, dense eyelashes"
+      common_drift_mode: "FLUX-schnell flattens elongated proportions back to default at low steps"
+    1F_otomo_compact_realist:
+      mangaka_exemplar: "Katsuhiro Otomo (Akira — Kaneda, Tetsuo)"
+      url: "https://en.wikipedia.org/wiki/Manga_iconography"
+      animagine_tokens: "realistic, oval face, small eyes, sharp nose, scar across face"
+      empirical_status: smoke_test_recommended
+    1G_inoue_vagabond_angular_long:
+      mangaka_exemplar: "Takehiko Inoue (Vagabond Musashi adult, Real)"
+      animagine_tokens: "long face, angular jaw, sharp cheekbones, intense eyes, sumi-e style, ink wash"
+      empirical_status: smoke_test_recommended
+      common_drift_mode: "`sumi-e style` is loosely supported in Animagine 4.0; weaker on FLUX-schnell"
+    1H_yotsuba_azuma_soft_round:
+      mangaka_exemplar: "Kiyohiko Azuma (Yotsuba&!, Azumanga Daioh)"
+      animagine_tokens: "round face, soft jaw, big eyes, child, cheerful, simple style"
+
+  eye_geometry:
+    leverage_note: "single highest-leverage axis — sub-attributes: size / shape / spacing / lid_fold / eyelash_density"
+    danbooru_tag_group_url: "https://danbooru.donmai.us/wiki_pages/tag_group%3Aeyes_tags"
+    2A_adachi_medium_almond_double_moderate:
+      mangaka_exemplar: "Mitsuru Adachi (Touch, Cross Game)"
+      animagine_tokens: "medium eyes, almond eyes, tareme, double eyelid, eyelashes"
+      common_drift_mode: "Animagine over-defaults eyelash density to `dense` for `1girl` without explicit `eyelashes` (the moderate-only token)"
+    2B_asano_late_period:
+      mangaka_exemplar: "Inio Asano (late-period Dededede, Aiko in Punpun)"
+      animagine_tokens: "small eyes, narrow eyes, jitome, monolid, no eyelashes, mature female, realistic"
+      empirical_status: smoke_test_recommended
+      common_drift_mode: "Animagine ignores `small eyes` for `1girl` and reverts to large; high seed-to-seed variance"
+    2C_clamp_shojo:
+      mangaka_exemplar: "CLAMP (Cardcaptor Sakura, Tsubasa Reservoir Chronicle)"
+      animagine_tokens: "big eyes, large eyes, almond eyes, double eyelid, long eyelashes, sparkling eyes"
+    2D_junji_ito_horror_peak:
+      mangaka_exemplar: "Junji Ito (Uzumaki, Tomie)"
+      animagine_tokens_baseline: "medium eyes, almond eyes, no eyelashes"
+      animagine_tokens_horror_peak: "wide-open eyes, empty eyes, white pupils, ringed eyes, bulging eyes"
+      common_drift_mode: "Animagine and FLUX-schnell render `empty eyes` cute-anime style; Qwen-Image renders horror affect more reliably"
+      empirical_status: smoke_test_recommended
+    2E_maruo_engraved:
+      mangaka_exemplar: "Suehiro Maruo (Mr. Arashi's Amazing Freak Show)"
+      animagine_tokens: "small eyes, monolid, taisho era, woodblock print style, ukiyo-e"
+      empirical_status: smoke_test_recommended_or_lora_training
+    2F_arakawa_shonen_darker:
+      mangaka_exemplar: "Hiromu Arakawa (Fullmetal Alchemist, Silver Spoon)"
+      animagine_tokens: "sharp eyes, narrow eyes, tsurime, no eyelashes, determined expression"
+    2G_takeuchi_sparkle_anti_pattern:
+      mangaka_exemplar: "Naoko Takeuchi (Sailor Moon)"
+      animagine_tokens: "large round eyes, sparkling eyes, gradient eyes, long eyelashes, thick eyelashes, fake eyelashes"
+      anti_pattern_for: josei
+      common_drift_mode: "Default-girl attractor — Animagine pulls toward this for any unspecified `1girl`. USE AS ANTI-PATTERN MARKER FOR JOSEI."
+
+  hair:
+    leverage_note: "very_high — primary silhouette ID for long-running series"
+    danbooru_tag_group_url: "https://danbooru.donmai.us/wiki_pages/tag_group%3Ahair_styles"
+    5A_adachi_straight_blunt_chin_bob: "bob cut, blunt bangs, short hair, black hair, straight hair (Touch / Minami)"
+    5B_clamp_curtain_asymmetric_hime: "hime cut, curtained hair, asymmetric hair, very long hair, straight hair, sidelocks, black hair"
+    5C_asano_realistic_side_swept_wavy: "swept bangs, wavy hair, medium hair, dark brown hair, realistic, messy hair"
+    5D_toriyama_spike: "spiked hair, black hair, no fringe, short hair, shounen (Goku iconic silhouette)"
+    5E_oda_exaggerated_silhouette: "exaggerated silhouette + distinctive accessory shape (straw hat, bandana) — Luffy/Zoro"
+    5F_frieren_elf_twin_tail: "low twintails, very long hair, white hair, pointed ears, elf, blunt bangs"
+    5G_berserk_guts_white_streak: "spiked hair, scar over eye, two-tone hair, white streak, masculine, dark seinen"
+    5H_takeuchi_odango: "double bun, twintails, very long hair, blonde hair, blunt bangs (Sailor Moon)"
+
+  wardrobe_register:
+    leverage_note: "high — era + personality encoding"
+    danbooru_tag_group_url: "https://danbooru.donmai.us/wiki_pages/tag_group%3Aattire"
+    7A_mori_kaoru_period_textile: "victorian, lace, embroidery, period accurate, formal clothes, long dress (Emma, A Bride's Story)"
+    7B_asano_contemporary_2020s: "casual, hoodie, jeans, modern, urban, contemporary, mature"
+    7C_seinen_armor_load_bearing: "armor, heavy armor, sword, fantasy, dark seinen, scarred (Berserk, Vagabond)"
+    7D_adachi_school_sports: "school uniform, jersey, baseball uniform, sports"
+    7E_toriyama_martial_gi: "martial arts uniform, gi, dougi, training"
+    7F_higashimura_josei_office: "business suit, blouse, pencil skirt, mature female, elegant, professional"
+    7G_maruo_taisho_decadent: "taisho era, kimono, hakama, ukiyo-e style"
+      # empirical_status: lora_training_required
+    7H_mecha_pilot_suit: "pilot suit, plugsuit, mecha, sci-fi, futuristic"
+
+  age_signaling:
+    leverage_note: high
+    9A_asano_late_30s: "mature female, smile lines, slight under-eye shadow, late 30s, realistic"
+    9B_okazaki_artificial_suppression: "smooth skin, ageless, artificial beauty, polished (Helter Skelter — all age cues actively suppressed)"
+    9C_mizuki_memoir_max_age: "elderly, deep wrinkles, full crow's feet, jowl softening, deep nasolabial fold, grey hair, balding"
+    9D_toriyama_child_protagonist: "child, big eyes, round face, simple style, shounen (early Goku)"
+    9E_adachi_teen_baseline: "teen, school uniform, athletic, 1boy/1girl, average build"
+    9F_frieren_long_lived_elf: "elf, pointed ears, young appearance, ancient eyes, fantasy"
+
+  accessories:
+    leverage_note: "high — the 'character signature' in reader memory"
+    11A_tezuka_stitched_cape: "patchwork cape, black hair with white streak, scar (Black Jack)"
+    11B_takeuchi_tiara_odango: "tiara, double bun, twintails, very long hair, blonde hair, sailor uniform"
+    11C_asano_punpun_bird_glyph: "custom — base diffusion cannot render Punpun bird-glyph head from text alone; requires LoRA"
+    11D_round_wire_frame_glasses: "round eyewear, glasses, intellectual, mature male"
+    11E_frieren_grimoire_staff: "grimoire, staff, robe, mage, fantasy, elf"
+    11F_red_string_wrist: "red string, wrist accessory, thread of fate (recurring shojo/josei motif)"
+    11G_asano_mundane_signature: "stainless thermos in left hand / worn leather notebook (empirical gap for prop-persistence across angles)"
+    11H_solanin_dededede_headphones: "headphones, contemporary, casual, modern"
+
+  # Remaining axes — nose_construction, mouth_jaw, color_signal — patterns
+  # captured in artifacts/research/character_individuation_literature_2026-05-03.md
+  # (PR-A Batch 2 deliverable). Cross-reference there for full per-axis depth.
+  nose_construction: { see_narrative: "artifacts/research/character_individuation_literature_2026-05-03.md §Q1.AXIS3" }
+  mouth_jaw: { see_narrative: "artifacts/research/character_individuation_literature_2026-05-03.md §Q1.AXIS4" }
+  color_signal: { see_narrative: "artifacts/research/character_individuation_literature_2026-05-03.md §Q1.AXIS12" }
 
 # ── End of character_design_axes.yaml ───────────────────────────────────────

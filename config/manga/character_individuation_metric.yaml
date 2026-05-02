@@ -1,0 +1,157 @@
+# Character Individuation Metric — Q2 Pick
+#
+# Status: AUTHORITY (new, this PR — research-only).
+# Schema version: 1.0
+# Created: 2026-05-03
+#
+# Purpose: Specifies the quantitative metric Phoenix Omega uses to determine
+# whether two characters in the catalog are visually distinguishable. Consumed
+# by the constraint solver (per `docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md`)
+# and the QA harness (gates Phase 2 of production campaign).
+#
+# Cross-references (SHA-pinned):
+cross_references:
+  pr_838_pipeline_spec:
+    path: docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md
+    sha: 3d7118b33448ca42c9af67f3e1b7e5efbb1c5d11
+    pr: 838
+  pr_838_axes:
+    path: config/manga/character_design_axes.yaml
+    sha: 3d7118b33448ca42c9af67f3e1b7e5efbb1c5d11
+    pr: 838
+  community_assets_audit:
+    path: docs/COMMUNITY_ASSETS_AUDIT_2026-04-29.md
+    sha: f4c50142b63df134d2f34c10a4a761bd9015c910
+    pr: 803
+    sections_referenced: ["Character consistency (PuLID-FaceNet — InsightFace AntelopeV2 commercial-blocked)"]
+
+schema_version: "1.0"
+last_updated: "2026-05-03"
+
+# ════════════════════════════════════════════════════════════════════════════
+# PRIMARY METRIC
+# ════════════════════════════════════════════════════════════════════════════
+
+primary_metric:
+  name: "FaceNet-512 cosine distance via DeepFace"
+  rationale: |
+    Three decision criteria evaluated:
+    (a) Reliable on stylized manga faces — limited public empirical data on stylized-domain
+        face metrics; FaceNet-512 chosen because the same backbone is already adopted by
+        the Phoenix stack via PuLID-FLUX-FaceNet (lldacing/ComfyUI_PuLID_Flux_ll), which
+        explicitly carves it out as the commercial-clean alternative to InsightFace
+        AntelopeV2.
+    (b) Installable WITHOUT paid API — FaceNet weights are MIT-compatible (VGGFace2
+        license); DeepFace wrapper is MIT.
+    (c) Fast enough for 200+ catalog batch — facenet-pytorch reports 12.97 FPS at
+        1080×1920 with GPU; DeepFace end-to-end is 4-6 FPS with detect/align overhead.
+        200-character × 10-image catalog = ~10 minutes single-GPU pass.
+
+  library:
+    name: deepface
+    repo_url: "https://github.com/serengil/deepface"
+    license: "MIT (wrapper) + FaceNet weights under VGGFace2 license"
+    install_command: "pip install deepface"
+    weights_auto_download: true
+
+  backbone:
+    model_name: "Facenet512"
+    embedding_dim: 512
+    benchmark_lfw_accuracy: "99.65% (VGGFace2)"
+    distance_function: cosine
+
+  operational_thresholds:
+    note: "PROPOSED — requires empirical calibration against the 22 stillness_press dashboard PNGs in PR-C"
+    distinct_floor: 0.40       # cosine_distance ≥ 0.40 → PASS distinct
+    borderline_band: [0.25, 0.40]   # WARN → operator review
+    look_alike_ceiling: 0.25   # cosine_distance < 0.25 → REJECT (constraint solver reruns)
+
+  throughput_estimate:
+    facenet_pytorch_alone:
+      fps: 12.97
+      condition: "1080×1920 with GPU"
+      source: "https://github.com/timesler/facenet-pytorch"
+    deepface_end_to_end:
+      fps: "4-6"
+      condition: "with detect+align+normalize overhead"
+    catalog_pass_estimate:
+      catalog_size: 200
+      images_per_character: 10
+      total_images: 2000
+      single_gpu_wall_clock: "~10 minutes"
+
+# ════════════════════════════════════════════════════════════════════════════
+# FALLBACK METRIC
+# ════════════════════════════════════════════════════════════════════════════
+
+fallback_metric:
+  name: "CLIP ViT-B/32 image-image cosine similarity"
+  trigger: |
+    If FaceNet-512 returns garbage on stylized B&W manga (i.e., all pairwise distances
+    cluster too tightly — operator's eyeball judgment of look-alike on the 22 dashboard
+    PNGs disagrees with metric output by more than 30%), fall back to CLIP.
+
+  rationale: |
+    CLIP ViT-B/32 trained on web-scale image-text including illustration / anime data
+    — better stylized-domain coverage than photoreal-only FaceNet. Lower precision on
+    identity (picks up scene/style/composition signals as well as face), so wider net.
+
+  library:
+    name: open_clip
+    repo_url: "https://github.com/mlfoundations/open_clip"
+    license: "MIT"
+    install_command: "pip install open-clip-torch"
+    load_call: "open_clip.create_model_and_transforms('ViT-B-32', pretrained='openai')"
+
+  operational_threshold:
+    note: "PROPOSED — requires same empirical calibration as primary"
+    distinct_threshold: "cosine_similarity < 0.85 → distinct character"
+    rationale: "CLIP image-image similarity is typically high; thresholds for 'different character' run tighter than photoreal face metrics"
+
+# ════════════════════════════════════════════════════════════════════════════
+# COMMERCIAL-CLEAN POSTURE (per audit PR #803)
+# ════════════════════════════════════════════════════════════════════════════
+
+commercial_clean_compliance:
+  primary_metric: 🟢
+  primary_metric_license_chain:
+    - "DeepFace wrapper: MIT"
+    - "FaceNet-512 backbone: trained on VGGFace2 (commercial-clean)"
+    - "facenet-pytorch alternative: MIT"
+  fallback_metric: 🟢
+  fallback_metric_license_chain:
+    - "open_clip: MIT"
+    - "OpenAI ViT-B/32 weights: research-permissive, commercial use OK per OpenAI license"
+  insightface_arcface_blocked: yes
+  insightface_arcface_block_reason: "InsightFace AntelopeV2 NC dependency per audit PR #803; ArcFace's strongest reference implementation rides on it"
+  alternative_arcface_via_deepface: "DeepFace's Keras-InsightFace port keeps AntelopeV2 license obligation per DeepFace README; NOT recommended for commercial catalog use"
+
+# ════════════════════════════════════════════════════════════════════════════
+# CALIBRATION PROBE REQUIRED BEFORE CATALOG ROLLOUT
+# ════════════════════════════════════════════════════════════════════════════
+
+calibration_probe:
+  scheduled_for: "PR-C (corrective-action smoke test on 22 stillness_press PNGs)"
+  procedure:
+    - step: 1
+      action: "Render the 22 stillness_press dashboard PNGs (operator-flagged as collapsing to one face) through DeepFace"
+    - step: 2
+      action: "Compute pairwise FaceNet-512 cosine distances"
+      expected_outcome: "most pairs cluster well below 0.25 (matching operator eyeball judgment of look-alike)"
+    - step: 3
+      action: "If FaceNet returns 'too distinct' (all distances >0.40 despite operator-eyeballed look-alike), trigger fallback to CLIP ViT-B/32"
+    - step: 4
+      action: "Use the calibrated 22-image distribution to set production threshold at 1.5× the median pairwise distance from a held-out 5-character 'obviously distinct' set"
+  output: "Calibrated threshold values replace the PROPOSED defaults above; constraint solver picks up the calibrated values on next run"
+
+# ════════════════════════════════════════════════════════════════════════════
+# DEFERRED ITEMS (follow-up PR)
+# ════════════════════════════════════════════════════════════════════════════
+
+deferred_followup_pr:
+  - description: "AniWho (arXiv:2208.11012) head-to-head benchmark against FaceNet on stylized faces"
+    rationale: "Public empirical literature on stylized-manga face metrics is thin; AniWho EfficientNet-B7 reports 85.08% top-1 on anime-character classification but no FaceNet/ArcFace/CLIP comparison published"
+  - description: "Empirical model comparison — Animagine 4.0 vs Qwen-Image vs FLUX-schnell on attractor strength using FaceNet-512 as the metric"
+    methodology_outlined_in: "artifacts/research/average_face_workaround_empirical_comparison_2026-05-03.md §5"
+
+# ── End of character_individuation_metric.yaml ─────────────────────────────
