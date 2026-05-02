@@ -1,0 +1,267 @@
+# Character Design Template — every new manga series fills this out before image generation
+#
+# Status: AUTHORITY (new, this PR).
+# Schema version: 1.0
+# Created: 2026-05-02
+#
+# Purpose:
+#   Each manga series in the catalog must produce a filled instance of this
+#   template *before* its main_character.png / cover.png / panel renderings are
+#   generated. The template encodes the 12-axis character-design vocabulary
+#   (per `config/manga/character_design_axes.yaml`) and is consumed by the
+#   character individuation constraint solver (per
+#   `docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md`).
+#
+# Workflow:
+#   1. Author / brand owner fills out a new instance of this template per series.
+#   2. Constraint solver validates the new instance against existing instances
+#      in the same brand (and globally) — flags collision on lockout axes.
+#   3. If collision, author iterates until solver passes.
+#   4. Validated instance is checked into
+#      `config/source_of_truth/manga_profiles/series/<series_id>.yaml` under a
+#      `character_design:` block.
+#   5. Image-generation pipeline reads the validated character_design and emits
+#      the appropriate prompt tokens for the chosen base model (Animagine XL 4.0
+#      / Qwen-Image / FLUX-schnell per audit PR #803 commercial-clean stack).
+#
+# Cross-references (SHA-pinned):
+cross_references:
+  cookbook_research:
+    path: docs/COMFYUI_FLUX_MANGA_PROMPTING_RESEARCH_2026-04-29.md
+    sha: 2881dd970bf2433e2225800ac6f73b1dd0281be5
+    pr: 802
+    sections_referenced: ["§2 (prompt structure)", "§3 (per-genre cookbook)", "§6 (character consistency)"]
+  community_assets_audit:
+    path: docs/COMMUNITY_ASSETS_AUDIT_2026-04-29.md
+    sha: f4c50142b63df134d2f34c10a4a761bd9015c910
+    pr: 803
+    sections_referenced: ["Character consistency", "Base diffusion model"]
+
+schema_version: "1.0"
+template_type: character_design
+last_updated: "2026-05-02"
+
+# ── How to fill this template ───────────────────────────────────────────────
+# Copy this block to `config/source_of_truth/manga_profiles/series/<series_id>.yaml`
+# under a `character_design:` key. Replace EXAMPLE values with series-specific values.
+# Run the constraint solver before committing.
+
+template:
+  series_id: EXAMPLE_series_id  # e.g., "stillness_press_anxiety_vol1"
+  brand_id: EXAMPLE_brand_id    # e.g., "stillness_press"
+  locale: en_US                 # one of: en_US, ja_JP, zh_TW, zh_CN, ko_KR
+  market_demo: josei            # one of: shonen, shojo, seinen, josei, kodomomuke, mature
+  genre_family: healing         # see config/manga/canonical_genre_list.yaml
+
+  # ── 12 character-design axes — fill all 12 ──────────────────────────────
+  # Allowed values per axis are from `config/manga/character_design_axes.yaml`.
+  # Each axis tagged "lockout: yes" is checked by the constraint solver against
+  # the existing catalog entries; "lockout: no" axes are free to vary.
+
+  axes:
+    # AXIS 1 — face_shape
+    face_shape:
+      value: heart_shaped              # one of: oval, square, round, heart_shaped, elongated, angular_long, soft_round
+      lockout: yes
+      mangaka_tradition: "Asano late-period josei (heart-shape softened jaw)"
+
+    # AXIS 2 — eye_geometry
+    eye_geometry:
+      size: small                       # one of: extra_small (gekiga), small (seinen), medium, large (shojo), extra_large (kodomomuke)
+      shape: almond                     # one of: almond, round, sharp_angular, hooded, downturned, upturned, monolid
+      spacing: standard                 # one of: narrow, standard, wide
+      lid_fold: single                  # one of: single, double, none_visible
+      eyelash_density: minimal          # one of: minimal (seinen), moderate, dense (shojo), heavy_decorative (older shojo, sparkle-era)
+      lockout: yes
+
+    # AXIS 3 — nose_construction
+    nose_construction:
+      bridge_angle: short_upturned      # one of: short_upturned, straight, slight_downturn, prominent, aquiline
+      bridge_length: short              # one of: short, medium, long
+      tip_shape: rounded                # one of: rounded, pointed, wide, narrow
+      nostril_visibility: implied       # one of: invisible (shojo), implied, drawn (seinen), prominent (gekiga)
+      lockout: yes
+
+    # AXIS 4 — mouth_jaw
+    mouth_jaw:
+      resting_expression: neutral_soft  # one of: neutral_soft, neutral_firm, slight_frown, slight_smile, parted_lips
+      jaw_width: narrow                 # one of: narrow, medium, wide, square
+      chin_shape: soft_pointed          # one of: soft_pointed, rounded, square, cleft, weak_chin
+      lip_shape: thin_upper_full_lower  # one of: thin_both, thin_upper_full_lower, full_both, bow_mouth (avoid for josei-adult)
+      lockout: yes
+
+    # AXIS 5 — hair
+    hair:
+      length: shoulder                  # one of: shaved, very_short, ear_length, chin_bob, shoulder, mid_back, long_to_waist, floor_length
+      parting: side_left                # one of: center, side_left, side_right, no_part_swept_back, asymmetric, fringed
+      fringe_style: straight_blunt      # one of: straight_blunt, side_swept, curtain, hime_cut, asymmetric, no_fringe
+      texture: straight                 # one of: straight, slight_wave, curly, coiled, textured_kinky
+      color_signal: dark_brown_with_grey # natural anchor: black, dark_brown, brown, dark_blonde, blonde, red, grey_at_temples, white_signaled
+      signature_shape_note: "loose strands escape side-parting throughout the day — character signal of mild disorder"
+      lockout: yes
+
+    # AXIS 6 — build
+    build:
+      height_implied: short             # one of: very_short (under 5'1"), short (5'1"-5'5"), average (5'5"-5'9"), tall (5'9"-6'1"), very_tall (over 6'1")
+      frame_density: small              # one of: very_small, small, average, athletic, broad, heavy
+      shoulder_ratio: narrow            # one of: narrow, average, broad
+      lockout: no                        # body silhouette is less individuating in manga than face — solver doesn't lock this hard
+
+    # AXIS 7 — wardrobe_register
+    wardrobe_register:
+      era_signal: contemporary_2020s    # one of: pre_industrial, meiji_taisho, postwar_showa, 80s_90s, 2000s_2010s, contemporary_2020s, near_future, far_future, alternate_history_X, fantasy_setting_X
+      personality_encoding:
+        - cardigan_layered_office       # 2-4 specific wardrobe items that encode personality
+        - corduroy_skirt
+        - sturdy_low_heel
+      formality: business_casual        # one of: undressed, sleepwear, casual, business_casual, formal, ceremonial, costume
+      lockout: yes
+
+    # AXIS 8 — posture_default
+    posture_default:
+      energy: contained                 # one of: collapsed, contained, neutral, energetic, dynamic, exuberant
+      symmetry: slight_left_lean        # one of: symmetric, slight_left_lean, slight_right_lean, asymmetric_dynamic, slumped
+      lockout: no                        # posture varies too much across panels to be primary individuation signal
+
+    # AXIS 9 — age_signaling
+    age_signaling:
+      apparent_age_decade: late_30s     # one of: pre_teen, teen, early_20s, mid_20s, late_20s, early_30s, mid_30s, late_30s, 40s, 50s, 60s, 70s_plus
+      visible_age_cues:
+        - smile_lines_visible
+        - no_full_crow_feet
+        - slight_under_eye_shadow
+      lockout: yes
+
+    # AXIS 10 — skin_treatment
+    skin_treatment:
+      texture: clean                    # one of: clean, slight_freckles, moderate_freckles, scarred (named scar), blemished, weathered, sun_damaged
+      tone: warm_light                  # one of: very_pale, pale_cool, pale_warm, warm_light, warm_medium, warm_deep, deep_brown, very_deep
+      lockout: no                        # commonly varies in B&W manga where skin tone is implied via shading; OK for solver to leave free
+
+    # AXIS 11 — accessories
+    accessories:
+      glasses: round_wire_frame         # one of: none, round_wire_frame, round_thick_frame, square_thick, cat_eye, half_rim, sport
+      jewelry: minimal                  # one of: none, minimal (e.g., one stud earring), modest, expressive, signature_piece (named — e.g., "grandmother's brooch")
+      signature_item: none              # named non-jewelry item that anchors character — e.g., "stainless thermos always in left hand", "grandmother's brooch (heart-shaped, brass)", "leather notebook"
+      lockout: yes                       # accessories are HIGH-LEVERAGE individuation signal — lock
+
+    # AXIS 12 — color_signal
+    color_signal:
+      palette_primary: muted_brown      # primary palette anchor for character (when color is in play): muted_brown, deep_teal, sage_green, dusty_rose, charcoal, navy, burgundy, mustard, lavender, etc.
+      palette_accent: deep_teal         # secondary accent
+      bw_register_note: "in B&W rendering, character reads as 'mid-grey-anchored, never high-contrast' — never the highest-contrast figure in a panel"
+      lockout: yes                       # in series with color, palette is highly individuating; in B&W series, the contrast register replaces palette as signal
+
+  # ── Solver metadata ─────────────────────────────────────────────────────
+  solver:
+    individuation_axes_locked: 9        # of 12; auto-counted by the solver from `lockout: yes` entries
+    last_validated: "2026-05-02"        # date the constraint solver last ran
+    collision_check_passed: pending     # one of: pending, passed, failed
+    collision_check_against:
+      brand_scope: stillness_press      # whom to check for collisions: brand-only (default) or global
+      collisions_detected: []           # list of (axis, colliding_series_id) tuples if any
+
+  # ── Render metadata ─────────────────────────────────────────────────────
+  render:
+    target_base_model: animagine_xl_4_0  # one of: animagine_xl_4_0, qwen_image, flux_schnell (commercial-clean stack per audit PR #803)
+    prompt_axis_priority:                # which axes go in positive prompt vs negative vs solver-only
+      positive_prompt_axes:
+        - face_shape
+        - eye_geometry
+        - hair
+        - wardrobe_register
+        - age_signaling
+        - accessories
+        - color_signal
+      negative_prompt_axes:              # axes expressed via negation tokens
+        - mouth_jaw  # negate forbidden patterns: e.g., "no bow_mouth"
+      solver_only_axes:                  # axes that don't go in prompt; solver uses for collision detection only
+        - skin_treatment
+        - posture_default
+        - build
+        - nose_construction
+    last_render_date: pending
+    render_artifact_path: pending        # filled when an actual render is produced
+
+# ── Validation rules (consumed by the constraint solver) ────────────────────
+validation_rules:
+
+  # Rule 1: at least 9 of 12 axes must have `lockout: yes`
+  minimum_locked_axes: 9
+
+  # Rule 2: if any locked axis collides with another series in the same brand
+  # on >= 5 of the locked axes' values, the new entry is REJECTED until the
+  # author varies one or more colliding axes
+  collision_threshold:
+    same_brand: 5_locked_axes_match
+    cross_brand: 7_locked_axes_match  # cross-brand is more permissive (different audiences)
+
+  # Rule 3: certain axis-value combinations are FORBIDDEN by genre/demographic.
+  # Examples:
+  forbidden_combinations:
+    - rule: "shojo_eye_geometry + josei_market_demo"
+      reason: "modern josei-adult register has moved past sparkle/big-eye conventions; reverting to shojo-eye in josei-market series produces shojo-teen reading"
+      example_violation:
+        market_demo: josei
+        eye_geometry.size: extra_large
+        eye_geometry.eyelash_density: heavy_decorative
+    - rule: "bow_mouth + josei_market_demo"
+      reason: "bow_mouth is a 1990s-shojo signal; modern josei has moved on"
+      example_violation:
+        market_demo: josei
+        mouth_jaw.lip_shape: bow_mouth
+    - rule: "heavy_decorative_eyelashes + seinen_market_demo"
+      reason: "seinen-mature register is realistic-restrained; heavy decoration reads as shojo-pastiche"
+      example_violation:
+        market_demo: seinen
+        eye_geometry.eyelash_density: heavy_decorative
+
+# ── Examples of well-locked instances (pedagogical) ─────────────────────────
+# These are illustrative — when the solver runs against the real catalog, it
+# generates per-instance reports.
+
+example_instances:
+
+  saki_stillness_jp_01:
+    series_id: stillness_jp_01
+    market_demo: josei
+    genre_family: healing
+    summary: |
+      Late-30s josei iyashikei protagonist. Heart-shape face + small almond
+      single-lid eyes + short upturned nose + thin-upper full-lower lip + chin-
+      length bob with side-left part + short-frame build + cardigan/corduroy
+      wardrobe + contained slight-left-lean posture + late-30s with smile lines
+      + clean skin + round wire-frame glasses + signature stainless thermos +
+      muted brown / deep teal palette.
+    differentiation_axes_from_other_stillness_protagonists:
+      - hair: shoulder bob (vs jp_02 hypothetical mid-back length)
+      - accessories: round wire-frame glasses (vs jp_02 hypothetical: no glasses)
+      - color_signal: muted brown anchor (vs jp_02 hypothetical: charcoal anchor)
+      - age_signaling: late-30s smile lines (vs jp_02 hypothetical: mid-40s with subtle crow's feet)
+
+  example_distinct_from_saki:
+    series_id: stillness_press_pressure_map  # workplace-stress slice_of_life
+    market_demo: josei
+    genre_family: slice_of_life
+    summary: |
+      Mid-40s manager protagonist. Square face + medium hooded eyes + straight
+      bridge + neutral-firm mouth + ear-length asymmetric hair, dark-blonde +
+      average build with broader shoulders + business-formal blazer + neutral
+      slight-right-lean posture + mid-40s with subtle crow's feet + slight
+      sun-damaged skin + cat-eye glasses + signature plain steel watch +
+      navy/burgundy palette.
+    differentiation_axes_from_saki:
+      - face_shape: square vs heart_shaped
+      - eye_geometry.shape: hooded vs almond
+      - hair.length: ear_length vs shoulder
+      - hair.color_signal: dark_blonde vs dark_brown_with_grey
+      - build: average vs small
+      - wardrobe_register: business_formal vs business_casual
+      - age_signaling: mid_40s vs late_30s
+      - accessories: cat_eye_glasses vs round_wire_frame
+      - color_signal: navy_burgundy vs muted_brown_deep_teal
+    # Solver note: 9 of 12 axes locked, 9/9 differentiation matches > threshold,
+    # so this passes against Saki — the two read as distinctly different
+    # protagonists.
+
+# ── End of template ─────────────────────────────────────────────────────────

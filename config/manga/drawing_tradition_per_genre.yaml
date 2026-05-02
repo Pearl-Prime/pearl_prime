@@ -1,0 +1,1347 @@
+# Per-Genre Drawing-Tradition Spec — Phoenix Omega Manga Cookbook Companion
+#
+# Status: AUTHORITY (new, this PR — research-only).
+# Schema version: 1.0
+# Created: 2026-05-02
+# Branch: agent/manga-drawing-traditions-research-20260502
+#
+# Purpose:
+#   The cookbook PR (#802) established WHICH tokens trigger each genre on FLUX/SDXL/
+#   Pony. This spec adds the layer the cookbook lacks: WHAT each genre's drawing
+#   tradition actually LOOKS like — line, ink, expression, panel framing, palette,
+#   mangaka exemplars — and how those visual properties map onto the
+#   commercially-clean base stack from audit PR #803 (Qwen-Image / Animagine XL 4.0
+#   / FLUX-schnell). The cookbook YAML follow-up PR will populate its
+#   `drawing_tradition:` block per genre by referencing this file.
+#
+# Tier-weighted depth per operator's I1+ override:
+#   - Top-8 priority genres = full A–H spec (5–8 mangaka exemplars each)
+#   - 17 deferred genres = schema-complete stubs (all A–H sub-blocks present;
+#     populated only with `status: deferred_phase2` + 1-line scope note + 2–3
+#     named mangaka anchors). The cookbook follow-up PR fills content; structural
+#     rework is forbidden.
+#
+# Cross-references (SHA-pinned):
+cross_references:
+  cookbook_research:
+    path: docs/COMFYUI_FLUX_MANGA_PROMPTING_RESEARCH_2026-04-29.md
+    sha: 2881dd970bf2433e2225800ac6f73b1dd0281be5
+    pr: 802
+    sections_referenced: ["§0 (engine)", "§1.2 (model landscape)", "§2.2 (genre-anchor tokens)", "§3 (cookbook structure)"]
+  community_assets_audit:
+    path: docs/COMMUNITY_ASSETS_AUDIT_2026-04-29.md
+    sha: f4c50142b63df134d2f34c10a4a761bd9015c910
+    pr: 803
+    sections_referenced: ["Base diffusion model (Qwen-Image / Animagine 4.0 / FLUX-schnell)", "Per-genre LoRAs Phase 1"]
+  community_lora_roster:
+    path: artifacts/research/community_lora_roster_2026-04-29.yaml
+    sha: f4c50142b63df134d2f34c10a4a761bd9015c910
+    pr: 803
+
+schema_version: "1.0"
+last_updated: "2026-05-02"
+genres_total: 25
+top_8_priority: [healing, dark_fantasy, psychological_horror, mecha, romance, slice_of_life, fantasy_adventure, comedy]
+deferred_phase_2: [battle, sports, mystery, horror, workplace, essay, food, family, procedural, historical, cultivation, sci_fi_cyberpunk, supernatural_everyday, school, memoir, social_issue, graphic_medicine, battle_internal]
+
+# ════════════════════════════════════════════════════════════════════════════
+# TOP-8 PRIORITY GENRES (full A–H spec, 5–8 mangaka per genre)
+# ════════════════════════════════════════════════════════════════════════════
+
+genres:
+
+  # ── 1. HEALING / IYASHIKEI ─────────────────────────────────────────────────
+  healing:
+    status: top_8_deep
+    label: "Healing / Iyashikei"
+    operator_role: "tentpole working register — 15/22 stillness_press dashboard rows"
+
+    A_line_tradition:
+      line_weight_profile: variable_quiet
+      stroke_economy: high
+      construction_lines: hidden
+      inking_pressure: low_and_even
+      exemplar_attributes:
+        - "uniform medium-thin line with light tapering at termini (Ashinano, Yokohama Kaidashi Kikou)"
+        - "near-mechanical line regularity allowing watercolor wash overlay (Amano, ARIA)"
+        - "slight drybrush on foliage (Ishizuka, Flying Witch — rural iyashikei dialect)"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "5–15%"
+      black_fill_floor_rule: "iyashikei pages routinely run sub-10% black coverage; Ashinano sometimes drops below 5%"
+      screentone_strategy: minimal_large_area_gradient
+      halftone_to_solid_black_ratio: "3:1 toward halftone"
+      hatching_style: parallel_sparse_observational
+      white_space_treatment: "40–60% of every page white or near-white; YKK establishing pages push 65%+"
+
+    C_body_language_expression:
+      face_proportions: anime_realistic_soft
+      expression_frequency_cap: low
+      expression_vocabulary: [soft_smile, neutral_content, gentle_surprise, peaceful_eyes_closed, gentle_sadness]
+      pose_vocabulary: [standing, sitting, walking, observing, holding_cup]
+      hand_drawing: anatomical_individual_finger_separation
+
+    D_panel_framing:
+      camera_distance_distribution: "60% medium / 25% wide-establishing / 15% close-up — almost no extreme close, almost no extreme long"
+      page_rhythm: regular_grid_4_to_6_panels
+      background_detail_density:
+        landscape: high
+        interior: empty_or_light_screentone
+      speed_lines_impact_frames: forbidden
+
+    E_color_treatment:
+      palette: warm_earth_plus_cool_dawn
+      saturation_range: "30–50%"
+      color_anchor_mangaka: kozue_amano
+      register: gansai_watercolor_layered_transparent
+
+    F_forbidden_drift_patterns:
+      - "speed_lines, motion_lines, action_lines, motion_blur"
+      - "chiaroscuro, dramatic_lighting, rim_light"
+      - "screaming, crying, exaggerated_expression, open_mouth_shouting, large_sweat_drops"
+      - "impact_frame, halftone_burst, manga_effect_lines"
+      - "8+ panel pages, shattered_glass overlapping panels"
+
+    G_mangaka_exemplars:
+      - name: Hitoshi Ashinano
+        works: ["Yokohama Kaidashi Kikou (1994–2006)", "Kabu no Isaki (2008–2017)"]
+        url: "https://en.wikipedia.org/wiki/Yokohama_Kaidashi_Kikou"
+        note: "ink-sparse, watercolor-cover iyashikei; the genre's foundational anchor"
+      - name: Kozue Amano
+        works: ["ARIA (2002–2008)", "Amanchu! (2008–2024)"]
+        url: "https://en.wikipedia.org/wiki/Kozue_Amano"
+        note: "the genre's color anchor; gansai watercolor over mechanical-uniform line"
+        career_phases:
+          - phase: bright_watercolor_aria
+            era: "2002–2008"
+            characteristic: "ARIA register: lightest line, brightest gansai wash"
+          - phase: amanchu_continuing
+            era: "2008–2024"
+            characteristic: "slightly bolder line, broader expression range"
+      - name: Chihiro Ishizuka
+        works: ["Flying Witch (2012–)"]
+        url: "https://en.wikipedia.org/wiki/Flying_Witch"
+        note: "rural-Aomori iyashikei + supernatural-lite; slightly drybrush hatching"
+      - name: Afro
+        works: ["Laid-Back Camp / Yuru Camp (2015–)"]
+        url: "https://en.wikipedia.org/wiki/Laid-Back_Camp"
+        note: "outdoor iyashikei, detailed gear, signature thick eyebrows"
+      - name: Atto
+        works: ["Non Non Biyori (2007–2021)"]
+        url: "https://en.wikipedia.org/wiki/Iyashikei"
+        note: "rural school iyashikei; SOL/iyashikei boundary case"
+      - name: Aoki Ume
+        works: ["Hidamari Sketch (2004–)"]
+        url: "https://en.wikipedia.org/wiki/Hidamari_Sketch"
+        note: "yonkoma iyashikei; intersection with comedy register"
+      - name: Tsukumizu
+        works: ["Girls' Last Tour / Shoujo Shuumatsu Ryokou (2014–2018)"]
+        url: "https://en.wikipedia.org/wiki/Girls%27_Last_Tour"
+        note: "iyashikei despite post-apocalyptic setting; quiet line, vast empty space"
+      - name: Umi Sakurai
+        works: ["A Man and His Cat / Ojisama to Neko (2018–)"]
+        url: "https://theconversation.com/iyashikei-healing-manga-comforts-readers-with-attention-to-small-joys-237117"
+        note: "modern iyashikei in the Amano lineage; small-joys exemplar"
+
+    H_token_mapping:
+      animagine_xl_4_0:
+        positive: "masterpiece, absurdres, scenery, outdoors, soft lighting, gentle expression, slice of life, peaceful, sky, detailed background, year 2024"
+        negative: "lowres, worst quality, low score, action lines, motion blur, screaming, exaggerated expression"
+        empirical_status: validated_by_audit  # audit PR #803 found Animagine 4.0 base alone covers iyashikei
+        citation: "https://huggingface.co/cagliostrolab/animagine-xl-4.0"
+      qwen_image:
+        positive: "soft watercolor anime illustration of a quiet seaside afternoon, gentle smile, warm earth palette, sparse linework, large white space, peaceful atmosphere"
+        negative: "harsh lines, dramatic shadows, motion lines, intense expression, dark colors"
+        empirical_status: validated_by_research
+        citation: "https://github.com/QwenLM/Qwen-Image"
+      flux_schnell:
+        positive: "serene watercolor manga page, sparse pen-and-ink, soft pastel wash, calm everyday scene, ample white space"
+        negative: "dramatic shading, action panels, speed lines, harsh contrast"
+        empirical_gap: "FLUX-schnell at 4 steps tends to over-saturate iyashikei wash; smoke-test at 4 vs 8 steps recommended"
+
+  # ── 2. DARK_FANTASY ────────────────────────────────────────────────────────
+  dark_fantasy:
+    status: top_8_deep
+    label: "Dark Fantasy"
+    operator_role: "2/22 dashboard failures (jp_07, jp_08); operator-flagged drift = 'looks like a fantasy book cover'"
+
+    A_line_tradition:
+      line_weight_profile: variable_brush_pen_heavy
+      stroke_economy: very_low
+      construction_lines: hidden_but_anatomy_worked_through
+      inking_pressure: dynamic_brush_driven
+      exemplar_attributes:
+        - "minute crosshatching with high variety of hatching directions (Miura)"
+        - "hatching follows surface plane (Miura's principle: 'lines go the same angle as the plane of Guts' face')"
+        - "Doré + Escher + Bosch lineage of engraving-density backgrounds"
+        - "sumi-e washy brush register as alternative pole (Inoue Vagabond)"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "35–60%"
+      screentone_strategy: sparse_hand_stippled_pre_1998_or_digital_post_1998
+      halftone_to_solid_black_ratio: "1:1.5 toward solid black"
+      hatching_style: dense_crosshatch_plus_chiaroscuro_plus_doré_parallel
+      white_space_treatment: "paper-white as brightest highlight in etching-style tonal pyramid"
+
+    C_body_language_expression:
+      face_proportions: seinen_realist_or_gekiga
+      expression_frequency_cap: low
+      expression_vocabulary: [stoic, worry_lines, scarred, controlled_grief, bracketed_extreme_rage, death_mask]
+      pose_vocabulary: [weighted, grounded, low_center_of_gravity, weapon_stance]
+      hand_drawing: highly_anatomical_knuckle_tendon_visible
+
+    D_panel_framing:
+      camera_distance_distribution: "intimate-medium-close + heavy over-the-shoulder; wide reserved for armies/landscapes"
+      page_rhythm: "long quiet sequences punctuated by full-bleed gore"
+      background_detail_density: very_high_engraving_level
+      speed_lines_impact_frames:
+        speed_lines: sparse_brush_smear_afterimage_hatching
+        impact_frames: full_bleed_silhouette_with_white_flash
+
+    E_color_treatment:
+      palette: muted_earth_blood_red_deep_blue
+      saturation_range: "20–40% with red accents at 60–80%"
+      color_anchor_mangaka: miura_for_painted_oil_density
+      register: oil_paint_color_inserts_or_sumi_brush_grayscale
+
+    F_forbidden_drift_patterns:
+      - "concept art, key visual, painterly, oil painting, frank frazetta, larry elmore, wayne reynolds"
+      - "western fantasy book cover, paperback cover, dnd art, magic the gathering"
+      - "full color airbrush, gradient background, soft lighting, hero pose splash art"
+      - "smooth gradient shading on monsters (must be crosshatched surfaces)"
+      - "chibi/SD deformation in serious sequences"
+
+    G_mangaka_exemplars:
+      - name: Kentaro Miura
+        works: ["Berserk vols 1–13 (1989–1997)", "Berserk vols 14–35 (1998–2010)", "Berserk vols 36–41 + Duranki (2011–2021)"]
+        url: "https://en.wikipedia.org/wiki/Kentaro_Miura"
+        note: "the foundational dark-fantasy anchor; Doré/Escher/Bosch lineage"
+        career_phases:
+          - phase: hand_hatched_pre_digital
+            era: "1989–1997"
+            characteristic: "hand-hatched, screentone-light, brush-heavy"
+          - phase: digital_tone_assistant_pipeline
+            era: "1998–2010"
+            characteristic: "digital tone introduction; same line philosophy at higher density"
+            citation: "https://www.skullknight.net/forum/index.php?threads/new-digital-art-techniques-in-berserk.15089/"
+          - phase: late_painted_inserts
+            era: "2011–2021"
+            characteristic: "more painted insert pages, color experimentation"
+      - name: Takehiko Inoue
+        works: ["Slam Dunk (1990–96)", "Vagabond (1998–)"]
+        url: "https://en.wikipedia.org/wiki/Takehiko_Inoue"
+        note: "dark-fantasy brush-pole reference (Vagabond only — Slam Dunk is sports register)"
+        career_phases:
+          - phase: slam_dunk_sports_pen
+            era: "1990–1996"
+            characteristic: "NOT dark-fantasy register; bright shonen line with speed-line vocabulary"
+          - phase: vagabond_sumi_brush
+            era: "1998–present"
+            characteristic: "traditional Japanese ink-brush/sumi-e — washy, expressive; the sumi-pole anchor for dark-fantasy"
+      - name: Makoto Yukimura
+        works: ["Vinland Saga (2005–)"]
+        url: "https://en.wikipedia.org/wiki/Vinland_Saga"
+        note: "cleaner line than Miura but same heavy-blacks ink philosophy; Norse historical-fantasy"
+      - name: Junji Ito
+        works: ["Uzumaki (1998–99)", "Tomie (1987–2000)", "Gyo (2001–02)"]
+        url: "https://longstrideillustration.com/junji-ito-techniques/"
+        note: "horror-adjacent dark fantasy; Tachikawa G-nib for irregular hatching"
+        cross_genre_link: psychological_horror
+      - name: Mohiro Kitoh
+        works: ["Shadow Star Narutaru (1998–2003)", "Bokurano (2003–09)"]
+        url: "https://en.wikipedia.org/wiki/Mohiro_Kitoh"
+        note: "stark, low-tone, psychological-horror dark fantasy; bridges to mecha cluster"
+        cross_genre_link: mecha
+      - name: Mochizuki Minetarō
+        works: ["Dragon Head (1994–99)"]
+        url: "https://en.wikipedia.org/wiki/Mochizuki_Minetar%C5%8D"
+        note: "catastrophe / claustrophobic horror; low-tone, high-ink-density"
+      - name: Akihito Tsukushi
+        works: ["Made in Abyss (2012–)"]
+        url: "https://medium.com/@Naumande/the-visual-art-of-made-in-abyss-c65557c790c1"
+        note: "soft-seinen-fantasy alternative to Berserk; round character + watercolor BG"
+
+    H_token_mapping:
+      animagine_xl_4_0:
+        positive: "monochrome, greyscale, manga, comic, dark fantasy, dense crosshatching, heavy shadows, ink, seinen manga, armor, sword, year 2005, masterpiece, high score"
+        negative: "western comics, dnd, fantasy book cover, frank frazetta, oil painting, painterly, full color, gradient background, soft lighting, airbrush, 3d, cg, photorealistic, hero pose splash art"
+        recommended_lora: "DARK FANTASY XL v1.1 (audit PR #803 — cross-test on Animagine 4.0 required; if degraded, build Phoenix-native)"
+        lora_url: "https://civitai.com/models/1223108/dark-fantasy-xl"
+        lora_license_status: "🟡 — Civitai 6-flag panel verification required"
+      qwen_image:
+        positive: "Anime illustration of a black and white seinen manga page in the Berserk tradition: armored swordsman in heavy crosshatched ink, dense Dore-style hatching on cloak and armor, paper-white highlights with crosshatched midtones, no screentone, dramatic chiaroscuro"
+        negative: "photo, cg, 3d, color, painterly, oil painting, fantasy book cover, soft lighting"
+        empirical_gap: "Qwen-Image base lacks explicit Berserk cluster; smoke-test seinen + gekiga keywords as anchors"
+      flux_schnell:
+        positive: "monochrome manga panel, black and white ink, dense crosshatching, dark fantasy seinen manga, armored warrior, heavy blacks, hatching shadows, no color"
+        negative: "color, painterly, 3d, western comic, fantasy book cover, blurry"
+        empirical_gap: "FLUX-schnell at 4 steps frequently smooths crosshatch into mid-grey wash; smoke-test 4 vs 8 steps + duplicate `dense ink crosshatching` keyword"
+
+  # ── 3. PSYCHOLOGICAL_HORROR ────────────────────────────────────────────────
+  psychological_horror:
+    status: top_8_deep
+    label: "Psychological Horror"
+    operator_role: "2/22 dashboard failures (jp_11, jp_12); operator-flagged drift = 'horror with same line economy as healing'"
+    subgenre_split_recommendation:
+      rationale: "horror has TWO opposing poles (Ito-sparse vs Maruo-dense) with opposite line-density grammars; one config cannot reliably trigger both. Split into _sparse and _dense subgenre configs."
+      configs:
+        psychological_horror_sparse: "Ito-pole; sparse-to-escalating; cosmic-horror cross"
+        psychological_horror_dense: "Maruo-pole; uniform-dense; gothic-romance/ero-guro cross"
+        gekiga_middle: "Umezu/Hino; captured by either config + `gekiga` tag"
+
+    A_line_tradition:
+      line_weight_profile: bipolar_sparse_or_dense
+      stroke_economy: bipolar
+      construction_lines: hidden_non_decorative
+      inking_pressure_dynamics:
+        ito_pole: "neat in normalcy → frayed/jittery as dread escalates"
+        maruo_pole: "uniform-pressure throughout, engraved consistency"
+      exemplar_attributes:
+        - "Ito: starts neat, escalates to panicked hatching as dread builds (dental-technician training shows in flesh detail)"
+        - "Maruo: thin precise ukiyo-e-derived line + German New Objectivity chiaroscuro"
+        - "Umezu/Hino gekiga middle: dramatic slow mood-build, dialog-light"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "30–60% — opposite of iyashikei's 5–15% floor"
+      screentone_strategy: heavy_patterned_dread_stippling
+      halftone_to_solid_black_ratio:
+        ito_pole: "70% hatching/screentone, 30% solid black"
+        maruo_pole: "40% solid black, 60% precise crosshatch"
+      hatching_style: cross_hatching_mandatory_in_both_poles
+      white_space_treatment: "compressed; when present, threatening (Uzumaki's spiral-cloud sky inverts iyashikei's empty-as-restful)"
+
+    C_body_language_expression:
+      face_proportions: realistic_elongated_gekiga
+      expression_frequency_cap: dread_restraint
+      expression_vocabulary: [flat_affect, slack_jawed, eyes_hollow_at_peak, mouth_elongated_at_peak]
+      expression_rule: "pages of frozen affect → single peak panel of distortion (NOT continuous gentle expression like healing)"
+      pose_vocabulary: [stillness, frozen, statuesque, doll_stiff, wrong_angled_loose_limb_hino]
+      hand_drawing: over_articulated_or_doll_stiff
+
+    D_panel_framing:
+      camera_distance_distribution: uncomfortable_in_between_distances_plus_extreme_close_at_peak
+      page_rhythm: dread_escalation_lovecraftian
+      background_detail_density: dense_architectural_or_unsettling_sparse
+      speed_lines_impact_frames:
+        speed_lines: forbidden
+        impact_frames: replaced_by_dread_frames_full_page_reveal_dense_screentone
+
+    E_color_treatment:
+      palette: cold_desaturated_green_black_with_blood_red_accent_only
+      saturation_range: "10–30% base; 60%+ red accents only"
+      color_anchor_mangaka: ito_for_cold_green_viz_deluxe_palette
+      forbidden_palette: [pastel_pink, sparkle_highlight, warm_sunlight, bright_color]
+
+    F_forbidden_drift_patterns:
+      - "smooth line, healing-mode wispy/feathered strokes"
+      - "iyashikei white space, soft lighting, peaceful atmosphere"
+      - "sparkle effects, blush stickers, big-eye shojo proportions"
+      - "speed lines, impact frames"
+      - "warm backgrounds, cottagecore, sunny"
+
+    G_mangaka_exemplars:
+      - name: Junji Ito
+        works: ["Tomie (1987–2000)", "Uzumaki (1998–99)", "Soichi", "Hellstar Remina (2005)"]
+        url: "https://en.wikipedia.org/wiki/Junji_Ito"
+        note: "master of escalating-line-deterioration as panic indicator; sparse-pole anchor"
+        career_phases:
+          - phase: early_tomie_shojo_horror_magazine
+            era: "1987–2000s"
+            characteristic: "sparser, cleaner shojo-adjacent line (Tomie ran in Monthly Halloween shojo-horror)"
+          - phase: post_2010_expansion
+            era: "2010–"
+            characteristic: "denser screentone use, fully developed cross-hatch dread vocabulary"
+      - name: Suehiro Maruo
+        works: ["Mr. Arashi's Amazing Freak Show / Shōjo Tsubaki (1984)", "The Strange Tale of Panorama Island (2008, Edogawa Ranpo adaptation)", "Ultra-Gash Inferno"]
+        url: "https://en.wikipedia.org/wiki/Suehiro_Maruo"
+        note: "ero-guro engraver — Taisho woodblock + German New Objectivity in thin uniform line; dense-pole anchor"
+      - name: Kazuo Umezu
+        works: ["The Drifting Classroom (1972–74)", "Reptilia/Hebi Onna (1960s)", "Cat Eyed Boy (1967)"]
+        url: "https://en.wikipedia.org/wiki/Kazuo_Umezu"
+        note: "god of horror manga; shojo-aesthetic + folk-horror imagery hybrid; gekiga-middle anchor"
+      - name: Hideshi Hino
+        works: ["Panorama of Hell (1982)", "Hell Baby (1982)", "Bug Boy (1975)"]
+        url: "https://www.popmatters.com/116412-masters-of-horror-manga-kazuo-umezu-and-hideshi-hino-2496128691.html"
+        note: "childlike rounded line undercut by abject body horror"
+      - name: Daijiro Morohoshi
+        works: ["Yōkai Hunter (1974)", "Mud Men (1975–82)", "Ankoku Shinwa (1976)"]
+        url: "https://en.wikipedia.org/wiki/Daijiro_Morohoshi"
+        note: "surrealist-horror via Dalí/Bosch/de Chirico; folkloric cosmic dread"
+      - name: Shigeru Mizuki
+        works: ["Hakaba Kitarō kashibon (1950s–60s)", "Showa: A History of Japan (1988–89)"]
+        url: "https://en.wikipedia.org/wiki/Shigeru_Mizuki"
+        note: "yōkai canon-builder; horror-adjacent with comic-grotesque blend"
+        career_phases:
+          - phase: kashibon_kamishibai_era
+            era: "1950s–early 60s"
+            characteristic: "rough rental-comic line, traveling-paper-drama framing"
+          - phase: late_memoir_era
+            era: "1988–89+"
+            characteristic: "photo-traced realism beside cartoonish Mizuki figures"
+      - name: Hiroaki Samura
+        works: ["Blade of the Immortal (1993–2012)"]
+        url: "https://en.wikipedia.org/wiki/Hiroaki_Samura"
+        note: "horror-adjacent gekiga; charcoal-textured ink density"
+      - name: Kanako Inuki
+        works: ["Presents (1990s)", "School Zone"]
+        url: "https://en.wikipedia.org/wiki/Kanako_Inuki"
+        note: "horror-shojo hybrid; bridge case for Umezu lineage"
+
+    H_token_mapping:
+      animagine_xl_4_0:
+        positive_ito_pole: "monochrome, greyscale, manga, horror, sketch, ink (medium), cross-hatching, screentone, gekiga, comic, year 2007, masterpiece, high score"
+        positive_maruo_pole: "monochrome, dense linework, ero guro, gekiga, etching, taisho era, masterpiece"
+        negative: "iyashikei, soft lighting, sparkle, bloom, pastel, healing, shoujo, blush, sunny, lens flare, low contrast"
+        empirical_caveat: "ero guro may push NSFW gating — pair with `sensitive` rating tag, not `explicit`"
+        recommended_loras_to_explore:
+          - "https://civitai.com/models/79155/junji-ito-style-sdxl-now-supported"
+          - "https://civitai.com/models/126608/sdxl-horror-style"
+        lora_license_status: "🟡 — verify Civitai 6-flag commercial settings"
+      qwen_image:
+        positive_ito_pole: "A monochrome manga panel in the style of Junji Ito horror manga, dense crosshatch shading, screentone dread, escalating linework, no color"
+        positive_maruo_pole: "Black and white ero-guro manga in the style of Suehiro Maruo, thin precise lines, Taisho woodblock influence, chiaroscuro, etched texture"
+        negative: "NOT a healing iyashikei scene, NOT soft pastel"
+        empirical_caveat: "Qwen has weaker booru-tag parsing than Animagine; prefer prose. `screentone halftone` literal token produces faded grayscale; supplement with `high contrast black ink, no grey wash` (https://lilting.ch/en/articles/manga-bw-workflow-test-draft)"
+      flux_schnell:
+        positive: "Junji Ito horror manga panel, monochrome ink illustration, dense cross-hatching, screentone dread shading, gekiga style, high contrast black and white, no color, oppressive atmosphere"
+        no_negative_prompts_available: true
+        counter_bias_workaround: "add `avoid soft pastel, avoid sunlit warmth` as positive descriptors per FLUX workaround syntax"
+        empirical_gap: "FLUX-schnell tends to add color drift even with `monochrome`; recommend post-process desaturation in pipeline or grain LUT"
+
+  # ── 4. MECHA ───────────────────────────────────────────────────────────────
+  mecha:
+    status: top_8_deep
+    label: "Mecha"
+    operator_role: "single most-flagged failure across cookbook + community-audit + this PR; operator-flagged drift = 'framed like Western concept art / no mecha visible'"
+
+    A_line_tradition:
+      line_weight_profile: variable_uniform_on_plates_tapered_on_cables
+      stroke_economy: low_on_background_high_on_hero
+      construction_lines: hidden_in_finished_panels_visible_in_schematic_inserts
+      inking_pressure: architectural_draftsman
+      exemplar_attributes:
+        - "fine even line over dense schematic detail (Shirow, Appleseed/GitS — uses straight-edge rules and french curves)"
+        - "subtle/spartan figure line + dense purposeful background line (Otomo Akira)"
+        - "gritty weathered zimmerit-style hatching on armor skirts (Kondo Gundam 0079)"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "25–45% — high; mecha cast deep cockpit shadows, joint cavities, intake voids"
+      screentone_strategy: heavy_patterned_3_to_5_densities_per_panel
+      halftone_to_solid_black_ratio: balanced
+      hatching_style: parallel_following_curved_armor_plane
+      white_space_treatment: "rare and load-bearing — chrome highlights, cockpit glass glare"
+
+    C_body_language_expression:
+      face_proportions:
+        pilot: seinen_realist_or_shonen_realist_hybrid
+        mech_separately_drawn: rigid_industrial
+      expression_frequency_cap: pilot_relaxed_in_cockpit_mech_rigid
+      pose_vocabulary:
+        mech: [stance, kneel, thruster_burn]
+        pilot: [seated_in_cockpit, casual_off_duty]
+      hand_drawing:
+        mech_hands: always_articulated_knuckle_segment_visible
+        human_hands: often_cropped_or_gloved
+
+    D_panel_framing:
+      camera_distance_distribution: "wide establishing → medium 3/4 mech action → cockpit close-up → extreme close-up HUD/eye"
+      page_rhythm: establishing_splash_at_chapter_start_tight_5_to_8_grids_in_combat_full_bleed_for_finishing
+      background_detail_density:
+        establishing: very_high_otomo_shirow_level
+        combat: aggressively_reduced_to_speed_lines
+      speed_lines_impact_frames:
+        speed_lines: radial_from_thruster_point
+        impact_frames: full_bleed_silhouette_white_flash
+
+    E_color_treatment:
+      default_register: bw_with_spot_color_on_chapter_splash
+      full_color_register: shirow_intron_depot_airbrush_cel
+      color_anchor_mangaka_saturated: shirow
+      color_anchor_mangaka_desaturated: kondo
+
+    F_forbidden_drift_patterns:
+      - "atmospheric perspective on the mech (manga mecha is sharp-edged, never soft-edged)"
+      - "airbrush rim-light (anime cel grammar, not manga)"
+      - "hide-the-mech-behind-dust/lens-flare (manga mecha is hardware-celebrated)"
+      - "pilot drawn at same scale-detail as mech (kills mech visual dominance)"
+      - "omitted panel borders (mecha pages depend on panel grid for sequence-of-action)"
+      - "western mech: Pacific Rim, Hollywood mech, octane render, unreal engine"
+
+    G_mangaka_exemplars:
+      - name: Masamune Shirow
+        works: ["Appleseed (1985–89)", "Ghost in the Shell (1989–97)", "Dominion (1986)"]
+        url: "https://en.wikipedia.org/wiki/Masamune_Shirow"
+        note: "densest schematic line in genre; influenced the Wachowskis"
+        career_phases:
+          - phase: cyberpunk_mecha_pen
+            era: "1985–1997"
+            characteristic: "panel-manga line tradition, schematic density"
+          - phase: post_1997_illustration_painted
+            era: "1997–"
+            characteristic: "less manga linework, more painted illustration — DON'T use as line-art reference"
+      - name: Katsuhiro Otomo
+        works: ["Dōmu (1980–81)", "Akira (1982–90)", "Steamboy (2004)"]
+        url: "https://en.wikipedia.org/wiki/Katsuhiro_Otomo"
+        note: "architectural mecha-cityscape gold standard"
+        career_phases:
+          - phase: pre_akira_new_wave
+            era: "1973–1981"
+            characteristic: "thinner lines, less mechanical density"
+          - phase: akira_peak_panel_manga
+            era: "1982–1990"
+            characteristic: "the architectural mecha-cityscape gold standard"
+          - phase: post_akira_film_illustration
+            era: "1990–"
+            characteristic: "animation/illustration register, NOT panel-manga"
+      - name: Kazuhisa Kondo
+        works: ["Mobile Suit Gundam 0079 (1986–87)", "Char's Deleted Affair (1988+)"]
+        url: "https://www.zimmerit.moe/kazuhisa-kondo-interview-gundam-mecha-advanced-operation/"
+        note: "gritty-weathered mil-mecha; zimmerit + field-overcoat aesthetic"
+      - name: Yukito Kishiro
+        works: ["Battle Angel Alita / Gunnm (1990–95)", "Last Order (2000–14)"]
+        url: "https://en.wikipedia.org/wiki/Battle_Angel_Alita"
+        note: "cyborg-mecha hybrid; finer line than Shirow, more anatomical"
+      - name: Yoshiyuki Sadamoto
+        works: ["Neon Genesis Evangelion manga (1994–2013)"]
+        url: "https://en.wikipedia.org/wiki/Yoshiyuki_Sadamoto"
+        note: "biomechanical register; softer character line + rigid mecha line"
+      - name: Mohiro Kitoh
+        works: ["Bokurano (2003–09)", "Shadow Star (1998–2004)"]
+        url: "https://en.wikipedia.org/wiki/Mohiro_Kitoh"
+        note: "stark, low-screentone; pediatric protagonists vs industrial mech"
+      - name: Yoshikazu Yasuhiko
+        works: ["Mobile Suit Gundam: The Origin (2001–11)", "Crusher Joe"]
+        url: "https://en.wikipedia.org/wiki/Yoshikazu_Yasuhiko"
+        note: "classical key-animator-as-mangaka; brush-on-Kent-paper, no white ink, hand-inked solid blacks"
+
+    H_token_mapping:
+      animagine_xl_4_0:
+        positive: "mecha, mecha musume optional, science fiction, robot, mobile suit, cockpit, pilot suit, monochrome, greyscale, comic, manga, screentone, panel, year 2005, masterpiece, high score"
+        negative: "western comics, 3d, cg, photorealistic, concept art, painterly, oil painting, blurry, soft lighting, gradient sky, key visual"
+        why_year_2005: "deliberately invokes pre-modern-painterly-anime cluster — pushes away from glossy 2024 illustration style"
+        recommended_lora: "Super Robot Diffusion XL (audit PR #803 — but Illustrious-XL base is commercial-blocked; cross-test on Animagine 4.0 required, build Phoenix-native if degraded)"
+      qwen_image:
+        positive: "Anime illustration of a manga panel showing a giant mecha pilot and his mobile suit in monochrome ink with screentone shading, low angle shot, dense mechanical detail on armor plates, in the style of 1990s seinen mecha manga"
+        negative: "photo, cg, 3d, western comic, oil painting, painterly"
+        empirical_gap: "literature on Qwen-Image × mecha-genre tokens is thin; smoke-test `Anime illustration of` prefix vs omitting across 8 fixed seeds"
+      flux_schnell:
+        positive: "monochrome manga panel, black and white, mecha mobile suit pilot in cockpit, dense mechanical line art, hatching, screentone shading, seinen manga style, comic panel border"
+        negative: "blurry, low quality, color, photorealistic, 3d, western comic"
+        empirical_gap: "FLUX-schnell at 4 steps loses mechanical edge sharpness; smoke-test 4 vs 8 steps"
+
+  # ── 5. ROMANCE (josei-adult register) ──────────────────────────────────────
+  romance:
+    status: top_8_deep
+    label: "Romance (Josei-Adult Register)"
+    operator_constraint: "EXPLICITLY josei-adult register, NOT shojo-teen sparkle"
+
+    A_line_tradition:
+      line_weight_profile: economical_loose_or_western_trained_precise
+      stroke_economy: very_high
+      construction_lines:
+        okazaki: "geometric grids, right angles, repetitive straight lines (Helter Skelter — panel composition resembling electric circuits)"
+        higashimura: "clean elegant detailed"
+      inking_pressure: quick_less_reworked_deliberately_imperfect
+      exemplar_attributes:
+        - "few lines but the right ones, precisely evocative of desired emotion (Okazaki)"
+        - "loose reckless penwork conveying energy + abandon (Okazaki Helter Skelter)"
+        - "Florence-trained oil-painting precision + texture capture (Yamazaki)"
+        - "photo-traced backgrounds (B&W converted) under hand-drawn realistic character lines (Asano post-Punpun)"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "10–25% — between iyashikei (5–15%) and horror (30–60%)"
+      screentone_strategy: sparse_mood_tones_not_decorative
+      halftone_to_solid_black_ratio: "higher solid-black than shojo; harsh contrast preferred (Okazaki signature)"
+      hatching_style: minimal_parallel_for_shadow
+      white_space_treatment: "restrained — emotionally compressed not airy; interior-monologue space not iyashikei breath"
+
+    C_body_language_expression:
+      face_proportions:
+        josei_eyes: "realistic-mature, NOT shojo big-eye; eyes ≤ 1/4 face, not 1/2"
+        josei_lips: "thicker than shojo average — small eyes + thicker lips combination is the canonical josei face"
+      expression_frequency_cap: glance_economy_not_sparkle
+      expression_vocabulary: [glance, gesture, turned_away_profile, restrained_smile, neutral_lit_with_eye_only]
+      pose_vocabulary: [sitting, leaning, walking, hands_occupied_cigarette_phone_drink]
+      hand_drawing: articulated_working_hands_okazaki_fashion_lineage
+
+    D_panel_framing:
+      camera_distance_distribution: medium_shots_plus_intimate_close_ups
+      signature_shot: off_center_medium_with_environmental_context
+      page_rhythm: slow_burn_emotional_reveal
+      background_detail_density: contextual_realistic_apartment_clutter_cafe_train
+      speed_lines_sparkle_effects: forbidden
+
+    E_color_treatment:
+      palette: muted_earth_cream_taupe_dusty_rose_sage_mocha_charcoal
+      accent: soft_pink_or_coral_only_not_default
+      saturation_range: "20–40% base"
+      color_anchor_mangaka_phase: asano_dededede_saturated_pop_over_muted
+      forbidden_palette: [pink_purple_default, sparkle_highlight, bright_pastel]
+
+    F_forbidden_drift_patterns:
+      - "sparkle-effect (single biggest shojo tell)"
+      - "bow-mouth (1990s shojo signal; modern josei moved past)"
+      - "shojo-eye proportions (eyes = 1/2 face)"
+      - "pink-purple palette default (use muted earth)"
+      - "flower-bubble background (use real interiors)"
+      - "hair-tucking, hands-clasped-to-chest, teen-coded gesture vocabulary"
+
+    G_mangaka_exemplars:
+      - name: Kyoko Okazaki
+        works: ["Pink (1989)", "River's Edge (1993–94)", "Helter Skelter (1995–96)"]
+        url: "https://en.wikipedia.org/wiki/Kyoko_Okazaki"
+        note: "foundational 90s josei — economical line, fashion-illustration energy, harsh B&W contrast (career ended 1996 traffic accident)"
+      - name: Inio Asano
+        works: ["Solanin (2005–06)", "Goodnight Punpun (2007–13)", "Dead Dead Demon's Dededede Destruction (2014–22)"]
+        url: "https://en.wikipedia.org/wiki/Inio_Asano"
+        note: "modern adult-literary romance floor; photo-traced realism + cartoon-emotion-avatar"
+        career_phases:
+          - phase: monochrome_dominant_pre_dededede
+            era: "2005–2013"
+            characteristic: "Solanin/Punpun/Nijigahara: monochrome, photo-traced BG, cartoon Punpun split"
+          - phase: post_dededede_full_color
+            era: "2014–2022"
+            characteristic: "saturated pop palette over muted backgrounds; full-color register"
+      - name: Mari Yamazaki
+        works: ["Thermae Romae (2008–13)", "Olympia Kyklos (2018–)", "Plinius (2014–)"]
+        url: "https://en.m.wikipedia.org/wiki/Mari_Yamazaki"
+        note: "Florence-trained line precision; comedic josei-seinen-crossover with classical-realism BG"
+      - name: Hisaya Nakajo
+        works: ["Hana-Kimi (1996–2004)", "Sugar Princess (2007)"]
+        url: "https://en.wikipedia.org/wiki/Hisaya_Nakajo"
+        note: "shojo-published but career-late style softens toward josei-rounded; shojo→josei transition reference"
+      - name: Akiko Higashimura
+        works: ["Princess Jellyfish / Kuragehime (2008–2017)", "Tokyo Tarareba Girls (2014–17)"]
+        url: "https://en.wikipedia.org/wiki/Akiko_Higashimura"
+        note: "Kanazawa oil-painting trained; clean elegant line; rhythm-virtuoso panel layouts"
+        career_phases:
+          - phase: comedic_shojo_register
+            era: "2008–2017"
+            characteristic: "Kuragehime — Eisner-shortlist; comedy-josei crossover"
+          - phase: mature_josei_register
+            era: "2014–2017"
+            characteristic: "Tokyo Tarareba Girls — sharper line economy, denser adult-anxiety thematic load"
+      - name: Moyoco Anno
+        works: ["Sakuran (2003)", "Happy Mania (1996–2001)"]
+        url: "https://en.wikipedia.org/wiki/Moyoco_Anno"
+        note: "josei canon, fashion-illustration lineage parallel to Okazaki"
+      - name: Erica Sakurazawa
+        works: ["Between the Sheets (1996)", "Angel Nest (1999)"]
+        url: "https://en.wikipedia.org/wiki/Erica_Sakurazawa"
+        note: "90s josei in Vertical translation lineup"
+      - name: Mari Okazaki
+        works: ["Suppli (2004–13)"]
+        url: "https://en.wikipedia.org/wiki/Suppli"
+        note: "workplace-adult josei"
+
+    H_token_mapping:
+      animagine_xl_4_0:
+        positive: "1girl, adult woman, mature female, josei, realistic eye proportions, monochrome, manga, slice of life, year 2010, masterpiece, high score"
+        positive_asano_pole: "+ photo background, realistic background, urban Tokyo"
+        positive_higashimura_pole: "+ clean linework, comedic, expressive"
+        negative: "shoujo, sparkle, glitter, bloom, big eyes, sparkling eyes, star eyes, blush stickers, flower background, frilly, kawaii, child, teen, pastel pink, bow mouth"
+        empirical_caveat: "single `josei` token alone is unreliable on Animagine; stack 3–4 explicit-attribute tokens"
+        no_dedicated_josei_style_lora: "as of 2026-05; genre best triggered via stacked descriptors"
+      qwen_image:
+        positive_okazaki_pole: "A monochrome josei manga panel in the style of Kyoko Okazaki, sparse confident linework, harsh black and white contrast, urban Tokyo setting, adult woman with realistic proportions"
+        positive_asano_pole: "A josei manga panel in the style of Inio Asano, photo-realistic Tokyo apartment background, hand-drawn adult character, muted color palette, restrained emotional expression"
+        counter_bias_prefix: "NOT shoujo, NOT sparkle effects, NOT big anime eyes, NOT pastel pink"
+      flux_schnell:
+        positive: "Josei manga panel, adult woman, Inio Asano style realism, muted earth palette, urban Tokyo apartment background, restrained intimate medium shot, no sparkle, no big anime eyes, muted desaturated, soft contrast, cream and taupe palette"
+        empirical_caveat: "FLUX-schnell defaults brighter than josei requires; explicitly add `muted desaturated, soft contrast, cream and taupe palette` early in prompt"
+
+      empirical_token_priority_summary: |
+        Reliable josei-vs-shojo shifters in priority order:
+        1. Explicit attribute tokens — `realistic eye proportions, small eyes, mature female, adult` (most reliable across all 3 bases)
+        2. The `josei` tag (strong on Animagine, weak on Qwen, weak on FLUX without anchor mangaka name)
+        3. Anchor mangaka names — `Kyoko Okazaki, Inio Asano, Akiko Higashimura` (strong on Qwen and FLUX which have broader natural-language priors, weaker on Animagine)
+        Best practice: stack all three layers.
+
+  # ── 6. SLICE_OF_LIFE ───────────────────────────────────────────────────────
+  slice_of_life:
+    status: top_8_deep
+    label: "Slice of Life"
+    operator_role: "2/22 dashboard rows; anchors the 'quiet drawing tradition' reference set"
+    boundary_distinction: "distinct from iyashikei — SOL allows conflict, peaks, broader emotional range; allows comedic AND dramatic beats but does not centerpiece them"
+
+    A_line_tradition:
+      line_weight_profile: variable_intentionally_inconsistent_across_moments
+      stroke_economy: medium
+      construction_lines: hidden
+      inking_pressure: medium_dynamic_with_slight_emphasis_at_jaw_hair_folds
+      exemplar_attributes:
+        - "deliberately different line for protagonist vs world (Yotsuba cartoony in documentary-realistic environment)"
+        - "yonkoma minimal-line register (Kakifly K-On!) vs full-page documentary register (Azuma Yotsuba)"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "10–25%"
+      screentone_strategy: medium_for_clothing_hair_shadow_ambient_mood_not_action
+      halftone_to_solid_black_ratio: "2:1 halftone"
+      hatching_style: medium_economy
+      white_space_treatment: "25–40% — less than iyashikei; the page is fuller"
+
+    C_body_language_expression:
+      face_proportions: anime_realistic_soft
+      expression_frequency_cap: medium
+      expression_vocabulary: [wider_than_iyashikei_not_gag_peaks, deliberately_varied_per_chapter]
+      pose_vocabulary: full_natural_running_jumping_hugging_mild_pratfalls
+      hand_drawing: careful_anatomical_extensive_erasure_for_important_frames
+
+    D_panel_framing:
+      camera_distance_distribution: "45% medium / 25% close / 20% wide / 10% extreme"
+      page_rhythm:
+        yonkoma_format: fixed_4_panel_kakifly_aoki_ume
+        full_page_format: irregular_5_to_8_panel_azuma
+      background_detail_density:
+        yonkoma: sparse_kakifly_minimal
+        full_page: rich_azuma_photograph_like
+      speed_lines_impact_frames: occasional_restrained_soft_motion_only
+
+    E_color_treatment:
+      palette_aoki_pole: pastel_candy
+      palette_azuma_pole: naturalistic_with_saturated_key_items
+      palette_afro_pole: earth_and_sky
+      color_anchor_soft_pastel: aoki_ume
+      color_anchor_naturalistic: azuma
+
+    F_forbidden_drift_patterns:
+      - "deformation-gag (slips into comedy — central SOL/comedy boundary)"
+      - "peaked linework (maintain consistent line register across pages)"
+      - "impact frames (reserved for comedy or shonen)"
+
+    G_mangaka_exemplars:
+      - name: Kiyohiko Azuma
+        works: ["Azumanga Daioh (1999–2002)", "Yotsuba&! (2003–)"]
+        url: "https://en.wikipedia.org/wiki/Kiyohiko_Azuma"
+        note: "the SOL anchor; deliberate dual-register (cartoony protagonist + documentary world)"
+        career_phases:
+          - phase: azumanga_yonkoma_experimental
+            era: "1999–2002"
+            characteristic: "yonkoma-comedy phase, sharper experimental designs (10th anniversary reissue redrawn in Yotsuba register)"
+          - phase: yotsuba_documentary_realism
+            era: "2003–"
+            characteristic: "full-page documentary realism, rounded designs, expanded backgrounds"
+      - name: Aoki Ume
+        works: ["Hidamari Sketch (2004–)"]
+        url: "https://en.wikipedia.org/wiki/Hidamari_Sketch"
+        note: "pastel SOL/iyashikei crossover, yonkoma"
+      - name: Kakifly
+        works: ["K-On! (2007–2012)", "K-On! College (2013)", "K-On! Shuffle (2018–)"]
+        url: "https://en.wikipedia.org/wiki/K-On!"
+        note: "minimal-background yonkoma SOL"
+      - name: Hikaru Nakamura
+        works: ["Saint Young Men / Seinto Oniisan (2006–)"]
+        url: "https://en.wikipedia.org/wiki/Saint_Young_Men"
+        note: "religious-mundane SOL with comedy edges; clean lines, restrained deformation"
+      - name: Inio Asano
+        cross_genre_link: romance
+        career_phases:
+          - phase: solanin_pen_realism_with_comedic_faces
+            era: "2005–2006"
+            characteristic: "early phase, exaggerated comedic faces in places — the SOL register of Asano"
+          - phase: punpun_photo_traced_bg_with_bird_avatar
+            era: "2007–2013"
+            characteristic: "mid phase; SOL-with-grief register"
+          - phase: dededede_full_color_dense_tonework
+            era: "2014–2022"
+            characteristic: "full-color register; SOL slips into post-apocalyptic-romance register"
+        note: "Asano's career spans SOL, romance, and supernatural_everyday; phase-tag mandatory"
+      - name: Fumi Yoshinaga
+        works: ["Antique Bakery (1999–2002)"]
+        url: "https://en.wikipedia.org/wiki/Antique_Bakery"
+        note: "shoujo SOL/josei crossover; very thin elegant line, expression-led"
+      - name: Atto
+        works: ["Non Non Biyori (2007–2021)"]
+        url: "https://en.wikipedia.org/wiki/Non_Non_Biyori"
+        note: "rural SOL with strong iyashikei lean; SOL/iyashikei boundary case"
+
+    H_token_mapping:
+      animagine_xl_4_0:
+        positive: "masterpiece, absurdres, slice of life, school uniform, casual clothes, 2girls, detailed background, soft expression, peaceful atmosphere, year 2024"
+        negative: "lowres, worst quality, chibi, super deformed, exaggerated expression, action lines"
+      qwen_image:
+        positive: "clean-line anime slice-of-life manga page, two friends in a kitchen, naturalistic backgrounds, gentle warm lighting, soft pastel palette, balanced page composition"
+        negative: "chibi deformation, dramatic action, speed lines, dark mood"
+      flux_schnell:
+        positive: "clean anime manga panel, slice of life, schoolgirls chatting, detailed interior, natural light, soft tone"
+        negative: "chibi, super deformed, harsh shadows, action burst"
+
+  # ── 7. FANTASY_ADVENTURE (incl. isekai) ────────────────────────────────────
+  fantasy_adventure:
+    status: top_8_deep
+    label: "Fantasy Adventure (incl. isekai)"
+    operator_role: "1/22 dashboard rows (jp_16 isekai-recovery); plus globally top-volume genre"
+    register_family_note: "the WIDEST-spectrum genre in canonical-25 — splintered across 4 mainline registers + 3 isekai sub-registers"
+
+    register_family_split:
+      shonen_fantasy: "Toriyama / Oda / Arakawa lineage — uniform light-medium line, kinetic action grammar"
+      seinen_fantasy: "Inoue Vagabond / Miura Berserk / Tsukushi Made in Abyss — variable heavy or watercolor-influenced"
+      quiet_fantasy: "Tsukasa Abe Frieren — uniform medium, deceptively simple, deadpan-melancholy"
+      classical_fantasy: "Yoshikazu Yasuhiko Gundam Origin — clean key-frame, brush-on-Kent-paper"
+
+    isekai_subregister_split:
+      isekai_recovery: "karoshi-reincarnation iyashikei; shonen-fantasy line + iyashikei pacing; warm pastoral palette"
+      isekai_power_fantasy: "light-novel adaptation; status-screen UI overlays; saturated cover; harem-composition variants"
+      isekai_cultivation: "manhwa-adjacent webtoon-vertical full-color; 3D-cel-shading + qi-aura-particles"
+
+    A_line_tradition:
+      line_weight_profile: bipolar_per_register
+      register_specifics:
+        shonen_fantasy: "uniform light-to-medium, flat pen pressure, weight-contrast at outline-vs-interior level"
+        seinen_fantasy_berserk: "variable heavy brush; minute crosshatching"
+        seinen_fantasy_made_in_abyss: "round/circular character construction + watercolor-influenced backgrounds + ink-wash"
+        quiet_fantasy_frieren: "uniform medium, deceptively simple — clean panels create quiet stillness"
+        classical_fantasy_yasuhiko: "Sakuyo brush direct on BB Kent paper, no preliminary sketches, no white ink"
+      stroke_economy: register_dependent
+      construction_lines: hidden_in_finished
+      inking_pressure: register_dependent
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio_spread:
+        quiet_fantasy_frieren: "10–15%"
+        shonen_fantasy: "20–30%"
+        classical_fantasy_yasuhiko: "20–25%"
+        seinen_fantasy_made_in_abyss: "30–45% with ink-wash tonal field"
+        seinen_fantasy_berserk: "50%+ hand-stippled near-engraving density"
+      screentone_strategy_per_register:
+        frieren: minimal
+        shonen_fantasy_classical: heavily_patterned
+        miura: hand_stippled_pre_1998_or_digital_post
+        tsukushi: ink_wash_tonal_field
+        yasuhiko: almost_zero_tone_solid_black
+
+    C_body_language_expression:
+      iconic_character_dependence: "the most iconic-character-dependent genre after mecha — protagonist must be visually distinctive enough for 50–200 chapter serialization"
+      hair_as_silhouette_id_examples: [goku_spike, luffy_strawhat_x_scar, frieren_pointed_elf_ears_twin_tails, guts_white_streak_eyepatch_prosthetic, sung_jinwoo_black_shaggy_fringe]
+      wardrobe_as_class_marker:
+        seinen_fantasy: "armor is load-bearing storytelling (Berserker armor, Vagabond swordsman robes)"
+        shonen_fantasy: "uniform-style outfits readers can re-draw from memory (Goku's gi, Luffy's vest-shorts)"
+      expression_frequency_cap_widest_in_canonical_25: "Frieren deadpan-melancholy → Berserk death-mask rage → Toriyama wide-eyed surprise"
+
+    D_panel_framing:
+      three_beat_dominant_rhythm: "ornate_establishing → dynamic_action → quiet_character_moment"
+      ornate_establishing_anchors: [vagabond_inoue, made_in_abyss_tsukushi]
+      dynamic_action_anchors: [toriyama_speed_line_template, oda_arakawa_inheritance]
+      quiet_moment_anchors: [frieren_2_to_3_page_silent_panels]
+      background_detail_density: "inversely correlated with sub-register: ornate-fantasy = high; quiet-fantasy = sparse with atmospheric haze"
+
+    E_color_treatment:
+      palette_per_subregister:
+        frieren_quiet_fantasy: cool_muted_blue_gray_dominant_snow_forest
+        classical_shonen_toriyama_oda: high_saturation_primary_sky_blue_sunset_orange_grass_green_flat_fills_no_gradient
+        seinen_dark_made_in_abyss_berserk: desaturated_moss_green_ochre_blood_red_accents
+        manhwa_cultivation_solo_leveling: full_color_throughout_vertical_scroll_saturated_cinematic_blue_purple_aura
+
+    F_forbidden_drift_patterns:
+      - "western book-cover/DnD splash art (no Wayne Reynolds / Larry Elmore single-figure-heroic-pose-centered composition)"
+      - "Lord of the Rings concept art (no Alan Lee / John Howe atmospheric watercolour realism for character work — Tsukushi is the ONLY exception)"
+      - "Pacific Rim / Western mecha (mecha-adjacent fantasy must use Yasuhiko classical mechanical line)"
+      - "Marvel/DC superhero comics (no 1990s X-Men heavy-musculature anatomy)"
+      - "western-DnD wardrobe defaults (plate-mail full-helms with crucifixes drift toward European medievalism)"
+
+    G_mangaka_exemplars:
+      - name: Akira Toriyama
+        works: ["Dr. Slump (1980–84)", "Dragon Ball (1984–95)", "Sand Land (2000, revived 2024)"]
+        url: "https://en.wikipedia.org/wiki/Sand_Land"
+        note: "foundational shonen-fantasy line"
+        career_phases:
+          - phase: dr_slump_cartoon_domestic
+            era: "1980–1984"
+            characteristic: "round-line gag-shonen pre-square-line phase"
+          - phase: dragon_ball_kinetic_shonen_fantasy
+            era: "1984–1995"
+            characteristic: "Tenkaichi-Frieza-Cell phase: square-line battle grammar codified"
+          - phase: sand_land_refined_prestige
+            era: "2000, 2024 revival"
+            characteristic: "more consistent than Dragon Ball; tankōbon-prestige register"
+      - name: Eiichiro Oda
+        works: ["One Piece (1997–)"]
+        url: "https://en.wikipedia.org/wiki/One_Piece"
+        note: "direct Toriyama lineage; rubbery deformation + bleed-edge action; #1 Oricon 2025"
+      - name: Hiromu Arakawa
+        works: ["Fullmetal Alchemist (2001–10)", "Silver Spoon", "Daemons of the Shadow Realm"]
+        url: "https://en.wikipedia.org/wiki/Hiromu_Arakawa"
+        note: "darker-shonen-fantasy register; cites Suihō Tagawa, Rumiko Takahashi, Mizuki, Mike Mignola as line lineage"
+      - name: Kentaro Miura
+        cross_genre_link: dark_fantasy
+        note: "see dark_fantasy section for full phase split — Berserk is reference for ALL dark-fantasy adjacents in fantasy_adventure"
+      - name: Takehiko Inoue
+        cross_genre_link: dark_fantasy
+        note: "see dark_fantasy section — Vagabond is the brush-fantasy reference, Slam Dunk is sports register"
+      - name: Akihito Tsukushi
+        works: ["Made in Abyss (2012–)"]
+        url: "https://en.wikipedia.org/wiki/Akihito_Tsukushi"
+        note: "round-form character construction + watercolour-influenced backgrounds; soft-seinen-fantasy alternative to Berserk"
+      - name: Tsukasa Abe
+        works: ["Frieren: Beyond Journey's End (2020–, illustrator; writer Kanehito Yamada)"]
+        url: "https://frieren.fandom.com/wiki/Abe_Tsukasa"
+        note: "canonical quiet-fantasy reference; #3 Oricon 2024; minimal line, deadpan expression, atmospheric restraint"
+      - name: Yoshikazu Yasuhiko
+        cross_genre_link: mecha
+        note: "see mecha section — classical key-frame line; reference for prestige-tankōbon fantasy_adventure"
+
+    H_token_mapping:
+      animagine_xl_4_0:
+        baseline: "fantasy_adventure covered by Animagine 4.0 base out-of-box per audit PR #803"
+        sub_register_push:
+          berserk_dark_seinen: "dark_fantasy, dark_souls_inspired, heavy_armor, gothic_armor, grimdark, high_contrast, dramatic_shadows, ink_heavy, crosshatching, monochrome, intricate_details, baroque_horror"
+          frieren_quiet_fantasy: "elf, long_ears, calm_expression, deadpan, soft_lighting, muted_colors, watercolor_background, snowy_landscape, minimal_shading, peaceful, melancholic, gentle_smile"
+          classical_shonen_toriyama_oda: "dragon_ball_style OR one_piece_style, dynamic_pose, action, vibrant_colors, clear_lineart, exaggerated_expression, speed_lines"
+          made_in_abyss_soft_seinen: "made_in_abyss_inspired, watercolor_background, round_character_design, ornate_environment, dungeon_descent, soft_lighting, child_protagonist, baroque_creatures"
+          yasuhiko_classical_prestige: "classical_anime_style, clean_lineart, retro_anime_70s_80s, gundam_origin_inspired, key_frame_quality, hand_inked_appearance"
+      qwen_image:
+        positive_template: "manga panel in the style of [SUBREGISTER ANCHOR] — [PROTAGONIST DESCRIPTION], [PALETTE], [PANEL COMPOSITION], [TRADITION TAG]"
+        sub_register_examples:
+          frieren: "manga panel in the style of Frieren — quiet elf protagonist, deadpan expression, muted blue-gray palette, minimal screentone, atmospheric forest background, monochrome ink"
+        strength: "best base for re-styling existing storyboard frame to a target sub-register"
+      flux_schnell:
+        note: "natural-language prompts; preserves global composition better than Animagine but loses tag-precision character ID"
+        recommendation: "pair with Animagine for character-locked panels"
+      isekai_recovery_specific:
+        animagine_push: "slow_life, peaceful, countryside, warm_lighting, gentle_protagonist, daily_life, no_combat, healing_atmosphere, soft_pastel_palette"
+        avoid: "dynamic_action, dark_fantasy"
+      isekai_power_fantasy_specific:
+        animagine_push: "light_novel_adaptation_style, RPG_status_screen, magical_aura, level_up_effect, fantasy_classes, harem_composition (if applicable), vibrant_action"
+      isekai_cultivation_specific:
+        animagine_push: "manhwa_style, webtoon_vertical_format, full_color, cel_shaded, aura_effects, overpowered_protagonist, dark_lord_aesthetic, korean_fantasy"
+
+  # ── 8. COMEDY ──────────────────────────────────────────────────────────────
+  comedy:
+    status: top_8_deep
+    label: "Comedy"
+    operator_role: "stillness_jp_27 working anchor (per operator's preempted top-8); inverse of iyashikei on most axes"
+    central_rule: "comedy MUST use deformation; without deformation it slips into SOL with jokes"
+
+    A_line_tradition:
+      line_weight_profile: variable_reactive
+      stroke_economy: variable_setup_economical_gag_chaotic
+      construction_lines: hidden_but_loose_wobble_visible_at_speed
+      inking_pressure: dynamic_heavy_at_impact_light_at_recovery
+      exemplar_attributes:
+        - "rhythmic line-weight contrast: thin-clean for setup → thick-reactive at punchline (Arawi)"
+        - "characters' outlines themselves dissolve into smears or sweat-drop shapes at peak gag (Arawi Nichijou)"
+
+    B_ink_density_tonal_grammar:
+      black_fill_ratio: "20–35% — highest of quiet-cluster genres"
+      screentone_strategy: high_contrast_halftone_bursts_radial_lines_dot_pattern_rage
+      halftone_to_solid_black_ratio: "1:1"
+      hatching_style: angry_intense_areas_hatched_dense
+      white_space_treatment: "15–30% — less than SOL"
+
+    C_body_language_expression:
+      face_proportions: anime_realistic_at_setup_chibi_or_henohenomoheji_at_gag
+      expression_frequency_cap: high_gag_faces_every_1_to_3_panels
+      expression_vocabulary: [henohenomoheji, bug_eyed_shock, vein_pop_forehead, oversized_sweat_drop, jagged_mouth_fury, faceplant]
+      pose_vocabulary: [full_plus_deformation_modes, mid_pratfall, mid_jump, comically_hunched, chibi_shrunk]
+      hand_drawing: stylized_mitten_at_peak_gag_anatomical_at_setup
+
+    D_panel_framing:
+      camera_distance_distribution: "extreme bursts — single-eye filling panel + tiny figure on white"
+      page_rhythm: burst_rest_central_rule_setup_calm_small_gag_peak_large_chaotic_recovery_silent_small
+      background_detail_density: variable_often_sparse_at_gag_white_or_screentone_isolates_character
+      speed_lines_impact_frames: required_concentration_lines_impact_stars_sweat_sprays_action_smears
+
+    E_color_treatment:
+      palette: bright_primaries_high_saturation_strong_contrast
+      saturation_range: "60–90%"
+      color_anchor_dense_deformation: arawi
+      color_anchor_clean_gentle_comedy: hikaru_nakamura
+
+    F_forbidden_drift_patterns:
+      - "omitted deformation (slips into SOL with jokes — central rule)"
+      - "level-pacing (kills gag rhythm — must burst-rest)"
+      - "iyashikei white space at gag-peak (anti-comedy)"
+      - "realistic-render at gag-peak (Asano photo-traced backgrounds undercut deformation)"
+
+    G_mangaka_exemplars:
+      - name: Keiichi Arawi
+        works: ["Nichijou (2006–2015)", "City (2016–)"]
+        url: "https://en.wikipedia.org/wiki/Nichijou"
+        note: "comedy anchor; mastery of rhythm with contrast between long still shots and sudden actions"
+        career_phases:
+          - phase: nichijou_surrealist_explosion
+            era: "2006–2015"
+            characteristic: "pushes deformation harder than City"
+          - phase: city_urban_deadpan_calmer
+            era: "2016–"
+            characteristic: "calmer than Nichijou, deadpan-comedy register"
+      - name: Kiyohiko Azuma
+        cross_genre_link: slice_of_life
+        note: "Azumanga Daioh yonkoma is primary comedy reference"
+      - name: Hikaru Nakamura
+        cross_genre_link: slice_of_life
+        note: "Saint Young Men: gentle-comedy register; deformation present but restrained"
+      - name: Aoki Ume
+        cross_genre_link: slice_of_life
+        note: "Hidamari Sketch: yonkoma comedy/iyashikei boundary case"
+      - name: Inio Asano
+        cross_genre_link: romance
+        note: "ONLY Solanin (early phase) belongs in comedy due to exaggerated faces; Punpun and Dededede are NOT comedy"
+      - name: Yarō Abe
+        works: ["Shinya Shokudō / Midnight Diner (2006–)"]
+        url: "https://en.wikipedia.org/wiki/Shin%27ya_Shokud%C5%8D"
+        note: "quiet-comedy register, food-adjacent, very restrained — comedy/SOL boundary case"
+
+    H_token_mapping:
+      animagine_xl_4_0:
+        positive: "masterpiece, absurdres, chibi, super deformed, exaggerated expression, sweat drop, blush, comedy, action lines, 1girl, dynamic pose"
+        negative: "lowres, worst quality, realistic, photorealistic, soft expression, calm atmosphere, sparse background"
+      qwen_image:
+        positive: "chibi anime gag manga panel, exaggerated comic expression, sweat drop, vein pop, action lines radiating, two characters mid-pratfall, bright high-contrast palette"
+        negative: "realistic proportions, soft watercolor, calm pose, sparse line, peaceful atmosphere"
+      flux_schnell:
+        positive: "gag manga page, super deformed characters, exaggerated faces, action burst, screentone halftone, comedic timing"
+        negative: "realistic, watercolor wash, calm scene, photographic"
+
+# ════════════════════════════════════════════════════════════════════════════
+# 17 DEFERRED PHASE-2 GENRES (schema-complete stubs per operator I1+ override)
+# ════════════════════════════════════════════════════════════════════════════
+# All A–H sub-blocks present and structurally consistent; populated only with
+# `status: deferred_phase2`, 1-line scope note, 2–3 named mangaka anchor, and
+# token starter recommendation. The cookbook follow-up PR fills full content.
+
+  # ── 9. BATTLE ──────────────────────────────────────────────────────────────
+  battle:
+    status: deferred_phase2
+    scope_note: "Shonen-action register; sharp-square-line + speed-line + impact-frame canon (Toriyama→Oda→Arakawa→Kishimoto→Murata lineage). Full A–H spec deferred to cookbook follow-up PR."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "sharp square lines for impact frames (Toriyama)" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "15–35% black fill — battle pages need legibility at speed" }
+    C_body_language_expression: { status: deferred_phase2, anchor_attribute: "high expression cap, reaction-shot grammar" }
+    D_panel_framing: { status: deferred_phase2, anchor_attribute: "rapid-alternation camera distance + impact-frame full-bleed" }
+    E_color_treatment: { status: deferred_phase2, anchor_attribute: "saturated primary palette" }
+    F_forbidden_drift_patterns:
+      - "static superhero-comic splash with rendered musculature (Marvel/DC)"
+      - "Pony-XL painterly-render look — manga battle reads as ink-on-paper not airbrush"
+    G_mangaka_exemplars:
+      - { name: "Akira Toriyama", works: ["Dragon Ball"], url: "https://en.wikipedia.org/wiki/Akira_Toriyama" }
+      - { name: "Yusuke Murata", works: ["One-Punch Man"], url: "https://en.wikipedia.org/wiki/Yusuke_Murata" }
+      - { name: "Tetsuo Hara", works: ["Hokuto no Ken"], url: "https://en.wikipedia.org/wiki/Tetsuo_Hara" }
+      - { name: "Tatsuki Fujimoto", works: ["Chainsaw Man"], url: "https://en.wikipedia.org/wiki/Chainsaw_Man" }
+    H_token_mapping:
+      animagine_starter: "(dynamic ink lines:1.2), heavy speedlines, screentone shading, manga panel, monochrome — Animagine handles shōnen battle natively"
+      empirical_status: deferred_validation
+
+  # ── 10. SPORTS ─────────────────────────────────────────────────────────────
+  sports:
+    status: deferred_phase2
+    scope_note: "Body-in-motion is the whole genre; anatomically accurate but exaggerated for kinetic clarity. Empirically top-7 globally per Q4 — operator portfolio underweighted (4 rows vs 51 mystery)."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "anatomically careful + exaggerated for impact (Inoue Slam Dunk lineage)" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "court/field collapse to speed-line voids during peak action" }
+    C_body_language_expression: { status: deferred_phase2, anchor_attribute: "sweat-bead as primary ink texture; reaction-grammar inherits from battle" }
+    D_panel_framing: { status: deferred_phase2, anchor_attribute: "training-payoff page rhythm" }
+    E_color_treatment: { status: deferred_phase2, anchor_attribute: "uniform+sky palette, saturated team colors" }
+    F_forbidden_drift_patterns:
+      - "chibi 4-panel format kills tension"
+      - "static fashion-pose illustration kills motion"
+      - "moe-glossy lighting"
+    G_mangaka_exemplars:
+      - { name: "Takehiko Inoue", works: ["Slam Dunk (1990–96)"], url: "https://en.wikipedia.org/wiki/Slam_Dunk_(manga)" }
+      - { name: "Haruichi Furudate", works: ["Haikyū!! (2012–2020)"], url: "https://en.wikipedia.org/wiki/Haikyu!!" }
+      - { name: "Yoichi Takahashi", works: ["Captain Tsubasa (1981–)"], url: "https://en.wikipedia.org/wiki/Captain_Tsubasa" }
+    H_token_mapping:
+      animagine_starter: "(athletic figure in motion:1.3), sweat, dynamic angle, ink shading, sportswear, manga panel"
+
+  # ── 11. MYSTERY ────────────────────────────────────────────────────────────
+  mystery:
+    status: deferred_phase2
+    scope_note: "Procedural-clean line for clue legibility; tight close-ups on hands/eyes/watches; thin precise inks not expressive brush noise."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "thin precise lines for clue legibility, no expressive brush noise" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "low ink density to preserve clarity" }
+    C_body_language_expression: { status: deferred_phase2, anchor_attribute: "flat affect with peak revelation panel" }
+    D_panel_framing: { status: deferred_phase2, anchor_attribute: "panels read like evidence-board cuts" }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "horror-genre ink density (kills procedural cleanness)"
+      - "comedy-style deformation (destroys reader trust in clues)"
+    G_mangaka_exemplars:
+      - { name: "Gosho Aoyama", works: ["Detective Conan (1994–)"], url: "https://en.wikipedia.org/wiki/Case_Closed" }
+      - { name: "Yusei Matsui", works: ["Neuro / Assassination Classroom"], url: "https://en.wikipedia.org/wiki/Yusei_Matsui" }
+      - { name: "Naoki Urasawa", works: ["Monster (1994–2001)"], url: "https://en.wikipedia.org/wiki/Monster_(manga)" }
+    H_token_mapping:
+      qwen_starter: "manga panel, detective interrogation, clean line art, evidence on table, monochrome — Qwen excels at text/diagram rendering"
+
+  # ── 12. HORROR (general — distinct from psychological_horror) ──────────────
+  horror:
+    status: deferred_phase2
+    scope_note: "General horror umbrella distinct from psychological_horror sparse/dense split — covers body-horror, supernatural-horror, J-horror canonical iconography."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "obsessively dense crosshatching; whites preserved only for shock" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "spiral/repeating motifs as compositional grammar" }
+    C_body_language_expression: { status: deferred_phase2, anchor_attribute: "faces over-detailed past the uncanny line" }
+    D_panel_framing: { status: deferred_phase2 }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "moe-eye proportions (uncanny depends on near-realism)"
+      - "clean digital-vector lines (horror needs ink texture)"
+    G_mangaka_exemplars:
+      - { name: "Junji Ito", cross_genre_link: psychological_horror }
+      - { name: "Kazuo Umezu", cross_genre_link: psychological_horror }
+      - { name: "Hideshi Hino", cross_genre_link: psychological_horror }
+    H_token_mapping:
+      animagine_starter: "(extreme detail crosshatching:1.3), (Junji Ito style:0.8), monochrome ink, body horror, dense linework"
+
+  # ── 13. WORKPLACE ──────────────────────────────────────────────────────────
+  workplace:
+    status: deferred_phase2
+    scope_note: "Mid-range body shots, suit/uniform fidelity; expression carried in eyes and small mouth-shifts."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "expression in eyes/mouth-shift not full-body action" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "ambient screentone for fluorescent office light" }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2 }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "shōnen speedlines in meeting scenes"
+      - "workplace clothing drawn as fantasy costume"
+    G_mangaka_exemplars:
+      - { name: "Akiko Higashimura", works: ["Princess Jellyfish"], cross_genre_link: romance }
+      - { name: "Kaiu Shirai / Riichirō Inagaki", works: ["Dr. Stone"], url: "https://en.wikipedia.org/wiki/Dr._Stone" }
+      - { name: "Mari Okazaki", works: ["Suppli (2004–13)"], url: "https://en.wikipedia.org/wiki/Suppli" }
+    H_token_mapping:
+      qwen_starter: "business attire, office setting, manga panel, conversational scene, neutral monochrome, soft screentone"
+
+  # ── 14. ESSAY ──────────────────────────────────────────────────────────────
+  essay:
+    status: deferred_phase2
+    scope_note: "Voice-driven loose sketch quality; line is casual on purpose, prioritizing voice over polish."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "loose sketch quality; line consistency varies on purpose to match diary tone" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "single-tone screentone or flat color fill" }
+    C_body_language_expression: { status: deferred_phase2, anchor_attribute: "chibi/SD deformation acceptable mid-page" }
+    D_panel_framing: { status: deferred_phase2, anchor_attribute: "lettering-density high relative to image" }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "polishing line into commercial shōnen kills intimacy"
+      - "background filler when text-density is the point"
+    G_mangaka_exemplars:
+      - { name: "Nagata Kabi", works: ["My Lesbian Experience with Loneliness (2016)"], url: "https://en.wikipedia.org/wiki/My_Lesbian_Experience_With_Loneliness" }
+      - { name: "Rieko Saibara", works: ["gag-essay manga (1990s–)"], url: "https://en.wikipedia.org/wiki/Rieko_Saibara" }
+    H_token_mapping:
+      flux_schnell_starter: "simple line drawing, autobiographical manga, flat tone, casual sketch style, single character, white background"
+
+  # ── 15. FOOD ───────────────────────────────────────────────────────────────
+  food:
+    status: deferred_phase2
+    scope_note: "Two registers — rough/intimate (Abe) vs lush/render (Hanasaki). Dish is always panel-hero. Inherits iyashikei tokens for food-iyashikei pair."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "two registers: rough/intimate vs lush/render" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2 }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2, anchor_attribute: "dish is always panel-hero" }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "dish drawn as background-prop"
+      - "battle-frame compositions"
+    G_mangaka_exemplars:
+      - { name: "Yarō Abe", works: ["Shinya Shokudō / Midnight Diner (2006–)"], url: "https://en.wikipedia.org/wiki/Shin%27ya_Shokud%C5%8D" }
+      - { name: "Chie Shinohara", works: ["Wakako Zake (2011–)"], url: "https://tvtropes.org/pmwiki/pmwiki.php/Manga/WakakoZake" }
+      - { name: "Tetsu Kariya / Akira Hanasaki", works: ["Oishinbo (1983–)"], url: "https://en.wikipedia.org/wiki/Oishinbo" }
+    H_token_mapping:
+      animagine_starter: "detailed food illustration, steam rising, intimate counter scene, soft shading, manga panel"
+
+  # ── 16. FAMILY ─────────────────────────────────────────────────────────────
+  family:
+    status: deferred_phase2
+    scope_note: "Soft round line; full-body framing for domestic continuity; backgrounds detailed with lived-in clutter (Yotsuba register)."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "soft round line; full-body framing" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "screentone reserved for hair only" }
+    C_body_language_expression: { status: deferred_phase2, anchor_attribute: "small noses, large lower eyelid mass" }
+    D_panel_framing: { status: deferred_phase2 }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "moe-fanservice framing"
+      - "seinen ink-density"
+    G_mangaka_exemplars:
+      - { name: "Kiyohiko Azuma", cross_genre_link: slice_of_life }
+      - { name: "Hiromu Arakawa", works: ["Silver Spoon"], cross_genre_link: fantasy_adventure }
+      - { name: "Machiko Hasegawa", works: ["Sazae-san (1946–1974)"], url: "https://en.wikipedia.org/wiki/Sazae-san" }
+    H_token_mapping:
+      animagine_starter: "gentle line art, domestic interior, family scene, warm composition, manga panel, soft screentone"
+
+  # ── 17. PROCEDURAL ─────────────────────────────────────────────────────────
+  procedural:
+    status: deferred_phase2
+    scope_note: "Cinematic seinen — shot-reverse-shot panel grammar, mid-line weight, realistic facial proportions, environment honoured."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "mid-line weight realistic" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2 }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2, anchor_attribute: "shot-reverse-shot" }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "leans shōnen kills weight"
+      - "leans horror crosshatch kills procedural neutrality"
+    G_mangaka_exemplars:
+      - { name: "Naoki Urasawa", works: ["Monster", "20th Century Boys"], url: "https://en.wikipedia.org/wiki/Naoki_Urasawa" }
+      - { name: "Kazuhiro Fujita", works: ["Karakuri Circus"], url: "https://en.wikipedia.org/wiki/Kazuhiro_Fujita" }
+      - { name: "Ryōichi Ikegami", works: ["Sanctuary", "Crying Freeman"], url: "https://en.wikipedia.org/wiki/Ryoichi_Ikegami" }
+    H_token_mapping:
+      qwen_starter: "seinen manga, realistic proportions, cinematic framing, urban interior, monochrome, detailed background"
+
+  # ── 18. HISTORICAL ─────────────────────────────────────────────────────────
+  historical:
+    status: deferred_phase2
+    scope_note: "Period-textile fidelity non-negotiable; backgrounds carry research; line weight stays consistent."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "consistent line weight (no shōnen burst lines)" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "Mori register: lace-level density on costume, restraint on faces" }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2 }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "anime-modern hairstyles"
+      - "skip background research"
+    G_mangaka_exemplars:
+      - { name: "Kaoru Mori", works: ["Emma", "A Bride's Story (2002–)"], url: "https://en.wikipedia.org/wiki/Kaoru_Mori" }
+      - { name: "Hiromu Arakawa", cross_genre_link: fantasy_adventure }
+      - { name: "Riyoko Ikeda", works: ["The Rose of Versailles"], url: "https://en.wikipedia.org/wiki/Rose_of_Versailles" }
+    H_token_mapping:
+      qwen_starter: "period costume, historical setting, detailed embroidery, classical manga line, soft screentone — Qwen excels at textile/architecture text-following"
+
+  # ── 19. CULTIVATION ────────────────────────────────────────────────────────
+  cultivation:
+    status: deferred_phase2
+    scope_note: "Manhua-flavored (NOT manga) — full-color webtoon-vertical; flowing robes; qi-energy as glowing volumetrics; xianxia conventions."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "manhua-style; longer sharper jaw than manga shōnen" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "full-color throughout — NOT monochrome" }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2, anchor_attribute: "vertical-scroll webtoon" }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "monochrome screentone (this is full-color manhua territory)"
+      - "Western superhero anatomy"
+    G_mangaka_exemplars:
+      - { name: "Tang Jia San Shao / Mu Feng Chun", works: ["Soul Land / Douluo Dalu (2009–)"], url: "https://soulland.fandom.com/wiki/List_of_Tang_Jia_San_Shao's_Works" }
+      - { name: "Wang Yu", works: ["A Record of a Mortal's Journey to Immortality manhua"], url: "https://en.wikipedia.org/wiki/A_Record_of_a_Mortal%27s_Journey_to_Immortality" }
+    H_token_mapping:
+      animagine_starter: "xianxia cultivation, flowing robes, qi energy aura, manhua color, vertical composition, glowing martial arts"
+
+  # ── 20. SCI_FI_CYBERPUNK ───────────────────────────────────────────────────
+  sci_fi_cyberpunk:
+    status: deferred_phase2
+    scope_note: "Architectural ink density — Nihei-grade megastructures; technical-pen precision on machinery; characters small relative to environment."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "technical-pen precision" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "architectural ink density Nihei-grade" }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2, anchor_attribute: "characters small relative to environment" }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "shōnen action close-up framing"
+      - "skip the architectural background (the city IS the genre)"
+    G_mangaka_exemplars:
+      - { name: "Masamune Shirow", cross_genre_link: mecha }
+      - { name: "Tsutomu Nihei", works: ["BLAME!", "Knights of Sidonia (1997–)"], url: "https://en.wikipedia.org/wiki/Tsutomu_Nihei" }
+      - { name: "Katsuhiro Otomo", cross_genre_link: mecha }
+    H_token_mapping:
+      flux_schnell_starter: "cyberpunk megastructure, technical line art, dense urban background, character small in frame, monochrome ink — FLUX strong on architectural detail"
+
+  # ── 21. SUPERNATURAL_EVERYDAY ──────────────────────────────────────────────
+  supernatural_everyday:
+    status: deferred_phase2
+    scope_note: "Mushishi register — real-world textures + delicate line-disturbance for supernatural element (wisps/blurs/tone-gradient)."
+    A_line_tradition: { status: deferred_phase2, anchor_attribute: "real-world textures rendered at high background fidelity" }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "supernatural rendered as delicate line-disturbance, not speedline-shouty" }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2 }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "spirit drawn as shōnen monster"
+      - "skip the mundane background"
+    G_mangaka_exemplars:
+      - { name: "Yuki Urushibara", works: ["Mushishi (1999–2008)"], url: "https://en.wikipedia.org/wiki/Mushishi" }
+      - { name: "Inio Asano", cross_genre_link: romance }
+      - { name: "Akihito Tsukushi", cross_genre_link: fantasy_adventure }
+    H_token_mapping:
+      qwen_starter: "Mushishi style, mundane setting with subtle ethereal element, soft line art, gradient screentone, quiet composition"
+
+  # ── 22. SCHOOL ─────────────────────────────────────────────────────────────
+  school:
+    status: deferred_phase2
+    scope_note: "Uniform-as-iconography (blazer/sailor-fuku does heavy character work); classroom backgrounds detailed but generic."
+    A_line_tradition: { status: deferred_phase2 }
+    B_ink_density_tonal_grammar: { status: deferred_phase2 }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2 }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "mecha-grade environment density"
+      - "default to fanservice framing"
+    G_mangaka_exemplars:
+      - { name: "Bisco Hatori", works: ["Ouran High School Host Club"], url: "https://en.wikipedia.org/wiki/Ouran_High_School_Host_Club" }
+      - { name: "Tsubasa Yamaguchi", works: ["Blue Period (2017–)"], url: "https://en.wikipedia.org/wiki/Blue_Period_(manga)" }
+      - { name: "Inio Asano", cross_genre_link: romance }
+    H_token_mapping:
+      animagine_starter: "school uniform, classroom interior, manga panel, soft line art, daylight through window, screentone shading"
+
+  # ── 23. MEMOIR ─────────────────────────────────────────────────────────────
+  memoir:
+    status: deferred_phase2
+    scope_note: "Voice-driven; line consistency varies on purpose; first-person framing common; lettering-density high."
+    A_line_tradition: { status: deferred_phase2 }
+    B_ink_density_tonal_grammar: { status: deferred_phase2 }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2 }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "polish the line into commercial shōnen"
+      - "background filler when text-density is the point"
+    G_mangaka_exemplars:
+      - { name: "Nagata Kabi", works: ["My Solo Exchange Diary"], cross_genre_link: essay }
+      - { name: "Keiji Nakazawa", works: ["Barefoot Gen (1973–74)"], url: "https://en.wikipedia.org/wiki/Barefoot_Gen" }
+      - { name: "Shigeru Mizuki", works: ["Showa: A History of Japan"], cross_genre_link: psychological_horror }
+    H_token_mapping:
+      flux_schnell_starter: "simple memoir comic, hand-drawn line, single character introspection, sparse background, journal style"
+
+  # ── 24. SOCIAL_ISSUE ───────────────────────────────────────────────────────
+  social_issue:
+    status: deferred_phase2
+    scope_note: "Documentary cleanness; Mizuki hybrid (photoreal backgrounds + cartoon characters) is canonical solution; restraint is moral grammar."
+    A_line_tradition: { status: deferred_phase2 }
+    B_ink_density_tonal_grammar: { status: deferred_phase2 }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2 }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "moe-style faces on serious subject matter"
+      - "battle-style impact framing on real-world violence"
+    G_mangaka_exemplars:
+      - { name: "Keiji Nakazawa", works: ["Barefoot Gen"], cross_genre_link: memoir }
+      - { name: "Shigeru Mizuki", works: ["Onward Towards Our Noble Deaths"], cross_genre_link: psychological_horror }
+      - { name: "Fumiyo Kōno", works: ["Town of Evening Calm, Country of Cherry Blossoms"], url: "https://en.wikipedia.org/wiki/Fumiyo_K%C5%8Dno" }
+    H_token_mapping:
+      qwen_starter: "documentary manga, realistic background, simple character line, restrained composition, monochrome, historical setting"
+
+  # ── 25. GRAPHIC_MEDICINE ───────────────────────────────────────────────────
+  graphic_medicine:
+    status: deferred_phase2
+    scope_note: "Clinical quietness; bodies rendered with anatomical respect; sign-language hands and medical apparatus drawn at higher detail than faces."
+    A_line_tradition: { status: deferred_phase2 }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "screentone marks dissociation/emotional state" }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2 }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "horror-grade body distortion"
+      - "moe to soften medical reality"
+    G_mangaka_exemplars:
+      - { name: "Yoshitoki Ōima", works: ["A Silent Voice"], url: "https://en.wikipedia.org/wiki/A_Silent_Voice" }
+      - { name: "Akiko Higashimura", cross_genre_link: romance }
+      - { name: "Kengo Hanazawa", works: ["I Am a Hero"], url: "https://en.wikipedia.org/wiki/Kengo_Hanazawa" }
+    H_token_mapping:
+      qwen_starter: "quiet medical scene, careful anatomy, expressive hands, soft tone, manga panel, restrained line"
+
+  # ── 26. BATTLE_INTERNAL ────────────────────────────────────────────────────
+  # (Note: not a separate ID in canonical_genre_list.yaml in some treatments;
+  # included here as a pacing-only canonical row per canonical_genre_list.yaml.)
+  battle_internal:
+    status: deferred_phase2
+    scope_note: "Mind/willpower fights — JoJo, Liar Game, Death Note. Inherits battle anchors plus Naoki Urasawa for psychological-stakes framing."
+    A_line_tradition: { status: deferred_phase2 }
+    B_ink_density_tonal_grammar: { status: deferred_phase2, anchor_attribute: "expression density rises, panel count shrinks" }
+    C_body_language_expression: { status: deferred_phase2 }
+    D_panel_framing: { status: deferred_phase2 }
+    E_color_treatment: { status: deferred_phase2 }
+    F_forbidden_drift_patterns:
+      - "physical-action speedlines (this register is internal)"
+    G_mangaka_exemplars:
+      - { name: "Tsugumi Ohba / Takeshi Obata", works: ["Death Note (2003–06)"], url: "https://en.wikipedia.org/wiki/Death_Note" }
+      - { name: "Hirohiko Araki", works: ["JoJo's Bizarre Adventure (1987–)"], url: "https://en.wikipedia.org/wiki/JoJo%27s_Bizarre_Adventure" }
+      - { name: "Naoki Urasawa", cross_genre_link: procedural }
+    H_token_mapping:
+      animagine_starter: "psychological battle manga, intense expression close-up, brain showdown, monochrome screentone"
+
+# ── End of drawing_tradition_per_genre.yaml ─────────────────────────────────

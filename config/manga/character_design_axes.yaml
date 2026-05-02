@@ -1,0 +1,413 @@
+# Character Design Axes — 12-Axis Individuation Vocabulary
+#
+# Status: AUTHORITY (new, this PR — research-only).
+# Schema version: 1.0
+# Created: 2026-05-02
+#
+# Purpose:
+#   The operator observed that across 22 stillness_press dashboard PNGs the
+#   protagonists read as variations of the same person — same face shape, eye
+#   geometry, age, hair construction. With 200+ planned series across 12-24
+#   brands, every protagonist must be visually distinct enough to function as a
+#   separate series lead.
+#
+#   This file documents the 12 character-design axes that mangaka actually use
+#   to differentiate protagonists across long careers (Mitsuru Adachi 30+ romance/
+#   sports series; Inio Asano's diverse leads in Punpun / Solanin / A Girl on the
+#   Shore / Dededede). Each axis lists allowed values and the mangaka-tradition
+#   vocabulary that anchors the value (e.g., "Adachi-style fringe" vs "CLAMP-style
+#   fringe" vs "Asano-style fringe").
+#
+#   The constraint solver in
+#   `docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md` reads this file +
+#   per-series instances of `character_design_template.yaml` to enforce that no
+#   two protagonists in the catalog collide on the most distinctive axes.
+#
+# Deferred-deep-literature note:
+#   The character-individuation literature scan agent (Q3.D average-face problem,
+#   ArcFace / DeepFace metric papers, FLUX face-attractor empirical comparison)
+#   did not return in this PR's session. Sections marked
+#   `deferred_literature_scan: true` need a follow-up PR to fill the empirical
+#   evidence layer. The structural axis vocabulary is complete and usable in
+#   this PR's form for the constraint solver implementation.
+#
+# Cross-references (SHA-pinned):
+cross_references:
+  cookbook_research:
+    path: docs/COMFYUI_FLUX_MANGA_PROMPTING_RESEARCH_2026-04-29.md
+    sha: 2881dd970bf2433e2225800ac6f73b1dd0281be5
+    pr: 802
+    sections_referenced: ["§6 (character consistency)"]
+  community_assets_audit:
+    path: docs/COMMUNITY_ASSETS_AUDIT_2026-04-29.md
+    sha: f4c50142b63df134d2f34c10a4a761bd9015c910
+    pr: 803
+    sections_referenced: ["Character consistency (PuLID-FaceNet recommendation)"]
+  character_design_template:
+    path: config/manga/character_design_template.yaml
+    relationship: "this file specifies the allowed values; the template is the per-series instance schema"
+
+schema_version: "1.0"
+last_updated: "2026-05-02"
+total_axes: 12
+lockout_axes_default: 9      # of 12; per-series instances may lock more
+lockout_axes_minimum_for_validation: 9
+
+# ════════════════════════════════════════════════════════════════════════════
+# THE 12 AXES
+# ════════════════════════════════════════════════════════════════════════════
+
+axes:
+
+  # ── AXIS 1 — face_shape ─────────────────────────────────────────────────────
+  face_shape:
+    axis_id: 1
+    description: "Geometric outline of the face viewed front-on; primary individuation signal alongside eye_geometry."
+    leverage: high
+    lockout_default: yes
+    allowed_values:
+      - oval
+      - square
+      - round
+      - heart_shaped
+      - elongated
+      - angular_long  # gekiga / seinen-realist
+      - soft_round    # iyashikei / shojo-soft
+    mangaka_tradition_vocabulary:
+      oval: "Adachi-style oval (Touch, Cross Game) — neutral default for shonen-romance"
+      square: "Hara Tetsuo-style square (Hokuto no Ken) — gekiga seinen masculine"
+      round: "Akira Toriyama-style round (Dragon Ball early Goku) — shonen-cartoon"
+      heart_shaped: "modern Asano-style heart (Punpun Aiko) — josei-soft"
+      elongated: "CLAMP-style elongated (xxxHolic Yūko, Cardcaptor Sakura adult forms) — shojo-stylized"
+      angular_long: "Inoue Vagabond-style angular (Musashi adult) — sumi-brush seinen"
+      soft_round: "Yotsuba's Azuma-style soft-round (Yotsuba-chan) — kodomomuke / family-iyashikei"
+    diffusion_token_reliability:
+      animagine_xl_4_0: "moderate — `face_shape:heart_shaped` resolves via danbooru-tag corpus; pair with `mature female` for josei context"
+      qwen_image: "high — natural-language `oval-shaped face with soft jaw` is well-parsed"
+      flux_schnell: "moderate — front-load explicit shape descriptor"
+
+  # ── AXIS 2 — eye_geometry ──────────────────────────────────────────────────
+  eye_geometry:
+    axis_id: 2
+    description: "Multi-attribute axis: size + shape + spacing + lid_fold + eyelash_density. The single highest-leverage individuation axis after face_shape."
+    leverage: very_high
+    lockout_default: yes
+    sub_attributes:
+      size:
+        allowed_values:
+          - extra_small  # gekiga (Hara Hokuto, Otomo Akira)
+          - small        # seinen (Asano, Urasawa, Yamazaki)
+          - medium       # neutral
+          - large        # shojo (Naoko Takeuchi Sailor Moon)
+          - extra_large  # kodomomuke / shojo-sparkle (Card Captor Sakura early)
+      shape:
+        allowed_values: [almond, round, sharp_angular, hooded, downturned, upturned, monolid]
+      spacing:
+        allowed_values: [narrow, standard, wide]
+      lid_fold:
+        allowed_values: [single, double, none_visible]
+      eyelash_density:
+        allowed_values:
+          - minimal             # seinen/gekiga
+          - moderate
+          - dense               # shojo
+          - heavy_decorative    # older shojo, sparkle-era — AVOID for josei-adult
+    mangaka_tradition_vocabulary:
+      adachi_style: "size: medium, shape: almond, lid_fold: double, eyelash: moderate — the iconic Adachi look across Touch / Slam Dunk-derived sports / H2"
+      asano_late_period: "size: small, shape: almond, spacing: narrow, lid_fold: single, eyelash: minimal — modern josei-adult standard"
+      clamp_shojo: "size: large, shape: almond elongated, lid_fold: double, eyelash: dense"
+      junji_ito_normal: "size: medium, shape: almond, lid_fold: double, eyelash: minimal — escalates to size: extra_large + hollow at horror peaks"
+      maruo_engraved: "size: small, shape: almond, lid_fold: single, eyelash: minimal but precise — Taisho woodblock"
+      arakawa_fma: "size: medium-small, shape: sharp_angular, eyelash: minimal — darker shonen"
+    forbidden_combinations:
+      - rule: "shojo_eye_geometry + josei_market_demo"
+        violation: "size: extra_large + eyelash_density: heavy_decorative on josei series"
+        reason: "modern josei-adult has moved past sparkle/big-eye; reverting reads as shojo-teen"
+      - rule: "heavy_decorative_eyelashes + seinen_market_demo"
+        violation: "eyelash_density: heavy_decorative on seinen series"
+        reason: "seinen-mature register is realistic-restrained"
+
+  # ── AXIS 3 — nose_construction ─────────────────────────────────────────────
+  nose_construction:
+    axis_id: 3
+    description: "Often invisible in shojo, prominently rendered in seinen/gekiga; a secondary but reliable individuation signal."
+    leverage: medium
+    lockout_default: yes
+    sub_attributes:
+      bridge_angle:
+        allowed_values: [short_upturned, straight, slight_downturn, prominent, aquiline]
+      bridge_length:
+        allowed_values: [short, medium, long]
+      tip_shape:
+        allowed_values: [rounded, pointed, wide, narrow]
+      nostril_visibility:
+        allowed_values:
+          - invisible    # shojo default (CLAMP, Naoko Takeuchi)
+          - implied      # iyashikei / soft-shojo
+          - drawn        # seinen
+          - prominent    # gekiga (Hara, Otomo)
+    mangaka_tradition_vocabulary:
+      shojo_invisible: "CLAMP, Takeuchi — nose drawn as a single line or implied shadow"
+      iyashikei_implied: "Ashinano, Amano — rounded short bridge, nostril implied"
+      seinen_drawn: "Asano, Urasawa — straight medium bridge, nostril drawn but not emphasized"
+      gekiga_prominent: "Hara Tetsuo — long aquiline bridge, prominent nostrils, heavy shadow"
+
+  # ── AXIS 4 — mouth_jaw ─────────────────────────────────────────────────────
+  mouth_jaw:
+    axis_id: 4
+    description: "Resting mouth shape + jaw architecture — strong character-personality signal."
+    leverage: high
+    lockout_default: yes
+    sub_attributes:
+      resting_expression:
+        allowed_values: [neutral_soft, neutral_firm, slight_frown, slight_smile, parted_lips]
+      jaw_width:
+        allowed_values: [narrow, medium, wide, square]
+      chin_shape:
+        allowed_values: [soft_pointed, rounded, square, cleft, weak_chin]
+      lip_shape:
+        allowed_values:
+          - thin_both
+          - thin_upper_full_lower    # canonical josei
+          - full_both
+          - bow_mouth                # 1990s shojo — AVOID for josei-adult
+    mangaka_tradition_vocabulary:
+      asano_thin_full: "thin upper, full lower — modern josei-adult standard"
+      okazaki_economical: "thin both, slight frown resting — 90s josei harsh-realist"
+      higashimura_clean: "neutral soft, thin upper, slightly full lower — clean elegant josei"
+      bow_mouth_dated: "1990s shojo (Hana-Kimi early Nakajo, early CLAMP) — DEPRECATED for modern josei"
+    forbidden_combinations:
+      - rule: "bow_mouth + josei_market_demo"
+        reason: "bow_mouth is a 1990s shojo signal; modern josei has moved past"
+
+  # ── AXIS 5 — hair ──────────────────────────────────────────────────────────
+  hair:
+    axis_id: 5
+    description: "The single strongest silhouette ID for long-running series — Goku spike, Frieren twin-tail-elf, Guts white-streak."
+    leverage: very_high
+    lockout_default: yes
+    sub_attributes:
+      length:
+        allowed_values: [shaved, very_short, ear_length, chin_bob, shoulder, mid_back, long_to_waist, floor_length]
+      parting:
+        allowed_values: [center, side_left, side_right, no_part_swept_back, asymmetric, fringed]
+      fringe_style:
+        allowed_values: [straight_blunt, side_swept, curtain, hime_cut, asymmetric, no_fringe]
+      texture:
+        allowed_values: [straight, slight_wave, curly, coiled, textured_kinky]
+      color_signal:
+        allowed_values: [black, dark_brown, brown, dark_blonde, blonde, red, grey_at_temples, white_signaled, pink_unrealistic, blue_unrealistic, green_unrealistic, purple_unrealistic]
+      signature_shape_note:
+        type: free_text
+        purpose: "describe the iconic silhouette signal (e.g., 'loose strands escape side-parting throughout the day — character signal of mild disorder')"
+    mangaka_tradition_vocabulary:
+      adachi_style_fringe: "straight_blunt with chin_bob length — sports-romance neutral"
+      clamp_style_fringe: "curtain + asymmetric, mid_back length, often hime_cut variant"
+      asano_realistic: "side_swept, slight_wave, dark_brown — modern realistic adult"
+      toriyama_spike: "no_fringe spike (Goku) — shonen-cartoon iconic silhouette"
+      oda_style_anatomy: "exaggerated silhouettes (Luffy strawhat reveal, Zoro bandana) — silhouette is the character"
+      frieren_twin_tail: "long_to_waist + double-side-tail + pointed elf-ears integration — quiet-fantasy iconic"
+
+  # ── AXIS 6 — build ─────────────────────────────────────────────────────────
+  build:
+    axis_id: 6
+    description: "Body silhouette less individuating in manga than face — solver doesn't lock this hard."
+    leverage: low_to_medium
+    lockout_default: no
+    sub_attributes:
+      height_implied:
+        allowed_values: [very_short, short, average, tall, very_tall]
+        ranges:
+          very_short: "under 5'1\" / 155cm"
+          short: "5'1\"-5'5\" / 155-165cm"
+          average: "5'5\"-5'9\" / 165-175cm"
+          tall: "5'9\"-6'1\" / 175-185cm"
+          very_tall: "over 6'1\" / 185cm"
+      frame_density:
+        allowed_values: [very_small, small, average, athletic, broad, heavy]
+      shoulder_ratio:
+        allowed_values: [narrow, average, broad]
+
+  # ── AXIS 7 — wardrobe_register ─────────────────────────────────────────────
+  wardrobe_register:
+    axis_id: 7
+    description: "Era-specific + personality-encoding; wardrobe carries character before face does in many genres."
+    leverage: high
+    lockout_default: yes
+    sub_attributes:
+      era_signal:
+        allowed_values:
+          - pre_industrial
+          - meiji_taisho
+          - postwar_showa
+          - 80s_90s
+          - 2000s_2010s
+          - contemporary_2020s
+          - near_future
+          - far_future
+          - alternate_history
+          - fantasy_setting
+      personality_encoding:
+        type: list_of_2_to_4_specific_items
+        purpose: "specific wardrobe items that encode personality (e.g., 'cardigan_layered_office, corduroy_skirt, sturdy_low_heel' for the librarian-protagonist signal)"
+      formality:
+        allowed_values: [undressed, sleepwear, casual, business_casual, formal, ceremonial, costume]
+    mangaka_tradition_vocabulary:
+      mori_kaoru_period_textile: "Emma / A Bride's Story — Victorian/Central Asian period accuracy at lace-level density"
+      asano_contemporary_realism: "Punpun / Solanin / Dededede — contemporary-2020s urban-Tokyo accurate"
+      seinen_armor_load_bearing: "Berserk Berserker armor, Vagabond swordsman robes — armor IS storytelling"
+
+  # ── AXIS 8 — posture_default ───────────────────────────────────────────────
+  posture_default:
+    axis_id: 8
+    description: "Posture varies too much across panels to be primary individuation signal — solver leaves free."
+    leverage: low
+    lockout_default: no
+    sub_attributes:
+      energy:
+        allowed_values: [collapsed, contained, neutral, energetic, dynamic, exuberant]
+      symmetry:
+        allowed_values: [symmetric, slight_left_lean, slight_right_lean, asymmetric_dynamic, slumped]
+
+  # ── AXIS 9 — age_signaling ─────────────────────────────────────────────────
+  age_signaling:
+    axis_id: 9
+    description: "Apparent decade plus visible cues — high-leverage individuation."
+    leverage: high
+    lockout_default: yes
+    sub_attributes:
+      apparent_age_decade:
+        allowed_values: [pre_teen, teen, early_20s, mid_20s, late_20s, early_30s, mid_30s, late_30s, 40s, 50s, 60s, 70s_plus]
+      visible_age_cues:
+        type: list
+        examples: [smile_lines_visible, no_full_crow_feet, slight_under_eye_shadow, full_crow_feet, jowl_softening, grey_at_temples, deep_nasolabial_fold]
+    mangaka_tradition_vocabulary:
+      asano_aiko_late_30s: "smile lines visible, no full crow's feet, slight under-eye shadow — josei-mature adult"
+      okazaki_helter_skelter_artificial: "all age cues actively suppressed (the artificial-beauty theme)"
+      shigeru_mizuki_late_self_portrait: "all age cues maximized — memoir self-portrait"
+
+  # ── AXIS 10 — skin_treatment ───────────────────────────────────────────────
+  skin_treatment:
+    axis_id: 10
+    description: "Commonly varies in B&W manga where skin tone is implied via shading; OK for solver to leave free in B&W series."
+    leverage: low_in_bw_medium_in_color
+    lockout_default: no
+    sub_attributes:
+      texture:
+        allowed_values: [clean, slight_freckles, moderate_freckles, scarred, blemished, weathered, sun_damaged]
+      tone:
+        allowed_values: [very_pale, pale_cool, pale_warm, warm_light, warm_medium, warm_deep, deep_brown, very_deep]
+
+  # ── AXIS 11 — accessories ──────────────────────────────────────────────────
+  accessories:
+    axis_id: 11
+    description: "HIGH-LEVERAGE individuation signal — accessories are often the 'character signature' in the reader's memory."
+    leverage: high
+    lockout_default: yes
+    sub_attributes:
+      glasses:
+        allowed_values: [none, round_wire_frame, round_thick_frame, square_thick, cat_eye, half_rim, sport]
+      jewelry:
+        allowed_values: [none, minimal, modest, expressive, signature_piece]
+      signature_item:
+        type: named_object_or_none
+        examples:
+          - "stainless thermos always in left hand"
+          - "grandmother's brooch (heart-shaped, brass)"
+          - "leather notebook with worn corners"
+          - "wooden walking stick"
+          - "wrist-tied red string"
+    mangaka_tradition_vocabulary:
+      tezuka_signature_items: "Black Jack's stitched cape; Astro Boy's twin spike-curls"
+      naoko_takeuchi_signature: "Sailor Moon's odango-tail buns + tiara — accessory IS the transformation"
+      asano_signature: "Punpun's bird-glyph head — accessory IS the protagonist"
+
+  # ── AXIS 12 — color_signal ─────────────────────────────────────────────────
+  color_signal:
+    axis_id: 12
+    description: "In series with color, palette is highly individuating. In B&W series, contrast register replaces palette."
+    leverage: very_high_in_color_medium_in_bw
+    lockout_default: yes
+    sub_attributes:
+      palette_primary:
+        allowed_values: [muted_brown, deep_teal, sage_green, dusty_rose, charcoal, navy, burgundy, mustard, lavender, ochre, slate, terracotta, cream, forest_green, indigo]
+      palette_accent:
+        allowed_values: [same_list_as_primary]
+      bw_register_note:
+        type: free_text
+        purpose: "describe contrast register in B&W (e.g., 'mid-grey-anchored, never the highest-contrast figure in a panel')"
+
+# ════════════════════════════════════════════════════════════════════════════
+# CONSTRAINT SOLVER RULES (consumed by the spec doc)
+# ════════════════════════════════════════════════════════════════════════════
+
+solver_rules:
+
+  lockout_minimum: 9  # of 12 axes must have lockout: yes for a valid character_design instance
+
+  collision_threshold:
+    same_brand: 5_locked_axes_match     # if 5 of the locked axes' values match an existing same-brand series, REJECT
+    cross_brand: 7_locked_axes_match    # cross-brand more permissive (different audiences)
+
+  axis_priority_order_for_solver:       # solver checks high-leverage axes first; finds collisions faster
+    - eye_geometry          # leverage: very_high
+    - hair                  # leverage: very_high (silhouette ID)
+    - color_signal_in_color # leverage: very_high in color series
+    - face_shape            # leverage: high
+    - mouth_jaw             # leverage: high
+    - wardrobe_register     # leverage: high
+    - age_signaling         # leverage: high
+    - accessories           # leverage: high
+    - nose_construction     # leverage: medium
+    - build                 # leverage: low_to_medium (lockout off by default)
+    - skin_treatment        # leverage: low in B&W
+    - posture_default       # leverage: low (lockout off by default)
+
+  forbidden_combinations:  # genre/demographic anti-patterns
+    - rule_id: "shojo_eye_in_josei"
+      axes: [eye_geometry.size, eye_geometry.eyelash_density, market_demo]
+      forbidden: { eye_geometry.size: extra_large, eye_geometry.eyelash_density: heavy_decorative, market_demo: josei }
+      reason: "modern josei-adult register has moved past sparkle/big-eye conventions"
+    - rule_id: "bow_mouth_in_josei"
+      axes: [mouth_jaw.lip_shape, market_demo]
+      forbidden: { mouth_jaw.lip_shape: bow_mouth, market_demo: josei }
+      reason: "bow_mouth is a 1990s shojo signal"
+    - rule_id: "heavy_eyelash_in_seinen"
+      axes: [eye_geometry.eyelash_density, market_demo]
+      forbidden: { eye_geometry.eyelash_density: heavy_decorative, market_demo: seinen }
+      reason: "seinen-mature register is realistic-restrained"
+
+# ════════════════════════════════════════════════════════════════════════════
+# DEFERRED LITERATURE-SCAN ITEMS (follow-up PR)
+# ════════════════════════════════════════════════════════════════════════════
+
+deferred_literature_scan:
+  status: deferred_followup_pr
+  scope: |
+    The character-individuation literature-scan agent did not return in this PR's
+    session (operator-approved option-3 cutover). Items below are flagged for a
+    focused follow-up PR with their own agent budget.
+  items:
+    - description: "Mark Crilley character-design tutorials — 12-axis correspondence with this file's axes"
+      sources_to_check:
+        - "https://www.youtube.com/@markcrilley"
+        - "Mark Crilley's Mastering Manga book series (Impact Books)"
+    - description: "Manga University textbooks — character-design vocabulary cross-reference"
+      sources_to_check:
+        - "https://mangauniversity.com/"
+        - "How To Draw Manga series (Graphic-sha publisher)"
+    - description: "Stanchfield gesture/character framework — applicability to manga"
+      sources_to_check: ["Drawn to Life Vol 1-2 (Walt Stanchfield via Don Hahn editor)"]
+    - description: "Open-source character-design generators — does Character.ai-style design-axis system exist publicly?"
+    - description: "ArcFace / DeepFace / CLIP pairwise face-similarity — empirical metric for distinctiveness QA"
+      sources_to_check:
+        - "https://arxiv.org/abs/1801.07698 (ArcFace)"
+        - "https://github.com/serengil/deepface"
+    - description: "Diffusion average-face attractor literature — 2024-2026 arXiv papers + community blog posts"
+      sources_to_check:
+        - "https://arxiv.org/abs/2403.03206 (FLUX architecture)"
+        - "Reddit r/StableDiffusion attractor discussion threads"
+    - description: "Empirical model comparison — Animagine 4.0 vs Qwen-Image vs FLUX-schnell on average-face attractor strength"
+      methodology: "fix prompt + 100 seeds, measure pairwise face-distance via DeepFace; lower = stronger attractor"
+
+# ── End of character_design_axes.yaml ───────────────────────────────────────
