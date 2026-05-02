@@ -28,8 +28,16 @@ cross_references:
     sha: f4c50142b63df134d2f34c10a4a761bd9015c910
     pr: 803
 
-schema_version: "1.0"
-last_updated: "2026-05-02"
+schema_version: "1.1"
+last_updated: "2026-05-03"
+license_diligence_completed_by: "PR-B (agent/license-clean-corpus-20260503) — see artifacts/research/license_diligence_2026-05-03.md"
+
+# License-fields populated per PR-B follow-up (2026-05-03). Most license-status
+# fields previously marked `deferred_followup_pr` are now resolved; remaining
+# operator-outreach items are explicitly tagged as such.
+#
+# Authoritative recommendation file: config/manga/corpus_license_recommendations.yaml
+# Legal-position paper: artifacts/research/synthetic_reference_legal_position_2026-05-03.md
 
 # ════════════════════════════════════════════════════════════════════════════
 # A. LICENSE FRAMEWORK (deferred — needs follow-up agent budget)
@@ -37,21 +45,34 @@ last_updated: "2026-05-02"
 # This section needs a focused follow-up PR. Stub-class anchors below.
 
 license_framework:
-  status: deferred_followup_pr
-  scope_note: "Phoenix engineering needs a documented framework before bulk corpus assembly. Stub-anchors here for the follow-up PR."
+  status: resolved_pr_b_2026_05_03
+  scope_note: "Framework resolved in PR-B; see artifacts/research/license_diligence_2026-05-03.md for full citations and per-publisher analysis."
 
   public_domain_manga:
-    framework_anchor: "Japanese 70-year copyright rule (post-1971 deaths covered)"
-    citation_pending: "Japanese copyright office or WIPO source — deferred"
+    framework_anchor: "Japanese Copyright Act Article 51(2) — 70 years from author death (extended from 50 in 2018, non-retroactive)"
+    citation_url: "https://www.cric.or.jp/english/clj/cl2.html"
+    statutory_basis_url: "https://en.wikipedia.org/wiki/Copyright_law_of_Japan"
     pd_horizon_anchors:
-      - { mangaka: "Osamu Tezuka", died: 1989, jp_pd_year: "2059 (death + 70)", us_pd_year_estimate: "varies by work" }
-      - { mangaka: "Shigeru Mizuki", died: 2015, jp_pd_year: "2085", note: "war-memoir social_issue corpus" }
-      - { mangaka: "Mitsuteru Yokoyama", died: 2004, jp_pd_year: "2074" }
+      - { mangaka: "Osamu Tezuka", died: 1989, jp_pd_year: "2060-01-01", license_tier: 🔴, note: "Still copyright; Tezuka Productions per-publication licensing the only path before 2060" }
+      - { mangaka: "Shigeru Mizuki", died: 2015, jp_pd_year: "2086-01-01", license_tier: 🔴 }
+      - { mangaka: "Mitsuteru Yokoyama", died: 2004, jp_pd_year: "2075-01-01", license_tier: 🔴 }
+      - { mangaka: "Kitazawa Rakuten", died: 1955, jp_pd_year: "2026-01-01", license_tier: 🟢, note: "⭐ PD as of 2026-01-01; single most consequential new asset (50-year term applied at death; 2018 extension non-retroactive)" }
+      - { mangaka: "Yumeji Takehisa", died: 1934, jp_pd_year: "~2005", license_tier: 🟢, note: "Solidly PD; pre-1999 PD entry" }
+      - { mangaka: "Okamoto Ippei", died: 1948, jp_pd_year: "1999→2019", license_tier: 🟢, note: "PD; entered before 2018 extension cutoff" }
+      - { mangaka: "Ishinomori Shotaro", died: 1998, jp_pd_year: "2069-01-01", license_tier: 🔴 }
+      - { mangaka: "Akatsuka Fujio", died: 2008, jp_pd_year: "2079-01-01", license_tier: 🔴 }
+      - { mangaka: "Fujiko F. Fujio", died: 1996, jp_pd_year: "2067-01-01", license_tier: 🔴 }
 
   creative_commons_licensed_manga:
-    status: deferred_followup_pr
-    framework_anchor: "CC-BY / CC-BY-SA / CC0 — all commercially-OK"
-    discovery_methodology_pending: "Wikimedia Commons search + Internet Archive + creator-hosted sites"
+    status: resolved_pr_b
+    finding: "There is no canonical 2026 corpus of CC-licensed Japanese manga. Pepper&Carrot (David Revoy, CC-BY 4.0) is the only CC manga-styled work usable in shipped product."
+    discovery_methodology_used: "Wikimedia Commons + Internet Archive + creator-hosted sites + Wikipedia 'Creative Commons-licensed comics' category audit (NB: at least 2 false positives in that category — Erma, Hyperbole and a Half are NOT actually CC)"
+    one_load_bearing_title:
+      title: "Pepper&Carrot"
+      author: "David Revoy"
+      url: "https://www.peppercarrot.com/"
+      license: "CC-BY 4.0"
+      license_tier: 🟢
 
   public_domain_reference_art:
     status: corpus_partial
@@ -62,24 +83,38 @@ license_framework:
       - { title: "Classical Japanese sumi-e", url: "https://en.wikipedia.org/wiki/Sumi-e", license: "PD-traditional", relevance: "line-economy reference; iyashikei + dark-fantasy brush-pole anchor" }
 
   publisher_sample_pages:
-    status: deferred_followup_pr
-    framework_anchor: "MangaPlus free-first-three-chapters policy; publisher educational/promotional fair-use"
-    publishers_to_research: [Shueisha, Kodansha, Shogakukan, Kadokawa]
-    citation_pending: "publisher-policy URLs"
+    status: resolved_pr_b
+    finding: "No major Japanese manga publisher offers a public educational / press / fair-use allowance Phoenix can rely on without per-title licensing. All catalog use is 'commercial purpose' per MangaPlus Article 9 §1(12)."
+    publishers_audited: [Shueisha (MangaPlus), Kodansha, Shogakukan (ShoPro), Kadokawa, Tezuka Productions]
+    operative_posture: "Joint Cloudflare suit (Nov 2025) — aggressive enforcement, no presumption of fair use"
+    only_workable_middle_ground: "Tezuka Productions per-publication clearance (https://tezuka.co.jp/en/contact/index.html)"
+    license_tier: 🔴
+    recommendation: "Skip publisher-copyrighted material entirely; rely on PD anchors + Phoenix-trained LoRAs"
 
   synthetic_reference:
-    status: corpus_complete  # framework-only entry
+    status: resolved_pr_b
     framework_note: |
       Generating small reference sets *from* trained Phoenix Omega LoRAs at lower
-      res for QA / drift-detection. Legal posture: derivative of model weights,
-      not derivative of original training data. Suitable for QA harness reference
-      embeddings; NOT for retraining.
+      res for QA / drift-detection. Legal posture per
+      artifacts/research/synthetic_reference_legal_position_2026-05-03.md:
+      - Internal-only QA gates: 🟢 OK
+      - Embedded in shipped product: 🔴 HOLD pending Andersen v. Stability AI merits ruling
+      Operator E1 default = conservative; matches the legal floor.
+    operator_default: conservative_internal_only
 
   manga109_dataset:
-    status: deferred_followup_pr
-    framework_anchor: "Aizawa et al. paper; license_terms_pending"
-    citation_pending: "Manga109 official site + license page"
-    phoenix_commercial_use_posture: pending_legal_review
+    status: resolved_pr_b
+    license_url: "https://huggingface.co/datasets/hal-utokyo/Manga109-s"
+    paper_citation_url: "https://arxiv.org/abs/2005.04425"
+    license_tier: 🟢_for_training_🔴_for_imagery_in_shipped_product
+    phoenix_commercial_use_posture: |
+      Manga109-s clause (5) explicitly authorises commercial use of "results... obtained
+      from machine learning experiments." Trained LoRAs and their outputs ARE results.
+      Clause (9) forbids treating "direct copies or modifications" as products.
+      Clause (8) forbids selling Manga109-s images alongside results.
+      Practical posture: USE FOR LORA TRAINING; DO NOT include Manga109-s imagery
+      in any shipped artifact (cookbook, dashboard, marketing).
+    deferred_subitem: "Cost estimate for separate negotiation tier covering the 22 non-s volumes — operator-outreach question to Aizawa Lab"
 
   clip_similarity_curation:
     status: framework_complete
