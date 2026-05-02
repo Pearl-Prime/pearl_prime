@@ -47,7 +47,13 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_TEMPLATES_PATH = REPO_ROOT / "config" / "publishing" / "bestseller_templates.yaml"
 DEFAULT_COOKBOOK_PATH = REPO_ROOT / "config" / "manga" / "genre_prompt_cookbook_v2.yaml"
+DEFAULT_IDENTITY_PATH = REPO_ROOT / "config" / "publishing" / "cover_identity_system.yaml"
 DEFAULT_WORKFLOW_PATH = REPO_ROOT / "scripts" / "image_generation" / "comfyui_workflows" / "flux_txt2img_manga.json"
+
+CKPT_BY_CONFIG = {
+    "dev": "flux1-dev-fp8.safetensors",
+    "schnell": "flux1-schnell-fp8.safetensors",
+}
 
 CANVAS_W = 1600
 CANVAS_H = 2560
@@ -83,6 +89,31 @@ def load_templates(path: Path | None = None) -> dict[str, Any]:
 def load_cookbook(path: Path | None = None) -> dict[str, Any]:
     p = path or DEFAULT_COOKBOOK_PATH
     return yaml.safe_load(p.read_text())
+
+
+def load_identity(path: Path | None = None) -> dict[str, Any] | None:
+    """Load cover_identity_system.yaml if present (R6 contract). Returns
+    None if absent so the imagery pipeline keeps working."""
+    p = path or DEFAULT_IDENTITY_PATH
+    if not p.exists():
+        return None
+    return yaml.safe_load(p.read_text())
+
+
+def _identity_book_record(identity_cfg: dict[str, Any] | None,
+                          identity_book_id: str) -> dict[str, Any] | None:
+    if not identity_cfg:
+        return None
+    return (identity_cfg.get("books") or {}).get(identity_book_id)
+
+
+def _bare_to_identity_id(bare_id: str) -> str:
+    """Map bare TEACHER_BOOKS id (e.g. 'sai_ma') to identity-system key
+    ('sai_maa'). Most ids match; handful diverge."""
+    overrides = {
+        "sai_ma": "sai_maa",
+    }
+    return overrides.get(bare_id, bare_id)
 
 
 # ─── ASPECT / SIZE ────────────────────────────────────────────────────
@@ -171,11 +202,19 @@ def plan_for_book(
     full_book_id: str,
     templates_cfg: dict[str, Any] | None = None,
     cookbook_cfg: dict[str, Any] | None = None,
+    identity_cfg: dict[str, Any] | None = None,
 ) -> ImageryPlan:
     """Build an ImageryPlan for a book_genre_map id (e.g.
-    'maat_boundaries')."""
+    'maat_boundaries').
+
+    R7: When ``identity_cfg`` (or the default identity YAML on disk)
+    contains an entry for the book, use the identity-system composer
+    for the prompt and respect ``cover_kind: type_only``.
+    """
     templates_cfg = templates_cfg or load_templates()
     cookbook_cfg = cookbook_cfg or load_cookbook()
+    if identity_cfg is None:
+        identity_cfg = load_identity()
     bgm = _iter_book_genre_map(templates_cfg, cookbook_cfg)
     if full_book_id not in bgm:
         raise ValueError(
@@ -184,10 +223,21 @@ def plan_for_book(
     genre = bgm[full_book_id]
     template = templates_cfg["templates"][genre]
     bare_id = _strip_genre_suffix(full_book_id, genre)
+    identity_id = _bare_to_identity_id(bare_id)
     out_path = (
         REPO_ROOT / "artifacts" / "pipeline_examples"
         / bare_id / f"cover_{bare_id}_v3_imagery.png"
     )
+
+    identity_book = _identity_book_record(identity_cfg, identity_id)
+    # R7: identity says type_only → skip FLUX even if R4 template has zone.
+    if identity_book and identity_book.get("cover_kind") == "type_only":
+        return ImageryPlan(
+            book_id=bare_id, full_book_id=full_book_id, genre=genre,
+            width=0, height=0, aspect=0.0,
+            positive_prompt="", negative_prompt="",
+            output_path=out_path, type_dominant=True,
+        )
 
     aspect = imagery_aspect_for_genre(template)
     if aspect is None:
@@ -199,8 +249,25 @@ def plan_for_book(
         )
 
     w, h = flux_dimensions(aspect)
-    positive = compose_positive_prompt(cookbook_cfg, genre)
-    negative = compose_negative_prompt(cookbook_cfg)
+    if identity_book:
+        # Use identity composer when book has an identity entry.
+        try:
+            from scripts.publish.identity_compose_prompt import (
+                compose_identity_positive,
+                compose_identity_negative,
+            )
+            positive = compose_identity_positive(identity_id)
+            negative = compose_identity_negative()
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(
+                "identity composer failed for %s: %s — falling back to cookbook",
+                identity_id, exc,
+            )
+            positive = compose_positive_prompt(cookbook_cfg, genre)
+            negative = compose_negative_prompt(cookbook_cfg)
+    else:
+        positive = compose_positive_prompt(cookbook_cfg, genre)
+        negative = compose_negative_prompt(cookbook_cfg)
     return ImageryPlan(
         book_id=bare_id, full_book_id=full_book_id, genre=genre,
         width=w, height=h, aspect=round(aspect, 3),
@@ -258,25 +325,51 @@ def submit_to_comfyui(
             inputs["seed"] = seed
 
     # Walk nodes; the workflow JSON pattern in this repo uses two
-    # CLIPTextEncode nodes: one for positive, one for negative. Tag-by-id
-    # heuristic: positive text node first, then negative. Using common
-    # FLUX manga workflow node ids (5/6/7/25 style): positive=6, negative=7.
-    if "6" in workflow and "inputs" in workflow["6"]:
-        workflow["6"]["inputs"]["text"] = plan.positive_prompt
-    if "7" in workflow and "inputs" in workflow["7"]:
-        workflow["7"]["inputs"]["text"] = plan.negative_prompt or " "
+    # CLIPTextEncode nodes with {{positive_prompt}} / {{negative_prompt}}
+    # placeholders. R7: detect slots by placeholder string instead of
+    # hard-coded node IDs (the manga workflow uses 2/3, not 6/7).
+    placeholder_filled = False
+    for _, node in workflow.items():
+        inputs = node.get("inputs", {})
+        text = inputs.get("text")
+        if not isinstance(text, str):
+            continue
+        if "{{positive_prompt}}" in text:
+            inputs["text"] = plan.positive_prompt
+            placeholder_filled = True
+        elif "{{negative_prompt}}" in text:
+            inputs["text"] = plan.negative_prompt or " "
+            placeholder_filled = True
+    # Legacy fallback: prior pipelines used node ids 6 (pos) / 7 (neg).
+    if not placeholder_filled:
+        if "6" in workflow and "inputs" in workflow["6"]:
+            workflow["6"]["inputs"]["text"] = plan.positive_prompt
+        if "7" in workflow and "inputs" in workflow["7"]:
+            workflow["7"]["inputs"]["text"] = plan.negative_prompt or " "
 
-    # Steps + cfg per config tier.
+    # Steps + cfg + sampler + scheduler + ckpt per config tier.
+    # FIX (R7): swap ckpt_name based on config so --config schnell actually
+    # loads the schnell ckpt instead of silently running schnell timings
+    # against the dev ckpt.
     if config == "schnell":
         steps, cfg = 4, 1.0
+        sampler, scheduler = "euler", "simple"
     else:
         steps, cfg = 28, 3.5
+        sampler, scheduler = "dpmpp_2m", "karras"
+    target_ckpt = CKPT_BY_CONFIG.get(config, CKPT_BY_CONFIG["dev"])
     for _, node in workflow.items():
         inputs = node.get("inputs", {})
         if "steps" in inputs:
             inputs["steps"] = steps
         if "cfg" in inputs:
             inputs["cfg"] = cfg
+        if "sampler_name" in inputs:
+            inputs["sampler_name"] = sampler
+        if "scheduler" in inputs:
+            inputs["scheduler"] = scheduler
+        if "ckpt_name" in inputs:
+            inputs["ckpt_name"] = target_ckpt
 
     url = comfyui_url.rstrip("/")
     payload = json.dumps({"prompt": workflow}).encode("utf-8")

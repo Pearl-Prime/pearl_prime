@@ -387,3 +387,75 @@ python3 scripts/publish/validate_epub.py --batch artifacts/epub/
 * [`config/publishing/kdp_cover_typography.yaml`](../../config/publishing/kdp_cover_typography.yaml)
   — owns per-genre fonts (kept; R5 added Caveat for
   imposter_syndrome's script accent).
+
+## §14 — Identity-system flow (R7, 2026-05-03)
+
+R6 (PR #843) shipped `config/publishing/cover_identity_system.yaml`, the
+four-layer differentiation contract: brand × author × series × book.
+R7 wires this YAML into the rendering pipeline so every probe, every
+batch, and every per-book render is identity-aware.
+
+### Pipeline order
+
+1. **Imagery composition** — `scripts/publish/identity_compose_prompt.py`
+   reads the identity YAML and composes a per-book FLUX positive prompt
+   that includes:
+   - `book.this_book_subject` (the per-book unique focal scene)
+   - `book.this_book_register` (per-book emotional micro-register)
+   - `brand.motif_pool` filtered to `author.motif_focus`
+   - `brand.palette` (primary / secondary / accent hex tokens)
+   - cookbook v2 `style_modifiers` + `universal_register` (style layer)
+   - identity lock-ins (`brand.one_word_read`, `author.signature_color`,
+     `brand.finish`, `book.this_book_micro_palette_shift`)
+2. **Imagery render** — `scripts/publish/render_imagery_for_template.py`
+   reads identity. If `book.cover_kind == "type_only"` it skips FLUX.
+   Otherwise it submits the identity-composed prompt to ComfyUI at
+   `$COMFYUI_URL`. Schnell vs dev now correctly swap `ckpt_name`.
+3. **Cover composite** — `scripts/publish/render_kdp_cover.py` accepts a
+   `book_id` (or `--identity-book` on CLI). When provided, it overlays:
+   - **Brand palette** replaces R4 `palette.primary.hex` (and secondary).
+   - **Author signature_color** is forced into the subtitle accent (and
+     into title color when the cover is type-dominant).
+   - **Author type_quirk** applies best-effort case/weight transforms on
+     title/subtitle/author styles; anything not structurally expressible
+     surfaces in `meta["identity"]["type_quirk_note"]` for visual QA.
+   - **Per-book micro_palette_shift** is recorded in meta (operator-
+     visible nudge string; no automated tinting yet).
+   - **Type-only override** forces `type_dominant=True` and clears the
+     imagery zone when `book.cover_kind == "type_only"`.
+4. **Quality gates** — `scripts/publish/cover_quality_gates.py` runs the
+   six automated R6 gates: focal-clarity-thumbnail, title-OCR-legibility
+   (luminance-delta proxy), color-count ≤3, brand-palette ΔE, signature-
+   color-present, warm-off-white. The five manual gates (`*_manual:
+   true` in identity YAML) defer to operator visual QA.
+
+### Operator: how to edit per-book vibes
+
+Open `config/publishing/cover_identity_system.yaml` and edit the `books:`
+block. The four fields the operator owns end-to-end:
+
+* `this_book_subject` — the FLUX prompt's focal scene string
+* `this_book_register` — the emotional micro-register string
+* `this_book_micro_palette_shift` — the per-book palette nudge string
+* `cover_kind` — set to `type_only` to skip FLUX entirely
+
+After editing: run `python3 scripts/publish/identity_compose_prompt.py
+--book <id>` to preview the new composed prompt; then re-render the
+imagery + composite via `render_imagery_for_template.py --book
+<full_book_id>` and `render_kdp_cover.py --identity-book <id>`. Run the
+gates with `cover_quality_gates.py <cover.png> --book <id>`.
+
+### Probes (R7, 2026-05-03)
+
+Four probes were rendered on Pearl Star schnell (only flux1-schnell-fp8
+is installed; bestseller-grade output requires dev tier per R6 §7) into
+`/tmp/phoenix_qa_covers/v6_identity_system/`:
+
+| book        | brand                | type     | identity_applied |
+|-------------|----------------------|----------|------------------|
+| ahjan       | inner_light_press    | image    | yes              |
+| master_sha  | soul_repair          | image    | yes              |
+| maat        | truth_compass        | type-only| yes              |
+| master_wu   | mountain_gate_press  | image    | yes              |
+
+Per-probe gate JSON next to each PNG; `_probe_summary.json` aggregates.

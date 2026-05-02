@@ -82,6 +82,7 @@ CANVAS_H = 2560
 DEFAULT_TYPOGRAPHY_PATH = REPO_ROOT / "config" / "publishing" / "kdp_cover_typography.yaml"
 DEFAULT_TEMPLATES_PATH = REPO_ROOT / "config" / "publishing" / "bestseller_templates.yaml"
 DEFAULT_COOKBOOK_PATH = REPO_ROOT / "config" / "manga" / "genre_prompt_cookbook_v2.yaml"
+DEFAULT_IDENTITY_PATH = REPO_ROOT / "config" / "publishing" / "cover_identity_system.yaml"
 
 # System-font fallbacks (used when bundled OFL font is missing).
 SYSTEM_FALLBACKS = {
@@ -150,6 +151,37 @@ def load_typography_config(path: Path | None = None) -> dict[str, Any]:
                     f"Genre '{genre_name}' missing required key '{required}'"
                 )
     return cfg
+
+
+def load_identity_system(path: Path | None = None) -> dict[str, Any] | None:
+    """Load cover_identity_system.yaml (R6 contract). Returns None if
+    the file is absent (renderer falls back to R4-template-only behavior)."""
+    cfg_path = path or DEFAULT_IDENTITY_PATH
+    if not cfg_path.exists():
+        return None
+    cfg = yaml.safe_load(cfg_path.read_text())
+    if not isinstance(cfg, dict):
+        return None
+    return cfg
+
+
+def resolve_identity_for_book(
+    book_id: str,
+    identity_cfg: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    """Look up identity layers (book/author/brand) for ``book_id``. Returns
+    None when identity_cfg is missing or has no entry for the book."""
+    if identity_cfg is None:
+        return None
+    books = identity_cfg.get("books") or {}
+    if book_id not in books:
+        return None
+    book = books[book_id]
+    authors = identity_cfg.get("authors") or {}
+    author = authors.get(book.get("author_id")) or {}
+    brands = identity_cfg.get("brands") or {}
+    brand = brands.get(author.get("brand_id")) or {}
+    return {"book": book, "author": author, "brand": brand}
 
 
 def load_templates_config(path: Path | None = None) -> dict[str, Any]:
@@ -620,6 +652,94 @@ def _draw_block_in_zone(
     return size_used, lines, fill_rgb
 
 
+# ─── IDENTITY-SYSTEM OVERLAY (R6/R7) ─────────────────────────────────
+
+
+def _apply_identity_overrides(
+    template: dict[str, Any],
+    typography: dict[str, Any],
+    identity: dict[str, Any],
+) -> dict[str, Any]:
+    """Layer R6 identity (book/author/brand) on top of R4 template +
+    R3 typography. Mutates copies, returns a meta dict describing what
+    was applied (for the renderer's return value)."""
+    meta: dict[str, Any] = {
+        "identity_applied": True,
+        "brand_id": identity.get("author", {}).get("brand_id"),
+        "author_id": identity.get("book", {}).get("author_id"),
+    }
+
+    brand = identity.get("brand") or {}
+    author = identity.get("author") or {}
+    book = identity.get("book") or {}
+
+    # 1. Brand palette override — replaces palette.primary.hex.
+    brand_palette = brand.get("palette") or {}
+    if brand_palette.get("primary"):
+        template["palette"]["primary"]["hex"] = brand_palette["primary"]
+        meta["brand_palette_primary"] = brand_palette["primary"]
+    if brand_palette.get("secondary"):
+        template["palette"]["secondary"]["hex"] = brand_palette["secondary"]
+        meta["brand_palette_secondary"] = brand_palette["secondary"]
+    if brand_palette.get("accent") and "accent" in template.get("palette", {}):
+        template["palette"]["accent"]["hex"] = brand_palette["accent"]
+
+    # 2. Per-book micro-palette shift (informational; surfaced to caller).
+    if book.get("this_book_micro_palette_shift"):
+        meta["micro_palette_shift"] = book["this_book_micro_palette_shift"]
+
+    # 3. Type-only override.
+    if book.get("cover_kind") == "type_only":
+        template["type_dominant"] = True
+        template["imagery_zone"] = None
+        meta["type_only_override"] = True
+
+    # 4. Author signature_color → subtitle accent + force into title color
+    #    when type_dominant (Truth Compass / Gen Spark style).
+    sig_color = author.get("signature_color")
+    if sig_color:
+        meta["author_signature_color"] = sig_color
+        sub_style = typography.get("subtitle_style") or {}
+        if isinstance(sub_style, dict):
+            sub_style = dict(sub_style)
+            sub_style["color"] = sig_color
+            typography["subtitle_style"] = sub_style
+        if template.get("type_dominant"):
+            title_style = dict(typography.get("title_style") or {})
+            title_style["color"] = sig_color
+            typography["title_style"] = title_style
+
+    # 5. Author type_quirk → applied as best-effort string toggles on
+    #    title/author style. Anything we can't structurally express is
+    #    surfaced via meta for operator visual QA.
+    quirk = author.get("type_quirk") or ""
+    if quirk:
+        meta["type_quirk_note"] = quirk
+        title_style = dict(typography.get("title_style") or {})
+        author_style = dict(typography.get("author_style") or {})
+        sub_style = dict(typography.get("subtitle_style") or {})
+        ql = quirk.lower()
+        if "lowercase" in ql and "title" in ql:
+            title_style["case"] = "lower"
+        if "small-caps" in ql or "small caps" in ql or "small_caps" in ql:
+            if "title" in ql:
+                title_style["case"] = "upper"
+            if "author" in ql or "byline" in ql:
+                author_style["case"] = "upper"
+        if "italic" in ql and ("subtitle" in ql or "subhead" in ql):
+            sub_style["font_weight"] = "italic"
+        if "lowercase" in ql and ("author" in ql or "byline" in ql):
+            author_style["case"] = "lower"
+        if "all-caps" in ql or "all caps" in ql:
+            if "title" in ql:
+                title_style["case"] = "upper"
+        typography["title_style"] = title_style
+        typography["author_style"] = author_style
+        typography["subtitle_style"] = sub_style
+
+    return meta
+
+
 # ─── MAIN RENDER ──────────────────────────────────────────────────────
 
 
@@ -635,6 +755,8 @@ def render_kdp_cover(
     typography_overrides: dict[str, Any] | None = None,
     typography_config_path: Path | None = None,
     templates_config_path: Path | None = None,
+    book_id: str | None = None,
+    identity_config_path: Path | None = None,
 ) -> dict[str, Any]:
     """Composite typography + imagery into the genre's template → 1600x2560 cover.
 
@@ -692,7 +814,19 @@ def render_kdp_cover(
             else:
                 genre_typography[key] = value
 
-    template = templates_cfg["templates"][genre]
+    template = json.loads(json.dumps(templates_cfg["templates"][genre]))
+
+    # Identity-system overlay (R6/R7). When book_id is provided AND the
+    # identity YAML has an entry for it, layer brand/author/book on top.
+    identity_meta: dict[str, Any] = {"identity_applied": False}
+    if book_id:
+        identity_cfg = load_identity_system(identity_config_path)
+        identity = resolve_identity_for_book(book_id, identity_cfg)
+        if identity is not None:
+            identity_meta = _apply_identity_overrides(
+                template, genre_typography, identity,
+            )
+
     type_dominant = bool(template.get("type_dominant", False))
 
     # 1. Build canvas (flat primary + optional imagery patch).
@@ -822,6 +956,7 @@ def render_kdp_cover(
             if isinstance(v, dict) and "hex" in v
         },
         "title_lines": title_lines,
+        "identity": identity_meta,
     }
 
 
@@ -943,6 +1078,11 @@ def build_parser() -> argparse.ArgumentParser:
                         help="Render all teacher books from TEACHER_BOOKS.")
     parser.add_argument("--typography-config", type=Path, default=None)
     parser.add_argument("--templates-config", type=Path, default=None)
+    parser.add_argument("--identity-book", type=str, default=None,
+                        help="Identity-system book key (e.g. 'ahjan', 'maat'). "
+                             "Reads cover_identity_system.yaml and overlays "
+                             "brand/author/book layers on R4 template.")
+    parser.add_argument("--identity-config", type=Path, default=None)
     return parser
 
 
@@ -1011,6 +1151,8 @@ def main(argv: list[str] | None = None) -> int:
         publisher=publisher,
         typography_config_path=args.typography_config,
         templates_config_path=args.templates_config,
+        book_id=args.identity_book,
+        identity_config_path=args.identity_config,
     )
     print(f"wrote {meta['output_size'][0]}x{meta['output_size'][1]} → {meta['output_path']}")
     print(f"  layout={meta['layout_used']} archetype={meta['template_archetype']}"
