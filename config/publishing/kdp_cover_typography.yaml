@@ -6,11 +6,11 @@
 #     anchor:              left | centered | right
 #     max_width_pct:       int (% of canvas width)
 #     max_height_pct:      int (% of canvas height for the title block)
-#     vertical_offset_pct: int (offset from top edge of zone, % of canvas height)
+#     vertical_offset_pct: int (offset from top edge of canvas, % of canvas height)
 #   title_style / subtitle_style / author_style:
 #     font_family:         serif | sans_serif | display | script
 #     font_weight:         regular | bold | extra_bold
-#     size_px_at_1600x2560: int
+#     size_px_at_1600x2560: int (target line height; renderer auto-shrinks for overflow)
 #     tracking_pct:        int (letter-spacing as % of em)
 #     case:                title | upper | lower
 #     color:               auto | "#hexcolor"  (auto = high-contrast pick from illustration zone)
@@ -19,9 +19,14 @@
 #     prefer_light_text_if_dark_zone: bool
 #     hex_palette_fallback: [list of hex colors used if illustration sampling fails]
 #
-# All entries are marked `# REVISIT_AFTER_R1` until R1's
-# `artifacts/research/kdp_bestseller_cover_analysis_2026-05-02.md` lands and the
-# operator can replace defaults with R1-derived per-genre rules.
+# Per R1 (artifacts/research/kdp_bestseller_cover_analysis_2026-05-02.md §12):
+#   Per-genre title font + weight + position + size + color + zone all
+#   come from the per-genre R1 table. R1 layout zones reflect where the
+#   FLUX focal point sits + which 40-60% of the canvas R3 owns for type.
+#   Bundled fonts: serif=EB Garamond, sans_serif=Inter, display=Playfair Display.
+#   No script font bundled (imposter_syndrome's "+1 script accent" deferred to v2.1).
+#
+# All entries are tuned to R1 (no longer REVISIT_AFTER_R1).
 
 defaults:
   canvas_w: 1600
@@ -30,13 +35,12 @@ defaults:
     serif: "assets/fonts/kdp_overlay/eb_garamond/EBGaramond-VariableFont_wght.ttf"
     sans_serif: "assets/fonts/kdp_overlay/inter/Inter-VariableFont_opsz_wght.ttf"
     display: "assets/fonts/kdp_overlay/playfair_display/PlayfairDisplay-VariableFont_wght.ttf"
-  # Author block — placed at bottom of every genre layout unless overridden.
   default_author_zone:
     position: "bottom"
     anchor: "centered"
     max_width_pct: 70
     max_height_pct: 6
-    vertical_offset_pct: 90  # 90% from top → near bottom edge
+    vertical_offset_pct: 90
   default_author_style:
     font_family: "sans_serif"
     font_weight: "bold"
@@ -48,245 +52,267 @@ defaults:
 
 genres:
 
-  anxiety:  # REVISIT_AFTER_R1
+  # R1: bold sans-serif, upper-third (FLUX focal is hand at center-lower),
+  # 18-22% block, cream on indigo OR indigo on cream.
+  anxiety:
     title_zone:
       position: "top"
       anchor: "centered"
       max_width_pct: 86
-      max_height_pct: 24
-      vertical_offset_pct: 6
-    title_style:
-      font_family: "serif"
-      font_weight: "bold"
-      size_px_at_1600x2560: 150
-      tracking_pct: 0
-      case: "title"
-      color: "auto"
-      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.38 }
-    subtitle_style:
-      font_family: "serif"
-      font_weight: "regular"
-      size_px_at_1600x2560: 56
-      tracking_pct: 2
-      case: "title"
-      color: "auto"
-      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
-    palette_hints:
-      prefer_light_text_if_dark_zone: true
-      hex_palette_fallback: ["#FFFFFF", "#0F172A"]
-
-  self_worth:  # REVISIT_AFTER_R1
-    title_zone:
-      position: "top"
-      anchor: "centered"
-      max_width_pct: 86
-      max_height_pct: 24
-      vertical_offset_pct: 8
-    title_style:
-      font_family: "display"
-      font_weight: "bold"
-      size_px_at_1600x2560: 158
-      tracking_pct: 0
-      case: "title"
-      color: "auto"
-      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.35 }
-    subtitle_style:
-      font_family: "serif"
-      font_weight: "regular"
-      size_px_at_1600x2560: 54
-      tracking_pct: 2
-      case: "title"
-      color: "auto"
-      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
-    palette_hints:
-      prefer_light_text_if_dark_zone: true
-      hex_palette_fallback: ["#FFFFFF", "#1E1B4B"]
-
-  overthinking:  # REVISIT_AFTER_R1
-    title_zone:
-      position: "top"
-      anchor: "centered"
-      max_width_pct: 84
       max_height_pct: 22
-      vertical_offset_pct: 6
+      vertical_offset_pct: 8
     title_style:
       font_family: "sans_serif"
       font_weight: "extra_bold"
-      size_px_at_1600x2560: 148
+      size_px_at_1600x2560: 220
       tracking_pct: -1
       case: "title"
       color: "auto"
-      shadow: { offset_px: [0, 4], blur_px: 12, color_alpha: 0.35 }
-    subtitle_style:
-      font_family: "sans_serif"
-      font_weight: "regular"
-      size_px_at_1600x2560: 52
-      tracking_pct: 2
-      case: "title"
-      color: "auto"
-      shadow: { offset_px: [0, 2], blur_px: 6, color_alpha: 0.28 }
-    palette_hints:
-      prefer_light_text_if_dark_zone: true
-      hex_palette_fallback: ["#FFFFFF", "#111827"]
-
-  boundaries:  # REVISIT_AFTER_R1
-    title_zone:
-      position: "top"
-      anchor: "centered"
-      max_width_pct: 86
-      max_height_pct: 24
-      vertical_offset_pct: 7
-    title_style:
-      font_family: "sans_serif"
-      font_weight: "extra_bold"
-      size_px_at_1600x2560: 156
-      tracking_pct: 0
-      case: "upper"
-      color: "auto"
       shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.38 }
     subtitle_style:
-      font_family: "serif"
+      font_family: "sans_serif"
       font_weight: "regular"
-      size_px_at_1600x2560: 54
+      size_px_at_1600x2560: 60
       tracking_pct: 2
       case: "title"
       color: "auto"
       shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
     palette_hints:
       prefer_light_text_if_dark_zone: true
-      hex_palette_fallback: ["#FFFFFF", "#7F1D1D"]
+      hex_palette_fallback: ["#FAF6EE", "#1E3A8A"]
 
-  burnout:  # REVISIT_AFTER_R1
-    title_zone:
-      position: "top"
-      anchor: "centered"
-      max_width_pct: 86
-      max_height_pct: 24
-      vertical_offset_pct: 6
-    title_style:
-      font_family: "serif"
-      font_weight: "bold"
-      size_px_at_1600x2560: 148
-      tracking_pct: 0
-      case: "title"
-      color: "auto"
-      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.35 }
-    subtitle_style:
-      font_family: "serif"
-      font_weight: "regular"
-      size_px_at_1600x2560: 52
-      tracking_pct: 2
-      case: "title"
-      color: "auto"
-      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
-    palette_hints:
-      prefer_light_text_if_dark_zone: true
-      hex_palette_fallback: ["#FFFFFF", "#7C2D12"]
-
-  grief:  # REVISIT_AFTER_R1
+  # R1: serif regular, center with generous top margin, 14-18% block,
+  # soft black on cream OR cream on dusty sage. FLUX focal: feather at lower-center.
+  grief:
     title_zone:
       position: "center"
       anchor: "centered"
-      max_width_pct: 80
-      max_height_pct: 22
-      vertical_offset_pct: 38
+      max_width_pct: 78
+      max_height_pct: 18
+      vertical_offset_pct: 28
     title_style:
-      font_family: "serif"
+      font_family: "display"
       font_weight: "regular"
-      size_px_at_1600x2560: 142
+      size_px_at_1600x2560: 180
       tracking_pct: 2
       case: "title"
       color: "auto"
-      shadow: { offset_px: [0, 4], blur_px: 16, color_alpha: 0.40 }
+      shadow: { offset_px: [0, 4], blur_px: 16, color_alpha: 0.30 }
     subtitle_style:
-      font_family: "serif"
+      font_family: "display"
       font_weight: "regular"
-      size_px_at_1600x2560: 50
+      size_px_at_1600x2560: 56
+      tracking_pct: 4
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.25 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#1F2937", "#F5EFE3"]
+
+  # R1: BIGGEST title of all genres — bold sans-serif display ALL CAPS,
+  # center 60% (full type takeover), 26-32% block, cream on terracotta.
+  # Most type-dominant genre — type IS the cover.
+  boundaries:
+    title_zone:
+      position: "center"
+      anchor: "centered"
+      max_width_pct: 88
+      max_height_pct: 32
+      vertical_offset_pct: 22
+    title_style:
+      font_family: "sans_serif"
+      font_weight: "extra_bold"
+      size_px_at_1600x2560: 340
+      tracking_pct: -2
+      case: "upper"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.30 }
+    subtitle_style:
+      font_family: "sans_serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 64
       tracking_pct: 4
       case: "title"
       color: "auto"
       shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
     palette_hints:
-      prefer_light_text_if_dark_zone: true
-      hex_palette_fallback: ["#FFFFFF", "#1E293B"]
+      prefer_light_text_if_dark_zone: false
+      hex_palette_fallback: ["#FBF3E4", "#B7472A"]
 
-  courage:  # REVISIT_AFTER_R1
+  # R1: humanist sans-serif OR display serif, center, 20-26% block,
+  # cream on terracotta OR warm-black on cream.
+  self_worth:
     title_zone:
-      position: "top"
+      position: "center"
       anchor: "centered"
-      max_width_pct: 88
+      max_width_pct: 84
       max_height_pct: 26
-      vertical_offset_pct: 5
+      vertical_offset_pct: 28
     title_style:
-      font_family: "display"
+      font_family: "sans_serif"
       font_weight: "bold"
-      size_px_at_1600x2560: 162
+      size_px_at_1600x2560: 280
       tracking_pct: 0
-      case: "upper"
+      case: "title"
       color: "auto"
-      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.40 }
+      shadow: { offset_px: [0, 4], blur_px: 12, color_alpha: 0.30 }
     subtitle_style:
-      font_family: "serif"
+      font_family: "sans_serif"
       font_weight: "regular"
-      size_px_at_1600x2560: 54
+      size_px_at_1600x2560: 60
       tracking_pct: 2
       case: "title"
       color: "auto"
-      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
+      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.28 }
     palette_hints:
-      prefer_light_text_if_dark_zone: true
-      hex_palette_fallback: ["#FFFFFF", "#7F1D1D"]
+      prefer_light_text_if_dark_zone: false
+      hex_palette_fallback: ["#FBF1DE", "#7C3F1F"]
 
-  imposter_syndrome:  # REVISIT_AFTER_R1
+  # R1: bold sans-serif Helvetica/Inter Black, center, often ALL CAPS,
+  # 18-24% block, single accent color on neutral.
+  overthinking:
     title_zone:
-      position: "top"
+      position: "center"
       anchor: "centered"
-      max_width_pct: 86
-      max_height_pct: 24
-      vertical_offset_pct: 6
+      max_width_pct: 82
+      max_height_pct: 22
+      vertical_offset_pct: 30
     title_style:
       font_family: "sans_serif"
       font_weight: "extra_bold"
-      size_px_at_1600x2560: 150
-      tracking_pct: -1
-      case: "title"
+      size_px_at_1600x2560: 240
+      tracking_pct: 0
+      case: "upper"
       color: "auto"
-      shadow: { offset_px: [0, 4], blur_px: 12, color_alpha: 0.35 }
+      shadow: { offset_px: [0, 4], blur_px: 12, color_alpha: 0.32 }
     subtitle_style:
       font_family: "sans_serif"
       font_weight: "regular"
-      size_px_at_1600x2560: 52
+      size_px_at_1600x2560: 56
       tracking_pct: 2
       case: "title"
       color: "auto"
       shadow: { offset_px: [0, 2], blur_px: 6, color_alpha: 0.28 }
     palette_hints:
       prefer_light_text_if_dark_zone: true
-      hex_palette_fallback: ["#FFFFFF", "#0C4A6E"]
+      hex_palette_fallback: ["#111827", "#F3F4F6"]
 
-  sleep_anxiety:  # REVISIT_AFTER_R1
+  # R1: bold sans-serif (+ script accent — script font deferred to v2.1),
+  # center 60%, 24-30% block, cream/black on hot coral.
+  imposter_syndrome:
+    title_zone:
+      position: "center"
+      anchor: "centered"
+      max_width_pct: 86
+      max_height_pct: 28
+      vertical_offset_pct: 24
+    title_style:
+      font_family: "sans_serif"
+      font_weight: "extra_bold"
+      size_px_at_1600x2560: 300
+      tracking_pct: -1
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 12, color_alpha: 0.30 }
+    subtitle_style:
+      font_family: "sans_serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 60
+      tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 6, color_alpha: 0.28 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: false
+      hex_palette_fallback: ["#FBF7F2", "#0F172A"]
+
+  # R1: light/medium sans-serif OR humanist serif (NOT black weight),
+  # center with large negative space above, 14-18% block, cream/pale gold
+  # on indigo. FLUX focal: moon at upper-third → title in lower 50%.
+  sleep_anxiety:
+    title_zone:
+      position: "bottom"
+      anchor: "centered"
+      max_width_pct: 80
+      max_height_pct: 18
+      vertical_offset_pct: 56
+    title_style:
+      font_family: "serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 200
+      tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.35 }
+    subtitle_style:
+      font_family: "serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 54
+      tracking_pct: 4
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.28 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#FFF8E7", "#1E1B4B"]
+
+  # R1: bold sans-serif (manifesto tier) OR light serif (recovery tier).
+  # Recovery tier chosen here — soft black on dusty palette, 18-22% block.
+  # FLUX focal: small wilting symbol at lower-third → title in upper 50%.
+  burnout:
     title_zone:
       position: "top"
       anchor: "centered"
       max_width_pct: 84
       max_height_pct: 22
-      vertical_offset_pct: 6
+      vertical_offset_pct: 8
     title_style:
-      font_family: "serif"
-      font_weight: "bold"
-      size_px_at_1600x2560: 146
+      font_family: "display"
+      font_weight: "regular"
+      size_px_at_1600x2560: 240
       tracking_pct: 0
       case: "title"
       color: "auto"
-      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.38 }
+      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.30 }
     subtitle_style:
-      font_family: "serif"
+      font_family: "display"
       font_weight: "regular"
-      size_px_at_1600x2560: 52
+      size_px_at_1600x2560: 56
       tracking_pct: 2
+      case: "title"
+      color: "auto"
+      shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.28 }
+    palette_hints:
+      prefer_light_text_if_dark_zone: true
+      hex_palette_fallback: ["#1F2937", "#F5EFE3"]
+
+  # R1: humanist sans-serif (Avenir, Gotham) OR condensed serif, bold,
+  # upper-third title + lower-third author SPLIT, 18-22% block,
+  # cream on terracotta. FLUX focal: mountain at lower-third → title in upper 50%.
+  courage:
+    title_zone:
+      position: "top"
+      anchor: "centered"
+      max_width_pct: 88
+      max_height_pct: 22
+      vertical_offset_pct: 8
+    title_style:
+      font_family: "sans_serif"
+      font_weight: "bold"
+      size_px_at_1600x2560: 240
+      tracking_pct: 0
+      case: "upper"
+      color: "auto"
+      shadow: { offset_px: [0, 4], blur_px: 14, color_alpha: 0.35 }
+    subtitle_style:
+      font_family: "sans_serif"
+      font_weight: "regular"
+      size_px_at_1600x2560: 60
+      tracking_pct: 4
       case: "title"
       color: "auto"
       shadow: { offset_px: [0, 2], blur_px: 8, color_alpha: 0.30 }
     palette_hints:
-      prefer_light_text_if_dark_zone: true
-      hex_palette_fallback: ["#FFFFFF", "#1E1B4B"]
+      prefer_light_text_if_dark_zone: false
+      hex_palette_fallback: ["#FBF1DE", "#7C2D12"]

@@ -1,10 +1,9 @@
 # Genre Prompt Cookbook v2 — KDP Self-Help Cover Regeneration
 #
-# This cookbook supersedes the thin per-genre prompt fragments scattered in
-# the prior cover_regen_manifest. It is the single source of truth for FLUX
-# positive + negative prompts when regenerating the 11 non-fragment KDP
-# self-help book covers (anxiety, sleep_anxiety, grief, boundaries,
-# self_worth, overthinking, imposter_syndrome) at 1600x2560 portrait.
+# This cookbook is the single source of truth for FLUX positive + negative
+# prompts when regenerating the 11 non-fragment KDP self-help book covers
+# (anxiety, sleep_anxiety, grief, boundaries, self_worth, overthinking,
+# imposter_syndrome, burnout, courage) at 1600x2560 portrait.
 #
 # CRITICAL DESIGN RULE — FROM PR #802 §0/§2/§8:
 #   The deployment's negative-prompt CLIPTextEncode node is the ONLY place
@@ -15,27 +14,33 @@
 #
 #   Therefore EVERY positive prompt in this cookbook is pure positive
 #   tokens. ALL negations live in `universal_negative` below, which is
-#   piped to the negative CLIPTextEncode slot by the (forthcoming) cookbook
-#   v2 compose helper.
+#   piped to the negative CLIPTextEncode slot by the cookbook v2 compose
+#   helper.
 #
-# This cookbook targets KDP self-help trade paperback aesthetics (single
-# focal subject, illustrated/painterly, room reserved at top + bottom for
-# title and author overlay). It is NOT the manga-panel cookbook from PR #802
-# (genre_prompt_cookbook.yaml), which targets sequential-art register for
-# stillness_press manga panels. Different surface, different prompt rules.
+# CRITICAL DESIGN RULE — FROM R1 (artifacts/research/kdp_bestseller_cover_analysis_2026-05-02.md §12):
+#   Bestseller self-help covers in our 9 genres do NOT depict faces or
+#   full human figures. The dominant archetypes are object-still-life
+#   (a single hand, feather, leaf, stone, moon, mountain) or pure
+#   typography on flat color (boundaries, imposter_syndrome). FLUX
+#   cannot reliably render readable text on covers — typography is
+#   composited later by `scripts/publish/render_kdp_cover.py` (R3).
 #
-# When R1's bestseller archetype analysis lands at
-# artifacts/research/kdp_bestseller_cover_analysis_2026-05-02.md, every
-# genre block flagged `revisit_after_r1: true` should be tuned to the
-# specific archetype R1 names. As of cookbook v2 first issue, R1's branch
-# does not exist yet — all genres are research-doc-grounded only.
+#   Therefore every genre's subject_prompt below is OBJECT- or
+#   COMPOSITION-driven, never figure-driven. "no faces, no human figures,
+#   no people" is in `universal_negative` to prevent FLUX from inserting
+#   them anyway.
+#
+# This cookbook targets KDP self-help trade paperback aesthetics. It is
+# NOT the manga-panel cookbook from PR #802 (genre_prompt_cookbook.yaml),
+# which targets sequential-art register for stillness_press manga panels.
+# Different surface, different prompt rules.
 
 schema_version: 2
 last_updated: "2026-05-02"
 
 authority:
   - "PR #802: docs/COMFYUI_FLUX_MANGA_PROMPTING_RESEARCH_2026-04-29.md (negation rule §8, sampler §2.4, weight syntax §2.3)"
-  - "R1 artifact: artifacts/research/kdp_bestseller_cover_analysis_2026-05-02.md (NOT YET AVAILABLE at cookbook v2 first issue; all genres carry revisit_after_r1: true)"
+  - "R1: artifacts/research/kdp_bestseller_cover_analysis_2026-05-02.md §12 (per-genre archetypes, lock-in tokens, no-figure rule)"
   - "PR #807: H1=A engine config — flux1-dev fp8 / 28 steps / cfg 3.5 / dpmpp_2m / karras"
 
 # Engine config (operator-facing reminder; not consumed by compose helper)
@@ -47,277 +52,264 @@ engine:
   cfg: 3.5
   width: 1600
   height: 2560
-  notes: >-
-    KDP portrait native resolution. Per PR #802 §0, do NOT use
-    flux1-schnell at these step counts — schnell is the 4-step distilled
-    variant and oversampling at 28 steps causes color oversaturation,
-    typography hallucinations, and concrete-noun amplification.
 
 # ---------------------------------------------------------------------------
 # Universal layout register — applied after every genre's subject + style
 # block. Reinforces composition WITHOUT using "no X" / "without X" patterns.
-# Pure positive-token reinforcement. Put what you DO want, never what you
-# don't. Negatives live in universal_negative below.
+# Pure positive-token reinforcement. Negatives live in universal_negative.
 # ---------------------------------------------------------------------------
 universal_register: >-
   KDP portrait composition, 1600x2560 portrait aspect, illustrated trade
-  paperback book cover, single dominant focal subject, bold cinematic
+  paperback book cover, single dominant focal element, bold cinematic
   composition, generous breathing room at top of frame for title overlay,
   generous breathing room at bottom of frame for author byline, modern
   bestseller aesthetic, professional book cover illustration, high
-  production value, painterly, depth of field, clean uncluttered
-  background
+  production value, painterly, editorial book cover photography aesthetic,
+  clean uncluttered background
 
 # ---------------------------------------------------------------------------
 # Universal negative prompt — ALL negations live here.
-# The deployment's negative-slot CLIPTextEncode node consumes this string
-# verbatim. Compose helper exposes this via compose_negative().
-# Tag-style, ~30 tokens, per PR #802 §2.5 (negatives on FLUX work when
-# short, tag-style, in the real negative slot, at cfg >= 3.0).
+# Tag-style, ~40 tokens. Per PR #802 §2.5 negatives on FLUX work when
+# short, tag-style, in the real negative slot, at cfg >= 3.0.
+# Per R1 §12 includes faces / human figures / stock photo / AI-look.
 # ---------------------------------------------------------------------------
 universal_negative: >-
   text, words, letters, typography, kanji, hiragana, katakana, chinese
-  characters, watermark, signature, logo, frame, border, low quality,
+  characters, watermark, signature, logo, frame, border, faces, human
+  figures, people, person, hands of a person, body parts, low quality,
   blurry, jpeg artifacts, grainy, distorted anatomy, deformed face,
   asymmetric eyes, extra limbs, mutated hands, extra fingers, cartoonish,
   chibi, oversaturated, harsh contrast, busy composition, cluttered,
   multiple subjects, collage, photo realistic skin pores, stock photo,
-  generic stock photography, placeholder art, amateur illustration
+  generic stock photography, placeholder art, amateur illustration, AI
+  generated look, midjourney aesthetic
 
 # ---------------------------------------------------------------------------
-# Per-genre prompt blocks.
+# Per-genre prompt blocks (R1-tuned, 2026-05-02).
 #
 # Schema:
-#   archetype:        2-3 word archetype name (R1-driven when available;
-#                     otherwise research-doc-grounded placeholder)
-#   palette:          2-3 line palette description (color register)
-#   composition:      single-line composition rule
-#   subject_prompt:   pure positive token block — the central image
-#   style_modifiers:  painterly / lighting / texture tokens
-#   lock_in_tokens:   2-3 strong visual concepts that anchor the genre
-#   revisit_after_r1: true if R1 was unavailable when this block was
-#                     authored (always true at cookbook v2 first issue)
+#   archetype:        2-3 word archetype name from R1 §1-§9
+#   palette:          R1 palette description (color register)
+#   composition:      single-line composition rule (object-driven)
+#   subject_prompt:   pure positive token block — the central image,
+#                     OBJECT-driven, NO figures
+#   style_modifiers:  editorial / lighting / texture tokens
+#   lock_in_tokens:   exactly the 3 strongest tokens per R1 §12 table
+#   revisit_after_r1: false (this cookbook IS the post-R1 tuning)
 # ---------------------------------------------------------------------------
 genres:
 
   anxiety:
-    # REVISIT-AFTER-R1: tune to bestseller archetype
-    archetype: "calm before dawn"
+    archetype: "single hand on cool blue"
     palette: >-
-      muted dawn blues, soft pre-sunrise lavender, warm cream highlights;
-      no harsh contrast, no oversaturated reds; the eye should rest, not
+      cool blue and cream palette, indigo to sky gradient, low chroma
+      with one warm accent at the focal point; the eye should rest, not
       jolt
     composition: >-
-      single human figure mid-frame, three-quarter view, eyes closed or
-      gaze lowered, breathing posture, generous negative space top and
-      bottom
+      single hand emerging from soft shadow at lower-center, fingers
+      relaxed, light catching the edge; vast open negative space above
+      for title overlay; minimalist editorial framing
     subject_prompt: >-
-      a single contemplative figure breathing slowly at first light, hand
-      resting over heart, soft dawn breaking behind, calm receptive
-      posture, eyes gently closed, expression of returning steadiness
+      single hand emerging from soft shadow, fingers softly relaxed,
+      catching a single shaft of cool morning light, surrounded by
+      generous quiet negative space, low-key editorial photography
+      composition, calm minimalist still life
     style_modifiers: >-
-      painterly trade paperback illustration, soft volumetric morning
-      light, gentle gradient sky, minimal grain, contemporary self help
-      bestseller aesthetic, warm restorative mood
-    lock_in_tokens: ["dawn light", "breathing posture", "stillness"]
-    revisit_after_r1: true
+      low-key editorial book cover photography, soft volumetric morning
+      light, cool blue and cream palette, minimalist contemporary
+      bestseller aesthetic, depth of field with quiet background
+    lock_in_tokens: ["single hand emerging from soft shadow", "cool blue and cream palette indigo to sky gradient", "low-key editorial photography calm minimalist"]
+    revisit_after_r1: false
 
   sleep_anxiety:
-    # REVISIT-AFTER-R1: tune to bestseller archetype
-    archetype: "quiet bedroom hour"
+    archetype: "crescent moon on indigo"
     palette: >-
-      deep indigo night, warm amber bedside glow, soft moonlit silver;
-      contrast lives between the warm pool of lamp light and the dark
-      surrounding room
+      deep navy to cream gradient, midnight indigo dominant, soft pale
+      gold or cream accent for the moon; quiet luminous register, no
+      harsh contrast
     composition: >-
-      single figure near a window or bedside, soft amber lamp providing
-      one focal warmth source, ambient room dark but not menacing,
-      portrait-friendly headroom
+      single crescent moon high in upper-third of frame on a deep indigo
+      field, soft halated glow, vast quiet sky below for title overlay
+      placement; balanced atmospheric still composition
     subject_prompt: >-
-      a person in a quiet bedroom in the small hours, seated calmly near
-      a window with a softly glowing bedside lamp, gentle moonlight on
-      bedding, expression of slowly settling into rest, hands relaxed in
-      lap
+      single crescent moon on a deep indigo field, soft pale glow
+      surrounding it, midnight palette, quiet atmospheric night
+      composition, soft natural light, vast still sky, minimalist editorial
+      book cover photography
     style_modifiers: >-
-      painterly book cover illustration, two-tone warm-cool lighting,
-      soft volumetric lamp glow, restful intimate atmosphere, modern
-      bestseller cover aesthetic
-    lock_in_tokens: ["bedside lamp glow", "moonlit bedroom", "settling into rest"]
-    revisit_after_r1: true
+      atmospheric night photography aesthetic, deep navy to cream
+      gradient, soft moonlit glow, quiet luminous register, restful
+      bestseller cover aesthetic, depth of field minimal grain
+    lock_in_tokens: ["crescent moon on indigo field soft glow", "deep navy to cream gradient midnight palette", "quiet atmospheric night composition soft natural light"]
+    revisit_after_r1: false
 
   grief:
-    # REVISIT-AFTER-R1: tune to bestseller archetype
-    archetype: "tender remembering"
+    archetype: "single feather on cream"
     palette: >-
-      soft slate grey, warm pewter, gentle moss green, slow ochre
-      highlights; the warmth must be earned, never bright; cool dominant,
-      warm accent
+      dusty sage and off-white palette, low chroma, soft natural light;
+      warmth must be earned, never bright; predominantly cool with a
+      single soft warm note
     composition: >-
-      single figure outdoors in still natural setting, hand on chest or
-      holding a small meaningful object, gaze slightly off-camera in
-      tender remembrance, soft mist or quiet weather
+      single small still object (feather, leaf, or smooth stone) resting
+      on cream or dusty sage field, soft natural overhead light, quiet
+      shadow; generous calm negative space; atmospheric still life
     subject_prompt: >-
-      a person standing alone in a quiet meadow or by still water,
-      holding a small folded letter or pressed flower close to their
-      chest, soft mist around them, expression of tender private grief
-      slowly turning toward acceptance
+      single feather resting on a cream field, soft natural overhead
+      light, gentle quiet shadow, atmospheric still life photography,
+      contemplative palette of cream and dusty sage, minimalist editorial
+      book cover composition
     style_modifiers: >-
-      painterly cinematic illustration, overcast diffuse natural light,
-      muted earth palette with one warm accent, contemplative bestseller
-      cover aesthetic, depth of field with soft focus background
-    lock_in_tokens: ["soft mist", "held keepsake", "still water"]
-    revisit_after_r1: true
+      atmospheric still life photography, soft natural light, dusty sage
+      and off-white palette, low chroma contemplative register, minimal
+      grain, depth of field with calm background
+    lock_in_tokens: ["single feather (or leaf, or stone) on cream field", "dusty sage and off-white palette low chroma", "atmospheric still life soft natural light contemplative"]
+    revisit_after_r1: false
 
   boundaries:
-    # REVISIT-AFTER-R1: tune to bestseller archetype
-    archetype: "rooted standing"
+    archetype: "bold flat color, terracotta and cream"
     palette: >-
-      grounded forest green, warm terracotta, deep walnut brown,
-      confident gold accent; saturated enough to feel firm, never harsh
+      bold flat color block, terracotta and cream, high contrast and
+      saturated; pure solid tone throughout, premium typography
+      bestseller register where the type is the cover
     composition: >-
-      single figure standing tall and grounded, feet visibly planted,
-      shoulders open, palm raised in calm refusal or hand resting on
-      heart, low-angle hint to convey strength without aggression
+      bold flat color background filling the canvas, single thin clean
+      geometric line dividing the field horizontally, generous negative
+      space at top and bottom for title overlay; type-dominant editorial
+      graphic
     subject_prompt: >-
-      a self-assured person standing tall and rooted in a wide natural
-      landscape, one palm raised in calm steady refusal, the other
-      resting lightly over heart, golden light framing them from behind,
-      expression of grounded clarity and self respect
+      bold flat color field of terracotta and cream, single thin clean
+      geometric line dividing the canvas, editorial graphic design
+      composition, high contrast typographic poster aesthetic, fully
+      saturated solid color block, flat solid tone throughout
     style_modifiers: >-
-      painterly illustrated book cover, golden hour rim lighting,
-      grounded earth tones, modern empowerment bestseller aesthetic,
-      warm dignified atmosphere
-    lock_in_tokens: ["rooted stance", "raised palm", "golden hour rim light"]
-    revisit_after_r1: true
+      editorial graphic design, high contrast flat color treatment,
+      premium minimalist poster aesthetic, clean vector-flat color
+      blocking, pure solid tone, contemporary self-help typography
+      bestseller register
+    lock_in_tokens: ["bold flat color field terracotta and cream", "single thin geometric line dividing canvas", "editorial graphic design high contrast solid tone"]
+    revisit_after_r1: false
 
   self_worth:
-    # REVISIT-AFTER-R1: tune to bestseller archetype
-    archetype: "inner light returning"
+    archetype: "warm earth tone field"
     palette: >-
-      warm honey gold, soft rose, cream highlights, gentle peach;
-      luminous and self-illuminating without being saccharine
+      warm earth tone background, terracotta or ochre dominant, soft
+      golden-hour highlight; humanist warmth, premium minimal register;
+      no figures, generous breathing room
     composition: >-
-      single figure mid-frame, hand resting over heart or arms loosely
-      crossed in self-embrace, soft inner-glow lighting suggesting the
-      light is coming from the subject, not the sun
+      warm earth tone field filling the canvas, soft golden-hour light
+      gradient from upper area, generous negative space throughout for
+      title takeover; humanist minimalist composition
     subject_prompt: >-
-      a softly luminous figure in quiet self-acceptance, hand resting
-      over heart, expression of gentle dawning realization, warm interior
-      light radiating from within and softly illuminating the face,
-      relaxed shoulders, the moment of remembering enoughness
+      warm earth tone background of terracotta and ochre, soft
+      golden-hour light from upper canvas, premium minimalist composition,
+      humanist warmth, generous negative space, editorial book cover
+      photography aesthetic
     style_modifiers: >-
-      painterly intimate illustration, warm interior glow, soft halation
-      around the figure, tender bestseller cover aesthetic, modern
-      self-acceptance cover language
-    lock_in_tokens: ["inner glow", "hand over heart", "warm halation"]
-    revisit_after_r1: true
+      premium minimalist editorial photography, warm earth tone palette,
+      soft golden-hour gradient, humanist warmth, generous negative
+      space, contemporary self-help bestseller cover aesthetic
+    lock_in_tokens: ["warm earth tone background terracotta or ochre", "soft golden-hour light premium minimal aesthetic", "humanist warmth generous negative space"]
+    revisit_after_r1: false
 
   overthinking:
-    # REVISIT-AFTER-R1: tune to bestseller archetype
-    archetype: "loop quieting"
+    archetype: "tangled line resolving"
     palette: >-
-      cool slate, soft mineral blue, warm cream emerging through;
-      dominant cool with a slowly arriving warm break, mirroring thought
-      finally yielding
+      cool gray and off-white palette with a single warm accent;
+      controlled cool register, the warm accent rewarding the eye for
+      following the line resolution
     composition: >-
-      single figure with hands gently at temples or fingertips touching
-      forehead, eyes lowered in concentration that is softening, faint
-      stylized swirling lines around the head dissolving into open space
-      as the eye moves outward
+      single tangled line in upper-third resolving downward into a clean
+      curve in the lower-half, single warm accent at the resolution
+      point, vast negative space framing; editorial line illustration
+      register
     subject_prompt: >-
-      a thoughtful person quieting a busy mind, fingertips lightly
-      touching forehead, eyes lowered, soft swirling stylized currents
-      around the head dissipating into clear cool air, expression of a
-      mental loop finally beginning to release
+      single tangled abstract line resolving into a clean curve, editorial
+      line illustration on cool gray and off-white field, single warm
+      accent at the resolution point, minimalist clean composition,
+      generous negative space framing
     style_modifiers: >-
-      painterly illustration, cool-to-warm subtle lighting transition,
-      stylized abstract thought currents rendered as soft brushstroke
-      forms, contemporary self help bestseller aesthetic
-    lock_in_tokens: ["dissipating thought currents", "fingertips at temple", "loop releasing"]
-    revisit_after_r1: true
+      editorial line illustration, minimalist clean register, cool gray
+      and off-white palette, single warm accent, contemporary self-help
+      bestseller cover aesthetic, vector-clean line work
+    lock_in_tokens: ["single tangled line resolving to clean curve", "cool gray and off-white single warm accent", "editorial line illustration minimalist clean"]
+    revisit_after_r1: false
 
   imposter_syndrome:
-    # REVISIT-AFTER-R1: tune to bestseller archetype
-    archetype: "stepping into light"
+    archetype: "hot coral flat color"
     palette: >-
-      transitional shadow-to-light gradient, deep teal entering warm
-      amber, confident clean cream highlight on the figure as they step
-      forward
+      hot coral or magenta flat color field, fully saturated, premium
+      feminist palette; high-energy editorial register; pure solid tone
+      throughout, type-dominant cover surface
     composition: >-
-      single figure walking forward out of softer shadow into a clear
-      shaft of warm light, face lifted, expression of recognition and
-      claiming, light hitting the face as the threshold is crossed
+      hot coral or magenta flat color field filling the canvas, single
+      bold geometric mark or clean shape, generous negative space
+      throughout for confident type takeover; high-energy editorial
+      graphic
     subject_prompt: >-
-      a person stepping forward from cooler shadow into a clear shaft of
-      warm confident light, face lifted, eyes meeting the light directly,
-      expression of quiet earned recognition, posture of someone finally
-      claiming their own legitimacy
+      hot coral flat color field, single bold geometric mark, premium
+      feminist palette, high-energy editorial graphic design, fully
+      saturated solid color, confident composition, flat solid tone
+      throughout
     style_modifiers: >-
-      cinematic painterly illustration, dramatic light shaft from upper
-      frame, warm amber key light meeting cool teal shadow, modern
-      empowerment bestseller cover aesthetic
-    lock_in_tokens: ["shaft of warm light", "stepping forward", "face lifted into light"]
-    revisit_after_r1: true
+      premium editorial graphic design, hot coral or magenta saturated
+      palette, high-energy bestseller register, clean vector-flat
+      treatment, pure solid tone, modern feminist self-help cover
+      aesthetic
+    lock_in_tokens: ["hot coral or magenta flat color field", "bold confident composition single geometric mark", "high-energy editorial graphic premium feminist palette"]
+    revisit_after_r1: false
 
   burnout:
     # Fragment-only book in inventory (master_feung_burnout) but cookbook
     # carries the genre for completeness so future regen can use it.
-    # REVISIT-AFTER-R1: tune to bestseller archetype
-    archetype: "after the fire"
+    archetype: "single wilting symbol on dusty"
     palette: >-
-      gentle ember warmth, sage green recovery, soft cream renewal;
-      warmth without heat, suggesting embers cooling rather than flames
+      muted dusty rose or sage and cream, low chroma; warmth without
+      heat, suggesting embers cooling rather than flames; quiet
+      restorative palette
     composition: >-
-      single figure resting in a quiet outdoor or near-window setting,
-      shoulders relaxing for the first time in a long while, soft tea
-      cup or held hand on chest, the visible exhale moment
+      single small wilting still object (leaf, dimmed bulb, half-empty
+      teacup) at lower-center on muted dusty field, soft natural light,
+      vast quiet negative space above; still quiet recovery composition
     subject_prompt: >-
-      a recovering person finally resting after long depletion, seated
-      with shoulders relaxing, holding a warm cup in both hands, soft
-      sage and ember tones surrounding them, expression of an exhale
-      that has been held too long, slow recovery beginning
+      single wilting leaf at lower-center on muted dusty rose field,
+      soft natural light, gentle shadow, atmospheric still life
+      photography, low chroma palette, quiet restorative composition,
+      generous negative space framing
     style_modifiers: >-
-      painterly intimate illustration, soft warm ambient light, restful
-      restorative atmosphere, modern recovery memoir bestseller cover
-      aesthetic
-    lock_in_tokens: ["held warm cup", "first long exhale", "ember warmth"]
-    revisit_after_r1: true
+      atmospheric still life photography, muted dusty palette, soft
+      natural light, low-energy quiet register, restorative recovery
+      memoir bestseller aesthetic, depth of field with calm background
+    lock_in_tokens: ["single wilting leaf (or dimmed bulb) on dusty palette", "muted dusty rose or sage and cream", "still quiet composition soft natural light low-energy"]
+    revisit_after_r1: false
 
   courage:
     # Fragment-only book in inventory (master_wu_courage) but cookbook
     # carries the genre for completeness so future regen can use it.
-    # REVISIT-AFTER-R1: tune to bestseller archetype
-    archetype: "first deliberate step"
+    archetype: "mountain on warm earth"
     palette: >-
-      bold dawn orange, deep slate, confident cream; high but considered
-      contrast — the moment of decision rendered in light vs ground
+      warm earth-tone palette, terracotta and amber, golden-hour glow;
+      grounded humanist warmth, never aggressive; the moment of
+      threshold rendered in light
     composition: >-
-      single figure on a path or threshold, taking a clear forward step,
-      gaze fixed on a horizon brightening with dawn, posture committed
-      but not aggressive
+      single mountain silhouette OR open horizon line in the lower-third,
+      warm golden-hour light gradient above, vast quiet sky for title
+      takeover; grounded composition with clear directional implication
     subject_prompt: >-
-      a determined person taking a deliberate first step on an open path
-      at dawn, gaze locked on a brightening horizon, one foot just lifted
-      forward, expression of measured courage that knows the cost and is
-      moving anyway, wind gently catching at clothing
+      single mountain silhouette in lower-third on warm earth-tone field,
+      golden-hour light gradient above, terracotta and amber palette,
+      humanist warmth, grounded landscape composition, generous quiet sky
     style_modifiers: >-
-      cinematic painterly illustration, dawn rim light, confident
-      composition with clear directional motion, modern bestseller cover
-      aesthetic for resilience and personal growth titles
-    lock_in_tokens: ["dawn horizon", "deliberate forward step", "wind in clothing"]
-    revisit_after_r1: true
+      cinematic editorial landscape photography, warm earth-tone palette,
+      golden-hour glow, grounded humanist register, modern resilience
+      bestseller cover aesthetic, depth of field minimal grain
+    lock_in_tokens: ["warm earth-tone palette terracotta and amber", "single mountain silhouette OR open horizon", "humanist warmth golden hour grounded composition"]
+    revisit_after_r1: false
 
 # ---------------------------------------------------------------------------
 # Per-book overrides.
 #
 # Most books should inherit their genre's prompt cleanly. Use this section
-# only when a specific book needs tone away from its genre default — for
-# example a "soft" anxiety memoir vs a "clinical" anxiety toolkit, or a
-# specifically multicultural figure depiction the generic genre prompt
-# can't carry.
-#
-# At cookbook v2 first issue, no overrides are defined. Operator + R1
-# follow-up may populate this section after archetype analysis lands.
+# only when a specific book needs tone away from its genre default.
 #
 # Schema:
 #   <book_id>:
@@ -330,10 +322,6 @@ book_overrides: {}
 
 # ---------------------------------------------------------------------------
 # Book-to-genre mapping. Source of truth for compose helper's --book flag.
-# Mirrors the inventory in docs/runbooks/COVER_REGENERATION_PLAN_2026-04-30.md.
-# Fragment-only books (master_feung_burnout, master_wu_courage) are listed
-# for completeness — cookbook can compose for them, but the books
-# themselves are content-gap blocked at the EPUB layer.
 # ---------------------------------------------------------------------------
 book_genre_map:
   ahjan_anxiety: anxiety
