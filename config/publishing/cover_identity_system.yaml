@@ -460,8 +460,9 @@ books:
     subtitle: "A Gentle Guide to Grief, Loss, and Healing"
     topic: grief
     lang: en
-    this_book_subject: "single small feather mid-frame on cream paper, soft falling shadow, dusk slate sky beyond"
-    this_book_micro_palette_shift: "cream pulled slightly toward bone"
+    cover_kind: image_full_bleed   # operator override 2026-05-03 — full-bleed atmospheric image + outlined title; subject anchored to LOWER THIRD so the title at top of frame doesn't overlap the feather (operator QA 2026-05-03 v2)
+    this_book_subject: "atmospheric dusk landscape, vast empty soft slate-grey sky filling the upper two-thirds of the frame with no detail, single delicate falling feather positioned at the bottom-third of the frame catching warm light, distant cream horizon line low in the frame, full-bleed editorial photography composition, painterly cinematic atmosphere, generous quiet sky above for title overlay"
+    this_book_micro_palette_shift: "slate pulled slightly toward warm dusk"
     this_book_register: "the chair across the table, the room where they were"
     series: null
 
@@ -528,7 +529,8 @@ books:
     subtitle: "Finding Your Way Through Grief and Heartbreak"
     topic: grief
     lang: en
-    this_book_subject: "single warm hand-shaped light through tree branches, golden cream field, soft vignette"
+    cover_kind: image_full_bleed   # operator override 2026-05-03 v3 — even with lower-third anchoring schnell put detail in upper third; switching to a SIMPLER subject (vast warm sky + tiny horizon band, no trees/objects) so schnell has nothing to put in the upper region
+    this_book_subject: "atmospheric warm dusk sky filling the entire frame, vast empty cream and pale-gold gradient with no detail or features, single tiny thin band of distant warm horizon light at the very bottom edge of the frame only, full-bleed editorial photography composition, painterly cinematic atmosphere, almost entirely empty sky"
     this_book_micro_palette_shift: "earth pulled slightly toward warm walnut"
     this_book_register: "the room they were in, still warm, still yours"
     series: null

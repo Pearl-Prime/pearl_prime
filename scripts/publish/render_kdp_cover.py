@@ -386,6 +386,53 @@ def _fit_font_to_box(
 # ─── DRAW ──────────────────────────────────────────────────────────────
 
 
+def _draw_title_gradient_overlay(
+    canvas: Image.Image,
+    title_zone_pct: dict[str, list[int]],
+    *,
+    direction: str = "top",
+    max_alpha: int = 130,
+    fade_y_pct: int = 50,
+    color: tuple[int, int, int] = (10, 10, 10),
+) -> None:
+    """Composite a soft top-down (or bottom-up) dark gradient over the canvas
+    that darkens the title-zone area enough for white outlined title text to
+    read against arbitrary imagery, while fading to fully transparent below
+    the title zone so the FLUX illustration shows through cleanly.
+
+    This is the bestseller convention for atmospheric covers (Atomic Habits,
+    Big Magic, The Subtle Art): the imagery doesn't need a hard color band;
+    a subtle gradient is enough to lift type-region contrast without
+    obscuring the focal element.
+
+    Args:
+        title_zone_pct: e.g. {'x_pct': [8, 92], 'y_pct': [10, 34]} from R4.
+        direction: 'top' (gradient from top edge down) or 'bottom'.
+        max_alpha: 0-255, opacity at the heaviest end of the gradient.
+        fade_y_pct: % of canvas height where gradient fully fades to 0.
+        color: gradient color (default near-black for white title overlay).
+    """
+    w, h = canvas.size
+    fade_y_px = max(1, int(h * fade_y_pct / 100))
+    # Build a 1×h alpha gradient column, then expand to w×h. Vectorized via
+    # Pillow ops — NOT a Python per-pixel loop (which would be ~4M iterations
+    # at full canvas size).
+    alpha_col = Image.new("L", (1, h), 0)
+    col_pixels = alpha_col.load()
+    if direction == "top":
+        for y in range(fade_y_px):
+            t = 1.0 - (y / fade_y_px)
+            col_pixels[0, y] = int(max_alpha * t)
+    else:  # bottom
+        for y in range(h - fade_y_px, h):
+            t = (y - (h - fade_y_px)) / fade_y_px
+            col_pixels[0, y] = int(max_alpha * t)
+    alpha_full = alpha_col.resize((w, h), Image.NEAREST)
+    color_layer = Image.new("RGB", (w, h), color)
+    layer = Image.merge("RGBA", (*color_layer.split(), alpha_full))
+    canvas.alpha_composite(layer)
+
+
 def _draw_text_with_shadow(
     canvas: Image.Image,
     lines: list[str],
@@ -414,6 +461,20 @@ def _draw_text_with_shadow(
     measure_img = Image.new("RGB", (max(1, box_w), 1))
     measure_draw = ImageDraw.Draw(measure_img)
 
+    # Outline ("stroked text") — operator preference for image_full_bleed
+    # mode and any title that sits on variable-color imagery without a
+    # neutral band. White-fill + black-outline (or hex-specified) renders
+    # universally legible over any image. Optional; opt-in via style.outline.
+    outline_cfg = style.get("outline") or {}
+    outline_px = int(outline_cfg.get("width_px", 0))
+    outline_color_spec = outline_cfg.get("color")
+    if outline_color_spec:
+        outline_rgb = _hex_to_rgb(outline_color_spec) if isinstance(outline_color_spec, str) else tuple(outline_color_spec[:3])
+    else:
+        # Default: pick the opposite luminance of the fill (auto-contrast outline).
+        fill_lum = (0.299*fill[0] + 0.587*fill[1] + 0.114*fill[2]) / 255
+        outline_rgb = (15, 15, 15) if fill_lum > 0.5 else (255, 255, 255)
+
     for i, line in enumerate(lines):
         line_w, _ = _measure_text(measure_draw, line, font, tracking_px)
         if anchor == "left":
@@ -426,11 +487,22 @@ def _draw_text_with_shadow(
 
         cursor = line_x
         for ch in line:
+            # Shadow stays as-is — render before outline so outline sits on top.
             shadow_draw.text(
                 (cursor + shadow_offset[0], line_y + shadow_offset[1]),
                 ch, font=font, fill=shadow_color,
             )
-            text_draw.text((cursor, line_y), ch, font=font, fill=fill + (255,))
+            # Pillow ≥ 8.0 supports stroke_width + stroke_fill on draw.text.
+            # When outline_px > 0 we render a stroked glyph (outline + fill in
+            # a single call); when 0 we render plain fill (back-compat).
+            if outline_px > 0:
+                text_draw.text(
+                    (cursor, line_y), ch, font=font, fill=fill + (255,),
+                    stroke_width=outline_px,
+                    stroke_fill=outline_rgb + (255,),
+                )
+            else:
+                text_draw.text((cursor, line_y), ch, font=font, fill=fill + (255,))
             ch_bbox = measure_draw.textbbox((0, 0), ch, font=font)
             cursor += (ch_bbox[2] - ch_bbox[0]) + tracking_px
 
@@ -694,6 +766,51 @@ def _apply_identity_overrides(
         template["imagery_zone"] = None
         meta["type_only_override"] = True
 
+    # 3b. Image-full-bleed override: imagery fills the whole canvas; title is
+    #     overlaid with stroked (outlined) text so it stays legible against
+    #     variable-color imagery without a neutral band. Operator-requested
+    #     2026-05-03 because the small per-genre imagery_zone was producing
+    #     "tiny feather inside a tiny window" results that didn't read at
+    #     thumbnail. Full-bleed + outlined title is the bestseller convention
+    #     for atmospheric self-help (e.g., Atomic Habits, Big Magic).
+    if book.get("cover_kind") == "image_full_bleed":
+        template["type_dominant"] = False
+        template["imagery_zone"] = {"x_pct": [0, 100], "y_pct": [0, 100]}
+        meta["full_bleed_override"] = True
+        # Force outlined-text on the title so it stays readable over
+        # arbitrary imagery. Operator can still override via per-book outline.
+        title_style = dict(typography.get("title_style") or {})
+        if not title_style.get("outline"):
+            title_style["outline"] = {"width_px": 7, "color": "#000000"}
+        if title_style.get("color", "auto") == "auto":
+            title_style["color"] = "#FFFFFF"
+        typography["title_style"] = title_style
+        # Subtitle: in full-bleed mode, override per-genre serif (which can be
+        # too delicate over photography) with a heavy sans-serif. Operator
+        # complaint 2026-05-03 v3: subtitles still hard to read with outline
+        # because Libre Baskerville regular at 88px is delicate. Inter
+        # extra_bold reads cleanly against atmospheric imagery.
+        sub_style = dict(typography.get("subtitle_style") or {})
+        sub_style["font_family"] = "sans_serif"
+        sub_style["font_weight"] = "extra_bold"
+        if not sub_style.get("outline"):
+            sub_style["outline"] = {"width_px": 5, "color": "#000000"}
+        if sub_style.get("color", "auto") == "auto":
+            sub_style["color"] = "#FFFFFF"
+        typography["subtitle_style"] = sub_style
+        # Author block: same upgrade — sans extra_bold + thicker outline.
+        author_style = dict(typography.get("author_style") or {})
+        author_style["font_family"] = "sans_serif"
+        author_style["font_weight"] = "extra_bold"
+        if not author_style.get("outline"):
+            author_style["outline"] = {"width_px": 4, "color": "#000000"}
+        if author_style.get("color", "auto") == "auto":
+            author_style["color"] = "#FFFFFF"
+        typography["author_style"] = author_style
+        # Soft top-down dark gradient over the title zone. Boosts contrast
+        # for white outlined text without a hard color band.
+        meta["title_gradient_overlay"] = True
+
     # 4. Author signature_color → subtitle accent + force into title color
     #    when type_dominant (Truth Compass / Gen Spark style).
     sig_color = author.get("signature_color")
@@ -833,6 +950,17 @@ def render_kdp_cover(
     canvas, imagery_meta = _build_canvas_with_imagery(template, illustration_path)
     primary_hex = template["palette"]["primary"]["hex"]
     bg_rgb = _hex_to_rgb(primary_hex)
+
+    # 1b. Title-zone gradient overlay (full-bleed mode only). Applied AFTER
+    # imagery composite so it darkens the title zone for white outlined text
+    # legibility without hiding the focal element. Implements bestseller
+    # convention used by atmospheric self-help (Atomic Habits / Big Magic).
+    if identity_meta.get("title_gradient_overlay"):
+        _draw_title_gradient_overlay(
+            canvas, template["title_zone"],
+            direction="top", max_alpha=145, fade_y_pct=55,
+            color=(8, 8, 8),
+        )
 
     # 2. Title.
     title_zone_rect = _pct_zone_to_pixels(template["title_zone"])

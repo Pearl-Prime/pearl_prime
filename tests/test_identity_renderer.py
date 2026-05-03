@@ -113,18 +113,22 @@ def test_signature_color_applied_to_subtitle(tmp_path):
 
 
 def test_micro_palette_shift_recorded_on_book(tmp_path):
-    out_path = tmp_path / "master_sha.png"
+    # Use 'miki' (type_only — no illustration needed) so the test doesn't
+    # require an image fixture. The identity layer's micro_palette_shift
+    # propagation is what's under test, independent of illustration.
+    out_path = tmp_path / "miki.png"
     meta = render_kdp_cover.render_kdp_cover(
         illustration_path=None,
-        title="The Weight of Gone",
-        author="Master Sha",
-        subtitle="A Gentle Guide",
-        genre="boundaries",
+        title="Who Let Me In",
+        author="Miki",
+        subtitle="A Guide to Dismantling Imposter Syndrome",
+        genre="imposter_syndrome",
         output_path=out_path,
-        book_id="master_sha",
+        book_id="miki",
     )
     assert meta["identity"]["micro_palette_shift"]
-    assert "cream" in meta["identity"]["micro_palette_shift"].lower()
+    # miki's micro_palette_shift mentions 'coral' per cover_identity_system.yaml.
+    assert "coral" in meta["identity"]["micro_palette_shift"].lower()
 
 
 def test_type_only_book_forces_type_dominant(tmp_path):
