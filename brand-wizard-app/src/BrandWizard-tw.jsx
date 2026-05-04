@@ -3331,7 +3331,7 @@ function IntroWelcome({ onNext }) {
   );
 }
 
-function IntroJourney({ onNext, onBack }) {
+function IntroJourney({ onNext, onBack, onChooseTeacher }) {
   const { t } = useTranslation();
   const phases = [
     { step: "1", title: t("intro", "基礎"), sub: t("intro", "原型與讀者"), color: "from-indigo-500 to-violet-600" },
@@ -3374,7 +3374,7 @@ function IntroJourney({ onNext, onBack }) {
           <div className="mt-6 text-center">
             <button
               type="button"
-              onClick={onNext}
+              onClick={onChooseTeacher}
               className="inline-flex items-center gap-2 rounded-2xl bg-gray-900 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-gray-800"
             >
               {t("ui", "開始建立你的品牌")} <ArrowRight size={18} />
@@ -3567,11 +3567,18 @@ export default function BrandWizard() {
   const nextStep = () => { if (step < 8) { setStep((s) => s + 1); scrollTop(); } };
   const prevStep = () => { if (step > 0) { setStep((s) => s - 1); scrollTop(); } else { setPhase("intro"); setIntroPage(1); scrollTop(); } };
   const goToHowItWorks = () => { setPhase("intro"); setIntroPage(1); scrollTop(); };
+  const goToTeacherShowcase = () => { window.location.href = "teacher_showcase.html"; };
+
+  // If ?teacher= in URL, skip intro
+  React.useEffect(() => {
+    const urlTeacher = new URLSearchParams(window.location.search).get("teacher");
+    if (urlTeacher) { setPhase("wizard"); setStep(0); scrollTop(); }
+  }, []);
 
   // INTRO: 0=welcome, 1=journey → straight to wizard (preview pages removed)
   if (phase === "intro") {
     if (introPage === 0) return <IntroWelcome onNext={nextIntro} />;
-    if (introPage >= 1) return <IntroJourney onNext={startWizard} onBack={prevIntro} />;
+    if (introPage >= 1) return <IntroJourney onNext={startWizard} onBack={prevIntro} onChooseTeacher={goToTeacherShowcase} />;
   }
 
   const canNext = step === 0
