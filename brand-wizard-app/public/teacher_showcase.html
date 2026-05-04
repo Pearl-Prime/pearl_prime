@@ -32,6 +32,10 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 .sidebar-subtitle { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); padding: 0 16px 12px; letter-spacing: 0.05em; }
 .nav-item { display: flex; align-items: center; gap: 10px; padding: 8px 16px; text-decoration: none; color: var(--text-primary); transition: all 0.2s; border-left: 3px solid transparent; }
 .nav-item:hover, .nav-item.active { background: var(--bg-tertiary); border-left-color: var(--brand-color); }
+.nav-radio { appearance: none; -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid rgba(245,166,35,0.3); background: transparent; cursor: pointer; flex-shrink: 0; transition: all .15s; position: relative; pointer-events: none; }
+.nav-item.active .nav-radio, .nav-radio:checked { border-color: var(--amber); background: var(--amber); box-shadow: 0 0 0 2px rgba(245,166,35,0.2); }
+.nav-item.active .nav-radio::after, .nav-radio:checked::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 5px; height: 5px; border-radius: 50%; background: #0D0D0D; }
+.nav-item:hover .nav-radio { border-color: rgba(245,166,35,0.6); }
 .nav-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.65rem; font-weight: 700; color: white; flex-shrink: 0; }
 .nav-name { font-size: 0.85rem; font-weight: 500; white-space: nowrap; display: block; }
 .nav-brand { font-size: 0.65rem; color: var(--text-muted); display: block; }
@@ -206,6 +210,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
   <div class="sidebar-title">Pearl Prime</div>
   <div class="sidebar-subtitle">13 TEACHERS / 13 BRANDS</div>
     <a href="#ahjan" class="nav-item" data-teacher="ahjan" style="--brand-color:#F5A623">
+      <input type="radio" name="teacher-select" class="nav-radio" value="ahjan">
       <span class="nav-icon" style="background:linear-gradient(135deg, #F5A623, #4A2C00)">OM</span>
       <div>
         <span class="nav-name">Ahjan</span>
@@ -213,6 +218,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#adi_da" class="nav-item" data-teacher="adi_da" style="--brand-color:#E74C3C">
+      <input type="radio" name="teacher-select" class="nav-radio" value="adi_da">
       <span class="nav-icon" style="background:linear-gradient(135deg, #E74C3C, #4A1010)">AW</span>
       <div>
         <span class="nav-name">Adi Da</span>
@@ -220,6 +226,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#master_feung" class="nav-item" data-teacher="master_feung" style="--brand-color:#2ECC71">
+      <input type="radio" name="teacher-select" class="nav-radio" value="master_feung">
       <span class="nav-icon" style="background:linear-gradient(135deg, #2ECC71, #0A3D1F)">VP</span>
       <div>
         <span class="nav-name">Master Feung</span>
@@ -227,6 +234,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#sai_ma" class="nav-item" data-teacher="sai_ma" style="--brand-color:#9B59B6">
+      <input type="radio" name="teacher-select" class="nav-radio" value="sai_ma">
       <span class="nav-icon" style="background:linear-gradient(135deg, #9B59B6, #2D1A35)">HG</span>
       <div>
         <span class="nav-name">Sai Ma</span>
@@ -234,6 +242,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#ra" class="nav-item" data-teacher="ra" style="--brand-color:#3498DB">
+      <input type="radio" name="teacher-select" class="nav-radio" value="ra">
       <span class="nav-icon" style="background:linear-gradient(135deg, #3498DB, #0F2940)">CE</span>
       <div>
         <span class="nav-name">Ra</span>
@@ -241,6 +250,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#junko" class="nav-item" data-teacher="junko" style="--brand-color:#1ABC9C">
+      <input type="radio" name="teacher-select" class="nav-radio" value="junko">
       <span class="nav-icon" style="background:linear-gradient(135deg, #1ABC9C, #0A3D32)">ZC</span>
       <div>
         <span class="nav-name">Junko</span>
@@ -248,6 +258,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#miki" class="nav-item" data-teacher="miki" style="--brand-color:#FF6B9D">
+      <input type="radio" name="teacher-select" class="nav-radio" value="miki">
       <span class="nav-icon" style="background:linear-gradient(135deg, #FF6B9D, #401A2D)">GS</span>
       <div>
         <span class="nav-name">Miki</span>
@@ -255,6 +266,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#master_wu" class="nav-item" data-teacher="master_wu" style="--brand-color:#95A5A6">
+      <input type="radio" name="teacher-select" class="nav-radio" value="master_wu">
       <span class="nav-icon" style="background:linear-gradient(135deg, #95A5A6, #2D3436)">IW</span>
       <div>
         <span class="nav-name">Master Wu</span>
@@ -262,6 +274,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#pamela_fellows" class="nav-item" data-teacher="pamela_fellows" style="--brand-color:#E8B4B8">
+      <input type="radio" name="teacher-select" class="nav-radio" value="pamela_fellows">
       <span class="nav-icon" style="background:linear-gradient(135deg, #E8B4B8, #3D2A2C)">BW</span>
       <div>
         <span class="nav-name">Pamela Fellows</span>
@@ -269,6 +282,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#joshin" class="nav-item" data-teacher="joshin" style="--brand-color:#4E7A51">
+      <input type="radio" name="teacher-select" class="nav-radio" value="joshin">
       <span class="nav-icon" style="background:linear-gradient(135deg, #4E7A51, #1A2D1B)">SF</span>
       <div>
         <span class="nav-name">Joshin</span>
@@ -276,6 +290,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#maat" class="nav-item" data-teacher="maat" style="--brand-color:#F39C12">
+      <input type="radio" name="teacher-select" class="nav-radio" value="maat">
       <span class="nav-icon" style="background:linear-gradient(135deg, #F39C12, #3D2700)">TC</span>
       <div>
         <span class="nav-name">Maat</span>
@@ -283,6 +298,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#omote" class="nav-item" data-teacher="omote" style="--brand-color:#5DADE2">
+      <input type="radio" name="teacher-select" class="nav-radio" value="omote">
       <span class="nav-icon" style="background:linear-gradient(135deg, #5DADE2, #1A3040)">GW</span>
       <div>
         <span class="nav-name">Omote</span>
@@ -290,6 +306,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </a>
     <a href="#master_sha" class="nav-item" data-teacher="master_sha" style="--brand-color:#8E44AD">
+      <input type="radio" name="teacher-select" class="nav-radio" value="master_sha">
       <span class="nav-icon" style="background:linear-gradient(135deg, #8E44AD, #2D1540)">SR</span>
       <div>
         <span class="nav-name">Master Sha</span>
@@ -11262,7 +11279,11 @@ const observer = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       navItems.forEach(item => item.classList.remove('active'));
       const activeNav = document.querySelector('.nav-item[data-teacher="' + entry.target.id + '"]');
-      if (activeNav) activeNav.classList.add('active');
+      if (activeNav) {
+        activeNav.classList.add('active');
+        const radio = activeNav.querySelector('.nav-radio');
+        if (radio) radio.checked = true;
+      }
     }
   });
 }, { threshold: 0.3 });
