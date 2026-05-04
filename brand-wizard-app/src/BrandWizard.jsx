@@ -3218,6 +3218,19 @@ function generateYAML(state) {
   const proven = PROVEN[state.archetype] || PROVEN.nervous_system;
   const c = state.contact || {};
   const ts = new Date().toISOString().split("T")[0];
+
+  // Read teacher selection set by teacher_select.html before wizard launch
+  let teacherMode = null;
+  try {
+    const raw = localStorage.getItem("phoenix_book_mode");
+    if (raw) teacherMode = JSON.parse(raw);
+  } catch (_) {}
+  // Also accept ?teacher= URL param as fallback
+  if (!teacherMode) {
+    const urlTeacher = new URLSearchParams(window.location.search).get("teacher");
+    if (urlTeacher) teacherMode = { mode: "teacher", teacher: urlTeacher };
+  }
+
   let y = `# Brand Admin Application — ${ts}\n# Pearl Prime Brand Configuration\n\n`;
   y += `brand_admin:\n  first_name: "${san(c.firstName)}"\n  last_name: "${san(c.lastName)}"\n  email: "${san(c.email)}"\n  phone: "${san((c.phoneCode || '+1') + ' ' + c.phone)}"\n\n`;
   y += `  messaging_channels:\n    line_id: "${san(c.line)}"\n    whatsapp: "${san(c.whatsapp)}"\n    wechat_id: "${san(c.wechat)}"\n    fb_messenger: "${san(c.messenger)}"\n    preferred_channel: "${c.preferred || "email"}"\n\n`;
@@ -3229,6 +3242,22 @@ function generateYAML(state) {
   y += `  onboarding_lane: "${state.onboardingLane || "self_help"}"\n  onboarding_market: "${state.onboardingMarket || "us"}"\n`;
   y += `  format_focus: "${state.formatFocus || "book"}"\n  channels: [${(state.channels || []).map((c) => `"${c}"`).join(", ")}]\n\n`;
   y += `  revenue_blend:\n    user_topics_weight: 0.30\n    proven_topics_weight: 0.70\n    note: "System blends brand identity with persona-based demand and proven search terms"\n\n`;
+
+  // Teacher mode block — written when admin selected a teacher in Step 1
+  // Mode is always "generalized": teachings are used but teacher name is NOT in content.
+  // The +5% boost increases how much catalog content draws from this teacher's tradition.
+  // See: config/catalog_planning/teacher_mode_config.yaml → user_selection_boost
+  if (teacherMode && teacherMode.teacher) {
+    y += `  teacher_mode:\n`;
+    y += `    selected_teacher: "${san(teacherMode.teacher)}"\n`;
+    y += `    mode: generalized\n`;
+    y += `    teacher_boost_pct: 5\n`;
+    y += `    rebalance_from: composite\n`;
+    y += `    note: "Teacher teachings woven into content at tradition level — no teacher name in books. +5% of catalog draws from this teacher's doctrine_profile instead of composite/no-teacher pool."\n\n`;
+  } else {
+    y += `  teacher_mode:\n    mode: composite\n    selected_teacher: null\n    teacher_boost_pct: 0\n\n`;
+  }
+
   y += `  proven_personas:\n`;
   proven.personas.forEach((p) => { y += `    - "${p}"\n`; });
   y += `\n  proven_search_topics:\n`;

@@ -40,6 +40,28 @@ teacher_mode_catalog_mix:
   generalized: 0.70
   composite: 0.10
 
+# ─── USER SELECTION BOOST ────────────────────────────────────────────────────
+# When a brand admin selects a teacher in teacher_select.html (Step 1 of wizard),
+# that teacher's KB gets a +5% weight boost in the generalized catalog mix.
+# The teacher name is NOT used in content (mode: generalized).
+# Only the teachings, tradition, and doctrine profile are drawn from more heavily.
+#
+# How it is written: wizard generateYAML() reads phoenix_book_mode from localStorage
+# and emits teacher_mode block → planner reads teacher_mode.selected_teacher +
+# teacher_mode.teacher_boost_pct and adds that many % to generalized content
+# drawing from that teacher's doctrine_profile in teacher_registry.yaml.
+#
+# Example: base generalized=0.65 + boost=0.05 → 0.70 from selected teacher's tradition.
+# Remaining 0.30 composite stays unchanged. named stays at 0.20 (or lower to rebalance).
+
+user_selection_boost:
+  mode: generalized              # boost goes to generalized, NOT named
+  teacher_boost_pct: 5           # +5 percentage points toward selected teacher's tradition
+  rebalance_from: composite      # the 5% comes out of composite (no-teacher) share
+  note: >
+    Teacher name is never written in boosted content. Tradition language only.
+    This is the "generalized" mode — same teachings as named, no individual attribution.
+
 # Platform spam-rule guidance
 # Applies to KDP, Google Play, Apple Books upload review policies
 platform_spam_notes:
