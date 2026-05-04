@@ -354,6 +354,7 @@ Pearl News is 100% at **code/tests** when classifier, selector, quality gates, a
 | Item | Location |
 |------|----------|
 | **Architecture spec** | [docs/PEARL_NEWS_ARCHITECTURE_SPEC.md](./PEARL_NEWS_ARCHITECTURE_SPEC.md) — Pipeline, atoms, templates, config, governance |
+| **Layout system (governing spec)** | [docs/PEARL_NEWS_LAYOUT_SYSTEM_2026-05-04.md](./PEARL_NEWS_LAYOUT_SYSTEM_2026-05-04.md) — **Governing spec** for the five article-page layouts (`default`/`scroll_story`/`dock`/`editorial`/`wide`); sidebar position contract, lang-aware overrides, anti-regression checklist, historical regression context. Read before editing `pearl_news/pipeline/assemble_v52.py`. |
 | **Article metadata schema (doc)** | [docs/PEARL_NEWS_ARTICLE_METADATA_SCHEMA.md](./PEARL_NEWS_ARTICLE_METADATA_SCHEMA.md) — Frozen metadata contract for `article_metadata.jsonl`; required keys, governance use |
 | **GitHub scheduling** | [docs/PEARL_NEWS_GITHUB_SCHEDULING.md](./PEARL_NEWS_GITHUB_SCHEDULING.md) — Scheduled pipeline runs, WordPress posting, GitHub Actions, secrets |
 | **Option B runbook (Qwen/Qwen-Agent)** | [docs/PEARL_NEWS_OPTION_B_RUNBOOK.md](./PEARL_NEWS_OPTION_B_RUNBOOK.md) — Copy Pearl News into Ahjan108/Qwen-Agent or Qwen; exact cp commands; self-hosted + LM Studio; §7 LM Studio reliability (schedule = no expand, manual = expand); 6 secrets; verify |

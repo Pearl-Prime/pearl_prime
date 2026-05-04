@@ -26,11 +26,24 @@ from __future__ import annotations
 
 import html
 import json
+import logging
 import re
 import sys
 import textwrap
 from pathlib import Path
 from typing import Any
+
+logger = logging.getLogger(__name__)
+
+# ── LAYOUT VARIANTS ──────────────────────────────────────────────────────────
+# See docs/PEARL_NEWS_LAYOUT_SYSTEM_2026-05-04.md for the canonical spec.
+# Sidebar position by variant:
+#   "default"      — sidebar right (1fr 360px grid, 1100px max canvas)
+#   "scroll_story" — no sidebar; cards inline as interstitials (720px column)
+#   "dock"         — sidebar left, sticky (280px 1fr grid, 1100px max canvas)
+#   "editorial"    — sidebar right, wider canvas (1fr 280px grid, 1280px max)
+#   "wide"         — sidebar bottom; cards as horizontal flex strip (900px body, 1280px max)
+LAYOUT_VARIANTS = frozenset({"default", "scroll_story", "dock", "editorial", "wide"})
 
 # ── TEACHER DATABASE ─────────────────────────────────────────────────────────
 # Maps teacher name → tradition, key terms, practice, exercise steps, etc.
@@ -774,7 +787,10 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     article_type = TEMPLATE_TO_TYPE.get(template, "Hard News + Insight + Action")
     news_event = meta.get("news_event", "")
     date_str = meta.get("date", "March 10, 2026")
-    layout = meta.get("layout", "default")  # "default" | "scroll_story" | "dock"
+    layout = meta.get("layout", "default")  # "default" | "scroll_story" | "dock" | "editorial" | "wide"
+    if layout not in LAYOUT_VARIANTS:
+        logger.warning("assemble_v52: unknown layout %r — falling back to 'default'", layout)
+        layout = "default"
 
     # ── Parse slots ──
     # Detect 14-slot architecture vs 6-slot legacy format
@@ -796,7 +812,12 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
         headline_raw = f"{h1}. {h2}".strip()
     else:
         # Legacy 6-slot format: assembler guesses split points
-        headline_raw = slots.get("headline", "Untitled")
+        headline_raw = (
+            slots.get("headline")
+            or article_json.get("title")
+            or article_json.get("article_title")
+            or "Pearl News"
+        )
         news_summary = slots.get("news_summary", "")
         youth_impact = slots.get("youth_impact", "")
         teacher_perspective = slots.get("teacher_perspective", "")
@@ -1002,6 +1023,10 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
         _layout_css = CSS_SCROLL_STORY
     elif layout == "dock":
         _layout_css = CSS_DOCK
+    elif layout == "editorial":
+        _layout_css = CSS_EDITORIAL
+    elif layout == "wide":
+        _layout_css = CSS_WIDE
 
     # ── Build inline interstitial HTML for scroll_story layout ──
     _inline_exercise_html = ""
@@ -1168,8 +1193,11 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     )
 
     # ── ASSEMBLE HTML ──
+    # Language attribute drives lang-aware CSS overrides (e.g. wide-layout strip header label).
+    _lang = (meta.get("language") or article_json.get("language") or "en").split("-")[0].lower()
+    _root_open = f'<div class="pn-article-root" lang="{_esc(_lang)}">'
     _body_open = f'''<!DOCTYPE html>
-<html lang="en">
+<html lang="{_esc(_lang)}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1177,9 +1205,10 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
 {CSS_BLOCK}
 {_layout_css}
 </head>
-<body>''' if standalone else f'''{CSS_BLOCK}
+<body>
+{_root_open}''' if standalone else f'''{CSS_BLOCK}
 {_layout_css}
-<div class="pn-article-root">'''
+{_root_open}'''
 
     return _body_open + \
         f'''
@@ -1364,7 +1393,7 @@ function toggleExercise() {{
   }} else if (paused) {{ resumeExercise(); }} else {{ pauseExercise(); }}
 }}
 </script>
-''' + ('</body>\n</html>' if standalone else '</div><!-- /.pn-article-root -->')
+''' + ('</div><!-- /.pn-article-root -->\n</body>\n</html>' if standalone else '</div><!-- /.pn-article-root -->')
 
 
 # ── CSS BLOCK (extracted from v5.2 gold standard — identical across all articles) ──
@@ -1519,9 +1548,14 @@ CSS_SCROLL_STORY = '''<style>
 CSS_DOCK = '''<style>
   /* Override: flip grid — sidebar left, content right */
   .article-container { display: grid; grid-template-columns: 280px 1fr; gap: 40px; max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
-  @media (max-width: 768px) { .article-container { grid-template-columns: 1fr; gap: 32px; } .sidebar-dock { display: none; } .sidebar-mobile-fallback { display: block; } }
+  /* Mobile: hide the dock rail and surface the full sidebar (cards) below the article instead */
+  @media (max-width: 768px) {
+    .article-container { grid-template-columns: 1fr; gap: 32px; }
+    .sidebar-dock { display: none; }
+    .pn-article-root .sidebar { display: flex; flex-direction: column; gap: 20px; padding-top: 24px; order: 3; }
+  }
   .article-body { max-width: 660px; padding-top: 40px; order: 2; }
-  .sidebar { display: none; }  /* original sidebar hidden */
+  .sidebar { display: none; }  /* original sidebar hidden on desktop (dock rail takes its place) */
 
   /* Dock sidebar: left, sticky */
   .sidebar-dock { order: 1; position: sticky; top: 24px; align-self: start; height: calc(100vh - 48px); overflow-y: auto; padding-top: 40px; display: flex; flex-direction: column; gap: 16px; }
@@ -1581,6 +1615,107 @@ document.addEventListener('DOMContentLoaded', () => {
   sections.forEach(s => observer.observe(s.el));
 });
 </script>'''
+
+
+# ── LAYOUT: EDITORIAL (wider canvas — 1280px, 860px body, 280px sidebar) ──────
+# ALL rules scoped under .pn-article-root so they never leak into the WP theme.
+CSS_EDITORIAL = '''<style>
+  /* ── Editorial: wider canvas, scoped to Pearl News article root ── */
+  .pn-article-root .article-container { grid-template-columns: 1fr 280px; gap: 60px; max-width: 1280px; padding: 0 40px 80px; }
+  .pn-article-root .nav-pillars { max-width: 1280px; padding: 0 40px; }
+  .pn-article-root .authority-inner { max-width: 1280px; padding: 0 40px; }
+
+  .pn-article-root .article-body { max-width: 860px; padding-top: 48px; }
+  .pn-article-root .article-body p { font-size: 18px; line-height: 1.75; margin-bottom: 22px; }
+  .pn-article-root .headline-layer-1 { font-size: 36px; line-height: 1.2; margin-bottom: 10px; }
+  .pn-article-root .headline-layer-2 { font-size: 22px; line-height: 1.4; margin-bottom: 36px; }
+  .pn-article-root .hook-1 { font-size: 21px; line-height: 1.65; }
+
+  .pn-article-root .block-blue,
+  .pn-article-root .block-gold,
+  .pn-article-root .block-sage { padding: 28px 36px; margin: 36px 0; }
+  .pn-article-root .block-blue p,
+  .pn-article-root .block-gold p,
+  .pn-article-root .block-sage p { font-size: 17px !important; line-height: 1.7; }
+
+  .pn-article-root .sidebar { gap: 20px; padding-top: 48px; }
+  .pn-article-root .sidebar-card { padding: 20px; }
+  .pn-article-root .sidebar-card h3 { font-size: 10px; letter-spacing: 2px; margin-bottom: 12px; }
+  .pn-article-root .sidebar-card p { font-size: 13px; }
+  .pn-article-root .hero-image { border-radius: 12px; }
+
+  @media (max-width: 1024px) {
+    .pn-article-root .article-container { grid-template-columns: 1fr; }
+    .pn-article-root .sidebar { display: none; }
+  }
+</style>'''
+
+
+# ── LAYOUT: WIDE (full-width canvas, sidebar cards at bottom as card strip) ───
+# ALL rules scoped under .pn-article-root so they never leak into the WP theme.
+CSS_WIDE = '''<style>
+  /* ── Wide: single-column read + bottom card strip, scoped to Pearl News article root ── */
+  .pn-article-root .article-container { display: block; max-width: 1280px; padding: 0 40px 0; }
+  .pn-article-root .nav-pillars { max-width: 1280px; padding: 0 40px; }
+  .pn-article-root .authority-inner { max-width: 1280px; padding: 0 40px; }
+
+  .pn-article-root .article-body { max-width: 900px; margin: 0 auto; padding-top: 48px; }
+  .pn-article-root .article-body p { font-size: 18px; line-height: 1.75; margin-bottom: 22px; }
+  .pn-article-root .headline-layer-1 { font-size: 40px; line-height: 1.2; margin-bottom: 10px; }
+  .pn-article-root .headline-layer-2 { font-size: 23px; line-height: 1.4; margin-bottom: 36px; }
+  .pn-article-root .hook-1 { font-size: 22px; line-height: 1.65; }
+
+  .pn-article-root .block-blue,
+  .pn-article-root .block-gold,
+  .pn-article-root .block-sage { padding: 32px 40px; margin: 40px 0; }
+  .pn-article-root .block-blue p,
+  .pn-article-root .block-gold p,
+  .pn-article-root .block-sage p { font-size: 17px !important; line-height: 1.75; }
+  .pn-article-root .hero-image { border-radius: 12px; }
+
+  /* Sidebar → bottom card strip */
+  .pn-article-root .sidebar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 48px 40px 80px;
+    margin-top: 48px;
+    border-top: 2px solid var(--border-light);
+  }
+  .pn-article-root .sidebar-card { flex: 1 1 280px; max-width: 420px; min-width: 240px; }
+  .pn-article-root .exercise-card { flex: 1 1 340px; max-width: 480px; }
+  .pn-article-root .cta-card { flex: 1 1 280px; max-width: 380px; }
+
+  /* Section label above the card strip — lang-aware via [lang=...] selectors below */
+  .pn-article-root .sidebar::before {
+    content: "PRACTICE & ENGAGE";
+    display: block;
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 4px;
+    flex: 0 0 100%;
+  }
+  .pn-article-root[lang="ja"] .sidebar::before { content: "実践と参加"; letter-spacing: 1px; }
+  .pn-article-root[lang="zh"] .sidebar::before { content: "练习与参与"; letter-spacing: 1px; }
+  .pn-article-root[lang="ko"] .sidebar::before { content: "실천과 참여"; letter-spacing: 1px; }
+
+  @media (max-width: 768px) {
+    .pn-article-root .article-container { padding: 0 20px 0; }
+    .pn-article-root .article-body { padding-top: 32px; }
+    .pn-article-root .sidebar { padding: 32px 20px 60px; gap: 16px; }
+    .pn-article-root .sidebar-card { flex: 1 1 100%; max-width: 100%; }
+    .pn-article-root .headline-layer-1 { font-size: 28px; }
+    .pn-article-root .headline-layer-2 { font-size: 18px; }
+  }
+</style>'''
 
 
 # ── CLI ───────────────────────────────────────────────────────────────────────

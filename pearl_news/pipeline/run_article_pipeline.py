@@ -193,6 +193,17 @@ def main() -> int:
         ),
     )
     ap.add_argument(
+        "--layout",
+        default="default",
+        choices=("default", "scroll_story", "dock", "editorial", "wide"),
+        help=(
+            "Pearl News layout variant for v5.2 rendering. "
+            "default=right sidebar, dock=left sidebar, wide=bottom-strip sidebar, "
+            "editorial=wider canvas + right sidebar, scroll_story=no sidebar. "
+            "See docs/PEARL_NEWS_LAYOUT_SYSTEM_2026-05-04.md."
+        ),
+    )
+    ap.add_argument(
         "-v",
         "--verbose",
         action="store_true",
@@ -502,6 +513,8 @@ def main() -> int:
                 "date": pub_date_display,
                 "news_event": item.get("title", ""),
                 "hero_image_url": featured_image_url or "",
+                "layout": args.layout,
+                "language": item.get("language", "en"),
             }
             # Wire expansion engine output into item["slots"] before v52 render.
             # slot_expansion_engine writes deterministic teacher atoms to item["_v52_slots"],
