@@ -3615,7 +3615,9 @@ export default function BrandWizard() {
         <div className="brand-studio-panel p-6 sm:p-8 lg:p-10">
           <div className="flex gap-6 lg:gap-8">
             <div className="min-w-0 flex-1">
-              {steps[step]}
+              <div style={step === 8 ? { maxHeight: "calc(100dvh - 220px)", overflowY: "auto", paddingRight: "4px" } : {}}>
+                {steps[step]}
+              </div>
               <div className="mt-8 flex items-center justify-between border-t border-gray-100/80 pt-6">
                 <button type="button" onClick={prevStep} className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:text-white">
                   <ChevronLeft size={16} /> {t("ui", "Back")}
