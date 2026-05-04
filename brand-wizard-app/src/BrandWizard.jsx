@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useMemo } from "react";
+import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { useTranslation } from "./useTranslation.jsx";
 import { ChevronRight, ChevronLeft, Eye, Sparkles, BookOpen, Mic, Film, Palette, Heart, Target, Zap, Shield, Sun, Moon, Flame, Feather, Brain, Compass, Star, Check, AlertTriangle, Download, Play, PenTool, Image, Layers, ArrowRight, Users, BarChart3, TrendingUp, Radio, Headphones, Tv, Smartphone, BookMarked, GraduationCap, Clock, Rocket, Award, Crown, Globe, Volume2, Brush, Activity, Search, Hash, Tag, Grip, CircleDot, SlidersHorizontal } from "lucide-react";
 import { OutputProofStrip } from "./onboarding/OutputProofStrip.jsx";
@@ -3575,7 +3575,7 @@ export default function BrandWizard() {
   const goToTeacherShowcase = () => { window.location.href = "teacher_showcase.html"; };
 
   // If ?teacher= in URL, skip intro and jump straight to wizard step 1
-  React.useEffect(() => {
+  useEffect(() => {
     const urlTeacher = new URLSearchParams(window.location.search).get("teacher");
     if (urlTeacher) { setPhase("wizard"); setStep(0); scrollTop(); }
   }, []);
