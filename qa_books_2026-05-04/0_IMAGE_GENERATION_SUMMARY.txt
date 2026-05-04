@@ -1,0 +1,182 @@
+PEARL PRIME — Image Generation Session FINAL SUMMARY
+=====================================================================
+Date: 2026-05-04
+Pearl Star ComfyUI: REACHABLE via Tailscale
+                    URL:        http://pearlstar.tail7fd910.ts.net:8188
+                    GPU:        NVIDIA RTX 5070 Ti, 16.6 GB VRAM
+                    Checkpoint: flux1-schnell-fp8.safetensors
+                    Cost:       FREE (owned hardware)
+                    Service:    systemd `comfyui.service` (auto-start on boot)
+
+
+SESSION OUTCOMES
+================
+
+Phase 1 — Wiring (NEW canonical default for ALL image generation)
+─────────────────────────────────────────────────────────────────
+  • docs/PEARL_STAR_IMAGE_GENERATION_PROTOCOL.md  ← canonical recipe
+  • skills/pearl-image/SKILL.md                   ← operational entry skill
+  • CLAUDE.md "Image Generation — ALWAYS Pearl Star ComfyUI" section
+  • docs/INTEGRATION_CREDENTIALS_REGISTRY.md §0 Tailscale URL canonicalized
+  • docs/DOCS_INDEX.md task-table entry registered
+  • 4 generator scripts patched to default to Pearl Star Tailscale URL
+
+Phase 2 — Old-system retirement
+───────────────────────────────
+  • specs/MANGA_AUTHOR_AND_COVER_ART_CANONICAL_SPEC.md  ← single source of truth
+  • Deleted: 9 obsolete specs/scripts/configs + 25 pre-generated base PNGs
+        - specs/archive/MANGA_AUTHOR_SYSTEM_SPEC.md
+        - specs/archive/MANGA_MODE_SYSTEM_SPEC.md
+        - specs/archive/DEFERRED_2026_04_26.md
+        - docs/authoring/AUTHOR_COVER_ART_SYSTEM.md
+        - config/authoring/author_cover_art_registry.yaml
+        - scripts/generate_author_cover_art_bases.py
+        - scripts/generate_author_cover_art_flux.py
+        - scripts/ci/check_author_cover_art.py
+        - phoenix_v4/planning/author_cover_art_resolver.py
+        - assets/authors/cover_art/*.png (15 base + 10 legacy gradient PNGs)
+  • image_qc.py patched to read EI character-authors from
+    config/authoring/manga_authors/ and pen-name profiles for collision detection.
+
+Phase 3 — Image generation (Pearl Star FLUX)
+────────────────────────────────────────────
+  ✅ Triptych:                39/39 FLUX  (13 teachers × portrait/scene/symbolic)
+  ✅ Brand bestseller covers: 13/13 FLUX  (1 per teacher brand)
+  ✅ KDP all-formats:         51/52 FLUX  (1 outlier: master_sha_podcast at 244 KB)
+  ✅ Warrior_calm image_bank: 61/61 FLUX  (10 model_sheets + 8 expressions
+                                            + 12 poses + 8 locations + 6 atmospheric
+                                            + 6 props + 5 motifs + 6 anchors;
+                                            avg 1.58 MB; 94 MB total)
+  ✅ Per-series FLUX upgrade: 213/213 FLUX  in 89 min, 0 failures
+        - stillness_press 157/157 (avg ~2.2 MB)
+        - warrior_calm    56/56  (avg ~5.5 MB — martial-ink renders are richer)
+
+Phase 4 — Dashboard
+───────────────────
+  ✅ scripts/dashboards/build_pearl_books_dashboard.py
+  ✅ qa_books_2026-05-04/pearl_books_dashboard.html  (open with `open …`)
+  ✅ qa_books_2026-05-04/pearl_books_dashboard.json  (manifest sidecar)
+
+
+END-STATE INVENTORY
+===================
+
+US Brand 1 — stillness_press (josei flagship, 157 series)
+─────────────────────────────────────────────────────────
+  • main_character.png:  157/157  (FLUX, avg ~1 MB, generated previously)
+  • cover.png:           157/157  (FLUX, avg ~2.2 MB, this session)
+  • image_bank assets:   116      (character/locations/atmospherics/props/motifs/anchors,
+                                    locale en_US, asset_registry.json)
+
+JP Brand 1 — warrior_calm (shonen martial arts, 56 series)
+──────────────────────────────────────────────────────────
+  • main_character.png:  56/56    (FLUX, generated previously)
+  • cover.png:           56/56    (FLUX, avg ~5.5 MB, this session)
+  • image_bank assets:   61       (master_wu char + locations + atmospherics
+                                    + props + motifs + anchors,
+                                    locale ja_JP, asset_registry.json)
+
+Brand-level shared assets
+─────────────────────────
+  • brand-wizard-app/public/assets/covers/cover_<teacher>_<topic>.png   (13)
+  • brand-wizard-app/public/assets/covers/kdp/<teacher>_<format>.png    (52)
+  • brand-wizard-app/public/assets/manga_covers/<teacher>_{portrait,scene,symbolic}.png (39)
+
+
+GRAND TOTAL THIS SESSION
+========================
+  Images generated to FLUX quality on Pearl Star:
+    Triptych ............................... 39
+    Brand bestseller covers ................ 13
+    KDP all-formats ........................ 51
+    Warrior_calm image_bank ................ 61
+    Per-series upgrade .................... 213
+    ───────────────────────────────────────────
+    TOTAL FLUX images generated:           377
+
+
+PEARL BOOKS DASHBOARD (run + open anytime)
+==========================================
+  python3 scripts/dashboards/build_pearl_books_dashboard.py
+  open /Users/ahjan/phoenix_omega/qa_books_2026-05-04/pearl_books_dashboard.html
+
+  Current state:
+    • 25 brands tracked
+    • 1,228 series total across all brands
+    • 1,228 main_character.png (100%)
+    • 213 cover.png (17% — only stillness_press + warrior_calm done)
+    • 213 FLUX-quality covers (17% — same set, all FLUX)
+    • 6 EI character-authors registered
+
+  Coverage by brand visible per-card. Locale filter buttons in each brand.
+  Status badges per book card: FLUX (green) / placeholder (yellow) / missing (red).
+
+
+CANONICAL HANDOFF DOC (full session record)
+============================================
+  docs/HANDOFF_PEARL_STAR_IMAGE_PIPELINE_2026-05-04.md
+  — Read this for the full operational handoff: what was wired, what was
+    deleted, how to use it going forward, Pearl_Int ops cheat sheet, the
+    two-stage cover pattern reference, QA verification checklist, and
+    NEXT_ACTION list.
+
+
+KNOWN GAPS / FUTURE WORK
+========================
+
+1. Other 23 brands (~1,015 series) still have main_character.png only — no covers.
+   Adapt /tmp/upgrade_per_series_covers_to_flux.py per brand.
+
+2. Image bank for the other 23 brands. /tmp/generate_warrior_calm_image_bank.py
+   is the template — adapt prompts per brand_illustration_styles.yaml entry.
+
+3. flux1-dev-fp8.safetensors not installed on Pearl Star (only 1.5 MB partial).
+   Anonymous HF rate-limit blocks the 17 GB download (~45 h ETA).
+   To install: add `HF_TOKEN` to Keychain, then via Pearl_Int — see
+   docs/HANDOFF_PEARL_STAR_IMAGE_PIPELINE_2026-05-04.md §7.
+   Schnell quality is shipping-acceptable for current covers.
+
+4. character_views FLUX mode (front/three_quarter/profile per teacher) is a
+   feature gap: scripts/image_generation/generate_manga_character_views.py
+   line 171 has a TODO. Triptych covers the portrait/scene/symbolic complement.
+
+5. master_sha_podcast.png (244 KB) — KDP outlier that fell back to gradient
+   despite 2 retries. Re-run when Pearl Star queue is fully idle.
+
+
+CANONICAL DOCS (read before any future image work)
+==================================================
+  1. docs/HANDOFF_PEARL_STAR_IMAGE_PIPELINE_2026-05-04.md  ← THIS SESSION'S HANDOFF
+  2. specs/MANGA_AUTHOR_AND_COVER_ART_CANONICAL_SPEC.md   ← authority for manga authors + covers
+  3. docs/PEARL_STAR_IMAGE_GENERATION_PROTOCOL.md         ← infra recipe (Pearl Star ComfyUI)
+  4. skills/pearl-image/SKILL.md                          ← operational entry point
+  5. skills/pearl-int/SKILL.md                            ← sister agent for installs/restarts
+  6. config/authoring/manga_authors/schema.yaml           ← EI author schema
+  7. docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md  ← protagonist 12-axis
+  8. docs/CHARACTER_INDIVIDUATION_PROMPT_ALGORITHM_2026-05-03.md ← token budgets
+
+
+WHEN OPERATOR RETURNS — QA CHECKLIST
+====================================
+  1. Read the handoff: docs/HANDOFF_PEARL_STAR_IMAGE_PIPELINE_2026-05-04.md
+
+  2. Open pearl_books_dashboard.html in browser. Verify:
+     • stillness_press shows 157 books with green "FLUX" badges.
+     • warrior_calm shows 56 books with green "FLUX" badges.
+     • EI character-authors panel populated for both brands.
+     • Locale filter buttons work.
+
+  3. Spot-check covers visually:
+     open /Users/ahjan/phoenix_omega/assets/manga_catalog/stillness_press/stillness_jp_20/cover.png
+     open /Users/ahjan/phoenix_omega/assets/manga_catalog/warrior_calm/warrior_calm_battle_ja_jp_01/cover.png
+
+  4. Confirm cleanup landed:
+     git status --short | grep -E "^D|^ D"
+     # should show 9 deleted source files + 25 deleted PNGs
+
+  5. Confirm authority chain:
+     cat specs/MANGA_AUTHOR_AND_COVER_ART_CANONICAL_SPEC.md | head -30
+     cat docs/PEARL_STAR_IMAGE_GENERATION_PROTOCOL.md | head -30
+
+  6. Verify trigger phrases route correctly: ask Claude "make a cover" or
+     "generate manga panel" — pearl-image skill should auto-load.
