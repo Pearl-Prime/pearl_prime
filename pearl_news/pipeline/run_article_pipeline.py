@@ -290,8 +290,13 @@ def main() -> int:
         return 0
 
     # Attach language to each item (used by assembler, resolver, expansion)
+    # Also pin teacher_id from --teacher flag now so the assembler's _resolve_slot
+    # for teacher_quotes_practices can load the correct teacher topic pack in the
+    # fallback path (when --expand is not used).
     for item in items:
         item["language"] = language
+        if args.teacher:
+            item["teacher_id"] = args.teacher
 
     # Step 2: Classify (topic + SDG)
     items = classify_sdgs(items)
@@ -349,10 +354,28 @@ def main() -> int:
     # Step 4: Assemble (structural draft from template + atoms/placeholders)
     items = assemble_articles(items)
 
-    # Step 4a (NEW): Resolve named teacher per article
+    # Step 4a (NEW): Resolve named teacher per article.
+    # If --teacher is set, override the resolver output so the deterministic plan
+    # loads the correct teacher's topic pack (INV-2: one teacher per article).
     for item in items:
         teacher = resolve_teacher(item, config_root=config_root, atoms_root=atoms_root)
         item["_teacher_resolved"] = teacher
+    if args.teacher:
+        # Build a minimal resolved dict from the daily-cycle TEACHER_LANGUAGE map
+        # and the teacher roster so the expansion engine uses the correct pack.
+        from pearl_news.pipeline.teacher_resolver import _load_roster
+        roster = _load_roster(config_root)
+        roster_entry = (roster.get("teachers") or {}).get(args.teacher) or {}
+        forced_resolved = {
+            "teacher_id": args.teacher,
+            "display_name": roster_entry.get("display_name") or args.teacher.replace("_", " ").title(),
+            "tradition": roster_entry.get("tradition") or "",
+            "attribution": roster_entry.get("attribution") or "",
+            "atoms": roster_entry.get("atoms") or [],
+        }
+        for item in items:
+            item["_teacher_resolved"] = forced_resolved
+            item["teacher_id"] = args.teacher
 
     # Step 4b: LLM expansion with language-based routing (CJK6 → Qwen, EN → Claude)
     llm_yaml: dict = {}
@@ -480,6 +503,12 @@ def main() -> int:
                 "news_event": item.get("title", ""),
                 "hero_image_url": featured_image_url or "",
             }
+            # Wire expansion engine output into item["slots"] before v52 render.
+            # slot_expansion_engine writes deterministic teacher atoms to item["_v52_slots"],
+            # but assemble_v52 reads from item["slots"] (set by assembler with placeholders).
+            # Merging here ensures deterministic pack content overwrites assembler placeholders.
+            if item.get("_v52_slots"):
+                item["slots"] = {**item.get("slots", {}), **item["_v52_slots"]}
             article_content = assemble_v52(item, v52_meta, standalone=False)
         else:
             # INV-5: inject byline block at the top of article content
