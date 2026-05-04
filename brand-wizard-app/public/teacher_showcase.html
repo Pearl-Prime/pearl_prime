@@ -250,6 +250,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 <style>.unav{font-family:'DM Mono',monospace;font-size:.4rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(250,246,240,.3);text-decoration:none;padding:3px 7px;border-radius:3px;transition:all .15s;white-space:nowrap}.unav:hover{color:rgba(250,246,240,.7);background:rgba(180,83,9,.08)}</style>
 <div style="height:36px"></div>
 
+<!-- Sticky teacher choose bar -->
+<div id="choose-bar">
+  <div>
+    <span id="choose-bar-label">Viewing — </span>
+    <span id="choose-bar-name"></span>
+  </div>
+  <button id="choose-bar-btn" onclick="chooseTeacherFromBar()">Choose This Teacher →</button>
+</div>
+
 <!-- Sidebar -->
 <nav class="sidebar" style="top:36px; height:calc(100vh - 36px)">
   <div class="sidebar-title">Pearl Prime</div>
@@ -11366,7 +11375,8 @@ function chooseTeacher(id, name) {
     b.textContent = L.select + ' ' + b.dataset.tname;
   });
   const btn = document.getElementById('sel-btn-' + id);
-  if (btn) { btn.classList.add('selected'); btn.textContent = ''; }
+  const L = TEACHER_LABELS[_teacherLang()] || TEACHER_LABELS.en;
+  if (btn) { btn.classList.add('selected'); btn.textContent = '✓ ' + L.chosen; }
   // update sticky bar
   updateChooseBar(id, name);
   // check nav radio
