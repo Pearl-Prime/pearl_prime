@@ -188,6 +188,51 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
   .teacher-cta:hover { background:rgba(217,119,6,.22); border-color:#d97706; color:#faf6f0;
     transform:translateY(-1px); box-shadow:0 2px 6px rgba(217,119,6,.2); }
   .cta-anchor { display:block; height:1px; visibility:hidden; }
+
+  /* Teacher select button in header */
+  .teacher-select-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: .6rem; letter-spacing: .08em;
+    text-transform: uppercase; padding: 7px 16px; border-radius: 4px;
+    cursor: pointer; border: 1px solid var(--brand-color, var(--amber));
+    background: transparent; color: var(--brand-color, var(--amber));
+    transition: all .18s; white-space: nowrap; margin-top: 10px;
+  }
+  .teacher-select-btn:hover, .teacher-select-btn.selected {
+    background: var(--brand-color, var(--amber)); color: #0e0a06;
+    box-shadow: 0 0 12px rgba(245,166,35,.3);
+  }
+  .teacher-select-btn.selected::before { content: "✓ "; }
+
+  /* Sticky choose bar */
+  #choose-bar {
+    position: fixed; bottom: 0; left: 240px; right: 0; z-index: 500;
+    background: rgba(14,10,6,.97); border-top: 1px solid rgba(180,83,9,.25);
+    backdrop-filter: blur(10px); padding: 10px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    transform: translateY(100%); transition: transform .25s ease;
+    font-family: 'DM Sans', sans-serif;
+  }
+  #choose-bar.visible { transform: translateY(0); }
+  #choose-bar-label {
+    font-size: .8rem; color: rgba(250,246,240,.5);
+    font-family: var(--mono); letter-spacing: .05em;
+  }
+  #choose-bar-name {
+    font-size: .95rem; color: #d97706; font-family: 'Cormorant Garamond', serif;
+    font-weight: 500; margin-left: 6px;
+  }
+  #choose-bar-btn {
+    font-family: var(--mono); font-size: .65rem; letter-spacing: .1em;
+    text-transform: uppercase; padding: 9px 22px; border-radius: 3px;
+    cursor: pointer; border: 1px solid #d97706;
+    background: #d97706; color: #0e0a06; font-weight: 700;
+    transition: all .15s;
+  }
+  #choose-bar-btn:hover { background: #b45309; border-color: #b45309; }
+  @media (max-width: 640px) {
+    #choose-bar { left: 0; flex-direction: column; gap: 8px; text-align: center; }
+  }
 </style>
 </head>
 <body>
@@ -351,7 +396,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Contemplative / inner light / karma yoga</div>
           <div class="teacher-focus">Meditation, mindfulness, inner peace</div>
           <div class="teacher-stats">🇺🇸 English · somatic_companion · 10,120 words · iyashikei</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-ahjan" data-tname="Ahjan" onclick="chooseTeacher('ahjan', 'Ahjan')">Select Ahjan</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -1449,7 +1495,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Radical Devotion / self-transcendence</div>
           <div class="teacher-focus">Self-worth, courage, boundaries</div>
           <div class="teacher-stats">🇺🇸 English · elder_stabilizer · 14,025 words · seinen</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-adi_da" data-tname="Adi Da" onclick="chooseTeacher('adi_da', 'Adi Da')">Select Adi Da</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -2702,7 +2749,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Taoist / Qigong / traditional Chinese</div>
           <div class="teacher-focus">Burnout, somatic healing, courage</div>
           <div class="teacher-stats">🇨🇳 中文 · elder_stabilizer · 8,614 words · wuxia</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-master_feung" data-tname="Master Feung" onclick="chooseTeacher('master_feung', 'Master Feung')">Select Master Feung</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -3396,7 +3444,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Vedic Hindu / Shakti / devotional</div>
           <div class="teacher-focus">Grief, compassion fatigue, depression</div>
           <div class="teacher-stats">🇨🇳 中文 · somatic_companion · 10,004 words · josei</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-sai_ma" data-tname="Sai Ma" onclick="chooseTeacher('sai_ma', 'Sai Ma')">Select Sai Ma</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -4221,7 +4270,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">African Spiritual / solar / ancestral</div>
           <div class="teacher-focus">Depression, courage, self-worth, grief</div>
           <div class="teacher-stats">🇺🇸 English · research_guide · 8,894 words · seinen</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-ra" data-tname="Ra" onclick="chooseTeacher('ra', 'Ra')">Select Ra</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -5026,7 +5076,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Zen Buddhist / wabi-sabi / zazen</div>
           <div class="teacher-focus">Burnout, imposter syndrome, courage</div>
           <div class="teacher-stats">🇯🇵 日本語 · somatic_companion · 8,872 words · seinen</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-junko" data-tname="Junko" onclick="chooseTeacher('junko', 'Junko')">Select Junko</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -6041,7 +6092,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Shinto / shinrin-yoku / forest bathing</div>
           <div class="teacher-focus">Sleep anxiety, anxiety, compassion fatigue</div>
           <div class="teacher-stats">🇯🇵 日本語 · research_guide · 8,177 words · iyashikei</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-miki" data-tname="Miki" onclick="chooseTeacher('miki', 'Miki')">Select Miki</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -6804,7 +6856,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Shaolin / martial arts / Chan Buddhism</div>
           <div class="teacher-focus">Courage, burnout, boundaries</div>
           <div class="teacher-stats">🇨🇳 中文 · elder_stabilizer · 6,784 words · wuxia</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-master_wu" data-tname="Master Wu" onclick="chooseTeacher('master_wu', 'Master Wu')">Select Master Wu</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -7520,7 +7573,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Somatic / polyvagal / nervous system</div>
           <div class="teacher-focus">Somatic healing, anxiety, burnout</div>
           <div class="teacher-stats">🇺🇸 English · somatic_companion · 10,487 words · josei</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-pamela_fellows" data-tname="Pamela Fellows" onclick="chooseTeacher('pamela_fellows', 'Pamela Fellows')">Select Pamela Fellows</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -8493,7 +8547,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Zen Buddhist / koan / mindfulness</div>
           <div class="teacher-focus">Overthinking, anxiety, burnout</div>
           <div class="teacher-stats">🇺🇸 English · research_guide · 4,799 words · seinen</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-joshin" data-tname="Joshin" onclick="chooseTeacher('joshin', 'Joshin')">Select Joshin</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -9057,7 +9112,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Egyptian Mystery / Ma'at / truth</div>
           <div class="teacher-focus">Boundaries, self-worth, social anxiety</div>
           <div class="teacher-stats">🇺🇸 English · research_guide · 10,162 words · seinen</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-maat" data-tname="Maat" onclick="chooseTeacher('maat', 'Maat')">Select Maat</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -9810,7 +9866,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Japanese Aesthetics / Noh theater / authenticity</div>
           <div class="teacher-focus">Self-worth, social anxiety, imposter syndrome</div>
           <div class="teacher-stats">🇰🇷 한국어 · research_guide · 9,073 words · seinen</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-omote" data-tname="Omote" onclick="chooseTeacher('omote', 'Omote')">Select Omote</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -10508,7 +10565,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           <div class="teacher-tradition">Soul Mind Body / quantum healing</div>
           <div class="teacher-focus">Somatic healing, depression, grief</div>
           <div class="teacher-stats">🇨🇳 中文 · elder_stabilizer · 8,492 words · iyashikei</div>
-        </div>
+                <button class="teacher-select-btn" id="sel-btn-master_sha" data-tname="Master Sha" onclick="chooseTeacher('master_sha', 'Master Sha')">Select Master Sha</button>
+      </div>
       </div>
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
@@ -11271,6 +11329,78 @@ function filterFormat(format) {
   });
 }
 
+
+// ── Teacher selection ───────────────────────────────────────────────────────
+const TEACHER_LABELS = {
+  en: { select: 'Select', chosen: 'Selected', barLabel: 'Viewing — ', barBtn: 'Choose This Teacher →' },
+  ja: { select: '選択する', chosen: '選択済み', barLabel: '表示中 — ', barBtn: 'このティーチャーを選ぶ →' },
+  zh: { select: '选择', chosen: '已选择', barLabel: '正在查看 — ', barBtn: '选择此老师 →' },
+  tw: { select: '選擇', chosen: '已選擇', barLabel: '正在查看 — ', barBtn: '選擇此老師 →' },
+};
+function _teacherLang() {
+  const loc = localStorage.getItem('pearl_prime_locale') || navigator.language || 'en';
+  if (loc.startsWith('ja')) return 'ja';
+  if (loc === 'zh-TW' || loc === 'tw') return 'tw';
+  if (loc.startsWith('zh')) return 'zh';
+  return 'en';
+}
+function _wizardFile() {
+  const lang = _teacherLang();
+  if (lang === 'ja') return 'wizard-ja.html';
+  if (lang === 'tw') return 'wizard-tw.html';
+  if (lang === 'zh') return 'wizard-zh.html';
+  return 'wizard.html';
+}
+let _selectedTeacher = null;
+function chooseTeacher(id, name) {
+  _selectedTeacher = { id, name };
+  // persist
+  localStorage.setItem('phoenix_book_mode', JSON.stringify({
+    mode: 'teacher', teacher: id, teacherName: name
+  }));
+  // update all select buttons
+  document.querySelectorAll('.teacher-select-btn').forEach(b => {
+    b.classList.remove('selected');
+    const lang = _teacherLang();
+    const L = TEACHER_LABELS[lang] || TEACHER_LABELS.en;
+    b.textContent = L.select + ' ' + b.dataset.tname;
+  });
+  const btn = document.getElementById('sel-btn-' + id);
+  if (btn) { btn.classList.add('selected'); btn.textContent = ''; }
+  // update sticky bar
+  updateChooseBar(id, name);
+  // check nav radio
+  const radio = document.querySelector('.nav-radio[value="' + id + '"]');
+  if (radio) radio.checked = true;
+}
+function updateChooseBar(id, name) {
+  const lang = _teacherLang();
+  const L = TEACHER_LABELS[lang] || TEACHER_LABELS.en;
+  const bar = document.getElementById('choose-bar');
+  const label = document.getElementById('choose-bar-label');
+  const nameEl = document.getElementById('choose-bar-name');
+  const barBtn = document.getElementById('choose-bar-btn');
+  if (label) label.textContent = L.barLabel;
+  if (nameEl) nameEl.textContent = name || '';
+  if (barBtn) barBtn.textContent = L.barBtn;
+  if (bar && name) bar.classList.add('visible');
+}
+function chooseTeacherFromBar() {
+  if (!_selectedTeacher) return;
+  window.location.href = _wizardFile() + '?teacher=' + _selectedTeacher.id;
+}
+// Init select button labels from locale
+document.addEventListener('DOMContentLoaded', () => {
+  const lang = _teacherLang();
+  const L = TEACHER_LABELS[lang] || TEACHER_LABELS.en;
+  document.querySelectorAll('.teacher-select-btn').forEach(btn => {
+    const tname = btn.dataset.tname;
+    btn.textContent = L.select + ' ' + tname;
+  });
+  document.getElementById('choose-bar-btn').textContent = L.barBtn;
+  document.getElementById('choose-bar-label').textContent = L.barLabel;
+});
+
 // Sidebar active tracking
 const sections = document.querySelectorAll('.teacher-section');
 const navItems = document.querySelectorAll('.nav-item');
@@ -11283,6 +11413,10 @@ const observer = new IntersectionObserver((entries) => {
         activeNav.classList.add('active');
         const radio = activeNav.querySelector('.nav-radio');
         if (radio) radio.checked = true;
+        // Update sticky bar to show current teacher in view
+        const tname = activeNav.querySelector('.nav-name')?.textContent || '';
+        const tid = activeNav.dataset.teacher || '';
+        updateChooseBar(tid, tname);
       }
     }
   });
