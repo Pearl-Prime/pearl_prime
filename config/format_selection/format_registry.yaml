@@ -135,3 +135,29 @@ runtime_formats:
     word_range: [50000, 65000]
     compatible_tiers: [A]
     compatible_structural_formats: [F013]
+
+  # Compact runtimes — purpose-built for short word bands with FEWER chapters
+  # than the default short runtimes (which assume a 12-chapter spine compressed
+  # into a small budget). Authority: docs/COMPACT_BOOK_FORMAT_SPECS_2026-05-04.md.
+  # Beat sheets compress the 4-phase narrative arc (HARDSHIP/HELP/HEALING/HOPE)
+  # into 5 or 8 chapters. Per-chapter word budget is larger than the
+  # equivalent-runtime micro/short formats because there are fewer chapters
+  # for the same word target.
+  compact_book_5ch_15min:
+    duration_minutes: 15
+    chapter_count_default: 5
+    word_range: [3000, 4500]
+    compatible_tiers: [A, B, C]
+    compatible_structural_formats: [F015, F003]
+  compact_book_5ch_20min:
+    duration_minutes: 20
+    chapter_count_default: 5
+    word_range: [4000, 5500]
+    compatible_tiers: [A, B, C]
+    compatible_structural_formats: [F015, F003]
+  compact_book_8ch_30min:
+    duration_minutes: 30
+    chapter_count_default: 8
+    word_range: [5500, 7500]
+    compatible_tiers: [A, B, C]
+    compatible_structural_formats: [F003, F006, F007, F011]

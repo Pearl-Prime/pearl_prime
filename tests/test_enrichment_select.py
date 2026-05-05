@@ -983,3 +983,51 @@ def test_depth_reservation_preserves_existing_affinity_priority(monkeypatch):
         assert not depth_slots, (
             f"Ch{ch.number} received depth despite chapter_affinity=[1,2,3]: {depth_slots}"
         )
+
+
+# ----------------------------------------------------------------------------
+# Compact runtime declarations (PR follow-up to #852).
+# ----------------------------------------------------------------------------
+
+def test_compact_runtimes_declared_in_format_registry():
+    """compact_book_5ch_15min / 5ch_20min / 8ch_30min must be declared with
+    word_range, chapter_count_default, and compatible_structural_formats."""
+    import yaml as _yaml
+    from pathlib import Path as _Path
+
+    cfg = _Path(__file__).resolve().parent.parent / "config" / "format_selection" / "format_registry.yaml"
+    data = _yaml.safe_load(cfg.read_text(encoding="utf-8"))
+    runtimes = data.get("runtime_formats", {})
+    for rt in ("compact_book_5ch_15min", "compact_book_5ch_20min", "compact_book_8ch_30min"):
+        assert rt in runtimes, f"{rt} missing from runtime_formats"
+        entry = runtimes[rt]
+        assert isinstance(entry.get("word_range"), list) and len(entry["word_range"]) == 2
+        assert entry.get("chapter_count_default") in (5, 8)
+        assert entry.get("compatible_structural_formats")
+
+
+def test_max_extra_chunks_for_format_handles_compact_runtimes():
+    """_max_extra_chunks_for_format must return non-negative ints for compact runtimes
+    and not collapse to the unknown-format fallback (base=3)."""
+    from phoenix_v4.planning.enrichment_select import _max_extra_chunks_for_format
+
+    for rt in ("compact_book_5ch_15min", "compact_book_5ch_20min", "compact_book_8ch_30min"):
+        # slot_target_words=460 (TEACHER_DOCTRINE word target) — typical case.
+        out = _max_extra_chunks_for_format(rt, 460)
+        assert isinstance(out, int) and out >= 0
+        # compact runtimes are short-form: budget should be smaller than standard_book's.
+        assert out <= _max_extra_chunks_for_format("standard_book", 460)
+
+
+def test_compact_runtimes_in_book_quality_gate_runtime_policies():
+    """book_quality_gate.yaml::runtime_policies must include compact runtimes."""
+    import yaml as _yaml
+    from pathlib import Path as _Path
+
+    cfg = _Path(__file__).resolve().parent.parent / "config" / "quality" / "book_quality_gate.yaml"
+    data = _yaml.safe_load(cfg.read_text(encoding="utf-8"))
+    policies = data.get("runtime_policies", {})
+    for rt in ("compact_book_5ch_15min", "compact_book_5ch_20min", "compact_book_8ch_30min"):
+        assert rt in policies, f"{rt} missing from runtime_policies"
+        assert "default_reject" in policies[rt]
+        assert "allow_override" in policies[rt]

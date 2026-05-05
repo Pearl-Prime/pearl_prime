@@ -46,6 +46,20 @@ runtime_policies:
   short_book_30:
     default_reject: false
     allow_override: true
+  # Compact runtimes — see docs/COMPACT_BOOK_FORMAT_SPECS_2026-05-04.md.
+  # Compact 5ch_15/20 are short-form (default reject like micro) until
+  # bestseller fitness is proved on shadow renders.
+  compact_book_5ch_15min:
+    default_reject: true
+    allow_override: true
+  compact_book_5ch_20min:
+    default_reject: true
+    allow_override: true
+  # Compact 8ch_30min mirrors short_book_30's release stance — cleared
+  # as a normal short-form runtime, not blocked by default.
+  compact_book_8ch_30min:
+    default_reject: false
+    allow_override: true
 
 artifact_regexes:
   - name: slot_type_line
