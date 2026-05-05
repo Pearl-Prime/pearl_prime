@@ -11,8 +11,21 @@ from dataclasses import dataclass
 # Micro / short spine books use many line-broken paragraphs; adjacent token overlap
 # stays artificially low while transitions still read fine. Relax only for these
 # runtime formats — standard+ thresholds stay unchanged.
+#
+# Compact formats (PR #856 / PR-G #861) are also short-form by character: 5-8 chapters,
+# 3000-7500 words, same paragraph-break density as micro_book_15/20. The chapter_flow
+# gate's transition-cue threshold should match (2 cues required, not 3 for standard).
+# Surfaced by PR-H smoke 2026-05-04: compact_book_8ch_30min was hitting the standard
+# threshold of 3, failing WEAK_TRANSITIONS even when ch8 had 2 transition cues.
 SHORT_FORM_RUNTIME_FORMAT_IDS = frozenset(
-    {"micro_book_15", "micro_book_20", "short_book_30"},
+    {
+        "micro_book_15",
+        "micro_book_20",
+        "short_book_30",
+        "compact_book_5ch_15min",
+        "compact_book_5ch_20min",
+        "compact_book_8ch_30min",
+    },
 )
 
 DEEP_FORM_RUNTIME_FORMAT_IDS = frozenset(

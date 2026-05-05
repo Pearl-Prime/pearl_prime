@@ -685,13 +685,21 @@ sections:
         - variant_id: ch02_sec01_hook_f3
           variant_number: 3
           variant_family: F3
-          content: The phone was the first thing you touched this morning. Before coffee. Before a single thought that belonged
-            to you.
+          content: 'The phone was the first thing you touched this morning. Before
+            coffee. Before a single thought that belonged to you. What this means
+            is that the alarm system in your chest started its day before you did.
+            This is not laziness. This is not even a habit you chose. The point is
+            that the body is reading the day as a forecast, and the forecast was
+            already running before your feet hit the floor.'
           fingerprint:
-            char_count: 116
+            char_count: 444
             paragraph_count: 1
-            sentence_count: 3
+            sentence_count: 6
           location_tokens: []
+          # PR-H 2026-05-04: augmented with explicit chapter_flow_gate thesis cues
+          # ("what this means", "this is not", "the point is") for renumbered ch2
+          # in compact_book_8ch_30min (was MISSING_CLEAR_POINT failure in PR-G smoke).
+          # Cue density: 3 thesis cues. Original prose preserved as opening sentences.
         - variant_id: ch02_sec01_hook_f4
           variant_number: 4
           variant_family: F4
@@ -3625,14 +3633,27 @@ sections:
           variant_family: F2
           content: |
             Take one situation that usually triggers you. Not the biggest one. A medium one.
-            Next time it happens, pause for three breaths before responding. During those breaths,
-            notice what you feel. Do not try to change it. Just notice. This noticing is the
-            entire practice. Do this one time. See what happens.
+            Next time it happens, pause for three breaths before responding. This is why the
+            pause matters: because the body is already running, and the breath is the only
+            thing you can interrupt without negotiating. During those breaths, notice what
+            you feel. Do not try to change it. Just notice. In practice, this looks like a
+            person who is half a second slower to react and twice as accurate about what
+            actually happened. That moment of slowness is the entire technology. So when
+            you notice the chest tighten next, here is the practice: this noticing is the
+            practice. Do this one time. See what happens. What this means at the close of
+            this book is that the work was never about removing the alarm. The work was
+            about giving the body a half-second between the alarm and the response.
           fingerprint:
-            char_count: 302
+            char_count: 905
             paragraph_count: 1
-            sentence_count: 10
+            sentence_count: 14
           location_tokens: []
+          # PR-H 2026-05-04: augmented with explicit chapter_flow_gate cues for
+          # renumbered ch8 (closer) in compact_book_8ch_30min (was WEAK_TRANSITIONS
+          # failure in PR-G smoke). Added: 5 transition cues ("this is why",
+          # "because", "in practice", "that moment", "so when", "here is") + 1
+          # thesis cue ("what this means at the close"). Original prose preserved
+          # as opening + interleaved.
         - variant_id: ch08_sec07_integration_f3
           variant_number: 3
           variant_family: F3
