@@ -404,10 +404,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Stillness Press</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/ahjan_audiobook.png" loading="lazy" alt="Ahjan Audiobook" onerror="this.style.display='none'">
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('ahjan')">
+            <img src="assets/covers/kdp/ahjan_audiobook.png" loading="lazy" alt="Ahjan Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-ahjan" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇺🇸 english_male · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-ahjan" preload="metadata" src="assets/audio/audiobook_chapters/ahjan_anxiety_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/ahjan_cover_anxiety.png" loading="lazy" alt="Ahjan Manga" onerror="this.style.display='none'">
@@ -434,21 +438,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-ahjan" preload="metadata"
                    src="assets/audio/podcast/ahjan_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/ahjan_social.png" loading="lazy" alt="Ahjan Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/ahjan_self_worth_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('ahjan_listen')">
-        <span class="toggle-arrow" id="arr_ahjan_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="ahjan_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Anxiety</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/ahjan_anxiety_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -461,16 +459,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('ahjan_watch')">
-        <span class="toggle-arrow" id="arr_ahjan_watch">▸</span> Watch
-      </div>
-      <div id="ahjan_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -485,17 +473,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </div>
         </div>
       </div>
-
-      <div class="section-toggle" onclick="toggleSection('ahjan_video_example')">
-        <span class="toggle-arrow" id="arr_ahjan_video_example">▸</span> Video — example reel
-      </div>
-      <div id="ahjan_video_example" class="collapsible" style="display:none">
-        <p class="listen-meta" style="margin:0 0 12px">Official teacher reel · 9:16 vertical</p>
-        <div class="video-reel-wrap">
-          <video controls playsinline preload="metadata" poster="assets/covers/kdp/ahjan_audiobook.png">
-            <source src="assets/video/teacher_reels/ahjan_reel.mp4" type="video/mp4">
-          </video>
-        </div>
         <div class="video-label" style="margin-top:8px">Teacher reel</div>
       </div>
 
@@ -1503,10 +1480,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Feather & Scale Press</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/adi_da_audiobook.png" loading="lazy" alt="Adi Da Audiobook" onerror="this.style.display='none'">
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('adi_da')">
+            <img src="assets/covers/kdp/adi_da_audiobook.png" loading="lazy" alt="Adi Da Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-adi_da" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇺🇸 english_male · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-adi_da" preload="metadata" src="assets/audio/audiobook_chapters/adi_da_self_worth_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/adi_da_cover_self_worth.png" loading="lazy" alt="Adi Da Manga" onerror="this.style.display='none'">
@@ -1533,21 +1514,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-adi_da" preload="metadata"
                    src="assets/audio/podcast/adi_da_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/adi_da_social.png" loading="lazy" alt="Adi Da Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/adi_da_boundaries_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('adi_da_listen')">
-        <span class="toggle-arrow" id="arr_adi_da_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="adi_da_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Self-Worth</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/adi_da_self_worth_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -1560,16 +1535,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('adi_da_watch')">
-        <span class="toggle-arrow" id="arr_adi_da_watch">▸</span> Watch
-      </div>
-      <div id="adi_da_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -1580,17 +1545,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </div>
         </div>
       </div>
-
-      <div class="section-toggle" onclick="toggleSection('adi_da_video_example')">
-        <span class="toggle-arrow" id="arr_adi_da_video_example">▸</span> Video — example reel
-      </div>
-      <div id="adi_da_video_example" class="collapsible" style="display:none">
-        <p class="listen-meta" style="margin:0 0 12px">Official teacher reel · 9:16 vertical</p>
-        <div class="video-reel-wrap">
-          <video controls playsinline preload="metadata" poster="assets/covers/kdp/adi_da_audiobook.png">
-            <source src="assets/video/teacher_reels/adi_da_reel.mp4" type="video/mp4">
-          </video>
-        </div>
         <div class="video-label" style="margin-top:8px">Teacher reel</div>
       </div>
 
@@ -2757,10 +2711,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Root & Meridian Press</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/master_feung_audiobook.png" loading="lazy" alt="Master Feung Audiobook" onerror="this.style.display='none'">
+                    <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('master_feung')">
+            <img src="assets/covers/kdp/master_feung_audiobook.png" loading="lazy" alt="Master Feung Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-master_feung" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇨🇳 chinese_male · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-master_feung" preload="metadata" src="assets/audio/audiobook_chapters/master_feung_burnout_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/master_feung_cover_burnout.png" loading="lazy" alt="Master Feung Manga" onerror="this.style.display='none'">
@@ -2787,21 +2745,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-master_feung" preload="metadata"
                    src="assets/audio/podcast/master_feung_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/master_feung_social.png" loading="lazy" alt="Master Feung Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/master_feung_courage_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('master_feung_listen')">
-        <span class="toggle-arrow" id="arr_master_feung_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="master_feung_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Burnout</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/master_feung_burnout_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -2814,16 +2766,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('master_feung_watch')">
-        <span class="toggle-arrow" id="arr_master_feung_watch">▸</span> Watch
-      </div>
-      <div id="master_feung_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -3452,10 +3394,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Open Vessel Press</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/sai_ma_audiobook.png" loading="lazy" alt="Sai Ma Audiobook" onerror="this.style.display='none'">
+                    <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('sai_ma')">
+            <img src="assets/covers/kdp/sai_ma_audiobook.png" loading="lazy" alt="Sai Ma Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-sai_ma" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇨🇳 chinese_female · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-sai_ma" preload="metadata" src="assets/audio/audiobook_chapters/sai_ma_grief_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/sai_ma_cover_grief.png" loading="lazy" alt="Sai Ma Manga" onerror="this.style.display='none'">
@@ -3482,21 +3428,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-sai_ma" preload="metadata"
                    src="assets/audio/podcast/sai_ma_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/sai_ma_social.png" loading="lazy" alt="Sai Ma Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/sai_ma_depression_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('sai_ma_listen')">
-        <span class="toggle-arrow" id="arr_sai_ma_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="sai_ma_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Grief</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/sai_ma_grief_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -3509,16 +3449,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('sai_ma_watch')">
-        <span class="toggle-arrow" id="arr_sai_ma_watch">▸</span> Watch
-      </div>
-      <div id="sai_ma_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -4278,10 +4208,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Ember & Ash Publishing</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/ra_audiobook.png" loading="lazy" alt="Ra Audiobook" onerror="this.style.display='none'">
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('ra')">
+            <img src="assets/covers/kdp/ra_audiobook.png" loading="lazy" alt="Ra Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-ra" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇺🇸 english_male · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-ra" preload="metadata" src="assets/audio/audiobook_chapters/ra_self_worth_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/ra_cover_self_worth.png" loading="lazy" alt="Ra Manga" onerror="this.style.display='none'">
@@ -4308,21 +4242,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-ra" preload="metadata"
                    src="assets/audio/podcast/ra_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/ra_social.png" loading="lazy" alt="Ra Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/ra_courage_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('ra_listen')">
-        <span class="toggle-arrow" id="arr_ra_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="ra_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Self-Worth</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/ra_self_worth_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -4335,16 +4263,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('ra_watch')">
-        <span class="toggle-arrow" id="arr_ra_watch">▸</span> Watch
-      </div>
-      <div id="ra_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -5084,10 +5002,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Bare Form Books</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/junko_audiobook.png" loading="lazy" alt="Junko Audiobook" onerror="this.style.display='none'">
+                    <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('junko')">
+            <img src="assets/covers/kdp/junko_audiobook.png" loading="lazy" alt="Junko Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-junko" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇯🇵 ja_female_warm · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-junko" preload="metadata" src="assets/audio/audiobook_chapters/junko_overthinking_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/junko_cover_mindfulness.png" loading="lazy" alt="Junko Manga" onerror="this.style.display='none'">
@@ -5114,21 +5036,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-junko" preload="metadata"
                    src="assets/audio/podcast/junko_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/junko_social.png" loading="lazy" alt="Junko Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/junko_courage_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('junko_listen')">
-        <span class="toggle-arrow" id="arr_junko_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="junko_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Overthinking</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/junko_overthinking_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -5141,16 +5057,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('junko_watch')">
-        <span class="toggle-arrow" id="arr_junko_watch">▸</span> Watch
-      </div>
-      <div id="junko_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -6100,10 +6006,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Present Tense Books</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/miki_audiobook.png" loading="lazy" alt="Miki Audiobook" onerror="this.style.display='none'">
+                    <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('miki')">
+            <img src="assets/covers/kdp/miki_audiobook.png" loading="lazy" alt="Miki Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-miki" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇯🇵 ja_m_calm_01 · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-miki" preload="metadata" src="assets/audio/audiobook_chapters/miki_imposter_syndrome_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/miki_cover_imposter_syndrome.png" loading="lazy" alt="Miki Manga" onerror="this.style.display='none'">
@@ -6130,21 +6040,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-miki" preload="metadata"
                    src="assets/audio/podcast/miki_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/miki_social.png" loading="lazy" alt="Miki Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/miki_anxiety_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('miki_listen')">
-        <span class="toggle-arrow" id="arr_miki_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="miki_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Imposter Syndrome</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/miki_imposter_syndrome_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -6157,16 +6061,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('miki_watch')">
-        <span class="toggle-arrow" id="arr_miki_watch">▸</span> Watch
-      </div>
-      <div id="miki_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -6864,10 +6758,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Iron Gate Press</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/master_wu_audiobook.png" loading="lazy" alt="Master Wu Audiobook" onerror="this.style.display='none'">
+                    <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('master_wu')">
+            <img src="assets/covers/kdp/master_wu_audiobook.png" loading="lazy" alt="Master Wu Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-master_wu" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇨🇳 chinese_male · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-master_wu" preload="metadata" src="assets/audio/audiobook_chapters/master_wu_courage_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/master_wu_cover_courage.png" loading="lazy" alt="Master Wu Manga" onerror="this.style.display='none'">
@@ -6894,21 +6792,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-master_wu" preload="metadata"
                    src="assets/audio/podcast/master_wu_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/master_wu_social.png" loading="lazy" alt="Master Wu Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/master_wu_boundaries_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('master_wu_listen')">
-        <span class="toggle-arrow" id="arr_master_wu_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="master_wu_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Courage</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/master_wu_courage_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -6921,16 +6813,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('master_wu_watch')">
-        <span class="toggle-arrow" id="arr_master_wu_watch">▸</span> Watch
-      </div>
-      <div id="master_wu_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -6941,17 +6823,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </div>
         </div>
       </div>
-
-      <div class="section-toggle" onclick="toggleSection('master_wu_video_example')">
-        <span class="toggle-arrow" id="arr_master_wu_video_example">▸</span> Video — example reel
-      </div>
-      <div id="master_wu_video_example" class="collapsible" style="display:none">
-        <p class="listen-meta" style="margin:0 0 12px">Official teacher reel · 9:16 vertical</p>
-        <div class="video-reel-wrap">
-          <video controls playsinline preload="metadata" poster="assets/covers/cover_master_wu_courage.png">
-            <source src="assets/video/teacher_reels/wu_reel.mp4" type="video/mp4">
-          </video>
-        </div>
         <div class="video-label" style="margin-top:8px">Teacher reel</div>
       </div>
 
@@ -7581,10 +7452,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Felt Sense Publishing</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/pamela_fellows_audiobook.png" loading="lazy" alt="Pamela Fellows Audiobook" onerror="this.style.display='none'">
+                    <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('pamela_fellows')">
+            <img src="assets/covers/kdp/pamela_fellows_audiobook.png" loading="lazy" alt="Pamela Fellows Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-pamela_fellows" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇺🇸 english_female · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-pamela_fellows" preload="metadata" src="assets/audio/audiobook_chapters/pamela_fellows_burnout_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/pamela_fellows_cover_burnout.png" loading="lazy" alt="Pamela Fellows Manga" onerror="this.style.display='none'">
@@ -7611,21 +7486,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-pamela_fellows" preload="metadata"
                    src="assets/audio/podcast/pamela_fellows_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/pamela_fellows_social.png" loading="lazy" alt="Pamela Fellows Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/pamela_fellows_financial_anxiety_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('pamela_fellows_listen')">
-        <span class="toggle-arrow" id="arr_pamela_fellows_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="pamela_fellows_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Burnout</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/pamela_fellows_burnout_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -7638,16 +7507,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('pamela_fellows_watch')">
-        <span class="toggle-arrow" id="arr_pamela_fellows_watch">▸</span> Watch
-      </div>
-      <div id="pamela_fellows_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -8555,10 +8414,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Clear Seeing Books</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/joshin_audiobook.png" loading="lazy" alt="Joshin Audiobook" onerror="this.style.display='none'">
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('joshin')">
+            <img src="assets/covers/kdp/joshin_audiobook.png" loading="lazy" alt="Joshin Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-joshin" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇺🇸 english_male · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-joshin" preload="metadata" src="assets/audio/audiobook_chapters/joshin_anxiety_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/joshin_cover_anxiety.png" loading="lazy" alt="Joshin Manga" onerror="this.style.display='none'">
@@ -8585,21 +8448,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-joshin" preload="metadata"
                    src="assets/audio/podcast/joshin_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/joshin_social.png" loading="lazy" alt="Joshin Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/joshin_burnout_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('joshin_listen')">
-        <span class="toggle-arrow" id="arr_joshin_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="joshin_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Anxiety</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/joshin_anxiety_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -8612,16 +8469,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('joshin_watch')">
-        <span class="toggle-arrow" id="arr_joshin_watch">▸</span> Watch
-      </div>
-      <div id="joshin_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -9120,10 +8967,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Feather & Scale Press</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/maat_audiobook.png" loading="lazy" alt="Maat Audiobook" onerror="this.style.display='none'">
+          <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('maat')">
+            <img src="assets/covers/kdp/maat_audiobook.png" loading="lazy" alt="Maat Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-maat" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇺🇸 english_male · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-maat" preload="metadata" src="assets/audio/audiobook_chapters/maat_boundaries_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/maat_front.png" loading="lazy" alt="Maat Manga (character)" onerror="this.style.display='none'">
@@ -9150,21 +9001,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-maat" preload="metadata"
                    src="assets/audio/podcast/maat_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/maat_social.png" loading="lazy" alt="Maat Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/maat_social_anxiety_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('maat_listen')">
-        <span class="toggle-arrow" id="arr_maat_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="maat_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Boundaries</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/maat_boundaries_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -9177,16 +9022,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('maat_watch')">
-        <span class="toggle-arrow" id="arr_maat_watch">▸</span> Watch
-      </div>
-      <div id="maat_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -9874,10 +9709,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Held Ground Press</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/omote_audiobook.png" loading="lazy" alt="Omote Audiobook" onerror="this.style.display='none'">
+                    <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('omote')">
+            <img src="assets/covers/kdp/omote_audiobook.png" loading="lazy" alt="Omote Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-omote" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇰🇷 ko_female_gentle · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-omote" preload="metadata" src="assets/audio/audiobook_chapters/omote_sleep_anxiety_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/omote_cover_sleep_anxiety.png" loading="lazy" alt="Omote Manga" onerror="this.style.display='none'">
@@ -9904,21 +9743,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-omote" preload="metadata"
                    src="assets/audio/podcast/omote_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/omote_social.png" loading="lazy" alt="Omote Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/omote_social_anxiety_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('omote_listen')">
-        <span class="toggle-arrow" id="arr_omote_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="omote_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Sleep Anxiety</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/omote_sleep_anxiety_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -9931,16 +9764,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('omote_watch')">
-        <span class="toggle-arrow" id="arr_omote_watch">▸</span> Watch
-      </div>
-      <div id="omote_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
@@ -10573,10 +10396,14 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-label">Ebook</div>
             <div class="format-brand">Night Architecture Books</div>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/master_sha_audiobook.png" loading="lazy" alt="Master Sha Audiobook" onerror="this.style.display='none'">
+                    <div class="format-card podcast-playable" style="cursor:pointer;position:relative" onclick="toggleAudiobook('master_sha')">
+            <img src="assets/covers/kdp/master_sha_audiobook.png" loading="lazy" alt="Master Sha Audiobook" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;margin-bottom:8px">
+            <div class="play-overlay" id="play-ab-master_sha" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;pointer-events:none">
+              <span style="color:white;font-size:1.1rem;margin-left:2px">&#9654;</span>
+            </div>
             <div class="format-label">Audiobook</div>
-            <div class="format-meta">🇨🇳 chinese_male · CosyVoice2</div>
+            <div class="format-meta">Ch 1 · click to play</div>
+            <audio id="audiobook-master_sha" preload="metadata" src="assets/audio/audiobook_chapters/master_sha_grief_ch1.mp3"></audio>
           </div>
           <div class="format-card">
             <img src="assets/manga_covers/master_sha_cover_grief.png" loading="lazy" alt="Master Sha Manga" onerror="this.style.display='none'">
@@ -10603,21 +10430,15 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <audio id="podcast-master_sha" preload="metadata"
                    src="assets/audio/podcast/master_sha_podcast_3min.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/covers/kdp/master_sha_social.png" loading="lazy" alt="Master Sha Social" onerror="this.style.display='none'">
-            <div class="format-label">Social</div>
-            <div class="format-meta">Shorts / feeds</div>
+                    <div class="format-card">
+            <video controls preload="metadata" playsinline style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px;margin-bottom:8px;background:#000">
+              <source src="assets/video/tiktok/master_sha_depression_tiktok.mp4" type="video/mp4">
+            </video>
+            <div class="format-label">Manga Short</div>
+            <div class="format-meta">Vertical · 90s</div>
           </div>
         </div>
       </div>
-
-      <!-- LISTEN -->
-      <div class="section-toggle" onclick="toggleSection('master_sha_listen')">
-        <span class="toggle-arrow" id="arr_master_sha_listen">▸</span> Listen — Chapter 1
-      </div>
-      <div id="master_sha_listen" class="collapsible" style="display:none">
-        <div class="listen-block">
-          <div class="listen-title">Chapter 1 — Grief</div>
           <audio controls preload="metadata" style="width:100%; height:40px; border-radius:6px">
             <source src="assets/audio/audiobook_chapters/master_sha_grief_ch1.mp3" type="audio/mpeg">
           </audio>
@@ -10630,16 +10451,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
           </audio>
         </div>
       </div>
-
-      <!-- WATCH -->
-      <div class="section-toggle" onclick="toggleSection('master_sha_watch')">
-        <span class="toggle-arrow" id="arr_master_sha_watch">▸</span> Watch
-      </div>
-      <div id="master_sha_watch" class="collapsible" style="display:none">
-        <div class="watch-grid">
-          <div class="watch-main">
-            <div class="video-container landscape">
-              <div class="video-note">YouTube video — coming soon (5 min landscape)</div>
             </div>
           </div>
           <div class="watch-side">
