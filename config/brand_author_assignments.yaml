@@ -1,11 +1,82 @@
 # Default pen-name author per brand when run_pipeline does not receive --author.
 # Authority: SYSTEMS_V4.md — "resolve author from brand".
 # First matching row wins (brand_id required; optional topic_ids, persona_ids, series_ids to narrow).
+#
+# author_pool: list of {author_id, voice_lock, tier} — used by anti-spam rotation
+#   per docs/PEN_NAME_AUTHOR_SYSTEM.md (no voice appears > 2× per brand within a locale)
+# topic_ids/persona_ids in a row narrow which author to pick for a given book
 
 assignments:
+  # ─── BRAND 1: stillness_press (teacher: ahjan) ───
+  # 12 pen-name authors, all bio'd in config/catalog_planning/teacher_brand_author_roster.yaml §01
+  # Topic-affinity rules (first matching row wins) below the pool route books to fitting authors.
+
   - brand_id: stillness_press
-    default_author: null
-    # No default: use --author explicitly or teacher-only book.
+    default_author: lena_thorne   # anxiety+sleep_anxiety primary — most common topic in catalog
+    author_pool:
+      - { author_id: lena_thorne,     voice_lock: EXAVITQu4vr4xnSDxMaL, tier: 1 }
+      - { author_id: daniel_voss,     voice_lock: onwK4e9ZLuTAKqWW03F9, tier: 1 }
+      - { author_id: mira_santos,     voice_lock: pMsXgVXv3BLzUgSXRplE, tier: 1 }
+      - { author_id: kai_okafor,      voice_lock: TxGEqnHWrfWFTfGW9XjX, tier: 1 }
+      - { author_id: ruth_alder,      voice_lock: ThT5KcBeYPX3keUQqHPh, tier: 1 }
+      - { author_id: sam_meridian,    voice_lock: Yko7PKHZNXotIFUBG7I9, tier: 2 }
+      - { author_id: noor_ibrahim,    voice_lock: oWAxZDx7w5VEj9dCyTzz, tier: 2 }
+      - { author_id: tara_woodfield,  voice_lock: ThT5KcBeYPX3keUQqHPh, tier: 2 }
+      - { author_id: rowan_beck,      voice_lock: onwK4e9ZLuTAKqWW03F9, tier: 2 }
+      - { author_id: mae_rivers,      voice_lock: oWAxZDx7w5VEj9dCyTzz, tier: 2 }
+      - { author_id: silas_grant,     voice_lock: ODq5zmih8GrVes37Dizd, tier: 2 }
+      - { author_id: iris_tam,        voice_lock: LcfcDJNUP1GQjkzn1xUU, tier: 2 }
+
+  # Topic-affinity rules for stillness_press (narrow author by topic when --author not passed)
+  - brand_id: stillness_press
+    topic_ids: [anxiety]
+    default_author: lena_thorne   # also: rowan_beck (alternate)
+  - brand_id: stillness_press
+    topic_ids: [sleep_anxiety]
+    default_author: lena_thorne   # also: iris_tam
+  - brand_id: stillness_press
+    topic_ids: [burnout]
+    default_author: daniel_voss   # also: tara_woodfield
+  - brand_id: stillness_press
+    topic_ids: [imposter_syndrome]
+    default_author: daniel_voss
+  - brand_id: stillness_press
+    topic_ids: [grief]
+    default_author: mira_santos   # also: mae_rivers
+  - brand_id: stillness_press
+    topic_ids: [self_worth]
+    default_author: mira_santos   # also: silas_grant
+  - brand_id: stillness_press
+    topic_ids: [social_anxiety]
+    default_author: kai_okafor
+  - brand_id: stillness_press
+    topic_ids: [overthinking]
+    default_author: kai_okafor    # also: rowan_beck
+  - brand_id: stillness_press
+    topic_ids: [boundaries]
+    default_author: ruth_alder    # also: tara_woodfield
+  - brand_id: stillness_press
+    topic_ids: [compassion_fatigue]
+    default_author: ruth_alder    # also: mae_rivers
+  - brand_id: stillness_press
+    topic_ids: [somatic_healing]
+    default_author: sam_meridian  # also: iris_tam
+  - brand_id: stillness_press
+    topic_ids: [depression]
+    default_author: sam_meridian  # also: silas_grant
+  - brand_id: stillness_press
+    topic_ids: [courage]
+    default_author: noor_ibrahim
+  - brand_id: stillness_press
+    topic_ids: [financial_anxiety, financial_stress]
+    default_author: noor_ibrahim
+  # Catalog topics not directly in any author's primary topics — assign to nearest fit
+  - brand_id: stillness_press
+    topic_ids: [mindfulness]
+    default_author: rowan_beck    # environmental psychologist; closest fit
+  - brand_id: stillness_press
+    topic_ids: [adhd_focus]
+    default_author: kai_okafor    # Gen Z, overthinking-adjacent
 
   - brand_id: cognitive_clarity
     default_author: null
