@@ -373,26 +373,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 <!-- Main Content -->
 <main class="main" style="padding-top:56px">
   <h1 class="page-title">Teacher Showcase</h1>
-  <p class="page-subtitle">13 teachers, 13 brands — complete media portfolio</p>
+  <p class="page-subtitle">Media Portfolio Examples</p>
 
-  <!-- Stats Bar -->
-  <div class="stats-bar">
-    <span class="stat-pill">13 Teachers</span>
-    <span class="stat-pill">15 Topics</span>
-    <span class="stat-pill">5 Formats</span>
-    <span class="stat-pill">4 Languages</span>
-    <span class="stat-pill green">$0 Production</span>
-  </div>
 
-  <!-- Format Filter -->
-  <div class="filter-bar" id="format-filter">
-    <button class="filter-btn active" onclick="filterFormat('all')">All</button>
-    <button class="filter-btn" onclick="filterFormat('formats')">Covers</button>
-    <button class="filter-btn" onclick="filterFormat('listen')">Audio</button>
-    <button class="filter-btn" onclick="filterFormat('watch')">Video</button>
-    <button class="filter-btn" onclick="filterFormat('manga')">Manga</button>
-    <button class="filter-btn" onclick="filterFormat('book')">Book</button>
-  </div>
 
   <!-- Teacher Sections -->
 
@@ -412,9 +395,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('ahjan_formats')">
-        <span class="toggle-arrow" id="arr_ahjan_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_ahjan_formats">▸</span> Formats
       </div>
-      <div id="ahjan_formats" class="collapsible" style="display:none">
+      <div id="ahjan_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/ahjan_ebook.png" loading="lazy" alt="Ahjan Ebook" onerror="this.style.display='none'">
@@ -1511,9 +1494,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('adi_da_formats')">
-        <span class="toggle-arrow" id="arr_adi_da_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_adi_da_formats">▸</span> Formats
       </div>
-      <div id="adi_da_formats" class="collapsible" style="display:none">
+      <div id="adi_da_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/adi_da_ebook.png" loading="lazy" alt="Adi Da Ebook" onerror="this.style.display='none'">
@@ -2765,9 +2748,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('master_feung_formats')">
-        <span class="toggle-arrow" id="arr_master_feung_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_master_feung_formats">▸</span> Formats
       </div>
-      <div id="master_feung_formats" class="collapsible" style="display:none">
+      <div id="master_feung_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/master_feung_ebook.png" loading="lazy" alt="Master Feung Ebook" onerror="this.style.display='none'">
@@ -3460,9 +3443,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('sai_ma_formats')">
-        <span class="toggle-arrow" id="arr_sai_ma_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_sai_ma_formats">▸</span> Formats
       </div>
-      <div id="sai_ma_formats" class="collapsible" style="display:none">
+      <div id="sai_ma_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/sai_ma_ebook.png" loading="lazy" alt="Sai Ma Ebook" onerror="this.style.display='none'">
@@ -4286,9 +4269,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('ra_formats')">
-        <span class="toggle-arrow" id="arr_ra_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_ra_formats">▸</span> Formats
       </div>
-      <div id="ra_formats" class="collapsible" style="display:none">
+      <div id="ra_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/ra_ebook.png" loading="lazy" alt="Ra Ebook" onerror="this.style.display='none'">
@@ -5092,9 +5075,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('junko_formats')">
-        <span class="toggle-arrow" id="arr_junko_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_junko_formats">▸</span> Formats
       </div>
-      <div id="junko_formats" class="collapsible" style="display:none">
+      <div id="junko_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/junko_ebook.png" loading="lazy" alt="Junko Ebook" onerror="this.style.display='none'">
@@ -6108,9 +6091,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('miki_formats')">
-        <span class="toggle-arrow" id="arr_miki_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_miki_formats">▸</span> Formats
       </div>
-      <div id="miki_formats" class="collapsible" style="display:none">
+      <div id="miki_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/miki_ebook.png" loading="lazy" alt="Miki Ebook" onerror="this.style.display='none'">
@@ -6872,9 +6855,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('master_wu_formats')">
-        <span class="toggle-arrow" id="arr_master_wu_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_master_wu_formats">▸</span> Formats
       </div>
-      <div id="master_wu_formats" class="collapsible" style="display:none">
+      <div id="master_wu_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/master_wu_ebook.png" loading="lazy" alt="Master Wu Ebook" onerror="this.style.display='none'">
@@ -7589,9 +7572,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('pamela_fellows_formats')">
-        <span class="toggle-arrow" id="arr_pamela_fellows_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_pamela_fellows_formats">▸</span> Formats
       </div>
-      <div id="pamela_fellows_formats" class="collapsible" style="display:none">
+      <div id="pamela_fellows_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/pamela_fellows_ebook.png" loading="lazy" alt="Pamela Fellows Ebook" onerror="this.style.display='none'">
@@ -8563,9 +8546,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('joshin_formats')">
-        <span class="toggle-arrow" id="arr_joshin_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_joshin_formats">▸</span> Formats
       </div>
-      <div id="joshin_formats" class="collapsible" style="display:none">
+      <div id="joshin_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/joshin_ebook.png" loading="lazy" alt="Joshin Ebook" onerror="this.style.display='none'">
@@ -9128,9 +9111,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('maat_formats')">
-        <span class="toggle-arrow" id="arr_maat_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_maat_formats">▸</span> Formats
       </div>
-      <div id="maat_formats" class="collapsible" style="display:none">
+      <div id="maat_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/maat_ebook.png" loading="lazy" alt="Maat Ebook" onerror="this.style.display='none'">
@@ -9882,9 +9865,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('omote_formats')">
-        <span class="toggle-arrow" id="arr_omote_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_omote_formats">▸</span> Formats
       </div>
-      <div id="omote_formats" class="collapsible" style="display:none">
+      <div id="omote_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/omote_ebook.png" loading="lazy" alt="Omote Ebook" onerror="this.style.display='none'">
@@ -10581,9 +10564,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 
       <!-- FORMATS ROW (ebook, audiobook, manga, podcast, social) -->
       <div class="section-toggle" onclick="toggleSection('master_sha_formats')">
-        <span class="toggle-arrow" id="arr_master_sha_formats">▸</span> Formats
+        <span class="toggle-arrow open" id="arr_master_sha_formats">▸</span> Formats
       </div>
-      <div id="master_sha_formats" class="collapsible" style="display:none">
+      <div id="master_sha_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
           <div class="format-card">
             <img src="assets/covers/kdp/master_sha_ebook.png" loading="lazy" alt="Master Sha Ebook" onerror="this.style.display='none'">
