@@ -519,3 +519,56 @@ Rejected (a) for the §23.9 violation. Rejected (b) for the rule-0 trip + worktr
 - Pearl_Dev → 3 new ws's (above) → trigger = this cap-entry PR merged.
 - Pearl_PM → close #865, close #867, close `ws_brand1_phase1_phase2_combined_pr_routing_20260505`, open 3 new ws's → trigger = Pearl_Dev opens the three replacement PRs.
 - Pearl_GitHub → review/merge the 3 replacement PRs in normal cadence (no special ordering; all three independent).
+
+### AUTO-PLAN-SSOT-01-AMENDMENT — chapter_count divergence adjudication for 16 of 20 formats (decision approved 2026-05-06)
+
+**Status:** **ratified — supplements AUTO-PLAN-SSOT-01** (2026-05-06).
+**Context:** Pearl_Dev STOP 2026-05-06 under `ws_auto_plan_ssot_refactor_20260505` surfaced that the original AUTO-PLAN-SSOT-01 cap entry (2026-05-05) assumed `config/format_selection/format_registry.yaml` carried `chapter_count_default` for every format the Python `phoenix_v4/planning/book_structure_plan.FORMAT_CHAPTER_COUNTS` dict covers, AND that values agreed where both existed. Neither was true: of 20 keys in the Python dict, **only 4 match the registry** (`micro_book_15`, `compact_book_5ch_15min`, `compact_book_5ch_20min`, `compact_book_8ch_30min`); **10 are missing from the registry entirely** (Group A); **6 have divergent values** (Group B). A naive swap of FORMAT_CHAPTER_COUNTS for a registry read would have lost 10 formats' counts (falling through to the dict's `.get(..., 10)` default) and silently changed runtime behavior for 6 others. Beyond AUTO-PLAN-SSOT-01's "30-50 line refactor" scope.
+
+A third Python source — `RUNTIME_TEMPLATES` at `book_structure_plan.py:62-65` — also exists, with `chapter_count` keys that differ AGAIN from FORMAT_CHAPTER_COUNTS (`short_book_30`: 6 here vs 8 there; `deep_book_6h`: 12 here vs 20 there). RUNTIME_TEMPLATES is consumed at line 120 only for `tier`/`exercise_cap` data; its embedded `chapter_count` field is vestigial in the auto-plan path. Out of scope for this amendment; flagged for follow-up cleanup.
+
+**Decision:** Group A backfilled from Python mechanically (Python is the only source). Group B adjudicated per format below; the receipt's default tie-breaker — **prefer Python (matches current runtime behavior); flag for bestseller smoke verification** — applies to all 6, because the evidence is that Python was set later (PR ACT-011 / BSG-011 "Book plan generator", commit 2026-04-14) than the registry values (PR #252 PR-#245-incident restore, 2026-03-30; subsequent PR #409 word_range calibration, 2026-04-09), AND no spec text in `PHOENIX_V4_5_WRITER_SPEC.md` / `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` declares chapter_count for any of the divergent formats. Python is the de-facto runtime SSoT; making registry SSoT means writing Python's values into the registry and deleting the duplicate Python constant. Format_selector's existing registry-read path (`format_selector._chapter_count_and_word_range:149-165`) applies persona/structural clamping AFTER reading `chapter_count_default` from the registry, so backfilling Python's values into the registry preserves both auto-plan and format-selector behavior.
+
+**Group A — 10 MISSING from registry, mechanical backfill** (write the Python value as `chapter_count_default` in `config/format_selection/format_registry.yaml:runtime_formats`):
+
+| Format | Backfill value |
+|---|---:|
+| `five_min_practice` | 5 |
+| `pocket_guide` | 6 |
+| `ten_things_to_do` | 8 |
+| `symptom_to_action_atlas` | 8 |
+| `daily_text_audio_companion` | 10 |
+| `crisis_cards` | 6 |
+| `weekly_challenge_pack` | 8 |
+| `faq_audiobook` | 8 |
+| `myth_vs_mechanism` | 8 |
+| `protocol_library` | 10 |
+
+For each Group A format, the registry currently has no entry under `runtime_formats:`; Pearl_Dev adds a minimal entry with at least `chapter_count_default` set. `word_range` and other fields can be filled at the operator's discretion or left absent (registry's other consumers like `format_selector` already handle missing optional fields with sensible fallbacks: `word_range: [9000, 11000]` per `format_selector.py:154`).
+
+**Group B — 6 DIVERGENT, ruling preserves Python value** (write the Python value as `chapter_count_default`, overwriting the existing registry value):
+
+| Format | Registry (current) | Python (current) | Ruling | Evidence |
+|---|---:|---:|---:|---|
+| `micro_book_20` | 5 | 6 | **6** | Registry from PR #252 (incident restore) → #409; Python from BSG-011 (later, deliberate). Tie-breaker: Python. |
+| `short_book_30` | 7 | 8 | **8** | Same. Note `RUNTIME_TEMPLATES[short_book_30].chapter_count = 6` exists for tier/exercise_cap context only; not the auto-plan value. |
+| `standard_book` | 12 | 10 | **10** | Same. **Most consequential** — `standard_book` is the default canonical book runtime. `RUNTIME_TEMPLATES[standard_book].chapter_count = 12` (matches registry) but again is tier/exercise_cap context, not auto-plan. Auto-plan currently produces 10-chapter `standard_book` outputs; preserve. |
+| `extended_book_2h` | 15 | 14 | **14** | Same. |
+| `deep_book_4h` | 20 | 16 | **16** | Same. |
+| `deep_book_6h` | 24 | 20 | **20** | Same. `RUNTIME_TEMPLATES[deep_book_6h].chapter_count = 12` is anomalous (third value); not the auto-plan value. |
+
+**Anti-drift check:** No new spec authored. Registry becomes SSoT for `chapter_count_default`; Python's `FORMAT_CHAPTER_COUNTS` constant is removed in the follow-up Pearl_Dev refactor PR. The 6 Group B rulings preserve current runtime behavior; if any of these turns out to be a regression vs intended bestseller-grade output, the bestseller-smoke run under `ws_pr_d_wires_resume_20260505` will surface it (and the registry value can be edited deliberately). The `RUNTIME_TEMPLATES.chapter_count` vestigial field is left untouched (separate cleanup, low priority).
+
+**Action items:**
+1. Pearl_Dev (`ws_auto_plan_ssot_refactor_20260505`): edit `config/format_selection/format_registry.yaml` under `runtime_formats:` — add 10 Group A entries with `chapter_count_default` (Group A table values); update 6 Group B entries' `chapter_count_default` to the Group B ruling values. One config commit.
+2. Pearl_Dev (same PR): remove `FORMAT_CHAPTER_COUNTS` dict from `phoenix_v4/planning/book_structure_plan.py`; replace the `n_chapters = chapter_count or FORMAT_CHAPTER_COUNTS.get(runtime_format, 10)` lookup at line 511 with a registry-aware reader (mirror the `_load_compact_chapter_subset` pattern landed in PR-Beta `0142d88337`). The fallback default 10 is preserved as a last-resort guard, but post-Group-A backfill no known runtime format should hit it. One code commit. Tests in `tests/test_book_structure_plan.py` updated.
+3. Pearl_Dev (same PR): bestseller smoke on `gen_z_professionals × anxiety` (per `HANDOFF_bestseller_smoke_post_852_856 §11`) at minimum; opportunistically run `millennial_women_professionals × anxiety` if low-cost — verify the 16 Group A+B rulings produced no regression beyond the literal value adjustments (e.g., chapter_count = 10 still produces standard_book; etc.).
+4. Pearl_PM (post-merge): close `ws_auto_plan_ssot_refactor_20260505` with the merged SHA + cite this amendment.
+
+**Out-of-scope for the refactor PR (separate follow-ups):**
+- `RUNTIME_TEMPLATES.chapter_count` vestigial field cleanup. Low priority; touch when next editing `book_structure_plan.py` for unrelated reasons.
+- Reconciling format_selector's persona/structural clamping with auto-plan's direct read. Currently auto-plan does NOT apply that clamping. If a future change wants the two paths to produce identical chapter counts under all conditions, it's a separate cap-entry-level decision (auto-plan would need persona/structural context at the lookup site).
+
+**Handoffs:**
+- Pearl_Dev → resume `ws_auto_plan_ssot_refactor_20260505`; refactor PR ~80-120 lines (larger than original AUTO-PLAN-SSOT-01's ~30-50 estimate; unavoidable given backfill scope).
+- Pearl_PM → post-merge: close `ws_auto_plan_ssot_refactor_20260505` (cite this amendment + the merged refactor SHA); update `proj_pearl_prime_bestseller_rebase_20260425.next_action` to reflect SSoT consolidation complete.
