@@ -90,6 +90,15 @@ artifacts/podcast_pilot/_dry.mp3
 artifacts/manga/image_bank/**/*.png
 artifacts/manga/image_bank/**/GENERATION_FAILURES.tsv
 
+# Manga rendered binaries — canonical home is R2 (see brand_admin_handoff manifest.json)
+# Per-PR panel renders + bubble-composed panels + webtoon strips + segments stay local
+# during dev; r2_sync.py uploads them; only the handoff manifest + UPLOAD_GUIDE commit.
+artifacts/manga/panel_renders/**/*.png
+artifacts/manga/panel_renders/**/*.jpg
+artifacts/manga/episodes/**/*.png
+artifacts/manga/episodes/**/*.jpg
+artifacts/manga/episodes/**/panel_images_manifest.json
+
 # Root cleanup archive (local safety net — not tracked)
 archive/root_cleanup_2026_04_10/
 

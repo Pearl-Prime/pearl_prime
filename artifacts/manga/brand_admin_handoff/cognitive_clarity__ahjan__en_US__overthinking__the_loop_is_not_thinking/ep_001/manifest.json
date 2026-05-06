@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0.0",
+  "brand": "cognitive_clarity",
+  "author": "ahjan",
+  "topic": "overthinking",
+  "episode_id": "ep_001",
+  "title": {
+    "en-US": "The Loop Is Not Thinking",
+    "ja-JP": "そのループは思考ではない"
+  },
+  "panel_count": 25,
+  "chapter_count": 5,
+  "locales_shipped": ["en-US", "ja-JP"],
+  "render_provenance": {
+    "tier": "V1 baseline",
+    "flux_model": "flux1-schnell-fp8.safetensors",
+    "workflow": "scripts/image_generation/comfyui_workflows/flux_txt2img_manga.json",
+    "sampler": "euler/simple",
+    "steps": 4,
+    "cfg": 1.0,
+    "resolution": "1080x1920",
+    "host": "pearl_star (RTX 5070 Ti)",
+    "wall_clock_minutes": 12,
+    "render_date": "2026-05-07"
+  },
+  "translation_provenance": {
+    "en-US": "ahjan via Pearl_Dev session 2026-05-07 (Tier 1 operator-present)",
+    "ja-JP": "Tier 1 inline V1 baseline; Pearl_Localization native-speaker review recommended pre-WEBTOON-Japan publish"
+  },
+  "bubble_compose_provenance": {
+    "bridge_script": "scripts/manga/render_episode_strip.py",
+    "library": "phoenix_v4.manga.chapter.bubble_render",
+    "heuristics": "V1 baseline — narration→whisper/square_narration, dialogue→normal/round_normal, !→excited/spiky, !!→screaming/scream_ultra"
+  },
+  "webtoon_compose_provenance": {
+    "library": "phoenix_v4.manga.chapter.webtoon_compose",
+    "strip_width_px": 800,
+    "max_segment_px": 1280,
+    "jpeg_quality": 92
+  },
+  "v1_caveats": {
+    "identity_drift": "Expected — V2 closes via the hybrid character-individuation pipeline per docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md (12-axis vocabulary + constraint solver + PuLID-FaceNet + face-distance QA harness; ~5-7 engineering days). Tracked by ws_manga_layered_pipeline_v2_20260507.",
+    "register_oscillation": "schnell-correct config (4 steps / cfg 1.0 / euler / simple) mitigates the 28-step audit defect; seinen-photorealistic register comes from prompts not LoRA — V2 brand-style LoRA + animeoutlineV4 register layer + halftone close further per spec.",
+    "ja_jp_translation": "Tier 1 V1 baseline; native-speaker review recommended pre-WEBTOON-Japan publish."
+  },
+  "r2": {
+    "endpoint": "https://626d6eb8162a8121f74e59235d82a4f5.r2.cloudflarestorage.com",
+    "bucket": "phoenix-omega-artifacts",
+    "prefix": "manga/cognitive_clarity__ahjan__en_US__overthinking__the_loop_is_not_thinking/ep_001/",
+    "uploaded_object_count": 104,
+    "uploaded_bytes": 158395544,
+    "structure": {
+      "preview_pngs": "<prefix>ep_001_<locale>.webtoon.png  (single combined preview for visual review; 800x40350 each)",
+      "segments": "<prefix>segments/<locale>/ep_001_<locale>_seg_NNN.jpg  (sliced for WEBTOON Canvas upload; 25 segments per locale, ~3.8 MB total per locale)",
+      "panels": "<prefix>panels/<locale>/<panel_id>.png  (per-panel bubbled PNGs)"
+    }
+  },
+  "operator_remaining": [
+    "Review preview PNGs (en-US + ja-JP) for visual sanity",
+    "Run scripts/publish/webtoon_canvas_upload.py per locale (see UPLOAD_GUIDE.md)",
+    "Decide LINE Manga Indies opt-in for ja-JP",
+    "Optional: Pearl_Localization native-speaker review pass on ja-JP",
+    "Ratify MANGA-LAYERED-PIPELINE-V2-01 cap entry (Pearl_Architect session) per docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md authority",
+    "Approve V2 phased budget (~5-7 engineering days per the hybrid spec, NOT the original over-engineered 2-3 weeks LoRA-everywhere plan)"
+  ]
+}

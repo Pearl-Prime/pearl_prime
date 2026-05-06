@@ -171,9 +171,12 @@ def main() -> int:
         print(f"ERROR: --panel-prompts not a file: {pp_path}", file=sys.stderr)
         return 1
     pp = json.loads(pp_path.read_text())
-    panels = pp.get("panels", [])
-    series_id = pp.get("series_id", "unknown_series")
-    chapter_id = pp.get("chapter_id", "unknown_chapter")
+    # Schema tolerance: brand-1 used "panels"; brand-2 (PR #918) uses "prompts".
+    # Same shape per item; fall through to whichever key exists.
+    panels = pp.get("prompts") or pp.get("panels") or []
+    # Same drift on identifiers — brand-2 uses "brand"/"episode".
+    series_id = pp.get("series_id") or pp.get("brand") or "unknown_series"
+    chapter_id = pp.get("chapter_id") or pp.get("episode") or "unknown_chapter"
 
     if args.output_dir:
         out_dir = Path(args.output_dir).resolve()
