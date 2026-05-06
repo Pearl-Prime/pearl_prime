@@ -234,3 +234,108 @@ Pearl Prime SCENE wiring (decision 1a, originally Tier 2 #3) — operator approv
 - Subsystem routing: artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv
 - Architecture routing: docs/PEARL_ARCHITECT_STATE.md
 - Session startup: docs/SESSION_UNITY_PROTOCOL.md
+
+---
+
+## Session-of-Sessions Closeout — 2026-05-04 → 2026-05-06
+
+**Scope:** multi-agent finish-out arc spanning Pearl_PM × 2,
+Pearl_Architect × 2, Pearl_Dev × 4, Pearl_GitHub × 1.
+
+### PRs landed on origin/main (chronological)
+
+| # | SHA | Lane |
+|---|---|---|
+| 874 | 38af30e9e5 | session handoff doc |
+| 850 | 4b198508ce | Pearl News slot/teacher |
+| 853 | 8070e81fd8 | Pearl News 5-layout |
+| 855 | 3aaadadb14 | Cover D1 |
+| 858 | f052d38d5e | bestseller smoke + auto-plan W1/W2/W4 |
+| 884 | 304f0c233e | Pearl_Architect 5-cap-entry routing batch |
+| 881 | 87a66af6c3 | Pearl_PM 13-ws coordination |
+| 875/876/877 | 6af1d0d456 / 2df0ebd98e / fb6815201c | handoff persistence |
+| 885 | 13441bbc80 | brand-1 atomic |
+| 886 | 0142d88337 | PR-D residual (PR-D-SPINE-01) |
+| 887 | cd56856d65 | atom backfill |
+| 888 | 3bf8937eb9 | DOCS_INDEX MASTER-CATALOG-01 |
+| 889 | 069a57ff2f | Pearl_PM finalization |
+| 891 | b206a83437 | AUTO-PLAN-SSOT-01-AMENDMENT |
+| 892 | 417ef35e29 | SSoT refactor |
+| 893 | e44bc6f135 | EXERCISE bank diagnosis |
+| 896 | ec8134a94b | origin/main rewind recovery |
+| 897 | e41a28038b | rewind incident report |
+| 898 | (merged earlier) | music-mode discovery |
+| 902 | 69ca0f323c | music-mode V1 implementation |
+| 903 | 2d39945682 | atom audit + F2 TEACHING alias |
+| 905 | 16777eb9e1 | Pearl_Architect 8-cap-entry batch |
+| 906 | 3ca01b7bbb | SUBSYSTEM_AUTHORITY_MAP music_mode row |
+| 907 | 26c9cf213c | TEMPLATE-UNIVERSAL audit (PASS) |
+| 908 | 9fa86a9c01 | BESTSELLER-INJECTIONS audit (PASS) |
+| 909 | 6fb3330310 | EXERCISE strict-canonical implementation plan |
+
+### Cap entries live on main (Pearl_Architect authority)
+
+`docs/PEARL_ARCHITECT_STATE.md` now holds 13 ratified cap entries
+across the 2026-04-26 → 2026-05-06 arc:
+
+- **MASTER-CATALOG-01** (closed-not-needed; route Phase 5 to per-axis canon)
+- **PR-D-SPINE-01** (declarative-P3 ratified)
+- **COVER-REGISTRY-01** (coexist; book-pipeline-canonical)
+- **AUTO-PLAN-SSOT-01** + **AUTO-PLAN-SSOT-01-AMENDMENT** (chapter_count → registry)
+- **BRAND1-COMBINED-PR-01** (split into 3 clean PRs)
+- **TEMPLATE-UNIVERSAL-01** (12-spine × 10-section × 3-floor; 5-optional)
+- **BESTSELLER-INJECTIONS-MANDATORY-01** (profile-gated + grid-architectural)
+- **CATALOG-800-PER-BRAND-01** (~800 system-wide; reframe-as-target)
+- **PEARL-EDITOR-UPSTREAM-01** (authority-flow not runtime stage)
+- **EXERCISE-BANK-RESOLUTION-01** (strict-canonical for production)
+- **QUOTE-ATOM-ROUTING-01** (retire-as-orphan; Pearl_Editor migrates)
+- **TEACHER-POOL-SEMANTICS-01** (keep first-match; content migration)
+- **MUSIC-MODE-V1-01** (ride-existing-pipeline; Pearl_Editor owns)
+
+### Critical incident closed
+
+**origin/main rewind 2026-05-05T21:57:36Z** (force-push from stale
+local clone via admin bypass=always). 14 squash SHAs orphaned;
+all recovered via Path 4 (server-side ref + merge PR). Branch
+protection ruleset 13451138 hardened (bypass_mode: always →
+pull_request). Auto-backup process (com.ahjan.phoenix_omega.autobackup)
+diagnosed innocent (pushes to feature branch, not main).
+
+### Subsystems updated
+
+| subsystem | change |
+|---|---|
+| pearl_prime | SSoT refactor + bestseller injections grid + music overlay |
+| core_pipeline | compact_chapter_subset declarative wiring |
+| pearl_news | 5-layout system + slot fix |
+| brand_admin | brand-1 author atomic + cover D1 |
+| manga_pipeline | (Pearl Star bundle separately deferred) |
+| **music_mode** | NEW subsystem registered; owner = Pearl_Editor |
+
+### Workstreams remaining open (non-blocking; operator-paced)
+
+| ws_id | Owner | Status |
+|---|---|---|
+| ws_exercise_strict_canonical_production_20260506 | Pearl_Dev | implementation half deferred to local-env session (diagnostic landed) |
+| ws_catalog_800_high_confidence_artifact_20260506 | Pearl_Research + Pearl_Marketing | data artifact authoring |
+| ws_gratitude_practices_authoring_20260506 | Pearl_Editor + Pearl_Writer | content authoring |
+| ws_quote_atom_orphan_migration_20260506 | Pearl_Editor + Pearl_Writer | ~9 atoms |
+| ws_ahjan_teaching_atoms_migration_20260506 | Pearl_Editor + Pearl_Writer | ~100 atoms → COMPRESSION/REFLECTION |
+| ws_music_mode_v1_pilot_20260506 | Pearl_PM | gated on musician #1 survey return |
+| ws_musician_banks_first_real_artist_20260506 | Pearl_Editor + Pearl_Writer | gated on survey |
+| ws_pearl_devops_tooling_maintenance_20260506 | Pearl_DevOps | broken pre_merge_check.sh + audit_llm_callers args + ruleset audit |
+
+### Operator queue (non-architecture)
+
+- Send `artifacts/musician_survey/SURVEY_TEMPLATE.yaml` to musician #1
+- D-PN-1, D-PN-2 (Pearl News) product decisions
+- D-CV-2, D-CV-3, D-CV-4 (Cover Phase 2+3) product decisions
+
+### Architecture-layer status: 100% closed
+
+The 2026-05-04 → 2026-05-06 multi-session arc closes here.
+All cap-entry ratifications are on `origin/main`. All routing
+decisions made. All P0 incidents resolved. All recovery work
+landed. Remaining ws's are content authoring + operator-paced
+pilot work, not architecture gates.
+
