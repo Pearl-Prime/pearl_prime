@@ -572,29 +572,226 @@ For each Group A format, the registry currently has no entry under `runtime_form
 **Handoffs:**
 - Pearl_Dev → resume `ws_auto_plan_ssot_refactor_20260505`; refactor PR ~80-120 lines (larger than original AUTO-PLAN-SSOT-01's ~30-50 estimate; unavoidable given backfill scope).
 - Pearl_PM → post-merge: close `ws_auto_plan_ssot_refactor_20260505` (cite this amendment + the merged refactor SHA); update `proj_pearl_prime_bestseller_rebase_20260425.next_action` to reflect SSoT consolidation complete.
-### MUSIC-MODE-V1-01 — Pearl Prime music overlay V1
 
-**(RECOMMENDED 2026-05-06; awaits Pearl_Architect ratification)**
+### TEMPLATE-UNIVERSAL-01 — Universal template = 12-chapter spine × 10-section grid × 3-variation floor (5 optional ceiling); chapter_count is per-format (decision approved 2026-05-06)
 
-**Status:** **recommended** (Pearl_Dev implementation; Pearl_Architect ratifies post-merge).
+**Status:** **ratified — Option (c) hybrid** (operator framing reconciled with shipped behavior, 2026-05-06).
+**Context:** Operator architecture ask — "Pearl Prime uses 12-chapter × 10-section × 5-variation universally." On inspection three of those four numbers are universal-at-spine-layer, but `chapter_count` was already adjudicated per-format under AUTO-PLAN-SSOT-01-AMENDMENT (16 of 20 formats explicit values; range 5-20). A naive ratification of "12 chapters universal" would silently retire 16 format adjudications. Re-investigation surfaced that the operator's universality claim holds at the **spine/registry** layer (`registry_resolver.load_registry` docstring: "Create registry/{topic}.yaml with 12 chapters × 10 sections × 5 variants"; `phoenix_v4/planning/registry_resolver.py:117`) but NOT at the **auto-plan output** layer (per-format `chapter_count_default` from `format_registry.yaml`).
+**Decision:** **Option (c) hybrid.** The 12 × 10 × 5 framing is canonical at the **spine/registry source-of-truth layer**; auto-plan **subsets** that source per format via PR-D-SPINE-01's `compact_chapter_subset` declarative mechanism. Concretely:
 
-**Context:** Operator V1 spec defines music mode as a Pearl Prime book overlay with two variants (`with-lyrics`, `no-lyrics`), second-person intro and conclusion, per-chapter opening and closing plus one mid-chapter bestseller-beat block, and one MusicGen companion prompt per book for brand-admin packaging. Discovery reference: `artifacts/qa/music_mode_discovery_2026-05-06.md` (PR #898 head when available).
+| Layer | Universal? | Authority | Mechanism |
+|---|---|---|---|
+| **Spine/registry** (per-topic source) | **Yes** — 12 chapters × 10 sections × ≥3 variants | `registry/<topic>.yaml`; `SOMATIC_10_SLOT_GRID` at `phoenix_v4/planning/beatmap_compile.py:42` | Topic registries are authored at 12×10×{≥3} per the resolver docstring contract |
+| **Auto-plan output** (per-book) | **No** — `chapter_count` per format | `format_registry.yaml:runtime_formats[].chapter_count_default` | `book_structure_plan.get_format_chapter_count` at `phoenix_v4/planning/book_structure_plan.py:46` reads registry; subsets via `_load_compact_chapter_subset` at `phoenix_v4/planning/knob_apply.py` per PR-D-SPINE-01 |
+| **Variations floor** | **Yes** — 3 floor (5 optional ceiling per-section) | SPEC-739-THRESHOLD-01 | `min_variants_required: 5` per-section override available where curated |
 
-**Decision (recommended):** Option A — ride on the existing book pipeline. New `SOURCE_OF_TRUTH/musician_banks/<id>/` mirrors `teacher_banks/` atom layout. `--music-mode` is orthogonal to `--pipeline-mode`. Atom template variation per persona × topic (V1 seeded for `gen_z_professionals` × `anxiety` test musician `test_artist_alpha`) provides uniqueness without per-musician code changes.
+The 10-section grid is unambiguously universal: every format renders against `SOMATIC_10_SLOT_GRID` (HOOK / STORY / REFLECTION / EXERCISE / STORY / TEACHER_DOCTRINE / REFLECTION / EXERCISE / STORY / INTEGRATION). The 3-variation floor is universal per SPEC-739-THRESHOLD-01 (not 5; 5 is opt-in via per-section `min_variants_required`). The 12-chapter SPINE is the topic registry's source-of-truth shape; per-book chapter_count is the auto-plan's subset over that 12-chapter spine. Rejected (a) literal universality (would retire AUTO-PLAN-SSOT-01-AMENDMENT and silently force 12 chapters on micro_book_15/compact_book_*/etc.). Rejected (b) reframe-as-implemented-without-spine-acknowledgement (loses operator's correct intuition that the 12×10×5 numbers ARE the canonical source-of-truth shape).
 
-**Anti-drift check:** Music slots are **additive** post-render injections on `book.txt`; `SOMATIC_10_SLOT_GRID` and enrichment slot plans are untouched. Bestseller composition inside chapters is unchanged; music blocks wrap chapter headings and paragraph runs only.
+**Anti-drift check:** No new spec authored. The hybrid recognition aligns with two already-ratified cap entries (AUTO-PLAN-SSOT-01 + AMENDMENT for chapter_count; SPEC-739-THRESHOLD-01 for variations floor) and with the existing spine architecture (12-chapter topic registry + per-format subset). Reframes operator's "universally" question as "at which layer?" — universal at spine, per-format at auto-plan.
 
-**Companion audio:** V1 ships **prompt JSON** via `scripts/music/generate_book_companion_song.py` (MusicGen runnable path remains Colab-oriented `scripts/music/musicgen_colab.py` / Pearl Star). WAV export is **deferred** until a supported local or scheduled runner is pinned.
-
-**Action items (Pearl_Architect ratifies):**
-
-1. Confirm Option A vs Option B (net-new subsystem boundary) per discovery §7.
-2. Confirm subsystem owner for `musician_banks/` (Pearl_Music vs Pearl_Prime vs new lane).
-3. Confirm survey schema canonical path: `artifacts/musician_survey/SURVEY_TEMPLATE.yaml`.
-4. Confirm or rename the six slot pool directory names under `approved_atoms/` (`LYRIC_*`, `MUSIC_REFLECTION_*`) vs Arc-First naming.
+**Action items:**
+1. Pearl_Dev (`ws_template_universal_audit_20260506`): grep for any registry/<topic>.yaml topic that does NOT have 12 chapters × 10 sections; surface as content gap (Pearl_Editor + Pearl_Writer ws would follow). Audit-only scope; no code changes.
+2. Pearl_GitHub (`ws_template_universal_docs_index_note_20260506`): when next refreshing `docs/DOCS_INDEX.md`, add a routing note that the universal template is "12-chapter spine source-of-truth + per-format auto-plan subset" (cite this entry + AUTO-PLAN-SSOT-01-AMENDMENT + PR-D-SPINE-01).
+3. No spec edit. No code edit. AUTO-PLAN-SSOT-01-AMENDMENT's 16 format rulings stand.
 
 **Handoffs:**
+- Pearl_Dev → `ws_template_universal_audit_20260506` → trigger = this cap-entry PR merged.
+- Pearl_GitHub → `ws_template_universal_docs_index_note_20260506` → trigger = next DOCS_INDEX refresh (low priority; piggyback).
 
-- **Pearl_Architect:** ratify or amend; add `musician_banks` row to `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` when owned.
-- **Pearl_PM:** open `ws_music_mode_v1_pilot_20260506`; administer survey to musician #1; expand atoms as surveys land (content, not code).
-- **Pearl_Editor + Pearl_Writer:** per-musician atom expansion from real survey YAML.
+### BESTSELLER-INJECTIONS-MANDATORY-01 — Bestseller injections mandatory for `--quality-profile production`; STORY at sec 2/5/9 architecturally mandatory across all profiles (decision approved 2026-05-06)
+
+**Status:** **ratified — Option (a) profile-gated for non-grid injections; grid-architectural for STORY-at-SCENE** (2026-05-06).
+**Context:** Operator architecture ask — "bestseller injections (named characters, story_plan/HARDSHIP at sec 2/5/9, journey_intro at sec 4/8, EI v2 gate, exercise_journeys) ALWAYS applied or gated on quality_profile?" Investigation surfaces that the question conflates two architecturally distinct injection mechanisms: (1) **grid-level injections** (sec 2/5/9 STORY slots producing `story_plan/HARDSHIP` named-character output via `phoenix_v4/planning/beatmap_compile.py:42 SOMATIC_10_SLOT_GRID` post-PR #669 SCENE→STORY swap) which run on every render regardless of profile, and (2) **flag-level injections** (`--exercise-journeys` controlling `attach_exercise_journeys` at `scripts/run_pipeline.py:619`; `--quality-profile production` enabling enrichment-gap hard-fail at `:568` and EI v2 gate blocking at `:269 _block_on_fail`) which are CLI-flag-gated.
+**Decision:** **mandatory for production; grid-architectural for STORY**. The two mechanisms preserve distinct contracts:
+
+| Injection | Mechanism | Always-on? | Citation |
+|---|---|---|---|
+| `story_plan/HARDSHIP` at sec 2/5/9 (named characters) | `SOMATIC_10_SLOT_GRID` STORY slots; engine bank via `persona_atoms["STORY"]`; `enrichment_select.py` waterfall | **YES — architecturally** (every render, every profile) | `phoenix_v4/planning/beatmap_compile.py:42-52`; BG-PR-09 closure entry above |
+| `journey_intro:awareness/regulation` at sec 4/8 EXERCISE | `attach_exercise_journeys` via `--exercise-journeys` flag | **YES for production** (canonical CLI default; bestseller smoke gates on this) | `scripts/run_pipeline.py:619-621` |
+| EI v2 gate | `quality_profile in {production, flagship}` | **YES for production** (blocking); flagship advisory; draft/debug skip | `scripts/run_pipeline.py:269-278 _block_on_fail` |
+| Enrichment-gap hard-fail | `quality_profile == "production"` | **YES for production** | `scripts/run_pipeline.py:567-579` |
+| Named-character story atoms (engine bank) | `atoms/<persona>/<topic>/<engine>/CANONICAL.txt` waterfall | **YES — content-dependent** (where present; per-persona content gap) | `enrichment_select.py:931-935` |
+
+Rejected (b) "MANDATORY across all profiles" — would force production-grade gates on draft/debug runs which exist precisely to allow iteration without those gates. Rejected (c) "per-injection gating without overall posture" — already implemented; the question is what the canonical posture *is*, not whether per-injection gates exist. The canonical posture is: **`--quality-profile production` is the bestseller-grade contract**; the canonical CLI in `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` declares this. STORY-at-SCENE is grid-mandatory because the slot grid itself is the architecture (PR #669 made STORY the slot type at sec 2/5/9; non-architectural to opt out).
+
+**Anti-drift check:** No new spec authored. The decision codifies what `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md:570-577` already declares (production CLI is canonical) and what BG-PR-09's PR #669 closure already shipped (grid-mandatory STORY at sec 2/5/9). Surfaces the architectural distinction (grid-level vs flag-level) so future-you doesn't accidentally route grid-level questions to flag-level mechanisms.
+
+**Action items:**
+1. Pearl_Dev (`ws_bestseller_injections_audit_20260506`): audit-only scope — verify the canonical CLI default in `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md:570-577` includes `--quality-profile production --exercise-journeys` (NOT optional). If the spec text does not declare this default explicitly, surface a 1-line spec edit (Pearl_Architect follow-up). No code changes from this audit.
+2. Pearl_Editor + Pearl_Writer (FOLLOWUP, content-not-code): the named-character engine bank (`atoms/<persona>/<topic>/<engine>/CANONICAL.txt`) coverage is the dominant variable in whether grid-mandatory STORY at sec 2/5/9 produces named-character output. Per existing `proj_pearl_prime_bestseller_rebase_20260425.open_questions`, midlife_women has zero master_arcs; covered as separate routing under that project. Not opened here.
+3. Pearl_GitHub: when refreshing `docs/DOCS_INDEX.md`, add a one-line routing note that "`--quality-profile production` is the canonical bestseller-grade CLI flag-set" pointing at `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md:570-577`.
+
+**Handoffs:**
+- Pearl_Dev → `ws_bestseller_injections_audit_20260506` → trigger = this cap-entry PR merged.
+- Pearl_Editor + Pearl_Writer → ongoing engine-bank coverage authoring under existing per-persona ws's; no new ws opened by this entry.
+- Pearl_GitHub → DOCS_INDEX routing note (low priority; piggyback).
+
+### CATALOG-800-PER-BRAND-01 — 800 high-confidence configs is system-wide total (not per-brand); reframe operator ask + open data-artifact ws (decision approved 2026-05-06)
+
+**Status:** **ratified — reframe-as-target with data-artifact follow-up** (2026-05-06).
+**Context:** Operator architecture ask — "does the catalog planner generate 800 configs per brand from marketing research?" Anchor at `artifacts/research/full_content_audit.md:65` defines the 800 as **HIGH CONFIDENCE (market-validated) — Brand's primary topic + primary persona + proven format + top 5 locales (en-US, de-DE, ja-JP, ko-KR, fr-FR)** out of a 7,020,000-config theoretical maximum. Math from the anchor: 24 archetypes × ~4 primary topics × ~2.5 primary personas × ~3 proven formats × 5 top locales ≈ 720-1,080 → rounds to ~800 **system-wide**, NOT 800 per brand. The auto-memory entry for "800 high-confidence configs" already records this correctly (`Operator's '800 books per brand' = ~800 high-confidence catalog configs (brand×topic×persona×format×locale) per artifacts/research/full_content_audit.md:65. The $-makers tier.`). Current shipped catalog enumeration: `artifacts/catalog/brand1_author_distribution_en_US.csv` (192 rows = brand-1 × en_US only, single locale, single brand) via `scripts/catalog_visibility/distribute_brand1_to_authors.py`.
+**Decision:** **ratify-as-target with reframe.** The 800 is the system-wide $-maker tier per the anchor; the planner does NOT today output 800 system-wide (it outputs 192 brand-1×en_US rows). Bridging the gap is a **data-artifact** ws, not a spec ws and not a code-architecture ws. Output target: `artifacts/catalog/high_confidence_catalog_v1.tsv` (or .csv) with columns `brand`, `topic`, `persona`, `format`, `locale`, `confidence_tier=high`, `source_evidence`. The Pearl_Research methodology already exists in the anchor doc (Part 2: cluster-based market viability scoring across 45 clusters); the ws operationalizes it across all 24 book archetypes (per BR-CANON-01 Path X — the manga axis is separately governed by `docs/GENRE_PORTFOLIO_PLAN.md` + per-locale plans).
+
+Rejected (a) "ratify-as-implemented if 800/brand IS today's output" — it isn't (192 rows, single brand, single locale). Rejected (c) "descope" — the 800 tier is the canonical $-maker target per the anchor; descoping it would retire the anchor's load-bearing claim. The anchor stands; the planner needs to catch up via a Pearl_Research/Pearl_Marketing data-artifact ws.
+
+**Anti-drift check:** No new spec authored. No new master plan doc (MASTER-CATALOG-01 closed-not-needed; the per-axis canon at `docs/GENRE_PORTFOLIO_PLAN.md` + `docs/CJK_CATALOG_PLAN.md` + `docs/US_CATALOG_PLAN.md` retains authority). The high-confidence catalog TSV is a **data-artifact** within the existing per-axis canon, NOT a parallel plan-doc. Operator's "800 per brand" framing is reframed in this entry's text + in memory; future operator asks reuse the system-wide framing.
+
+**Action items:**
+1. Pearl_Research + Pearl_Marketing (`ws_catalog_800_high_confidence_artifact_20260506`): operationalize the anchor's market-viability methodology (`artifacts/research/full_content_audit.md` Part 2) across all 24 book archetypes × primary topics × primary personas × proven formats × top 5 locales. Output: `artifacts/catalog/high_confidence_catalog_v1.tsv`. Method: walk `config/brand_registry.yaml` brand-by-brand; for each brand pull primary_topics + primary_personas; cross with proven formats per `format_registry.yaml`; emit one row per (brand × topic × persona × format × locale) tuple where confidence is high per the anchor's cluster scores. Iteration cap = 1 PR; no code changes (data only, optional small generator script).
+2. Pearl_Dev (FOLLOWUP, separate ws if needed): if the data-artifact reveals the existing planner (`scripts/catalog_visibility/distribute_brand1_to_authors.py`) needs generalization beyond brand-1×en_US to consume the 800-row TSV, open `ws_catalog_planner_generalization_20260506` (Pearl_Dev). NOT opened here; gated on the artifact ws producing actionable evidence.
+3. Pearl_GitHub: when next refreshing `docs/DOCS_INDEX.md`, add a routing note that "high-confidence catalog tier = ~800 system-wide per `artifacts/research/full_content_audit.md:65`" pointing at the artifact TSV (after it lands).
+
+**Handoffs:**
+- Pearl_Research + Pearl_Marketing → `ws_catalog_800_high_confidence_artifact_20260506` → trigger = this cap-entry PR merged.
+- Pearl_Dev → optional `ws_catalog_planner_generalization_20260506` → trigger = artifact ws produces evidence requiring planner code changes.
+- Pearl_GitHub → DOCS_INDEX routing note → trigger = artifact TSV lands.
+
+### PEARL-EDITOR-UPSTREAM-01 — Pearl_Editor owns content authority for teacher_banks + atom authoring lanes; "upstream" = authority-flow not pipeline-stage (decision approved 2026-05-06)
+
+**Status:** **ratified — Option (c) hybrid** (operator framing reframed as authority-flow, 2026-05-06).
+**Context:** Operator architecture ask — "Pearl_Editor sits upstream of Pearl_Prime." `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` already records: `teacher_mode | docs/SYSTEMS_V4.md;specs/PHOENIX_V4_5_WRITER_SPEC.md | SOURCE_OF_TRUTH/teacher_banks/;config/authoring/pen_name_teacher_profiles.yaml | Pearl_Editor | active`. So Pearl_Editor IS the active authority owner of teacher_banks, which Pearl_Prime's render pipeline reads as overlay content (`phoenix_v4/planning/registry_resolver.py:51-67`). The "upstream" framing is correct as **authority-flow** (content authority precedes render consumption) but not as **pipeline-stage** (Pearl_Editor isn't a runtime pipeline step that fires before Pearl_Prime).
+**Decision:** **Option (c) hybrid.** Pearl_Editor's authority scope:
+
+| Authority | Status | Path | Spec |
+|---|---|---|---|
+| `teacher_banks/<teacher>/doctrine/` | **owned today** (existing) | `SOURCE_OF_TRUTH/teacher_banks/` | `docs/SYSTEMS_V4.md` teacher mode |
+| `teacher_banks/<teacher>/approved_atoms/<TYPE>/` | **owned today** (existing) | same | `PHOENIX_V4_5_WRITER_SPEC §4.5` (EXERCISE three-source); SPEC-739-VALIDATOR-MULTISOURCE-01 ratified per-spec scope |
+| `config/authoring/pen_name_teacher_profiles.yaml` | **owned today** (existing) | same | per SUBSYSTEM_AUTHORITY_MAP |
+| `atoms/<persona>/<topic>/<TYPE>/CANONICAL.txt` (persona-keyed atoms) | **co-owned with Pearl_Writer** (existing practice via atom_gap_fill / story_cell_authoring lanes) | `atoms/` | `PHOENIX_V4_5_WRITER_SPEC §3` |
+| `SOURCE_OF_TRUTH/musician_banks/<id>/` (NEW under MUSIC-MODE-V1-01 below) | **expand to own** (recommended this entry) | `SOURCE_OF_TRUTH/musician_banks/` | per MUSIC-MODE-V1-01 |
+
+Pearl_Editor is the content-authority node; Pearl_Prime's render pipeline is the consumption node. "Upstream" reframes correctly as authority precedes render. **Pearl_Editor is NOT inserted as a runtime pipeline step** (which would require new pipeline architecture); the existing read-overlay mechanism in `registry_resolver.py:415-462` is the integration point and stays unchanged. Rejected (a) "ratify upstream as new runtime pipeline step" — would require new spec authoring (out-of-scope for cap entries) and a new pipeline stage; the existing overlay mechanism already produces the desired effect. Rejected (b) "ratify current scope without authority-flow reframe" — loses operator's correct intuition that content authority should precede render consumption.
+
+**Anti-drift check:** No new spec authored. SUBSYSTEM_AUTHORITY_MAP row stays as-is for `teacher_mode`; this entry adds clarity on what "upstream" means architecturally without expanding Pearl_Editor's runtime role. The musician_banks expansion lands cleanly under MUSIC-MODE-V1-01 below (which routes ownership to Pearl_Editor consistent with this entry's authority-flow framing).
+
+**Action items:**
+1. Pearl_PM: add a `pearl_editor_scope` open question to `proj_pearl_prime_bestseller_rebase_20260425` capturing "should atoms/<persona>/* be promoted to a full Pearl_Editor authority row in SUBSYSTEM_AUTHORITY_MAP, or remain co-owned with Pearl_Writer via existing atom_gap_fill / story_cell_authoring practice?" — defer the formal decision until catalog 800 data-artifact (CATALOG-800-PER-BRAND-01) reveals scale-of-authoring-needed pressure.
+2. Pearl_GitHub: when next refreshing `docs/DOCS_INDEX.md` or `docs/OWNERSHIP_MATRIX.md`, add a routing note that Pearl_Editor's authority is **content authority** (read-overlay model), not a runtime pipeline stage; cite this entry.
+3. NO spec authored under this entry. NO subsystem authority map edit beyond MUSIC-MODE-V1-01's musician_banks row addition (covered there).
+
+**Handoffs:**
+- Pearl_PM → open-question add on `proj_pearl_prime_bestseller_rebase_20260425` → trigger = this cap-entry PR merged.
+- Pearl_GitHub → DOCS_INDEX/OWNERSHIP_MATRIX routing note (low priority; piggyback) → trigger = next refresh.
+- No Pearl_Dev ws opened by this entry.
+
+### EXERCISE-BANK-RESOLUTION-01 — Strict-canonical EXERCISE for `--quality-profile production`; gratitude_practices content authoring is separate (decision approved 2026-05-06)
+
+**Status:** **ratified — Option 1 (strict-canonical for production)** (operator decision 2026-05-06; PR #893 diagnosis merged).
+**Context:** PR #893 (`agent/exercise-bank-diagnosis-20260506`, MERGED) authored `docs/EXERCISE_BANK_ENFORCEMENT_DIAGNOSIS_2026-05-06.md` (~209 lines, single-file diagnosis MD; no code/specs/configs touched). Findings:
+- 37-somatic bank exists at `SOURCE_OF_TRUTH/practice_library/inbox/exercises_ab_tady_37_PRODUCTION_READY.json` (39 items with full 5-part `components`).
+- 9-types bank exists for 8 of 9 types (`*_library_34_PRODUCTION_READY.json` × 8 = 272 items); `gratitude_practices` is **absent on disk** (content authoring gap).
+- 5-part structure (`bridge + intro + description + aha + integration`) reaches the rendered book via `practice_library_loader.py` + `chapter_composer` (`/tmp/bestseller_smoke_ssot_refactor_genz/book.txt` verified).
+- `library_34 FALLBACK` warning name is misleading: per spec §4.5 the practice_library IS the third source (`atoms/<persona>/<topic>/EXERCISE/CANONICAL.txt` → `teacher_banks/<teacher>/approved_atoms/EXERCISE/*.yaml` → `practice_library`). Current behavior matches spec; the warning text drifts from spec.
+- For `gen_z_professionals × anxiety` the persona-atom + teacher_banks EXERCISE sources are empty (#887 atom backfill explicitly deferred EXERCISE), so the third-source fall-through fires correctly per spec.
+
+PR #893 surfaced three options: (1) **Strict-canonical EXERCISE for `production` profile** (~20-30 lines in `scripts/run_pipeline.py` raising `EnrichmentGapError` when EXERCISE falls through to practice_library; production must use persona-atom OR teacher_banks); (2) re-ingest practice_library with components preserved + collapse parallel paths (~50-100 lines, multi-file); (3) cosmetic log rename + audit `source_id` traceability (~15 lines). Diagnosis recommended (1).
+
+**Decision:** **Option 1 — strict-canonical for `--quality-profile production`.** Reasoning: (i) honors operator intent that production books use **persona-keyed or teacher-keyed** EXERCISE content (where authoring quality is highest), reserving practice_library for non-production iteration; (ii) makes the existing `--quality-profile` posture (BESTSELLER-INJECTIONS-MANDATORY-01) consistent across EXERCISE alongside enrichment-gap hard-fail and EI v2 gate; (iii) surfaces #887's deferred EXERCISE atom backfill as a hard signal (production rejects until the atoms exist), forcing the content-gap to the foreground rather than masking it with practice_library fallback; (iv) the practice_library third-source remains valid for `--quality-profile draft/debug/flagship` so iteration is unblocked. Rejected (2): structural multi-file refactor is right long-term but is **out of this cap-entry's routing scope** (separate Pearl_Architect ruling needed if pursued). Rejected (3): cosmetic-only log rename doesn't change behavior; the log message reframe should ride along with Option 1's PR (free) but is not the load-bearing change.
+
+**The 9th content type `gratitude_practices` is a CONTENT AUTHORING gap, NOT this entry's architectural concern.** Pearl_Editor + Pearl_Writer ws opened separately for the bank authoring; independent of the strict-canonical ruling.
+
+**Anti-drift check:** No new spec authored. The strict-canonical mode is a **behavior tightening** of the existing `--quality-profile production` posture, not a new gate. The third-source practice_library remains spec-§4.5-canonical for non-production profiles. The misleading log message ("library_34 FALLBACK") is rewriteable in the same Pearl_Dev PR (free piggyback) to restore spec-text-fidelity. Surfaces #887's deferred EXERCISE atom gap as a forcing function.
+
+**Action items:**
+1. Pearl_Dev (`ws_exercise_strict_canonical_production_20260506`): edit `scripts/run_pipeline.py` to raise `EnrichmentGapError` when EXERCISE resolution falls through to `practice_library` AND `quality_profile == "production"`. Estimated ~20-30 lines per PR #893 diagnosis. Free piggyback: rewrite the misleading log warning at `phoenix_v4/exercises/practice_library_loader.py` from "EXERCISE FALLBACK: Using library_34" to "EXERCISE: Using practice_library per spec §4.5". Tests: pin the error path under production profile + the pass path under draft/debug/flagship.
+2. Pearl_Editor + Pearl_Writer (`ws_gratitude_practices_authoring_20260506`): author the 9th content type bank `gratitude_practices_library_34_PRODUCTION_READY.json` mirroring the existing 8 types' schema (5-part components per item; ~34 items per content-bank precedent). Independent of Pearl_Dev's ruling; can ship in parallel.
+3. Pearl_Editor + Pearl_Writer (FOLLOWUP, content-not-code): EXERCISE atom backfill for `gen_z_professionals × anxiety` (and other personas where production runs would now hard-fail). Per `proj_pearl_prime_bestseller_rebase_20260425.open_questions` master_arcs gap list. NOT opened by this entry; covered under existing project ws's.
+
+**Handoffs:**
+- Pearl_Dev → `ws_exercise_strict_canonical_production_20260506` → trigger = this cap-entry PR merged.
+- Pearl_Editor + Pearl_Writer → `ws_gratitude_practices_authoring_20260506` → trigger = this cap-entry PR merged.
+- Pearl_Editor + Pearl_Writer → ongoing EXERCISE atom backfill under existing per-persona ws's.
+
+### QUOTE-ATOM-ROUTING-01 — Retire ~9 persona-keyed QUOTE atoms as orphan (no canonical slot grid entry); migrate content to TEACHER_DOCTRINE / REFLECTION / INTEGRATION (decision approved 2026-05-06)
+
+**Status:** **ratified — Option (d) retire-as-orphan + content migration** (operator decision 2026-05-06; F3 deferred from PR #903).
+**Context:** PR #903 atom-usage audit F3: `atoms/<persona>/<topic>/QUOTE/CANONICAL.txt` files exist (~9 affected — primarily ahjan-authored) but **no entry in `_TEACHER_TYPE_MAP`, no membership in `_PERSONA_OVERLAY_TYPES`, no membership in `_TEACHER_OVERLAY_TYPES`, and no QUOTE slot in `SOMATIC_10_SLOT_GRID`**. They never load. Re-investigation per TEMPLATE-UNIVERSAL-01: the canonical 10-section grid is HOOK / STORY / REFLECTION / EXERCISE / STORY / TEACHER_DOCTRINE / REFLECTION / EXERCISE / STORY / INTEGRATION — no QUOTE. Adding QUOTE to `_PERSONA_OVERLAY_TYPES` would not route the 9 atoms because no chapter section has `section_type=QUOTE`.
+
+Four routing options were considered: (a) alias QUOTE → TEACHER_DOCTRINE in `_TEACHER_TYPE_MAP` (mirror F2's TEACHING fix; ~1 line); (b) alias QUOTE → PERMISSION; (c) introduce QUOTE as a new canonical 10-section grid entry (architectural — would require spec edit on `PHOENIX_V4_5_WRITER_SPEC.md` AND a new `SOMATIC_10_SLOT_GRID` slot, retiring or expanding the 10-section canon); (d) retire as orphan + migrate content.
+
+**Decision:** **Option (d) — retire-as-orphan; Pearl_Editor migrates content.** Reasoning: (i) the 10-section grid is canonical per TEMPLATE-UNIVERSAL-01 (this batch); introducing an 11th slot type is architectural change requiring spec authority (out of this entry's scope); (ii) F2's TEACHING fix worked because `TEACHING/` lived in `teacher_banks/<teacher>/approved_atoms/` (teacher-keyed; aliasable as TEACHER_DOCTRINE alternate dir name) — F3's QUOTE atoms live in `atoms/<persona>/<topic>/QUOTE/` (persona-keyed; different shape; not aliasable as a teacher-bank alternate); (iii) aliasing persona-keyed QUOTE into the teacher overlay path would cross authority boundaries (Pearl_Editor's teacher_banks vs persona atoms co-owned with Pearl_Writer per PEARL-EDITOR-UPSTREAM-01); (iv) the 9 atoms appear to be a content-authoring experiment at a non-canonical slot type — Pearl_Editor reviews each atom and re-files content into TEACHER_DOCTRINE / REFLECTION / INTEGRATION (whichever fits) under the correct persona-keyed slot directory, OR retires individual atoms whose content doesn't fit anywhere canonical.
+
+Rejected (a) and (b): both require aliasing persona-keyed atoms into teacher-overlay or other paths in `_TEACHER_TYPE_MAP`, which crosses authority boundaries (teacher-bank lookups don't read `atoms/<persona>/<topic>/`). Rejected (c): introducing QUOTE as 11th canonical slot is architectural, requires spec authority, and is disproportionate to 9 atoms.
+
+**Anti-drift check:** No new spec authored. No new code shape. The retire-and-migrate path preserves the canonical 10-section grid (per TEMPLATE-UNIVERSAL-01) and respects authority boundaries (per PEARL-EDITOR-UPSTREAM-01). Cleanup is content authoring (Pearl_Editor's lane), not code.
+
+**Action items:**
+1. Pearl_Editor (`ws_quote_atom_orphan_migration_20260506`): inventory the ~9 `atoms/<persona>/<topic>/QUOTE/CANONICAL.txt` files (`find atoms -name CANONICAL.txt -path '*/QUOTE/*'`). For each: read content; pick best-fit canonical slot (TEACHER_DOCTRINE / REFLECTION / INTEGRATION typical for quote-style content); re-author at `atoms/<persona>/<topic>/<TARGET_SLOT>/CANONICAL.txt` (append to the existing variant list rather than overwrite); delete the source `QUOTE/` directory tree. Pearl_Writer pairs if content needs adaptation. Single-PR scope; no code changes.
+2. Pearl_Dev (CLOSED-NOT-NEEDED; do not open ws): no `_TEACHER_TYPE_MAP` edit, no `_PERSONA_OVERLAY_TYPES` edit, no `SOMATIC_10_SLOT_GRID` edit. F3 closes via content migration only.
+3. Pearl_PM: close `ws_quote_atom_routing_fix_20260506` (if pre-emptively opened) status=resolved-by-QUOTE-ATOM-ROUTING-01-as-content-migration.
+
+**Handoffs:**
+- Pearl_Editor + Pearl_Writer → `ws_quote_atom_orphan_migration_20260506` → trigger = this cap-entry PR merged.
+- Pearl_Dev → no ws opened (closed-not-needed at the code layer).
+- Pearl_PM → `ws_quote_atom_routing_fix_20260506` (if exists) → close as resolved.
+
+### TEACHER-POOL-SEMANTICS-01 — `_TEACHER_TYPE_MAP` lookup is first-match (intentional, deterministic); F7 closes as designed; ahjan TEACHING reachability via Pearl_Editor migration (decision approved 2026-05-06)
+
+**Status:** **ratified — Option (a) keep first-match; Pearl_Editor content migration unblocks ahjan TEACHING reachability** (operator decision 2026-05-06; F7 deferred from PR #903).
+**Context:** PR #903 atom-usage audit F7: `_TEACHER_TYPE_MAP` lookup at `phoenix_v4/planning/registry_resolver.py:425-429`:
+
+```python
+atom_pool: list[dict] = []
+for dir_name in _TEACHER_TYPE_MAP.get(sec_type, [sec_type]):
+    atom_pool = teacher_atoms.get(dir_name, [])
+    if atom_pool:
+        break
+```
+
+Behavior is **first-match** (overwrites `atom_pool` each iteration; breaks on first non-empty match). Audit framed it as undocumented; framing was wrong — code is unambiguously first-match. F2 fix added `"TEACHING"` to `_TEACHER_TYPE_MAP["TEACHER_DOCTRINE"]` = `["COMPRESSION", "REFLECTION", "TEACHING"]`. For ahjan: if ahjan has any COMPRESSION atoms, those win; the ~100 TEACHING atoms remain effectively unreached at slot-lookup time UNLESS COMPRESSION + REFLECTION are both empty. Switching to union semantics would unlock the 100 TEACHING atoms but changes the seed→atom mapping (the modulo over a larger pool produces different deterministic selections), which would invalidate cached bestseller-grade book outputs (gen_z_professionals × anxiety etc. on origin/main per BG-PR-09 closure verification).
+
+Three options were considered: (a) keep first-match (deterministic; F7 closes as intentional); (b) switch to union (more diversity but changes seed→atom mapping); (c) hybrid — first-match for production; union for draft/debug.
+
+**Decision:** **Option (a) — keep first-match.** Reasoning: (i) deterministic seed→atom mapping is **load-bearing for render-cache stability** — every cached bestseller-grade book on origin/main was rendered against the first-match contract; switching to union would silently drift cached vs fresh-render outputs; (ii) the F2 fix's TEACHING addition serves as a **safety net** — when a teacher has no COMPRESSION/REFLECTION, the TEACHING dir is now reachable (which is the original ghost-atom failure F2 addressed); (iii) ahjan's ~100 TEACHING atoms unreachability under first-match is a **content-authoring problem at the wrong directory**, not a code-semantics problem — Pearl_Editor migrates the 100 atoms into COMPRESSION (or REFLECTION) preserving first-match preference and unlocking the content for bestseller-grade renders; (iv) introducing flag-gated hybrid (Option c) adds CLI surface for a problem solvable at the content layer; respects "smaller change wins" and Arc-First minimalism.
+
+Rejected (b): union breaks render-cache determinism without operator-approved cache regeneration; the cost (re-render the bestseller-grade catalog) is disproportionate to the benefit (one teacher's ~100 atoms reachable in their original location). Rejected (c) hybrid: adds a flag for a content-layer problem; over-engineering.
+
+The first-match contract is now **explicitly documented**: `_TEACHER_TYPE_MAP[<TYPE>] = [primary_dir, fallback_dir, ...]`; lookup returns the first non-empty pool. Adding aliases (like F2's "TEACHING") expands the **fallback chain**, not the **active pool**. Future contributors should treat the aliases as ordered preferences.
+
+**Anti-drift check:** No new spec authored. The decision codifies the existing code's intent and writes the contract into the cap entry as load-bearing reference. The Pearl_Editor migration ws unblocks ahjan content reachability without any code change. Render-cache stability is preserved.
+
+**Action items:**
+1. Pearl_Editor + Pearl_Writer (`ws_ahjan_teaching_atoms_migration_20260506`): inventory ahjan's `SOURCE_OF_TRUTH/teacher_banks/ahjan/approved_atoms/TEACHING/*.yaml` files. For each: re-file as `SOURCE_OF_TRUTH/teacher_banks/ahjan/approved_atoms/COMPRESSION/<atom_id>.yaml` (or REFLECTION if content fit is better); delete source TEACHING/ tree after migration. Use first-match preference: COMPRESSION wins for teacher-doctrine voice; REFLECTION for reflective voice. Single-PR scope; no code changes.
+2. Pearl_Dev (`ws_teacher_pool_semantics_doc_pin_20260506` — OPTIONAL, low priority): add a 5-line docstring above `_TEACHER_TYPE_MAP` at `phoenix_v4/planning/registry_resolver.py:58` documenting the first-match contract explicitly so a future maintainer doesn't switch it to union without operator approval. ~5-line doc patch; no behavior change. Free piggyback on any future `registry_resolver.py` edit; not urgent.
+3. Pearl_Architect (FUTURE, deferred): if/when the operator approves a cache-regeneration pass for the bestseller-grade catalog, re-open this question for union-pool consideration — but not before. Not opened here.
+
+**Handoffs:**
+- Pearl_Editor + Pearl_Writer → `ws_ahjan_teaching_atoms_migration_20260506` → trigger = this cap-entry PR merged.
+- Pearl_Dev → optional `ws_teacher_pool_semantics_doc_pin_20260506` (low priority; free piggyback).
+- Pearl_Architect → no follow-up ws opened; reopen only on cache-regeneration approval.
+
+### MUSIC-MODE-V1-01 — Pearl Prime music overlay V1 ratified-as-drafted; subsystem `music_mode` owner = Pearl_Editor (decision approved 2026-05-06)
+
+**Status:** **ratified** (operator decision 2026-05-06; supersedes draft "RECOMMENDED 2026-05-06" on PR #902 head ref).
+**Merge-order note:** This batch's coordination PR and PR #902 (`agent/music-mode-v1-implementation-20260506`) carry mutual draft text on this entry. If this batch's PR merges first, PR #902's rebase auto-resolves the duplicate header (this batch's "ratified" entry wins; PR #902's "recommended" draft is discarded by rebase). If PR #902 merges first, this batch's PR rebase replaces the "recommended" draft with this "ratified" entry in place. Either order is safe; operator merges in QA pass per the session's coordination notes.
+**Context:** Pearl_Dev draft on PR #902 implemented Pearl Prime music overlay V1: two render variants (`with-lyrics`, `no-lyrics`); second-person intro and conclusion; per-chapter opening, closing, and one mid-chapter bestseller-beat block; one MusicGen companion prompt per book for brand-admin packaging. Discovery reference: `artifacts/qa/music_mode_discovery_2026-05-06.md` (PR #898 head when available). Implementation:
+- New `SOURCE_OF_TRUTH/musician_banks/<id>/` mirrors `teacher_banks/` atom layout.
+- `--music-mode` is **orthogonal** to `--pipeline-mode` (additive overlay).
+- 6 new slot pool directory names under `approved_atoms/`: `LYRIC_OPENING`, `LYRIC_CLOSING`, `LYRIC_BESTSELLER_BEAT`, `MUSIC_REFLECTION_OPENING`, `MUSIC_REFLECTION_CLOSING`, `MUSIC_REFLECTION_BESTSELLER_BEAT`.
+- V1 seeded for `gen_z_professionals × anxiety` test musician `test_artist_alpha`; survey schema at `artifacts/musician_survey/SURVEY_TEMPLATE.yaml`.
+- Companion audio: V1 ships **prompt JSON** via `scripts/music/generate_book_companion_song.py`; MusicGen runnable path remains Colab-oriented (`scripts/music/musicgen_colab.py` / Pearl Star). WAV export deferred until a supported local/scheduled runner is pinned.
+
+Pearl_Dev's draft requested ratification on four specific points; this entry rules each.
+
+**Decision:** **ratify-as-drafted with ownership clarified.** Per-point rulings:
+
+| # | Question | Ruling | Rationale |
+|---|---|---|---|
+| 1 | Option A (ride existing pipeline) vs Option B (net-new `music_pipeline` subsystem) | **Option A** | Path X precedent (BR-CANON-01 Path X) — additive overlays preferred over net-new subsystems where existing pipeline can absorb. Music slots are **additive post-render injections** on `book.txt`; `SOMATIC_10_SLOT_GRID` and enrichment slot plans untouched (per draft anti-drift check). |
+| 2 | `musician_banks/` subsystem owner: Pearl_Music? Pearl_Prime sub-mode? new agent? | **`music_mode` subsystem; owner = Pearl_Editor** | Consistent with PEARL-EDITOR-UPSTREAM-01 (this batch) — Pearl_Editor owns content authority for all banks (teacher_banks today; expand to musician_banks under this entry). Avoids minting a net-new agent (Pearl_Music) for a content-authoring lane that fits the existing Pearl_Editor authority shape. |
+| 3 | Survey schema canonical at `artifacts/musician_survey/SURVEY_TEMPLATE.yaml` | **Yes — confirmed canonical** | Schema lives in `artifacts/` (data layer), not in `specs/` or `config/`. Appropriate placement for a survey artifact template. |
+| 4 | Six new slot type names per Arc-First | **Confirmed as-named** | `LYRIC_*` and `MUSIC_REFLECTION_*` are descriptive, lane-specific (no collision with `SOMATIC_10_SLOT_GRID` slot names), and grouped semantically (LYRIC for lyrical content; MUSIC_REFLECTION for reflective text on the music). Names align with Arc-First's "additive overlays use distinct namespaces" pattern. |
+
+Anti-drift check (additive on draft's own check): The music-mode subsystem expands Pearl_Editor's content-authority scope (per PEARL-EDITOR-UPSTREAM-01). It does NOT introduce a runtime pipeline stage; the existing post-render injection mechanism is the integration point. No new spec authored — `MUSIC_MODE_V1.md` (if Pearl_Dev's PR carries one) is operational documentation, not spec authority; the `music_mode` subsystem's spec authority is `docs/SYSTEMS_V4.md` (extended via Pearl_Editor follow-up if/when needed). The 6 slot names extend `approved_atoms/` directory conventions; no collision with the canonical 10-section grid.
+
+**Action items:**
+1. Pearl_GitHub (PR #902 reviewer): merge PR #902 per operator approval. Nothing in this ratification changes the implementation shape; the "recommended" status flip to "ratified" is the only delta vs PR #902's draft.
+2. Pearl_PM (`ws_music_mode_v1_pilot_20260506`): administer survey to musician #1 (real, non-test); receive YAML; route to Pearl_Editor for first real `musician_banks/<id>/` authoring. Iteration cap = 1 musician per ws (V1 scope).
+3. Pearl_Editor + Pearl_Writer (`ws_musician_banks_first_real_artist_20260506`): per-musician atom expansion from real survey YAML. Authors the 6 slot pools (`LYRIC_OPENING`/`CLOSING`/`BESTSELLER_BEAT`, `MUSIC_REFLECTION_OPENING`/`CLOSING`/`BESTSELLER_BEAT`) at `SOURCE_OF_TRUTH/musician_banks/<id>/approved_atoms/<SLOT>/<atom_id>.yaml`. Content authoring; no code.
+4. Pearl_Architect (this entry's effect): add `music_mode | docs/SYSTEMS_V4.md | SOURCE_OF_TRUTH/musician_banks/;artifacts/musician_survey/SURVEY_TEMPLATE.yaml | Pearl_Editor | active` row to `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv`. NOT done in this PR (cap entries are routing-only); flagged as Pearl_GitHub follow-up under `ws_subsystem_authority_map_music_mode_row_20260506`.
+
+**Handoffs:**
+- Pearl_GitHub → PR #902 merge (operator approval) → trigger = this cap-entry PR + PR #902 both ready.
+- Pearl_PM → `ws_music_mode_v1_pilot_20260506` → trigger = PR #902 merged.
+- Pearl_Editor + Pearl_Writer → `ws_musician_banks_first_real_artist_20260506` → trigger = first real survey YAML received.
+- Pearl_GitHub → `ws_subsystem_authority_map_music_mode_row_20260506` → trigger = this cap-entry PR merged (small TSV row addition).
