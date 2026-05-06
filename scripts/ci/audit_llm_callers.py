@@ -6,6 +6,7 @@ import argparse
 import json
 import re
 import sys
+import time
 from pathlib import Path
 
 import yaml
@@ -74,10 +75,22 @@ def _line_allowed(line: str, subs: list[str] | None) -> bool:
 
 
 def main() -> int:
+    # Repo-canonical defaults so the script is callable from agent
+    # sessions without having to repeat the same boilerplate paths.
+    # CI workflows still pass explicit args (see
+    # .github/workflows/llm-policy-enforcement.yml); they override.
+    default_banned = REPO_ROOT / "config" / "governance" / "banned_llm_patterns.yaml"
+    default_allowed = REPO_ROOT / "config" / "governance" / "allowed_llm_patterns.yaml"
+    default_output = Path("/tmp") / f"llm_audit_{time.strftime('%Y%m%d_%H%M%S')}.json"
+
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--banned-patterns-file", type=Path, required=True)
-    ap.add_argument("--allowed-patterns-file", type=Path, default=None)
-    ap.add_argument("--output", type=Path, required=True)
+    ap.add_argument("--banned-patterns-file", type=Path, default=default_banned)
+    ap.add_argument(
+        "--allowed-patterns-file",
+        type=Path,
+        default=default_allowed if default_allowed.exists() else None,
+    )
+    ap.add_argument("--output", type=Path, default=default_output)
     ap.add_argument("--roots", nargs="*", help="Limit scan to these roots (repo-relative or absolute)")
     ap.add_argument("--fail-on-violation", action="store_true")
     args = ap.parse_args()

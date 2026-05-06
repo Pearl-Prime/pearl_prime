@@ -4,6 +4,10 @@
 #
 # MANDATORY for all agent sessions. See CLAUDE.md rule 0.
 # Added after PR #245 incident (20,006 files deleted by squash merge).
+#
+# 2026-05-06: rewrote to use `gh pr view --json files` instead of
+# `gh pr diff --stat` / `--name-status` (those flags were removed in
+# recent gh CLI versions). Behavior unchanged.
 
 set -euo pipefail
 
@@ -11,25 +15,28 @@ PR_NUMBER="${1:?Usage: $0 <PR_NUMBER>}"
 
 echo "=== Pre-merge safety check for PR #${PR_NUMBER} ==="
 
-# Get diff stats
-STATS=$(gh pr diff "$PR_NUMBER" --stat 2>/dev/null | tail -1)
-echo "Diff stats: $STATS"
+# Pull all per-file metadata in one API call. The `files` field returns
+# per-file additions, deletions, and changeType (ADDED/MODIFIED/REMOVED/
+# RENAMED/COPIED). additions/deletions are total numeric counts.
+JSON=$(gh pr view "$PR_NUMBER" --json additions,deletions,files 2>/dev/null)
 
-# Count deletions
-DELETED=$(gh pr diff "$PR_NUMBER" 2>/dev/null | grep '^-' | grep -v '^---' | wc -l | tr -d ' ')
-FILES_CHANGED=$(gh pr diff "$PR_NUMBER" --stat 2>/dev/null | grep -c '|' || echo 0)
-FILES_DELETED=$(gh pr diff "$PR_NUMBER" --name-status 2>/dev/null | grep -c '^D' || echo 0)
+ADDITIONS=$(echo "$JSON" | jq -r '.additions')
+DELETED_LINES=$(echo "$JSON" | jq -r '.deletions')
+FILES_CHANGED=$(echo "$JSON" | jq -r '.files | length')
+FILES_DELETED=$(echo "$JSON" | jq -r '[.files[] | select(.changeType == "REMOVED")] | length')
 
+echo "Diff stats: ${FILES_CHANGED} file(s), +${ADDITIONS}/-${DELETED_LINES}"
 echo "Files changed: $FILES_CHANGED"
 echo "Files deleted: $FILES_DELETED"
-echo "Lines deleted: $DELETED"
+echo "Lines deleted: $DELETED_LINES"
 
 # Safety gates
 if [ "$FILES_DELETED" -gt 50 ]; then
     echo ""
     echo "⛔ BLOCKED: PR #${PR_NUMBER} deletes ${FILES_DELETED} files (threshold: 50)"
     echo "Top deleted directories:"
-    gh pr diff "$PR_NUMBER" --name-status 2>/dev/null | grep '^D' | cut -f2 | cut -d/ -f1 | sort | uniq -c | sort -rn | head -10
+    echo "$JSON" | jq -r '.files[] | select(.changeType == "REMOVED") | .path' \
+        | cut -d/ -f1 | sort | uniq -c | sort -rn | head -10
     echo ""
     echo "DO NOT MERGE without explicit owner approval."
     exit 1
