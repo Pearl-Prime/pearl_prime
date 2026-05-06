@@ -266,6 +266,35 @@ FLAGSHIP_BLOCKING_GATES = frozenset(
 )
 
 
+def _check_exercise_strict_canonical_gate(
+    quality_profile: str, enrichment_audit: dict | None
+) -> None:
+    """EXERCISE-BANK-RESOLUTION-01: production must not fall through to practice_library.
+
+    Production MUST resolve EXERCISE slots from ``teacher_banks/approved_atoms/EXERCISE``
+    or the persona-atom EXERCISE bank — not from ``practice_library`` (the spec §4.5
+    third source). practice_library is acceptable for draft/debug/flagship profiles;
+    production requires authored canon.
+
+    Raises ``SystemExit`` (matches existing production-gate pattern at the call site)
+    with an actionable message when the gate fires.
+    """
+    if quality_profile != "production":
+        return
+    practice_lib_count = (enrichment_audit or {}).get("slots_from_practice_library", 0)
+    if practice_lib_count <= 0:
+        return
+    raise SystemExit(
+        f"[PRODUCTION GATE] EXERCISE-BANK-RESOLUTION-01 strict-canonical: "
+        f"{practice_lib_count} EXERCISE slot(s) resolved via practice_library "
+        f"fall-through. Production must resolve EXERCISE from "
+        f"teacher_banks/approved_atoms/EXERCISE or persona-atom EXERCISE bank. "
+        f"Add atoms upstream (Pearl_Editor + Pearl_Writer ws), or use "
+        f"--quality-profile draft/debug to allow practice_library fall-through "
+        f"during development."
+    )
+
+
 def _block_on_fail(quality_profile: str, gate_name: str) -> bool:
     """Return True when a FAIL on ``gate_name`` should append to the failures list.
 
@@ -579,6 +608,9 @@ def _run_spine_pipeline_mode(
                 f"({len(gap_slots)} slots). Fix content banks or atom coverage before production run.\n"
                 + "\n".join(f"  - {s}" for s in gap_slots[:10])
             )
+
+        # EXERCISE-BANK-RESOLUTION-01 strict-canonical gate (production only).
+        _check_exercise_strict_canonical_gate(quality_profile, enriched.enrichment_audit)
     pre_depth_words = enriched.total_words
     depth_map_path = repo_root / "config" / "depth" / "depth_module_map.yaml"
     if depth_map_path.exists() and yaml:
