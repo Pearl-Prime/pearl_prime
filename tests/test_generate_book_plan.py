@@ -94,3 +94,68 @@ def test_generated_plan_custom_chapter_count():
     )
     assert plan.chapter_count == 7
     validate_book_arc(plan)
+
+
+# ---------------------------------------------------------------------------
+# Compact runtime formats (PR-E follow-up to PR #856 + #858 smoke diagnosis)
+# ---------------------------------------------------------------------------
+# PR #856 declared compact_book_5ch_15min / 5ch_20min / 8ch_30min in
+# config/format_selection/format_registry.yaml but did not register them in
+# the auto-plan path's FORMAT_CHAPTER_COUNTS dict. PR #858 smoke surfaced this
+# as a 13-chapter render against an 8-chapter format declaration. These tests
+# regression-guard the compact-format auto-plan wiring.
+
+def test_compact_book_5ch_15min_chapter_count():
+    """PR-E regression: compact_book_5ch_15min must auto-plan to exactly 5 chapters."""
+    plan = generate_book_plan(
+        "anxiety", "gen_z_professionals", "compact_book_5ch_15min", "somatic_first"
+    )
+    assert plan.chapter_count == 5, (
+        f"compact_book_5ch_15min should auto-plan to 5 chapters, got {plan.chapter_count}"
+    )
+    validate_book_arc(plan)
+
+
+def test_compact_book_5ch_20min_chapter_count():
+    """PR-E regression: compact_book_5ch_20min must auto-plan to exactly 5 chapters."""
+    plan = generate_book_plan(
+        "anxiety", "gen_z_professionals", "compact_book_5ch_20min", "somatic_first"
+    )
+    assert plan.chapter_count == 5, (
+        f"compact_book_5ch_20min should auto-plan to 5 chapters, got {plan.chapter_count}"
+    )
+    validate_book_arc(plan)
+
+
+def test_compact_book_8ch_30min_chapter_count():
+    """PR-E regression: compact_book_8ch_30min must auto-plan to exactly 8 chapters.
+
+    This is the format that produced 13 chapters in PR #858's smoke run (under-cover
+    of the auto-plan default fallback). Asserting 8 here closes that regression.
+    """
+    plan = generate_book_plan(
+        "anxiety", "gen_z_professionals", "compact_book_8ch_30min", "somatic_first"
+    )
+    assert plan.chapter_count == 8, (
+        f"compact_book_8ch_30min should auto-plan to 8 chapters, got {plan.chapter_count}"
+    )
+    validate_book_arc(plan)
+
+
+def test_format_chapter_counts_compact_entries_present():
+    """All three compact runtime formats must be registered in FORMAT_CHAPTER_COUNTS."""
+    from phoenix_v4.planning.book_structure_plan import FORMAT_CHAPTER_COUNTS
+
+    expected = {
+        "compact_book_5ch_15min": 5,
+        "compact_book_5ch_20min": 5,
+        "compact_book_8ch_30min": 8,
+    }
+    for fmt, expected_count in expected.items():
+        assert fmt in FORMAT_CHAPTER_COUNTS, (
+            f"compact format {fmt!r} missing from FORMAT_CHAPTER_COUNTS"
+        )
+        assert FORMAT_CHAPTER_COUNTS[fmt] == expected_count, (
+            f"FORMAT_CHAPTER_COUNTS[{fmt!r}] = {FORMAT_CHAPTER_COUNTS[fmt]}, "
+            f"expected {expected_count}"
+        )

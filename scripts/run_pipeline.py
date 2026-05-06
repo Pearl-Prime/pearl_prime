@@ -511,7 +511,9 @@ def _run_spine_pipeline_mode(
         for ch in book_plan.chapters
     }
 
-    spine = load_spine(topic_id, repo_root)
+    # PR-G: pass runtime_format so compact formats can subset the spine via
+    # config/format_selection/format_registry.yaml::compact_chapter_subset.
+    spine = load_spine(topic_id, repo_root, runtime_format=runtime_fmt)
     knob_profile = load_knob_profile(topic_id, repo_root)
     shaped_spine = apply_knobs(
         spine,

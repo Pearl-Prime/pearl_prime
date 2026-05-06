@@ -1,6 +1,6 @@
 # Pearl_Architect State
 
-Last verified: 2026-04-26  
+Last verified: 2026-05-05  
 Owner: Pearl_Architect
 
 ## Purpose
@@ -386,3 +386,136 @@ Both architectural paths produce identical bestseller-grade output. PR #669 chos
 - Pearl_PM (post-merge): mark `ws_spec_739_validator_teacher_banks_awareness_20260428` as **completed** in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (cite this PR + this cap entry); update the proj `next_action` to reflect that the gap-report numbers are now `691 → 452 (−35%)` for the canonical reference.
 - Pearl_Architect (FUTURE, when scheduled): rule on extending validator multi-source awareness to the other 9 section types per the open routing question above. Open `ws_spec_739_validator_alt_source_extension_<DATE>` if the answer is yes.
 - Pearl_Editor + Pearl_Writer (Phase 2 restart, separate session): the corrected gap report at `artifacts/qa/variant_coverage_gap_2026-04-28.md` is now pipeline-accurate for TEACHER_DOCTRINE + EXERCISE; remaining 110 below_threshold tuples are the real Phase 2 backlog. Hero persona = `millennial_women_professionals` (7 mwp gaps total post-fix).
+
+### MASTER-CATALOG-01 — `PHOENIX_OMEGA_MASTER_CATALOG_PLAN.md` declared not-needed; route to existing canon (decision approved 2026-05-05)
+
+**Status:** **closed-not-needed** (Option (ii), 2026-05-05).
+**Context:** Audit handoff `docs/PHOENIX_OMEGA_AUDIT_HANDOFF_2026-05-04.md` (persisted via PR #875) §1 row 9 + §5.1 P0 #2 listed `docs/PHOENIX_OMEGA_MASTER_CATALOG_PLAN.md` as a missing anchor cited in the audit's Phase 5 storefront pathway. Three options surfaced: (i) author the doc, (ii) re-route Phase 5 to existing canonical docs, or (iii) declare obsolete.
+**Decision:** **Option (ii) — re-route.** A unified "master catalog plan" anchor would *drift from* `BR-CANON-01 Path X` (37 = manga canon; 24 archetypes × 13 lanes = 312 = book pipeline; both legitimate on different axes). Manga and book pipelines are intentionally distinct; a single unifying plan-doc would re-introduce the pre-Path-X conflation that Path X explicitly retired. The audit was authored before Path X landed; its "missing master plan" framing is a pre-Path-X artifact. The Phase 5 storefront pathway references the per-axis canon already on origin/main:
+- **Manga axis:** `artifacts/manga/MANGA_FULL_CATALOG_PLAN.md` + `docs/CJK_CATALOG_PLAN.md` + `docs/US_CATALOG_PLAN.md` (per-locale)
+- **Book axis:** `docs/GENRE_PORTFOLIO_PLAN.md` (canonical strategic) + book script catalogs (4 locales × 13 brands)
+- **Cross-axis index:** `docs/DOCS_INDEX.md` (the navigation layer; not a plan doc)
+Rejected (i) because it would author drift; rejected (iii) because the underlying Phase 5 pathway IS active and routed to existing canon.
+**Anti-drift check:** Re-routing to existing canon is anti-drift. Option (i) would have created a parallel plan-doc duplicating `GENRE_PORTFOLIO_PLAN.md` + `MANGA_FULL_CATALOG_PLAN.md` content, exactly the kind of "introduce a new spec when a canonical file already exists" pattern this doc's `Common Drift Patterns` section flags.
+**Action items:**
+1. Pearl_GitHub (`ws_docs_index_refresh_20260505`): when refreshing `docs/DOCS_INDEX.md`, add a routing note that the audit's `PHOENIX_OMEGA_MASTER_CATALOG_PLAN.md` reference is closed-not-needed under MASTER-CATALOG-01 and link to the per-axis canon above.
+2. Pearl_PM: close `ws_master_catalog_plan_authoring_20260505` status=closed-not-needed citing this entry.
+**Handoffs:**
+- Pearl_GitHub → `ws_docs_index_refresh_20260505` → trigger = audit-handoff persistence PR #875 merged.
+- Pearl_PM → `ws_master_catalog_plan_authoring_20260505` → trigger = this cap-entry PR merged; close-out only.
+
+### PR-D-SPINE-01 — Compact-format spine = declarative subset of 12-chapter spine via `compact_chapter_subset` (P3-refined; decision approved 2026-05-05)
+
+**Status:** **ratified — declarative-P3 implementation already shipped in PR #865** (operator decision 2026-05-05).
+**Context:** `artifacts/handoff/PR_D_HANDOFF_2026-05-04.md` (persisted via PR #877) §3 surfaced four paths for the compact-format spine architecture: P1 (synthesize spine from format spec's `beat_sheet` — ~50 lines, single source of truth = format spec, risk = thin synthesized scaffolding), P2 (author 3 new compact spine YAMLs via Pearl_Writer follow-up — crosses engineering/content line, slowest), P3 (subset 12-chapter spine to N chapters at `apply_knob` time — ~15-30 lines, brittle if hand-coded), abandon. PR #865 (still blocked under BRAND1-COMBINED-PR-01 below) ships a **declarative refinement of P3**: `compact_chapter_subset: [1, 4, 7, 10, 12]` etc. is added to each compact format block in `config/format_selection/format_registry.yaml`; `_load_compact_chapter_subset` in `phoenix_v4/planning/knob_apply.py` reads the list and returns subsetted, renumbered `SpineChapter` objects from the full topic spine. Three tests pin the contract (`test_load_spine_compact_8ch_30min_subsets_to_8` etc.; verified passing in Pearl_PM 2026-05-04 session).
+**Decision:** **P3-declarative.** The brittleness the handoff flagged for P3 (auto-mapping `phase → chapter range` is fragile) is mitigated by **operator hand-curation of the subset list per format**: each compact format's `compact_chapter_subset` is a small explicit list; the operator can re-curate if a particular spine chapter's role doesn't match the compact narrative. P1 is rejected because synthesizing from `beat_sheet` discards the spine-author's curation work. P2 is rejected as cost-disproportionate for the thin compact-format coverage and as crossing engineering/content lines mid-cycle. Abandon is rejected — #858 already shipped W1+W2+W4 wiring; backing out is wasteful.
+**Anti-drift check:** Declarative subset config in `format_registry.yaml` extends an existing canon; no new spec authored. The `_load_compact_chapter_subset` reader is a single ~30-line helper in `knob_apply.py`, not a parallel pipeline. Format spec remains the single source of truth for compact format contract; spine YAMLs remain the single source of truth for chapter content.
+**Action items:**
+1. Pearl_Dev (after BRAND1-COMBINED-PR-01 split lands): the W1+W2+W4 wiring is on origin/main via #858. The W3a (`SOMATIC_FULL_RUNTIME_FORMATS` extension), W3c (declarative subset implementation), W3d (`ARC_BEATS` extension), and W4 (runtime_policies in `book_quality_gate.yaml`) all currently live in #865's branch — fold these into the PR-Beta split per BRAND1-COMBINED-PR-01.
+2. Pearl_Dev: under `ws_pr_d_wires_resume_20260505`, run W5/W6 smoke against `gen_z_professionals × anxiety × {compact_book_5ch_15min, compact_book_8ch_30min}` once PR-Beta lands. Iteration cap = 2 per memory `feedback_validation_before_scaling`.
+**Handoffs:**
+- Pearl_Dev → `ws_pr_d_wires_resume_20260505` → trigger = BRAND1-COMBINED-PR-01 PR-Beta merged (chapter_count fix + spine subset on origin/main).
+- Pearl_PM → `ws_pr_d_spine_arch_pick_20260505` → trigger = this cap-entry PR merged; close as resolved-by-PR-D-SPINE-01.
+
+### COVER-REGISTRY-01 — `config/authoring/author_cover_art_registry.yaml` is book-pipeline-only (not retired); manga has no registry (decision approved 2026-05-05)
+
+**Status:** **ratified** (Option (a) with reframe, 2026-05-05).
+**Context:** Pearl_PM 2026-05-04 finish-out session surfaced a file-level conflict between PR #880 (Pearl Star image-gen canonical bundle) and the brand-1 PR stack (#865 + #867). The Pearl Star handoff `docs/HANDOFF_PEARL_STAR_IMAGE_PIPELINE_2026-05-04.md` §3 listed `config/authoring/author_cover_art_registry.yaml` as a deletion candidate alongside the rest of the static-PNG manga cover-art system; brand-1 PR #865 added 12 stillness_press author entries + 8 brand palette tokens to that same file. Pearl_PM excluded the deletion from PR #880 per Q-B and routed the long-term decision here. Three options were on the table: (a) coexist (two cover systems in parallel), (b) retire the YAML and re-land brand-1's 12 entries elsewhere, (c) retire the new EI manga-author system instead.
+**Decision:** **Option (a) — coexist, with explicit reframe.** Path X (BR-CANON-01 Path X cap entry) already established that manga and book pipelines are intentionally distinct on the brand-count axis; the cover-art axis is the same shape. Specifically:
+- **Manga side:** EI character-authors at `config/authoring/manga_authors/`. Cover art is **unique per book** — Pearl Star FLUX renders imagery + PIL composites typography. **No registry, no shared bases.** Spec authority: `specs/MANGA_AUTHOR_AND_COVER_ART_CANONICAL_SPEC.md` (in PR #880).
+- **Book side (KDP audiobooks):** Pen-name authors at `config/authoring/pen_name_teacher_profiles.yaml` + `config/author_registry.yaml`. Cover art uses **4 base slots per author + deterministic SHA256 per-book composition** (PIL-only, FLUX bases generated once per author). Spec authority: `docs/authoring/AUTHOR_COVER_ART_SPEC.md` (committed in #865 as part of brand-1 phase 1). `config/authoring/author_cover_art_registry.yaml` is the runtime registry for the 4-slot system; it stays.
+The Pearl Star handoff §3 listed the YAML as a deletion candidate because it conflated "old MANGA static-PNG cover art" with "all static-PNG cover art." Brand-1 explicitly notes (handoff §11 #4): "Treating manga authors and pen-name authors as the same class — they're separate." The two systems share neither a registry nor a generator; the only collision was the filename `author_cover_art_registry.yaml` which now belongs to the BOOK pipeline only. Rejected (b) because re-landing brand-1's content elsewhere is churn for no architectural gain. Rejected (c) because the Pearl Star EI author-cover system has clear spec authority and is needed for the manga lane.
+**Anti-drift check:** This decision **clarifies** path-family ownership rather than introducing new files: zero new specs, zero new configs. It corrects a deletion-list scope error in the Pearl Star handoff. The new `MANGA_AUTHOR_AND_COVER_ART_CANONICAL_SPEC.md` retains authority over the manga axis; `AUTHOR_COVER_ART_SPEC.md` (book axis, in #865) retains authority over the book axis; both systems have non-overlapping config paths.
+**Action items:**
+1. Pearl_GitHub (PR #880 reviewer): merge PR #880 as currently shaped — the deletion of `config/authoring/author_cover_art_registry.yaml` is correctly NOT in the bundle.
+2. Pearl_Brand: edit `specs/MANGA_AUTHOR_AND_COVER_ART_CANONICAL_SPEC.md` (in PR #880, before merge OR follow-up doc PR after merge) to remove `config/authoring/author_cover_art_registry.yaml + dependent scripts (old; deletion candidates)` from the "Replaces" front-matter. Replace with: "the static-PNG manga cover-art system is retired on the manga side only; the book-side `author_cover_art_registry.yaml` remains active under `docs/authoring/AUTHOR_COVER_ART_SPEC.md`." This is a small spec edit, not new spec authoring.
+3. Pearl_PM: close `ws_pearl_star_brand1_cover_registry_routing_20260505` status=resolved-by-COVER-REGISTRY-01 citing this entry.
+**Handoffs:**
+- Pearl_GitHub → PR #880 merge (operator approval per receipt E5).
+- Pearl_Brand → small spec-edit ws (Pearl_PM to open `ws_manga_cover_spec_replaces_clause_edit_20260505` if the edit is deferred to a follow-up PR; or Pearl_GitHub edits in PR #880 directly).
+- Pearl_PM → `ws_pearl_star_brand1_cover_registry_routing_20260505` → trigger = this cap-entry PR merged; close as resolved.
+
+### AUTO-PLAN-SSOT-01 — Canonical chapter_count = `format_registry.yaml`; refactor `book_structure_plan.FORMAT_CHAPTER_COUNTS` to read from registry (decision approved 2026-05-05)
+
+**Status:** **ratified — long-term refactor (Option (b)); stopgap (NOTE comment + dual-update) acceptable for current cycle** (operator decision 2026-05-05).
+**Context:** `artifacts/handoff/HANDOFF_bestseller_smoke_post_852_856_2026-05-04.md` (on origin/main via PR #858 squash `f052d38d5e`) §Finding 1 named the SSoT violation: `phoenix_v4/planning/book_structure_plan.py:18 FORMAT_CHAPTER_COUNTS` is a hardcoded dict that duplicates `chapter_count_default` declared in `config/format_selection/format_registry.yaml`. The format-selector path at `phoenix_v4/planning/format_selector.py:153` already reads from the registry; the auto-plan path does not. PR #856 added the `compact_book_*` registry declarations without wiring `book_structure_plan` to read them, so the auto-plan's fallback `FORMAT_CHAPTER_COUNTS.get(runtime_format, 10)` returned 10 chapters instead of the registry-declared 8 — the failure that produced REJECT in the bestseller smoke.
+**Decision:** **Option (b) — `format_registry.yaml` is the canonical home for chapter_count_default.** `book_structure_plan.FORMAT_CHAPTER_COUNTS` should be refactored to either (i) read at module-import time from the registry, or (ii) be eliminated in favor of a registry-aware helper. Either form prevents the same regression on the next format added. Rejected option (a) leave-as-is: dual-update discipline failed once (#856) and will fail again. Rejected putting chapter_count in `book_structure_plan.py`: that's a runtime planning module, not a config; format declarations belong in `format_registry.yaml` per existing structure.
+
+The interim stopgap landed in PR #865 (still blocked) is acceptable for this cycle:
+- Adds `compact_book_*` entries to `FORMAT_CHAPTER_COUNTS` (matches registry's `chapter_count_default`)
+- Adds an explicit NOTE comment naming the duplication, the format-selector single-source path, and "BOTH must be updated together when adding a new runtime format. Eliminating the duplication … is tracked as a follow-up refactor"
+The NOTE comment is the right interim contract: it documents the drift risk explicitly. The follow-up refactor is the ratification target; that's what this cap entry tracks.
+
+**Anti-drift check:** No new spec authored. The decision aligns auto-plan with format-selector: both read `chapter_count_default` from the same registry. Reduces (does not introduce) duplication.
+**Action items:**
+1. Pearl_Dev (follow-up after BRAND1-COMBINED-PR-01 PR-Beta lands, which carries the stopgap): open a small refactor PR replacing `FORMAT_CHAPTER_COUNTS` with a registry-aware helper. ~30-50 lines. Single owner: `book_structure_plan.py`. Test pin: assert that adding a new runtime format to `format_registry.yaml` flows through to auto-plan without editing `book_structure_plan.py`.
+2. Pearl_PM: close `ws_auto_plan_ssot_routing_20260505` status=resolved-by-AUTO-PLAN-SSOT-01 once the refactor PR lands. The interim stopgap is part of BRAND1-COMBINED-PR-01 PR-Beta; the refactor is a separate ws.
+**Handoffs:**
+- Pearl_Dev → `ws_auto_plan_ssot_refactor_20260505` (NEW; Pearl_PM to open) → trigger = BRAND1-COMBINED-PR-01 PR-Beta merged.
+- Pearl_PM → `ws_auto_plan_ssot_routing_20260505` → trigger = this cap-entry PR merged; close as resolved (refactor work tracked under the new ws).
+
+### BRAND1-COMBINED-PR-01 — Close #865 + #867; split into 3 clean PRs off `origin/main` (decision approved 2026-05-05)
+
+**Status:** **ratified — Option (c) split differently, with specific 3-PR shape** (operator decision 2026-05-05).
+**Context:** Pearl_PM 2026-05-04 finish-out session attempted the Q-A directive's strip + rebase path on PR #865 (brand-1 phase 1, registry plumbing) and PR #867 (brand-1 phase 2, 48 author bundle YAMLs stacked on #865). Two structural blockers surfaced: (1) **#865 alone fails CI** because `tests/test_registry_plan_runtime_format.py` invokes `scripts/run_pipeline.py` and the pipeline rejects per Writer Spec §23.9 ("no assets directory for author_id=lena_thorne") — registries reference 12 brand-1 authors whose `assets/authors/{id}/` directories live in #867, not #865. (2) **#867 is CONFLICTING** after #865's rebase, locked at sibling worktree `unruffled-robinson-25197f`, and its diff vs current `origin/main` shows 153 files changed including 61 file deletions (over `CLAUDE.md` rule 0 threshold of 50) — most of those are stale `.claude/worktrees/*` deletions plus retroactive deletions of `tests/test_cover_d1_immediate_fixes.py` (#855), `tests/test_pearl_news_sidebar_v52.py` (#853), and other already-merged work the branch was based off pre-merge. Cherry-picking #867's commits onto rebased #865 produced conflicts on tangled history.
+
+In addition, PR #865 has scope-creeped well past brand-1 phase 1's 7-file charter: its 24-file rebased diff covers four distinct workstreams — (i) brand-1 author registries + spec doc (the original charter), (ii) PR-D residual wiring (chapter_count fix in `book_structure_plan.py` + spine subset in `format_registry.yaml` + `knob_apply.py` + `chapter_flow_gate.py`), (iii) `gen_z_professionals × anxiety` atom backfill (3 CANONICAL.txt files), (iv) 3 PR_E/G/H bestseller smoke QA artifacts.
+
+Four options were considered:
+- (a) keep stacked: blocked on Writer Spec §23.9 (registries-without-assets); also #865 still carries 3 unrelated workstreams in scope.
+- (b) collapse #865 + #867 into one combined PR off main: 153 file changes including 61 deletions tripping rule 0; spurious `.claude/worktrees/*` artifacts; cross-workstream creep persists.
+- (c) split differently: separate PRs aligned to actual workstreams.
+- (d) close both and re-author from scratch: wasteful (working content exists).
+
+**Decision:** **Option (c) split differently into THREE clean PRs off `origin/main`** (`f052d38d5e` post-#858):
+
+**PR-Alpha — brand-1 author system atomic.** The brand-1 phase 1 + phase 2 unit per the brand-1 handoff's "the two PRs together" framing. Files (~62):
+- `config/author_registry.yaml` (12 stillness_press entries)
+- `config/authoring/author_cover_art_registry.yaml` (12 entries + 8 palette tokens — the file COVER-REGISTRY-01 ratifies as book-pipeline-canonical)
+- `config/authors/author_voice_profiles.yaml` (12 voice profiles)
+- `config/brand_author_assignments.yaml` (12-author pool + topic-affinity rules)
+- `docs/authoring/AUTHOR_COVER_ART_SPEC.md` (NEW — book-pipeline cover-art authority per COVER-REGISTRY-01)
+- `scripts/catalog_visibility/distribute_brand1_to_authors.py` (NEW)
+- `artifacts/catalog/brand1_author_distribution_en_US.csv` (192 rows)
+- `assets/authors/{12 author_ids}/{bio,why_this_book,authority_position,audiobook_pre_intro}.yaml` × 12 = 48 YAMLs
+- `docs/handoffs/2026-05-04_brand1_author_system_handoff.md` (handoff doc)
+Resolves Writer Spec §23.9: registries and assets land atomically.
+
+**PR-Beta — PR-D residual wiring + auto-plan SSoT stopgap.** Per PR-D-SPINE-01 + AUTO-PLAN-SSOT-01. Files (~10):
+- `config/format_selection/format_registry.yaml` (`compact_chapter_subset` declarations on 3 compact formats)
+- `phoenix_v4/planning/knob_apply.py` (`_load_compact_chapter_subset` + extended `load_spine` signature)
+- `phoenix_v4/planning/book_structure_plan.py` (`FORMAT_CHAPTER_COUNTS` augmented + NOTE comment per AUTO-PLAN-SSOT-01 stopgap)
+- `phoenix_v4/quality/chapter_flow_gate.py` (compact runtime classification)
+- `config/quality/per_format_chapter_flow_requirements.yaml` (compact rules)
+- `config/quality/book_quality_gate.yaml` (`runtime_policies` for compact, if not already on main from #858)
+- `config/spines/anxiety_spine.yaml` (any tweaks)
+- `registry/anxiety.yaml` (any tweaks)
+- 4 test files: `tests/test_chapter_flow_gate.py`, `tests/test_enrichment_select.py` (adds), `tests/test_generate_book_plan.py`, `tests/test_knob_apply.py`
+This PR-Beta is the pipeline-side residual; it gates the AUTO-PLAN-SSOT-01 long-term refactor (separate Pearl_Dev follow-up ws).
+
+**PR-Gamma — gen_z×anxiety atom backfill.** Per bestseller smoke handoff §Finding 2. Files (~3):
+- `atoms/gen_z_professionals/anxiety/HOOK/CANONICAL.txt`
+- `atoms/gen_z_professionals/anxiety/INTEGRATION/CANONICAL.txt`
+- `atoms/gen_z_professionals/anxiety/PIVOT/CANONICAL.txt`
+Optional: minor test additions if any existing test pins these paths.
+
+**Out-of-scope** (not in any of the three PRs): the 3 PR_E/G/H bestseller smoke QA artifacts (`artifacts/qa/bestseller_smoke_post_pr_{e,g,h}_2026-05-04.md`). These are evidence, not deliverables. They can land as part of the W5/W6 smoke re-run under `ws_bestseller_smoke_re_run_20260505` after PR-Beta + PR-Gamma merge, OR be omitted entirely if the re-run produces fresh equivalent artifacts.
+
+Rejected (a) for the §23.9 violation. Rejected (b) for the rule-0 trip + worktree artifact pollution. Rejected (d) for being wasteful — Pearl_Dev cherry-picks the already-authored content into the three new branches.
+
+**Anti-drift check:** No new specs authored. Three PRs, each scoped to a single workstream, each landing atomically per its own integration contract. Brand-1 phase-1+phase-2 atomic landing satisfies Writer Spec §23.9. PR-D residual wiring honors PR-D-SPINE-01's declarative-P3 ratification. Atom backfill honors bestseller smoke handoff Finding 2's content-only scope.
+**Action items:**
+1. **Pearl_Dev** (PRIMARY, IMMEDIATE) — open the three clean PRs from `origin/main`:
+   - branch a: `agent/brand1-author-system-atomic-20260505` for PR-Alpha. Cherry-pick from #865 + #867. Verify `lena_thorne` assets exist before opening. Run gates including `gh pr view --json files` deletion check (expect 0 deletions).
+   - branch b: `agent/pr-d-residual-wiring-20260505` for PR-Beta. Cherry-pick the relevant 10 files from rebased #865's branch (`agent/brand1-author-system-phase1` at `c459e217db`). Re-run the 3 `test_load_spine_compact_*` tests locally; verify pass.
+   - branch c: `agent/atom-backfill-gen-z-anxiety-20260505` for PR-Gamma. Cherry-pick the 3 atoms.
+   - All three independent of each other — Pearl_Dev opens in parallel.
+2. **Pearl_PM** (after Pearl_Dev opens the three PRs):
+   - close PR #865 status=superseded by PR-Alpha/Beta/Gamma trio; comment linking this cap entry.
+   - close PR #867 status=superseded by PR-Alpha; comment linking this cap entry.
+   - close `ws_brand1_phase1_phase2_combined_pr_routing_20260505` status=resolved-by-BRAND1-COMBINED-PR-01.
+   - open three new ws's: `ws_brand1_author_system_atomic_pr_20260505`, `ws_pr_d_residual_wiring_pr_20260505`, `ws_atom_backfill_gen_z_anxiety_pr_20260505`. Each with Pearl_Dev as owner, blocker=needs-CI-pass, next_owner=Pearl_GitHub.
+**Handoffs:**
+- Pearl_Dev → 3 new ws's (above) → trigger = this cap-entry PR merged.
+- Pearl_PM → close #865, close #867, close `ws_brand1_phase1_phase2_combined_pr_routing_20260505`, open 3 new ws's → trigger = Pearl_Dev opens the three replacement PRs.
+- Pearl_GitHub → review/merge the 3 replacement PRs in normal cadence (no special ordering; all three independent).

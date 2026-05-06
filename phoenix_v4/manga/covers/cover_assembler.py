@@ -86,12 +86,23 @@ class CoverAssembler:
             zone_height_fraction=params.title_zone_fraction,
         )
 
-        # 2. Title text
-        if params.title_text and params.typography_config:
-            try:
-                image = self._render_title_text(image, params)
-            except Exception as exc:
-                logger.warning("Title text render failed: %s", exc)
+        # 2. Title text — fail-closed: a cover without a title is a defect, not a stylistic choice.
+        # Historical bug (2026-04..2026-05): manga covers shipped to artifacts/pipeline_examples/
+        # with no title rendered because params.title_text was empty AND the swallowed-exception
+        # path silently passed broken covers downstream. See
+        # docs/PEARL_NEWS_LAYOUT_SYSTEM_2026-05-04.md "Anti-regression checklist" — every cover
+        # must have its title rendered before publish.
+        if not params.title_text or not params.title_text.strip():
+            raise ValueError(
+                "CoverParams.title_text is required (manga covers must render a title; "
+                "shipping a title-less cover violates the cover_quality_gates contract)."
+            )
+        if not params.typography_config:
+            raise ValueError(
+                "CoverParams.typography_config is required to render the title."
+            )
+        # Re-raise instead of swallowing — a title render failure is not recoverable here.
+        image = self._render_title_text(image, params)
 
         # 3. Volume badge
         image = self._render_volume_badge(image, params)

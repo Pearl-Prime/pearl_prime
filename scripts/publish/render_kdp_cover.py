@@ -324,10 +324,71 @@ def _measure_text(draw: ImageDraw.ImageDraw, text: str,
     return width, height
 
 
+# Words that must NEVER be orphaned at the end of a wrapped line.
+# Orphan-articles + leading-prepositions look like gibberish in title type
+# (e.g. "The / No That Saved Me" reads as a fragment, not a sentence).
+# This list is conservative — common-case English titles only. CJK titles do
+# not have this concept; we only apply orphan-prevention when the input is
+# ASCII-dominant (heuristic at call-site).
+_NO_ORPHAN_LEADING_WORDS = frozenset({
+    # articles
+    "a", "an", "the",
+    # short prepositions
+    "of", "to", "in", "on", "at", "by", "for", "from", "with", "into", "onto",
+    # coordinating conjunctions
+    "and", "or", "but", "nor", "so", "yet",
+    # demonstratives / possessives
+    "this", "that", "these", "those", "my", "your", "our", "his", "her",
+    # short qualifiers
+    "no", "not",
+})
+
+
+def _is_orphan_candidate(word: str) -> bool:
+    """True if `word` should never end a wrapped line (case-insensitive)."""
+    stripped = word.strip(".,;:!?\"'`-")
+    return stripped.lower() in _NO_ORPHAN_LEADING_WORDS
+
+
+def _is_ascii_dominant(text: str) -> bool:
+    """Heuristic — only apply orphan-prevention to ASCII-dominant text (English-shaped)."""
+    if not text:
+        return False
+    ascii_count = sum(1 for ch in text if ord(ch) < 128)
+    return ascii_count / max(1, len(text)) >= 0.85
+
+
+def _has_orphan_line(lines: list[str], text: str) -> bool:
+    """True if any line ends with an orphan-candidate. CJK skipped (heuristic)."""
+    if not _is_ascii_dominant(text):
+        return False
+    for ln in lines[:-1]:  # last line cannot orphan into "next" line
+        tokens = ln.split()
+        if tokens and _is_orphan_candidate(tokens[-1]):
+            return True
+    return False
+
+
 def _wrap_to_width(draw: ImageDraw.ImageDraw, text: str,
                    font: ImageFont.FreeTypeFont,
                    tracking_px: int, max_width: int) -> list[str]:
-    """Greedy wrap on whitespace. Unsplittable words remain whole."""
+    """Greedy wrap on whitespace, then orphan-prevention pass.
+
+    Stage 1: greedy whitespace wrap (unsplittable words remain whole).
+    Stage 2: if the input is ASCII-dominant English, walk the line breaks and
+             pull a trailing orphan-candidate ("The", "Of", "No" …) down to
+             the next line so titles don't ship with dangling articles.
+             Skip stage 2 entirely if pulling the orphan would push the next
+             line above max_width — when geometry can't satisfy semantics,
+             geometry wins (we'd rather render with a small typographic ick
+             than overflow the title box). The TYPOGRAPHY FITTER calls
+             `_has_orphan_line` to detect this case and shrink the font so
+             a future call to `_wrap_to_width` succeeds at the smaller size.
+
+    If a single word exceeds max_width we still emit it as its own line —
+    typography fitter (`_fit_font_to_box`) is responsible for shrinking the
+    font in that case.
+    """
     words = text.split()
     if not words:
         return [""]
@@ -343,7 +404,35 @@ def _wrap_to_width(draw: ImageDraw.ImageDraw, text: str,
             current = [word]
     if current:
         lines.append(" ".join(current))
-    return lines
+
+    if not _is_ascii_dominant(text) or len(lines) < 2:
+        return lines
+
+    # Orphan-prevention pass: if line N ends with an orphan-candidate and
+    # appending it to line N+1 doesn't overflow, move it down. This pulls
+    # the orphan even if the source line is left empty (an empty line is
+    # filtered out below — that's fine; the result is one fewer line, which
+    # is what the typography fitter wants anyway).
+    fixed: list[str] = list(lines)
+    i = 0
+    safety = 0
+    max_iterations = max(20, len(fixed) * 4)
+    while i < len(fixed) - 1 and safety < max_iterations:
+        safety += 1
+        tokens = fixed[i].split()
+        if tokens and _is_orphan_candidate(tokens[-1]):
+            orphan = tokens[-1]
+            next_line = fixed[i + 1]
+            candidate_next = orphan + " " + next_line
+            w, _ = _measure_text(draw, candidate_next, font, tracking_px)
+            if w <= max_width:
+                fixed[i] = " ".join(tokens[:-1])  # may become empty — filtered below
+                fixed[i + 1] = candidate_next
+                # don't advance i — the new tail of fixed[i] might also be an orphan
+                continue
+        i += 1
+    # Drop any blank lines that orphan-pulling left behind
+    return [ln for ln in fixed if ln.strip()] or [""]
 
 
 def _fit_font_to_box(
@@ -356,26 +445,46 @@ def _fit_font_to_box(
     initial_size: int,
     min_size: int = 36,
 ) -> tuple[ImageFont.FreeTypeFont, list[str], int]:
-    """Shrink font until wrapped text fits in the bounding box."""
+    """Shrink font until wrapped text fits in the bounding box.
+
+    Two-pass strategy. Pass 1 prefers orphan-free wraps (no dangling articles,
+    prepositions, etc.); Pass 2 falls back to any wrap that fits, accepting an
+    orphan if the geometry forces it. This keeps "The Book of No" from rendering
+    as ['The', 'Book of No'] when a slightly smaller font lets it become
+    ['The Book of', 'No'] or ['The Book', 'of No'] cleanly.
+    """
     family = style.get("font_family", "serif")
     weight = style.get("font_weight", "regular")
     tracking_pct = style.get("tracking_pct", 0)
     measure_img = Image.new("RGB", (max(1, max_width), max(1, max_height)))
     measure_draw = ImageDraw.Draw(measure_img)
-    size = initial_size
-    while size >= min_size:
-        font = _load_font(family, size, weight, cfg)
-        tracking_px = int(round(size * tracking_pct / 100.0))
-        lines = _wrap_to_width(measure_draw, text, font, tracking_px, max_width)
-        line_h = int(size * 1.15)
-        total_h = line_h * len(lines)
-        widest = 0
-        for line in lines:
-            w, _ = _measure_text(measure_draw, line, font, tracking_px)
-            widest = max(widest, w)
-        if widest <= max_width and total_h <= max_height:
-            return font, lines, size
-        size -= 4
+
+    def _attempt(prefer_orphan_free: bool) -> tuple[ImageFont.FreeTypeFont, list[str], int] | None:
+        size = initial_size
+        while size >= min_size:
+            font = _load_font(family, size, weight, cfg)
+            tracking_px = int(round(size * tracking_pct / 100.0))
+            lines = _wrap_to_width(measure_draw, text, font, tracking_px, max_width)
+            line_h = int(size * 1.15)
+            total_h = line_h * len(lines)
+            widest = max(
+                (_measure_text(measure_draw, ln, font, tracking_px)[0] for ln in lines),
+                default=0,
+            )
+            geometry_ok = widest <= max_width and total_h <= max_height
+            if geometry_ok and (not prefer_orphan_free or not _has_orphan_line(lines, text)):
+                return font, lines, size
+            size -= 4
+        return None
+
+    # Pass 1 — prefer orphan-free
+    result = _attempt(prefer_orphan_free=True)
+    if result is not None:
+        return result
+    # Pass 2 — accept orphans if geometry can't be satisfied otherwise
+    result = _attempt(prefer_orphan_free=False)
+    if result is not None:
+        return result
     # Fallback at the floor; caller decides whether to error out.
     font = _load_font(family, min_size, weight, cfg)
     tracking_px = int(round(min_size * tracking_pct / 100.0))

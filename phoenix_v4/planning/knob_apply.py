@@ -216,7 +216,56 @@ class ShapedSpine:
     knob_audit: KnobAudit
 
 
-def load_spine(topic: str, repo_root: Optional[Path] = None) -> SelectedSpine:
+def _load_compact_chapter_subset(runtime_format: str, repo_root: Path) -> Optional[List[int]]:
+    """Read `compact_chapter_subset` from format_registry.yaml for a runtime format.
+
+    Returns the 1-based original-spine indices to keep, or None if the format
+    declares no subset (i.e., uses the full spine). Used by load_spine to
+    compress the topic spine for compact runtime formats per PR-G design
+    (P1 — format-spec-declared subset patterns).
+    """
+    if not runtime_format:
+        return None
+    registry_path = repo_root / "config" / "format_selection" / "format_registry.yaml"
+    if not registry_path.exists() or yaml is None:
+        return None
+    try:
+        data = yaml.safe_load(registry_path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return None
+    formats = data.get("runtime_formats") or data.get("formats") or {}
+    spec = formats.get(runtime_format) or {}
+    subset = spec.get("compact_chapter_subset")
+    if not isinstance(subset, list):
+        return None
+    return [int(n) for n in subset if isinstance(n, (int, float))]
+
+
+def load_spine(
+    topic: str,
+    repo_root: Optional[Path] = None,
+    runtime_format: Optional[str] = None,
+) -> SelectedSpine:
+    """Load a topic spine, optionally compressed for a compact runtime format.
+
+    For compact runtime formats (declared via `compact_chapter_subset` in
+    config/format_selection/format_registry.yaml), the returned spine contains
+    only the subsetted chapters, **renumbered 1..N**. The renumbering is
+    intentional: downstream code (e.g., enrichment_select._chapter_phase,
+    story_planner.DEFAULT_PHASE_CHAPTERS) computes phase boundaries assuming
+    contiguous 1..N chapter numbering. Original chapter numbers are preserved
+    in the format spec's `compact_chapter_subset` field for traceability.
+
+    For non-compact formats (or when runtime_format is None / lacks a subset
+    declaration), behavior is unchanged: full topic spine, original numbers.
+
+    Args:
+        topic: topic id (e.g., "anxiety")
+        repo_root: repo root path (default REPO_ROOT)
+        runtime_format: runtime format id (e.g., "compact_book_8ch_30min").
+            When this format declares `compact_chapter_subset`, the spine is
+            compressed accordingly.
+    """
     root = repo_root or REPO_ROOT
     path = _resolve_path(
         root,
@@ -252,6 +301,42 @@ def load_spine(topic: str, repo_root: Optional[Path] = None) -> SelectedSpine:
             )
         )
     chap_list.sort(key=lambda c: c.number)
+
+    # Apply compact-format chapter subset if declared (PR-G).
+    subset = _load_compact_chapter_subset(runtime_format or "", root)
+    if subset:
+        original_by_number = {c.number: c for c in chap_list}
+        kept: List[SpineChapter] = []
+        for new_idx, orig_num in enumerate(subset, start=1):
+            orig = original_by_number.get(int(orig_num))
+            if not orig:
+                # Subset declares an index that doesn't exist in the spine — skip.
+                # This should never happen if format_registry is correct; surfaced
+                # via test_compact_subset_validates_indices.
+                continue
+            # Rebuild the chapter with renumbered position. Field order matches
+            # SpineChapter dataclass definition (number first).
+            kept.append(
+                SpineChapter(
+                    number=new_idx,
+                    role=orig.role,
+                    working_title=orig.working_title,
+                    thesis=orig.thesis,
+                    emotional_job=orig.emotional_job,
+                    practical_job=orig.practical_job,
+                    what_changes=orig.what_changes,
+                    required_sections=list(orig.required_sections),
+                    forbidden_moves=list(orig.forbidden_moves),
+                    recommended_enrichments=list(orig.recommended_enrichments),
+                )
+            )
+        if not kept:
+            raise ValueError(
+                f"compact_chapter_subset for {runtime_format!r} produced empty spine; "
+                f"check that subset indices exist in {topic}_spine.yaml"
+            )
+        chap_list = kept
+
     seq = data.get("sequencing_rules") or {}
     seq = seq if isinstance(seq, dict) else {}
     tone = data.get("tone_and_pacing") or {}

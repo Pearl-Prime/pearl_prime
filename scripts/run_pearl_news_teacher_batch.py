@@ -269,7 +269,7 @@ def _build_item(
     return item
 
 
-def _render_article_payload(item: dict[str, Any]) -> dict[str, Any]:
+def _render_article_payload(item: dict[str, Any], *, layout: str = "default") -> dict[str, Any]:
     teacher = item.get("_teacher_resolved") or {}
     v52_input = {
         "slots": item["_v52_slots"],
@@ -278,6 +278,8 @@ def _render_article_payload(item: dict[str, Any]) -> dict[str, Any]:
         "sdg": item.get("primary_sdg", "3"),
         "template": item.get("template_id", "hard_news_spiritual_response"),
         "news_event": item.get("summary") or item.get("raw_summary") or "",
+        "layout": layout,
+        "language": item.get("language", "en"),
         "_deterministic_teacher_topic_pack": item.get("_deterministic_teacher_topic_pack"),
         "_deterministic_beat_map": item.get("_deterministic_beat_map"),
         "_deterministic_article_plan": item.get("_deterministic_article_plan"),
@@ -364,6 +366,17 @@ def main() -> int:
         "--teacher-set",
         default="",
         help="Process only teachers in this comma-separated list or named set (all=all active teachers)",
+    )
+    ap.add_argument(
+        "--layout",
+        default="default",
+        choices=("default", "scroll_story", "dock", "editorial", "wide"),
+        help=(
+            "Pearl News layout variant for v5.2 rendering. "
+            "default=right sidebar, dock=left sidebar, wide=bottom-strip sidebar, "
+            "editorial=wider canvas + right sidebar, scroll_story=no sidebar. "
+            "See docs/PEARL_NEWS_LAYOUT_SYSTEM_2026-05-04.md."
+        ),
     )
     args = ap.parse_args()
 
@@ -472,7 +485,7 @@ def main() -> int:
             item = apply_completed_contract(item, deterministic_plan, completed_contract)
             item["_slot_source"] = actual_slot_source
             item = run_quality_gates([item])[0]
-            payload = _render_article_payload(item)
+            payload = _render_article_payload(item, layout=args.layout)
             json_path = articles_dir / f"article_{teacher_id}_{topic}_{template_id}.json"
             html_path = html_dir / f"article_{teacher_id}_{topic}_{template_id}_v52.html"
             preview_content = payload.pop("_preview_content", payload["content"])

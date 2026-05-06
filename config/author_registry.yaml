@@ -37,6 +37,120 @@ authors:
     positioning_profile: elder_stabilizer
     assets_path: deli/mnt/user-data/outputs/diane_reyes
 
+  # ─── BRAND 1: stillness_press (teacher: ahjan) — 12 pen-name authors ───
+  # Source of truth: config/catalog_planning/teacher_brand_author_roster.yaml §01
+  # Voicing: Teacher Mode interpreter (per TEACHER_MODE_AUTHORING_PLAYBOOK.md §8.1)
+  # Each author writes books drawing on Ahjan's contemplative-Buddhism teaching;
+  # bios drafted in roster, status: draft until per-author 4-asset bundle is approved.
+
+  lena_thorne:
+    pen_name: "Lena Thorne"
+    brand_id: stillness_press
+    persona_ids: [millennial_women_professionals, healthcare_rns]
+    topic_ids: [anxiety, sleep_anxiety]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/lena_thorne
+    status: draft
+
+  daniel_voss:
+    pen_name: "Daniel Voss"
+    brand_id: stillness_press
+    persona_ids: [tech_finance_burnout, corporate_managers]
+    topic_ids: [burnout, imposter_syndrome]
+    positioning_profile: research_guide
+    assets_path: assets/authors/daniel_voss
+    status: draft
+
+  mira_santos:
+    pen_name: "Mira Santos"
+    brand_id: stillness_press
+    persona_ids: [gen_x_sandwich, working_parents]
+    topic_ids: [grief, self_worth]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/mira_santos
+    status: draft
+
+  kai_okafor:
+    pen_name: "Kai Okafor"
+    brand_id: stillness_press
+    persona_ids: [gen_z_professionals, gen_alpha_students]
+    topic_ids: [social_anxiety, overthinking]
+    positioning_profile: research_guide
+    assets_path: assets/authors/kai_okafor
+    status: draft
+
+  ruth_alder:
+    pen_name: "Ruth Alder"
+    brand_id: stillness_press
+    persona_ids: [healthcare_rns, first_responders]
+    topic_ids: [boundaries, compassion_fatigue]
+    positioning_profile: elder_stabilizer
+    assets_path: assets/authors/ruth_alder
+    status: draft
+
+  sam_meridian:
+    pen_name: "Sam Meridian"
+    brand_id: stillness_press
+    persona_ids: [entrepreneurs, millennial_women_professionals]
+    topic_ids: [somatic_healing, depression]
+    positioning_profile: research_guide
+    assets_path: assets/authors/sam_meridian
+    status: draft
+
+  noor_ibrahim:
+    pen_name: "Noor Ibrahim"
+    brand_id: stillness_press
+    persona_ids: [entrepreneurs, gen_x_sandwich]
+    topic_ids: [courage, financial_anxiety]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/noor_ibrahim
+    status: draft
+
+  tara_woodfield:
+    pen_name: "Tara Woodfield"
+    brand_id: stillness_press
+    persona_ids: [gen_x_sandwich, working_parents]
+    topic_ids: [boundaries, burnout]
+    positioning_profile: elder_stabilizer
+    assets_path: assets/authors/tara_woodfield
+    status: draft
+
+  rowan_beck:
+    pen_name: "Rowan Beck"
+    brand_id: stillness_press
+    persona_ids: [tech_finance_burnout, millennial_women_professionals]
+    topic_ids: [anxiety, overthinking]
+    positioning_profile: research_guide
+    assets_path: assets/authors/rowan_beck
+    status: draft
+
+  mae_rivers:
+    pen_name: "Mae Rivers"
+    brand_id: stillness_press
+    persona_ids: [healthcare_rns, first_responders]
+    topic_ids: [grief, compassion_fatigue]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/mae_rivers
+    status: draft
+
+  silas_grant:
+    pen_name: "Silas Grant"
+    brand_id: stillness_press
+    persona_ids: [entrepreneurs, gen_x_sandwich]
+    topic_ids: [self_worth, depression]
+    positioning_profile: elder_stabilizer
+    assets_path: assets/authors/silas_grant
+    status: draft
+
+  iris_tam:
+    pen_name: "Iris Tam"
+    brand_id: stillness_press
+    persona_ids: [millennial_women_professionals, working_parents]
+    topic_ids: [somatic_healing, sleep_anxiety]
+    positioning_profile: somatic_companion
+    assets_path: assets/authors/iris_tam
+    status: draft
+
 # Resolution rule (Option B): Author registry is for pre-intro/asset resolution only.
 # Atoms remain persona/topic keyed. No author_id on atoms; no author-scoped atom pool.
 # When --author is set: use this registry only to resolve bio, why_this_book, authority_position,

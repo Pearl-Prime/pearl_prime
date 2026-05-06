@@ -14,6 +14,16 @@ from phoenix_v4.planning.chapter_plan import ChapterPlan, PlanValidationError, v
 
 # ---------------------------------------------------------------------------
 # Format → chapter count defaults (BSG-011 / ACT-011)
+#
+# NOTE: this dict is the auto-plan path's source of truth. The format-selector
+# path at phoenix_v4/planning/format_selector.py:153 reads `chapter_count_default`
+# directly from config/format_selection/format_registry.yaml. Both paths must
+# agree. When adding a new runtime format, update BOTH:
+#   1. config/format_selection/format_registry.yaml (chapter_count_default)
+#   2. this dict (FORMAT_CHAPTER_COUNTS)
+# Eliminating the duplication (have book_structure_plan read from registry)
+# is tracked as a follow-up refactor; surfaced by PR #858 smoke-verification
+# diagnosis on 2026-05-04.
 # ---------------------------------------------------------------------------
 FORMAT_CHAPTER_COUNTS: dict[str, int] = {
     "micro_book_15": 5,
@@ -33,6 +43,11 @@ FORMAT_CHAPTER_COUNTS: dict[str, int] = {
     "extended_book_2h": 14,
     "deep_book_4h": 16,
     "deep_book_6h": 20,
+    # Compact runtime formats (declared in PR #856 format_registry.yaml,
+    # wired into auto-plan here per PR #858 smoke diagnosis).
+    "compact_book_5ch_15min": 5,
+    "compact_book_5ch_20min": 5,
+    "compact_book_8ch_30min": 8,
 }
 
 

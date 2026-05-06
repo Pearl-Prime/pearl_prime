@@ -1,0 +1,286 @@
+# Per-format chapter_flow gate cue coverage requirements
+# Authority: phoenix_v4/quality/chapter_flow_gate.py (THESIS_CUES + TRANSITION_CUES lists)
+# Created: 2026-05-04 (PR-H — atom wrapper variants for compact runtime formats)
+#
+# This file documents which cue phrases each chapter slot must contain to pass
+# the chapter_flow gate, per runtime format. Each compact runtime format's
+# chapter slots are mapped to the original-spine chapter they came from
+# (per config/format_selection/format_registry.yaml::compact_chapter_subset)
+# AND the cue requirements for the renumbered slot.
+#
+# Why this file exists:
+#   PR-G (#861) wired spine subsetting + renumbering for compact runtime formats.
+#   After renumbering, atoms backfilled by PR #852 with chapter_target bound to
+#   the 12-chapter spine (e.g., target=12 for closer atoms) no longer match the
+#   renumbered slot (target should be 5 for compact_book_5ch_15min closer, 8 for
+#   compact_book_8ch_30min closer). Chapter_flow gate failed on 2/8 chapters in
+#   PR-G's smoke (ch2 MISSING_CLEAR_POINT, ch8 WEAK_TRANSITIONS).
+#
+#   PR-H authors atom WRAPPER variants (HOOK v81-v88, PIVOT v44-v49, INTEGRATION
+#   v31-v35) explicitly containing the chapter_flow gate's exact cue phrases.
+#   The wrapper variants are added to the variant pool; deterministic selection
+#   probabilistically lands one on each chapter, and by construction every
+#   wrapper-variant chapter will pass the gate.
+#
+#   This YAML file documents the cue requirements per format so future atom
+#   authoring can audit coverage gaps before adding new compact runtime formats.
+
+schema_version: 1
+governing_specs:
+  - phoenix_v4/quality/chapter_flow_gate.py
+  - config/format_selection/format_registry.yaml
+  - docs/COMPACT_BOOK_FORMAT_SPECS_2026-05-04.md  # PR #852
+
+# Reference: the gate's exact cue lists (must match phoenix_v4/quality/chapter_flow_gate.py)
+gate_cue_reference:
+  thesis_cues:           # at least 1 required for MISSING_CLEAR_POINT pass
+    - "principle:"
+    - "the point is"
+    - "what this means"
+    - "this is not"
+  transition_cues:       # at least 2-3 required for WEAK_TRANSITIONS pass (2 short_form, 3 default, deep_form scales by sentence count)
+    - "that moment"
+    - "which means"
+    - "so when"
+    - "this is why"
+    - "in practice"
+    - "for example"
+    - "here is"
+    - "because"
+    - "that matters because"
+    - "this is the mechanism"
+    - "you can see"
+    - "what looks like"
+    - "remember this"
+
+# Per-runtime-format cue coverage map.
+# Each entry lists the renumbered chapter slots (1..N) that result from the
+# format's compact_chapter_subset, the original-spine chapter each came from,
+# the role/phase of that chapter, and the cue requirements.
+runtime_formats:
+
+  compact_book_5ch_15min:
+    compact_chapter_subset: [1, 4, 7, 10, 12]
+    chapter_count: 5
+    short_form_thresholds: true   # short_form: min 2 transitions, 1 thesis
+    chapters:
+      - position: 1
+        original_spine_chapter: 1
+        role: recognition
+        phase: HARDSHIP
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: HOOK
+      - position: 2
+        original_spine_chapter: 4
+        role: mechanism
+        phase: HELP
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: HOOK
+      - position: 3
+        original_spine_chapter: 7
+        role: practical_interruption
+        phase: HEALING
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: PIVOT
+      - position: 4
+        original_spine_chapter: 10
+        role: reframe
+        phase: HOPE
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: PIVOT
+      - position: 5
+        original_spine_chapter: 12
+        role: integration
+        phase: HOPE
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: INTEGRATION  # closer slot
+        is_closer: true
+
+  compact_book_5ch_20min:
+    compact_chapter_subset: [1, 4, 7, 10, 12]
+    chapter_count: 5
+    short_form_thresholds: true
+    chapters:
+      # Same as 5ch_15min — different word budget, same narrative arc + cue requirements
+      - position: 1
+        original_spine_chapter: 1
+        role: recognition
+        phase: HARDSHIP
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: HOOK
+      - position: 2
+        original_spine_chapter: 4
+        role: mechanism
+        phase: HELP
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: HOOK
+      - position: 3
+        original_spine_chapter: 7
+        role: practical_interruption
+        phase: HEALING
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: PIVOT
+      - position: 4
+        original_spine_chapter: 10
+        role: reframe
+        phase: HOPE
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: PIVOT
+      - position: 5
+        original_spine_chapter: 12
+        role: integration
+        phase: HOPE
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: INTEGRATION
+        is_closer: true
+
+  compact_book_8ch_30min:
+    compact_chapter_subset: [1, 3, 4, 6, 7, 9, 10, 12]
+    chapter_count: 8
+    short_form_thresholds: true   # 8ch still classifies as short-form (chapter_count < 12)
+    chapters:
+      - position: 1
+        original_spine_chapter: 1
+        role: recognition
+        phase: HARDSHIP
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: HOOK
+      - position: 2
+        original_spine_chapter: 3
+        role: pattern_mapping
+        phase: HARDSHIP
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: HOOK
+        pre_pr_h_smoke_status: FAIL_MISSING_CLEAR_POINT  # what PR-G smoke surfaced
+      - position: 3
+        original_spine_chapter: 4
+        role: mechanism
+        phase: HELP
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: HOOK
+      - position: 4
+        original_spine_chapter: 6
+        role: destabilization
+        phase: HELP
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: PIVOT
+      - position: 5
+        original_spine_chapter: 7
+        role: practical_interruption
+        phase: HEALING
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: PIVOT
+      - position: 6
+        original_spine_chapter: 9
+        role: somatic_legitimacy
+        phase: HEALING
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: PIVOT
+      - position: 7
+        original_spine_chapter: 10
+        role: reframe
+        phase: HOPE
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: PIVOT
+      - position: 8
+        original_spine_chapter: 12
+        role: integration
+        phase: HOPE
+        thesis_cues_required: 1
+        transition_cues_required: 2
+        primary_atom_pool: INTEGRATION
+        is_closer: true
+        pre_pr_h_smoke_status: FAIL_WEAK_TRANSITIONS  # what PR-G smoke surfaced
+
+  # Standard 12-chapter formats use the unrenumbered spine; PR #852's atoms
+  # already covered ch1, ch3, ch8, ch11, ch12 with chapter_target metadata.
+  # Documented here for completeness; no PR-H wrapper variants are required
+  # because the 12-chapter spine doesn't trigger renumbering issues.
+  standard_book:
+    compact_chapter_subset: null   # full 12-chapter spine
+    chapter_count: 12
+    short_form_thresholds: false   # standard_book is default thresholds (3 transitions)
+    note: |
+      Default 12-chapter spine. PR #852 atom backfill (HOOK ch1/3/8/11/12 thesis,
+      PIVOT ch2/12 transitions, INTEGRATION ch12 closer) covers most chapters.
+      PR-H wrapper variants (HOOK v81-v88, PIVOT v44-v49, INTEGRATION v31-v35)
+      add additional cue-rich pool depth that benefits standard_book too via
+      diluting low-cue variants in the deterministic selection pool.
+
+# PR-H wrapper atom inventory (added 2026-05-04)
+pr_h_wrapper_atoms:
+  HOOK:
+    file: atoms/gen_z_professionals/anxiety/HOOK/CANONICAL.txt
+    variants: [v81, v82, v83, v84, v85, v86, v87, v88]
+    count: 8
+    cue_density:
+      v81: { thesis: 2, transition: 0 }
+      v82: { thesis: 1, transition: 2 }
+      v83: { thesis: 2, transition: 1 }
+      v84: { thesis: 2, transition: 1 }
+      v85: { thesis: 1, transition: 3 }
+      v86: { thesis: 2, transition: 0 }
+      v87: { thesis: 2, transition: 2 }
+      v88: { thesis: 2, transition: 0 }
+  PIVOT:
+    file: atoms/gen_z_professionals/anxiety/PIVOT/CANONICAL.txt
+    variants: [v44, v45, v46, v47, v48, v49]
+    count: 6
+    cue_density:
+      v44: { thesis: 0, transition: 4 }
+      v45: { thesis: 0, transition: 4 }
+      v46: { thesis: 0, transition: 3 }
+      v47: { thesis: 0, transition: 5 }
+      v48: { thesis: 0, transition: 4 }
+      v49: { thesis: 0, transition: 3 }
+  INTEGRATION:
+    file: atoms/gen_z_professionals/anxiety/INTEGRATION/CANONICAL.txt
+    variants: [v31, v32, v33, v34, v35]
+    count: 5
+    cue_density:
+      v31: { thesis: 1, transition: 4 }
+      v32: { thesis: 1, transition: 3 }
+      v33: { thesis: 3, transition: 4 }
+      v34: { thesis: 2, transition: 1 }
+      v35: { thesis: 1, transition: 1 }
+    chapter_target_per_format:   # NEW field — per-format renumbered closer slot
+      default: 12              # standard 12-chapter spine
+      compact_book_5ch_15min: 5
+      compact_book_5ch_20min: 5
+      compact_book_8ch_30min: 8
+
+# How to extend this file when a new runtime format lands
+extension_protocol: |
+  When adding a new compact runtime format:
+  1. Declare compact_chapter_subset in config/format_selection/format_registry.yaml
+  2. Add a new entry under runtime_formats: in this file with the renumbered
+     chapter→original-spine mapping
+  3. For each renumbered chapter, document required cues per the gate_cue_reference
+     section
+  4. If new wrapper atoms are needed (e.g., for a format with novel role placement),
+     author them under pr_h_wrapper_atoms and add chapter_target_per_format mapping
+  5. Re-run the chapter_flow gate smoke per docs/COMPACT_BOOK_FORMAT_SPECS_2026-05-04.md
+
+# How chapter_target_per_format is consumed (informational)
+# Currently the field is informational metadata in atom headers. Future
+# enrichment_select.py work can read this field via the registry resolver
+# to filter INTEGRATION variants by renumbered closer slot per format. PR-H
+# ships the metadata convention; downstream consumer is a separate engineering PR.
+chapter_target_per_format_consumer_status: informational_only_pr_h

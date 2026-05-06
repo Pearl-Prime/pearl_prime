@@ -367,3 +367,121 @@ def test_cli_three_topics_smoke():
         total = sum(ch.target_word_count for ch in shaped.chapters)
         assert len(shaped.chapters) == 12
         assert 9000 <= total <= 13000
+
+
+
+# ---------------------------------------------------------------------------
+# Compact-format spine subset (PR-G)
+# ---------------------------------------------------------------------------
+# Compact runtime formats declare `compact_chapter_subset` in
+# config/format_selection/format_registry.yaml. When load_spine is called with
+# such a runtime_format, it returns a subsetted spine renumbered 1..N. These
+# tests pin the contract that smoke-verification confirmed in PR-G.
+
+def test_load_spine_compact_8ch_30min_subsets_to_8():
+    """compact_book_8ch_30min must produce an 8-chapter spine."""
+    s = load_spine("anxiety", runtime_format="compact_book_8ch_30min")
+    assert len(s.chapters) == 8, (
+        f"compact_book_8ch_30min should yield 8 chapters, got {len(s.chapters)}"
+    )
+
+
+def test_load_spine_compact_5ch_15min_subsets_to_5():
+    """compact_book_5ch_15min must produce a 5-chapter spine."""
+    s = load_spine("anxiety", runtime_format="compact_book_5ch_15min")
+    assert len(s.chapters) == 5
+
+
+def test_load_spine_compact_5ch_20min_subsets_to_5():
+    """compact_book_5ch_20min must produce a 5-chapter spine."""
+    s = load_spine("anxiety", runtime_format="compact_book_5ch_20min")
+    assert len(s.chapters) == 5
+
+
+def test_load_spine_compact_chapters_renumbered_to_1_through_n():
+    """Subsetted chapters MUST be renumbered 1..N for downstream phase mapping.
+
+    enrichment_select._chapter_phase computes phase boundaries assuming
+    contiguous chapter_number 1..chapter_count. If we returned original
+    spine numbers (e.g. [1,3,4,6,7,9,10,12]), phase boundaries would
+    miscompute and chapters 6/7/9 would land in HOPE instead of HELP/HEALING.
+    """
+    s8 = load_spine("anxiety", runtime_format="compact_book_8ch_30min")
+    assert [c.number for c in s8.chapters] == [1, 2, 3, 4, 5, 6, 7, 8]
+
+    s5 = load_spine("anxiety", runtime_format="compact_book_5ch_15min")
+    assert [c.number for c in s5.chapters] == [1, 2, 3, 4, 5]
+
+
+def test_load_spine_compact_preserves_role_semantics():
+    """Subset must keep the four narrative phases represented + closer.
+
+    Default subsets per format_registry.yaml:
+      8ch: [1, 3, 4, 6, 7, 9, 10, 12]  (recognition, pattern_mapping, mechanism,
+                                        destabilization, practical_interruption,
+                                        somatic_legitimacy, reframe, integration)
+      5ch: [1, 4, 7, 10, 12]            (recognition, mechanism,
+                                         practical_interruption, reframe,
+                                         integration)
+    Closer (integration, original ch12) MUST be present in both — without it the
+    book has no resolution chapter and ending_contract gates fail.
+    """
+    s8 = load_spine("anxiety", runtime_format="compact_book_8ch_30min")
+    roles8 = [c.role for c in s8.chapters]
+    assert "recognition" in roles8, "8ch subset missing recognition (HARDSHIP)"
+    assert "mechanism" in roles8, "8ch subset missing mechanism (HELP)"
+    assert "practical_interruption" in roles8, "8ch subset missing practical_interruption (HEALING)"
+    assert "integration" in roles8, "8ch subset missing integration (closer/HOPE)"
+    # Verify integration is the LAST chapter (closer position)
+    assert s8.chapters[-1].role == "integration", (
+        "integration must be the final chapter of compact subsets"
+    )
+
+    s5 = load_spine("anxiety", runtime_format="compact_book_5ch_15min")
+    roles5 = [c.role for c in s5.chapters]
+    assert "recognition" in roles5
+    assert "mechanism" in roles5
+    assert "practical_interruption" in roles5
+    assert "integration" in roles5
+    assert s5.chapters[-1].role == "integration"
+
+
+def test_load_spine_no_runtime_format_returns_full_spine():
+    """Backward-compat: load_spine with no runtime_format returns the full 12-chapter spine."""
+    s = load_spine("anxiety")
+    assert len(s.chapters) == 12
+    s_explicit = load_spine("anxiety", runtime_format=None)
+    assert len(s_explicit.chapters) == 12
+
+
+def test_load_spine_non_compact_format_returns_full_spine():
+    """Non-compact runtime formats (no compact_chapter_subset declared) return full spine."""
+    s = load_spine("anxiety", runtime_format="standard_book")
+    assert len(s.chapters) == 12
+    s_micro = load_spine("anxiety", runtime_format="micro_book_15")
+    assert len(s_micro.chapters) == 12  # micro_book_15 has no subset declaration
+
+
+def test_apply_knobs_on_compact_spine_validates_clean():
+    """apply_knobs against a compact-subsetted spine must validate cleanly.
+
+    The validate_shaped_spine check `len(shaped.chapters) != len(original.chapters)`
+    correctly compares against the (already-subsetted) spine passed in, so
+    the chapter_count_mismatch violation does NOT fire for compact runs.
+    """
+    spine = load_spine("anxiety", runtime_format="compact_book_8ch_30min")
+    knobs = load_knob_profile("anxiety")
+    shaped = apply_knobs(
+        spine, knobs, runtime_format="compact_book_8ch_30min"
+    )
+    assert len(shaped.chapters) == 8
+    violations = validate_shaped_spine(shaped, spine, knobs)
+    # Word range may flag depending on tuning; the critical assertion is no
+    # chapter_count_mismatch / chapter_order_changed / role_mutated violations
+    blocking = [v for v in violations if any(
+        s in v for s in ("chapter_count_mismatch", "chapter_order_changed",
+                         "role_mutated", "thesis_mutated", "missing_original_chapter")
+    )]
+    assert blocking == [], (
+        f"unexpected blocking violations on compact spine: {blocking}"
+    )

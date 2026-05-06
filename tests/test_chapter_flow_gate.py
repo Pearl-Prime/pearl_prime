@@ -173,3 +173,43 @@ Notice your breath. Exhale once. Write one line.
     assert "GENERIC_SCENE_FALLBACK" in result.errors
     assert "ANNOUNCED_THREAD" in result.errors
     assert any(w.startswith("SCAFFOLD_RISK:") for w in result.warnings)
+
+
+def test_compact_runtime_formats_classified_short_form():
+    """PR-H 2026-05-04: compact runtime formats must be short-form for transition cue threshold.
+
+    Compact formats (5/5/8 chapters, 3000-7500 words) are short-form by character.
+    Without this classification, they fall to the "standard" profile requiring 3
+    transition cues per chapter, which is too strict for compact-pacing prose.
+    PR-G smoke surfaced ch8 of compact_book_8ch_30min failing WEAK_TRANSITIONS at
+    2 cue hits when standard threshold of 3 was applied.
+    """
+    from phoenix_v4.quality.chapter_flow_gate import (
+        flow_profile_for_runtime_format,
+        SHORT_FORM_RUNTIME_FORMAT_IDS,
+    )
+    for fmt in (
+        "compact_book_5ch_15min",
+        "compact_book_5ch_20min",
+        "compact_book_8ch_30min",
+    ):
+        assert fmt in SHORT_FORM_RUNTIME_FORMAT_IDS, (
+            f"compact format {fmt!r} must be in SHORT_FORM_RUNTIME_FORMAT_IDS"
+        )
+        assert flow_profile_for_runtime_format(fmt) == "short_form", (
+            f"compact format {fmt!r} must classify as short_form"
+        )
+
+
+def test_existing_short_form_formats_still_short_form():
+    """Regression: don't break existing short-form classification."""
+    from phoenix_v4.quality.chapter_flow_gate import flow_profile_for_runtime_format
+    for fmt in ("micro_book_15", "micro_book_20", "short_book_30"):
+        assert flow_profile_for_runtime_format(fmt) == "short_form"
+
+
+def test_standard_book_unchanged():
+    """Regression: standard_book is still standard, not short_form."""
+    from phoenix_v4.quality.chapter_flow_gate import flow_profile_for_runtime_format
+    assert flow_profile_for_runtime_format("standard_book") == "standard"
+    assert flow_profile_for_runtime_format("deep_book_4h") == "deep_form"

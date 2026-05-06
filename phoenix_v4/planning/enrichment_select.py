@@ -517,7 +517,15 @@ def _max_extra_chunks_for_format(runtime_format: str, slot_target_words: int) ->
     tw = max(0, int(slot_target_words or 0))
     if rf in ("micro_book_15", "micro_book_20"):
         base = 0
+    elif rf in ("compact_book_5ch_15min", "compact_book_5ch_20min"):
+        # 5 chapters → larger per-chapter share than micro_book_*; allow
+        # one extra chunk per slot to fill the higher per-section budget.
+        base = 1
     elif rf == "short_book_30":
+        base = 1
+    elif rf == "compact_book_8ch_30min":
+        # 8 chapters at the same word band as short_book_30 (7 chapters);
+        # per-chapter share is similar, so match short_book_30's budget.
         base = 1
     elif rf == "standard_book":
         base = 3

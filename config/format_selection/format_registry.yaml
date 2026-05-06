@@ -135,3 +135,41 @@ runtime_formats:
     word_range: [50000, 65000]
     compatible_tiers: [A]
     compatible_structural_formats: [F013]
+
+  # Compact runtimes — purpose-built for short word bands with FEWER chapters
+  # than the default short runtimes (which assume a 12-chapter spine compressed
+  # into a small budget). Authority: docs/COMPACT_BOOK_FORMAT_SPECS_2026-05-04.md.
+  # Beat sheets compress the 4-phase narrative arc (HARDSHIP/HELP/HEALING/HOPE)
+  # into 5 or 8 chapters. Per-chapter word budget is larger than the
+  # equivalent-runtime micro/short formats because there are fewer chapters
+  # for the same word target.
+  compact_book_5ch_15min:
+    duration_minutes: 15
+    chapter_count_default: 5
+    word_range: [3000, 4500]
+    compatible_tiers: [A, B, C]
+    compatible_structural_formats: [F015, F003]
+    # Spine compression: which chapters of the standard 12-chapter topic spine to keep.
+    # 1-based original-spine indices. Picks one chapter per phase (HARDSHIP/HELP/HEALING/HOPE)
+    # plus the closer (12=integration). After subset, chapters are renumbered 1..N for
+    # downstream phase-mapping logic in _chapter_phase / story_planner.
+    compact_chapter_subset: [1, 4, 7, 10, 12]
+  compact_book_5ch_20min:
+    duration_minutes: 20
+    chapter_count_default: 5
+    word_range: [4000, 5500]
+    compatible_tiers: [A, B, C]
+    compatible_structural_formats: [F015, F003]
+    # Same spine compression as 5ch_15min — same narrative arc, more words per chapter.
+    compact_chapter_subset: [1, 4, 7, 10, 12]
+  compact_book_8ch_30min:
+    duration_minutes: 30
+    chapter_count_default: 8
+    word_range: [5500, 7500]
+    compatible_tiers: [A, B, C]
+    compatible_structural_formats: [F003, F006, F007, F011]
+    # Spine compression: 2 chapters per phase + closer. Drops origin (ch2),
+    # cost_exposure (ch5), practice_under_pressure (ch8), identity_fracture (ch11)
+    # — the chapters whose narrative role is most-overlapping with their phase peers.
+    # Renumbered 1..8 after subset.
+    compact_chapter_subset: [1, 3, 4, 6, 7, 9, 10, 12]

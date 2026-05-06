@@ -1,7 +1,50 @@
 # Pearl_PM State
 
-Last verified: 2026-04-27
+Last verified: 2026-05-05
 Owner: Pearl_PM
+
+## Pearl_PM 2026-05-04 finish-out session
+
+This entry records the multi-handoff coordination session held 2026-05-04 → 2026-05-05.
+
+**Merges landed (8):**
+- #874 (`38af30e9e5`) — session handoff doc
+- #850 (`4b198508ce`) — Pearl News slot/teacher fix
+- #853 (`8070e81fd8`) — Pearl News 5-layout system
+- #855 (`3aaadadb14`) — Cover D1 immediate fixes (test fix landed in this session)
+- #858 (`f052d38d5e`) — bestseller smoke + auto-plan format wiring (W1+W2+W4)
+
+**PRs opened, NOT merged (4):**
+- #875 — persistence: Phoenix Omega audit handoff doc
+- #876 — persistence: Pearl Star image pipeline handoff doc
+- #877 — persistence: PR-D format wires handoff doc
+- #880 — Pearl Star image-gen canonical bundle (47 files, 35 deletions; excludes `config/authoring/author_cover_art_registry.yaml` per Q-B routing)
+
+**PRs blocked (3):**
+- #857 — Cover Phase 1 (CI green; awaiting operator GitHub APPROVE)
+- #865 — brand-1 phase 1 (CI fails: Writer Spec §23.9 requires phase-2 author assets that live in #867 — combined-PR architectural choice required)
+- #867 — brand-1 phase 2 (CONFLICTING after #865 rebase; locked at sibling worktree; same combined-PR question)
+
+**New workstreams opened (10 + 3 persistence = 13):**
+- ws_persist_{phoenix_omega_audit,pearl_star_image,pr_d_format_wires}_handoff_20260504 (Pearl_GitHub, in_review)
+- ws_main_branch_protection_restore_20260505 (Pearl_DevOps, blocked-on-operator-go)
+- ws_master_catalog_plan_authoring_20260505 (Pearl_Architect, proposed)
+- ws_docs_index_refresh_20260505 (Pearl_GitHub, proposed)
+- ws_pr_d_spine_arch_pick_20260505 (Pearl_Architect, needs-decision)
+- ws_pr_d_wires_resume_20260505 (Pearl_Dev, blocked)
+- ws_pearl_star_brand1_cover_registry_routing_20260505 (Pearl_Architect, needs-decision)
+- ws_auto_plan_ssot_routing_20260505 (Pearl_Architect, needs-decision)
+- ws_bestseller_smoke_re_run_20260505 (Pearl_Dev, blocked)
+- ws_pr5_cover_phase_2_20260505 (Pearl_Dev, blocked-on-D-CV)
+- ws_brand1_phase1_phase2_combined_pr_routing_20260505 (Pearl_Architect, needs-decision)
+
+**Operator-gated decisions surfaced (8):**
+- D-PN-1, D-PN-2 (Pearl News publisher wiring + 14-slot re-QA)
+- D-CV-1..D-CV-4 (cover system)
+- P0: branch protection on main (ruleset 13451138 IS active but only requires `Verify governance`; review whether to extend)
+- ws_brand1_phase1_phase2_combined_pr_routing — combined-PR architectural choice
+
+
 
 ## Purpose
 
