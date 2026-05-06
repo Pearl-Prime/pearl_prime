@@ -3,9 +3,57 @@
 Last verified: 2026-05-05
 Owner: Pearl_PM
 
-## Pearl_PM 2026-05-04 finish-out session
+## Pearl_PM 2026-05-05 finalization (FINISH-OUT BLOCK COMPLETE)
 
-This entry records the multi-handoff coordination session held 2026-05-04 → 2026-05-05.
+This is the closeout of the multi-session 2026-05-04 → 2026-05-05 finish-out coordination block.
+Five agents participated: Pearl_PM (twice), Pearl_Architect, Pearl_Dev, Pearl_GitHub.
+
+**14 PRs landed to origin/main** (chronological by merge):
+- #874 `38af30e9e5` — session handoff doc
+- #850 `4b198508ce` — Pearl News slot/teacher fix
+- #853 `8070e81fd8` — Pearl News 5-layout system
+- #855 `3aaadadb14` — Cover D1 immediate fixes
+- #858 `f052d38d5e` — bestseller smoke + auto-plan W1+W2+W4 wiring
+- #884 `304f0c233e` — Pearl_Architect routing batch (5 cap entries: MASTER-CATALOG-01, PR-D-SPINE-01, COVER-REGISTRY-01, AUTO-PLAN-SSOT-01, BRAND1-COMBINED-PR-01)
+- #881 `87a66af6c3` — Pearl_PM 2026-05-04 coordination bookkeeping (13 ws rows)
+- #875 `6af1d0d456` — Phoenix Omega audit handoff persistence
+- #876 `2df0ebd98e` — Pearl Star image pipeline handoff persistence
+- #877 `fb6815201c` — PR-D format wires handoff persistence
+- #885 `13441bbc80` — PR-Alpha brand-1 author atomic (resolves Writer Spec §23.9)
+- #886 `0142d88337` — PR-Beta PR-D residual wiring (PR-D-SPINE-01 declarative-P3 + AUTO-PLAN-SSOT-01 stopgap)
+- #887 `cd56856d65` — PR-Gamma gen_z×anxiety atom backfill
+- #888 `3bf8937eb9` — DOCS_INDEX MASTER-CATALOG-01 routing note
+
+**5 Pearl_Architect cap entries live on origin/main** (canonical text in `docs/PEARL_ARCHITECT_STATE.md`):
+- MASTER-CATALOG-01 — closed-not-needed: route to existing per-axis canon (no master plan; Path X)
+- PR-D-SPINE-01 — declarative-P3 via `compact_chapter_subset` (shipped in PR-Beta #886)
+- COVER-REGISTRY-01 — coexist; book-pipeline retains `author_cover_art_registry.yaml`; manga has no registry
+- AUTO-PLAN-SSOT-01 — canonical chapter_count = `format_registry.yaml`; refactor scheduled (separate ws)
+- BRAND1-COMBINED-PR-01 — close #865/#867; split into PR-Alpha/Beta/Gamma
+
+**PRs closed superseded:** #865, #867 (replaced by the BRAND1-COMBINED PR-Alpha/Beta/Gamma trio).
+
+**11 ws rows closed completed; 2 new follow-up ws rows opened** (this finalization PR):
+- Closed: ws_brand1_phase1_phase2_combined_pr_routing_20260505, ws_pr_d_spine_arch_pick_20260505, ws_pearl_star_brand1_cover_registry_routing_20260505, ws_master_catalog_plan_authoring_20260505 (closed-not-needed), ws_auto_plan_ssot_routing_20260505, ws_persist_phoenix_omega_audit_handoff_20260504, ws_persist_pearl_star_image_handoff_20260504, ws_persist_pr_d_format_wires_handoff_20260504, ws_docs_index_refresh_20260505, ws_pr_d_wires_resume_20260505 (status: pending — ready to start)
+- Opened: `ws_auto_plan_ssot_refactor_20260505` (Pearl_Dev; AUTO-PLAN-SSOT-01 long-term refactor; ready); `ws_pearl_devops_tooling_maintenance_20260505` (Pearl_DevOps; pre_merge_check.sh + CLAUDE.md audit_llm_callers args + worktree-shared-inode artifacts; low priority)
+
+**Operator-gated items still pending** (not blocking forward agent work):
+- P0 — branch protection extension (ruleset 13451138 currently requires only `Verify governance`)
+- D-PN-1, D-PN-2 — Pearl News publisher wiring + 14-slot re-QA
+- D-CV-2, D-CV-3, D-CV-4 — Cover Phase 2+3 follow-on decisions
+- approve + merge #857 (Cover Phase 1)
+- separate-review + merge #880 (Pearl Star image bundle, amended with COVER-REGISTRY-01 spec edit)
+- merge this finalization PR (Pearl_PM 2026-05-05)
+
+**Next agent sessions ready** (no prereqs, can start immediately):
+- Pearl_Dev → `ws_auto_plan_ssot_refactor_20260505` (small refactor PR)
+- Pearl_Dev → `ws_pr_d_wires_resume_20260505` (re-run bestseller smoke; iteration cap = 2)
+
+---
+
+## Pearl_PM 2026-05-04 finish-out session (archived)
+
+The earlier finish-out session block follows; preserved for archaeology.
 
 **Merges landed (8):**
 - #874 (`38af30e9e5`) — session handoff doc
