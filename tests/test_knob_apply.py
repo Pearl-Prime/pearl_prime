@@ -56,7 +56,11 @@ def test_load_knob_profile_grief():
 def test_load_runtime_format_standard():
     spec = load_runtime_format("standard_book")
     assert spec["word_range"] == [9000, 13000]
-    assert spec["chapter_count_default"] == 12
+    # AUTO-PLAN-SSOT-01-AMENDMENT (2026-05-06) Group B ruling: standard_book
+    # chapter_count_default reconciled from 12 (registry pre-amendment) to 10
+    # (Python ACT-011/BSG-011 deliberate runtime value, preserved as the
+    # behavior-preserving choice). See docs/PEARL_ARCHITECT_STATE.md.
+    assert spec["chapter_count_default"] == 10
 
 
 def test_apply_knobs_anxiety_standard():

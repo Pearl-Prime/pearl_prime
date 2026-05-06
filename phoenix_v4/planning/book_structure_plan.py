@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -12,48 +13,55 @@ except ImportError:  # pragma: no cover
 
 from phoenix_v4.planning.chapter_plan import ChapterPlan, PlanValidationError, validate_chapter_plan
 
-# ---------------------------------------------------------------------------
-# Format → chapter count defaults (BSG-011 / ACT-011)
-#
-# NOTE: this dict is the auto-plan path's source of truth. The format-selector
-# path at phoenix_v4/planning/format_selector.py:153 reads `chapter_count_default`
-# directly from config/format_selection/format_registry.yaml. Both paths must
-# agree. When adding a new runtime format, update BOTH:
-#   1. config/format_selection/format_registry.yaml (chapter_count_default)
-#   2. this dict (FORMAT_CHAPTER_COUNTS)
-# Eliminating the duplication (have book_structure_plan read from registry)
-# is tracked as a follow-up refactor; surfaced by PR #858 smoke-verification
-# diagnosis on 2026-05-04.
-# ---------------------------------------------------------------------------
-FORMAT_CHAPTER_COUNTS: dict[str, int] = {
-    "micro_book_15": 5,
-    "micro_book_20": 6,
-    "five_min_practice": 5,
-    "pocket_guide": 6,
-    "ten_things_to_do": 8,
-    "short_book_30": 8,
-    "symptom_to_action_atlas": 8,
-    "daily_text_audio_companion": 10,
-    "crisis_cards": 6,
-    "weekly_challenge_pack": 8,
-    "faq_audiobook": 8,
-    "myth_vs_mechanism": 8,
-    "protocol_library": 10,
-    "standard_book": 10,
-    "extended_book_2h": 14,
-    "deep_book_4h": 16,
-    "deep_book_6h": 20,
-    # Compact runtime formats (declared in PR #856 format_registry.yaml,
-    # wired into auto-plan here per PR #858 smoke diagnosis).
-    "compact_book_5ch_15min": 5,
-    "compact_book_5ch_20min": 5,
-    "compact_book_8ch_30min": 8,
-}
-
-
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 PLANS_ROOT = REPO_ROOT / "config" / "plans"
 EI_V2_CONFIG = REPO_ROOT / "config" / "quality" / "ei_v2_config.yaml"
+FORMAT_REGISTRY_PATH = REPO_ROOT / "config" / "format_selection" / "format_registry.yaml"
+
+
+# Default chapter count when a runtime format is unknown to the registry.
+# Post-AUTO-PLAN-SSOT-01-AMENDMENT (2026-05-06) backfill, every format the
+# auto-plan path knows about has a registry entry; this fallback is a
+# last-resort guard for runtime formats that are referenced before being
+# declared.
+_FORMAT_CHAPTER_COUNT_FALLBACK = 10
+
+
+@lru_cache(maxsize=1)
+def _load_format_registry() -> dict[str, Any]:
+    """Read config/format_selection/format_registry.yaml once per process.
+
+    Cached via lru_cache so the auto-plan hot path (called many times per
+    pipeline run) doesn't re-parse the file. Tests that need to override
+    can call _load_format_registry.cache_clear().
+    """
+    if yaml is None or not FORMAT_REGISTRY_PATH.exists():
+        return {}
+    try:
+        return yaml.safe_load(FORMAT_REGISTRY_PATH.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return {}
+
+
+def get_format_chapter_count(runtime_format: str) -> int:
+    """Return chapter_count_default for `runtime_format` from the registry.
+
+    Single source of truth per AUTO-PLAN-SSOT-01 + AUTO-PLAN-SSOT-01-AMENDMENT
+    (`docs/PEARL_ARCHITECT_STATE.md`, 2026-05-06). Replaces the prior
+    `FORMAT_CHAPTER_COUNTS` Python constant which had drifted from the
+    registry on 16 of 20 formats. Falls back to
+    `_FORMAT_CHAPTER_COUNT_FALLBACK` (10) only for formats the registry
+    does not declare.
+    """
+    if not runtime_format:
+        return _FORMAT_CHAPTER_COUNT_FALLBACK
+    runtime_formats = _load_format_registry().get("runtime_formats") or {}
+    spec = runtime_formats.get(runtime_format) or {}
+    if isinstance(spec, dict):
+        cc = spec.get("chapter_count_default")
+        if isinstance(cc, int) and cc > 0:
+            return cc
+    return _FORMAT_CHAPTER_COUNT_FALLBACK
 
 RUNTIME_ALIASES = {
     "standard_book": "deep_book_6h",
@@ -508,7 +516,7 @@ def generate_book_plan(
     """
     from phoenix_v4.planning.chapter_planner import assign_bestseller_structures
 
-    n_chapters = chapter_count or FORMAT_CHAPTER_COUNTS.get(runtime_format, 10)
+    n_chapters = chapter_count or get_format_chapter_count(runtime_format)
     selector_key = seed or f"{topic_id}:{persona_id}:{runtime_format}"
     structures = assign_bestseller_structures(n_chapters, selector_key)
 

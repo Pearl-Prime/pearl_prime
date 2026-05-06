@@ -101,9 +101,13 @@ def test_generated_plan_custom_chapter_count():
 # ---------------------------------------------------------------------------
 # PR #856 declared compact_book_5ch_15min / 5ch_20min / 8ch_30min in
 # config/format_selection/format_registry.yaml but did not register them in
-# the auto-plan path's FORMAT_CHAPTER_COUNTS dict. PR #858 smoke surfaced this
-# as a 13-chapter render against an 8-chapter format declaration. These tests
-# regression-guard the compact-format auto-plan wiring.
+# the auto-plan path. PR #858 smoke surfaced this as a 13-chapter render
+# against an 8-chapter format declaration. These tests regression-guard the
+# compact-format auto-plan wiring.
+#
+# Post-AUTO-PLAN-SSOT-01-AMENDMENT (2026-05-06) refactor: chapter_count is
+# read from format_registry.yaml via get_format_chapter_count(); the prior
+# FORMAT_CHAPTER_COUNTS dict is removed.
 
 def test_compact_book_5ch_15min_chapter_count():
     """PR-E regression: compact_book_5ch_15min must auto-plan to exactly 5 chapters."""
@@ -143,8 +147,13 @@ def test_compact_book_8ch_30min_chapter_count():
 
 
 def test_format_chapter_counts_compact_entries_present():
-    """All three compact runtime formats must be registered in FORMAT_CHAPTER_COUNTS."""
-    from phoenix_v4.planning.book_structure_plan import FORMAT_CHAPTER_COUNTS
+    """All three compact runtime formats must resolve via get_format_chapter_count.
+
+    Post-AUTO-PLAN-SSOT-01-AMENDMENT: chapter_count is read from
+    config/format_selection/format_registry.yaml via the registry-aware
+    helper; FORMAT_CHAPTER_COUNTS dict no longer exists.
+    """
+    from phoenix_v4.planning.book_structure_plan import get_format_chapter_count
 
     expected = {
         "compact_book_5ch_15min": 5,
@@ -152,10 +161,41 @@ def test_format_chapter_counts_compact_entries_present():
         "compact_book_8ch_30min": 8,
     }
     for fmt, expected_count in expected.items():
-        assert fmt in FORMAT_CHAPTER_COUNTS, (
-            f"compact format {fmt!r} missing from FORMAT_CHAPTER_COUNTS"
+        actual = get_format_chapter_count(fmt)
+        assert actual == expected_count, (
+            f"get_format_chapter_count({fmt!r}) = {actual}, expected {expected_count}"
         )
-        assert FORMAT_CHAPTER_COUNTS[fmt] == expected_count, (
-            f"FORMAT_CHAPTER_COUNTS[{fmt!r}] = {FORMAT_CHAPTER_COUNTS[fmt]}, "
-            f"expected {expected_count}"
+
+
+def test_chapter_count_reads_from_registry_ssot():
+    """Pin the SSoT contract: get_format_chapter_count reads from registry.
+
+    Proves AUTO-PLAN-SSOT-01-AMENDMENT: editing format_registry.yaml's
+    chapter_count_default flows through to the auto-plan path without
+    touching book_structure_plan.py. The FORMAT_CHAPTER_COUNTS Python
+    constant is genuinely gone, not just renamed.
+    """
+    import phoenix_v4.planning.book_structure_plan as bsp
+
+    # No FORMAT_CHAPTER_COUNTS attribute on the module (constant removed).
+    assert not hasattr(bsp, "FORMAT_CHAPTER_COUNTS"), (
+        "FORMAT_CHAPTER_COUNTS should have been removed in the AUTO-PLAN-SSOT-01 refactor; "
+        "the registry is now the single source of truth"
+    )
+
+    # Monkeypatch the registry loader to return a known dict; verify
+    # get_format_chapter_count picks up the new value without code changes.
+    bsp._load_format_registry.cache_clear()
+    original_loader = bsp._load_format_registry
+    try:
+        bsp._load_format_registry = lambda: {
+            "runtime_formats": {
+                "synthetic_test_format": {"chapter_count_default": 42}
+            }
+        }
+        assert bsp.get_format_chapter_count("synthetic_test_format") == 42, (
+            "registry-driven lookup did not return the patched value; SSoT broken"
         )
+    finally:
+        bsp._load_format_registry = original_loader
+        bsp._load_format_registry.cache_clear()

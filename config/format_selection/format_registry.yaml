@@ -101,40 +101,70 @@ runtime_formats:
     compatible_structural_formats: [F015, F003]
   micro_book_20:
     duration_minutes: 20
-    chapter_count_default: 5
+    chapter_count_default: 6  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 5; Python value 6 preserved
     word_range: [3000, 5500]
     compatible_tiers: [A, B, C]
     compatible_structural_formats: [F015, F003]
   short_book_30:
     duration_minutes: 30
-    chapter_count_default: 7
+    chapter_count_default: 8  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 7; Python value 8 preserved
     word_range: [4500, 7500]
     compatible_tiers: [A, B, C]
     compatible_structural_formats: [F003, F006, F007, F011]
   standard_book:
     duration_minutes: 55
-    chapter_count_default: 12
+    chapter_count_default: 10  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 12; Python value 10 preserved (most consequential — default canonical book runtime)
     word_range: [9000, 13000]
     compatible_tiers: [A, B]
     compatible_structural_formats: [F006, F007, F010, F011, F014]
   extended_book_2h:
     duration_minutes: 120
-    chapter_count_default: 15
+    chapter_count_default: 14  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 15; Python value 14 preserved
     word_range: [17000, 25000]
     compatible_tiers: [A, B]
     compatible_structural_formats: [F004, F009, F010, F014]
   deep_book_4h:
     duration_minutes: 240
-    chapter_count_default: 20
+    chapter_count_default: 16  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 20; Python value 16 preserved
     word_range: [20000, 40000]
     compatible_tiers: [A]
     compatible_structural_formats: [F004, F009, F013]
   deep_book_6h:
     duration_minutes: 360
-    chapter_count_default: 24
+    chapter_count_default: 20  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 24; Python value 20 preserved
     word_range: [50000, 65000]
     compatible_tiers: [A]
     compatible_structural_formats: [F013]
+
+  # AUTO-PLAN-SSOT-01-AMENDMENT Group A backfill (10 formats):
+  # These formats existed only in phoenix_v4/planning/book_structure_plan.FORMAT_CHAPTER_COUNTS.
+  # Per amendment Action item 1, backfill `chapter_count_default` from Python.
+  # Other registry fields (duration_minutes, word_range, compatible_tiers,
+  # compatible_structural_formats) are intentionally absent — Python had only
+  # the chapter_count value and these formats are not consumed by format_selector
+  # (verified pre-refactor: 0 hits in format_selector.py / enrichment_select.py /
+  # knob_apply.py). Operator may extend these entries with the other fields when
+  # the formats become first-class runtime targets.
+  five_min_practice:
+    chapter_count_default: 5
+  pocket_guide:
+    chapter_count_default: 6
+  ten_things_to_do:
+    chapter_count_default: 8
+  symptom_to_action_atlas:
+    chapter_count_default: 8
+  daily_text_audio_companion:
+    chapter_count_default: 10
+  crisis_cards:
+    chapter_count_default: 6
+  weekly_challenge_pack:
+    chapter_count_default: 8
+  faq_audiobook:
+    chapter_count_default: 8
+  myth_vs_mechanism:
+    chapter_count_default: 8
+  protocol_library:
+    chapter_count_default: 10
 
   # Compact runtimes — purpose-built for short word bands with FEWER chapters
   # than the default short runtimes (which assume a 12-chapter spine compressed
