@@ -424,6 +424,18 @@ def resolve_book(
             overlay_id = None
 
             # Teacher overlay: doctrine, exercises, integration, pivot, permission, etc.
+            #
+            # First-match semantics per TEACHER-POOL-SEMANTICS-01 cap entry:
+            # The loop below picks the FIRST non-empty pool from the type-alias
+            # list and breaks. This is intentional and load-bearing — it makes
+            # render output deterministic given (seed, ch_key, sec_key) and
+            # preserves render-cache stability. Switching to union-pool semantics
+            # would change seed→atom mapping and require a regeneration pass on
+            # any cached/shipped books. Content gaps that surface in this code
+            # path (e.g., ahjan TEACHING atoms unreachable when COMPRESSION pool
+            # is non-empty) are routed to Pearl_Editor + Pearl_Writer content
+            # migration ws's (e.g., ws_ahjan_teaching_atoms_migration_20260506),
+            # not to a code-side semantics flip.
             if teacher_atoms and sec_type in _TEACHER_OVERLAY_TYPES:
                 atom_pool: list[dict] = []
                 for dir_name in _TEACHER_TYPE_MAP.get(sec_type, [sec_type]):

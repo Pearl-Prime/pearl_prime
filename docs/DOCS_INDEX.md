@@ -2255,3 +2255,31 @@ All `.md` files under `specs/` confirmed present on disk. Additional `.txt` and 
 | [scripts/check_golden_translation.py](../scripts/check_golden_translation.py) | Translation | ✓ — Stub: implement for golden_translation_regression.yaml check |
 | [scripts/native_prompts_eval_learn.py](../scripts/native_prompts_eval_learn.py) | Translation | ✓ — Stub: implement for native-speaker eval prompts and learn |
 # Locale parity report added
+
+---
+
+## Cap-Entry Routing Index (architecture authority)
+
+For architecture decisions, route to the relevant cap entry in
+[docs/PEARL_ARCHITECT_STATE.md](./PEARL_ARCHITECT_STATE.md). 13 cap entries
+ratified through 2026-05-06:
+
+| Cap entry | Subject |
+|---|---|
+| TEMPLATE-UNIVERSAL-01 | 12-spine × 10-section grid + 3-floor-with-5-optional variants |
+| BESTSELLER-INJECTIONS-MANDATORY-01 | profile-gated quality gates + grid-architectural STORY at sec 2/5/9 |
+| CATALOG-800-PER-BRAND-01 | ~800 system-wide high-confidence configs (target) |
+| PEARL-EDITOR-UPSTREAM-01 | Pearl_Editor authority-flow not runtime stage |
+| EXERCISE-BANK-RESOLUTION-01 | strict-canonical for production; raise on practice_library fall-through |
+| QUOTE-ATOM-ROUTING-01 | retire-as-orphan; Pearl_Editor migrates content |
+| TEACHER-POOL-SEMANTICS-01 | keep first-match; deterministic render-cache stability |
+| MUSIC-MODE-V1-01 | ride existing pipeline; Pearl_Editor owns musician_banks |
+| MASTER-CATALOG-01 | closed-not-needed; route Phase 5 to per-axis canon |
+| PR-D-SPINE-01 | declarative-P3 ratified |
+| COVER-REGISTRY-01 | coexist; book-pipeline-canonical |
+| AUTO-PLAN-SSOT-01 + AMENDMENT | chapter_count single source of truth = format_registry.yaml |
+| BRAND1-COMBINED-PR-01 | split into 3 clean PRs |
+
+Routing principle: if a code or content question maps to one of the above,
+read the cap entry first. The Pearl_Architect file is the canonical
+authority; this table is a navigation aid only.
