@@ -24,9 +24,12 @@ Usage:
     r2_sync.py ls --namespace manga_rendered_books
 
 Auth: reads CLOUDFLARE_ACCOUNT_ID + R2_ACCESS_KEY_ID + R2_SECRET_ACCESS_KEY
-from environment. In Codespaces these come from Codespaces secrets; in
-Pearl Star they come from the integration_env_registry.py Keychain bridge;
-in Actions they come from repo secrets.
+from environment. Optional R2_ENDPOINT overrides the S3 endpoint URL — set
+this for EU-jurisdiction or non-default-jurisdiction buckets where the host
+is NOT https://<account_id>.r2.cloudflarestorage.com (Cloudflare prints the
+correct URL on the R2 token result page). In Codespaces credentials come
+from Codespaces secrets; in Pearl Star they come from the
+integration_env_registry.py Keychain bridge; in Actions from repo secrets.
 
 Refuses to run on a local laptop unless PHOENIX_OMEGA_REMOTE=local-override.
 """
@@ -99,7 +102,7 @@ def _r2_client():
             "or generate at https://dash.cloudflare.com → R2 → Manage R2 API Tokens."
         )
 
-    endpoint = f"https://{account_id}.r2.cloudflarestorage.com"
+    endpoint = os.environ.get("R2_ENDPOINT") or f"https://{account_id}.r2.cloudflarestorage.com"
     return boto3.client(
         "s3",
         endpoint_url=endpoint,

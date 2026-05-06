@@ -51,6 +51,7 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("Cloudflare R2", "R2_SECRET_ACCESS_KEY", False, "R2 S3-compatible secret (shown once when access key created)"),
     ("Cloudflare R2", "R2_ACCOUNT_ID", False, "R2 account ID for S3 endpoint URL (same value as CLOUDFLARE_ACCOUNT_ID; scoped separately for r2_sync.py + setup_r2.sh consumers)"),
     ("Cloudflare R2", "R2_BUCKET", False, "R2 bucket name (default: phoenix-omega-artifacts)"),
+    ("Cloudflare R2", "R2_ENDPOINT", False, "S3 endpoint URL override. Set this for EU-jurisdiction or non-default-jurisdiction buckets where the host is NOT https://<R2_ACCOUNT_ID>.r2.cloudflarestorage.com. Cloudflare shows the correct URL on the R2 → Manage R2 API Tokens result page."),
     ("GitHub", "GITHUB_TOKEN", False, "GitHub API (auto in Actions)"),
     ("GitHub", "GITHUB_REPOSITORY", False, "owner/repo for API calls; auto in Actions"),
     # --- Publishing ---
