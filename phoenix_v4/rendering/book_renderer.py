@@ -18,6 +18,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, List, Optional
 
+import json
+
 logger = logging.getLogger(__name__)
 
 from phoenix_v4.quality.chapter_flow_gate import (
@@ -678,8 +680,6 @@ def location_grounding_report(text: str, plan: Optional[dict[str, Any]] = None) 
         "opening_excerpt": opening_excerpt,
         "errors": errors,
     }
-
-import json
 
 import yaml
 
@@ -1808,6 +1808,51 @@ class TxtWriter:
         return out_path
 
 
+def _maybe_apply_music_overlay_to_txt(
+    book_txt: Path,
+    plan: dict[str, Any],
+    output_dir: Path,
+    *,
+    music_mode: Optional[str],
+    musician_id: Optional[str],
+    repo_root: Path,
+) -> None:
+    """Post-process ``book.txt`` in place when music mode is active (additive overlay)."""
+    mm = (music_mode or "none").strip()
+    mid = (musician_id or "").strip()
+    if mm == "none" or not mid:
+        return
+    from phoenix_v4.rendering.music_manuscript_overlay import apply_music_overlay_to_manuscript
+
+    text = book_txt.read_text(encoding="utf-8")
+    persona_id = (plan.get("persona_id") or (plan.get("book_spec") or {}).get("persona_id") or "").strip()
+    topic_id = (plan.get("topic_id") or (plan.get("book_spec") or {}).get("topic_id") or "").strip()
+    seed = str(plan.get("plan_hash") or plan.get("plan_id") or plan.get("seed") or "book")
+    new_text, audit = apply_music_overlay_to_manuscript(
+        text,
+        repo_root=repo_root,
+        music_mode=mm,
+        musician_id=mid,
+        persona_id=persona_id or "unknown_persona",
+        topic_id=topic_id or "unknown_topic",
+        book_seed=seed,
+    )
+    book_txt.write_text(new_text, encoding="utf-8")
+    (output_dir / "music_overlay_audit.json").write_text(json.dumps(audit, indent=2), encoding="utf-8")
+    spa = output_dir / "section_packet_audit.json"
+    if spa.exists():
+        try:
+            payload = json.loads(spa.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            payload = {}
+    else:
+        payload = {}
+    if not isinstance(payload, dict):
+        payload = {}
+    payload["musician_overlay"] = audit
+    spa.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+
 def render_book(
     plan: dict[str, Any],
     output_dir: Path,
@@ -1825,6 +1870,9 @@ def render_book(
     enforce_chapter_flow: bool = False,
     enforce_dimension_gates: bool = False,
     enforce_location_grounding: bool = True,
+    music_mode: Optional[str] = None,
+    musician_id: Optional[str] = None,
+    repo_root_for_music: Optional[Path] = None,
 ) -> dict[str, Path]:
     """
     Stage 6: resolve prose for plan and write requested formats to output_dir.
@@ -1933,6 +1981,16 @@ def render_book(
             raw = out_path.read_text(encoding="utf-8")
             localized = localize_rendered_text(raw, locale)
             out_path.write_text(localized, encoding="utf-8")
+
+        _music_repo = repo_root_for_music or Path(__file__).resolve().parents[2]
+        _maybe_apply_music_overlay_to_txt(
+            out_path,
+            plan,
+            output_dir,
+            music_mode=music_mode,
+            musician_id=musician_id,
+            repo_root=_music_repo,
+        )
 
         written["txt"] = out_path
 

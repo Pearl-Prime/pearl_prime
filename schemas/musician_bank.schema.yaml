@@ -1,0 +1,20 @@
+# Validates musician_banks/<id>/ profile + themes + voice + survey response shape (V1).
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://pearl.local/schemas/musician_bank.schema.yaml
+title: MusicianBankV1
+type: object
+required: [musician_id, display_name, primary_genre]
+properties:
+  musician_id:
+    type: string
+  display_name:
+    type: string
+  primary_genre:
+    type: string
+  themes:
+    type: array
+    items: { type: string }
+  healing_intent_summary:
+    type: string
+  synthetic:
+    type: boolean

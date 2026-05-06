@@ -572,3 +572,29 @@ For each Group A format, the registry currently has no entry under `runtime_form
 **Handoffs:**
 - Pearl_Dev → resume `ws_auto_plan_ssot_refactor_20260505`; refactor PR ~80-120 lines (larger than original AUTO-PLAN-SSOT-01's ~30-50 estimate; unavoidable given backfill scope).
 - Pearl_PM → post-merge: close `ws_auto_plan_ssot_refactor_20260505` (cite this amendment + the merged refactor SHA); update `proj_pearl_prime_bestseller_rebase_20260425.next_action` to reflect SSoT consolidation complete.
+### MUSIC-MODE-V1-01 — Pearl Prime music overlay V1
+
+**(RECOMMENDED 2026-05-06; awaits Pearl_Architect ratification)**
+
+**Status:** **recommended** (Pearl_Dev implementation; Pearl_Architect ratifies post-merge).
+
+**Context:** Operator V1 spec defines music mode as a Pearl Prime book overlay with two variants (`with-lyrics`, `no-lyrics`), second-person intro and conclusion, per-chapter opening and closing plus one mid-chapter bestseller-beat block, and one MusicGen companion prompt per book for brand-admin packaging. Discovery reference: `artifacts/qa/music_mode_discovery_2026-05-06.md` (PR #898 head when available).
+
+**Decision (recommended):** Option A — ride on the existing book pipeline. New `SOURCE_OF_TRUTH/musician_banks/<id>/` mirrors `teacher_banks/` atom layout. `--music-mode` is orthogonal to `--pipeline-mode`. Atom template variation per persona × topic (V1 seeded for `gen_z_professionals` × `anxiety` test musician `test_artist_alpha`) provides uniqueness without per-musician code changes.
+
+**Anti-drift check:** Music slots are **additive** post-render injections on `book.txt`; `SOMATIC_10_SLOT_GRID` and enrichment slot plans are untouched. Bestseller composition inside chapters is unchanged; music blocks wrap chapter headings and paragraph runs only.
+
+**Companion audio:** V1 ships **prompt JSON** via `scripts/music/generate_book_companion_song.py` (MusicGen runnable path remains Colab-oriented `scripts/music/musicgen_colab.py` / Pearl Star). WAV export is **deferred** until a supported local or scheduled runner is pinned.
+
+**Action items (Pearl_Architect ratifies):**
+
+1. Confirm Option A vs Option B (net-new subsystem boundary) per discovery §7.
+2. Confirm subsystem owner for `musician_banks/` (Pearl_Music vs Pearl_Prime vs new lane).
+3. Confirm survey schema canonical path: `artifacts/musician_survey/SURVEY_TEMPLATE.yaml`.
+4. Confirm or rename the six slot pool directory names under `approved_atoms/` (`LYRIC_*`, `MUSIC_REFLECTION_*`) vs Arc-First naming.
+
+**Handoffs:**
+
+- **Pearl_Architect:** ratify or amend; add `musician_banks` row to `artifacts/coordination/SUBSYSTEM_AUTHORITY_MAP.tsv` when owned.
+- **Pearl_PM:** open `ws_music_mode_v1_pilot_20260506`; administer survey to musician #1; expand atoms as surveys land (content, not code).
+- **Pearl_Editor + Pearl_Writer:** per-musician atom expansion from real survey YAML.

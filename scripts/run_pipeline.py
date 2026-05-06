@@ -1208,9 +1208,30 @@ def _run_spine_pipeline_mode(
         out_path.write_text(json.dumps(plan_out, indent=2, ensure_ascii=False))
         print(f"Wrote {args.out}")
 
+    _music_audit_spine: dict | None = None
     if args.render_book:
         book_path = render_dir / "book.txt"
-        book_path.write_text(prose, encoding="utf-8")
+        _prose_out = prose
+        _music_mode = getattr(args, "music_mode", "none") or "none"
+        _musician_id = (getattr(args, "musician_id", None) or "").strip()
+        if _music_mode != "none" and _musician_id:
+            from phoenix_v4.rendering.music_manuscript_overlay import apply_music_overlay_to_manuscript
+
+            _prose_out, _music_audit = apply_music_overlay_to_manuscript(
+                prose,
+                repo_root=repo_root,
+                music_mode=_music_mode,
+                musician_id=_musician_id,
+                persona_id=persona_id,
+                topic_id=topic_id,
+                book_seed=str(seed),
+            )
+            _music_audit_spine = _music_audit
+            (render_dir / "music_overlay_audit.json").write_text(
+                json.dumps(_music_audit, indent=2, ensure_ascii=False),
+                encoding="utf-8",
+            )
+        book_path.write_text(_prose_out, encoding="utf-8")
         print(f"Rendered book (spine mode): {book_path}")
         _gcp = getattr(args, "golden_chapter_pilot", None)
         if _gcp is not None:
@@ -1220,7 +1241,7 @@ def _run_spine_pipeline_mode(
                 )
 
                 _rp = write_golden_chapter_pilot_artifacts(
-                    manuscript_text=prose,
+                    manuscript_text=_prose_out,
                     enriched=enriched,
                     chapter_number_1based=int(_gcp),
                     out_dir=render_dir,
@@ -1245,9 +1266,14 @@ def _run_spine_pipeline_mode(
             encoding="utf-8",
         )
         _spa = enriched.enrichment_audit.get("section_packet_audit")
-        if _spa:
+        _spa_dict: dict = {}
+        if isinstance(_spa, dict):
+            _spa_dict = dict(_spa)
+        if _music_audit_spine is not None:
+            _spa_dict["musician_overlay"] = _music_audit_spine
+        if _spa_dict:
             (render_dir / "section_packet_audit.json").write_text(
-                json.dumps(_spa, indent=2, default=str, ensure_ascii=False),
+                json.dumps(_spa_dict, indent=2, default=str, ensure_ascii=False),
                 encoding="utf-8",
             )
         _bq_fail, _bq_frag = _apply_book_quality_gate(
@@ -1549,7 +1575,23 @@ def main() -> int:
         action="store_true",
         help="Attach thesis-aligned exercise journeys to EXERCISE slots after depth pass.",
     )
+    ap.add_argument(
+        "--music-mode",
+        choices=["none", "with-lyrics", "no-lyrics"],
+        default="none",
+        help="Pearl Prime music overlay (additive; orthogonal to --pipeline-mode). Default: none.",
+    )
+    ap.add_argument(
+        "--musician-id",
+        default=None,
+        help="Musician bank id under SOURCE_OF_TRUTH/musician_banks/ (required when --music-mode is not none).",
+    )
     args = ap.parse_args()
+
+    if getattr(args, "music_mode", "none") != "none":
+        if not (getattr(args, "musician_id", None) or "").strip():
+            print("--musician-id is required when --music-mode is not none", file=sys.stderr)
+            return 1
 
     if getattr(args, "no_job_check", False):
         print(
@@ -2178,11 +2220,30 @@ def main() -> int:
             render_dir = Path(args.render_dir) if args.render_dir else Path("artifacts/rendered") / f"registry-{topic_id}"
             render_dir.mkdir(parents=True, exist_ok=True)
             book_path = render_dir / "book.txt"
-            book_path.write_text(prose, encoding="utf-8")
+            _prose_reg_out = prose
+            _music_mode_reg = getattr(args, "music_mode", "none") or "none"
+            _musician_id_reg = (getattr(args, "musician_id", None) or "").strip()
+            if _music_mode_reg != "none" and _musician_id_reg:
+                from phoenix_v4.rendering.music_manuscript_overlay import apply_music_overlay_to_manuscript
+
+                _prose_reg_out, _music_audit_reg = apply_music_overlay_to_manuscript(
+                    prose,
+                    repo_root=REPO_ROOT,
+                    music_mode=_music_mode_reg,
+                    musician_id=_musician_id_reg,
+                    persona_id=str(book_spec_for_compiler.get("persona_id") or ""),
+                    topic_id=str(topic_id or ""),
+                    book_seed=str(seed),
+                )
+                (render_dir / "music_overlay_audit.json").write_text(
+                    json.dumps(_music_audit_reg, indent=2, ensure_ascii=False),
+                    encoding="utf-8",
+                )
+            book_path.write_text(_prose_reg_out, encoding="utf-8")
             print(f"Rendered book (txt): {book_path}")
 
             # Budget report (word_count matches delivered prose; enables word_count_gate)
-            _wc_prose = len(prose.split())
+            _wc_prose = len(_prose_reg_out.split())
             budget_path = render_dir / "budget.json"
             budget_payload: dict = {
                 "word_count": _wc_prose,
@@ -2205,7 +2266,7 @@ def main() -> int:
                 try:
                     from phoenix_v4.rendering.book_renderer import WordCountGateError, word_count_gate
 
-                    gate_metrics = word_count_gate(prose, _reg_runtime, source_hint=str(book_path))
+                    gate_metrics = word_count_gate(_prose_reg_out, _reg_runtime, source_hint=str(book_path))
                     refresh = json.loads(budget_path.read_text(encoding="utf-8"))
                     refresh["gate_result"] = gate_metrics
                     budget_path.write_text(json.dumps(refresh, indent=2))
@@ -2238,7 +2299,7 @@ def main() -> int:
                 try:
                     from phoenix_v4.rendering.book_renderer import chapter_flow_gate_report
                     _flow_report = chapter_flow_gate_report(
-                        prose, runtime_format_id=_reg_runtime or None
+                        _prose_reg_out, runtime_format_id=_reg_runtime or None
                     )
                     _flow_report_path = render_dir / "chapter_flow_report.json"
                     _flow_report_path.write_text(
@@ -2266,7 +2327,7 @@ def main() -> int:
             if gates_run:
                 try:
                     from phoenix_v4.quality.bestseller_craft_gate import evaluate_bestseller_craft
-                    _chapters_for_craft = _extract_registry_chapters(prose)
+                    _chapters_for_craft = _extract_registry_chapters(_prose_reg_out)
                     _craft_results = []
                     for _i, _ch_text in enumerate(_chapters_for_craft):
                         _craft = evaluate_bestseller_craft(_ch_text)
@@ -2313,7 +2374,7 @@ def main() -> int:
                     from phoenix_v4.qa.scene_anti_genericity_gate import (
                         enforce_scene_gate as _enforce_scene_gate,
                     )
-                    _scene_proses = _extract_registry_chapters(prose)
+                    _scene_proses = _extract_registry_chapters(_prose_reg_out)
                     if _scene_proses:
                         _scene_result = _enforce_scene_gate(
                             _scene_proses, mode=args.scene_gate_mode
@@ -3244,6 +3305,9 @@ def main() -> int:
                     include_slot_labels_qa=False,
                     enforce_word_count=not args.skip_word_count_gate,
                     enforce_chapter_flow=False,  # chapter_flow gate runs post-render as QA, not blocking
+                    music_mode=getattr(args, "music_mode", None),
+                    musician_id=getattr(args, "musician_id", None),
+                    repo_root_for_music=REPO_ROOT,
                 )
                 for fmt, path in written.items():
                     print(f"Rendered book ({fmt}): {path}")

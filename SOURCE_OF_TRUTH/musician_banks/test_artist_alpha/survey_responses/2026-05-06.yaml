@@ -1,0 +1,48 @@
+# Synthetic pseudonymous survey — fictional test musician for music-mode V1 CI.
+survey_version: "1.0"
+synthetic: true
+submitted_date: "2026-05-06"
+identity:
+  display_name: "Test Artist Alpha"
+  years_active: "12 (fictional)"
+  primary_genre: "indie folk"
+  secondary_genres: ["ambient sketches"]
+  primary_instruments: ["voice", "acoustic guitar"]
+  creative_phases: ["early acoustic", "current sparse arrangements"]
+
+themes:
+  primary_themes: ["recovery", "quiet courage", "presence"]
+  avoided_themes: ["glamour pain-as-aesthetic"]
+  listener_hope_one: "That stillness can feel honest instead of empty."
+
+voice_craft:
+  voice_person: first_person
+  register: plain_spoken
+  pacing: varied
+  signature_devices: ["returning morning imagery", "short refrain lines"]
+
+material_for_reflection:
+  touchstone_tracks: ["Track A (fictional)", "Track B (fictional)"]
+  key_collaborators: []
+  citations_links: []
+
+healing_intent:
+  what_helps_heal: "Stillness through honest lyric — naming small fears without dramatizing them."
+  listener_responses_to_amplify: ["Readers said the quiet songs made room to breathe."]
+  wellness_framing_rejects: ["Myth that pain is required for depth."]
+
+output_preferences_with_lyrics:
+  lyric_form: free_verse
+  lyric_length_note: "8–14 lines per block"
+  explicit_content_ok: false
+  companion_ai_song_consent: true
+
+output_preferences_no_lyrics:
+  reflection_form: mixed
+  reflection_perspective: musician
+
+consent_licensing:
+  ai_reflections_consent: true
+  usage_restrictions: "Fictional CI seed only; non-commercial test artifacts."
+  followup_email: "music-mode-ci@example.invalid"
+  signature: "Test Artist Alpha"
