@@ -55,8 +55,11 @@ _TEACHER_OVERLAY_TYPES = frozenset({
 # Section types that get overlaid in regular/persona mode
 _PERSONA_OVERLAY_TYPES = frozenset({"HOOK", "SCENE", "STORY"})
 # Mapping from registry section type to teacher atom directory name
+# TEACHING is the on-disk teacher-bank section type name for some teachers
+# (e.g., ahjan); aliased to TEACHER_DOCTRINE so slot lookup reaches it.
+# Per F2 in atom_usage_audit_2026-05-06.md.
 _TEACHER_TYPE_MAP = {
-    "TEACHER_DOCTRINE": ["COMPRESSION", "REFLECTION"],
+    "TEACHER_DOCTRINE": ["COMPRESSION", "REFLECTION", "TEACHING"],
     "HOOK": ["HOOK"],
     "EXERCISE": ["EXERCISE"],
     "INTEGRATION": ["INTEGRATION"],
