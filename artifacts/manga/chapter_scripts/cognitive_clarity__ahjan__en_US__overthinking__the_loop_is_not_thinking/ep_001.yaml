@@ -1,0 +1,296 @@
+schema_version: 1.0
+brand: cognitive_clarity
+brand_voice:
+  demographic: seinen
+  register: psychological_grounded
+  cadence: short_clipped_with_introspective_pauses
+  notes: CBT-adjacent. The protagonist is an adult man at a desk. Imagery is realistic (not stylized). Bubbles favor short
+    declarative sentences; narration is sparse and sits like internal observation, not voice-over.
+author: ahjan
+locale_origin: en-US
+topic: overthinking
+arc_position: complete_5ch_recognition_to_integration
+title:
+  en-US: The Loop Is Not Thinking
+  ja-JP: そのループは思考ではない
+tagline:
+  en-US: Five days inside the loop, and the one move that lands.
+  ja-JP: ループの中の五日間、そして着地する唯一の動き。
+chapters:
+  ch01:
+    title:
+      en-US: Tuesday, 11:47 PM
+      ja-JP: 火曜日、午後11時47分
+    panels:
+    - panel_id: ch01_p01
+      layout: full_page_establishing
+      scene: A man, late thirties, at a kitchen table. Laptop open. Cold tea. The light is one ceiling fixture; the window
+        behind him shows nothing.
+      narration:
+        en-US: He has been thinking about the same email for three hours.
+        ja-JP: 彼は三時間、同じメールについて考え続けている。
+      dialogue: []
+      sfx: []
+    - panel_id: ch01_p02
+      layout: medium_shot
+      scene: Same man, closer in. His eyes are not on the screen. They are mid-distance, focused on something internal.
+      narration:
+        en-US: It is not a hard email.
+        ja-JP: 難しいメールではない。
+      dialogue: []
+      sfx: []
+    - panel_id: ch01_p03
+      layout: tight_thought_bubble_layered
+      scene: The man stares at a single sentence. Around him, faded thought bubbles overlap — three versions of what could
+        go wrong, three of what he should have said.
+      narration:
+        en-US: He has rewritten it nine times.
+        ja-JP: 彼はそれを九回書き直した。
+      dialogue:
+      - speaker: protagonist_internal
+        text:
+          en-US: If I send it like this, she'll think I'm—
+          ja-JP: このまま送ったら、彼女は俺のことを——
+      sfx: []
+    - panel_id: ch01_p04
+      layout: clock_close
+      scene: The clock on the laptop reads 11:47 PM. The cursor blinks in the empty subject line.
+      narration:
+        en-US: He has not pressed send.
+        ja-JP: 送信は押していない。
+      dialogue: []
+      sfx: []
+    - panel_id: ch01_p05
+      layout: pulled_back_alone
+      scene: Wide shot. The man at the table, surrounded by the dim apartment, very still.
+      narration:
+        en-US: This is what overthinking looks like from the outside. From the inside, it feels like work.
+        ja-JP: これが外から見た『考えすぎ』の姿だ。中から感じれば、仕事のように思える。
+      dialogue: []
+      sfx: []
+  ch02:
+    title:
+      en-US: What The Loop Is Actually Doing
+      ja-JP: ループが実際にやっていること
+    panels:
+    - panel_id: ch02_p01
+      layout: brain_diagram_overlay_subtle
+      scene: A subtle anatomical overlay on the man's profile. Not showy — like an old textbook illustration, only the prefrontal
+        cortex highlighted.
+      narration:
+        en-US: The brain is a pattern-matcher. When given a problem, it searches.
+        ja-JP: 脳はパターンを照合する装置だ。問題を渡されると、検索を始める。
+      dialogue: []
+      sfx: []
+    - panel_id: ch02_p02
+      layout: search_metaphor
+      scene: Imagery — a hand pulling open drawers in an old wooden filing cabinet, each drawer opening another drawer behind
+        it.
+      narration:
+        en-US: Most of the time, the search returns a match. You decide. You move on.
+        ja-JP: ほとんどの場合、検索は一致を返す。決めて、次へ進む。
+      dialogue: []
+      sfx: []
+    - panel_id: ch02_p03
+      layout: recursion_visualized
+      scene: The same drawer opening pattern, but now the drawer reveals itself opening — recursive, infinite. The man's face
+        is faintly visible behind the drawers, eyes dim.
+      narration:
+        en-US: But sometimes the search returns nothing satisfactory. So the brain searches again. With slightly different
+          terms.
+        ja-JP: だが、検索が満足な答えを返さないこともある。すると脳はもう一度検索する。少しだけ言葉を変えて。
+      dialogue: []
+      sfx: []
+    - panel_id: ch02_p04
+      layout: panel_with_inset
+      scene: The man at the table again. An inset shows the brain's recursive search visualized as an MRI cross-section, the
+        same regions lighting up in cycles.
+      narration:
+        en-US: This is the loop. The brain is not stuck. The brain is doing exactly what it was built to do.
+        ja-JP: これがループだ。脳は止まっているのではない。脳は本来の仕事を、完璧にこなしている。
+      dialogue: []
+      sfx: []
+    - panel_id: ch02_p05
+      layout: declarative_close
+      scene: Close on the man's face. His eyes shift slightly. A small recognition.
+      narration:
+        en-US: What it was not built for is to know when to stop.
+        ja-JP: ただ、止まり時を知るようには、脳は作られていない。
+      dialogue: []
+      sfx: []
+  ch03:
+    title:
+      en-US: The Cost
+      ja-JP: 代償
+    panels:
+    - panel_id: ch03_p01
+      layout: bedroom_dark
+      scene: The man in bed, eyes open, ceiling above. The clock reads 2:14 AM.
+      narration:
+        en-US: He has been in the loop for five hours.
+        ja-JP: 彼はもう五時間、ループの中にいる。
+      dialogue: []
+      sfx: []
+    - panel_id: ch03_p02
+      layout: bedside_partner
+      scene: His partner, asleep beside him, back turned. He looks at her, then away. She sleeps because she is not in the
+        loop.
+      narration:
+        en-US: She asked, before bed, what was on his mind. He said nothing.
+        ja-JP: 寝る前に彼女は『何を考えてるの』と訊いた。彼は『何も』と答えた。
+      dialogue: []
+      sfx: []
+    - panel_id: ch03_p03
+      layout: morning_kitchen_zombie
+      scene: Same man, the next morning. Coffee. His hand on the cup is not quite steady.
+      narration:
+        en-US: He slept ninety minutes. He has a meeting in thirty.
+        ja-JP: 睡眠九十分。会議まで三十分。
+      dialogue: []
+      sfx: []
+    - panel_id: ch03_p04
+      layout: meeting_table
+      scene: Office meeting. The man's face is composed but his eyes lag — a half-second behind. A colleague is asking him
+        a question.
+      narration:
+        en-US: The loop has eaten today before today began.
+        ja-JP: 今日が始まる前に、ループが今日を食べてしまった。
+      dialogue:
+      - speaker: colleague
+        text:
+          en-US: —your input on the timeline?
+          ja-JP: ——スケジュールについて、何かある？
+      - speaker: protagonist
+        text:
+          en-US: Sorry. Could you—
+          ja-JP: すまない。もう一度——
+      sfx: []
+    - panel_id: ch03_p05
+      layout: hand_close
+      scene: His hand on the desk, fingers slightly trembling. Beside it, his phone, screen-down.
+      narration:
+        en-US: The cost is not the email. The cost is everything the loop touches on its way to the email.
+        ja-JP: 代償はメールそのものじゃない。ループがメールに辿り着くまでに触れる、すべてだ。
+      dialogue: []
+      sfx: []
+  ch04:
+    title:
+      en-US: The Move
+      ja-JP: その動き
+    panels:
+    - panel_id: ch04_p01
+      layout: therapist_office
+      scene: A therapist's office. The man sits opposite a calm, attentive listener. The room is unstyled — beige, neutral,
+        real.
+      narration: null
+      dialogue:
+      - speaker: therapist
+        text:
+          en-US: What if you didn't try to stop it?
+          ja-JP: 止めようとしないなら、どうなる？
+      sfx: []
+    - panel_id: ch04_p02
+      layout: man_thinking
+      scene: The man considers. His brow narrows.
+      narration: null
+      dialogue:
+      - speaker: protagonist
+        text:
+          en-US: I should just let it spin?
+          ja-JP: ただ回らせておけばいい、ということか？
+      sfx: []
+    - panel_id: ch04_p03
+      layout: therapist_response
+      scene: The therapist leans forward slightly.
+      narration: null
+      dialogue:
+      - speaker: therapist
+        text:
+          en-US: Name it. Out loud or in your head. 'This is the loop.' Then go do something with your hands.
+          ja-JP: 名前を呼ぶんだ。声に出してもいい、心の中でもいい。『これはループだ』と。それから、手を使う何かをしに行く。
+      sfx: []
+    - panel_id: ch04_p04
+      layout: man_at_sink
+      scene: The man at his kitchen sink. Doing dishes. Slowly. The water runs.
+      narration:
+        en-US: Naming it is not believing it.
+        ja-JP: 名前を呼ぶことは、信じることではない。
+      dialogue:
+      - speaker: protagonist_internal
+        text:
+          en-US: This is the loop.
+          ja-JP: これはループだ。
+      sfx:
+      - placement: water_running
+        text:
+          en-US: —
+          ja-JP: ——
+    - panel_id: ch04_p05
+      layout: hands_on_dishes
+      scene: Close on his hands, scrubbing a plate. The grip is steadier than it has been all week.
+      narration:
+        en-US: The loop continued. He just stopped being the same person watching it.
+        ja-JP: ループは続いた。ただ、それを見ている彼が、もう同じ人物ではなかった。
+      dialogue: []
+      sfx: []
+  ch05:
+    title:
+      en-US: The Week After
+      ja-JP: 翌週
+    panels:
+    - panel_id: ch05_p01
+      layout: same_kitchen_morning
+      scene: Same kitchen, one week later. Morning. The man is making coffee. The light is different — dawn through the window
+        now, not ceiling fixture.
+      narration:
+        en-US: He still gets caught.
+        ja-JP: 今でも捕まる。
+      dialogue: []
+      sfx: []
+    - panel_id: ch05_p02
+      layout: same_table_email_open
+      scene: Same table. A new email is half-drafted on the screen. The man pauses.
+      narration: null
+      dialogue:
+      - speaker: protagonist_internal
+        text:
+          en-US: This is the loop.
+          ja-JP: これはループだ。
+      sfx: []
+    - panel_id: ch05_p03
+      layout: man_standing_up
+      scene: The man stands. Walks toward the window.
+      narration:
+        en-US: He does not finish the email.
+        ja-JP: メールは仕上げない。
+      dialogue: []
+      sfx: []
+    - panel_id: ch05_p04
+      layout: window_view
+      scene: The view from his window. A street, a tree, a person walking a dog. Ordinary. Real.
+      narration:
+        en-US: He looks at something the loop did not generate.
+        ja-JP: ループが作り出したものではない、何かを見つめる。
+      dialogue: []
+      sfx: []
+    - panel_id: ch05_p05
+      layout: closing_panel_table_send
+      scene: Back at the table. He presses send. The loop is still there in the background somewhere. He goes to make breakfast.
+      narration:
+        en-US: The loop is not thinking. It is the brain refusing to land. You teach it where the ground is.
+        ja-JP: ループは思考ではない。それは脳が着地を拒んでいる状態だ。あなたが、地面の場所を教えてやる。
+      dialogue: []
+      sfx: []
+metadata:
+  total_chapters: 5
+  total_panels: 25
+  bestseller_arc_positions:
+    recognition: ch01
+    mechanism_proof: ch02
+    cost: ch03
+    turning_point: ch04
+    integration: ch05
+  authoring_provenance:
+    en-US: ahjan via Pearl_Dev session 2026-05-07 (Tier 1 operator-present per CLAUDE.md)
+    ja-JP: Tier 1 inline translation 2026-05-07 (V1 baseline; Pearl_Localization native-speaker review recommended pre-WEBTOON-Japan
+      publish)

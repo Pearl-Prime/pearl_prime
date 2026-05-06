@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0",
+  "brand": "cognitive_clarity",
+  "episode": "ep_001",
+  "title": "The Loop Is Not Thinking",
+  "model": "flux-schnell-fp8",
+  "render_target": "1080x1920 (webtoon vertical)",
+  "locale_agnostic": true,
+  "note": "Imagery only; bubble_render composes locale-specific text. 25 panels, 5 chapters. Mirrors brand-1 panel_prompts JSON shape per docs/sessions/SESSION_HANDOFF_2026-04-25.md.",
+  "prompts": [
+    {
+      "panel_id": "ch01_p01",
+      "prompt": "wide establishing shot of a man in his late thirties at a small kitchen table, laptop open, cold mug of tea beside it, single warm ceiling light overhead, the window behind him showing only black night, sparse modern apartment, cinematic muted color palette, photorealistic, late evening atmosphere, slight color desaturation, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 514
+    },
+    {
+      "panel_id": "ch01_p02",
+      "prompt": "medium shot of the same man, closer in, tired eyes focused on middle distance not on the laptop screen, light from screen on his face, subtle shadow under eyes, photorealistic seinen manga style, contemplative mood, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 403
+    },
+    {
+      "panel_id": "ch01_p03",
+      "prompt": "tight composition of a man at a laptop, multiple semi-transparent thought bubble layers overlapping around his head showing fragments of conversation scenarios in faded outline, busy mental atmosphere, his expression furrowed, photorealistic with slight surrealism for the bubbles, monochrome thought bubbles against warm room tones, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 521
+    },
+    {
+      "panel_id": "ch01_p04",
+      "prompt": "extreme close-up of a laptop screen showing a clock 11:47 PM and an empty email subject line with a blinking cursor, soft bokeh background, photographic detail, late night ambient light, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 374
+    },
+    {
+      "panel_id": "ch01_p05",
+      "prompt": "wide pulled-back shot of the same kitchen at night, the man at the table small in frame, dim apartment surrounding him, very still, lonely composition, cinematic wide angle, isolation atmosphere, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 383
+    },
+    {
+      "panel_id": "ch02_p01",
+      "prompt": "subtle anatomical overlay on a man's profile silhouette, like a vintage neuroscience textbook illustration, only the prefrontal cortex region softly highlighted in faded ink, otherwise muted profile of the man at the desk, educational illustration style mixed with photorealism, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 466
+    },
+    {
+      "panel_id": "ch02_p02",
+      "prompt": "metaphorical imagery of a hand pulling open old wooden filing cabinet drawers, each drawer revealing another drawer behind it, warm sepia tones, dust motes, archival aesthetic, no text on the drawers, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 388
+    },
+    {
+      "panel_id": "ch02_p03",
+      "prompt": "recursive surreal imagery of opening drawers showing themselves opening infinitely, the man's tired face faintly visible behind the recursive layers, dreamlike but unsettling, muted color palette, escher-influenced composition, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 415
+    },
+    {
+      "panel_id": "ch02_p04",
+      "prompt": "split panel composition: foreground shows the man at his kitchen table; inset top-right corner shows a stylized MRI brain cross-section with regions glowing in sequential cycles, scientific illustration style for the inset, photorealistic for the foreground, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 446
+    },
+    {
+      "panel_id": "ch02_p05",
+      "prompt": "tight close-up of the man's face, his eyes shifting subtly, a small recognition forming, gentle warm light, photorealistic seinen manga style, intimate framing, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 348
+    },
+    {
+      "panel_id": "ch03_p01",
+      "prompt": "the man lying in bed at night, eyes wide open, ceiling above him, alarm clock on bedside table reading 2:14 AM, soft moonlight from window, partner asleep on far side of bed back turned, melancholy atmosphere, photorealistic, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 413
+    },
+    {
+      "panel_id": "ch03_p02",
+      "prompt": "intimate side composition of the man in bed looking at his sleeping partner whose back is turned to him, her shape under the covers, his expression conflicted, dim blue moonlight, photorealistic, quiet despair, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 398
+    },
+    {
+      "panel_id": "ch03_p03",
+      "prompt": "morning kitchen scene the next day, same man at the counter holding a coffee mug, hand slightly unsteady, dawn light coming through the window, exhaustion in his posture, photorealistic mundane setting, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 390
+    },
+    {
+      "panel_id": "ch03_p04",
+      "prompt": "office meeting room, the man at a conference table, his face composed but eyes lagging half a second behind, three other colleagues around the table, fluorescent overhead lighting, modern corporate space, photorealistic, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 408
+    },
+    {
+      "panel_id": "ch03_p05",
+      "prompt": "extreme close-up of the man's hand resting on a wooden desk, fingers slightly trembling, his phone face-down on the desk beside the hand, soft focus background, hyper-detailed, intimate framing, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 382
+    },
+    {
+      "panel_id": "ch04_p01",
+      "prompt": "therapist's office, neutral beige walls, two chairs facing each other, the man on one side, a calm attentive listener on the other, the room is realistic and unstyled, soft natural light from a side window, photorealistic seinen style, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 423
+    },
+    {
+      "panel_id": "ch04_p02",
+      "prompt": "medium shot of the man considering a question, his brow narrowing, lips slightly parted, in the same therapist's chair, photorealistic intimate framing, thoughtful expression, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 363
+    },
+    {
+      "panel_id": "ch04_p03",
+      "prompt": "the therapist leaning forward slightly in her chair, attentive expression, the man partly visible in foreground listening, neutral office setting, photorealistic, quiet authority, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 367
+    },
+    {
+      "panel_id": "ch04_p04",
+      "prompt": "the man at his kitchen sink doing dishes slowly, water running from the tap, soap on his hands, evening or morning soft light from a window above the sink, the kitchen warm and lived-in, photorealistic, peaceful focus, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 406
+    },
+    {
+      "panel_id": "ch04_p05",
+      "prompt": "extreme close-up of the man's hands scrubbing a white plate, water and suds, hands steady and competent, hyper-detailed photorealism, sense of restored capacity, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 349
+    },
+    {
+      "panel_id": "ch05_p01",
+      "prompt": "same kitchen, one week later, dawn light streaming through the window now instead of overhead fixture, the man at the counter making coffee, a small change in his posture compared to ch01, photorealistic, hopeful subdued atmosphere, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 420
+    },
+    {
+      "panel_id": "ch05_p02",
+      "prompt": "the same kitchen table from ch01, but now with a half-drafted email on the laptop screen, the man pausing mid-typing, a moment of recognition crossing his face, soft morning light, photorealistic, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 384
+    },
+    {
+      "panel_id": "ch05_p03",
+      "prompt": "the man stands up from the kitchen table and walks toward the window, mid-stride, the laptop still open behind him on the table, photorealistic, deliberate movement, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 353
+    },
+    {
+      "panel_id": "ch05_p04",
+      "prompt": "view from a window: an ordinary street scene with a tree in soft morning light, a person walking a dog along the sidewalk, real and unremarkable, photorealistic, calm composition with depth of field, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 387
+    },
+    {
+      "panel_id": "ch05_p05",
+      "prompt": "wide closing panel of the kitchen, the man back at the table having just clicked send, getting up to start breakfast, soft morning light, the laptop still open but now in background, peaceful resolution, photorealistic, seinen manga photorealistic style, muted color palette, cinematic composition, no text, no dialogue bubbles, no speech, no characters facing camera reading words, ambient natural lighting",
+      "negative_prompt": "text, dialogue, speech bubbles, words, lettering, signs with readable text, characters reading text, blurry, low quality, watermark, signature",
+      "model": "flux-schnell-fp8",
+      "width": 1080,
+      "height": 1920,
+      "char_count": 407
+    }
+  ]
+}
