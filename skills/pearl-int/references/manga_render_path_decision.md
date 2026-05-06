@@ -41,22 +41,47 @@ identity drift. The audit confirmed via PNG inspection of 8 outputs.
   `~/.phoenix_omega_pearl_star` confirms canonical host.
 - **Cost:** $0. This is the default for all manga panel work.
 
-### Path B — RunComfy serverless ComfyUI (PAID fallback)
+### Path B — RunComfy serverless ComfyUI (PAID; video_bank only as of 2026-05-07)
 
 - **Endpoint:** `https://api.runcomfy.net/prod/v1`
-- **Deployment:** `677edba8-ace0-4b2b-bad2-8e94b9959065`
+- **Deployment:** `677edba8-ace0-4b2b-bad2-8e94b9959065` (`RUNCOMFY_DEPLOYMENT_ID`)
 - **Driver:** `scripts/image_generation/runcomfy_batch.py`
-- **Workflow:** `scripts/image_generation/comfyui_workflows/flux_video_bank.json`
-  (different from manga panel template — uses node-id-override pattern)
-- **Cost:** ~$0.03/render (per RunComfy metering)
-- **Per-batch budget:** 25-panel manga episode ≈ $0.75
+- **Workflow on the deployment:** `flux_video_bank.json` —
+  flux1-schnell-fp8 / 4 steps / 1.0 cfg / euler / simple. **This is
+  CORRECT for schnell** (schnell is distilled for ~4 steps cfg 1.0).
+  The audit's "schnell defects" finding was specifically about schnell
+  run at DEV settings (24 steps / 4.0 cfg) — that combination is broken.
+  Schnell at its native 4/1.0 is fine.
+- **Cost:** ~$0.03/render (per RunComfy metering). Used for video_bank
+  asset generation, not manga panels.
 - **Auth:** `RUNCOMFY_API_KEY` + `RUNCOMFY_DEPLOYMENT_ID` from Keychain
-  (post PR #920 scheme: `service=phoenix-omega`, `account=NAME`)
-- **KNOWN BLOCKER:** RunComfy serverless deployment holds an OLDER
-  workflow bundle. Local templates updated by PR #807/#809; serverless
-  rejects the new graph with HTTP 422 until re-imported via the RunComfy
-  console (operator action — see `artifacts/qa/flux_workflow_fix_smoke_2026-04-30.md` §4A).
-  Until re-sync, RunComfy returns the OLD schnell-mismatch outputs.
+  (post PR #920 scheme: `service=phoenix-omega`, `account=NAME`).
+- **Manga panels are NOT served by this deployment.** Node IDs and
+  workflow shape are video_bank-specific. Submitting a manga-shape
+  graph (`flux_txt2img_manga.json`) returns HTTP 422 — that is NOT
+  staleness; it is graph-shape mismatch.
+
+### What was previously misdocumented
+
+The `artifacts/qa/flux_workflow_fix_smoke_2026-04-30.md` smoke test
+attempted to validate the schnell→dev fix by submitting a manga-shape
+workflow against the video_bank deployment. The 422 there was about
+graph-shape mismatch, not deployment staleness. The smoke MD's "Path
+to actually validating the fix → re-deploy the workflow" framing
+implied the deployment needed re-sync; in fact:
+
+- The deployment is correctly serving its video_bank purpose.
+- The schnell-at-dev-settings defect lives in OTHER template files
+  (`config/comfyui_workflows/manga_covers/*.json`) which PR #807/#809
+  already corrected on origin/main.
+- Manga panel work routes to Path A (Pearl Star); RunComfy is not a
+  manga fallback unless a separate manga-compatible RunComfy
+  deployment is created (not currently scheduled).
+
+**Net: nothing to fix on RunComfy deployment 677edba8.** Cap-entry
+follow-up: when/if manga-RunComfy fallback is needed, open a separate
+deployment + a separate `RUNCOMFY_MANGA_DEPLOYMENT_ID` env var. Don't
+overwrite the video_bank deployment.
 
 ## Decision tree
 
@@ -78,28 +103,33 @@ START: manga panel batch needed
 │             └── If not running but GPU still hot → another job;
 │                                                      surface to operator
 │
-├── Q3: Is this a video_bank or large-batch (>100 renders) job?
-│   ├── YES → Path B (RunComfy serverless, after re-sync); horizontal
-│   │         scaling; cost amortizes
-│   └── NO  → Path A
+├── Q3: Is this a video_bank job?
+│   ├── YES → Path B (RunComfy serverless 677edba8); already configured
+│   │         correctly with schnell/4/1.0 — no re-sync needed
+│   └── NO  → Path A (Pearl Star) for manga panels
 │
 └── Q4: Are we time-critical (release deadline within hours)?
     ├── YES → operator authorizes Path B with explicit cost approval
     └── NO  → Path A (free; queue-and-wait if GPU constrained)
 ```
 
-## RunComfy re-sync procedure (operator-only; ~5 min in console)
+## NOT a re-sync — when manga-RunComfy fallback IS desired
 
-1. Open RunComfy console → Deployments → `677edba8-ace0-4b2b-bad2-8e94b9959065`
-2. Re-import workflow JSON: `scripts/image_generation/comfyui_workflows/flux_txt2img_manga.json`
-3. Verify `flux1-dev-fp8.safetensors` checkpoint slot is populated
-4. Save deployment
-5. Test: `python3 scripts/image_generation/smoke_test_flux_workflow_fix.py --run`
-   — expect 8 renders × 4 genres × 2 configs = $0.24 cost; outputs at
-   `artifacts/qa/flux_workflow_fix_smoke_2026-04-30.md`
+If at some future date manga-on-RunComfy becomes useful (e.g., Pearl
+Star migration, scale beyond local GPU, time-critical batch), the
+correct procedure is:
 
-After re-sync, Path B is unblocked. Until then, Path B is BROKEN; do NOT
-route brand-2 panel work there even if Pearl Star is unavailable.
+1. Create a NEW RunComfy deployment (don't overwrite 677edba8).
+2. Import `scripts/image_generation/comfyui_workflows/flux_txt2img_manga.json`
+   to the new deployment.
+3. Add a new env var (`RUNCOMFY_MANGA_DEPLOYMENT_ID`) tracked in
+   `scripts/ci/integration_env_registry.py`.
+4. Update `runcomfy_batch.py` to accept a deployment-routing arg, OR
+   write a manga-specific submitter that targets the new deployment.
+5. Smoke-test against the new deployment.
+6. Update this doc with the new deployment ID + cost considerations.
+
+This is a multi-hour Pearl_Dev session, not a 5-minute console action.
 
 ## Future composite (Phase 2, not currently scheduled)
 
