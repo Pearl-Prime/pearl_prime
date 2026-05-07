@@ -386,7 +386,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="ahjan_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('ahjan_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/ahjan_ebook.png" loading="lazy" alt="Ahjan Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Stillness Press</div>
@@ -400,8 +400,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-ahjan" preload="metadata" src="assets/audio/audiobook_chapters/ahjan_anxiety_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/ahjan_scene.png" loading="lazy" alt="Ahjan Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('ahjan')" style="cursor:pointer">
+            <img id="manga-img-ahjan" src="assets/manga_covers/ahjan_scene.png" loading="lazy" alt="Ahjan Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -436,16 +436,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
-</div>
-</div>
-</div>
-        </div>
-      </div>
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('ahjan_book')">
@@ -1394,7 +1386,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="adi_da_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('adi_da_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/adi_da_ebook.png" loading="lazy" alt="Adi Da Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Feather & Scale Press</div>
@@ -1408,8 +1400,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-adi_da" preload="metadata" src="assets/audio/audiobook_chapters/adi_da_self_worth_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/adi_da_scene.png" loading="lazy" alt="Adi Da Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('adi_da')" style="cursor:pointer">
+            <img id="manga-img-adi_da" src="assets/manga_covers/adi_da_scene.png" loading="lazy" alt="Adi Da Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -1446,16 +1438,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
-</div>
-</div>
-</div>
-        </div>
-      </div>
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('adi_da_book')">
@@ -2561,7 +2545,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="master_feung_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('master_feung_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/master_feung_ebook.png" loading="lazy" alt="Master Feung Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Root & Meridian Press</div>
@@ -2575,8 +2559,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-master_feung" preload="metadata" src="assets/audio/audiobook_chapters/master_feung_burnout_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/master_feung_scene.png" loading="lazy" alt="Master Feung Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('master_feung')" style="cursor:pointer">
+            <img id="manga-img-master_feung" src="assets/manga_covers/master_feung_scene.png" loading="lazy" alt="Master Feung Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -2613,16 +2597,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
-</div>
-</div>
-</div>
-        </div>
-      </div>
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('master_feung_book')">
@@ -3182,7 +3158,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="sai_ma_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('sai_ma_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/sai_ma_ebook.png" loading="lazy" alt="Sai Ma Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Open Vessel Press</div>
@@ -3196,8 +3172,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-sai_ma" preload="metadata" src="assets/audio/audiobook_chapters/sai_ma_grief_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/sai_ma_scene.png" loading="lazy" alt="Sai Ma Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('sai_ma')" style="cursor:pointer">
+            <img id="manga-img-sai_ma" src="assets/manga_covers/sai_ma_scene.png" loading="lazy" alt="Sai Ma Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -3234,16 +3210,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
-</div>
-</div>
-</div>
-        </div>
-      </div>
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('sai_ma_book')">
@@ -3934,7 +3902,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="ra_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('ra_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/ra_ebook.png" loading="lazy" alt="Ra Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Ember & Ash Publishing</div>
@@ -3948,8 +3916,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-ra" preload="metadata" src="assets/audio/audiobook_chapters/ra_self_worth_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/ra_scene.png" loading="lazy" alt="Ra Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('ra')" style="cursor:pointer">
+            <img id="manga-img-ra" src="assets/manga_covers/ra_scene.png" loading="lazy" alt="Ra Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -3986,16 +3954,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
-</div>
-</div>
-</div>
-        </div>
-      </div>
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('ra_book')">
@@ -4666,7 +4626,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="junko_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('junko_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/junko_ebook.png" loading="lazy" alt="Junko Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Bare Form Books</div>
@@ -4680,8 +4640,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-junko" preload="metadata" src="assets/audio/audiobook_chapters/junko_overthinking_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/junko_scene.png" loading="lazy" alt="Junko Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('junko')" style="cursor:pointer">
+            <img id="manga-img-junko" src="assets/manga_covers/junko_scene.png" loading="lazy" alt="Junko Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -4716,9 +4676,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
 </div>
@@ -5605,7 +5562,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="miki_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('miki_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/miki_ebook.png" loading="lazy" alt="Miki Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Present Tense Books</div>
@@ -5619,8 +5576,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-miki" preload="metadata" src="assets/audio/audiobook_chapters/miki_imposter_syndrome_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/miki_scene.png" loading="lazy" alt="Miki Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('miki')" style="cursor:pointer">
+            <img id="manga-img-miki" src="assets/manga_covers/miki_scene.png" loading="lazy" alt="Miki Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -5657,16 +5614,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
-</div>
-</div>
-</div>
-        </div>
-      </div>
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('miki_book')">
@@ -6295,7 +6244,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="master_wu_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('master_wu_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/master_wu_ebook.png" loading="lazy" alt="Master Wu Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Iron Gate Press</div>
@@ -6309,8 +6258,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-master_wu" preload="metadata" src="assets/audio/audiobook_chapters/master_wu_courage_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/master_wu_scene.png" loading="lazy" alt="Master Wu Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('master_wu')" style="cursor:pointer">
+            <img id="manga-img-master_wu" src="assets/manga_covers/master_wu_scene.png" loading="lazy" alt="Master Wu Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -6347,9 +6296,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
 </div>
@@ -6924,7 +6870,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="pamela_fellows_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('pamela_fellows_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/pamela_fellows_ebook.png" loading="lazy" alt="Pamela Fellows Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Felt Sense Publishing</div>
@@ -6938,8 +6884,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-pamela_fellows" preload="metadata" src="assets/audio/audiobook_chapters/pamela_fellows_burnout_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/pamela_fellows_scene.png" loading="lazy" alt="Pamela Fellows Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('pamela_fellows')" style="cursor:pointer">
+            <img id="manga-img-pamela_fellows" src="assets/manga_covers/pamela_fellows_scene.png" loading="lazy" alt="Pamela Fellows Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -6976,16 +6922,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
-</div>
-</div>
-</div>
-        </div>
-      </div>
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('pamela_fellows_book')">
@@ -7824,7 +7762,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="joshin_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('joshin_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/joshin_ebook.png" loading="lazy" alt="Joshin Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Clear Seeing Books</div>
@@ -7838,8 +7776,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-joshin" preload="metadata" src="assets/audio/audiobook_chapters/joshin_anxiety_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/joshin_scene.png" loading="lazy" alt="Joshin Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('joshin')" style="cursor:pointer">
+            <img id="manga-img-joshin" src="assets/manga_covers/joshin_scene.png" loading="lazy" alt="Joshin Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -7874,9 +7812,6 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
 </div>
@@ -8312,7 +8247,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="maat_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('maat_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/maat_ebook.png" loading="lazy" alt="Maat Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Feather & Scale Press</div>
@@ -8326,8 +8261,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-maat" preload="metadata" src="assets/audio/audiobook_chapters/maat_boundaries_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/maat_scene.png" loading="lazy" alt="Maat Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('maat')" style="cursor:pointer">
+            <img id="manga-img-maat" src="assets/manga_covers/maat_scene.png" loading="lazy" alt="Maat Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -8364,16 +8299,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
-</div>
-</div>
-</div>
-        </div>
-      </div>
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('maat_book')">
@@ -8992,7 +8919,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="omote_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('omote_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/omote_ebook.png" loading="lazy" alt="Omote Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Held Ground Press</div>
@@ -9006,8 +8933,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-omote" preload="metadata" src="assets/audio/audiobook_chapters/omote_sleep_anxiety_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/omote_scene.png" loading="lazy" alt="Omote Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('omote')" style="cursor:pointer">
+            <img id="manga-img-omote" src="assets/manga_covers/omote_scene.png" loading="lazy" alt="Omote Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -9044,16 +8971,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
-</div>
-</div>
-</div>
-        </div>
-      </div>
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('omote_book')">
@@ -9617,7 +9536,7 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
       <div id="master_sha_formats" class="collapsible" style="display:block">
         <div class="formats-grid">
-          <div class="format-card">
+          <div class="format-card" onclick="toggleSection('master_sha_book')" style="cursor:pointer">
             <img src="assets/covers/kdp/master_sha_ebook.png" loading="lazy" alt="Master Sha Ebook" onerror="this.style.display='none'">
             <div class="format-label">Ebook</div>
             <div class="format-brand">Night Architecture Books</div>
@@ -9631,8 +9550,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
             <div class="format-meta">Ch 1 · click to play</div>
             <audio id="audiobook-master_sha" preload="metadata" src="assets/audio/audiobook_chapters/master_sha_grief_ch1.mp3"></audio>
           </div>
-          <div class="format-card">
-            <img src="assets/manga_covers/master_sha_scene.png" loading="lazy" alt="Master Sha Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
+          <div class="format-card" onclick="cycleManga('master_sha')" style="cursor:pointer">
+            <img id="manga-img-master_sha" src="assets/manga_covers/master_sha_scene.png" loading="lazy" alt="Master Sha Character" onerror="this.style.display='none'" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:4px;margin-bottom:8px">
             <div class="format-label">Manga</div>
             <div class="format-meta">Character art</div>
           </div>
@@ -9669,16 +9588,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
 
       <!-- LISTEN -->
-        </div>
-        </div>
-      </div>
 
       <!-- READ MANGA -->
-</div>
-</div>
-</div>
-        </div>
-      </div>
 
       <!-- READ BOOK -->
       <div class="section-toggle" onclick="toggleSection('master_sha_book')">
@@ -10419,7 +10330,14 @@ function cycleManga(tid) {
 <script>
 /* Podcast click-to-play — only one plays at a time */
 const _pod = { el: null, tid: null };
-function togglePodcast(tid) {
+function toggleAudiobook(tid) {
+      var audio = document.getElementById('audiobook-' + tid);
+      var icon  = document.getElementById('play-ab-' + tid);
+      if (!audio) return;
+      if (audio.paused) { audio.play(); if(icon) icon.style.opacity='0'; }
+      else { audio.pause(); if(icon) icon.style.opacity='1'; }
+    }
+    function togglePodcast(tid) {
   const audio = document.getElementById('podcast-' + tid);
   const overlay = document.getElementById('play-' + tid);
   if (!audio || !overlay) return;
