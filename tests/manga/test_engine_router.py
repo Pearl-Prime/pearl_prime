@@ -119,3 +119,44 @@ def test_load_brand_list_against_real_repo():
         assert len(brands) >= 1
     elif isinstance(brands, list):
         assert len(brands) >= 1
+
+
+# ── Phase B Path B fallback (operator-supervised install scenario) ──────────
+
+def test_available_engines_filter_degrades_to_flux_when_qwen_not_installed():
+    """Path B: Qwen install deferred. seinen/essay routes that would pick
+    Qwen instead degrade to FLUX-schnell with explicit fallback reasoning."""
+    sel = select_engine(
+        brand_id="cognitive_clarity", genre="essay",
+        market_demo="josei", brand_list=_BRAND_LIST,
+        available_engines={ENGINE_FLUX_SCHNELL, ENGINE_ANIMAGINE},
+    )
+    assert sel.engine == ENGINE_FLUX_SCHNELL
+    assert sel.fallback_used is True
+    assert "qwen_image" in sel.fallback_reason or "Qwen-Image" in sel.fallback_reason or "qwen" in sel.fallback_reason.lower()
+
+
+def test_available_engines_passes_through_when_chosen_engine_installed():
+    """Animagine route passes through when Animagine IS in available_engines."""
+    sel = select_engine(
+        brand_id="stillness_press", genre="healing",
+        brand_list=_BRAND_LIST,
+        available_engines={ENGINE_FLUX_SCHNELL, ENGINE_ANIMAGINE},
+    )
+    assert sel.engine == ENGINE_ANIMAGINE
+    # Routing-rule fallback should NOT fire — engine matched the routing
+    # rule AND was available
+    assert "not in available_engines" not in sel.fallback_reason
+
+
+def test_available_engines_none_means_trust_routing_rules():
+    """available_engines=None preserves pre-runtime-registry behavior
+    (the unit-test default + the back-compat path for non-Pearl-Star
+    consumers)."""
+    sel = select_engine(
+        brand_id="cognitive_clarity", genre="essay",
+        market_demo="josei", brand_list=_BRAND_LIST,
+        available_engines=None,
+    )
+    # No availability check applied — Qwen wins per the routing rule
+    assert sel.engine == ENGINE_QWEN

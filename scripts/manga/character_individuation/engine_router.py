@@ -143,6 +143,7 @@ def select_engine(
     use_reference: bool = False,
     brand_list: dict | None = None,
     workflows_dir: Path | None = None,
+    available_engines: set[str] | None = None,
 ) -> EngineSelection:
     """Select base model + workflow + sampler per inputs.
 
@@ -152,6 +153,14 @@ def select_engine(
       2. Genre-driven match (genre is more specific than demographic)
       3. Demographic-driven match
       4. Fallback to FLUX-schnell (the V1 brand-2 ship config)
+
+    If ``available_engines`` is provided, the chosen engine is checked
+    against the install-time runtime registry; if the chosen engine isn't
+    installed yet (e.g. Qwen-Image deferred per Phase B Path B), we
+    degrade to FLUX-schnell with explicit ``fallback_used=True`` +
+    reasoning so callers can log the degradation. ``available_engines=None``
+    means "trust the routing rules" (the unit-test default and the
+    pre-runtime-registry behavior).
     """
     workflows_dir = workflows_dir or DEFAULT_WORKFLOWS_DIR
 
@@ -188,6 +197,20 @@ def select_engine(
         fallback_reason = (
             f"no genre / demographic match (brand={brand_id}, genre={genre}, "
             f"market_demo={market_demo}); fallback to FLUX-schnell"
+        )
+        reasoning_bits.append(fallback_reason)
+
+    # Phase B Path B fallback: if the chosen engine isn't actually installed
+    # on Pearl Star yet (Qwen-Image deferred to a focused operator session
+    # per artifacts/qa/pearl_star_v2_install_log_2026-05-07.md), degrade to
+    # FLUX-schnell rather than silently routing to a missing checkpoint.
+    if available_engines is not None and engine not in available_engines:
+        original_engine = engine
+        engine = ENGINE_FLUX_SCHNELL
+        fallback_used = True
+        fallback_reason = (
+            f"chosen engine {original_engine!r} not in available_engines "
+            f"({sorted(available_engines)}); degrading to FLUX-schnell"
         )
         reasoning_bits.append(fallback_reason)
 

@@ -188,6 +188,8 @@ use_reference) tuple.
 
 Phase B installs `lldacing/ComfyUI_PuLID_Flux_ll` (FaceNet variant) for the FLUX path and `cubiq/PuLID_ComfyUI` for the SDXL/Animagine path. Use **`PulidFluxFaceNetLoader`** specifically — `PulidFluxInsightFaceLoader` would pull the AntelopeV2 weights which are non-commercial. See `docs/runbooks/PEARL_STAR_PULID_INSTALL_2026-05-07.md` for the install procedure (venv torch-conflict caveat included).
 
+**INSTALL STATUS — 2026-05-07 (Pearl_Int):** Phase B install bringup executed per the runbook. Both PuLID node packs cloned at the commits documented in [`pearl_star_node_inventory.md`](pearl_star_node_inventory.md); `facenet-pytorch 2.6.0` installed via `--no-deps` workaround so torch 2.11.0+cu130 is preserved. Qwen-Image + Animagine XL 4.0 checkpoints downloaded to per-model subdirectories under `~/phoenix_server/ComfyUI/models/checkpoints/`. Full transcript at [`artifacts/qa/pearl_star_v2_install_log_2026-05-07.md`](../../artifacts/qa/pearl_star_v2_install_log_2026-05-07.md). License flags re-verified — none have changed since audit `2026-04-29`.
+
 ### V2 routing summary
 
 ```
