@@ -836,3 +836,25 @@ Anti-drift check (additive on draft's own check): The music-mode subsystem expan
 - Pearl_Dev → `ws_manga_v2_phase_d_anatomical_integration_20260507` → trigger = Phase D research ws closes with vetted asset list.
 - Pearl_Dev → `ws_manga_v2_phase_e_re_render_smoke_20260507` → trigger = Phases A+B+C+D all merged.
 - Pearl_GitHub → `ws_manga_v2_supersede_dev_stub_20260507` (small follow-up doc edit) → trigger = PR #923 merged + this cap-entry PR merged.
+
+### QI-FOUNDATION-CANONICAL-RECONCILIATION-01 — `qi_foundation` alias in `brand_lora_plans` vs canonical **`qi_foundation_cultivation`** (PR #940 D1; ratification **proposed** 2026-05-08)
+
+**Status:** **proposed** (cap + audit artifact only — YAML execution deferred to Pearl_Dev follow-up PR).
+
+**Context:** PR #940 scoping discrepancy **D1**: `config/manga/brand_lora_plans.yaml` references **`qi_foundation`** — `brand_suffixes` binds suffix **`qf`** at **line ~27**; **`character_loras.master_feung`** (**lines ~67–73**) uses **`trigger_word: "feung_qf"`** and **`style_ref: qi_foundation`**; **`brand_style_loras`** Block **~159–163** uses root key **`qi_foundation`** with **`style_qf`**. **`config/manga/canonical_brand_list.yaml`** has **no** `qi_foundation` key; the Path-X manga brand exists as **`qi_foundation_cultivation`** (**~288–293** under `brands:`). Adjacent **`config/manga/*.yaml`** files (`brand_genre_allocation.yaml`, `manga_brand_series_plan.yaml`, `character_brand_registry.yaml`, `japan_dual_track_config.yaml`, `brand_illustration_styles.yaml`) still key **`qi_foundation`** — second-order drift; catalog series plans already cite **`brand_id: qi_foundation_cultivation`**. Project routing: **`proj_manga_catalog_reconciliation_20260426`** (canonical 37-brand registry governance per ACTIVE_PROJECTS).
+
+**Decision:** **Direction B.** Do **not** add a 38ᵗʰ **`qi_foundation`** row to `canonical_brand_list.yaml` (**Direction A rejected** — would duplicate **`qi_foundation_cultivation`** and break Path X **37 manga brands** invariant). **`brand_lora_plans`** is subordinate configuration; it must consume **canonical `brand_id` strings**. Pearl_Dev fixes by **replacing** **`qi_foundation`** keys/refs with **`qi_foundation_cultivation`**, **retaining `qf`**/`feung_qf`/`style_qf` as suffix/trigger convention, and **rebinding `master_feung`** to the canonical brand. Optional extended sweep: rename **`qi_foundation`** → **`qi_foundation_cultivation`** in other `config/manga/*.yaml` call sites to remove inner-field contradictions (e.g. `character_brand_registry` **`brand_id: qi_foundation`**).
+
+**Anti-drift:** Target CI invariant: **every** `brand_suffixes` key **and** every `style_ref` / `brand_style_loras` root key that denotes a **manga canonical brand** must satisfy **key ∈ `canonical_brand_list.brands`**. **Staged enforcement** (Pearl_DevOps + Pearl_Dev): **Phase 1** — land this cap’s Pearl_Dev YAML fix + add a **fatal check** for reintroduction of alias **`qi_foundation`** where canonical expects **`qi_foundation_cultivation`** in LoRA/teaching-plane configs. **Phase 2** — expand to full key-set crosswalk (note: `brand_suffixes` today uses other abbreviated slugs vs canonical full names — full strict mode may require a one-time alias map or broader rename batch; track under `proj_manga_catalog_reconciliation_20260426`).
+
+**Action items:**
+1. **Pearl_Dev:** follow-up PR — edit **`config/manga/brand_lora_plans.yaml`** per Direction B; optionally batch the §2 `config/manga/` alias sweep in same or sequenced PR.
+2. **Pearl_DevOps** (primary CI gate owner) **+ Pearl_Dev** (domain script assist): add **`ws_brand_suffix_canonical_ci_20260508`** — CI script + workflow job implementing Phase 1 (alias regression) then Phase 2 (full ⊂-check or approved alias map).
+
+**Handoffs:**
+- **Pearl_Dev** → YAML execution PR → trigger = merge of this cap PR.
+- **Pearl_DevOps** → CI workstream above → trigger = after Pearl_Dev lands Phase-1 YAML (or in parallel if check is forward-compatible).
+
+**Budget:** This PR = **docs-only** (~2 files, ~0 engineering risk). Follow-up Pearl_Dev YAML PR = **small** (single-file minimum; **medium** if full `config/manga/` alias sweep). CI Phase 1 = **~0.5–1 eng-day** (script + workflow); Phase 2 = **backlog sized** after alias inventory.
+
+**Audit artifact:** `artifacts/qa/qi_foundation_canonical_reconciliation_2026-05-08.md`.
