@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime — Musician Reflections Survey</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --border: #334155;
+    --txt: #e2e8f0;
+    --muted: #94a3b8;
+    --amber: #f59e0b;
+    --teal: #14b8a6;
+    --red: #ef4444;
+    --mono: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--txt); font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; padding: 40px 20px 80px; }
+  .container { max-width: 720px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 48px; }
+  header .logo { font-family: var(--mono); font-size: 0.75rem; color: var(--amber); letter-spacing: 0.1em; margin-bottom: 12px; }
+  header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+  header p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; max-width: 540px; margin: 0 auto; }
+  .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+  .section-title { font-family: var(--mono); font-size: 0.7rem; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .field { margin-bottom: 20px; }
+  .field:last-child { margin-bottom: 0; }
+  label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--txt); margin-bottom: 6px; }
+  label .hint { font-weight: 400; color: var(--muted); font-size: 0.8rem; display: block; margin-top: 2px; }
+  input[type="text"], input[type="email"], textarea, select {
+    width: 100%; background: #0f172a; border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; color: var(--txt); font-size: 0.9rem; font-family: inherit;
+    outline: none; transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--amber); }
+  textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+  .tag-input { display: flex; flex-wrap: wrap; gap: 8px; background: #0f172a; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; cursor: text; min-height: 44px; align-items: center; }
+  .tag-input:focus-within { border-color: var(--amber); }
+  .tag { background: var(--border); color: var(--txt); border-radius: 4px; padding: 2px 8px; font-size: 0.8rem; display: flex; align-items: center; gap: 4px; }
+  .tag button { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.9rem; line-height: 1; padding: 0; }
+  .tag-input input { border: none; background: transparent; color: var(--txt); font-size: 0.85rem; outline: none; flex: 1; min-width: 120px; padding: 2px 4px; }
+  .radio-group, .check-group { display: flex; flex-wrap: wrap; gap: 10px; }
+  .radio-group label, .check-group label {
+    display: flex; align-items: center; gap: 8px; cursor: pointer;
+    background: #0f172a; border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 14px; font-size: 0.85rem; font-weight: 400; color: var(--muted);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .radio-group label:has(input:checked), .check-group label:has(input:checked) { border-color: var(--amber); color: var(--txt); }
+  .radio-group input, .check-group input { accent-color: var(--amber); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 540px) { .field-row { grid-template-columns: 1fr; } }
+  .consent-block { background: #0f172a; border: 1px solid var(--border); border-radius: 8px; padding: 16px; font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+  .submit-btn {
+    width: 100%; padding: 14px; background: var(--amber); color: #000;
+    font-weight: 700; font-size: 1rem; border: none; border-radius: 10px;
+    cursor: pointer; transition: opacity 0.2s; margin-top: 8px;
+  }
+  .submit-btn:hover { opacity: 0.9; }
+  .progress { height: 3px; background: var(--border); border-radius: 2px; margin-bottom: 32px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--amber), var(--teal)); width: 0%; transition: width 0.3s; }
+  .required { color: var(--amber); }
+  #success { display: none; text-align: center; padding: 60px 20px; }
+  #success .icon { font-size: 3rem; margin-bottom: 16px; }
+  #success h2 { font-size: 1.5rem; margin-bottom: 8px; }
+  #success p { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo">Pearl Prime · Music Mode</div>
+    <h1>Musician Reflections Survey</h1>
+    <p>Help Pearl Prime understand your voice, your craft, and the healing intent behind your music. Responses shape your AI-generated reflections and lyric companions.</p>
+  </header>
+
+  <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+
+  <form id="survey-form">
+
+    <!-- IDENTITY -->
+    <div class="section">
+      <div class="section-title">01 · Identity</div>
+      <div class="field-row">
+        <div class="field">
+          <label>Display Name <span class="required">*</span></label>
+          <input type="text" name="display_name" placeholder="How you want to be known" required>
+        </div>
+        <div class="field">
+          <label>Years Active</label>
+          <input type="text" name="years_active" placeholder="e.g. 8">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Primary Genre <span class="required">*</span></label>
+          <input type="text" name="primary_genre" placeholder="e.g. indie folk, ambient, jazz" required>
+        </div>
+        <div class="field">
+          <label>Secondary Genres</label>
+          <input type="text" name="secondary_genres" placeholder="Comma-separated">
+        </div>
+      </div>
+      <div class="field">
+        <label>Primary Instruments
+          <span class="hint">Comma-separated list</span>
+        </label>
+        <input type="text" name="primary_instruments" placeholder="e.g. voice, acoustic guitar, piano">
+      </div>
+      <div class="field">
+        <label>Creative Phases
+          <span class="hint">Describe how your work has evolved — e.g. "early acoustic", "current sparse arrangements"</span>
+        </label>
+        <textarea name="creative_phases" rows="2" placeholder="Early work → current phase..."></textarea>
+      </div>
+    </div>
+
+    <!-- THEMES -->
+    <div class="section">
+      <div class="section-title">02 · Themes &amp; Voice</div>
+      <div class="field">
+        <label>Primary Themes <span class="required">*</span>
+          <span class="hint">What core emotional / human experiences run through your work?</span>
+        </label>
+        <input type="text" name="primary_themes" placeholder="e.g. recovery, quiet courage, presence" required>
+      </div>
+      <div class="field">
+        <label>Themes You Actively Avoid
+          <span class="hint">Aesthetic or emotional territory you reject</span>
+        </label>
+        <input type="text" name="avoided_themes" placeholder="e.g. glamour, pain-as-aesthetic">
+      </div>
+      <div class="field">
+        <label>One Thing You Hope Listeners Feel or Know
+          <span class="hint">Your single most important listener intention</span>
+        </label>
+        <textarea name="listener_hope_one" rows="2" placeholder="That ____"></textarea>
+      </div>
+    </div>
+
+    <!-- VOICE CRAFT -->
+    <div class="section">
+      <div class="section-title">03 · Voice &amp; Craft</div>
+      <div class="field">
+        <label>Lyric Person</label>
+        <div class="radio-group">
+          <label><input type="radio" name="voice_person" value="first_person"> First person (I)</label>
+          <label><input type="radio" name="voice_person" value="second_person"> Second person (you)</label>
+          <label><input type="radio" name="voice_person" value="third_person"> Third person</label>
+          <label><input type="radio" name="voice_person" value="mixed"> Mixed</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Register / Tone</label>
+        <div class="radio-group">
+          <label><input type="radio" name="register" value="plain_spoken"> Plain-spoken</label>
+          <label><input type="radio" name="register" value="poetic"> Poetic / elevated</label>
+          <label><input type="radio" name="register" value="conversational"> Conversational</label>
+          <label><input type="radio" name="register" value="spiritual"> Spiritual / devotional</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Pacing</label>
+        <div class="radio-group">
+          <label><input type="radio" name="pacing" value="slow"> Slow / sparse</label>
+          <label><input type="radio" name="pacing" value="varied"> Varied</label>
+          <label><input type="radio" name="pacing" value="driving"> Driving / rhythmic</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Signature Devices or Images
+          <span class="hint">Recurring metaphors, imagery, or structural moves that define your voice</span>
+        </label>
+        <textarea name="signature_devices" rows="2" placeholder="e.g. returning morning imagery, short refrain lines..."></textarea>
+      </div>
+    </div>
+
+    <!-- MATERIAL FOR REFLECTION -->
+    <div class="section">
+      <div class="section-title">04 · Material for Reflection</div>
+      <div class="field">
+        <label>Touchstone Tracks (your own or influences)
+          <span class="hint">Songs that represent the emotional world you're working in</span>
+        </label>
+        <textarea name="touchstone_tracks" rows="2" placeholder="Track / artist — one per line or comma-separated"></textarea>
+      </div>
+      <div class="field">
+        <label>Key Collaborators (optional)</label>
+        <input type="text" name="key_collaborators" placeholder="Producer, co-writer, etc.">
+      </div>
+      <div class="field">
+        <label>Links / Citations (Spotify, Bandcamp, etc.)</label>
+        <input type="text" name="citations_links" placeholder="https://...">
+      </div>
+    </div>
+
+    <!-- HEALING INTENT -->
+    <div class="section">
+      <div class="section-title">05 · Healing Intent</div>
+      <div class="field">
+        <label>What does your music help heal or open up? <span class="required">*</span>
+          <span class="hint">In your own words — this shapes the reflection framing</span>
+        </label>
+        <textarea name="what_helps_heal" rows="3" placeholder="Stillness through honest lyric — naming small fears without dramatizing them..." required></textarea>
+      </div>
+      <div class="field">
+        <label>Listener Responses You Want to Amplify
+          <span class="hint">Feedback you've received that you want more of</span>
+        </label>
+        <textarea name="listener_responses_to_amplify" rows="2" placeholder="e.g. Readers said the quiet songs made room to breathe..."></textarea>
+      </div>
+      <div class="field">
+        <label>Wellness Framings You Reject
+          <span class="hint">Tropes or narratives you don't want in your reflections</span>
+        </label>
+        <textarea name="wellness_framing_rejects" rows="2" placeholder="e.g. Myth that pain is required for depth..."></textarea>
+      </div>
+    </div>
+
+    <!-- OUTPUT PREFERENCES -->
+    <div class="section">
+      <div class="section-title">06 · Output Preferences</div>
+      <div class="field">
+        <label>Lyric Form (if generating lyric companions)</label>
+        <div class="radio-group">
+          <label><input type="radio" name="lyric_form" value="free_verse"> Free verse</label>
+          <label><input type="radio" name="lyric_form" value="structured"> Structured / rhymed</label>
+          <label><input type="radio" name="lyric_form" value="prose_poem"> Prose poem</label>
+          <label><input type="radio" name="lyric_form" value="no_lyrics"> No lyrics please</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Reflection Perspective</label>
+        <div class="radio-group">
+          <label><input type="radio" name="reflection_perspective" value="musician"> As musician (first person)</label>
+          <label><input type="radio" name="reflection_perspective" value="listener"> As listener</label>
+          <label><input type="radio" name="reflection_perspective" value="mixed"> Mixed</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Output Options</label>
+        <div class="check-group">
+          <label><input type="checkbox" name="explicit_ok" value="yes"> Explicit content OK</label>
+          <label><input type="checkbox" name="ai_song_consent" value="yes"> AI companion song consent</label>
+          <label><input type="checkbox" name="ai_reflections_consent" value="yes"> AI reflections consent</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Lyric Length Note
+          <span class="hint">Any constraint on block length e.g. "8–14 lines per block"</span>
+        </label>
+        <input type="text" name="lyric_length_note" placeholder="e.g. 8–14 lines per block">
+      </div>
+    </div>
+
+    <!-- CONSENT -->
+    <div class="section">
+      <div class="section-title">07 · Consent &amp; Contact</div>
+      <div class="consent-block">
+        Your responses will be stored as a YAML profile and used to generate personalised AI reflections, lyric companions, and podcast atoms through Pearl Prime's Music Mode pipeline. No data is shared with third parties. You can request deletion at any time.
+      </div>
+      <div class="field">
+        <label>Usage Restrictions (optional)
+          <span class="hint">Any specific limits on how your data may be used</span>
+        </label>
+        <textarea name="usage_restrictions" rows="2" placeholder="e.g. Non-commercial only; no social media reposts without permission..."></textarea>
+      </div>
+      <div class="field">
+        <label>Follow-up Email (optional)
+          <span class="hint">To receive your generated reflections</span>
+        </label>
+        <input type="email" name="followup_email" placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label>Signature / Name for Consent <span class="required">*</span></label>
+        <input type="text" name="signature" placeholder="Your name as consent" required>
+      </div>
+      <button type="submit" class="submit-btn">Submit Reflections Survey →</button>
+    </div>
+
+  </form>
+
+  <div id="success">
+    <div class="icon">🎵</div>
+    <h2>Survey received.</h2>
+    <p>Your musician profile is being processed. Reflections will be ready shortly.</p>
+  </div>
+
+</div>
+
+<script>
+  // Progress bar
+  const fields = document.querySelectorAll('input, textarea, select');
+  function updateProgress() {
+    let filled = 0;
+    fields.forEach(f => { if (f.value && f.value.trim()) filled++; });
+    document.getElementById('progress-fill').style.width = Math.round((filled / fields.length) * 100) + '%';
+  }
+  fields.forEach(f => f.addEventListener('input', updateProgress));
+  fields.forEach(f => f.addEventListener('change', updateProgress));
+
+  // Form submit
+  document.getElementById('survey-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = {};
+    new FormData(this).forEach((v, k) => { data[k] = v; });
+    console.log('Survey data:', JSON.stringify(data, null, 2));
+    // TODO: POST to backend or save as YAML via API
+    document.getElementById('survey-form').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+  });
+</script>
+</body>
+</html>
