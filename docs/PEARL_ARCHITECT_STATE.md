@@ -933,3 +933,64 @@ Anti-drift check (additive on draft's own check): The music-mode subsystem expan
 - `artifacts/qa/teacher_manga_30s_locale_brand_matrix_2026-05-08.tsv` (13-row matrix with rationale + flags)
 - `PRJ-TEACHER-MANGA-30S-VIDEO-V1` (in `ACTIVE_PROJECTS.tsv`)
 - 3 workstream rows in `ACTIVE_WORKSTREAMS.tsv` (status=proposed)
+
+### PER-CHAPTER-OVERLAY-ENFORCEMENT-V1-01 — Per-chapter overlay rule enforcement scoped; unblocks YELLOW ITEM-2 (`your nervous system` allowlist removal) (decision ratified 2026-05-08)
+
+**Status:** **ratified** (2026-05-08). Subsystem: `core_pipeline`. Project: PRJ-PEARL-PRIME-Q-GATES. Workstreams opened: `ws_per_chapter_overlay_enforcement_design_20260508` (status=proposed, Pearl_Architect), `ws_per_chapter_overlay_enforcement_impl_20260508` (status=proposed, Pearl_Dev — covers Phases 1/2/3).
+
+**Context:** Sprint 1 YELLOW ITEM-1 (PR #941, SHA aed7d2a017) replaced the raw `ignored_prefixes` tuple in `_repeated_phrase_violations` with a YAML-backed `config/quality/refrain_allowlist.yaml` (43 entries: 36 `legitimate_motif` cap=18, 7 `doctrinal_attribution` cap=14). ITEM-1 closed the book-wide cap gap. ITEM-2 — removal of `"your nervous system"` from the allowlist — was deferred because the allowlist entry carries `todo: ITEM-2:remove-when-per-chapter-overlay-active`: removing it without overlay enforcement would cause spurious gate failures on any somatic book where the phrase is genuinely used as spine vocabulary. This cap ratifies the scope needed to make that removal safe.
+
+**Problem the book-wide cap cannot solve:** A phrase appearing exactly twice per chapter in a 12-chapter book passes the book-wide cap of 18 (cap_per_chapter=2 handles the per-chapter density). What the book-wide cap alone cannot catch is structural: a refrain phrase absent from the climax chapters (arc discontinuity), an attribution phrase appearing in compression chapters (cognitive competition), or a fragment phrase clustering 5 times in a single chapter even if it is under the book-wide total. The per-chapter overlay enforcement closes these four structural gaps.
+
+**Four overlay rule types (defined precisely in `docs/specs/PER_CHAPTER_OVERLAY_ENFORCEMENT_V1_SPEC.md §2`):**
+
+1. **DENSITY_CEILING** — phrase appears ≤N times per chapter (default N=2 for `legitimate_motif`). Spec source: `BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md §6 Pacing Rules`. Reader failure mode: within-chapter mantra fatigue.
+
+2. **PRESENCE_FLOOR** — phrase appears ≥1 time in each of the named structural chapter classes (`opening`=ch1, `mid`=ch4–8, `climax`=ch9–10). Spec source: `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` (SOMATIC SLOT GRID). Reader failure mode: arc discontinuity.
+
+3. **DRIFT_DETECTION** — chapter containing phrase ≥3 times triggers per-chapter violation independent of book-wide cap. Spec source: `BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md §2 Voice/Register`. Reader failure mode: phrase drift / audio defect perception.
+
+4. **ABSENCE_GUARD** — phrase must NOT appear in named chapter classes (default for `doctrinal_attribution`: `compression_chapters`). Spec source: `PHOENIX_V4_5_WRITER_SPEC.md §4 TEACHER_DOCTRINE`. Reader failure mode: attribution overload in concept-dense sections.
+
+**Composition rule:** `PASS = book_wide_cap_ok AND all_overlay_rules_ok`. Both gates are mandatory. The violation dict must include a `rule` key: `book_wide_cap` or `overlay:<rule_type>`.
+
+**Critical distinction — cap_per_chapter vs overlay_rule:** `cap_per_chapter` is a numeric ceiling (integer) applied unconditionally to every chapter. `overlay_rule` is a structural rule type (enum) encoding structural assertions about phrase distribution across chapter architecture. They compose independently. An entry with `cap_per_chapter: 2` and `overlay_rule: presence_floor` simultaneously enforces "no more than 2 per chapter" (density) AND "must appear at least once in opening + mid + climax" (structure). These are documented separately in the violation dict.
+
+**Extended YAML schema (new optional fields — back-compat; absence of `overlay_rule` defaults to `none`):**
+```yaml
+overlay_rule: none  # density_ceiling | presence_floor | drift_detection | absence_guard | none
+overlay_param:
+  N: 2
+  structural_chapters: [opening, mid, climax]
+  excluded_chapter_classes: []
+```
+
+**Per-entry overlay assignment summary (Phase 2 targets; full table in spec §6):**
+- Group A entries 1–15 (core somatic instruction motifs): full-phrase entries → `presence_floor`; fragment entries → `none` (governed by parent).
+- Group B entries 16–36 (sprint-1 scene-anchor motifs): root motif sentences → `presence_floor`; n-gram fragments → `drift_detection`. Entry 27 (`your nervous system`) → `drift_detection` (ITEM-2 target).
+- Group C entries 37–43 (TEACHER_DOCTRINE attribution): all → `absence_guard(compression_chapters)`.
+
+**Migration path (ITEM-2 unblock chain):**
+- Phase 1: implement gate extension + extended YAML schema + tests; all current entries default to `overlay_rule: none` (zero behavior change); reference book (50,344-word deep_book_6h anxiety×gen_z, SHA 635e1a96bf) revalidated.
+- Phase 2: per-entry `overlay_rule` assignment sweep PR; revalidate reference book end-to-end.
+- Phase 3: remove `your nervous system` from allowlist; gate must catch it via `drift_detection` OR default book-wide cap >12; ITEM-2 closed when violation fires without the allowlist entry.
+
+**Anti-drift rules:**
+- No silent thresholds — every `overlay_param` must cite spec source.
+- No removal from allowlist without regenerating ≥1 reference book end-to-end before merge.
+- Overlay rule changes require end-to-end reference book rerun before PR merges.
+- Gate must report which rule fired in violation dict (`book_wide_cap` or `overlay:<rule_type>`).
+- `cap_per_chapter` (numeric) and `overlay_rule` (structural) are distinct; violation dict documents them separately.
+
+**Anti-drift check (per Common Drift Patterns):** `docs/specs/PER_CHAPTER_OVERLAY_ENFORCEMENT_V1_SPEC.md` is genuinely new — no existing spec covers per-chapter overlay enforcement rules for the refrain allowlist. It SUPPLEMENTS `config/quality/refrain_allowlist.yaml` (which defines what is allowed) with an enforcement layer (how allowance is conditionally governed). It does NOT duplicate `BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md` or `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` — it cites them as spec sources for each rule's threshold values. The new YAML fields are additive and back-compatible (absence = `none` = no change). Not drift.
+
+**Action items:**
+1. Pearl_Dev (`ws_per_chapter_overlay_enforcement_impl_20260508`, Phase 1): implement gate extension + YAML schema + tests; separate PR after this cap-entry PR merges.
+2. Pearl_Dev (Phase 2 sweep PR, gated on Phase 1 merge): assign `overlay_rule` per-entry per spec §6 table; revalidate reference book.
+3. Pearl_Dev (Phase 3 PR, gated on Phase 2 merge): remove `your nervous system`; confirm gate catches it; ITEM-2 closed.
+4. Pearl_PM: track `ws_per_chapter_overlay_enforcement_impl_20260508` through Phases 1/2/3.
+
+**Handoffs:**
+- Pearl_Dev → `ws_per_chapter_overlay_enforcement_impl_20260508` (Phase 1) → trigger = this cap-entry PR merged.
+- Pearl_PM → update `ws_per_chapter_overlay_enforcement_impl_20260508` status through Phase 2 and Phase 3 → trigger = Phase 1 merged.
+- Pearl_Architect → no follow-up routing needed; spec is self-contained; reopen only if a new structural rule type is proposed.
