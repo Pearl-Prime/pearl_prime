@@ -159,3 +159,47 @@ When opening a manga ship Pearl_Dev session, default the prompt to:
 - DO add a GPU-availability preflight check (`nvidia-smi --query-gpu=memory.free`)
 - DO NOT route to RunComfy unless operator explicitly authorizes the
   paid path AND the deployment re-sync has completed
+
+## V2 update — multi-base-model stack (post Phase B; cap entry MANGA-LAYERED-PIPELINE-V2-01)
+
+After Phase B (cap entry MANGA-LAYERED-PIPELINE-V2-01) lands, the Pearl
+Star render path expands from FLUX-only to a 3-engine commercial-clean
+stack with PuLID-FaceNet identity-lock layered on top. The
+`scripts/manga/character_individuation/engine_router.py` selects the
+right engine + workflow per (brand, genre, demographic, color_mode,
+use_reference) tuple.
+
+### Engine inventory (commercial-clean)
+
+| Engine | License | When | Workflow file |
+|---|---|---|---|
+| **Qwen-Image** | Apache 2.0 | seinen / josei character-distinctness work; CJK speech-bubble rendering on JP/CN locales | `qwen_image_txt2img_manga.json` |
+| **Animagine XL 4.0** | RAIL++-M | shojo / iyashikei / healing register where the anime-soft attractor IS the desired register | `animagine_xl_txt2img_manga.json` |
+| **FLUX-schnell-fp8** | Apache 2.0 | fallback path AND the brand-2 V1 ship config (4 steps / cfg 1.0 / euler / simple); PuLID variant available for FaceNet conditioning | `flux_txt2img_manga.json` (brand-2 V1) + `flux_txt2img_manga_pulid.json` (Phase B PuLID) |
+
+### Banned base models (license-blocked per `artifacts/research/license_risk_register_2026-04-29.md`)
+
+- **FLUX-dev** — non-commercial license; LoRAs trained on it inherit the NC restriction. `brand_lora_plans.yaml::training_defaults.base_model` migrates to schnell or Animagine in Phase C.
+- **Pony Diffusion V6 XL** — explicit no-monetization clause.
+- **NoobAI XL** — explicit no-commercialization clause.
+- **Illustrious-XL standalone** — base contamination blocks generated-image commercial use.
+
+### PuLID-FaceNet identity lock
+
+Phase B installs `lldacing/ComfyUI_PuLID_Flux_ll` (FaceNet variant) for the FLUX path and `cubiq/PuLID_ComfyUI` for the SDXL/Animagine path. Use **`PulidFluxFaceNetLoader`** specifically — `PulidFluxInsightFaceLoader` would pull the AntelopeV2 weights which are non-commercial. See `docs/runbooks/PEARL_STAR_PULID_INSTALL_2026-05-07.md` for the install procedure (venv torch-conflict caveat included).
+
+### V2 routing summary
+
+```
+queue_panel_renders.py (extended Phase B):
+  --workflow-path   → override default workflow
+  --reference-image → auto-selects PuLID variant; injects image into LoadImage node
+
+engine_router.select_engine(brand_id, genre, market_demo, color_mode, use_reference):
+  color_mode=color   → FLUX-schnell + ColorManga (Phase C)
+  genre ∈ Qwen-set   → Qwen-Image
+  genre ∈ Animagine-set → Animagine XL 4.0
+  demographic shojo / kodomomuke → Animagine
+  demographic seinen / josei / mature → Qwen
+  fallback           → FLUX-schnell (V1 brand-2 ship config)
+```

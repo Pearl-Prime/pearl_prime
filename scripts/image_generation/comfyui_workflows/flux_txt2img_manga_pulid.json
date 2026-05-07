@@ -1,0 +1,68 @@
+{
+    "_meta": {
+        "name": "Phoenix Omega — FLUX schnell-fp8 + PuLID-FaceNet (manga panel)",
+        "description": "FLUX-schnell-fp8 base + PuLID-FaceNet identity lock. Reference image conditioning via PulidFluxFaceNetLoader (commercial-clean per audit PR #803; NOT InsightFace AntelopeV2). Sampler is schnell-canonical 4 steps cfg 1.0 euler simple. Generator replaces {{positive_prompt}} / {{negative_prompt}} / {{reference_image}}. 1080x1920 webtoon vertical default.",
+        "version": "1.0.0",
+        "phase": "V2-B-PuLID-FaceNet",
+        "license_notes": "lldacing/ComfyUI_PuLID_Flux_ll Apache 2.0; facenet-pytorch + VGGFace2 commercial-clean weights; flux1-schnell-fp8 Apache 2.0"
+    },
+    "1": {
+        "class_type": "CheckpointLoaderSimple",
+        "inputs": {"ckpt_name": "flux1-schnell-fp8.safetensors"}
+    },
+    "2": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {"text": "{{positive_prompt}}", "clip": ["1", 1]}
+    },
+    "3": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {"text": "{{negative_prompt}}", "clip": ["1", 1]}
+    },
+    "4": {
+        "class_type": "EmptyLatentImage",
+        "inputs": {"width": 1080, "height": 1920, "batch_size": 1}
+    },
+    "10": {
+        "class_type": "LoadImage",
+        "inputs": {"image": "{{reference_image}}"}
+    },
+    "11": {
+        "class_type": "PulidFluxFaceNetLoader",
+        "inputs": {}
+    },
+    "12": {
+        "class_type": "ApplyPulidFlux",
+        "inputs": {
+            "model": ["1", 0],
+            "pulid_flux": ["11", 0],
+            "reference_image": ["10", 0],
+            "weight": 0.85,
+            "start_at": 0.0,
+            "end_at": 1.0,
+            "method": "fidelity"
+        }
+    },
+    "5": {
+        "class_type": "KSampler",
+        "inputs": {
+            "seed": 42,
+            "steps": 4,
+            "cfg": 1.0,
+            "sampler_name": "euler",
+            "scheduler": "simple",
+            "denoise": 1.0,
+            "model": ["12", 0],
+            "positive": ["2", 0],
+            "negative": ["3", 0],
+            "latent_image": ["4", 0]
+        }
+    },
+    "6": {
+        "class_type": "VAEDecode",
+        "inputs": {"samples": ["5", 0], "vae": ["1", 2]}
+    },
+    "7": {
+        "class_type": "SaveImage",
+        "inputs": {"filename_prefix": "manga_panel_pulid", "images": ["6", 0]}
+    }
+}

@@ -164,6 +164,17 @@ def main() -> int:
     ap.add_argument("--seed-base", type=int, default=DEFAULT_SEED, help=f"Seed base (panel index added; default: {DEFAULT_SEED})")
     ap.add_argument("--skip-existing", action="store_true", help="Skip panels whose output PNG already exists")
     ap.add_argument("--dry-run", action="store_true", help="Validate prompts; do not call ComfyUI")
+    # V2 Phase B.7 extensions: workflow override + reference-image conditioning.
+    # Back-compat: when neither --workflow-path nor --reference-image is set,
+    # the existing FLUX-schnell-no-PuLID path runs unchanged (brand-2 V1 ship).
+    ap.add_argument("--workflow-path", default=None,
+                    help="Override the default workflow template (e.g. comfyui_workflows/"
+                         "flux_txt2img_manga_pulid.json for PuLID-FaceNet conditioning)")
+    ap.add_argument("--reference-image", default=None,
+                    help="Reference-image filename for PuLID workflows (must already be uploaded "
+                         "to ComfyUI's input/ dir; replaces the {{reference_image}} placeholder "
+                         "in the workflow JSON LoadImage node). Implies --workflow-path the "
+                         "matching PuLID variant if not explicitly set.")
     args = ap.parse_args()
 
     pp_path = Path(args.panel_prompts).resolve()
@@ -201,10 +212,27 @@ def main() -> int:
             print(f"  [dry] {pid} → {out_dir}/{pid}.png  ({len(prompt)} char prompt)", file=sys.stderr)
         return 0
 
-    if not WORKFLOW_PATH.is_file():
-        print(f"ERROR: workflow template missing: {WORKFLOW_PATH}", file=sys.stderr)
+    # V2 Phase B.7: workflow override + reference-image-aware path
+    workflow_path = Path(args.workflow_path).resolve() if args.workflow_path else WORKFLOW_PATH
+    if args.reference_image and not args.workflow_path:
+        # Imply PuLID variant if reference-image given without explicit workflow
+        pulid_variant = WORKFLOW_PATH.with_name(WORKFLOW_PATH.stem + "_pulid.json")
+        if pulid_variant.is_file():
+            workflow_path = pulid_variant
+            print(f"--reference-image set; auto-selected PuLID variant: {workflow_path.name}", file=sys.stderr)
+    if not workflow_path.is_file():
+        print(f"ERROR: workflow template missing: {workflow_path}", file=sys.stderr)
         return 1
-    workflow_template = load_workflow(WORKFLOW_PATH)
+    workflow_template = load_workflow(workflow_path)
+    if args.reference_image:
+        # Inject reference image filename into LoadImage node's {{reference_image}} placeholder
+        for node in workflow_template.values():
+            if isinstance(node, dict):
+                inputs = node.get("inputs") or {}
+                img = inputs.get("image")
+                if isinstance(img, str) and "{{reference_image}}" in img:
+                    inputs["image"] = args.reference_image
+        print(f"reference image: {args.reference_image} (must be in ComfyUI input/ dir)", file=sys.stderr)
 
     ok = 0
     fail = 0
