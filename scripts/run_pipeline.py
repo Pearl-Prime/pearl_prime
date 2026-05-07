@@ -673,9 +673,6 @@ def _run_spine_pipeline_mode(
         book_seed=seed,
         flow_profile=_flow_profile,
     )
-    prose, _whole_book_dedupe_notes = dedupe_scene_furniture_book(prose)
-    if _whole_book_dedupe_notes:
-        _governance_report.setdefault("whole_book_dedupe_notes", []).extend(_whole_book_dedupe_notes)
     prose = clean_for_delivery(
         prose,
         plan={"runtime_format_id": runtime_fmt, "book_plan_id": book_plan.plan_id},
@@ -686,6 +683,12 @@ def _run_spine_pipeline_mode(
         book_seed=seed,
         flow_profile=_flow_profile,
     )
+    # Sprint-1: run dedupe_scene_furniture_book AFTER both strengthen passes so that
+    # any repeated phrases introduced or survived through strengthen are caught here,
+    # just before the scene_anchor_density check.
+    prose, _whole_book_dedupe_notes = dedupe_scene_furniture_book(prose)
+    if _whole_book_dedupe_notes:
+        _governance_report.setdefault("whole_book_dedupe_notes", []).extend(_whole_book_dedupe_notes)
     # Apply per-chapter word cap from modular output format (see apply_output_format_to_plan above).
     # Preserves the "Chapter N" heading line and paragraph structure so downstream gates can
     # still parse chapters via _extract_registry_chapters; only the body is truncated by words.

@@ -756,6 +756,13 @@ def peek_registry_content_for_beatmap_slot(
     rf = (beatmap.runtime_format or "").strip()
     if rf == "deep_book_6h" and pid:
         persona_atoms = _merged_persona_atoms_deep_6h(pid, topic, root)
+        # Supplement with remaining slot types (REFLECTION, EXERCISE, etc.) from the
+        # primary persona. _merged_persona_atoms_deep_6h only merges HOOK/SCENE/STORY;
+        # beatmap slots like the second REFLECTION (slot_index=6) need persona atoms too.
+        _primary_atoms = _load_persona_atoms(pid, topic)
+        for _st, _atoms in _primary_atoms.items():
+            if _st not in persona_atoms and _atoms:
+                persona_atoms[_st] = _atoms
     elif pid:
         persona_atoms = _load_persona_atoms(pid, topic)
     else:
@@ -826,6 +833,13 @@ def select_enrichment(
     rf_bm = (bm.runtime_format or "").strip()
     if rf_bm == "deep_book_6h" and pid:
         persona_atoms = _merged_persona_atoms_deep_6h(pid, topic, root)
+        # Supplement with remaining slot types (REFLECTION, EXERCISE, etc.) from the
+        # primary persona. _merged_persona_atoms_deep_6h only merges HOOK/SCENE/STORY;
+        # beatmap slots like the second REFLECTION (slot_index=6) need persona atoms too.
+        _primary_atoms = _load_persona_atoms(pid, topic)
+        for _st, _atoms in _primary_atoms.items():
+            if _st not in persona_atoms and _atoms:
+                persona_atoms[_st] = _atoms
     elif pid:
         persona_atoms = _load_persona_atoms(pid, topic)
     else:
@@ -1552,6 +1566,49 @@ def _select_prose_chunk(content: str, seed: str, min_words: int = 21) -> Optiona
     return "\n\n".join(collected) if collected else None
 
 
+def _select_prose_chunk_unique(
+    content: str,
+    seed: str,
+    book_seen_bodies: Optional[set],
+    min_words: int = 21,
+) -> Optional[str]:
+    """
+    Like _select_prose_chunk but skips individual paragraphs already in book_seen_bodies.
+
+    Each paragraph is checked individually against book_seen_bodies (not the whole chunk).
+    This allows collecting ~150 words of prose from unique paragraphs even when the
+    CANONICAL.txt shares some atoms with base enrichment.
+
+    Returns None only if fewer than min_words of unique content can be collected.
+    Falls back to _select_prose_chunk (no dedup filter) when book_seen_bodies is None.
+    """
+    if book_seen_bodies is None:
+        return _select_prose_chunk(content, seed, min_words)
+    if not content:
+        return None
+    paragraphs = [p.strip() for p in re.split(r"\n{2,}", content) if p.strip()]
+    paras = [p for p in paragraphs if len(p.split()) >= min_words]
+    if not paras:
+        return None
+    start_idx = _deterministic_index(f"{seed}:pa_para", len(paras))
+    collected: List[str] = []
+    target = 150
+    for i in range(len(paras)):
+        para = paras[(start_idx + i) % len(paras)]
+        if _norm_ws(para) in book_seen_bodies:
+            continue  # skip paragraphs already used (base or prior depth)
+        collected.append(para)
+        if sum(len(p.split()) for p in collected) >= target:
+            break
+    if not collected:
+        return None
+    # Only return if we have at least min_words of unique content
+    total = sum(len(p.split()) for p in collected)
+    if total < min_words:
+        return None
+    return "\n\n".join(collected)
+
+
 def _load_depth_content(
     source: Dict[str, Any],
     topic: str,
@@ -1560,10 +1617,16 @@ def _load_depth_content(
     chapter_number: int,
     seed: str,
     repo_root: Path,
+    book_seen_bodies: Optional[set] = None,
 ) -> Optional[str]:
     """
     Load actual content for a depth module from a specific source.
     Returns the prose text, or None if not available.
+
+    book_seen_bodies: optional book-level set of _norm_ws(body) strings already used.
+    When provided, any content whose normalized body is already in the set is skipped
+    so the caller can fall through to the next source and avoid producing duplicate
+    paragraphs that _dedup_repeated_blocks would strip later.
     """
     source_type = source.get("type")
     persona_id = (persona_id or "").strip()
@@ -1590,6 +1653,8 @@ def _load_depth_content(
             atom_data = _load_yaml(atoms[idx])
             content = str(atom_data.get("body") or atom_data.get("content") or "").strip()
             if content and len(content.split()) > 20:
+                if book_seen_bodies is not None and _norm_ws(content) in book_seen_bodies:
+                    continue  # already used in another chapter — skip to next slot_type
                 return content
         return None
 
@@ -1600,8 +1665,18 @@ def _load_depth_content(
             if canonical.exists():
                 raw = canonical.read_text(encoding="utf-8")
                 prose = _extract_prose_from_canonical(raw)
-                chunk = _select_prose_chunk(prose, f"{seed}:ch{chapter_number}:{slot_type}")
+                # Use "depth_pa" prefix in seed so depth picks a DIFFERENT starting
+                # paragraph than base enrichment (which uses "{seed}:ch{N}:{slot}").
+                # _select_prose_chunk_unique additionally skips individual paragraphs
+                # already in book_seen_bodies so cross-chapter depth dedup is maintained.
+                chunk = _select_prose_chunk_unique(
+                    prose,
+                    f"{seed}:depth_pa:{chapter_number}:{slot_type}",
+                    book_seen_bodies,
+                )
                 if chunk:
+                    if book_seen_bodies is not None and _norm_ws(chunk) in book_seen_bodies:
+                        continue  # whole chunk already seen — skip to next slot_type
                     return chunk
         topic_dir = repo_root / "atoms" / persona_id / topic
         if topic_dir.exists():
@@ -1614,8 +1689,14 @@ def _load_depth_content(
                 if canonical.exists():
                     raw = canonical.read_text(encoding="utf-8")
                     prose = _extract_prose_from_canonical(raw)
-                    chunk = _select_prose_chunk(prose, f"{seed}:ch{chapter_number}:{engine_dir.name}")
+                    chunk = _select_prose_chunk_unique(
+                        prose,
+                        f"{seed}:depth_eng:{chapter_number}:{engine_dir.name}",
+                        book_seen_bodies,
+                    )
                     if chunk:
+                        if book_seen_bodies is not None and _norm_ws(chunk) in book_seen_bodies:
+                            continue
                         return chunk
         return None
 
@@ -1678,7 +1759,10 @@ def _load_depth_content(
         blocks = _phoenix_standard_text_candidates(data)
         if not blocks:
             return None
-        idx = _deterministic_index(f"{seed}:phoenix", len(blocks))
+        # Include chapter_number in seed so different chapters pick different blocks
+        # from the pool (integration_landing has 7 blocks; 12 chapters → some repeats
+        # but cross-chapter dedup is better than all chapters getting block 0).
+        idx = _deterministic_index(f"{seed}:phoenix:{chapter_number}", len(blocks))
         return blocks[idx]
 
     if source_type == "exercise_atom":
@@ -1744,10 +1828,16 @@ def _fill_chapter_depth(
     pass_label: str,
     audit_list: List[Dict[str, Any]],
     deficit_floor: int,
+    book_seen_bodies: Optional[set] = None,
 ) -> int:
     """
     Attempt to fill one chapter with depth content up to max_words_to_add.
     Returns total words added.
+
+    book_seen_bodies: optional book-level set of _norm_ws(body) strings already used.
+    Passed through to _load_depth_content to skip duplicate atoms across chapters.
+    After adding content, registers both the raw and truncated body so subsequent
+    chapters cannot reuse the same atom.
     """
     phase = _chapter_phase(chapter.number, chapter_count)
     priority_key = f"depth_priority_{phase}"
@@ -1788,6 +1878,7 @@ def _fill_chapter_depth(
                 chapter_number=chapter.number,
                 seed=f"depth:{topic}:{chapter.number}:{module_name}:r{depth_round}:{pass_label}",
                 repo_root=root,
+                book_seen_bodies=book_seen_bodies,
             )
             if not content:
                 continue
@@ -1824,6 +1915,13 @@ def _fill_chapter_depth(
             chapter.total_words += added_w
             words_added_total += added_w
             remaining_allowance -= added_w
+
+            # Register used atom bodies book-wide so subsequent chapters skip them
+            if book_seen_bodies is not None:
+                book_seen_bodies.add(_norm_ws(content))   # full raw atom
+                _trimmed_norm = _norm_ws(trimmed)
+                if _trimmed_norm != _norm_ws(content):
+                    book_seen_bodies.add(_trimmed_norm)   # truncated fragment
 
             audit_list.append({
                 "chapter": chapter.number,
@@ -1896,6 +1994,14 @@ def apply_depth_pass(
     depth_budget_starvation: List[Dict[str, Any]] = []
     audit_list: List[Dict[str, Any]] = enriched_book.enrichment_audit["depth_modules_added"]
 
+    # Per-chapter paragraph dedup: each chapter keeps its own set of used paragraph
+    # bodies (across all depth rounds + passes). This prevents the same source
+    # paragraph from appearing multiple times in the SAME chapter (which causes
+    # scene anchor density violations when the same phrase repeats in many paragraphs).
+    # Different chapters CAN reuse the same source paragraphs — cross-chapter
+    # duplicates are handled by _dedup_repeated_blocks in clean_for_delivery.
+    _chapter_seen_bodies: Dict[int, set] = {}
+
     for _depth_round in range(depth_rounds):
 
         # ── Pass 1: Reservation ─────────────────────────────────────────────
@@ -1966,6 +2072,7 @@ def apply_depth_pass(
                 pass_label=f"p1r{_depth_round}",
                 audit_list=audit_list,
                 deficit_floor=deficit_floor,
+                book_seen_bodies=_chapter_seen_bodies.setdefault(chapter.number, set()),
             )
             reservation_used += added
             depth_words_added_by_chapter[chapter.number] += added
@@ -2033,6 +2140,7 @@ def apply_depth_pass(
                 pass_label=f"p2r{_depth_round}",
                 audit_list=audit_list,
                 deficit_floor=deficit_floor,
+                book_seen_bodies=_chapter_seen_bodies.setdefault(chapter.number, set()),
             )
             depth_words_added_by_chapter[chapter.number] += added
 

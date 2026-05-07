@@ -556,7 +556,8 @@ def _dedupe_paragraphs(
     phrase_memory: EnvironmentPhraseMemory | None = None,
     chapter_index: int = 0,
 ) -> str:
-    seen: set[str] = set()
+    seen_prefixes: set[str] = set()
+    seen_suffixes: set[str] = set()
     out: list[str] = []
     for b in blocks:
         chunk = _strip_slot_artifacts(
@@ -570,10 +571,16 @@ def _dedupe_paragraphs(
             p = para.strip()
             if len(p) < 24:
                 continue
-            key = re.sub(r"\s+", " ", p.lower())[:220]
-            if key in seen:
+            norm = re.sub(r"\s+", " ", p.lower())
+            prefix_key = norm[:220]
+            # Sprint-1: also dedup by suffix (last 120 chars) so exercise templates
+            # that share a common ending sentence (e.g. "Whatever happened — or did
+            # not happen — is exactly right.") don't stack within a chapter.
+            suffix_key = norm[-120:] if len(norm) > 120 else norm
+            if prefix_key in seen_prefixes or suffix_key in seen_suffixes:
                 continue
-            seen.add(key)
+            seen_prefixes.add(prefix_key)
+            seen_suffixes.add(suffix_key)
             out.append(p)
     return "\n\n".join(out)
 
@@ -691,6 +698,11 @@ def build_virtual_slot_streams(
     permission = _first_or_join(b["PERMISSION"])
     compression = _first_or_join(b["COMPRESSION"])
     doctrine = _first_or_join(b["TEACHER_DOCTRINE"])
+    # Sprint-1 word-floor fix: route TEACHER_DOCTRINE to COMPRESSION so it is
+    # appended verbatim by compose_chapter_prose (compose_chapter_prose never adds
+    # doctrine from slot_map to parts — TEACHER_DOCTRINE was silently discarded).
+    if doctrine:
+        compression = "\n\n".join(x for x in (compression, doctrine) if x)
 
     # Order matches compose_chapter_prose consumption (opening → … → thread).
     types_: list[str] = []
@@ -1213,6 +1225,7 @@ def dedupe_scene_furniture_book(
         "a hallway hum carries through the corridor",
         "route motion keeps the rhythm nearby",
         "the cursor waits where you left it",
+        "the cursor holds where you left it",
         "a coffee ring stays on the coaster",
         "your badge stays in your pocket",
         "a pale reflection at the glass edge",
@@ -1221,6 +1234,63 @@ def dedupe_scene_furniture_book(
         "the street below is visible",
         "the street below is",
         "gray light through the window",
+        # Sprint-1 additions — depth-pass phrases that repeatedly fire within chapters
+        "moves through the room",
+        "holds where you left it",
+        "an engine note from outside",
+        "light over the window",
+        "what this means is that",
+        "and your nervous system",
+        "the desk holds the pen",
+        "you can see the",
+        # Sprint-1 wave-3 — multi-fill depth teaching phrases
+        "the point is that",
+        "a different input for a moment",
+        "you do not need to believe",
+        "doing exactly what it was",
+        "is a body that",
+        "by the time you",
+        "your body has already",
+        "before you move on",
+        # Sprint-1 wave-4 — teaching phrases from full-reflection depth pass
+        "your body is running",
+        "fix anything just to give",
+        "just to give yourself",
+        "change from this moment",
+        "happened or did not happen",
+        "did not happen is exactly",
+        "happen is exactly right",
+        "ahjan describes this as",
+        "the alarm without threat",
+        "i want you to",
+        "i want to name",
+        "you do not need",
+        "because the alarm doesn",
+        "not to fix anything",
+        "at the remote work",
+        "that just try it",
+        "this is why the",
+        # Sprint-1 wave-5 — em-dash variants not caught by plain regex
+        "happened — or did not happen — is exactly right",
+        "now, notice something",
+        # Sprint-1 wave-6 — period-separated phrases not caught by word-boundary search
+        "that. just try it",
+        "nothing has to forward",
+        "the cost of this",
+        "both are fine whatever",
+        "both are fine. whatever",
+        "breath at a time",
+        "a nervous system that",
+        "she does not know",
+        "this is not laziness",
+        "is a nervous system",
+        # Sprint-1 wave-7 — TEACHER_DOCTRINE & depth boilerplate: book-wide density >12 cap
+        "drawing on ahjan's mindfulness",
+        "ahjan's mindfulness and somatic",
+        "and somatic teaches us",
+        "according to ahjan",
+        "that is the part",
+        "the remote work improved",
     )
     for sig in signatures:
         work, n = _limit_case_insensitive_phrase_occurrences(work, sig, max_each, ())

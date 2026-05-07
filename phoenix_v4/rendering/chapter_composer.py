@@ -1217,27 +1217,20 @@ def _distill_mechanism(
     return _distill_mechanism_legacy(reflection, thesis)
 
 
-def _trim_reflection(reflection: str, max_sentences: int = 7) -> str:
-    """Trim REFLECTION to the most thesis-relevant sentences."""
-    sents = _sentences(reflection)
-    if not sents:
+def _trim_reflection(reflection: str, max_sentences: int = 50) -> str:
+    """Trim REFLECTION to the most thesis-relevant sentences.
+
+    Sprint-1 note: when depth content is routed through REFLECTION (depth_mech →
+    REFLECTION in build_virtual_slot_streams), the input can be 3000-5000 words.
+    The old keyword-filter approach silently discarded ~75% of this content.
+    Fix: return the full reflection (all sentences) after stripping academic hedging.
+    The max_sentences parameter is retained for API compatibility but no longer caps
+    output — use the caller to limit if needed.
+    """
+    if not reflection:
         return ""
-    keep_keywords = (
-        "choice", "cost", "regret", "perfect", "frozen", "adjust", "path",
-        "mechanism", "alarm", "comparison", "shame", "watcher", "overwhelm",
-        "grief", "spiral", "pattern", "system", "nervous",
-    )
-    chosen: list[str] = []
-    for s in sents:
-        low = s.lower()
-        if any(k in low for k in keep_keywords):
-            chosen.append(s)
-        if len(chosen) >= max_sentences:
-            break
-    if len(chosen) < 4:
-        chosen = sents[:max_sentences]
-    joined = " ".join(chosen)
-    # Strip academic hedging
+    # Strip academic hedging inline (preserve all sentences)
+    joined = reflection
     joined = re.sub(r"\bI have noticed that\s+", "", joined, flags=re.I)
     joined = re.sub(r"\bWhat I have come to understand is that\s+", "", joined, flags=re.I)
     joined = re.sub(r"\bWhat I have come to think about is\s+", "", joined, flags=re.I)

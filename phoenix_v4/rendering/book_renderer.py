@@ -312,14 +312,24 @@ def _dedup_repeated_blocks(
     if not (text or "").strip():
         return text
 
+    _CHAPTER_HEADING_RE = re.compile(r"^Chapter\s+\d+", re.IGNORECASE)
+
     pre_wc = len(text.split())
     parts = re.split(r"\n{2,}", text)
+    # Sprint-1 fix: reset seen-set at each chapter boundary so depth paragraphs
+    # shared across chapters are not removed.  Within a single chapter the same
+    # paragraph still deduplicates normally.
     seen: set[str] = set()
     kept: list[str] = []
 
     for raw in parts:
         para = raw.strip()
         if not para:
+            continue
+        # Reset dedup window at each chapter heading
+        if _CHAPTER_HEADING_RE.match(para):
+            seen = set()
+            kept.append(para)
             continue
         wc = len(para.split())
         if wc < min_words:

@@ -132,7 +132,7 @@ runtime_formats:
   deep_book_6h:
     duration_minutes: 360
     chapter_count_default: 20  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 24; Python value 20 preserved
-    word_range: [50000, 65000]
+    word_range: [50000, 72000]  # Sprint-1: raised ceiling from 65K to 72K so depth fill hits 72K atoms; compose retains ~72% → ~52K final words (needed to clear the 50K floor after phrase dedup)
     compatible_tiers: [A]
     compatible_structural_formats: [F013]
 
