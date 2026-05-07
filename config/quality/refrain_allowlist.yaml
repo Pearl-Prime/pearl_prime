@@ -1,0 +1,362 @@
+version: 1
+spec_anchor: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+# Cap formula: legitimate_motif cap_book_wide = ceil(1.5 * chapter_count) = 18 (12-ch book)
+# Cap formula: doctrinal_attribution cap_book_wide = chapter_count + 2 = 14
+# MASKED_DEFECT entries are NOT in this list — they hit the default >12 cap.
+#
+# NOTE: Session A audit artifact (artifacts/qa/sprint1_ignored_prefixes_conformance_2026-05-08.md)
+# was absent at migration time. Entries classified based on inline comments in source
+# (scene-anchor motifs vs TEACHER_DOCTRINE). Unclassified entries default to
+# legitimate_motif cap=18 per ITEM-1 spec fallback rule.
+
+entries:
+  # --- Original somatic instruction motifs (lines 81-97 in pre-migration source) ---
+
+  - phrase: "the point is that"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Scene-anchor opening; ~1x per chapter in 12-ch book. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "i want you to"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Somatic instruction motif; reader-address refrain. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "now i want you"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Somatic instruction transition phrase. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "not to fix anything"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Core somatic exercise phrase; non-striving refrain. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "anything just to"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Fragment of somatic exercise phrase sequence. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "fix anything"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Fragment: 'not to fix anything'. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "to fix anything"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Fragment of somatic exercise phrase. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "just to give yourself"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Somatic self-permission exercise phrase. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "to give yourself"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Fragment of somatic self-permission phrase. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "give yourself a"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Fragment of somatic self-permission phrase. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "before you move on"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Chapter transition / integration anchor. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "a different input"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Somatic reframe exercise phrase. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "different input for"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Fragment of somatic reframe phrase. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "input for a"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Fragment of somatic reframe phrase. Unclassified — defaulted."
+    todo: null
+
+  - phrase: "one breath at a time"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Scene-anchor motif; grounding phrase used across chapters. Unclassified — defaulted."
+    todo: null
+
+  # --- Sprint-1 scene-anchor motifs (source comment: 'intentional recurring hooks') ---
+
+  - phrase: "you have been looking"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor: opening of canonical motif sentence. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "have been looking"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "been looking at"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "looking at it for"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "at it for forty"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "it for forty minutes"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "the task is open"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor motif sentence. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "task is open you"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "is open you have"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "open you have been"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "your body knows"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor motif. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "your nervous system"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Spine-specific somatic vocabulary; high density is genre-expected. Sprint-1 scene-anchor."
+    todo: "ITEM-2:remove-when-per-chapter-overlay-active"
+
+  - phrase: "body knows something"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "knows something your"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "something your calendar"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "not forever just"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor phrase. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "it was the cost"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor phrase. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "was the cost of"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "the alarm does not"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor phrase. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "the alarm dressed"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor phrase. Source comment: intentional recurring hook."
+    todo: null
+
+  - phrase: "the foundation of contemplative"
+    classification: legitimate_motif
+    cap_book_wide: 18
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "Sprint-1 scene-anchor phrase. Source comment: intentional recurring hook."
+    todo: null
+
+  # --- TEACHER_DOCTRINE recurring attribution phrases ---
+  # Classified doctrinal_attribution: cap_book_wide = chapter_count + 2 = 14
+
+  - phrase: "drawing on ahjan"
+    classification: doctrinal_attribution
+    cap_book_wide: 14
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
+    todo: null
+
+  - phrase: "ahjan's mindfulness"
+    classification: doctrinal_attribution
+    cap_book_wide: 14
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
+    todo: null
+
+  - phrase: "mindfulness and somatic"
+    classification: doctrinal_attribution
+    cap_book_wide: 14
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
+    todo: null
+
+  - phrase: "somatic teaches us"
+    classification: doctrinal_attribution
+    cap_book_wide: 14
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
+    todo: null
+
+  - phrase: "according to ahjan"
+    classification: doctrinal_attribution
+    cap_book_wide: 14
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
+    todo: null
+
+  - phrase: "that is the part"
+    classification: doctrinal_attribution
+    cap_book_wide: 14
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
+    todo: null
+
+  - phrase: "the remote work improved"
+    classification: doctrinal_attribution
+    cap_book_wide: 14
+    cap_per_chapter: 2
+    spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
+    rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
+    todo: null

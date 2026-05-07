@@ -8,11 +8,40 @@ from __future__ import annotations
 
 import json
 import re
+import yaml as _yaml
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Optional
 
 from phoenix_v4.quality.chapter_flow_gate import evaluate_chapter_flow, flow_profile_for_runtime_format
+
+
+def _load_refrain_allowlist() -> dict[str, dict]:
+    """Return phrase -> entry dict (longest-match-wins via iteration order).
+
+    Phrases are stored lower-cased and sorted longest-first so the lookup loop
+    can short-circuit on the first (longest) match.  If the YAML is missing or
+    malformed, returns an empty dict so the gate degrades to the plain >12 cap.
+    """
+    path = Path(__file__).resolve().parents[2] / "config" / "quality" / "refrain_allowlist.yaml"
+    try:
+        data = _yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return {}
+    result: dict[str, dict] = {}
+    for entry in data.get("entries", []):
+        phrase = (entry.get("phrase") or "").strip().lower()
+        if not phrase:
+            continue
+        # Require at least cap_book_wide to be present; skip malformed entries.
+        if "cap_book_wide" not in entry:
+            continue
+        result[phrase] = entry
+    # Sort longest-first so the matching loop finds the most-specific entry first.
+    return dict(sorted(result.items(), key=lambda kv: -len(kv[0])))
+
+
+_REFRAIN_ALLOWLIST: dict[str, dict] = _load_refrain_allowlist()
 
 
 @dataclass
@@ -75,71 +104,47 @@ def _runtime_word_range(runtime_format_id: str) -> Optional[tuple[int, int]]:
         return None
 
 
+def _match_allowlist_entry(phrase: str, allowlist: dict[str, dict]) -> dict | None:
+    """Return the allowlist entry whose key is a prefix of *phrase*, or None.
+
+    The allowlist is pre-sorted longest-first so the first match found is the
+    most specific (longest-match-wins).
+    """
+    for key, entry in allowlist.items():
+        if phrase.startswith(key):
+            return entry
+    return None
+
+
 def _repeated_phrase_violations(text: str, *, cap: int = 12) -> list[dict[str, Any]]:
+    """Return n-grams (n=4,5,6) that exceed their per-entry or default book-wide cap.
+
+    For each candidate phrase the function checks whether it starts with any
+    entry in _REFRAIN_ALLOWLIST (longest-match-wins).  If matched, the entry's
+    ``cap_book_wide`` is used instead of the default *cap*.  The returned dicts
+    include ``matched_allowlist_entry`` (phrase key or None) and ``cap_applied``
+    so callers can distinguish between default-cap violations and allowlist
+    violations.
+    """
     words = re.findall(r"[a-z0-9']+", (text or "").lower())
     counts: dict[str, int] = {}
-    ignored_prefixes = (
-        "the point is that",
-        "i want you to",
-        "now i want you",
-        "not to fix anything",
-        "anything just to",
-        "fix anything",
-        "to fix anything",
-        "just to give yourself",
-        "to give yourself",
-        "give yourself a",
-        "before you move on",
-        "a different input",
-        "different input for",
-        "input for a",
-        "one breath at a time",
-        # Sprint-1: scene-anchor motifs that legitimately repeat across all chapters
-        # (book-wide: ~1× per chapter = ~12–13× in a 12-chapter deep_book).
-        # These are intentional recurring hooks, not quality regressions.
-        # Full source sentence: "You have been looking at it for forty minutes.
-        # The task is open. Your body knows something your calendar doesn't."
-        "you have been looking",
-        "have been looking",
-        "been looking at",
-        "looking at it for",
-        "at it for forty",
-        "it for forty minutes",
-        "the task is open",
-        "task is open you",
-        "is open you have",
-        "open you have been",
-        "your body knows",
-        "your nervous system",
-        "body knows something",
-        "knows something your",
-        "something your calendar",
-        "not forever just",
-        "it was the cost",
-        "was the cost of",
-        "the alarm does not",
-        "the alarm dressed",
-        "the foundation of contemplative",
-        # TEACHER_DOCTRINE recurring attribution phrases
-        "drawing on ahjan",
-        "ahjan's mindfulness",
-        "mindfulness and somatic",
-        "somatic teaches us",
-        "according to ahjan",
-        "that is the part",
-        "the remote work improved",
-    )
     for n in (4, 5, 6):
         for i in range(0, max(0, len(words) - n + 1)):
             phrase = " ".join(words[i : i + n])
-            if any(phrase.startswith(prefix) for prefix in ignored_prefixes):
-                continue
             counts[phrase] = counts.get(phrase, 0) + 1
-    offenders = [
-        {"phrase": phrase, "count": count}
-        for phrase, count in counts.items()
-        if count > cap
-    ]
+
+    offenders: list[dict[str, Any]] = []
+    for phrase, count in counts.items():
+        entry = _match_allowlist_entry(phrase, _REFRAIN_ALLOWLIST)
+        effective_cap = int(entry["cap_book_wide"]) if entry is not None else cap
+        if count > effective_cap:
+            offenders.append({
+                "phrase": phrase,
+                "count": count,
+                "matched_allowlist_entry": entry.get("phrase") if entry is not None else None,
+                "cap_applied": effective_cap,
+            })
+
     offenders.sort(key=lambda x: (-int(x["count"]), str(x["phrase"])))
     return offenders[:20]
 
