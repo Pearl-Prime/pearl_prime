@@ -858,3 +858,78 @@ Anti-drift check (additive on draft's own check): The music-mode subsystem expan
 **Budget:** This PR = **docs-only** (~2 files, ~0 engineering risk). Follow-up Pearl_Dev YAML PR = **small** (single-file minimum; **medium** if full `config/manga/` alias sweep). CI Phase 1 = **~0.5–1 eng-day** (script + workflow); Phase 2 = **backlog sized** after alias inventory.
 
 **Audit artifact:** `artifacts/qa/qi_foundation_canonical_reconciliation_2026-05-08.md`.
+
+### TEACHER-MANGA-30S-VIDEO-V1-01 — 12 (or 13) teacher × manga 30-second video deliverables, scope ratified (decision pending 2026-05-08)
+
+**Status:** **proposed** — awaiting operator answers to Q1–Q4 in [docs/specs/TEACHER_MANGA_30S_VIDEO_V1_SPEC.md §16](../docs/specs/TEACHER_MANGA_30S_VIDEO_V1_SPEC.md). Ratification will be appended as `TEACHER-MANGA-30S-VIDEO-V1-01-AMENDMENT` in the next router turn.
+
+**Context:** Operator request — a 30-second video per teacher, tied to that teacher's manga brand, with the SAME NARRATIVE MEANING as the teacher's audiobook chapter-1 sample (script meaning-matched, not verbatim). Teacher-as-MC experiences a struggle → release/resolution arc that mirrors the teacher's signature transformation. Style is primarily manga but with a deliberate spread of types — manga, fantasy, hybrid, and one experimental — to demonstrate market range while keeping teacher identity locked. Locale is the teacher's native locale per operator's matrix.
+
+**Decision:** Lock V1 scope at **12 teachers × 1 video each = 12 deliverables** (with adi_da as a 13th candidate pending Q1) per the four pillars below. Do NOT render until operator answers Q1–Q4.
+
+| Pillar | Lock |
+|---|---|
+| Story shape | HOOK (0–6s) → STRUGGLE (6–22s) → RELEASE (22–30s) — same DNA as the audiobook chapter-1 climax |
+| Script-reuse rule | Meaning matches `artifacts/audiobook_samples/_prose/<teacher>_*_ch1.txt`; verbatim NOT required; 30s ≈ 65–80 EN words / locale-equivalent |
+| Teacher-as-MC | Reuse `character_design` from `brand_lora_plans.yaml.character_loras.<teacher>`; NO new identity instances |
+| Style spread | 6 pure_manga / 3 manga_fantasy_hybrid / 2 cinematic_painterly_fantasy / 1 experimental — distribution + per-teacher rationale in `artifacts/qa/teacher_manga_30s_locale_brand_matrix_2026-05-08.tsv` |
+
+**Verified brand bindings (12/12 confirmed against `config/manga/brand_lora_plans.yaml.brand_suffixes`):**
+
+| Teacher → manga brand (suffix) | Locale | Style mode |
+|---|---|---|
+| ahjan → stillness_press (sp) | en-US | pure_manga |
+| joshin → cognitive_clarity (cc) | ja-JP | pure_manga **(pilot candidate)** |
+| miki → digital_ground (dg) | ja-JP | pure_manga |
+| junko → relational_calm (rc) | ja-JP | pure_manga |
+| omote → body_memory (bm) | ja-JP | pure_manga |
+| master_wu → warrior_calm (wc) | zh-TW | pure_manga |
+| master_feung → qi_foundation (qf) | zh-CN | manga_fantasy_hybrid |
+| master_sha → sleep_restoration (sr) | en-US | manga_fantasy_hybrid |
+| ra → solar_return (so) | en-US | manga_fantasy_hybrid |
+| pamela_fellows → somatic_wisdom (sw) | en-US | cinematic_painterly_fantasy |
+| sai_ma → devotion_path (dp) | en-US | cinematic_painterly_fantasy |
+| maat → heart_balance (hb) | en-US | experimental |
+| (13th candidate) adi_da → (NONE) | zh-TW | (deferred; depends on Q1) |
+
+**Anti-drift check:** Identity-preserving by design. The 12-axis `character_design` from `docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md` is reused; style-spread varies wardrobe/setting/lighting/lineart-engine but NOT identity. No paid LLM/TTS APIs unattended (Tier 2 = CosyVoice2 + edge_tts free; Tier 1 = Pearl_Writer Claude subagent operator-present). No verbatim audiobook prose re-quote in social/video context (>15-word displacive copyright avoidance). Pearl Star Path A is the canonical render path per `docs/PEARL_STAR_IMAGE_GENERATION_PROTOCOL.md`.
+
+**Discrepancies surfaced during cross-check (do NOT block scoping; flagged in spec §15):**
+
+| ID | Discrepancy | Disposition |
+|---|---|---|
+| D1 | `qi_foundation` brand (master_feung's binding) is NOT in `config/manga/canonical_brand_list.yaml` although it IS in `brand_lora_plans.yaml.brand_suffixes` (suffix `qf`). | Propose demographic = seinen-cultivation for matrix; flag for Pearl_Architect cap follow-up to either add or formally retire. NOT blocking V1 scoping. |
+| D2 | maat audiobook prose anchor MISSING — no `maat_*_ch1.txt` under `artifacts/audiobook_samples/_prose/`. | Pearl_Writer prereq before Pearl_Localization can derive maat's script. Until prose lands, maat row is **blocked**. Recommendation: Pearl_Writer authors `maat_<topic>_ch1.txt` ASAP; otherwise drop maat from V1 and revisit V1.1. |
+| D3 | adi_da has audiobook prose + operator-stated locale (zh-TW) but NO manga brand binding in `brand_lora_plans.character_loras` and NO entry in `brand_suffixes`. | Q1 operator decision in §16: include / defer / skip. Default if no answer = defer. |
+
+**Out of scope (this cap entry):**
+1. Any render, any video file, any audio file (cap entry first; renders later).
+2. Any code change to `phoenix_v4/` or `scripts/` or `config/video/*` params.
+3. New render preset `teacher_30s_vertical_v1` under `config/video/render_params.yaml` — flagged as Pearl_Dev follow-up PR (spec §13c). NOT added in this scoping cap.
+4. New LoRA training, new `character_design` YAML — viewing mode only.
+5. D1 reconciliation (qi_foundation in canonical_brand_list) — separate Pearl_Architect cap follow-up.
+6. D2 (maat audiobook prose) — Pearl_Writer task; gates maat row only.
+7. Q1–Q4 decisions (operator).
+
+**Action items (with owner + handoff prompt seed in spec §13):**
+- **a. Pearl_Localization** — derive 12 (or 13) locale-correct 30s scripts; emit YAML at `artifacts/video/teacher_30s_v1/<teacher>/script_<locale>.yaml`.
+- **b. Pearl_Editor** — confirm style-spread assignment per teacher matches teacher voice + brand demographic.
+- **c. Pearl_Dev** — propose `teacher_30s_vertical_v1` render preset under `config/video/render_params.yaml` in a SEPARATE PR (not this cap PR).
+- **d. Pearl_Int** — confirm CosyVoice2 reference-voice availability per teacher on Pearl Star.
+- **e. Pearl_Video** — pilot render: ONE teacher (recommend joshin / cognitive_clarity).
+- **f. Pearl_Architect (next-turn amendment)** — once Q1–Q4 answered, ratify final matrix into `TEACHER-MANGA-30S-VIDEO-V1-01-AMENDMENT`.
+
+**Budget (Tier 2 unattended — free):** Pearl Star GPU ~6–12h total; CosyVoice2 ~1h total; ffmpeg trivial; operator review ~2h. Paid spend 0.
+
+**Handoffs:**
+- Pearl_PM (post-merge): backfill three workstream rows in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (`ws_teacher30s_scope_ratified`, `ws_teacher30s_script_derivation`, `ws_teacher30s_render_pilot` — all status=proposed until operator answers Q1–Q4).
+- Operator (gating): answer Q1–Q4 in `docs/specs/TEACHER_MANGA_30S_VIDEO_V1_SPEC.md §16`. Defaults if silent: Q1 defer adi_da, Q2 approve as proposed, Q3 joshin pilot, Q4 all en-US defaults stand.
+- Pearl_Architect (next router turn, amendment): ratify final matrix; issue parallel implementation prompts (Pearl_Localization × 12, Pearl_Int reference-voice audit, Pearl_Editor style review, Pearl_Video pilot, Pearl_Dev render preset PR).
+- Pearl_Writer (deferred, gated only on D2): author `maat_<topic>_ch1.txt` audiobook prose anchor.
+- Pearl_Architect (deferred, separate cap): reconcile qi_foundation in `canonical_brand_list.yaml` (D1).
+
+**Resolves:** none (this is a new program). Companion artifacts:
+- `docs/specs/TEACHER_MANGA_30S_VIDEO_V1_SPEC.md` (operator-readable spec)
+- `artifacts/qa/teacher_manga_30s_locale_brand_matrix_2026-05-08.tsv` (13-row matrix with rationale + flags)
+- `PRJ-TEACHER-MANGA-30S-VIDEO-V1` (in `ACTIVE_PROJECTS.tsv`)
+- 3 workstream rows in `ACTIVE_WORKSTREAMS.tsv` (status=proposed)
