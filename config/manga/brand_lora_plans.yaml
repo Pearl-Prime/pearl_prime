@@ -24,7 +24,7 @@ brand_suffixes:
   stillness_press: sp
   cognitive_clarity: cc
   somatic_wisdom: sw
-  qi_foundation: qf
+  qi_foundation_cultivation: qf
   digital_ground: dg
   heart_balance: hb
   relational_calm: rc
@@ -69,7 +69,7 @@ character_loras:
     reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
     training_steps: 1500
     ip_adapter_weight: 0.82
-    style_ref: qi_foundation
+    style_ref: qi_foundation_cultivation
     notes: "Chinese male, elder presence, qigong practitioner posture"
 
   miki:
@@ -156,7 +156,7 @@ brand_style_loras:
     training_steps: 2000
     notes: "Clean modern clinical warmth"
 
-  qi_foundation:
+  qi_foundation_cultivation:
     trigger_word: "style_qf"
     training_images: 20
     training_steps: 2000
