@@ -1,0 +1,39 @@
+# TEACHER-MANGA-30S-VIDEO-V1 — localized 30s spine (meaning-matched to anchor prose; not verbatim)
+project_id: PRJ-TEACHER-MANGA-30S-VIDEO-V1
+teacher_id: sai_ma
+brand_id: devotion_path
+locale: en_US
+anchor_prose_path: artifacts/audiobook_samples/_prose/sai_ma_grief_ch1.txt
+total_seconds: 30
+
+beats:
+  - id: hook
+    start_s: 0
+    end_s: 6
+    text: Rain drills the alley shoulders cold while memory edits sun leaves balloons slack in her vanished hand ordinary you thought permanent.
+    sensory_anchor: Drizzle beaded on sleeves; asphalt smell; faint traffic wash at the alley mouth
+    mc_action: Hood up, palms tucked in pockets, knuckles finding the ridge of keys
+
+  - id: struggle
+    start_s: 6
+    end_s: 22
+    text: Her line still buzzes the sternum—I cannot—that grief soaking the flat where scent cuts nights drum glass breath stacks shallow limbs heavy with absence.
+    embodied_dis_ease: Throat ringed tight; hands clutching blankets; loneliness as hollow pressure behind ribs
+    mc_action: Sliding to the floor with back against the door—grounding spine while tears run without drama
+
+  - id: release
+    start_s: 22
+    end_s: 30
+    text: Stay inside ache without sharpening it inhale four exhale six sixty seconds witnessing carry her beside your beating pulse disciplined love endures softly.
+    signature_practice: Timed breath—inhale four, exhale six—three rounds with one memory held gently, not solved
+    mc_action: Palm to chest, whisper a vow to witness the sorrow for sixty seconds straight
+
+reading_rate_basis: >-
+  config/localization/locale_registry.yaml — en-US; Devotion Path / shonen grit: steadfast tone, kinetic imagery, no melodramatic score cues in text—VO carries weight; 65–80 words.
+
+word_count_target: 65–80 English words total
+estimated_word_count_script: 68
+estimated_seconds: 30
+
+voice_notes: >-
+  Controlled intensity—discipline framing for grief endurance; masculine-neutral delivery option; emphasize breath cadence markers for VO engineering.

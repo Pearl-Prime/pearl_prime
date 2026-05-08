@@ -1,0 +1,40 @@
+# TEACHER-MANGA-30S-VIDEO-V1 — localized 30s spine (meaning-matched to anchor prose; not verbatim)
+project_id: PRJ-TEACHER-MANGA-30S-VIDEO-V1
+teacher_id: master_feung
+brand_id: qi_foundation_cultivation
+locale: zh_CN
+anchor_prose_path: artifacts/audiobook_samples/_prose/master_feung_burnout_ch1.txt
+total_seconds: 30
+
+beats:
+  - id: hook
+    start_s: 0
+    end_s: 6
+    text: 光从帘缝钻进来，你还像背着通宵评语，胃里茶还温——心里一空耗就把它吞没了。
+    sensory_anchor: 木椅吱呀一声；隔夜茶的气味像一条浅浅的绳，拽着你回到桌前
+    mc_action: 拧开保温杯，小口抿茶，指腹一圈圈摩挲杯壁
+
+  - id: struggle
+    start_s: 6
+    end_s: 22
+    text: 红点连成串压得胸闷你爱过的讲台现在却像掏空还撑体面孩子们在操场跑着轻巧你只膝软不是懒是多给一点就要断的长期透支。
+    embodied_dis_ease: 肩颈板结；胃袋发沉；哈欠反复却睡不回来的倦
+    mc_action: 站在窗前握紧窗框又松开，指腹发白再慢慢回血
+
+  - id: release
+    start_s: 22
+    end_s: 30
+    text: 先沉气吐长肩卸半寸把一件小事说出口求助不是示弱给命留一口通气。
+    signature_practice: 丹田一息三句：慢吸—停顿—绵长呼；呼尽时肩颈主动下垂半分
+    mc_action: 双手叠在小腹前方，指腹轻按，配合呼气数数到六
+
+reading_rate_basis: >-
+  config/localization/locale_registry.yaml — zh-CN: Simplified Chinese (Mainland); tts_locale_code zh-CN;
+  primary cosyvoice2; pragmatic secular burnout framing suited to cultivation genre without overt clinical labeling.
+
+word_count_target: Approx. 92–110 Simplified Chinese characters total (density ≈ en 65–80 words @ 30s)
+estimated_character_count_script: 124
+estimated_seconds: 30
+
+voice_notes: >-
+  Qi Foundation lane: calm mentor tone, agricultural/field metaphors allowed lightly; avoid therapy buzzwords; dignify rest as practice.

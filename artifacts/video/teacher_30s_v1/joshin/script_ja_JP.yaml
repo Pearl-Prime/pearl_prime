@@ -1,0 +1,41 @@
+# TEACHER-MANGA-30S-VIDEO-V1 — localized 30s spine (meaning-matched to anchor prose; not verbatim)
+project_id: PRJ-TEACHER-MANGA-30S-VIDEO-V1
+teacher_id: joshin
+brand_id: cognitive_clarity
+locale: ja_JP
+anchor_prose_path: artifacts/audiobook_samples/_prose/joshin_anxiety_ch1.txt
+total_seconds: 30
+
+beats:
+  - id: hook
+    start_s: 0
+    end_s: 6
+    text: 「朝、不安は先についてくる。小さな選択も賭けに見える。」
+    sensory_anchor: 目が覚めたばかりの緊張、胸の強ばりが先に浮かぶ感覚
+    mc_action: 寝台で身体の固さに気づき、視線だけを天井へ向ける
+
+  - id: struggle
+    start_s: 6
+    end_s: 22
+    text: 「分岐点で動悸と汗が灯り、浅い呼吸が続く。脳は弱い合図に倍率をかけ、自分だけが苦しいと思い込む。」
+    embodied_dis_ease: 過剰警戒による疲労、孤立感、頭と身体が同じリズムで回らない感覚
+    mc_action: 玄関ノブに手をかけて止まり、視界が細くなるのを自覚する
+
+  - id: release
+    start_s: 22
+    end_s: 30
+    text: 「ゆっくり吐き下腹に手を置けば嵐だけがあなたではないこの観察が戻り道」
+    signature_practice: 一息の正念的呼吸で身体感覚に接地し、過剰予測のループをそっとはずす
+    mc_action: 片手で胸、もう一方で下腹に触れ、吐く息を二拍で伸ばす
+
+reading_rate_basis: >-
+  config/localization/locale_registry.yaml — locale key ja-JP: Japanese (Japan); tts_locale_code ja-JP;
+  primary cosyvoice2; catalogue notes emphasize secular/practical framing and 丁寧語 for narration —
+  informational density adjusted so ~95–118 characters ≈ ~65–80 en-word slot for 30s VO.
+
+word_count_target: Approx. 95–118 Japanese characters total (informational equivalent to 65–80 en words @ 30s)
+estimated_character_count_script: 107
+estimated_seconds: 30
+
+voice_notes: >-
+  Cognitive Clarity lane: analytic warmth, restrained metaphor, plainly names nervous-system alarm without clinical alarmism.
