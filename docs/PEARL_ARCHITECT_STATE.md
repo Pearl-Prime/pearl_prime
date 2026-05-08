@@ -939,6 +939,41 @@ Anti-drift check (additive on draft's own check): The music-mode subsystem expan
 **Action items:** `ws_feat_knob_p0_1/2/3` `status=runnable`; router fans out implementation prompts in next turn.
 
 **Handoffs:** Pearl_Dev owns implementation; Pearl_Architect ratifies completion when each ws lands.
+
+### MUSIC-MODE-BRAND-INTEGRATION-V1-01 — Music mode as first-class brand archetype (brands 38+); wizard + musician survey; live routes (proposed 2026-05-09; pending operator Q1–Q4)
+
+**Status:** **proposed** (cap + spec + coordination only — **no** implementation in the opening PR).
+
+**Context:** Operator directive: **music mode is not a bolt-on**. It is a **first-class brand archetype** with **new brands numbered 38+**, architecturally **separate** from canonical **Path X 37** (`config/manga/canonical_brand_list.yaml`). Each music-mode brand requires **brand wizard** plus **`musician_reflections_survey`**. The survey must expose a **single Save control at the bottom**; submissions **persist via backend** into **wizard YAML**, then **auto-advance** the wizard. The survey must be served as a **live route inside the wizard app** (same origin / wizard navigation) — **`file://` URLs are deprecated** for this flow. **Music-mode brand catalog = 100% music-mode books** (no composite teacher+music catalog row; no teacher-mode masquerading as music-mode). Registry SSOT for music-mode brands: **`config/music/music_brand_registry.yaml`** (new file path reserved; authoring lands under `ws_music_brand_registry_music_brand_registry_yaml_20260509`). **Freebie / funnel music-mode integration** is explicitly **out of scope** for V1 and is tracked only as a **follow-up cap** placeholder (`ws_music_brand_freebie_funnel_followup_cap_20260509`).
+
+**Cross-reference:** **`MUSIC-MODE-V1-01`** (Pearl Prime overlay, `musician_banks/`, survey template artifact) remains the **rendering / atom-bank** authority. **This entry (`MUSIC-MODE-BRAND-INTEGRATION-V1-01`)** owns **brand identity + onboarding + catalog classification** for music-mode **brands 38+** without contaminating Path X 37.
+
+**Decision (locked sections — ratification package):**
+
+1. **Archetype + numbering:** Music mode = first-class archetype; brands **38+**; dedicated registry **`config/music/music_brand_registry.yaml`** (not merged into `canonical_brand_list.yaml`).
+2. **Wizard flow:** **Step 1** — mode selector (includes music-mode path). **Step 4** — conditional **musician_reflections_survey** pane when music-mode is selected. Both steps run on the **live wizard HTTP route** (wizard app shell), **not** `file://`.
+3. **Save mechanism:** **One** Save button at bottom → **POST** → persisted **wizard YAML** (backend / server route contract TBD in implementation PR) → **auto-advance** to next wizard step.
+4. **Catalog rule:** Music-mode brand catalog rows are **100% music-mode** pipeline books only — **no** composite rows; **no** teacher-mode substitution.
+5. **Registry architecture:** **Active** music-mode brand = **brand wizard YAML present** per **Q4 default** (same wizard YAML SSOT as worldwide program — see `WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01` active-brand note). **`music_brand_registry.yaml`** indexes / cross-walks wizard outputs; it does not invent parallel pen names without wizard backing.
+6. **Compatibility:** Path X **37 canonical brands frozen**. Existing **`music_pipeline`** scripts and **`MUSIC-MODE-V1-01`** overlay tooling are **consumed unchanged**; this program adds **brand/admin + catalog** surfaces only unless an implementation ws explicitly extends pipeline flags (requires AMENDMENT).
+7. **Anti-drift:** **No** `canonical_brand_list.yaml` contamination with music-only pseudo-brands. Survey answers **do not** live only in browser localStorage — **server-backed persistence** to wizard YAML. **`file://` embedding** for the survey is **rejected** (security + SSOT + CI reproducibility).
+8. **Action items:** Six workstreams in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`: `ws_music_brand_wizard_step1_step4_survey_pane_20260509`; `ws_music_brand_survey_save_post_yaml_advance_20260509`; `ws_music_brand_registry_music_brand_registry_yaml_20260509`; `ws_music_brand_catalog_generator_100pct_music_mode_20260509`; `ws_music_brand_wizard_live_embed_routing_20260509`; `ws_music_brand_freebie_funnel_followup_cap_20260509`.
+9. **Budget:** **Tier 1** (operator-present) for **design + ratification + Q-card**; **Tier 2** acceptable for unattended **catalog regeneration** runs **after** SSOT locks and operator Q1–Q4 answers.
+10. **Status gate:** Remains **`proposed`** until operator records **Q1–Q4** answers in `docs/specs/MUSIC_MODE_BRAND_INTEGRATION_V1_SPEC.md` §16; Pearl_Architect issues **`MUSIC-MODE-BRAND-INTEGRATION-V1-01-AMENDMENT`** in a follow-up session flipping **`proposed` → `active`** when answers land.
+
+**Operator decision card (verbatim — answer in spec §16):**
+
+- **Q1 — UX flow placement:** Confirm mode selector at **wizard step 1** (default), or name an alternative step index + rationale.
+- **Q2 — `brand_id` slug rule:** Confirm **`<musician_handle>_music`** (default), or specify an alternate deterministic slug pattern + collision policy.
+- **Q3 — Catalog volume tier default:** Confirm **800** baseline tier (default), or specify alternate tier / cap for first music-mode catalog slice.
+- **Q4 — Inactive brand path:** Confirm **same brand_wizard YAML SSOT** marks inactive brands (default), or specify a secondary persisted store (requires AMENDMENT to this cap).
+
+**Anti-drift check:** Does not duplicate `MUSIC-MODE-V1-01`; supplements with **brand/wizard/catalog** boundaries. Does not edit `canonical_brand_list.yaml` in this PR.
+
+**Handoffs:** **Pearl_PM** — after merge, set downstream ws `status` from `proposed` toward `runnable` as Q1–Q4 close. **Pearl_Dev + Pearl_Brand** — own wizard + routing + registry implementation fan-out. **Pearl_Architect** — amendment session after operator answers.
+
+**Pointers:** `docs/specs/MUSIC_MODE_BRAND_INTEGRATION_V1_SPEC.md`; `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-MUSIC-MODE-BRAND-INTEGRATION-V1`); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (six `ws_music_brand_*` rows); `artifacts/musician_survey/SURVEY_TEMPLATE.yaml` (schema reference); `docs/PEARL_ARCHITECT_STATE.md` (`MUSIC-MODE-V1-01`).
+
 ### TEACHER-MANGA-30S-VIDEO-V1-01 — 12 teacher × manga 30-second video deliverables (**active**); adi_da deferred V1.1 (ratified 2026-05-08)
 
 **Status:** **active** — operator answers to Q1–Q4 captured in [`docs/specs/TEACHER_MANGA_30S_VIDEO_V1_SPEC.md` §AMENDMENT-2026-05-08](../docs/specs/TEACHER_MANGA_30S_VIDEO_V1_SPEC.md); binding matrix edits in [`artifacts/qa/teacher_manga_30s_locale_brand_matrix_2026-05-08.tsv`](../artifacts/qa/teacher_manga_30s_locale_brand_matrix_2026-05-08.tsv).
