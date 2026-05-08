@@ -24,7 +24,7 @@ fonts:
     canonical_release: "2.004"
     locale_targets: [ja_JP]
     roles: [body, dialogue]
-    path: otf/SourceHanSansJP-Regular.otf
+    path: source_han_sans_jp.otf
     fallback_for_glyphs:
       - "Hiragana"
       - "Katakana"
@@ -44,7 +44,7 @@ fonts:
     canonical_release: "2.004"
     locale_targets: [zh_TW]
     roles: [body, dialogue]
-    path: otf/SourceHanSansTC-Regular.otf
+    path: source_han_sans_tc.otf
     fallback_for_glyphs:
       - "Traditional Chinese (Big5 + CNS 11643)"
     status: pending
@@ -61,7 +61,7 @@ fonts:
     canonical_release: "2.004"
     locale_targets: [zh_CN]
     roles: [body, dialogue]
-    path: otf/SourceHanSansSC-Regular.otf
+    path: source_han_sans_sc.otf
     fallback_for_glyphs:
       - "Simplified Chinese (GB18030)"
     status: pending
@@ -79,7 +79,7 @@ fonts:
     canonical_release: "2.004"
     locale_targets: [ko_KR]
     roles: [body, dialogue]
-    path: otf/SourceHanSansKR-Regular.otf
+    path: source_han_sans_kr.otf
     fallback_for_glyphs:
       - "Hangul Syllables"
       - "Hangul Jamo"

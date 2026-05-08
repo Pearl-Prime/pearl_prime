@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://phoenix-omega.dev/schemas/manga/lettering_spec.schema.json",
   "title": "Manga Lettering Spec",
-  "description": "Per-chapter lettering plan. v3 adds text_by_locale on dialogue lines, sfx_by_locale, narrator_caption_by_locale, and per-locale font overrides — letting one layered render ship to multiple markets without re-rendering art (per PR #631 Decision 1: 50–99× cost reduction across 5 markets vs re-render-per-locale). v2 fields kept for backward compatibility — a v2 spec uses default-locale text only.",
+  "description": "Per-chapter lettering plan. v3 adds text_by_locale on dialogue lines, sfx_by_locale, narrator_caption_by_locale, and per-locale font overrides — letting one layered render ship to multiple markets without re-rendering art (per PR #631 Decision 1: 50–99× cost reduction across 5 markets vs re-render-per-locale). Bubble render V2 adds furigana, vertical_kanji, demonic_bubble, fractional head boxes for tails, mouth_anchor, plus text manifests for publish-time rehydration. v2 fields kept for backward compatibility — a v2 spec uses default-locale text only.",
   "allOf": [
     { "$ref": "manga_common.schema.json#/$defs/artifact_base" },
     {
@@ -92,7 +92,43 @@
                       "type": "string",
                       "enum": ["top_left", "top_right", "top_center", "bottom_left", "bottom_right", "bottom_center", "center_left", "center_right"]
                     },
-                    "speech_atom_id": { "type": ["string", "null"] }
+                    "speech_atom_id": { "type": ["string", "null"] },
+                    "furigana": {
+                      "type": "array",
+                      "description": "V2 lettering — structured ruby segments for Japanese. Each base substring appears in-order within the localized dialogue text.",
+                      "items": {
+                        "type": "object",
+                        "required": ["base", "reading"],
+                        "additionalProperties": false,
+                        "properties": {
+                          "base": { "type": "string", "minLength": 1 },
+                          "reading": { "type": "string", "minLength": 1 }
+                        }
+                      }
+                    },
+                    "vertical_kanji": {
+                      "type": "boolean",
+                      "description": "V2 lettering — vertical top-to-bottom CJK columns (writing-mode vertical-rl equivalent) when true."
+                    },
+                    "demonic_bubble": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "V2 lettering — supernatural wavy bubble styling when enabled.",
+                      "properties": {
+                        "enabled": { "type": "boolean" },
+                        "variant": { "type": "string", "enum": ["default", "wavy", "glow"] }
+                      }
+                    },
+                    "mouth_anchor": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Normalized (0–1) panel-space mouth point for tail aiming.",
+                      "required": ["x", "y"],
+                      "properties": {
+                        "x": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+                        "y": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+                      }
+                    }
                   }
                 }
               },
@@ -143,6 +179,21 @@
                 },
                 "additionalProperties": false,
                 "description": "v3 — actual per-locale coverage after compose. Useful for the Scroll Therapeutic Test (PR #631 Decision 6) which checks bubble coverage caps."
+              },
+              "character_head_bboxes": {
+                "type": "object",
+                "description": "V2 lettering — fractional head bbox per speaker (0–1) for auto tail targeting.",
+                "additionalProperties": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["x1", "y1", "x2", "y2"],
+                  "properties": {
+                    "x1": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+                    "y1": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+                    "x2": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+                    "y2": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+                  }
+                }
               }
             }
           }

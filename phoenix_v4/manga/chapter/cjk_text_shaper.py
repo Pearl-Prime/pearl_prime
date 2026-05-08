@@ -245,6 +245,126 @@ def render_text_to_pil(
         pass
 
 
+# ─── vertical Japanese (manga-style columns) ───────────────────────────────
+
+
+def _glyph_height(draw: Any, ch: str, font: Any) -> int:
+    try:
+        bbox = draw.textbbox((0, 0), ch, font=font)
+        return max(1, bbox[3] - bbox[1])
+    except AttributeError:
+        return max(1, draw.textsize(ch, font=font)[1])  # type: ignore[attr-defined]
+
+
+def measure_vertical_cjk_block(
+    draw: Any,
+    text: str,
+    *,
+    font: Any,
+    locale: str,
+    max_column_height: int,
+    column_gap: int = 4,
+) -> tuple[int, int]:
+    """Like ``render_vertical_cjk_block`` but only returns ``(width, height)``."""
+    if locale not in VALID_CJK_LOCALES or not text or not text.strip():
+        return 0, 0
+
+    stripped = text.strip()
+    columns: list[list[str]] = []
+    col: list[str] = []
+    col_h = 0
+    for ch in stripped:
+        gh = _glyph_height(draw, ch, font)
+        if col and col_h + gh + 2 > max_column_height:
+            columns.append(col)
+            col = []
+            col_h = 0
+        col.append(ch)
+        col_h += gh + 2
+    if col:
+        columns.append(col)
+
+    def col_width(chars: list[str]) -> int:
+        wmax = 1
+        for c in chars:
+            try:
+                bbox = draw.textbbox((0, 0), c, font=font)
+                wmax = max(wmax, bbox[2] - bbox[0])
+            except AttributeError:
+                wmax = max(wmax, draw.textsize(c, font=font)[0])  # type: ignore[attr-defined]
+        return wmax
+
+    total_w = 0
+    tallest = 0
+    for chars in columns:
+        cw = col_width(chars)
+        total_w += cw + column_gap
+        col_h = sum(_glyph_height(draw, c, font) + 2 for c in chars)
+        tallest = max(tallest, col_h)
+    total_w = max(0, total_w - column_gap)
+    return total_w, tallest
+
+
+def render_vertical_cjk_block(
+    draw: Any,
+    text: str,
+    right_x: int,
+    top_y: int,
+    *,
+    font: Any,
+    locale: str,
+    fill: tuple[int, int, int, int] = (0, 0, 0, 255),
+    max_column_height: int,
+    column_gap: int = 4,
+) -> tuple[int, int]:
+    """Draw ``text`` in top-to-bottom columns, progressing right-to-left."""
+    if locale not in VALID_CJK_LOCALES or not text:
+        return 0, 0
+
+    stripped = text.strip()
+    if not stripped:
+        return 0, 0
+
+    columns: list[list[str]] = []
+    col: list[str] = []
+    col_h = 0
+    for ch in stripped:
+        gh = _glyph_height(draw, ch, font)
+        if col and col_h + gh + 2 > max_column_height:
+            columns.append(col)
+            col = []
+            col_h = 0
+        col.append(ch)
+        col_h += gh + 2
+    if col:
+        columns.append(col)
+
+    def col_width(chars: list[str]) -> int:
+        wmax = 1
+        for c in chars:
+            try:
+                bbox = draw.textbbox((0, 0), c, font=font)
+                wmax = max(wmax, bbox[2] - bbox[0])
+            except AttributeError:
+                wmax = max(wmax, draw.textsize(c, font=font)[0])  # type: ignore[attr-defined]
+        return wmax
+
+    x_right = right_x
+    tallest = 0
+    for chars in columns:
+        cw = col_width(chars)
+        x_left = x_right - cw
+        y = top_y
+        for ch in chars:
+            render_text_to_pil(draw, ch, x_left, y, font=font, locale=locale, fill=fill)
+            y += _glyph_height(draw, ch, font) + 2
+        tallest = max(tallest, y - top_y)
+        x_right = x_left - column_gap
+
+    total_w = max(0, right_x - x_right - column_gap)
+    return total_w, tallest
+
+
 # ─── diagnostic helpers ───────────────────────────────────────────────────
 
 

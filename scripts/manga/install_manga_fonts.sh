@@ -43,27 +43,41 @@ download_if_missing() {
   echo "  ✓ wrote ${target##${REPO}/}"
 }
 
-# ── CJK BODY: Source Han Sans family ────────────────────────────────────
-# Adobe ships Source Han Sans (= Google's Noto Sans CJK) on GitHub releases.
-# Direct OTF links from Adobe's release v2.004 (canonical).
+# ── CJK BODY: Source Han Sans family (via Noto Sans CJK OTF mirrors) ────
+# Same outlines/typeface family Source Han Sans / Noto Sans CJK (see
+# FONT_REGISTRY + Adobe/Google pairing docs).
 
-SHS_BASE="https://github.com/adobe-fonts/source-han-sans/raw/release/OTF"
+NOTO_SANS_CJK_OTF="https://github.com/notofonts/noto-cjk/raw/main/Sans/OTF"
 
 download_if_missing "${OTF_DIR}/SourceHanSansJP-Regular.otf" \
-  "${SHS_BASE}/Japanese/SourceHanSansJP-Regular.otf" \
+  "${NOTO_SANS_CJK_OTF}/Japanese/NotoSansCJKjp-Regular.otf" \
   source_han_sans_jp
 
 download_if_missing "${OTF_DIR}/SourceHanSansTC-Regular.otf" \
-  "${SHS_BASE}/TraditionalChinese/SourceHanSansTC-Regular.otf" \
+  "${NOTO_SANS_CJK_OTF}/TraditionalChinese/NotoSansCJKtc-Regular.otf" \
   source_han_sans_tc
 
 download_if_missing "${OTF_DIR}/SourceHanSansSC-Regular.otf" \
-  "${SHS_BASE}/SimplifiedChinese/SourceHanSansSC-Regular.otf" \
+  "${NOTO_SANS_CJK_OTF}/SimplifiedChinese/NotoSansCJKsc-Regular.otf" \
   source_han_sans_sc
 
 download_if_missing "${OTF_DIR}/SourceHanSansKR-Regular.otf" \
-  "${SHS_BASE}/Korean/SourceHanSansKR-Regular.otf" \
+  "${NOTO_SANS_CJK_OTF}/Korean/NotoSansCJKkr-Regular.otf" \
   source_han_sans_kr
+
+# Flat FONT_REGISTRY paths under fonts/manga/
+download_if_missing "${FONTS_DIR}/source_han_sans_jp.otf" \
+  "${NOTO_SANS_CJK_OTF}/Japanese/NotoSansCJKjp-Regular.otf" \
+  source_han_jp_flat
+download_if_missing "${FONTS_DIR}/source_han_sans_tc.otf" \
+  "${NOTO_SANS_CJK_OTF}/TraditionalChinese/NotoSansCJKtc-Regular.otf" \
+  source_han_tc_flat
+download_if_missing "${FONTS_DIR}/source_han_sans_sc.otf" \
+  "${NOTO_SANS_CJK_OTF}/SimplifiedChinese/NotoSansCJKsc-Regular.otf" \
+  source_han_sc_flat
+download_if_missing "${FONTS_DIR}/source_han_sans_kr.otf" \
+  "${NOTO_SANS_CJK_OTF}/Korean/NotoSansCJKkr-Regular.otf" \
+  source_han_kr_flat
 
 # ── CJK DISPLAY: Klee One JP, LXGW WenKai ───────────────────────────────
 # Klee One via Google Fonts API
