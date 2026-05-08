@@ -41,7 +41,7 @@ This reads the registry below and reports which env vars are set vs missing.
 |-------|-------|
 | **Server** | Ubuntu 24.04 at `PEARL_STAR_IP` (default: 192.168.1.112 LAN) |
 | **Services** | Ollama/Qwen3:14b (:11434), ComfyUI/FLUX.1-dev (:8188), CosyVoice2 (:9880) |
-| **Env vars** | `PEARL_STAR_IP`, `COMFYUI_URL`, `COSYVOICE_URL` |
+| **Env vars** | `PEARL_STAR_IP`, `COMFYUI_URL`, `COSYVOICE_URL` (optional gated downloads: `HF_TOKEN`) |
 | **Consumed by** | `phoenix_v4/manga/image_backend.py`, `scripts/image_generation/runcomfy_batch.py`, `scripts/video/flux_client.py`, `scripts/audio/generate_presenter_audio.py`, `scripts/localization/llm_client.py`, `pearl_news/pipeline/llm_expand.py` |
 | **How to obtain** | See [docs/UBUNTU_PRODUCTION_SERVER_SETUP.md](./UBUNTU_PRODUCTION_SERVER_SETUP.md) |
 | **Required vs optional** | `PEARL_STAR_IP` and `COMFYUI_URL` required; `COSYVOICE_URL` optional (CJK TTS) |
@@ -71,6 +71,12 @@ This reads the registry below and reports which env vars are set vs missing.
 - `COMFYUI_URL` = http://192.168.1.112:8188
 - `COSYVOICE_URL` = http://192.168.1.112:9880
 - `QWEN_BASE_URL` = http://192.168.1.112:11434/v1
+
+**Hugging Face (`HF_TOKEN`) — Pearl Star gated downloads (optional):**
+- **Env var:** `HF_TOKEN` (user access token — **Keychain only**; do not paste into repo docs or commits).
+- **Used for:** authenticated pulls of gated/large checkpoints on Pearl Star (`huggingface-cli`, ComfyUI-managed downloads). Install/runbook reference: [docs/runbooks/PEARL_STAR_PULID_INSTALL_2026-05-07.md](./runbooks/PEARL_STAR_PULID_INSTALL_2026-05-07.md).
+- **How to obtain:** Hugging Face → Settings → Access Tokens — create a token with read access to needed models/repos.
+- **Required vs optional:** Optional — required only when downloading models that enforce Hugging Face authentication.
 
 ### 1a. Together AI — LLM (preferred for Qwen translation; free fallback for Pearl News EN)
 

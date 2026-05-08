@@ -106,6 +106,12 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("Pearl Star", "PEARL_STAR_IP", True, "Pearl Star server LAN IP (ComfyUI, Ollama, CosyVoice2)"),
     ("Pearl Star / ComfyUI", "COMFYUI_URL", True, "ComfyUI endpoint (e.g. http://${PEARL_STAR_IP}:8188)"),
     ("Pearl Star / CosyVoice2", "COSYVOICE_URL", False, "CosyVoice2 TTS endpoint (e.g. http://${PEARL_STAR_IP}:9880)"),
+    (
+        "Pearl Star / Hugging Face",
+        "HF_TOKEN",
+        False,
+        "Hugging Face user access token for gated model downloads on Pearl Star (huggingface-cli / ComfyUI). macOS Keychain only — never commit the value.",
+    ),
     # Image generation (PRIMARY — ComfyUI on Pearl Star; RunComfy is cloud fallback)
     ("RunComfy", "RUNCOMFY_API_KEY", False, "RunComfy API key (FALLBACK image gen — cloud backup when ComfyUI unavailable)"),
     ("RunComfy", "RUNCOMFY_TOKEN", False, "Alias accepted by some scripts/task briefs; same Bearer material as RUNCOMFY_API_KEY (Keychain parity per N3 2026-04-27)"),
