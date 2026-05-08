@@ -9,6 +9,10 @@ spec_anchor: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
 # (scene-anchor motifs vs TEACHER_DOCTRINE). Unclassified entries default to
 # legitimate_motif cap=18 per ITEM-1 spec fallback rule.
 
+# Phase 1 overlay (PER-CHAPTER-OVERLAY-ENFORCEMENT-V1 — back-compat: default overlay_rule none).
+#   overlay_rule: none | density_ceiling | presence_floor | drift_detection | absence_guard
+#   overlay_param: {}  — rule-specific; see docs/specs/PER_CHAPTER_OVERLAY_ENFORCEMENT_V1_SPEC.md section 4
+
 entries:
   # --- Original somatic instruction motifs (lines 81-97 in pre-migration source) ---
 
@@ -19,6 +23,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Scene-anchor opening; ~1x per chapter in 12-ch book. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "i want you to"
     classification: legitimate_motif
@@ -27,6 +33,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Somatic instruction motif; reader-address refrain. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "now i want you"
     classification: legitimate_motif
@@ -35,6 +43,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Somatic instruction transition phrase. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "not to fix anything"
     classification: legitimate_motif
@@ -43,6 +53,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Core somatic exercise phrase; non-striving refrain. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "anything just to"
     classification: legitimate_motif
@@ -51,6 +63,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Fragment of somatic exercise phrase sequence. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "fix anything"
     classification: legitimate_motif
@@ -59,6 +73,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Fragment: 'not to fix anything'. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "to fix anything"
     classification: legitimate_motif
@@ -67,6 +83,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Fragment of somatic exercise phrase. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "just to give yourself"
     classification: legitimate_motif
@@ -75,6 +93,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Somatic self-permission exercise phrase. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "to give yourself"
     classification: legitimate_motif
@@ -83,6 +103,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Fragment of somatic self-permission phrase. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "give yourself a"
     classification: legitimate_motif
@@ -91,6 +113,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Fragment of somatic self-permission phrase. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "before you move on"
     classification: legitimate_motif
@@ -99,6 +123,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Chapter transition / integration anchor. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "a different input"
     classification: legitimate_motif
@@ -107,6 +133,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Somatic reframe exercise phrase. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "different input for"
     classification: legitimate_motif
@@ -115,6 +143,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Fragment of somatic reframe phrase. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "input for a"
     classification: legitimate_motif
@@ -123,6 +153,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Fragment of somatic reframe phrase. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "one breath at a time"
     classification: legitimate_motif
@@ -131,6 +163,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Scene-anchor motif; grounding phrase used across chapters. Unclassified — defaulted."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   # --- Sprint-1 scene-anchor motifs (source comment: 'intentional recurring hooks') ---
 
@@ -141,6 +175,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor: opening of canonical motif sentence. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "have been looking"
     classification: legitimate_motif
@@ -149,6 +185,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "been looking at"
     classification: legitimate_motif
@@ -157,6 +195,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "looking at it for"
     classification: legitimate_motif
@@ -165,6 +205,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "at it for forty"
     classification: legitimate_motif
@@ -173,6 +215,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "it for forty minutes"
     classification: legitimate_motif
@@ -181,6 +225,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "the task is open"
     classification: legitimate_motif
@@ -189,6 +235,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor motif sentence. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "task is open you"
     classification: legitimate_motif
@@ -197,6 +245,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "is open you have"
     classification: legitimate_motif
@@ -205,6 +255,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "open you have been"
     classification: legitimate_motif
@@ -213,6 +265,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "your body knows"
     classification: legitimate_motif
@@ -221,6 +275,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor motif. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "your nervous system"
     classification: legitimate_motif
@@ -229,6 +285,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Spine-specific somatic vocabulary; high density is genre-expected. Sprint-1 scene-anchor."
     todo: "ITEM-2:remove-when-per-chapter-overlay-active"
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "body knows something"
     classification: legitimate_motif
@@ -237,6 +295,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "knows something your"
     classification: legitimate_motif
@@ -245,6 +305,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "something your calendar"
     classification: legitimate_motif
@@ -253,6 +315,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "not forever just"
     classification: legitimate_motif
@@ -261,6 +325,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor phrase. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "it was the cost"
     classification: legitimate_motif
@@ -269,6 +335,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor phrase. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "was the cost of"
     classification: legitimate_motif
@@ -277,6 +345,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor fragment. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "the alarm does not"
     classification: legitimate_motif
@@ -285,6 +355,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor phrase. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "the alarm dressed"
     classification: legitimate_motif
@@ -293,6 +365,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor phrase. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "the foundation of contemplative"
     classification: legitimate_motif
@@ -301,6 +375,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "Sprint-1 scene-anchor phrase. Source comment: intentional recurring hook."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   # --- TEACHER_DOCTRINE recurring attribution phrases ---
   # Classified doctrinal_attribution: cap_book_wide = chapter_count + 2 = 14
@@ -312,6 +388,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "ahjan's mindfulness"
     classification: doctrinal_attribution
@@ -320,6 +398,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "mindfulness and somatic"
     classification: doctrinal_attribution
@@ -328,6 +408,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "somatic teaches us"
     classification: doctrinal_attribution
@@ -336,6 +418,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "according to ahjan"
     classification: doctrinal_attribution
@@ -344,6 +428,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "that is the part"
     classification: doctrinal_attribution
@@ -352,6 +438,8 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
 
   - phrase: "the remote work improved"
     classification: doctrinal_attribution
@@ -360,3 +448,5 @@ entries:
     spec_citation: "docs/BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md#phrase-density"
     rationale: "TEACHER_DOCTRINE attribution phrase. Source comment: recurring attribution."
     todo: null
+    overlay_rule: none
+    overlay_param: {}
