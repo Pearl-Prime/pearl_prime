@@ -87,28 +87,106 @@ def load_active_workstreams():
 # Git diff analysis
 # ---------------------------------------------------------------------------
 
-def get_changed_files(pr_number=None):
-    """Get list of changed files with status (A/M/D)."""
-    if pr_number:
-        result = subprocess.run(
-            ["gh", "pr", "diff", str(pr_number), "--name-status"],
-            capture_output=True, text=True, cwd=REPO_ROOT
-        )
-    else:
-        result = subprocess.run(
-            ["git", "diff", "--name-status", "origin/main...HEAD"],
-            capture_output=True, text=True, cwd=REPO_ROOT
-        )
+def _telemetry_pr_changed_files(source: str, **kwargs: object) -> None:
+    parts = [f"[pr_governance_review] changed_files_source={source}"]
+    for k, v in kwargs.items():
+        if v is None:
+            continue
+        s = str(v).replace("\n", " ").strip()
+        if not s:
+            continue
+        parts.append(f"{k}={s}")
+    print(" ".join(parts), file=sys.stderr)
 
-    files = []
-    for line in result.stdout.strip().split("\n"):
-        if not line.strip():
+
+def _parse_gh_name_status(stdout: str) -> list[dict]:
+    files: list[dict] = []
+    for line in stdout.splitlines():
+        line = line.strip()
+        if not line:
             continue
         parts = line.split("\t", 1)
         if len(parts) == 2:
             status, path = parts
             files.append({"status": status.strip(), "path": path.strip()})
     return files
+
+
+def _change_type_to_status(change_type: str) -> str:
+    ct = (change_type or "").upper()
+    if ct == "ADDED":
+        return "A"
+    if ct in ("DELETED", "REMOVED"):
+        return "D"
+    if ct in ("MODIFIED", "CHANGED"):
+        return "M"
+    if ct == "RENAMED":
+        return "M"
+    return "M"
+
+
+def _files_from_pr_view_json(pr_number) -> list[dict]:
+    result = subprocess.run(
+        ["gh", "pr", "view", str(pr_number), "--json", "files"],
+        capture_output=True,
+        text=True,
+        cwd=REPO_ROOT,
+    )
+    if result.returncode != 0:
+        return []
+    try:
+        data = json.loads(result.stdout)
+    except json.JSONDecodeError:
+        return []
+    out: list[dict] = []
+    for ent in data.get("files") or []:
+        path = ent.get("path") or ""
+        if not path:
+            continue
+        out.append(
+            {
+                "status": _change_type_to_status(ent.get("changeType") or ""),
+                "path": path,
+            }
+        )
+    return out
+
+
+def get_changed_files(pr_number=None):
+    """Get list of changed files with status (A/M/D)."""
+    if not pr_number:
+        result = subprocess.run(
+            ["git", "diff", "--name-status", "origin/main...HEAD"],
+            capture_output=True,
+            text=True,
+            cwd=REPO_ROOT,
+        )
+        return _parse_gh_name_status(result.stdout)
+
+    result = subprocess.run(
+        ["gh", "pr", "diff", str(pr_number), "--name-status"],
+        capture_output=True,
+        text=True,
+        cwd=REPO_ROOT,
+    )
+    parsed = _parse_gh_name_status(result.stdout)
+    if result.returncode == 0 and parsed:
+        _telemetry_pr_changed_files("gh_pr_diff_name_status", gh_pr_diff_rc=result.returncode)
+        return parsed
+
+    extra: dict[str, object] = {}
+    if result.returncode != 0:
+        extra["gh_pr_diff_rc"] = result.returncode
+        err = (result.stderr or "").strip()
+        if err:
+            extra["gh_pr_diff_stderr"] = err[:200]
+    elif not (result.stdout or "").strip():
+        extra["detail"] = "empty_or_failed_diff"
+    else:
+        extra["detail"] = "gh_pr_diff_unparseable"
+
+    _telemetry_pr_changed_files("gh_pr_view_json_files", **extra)
+    return _files_from_pr_view_json(pr_number)
 
 # ---------------------------------------------------------------------------
 # Checks

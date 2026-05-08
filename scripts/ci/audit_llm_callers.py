@@ -30,6 +30,10 @@ SKIP_DIRS = {
 SKIP_PREFIXES = (".claude/",)
 
 
+class BudgetExceeded(Exception):
+    """Raised when --max-runtime-seconds is exceeded."""
+
+
 def _should_skip(path: Path) -> bool:
     rel = path.relative_to(REPO_ROOT)
     parts = rel.parts
@@ -39,9 +43,21 @@ def _should_skip(path: Path) -> bool:
     return any(s.startswith(p) for p in SKIP_PREFIXES)
 
 
-def _iter_files(roots: list[Path]) -> list[Path]:
+def _elapsed(start: float) -> float:
+    return time.monotonic() - start
+
+
+def _enforce_budget(start: float, max_seconds: float | None) -> None:
+    if max_seconds is None:
+        return
+    if _elapsed(start) >= max_seconds:
+        raise BudgetExceeded()
+
+
+def _iter_files(roots: list[Path], start: float, max_seconds: float | None) -> list[Path]:
     out: list[Path] = []
     for root in roots:
+        _enforce_budget(start, max_seconds)
         if root.is_file():
             if root.suffix in {".py", ".yaml", ".yml"}:
                 out.append(root)
@@ -49,6 +65,7 @@ def _iter_files(roots: list[Path]) -> list[Path]:
         if not root.is_dir():
             continue
         for p in root.rglob("*"):
+            _enforce_budget(start, max_seconds)
             if not p.is_file():
                 continue
             if p.suffix not in {".py", ".yaml", ".yml"}:
@@ -91,94 +108,122 @@ def main() -> int:
         default=default_allowed if default_allowed.exists() else None,
     )
     ap.add_argument("--output", type=Path, default=default_output)
-    ap.add_argument("--roots", nargs="*", help="Limit scan to these roots (repo-relative or absolute)")
+    ap.add_argument(
+        "--roots",
+        nargs="+",
+        default=None,
+        metavar="PATH",
+        help="Limit scan to these roots (repo-relative or absolute); one or more paths",
+    )
+    ap.add_argument(
+        "--max-runtime-seconds",
+        type=float,
+        default=None,
+        metavar="N",
+        help="Abort with exit 2 if monotonic elapsed time exceeds N during discovery or scanning",
+    )
     ap.add_argument("--fail-on-violation", action="store_true")
     args = ap.parse_args()
 
-    banned_cfg = yaml.safe_load(args.banned_patterns_file.read_text(encoding="utf-8")) or {}
-    global_exempt = list(banned_cfg.get("global_exempt_prefixes") or [])
-    rules = banned_cfg.get("banned_patterns") or {}
-    rule_items = list(rules.items()) if isinstance(rules, dict) else []
+    start = time.monotonic()
+    max_rt = args.max_runtime_seconds
 
-    roots: list[Path] = []
-    if args.roots:
-        for r in args.roots:
-            p = Path(r)
-            if not p.is_absolute():
-                p = REPO_ROOT / p
-            roots.append(p.resolve())
-    else:
-        roots.append(REPO_ROOT)
+    try:
+        _enforce_budget(start, max_rt)
 
-    files = _iter_files(roots)
-    violations: list[dict[str, object]] = []
+        banned_cfg = yaml.safe_load(args.banned_patterns_file.read_text(encoding="utf-8")) or {}
+        global_exempt = list(banned_cfg.get("global_exempt_prefixes") or [])
+        rules = banned_cfg.get("banned_patterns") or {}
+        rule_items = list(rules.items()) if isinstance(rules, dict) else []
 
-    for rule_name, spec in rule_items:
-        if not isinstance(spec, dict):
-            continue
-        pattern = spec.get("regex") or ""
-        reason = spec.get("reason") or ""
-        exempt_paths = list(spec.get("exempt_paths") or [])
-        line_allow = list(spec.get("line_allow_substrings") or [])
-        try:
-            rx = re.compile(pattern, re.MULTILINE | re.DOTALL)
-        except re.error as e:
-            print(f"Invalid regex for {rule_name}: {e}", file=sys.stderr)
-            return 2
+        roots: list[Path] = []
+        if args.roots:
+            for r in args.roots:
+                p = Path(r)
+                if not p.is_absolute():
+                    p = REPO_ROOT / p
+                roots.append(p.resolve())
+        else:
+            roots.append(REPO_ROOT)
 
-        for path in files:
-            rel = path.relative_to(REPO_ROOT).as_posix()
-            if _path_exempt(rel, global_exempt) or _path_exempt(rel, exempt_paths):
+        files = _iter_files(roots, start, max_rt)
+        violations: list[dict[str, object]] = []
+
+        for rule_name, spec in rule_items:
+            if not isinstance(spec, dict):
                 continue
+            pattern = spec.get("regex") or ""
+            reason = spec.get("reason") or ""
+            exempt_paths = list(spec.get("exempt_paths") or [])
+            line_allow = list(spec.get("line_allow_substrings") or [])
             try:
-                text = path.read_text(encoding="utf-8", errors="replace")
-            except OSError:
-                continue
-            for m in rx.finditer(text):
-                start = m.start()
-                line_no = text.count("\n", 0, start) + 1
-                line_start = text.rfind("\n", 0, start) + 1
-                line_end = text.find("\n", start)
-                if line_end < 0:
-                    line_end = len(text)
-                line = text[line_start:line_end]
-                if line_allow and _line_allowed(line, line_allow):
-                    continue
-                snippet = m.group(0).strip().replace("\n", " ")[:200]
-                violations.append(
-                    {
-                        "rule": rule_name,
-                        "path": rel,
-                        "line": line_no,
-                        "snippet": snippet,
-                        "reason": reason,
-                    }
-                )
+                rx = re.compile(pattern, re.MULTILINE | re.DOTALL)
+            except re.error as e:
+                print(f"Invalid regex for {rule_name}: {e}", file=sys.stderr)
+                return 2
 
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    lines = [
-        "# LLM callers audit",
-        "",
-        f"- Violations: **{len(violations)}**",
-        f"- Files scanned: **{len(files)}**",
-        "",
-    ]
-    for v in violations:
-        lines.append(f"## `{v['path']}`:{v['line']} — `{v['rule']}`")
-        lines.append("")
-        lines.append(f"- Reason: {v['reason']}")
-        lines.append(f"- Snippet: `{v['snippet']}`")
-        lines.append("")
-    args.output.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    summary_path = args.output.parent / "llm_audit_summary.json"
-    summary_path.write_text(
-        json.dumps({"violation_count": len(violations), "violations": violations}, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    print(json.dumps({"violation_count": len(violations)}, indent=2))
-    if args.fail_on_violation and violations:
-        return 1
-    return 0
+            for path in files:
+                _enforce_budget(start, max_rt)
+                rel = path.relative_to(REPO_ROOT).as_posix()
+                if _path_exempt(rel, global_exempt) or _path_exempt(rel, exempt_paths):
+                    continue
+                try:
+                    text = path.read_text(encoding="utf-8", errors="replace")
+                except OSError:
+                    continue
+                for m in rx.finditer(text):
+                    _enforce_budget(start, max_rt)
+                    start_idx = m.start()
+                    line_no = text.count("\n", 0, start_idx) + 1
+                    line_start = text.rfind("\n", 0, start_idx) + 1
+                    line_end = text.find("\n", start_idx)
+                    if line_end < 0:
+                        line_end = len(text)
+                    line = text[line_start:line_end]
+                    if line_allow and _line_allowed(line, line_allow):
+                        continue
+                    snippet = m.group(0).strip().replace("\n", " ")[:200]
+                    violations.append(
+                        {
+                            "rule": rule_name,
+                            "path": rel,
+                            "line": line_no,
+                            "snippet": snippet,
+                            "reason": reason,
+                        }
+                    )
+
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        lines = [
+            "# LLM callers audit",
+            "",
+            f"- Violations: **{len(violations)}**",
+            f"- Files scanned: **{len(files)}**",
+            "",
+        ]
+        for v in violations:
+            lines.append(f"## `{v['path']}`:{v['line']} — `{v['rule']}`")
+            lines.append("")
+            lines.append(f"- Reason: {v['reason']}")
+            lines.append("")
+            lines.append(f"- Snippet: `{v['snippet']}`")
+            lines.append("")
+        args.output.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        summary_path = args.output.parent / "llm_audit_summary.json"
+        summary_path.write_text(
+            json.dumps({"violation_count": len(violations), "violations": violations}, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        print(json.dumps({"violation_count": len(violations)}, indent=2))
+        if args.fail_on_violation and violations:
+            return 1
+        return 0
+    except BudgetExceeded:
+        print(
+            "[audit_llm_callers] exceeded --max-runtime-seconds budget during file discovery or scan",
+            file=sys.stderr,
+        )
+        return 2
 
 
 if __name__ == "__main__":
