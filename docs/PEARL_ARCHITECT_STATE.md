@@ -890,3 +890,53 @@ Anti-drift check (additive on draft's own check): The music-mode subsystem expan
 **Budget:** Tier 1 (operator-present) for **design + ratification + phase prompts**; Tier 2 acceptable for unattended **catalog/pipeline regeneration** tasks **after** SSOT locks.
 
 **Pointers:** `artifacts/qa/go_live_readiness_audit_2026-05-08.md`; `docs/specs/WORLDWIDE_CATALOG_GO_LIVE_V1_PROGRAM_SPEC.md`; `artifacts/coordination/ACTIVE_PROJECTS.tsv`; `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`.
+
+#### AMENDMENT 2026-05-08-PRIORITIES
+
+**Status transition:** `proposed` -> `active` (operator decisions are the activation gate).
+
+**Decision:** Operator ratifies phase order + per-surface priorities + Wave A recovery scope + active-brand SSOT + weekly cadence per Q1-Q5 above.
+
+**Operator decisions (verbatim):**
+
+- Q1 = yes (phase order: visibility -> wiring -> catalog -> go-live)
+- Q2 priorities:
+  - P0 = Surface 1 (Catalog planning), Surface 4 (Active/inactive brands), Surface 6 (Marketing volume SSOT) [all 3 RED surfaces]
+  - P1 = Surface 2 (Brand dashboard), Surface 8 (Executive dashboard)
+  - P2 = Surface 3 (Weekly packaging), Surface 5 (Author/bio), Surface 7 (Spine/CLI perf), Surface 9 (Command UI <-> CLI), Surface 10 (Disk/worktrees)
+- Q3 = commit A1 (Pearl_Localization 12 scripts) + A2 (Pearl_Int CosyVoice2 audit TSV) + A5 (Pearl_Dev overlay Phase 1) + Pearl_DevOps CI hygiene (5 files); abandon A6 + stale drafts/contaminated worktree leftovers
+- Q4 = brand_wizard YAML confirmed as canonical SSOT for active/inactive brand classification
+- Q5 = Weekly cadence: Monday, both email + file delivery
+
+**Anti-drift:**
+
+- any agent doing point work on a P0 surface must reference its `ws_worldwide_gl_s0X` row
+- any P-tier reassignment requires a separate AMENDMENT
+- "active brand" definition is brand_wizard YAML presence -- ANY override requires AMENDMENT
+- weekly download cadence is Monday email+file -- change requires AMENDMENT
+
+**Action items:** Phase 1 P0 ws rows (s01, s04, s06) advance to `status=runnable`; router fans out implementation prompts in next turn.
+
+**Handoffs:** Pearl_PM owns program; per-surface implementation owners assigned in ws rows.
+
+### FEATURE-KNOB-CATALOG-VARIATION-V1-01 — Structural variation + angle registry alignment + explicit angle_id per row (ratified 2026-05-08)
+
+**Status:** **active** (operator authorized; ws rows runnable).
+
+**Context:** PR #960 audit found dead vocab (angle_registry, recommender weights) + 12 cross-cutting findings; operator authorizes top-3 P0 remediations.
+
+**Decision:** 3 Pearl_Dev workstreams open per the 3 P0 directions verbatim:
+
+- P0-1: Serialize structural variation (angle_id, motif_id, book_structure_id, journey_shape_id, stable signature) on Pearl Prime full-catalog artifacts
+- P0-2: Align CatalogPlanner angle resolution with `config/angles/angle_registry.yaml` (replace heuristic `_derive_angle` and `{topic}_general` defaults)
+- P0-3: Add explicit `angle_id` per catalog row (deterministic registry join; narrative framing catalog-declared, not CLI/arc-defaulted)
+
+**Anti-drift:**
+
+- the 3 P0 workstreams are independent and must NOT be merged into a single mega-PR
+- any new vocab axis added to `angle_registry.yaml` or motif registry requires AMENDMENT
+- removing the heuristic `_derive_angle` path requires the registry-join path to be production-validated against an existing reference book
+
+**Action items:** `ws_feat_knob_p0_1/2/3` `status=runnable`; router fans out implementation prompts in next turn.
+
+**Handoffs:** Pearl_Dev owns implementation; Pearl_Architect ratifies completion when each ws lands.

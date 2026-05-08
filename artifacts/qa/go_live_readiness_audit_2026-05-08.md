@@ -418,3 +418,27 @@ PYTHONPATH=. python3 scripts/run_pipeline.py \
 ---
 
 *END AUDIT — implementation intentionally out of scope.*
+
+---
+
+## OPERATOR-DECISIONS-2026-05-08
+
+Ratification payload for `WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01` activation.
+
+### Q1-Q5 (verbatim)
+
+- Q1 = yes (phase order: visibility -> wiring -> catalog -> go-live)
+- Q2 priorities:
+  - P0 = Surface 1 (Catalog planning), Surface 4 (Active/inactive brands), Surface 6 (Marketing volume SSOT)  [all 3 RED surfaces]
+  - P1 = Surface 2 (Brand dashboard), Surface 8 (Executive dashboard)
+  - P2 = Surface 3 (Weekly packaging), Surface 5 (Author/bio), Surface 7 (Spine/CLI perf), Surface 9 (Command UI <-> CLI), Surface 10 (Disk/worktrees)
+- Q3 = commit A1 (Pearl_Localization 12 scripts) + A2 (Pearl_Int CosyVoice2 audit TSV) + A5 (Pearl_Dev overlay Phase 1) + Pearl_DevOps CI hygiene (5 files); abandon A6 + stale drafts/contaminated worktree leftovers
+- Q4 = brand_wizard YAML confirmed as canonical SSOT for active/inactive brand classification
+- Q5 = Weekly cadence: Monday, both email + file delivery
+
+### Activation notes
+
+- Program status transition authorized: `proposed` -> `active`.
+- P0 surfaces unlocked for runnable execution: `s01`, `s04`, `s06`.
+- P1 surfaces queued: `s02`, `s08`.
+- P2 surfaces queued: `s03`, `s05`, `s07`, `s09`, `s10`.

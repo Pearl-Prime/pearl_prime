@@ -49,3 +49,35 @@ Questions **Q1–Q5** are listed verbatim at the **end** of `artifacts/qa/go_liv
 ## Handoff
 
 After operator answers **Q1–Q5**, Pearl_PM routes **Phase 1** implementation prompts against the **`ws_worldwide_gl_*`** rows opened for this project.
+
+---
+
+## AMENDMENT-2026-05-08-PRIORITIES
+
+Operator decisions ratified as the activation gate for `WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01`.
+
+### Q1-Q5 (verbatim)
+
+- Q1 = yes (phase order: visibility -> wiring -> catalog -> go-live)
+- Q2 priorities:
+  - P0 = Surface 1 (Catalog planning), Surface 4 (Active/inactive brands), Surface 6 (Marketing volume SSOT)  [all 3 RED surfaces]
+  - P1 = Surface 2 (Brand dashboard), Surface 8 (Executive dashboard)
+  - P2 = Surface 3 (Weekly packaging), Surface 5 (Author/bio), Surface 7 (Spine/CLI perf), Surface 9 (Command UI <-> CLI), Surface 10 (Disk/worktrees)
+- Q3 = commit A1 (Pearl_Localization 12 scripts) + A2 (Pearl_Int CosyVoice2 audit TSV) + A5 (Pearl_Dev overlay Phase 1) + Pearl_DevOps CI hygiene (5 files); abandon A6 + stale drafts/contaminated worktree leftovers
+- Q4 = brand_wizard YAML confirmed as canonical SSOT for active/inactive brand classification
+- Q5 = Weekly cadence: Monday, both email + file delivery
+
+### Per-surface priority lock
+
+| Surface | Name | Priority |
+|---|---|---|
+| Surface 1 | Catalog planning | P0 |
+| Surface 2 | Brand dashboard | P1 |
+| Surface 3 | Weekly packaging | P2 |
+| Surface 4 | Active/inactive brands | P0 |
+| Surface 5 | Author/bio | P2 |
+| Surface 6 | Marketing volume SSOT | P0 |
+| Surface 7 | Spine/CLI perf | P2 |
+| Surface 8 | Executive dashboard | P1 |
+| Surface 9 | Command UI <-> CLI | P2 |
+| Surface 10 | Disk/worktrees | P2 |
