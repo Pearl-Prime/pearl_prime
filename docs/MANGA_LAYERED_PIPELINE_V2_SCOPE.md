@@ -1,3 +1,10 @@
+---
+SUPERSEDED 2026-05-07 by MANGA-LAYERED-PIPELINE-V2-01
+cap entry in docs/PEARL_ARCHITECT_STATE.md (PR #924 merge
+SHA ec46a72238). This stub is preserved for archaeology.
+Authoritative V2 scope: see cap entry.
+---
+
 # Manga Layered Pipeline V2 — Implementation Pointer (2026-05-07)
 
 **Authority spec:** [docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md](CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md)
