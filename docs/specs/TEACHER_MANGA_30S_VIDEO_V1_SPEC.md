@@ -1,6 +1,6 @@
 # Teacher × Manga 30-Second Video — V1 Spec
 
-**Status:** PROPOSED — awaiting operator ratification of Q1–Q4 (see §16)
+**Status:** **ACTIVE** — operator Q1–Q4 ratified 2026-05-08 (see §AMENDMENT-2026-05-08)
 **Cap entry:** `TEACHER-MANGA-30S-VIDEO-V1-01` in `docs/PEARL_ARCHITECT_STATE.md`
 **Project:** `PRJ-TEACHER-MANGA-30S-VIDEO-V1` in `artifacts/coordination/ACTIVE_PROJECTS.tsv`
 **Owner:** Pearl_Architect (this scoping); Pearl_Video (pilot render); Pearl_Localization (script derivation); Pearl_Editor (style review)
@@ -20,7 +20,7 @@
 
 ## §1. Scope
 
-12 teachers × 1 video each = **12 deliverables for V1** (with adi_da as a 13th candidate pending operator decision in §16 Q1). 30 seconds each. Vertical 1080×1920 (9:16) primary; landscape 1920×1080 (16:9) secondary if cadence config (`config/release_velocity/video_cadence.yaml`) permits.
+**12 active teachers × 1 video each = 12 ship deliverables for V1.** **adi_da is deferred to V1.1** per operator Q1 = (b); the binding **13-row matrix** retains adi_da as **`deferred_v1_1`** (not in the 12-active render set). 30 seconds each. Vertical 1080×1920 (9:16) primary; landscape 1920×1080 (16:9) secondary if cadence config (`config/release_velocity/video_cadence.yaml`) permits.
 
 This program is a **viewing mode** on existing teacher identity, not a new identity. No new teacher banks. No new `character_design` instances. Style varies wardrobe / setting / lighting / lineart engine; the 12-axis identity locked under `docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md` stays unchanged.
 
@@ -90,7 +90,7 @@ Operator-stated narration locale per teacher:
 | Locale | Teachers |
 |---|---|
 | **ja-JP** (4) | miki, junko, omote, joshin |
-| **zh-TW** (1, +adi_da pending Q1) | master_wu (+ adi_da if Q1=include) |
+| **zh-TW** (1 — adi_da deferred V1.1) | master_wu only |
 | **zh-CN** (1) | master_feung |
 | **en-US** (6) | ahjan, pamela_fellows, master_sha, maat, ra, sai_ma |
 
@@ -143,32 +143,32 @@ Per `CLAUDE.md` "LLM Tier Policy" section.
 
 | # | Owner | Task | Handoff prompt seed |
 |---|---|---|---|
-| a | Pearl_Localization | Derive 12 (or 13 incl. adi_da if Q1=include) locale-correct 30s scripts from existing audiobook prose. | "Read each teacher's `<teacher>_*_ch1.txt`; emit YAML at `artifacts/video/teacher_30s_v1/<teacher>/script_<locale>.yaml` with hook (0-6s) / struggle (6-22s) / release (22-30s) blocks; meaning-match the chapter-1 climax; respect the locale word/mora/hanzi count budget in §3." |
+| a | Pearl_Localization | Derive **12** locale-correct 30s scripts from existing audiobook prose (**adi_da excluded** per Q1 = b). | "Read each active teacher's `<teacher>_*_ch1.txt`; emit YAML at `artifacts/video/teacher_30s_v1/<teacher>/script_<locale>.yaml` with hook (0-6s) / struggle (6-22s) / release (22-30s) blocks; meaning-match the chapter-1 climax; respect the locale word/mora/hanzi count budget in §3." |
 | b | Pearl_Editor | Confirm style-spread assignment per teacher matches teacher voice + brand demographic. | "Read the matrix TSV; for each row, confirm or flag the proposed style mode; surface any teacher whose voice would feel false in the proposed style; keep the 6/3/2/1 distribution intact." |
 | c | Pearl_Dev | Propose `teacher_30s_vertical_v1` render preset under `config/video/render_params.yaml` in a SEPARATE PR (not this cap PR). | "Add a render preset that targets 9:16 / 30s / 30fps / -14 LUFS / -1.0 dBTP; reuse existing xfade and noise params; add a manga-panel-step transition mode if not present; do not modify the `short` format envelope in `format_specs.yaml`." |
 | d | Pearl_Int | Confirm CosyVoice2 reference-voice availability per teacher on Pearl Star; flag any missing reference clips. | "SSH to Pearl Star (`pearl_star` alias); list `~/CosyVoice2/voices/<teacher>/` for each teacher in the matrix; flag any missing; propose nearest-locale stock voice fallback." |
 | e | Pearl_Video | Pilot render: pick ONE teacher (recommended **joshin / cognitive_clarity** since brand-2 manga assets and ja-JP TTS are furthest along) for V1 pilot before fanning out to 12. | "Render the pilot per the matrix row for joshin; use the script Pearl_Localization produces; confirm 30s exact, 1080×1920, FLUX-quality stills, no displacive verbatim quote; surface artifact for operator review before fanning out." |
-| f | Pearl_Architect (next-turn amendment) | Once style spread + adi_da inclusion + pilot teacher + locale overrides approved by operator (Q1–Q4), ratify final matrix into TEACHER-MANGA-30S-VIDEO-V1-01 amendment cap. | (this session's follow-up turn) |
+| f | Pearl_Architect | **COMPLETE (2026-05-08)** — Q1–Q4 ratified into cap + `§AMENDMENT-2026-05-08` + matrix TSV. No further scope prompts from this lane. | — |
 
 ## §14. Status lifecycle
 
-- **proposed** — current state. This spec + cap entry + matrix exist; no work fanned out.
-- **active** — after operator answers Q1–Q4 in §16; Pearl_Architect ratifies amendment; multi-parallel implementation prompts issued.
-- **shipped_v1** — 12 (or 13) videos rendered, operator-approved, dropped to social platforms per `video_cadence.yaml`.
+- **proposed** — pre-ratification: spec + cap entry + matrix without operator lock.
+- **active** — **current (2026-05-08).** Operator answered Q1–Q4; Pearl_Architect ratified §AMENDMENT-2026-05-08; cap **TEACHER-MANGA-30S-VIDEO-V1-01** is **active**; Wave A (A1–A7 subset) already running — **do not re-prompt** (capture refs in amendment).
+- **shipped_v1** — **12** active-teacher videos rendered, operator-approved, dropped to social platforms per `video_cadence.yaml` (**adi_da** is out-of-scope until V1.1).
 
 ## §15. Discrepancies surfaced during scoping
 
-The cross-check in step 4 of the scoping plan revealed three discrepancies that must be resolved before any render:
+The cross-check in step 4 of the scoping plan surfaced three items; disposition was updated on **2026-05-08** per operator Q1–Q4 and prereq closures (#944, #943):
 
 | ID | Discrepancy | Disposition |
 |---|---|---|
-| **D1** | `qi_foundation` brand (master_feung's binding) is **not present** in `config/manga/canonical_brand_list.yaml`. It IS present in `config/manga/brand_lora_plans.yaml.brand_suffixes` (suffix = `qf`). Demographic unconfirmed. | Propose demographic = `seinen-cultivation` for matrix purposes; flag for Pearl_Architect cap-entry follow-up to either add qi_foundation to canonical_brand_list or formally retire it. Does NOT block scoping. |
-| **D2** | **maat audiobook prose anchor is missing.** No `maat_*_ch1.txt` exists under `artifacts/audiobook_samples/_prose/`. All 11 other (matrix-listed) teachers have an anchor. | Pearl_Writer prereq before Pearl_Localization can derive maat's 30s script. Until prose lands, maat's row in the matrix is **blocked**. Recommendation: Pearl_Writer authors `maat_boundaries_ch1.txt` (or operator-chosen topic) ASAP; otherwise drop maat from V1 and revisit in V1.1. |
-| **D3** | adi_da has audiobook prose (`adi_da_self_worth_ch1.txt`) and operator-stated locale (zh-TW) but **no manga brand binding** in operator's 12-list, **no entry** in `brand_lora_plans.character_loras`, and **no entry** in `brand_suffixes`. | Operator decision Q1 in §16. Three paths: (a) include as 13th deliverable + author character_design + assign brand; (b) defer pending brand assignment; (c) skip. Do NOT silently drop. |
+| **D1** | `qi_foundation` brand (master_feung's binding) vs `canonical_brand_list.yaml` | **Prerequisite closed for V1** via **PR #944** (merge **`7e8009e78e`**). Follow-up YAML reconciliation remains **Wave A4** Pearl_Dev lane. |
+| **D2** | maat audiobook prose anchor | **Closed** via **PR #943** (merge **`54b759d603`**). Anchor: `artifacts/audiobook_samples/_prose/maat_self_worth_ch1.txt`. Matrix row **`ready`**. |
+| **D3** | adi_da unbound to manga pipeline | Operator **Q1 = (b)**: **defer V1.1**; tracked as brand-binding prerequisite; **does not block** V1 **12-active** ship. |
 
-## §16. Operator-gated questions (must be answered before fan-out)
+## §16. Operator-gated questions (answered 2026-05-08)
 
-> The next router turn is blocked on these four answers. Pearl_Architect issues amendment + multi-parallel implementation prompts the moment they land.
+> **Resolved.** Binding ratification lives in **`§AMENDMENT-2026-05-08`** below (and cap entry **`TEACHER-MANGA-30S-VIDEO-V1-01`** in `docs/PEARL_ARCHITECT_STATE.md`). Wave A prompts were already issued — **do not re-issue**.
 
 ### Q1 — adi_da inclusion
 
@@ -205,10 +205,7 @@ Any teacher whose en-US default in §7 should be overridden to a different nativ
 - Any render. Any video file. Any audio file.
 - Any code change to `phoenix_v4/`, `scripts/`, `config/video/*` params (cap entry first; param edits land later under their own PR per §13c).
 - Any LoRA training, any new `character_design` YAML.
-- Modifying existing cap entries.
-- Q1–Q4 decisions (operator).
-- Discrepancy D1 (qi_foundation canonical_brand_list reconciliation) — separate Pearl_Architect cap follow-up.
-- Discrepancy D2 (maat audiobook prose authoring) — separate Pearl_Writer task; gates maat row only.
+- Edits that contradict **`§AMENDMENT-2026-05-08`** without a new AMENDMENT.
 
 ## §18. References
 
@@ -221,3 +218,68 @@ Any teacher whose en-US default in §7 should be overridden to a different nativ
 - `config/localization/locale_registry.yaml` — locale code authority
 - `docs/PEARL_STAR_IMAGE_GENERATION_PROTOCOL.md` — render path canon (Pearl Star Tailscale URL, flux1-schnell-fp8, two-stage pattern)
 - `docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md` — 12-axis identity discipline
+
+---
+
+## §AMENDMENT-2026-05-08 — operator Q1–Q4 ratification (binding)
+
+Operator decisions (verbatim lock):
+
+- **Q1 = (b)** — defer **adi_da** to **V1.1** (program ships **12**, not 13).
+- **Q2 = approve** — lock **6 / 3 / 2 / 1** style spread **as proposed** in §6 + matrix TSV.
+- **Q3 = joshin** — pilot **= joshin / cognitive_clarity / ja-JP**.
+- **Q4 = none** — retain all **six** **en-US** defaults: **ahjan, pamela_fellows, master_sha, maat, ra, sai_ma**.
+
+### 1. ADI_DA deferral (Q1 = b)
+
+Total V1 deliverables: **12** (not **13**). **adi_da** row is **preserved** in `artifacts/qa/teacher_manga_30s_locale_brand_matrix_2026-05-08.tsv` with **`deferred_v1_1`**, rationale **`no manga brand binding in brand_lora_plans.character_loras; awaits brand assignment`**.
+
+**Anti-drift:** Any future agent attempting to render **adi_da** against cap **TEACHER-MANGA-30S-VIDEO-V1-01** MUST STOP and request **explicit V1.1** scoping (brand + `character_design` binding).
+
+### 2. Style-spread lock (Q2 = approve)
+
+- **6** `pure_manga`: ahjan, joshin, miki, junko, omote, master_wu
+- **3** `manga_fantasy_hybrid`: master_feung, master_sha, ra
+- **2** `cinematic_painterly_fantasy`: pamela_fellows, sai_ma
+- **1** `experimental`: maat
+
+**Anti-drift:** Any per-teacher style reassignment requires a **separate AMENDMENT**. Agents MUST NOT silently re-allocate styles.
+
+### 3. Pilot teacher (Q3 = joshin)
+
+Pilot **= joshin / cognitive_clarity / ja_JP**. **Wave B1** (`Pearl_Video` joshin pilot) consumes **Wave A1** joshin script **+ Wave A2** joshin reference-voice row **+ Wave A6** `teacher_30s_vertical_v1` render preset convergence.
+
+**Anti-drift:** Pilot identity is locked; operator-level **re-pilot** requires explicit instruction.
+
+### 4. Locale lock (Q4 = none)
+
+- **ja_JP:** joshin, miki, junko, omote  
+- **zh_TW:** master_wu *(note: **adi_da** deferred → **single-teacher zh_TW** in V1)*  
+- **zh_CN:** master_feung  
+- **en_US:** ahjan, pamela_fellows, master_sha, maat, ra, sai_ma  
+
+**Anti-drift:** Locale overrides require a future **AMENDMENT**.
+
+### 5. Prerequisite status
+
+- **D1** (`qi_foundation`): **closed** by **PR #944** (merged **`7e8009e78e`**); follow-up YAML reconciliation **in flight** as **Wave A4**.
+- **D2** (maat audiobook prose): **closed** by **PR #943** (merged **`54b759d603`**); **maat** matrix row **`ready`**.
+- **D3** (**adi_da** brand binding): **V1.1** prerequisite — **not blocking** V1.
+
+### 6. Status transitions
+
+- Cap **TEACHER-MANGA-30S-VIDEO-V1-01**: **`proposed` → `active`**
+- **`ws_teacher30s_scope_ratified`**: **`proposed` → `complete`**
+- **`ws_teacher30s_script_derivation`**: **`proposed` → `in_progress`** (Wave **A1** Pearl_Localization PR pending)
+- **`ws_teacher30s_render_pilot`**: **`proposed` → `in_progress`** (Wave **B1** gated on **A1 + A2 (joshin) + A6**)
+
+### 7. Wave A in-flight references (capture-only — DO NOT re-prompt)
+
+- **A1** Pearl_Localization × **12** scripts → recovery PR pending
+- **A2** Pearl_Int CosyVoice2 audit → recovery PR pending
+- **A3** Pearl_Editor style review → **PR #953** (open)
+- **A4** Pearl_Dev `qi_foundation` YAML reconciliation → **PR #952** (open)
+- **A5** Pearl_Dev overlay enforcement Phase 1 → recovery PR pending
+- **A6** Pearl_Dev `teacher_30s_vertical_v1` render preset → status unknown
+- **A7** Pearl_GitHub merge train → **CLOSED (5 SHAs)**
+- **B1** Pearl_Video **joshin** pilot → gated on **A1 + A2 (joshin) + A6**

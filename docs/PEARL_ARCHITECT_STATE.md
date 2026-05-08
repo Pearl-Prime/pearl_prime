@@ -858,7 +858,6 @@ Anti-drift check (additive on draft's own check): The music-mode subsystem expan
 **Budget:** This PR = **docs-only** (~2 files, ~0 engineering risk). Follow-up Pearl_Dev YAML PR = **small** (single-file minimum; **medium** if full `config/manga/` alias sweep). CI Phase 1 = **~0.5–1 eng-day** (script + workflow); Phase 2 = **backlog sized** after alias inventory.
 
 **Audit artifact:** `artifacts/qa/qi_foundation_canonical_reconciliation_2026-05-08.md`.
-
 ### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — Worldwide catalog production go-live program audit (proposed 2026-05-08; awaits operator Q1–Q5 + phase approval)
 
 **Status:** **proposed** (program record + gap matrix only — no implementation in the opening PR).
@@ -940,3 +939,170 @@ Anti-drift check (additive on draft's own check): The music-mode subsystem expan
 **Action items:** `ws_feat_knob_p0_1/2/3` `status=runnable`; router fans out implementation prompts in next turn.
 
 **Handoffs:** Pearl_Dev owns implementation; Pearl_Architect ratifies completion when each ws lands.
+### TEACHER-MANGA-30S-VIDEO-V1-01 — 12 teacher × manga 30-second video deliverables (**active**); adi_da deferred V1.1 (ratified 2026-05-08)
+
+**Status:** **active** — operator answers to Q1–Q4 captured in [`docs/specs/TEACHER_MANGA_30S_VIDEO_V1_SPEC.md` §AMENDMENT-2026-05-08](../docs/specs/TEACHER_MANGA_30S_VIDEO_V1_SPEC.md); binding matrix edits in [`artifacts/qa/teacher_manga_30s_locale_brand_matrix_2026-05-08.tsv`](../artifacts/qa/teacher_manga_30s_locale_brand_matrix_2026-05-08.tsv).
+
+**Context:** Operator request — a 30-second video per teacher, tied to that teacher's manga brand, with the SAME NARRATIVE MEANING as the teacher's audiobook chapter-1 sample (script meaning-matched, not verbatim). Teacher-as-MC experiences a struggle → release/resolution arc that mirrors the teacher's signature transformation. Style is primarily manga but with a deliberate spread of types — manga, fantasy, hybrid, and one experimental — to demonstrate market range while keeping teacher identity locked. Locale is the teacher's native locale per operator's matrix.
+
+**Decision (V1 frozen):** **12 teachers × 1 video each = 12 ship deliverables.** **adi_da is deferred to V1.1** per operator **Q1 = (b)** — no manga brand binding in `brand_lora_plans.character_loras`; matrix row retained with **`deferred_v1_1`**. Wave A implementation prompts are **already in flight** — do **not** re-issue those prompts.
+
+| Pillar | Lock |
+|---|---|
+| Story shape | HOOK (0–6s) → STRUGGLE (6–22s) → RELEASE (22–30s) — same DNA as the audiobook chapter-1 climax |
+| Script-reuse rule | Meaning matches `artifacts/audiobook_samples/_prose/<teacher>_*_ch1.txt`; verbatim NOT required; 30s ≈ 65–80 EN words / locale-equivalent |
+| Teacher-as-MC | Reuse `character_design` from `brand_lora_plans.yaml.character_loras.<teacher>`; NO new identity instances (**adi_da has none — deferred V1.1**). |
+| Style spread (**Q2 locked**) | **6** `pure_manga` / **3** `manga_fantasy_hybrid` / **2** `cinematic_painterly_fantasy` / **1** `experimental` — distribution + per-teacher rationale in `artifacts/qa/teacher_manga_30s_locale_brand_matrix_2026-05-08.tsv`; **silent per-teacher style reassignment is forbidden** → requires separate AMENDMENT. |
+
+**Verified brand bindings (12/12 confirmed against `config/manga/brand_lora_plans.yaml.brand_suffixes`) — pilot locked Q3:**
+
+| Teacher → manga brand (suffix) | Locale | Style mode |
+|---|---|---|
+| ahjan → stillness_press (sp) | en-US | pure_manga |
+| joshin → cognitive_clarity (cc) | ja-JP | pure_manga **(pilot — locked)** |
+| miki → digital_ground (dg) | ja-JP | pure_manga |
+| junko → relational_calm (rc) | ja-JP | pure_manga |
+| omote → body_memory (bm) | ja-JP | pure_manga |
+| master_wu → warrior_calm (wc) | zh-TW | pure_manga |
+| master_feung → qi_foundation (qf) | zh-CN | manga_fantasy_hybrid |
+| master_sha → sleep_restoration (sr) | en-US | manga_fantasy_hybrid |
+| ra → solar_return (so) | en-US | manga_fantasy_hybrid |
+| pamela_fellows → somatic_wisdom (sw) | en-US | cinematic_painterly_fantasy |
+| sai_ma → devotion_path (dp) | en-US | cinematic_painterly_fantasy |
+| maat → heart_balance (hb) | en-US | experimental |
+| **(deferred V1.1)** adi_da → (**NONE**) | zh-TW | **deferred — see amendment §1 / matrix row** |
+
+**Anti-drift check:** Identity-preserving by design. The 12-axis `character_design` from `docs/CHARACTER_INDIVIDUATION_PIPELINE_SPEC_2026-05-02.md` is reused; style-spread varies wardrobe/setting/lighting/lineart-engine but NOT identity. **Any agent attempting to render adi_da under THIS cap MUST stop and request explicit V1.1 scoping** (brand/`character_design` binding). Per-teacher style overrides require AMENDMENT. Pilot identity (**joshin / cognitive_clarity / ja-JP**) is locked; operator-level re-pilot needs explicit instruction. No paid LLM/TTS APIs unattended (Tier 2 = CosyVoice2 + edge_tts free). No verbatim audiobook prose re-quote in social/video context (>15-word displacive copyright avoidance). Pearl Star Path A is the canonical render path per `docs/PEARL_STAR_IMAGE_GENERATION_PROTOCOL.md`.
+
+**Discrepancies / prerequisite tracking (updated 2026-05-08):**
+
+| ID | Discrepancy | Disposition |
+|---|---|---|
+| D1 | `qi_foundation` brand (master_feung's binding) vs `canonical_brand_list.yaml` | **Closed for V1 prerequisite purposes** via **PR #944** merged **`7e8009e78e`**; YAML reconciliation continues as **Wave A4** Pearl_Dev lane (not blocking cap activation). |
+| D2 | maat audiobook prose anchor | **Closed** via **PR #943** merged **`54b759d603`** (`artifacts/audiobook_samples/_prose/maat_self_worth_ch1.txt`); maat matrix row **`ready`**. |
+| D3 | adi_da unbound manga brand | **Tracked as V1.1 prerequisite** per **Q1 = (b)**; **does not block** V1 (12-active program). |
+
+**Out of scope (this cap entry):**
+1. Any render, any video file, any audio file (unless owned by downstream lanes).
+2. Any code change to `phoenix_v4/` or `scripts/` or `config/video/*` params (Pearl_Dev PRs tracked under Wave A).
+3. Editing `canonical_brand_list.yaml` / `brand_lora_plans.yaml` for adi_da (V1.1 cap entry when scheduled).
+4. **Re-issuing** Pearl_Localization / Pearl_Int / Pearl_Editor / Pearl_Dev Wave A prompts (capture-only refs in amendment §7).
+
+**Action items — Wave capture (already running; see amendment §7):**
+- **A1** Pearl_Localization × **12** scripts → recovery PR pending
+- **A2** Pearl_Int CosyVoice2 audit → recovery PR pending
+- **A3** Pearl_Editor style review → **PR #953** (open)
+- **A4** Pearl_Dev `qi_foundation` YAML reconciliation → **PR #952** (open)
+- **A5** Pearl_Dev overlay enforcement Phase 1 → recovery PR pending
+- **A6** Pearl_Dev `teacher_30s_vertical_v1` render preset → status unknown
+- **A7** Pearl_GitHub merge train → **CLOSED (5 SHAs)**
+- **B1** Pearl_Video **joshin** pilot → gated on **A1 + A2 (joshin row) + A6**
+
+**Budget (Tier 2 unattended — free):** Pearl Star GPU ~6–12h active-teacher total; CosyVoice2 ~1h total; ffmpeg trivial; operator review scaled to 12. Paid spend 0.
+
+**Handoffs:**
+- **Pearl_PM** — coordination cleanup picks up **this amendment PR** alongside Wave A PRs pending.
+- Any future operator change to locales (**Q4 locked**) → **requires AMENDMENT**.
+
+**Resolves:** V1 operational scope freeze for 12 active teachers plus **1 deferred** matrix row (**13 rows preserved**).
+
+#### TEACHER-MANGA-30S-VIDEO-V1-01 — AMENDMENT — 2026-05-08 (operator Q1–Q4 — binding)
+
+Operator decisions (verbatim lock):
+
+- **Q1 = (b)** — defer **adi_da** to **V1.1** (program ships **12**, not 13).
+- **Q2 = approve** — lock **6 / 3 / 2 / 1** style spread **as proposed** in §6 table + matrix.
+- **Q3 = joshin** — pilot **= joshin / cognitive_clarity / ja-JP**.
+- **Q4 = none** — retain all **six** **en-US** defaults: **ahjan, pamela_fellows, master_sha, maat, ra, sai_ma**.
+
+1. **ADI_DA deferral (Q1 = b):** Total V1 deliverables **12** (not 13). **adi_da** row **preserved** in matrix TSV with **`deferred_v1_1`**; rationale **"no manga brand binding in brand_lora_plans.character_loras; awaits brand assignment"**. **Anti-drift:** Any agent attempting to render **adi_da** against **this cap** MUST STOP and request **V1.1** scoping.
+
+2. **Style-spread lock (Q2 = approve):**
+   - **6** `pure_manga`: ahjan, joshin, miki, junko, omote, master_wu
+   - **3** `manga_fantasy_hybrid`: master_feung, master_sha, ra
+   - **2** `cinematic_painterly_fantasy`: pamela_fellows, sai_ma
+   - **1** `experimental`: maat
+   **Anti-drift:** Per-teacher style reassignment requires a **separate AMENDMENT** — agents MAY NOT silently re-allocate.
+
+3. **Pilot teacher (Q3 = joshin):** Pilot **= joshin / cognitive_clarity / ja-JP**. **Wave B1** (`Pearl_Video` joshin pilot) consumes **Wave A1** joshin script **+ Wave A2** joshin reference voice **+ Wave A6** render preset convergence. **Anti-drift:** Pilot identity locked; operator-level **re-pilot** needs explicit instruction.
+
+4. **Locale lock (Q4 = none):** **ja_JP:** joshin, miki, junko, omote · **zh_TW:** master_wu *(adi_da deferred → **single-teacher zh_TW** in V1)* · **zh_CN:** master_feung · **en_US:** ahjan, pamela_fellows, master_sha, maat, ra, sai_ma. **Anti-drift:** Locale overrides require future **AMENDMENT**.
+
+5. **Prerequisite status:**
+   - **D1** (`qi_foundation`): **Closed** by **PR #944** (merged **`7e8009e78e`**); follow-up YAML reconciliation **in flight** as **Wave A4**.
+   - **D2** (maat audiobook prose): **Closed** by **PR #943** (merged **`54b759d603`**); **maat** row → **`ready`**.
+   - **D3** (adi_da brand binding): **V1.1** prerequisite — **does not block** V1.
+
+6. **Status transitions:** Cap **TEACHER-MANGA-30S-VIDEO-V1-01**: **`proposed` → `active`**. **`ws_teacher30s_scope_ratified`**: **`proposed` → `complete`**. **`ws_teacher30s_script_derivation`**, **`ws_teacher30s_render_pilot`**: **`proposed` → `in_progress`** (Wave A/B refs per §7).
+
+7. **Wave A in-flight references (capture-only — DO NOT re-prompt):**
+   - **A1** Pearl_Localization × 12 scripts → recovery PR pending
+   - **A2** Pearl_Int CosyVoice2 audit → recovery PR pending
+   - **A3** Pearl_Editor style review → **PR #953** (open)
+   - **A4** Pearl_Dev `qi_foundation` YAML reconciliation → **PR #952** (open)
+   - **A5** Pearl_Dev overlay enforcement Phase 1 → recovery PR pending
+   - **A6** Pearl_Dev `teacher_30s_vertical_v1` render preset → status unknown
+   - **A7** Pearl_GitHub merge train → **CLOSED (5 SHAs)**
+   - **B1** Pearl_Video joshin pilot → gated on **A1 + A2 (joshin) + A6**
+
+
+### PER-CHAPTER-OVERLAY-ENFORCEMENT-V1-01 — Per-chapter overlay rule enforcement scoped; unblocks YELLOW ITEM-2 (`your nervous system` allowlist removal) (decision ratified 2026-05-08)
+
+**Status:** **ratified** (2026-05-08). Subsystem: `core_pipeline`. Project: PRJ-PEARL-PRIME-Q-GATES. Workstreams opened: `ws_per_chapter_overlay_enforcement_design_20260508` (status=proposed, Pearl_Architect), `ws_per_chapter_overlay_enforcement_impl_20260508` (status=proposed, Pearl_Dev — covers Phases 1/2/3).
+
+**Context:** Sprint 1 YELLOW ITEM-1 (PR #941, SHA aed7d2a017) replaced the raw `ignored_prefixes` tuple in `_repeated_phrase_violations` with a YAML-backed `config/quality/refrain_allowlist.yaml` (43 entries: 36 `legitimate_motif` cap=18, 7 `doctrinal_attribution` cap=14). ITEM-1 closed the book-wide cap gap. ITEM-2 — removal of `"your nervous system"` from the allowlist — was deferred because the allowlist entry carries `todo: ITEM-2:remove-when-per-chapter-overlay-active`: removing it without overlay enforcement would cause spurious gate failures on any somatic book where the phrase is genuinely used as spine vocabulary. This cap ratifies the scope needed to make that removal safe.
+
+**Problem the book-wide cap cannot solve:** A phrase appearing exactly twice per chapter in a 12-chapter book passes the book-wide cap of 18 (cap_per_chapter=2 handles the per-chapter density). What the book-wide cap alone cannot catch is structural: a refrain phrase absent from the climax chapters (arc discontinuity), an attribution phrase appearing in compression chapters (cognitive competition), or a fragment phrase clustering 5 times in a single chapter even if it is under the book-wide total. The per-chapter overlay enforcement closes these four structural gaps.
+
+**Four overlay rule types (defined precisely in `docs/specs/PER_CHAPTER_OVERLAY_ENFORCEMENT_V1_SPEC.md §2`):**
+
+1. **DENSITY_CEILING** — phrase appears ≤N times per chapter (default N=2 for `legitimate_motif`). Spec source: `BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md §6 Pacing Rules`. Reader failure mode: within-chapter mantra fatigue.
+
+2. **PRESENCE_FLOOR** — phrase appears ≥1 time in each of the named structural chapter classes (`opening`=ch1, `mid`=ch4–8, `climax`=ch9–10). Spec source: `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` (SOMATIC SLOT GRID). Reader failure mode: arc discontinuity.
+
+3. **DRIFT_DETECTION** — chapter containing phrase ≥3 times triggers per-chapter violation independent of book-wide cap. Spec source: `BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md §2 Voice/Register`. Reader failure mode: phrase drift / audio defect perception.
+
+4. **ABSENCE_GUARD** — phrase must NOT appear in named chapter classes (default for `doctrinal_attribution`: `compression_chapters`). Spec source: `PHOENIX_V4_5_WRITER_SPEC.md §4 TEACHER_DOCTRINE`. Reader failure mode: attribution overload in concept-dense sections.
+
+**Composition rule:** `PASS = book_wide_cap_ok AND all_overlay_rules_ok`. Both gates are mandatory. The violation dict must include a `rule` key: `book_wide_cap` or `overlay:<rule_type>`.
+
+**Critical distinction — cap_per_chapter vs overlay_rule:** `cap_per_chapter` is a numeric ceiling (integer) applied unconditionally to every chapter. `overlay_rule` is a structural rule type (enum) encoding structural assertions about phrase distribution across chapter architecture. They compose independently. An entry with `cap_per_chapter: 2` and `overlay_rule: presence_floor` simultaneously enforces "no more than 2 per chapter" (density) AND "must appear at least once in opening + mid + climax" (structure). These are documented separately in the violation dict.
+
+**Extended YAML schema (new optional fields — back-compat; absence of `overlay_rule` defaults to `none`):**
+```yaml
+overlay_rule: none  # density_ceiling | presence_floor | drift_detection | absence_guard | none
+overlay_param:
+  N: 2
+  structural_chapters: [opening, mid, climax]
+  excluded_chapter_classes: []
+```
+
+**Per-entry overlay assignment summary (Phase 2 targets; full table in spec §6):**
+- Group A entries 1–15 (core somatic instruction motifs): full-phrase entries → `presence_floor`; fragment entries → `none` (governed by parent).
+- Group B entries 16–36 (sprint-1 scene-anchor motifs): root motif sentences → `presence_floor`; n-gram fragments → `drift_detection`. Entry 27 (`your nervous system`) → `drift_detection` (ITEM-2 target).
+- Group C entries 37–43 (TEACHER_DOCTRINE attribution): all → `absence_guard(compression_chapters)`.
+
+**Migration path (ITEM-2 unblock chain):**
+- Phase 1: implement gate extension + extended YAML schema + tests; all current entries default to `overlay_rule: none` (zero behavior change); reference book (50,344-word deep_book_6h anxiety×gen_z, SHA 635e1a96bf) revalidated.
+- Phase 2: per-entry `overlay_rule` assignment sweep PR; revalidate reference book end-to-end.
+- Phase 3: remove `your nervous system` from allowlist; gate must catch it via `drift_detection` OR default book-wide cap >12; ITEM-2 closed when violation fires without the allowlist entry.
+
+**Anti-drift rules:**
+- No silent thresholds — every `overlay_param` must cite spec source.
+- No removal from allowlist without regenerating ≥1 reference book end-to-end before merge.
+- Overlay rule changes require end-to-end reference book rerun before PR merges.
+- Gate must report which rule fired in violation dict (`book_wide_cap` or `overlay:<rule_type>`).
+- `cap_per_chapter` (numeric) and `overlay_rule` (structural) are distinct; violation dict documents them separately.
+
+**Anti-drift check (per Common Drift Patterns):** `docs/specs/PER_CHAPTER_OVERLAY_ENFORCEMENT_V1_SPEC.md` is genuinely new — no existing spec covers per-chapter overlay enforcement rules for the refrain allowlist. It SUPPLEMENTS `config/quality/refrain_allowlist.yaml` (which defines what is allowed) with an enforcement layer (how allowance is conditionally governed). It does NOT duplicate `BESTSELLER_QUALITY_BENCHMARK_RESEARCH.md` or `PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md` — it cites them as spec sources for each rule's threshold values. The new YAML fields are additive and back-compatible (absence = `none` = no change). Not drift.
+
+**Action items:**
+1. Pearl_Dev (`ws_per_chapter_overlay_enforcement_impl_20260508`, Phase 1): implement gate extension + YAML schema + tests; separate PR after this cap-entry PR merges.
+2. Pearl_Dev (Phase 2 sweep PR, gated on Phase 1 merge): assign `overlay_rule` per-entry per spec §6 table; revalidate reference book.
+3. Pearl_Dev (Phase 3 PR, gated on Phase 2 merge): remove `your nervous system`; confirm gate catches it; ITEM-2 closed.
+4. Pearl_PM: track `ws_per_chapter_overlay_enforcement_impl_20260508` through Phases 1/2/3.
+
+**Handoffs:**
+- Pearl_Dev → `ws_per_chapter_overlay_enforcement_impl_20260508` (Phase 1) → trigger = this cap-entry PR merged.
+- Pearl_PM → update `ws_per_chapter_overlay_enforcement_impl_20260508` status through Phase 2 and Phase 3 → trigger = Phase 1 merged.
+- Pearl_Architect → no follow-up routing needed; spec is self-contained; reopen only if a new structural rule type is proposed.
