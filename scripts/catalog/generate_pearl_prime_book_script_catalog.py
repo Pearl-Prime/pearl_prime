@@ -67,6 +67,10 @@ from typing import Any
 
 import yaml  # required; install via: pip install pyyaml
 
+# Active/inactive brand classifier consumer (PR #972 SSOT, mirrors PR #982 brand_admin pattern).
+# Inactive brands are skipped with a single log line; spec: docs/specs/ACTIVE_BRAND_SSOT_V1_SPEC.md.
+from scripts.catalog._active_brand_filter import is_brand_active
+
 # ── Path resolution ─────────────────────────────────────────────────────────
 REPO_ROOT = Path(__file__).resolve().parents[2]
 _MAIN_REPO = Path("/Users/ahjan/phoenix_omega")
@@ -545,6 +549,9 @@ def build_rows_for_locale(locale: str, inputs: dict,
     status_counts: dict[str, int] = {}
 
     for brand in brand_ids:
+        if not is_brand_active(brand):
+            print(f"[{locale}] skipped: inactive brand {brand}")
+            continue
         bt = brand_teacher.get(brand)
         if not bt:
             # Not in any known brand registry — still emit a row tagged as blocked.

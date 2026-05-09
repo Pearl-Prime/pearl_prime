@@ -52,6 +52,10 @@ try:
 except ImportError:
     yaml = None
 
+# Active/inactive brand classifier consumer (PR #972 SSOT, mirrors PR #982 brand_admin pattern).
+# Inactive brands are skipped with a single log line; spec: docs/specs/ACTIVE_BRAND_SSOT_V1_SPEC.md.
+from scripts.catalog._active_brand_filter import is_brand_active
+
 
 def _load_yaml(path: Path) -> Any:
     """Load a YAML file, falling back to JSON-based stub if PyYAML missing."""
@@ -1074,6 +1078,9 @@ def generate_catalog(
         if lane_filter and lane_id != lane_filter:
             continue
         if brand_filter and brand_id != brand_filter:
+            continue
+        if not is_brand_active(brand_id):
+            print(f"[{lane_id}] skipped: inactive brand {brand_id}")
             continue
 
         archetype_id = brand_data.get("brand_archetype_id", "")
