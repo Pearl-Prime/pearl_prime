@@ -655,6 +655,45 @@ class CatalogPlanner:
             ))
         return specs
 
+    def generate_for_brand(
+        self,
+        brand_id: str,
+        n: int,
+        seed: str = "brand_wave",
+        teacher_id: str = "default_teacher",
+        *,
+        trend_score_path: Optional[Path] = None,
+        repo_root: Optional[Path] = None,
+    ) -> list[BookSpec]:
+        """Produce up to ``n`` ``BookSpec`` rows for ``brand_id``.
+
+        When ``brand_id`` is listed in ``config/music/music_brand_registry.yaml``,
+        applies the §4 music-mode-only slice: ``default_teacher``, ``teacher_mode=False``,
+        and post-filters any hybrid/composite-tagged rows. Path X brands and all
+        others use the same wave planner path as :meth:`produce_wave` with matching
+        arguments (no music-only filter).
+        """
+        from scripts.catalog.music_mode_branch import (
+            CatalogBranch,
+            filter_to_music_mode_book_specs,
+            resolve_catalog_branch,
+        )
+
+        root = repo_root or REPO_ROOT
+        branch = resolve_catalog_branch(brand_id, repo_root=root)
+        wave_teacher = "default_teacher" if branch is CatalogBranch.MUSIC_ONLY else teacher_id
+        specs = self.produce_wave(
+            n,
+            seed=seed,
+            teacher_id=wave_teacher,
+            brand_id=brand_id,
+            teacher_mode=False,
+            trend_score_path=trend_score_path,
+        )
+        if branch is CatalogBranch.MUSIC_ONLY:
+            return filter_to_music_mode_book_specs(specs)
+        return specs
+
     def _domain_to_topic(self, domain_id: str) -> str:
         """Map domain to a topic slug used by Stage 2 / atoms."""
         m = {

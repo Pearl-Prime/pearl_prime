@@ -46,7 +46,7 @@ The survey exposes **exactly one primary Save action** at the **bottom** of the 
 
 1. User completes survey fields (schema aligned with `artifacts/musician_survey/SURVEY_TEMPLATE.yaml` and program deltas tracked in implementation PRs).  
 2. User clicks **Save**.  
-3. Client issues **POST** to the wizard backend (exact path TBD in `ws_music_brand_survey_save_post_yaml_advance_20260509`).  
+3. Client issues **POST** to the wizard backend at **`/wizard/music-survey/save`** (FastAPI app in `brand-wizard-app/server/music_survey_routes.py`; handler `music_survey_save_handler.py`; see `artifacts/qa/music_survey_save_post_2026-05-10.md`).  
 4. Server **persists** answers into the **wizard YAML** SSOT for that brand session (no “save only to localStorage”).  
 5. On **success**, server response triggers **auto-advance** to the next wizard step.
 
@@ -55,6 +55,8 @@ The survey exposes **exactly one primary Save action** at the **bottom** of the 
 ## §4. Catalog: 100% music mode
 
 Any **catalog slice** labeled as a **music-mode brand catalog** MUST contain **only** books produced under the **music-mode pipeline** contract for that brand. **Forbidden:** composite “teacher + music” hybrid rows; **forbidden:** teacher-mode books listed under a music-mode brand id.
+
+**Implementation reference (Pearl_Dev):** `CatalogPlanner.generate_for_brand` in `phoenix_v4/planning/catalog_planner.py` plus `scripts/catalog/music_mode_branch.py` (registry precedence, music-only filtering). QA notes: `artifacts/qa/music_mode_catalog_branch_2026-05-10.md`.
 
 ---
 
