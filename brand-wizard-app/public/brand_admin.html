@@ -241,6 +241,15 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 .rc-spend-bar-fill{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:4px;transition:width .4s}
 .rc-spend-bar-fill.rc-warn{background:linear-gradient(90deg,#b45309,#f59e0b)}
 .rc-spend-80{position:absolute;left:80%;top:0;bottom:0;width:1px;background:rgba(248,113,113,.45);pointer-events:none}
+
+/* Weekly packaging (P2 surface 3 / Q5 Monday drop) */
+.wp-pill{font-family:var(--mono);font-size:.38rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:2px;border:1px solid var(--border)}
+.wp-pill.ready{background:rgba(74,222,128,.1);color:var(--green);border-color:rgba(74,222,128,.25)}
+.wp-pill.pending{background:rgba(180,83,9,.1);color:var(--acc2);border-color:rgba(180,83,9,.2)}
+.wp-pill.error{background:rgba(248,113,113,.1);color:var(--red);border-color:rgba(248,113,113,.25)}
+.wp-dl{font-family:var(--mono);font-size:.48rem;color:var(--acc2);text-decoration:underline}
+.wp-dl:hover{color:var(--hi)}
+.wp-counts{font-family:var(--mono);font-size:.45rem;color:var(--dim);letter-spacing:.04em}
 </style>
 </head>
 <body>
@@ -305,6 +314,25 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
     </table>
   </div>
   <div class="ab-muted" id="ab-hint" style="font-size:.48rem;line-height:1.5"></div>
+</div>
+
+<!-- Weekly packaging status (WORLDWIDE-CATALOG-GO-LIVE-V1 P2 surface 3 / Q5 Monday email + file) -->
+<div id="wp-catalog-panel" class="ab-catalog-panel" aria-live="polite">
+  <div class="ab-panel-head">
+    <div class="section-hdr" style="margin:0">
+      <span class="pp-icon sm" data-icon="external"></span>
+      <span class="section-hdr-title">Weekly download packages (coordination TSV)</span>
+    </div>
+    <button type="button" class="action-btn" style="margin:0;padding:6px 12px;font-size:.5rem" onclick="refreshWeeklyPackagePanel(true)">Refresh</button>
+  </div>
+  <div class="ab-muted" style="font-size:.48rem;margin-bottom:8px;line-height:1.45">Cadence: packages are generated on <strong style="color:var(--mid)">Monday</strong> with email delivery per program Q5. Filename uses that week’s Monday: <code style="color:var(--acc2)">artifacts/coordination/weekly_packages_&lt;YYYY-MM-DD&gt;.tsv</code>.</div>
+  <div class="ab-table-wrap">
+    <table class="ab-table" id="wp-table">
+      <thead><tr><th>brand_id</th><th>status</th><th>ready / pending</th><th>last_updated</th><th>download</th></tr></thead>
+      <tbody id="wp-tbody"><tr><td colspan="5" class="ab-muted">Waiting for catalog snapshot…</td></tr></tbody>
+    </table>
+  </div>
+  <div class="ab-muted" id="wp-hint" style="font-size:.48rem;line-height:1.5;margin-top:6px"></div>
 </div>
 
 <!-- RunComfy monthly spend (IMG-RENDER-DUAL-PATH-V1-01 / ws_runcomfy_cost_alert_dashboard) -->
@@ -1076,11 +1104,77 @@ function refreshActiveBrandExecPanel(){
       }).join('');
       tbody.innerHTML=rows||'<tr><td colspan="4" class="ab-muted">No brands</td></tr>';
       if(hint) hint.textContent='Run from repo root: PYTHONPATH=. python3 scripts/brand/dashboard_classifier_endpoint.py --serve';
+      window.__abActiveBrandIds=(data.brands||[]).filter(function(b){ return b.status==='active'; }).map(function(b){ return b.brand_id; });
+      refreshWeeklyPackagePanel(false);
     })
     .catch(function(e){
       tbody.innerHTML='<tr><td colspan="4" class="ab-muted">Could not load snapshot ('+abEsc(e.message)+'). Start helper: '
         +'<code style="color:var(--acc2)">PYTHONPATH=. python3 scripts/brand/dashboard_classifier_endpoint.py --serve</code></td></tr>';
       if(hint) hint.textContent='Default URL: '+abPanelApiUrl()+' — override with ?ab_endpoint= or window.__ACTIVE_BRAND_DASHBOARD_URL';
+      window.__abActiveBrandIds=[];
+      refreshWeeklyPackagePanel(false);
+    });
+}
+
+// ── Weekly package coordination panel (Pearl_Brand / Q5 Monday drop) ──
+function wpPanelApiUrl(bust){
+  var base;
+  try{
+    var q=new URLSearchParams(window.location.search).get('wp_endpoint');
+    if(q) base=q;
+  }catch(e0){}
+  if(!base&&typeof window.__WEEKLY_PACKAGE_STATUS_URL==='string') base=window.__WEEKLY_PACKAGE_STATUS_URL;
+  if(!base) base='http://127.0.0.1:8767/weekly-package-status.json';
+  if(bust) base+=(base.indexOf('?')>=0?'&':'?')+'_='+Date.now();
+  return base;
+}
+function refreshWeeklyPackagePanel(isManual){
+  var tbody=document.getElementById('wp-tbody');
+  var hint=document.getElementById('wp-hint');
+  if(!tbody) return;
+  tbody.innerHTML='<tr><td colspan="5" class="ab-muted">Loading weekly package snapshot…</td></tr>';
+  if(hint) hint.textContent='';
+  fetch(wpPanelApiUrl(!!isManual),{cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(data){
+      var ids=(window.__abActiveBrandIds||[]).slice().sort();
+      var keys=Object.keys(data||{});
+      var tsvEmpty=!keys.length;
+      if(!ids.length){
+        tbody.innerHTML='<tr><td colspan="5" class="ab-muted">No active brands yet — refresh the catalog panel above.</td></tr>';
+        if(hint) hint.textContent='When the catalog snapshot loads, this table lists each active brand. Helper: PYTHONPATH=. python3 scripts/brand/weekly_package_endpoint.py --serve';
+        return;
+      }
+      var rows=ids.map(function(bid){
+        var row=data[bid]||{status:'pending',ready_count:0,pending_count:0,last_updated:null};
+        var st=row.status||'pending';
+        var pillClass='wp-pill pending';
+        if(st==='ready') pillClass='wp-pill ready';
+        if(st==='error') pillClass='wp-pill error';
+        var rc=row.ready_count!=null?Number(row.ready_count):0;
+        var pc=row.pending_count!=null?Number(row.pending_count):0;
+        var counts=String(rc)+' / '+String(pc);
+        var lu=row.last_updated?abEsc(String(row.last_updated)):'—';
+        var dl='—';
+        if(st==='ready'&&row.download_url){
+          dl='<a class="wp-dl" href="'+abEsc(String(row.download_url))+'" target="_blank" rel="noopener">Download</a>';
+        }
+        return '<tr><td>'+abEsc(bid)+'</td><td><span class="'+pillClass+'">'+abEsc(st)+'</span></td>'
+          +'<td class="wp-counts">'+abEsc(counts)+'</td><td class="ab-muted">'+lu+'</td><td>'+dl+'</td></tr>';
+      }).join('');
+      tbody.innerHTML=rows;
+      if(hint){
+        if(tsvEmpty){
+          hint.textContent='No coordination TSV for this ISO week (empty JSON) — rows default to pending. Expected file: artifacts/coordination/weekly_packages_<Monday>.tsv';
+        }else{
+          hint.textContent='Run: PYTHONPATH=. python3 scripts/brand/weekly_package_endpoint.py --serve — URL '+wpPanelApiUrl(false);
+        }
+      }
+    })
+    .catch(function(e){
+      tbody.innerHTML='<tr><td colspan="5" class="ab-muted">Could not load weekly packages ('+abEsc(e.message)+'). Start: '
+        +'<code style="color:var(--acc2)">PYTHONPATH=. python3 scripts/brand/weekly_package_endpoint.py --serve</code></td></tr>';
+      if(hint) hint.textContent='Default URL: '+wpPanelApiUrl(false)+' — override ?wp_endpoint= or window.__WEEKLY_PACKAGE_STATUS_URL';
     });
 }
 
