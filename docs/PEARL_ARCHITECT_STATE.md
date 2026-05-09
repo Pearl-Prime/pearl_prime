@@ -1014,6 +1014,38 @@ Operator decisions (**all defaults accepted**):
      - **e.** `ws_music_brand_wizard_live_embed_routing_20260509` → **Pearl_Dev**
      - **f.** `ws_music_brand_freebie_funnel_followup_cap_20260509` → **Pearl_Architect** (authors separate cap **MUSIC-MODE-FREEBIE-FUNNEL-V1-02**)
 
+### MUSIC-MODE-FREEBIE-FUNNEL-V1-02 — Music mode brand freebies + funnel (additive; proposed 2026-05-09; pending operator decision card)
+
+**Status:** **proposed** — doc-only cap + spec + coordination; **no** code, **no** UI, **no** authored freebie assets in this PR. Normative inventory and deltas live in [`docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md`](./specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md).
+
+**Context:** Operator framing from `MUSIC-MODE-BRAND-INTEGRATION-V1-01` action item **f** / `ws_music_brand_freebie_funnel_followup_cap_20260509`: *the funnel and freebies we create should also have considerations for music mode* — companion songs as freebies, music previews, sample EPs, lyric videos, etc. This cap **does not** amend `MUSIC-MODE-BRAND-INTEGRATION-V1-01`; it **spins** the deferred freebie/funnel scope into its own program under **`PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`**.
+
+**Cross-reference:** Parent program **`PRJ-MUSIC-MODE-BRAND-INTEGRATION-V1`** + `MUSIC-MODE-BRAND-INTEGRATION-V1-01` (wizard, registry, catalog). Rendering overlay remains **`MUSIC-MODE-V1-01`**. Freebie system authority remains **`specs/PHOENIX_FREEBIE_SYSTEM_SPEC.md`** + `config/freebies/*`.
+
+**Decision (locked sections — ratification package):**
+
+1. **SCOPE — Music mode brand freebies + funnel artifacts that differ from standard Pearl Prime brand freebies.** Covers **additive** music-native lead magnets and **funnel touchpoint deltas** for music-mode brands (38+), including operator examples: **companion song** as freebie, **music previews**, **sample EPs**, **lyric videos**, and related hooks. **Out of this cap’s PR:** implementation, funnel code changes, and Pearl_Marketing-authored templates (tracked under child workstreams).
+
+2. **INVENTORY OF EXISTING FREEBIE/FUNNEL SURFACES (discovery).** Pearl_Architect discovery sweep (2026-05-09) documented in spec **§2**: `funnel/` (Flask proof-loop hub + README pointers into `config/freebies/*`); **`platform_marketing/`** path **not present** at repo root — marketing-adjacent surfaces mapped to `config/marketing/`, `docs/marketing/`, `scripts/marketing/`, `marketing_deep_research/`; `somatic_exercise_freebee_apps/` (HTML somatic tools); `config/freebies/` (`freebie_registry.yaml`, `funnel_proof_loop.yaml`, `freebie_to_book_map.yaml`, `freebie_selection_rules.yaml`, companion workbook YAML, etc.). For each bucket: **music-mode-aware today ≈ no**; spec records **where** music-mode freebie types would attach.
+
+3. **PROPOSED MUSIC MODE FREEBIE TYPES (V1 candidate set — ≥5).** (a) Companion song download (free full track from upcoming album). (b) 30s preview clip (lyric snippet + audio). (c) Sample EP (3–5 tracks). (d) Lyric poster (PDF). (e) Behind-the-song interview (audio or text). Additional types **via Pearl_Marketing** after operator Q1.
+
+4. **FUNNEL FLOW DELTA.** Music-mode brand funnel = **standard Pearl Prime / burnout-reset style funnel backbone** + **music-specific top-of-funnel hooks** (audio-first promise, track list, listening CTA). Spec **§4** lists what **stays shared** vs what **deltas** (hero, email E1–E5 tone, book vs album CTA, asset hosting).
+
+5. **ANTI-DRIFT.** Music-mode freebies **SHALL NOT replace** standard Pearl Prime freebies for music-mode brands; they **extend** the freebie set. Music-mode freebie types are **additive** to existing freebie taxonomy (`freebie_registry.yaml` pattern per `PHOENIX_FREEBIE_SYSTEM_SPEC.md`). Implementation **MUST** consume **`brand_wizard` YAML** plus **`musician_reflections_survey`** persisted fields (same wizard YAML SSOT family as `MUSIC_MODE_BRAND_INTEGRATION_V1_SPEC.md` §3 — survey payload keyed/merged into wizard persistence; **not** hardcoded per-brand lists). **Catalog volume** Q3=800 baseline applies to **book catalog rows**, **not** freebie cadence; freebie cadence is **separate** (spec **§5**).
+
+6. **ACTION ITEMS (named sub-workstreams — not authored here).** `ws_music_freebie_inventory_audit_20260509` (Pearl_Marketing); `ws_music_freebie_template_authoring_20260509` (Pearl_Marketing); `ws_music_freebie_funnel_wiring_20260509` (Pearl_Dev). Opened under **`PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`** in `ACTIVE_WORKSTREAMS.tsv`.
+
+7. **STATUS.** **`proposed`** pending operator **Q1–Q3** in `docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md` §16 (decision card). Pearl_Architect amendment flips to **active** when answers land.
+
+**Operator decision card (verbatim — answer in spec §16):** see spec **§16 Q1–Q3** (freebie-type set approval; funnel delta breadth; implementation phasing).
+
+**Anti-drift check:** Does not edit parent `MUSIC-MODE-BRAND-INTEGRATION-V1-01` entry. Does not imply Path X 37 changes. No paid API scope.
+
+**Handoffs:** **Pearl_PM** — child ws statuses after operator Q-card. **Pearl_Marketing** — inventory + template authoring. **Pearl_Dev** — pipeline wiring to YAML SSOT. **Pearl_Architect** — amendment after Q1–Q3.
+
+**Pointers:** `docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md`; `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`; `ws_music_brand_freebie_funnel_followup_cap_20260509` (action item **f** — row marked **completed** after PR #979 lands; follow-up work under `PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`).
+
 ### TEACHER-MANGA-30S-VIDEO-V1-01 — 12 teacher × manga 30-second video deliverables (**active**); adi_da deferred V1.1 (ratified 2026-05-08)
 
 **Status:** **active** — operator answers to Q1–Q4 captured in [`docs/specs/TEACHER_MANGA_30S_VIDEO_V1_SPEC.md` §AMENDMENT-2026-05-08](../docs/specs/TEACHER_MANGA_30S_VIDEO_V1_SPEC.md); binding matrix edits in [`artifacts/qa/teacher_manga_30s_locale_brand_matrix_2026-05-08.tsv`](../artifacts/qa/teacher_manga_30s_locale_brand_matrix_2026-05-08.tsv).
