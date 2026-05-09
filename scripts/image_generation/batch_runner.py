@@ -189,6 +189,21 @@ def _parse_spend_tsv(text: str) -> float:
             idx = header.index("amount_usd")
         else:
             idx = len(header) - 1
+        # Spec §4: cumulative_month_spend_usd is vendor running total — do not sum rows.
+        if "cumulative_month_spend_usd" in header:
+            idx = header.index("cumulative_month_spend_usd")
+            last_val = 0.0
+            for row in rows[start:]:
+                if not row or idx >= len(row):
+                    continue
+                cell = row[idx].strip().replace("$", "")
+                if not cell:
+                    continue
+                try:
+                    last_val = float(cell)
+                except ValueError:
+                    continue
+            return last_val
         for row in rows[start:]:
             if not row or idx >= len(row):
                 continue
