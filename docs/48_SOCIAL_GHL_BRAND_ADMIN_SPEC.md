@@ -178,7 +178,7 @@ With UTM parameters per platform:
 | Language | CTA (Short) | CTA (Medium) | CTA (Bio Link) |
 |----------|------------|-------------|----------------|
 | **English** | "Free guide in bio ↗" | "Get the companion guide free → link in bio" | "Free wellness tools: brand-admin-onboarding.pages.dev/free/{slug}" |
-| **Japanese** | "無料ガイド → プロフリンク" | "��料の実践ガイドをダウンロード → プロフィールのリンクから" | "無料ウェルネスツール: brand-admin-onboarding.pages.dev/free/{slug}" |
+| **Japanese** | "無料ガイド → プロフリンク" | "無料の実践ガイドをダウンロード → プロフィールのリンクから" | "無料ウェルネスツール: brand-admin-onboarding.pages.dev/free/{slug}" |
 | **Korean** | "무료 가이드 → 프로필 링크" | "무료 실천 가이드 받기 → 프로필 링크에서" | "무료 웰니스 도구: brand-admin-onboarding.pages.dev/free/{slug}" |
 | **Traditional Chinese** | "免費指南 → 個人檔案連結" | "免費下載實踐指南 → 個人檔案連結" | "免費身心工具: brand-admin-onboarding.pages.dev/free/{slug}" |
 | **Simplified Chinese** | "免费指南 → 个人资料链接" | "免费下载实践指南 → 个人资料链接" | "免费身心工具: brand-admin-onboarding.pages.dev/free/{slug}" |
@@ -186,7 +186,7 @@ With UTM parameters per platform:
 | **French** | "Guide gratuit → lien en bio" | "Téléchargez le guide gratuit → lien dans la bio" | "Outils gratuits: brand-admin-onboarding.pages.dev/free/{slug}" |
 | **German** | "Kostenloser Guide → Link in Bio" | "Kostenloser Begleitguide herunterladen → Link in Bio" | "Kostenlose Tools: brand-admin-onboarding.pages.dev/free/{slug}" |
 | **Italian** | "Guida gratuita → link in bio" | "Scarica la guida gratuita → link nel profilo" | "Strumenti gratuiti: brand-admin-onboarding.pages.dev/free/{slug}" |
-| **Hungarian** | "Ingyenes útmutató → link a bio-ban" | "Töltsd le az ingyenes útmutatót ��� link a profilban" | "Ingyenes eszközök: brand-admin-onboarding.pages.dev/free/{slug}" |
+| **Hungarian** | "Ingyenes útmutató → link a bio-ban" | "Töltsd le az ingyenes útmutatót → link a profilban" | "Ingyenes eszközök: brand-admin-onboarding.pages.dev/free/{slug}" |
 
 ---
 
@@ -223,7 +223,7 @@ When someone downloads a freebie, they enter the **proof-loop email sequence**. 
 | E1 | "Your free guide is ready" | "無料ガイドをお届けします" | "무료 가이드가 준비되었습니다" | "Tu guía gratuita está lista" |
 | E2 | "Try a different exercise" | "別のエクササイズを試してみてください" | "다른 운동을 시도해 보세요" | "Prueba un ejercicio diferente" |
 | E3 | "Someone's story" | "ある人のストーリー" | "어떤 사람의 이야기" | "La historia de alguien" |
-| E4 | "The full book is here" | "完全版の書籍はこちら" | "전�� 책이 여기 있습니다" | "El libro completo está aquí" |
+| E4 | "The full book is here" | "完全版の書籍はこちら" | "전체 책이 여기 있습니다" | "El libro completo está aquí" |
 | E5 | "More tools for you" | "あなたのためのツール" | "당신을 위한 도구들" | "Más herramientas para ti" |
 
 ---
