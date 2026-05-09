@@ -132,3 +132,5 @@ This document is **CAP + scoping only**. No remediation steps are authorized her
 **Acceptance hint for implementation PR:** `PYTHONPATH=. python scripts/run_production_readiness_gates.py` (and Core tests workflow) **green on `main`** with intentional missing asset fixtures producing **warnings**, not condition-18 **fail**, unless a separate strict mode is later ratified.
 
 **Workstream split:** **`ws_ci_recovery_core_tests_cover_art`** — umbrella Phase 2 lane (verification + handoff toward Release gates). **`ws_ci_recovery_phase_2_impl_20260510`** — concrete gate-relaxation implementation PR.
+
+**Implementation (code):** `scripts/ci/check_author_cover_art.py` — default **warn** (PR #1006 / §16 Q2); missing on-disk `cover_art_base` emits **`::warning::`** on stderr and exits **0**; **`COVER_ART_GATE_MODE=fail`** or **`--gate-mode fail`** restores strict fail-hard. Tests: `tests/ci/test_check_author_cover_art_warn_mode.py`. Operator smoke log: `artifacts/qa/ci_recovery_phase_2_cover_art_warn_impl_2026-05-10.md`.
