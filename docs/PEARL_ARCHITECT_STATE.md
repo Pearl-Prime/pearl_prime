@@ -1254,7 +1254,6 @@ overlay_param:
 - Pearl_PM → update `ws_per_chapter_overlay_enforcement_impl_20260508` status through Phase 2 and Phase 3 → trigger = Phase 1 merged.
 - Pearl_Architect → no follow-up routing needed; spec is self-contained; reopen only if a new structural rule type is proposed.
 
-
 ### IMG-RENDER-DUAL-PATH-V1-01 — Dual-path image generation: Pearl Star (Tier 2, free, canonical) + RunComfy ($10/month soft cap) + locale-first queue (ratified operator Q-IMG-1/2/3, 2026-05-09)
 
 **Status:** **active** (operator authorization; OPERATOR DECISION CARD: NONE — binding immediately).
@@ -1339,3 +1338,26 @@ overlay_param:
 - **Pearl_Dev:** batch orchestrator with dual dispatcher + parity logging.
 - **Pearl_PM:** parallel plan doc reorder annotations (coordinate with #988 lineage).
 - **Pearl_Brand:** operational spend UX for operators reviewing soft-cap posture.
+
+### CI-BASELINE-RECOVERY-V1-01 — CI baseline recovery: required-check root causes + phased recovery (Pearl_DevOps cap + spec 2026-05-09)
+
+**Status:** **proposed** — pending operator priority pick and answers to Q1–Q3 in `docs/specs/CI_BASELINE_RECOVERY_V1_SPEC.md` §16.
+
+**Subsystem:** `pearl_devops` (primary); coordination with `Pearl_Editor` on cover art policy.
+
+**Context:** `main` @ `465b772186f049fa3ce63453ccdc616bc5d98e23` exhibits failing **required** checks (**Core tests**, **Release gates** when path-filter triggers, **Verify governance**) driven by (1) production readiness **condition 18** / missing `assets/authors/cover_art/*_base.png` vs `config/authoring/author_cover_art_registry.yaml`, and (2) `verify_github_governance.py` **FORBIDDEN_PATTERNS** false positive on legitimate `bypass_actors` field references in `scripts/ci/check_branch_protection_ruleset.py` (scanner line **29**; `check_no_bypass_scripts` loop ~**141–165**). Routine PR merges currently require **`--admin`** to bypass branch protection — this cap scopes recovery so **`--admin` is no longer the default merge path**.
+
+**Authority bundle:** `docs/GITHUB_OPERATIONS_FRAMEWORK.md`; `docs/GITHUB_GOVERNANCE.md`; `docs/BRANCH_PROTECTION_REQUIREMENTS.md`; `config/governance/required_checks.yaml`; `CLAUDE.md` rule 0 (mass deletion).
+
+**Project / workstreams:** `PRJ-CI-BASELINE-RECOVERY-V1` in `artifacts/coordination/ACTIVE_PROJECTS.tsv`; `ws_ci_recovery_verify_governance_bypass`, `ws_ci_recovery_core_tests_cover_art`, `ws_ci_recovery_release_gates`, `ws_ci_recovery_acceptance` in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`.
+
+**Canonical spec:** `docs/specs/CI_BASELINE_RECOVERY_V1_SPEC.md` (per-check URLs, phased plan, anti-drift, budget, operator decision card).
+
+**Out of scope (this cap):** remediation code changes; edits to `required_checks.yaml` / live rulesets **before** fixes land and prove green on `main`.
+
+**Anti-drift (summary):** Preserve all historical `--admin` audit trail; post-recovery reserve `--admin` for true emergencies; new required checks must prove green before promotion; cover-art gate should trend toward **warn-not-fail** for missing assets (Pearl_Editor follow-up) once operator selects option in §16 Q2.
+
+**Action items:**
+1. Operator: answer **Q1–Q3** in `docs/specs/CI_BASELINE_RECOVERY_V1_SPEC.md` §16 (verbatim card).
+2. Pearl_DevOps: after ratification, execute **Phase 1** (`ws_ci_recovery_verify_governance_bypass`) then **Phase 2–4** per spec.
+3. Pearl_PM: track statuses in coordination TSVs through acceptance.
