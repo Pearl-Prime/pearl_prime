@@ -1,18 +1,19 @@
 # Local clone hygiene audit — 2026-05-10
 
 **PROJECT_ID:** PRJ-PEARL-DEVOPS-LOCAL-HYGIENE  
-**SUBSYSTEM:** pearl_devops (operator-machine cleanup; no direct push from damaged clone)  
+**SUBSYSTEM:** pearl_devops (operator-machine cleanup; no push from damaged primary clone)  
 **Operator clone:** `/Users/ahjan/phoenix_omega`
 
 ## Initial state (pre-hygiene)
 
 | Item | Value |
 |------|--------|
-| Branch (stated) | `agent/ci-baseline-recovery-v1-cap-20260509` |
-| Approx. diff vs `origin/main` | ~31,474 paths (`git diff-tree`); operator report ~31,492 files / ~201.8 MB |
-| Noise vs genuine | ~30,480 paths under `.claude/worktrees/`; ~994 paths outside that prefix |
-| `origin/main` at time of reset | `e25bd63e8a20f1c13fa4285ccfe1be095523546a` |
-| Root cause | Stale `.claude/worktrees/` ephemera plus local branch drift; prior `git reset --hard` left a **zero-byte `.git/index`**, breaking `git fetch` / `git status` until repaired |
+| Branch (reported) | `agent/ci-baseline-recovery-v1-cap-20260509` (later observed on other topic branches at same drifted `HEAD`) |
+| Diff vs `origin/main` | ~31,474 paths (`git diff-tree --name-only -r origin/main HEAD`); operator report ~31,492 files / ~201.8 MB |
+| Noise vs genuine | ~30,480 paths under `.claude/worktrees/`; ~994 paths outside that prefix (includes large `artifacts/`, workflows, binaries) |
+| Monster commit | `221b35dfe1` — ~31,485 files changed (nested `.claude/worktrees/` snapshot) |
+| `origin/main` at reset | `e25bd63e8a20f1c13fa4285ccfe1be095523546a` |
+| Root cause | `.claude/worktrees/` ephemera committed into the local branch tree; concurrent git + interrupted cleanup left **corrupt `.git/index`** (`index file smaller than expected`), blocking normal fetch/checkout until repaired |
 
 ## Phase 2 — conservative backup
 
@@ -20,23 +21,28 @@
 
 | Artifact | Description |
 |----------|-------------|
-| `patches/genuine_vs_origin_main_excluding_worktrees.patch.gz` | Unified diff `origin/main..HEAD` excluding `.claude/worktrees` (gzip) |
-| `patches/commits_ahead_of_origin_main.txt` | Seven local commits that had been ahead of `origin/main` |
+| `patches/excluding_dot_claude_worktrees.patch` | Unified diff `origin/main..HEAD` with pathspec exclude `.claude/worktrees` (~2.3 MB text) |
+| `patches/genuine_vs_origin_main_excluding_worktrees.patch.gz` | Earlier gzip of the same class of diff |
+| `patches/0001-*.patch` | `git format-patch -1` for small commits after the monster commit (docs, CI cover-art warn mode, coordination, chore backups) |
+| `patches/commits_ahead_of_origin_main.txt` | Local commits that had been ahead of `origin/main` |
 | `non_worktree_changed_paths.txt` | Path manifest (~994 entries) |
-| `new_files/artifacts_wave_refresh/` | Rsync of `artifacts/wave_refresh/` (Wave-pattern JSON; 196 files) |
-| `needs_review/` | Manifest + copies of two untracked coordination templates |
+| `new_files/` | Wave-pattern / coordination captures (includes `artifacts_wave_refresh/` rsync where present; post-reset `artifacts/coordination/CONDUCTOR_HANDOFF.md` and `orchestrator_log_2026-05-10.md` moved here for a **fully empty** `git status`) |
+| `needs_review/` | Manifests / samples as captured during triage |
 | `BACKUP_INVENTORY.txt` | Human-readable inventory |
+| `quarantine/worktrees_*` | **Fast path:** entire repo `.claude/worktrees/` **moved aside** with `mv` (avoids multi-hour `rm -rf` on millions of files); operator may delete this quarantine after verifying backups |
 
-Skipped: `.claude/worktrees/**` (operator ephemera; not patch-worthy per policy).
+Skipped in patch backup: live `.claude/worktrees/**` contents (machine ephemera; not patch-worthy per policy).
 
-## Phase 3 — reset to `origin/main` and index repair
+## Phase 3 — reset to `origin/main` (2026-05-10 completion)
 
-1. Prior session completed `git reset --hard origin/main` to commit `e25bd63e8a` (HEAD matched `origin/main`; `git diff-tree origin/main HEAD` count **0**).
-2. **Index repair:** `.git/index` was corrupt (0 bytes). A valid index was copied from a **donor shallow clone** at the same commit:  
-   `/tmp/phoenix_omega_index_donor_20260510` (clone of `https://github.com/Ahjan108/phoenix_omega_v4.8.git`, depth 1, `main` = `e25bd63e8a`).
-3. `git symbolic-ref HEAD` → `refs/heads/main`; `git reset --hard origin/main` re-aligned the working tree (LFS: ~967 “should have been pointers” warnings when smudge skipped — expected for local binaries vs pointer mode).
-4. `git worktree prune` executed.
-5. **Residual local-only noise (acceptable):** untracked and dirty entries under `.claude/worktrees/` (active Claude Code worktrees) and optional untracked `artifacts/coordination/*.md` logs. **Does not change the committed tree;** `origin/main` is unchanged.
+1. **`git fetch origin`** — confirmed `origin/main` = `e25bd63e8a`.
+2. **Ephemera out of the way:** `mv /Users/ahjan/phoenix_omega/.claude/worktrees` → `/tmp/phoenix_omega_local_hygiene_2026-05-10/quarantine/worktrees_<timestamp>` (after stopping a long-running `rm -rf` attempt).
+3. **Index rebuild:** removed corrupt `.git/index` / stale `.git/index.lock`; `git update-ref refs/heads/main origin/main`; `git symbolic-ref HEAD refs/heads/main`; `git read-tree -u -m origin/main` (removed blocking untracked paths such as `.claude/scheduled_tasks.lock` and `.cursor/*.log` where they conflicted with tracked paths).
+4. **`git reset --hard origin/main`** — repopulated working tree to match `origin/main` (expect LFS smudge warnings if `GIT_LFS_SKIP_SMUDGE=1` was used elsewhere; tree still matches commit).
+5. **`git worktree prune`**.
+6. **Clean slate:** two residual untracked coordination files under `artifacts/coordination/` were moved to `new_files/` so **`git status` is empty**.
+
+No commits and **no push** were made from `/Users/ahjan/phoenix_omega` during hygiene (per policy). `origin/main` was not rewritten.
 
 ## Final state (operator clone)
 
@@ -45,10 +51,13 @@ Skipped: `.claude/worktrees/**` (operator ephemera; not patch-worthy per policy)
 | `HEAD` | `e25bd63e8a20f1c13fa4285ccfe1be095523546a` |
 | Branch | `main` |
 | Committed tree vs `origin/main` | **0** paths (`git diff-tree --name-only -r origin/main HEAD`) |
-| File-count delta (reported noise) | ~31k path diff → **0** (committed baseline) |
+| Working tree | **`git status --short` empty** |
+| File-count delta (reported noise) | ~31k path diff → **0** vs `origin/main` |
 
 ## PR for this audit document
 
-This file is added via a **fresh sibling clone** (not from `/Users/ahjan/phoenix_omega`) as `artifacts/qa/local_clone_hygiene_2026-05-10.md` on branch `agent/local-clone-hygiene-2026-05-10`.
+- **PR:** https://github.com/Ahjan108/phoenix_omega_v4.8/pull/1003  
+- **Branch:** `agent/local-clone-hygiene-2026-05-10`  
+- **Initial audit commit on branch:** `f6cbbc248a40b8be20f3580ed6544335fa735e81` (doc-only; sibling clone `phoenix_omega_local_hygiene_pr_wt`)
 
-**HANDOFF_TO:** operator — clone is usable for normal git operations against `main` at `e25bd63e8a`; keep or delete `.claude/worktrees/` scratch dirs locally as you prefer.
+**HANDOFF_TO:** operator — primary clone is aligned to `main` at `e25bd63e8a` with a clean index and empty status; delete `/tmp/.../quarantine/worktrees_*` when satisfied backups are enough.
