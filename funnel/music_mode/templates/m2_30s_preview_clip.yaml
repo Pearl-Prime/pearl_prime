@@ -10,11 +10,14 @@ delivery_format: hosted_clip_with_on_screen_lyric_snippet
 sample_size: thirty_seconds
 gating_step: optional_email_for_full_track_or_pre_save
 copy_blocks:
-  CTA: Listen to the 30s hook
+  CTA: Play 30s
   body: |
-    Lyric snippet on-screen plus audio hook; bridges to album or pre-save.
-    Placeholders: {{clip_url}}, {{track_title}}, {{pre_save_url}}, {{album_url}}.
-  social_share: "30 seconds of {{track_title}} — hear the hook: {{clip_url}}"
+    You get thirty seconds of "{{track_title}}" with the lyric line that hits hardest burned on-screen so the hook lands even on mute-scroll.
+    Tap play on {{clip_url}} first; if you want the full journey, {{album_url}} is one swipe away without leaving this story arc.
+    When the drop date still matters, {{pre_save_url}} is the single next step—no second CTA competing for your thumb.
+    This clip is the same stem stack as the final master, so what you hear is the real arrangement, just time-boxed for feeds.
+  social_share: >-
+    30s of "{{track_title}}" with on-screen lyrics—hear the hook, then pre-save: {{clip_url}}
 cross_link_targets:
   - template_id: companion_track_download_v1
     relation: full_track_upgrade

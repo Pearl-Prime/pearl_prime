@@ -10,11 +10,14 @@ delivery_format: audio_or_long_form_text
 sample_size: one_interview_per_focus_track
 gating_step: email_capture_or_gated_player_per_hub_policy
 copy_blocks:
-  CTA: Hear the story behind the song
+  CTA: Hear story
   body: |
-    Audio or long-form text tying persona to track meaning; supports proof-loop mid-sequence.
-    Placeholders: {{interview_url}}, {{track_title}}, {{artist_name}}, {{story_pull_quote}}.
-  social_share: "Behind the song: {{track_title}} — {{interview_url}}"
+    {{artist_name}} walks you through why "{{track_title}}" exists—the room noise, the lyric rewrite at 2 a.m., the line {{story_pull_quote}} that almost did not make the cut.
+    Open {{interview_url}} after email (or hit the gated player if your hub keeps audio inside the page) and treat it like a greenroom hang, not a press kit.
+    This slot is built for the proof-loop middle: context first, replay second, so the track hits harder on the next listen.
+    Whether you skim the transcript or let the full run play, it is one narrative spine—no sidebar CTAs fighting the story.
+  social_share: >-
+    Behind "{{track_title}}": {{artist_name}} on {{story_pull_quote}}—{{interview_url}}
 cross_link_targets:
   - template_id: companion_track_download_v1
     relation: listen_after_story

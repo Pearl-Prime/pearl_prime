@@ -10,11 +10,14 @@ delivery_format: lossy_or_lossless_download
 sample_size: one_full_quality_track
 gating_step: email_capture_before_download_link
 copy_blocks:
-  CTA: Get the free companion track
+  CTA: Get my song
   body: |
-    One full-quality track from the upcoming album—yours after email signup.
-    Placeholders: {{track_title}}, {{artist_name}}, {{download_url}}, {{album_slug}}.
-  social_share: I just grabbed the free companion track for {{track_title}} — {{landing_url}}
+    This is the one track {{artist_name}} wanted you to hear first—same mix that will ship on the album, not a watered-down teaser.
+    Drop your email once and we will send a clean download link for "{{track_title}}" straight to your inbox; no hoops, just the song.
+    When you are ready to go deeper, your confirmation path also points at {{album_slug}} so pre-save and full-release day stay on your radar.
+    If anything bounces, use {{download_url}} from the email—we keep that link valid through the campaign window.
+  social_share: >-
+    Free companion track: "{{track_title}}" by {{artist_name}}—email once, grab it: {{landing_url}}
 cross_link_targets:
   - template_id: preview_clip_30s_v1
     relation: tease_same_release_wave

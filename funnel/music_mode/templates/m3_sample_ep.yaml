@@ -10,11 +10,14 @@ delivery_format: zip_download_or_streaming_links_per_policy
 sample_size: three_to_five_tracks
 gating_step: email_capture_before_bundle_delivery
 copy_blocks:
-  CTA: Download the sample EP
+  CTA: Get the EP
   body: |
-    Three to five tracks delivered as one bundle (zip or streaming links per policy).
-    Placeholders: {{bundle_url}}, {{tracklist}}, {{artist_name}}, {{album_slug}}.
-  social_share: Free sample EP from {{artist_name}} — {{bundle_url}}
+    {{artist_name}} bundled {{tracklist}} into one listen-first package so you can feel the arc instead of guessing from a lone single.
+    After email capture you will see {{bundle_url}}—zip for offline crates or streaming tokens per policy, but always the same track order we sequenced in the studio.
+    Think of it as side-A energy for {{album_slug}}: enough breadth to know if the whole record belongs in your rotation.
+    One bundle, one decision point—stay for the deep cuts or bounce early with zero guilt.
+  social_share: >-
+    Three-to-five track sample EP from {{artist_name}}—same sequence we mixed in-house. Pull the bundle here: {{bundle_url}}
 cross_link_targets:
   - template_id: companion_track_download_v1
     relation: flagship_single_cross_sell
