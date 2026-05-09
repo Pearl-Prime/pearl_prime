@@ -918,6 +918,46 @@ Anti-drift check (additive on draft's own check): The music-mode subsystem expan
 
 **Handoffs:** Pearl_PM owns program; per-surface implementation owners assigned in ws rows.
 
+#### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT — 2026-05-09 (Pearl_Conductor autonomous wave Phase 1 P0 progress)
+
+Phase 1 P0 progress captured (no operator decisions required; this AMENDMENT is a state-snapshot record):
+
+1. **Surface 4 — Active Brand SSOT** — substantively shipped:
+   - PR #972 (`10ed203bd6`) — active/inactive classifier (brand_wizard YAML SSOT) landed
+   - PR #977 (`5b455bbf19`) — brand_admin dashboard panel consumer
+   - PR #982 (`509fad6d56`) — brand_admin.html active classifier consumer (gating + ordering)
+   - PR #987 (`1e28f4378a`) — Pearl Prime + full-catalog generators consume active classifier (helper module + per-brand gating)
+   - **Status:** Surface 4 SSOT closed; consumers in flight on multiple surfaces.
+
+2. **Surface 2 — Brand Dashboard** — partial:
+   - PR #977 panel ships; broader binding (locale grids, podcast row, piece-level status) remains under `ws_worldwide_gl_s02_brand_dashboard_20260508`.
+
+3. **Surface 6 — Marketing Volume SSOT** — substantively shipped:
+   - PR #976 (`f4a872b937`) — discovery + V1 spec (`docs/specs/MARKETING_VOLUME_SSOT_V1_SPEC.md`)
+   - PR #984 (`4c89fe1f19`) — `config/marketing/weekly_volumes_per_brand.yaml` V1 baseline (37 brands × 6 surfaces; status=draft awaiting Table 6 ratification)
+   - **Status:** SSOT YAML on disk; consumer wiring (Surfaces 2/3/8) is next per spec §5 #4.
+
+4. **Cross-cutting Pearl Prime feature/knob progress:**
+   - PR #974 (`a5eb025a0a`) — FEATURE-KNOB P0-2 angle_registry alignment
+   - PR #978 (`95cdb3be6f`) — FEATURE-KNOB P0-3 explicit angle_id per row
+   - PR #986 (`071f4ee21b`) — FEATURE-KNOB P0-1 structural variation axes + stable signature
+   - **Status:** P0-1/P0-2/P0-3 trio complete; downstream consumption auditable.
+
+5. **Music-mode integration progress** (cross-ref MUSIC-MODE-BRAND-INTEGRATION-V1-01):
+   - PR #973 (`465b772186`) — cap ratified
+   - PR #975 (`38c6596f95`) — AMENDMENT 2026-05-09 (Q1-Q4 ratified; 6 ws runnable)
+   - PR #981 (`4a26d3b35f`) — `config/music/music_brand_registry.yaml` SSOT schema+seed
+   - PR #983 (`144a5437e7`) — wizard step 1 mode selector + step 4 survey pane
+   - **Status:** registry + wizard pane shipped; survey-save POST + live-embed routes + 100%-music-mode catalog generator remain (deferred to next operator round).
+
+6. **Freebie/funnel cap parallel** (cross-ref MUSIC-MODE-FREEBIE-FUNNEL-V1-02):
+   - PR #979 — cap proposed
+   - PR #989 — AMENDMENT operator Q1-Q3 ratified; cap proposed→active
+
+**No new operator decisions required by this AMENDMENT.** It captures the state of the program after the autonomous wave so subsequent sessions can pick up cleanly. Outstanding open questions in the parent cap remain unchanged. Anti-drift: any future agent picking up Phase 1 P0 work should consult this AMENDMENT block before re-prompting on Surfaces 4/6 or feature/knob P0 axes.
+
+Authorization: Pearl_Conductor 2026-05-09 autonomous wave (operator pre-approved orchestration).
+
 ### FEATURE-KNOB-CATALOG-VARIATION-V1-01 — Structural variation + angle registry alignment + explicit angle_id per row (ratified 2026-05-08)
 
 **Status:** **active** (operator authorized; ws rows runnable).
