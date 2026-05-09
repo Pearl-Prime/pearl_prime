@@ -81,3 +81,46 @@ Operator decisions ratified as the activation gate for `WORLDWIDE-CATALOG-GO-LIV
 | Surface 8 | Executive dashboard | P1 |
 | Surface 9 | Command UI <-> CLI | P2 |
 | Surface 10 | Disk/worktrees | P2 |
+
+---
+
+## Phase 1 P0 progress (2026-05-10)
+
+Doc-only snapshot mirroring the architect cap entry `WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT — 2026-05-10` in `docs/PEARL_ARCHITECT_STATE.md`. No new operator decisions; this section anchors the operator-readable spec to the same `main` HEAD so downstream readers do not have to cross-reference the architect log to know "what shipped, what is queued."
+
+**`main` HEAD anchor:** `e25bd63e8a20f1c13fa4285ccfe1be095523546a` (2026-05-10).
+
+### Phase 1 P0 status matrix
+
+| Surface | Name | Tier | Status | PRs (merged) |
+|---|---|---|---|---|
+| Surface 4 | Active/inactive brand classifier (brand_wizard YAML SSOT) | P0 | merged | #972 (classifier) |
+| Surface 6 | Marketing volume SSOT (discovery + V1 spec + YAML baseline) | P0 | merged | #976 (discovery + spec), #984 (`config/marketing/weekly_volumes_per_brand.yaml` V1) |
+| Surface 1 | Catalog planning (Pearl Prime feature/knob axes) | P0 | substantively shipped | #986 (P0-1 structural variation + stable signature), #974 (P0-2 angle_registry alignment), #978 (P0-3 explicit `angle_id` per row) |
+| Surface 2 | Brand dashboard (active brand panel) | P1 | partial — first consumer merged | #977 (active panel consumer of Surface 4 SSOT) |
+| Surface 8 | Executive dashboard | P1 | queued | — |
+| Surface 3 | Weekly packaging | P2 | queued | — |
+| Surface 5 | Author/bio | P2 | queued | — |
+| Surface 7 | Spine/CLI perf | P2 | queued | — |
+| Surface 9 | Command UI ↔ CLI | P2 | queued | — |
+| Surface 10 | Disk/worktrees | P2 | queued | — |
+
+### Closeout summary
+
+- **Surface 4 (active-brand SSOT)** — classifier + first dashboard consumer merged. SSOT layer closed; further consumers (`brand_admin.html`, Pearl Prime / full-catalog generators) landed under the 2026-05-09 wave (see architect cap for per-PR SHAs).
+- **Surface 6 (marketing volume SSOT)** — discovery + V1 spec (`docs/specs/MARKETING_VOLUME_SSOT_V1_SPEC.md`) + V1 YAML baseline (37 brands × 6 surfaces) merged. Consumer wiring (Surfaces 2/3/8) is the next P1/P2 hop per spec §5 #4.
+- **Surface 1 (catalog planning)** — Pearl Prime feature/knob P0-1/2/3 trio merged via the **`FEATURE-KNOB-CATALOG-VARIATION-V1-01`** cap. Catalog rows now carry explicit `angle_id` + structural variation axes + stable signature.
+- **Surface 2 (brand dashboard)** — first slice (active panel) shipped early as part of the Surface 4 fan-out; broader Surface 2 ws (locale grids, podcast row, piece-level status) remains queued at P1.
+- **Surfaces 3 / 5 / 7 / 8 / 9 / 10** — queued at P1/P2 per **AMENDMENT-2026-05-08-PRIORITIES**. No re-prioritization; this section does not move tiers.
+
+### Anti-drift
+
+- Phase 1 P0 is **substantively complete** at the SSOT/spec layer for Surfaces 1/4/6. Any session claiming "Phase 1 incomplete" must reference an unmerged P0 PR or a missing P0 ws row (none currently outstanding per this snapshot).
+- Production go-live remains defined **only** by **Phase 4 exit criteria** in `artifacts/qa/go_live_readiness_audit_2026-05-08.md`. P0 SSOT closure does **not** itself constitute go-live.
+- Any P-tier reassignment still requires a separate AMENDMENT (per AMENDMENT-2026-05-08-PRIORITIES anti-drift).
+
+### Handoff
+
+Pearl_PM may now route P1 prompts (Surface 2 broader binding + Surface 8 executive dashboard) against `ws_worldwide_gl_s02_*` and `ws_worldwide_gl_s08_*` without further architect ratification. P0 ws rows (`ws_worldwide_gl_s01_*`, `ws_worldwide_gl_s04_*`, `ws_worldwide_gl_s06_*`) may be flipped from `runnable`/`active` to `done` in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` at Pearl_PM's discretion.
+
+Authority cross-ref: `docs/PEARL_ARCHITECT_STATE.md` → `WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT — 2026-05-10`.

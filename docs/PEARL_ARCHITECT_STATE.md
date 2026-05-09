@@ -958,6 +958,61 @@ Phase 1 P0 progress captured (no operator decisions required; this AMENDMENT is 
 
 Authorization: Pearl_Conductor 2026-05-09 autonomous wave (operator pre-approved orchestration).
 
+#### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT — 2026-05-10 (Phase 1 P0 progress snapshot — per-surface completed/remaining matrix)
+
+**Purpose:** State-snapshot record after Phase 1 P0 implementations landed on `main`. No new operator decisions. Anchors the program to `main` HEAD so subsequent sessions can resume from a known point without re-reading every prior PR.
+
+**`main` HEAD anchor:** `e25bd63e8a20f1c13fa4285ccfe1be095523546a` (2026-05-10).
+
+**Per-surface progress (P0 first, then P1/P2 queue):**
+
+| Surface | Name | Tier | Status | Evidence |
+|---|---|---|---|---|
+| Surface 4 | Active/inactive brand classifier (brand_wizard YAML SSOT) | **P0** | **merged** | PR **#972** (`10ed203bd6`) — classifier landed; SSOT closed |
+| Surface 6 | Marketing volume SSOT (discovery + V1 spec + YAML baseline) | **P0** | **merged** | PR **#976** (`f4a872b937`) — discovery + `docs/specs/MARKETING_VOLUME_SSOT_V1_SPEC.md`; PR **#984** (`4c89fe1f19`) — `config/marketing/weekly_volumes_per_brand.yaml` V1 baseline (37 brands × 6 surfaces) |
+| Surface 1 | Catalog planning (Pearl Prime feature/knob axes) | **P0** | **substantively shipped (in flight on consumers)** | feat/knob trio merged: PR **#986** (`071f4ee21b`) P0-1 structural variation + stable signature; PR **#974** (`a5eb025a0a`) P0-2 angle_registry alignment; PR **#978** (`95cdb3be6f`) P0-3 explicit `angle_id` per row. Structural variation done; downstream catalog regen audits remain. |
+| Surface 2 | Brand dashboard (active brand panel) | **P1** | **partial — first consumer merged** | PR **#977** (`5b455bbf19`) — brand_admin dashboard active-panel consumer of Surface 4 SSOT; broader binding (locale grids, podcast row, piece-level status) remains under `ws_worldwide_gl_s02_brand_dashboard_20260508` |
+| Surface 8 | Executive dashboard | **P1** | **queued** | per AMENDMENT-2026-05-08-PRIORITIES; no PR landed |
+| Surface 3 | Weekly packaging | **P2** | **queued** | per AMENDMENT-2026-05-08-PRIORITIES |
+| Surface 5 | Author/bio | **P2** | **queued** | per AMENDMENT-2026-05-08-PRIORITIES |
+| Surface 7 | Spine/CLI perf | **P2** | **queued** | per AMENDMENT-2026-05-08-PRIORITIES |
+| Surface 9 | Command UI ↔ CLI | **P2** | **queued** | per AMENDMENT-2026-05-08-PRIORITIES |
+| Surface 10 | Disk/worktrees | **P2** | **queued** | per AMENDMENT-2026-05-08-PRIORITIES |
+
+**Phase 1 P0 closeout summary:**
+
+- **Surface 4 (active-brand SSOT):** classifier merged in #972. First consumer merged in #977 (Surface 2 panel). Additional consumers landed under the 2026-05-09 wave (PRs #982, #987 for `brand_admin.html` + Pearl Prime / full-catalog generators; see prior amendment).
+- **Surface 6 (marketing volume SSOT):** discovery + V1 spec merged in #976; YAML baseline merged in #984. Consumer wiring (Surfaces 2/3/8) is the next P1/P2 hop per `MARKETING_VOLUME_SSOT_V1_SPEC.md` §5 #4.
+- **Surface 1 (catalog planning):** structural variation P0 trio (#986/#974/#978) merged. Catalog rows now carry explicit `angle_id` + structural axes + stable signature; downstream consumption is auditable.
+- **Surface 2 (brand dashboard):** P1 — first slice (active panel consumer) shipped early as part of the Surface 4 fan-out; the broader Surface 2 ws remains queued for full P1 execution.
+- **Surfaces 3/5/7/8/9/10:** queued at P1/P2 per the **AMENDMENT-2026-05-08-PRIORITIES** lock. No re-prioritization; this AMENDMENT does not move tiers.
+
+**Completed `ws_worldwide_gl_*` lanes (P0):**
+
+- `ws_worldwide_gl_s04_active_brand_classifier_20260508` — **closed** (PR #972 + downstream consumers)
+- `ws_worldwide_gl_s06_marketing_volume_ssot_20260508` — **closed** at SSOT layer (PR #976 spec + PR #984 YAML); consumer-wiring follow-ups are P1/P2 per spec
+- `ws_worldwide_gl_s01_catalog_planning_20260508` — **substantively closed** at the Pearl Prime feature/knob layer (PRs #986/#974/#978 via `FEATURE-KNOB-CATALOG-VARIATION-V1-01`); any catalog-generator consumption verification remains open
+
+**Remaining `ws_worldwide_gl_*` lanes:**
+
+- **P1:** `ws_worldwide_gl_s02_brand_dashboard_20260508` (broader binding beyond active panel); `ws_worldwide_gl_s08_executive_dashboard_20260508`
+- **P2:** `ws_worldwide_gl_s03_weekly_packaging_20260508`; `ws_worldwide_gl_s05_author_bio_20260508`; `ws_worldwide_gl_s07_spine_cli_perf_20260508`; `ws_worldwide_gl_s09_command_ui_cli_20260508`; `ws_worldwide_gl_s10_disk_worktrees_20260508`
+
+**Anti-drift:**
+
+- Phase 1 P0 is **substantively complete** at the SSOT/spec layer for Surfaces 1/4/6. Any session claiming "Phase 1 incomplete" must reference an unmerged P0 PR or a missing P0 ws row (none currently outstanding per this snapshot).
+- Production go-live remains defined **only** by **Phase 4 exit criteria** in `artifacts/qa/go_live_readiness_audit_2026-05-08.md`. P0 SSOT closure does **not** itself constitute go-live.
+- Any P-tier reassignment still requires a separate AMENDMENT (per AMENDMENT-2026-05-08-PRIORITIES anti-drift).
+- This AMENDMENT supersedes the 2026-05-09 AMENDMENT only on the **Phase 1 P0 status matrix**; the 2026-05-09 entry remains authoritative for music-mode + freebie/funnel cross-references and per-PR SHA evidence.
+
+**Action items:** none new. Pearl_PM may now route P1 prompts (Surface 2 broader binding + Surface 8) against `ws_worldwide_gl_s02_*` and `ws_worldwide_gl_s08_*` without further architect ratification.
+
+**Handoffs:** **Pearl_PM** — owns Phase 1 → Phase 2 transition decision (when to flip Phase 1 P0 from `runnable`/`active` to `done` in `ACTIVE_WORKSTREAMS.tsv`). **Surface owners** — unchanged from parent cap.
+
+**Pointers:** parent cap `WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01` (above); prior `AMENDMENT — 2026-05-09`; `docs/specs/WORLDWIDE_CATALOG_GO_LIVE_V1_PROGRAM_SPEC.md` (operator-readable mirror); `artifacts/qa/go_live_readiness_audit_2026-05-08.md`; `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`.
+
+Authorization: Pearl_Architect 2026-05-10 doc-only progress amendment (operator pre-approved snapshot; no new decisions).
+
 ### FEATURE-KNOB-CATALOG-VARIATION-V1-01 — Structural variation + angle registry alignment + explicit angle_id per row (ratified 2026-05-08)
 
 **Status:** **active** (operator authorized; ws rows runnable).
