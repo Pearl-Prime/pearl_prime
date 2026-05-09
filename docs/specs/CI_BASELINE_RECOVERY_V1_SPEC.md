@@ -116,3 +116,19 @@ This document is **CAP + scoping only**. No remediation steps are authorized her
 
 - Coordination: `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-CI-BASELINE-RECOVERY-V1`), `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` (four `ws_ci_recovery_*` rows).
 - Architect cap entry: `docs/PEARL_ARCHITECT_STATE.md` (`CI-BASELINE-RECOVERY-V1-01`).
+
+---
+
+## Phase 2 — cover_art gate relaxation (detail; ratified 2026-05-10)
+
+**Problem anchor:** §2.1 / §2.2 — **condition 18** fails **Core tests** (and **Release gates** when path filters match) when launchable authors reference **`cover_art_base`** paths under `assets/authors/cover_art/<author_id>_base.png` that are absent on the CI checkout.
+
+**Q2 decision (ratified):** Operator selects **§16 Q2 option (B)** — **relax-to-warn**: missing files remain visible (non-silent) but **do not fail** the author cover art gate / readiness classification that currently hard-fails Core tests. Strict asset compliance **(§16 Q2 option A)** is **not** the chosen path for Phase 2 recovery.
+
+**Documentation vs implementation:** This section ratifies **policy and sequencing** only. The follow-up implementation PR adjusts `scripts/ci/check_author_cover_art.py` and any production-readiness mapping in `scripts/run_production_readiness_gates.py` (and tests) so missing PNGs emit **WARN** and Core tests can pass. That code change is **out of scope** for the cap-amendment documentation PR and is owned under workstream **`ws_ci_recovery_phase_2_impl_20260510`**.
+
+**Pearl_Editor coupling:** WARN posture does not remove the obligation to backfill or regenerate assets per editorial/catalog plans; it only removes **CI hard-block** for the missing-file class while recovery proceeds.
+
+**Acceptance hint for implementation PR:** `PYTHONPATH=. python scripts/run_production_readiness_gates.py` (and Core tests workflow) **green on `main`** with intentional missing asset fixtures producing **warnings**, not condition-18 **fail**, unless a separate strict mode is later ratified.
+
+**Workstream split:** **`ws_ci_recovery_core_tests_cover_art`** — umbrella Phase 2 lane (verification + handoff toward Release gates). **`ws_ci_recovery_phase_2_impl_20260510`** — concrete gate-relaxation implementation PR.

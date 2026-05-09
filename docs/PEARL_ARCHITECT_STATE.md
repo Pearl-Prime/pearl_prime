@@ -1361,3 +1361,17 @@ overlay_param:
 1. Operator: answer **Q1–Q3** in `docs/specs/CI_BASELINE_RECOVERY_V1_SPEC.md` §16 (verbatim card).
 2. Pearl_DevOps: after ratification, execute **Phase 1** (`ws_ci_recovery_verify_governance_bypass`) then **Phase 2–4** per spec.
 3. Pearl_PM: track statuses in coordination TSVs through acceptance.
+
+### CI-BASELINE-RECOVERY-V1-01 — AMENDMENT (2026-05-10): Phase 2 ratified; cover_art gate Q2 = relax-to-warn
+
+**Baseline:** Cap `CI-BASELINE-RECOVERY-V1-01` landed via merge **PR #980** (operator-approved recovery cap on `main`).
+
+**Ratified Phase 2 posture:** Core tests recovery for production readiness **condition 18** (author cover art / `scripts/ci/check_author_cover_art.py` and its readiness integration) proceeds under **§16 Q2 option (B)**: treat missing registry-referenced `cover_art_base` PNGs under `assets/authors/cover_art/` as **WARN**, not **FAIL**, until assets are filled or policy is amended again. Aligns with the cap’s anti-drift note that cover-art gates should trend toward **warn-not-fail** once catalog posture is explicit.
+
+**Scope of this amendment:** Documentation and coordination only. **No gate code change** in the amendment PR; the implementation PR that actually relaxes severity is a **follow-up**, tracked as **`ws_ci_recovery_phase_2_impl_20260510`** (runnable).
+
+**Operator Q2:** **relax-to-warn** — pre-approved for this session under standing operator authority for `CI-BASELINE-RECOVERY-V1-01` (no additional authorization required).
+
+**Execution order:** Phase 1 (Verify governance) remains first in the default sequence; Phase 2 implementation may proceed after Phase 1 green per spec §3 unless an incident reorder is separately recorded.
+
+**Where recorded:** `docs/specs/CI_BASELINE_RECOVERY_V1_SPEC.md` — appended Phase 2 cover_art relaxation detail; `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` — `ws_ci_recovery_core_tests_cover_art` advanced to **runnable**, new **`ws_ci_recovery_phase_2_impl_20260510`** row **runnable**.
