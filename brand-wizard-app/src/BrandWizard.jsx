@@ -1332,6 +1332,8 @@ function PersonaImpactPanel({ state, step = 0, i18n = {} }) {
 
 function Step1Archetype({ state, update, i18n = {} }) {
   const { tArchetypes: _A = ARCHETYPES } = i18n;
+  const mode = state.mode || "book";
+  const isMusic = mode === "music";
   return (
     <div>
       <StepHero
@@ -1340,12 +1342,50 @@ function Step1Archetype({ state, update, i18n = {} }) {
         subtitle="Your archetype is the feeling readers associate with you — across prose, covers, video, and social. Pick the worldview that matches how you want to show up."
         helper="Each card includes a short vision of the world your brand invites readers into."
       />
-      <div className="mb-6 rounded-xl border border-indigo-100/80 bg-indigo-50/60 px-4 py-3 backdrop-blur-sm">
-        <p className="text-xs font-medium text-indigo-900">{useTranslation().t("steps", "This is the highest-leverage choice in the studio — everything else builds on the emotional territory you choose here.")}</p>
+      {/* §2 MUSIC-MODE-BRAND-INTEGRATION-V1-01: archetype/mode selector — Book mode uses standard archetype path; Music mode (brand-id space 38+) swaps step 4 to the musician_reflections_survey. */}
+      <div className="mb-6 rounded-2xl border-2 border-gray-200 bg-white p-4">
+        <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-600">Mode</p>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <button
+            type="button"
+            onClick={() => update({ mode: "book" })}
+            className={`text-left p-4 rounded-xl border-2 transition-all ${!isMusic ? "border-gray-900 bg-gray-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}
+          >
+            <div className="flex items-center gap-2">
+              <BookOpen size={18} className="text-gray-900" />
+              <span className="font-bold text-sm text-white">Book mode</span>
+              {!isMusic && <div className="ml-auto w-5 h-5 rounded-full bg-gray-900 flex items-center justify-center"><Check size={12} className="text-white" /></div>}
+            </div>
+            <p className="text-[11px] text-white mt-1.5 leading-relaxed">Self-help, memoir, manga, editorial — the standard catalog path with archetype, persona, voice, and visual style.</p>
+          </button>
+          <button
+            type="button"
+            onClick={() => update({ mode: "music" })}
+            className={`text-left p-4 rounded-xl border-2 transition-all ${isMusic ? "border-amber-500 bg-amber-50 shadow-md" : "border-gray-200 bg-white hover:border-gray-300"}`}
+          >
+            <div className="flex items-center gap-2">
+              <Headphones size={18} className="text-amber-600" />
+              <span className="font-bold text-sm text-white">Music mode</span>
+              {isMusic && <div className="ml-auto w-5 h-5 rounded-full bg-amber-600 flex items-center justify-center"><Check size={12} className="text-white" /></div>}
+            </div>
+            <p className="text-[11px] text-white mt-1.5 leading-relaxed">First-class music brand (id 38+). Step 4 becomes the musician reflections survey — voice, themes, healing intent, consent.</p>
+          </button>
+        </div>
       </div>
-      <div className="grid grid-cols-1 gap-3">
-        {_A.map((arch) => <ArchetypeCard key={arch.id} arch={arch} selected={state.archetype} onClick={(id) => update({ archetype: id })} />)}
-      </div>
+      {!isMusic ? (
+        <>
+          <div className="mb-6 rounded-xl border border-indigo-100/80 bg-indigo-50/60 px-4 py-3 backdrop-blur-sm">
+            <p className="text-xs font-medium text-indigo-900">{useTranslation().t("steps", "This is the highest-leverage choice in the studio — everything else builds on the emotional territory you choose here.")}</p>
+          </div>
+          <div className="grid grid-cols-1 gap-3">
+            {_A.map((arch) => <ArchetypeCard key={arch.id} arch={arch} selected={state.archetype} onClick={(id) => update({ archetype: id })} />)}
+          </div>
+        </>
+      ) : (
+        <div className="mb-6 rounded-xl border border-amber-200/80 bg-amber-50/60 px-4 py-3 backdrop-blur-sm">
+          <p className="text-xs font-medium text-amber-900">Music mode selected — your brand archetype is set by the musician reflections survey at step 4. Continue to capture your primary listener context, then complete the survey on step 4.</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -3511,6 +3551,276 @@ function ShowcaseFormats({ onNext, onBack }) {
 }
 
 // ═══════════════════════════════════════════════════════════
+// MUSICIAN REFLECTIONS SURVEY PANE  (MUSIC-MODE-BRAND-INTEGRATION-V1-01 §2/§3)
+// Embedded in wizard chrome at step 4 (index 3) when state.mode === "music".
+// Schema mirrors artifacts/musician_survey/SURVEY_TEMPLATE.yaml.
+// Save button stub — actual POST handler in ws_music_brand_survey_save_post_yaml_advance_20260509.
+// ═══════════════════════════════════════════════════════════
+
+function MusicianReflectionsSurveyPane({ state, update, i18n = {} }) {
+  const survey = state.musicianSurvey || {};
+  const setField = (key, value) => update({ musicianSurvey: { ...survey, [key]: value } });
+  const handleSaveStub = () => {
+    // Save handler wired in ws_music_brand_survey_save_post_yaml_advance_20260509 (out of scope this PR).
+    // eslint-disable-next-line no-alert
+    window.alert("Save handler wired in ws_music_brand_survey_save_post_yaml_advance_20260509 (POST → wizard YAML SSOT → auto-advance). Stub for UX-only PR.");
+  };
+
+  const FieldLabel = ({ children, required }) => (
+    <label className="mb-1 block text-xs font-semibold text-white">
+      {children}{required ? <span className="ml-1 text-amber-500">*</span> : null}
+    </label>
+  );
+  const inputClass = "w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-amber-500 focus:outline-none";
+  const textareaClass = inputClass + " resize-y min-h-[72px] leading-relaxed";
+
+  const SectionHeader = ({ n, title }) => (
+    <div className="mb-3 flex items-center gap-2">
+      <span className="font-mono text-[10px] font-semibold tracking-[0.18em] text-amber-600">{n}</span>
+      <h3 className="text-sm font-bold uppercase tracking-wider text-white">{title}</h3>
+      <div className="ml-2 h-px flex-1 bg-gray-200/60" />
+    </div>
+  );
+
+  return (
+    <div>
+      <StepHero
+        eyebrow="Music mode · Step 4"
+        title="Musician reflections survey"
+        subtitle="Pearl Prime music mode — capture your voice, themes, and healing intent. Responses become the YAML profile that drives reflections, lyric companions, and podcast atoms."
+        helper="Aligned with artifacts/musician_survey/SURVEY_TEMPLATE.yaml. Required fields marked with an amber asterisk."
+      />
+
+      <div className="space-y-5">
+
+        {/* IDENTITY */}
+        <div className="rounded-2xl border-2 border-gray-200 bg-white p-5">
+          <SectionHeader n="01" title="Identity" />
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div>
+              <FieldLabel required>Display name</FieldLabel>
+              <input className={inputClass} type="text" value={survey.display_name || ""} onChange={(e) => setField("display_name", e.target.value)} placeholder="How you want to be known" />
+            </div>
+            <div>
+              <FieldLabel>Years active</FieldLabel>
+              <input className={inputClass} type="text" value={survey.years_active || ""} onChange={(e) => setField("years_active", e.target.value)} placeholder="e.g. 8" />
+            </div>
+            <div>
+              <FieldLabel required>Primary genre</FieldLabel>
+              <input className={inputClass} type="text" value={survey.primary_genre || ""} onChange={(e) => setField("primary_genre", e.target.value)} placeholder="e.g. indie folk, ambient, jazz" />
+            </div>
+            <div>
+              <FieldLabel>Secondary genres</FieldLabel>
+              <input className={inputClass} type="text" value={survey.secondary_genres || ""} onChange={(e) => setField("secondary_genres", e.target.value)} placeholder="Comma-separated" />
+            </div>
+            <div className="sm:col-span-2">
+              <FieldLabel>Primary instruments</FieldLabel>
+              <input className={inputClass} type="text" value={survey.primary_instruments || ""} onChange={(e) => setField("primary_instruments", e.target.value)} placeholder="e.g. voice, acoustic guitar, piano" />
+            </div>
+            <div className="sm:col-span-2">
+              <FieldLabel>Creative phases</FieldLabel>
+              <textarea className={textareaClass} rows={2} value={survey.creative_phases || ""} onChange={(e) => setField("creative_phases", e.target.value)} placeholder="Early acoustic → current sparse arrangements..." />
+            </div>
+          </div>
+        </div>
+
+        {/* THEMES */}
+        <div className="rounded-2xl border-2 border-gray-200 bg-white p-5">
+          <SectionHeader n="02" title="Themes" />
+          <div className="space-y-3">
+            <div>
+              <FieldLabel required>Primary themes</FieldLabel>
+              <input className={inputClass} type="text" value={survey.primary_themes || ""} onChange={(e) => setField("primary_themes", e.target.value)} placeholder="3–5 themes — e.g. recovery, quiet courage, presence" />
+            </div>
+            <div>
+              <FieldLabel>Themes you avoid</FieldLabel>
+              <input className={inputClass} type="text" value={survey.avoided_themes || ""} onChange={(e) => setField("avoided_themes", e.target.value)} placeholder="e.g. glamour, pain-as-aesthetic" />
+            </div>
+            <div>
+              <FieldLabel required>One thing you hope listeners feel or know</FieldLabel>
+              <textarea className={textareaClass} rows={2} value={survey.listener_hope_one || ""} onChange={(e) => setField("listener_hope_one", e.target.value)} placeholder="That ____" />
+            </div>
+          </div>
+        </div>
+
+        {/* VOICE & CRAFT */}
+        <div className="rounded-2xl border-2 border-gray-200 bg-white p-5">
+          <SectionHeader n="03" title="Voice &amp; craft" />
+          <div className="space-y-3">
+            <div>
+              <FieldLabel>Lyric person</FieldLabel>
+              <select className={inputClass} value={survey.voice_person || ""} onChange={(e) => setField("voice_person", e.target.value)}>
+                <option value="">— select —</option>
+                <option value="first_person">First person</option>
+                <option value="observational">Observational</option>
+                <option value="character_driven">Character-driven</option>
+                <option value="mixed">Mixed</option>
+              </select>
+            </div>
+            <div>
+              <FieldLabel>Register</FieldLabel>
+              <select className={inputClass} value={survey.register || ""} onChange={(e) => setField("register", e.target.value)}>
+                <option value="">— select —</option>
+                <option value="plain_spoken">Plain-spoken</option>
+                <option value="poetic">Poetic</option>
+                <option value="technical">Technical</option>
+                <option value="mixed">Mixed</option>
+              </select>
+            </div>
+            <div>
+              <FieldLabel>Pacing</FieldLabel>
+              <select className={inputClass} value={survey.pacing || ""} onChange={(e) => setField("pacing", e.target.value)}>
+                <option value="">— select —</option>
+                <option value="short_clipped">Short / clipped</option>
+                <option value="long_flowing">Long / flowing</option>
+                <option value="varied">Varied</option>
+              </select>
+            </div>
+            <div>
+              <FieldLabel>Signature devices</FieldLabel>
+              <textarea className={textareaClass} rows={2} value={survey.signature_devices || ""} onChange={(e) => setField("signature_devices", e.target.value)} placeholder="Recurring metaphors, imagery, structural moves..." />
+            </div>
+          </div>
+        </div>
+
+        {/* MATERIAL FOR REFLECTION */}
+        <div className="rounded-2xl border-2 border-gray-200 bg-white p-5">
+          <SectionHeader n="04" title="Material for reflection" />
+          <div className="space-y-3">
+            <div>
+              <FieldLabel required>Touchstone tracks</FieldLabel>
+              <textarea className={textareaClass} rows={2} value={survey.touchstone_tracks || ""} onChange={(e) => setField("touchstone_tracks", e.target.value)} placeholder="5–10 songs/albums — track / artist, one per line or comma-separated" />
+            </div>
+            <div>
+              <FieldLabel>Key collaborators</FieldLabel>
+              <input className={inputClass} type="text" value={survey.key_collaborators || ""} onChange={(e) => setField("key_collaborators", e.target.value)} placeholder="Producer, co-writer, etc." />
+            </div>
+            <div>
+              <FieldLabel>Citations / links</FieldLabel>
+              <input className={inputClass} type="text" value={survey.citations_links || ""} onChange={(e) => setField("citations_links", e.target.value)} placeholder="Spotify, Bandcamp, etc." />
+            </div>
+          </div>
+        </div>
+
+        {/* HEALING INTENT */}
+        <div className="rounded-2xl border-2 border-gray-200 bg-white p-5">
+          <SectionHeader n="05" title="Healing intent" />
+          <div className="space-y-3">
+            <div>
+              <FieldLabel required>What does your music help heal?</FieldLabel>
+              <textarea className={textareaClass} rows={3} value={survey.what_helps_heal || ""} onChange={(e) => setField("what_helps_heal", e.target.value)} placeholder="In your own words — this shapes the reflection framing." />
+            </div>
+            <div>
+              <FieldLabel>Listener responses to amplify</FieldLabel>
+              <textarea className={textareaClass} rows={2} value={survey.listener_responses_to_amplify || ""} onChange={(e) => setField("listener_responses_to_amplify", e.target.value)} placeholder="Feedback you've received that you want more of." />
+            </div>
+            <div>
+              <FieldLabel>Wellness framings you reject</FieldLabel>
+              <textarea className={textareaClass} rows={2} value={survey.wellness_framing_rejects || ""} onChange={(e) => setField("wellness_framing_rejects", e.target.value)} placeholder="Tropes you don't want in your reflections." />
+            </div>
+          </div>
+        </div>
+
+        {/* OUTPUT PREFS */}
+        <div className="rounded-2xl border-2 border-gray-200 bg-white p-5">
+          <SectionHeader n="06" title="Output preferences" />
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div>
+              <FieldLabel>Lyric form</FieldLabel>
+              <select className={inputClass} value={survey.lyric_form || ""} onChange={(e) => setField("lyric_form", e.target.value)}>
+                <option value="">— select —</option>
+                <option value="free_verse">Free verse</option>
+                <option value="rhymed">Rhymed</option>
+                <option value="verse_chorus">Verse / chorus</option>
+              </select>
+            </div>
+            <div>
+              <FieldLabel>Reflection form</FieldLabel>
+              <select className={inputClass} value={survey.reflection_form || ""} onChange={(e) => setField("reflection_form", e.target.value)}>
+                <option value="">— select —</option>
+                <option value="essay">Essay</option>
+                <option value="journal_entry">Journal entry</option>
+                <option value="meditation">Meditation</option>
+                <option value="mixed">Mixed</option>
+              </select>
+            </div>
+            <div>
+              <FieldLabel>Reflection perspective</FieldLabel>
+              <select className={inputClass} value={survey.reflection_perspective || ""} onChange={(e) => setField("reflection_perspective", e.target.value)}>
+                <option value="">— select —</option>
+                <option value="musician">Musician</option>
+                <option value="listener">Listener</option>
+                <option value="critic">Critic</option>
+                <option value="mixed">Mixed</option>
+              </select>
+            </div>
+            <div>
+              <FieldLabel>Lyric length note</FieldLabel>
+              <input className={inputClass} type="text" value={survey.lyric_length_note || ""} onChange={(e) => setField("lyric_length_note", e.target.value)} placeholder="e.g. 8–14 lines per block" />
+            </div>
+            <div className="flex items-center gap-2">
+              <input id="ms_explicit_ok" type="checkbox" className="h-4 w-4 accent-amber-500" checked={!!survey.explicit_content_ok} onChange={(e) => setField("explicit_content_ok", e.target.checked)} />
+              <label htmlFor="ms_explicit_ok" className="text-xs text-white">Explicit content OK</label>
+            </div>
+            <div className="flex items-center gap-2">
+              <input id="ms_companion_ai" type="checkbox" className="h-4 w-4 accent-amber-500" checked={!!survey.companion_ai_song_consent} onChange={(e) => setField("companion_ai_song_consent", e.target.checked)} />
+              <label htmlFor="ms_companion_ai" className="text-xs text-white">AI companion-song consent</label>
+            </div>
+          </div>
+        </div>
+
+        {/* CONSENT & LICENSING */}
+        <div className="rounded-2xl border-2 border-gray-200 bg-white p-5">
+          <SectionHeader n="07" title="Consent &amp; licensing" />
+          <p className="mb-3 text-[11px] leading-relaxed text-white">
+            Your responses persist as YAML in the brand wizard SSOT. They drive AI reflections, lyric companions, and podcast atoms via the music-mode pipeline. No third-party sharing. Deletion on request.
+          </p>
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <input id="ms_ai_reflections" type="checkbox" className="h-4 w-4 accent-amber-500" checked={!!survey.ai_reflections_consent} onChange={(e) => setField("ai_reflections_consent", e.target.checked)} />
+              <label htmlFor="ms_ai_reflections" className="text-xs text-white">AI reflections consent <span className="ml-1 text-amber-500">*</span></label>
+            </div>
+            <div>
+              <FieldLabel>Usage restrictions</FieldLabel>
+              <textarea className={textareaClass} rows={2} value={survey.usage_restrictions || ""} onChange={(e) => setField("usage_restrictions", e.target.value)} placeholder="e.g. Non-commercial only; no social-media reposts without permission." />
+            </div>
+            <div>
+              <FieldLabel required>Follow-up email</FieldLabel>
+              <input className={inputClass} type="email" value={survey.followup_email || ""} onChange={(e) => setField("followup_email", e.target.value)} placeholder="you@example.com" />
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div>
+                <FieldLabel required>Submitted date</FieldLabel>
+                <input className={inputClass} type="date" value={survey.submitted_date || ""} onChange={(e) => setField("submitted_date", e.target.value)} />
+              </div>
+              <div>
+                <FieldLabel required>Signature (your name as consent)</FieldLabel>
+                <input className={inputClass} type="text" value={survey.signature || ""} onChange={(e) => setField("signature", e.target.value)} placeholder="Your name as consent" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* SAVE — single primary action at bottom (§3). Stub: actual POST/persist/auto-advance lands in ws_music_brand_survey_save_post_yaml_advance. */}
+        <div className="flex flex-col items-stretch gap-2 rounded-2xl border-2 border-amber-200 bg-amber-50 p-5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs leading-relaxed text-amber-900">
+            <strong>Save</strong> persists answers into the brand wizard YAML SSOT and auto-advances to the next step. POST handler arrives in <code className="rounded bg-white/80 px-1 font-mono text-[10px]">ws_music_brand_survey_save_post_yaml_advance_20260509</code>.
+          </p>
+          <button
+            type="button"
+            onClick={handleSaveStub}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-600 px-6 py-2.5 text-sm font-bold text-white shadow-md transition-colors hover:bg-amber-700"
+          >
+            Save reflections survey
+          </button>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
 // MAIN WIZARD
 // ═══════════════════════════════════════════════════════════
 
@@ -3556,6 +3866,9 @@ export default function BrandWizard() {
   const [introPage, setIntroPage] = useState(0);
   const [step, setStep] = useState(0);
   const [state, setState] = useState({
+    // mode: brand-archetype path. "book" = default catalog/teacher path; "music" = MUSIC-MODE-BRAND-INTEGRATION-V1-01 §2 music path.
+    mode: "book",
+    musicianSurvey: {},
     archetype: null, persona: null, moment: null,
     voiceSettings: {}, visualStyle: null, emotions: [],
     tradition: "", angles: [], topicTags: [],
@@ -3586,21 +3899,26 @@ export default function BrandWizard() {
     if (introPage >= 1) return <IntroJourney onNext={startWizard} onBack={prevIntro} onChooseTeacher={goToTeacherShowcase} />;
   }
 
+  // Music mode (§2) bypasses book-archetype gating on early steps; the survey pane (step 4 / index 3) governs music-mode advance.
+  const isMusicMode = state.mode === "music";
   const canNext = step === 0
-    ? !!state.archetype
+    ? (isMusicMode || !!state.archetype)
     : step === 1
-      ? !!state.persona && !!state.onboardingLane && !!state.onboardingMarket
+      ? (isMusicMode || (!!state.persona && !!state.onboardingLane && !!state.onboardingMarket))
       : step === 2
-        ? !!state.moment
+        ? (isMusicMode || !!state.moment)
         : true;
 
   const i18nData = { tArchetypes, tPersonas, tMoments, tVisualStyles, tEmotionCategories, tAngleFeedback, tSelectionFeedback, tProven, tV4FormatsStructural, t };
 
+  // §2/§3 MUSIC-MODE-BRAND-INTEGRATION-V1-01: when mode=music, swap step 4 (index 3) Voice Tone for the musician_reflections_survey pane.
   const steps = [
     <Step1Archetype key={0} state={state} update={update} i18n={i18nData} />,
     <Step2PrimaryReader key={1} state={state} update={update} i18n={i18nData} />,
     <Step3TriggerMoment key={2} state={state} update={update} i18n={i18nData} />,
-    <Step4VoiceGraphs key={3} state={state} update={update} i18n={i18nData} />,
+    isMusicMode
+      ? <MusicianReflectionsSurveyPane key={3} state={state} update={update} i18n={i18nData} />
+      : <Step4VoiceGraphs key={3} state={state} update={update} i18n={i18nData} />,
     <Step5VisualStyle key={4} state={state} update={update} i18n={i18nData} />,
     <Step6EmotionalOutcomes key={5} state={state} update={update} i18n={i18nData} />,
     <Step7Topics key={6} state={state} update={update} i18n={i18nData} />,
