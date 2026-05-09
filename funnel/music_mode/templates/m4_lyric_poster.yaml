@@ -1,0 +1,24 @@
+# PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1 — M4 scaffold (docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md §3)
+project_id: PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1
+subsystem: marketing
+spec_ref: docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md#3-proposed-music-mode-freebie-types-v1-candidate-set
+freebie_tier: M4
+template_id: lyric_poster_pdf_v1
+name: Lyric poster (PDF)
+asset_type: printable_lyric_poster
+delivery_format: pdf_download
+sample_size: single_poster_per_track_or_campaign
+gating_step: email_capture_before_pdf_delivery
+copy_blocks:
+  CTA: Get the printable lyric poster
+  body: |
+    Printable artifact tied to the companion track or preview clip campaign.
+    Placeholders: {{poster_pdf_url}}, {{track_title}}, {{lyric_excerpt}}, {{artist_name}}.
+  social_share: Printable lyric poster for {{track_title}} — {{poster_pdf_url}}
+cross_link_targets:
+  - template_id: companion_track_download_v1
+    relation: paired_full_track_offer
+  - template_id: preview_clip_30s_v1
+    relation: paired_hook_campaign
+  - template_id: behind_the_song_interview_v1
+    relation: meaning_behind_lyrics

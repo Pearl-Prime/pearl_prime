@@ -1,0 +1,24 @@
+# PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1 — M5 scaffold (docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md §3)
+project_id: PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1
+subsystem: marketing
+spec_ref: docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md#3-proposed-music-mode-freebie-types-v1-candidate-set
+freebie_tier: M5
+template_id: behind_the_song_interview_v1
+name: Behind-the-song interview
+asset_type: narrative_interview
+delivery_format: audio_or_long_form_text
+sample_size: one_interview_per_focus_track
+gating_step: email_capture_or_gated_player_per_hub_policy
+copy_blocks:
+  CTA: Hear the story behind the song
+  body: |
+    Audio or long-form text tying persona to track meaning; supports proof-loop mid-sequence.
+    Placeholders: {{interview_url}}, {{track_title}}, {{artist_name}}, {{story_pull_quote}}.
+  social_share: "Behind the song: {{track_title}} — {{interview_url}}"
+cross_link_targets:
+  - template_id: companion_track_download_v1
+    relation: listen_after_story
+  - template_id: preview_clip_30s_v1
+    relation: hook_after_context
+  - template_id: sample_ep_bundle_v1
+    relation: bundle_after_persona_depth
