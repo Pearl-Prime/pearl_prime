@@ -217,6 +217,21 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
   .pp-flow{flex-direction:column}
   .pp-flow-arrow{transform:rotate(90deg)}
 }
+
+/* Active brand SSOT panel */
+.ab-catalog-panel{margin:0;padding:12px 20px 14px;background:rgba(14,10,6,.92);border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:8px}
+.ab-panel-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px}
+.ab-counts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.ab-count{font-size:.58rem;color:var(--mid)}
+.ab-count strong{color:var(--acc2)}
+.ab-region-row{display:flex;gap:14px;flex-wrap:wrap;color:var(--dim);font-size:.5rem;letter-spacing:.04em}
+.ab-table-wrap{overflow:auto;max-height:min(38vh,320px);border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,.2)}
+.ab-table{width:100%;border-collapse:collapse;font-size:.52rem}
+.ab-table th,.ab-table td{padding:6px 8px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+.ab-table th{color:var(--acc2);position:sticky;top:0;background:rgba(14,10,6,.98);z-index:1}
+.ab-st-active{color:var(--green);font-weight:600}
+.ab-st-inactive{color:var(--red);font-weight:600}
+.ab-row-current{background:rgba(180,83,9,.12)}
 </style>
 </head>
 <body>
@@ -255,6 +270,32 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
   </div>
   <div class="bar-track"><div class="bar-fill" id="bar-fill" style="width:0"></div></div>
   <div class="pct-text" id="pct-text">0% complete</div>
+</div>
+
+<!-- Active brand SSOT executive panel (WORLDWIDE-CATALOG-GO-LIVE-V1 P1 surface 2) -->
+<div id="ab-catalog-panel" class="ab-catalog-panel" aria-live="polite">
+  <div class="ab-panel-head">
+    <div class="section-hdr" style="margin:0">
+      <span class="pp-icon sm" data-icon="intelligence"></span>
+      <span class="section-hdr-title">Catalog active / inactive (brand_wizard YAML)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <div class="ab-counts" id="ab-counts">
+        <span class="ab-count">Active: <strong id="ab-n-active">—</strong></span>
+        <span class="ab-count">Inactive: <strong id="ab-n-inactive">—</strong></span>
+        <span class="ab-count ab-muted" id="ab-generated">…</span>
+      </div>
+      <button type="button" class="action-btn" style="margin:0;padding:6px 12px;font-size:.5rem" onclick="refreshActiveBrandExecPanel()">Refresh</button>
+    </div>
+  </div>
+  <div class="ab-region-row" id="ab-regions"></div>
+  <div class="ab-table-wrap">
+    <table class="ab-table" id="ab-table">
+      <thead><tr><th>brand_id</th><th>region</th><th>status</th><th>reason / last run</th></tr></thead>
+      <tbody id="ab-tbody"><tr><td colspan="4" class="ab-muted">Loading snapshot…</td></tr></tbody>
+    </table>
+  </div>
+  <div class="ab-muted" id="ab-hint" style="font-size:.48rem;line-height:1.5"></div>
 </div>
 
 <!-- Brand Picker -->
@@ -960,6 +1001,59 @@ function dismissCelebration(){
   else if(sp>=100 && uploadPct()>=100) showPhase(3);
 }
 
+// ── Active brand SSOT panel (classifier consumer) ──
+function abEsc(s){
+  return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+}
+function abPanelApiUrl(){
+  try{
+    var q=new URLSearchParams(window.location.search).get('ab_endpoint');
+    if(q) return q;
+  }catch(e){}
+  if(typeof window.__ACTIVE_BRAND_DASHBOARD_URL==='string'&&window.__ACTIVE_BRAND_DASHBOARD_URL)
+    return window.__ACTIVE_BRAND_DASHBOARD_URL;
+  return 'http://127.0.0.1:8765/active-brand-dashboard.json';
+}
+function refreshActiveBrandExecPanel(){
+  var tbody=document.getElementById('ab-tbody');
+  var hint=document.getElementById('ab-hint');
+  if(!tbody) return;
+  tbody.innerHTML='<tr><td colspan="4" class="ab-muted">Loading snapshot…</td></tr>';
+  if(hint) hint.textContent='';
+  fetch(abPanelApiUrl(),{cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(data){
+      document.getElementById('ab-n-active').textContent=String(data.totals.active);
+      document.getElementById('ab-n-inactive').textContent=String(data.totals.inactive);
+      var genEl=document.getElementById('ab-generated');
+      if(genEl) genEl.textContent=data.generated_at?'Updated '+data.generated_at:'';
+      var reg=document.getElementById('ab-regions');
+      if(reg&&data.by_region){
+        var mc=data.by_region.manga_canonical||{};
+        var ot=data.by_region.other_registry||{};
+        var ms=data.manga_canonical_slice||{};
+        reg.innerHTML='<span><strong>Manga canonical (37 slice)</strong>: '+ms.active+' active / '+ms.inactive+' inactive / '+ms.total+' total</span>'
+          +'<span><strong>manga_canonical</strong>: '+mc.active+' / '+mc.inactive+' / '+mc.total+'</span>'
+          +'<span><strong>other_registry</strong>: '+ot.active+' / '+ot.inactive+' / '+ot.total+'</span>'
+          +(data.music_registry_deferred?' <span style="color:var(--acc2)">music registry deferred</span>':'');
+      }
+      var rows=(data.brands||[]).map(function(b){
+        var cur=(brandId&&b.brand_id===brandId)?'ab-row-current':'';
+        var reasonOrRun=b.status==='active'?(b.last_wizard_run||'—'):(b.reason||'—');
+        return '<tr class="'+cur+'"><td>'+abEsc(b.brand_id)+'</td><td>'+abEsc(b.region)+'</td>'
+          +'<td class="'+(b.status==='active'?'ab-st-active':'ab-st-inactive')+'">'+abEsc(b.status)+'</td>'
+          +'<td class="ab-muted">'+abEsc(reasonOrRun)+'</td></tr>';
+      }).join('');
+      tbody.innerHTML=rows||'<tr><td colspan="4" class="ab-muted">No brands</td></tr>';
+      if(hint) hint.textContent='Run from repo root: PYTHONPATH=. python3 scripts/brand/dashboard_classifier_endpoint.py --serve';
+    })
+    .catch(function(e){
+      tbody.innerHTML='<tr><td colspan="4" class="ab-muted">Could not load snapshot ('+abEsc(e.message)+'). Start helper: '
+        +'<code style="color:var(--acc2)">PYTHONPATH=. python3 scripts/brand/dashboard_classifier_endpoint.py --serve</code></td></tr>';
+      if(hint) hint.textContent='Default URL: '+abPanelApiUrl()+' — override with ?ab_endpoint= or window.__ACTIVE_BRAND_DASHBOARD_URL';
+    });
+}
+
 // ── Brand Picker ──
 function renderPicker(){
   const el=document.getElementById('picker');
@@ -975,6 +1069,7 @@ function renderPicker(){
   }
   h+='</div>';
   el.innerHTML=h;
+  refreshActiveBrandExecPanel();
 }
 function selectBrand(bid){
   history.replaceState(null,'','?brand='+bid);
@@ -995,6 +1090,7 @@ function initBrand(bid){
   document.getElementById('main-wrap').style.display='block';
   document.getElementById('brand-pill').textContent=brand.d;
   renderPhase0(); renderPhase1(); renderPhase2(); renderPhase3(); renderProgress();
+  refreshActiveBrandExecPanel();
 
   const urlP=new URLSearchParams(window.location.search);
   const phaseParam=urlP.get('phase');
