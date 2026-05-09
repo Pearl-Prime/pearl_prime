@@ -232,6 +232,15 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 .ab-st-active{color:var(--green);font-weight:600}
 .ab-st-inactive{color:var(--red);font-weight:600}
 .ab-row-current{background:rgba(180,83,9,.12)}
+.ab-muted{color:var(--dim)}
+.rc-spend-panel{border-top:1px solid rgba(180,83,9,.08)}
+.rc-spend-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;margin-top:4px}
+.rc-spend-val{font-family:var(--mono);font-size:.75rem;color:var(--acc2)}
+.rc-spend-meta{font-family:var(--mono);font-size:.48rem;color:var(--dim);letter-spacing:.04em}
+.rc-spend-bar-track{height:8px;background:rgba(180,83,9,.12);border-radius:4px;overflow:hidden;margin-top:8px;position:relative}
+.rc-spend-bar-fill{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:4px;transition:width .4s}
+.rc-spend-bar-fill.rc-warn{background:linear-gradient(90deg,#b45309,#f59e0b)}
+.rc-spend-80{position:absolute;left:80%;top:0;bottom:0;width:1px;background:rgba(248,113,113,.45);pointer-events:none}
 </style>
 </head>
 <body>
@@ -296,6 +305,27 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
     </table>
   </div>
   <div class="ab-muted" id="ab-hint" style="font-size:.48rem;line-height:1.5"></div>
+</div>
+
+<!-- RunComfy monthly spend (IMG-RENDER-DUAL-PATH-V1-01 / ws_runcomfy_cost_alert_dashboard) -->
+<div id="rc-spend-panel" class="ab-catalog-panel rc-spend-panel" aria-live="polite">
+  <div class="ab-panel-head">
+    <div class="section-hdr" style="margin:0">
+      <span class="pp-icon sm" data-icon="video"></span>
+      <span class="section-hdr-title">RunComfy monthly spend (read-only)</span>
+    </div>
+    <button type="button" class="action-btn" style="margin:0;padding:6px 12px;font-size:.5rem" onclick="refreshRuncomfySpendPanel()">Refresh</button>
+  </div>
+  <div class="rc-spend-row">
+    <div class="rc-spend-val" id="rc-spend-amount">—</div>
+    <div class="rc-spend-meta" id="rc-spend-meta"></div>
+  </div>
+  <div class="rc-spend-bar-track">
+    <div class="rc-spend-80" title="80% budget warn"></div>
+    <div class="rc-spend-bar-fill" id="rc-spend-bar" style="width:0"></div>
+  </div>
+  <div class="warn" id="rc-spend-warn" style="display:none;margin-top:8px"><strong>80% threshold</strong> — RunComfy month-to-date is at or above 80% of the soft cap. Coordinate with Pearl_Int before additional paid dispatch.</div>
+  <div class="ab-muted" id="rc-spend-hint" style="font-size:.48rem;line-height:1.5;margin-top:6px"></div>
 </div>
 
 <!-- Brand Picker -->
@@ -1054,6 +1084,61 @@ function refreshActiveBrandExecPanel(){
     });
 }
 
+// ── RunComfy spend panel (Pearl_Int TSV consumer) ──
+function rcSpendApiUrl(){
+  try{
+    var q=new URLSearchParams(window.location.search).get('rc_endpoint');
+    if(q) return q;
+  }catch(e){}
+  if(typeof window.__RUNCOMFY_SPEND_URL==='string'&&window.__RUNCOMFY_SPEND_URL)
+    return window.__RUNCOMFY_SPEND_URL;
+  return 'http://127.0.0.1:8766/runcomfy-monthly-spend.json';
+}
+function refreshRuncomfySpendPanel(){
+  var amt=document.getElementById('rc-spend-amount');
+  var meta=document.getElementById('rc-spend-meta');
+  var bar=document.getElementById('rc-spend-bar');
+  var warn=document.getElementById('rc-spend-warn');
+  var hint=document.getElementById('rc-spend-hint');
+  if(!amt||!bar) return;
+  amt.textContent='Loading…';
+  if(meta) meta.textContent='';
+  bar.style.width='0';
+  bar.classList.remove('rc-warn');
+  if(warn) warn.style.display='none';
+  if(hint) hint.textContent='';
+  fetch(rcSpendApiUrl(),{cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(d){
+      var cap=d.monthly_budget_cap_usd!=null?Number(d.monthly_budget_cap_usd):10;
+      if(!d.tsv_present){
+        amt.textContent='No spend file';
+        if(meta) meta.textContent='artifacts/qa/runcomfy_monthly_spend.tsv (pending Pearl_Int)';
+        if(hint) hint.textContent='Helper: PYTHONPATH=. python3 scripts/brand/runcomfy_spend_endpoint.py --serve --port 8766';
+        return;
+      }
+      var s=d.cumulative_month_spend_usd!=null?Number(d.cumulative_month_spend_usd):0;
+      amt.textContent='$'+s.toFixed(2)+' / $'+cap.toFixed(2)+' cap';
+      var u=d.utilization!=null?Number(d.utilization):0;
+      var pct=Math.min(100,Math.max(0,u*100));
+      bar.style.width=pct.toFixed(1)+'%';
+      if(d.budget_warn_80pct) bar.classList.add('rc-warn');
+      if(meta){
+        var bits=[];
+        if(d.last_snapshot_date) bits.push('snapshot '+d.last_snapshot_date);
+        if(d.generated_at) bits.push('payload '+d.generated_at);
+        meta.textContent=bits.join(' · ');
+      }
+      if(warn) warn.style.display=d.budget_warn_80pct?'flex':'none';
+      if(hint) hint.textContent='Run: PYTHONPATH=. python3 scripts/brand/runcomfy_spend_endpoint.py --serve — URL '+rcSpendApiUrl();
+    })
+    .catch(function(e){
+      amt.textContent='Unavailable';
+      if(meta) meta.textContent='';
+      if(hint) hint.textContent='Could not load ('+abEsc(e.message)+'). Start: PYTHONPATH=. python3 scripts/brand/runcomfy_spend_endpoint.py --serve — default '+rcSpendApiUrl()+' — override ?rc_endpoint= or window.__RUNCOMFY_SPEND_URL';
+    });
+}
+
 // ── Brand Picker ──
 function renderPicker(){
   const el=document.getElementById('picker');
@@ -1070,6 +1155,7 @@ function renderPicker(){
   h+='</div>';
   el.innerHTML=h;
   refreshActiveBrandExecPanel();
+  refreshRuncomfySpendPanel();
 }
 function selectBrand(bid){
   history.replaceState(null,'','?brand='+bid);
@@ -1091,6 +1177,7 @@ function initBrand(bid){
   document.getElementById('brand-pill').textContent=brand.d;
   renderPhase0(); renderPhase1(); renderPhase2(); renderPhase3(); renderProgress();
   refreshActiveBrandExecPanel();
+  refreshRuncomfySpendPanel();
 
   const urlP=new URLSearchParams(window.location.search);
   const phaseParam=urlP.get('phase');

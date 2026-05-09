@@ -225,6 +225,20 @@
       margin-bottom: 10px;
     }
     .alert-red.hidden { display: none; }
+    .alert-amber {
+      background: rgba(217,119,6,0.12);
+      border: 1px solid rgba(217,119,6,0.45);
+      color: #fcd34d;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+    }
+    .kpi-card.warn {
+      border-color: rgba(217,119,6,0.45);
+      background: linear-gradient(180deg, rgba(217,119,6,0.06), var(--card));
+    }
+    .kpi-card.warn .value { color: var(--amber2); }
 
     /* Teacher mode cards */
     .teacher-mode-grid {
@@ -362,6 +376,43 @@
       <div class="value" id="buildable-count">—</div>
       <div class="sub">markets ready for English catalog build</div>
     </div>
+  </div>
+
+  <!-- RunComfy Cost Alert (ws_runcomfy_cost_alert_dashboard_20260509) -->
+  <div id="runcomfy-cost-alert" class="section" aria-label="RunComfy cost alert">
+    <div class="section-title">&#x26A0;&#xFE0F; RunComfy Cost Alert <span class="phase-tag">Conductor Defaults</span></div>
+    <div class="alert-amber">
+      <strong>Operator-facing cap:</strong> $10.00 / month RunComfy GPU spend.
+      Per Pearl_Conductor v2 defaults, autonomous waves pause RunComfy jobs once this cap is reached
+      and require operator review before resuming.
+    </div>
+    <div class="kpi-grid" style="margin-bottom:12px">
+      <div class="kpi-card warn">
+        <div class="label">Monthly Cap</div>
+        <div class="value">$10.00</div>
+        <div class="sub">RunComfy GPU budget · operator review on overage</div>
+      </div>
+      <div class="kpi-card warn">
+        <div class="label">Tracking Source</div>
+        <div class="value" style="font-size:1rem">Conductor Defaults</div>
+        <div class="sub">Pearl_Conductor v2 — autonomous wave defaults</div>
+      </div>
+      <div class="kpi-card warn">
+        <div class="label">Profile / Tokens</div>
+        <div class="value" style="font-size:0.95rem">runcomfy.com/profile</div>
+        <div class="sub">Operator-managed externally · no API wired here</div>
+      </div>
+    </div>
+    <div class="cli-ref">
+      <strong>Credential reference (in-repo, text only):</strong><br>
+      <code>docs/INTEGRATION_CREDENTIALS_REGISTRY.md</code> &mdash; RunComfy section<br>
+      <strong>Profile URL (operator-managed, not auto-opened):</strong><br>
+      <code>https://www.runcomfy.com/profile</code> &rarr; API Tokens
+    </div>
+    <p style="font-size:0.75rem;color:var(--muted);margin-top:10px;">
+      Static informational widget. No external API calls. No secrets read in browser.
+      Workstream: <span class="cmd">ws_runcomfy_cost_alert_dashboard_20260509</span>
+    </p>
   </div>
 
   <!-- Build Controls -->
