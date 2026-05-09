@@ -1,6 +1,6 @@
 # Music mode brand integration — V1 spec
 
-**Status:** PROPOSED — awaiting operator ratification of Q1–Q4 (see §16)  
+**Status:** ACTIVE — operator Q1–Q4 ratified 2026-05-09 (see §16 + §AMENDMENT-2026-05-09)  
 **Cap entry:** `MUSIC-MODE-BRAND-INTEGRATION-V1-01` in `docs/PEARL_ARCHITECT_STATE.md`  
 **Project:** `PRJ-MUSIC-MODE-BRAND-INTEGRATION-V1` in `artifacts/coordination/ACTIVE_PROJECTS.tsv`  
 **Owner (ratification):** Pearl_Architect  
@@ -104,7 +104,7 @@ Any **catalog slice** labeled as a **music-mode brand catalog** MUST contain **o
 
 ## §10. Status
 
-Program + cap remain **`proposed`** until §16 Q1–Q4 are answered. Pearl_Architect publishes **`MUSIC-MODE-BRAND-INTEGRATION-V1-01-AMENDMENT`** to flip to **`active`** when recorded.
+Program + cap are **`active`** as of **2026-05-09**. Operator **Q1–Q4** defaults are recorded in §16 and locked verbatim in **§AMENDMENT-2026-05-09**. Coordination rows: **`PRJ-MUSIC-MODE-BRAND-INTEGRATION-V1`** **`proposed` → `active`**; six `ws_music_brand_*` rows **`proposed` → `runnable`**.
 
 ---
 
@@ -118,7 +118,7 @@ Answer inline below each question (operator).
 
 **Pearl_Architect default if no answer:** mode selector at wizard step 1.
 
-*Operator answer:*
+*Operator answer:* **Accepted — Pearl_Architect default (2026-05-09 ratification).**
 
 ### Q2 — brand_id slug rule
 
@@ -126,7 +126,7 @@ Answer inline below each question (operator).
 
 **Pearl_Architect default if no answer:** `<musician_handle>_music`.
 
-*Operator answer:*
+*Operator answer:* **Accepted — Pearl_Architect default (2026-05-09 ratification).**
 
 ### Q3 — catalog volume tier default
 
@@ -134,7 +134,7 @@ Answer inline below each question (operator).
 
 **Pearl_Architect default if no answer:** 800 baseline.
 
-*Operator answer:*
+*Operator answer:* **Accepted — Pearl_Architect default (2026-05-09 ratification).**
 
 ### Q4 — inactive brand path
 
@@ -142,7 +142,44 @@ Answer inline below each question (operator).
 
 **Pearl_Architect default if no answer:** same brand_wizard YAML SSOT.
 
-*Operator answer:*
+*Operator answer:* **Accepted — Pearl_Architect default (2026-05-09 ratification).**
+
+---
+
+## §AMENDMENT-2026-05-09 — Operator Q1–Q4 defaults (binding)
+
+This section mirrors the cap-entry amendment in `docs/PEARL_ARCHITECT_STATE.md` (**MUSIC-MODE-BRAND-INTEGRATION-V1-01 — AMENDMENT — 2026-05-09**).
+
+1. **UX FLOW (Q1=default):**
+   - Mode selector at brand wizard step 1 with options: [Standard book brand] [Manga/illustrated brand] [Music mode brand] [Hybrid (advanced — reserved)]
+   - Music mode flow inserts musician reflections survey as conditional Step 4 (live wizard pane, NOT file:// URL).
+   - **Anti-drift:** any UX placement change (mid-wizard, end-of-wizard, popup) requires separate AMENDMENT.
+
+2. **BRAND_ID SLUG (Q2=default):**
+   - Music mode brand_id = `<musician_handle>_music` (e.g., ahjansam_music, junko_music).
+   - **Anti-drift:** alternate naming patterns (vanity slug, numeric, etc.) require separate AMENDMENT.
+
+3. **CATALOG VOLUME TIER (Q3=default):**
+   - Default tier = 800 baseline (matches Path X canonical brand volume).
+   - Override via survey field `music_volume_tier` ∈ {solo, standard, enterprise}; solo<800, standard=800, enterprise>800 (specific numeric ranges TBD by Pearl_Marketing in implementation).
+   - **Anti-drift:** changing the default 800 baseline requires separate AMENDMENT.
+
+4. **INACTIVE BRAND PATH (Q4=default):**
+   - Music mode brand active/inactive classification follows the same brand_wizard YAML SSOT defined in WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 + ws_worldwide_gl_s04 classifier (PR #972).
+   - Music mode brands MUST appear in `config/music/music_brand_registry.yaml` AND have a brand_wizard YAML at `brand-wizard-app/brands/<brand_id>.yaml` to be active.
+   - **Anti-drift:** any music-mode-specific archive/retention rule (vs Path X) requires separate AMENDMENT.
+
+5. **STATUS TRANSITIONS:**
+   - Cap entry **MUSIC-MODE-BRAND-INTEGRATION-V1-01**: status **proposed → active**.
+   - **6 ws rows**: **proposed → runnable** (per `ACTIVE_WORKSTREAMS.tsv` update).
+   - **PRJ-MUSIC-MODE-BRAND-INTEGRATION-V1**: status **proposed → active**.
+   - **Implementation ownership** (named, not authored here):
+     - **a.** `ws_music_brand_wizard_step1_step4_survey_pane_20260509` → **Pearl_Brand**
+     - **b.** `ws_music_brand_survey_save_post_yaml_advance_20260509` → **Pearl_Dev**
+     - **c.** `ws_music_brand_registry_music_brand_registry_yaml_20260509` → **Pearl_Dev**
+     - **d.** `ws_music_brand_catalog_generator_100pct_music_mode_20260509` → **Pearl_Dev**
+     - **e.** `ws_music_brand_wizard_live_embed_routing_20260509` → **Pearl_Dev**
+     - **f.** `ws_music_brand_freebie_funnel_followup_cap_20260509` → **Pearl_Architect** (authors separate cap **MUSIC-MODE-FREEBIE-FUNNEL-V1-02**)
 
 ---
 
