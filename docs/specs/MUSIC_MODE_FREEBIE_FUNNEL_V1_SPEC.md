@@ -1,6 +1,6 @@
 # Music mode freebie + funnel — V1 spec
 
-**Status:** PROPOSED — awaiting operator Q1–Q3 (see §16)  
+**Status:** ACTIVE — operator Q1–Q3 recorded 2026-05-09 (see §16; AMENDMENT in `docs/PEARL_ARCHITECT_STATE.md`)  
 **Cap entry:** `MUSIC-MODE-FREEBIE-FUNNEL-V1-02` in `docs/PEARL_ARCHITECT_STATE.md`  
 **Project:** `PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1` in `artifacts/coordination/ACTIVE_PROJECTS.tsv`  
 **Parent program:** `PRJ-MUSIC-MODE-BRAND-INTEGRATION-V1` / `MUSIC-MODE-BRAND-INTEGRATION-V1-01` (wizard + registry + catalog)  
@@ -140,7 +140,7 @@ Additional types (e.g. **lyric video** file, **stem/teaser** pack, **live sessio
 
 ## §7. Status
 
-**PROPOSED** until operator records **Q1–Q3** in §16. Pearl_Architect issues **MUSIC-MODE-FREEBIE-FUNNEL-V1-02-AMENDMENT** when answers land.
+**ACTIVE** — operator recorded **Q1–Q3** in §16 on 2026-05-09 (Pearl_Conductor autonomous wave; binding). **MUSIC-MODE-FREEBIE-FUNNEL-V1-02-AMENDMENT** in `docs/PEARL_ARCHITECT_STATE.md` (2026-05-09).
 
 ---
 
@@ -152,6 +152,15 @@ Additional types (e.g. **lyric video** file, **stem/teaser** pack, **live sessio
 
 **Q3:** Implementation phasing — **single big PR** **or** **phased** (inventory → templates → wiring)?
 
+### Operator answers (recorded 2026-05-09 via Pearl_Conductor autonomous wave)
+
+- **Q1 = approve** (M1-M5 set ratified)
+- **Q2 = minimal** (funnel delta minimized)
+- **Q3 = phased** (Phase 1 templates + inventory; Phase 2 funnel wiring gated)
+
+Authorization: Pearl_Conductor 2026-05-09 autonomous wave (operator pre-approved).
+AMENDMENT entry: docs/PEARL_ARCHITECT_STATE.md MUSIC-MODE-FREEBIE-FUNNEL-V1-02 — AMENDMENT — 2026-05-09.
+
 ---
 
 ## Revision history
@@ -159,3 +168,4 @@ Additional types (e.g. **lyric video** file, **stem/teaser** pack, **live sessio
 | Date | Change |
 |------|--------|
 | 2026-05-09 | Initial Pearl_Architect doc-only cap + spec; discovery snapshot on `origin/main`. |
+| 2026-05-09 | AMENDMENT — operator Q1=approve, Q2=minimal, Q3=phased recorded in §16 (Pearl_Conductor autonomous wave defaults; binding). Cap status proposed → active. Cross-ref: `docs/PEARL_ARCHITECT_STATE.md` MUSIC-MODE-FREEBIE-FUNNEL-V1-02 — AMENDMENT — 2026-05-09. |

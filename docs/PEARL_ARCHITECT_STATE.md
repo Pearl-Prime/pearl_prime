@@ -1054,9 +1054,9 @@ Operator decisions (**all defaults accepted**):
      - **e.** `ws_music_brand_wizard_live_embed_routing_20260509` → **Pearl_Dev**
      - **f.** `ws_music_brand_freebie_funnel_followup_cap_20260509` → **Pearl_Architect** (authors separate cap **MUSIC-MODE-FREEBIE-FUNNEL-V1-02**)
 
-### MUSIC-MODE-FREEBIE-FUNNEL-V1-02 — Music mode brand freebies + funnel (additive; proposed 2026-05-09; pending operator decision card)
+### MUSIC-MODE-FREEBIE-FUNNEL-V1-02 — Music mode brand freebies + funnel (additive; **active** 2026-05-09; Q1–Q3 ratified)
 
-**Status:** **proposed** — doc-only cap + spec + coordination; **no** code, **no** UI, **no** authored freebie assets in this PR. Normative inventory and deltas live in [`docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md`](./specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md).
+**Status:** **active** — operator answers to Q1–Q3 captured in [`docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md` §16 — Operator answers (recorded 2026-05-09)](./specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md) and the AMENDMENT below; child project **`PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`**: **`proposed` → `active`** in `artifacts/coordination/ACTIVE_PROJECTS.tsv`; child workstreams advanced per the AMENDMENT below. Doc-only AMENDMENT — no code, no UI, no authored freebie assets in this PR. Normative inventory and deltas live in [`docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md`](./specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md).
 
 **Context:** Operator framing from `MUSIC-MODE-BRAND-INTEGRATION-V1-01` action item **f** / `ws_music_brand_freebie_funnel_followup_cap_20260509`: *the funnel and freebies we create should also have considerations for music mode* — companion songs as freebies, music previews, sample EPs, lyric videos, etc. This cap **does not** amend `MUSIC-MODE-BRAND-INTEGRATION-V1-01`; it **spins** the deferred freebie/funnel scope into its own program under **`PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`**.
 
@@ -1076,7 +1076,7 @@ Operator decisions (**all defaults accepted**):
 
 6. **ACTION ITEMS (named sub-workstreams — not authored here).** `ws_music_freebie_inventory_audit_20260509` (Pearl_Marketing); `ws_music_freebie_template_authoring_20260509` (Pearl_Marketing); `ws_music_freebie_funnel_wiring_20260509` (Pearl_Dev). Opened under **`PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`** in `ACTIVE_WORKSTREAMS.tsv`.
 
-7. **STATUS.** **`proposed`** pending operator **Q1–Q3** in `docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md` §16 (decision card). Pearl_Architect amendment flips to **active** when answers land.
+7. **STATUS.** **`active`** — operator **Q1–Q3** answered 2026-05-09 (defaults via Pearl_Conductor autonomous wave; binding). See AMENDMENT block below for verbatim lock + status transitions.
 
 **Operator decision card (verbatim — answer in spec §16):** see spec **§16 Q1–Q3** (freebie-type set approval; funnel delta breadth; implementation phasing).
 
@@ -1085,6 +1085,30 @@ Operator decisions (**all defaults accepted**):
 **Handoffs:** **Pearl_PM** — child ws statuses after operator Q-card. **Pearl_Marketing** — inventory + template authoring. **Pearl_Dev** — pipeline wiring to YAML SSOT. **Pearl_Architect** — amendment after Q1–Q3.
 
 **Pointers:** `docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md`; `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`; `ws_music_brand_freebie_funnel_followup_cap_20260509` (action item **f** — row marked **completed** after PR #979 lands; follow-up work under `PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`).
+
+#### MUSIC-MODE-FREEBIE-FUNNEL-V1-02 — AMENDMENT — 2026-05-09 (operator Q1-Q3 — binding via Pearl_Conductor autonomous wave)
+
+Operator decisions (verbatim lock):
+
+- **Q1 = approve** — M1-M5 freebie type set approved as proposed (5 types per spec §6).
+- **Q2 = minimal** — funnel delta minimized; no new funnel stages introduced.
+- **Q3 = phased** — Phase 1 = templates + inventory (P0); Phase 2 = funnel wiring (gated on Phase 1 closure).
+
+1. **M1-M5 lock (Q1):** the 5 freebie types listed in spec §6 are ratified as-is. Anti-drift: any agent adding M6 or altering M1-M5 scope MUST request a separate AMENDMENT.
+
+2. **Funnel posture (Q2):** Funnel arch unchanged. Music-mode freebies extend the type taxonomy without new stages. Anti-drift: no new music-specific funnel stages without separate AMENDMENT.
+
+3. **Phasing (Q3):** Phase 1 = template authoring (M1-M5) + inventory audit. Phase 2 = funnel wiring (gated on Phase 1 closure). Anti-drift: do NOT begin funnel-wiring ws until template authoring ws closes.
+
+4. **Status transitions:**
+   - Cap MUSIC-MODE-FREEBIE-FUNNEL-V1-02: proposed → active
+   - PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1: proposed → active
+   - ws_music_brand_freebie_funnel_followup_cap_20260509: in_progress → completed
+   - ws_music_freebie_inventory_audit_20260509: → runnable (Phase 1 P0)
+   - ws_music_freebie_template_authoring_20260509: → runnable (Phase 1 P0)
+   - ws_music_freebie_funnel_wiring_20260509: → blocked_on_phase_1 (Phase 2)
+
+5. **Authorization:** Pearl_Conductor 2026-05-09 autonomous wave (operator pre-approved).
 
 ### TEACHER-MANGA-30S-VIDEO-V1-01 — 12 teacher × manga 30-second video deliverables (**active**); adi_da deferred V1.1 (ratified 2026-05-08)
 
