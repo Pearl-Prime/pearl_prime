@@ -28,6 +28,25 @@ High-confidence filter:
   Rows with default-0.5 scoring on either dimension are emitted with
   readiness_status=blocked_score and blockers=needs_score (per dev brief).
 
+Structural variation axes (FEATURE-KNOB-CATALOG-VARIATION-V1-01 P0-1):
+  Each row carries the canonical variation tuple consumed by
+  ``phoenix_v4/planning/variation_selector.py`` so the catalog reflects
+  what ``run_pipeline`` will actually execute:
+
+    - ``angle_id``           — declared in ``config/angles/angle_registry.yaml`` (`angles:` keys)
+    - ``motif_id``           — declared in ``config/source_of_truth/recurring_motif_bank.yaml``
+    - ``book_structure_id``  — declared in ``config/source_of_truth/book_structure_archetypes.yaml``
+    - ``journey_shape_id``   — declared in ``config/source_of_truth/journey_shapes.yaml``
+    - ``variation_signature``— deterministic short SHA256 over the canonical tuple
+                               (see ``phoenix_v4/planning/schema_v4.compute_variation_signature``)
+
+  Selection is deterministic via the same SSOT-driven path as the runtime
+  pipeline. ``angle_id`` resolves through ``catalog_planner_resolution.topic_angle_map``
+  when declared (P0-2 SSOT); for topics not yet listed in the map, a deterministic
+  SHA256 over (topic|persona) selects from the registry-declared angle keys so
+  every row carries a registry-valid ``angle_id`` without mutating the
+  registry (any new mapping requires AMENDMENT per cap entry).
+
 Usage:
   python3 scripts/catalog/generate_pearl_prime_book_script_catalog.py \\
     --locales en_US,ja_JP,zh_TW,zh_CN \\
@@ -66,6 +85,16 @@ DEFAULT_RUNTIME_FORMAT = "standard_book"
 DEFAULT_DURATION_BAND = "standard"  # 12ch x ~6kw/ch nominal
 SCORE_THRESHOLD_STRONG = 0.70  # per teacher_topic_persona_scores.yaml score_bands
 
+# Pearl Prime nominal chapter count for structural variation selection. The
+# 12x10x5 lock (chapters x sections x variants) drives this; ``select_variation_knobs``
+# uses the chapter count to gate journey_shape candidates by ``chapter_count_range``.
+PEARL_PRIME_CHAPTER_COUNT = 12
+
+# FEATURE-KNOB-CATALOG-VARIATION-V1-01 P0-1: deterministic seed shared with the
+# runtime pipeline so each catalog row's variation signature matches what the
+# Stage-2 selector will compute when ``run_pipeline`` consumes the same row.
+VARIATION_SEED_PREFIX = "pearl_prime_catalog_v1"
+
 # Locale → market_id in market_catalog_registry.yaml
 LOCALE_TO_MARKET = {
     "en_US": "us",
@@ -74,7 +103,11 @@ LOCALE_TO_MARKET = {
     "zh_CN": "china",
 }
 
-# Pearl Prime catalog row column order — exact spec from dev brief
+# Pearl Prime catalog row column order — exact spec from dev brief.
+# Columns 1–23 are positionally locked (downstream consumers may rely on
+# positional access). Columns 24–28 are the structural variation axes added
+# under FEATURE-KNOB-CATALOG-VARIATION-V1-01 P0-1 (appended, not interleaved,
+# so positional readers of the original schema keep working).
 COLUMNS = [
     "locale",
     "market",
@@ -99,6 +132,12 @@ COLUMNS = [
     "output_target_path",
     "notes",
     "blockers",
+    # P0-1 structural variation axes (appended, positionally locked here):
+    "angle_id",
+    "motif_id",
+    "book_structure_id",
+    "journey_shape_id",
+    "variation_signature",
 ]
 
 
@@ -131,9 +170,110 @@ def load_all_inputs() -> dict:
         "locale_brand_names": "config/catalog_planning/locale_brand_names.yaml",
         "format_registry":   "config/format_selection/format_registry.yaml",
         "canonical_genres":  "config/manga/canonical_genre_list.yaml",
+        # FEATURE-KNOB-CATALOG-VARIATION-V1-01 P0-1: variation axis registries.
+        "angle_registry":    "config/angles/angle_registry.yaml",
+        "motif_bank":        "config/source_of_truth/recurring_motif_bank.yaml",
+        "book_structures":   "config/source_of_truth/book_structure_archetypes.yaml",
+        "journey_shapes":    "config/source_of_truth/journey_shapes.yaml",
     }
     return {k: {"data": _load_yaml(v), "sha256": _sha256(v), "path": v}
             for k, v in sources.items()}
+
+
+# ── Structural variation axes (P0-1) ────────────────────────────────────────
+# Deterministic per-row selection of the 4 ratified axes
+# (angle_id, motif_id, book_structure_id, journey_shape_id) plus a stable
+# signature, using the same SSOT-driven path as the runtime pipeline.
+
+def resolve_angle_id(angle_registry: dict, topic: str, persona: str,
+                     brand: str, locale: str) -> tuple[str, str]:
+    """
+    Returns (angle_id, source_tag).
+
+    1. Use ``catalog_planner_resolution.topic_angle_map`` (P0-2 SSOT) when the
+       topic is mapped AND the resulting angle_id is declared under ``angles:``.
+    2. Otherwise deterministically pick one of the registry-declared angle keys
+       via SHA256 over (locale|brand|topic|persona). The cap entry's anti-drift
+       rule forbids adding new mappings to the registry in this PR — any new
+       topic→angle mapping requires AMENDMENT.
+
+    Either path returns an angle_id that is a valid key under ``angles:`` so
+    the value round-trips through ``CatalogPlanner._validate_catalog_angle_id``.
+    """
+    angles_root = (angle_registry.get("angles") or {})
+    declared = sorted(angles_root.keys())
+    if not declared:
+        # Should never happen — registry is governance-locked. Fail loud.
+        raise RuntimeError(
+            "config/angles/angle_registry.yaml::angles is empty; cannot serialize angle_id"
+        )
+
+    res_block = (angle_registry.get("catalog_planner_resolution") or {})
+    topic_map = (res_block.get("topic_angle_map") or {})
+    mapped = topic_map.get(topic)
+    if mapped and mapped in angles_root:
+        return (str(mapped), "topic_angle_map")
+
+    seed = f"{locale}|{brand}|{topic}|{persona}".encode("utf-8")
+    idx = int(hashlib.sha256(seed).hexdigest(), 16) % len(declared)
+    return (declared[idx], "deterministic_topic_persona_hash")
+
+
+def select_variation_axes(angle_registry: dict, topic: str, persona: str,
+                          brand: str, locale: str, teacher_id: str
+                          ) -> tuple[dict, str]:
+    """
+    Returns ({angle_id, motif_id, book_structure_id, journey_shape_id, variation_signature},
+             angle_source_tag).
+
+    Uses ``phoenix_v4.planning.variation_selector.select_variation_knobs`` as
+    the canonical SSOT-driven selector so each catalog row's variation tuple
+    matches what ``run_pipeline`` will compute for the same (topic, persona,
+    angle, seed). The stable signature is the existing
+    ``compute_variation_signature`` (32-char hex SHA256 prefix over the
+    canonical variation tuple).
+    """
+    # Late import: keep module importable in environments where phoenix_v4 is
+    # not on the Python path (the generator already requires repo root on
+    # sys.path via ``REPO_ROOT`` to resolve config/, but we add it explicitly
+    # here so the import works regardless of caller cwd).
+    if str(REPO_ROOT) not in sys.path:
+        sys.path.insert(0, str(REPO_ROOT))
+    from phoenix_v4.planning.variation_selector import select_variation_knobs  # type: ignore
+
+    angle_id, source_tag = resolve_angle_id(
+        angle_registry, topic, persona, brand, locale)
+
+    # Per-row deterministic seed: stable across runs for identical inputs but
+    # distinct across (locale, brand, teacher, topic, persona) combos so
+    # adjacent rows don't collide on the same variation knob tuple.
+    seed = (
+        f"{VARIATION_SEED_PREFIX}|{locale}|{brand}|{teacher_id}|"
+        f"{topic}|{persona}|{angle_id}"
+    )
+
+    knobs = select_variation_knobs(
+        topic_id=topic,
+        persona_id=persona,
+        chapter_count=PEARL_PRIME_CHAPTER_COUNT,
+        seed=seed,
+        angle_id=angle_id,
+        arc_id="",
+        installment_number=None,
+        wave_index=None,           # no anti-cluster across the whole catalog (audit P0-1 scope)
+        config_root=None,          # use phoenix_v4 default config_root
+        arc_tags=None,
+        platform_id=None,          # platform_knob_tuning is P1, not P0-1
+    )
+
+    axes = {
+        "angle_id": angle_id,
+        "motif_id": knobs["motif_id"],
+        "book_structure_id": knobs["book_structure_id"],
+        "journey_shape_id": knobs["journey_shape_id"],
+        "variation_signature": knobs["variation_signature"],
+    }
+    return (axes, source_tag)
 
 
 # ── Brand → teacher resolution ──────────────────────────────────────────────
@@ -386,6 +526,7 @@ def build_rows_for_locale(locale: str, inputs: dict,
     brand_ids = market.get("brands") or []
 
     catalog_config = inputs["catalog_config"]["data"]
+    angle_registry = inputs["angle_registry"]["data"] or {}
     topics = inputs["topics"]["data"].get("topics") or []
     personas = inputs["personas"]["data"].get("personas") or []
     # Restrict topics + personas to the active set declared in catalog_generation_config
@@ -413,7 +554,8 @@ def build_rows_for_locale(locale: str, inputs: dict,
                                  locale, DEFAULT_RUNTIME_FORMAT):
                         continue
                     rows.append(_blocked_brand_row(
-                        locale, market_id, brand, topic, persona, locale_names))
+                        locale, market_id, brand, topic, persona, locale_names,
+                        angle_registry))
                     status_counts["blocked_teacher"] = status_counts.get(
                         "blocked_teacher", 0) + 1
             continue
@@ -438,7 +580,7 @@ def build_rows_for_locale(locale: str, inputs: dict,
                     rows.append(_row(
                         locale, market_id, brand, teacher_id, teacher_mode,
                         topic, persona, comp,
-                        catalog_config, locale_names,
+                        catalog_config, locale_names, angle_registry,
                         readiness="blocked_score",
                         blockers="needs_score",
                         notes=(
@@ -459,7 +601,7 @@ def build_rows_for_locale(locale: str, inputs: dict,
                 rows.append(_row(
                     locale, market_id, brand, teacher_id, teacher_mode,
                     topic, persona, comp,
-                    catalog_config, locale_names,
+                    catalog_config, locale_names, angle_registry,
                     readiness="ready",
                     blockers="",
                     notes=f"composite={comp:.2f}",
@@ -472,6 +614,7 @@ def build_rows_for_locale(locale: str, inputs: dict,
 def _row(locale: str, market_id: str, brand: str, teacher_id: str,
          teacher_mode: bool, topic: str, persona: str, composite: float,
          catalog_config: dict, locale_names: dict[str, str],
+         angle_registry: dict,
          readiness: str, blockers: str, notes: str) -> dict:
     title, subtitle, title_note = pick_title_subtitle(
         catalog_config, topic, persona, locale, brand,
@@ -483,6 +626,12 @@ def _row(locale: str, market_id: str, brand: str, teacher_id: str,
         # Title synthesis missing is a soft block — surface it but keep readiness ready
         # only if other gates pass; mark notes.
         pass
+
+    axes, angle_source = select_variation_axes(
+        angle_registry, topic, persona, brand, locale, teacher_id)
+    if angle_source != "topic_angle_map":
+        extra_notes = "; ".join(
+            x for x in (extra_notes, f"angle_source={angle_source}") if x)
 
     return {
         "locale": locale,
@@ -508,12 +657,24 @@ def _row(locale: str, market_id: str, brand: str, teacher_id: str,
         "output_target_path": output_target_path(locale, brand, topic, persona, teacher_id),
         "notes": extra_notes,
         "blockers": blockers,
+        # P0-1 structural variation axes:
+        "angle_id": axes["angle_id"],
+        "motif_id": axes["motif_id"],
+        "book_structure_id": axes["book_structure_id"],
+        "journey_shape_id": axes["journey_shape_id"],
+        "variation_signature": axes["variation_signature"],
     }
 
 
 def _blocked_brand_row(locale: str, market_id: str, brand: str,
                        topic: str, persona: str,
-                       locale_names: dict[str, str]) -> dict:
+                       locale_names: dict[str, str],
+                       angle_registry: dict) -> dict:
+    # Even teacher-blocked rows carry registry-valid variation axes so
+    # downstream readers can plan around them. Use the empty-string teacher_id
+    # as the seed component to keep determinism explicit.
+    axes, _ = select_variation_axes(
+        angle_registry, topic, persona, brand, locale, teacher_id="")
     return {
         "locale": locale,
         "market": market_id,
@@ -538,6 +699,12 @@ def _blocked_brand_row(locale: str, market_id: str, brand: str,
         "output_target_path": "",
         "notes": "no teacher mapping resolved for this brand",
         "blockers": "needs_teacher_mapping",
+        # P0-1 structural variation axes:
+        "angle_id": axes["angle_id"],
+        "motif_id": axes["motif_id"],
+        "book_structure_id": axes["book_structure_id"],
+        "journey_shape_id": axes["journey_shape_id"],
+        "variation_signature": axes["variation_signature"],
     }
 
 
