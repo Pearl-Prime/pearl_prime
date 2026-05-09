@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import re
 from dataclasses import dataclass
 from enum import Enum
@@ -28,7 +29,18 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 CONFIG_CATALOG = REPO_ROOT / "config" / "catalog_planning"
 CONFIG_LOCALIZATION = REPO_ROOT / "config" / "localization"
 CONFIG_AUTHORING = REPO_ROOT / "config" / "authoring"
+CONFIG_ANGLES = REPO_ROOT / "config" / "angles"
 RENDER_LOCATION_PROFILES = CONFIG_LOCALIZATION / "render_location_profiles.yaml"
+
+_LOG = logging.getLogger(__name__)
+
+
+class AngleResolutionError(RuntimeError):
+    """Raised when ``angle_strict=True`` and neither registry nor series heuristics yield an angle."""
+
+
+def _angle_registry_default_path() -> Path:
+    return CONFIG_ANGLES / "angle_registry.yaml"
 
 
 def _normalize_location_key(value: Optional[str]) -> str:
@@ -251,6 +263,7 @@ class CatalogPlanner:
         locale_registry_path: Optional[Path] = None,
         author_registry_path: Optional[Path] = None,
         positioning_profiles_path: Optional[Path] = None,
+        angle_registry_path: Optional[Path] = None,
     ):
         domain_path = domain_path or (CONFIG_CATALOG / "domain_definitions.yaml")
         series_path = series_path or (CONFIG_CATALOG / "series_templates.yaml")
@@ -270,6 +283,9 @@ class CatalogPlanner:
         self._positioning_profiles_path = positioning_profiles_path
         self._author_registry: Optional[dict] = None
         self._positioning_profiles: Optional[dict] = None
+        self._angle_registry_path = angle_registry_path or _angle_registry_default_path()
+        self._angle_registry_data: Optional[dict] = None
+        self._last_angle_resolution_meta: dict[str, Any] = {}
 
     @staticmethod
     def _load_yaml(p: Path) -> dict:
@@ -295,6 +311,16 @@ class CatalogPlanner:
             return self._positioning_profiles
         self._positioning_profiles = self._load_yaml(self._positioning_profiles_path)
         return self._positioning_profiles
+
+    def _load_angle_registry(self) -> dict:
+        if self._angle_registry_data is not None:
+            return self._angle_registry_data
+        self._angle_registry_data = self._load_yaml(self._angle_registry_path)
+        return self._angle_registry_data
+
+    def last_angle_resolution_meta(self) -> dict[str, Any]:
+        """Metadata from the most recent ``_derive_angle`` call (empty if derive was not used)."""
+        return dict(self._last_angle_resolution_meta)
 
     def _resolve_author_positioning(
         self,
@@ -352,8 +378,12 @@ class CatalogPlanner:
         narrator_id: Optional[str] = None,
         atoms_model: Optional[AtomsModel] = None,
         trend_score_path: Optional[Path] = None,
+        angle_strict: bool = False,
     ) -> BookSpec:
         """Produce one BookSpec. Required: topic_id, persona_id.
+
+        angle_strict: when True, missing registry + series angle resolution raises
+            ``AngleResolutionError`` instead of ``{topic_id}_general`` fallback.
 
         atoms_model: optional; caller sets (e.g. from legacy_personas). Planner does not infer.
         locale resolution: 1) caller-supplied 2) brand_registry[brand_id].locale 3) en-US.
@@ -369,6 +399,7 @@ class CatalogPlanner:
         """
         if not topic_id or not persona_id:
             raise ValueError("BookSpec requires topic_id and persona_id")
+        self._last_angle_resolution_meta = {}
         positioning = self._resolve_author_positioning(author_id, brand_id, author_positioning_profile)
         trend_payload = load_structured_trend_score(trend_score_path) if trend_score_path else None
         trend_heat = trend_heat_for_topic_id(topic_id, trend_payload)
@@ -411,7 +442,7 @@ class CatalogPlanner:
 
         # Path 3: Derive angle from topic + persona when series absent
         if not angle_id:
-            angle_id = self._derive_angle(topic_id, persona_id, series_cfg)
+            angle_id = self._derive_angle(topic_id, persona_id, series_cfg, strict=angle_strict)
 
         if not domain_id:
             domain_id = self._topic_to_domain(topic_id)
@@ -443,15 +474,48 @@ class CatalogPlanner:
         topic_id: str,
         persona_id: str,
         series_cfg: dict,
+        *,
+        strict: bool = False,
     ) -> str:
-        """Derive a real angle from topic_id + persona_id.
+        """Derive angle_id using ``config/angles/angle_registry.yaml`` SSOT, then series heuristics.
 
-        Strategy:
-        1. Find series in config whose domain maps to this topic_id.
-        2. Among those, prefer series with persona_affinity.high containing persona_id.
-        3. Return first angle from the best-matched series.
-        4. If nothing matches, return topic_id + "_general" (still better than "default_angle").
+        Order (FEATURE-KNOB-CATALOG-VARIATION-V1-01 P0-2):
+        1. ``catalog_planner_resolution.topic_angle_map`` → angle must exist under ``angles:``.
+        2. Legacy series/domain/persona_affinity heuristic (unchanged).
+        3. If still unresolved: ``{topic_id}_general`` unless ``strict`` is True (then raise).
+
+        Side effect: ``self._last_angle_resolution_meta`` documents the winning path.
         """
+        meta: dict[str, Any] = {
+            "source": None,
+            "registry_hit": False,
+            "registry_angle_id": None,
+            "series_heuristic_used": False,
+            "heuristic_general_fallback": False,
+            "angle_id": None,
+        }
+
+        reg = self._load_angle_registry()
+        angles_root = reg.get("angles") or {}
+        res_block = reg.get("catalog_planner_resolution") or {}
+        topic_map = res_block.get("topic_angle_map") or {}
+        mapped = topic_map.get(topic_id)
+        if mapped is not None:
+            aid = str(mapped)
+            if aid in angles_root:
+                meta["registry_hit"] = True
+                meta["registry_angle_id"] = aid
+                meta["source"] = "angle_registry.topic_angle_map"
+                meta["angle_id"] = aid
+                self._last_angle_resolution_meta = meta
+                return aid
+            _LOG.warning(
+                "catalog angle registry: topic_angle_map maps topic_id=%r to angle_id=%r "
+                "but that angle_id is not declared under angles: — treating as registry miss",
+                topic_id,
+                mapped,
+            )
+
         topic_to_domain = {
             "relationship_anxiety": "anxiety_cluster",
             "grief": "grief_cluster",
@@ -490,9 +554,35 @@ class CatalogPlanner:
         if best_series:
             angles = best_series.get("angles") or []
             if angles:
-                return angles[0]
+                chosen = angles[0]
+                meta["series_heuristic_used"] = True
+                meta["source"] = "series_template_domain_persona"
+                meta["angle_id"] = chosen
+                self._last_angle_resolution_meta = meta
+                return chosen
 
-        return f"{topic_id}_general"
+        if strict:
+            meta["source"] = "unresolved_strict"
+            self._last_angle_resolution_meta = meta
+            raise AngleResolutionError(
+                f"No angle for topic_id={topic_id!r}: registry miss, no series heuristic match, "
+                "and angle_strict=True (no topic_general fallback)."
+            )
+
+        fallback = f"{topic_id}_general"
+        meta["heuristic_general_fallback"] = True
+        meta["source"] = "topic_general_fallback"
+        meta["angle_id"] = fallback
+        self._last_angle_resolution_meta = meta
+        _LOG.warning(
+            "catalog angle: registry + series miss for topic_id=%r persona_id=%r — "
+            "using heuristic fallback %r (declare topic in catalog_planner_resolution.topic_angle_map "
+            "or supply series angles to avoid this)",
+            topic_id,
+            persona_id,
+            fallback,
+        )
+        return fallback
 
     def _topic_to_domain(self, topic_id: str) -> str:
         """Map topic_id to domain_id. Inverse of _domain_to_topic."""

@@ -27,3 +27,15 @@ angles:
     chapter_1_role_bias: recognition
     integration_reinforcement_type: mechanism_focus
     framing_mode: leverage
+
+# ── CatalogPlanner SSOT (FEATURE-KNOB-CATALOG-VARIATION-V1-01 P0-2) ───────────
+# Maps catalog topic_id → angle_id declared under ``angles:`` above.
+# CatalogPlanner consults this before series-domain heuristics; unmatched topics
+# fall back to ``{topic_id}_general`` unless angle_strict=True on produce_single().
+catalog_planner_resolution:
+  version: 1
+  topic_angle_map:
+    relationship_anxiety: HIDDEN_TRUTH
+    grief: WRONG_PROBLEM
+    shame: ONE_LEVER
+    self_worth: MAP_PROMISE
