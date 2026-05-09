@@ -1054,9 +1054,9 @@ Operator decisions (**all defaults accepted**):
      - **e.** `ws_music_brand_wizard_live_embed_routing_20260509` → **Pearl_Dev**
      - **f.** `ws_music_brand_freebie_funnel_followup_cap_20260509` → **Pearl_Architect** (authors separate cap **MUSIC-MODE-FREEBIE-FUNNEL-V1-02**)
 
-### MUSIC-MODE-FREEBIE-FUNNEL-V1-02 — Music mode brand freebies + funnel (additive; **active** 2026-05-09; Q1–Q3 ratified)
+### MUSIC-MODE-FREEBIE-FUNNEL-V1-02 — Music mode brand freebies + funnel (additive; proposed 2026-05-09; pending operator decision card)
 
-**Status:** **active** — operator answers to Q1–Q3 captured in [`docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md` §16 — Operator answers (recorded 2026-05-09)](./specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md) and the AMENDMENT below; child project **`PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`**: **`proposed` → `active`** in `artifacts/coordination/ACTIVE_PROJECTS.tsv`; child workstreams advanced per the AMENDMENT below. Doc-only AMENDMENT — no code, no UI, no authored freebie assets in this PR. Normative inventory and deltas live in [`docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md`](./specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md).
+**Status:** **proposed** — doc-only cap + spec + coordination; **no** code, **no** UI, **no** authored freebie assets in this PR. Normative inventory and deltas live in [`docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md`](./specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md).
 
 **Context:** Operator framing from `MUSIC-MODE-BRAND-INTEGRATION-V1-01` action item **f** / `ws_music_brand_freebie_funnel_followup_cap_20260509`: *the funnel and freebies we create should also have considerations for music mode* — companion songs as freebies, music previews, sample EPs, lyric videos, etc. This cap **does not** amend `MUSIC-MODE-BRAND-INTEGRATION-V1-01`; it **spins** the deferred freebie/funnel scope into its own program under **`PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`**.
 
@@ -1076,7 +1076,7 @@ Operator decisions (**all defaults accepted**):
 
 6. **ACTION ITEMS (named sub-workstreams — not authored here).** `ws_music_freebie_inventory_audit_20260509` (Pearl_Marketing); `ws_music_freebie_template_authoring_20260509` (Pearl_Marketing); `ws_music_freebie_funnel_wiring_20260509` (Pearl_Dev). Opened under **`PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`** in `ACTIVE_WORKSTREAMS.tsv`.
 
-7. **STATUS.** **`active`** — operator **Q1–Q3** answered 2026-05-09 (defaults via Pearl_Conductor autonomous wave; binding). See AMENDMENT block below for verbatim lock + status transitions.
+7. **STATUS.** **`proposed`** pending operator **Q1–Q3** in `docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md` §16 (decision card). Pearl_Architect amendment flips to **active** when answers land.
 
 **Operator decision card (verbatim — answer in spec §16):** see spec **§16 Q1–Q3** (freebie-type set approval; funnel delta breadth; implementation phasing).
 
@@ -1085,30 +1085,6 @@ Operator decisions (**all defaults accepted**):
 **Handoffs:** **Pearl_PM** — child ws statuses after operator Q-card. **Pearl_Marketing** — inventory + template authoring. **Pearl_Dev** — pipeline wiring to YAML SSOT. **Pearl_Architect** — amendment after Q1–Q3.
 
 **Pointers:** `docs/specs/MUSIC_MODE_FREEBIE_FUNNEL_V1_SPEC.md`; `artifacts/coordination/ACTIVE_PROJECTS.tsv` (`PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`; `ws_music_brand_freebie_funnel_followup_cap_20260509` (action item **f** — row marked **completed** after PR #979 lands; follow-up work under `PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1`).
-
-#### MUSIC-MODE-FREEBIE-FUNNEL-V1-02 — AMENDMENT — 2026-05-09 (operator Q1-Q3 — binding via Pearl_Conductor autonomous wave)
-
-Operator decisions (verbatim lock):
-
-- **Q1 = approve** — M1-M5 freebie type set approved as proposed (5 types per spec §6).
-- **Q2 = minimal** — funnel delta minimized; no new funnel stages introduced.
-- **Q3 = phased** — Phase 1 = templates + inventory (P0); Phase 2 = funnel wiring (gated on Phase 1 closure).
-
-1. **M1-M5 lock (Q1):** the 5 freebie types listed in spec §6 are ratified as-is. Anti-drift: any agent adding M6 or altering M1-M5 scope MUST request a separate AMENDMENT.
-
-2. **Funnel posture (Q2):** Funnel arch unchanged. Music-mode freebies extend the type taxonomy without new stages. Anti-drift: no new music-specific funnel stages without separate AMENDMENT.
-
-3. **Phasing (Q3):** Phase 1 = template authoring (M1-M5) + inventory audit. Phase 2 = funnel wiring (gated on Phase 1 closure). Anti-drift: do NOT begin funnel-wiring ws until template authoring ws closes.
-
-4. **Status transitions:**
-   - Cap MUSIC-MODE-FREEBIE-FUNNEL-V1-02: proposed → active
-   - PRJ-MUSIC-MODE-FREEBIE-FUNNEL-V1: proposed → active
-   - ws_music_brand_freebie_funnel_followup_cap_20260509: in_progress → completed
-   - ws_music_freebie_inventory_audit_20260509: → runnable (Phase 1 P0)
-   - ws_music_freebie_template_authoring_20260509: → runnable (Phase 1 P0)
-   - ws_music_freebie_funnel_wiring_20260509: → blocked_on_phase_1 (Phase 2)
-
-5. **Authorization:** Pearl_Conductor 2026-05-09 autonomous wave (operator pre-approved).
 
 ### TEACHER-MANGA-30S-VIDEO-V1-01 — 12 teacher × manga 30-second video deliverables (**active**); adi_da deferred V1.1 (ratified 2026-05-08)
 
@@ -1277,3 +1253,89 @@ overlay_param:
 - Pearl_Dev → `ws_per_chapter_overlay_enforcement_impl_20260508` (Phase 1) → trigger = this cap-entry PR merged.
 - Pearl_PM → update `ws_per_chapter_overlay_enforcement_impl_20260508` status through Phase 2 and Phase 3 → trigger = Phase 1 merged.
 - Pearl_Architect → no follow-up routing needed; spec is self-contained; reopen only if a new structural rule type is proposed.
+
+
+### IMG-RENDER-DUAL-PATH-V1-01 — Dual-path image generation: Pearl Star (Tier 2, free, canonical) + RunComfy ($10/month soft cap) + locale-first queue (ratified operator Q-IMG-1/2/3, 2026-05-09)
+
+**Status:** **active** (operator authorization; OPERATOR DECISION CARD: NONE — binding immediately).
+
+**PROJECT_ID:** `PRJ-DUAL-PATH-IMAGE-RENDER-V1`.  
+**Subsystem:** `integrations` (primary RunComfy wiring); `manga_pipeline`; `brand_admin`; cross-cutting.  
+**Spec:** [`docs/specs/IMG_RENDER_DUAL_PATH_V1_SPEC.md`](./specs/IMG_RENDER_DUAL_PATH_V1_SPEC.md).
+
+**Authority / cross-links (do not supersede Arc-First; supplement catalog + integrations posture):**
+
+- WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 and MANGA-LAYERED-PIPELINE-V2-01 anchors in `docs/PEARL_ARCHITECT_STATE.md` (existing caps).
+- `docs/INTEGRATION_CREDENTIALS_REGISTRY.md` — credential prose (RunComfy token staged per operator; Pearl_Int wiring extends registry in a separate workstream — **unchanged here**).
+- `skills/pearl-int/references/manga_render_path_decision.md` — Pearl Star remains **Path A canonical** post-#921/#922; RunComfy was video_bank-scope historically; **this cap expands RunComfy to parallel image renders** without demoting Pearl Star.
+- [`artifacts/qa/parallel_image_generation_plan_2026-05-09.md`](../artifacts/qa/parallel_image_generation_plan_2026-05-09.md) (PR #988) — default **within-locale asset-type ordering**.
+- [`CLAUDE.md`](../CLAUDE.md) Tier 1 vs Tier 2 policy — Pearl Star = Tier 2 unattended; repo remains BANNED on paid cloud LLM keys in Tier-2 pipelines per existing enforcement.
+
+**Operator decisions (verbatim lock):**
+
+| ID | Decision |
+|----|-----------|
+| **Q-IMG-1** | **Locale-first queue:** prioritize `ja_JP`, `zh_TW`, `zh_CN` for brands that already have `en_US` assets (~18 brands × 3 missing locales = **54 brand-locale cells**) **before** zero-asset brand fills. |
+| **Q-IMG-2** | **Within-cell asset ordering** follows **`parallel_image_generation_plan_2026-05-09.md` default** (PR #988; operator-approved). |
+| **Q-IMG-3** | **Pearl Star has NO monthly spend cap.** Run unattended until drained or operator pauses. |
+| **RunComfy budget** | **$10/month soft cap** after free-tier credits exhausted; Pearl Star unaffected. |
+
+**1. Scope (summary)** — Dual-path image generation consumes the **same** ComfyUI-style workflow JSON templates (Animagine, FLUX, Qwen-Image, etc.). **Pearl Star** is the primary/canonical Tier-2 unattended path.**RunComfy** adds parallel paid capacity + locale-variant overflow. Renderer choice is environment-agnostic; divergence in workflow JSON bodies between paths is **forbidden** (see spec §7).
+
+**2. Priority queue (Q-IMG-1 + Q-IMG-2)**
+
+1. Locales **`ja_JP`, `zh_TW`, `zh_CN`** for brands with existing **`en_US`** coverage (54 cells framing).
+2. Then **`en_US`** for **19 zero-asset brands**, only **after** the 18-brand locale-parity cohort reaches **≥80%** of its target asset-count threshold.
+3. Then **non-`en_US`** fills for those zero-asset brands (final wave).
+4. Within each brand-locale cell, **asset-type order** = PR #988 plan default (**Q-IMG-2**).
+
+**3. Pearl Star path — Tier 2**
+
+- Free; 24/7 unattended; single-GPU sequential per session (throughput posture per infra reality).
+- **CosyVoice2 resident ~2.9 GiB** — image sessions must reserve headroom accordingly.
+- **~19.3 days** wall-time estimate at saturated utilization for **100,605** images per PR #988 inventory framing (ordering does not change the count — **planning fidelity** datum only).
+- **No monthly operator spend cap** — **Q-IMG-3**.
+
+**4. RunComfy path — paid soft cap**
+
+- Token: **`phoenix-omega` / `RUNCOMFY_API_TOKEN`** macOS Keychain generic-password (operator staged via `security add-generic-password` — Pearl_Int verifies read path only once wiring executes).
+- **Free tier consumes first.** Soft cap (**$10/mo billed**) binds only on **metered/on-bill RunComfy spend after free exhaustion** (Pearl_Int normalizes semantics against actual vendor statements — see spec §4).
+- **Soft-cap behavior:** at **$8 (80%)** → Pearl_Int emits **budget alert** (Slack/email/log per wiring); at **$10 (100%)** → RunComfy path **`COOLDOWN`**: dispatch **paused** until next calendar-month rollover.**Pearl Star continues.**
+- **State file:** `artifacts/qa/runcomfy_monthly_spend.tsv` — columns **`date`** | **`dispatched_jobs_today`** | **`cumulative_month_spend_usd`** (append-only daily rows).
+
+**5. Workflow + LoRA gate**
+
+- Workflows authoritative under `scripts/image_generation/comfyui_workflows/` today; RunComfy must accept **those same JSONs** modulo environment validation (Pearl_Int audit ws).
+- **Civitai 6-flag commercial gate** applies **uniformly** (see `skills/pearl-int/references/integration_registry.md`). **Banned LoRAs (e.g. Rent-only)** are blocked on **both** paths.
+
+**6. Dispatch (Pearl_Dev — `ws_image_batch_generation_orchestration_20260509`)**
+
+- Builds batches from §2 ordering; **Pearl Star + RunComfy** receive **parallel** eligible batches whenever `cumulative_month_spend_usd < 10`; else RunComfy arm holds **cooldown**.
+- Telemetry: `artifacts/qa/image_batch_dispatch_log.tsv` — `timestamp`, `batch_id`, `brand`, `locale`, `asset_type`, `path` (`pearl_star`|`runcomfy`), **`spend_to_date_usd`**, `status`. Per-job **`wall_time`**, **`output_path`**, **`hash`** tracked in implementation artifacts (exact column extension allowed in Pearl_Dev PR — additive only vs this spec §6 skeleton).
+
+**7. Anti-drift**
+
+1. **`$10` RunComfy cap is constitutionally binding** absent operator **`AMENDMENT`** — no silent bypass branches.
+2. **Pearl Star canonical-ness** survives per `manga_render_path_decision.md` — RunComfy is **additive capacity**, never a replacement canon.
+3. **Identical workflow JSON** semantics across paths unless an **explicit AMENDMENT** cites vendor impossibility (then document divergence in Pearl_Int audit with operator sign-off).
+4. **Locale-first queue is binding.** **Brand-before-locale inversion** requires **AMENDMENT**.
+5. LoRA licensing gate uniformity across paths (**non-negotiable repeat**).
+
+**8. Prerequisites + action items**
+
+- **PREREQ:** Pearl_Int **Steps 3+4 — Animagine + Qwen-Image on Pearl Star** (operator-attended rollout in flight vs **PR #946** prep lineage).
+
+| Workstream ID | Owner | Scope |
+|---|---|---|
+| `ws_runcomfy_pearl_int_wiring_20260509` | Pearl_Int | Keychain-backed API client; [`scripts/image_generation/runcomfy_dispatch.py`](../scripts/image_generation/runcomfy_dispatch.py); daily billing probe → `artifacts/qa/runcomfy_monthly_spend.tsv`; $8/$10 cap machine. |
+| `ws_image_batch_generation_orchestration_20260509` | Pearl_Dev | Dual-path batch runner §6 — cost-aware parallelism + structured logs; queue reader §2. |
+| `ws_parallel_plan_locale_first_priority_update_20260509` | Pearl_PM | Update **only** [`artifacts/qa/parallel_image_generation_plan_2026-05-09.md`](../artifacts/qa/parallel_image_generation_plan_2026-05-09.md) for locale-first + RunComfy parallel annotations (**separate ws / PR — not here**). |
+| `ws_runcomfy_workflow_compatibility_audit_20260509` | Pearl_Int | Environment matrix vs Pearl Star workflows (nodes, loaders, LoRAs). |
+| `ws_runcomfy_cost_alert_dashboard_20260509` | Pearl_Brand | Exec/brand dashboard — monthly RunComfy spend panel + threshold surfacing (**80% yellow posture** mirrored from Pearl_Int alerting). |
+
+**Handoffs:**
+
+- **Pearl_Int:** RunComfy wiring + compatibility audit (`RUNCOMFY_API_TOKEN` **must exist in Keychain before dispatch test PRs merge** — operator confirms staging receipt).
+- **Pearl_Dev:** batch orchestrator with dual dispatcher + parity logging.
+- **Pearl_PM:** parallel plan doc reorder annotations (coordinate with #988 lineage).
+- **Pearl_Brand:** operational spend UX for operators reviewing soft-cap posture.
