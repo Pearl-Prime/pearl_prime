@@ -26,7 +26,18 @@ CONFIG_PATH = REPO_ROOT / "config" / "governance" / "required_checks.yaml"
 SCRIPTS_CI = REPO_ROOT / "scripts" / "ci"
 WORKFLOWS_DIR = REPO_ROOT / ".github" / "workflows"
 FORBIDDEN_FILES = (".github_token", "github_access_token.rtf")
-FORBIDDEN_PATTERNS = (re.compile(r"enforcement\s*:\s*[\"']disabled[\"']", re.I), re.compile(r"bypass_actors", re.I))
+# Script-level bypass indicators only. Do not match bare API field names like
+# bypass_actors (legitimate in ruleset readers, e.g. check_branch_protection_ruleset.py).
+FORBIDDEN_BYPASS_SCRIPT_PATTERNS = (
+    re.compile(r'enforcement\s*:\s*["\']disabled["\']', re.I),
+    re.compile(r'["\']bypass_mode["\']\s*:\s*["\']always["\']', re.I),
+    re.compile(r'\bbypass_mode\s*=\s*["\']always["\']', re.I),
+)
+
+
+def text_has_forbidden_bypass_logic(text: str) -> bool:
+    """True if *text* looks like code that weakens rulesets (not API field reads)."""
+    return any(p.search(text) for p in FORBIDDEN_BYPASS_SCRIPT_PATTERNS)
 
 
 def load_config() -> dict:
@@ -150,14 +161,10 @@ def check_no_bypass_scripts() -> bool:
             ok = False
         else:
             try:
-                if f.name == "verify_github_governance.py":
-                    continue
                 text = f.read_text()
-                for pat in FORBIDDEN_PATTERNS:
-                    if pat.search(text):
-                        print(f"  FAIL: Bypass logic in {f.name}")
-                        ok = False
-                        break
+                if text_has_forbidden_bypass_logic(text):
+                    print(f"  FAIL: Bypass logic in {f.name}")
+                    ok = False
             except Exception:
                 pass
     if ok:
