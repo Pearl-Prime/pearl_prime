@@ -129,6 +129,14 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 .brand-card h3{font-size:.82rem;font-weight:500;color:#f5d0a9;margin-bottom:3px}
 .brand-card .focus{font-size:.62rem;color:var(--dim);line-height:1.4}
 .brand-card .teacher-tag{font-family:var(--mono);font-size:.4rem;color:var(--acc2);border:1px solid var(--acc);padding:1px 6px;border-radius:3px;margin-top:5px;display:inline-block}
+.brand-card.inactive{opacity:.55}
+.brand-card.inactive:hover{opacity:.85}
+.brand-card .ab-pill{font-family:var(--mono);font-size:.4rem;letter-spacing:.05em;text-transform:uppercase;padding:1px 6px;border-radius:3px;margin-top:5px;margin-left:5px;display:inline-block}
+.brand-card .ab-pill.active{color:var(--green);border:1px solid rgba(74,222,128,.4);background:rgba(74,222,128,.08)}
+.brand-card .ab-pill.inactive{color:var(--red);border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.05)}
+.ab-counts-line{font-family:var(--mono);font-size:.5rem;color:var(--dim);letter-spacing:.05em;margin-bottom:14px}
+.ab-counts-line strong.active{color:var(--green)}
+.ab-counts-line strong.inactive{color:var(--red)}
 
 /* -- Celebration Overlay -- */
 #celebration{display:none;position:fixed;inset:0;z-index:200;background:rgba(14,10,6,.85);align-items:center;justify-content:center;flex-direction:column;gap:16px}
@@ -221,6 +229,61 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 </div>
 
 <script>
+// ── Active brand classifier consumer (WORLDWIDE-CATALOG-GO-LIVE-V1 P0 / surface 4) ──
+// Reads the active/inactive classifier snapshot shipped via PR #972 (commit 10ed203bd6):
+//   scripts/brand/active_brand_classifier.py + brand-wizard-app/brands/<id>.yaml SSOT.
+// Runtime contract mirrors `dashboard_classifier_endpoint.py --json` (PR #972 sibling).
+// Resolution order:
+//   1. ?ab_endpoint=<url>             -> live classifier (helper or static JSON file)
+//   2. window.__ACTIVE_BRAND_DASHBOARD_URL
+//   3. AB_SNAPSHOT inline default below (regenerable from classifier; ships all-inactive
+//      until brand-wizard-app/brands/<id>.yaml bundles land per ACTIVE_BRAND_SSOT_V1_SPEC).
+// Spec: docs/specs/ACTIVE_BRAND_SSOT_V1_SPEC.md
+// Pattern: docs/handoffs/BRAND_ADMIN_ACTIVE_CONSUMER_HANDOFF_2026-05-09.md
+const AB_SNAPSHOT={
+  schema_version:1,
+  generated_at:"2026-05-09",
+  source:"docs/specs/ACTIVE_BRAND_SSOT_V1_SPEC.md (Phase 1; brand-wizard-app/brands/*.yaml)",
+  brands:[] // {brand_id, status:"active"|"inactive", reason} -- empty until wizard YAML bundles land
+};
+// State: brand_id -> {active:bool, reason:string}
+let AB_STATUS={};
+function abEndpointUrl(){
+  try{
+    const q=new URLSearchParams(window.location.search).get('ab_endpoint');
+    if(q) return q;
+  }catch(e){}
+  if(typeof window.__ACTIVE_BRAND_DASHBOARD_URL==='string' && window.__ACTIVE_BRAND_DASHBOARD_URL)
+    return window.__ACTIVE_BRAND_DASHBOARD_URL;
+  return null;
+}
+function abApplySnapshot(snap){
+  AB_STATUS={};
+  if(snap && Array.isArray(snap.brands)){
+    snap.brands.forEach(function(b){
+      if(b && b.brand_id){
+        AB_STATUS[b.brand_id]={active:b.status==='active', reason:b.reason||''};
+      }
+    });
+  }
+}
+function abIsActive(bid){ const s=AB_STATUS[bid]; return !!(s && s.active); }
+function abReason(bid){ const s=AB_STATUS[bid]; return s?(s.reason||''):'no brand_wizard YAML found'; }
+function abLoadAndRefresh(){
+  // Apply inline snapshot first so the picker is never empty.
+  abApplySnapshot(AB_SNAPSHOT);
+  const url=abEndpointUrl();
+  if(!url) return;
+  fetch(url,{cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(data){
+      abApplySnapshot(data);
+      const pick=document.getElementById('picker');
+      if(pick && pick.classList.contains('show')) renderPicker();
+    })
+    .catch(function(){ /* keep inline snapshot */ });
+}
+
 // ── Brand Data (24 en_US) ──
 const B={
   inner_light_press_en_us:{d:"Inner Light Press",t:"Ahjan",tm:true,tr:"Contemplative / inner light",f:"Meditation, mindfulness, inner peace",tp:["anxiety","burnout","depression","self_worth","somatic_healing","mindfulness"]},
@@ -627,12 +690,25 @@ function renderPicker(){
   const el=document.getElementById('picker');
   el.classList.add('show');
   document.getElementById('main-wrap').style.display='none';
-  let h=`<h1>Brand Admin</h1><p class="sub">Select a brand to begin</p><div class="brand-grid">`;
-  for(const [bid,b] of Object.entries(B)){
-    h+=`<div class="brand-card" onclick="selectBrand('${bid}')">
+  // Gate visibility/ordering by active classifier (PR #972 SSOT). Active brands sort
+  // before inactive; both groups preserve declared order within their bucket.
+  const entries=Object.entries(B);
+  const active=entries.filter(function(e){ return abIsActive(e[0]); });
+  const inactive=entries.filter(function(e){ return !abIsActive(e[0]); });
+  const ordered=active.concat(inactive);
+  let h=`<h1>Brand Admin</h1><p class="sub">Select a brand to begin</p>`;
+  h+=`<div class="ab-counts-line">Catalog status: <strong class="active">${active.length} active</strong> &middot; <strong class="inactive">${inactive.length} inactive</strong> &middot; ${entries.length} total &mdash; source: brand_wizard YAML SSOT (PR #972)</div>`;
+  h+=`<div class="brand-grid">`;
+  for(const [bid,b] of ordered){
+    const isActive=abIsActive(bid);
+    const cls='brand-card'+(isActive?' active':' inactive');
+    const pillCls='ab-pill '+(isActive?'active':'inactive');
+    const pillTxt=isActive?'Active':'Inactive';
+    const titleAttr=isActive?'':' title="'+abReason(bid).replace(/"/g,'&quot;')+'"';
+    h+=`<div class="${cls}" onclick="selectBrand('${bid}')"${titleAttr}>
       <h3>${b.d}</h3>
       <div class="focus">${b.f}</div>
-      ${b.tm?`<span class="teacher-tag">${b.t}</span>`:''}
+      ${b.tm?`<span class="teacher-tag">${b.t}</span>`:''}<span class="${pillCls}">${pillTxt}</span>
     </div>`;
   }
   h+='</div>';
@@ -699,6 +775,8 @@ function initBrand(bid){
 }
 
 function init(){
+  // Apply active-brand classifier snapshot before first render so picker is gated immediately.
+  abLoadAndRefresh();
   const p=new URLSearchParams(window.location.search);
   const bid=p.get('brand');
   if(bid && B[bid]) initBrand(bid);
