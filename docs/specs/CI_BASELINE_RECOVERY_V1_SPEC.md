@@ -146,3 +146,15 @@ This document is **CAP + scoping only**. No remediation steps are authorized her
 **Recommended remediation (implementation PR, not this spec):** Extend **`requirements-test.txt`** with **`fastapi`** (minimal alignment; see proposed diff in `artifacts/qa/ci_recovery_phase_2_core_tests_diagnostic_2026-05-10.md`). **Workstream:** `ws_ci_recovery_phase_2_5_core_tests_brand_wizard_deps`. **Effort:** **S**.
 
 **Workflow env note:** `COVER_ART_GATE_MODE` is **not** set in `.github/workflows/*.yml`; default **warn** in `check_author_cover_art.py` remains sufficient **once pytest passes**. No workflow-only fix is indicated for cover_art for this failure mode.
+
+---
+
+## Phase 2.6 — TestClient dependency closure (deps; diagnostic 2026-05-10)
+
+**Problem anchor:** After Phase 2.5 added **`fastapi`** to **`requirements-test.txt`**, **Core tests** (`.github/workflows/core-tests.yml`) still failed on **`tests/test_server_health.py`** collection: **`starlette.testclient`** requires **`httpx`**, which was **not** installed by that workflow.
+
+**Why Phase 2.5 was incomplete:** **`fastapi`** alone does not install **`httpx`** in the minimal CI pin path; **`TestClient`** is the next import and fails without **`httpx`**.
+
+**Policy / sequencing (this spec):** Treat **Phase 2.6** as a small **test dependency closure** under the same recovery program — align **`requirements-test.txt`** (preferred) or **`core-tests.yml`** with the stack already implied by **`server-ci.yml`** (`pip install httpx`).
+
+**Documentation vs implementation:** Evidence and recommendation: **`artifacts/qa/ci_recovery_phase_2_6_diagnostic_2026-05-10.md`**. Implementation (add **`httpx`** to test requirements or workflow) is a **separate** code PR — not merged via this diagnostic-only lane.
