@@ -134,3 +134,15 @@ This document is **CAP + scoping only**. No remediation steps are authorized her
 **Workstream split:** **`ws_ci_recovery_core_tests_cover_art`** — umbrella Phase 2 lane (verification + handoff toward Release gates). **`ws_ci_recovery_phase_2_impl_20260510`** — concrete gate-relaxation implementation PR.
 
 **Implementation (code):** `scripts/ci/check_author_cover_art.py` — default **warn** (PR #1006 / §16 Q2); missing on-disk `cover_art_base` emits **`::warning::`** on stderr and exits **0**; **`COVER_ART_GATE_MODE=fail`** or **`--gate-mode fail`** restores strict fail-hard. Tests: `tests/ci/test_check_author_cover_art_warn_mode.py`. Operator smoke log: `artifacts/qa/ci_recovery_phase_2_cover_art_warn_impl_2026-05-10.md`.
+
+---
+
+## Phase 2.5 — Core tests pytest dependency gap (post-#1011 still-red; diagnosed 2026-05-10)
+
+**Evidence:** GitHub Actions run **25614516443** on `main` @ **`805f62947d01c29820860785b8abce9d6a5f2c61`** — workflow **Core tests**, step **Run fast/core pytest**, fails during collection with **`ModuleNotFoundError: No module named 'fastapi'`** importing `brand-wizard-app/server/music_survey_routes.py` from `tests/brand_wizard/test_music_survey_save_handler.py`.
+
+**Why Phase 2 did not green Core tests:** Phase 2 relaxed **Gate 18 (author cover art)** only. Core tests runs **pytest before** `scripts/run_production_readiness_gates.py`; the failure occurs **before** any cover_art gate executes.
+
+**Recommended remediation (implementation PR, not this spec):** Extend **`requirements-test.txt`** with **`fastapi`** (minimal alignment; see proposed diff in `artifacts/qa/ci_recovery_phase_2_core_tests_diagnostic_2026-05-10.md`). **Workstream:** `ws_ci_recovery_phase_2_5_core_tests_brand_wizard_deps`. **Effort:** **S**.
+
+**Workflow env note:** `COVER_ART_GATE_MODE` is **not** set in `.github/workflows/*.yml`; default **warn** in `check_author_cover_art.py` remains sufficient **once pytest passes**. No workflow-only fix is indicated for cover_art for this failure mode.
