@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Dual-path parallel image batch runner (Pearl Star + RunComfy).
 
-Scaffold: plan load, locale-first ordering, dry-run dispatch, RunComfy spend
-cooldown check, dispatch logging. Live API/SSH activation is intentionally
-blocked outside ``dry_run`` until follow-up wiring lands.
+Plan load, locale-first ordering, dry-run dispatch, RunComfy spend cooldown,
+optional **activation** (``--activate`` / ``--live``) for real Pearl Star
+(SSH + ComfyUI ``/prompt``) and RunComfy (``submit_inference`` overrides path).
 
 Project: PRJ-DUAL-PATH-IMAGE-RENDER-V1 (IMG-RENDER-DUAL-PATH-V1-01).
 """
@@ -16,7 +16,10 @@ import importlib.util
 import io
 import json
 import re
+import subprocess
 import sys
+import time
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
@@ -28,6 +31,126 @@ RUNCOMFY_SPEND_TSV = REPO_ROOT / "artifacts" / "qa" / "runcomfy_monthly_spend.ts
 DISPATCH_LOG_TSV = REPO_ROOT / "artifacts" / "qa" / "image_batch_dispatch_log.tsv"
 
 _COOLDOWN_USD = 10.0
+
+
+@dataclass
+class PearlStarModelState:
+    """Pearl Star ComfyUI model presence snapshot (from a read-only SSH probe)."""
+
+    flux_schnell_present: bool
+    animagine_xl_present: bool
+    qwen_unified_ckpt_present: bool
+    qwen_transformer_shard_count: int
+    probe_stdout: str
+
+
+def probe_pearl_star_models(ssh_host: str = "pearl_star", *, timeout_s: int = 90) -> PearlStarModelState | None:
+    """SSH to Pearl Star and list checkpoints / diffusion_models / transformer shards."""
+    remote = (
+        "echo __CK__; ls ~/phoenix_server/ComfyUI/models/checkpoints/*.safetensors 2>/dev/null || true; "
+        "echo __DM__; ls ~/phoenix_server/ComfyUI/models/diffusion_models/*.safetensors 2>/dev/null || true; "
+        "echo __TR__; ls ~/phoenix_server/ComfyUI/models/transformer/diffusion_pytorch_model-*.safetensors "
+        "2>/dev/null | wc -l"
+    )
+    try:
+        r = subprocess.run(
+            ["ssh", "-o", "BatchMode=yes", ssh_host, remote],
+            capture_output=True,
+            text=True,
+            timeout=timeout_s,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    if r.returncode != 0:
+        return None
+    text = r.stdout
+    low = text.lower()
+    flux = "flux1-schnell-fp8" in low
+    animagine = "animagine_xl_4_0.safetensors" in low or "animagine-xl-4.0" in low
+    qwen_ckpt = "qwen_image_2.0" in low
+    shards = 0
+    if "__tr__" in low:
+        tail = text.split("__TR__", 1)[-1]
+        for line in tail.splitlines():
+            line = line.strip()
+            if line.isdigit():
+                shards = int(line)
+                break
+    return PearlStarModelState(
+        flux_schnell_present=flux,
+        animagine_xl_present=animagine,
+        qwen_unified_ckpt_present=qwen_ckpt,
+        qwen_transformer_shard_count=shards,
+        probe_stdout=text.strip()[:8000],
+    )
+
+
+def resolve_dispatch_path(
+    batch: Mapping[str, Any],
+    state: PearlStarModelState | None,
+) -> str:
+    """IMG-RENDER-DUAL-PATH routing: ``flux_*`` Pearl primary; ``animagine_*`` if ckpt; ``qwen_*`` if unified ckpt."""
+    raw = str(batch.get("dispatch_path", "auto")).strip().lower()
+    if raw not in ("", "auto"):
+        return "runcomfy" if raw in ("run_comfy",) else raw
+
+    if state is None:
+        return "runcomfy"
+
+    wf = str(
+        batch.get("workflow_template") or batch.get("workflow_path") or "flux_txt2img_manga.json",
+    ).strip().lower()
+    if wf.startswith("flux_"):
+        return "pearl_star" if state.flux_schnell_present else "runcomfy"
+    if wf.startswith("animagine_"):
+        return "pearl_star" if state.animagine_xl_present else "runcomfy"
+    if wf.startswith("qwen_image_"):
+        return "pearl_star" if state.qwen_unified_ckpt_present else "runcomfy"
+    return "pearl_star"
+
+
+def apply_dispatch_routing(batch: Mapping[str, Any], state: PearlStarModelState | None) -> dict[str, Any]:
+    out = dict(batch)
+    out["dispatch_path"] = resolve_dispatch_path(batch, state)
+    return out
+
+
+def ensure_pearl_comfyui(ssh_host: str = "pearl_star", *, wait_s: int = 30) -> None:
+    """If ComfyUI is not answering on 8188, start ``main.py`` remotely (nohup) and wait."""
+    ping = (
+        "curl -s -o /dev/null -w '%{http_code}' "
+        "http://127.0.0.1:8188/system_stats || true"
+    )
+    r = subprocess.run(
+        ["ssh", "-o", "BatchMode=yes", ssh_host, ping],
+        capture_output=True,
+        text=True,
+        timeout=40,
+    )
+    if (r.stdout or "").strip() == "200":
+        return
+    start = (
+        "cd ~/phoenix_server/ComfyUI && "
+        "nohup python3 main.py --listen 0.0.0.0 --port 8188 > /tmp/comfyui.log 2>&1 &"
+    )
+    subprocess.run(
+        ["ssh", "-o", "BatchMode=yes", ssh_host, start],
+        check=False,
+        timeout=30,
+    )
+    time.sleep(wait_s)
+    r2 = subprocess.run(
+        ["ssh", "-o", "BatchMode=yes", ssh_host, ping],
+        capture_output=True,
+        text=True,
+        timeout=40,
+    )
+    if (r2.stdout or "").strip() != "200":
+        raise RuntimeError(
+            "Pearl Star ComfyUI did not become ready on :8188 after remote start attempt "
+            f"(http_code={(r2.stdout or '').strip()!r}).",
+        )
+
 
 # Q-IMG-1 locale-first: highest priority first within the tuple sort key.
 _LOCALE_RANK: dict[str, int] = {
@@ -142,13 +265,17 @@ def priority_sort(batches: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     return enriched
 
 
-def dispatch(batch: Mapping[str, Any], *, dry_run: bool = True) -> dict[str, Any]:
-    """Route ``batch`` to Pearl Star or RunComfy. Respects ``dry_run`` only."""
+def dispatch(batch: Mapping[str, Any], *, dry_run: bool = True, **kwargs: Any) -> dict[str, Any]:
+    """Route ``batch`` to Pearl Star or RunComfy.
+
+    Optional ``activation_output_dir`` / ``ssh_host`` are forwarded for live
+    activation (see ``pearl_star_dispatcher`` / ``runcomfy_dispatcher``).
+    """
     path = str(batch.get("dispatch_path", "")).strip().lower()
     if path == "pearl_star":
-        return _pearl().dispatch(batch, dry_run=dry_run)
+        return _pearl().dispatch(batch, dry_run=dry_run, **kwargs)
     if path in ("runcomfy", "run_comfy"):
-        return _runcomfy().dispatch(batch, dry_run=dry_run)
+        return _runcomfy().dispatch(batch, dry_run=dry_run, **kwargs)
     raise ValueError(f"Unknown dispatch_path: {batch.get('dispatch_path')!r}")
 
 
@@ -297,28 +424,132 @@ def run_batches(
     return results
 
 
+def run_live_activation(
+    batches: Sequence[Mapping[str, Any]],
+    *,
+    output_root: Path,
+    ssh_host: str = "pearl_star",
+    skip_comfy_ping: bool = False,
+    max_batches: int | None = None,
+    write_dispatch_log: bool = False,
+    cost_check: Callable[[], dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    """Locale-first live run with ``dispatch_path:auto`` resolved from Pearl Star probe."""
+    if not skip_comfy_ping:
+        ensure_pearl_comfyui(ssh_host)
+    state = probe_pearl_star_models(ssh_host)
+    routed = [apply_dispatch_routing(dict(b), state) for b in batches]
+    ordered = priority_sort(routed)
+    if max_batches is not None:
+        ordered = ordered[: max(0, max_batches)]
+    cost_fn = cost_check or runcomfy_cost_check
+    results: list[dict[str, Any]] = []
+    for batch in ordered:
+        path = str(batch.get("dispatch_path", "")).strip().lower()
+        cost = cost_fn()
+        if path in ("runcomfy", "run_comfy") and _should_skip_runcomfy(cost):
+            row = {
+                "batch_id": batch.get("batch_id"),
+                "dispatch_path": "runcomfy",
+                "skipped": True,
+                "reason": "runcomfy_cost_cooldown",
+                "cost": dict(cost),
+            }
+            results.append(row)
+            if write_dispatch_log:
+                log_dispatch(
+                    {
+                        "batch_id": batch.get("batch_id"),
+                        "dispatch_path": "runcomfy",
+                        "dry_run": False,
+                        "status": "SUPPRESSED_COOLDOWN",
+                        "notes": "tsv_or_billing_cap",
+                        "payload": row,
+                    },
+                )
+            continue
+        kwargs: dict[str, Any] = {"activation_output_dir": output_root}
+        if path == "pearl_star":
+            kwargs["ssh_host"] = ssh_host
+        res = dispatch(batch, dry_run=False, **kwargs)
+        res["batch_id"] = batch.get("batch_id")
+        if state is not None:
+            res["model_probe"] = {
+                "flux_schnell_present": state.flux_schnell_present,
+                "animagine_xl_present": state.animagine_xl_present,
+                "qwen_unified_ckpt_present": state.qwen_unified_ckpt_present,
+                "qwen_transformer_shard_count": state.qwen_transformer_shard_count,
+            }
+        if write_dispatch_log:
+            log_dispatch(
+                {
+                    "batch_id": batch.get("batch_id"),
+                    "dispatch_path": path,
+                    "dry_run": False,
+                    "status": str(res.get("status", "")),
+                    "notes": str(res.get("notes", "")),
+                    "payload": {k: v for k, v in res.items() if k != "model_probe"},
+                },
+            )
+        results.append(res)
+    return results
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--plan",
         required=True,
         type=Path,
-        help="Path to parallel_image_generation_plan markdown",
+        help="Path to markdown containing ```batch fenced blocks",
     )
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Explicit safe mode (default when --live is not set)",
+        help="Explicit safe mode (default when --activate/--live are not set)",
     )
     parser.add_argument(
         "--live",
         action="store_true",
-        help="Attempt live dispatch (blocked in scaffold until wiring lands)",
+        help="Alias of --activate (live dispatch)",
+    )
+    parser.add_argument(
+        "--activate",
+        action="store_true",
+        help="Live dispatch to Pearl Star and/or RunComfy (respects routing + cost cap)",
+    )
+    parser.add_argument(
+        "--output-root",
+        type=Path,
+        default=None,
+        help="Directory for activation PNG outputs (default: artifacts/manga/activation_smoke_2026-05-10)",
+    )
+    parser.add_argument(
+        "--max-batches",
+        type=int,
+        default=None,
+        help="Process only the first N batches after locale sort (smoke)",
+    )
+    parser.add_argument(
+        "--ssh-host",
+        default="pearl_star",
+        help="SSH host alias for Pearl Star (default: pearl_star)",
+    )
+    parser.add_argument(
+        "--skip-comfy-ping",
+        action="store_true",
+        help="Do not SSH-start ComfyUI if :8188 is down (for tests)",
+    )
+    parser.add_argument(
+        "--write-dispatch-log",
+        action="store_true",
+        help="Append rows to artifacts/qa/image_batch_dispatch_log.tsv during activation",
     )
     args = parser.parse_args(argv)
-    if args.dry_run and args.live:
-        parser.error("--dry-run and --live are mutually exclusive")
-    dry_run = not args.live
+    if args.dry_run and (args.live or args.activate):
+        parser.error("--dry-run is mutually exclusive with --live / --activate")
+    activate = bool(args.live or args.activate)
+    dry_run = not activate
     plan_path = args.plan
     if not plan_path.is_file():
         print(f"error: plan file not found: {plan_path}", file=sys.stderr)
@@ -326,6 +557,23 @@ def main(argv: list[str] | None = None) -> int:
     batches = load_plan(plan_path)
     cost = runcomfy_cost_check()
     print(json.dumps({"cost": cost, "batch_count": len(batches)}, indent=2))
+    if activate:
+        out = args.output_root or (
+            REPO_ROOT / "artifacts" / "manga" / "activation_smoke_2026-05-10"
+        )
+        out.mkdir(parents=True, exist_ok=True)
+        probe = probe_pearl_star_models(args.ssh_host)
+        print(json.dumps({"model_probe": probe.__dict__ if probe else None}, indent=2, default=str))
+        for res in run_live_activation(
+            batches,
+            output_root=out.resolve(),
+            ssh_host=args.ssh_host,
+            skip_comfy_ping=args.skip_comfy_ping,
+            max_batches=args.max_batches,
+            write_dispatch_log=args.write_dispatch_log,
+        ):
+            print(json.dumps(res, indent=2, default=str))
+        return 0
     for res in run_batches(batches, dry_run=dry_run):
         print(json.dumps(res, indent=2))
     return 0
