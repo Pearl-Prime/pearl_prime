@@ -1074,7 +1074,7 @@ Authorization: Pearl_PM + Pearl_Architect joint transition bookkeeping 2026-05-1
 ##### 3. PHASE 2 SCOPE
 
 - **Polish — image quality:** suppress **text / words** baked into raster renders (negative-prompt + workflow hygiene); character consistency; brand voice fidelity. Final lettering remains the dedicated **lettering pipeline** (not generative in-image text).
-- **Catalog completion:** **37** brands × **3** locales × **5** surfaces (**ebook**, **audiobook**, **manga**, **podcast**, **video**).
+- **Catalog completion:** **Phoenix-counted cells = 259** — **222** = **37 × 3 × 2** (**ebook** + **manga**) regular worldwide + **37** Japan **manga-only** parallel (**37 × ja_JP × manga**; separate JP legal entity — see **AMENDMENT-2026-05-10-CELL-MATH-CORRECTION** + **JAPAN-MANGA-ONLY-CATALOG-V1-01**). **Audiobook** ships via **Google Play brand admin** (not a Phoenix cell). **Podcast** remains a **separate planning track**.
 - **Author / teacher associations:** **6–12** authors per brand with bios.
 - **Dashboard expansion:** main-character display **per manga series**; per-brand **cover art** panel.
 - **Full queue activation (Pearl_Conductor v3):** **~19.3-day** unattended generation backlog → **~6–10 days** wall-clock at dual-path parallelism (Pearl Star + RunComfy), **after** Phase 2 P0 polish closes known image-defect classes (notably baked-in text).
@@ -1520,3 +1520,95 @@ overlay_param:
 **Execution order:** Phase 1 (Verify governance) remains first in the default sequence; Phase 2 implementation may proceed after Phase 1 green per spec §3 unless an incident reorder is separately recorded.
 
 **Where recorded:** `docs/specs/CI_BASELINE_RECOVERY_V1_SPEC.md` — appended Phase 2 cover_art relaxation detail; `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` — `ws_ci_recovery_core_tests_cover_art` advanced to **runnable**, new **`ws_ci_recovery_phase_2_impl_20260510`** row **runnable**.
+
+#### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT-2026-05-10-CELL-MATH-CORRECTION (operator Gap #3 ratification)
+
+**Authorization:** Operator clarification **2026-05-10** (Pearl_Architect doc-only propagation).
+
+**Verbatim production facts (locked):**
+
+- **Regular worldwide catalog:** **37 brands × 3 locales (`en_US`, `ja_JP`, `zh`) × 2 Phoenix surfaces (`ebook`, `manga`) = 222 cells.** Locale mix: **en_US** ebook-heavy with some manga; **ja_JP** higher manga % vs en_US; **zh** similar mix per market research.  
+- **Audiobook:** **NOT** a Phoenix Omega cell. Each ebook script is the **script** for the audiobook; brand admin generates/list MP3 via **Google Play** dashboard for supported languages.  
+- **Podcast:** **Separate planning track** — **not** counted in the **222** regular cells.  
+- **Japan manga-only parallel catalog (NEW program):** **37 brands** with **IDENTICAL `brand_id` keys** to the regular 37 × **`ja_JP` locale** × **manga-only** surface = **37 cells**. **Separate Japanese company / legal entity.** Distribution: **Line Manga** (primary; PR #801 research lineage) **+ other JP manga platforms** (vs regular ja_JP lane → Google Play + Amazon, etc.). Same character/voice/brand narrative IDs; **different** storefront + financial entity.  
+- **Total Phoenix-Omega-planned cells:** **222 + 37 = 259**.
+
+**Anti-drift (hard):**
+
+1. The **555** cell figure (PR #1023 + PR #1027 deck lineage) is **SUPERSEDED**; authoritative denominator is **259** until a future operator **AMENDMENT** changes it.  
+2. **Audiobook generation is NEVER a Phoenix Omega cell** — future docs claiming otherwise are drift.  
+3. Japan manga-only **`brand_id` set is IDENTICAL** to the regular 37 — adding net-new brand IDs requires an **AMENDMENT**.  
+4. **Operator decision Gap #3 ratified:** authoritative production cell total is **259** (`authoritative-is-259`).
+
+**Deliverable pointers:** `docs/specs/PEARL_PRIME_WORLDWIDE_CATALOG_PLAN_V1.md`; `artifacts/catalog/worldwide_catalog_plan_{en_US,ja_JP,zh}_2026-05-10.tsv`; `brand-wizard-app/public/pearl_prime_v6-3-en.html`.
+
+**Phase 2 catalog completion line (cross-edit):** The historical bullet that read “37 × 3 × 5 surfaces” in **AMENDMENT-2026-05-10-PHASE-1-P0-COMPLETE §3** is **superseded for cell math** by this amendment — Phoenix-counted worldwide cells are **ebook+manga = 222** plus **Japan manga-only = 37**.
+
+---
+
+#### PER-CHAPTER-OVERLAY-ENFORCEMENT-V1-01 — AMENDMENT-2026-05-10-GAP-1-NERVOUS-SYSTEM-FOLLOWUP
+
+**Operator decision (Gap #1):** Remove **`your nervous system`** from `refrain_allowlist` **after** overlay Phase 2 proves the gate catches it.
+
+**Action:** Open follow-up workstream **`ws_phase_2_item_2_remove_nervous_system_after_overlay_proven_20260510`** (Pearl_Dev): demonstrate overlay catches the phrase via **test fixture**; **then** remove the allowlist entry in a subsequent PR (ITEM-2 chain).
+
+---
+
+#### PER-CHAPTER-OVERLAY-ENFORCEMENT-V1-01 — AMENDMENT-2026-05-10-GAP-2-IMPL-COMPLETE
+
+**Operator decision (Gap #2):** Mark **`ws_per_chapter_overlay_enforcement_impl_20260508`** **complete** (was `proposed`).
+
+**Evidence:** `phoenix_v4/quality/book_quality_gate.py` **`_overlay_violations`** (**lines 176–286**) — overlay rule kinds **`density_ceiling`**, **`drift_detection`**, **`presence_floor`**, **`absence_guard`** — plus **`_repeated_phrase_violations`** integration entrypoint (**from line 287**), i.e. the **~176–297** window Pearl_Architect cited for Phase 1–2 overlay enforcement landing on `main`.
+
+---
+
+#### PER-CHAPTER-OVERLAY-ENFORCEMENT-V1-01 — AMENDMENT-2026-05-10-GAP-4-CAP-BANNER-CLEANUP
+
+**Operator decision (Gap #4):** **cleanup-now** — cap status banners drift from merged `main` reality.
+
+**Action:** Open **`ws_phase_2_cap_status_banner_cleanup_20260510`** (Pearl_PM): pass through **all** cap entries’ status banners in `docs/PEARL_ARCHITECT_STATE.md` (and linked coordination surfaces) and reconcile with **merged `main`** reality; small Pearl_PM follow-up PR.
+
+---
+
+### JAPAN-MANGA-ONLY-CATALOG-V1-01 — Japan parallel manga-only catalog (BG-PR-09 house style)
+
+**Status:** **proposed** — pending operator confirmation of legal/business decisions.
+
+**PROJECT_ID:** `PRJ-JAPAN-MANGA-ONLY-CATALOG-V1`
+
+**Context:** Operator clarified Japan operates **two** parallel catalogs: **(a)** regular worldwide catalog includes **`ja_JP`** variants on Google Play / Amazon / etc., and **(b)** a **Japan-only manga catalog** (37 brands × manga surface) distributed via a **separate Japanese company** contracting **Line Manga** + other JP manga platforms.
+
+**Decision (architecture):**
+
+- **37 `brand_id` values** are **IDENTICAL** to `config/manga/canonical_brand_list.yaml` — **no new brand IDs**.  
+- **Surface scope:** **manga only** (no ebook, no podcast, no video) for this program cap.  
+- **Distribution:** **Line Manga** primary (per PR #801 research lineage) + **other JP manga platforms TBD**.  
+- **Legal entity:** **separate Japanese company** (operator-side corporate action; documented here only).  
+- **Financial flow:** **separate** from regular Phoenix Omega economics (different platform rev-share + different brand-admin posting path).
+
+**Anti-drift:**
+
+1. **37 brand IDs IDENTICAL** to canonical list — net-new IDs require **AMENDMENT**.  
+2. **Manga-only scope is BINDING** — adding ebook/podcast/video requires **AMENDMENT**.  
+3. **Cross-catalog character/voice consistency:** characters **MUST** match regular per-brand `character_design` — drift = quality risk.  
+4. **Separate legal entity is operator-side** — do **not** auto-create code assuming single-entity ownership.
+
+**Action items (tracked as workstreams; not fully authored in this PR):**
+
+| Workstream ID | Owner | Purpose |
+|---|---|---|
+| `ws_japan_manga_only_catalog_scoping_20260510` | Pearl_PM + Pearl_Marketing | Author per-brand manga catalog (37 × series/episode counts) for Japan manga-only program. |
+| `ws_japan_manga_only_platform_contract_research_20260510` | Pearl_Research | Refresh PR #801 Line Manga research with Japan-manga-only terms. |
+| `ws_japan_manga_only_legal_entity_decision_20260510` | Operator-side | Confirm separate Japanese company structure with counsel. |
+| `ws_japan_manga_only_brand_admin_separation_20260510` | Pearl_Dev | Wizard / brand-admin path for Japan-manga-only (same vs separate Japanese-only wizard). |
+
+**Operator decision card (Q1–Q4):**
+
+1. **Q1:** Confirm **37 brand IDs identical** to regular catalog (vs different IDs for legal separation)?  
+2. **Q2:** Manga volume per brand for Japan-manga-only — **same** as regular `ja_JP` manga %, **or higher** because the catalog is manga-dedicated?  
+3. **Q3:** Brand admin separation — **same wizard** vs **separate Japanese-only wizard**?  
+4. **Q4:** Timeline — **Phase 2 alongside V1.1 worldwide expansion**, **or Phase 3** after worldwide V1 ships?
+
+**Authority:** This cap entry + `docs/specs/JAPAN_MANGA_ONLY_CATALOG_V1_SPEC.md` (detail).
+
+---

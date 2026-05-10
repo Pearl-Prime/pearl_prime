@@ -7,6 +7,8 @@
 **Date:** 2026-05-10  
 **Consumes:** `artifacts/catalog/worldwide_catalog_plan_{en_US,ja_JP,zh}_2026-05-10.tsv` (this plan’s numeric SSOT for dashboard + render backlog imports)
 
+**Operator amendment (2026-05-10 — cell math):** Phoenix Omega **production cell** authority is **259** = **222** regular worldwide (**37 × 3 locales × 2 surfaces: ebook + manga**) + **37** Japan **manga-only** parallel catalog (**37 × ja_JP × manga**; identical `brand_id` set; separate Japanese legal entity + Line Manga / JP manga platform distribution). This **supersedes** the retired **555** (37×3×5) planner figure and any **45,216** packaged-asset deck totals tied to that retired denominator. Ratification: `docs/PEARL_ARCHITECT_STATE.md` → **WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01** `AMENDMENT-2026-05-10-CELL-MATH-CORRECTION` + **JAPAN-MANGA-ONLY-CATALOG-V1-01**. Parallel spec: `docs/specs/JAPAN_MANGA_ONLY_CATALOG_V1_SPEC.md`.
+
 ---
 
 ## Document control
@@ -31,10 +33,15 @@
 
 - **Brands:** 37 (`canonical_brand_list.yaml`, Path X manga canon)  
 - **Locales (planning buckets):** `en_US`, `ja_JP`, `zh` where **zh = zh_TW + zh_CN** as a combined execution bucket (two storefronts, one planning file).  
-- **Surfaces (5):** `ebook`, `audiobook`, `manga`, `podcast`, `video` (short-form + long-form counts roll up under `video` in Section 2; TSV exposes `video_short` / `video_long`).
+- **Phoenix-counted surfaces (regular worldwide catalog):** **`ebook` + `manga` only** → **37 × 3 × 2 = 222** production cells. Per-locale mix: **en_US** ebook-heavy with some manga; **ja_JP** higher manga % vs en_US; **zh** similar mix per market research.  
+- **Audiobook:** **not** a Phoenix Omega cell. Each ebook manuscript is the **script** for the audiobook; **MP3 generation and storefront listing** ship via **Google Play brand admin** for supported languages (outside Phoenix cell grid).  
+- **Podcast:** **separate planning track** — not counted in the **222** regular cells (marketing SSOT cadence remains orthogonal).  
+- **Video:** retained in Phase 2 **TSV / marketing** rollups as planning stubs (`video_short` / `video_long` columns) but is **not** part of the **222** Phoenix ebook+manga cell definition.  
+- **Japan manga-only parallel catalog:** **37** additional cells (**37 × ja_JP × manga** only) — **same 37 `brand_id` values** as the regular catalog, **different** distribution legal entity + storefront stack (Line Manga primary + other JP manga platforms). See `docs/specs/JAPAN_MANGA_ONLY_CATALOG_V1_SPEC.md`. **Total Phoenix-planned cells = 222 + 37 = 259.**
 
-**Brand-locale-surface cells:** 37 × 3 × 5 = **555** planning cells.  
-Each cell carries: enabled flag, series depth (where applicable), unit counts, teacher/author association coverage, and downstream asset hooks (covers, manga protagonists).
+**Anti-drift:** Any future document that calls **555** cells or treats **audiobook** as a Phoenix cell is **superseded** by this amendment unless a new operator **AMENDMENT** explicitly revives a different denominator.
+
+Each **cell** in the 222-grid carries: enabled flag, series depth (where applicable), unit counts, teacher/author association coverage, and downstream asset hooks (covers, manga protagonists). The **37** Japan manga-only cells reuse the same per-brand narrative/voice/character IDs with a **manga-only** surface binding and separate distribution entity.
 
 ### 1.2 Phase 2 default counts (operator Q2 baseline)
 
@@ -43,13 +50,13 @@ Unless superseded by operator override (see Section 10 Q2):
 | Surface | Rule |
 |---------|------|
 | ebook | **5** series × **5** books per series = **25** books per brand per `en_US` or `ja_JP` locale bucket |
-| audiobook | **Same script + same volume as ebook** (Pearl Prime audiobook mirrors ebook row count 1:1) |
+| audiobook | **Out of Phoenix cells:** ebook script is the narration source; **Google Play brand admin** produces/ships MP3 for supported languages (not counted in the **222** / **259** cell model). |
 | manga series | **Tier ladder:** flagship **14**, core **8**, niche **4** active series targets (aligned to PR #988 companion `parallel_image_generation_plan_2026-05-09.md` subsection 3.1 commentary + `canonical_brand_list.yaml` tier tags) |
 | manga episodes | **24** serialization units per series per locale bucket (≈ bi-weekly cadence for one planning year; reconciles to `manga_brand_series_plan.yaml` global bi-weekly default without binding chapter math) |
 | podcast | **26** episodes per brand per locale bucket (bi-weekly cadence for 12 months) — *marketing SSOT currently 0/wk pending Table 6* |
 | video | **12** short + **4** long pieces per brand per locale bucket (weekly-ish short + monthly long planning stub) |
 
-**zh bucket:** each `brand_id` row in `worldwide_catalog_plan_zh_2026-05-10.tsv` **sums zh_TW + zh_CN** parallel SKUs: `total_books`, `manga_series`, podcast, and video counts are **doubled** vs en_US rows; `covers_needed` = `2 × total_books` (KDP + audiobook for each CJK SKU). See `artifacts/qa/worldwide_catalog_plan_v1_methodology_2026-05-10.md` Section 3.
+**zh bucket:** each `brand_id` row in `worldwide_catalog_plan_zh_2026-05-10.tsv` **sums zh_TW + zh_CN** parallel SKUs: `total_books`, `manga_series`, podcast, and video counts are **doubled** vs en_US rows; `covers_needed` = `2 × total_books` (KDP + paired retail cover workload for each CJK SKU; **audiobook MP3 still ships via Google Play brand admin**, not as a Phoenix cell). See `artifacts/qa/worldwide_catalog_plan_v1_methodology_2026-05-10.md` Section 3.
 
 ### 1.3 Locale enablement flags (default = all on)
 
@@ -74,7 +81,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko, master_wu
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=14; episodes_per_series=24; **episodes_total=336** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (14 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -89,7 +96,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** joshin, ahjan, pamela_fellows, master_feung, miki, maat, junko, master_wu
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=14; episodes_per_series=24; **episodes_total=336** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (14 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -104,7 +111,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** miki, ahjan, joshin, pamela_fellows, master_feung, maat, junko, master_wu
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=14; episodes_per_series=24; **episodes_total=336** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (14 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -119,7 +126,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** master_sha, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -134,7 +141,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** pamela_fellows, ahjan, joshin, master_feung, miki, maat, junko, master_wu
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -149,7 +156,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** junko, ahjan, joshin, pamela_fellows, master_feung, miki, maat, master_wu
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -164,7 +171,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -179,7 +186,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** omote, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -194,7 +201,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -209,7 +216,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** master_sha, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -224,7 +231,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -239,7 +246,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -254,7 +261,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -269,7 +276,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -284,7 +291,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -299,7 +306,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -314,7 +321,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -329,7 +336,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -344,7 +351,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** maat, ahjan, joshin, pamela_fellows, master_feung, miki, junko, master_wu
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=8; episodes_per_series=24; **episodes_total=192** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (8 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -359,7 +366,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -374,7 +381,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -389,7 +396,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -404,7 +411,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -419,7 +426,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -434,7 +441,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** sai_ma, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -449,7 +456,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -464,7 +471,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** master_wu, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -479,7 +486,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -494,7 +501,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** ra, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -509,7 +516,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -524,7 +531,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -539,7 +546,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -554,7 +561,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -569,7 +576,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** master_feung, ahjan, joshin, pamela_fellows, miki, maat, junko, master_wu
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -584,7 +591,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -599,7 +606,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** composite_faculty, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -614,7 +621,7 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 - **Author / teacher pack (8 of 6–12 target):** adi_da, ahjan, joshin, pamela_fellows, master_feung, miki, maat, junko
 - **Per-locale enabled (default):** en_US yes; ja_JP yes; zh_TW yes; zh_CN yes (planned via combined zh TSV row)
 - **ebook:** series_count=5; books_per_series=5; **total=25** / locale (50 across zh bucket per TSV)
-- **audiobook:** same titles/scripts as ebook; **units = ebook**
+- **audiobook:** **not a Phoenix cell** — ebook script doubles as narration script; **Google Play brand admin** output path for MP3 (see §1.1).
 - **manga:** series_count=4; episodes_per_series=24; **episodes_total=96** / locale (double in zh bucket per TSV)
 - **Manga protagonist note:** One protagonist identity per manga series (4 series). Lock via `config/manga/character_design_axes.yaml` + `character_design_template.yaml` when `character_design` YAML exists on series profiles; until then use `brand_lora_plans.yaml.protagonist_loras` / `character_loras` notes as the authoring seed.
 - **podcast:** 26 episodes @ ~bi-weekly cadence (placeholder until `weekly_volumes_per_brand.yaml` non-zero)
@@ -625,7 +632,13 @@ For each Path X brand: **brand_id**, **tier + demographic** (from `canonical_bra
 
 ## 3. Per-locale matrix (rollup)
 
-Source: TSV header sums (methodology document Section 5 cross-check).
+### 3.0 Packaged-asset planning totals (operator cell-math correction 2026-05-10)
+
+- **Retired deck anchor (superseded):** **45,216** “total worldwide packaged-asset target” was computed from the retired **555** (37×3×5) cell model in `brand-wizard-app/public/pearl_prime_v6-3-en.html` (PR #1027 lineage) — **do not use for Phoenix cell authority.**  
+- **Revised planning scalar (illustrative):** rescale the legacy numerator by the new cell ratio **259 ÷ 555** → **45,216 × (259÷555) ≈ 21,109** → **21,100** rounded for operator-facing slides (see same HTML update in this PR). This is a **budget-shape** correction until Pearl_Marketing recomputes per-surface SSOT after Table 6 ratification.  
+- **Locale column split (same 1 : 1 : 2 script-weight story as the prior deck):** **4,521 / 4,521 / 9,044** for **en_US / ja_JP / zh** on the **regular 222-cell** spine; **+3,014** reserved-shape bucket for the **37** Japan manga-only parallel cells → **≈21,100** combined headline.
+
+Source: TSV header sums (methodology document Section 5 cross-check) — tables below remain the **SKU-depth** SSOT for generators; **§3.0** is the **cell + headline asset** correction layer.
 
 ### 3.1 en_US
 
@@ -745,7 +758,7 @@ Same three panels after Phase 2.3; must display **TW vs CN** sub-columns where a
 | 2.1 | en_US catalog complete + all en_US covers + all en_US manga protagonists |
 | 2.2 | ja_JP catalog complete + ja_JP covers + ja_JP protagonists |
 | 2.3 | zh catalog complete + zh covers + zh protagonists (TW+CN) |
-| 2.4 | Full content production rollout (podcast + video surfaces at non-zero `weekly_volumes_per_brand.yaml`) |
+| 2.4 | Full content production rollout (**podcast + video** surfaces at non-zero `weekly_volumes_per_brand.yaml` — **still orthogonal** to the **222** ebook+manga Phoenix cell grid; Japan manga-only program tracked under **PRJ-JAPAN-MANGA-ONLY-CATALOG-V1**) |
 
 ---
 

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl Prime · en-US</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;font-family:'DM Sans',sans-serif;overflow:hidden}
+.view{display:none;width:100%;height:100%;flex-direction:column}
+.view.on{display:flex}
+.slides{flex:1;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;transform:translateX(28px);transition:opacity .35s ease,transform .35s ease;overflow:hidden}
+.slide.on{opacity:1;pointer-events:all;transform:translateX(0)}
+.slide.out{opacity:0;transform:translateX(-28px);transition:opacity .22s ease,transform .22s ease}
+.btm{height:50px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;border-top:1px solid var(--rule);background:var(--bg)}
+.b-brand{font-family:'Cormorant Garamond',serif;font-size:.88rem;font-weight:600;letter-spacing:.04em;cursor:pointer;background:none;border:none;padding:0;color:var(--ink)}
+.b-ctrl{display:flex;align-items:center;gap:.7rem}
+.b-dots{display:flex;gap:4px;align-items:center}
+.b-dot{width:4px;height:4px;border-radius:50%;cursor:pointer;transition:all .18s;border:none;padding:0;background:rgba(28,16,9,.14)}
+.b-dot.on{width:11px;border-radius:2px;background:#b45309}
+.b-cnt{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.1em;color:#a08060}
+.b-btn{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;padding:.32rem .8rem;border-radius:1px;cursor:pointer;transition:all .18s;border:1px solid rgba(120,80,20,.2);color:#1c1009;background:transparent}
+.b-btn:hover{background:#1c1009;color:#faf6f0}
+.b-btn:disabled{opacity:.18;pointer-events:none}
+.pbar{height:2px;background:#b45309;width:0;transition:width .35s ease;flex-shrink:0}
+:root{
+  --bg:#faf6f0;--bg2:#f3ede3;--ink:#1c1009;--ink2:#7a6050;--ink3:#a08060;
+  --acc:#b45309;--acc2:#d97706;--rule:rgba(120,80,20,.1);
+  --serif:'Cormorant Garamond',serif;--mono:'DM Mono',monospace;
+}
+.sp{padding:3rem 4.5rem 3.5rem;background:var(--bg);position:absolute;inset:0;overflow:auto}
+.sp2{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}
+.sp2l{padding:3rem 2.5rem 3.5rem 4.5rem;display:flex;flex-direction:column;justify-content:center;background:var(--bg);overflow:auto}
+.sp2r{padding:3rem 3rem 3.5rem 2.5rem;display:flex;flex-direction:column;justify-content:center;gap:.8rem;background:var(--bg2);border-left:1px solid var(--rule);overflow:auto}
+.eye{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin-bottom:.8rem}
+.hl{font-family:var(--serif);font-weight:300;line-height:1.1;letter-spacing:-.01em;margin-bottom:.8rem;font-size:clamp(1.4rem,2.6vw,2.2rem);color:var(--ink)}
+.hl em{font-style:italic;color:var(--acc)}
+.bt{font-size:.83rem;font-weight:300;line-height:1.8;color:var(--ink2)}
+.qb{border-left:2px solid var(--acc);padding-left:1rem;font-family:var(--serif);font-size:1rem;font-style:italic;font-weight:300;line-height:1.5;color:var(--ink)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule)}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--rule)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule)}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule)}
+.cell{padding:.75rem .7rem;display:flex;flex-direction:column;gap:.22rem;background:var(--bg)}
+.cell:nth-child(even){background:var(--bg2)}
+.cn{font-family:var(--mono);font-size:.46rem;letter-spacing:.1em;color:var(--acc)}
+.cnm{font-family:var(--serif);font-size:.82rem;font-weight:400;line-height:1.1;color:var(--ink)}
+.cm{font-family:var(--mono);font-size:.48rem;letter-spacing:.06em;color:var(--acc2)}
+.cd{font-size:.62rem;line-height:1.45;color:var(--ink2)}
+.card{padding:.85rem 1rem;display:flex;flex-direction:column;gap:.28rem;border:1px solid var(--rule);background:#fff}
+.clbl{font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc)}
+.cval{font-family:var(--serif);font-size:.9rem;font-weight:400;line-height:1.2;color:var(--ink)}
+.csub{font-size:.68rem;line-height:1.5;color:var(--ink2)}
+.dr{display:flex;gap:.6rem;padding:.45rem 0;border-bottom:1px solid var(--rule);align-items:flex-start}
+.dnum{font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;min-width:36px;padding-top:2px;color:var(--ink3)}
+.dnm{font-family:var(--serif);font-size:.85rem;font-weight:400;line-height:1.1;margin-bottom:.08rem;color:var(--ink)}
+.dtk{font-size:.64rem;line-height:1.5;color:var(--ink2)}
+.story{position:absolute;inset:0;background:var(--bg);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr}
+.story-top{grid-column:1/-1;background:var(--bg);padding:1.4rem 4.5rem 1rem;border-bottom:1px solid var(--rule)}
+.story-left{padding:1rem 2rem 1.4rem 4.5rem;overflow:auto;display:flex;flex-direction:column;gap:.7rem;border-right:1px solid var(--rule)}
+.story-right{padding:1rem 3rem 1.4rem 2rem;display:flex;flex-direction:column;justify-content:center}
+.sb{border:1px solid var(--rule);background:#fff}
+.sb-head{padding:.45rem .85rem;background:var(--acc);font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.sb-body{padding:.6rem .85rem;display:flex;flex-direction:column;gap:.22rem}
+.sb-row{display:flex;align-items:flex-start;gap:.45rem;font-size:.7rem;color:var(--ink2);line-height:1.45}
+.sb-row::before{content:'›';color:var(--acc);font-size:.75rem;flex-shrink:0;margin-top:.05rem}
+.rev-wrap{display:flex;flex-direction:column;gap:.5rem;height:100%}
+.rev-title{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+.rev-big{font-family:var(--serif);font-size:1.8rem;font-weight:600;color:var(--acc);line-height:1}
+.rev-sub{font-family:var(--mono);font-size:.46rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:.2rem}
+.rev-split{display:flex;flex-direction:column;gap:.25rem;margin:.3rem 0 .5rem}
+.rev-split-row{display:flex;align-items:center;gap:.5rem}
+.rev-split-lbl{font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;min-width:120px;color:var(--ink2)}
+.rev-split-bar{flex:1;height:6px;background:rgba(28,16,9,.07);border-radius:3px;overflow:hidden}
+.rev-split-fill{height:100%;border-radius:3px}
+.rev-split-pct{font-family:var(--mono);font-size:.5rem;font-weight:600;min-width:32px;text-align:right}
+.bars{display:flex;align-items:flex-end;gap:2px;height:70px;margin-top:.3rem}
+.bar-col{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1}
+.bar-fill{width:100%;border-radius:2px 2px 0 0;min-height:2px}
+.bar-lbl{font-family:var(--mono);font-size:.36rem;color:var(--ink3);letter-spacing:.02em}
+#v-landing{background:var(--bg);position:relative;align-items:center;justify-content:center}
+.land-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:clamp(8rem,18vw,18rem);font-weight:300;color:rgba(180,83,9,.04);pointer-events:none;user-select:none}
+.land-in{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem}
+.l-title{font-family:var(--serif);font-size:clamp(2.8rem,7vw,5.5rem);font-weight:300;color:var(--ink);line-height:1;letter-spacing:-.02em;margin-bottom:.5rem}
+.l-title span{color:var(--acc);font-style:italic}
+.l-tag{font-family:var(--serif);font-size:clamp(.88rem,1.6vw,1.15rem);font-weight:300;font-style:italic;color:var(--ink2);margin-bottom:2.5rem;max-width:520px}
+.l-prompt{font-size:.78rem;font-weight:300;color:var(--ink3);margin-bottom:1.4rem}
+.flags{display:flex;gap:1.1rem;justify-content:center;flex-wrap:wrap}
+.flag{display:flex;flex-direction:column;align-items:center;gap:.55rem;padding:1rem 1.4rem;border:1px solid var(--rule);background:rgba(180,83,9,.03);border-radius:2px;cursor:pointer;min-width:98px;transition:border-color .22s,background .22s,transform .22s}
+.flag:hover{border-color:var(--acc);background:rgba(180,83,9,.07);transform:translateY(-3px)}
+.f-em{font-size:2.1rem;line-height:1}
+.f-lb{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.f-sb{font-size:.62rem;color:var(--ink3);font-weight:300}
+.data-foot{font-family:var(--mono);font-size:.46rem;letter-spacing:.06em;color:var(--ink3);margin-top:.6rem;line-height:1.5}
+.world-map{max-width:100%;height:auto;opacity:.35;margin:.5rem 0}
+.snum{font-family:var(--serif);font-size:1.9rem;font-weight:600;line-height:1;display:inline;color:var(--acc)}
+.slbl{font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.t12{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule)}
+@media(max-width:900px){.t12{grid-template-columns:repeat(2,1fr)}.sp2{grid-template-columns:1fr}.sp2r{border-left:none;border-top:1px solid var(--rule)}}
+</style>
+</head>
+<body>
+
+<div class="view on" id="v-landing">
+  <div class="land-bg">Pearl</div>
+  <div class="land-in">
+    <h1 class="l-title">Pearl <span>Prime</span></h1>
+    <p class="l-tag">Shelf-ready wisdom for readers who live on screens, in earbuds, and between chapters.<br>One spine. Three language markets. Your hand on the upload.</p>
+    <p class="l-prompt">Choose a market deck</p>
+    <div class="flags">
+      <div class="flag" onclick="showPath('en')" style="border-color:var(--acc)"><span class="f-em">🇺🇸</span><span class="f-lb">USA</span><span class="f-sb">en-US · this deck</span></div>
+      <div class="flag" onclick="location.href='pearl_prime_v6-3-ja.html'"><span class="f-em">🇯🇵</span><span class="f-lb">Japan</span><span class="f-sb">ja-JP</span></div>
+      <div class="flag" onclick="location.href='pearl_prime_v6-3-tw.html'"><span class="f-em">🇹🇼</span><span class="f-lb">Taiwan</span><span class="f-sb">zh-TW</span></div>
+      <div class="flag" onclick="location.href='pearl_prime_v6-3-zh.html'"><span class="f-em">🇨🇳</span><span class="f-lb">Mainland</span><span class="f-sb">zh-CN</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="v-en">
+  <div class="pbar" id="pb-en"></div>
+  <div class="slides" id="sl-en">
+
+    <div class="slide on" style="background:var(--bg)">
+      <div class="story">
+        <div class="story-top">
+          <div class="hl" style="margin-bottom:.25rem">The shelf is crowded with noise.<br><em>Readers still reach for what feels true.</em></div>
+          <p class="bt" style="max-width:820px;font-size:.8rem">Pearl Prime is the weekly packaging engine for therapeutic books, audio, manga, podcasts, and short video born from the United Spiritual Leaders Forum lineage — tuned for American bookstore psychology (promise without hype, warmth without therapy-speak). <strong style="color:var(--ink);font-weight:500">Ei — Enlightened Intelligence</strong> sequences what each reader can metabolize next. You are not a publisher fighting algorithms alone; you are the <strong style="color:var(--ink);font-weight:500">Brand Director</strong> who places finished assets where Gen Z and Gen Alpha already shop and listen.</p>
+        </div>
+        <div class="story-left">
+          <div class="sb">
+            <div class="sb-head">Pearl Prime drops every week</div>
+            <div class="sb-body">
+              <div class="sb-row">Ebook blocks ready for KDP, Apple, Google Play</div>
+              <div class="sb-row">Audiobook masters routed around Audible/ACX limits via approved aggregators</div>
+              <div class="sb-row">Vertical manga episodes tuned for Canvas / Tapas habits</div>
+              <div class="sb-row">Podcast strips + cut-down video for discovery</div>
+            </div>
+          </div>
+          <div class="sb">
+            <div class="sb-head">You upload where Americans already buy</div>
+            <div class="sb-body">
+              <div class="sb-row">Amazon KDP · Google Play Books · Apple Books · Draft2Digital / libraries</div>
+              <div class="sb-row">INaudio / Findaway → Spotify, Apple Audio, Kobo, Scribd</div>
+              <div class="sb-row">Webtoon Canvas · Tapas · Kindle / ComiXology manga lanes</div>
+            </div>
+          </div>
+          <div class="sb">
+            <div class="sb-head">48Social (exclusive partner) pushes daily</div>
+            <div class="sb-body">
+              <div class="sb-row">Short clips, quote cards, audio lifts — mined from your titles, not invented</div>
+              <div class="sb-row">Up to 48 surfaces · 365 clips/year per brand · zero paid spend baked into the model</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-right">
+          <div class="rev-wrap" id="chart-en"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="sp2">
+        <div class="sp2l">
+          <div class="eye">Origin · why this exists</div>
+          <h2 class="hl">Teachers who carry lineages sat with builders<br>who carry <em>metrics.</em></h2>
+          <p class="bt" style="margin-bottom:.9rem">The United Spiritual Leaders Forum exists because young readers inherit anxiety faster than vocabulary for it. The Forum asked for a pipeline that respects doctrine, tone, and care — then hands you files you can actually ship.</p>
+          <p class="bt" style="margin-bottom:1rem">Pearl Prime is that pipeline: a composite teacher knowledge base, processed through Ei so the work reads like a human mentor, not a chatbot. In the US that means plainspoken empathy, cultural fluency around burnout and identity, and formats that meet people on BookTok, in earbuds, and on vertical manga feeds.</p>
+          <div class="qb">"Spiritual roots on the copyright page. Therapeutic craft in every chapter."</div>
+        </div>
+        <div class="sp2r">
+          <div class="card"><div class="clbl">Source</div><div class="cval">United Spiritual Leaders Forum</div><div class="csub">Lineage-aware teachers and emerging voices aligned on one mandate: wisdom that can travel without losing its spine.</div></div>
+          <div class="card"><div class="clbl">Engine</div><div class="cval">Ei — Enlightened Intelligence</div><div class="csub">Reader pacing, somatic-friendly sequencing, and guardrails so therapeutic intent survives adaptation.</div></div>
+          <div class="card"><div class="clbl">Mission</div><div class="cval">Change the youth — change the world</div><div class="csub">Ancient maps for modern nervous systems, packaged the way Americans already consume culture.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide sp">
+      <div class="eye">System architecture</div>
+      <h2 class="hl">Four layers. <em>One chain you can operate.</em></h2>
+      <div class="g4" style="margin-top:.8rem">
+        <div class="cell"><span class="cn">01</span><div class="cnm">Teacher</div><div class="cm">Doctrine & tone</div><div class="cd">What is true for this lineage, how disagreement is held, which metaphors are alive.</div></div>
+        <div class="cell"><span class="cn">02</span><div class="cnm">Ei</div><div class="cm">Delivery intelligence</div><div class="cd">Diagnosis of reader state, emotional sequencing, pacing, and personalization hooks.</div></div>
+        <div class="cell"><span class="cn">03</span><div class="cnm">Brand</div><div class="cm">Market-facing voice</div><div class="cd">Cover logic, positioning, retailer metadata, social-safe excerpts.</div></div>
+        <div class="cell"><span class="cn">04</span><div class="cnm">Output</div><div class="cm">Shippable assets</div><div class="cd">Ebook + manga episodes trace to Phoenix cells; audiobook MP3 via Google Play brand admin; podcast + video on separate planning tracks.</div></div>
+      </div>
+      <div class="qb" style="margin-top:1.1rem">Teachers anchor meaning. Ei protects the reader experience. You own the upload calendar.</div>
+    </div>
+
+    <div class="slide sp">
+      <div class="eye">Brand angles · five proven aisles</div>
+      <h2 class="hl" style="margin-bottom:.9rem">Each column is a <em>reader promise</em> you can merchandise.</h2>
+      <div class="g5">
+        <div class="cell"><div style="width:18px;height:2px;background:var(--acc);margin-bottom:.3rem"></div><div class="cnm">Nervous System</div><div class="cm">verb: regulate</div><div class="cd">Stress, panic-adjacent anxiety, somatic loops — the widest discovery tail.</div></div>
+        <div class="cell"><div style="width:18px;height:2px;background:var(--acc);margin-bottom:.3rem"></div><div class="cnm">Identity & Direction</div><div class="cm">verb: discover</div><div class="cd">Purpose, values, "who am I now" — dominant Gen Z frame.</div></div>
+        <div class="cell"><div style="width:18px;height:2px;background:var(--acc);margin-bottom:.3rem"></div><div class="cnm">Emotional Healing</div><div class="cm">verb: release</div><div class="cd">Grief, repair, relational residue — premium completion rates when done gently.</div></div>
+        <div class="cell"><div style="width:18px;height:2px;background:var(--acc);margin-bottom:.3rem"></div><div class="cnm">Performance & Focus</div><div class="cm">verb: build</div><div class="cd">Flow, discipline, creative stamina — readers pay for outcomes here.</div></div>
+        <div class="cell"><div style="width:18px;height:2px;background:var(--acc);margin-bottom:.3rem"></div><div class="cnm">Spiritual Awakening</div><div class="cm">verb: remember</div><div class="cd">Dharma, contemplative depth, awe — slower funnel, highest trust.</div></div>
+      </div>
+    </div>
+
+    <div class="slide sp">
+      <div class="eye">The twelve teacher-led book brands</div>
+      <h2 class="hl" style="margin-bottom:.6rem">Twelve shelves. <em>Twelve unmistakable voices.</em></h2>
+      <p class="bt" style="margin-bottom:.8rem;max-width:780px">These are the Pearl Prime "teacher mode" imprints — each tied to a living teacher archetype, each forbidden from sounding interchangeable. They anchor the English-first catalogs and reappear across locales with culturally tuned skins.</p>
+      <div class="t12">
+        <div class="cell"><span class="cn">01</span><div class="cnm">Stillness Press</div><div class="cm">Ahjan · contemplative alarm literacy</div></div>
+        <div class="cell"><span class="cn">02</span><div class="cnm">Cognitive Clarity</div><div class="cm">Joshin · Zen inquiry for spirals</div></div>
+        <div class="cell"><span class="cn">03</span><div class="cnm">Somatic Wisdom</div><div class="cm">Pamela Fellows · polyvagal craft</div></div>
+        <div class="cell"><span class="cn">04</span><div class="cnm">Qi Foundation</div><div class="cm">Master Feung · energy architecture</div></div>
+        <div class="cell"><span class="cn">05</span><div class="cnm">Digital Ground</div><div class="cm">Miki · presence vs. feed</div></div>
+        <div class="cell"><span class="cn">06</span><div class="cnm">Heart Balance</div><div class="cm">Maat · shadow-honest truth</div></div>
+        <div class="cell"><span class="cn">07</span><div class="cnm">Relational Calm</div><div class="cm">Junko · shame &amp; acceptance</div></div>
+        <div class="cell"><span class="cn">08</span><div class="cnm">Warrior Calm</div><div class="cm">Master Wu · crisis composure</div></div>
+        <div class="cell"><span class="cn">09</span><div class="cnm">Sleep Restoration</div><div class="cm">Master Sha · sacred repair</div></div>
+        <div class="cell"><span class="cn">10</span><div class="cnm">Body Memory</div><div class="cm">Omote · grief in the flesh</div></div>
+        <div class="cell"><span class="cn">11</span><div class="cnm">Solar Return</div><div class="cm">Ra · burnout as initiation</div></div>
+        <div class="cell"><span class="cn">12</span><div class="cnm">Devotion Path</div><div class="cm">Sai Ma · bhakti for caregivers</div></div>
+      </div>
+      <p class="data-foot">Teacher ↔ brand mapping: config/catalog_planning/teacher_brand_archetypes.yaml</p>
+      <div style="margin-top:1rem;padding-top:.85rem;border-top:1px solid var(--rule)">
+        <div class="eye" style="margin-bottom:.45rem">Voice samples · shelf register</div>
+        <div class="g2" style="background:transparent;gap:.5rem">
+          <div class="card" style="padding:.5rem .65rem"><div class="clbl">Ahjan</div><div class="csub" style="font-size:.62rem">"See the alarm before you obey it."</div></div>
+          <div class="card" style="padding:.5rem .65rem"><div class="clbl">Pamela</div><div class="csub" style="font-size:.62rem">"Science first, then the body lets go."</div></div>
+          <div class="card" style="padding:.5rem .65rem"><div class="clbl">Joshin</div><div class="csub" style="font-size:.62rem">"Cut the loop without insulting your mind."</div></div>
+          <div class="card" style="padding:.5rem .65rem"><div class="clbl">Sai Ma</div><div class="csub" style="font-size:.62rem">"Devotion turned inward refills the cup."</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide sp">
+      <div class="eye">Thirty-seven worldwide manga brands · Phoenix-counted surfaces</div>
+      <h2 class="hl" style="margin-bottom:.6rem">Manga meets Prime on one <em>coverage matrix.</em></h2>
+      <p class="bt" style="margin-bottom:.9rem;max-width:760px">Canonical manga registry holds <strong style="color:var(--ink);font-weight:500">37</strong> production brands. Pearl Prime pairs those lanes with the twelve teacher-led book imprints inside a single brand-admin mental model: you always know which brand row you are feeding, which locale grammar applies, and which <strong style="color:var(--ink);font-weight:500">Phoenix-counted</strong> surfaces (ebook + manga) ship inside the <strong style="color:var(--ink);font-weight:500">259</strong>-cell production spine.</p>
+      <div class="g5" style="margin-bottom:.9rem">
+        <div class="cell"><div class="cnm">Ebook</div><div class="cd">EPUB / Kindle-ready blocks · Phoenix cell</div></div>
+        <div class="cell"><div class="cnm">Audiobook</div><div class="cd">Script = ebook; MP3 via Google Play brand admin · <strong>not</strong> a Phoenix cell</div></div>
+        <div class="cell"><div class="cnm">Manga</div><div class="cd">Vertical episodes + alt layouts per locale · Phoenix cell</div></div>
+        <div class="cell"><div class="cnm">Podcast</div><div class="cd">Separate planning track · not in 222 regular cells</div></div>
+        <div class="cell"><div class="cnm">Video</div><div class="cd">Social / motion lane · separate from 222-cell spine</div></div>
+      </div>
+      <div class="qb">37 × 3 × 2 ebook+manga = <strong>222</strong> regular cells · +37 Japan manga-only parallel (Line Manga stack) = <strong>259</strong> Phoenix-planned cells — supersedes retired 555 / 45,216 slide math (operator 2026-05-10).</div>
+      <p class="data-foot">Manga canon count: config/manga/canonical_brand_list.yaml · Path X note: docs/PEARL_ARCHITECT_STATE.md</p>
+    </div>
+
+    <div class="slide sp">
+      <div class="eye">Worldwide markets · Three languages, one spine</div>
+      <h2 class="hl" style="margin-bottom:.5rem">Where you publish — <em>in one glance.</em></h2>
+      <p class="bt" style="margin-bottom:.6rem;max-width:720px">The Pearl command preview pages open with the same "choose your market" instinct you see on phoenix-command: a grid of locales, each implying different storefronts, cadence, and social gravity. This deck locks the <strong style="color:var(--ink);font-weight:500">numeric spine</strong> to the worldwide catalog plan so finance, ops, and brand admins share one vocabulary.</p>
+      <svg class="world-map" viewBox="0 0 360 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <ellipse cx="180" cy="60" rx="170" ry="52" fill="none" stroke="#b45309" stroke-width="0.6" opacity="0.35"/>
+        <path d="M40 70 Q120 30 200 55 T340 65" fill="none" stroke="#7a6050" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="95" cy="52" r="4" fill="#b45309" opacity="0.55"/><circle cx="270" cy="48" r="4" fill="#b45309" opacity="0.55"/><circle cx="235" cy="78" r="4" fill="#d97706" opacity="0.55"/>
+      </svg>
+      <div class="g3">
+        <div class="cell" style="padding:1rem 1rem 1.1rem">
+          <div class="clbl">en_US</div>
+          <div class="cval" style="font-size:1.5rem;margin:.2rem 0">4,521</div>
+          <div class="csub">Packaged-asset slice (regular 222-cell spine) · 37 brands · 74 ebook+manga cells (37×2) inside the English track · 1 : 1 : 2 weighting vs other columns.</div>
+          <div class="data-foot">Series / episode rollups: worldwide_catalog_plan_en_US_2026-05-10.tsv (PR #1023)</div>
+        </div>
+        <div class="cell" style="padding:1rem 1rem 1.1rem">
+          <div class="clbl">ja_JP</div>
+          <div class="cval" style="font-size:1.5rem;margin:.2rem 0">4,521</div>
+          <div class="csub">Regular ja_JP lane · 74 ebook+manga cells · Google Play / Amazon spine · parallel +37 manga-only cells (Line Manga entity) tracked separately.</div>
+          <div class="data-foot">Rollups: worldwide_catalog_plan_ja_JP_2026-05-10.tsv (PR #1023)</div>
+        </div>
+        <div class="cell" style="padding:1rem 1rem 1.1rem">
+          <div class="clbl">zh · zh_TW + zh_CN</div>
+          <div class="cval" style="font-size:1.5rem;margin:.2rem 0">9,044</div>
+          <div class="csub">Combined zh workload · 74 planner cells in the zh locale column of the 222-cell regular matrix · doubled script outputs vs en/ja columns (1 : 1 : 2).</div>
+          <div class="data-foot">Rollups: worldwide_catalog_plan_zh_2026-05-10.tsv (PR #1023)</div>
+        </div>
+      </div>
+      <div style="margin-top:.85rem;padding:.65rem .9rem;border:1px solid var(--rule);background:var(--bg2)">
+        <div class="snum" style="font-size:1.4rem">21,100</div>
+        <span class="slbl" style="display:inline;margin-left:.4rem">total Phoenix-planned packaged-asset headline (259-cell model)</span>
+        <p class="bt" style="margin-top:.45rem;font-size:.72rem"><strong style="font-weight:500;color:var(--ink)">259</strong> production cells · <strong style="font-weight:500;color:var(--ink)">222</strong> regular (37×3×2 ebook+manga) + <strong style="font-weight:500;color:var(--ink)">37</strong> Japan manga-only parallel (Line Manga + JP platforms; separate JP entity) · rescales retired <strong style="font-weight:500;color:var(--ink)">45,216</strong> deck numerator by <strong style="font-weight:500;color:var(--ink)">259÷555</strong> per <strong style="font-weight:500;color:var(--ink)">PEARL_PRIME_WORLDWIDE_CATALOG_PLAN_V1</strong> §3.0 (operator 2026-05-10). <strong style="font-weight:500;color:var(--ink)">Audiobook</strong> = Google Play brand-admin output (not Phoenix-generated). <strong style="font-weight:500;color:var(--ink)">Podcast</strong> = separate planning track.</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="sp2">
+        <div class="sp2l">
+          <div class="eye">48Social · exclusive Pearl Prime partner</div>
+          <h2 class="hl">Discovery that is <em>mined from the manuscript,</em> not glued on after.</h2>
+          <p class="bt" style="margin-bottom:.8rem">48Social is its own shop — Pearl Prime's exclusive organic partner. They lift emotional peaks, teachable beats, and sonic hooks, then render them into daily short-form posts across the platforms Americans already scroll.</p>
+          <div style="display:flex;flex-direction:column;gap:.28rem;margin-top:.4rem">
+            <div style="display:flex;align-items:center;gap:.5rem"><span style="color:var(--acc);font-size:.7rem">↓</span><span style="font-size:.78rem;color:var(--ink2)">Peaks detected in ebook + audio + manga</span></div>
+            <div style="display:flex;align-items:center;gap:.5rem"><span style="color:var(--acc);font-size:.7rem">↓</span><span style="font-size:.78rem;color:var(--ink2)">Re-rendered as reels, audiograms, quote cards</span></div>
+            <div style="display:flex;align-items:center;gap:.5rem"><span style="color:var(--acc);font-size:.7rem">↓</span><span style="font-size:.78rem;color:var(--ink2)">Posted daily — no ad spend required in the base model</span></div>
+            <div style="display:flex;align-items:center;gap:.5rem"><span style="color:var(--acc);font-size:.7rem">↓</span><span style="font-size:.78rem;color:var(--acc)">Discovery funnels back to your storefronts</span></div>
+          </div>
+        </div>
+        <div class="sp2r">
+          <div class="card"><div class="clbl">US surfaces</div><div class="cval">TikTok · Reels · Shorts · X · YouTube</div><div class="csub">BookTok energy without BookTok chaos — clips tethered to the lesson, not the trend of the hour.</div></div>
+          <div class="card"><div class="clbl">Economics reminder</div><div class="cval">5% social lift fee · $850–$3.4K/mo by month 12</div><div class="csub">Modeled like royalty: predictable, disclosed, tied to performance bands you can stress-test.</div></div>
+          <div class="card"><div class="clbl">Operator note</div><div class="cval">Phoenix command UI</div><div class="csub">Locale chooser pattern mirrored from the Pearl Prime command preview (e.g. 729184d3 deployment) — same mental map, different skin.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide sp">
+      <div class="eye">Brand Director · weekly operating rhythm</div>
+      <h2 class="hl" style="margin-bottom:.9rem">Monday packaging, <em>Friday social approval.</em></h2>
+      <div class="g2">
+        <div style="background:var(--bg);padding:.75rem 1rem">
+          <div class="dr"><span class="dnum">MON</span><div><div class="dnm">Receive &amp; QC</div><div class="dtk">Pull the packet, diff against prior week, flag anything that feels off-brand before upload.</div></div></div>
+          <div class="dr"><span class="dnum">TUE</span><div><div class="dnm">Ebooks + manga</div><div class="dtk">KDP / Apple / Google + Canvas or Tapas episode depending on lane.</div></div></div>
+          <div class="dr"><span class="dnum">WED</span><div><div class="dnm">Audio + podcast</div><div class="dtk">Aggregator passes, Spotify / Apple checks, show-notes for RSS.</div></div></div>
+          <div class="dr" style="border-bottom:none"><span class="dnum">THU</span><div><div class="dnm">Live verification</div><div class="dtk">Storefront QA, price parity, link rot hunt — especially after metadata pushes.</div></div></div>
+        </div>
+        <div style="background:var(--bg2);padding:.75rem 1rem">
+          <div class="dr"><span class="dnum">FRI</span><div><div class="dnm">48Social approvals</div><div class="dtk">Clip review, tone check, crisis-of-the-week sensitivity pass.</div></div></div>
+          <div class="dr"><span class="dnum">SAT</span><div><div class="dnm">Revenue scan</div><div class="dtk">KDP, Play, audio dashboards — note which angle is over-performing.</div></div></div>
+          <div class="dr" style="border-bottom:none"><span class="dnum">SUN</span><div><div class="dnm">Plan / breathe</div><div class="dtk">Skim next packet, pre-stage covers, protect one offline hour — sustainability is part of the brand.</div></div></div>
+        </div>
+      </div>
+      <p class="data-foot">Brand admin onboarding wizard routes permissions + locale packs once you accept a lane. Full US royalty tables: <code style="font-family:var(--mono);font-size:.65rem">pearl_prime_v6-3.html</code> · Phoenix-command locale grid: see deployment notes in authoring QA doc.</p>
+    </div>
+
+    <div class="slide" style="background:#1c1009;position:absolute;inset:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));overflow-y:auto">
+      <div style="padding:3rem 2.5rem 3.5rem 4.5rem;display:flex;flex-direction:column;justify-content:center">
+        <div class="eye" style="color:var(--acc2)">Pearl Prime · United States · Brand Director</div>
+        <h2 style="font-family:var(--serif);font-weight:300;line-height:1.05;letter-spacing:-.02em;font-size:clamp(2rem,4vw,3.4rem);color:#faf6f0;margin-bottom:1rem">Readers are waiting on the other side of the upload button.<br><em style="color:var(--acc2)">Be the steward they trust.</em></h2>
+        <p style="font-size:.83rem;font-weight:300;line-height:1.8;color:rgba(250,246,240,.5);max-width:420px;margin-bottom:1.4rem">If you want ancient wisdom to sound like it belongs beside the books Americans already love — not like a press release — this system was built so you can ship weekly without becoming a studio.</p>
+        <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+          <a href="https://brand-admin-onboarding.pages.dev/wizard" style="font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.5rem 1.2rem;border-radius:1px;text-decoration:none;background:var(--acc);color:#fff;border:1px solid var(--acc)">Start Brand Director onboarding ↗</a>
+          <button onclick="showLanding()" style="font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;padding:.5rem 1rem;border-radius:1px;cursor:pointer;border:1px solid rgba(250,246,240,.12);color:rgba(250,246,240,.3);background:transparent">← Choose another locale deck</button>
+        </div>
+      </div>
+      <div style="padding:3rem 3rem 3.5rem 2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1rem;border-left:1px solid rgba(250,246,240,.06)">
+        <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.25);margin-bottom:.2rem">What happens next</div>
+        <div style="border:1px solid rgba(250,246,240,.07);background:rgba(250,246,240,.03);padding:.9rem 1rem">
+          <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin-bottom:.4rem">1 · Wizard</div>
+          <div style="font-size:.72rem;color:rgba(250,246,240,.5);line-height:1.65">You confirm lane, risk tolerance, and storefront access. We generate the checklist you actually follow.</div>
+        </div>
+        <div style="border:1px solid rgba(250,246,240,.07);background:rgba(250,246,240,.03);padding:.9rem 1rem">
+          <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin-bottom:.4rem">2 · Weekly packets</div>
+          <div style="font-size:.72rem;color:rgba(250,246,240,.5);line-height:1.65">Assets arrive labeled for each surface — ebook, audiobook, manga, podcast, video — aligned to the worldwide matrix.</div>
+        </div>
+        <div style="border:1px solid rgba(250,246,240,.07);background:rgba(250,246,240,.03);padding:.9rem 1rem">
+          <div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin-bottom:.4rem">3 · Deploy + review</div>
+          <div style="font-size:.72rem;color:rgba(250,246,240,.5);line-height:1.65">Operator publishes this HTML to Cloudflare Pages; you open the live URL and read like a reader, not like QA — pass/fail in one sitting.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="btm"><button class="b-brand" onclick="showLanding()">Pearl<span style="color:var(--acc)">Prime</span> <span style="font-family:var(--mono);font-size:.46rem;opacity:.35">🇺🇸</span></button><div class="b-ctrl"><div class="b-dots" id="d-en"></div><span class="b-cnt" id="c-en">1/10</span><button class="b-btn" id="bb-en" onclick="nav('en',-1)" disabled>← Back</button><button class="b-btn" id="bn-en" onclick="nav('en',1)">Next →</button></div></div>
+</div>
+
+<script>
+var cur={en:0};
+var tot={en:10};
+var RD={
+  en:{peak:'$10,200',platformNote:'Google Play 62% + INaudio/Findaway 38% · organic only · US pilot cluster',
+    vals:[2200,3600,5000,6200,7200,8000,8400,8800,9200,9500,9800,10200],
+    splits:[{l:'You — Brand Director',p:80,c:'#b45309'},{l:'USLF Teachers',p:10,c:'#92400e'},{l:'Pearl Prime',p:5,c:'#d97706'},{l:'48Social',p:5,c:'#a08060'}]}
+};
+function buildChart(p){
+  var el=document.getElementById('chart-'+p);
+  if(!el)return;
+  var d=RD[p];
+  var max=Math.max.apply(null,d.vals);
+  var h='';
+  h+='<div class="rev-title">Revenue stays on your side of the ledger</div>';
+  h+='<div style="margin:.15rem 0 .08rem">';
+  h+='<div style="font-family:var(--mono);font-size:.52rem;color:var(--ink3);letter-spacing:.06em;margin-bottom:.1rem">Modeled ramp</div>';
+  h+='<div class="rev-big">'+d.peak+'</div>';
+  h+='<div class="rev-sub">Monthly · by month 12</div>';
+  h+='</div>';
+  h+='<div style="font-size:.6rem;color:var(--acc);font-family:var(--mono);letter-spacing:.05em;margin:.2rem 0 .4rem">'+d.platformNote+'</div>';
+  h+='<div class="bars">';
+  var months=['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12'];
+  for(var i=0;i<d.vals.length;i++){
+    var bh=Math.round((d.vals[i]/max)*62);
+    var last=(i===d.vals.length-1);
+    h+='<div class="bar-col">';
+    h+='<div class="bar-fill" style="height:'+bh+'px;background:'+(last?'var(--acc)':'rgba(180,83,9,.3)')+'"></div>';
+    h+='<div class="bar-lbl">'+months[i]+'</div>';
+    h+='</div>';
+  }
+  h+='</div>';
+  h+='<div style="font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:.45rem 0 .28rem">Split (model)</div>';
+  h+='<div class="rev-split">';
+  for(var j=0;j<d.splits.length;j++){
+    var s=d.splits[j];
+    h+='<div class="rev-split-row">';
+    h+='<span class="rev-split-lbl">'+s.l+'</span>';
+    h+='<div class="rev-split-bar"><div class="rev-split-fill" style="width:'+s.p+'%;background:'+s.c+'"></div></div>';
+    h+='<span class="rev-split-pct" style="color:'+s.c+'">'+s.p+'%</span>';
+    h+='</div>';
+  }
+  h+='</div>';
+  el.innerHTML=h;
+}
+function showLanding(){
+  document.getElementById('v-en').classList.remove('on');
+  document.getElementById('v-landing').classList.add('on');
+}
+function showPath(p){
+  document.getElementById('v-landing').classList.remove('on');
+  document.getElementById('v-'+p).classList.add('on');
+  buildDots(p);updateNav(p);buildChart(p);
+}
+function nav(p,dir){
+  var next=cur[p]+dir;
+  if(next<0||next>=tot[p])return;
+  var ss=document.querySelectorAll('#sl-'+p+' .slide');
+  ss[cur[p]].classList.remove('on');ss[cur[p]].classList.add('out');
+  setTimeout(function(){ss[cur[p]].classList.remove('out');},240);
+  cur[p]=next;ss[next].classList.add('on');updateNav(p);
+}
+function buildDots(p){
+  var el=document.getElementById('d-'+p);el.innerHTML='';
+  for(var i=0;i<tot[p];i++){
+    var d=document.createElement('button');
+    d.className='b-dot'+(i===0?' on':'');
+    (function(idx){d.onclick=function(){jumpTo(p,idx);};})(i);
+    el.appendChild(d);
+  }
+}
+function jumpTo(p,idx){
+  var ss=document.querySelectorAll('#sl-'+p+' .slide');
+  ss[cur[p]].classList.remove('on');cur[p]=idx;ss[idx].classList.add('on');updateNav(p);
+}
+function updateNav(p){
+  var c=cur[p],t=tot[p];
+  document.getElementById('c-'+p).textContent=(c+1)+'/'+t;
+  document.getElementById('bb-'+p).disabled=c===0;
+  document.getElementById('bn-'+p).disabled=c===t-1;
+  document.getElementById('bn-'+p).textContent=c===t-1?'Done':'Next →';
+  document.getElementById('pb-'+p).style.width=((c+1)/t*100)+'%';
+  var dots=document.querySelectorAll('#d-'+p+' .b-dot');
+  dots.forEach(function(d,i){d.classList.toggle('on',i===c);});
+}
+document.addEventListener('keydown',function(e){
+  var active=['en'].find(function(p){return document.getElementById('v-'+p).classList.contains('on');});
+  if(!active)return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')nav(active,1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')nav(active,-1);
+  if(e.key==='Escape')showLanding();
+});
+window.addEventListener('DOMContentLoaded',function(){showPath('en');});
+</script>
+</body>
+</html>
