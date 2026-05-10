@@ -860,7 +860,7 @@ Anti-drift check (additive on draft's own check): The music-mode subsystem expan
 **Audit artifact:** `artifacts/qa/qi_foundation_canonical_reconciliation_2026-05-08.md`.
 ### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — Worldwide catalog production go-live program audit (operator-ratified 2026-05-08; **Phase 1 P0 complete** 2026-05-10)
 
-**Status:** **complete** at the **Phase 1 P0** milestone boundary per **AMENDMENT-2026-05-10-PHASE-1-P0-COMPLETE** (program continues Phases **2–4** toward go-live; **Phase 4** exit criteria remain the only go-live definition).
+**Status:** **ACTIVE** — **Phase 1 P0** closed per **AMENDMENT-2026-05-10-PHASE-1-P0-COMPLETE** + **PR #1022** (Phase 1 P0 closure / activation evidence chain on `main`); **Phase 2 V1.1** execution begins per **AMENDMENT-2026-05-11-V1-1-37-BRAND-ACTIVATION** (program continues Phases **2–4** toward go-live; **Phase 4** exit criteria remain the only go-live definition).
 
 **Context:** Operator requested a **single durable program** for **worldwide production go-live** framed as **37 brands × 4 locales** across the Pearl Prime / brand-admin / dashboard / pipeline surfaces. Past work fragmented into point fixes. This program **freezes** an honest **10-surface** audit (catalog planning, brand dashboard, weekly admin packaging, active-brand classification, author/bio matrix, marketing weekly volumes, spine CLI performance, executive dashboard, command UI ↔ CLI alignment, worktree/disk inventory) so every remediation references **one** `PROJECT_ID` and **named workstreams**.
 
@@ -1543,6 +1543,84 @@ overlay_param:
 **Deliverable pointers:** `docs/specs/PEARL_PRIME_WORLDWIDE_CATALOG_PLAN_V1.md`; `artifacts/catalog/worldwide_catalog_plan_{en_US,ja_JP,zh}_2026-05-10.tsv`; `brand-wizard-app/public/pearl_prime_v6-3-en.html`.
 
 **Phase 2 catalog completion line (cross-edit):** The historical bullet that read “37 × 3 × 5 surfaces” in **AMENDMENT-2026-05-10-PHASE-1-P0-COMPLETE §3** is **superseded for cell math** by this amendment — Phoenix-counted worldwide cells are **ebook+manga = 222** plus **Japan manga-only = 37**.
+
+---
+
+#### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT-2026-05-11-V1-1-37-BRAND-ACTIVATION (operator Q1–Q4 ratification; PR #1037 allocation stack)
+
+**Authorization:** Operator decision card answers on **PR #1037** / `docs/specs/PEARL_PRIME_WORLDWIDE_CATALOG_PLAN_V1.md` appendix + `docs/specs/MANGA_ONLY_BRAND_ALLOCATION_V1_SPEC.md` — **Pearl_Architect** doc-only ratification **2026-05-11** (Tier 1). **BINDING:** Q1–Q4 below cannot be reversed by downstream agents without a **separate operator AMENDMENT**. **37 Path X `brand_id` values** remain **frozen** (`config/manga/canonical_brand_list.yaml` — no edits in this wave).
+
+**Operator decisions (verbatim):**
+
+- **Q1** = **V1.1** (ship all **25** missing alongside existing **12**; single Phase 2 wave).
+- **Q2** = **approve** (**5** series × **5** episodes per brand-locale-surface; default).
+- **Q3** = **parallel-locales** (all **4** locales simultaneously per brand).
+- **Q4** = **blocked_lora-first** (**zh_TW** + **zh_CN** `blocked_lora` cleanup before `blocked_score`).
+
+---
+
+##### 1. PHASE 2 V1.1 SCOPE (Q1=V1.1 single wave)
+
+- All **37** Path X canonical brands ship in **V1.1** (**12** existing teacher brands + **25** missing manga-only/category brands).
+- **V1.1** wave produces **200** **NEW** brand-locale-surface cells (**25** brands × **4** locales × **2** surfaces) **ON TOP OF** existing **12**-brand × **4**-locale × **2**-surface = **96** cells.
+- **Total V1.1 cells: 296** (per **PR #1037** TSV row count: `artifacts/qa/worldwide_catalog_37_brand_allocation_plan_2026-05-11.tsv`).
+- **V1.2 deferred:** **NOT** a deferred-brand pile; reserved for **surface expansion** (e.g., adding **video** to brands that currently have **ebook+manga**).
+- **Anti-drift:** do **NOT** spawn **V1.2-deferred-brand** workstreams; if any agent surfaces “ship **25** brands later,” that violates **Q1=V1.1** ratification.
+
+##### 2. BRAND VOLUMES (Q2=approve default 5×5)
+
+- Default per brand-locale-surface: **5** series × **5** episodes = **25** content units.
+- Total **V1.1** content units (excluding existing **12**): **200** cells × **25** units = **5,000** new content units.
+- Plus existing **12** brands × **4** locales × **2** surfaces × **25** units = **2,400** (or already partially produced).
+- **TOTAL V1.1 target: ~7,400** content units worldwide (**en_US** + **ja_JP** + **zh_TW** + **zh_CN** regular catalogs).
+- **Note:** Japan-manga-only catalog (**37** cells, separate cap, parallel program) is **NOT** counted in **V1.1** worldwide totals; it runs as **`PRJ-JAPAN-MANGA-ONLY-CATALOG-V1`**.
+- **Anti-drift:** per-brand volume override requires **AMENDMENT** (not silent edits to TSV).
+
+##### 3. LOCALE PARALLELISM (Q3=parallel-locales)
+
+- All **4** locales (**en_US**, **ja_JP**, **zh_TW**, **zh_CN**) generate **simultaneously** per brand.
+- **Pearl Star** + **RunComfy** dual-path handles concurrent dispatch (per **IMG-RENDER-DUAL-PATH-V1-01** + **AMENDMENT-2026-05-10-PATH-BY-WORKFLOW**).
+- **Cost expectation:** RunComfy **$10/mo** cap will be exercised more aggressively than serial-locale approach; **Pearl Star** handles overflow.
+- **Anti-drift:** any agent that switches to **serial-locale** (**en-first**) without operator **AMENDMENT** violates **Q3**.
+- **Pearl_Conductor v3** (when fired) **MUST** honor **parallel-locale** dispatch order.
+
+##### 4. CLEANUP PRIORITY (Q4=blocked_lora-first)
+
+**Pearl_Dev** priority order:
+
+1. **zh_TW** + **zh_CN** `blocked_lora` rows (**~150** total per **PR #1035** audit).
+2. **zh_TW** `blocked_score` rows (**160** per audit).
+3. **ja_JP** `warrior_calm` tentpole mismatch (single-brand metadata fix).
+
+**Rationale:** `blocked_lora` blocks **all** rendering for those rows; `blocked_score` blocks promotional metadata but **doesn't** gate renders.
+
+**Anti-drift:** do **not** interleave `blocked_score` before `blocked_lora` unless operator **AMENDMENT**.
+
+##### 5. STATUS TRANSITIONS
+
+- Cap entry **WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01:** continues as **ACTIVE** (**Phase 1 P0** complete via **#1022**; **Phase 2** begins now).
+- Workstreams ratified to **runnable** per **Q1**:
+  - `ws_catalog_generator_extend_to_37_brands_20260511` → **runnable** (**Pearl_Dev**; the most critical-path ws).
+  - `ws_zh_manga_blocked_lora_followup_20260511` → **runnable** (**Pearl_Dev**; per **Q4** priority).
+  - `ws_zh_manga_blocked_score_followup_20260511` → **status=queued** (waits on `blocked_lora` completion).
+- **NEW** workstreams opened by this **AMENDMENT**:
+  - `ws_catalog_generator_v1_1_25_brand_authoring_20260511` → **runnable** (**Pearl_Marketing**; authors per-brand series themes for the **25** missing brands).
+  - `ws_pearl_conductor_v3_full_queue_activation_20260511` → **status=queued_after_v1_1_authoring** (**Pearl_Dev**; fires unattended generation once **25**-brand themes authored + generator extended + `blocked_lora` cleared).
+  - `ws_warrior_calm_ja_jp_tentpole_fix_20260511` → **status=queued** (**Pearl_Editor**; small metadata fix).
+
+##### 6. ACTION ITEMS (named for next-router fan-out; not authored here)
+
+| ID | Owner | Action |
+|---|---|---|
+| **a.** | **Pearl_Dev** | Extend catalog generator to **37** Path X brands (consume **PR #1037** TSV; mirror `music_mode_branch.py` pattern from **#1008**). |
+| **b.** | **Pearl_Marketing** | Author per-brand series themes for the **25** missing brands (e.g., `healing_ground` series titles, workplace brands' topic anchors, romance brands' arc shapes). |
+| **c.** | **Pearl_Dev** | Clear **zh_TW** + **zh_CN** `blocked_lora` rows (**~150** rows) — likely LoRA training or asset gating fix. |
+| **d.** | **Pearl_Editor** | **ja_JP** `warrior_calm` tentpole metadata fix (single-brand). |
+| **e.** | **Pearl_Dev** (after **a**+**b**+**c**): | **Pearl_Conductor v3** prompt — full-queue unattended generation against all **37** × **4** locales × **2** surfaces (estimated **5–10** days wall on **Pearl Star** + **RunComfy** under **$10** cap). **DO NOT** spawn / fire **v3** until **a**, **b**, and **c** are satisfied — this **AMENDMENT** is the gate. |
+| **f.** | **Pearl_Brand** | Dashboard updates to surface **37**-brand status + **V1.1** progress per brand. |
+| **g.** | **Pearl_Architect** | Closeout **AMENDMENT** once **V1.1** completes (target: **7,400** content units shipped; first end-to-end worldwide brand catalog ratified at **100%**). |
+
+**Pointers:** **PR #1037** (allocation plan TSV); **PR #1035** (status diagnostic); **PR #1022** (Phase 1 P0 closure); **AMENDMENT-2026-05-10-PATH-BY-WORKFLOW** (dual-path routing); `docs/specs/MANGA_ONLY_BRAND_ALLOCATION_V1_SPEC.md`; `artifacts/qa/worldwide_catalog_37_brand_allocation_plan_2026-05-11.tsv`.
 
 ---
 
