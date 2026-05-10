@@ -14,7 +14,7 @@
     },
     "3": {
         "class_type": "CLIPTextEncode",
-        "inputs": {"text": "{{negative_prompt}}", "clip": ["1", 1]}
+        "inputs": {"text": "{{negative_prompt}}, text, words, letters, captions, watermark, signature, signs, writing, typography, text characters, font, lettering, logos, subtitles, calligraphy", "clip": ["1", 1]}
     },
     "4": {
         "class_type": "EmptyLatentImage",

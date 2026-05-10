@@ -139,7 +139,7 @@ def _build_workflow(
             if "{{positive_prompt}}" in inputs["text"]:
                 inputs["text"] = positive_prompt
             elif "{{negative_prompt}}" in inputs["text"]:
-                inputs["text"] = negative_prompt
+                inputs["text"] = inputs["text"].replace("{{negative_prompt}}", negative_prompt)
 
         # Replace input image
         if isinstance(inputs.get("image"), str) and "{{input_image}}" in inputs["image"]:
