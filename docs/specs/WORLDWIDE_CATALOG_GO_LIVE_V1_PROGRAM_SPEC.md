@@ -124,3 +124,37 @@ Doc-only snapshot mirroring the architect cap entry `WORLDWIDE-CATALOG-GO-LIVE-V
 Pearl_PM may now route P1 prompts (Surface 2 broader binding + Surface 8 executive dashboard) against `ws_worldwide_gl_s02_*` and `ws_worldwide_gl_s08_*` without further architect ratification. P0 ws rows (`ws_worldwide_gl_s01_*`, `ws_worldwide_gl_s04_*`, `ws_worldwide_gl_s06_*`) may be flipped from `runnable`/`active` to `done` in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv` at Pearl_PM's discretion.
 
 Authority cross-ref: `docs/PEARL_ARCHITECT_STATE.md` → `WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT — 2026-05-10`.
+
+---
+
+## §AMENDMENT-2026-05-10-PHASE-1-P0-COMPLETE
+
+Operator-readable mirror of `docs/PEARL_ARCHITECT_STATE.md` → **WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT-2026-05-10-PHASE-1-P0-COMPLETE**. Ratifies **Phase 1 P0 = 100% complete** and opens **Phase 2**.
+
+### 1. Phase 1 P0 100% complete
+
+- **Visual signoff:** Operator **`PHASE_1_P0_VISUAL_SIGNOFF_PASS`** — **5 / 5** renders **PASS** tied to **PR #1020** batch-runner activation.
+- **PNG evidence (repo-relative):** `artifacts/manga/activation_smoke_2026-05-10/smoke_junko_animagine_ja/smoke_junko_animagine_ja.png`; `.../smoke_miki_qwen_ja/smoke_miki_qwen_ja.png`; `.../smoke_feung_animagine_zh/smoke_feung_animagine_zh.png`; `.../smoke_joshin_flux_en/smoke_joshin_flux_en.png`; `.../smoke_ahjan_flux_en/smoke_ahjan_flux_en.png` (see `artifacts/qa/batch_runner_activation_smoke_2026-05-10.md` on **PR #1020**).
+- **Anti-drift gate:** ≥ **1** operator-validated real dual-path batch (Pearl Star + RunComfy), per **AMENDMENT-2026-05-08-PRIORITIES**.
+- **Wave duration:** **2026-05-08 → 2026-05-10** (~**2** days).
+- **Merged PR count (window):** **63** PRs merged on `merged:2026-05-08..2026-05-10` (**≥ 35** program threshold).
+
+**Verbatim binding claim:** **Phase 1 P0 is 100% complete** for **`PRJ-WORLDWIDE-CATALOG-GO-LIVE-V1`**.
+
+### 2. Phase 2 entry criteria
+
+Phase 1 P0 milestone closed; CI baseline mostly green (Phase 2.6 in flight); Pearl Star + RunComfy dual-path exercised; image batch runner **dry-run + live** modes available.
+
+### 3. Phase 2 scope
+
+Image polish (remove baked-in text; consistency; voice fidelity; lettering stays pipeline-owned); **37 × 3 × 5** catalog matrix; **6–12** authors/brand; dashboard main-character + cover panels; full-queue activation after polish (**~19.3d → ~6–10d** dual-path).
+
+### 4. Anti-drift
+
+**“Phase 1 P0 is 100% complete”** cannot be downgraded without a new operator **AMENDMENT**. Phase 2 `ws_*` rows are **runnable** but **not** auto-spawned without operator authorization. Catalog master plan = Pearl_PM + Pearl_Marketing.
+
+### 5. Action items (named `ws_*`)
+
+`ws_phase_2_negative_prompt_text_removal_20260510` (Pearl_Dev); `ws_phase_2_worldwide_catalog_plan_v1_20260510` (Pearl_PM + Pearl_Marketing); `ws_phase_2_dashboard_manga_character_display_20260510` (Pearl_Brand); `ws_phase_2_full_queue_activation_20260510` (Pearl_Dev / Pearl_Conductor v3).
+
+**Authority cross-ref (supersedes gate text):** parent architect cap **AMENDMENT-2026-05-10-PHASE-1-P0-COMPLETE** closes the prior “no 100% until real batch” hold on **Phase 1 P0** once this spec section ships on `main`.

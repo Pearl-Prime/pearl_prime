@@ -858,9 +858,9 @@ Anti-drift check (additive on draft's own check): The music-mode subsystem expan
 **Budget:** This PR = **docs-only** (~2 files, ~0 engineering risk). Follow-up Pearl_Dev YAML PR = **small** (single-file minimum; **medium** if full `config/manga/` alias sweep). CI Phase 1 = **~0.5–1 eng-day** (script + workflow); Phase 2 = **backlog sized** after alias inventory.
 
 **Audit artifact:** `artifacts/qa/qi_foundation_canonical_reconciliation_2026-05-08.md`.
-### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — Worldwide catalog production go-live program audit (proposed 2026-05-08; awaits operator Q1–Q5 + phase approval)
+### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — Worldwide catalog production go-live program audit (operator-ratified 2026-05-08; **Phase 1 P0 complete** 2026-05-10)
 
-**Status:** **proposed** (program record + gap matrix only — no implementation in the opening PR).
+**Status:** **complete** at the **Phase 1 P0** milestone boundary per **AMENDMENT-2026-05-10-PHASE-1-P0-COMPLETE** (program continues Phases **2–4** toward go-live; **Phase 4** exit criteria remain the only go-live definition).
 
 **Context:** Operator requested a **single durable program** for **worldwide production go-live** framed as **37 brands × 4 locales** across the Pearl Prime / brand-admin / dashboard / pipeline surfaces. Past work fragmented into point fixes. This program **freezes** an honest **10-surface** audit (catalog planning, brand dashboard, weekly admin packaging, active-brand classification, author/bio matrix, marketing weekly volumes, spine CLI performance, executive dashboard, command UI ↔ CLI alignment, worktree/disk inventory) so every remediation references **one** `PROJECT_ID` and **named workstreams**.
 
@@ -1036,6 +1036,72 @@ Authorization: Pearl_Architect 2026-05-10 doc-only progress amendment (operator 
 **Pointers:** prior matrix AMENDMENT (same day, above); `docs/specs/WORLDWIDE_CATALOG_GO_LIVE_V1_PROGRAM_SPEC.md`; `artifacts/qa/go_live_readiness_audit_2026-05-08.md` Phase 4 exit criteria; `docs/PEARL_PM_STATE.md` wave snapshot.
 
 Authorization: Pearl_PM + Pearl_Architect joint transition bookkeeping 2026-05-10 (doc-only; no operator decision required).
+
+#### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT-2026-05-10-PHASE-1-P0-COMPLETE
+
+**Authorization:** Operator **`PHASE_1_P0_VISUAL_SIGNOFF_PASS`** on **5 / 5** real renders executed under **PR #1020** batch-runner activation (dual-path Pearl Star + RunComfy). This amendment ratifies the parent cap **status → `complete`** at the **Phase 1 P0** boundary and opens **Phase 2** per **AMENDMENT-2026-05-08-PRIORITIES** anti-drift gate (real operator-validated batch).
+
+**`main` HEAD anchor (doc authoring):** `3c35e9f64ced852555fe842152225efe26d4ff9a` (2026-05-10).
+
+---
+
+##### 1. PHASE 1 P0 100% COMPLETE
+
+- **Visual signoff:** Operator confirmed **`PHASE_1_P0_VISUAL_SIGNOFF_PASS`** — **5 / 5** renders **PASS** (full-resolution review of real PNG outputs).
+- **PNG evidence (repo-relative paths; PR #1020 smoke table):**
+  1. `artifacts/manga/activation_smoke_2026-05-10/smoke_junko_animagine_ja/smoke_junko_animagine_ja.png`
+  2. `artifacts/manga/activation_smoke_2026-05-10/smoke_miki_qwen_ja/smoke_miki_qwen_ja.png`
+  3. `artifacts/manga/activation_smoke_2026-05-10/smoke_feung_animagine_zh/smoke_feung_animagine_zh.png`
+  4. `artifacts/manga/activation_smoke_2026-05-10/smoke_joshin_flux_en/smoke_joshin_flux_en.png`
+  5. `artifacts/manga/activation_smoke_2026-05-10/smoke_ahjan_flux_en/smoke_ahjan_flux_en.png`
+- **Anti-drift gate satisfied:** ≥ **1** operator-validated **real** dual-path batch (Pearl Star + RunComfy) with machine-verified PNG signatures + logged hashes per `artifacts/qa/batch_runner_activation_smoke_2026-05-10.md` (**PR #1020**; file lands with runner merge).
+- **Wave duration:** **2026-05-08 → 2026-05-10** (~**2** days) for the **WORLDWIDE** activation wave.
+- **Total PRs merged (inclusive window):** `gh pr list --state merged --search merged:2026-05-08..2026-05-10` → **63** merged PRs on the tracked GitHub remote (**≥ 35** program wave threshold).
+
+**Binding claim (verbatim):** **Phase 1 P0 is 100% complete** for **`PRJ-WORLDWIDE-CATALOG-GO-LIVE-V1`** at the milestone boundary defined by **AMENDMENT-2026-05-08-PRIORITIES** + operator visual signoff + real-render evidence above.
+
+---
+
+##### 2. PHASE 2 ENTRY CRITERIA
+
+1. **Phase 1 P0 milestone closed** — this AMENDMENT (operator visual signoff + anti-drift gate met).
+2. **CI baseline mostly green** — Phase **1 + 2 + 2.5** delivered; **2.6** in flight per **PRJ-CI-BASELINE-RECOVERY-V1**; eventual elimination of **`--admin`** merge bypass remains an acceptance goal (`ws_ci_recovery_acceptance`).
+3. **Pearl Star + RunComfy dual-path operational** — live dispatch exercised under **PR #1020** activation harness (`--activate` / `--live` modes; see `IMG-RENDER-DUAL-PATH-V1-01`).
+4. **Image batch runner activated** — **dry-run** scaffold (**PR #995**) + **live** activation path (**PR #1020**) with replayable smoke plan.
+
+---
+
+##### 3. PHASE 2 SCOPE
+
+- **Polish — image quality:** suppress **text / words** baked into raster renders (negative-prompt + workflow hygiene); character consistency; brand voice fidelity. Final lettering remains the dedicated **lettering pipeline** (not generative in-image text).
+- **Catalog completion:** **37** brands × **3** locales × **5** surfaces (**ebook**, **audiobook**, **manga**, **podcast**, **video**).
+- **Author / teacher associations:** **6–12** authors per brand with bios.
+- **Dashboard expansion:** main-character display **per manga series**; per-brand **cover art** panel.
+- **Full queue activation (Pearl_Conductor v3):** **~19.3-day** unattended generation backlog → **~6–10 days** wall-clock at dual-path parallelism (Pearl Star + RunComfy), **after** Phase 2 P0 polish closes known image-defect classes (notably baked-in text).
+
+---
+
+##### 4. ANTI-DRIFT
+
+- The claim **“Phase 1 P0 is 100% complete”** is **BINDING** for this program record — it **cannot** be downgraded or contradicted in coordination docs **without a new operator AMENDMENT** referencing this block.
+- **Phase 2** workstreams enumerated in §5 are **queued** (`status=runnable` in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`); **no autonomous spawn / execution** without **separate operator authorization** (Pearl_Conductor policy unchanged).
+- **Text baked into images** is **Phase 2 P0 polish** (**high priority**; operator-flagged defect on otherwise PASS renders).
+- The **master catalog × locale × surface matrix** is a **Phase 2 strategic deliverable** (**Pearl_PM** + **Pearl_Marketing** scope; not guessed here).
+
+---
+
+##### 5. ACTION ITEMS (named `ws_*` — prompts not authored in this amendment)
+
+| workstream_id | Primary owners | Intent |
+|---|---|---|
+| `ws_phase_2_negative_prompt_text_removal_20260510` | Pearl_Dev | Patch workflow JSONs to add **text / words / typography** to **negative prompts**; re-render for operator verification (lettering remains pipeline-owned). |
+| `ws_phase_2_worldwide_catalog_plan_v1_20260510` | Pearl_PM + Pearl_Marketing | Author **37 × 3 × 5** coverage master plan (surfaces above) aligned to **Path X** + marketing SSOT. |
+| `ws_phase_2_dashboard_manga_character_display_20260510` | Pearl_Brand | Add per-series **main character** panel + per-brand **cover art** panel on dashboards. |
+| `ws_phase_2_full_queue_activation_20260510` | Pearl_Dev (Pearl_Conductor **v3**) | Fire **19.3-day** unattended generation backlog **after** Phase 2 P0 polish (text removal + related gates). |
+
+**Supersedes-in-effect:** The prior same-day **“Do NOT close Phase 1 as 100% program-complete … until ≥ 1 real operator-validated batch”** hard note in **AMENDMENT — 2026-05-10 (Phase 1 P0 → Phase 2 transition)** is **closed satisfied** by operator **`PHASE_1_P0_VISUAL_SIGNOFF_PASS`** + evidence §1 above.
+
+**Pointers:** `artifacts/qa/batch_runner_activation_smoke_2026-05-10.md` (**PR #1020**); prior **AMENDMENT — 2026-05-10** matrix + transition blocks; `docs/specs/WORLDWIDE_CATALOG_GO_LIVE_V1_PROGRAM_SPEC.md` §**AMENDMENT-2026-05-10-PHASE-1-P0-COMPLETE**; `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`.
 
 ### FEATURE-KNOB-CATALOG-VARIATION-V1-01 — Structural variation + angle registry alignment + explicit angle_id per row (ratified 2026-05-08)
 
