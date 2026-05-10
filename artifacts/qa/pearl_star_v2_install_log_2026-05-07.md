@@ -197,3 +197,34 @@ Order of operations operator faces:
 ## Pearl_Editor blocker for B6
 
 12 of 12 named teachers pending character_design YAML completion. The Phase A.4 [pre-staged checklist](character_design_a4_pre_staged_checklist_2026-05-07.md) provides axis seeds and operator instructions; ahjan has the richest seed material (12 model_sheets + 8 expressions on disk per `artifacts/manga/image_bank/stillness_press/character_model_sheets.json`). Once Pearl_Editor lands the first `character_design:` block in a series YAML, the reference_sheet_generator (already on main from PR #926) renders the canonical reference PNG against the now-installed PuLID stack — closing the B6 deferral.
+
+---
+
+## Appendix — Qwen-Image transformer shard 08 completion (Pearl_Int, 2026-05-10)
+
+**PROJECT_ID:** PRJ-MANGA-V2 · **Subsystem:** integrations
+
+Transcript (Pearl Star host `pearl_star`):
+
+1. **Stuck single-connection jobs cleared** — `pkill` patterns scoped to avoid matching the SSH session itself (`curl` / `hf download` lines targeting Qwen).
+2. **HF token staged on Pearl Star** via stdin → `/tmp/.hf_token_session` (chmod 600); never passed on `ssh` argv. Token file removed after download (`rm -f /tmp/.hf_token_session`).
+3. **`aria2c`:** system `apt-get` for `aria2` was not usable non-interactively; a **static `aria2c` 1.37.0** binary was placed under `~/.local/bin/aria2c` on Pearl Star (operator-supplied x86_64 musl build). `PATH` included `~/.local/bin` for the download command.
+4. **First attempt (`--split=16 --max-connection-per-server=16`)** produced an **oversized** artifact (~5.2 GiB vs expected **4,984,232,856** bytes) and **SHA256 mismatch** vs Hub LFS OID. Corrupt file + `.aria2` control file **removed**; download **not** declared successful.
+5. **Second attempt (`--split=8 --max-connection-per-server=8`, fresh file)** completed with **`aria2c` status OK**; final size **4984232856** bytes; **no** residual `.aria2` next to the `.safetensors`.
+6. **SHA256 (required gate):**
+
+```
+$ cd ~/phoenix_server/ComfyUI/models/transformer && sha256sum diffusion_pytorch_model-00008-of-00009.safetensors
+caedc7cc2914ab113cfbb3684cf072350201182ae8de1a7308e419385987ae40  diffusion_pytorch_model-00008-of-00009.safetensors
+```
+
+**Verdict: MATCH** (expected OID `caedc7cc2914ab113cfbb3684cf072350201182ae8de1a7308e419385987ae40`).
+
+7. **Inventory:** `find …/transformer -name 'diffusion_pytorch_model-*.safetensors' | wc -l` → **9** (shards 01–09). Text encoder shards (`model-0000[1-4]-of-00004.safetensors`) and VAE `.safetensors` under `models/vae` present per `find` listing at completion time.
+8. **GPU snapshot after completion:** `nvidia-smi --query-gpu=memory.free,memory.used --format=csv` → `2808 MiB` free, `13033 MiB` used (CosyVoice2 + ComfyUI footprint unchanged in spirit from the 2026-05-07 baseline).
+9. **Workflow smoke:** ComfyUI `main.py` on this host **does not** expose `--validate-workflow` (help output checked). Fallback: copied repo workflow JSON to `/tmp`, then **`GET http://127.0.0.1:8188/object_info`** + Python intersection over all `class_type` values → **missing list empty** (all nine node types registered). **Caveat:** `CheckpointLoaderSimple` in `qwen_image_txt2img_manga.json` references `qwen_image_2.0.safetensors`; that filename was **not** present under `models/checkpoints/` at check time — shard completion does not by itself supply the single-file checkpoint; execution smoke remains gated on checkpoint packaging / path config.
+10. **Cleanup:** `/tmp/.hf_token_session`, `/tmp/aria2c_shard08.log`, and the temporary workflow copy under `/tmp` removed after verification.
+
+**Security note:** Any process listing that captured `Authorization: Bearer …` in argv should be treated as a **credential hygiene** signal; operator should **rotate** the Hugging Face token stored in Keychain after this session.
+
+**Detail doc:** [`pearl_star_qwen_shard_08_complete_2026-05-10.md`](pearl_star_qwen_shard_08_complete_2026-05-10.md).
