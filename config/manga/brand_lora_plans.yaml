@@ -136,6 +136,15 @@ character_loras:
     style_ref: devotion_path
     notes: "Indian female, bhakti devotion radiance, flowing presence"
 
+  # Taiwan-only teacher (bright_presence_tw); catalog generator requires a registry row.
+  adi_da:
+    trigger_word: "adi_da_bptw"
+    reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
+    training_steps: 1500
+    ip_adapter_weight: 0.86
+    style_ref: stillness_press
+    notes: "Adi Da teacher-mode (zh_TW bright_presence_tw); train dedicated assets before production renders"
+
 # Per-brand style LoRA (cohesive visual identity across all brand outputs)
 brand_style_loras:
   stillness_press:

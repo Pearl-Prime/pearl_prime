@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Manga Catalog Generator (en_US + ja_JP)
-========================================
+Manga Catalog Generator (Pearl Prime locales)
+=============================================
 
 Materializes the brand × genre allocation matrix in
 config/manga/brand_genre_allocation.yaml into per-locale manga catalog
@@ -268,6 +268,36 @@ def _strip_locale_suffix(brand: str) -> str:
     return brand
 
 
+# zh lattice + Taiwan-only marketing slugs → keys under brand_style_loras
+# (trained teacher / standard styles). See docs/brand_admin/zh_*_distribution_guide.md.
+_CATALOG_BRAND_STYLE_CANON: dict[str, str] = {
+    "sleep_repair": "sleep_restoration",
+    "panic_first_aid": "stabilizer",
+    "gen_z_grounding": "digital_ground",
+    "grief_companion": "body_memory",
+    "inner_security": "relational_calm",
+    "bright_presence": "stillness_press",
+}
+
+
+def _resolve_brand_style_key(style_loras: dict, brand: str) -> tuple[str, str]:
+    """
+    Returns (style_yaml_key, provenance_suffix) for brand_style_loras.
+    provenance_suffix is empty when the row uses a direct YAML key match.
+    """
+    if brand in style_loras:
+        return brand, ""
+    base = _strip_locale_suffix(brand)
+    if base in style_loras:
+        if base != brand:
+            return base, "shared via locale-suffix strip"
+        return base, ""
+    canon = _CATALOG_BRAND_STYLE_CANON.get(base)
+    if canon and canon in style_loras:
+        return canon, f"catalog style map {base!r}→{canon!r}"
+    return "", ""
+
+
 def lora_refs(lora_plans: dict, brand: str, teacher: str | None) -> tuple[str, str]:
     """
     Returns (lora_plan_ref, character_pipeline_ref).
@@ -277,21 +307,24 @@ def lora_refs(lora_plans: dict, brand: str, teacher: str | None) -> tuple[str, s
       2. Try stripping locale suffix (_tw, _cn, _hk, _sg) and matching base
          brand (e.g. stabilizer_tw → stabilizer); when matched, mark in the
          ref so downstream knows it's a shared style.
-      3. Otherwise blank → flagged as blocked_lora.
+      3. Try catalog marketing-base → trained style key map (zh lattice +
+         bright_presence_tw base), per V1.1 Q4 blocked_lora-first cleanup.
+      4. Otherwise blank → flagged as blocked_lora.
 
     Character resolution: teacher_id direct lookup; blank if missing.
     """
     style_loras = (lora_plans.get("brand_style_loras") or {})
     char_loras = (lora_plans.get("character_loras") or {})
 
-    if brand in style_loras:
-        lora_ref = f"brand_lora_plans.brand_style_loras.{brand}"
+    sk, prov = _resolve_brand_style_key(style_loras, brand)
+    if sk:
+        lora_ref = (
+            f"brand_lora_plans.brand_style_loras.{sk} ({prov})"
+            if prov
+            else f"brand_lora_plans.brand_style_loras.{sk}"
+        )
     else:
-        base = _strip_locale_suffix(brand)
-        if base != brand and base in style_loras:
-            lora_ref = f"brand_lora_plans.brand_style_loras.{base} (shared via locale-suffix strip)"
-        else:
-            lora_ref = ""
+        lora_ref = ""
 
     if teacher and teacher in char_loras:
         char_ref = f"brand_lora_plans.character_loras.{teacher}"
@@ -460,7 +493,10 @@ def main() -> int:
             "allocation_matrix_authority": "config/manga/brand_genre_allocation.yaml",
             "genre_reconciliation_completed": True,
             "reconciliation_strategy": "option_C_coexist (mono-genre = tentpole, matrix = portfolio)",
-            "scope": "en_US + ja_JP only — zh_TW + zh_CN deferred per task brief",
+            "zh_tw_zh_cn_lora": (
+                "V1.1 Q4: zh marketing-base slugs resolve to trained brand_style_loras keys; "
+                "adi_da character_loras entry gates bright_presence_tw"
+            ),
         },
         "scope_excluded": [
             "ComfyUI image generation",
