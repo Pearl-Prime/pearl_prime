@@ -794,3 +794,28 @@ Verbatim from program brief (answer in governance / operator session):
 - Aggregates: see Section 3 plus methodology document Section 5.  
 - Next execution owners: Pearl_Marketing (Table 6 + SSOT), Pearl_Dev (dashboard WS), Pearl_Int (Pearl Star Step 4), Pearl_Editor (character_design A4).
 
+---
+
+## Appendix: brand-coverage-37 (allocation summary, 2026-05-11)
+
+**Headline:** 25 Path X canonical brands have **no** `brand_genre_allocation.yaml` row in any locale today; only **12** teacher-aligned brands are materialized for en_US and ja_JP (and 12 + `bright_presence_tw` lane in zh_TW; 12 in zh_CN). Pearl_Conductor v3 wired only to matrix-backed brands therefore spans **12** brands, not **37**, until the generator extension lands.
+
+**Proposed allocation (Pearl_PM + Pearl_Marketing):**
+
+- Machine-readable grid: `artifacts/qa/worldwide_catalog_37_brand_allocation_plan_2026-05-11.tsv` (**296** rows = 37 × 4 locales × 2 surfaces: `ebook` + `manga`).
+- Gap narrative + locale matrix + surface-mix heuristics: `artifacts/qa/worldwide_catalog_37_brand_allocation_audit_2026-05-11.md`.
+- Manga-only / missing-brand allocation rules: `docs/specs/MANGA_ONLY_BRAND_ALLOCATION_V1_SPEC.md`.
+
+**Gap counts (Path X canonical vs genre matrix):** en_US **25** missing; ja_JP **25** missing; zh_TW **24** missing (13 of 37 present, including `bright_presence_tw` → `bright_presence_tw_seinen`); zh_CN **25** missing.
+
+**Incremental surface rows proposed for the 25 missing brands:** **200** (25 × 4 locales × 2 surfaces) at default **5 series × 5 units** per cell in the TSV (`V1.1_proposed`), pending operator Q2 override to tier ladder in Section 1.2 of this document.
+
+**Operator decisions (catalog-scale program — addendum to Section 10):**
+
+- **Q1:** 25 missing brands — ship all in V1.1 (parallel with existing 12), OR phase to V1.2?
+- **Q2:** Default series count per missing brand (5 series × 5 episodes = 25 books-equivalent)? Override per-brand?
+- **Q3:** Locale priority for missing brands — en_US first (per locale-first), OR all 4 locales simultaneously?
+- **Q4:** blocked_lora / blocked_score follow-up — Pearl_Dev priority order?
+
+**Cross-reference:** PR **#1035** catalog planning status diagnostic (per-market authored row counts).
+
