@@ -1,7 +1,38 @@
 # Pearl_PM State
 
-Last verified: 2026-05-05
+Last verified: 2026-05-10
 Owner: Pearl_PM
+
+## Pearl_PM 2026-05-08 → 2026-05-10 program execution snapshot (multi-agent wave)
+
+**Window:** 2026-05-08 → 2026-05-10 (local program clock; GitHub merge timestamps cluster on 2026-05-09 UTC).
+
+**Merged PRs verified:** `gh pr list --repo Ahjan108/phoenix_omega_v4.8 --state merged --limit 120 --search "merged:>2026-05-08"` → **35** merges (operator wave ~25+ satisfied; count refreshed after #1012 weekly slice landed on `main`).
+
+**`origin/main` anchor (post-wave, pre-this-coord-PR):** `ec6e24ccf1` (includes weekly packaging dashboard slice + #1011 CI cover-art WARN stack).
+
+**WORLDWIDE-CATALOG-GO-LIVE-V1 — Phase 1 P0 surfaces (substantially complete):**
+
+| Surface | Scope | Status |
+|--------:|-------|--------|
+| 1 | Catalog / FEATURE-KNOB trio (angle registry align + explicit `angle_id` + structural variation) | merged (#986 / #974 / #978) |
+| 2 | Brand dashboard — active panel + RunComfy spend read path + weekly package status slice | partial merged (#977 / #1005 / #1012); broader binding still P1 |
+| 4 | Active brand classifier + consumers (brand_admin + generators) | merged (#972 + downstream) |
+| 6 | Marketing volume SSOT spec + V1 YAML | merged (#976 / #984) |
+
+**Caps / parallel tracks (wave-linked):**
+
+- **MUSIC-MODE-BRAND-INTEGRATION-V1:** cap active; six ws runnable → **five core implementation lanes completed** on main (registry + wizard + survey save + catalog slice + live-route bundle; PRs include #981 / #983 / #1008 / #1009); freebie funnel remains separate project.
+- **IMG-RENDER-DUAL-PATH-V1:** cap active; **RunComfy wired dry-run** (#1010) + dashboard spend (#1005) + compat audit (#996) + PM plan (#988); batch scaffold **#995** in flight; **queue ACTIVATION** blocked **Pearl Star Step 4** (Qwen-Image shard rollout — operator telemetry ~**7%** on shard **08**).
+- **CI-BASELINE-RECOVERY-V1:** Phase 2 P0 **ratified** (#1006) + **implemented** (#1011); Phase 1 governance bypass **#997** merged; **Pearl_DevOps** owns post-merge Core + Release gate verification on main.
+
+**Pearl Star Step 4:** in flight; **blocks** unattended / batch **image generation ACTIVATION** until model shard rollout completes.
+
+**Operator-side actions remaining:** Hugging Face token rotation (per Pearl_Int / integration runbooks); occasional Step 4 rollout monitoring; RunComfy token staging when moving past dry-run.
+
+**Doc pointers:** `docs/PEARL_ARCHITECT_STATE.md` (WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 **Phase 1 → Phase 2 transition AMENDMENT**); `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`; `artifacts/coordination/ACTIVE_PROJECTS.tsv`.
+
+---
 
 ## Pearl_PM 2026-05-05 finalization (FINISH-OUT BLOCK COMPLETE)
 

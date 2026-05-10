@@ -1,6 +1,6 @@
 # Pearl_Architect State
 
-Last verified: 2026-05-05  
+Last verified: 2026-05-10  
 Owner: Pearl_Architect
 
 ## Purpose
@@ -1012,6 +1012,30 @@ Authorization: Pearl_Conductor 2026-05-09 autonomous wave (operator pre-approved
 **Pointers:** parent cap `WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01` (above); prior `AMENDMENT — 2026-05-09`; `docs/specs/WORLDWIDE_CATALOG_GO_LIVE_V1_PROGRAM_SPEC.md` (operator-readable mirror); `artifacts/qa/go_live_readiness_audit_2026-05-08.md`; `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`.
 
 Authorization: Pearl_Architect 2026-05-10 doc-only progress amendment (operator pre-approved snapshot; no new decisions).
+
+#### WORLDWIDE-CATALOG-GO-LIVE-V1-PROGRAM-01 — AMENDMENT — 2026-05-10 (Phase 1 P0 → Phase 2 transition)
+
+**Status:** **Phase 1 P0 substantially complete** (program SSOT + first-wave consumers; **not** a Phase 4 go-live declaration).
+
+**What landed on `main` for P0-class surfaces (this transition record):**
+
+1. **Surface 1 — Catalog planning / Pearl Prime knobs:** angle registry alignment + explicit `angle_id` per row + structural variation axes + stable signature (**#974**, **#978**, **#986** via `FEATURE-KNOB-CATALOG-VARIATION-V1-01`).
+2. **Surface 2 — Brand dashboard (P1-class surface; first slices shipped early):** active/inactive panel consumer (**#977**) + RunComfy monthly spend panel + read path (**#1005**). Broader locale grids / podcast row / piece-level status remain **P1** under `ws_worldwide_gl_s02_brand_dashboard_20260508`.
+3. **Surface 4 — Active brand SSOT:** classifier (**#972**) + `brand_admin` dashboard consumer (**#977**) + `brand_admin.html` consumer (**#982**) + Pearl Prime + full-catalog generator consumers (**#987**) — **all live** on `main` per prior amendments + this wave.
+4. **Surface 6 — Marketing volume SSOT:** discovery + binding spec (**#976**) + V1 YAML baseline (**#984**) — **SSOT authored**; consumer wiring remains **P1/P2** per `MARKETING_VOLUME_SSOT_V1_SPEC.md` §5.
+
+**Surfaces 3 / 5 / 7 / 8 / 9 / 10:** unchanged queue posture vs **AMENDMENT-2026-05-08-PRIORITIES** — **P1/P2** (weekly packaging automation branch is **in flight on remote** per `ACTIVE_WORKSTREAMS.tsv`; not a program tier change).
+
+**Phase 2 entry criteria (Pearl_PM routing gate — non-exhaustive):**
+
+1. **Core tests green on `main`** after CI recovery cover-art WARN path is observed stable (**#1011** merged; Pearl_DevOps confirms green signal on required checks).
+2. **Image generation queue active** only after **Pearl_Int Step 4** completes **Qwen-Image** rollout prerequisites on Pearl Star (operator telemetry: shard **08** ~**7%** at time of this AMENDMENT — **blocks** batch **ACTIVATION**, not doc/spec work).
+
+**Anti-drift (hard):** Do **NOT** close **Phase 1** as **100% program-complete** (and do **not** treat Phase 4 go-live as satisfied) until **image generation produces ≥ 1 real operator-validated batch** on the chosen production path (Pearl Star lane and/or RunComfy paid lane per `IMG-RENDER-DUAL-PATH-V1-01`). Coordination-only “dry-run” or scaffold merges are **insufficient** for that bar.
+
+**Pointers:** prior matrix AMENDMENT (same day, above); `docs/specs/WORLDWIDE_CATALOG_GO_LIVE_V1_PROGRAM_SPEC.md`; `artifacts/qa/go_live_readiness_audit_2026-05-08.md` Phase 4 exit criteria; `docs/PEARL_PM_STATE.md` wave snapshot.
+
+Authorization: Pearl_PM + Pearl_Architect joint transition bookkeeping 2026-05-10 (doc-only; no operator decision required).
 
 ### FEATURE-KNOB-CATALOG-VARIATION-V1-01 — Structural variation + angle registry alignment + explicit angle_id per row (ratified 2026-05-08)
 
