@@ -250,6 +250,19 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
 .wp-dl{font-family:var(--mono);font-size:.48rem;color:var(--acc2);text-decoration:underline}
 .wp-dl:hover{color:var(--hi)}
 .wp-counts{font-family:var(--mono);font-size:.45rem;color:var(--dim);letter-spacing:.04em}
+
+/* Manga main character panel (PRJ-WORLDWIDE-CATALOG-GO-LIVE-V1 Phase 2 P0) */
+.mcp-brand-card{border:1px solid var(--border);border-radius:6px;background:rgba(0,0,0,.18);margin-bottom:10px;padding:10px 12px}
+.mcp-brand-hdr{font-family:var(--mono);font-size:.52rem;color:var(--acc2);letter-spacing:.06em;margin-bottom:8px}
+.mcp-loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:700px){.mcp-loc-grid{grid-template-columns:1fr}}
+.mcp-loc-lbl{font-family:var(--mono);font-size:.42rem;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.mcp-thumb-grid{display:flex;flex-wrap:wrap;gap:8px}
+.mcp-thumb{width:84px;text-align:center}
+.mcp-thumb img{width:72px;height:72px;object-fit:cover;border-radius:4px;border:1px solid var(--border);background:#000}
+.mcp-thumb-miss .mcp-missing{width:72px;height:72px;margin:0 auto;display:flex;align-items:center;justify-content:center;border-radius:4px;border:1px dashed var(--border);font-family:var(--mono);font-size:.42rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.mcp-thumb-meta{font-family:var(--mono);font-size:.38rem;color:var(--mid);margin-top:4px;line-height:1.25;word-break:break-all}
+.mcp-empty,.mcp-loading{font-size:.52rem;padding:4px 0}
 </style>
 </head>
 <body>
@@ -333,6 +346,20 @@ html,body{width:100%;height:100%;font-family:"DM Sans",sans-serif;background:#0e
     </table>
   </div>
   <div class="ab-muted" id="wp-hint" style="font-size:.48rem;line-height:1.5;margin-top:6px"></div>
+</div>
+
+<!-- Manga main character thumbnails (catalog plan TSV + artifacts/manga inventory) -->
+<div id="manga-character-panel" class="ab-catalog-panel" aria-live="polite">
+  <div class="ab-panel-head">
+    <div class="section-hdr" style="margin:0">
+      <span class="pp-icon sm" data-icon="manga"></span>
+      <span class="section-hdr-title">Manga main character (en_US · ja_JP)</span>
+    </div>
+    <button type="button" class="action-btn" style="margin:0;padding:6px 12px;font-size:.5rem" onclick="refreshMangaCharacterPanel(true)">Refresh</button>
+  </div>
+  <div class="ab-muted" style="font-size:.48rem;margin-bottom:8px;line-height:1.45">Phase 2 scaffold: reads <code style="color:var(--acc2)">artifacts/catalog/worldwide_catalog_plan_en_US_2026-05-10.tsv</code> (and matching <code style="color:var(--acc2)">ja_JP</code> file when present), resolves <code style="color:var(--acc2)">artifacts/manga/&lt;locale&gt;/&lt;brand&gt;/&lt;series&gt;/main_character.png</code> with fallbacks. Character generation is out of scope; missing assets show a placeholder.</div>
+  <div id="mcp-body"><div class="ab-muted mcp-loading">Loading manga character snapshot…</div></div>
+  <div class="ab-muted" id="mcp-hint" style="font-size:.48rem;line-height:1.5;margin-top:6px"></div>
 </div>
 
 <!-- RunComfy monthly spend (IMG-RENDER-DUAL-PATH-V1-01 / ws_runcomfy_cost_alert_dashboard) -->
@@ -1178,6 +1205,84 @@ function refreshWeeklyPackagePanel(isManual){
     });
 }
 
+// ── Manga main character panel (worldwide catalog plan + artifacts/manga) ──
+function mcpPanelApiUrl(bust){
+  var base;
+  try{
+    var q=new URLSearchParams(window.location.search).get('mcp_endpoint');
+    if(q) base=q;
+  }catch(e0){}
+  if(!base&&typeof window.__MANGA_CHARACTER_PANEL_URL==='string') base=window.__MANGA_CHARACTER_PANEL_URL;
+  if(!base) base='http://127.0.0.1:8768/manga-character-panel.json';
+  if(bust) base+=(base.indexOf('?')>=0?'&':'?')+'_='+Date.now();
+  return base;
+}
+function mcpRepoRelFromPosix(posixPath){
+  if(!posixPath) return '';
+  var parts=String(posixPath).split('/');
+  return '../../'+parts.join('/');
+}
+function mcpSeriesThumbs(seriesArr){
+  if(!seriesArr||!seriesArr.length){
+    return '<div class="ab-muted mcp-empty">No series in catalog plan for this locale.</div>';
+  }
+  var h='<div class="mcp-thumb-grid">';
+  for(var j=0;j<seriesArr.length;j++){
+    var s=seriesArr[j];
+    var sid=abEsc(s.series_id||'');
+    if(s.status==='ready'&&s.main_character_image_path){
+      var url=mcpRepoRelFromPosix(s.main_character_image_path);
+      h+='<div class="mcp-thumb"><div class="mcp-thumb-meta">'+sid+'</div>'
+        +'<img src="'+abEsc(url)+'" alt="" width="72" height="72" loading="lazy" '
+        +'onerror="this.style.display=\'none\';var fb=this.nextElementSibling;if(fb)fb.style.display=\'flex\';"/>'
+        +'<div class="mcp-thumb-miss" style="display:none;margin:0 auto;width:84px"><div class="mcp-missing">missing</div></div>'
+        +'</div>';
+    }else{
+      h+='<div class="mcp-thumb mcp-thumb-miss"><div class="mcp-thumb-meta">'+sid+'</div><div class="mcp-missing">missing</div></div>';
+    }
+  }
+  h+='</div>';
+  return h;
+}
+function refreshMangaCharacterPanel(isManual){
+  var body=document.getElementById('mcp-body');
+  var hint=document.getElementById('mcp-hint');
+  if(!body) return;
+  body.innerHTML='<div class="ab-muted mcp-loading">Loading manga character snapshot…</div>';
+  if(hint) hint.textContent='';
+  fetch(mcpPanelApiUrl(!!isManual),{cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(data){
+      var ids=Object.keys(data||{}).filter(function(k){
+        var o=data[k];
+        return o&&typeof o==='object'&&(o.en_US||o.ja_JP);
+      }).sort();
+      if(!ids.length){
+        body.innerHTML='<div class="ab-muted">No active brands in classifier snapshot.</div>';
+        if(hint) hint.textContent='Load the catalog active/inactive panel above, then refresh.';
+        return;
+      }
+      var h='';
+      for(var i=0;i<ids.length;i++){
+        var bid=ids[i];
+        var locs=data[bid]||{};
+        var en=(locs.en_US&&locs.en_US.series)||[];
+        var ja=(locs.ja_JP&&locs.ja_JP.series)||[];
+        h+='<div class="mcp-brand-card"><div class="mcp-brand-hdr">'+abEsc(bid)+'</div><div class="mcp-loc-grid">';
+        h+='<div class="mcp-loc-col"><div class="mcp-loc-lbl">en_US</div>'+mcpSeriesThumbs(en)+'</div>';
+        h+='<div class="mcp-loc-col"><div class="mcp-loc-lbl">ja_JP</div>'+mcpSeriesThumbs(ja)+'</div>';
+        h+='</div></div>';
+      }
+      body.innerHTML=h;
+      if(hint) hint.textContent='Run: PYTHONPATH=. python3 scripts/brand/manga_character_endpoint.py --serve — URL '+mcpPanelApiUrl(false);
+    })
+    .catch(function(e){
+      body.innerHTML='<div class="ab-muted">Could not load manga character panel ('+abEsc(e.message)+'). Start: '
+        +'<code style="color:var(--acc2)">PYTHONPATH=. python3 scripts/brand/manga_character_endpoint.py --serve</code></div>';
+      if(hint) hint.textContent='Default URL: '+mcpPanelApiUrl(false)+' — override ?mcp_endpoint= or window.__MANGA_CHARACTER_PANEL_URL';
+    });
+}
+
 // ── RunComfy spend panel (Pearl_Int TSV consumer) ──
 function rcSpendApiUrl(){
   try{
@@ -1249,6 +1354,7 @@ function renderPicker(){
   h+='</div>';
   el.innerHTML=h;
   refreshActiveBrandExecPanel();
+  refreshMangaCharacterPanel(false);
   refreshRuncomfySpendPanel();
 }
 function selectBrand(bid){
@@ -1271,6 +1377,7 @@ function initBrand(bid){
   document.getElementById('brand-pill').textContent=brand.d;
   renderPhase0(); renderPhase1(); renderPhase2(); renderPhase3(); renderProgress();
   refreshActiveBrandExecPanel();
+  refreshMangaCharacterPanel(false);
   refreshRuncomfySpendPanel();
 
   const urlP=new URLSearchParams(window.location.search);
