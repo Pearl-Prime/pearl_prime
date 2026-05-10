@@ -45,9 +45,9 @@ def test_resolve_by_brand_genre_from_chapter_request(tmp_path):
 
 
 def test_resolve_explicit_params_override_chapter_request(tmp_path):
-    # chapter_request says stillness_press/healing, but caller explicitly passes warrior_calm/battle
+    # chapter_request says stillness_press/healing, but caller explicitly passes warrior_calm/cultivation
     ws = _make_workspace(tmp_path, brand_id="stillness_press", genre_family="healing")
-    result = _resolve_manga_profile(ws, brand_id="warrior_calm", genre_id="battle")
+    result = _resolve_manga_profile(ws, brand_id="warrior_calm", genre_id="cultivation")
     assert result is not None
     assert result.brand_id == "warrior_calm"
     assert result.emotional_engine == "rivalry"

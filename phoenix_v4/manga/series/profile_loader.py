@@ -21,7 +21,7 @@ from phoenix_v4.manga.models.validation import repo_root
 # Enum values mirroring schema.yaml — update here when schema changes.
 VALID_MARKET_DEMOS = frozenset(["shonen", "shojo", "seinen", "josei", "kodomo"])
 VALID_GENRE_FAMILIES = frozenset([
-    "battle", "romance", "mystery", "healing", "horror", "sports", "school",
+    "battle", "cultivation", "romance", "mystery", "healing", "horror", "sports", "school",
     "workplace", "historical", "fantasy", "sci_fi", "delinquent", "gag",
     "essay", "memoir", "food", "club_hobby", "procedural",
     "supernatural_everyday", "survival", "revenge", "social_issue",
