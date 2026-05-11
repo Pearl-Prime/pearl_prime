@@ -1,0 +1,763 @@
+# V1.2 themes — Cluster C (Grief/Trauma/Healing) × zh_TW
+# 25 series = 5 brands × 5 series — Traditional Chinese (Taiwan-natural)
+# Brand mapping (from PR #1061/#1066 Cluster C):
+#   spiritual_ground_supernatural (← grief_companion_iyashikei)
+#   trauma_path_healing (← trauma_recovery_shojo)
+#   healing_ground_healing (exact)
+#   warrior_calm_cultivation (← ash_and_steel_warrior_calm)
+#   stoic_edge_battle (← surrender_form_warrior_calm)
+# Constraint: artifacts/research/v1_2_genre_allocation_constraint_2026-05-12.md
+#
+# Locale guidance applied:
+#   - 100% 繁體中文, Taiwan-natural phrasing for all narrative prose.
+#   - NO mainland forms: 視頻→影片  軟件→軟體  智能手機→智慧型手機  互聯網→網路
+#     地鐵→捷運/MRT  外賣→外送  打的→搭計程車
+#   - Structural enums (genre_family, magical_register, serial_engine) remain English.
+#   - Cluster C TW grief anchors used: 中元普渡, 清明掃墓, 牌位, 祖厝, 庫銀, 七月十五,
+#     媽祖廟, 宜蘭/台東海邊, 茶湯, 紙錢, 燒王船.
+#   - Tone: 死神的精準度 + 用九柑仔店 + 神隱少女 — Ghost Festival realism with
+#     Ghibli soft-magic register.
+#   - reading_platform_fit ratio: ~55% webtoon_vertical / ~45% manga_traditional.
+#   - Persona mix: ~55% Gen Z, ~10% Gen Alpha (limited bereavement fit),
+#     ~30% Mill, ~5% Gen X.
+#
+# Genre allocation for Cluster C × zh_TW (within binding ranges):
+#   healing:                6
+#   slice_of_life:          5
+#   supernatural_everyday:  4
+#   mystery_cozy:           4
+#   fantasy_adventure:      3
+#   romance:                1
+#   horror:                 1
+#   other:                  1
+#   TOTAL:                  25
+
+schema_version: "1.2"
+locale: zh_TW
+cluster: C
+cluster_name: "Grief/Trauma/Healing"
+total_series_target: 25
+total_brands_target: 5
+series_per_brand_target: 5
+
+series:
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 01 / 05 — spiritual_ground_supernatural (grief companion · iyashikei)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: spiritual_ground_supernatural__zh_TW__qi_yue_de_xin_xiang
+    brand_id: spiritual_ground_supernatural
+    locale: zh_TW
+    persona_archetype: ML-bereaved
+    daily_life_anchor: home_apartment
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "在大稻埕一棟老屋三樓守寡的三十六歲女主角,於七月十五鬼門開那天,在客廳的紅木供桌上發現一個從未見過的舊信箱;每隔七天就會自動出現一封信,寄信人是這條巷子裡剛剛失去親人的某個人——而當事人自己不曉得有寄過。她一封一封寫回信,慢慢走完自己的喪期。"
+    volume_runway_target: 160
+    reading_platform_fit: manga_traditional
+    series_title: "七月的信箱"
+    series_logline: "丈夫頭七過完那年的中元節,小靜在自家供桌上發現一個多出來的舊信箱;每七天會出現一封信,寄信人是這條巷子裡剛失去家人的某個人——而他們自己不知道有寄過。"
+    series_description: "小靜三十六歲,住在大稻埕迪化街一棟三層樓的老房子。先生宥成走了一百天。七月十五那天傍晚,她照例把茶湯擺上供桌、燒一份庫銀;走回客廳時,看見供桌的紅木邊角多了一個從沒見過的鐵製舊信箱,大小約一塊磚頭。她打開,裡面是一封信:『家裡的鐵門我媽以前都是晚上九點半關。現在沒有人提醒我了。』沒有署名。她拿到巷尾的媽祖廟跟廟公低聲問,廟公點點頭:『七月的事情,有時候要寫回信。』小靜回家提筆。她不勸他別難過——她寫,鐵門可以由你自己關,只是現在你還沒準備好,先讓它開到十點半也沒有人會說你。她把信擺回信箱,信不見了。七天後,新的一封。一巻一封,巷子裡每個剛經歷喪事的人,他們自己沒寫過、卻被自己心裡最深的那一塊代寫的信,陸續送到小靜手上。死神的精準度+宮崎駿的溫度,在大稻埕的老巷裡。"
+    opening_5_volume_arc:
+      vol_1: "第一封。隔壁的阿嬤上個月走了,她兒子寫的——關於鐵門的時間。小靜把回信寫進茶湯的霧氣裡。"
+      vol_2: "第二封。巷尾賣紅龜粿的阿伯走了,媳婦寫的——關於『公公以前都把粿留最後一塊給我』。小靜回信教她把那一塊粿留給自己。"
+      vol_3: "第三封寄件人不在巷子裡,是宥成生前的同事。小靜第一次知道宥成在公司被叫做『會記得每個人生日的人』。"
+      vol_4: "第四封來自一個八歲的小男孩。他媽媽剛走。字歪歪斜斜。小靜寫回信,改用注音。"
+      vol_5: "第五封信寄件人——是小靜自己。是她自己沒寫過、卻被心裡最深處代寫的。她第一次坐下來,給自己回信。"
+    comp_titles: ["用九柑仔店", "死神的精準度", "可不可以你也剛好喜歡我", "深夜食堂", "送行者"]
+    reader_promise: "你心裡最深的那塊地方說不出口的話,有人會替你寫,也有人會替你寫回信。"
+    marketing_angle: "如果《用九柑仔店》的雜貨店改成大稻埕老屋的供桌,信箱裡躺著的是你還沒能寫出口的那封信。"
+    genre_family: healing
+    emotional_engine: chosen_family + inherited_wisdom
+    audience: "三十五至五十歲、近年失去親人、住在台北舊城區或宜蘭/台南老街的女性讀者"
+
+  - series_id: spiritual_ground_supernatural__zh_TW__a_ma_de_tea_pu
+    brand_id: spiritual_ground_supernatural
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: home_apartment
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十五歲的女主角從外婆那兒繼承一本牛皮紙茶譜,每翻開一頁就會浮現出此刻全台北最思念外婆茶的人是誰;她照茶譜泡茶、騎著 125cc 機車送過去,慢慢拼湊出外婆從未告訴她的年輕時光。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "外婆的茶譜"
+    series_logline: "二十五歲的她繼承了外婆留下的舊茶譜,翻開一頁就會浮出此刻最想念那一杯茶的人。她照著泡,騎機車送過去。"
+    series_description: "盈方搬到新店租了一間有小陽台的套房後,在外婆的遺物紙箱底找到一本牛皮紙茶譜——封面寫『阿嬤的茶』。第一頁是青心烏龍。當天晚上她翻開,字底下浮出小小一行:『內湖區・李太太・今晚十一點』。盈方猶豫了二十分鐘,泡了一壺,裝進保溫瓶,跨上 125 機車。李太太是位獨居的退休護理師,茶到的時候哭了——她以前在外婆的茶行打工。盈方還來不及反應,李太太就說:『阿嬤泡這款茶的時候,水溫只用八十五度。』每一巻一杯茶、一個人。盈方一頁一頁翻,茶譜的背面有外婆細小的筆記:『水太燙、人就喝不久』、『泡給剛哭過的人,葉子要先沖一道水洗去澀』。外婆從沒告訴過盈方她年輕時的事,而台北的這些人正在替她說。"
+    opening_5_volume_arc:
+      vol_1: "青心烏龍。內湖李太太。八十五度的水溫。盈方第一次明白外婆是個有過去的人。"
+      vol_2: "東方美人。永和的攝影師。茶譜的背面寫:『不要問他拍過誰』。盈方學會閉嘴。"
+      vol_3: "鐵觀音。萬華的廟公。盈方知道外婆年輕時在艋舺賣過茶。"
+      vol_4: "蜜香紅茶。基隆港邊的修船師傅。外婆原來有一個沒嫁的初戀。"
+      vol_5: "包種茶。茶譜的最後一頁,寄件地址是盈方自己。外婆替二十五歲的孫女留了一杯。"
+    comp_titles: ["用九柑仔店", "深夜食堂", "可不可以你也剛好喜歡我", "茶金", "海街日記"]
+    reader_promise: "你以為自己什麼都不知道她的人生,可是她替你留了一本譜,一杯杯告訴你。"
+    marketing_angle: "《茶金》的時代感 × 《海街日記》的姊妹溫度,放進一本只有 25 歲孫女看得懂的茶譜。"
+    genre_family: healing
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "Z 世代 23–28 歲、剛開始一人住、與長輩之間有未完成對話的女性"
+
+  - series_id: spiritual_ground_supernatural__zh_TW__shao_wang_chuan_de_xiao_zhen
+    brand_id: spiritual_ground_supernatural
+    locale: zh_TW
+    persona_archetype: ML-bereaved
+    daily_life_anchor: town_village
+    portal_mechanic: place
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: location_anthology
+    long_arc_spine: "東港燒王船祭典結束的隔天清晨,一位三十二歲的記者奉派回到自己出生的小鎮做後續報導;她發現王船灰燼之中,每年都會多出一些『沒人放上去』的祭品——是鎮上沒能正式告別的人們的遺物。她從一件件遺物追溯出鎮上那些被海洋、地震、車禍奪走的家庭故事。"
+    volume_runway_target: 140
+    reading_platform_fit: manga_traditional
+    series_title: "燒王船的小鎮"
+    series_logline: "東港王船祭結束隔天,記者回到出生的小鎮,發現灰燼裡每年都會多出沒人放過的遺物——是鎮上沒能好好告別的人們留下的。"
+    series_description: "宛庭在台北做了八年地方版記者。今年王船祭,主編派她回東港跑後續。她沒提自己是東港人。祭典結束隔天清晨,海風還是鹹的,她跟著清掃志工去灰燼現場——按照習俗,王船燒過之後不撿、不留。可是宛庭看見一只小小的孩童雨鞋,黑底紅邊,完好無缺地立在灰裡。她拍了張照。回到台北一個禮拜後,她在母親留下的舊相簿裡看見同一雙雨鞋——那是她小學三年級的同學阿宏,後來被海帶走了。第二年她再回東港,灰燼裡又有一件東西。第三年又一件。一巻一件遺物、一個鎮上沒能好好說再見的家庭。宛庭發現自己其實一直在替小鎮做告別。"
+    opening_5_volume_arc:
+      vol_1: "黑底紅邊的雨鞋。阿宏。海。宛庭第一次回家。"
+      vol_2: "一支斷掉的吉他絃。921 那年走的高中音樂老師。"
+      vol_3: "一支沾了油漆的螺絲起子。鎮上修船廠的老師傅,前年中風走的。"
+      vol_4: "一張燙金請帖。鎮上最後一場辦不成的婚禮——新娘前一天車禍。"
+      vol_5: "宛庭自己的童年髮夾。她終於明白為什麼母親從來不准她回東港。"
+    comp_titles: ["送行者", "陽光普照", "海街日記", "用九柑仔店", "返校"]
+    reader_promise: "整個小鎮替你燒掉的,不只是王船,還有那些你沒有機會親口說的再見。"
+    marketing_angle: "《送行者》的職人凝視 × 東港王船祭的鏗鏘儀式 × 一位記者女兒慢慢回家的距離。"
+    genre_family: supernatural_everyday
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "三十至四十五歲、出身南部小鎮、目前在北部工作的讀者"
+
+  - series_id: spiritual_ground_supernatural__zh_TW__zhong_yuan_de_zhi_qian_dian
+    brand_id: spiritual_ground_supernatural
+    locale: zh_TW
+    persona_archetype: GX-late
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "在彰化鹿港老街上,一位六十二歲的紙錢店老闆娘退休前的最後一個七月,她發現自己店裡的庫銀燒了之後,客人會在夢裡收到一則『中陰回信』。她決定把這個能力傳給來打工的孫女——但孫女只想去台北做插畫師。"
+    volume_runway_target: 130
+    reading_platform_fit: manga_traditional
+    series_title: "中元的紙錢店"
+    series_logline: "鹿港老街上一間開了五十年的紙錢店,老闆娘今年七月才知道,她燒出去的庫銀會在客人夢裡變成一封回信。"
+    series_description: "玉鳳阿嬤在鹿港老街上開紙錢店開了五十年。今年她六十二歲,本來打算頂讓給對面那家賣牛舌餅的。中元節前三週,孫女宥真從台北回來幫忙——念視覺傳達系剛畢業,正在跟自己賭氣要不要去日商。某天傍晚,熟客陳先生來訂庫銀:給三年前走的太太。玉鳳照單燒了。陳先生那天晚上做了一個夢,夢裡太太說了一句二十年前她想說沒說的話。陳先生隔週紅著眼回來,玉鳳才知道——她燒了五十年的紙錢,原來真的有人收到。她沒跟任何人說過,只想著怎麼把這件事告訴宥真,讓店留下來。可是宥真說:阿嬤,我不會做這個。一巻一個客人、一封中陰回信、一次祖孫之間遲遲說不出口的真話。"
+    opening_5_volume_arc:
+      vol_1: "陳先生與太太。第一次有人帶著夢回來。玉鳳第一次想:要不要告訴宥真。"
+      vol_2: "做工的阿伯來燒給他父親。庫銀變成一句『阿爸從沒嫌過你愛喝酒』。"
+      vol_3: "宥真自己接了一單。她不信,但還是照阿嬤的方法燒。客人三天後回來。"
+      vol_4: "宥真在阿嬤的舊帳本後面看到自己媽媽——也就是阿嬤的女兒——的名字。媽媽走了二十年。"
+      vol_5: "宥真決定燒一份庫銀給媽媽。她在夢裡收到回信。她決定留下來,但用自己的方式重新設計這間店。"
+    comp_titles: ["用九柑仔店", "天橋上的魔術師", "可不可以你也剛好喜歡我", "深夜食堂", "送行者"]
+    reader_promise: "傳統不是要你變成阿嬤——是讓阿嬤的手,在你手上多走一段路。"
+    marketing_angle: "《用九柑仔店》的鹿港版 × 紙錢店裡跨世代的職人傳承 × 中元的溫柔奇幻。"
+    genre_family: supernatural_everyday
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "三十至五十歲、家中有長輩經營老店、或自己正在掙扎要不要回家接的讀者"
+
+  - series_id: spiritual_ground_supernatural__zh_TW__yi_lan_hai_bian_de_qing_ming
+    brand_id: spiritual_ground_supernatural
+    locale: zh_TW
+    persona_archetype: GZ-uni
+    daily_life_anchor: education
+    portal_mechanic: place
+    episodic_frame_per_volume: season
+    magical_register: magical_realism
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "宜蘭壯圍海邊一所小學的二十三歲代課老師,在連續四個清明節之間,陪著班上十二位學生各自走過家中的失去——而她自己也在第一個清明把母親的骨灰撒在這片海。四個清明結束時,她的代課合約到期,但她決定不走了。"
+    volume_runway_target: 120
+    reading_platform_fit: webtoon_vertical
+    series_title: "宜蘭海邊的清明"
+    series_logline: "壯圍海邊一所小學的代課老師,陪著十二個小孩走過四個清明節——而她自己第一個清明才把媽媽的骨灰撒進那片海。"
+    series_description: "之婕大學畢業後本來要去台北做新媒體編輯。母親在她畢業前三個月走了。她照母親的意願,把骨灰帶回宜蘭壯圍——母親小時候住過的海邊小村。原本只是來一趟,結果村裡的小學缺一個代課老師,她沒打算留,但簽了一年。第一個清明,她帶班上小朋友去掃墓——有的小朋友家裡有兩座墓、有的根本沒人帶他去。她才發現,十二個孩子裡有九個經歷過失去:阿嬤、媽媽、爸爸、哥哥、剛出生就走的妹妹、爺爺、寵物狗、外婆、阿祖。她的代課合約一年一年續。每一巻是一個清明、一個孩子的故事、之婕自己的一次練習。海邊的風一直是鹹的。她媽媽在那片海裡。"
+    opening_5_volume_arc:
+      vol_1: "第一個清明。小敏帶班上去掃外婆的墓。之婕第一次去看自己媽媽的海。"
+      vol_2: "夏天。轉學生阿翰從台北來,他的爸爸前年自殺。之婕教他怎麼在課本上畫一座『沒有墓碑的墓』。"
+      vol_3: "颱風夜。小芸的阿祖一百零三歲走了。一整個村子辦喪。之婕第一次幫忙摺紙蓮花。"
+      vol_4: "第二個清明。班上多了一個剛出生失去妹妹的女孩。之婕讓全班寫一封給『沒有名字的家人』的信。"
+      vol_5: "代課合約到期。之婕決定不走了。她在海邊買了一間小屋,準備考正式教師。"
+    comp_titles: ["你的孩子不是你的孩子", "海街日記", "用九柑仔店", "可不可以你也剛好喜歡我", "湯道"]
+    reader_promise: "走不掉,有時候不是被困住,是某一片海留下了你。"
+    marketing_angle: "《海街日記》的姊妹溫柔 × 宜蘭壯圍的鹹海風 × 一年一年的清明,慢慢縫合一個老師和十二個孩子的失去。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + slow_mastery
+    audience: "Z 世代 22–28 歲、剛失去親人、正在思考要不要離開家鄉的讀者"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 02 / 05 — trauma_path_healing (trauma recovery · shojo register)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: trauma_path_healing__zh_TW__shi_qu_de_di_di_de_ji_ta
+    brand_id: trauma_path_healing
+    locale: zh_TW
+    persona_archetype: GZ-uni
+    daily_life_anchor: education
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "二十一歲的大學音樂系女主角,在弟弟車禍走後第八個月才終於敢打開他留下的那把吉他;她每彈一首,身邊就會出現一位『正在走過自己失去』的同齡人,五卷五個人組成她的療癒夥伴群,從互相搭一個音、到一起在學校禮堂辦一場無聲演奏會。"
+    volume_runway_target: 140
+    reading_platform_fit: webtoon_vertical
+    series_title: "弟弟留下的吉他"
+    series_logline: "弟弟走後第八個月,她終於敢打開他留下的吉他——每彈一首,身邊就會出現一個跟她一樣正在走過失去的人。"
+    series_description: "羽彤念輔仁大學音樂系大三,主修古典鋼琴。弟弟羽辰在她升大三那個暑假騎機車被撞,當場走。羽辰自學吉他十年,留下一把二手 Yamaha,放在家裡客廳沒人動。八個月後,羽彤一個人在宿舍,終於從家裡帶來了那把吉他。她不會彈,只是輕輕撥了一根弦。當天晚上她在學校的琴房,認識了一個叫小靖的學妹——小靖一年前姐姐自殺。她們沒有約好。一巻一個夥伴:失去爸爸的擊樂組長學長、失去寵物狗(陪了十五年)的同班同學、失去媽媽的合唱團學妹、失去自己一條腿的銅管系學長。五個人從各自的琴房開始一起練琴,慢慢練出一首沒有歌詞的曲子。第五卷的最後,他們在學校禮堂辦了一場無聲演奏會——觀眾不出聲、不鼓掌,只是來坐著。"
+    opening_5_volume_arc:
+      vol_1: "羽彤撥第一根弦。琴房遇見小靖。她們約好每週三晚上一起練。"
+      vol_2: "擊樂組長學長加入。他的爸爸是消防員,殉職。他教羽彤怎麼用心跳當節拍器。"
+      vol_3: "同班同學帶著她剛走的柴犬照片來。她說『有些悲傷比較小,但一樣會把你壓住』。"
+      vol_4: "合唱團學妹加入。她媽媽是癌末。她每個禮拜要回宜蘭。羽彤教她搭客運的時候怎麼戴耳機。"
+      vol_5: "禮堂無聲演奏會。羽辰沒有來——他不會來。但羽彤第一次彈完一整首歌沒有哭。"
+    comp_titles: ["可不可以你也剛好喜歡我", "我吃了那個男孩一整年的早餐", "BECK", "四月是你的謊言", "海街日記"]
+    reader_promise: "你失去的那個人不會回來——但你會遇見其他也失去了的人,你們會一起把日子彈成一首歌。"
+    marketing_angle: "《四月是你的謊言》的器樂青春 × 台北輔大琴房 × 失去手足的 Z 世代療癒群像。"
+    genre_family: healing
+    emotional_engine: chosen_family + slow_mastery
+    audience: "Z 世代 19–24 歲、近年失去過手足或同輩、念藝術/音樂相關科系的讀者"
+
+  - series_id: trauma_path_healing__zh_TW__bao_lei_ban_de_zhou_qi
+    brand_id: trauma_path_healing
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: home_apartment
+    portal_mechanic: pact
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "二十四歲、家暴倖存的女主角搬到新北中和的一間頂加套房,跟室友——一位剛從性侵案走出來的女生——簽下一張『暴雷板協議』:每週三晚上九點,輪流把這禮拜最不想想起的事情寫在白板上,寫完就一起把白板擦乾淨。五卷五個白板週期,她們的房間慢慢變成這條巷子裡其他幾位倖存者的中繼站。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "暴雷板的週期"
+    series_logline: "在中和頂加的一間套房,兩個倖存者簽了一張協議:每週三晚上,把這禮拜最不想想起的事寫在白板上,寫完一起擦掉。"
+    series_description: "鈺珊二十四歲,從台中老家逃出來半年。父親家暴。她在新北中和找到一間頂加,跟在 PTT 站長 board 認識的室友安語合租。安語比她小一歲,從一段長期關係裡剛走出來,對方是熟識的長輩,過程她不想再講第二次。兩個人都在做心理諮商。鈺珊提議的:她們在客廳的牆上掛一塊白板。每週三晚上九點,輪流寫一句『這禮拜最不想想起的事』。寫完,兩個人一起把白板擦乾淨。沒有評論、沒有安慰、不問細節。一巻一個禮拜的故事。慢慢的,她們套房的客廳變成了這條巷子裡幾位倖存者的中繼站——對面的攝影師大哥、樓下的便利商店店員姊姊、外送員小弟。每個人都有自己的白板週期。"
+    opening_5_volume_arc:
+      vol_1: "第一次寫白板。鈺珊寫:『今天我聞到父親常用的洗衣精味道』。安語沒問。她們擦掉。"
+      vol_2: "對面攝影師大哥來借熱水。他看到白板。他問可不可以也寫一次。鈺珊說可以,但要先簽協議。"
+      vol_3: "便利商店店員姊姊輪她寫。她寫:『前夫的車昨天又停在巷口』。她們三個一起報警。"
+      vol_4: "鈺珊接到老家電話。父親病重。安語陪她搭高鐵回台中。她沒進醫院。她們在月台上寫了一塊白板。"
+      vol_5: "白板第六十七個禮拜。鈺珊發現自己已經有兩個禮拜沒寫了。她決定買第二塊新白板,給其他想加入的人用。"
+    comp_titles: ["可不可以你也剛好喜歡我", "82 年生的金智英", "孤味", "你的孩子不是你的孩子", "深夜食堂"]
+    reader_promise: "你不必告訴我發生過什麼——你只要告訴我這禮拜哪一刻你撐住了。"
+    marketing_angle: "《82年生的金智英》的女性互助溫度 × 中和頂加的真實 × 一塊白板組成的療癒週期。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + competent_calm_specialist
+    audience: "Z 世代 22–28 歲、家暴/性侵/控制型關係倖存者、在台北/新北獨居的女性讀者"
+
+  - series_id: trauma_path_healing__zh_TW__shen_yin_shao_nu_de_da_yao_shi
+    brand_id: trauma_path_healing
+    locale: zh_TW
+    persona_archetype: GA-tween
+    daily_life_anchor: education
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: soft_fantasy
+    serial_engine: case_of_the_week
+    long_arc_spine: "十三歲的國一女主角在父母離婚後跟阿嬤一起搬回澎湖,在阿嬤的中藥房後院找到一把舊銅鑰匙,只要她把鑰匙放在心情藥草盒上,就能聽見抽屜裡的藥草低聲說『現在最需要這味藥的人是誰』;一巻一位同學、一位街坊,她學著為小傷口開一份藥。"
+    volume_runway_target: 130
+    reading_platform_fit: webtoon_vertical
+    series_title: "神隱少女的大鑰匙"
+    series_logline: "十三歲的她搬回澎湖跟阿嬤住,在阿嬤的中藥房找到一把銅鑰匙——只要放在藥草盒上,藥草會悄悄告訴她,誰最需要這一味。"
+    series_description: "茉雅國一上學期,父母離婚,她跟著媽媽搬回澎湖馬公,跟阿嬤一起住在開了四十年的『益安堂』中藥房樓上。轉學第一個禮拜她不講話。某天下午她在後院掃地,牆角磚縫裡撿到一把黑亮的銅鑰匙。她沒跟誰說,放進口袋。第二天她在抽屜裡看到阿嬤珍藏的一個漆木藥草盒——上面剛好有一個鎖孔。鑰匙轉進去,沒有開盒,盒裡的藥草卻細細地響:『樓下賣燒餅的阿伯,今天右肩痛』。茉雅嚇了一跳,但隔天放學她真的看到阿伯在揉肩。一巻一位街坊或同學:轉學第一天就霸凌她的男生、剛失去寵物的隔壁班女生、在馬公港邊釣魚的退休船長、阿嬤本人在某個下午突然的暈眩、最後一卷是茉雅自己。藥草不是萬靈丹,但每一卷茉雅學會了:有些悲傷,要先聽見它叫什麼名字,才能開藥。"
+    opening_5_volume_arc:
+      vol_1: "燒餅阿伯。右肩。茉雅學會的第一味藥是『熱毛巾敷三分鐘』。"
+      vol_2: "霸凌她的男生其實爸爸入獄。藥草說:這味藥不在櫃子裡,是茉雅放學陪他走十分鐘。"
+      vol_3: "隔壁班女生剛失去陪了十一年的橘貓。茉雅學會的藥是阿嬤的話:『讓她哭夠』。"
+      vol_4: "阿嬤暈眩。茉雅第一次怕鑰匙告訴她什麼。藥草說:阿嬤要的不是藥,是讓茉雅留下。"
+      vol_5: "茉雅自己。鑰匙放上盒子,藥草沉默。她突然懂了:不是每一道傷都有藥,有些只是要時間,跟阿嬤。"
+    comp_titles: ["神隱少女", "用九柑仔店", "可不可以你也剛好喜歡我", "螢火之森", "海街日記"]
+    reader_promise: "你心裡那道剛剛裂開的小傷口,有名字、有對應的一味藥——只是要先聽見它叫什麼。"
+    marketing_angle: "《神隱少女》的鑰匙與配方 × 澎湖中藥房四十年的木櫃 × 十三歲少女的小小醫者旅程。"
+    genre_family: mystery_cozy
+    emotional_engine: slow_mastery + inherited_wisdom
+    audience: "Gen Alpha 11–14 歲與其家長共讀;對中醫/藥草/澎湖有興趣的女孩讀者"
+
+  - series_id: trauma_path_healing__zh_TW__zai_jian_qian_de_xiao_dao_bie
+    brand_id: trauma_path_healing
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十六歲的女主角在台中第七公墓附近一間花店打工,她發現店裡每天傍晚會有一束『沒有訂單』的花自己出現在櫃台——她照著花語把花送出去,每一卷都找到一位這個禮拜還沒能向某個人說再見的人。她自己心裡也有一個還沒說的人。"
+    volume_runway_target: 130
+    reading_platform_fit: manga_traditional
+    series_title: "再見前的小道別"
+    series_logline: "台中第七公墓旁的小花店,每天傍晚會有一束沒人訂的花出現在櫃台——她照著花語,把花送給今天最需要說再見的人。"
+    series_description: "湘宜二十六歲,從南投來台中讀大學畢業後留下來。她在大里第七公墓附近的一間花店打工兩年,店是六十歲的老闆娘阿珠開的。某個秋天的傍晚,湘宜要關店,看見櫃台上多出一束沒有訂單的花——白百合配尤加利。她問阿珠,阿珠只說:『花自己長出來的時候,你照花語送就對了。』湘宜照阿珠給她的花語小冊子,白百合是『純粹的告別』。她在巷口看見一位中年男人剛從公墓回來,手裡空空的。她遞了花。男人沒問,接過,鞠了一躬。一巻一束花、一個還沒說完的再見。湘宜慢慢發現,她自己也有一個還沒說完的——念大學時走的室友。第五卷,花店櫃台上多出的那一束,是粉色玫瑰配薰衣草,花語是『遲到的擁抱』,湘宜知道,那是給她自己的。"
+    opening_5_volume_arc:
+      vol_1: "白百合與尤加利。公墓回來的中年男人。湘宜送出第一束。"
+      vol_2: "向日葵與滿天星。九歲的男孩剛失去爺爺。花語:『你還是會有夏天』。"
+      vol_3: "藍色繡球與洋桔梗。失婚的姐姐。她沒帶花去前夫的告別式。"
+      vol_4: "白色洋甘菊。湘宜送給阿珠老闆娘——她才知道阿珠也是倖存者。"
+      vol_5: "粉色玫瑰配薰衣草。湘宜自己。她回大學宿舍的舊樓下,放了那束花。"
+    comp_titles: ["送行者", "用九柑仔店", "可不可以你也剛好喜歡我", "孤味", "海街日記"]
+    reader_promise: "有些再見不是說給對方聽的——是說給自己心裡那個還沒能放下的部分聽的。"
+    marketing_angle: "《送行者》的職人鏡頭 × 台中第七公墓旁的花店 × 一位女孩在五束花裡走完自己的喪期。"
+    genre_family: slice_of_life
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "Z 世代 22–30 歲、念大學時或剛出社會時失去過親密的人、在中部生活的讀者"
+
+  - series_id: trauma_path_healing__zh_TW__qian_ren_de_xin_dui_xiang
+    brand_id: trauma_path_healing
+    locale: zh_TW
+    persona_archetype: GZ-uni
+    daily_life_anchor: education
+    portal_mechanic: pact
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "二十二歲的女主角在前任(中學摯愛、自殺)走後三年,在 IG 上看見一位陌生人的新對象貼文——竟然是前任的學弟。她抱著要去質問的心情約見,卻發現對方也在處理同一份失去。兩個人的關係從『可不可以一起好好說再見』開始,慢慢走到『可不可以一起重新喜歡誰』。"
+    volume_runway_target: 120
+    reading_platform_fit: webtoon_vertical
+    series_title: "前任的新對象"
+    series_logline: "前任走後三年,她在 IG 看到一個陌生人的新對象貼文——竟然是前任的學弟。她去質問,卻意外開始了一段慢慢的、互相療傷的關係。"
+    series_description: "霏寧大五,中文系。中學時的男友翊翔在他們上大一那年自殺。三年。霏寧的心理諮商穩定中,但她每年的忌日都會去他的 IG 翻舊照。今年三月,她滑到他學弟柏均的限動——柏均po了一張背影,標題寫『新對象』。霏寧氣到失眠。她私訊柏均約見。咖啡店裡柏均一句話沒講完就紅了眼:他口中的『新對象』不是新女友,是他自己重新開始去喜歡一個人——某種說給翊翔聽的告慰。一巻一次見面、一次小小的對話。他們不戀愛,只是『一起好好說再見』。第四卷他們才開始牽手。第五卷柏均終於說:『我可以喜歡你,但是要慢一點,因為我想確定不是因為他。』霏寧回:『我也想確定。』他們約好慢一點。"
+    opening_5_volume_arc:
+      vol_1: "IG 限動的衝擊。咖啡店第一次見面。霏寧把翊翔的最後一封簡訊給柏均看。"
+      vol_2: "兩個人去掃翊翔的墓。柏均第一次跟翊翔家人見面以霏寧朋友的身份。"
+      vol_3: "霏寧帶柏均去翊翔常去的舊書店。柏均買了一本書,翊翔以前推薦過。"
+      vol_4: "第一次牽手。在台北車站地下街。誰都沒先放開。"
+      vol_5: "柏均的告白。霏寧的『慢一點』。他們約好不是戀人,但每週見一次。"
+    comp_titles: ["可不可以你也剛好喜歡我", "我吃了那個男孩一整年的早餐", "孤味", "送行者", "前任行星"]
+    reader_promise: "失去過同一個人的兩個人,可以一起學會重新喜歡——只要願意慢一點。"
+    marketing_angle: "《可不可以你也剛好喜歡我》的純愛骨幹 × 一場關於遺族與遺族之間的、最溫柔的『前任新對象』。"
+    genre_family: romance
+    emotional_engine: chosen_family + slow_mastery
+    audience: "Z 世代 20–26 歲、失去過中學/大學時期重要的人、開始考慮新關係的讀者"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 03 / 05 — healing_ground_healing (healing core · therapeutic ground)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: healing_ground_healing__zh_TW__bao_le_yi_ge_xia_tian_de_lao_mao
+    brand_id: healing_ground_healing
+    locale: zh_TW
+    persona_archetype: ML-bereaved
+    daily_life_anchor: home_apartment
+    portal_mechanic: companion
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十四歲的女主角剛失去陪她十六年的橘貓,在台南安平海堤邊撿到一隻只在傍晚出現、看得見她哭的虎斑貓;牠不收養、不入屋,只陪她一個夏天,並把附近其他剛失去寵物的人一個個帶到她面前——她開始無意間做起一個『沒有招牌的失寵物互助會』。"
+    volume_runway_target: 140
+    reading_platform_fit: webtoon_vertical
+    series_title: "抱了一個夏天的老貓"
+    series_logline: "陪了她十六年的橘貓走的那週,她在安平海堤撿到一隻只在傍晚出現的虎斑貓——他不入屋、不收養,只陪她一個夏天。"
+    series_description: "佩芸三十四歲,在台南做剪輯接案。她養的橘貓糖糖,大學前的暑假撿回來,走的那天剛滿十六歲。糖糖走後一個月,她不能在家,每天傍晚都去安平海堤散步。某個禮拜五黃昏,海堤的水泥階梯上坐著一隻虎斑老貓,皮膚鬆鬆、左眼有點白濁。牠看見佩芸,沒躲,反而過來蹭她小腿。佩芸蹲下哭了二十分鐘。從那天起,虎斑每天傍晚出現在同一處;她想抱回家,牠不從;想餵牠進貓籠,牠也走開。牠只在那個傍晚的時段、那段海堤、陪她。第二週開始,海堤上開始出現別人——一位剛失去黃金獵犬的高中生、一位剛失去鸚鵡的退休工程師、一個剛失去寵物兔的小女孩。虎斑會走過去,讓他們摸一下,然後回到佩芸腳邊。佩芸發現,自己其實在主持一個沒有招牌的失寵物互助會。一巻一位夥伴。"
+    opening_5_volume_arc:
+      vol_1: "海堤上第一次見到虎斑。佩芸不哭也能坐二十分鐘。"
+      vol_2: "高中生小翔。黃金獵犬。佩芸第一次替別人說那句『他不會回來』。"
+      vol_3: "退休工程師。鸚鵡跟了他二十二年。佩芸學會什麼話不要說。"
+      vol_4: "小女孩。兔子。佩芸用糖糖的故事,沒有迴避『死亡』兩個字。"
+      vol_5: "夏天結束。虎斑沒再出現。佩芸知道牠走了。她在海堤蓋了一塊小小的石頭——給糖糖、給虎斑、給每一隻。"
+    comp_titles: ["海街日記", "用九柑仔店", "可不可以你也剛好喜歡我", "深夜食堂", "貓"]
+    reader_promise: "你抱不住的、養不回來的,有時候願意陪你一個夏天——這就夠了。"
+    marketing_angle: "《海街日記》的鎌倉海邊溫度移到台南安平,加上一隻只陪你一個夏天的老虎斑——失寵物的純台灣腔療癒。"
+    genre_family: healing
+    emotional_engine: chosen_family + slow_mastery
+    audience: "三十至四十五歲、近年失去伴侶寵物、住在中南部的讀者"
+
+  - series_id: healing_ground_healing__zh_TW__ji_si_lu_de_ling_chen
+    brand_id: healing_ground_healing
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: place
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十六歲的女主角在台北市東區一間二十四小時花店做大夜班,她發現店裡每天凌晨三點到四點之間,會有客人來訂『不送給活人』的花。她開始記下每一束花、每一個地址,慢慢拼出整座城市的失去地圖——並且發現自己也走進了這張地圖。"
+    volume_runway_target: 140
+    reading_platform_fit: manga_traditional
+    series_title: "祭祀路的凌晨"
+    series_logline: "東區二十四小時花店,凌晨三點到四點之間,會有客人來訂『不送給活人』的花。她開始記下,並走進那張地圖。"
+    series_description: "茉欣大學畢業後沒考上正式工作,在敦化南路一間二十四小時花店做大夜。第一個月她以為大夜很閒。第三週,某個禮拜二凌晨三點十二分,門口進來一位西裝筆挺的中年男人——他眼睛紅紅地,訂了一束白色香水百合,送往陽明山第一公墓某個座號。茉欣抄下訂單。隔天凌晨三點三十八分,另一位女士訂花送到六張犁。第三天,凌晨三點零五分,又一位。茉欣發現,凌晨三點到四點之間,每天都有人來訂『不送給活人』的花——這時間城市還沒醒,只有失去最重的人,在這一小時來訂單。她開始記。一巻一張訂單、一個她跟著送的故事(白天她自己騎機車補送)。第五卷的某個凌晨,她發現訂單簿上多出一張——她姊姊的名字,姊姊三年前車禍走了,訂單寫的地址是她自己家。"
+    opening_5_volume_arc:
+      vol_1: "西裝男與陽明山第一公墓。茉欣第一次跟著去送。"
+      vol_2: "凌晨三點四十分的離婚律師。她送花給前夫——他兩個月前過世。"
+      vol_3: "凌晨三點十分的二十一歲女生。她送花給高中時暗戀的男生——他高三那年走了。"
+      vol_4: "凌晨三點半的七十歲阿伯。他送花給自己。茉欣學會什麼是『預先告別』。"
+      vol_5: "凌晨三點正。訂單寫姊姊。地址寫茉欣自己家。她回家,在門口擺了一束白玫瑰。"
+    comp_titles: ["送行者", "深夜食堂", "用九柑仔店", "可不可以你也剛好喜歡我", "海街日記"]
+    reader_promise: "城市最深的失去,都集中在沒人醒著的那一個小時——你不是一個人在這個鐘點裡撐著。"
+    marketing_angle: "《深夜食堂》的時段限定 × 《送行者》的職人鏡頭 × 東區二十四小時花店一個凌晨小時的地圖。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "Z 世代 24–30 歲、做大夜/輪班工作、有過失去未癒的讀者"
+
+  - series_id: healing_ground_healing__zh_TW__hua_lian_yu_kou_de_wen_su
+    brand_id: healing_ground_healing
+    locale: zh_TW
+    persona_archetype: ML-bereaved
+    daily_life_anchor: town_village
+    portal_mechanic: place
+    episodic_frame_per_volume: season
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "三十八歲、丈夫罹癌走後第二年的女主角,辭掉台北的廣告業工作,搬到花蓮玉里鎮父親留下的小溫泉民宿;她從零開始學經營,客人多半是來休息一晚的失婚、失業、失親的旅人,她什麼都不問,只放好一份茶湯。"
+    volume_runway_target: 130
+    reading_platform_fit: manga_traditional
+    series_title: "花蓮玉里的溫宿"
+    series_logline: "丈夫走後第二年,她辭掉台北的工作,搬到花蓮玉里父親留下的小溫泉民宿;她不問客人為什麼來,只放好一份茶湯。"
+    series_description: "怡儒三十八歲,在台北做了十五年廣告 AE。丈夫俊翔三十六歲被診斷胰臟癌,走的時候不到三十八。怡儒撐了一年多,某天在辦公室開週會,突然站起來說:『我先回去。』她沒回家,直接搭普悠瑪去花蓮玉里——父親十年前留給她的一棟兩房一廳老民宿,從來沒整理過。她在那兒待了一個禮拜,沒回台北。第二個禮拜,她開始一個人刷地板。第三個月,民宿登上 Google 地圖。第一位客人是位失婚的男士,從台中來。怡儒沒問。早餐放一壺熱茶湯、一盤酸菜白肉、一碟麻油雞。男士住三天,離開前在留言本寫:『我來這裡,什麼都沒解決——但我可以呼吸了。』一巻一位客人、一個季節。怡儒慢慢明白,她不是在做民宿,她在做一個讓人合法停下來的地方。"
+    opening_5_volume_arc:
+      vol_1: "春。失婚男士。茶湯。怡儒第一次發現,她可以不問。"
+      vol_2: "夏。失業的中年女工程師。怡儒帶她去玉里的稻浪。"
+      vol_3: "秋。失去母親的高中女生。怡儒讓她在客廳哭夠。"
+      vol_4: "冬。一位剛失去寵物的老先生。怡儒第一次在民宿院子陪人埋了一個小盒子。"
+      vol_5: "第二年的春。一位剛喪偶的太太。怡儒第一次在自己面前說出俊翔的名字。"
+    comp_titles: ["用九柑仔店", "海街日記", "送行者", "深夜食堂", "幸福路上"]
+    reader_promise: "你來這裡什麼都不必解決——你只要呼吸,茶湯放好了。"
+    marketing_angle: "《幸福路上》的離家與回家 × 花蓮玉里的稻浪 × 一位廣告人變成民宿主人的、不解決什麼的療癒。"
+    genre_family: slice_of_life
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "三十五至五十歲、剛喪偶/離婚/離職、考慮『要不要逃』的讀者"
+
+  - series_id: healing_ground_healing__zh_TW__san_yi_shang_quan_de_xiao_zhen_ji
+    brand_id: healing_ground_healing
+    locale: zh_TW
+    persona_archetype: GZ-uni
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十二歲的女大生在三義木雕老街繼承外公留下的小鎮級『鎮魂木匠舖』;她不會雕,但客人會帶一件遺物來請她『雕一個收納它的盒子』,雕到一半,木頭會自己告訴她這位逝者沒能說完的最後一句話——她照著刻上盒子內側。"
+    volume_runway_target: 130
+    reading_platform_fit: webtoon_vertical
+    series_title: "三義商圈的小鎮級"
+    series_logline: "三義木雕老街上,她繼承外公的小木舖;客人帶遺物來請她做盒子,雕到一半,木頭會告訴她那個人沒說完的最後一句話。"
+    series_description: "聖玲念聯合大學工業設計大三。外公在三義老街開了五十年的小木舖,半年前走了。聖玲利用暑假回去整理。第一位上門的不是觀光客——是巷子裡的鄰居林伯母,她抱著一只藍色塑膠袋,裡頭是她剛走的先生的老花眼鏡、一支舊鋼筆、一張褪色的合照。林伯母說:『可以麻煩你做一個小盒子嗎?我不會弄。』聖玲為難,她不是木匠。她照外公留下的工具書試著動手,雕到一半,木頭表面的紋路自己慢慢浮出一行字:『眼鏡放右口袋,我才看得清楚你。』聖玲愣住——這不是她想的。她照刻上盒子的內側。林伯母收到盒子,打開看見字,沒說話,鞠了一躬走了。隔天巷子裡來了第二位。一巻一份遺物、一句沒說完的話。"
+    opening_5_volume_arc:
+      vol_1: "林伯母與老花眼鏡。第一句沒說完的話。聖玲第一次相信外公的工具。"
+      vol_2: "對面茶行的老闆娘失去十年的童養媳同伴。老茶壺。一句『水溫八十,我才喝得下』。"
+      vol_3: "外地來的男生為他自殺的弟弟訂盒子。一支電競滑鼠。聖玲第一次在雕的過程哭。"
+      vol_4: "聖玲想替自己外公做一個盒子。她拿起外公的老木尺,木頭沉默。"
+      vol_5: "外公的盒子終於浮字:『把店留給你,不是要你留下,是讓你知道有一個可以回來的地方。』聖玲決定畢業後不留下,但每個月回三義一趟。"
+    comp_titles: ["用九柑仔店", "送行者", "海街日記", "可不可以你也剛好喜歡我", "深夜食堂"]
+    reader_promise: "你以為他沒說的那句話——其實藏在你還沒打開的那塊木頭裡。"
+    marketing_angle: "《用九柑仔店》的職人傳承 × 三義木雕的鏗鏘工法 × 一位設計系女大生繼承外公的『鎮魂工具』。"
+    genre_family: mystery_cozy
+    emotional_engine: inherited_wisdom + slow_mastery
+    audience: "Z 世代 20–26 歲、家中有長輩職人手藝、念設計/工藝相關科系的讀者"
+
+  - series_id: healing_ground_healing__zh_TW__hou_shan_de_lao_yi_yuan
+    brand_id: healing_ground_healing
+    locale: zh_TW
+    persona_archetype: GA-tween
+    daily_life_anchor: education
+    portal_mechanic: companion
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "十二歲、剛失去爺爺的小六女主角,跟著護理師媽媽搬到台東池上一家小鎮醫院後面的宿舍;她在醫院後山撿到一隻會說人話的老山羌,牠只告訴她每天醫院裡哪一位病人或家屬需要一點點安靜的陪伴。她不打擾,只是去坐五分鐘。"
+    volume_runway_target: 120
+    reading_platform_fit: webtoon_vertical
+    series_title: "後山的老醫院"
+    series_logline: "她跟著護理師媽媽搬到台東池上的小醫院,在後山撿到一隻會說人話的老山羌——牠告訴她哪一位病人今天需要五分鐘的陪。"
+    series_description: "敏甯小六升小七的暑假,跟爺爺最親的爺爺心臟病走了。媽媽是護理師,被調到台東池上鎮的小型聯合診所——縣府為了支援高齡偏鄉。一家人搬進診所後面的宿舍。第一個禮拜敏甯不太說話。某天她在後山的步道上撿到一隻受傷的老山羌,左前腳有道擦傷。她蹲下去想看清楚,山羌張口說:『拜託,我已經一百四十歲了,不要再撿。』敏甯嚇到坐在地上。山羌只說一次。從那天起,他每天傍晚出現在宿舍後門,告訴敏甯一件事:『三〇二病房的阿嬤,今天她兒子沒來。』『五號診間外面的小男生,他爸爸剛掛號,但他不知道。』敏甯就去坐五分鐘。她不問、不勸、不安慰。她爺爺走的時候,她在房間外面坐著,沒進去。她現在學會,坐外面的那個人,也算陪。"
+    opening_5_volume_arc:
+      vol_1: "後山。山羌。第一句話。敏甯第一次走進三〇二病房。"
+      vol_2: "五號診間外面的小男生。爸爸還沒走出來。敏甯遞了一張面紙。"
+      vol_3: "病房走廊上的菲律賓籍照服員阿姨。山羌說她媽媽剛走、她不能回去。敏甯坐了十分鐘。"
+      vol_4: "山羌的左前腳開始癒合,但牠變得越來越少出現。敏甯怕牠走。"
+      vol_5: "山羌最後一次出現。牠告訴敏甯:『今天需要陪五分鐘的人——是你媽媽。爺爺走那天,她在急診室外面也沒進去。』敏甯第一次去敲媽媽的休息室門。"
+    comp_titles: ["神隱少女", "用九柑仔店", "可不可以你也剛好喜歡我", "海街日記", "螢火之森"]
+    reader_promise: "陪一個人不一定要走進病房——有時候,只要坐在外面五分鐘就夠了。"
+    marketing_angle: "《螢火之森》的山林靈獸 × 台東池上的小鎮醫院 × 一個十二歲女孩學會『坐在外面也是陪』。"
+    genre_family: supernatural_everyday
+    emotional_engine: chosen_family + slow_mastery
+    audience: "Gen Alpha 10–13 歲 + 三十至四十歲家長共讀;偏鄉醫療家庭、近年失去長輩的家庭"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 04 / 05 — warrior_calm_cultivation (ash & steel · warrior_calm)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: warrior_calm_cultivation__zh_TW__shi_yong_de_xiao_yao
+    brand_id: warrior_calm_cultivation
+    locale: zh_TW
+    persona_archetype: ML-bereaved
+    daily_life_anchor: town_village
+    portal_mechanic: pact
+    episodic_frame_per_volume: customer
+    magical_register: soft_fantasy
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "在虛構的『南島古道』背景上(地理感受像台灣中央山脈+排灣族口傳),四十歲、剛失去同袍的退役獵人主角接過去世師父留下的一把鏽鐵腰刀;每替一位失去親人的村民完成一項『心願小工』,刀上的鏽痕就退一道——五卷退完五道,代表他自己也走完了一段悼亡的修煉階。"
+    volume_runway_target: 180
+    reading_platform_fit: manga_traditional
+    series_title: "失勇的小腰刀"
+    series_logline: "退役獵人接過師父的鏽刀,他每替一位失去親人的村民完成一件心願小工,刀上的鏽就退一道——五道退完,他也走完了自己的悼亡。"
+    series_description: "穆禾今年四十歲,生長在虛構的『南島古道』山脈裡——一個排灣族口傳與台灣中央山脈感受融合的虛構地理。他是村裡兩位巡山獵人之一。半年前,同袍兼摯友達魯在追一頭山豬時掉進獸坑,當場走。穆禾辭去巡山職,把獵刀掛起。三個月後,村裡的老師父也走了。師父什麼都沒留,只留一把生鏽的舊腰刀,刀身有五道明顯的鏽痕。村長把刀交給穆禾。村長說:『師父留話,這刀的鏽,你做完五件事就會退。』第一件事是村裡剛喪偶的青絲嬤想把丈夫常坐的那塊溪邊石頭刻字。穆禾不會刻字,但他帶著刀去。刀身在他剛動手時自己微微熱了一下,他不自覺刻完了。回到家,刀上第一道鏽淡了。一巻一件小工、一道退鏽。最後一道,他要為師父做。"
+    opening_5_volume_arc:
+      vol_1: "青絲嬤的溪邊石頭。穆禾學會,刀替他做了一半。"
+      vol_2: "山下小村,失去獨子的鐵匠。穆禾替他打一支兒子用過的小鋤頭。第二道鏽淡了。"
+      vol_3: "巡山隊現任隊長——達魯生前帶過的學弟——夜裡來找穆禾。穆禾陪他重走達魯掉進去的山徑。第三道鏽淡了。"
+      vol_4: "村裡的孩子要替剛走的祖母做一支竹笛。穆禾不會做竹笛,他學。第四道鏽淡了。"
+      vol_5: "師父。穆禾發現師父沒有家人,只有他。他替師父在山頂刻了一塊牌位,寫的不是名字,是師父教他的第一個字——『停』。最後一道鏽退完。刀身光亮,他把刀掛回牆上,沒再戴。"
+    comp_titles: ["黃金神威", "修羅之刻", "葬送的芙莉蓮", "用九柑仔店", "BANANA FISH"]
+    reader_promise: "走完悼亡的人不會變強——他只是學會了把刀掛起來,知道什麼時候不再需要拔。"
+    marketing_angle: "《葬送的芙莉蓮》的安靜推進 × 排灣族口傳味道 × 一位獵人替五個人完成五件小工,慢慢悼完自己的同袍與師父。"
+    genre_family: fantasy_adventure
+    emotional_engine: slow_mastery + competent_calm_specialist
+    audience: "三十至五十歲、失去過摯友或師長、偏好慢節奏奇幻設定的男性讀者(也適合女性)"
+
+  - series_id: warrior_calm_cultivation__zh_TW__shan_de_shou_che_ren
+    brand_id: warrior_calm_cultivation
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: education
+    portal_mechanic: place
+    episodic_frame_per_volume: customer
+    magical_register: soft_fantasy
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "在虛構修煉門派『靜山院』裡,二十一歲的女主角加入時已是同期最後一名;她沒有靈根、不能御劍,只能學門派最冷門的『守車人』職——專門負責修煉者下山途中遇到的『心傷案』。五卷五個案件,她從拒絕承認自己也有心傷、到主動接下『門派最大的舊案』(師伯三十年前的同門之死)。"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "山的守車人"
+    series_logline: "她加入靜山院時是同期最後一名,她沒有靈根,只能學最冷門的『守車人』職——負責下山路上修煉者的心傷案。"
+    series_description: "靄寧二十一歲,大學讀資管,畢業後她沒去公司,跑去報考虛構的『靜山院』(地理感像合歡山+雪山支系)。她沒有靈根、不能御劍,初試時排名同期最後。掌門安排她進『守車人』職——這是門派最冷門的方向,負責修煉者離山下山途中遇到的『心傷案』(心傷會在山下發作,但解法在山上)。第一個案子,一位剛出師的師兄回到山下後在母親忌日前夕無法呼吸。靄寧不能御劍,她只能搭客運下山、跟他坐一整夜的便利商店。她跟著家裡阿嬤學的中藥草知識用上了。師兄沒解開,但他可以喘氣了。靄寧發現,守車人不是『不夠強』,是門派裡唯一願意承認『修煉的人也會心傷』的職。一巻一案。第五卷,她接下門派最大的舊案——師伯三十年前的同門之死,所有人都迴避。"
+    opening_5_volume_arc:
+      vol_1: "師兄與母親忌日。靄寧的第一個案子。便利商店一整夜。"
+      vol_2: "出師的女師姐,在山下面試前一晚發病——她父親生前希望她進公司。靄寧帶她去公園跑步。"
+      vol_3: "退門離山的中年師伯,他離不開山。靄寧第一次承認自己也離不開家。"
+      vol_4: "靄寧自己心傷發作。她爸爸三年前走的。守車人接案的師姐回頭來陪她。"
+      vol_5: "師伯的三十年舊案。同門之死。靄寧接案,需要爬整座山脈最高的峰——但這一次,她願意走慢一點。"
+    comp_titles: ["葬送的芙莉蓮", "魔法少女小圓", "全知讀者視角", "鋼之鍊金術師", "Solo Leveling"]
+    reader_promise: "你不是不夠強,你只是被分配到了那個願意承認大家也會心傷的職。"
+    marketing_angle: "《葬送的芙莉蓮》的修煉式淡定 × 台灣中央山脈虛構化的『靜山院』× Z 世代版的修真療癒群像。"
+    genre_family: fantasy_adventure
+    emotional_engine: slow_mastery + chosen_family
+    audience: "Z 世代 22–28 歲、對修真/修煉題材感興趣、但厭倦套路爽文的讀者"
+
+  - series_id: warrior_calm_cultivation__zh_TW__hui_jin_de_dao_yang
+    brand_id: warrior_calm_cultivation
+    locale: zh_TW
+    persona_archetype: ML-bereaved
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十五歲的男主角在彰化員林開了一間小道場,他剛失去師父(也是他的養父),道場裡剩下他和師父留下的一只灰金色舊砂袋——每打一拳，砂袋落下的灰只在曾經失去某個人的人面前才看得見。他開始接『失去者的拳』——不是教打架,是教他們把那些沒處放的力氣安頓下來。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "灰金的道場"
+    series_logline: "員林一間小道場,他剛失去師父養父，砂袋的灰只在失去過某個人的人面前才落得見——他開始教『失去者的拳』。"
+    series_description: "凱琦三十五歲,從小是孤兒,被空手道老師——他稱呼『師父』也是他的養父——從育幼院領養。師父七十歲,半年前心肌梗塞走。員林這間小道場本來收國中生兼差,師父走後生員清空。凱琦不會招生,他自己每天清晨四點開始打砂袋——師父留下的那只灰金色舊砂袋。某天清晨他打到第三百下,袋子落下一陣金灰,飄在地上。他不在意。下午一位中年女士來敲門:『請問還收嗎?』她進來的瞬間,看見地上的金灰,腳停住:『這是......。』她剛失去先生。凱琦愣住——他從沒看見有人看得到那些灰。他開始接『失去者的拳』。教法很簡單:不是出拳,是學會收拳。一巻一位學員。"
+    opening_5_volume_arc:
+      vol_1: "中年女士。剛喪偶。她打的不是拳,是嗚咽。凱琦學會師父當年怎麼接他。"
+      vol_2: "高中男生。媽媽自殺。他打到拳頭流血。凱琦教他『不打了』也是一種拳。"
+      vol_3: "退休消防員。班上殉職的學弟。他每一拳都精準。凱琦第一次只在旁邊不出聲。"
+      vol_4: "凱琦的舊同門——師兄,當年離開道場去日本。他回來,說想再見師父一次。凱琦帶他打砂袋,灰落下,師兄看見了。"
+      vol_5: "凱琦自己。他第一次站到砂袋面前哭。金灰落在他自己腳邊。砂袋空了,但他終於可以掛起來。"
+    comp_titles: ["BANANA FISH", "修羅之刻", "葬送的芙莉蓮", "送行者", "用九柑仔店"]
+    reader_promise: "你心裡那股沒處放的力氣,不是要打給誰看——是要學會,什麼時候可以放下來。"
+    marketing_angle: "《修羅之刻》的拳道凝視 × 員林老社區的小道場 × 一位養子接過師父走後的『失去者的拳』。"
+    genre_family: healing
+    emotional_engine: slow_mastery + competent_calm_specialist
+    audience: "三十至五十歲、有過師長/養父之死、習武或運動背景的男性讀者(也適合女性)"
+
+  - series_id: warrior_calm_cultivation__zh_TW__yu_shan_jiao_xia_de_lao_shi
+    brand_id: warrior_calm_cultivation
+    locale: zh_TW
+    persona_archetype: GZ-uni
+    daily_life_anchor: education
+    portal_mechanic: place
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十三歲、剛保送研究所的女主角,暑假回到玉山腳下信義鄉的小村替剛中風的爺爺看店——爺爺開了三十年的『山下打鐵舖』。她在店裡發現一本『修壞工具的修煉冊』,每一頁記錄一件被村民摔壞的工具背後沒能說出口的失去事。她照著修,村裡的人慢慢回來。"
+    volume_runway_target: 140
+    reading_platform_fit: webtoon_vertical
+    series_title: "玉山腳下的老師"
+    series_logline: "暑假替中風的打鐵舖爺爺看店,她在櫃台下找到一本『修壞工具的修煉冊』——每一頁是村民摔壞一件工具背後沒說的失去。"
+    series_description: "宛欣二十三歲,保送台大公衛所。暑假爺爺中風,她回信義鄉看店——爺爺三十年來開的『山下打鐵舖』。第一週都是觀光客來問會不會做鑰匙圈,她應付得很彆扭。第二週某天傍晚,村裡的阿成伯送來一支斷柄的鋤頭。宛欣不會修,但她在櫃台下抽屜找到一本布封面舊筆記——爺爺的字:『鋤頭斷柄不是用力,是放手之前沒喊出來。阿成伯,廿四年前,女兒入贅後沒再回來。』她照筆記提示用幾個簡單的步驟把柄換上,送過去。阿成伯收到鋤頭,坐在門口看了很久,跟她說：『跟你爺爺說一聲謝謝。』村民開始一個一個送東西來——斷掉的菜刀、彎掉的鐵釘、裂開的鍋柄。一巻一件、一段失去。宛欣慢慢知道,爺爺不只在打鐵——他在替整個村子收一份失去清單。"
+    opening_5_volume_arc:
+      vol_1: "阿成伯的鋤頭。女兒入贅後沒再回來。宛欣第一次打開那本冊。"
+      vol_2: "村口賣麵阿姨的菜刀。先生十年前走。宛欣學會什麼話不必問。"
+      vol_3: "山上的布農族大哥的鋤頭。哥哥山難。宛欣第一次跟著上山。"
+      vol_4: "爺爺中風後第一次自己拿筆。他在冊子末頁寫:『下一頁留給你。』"
+      vol_5: "宛欣自己寫第一頁——爸爸,她爸爸八歲時走,她從不講。她寫完,爺爺在病床上點頭。她決定保留打鐵舖,但只在寒暑假回來開。"
+    comp_titles: ["用九柑仔店", "送行者", "海街日記", "可不可以你也剛好喜歡我", "深夜食堂"]
+    reader_promise: "你以為他只是個打鐵的——其實他替整個村子收了一本三十年的失去清單。"
+    marketing_angle: "《用九柑仔店》的職人記憶 × 信義鄉玉山腳下的打鐵舖 × 一位 Z 世代女孫女接下爺爺的失去清單。"
+    genre_family: slice_of_life
+    emotional_engine: inherited_wisdom + slow_mastery
+    audience: "Z 世代 21–27 歲、家中有長輩開傳統店鋪、念公衛/社工/設計類科系的讀者"
+
+  - series_id: warrior_calm_cultivation__zh_TW__jiu_zhuo_shan_de_qi_pan
+    brand_id: warrior_calm_cultivation
+    locale: zh_TW
+    persona_archetype: GZ-uni
+    daily_life_anchor: education
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "二十二歲、台大圍棋社副社長的女主角,在外公(前職業棋士)走後繼承了他常下的舊木棋盤——棋盤每讓兩個剛失去誰的人下一盤,棋局結束時,雙方會看見對方失去的人坐在對面;她和五位棋友陸續走進這個『悼亡對局』,慢慢拼出外公生前最深的一場輸局。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "舊桌山的棋盤"
+    series_logline: "她繼承外公的舊棋盤;讓兩個剛失去誰的人下一盤,結束時雙方會看見對方失去的人坐在對面。"
+    series_description: "詠晴台大資工系大四,圍棋社副社長。外公連叔——前職業棋士、戰後從中國大陸隨家人來台、晚年定居於台北舊街——半年前走。他留下的桐木棋盤,連叔生前每週一晚上都會搬到客廳跟詠晴下一盤。某天晚上社課,詠晴帶棋盤去學校,跟剛失去媽媽的學妹下了一盤。她們收子的瞬間,棋盤上突然出現第三道影子——學妹的媽媽,坐在學妹對面,輕輕替她整理瀏海。詠晴看得清清楚楚,學妹也看見了。學妹哭出來,影子消散。詠晴沒辦法解釋。她把棋盤帶回家,連叔不會托夢,但她開始邀請棋社裡其他失去過誰的人來下。一巻一位棋友、一場對局、一個看見。第五卷,詠晴知道,連叔生前最在意的一場輸局是輸給一個 1953 年的同門——那個同門從沒到過台灣。"
+    opening_5_volume_arc:
+      vol_1: "學妹與媽媽。第一盤。詠晴第一次知道棋盤的能力。"
+      vol_2: "棋社社長,他高中時最好的朋友自殺。對局結束,影子是朋友。"
+      vol_3: "校外來訪的退休數學老師,他兒子車禍。詠晴第一次看見一位『失去孩子』的人。"
+      vol_4: "詠晴自己對局,對手是棋社副指導老師。詠晴的失去——是外公連叔。她第一次看見連叔坐在對面。"
+      vol_5: "詠晴透過連叔的舊棋譜,找到 1953 年的同門。她寄出一封信。對局沒下完，但她知道連叔等的不是贏回來。"
+    comp_titles: ["棋靈王", "可不可以你也剛好喜歡我", "海街日記", "用九柑仔店", "送行者"]
+    reader_promise: "你跟另一個失去過的人之間,有一張棋盤——把它擺好,你們會一起看見不該還在的人。"
+    marketing_angle: "《棋靈王》的職人對局 × 台大圍棋社的青春 × 一張外公留下的桐木棋盤裡,跨世代的悼亡對局。"
+    genre_family: mystery_cozy
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "Z 世代 20–26 歲、念理工/棋類社團、家中有外省第一代長輩的讀者"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 05 / 05 — stoic_edge_battle (surrender form · warrior_calm)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: stoic_edge_battle__zh_TW__hai_an_xian_de_jue_dou_zhe
+    brand_id: stoic_edge_battle
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: town_village
+    portal_mechanic: pact
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "在虛構的『黑潮諸島』背景上(地理感像台灣東岸+蘭嶼+綠島),二十六歲的女主角繼承外公留下的『海岸線決鬥者』身份——這不是打架,是替剛失去親人的島民走完一段對抗『未盡之怒』的儀式對決。五卷五個對手、五次怒氣的形態,她也走完自己失去外公的怒。"
+    volume_runway_target: 180
+    reading_platform_fit: manga_traditional
+    series_title: "海岸線的決鬥者"
+    series_logline: "在黑潮諸島,她繼承外公的『決鬥者』身份——這不是打架,是替剛失去誰的人走完一段對抗未盡之怒的儀式。"
+    series_description: "若菡二十六歲,出生在虛構的『黑潮諸島』(地理感像台灣東岸+蘭嶼+綠島融合的群島)。外公伊洛是島上的『決鬥者』——這在島民傳統裡不是會打架的人,而是受過特殊訓練、能陪一位剛失去親人的島民,走完一場以儀式為骨架的『未盡之怒對決』。對決不傷人,招式是慢的,但每一招都精準對應一種怒氣的形態:翻湧的、悶住的、自我攻擊的、向外失控的、轉成沉默的。外公走後,若菡繼承這份職。第一個來找她的是剛失去父親的中年漁夫,他連續三個禮拜砸自己家的椅子。若菡帶他到海邊礁石上,對決一個下午,他沒砸椅子了。一巻一位對手、一種怒。"
+    opening_5_volume_arc:
+      vol_1: "中年漁夫。砸椅子的翻湧怒。礁石上的對決。若菡第一次替別人接招。"
+      vol_2: "高中女生。失去媽媽的悶住怒。她不哭也不講。若菡學會什麼都不問。"
+      vol_3: "六十歲的退休教師。自我攻擊的怒——他一直在自責沒陪太太走完。若菡的招式變成『擋』。"
+      vol_4: "外地觀光客,他失去未婚妻——車禍。向外失控的怒。若菡第一次差點傷。"
+      vol_5: "若菡自己。她失去外公的、轉成沉默的怒。她跟自己對決。最後一招——『退』。"
+    comp_titles: ["修羅之刻", "黃金神威", "葬送的芙莉蓮", "BANANA FISH", "Solo Leveling"]
+    reader_promise: "你心裡那股說不清是傷心還是憤怒的東西——它有形狀,而且有人會陪你走完一場儀式去看。"
+    marketing_angle: "《修羅之刻》的儀式對決 × 蘭嶼/綠島混合的虛構諸島 × 一位女決鬥者替五個失去者走完五種怒。"
+    genre_family: fantasy_adventure
+    emotional_engine: competent_calm_specialist + slow_mastery
+    audience: "Z 世代 23–30 歲、面對突發失去後處於憤怒階段、喜歡儀式美學的讀者"
+
+  - series_id: stoic_edge_battle__zh_TW__yi_lan_li_yu_de_ye_che
+    brand_id: stoic_edge_battle
+    locale: zh_TW
+    persona_archetype: ML-bereaved
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十六歲、剛從車禍中倖存(妻子當場身亡)的男主角,辭去台北的工作回到宜蘭老家開了一輛夜車——只在凌晨零點到清晨五點之間,在礁溪到頭城這段海岸公路上,替剛經歷喪事的人開車。他不問、不收太多錢,但每一位客人下車時,都會留下一個小物。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "宜蘭礁溪的夜車"
+    series_logline: "車禍倖存後,他辭職回宜蘭開夜車——凌晨在礁溪到頭城這段海岸公路,只載剛經歷喪事的人。"
+    series_description: "孟翰三十六歲,前廣告公司業務總監。妻子苑寧在他三十四歲那年的中秋連假——他開車——對向車道酒駕撞上,當場走。孟翰活下來。康復之後他沒回廣告公司,他考了職業駕照,回宜蘭老家把父親生前的舊喜美整理好,登記了一張不上線的『夜車』。他只在凌晨零點到清晨五點之間接客,範圍只在礁溪到頭城這段濱海公路。客戶他不主動找,但有需要的人慢慢找上他——殯儀館的人介紹的、慈善團體介紹的。第一位客人是位剛辦完父親告別式的中年男子,他不能睡。孟翰開了一個半小時,沒講話。下車時客人遞了一張二十塊的紙鈔——說只能給這個數字,他相信車費的儀式感。孟翰把那張紙鈔釘在儀表板上。一巻一位客人、一個小物、一條沒寫在地圖上的悼亡路線。"
+    opening_5_volume_arc:
+      vol_1: "中年男子。父親。二十塊紙鈔。孟翰第一次開夜車。"
+      vol_2: "二十二歲女生。男友自殺。她在副駕座哭一路,下車留了一把鑰匙。"
+      vol_3: "失去兒子的退休教師夫妻。他們連話都沒講,孟翰開到他兒子出車禍的路口,停了五分鐘。"
+      vol_4: "三十五歲女生剛喪夫。孟翰第一次發現自己想說『我也是』。他沒說。她留了一張結婚照。"
+      vol_5: "孟翰自己。中秋夜。他開回出車禍的那個交流道。沒有客人。他在副駕擺了苑寧的圍巾。"
+    comp_titles: ["送行者", "深夜食堂", "用九柑仔店", "海街日記", "可不可以你也剛好喜歡我"]
+    reader_promise: "你不必告訴司機你失去了誰——他知道,他自己也載著一個。"
+    marketing_angle: "《送行者》的職人凝視 × 宜蘭礁溪到頭城的濱海公路 × 一位倖存丈夫的、不收費的夜車悼亡路線。"
+    genre_family: supernatural_everyday
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "三十至五十歲、近年失去伴侶/手足、有開車或夜班經驗的讀者"
+
+  - series_id: stoic_edge_battle__zh_TW__shi_dan_de_yin_zi
+    brand_id: stoic_edge_battle
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: home_apartment
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: occult_cosmic
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十八歲、念社工系出身的女主角接下一份冷門工作——她替殯儀館代為處理『遺物中可能藏有怨氣』的物件。她有一只繼承外婆的香爐,把物件擺進去過火五秒,她會看見這件物的影子——是亡者的執念,還是生者的恐懼。五卷五件物,她要學會什麼時候執念該散、什麼時候該留。"
+    volume_runway_target: 130
+    reading_platform_fit: manga_traditional
+    series_title: "失膽的影子"
+    series_logline: "社工系畢業,她替殯儀館處理『可能藏有怨氣』的遺物;外婆的香爐過火五秒,她會看見物件背後的影子。"
+    series_description: "茜華二十八歲,社工系畢業後沒進公部門,反而接了一個冷門案子——某個老牌殯儀館的『遺物善後員』。台灣民俗裡有部分家屬會擔心過世親人的某些遺物還『帶著情緒』,過去都由殯儀館的老師傅低調處理,如今老師傅退休,殯儀館找上茜華——因為她的外婆生前是擅長處理這類事的。茜華只繼承一只外婆留下的小銅香爐。她不太信,但每件物擺進香爐過火五秒,她就會看見一個影子——有時候是亡者的執念,有時候是還在世的家屬的恐懼投射。茜華要替每件物分辨:是該讓它散、還是該留下。第一件是一位過世母親的老花眼鏡——女兒覺得每次戴上都想哭。茜華過火,看見的不是亡者,是女兒自己怕忘記。茜華建議留下。一巻一件物。儀式感濃但不恐怖,主軸是『分辨與安頓』。"
+    opening_5_volume_arc:
+      vol_1: "老花眼鏡。亡者母親 vs 女兒的恐懼。茜華建議留下。"
+      vol_2: "一支舊鋼筆。亡者父親 vs 兒子的內疚。執念實在。茜華建議散。"
+      vol_3: "一張舊唱片。亡者妻子 vs 丈夫的孤獨。茜華建議留下,但封進新匣。"
+      vol_4: "一件嬰兒服。流產的母親自己心裡的執念。茜華第一次告訴一位生者:『要放的是你自己心裡的影子,不是這件衣服』。"
+      vol_5: "茜華自己。她的外婆走那天,她沒見到最後一面。她把外婆的舊頂針擺進香爐。過火五秒——影子是她自己。她學會的最後一件事是,有些影子要留著陪你一段路。"
+    comp_titles: ["送行者", "蟲師", "用九柑仔店", "夏目友人帳", "鬼太郎"]
+    reader_promise: "你身邊那件物有沒有怨氣,不是物決定的——是你心裡那塊還沒看清的影子在說話。"
+    marketing_angle: "《蟲師》的職人民俗凝視 × 台灣民間殯儀館的真實 × 一位社工背景的女遺物善後員的療癒儀式。"
+    genre_family: horror
+    emotional_engine: competent_calm_specialist + inherited_wisdom
+    audience: "Z 世代/Millennial 25–35 歲、對台灣民俗有興趣、可以接受『冷靜版恐怖』的讀者"
+
+  - series_id: stoic_edge_battle__zh_TW__ku_tin_de_chou
+    brand_id: stoic_edge_battle
+    locale: zh_TW
+    persona_archetype: ML-bereaved
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "四十二歲的退役國軍士官長,在桃園八德開了一間二手書攤養老,但他發現店裡每隔一陣子會多出一本『沒人寄賣』的舊書——書頁夾著一張遺書未寄發的草稿;他開始追蹤這些書背後的故事,並替沒寄出去的話找到正確的對象。"
+    volume_runway_target: 140
+    reading_platform_fit: webtoon_vertical
+    series_title: "庫亭的仇"
+    series_logline: "退役士官長在八德開二手書攤,店裡每隔幾週多出一本沒人寄賣的舊書,書頁夾著一張沒寄出的遺書草稿。"
+    series_description: "建成四十二歲,在國軍當了二十年通信士官長,退役後沒回老家高雄,留在桃園八德——他的最後一個駐地。他開了一間小小的二手書攤『庫亭』(以軍中『庫亭』命名),每天早上九點到傍晚六點。半年後某個禮拜三上午,他清點貨架發現多了一本《吳念真小說集》——他沒收過這本。翻開,夾著一張褪色紙條:『給佳玲——對不起,我那天說的不是我真的想的。』沒有署名。建成把書放回原位。三天後書消失了。他想:是顧客拿走的吧。一週後又出現另一本——夾著另一張紙條。建成開始追蹤。他用通信兵的細心,從紙條的字跡、書的年代、書架角度,慢慢拼出每張未寄出的遺書草稿背後是誰、要寄給誰。一巻一張紙條。他學會的是——他自己也有一張沒寄出。"
+    opening_5_volume_arc:
+      vol_1: "《吳念真小說集》與佳玲。建成第一次追到一位中年女士——她先生十年前心肌梗塞,沒道別。"
+      vol_2: "《海邊的卡夫卡》。給高中時的好朋友——對方車禍走了二十年。建成找到那位朋友的妹妹。"
+      vol_3: "一本軍事戰史。給戰友。建成第一次發現紙條的字跡很熟。"
+      vol_4: "建成在自己最舊的軍服口袋翻到一張類似紙條。是他自己的字。給已逝的母親。"
+      vol_5: "建成把那張紙條讀完——母親十一年前走的時候他在外島駐防,沒能回去。他把紙條夾進母親愛讀的書,寄回老家給弟弟。"
+    comp_titles: ["送行者", "用九柑仔店", "深夜食堂", "可不可以你也剛好喜歡我", "海街日記"]
+    reader_promise: "你說不出口的那句話,不一定要寄給對方——但要寄出去。"
+    marketing_angle: "《用九柑仔店》的小店質感 × 八德二手書攤裡的軍人退役感 × 一位士官長追查遺書草稿、最後寄出自己那張的故事。"
+    genre_family: mystery_cozy
+    emotional_engine: competent_calm_specialist + slow_mastery
+    audience: "三十五至五十五歲、退役或在軍中服務、有未完成的告別的男性讀者"
+
+  - series_id: stoic_edge_battle__zh_TW__ye_shi_de_jue_dou
+    brand_id: stoic_edge_battle
+    locale: zh_TW
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: pact
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十五歲、剛失去最好朋友(MMA 選手·場上失事)的女主角,在台中逢甲夜市替她朋友的姐姐顧每週二的牛排攤——她發現夜市裡有一群剛失去誰的人,默默約好每週二晚上在牛排攤後面的小空地走一場慢拳『悼亡決鬥』。她從旁觀者變成參與者,並把這個小聚會慢慢變成一個無名的療癒社群。"
+    volume_runway_target: 140
+    reading_platform_fit: webtoon_vertical
+    series_title: "夜市的決鬥"
+    series_logline: "她替失事的好友顧夜市牛排攤;她發現夜市裡有一群剛失去誰的人,每週二在攤後的空地走一場慢拳悼亡決鬥。"
+    series_description: "羽彗二十五歲,大學念體育系。她最好的朋友郁靜是 MMA 選手,半年前在一場業餘賽事中意外失事——對方一拳擊中太陽穴。郁靜的姊姊請羽彗暫時頂下郁靜每週二在逢甲夜市的牛排攤——攤位是郁靜當年湊錢買的,姊姊沒法每天顧。羽彗第一個禮拜二顧攤,十一點打烊,她正在收。她看見隔壁攤的水果阿姨和對面攤的滷味大哥默默走進攤位後面的小空地。空地不大,他們脫了外套,慢慢走拳——不是真打,動作慢得像太極。羽彗看了二十分鐘。下週她問。水果阿姨說:『我們在這裡走拳,十年。每個禮拜二。』她們在悼自己失去的人。羽彗從第三週開始加入。一巻一位夜市夥伴、一場慢拳對決、一個失去的故事。第五卷,羽彗自己脫了外套,替郁靜走第一場拳。"
+    opening_5_volume_arc:
+      vol_1: "水果阿姨。她哥哥三十年前在這個夜市自殺。她的拳法是『等』。"
+      vol_2: "滷味大哥。前妻自殺後他帶兒子。他的拳法是『護』。羽彗第一次走進空地，只是站著。"
+      vol_3: "夜市的清掃阿伯。失去三十二歲的兒子。他的拳法是『放』。"
+      vol_4: "羽彗認識了郁靜當年的對手——也來了夜市。他在自責。他的拳法是『扛』。"
+      vol_5: "羽彗第一次走拳。給郁靜。她的拳法是『再見』。夜市的人都看著她走完一輪。"
+    comp_titles: ["修羅之刻", "BANANA FISH", "可不可以你也剛好喜歡我", "用九柑仔店", "深夜食堂"]
+    reader_promise: "每個夜市的攤後,都有一群你不知道的、互相替彼此走完最後一場拳的人。"
+    marketing_angle: "《修羅之刻》的拳道凝視 × 逢甲夜市熱鬧背後的私密空地 × Z 世代的無名療癒社群。"
+    genre_family: other
+    emotional_engine: chosen_family + slow_mastery
+    audience: "Z 世代 22–28 歲、體育/運動背景、失去過同伴/隊友的讀者"
