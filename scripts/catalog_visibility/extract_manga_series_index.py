@@ -32,6 +32,13 @@ MANGA_PROFILE_ROOT = REPO_ROOT / "config" / "source_of_truth" / "manga_profiles"
 BRAND_SERIES_PLAN_PATH = REPO_ROOT / "config" / "manga" / "manga_brand_series_plan.yaml"
 DEFAULT_OUT = REPO_ROOT / "artifacts" / "catalog_visibility" / "manga_series_index.json"
 
+# Note: V1.1 series themes
+# (artifacts/marketing/v1_1_25_brand_series_themes_2026-05-11.yaml) are NOT joined
+# here — manga profile YAMLs already carry full series_title / series_logline /
+# series_description (verified 2026-05-11, all 312 rows). Backfilling from the
+# V1.1 marketing pass would be a no-op. Deferred as a follow-up if the manga
+# fields ever drift to empty.
+
 # Fields treated as "required for marketing completeness" (dashboard amber pills + gap view).
 MARKETING_REQUIRED = (
     "reader_promise",
@@ -228,6 +235,23 @@ def raw_doc_to_entry(
     entry["max_dormant_months"] = (
         sr.get("max_dormant_months") if sr else plan.get("max_dormant_months")
     )
+
+    # V1.1 — rendered vs planned: a series is "rendered" only when its
+    # main_character_image_path resolves to a file under the repo root.
+    # All other series (including ones with a declared path that does not
+    # yet exist on disk) are tagged "planned" so the dashboard's status
+    # filter chip works consistently across the book + manga catalogs.
+    img_rel = entry.get("main_character_image_path")
+    img_exists = False
+    if isinstance(img_rel, str) and img_rel.strip():
+        candidate = REPO_ROOT / img_rel
+        try:
+            img_exists = candidate.is_file()
+        except OSError:
+            img_exists = False
+    raw_status = entry.get("status")
+    if not raw_status or raw_status in ("draft", "planned", "rendered"):
+        entry["status"] = "rendered" if img_exists else "planned"
 
     # Layer 2 — static research links (same for every entry)
     entry["research_links"] = RESEARCH_LINKS

@@ -10,22 +10,32 @@ forked with minimal field swaps. The book-specific differences:
 - Adds ``cover_kind`` (image_full_bleed | image_dominant | type_only) so
   the dashboard can color-code by cover-render strategy
 - Adds ``brand_palette`` (hex tuple) so cards can adopt the brand color
+- V1.1 (2026-05-11): merges full **planned** catalog from the worldwide
+  allocation TSV + V1.1 series themes YAML. Rendered books carry
+  ``status="rendered"``; planned-but-unrendered books carry
+  ``status="planned"`` and have ``book_cover_image_path=None``.
 
 Sources:
 
 - ``scripts/release/build_epub.py:TEACHER_BOOKS`` — title / subtitle /
-  author / publisher / topic / locale per book
+  author / publisher / topic / locale per book (legacy rendered set)
 - ``config/publishing/cover_identity_system.yaml`` — brand_id, register,
   subject, micro_palette_shift, cover_kind, series
 - ``config/publishing/bestseller_templates.yaml`` — palette + archetype
 - ``artifacts/pipeline_examples/<teacher>/cover_<book_id>_FINAL.png`` or
   fallback ``cover_<book_id>_v3_imagery.png`` for the cover tile path
+- ``artifacts/qa/worldwide_catalog_37_brand_allocation_plan_2026-05-11.tsv``
+  — V1.1 allocation: brand_id × locale × surface × series_count (ebook rows only)
+- ``artifacts/marketing/v1_1_25_brand_series_themes_2026-05-11.yaml`` —
+  V1.1 per-brand×locale series concepts (title, arc_shape, throughline)
 
 Output: ``artifacts/catalog_visibility/book_series_index.json``.
 """
 from __future__ import annotations
 
+import csv
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -40,6 +50,173 @@ IDENTITY_YAML = REPO_ROOT / "config" / "publishing" / "cover_identity_system.yam
 TEMPLATES_YAML = REPO_ROOT / "config" / "publishing" / "bestseller_templates.yaml"
 COOKBOOK_YAML = REPO_ROOT / "config" / "manga" / "genre_prompt_cookbook_v2.yaml"
 INDEX_OUTPUT = REPO_ROOT / "artifacts" / "catalog_visibility" / "book_series_index.json"
+
+# V1.1 planned-catalog inputs
+ALLOCATION_TSV = (
+    REPO_ROOT / "artifacts" / "qa"
+    / "worldwide_catalog_37_brand_allocation_plan_2026-05-11.tsv"
+)
+SERIES_THEMES_YAML = (
+    REPO_ROOT / "artifacts" / "marketing"
+    / "v1_1_25_brand_series_themes_2026-05-11.yaml"
+)
+CANONICAL_BRANDS_YAML = REPO_ROOT / "config" / "manga" / "canonical_brand_list.yaml"
+BRAND_REGISTRY_YAML = REPO_ROOT / "config" / "brand_registry.yaml"
+
+
+_SLUG_RE = re.compile(r"[^a-z0-9]+")
+
+
+def _slug(s: str) -> str:
+    return _SLUG_RE.sub("_", s.lower()).strip("_") or "x"
+
+
+def _safe_repo_relative(p: Path) -> str:
+    """Return ``p`` relative to REPO_ROOT if possible, else absolute string."""
+    try:
+        return str(p.resolve().relative_to(REPO_ROOT))
+    except ValueError:
+        return str(p)
+
+
+def _load_allocation_rows(path: Path) -> list[dict[str, str]]:
+    """Read the V1.1 worldwide allocation TSV. Returns [] if missing."""
+    if not path.is_file():
+        return []
+    with path.open(encoding="utf-8") as fh:
+        reader = csv.DictReader(fh, delimiter="\t")
+        return [dict(r) for r in reader]
+
+
+def _load_series_themes(path: Path) -> dict[str, Any]:
+    """Read the V1.1 series themes YAML. Returns {} if missing."""
+    if not path.is_file():
+        return {}
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    return data if isinstance(data, dict) else {}
+
+
+def _load_brand_locale_map() -> dict[str, str]:
+    """Map brand_id → declared locale from brand_registry (if present)."""
+    if not BRAND_REGISTRY_YAML.is_file():
+        return {}
+    data = yaml.safe_load(BRAND_REGISTRY_YAML.read_text(encoding="utf-8")) or {}
+    brands = data.get("brands") or {}
+    out: dict[str, str] = {}
+    for bid, meta in brands.items():
+        if isinstance(meta, dict) and meta.get("locale"):
+            out[str(bid)] = str(meta["locale"])
+    return out
+
+
+def _brand_default_priority(brand_id: str, allocation_rows: list[dict[str, str]]) -> str | None:
+    for row in allocation_rows:
+        if row.get("brand_id") == brand_id and row.get("priority_phase"):
+            return row["priority_phase"]
+    return None
+
+
+def _load_v1_1_planned_books(
+    *,
+    allocation_path: Path = ALLOCATION_TSV,
+    themes_path: Path = SERIES_THEMES_YAML,
+) -> list[dict[str, Any]]:
+    """Enumerate one row per planned ebook series per (brand, locale).
+
+    Joins allocation TSV (ebook surface only) with V1.1 series themes by
+    (brand_id, locale). When themes are missing for a (brand, locale) pair,
+    falls back to synthetic ``"<Brand> Series N"`` titles so the planned
+    cell is still visible in the dashboard.
+    """
+    alloc_rows = _load_allocation_rows(allocation_path)
+    themes_doc = _load_series_themes(themes_path)
+    brand_themes = themes_doc.get("brands") if isinstance(themes_doc, dict) else None
+    brand_themes = brand_themes if isinstance(brand_themes, dict) else {}
+
+    brand_locale_registry = _load_brand_locale_map()
+    rows_out: list[dict[str, Any]] = []
+
+    for row in alloc_rows:
+        if row.get("surface") != "ebook":
+            continue
+        brand_id = row.get("brand_id") or ""
+        locale = row.get("locale") or ""
+        if not brand_id or not locale:
+            continue
+        try:
+            series_count = int(row.get("series_count") or 0)
+        except ValueError:
+            series_count = 0
+        try:
+            episodes_per_series = int(row.get("episode_per_series_count") or 0)
+        except ValueError:
+            episodes_per_series = 0
+        priority_phase = row.get("priority_phase") or None
+
+        brand_block = brand_themes.get(brand_id) or {}
+        series_by_locale = (brand_block.get("series") or {}) if isinstance(brand_block, dict) else {}
+        themes_for_locale = series_by_locale.get(locale) or []
+        themes_for_locale = themes_for_locale if isinstance(themes_for_locale, list) else []
+
+        # Emit exactly series_count rows per allocation cell. If themes run out, synthesise.
+        for idx in range(series_count):
+            if idx < len(themes_for_locale):
+                t = themes_for_locale[idx] or {}
+                title = str(t.get("series_title") or f"{brand_id} series {idx + 1}")
+                logline = t.get("arc_shape")
+                description = t.get("emotional_throughline")
+                surface_priority = t.get("surface_priority")
+            else:
+                title = f"{brand_id.replace('_', ' ').title()} — Series {idx + 1}"
+                logline = None
+                description = None
+                surface_priority = None
+
+            book_id = f"{brand_id}__{locale}__{idx + 1:02d}"
+            rows_out.append({
+                "book_id": book_id,
+                "brand_id": brand_id,
+                "locale": locale,
+                "lang": locale,
+                "author_id": None,
+                "author": None,
+                "publisher": None,
+                "teacher": None,
+                "book_title": title,
+                "book_subtitle": logline,
+                "book_description": description,
+                "topic": (brand_block.get("topic_anchor")
+                          if isinstance(brand_block, dict) else None),
+                "genre_family": None,
+                "subgenre": None,
+                "book_register": surface_priority,
+                "book_subject": None,
+                "book_subject_note": None,
+                "micro_palette_shift": None,
+                "series": None,
+                "brand_palette_primary": None,
+                "brand_palette_secondary": None,
+                "brand_palette_brand": None,
+                "brand_inspiration": None,
+                "author_signature_color": None,
+                "cover_kind": "planned_placeholder",
+                "template_archetype": None,
+                "book_cover_image_path": None,
+                "book_cover_status": "planned",
+                "epub_path": None,
+                "format": "ebook",
+                "launch_priority": "P1",
+                "status": "planned",
+                "priority_phase": priority_phase,
+                "surface": "ebook",
+                "series_count": series_count,
+                "episode_per_series_count": episodes_per_series,
+                "series_index": idx + 1,
+                "registry_locale": brand_locale_registry.get(brand_id),
+                "plan_source_path": _safe_repo_relative(allocation_path),
+            })
+
+    return rows_out
 
 
 def _load_teacher_books() -> list[dict[str, Any]]:
@@ -137,20 +314,34 @@ def build_book_series_index() -> dict[str, Any]:
             "epub_path": f"artifacts/epub/{book_id_full}.epub" if (REPO_ROOT / f"artifacts/epub/{book_id_full}.epub").is_file() else None,
             "format": "ebook",
             "launch_priority": book_identity.get("launch_priority", "P1"),
-            "status": "draft",
+            "status": "rendered",
+            "priority_phase": "V1.0_matrix_confirmed",
+            "surface": "ebook",
         }
         rows.append(row)
 
+    # V1.1 — merge planned-but-unrendered ebook rows from worldwide allocation TSV.
+    planned_rows = _load_v1_1_planned_books()
+    rendered_ids = {str(r.get("book_id")) for r in rows}
+    merged: list[dict[str, Any]] = list(rows)
+    for p in planned_rows:
+        if str(p.get("book_id")) in rendered_ids:
+            # Rendered row already exists with this id; keep rendered metadata.
+            continue
+        merged.append(p)
+
     out = {
-        "schema_version": 1,
-        "books": rows,
+        "schema_version": 2,
+        "books": merged,
         "stats": {
-            "total_books": len(rows),
-            "covers_present": sum(1 for r in rows if r["book_cover_image_path"]),
-            "covers_missing": sum(1 for r in rows if not r["book_cover_image_path"]),
-            "type_only": sum(1 for r in rows if r["cover_kind"] == "type_only"),
-            "image_full_bleed": sum(1 for r in rows if r["cover_kind"] == "image_full_bleed"),
-            "image_dominant": sum(1 for r in rows if r["cover_kind"] == "image_dominant"),
+            "total_books": len(merged),
+            "rendered_books": sum(1 for r in merged if r.get("status") == "rendered"),
+            "planned_books": sum(1 for r in merged if r.get("status") == "planned"),
+            "covers_present": sum(1 for r in merged if r.get("book_cover_image_path")),
+            "covers_missing": sum(1 for r in merged if not r.get("book_cover_image_path")),
+            "type_only": sum(1 for r in merged if r.get("cover_kind") == "type_only"),
+            "image_full_bleed": sum(1 for r in merged if r.get("cover_kind") == "image_full_bleed"),
+            "image_dominant": sum(1 for r in merged if r.get("cover_kind") == "image_dominant"),
         },
     }
     return out
@@ -161,8 +352,11 @@ def main() -> int:
     INDEX_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     INDEX_OUTPUT.write_text(json.dumps(index, indent=2, ensure_ascii=False))
     s = index["stats"]
-    print(f"wrote {INDEX_OUTPUT.relative_to(REPO_ROOT)}: "
-          f"{s['total_books']} books · {s['covers_present']} with covers · "
+    print(f"wrote {_safe_repo_relative(INDEX_OUTPUT)}: "
+          f"{s['total_books']} books "
+          f"({s.get('rendered_books', 0)} rendered + "
+          f"{s.get('planned_books', 0)} planned) · "
+          f"{s['covers_present']} with covers · "
           f"{s['covers_missing']} missing")
     return 0
 

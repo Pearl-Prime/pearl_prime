@@ -178,6 +178,34 @@
     .tc-relational { background: #3d2800; border-color: #e7a31b; color: #ffe08a; }
     .tc-financial  { background: #0d3320; border-color: #2d6a4f; color: #7ee8b0; }
     .tc-default    { background: #222; border-color: var(--border); color: var(--muted); }
+    /* ── V1.1 status pills (rendered vs planned) and placeholder hero ── */
+    .status-pill { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+                   letter-spacing: 0.04em; text-transform: uppercase; }
+    .status-rendered { background: #1b4332; color: #b7f0c2; border: 1px solid #2d6a4f; }
+    .status-planned  { background: #3d3000; color: #ffe08a; border: 1px solid #b08900; }
+    .priority-badge {
+      font-size: 10px; padding: 2px 6px; border-radius: 4px;
+      background: #1a2030; border: 1px solid var(--border); color: var(--muted);
+    }
+    .card .hero.planned-placeholder {
+      background: repeating-linear-gradient(45deg, #181d27, #181d27 12px, #1f2531 12px, #1f2531 24px);
+      color: var(--muted); font-size: 12px; flex-direction: column; gap: 6px;
+    }
+    .card .hero.planned-placeholder .ph-label {
+      font-weight: 700; letter-spacing: 0.08em; font-size: 11px; color: #ffe08a;
+    }
+    .card .hero.planned-placeholder .ph-id {
+      font-size: 10px; color: var(--muted); font-family: monospace;
+      padding: 0 10px; text-align: center; word-break: break-all;
+    }
+    /* V1.1 status filter chip strip */
+    .status-chip-bar { display: flex; gap: 6px; }
+    .status-chip {
+      padding: 4px 12px; border-radius: 999px; font-size: 12px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--panel); color: var(--text);
+      user-select: none;
+    }
+    .status-chip.active { background: #1e2a44; border-color: var(--accent); }
     /* ── Platform cadence table in drawer ── */
     .cadence-table { width: 100%; border-collapse: collapse; font-size: 12px; font-family: monospace; margin-top: 4px; }
     .cadence-table td { padding: 3px 6px; border-bottom: 1px solid #1e2530; }
@@ -207,6 +235,7 @@
     <main>
       <div class="toolbar">
         <div class="views" id="views"></div>
+        <div class="status-chip-bar" id="status-chip-bar"></div>
         <span class="count" id="countline"></span>
       </div>
       <div id="content"></div>
@@ -232,6 +261,7 @@
       engine: {},
       promise: {},
       status: "all",
+      v11_status: "all",  // V1.1 rendered/planned chip
       launch: "all",
       image: "all",
       meta: "all",
@@ -276,6 +306,12 @@
       if (row.emotional_engine && state.engine[row.emotional_engine] === false) return false;
       if (row.reader_promise && state.promise[row.reader_promise] === false) return false;
       if (state.status !== "all" && statusBucket(row.status) !== state.status) return false;
+      if (state.v11_status !== "all") {
+        const raw = String(row.status || "").toLowerCase();
+        const isRendered = raw === "rendered";
+        if (state.v11_status === "rendered" && !isRendered) return false;
+        if (state.v11_status === "planned" && isRendered) return false;
+      }
       if (state.launch !== "all") {
         const k = lpKey(row.launch_priority);
         if (state.launch === "unset" && k !== "unset") return false;
@@ -467,6 +503,28 @@
       document.querySelectorAll("#views button").forEach((b) => {
         b.addEventListener("click", () => { state.view = b.dataset.v; render(); });
       });
+      // V1.1 rendered/planned chip strip — only render when both kinds are present.
+      const renderedCount = SERIES.filter((r) => String(r.status || "").toLowerCase() === "rendered").length;
+      const plannedCount = SERIES.length - renderedCount;
+      const chipHost = document.getElementById("status-chip-bar");
+      if (chipHost) {
+        if (renderedCount > 0 && plannedCount > 0) {
+          const opts = [
+            { k: "all", label: "All (" + (renderedCount + plannedCount) + ")" },
+            { k: "rendered", label: "Rendered (" + renderedCount + ")" },
+            { k: "planned", label: "Planned (" + plannedCount + ")" },
+          ];
+          chipHost.innerHTML = opts.map((o) =>
+            "<span class=\"status-chip" + (state.v11_status === o.k ? " active" : "") +
+            "\" data-v11=\"" + o.k + "\">" + escHtml(o.label) + "</span>"
+          ).join("");
+          chipHost.querySelectorAll(".status-chip").forEach((el) => {
+            el.addEventListener("click", () => { state.v11_status = el.dataset.v11; render(); });
+          });
+        } else {
+          chipHost.innerHTML = "";
+        }
+      }
       if (state.view === "card") document.getElementById("content").innerHTML = cardView(rows);
       else if (state.view === "table") document.getElementById("content").innerHTML = tableView(sortRows(rows));
       else if (state.view === "gap") document.getElementById("content").innerHTML = gapView(rows);
@@ -475,6 +533,10 @@
     }
 
     function inlineBadges(row) {
+      // Planned-but-unrendered V1.1 rows are missing-by-design; do not
+      // splash the card with red/yellow warns. The status pill already
+      // communicates state.
+      if (String(row.status || "").toLowerCase() !== "rendered") return "";
       const bits = [];
       if (!row.main_character_image_path) bits.push("🔴 Missing character image");
       if (!row.series_description) bits.push("🟡 Missing series description");
@@ -531,9 +593,19 @@
       const logline = escHtml(row.series_logline || "");
       const angle = escHtml(row.marketing_angle || "");
       const comps = (row.comp_titles || []).map(escHtml).join(", ");
-      const hero = src
-        ? "<div class=\"hero\"><img src=\"" + escAttr(src) + "\" alt=\"\" /></div>"
-        : "<div class=\"hero\"><span class=\"badge-missing\">Missing in plan</span></div>";
+      const rawStatus = String(row.status || "").toLowerCase();
+      let hero;
+      if (src) {
+        hero = "<div class=\"hero\"><img src=\"" + escAttr(src) + "\" alt=\"\" /></div>";
+      } else if (rawStatus !== "rendered") {
+        // V1.1 planned-but-unrendered: show a neutral placeholder tile.
+        hero = "<div class=\"hero planned-placeholder\">"
+             + "<div class=\"ph-label\">PLANNED</div>"
+             + "<div class=\"ph-id\">" + escHtml(row.series_id || "") + "</div>"
+             + "</div>";
+      } else {
+        hero = "<div class=\"hero\"><span class=\"badge-missing\">Missing in plan</span></div>";
+      }
       let h = "<article class=\"card\" data-id=\"" + escAttr(row.series_id) + "\">";
       h += hero;
       h += "<div class=\"body\">";
@@ -549,7 +621,15 @@
       h += "<div class=\"badges-row\">";
       if (row.audience || row.market_demo) h += "<span class=\"tag\">" + escHtml(row.audience || row.market_demo) + "</span>";
       h += "<span class=\"" + lpClass(row.launch_priority) + "\">" + escHtml(lpKey(row.launch_priority)) + "</span>";
-      h += "<span class=\"tag\">" + escHtml(statusBucket(row.status)) + "</span>";
+      // V1.1 status pill + optional priority_phase badge
+      if (rawStatus === "rendered") {
+        h += "<span class=\"status-pill status-rendered\">Rendered</span>";
+      } else {
+        h += "<span class=\"status-pill status-planned\">Planned</span>";
+      }
+      if (row.priority_phase) {
+        h += "<span class=\"priority-badge\">" + escHtml(row.priority_phase) + "</span>";
+      }
       h += "</div>";
       h += inlineBadges(row);
       h += "<button type=\"button\" class=\"expand\" data-open=\"" + escAttr(row.series_id) + "\">Expand details →</button>";

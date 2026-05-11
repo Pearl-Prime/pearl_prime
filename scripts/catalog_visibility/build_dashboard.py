@@ -75,7 +75,9 @@ def main() -> int:
         default=None,
         help="brand_id or alias (e.g. brand1 → stillness_press). Omit to include all brands.",
     )
-    ap.add_argument("--locale", type=str, default="en", help="Primary language subtag match (en matches en_US)")
+    ap.add_argument("--locale", type=str, default="",
+                    help="Primary language subtag match (en matches en_US). "
+                         "Empty / 'all' includes every locale (V1.1 default).")
     ap.add_argument("--out", type=Path, default=None)
     ap.add_argument(
         "--title",
@@ -87,20 +89,28 @@ def main() -> int:
 
     data = json.loads(args.index.read_text(encoding="utf-8"))
     rows = list(data.get("series") or [])
-    filtered = _filter_series(rows, brand_id=args.brand, locale=args.locale)
+    locale_arg = "" if args.locale.lower() in ("", "all") else args.locale
+    filtered = _filter_series(rows, brand_id=args.brand, locale=locale_arg)
 
+    locale_label = args.locale or "all locales"
+    locale_slug = args.locale or "all"
     if args.brand is not None:
         resolved = _resolve_brand(args.brand)
-        title = args.title.strip() or f"Manga catalog — {resolved} ({args.locale})"
-        default_out = args.index.parent / f"{resolved}_{args.locale}_manga_dashboard.html"
+        title = args.title.strip() or f"Manga catalog — {resolved} ({locale_label})"
+        default_out = args.index.parent / f"{resolved}_{locale_slug}_manga_dashboard.html"
     else:
-        title = args.title.strip() or f"Manga catalog — all brands ({args.locale})"
-        default_out = args.index.parent / f"{args.locale}_manga_dashboard.html"
+        title = args.title.strip() or f"Manga catalog — all brands ({locale_label})"
+        default_out = args.index.parent / f"{locale_slug}_manga_dashboard.html"
 
     out_path: Path = args.out if args.out is not None else default_out
     html = build_html(series_slice=filtered, page_title=title)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(html, encoding="utf-8")
+    try:
+        rel = out_path.resolve().relative_to(Path(__file__).resolve().parents[2])
+        print(f"wrote {rel} — {len(filtered)} series")
+    except ValueError:
+        print(f"wrote {out_path} — {len(filtered)} series")
     return 0
 
 

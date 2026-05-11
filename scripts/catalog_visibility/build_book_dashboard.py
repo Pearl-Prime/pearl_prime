@@ -70,8 +70,22 @@ LABEL_SWAPS = [
 
 
 def _synthesise_description(book: dict[str, Any]) -> str:
-    """Compose a book description from R6 identity fields + EPUB metadata."""
-    parts: list[str] = []
+    """Compose a book description from R6 identity fields + EPUB metadata.
+
+    V1.1: planned books carry ``book_description`` (emotional throughline)
+    from the series themes YAML; render that directly when present so the
+    dashboard surfaces real V1.1 marketing copy instead of an empty card.
+    """
+    explicit = book.get("book_description")
+    if explicit:
+        parts: list[str] = []
+        subtitle = book.get("book_subtitle")
+        if subtitle:
+            parts.append(f"**{subtitle}**")
+        parts.append(str(explicit).strip())
+        return "\n\n".join(parts)
+
+    parts = []
     register = book.get("book_register")
     subtitle = book.get("book_subtitle")
     subject_note = book.get("book_subject_note")
@@ -120,6 +134,11 @@ def _book_to_series_shape(book: dict[str, Any]) -> dict[str, Any]:
         "epub_path": book.get("epub_path"),
         "brand_palette_primary": book.get("brand_palette_primary"),
         "author_signature_color": book.get("author_signature_color"),
+        # V1.1 catalog metadata
+        "priority_phase": book.get("priority_phase"),
+        "surface": book.get("surface") or "ebook",
+        "series_count": book.get("series_count"),
+        "episode_per_series_count": book.get("episode_per_series_count"),
     }
 
 
@@ -130,7 +149,9 @@ def main() -> int:
                     help="Path to book_series_index.json")
     ap.add_argument("--brand", type=str, default=None,
                     help="brand_id or teacher_id to filter (omit for all)")
-    ap.add_argument("--locale", type=str, default="en")
+    ap.add_argument("--locale", type=str, default="",
+                    help="Primary language subtag (en, ja, zh). "
+                         "Empty / 'all' shows every locale (V1.1 default).")
     ap.add_argument("--out", type=Path, default=None)
     ap.add_argument("--title", type=str, default="",
                     help="HTML title override")
@@ -140,14 +161,16 @@ def main() -> int:
     book_rows = list(data.get("books") or [])
     series_rows = [_book_to_series_shape(b) for b in book_rows]
 
-    filtered = _filter_series(series_rows, brand_id=args.brand, locale=args.locale)
+    locale_arg = "" if args.locale.lower() in ("", "all") else args.locale
+    filtered = _filter_series(series_rows, brand_id=args.brand, locale=locale_arg)
 
+    locale_label = args.locale or "all locales"
     if args.brand is not None:
         resolved = _resolve_brand(args.brand)
-        title = args.title.strip() or f"Book catalog — {resolved} ({args.locale})"
-        default_out = args.index.parent / f"{resolved}_{args.locale}_book_dashboard.html"
+        title = args.title.strip() or f"Book catalog — {resolved} ({locale_label})"
+        default_out = args.index.parent / f"{resolved}_{args.locale or 'all'}_book_dashboard.html"
     else:
-        title = args.title.strip() or f"Book catalog — all brands ({args.locale})"
+        title = args.title.strip() or f"Book catalog — all brands ({locale_label})"
         default_out = args.index.parent / f"global_book_dashboard.html"
 
     out_path: Path = args.out if args.out is not None else default_out

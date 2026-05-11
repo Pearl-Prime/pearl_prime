@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Manga catalog — all (all)</title>
+  <title>Phoenix Omega — Global Manga Catalog (V1.1)</title>
   <style>
     :root {
       --bg: #0f1216;
@@ -178,6 +178,34 @@
     .tc-relational { background: #3d2800; border-color: #e7a31b; color: #ffe08a; }
     .tc-financial  { background: #0d3320; border-color: #2d6a4f; color: #7ee8b0; }
     .tc-default    { background: #222; border-color: var(--border); color: var(--muted); }
+    /* ── V1.1 status pills (rendered vs planned) and placeholder hero ── */
+    .status-pill { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+                   letter-spacing: 0.04em; text-transform: uppercase; }
+    .status-rendered { background: #1b4332; color: #b7f0c2; border: 1px solid #2d6a4f; }
+    .status-planned  { background: #3d3000; color: #ffe08a; border: 1px solid #b08900; }
+    .priority-badge {
+      font-size: 10px; padding: 2px 6px; border-radius: 4px;
+      background: #1a2030; border: 1px solid var(--border); color: var(--muted);
+    }
+    .card .hero.planned-placeholder {
+      background: repeating-linear-gradient(45deg, #181d27, #181d27 12px, #1f2531 12px, #1f2531 24px);
+      color: var(--muted); font-size: 12px; flex-direction: column; gap: 6px;
+    }
+    .card .hero.planned-placeholder .ph-label {
+      font-weight: 700; letter-spacing: 0.08em; font-size: 11px; color: #ffe08a;
+    }
+    .card .hero.planned-placeholder .ph-id {
+      font-size: 10px; color: var(--muted); font-family: monospace;
+      padding: 0 10px; text-align: center; word-break: break-all;
+    }
+    /* V1.1 status filter chip strip */
+    .status-chip-bar { display: flex; gap: 6px; }
+    .status-chip {
+      padding: 4px 12px; border-radius: 999px; font-size: 12px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--panel); color: var(--text);
+      user-select: none;
+    }
+    .status-chip.active { background: #1e2a44; border-color: var(--accent); }
     /* ── Platform cadence table in drawer ── */
     .cadence-table { width: 100%; border-collapse: collapse; font-size: 12px; font-family: monospace; margin-top: 4px; }
     .cadence-table td { padding: 3px 6px; border-bottom: 1px solid #1e2530; }
@@ -207,6 +235,7 @@
     <main>
       <div class="toolbar">
         <div class="views" id="views"></div>
+        <div class="status-chip-bar" id="status-chip-bar"></div>
         <span class="count" id="countline"></span>
       </div>
       <div id="content"></div>
@@ -6959,7 +6988,7 @@
       "Blue Period",
       "Silver Spoon"
     ],
-    "marketing_angle": null,
+    "marketing_angle": "For the sensory-overwhelmed urban dweller. This series offers regulation through design — miniature worlds rendered in loving detail, proving that mastery over a small ideal space can quiet the roar of an unmanageable one.",
     "hook_lines": null,
     "launch_priority": "P1",
     "status": "in_plan",
@@ -11271,25 +11300,16 @@
     "main_character_role": "freelance graphic designer with RSI and burnout",
     "main_character_image_path": null,
     "plan_source_path": "config/source_of_truth/manga_profiles/qi_foundation/series_01.yaml",
-    "teacher": "master_feung",
-    "primary_lane": "english_global",
-    "active_series_target": 3,
-    "new_series_per_year": 3,
-    "chapters_per_month": 4,
-    "max_chapters_before_volume": 16,
-    "volumes_per_year_target": 6,
-    "topic_allocation": {
-      "burnout": "1 series",
-      "anxiety": "1 series",
-      "self_worth": "1 series"
-    },
-    "platform_cadence": {
-      "english_global": "weekly",
-      "japan": "weekly",
-      "korea": "weekly",
-      "taiwan": "weekly"
-    },
-    "max_dormant_months": 2,
+    "teacher": null,
+    "primary_lane": null,
+    "active_series_target": null,
+    "new_series_per_year": null,
+    "chapters_per_month": null,
+    "max_chapters_before_volume": null,
+    "volumes_per_year_target": null,
+    "topic_allocation": {},
+    "platform_cadence": {},
+    "max_dormant_months": null,
     "research_links": [
       {
         "label": "Global Distribution Strategy",
@@ -11338,25 +11358,16 @@
     "main_character_role": "former collegiate runner now in a sedentary sales job",
     "main_character_image_path": null,
     "plan_source_path": "config/source_of_truth/manga_profiles/qi_foundation/series_02.yaml",
-    "teacher": "master_feung",
-    "primary_lane": "english_global",
-    "active_series_target": 3,
-    "new_series_per_year": 3,
-    "chapters_per_month": 4,
-    "max_chapters_before_volume": 16,
-    "volumes_per_year_target": 6,
-    "topic_allocation": {
-      "burnout": "1 series",
-      "anxiety": "1 series",
-      "self_worth": "1 series"
-    },
-    "platform_cadence": {
-      "english_global": "weekly",
-      "japan": "weekly",
-      "korea": "weekly",
-      "taiwan": "weekly"
-    },
-    "max_dormant_months": 2,
+    "teacher": null,
+    "primary_lane": null,
+    "active_series_target": null,
+    "new_series_per_year": null,
+    "chapters_per_month": null,
+    "max_chapters_before_volume": null,
+    "volumes_per_year_target": null,
+    "topic_allocation": {},
+    "platform_cadence": {},
+    "max_dormant_months": null,
     "research_links": [
       {
         "label": "Global Distribution Strategy",
@@ -11405,25 +11416,16 @@
     "main_character_role": "experienced hospital nurse suffering from compassion fatigue",
     "main_character_image_path": null,
     "plan_source_path": "config/source_of_truth/manga_profiles/qi_foundation/series_03.yaml",
-    "teacher": "master_feung",
-    "primary_lane": "english_global",
-    "active_series_target": 3,
-    "new_series_per_year": 3,
-    "chapters_per_month": 4,
-    "max_chapters_before_volume": 16,
-    "volumes_per_year_target": 6,
-    "topic_allocation": {
-      "burnout": "1 series",
-      "anxiety": "1 series",
-      "self_worth": "1 series"
-    },
-    "platform_cadence": {
-      "english_global": "weekly",
-      "japan": "weekly",
-      "korea": "weekly",
-      "taiwan": "weekly"
-    },
-    "max_dormant_months": 2,
+    "teacher": null,
+    "primary_lane": null,
+    "active_series_target": null,
+    "new_series_per_year": null,
+    "chapters_per_month": null,
+    "max_chapters_before_volume": null,
+    "volumes_per_year_target": null,
+    "topic_allocation": {},
+    "platform_cadence": {},
+    "max_dormant_months": null,
     "research_links": [
       {
         "label": "Global Distribution Strategy",
@@ -11472,25 +11474,16 @@
     "main_character_role": "remote software engineer living out of a suitcase",
     "main_character_image_path": null,
     "plan_source_path": "config/source_of_truth/manga_profiles/qi_foundation/series_04.yaml",
-    "teacher": "master_feung",
-    "primary_lane": "english_global",
-    "active_series_target": 3,
-    "new_series_per_year": 3,
-    "chapters_per_month": 4,
-    "max_chapters_before_volume": 16,
-    "volumes_per_year_target": 6,
-    "topic_allocation": {
-      "burnout": "1 series",
-      "anxiety": "1 series",
-      "self_worth": "1 series"
-    },
-    "platform_cadence": {
-      "english_global": "weekly",
-      "japan": "weekly",
-      "korea": "weekly",
-      "taiwan": "weekly"
-    },
-    "max_dormant_months": 2,
+    "teacher": null,
+    "primary_lane": null,
+    "active_series_target": null,
+    "new_series_per_year": null,
+    "chapters_per_month": null,
+    "max_chapters_before_volume": null,
+    "volumes_per_year_target": null,
+    "topic_allocation": {},
+    "platform_cadence": {},
+    "max_dormant_months": null,
     "research_links": [
       {
         "label": "Global Distribution Strategy",
@@ -11539,25 +11532,16 @@
     "main_character_role": "sound-sensitive music composer with misophonia and burnout",
     "main_character_image_path": null,
     "plan_source_path": "config/source_of_truth/manga_profiles/qi_foundation/series_05.yaml",
-    "teacher": "master_feung",
-    "primary_lane": "english_global",
-    "active_series_target": 3,
-    "new_series_per_year": 3,
-    "chapters_per_month": 4,
-    "max_chapters_before_volume": 16,
-    "volumes_per_year_target": 6,
-    "topic_allocation": {
-      "burnout": "1 series",
-      "anxiety": "1 series",
-      "self_worth": "1 series"
-    },
-    "platform_cadence": {
-      "english_global": "weekly",
-      "japan": "weekly",
-      "korea": "weekly",
-      "taiwan": "weekly"
-    },
-    "max_dormant_months": 2,
+    "teacher": null,
+    "primary_lane": null,
+    "active_series_target": null,
+    "new_series_per_year": null,
+    "chapters_per_month": null,
+    "max_chapters_before_volume": null,
+    "volumes_per_year_target": null,
+    "topic_allocation": {},
+    "platform_cadence": {},
+    "max_dormant_months": null,
     "research_links": [
       {
         "label": "Global Distribution Strategy",
@@ -11606,25 +11590,16 @@
     "main_character_role": "first-year middle school teacher facing burnout",
     "main_character_image_path": null,
     "plan_source_path": "config/source_of_truth/manga_profiles/qi_foundation/series_06.yaml",
-    "teacher": "master_feung",
-    "primary_lane": "english_global",
-    "active_series_target": 3,
-    "new_series_per_year": 3,
-    "chapters_per_month": 4,
-    "max_chapters_before_volume": 16,
-    "volumes_per_year_target": 6,
-    "topic_allocation": {
-      "burnout": "1 series",
-      "anxiety": "1 series",
-      "self_worth": "1 series"
-    },
-    "platform_cadence": {
-      "english_global": "weekly",
-      "japan": "weekly",
-      "korea": "weekly",
-      "taiwan": "weekly"
-    },
-    "max_dormant_months": 2,
+    "teacher": null,
+    "primary_lane": null,
+    "active_series_target": null,
+    "new_series_per_year": null,
+    "chapters_per_month": null,
+    "max_chapters_before_volume": null,
+    "volumes_per_year_target": null,
+    "topic_allocation": {},
+    "platform_cadence": {},
+    "max_dormant_months": null,
     "research_links": [
       {
         "label": "Global Distribution Strategy",
@@ -11673,25 +11648,16 @@
     "main_character_role": "irascible biomedical researcher",
     "main_character_image_path": null,
     "plan_source_path": "config/source_of_truth/manga_profiles/qi_foundation/series_07.yaml",
-    "teacher": "master_feung",
-    "primary_lane": "english_global",
-    "active_series_target": 3,
-    "new_series_per_year": 3,
-    "chapters_per_month": 4,
-    "max_chapters_before_volume": 16,
-    "volumes_per_year_target": 6,
-    "topic_allocation": {
-      "burnout": "1 series",
-      "anxiety": "1 series",
-      "self_worth": "1 series"
-    },
-    "platform_cadence": {
-      "english_global": "weekly",
-      "japan": "weekly",
-      "korea": "weekly",
-      "taiwan": "weekly"
-    },
-    "max_dormant_months": 2,
+    "teacher": null,
+    "primary_lane": null,
+    "active_series_target": null,
+    "new_series_per_year": null,
+    "chapters_per_month": null,
+    "max_chapters_before_volume": null,
+    "volumes_per_year_target": null,
+    "topic_allocation": {},
+    "platform_cadence": {},
+    "max_dormant_months": null,
     "research_links": [
       {
         "label": "Global Distribution Strategy",
@@ -11740,25 +11706,16 @@
     "main_character_role": "novelist blocked by chronic fatigue and self-criticism",
     "main_character_image_path": null,
     "plan_source_path": "config/source_of_truth/manga_profiles/qi_foundation/series_08.yaml",
-    "teacher": "master_feung",
-    "primary_lane": "english_global",
-    "active_series_target": 3,
-    "new_series_per_year": 3,
-    "chapters_per_month": 4,
-    "max_chapters_before_volume": 16,
-    "volumes_per_year_target": 6,
-    "topic_allocation": {
-      "burnout": "1 series",
-      "anxiety": "1 series",
-      "self_worth": "1 series"
-    },
-    "platform_cadence": {
-      "english_global": "weekly",
-      "japan": "weekly",
-      "korea": "weekly",
-      "taiwan": "weekly"
-    },
-    "max_dormant_months": 2,
+    "teacher": null,
+    "primary_lane": null,
+    "active_series_target": null,
+    "new_series_per_year": null,
+    "chapters_per_month": null,
+    "max_chapters_before_volume": null,
+    "volumes_per_year_target": null,
+    "topic_allocation": {},
+    "platform_cadence": {},
+    "max_dormant_months": null,
     "research_links": [
       {
         "label": "Global Distribution Strategy",
@@ -13223,6 +13180,1414 @@
     "topic_allocation": {},
     "platform_cadence": {},
     "max_dormant_months": null,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "cognitive_clarity",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "cogclar_jp_01",
+    "series_title": "不安の地図を描く",
+    "series_logline": "A young analyst must navigate the physical landscape of his own anxious mind — one chapter, one map, one thing he has never looked at directly.",
+    "series_description": "Protagonist (26, data analyst) begins seeing a psychiatrist who gives him an unusual\nassignment: draw a map of your anxiety. Each chapter, he externalizes a different\nanxious thought as a visual metaphor — a city with no exits, a room where the walls\nmove, a corridor that branches every time he chooses. Visualization-heavy. The\ninternal landscape becomes more real than the office he works in. Monthly Afternoon\nseinen aesthetic: psychological depth, visual invention, no resolution delivered.",
+    "market_demo": "seinen",
+    "genre_family": "mystery",
+    "subgenre": "psychological_visualization",
+    "emotional_engine": "wonder",
+    "serialization_engine": "arc_based",
+    "visual_grammar": "polished_seinen",
+    "reader_promise": "You will see the shape of your anxiety before it can hide.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Planetes (Makoto Yukimura)",
+      "20th Century Boys (Naoki Urasawa) — visual metaphor scale"
+    ],
+    "marketing_angle": "Visualization as genre. The internal CBT concept (externalizing anxious thoughts)\nbecomes the manga's visual vocabulary — each chapter is a different architectural\nmetaphor for a cognitive pattern. Polished seinen linework. Target: Monthly Afternoon\nor ComicWalker. Comp: Planetes visual intelligence with therapy subject matter.",
+    "hook_lines": null,
+    "launch_priority": "P1",
+    "status": "planned",
+    "main_character_name": "大輔",
+    "main_character_role": "data analyst, 26, referred to psychiatry by his physician",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/cogclar_jp_01.yaml",
+    "teacher": "joshin",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 3,
+    "max_chapters_before_volume": 12,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "overthinking": "1 series",
+      "imposter_syndrome": "1 series",
+      "burnout": "1 series",
+      "boundaries": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "bi_weekly",
+      "japan": "bi_weekly",
+      "korea": "bi_weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "cognitive_clarity",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "cogclar_jp_02",
+    "series_title": "考えすぎてしまうあなたへ",
+    "series_logline": "Dialogue-heavy therapy manga for the reader whose brain will not stop running scenarios.",
+    "series_description": "Protagonist overthinks everything. This series maps the mechanism with precision —\n4-koma strips that demonstrate specific cognitive loops (pre-mortem rehearsal, second-\norder consequence modeling, status-threat scanning) followed by brief essay interludes\nfrom the perspective of a clinical psychologist who consults on the series. CBT-\ninformed but never clinical in register. Target: Pixiv Comics free chapters as\ndiscovery, tankobon for library and purchase.",
+    "market_demo": "seinen",
+    "genre_family": "healing",
+    "subgenre": "overthinking_4koma_hybrid",
+    "emotional_engine": "recognition",
+    "serialization_engine": "episodic",
+    "visual_grammar": "polished_seinen",
+    "reader_promise": "You will recognize the loop and finally watch it from outside.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Berserk (Kentaro Miura) — visual intensity for internal states, not topic",
+      "Flow: Optimal Experience (Csikszentmihalyi) — reader type"
+    ],
+    "marketing_angle": "Hybrid 4-koma + explanatory essay — the overthinking recognition bank made visual.\nHighly shareable individual strips. The CBT techniques embedded in narrative, not\nexplained. Pixiv as discovery platform for the male overthinking demographic.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": "翔",
+    "main_character_role": "product manager, 29, sees a therapist for the first time",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/cogclar_jp_02.yaml",
+    "teacher": "joshin",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 3,
+    "max_chapters_before_volume": 12,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "overthinking": "1 series",
+      "imposter_syndrome": "1 series",
+      "burnout": "1 series",
+      "boundaries": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "bi_weekly",
+      "japan": "bi_weekly",
+      "korea": "bi_weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "cognitive_clarity",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "cogclar_jp_04",
+    "series_title": "完璧主義の夜",
+    "series_logline": "A young architect who cannot stop reviewing his work is not afraid of failure — he is afraid of being seen clearly.",
+    "series_description": "He is good at his work. The team respects him. He receives the commission. At night\nhe goes back to the drawings and finds everything wrong. This is not perfectionism\nabout the work — the series slowly makes clear it is the expectation of exposure.\nEach chapter ends late, quietly. He does not spiral dramatically. He just stays too\nlong. Jump SQ or ComicWalker aesthetic: understated, evening-focused, calibrated\nfor the male imposter syndrome reader.",
+    "market_demo": "seinen",
+    "genre_family": "mystery",
+    "subgenre": "perfectionism_quiet_drama",
+    "emotional_engine": "recognition",
+    "serialization_engine": "mood_based",
+    "visual_grammar": "polished_seinen",
+    "reader_promise": "You will stop running from the flaw the perfectionist part of you is so sure is there.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Vagabond (Takehiko Inoue) — discipline, craft, identity",
+      "Blue Period (Tsubasa Yamaguchi) — artistic perfectionism"
+    ],
+    "marketing_angle": "Imposter syndrome in seinen register — not the female \"I don't belong\" story but\nthe male \"I am about to be found out\" story. Quiet. Evening-paced. The architectural\nsetting is visually rich. Polished seinen linework with near-architectural precision.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": "蓮",
+    "main_character_role": "architect, 28, junior partner, never satisfied",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/cogclar_jp_04.yaml",
+    "teacher": "joshin",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 3,
+    "max_chapters_before_volume": 12,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "overthinking": "1 series",
+      "imposter_syndrome": "1 series",
+      "burnout": "1 series",
+      "boundaries": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "bi_weekly",
+      "japan": "bi_weekly",
+      "korea": "bi_weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "cognitive_clarity",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "cogclar_jp_07",
+    "series_title": "偽りの分析家",
+    "series_logline": "He spots every pattern in the market. He cannot stop spotting the same pattern in himself.",
+    "series_description": "A securities analyst realizes the catastrophic patterns he sees in financial data are mirrors\nof his own cognitive loops. The series is a psychological thriller about overthinking, imposter\nsyndrome, and the difference between analysis and paranoia. The therapy content (cognitive\ndistortions, pattern-interruption, reality-testing) embedded entirely inside a financial\nthriller. Comp: Liar Game's intellectual tension applied to internal psychological state.",
+    "market_demo": "seinen",
+    "genre_family": "psychological_thriller",
+    "subgenre": "overthinking_thriller",
+    "emotional_engine": "paranoia_resolution",
+    "serialization_engine": "arc_based",
+    "visual_grammar": "seinen_thriller",
+    "reader_promise": "The pattern you keep seeing is real. The question is whether it means what you think.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Liar Game (Shinobu Kaitani)",
+      "Kaiji (Nobuyuki Fukumoto) — pressure register",
+      "Homunculus (Hideo Yamamoto) — interior psychology"
+    ],
+    "marketing_angle": "Psychological thriller for the seinen reader who uses analysis as a defense mechanism. The\noverthinking content is the mystery mechanics — never announced. Positioned for\nMonthly Afternoon.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": null,
+    "main_character_role": "securities analyst, pattern-recognition specialist",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/cogclar_jp_07.yaml",
+    "teacher": "joshin",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 3,
+    "max_chapters_before_volume": 12,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "overthinking": "1 series",
+      "imposter_syndrome": "1 series",
+      "burnout": "1 series",
+      "boundaries": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "bi_weekly",
+      "japan": "bi_weekly",
+      "korea": "bi_weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "cognitive_clarity",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "cogclar_jp_10",
+    "series_title": "完全記憶の呪い",
+    "series_logline": "He remembers everything. Every failure. Every word. Every version of himself he has failed to be.",
+    "series_description": "A man with perfect autobiographical memory cannot escape his past — every mistake,\nembarrassment, and failure is perpetually accessible, as vivid as the present. Rumination,\noverthinking, and self-critical loops embedded in a psychological horror shell. The horror\nis not supernatural — it is the terror of complete self-awareness without self-compassion.\nComp: Evangelion's interior psychological collapse applied to a realistic protagonist.",
+    "market_demo": "seinen",
+    "genre_family": "psychological_horror",
+    "subgenre": "rumination_horror",
+    "emotional_engine": "recognition_horror",
+    "serialization_engine": "arc_based",
+    "visual_grammar": "seinen_thriller",
+    "reader_promise": "He cannot forget. Neither can you. The series knows.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Neon Genesis Evangelion (Hideaki Anno) — interior collapse",
+      "Oyasumi Punpun (Inio Asano) — register",
+      "Homunculus (Hideo Yamamoto)"
+    ],
+    "marketing_angle": "Psychological horror for the seinen reader who recognizes the character immediately. The\nrumination content IS the horror mechanic. Positioned for Monthly Afternoon or Jump SQ.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": null,
+    "main_character_role": "man with perfect autobiographical memory",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/cogclar_jp_10.yaml",
+    "teacher": "joshin",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 3,
+    "max_chapters_before_volume": 12,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "overthinking": "1 series",
+      "imposter_syndrome": "1 series",
+      "burnout": "1 series",
+      "boundaries": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "bi_weekly",
+      "japan": "bi_weekly",
+      "korea": "bi_weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "cognitive_clarity",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "cogclar_jp_12",
+    "series_title": "感情インデックス",
+    "series_logline": "In 2031, your emotional state is indexed automatically. She cannot afford to let them see the score.",
+    "series_description": "Near-future Japan, 2031. Wearable devices automatically index and report employees' emotional\nstates to management. A woman in a high-performance finance role is burning out but cannot let\nher Emotion Index drop without losing her position. Burnout, performance anxiety, and the cost\nof hiding distress embedded in a cyberpunk surveillance thriller. The wellness content is the\nplot engine — not a detour.",
+    "market_demo": "seinen",
+    "genre_family": "sci_fi_cyberpunk",
+    "subgenre": "surveillance_burnout",
+    "emotional_engine": "paranoia_resolution",
+    "serialization_engine": "arc_based",
+    "visual_grammar": "seinen_thriller",
+    "reader_promise": "The system knows you are burning out. It just does not care.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Blame! (Tsutomu Nihei) — cyberpunk register",
+      "Ghost in the Shell (Masamune Shirow) — corporate surveillance",
+      "Pluto (Naoki Urasawa) — psychological depth in genre"
+    ],
+    "marketing_angle": "Cyberpunk / near-future thriller for the seinen reader who has hidden exhaustion at work.\nThe burnout content is the genre mechanic. Positioned for Monthly Afternoon or\nAfternoon Season.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": null,
+    "main_character_role": "finance professional, 2031, Emotion Index subject",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/cogclar_jp_12.yaml",
+    "teacher": "joshin",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 3,
+    "max_chapters_before_volume": 12,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "overthinking": "1 series",
+      "imposter_syndrome": "1 series",
+      "burnout": "1 series",
+      "boundaries": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "bi_weekly",
+      "japan": "bi_weekly",
+      "korea": "bi_weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "cognitive_clarity",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "cogclar_jp_13",
+    "series_title": "バグった脳内",
+    "series_logline": "He deleted the glitch. He deleted himself with it.",
+    "series_description": "A cyberpunk programmer had his ADHD neural patterns medicated away by a mandatory corporate\nneuro-compliance program. His productivity scores are perfect. His creative breakthroughs have\nstopped. The series is about his attempt to recover the cognitive patterns the system removed.\nADHD identity, self-trust, and the relationship between neurodivergence and creativity embedded\ninside a cyberpunk identity thriller.",
+    "market_demo": "seinen",
+    "genre_family": "sci_fi_cyberpunk",
+    "subgenre": "adhd_cyberpunk",
+    "emotional_engine": "identity_reclamation",
+    "serialization_engine": "arc_based",
+    "visual_grammar": "seinen_thriller",
+    "reader_promise": "The glitch was always the feature.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Ghost in the Shell (Masamune Shirow) — identity in technology",
+      "Pluto (Naoki Urasawa)",
+      "Cyberpunk: Edgerunners (Studio Trigger) — register"
+    ],
+    "marketing_angle": "Cyberpunk for the seinen reader who was told their brain was the problem. The ADHD content\nis the genre mechanic — the \"glitch\" is both literal (code) and narrative (his cognition).\nPositioned as a prestige cyberpunk series.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": null,
+    "main_character_role": "cyberpunk programmer, post-neuro-compliance subject",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/cogclar_jp_13.yaml",
+    "teacher": "joshin",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 3,
+    "max_chapters_before_volume": 12,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "overthinking": "1 series",
+      "imposter_syndrome": "1 series",
+      "burnout": "1 series",
+      "boundaries": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "bi_weekly",
+      "japan": "bi_weekly",
+      "korea": "bi_weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "digital_ground",
+    "catalog_id": null,
+    "locale": null,
+    "series_id": "digground_kr_01",
+    "series_title": "퇴근 후의 나",
+    "series_logline": "She quit her startup after two years of not sleeping. The series is what happened after — the year she spent finding out who she was without the job.",
+    "series_description": "A 27-year-old IT worker in Seoul quits her startup after two years of burnout.\nShe expects to feel free. Instead she feels empty. The series follows the first\nyear of her life without work-as-identity — boredom, unexpected grief, the slow\nreturn of something that might be herself. Aggretsuko meets soft webtoon slice-\nof-life. Full color, vertical scroll. LINE Global / Naver distribution.",
+    "market_demo": "seinen",
+    "genre_family": "healing",
+    "subgenre": "burnout_recovery_slice",
+    "emotional_engine": "cozy_restoration",
+    "serialization_engine": "arc_based",
+    "visual_grammar": "social_media_simulacra",
+    "reader_promise": "You will find out who you are when the job isn't defining you.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Aggretsuko (Rarecho) — burnout register, workplace",
+      "True Beauty (Yaongyi) — platform behavior, webtoon aesthetics"
+    ],
+    "marketing_angle": "Korean Gen Z burnout recovery told from the inside — no moralizing, no productivity\nadvice, no resolution until it arrives honestly. Full-color webtoon format dominant\non Naver/LINE. The empty year is the story. Relatable in Korea, Taiwan, and for\nglobal Asian diaspora.",
+    "hook_lines": null,
+    "launch_priority": "P1",
+    "status": "planned",
+    "main_character_name": "지은",
+    "main_character_role": "IT worker, 27, quit her startup, currently adrift",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/digground_kr_01.yaml",
+    "teacher": "miki",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 4,
+    "max_chapters_before_volume": 14,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "financial_anxiety": "1 series",
+      "financial_stress": "1 series",
+      "social_anxiety": "1 series",
+      "imposter_syndrome": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "weekly",
+      "korea": "weekly",
+      "taiwan": "weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "digital_ground",
+    "catalog_id": null,
+    "locale": null,
+    "series_id": "digground_kr_04",
+    "series_title": "개발자의 신체",
+    "series_logline": "He is 30, a senior developer, and he just discovered he has a body.",
+    "series_description": "A senior developer (30, Korean, stereotypically desk-bound) has a health scare at\na routine check-up. Nothing serious. But his doctor says: you need to use your body.\nHe does not know what this means. The series follows his education in embodiment —\nsomatic therapy, stretching, basic yoga, learning to feel his own hunger — with\nthe self-aware humor of someone who has never thought about their body as a real\nobject. Somatic wellness through comedy. Platform: LINE Manga Korea.",
+    "market_demo": "seinen",
+    "genre_family": "healing",
+    "subgenre": "somatic_comedy",
+    "emotional_engine": "recognition",
+    "serialization_engine": "episodic",
+    "visual_grammar": "social_media_simulacra",
+    "reader_promise": "You will laugh at how badly you have been ignoring your body and then feel something shift.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Aggretsuko (Rarecho) — workplace humor + emotional depth",
+      "Cells at Work (Akane Shimizu) — body-as-subject, educational comedy"
+    ],
+    "marketing_angle": "Somatic wellness via humor — the most accessible entry point for male audiences\nwho do not engage with \"wellness\" framing. The comedy makes it shareable. The\nunderlying somatic content is real and useful. Platform: LINE Manga Korea or\nKakao for the 28–35 male tech worker demographic.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": "준혁",
+    "main_character_role": "senior developer, 30, just discovered he has a body",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/digground_kr_04.yaml",
+    "teacher": "miki",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 4,
+    "max_chapters_before_volume": 14,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "financial_anxiety": "1 series",
+      "financial_stress": "1 series",
+      "social_anxiety": "1 series",
+      "imposter_syndrome": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "weekly",
+      "korea": "weekly",
+      "taiwan": "weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "digital_ground",
+    "catalog_id": null,
+    "locale": null,
+    "series_id": "digground_kr_06",
+    "series_title": "야간 모드",
+    "series_logline": "A UX designer who cannot sleep tries one intervention per night and documents it. The series is designed to be read in the dark.",
+    "series_description": "She designs apps for a living. She cannot sleep. Each episode of this series is\none night: one intervention tried (no screens, white noise, breathing, early wake,\nsleep restriction therapy), one result (inconclusive, mostly). The visual aesthetic\nmimics phone interface aesthetics — dark background, muted teal and navy highlights,\nnotification-style chapter headers. It is meant to be read in bed in the dark on\na phone. The irony is intentional. Platform: LINE Manga global distribution /\nBilibili Comics for CN market crossover.",
+    "market_demo": "josei",
+    "genre_family": "healing",
+    "subgenre": "sleep_anxiety_tech_aesthetic",
+    "emotional_engine": "cozy_restoration",
+    "serialization_engine": "episodic",
+    "visual_grammar": "social_media_simulacra",
+    "reader_promise": "You will find the part of your sleep that the phone took.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Night is Short, Walk on Girl (Tomihiko Morimi) — night register, not topic",
+      "Sleep (Haruki Murakami short story) — protagonist register"
+    ],
+    "marketing_angle": "Sleep anxiety content told from inside the tech worker's specific experience —\nsomeone who makes the apps that are keeping her awake. Visual design mimics\ndark-mode phone UI. Cross-platform appeal: KR + CN through LINE/Bilibili.\nExtremely high mobile-first optimization.",
+    "hook_lines": null,
+    "launch_priority": "P1",
+    "status": "planned",
+    "main_character_name": "수민",
+    "main_character_role": "UX designer, 28, product of the apps she builds",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/digground_kr_06.yaml",
+    "teacher": "miki",
+    "primary_lane": "english_global",
+    "active_series_target": 4,
+    "new_series_per_year": 5,
+    "chapters_per_month": 4,
+    "max_chapters_before_volume": 14,
+    "volumes_per_year_target": 8,
+    "topic_allocation": {
+      "financial_anxiety": "1 series",
+      "financial_stress": "1 series",
+      "social_anxiety": "1 series",
+      "imposter_syndrome": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "weekly",
+      "korea": "weekly",
+      "taiwan": "weekly"
+    },
+    "max_dormant_months": 2,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "stillness_press",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "stillness_jp_01",
+    "series_title": "仕事帰り、ひとりごはん",
+    "series_logline": "For the working woman who eats alone and finds that enough.",
+    "series_description": "A woman in her late thirties moves through the week eating alone — different small\nrestaurants each night, no particular reason, no destination. Nothing happens. The\nseries accumulates these moments until they feel like a life fully inhabited.\nWakako Zake-adjacent. No dramatic arc. The food is present. She is present.\nThat's the whole series.",
+    "market_demo": "josei",
+    "genre_family": "healing",
+    "subgenre": "iyashikei_daily_life",
+    "emotional_engine": "cozy_restoration",
+    "serialization_engine": "episodic",
+    "visual_grammar": "iyashikei_minimalism",
+    "reader_promise": "You will find quiet in the middle of the week, one meal at a time.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Wakako Zake (Chie Shinohara)",
+      "Shinya Shokudō / Midnight Diner (Yarō Abe)",
+      "Yotsuba&! (Kiyohiko Azuma) — emotional register, not topic"
+    ],
+    "marketing_angle": "Positioned for the josei adult market on LINE Manga. Near-wordless sequences.\nMinimal ink fill. The cooking and eating are depicted with precise, quiet\nattention. Visual comp: Yoru Neko (evening cat aesthetic) meets Shinya Shokudō.\nReader is not told how to feel. She just watches.",
+    "hook_lines": null,
+    "launch_priority": "P1",
+    "status": "planned",
+    "main_character_name": "咲",
+    "main_character_role": "copywriter, late 30s, eats alone by choice",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/stillness_jp_01.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "stillness_press",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "stillness_jp_02",
+    "series_title": "猫のいる診察室",
+    "series_logline": "A therapist's quiet office. A stray cat. A different person's gentle story each chapter.",
+    "series_description": "In a small countryside clinic, a therapist sees patients one by one. A stray cat\nhas taken up residence in the waiting room. Each chapter follows a different patient —\ntheir anxiety, their grief, the thing they can't say out loud. The cat watches. The\nsessions end. Nothing is resolved. Something shifts. Mental health awareness through\nquiet narrative, not clinical explanation.",
+    "market_demo": "seinen",
+    "genre_family": "healing",
+    "subgenre": "iyashikei_therapy_adjacent",
+    "emotional_engine": "cozy_restoration",
+    "serialization_engine": "episodic",
+    "visual_grammar": "iyashikei_minimalism",
+    "reader_promise": "You will understand why the cat stays.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "A Man and His Cat (Umi Sakurai)",
+      "Mushishi (Yuki Urushibara) — register, not topic"
+    ],
+    "marketing_angle": "Mental health manga without clinical framing — the therapeutic process rendered as\nlived experience. ComicWalker (free-to-read) as discovery platform; tankobon collect\nfor library and purchase market. Comp: A Man and His Cat (warm, adult, quiet).",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": "先生",
+    "main_character_role": "therapist in countryside clinic",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/stillness_jp_02.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "stillness_press",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "stillness_jp_03",
+    "series_title": "週末だけの農園",
+    "series_logline": "A tech worker rents a tiny plot outside Tokyo. Four seasons. No plot. Pure iyashikei.",
+    "series_description": "A man in his early thirties who works in tech rents a small plot of farmland an hour\noutside Tokyo. He goes on weekends. He plants things. They grow or they don't. The\nseries follows the four seasons — soil, rain, the first shoots of spring, the quiet\nof winter. No dramatic arc. His anxious work brain quiets in the field. He doesn't\nknow why. The series doesn't explain it. Laid-Back Camp adjacent for the male office\nworker demographic.",
+    "market_demo": "seinen",
+    "genre_family": "healing",
+    "subgenre": "iyashikei_nature",
+    "emotional_engine": "cozy_restoration",
+    "serialization_engine": "mood_based",
+    "visual_grammar": "iyashikei_minimalism",
+    "reader_promise": "You will remember there is ground under your feet.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Yuru Camp / Laid-Back Camp (Afro)",
+      "Barakamon (Satsuki Yoshino)"
+    ],
+    "marketing_angle": "Pure iyashikei for the seinen male burnout demographic. Extremely high silent panel\nratio (55%). Full seasonal arc gives the series natural structure without narrative\nstakes. Pixiv Comics as primary — built-in male seinen iyashikei audience.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": "健",
+    "main_character_role": "software engineer, early 30s, weekend farmer",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/stillness_jp_03.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "stillness_press",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "stillness_jp_04",
+    "series_title": "眠れない夜の地図",
+    "series_logline": "Each chapter: a different person who can't sleep and the quiet ritual that holds them.",
+    "series_description": "An anthology. Each chapter follows a different person unable to sleep — the night-shift\nnurse, the student before exams, the new parent, the person who can't stop the replay.\nEach has a ritual: tea, a slow walk, a notebook, the window. The series does not explain\ninsomnia or offer solutions. It maps the texture of sleepless nights with precision and\ntenderness. For anyone who has been awake at 3am knowing they're not the only one.",
+    "market_demo": "josei",
+    "genre_family": "healing",
+    "subgenre": "iyashikei_anthology",
+    "emotional_engine": "cozy_restoration",
+    "serialization_engine": "episodic",
+    "visual_grammar": "iyashikei_minimalism",
+    "reader_promise": "You will feel less alone in the 3am quiet.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Flying Witch (Chihiro Ishizuka) — register",
+      "Aria (Kozue Amano) — emotional tone"
+    ],
+    "marketing_angle": "Sleep anxiety through anthology format — high reader identification, natural sharing\nbehavior (\"this is me\"). Near-zero ink density. Designed to be read at night on a dim\nscreen. LINE Manga as primary — strongest late-night reading demographic.",
+    "hook_lines": null,
+    "launch_priority": "P1",
+    "status": "planned",
+    "main_character_name": null,
+    "main_character_role": "rotating — one person per chapter",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/stillness_jp_04.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "stillness_press",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "stillness_jp_05",
+    "series_title": "そのままでいい",
+    "series_logline": "A direct therapy manga, co-created with a clinical psychologist, for the reader who has never believed the reassurance.",
+    "series_description": "A young woman has heard it her whole life — \"you're fine, you're doing great\" — and\nnever believed it. This series uses 4-koma panels interspersed with explanatory pages\n(written in the voice of a psychologist) to trace the imposter schema: where it comes\nfrom, what it protects, how it keeps running after the reason is gone. Not a workbook.\nNot a lecture. A manga where someone finally maps the exact feeling. Direct comp:\n\"I'm Enough\" (Hosokawa + Dr. Mizushima, Last Gasp).",
+    "market_demo": "josei",
+    "genre_family": "healing",
+    "subgenre": "therapy_manga_direct",
+    "emotional_engine": "recognition",
+    "serialization_engine": "arc_based",
+    "visual_grammar": "iyashikei_minimalism",
+    "reader_promise": "You will realize the voice that says you're not enough has a name and a history.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "I'm Enough (Tenten Hosokawa + Dr. Hiroko Mizushima)",
+      "My Lesbian Experience With Loneliness (Nagata Kabi)"
+    ],
+    "marketing_angle": "The only manga in the stillness_press lineup with explicit clinical co-author framing.\n4-koma hybrid + explanatory interludes — formats the insight for readers who want\nunderstanding, not just feeling. Standalone tankobon format + LINE digital.\nComp credibility: positions as Japanese equivalent of \"I'm Enough\" for the domestic market.",
+    "hook_lines": null,
+    "launch_priority": "P0",
+    "status": "planned",
+    "main_character_name": "ほのか",
+    "main_character_role": "office worker, late 20s, high achiever who cannot accept she is enough",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/stillness_jp_05.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "stillness_press",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "stillness_jp_06",
+    "series_title": "ゆっくりを覚える",
+    "series_logline": "After burning out, she forgot how her body felt. This is the series about finding out.",
+    "series_description": "A woman in her early thirties collapses at work — not dramatically, just quietly,\non a Tuesday. She takes medical leave. She does not know what to do with the quiet.\nThe series follows her learning somatic practices she has never tried: breathing that\nreaches the belly, walking without destination, sitting without a screen. Each chapter\nis a practice. Her body responds before her mind understands why. Karoshi-adjacent\nburnout recovery for the josei reader who has also been collapsing slowly.",
+    "market_demo": "josei",
+    "genre_family": "healing",
+    "subgenre": "somatic_recovery",
+    "emotional_engine": "cozy_restoration",
+    "serialization_engine": "arc_based",
+    "visual_grammar": "iyashikei_minimalism",
+    "reader_promise": "You will find the part of your body that remembers stillness.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Barakamon (Satsuki Yoshino) — burnout recovery register",
+      "Yokohama Kaidashi Kikou (Hitoshi Ashinano) — somatic slowness"
+    ],
+    "marketing_angle": "Somatic healing rendered as visual manga practice — breathing exercises, body scans,\nsensory grounding depicted in slow, near-silent panels. Positions somatic recovery\nas a Japanese cultural concept (体の声を聞く — listening to the body's voice) not\nWestern therapy import. LINE Manga + Nico Nico for digital.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": "藍",
+    "main_character_role": "marketing manager, early 30s, on medical leave after quiet collapse",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/stillness_jp_06.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "stillness_press",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "stillness_jp_07",
+    "series_title": "魂の森で目醒める",
+    "series_logline": "A woman burned out so completely she dissolved into the forest. The series is about returning.",
+    "series_description": "A woman burned out to the point of dissolution wanders a spirit forest as something between\nhuman and nature. Each chapter she recovers one small physical sensation — cold water, rough\nbark, the weight of sleep. The wellness content (somatic healing, body reoccupation after\nburnout) travels entirely inside a dark fantasy shell. No clinical language. No therapist\ncharacter. The forest is the therapist.",
+    "market_demo": "josei",
+    "genre_family": "dark_fantasy",
+    "subgenre": "somatic_fantasy",
+    "emotional_engine": "grief_restoration",
+    "serialization_engine": "episodic",
+    "visual_grammar": "expressive_josei",
+    "reader_promise": "You will feel yourself returning to your body, one chapter at a time.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Mushishi (Yuki Urushibara)",
+      "Princess Mononoke (Hayao Miyazaki)",
+      "Berserk (Kentaro Miura) — tone, not topic"
+    ],
+    "marketing_angle": "Positioned as dark fantasy / supernatural healing manga for josei adult market. Comp: Mushishi\nemotional register meets Berserk visual weight. The psychological content (somatic healing,\nburnout recovery) is never named — readers process it as \"a story about a woman returning\nto herself.\"",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": null,
+    "main_character_role": "burnout survivor, between human and forest spirit",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/stillness_jp_07.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "stillness_press",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "stillness_jp_08",
+    "series_title": "灰色の竜騎士",
+    "series_logline": "After losing everyone, she rides. The dragon only flies when she stops pretending she is fine.",
+    "series_description": "A female knight who has lost her entire unit rides an ashen dragon across a devastated\nlandscape. The dragon's ability to fly correlates directly with her emotional state — it\ngrounds when she dissociates, surges when she grieves fully. The series is about grief\nprocessing and somatic reconnection, embedded entirely inside a dark fantasy adventure.\nNo therapist. No clinical frame. Comp: Frieren's emotional register with heavier visual weight.",
+    "market_demo": "josei",
+    "genre_family": "dark_fantasy",
+    "subgenre": "grief_fantasy",
+    "emotional_engine": "grief_restoration",
+    "serialization_engine": "arc_based",
+    "visual_grammar": "expressive_josei",
+    "reader_promise": "The dragon knows what you lost. It has been waiting for you to know too.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Frieren: Beyond Journey's End (Yamada/Abe)",
+      "Vinland Saga (Makoto Yukimura) — tone",
+      "Berserk (Kentaro Miura)"
+    ],
+    "marketing_angle": "Dark fantasy for the josei reader who loved Frieren and wanted something heavier. The grief\ncontent is the story — not a detour. Positioned as a prestige josei series for LINE Manga.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": null,
+    "main_character_role": "female knight, sole survivor, ashgrey dragon rider",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/stillness_jp_08.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "stillness_press",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "stillness_jp_11",
+    "series_title": "不安の蟲",
+    "series_logline": "She can see what everyone is afraid of. It looks like insects. She cannot turn it off.",
+    "series_description": "An office worker develops the ability to see other people's anxiety as physical insects\nswarming around them. The series follows her trying to function while perceiving constant\nambient fear. Social anxiety, sensory overwhelm, and the exhaustion of hypervigilance\nembedded entirely in a psychological horror shell. The horror is the anxiety — not a\nmetaphor for it, the literal experience made visible.",
+    "market_demo": "josei",
+    "genre_family": "psychological_horror",
+    "subgenre": "anxiety_horror",
+    "emotional_engine": "recognition_horror",
+    "serialization_engine": "episodic",
+    "visual_grammar": "expressive_josei",
+    "reader_promise": "You are not imagining it. The series just makes it visible.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Mob Psycho 100 (ONE)",
+      "Uzumaki (Junji Ito) — visual density",
+      "Homunculus (Hideo Yamamoto)"
+    ],
+    "marketing_angle": "Psychological horror for readers who found Mob Psycho 100 but wanted a female protagonist\nand a more interior emotional register. The anxiety content is the genre mechanic, not\na message.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": null,
+    "main_character_role": "office worker, involuntary anxiety-perceiver",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/stillness_jp_11.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "stillness_press",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "stillness_jp_12",
+    "series_title": "眠れない家",
+    "series_logline": "Every night resets to 3am. Each reset is a different reason she cannot stop.",
+    "series_description": "A woman moves into a house where time loops at 3am. Each chapter is a different iteration\nof the same sleepless night — different year of her life, different anxiety driving the\nwakefulness, different quiet ritual she tries. Sleep anxiety embedded in a supernatural\nhorror loop structure. The house is not malevolent — it's a mirror. The loop only breaks\nwhen she understands what she's been avoiding.",
+    "market_demo": "josei",
+    "genre_family": "psychological_horror",
+    "subgenre": "sleep_horror",
+    "emotional_engine": "recognition_horror",
+    "serialization_engine": "episodic",
+    "visual_grammar": "expressive_josei",
+    "reader_promise": "3am again. This chapter knows.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "The Promised Neverland (Shirai/Demizu) — tension register",
+      "Junji Ito Collection — quiet dread"
+    ],
+    "marketing_angle": "Supernatural horror / quiet dread for the reader who is already awake at 3am. The sleep\ncontent is the loop mechanic, not announced as wellness. Positioned for the horror-adjacent\njosei reader.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": null,
+    "main_character_role": "woman, new tenant, caught in the 3am loop",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/stillness_jp_12.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
+    "research_links": [
+      {
+        "label": "Global Distribution Strategy",
+        "path": "artifacts/research/global_manga_distribution_strategy.md"
+      },
+      {
+        "label": "Revenue Strategy",
+        "path": "artifacts/research/manga_publishing_revenue_strategy.md"
+      },
+      {
+        "label": "Therapeutic Wellness Market",
+        "path": "artifacts/research/therapeutic_manga_wellness_market_research_2026_04_04.md"
+      },
+      {
+        "label": "Genre Writing Styles",
+        "path": "artifacts/research/manga_genre_writing_styles_2026_04_04.md"
+      }
+    ]
+  },
+  {
+    "brand_id": "stillness_press",
+    "catalog_id": "en_us_core",
+    "locale": "en_US",
+    "series_id": "stillness_jp_16",
+    "series_title": "燃え尽きた勇者の転生",
+    "series_logline": "He died of overwork. He woke up in a world where the only currency is rest.",
+    "series_description": "A salaryman who died of karoshi is reincarnated in an isekai world where productivity is\nforbidden and rest is the only skill that matters. To level up, he must genuinely slow\ndown — the system detects and penalizes urgency. Burnout recovery embedded entirely in\nisekai game-mechanic shell. The protagonist must unlearn overwork to survive. Comp:\nSpy x Family's light action-comedy register applied to burnout content.",
+    "market_demo": "josei",
+    "genre_family": "isekai",
+    "subgenre": "recovery_isekai",
+    "emotional_engine": "cozy_restoration",
+    "serialization_engine": "arc_based",
+    "visual_grammar": "iyashikei_minimalism",
+    "reader_promise": "In this world, rest is the only power that matters.",
+    "positioning": null,
+    "audience": null,
+    "comp_titles": [
+      "Spy x Family (Tatsuya Endo) — register",
+      "That Time I Got Reincarnated as a Slime (Fuse) — isekai template",
+      "Aggretsuko (Rarecho) — burnout content"
+    ],
+    "marketing_angle": "Recovery isekai for the reader who wants the genre pleasure of leveling up while the\ncontent rewires their relationship to productivity. Positioned as isekai / workplace\ncomedy for LINE Manga josei and seinen overlap audience.",
+    "hook_lines": null,
+    "launch_priority": "P2",
+    "status": "planned",
+    "main_character_name": null,
+    "main_character_role": "karoshi salaryman, reincarnated protagonist",
+    "main_character_image_path": null,
+    "plan_source_path": "config/source_of_truth/manga_profiles/series/stillness_jp_16.yaml",
+    "teacher": "ahjan",
+    "primary_lane": "english_global",
+    "active_series_target": 3,
+    "new_series_per_year": 4,
+    "chapters_per_month": 2,
+    "max_chapters_before_volume": 10,
+    "volumes_per_year_target": 6,
+    "topic_allocation": {
+      "anxiety": "1 series",
+      "sleep_anxiety": "1 series",
+      "somatic_healing": "1 series"
+    },
+    "platform_cadence": {
+      "english_global": "weekly",
+      "japan": "bi_weekly",
+      "korea": "weekly"
+    },
+    "max_dormant_months": 3,
     "research_links": [
       {
         "label": "Global Distribution Strategy",
@@ -17950,6 +19315,7 @@
       engine: {},
       promise: {},
       status: "all",
+      v11_status: "all",  // V1.1 rendered/planned chip
       launch: "all",
       image: "all",
       meta: "all",
@@ -17994,6 +19360,12 @@
       if (row.emotional_engine && state.engine[row.emotional_engine] === false) return false;
       if (row.reader_promise && state.promise[row.reader_promise] === false) return false;
       if (state.status !== "all" && statusBucket(row.status) !== state.status) return false;
+      if (state.v11_status !== "all") {
+        const raw = String(row.status || "").toLowerCase();
+        const isRendered = raw === "rendered";
+        if (state.v11_status === "rendered" && !isRendered) return false;
+        if (state.v11_status === "planned" && isRendered) return false;
+      }
       if (state.launch !== "all") {
         const k = lpKey(row.launch_priority);
         if (state.launch === "unset" && k !== "unset") return false;
@@ -18185,6 +19557,28 @@
       document.querySelectorAll("#views button").forEach((b) => {
         b.addEventListener("click", () => { state.view = b.dataset.v; render(); });
       });
+      // V1.1 rendered/planned chip strip — only render when both kinds are present.
+      const renderedCount = SERIES.filter((r) => String(r.status || "").toLowerCase() === "rendered").length;
+      const plannedCount = SERIES.length - renderedCount;
+      const chipHost = document.getElementById("status-chip-bar");
+      if (chipHost) {
+        if (renderedCount > 0 && plannedCount > 0) {
+          const opts = [
+            { k: "all", label: "All (" + (renderedCount + plannedCount) + ")" },
+            { k: "rendered", label: "Rendered (" + renderedCount + ")" },
+            { k: "planned", label: "Planned (" + plannedCount + ")" },
+          ];
+          chipHost.innerHTML = opts.map((o) =>
+            "<span class=\"status-chip" + (state.v11_status === o.k ? " active" : "") +
+            "\" data-v11=\"" + o.k + "\">" + escHtml(o.label) + "</span>"
+          ).join("");
+          chipHost.querySelectorAll(".status-chip").forEach((el) => {
+            el.addEventListener("click", () => { state.v11_status = el.dataset.v11; render(); });
+          });
+        } else {
+          chipHost.innerHTML = "";
+        }
+      }
       if (state.view === "card") document.getElementById("content").innerHTML = cardView(rows);
       else if (state.view === "table") document.getElementById("content").innerHTML = tableView(sortRows(rows));
       else if (state.view === "gap") document.getElementById("content").innerHTML = gapView(rows);
@@ -18193,6 +19587,10 @@
     }
 
     function inlineBadges(row) {
+      // Planned-but-unrendered V1.1 rows are missing-by-design; do not
+      // splash the card with red/yellow warns. The status pill already
+      // communicates state.
+      if (String(row.status || "").toLowerCase() !== "rendered") return "";
       const bits = [];
       if (!row.main_character_image_path) bits.push("🔴 Missing character image");
       if (!row.series_description) bits.push("🟡 Missing series description");
@@ -18249,9 +19647,19 @@
       const logline = escHtml(row.series_logline || "");
       const angle = escHtml(row.marketing_angle || "");
       const comps = (row.comp_titles || []).map(escHtml).join(", ");
-      const hero = src
-        ? "<div class=\"hero\"><img src=\"" + escAttr(src) + "\" alt=\"\" /></div>"
-        : "<div class=\"hero\"><span class=\"badge-missing\">Missing in plan</span></div>";
+      const rawStatus = String(row.status || "").toLowerCase();
+      let hero;
+      if (src) {
+        hero = "<div class=\"hero\"><img src=\"" + escAttr(src) + "\" alt=\"\" /></div>";
+      } else if (rawStatus !== "rendered") {
+        // V1.1 planned-but-unrendered: show a neutral placeholder tile.
+        hero = "<div class=\"hero planned-placeholder\">"
+             + "<div class=\"ph-label\">PLANNED</div>"
+             + "<div class=\"ph-id\">" + escHtml(row.series_id || "") + "</div>"
+             + "</div>";
+      } else {
+        hero = "<div class=\"hero\"><span class=\"badge-missing\">Missing in plan</span></div>";
+      }
       let h = "<article class=\"card\" data-id=\"" + escAttr(row.series_id) + "\">";
       h += hero;
       h += "<div class=\"body\">";
@@ -18267,7 +19675,15 @@
       h += "<div class=\"badges-row\">";
       if (row.audience || row.market_demo) h += "<span class=\"tag\">" + escHtml(row.audience || row.market_demo) + "</span>";
       h += "<span class=\"" + lpClass(row.launch_priority) + "\">" + escHtml(lpKey(row.launch_priority)) + "</span>";
-      h += "<span class=\"tag\">" + escHtml(statusBucket(row.status)) + "</span>";
+      // V1.1 status pill + optional priority_phase badge
+      if (rawStatus === "rendered") {
+        h += "<span class=\"status-pill status-rendered\">Rendered</span>";
+      } else {
+        h += "<span class=\"status-pill status-planned\">Planned</span>";
+      }
+      if (row.priority_phase) {
+        h += "<span class=\"priority-badge\">" + escHtml(row.priority_phase) + "</span>";
+      }
       h += "</div>";
       h += inlineBadges(row);
       h += "<button type=\"button\" class=\"expand\" data-open=\"" + escAttr(row.series_id) + "\">Expand details →</button>";
