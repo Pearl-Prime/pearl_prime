@@ -27,6 +27,15 @@ from typing import Any, Callable, Mapping, Sequence
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
+# Ensure the repo root is importable as ``scripts.*`` regardless of how this
+# module is entered. When invoked as ``python3 scripts/image_generation/batch_runner.py``
+# Python sets ``sys.path[0]`` to the script's directory, so absolute imports
+# like ``from scripts.image_generation import runcomfy_dispatch`` fail inside
+# dispatcher modules loaded via ``importlib.util.spec_from_file_location``
+# (Conductor v3 Phase 1 smoke regression — PR #1054 RunComfy path 6/6 fail).
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 # Default artifact paths (tests may monkeypatch these module attributes).
 RUNCOMFY_SPEND_TSV = REPO_ROOT / "artifacts" / "qa" / "runcomfy_monthly_spend.tsv"
 DISPATCH_LOG_TSV = REPO_ROOT / "artifacts" / "qa" / "image_batch_dispatch_log.tsv"
@@ -168,6 +177,11 @@ def _load_dispatcher_module(file_stem: str) -> Any:
     """Load ``dispatchers/<file_stem>.py`` without a package ``__init__``."""
     path = Path(__file__).resolve().parent / "dispatchers" / f"{file_stem}.py"
     qualname = f"scripts.image_generation.dispatchers.{file_stem}"
+    # Defensive: dispatchers do ``from scripts.image_generation import ...`` at
+    # module top. If REPO_ROOT slipped off sys.path (e.g. caller manipulated it
+    # after import-time), put it back before exec_module.
+    if str(REPO_ROOT) not in sys.path:
+        sys.path.insert(0, str(REPO_ROOT))
     spec = importlib.util.spec_from_file_location(qualname, path)
     if spec is None or spec.loader is None:
         raise ImportError(f"Cannot load dispatcher module from {path}")
