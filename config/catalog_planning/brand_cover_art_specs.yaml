@@ -34,6 +34,32 @@ generation_defaults:
   scheduler: normal
   backend: comfyui  # COMFYUI_URL env var
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Cover prompt authoring rules — TEXT-FREE FLUX renders + PIL typography overlay
+# Lineage: PR #1025 (Phase 2 P0 negative-prompt fix) + PR #1043 V1.1 smoke regression
+# Operator memory note: feedback_cover_text_overlay_two_stage
+# ─────────────────────────────────────────────────────────────────────────────
+# Two-stage cover architecture:
+#   Stage 1 (FLUX): renders imagery only — NO title, NO author name, NO subtitle
+#   Stage 2 (PIL):  composites typography downstream from per-format slot data
+#
+# AUTHORING RULES (apply to every cover positive_prompt for all brands):
+#   1. NEVER quote literal series titles or book titles inside positive_prompt
+#      (FLUX will hallucinate them as embedded typography — see PR #1043 smoke
+#      where "The Season After", "Mirror Crush", "Salary Story Hour" leaked).
+#   2. Use {title_area} / {colophon_area} placeholders ONLY — these are typography
+#      slot descriptions ("upper negative space for typography"), not text content.
+#   3. Describe series concept via emotional throughline / palette / composition,
+#      NOT via title quotation.
+#
+# NEGATIVE PROMPT PARITY (every cover render must include this block):
+text_free_negative_prompt: >
+  text, letters, words, watermark, signature, typography, logo, caption,
+  title text, book title text, embedded title, lettering, calligraphy,
+  signage, captions, subtitles, font glyphs, latin alphabet typography,
+  text characters, font, signs, writing, typography characters
+# ─────────────────────────────────────────────────────────────────────────────
+
 brands:
   stillness_press:
     character_lora: "ahjan_sp"
