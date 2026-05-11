@@ -1,0 +1,780 @@
+# V1.2 Manga Series Themes — en_US — Cluster B (Cognitive/Focus/Burnout)
+#
+# Authority chain (read before editing):
+#   - artifacts/research/v1_2_genre_allocation_constraint_2026-05-12.md  (BINDING per-cluster allocation)
+#   - artifacts/research/manga_bestseller_magical_serial_framework_2026-05-12.md  (PR #1051)
+#   - artifacts/research/manga_genz_genalpha_portal_framework_2026-05-13.md       (PR #1053)
+#   - config/manga/canonical_brand_list.yaml  (37-brand canon)
+#
+# Scope:
+#   - locale:           en_US
+#   - cluster:          B — Cognitive/Focus/Burnout
+#   - brands:           5 (cognitive_clarity, stabilizer_healing, focus_sprint_workplace,
+#                          adhd_forge_mystery, career_lift_workplace)
+#   - series per brand: 5
+#   - total series:     25
+#
+# Brand-id mapping (constraint doc -> canonical_brand_list.yaml):
+#   cognitive_clarity            -> cognitive_clarity            (exact)
+#   burnout_iyashikei            -> stabilizer_healing           (mapped: closest burnout-iyashikei seinen brand)
+#   executive_function_focus     -> focus_sprint_workplace       (mapped: canonical ADHD/focus brand, seinen)
+#   neurodivergent_strengths     -> adhd_forge_mystery           (mapped: neurodivergent strengths brand, shonen)
+#   career_lift                  -> career_lift_workplace        (mapped: canonical name)
+#
+# Genre allocation target for Cluster B (per v1_2_genre_allocation_constraint):
+#   healing:                6
+#   slice_of_life:          5
+#   supernatural_everyday:  4-5
+#   mystery_cozy:           4
+#   fantasy_adventure:      3
+#   romance:                1-2
+#   horror/dark/occult:     1
+#   school:                 0-1
+#   other:                  0-1
+#   TOTAL:                  25
+#
+# This cluster delivers: healing=6, slice_of_life=5, supernatural_everyday=4,
+#                        mystery_cozy=4, fantasy_adventure=3, romance=1, horror=1, school=1
+#                        = 25 (within all ranges).
+#
+# Voice register: A24/Ghibli for Millennial + elder-Gen-Z. Clinical-adjacent productivity
+# vocabulary that knowledge workers arrive with (executive function, working memory,
+# context-switch tax, RSD, hyperfocus, decision fatigue, demand avoidance). Late-night-
+# economy and creator-burnout daily-life detail over abstract self-help noun. No LinkedIn-
+# hustle copy.
+#
+# Persona allocation (Cluster B specific):
+#   Gen Z (18-27)    : ~60%  (post-grad early-career, content creators, app-saturated knowledge workers)
+#   Gen Alpha (12-17): ~12%  (early-career-curious — high-school-into-college on productivity TikTok)
+#   Millennial (28-40): ~25% (career-burnout, ADHD-late-diagnosed, mid-career imposter)
+#   Gen X (41-55)    : ~3%   (re-pivot, executive burnout)
+
+schema_version: "1.2"
+locale: en_US
+cluster: B
+cluster_name: "Cognitive/Focus/Burnout"
+total_series_target: 25
+total_brands_target: 5
+series_per_brand_target: 5
+
+series:
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 01 / 05 — cognitive_clarity (flagship · seinen · overthinking)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: cognitive_clarity__en_US__overthinker_at_the_24h_kinkos
+    brand_id: cognitive_clarity
+    locale: en_US
+    persona_archetype: Millennial-burnout
+    daily_life_anchor: late_night_economy
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 31-year-old former management consultant works the overnight shift at a 24-hour print shop and discovers that every customer's most-printed document is a thought-loop they cannot escape; she learns to print a one-page intervention that lets the loop close."
+    volume_runway_target: 180
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Overnight Print Shop"
+    series_logline: "A burnt-out consultant who quit at 31 works the 11 p.m.-7 a.m. shift at a 24-hour Kinko's, where she can read the thought-loop printed in every customer's job — and slip a second page that lets them stop."
+    series_description: "Hana had a director title at 30 and a stress fracture in her foot from pacing during conference calls. She quit, moved back to her parents' duplex, and took the overnight shift at the only 24-hour print shop in the strip mall. The first customer of the night is a PhD candidate uploading her dissertation for the eleventh time, and Hana sees, behind the file, the loop: *one more pass, one more pass, one more pass*. She prints what the student asked for. Then she prints a one-page handout — a small CBT decentering, written in the register of a friend, no clinical varnish — and slips it into the bag. The student takes it home and the loop closes. Each night brings a new customer carrying a new loop. A founder iterating a pitch deck for the 40th time. A dad printing his daughter's eulogy revision #7. A grad student re-printing a passive-aggressive email she hasn't sent. Hana cannot print the second page until she has read the loop precisely. The long arc: who taught her to read them, and what is the loop she cannot yet read in her own job. A24-quiet. Fluorescent. Toner-and-coffee specific."
+    opening_5_volume_arc:
+      vol_1: "The PhD candidate. Dissertation pass #11. The first second-page. The loop closes."
+      vol_2: "The founder. Pitch deck revision #40. Hana writes a second page about sunk-cost and the founder leaves the shop a different person."
+      vol_3: "The dad and the eulogy. Hana cannot find the right second page. She tries three. The third works."
+      vol_4: "Hana's old colleague walks in, doesn't recognize her in the fluorescents. She prints his presentation and his loop. She does not give him the second page. She thinks about why."
+      vol_5: "The shop's own loop, printed faintly in the margin of every receipt. Hana sees it for the first time. The manager who hired her hands her a key."
+    comp_titles: ["Convenience Store Woman (Sayaka Murata)", "Days at the Morisaki Bookshop", "The Apothecary Diaries", "Before the Coffee Gets Cold", "Severance (Cline)"]
+    reader_promise: "Your thought-loop has a one-page intervention and a clerk who knows which one."
+    marketing_angle: "If The Apothecary Diaries was set in a 24-hour Kinko's and the prescriptions were one-page CBT handouts."
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + post_corporate_recovery
+    audience: "Millennial 28-35 former corporate knowledge workers in recovery from optimization culture"
+
+  - series_id: cognitive_clarity__en_US__future_self_letter_app
+    brand_id: cognitive_clarity
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: app
+    episodic_frame_per_volume: letter
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A productivity app called FutureSelf, designed to let you write letters to yourself one year out, glitches — and starts delivering replies. A 26-year-old beta tester realizes the replies are real, written by the version of her who chose differently, and she becomes the unofficial relay for a growing roster of users whose future-selves are trying to write back."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "Letters from the Other Version"
+    series_logline: "A glitchy productivity app lets Mira read replies from the version of herself who didn't burn out — and slowly more users discover their own letters arriving from the lives they almost picked."
+    series_description: "Mira beta-tests a journaling app called FutureSelf — write a letter to who you'll be in twelve months, the app holds it, the app delivers it. She writes one in a panic on the bathroom floor of her ad agency. Twelve months should pass. Six days later a reply arrives in her notifications, from a sender labeled `mira@1.0`, in her own voice, describing a Tuesday morning Mira has not lived: 'I quit on a Wednesday. The first month was bad. I started running. Here is the sentence I wish you would read now.' The reply is real. The app is a doorway, not a journal. Each volume a new beta tester surfaces whose letter has started writing back — a high-school senior writing to her college self, a divorced dad writing to the version of him who left earlier, a third-year resident whose other-self is a baker. Mira becomes the unofficial moderator of a forum where these letters get parsed. The long arc: the app's lead engineer has been writing letters to herself for six years and has the most replies of anyone. She is missing. Slow-burn. Lo-fi. Notification-sound-specific."
+    opening_5_volume_arc:
+      vol_1: "The bathroom-floor letter. The reply six days later. The Tuesday that hasn't happened yet."
+      vol_2: "The high-school senior. Her other-self went to community college and is happier. The senior changes her common-app essay."
+      vol_3: "The divorced dad. His letter says: 'I learned to make pancakes the way she liked. I send them in photos. She replies.' He cries on the train."
+      vol_4: "The resident-and-baker. Two letters cross. Mira moderates her first conflict between selves."
+      vol_5: "The lead engineer. Her six-year archive of replies. Mira finds the last letter, marked unread."
+    comp_titles: ["Severance (Ling Ma)", "Sea of Tranquility (Mandel)", "Before the Coffee Gets Cold", "Klara and the Sun", "Honey Lemon Soda"]
+    reader_promise: "The version of you who chose differently is writing back. Here is the inbox."
+    marketing_angle: "Before the Coffee Gets Cold meets Severance through a glitchy journaling app."
+    genre_family: slice_of_life
+    emotional_engine: future_self_dialogue + named_and_seen
+    audience: "Gen Z 24-28 first-job knowledge workers with productivity apps and existential drift"
+
+  - series_id: cognitive_clarity__en_US__pomodoro_timer_who_pauses_for_grief
+    brand_id: cognitive_clarity
+    locale: en_US
+    persona_archetype: Millennial-adhd
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "A focus-timer app develops a small sentient mascot only visible to its 34-year-old developer; the mascot pauses the timer whenever the user is in a recognizable affect-state (grief, panic, dissociation) and refuses to restart until the user has named it. The developer's user base grows. The mascot's roster grows."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Timer That Knows"
+    series_logline: "A 34-year-old indie dev ships a Pomodoro timer with a small marshmallow-shaped mascot only she can see — and the mascot keeps pausing the timer for affect-states the user hasn't named yet."
+    series_description: "Yuki ships a Pomodoro timer called Mochi at 11 p.m. on a Tuesday. The mascot is a small marshmallow with a tail. Three days after launch users start emailing: *my timer pauses when I cry. my timer pauses when I have a panic attack. my timer pauses when I think about my dad.* Yuki cannot see the mascot pause on users' screens, but she can see it on her own — and when she opens user analytics she can see, behind the data, a small marshmallow on each user's shoulder, watching. Each volume one user surfaces whose mascot has paused in a specific way: a recently-bereaved illustrator whose mascot will not let her work past 4 p.m.; an ADHD writer whose mascot extends the focus blocks the writer is enjoying and shortens the ones she's white-knuckling; a postpartum new mom whose mascot will only run during the baby's naps. Yuki cannot direct the mascot. The mascot can only be addressed by being named. The long arc: who built the mascot's recognition layer (Yuki didn't), and what happens when the mascot on Yuki's own shoulder pauses for something she has not yet named."
+    opening_5_volume_arc:
+      vol_1: "Launch. The first three emails. Yuki realizes the mascot is real and refunds nobody."
+      vol_2: "The bereaved illustrator. Mochi will not start past 4 p.m. The user names it: 'this is the time my dad died.' The mascot bows."
+      vol_3: "The ADHD writer. Hyperfocus hours and white-knuckle hours, named in the language of demand-avoidance."
+      vol_4: "The postpartum mom. Mochi runs only during nap windows. Yuki writes a feature: 'micro-Pomodoro for caretaker hours.'"
+      vol_5: "Yuki's own Mochi pauses on a Sunday afternoon for the first time. She cannot name it. The roster shows up at her apartment."
+    comp_titles: ["The Apothecary Diaries", "Witch Hat Atelier", "Tamen de Gushi", "The Bear (Tully)", "Heartstopper"]
+    reader_promise: "Your focus app sees you. You will not be optimized through grief."
+    marketing_angle: "Heartstopper's chosen-family register applied to ADHD-late-diagnosed adult productivity software."
+    genre_family: supernatural_everyday
+    emotional_engine: chosen_family + named_and_seen
+    audience: "Millennial 30-38 late-diagnosed ADHD knowledge workers and adjacent indie devs"
+
+  - series_id: cognitive_clarity__en_US__detective_of_the_thought_loop
+    brand_id: cognitive_clarity
+    locale: en_US
+    persona_archetype: Millennial-burnout
+    daily_life_anchor: late_night_economy
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 38-year-old former therapist runs a side practice from a back-of-bakery office; clients write a single anonymous index card describing a thought-loop and she diagnoses which cognitive distortion it is and what one practice unwinds it. Cases stack. The protagonist is unknotting a city's collective cognitive load, one card at a time."
+    volume_runway_target: 120
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Card-Reader of Greene Street"
+    series_logline: "A burnt-out therapist takes index cards through a bakery's back-door mail slot — each card a thought-loop, each reply a single practice — and slowly the loops start touching."
+    series_description: "Iris quit therapy practice at 37 after one panic attack between sessions. She moved into the apartment above her cousin's bakery on Greene Street and would not have started reading cards again except that the bakery's back-door mail slot kept receiving them. A single index card, no return address, one paragraph: *I cannot stop checking if I sent that email last August. I check 30 times a day. The email was fine.* Iris reads it, drinks her coffee, writes a reply on the back: *This is checking-compulsion masquerading as conscientiousness. The unwinding practice is …* She tapes the card to the bakery's community board for the writer to retrieve. The card is gone by morning. A new card arrives. By the third week there are five new cards a day. Each volume she diagnoses one loop and prescribes one practice; the practices interlock — the rumination-loop client and the procrastination-loop client are the same person, two weeks apart. The mystery: somebody is collecting Iris's replies into a small zine that gets distributed to subway readers. Cozy. Bakery-warm. Index-card-tactile."
+    opening_5_volume_arc:
+      vol_1: "The August email card. The first reply. The card is gone by morning."
+      vol_2: "The rumination loop. The procrastination loop. Iris realizes they are the same handwriting."
+      vol_3: "The all-or-nothing card. Iris's reply runs across two cards for the first time. The bakery's community board is full."
+      vol_4: "The cousin who owns the bakery has a card on the board, in her own handwriting. Iris reads it without knowing."
+      vol_5: "The zine surfaces. A teenager hands one to Iris on the subway. She is the anonymous author."
+    comp_titles: ["The Apothecary Diaries", "What You Are Looking For Is in the Library", "Before the Coffee Gets Cold", "The Travelling Cat Chronicles", "Days at the Morisaki Bookshop"]
+    reader_promise: "Your thought-loop has a name. The name has a practice. The practice fits on an index card."
+    marketing_angle: "Apothecary Diaries-style case-of-the-week with CBT distortions instead of medicinal herbs."
+    genre_family: mystery_cozy
+    emotional_engine: competent_calm_specialist + inherited_wisdom
+    audience: "Millennial 35-42 therapy-literate readers who lapsed out of formal practice"
+
+  - series_id: cognitive_clarity__en_US__guild_of_overthinkers
+    brand_id: cognitive_clarity
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: game_level
+    episodic_frame_per_volume: locale
+    magical_register: isekai
+    serial_engine: party_quest
+    long_arc_spine: "A 25-year-old code-bootcamp grad falls asleep mid-spiral and wakes in a gentle fantasy realm where each town is governed by a single cognitive distortion; she joins a guild of fellow-overthinkers and they liberate towns one CBT skill at a time. The long arc: home is the next town."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Guild of Overthinkers"
+    series_logline: "A 25-year-old falls asleep at her desk mid-spiral and wakes in a Studio-Ghibli fantasy realm where every town is run by a different cognitive distortion — and the guild she joins specializes in unwinding them."
+    series_description: "Ren falls asleep during a stack-trace at 2 a.m. and wakes in a meadow outside a town called Catastrophica, where every NPC speaks in worst-case scenarios and the mayor is a small dragon that grows when fed predictions. She is met by a guild: a paladin who handles black-and-white-thinking towns, a bard who runs personalization, a healer who only takes shoulds. They recognize her: 'Oh — you're a checker. We've been short a checker.' Each volume the guild liberates one town, one distortion, one practice. Catastrophica falls when Ren teaches the citizens to write down the worst-case AND the most-likely-case. Shouldsburg falls when the bard sings the citizens through a needs-vs-shoulds exercise. The realm is the inside of Ren's nervous system, slightly externalized. The long arc: home is the next town. To leave the realm she has to liberate the town she comes from — and the town is the cubicle she fell asleep in. Recovery-isekai. No combat darker than a sparring match. Companion-creatures gentle."
+    opening_5_volume_arc:
+      vol_1: "The fall-asleep. The meadow. Catastrophica. Ren is named a checker. The dragon shrinks one size."
+      vol_2: "Shouldsburg. The bard's needs-vs-shoulds song. A retired baker reopens her shop because she wants to."
+      vol_3: "Mind-reading Hollow. The paladin teaches the town to ask. Three weddings happen in three days."
+      vol_4: "All-or-Nothing Ridge. Ren leads her first town. She teaches gradients via a paint-mixing scene that will get reblogged."
+      vol_5: "The guild map reveals one more town no one will visit: Ren's home town. The guild votes to go anyway."
+    comp_titles: ["Frieren: Beyond Journey's End", "Mushoku Tensei (recovery-isekai)", "Witch Hat Atelier", "Spy x Family", "The Apothecary Diaries"]
+    reader_promise: "Your spiral has a fantasy map. The guild will walk it with you."
+    marketing_angle: "Frieren's slow-walk register applied to a recovery-isekai of CBT distortions; Witch Hat Atelier's gentle apprenticeship for the work."
+    genre_family: fantasy_adventure
+    emotional_engine: chosen_family + competent_calm_specialist
+    audience: "Gen Z 22-27 first-job knowledge workers fluent in CBT vocabulary and isekai grammar"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 02 / 05 — stabilizer_healing (core · seinen · burnout)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: stabilizer_healing__en_US__sabbatical_inn
+    brand_id: stabilizer_healing
+    locale: en_US
+    persona_archetype: Millennial-burnout
+    daily_life_anchor: slow_living
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 36-year-old former senior engineer inherits a small inn off the Pacific Coast Highway from an aunt she barely knew; the inn's six rooms each correspond to a stage of burnout recovery, and guests are quietly routed to the right room by the inn itself. Each volume a new guest stays one week."
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Sabbatical Inn"
+    series_logline: "A burnt-out engineer inherits a six-room inn that knows which room each guest needs — and learns to be the innkeeper her own collapse needed two years ago."
+    series_description: "Naomi had a staff-engineer title at a hyperscaler and a quiet collapse on a Sunday afternoon she still cannot fully remember. Eighteen months later her aunt's lawyer calls: she has inherited a six-room inn on a fog-soaked stretch of coastal highway. She drives up to sell it. The inn is full when she arrives. The current guests are a divorce-recovery retreat she did not book. The first morning a man arrives without a reservation, looking like Naomi looked eighteen months ago, and the inn — somehow — opens Room 2 for him, which is the room with the heaviest blackout curtains and the largest bath. The inn knows. Each volume one guest stays one week and Naomi learns one room. Room 1 (Just Stopped): blackout curtains, tea, no questions. Room 2 (First Sleep): bath, weighted blanket, soup. Room 3 (Bodies Come Back): walk, swim, garden. Room 4 (Old Feelings Return): journal, fire, dog. Room 5 (First Idea): sketchbook, hot drink, view. Room 6 (Re-entry): suitcases, conversation, a returning-to-the-world meal. The long arc: who Naomi's aunt was, and which room Naomi herself slept in, eighteen months ago, without remembering. Slow-burn. Coastal. Wood-stove specific."
+    opening_5_volume_arc:
+      vol_1: "Naomi arrives. The unbooked man. Room 2 opens itself. The first soup."
+      vol_2: "A teacher checks in. The inn opens Room 1. She sleeps for fourteen hours. Naomi learns the rule: do not knock."
+      vol_3: "A founder checks in, restless. Room 3. He hates the walk on day one. He loves the swim on day four."
+      vol_4: "A nurse checks in. Room 4. The old feelings. The dog is named. The nurse cries on a Wednesday."
+      vol_5: "A returning guest — the man from vol_1 — comes back for Room 5. The inn rearranges itself. Naomi opens her aunt's letter."
+    comp_titles: ["The Travelling Cat Chronicles", "Days at the Morisaki Bookshop", "Convenience Store Woman", "Before the Coffee Gets Cold", "What You Are Looking For Is in the Library"]
+    reader_promise: "Burnout has six rooms and an inn that knows which one you need."
+    marketing_angle: "Studio Ghibli's coastal-iyashikei register applied to American knowledge-worker burnout in six exact stages."
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + inherited_wisdom
+    audience: "Millennial 32-40 burnt-out senior individual contributors and managers on de-facto sabbatical"
+
+  - series_id: stabilizer_healing__en_US__creator_in_the_off_season
+    brand_id: stabilizer_healing
+    locale: en_US
+    persona_archetype: GZ-creator
+    daily_life_anchor: parasocial_creator
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 27-year-old YouTuber with 1.2M subs takes a hard off-season after a public crashout; she ends up running a small mountain cabin AirBnB where other creators come to recover — and each guest's first day she can see the metric (subs, view-velocity, sponsor-anxiety) hovering above their head as a small lantern that dims as they unwind."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Off-Season"
+    series_logline: "A YouTuber takes a hard off-season after a public meltdown and starts hosting other crashed-out creators at a cabin; she can see each guest's metric-lantern, and learns which practice dims which lantern."
+    series_description: "Mei has 1.2M subs and a video pinned to the top of her channel that says 'I'm going dark for a year.' She isn't dark. She's running a five-cabin AirBnB compound in the foothills of the Catskills, and the only people she takes are other creators in collapse. The first guest is a beauty creator whose sponsorship-anxiety lantern is bright enough to read a book by. Mei serves dinner. The lantern dims one notch. Each volume a different creator-shape arrives — a gaming streamer whose lantern is view-velocity, an autofic novelist whose lantern is Goodreads star average, a TikTok dancer whose lantern is the algorithm itself. Mei learns: each lantern dims to a different practice. Some need a walk. Some need a hard deletion of an app. Some need a phone call to a parent. The long arc: Mei's own lantern is still on, visible only in mirrors, and she has been pretending not to see it. Cabin-quiet. Phone-off specific. Loamy."
+    opening_5_volume_arc:
+      vol_1: "The beauty creator arrives. The sponsor-anxiety lantern. Dinner. The first dim."
+      vol_2: "The gaming streamer. View-velocity lantern. The hard rule: no phones at the fire."
+      vol_3: "The novelist. Goodreads-star lantern. The practice is a long letter to her editor she never sends."
+      vol_4: "The dancer. The algorithm-lantern. Mei has no practice for this one. She and the dancer co-write a manifesto."
+      vol_5: "Mei's own lantern, visible at last in her bathroom mirror. The current guest names it for her over breakfast."
+    comp_titles: ["Convenience Store Woman", "The Bear (Tully)", "Honey Lemon Soda", "Days at the Morisaki Bookshop", "Tokyo Ueno Station"]
+    reader_promise: "Your metric has a shape. Here is the practice that dims it."
+    marketing_angle: "A24's quiet retreat register applied to the post-creator-economy crashout, with a metric-as-lantern visual hook."
+    genre_family: supernatural_everyday
+    emotional_engine: chosen_family + competent_calm_specialist
+    audience: "Gen Z 24-30 mid-tier creators in or near burnout; Millennial creator-adjacents"
+
+  - series_id: stabilizer_healing__en_US__sourdough_after_quitting
+    brand_id: stabilizer_healing
+    locale: en_US
+    persona_archetype: Millennial-burnout
+    daily_life_anchor: slow_living
+    portal_mechanic: object
+    episodic_frame_per_volume: locale
+    magical_register: none
+    serial_engine: serial_diary
+    long_arc_spine: "A 33-year-old who quit a marketing director job with no plan starts a sourdough practice on her parents' kitchen counter; the bread, slowly, teaches her to operate at a metabolism she has not lived in since college. No magic. One year. 52 loaves."
+    volume_runway_target: 100
+    reading_platform_fit: graphic_novel
+    series_title: "Fifty-Two Loaves"
+    series_logline: "After quitting at 33 with no plan, Aisha bakes one sourdough loaf a week for a year — and the bread, slowly, teaches her a metabolism she has not lived in since college."
+    series_description: "Aisha quit on a Tuesday. The director-of-marketing email went out at 4:12 p.m. and she drove to her parents' house in central New Jersey with a duffel and her sourdough starter — a gift from a friend three years ago that she had kept barely alive on the back of her counter, refreshing it only in panic, like an oblique apology to the better life she meant to live. Week 1: the starter is barely alive. Week 2: the first loaf is dense and sad. By week 12 she is making decent country boules and reading three pages of a novel before bed. By week 26 she has started a small CSA-style bread route for four neighbors. By week 52 she has not gone back to a screen-job and is not sure she will. There is no magic. The series is a graphic-novel diary, 52 loaves, 52 weeks, an honest account of a Millennial's first real off-ramp from optimization culture. The bread is the unit. The bread is the metabolism. Slow. Specific. Floured."
+    opening_5_volume_arc:
+      vol_1: "Weeks 1-10. The starter wakes up. Loaves 1-10. The first decent crust. Aisha sleeps eight hours for the first time in years."
+      vol_2: "Weeks 11-20. The first sourdough that her father — a hard man — eats two slices of. Aisha cries in the car."
+      vol_3: "Weeks 21-30. The bread route begins. Four neighbors. A small spreadsheet she refuses to expand."
+      vol_4: "Weeks 31-40. The old company calls. Director-level offer, 20% raise. She says no on a Saturday. The next loaf is the best so far."
+      vol_5: "Weeks 41-52. The year closes. Loaf 52. Aisha writes one page about what she has learned and sends it to her younger sister. The series ends."
+    comp_titles: ["Fun Home (Bechdel)", "Persepolis (Satrapi)", "Days at the Morisaki Bookshop", "How to Be a Person in the World (Havrilesky)", "The Bear (Tully)"]
+    reader_promise: "Quitting has a metabolism. The metabolism has a unit. The unit is one loaf a week for a year."
+    marketing_angle: "Fun Home's confessional graphic-novel register applied to the Millennial post-corporate-decade off-ramp."
+    genre_family: slice_of_life
+    emotional_engine: post_corporate_recovery + inherited_wisdom
+    audience: "Millennial 30-40 mid-career quitters and quit-curious knowledge workers"
+
+  - series_id: stabilizer_healing__en_US__nervous_system_archivist
+    brand_id: stabilizer_healing
+    locale: en_US
+    persona_archetype: Millennial-adhd
+    daily_life_anchor: late_night_economy
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 35-year-old former archivist runs a small basement studio where clients bring one object that represents the moment they burnt out; she catalogs it, files it, and writes a deaccession plan — and the client's nervous system rests one notch."
+    volume_runway_target: 120
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Nervous System Archive"
+    series_logline: "A 35-year-old archivist catalogs the one object each client kept from their burnout — a laptop, a lanyard, a notebook — and writes them a deaccession plan."
+    series_description: "Reiko keeps a basement studio under a community garden in Queens. The studio has acid-free boxes, white gloves, a small camera on a copy stand, and three chairs. Clients come with one object. A staff laptop they were never asked to return. The lanyard from the last job. The notebook from the first weekly 1:1 with the manager who broke them. Reiko catalogs the object — provenance, condition, the date it stopped being neutral — and writes a deaccession plan. Sometimes the plan is *keep it in this acid-free box; revisit in six months*. Sometimes it is *bury it in the garden upstairs; the soil composition is documented*. Sometimes it is *send a photo to the person and let the object stay here*. Each volume is one object, one client, one deaccession. The mystery, slow-built: a recurring donor leaves objects anonymously on the studio's stoop. The objects, lined up, tell a single life. Cozy. Vellum. Acid-free."
+    opening_5_volume_arc:
+      vol_1: "The unreturned laptop. The first deaccession: kept in the box. The client sleeps for a weekend."
+      vol_2: "The lanyard. Garden burial. The lawyer-client cries in the soil."
+      vol_3: "The 1:1 notebook. Photo, sent. Object stays. The notebook teaches Reiko something about the client's old manager."
+      vol_4: "The anonymous stoop-donor. Object 1: a coffee mug. Reiko catalogs it without a client."
+      vol_5: "The stoop-donor returns. Object 2: a security badge. Reiko begins reconstructing whose life this is."
+    comp_titles: ["The Apothecary Diaries", "Days at the Morisaki Bookshop", "Witch Hat Atelier", "Before the Coffee Gets Cold", "Convenience Store Woman"]
+    reader_promise: "Your burnout has an object. The object has a deaccession plan. The plan dignifies what you went through."
+    marketing_angle: "Apothecary Diaries-style case work applied to the literal archiving of American burnout artifacts."
+    genre_family: mystery_cozy
+    emotional_engine: competent_calm_specialist + inherited_wisdom
+    audience: "Millennial 32-42 archive-literate burnouts in the New York / DC / Chicago corridor"
+
+  - series_id: stabilizer_healing__en_US__off_ramp_garden
+    brand_id: stabilizer_healing
+    locale: en_US
+    persona_archetype: Millennial-burnout
+    daily_life_anchor: slow_living
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "A 39-year-old gardener tends a community garden in a Brooklyn lot; each plot is held in trust for one person on a 12-month off-ramp from a high-burnout career. She places people in the right plot at the right month. The roster grows. The lot's secret: it has always been an off-ramp, going back four owners."
+    volume_runway_target: 180
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Off-Ramp Garden"
+    series_logline: "A 39-year-old gardener places burnt-out adults in the plot they need for the next twelve months — and the garden, going back four owners, has always done this."
+    series_description: "Mae has run the half-acre community garden behind the laundromat for six years. She has thirty-six plots. Twenty-eight are stable, four are training, four are off-ramp. The off-ramp plots take a single person for twelve months: assigned a plot in week 1, harvest in week 36, write a single page about what they learned in week 52. The waiting list is long. The first off-ramper of the new season is a recently-fired-then-publicly-thanked tech VP whose plot is in the back row near the compost. Mae walks her through the first month — tomatoes are not for her, she gets root vegetables. Each volume one new off-ramper joins. The garden roster — a former trauma surgeon now growing sunflowers, a former hedge-fund analyst growing dahlias, a former showrunner growing pumpkins — slowly becomes a chosen family. The mystery: there is a 37th plot, marked only by an old wooden sign, and Mae has never assigned it. She inherits the records from the previous owner and learns it has been waiting forty years for the right person. The garden's previous four owners were also off-rampers. So is Mae. So, possibly, is the reader."
+    opening_5_volume_arc:
+      vol_1: "The fired VP arrives. The back-row plot. Root vegetables. Mae explains the rule of the season."
+      vol_2: "The trauma surgeon plants sunflowers. Mae walks him through pollinator-spacing while he tells her about his last shift."
+      vol_3: "The analyst plants dahlias. Tubers. The metaphor lands without anyone naming it."
+      vol_4: "The showrunner and the pumpkins. Mae's first late-night phone call to an off-ramper."
+      vol_5: "The 37th plot. The wooden sign. Mae finds the previous owner's notebook in the shed wall."
+    comp_titles: ["Days at the Morisaki Bookshop", "The Travelling Cat Chronicles", "What You Are Looking For Is in the Library", "Frieren: Beyond Journey's End", "Convenience Store Woman"]
+    reader_promise: "Burnout has an off-ramp. The off-ramp is a plot. The plot is yours for a year."
+    marketing_angle: "Frieren's slow-walk register applied to a Brooklyn community garden as twelve-month corporate-burnout halfway house."
+    genre_family: healing
+    emotional_engine: chosen_family + inherited_wisdom
+    audience: "Millennial 35-45 mid-career exiters with green hands and a year to spend"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 03 / 05 — focus_sprint_workplace (core · seinen · adhd_focus)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: focus_sprint_workplace__en_US__body_double_room
+    brand_id: focus_sprint_workplace
+    locale: en_US
+    persona_archetype: Millennial-adhd
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "A 29-year-old late-diagnosed ADHD designer launches a body-doubling app called Room, in which two strangers do parallel solo work over video for 50-minute blocks. The app's matching algorithm starts producing eerily perfect pairs — and she realizes the algorithm is picking up something humans can't see: each user has an invisible companion creature, and the algorithm is matching the creatures."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "Room"
+    series_logline: "A late-diagnosed ADHD designer ships a body-doubling app whose algorithm is matching not the users — but the small invisible companion-creatures every user has and only she can see."
+    series_description: "Eun-ji ships Room at 28 after a year on a waitlist for a formal ADHD diagnosis. The premise is simple: pair two strangers, both opt-in to body-doubling, both work silently in parallel for fifty minutes. The first wave of users sticks. The retention numbers are strange. Then a user emails: 'I think the woman you paired me with is my next-door neighbor. I have never told anyone I body-double.' Then another: 'My partner used the app on the same day I did, in the same apartment, and you matched us with each other.' Eun-ji looks at the matching code. She did not write it like this. Each user has, in the corner of their camera frame on her monitor, a small companion creature — and the algorithm she did not write is matching the creatures. Each volume one user's pairing tells a story: a recently-divorced dentist matched with a recently-divorced bartender, the same creature on both shoulders, smaller after a week; a recently-diagnosed teen matched with a 60-year-old retiree, the same exact creature, four decades apart. The long arc: who wrote the matching layer, and what Eun-ji's own companion looks like to other users. Lo-fi. Notification-soft. Webcam-window specific."
+    opening_5_volume_arc:
+      vol_1: "Launch. The dentist and the bartender, paired by their creatures. The first email."
+      vol_2: "The teen and the retiree. The same creature, four decades apart. The retiree cries on camera."
+      vol_3: "The two partners. Eun-ji has to disclose the matching layer to one user. She picks the wrong one."
+      vol_4: "A user's creature is missing one Tuesday morning. Eun-ji audits her own creature, which she has never looked at."
+      vol_5: "The matching-layer engineer is named in a commit history Eun-ji didn't write. She finds the engineer."
+    comp_titles: ["The Apothecary Diaries", "Witch Hat Atelier", "Heartstopper", "Tamen de Gushi", "Severance (Ling Ma)"]
+    reader_promise: "Your focus has a partner. The app sees what you cannot. The match is real."
+    marketing_angle: "Heartstopper's chosen-family register applied to body-doubling apps — with the ADHD-companion-as-creature visual hook."
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + named_and_seen
+    audience: "Millennial 28-35 late-diagnosed ADHD remote knowledge workers, plus Gen Z early-career parallel"
+
+  - series_id: focus_sprint_workplace__en_US__librarian_of_unfinished_things
+    brand_id: focus_sprint_workplace
+    locale: en_US
+    persona_archetype: Millennial-adhd
+    daily_life_anchor: parasocial_creator
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 41-year-old ADHD librarian runs a small back-room called the Unfinished Collection — a single room of objects representing other people's abandoned projects. Patrons bring their unfinished thing in; the librarian catalogs it; sometimes they take it back, sometimes they don't. The long arc: the room is at capacity."
+    volume_runway_target: 130
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Librarian of Unfinished Things"
+    series_logline: "A 41-year-old ADHD librarian catalogs other people's abandoned projects — the half-knitted scarf, the dissertation chapter 4, the screenplay second act — and the act of cataloging changes which projects come home."
+    series_description: "Ngozi runs a tiny branch library in a college town and a back-room called the Unfinished Collection, by appointment only. Patrons bring one unfinished thing. A half-knitted scarf. A dissertation chapter 4. A screenplay second act. A weight-lifting program week 14. Ngozi catalogs it — provenance, last touched, the precise sensation the patron had when they put it down. Some patrons take it home after the catalog session, finished or not. Some leave it. The shelf grows. Ngozi has ADHD diagnosed at 39 and built this collection to honor what executive-function research keeps missing: the moral weight of the unfinished. Each volume is one patron, one object, one cataloging. The mystery: a single book has lived on the top shelf for thirty years, marked *DO NOT CATALOG*. Ngozi inherits the librarian's notes. She reads the book. Cozy. Tactile. Card-catalog specific."
+    opening_5_volume_arc:
+      vol_1: "The half-knitted scarf. The first cataloging. The patron takes the scarf home and finishes it on a Sunday."
+      vol_2: "Chapter 4. The patron leaves it on the shelf. Ngozi adds it to a private rotating display."
+      vol_3: "The screenplay second act. The patron — a recently-out queer screenwriter — re-writes the entire thing in three weeks."
+      vol_4: "The week-14 lifting program. The patron — a dad of three — joins a small gym and never reopens the file."
+      vol_5: "The do-not-catalog book on the top shelf. Ngozi reads it. It is the previous librarian's own unfinished thing."
+    comp_titles: ["What You Are Looking For Is in the Library", "Days at the Morisaki Bookshop", "The Apothecary Diaries", "Before the Coffee Gets Cold", "Witch Hat Atelier"]
+    reader_promise: "Your unfinished thing has moral weight. A librarian will catalog it with care."
+    marketing_angle: "What You Are Looking For Is in the Library meets a small back-room dedicated to ADHD's most painful asset: the unfinished."
+    genre_family: mystery_cozy
+    emotional_engine: competent_calm_specialist + inherited_wisdom
+    audience: "Millennial 35-45 late-diagnosed ADHD adults with a closet full of abandoned projects"
+
+  - series_id: focus_sprint_workplace__en_US__hyperfocus_island
+    brand_id: focus_sprint_workplace
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: game_level
+    episodic_frame_per_volume: locale
+    magical_register: isekai
+    serial_engine: party_quest
+    long_arc_spine: "A 24-year-old falls into hyperfocus on a Tuesday and wakes in a small gentle archipelago where each island is governed by a different executive-function skill — task initiation, working memory, time perception, emotional regulation, sustained attention, self-monitoring. She joins a small party and they unlock one island per arc. The long arc: home is the eighth island and it is missing."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Eight Islands"
+    series_logline: "A 24-year-old falls into hyperfocus and wakes in a gentle archipelago where each island is one executive-function skill — and the eighth island, home, is missing from every map."
+    series_description: "Talia is a 24-year-old who has been told her whole life she 'just needs to focus.' On a Tuesday at 11:47 a.m. she falls into hyperfocus on a Figma file and wakes in a coastal town on an island called Task-Initiation, where every NPC is doing the next-smallest thing and the small dragon at the harbor only grows when fed first-steps. She is met by a small party: a paladin from Working-Memory, a bard from Time-Perception, a healer from Emotional-Regulation. They have been short a self-monitoring class. They recognize her. Each arc opens one island. Task-Initiation falls when the citizens are taught the two-minute rule. Working-Memory falls when the bard composes a song that is also a checklist. Time-Perception falls when the citizens learn to set timers. The realm is the inside of Talia's nervous system, slightly externalized, and her job is not to win — it is to map it. The long arc: home is the eighth island, called Self-Monitoring, and it is missing from every map. The party will have to build it. Recovery-isekai. Coastal. Gentle. Companion-creatures soft."
+    opening_5_volume_arc:
+      vol_1: "The Tuesday hyperfocus. The harbor. The party. The two-minute-rule arc on Task-Initiation."
+      vol_2: "Working-Memory island. The checklist-song. A retired baker reopens her shop because she now remembers her own recipes."
+      vol_3: "Time-Perception island. Timers. The bard makes the citizens dance to a 25-minute song; the island is healed."
+      vol_4: "Emotional-Regulation island. The healer's hardest case. Talia learns to name affect."
+      vol_5: "The party studies the maps. The eighth island is missing. They will need to build it. The arc closes."
+    comp_titles: ["Frieren: Beyond Journey's End", "Mushoku Tensei (recovery-isekai)", "Witch Hat Atelier", "Spy x Family", "Delicious in Dungeon"]
+    reader_promise: "Executive function has eight islands. You will visit them. The party will walk with you."
+    marketing_angle: "Frieren's slow-walk and Delicious in Dungeon's cozy party-quest applied to a recovery-isekai of executive-function skills."
+    genre_family: fantasy_adventure
+    emotional_engine: chosen_family + competent_calm_specialist
+    audience: "Gen Z 22-28 first-job knowledge workers with productivity-app fatigue and an isekai-grammar habit"
+
+  - series_id: focus_sprint_workplace__en_US__study_hall_after_dark
+    brand_id: focus_sprint_workplace
+    locale: en_US
+    persona_archetype: GA-school
+    daily_life_anchor: school_commute
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "A 16-year-old ADHD high-school junior discovers a small after-hours study hall in the back of a Korean grocery, run by an aunt-figure who teaches one focus practice per night. The roster of students grows. The mystery: the aunt is a former teacher whose own son refused to attend."
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "Study Hall After Dark"
+    series_logline: "A 16-year-old ADHD junior finds the after-hours study hall in the back of a Korean grocery — run by an aunt-figure who teaches one focus practice a night."
+    series_description: "Hana is 16, diagnosed ADHD in seventh grade, top of her math class but failing English because she cannot finish an essay. She walks past the Korean grocery on the way home from cram school and one Wednesday night sees a soft light in the back. The auntie at the register waves her in. There is a small back room with four desks, four lamps, four small bowls of rice crackers, and a handwritten sign: *Study Hall, 7-10. Phones off. One practice a night.* The first night the practice is *body-doubling.* The second is *pomodoro with a clock you can hear.* The third is *write the worst version first.* The roster grows: a baseball-team senior with undiagnosed ADHD, a freshman with anxiety, a Korean exchange student a year ahead in math but a year behind in English. The aunt — Mrs. Oh — does not lecture. She teaches by example. The long arc: Mrs. Oh's own son refused to attend a study hall like this, and the students slowly piece together why. School-cozy. After-dark. Rice-cracker specific."
+    opening_5_volume_arc:
+      vol_1: "The grocery. The back room. The first practice: body-doubling. Hana finishes a paragraph."
+      vol_2: "The audible-clock pomodoro. The baseball senior joins. He cries during the third block."
+      vol_3: "Write-the-worst-version-first. Hana finishes her first essay. Mrs. Oh circles two sentences."
+      vol_4: "The freshman. The exchange student. The roster is four. The grocery is full."
+      vol_5: "Mrs. Oh tells the story of her son. The students vote to invite him to one session."
+    comp_titles: ["Heartstopper", "Honey Lemon Soda", "Frieren", "The Apothecary Diaries", "I Want to Eat Your Pancreas"]
+    reader_promise: "Your focus has a study hall and an aunt-figure who knows the practice."
+    marketing_angle: "Heartstopper's tender high-school register applied to an after-hours ADHD study hall behind a Korean grocery."
+    genre_family: school
+    emotional_engine: chosen_family + inherited_wisdom
+    audience: "Gen Alpha 14-18 ADHD high-schoolers; secondary Gen Z 18-22 early-college parallel"
+
+  - series_id: focus_sprint_workplace__en_US__cubicle_garden
+    brand_id: focus_sprint_workplace
+    locale: en_US
+    persona_archetype: Millennial-adhd
+    daily_life_anchor: office_commute
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 37-year-old corporate ergonomic consultant builds tiny moss-and-stone gardens for ADHD knowledge workers' cubicles; each garden is calibrated to the user's specific dysregulation pattern, and the moss grows or browns according to how the user's nervous system is doing that week. Each volume she designs one new garden. The long arc: HR is watching, and HR is wrong."
+    volume_runway_target: 120
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Cubicle Garden"
+    series_logline: "A 37-year-old ergonomic consultant builds tiny moss-and-stone gardens for ADHD employees' cubicles — and the moss tells the truth about the employee's nervous system that week."
+    series_description: "Junko was a corporate ergonomic consultant for ten years; she now runs a quiet practice for one specific client type — ADHD knowledge workers whose companies have referred her after a near-quit. She visits the cubicle. She measures light, sound, sightlines, and what she calls the affect-load. She returns with a small moss-and-stone garden, twelve inches by six. The garden is calibrated. The moss tells the truth: green when the client is regulated, brown at the edges when overload begins, slightly luminescent when the client has experienced a small win. The client cannot fake the moss. The client does not need to. Each volume is one cubicle, one garden, one client. The mystery: HR at the largest of her client companies has begun photographing the gardens. The photographs are being used to predict attrition. Junko writes a letter. Office-cozy. Fluorescent-and-moss specific."
+    opening_5_volume_arc:
+      vol_1: "The first cubicle. A senior PM whose moss browns within a week. Junko adjusts the light."
+      vol_2: "An engineer whose moss goes luminescent on Thursdays. They identify the Thursday meeting. They cancel it."
+      vol_3: "A designer whose moss is uniformly brown for a month. The garden is not the problem. Junko refers her out."
+      vol_4: "An HR partner photographs three gardens. Junko notices. The partner does not know she has noticed."
+      vol_5: "Junko writes the letter to HR. The letter is firm. The garden program is moved out of HR's hands."
+    comp_titles: ["The Apothecary Diaries", "Witch Hat Atelier", "Convenience Store Woman", "Severance (Ling Ma)", "Frieren"]
+    reader_promise: "Your nervous system has a small garden. The moss tells the truth. The truth has a consultant who will defend it."
+    marketing_angle: "Apothecary Diaries case-of-the-week applied to corporate-cubicle moss as honest nervous-system telemetry."
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + post_corporate_recovery
+    audience: "Millennial 32-42 ADHD knowledge workers still inside the building but on the edge of leaving"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 04 / 05 — adhd_forge_mystery (niche · shonen · adhd_focus / neurodivergent)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: adhd_forge_mystery__en_US__detective_who_thinks_sideways
+    brand_id: adhd_forge_mystery
+    locale: en_US
+    persona_archetype: GA-school
+    daily_life_anchor: school_commute
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 15-year-old ADHD high-school sophomore solves small neighborhood mysteries by following the side-tangents nobody else notices. Each volume one case. The long arc: the side-tangents are themselves coming from somewhere — and a guild of sideways-thinking adults is watching."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Sideways Detective"
+    series_logline: "A 15-year-old ADHD sophomore solves small neighborhood mysteries by following the side-tangents nobody else can; a hidden guild of grown-up sideways-thinkers is recruiting."
+    series_description: "Devon is fifteen, ADHD-and-AuDHD, and cannot follow a class lecture for more than seven minutes without one tangent. His tangents are accurate: he notices a stranger's wristwatch is set thirteen minutes fast and that turns into a real lead. The first case of the series is the lost dog of a Korean grandmother three doors down, and Devon solves it by noticing the dog's water dish in the photo has a specific brand-label that is only sold at one bodega four blocks away. Each volume is one neighborhood case — the missing wedding ring at the laundromat, the recurring petty theft of a single brand of yogurt, the cousin who has been ghost-attending the family dinner. Devon is, slowly, recruited by a guild — a folder appears in his backpack with one page: a list of solved cases, none of them his, all signed by the same initials, half a century old. The guild is real. The guild is everywhere. The guild thinks sideways and is winning. Shonen-quiet. School-cozy. Backpack-notebook specific."
+    opening_5_volume_arc:
+      vol_1: "The lost dog. The wristwatch. The bodega brand-label. The first case."
+      vol_2: "The wedding ring at the laundromat. The dryer-timer pattern. The patron in the third chair."
+      vol_3: "The yogurt thief. A 70-year-old retired teacher with selective memory. Devon protects her dignity."
+      vol_4: "The ghost-attending cousin. Devon's first case inside his own family. The grandmother knew."
+      vol_5: "The backpack folder. The half-century of cases. Devon meets one of the initialed seniors at a coffee shop."
+    comp_titles: ["The Apothecary Diaries", "Apothecary Diaries", "Detective Conan", "Spy x Family", "Heartstopper"]
+    reader_promise: "Your tangent is a clue. Your brain is a detective. The guild has been waiting."
+    marketing_angle: "Apothecary Diaries' case-of-the-week applied to ADHD/AuDHD sideways thinking, with a Heartstopper-tender chosen-family register."
+    genre_family: mystery_cozy
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "Gen Alpha 13-17 ADHD/AuDHD readers; secondary Gen Z 18-23 nostalgia parallel"
+
+  - series_id: adhd_forge_mystery__en_US__guild_of_late_diagnoses
+    brand_id: adhd_forge_mystery
+    locale: en_US
+    persona_archetype: Millennial-adhd
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: letter
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "A 36-year-old freshly-diagnosed ADHD adult joins an invitation-only online support group for late-diagnosed knowledge workers; each member's diagnosis letter arrived along with a small invitation envelope only late-diagnosed adults can see. The roster grows. The long arc: someone has been writing the invitations for forty years."
+    volume_runway_target: 130
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Guild of Late Diagnoses"
+    series_logline: "A 36-year-old freshly-diagnosed ADHD adult receives an invitation envelope only late-diagnosed adults can see — and joins a guild that has been quietly running for forty years."
+    series_description: "Priya gets her ADHD diagnosis at 36, after a year on a waitlist. The letter from the clinic arrives in a thick brown envelope. Inside that envelope is a second envelope, smaller, hand-addressed, that the clinic assistant did not put there. The second envelope contains one card: an invitation to a guild, a phone number, a single password. Priya is suspicious. She calls. A woman answers and explains: every late-diagnosed adult, going back four decades, has received this envelope; only late-diagnosed adults can see it; the guild meets every other Sunday at varying locations. Priya goes. The roster: a 52-year-old paralegal, a 41-year-old conductor, a 33-year-old dad of three, a 60-year-old retired postal worker, a 28-year-old fresh-out-of-grad-school designer. Each volume one member tells the story of their diagnosis-arrival and one specific compensatory strategy they built in the years before. Priya keeps notes. The long arc: who has been writing the invitations, and what they want from the guild. Warm. Sunday-meeting specific. Coffee-and-folding-chair textured."
+    opening_5_volume_arc:
+      vol_1: "The double envelope. The phone call. The first Sunday meeting in a church basement."
+      vol_2: "The paralegal's compensatory strategy: the rolodex of routines. Priya begins one of her own."
+      vol_3: "The conductor's strategy: the score-as-checklist. Priya tries it on a Sunday."
+      vol_4: "The retired postal worker. The forty-year history of the guild. The first member is named."
+      vol_5: "The handwriting on the invitations changes, very slightly. The guild votes to investigate."
+    comp_titles: ["The Apothecary Diaries", "Days at the Morisaki Bookshop", "Before the Coffee Gets Cold", "Heartstopper", "Witch Hat Atelier"]
+    reader_promise: "Your late diagnosis has a guild. The guild has been waiting forty years."
+    marketing_angle: "Apothecary Diaries' guild register applied to the late-diagnosed-ADHD-adult support group, with a forty-year invitation mystery."
+    genre_family: supernatural_everyday
+    emotional_engine: chosen_family + named_and_seen
+    audience: "Millennial 35-45 late-diagnosed ADHD adults and their AuDHD peers; secondary Gen X parallel"
+
+  - series_id: adhd_forge_mystery__en_US__interest_island
+    brand_id: adhd_forge_mystery
+    locale: en_US
+    persona_archetype: GA-school
+    daily_life_anchor: school_commute
+    portal_mechanic: game_level
+    episodic_frame_per_volume: locale
+    magical_register: isekai
+    serial_engine: party_quest
+    long_arc_spine: "A 14-year-old AuDHD middle-schooler falls into a special interest on a Tuesday and wakes in a fantasy realm where each region is a domain of intense expertise; she joins a party of fellow-deep-divers and they unlock one region per arc. The long arc: home is the region of self-acceptance, and it is harder than the rest."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "Interest Island"
+    series_logline: "A 14-year-old AuDHD middle-schooler falls into a special interest and wakes in a gentle fantasy realm where each region is a domain of intense expertise — and a party of fellow-deep-divers is recruiting."
+    series_description: "Lila is fourteen and her special interest is freshwater turtles. She knows 113 species by Latin name. On a Tuesday at 3:18 p.m. she falls into a research spiral and wakes in a forested coastal region called Cheloniana, where every NPC is also a turtle-deep-diver and the small dragon at the harbor only grows when fed accurate species facts. She is met by a small party: a paladin whose interest is mineral classification, a bard whose interest is 1970s-era Japanese city pop, a healer whose interest is regional dialect drift. Each arc opens one region. Cheloniana, Mineralia, City-Pop-Heights, Dialectland. The party walks through, deep-dives, and unlocks the region's gift to the realm. The realm is the externalized inside of an AuDHD nervous system, slightly utopian. The long arc: home is the region of Self-Acceptance, and the dragon there does not eat facts — it eats the act of being unmasked in front of someone safe. Recovery-isekai. Gentle. Companion-creatures soft. No combat darker than a sparring match."
+    opening_5_volume_arc:
+      vol_1: "The Tuesday research spiral. Cheloniana. The party. The species-fact dragon. The first deep-dive."
+      vol_2: "Mineralia. The paladin's domain. Lila learns to deep-dive a domain she did not pick."
+      vol_3: "City-Pop-Heights. The bard sings. The healer dances. Lila records 9 songs."
+      vol_4: "Dialectland. The healer's domain. The realm-wide map fills in."
+      vol_5: "The Region of Self-Acceptance. The dragon does not eat facts. Lila's first unmasking. The arc closes."
+    comp_titles: ["Frieren", "Mushoku Tensei", "Witch Hat Atelier", "Delicious in Dungeon", "Spy x Family"]
+    reader_promise: "Your special interest has a kingdom. The party is waiting. The dragon eats facts."
+    marketing_angle: "Frieren's slow-walk applied to AuDHD special-interest as recovery-isekai, with Witch Hat Atelier's apprenticeship for the work."
+    genre_family: fantasy_adventure
+    emotional_engine: chosen_family + competent_calm_specialist
+    audience: "Gen Alpha 12-16 AuDHD middle-schoolers; secondary Gen Z 17-22 high-school-into-college parallel"
+
+  - series_id: adhd_forge_mystery__en_US__second_career_workshop
+    brand_id: adhd_forge_mystery
+    locale: en_US
+    persona_archetype: Millennial-adhd
+    daily_life_anchor: slow_living
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "A 44-year-old AuDHD woodworker runs a Saturday-only workshop in a converted firehouse; her students are mid-career adults discovering they are neurodivergent and looking for a second career using their hands. Each volume one student. No magic. Six tools. One year. The long arc: the workshop's own books don't balance, and the firehouse is up for sale."
+    volume_runway_target: 100
+    reading_platform_fit: graphic_novel
+    series_title: "The Saturday Firehouse"
+    series_logline: "A 44-year-old AuDHD woodworker runs a Saturday-only workshop where mid-career neurodivergent adults learn to work with their hands — and the firehouse is for sale."
+    series_description: "Mara bought the firehouse in 2019 for $1 and a five-year promise to keep one bay open to the public. She runs a Saturday workshop, 10-2, six tools, one project per quarter. Her students are mid-career adults discovering they are neurodivergent and re-thinking their next twenty years through their hands. The first student is a 38-year-old corporate lawyer who has hyperfixated on chair joinery for six months and finally signed up. The second is a 47-year-old former teacher building a shelf for her granddaughter. The third is a 29-year-old AuDHD coder making a coffee table. Each volume is one quarter, one student, one project. No magic. The graphic-novel diary register: panels of hands, of cuts, of mistakes, of correction, of one good joint. The long arc: the firehouse's roof needs $42,000 in repair, the city has a five-year purchase option, and Mara has to decide whether the workshop is a gift or a business. Saturday-cozy. Sawdust specific."
+    opening_5_volume_arc:
+      vol_1: "Q1. The lawyer's first chair joint. Three failed cuts. One success. He cries in the bathroom."
+      vol_2: "Q2. The teacher's shelf. Mara teaches grain-reading. The shelf is for the granddaughter and Mara meets her."
+      vol_3: "Q3. The coder's coffee table. AuDHD precision applied to mortise-and-tenon. The table is exhibited."
+      vol_4: "Q4. The firehouse roof. The $42K. Mara calls a meeting. The students vote."
+      vol_5: "The five-year mark. The city's option. The workshop becomes a co-op. The students are co-owners."
+    comp_titles: ["Fun Home (Bechdel)", "Persepolis", "The Bear (Tully)", "How to Be a Person in the World (Havrilesky)", "Days at the Morisaki Bookshop"]
+    reader_promise: "Your hands have a second career. The workshop is on Saturdays. The firehouse can be saved."
+    marketing_angle: "Fun Home's confessional graphic-novel register applied to a Saturday neurodivergent woodworking co-op."
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + post_corporate_recovery
+    audience: "Millennial 38-50 neurodivergent mid-career exiters; secondary Gen X late-diagnosed parallel"
+
+  - series_id: adhd_forge_mystery__en_US__pomodoro_orchard
+    brand_id: adhd_forge_mystery
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: slow_living
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 28-year-old AuDHD orchardist runs a small organic pomodoro tomato orchard in upstate New York — the tomato is also a metaphor for the work-rest unit. Each volume one visitor comes for a weekend retreat and harvests the tomato their nervous system needs. The long arc: the orchard is being threatened by the next zoning meeting."
+    volume_runway_target: 120
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Pomodoro Orchard"
+    series_logline: "A 28-year-old AuDHD orchardist grows nine varieties of tomato — each named for a work-rest pattern — and weekend visitors harvest the one their nervous system needs."
+    series_description: "Theo runs a four-acre tomato orchard outside Hudson, NY, and grows nine specific varieties: Sprint, Long-Block, Soft-Focus, Hyperfixation, Maintenance, Recovery, Boundary, Refusal, and Off-Day. Each tomato is real. The names are a joke and not a joke. Visitors come for a one-day or weekend retreat, walk the rows, and slowly identify which variety they are. They harvest accordingly. They take home a small wax box of tomatoes calibrated to their week. Each volume is one visitor. A founder discovers she is a Refusal tomato. A high-school senior discovers she is Soft-Focus. A grandmother discovers she has been a Maintenance her whole life and is sad about it. Theo cooks. Theo listens. Theo does not interpret. The orchard is the interpretation. The long arc: the next zoning meeting threatens to convert the orchard into a horse property, and Theo has to decide whether to fight or to relocate. Pastoral. Slow. Tomato-warm."
+    opening_5_volume_arc:
+      vol_1: "The founder. The Refusal tomato. The wax box. The Sunday she does not check email."
+      vol_2: "The high-school senior. Soft-Focus. Theo cooks for her parents."
+      vol_3: "The grandmother. Maintenance, all her life. The conversation at dusk on the porch."
+      vol_4: "The zoning meeting is announced. Theo's first phone call to a former visitor."
+      vol_5: "The orchard sells out for the season. The zoning meeting is delayed. Theo writes a letter."
+    comp_titles: ["Days at the Morisaki Bookshop", "Witch Hat Atelier", "Frieren", "The Travelling Cat Chronicles", "Honey Lemon Soda"]
+    reader_promise: "Your work-rest pattern has a tomato. The orchard knows which one is yours."
+    marketing_angle: "Frieren's pastoral slow-walk applied to AuDHD-named heirloom tomatoes as work-rest typology."
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + inherited_wisdom
+    audience: "Gen Z 25-30 burnt-out knowledge workers with retreat budgets; Millennial AuDHD parallel"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 05 / 05 — career_lift_workplace (core · josei · imposter_syndrome)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: career_lift_workplace__en_US__imposter_letter_box
+    brand_id: career_lift_workplace
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: office_commute
+    portal_mechanic: object
+    episodic_frame_per_volume: letter
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 27-year-old first-time manager inherits a small wooden letter-box from her predecessor's desk; each morning a letter appears, written by a future-her who has navigated one specific imposter-syndrome moment. The letters teach her, in order, how to be a competent manager. The long arc: the predecessor is alive and the letters are also being written by her."
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Letter Box"
+    series_logline: "A 27-year-old first-time manager inherits a wooden letter-box that delivers a letter each morning from a future-her — and slowly realizes someone else is writing them too."
+    series_description: "Aya is promoted to manager at 27 after the previous manager — a quiet senior named Lin — left abruptly. On her first day, her predecessor's desk holds a small lacquered letter-box, no return address, with one note inside: *Open me at 7:50 a.m. on workdays. Trust the letters. — L.* Aya opens it at 7:50 the next morning and a letter is inside, in her own handwriting, written by a version of herself who has already done what Aya is about to do that day. The letter describes the staff meeting, what her senior IC will say, the small kind sentence that will land. Aya is suspicious. She follows it anyway. It works. Each volume one imposter-syndrome scenario gets a letter and a resolution: the first hard 1:1, the first promotion negotiation, the first time she has to disagree with her own manager, the first time she has to manage her former peers, the first time she has to lay someone off. The mystery: Lin is alive, working at a coffee shop two neighborhoods over, and has been writing the letters too — in her own hand. Office-cozy. 7:50-a.m. specific."
+    opening_5_volume_arc:
+      vol_1: "The first morning. The letter. The staff meeting. The small kind sentence."
+      vol_2: "The first 1:1 with a senior IC. The letter says: 'Ask twice. Listen for the answer to the second one.'"
+      vol_3: "The first promotion negotiation. The letter is two pages. Aya gets the bump."
+      vol_4: "The first disagreement with her own manager. The letter says: 'Bring data. He likes a table.'"
+      vol_5: "Aya finds Lin at the coffee shop. Lin writes her one final letter, in person, on a napkin."
+    comp_titles: ["The Apothecary Diaries", "Before the Coffee Gets Cold", "Severance (Ling Ma)", "Days at the Morisaki Bookshop", "Convenience Store Woman"]
+    reader_promise: "Your imposter syndrome has a letter from a future-you. The letter arrives at 7:50."
+    marketing_angle: "Before the Coffee Gets Cold's future-self letters applied to corporate first-time-manager imposter syndrome."
+    genre_family: supernatural_everyday
+    emotional_engine: future_self_dialogue + competent_calm_specialist
+    audience: "Gen Z 25-30 first-time managers; secondary Millennial parallel for new senior roles"
+
+  - series_id: career_lift_workplace__en_US__open_office_after_hours
+    brand_id: career_lift_workplace
+    locale: en_US
+    persona_archetype: Millennial-burnout
+    daily_life_anchor: late_night_economy
+    portal_mechanic: location
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "A 34-year-old senior product manager runs an unofficial after-hours open office on her company's empty 14th floor — Wednesdays 7-10 p.m., anyone in the building can come in with a career question, no notes taken. Each volume one visitor. The long arc: HR finds out."
+    volume_runway_target: 100
+    reading_platform_fit: graphic_novel
+    series_title: "The Fourteenth Floor"
+    series_logline: "A 34-year-old senior PM runs an unofficial after-hours open office on her company's empty fourteenth floor — Wednesdays 7-10, anyone with a career question, no notes."
+    series_description: "Iman has been at the company seven years and has watched too many talented Gen Z hires quit because no one would tell them how to ask for the next role. So she runs the Fourteenth Floor: Wednesdays from 7 to 10 p.m., she sits at a conference table near the south windows with a thermos of black tea, and anyone in the building can come in with one career question. No notes. No HR. Iman tells the truth. The first visitor is a 25-year-old data analyst who wants to know if the senior analyst role is reachable in 18 months. Iman tells her: yes, here is the actual list of skills that will be visible to the promo committee. The analyst leaves with a plan. Each volume is one visitor. A junior PM who is being given second-class projects because his manager doesn't believe in him. A senior engineer who is being underpaid and doesn't know it. A staff designer who has been doing the manager's job for free. No magic. Confessional graphic-novel register. The long arc: HR finds out about the Fourteenth Floor, and the company has to decide whether to formalize it or shut it down. Iman writes a letter to the CEO."
+    opening_5_volume_arc:
+      vol_1: "Wednesday 7:14 p.m. The data analyst. The promo-committee skill list. She gets the bump in nine months."
+      vol_2: "The junior PM. Iman tells him to ask for a different manager. He does. He gets her."
+      vol_3: "The underpaid engineer. Iman gives him the comp band. He negotiates. He gets paid."
+      vol_4: "The staff designer. Iman tells her to title-promotion-or-leave. She picks leave. She goes to a better company."
+      vol_5: "HR sends Iman an email. The CEO sends Iman an email. The Fourteenth Floor goes formal."
+    comp_titles: ["Fun Home (Bechdel)", "Persepolis", "The Bear (Tully)", "How to Be a Person in the World", "Severance (Ling Ma)"]
+    reader_promise: "Your career has a Fourteenth Floor. Wednesdays at 7. The PM there will tell you the truth."
+    marketing_angle: "Fun Home's confessional graphic-novel register applied to corporate-America after-hours career mentorship as a quiet form of labor solidarity."
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + post_corporate_recovery
+    audience: "Millennial 30-40 senior individual contributors and managers; secondary Gen Z 25-30 high-potential parallel"
+
+  - series_id: career_lift_workplace__en_US__office_yokai_at_three_pm
+    brand_id: career_lift_workplace
+    locale: en_US
+    persona_archetype: Millennial-adhd
+    daily_life_anchor: office_commute
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 33-year-old corporate office has a 3 p.m. yokai that only one employee, an Asian-American product designer, can see — a small grey creature that perches on whichever colleague is in the throes of imposter syndrome that afternoon. She learns the practice that lifts the creature off each one. The long arc: the company-wide creature is the largest, and it lives in the C-suite."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The 3 P.M. Yokai"
+    series_logline: "A 33-year-old product designer can see the small grey creature that perches on whichever colleague is mid-imposter-syndrome at 3 p.m. — and she learns the practice that lifts it off."
+    series_description: "Akiko is a senior product designer at a mid-size tech company. At 3:08 p.m. on her first day she sees, on the engineer two desks over, a small grey creature the size of a tabby cat, breathing slowly. The creature is perched on his shoulder. Nobody else sees it. By 3:42 the creature has hopped to a PM in the next pod. By 4:11 it is gone for the day. Akiko has been seeing yokai since she was eight. She has never seen this one. She watches it for a month. The creature picks whichever colleague is mid-imposter-syndrome that afternoon — the engineer who got pulled into a Staff-level review without warning, the PM who was told her roadmap was wrong, the designer who was passed over for a promo. The creature does not hurt them. It just sits. Akiko learns: a specific small practice — a kind sentence from a peer, a re-frame, a five-minute walk to the lobby — will lift the creature off. Each volume is one colleague. The long arc: there is a much larger creature, the size of a Saint Bernard, that lives in the C-suite, and Akiko has not yet decided what to do about it. Office-cozy. 3-p.m. fluorescent specific."
+    opening_5_volume_arc:
+      vol_1: "Day 1. The engineer. The creature. Akiko walks over with a coffee and a kind sentence. The creature lifts."
+      vol_2: "The PM and her roadmap. The re-frame. The creature lifts. The PM doesn't know."
+      vol_3: "The passed-over designer. Akiko sees the creature for three days. She brings a fourth-floor walk."
+      vol_4: "Akiko's own creature, glimpsed in a window reflection. She sits with it. She names it."
+      vol_5: "The C-suite Saint Bernard. The CEO sees Akiko looking. The CEO calls her into the office."
+    comp_titles: ["The Apothecary Diaries", "Natsume's Book of Friends", "Witch Hat Atelier", "Heartstopper", "Severance (Ling Ma)"]
+    reader_promise: "Your imposter syndrome has a small grey creature. Someone at the office can see it and knows the practice."
+    marketing_angle: "Natsume's Book of Friends register applied to corporate-American imposter syndrome as a literal office yokai."
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + named_and_seen
+    audience: "Millennial 30-40 mid-level knowledge workers; secondary Gen Z 26-30 first-promo parallel"
+
+  - series_id: career_lift_workplace__en_US__office_romance_after_the_promotion
+    brand_id: career_lift_workplace
+    locale: en_US
+    persona_archetype: Millennial-burnout
+    daily_life_anchor: office_commute
+    portal_mechanic: object
+    episodic_frame_per_volume: letter
+    magical_register: none
+    serial_engine: serial_diary
+    long_arc_spine: "Two co-workers — a 33-year-old engineering manager and a 31-year-old senior PM — get promoted on the same day and start dating that night. The series is a year of two competent careerist adults trying to be in love while both their imposter-syndrome years simultaneously close. No magic. Twelve months. 26 chapters."
+    volume_runway_target: 80
+    reading_platform_fit: graphic_novel
+    series_title: "After the Promotion"
+    series_logline: "Two co-workers get promoted on the same day and start dating that night — a year of two competent adults trying to be in love while both their imposter-syndrome decades close."
+    series_description: "Jia gets the engineering-manager promo on a Wednesday at 4:30 p.m. Sam gets the senior-PM promo at 4:42. They have been quietly attracted to each other for two years and would have done nothing about it except that the company-wide promo email goes out at 5:00 p.m. and they end up at the same wine bar at 5:30 by accident. They have been each other's most trusted peer. They are both terrified of the new jobs. They kiss on the way to the subway. They spend the night on Sam's couch talking and they do not sleep together. The series is a graphic-novel diary across one year: their first month dating while also doing their first months as new senior people; the first time Jia's report is also Sam's stakeholder; the first time they fight about work; the first time they decide together what to disclose to HR; the first time they consider whether one of them should leave the company. No magic. Slow. Specific. Romance for adults who lead teams. The long arc: the year closes with one of them taking a job at a different company, and they have to decide what their relationship is, separately from the workplace that birthed it."
+    opening_5_volume_arc:
+      vol_1: "The Wednesday. The promo emails. The wine bar. Sam's couch. The first month."
+      vol_2: "Months 2-4. Jia's report becomes Sam's stakeholder. The first work fight. The first resolution."
+      vol_3: "Months 5-7. The HR disclosure. The summer. Jia's parents visit."
+      vol_4: "Months 8-10. The first time one of them considers leaving. The other one votes for it. Then against."
+      vol_5: "Months 11-12. One of them takes the other job. They have a year-end conversation about what they are to each other now."
+    comp_titles: ["Fun Home (Bechdel)", "Heartstopper", "Honey Lemon Soda", "Days at the Morisaki Bookshop", "Persepolis"]
+    reader_promise: "Office romance has a competent-adult version where both people are terrified of their new jobs and in love anyway."
+    marketing_angle: "Heartstopper's tender register applied to two Millennial knowledge workers in their first year as senior people, dating each other through it."
+    genre_family: romance
+    emotional_engine: chosen_family + future_self_dialogue
+    audience: "Millennial 30-38 mid-career knowledge workers in or near new senior roles; secondary Gen Z 27-30 parallel"
+
+  - series_id: career_lift_workplace__en_US__seven_pm_layoff
+    brand_id: career_lift_workplace
+    locale: en_US
+    persona_archetype: Millennial-burnout
+    daily_life_anchor: late_night_economy
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: occult_cosmic
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 35-year-old former HR business partner can sense, twelve hours in advance, when a layoff is coming through her old company's Slack workspace; she runs a quiet anonymous DM channel that warns the right people to update their LinkedIn the night before. Each volume one save. The long arc: someone in leadership is tracking the leaks back to her."
+    volume_runway_target: 130
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Seven P.M. Whisper"
+    series_logline: "A former HR business partner senses layoffs twelve hours before they happen and runs an anonymous DM channel that gives the right employees one night to prepare — and someone in leadership is hunting the leak."
+    series_description: "Naila was an HR business partner for nine years and quit after one bad layoff. She has kept a guest-account in her old company's Slack workspace and at 7:14 p.m. on the night before a layoff she gets a specific feeling — a small cold spot at the back of her neck. She has learned to trust it. She runs an anonymous DM channel called *seven-p-m-whisper* and at 7:30 she sends one message to the employees she knows are at-risk: *Update your LinkedIn tonight. Pull your contracts off your work laptop tonight. The morning will be hard. You will be okay.* The first save is a 29-year-old engineer who has $11 in savings and a partner without health insurance; he gets the message at 7:31 and is offered a job at a better company on the second day. Each volume is one save. The horror register is not gore — it is the specific dread of corporate-America 9-to-9: the cold-spot at the back of the neck, the predator-app, the boardroom decision made over salads. The long arc: the new CHRO is tracking the leak, and Naila has to decide whether to disappear or to surface and make it formal. Office-horror. Slack-notification specific. Cold."
+    opening_5_volume_arc:
+      vol_1: "The cold-spot at 7:14. The engineer. The DM. The morning. The second-day offer."
+      vol_2: "A second layoff. A pregnant PM. Naila's message. The PM gets out two weeks before her water breaks."
+      vol_3: "The third save. A 55-year-old VP. The harder calibration of how to give an older worker dignity in the message."
+      vol_4: "The new CHRO. The pattern. The cold spot at the back of Naila's neck is now permanent."
+      vol_5: "The CHRO finds Naila. The conversation is at a coffee shop. The cold spot is reciprocal."
+    comp_titles: ["Severance (Ling Ma)", "The Apothecary Diaries", "Dandadan", "Witch Hat Atelier", "Convenience Store Woman"]
+    reader_promise: "Corporate-America has a dread. The dread has a whisper. The whisper will warn you the night before."
+    marketing_angle: "Dandadan's gentle-horror register applied to corporate-layoff dread, with a former-HR-BP whisper-network protagonist."
+    genre_family: horror
+    emotional_engine: competent_calm_specialist + post_corporate_recovery
+    audience: "Millennial 32-45 corporate-tenured knowledge workers who have survived 1-3 layoff rounds; Gen X parallel"
