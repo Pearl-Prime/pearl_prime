@@ -1,0 +1,207 @@
+# V1.2 EXEMPLAR — stillness_press × en_US × 5 series
+#
+# Status: REFERENCE TEMPLATE for Pearl_Writer hybrid wave (96-100 subagents,
+# each authoring 5 series for one brand × one locale).
+#
+# This file is the quality benchmark. Subagents must match this register,
+# field completeness, and prose density. See:
+# - artifacts/research/v1_2_genre_allocation_constraint_2026-05-12.md  (binding genre allocation)
+# - artifacts/research/manga_bestseller_magical_serial_framework_2026-05-12.md  (magical + serial framework, PR #1051)
+# - artifacts/research/manga_genz_genalpha_portal_framework_2026-05-13.md  (Gen Z/Alpha portal + persona, PR #1053)
+#
+# Brand: stillness_press (flagship · josei · primary_topic: anxiety; secondary: somatic_healing, sleep, grief, trauma_recovery)
+# Per-brand recommended register (from PR #1051 mapping): magical_register = supernatural_everyday; serial_engine = case_of_the_week
+# Persona mix this brand: Gen Z primary (3), Gen Alpha co (1), Millennial (1)
+# Genre distribution this brand (within Cluster A 25-series budget): 2 healing, 2 slice_of_life, 1 mystery_cozy
+
+series:
+
+  - series_id: stillness_press__en_US__late_night_seven_eleven
+    brand_id: stillness_press
+    locale: en_US
+    persona_archetype: "24yo overnight-shift convenience-store clerk in Long Beach, ESL second-gen Filipina, anxious-attached, finishing community college nursing prerequisites between customers, quiet, observant, carries a tin of mints she never opens"
+    daily_life_anchor: late_night_economy
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "What is the original anxiety, and can it be returned — and the mascot who teaches her to see anxiety-shapes, what does it want from her over the long years she works this shift?"
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Late-Night 7-Eleven of Quiet Things"
+    series_logline: "Each customer at the 2 a.m. counter arrives carrying their anxiety as a shape only the clerk can see — and the store somehow always has the right tiny product."
+    series_description: >
+      Marisol works the overnight shift at a 7-Eleven on Anaheim Street that never seems to run out of what
+      customers actually need. After her grandmother's death, she begins seeing thin flickering shapes following
+      each person who comes through the door — a curl of smoke around the trucker buying decaf, a wet feathered
+      thing perched on the shoulder of the high-schooler buying instant ramen at 3 a.m. The shapes are anxieties.
+      The store, somehow, always has the small correct thing: lavender-honey lozenges, a particular brand of
+      kombucha, a notebook with the right paper. Marisol doesn't fix anyone. She just notices, and stocks the
+      shelf one row deeper, and the customer leaves a little quieter than they came in. A small black-and-white
+      cat who calls itself the mascot of the store occasionally speaks to her in dreams. It's teaching her
+      something she's not ready to name. Each volume is one shift, one customer, one anxiety-shape released —
+      and one more page of Marisol's own long, careful return to herself.
+    opening_5_volume_arc:
+      - vol_1: "Introduces the store, Marisol, the mascot, and the first three anxiety-customers: a panicked father, a sleepless teen, an old man returning to the same aisle every night for a week. The mascot reveals that Marisol's grandmother worked this shift before her."
+      - vol_2: "A new clerk is hired for the second night. He cannot see the shapes — but he is good with customers, and Marisol begins to understand what the shapes do not need to be visible to be tended."
+      - vol_3: "A regular customer's shape begins to grow rather than shrink. Marisol learns that some anxieties are not meant to leave — they are meant to be carried with company."
+      - vol_4: "The mascot brings Marisol a memory of her grandmother's last shift. The store's mythology deepens: it has had a quiet clerk for at least eighty years."
+      - vol_5: "Marisol meets a customer whose shape is her own — a younger woman, alone, on her first overnight shift across town. Marisol stocks the shelf for her. A mini-resolution: she begins to believe she can do this work without losing herself in it."
+    comp_titles: ["Convenience Store Woman (novel, comp tone)", "Mushishi", "Natsume's Book of Friends", "Apothecary Diaries", "Aria"]
+    reader_promise: "Each chapter, one customer arrives with a quiet ache, and a small object on the shelf turns out to be exactly what they need."
+    marketing_angle: "Healing iyashikei meets the American late-night convenience economy. For Gen Z readers who work overnight shifts and recognize themselves in the fluorescent-lit register."
+    genre_family: healing
+    emotional_engine: quiet-competence-under-vigilance
+    audience: "Gen Z women 18-28, working-class & first-gen college, anxious-attached, drawn to slow contemplative manga; secondary: millennial women in service-industry roles"
+
+  - series_id: stillness_press__en_US__bullet_journal_of_tiny_hauntings
+    brand_id: stillness_press
+    locale: en_US
+    persona_archetype: "16yo Gen Alpha high-school sophomore in suburban Ohio, AP-overloaded perfectionist, lives on a journaling-community Discord, makes elaborate spreads with washi tape, can't sleep before 1 a.m. since middle school"
+    daily_life_anchor: journaling_community
+    portal_mechanic: letter
+    episodic_frame_per_volume: dream_visitor
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "Each unsent page in her journal calls a small ghost from the future — what is the journal trying to teach her about the woman she will become, and which of these ghosts is hers?"
+    volume_runway_target: 120
+    reading_platform_fit: webtoon_vertical
+    series_title: "Bullet Journal of Tiny Hauntings"
+    series_logline: "The unfinished spreads in her bullet journal start summoning small ghosts — each one a future version of someone she knows, leaving notes she's too young to understand."
+    series_description: >
+      Sam keeps a bullet journal because the act of color-coding her own anxieties has been the only thing
+      that lets her sleep. She is good at the spreads — the habit trackers, the gratitude logs, the mood
+      curves drawn in three shades of pencil. One night she writes a page she doesn't finish — a half-list of
+      apologies to her mother — and wakes up to find a small translucent person sitting on her desk,
+      reading it. The ghost is a future version of her mother, twenty-three years older, who has come back
+      through the unfinished page to leave a single sentence Sam will need to hear in eight years. The
+      hauntings continue. Each unfinished spread summons a ghost from the future life of someone close to
+      her — a teacher, a brother, the girl she has a crush on but cannot say so — and each ghost leaves a
+      small kind warning, a single line. Sam is not allowed to know what they mean. She just transcribes
+      them on a private spread at the back of the journal and waits for time to teach her.
+    opening_5_volume_arc:
+      - vol_1: "Sam discovers the haunting mechanic; the first three ghosts arrive (mother, brother, English teacher). She begins the private spread at the back of the book."
+      - vol_2: "A ghost arrives for a girl Sam doesn't know — a stranger from a future neighborhood. The journal is teaching Sam that the haunting is not limited to people she has already met."
+      - vol_3: "A ghost refuses to leave. It is Sam's own future self at 22, exhausted, asking for a message Sam doesn't know how to send back."
+      - vol_4: "Sam meets the journaling-community founder online — a woman in her thirties whose own bullet journal has been quietly haunted for ten years. They begin to compare notes."
+      - vol_5: "Sam realizes she has been receiving the journal's lessons but not yet writing them. The mid-arc reveal: the journal is not a window. It is a practice — and the ghosts come because she is willing to be visited."
+    comp_titles: ["Komi Can't Communicate", "Sweat and Soap", "Hi Score Girl", "A Sign of Affection"]
+    reader_promise: "Each chapter ends with one small kind warning from a future version of someone she loves, and Sam learns to carry it without needing to understand it yet."
+    marketing_angle: "For the AP-overloaded Gen Alpha journaling-community kids who already know their phones are part of how they manage themselves. Therapeutic without being condescending; mystical without being woo."
+    genre_family: slice_of_life
+    emotional_engine: hopeful-self-trust
+    audience: "Gen Alpha 13-17, journaling-community & studyblr-adjacent, neurodivergent-friendly; secondary: Gen Z college first-years"
+
+  - series_id: stillness_press__en_US__she_who_counts_the_doors
+    brand_id: stillness_press
+    locale: en_US
+    persona_archetype: "27yo Korean-American architecture-firm intern in Brooklyn, panic-disorder-diagnosed since college, walks everywhere to manage the symptoms, has memorized every door in her commute corridor"
+    daily_life_anchor: school_commute
+    portal_mechanic: door
+    episodic_frame_per_volume: locale
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "Each door she's memorized opens, one shift at a time, into a small parallel room where a different version of herself learned to be safe — how many rooms does it take, and who is keeping count?"
+    volume_runway_target: 100
+    reading_platform_fit: both
+    series_title: "She Who Counts the Doors"
+    series_logline: "A panic-disorder architect has memorized 412 doors on her Brooklyn commute — when one of them lets her into a parallel room where a calmer version of herself already lives, she begins collecting them."
+    series_description: >
+      Ji-Yun has counted doors since college. It is a thing her therapist taught her — name the doors,
+      they are not going anywhere, they will be here when you pass them again. She has 412 doors memorized
+      on her walk between the L stop at Bedford and the architecture firm where she interns in Williamsburg.
+      One Tuesday in October, door 117 — a brownstone basement with a single brass knob — opens for her. Inside
+      is a small bright room she has never seen, with a woman in it who looks like her in five years. The
+      woman is calm. The woman is reading. The woman says: come in when you need to. The next week, door 41
+      opens. Ji-Yun begins to collect them. Each parallel room is one version of herself who learned to be
+      safe in one specific way — through art, through movement, through other people, through the slow
+      patient practice of doing nothing for a whole afternoon. None of them are her future. They are her
+      possible. The companion roster grows. So does her ability to walk past door 117 without going in.
+    opening_5_volume_arc:
+      - vol_1: "Door 117 opens. The reading-woman appears. Ji-Yun begins to keep a small map of the doors that have opened."
+      - vol_2: "Doors 41 (art-woman), 280 (movement-woman), 339 (community-woman) open in sequence. Each room teaches one small ritual."
+      - vol_3: "Door 412 — the last door before her office — opens. The version of herself inside is a child. The book shifts register: the rooms also remember her past."
+      - vol_4: "A new door appears on her commute that wasn't there before. Door 413. Inside is an empty room. Ji-Yun is being asked to make one."
+      - vol_5: "The mid-arc resolution: Ji-Yun walks past door 117 without going in for the first time. The reading-woman waves through the window. The map now has 413 entries. The first arc closes; the long question opens — who is keeping count, and why this many?"
+    comp_titles: ["The Apothecary Diaries", "Frieren: Beyond Journey's End", "Mononoke", "Aria"]
+    reader_promise: "Each chapter, one door opens, and inside is a small calm version of yourself you have not yet learned to be."
+    marketing_angle: "Magical realism for the panic-disorder generation. Architecture-school aesthetic, A24-quiet, deeply New York. For readers who walk to manage themselves."
+    genre_family: healing
+    emotional_engine: slow-self-recognition
+    audience: "Gen Z & elder-Gen-Z women 22-30, urban professionals with diagnosed anxiety/panic, design-school-adjacent; secondary: AAPI women in creative-industry roles"
+
+  - series_id: stillness_press__en_US__anxiety_has_a_cat
+    brand_id: stillness_press
+    locale: en_US
+    persona_archetype: "29yo white queer non-binary remote-work copywriter in Portland, autistic, recently adopted an old shelter cat that nobody else wanted, watches their anxiety dissolve and reconstitute on a weekly cycle"
+    daily_life_anchor: neurodivergent
+    portal_mechanic: mascot
+    episodic_frame_per_volume: season
+    magical_register: supernatural_everyday
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "The cat is not a normal cat — it is the embodiment of their anxiety, and as the cat ages, the anxiety is teaching them how to be old together; what does it mean to keep a cat who is also your fear?"
+    volume_runway_target: 80
+    reading_platform_fit: webtoon_vertical
+    series_title: "Anxiety Has a Cat"
+    series_logline: "A queer autistic remote worker adopts an old shelter cat that turns out to be the literal embodiment of their anxiety — and as the cat ages, the anxiety is learning to be carried."
+    series_description: >
+      Wren has had generalized anxiety for as long as they can remember. They also, as of three weeks ago,
+      have a cat. Bartholomew is twelve, mostly white, lopsided in the face, and was at the shelter for two
+      years before Wren walked in. Bartholomew does not behave like a cat. He has opinions about the lighting.
+      He sits on Wren's keyboard at the exact moment they are about to spiral. He knows the difference between
+      the bad anxious days and the regular anxious days. By the end of the first month, Wren begins to suspect
+      something they cannot quite admit: Bartholomew is the anxiety. The anxiety has a body now. It eats. It
+      sleeps in the sun. It needs flea medicine. It will, eventually, die. Wren is being asked to do the
+      strangest thing they have ever done — to keep their own fear alive, and warm, and well, for the rest of
+      its short life. The series is structured around the seasons of Bartholomew's old age. Each volume is a
+      different season, a different small reckoning. The anxiety, contained in a body, becomes possible to love.
+    opening_5_volume_arc:
+      - vol_1: "Autumn. Wren brings Bartholomew home. The realization slowly forms. Wren tells no one."
+      - vol_2: "Winter. Bartholomew falls ill. Wren learns that the anxiety, when sick, is more bearable than the anxiety when active. The vet costs $1,400. Wren pays it without flinching."
+      - vol_3: "Spring. A neighbor — also autistic, also queer — recognizes what Bartholomew is. They have one too, a small brown bird. They begin to compare notes."
+      - vol_4: "Summer. Bartholomew goes deaf. Wren has to adjust everything. They learn the texture of accommodating an anxiety that is no longer fully responsive."
+      - vol_5: "Autumn returns. Bartholomew has one year left, the vet says. Wren writes their first essay about this. The book opens out — the second arc will follow that last year, season by season."
+    comp_titles: ["A Man and His Cat", "With the Light", "Heartstopper", "Witch Hat Atelier"]
+    reader_promise: "Each chapter, the anxiety does one small bodily thing — eats, sleeps, asks to be brushed — and is loved exactly as it is."
+    marketing_angle: "For the neurodivergent queer Gen Z who already know their anxiety is part of them. About the long slow grace of carrying it well."
+    genre_family: slice_of_life
+    emotional_engine: tender-acceptance
+    audience: "Gen Z & queer Millennials 22-34, neurodivergent (especially autistic), pet-people, A24-coded reading taste; secondary: anyone caregiving for an elderly animal"
+
+  - series_id: stillness_press__en_US__the_apothecarys_daughter_on_late_shift
+    brand_id: stillness_press
+    locale: en_US
+    persona_archetype: "22yo Latina pharmacy-tech apprentice in El Paso, daughter of a curandera, working overnight shifts at a 24-hour pharmacy on the highway, dual-trained in clinical and folk practice"
+    daily_life_anchor: late_night_economy
+    portal_mechanic: recipe
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: mystery_box
+    long_arc_spine: "The customers who come to the overnight pharmacy with strange symptoms are carrying inherited family wounds — and someone is leaving recipes from her dead grandmother in the back room, one per week. Who?"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Apothecary's Daughter on Late Shift"
+    series_logline: "An apprentice pharmacy tech who also trained as a folk healer works the overnight shift on the El Paso highway — and the customers' symptoms aren't only theirs."
+    series_description: >
+      Aracely is two months into her pharmacy-tech apprenticeship at a 24-hour Walgreens off I-10 when her
+      grandmother dies. Her grandmother was a curandera — a folk healer — and Aracely is the only grandchild
+      she trained in either tradition. The clinical work is calm; Aracely is good at it. The customers, though,
+      keep arriving with symptoms that don't fit. A truck driver with a rash shaped like the state of Chihuahua.
+      A teenage girl who sleepwalks in only one specific direction. A businessman whose tinnitus plays a song
+      that turns out to be his great-grandmother's lullaby. Aracely begins to understand that some symptoms are
+      inherited — that grief, and shame, and unfinished family business can wear the body like a uniform.
+      She is also finding recipes in the back room. Handwritten, in her grandmother's hand. One per week.
+      Each one is for a symptom she has not yet seen. The recipes know what is coming. The question becomes:
+      who is leaving them, and is her grandmother still working a shift somewhere Aracely cannot yet visit?
+    opening_5_volume_arc:
+      - vol_1: "Grandmother's funeral. First three highway customers with strange symptoms. First recipe appears in the back-room cabinet."
+      - vol_2: "Aracely begins keeping a private notebook — clinical diagnosis on the left, folk diagnosis on the right. Her pharmacist supervisor notices and does not comment."
+      - vol_3: "A symptom arrives that the recipe does not solve. Aracely has to improvise. She succeeds. The improvisation later appears in her grandmother's handwriting, two weeks before the date."
+      - vol_4: "Aracely's mother — who left the folk practice decades ago — visits and recognizes the back room. The mother knows more than she has said about who might be leaving the recipes."
+      - vol_5: "The first arc closes with one symptom Aracely cannot heal: her own. The mystery deepens — and she begins, for the first time, to study herself."
+    comp_titles: ["The Apothecary Diaries", "Mushishi", "Mononoke", "Like Water for Chocolate (novel comp)", "Heavenly Delusion"]
+    reader_promise: "Each chapter, one customer arrives with a symptom that is also a memory, and Aracely finds the recipe — or learns to write one."
+    marketing_angle: "Curandera tradition meets clinical pharmacy. For Latina Gen Z readers who hold both lineages, and anyone who has watched a grandmother's knowledge almost not get carried forward."
+    genre_family: mystery_cozy
+    emotional_engine: inheritance-and-vocation
+    audience: "Gen Z & elder-Gen-Z Latina/Hispanic women 18-28, pharmacy/nursing/medical-track, second-gen US; secondary: anyone in clinical professions with a folk-tradition family"

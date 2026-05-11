@@ -1,0 +1,761 @@
+# V1.2 Manga Series Themes — en_US
+#
+# Authority: V1.2 framework = PR #1051 (magical_register + serial_engine + long_arc_spine
+# + opening_5_volume_arc) AND PR #1053 (Gen Z / Gen Alpha portal-anchor pattern with
+# persona_archetype + daily_life_anchor + portal_mechanic + episodic_frame_per_volume
+# + volume_runway_target + reading_platform_fit).
+#
+# Source briefs (read both before editing this file):
+#   - artifacts/research/manga_bestseller_magical_serial_framework_2026-05-12.md  (PR #1051)
+#   - artifacts/research/manga_genz_genalpha_portal_framework_2026-05-13.md       (PR #1053)
+#
+# Scope (this file):
+#   - locale:           en_US
+#   - brands:           25  (V1.1 brand allocation per artifacts/qa/worldwide_catalog_37_brand_allocation_plan_2026-05-11.tsv)
+#   - series per brand: 5
+#   - total series:     125
+#
+# Sibling files (other locales authored separately):
+#   - artifacts/marketing/v1_2_themes_ja_JP.yaml   (pending)
+#   - artifacts/marketing/v1_2_themes_zh_TW.yaml   (pending)
+#   - artifacts/marketing/v1_2_themes_zh_CN.yaml   (pending)
+#
+# Voice register: A24/Ghibli for Gen Z. Clinical-adjacent vocabulary that Gen Z arrives
+# with (regulating, nervous system, RSD, executive function). Specific sensory daily-life
+# detail over abstract wellness noun. Chosen-family, queerness, neurodivergence as default
+# not theme. No TikTok lingo (rizz, no cap, fr fr) — dates within 18 months.
+#
+# Schema (per series, V1.2):
+#   series_id, brand_id, locale, persona_archetype, daily_life_anchor, portal_mechanic,
+#   episodic_frame_per_volume, magical_register, serial_engine, long_arc_spine,
+#   volume_runway_target, reading_platform_fit, series_title, series_logline,
+#   series_description, opening_5_volume_arc (vol_1..vol_5), comp_titles, reader_promise,
+#   marketing_angle, genre_family, emotional_engine, audience.
+
+schema_version: "1.2"
+locale: en_US
+total_series_target: 125
+total_brands_target: 25
+series_per_brand_target: 5
+
+series:
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 01 / 25 — stillness_press (flagship · josei · anxiety)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: stillness_press__en_US__late_night_seven_eleven_quiet_things
+    brand_id: stillness_press
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F4_retail_service
+    portal_mechanic: P_object
+    episodic_frame_per_volume: E_customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "Each anxious customer who walks in at 3 a.m. carries a small fluorescent creature only the clerk can see; she stocks the right product AND the right pocket-ritual, and slowly learns whose creatures these were before they were anyone's."
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "The 3 A.M. Aisle"
+    series_logline: "A Gen Z 7-Eleven clerk sees the small fluorescent creatures riding each anxious customer's shoulder; she stocks the shelf that fits."
+    series_description: "Mio works the graveyard shift at the only 7-Eleven open in her neighborhood. The fluorescent lights buzz on a frequency she's stopped hearing. The first customer of the night is a paralegal who can't sleep, and Mio can see the small flickering thing perched on his shoulder. She rings up his decaf, his lavender candy, and slips him a folded square of paper with one sentence on it — the thing to say to himself when the panic comes back. The creature stays. He leaves. Each night brings a new customer and a new creature: rent-doom, dissertation-spiral, the ex's new partner. Mio doesn't fight them. She finds the shelf-item and the pocket-ritual that lets the customer go home carrying it a little better. A24-quiet. Ghibli-warm. Convenience-store-fluorescent."
+    opening_5_volume_arc:
+      vol_1: "First customer: the paralegal whose creature is the size of a moth and won't stop flapping. Decaf. Lavender. A sentence about the body coming home."
+      vol_2: "The art student whose creature is invisible until she opens her phone — comparison-anxiety as a small mirrored thing."
+      vol_3: "The night-shift nurse whose creature is going dark from being held too long. Mio learns she can stock for grief-fatigue too."
+      vol_4: "The first repeat customer. The paralegal returns. His creature is smaller. Mio sees one perched on her own shoulder for the first time."
+      vol_5: "The manager-on-call review. Mio is told she's too slow on inventory. The store's own creature — corporate-burnout-yokai — is named. Mio decides to stay."
+    comp_titles: ["Convenience Store Woman (Sayaka Murata)", "The Apothecary Diaries", "After the Quake (Murakami)", "Tokyo Ueno Station", "Sweet Bean Paste"]
+    reader_promise: "Your anxiety has a shape and a clerk who knows your shelf."
+    marketing_angle: "If Convenience Store Woman had a wellness ghost story inside it — and the ghost was kind."
+    genre_family: supernatural_everyday_wellness_episodic
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "Gen Z 23–27 first-job urban knowledge workers with named-and-claimed anxiety"
+
+  - series_id: stillness_press__en_US__girl_with_pocket_ledger
+    brand_id: stillness_press
+    locale: en_US
+    persona_archetype: GZ-uni
+    daily_life_anchor: F2_content_creator
+    portal_mechanic: P_object
+    episodic_frame_per_volume: E_song_recipe_case
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A pocket ledger inherited from a dead grandmother shows the anxious thought of any person it touches; each volume the protagonist learns one practice to give the thought back."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Pocket Ledger"
+    series_logline: "A university student inherits a small leather notebook that writes down what the nearest person is afraid of — and slowly learns to give the fear back."
+    series_description: "When Iris's grandmother dies she inherits a notebook the size of a deck of cards and a single instruction: keep it close, never read it on the bus. The first time she opens it on a bus she sees her seatmate's panic written in her grandmother's handwriting — a girl who is failing her chemistry exam tomorrow. Iris cannot stop the writing, but she can answer it. Each volume she learns one small practice — a breath, a 5-4-3-2-1 grounding, a re-frame, a permission — that, when said aloud, lets the page erase itself and the fear leave the seatmate's body. The ledger fills, then empties, then fills. The mystery: the ledger has a final page that has been blank Iris's whole life. Whose name is going to appear on it? Slow-burn campus iyashikei. Pomeranian roommate. A library that closes at midnight."
+    opening_5_volume_arc:
+      vol_1: "The girl on the bus. Chemistry exam. The breath. The page erases."
+      vol_2: "The bus driver. A father-of-three terrified of being laid off. A different practice. The ledger fills, then empties."
+      vol_3: "Iris's roommate, Pomeranian-loud. The ledger writes itself without being opened. RSD made visible."
+      vol_4: "A stranger Iris cannot place. The fear is grief — for someone Iris doesn't know yet."
+      vol_5: "The grandmother's handwriting changes. The first hint that the ledger has been writing back."
+    comp_titles: ["The Apothecary Diaries", "Frieren: Beyond Journey's End", "The Bookbinder's Notebook (Sōsuke Natsukawa)", "Before the Coffee Gets Cold", "What You Are Looking For Is in the Library"]
+    reader_promise: "Every fear has a practice. The practice fits in a notebook."
+    marketing_angle: "A24-college slow-burn meets Frieren's grief-permission via a tiny inherited notebook."
+    genre_family: magical_realism_wellness_episodic
+    emotional_engine: inherited_wisdom + competent_calm_specialist
+    audience: "Gen Z 18–22 university students with mental-health vocabulary and a dead grandmother"
+
+  - series_id: stillness_press__en_US__roommate_who_can_see_my_anxiety
+    brand_id: stillness_press
+    locale: en_US
+    persona_archetype: GZ-queer
+    daily_life_anchor: F1_app_social
+    portal_mechanic: P_mascot
+    episodic_frame_per_volume: E_customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "A queer 24-year-old's anxiety manifests as a small house-yokai only her new roommate can see; the roommate is a witch-of-the-mundane who introduces the protagonist to a slowly-growing roster of similarly-yokai-burdened friends."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Roommate Who Can See My Anxiety"
+    series_logline: "Asha moves in with a stranger from a Discord listing and discovers the stranger is a witch-of-the-mundane who can see the small grey creature Asha has lived with since age fourteen."
+    series_description: "Asha is a 24-year-old non-binary illustrator who has been managing the small grey creature since high school. The creature follows them everywhere — into showers, onto buses, into bed. They have never told anyone. The new roommate, Nour, a queer Lebanese-American forensic accountant who knits, looks up from the cereal box on day three and says, casually, 'Hi, little friend.' Each volume Nour introduces Asha to one more friend whose creature she can also see — a transmasc barista with an octopus on his back, a deaf grad student with a tiny crow in her hair, a polyamorous polyglot with three small companions. The roster grows. The creatures soften. The long arc: who taught Nour to see them, and why is Nour's own creature the largest of all? Queerness, neurodivergence, and intergenerational trauma are baseline; the case-of-the-week is not coming-out but coming-into."
+    opening_5_volume_arc:
+      vol_1: "Move-in day. The cereal box conversation. Asha cries in the bathroom in relief, not shame."
+      vol_2: "The transmasc barista. The octopus on his back is named. Coffee shop becomes a third-place."
+      vol_3: "The deaf grad student. The crow in her hair speaks ASL. The roster is four."
+      vol_4: "Asha's family Zoom call. The creature triples in size on screen. Nour stays in frame."
+      vol_5: "Nour's own creature, glimpsed once at 2 a.m. in the kitchen, taller than Nour. The mystery opens."
+    comp_titles: ["Heartstopper", "Our Dreams at Dusk (Shimanami Tasogare)", "I Think Our Son Is Gay", "The Bride Was a Boy", "Witch Hat Atelier"]
+    reader_promise: "Your anxiety is real, it has a shape, and your people see it and stay."
+    marketing_angle: "Heartstopper's chosen-family register applied to clinical-adjacent Gen Z anxiety, with a witch-of-the-mundane lead."
+    genre_family: supernatural_everyday_queer_chosen_family
+    emotional_engine: chosen_family + named_and_seen
+    audience: "Gen Z 22–28 queer and neurodivergent urban creatives, mental-health-literate"
+
+  - series_id: stillness_press__en_US__last_panic_attack_of_yui_ito
+    brand_id: stillness_press
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F3_transit_commute
+    portal_mechanic: P_transit
+    episodic_frame_per_volume: E_locale
+    magical_register: supernatural_everyday
+    serial_engine: location_anthology
+    long_arc_spine: "A 26-year-old's last panic attack stranded her on a subway platform that runs one stop further than the map shows; each volume she finds a new station that exists only when someone on the line is mid-attack — and helps the person there step off."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "One Stop Further"
+    series_logline: "Yui Ito had her last panic attack on the F train and discovered a station that isn't on any map — and that she can come back to it whenever someone else needs it."
+    series_description: "Yui is 26 and had her first panic attack in college, her worst at 23, her last on the F train at 2:11 a.m. She got off one stop further than her usual exit and the station was wrong: tiled in a color she had never seen, lit by a moon-shaped bulb, manned by a clerk who handed her a paper cup of warm barley tea and said, 'You can come back here whenever.' She did not believe it. The next time someone on her line had a visible panic attack she rode past her stop and the moon-station opened. Each volume she finds a new in-between station on a new line in a new city — the F, the Yamanote, the London Northern, the Taipei Brown, the LA Metro Gold. Each station is staffed by someone who once stepped off there. Each volume she helps one person step off. The long arc is who built the line, and what the last station looks like."
+    opening_5_volume_arc:
+      vol_1: "The F train. The first return. A teenage boy mid-attack. Barley tea. The first sentence: 'You can come back here whenever.'"
+      vol_2: "The Yamanote. A salaryman on the Sunday-night-train. The station is named. Yui meets the clerk who handed her the cup."
+      vol_3: "The London Northern. A grad student mid-thesis. Yui learns the stations are also exits — you can stay if you want."
+      vol_4: "The Taipei Brown. A creator influencer mid-collab-meltdown. Yui's first multi-person case."
+      vol_5: "The LA Metro Gold. Yui's own old roommate, mid-attack, recognizes Yui. The personal stakes open."
+    comp_titles: ["Spirited Away", "The Midnight Library", "Frieren", "Before the Coffee Gets Cold", "After Dark (Murakami)"]
+    reader_promise: "The worst night had a door, and you can come back through it for someone else."
+    marketing_angle: "Spirited Away on the subway, for the generation that names panic out loud."
+    genre_family: supernatural_everyday_transit
+    emotional_engine: paying_it_forward + competent_calm_specialist
+    audience: "Gen Z 24–29 transit-city first-job knowledge workers"
+
+  - series_id: stillness_press__en_US__sunday_apothecary_pocket_rituals
+    brand_id: stillness_press
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F4_retail_service
+    portal_mechanic: P_object
+    episodic_frame_per_volume: E_song_recipe_case
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 25-year-old runs a Sunday-only apothecary shop where each anxious customer leaves with one tiny ritual — a folded note, a smoked tea, a knotted thread — and the protagonist slowly accumulates the master ritual that calmed her own grandmother fifty years ago."
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Sunday Apothecary"
+    series_logline: "Open Sundays only. Each customer leaves with one tiny ritual. Each ritual was once someone else's, and someday will be someone else's."
+    series_description: "Reni inherited a single key and a single instruction: the shop opens Sundays only, between 11 and 5. The shop is the size of a walk-in closet, on the second floor of a converted brownstone in Brooklyn, and the inventory looks like nothing — a jar of folded notes, a small drawer of smoked tea leaves, a tray of knotted threads. The customers find their way. Each Sunday Reni listens, asks one question, and reaches for one item. The customer leaves with a pocket-ritual they can do in 30 seconds anywhere — at a desk, on a train, in a bathroom stall. The shop's stock replenishes only when a customer returns and donates back the ritual that worked, slightly altered. The long arc: Reni's grandmother — the original keeper — wrote down one ritual she never gave to anyone. It is folded in the back of the cash drawer. The book Reni is, slowly, becoming."
+    opening_5_volume_arc:
+      vol_1: "First Sunday open. A woman in her 50s. A folded note. The note that calmed her father in 1982."
+      vol_2: "A college freshman. A smoked tea. The protocol: brew, smell, do not drink. The ritual leaves with her."
+      vol_3: "A high-school teacher in a school shooting drill aftermath. A knotted thread. The thread is named."
+      vol_4: "First return-customer. The woman from vol_1 brings back the note, altered. The shop's inventory grows."
+      vol_5: "Reni opens the cash drawer for closing. The grandmother's folded note is visible for the first time, but not yet read."
+    comp_titles: ["The Apothecary Diaries", "Sweet Bean Paste", "The Cat Who Saved Books", "Days at the Morisaki Bookshop", "The Travelling Cat Chronicles"]
+    reader_promise: "Every Sunday, one small thing you can put in your pocket and use Monday."
+    marketing_angle: "The Apothecary Diaries reframed for Gen Z urban wellness — one pocket-ritual at a time."
+    genre_family: magical_realism_wellness_episodic
+    emotional_engine: competent_calm_specialist + inherited_wisdom
+    audience: "Gen Z 24–29 urban Gen Z wellness-curious first-job"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 02 / 25 — cognitive_clarity (flagship · seinen · overthinking)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: cognitive_clarity__en_US__doom_scroll_rescue_agency
+    brand_id: cognitive_clarity
+    locale: en_US
+    persona_archetype: GZ-uni
+    daily_life_anchor: F1_app_social
+    portal_mechanic: P_app
+    episodic_frame_per_volume: E_customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 21-year-old CS major discovers an anti-doom-scroll app that costs her 12 minutes of her life every time she opens it for someone else — and each customer's thought-loop is named, mapped, and gently exited."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "Doom-Scroll Rescue Agency"
+    series_logline: "Open the app, scroll once, and you'll see the actual thought your friend is stuck on. Helping costs you 12 minutes of your life. Use sparingly."
+    series_description: "Vee is a junior CS major with an honors thesis and a 4 a.m. doom-scroll habit she has named and is failing to manage. She finds the app by accident — a notification with no source. The app shows one thing: the actual thought-loop the nearest friend is stuck on, rendered as a small visible animal that orbits their head. Vee can intervene. Each intervention costs her 12 minutes of her own life — measured, accurate, deducted from the back end. The first volume she pays it gladly. By volume three she is keeping a ledger. Each volume is one rescue: an art-school friend's comparison-loop (a small mirrored mouse), a roommate's catastrophizing-spiral (a snake that ties itself into knots), a TA's imposter-thought (a chameleon that turns the color of whoever she's standing next to). The long arc: the app was built by someone. The 12 minutes are going somewhere. Vee's own thought-loop has been growing this whole time."
+    opening_5_volume_arc:
+      vol_1: "The notification. The mirrored mouse. Vee's first 12 minutes."
+      vol_2: "The snake. The roommate. Vee's ledger begins."
+      vol_3: "The chameleon. The TA. Vee notices her own loop has grown."
+      vol_4: "First repeat-customer. The art-school friend asks for it. Vee is asked to stop. She doesn't."
+      vol_5: "The app's developer leaves a comment. The 12 minutes are going TO someone."
+    comp_titles: ["Solo Leveling", "The Apothecary Diaries", "Death Note (early acts, structure)", "Eden of the East", "Sayonara Football"]
+    reader_promise: "Your runaway thought has a shape, a name, and a way out."
+    marketing_angle: "Death Note's escalating-cost structure applied to mental-health intervention — for the generation that names rumination out loud."
+    genre_family: magical_realism_thriller_wellness
+    emotional_engine: escalating_cost + competent_calm_specialist
+    audience: "Gen Z 18–22 university overthinkers, CS / honors-track, mental-health-literate"
+
+  - series_id: cognitive_clarity__en_US__animal_in_the_office
+    brand_id: cognitive_clarity
+    locale: en_US
+    persona_archetype: GZ-neurodiv
+    daily_life_anchor: F1_app_social
+    portal_mechanic: P_mascot
+    episodic_frame_per_volume: E_customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "An ADHD junior data scientist sees every distraction in her open-plan office as a small animal — a fox at the coffee machine, an octopus around her monitor — and each volume she befriends one until it stops interrupting."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Animal in the Office"
+    series_logline: "Kiri can see the small fox at the coffee machine, the octopus on her monitor, the magpie in the Slack channel — and she's learning to feed each one so it stops interrupting her."
+    series_description: "Kiri is 25, two years post-undergrad, three months into a junior data-science role at a mid-sized company in Toronto. She has been ADHD-diagnosed since 19 and has tried four medications. The animals appeared in week two of the new job. They are not hallucinations — she can will herself to ignore them — but she can also see them clearly: a small red fox that lives at the coffee machine, a translucent octopus that wraps her monitor cables, a magpie that perches on the Slack icon. Each volume she befriends one. The trick, she discovers, is not to chase them off but to ask what they want, give it once, and watch them quiet down. Volume four: she discovers her CTO can also see them. The long arc: where did the animals come from, and why does Kiri's own animal — never named, never quite seen — get larger every time she ignores it?"
+    opening_5_volume_arc:
+      vol_1: "The fox at the coffee machine. Kiri brings it sugar. It quiets."
+      vol_2: "The octopus on the monitor. Kiri unplugs one cable. It re-coils on her wrist, smaller."
+      vol_3: "The magpie. Slack. Kiri mutes one channel. The magpie sleeps."
+      vol_4: "The CTO. He has a wolf. He has been managing it for 30 years. Mentorship begins."
+      vol_5: "Kiri glimpses her own animal in the bathroom mirror. It is the size of a deer. The name has not arrived."
+    comp_titles: ["A Man and His Cat", "The Apothecary Diaries", "Skip and Loafer", "Recovery of an MMO Junkie", "Wotakoi: Love is Hard for Otaku"]
+    reader_promise: "Your distraction is an animal, and animals can be befriended."
+    marketing_angle: "ADHD-literate workplace iyashikei — Skip and Loafer for the diagnosed-and-claimed Gen Z."
+    genre_family: magical_realism_workplace_neurodivergent
+    emotional_engine: named_and_seen + competent_calm_specialist
+    audience: "Gen Z 24–28 ADHD/neurodivergent first-job knowledge workers"
+
+  - series_id: cognitive_clarity__en_US__subtraction_journal
+    brand_id: cognitive_clarity
+    locale: en_US
+    persona_archetype: GZ-uni
+    daily_life_anchor: F2_content_creator
+    portal_mechanic: P_object
+    episodic_frame_per_volume: E_song_recipe_case
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A bullet-journal influencer's notebook starts erasing one habit per page; each volume she subtracts one cognitive habit and watches what she becomes underneath."
+    volume_runway_target: 120
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Subtraction Journal"
+    series_logline: "Maya's bullet journal stopped letting her add to it. Each page lets her subtract one habit instead — and what's left turns out to be the actual person."
+    series_description: "Maya, 22, is a bullet-journal-lifestyle creator with 240k followers and four years of color-coded productivity videos. The day she opens her new Leuchtturm1917, the first page is already written in her handwriting: a single instruction — 'subtract one.' She writes the habit she most wants to drop: doom-scroll before sleep. The page glows once and erases. The habit is gone. The next page: subtract one. Each volume she names one cognitive habit — checking email before breakfast, comparing in private, planning four steps ahead, narrating her life as content — and lets the journal take it. The followers notice. The content shifts. The long arc: what is the asymptotic minimum self? Is there a page she shouldn't turn? And whose handwriting was on page one?"
+    opening_5_volume_arc:
+      vol_1: "Page one. Doom-scroll. The journal erases. Maya sleeps."
+      vol_2: "Email before breakfast. The journal erases. Maya tastes oatmeal for the first time in a year."
+      vol_3: "Comparing in private. The journal erases. Maya posts the worst piece of content of her career, and it lands."
+      vol_4: "Planning four steps ahead. The journal erases. The followers riot."
+      vol_5: "Narrating her life as content. The journal erases. The creator is gone. The person remains."
+    comp_titles: ["The Apothecary Diaries", "What You Are Looking For Is in the Library", "Minimal Mind (Marie Kondō's tonal cousin)", "Witch Hat Atelier", "The Library at Mount Char (atmosphere)"]
+    reader_promise: "What's underneath the optimization? Find out one habit at a time."
+    marketing_angle: "Marie Kondō meets Frieren — for the bullet-journal generation that is starting to suspect it has been performing."
+    genre_family: magical_realism_creator_economy
+    emotional_engine: subtraction + identity_dissolution
+    audience: "Gen Z 19–25 creator-economy bullet-journal optimizers"
+
+  - series_id: cognitive_clarity__en_US__five_minute_rule_oracle
+    brand_id: cognitive_clarity
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F1_app_social
+    portal_mechanic: P_mascot
+    episodic_frame_per_volume: E_customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "A 26-year-old product manager keeps finding the same small yokai-of-decision-paralysis perched on different coworkers' shoulders; each volume she helps one make the choice — and the yokai joins her own slowly-growing roster of advisors."
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "Five Minutes, Please"
+    series_logline: "Reya's coworkers can't make decisions, and she can see why — a small yokai whispers every catastrophe in their ear. She has five minutes. Use them well."
+    series_description: "Reya is a 26-year-old product manager at a mid-stage Series B startup in Austin. She is good at her job because she can see what no one else can: each coworker mid-decision has a small grey yokai perched on the non-dominant shoulder, whispering every catastrophe outcome. Reya, in five-minute one-on-ones, names the catastrophe the yokai is whispering, lets the coworker hear it, and watches the coworker actually decide. The yokai do not leave when satisfied — they migrate to Reya's office and join a slowly-growing roster of advisors who help her see her own decisions. Volume eight: there are seven yokai in her office plant. Volume twelve: her CEO asks her into his office and his yokai is the size of a desk. The long arc: the yokai are mapping something. They are not just observers."
+    opening_5_volume_arc:
+      vol_1: "First five-minute meeting. The designer's yokai is named. The decision is made."
+      vol_2: "The PM's yokai. A different shape. Same five-minute rhythm."
+      vol_3: "Engineering manager. The yokai is large. The conversation runs over."
+      vol_4: "The first yokai migrates to Reya's plant. The roster begins."
+      vol_5: "The CEO's office. The desk-sized yokai. Reya's own five-minute clock starts."
+    comp_titles: ["The Apothecary Diaries", "Skip and Loafer", "Wotakoi", "Mob Psycho 100 (workplace branch)", "Aggretsuko"]
+    reader_promise: "Your decision has a shape, and a five-minute conversation that fits it."
+    marketing_angle: "Aggretsuko's office-yokai register applied to Gen Z product-management — competent specialist + chosen-coworker family."
+    genre_family: supernatural_everyday_workplace
+    emotional_engine: competent_calm_specialist + companion_roster
+    audience: "Gen Z 24–29 product-track first-job knowledge workers"
+
+  - series_id: cognitive_clarity__en_US__overthinking_repair_shop
+    brand_id: cognitive_clarity
+    locale: en_US
+    persona_archetype: GZ-uni
+    daily_life_anchor: F4_retail_service
+    portal_mechanic: P_object
+    episodic_frame_per_volume: E_customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "A neurodivergent 23-year-old runs a Saturday-only repair shop where customers bring physical objects that are stuck — a stuck zipper, a stuck record, a stuck door — and each repair maps to one cognitive un-sticking the protagonist gently names."
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Stuck-Things Shop"
+    series_logline: "Bring her your stuck zipper. She'll un-stick the zipper. She'll also un-stick what the zipper has been holding."
+    series_description: "Hazel is 23 and on the autism spectrum and very good with her hands. She opened the shop after college — Saturdays only, walk-ins, no appointment system, payment whatever-you-can. The sign says: 'I fix stuck things.' She means it literally. People bring stuck zippers, stuck record players, stuck cabinet doors, stuck umbrellas. While Hazel works — silently, focused, the customer narrating — the customer hears themselves describe the stuck thing, and somewhere in the narration the cognitive parallel surfaces. Hazel never points it out. She just fixes the zipper. Volume by volume the customers return with new stuck objects and report that other things have un-stuck too. The long arc: Hazel's own stuck-thing is in the back-room cabinet. It has been stuck since she was 12. She is not in a hurry."
+    opening_5_volume_arc:
+      vol_1: "First Saturday. The zipper. The customer's stuck conversation with her mother."
+      vol_2: "The record player. The customer's stuck thesis. The needle is replaced."
+      vol_3: "The cabinet door. The customer's stuck grief. The hinge is oiled."
+      vol_4: "The umbrella. The customer's stuck career decision. The mechanism is reset."
+      vol_5: "Hazel opens the back-room cabinet for cleaning. The stuck thing is still stuck. The reader sees it for the first time."
+    comp_titles: ["The Apothecary Diaries", "Sweet Bean Paste", "A Silent Voice", "The Cat Who Saved Books", "Witch Hat Atelier"]
+    reader_promise: "Your overthinking is a stuck thing, and stuck things have un-stickings."
+    marketing_angle: "Hands-on iyashikei for the neurodivergent generation — repair as cognition."
+    genre_family: supernatural_everyday_wellness_episodic
+    emotional_engine: competent_calm_specialist + somatic_repair
+    audience: "Gen Z 20–26 neurodivergent hands-on / craft / repair-curious"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 03 / 25 — digital_ground (flagship · manhwa · burnout)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: digital_ground__en_US__hidden_slack_channel_for_the_burnt
+    brand_id: digital_ground
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F1_app_social
+    portal_mechanic: P_app
+    episodic_frame_per_volume: E_customer
+    magical_register: isekai
+    serial_engine: companion_roster
+    long_arc_spine: "A junior dev finds a hidden Slack channel in her tech-company workspace where each burnt-out coworker shows up as a parallel-realm version of themselves; the protagonist guides them through the realm and back."
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "#burnt-channel"
+    series_logline: "Slack channel #burnt — invite-only, no members visible, opens at 11 p.m. each weekday. Step in and you arrive in the parallel realm of who you would have been without the burnout."
+    series_description: "Tess is 25, two years into a junior dev role at a mid-size SaaS in Brooklyn. The channel appears in her Slack sidebar on a Tuesday with no notification — #burnt, member count zero. She clicks. A chat input. She types 'hi' and the screen goes black, then resolves: she is standing in the office she works in, but at a different time, and the version of her teammate Adam who is sitting at his desk is the version Adam would have been if he had taken the offer in Lisbon two years ago. He is rested. He is also confused. Tess guides him back. Each volume, one coworker enters the channel and Tess walks them through the realm of who-they-would-have-been-if. The cost: every visit ages the coworker's burnout one notch. The reward: they see what they have been protecting themselves from. The long arc: who runs the channel, and what happens when Tess herself enters?"
+    opening_5_volume_arc:
+      vol_1: "The channel appears. Adam in the Lisbon realm. The first return."
+      vol_2: "The product manager in the realm where she chose research. The cost is named."
+      vol_3: "The CTO in the realm where he stayed in academia. The CTO recognizes the channel."
+      vol_4: "The first coworker who refuses to come back. Tess negotiates."
+      vol_5: "Tess types her own message. The channel opens for her. She does not enter — yet."
+    comp_titles: ["Solo Leveling", "Re:Zero", "The Beginning After the End", "Tower of God", "Eden of the East"]
+    reader_promise: "There is a parallel you who didn't burn out, and you can visit. The visit costs."
+    marketing_angle: "Solo Leveling's portal-mechanic applied to tech-burnout — for the manhwa-literate first-job generation."
+    genre_family: isekai_workplace_burnout
+    emotional_engine: parallel_self + escalating_cost
+    audience: "Gen Z 24–29 tech-worker burnout-adjacent, manhwa-literate"
+
+  - series_id: digital_ground__en_US__offboarding_ceremonies
+    brand_id: digital_ground
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F4_retail_service
+    portal_mechanic: P_object
+    episodic_frame_per_volume: E_customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 28-year-old former PM runs an underground 'offboarding ceremony' service — for tech workers leaving toxic jobs — where each ceremony involves one ritual object and one named yokai of corporate burnout that is gently sent home."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "Offboarding Ceremonies"
+    series_logline: "She runs the ceremony you do the night before your last day. One object, one yokai, one good leaving."
+    series_description: "Nazia, 28, did three startups, the third one broke her, and on the night before her last day a friend's friend taught her the ceremony: one object the company gave you (laptop sticker, swag mug, hoodie), one yokai of corporate burnout you have been carrying (the always-on yokai, the comparison yokai, the impostor yokai, the founder-worship yokai), one small action that releases both. She runs the service out of her apartment in Oakland, by referral only. Each volume one client — the tech-worker version of a Studio Ghibli ritual specialist. The long arc: a former CEO wants the ceremony. He is one of the yokai's original sources. Whether Nazia agrees to perform it for him is the long question."
+    opening_5_volume_arc:
+      vol_1: "First client. A senior PM leaving a unicorn. Swag mug. The always-on yokai. Goodbye."
+      vol_2: "An eng manager. Hoodie. The comparison yokai. Goodbye."
+      vol_3: "A designer. Laptop sticker. The impostor yokai. Goodbye."
+      vol_4: "A founder. The founder-worship yokai. The ceremony is harder. Nazia learns."
+      vol_5: "The former CEO arrives. The ceremony Nazia has not yet learned. The arc opens."
+    comp_titles: ["The Apothecary Diaries", "Witch Hat Atelier", "Frieren", "Sweet Bean Paste", "The Cat Who Saved Books"]
+    reader_promise: "Your last day deserves a ceremony. The ceremony exists."
+    marketing_angle: "Tech-burnout iyashikei — for the manhwa-literate cohort that has already left two jobs."
+    genre_family: supernatural_everyday_workplace_burnout
+    emotional_engine: competent_calm_specialist + ritual_release
+    audience: "Gen Z 25–30 second-job-or-later tech workers, burnout-named-and-claimed"
+
+  - series_id: digital_ground__en_US__after_hours_repair_shop_for_devs
+    brand_id: digital_ground
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F4_retail_service
+    portal_mechanic: P_mascot
+    episodic_frame_per_volume: E_customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "A converted laundromat in Queens — open midnight to 4 a.m. only — is run by a witch-of-the-mundane who fixes the broken parts of dev-job lives; her companions are a roster of yokai-of-tech-debt who help one client per volume."
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "The After-Hours Laundromat"
+    series_logline: "Midnight to 4 a.m. only. Bring your laundry. Bring your unmerged PR. The witch will fold both."
+    series_description: "Linh, 31 (the upper-edge Gen Z), runs a 24-hour laundromat that is only actually open midnight to 4 a.m. The clientele is exclusively senior+ developers from the surrounding three NYC neighborhoods. They bring laundry. They bring something else — a stuck merge conflict, a deprecated dependency, an oncall trauma, a layoff-survivor's guilt — and while the laundry tumbles, Linh's roster of small yokai-of-tech-debt (the legacy-yokai who only wears 2014 frameworks, the on-call-yokai with a permanently lit phone, the layoff-survivor-yokai who keeps counting heads) gather around and the conversation begins. The yokai do not give advice. They listen. The laundry comes out clean. The dev leaves. The long arc: Linh's own laundromat-yokai, the one only she can see, has been there since she opened. It is the one she has not yet introduced to anyone."
+    opening_5_volume_arc:
+      vol_1: "First customer. Senior backend dev. Stuck merge. The legacy-yokai listens."
+      vol_2: "Tech lead. On-call burnout. The on-call-yokai's phone is named."
+      vol_3: "Eng manager. Layoff-survivor. The roster grows."
+      vol_4: "First repeat. The backend dev returns. Different stuck thing."
+      vol_5: "Linh's own yokai is glimpsed by a customer for the first time. The customer asks. Linh demurs."
+    comp_titles: ["The Apothecary Diaries", "Sweet Bean Paste", "Witch Hat Atelier", "The Cat Who Saved Books", "Frieren"]
+    reader_promise: "Your tech-debt is shaped, named, and laundered."
+    marketing_angle: "Witch-of-the-mundane iyashikei for the senior-dev burnout cohort that already has a therapist and a laundromat preference."
+    genre_family: supernatural_everyday_workplace_burnout
+    emotional_engine: competent_calm_specialist + companion_roster
+    audience: "Gen Z 28–32 senior dev / tech IC, burnout-named-and-managed"
+
+  - series_id: digital_ground__en_US__the_pto_yokai
+    brand_id: digital_ground
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F1_app_social
+    portal_mechanic: P_app
+    episodic_frame_per_volume: E_customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "An HR coordinator notices that every PTO request from her company generates one small yokai in the requester's calendar — and each yokai is the size of the rest the requester actually owes themselves."
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "The PTO Yokai"
+    series_logline: "Every approved PTO request in the company calendar has a small yokai inside it. The yokai is the size of the rest the requester actually owes themselves. They mostly don't take it."
+    series_description: "Jordan, 26, is an HR coordinator at a 400-person tech company. Three months in she notices the yokai. They appear in Google Calendar — small, slightly translucent, sitting inside the green PTO-block on each requester's calendar. The yokai is exactly the size of the rest that requester actually needs. Most PTO requests are 3 days. Most yokai are the size of 10 days. The yokai don't follow the requester on vacation. They sit in the calendar slot, waiting. Each volume one requester returns from PTO and Jordan watches the yokai shrink slightly (if the rest was real) or grow (if the PTO was a working vacation). Each volume she also has one conversation, gently, with one requester. The long arc: Jordan's own yokai is in her own calendar. She has not approved her own PTO in 18 months."
+    opening_5_volume_arc:
+      vol_1: "The first yokai noticed. A senior engineer's 3-day weekend. The yokai is the size of a fortnight."
+      vol_2: "The product manager's working vacation. The yokai grows."
+      vol_3: "The designer's real vacation. The yokai shrinks. Jordan smiles."
+      vol_4: "The CEO's calendar. The yokai is the size of a year."
+      vol_5: "Jordan opens her own calendar. The yokai has been there the whole time."
+    comp_titles: ["Aggretsuko", "Wotakoi", "Skip and Loafer", "The Apothecary Diaries", "Recovery of an MMO Junkie"]
+    reader_promise: "Your rest has a size, and a yokai is keeping count."
+    marketing_angle: "HR-yokai workplace iyashikei — for the Gen Z that knows the difference between PTO and PTO."
+    genre_family: magical_realism_workplace_burnout
+    emotional_engine: named_and_seen + workplace_critique
+    audience: "Gen Z 24–28 HR / people-ops / observant first-job knowledge workers"
+
+  - series_id: digital_ground__en_US__second_monitor_world
+    brand_id: digital_ground
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F5_school_gaming
+    portal_mechanic: P_character_jump
+    episodic_frame_per_volume: E_locale
+    magical_register: isekai
+    serial_engine: location_anthology
+    long_arc_spine: "A remote-work product manager discovers her second monitor is a portal — each work-from-home spot she sets up in is a parallel office somewhere else, and each volume is one location's burnout story."
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Second Monitor"
+    series_logline: "Marisol's second monitor sometimes shows a different office than the one she's in. She has learned to set up her remote-work spot anywhere the monitor sends her."
+    series_description: "Marisol, 27, is fully remote, lives in Mexico City, works for a US-based fintech. The second monitor was a hand-me-down from her cousin. On a Tuesday morning, it boots up showing not her Notion but a different office — Seoul. She can step through. The first time she does, she finds another fully-remote worker, Seoul-based, mid-meltdown, and she helps. The portal closes when the meltdown is named. Volume two: the monitor opens to Lagos. Volume three: Mumbai. Volume four: a coworking space in Lisbon. Each volume she helps one fully-remote worker name what's eating them — the time-zone-yokai, the always-on-yokai, the never-meet-coworkers-yokai. The long arc: the monitor was sent to her on purpose. By whom is the long-arc question."
+    opening_5_volume_arc:
+      vol_1: "Seoul. The time-zone-yokai. The first case."
+      vol_2: "Lagos. The always-on-yokai. The roster grows."
+      vol_3: "Mumbai. The never-meet-coworkers-yokai. Marisol video-calls a Mumbai worker for the first time."
+      vol_4: "Lisbon. A coworking-space cluster. Marisol's first multi-person case."
+      vol_5: "The monitor's manufacturer is researched. The mystery opens."
+    comp_titles: ["Solo Leveling", "Eden of the East", "Re:Zero", "The Beginning After the End", "Tower of God"]
+    reader_promise: "Your remote-work loneliness is a portal, and the portal opens both ways."
+    marketing_angle: "Portal-fantasy applied to the global-remote-work generation — international + workplace + isekai."
+    genre_family: isekai_workplace_remote
+    emotional_engine: parallel_self + international_chosen_family
+    audience: "Gen Z 25–30 fully-remote international knowledge workers"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 04 / 25 — sleep_restoration_iyashikei (core · josei · sleep)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: sleep_restoration_iyashikei__en_US__sleep_influencer_podcast
+    brand_id: sleep_restoration_iyashikei
+    locale: en_US
+    persona_archetype: GZ-uni
+    daily_life_anchor: F2_content_creator
+    portal_mechanic: P_mascot
+    episodic_frame_per_volume: E_customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 23-year-old sleep-podcast host's recurring sleep-spirit mascot starts visiting individual listeners in their dreams — each volume one listener's insomnia case is mapped and resolved."
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Late-Night Podcast"
+    series_logline: "Each Tuesday at 11 p.m. she records the podcast. Each Tuesday at 3 a.m. the sleep-spirit visits one of her listeners. They never meet her. They sleep."
+    series_description: "Wren is 23, third-year journalism, runs a niche sleep-podcast (270 listeners, growing) where she reads slow-paced public-domain texts and the small grey sleep-spirit she has always seen perches on the mic. One Wednesday a listener emails: 'I dreamed about a small grey creature last night and slept for the first time in three weeks.' Wren realizes the spirit is leaving the recording. Each volume the spirit visits one listener — their insomnia story is mapped, the dream-visit is rendered, the listener sleeps. The listener never knows it was Wren. The long arc: the spirit is aging. Wren is learning to take care of it. There is a 271st listener whose story the spirit will not visit. Whose story is it?"
+    opening_5_volume_arc:
+      vol_1: "First listener-email. The med student's three-week insomnia. The spirit visits. He sleeps."
+      vol_2: "The night-shift nurse. The spirit teaches Wren about shift-work circadian disruption."
+      vol_3: "The high-schooler whose parents fight at night. The spirit's intervention is larger."
+      vol_4: "The first listener who recognizes the spirit on the podcast. Their email is just one line: 'Thank you.'"
+      vol_5: "The 271st listener. The story the spirit will not visit. The mystery opens."
+    comp_titles: ["Mushishi", "Frieren", "The Apothecary Diaries", "Natsume's Book of Friends", "Sweet Bean Paste"]
+    reader_promise: "Someone is helping you sleep. You will not know who."
+    marketing_angle: "Mushishi for the podcast generation — quiet, episodic, devotional."
+    genre_family: supernatural_everyday_creator_economy
+    emotional_engine: anonymous_gift + companion_roster
+    audience: "Gen Z 19–25 insomnia-named-and-claimed, podcast-listening"
+
+  - series_id: sleep_restoration_iyashikei__en_US__moon_station_sleep_clinic
+    brand_id: sleep_restoration_iyashikei
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F3_transit_commute
+    portal_mechanic: P_transit
+    episodic_frame_per_volume: E_locale
+    magical_register: supernatural_everyday
+    serial_engine: location_anthology
+    long_arc_spine: "A spirit-world sleep clinic operates one stop further than the last subway station in every major city — the protagonist works the night shift, and each volume is one dream-zone visited and one sleeper restored."
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Moon-Station Clinic"
+    series_logline: "One stop further than the last station, in every city, there is a clinic. The dream-walker works the night shift. Each volume she restores one sleeper."
+    series_description: "Imogen, 26, lost a year of sleep to a breakup-then-grief cycle and ended up one stop too far on the F train at 4 a.m. The moon-station clinic was waiting. They hired her. She is the night-shift dream-walker now — each shift one sleeper from any city in the world arrives in a dream-zone she has to visit, map, and gently restore. The dream-zones are locales: an underwater bus stop, a forest of clocks, a kitchen that is also a beach, a library where every book is the reader's own unfinished thought. Each volume one zone, one sleeper. The long arc: Imogen's own dream-zone has been closed for visitors since she started. It will not open until she's ready. She is not yet."
+    opening_5_volume_arc:
+      vol_1: "The underwater bus stop. A teenager with grief-insomnia. Restored."
+      vol_2: "The forest of clocks. A new parent's sleep-cycle. Restored."
+      vol_3: "The kitchen-beach. A senior nurse, shift-work. Restored."
+      vol_4: "The library of unfinished thoughts. The protagonist's college roommate, by accident."
+      vol_5: "Imogen's own zone, briefly visible at end-of-shift. The reader sees it once."
+    comp_titles: ["Spirited Away", "The Midnight Library", "Mushishi", "Frieren", "Wandering Son"]
+    reader_promise: "Your sleep has a city, and someone is working the night shift there for you."
+    marketing_angle: "Spirited Away for the insomnia generation — episodic, devotional, transit-mediated."
+    genre_family: supernatural_everyday_dream_anthology
+    emotional_engine: competent_calm_specialist + anonymous_gift
+    audience: "Gen Z 23–28 urban insomniacs, sleep-app users, transit-city"
+
+  - series_id: sleep_restoration_iyashikei__en_US__sleeper_cell
+    brand_id: sleep_restoration_iyashikei
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F1_app_social
+    portal_mechanic: P_app
+    episodic_frame_per_volume: E_customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A sleep-tracking app's premium tier is staffed by yokai who visit users' dreams — the protagonist is the only human moderator, and each volume she ratifies one yokai's intervention with one user."
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "Premium Tier"
+    series_logline: "The premium tier of the sleep-tracking app costs $4.99/month and includes one yokai. The yokai visits. The user sleeps. She is the moderator who keeps it humane."
+    series_description: "Quinn, 25, took a contract role as a 'content moderator' for a sleep-tracking app and discovered on day three that the premium tier is staffed by sleep-yokai — small, professional, slightly bored — who visit users' dreams when invoked. Quinn's job is to review the visit logs and ratify or veto each intervention. Most are fine. Some are not. Each volume one case: a yokai that was a little too aggressive with a teenager's intrusive thoughts, a yokai that fell asleep on duty and the user dreamed of her instead, a yokai that became attached. Quinn is learning to manage them. The long arc: the company is going public. The yokai do not want to be on the S-1. Quinn has to choose."
+    opening_5_volume_arc:
+      vol_1: "First veto. The over-aggressive yokai. The teenager's case."
+      vol_2: "The sleeping yokai. The user dreams of her. The HR conversation."
+      vol_3: "The attached yokai. The user is a single dad. Quinn negotiates."
+      vol_4: "The first IPO meeting. Quinn meets the CEO and his yokai (he has one)."
+      vol_5: "Quinn drafts her resignation. Or her negotiation. The choice opens."
+    comp_titles: ["Eden of the East", "The Apothecary Diaries", "Death Note (structure)", "Aggretsuko", "Wotakoi"]
+    reader_promise: "Your sleep app has employees you don't see. Someone makes sure they're kind."
+    marketing_angle: "Aggretsuko's workplace iyashikei applied to the wellness-tech industry — humane labor inside the sleep-app boom."
+    genre_family: magical_realism_workplace_wellness_tech
+    emotional_engine: humane_labor_advocacy + competent_calm_specialist
+    audience: "Gen Z 24–28 wellness-tech industry, content-moderator-adjacent"
+
+  - series_id: sleep_restoration_iyashikei__en_US__night_kitchen
+    brand_id: sleep_restoration_iyashikei
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F4_retail_service
+    portal_mechanic: P_object
+    episodic_frame_per_volume: E_customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 24-hour kitchen open only 1 a.m. to 5 a.m. serves one bowl of warm grain to each insomniac who finds the door; each volume one customer's sleep is gently restored over one bowl."
+    volume_runway_target: 200
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Night Kitchen"
+    series_logline: "Open 1 to 5. One bowl per customer. The bowl is warm. The customer sleeps. The cook does not."
+    series_description: "Mei, 26, runs a tiny basement kitchen in a brownstone in Brooklyn — no sign, no Yelp page, finds you on the worst night via a referral you can't quite remember receiving. Open 1 a.m. to 5 a.m. One bowl per customer. The bowl is always warm grain — porridge, rice, oatmeal, congee — and one small additive Mei chooses based on a single question. Each volume one customer arrives with one sleeplessness pattern (rumination, grief, hypervigilance, screen-fried, anticipatory anxiety) and one bowl resolves it. The customer leaves and sleeps. They never return — sleep restored, no need. The long arc: Mei has not slept herself in 4 years. Each customer she serves she is also serving herself, indirectly. The 200th customer will be the one whose bowl, finally, is also her own."
+    opening_5_volume_arc:
+      vol_1: "First customer. Ruminator. Porridge with cardamom. Sleeps."
+      vol_2: "Grief insomnia. Congee with ginger and salt. Sleeps."
+      vol_3: "Hypervigilant new mom. Rice porridge with miso. Sleeps."
+      vol_4: "Screen-fried teen. Oatmeal with cinnamon and dark honey. Sleeps."
+      vol_5: "First customer who almost recognizes Mei. The kitchen flickers. The long arc opens."
+    comp_titles: ["Midnight Diner: Tokyo Stories", "Sweet Bean Paste", "Days at the Morisaki Bookshop", "Before the Coffee Gets Cold", "What You Are Looking For Is in the Library"]
+    reader_promise: "One bowl. One night. You will sleep."
+    marketing_angle: "Midnight Diner for the insomnia generation — episodic, warm, devotional."
+    genre_family: supernatural_everyday_wellness_episodic
+    emotional_engine: competent_calm_specialist + ritual_warmth
+    audience: "Gen Z 23–28 urban insomniacs, food-and-warmth-attentive"
+
+  - series_id: sleep_restoration_iyashikei__en_US__dreaming_for_others
+    brand_id: sleep_restoration_iyashikei
+    locale: en_US
+    persona_archetype: GZ-uni
+    daily_life_anchor: F1_app_social
+    portal_mechanic: P_mascot
+    episodic_frame_per_volume: E_customer
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "A 22-year-old discovers she can dream the dreams that other people need to have — and slowly accumulates a roster of dream-collaborator yokai who help her dispatch one dream per night to one needful sleeper."
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "Dreaming For Others"
+    series_logline: "Ila can dream someone else's dream for them. She's been doing it accidentally for years. Now she's learning to do it on purpose."
+    series_description: "Ila is 22, art-school, has always had vivid dreams she could remember in detail. She realizes in her senior year that the friend she dreamed about last night actually had the dream — they emailed her a description that matched her own. The dreams she has on someone else's behalf are the dreams they need to have but cannot. Each volume Ila acquires one new dream-collaborator yokai (a small fox who helps with grief-dreams, a heron who helps with creative-block dreams, a moth who helps with closure-dreams) and dispatches one dream per night. Receivers do not know. The cost: Ila herself sleeps lightly, dreams thinly. The long arc: who taught her, and what is the dream she has not yet dreamed for herself?"
+    opening_5_volume_arc:
+      vol_1: "The grief-dream for a friend. The fox arrives."
+      vol_2: "The creative-block dream for a classmate. The heron arrives."
+      vol_3: "The closure-dream for an ex. The moth arrives."
+      vol_4: "The first dream Ila dispatches to a stranger. The roster grows."
+      vol_5: "Ila's own dream — the one she has been saving for herself — is hinted. The arc opens."
+    comp_titles: ["Mushishi", "Paprika (Satoshi Kon)", "The Apothecary Diaries", "Frieren", "Natsume's Book of Friends"]
+    reader_promise: "Someone is dreaming the dream you needed. They are quiet about it."
+    marketing_angle: "Mushishi for the dream-journaling generation — quiet, devotional, gift-economy."
+    genre_family: magical_realism_dream_gift
+    emotional_engine: anonymous_gift + companion_roster
+    audience: "Gen Z 20–25 dream-journaling, art-school, creative-claimed"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 05 / 25 — somatic_wisdom_shojo (core · josei · somatic_healing)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: somatic_wisdom_shojo__en_US__pilates_studio_yokai_trainer
+    brand_id: somatic_wisdom_shojo
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F4_retail_service
+    portal_mechanic: P_mascot
+    episodic_frame_per_volume: E_customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 25-year-old former-dancer Pilates instructor sees a small yokai trainer-spirit attached to each new client; the yokai shows where the client's body holds shame, and each volume one client's somatic story is gently unfolded."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Studio Trainer"
+    series_logline: "Every new client walks in with a small yokai-trainer attached. The yokai shows Bea where the body is holding what the mouth won't say."
+    series_description: "Bea is 25, was a serious ballet dancer until 19, runs the 6 a.m. and 9 p.m. Pilates classes at a small studio in Portland. The yokai started appearing in her second year of teaching — small companions perched on each new client's shoulder, sometimes a small bird, sometimes a small fox, sometimes a shape Bea has no name for. Each yokai shows her where the body is holding something the client has not said. Each volume one client's somatic story is gently unfolded — through Pilates cues that are also psychological cues, through a hand on a shoulder blade, through a question asked at the right moment. The yokai softens. The client returns. The long arc: Bea's own yokai — never seen by anyone else — has been with her since 19. It will not let her dance again. Whether it should is the long question."
+    opening_5_volume_arc:
+      vol_1: "First new client. Bird-yokai. Held breath. Unfolded over one session."
+      vol_2: "Fox-yokai. Lower back. The story is grief. Unfolded over two."
+      vol_3: "The unnamed shape. Pelvis. The client has not told her therapist yet. Bea is gentle."
+      vol_4: "First returning client. Smaller yokai. Bea's reward."
+      vol_5: "Bea catches her own yokai in the studio mirror. The reader sees the shape. Bea looks away."
+    comp_titles: ["A Silent Voice", "Witch Hat Atelier", "The Apothecary Diaries", "Wandering Son", "Skip and Loafer"]
+    reader_promise: "Your body has a yokai, and the right trainer can see her."
+    marketing_angle: "Somatic-Pilates iyashikei for the body-literate Gen Z — A Silent Voice attention applied to the studio."
+    genre_family: supernatural_everyday_wellness_somatic
+    emotional_engine: somatic_repair + competent_calm_specialist
+    audience: "Gen Z 23–28 movement-practice (Pilates / yoga / climbing), body-aware"
+
+  - series_id: somatic_wisdom_shojo__en_US__body_letter_archive
+    brand_id: somatic_wisdom_shojo
+    locale: en_US
+    persona_archetype: GZ-queer
+    daily_life_anchor: F2_content_creator
+    portal_mechanic: P_object
+    episodic_frame_per_volume: E_locale
+    magical_register: magical_realism
+    serial_engine: location_anthology
+    long_arc_spine: "A 27-year-old somatic-therapist-in-training inherits an archive of letters written from one body-part to another; each volume she visits the locale (the wrist, the throat, the back of the knee) and helps one client read one letter aloud."
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "Letters From the Body"
+    series_logline: "The archive has been growing since 1932. Each letter is written from one body-part to another. Each volume she reads one aloud."
+    series_description: "Salah, 27, is finishing a master's in somatic therapy in Chicago and inherits an archive from her late great-aunt — a wooden filing cabinet of letters, each written, in a different hand, from one body-part to another. 'Dear Wrist, I am the Shoulder, I have been holding for both of us.' 'Dear Throat, I am the Belly, the words you swallowed arrive here.' The archive has been growing since 1932 — Salah's great-aunt collected them from clients across four cities. Salah's job, in volume one, is to figure out what to do with them. By volume three she is reading them aloud to current clients whose somatic story matches. The body part lights up. The held thing loosens. The long arc: there is one letter in the archive addressed to Salah herself. It has been there since before she was born."
+    opening_5_volume_arc:
+      vol_1: "The wrist. The shoulder's letter. A first client's chronic pain."
+      vol_2: "The throat. The belly's letter. A client's swallowed grief."
+      vol_3: "The back of the knee. The hip's letter. A client's withheld choice."
+      vol_4: "The collarbone. The jaw's letter. A client's withheld voice."
+      vol_5: "Salah finds her own envelope in the archive. The arc opens. She does not yet open it."
+    comp_titles: ["The Apothecary Diaries", "Witch Hat Atelier", "Sweet Bean Paste", "A Silent Voice", "What You Are Looking For Is in the Library"]
+    reader_promise: "Your body has been writing letters. Someone is reading them aloud."
+    marketing_angle: "Somatic-therapy iyashikei for the body-literate generation — archive as practice."
+    genre_family: magical_realism_somatic_archive
+    emotional_engine: inherited_wisdom + somatic_repair
+    audience: "Gen Z 24–29 somatic-therapy-curious, queer-coded, body-literate"
+
+  - series_id: somatic_wisdom_shojo__en_US__neighborhood_bodyworker
+    brand_id: somatic_wisdom_shojo
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F4_retail_service
+    portal_mechanic: P_mascot
+    episodic_frame_per_volume: E_customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "A 26-year-old massage therapist's small clinic is staffed by a slowly-growing roster of yokai-of-held-tension (the shoulder-yokai, the jaw-yokai, the lower-back-yokai), each of whom helps with one client's stuck somatic story per volume."
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Neighborhood Clinic"
+    series_logline: "She rents a 200-square-foot clinic above a bakery. The roster of yokai she works with grows volume by volume. The clients sleep on the table."
+    series_description: "Naomi, 26, took her LMT certification two years ago and rents a single-room clinic above a bakery in a small city in upstate New York. The first yokai showed up in week three — the shoulder-yokai, who helps her find the right knot. By volume one she has three on the roster (shoulder, jaw, lower-back). Each volume one client arrives with a stuck somatic story and the corresponding yokai helps Naomi work it out. The clients sleep on the table. They go home rested. The yokai do not follow them. The long arc: a new yokai joins each season — pelvis (vol 4), diaphragm (vol 7), neck (vol 11) — and Naomi's roster grows. The mystery: the yokai are not in fact assigned to body parts. They are assigned to held emotions, and each one has a story Naomi does not yet know."
+    opening_5_volume_arc:
+      vol_1: "First client. Shoulder-yokai. Computer-job tension. Resolved."
+      vol_2: "Jaw-yokai. Public-speaker client. Resolved."
+      vol_3: "Lower-back-yokai. Grief-carrying client. Resolved."
+      vol_4: "Pelvis-yokai joins the roster. First client: a postpartum new mom."
+      vol_5: "Naomi notices the shoulder-yokai is also a grief-yokai. The mystery opens."
+    comp_titles: ["A Silent Voice", "Witch Hat Atelier", "The Apothecary Diaries", "Sweet Bean Paste", "Skip and Loafer"]
+    reader_promise: "Your tension is shaped, named, and worked out."
+    marketing_angle: "Massage-clinic iyashikei for the body-literate Gen Z — workplace + companion-roster."
+    genre_family: supernatural_everyday_wellness_somatic
+    emotional_engine: companion_roster + somatic_repair
+    audience: "Gen Z 24–28 bodywork-curious, urban, post-grad"
+
+  - series_id: somatic_wisdom_shojo__en_US__breathwork_for_the_chronically_online
+    brand_id: somatic_wisdom_shojo
+    locale: en_US
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: F1_app_social
+    portal_mechanic: P_app
+    episodic_frame_per_volume: E_song_recipe_case
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "A 24-year-old breathwork instructor's TikTok DMs surface one stuck breath-pattern per follower; each volume she invents one new short practice that targets one pattern and ships it as a single 90-second video."
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "The Ninety-Second Breath"
+    series_logline: "Each Tuesday she ships a new 90-second breath practice. Each Tuesday it fits exactly one follower's stuck pattern. The fit is not coincidence."
+    series_description: "Tomi, 24, certified in three breathwork modalities, has 80k TikTok followers and a Tuesday-night ritual: read the DMs from the past week, find the one stuck breath-pattern that keeps surfacing, invent the 90-second practice that exactly targets it. She does not know how she knows. The practices are precise — box-breathing variants, physiological-sigh variants, hum-into-fingertip cues — and they work. Each volume one practice is invented, one pattern is named, one follower (chosen by the DMs themselves) is gently helped. The long arc: someone is sending Tomi the DMs. Not the followers — the DMs themselves are arriving from a source she cannot trace. The 100th DM is the one she will not be able to answer with a 90-second practice."
+    opening_5_volume_arc:
+      vol_1: "First Tuesday. The held-breath-during-Zoom pattern. The practice. The video."
+      vol_2: "The hyperventilation-while-scrolling pattern. The physiological sigh."
+      vol_3: "The sleep-onset breath-hold. The hum into fingertip."
+      vol_4: "The grief-shallow-chest pattern. The four-six exhale."
+      vol_5: "The DM Tomi cannot trace. The source begins to appear."
+    comp_titles: ["The Apothecary Diaries", "Witch Hat Atelier", "Aggretsuko", "Skip and Loafer", "Recovery of an MMO Junkie"]
+    reader_promise: "Your stuck breath has a 90-second practice. It will be on your FYP Tuesday."
+    marketing_angle: "Breathwork-creator iyashikei for the somatic-literate TikTok generation."
+    genre_family: magical_realism_creator_economy_somatic
+    emotional_engine: competent_calm_specialist + anonymous_gift
+    audience: "Gen Z 22–27 breathwork-curious, chronically-online, somatic-named"
+
+  - series_id: somatic_wisdom_shojo__en_US__climbing_gym_body_memory
+    brand_id: somatic_wisdom_shojo
+    locale: en_US
+    persona_archetype: GZ-uni
+    daily_life_anchor: F4_retail_service
+    portal_mechanic: P_object
+    episodic_frame_per_volume: E_locale
+    magical_register: magical_realism
+    serial_engine: location_anthology
+    long_arc_spine: "A bouldering gym's chalk bags each carry a small somatic memory; the protagonist (a route-setter) maps one bag, one climber, one held memory per volume."
+    volume_runway_target: 80
+    reading_platform_fit: webtoon_vertical
+    series_title: "Chalk Bags"
+    series_logline: "Every chalk bag at the gym carries one small held memory of the body that bought it. The route-setter is learning to read them."
+    series_description: "Yumi, 22, is a route-setter and assistant manager at a bouldering gym in Seattle. The chalk bags belong to the regulars — each clipped to the wall at the bouldering area, each with the regular's name on it. Yumi realizes in volume one that when she rests her hand on a chalk bag she briefly experiences a fragment of the body-memory of the climber it belongs to: the day they fell from V3 and stopped trying for two months, the morning they came to the gym to escape a fight, the year they were 11 and first wanted to climb. Each volume one chalk bag, one regular, one memory mapped and gently honored — Yumi sets a route for them, or doesn't say anything, or has the right conversation at the right grade. The long arc: Yumi's own chalk bag is on the wall. She has not picked it up in a year. The reason is in it."
+    opening_5_volume_arc:
+      vol_1: "The first chalk bag. A new regular. The day they fell from V3."
+      vol_2: "The morning-fight regular. Yumi sets her a V4 problem that is the right shape."
+      vol_3: "The 11-year-old memory. Yumi has the right conversation, accidentally."
+      vol_4: "A regular's chalk bag goes missing. The memory is at risk. Yumi tracks it."
+      vol_5: "Yumi's own chalk bag, still on the wall. The reader feels the weight. Yumi does not yet pick it up."
+    comp_titles: ["A Silent Voice", "Skip and Loafer", "Witch Hat Atelier", "The Apothecary Diaries", "Wandering Son"]
+    reader_promise: "Your body remembers, and your chalk bag is keeping count."
+    marketing_angle: "Bouldering iyashikei for the somatic-literate Gen Z — climbing-gym chosen-family."
+    genre_family: magical_realism_somatic_sport
+    emotional_engine: somatic_repair + chosen_family
+    audience: "Gen Z 20–26 climbing/bouldering/movement-sport, body-literate"
