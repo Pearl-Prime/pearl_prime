@@ -155,8 +155,26 @@ def _resolve_character_lora(
     return ""
 
 
-def _batch_id(brand: str, locale: str, surface: str, sidx: int, eidx: int) -> str:
-    raw = f"{brand}|{locale}|{surface}|{sidx}|{eidx}".encode("utf-8")
+def _batch_id(
+    brand: str,
+    locale: str,
+    source_surface: str,
+    surface: str,
+    sidx: int,
+    eidx: int,
+) -> str:
+    """Deterministic batch id for one render unit.
+
+    ``source_surface`` is the allocation-row surface (``ebook`` | ``manga``)
+    that produced this batch. ``surface`` is the render surface (``cover`` |
+    ``panel``). Both segments participate in the hash so an ebook→cover and
+    a manga→cover for the SAME (brand, locale, series_idx, episode_idx)
+    receive distinct batch_ids — preventing the 724 duplicate batches per
+    full plan that Pearl_Conductor v3 (run_id ``..._t0103``) caught at
+    checkpoint init. See AMENDMENT-2026-05-12-COVER-UNIQUENESS in
+    ``docs/specs/CONDUCTOR_V3_DISPATCH_BRIDGE_V1_SPEC.md``.
+    """
+    raw = f"{brand}|{locale}|{source_surface}|{surface}|{sidx}|{eidx}".encode("utf-8")
     return "v3_" + hashlib.sha1(raw).hexdigest()[:14]
 
 
@@ -278,15 +296,21 @@ def build_batches_for_cell(
         f"artifacts/manga/conductor_v3_{run_id}/{locale}"
     )
 
+    # source_surface tags the allocation row (ebook|manga) so cover batches
+    # for the SAME brand+locale+series_idx but different source surfaces
+    # diverge — one cover per surface row. Without this segment, an ebook
+    # cover and a manga cover for (brand, locale, sidx=0) collide on
+    # batch_id and output_path. See AMENDMENT-2026-05-12-COVER-UNIQUENESS.
     for sidx in range(series_count):
         concept = series_list[sidx % len(series_list)]
         # --- cover batch ---
-        cover_id = _batch_id(brand, locale, "cover", sidx, 0)
+        cover_id = _batch_id(brand, locale, surface, "cover", sidx, 0)
         batches.append({
             "batch_id": cover_id,
             "brand_id": brand,
             "locale": bcp47,
             "surface": "cover",
+            "source_surface": surface,
             "dispatch_path": DISPATCH_BY_SURFACE["cover"],
             "workflow_template": WORKFLOW_BY_SURFACE["cover"],
             "asset_type": "manga_cover" if surface == "manga" else "kdp_cover",
@@ -294,7 +318,7 @@ def build_batches_for_cell(
             "negative_prompt": neg,
             "style_lora": style_lora,
             "character_lora": char_lora,
-            "output_path": f"{out_root}/{cover_id}.png",
+            "output_path": f"{out_root}/{surface}/{cover_id}.png",
             "series_idx": sidx,
             "episode_idx": 0,
             "priority_phase": priority_phase,
@@ -303,12 +327,17 @@ def build_batches_for_cell(
         # --- panel batches (manga surface only) ---
         if surface == "manga":
             for eidx in range(1, episodes_per_series + 1):
-                panel_id = _batch_id(brand, locale, "panel", sidx, eidx)
+                # Defensive: include source_surface segment for symmetry with
+                # cover batch_ids even though episode_idx already disambiguates
+                # panels (no ebook→panel rows exist today, but this prevents
+                # future surface additions from re-introducing collisions).
+                panel_id = _batch_id(brand, locale, surface, "panel", sidx, eidx)
                 batches.append({
                     "batch_id": panel_id,
                     "brand_id": brand,
                     "locale": bcp47,
                     "surface": "panel",
+                    "source_surface": surface,
                     "dispatch_path": DISPATCH_BY_SURFACE["panel"],
                     "workflow_template": WORKFLOW_BY_SURFACE["panel"],
                     "asset_type": "manga_panel",
@@ -316,7 +345,7 @@ def build_batches_for_cell(
                     "negative_prompt": neg,
                     "style_lora": style_lora,
                     "character_lora": char_lora,
-                    "output_path": f"{out_root}/{panel_id}.png",
+                    "output_path": f"{out_root}/{surface}/{panel_id}.png",
                     "series_idx": sidx,
                     "episode_idx": eidx,
                     "priority_phase": priority_phase,
@@ -346,8 +375,8 @@ def batches_to_markdown(batches: list[dict[str, Any]], *, locale: str, run_id: s
         "",
     ]
     field_order = (
-        "batch_id", "brand_id", "locale", "surface", "dispatch_path",
-        "workflow_template", "asset_type", "positive_prompt",
+        "batch_id", "brand_id", "locale", "surface", "source_surface",
+        "dispatch_path", "workflow_template", "asset_type", "positive_prompt",
         "negative_prompt", "style_lora", "character_lora", "output_path",
         "series_idx", "episode_idx", "priority_phase", "sequence",
     )

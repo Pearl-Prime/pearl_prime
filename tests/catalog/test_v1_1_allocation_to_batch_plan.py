@@ -140,6 +140,143 @@ def test_locale_filter(tmp_path):
     assert not (tmp_path / "plan_ja_JP.md").exists()
 
 
+def test_batch_id_uniqueness_full_allocation(real_run_summary):
+    """Every batch in the real 296-cell allocation expansion MUST have a
+    unique ``batch_id`` AND a unique ``output_path``.
+
+    Regression for the cover collision that blocked Pearl_Conductor v3
+    run_id ``conductor_v3_2026_05_11_t0103`` at checkpoint init: 148
+    brand+locale pairs in the allocation TSV carry both ``ebook`` and
+    ``manga`` rows, and prior to AMENDMENT-2026-05-12-COVER-UNIQUENESS the
+    cover batch_id was hashed only over ``(brand, locale, "cover", sidx,
+    0)`` — yielding 724 duplicates per 13,540-batch full plan. The fix
+    includes the allocation row's ``source_surface`` in both the hash and
+    the output_path segment.
+    """
+    _, out_dir = real_run_summary
+    all_ids: list[str] = []
+    all_paths: list[str] = []
+    per_locale: dict[str, dict[str, int]] = {}
+    for loc in ("en_US", "ja_JP", "zh_TW", "zh_CN"):
+        batches = load_plan(out_dir / f"plan_{loc}.md")
+        ids = [b["batch_id"] for b in batches]
+        paths = [b["output_path"] for b in batches]
+        per_locale[loc] = {
+            "batches": len(batches),
+            "unique_ids": len(set(ids)),
+            "dup_ids": len(ids) - len(set(ids)),
+            "unique_paths": len(set(paths)),
+            "dup_paths": len(paths) - len(set(paths)),
+        }
+        all_ids.extend(ids)
+        all_paths.extend(paths)
+    # Per-locale: zero dups, batch_ids and output_paths fully unique.
+    for loc, stats in per_locale.items():
+        assert stats["dup_ids"] == 0, (
+            f"{loc}: {stats['dup_ids']} duplicate batch_ids (stats={stats})"
+        )
+        assert stats["dup_paths"] == 0, (
+            f"{loc}: {stats['dup_paths']} duplicate output_paths (stats={stats})"
+        )
+    # Cross-locale: still unique. Total = 13,540 over the real TSV.
+    assert len(set(all_ids)) == len(all_ids), (
+        f"cross-locale: {len(all_ids) - len(set(all_ids))} duplicate batch_ids"
+    )
+    assert len(set(all_paths)) == len(all_paths), (
+        f"cross-locale: {len(all_paths) - len(set(all_paths))} "
+        "duplicate output_paths"
+    )
+    assert len(all_ids) == 13540, (
+        f"expected 13540 total batches from 296-cell allocation, got {len(all_ids)}"
+    )
+
+
+def test_ebook_and_manga_covers_diverge():
+    """For a synthetic brand+locale carrying both ``ebook`` and ``manga``
+    allocation rows, the cover batches MUST have distinct ``batch_id`` AND
+    distinct ``output_path``. The system MUST also expose ``source_surface``
+    on the batch dict so downstream prompt authors can diverge per surface
+    (e.g. KDP-cover-specific vs manga-cover-specific framing).
+    """
+    canon = gen._DEFAULT_STYLE_CANON
+    series_themes = {
+        "brands": {
+            "stillness_press": {
+                "series": {
+                    "en_US": [
+                        {
+                            "series_title": "Synthetic Calm",
+                            "arc_shape": "settle into stillness",
+                            "emotional_throughline": "quiet returns",
+                            "surface_priority": "balanced",
+                        }
+                    ]
+                }
+            }
+        }
+    }
+    cover_specs = {
+        "brands": {
+            "stillness_press": {"prompt_template": "", "character_lora": ""}
+        },
+        "text_free_negative_prompt": "watermark, typography, text",
+    }
+    ebook_batches = gen.build_batches_for_cell(
+        brand="stillness_press",
+        locale="en_US",
+        surface="ebook",
+        series_count=3,
+        episodes_per_series=5,
+        priority_phase="V1.0_matrix_confirmed",
+        series_themes=series_themes,
+        cover_specs=cover_specs,
+        style_loras={},
+        char_loras={},
+        canon=canon,
+        run_id="synthetic",
+    )
+    manga_batches = gen.build_batches_for_cell(
+        brand="stillness_press",
+        locale="en_US",
+        surface="manga",
+        series_count=3,
+        episodes_per_series=5,
+        priority_phase="V1.0_matrix_confirmed",
+        series_themes=series_themes,
+        cover_specs=cover_specs,
+        style_loras={},
+        char_loras={},
+        canon=canon,
+        run_id="synthetic",
+    )
+    ebook_covers = [b for b in ebook_batches if b["surface"] == "cover"]
+    manga_covers = [b for b in manga_batches if b["surface"] == "cover"]
+    assert len(ebook_covers) == 3
+    assert len(manga_covers) == 3
+    ebook_ids = {b["batch_id"] for b in ebook_covers}
+    manga_ids = {b["batch_id"] for b in manga_covers}
+    assert not (ebook_ids & manga_ids), (
+        f"ebook/manga cover batch_id collision: {ebook_ids & manga_ids}"
+    )
+    ebook_paths = {b["output_path"] for b in ebook_covers}
+    manga_paths = {b["output_path"] for b in manga_covers}
+    assert not (ebook_paths & manga_paths), (
+        f"ebook/manga cover output_path collision: {ebook_paths & manga_paths}"
+    )
+    # System exposes source_surface so prompts CAN diverge per surface.
+    for b in ebook_covers:
+        assert b.get("source_surface") == "ebook"
+    for b in manga_covers:
+        assert b.get("source_surface") == "manga"
+    # Output paths must include the source_surface segment so two cover
+    # PNGs land in distinct directories — required for KDP vs manga asset
+    # sorting downstream.
+    for b in ebook_covers:
+        assert "/ebook/" in b["output_path"], b["output_path"]
+    for b in manga_covers:
+        assert "/manga/" in b["output_path"], b["output_path"]
+
+
 def test_lora_resolution_uses_plans():
     """A known V1.0 brand (stillness_press) resolves to its style + character
     LoRA refs from the plans YAML."""

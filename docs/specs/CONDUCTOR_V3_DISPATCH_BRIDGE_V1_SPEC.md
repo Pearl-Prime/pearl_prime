@@ -45,10 +45,17 @@ re-entrant fan-out across 296 cells × ~25 units over 5–10 days.
 N ` ```batch ` blocks consumable by `batch_runner.load_plan`.
 
 **Per-batch fields:**
-- `batch_id` — deterministic `sha1(brand|locale|surface|series_idx|episode_idx)[:16]`
+- `batch_id` — deterministic
+  `"v3_" + sha1(brand|locale|source_surface|surface|series_idx|episode_idx)[:14]`.
+  See AMENDMENT-2026-05-12-COVER-UNIQUENESS below for why `source_surface`
+  participates in the hash.
 - `brand_id`
 - `locale` (BCP-47 lower form: `en-us|ja-jp|zh-tw|zh-cn`)
-- `surface` (`cover` | `panel`)
+- `surface` (`cover` | `panel`) — the render surface
+- `source_surface` (`ebook` | `manga`) — the allocation TSV row that
+  produced this batch. A single brand+locale pair may carry BOTH an
+  `ebook` and a `manga` allocation row; both rows emit one cover each, and
+  `source_surface` keeps them distinct.
 - `dispatch_path` (FLUX cover → `pearl_star`; Qwen panel → `runcomfy` per
   AMENDMENT-2026-05-10-PATH-BY-WORKFLOW)
 - `workflow_template` (`flux_txt2img_manga.json` for cover,
@@ -58,7 +65,8 @@ N ` ```batch ` blocks consumable by `batch_runner.load_plan`.
   `brand_cover_art_specs.yaml`)
 - `style_lora` (`brand_lora_plans.brand_style_loras.<key>`)
 - `character_lora` (`brand_lora_plans.character_loras.<teacher>` if applicable)
-- `output_path` (`artifacts/manga/conductor_v3_<run_id>/<locale>/<batch_id>.png`)
+- `output_path`
+  (`artifacts/manga/conductor_v3_<run_id>/<locale>/<source_surface>/<batch_id>.png`)
 - `series_idx`, `episode_idx`, `priority_phase`, `series_title_internal_only`
 
 **Cover authoring rule (cover_text_overlay_two_stage):** the cover
@@ -225,3 +233,58 @@ Coverage target: ≥ 90% on the three new modules.
 - Catalog generation (CSV rows for KDP/ACX) is owned by
   `scripts/catalog/generate_manga_catalog.py`; this bridge only emits
   image-generation batches.
+
+---
+
+## AMENDMENT-2026-05-12-COVER-UNIQUENESS
+
+**Cap entry version bump:** `CONDUCTOR-V3-DISPATCH-BRIDGE-V1-01` v1.1
+
+**Trigger:** Pearl_Conductor v3 (run_id `conductor_v3_2026_05_11_t0103`)
+rejected the full plan at checkpoint init. Of the 296-cell allocation TSV,
+148 brand+locale pairs carry BOTH an `ebook` row and a `manga` row. The
+prior batch_id scheme — `sha1(brand|locale|"cover"|series_idx|0)` — collapsed
+the two cover batches to the same hash, producing **724 duplicate
+batch_ids per 13,540-batch full plan** (181 collisions × 4 locales).
+Checkpoint init enforces uniqueness, so the run was aborted at zero spend
+(no theater).
+
+**Fix (Option A — distinct covers per surface):**
+
+1. `_batch_id(brand, locale, source_surface, surface, sidx, eidx)` now
+   takes the allocation row's `source_surface` (`ebook` | `manga`) as a
+   dedicated hash segment. Two surface rows under the same brand+locale
+   produce distinct cover IDs.
+2. `output_path` now includes a `<source_surface>` segment between
+   `<locale>/` and `<batch_id>.png`. Ebook-cover and manga-cover PNGs land
+   in distinct directories (`…/en_US/ebook/v3_….png` vs
+   `…/en_US/manga/v3_….png`).
+3. Panel batches receive the same segment defensively (they already
+   disambiguate by `episode_idx`; the symmetry prevents future surface
+   additions from re-introducing collisions).
+4. Each batch dict now exposes `source_surface` as a first-class field so
+   downstream authors can switch on it (e.g. KDP-cover-specific framing vs
+   manga-cover-specific framing).
+
+**Verification (full 296-cell expansion):**
+
+| locale | batches | unique batch_ids | dup batch_ids | unique output_paths | dup output_paths |
+| --- | --- | --- | --- | --- | --- |
+| en_US | 3,385 | 3,385 | 0 | 3,385 | 0 |
+| ja_JP | 3,385 | 3,385 | 0 | 3,385 | 0 |
+| zh_TW | 3,385 | 3,385 | 0 | 3,385 | 0 |
+| zh_CN | 3,385 | 3,385 | 0 | 3,385 | 0 |
+| **total** | **13,540** | **13,540** | **0** | **13,540** | **0** |
+
+**Tests** (`tests/catalog/test_v1_1_allocation_to_batch_plan.py`):
+- `test_batch_id_uniqueness_full_allocation` — expands the real allocation
+  TSV, asserts uniqueness across all 13,540 batches plus the per-locale
+  table above.
+- `test_ebook_and_manga_covers_diverge` — synthetic brand+locale carrying
+  both ebook and manga rows; asserts distinct batch_ids, distinct
+  output_paths, distinct `source_surface` field values.
+
+**Operator action:** re-fire Pearl_Conductor v3 with a fresh `run_id`
+after this PR merges. Existing partial checkpoints for
+`conductor_v3_2026_05_11_t0103` should be discarded (no rows written
+beyond init).
