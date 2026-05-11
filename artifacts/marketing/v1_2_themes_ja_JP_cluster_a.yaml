@@ -1,0 +1,779 @@
+# V1.2 themes — Cluster A (Anxiety/Somatic/Sleep) × ja_JP
+# 25 series = 5 brands × 5 series — natural Japanese content (ja-native)
+#
+# Authority chain (read before editing):
+#   - artifacts/research/v1_2_genre_allocation_constraint_2026-05-12.md  (BINDING per-cluster allocation)
+#   - artifacts/research/manga_bestseller_magical_serial_framework_2026-05-12.md  (PR #1051)
+#   - artifacts/research/manga_genz_genalpha_portal_framework_2026-05-13.md       (PR #1053)
+#   - config/manga/canonical_brand_list.yaml  (37-brand canon)
+#   - artifacts/marketing/v1_2_themes_en_US_cluster_a.yaml  (PR #1056 pilot — structural template)
+#
+# Scope:
+#   - locale:           ja_JP
+#   - cluster:          A — Anxiety/Somatic/Sleep
+#   - brands:           5 (stillness_press, sleep_restoration_iyashikei, somatic_wisdom_shojo,
+#                          body_memory_shojo, stabilizer_healing)
+#   - series per brand: 5
+#   - total series:     25
+#
+# Locale guidance applied:
+#   - 100% natural Japanese for: series_title, series_logline, series_description,
+#     opening_5_volume_arc, long_arc_spine, reader_promise, marketing_angle, audience.
+#   - Structural enums in English: persona_archetype, daily_life_anchor, portal_mechanic,
+#     episodic_frame_per_volume, magical_register, serial_engine, reading_platform_fit,
+#     genre_family, emotional_engine.
+#   - Tone references: 『葬送のフリーレン』感情の節度 + 『薬屋のひとりごと』職能の確かさ
+#     + 『よつばと!』静かな驚き + 『蟲師』日常の中の超常.
+#   - reading_platform_fit ratio: ~70% manga_traditional, ~30% webtoon_vertical
+#     (INVERTED from en_US — JP buyers prefer pages, older-skewed).
+#   - Cultural anchors used: 銭湯, 神社, 茶屋, 商店街, 喫茶店, 駅, 田舎, 縁側, 路地.
+#   - Persona mix: ~50% Gen Z, ~25% Gen Alpha, ~20% Millennial, ~5% Gen X (Mill heavier than en_US).
+#   - comp_titles: real JP titles fitting each series' register.
+#
+# Genre allocation for Cluster A × ja_JP (within binding ranges):
+#   healing:                6
+#   slice_of_life:          5
+#   supernatural_everyday:  5
+#   mystery_cozy:           4
+#   fantasy_adventure:      3
+#   romance:                1
+#   horror:                 1
+#   school:                 0
+#   TOTAL:                  25
+#
+# Brand-id mapping (constraint doc -> canonical_brand_list.yaml):
+#   stillness_press                 -> stillness_press                 (exact)
+#   sleep_restoration_iyashikei     -> sleep_restoration_iyashikei     (exact)
+#   somatic_wisdom_shojo            -> somatic_wisdom_shojo            (exact)
+#   body_memory_seinen              -> body_memory_shojo               (mapped)
+#   panic_first_aid_stabilizer      -> stabilizer_healing              (mapped)
+
+schema_version: "1.2"
+locale: ja_JP
+cluster: A
+cluster_name: "Anxiety/Somatic/Sleep"
+total_series_target: 25
+total_brands_target: 5
+series_per_brand_target: 5
+
+series:
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 01 / 05 — stillness_press (flagship · josei · anxiety)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: stillness_press__ja_JP__sangenjaya_konbini_yoru_no_tana
+    brand_id: stillness_press
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "三軒茶屋の深夜コンビニに来る不安を抱えたお客一人ひとりの肩に、店員にだけ見える小さな蛍光色の生き物が乗っている。彼女は商品と一緒に、ポケットに収まる小さな儀式を渡す。その生き物がもともと誰のものだったのかを、巻を重ねるごとに知っていく。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "夜のコンビニ、三番目の棚"
+    series_logline: "深夜のコンビニで、不安を抱えたお客の肩に乗る小さな生き物が見える店員。彼女はその人に合う棚を、ちゃんと知っている。"
+    series_description: "美緒は三軒茶屋の二十四時間営業のコンビニで夜勤を務めている。蛍光灯のかすかな唸りは、いつの間にか耳に入らなくなった。最初のお客は、眠れない法律事務所勤めの男性。彼の肩には、小さなちらつく生き物がいる。美緒はディカフェのコーヒーとラベンダー味の飴を打ち、紙片を一枚そっと添える。そこには、パニックが戻ってきたとき自分にかける一言だけが書いてある。生き物は残る。客は帰る。夜ごとに新しい客と、新しい生き物。家賃の不安、論文の渦、別れた恋人の新しいパートナー。美緒は戦わない。お客がその生き物を少しだけ楽に抱えて帰れるよう、棚の商品と小さな儀式を選ぶ。蛍光灯のしんとした明かりの中、静かに進む話。"
+    opening_5_volume_arc:
+      vol_1: "最初の客。法律事務所の青年。肩の上の蛾のような生き物。ディカフェとラベンダーの飴、そして紙片一枚。"
+      vol_2: "美大生の客。スマートフォンを開いた瞬間に現れる、鏡のように小さな比較の生き物。"
+      vol_3: "夜勤明けの看護師。生き物は、抱きすぎて色が褪せかけている。美緒は喪のための棚も置けることを知る。"
+      vol_4: "最初の常連客。法律事務所の青年が戻ってくる。肩の生き物はひと回り小さい。美緒は自分の肩にも生き物がいることに、初めて気づく。"
+      vol_5: "本部のエリアマネージャー巡回。棚卸しが遅いと指摘される。店舗そのものに棲む生き物——企業の燃え尽き妖怪——に名前がつく日。美緒は残ることを選ぶ。"
+    comp_titles: ["コンビニ人間", "薬屋のひとりごと", "深夜食堂", "夜は短し歩けよ乙女", "ホリミヤ"]
+    reader_promise: "あなたの不安にはかたちがあって、それを知っている店員がいる。"
+    marketing_angle: "『コンビニ人間』に小さな妖怪を一匹入れたら——そして、その妖怪が優しかったら。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + chosen_family
+    audience: "都市部で初職に就いた二十代前半の女性、自分の不安に名前をつけられる読者層"
+
+  - series_id: stillness_press__ja_JP__sobo_no_techo
+    brand_id: stillness_press
+    locale: ja_JP
+    persona_archetype: GZ-uni
+    daily_life_anchor: content_creation
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "亡くなった祖母から受け継いだ小さな手帖は、触れた人のいちばん近くにいる誰かの恐れを書き写す。主人公は巻ごとに一つずつ、その恐れを返す作法を覚えていく。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "祖母の手帖"
+    series_logline: "大学生のいりすは、亡き祖母から手のひらほどの革の手帖を受け取る。手帖には、近くにいる人の不安が、祖母の字で書き写されていく。"
+    series_description: "祖母の四十九日が明けて、いりすは形見の手帖を受け取った。トランプの箱ほどの大きさの、革表紙の手帖。添えられていた指示はただ一行——『いつもそばに。バスでは開かないこと』。最初にバスで開いたとき、隣に座っていた女子高生の翌日の化学の試験への怯えが、祖母の筆跡で書かれていた。いりすは書くのを止められないが、応えることはできる。一巻ごとに一つ、小さな作法を覚える——呼吸、五・四・三・二・一のグラウンディング、別の言葉での言い換え、自分への許可。声に出して言うと、ページは消え、不安は隣人の体から離れていく。手帖は埋まっては空き、また埋まる。最後のページだけは、いりすが生まれてからずっと白いまま。誰の名前が現れるのか。武蔵野の真夜中までやっている図書館、ポメラニアンの同居人、ゆっくり進む大学生活の物語。"
+    opening_5_volume_arc:
+      vol_1: "バスの少女。化学の試験。一呼吸。ページが消える。"
+      vol_2: "バスの運転手。リストラに怯える三児の父。別の作法。手帖は満ち、また空く。"
+      vol_3: "同居人のポメラニアン女子。手帖が開かないまま勝手に書き始める。RSDが可視化される。"
+      vol_4: "顔の知らない人。書かれていたのは喪——まだ知らない誰かのためのもの。"
+      vol_5: "祖母の筆跡が、少しだけ変わる。手帖がいりすに返事をしている、というかすかな兆し。"
+    comp_titles: ["薬屋のひとりごと", "葬送のフリーレン", "コーヒーが冷めないうちに", "森崎書店の日々", "君は月夜に光り輝く"]
+    reader_promise: "どんな不安にも、それに合う作法がある。作法は手帖一冊に収まる。"
+    marketing_angle: "『コーヒーが冷めないうちに』の祖母の温度を、心理学リテラシーのある大学生世代に手渡したら。"
+    genre_family: slice_of_life
+    emotional_engine: inherited_wisdom + competent_calm_specialist
+    audience: "メンタルヘルスの語彙を持ち、亡き祖母の記憶を抱える大学生世代"
+
+  - series_id: stillness_press__ja_JP__doukyonin_wa_watashi_no_fuan_ga_mieru
+    brand_id: stillness_press
+    locale: ja_JP
+    persona_archetype: GZ-queer
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "二十四歳のクィアなイラストレーターの不安は、家に棲む小さな妖怪として現れる。それが見えるのは新しい同居人だけ——日常魔法の使い手で、似た事情を持つ友人たちを少しずつ紹介してくれる。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "同居人は私の不安が見える"
+    series_logline: "ネット掲示板で見つけた同居人と暮らし始めたあしゃ。三日目の朝、シリアルの箱越しに同居人が小さな灰色の生き物に向かって『おはよう、ちびちゃん』と言った。"
+    series_description: "あしゃは二十四歳のノンバイナリー・イラストレーター。高校生のころから、肩のあたりにいる小さな灰色の生き物を、ずっと一人で抱えてきた。風呂にも、バスにも、寝室にもついてくる。誰にも言ったことがなかった。新しい同居人のヌールはレバノン系日本人の編み物好きな経理職で、引っ越して三日目の朝、シリアルの箱越しに『おはよう、ちびちゃん』とこともなげに言った。一巻ごとにヌールは、同じように『生き物が見える』友人を紹介してくれる——蛸を背負ったトランスの男性バリスタ、髪に小さなカラスを宿す聴覚障がいの院生、三匹を連れたポリアモリーの多言語話者。仲間が増えるたび、生き物たちはやわらかくなる。長期の伏線——ヌールに見えるようになったきっかけは何で、なぜ彼女自身の生き物がいちばん大きいのか。クィア性、神経多様性、世代を越えた傷は、ここでは前提として置かれている。週ごとのテーマは『カミングアウト』ではなく、『カムイントゥ——自分に帰っていく』ことの方。"
+    opening_5_volume_arc:
+      vol_1: "引っ越しの日。シリアルの箱越しの一言。あしゃは恥ではなく安堵で、洗面所で泣く。"
+      vol_2: "トランスのバリスタ。背中の蛸に名前がつく。下北沢のコーヒー店が、もう一つの居場所になる。"
+      vol_3: "聴覚障がいの院生。髪のカラスは手話を話す。仲間は四人になる。"
+      vol_4: "家族とのテレビ通話。画面の中で、あしゃの生き物が三倍に膨らむ。ヌールはフレームから外れない。"
+      vol_5: "深夜二時の台所で、一度だけヌール自身の生き物が見える。ヌールよりも大きい。長い謎が、ここから始まる。"
+    comp_titles: ["違国日記", "しまなみ誰そ彼", "とんがり帽子のアトリエ", "ホリミヤ", "私の少年"]
+    reader_promise: "あなたの不安は本物で、かたちがあって、それを見たうえで一緒にいてくれる人がいる。"
+    marketing_angle: "『違国日記』の選びとる家族のぬくもりを、メンタルヘルスを語彙にもつZ世代のクィアな日常に重ねたら。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + named_and_seen
+    audience: "クィアでネウロダイヴァージェントな都市部の二十代クリエイティブ層、メンタルヘルス・リテラシー高め"
+
+  - series_id: stillness_press__ja_JP__hitotsu_saki_no_eki
+    brand_id: stillness_press
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: school_commute
+    portal_mechanic: train_station
+    episodic_frame_per_volume: locale
+    magical_register: supernatural_everyday
+    serial_engine: location_anthology
+    long_arc_spine: "二十六歳の女性が最後のパニック発作の夜に降りてしまった駅は、地図に載っていない一駅先の駅だった。誰かが発作のさなかにいるときだけ、その駅は開く。彼女は何度もその駅に戻り、降りた人を一人ずつ送り出していく。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "ひとつ先の駅"
+    series_logline: "井戸ゆいの最後のパニック発作は、終電の小田急線だった。そこで一駅多く乗ってしまい、地図にない駅で温かい麦茶を渡された。あの駅には、誰かのために戻れる。"
+    series_description: "ゆいは二十六歳。大学で最初の発作、二十三で最悪の発作、二十六歳のあの夜の小田急線が、最後の発作だった。いつもの駅をひとつ過ぎてしまい、降り立った駅は色が違った——見たことのない深い緑のタイル、三日月のかたちの裸電球、紙コップに温かい麦茶を注いで『またいつでもおいで』と言った駅員。信じなかった。けれど、自分と同じ路線で誰かが目に見えて発作を起こした夜、降りずに過ぎ、もう一駅。月の駅は、開いた。各巻、別の都市の、終点のひとつ先にある駅を訪ねる——小田急、山手、地下鉄丸ノ内、京都の市電、大阪環状。それぞれの駅は、かつてそこで降りた誰かが、いま勤めている。一巻ごとに一人を、ホームへ送り出す。長期の謎は、この路線を最初に敷いたのは誰で、終点はどんな場所か。"
+    opening_5_volume_arc:
+      vol_1: "小田急線。最初の帰還。十代の少年がパニックの最中にいる。麦茶。最初の一言——『またいつでもおいで』。"
+      vol_2: "山手線。日曜夜の電車に揺られるサラリーマン。駅にも名前がつく。あの夜の駅員と再会する。"
+      vol_3: "京都の市電。修士論文の佳境にいる院生。降りた駅は『出口』でもあると、ゆいは知る。"
+      vol_4: "大阪環状線。共同制作の打ち合わせで燃え尽きた若いクリエイター。初めての複数人ケース。"
+      vol_5: "地下鉄丸ノ内。発作の最中にいるのは、ゆいの大学時代のルームメイト。彼女はゆいを見分ける。物語の核が、ここで動き出す。"
+    comp_titles: ["千と千尋の神隠し", "コーヒーが冷めないうちに", "葬送のフリーレン", "アフターダーク", "夜は短し歩けよ乙女"]
+    reader_promise: "いちばん辛かった夜には扉があって、別の誰かのために、もう一度くぐることができる。"
+    marketing_angle: "『千と千尋』の駅を、パニックを名前で呼べる世代の通勤路線に置き換えたら。"
+    genre_family: supernatural_everyday
+    emotional_engine: paying_it_forward + competent_calm_specialist
+    audience: "都市の通勤電車で働く二十代後半の知識労働者層、パニックや不安を言語化できる読者"
+
+  - series_id: stillness_press__ja_JP__nichiyou_no_kogusuriya
+    brand_id: stillness_press
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: ritual
+    episodic_frame_per_volume: recipe
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十五歳の女性が祖母から受け継いだ日曜だけ開く小さな小薬屋。来る客一人ひとりに、ポケットに入る小さな儀式を一つ渡す。儀式はかつて別の誰かのものだった——主人公はその系譜を、巻を重ねるごとに辿っていく。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "日曜の小薬屋"
+    series_logline: "日曜だけ開く。お客一人につき一つの儀式。その儀式はかつて誰かのもので、いつかまた別の誰かのものになる。"
+    series_description: "蓮はひとつの鍵と、ひとつの指示だけを祖母から受け継いだ——『日曜のみ、十一時から五時まで開けること』。下町の商店街の二階、四畳半ほどの店。並んでいるのは商品らしいものではない。瓶に入った折りたたまれた紙片、引き出しの中の燻した茶葉、結び目の入った絹糸の盆。それでも、客は店を見つけてやって来る。蓮は耳を傾け、一つだけ問いを返し、棚から一つを選んで手渡す。客は三十秒で、机の上でも電車の中でも、駅のトイレの個室でも実践できる小さな儀式を一つ、ポケットに入れて帰る。在庫が補充されるのは、客が戻ってきて、自分に効いた儀式を少しだけ変えて店に置いていったとき。長期の謎——祖母が最初の店主で、誰にも渡さなかった儀式が一つだけ、レジの引き出しの奥に畳まれて残っている。蓮はゆっくり、その一冊の『書』になっていく。"
+    opening_5_volume_arc:
+      vol_1: "店を開けた最初の日曜。五十代の女性。折りたたまれた紙片。一九八二年に父を落ち着かせた一文。"
+      vol_2: "大学一年生。燻した茶葉。手順——湯を注ぐ、香りを嗅ぐ、飲まないこと。儀式は彼女と帰っていく。"
+      vol_3: "避難訓練の翌週に来る高校教師。結び目の絹糸。糸に名前がつく。"
+      vol_4: "最初の戻り客。一巻目の女性が、紙片を少し変えて返しに来る。在庫が増える。"
+      vol_5: "閉店時、蓮はレジの引き出しを開ける。祖母の畳まれた紙片が、初めて目に入る。読みはしない。"
+    comp_titles: ["薬屋のひとりごと", "深夜食堂", "猫を抱いて象と泳ぐ", "森崎書店の日々", "ツバキ文具店"]
+    reader_promise: "毎週日曜、月曜に使える小さなものを一つ、ポケットに入れて持ち帰れる。"
+    marketing_angle: "『薬屋のひとりごと』の職能の確かさを、現代の小さな商店街に下ろしたら。"
+    genre_family: mystery_cozy
+    emotional_engine: competent_calm_specialist + inherited_wisdom
+    audience: "都市部で働き始めた二十代後半、暮らしの中の儀式に関心のある読者層"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 02 / 05 — sleep_restoration_iyashikei (core · josei · sleep)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: sleep_restoration_iyashikei__ja_JP__shinya_podcast_no_chiisai_kami
+    brand_id: sleep_restoration_iyashikei
+    locale: ja_JP
+    persona_archetype: GZ-uni
+    daily_life_anchor: content_creation
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十三歳の眠りのポッドキャスト配信者の脇に、いつも小さな灰色の眠りの神が座っている。ある日からその神は、配信を聴くリスナーたちの夢に出向き、一人ずつの眠れない夜をほどいていく。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "夜更けのポッドキャスト"
+    series_logline: "毎週火曜日の二十三時、彼女は番組を録音する。毎週火曜日の午前三時、彼女の脇にいる小さな眠りの神が、聴いている誰かの夢を訪ねる。"
+    series_description: "蓮は二十三歳、ジャーナリズム専攻の三回生。聴取者二百七十人の小さなポッドキャストを運営している。番組は青空文庫の朗読を、ゆっくりと、低い声で読むだけ。マイクの脇には、子どものころから見えている小さな灰色の眠りの神が座っている。ある水曜日、メールが届く——『昨夜、灰色のちいさな生き物の夢を見て、三週間ぶりに眠れました』。蓮は気づく。神は、録音から出ていっている。一巻ごとに、神は一人のリスナーを訪ねる——その人の眠れない理由が描かれ、夢の中での訪問が描かれ、その人が眠る。リスナーは、それが蓮であることを知らない。長期の弧——神は少しずつ歳をとっている。蓮はその世話の仕方を学んでいく。二百七十一人目のリスナーがいて、その人の夢にだけ、神は行こうとしない。それは誰の物語なのか。"
+    opening_5_volume_arc:
+      vol_1: "最初のメール。三週間眠れない医学部生。神が訪ねる。彼は眠る。"
+      vol_2: "夜勤の看護師。神は蓮に、交代勤務の概日リズムを教える。"
+      vol_3: "親が夜ごとに喧嘩する家の女子高生。神の介入は、いつもより少し長い。"
+      vol_4: "番組内で神に気づいたリスナーが現れる。メールは一行だけ——『ありがとう』。"
+      vol_5: "二百七十一人目。神が行きたがらない夢の物語。長期の謎が動き出す。"
+    comp_titles: ["蟲師", "葬送のフリーレン", "薬屋のひとりごと", "夏目友人帳", "ツバキ文具店"]
+    reader_promise: "あなたの眠りを、誰かが手伝ってくれている。それが誰かは、たぶん最後まで分からない。"
+    marketing_angle: "『蟲師』の静けさを、ポッドキャストを聴いて眠ろうとする世代のために。"
+    genre_family: healing
+    emotional_engine: anonymous_gift + companion_roster
+    audience: "不眠を名前で呼べる、ポッドキャスト好きの二十代前半"
+
+  - series_id: sleep_restoration_iyashikei__ja_JP__tsuki_no_eki_no_nemuri_iin
+    brand_id: sleep_restoration_iyashikei
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: school_commute
+    portal_mechanic: train_station
+    episodic_frame_per_volume: locale
+    magical_register: supernatural_everyday
+    serial_engine: location_anthology
+    long_arc_spine: "あらゆる大都市の最終駅の、ひとつ先にある霊的な眠り医院。主人公は夜勤の夢渡り職員として働き、各巻ひとつの夢の領域を訪ねて、一人の眠れない人を取り戻していく。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "月の駅の眠り医院"
+    series_logline: "あらゆる都市の終点の、もうひとつ先に医院はある。夢渡りの夜勤職員は、一巻ごとに一人の眠れる人を取り戻す。"
+    series_description: "羽音は二十六歳。別れと喪の連鎖で一年分の眠りを失い、午前四時の山手線で一駅多く乗ってしまった。月の駅の医院が、彼女を雇った。いまは夜勤の夢渡り職員。シフトごとに世界中のどこかの都市の眠れない一人が、夢の領域として現れる——水底のバス停、時計だらけの森、海辺でもある台所、読者自身の未完の思考が並ぶ図書館。一巻に一つの領域、一人の眠り手。長期の弧——羽音自身の夢の領域は、勤め始めてからずっと閉鎖されている。準備ができるまで開かない。彼女は、まだ準備ができていない。"
+    opening_5_volume_arc:
+      vol_1: "水底のバス停。喪の不眠を抱えた高校生。取り戻される。"
+      vol_2: "時計だらけの森。生まれたての赤ん坊を抱えた新米の親の睡眠周期。取り戻される。"
+      vol_3: "海辺でもある台所。夜勤を続ける年配の看護師。取り戻される。"
+      vol_4: "未完の思考の図書館。羽音の大学時代のルームメイトが、偶然そこに現れる。"
+      vol_5: "シフト明け、羽音自身の領域が一瞬だけ見える。読者だけがそれを見る。"
+    comp_titles: ["千と千尋の神隠し", "アリア", "蟲師", "葬送のフリーレン", "夏目友人帳"]
+    reader_promise: "あなたの眠りには街があって、誰かがそこで夜勤を引き受けてくれている。"
+    marketing_angle: "『千と千尋』の駅を、不眠を抱える世代のための医院に書き換えたら。"
+    genre_family: fantasy_adventure
+    emotional_engine: competent_calm_specialist + anonymous_gift
+    audience: "都市部で不眠を抱える二十代後半、睡眠アプリ利用者、通勤電車世代"
+
+  - series_id: sleep_restoration_iyashikei__ja_JP__yoru_no_kicchin
+    brand_id: sleep_restoration_iyashikei
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "深夜一時から五時まで、看板も検索結果も出ない地下のキッチン。一人の客に温かい一杯の粥を出す。客は眠って帰り、店主は今日も眠らない。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "夜のキッチン"
+    series_logline: "一時から五時まで。一人につき一杯。粥は温かい。客は眠る。店主は眠らない。"
+    series_description: "芽生は二十六歳。下町の古い住宅の地下、看板もウェブにも載らない小さなキッチンを切り盛りしている。誰かに紹介されてきた、と思って来るのに、紹介した人の名前が思い出せない、そんな夜の店。深夜一時から五時まで。一人につき一杯。出てくるのは必ず温かい穀物の粥——お粥、粥のような雑炊、麦粥、玄米粥。芽生はひとつだけ問いを返して、一つだけ薬味を選ぶ。各巻、ひとりの客がやってくる。眠れない型——反芻、喪、過覚醒、画面疲れ、予期不安——とその粥が描かれる。客は帰って眠る。二度と来ない、もう必要がないから。長期の弧——芽生自身は四年眠っていない。客に出すたびに、自分にも少しずつ出している。二百杯目に出る粥は、ようやく自分自身の粥になる。"
+    opening_5_volume_arc:
+      vol_1: "最初の客。反芻の型。カルダモン入りのお粥。眠る。"
+      vol_2: "喪の不眠。生姜と塩を入れた中華粥。眠る。"
+      vol_3: "過覚醒の新米の母。味噌を一さじ落とした粥。眠る。"
+      vol_4: "画面疲れの高校生。シナモンと黒蜂蜜の麦粥。眠る。"
+      vol_5: "初めて、芽生のことをほとんど見分ける客が現れる。キッチンが、ほんの一瞬ちらつく。長期の弧が動き出す。"
+    comp_titles: ["深夜食堂", "あん", "森崎書店の日々", "コーヒーが冷めないうちに", "ツバキ文具店"]
+    reader_promise: "一杯と一晩で、あなたはたぶん眠れる。"
+    marketing_angle: "『深夜食堂』の温度を、不眠を抱える現代の若い読者のために。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + ritual_warmth
+    audience: "都市部で不眠を抱える二十代後半、食と温度に敏感な読者"
+
+  - series_id: sleep_restoration_iyashikei__ja_JP__yume_wo_kasu_appli
+    brand_id: sleep_restoration_iyashikei
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "睡眠記録アプリの有料プランは、実は妖怪たちが運営している。彼らはユーザーの夢を訪ねて眠りを助ける。主人公は唯一の人間モデレーター——一巻ごとに一つの介入を、人間味のあるものとして承認していく。"
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "プレミアム・ティア"
+    series_logline: "月四百九十円の有料プランには、妖怪が一人ついてくる。妖怪はユーザーの夢を訪ねる。ユーザーは眠る。クインはその過程を人間味あるものに保つ仕事をしている。"
+    series_description: "麻衣は三十二歳。睡眠記録アプリのスタートアップに『コンテンツモデレーター』として業務委託で入った三日目、有料プランの裏側を知る——課金されたユーザーの夢には、小さな、職業意識の高い、少し退屈そうな妖怪たちが派遣されている。麻衣の仕事は、訪問ログを見て介入を承認するか拒否するかを判断すること。ほとんどは問題ない。たまに問題がある。各巻一件——十代の侵入思考に強く出すぎた妖怪、当直で寝てしまいユーザーがその妖怪自身の夢を見てしまった件、ユーザーに情がうつってしまった妖怪。麻衣は妖怪たちを支える側に回っていく。長期の弧——会社は上場準備に入る。妖怪たちは目論見書に名前が載るのを嫌がる。麻衣はどちらに立つかを選ぶ。"
+    opening_5_volume_arc:
+      vol_1: "最初の承認拒否。やりすぎた妖怪。十代の侵入思考の件。"
+      vol_2: "当直で居眠りした妖怪。ユーザーがその妖怪の夢を見る。人事との会話。"
+      vol_3: "情がうつった妖怪。ユーザーはシングルファーザー。麻衣が交渉する。"
+      vol_4: "初めての上場準備会議。CEOにも妖怪がいることに、麻衣は気づく。"
+      vol_5: "麻衣は辞表を書く。あるいは交渉案を書く。選択が見えてくる。"
+    comp_titles: ["セクシー田中さん", "薬屋のひとりごと", "ワカコ酒", "アグレッシブ烈子", "メイドインアビス"]
+    reader_promise: "あなたの睡眠アプリには、見えない従業員がいる。誰かが彼らを大切にしている。"
+    marketing_angle: "『セクシー田中さん』の職場の手触りを、睡眠ウェルテックの裏側に持ち込んだら。"
+    genre_family: mystery_cozy
+    emotional_engine: humane_labor_advocacy + competent_calm_specialist
+    audience: "ウェルネス・テック業界のミレニアル世代、業務委託・モデレーション職に近い層"
+
+  - series_id: sleep_restoration_iyashikei__ja_JP__hito_no_yume_wo_miru
+    brand_id: sleep_restoration_iyashikei
+    locale: ja_JP
+    persona_archetype: GZ-uni
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: dream
+    episodic_frame_per_volume: dream_visitor
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "二十二歳の美大生は、別の誰かが見るべき夢を代わりに見ることができる。手伝ってくれる夢の仲間妖怪が、巻を重ねるごとに一匹ずつ増えていく。"
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "人の夢を見る"
+    series_logline: "依羅は誰かの夢を代わりに見られる。何年も前から、知らずにやっていた。いま、意図して始めようとしている。"
+    series_description: "依羅は二十二歳、美大の四回生。昔から夢の記憶が異様にはっきりしている。四年生になって気づく——昨日夢に出てきた友人が、本当にその夢を見ていた。メールが届いた、内容が一致した。依羅が代わりに見ている夢は、その人が見るべきなのに、自分では見られなかった夢。各巻、依羅は新しい夢の仲間妖怪を一匹ずつ得る——喪の夢を手伝う小さな狐、創作のスランプの夢を手伝う鷺、別れの整理の夢を手伝う蛾。受け手は、それを知らない。代償——依羅自身の眠りは浅く、自分の夢はだんだん薄くなる。長期の弧——誰が彼女に教えたのか。そして、依羅がまだ自分のために見ていない、最後の夢は何か。"
+    opening_5_volume_arc:
+      vol_1: "友人のための喪の夢。狐が現れる。"
+      vol_2: "同級生のための創作スランプの夢。鷺が現れる。"
+      vol_3: "別れた相手のための整理の夢。蛾が現れる。"
+      vol_4: "初めて、知らない人のために夢を派遣する。仲間が増える。"
+      vol_5: "依羅自身のためにとっておいた夢——その輪郭だけが、ほのめかされる。"
+    comp_titles: ["蟲師", "パプリカ", "薬屋のひとりごと", "葬送のフリーレン", "夏目友人帳"]
+    reader_promise: "あなたが必要としていた夢を、誰かが代わりに見てくれている。本人はそれを言わない。"
+    marketing_angle: "『蟲師』の手つきを、夢日記をつける世代のために、贈与の物語として。"
+    genre_family: supernatural_everyday
+    emotional_engine: anonymous_gift + companion_roster
+    audience: "二十代前半、夢日記を書く美大・創作系の読者"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 03 / 05 — somatic_wisdom_shojo (core · josei · somatic_healing)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: somatic_wisdom_shojo__ja_JP__pilatesu_no_chiisai_torena
+    brand_id: somatic_wisdom_shojo
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "元バレエダンサーのピラティス・インストラクター、二十五歳。新しい受講生の肩には、小さな『トレーナー妖怪』が乗っている。妖怪は、客の身体が何を抱えているかを示す。各巻、一人の客の身体の物語が、そっとほどかれる。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "スタジオの小さなトレーナー"
+    series_logline: "新しい受講生は、誰もが小さなトレーナー妖怪を連れてくる。妖怪は、口が言わないことを身体がどこで抱えているか、紗英に教える。"
+    series_description: "紗英は二十五歳。十九までクラシックバレエを真面目にやっていた。いまは京都の小さなスタジオで、朝六時と夜九時のピラティス・クラスを担当している。妖怪が見え始めたのは、教え始めて二年目。新しい受講生の肩や腰に、小さな鳥、小さな狐、ときに紗英の知らないかたちのもの。妖怪は、その身体が何を抱えているかを示してくれる——胸郭で止まった呼吸、骨盤に置かれた喪、肩甲骨の奥の名乗れない怒り。紗英はピラティスのキューを、心理的なキューと同じ温度で出す。肩甲骨に手を置く。然るべきタイミングで、ひとつだけ問いを出す。妖怪はやわらかくなる。客はまた来る。長期の弧——紗英自身の妖怪は、十九歳から離れない。誰にも見えない。それが彼女に踊らせない。踊らせるべきかどうかは、長い問いとして残る。"
+    opening_5_volume_arc:
+      vol_1: "最初の新規受講生。鳥の妖怪。止まった呼吸。一回のセッションでほどける。"
+      vol_2: "狐の妖怪。腰。物語は喪。二回かかってほどける。"
+      vol_3: "名前のない妖怪。骨盤。客はまだセラピストにも話していない。紗英は静かにいる。"
+      vol_4: "初めての戻り客。妖怪は小さくなっている。紗英の小さな報酬。"
+      vol_5: "鏡の中で、紗英は自分の妖怪を初めてはっきり見る。読者にもそのかたちが見える。紗英は目をそらす。"
+    comp_titles: ["聲の形", "とんがり帽子のアトリエ", "薬屋のひとりごと", "スキップとローファー", "ハチミツとクローバー"]
+    reader_promise: "あなたの身体には妖怪がいて、それを見てくれるトレーナーがいる。"
+    marketing_angle: "『聲の形』の身体への注意深さを、ピラティスのスタジオに置いたら。"
+    genre_family: slice_of_life
+    emotional_engine: somatic_repair + competent_calm_specialist
+    audience: "ピラティス・ヨガ・ボルダリングをする二十代後半、身体への意識が高い層"
+
+  - series_id: somatic_wisdom_shojo__ja_JP__karada_kara_no_tegami
+    brand_id: somatic_wisdom_shojo
+    locale: ja_JP
+    persona_archetype: GZ-queer
+    daily_life_anchor: content_creation
+    portal_mechanic: object
+    episodic_frame_per_volume: locale
+    magical_register: magical_realism
+    serial_engine: location_anthology
+    long_arc_spine: "ソマティック・セラピスト修行中の二十七歳が、亡き大伯母から受け継いだ手紙の保管庫。手紙はすべて、ある身体の部位から別の部位に宛てて書かれている。各巻、ひとつの部位を訪ね、一人の客のためにひとつの手紙を声に出して読む。"
+    volume_runway_target: 100
+    reading_platform_fit: manga_traditional
+    series_title: "身体からの手紙"
+    series_logline: "保管庫の手紙は一九三二年から増え続けている。各巻、ひとつだけ、声に出して読む。"
+    series_description: "詩穂は二十七歳。札幌でソマティック・セラピーの修士課程を終えようとしている。亡き大伯母から受け継いだのは、木製の引き出し式の保管庫——いろいろな筆跡で、ある身体の部位から別の部位に宛てて書かれた手紙が、年代順に並んでいる。『手首様、肩より。あなたの分も、私が抱えていました』。『喉様、腹より。あなたが飲み込んだ言葉は、ここに届いています』。手紙は一九三二年から、大伯母が四つの街のクライアントから集め続けてきた。詩穂の仕事は、一巻目では、これをどうするかを考えること。三巻目までに、現在のクライアントの身体の物語と一致する手紙を、声に出して読み始める。読まれた部位が、ふっと光るようにゆるむ。長期の弧——保管庫の中に、生まれる前から詩穂宛ての一通が、確かに置かれている。"
+    opening_5_volume_arc:
+      vol_1: "手首。肩からの手紙。慢性の痛みを抱えた初めての客。"
+      vol_2: "喉。腹からの手紙。飲み込まれた喪を抱えた客。"
+      vol_3: "膝の裏。腰からの手紙。選びを保留にし続ける客。"
+      vol_4: "鎖骨。顎からの手紙。声を抑え続けた客。"
+      vol_5: "詩穂は自分宛ての封筒を、保管庫の中に見つける。長い弧が動き出す。まだ開封はしない。"
+    comp_titles: ["薬屋のひとりごと", "とんがり帽子のアトリエ", "あん", "聲の形", "ツバキ文具店"]
+    reader_promise: "あなたの身体は、ずっと手紙を書いてきた。誰かがそれを声に出して読み始める。"
+    marketing_angle: "ソマティック・セラピーを、手紙という装置で誰かに手渡せるかたちにしたら。"
+    genre_family: mystery_cozy
+    emotional_engine: inherited_wisdom + somatic_repair
+    audience: "ソマティック・セラピーに関心のある二十代後半、クィアな読者層"
+
+  - series_id: somatic_wisdom_shojo__ja_JP__shotengai_no_seitai_in
+    brand_id: somatic_wisdom_shojo
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "二十六歳の整体師の、商店街の二階にある小さな治療院。彼女と一緒に働く『張りの妖怪』の数が、巻を重ねるごとに増えていく——肩、顎、腰、骨盤、横隔膜、首。各巻、客の止まった身体の物語に、対応する妖怪が手を貸す。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "商店街の整体院"
+    series_logline: "パン屋の二階、四畳半の整体院。彼女と一緒に働く妖怪の名簿は、巻ごとに増える。客はベッドの上で眠る。"
+    series_description: "直美は二十六歳。柔道整復師の資格を取って二年、群馬の小さな町の商店街、パン屋の二階の四畳半を借りて整体院を開いた。最初の妖怪が現れたのは三週間目——肩の妖怪。直美が正しい結び目を見つけるのを手伝ってくれる。一巻目の時点で、名簿は三体（肩・顎・腰）。各巻、止まった身体の物語を持つ客が一人やってきて、対応する妖怪が直美と一緒に手をほどく。客はベッドの上で眠ってしまう。家に帰って、よく休む。妖怪は客にはついていかない。長期の弧——季節ごとに新しい妖怪が一体ずつ名簿に加わる——骨盤（四巻）、横隔膜（七巻）、首（十一巻）。謎は——妖怪たちは実は身体の部位に割り当てられているのではなく、抱えられた感情に割り当てられている。それぞれに、直美がまだ知らない物語がある。"
+    opening_5_volume_arc:
+      vol_1: "最初の客。肩の妖怪。長時間のデスクワーク。ほどける。"
+      vol_2: "顎の妖怪。学校で講演を続ける教師。ほどける。"
+      vol_3: "腰の妖怪。喪を抱えた客。ほどける。"
+      vol_4: "骨盤の妖怪が名簿に加わる。最初の客は産後の母親。"
+      vol_5: "直美は気づく——肩の妖怪は、実は喪の妖怪でもある。謎が動き出す。"
+    comp_titles: ["聲の形", "とんがり帽子のアトリエ", "薬屋のひとりごと", "あん", "スキップとローファー"]
+    reader_promise: "あなたの張りには名前があって、かたちがあって、ちゃんとほどかれる。"
+    marketing_angle: "商店街の小さな整体院を、身体リテラシーの高い若い読者のために、仲間の物語として。"
+    genre_family: healing
+    emotional_engine: companion_roster + somatic_repair
+    audience: "二十代後半、整体・ボディワークに関心のある都市部の社会人"
+
+  - series_id: somatic_wisdom_shojo__ja_JP__online_de_yawarakaku_naru
+    brand_id: somatic_wisdom_shojo
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: app
+    episodic_frame_per_volume: recipe
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十四歳の呼吸法インストラクターのSNSのDMには、フォロワーの止まった呼吸の癖がひとつずつ届く。各巻、彼女は新しい九十秒の練習をひとつ考案し、一本の動画として送り出す。"
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "オンラインで、やわらかくなる"
+    series_logline: "DMに届くのは、フォロワー一人ひとりの止まった呼吸。麻友は九十秒の練習を一つずつ考えて、一本の短い動画にする。"
+    series_description: "麻友は二十四歳。呼吸法インストラクターの資格を取って、TikTokとYouTubeショートで配信を始めた。一巻目の時点で登録は一万二千人、コメントは穏やか、DMはおびただしい。読んでいるうちに、麻友はパターンに気づく——一人ひとり、呼吸の止まり方が違う。胸の上で止まる人、吐ききれない人、肋骨の下が動かない人、息を取り合いに行ってしまう人。各巻、麻友は一人のフォロワーのパターンに合う九十秒の練習を新しく考案し、台所で撮って投稿する。コメント欄にひとつ、『これでした』とつく。長期の弧——配信が大きくなる。スポンサーが現れる。麻友の練習は、そのうちのどれが商品化され、どれが無料で残されるべきか。彼女自身の呼吸のことも、ゆっくり描かれる。"
+    opening_5_volume_arc:
+      vol_1: "胸の上で止まる呼吸。十代の女子高校生のDM。九十秒の練習。投稿される。"
+      vol_2: "吐ききれない呼吸。新人会社員。練習。投稿。コメント。"
+      vol_3: "肋骨の下が動かない呼吸。プログラマーの男性。練習。"
+      vol_4: "息を取り合いに行く呼吸。ステージに立つ歌い手。練習。"
+      vol_5: "最初のスポンサー提案。麻友は、何を売り、何を売らないかを選び始める。"
+    comp_titles: ["セクシー田中さん", "薬屋のひとりごと", "聲の形", "ホリミヤ", "ハチミツとクローバー"]
+    reader_promise: "あなたの止まった呼吸には、九十秒の練習がある。"
+    marketing_angle: "ウェルネス系インフルエンサーの仕事を、職能の物語としてまっすぐ描いたら。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + humane_labor_advocacy
+    audience: "SNSで呼吸法・ヨガを取り入れている二十代の社会人"
+
+  - series_id: somatic_wisdom_shojo__ja_JP__sento_no_nukumori
+    brand_id: somatic_wisdom_shojo
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: retail_service
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "下町の銭湯の番台に三十四歳で帰ってきた女性。湯の中で身体がやわらぐとき、客の肩から張りの妖怪がふっと離れる瞬間が見える。各巻、ひとりの客の体が思い出す物語を、湯気越しに描く。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "銭湯のぬくもり"
+    series_logline: "番台に立つと、湯に浸かった客の身体がやわらぐ瞬間が、ちゃんと見える。"
+    series_description: "深雪は三十四歳。大阪の広告代理店を辞めて、母方の祖父が遺した下町の銭湯を継いだ。番台に座って三ヶ月目、湯気越しに気づく——湯に浸かった客の身体から、肩や腰に乗っていた小さな張りの妖怪が、ふっと離れて湯に溶けていく瞬間がある。深雪はその瞬間に立ち会う。湯の温度を整え、薬湯の日を決め、休憩室で一杯の冷たい麦茶を注ぐ。各巻、客一人ひとりが、湯の中で身体が思い出した物語を、深雪に少しだけ話す——亡くなった夫のこと、続けてきた介護のこと、辞めた仕事のこと。深雪は聞く。長期の弧——銭湯は経営が苦しい。再開発の話もある。深雪は、この場所をどう残すかを、巻を重ねるごとに考えていく。"
+    opening_5_volume_arc:
+      vol_1: "番台三ヶ月目の朝。常連の七十代の女性。湯の中で肩の張りの妖怪がほどける。"
+      vol_2: "介護を続ける四十代の娘。週に二度の薬湯。"
+      vol_3: "辞めたばかりの三十代会社員。長湯。番台越しの五分の会話。"
+      vol_4: "再開発の説明会。銭湯の存続。妖怪たちが番台のまわりに集まる。"
+      vol_5: "深雪は、自分自身が湯にゆっくり浸かる夜を持つ。彼女自身の妖怪が、ひとつだけ離れる。"
+    comp_titles: ["テルマエ・ロマエ", "深夜食堂", "あん", "ツバキ文具店", "コーヒーが冷めないうちに"]
+    reader_promise: "湯に浸かれば、身体は思い出す。番台に、それを見てくれる人がいる。"
+    marketing_angle: "銭湯という最後の都市の余白を、身体リテラシーの物語として残す。"
+    genre_family: supernatural_everyday
+    emotional_engine: ritual_warmth + somatic_repair
+    audience: "三十代のキャリア中盤、地元に帰る・場所を継ぐことを考える読者"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 04 / 05 — body_memory_shojo (core · josei · somatic_healing/trauma)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: body_memory_shojo__ja_JP__hone_no_naka_no_kioku
+    brand_id: body_memory_shojo
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十六歳の骨董修復師の手の中で、器が小さく震えることがある。器に残った前の持ち主の身体の記憶が、修復のさなかに浮かび上がる。各巻、ひとつの器が、ひとつの身体の物語をほどく。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "骨の中の記憶"
+    series_logline: "彼女の手の中で、欠けた器が小さく震える。割れた茶碗には、前の持ち主の身体が抱えていたものが、まだ残っている。"
+    series_description: "椿は二十六歳。京都の路地裏の小さな工房で、金継ぎを中心とする骨董修復をしている。修復している器が、ときどき手のひらの中で小さく震える。震えと一緒に、前の持ち主の身体の記憶が浮かぶ——肩で受け止め続けた介護の重さ、喉の奥に飲み込んだ怒り、腰に巻きついた喪。椿は震えを聞く。金で継ぐ線の引き方を、その身体の物語に合わせて変える。器は、新しい持ち主のもとに送り出される。新しい持ち主の身体が、少しだけ楽になる。長期の弧——椿自身の身体は、十代の事故からずっと、ある重さを抱えている。工房に届く器の中に、いつか彼女の身体に向けて書かれたものが現れる。"
+    opening_5_volume_arc:
+      vol_1: "欠けた抹茶茶碗。前の持ち主は介護を続けた女性。肩の震え。金継ぎの線は、肩から鎖骨へ。"
+      vol_2: "割れた湯のみ。前の持ち主は喉の手術をした男性。喉の震え。金継ぎは縦に一本。"
+      vol_3: "ひびの入った皿。前の持ち主は若くして亡くなった姉。腰の震え。金継ぎは、皿を支える円として。"
+      vol_4: "客が、自分の身体が楽になったことに気づいて、もう一度工房を訪ねてくる。"
+      vol_5: "椿の十代の事故のことが、初めて言葉にされる。次に届く器が、彼女自身に向けて震え始める。"
+    comp_titles: ["ツバキ文具店", "薬屋のひとりごと", "聲の形", "あん", "蟲師"]
+    reader_promise: "あなたの身体が抱えてきたものは、誰かの手の中で、器を通してほどける。"
+    marketing_angle: "金継ぎという日本の手仕事を、トラウマ回復の物語としてまっすぐ描く。"
+    genre_family: healing
+    emotional_engine: somatic_repair + inherited_wisdom
+    audience: "二十代後半、手仕事・骨董・暮らしの繊細さに惹かれる読者"
+
+  - series_id: body_memory_shojo__ja_JP__furusato_no_engawa
+    brand_id: body_memory_shojo
+    locale: ja_JP
+    persona_archetype: GA-tween
+    daily_life_anchor: school_commute
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: location_anthology
+    long_arc_spine: "夏休みに祖母の田舎に預けられた小学六年生。縁側に座ると、村にいる年配の人たちの身体に小さな影のような生き物が見えるようになる。各巻、ひとつの家を訪ねて、その人の身体がずっと抱えてきたものを、一緒に縁側に並べる。"
+    volume_runway_target: 100
+    reading_platform_fit: manga_traditional
+    series_title: "祖母の家の縁側"
+    series_logline: "夏休み、田舎の祖母の家。縁側に座ると、村の年配の人の身体に乗っているものが、ぼんやり見える。"
+    series_description: "晴は小学六年生。両親の出張で、夏休みのあいだ祖母の家——四国の小さな村——に預けられている。祖母の家には縁側があって、午後三時ごろに座ると、向かいの畑からやってくる年配の人たちの身体に、小さな影のような生き物が乗っているのが見える。影は重そうだったり、薄かったり、震えていたりする。祖母は、晴にだけ見えるその影を、当たり前のように一緒に見る。各巻、晴は祖母と一緒に村のひとつの家を訪ねる——縁側でお茶を飲み、影の話を聞き、その人の身体が長く抱えてきたものを、縁側の上にそっと並べる。話が終わると、影はひと回り小さくなる。長期の弧——晴は、自分の身体にも小さな影が乗っていることに、夏の終わりに気づく。祖母は、それも見ていてくれている。"
+    opening_5_volume_arc:
+      vol_1: "縁側の午後三時。最初の隣人。畑の手伝いを五十年続けた女性。腰の影。"
+      vol_2: "戦争に行った祖父の兄弟の妻。胸の影。長い記憶。"
+      vol_3: "村で一人だけ若い世代の三十代の男性。肩の影。出戻りの理由。"
+      vol_4: "晴は自分の身体の影に気づく。学校でのこと。祖母は何も言わずに一緒に並ぶ。"
+      vol_5: "夏の終わり。晴は街に帰る。縁側は、来年の夏まで、また待っている。"
+    comp_titles: ["よつばと!", "蟲師", "夏目友人帳", "となりのトトロ", "アリス21"]
+    reader_promise: "あなたの身体が抱えているものは、縁側に並べていい。"
+    marketing_angle: "『よつばと!』の静かな驚きを、田舎の祖母の家の縁側に置いたら。"
+    genre_family: slice_of_life
+    emotional_engine: inherited_wisdom + somatic_repair
+    audience: "Gen Alpha（小学五年から中学生）、田舎の祖父母の家を持つ読者層"
+
+  - series_id: body_memory_shojo__ja_JP__yakei_no_jinja
+    brand_id: body_memory_shojo
+    locale: ja_JP
+    persona_archetype: GZ-uni
+    daily_life_anchor: school_commute
+    portal_mechanic: ritual
+    episodic_frame_per_volume: locale
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "二十一歳の神社のアルバイト巫女は、夜の境内で参拝者の身体が抱えてきたものを、お祓いのかたちでほどく作法を覚えていく。各巻、神社に住まう小さな神たちの名簿が、ひとつずつ増える。"
+    volume_runway_target: 100
+    reading_platform_fit: manga_traditional
+    series_title: "夜景の神社"
+    series_logline: "夜の境内で参拝するのは、昼に拝めない人たち。彼女は、その身体がずっと抱えてきたものを、お祓いのかたちでほどく作法を覚えていく。"
+    series_description: "凛は二十一歳、史学科の三回生。京都の小さな氏神神社で、夜のアルバイト巫女をしている。夜九時から十一時まで、境内に灯りをともし、たまにやってくる参拝者の対応をする。昼に来られない人ばかりだ。働く人、夜勤明けの人、誰にも見られたくない悩みを抱えた人。凛は、その人たちの身体に小さな影が乗っていることに、夏のはじめに気づく。同時に、神社の境内には小さな神様たちが住んでいる——手水舎の神、楓の木の神、灯篭の神。神様たちは、お祓いの作法を、凛にひとつずつ教えてくれる。各巻、ひとりの参拝者の身体がほどけ、新しい神様が名簿に加わる。長期の弧——本殿の奥には、まだ凛にも見えない神様がいる。その神様は、凛自身の身体の影を、いつか引き受けてくれる。"
+    opening_5_volume_arc:
+      vol_1: "夜の境内、最初の参拝者。手水舎の神がお祓いの作法を一つ教える。"
+      vol_2: "夜勤明けの看護師。楓の木の神。葉に手を当てる作法。"
+      vol_3: "別れたばかりの会社員。灯篭の神。ろうそくの作法。"
+      vol_4: "新しい神が名簿に加わる——拝殿の鈴の神。鈴を三度鳴らす作法。"
+      vol_5: "本殿の奥のほうから、まだ姿の見えない神の気配がする。凛はまだ、そこまでは行かない。"
+    comp_titles: ["夏目友人帳", "蟲師", "薬屋のひとりごと", "葬送のフリーレン", "ぬらりひょんの孫"]
+    reader_promise: "夜の神社には、あなたの身体の影を引き受けてくれる小さな神様が、ちゃんといる。"
+    marketing_angle: "『夏目友人帳』の妖怪の温度を、現代の神社のアルバイトに置いたら。"
+    genre_family: supernatural_everyday
+    emotional_engine: chosen_family + somatic_repair
+    audience: "Gen Z、神社・伝統文化・スピリチュアルなものに静かに関心のある大学生層"
+
+  - series_id: body_memory_shojo__ja_JP__mushi_to_karada
+    brand_id: body_memory_shojo
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: retail_service
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: soft_fantasy
+    serial_engine: case_of_the_week
+    long_arc_spine: "山間の小さな町で、身体の不調を見立てる『虫師』のような職人。客の身体に棲み着いた虫——身体の記憶のかたちをした生き物——を、各巻ひとつずつ、丁寧に外していく。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "身体の虫"
+    series_logline: "彼女は身体に棲み着いた『虫』を見立てる。虫はそれぞれ、その人がずっと抱えてきた記憶のかたち。各巻、ひとつの虫が、ひとつの身体から離れる。"
+    series_description: "悠子は三十六歳。長野の山間の町で、亡き師匠から受け継いだ小さな診療所に似た仕事場を開いている。看板には『身体見立て』とだけ書いてある。客の身体には、小さな虫——蝶のような、蛾のような、ときに名づけられない生き物——が棲み着いている。虫はそれぞれ、客がずっと抱えてきた記憶のかたち。介護の重さ、母の言葉、若いころの傷、忘れた約束。悠子は虫を見立て、客と一緒に虫の名前を呼び、丁寧に外していく。虫は、悠子の仕事場の小さな箱に集められ、ときどき夜に箱から出て庭で休む。長期の弧——師匠の遺した一番大きな虫は、まだ箱の中で動かない。それを最後に、悠子は仕事場をどうするかを決める。"
+    opening_5_volume_arc:
+      vol_1: "最初の客。蝶のかたちの虫。母の言葉。離れる。"
+      vol_2: "蛾のかたちの虫。若いころの傷。離れる。"
+      vol_3: "名前のない虫。忘れた約束。客は思い出すか、思い出さないかを選ぶ。"
+      vol_4: "庭で休む虫たち。悠子は、夜にだけ虫と話せる。"
+      vol_5: "師匠の遺した虫が、初めて少しだけ動く。長い弧が動き出す。"
+    comp_titles: ["蟲師", "薬屋のひとりごと", "葬送のフリーレン", "夏目友人帳", "ぬるい毒"]
+    reader_promise: "あなたの身体に棲み着いたものには、名前があって、ちゃんと離れていく道がある。"
+    marketing_angle: "『蟲師』の手つきを、トラウマ回復の物語として、現代の山間の町に置いたら。"
+    genre_family: fantasy_adventure
+    emotional_engine: competent_calm_specialist + inherited_wisdom
+    audience: "ミレニアル世代、トラウマ・身体記憶のテーマに静かな関心を持つ読者"
+
+  - series_id: body_memory_shojo__ja_JP__hagureta_kioku_no_ie
+    brand_id: body_memory_shojo
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: occult_cosmic
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十七歳の整理収納アドバイザーが請け負うのは、亡くなった人の家の片付け。家の中の物には、生前の身体が抱えていたものが残っている——ときに、それは静かに依頼者の身体に移ろうとする。彼女はそれを、丁寧に止める作法を学んでいく。"
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "はぐれた記憶の家"
+    series_logline: "亡くなった人の家を片付けると、ときどき、まだほどけないものが残っている。彼女はそれを、依頼者の身体に移らないように、ちゃんと止める。"
+    series_description: "果林は二十七歳。整理収納アドバイザーの資格を取り、遺品整理に特化した一人会社を立ち上げて二年目。依頼者はたいてい、亡くなった親や祖父母の家を任された四十代から六十代。家の中の物——タンスに畳まれた服、引き出しの古い手紙、台所の缶詰——には、生前の人がその身体で抱えていたものが、まだ薄く残っている。果林にはそれが見える。気をつけないと、残ったものは依頼者の身体に静かに移ろうとする。母から娘へ、父から息子へ。果林は、それを止める作法を覚えていく。塩、湯、声に出して名前を呼ぶこと、燃やすこと、写真に撮って手放すこと。長期の弧——果林自身の祖母の家の片付けは、まだ請け負えていない。それを引き受けられるようになるまでの物語。怖さは抑制的に、温度はあくまで実務的に。"
+    opening_5_volume_arc:
+      vol_1: "最初の依頼。亡き母の家を片付ける五十代の娘。タンスの中の服。塩。"
+      vol_2: "亡き父の書斎を片付ける四十代の息子。古い手紙の束。声に出して名前を呼ぶ。"
+      vol_3: "祖母の台所。三人の孫娘。缶詰と古い醤油。湯と、写真。"
+      vol_4: "依頼者の身体に、移りかけたものが見える。果林は止める。"
+      vol_5: "果林は自分の祖母の家のことを、初めて誰かに話す。まだ、引き受けはしない。"
+    comp_titles: ["地獄少女", "墓場鬼太郎", "ぬらりひょんの孫", "怪~ayakashi~", "百鬼夜行抄"]
+    reader_promise: "亡くなった人が抱えていたものを、あなたの身体に引き継がせない作法がある。"
+    marketing_angle: "遺品整理という現代の仕事を、ホラーの最低限の温度で、回復の物語として描く。"
+    genre_family: horror
+    emotional_engine: competent_calm_specialist + somatic_repair
+    audience: "都市部で働く二十代後半、家族の死・遺品整理の実務に関心のある読者"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 05 / 05 — stabilizer_healing (core · seinen · burnout/panic-first-aid)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: stabilizer_healing__ja_JP__panic_no_kyukyu_shitsu
+    brand_id: stabilizer_healing
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十一歳の元救急救命士。心身のパニック発作専門の小さな『救急処置室』を、商店街の隅に開く。来る客一人ひとりに、九十秒以内で発作を止める実務的な作法を、その人の身体に合わせて手渡す。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "パニックの救急室"
+    series_logline: "発作のとき、九十秒以内に身体を止める作法を、その人の身体に合わせて手渡す——商店街の隅にある、看板のない救急室。"
+    series_description: "亘は三十一歳。十年勤めた救急救命士を辞めて、地元の商店街の隅にある四畳半の元事務所を借り、看板のない『救急処置室』を開いた。扉に貼ってあるのは『不安発作・パニック発作 / 予約不要 / 無料 / 一回三十分まで』とだけ。来る客は、発作のさなかの人もいれば、もう何度目かの常連もいる。亘は、その人の発作の型——胸で起きるか、喉で起きるか、手から始まるか——を聞き、その身体に合わせて九十秒以内で止める作法を一つだけ手渡す。冷水、氷、五本指の数え方、舌を上あごにつけること、四秒の息吐き。一巻ごとに一人の客と、一つの作法と、その人の発作の物語。長期の弧——亘自身が救急救命士を辞めた理由が、ある一人の客との会話で初めて言葉になる。"
+    opening_5_volume_arc:
+      vol_1: "最初の客。胸で起きる発作の若手会社員。冷水を手首に。九十秒以内に止まる。"
+      vol_2: "喉で起きる発作の四十代の介護職員。氷を口に含む。"
+      vol_3: "手のしびれから始まる発作の大学院生。五本指の数え方。"
+      vol_4: "発作を予期して動けなくなる主婦。四秒の息吐き。"
+      vol_5: "ある日来た中年の元同僚。亘が救命士を辞めた現場の話が、初めて出る。"
+    comp_titles: ["BLACK JACK", "薬屋のひとりごと", "コウノドリ", "深夜食堂", "ザ・ファブル"]
+    reader_promise: "発作のさなかでも、九十秒以内に身体を止められる作法は、ちゃんとある。"
+    marketing_angle: "『コウノドリ』の職能の手触りを、パニック発作の救急処置室として、商店街の隅に置いたら。"
+    genre_family: mystery_cozy
+    emotional_engine: competent_calm_specialist + humane_labor_advocacy
+    audience: "三十代の社会人、パニック発作を経験したか家族に持つ読者"
+
+  - series_id: stabilizer_healing__ja_JP__kissaten_no_ato_sanjippun
+    brand_id: stabilizer_healing
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: retail_service
+    portal_mechanic: ritual
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "下町の喫茶店『あとさんじゅっぷん』。発作のあと、職場や家に戻る前に三十分だけ立ち寄るための店。マスターは元臨床心理士。客一人につき一杯のコーヒーと、ひとつだけの静かな会話。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "喫茶『あとさんじゅっぷん』"
+    series_logline: "発作のあと、職場や家に戻る前に三十分だけ。マスターは元臨床心理士。コーヒーは深煎り。"
+    series_description: "和也は四十二歳。十二年勤めた病院の臨床心理士を辞めて、東京下町に喫茶店を開いた。看板は『あとさんじゅっぷん』。表に小さく書いてあるのは『発作のあと、職場や家に戻る前に三十分だけ。コーヒーは深煎り四百円』。常連はみな、発作からの帰り道に立ち寄る人たち。和也は、ひとつだけ問いを返し、コーヒーを一杯出す。話したい人には話を聞き、話したくない人には新聞を渡す。三十分後、客は店を出て、職場や家に帰る。一巻ごとに、ひとりの客の発作の物語と、その人の帰り道。長期の弧——和也が病院を辞めた理由は、十二年目に担当した一人の患者のこと。その患者は、今もこの店には来ない。喫茶店の温度は、現実そのもの。魔法はない。あるのは三十分と、深煎りと、聞き手。"
+    opening_5_volume_arc:
+      vol_1: "最初の客。出勤前に駅で発作を起こした三十代の会社員。三十分。コーヒー。職場へ。"
+      vol_2: "保育園のお迎えの帰りに発作を起こした母親。三十分。新聞。家へ。"
+      vol_3: "面接の帰りの就活生。三十分。和也のひとつの問い。"
+      vol_4: "週に三度来ている常連の話が、初めて少しだけ進む。"
+      vol_5: "ある夜、和也は閉店後にひとりでコーヒーを淹れる。十二年前の患者のことを思い出している。"
+    comp_titles: ["深夜食堂", "ホリミヤ", "コーヒーが冷めないうちに", "ツバキ文具店", "東京タラレバ娘"]
+    reader_promise: "発作のあと、職場や家に戻る前に三十分だけ立ち寄れる場所が、ちゃんとある。"
+    marketing_angle: "魔法を一切使わずに、現代日本のパニック発作後三十分を、職能と温度だけで描く。"
+    genre_family: slice_of_life
+    emotional_engine: humane_labor_advocacy + competent_calm_specialist
+    audience: "三十代から四十代の働き手、メンタルクリニック通院経験のある読者"
+
+  - series_id: stabilizer_healing__ja_JP__hatsuya_no_chairo
+    brand_id: stabilizer_healing
+    locale: ja_JP
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "深夜の発作で家から出てしまった人たちが、たどり着く商店街の茶屋。茶屋には、客の発作を一杯のお茶で鎮める茶葉の妖怪たちが住んでいる。各巻、ひとりの客と、ひとつのお茶と、ひとつの妖怪。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "発作の茶屋"
+    series_logline: "深夜の発作で家を出てしまった人がたどり着く商店街の茶屋。茶葉の妖怪たちが、客の発作に合うお茶を選ぶ。"
+    series_description: "美咲は二十八歳。曾祖母から受け継いだ商店街の小さな茶屋を、夜二十二時から朝五時まで開けている。表の看板には『発作のときどうぞ』とだけ書いてある。深夜、家から出てしまった発作の人たちが、ふらりとたどり着く。茶屋には、棚に並んだ茶葉の缶ごとに、小さな妖怪が住んでいる——カモミールの妖怪、ほうじ茶の妖怪、よもぎの妖怪、麦茶の妖怪。妖怪たちは、客の発作の型に合うお茶を、美咲に教えてくれる。客は一杯飲んで、発作が鎮まり、店の畳の上で少しだけ眠って、朝に帰っていく。一巻ごとに、ひとりの客と、ひとつのお茶と、ひとつの妖怪の物語。長期の弧——曾祖母から受け継いだ缶のうち、いちばん奥の缶だけが、まだ妖怪に会えていない。最後の缶の妖怪が、美咲自身の発作を引き受けてくれる日まで。"
+    opening_5_volume_arc:
+      vol_1: "最初の深夜の客。胸が苦しい三十代の会社員。カモミールの妖怪。一杯。眠る。"
+      vol_2: "手が震える二十代の保育士。ほうじ茶の妖怪。一杯。"
+      vol_3: "息がうまく吸えない大学院生。よもぎの妖怪。一杯。"
+      vol_4: "発作のあとの脱力に来た六十代の女性。麦茶の妖怪。一杯。"
+      vol_5: "美咲が自分自身の発作に気づく夜。いちばん奥の缶が、ほんの少しだけ揺れる。"
+    comp_titles: ["夏目友人帳", "薬屋のひとりごと", "深夜食堂", "蟲師", "ツバキ文具店"]
+    reader_promise: "発作のときに家から出てしまっても、一杯と、一晩だけの居場所がある。"
+    marketing_angle: "『夏目友人帳』の妖怪の温度を、商店街の茶屋の深夜営業に置いたら。"
+    genre_family: supernatural_everyday
+    emotional_engine: ritual_warmth + companion_roster
+    audience: "二十代後半の社会人、発作・パニックを経験した読者層"
+
+  - series_id: stabilizer_healing__ja_JP__yume_no_naka_no_byouin
+    brand_id: stabilizer_healing
+    locale: ja_JP
+    persona_archetype: GZ-uni
+    daily_life_anchor: school_commute
+    portal_mechanic: dream
+    episodic_frame_per_volume: dream_visitor
+    magical_register: soft_fantasy
+    serial_engine: location_anthology
+    long_arc_spine: "発作で気を失ったあと、人は夢の中の病院に短い時間だけ運ばれることがある。二十二歳の医学部生が、その病院の研修医として、夜ごとに一人ずつ患者を診ていく物語。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "夢の中の病院"
+    series_logline: "発作で気を失った人が、夢の中で短い時間だけ運ばれてくる病院。彼女はそこの研修医。"
+    series_description: "光は二十二歳、医学部の四回生。あるとき、自分の発作で気を失っているあいだに、夢の中の病院にいた。木造の、駅舎のような病院。年配の医師に『君、来年から研修医として来ないか』と言われた。来年が来た。光は、夜ごとに夢の中の病院で、現実のどこかの誰かが発作で気を失っているあいだの短い時間だけ、研修医として診療をする。問診、聴診、応急の作法。患者は短い時間ののち、現実の身体に戻る。光は、診療室の窓から、その人が現実の自分のもとに帰っていくのを見送る。長期の弧——夢の病院の指導医は、光が中学生のころ、発作で気を失ったときに最初に診てくれた人。光は、その人の名前と、現実での消息を、巻を重ねながら少しずつ知っていく。"
+    opening_5_volume_arc:
+      vol_1: "夢の病院、初日の朝。最初の患者。胸の痛みの会社員。光の最初の応急処置。"
+      vol_2: "二人目の患者。発作と過呼吸が同時に来た主婦。指導医の手つきから一つ学ぶ。"
+      vol_3: "三人目の患者。大学受験を翌週に控えた高校生。光は自分の高校時代を思い出す。"
+      vol_4: "指導医について、光は初めて病院の外を歩く。夢の中の街が広がっている。"
+      vol_5: "指導医の名前が、現実の何かと重なる気配。長い弧が動き出す。"
+    comp_titles: ["仁-JIN-", "コウノドリ", "BLACK JACK", "夏目友人帳", "葬送のフリーレン"]
+    reader_promise: "発作で気を失っているあいだ、夢の中で誰かが、ちゃんとあなたを診てくれている。"
+    marketing_angle: "医療ものの職能の手触りを、夢の中の病院という装置で、発作の物語として描く。"
+    genre_family: fantasy_adventure
+    emotional_engine: competent_calm_specialist + paying_it_forward
+    audience: "Gen Z、医療職志望・心理学関心のある大学生・若手社会人"
+
+  - series_id: stabilizer_healing__ja_JP__hossa_no_aida_no_renai
+    brand_id: stabilizer_healing
+    locale: ja_JP
+    persona_archetype: Mill-careerist
+    daily_life_anchor: app_blogosphere
+    portal_mechanic: app
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: case_of_the_week
+    long_arc_spine: "三十歳の元看護師と三十三歳のシステムエンジニア。ふたりとも発作持ち。マッチングアプリで出会い、お互いの発作のときに駆けつける関係から、ゆっくりと恋愛にずれていく日々。"
+    volume_runway_target: 100
+    reading_platform_fit: webtoon_vertical
+    series_title: "発作のあいだの恋愛"
+    series_logline: "ふたりとも発作持ち。アプリで出会って、お互いの発作のときに駆けつける関係から始まる。"
+    series_description: "歩美は三十歳、元看護師、いまはコールセンター勤務。発作持ちで、職場では言っていない。一馬は三十三歳、システムエンジニア、リモートワーク中心。発作持ちで、同居の家族にも言っていない。ふたりは『発作持ちの人と話したい』という条件で出会えるマッチングアプリで知り合う。最初の三ヶ月は、お互いの発作のときに、テキスト一通で駆けつけたり、電話で九十秒の作法を一緒にやったりする関係。恋愛感情はまだ言葉にされない。各巻、ひとつのデート（あるいはデートにならなかった日）と、ひとつの発作と、ひとつの作法。ふたりはゆっくり、自分たちの関係が何なのかを、言葉にしようとする。長期の弧——歩美が看護師を辞めた理由と、一馬が家族に発作を言えない理由が、巻を重ねるごとに、相手にだけ少しずつ手渡される。魔法はない。あるのは、駆けつけることと、九十秒と、深煎りのコーヒー。"
+    opening_5_volume_arc:
+      vol_1: "アプリで出会う。最初のメッセージのやりとり。一馬の最初の発作。歩美が電話で四秒の息吐きをやる。"
+      vol_2: "初めて会う。喫茶店で三十分。話さない時間が長い。"
+      vol_3: "歩美の発作。一馬が電車で駆けつける。冷水を手首に。"
+      vol_4: "ふたりで散歩する。お互いの仕事の話が、初めて少し出る。"
+      vol_5: "一馬は『これは何の関係なのか』を聞こうとする。歩美は答えるか、答えないかを選ぶ。"
+    comp_titles: ["君の膵臓をたべたい", "ホリミヤ", "東京タラレバ娘", "凪のお暇", "違国日記"]
+    reader_promise: "発作を抱えていても、ふたりで成立する関係が、ちゃんとある。"
+    marketing_angle: "発作持ち同士の恋愛を、奇跡なしの、駆けつけることの物語として描く。"
+    genre_family: romance
+    emotional_engine: chosen_family + competent_calm_specialist
+    audience: "三十代の働き手、発作・パニックを抱える読者、現実的な恋愛物語を好む層"
