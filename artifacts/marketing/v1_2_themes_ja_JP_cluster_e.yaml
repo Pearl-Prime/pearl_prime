@@ -13,9 +13,9 @@ series_per_brand_target: 5
 # Brand mapping (per constraint Cluster E: digital_ground / gen_z_grounding /
 # confidence_core / mecha_identity / queer_identity_growth):
 #   digital_ground            → digital_ground            (flagship · manhwa · burnout)
-#   gen_z_grounding           → confidence_core_romance   (niche · shojo · imposter)
-#   confidence_core           → calm_student_school       (niche · shojo · anxiety)
-#   mecha_identity            → focus_sprint_workplace    (niche · seinen · adhd_focus)
+#   gen_z_grounding           → calm_student_school       (niche · shojo · anxiety)
+#   confidence_core           → confidence_core_romance   (niche · shojo · imposter)
+#   mecha_identity            → solar_return_isekai       (niche · seinen · isekai_identity)
 #   queer_identity_growth     → creative_unfold_social    (niche · shojo · social_anxiety)
 # Constraint: artifacts/research/v1_2_genre_allocation_constraint_2026-05-12.md
 #
@@ -196,13 +196,13 @@ series:
     audience: "Z世代二十二〜二十六、大手企業の新人で同期グループチャットを持つ若手社会人層"
 
   # ════════════════════════════════════════════════════════════════════════════
-  # BRAND 02 / 05 — confidence_core_romance (niche · shojo · imposter_syndrome)
+  # BRAND 02 / 05 — calm_student_school (niche · shojo · anxiety)
   # primary_topic: imposter_syndrome · secondary: self_worth, social_anxiety
   # Cluster-E role: gen_z_grounding — Z世代の地に足のついた自己像形成
   # ════════════════════════════════════════════════════════════════════════════
 
-  - series_id: confidence_core_romance__ja_JP__hoshou_shitsu_no_juu_gofun
-    brand_id: confidence_core_romance
+  - series_id: calm_student_school__ja_JP__hoshou_shitsu_no_juu_gofun
+    brand_id: calm_student_school
     locale: ja_JP
     persona_archetype: ML-mid
     daily_life_anchor: queer_identity
@@ -229,8 +229,8 @@ series:
     emotional_engine: earned_voice + competent_calm_specialist
     audience: "アルファ世代十三〜十五、自分について大切なことを誰にも言えていない中学生読者層"
 
-  - series_id: confidence_core_romance__ja_JP__seifuku_no_alteration
-    brand_id: confidence_core_romance
+  - series_id: calm_student_school__ja_JP__seifuku_no_alteration
+    brand_id: calm_student_school
     locale: ja_JP
     persona_archetype: GA-tween
     daily_life_anchor: thrift_vintage
@@ -257,8 +257,8 @@ series:
     emotional_engine: competent_calm_specialist + earned_voice
     audience: "アルファ世代十一〜十四、思春期の体の変化と制服の窮屈さを抱える中学生読者層"
 
-  - series_id: confidence_core_romance__ja_JP__shinro_soudan_no_kado
-    brand_id: confidence_core_romance
+  - series_id: calm_student_school__ja_JP__shinro_soudan_no_kado
+    brand_id: calm_student_school
     locale: ja_JP
     persona_archetype: GA-tween
     daily_life_anchor: parasocial_creator
@@ -285,8 +285,8 @@ series:
     emotional_engine: inherited_wisdom + earned_voice
     audience: "アルファ世代十四〜十六、進路の希望を書けない中三・高一読者層"
 
-  - series_id: confidence_core_romance__ja_JP__bunkasai_no_mahou_jin
-    brand_id: confidence_core_romance
+  - series_id: calm_student_school__ja_JP__bunkasai_no_mahou_jin
+    brand_id: calm_student_school
     locale: ja_JP
     persona_archetype: GA-tween
     daily_life_anchor: content_creation
@@ -313,8 +313,8 @@ series:
     emotional_engine: chosen_family + inherited_wisdom
     audience: "アルファ世代十三〜十五、文化祭・体育祭・修学旅行などの行事を抱える中学生読者層"
 
-  - series_id: confidence_core_romance__ja_JP__juku_no_yorimichi
-    brand_id: confidence_core_romance
+  - series_id: calm_student_school__ja_JP__juku_no_yorimichi
+    brand_id: calm_student_school
     locale: ja_JP
     persona_archetype: GA-tween
     daily_life_anchor: late_night_economy
@@ -342,13 +342,13 @@ series:
     audience: "アルファ世代十三〜十五、塾通いで中学受験・高校受験の重圧下にある中学生読者層"
 
   # ════════════════════════════════════════════════════════════════════════════
-  # BRAND 03 / 05 — calm_student_school (niche · shojo · anxiety)
+  # BRAND 03 / 05 — confidence_core_romance (niche · shojo · imposter_syndrome)
   # primary_topic: anxiety · secondary: social_anxiety, self_worth
   # Cluster-E role: confidence_core — 学校生活のなかの自己肯定の核
   # ════════════════════════════════════════════════════════════════════════════
 
-  - series_id: calm_student_school__ja_JP__chuugaku_no_toshoshitsu_no_haru
-    brand_id: calm_student_school
+  - series_id: confidence_core_romance__ja_JP__chuugaku_no_toshoshitsu_no_haru
+    brand_id: confidence_core_romance
     locale: ja_JP
     persona_archetype: ML-mid
     daily_life_anchor: thrift_vintage
@@ -375,8 +375,8 @@ series:
     emotional_engine: inherited_wisdom + competent_calm_specialist
     audience: "アルファ世代十二〜十四、登校不安と図書室への安全感を抱える中学生読者層"
 
-  - series_id: calm_student_school__ja_JP__ko_no_kyoushitsu
-    brand_id: calm_student_school
+  - series_id: confidence_core_romance__ja_JP__ko_no_kyoushitsu
+    brand_id: confidence_core_romance
     locale: ja_JP
     persona_archetype: ML-mid
     daily_life_anchor: queer_identity
@@ -403,8 +403,8 @@ series:
     emotional_engine: quiet_stewardship + ritual_as_belonging
     audience: "アルファ世代十二〜十五、不登校・五月病・登校不安を経験している中学生読者層"
 
-  - series_id: calm_student_school__ja_JP__kakouseiki_no_sake_no_yado
-    brand_id: calm_student_school
+  - series_id: confidence_core_romance__ja_JP__kakouseiki_no_sake_no_yado
+    brand_id: confidence_core_romance
     locale: ja_JP
     persona_archetype: ML-mid
     daily_life_anchor: thrift_vintage
@@ -431,8 +431,8 @@ series:
     emotional_engine: chosen_family + earned_voice
     audience: "アルファ世代十三〜十五、修学旅行の三泊で日常を再起動した経験のある中学生読者層"
 
-  - series_id: calm_student_school__ja_JP__hokenshitsu_no_neko
-    brand_id: calm_student_school
+  - series_id: confidence_core_romance__ja_JP__hokenshitsu_no_neko
+    brand_id: confidence_core_romance
     locale: ja_JP
     persona_archetype: ML-mid
     daily_life_anchor: queer_identity
@@ -459,8 +459,8 @@ series:
     emotional_engine: competent_calm_specialist + chosen_family
     audience: "アルファ世代十一〜十四、保健室がいちばん安全な場所だった中学生読者層"
 
-  - series_id: calm_student_school__ja_JP__nyuugakushi_no_jugofun_mae
-    brand_id: calm_student_school
+  - series_id: confidence_core_romance__ja_JP__nyuugakushi_no_jugofun_mae
+    brand_id: confidence_core_romance
     locale: ja_JP
     persona_archetype: GA-tween
     daily_life_anchor: queer_identity
@@ -488,13 +488,13 @@ series:
     audience: "アルファ世代十一〜十三、入学式の最初の十五分が最大の山だった中学一年生読者層"
 
   # ════════════════════════════════════════════════════════════════════════════
-  # BRAND 04 / 05 — focus_sprint_workplace (niche · seinen · adhd_focus)
+  # BRAND 04 / 05 — solar_return_isekai (niche · seinen · isekai_identity)
   # primary_topic: adhd_focus · secondary: imposter_syndrome, social_anxiety
   # Cluster-E role: mecha_identity — 発達特性・脳のクセを乗りこなすアイデンティティ
   # ════════════════════════════════════════════════════════════════════════════
 
-  - series_id: focus_sprint_workplace__ja_JP__rikashitsu_no_yoru
-    brand_id: focus_sprint_workplace
+  - series_id: solar_return_isekai__ja_JP__rikashitsu_no_yoru
+    brand_id: solar_return_isekai
     locale: ja_JP
     persona_archetype: ML-mid
     daily_life_anchor: content_creation
@@ -521,8 +521,8 @@ series:
     emotional_engine: inherited_wisdom + earned_voice
     audience: "アルファ世代十二〜十四、ADHD・自閉スペクトラム特性を抱える中学生読者層"
 
-  - series_id: focus_sprint_workplace__ja_JP__pomodoro_no_kissaten
-    brand_id: focus_sprint_workplace
+  - series_id: solar_return_isekai__ja_JP__pomodoro_no_kissaten
+    brand_id: solar_return_isekai
     locale: ja_JP
     persona_archetype: GZ-firstjob
     daily_life_anchor: content_creation
@@ -549,8 +549,8 @@ series:
     emotional_engine: chosen_family + ritual_as_belonging
     audience: "Z世代二十四〜二十八、ADHD・自閉特性で家で仕事ができないフリーランスや若手会社員層"
 
-  - series_id: focus_sprint_workplace__ja_JP__noizu_kyanseringu_no_kyou
-    brand_id: focus_sprint_workplace
+  - series_id: solar_return_isekai__ja_JP__noizu_kyanseringu_no_kyou
+    brand_id: solar_return_isekai
     locale: ja_JP
     persona_archetype: GA-tween
     daily_life_anchor: ai_companion
@@ -577,8 +577,8 @@ series:
     emotional_engine: inherited_wisdom + competent_calm_specialist
     audience: "アルファ世代十三〜十五、感覚過敏・自閉スペクトラム・HSPの中学生読者層"
 
-  - series_id: focus_sprint_workplace__ja_JP__kuusou_techou_no_yume
-    brand_id: focus_sprint_workplace
+  - series_id: solar_return_isekai__ja_JP__kuusou_techou_no_yume
+    brand_id: solar_return_isekai
     locale: ja_JP
     persona_archetype: GA-tween
     daily_life_anchor: content_creation
@@ -605,8 +605,8 @@ series:
     emotional_engine: chosen_family + earned_voice
     audience: "アルファ世代十二〜十四、ADHD・自閉スペクトラム・場面緘黙の中学生読者層"
 
-  - series_id: focus_sprint_workplace__ja_JP__chronotype_no_keiyaku
-    brand_id: focus_sprint_workplace
+  - series_id: solar_return_isekai__ja_JP__chronotype_no_keiyaku
+    brand_id: solar_return_isekai
     locale: ja_JP
     persona_archetype: GZ-firstjob
     daily_life_anchor: late_night_economy
