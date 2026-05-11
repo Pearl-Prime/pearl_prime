@@ -19,6 +19,7 @@ from typing import Any, Mapping
 from scripts.image_generation import runcomfy_dispatch as _rc
 from scripts.image_generation import runcomfy_cost_tracker as _bill
 from scripts.image_generation import batch_runner as _br
+from scripts.image_generation import runcomfy_spend_ledger as _ledger
 from scripts.image_generation.runcomfy_batch import (
     download_image,
     extract_image_url,
@@ -181,4 +182,25 @@ def dispatch(
     result["sha256"] = sha
     result["wall_time_s"] = wall
     result["runcomfy_request_id"] = request_id
+
+    # Append per-call spend ledger row (RUNCOMFY-SPEND-LEDGER-V1).
+    # Wall-time GPU-seconds × published per-second rate; flagged ``estimated``
+    # because vendor billing endpoint returns HTTP 403 in this env. See
+    # docs/specs/RUNCOMFY_SPEND_LEDGER_V1_SPEC.md §3.
+    try:
+        ledger_row = _ledger.record_dispatch(
+            batch_id=str(batch.get("batch_id", "")),
+            workflow_id=plan.workflow_hint,
+            gpu_seconds=float(wall),
+            source="estimated",
+            request_id=request_id,
+        )
+        result["spend_ledger"] = {
+            "est_usd": ledger_row.est_usd,
+            "cumulative_month_usd": ledger_row.cumulative_month_usd,
+            "source": ledger_row.source,
+            "rate_per_second_usd": ledger_row.rate_per_second_usd,
+        }
+    except Exception as ledger_err:  # noqa: BLE001 — never block dispatch on ledger
+        result["spend_ledger_error"] = str(ledger_err)[:200]
     return result
