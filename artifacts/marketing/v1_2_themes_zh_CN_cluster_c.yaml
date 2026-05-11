@@ -1,0 +1,776 @@
+# V1.2 themes — Cluster C (Grief/Trauma/Healing) × zh_CN
+# 25 series = 5 brands × 5 series — Simplified Chinese (mainland-natural)
+# Brand mapping (from PR #1061/#1066):
+#   spiritual_ground_supernatural (← grief_companion_iyashikei)
+#   trauma_path_healing (← trauma_recovery_shojo)
+#   healing_ground_healing (exact)
+#   warrior_calm_cultivation (← ash_and_steel_warrior_calm)
+#   stoic_edge_battle (← surrender_form_warrior_calm)
+# Constraint: artifacts/research/v1_2_genre_allocation_constraint_2026-05-12.md
+schema_version: "1.2"
+locale: zh_CN
+cluster: C
+cluster_name: "Grief/Trauma/Healing"
+total_series_target: 25
+total_brands_target: 5
+series_per_brand_target: 5
+
+# Locale guidance applied:
+#   - 100% Simplified Chinese (mainland-natural) for: series_title, series_logline,
+#     series_description, opening_5_volume_arc, long_arc_spine, reader_promise,
+#     marketing_angle, audience.
+#   - Structural enums in English (schema lock).
+#   - Tone references: 『一人之下』 grounded-supernatural + 『罗小黑战记』 contemporary-yokai +
+#     『镖人』 emotional-restraint.
+#   - reading_platform_fit: ~70% webtoon_vertical / ~30% manga_traditional
+#     (Kuaikan / Bilibili Comics dominate mainland; pages remain a respected register
+#     for older bereavement themes).
+#   - Mainland cultural grief anchors: 清明 (Qingming tomb-sweeping), 中元节 (Hungry Ghost Festival),
+#     七夕, 牌位/灵堂, 烧纸钱 (joss paper), 头七 (first seven days), 老家 (ancestral hometown),
+#     长辈遗物 (elder's keepsakes), 海葬 (modern sea burial), 微信遗信, 网络祭祀.
+#   - Persona mix: ~55% Gen Z, ~3% Gen Alpha (limited bereavement fit — pet/grandparent),
+#     ~30% Mill, ~12% Gen X (older bereavement readers).
+#   - Content-compliance: wellness/grief/family/intergenerational/lineage fine;
+#     no Taiwan/HK politics, no Tibet/Xinjiang, no critique of state memorial/funeral policy.
+#   - Strict mainland register: 视频 (not 視頻/影片), 软件 (not 軟體), 智能手机, 互联网,
+#     地铁, 出租车, 信息 (not 訊息).
+#
+# Genre allocation for Cluster C × zh_CN (within binding ranges):
+#   healing:                6
+#   slice_of_life:          5
+#   supernatural_everyday:  5
+#   mystery_cozy:           4
+#   fantasy_adventure:      3
+#   romance:                1
+#   horror:                 1
+#   TOTAL:                  25
+
+series:
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 01 / 05 — spiritual_ground_supernatural (grief companion · iyashikei)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: spiritual_ground_supernatural__zh_CN__ling_tang_qian_de_di_er_zhang_yi_zi
+    brand_id: spiritual_ground_supernatural
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: home_apartment
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "丈夫头七刚过的三十六岁妻子,发现客厅灵堂前那把没人坐的椅子上,每周都会出现一封陌生笔迹的信。写信的不是亡夫,是同小区里刚失去亲人的人——他们自己并不知道写过。她一封一封,把回信送回去。"
+    volume_runway_target: 160
+    reading_platform_fit: manga_traditional
+    series_title: "灵堂前的第二张椅子"
+    series_logline: "丈夫头七一过,客厅灵堂前那把空椅上,第一封陌生笔迹的信压在牌位脚下。这是上海一栋老破小公房里,关于谁在替谁悲伤的故事。"
+    series_description: "顾安宁三十六岁,丈夫陆远去世第七天的清晨,她在灵堂前那把藤椅上发现一封没贴邮票的信。信纸是从练字本上撕下来的,字迹不是陆远的:『我妈走了三个星期了,厨房灯还亮着,没人提醒我关』。落款没有名字。安宁去小区底楼那家二十四小时茶馆问老板,老板点头:『我们家也是,有时候桌上会多出来一杯没人点的茶』。她一户一户去找写信的人——本人都不记得自己写过,写信的是他们悲伤里最深的那一层。安宁开始回信,用自己这七天里学到的小事:几点关厨房灯、香一次烧一支就够、清明不一定要回老家祭拜也可以。每一卷一个人的丧。陆远不会回来,这是故事的前提,不是悬念。"
+    opening_5_volume_arc:
+      vol_1: "第一封信。失去母亲三周的中年女邻居,厨房灯的话。安宁把回信托给楼下茶馆老板。"
+      vol_2: "第二封信。父亲走了的高三男生,父亲那双没人收的皮鞋。安宁写下收鞋这件事可以慢慢来。"
+      vol_3: "第三封信来自一个还活着的人——查出晚期癌症的六十岁退休教师。在世的丧。安宁第一次写不下去。"
+      vol_4: "第四封信的笔迹,被安宁认出是陆远生前同事的。陆远不为她所知的一面,隔着信封轻轻递回来。"
+      vol_5: "藤椅上出现一封安宁自己的笔迹的信,她不记得写过。轮到她回自己的信了。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "解忧杂货店 (中文版)", "镖人"]
+    reader_promise: "你不记得写过的那封信,会有人替你收下,也会替你写回信。"
+    marketing_angle: "如果『深夜食堂』那盏灯换成灵堂前的一支香——头七后,有人替你接住没说完的话。"
+    genre_family: healing
+    emotional_engine: chosen_family + inherited_wisdom
+    audience: "30 至 55 岁、近期经历亲人离世的一线/新一线城市居民"
+
+  - series_id: spiritual_ground_supernatural__zh_CN__nai_nai_de_xiao_cai_pu_he_zi
+    brand_id: spiritual_ground_supernatural
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: home_apartment
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "奶奶留下来的一只老樟木菜谱盒,每次打开都会递出一张菜谱——那是今天这座城里最想念奶奶的人最爱吃的一道。主人公一卷做一道,慢慢看清菜谱背面奶奶写的小字。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "奶奶的菜谱盒"
+    series_logline: "整理奶奶遗物时翻出来的老樟木盒,搬进出租屋后会在不同的夜里自动递出不同的菜谱卡——那是这座城里另一个人,正在最想念她外婆的味道。"
+    series_description: "二十四岁的林希在杭州一个人租住老破小,半年前奶奶走了。家里分遗物时,她拿到一只民国年间的樟木菜谱盒,里面五百多张毛边纸菜谱,边角都已经黄了。盒子在搬家纸箱里压了三个月,直到有一晚她突然打开。最上面一张是奶奶字迹的『春韭拌香干』——林希从没见过的菜。第二天她在小区便利店听到隔壁阿姨打电话:『我妈走了,她那道春韭拌香干没人会做了……』。林希做了一份,用油纸包好,放在那位阿姨小区单元门口的鞋柜上。盒子第二天又递出新的一张。一卷一道菜,一卷一个人。背面是奶奶用铅笔写的小字:『心里苦的人,盐放少一点』。"
+    opening_5_volume_arc:
+      vol_1: "春韭拌香干。隔壁单元的阿姨。菜谱背面第一行小字被林希看见。"
+      vol_2: "红烧肉。失去妻子的中年男人,他不会做饭。林希第一次意识到『盐放少一点』是奶奶留给她的。"
+      vol_3: "八宝饭。一个三岁孩子的生日,外公刚走。"
+      vol_4: "蒸蛋的那一天。菜谱盒一整天没有递出新的。奶奶也有自己想念的人。"
+      vol_5: "最后一张是奶奶的妈妈——林希没见过的太外婆——的一道糟带鱼。林希做出来,供在奶奶的相片前。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "葬送的芙莉莲", "镖人"]
+    reader_promise: "失去一个人,是慢慢学会做她做过的那道菜。"
+    marketing_angle: "把『深夜食堂』的菜谱和『解忧杂货店』的回信,装进奶奶的老樟木盒里。"
+    genre_family: healing
+    emotional_engine: inherited_wisdom + named_and_seen
+    audience: "20 至 28 岁、刚开始一个人住、近期失去祖辈的 Gen Z 社畜"
+
+  - series_id: spiritual_ground_supernatural__zh_CN__chong_wu_huo_zang_chang_de_ye_ban
+    brand_id: spiritual_ground_supernatural
+    locale: zh_CN
+    persona_archetype: GZ-queer
+    daily_life_anchor: home_apartment
+    portal_mechanic: mascot
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "深夜营业的宠物殡仪馆前台,主人公能看见家属脚边那只刚走的宠物的透明身影。一卷一组家属,陪一次告别。同事一个一个变得『看得见』,主人公自己的那只老猫,也在慢慢回来。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "夜班宠物殡仪馆"
+    series_logline: "二十五岁的非二元青年在二十四小时宠物殡仪馆值夜班,看得见家属脚边那只透明的、刚走的小家伙。"
+    series_description: "苏星眠二十五岁,非二元身份,在成都郊区一家二十四小时宠物殡仪馆做夜班前台。半年前他的老猫『芒果』走了。复工第一晚,一对老夫妻抱着一只柴犬过来,苏星眠看见那只柴犬透明地站在老人脚边,抬头朝他摇了一下尾巴。他对老人说:『这位小家伙在朝你们摇尾巴呢』。阿姨眼泪当场掉下来。一卷一组家属——失去老猫的一对女同伴侣、十六年金毛走了的盲人爸爸、仓鼠走了的休学初二男生。火化时间是定的,苏星眠就在那短短的时间里,替小家伙把最后一次摇尾、最后一次哼哼,转述给家属。芒果他还看不见。一卷一卷,同事一个个变得能看见——前宠物医院护士的跨性别男生、聋哑的见习道士。"
+    opening_5_volume_arc:
+      vol_1: "第一组家属和柴犬。前台日光灯下的那一下尾巴。"
+      vol_2: "女同伴侣和老猫。苏星眠第一次跟人提起芒果。"
+      vol_3: "盲人爸爸和金毛,金毛把鼻尖蹭在他手心。"
+      vol_4: "新人入职:跨性别男生。他看得见仓鼠。"
+      vol_5: "凌晨三点,苏星眠自己脚边出现了芒果。芒果正在摇尾巴。"
+    comp_titles: ["一人之下", "罗小黑战记", "镖人", "雏蜂", "深夜食堂"]
+    reader_promise: "陪你那么久的小家伙,最后一下尾巴,有人替你看见。"
+    marketing_angle: "把『罗小黑战记』的现代妖怪温度,放进二十四小时宠物殡仪馆的前台。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + competent_calm_specialist
+    audience: "20 至 28 岁、把宠物当家人的 Gen Z 群体,含 LGBTQ+ 友好读者"
+
+  - series_id: spiritual_ground_supernatural__zh_CN__er_ci_zang_li_cha_guan
+    brand_id: spiritual_ground_supernatural
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: cafe_bookstore
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "外婆留下的老茶馆每月最后一个周日午后三点闭店两小时,做一场『二次葬礼』——把头七那场没说完的话,再说一次。每场都多一个谁家也没认领的透明客人。一卷一卷,茶馆主人慢慢知道那个透明的人是谁。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "二次葬礼茶馆"
+    series_logline: "苏州平江路一家老茶馆,每月一次的下午专场——只为头七那天没说出口的那句话再开一次场。"
+    series_description: "三十六岁的沈理子接手外婆留下的茶馆『闲泊』。在交接账本里她看到一行规矩:每月最后一个周日下午三点至五点闭店做私场——『二次葬礼』。常来的老阿姨告诉她:头七那天大家都在张罗丧事,有些话来不及说;这是再说一次的机会。每月不同的人来。理子负责煮水、添茶、不评论。每人对着没来的那位说:『当时我其实想说……』。每一场结束,客人脚边总有一个谁家也没认领的透明客人。每月不同。一卷一卷,这位透明客人的身世慢慢揭开。最后一个谜底——外婆当年开第一场,是为了谁。"
+    opening_5_volume_arc:
+      vol_1: "第一场。离异的父亲对前妻说『再婚对不起』。透明客人是谁。"
+      vol_2: "第二场。初中生对弟弟说『让你先走对不起』。透明客人的轮廓更清楚一点。"
+      vol_3: "第三场。退休教师对自杀学生说『没看出来对不起』。理子重新翻外婆账本第一页。"
+      vol_4: "第四场。透明客人第一次回看理子——是外婆生前最好的朋友。"
+      vol_5: "第五场。外婆办第一场的对象——理子外公——名字第一次被说出口。"
+    comp_titles: ["一人之下", "解忧杂货店 (中文版)", "深夜食堂", "葬送的芙莉莲", "镖人"]
+    reader_promise: "头七那天没说出口的话,还有一个地方可以再说一次。"
+    marketing_angle: "把『解忧杂货店』的代笔角色,挪到外婆茶馆每月一次的下午闭店里。"
+    genre_family: mystery_cozy
+    emotional_engine: competent_calm_specialist + inherited_wisdom
+    audience: "35 至 55 岁、有过亲人离世经历的读者,偏好江南散文式叙事"
+
+  - series_id: spiritual_ground_supernatural__zh_CN__xi_jiao_xiao_qu_de_zhuan_ye_pei_an_ren
+    brand_id: spiritual_ground_supernatural
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: home_apartment
+    portal_mechanic: companion
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: companion_roster
+    long_arc_spine: "西郊一个老小区里,做『陪安人』的二十六岁姑娘上门陪伴刚失去亲人的家庭——不做仪式,只陪。她身边那只不被别人看见的旧布老虎,一卷一卷地告诉她,自己原本是哪家小孩的护身布偶。"
+    volume_runway_target: 140
+    reading_platform_fit: webtoon_vertical
+    series_title: "西郊小区的陪安人"
+    series_logline: "微信小程序刚上线一个新服务:『陪安人』——头七后上门坐两小时,不劝、不烧纸、不收红包。她包里那只旧布老虎,只有她自己看得见。"
+    series_description: "余安二十六岁,辞了写字楼,在西安西郊一个老小区里做新职业『陪安人』。客户在微信小程序里下单:头七后上门两小时,陪坐、陪沉默、陪做一顿家常菜,不收红包、不烧纸钱。她包里始终带着一只老式手缝的布老虎,只有她自己看得见——那是她小时候奶奶替她缝的护身偶。一卷一户:刚失去爸爸的初一女孩、海葬完老伴的退休工程师、失独的母亲、留学回来发现祖父走了的小伙子。余安不安慰,她只是陪。布老虎在每户人家的客厅角落里,会发现一件别人留下来的小东西——一张旧船票、一支没写完的钢笔——而布老虎自己,其实是上世纪八十年代另一家小孩的护身偶。一卷一卷,这个家的故事慢慢补回来。"
+    opening_5_volume_arc:
+      vol_1: "初一女孩,失去爸爸三周。两小时,做了一锅西红柿鸡蛋面。布老虎在沙发下找到爸爸的旧钥匙串。"
+      vol_2: "退休工程师,刚海葬完老伴。余安陪他第一次去菜市场。布老虎注意到阳台上一盆还没浇水的茉莉。"
+      vol_3: "失独母亲,六年了。余安第一次只是陪坐着不说话两小时。"
+      vol_4: "留学生回国,祖父走了三个月。布老虎在书房抽屉里找到当年祖父替它(布老虎)写的一张借条——它原本属于哪家?"
+      vol_5: "余安去找布老虎最早的小主人。一位八十多岁的老人。布老虎第一次在别人面前显形。"
+    comp_titles: ["一人之下", "罗小黑战记", "镖人", "深夜食堂", "葬送的芙莉莲"]
+    reader_promise: "你不用立刻坚强,可以先有人陪你坐两小时。"
+    marketing_angle: "如果『深夜食堂』开成上门服务——头七后,有人替你来陪坐两小时。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + competent_calm_specialist
+    audience: "23 至 30 岁、家中刚有丧事的新一线城市 Gen Z 群体,以及他们的父母辈共读"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 02 / 05 — trauma_path_healing (recovery shojo · trauma path)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: trauma_path_healing__zh_CN__zhao_pian_li_de_kong_bai_ren
+    brand_id: trauma_path_healing
+    locale: zh_CN
+    persona_archetype: GZ-uni
+    daily_life_anchor: school_university
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: mystery_box
+    long_arc_spine: "美院大三女生在二手相机里冲洗出来的胶卷上,看见自己童年照片的某一个角落里站着一个轮廓模糊的『空白人』。一卷一卷,她和这个空白人一起重新走过自己被忽略的那段童年。"
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "照片里的空白人"
+    series_logline: "美院大三的姑娘在二手店淘到一台老胶片机,自家童年胶卷里,她身边永远站着一个面目模糊的人——明明她记得没人在那儿。"
+    series_description: "苏念二十一岁,中央美院摄影系大三。她在五道口一家二手店里买回一台爷爷辈的胶片机,翻出家里十几个老胶卷想自己冲。第一卷洗出来的照片里——她六岁的生日,蛋糕、爸妈、姑姑——背景里,客厅门框边,站着一个全身轮廓但是脸是空白的人影。她问妈妈,妈妈说:『你六岁生日,没别人在,就是我和你爸』。第二卷:七岁春游,同样的空白人。第三卷:九岁,身高已经够了一点,但还是没有脸。苏念慢慢明白,那个空白人不是别人——是她自己被童年忽略的那一部分。每一卷,她去重新走访照片的拍摄地,带回一件能让空白人多『显形』一点的小事:一首她以为自己从来没听过的儿歌、一双她忘了的旧凉鞋。一卷结束,空白人的眉眼会清晰一点。"
+    opening_5_volume_arc:
+      vol_1: "第一卷胶卷,六岁生日。苏念在地下室找到当年的童鞋,空白人轮廓变实。"
+      vol_2: "七岁春游北海公园。空白人有了头发的形状。"
+      vol_3: "九岁,父母刚离婚那年的国庆。空白人开始有眉毛。苏念第一次去找当年的姑姑。"
+      vol_4: "十一岁的一组照片,空白人转过身——苏念看见后脑勺。"
+      vol_5: "最后一卷洗出来,十三岁生日。空白人转过来,有了脸——是六岁的自己。"
+    comp_titles: ["一人之下", "葬送的芙莉莲", "你的名字 (中文版)", "罗小黑战记", "镖人"]
+    reader_promise: "童年里没人看见的那部分你,有一天可以自己重新看见。"
+    marketing_angle: "把『你的名字』那种错位的相遇,放进自家童年的胶片相册里。"
+    genre_family: healing
+    emotional_engine: named_and_seen + ledger_atonement
+    audience: "20 至 25 岁、有童年情感忽视经历、读咨询类心理书籍的 Gen Z 在校女生"
+
+  - series_id: trauma_path_healing__zh_CN__lou_xia_xi_yi_dian_de_kou_dai_xin
+    brand_id: trauma_path_healing
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: companion_roster
+    long_arc_spine: "新一线城市老小区的洗衣店,店员二十三岁,在客人送洗衣物的口袋里总能摸到一张被洗烂一半的纸条——上面写着客人自己都不记得藏过的旧创伤。她不戳破,只把衣物洗得格外干净,再附一张新的小卡片。"
+    volume_runway_target: 140
+    reading_platform_fit: webtoon_vertical
+    series_title: "楼下洗衣店的口袋信"
+    series_logline: "重庆一栋老居民楼下的洗衣店,二十三岁的店员每天能从客人衣服口袋里摸到一张被洗烂一半、客人自己都忘了写过的纸条。"
+    series_description: "周可可二十三岁,重庆江北一家小区底商的洗衣店学徒。师傅教她的第一件事是:口袋一定要先翻、纸巾零钱要留好。她翻着翻着发现:很多衣服口袋里有一张被汗水或洗衣液晕开一半的小纸条——客人自己根本不记得写过。一张写着『他打我那次,我没还手』;一张写着『高考前一晚,我妈说你怎么连考试都不会』;一张写着『我对娃发火了,我害怕』。可可不戳破任何人。她把那件衣物洗得格外柔软,放回的时候,附一张她自己手写的小卡片——只一句话,跟那张烂纸条隔空对话。一卷一位客人:总爱穿白衬衫的年轻爸爸、外卖小哥、刚搬来的高中女生、跑了一夜专车的中年司机。可可的师傅(一位退休的精神科护士)在背后看着,慢慢把行业里的小技巧交给她。"
+    opening_5_volume_arc:
+      vol_1: "白衬衫年轻爸爸,纸条是『我对娃发火了』。可可的小卡片只写四个字:『一次而已』。"
+      vol_2: "外卖小哥,纸条是高三那年的。可可的小卡片放在送回的衬衫口袋里。"
+      vol_3: "高中女生,纸条是『他打我那次,我没还手』。可可第一次去找师傅商量。"
+      vol_4: "中年司机,纸条是关于自己已经不记得的父亲。可可意识到自己也写过一张。"
+      vol_5: "可可洗自己的外套时,从口袋里摸出一张烂纸条——是她自己十三岁那年写的。师傅替她写回那张卡片。"
+    comp_titles: ["一人之下", "罗小黑战记", "深夜食堂", "葬送的芙莉莲", "镖人"]
+    reader_promise: "你以为自己都忘了的那些话,有人替你接住,再把衣服洗干净送回来。"
+    marketing_angle: "如果『深夜食堂』开了一家洗衣店——口袋里的纸条比客人记得更多。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + named_and_seen
+    audience: "22 至 28 岁、来自西部三四线城市的新一线城市打工 Gen Z"
+
+  - series_id: trauma_path_healing__zh_CN__qi_xi_ye_de_xin_xiang
+    brand_id: trauma_path_healing
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: home_apartment
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "每年七夕这一夜,主人公小区门口那只无人认领的旧铁皮信箱里,会出现一封写给自己童年版本的信。她要在天亮前替写信人去做信里没做成的那件小事。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "七夕夜的信箱"
+    series_logline: "南京老门东巷口那只生了锈的铁皮信箱,每年只在七夕那一夜会有信——写信人是自己的童年。"
+    series_description: "陈临三十四岁,搬回南京照顾乳腺癌康复期的妈妈,住在老门东一条窄巷里。巷口立着一只民国年间留下来的铁皮信箱,平时锁着、没人用。第一年七夕,她下班路过,听见信箱里有响动,翻出来一封没贴邮票的信——信纸是练习簿撕下来的,字迹是她小学三年级时的:『七夕那天我答应自己长大一定要带妈妈去看那场紫金山的星星,可是我会忘记的』。第二天她请了一天年假,带妈妈去紫金山。从那以后每年七夕都会有一封信——有时候是她自己的童年,有时候是这条巷里别家小孩的童年。每一卷一封信。她负责帮写信人替自己当年的承诺补上一份兑现。"
+    opening_5_volume_arc:
+      vol_1: "第一封信,她小学三年级的字迹。紫金山看星星。妈妈坐了一整夜。"
+      vol_2: "第二封信是隔壁阿姨家儿子小时候写的。要去秦淮河放一盏河灯。"
+      vol_3: "第三封信是巷口剃头匠老爷爷童年的。要回老家一趟。陈临开车送他回扬州。"
+      vol_4: "第四封信突然没有人认领。陈临慢慢发现这是巷口去年走了的老太太当年的字。"
+      vol_5: "第五封信是陈临自己十二岁写的,关于妈妈那次第一次确诊。母女终于把这件事讲出来。"
+    comp_titles: ["一人之下", "你的名字 (中文版)", "解忧杂货店 (中文版)", "葬送的芙莉莲", "镖人"]
+    reader_promise: "小时候你答应过自己却忘了的事,有一天可以替自己补上一份。"
+    marketing_angle: "把『你的名字』那条隔着时间的线,挪到自家巷口一个七夕夜的信箱里。"
+    genre_family: supernatural_everyday
+    emotional_engine: ledger_atonement + inherited_wisdom
+    audience: "30 至 40 岁、与原生家庭关系复杂、近期回到家乡照顾父母的 Millennial 女性"
+
+  - series_id: trauma_path_healing__zh_CN__yu_lin_dao_chuang_shang_quan_yu_yuan
+    brand_id: trauma_path_healing
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: nature_park
+    portal_mechanic: realm
+    episodic_frame_per_volume: customer
+    magical_register: soft_fantasy
+    serial_engine: location_anthology
+    long_arc_spine: "云南西双版纳一片政府划地的『雨林创伤康愈园』——表面是生态康复景区,只对家暴幸存者、童年虐待幸存者开放短期入住。园内有一片只在月圆夜显路的旧寨遗址,每个住进来的人会在那里遇见自己的一段过去。"
+    volume_runway_target: 170
+    reading_platform_fit: webtoon_vertical
+    series_title: "雨林创伤康愈园"
+    series_logline: "西双版纳州一片申请下来的康愈园,只接收家暴或童年虐待幸存者的短期入住——园里有一片月圆夜才显路的旧寨遗址。"
+    series_description: "三十八岁的依罗,傣族,五年前从一段长期家暴婚姻里走出来,如今在西双版纳州一片民政部门挂牌的『雨林创伤康愈园』做协调员。园区四百亩,合作的咨询师轮流驻园,只对有正式社工转介的家暴幸存者、童年虐待幸存者开放,每期十四天。园中央有一片清代旧傣寨遗址,日常看不出路;一到月圆夜,杂草让出一条石板小道,谁愿意走进去都行。每个走进去的人会在遗址里遇见自己的一段过去——不是穿越,是雨林本身的一种安静呼吸。一卷一位入住者:被外公性侵的二十六岁北漂、被丈夫家暴十二年的小学教师、童年被冷暴力的男大学生、被前妻持续羞辱的退伍军人、依罗自己。依罗作为协调员,只负责陪走、不评论。每一卷里,遗址会让来人遇见的不是加害者,而是自己当年没人替自己说话的那个版本。"
+    opening_5_volume_arc:
+      vol_1: "二十六岁北漂女生。月圆夜,遗址里她遇见自己六岁。"
+      vol_2: "小学教师阿姨。她遇见十九岁刚结婚那个自己。"
+      vol_3: "男大学生。他遇见小学被孤立那个自己。"
+      vol_4: "退伍军人。他遇见入伍前在县城被前妻当街扇耳光那个自己。"
+      vol_5: "依罗自己第一次走进遗址。她遇见三十二岁那个还在婚姻里的自己。"
+    comp_titles: ["一人之下", "罗小黑战记", "葬送的芙莉莲", "镖人", "雏蜂"]
+    reader_promise: "你过去那个没人替你说话的版本,可以在这片雨林里再被遇见一次。"
+    marketing_angle: "把『一人之下』的灵气场地感,放进西南州一片真实存在的康愈试点园区。"
+    genre_family: fantasy_adventure
+    emotional_engine: named_and_seen + chosen_family
+    audience: "28 至 45 岁、家暴/童年虐待幸存者及其同盟,愿意阅读疗愈题材的城市女性"
+
+  - series_id: trauma_path_healing__zh_CN__zai_hun_qing_jie_ji
+    brand_id: trauma_path_healing
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: home_apartment
+    portal_mechanic: companion
+    episodic_frame_per_volume: relationship
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "三十八岁的妈妈在丈夫去世两年后,与小区里一位单亲爸爸开始谨慎的再婚试探。一年时间,从一起接娃放学到搬进一套房,慢慢学会:再爱一个人,不是辜负前任。"
+    volume_runway_target: 130
+    reading_platform_fit: webtoon_vertical
+    series_title: "再婚清节记"
+    series_logline: "丈夫忌日刚过两年的春天,三十八岁的女人开始与小区里同样独自带娃的爸爸,慢慢牵手——清明、中元、忌日,她每一节都要重新学一次。"
+    series_description: "韦慎慎三十八岁,丈夫去世两年。八岁的儿子近半年开始喊小区里另一户的『林叔叔』很自然。林叔叔三十九岁,妻子产后大出血走了。两个家庭从一起接娃放学开始,慢慢吃饭、慢慢周末出游。慎慎心里清楚:她不是要替前夫找接班人,她是要替自己重新练习『被一个温柔的人喜欢着』。一年时间。一卷一节:清明回前夫老家上坟,慎慎第一次开口让林叔叔在车里等;中元节,慎慎和儿子在阳台烧纸,林叔叔过来递了一杯水;前夫忌日,林叔叔留她和儿子独处一整天;次年春天,搬家。这是一部慢的、有节气的、不戏剧化的再婚故事。整部书的关键词只有一个——不辜负。"
+    opening_5_volume_arc:
+      vol_1: "春天接娃放学。第一次一起在小区门口吃手抓饼。儿子主动叫『林叔叔』。"
+      vol_2: "清明上坟。慎慎让林叔叔在停车场等她和儿子。林叔叔在车里读完一本《唐宋词十七讲》。"
+      vol_3: "夏末中元。阳台烧纸。儿子第一次在林叔叔面前哭出声。"
+      vol_4: "前夫忌日。林叔叔自觉回自家。慎慎和儿子整理前夫遗物。"
+      vol_5: "次年春,搬到一套大一点的房子。前夫的照片放在客厅最高的那一格,被晚霞照得很亮。"
+    comp_titles: ["镖人", "深夜食堂", "葬送的芙莉莲", "你的名字 (中文版)", "全知读者视角"]
+    reader_promise: "再爱一个人,不是辜负你曾经爱过的那个人。"
+    marketing_angle: "如果『深夜食堂』里那对中年男女有自己的一卷书——节气、孩子、慢的牵手。"
+    genre_family: romance
+    emotional_engine: named_and_seen + chosen_family
+    audience: "33 至 45 岁、丧偶或离异、带学龄孩子、考虑重新组建家庭的 Millennial 女性"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 03 / 05 — healing_ground_healing (community garden grief)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: healing_ground_healing__zh_CN__she_qu_zi_qiang_yuan_de_yi_lou
+    brand_id: healing_ground_healing
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: nature_park
+    portal_mechanic: realm
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "上海一家居委会推动的社区自强园(失独/丧偶家庭共建菜园)二楼,一间不挂招牌的房间——里面长出来的花花草草,会在不同的人面前显成不同已故亲人会说的一句话。"
+    volume_runway_target: 160
+    reading_platform_fit: webtoon_vertical
+    series_title: "社区自强园的二楼"
+    series_logline: "上海普陀区一栋老办公楼二楼,一间常年不挂招牌的房间——失独和丧偶家庭轮值打理。窗台上的花,会在不同的人面前长出不同的一句话。"
+    series_description: "陶昭三十二岁,失独。三年前她加入街道办推动的社区自强园(失独/丧偶家庭共建菜园),一年前轮到她当二楼那间小屋的轮值人。小屋十二平米,西窗摆满了大家从各自家里搬来的盆栽——薄荷、八仙花、一盆水仙、一棵长得歪歪扭扭的金钱树。每个走进来的人,会在不同的盆栽叶子上看见不同的字迹——是他们已故亲人会说的一句话。失独的妈妈在金钱树上看见儿子的字:『妈,腰别再蹲那么久了』;丧偶的爷爷在水仙叶上看见老伴的字:『药下午两点那一顿,你又忘了』。陶昭轮值的时候,只负责煮水、添茶、不评论。一卷一户:刚失独半年的母亲、失去丈夫八年但还没敢搬走他衣服的奶奶、刚失去伴侣的同性恋者、孩子自杀的父亲、陶昭自己。每一卷里,陶昭学会陪着对方在叶子上多停留三分钟,然后让他们带一片叶子回家。"
+    opening_5_volume_arc:
+      vol_1: "失独半年的母亲。金钱树上是儿子的字。陶昭第一次给别人煮姜茶。"
+      vol_2: "失去丈夫八年的奶奶。水仙叶上是老伴的字。奶奶第一次答应陶昭把丈夫的旧衬衫送出去。"
+      vol_3: "失去同性伴侣的中年男人。八仙花上的字是伴侣家乡话。"
+      vol_4: "失去自杀儿子的父亲。薄荷一直没显字。陶昭让他先回家,下周再来。"
+      vol_5: "陶昭自己第一次在金钱树上看见已故女儿的字。她当场坐在地上哭出来,水仙叶替她接住。"
+    comp_titles: ["一人之下", "葬送的芙莉莲", "罗小黑战记", "深夜食堂", "镖人"]
+    reader_promise: "你想再听一次的那句话,会在某一片叶子上等你。"
+    marketing_angle: "把『葬送的芙莉莲』的温柔不喧哗,放进一间普陀区居委会楼上的小屋。"
+    genre_family: healing
+    emotional_engine: chosen_family + inherited_wisdom
+    audience: "30 至 50 岁、经历失独/丧偶、参与过社区共建活动的城市居民"
+
+  - series_id: healing_ground_healing__zh_CN__qing_ming_wu_zhu_mu_de_dan_an
+    brand_id: healing_ground_healing
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: home_apartment
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十六岁的姑娘做新型职业『清明无主墓代扫人』,接单上山打扫那些联系不上后人的旧墓。每扫一座,墓主家庭的一段未结的旧事会自动落到她手机微信的一个无来源对话框里。一卷一墓。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "清明无主墓档案"
+    series_logline: "杭州一家民政部门挂靠的『代扫服务社』,二十六岁姑娘接的是最冷的活——清明上山扫那些联系不上后人的旧墓。"
+    series_description: "孟知秋二十六岁,杭州本地人,在西湖区一家挂靠民政局的代扫服务社做兼职。清明前后,服务社专门接最冷的一类单——联系不上后人、由公墓委托清理的旧墓。她一身工装上山,带香、带纸、带白菊。每扫完一座,微信『文件传输助手』对话框会跳出一段没有来源的对话:墓主家庭当年没说完的一句话。她要把这段话存档,带回服务社的旧档案库。一卷一墓:1958 年下放途中没回来的工程师、1981 年远嫁海南的女儿没赶上母亲最后一面、九十年代下岗时跳楼的厂长、2003 年非典走的医生、一个未成年人。每一卷,孟知秋慢慢拼出这座城市半个世纪的一段普通人史。"
+    opening_5_volume_arc:
+      vol_1: "1958 年的工程师墓。微信弹出他妻子当年没说完的一段话。"
+      vol_2: "1981 年远嫁海南的女儿。她当年没赶上母亲最后一面。孟知秋打了一通电话。"
+      vol_3: "九十年代下岗厂长。孟知秋找到他还在世的儿子。"
+      vol_4: "2003 年非典走的医生。一份当年没寄出的家书。"
+      vol_5: "未成年人。孟知秋第一次扫完一座墓后,自己也对着空气说了一句话。"
+    comp_titles: ["一人之下", "镖人", "雏蜂", "罗小黑战记", "葬送的芙莉莲"]
+    reader_promise: "没人替你扫的那一座墓,有人替你扫,也替你听一段当年没说完的话。"
+    marketing_angle: "把『镖人』的旧朝代质感,放进当代清明无主墓档案。"
+    genre_family: mystery_cozy
+    emotional_engine: ledger_atonement + inherited_wisdom
+    audience: "25 至 35 岁、对历史/家族记忆感兴趣、清明仍随长辈祭祖的 Gen Z 与 Mill 群体"
+
+  - series_id: healing_ground_healing__zh_CN__lao_jia_de_xiang_xia_wu
+    brand_id: healing_ground_healing
+    locale: zh_CN
+    persona_archetype: GX-bereaved
+    daily_life_anchor: home_apartment
+    portal_mechanic: realm
+    episodic_frame_per_volume: customer
+    magical_register: none
+    serial_engine: companion_roster
+    long_arc_spine: "五十八岁的退休女工回到湖南老家乡下屋,一个人住,慢慢把屋后那块荒地重新拾掇起来。村里几位同样独居的老姐妹陆续加入。一卷一位姐妹,讲一段自己年轻时没能讲的丧。"
+    volume_runway_target: 140
+    reading_platform_fit: webtoon_vertical
+    series_title: "老家的乡下屋"
+    series_logline: "退休那年丈夫走了,女儿在深圳。她回到湖南老家乡下屋,一个人住——直到村里那几位老姐妹,一个一个推门进来。"
+    series_description: "唐桂英五十八岁,退休工艺厂女工,丈夫去世第二年,她从长沙回到湘南老家乡下屋。屋是父母留下来的,六间土砖房,屋后一块荒了二十年的菜地。她一个人重新拾掇——劈柴、起灶、晒辣椒、腌酸豆角。村里几位同样独居的老姐妹陆续推门进来——丈夫早逝的、儿子在外地打工很少回来的、儿媳走了帮带孙子的、自己得过乳腺癌的。一卷一位姐妹。她们坐在桂英堂屋的木板凳上,慢慢讲自己年轻时没能讲出来的那段丧——七十年代下乡那批人;八十年代乡镇企业突然垮掉的下岗潮;九十年代失去的孩子。桂英只听,不评论,只是给她们再添一碗茶。一年时间,这间乡下屋慢慢变成了村里最暖的那一间。"
+    opening_5_volume_arc:
+      vol_1: "回老家第一周。劈柴。隔壁阿英奶奶端来一碗剁辣椒。"
+      vol_2: "阿英奶奶讲下放时丢了的丈夫。桂英第一次在自己堂屋里替别人擦眼泪。"
+      vol_3: "村东头的银婶讲八十年代乡镇企业垮掉那年。她没敢跟丈夫说自己怀过孕。"
+      vol_4: "村小学退休的胡老师讲自己唯一的女儿。"
+      vol_5: "桂英自己讲丈夫走那一天。屋后菜地第一次有人帮她浇水。"
+    comp_titles: ["镖人", "深夜食堂", "解忧杂货店 (中文版)", "葬送的芙莉莲", "罗小黑战记"]
+    reader_promise: "你回到老家不是认输,是有人替你接下来一段你一直没讲完的丧。"
+    marketing_angle: "把『深夜食堂』的夜里那盏灯,挪到湘南一间乡下屋的堂屋里。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + named_and_seen
+    audience: "50 至 65 岁、丧偶或子女在外地、考虑落叶归根的 Gen X 女性"
+
+  - series_id: healing_ground_healing__zh_CN__zhong_yuan_jie_de_lao_zhai
+    brand_id: healing_ground_healing
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: home_apartment
+    portal_mechanic: realm
+    episodic_frame_per_volume: customer
+    magical_register: occult_cosmic
+    serial_engine: location_anthology
+    long_arc_spine: "一栋有八十年历史的福建老侨乡大宅,每年中元节那一夜,主屋的西厢房会显出一间不在白天的房间。住进去过夜的人,会遇见自己家族里被遗忘的某一段故事。基调是安静、克制、不吓人。"
+    volume_runway_target: 140
+    reading_platform_fit: manga_traditional
+    series_title: "中元节的老宅"
+    series_logline: "福建闽南一栋老侨乡大宅,白天是研学景点,中元节那一夜,主屋的西厢房会多出一间不在地图上的房间。"
+    series_description: "苏归三十三岁,从厦门搬回安溪,接手姑奶奶留下来的一栋八十年历史的闽南侨乡大宅。白天大宅对外开放做民俗研学。每年中元节那一夜,大宅按祖训关闭,只允许至亲入内。主屋西厢房会显出一间不在白天的房间——苏归小时候听姑奶奶说过,但一直以为是吓小孩的话。第一年中元她试着进去过夜,遇见的不是任何鬼怪,而是 1948 年下南洋的那位曾祖父——某个夜晚他在马六甲一家茶店里没寄出去的一封家书。第二年是 1958 年回乡那位姑表叔的下放经历。第三年是九十年代远嫁台湾的姑姑(注:不写她在台湾的政治环境,只写她想念安溪的米粉)。一卷一夜。每个夜里来的客人都不会留过夜——天亮就走。整部书是一部温和的、克制的家族史。基调不是恐怖,是温度低的怀念。"
+    opening_5_volume_arc:
+      vol_1: "第一年中元。1948 年下南洋的曾祖父。苏归替他把那封家书完成。"
+      vol_2: "第二年。1958 年下放的姑表叔。苏归学会替他喝一碗冷掉的米粉。"
+      vol_3: "第三年。九十年代远嫁的姑姑——只聊安溪米粉、铁观音、儿时的小巷。"
+      vol_4: "第四年。曾祖母,1936 年生头胎那一夜。苏归整夜没说话,只是替她擦汗。"
+      vol_5: "第五年。第一次出现的是苏归自己——四十年后回来的她。她和现在的自己对坐了一夜。"
+    comp_titles: ["一人之下", "镖人", "葬送的芙莉莲", "罗小黑战记", "雏蜂"]
+    reader_promise: "中元那一夜你想见的那位长辈,会在家里那间屋子里替你留一盏灯。"
+    marketing_angle: "把『一人之下』的灵气家族感,放进一栋闽南侨乡老宅的中元夜里。"
+    genre_family: horror
+    emotional_engine: inherited_wisdom + named_and_seen
+    audience: "30 至 50 岁、有侨乡家族背景或重视家族祭祀的 Mill 群体"
+
+  - series_id: healing_ground_healing__zh_CN__san_dai_tong_tang_de_xiao_yang_tai
+    brand_id: healing_ground_healing
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: home_apartment
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "三代同堂的老破小,阳台上奶奶留下来一只搪瓷盆。三十二岁的孙女接手照看。每次她把当季的菜或花种进去,盆里就会冒出来一截奶奶当年没讲完的话。一卷一种植物。"
+    volume_runway_target: 140
+    reading_platform_fit: manga_traditional
+    series_title: "三代同堂的小阳台"
+    series_logline: "北京西二旗一套五十平的老破小,阳台上奶奶留下的一只搪瓷盆——孙女每种一样东西,盆边就长出一截奶奶当年没说完的话。"
+    series_description: "周敬之三十二岁,程序员,和爸爸妈妈住北京西二旗一套五十平的老破小。奶奶去年走了,临终前把阳台上那只民国年间她从天津老家带过来的搪瓷盆托给了她。盆有手掌大小、釉面斑驳,奶奶在世时种过葱、薄荷、太阳花。敬之接手第一周种了一棵小葱。第三天她从盆边的泥土里发现一截手写的纸条,字迹是奶奶的:『1955 年我嫁过来的时候,你太奶嫌我个矮』。第二周种薄荷,又是一截:『1968 年你爷爷不在身边那一年』。一卷一种植物。盆里冒出来的小纸条,慢慢拼出奶奶一辈子没跟孙女讲完的那本家史。爸爸妈妈一开始不信。敬之不戳破,她只是种,只是把纸条收进一本厚相册。最后一卷,妈妈也开始往盆里种东西。"
+    opening_5_volume_arc:
+      vol_1: "小葱。1955 年。敬之第一次把纸条拿给妈妈看。妈妈没说话。"
+      vol_2: "薄荷。1968 年。爸爸默默把奶奶的旧照片拿出来。"
+      vol_3: "太阳花。1976 年,奶奶人生最难那一年。一家人第一次坐下来吃完整顿晚饭。"
+      vol_4: "韭菜。1990 年,奶奶第一次抱敬之。敬之放声哭。"
+      vol_5: "金银花。妈妈在盆里种下今年的一棵。她的纸条第一次冒出来。"
+    comp_titles: ["镖人", "深夜食堂", "罗小黑战记", "葬送的芙莉莲", "解忧杂货店 (中文版)"]
+    reader_promise: "你来不及跟奶奶说的话,可以一棵一棵种进她留下来的那只盆里。"
+    marketing_angle: "把『深夜食堂』的小桌灯,放进西二旗一套五十平老破小的阳台上。"
+    genre_family: healing
+    emotional_engine: inherited_wisdom + chosen_family
+    audience: "28 至 38 岁、三代同堂、近期失去祖辈的北漂 Millennial"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 04 / 05 — warrior_calm_cultivation (ash and steel · warrior calm)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: warrior_calm_cultivation__zh_CN__hui_yu_yuan_dao_gu_yi_men
+    brand_id: warrior_calm_cultivation
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: workshop_studio
+    portal_mechanic: realm
+    episodic_frame_per_volume: case
+    magical_register: soft_fantasy
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "二十四岁的徒弟在云南一处偏远古驿道边的旧铁匠铺学打刀。每打成一柄,会被请去隔山一座只有月圆夜显路的『古意门』里——里面住着一位失去同伴或徒弟的旧时人,刀是替他做的告别。一柄一卷,徒弟自己也在告别她过早走掉的师姐。"
+    volume_runway_target: 180
+    reading_platform_fit: webtoon_vertical
+    series_title: "灰与缘:古驿门"
+    series_logline: "云南腾冲外驿道边一间还在打刀的旧铁匠铺,二十四岁的徒弟每打成一柄,就要替一位旧时人做一场不出血的告别。"
+    series_description: "孟原二十四岁,辞掉昆明的设计工作,跟着叔公在腾冲驿道边一间还在打刀的老铁匠铺当徒弟。叔公七十二岁,做这一行五十年。半年前孟原的师姐在出师前的一次出炉中意外去世,孟原一直没敢回炉。叔公带她回炉的第一天告诉她,这间铺子还有一项规矩:每打成一柄能让人放下手的刀,要带着它走过隔山一道只在月圆夜显路的『古意门』。门里住着一位旧时人——他们也曾失去过同伴或徒弟,刀是替他们做的最后一次告别。一卷一柄一人:1937 年从滇缅公路上没回来的工兵班长、明清马帮的女当家、抗战时医院的护士长、清末驿道的一位邮差、孟原自己的师姐。每打完一柄,孟原对着炉火的呼吸更稳一点。基调:克制、缓、刀不出血。"
+    opening_5_volume_arc:
+      vol_1: "第一柄。给滇缅公路工兵班长。火候不稳,叔公替她扶住锤。"
+      vol_2: "第二柄。给明清马帮女当家。孟原第一次独自走完门里那段路。"
+      vol_3: "第三柄。给抗战护士长。刀打成,孟原在门里替她哭了一场。"
+      vol_4: "第四柄。给清末邮差。孟原意识到自己也开始能呼吸均匀。"
+      vol_5: "第五柄。给师姐。叔公站在炉边不说话。门只开了一次,关上。孟原出师。"
+    comp_titles: ["镖人", "一人之下", "葬送的芙莉莲", "罗小黑战记", "雏蜂"]
+    reader_promise: "你那柄替自己打的告别,会有炉火替你扶住。"
+    marketing_angle: "把『镖人』的旧道感和『葬送的芙莉莲』的告别节奏,放进腾冲驿道边的一间老铁匠铺。"
+    genre_family: fantasy_adventure
+    emotional_engine: competent_calm_specialist + inherited_wisdom
+    audience: "22 至 30 岁、迷上手工/匠人题材、近期失去同辈朋友的 Gen Z"
+
+  - series_id: warrior_calm_cultivation__zh_CN__lao_jia_de_jiu_dao
+    brand_id: warrior_calm_cultivation
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: home_apartment
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "山东老家奶奶留下来的一柄包菜刀,搬到上海后总在不同的夜里『没法切动』某一种食材——那是奶奶生前最后一段日子没能跟主人公说的某句话。主人公做完那道菜,刀就能重新切动了。一卷一道菜,一卷一句话。"
+    volume_runway_target: 130
+    reading_platform_fit: webtoon_vertical
+    series_title: "老家的旧刀"
+    series_logline: "山东老家奶奶留下的那柄包菜刀,搬到上海五年了。某天它突然切不动一颗白菜——奶奶临终那段日子,本来有句话要说。"
+    series_description: "白桐三十一岁,上海一家会计师事务所工作。山东老家奶奶五年前走了,临终前最后一段时间,她在外地出差没赶回去。奶奶留下来的一柄包菜刀,她带回上海一直在用。三月一个晚上她准备做白菜汤,刀突然像被钉在白菜上,切不动。她请师傅磨刀——师傅说刀好得很。当晚她做梦,梦见奶奶站在自己上海厨房里说:『你那年高考前一晚,我熬的小米粥你没喝完』。第二天白桐去早市买小米,熬一锅粥,刀就重新切得动白菜了。一卷一道菜:鲁西平原的猪肉白菜炖粉条、阴历七月十五的茄盒、十月十一月的腌芥菜、立春的春饼、冬至的水饺。每做完一道,奶奶临终那段日子没说出的一句话,就被白桐替自己听见一次。"
+    opening_5_volume_arc:
+      vol_1: "白菜切不动。小米粥那句话。白桐第一次在上海厨房里哭。"
+      vol_2: "猪肉炖粉条。奶奶 1971 年下放那一段日子的一句话。"
+      vol_3: "中元节的茄盒。奶奶想念的不是丈夫,是自己嫁过来那年没见的哥哥。"
+      vol_4: "腌芥菜。白桐第一次邀请同事来家里吃饭。"
+      vol_5: "冬至水饺。最后一句话是『你过得很好,我看见了』。刀切水饺皮丝滑。"
+    comp_titles: ["镖人", "深夜食堂", "罗小黑战记", "葬送的芙莉莲", "一人之下"]
+    reader_promise: "你那年没接住的那句话,可以一道菜一道菜替自己重新接住。"
+    marketing_angle: "把『深夜食堂』的台灯,挪到上海一间出租屋的灶台上,刀是奶奶留下的。"
+    genre_family: supernatural_everyday
+    emotional_engine: inherited_wisdom + named_and_seen
+    audience: "28 至 38 岁、在一线城市生活、近期失去祖辈的鲁/豫/苏北 Millennial"
+
+  - series_id: warrior_calm_cultivation__zh_CN__chong_xin_xue_huxi
+    brand_id: warrior_calm_cultivation
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: nature_park
+    portal_mechanic: realm
+    episodic_frame_per_volume: customer
+    magical_register: soft_fantasy
+    serial_engine: location_anthology
+    long_arc_spine: "三十六岁的退伍兵在大理苍山脚下一座武馆做太极陪练。每位来学的人都背着一段没放下的丧。陪练一年,武馆后院那棵老梅树会在落雪时为已经放下的人开一朵花。一卷一人。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "重新学呼吸"
+    series_logline: "大理苍山脚下一座小武馆,三十六岁的退伍兵做太极陪练——他自己也还在学,怎么把战友的死从胸口慢慢放下。"
+    series_description: "段聿三十六岁,五年前从某高原边防部队退伍,目前在大理双廊一座旧白族院子改建的小武馆做太极陪练。他师父七十岁,半失明。学员大多是城里来的,带着一段没放下的丧:一位刚失去妻子的医生、一位失去儿子的退休警察、一位被前妻虐待过的男士、一位 35 岁刚被诊断为创伤后应激的女程序员、段聿自己。陪练是慢的,招式只有六个,呼吸要数到二十二。一年时间。武馆后院一棵九十年的老梅,师父说会替已经放下的人在落雪那天开一朵花。一卷一位学员:谁先开。段聿自己心里有一位战友——他不奢望梅树替自己开。基调:克制、不喊口号、不写部队具体场景、不涉政治。"
+    opening_5_volume_arc:
+      vol_1: "失去妻子的医生。第一招『起势』。他第一周不肯把双臂抬起来。"
+      vol_2: "失去儿子的退休警察。第二招『野马分鬃』。师父让段聿替他扶住右肩。"
+      vol_3: "被前妻虐待过的男士。第三招『搂膝拗步』。段聿陪他在院子里走了一个小时。"
+      vol_4: "刚被诊断为创伤后应激的女程序员。第四招『手挥琵琶』。她第一次哭着完成。"
+      vol_5: "立冬落雪。梅树开了一朵——给那位退休警察。段聿走到树下,替自己的战友抱了抱树干。"
+    comp_titles: ["镖人", "一人之下", "葬送的芙莉莲", "罗小黑战记", "雏蜂"]
+    reader_promise: "你那段还没放下的丧,可以靠一招接一招的呼吸,慢慢学会扛住。"
+    marketing_angle: "把『镖人』的克制武感,放进大理一座白族小院的太极课。"
+    genre_family: healing
+    emotional_engine: competent_calm_specialist + named_and_seen
+    audience: "30 至 45 岁、有创伤后应激相关经历、对身心实践有兴趣的城市 Mill"
+
+  - series_id: warrior_calm_cultivation__zh_CN__yi_pi_jiu_zhe_zi_de_zhuan
+    brand_id: warrior_calm_cultivation
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: workshop_studio
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: magical_realism
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十五岁的姑娘在西塘古镇接手一家老折扇铺,每修复一把客人送来的旧折扇,扇骨上会浮出一笔旧字——那是这把扇子最初的主人没寄出去的一封信。"
+    volume_runway_target: 140
+    reading_platform_fit: webtoon_vertical
+    series_title: "一批旧折扇子的传"
+    series_logline: "西塘古镇一家百年老折扇铺新接手的姑娘,每修复一把客人寄来的旧扇,扇骨上会浮出最初主人没寄出去的一封信。"
+    series_description: "葛知白二十五岁,接手姑奶奶在嘉兴西塘开了六十年的老折扇铺。客人寄过来要修复的旧扇,大多带着一段家史:祖父留下的、抗战时北平一位伶人用过的、八十年代南下的工程师包里那把、九十年代上海一位老师傅留给学生的。知白用茶水蒸、用古法粘扇骨。每修好一把,扇骨内侧会浮出一行非常淡的字——是这把扇子最初的主人没寄出去的一封信里的一句。她拍下来,寄回客人。一卷一把扇:一卷一句没寄出去的话。整部书是一部慢的、关于普通中国人没说完的话的合集。基调:克制、温润、文物级别的安静。"
+    opening_5_volume_arc:
+      vol_1: "一把民国年间的祖父扇。字是 1947 年没寄出的一封家书的一句。"
+      vol_2: "一把抗战北平伶人的扇。字是 1939 年。"
+      vol_3: "八十年代南下工程师的扇。字是 1985 年。"
+      vol_4: "九十年代上海老师傅留给学生的扇。字是 1996 年。学生今年六十。"
+      vol_5: "知白姑奶奶留给她的那把扇。字是 1962 年——姑奶奶没寄给葛知白祖父的那封。"
+    comp_titles: ["镖人", "一人之下", "葬送的芙莉莲", "罗小黑战记", "解忧杂货店 (中文版)"]
+    reader_promise: "你长辈没寄出去的那封信,还有一把扇替他存着。"
+    marketing_angle: "把『葬送的芙莉莲』的告别温度,放进西塘一间老折扇铺的修复工序里。"
+    genre_family: mystery_cozy
+    emotional_engine: inherited_wisdom + ledger_atonement
+    audience: "23 至 33 岁、文博/手作爱好者、关注家族史的城市 Gen Z 与 Mill"
+
+  - series_id: warrior_calm_cultivation__zh_CN__hou_qi_de_xin_li_zi_xun_shi
+    brand_id: warrior_calm_cultivation
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: workplace_office
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: mystery_box
+    long_arc_spine: "二十六岁的实习心理咨询师在成都一家社区心理门诊,接到的咨询档案里总会自动多出一张前一位咨询师没写完的访谈记录——上面是上世纪某位幸存者(地震、矿难、洪水)当年没说出口的话。她不在档案里改字,只能在新一次咨询里替对方接住。"
+    volume_runway_target: 150
+    reading_platform_fit: webtoon_vertical
+    series_title: "后期的心理咨询室"
+    series_logline: "成都金牛区一家社区心理门诊,二十六岁的实习咨询师接手的旧档案,会自动多出一张前任没写完的访谈记录——上面是上世纪一位幸存者的话。"
+    series_description: "童子归二十六岁,北师大心理系毕业,在成都金牛区一家社区门诊做实习咨询师。督导是个五十岁的中年女性,五年前从汶川灾后心理援助组退下来。子归接手的旧来访者档案,常常会自动多出一页用钢笔写的访谈记录,字迹是不同年代不同咨询师的,记录的是上世纪某位幸存者当年没敢说出口的一段话:1976 年唐山的、1998 年长江洪水的、2008 年汶川的、2012 年北京721 的、九十年代矿难的。子归发现,这些幸存者的后辈或亲属,正是她现在每周要见的新来访者。她不能在旧档案里改字,只能在每周一次的咨询里,听这位后辈替上一辈把那段话讲一次。基调:行业写实、克制、不消费灾难、聚焦『话语代际传承』。"
+    opening_5_volume_arc:
+      vol_1: "第一份旧档案,1976 年唐山幸存者。来访者是她的女儿,今年五十二岁。"
+      vol_2: "1998 年长江洪水的幸存者。来访者是他二十二岁的儿子。"
+      vol_3: "2008 年汶川。来访者是当年八岁、如今二十六岁的女生。子归看见自己的影子。"
+      vol_4: "2012 年北京 721。来访者是当年从车里被救出来的男士的妻子。"
+      vol_5: "九十年代矿难。督导第一次坐进咨询室,作为子归的来访者——她是那场矿难的姐姐。"
+    comp_titles: ["镖人", "一人之下", "葬送的芙莉莲", "罗小黑战记", "雏蜂"]
+    reader_promise: "上一辈没敢说出口的话,这一辈可以替他们说一次。"
+    marketing_angle: "把『镖人』的代际叙事感,放进社区心理门诊的旧档案柜。"
+    genre_family: mystery_cozy
+    emotional_engine: ledger_atonement + competent_calm_specialist
+    audience: "23 至 32 岁、心理学/社工专业背景、家族里有上一代灾难/创伤经历的 Gen Z"
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # BRAND 05 / 05 — stoic_edge_battle (surrender form · warrior calm · battle)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  - series_id: stoic_edge_battle__zh_CN__lao_bo_ke_jia_ting_de_qi_xi_shi_san_tian
+    brand_id: stoic_edge_battle
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: home_apartment
+    portal_mechanic: companion
+    episodic_frame_per_volume: relationship
+    magical_register: none
+    serial_engine: life_stage_rhythm
+    long_arc_spine: "老破小一家三口,父亲今年初查出晚期。一家人从『七夕』数到『头七』再到『第十三天』,慢慢学会:面对一段必然到来的丧,不是练习坚强,是练习一起把日子过得正常。"
+    volume_runway_target: 130
+    reading_platform_fit: manga_traditional
+    series_title: "老破小家庭的七夕十三天"
+    series_logline: "南京一个五十八平方米的老破小,父亲今年初查出晚期。十三个有名的日子——从七夕、中元、重阳到头七——一家三口一起走完。"
+    series_description: "邵清宛三十四岁,在南京建邺一家国企做行政,父母住鼓楼一套五十八平方米的老破小。今年三月,父亲查出胰腺癌晚期。母亲六十二岁,在小区超市做收银。一家三口决定不住院晚期,把家里改造成一间安宁照护居所——社区医院上门、专业护士每周两次。十三个被命名的日子构成这部书的节奏:春分、清明、谷雨、立夏、端午、七夕、中元、白露、重阳、立冬、冬至、最后一天、头七。每一卷是一天。基调:克制、写实、不戏剧化。整部书的最大事件是:父亲一定会走,这是前提。读者跟着的是邵清宛、母亲和父亲怎么共同把这段日子过成『仍是日子』。"
+    opening_5_volume_arc:
+      vol_1: "春分。父亲第一次拒绝化疗的那天。一家人在阳台吃了一顿青团。"
+      vol_2: "清明。一家人没回老家祭祖,父亲只让女儿陪他在家烧三支香。"
+      vol_3: "谷雨。父亲想去玄武湖再走一圈。轮椅。"
+      vol_4: "立夏。社区医院第一次上门。护士姐姐带来一只小薄荷盆栽。"
+      vol_5: "端午。父亲坐在厨房凳子上,看母亲包了一年里最后一次粽子。"
+    comp_titles: ["镖人", "深夜食堂", "葬送的芙莉莲", "罗小黑战记", "解忧杂货店 (中文版)"]
+    reader_promise: "面对必然到来的告别,你不必练习坚强,只需要练习把日子过完。"
+    marketing_angle: "把『深夜食堂』的桌灯放进南京一套五十八平的老破小,父亲今年走。"
+    genre_family: slice_of_life
+    emotional_engine: chosen_family + competent_calm_specialist
+    audience: "30 至 45 岁、父母正进入晚期照护、独生子女在大城市的 Millennial"
+
+  - series_id: stoic_edge_battle__zh_CN__chuan_che_ren_di_shi_dai
+    brand_id: stoic_edge_battle
+    locale: zh_CN
+    persona_archetype: GZ-uni
+    daily_life_anchor: nature_park
+    portal_mechanic: realm
+    episodic_frame_per_volume: case
+    magical_register: soft_fantasy
+    serial_engine: power_escalation_ladder
+    long_arc_spine: "现代『穿车人』:大学生主角能穿过自家城市每一道废弃公路、旧绿皮火车、被拆掉的菜场——每穿过一处,就要替这片地方完成一段它没能完成的告别。一卷一处。基调像『镖人』穿越版本,只跑路、不拔刀。"
+    volume_runway_target: 200
+    reading_platform_fit: manga_traditional
+    series_title: "穿车人:第十代"
+    series_logline: "二十岁的女大学生发现自己能穿过家乡每一条废弃公路、每一节旧绿皮、每一座被拆掉的菜场——每穿过一次,要替那一片地方做一次告别。"
+    series_description: "祁岁安二十岁,沈阳人,在大连读海洋大学。家族口口相传一项手艺:能『穿车』——从废弃的旧公路、断头铁路、被拆掉的菜场穿过去,做一次别人帮不了的告别。岁安十六岁那年第一次显能力。家族里上一代是她的姑奶奶,2003 年去世,前八代都是女性。一卷一处:沈阳铁西区被拆掉的老厂区、大连金石滩的一段废弃旅游小火车、海拉尔到满洲里那段没人开的公路、长白山脚下一座废弃林场、河北一座 1998 年被洪水冲毁的村小。每一处她去,带的不是刀,是一本旧笔记本,记下那一片地方还没来得及说完的话——下岗工人、铁路工、林场子弟、被洪水冲走的小学生家长。整部书是现代地理的告别史,不是穿越爽文。最后一卷,她回到沈阳,去穿姑奶奶当年最后没敢穿的那一段。"
+    opening_5_volume_arc:
+      vol_1: "沈阳铁西区,被拆掉的老厂区。三个下岗女工的告别。"
+      vol_2: "大连金石滩废弃小火车。九十年代游客小男孩的故事。"
+      vol_3: "海拉尔到满洲里那段没人开的公路。一位长途货车司机的告别。"
+      vol_4: "长白山林场。九十年代被砍伐运走的林场子弟。"
+      vol_5: "河北 1998 洪水的村小。岁安第一次没能完成告别,她回大连歇一周。"
+    comp_titles: ["镖人", "一人之下", "罗小黑战记", "雏蜂", "全知读者视角"]
+    reader_promise: "你那片故乡没能讲完的话,会有一个人代代替你们去穿过去。"
+    marketing_angle: "把『镖人』那条旧道,改成穿越当代东北/华北废弃公路的告别路线。"
+    genre_family: fantasy_adventure
+    emotional_engine: inherited_wisdom + competent_calm_specialist
+    audience: "20 至 28 岁、东北/华北籍、关注下岗/老工业区记忆的 Gen Z"
+
+  - series_id: stoic_edge_battle__zh_CN__hai_zang_chuan_di_qi_ye
+    brand_id: stoic_edge_battle
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: nature_park
+    portal_mechanic: realm
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: location_anthology
+    long_arc_spine: "厦门一艘做海葬服务的旧渔船,船长四十岁,失去过自己的妻子。每次出海撒骨灰,他能在浪里看见客人已故亲人的最后一句话,以浪花的形状浮上来三秒。一卷一次出海。"
+    volume_runway_target: 150
+    reading_platform_fit: manga_traditional
+    series_title: "海葬船的七夜"
+    series_logline: "厦门海域一艘改装过的旧渔船,船长四十岁,做的是海葬服务。每次撒下去的浪头里,客人已故亲人会说的最后一句话,会浮三秒。"
+    series_description: "苏景行四十岁,厦门本地人,五年前妻子病逝后海葬。如今他自己买了一艘旧渔船,改装做民政部门批准的合法海葬服务。船上常备:鲜花、可降解骨灰盒、家属用的姜茶。每次出海固定七小时:出港、绕青屿、撒花、撒骨灰、绕一圈、回港。每次撒下去,海面上会有一道浪头停三秒——景行能看见那道浪上浮出一句话,是逝者会对家属说的最后一句。他不告诉家属,只在自己出海记录本上记下来。一卷一次出海:海葬一位早逝的父亲、一位丁克丈夫、一位被诊断绝症后选择尊严走的老太太、一位还没满月就走的婴孩、景行自己当年没能替妻子完成的那一句话。每一卷,景行也在替自己慢慢补上一句没说出口的告别。"
+    opening_5_volume_arc:
+      vol_1: "早逝父亲。浪上的话是『你妈别再蹲着洗衣服了』。景行没告诉家属。"
+      vol_2: "丁克丈夫。浪上的话是『谢谢你陪我活成这样』。"
+      vol_3: "选择尊严走的老太太。浪上的话是给她孙女的——『不必哭很久』。"
+      vol_4: "未满月的婴孩。浪整整七分钟没起。景行第一次坐在船头哭。"
+      vol_5: "景行决定为妻子重新出一趟海。这次他自己讲一句话给浪听。"
+    comp_titles: ["镖人", "深夜食堂", "葬送的芙莉莲", "罗小黑战记", "一人之下"]
+    reader_promise: "你撒下去的那一份,会有一道浪替你接住。"
+    marketing_angle: "把『深夜食堂』的不出声的温柔,放上厦门一艘做海葬服务的旧渔船。"
+    genre_family: supernatural_everyday
+    emotional_engine: competent_calm_specialist + named_and_seen
+    audience: "30 至 50 岁、考虑或近期接受海葬等现代殡葬方式的城市 Mill/Gen X"
+
+  - series_id: stoic_edge_battle__zh_CN__zhong_yuan_jie_de_kuai_di_yuan
+    brand_id: stoic_edge_battle
+    locale: zh_CN
+    persona_archetype: ML-bereaved
+    daily_life_anchor: retail_service
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "中元节前后,城中村快递员会收到一些没有寄件人、没有上家面单的包裹——客户能在小区门口取到、收件人却是已经过世的家人。快递员是三十岁的离异女性,每送一件,她替双方多说一句话。"
+    volume_runway_target: 140
+    reading_platform_fit: webtoon_vertical
+    series_title: "中元节的快递员"
+    series_logline: "广州城中村一位三十岁的快递员,每年中元节前后会收到一批没有寄件人的包裹——收件人却是已经过世的家人。"
+    series_description: "霍未未三十岁,离异,带七岁女儿住广州海珠区一片城中村。她在城中村片区做京东末端配送员四年了。每年农历七月十五前后,她的派件单上会突然多出来一批奇怪的包裹:没有寄件人、没有上家面单、商品是日常的——一盒桂花酱、一双布鞋、一本旧相册、一张老演唱会的门票、一支水笔。收件地址在城中村某户,收件人名字却是早就过世的人。她第一年不敢送,送了发现:收件家属会愣一下,但会接下来。她慢慢明白这是城中村小区一种自发的祭祀方式——还在的家人,假装下单给已经走了的人。霍未未替双方多说一句话:『阿姨,这是阿叔生前最爱的桂花酱』。一卷一户,一卷一件。她自己的母亲三年前走了,她从来没下过单给母亲。最后一卷她下了第一单。"
+    opening_5_volume_arc:
+      vol_1: "桂花酱。失去丈夫五年的阿姨。霍未未替她接了一句话。"
+      vol_2: "布鞋。失去父亲八年的中年男人。霍未未把鞋摆在他家门口。"
+      vol_3: "旧相册。失去伴侣的同性恋大叔。"
+      vol_4: "演唱会门票。失去儿子的妈妈。霍未未带女儿一起去送。"
+      vol_5: "水笔。霍未未第一次给自己的母亲下单。"
+    comp_titles: ["镖人", "深夜食堂", "罗小黑战记", "葬送的芙莉莲", "全知读者视角"]
+    reader_promise: "中元节那天你想送出去的那份心意,会有人替你按响那个门铃。"
+    marketing_angle: "把『深夜食堂』的桌灯,放进广州城中村一辆中元节的电动小三轮上。"
+    genre_family: supernatural_everyday
+    emotional_engine: chosen_family + ledger_atonement
+    audience: "25 至 35 岁、外来务工或新一线城市底层服务业从业者、对民俗心理有兴趣的 Mill"
+
+  - series_id: stoic_edge_battle__zh_CN__zhi_qian_zhe_die_shi_de_san_yue
+    brand_id: stoic_edge_battle
+    locale: zh_CN
+    persona_archetype: GZ-firstjob
+    daily_life_anchor: workshop_studio
+    portal_mechanic: object
+    episodic_frame_per_volume: customer
+    magical_register: supernatural_everyday
+    serial_engine: case_of_the_week
+    long_arc_spine: "二十四岁的姑娘开了一家上门叠纸钱的小工作室,客户都是不方便自己折的家庭。每一沓折好的纸钱,会在烧的时候自动浮上一句话——逝者听到、家属也听到。一卷一户。三个月时间。"
+    volume_runway_target: 130
+    reading_platform_fit: webtoon_vertical
+    series_title: "纸钱折叠师的三月"
+    series_logline: "二十四岁的姑娘在微信小程序上线一项服务:上门替不方便折的家庭叠纸钱。三月时间,一户一户。"
+    series_description: "宁知三二十四岁,武汉本地人,小语种毕业找不到合适工作,微信小程序上线一项服务:上门替家庭叠纸钱。客户大多是高龄长辈走了的家庭、子女在外地不能回来、或新一代城里人不会折。她随身带一沓黄烧纸、一把竹尺、一只折叠小桌。每一户人家,她坐两小时,边教边折——折金元宝、银元宝、纸衣、纸鞋。她有一个秘密:每一沓折好的纸钱,烧的时候火焰里会浮上一句话,逝者和家属同时听见。她不解释,她只折。三月时间。一卷一户:1962 年下放走了的太爷爷、1978 年的小阿姨、2003 年走的爸爸、2019 年走的奶奶、2024 年走的小弟弟。每一卷,知三自己心里的一个结也松开一点。她爸爸 2003 年走的时候她才两岁,她从未替自己折过一次。"
+    opening_5_volume_arc:
+      vol_1: "失去太爷爷的家庭。1962 年下放。火焰里那句话:『当年那条路,我自己走完了』。"
+      vol_2: "1978 年的小阿姨。火焰里那句话给她妹妹——『姐对不起,头胎没保住』。"
+      vol_3: "2003 年走的爸爸——别人家的爸爸,不是知三的。知三第一次发抖。"
+      vol_4: "2019 年走的奶奶。火焰里那句话给孙女:『下次清明带男朋友给我看一眼』。"
+      vol_5: "2024 年走的小弟弟。知三回家。她替自己爸爸折了第一沓。火焰里的话她记了一辈子。"
+    comp_titles: ["镖人", "深夜食堂", "罗小黑战记", "葬送的芙莉莲", "解忧杂货店 (中文版)"]
+    reader_promise: "你还没替自己长辈折过的那沓纸钱,这世上总有人替你先折一次。"
+    marketing_angle: "把『深夜食堂』的台灯,挪到一只折纸的小竹尺旁边——上门叠纸钱的新职业。"
+    genre_family: supernatural_everyday
+    emotional_engine: ledger_atonement + inherited_wisdom
+    audience: "22 至 30 岁、新一线城市自由职业 Gen Z、关注殡葬现代化和民俗传承"
+
+
+
+
+
+
+
+
