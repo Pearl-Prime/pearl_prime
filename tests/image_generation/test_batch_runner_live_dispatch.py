@@ -92,8 +92,10 @@ def test_run_live_activation_happy_path_pearl(monkeypatch: pytest.MonkeyPatch, t
         ssh_host="testhost",
         skip_comfy_ping=True,
     )
-    assert len(res) == 1
-    assert res[0]["status"] == "succeeded"
+    # Last element is the fault_tolerance_summary row (RUN_LIVE_ACTIVATION_FAULT_TOLERANCE_V1).
+    cells = [r for r in res if not r.get("fault_tolerance_summary")]
+    assert len(cells) == 1
+    assert cells[0]["status"] == "succeeded"
 
 
 def test_run_live_activation_skips_runcomfy_on_cost_cap(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
@@ -120,8 +122,9 @@ def test_run_live_activation_skips_runcomfy_on_cost_cap(monkeypatch: pytest.Monk
         output_root=out,
         skip_comfy_ping=True,
     )
-    assert res[0].get("skipped") is True
-    assert res[0].get("reason") == "runcomfy_cost_cooldown"
+    cells = [r for r in res if not r.get("fault_tolerance_summary")]
+    assert cells[0].get("skipped") is True
+    assert cells[0].get("reason") == "runcomfy_cost_cooldown"
 
 
 def test_run_live_activation_routing_animagine_to_pearl(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:

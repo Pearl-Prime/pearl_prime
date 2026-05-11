@@ -19,7 +19,8 @@ import re
 import subprocess
 import sys
 import time
-from dataclasses import dataclass
+import uuid
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
@@ -424,6 +425,180 @@ def run_batches(
     return results
 
 
+# ----------------------------------------------------------------------------
+# Per-batch fault tolerance (RUN_LIVE_ACTIVATION_FAULT_TOLERANCE_V1)
+# ----------------------------------------------------------------------------
+# Pearl_Conductor v3 dispatches ~7,400 units unattended over 5–10 days. A
+# single non-recoverable transient at unit 800 must NOT abort the run.
+# Retry classification table is documented in
+# ``docs/specs/RUN_LIVE_ACTIVATION_FAULT_TOLERANCE_V1_SPEC.md``.
+
+# Substrings that mark a RunComfy / Pearl Star *transient* failure.
+_TRANSIENT_SUBSTRINGS: tuple[str, ...] = (
+    "no image url",
+    "http 502",
+    "http 503",
+    "http 504",
+    "502 bad gateway",
+    "503 service unavailable",
+    "504 gateway timeout",
+    "timeout",
+    "timed out",
+    "queue full",
+    "queue is full",
+    "connection reset",
+    "temporarily unavailable",
+    "read timed out",
+    "connection aborted",
+)
+
+# Substrings that mark a *non-retryable* (fail-fast) failure. Take precedence
+# over transient classification when both match.
+_NON_RETRYABLE_SUBSTRINGS: tuple[str, ...] = (
+    "http 401",
+    "http 403",
+    "unauthorized",
+    "forbidden",
+    "invalid api key",
+    "invalid token",
+    "invalid workflow",
+    "workflow json",
+    "suppressed_cooldown",
+    "cumulative_month_spend_usd >= $10",
+    "spend cap",
+    "cap exhausted",
+    "missing status url",  # malformed deployment response — not transient
+)
+
+
+@dataclass(frozen=True)
+class FaultTolerancePolicy:
+    """Configurable retry policy for ``run_live_activation``.
+
+    Defaults: 2 retries with 30s / 90s backoffs (exponential ~3x). Both the
+    transient and non-retryable lists are augmentable via ``extra_transient``
+    / ``extra_non_retryable`` for callers that want to override classification
+    without forking this module.
+    """
+
+    max_retries: int = 2
+    backoff_schedule_s: tuple[float, ...] = (30.0, 90.0)
+    extra_transient: tuple[str, ...] = field(default_factory=tuple)
+    extra_non_retryable: tuple[str, ...] = field(default_factory=tuple)
+
+    def backoff_for(self, attempt_index: int) -> float:
+        """Sleep seconds before retry attempt ``attempt_index`` (0-based)."""
+        if not self.backoff_schedule_s:
+            return 0.0
+        idx = min(attempt_index, len(self.backoff_schedule_s) - 1)
+        return float(self.backoff_schedule_s[idx])
+
+
+def _classify_exception(
+    exc: BaseException,
+    policy: FaultTolerancePolicy,
+) -> str:
+    """Return ``"non_retryable"``, ``"transient"``, or ``"unknown"``.
+
+    Unknown failures are treated as non-retryable by the caller (fail-fast on
+    surprise). Non-retryable wins over transient when both match — a 401 that
+    also happens to mention "timeout" stays non-retryable.
+    """
+    msg = f"{type(exc).__name__}: {exc}".lower()
+    non_retry_hits = tuple(_NON_RETRYABLE_SUBSTRINGS) + tuple(
+        s.lower() for s in policy.extra_non_retryable
+    )
+    if any(s in msg for s in non_retry_hits):
+        return "non_retryable"
+    transient_hits = tuple(_TRANSIENT_SUBSTRINGS) + tuple(
+        s.lower() for s in policy.extra_transient
+    )
+    if any(s in msg for s in transient_hits):
+        return "transient"
+    return "unknown"
+
+
+def _failed_cells_sidecar_path(output_root: Path, run_id: str) -> Path:
+    """Sidecar TSV co-located with the run output: ``<run_id>_failed_cells.tsv``."""
+    safe_id = re.sub(r"[^a-zA-Z0-9_.-]+", "_", run_id) or "run"
+    return Path(output_root) / f"{safe_id}_failed_cells.tsv"
+
+
+def _append_failed_cell(
+    sidecar_path: Path,
+    *,
+    batch_id: str,
+    dispatch_path: str,
+    classification: str,
+    attempts: int,
+    error_repr: str,
+) -> None:
+    """Append one TSV row describing a permanently-failed cell."""
+    sidecar_path.parent.mkdir(parents=True, exist_ok=True)
+    is_new = not sidecar_path.is_file()
+    fieldnames = [
+        "ts_utc",
+        "batch_id",
+        "dispatch_path",
+        "classification",
+        "attempts",
+        "error",
+    ]
+    row = {
+        "ts_utc": datetime.now(timezone.utc).isoformat(),
+        "batch_id": batch_id,
+        "dispatch_path": dispatch_path,
+        "classification": classification,
+        "attempts": str(attempts),
+        # TSV: collapse tabs/newlines so one row stays one line.
+        "error": re.sub(r"[\t\r\n]+", " ", error_repr)[:2000],
+    }
+    with sidecar_path.open("a", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter="\t")
+        if is_new:
+            writer.writeheader()
+        writer.writerow(row)
+
+
+def _dispatch_with_retries(
+    batch: Mapping[str, Any],
+    *,
+    dispatch_kwargs: Mapping[str, Any],
+    policy: FaultTolerancePolicy,
+    sleep_fn: Callable[[float], None] = time.sleep,
+    dispatch_fn: Callable[..., dict[str, Any]] | None = None,
+) -> tuple[dict[str, Any] | None, int, BaseException | None, str]:
+    """Try ``dispatch(batch, **dispatch_kwargs)`` with classified retries.
+
+    Returns ``(result, attempts, last_exception, classification)``. On success
+    ``last_exception`` is ``None`` and ``classification`` is ``"succeeded"``.
+    On exhaustion / non-retryable, ``result`` is ``None`` and the caller logs
+    the cell as failed and continues. ``dispatch_fn`` defaults to module-level
+    ``dispatch`` so tests can inject without monkeypatching globals.
+    """
+    fn = dispatch_fn or dispatch
+    attempts = 0
+    last_exc: BaseException | None = None
+    classification = "unknown"
+    while True:
+        attempts += 1
+        try:
+            return fn(batch, dry_run=False, **dispatch_kwargs), attempts, None, "succeeded"
+        except BaseException as exc:  # noqa: BLE001 — intentionally broad; classified next
+            # Never swallow keyboard interrupts / system exit — those mean
+            # the operator told us to stop and we must.
+            if isinstance(exc, (KeyboardInterrupt, SystemExit)):
+                raise
+            last_exc = exc
+            classification = _classify_exception(exc, policy)
+            if classification != "transient":
+                # non_retryable or unknown → fail-fast, no further attempts.
+                return None, attempts, last_exc, classification
+            if attempts > policy.max_retries:
+                return None, attempts, last_exc, "retries_exhausted"
+            sleep_fn(policy.backoff_for(attempts - 1))
+
+
 def run_live_activation(
     batches: Sequence[Mapping[str, Any]],
     *,
@@ -433,8 +608,20 @@ def run_live_activation(
     max_batches: int | None = None,
     write_dispatch_log: bool = False,
     cost_check: Callable[[], dict[str, Any]] | None = None,
+    fault_tolerance: FaultTolerancePolicy | None = None,
+    run_id: str | None = None,
+    sleep_fn: Callable[[float], None] = time.sleep,
 ) -> list[dict[str, Any]]:
-    """Locale-first live run with ``dispatch_path:auto`` resolved from Pearl Star probe."""
+    """Locale-first live run with ``dispatch_path:auto`` resolved from Pearl Star probe.
+
+    Per-batch fault tolerance (RUN_LIVE_ACTIVATION_FAULT_TOLERANCE_V1):
+    transient failures (e.g. ``"No image URL"``, HTTP 502/503/504, timeouts,
+    queue-full) are retried per ``fault_tolerance`` (default: 2 retries with
+    30s/90s backoff). Non-retryable failures (auth, cap exhausted, invalid
+    workflow JSON) and unknown-class failures fail fast for that one cell.
+    A cell that exhausts retries is appended to
+    ``<output_root>/<run_id>_failed_cells.tsv`` and the run continues.
+    """
     if not skip_comfy_ping:
         ensure_pearl_comfyui(ssh_host)
     state = probe_pearl_star_models(ssh_host)
@@ -443,7 +630,15 @@ def run_live_activation(
     if max_batches is not None:
         ordered = ordered[: max(0, max_batches)]
     cost_fn = cost_check or runcomfy_cost_check
+    policy = fault_tolerance or FaultTolerancePolicy()
+    effective_run_id = run_id or datetime.now(timezone.utc).strftime("run_%Y%m%dT%H%M%SZ_") + uuid.uuid4().hex[:6]
+    sidecar = _failed_cells_sidecar_path(output_root, effective_run_id)
+
     results: list[dict[str, Any]] = []
+    succeeded = 0
+    retried = 0
+    failed: list[dict[str, Any]] = []
+
     for batch in ordered:
         path = str(batch.get("dispatch_path", "")).strip().lower()
         cost = cost_fn()
@@ -471,27 +666,90 @@ def run_live_activation(
         kwargs: dict[str, Any] = {"activation_output_dir": output_root}
         if path == "pearl_star":
             kwargs["ssh_host"] = ssh_host
-        res = dispatch(batch, dry_run=False, **kwargs)
-        res["batch_id"] = batch.get("batch_id")
-        if state is not None:
-            res["model_probe"] = {
-                "flux_schnell_present": state.flux_schnell_present,
-                "animagine_xl_present": state.animagine_xl_present,
-                "qwen_unified_ckpt_present": state.qwen_unified_ckpt_present,
-                "qwen_transformer_shard_count": state.qwen_transformer_shard_count,
-            }
+
+        res, attempts, exc, classification = _dispatch_with_retries(
+            batch,
+            dispatch_kwargs=kwargs,
+            policy=policy,
+            sleep_fn=sleep_fn,
+        )
+        if res is not None:
+            res["batch_id"] = batch.get("batch_id")
+            res["attempts"] = attempts
+            if attempts > 1:
+                retried += 1
+            succeeded += 1
+            if state is not None:
+                res["model_probe"] = {
+                    "flux_schnell_present": state.flux_schnell_present,
+                    "animagine_xl_present": state.animagine_xl_present,
+                    "qwen_unified_ckpt_present": state.qwen_unified_ckpt_present,
+                    "qwen_transformer_shard_count": state.qwen_transformer_shard_count,
+                }
+            if write_dispatch_log:
+                log_dispatch(
+                    {
+                        "batch_id": batch.get("batch_id"),
+                        "dispatch_path": path,
+                        "dry_run": False,
+                        "status": str(res.get("status", "")),
+                        "notes": str(res.get("notes", "")),
+                        "payload": {k: v for k, v in res.items() if k != "model_probe"},
+                    },
+                )
+            results.append(res)
+            continue
+
+        # Permanent failure for this cell — sidecar + continue.
+        err_repr = f"{type(exc).__name__}: {exc}" if exc is not None else "unknown_error"
+        _append_failed_cell(
+            sidecar,
+            batch_id=str(batch.get("batch_id", "")),
+            dispatch_path=path,
+            classification=classification,
+            attempts=attempts,
+            error_repr=err_repr,
+        )
+        row = {
+            "batch_id": batch.get("batch_id"),
+            "dispatch_path": path,
+            "status": "failed",
+            "failed": True,
+            "classification": classification,
+            "attempts": attempts,
+            "error": err_repr,
+        }
+        results.append(row)
+        failed.append(row)
         if write_dispatch_log:
             log_dispatch(
                 {
                     "batch_id": batch.get("batch_id"),
                     "dispatch_path": path,
                     "dry_run": False,
-                    "status": str(res.get("status", "")),
-                    "notes": str(res.get("notes", "")),
-                    "payload": {k: v for k, v in res.items() if k != "model_probe"},
+                    "status": "FAILED",
+                    "notes": f"{classification} attempts={attempts}",
+                    "payload": row,
                 },
             )
-        results.append(res)
+
+    summary = {
+        "fault_tolerance_summary": True,
+        "run_id": effective_run_id,
+        "succeeded": succeeded,
+        "retried": retried,
+        "failed": len(failed),
+        "failed_cells": [
+            {
+                "batch_id": f.get("batch_id"),
+                "classification": f.get("classification"),
+                "attempts": f.get("attempts"),
+            }
+            for f in failed
+        ],
+        "failed_cells_sidecar": str(sidecar) if sidecar.is_file() else None,
+    }
+    results.append(summary)
     return results
 
 
