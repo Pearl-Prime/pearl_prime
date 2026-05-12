@@ -219,6 +219,96 @@ def _load_v1_1_planned_books(
     return rows_out
 
 
+def _load_v1_2_planned_books(
+    repo_root: Path = REPO_ROOT,
+) -> list[dict[str, Any]]:
+    """Enumerate one row per V1.2 series concept.
+
+    V1.2 themes are richer than V1.1: each series has a fully-authored
+    persona_archetype, magical_register, serial_engine, portal_mechanic,
+    long_arc_spine, opening_5_volume_arc, etc. Files live at
+    ``artifacts/marketing/v1_2_themes_<locale>_cluster_<x>.yaml`` (20 total =
+    4 locales × 5 clusters). Each emits ~25 series.
+
+    Output row shape matches V1.1 planned rows for dashboard compatibility,
+    with V1.2 metadata added so the card can show register/engine chips.
+    Status = "planned"; source_version = "v1.2".
+    """
+    glob_pattern = "artifacts/marketing/v1_2_themes_*_cluster_*.yaml"
+    rows_out: list[dict[str, Any]] = []
+    for path in sorted(repo_root.glob(glob_pattern)):
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        cluster_id = data.get("cluster")
+        locale_default = data.get("locale")
+        for series in data.get("series", []) or []:
+            series_id = str(series.get("series_id") or "").strip()
+            brand_id = str(series.get("brand_id") or "").strip()
+            locale = str(series.get("locale") or locale_default or "").strip()
+            if not series_id or not brand_id or not locale:
+                continue
+            book_id = series_id  # already deterministic <brand>__<locale>__<slug>
+            rows_out.append({
+                "book_id": book_id,
+                "brand_id": brand_id,
+                "locale": locale,
+                "lang": locale,
+                "author_id": None,
+                "author": None,
+                "publisher": None,
+                "teacher": None,
+                "book_title": series.get("series_title") or f"{brand_id} series",
+                "book_subtitle": series.get("series_logline"),
+                "book_description": series.get("series_description"),
+                "topic": None,
+                "genre_family": series.get("genre_family"),
+                "subgenre": None,
+                "book_register": series.get("reading_platform_fit"),
+                "book_subject": None,
+                "book_subject_note": None,
+                "micro_palette_shift": None,
+                "series": None,
+                "brand_palette_primary": None,
+                "brand_palette_secondary": None,
+                "brand_palette_brand": None,
+                "brand_inspiration": None,
+                "author_signature_color": None,
+                "cover_kind": "planned_placeholder",
+                "template_archetype": None,
+                "book_cover_image_path": None,
+                "book_cover_status": "planned",
+                "epub_path": None,
+                "format": "ebook",
+                "launch_priority": "P1",
+                "status": "planned",
+                "priority_phase": None,
+                "surface": "ebook",
+                "series_count": None,
+                "episode_per_series_count": None,
+                "series_index": None,
+                "registry_locale": None,
+                "plan_source_path": str(path.relative_to(repo_root)),
+                # V1.2-specific metadata (pass-through for dashboard card chips):
+                "source_version": "v1.2",
+                "cluster_id": cluster_id,
+                "persona_archetype": series.get("persona_archetype"),
+                "daily_life_anchor": series.get("daily_life_anchor"),
+                "portal_mechanic": series.get("portal_mechanic"),
+                "episodic_frame_per_volume": series.get("episodic_frame_per_volume"),
+                "magical_register": series.get("magical_register"),
+                "serial_engine": series.get("serial_engine"),
+                "long_arc_spine": series.get("long_arc_spine"),
+                "volume_runway_target": series.get("volume_runway_target"),
+                "reading_platform_fit": series.get("reading_platform_fit"),
+                "opening_5_volume_arc": series.get("opening_5_volume_arc"),
+                "comp_titles": series.get("comp_titles"),
+                "reader_promise": series.get("reader_promise"),
+                "marketing_angle": series.get("marketing_angle"),
+                "emotional_engine": series.get("emotional_engine"),
+                "audience": series.get("audience"),
+            })
+    return rows_out
+
+
 def _load_teacher_books() -> list[dict[str, Any]]:
     """Pull TEACHER_BOOKS from the build_epub module without running it."""
     from scripts.release.build_epub import TEACHER_BOOKS
@@ -329,6 +419,18 @@ def build_book_series_index() -> dict[str, Any]:
             # Rendered row already exists with this id; keep rendered metadata.
             continue
         merged.append(p)
+
+    # V1.2 — merge richer planned rows from the 20 cluster YAML files.
+    # Each V1.2 series has portal_mechanic / magical_register / serial_engine
+    # / persona_archetype metadata that the dashboard card surfaces.
+    v1_2_rows = _load_v1_2_planned_books()
+    existing_ids = {str(r.get("book_id")) for r in merged}
+    for v in v1_2_rows:
+        if str(v.get("book_id")) in existing_ids:
+            # Already covered by rendered or V1.1 planned; do not duplicate.
+            continue
+        merged.append(v)
+        existing_ids.add(str(v.get("book_id")))
 
     out = {
         "schema_version": 2,

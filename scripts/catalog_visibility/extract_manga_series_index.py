@@ -272,15 +272,99 @@ def marketing_gaps(entry: dict[str, Any]) -> list[str]:
     return missing
 
 
+def _load_v1_2_manga_series(repo_root: Path = REPO_ROOT) -> list[dict[str, Any]]:
+    """Load 20 V1.2 cluster YAML files and emit manga_series_index rows.
+
+    Files: ``artifacts/marketing/v1_2_themes_<locale>_cluster_<x>.yaml``.
+    Each series becomes a manga index row with status="planned",
+    source_version="v1.2", carrying through V1.2 metadata (magical_register,
+    serial_engine, portal_mechanic, persona_archetype, etc.) so the dashboard
+    card can surface them.
+    """
+    glob_pattern = "artifacts/marketing/v1_2_themes_*_cluster_*.yaml"
+    rows: list[dict[str, Any]] = []
+    for path in sorted(repo_root.glob(glob_pattern)):
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        cluster_id = data.get("cluster")
+        locale_default = data.get("locale")
+        for series in data.get("series", []) or []:
+            series_id = _s(series.get("series_id"))
+            brand_id = _s(series.get("brand_id"))
+            locale = _s(series.get("locale")) or locale_default
+            if not series_id or not brand_id or not locale:
+                continue
+            entry: dict[str, Any] = {
+                "brand_id": brand_id,
+                "catalog_id": None,
+                "locale": locale,
+                "series_id": series_id,
+                "series_title": _s(series.get("series_title")),
+                "series_logline": _s(series.get("series_logline")),
+                "series_description": _s(series.get("series_description")),
+                "market_demo": None,
+                "genre_family": _s(series.get("genre_family")),
+                "subgenre": None,
+                "emotional_engine": _s(series.get("emotional_engine")),
+                "serialization_engine": _s(series.get("serial_engine")),
+                "visual_grammar": None,
+                "reader_promise": _s(series.get("reader_promise")),
+                "positioning": None,
+                "audience": _s(series.get("audience")),
+                "comp_titles": _list_str(series.get("comp_titles")),
+                "marketing_angle": _s(series.get("marketing_angle")),
+                "hook_lines": None,
+                "launch_priority": "P1",
+                "status": "planned",
+                "main_character_name": None,
+                "main_character_role": None,
+                "main_character_image_path": None,
+                "plan_source_path": str(path.relative_to(repo_root)),
+                # V1.2-specific metadata:
+                "source_version": "v1.2",
+                "cluster_id": cluster_id,
+                "persona_archetype": series.get("persona_archetype"),
+                "daily_life_anchor": series.get("daily_life_anchor"),
+                "portal_mechanic": series.get("portal_mechanic"),
+                "episodic_frame_per_volume": series.get("episodic_frame_per_volume"),
+                "magical_register": series.get("magical_register"),
+                "serial_engine": series.get("serial_engine"),
+                "long_arc_spine": _s(series.get("long_arc_spine")),
+                "volume_runway_target": series.get("volume_runway_target"),
+                "reading_platform_fit": series.get("reading_platform_fit"),
+                "opening_5_volume_arc": series.get("opening_5_volume_arc"),
+            }
+            for k in NORMALIZED_KEYS:
+                if k not in entry:
+                    entry[k] = None
+            rows.append(entry)
+    return rows
+
+
 def extract_all(
     profile_root: Path,
     brand_registry_path: Path,
     plan_path: Path | None = None,
+    *,
+    include_v1_2: bool | None = None,
 ) -> tuple[list[dict[str, Any]], list[str]]:
+    """Extract manga series index entries.
+
+    ``include_v1_2`` controls whether the 20 V1.2 cluster YAML files are
+    merged in. Default behavior: include V1.2 when called with the production
+    profile_root (``MANGA_PROFILE_ROOT``); skip V1.2 when called with a
+    synthetic ``tmp_path`` (test harness). Pass explicitly to override.
+    """
     brands = load_brand_registry(brand_registry_path)
     plan_brands = load_brand_series_plan(plan_path or BRAND_SERIES_PLAN_PATH)
     series: list[dict[str, Any]] = []
     errors: list[str] = []
+
+    if include_v1_2 is None:
+        # Auto-detect: include V1.2 only when scanning the production profile root.
+        try:
+            include_v1_2 = profile_root.resolve() == MANGA_PROFILE_ROOT.resolve()
+        except OSError:
+            include_v1_2 = False
 
     for path in discover_profile_files(profile_root):
         try:
@@ -300,6 +384,19 @@ def extract_all(
         if raw.get("profile_type") == "brand_genre_lane":
             continue
         series.append(raw_doc_to_entry(raw, path, brands, plan_brands))
+
+    # V1.2 — merge richer planned series from the 20 cluster YAMLs.
+    # Only when scanning production profile root (auto-detected above);
+    # tests pass synthetic tmp_paths and skip this merge by default.
+    if include_v1_2:
+        v1_2_rows = _load_v1_2_manga_series(REPO_ROOT)
+        existing_ids = {str(s.get("series_id")) for s in series if s.get("series_id")}
+        for v in v1_2_rows:
+            sid = str(v.get("series_id"))
+            if sid in existing_ids:
+                continue
+            series.append(v)
+            existing_ids.add(sid)
 
     return series, errors
 

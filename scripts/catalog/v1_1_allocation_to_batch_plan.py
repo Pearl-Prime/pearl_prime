@@ -53,6 +53,7 @@ DEFAULT_SERIES_THEMES = (
     / "marketing"
     / "v1_1_25_brand_series_themes_2026-05-11.yaml"
 )
+DEFAULT_V1_2_THEMES_GLOB = "artifacts/marketing/v1_2_themes_*_cluster_*.yaml"
 DEFAULT_LORA_PLANS = REPO_ROOT / "config" / "manga" / "brand_lora_plans.yaml"
 DEFAULT_COVER_SPECS = (
     REPO_ROOT / "config" / "catalog_planning" / "brand_cover_art_specs.yaml"
@@ -94,6 +95,97 @@ def _load_yaml(path: Path) -> dict[str, Any]:
     if not path.exists():
         raise FileNotFoundError(f"missing input YAML: {path}")
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+
+
+def _load_v1_2_series_themes(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
+    """Load the 20 V1.2 cluster YAML files and re-shape into the V1.1 contract.
+
+    V1.2 cluster files are flat per (locale, cluster):
+        schema_version: "1.2"
+        locale: <locale>
+        cluster: <cluster>
+        series:
+          - series_id: <brand>__<locale>__<slug>
+            brand_id: <brand>
+            locale: <locale>
+            series_title: ...
+            series_logline: ...
+            series_description: ...
+            magical_register: ...
+            serial_engine: ...
+            ...
+
+    V1.1 contract expected by ``_series_for`` is nested:
+        brands:
+          <brand>:
+            series:
+              <locale>:
+                - series_title: ...
+                  arc_shape: ...
+                  emotional_throughline: ...
+                  surface_priority: ...
+
+    Mapping:
+      series_title          -> series_title (passthrough)
+      serial_engine         -> arc_shape   (the long-arc structural pattern)
+      series_logline        -> emotional_throughline (1-sentence feel hook)
+      reading_platform_fit  -> surface_priority (webtoon_vertical | manga_traditional | both)
+
+    Additional V1.2 metadata (magical_register, portal_mechanic, persona_archetype,
+    long_arc_spine, opening_5_volume_arc, etc.) is preserved on the per-series
+    dict so downstream consumers can pick it up if desired.
+
+    Glob pattern: ``DEFAULT_V1_2_THEMES_GLOB`` (artifacts/marketing/v1_2_themes_*_cluster_*.yaml).
+    Expects 20 files (5 clusters × 4 locales). Missing files do NOT raise — the
+    bridge will fall back to synthetic concepts per ``_series_for`` for any
+    (brand, locale) pair without a V1.2 entry.
+    """
+    out: dict[str, dict[str, dict[str, list[dict[str, Any]]]]] = {"brands": {}}
+    file_count = 0
+    for path in sorted(repo_root.glob(DEFAULT_V1_2_THEMES_GLOB)):
+        file_count += 1
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        for series in data.get("series", []) or []:
+            brand_id = series.get("brand_id")
+            locale = series.get("locale") or data.get("locale")
+            if not brand_id or not locale:
+                continue
+            v1_1_shape = {
+                "series_title": series.get("series_title", ""),
+                "arc_shape": series.get("serial_engine", ""),
+                "emotional_throughline": series.get("series_logline", ""),
+                "surface_priority": series.get("reading_platform_fit", "balanced"),
+                # V1.2 passthrough metadata (preserved for downstream consumers):
+                "_v1_2": {
+                    "series_id": series.get("series_id"),
+                    "series_description": series.get("series_description"),
+                    "magical_register": series.get("magical_register"),
+                    "serial_engine": series.get("serial_engine"),
+                    "portal_mechanic": series.get("portal_mechanic"),
+                    "daily_life_anchor": series.get("daily_life_anchor"),
+                    "episodic_frame_per_volume": series.get("episodic_frame_per_volume"),
+                    "persona_archetype": series.get("persona_archetype"),
+                    "long_arc_spine": series.get("long_arc_spine"),
+                    "volume_runway_target": series.get("volume_runway_target"),
+                    "opening_5_volume_arc": series.get("opening_5_volume_arc"),
+                    "genre_family": series.get("genre_family"),
+                    "comp_titles": series.get("comp_titles"),
+                    "reader_promise": series.get("reader_promise"),
+                    "marketing_angle": series.get("marketing_angle"),
+                    "emotional_engine": series.get("emotional_engine"),
+                    "audience": series.get("audience"),
+                    "source_version": "v1.2",
+                    "source_path": str(path.relative_to(repo_root)),
+                },
+            }
+            brand_block = out["brands"].setdefault(brand_id, {"series": {}})
+            brand_block["series"].setdefault(locale, []).append(v1_1_shape)
+    out["_meta"] = {
+        "source_version": "v1.2",
+        "files_loaded": file_count,
+        "glob_pattern": DEFAULT_V1_2_THEMES_GLOB,
+    }
+    return out
 
 
 def _load_style_canon() -> dict[str, str]:
@@ -402,11 +494,15 @@ def generate_plans(
     cover_specs_path: Path | None = None,
     lora_plans_path: Path | None = None,
     dry_run: bool = False,
+    use_v1_2_themes: bool = False,
 ) -> dict[str, Any]:
     alloc = load_v1_1_brand_allocation_plan(
         allocation_tsv or default_allocation_tsv_path(REPO_ROOT)
     )
-    series_themes = _load_yaml(series_themes_path or DEFAULT_SERIES_THEMES)
+    if use_v1_2_themes:
+        series_themes = _load_v1_2_series_themes(REPO_ROOT)
+    else:
+        series_themes = _load_yaml(series_themes_path or DEFAULT_SERIES_THEMES)
     cover_specs = _load_yaml(cover_specs_path or DEFAULT_COVER_SPECS)
     lora_plans = _load_yaml(lora_plans_path or DEFAULT_LORA_PLANS)
     style_loras = lora_plans.get("brand_style_loras") or {}
@@ -482,6 +578,12 @@ def _cli(argv: list[str] | None = None) -> int:
     p.add_argument("--cover-specs", default=None)
     p.add_argument("--lora-plans", default=None)
     p.add_argument("--dry-run", action="store_true")
+    p.add_argument(
+        "--v1-2",
+        action="store_true",
+        dest="use_v1_2_themes",
+        help="Load themes from the 20 V1.2 cluster YAML files instead of the V1.1 themes YAML.",
+    )
     args = p.parse_args(argv)
     try:
         summary = generate_plans(
@@ -493,6 +595,7 @@ def _cli(argv: list[str] | None = None) -> int:
             cover_specs_path=Path(args.cover_specs) if args.cover_specs else None,
             lora_plans_path=Path(args.lora_plans) if args.lora_plans else None,
             dry_run=args.dry_run,
+            use_v1_2_themes=args.use_v1_2_themes,
         )
     except FileNotFoundError as e:
         print(f"ERROR (input): {e}", file=sys.stderr)
