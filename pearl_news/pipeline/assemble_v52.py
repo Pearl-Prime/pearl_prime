@@ -1212,27 +1212,12 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
 
     return _body_open + \
         f'''
-<!-- ═══════ PILLAR NAVIGATION ═══════ -->
-<nav class="nav-pillars">
-{nav_links}
-</nav>
-<!-- ═══════ AUTHORITY BLOCK ═══════ -->
-<div class="authority-block">
-  <div class="authority-inner">
-    <div class="authority-left">
-      <div class="authority-pillar">{_esc(pillar.upper())} <span class="article-type">· {_esc(article_type)}</span></div>
-      <div class="authority-sources">
-        <span class="label">Based on reporting from</span>
-        {authority_sources}
-      </div>
-    </div>
-    <div class="authority-right">
-      Reported by Pearl News<br>
-      For the United Spiritual Leaders Forum<br>
-      {_esc(date_str)}
-    </div>
-  </div>
-</div>
+<!-- (mock-up pillar nav + authority block removed per operator 2026-05-14:
+     "Planet / Mind / Work & Future / ... MIND · Hard News + Insight + Action ..."
+     was prototyping chrome only — not needed in production templates.
+     The variables nav_links / authority_sources / pillar / article_type /
+     date_str remain computed upstream for legacy callers but are no longer
+     emitted into the rendered article.) -->
 <!-- ═══════ ARTICLE + SIDEBAR ═══════ -->
 <div class="article-container">
 {_dock_sidebar_html}
