@@ -389,6 +389,36 @@ def _strip_html_from_slot(text: str) -> str:
     return re.sub(r"[ \t]+", " ", stripped).strip() if has_tags else stripped.strip()
 
 
+# Lines we ALWAYS strip from any slot output — these are scaffolding directives
+# from the slot prompt itself that the LLM (Gemma especially) sometimes echoes
+# back into its response. Examples observed in production:
+#   "SLOT: Youth impact — HOOK: contradiction; anchors."
+#   "CONTEXT:"  "REQUIRED SECTIONS:"  "VOICE:"  "OUTPUT:"
+#   "## LEDE"  "## NEWS SUMMARY"  "## YOUTH IMPACT"  etc.
+_SLOT_SCAFFOLD_LINE_RE = re.compile(
+    r"""^(
+          SLOT:.*                                     # SLOT: directive header
+        | CONTEXT:.*                                  # CONTEXT: header
+        | REQUIRED\s+SECTIONS?:.*                     # 'REQUIRED SECTIONS:'
+        | VOICE:.*
+        | OUTPUT:.*
+        | CHAIN\s+FOR\s+.*:.*                         # CHAIN FOR TEACHER INTEGRATION: ...
+        | CONTRADICTION\s+DOCTRINE.*                  # spec section labels
+        | ANCHOR\s+DENSITY.*
+        | WHAT\s+YOU\s+ARE\s+DOING:.*
+        | QWEN\s+(?:DISCIPLINE|の規律|纪律).*          # Qwen discipline header (en/ja/zh)
+        | \#{1,6}\s+\S.*                              # markdown headers: ## LEDE, ### foo
+        | \*{2,}.*\*{2,}\s*$                          # **BOLD ALL-CAPS LINE** that's a label
+      )$
+    """,
+    re.IGNORECASE | re.VERBOSE,
+)
+
+
+def _is_scaffold_line(line: str) -> bool:
+    return bool(_SLOT_SCAFFOLD_LINE_RE.match(line.strip()))
+
+
 def _clean_slot_output(slot: str, text: str) -> str:
     cleaned = (text or "").strip()
     if not cleaned:
@@ -405,15 +435,18 @@ def _clean_slot_output(slot: str, text: str) -> str:
         return ""
 
     prefixes = _SLOT_FORMAT_PREFIXES.get(slot)
-    if not prefixes:
-        return cleaned
 
     kept: list[str] = []
     for raw_line in cleaned.splitlines():
         line = raw_line.strip()
         if not line:
             continue
-        if any(line.upper().startswith(prefix) for prefix in prefixes):
+        # Drop scaffolding directives the model echoed back from the slot prompt
+        # (SLOT:, CONTEXT:, ## LEDE, ## YOUTH IMPACT, etc.).
+        if _is_scaffold_line(line):
+            continue
+        # Slot-specific prefix handling (HEADER:/PEG:/HOOK:/BIG_PICTURE:).
+        if prefixes and any(line.upper().startswith(prefix) for prefix in prefixes):
             for prefix in prefixes:
                 if line.upper().startswith(prefix):
                     remainder = line[len(prefix) :].strip()
