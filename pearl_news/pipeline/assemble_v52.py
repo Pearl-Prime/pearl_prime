@@ -1434,6 +1434,12 @@ CSS_BLOCK = '''<style>
   .authority-sources .label { opacity: 0.65; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 2px; }
   .authority-right { font-family: var(--font-sans); font-size: 11px; text-align: right; opacity: 0.75; line-height: 1.7; }
   .article-container { display: grid; grid-template-columns: 1fr 360px; gap: 48px; max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
+  /* WordPress wpautop filter inserts phantom <p> tags between our <div> children.
+     An empty <p> between .article-body and .sidebar claims grid cell row1-col2,
+     pushing the real .sidebar down to row 2 — that's the "right nav not there"
+     symptom seen in the Newspaper theme. Suppress all direct <p> children of the
+     grid container and the article root so the layout survives WP's filter. */
+  .pn-article-root > p, .article-container > p { display: none !important; }
   @media (max-width: 768px) { .article-container { grid-template-columns: 1fr; gap: 32px; } .sidebar { order: 2; } .nav-pillars { overflow-x: auto; flex-wrap: nowrap; } }
   .article-body { max-width: 640px; padding-top: 40px; }
   .headline-layer-1 { font-family: var(--font-serif); font-size: 32px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.2px; margin-bottom: 8px; line-height: 1.25; }
