@@ -14,15 +14,21 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
+import random
 import sys
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
+
+import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
+
+logger = logging.getLogger("pearl_news.teacher_batch")
 
 from pearl_news.pipeline.assemble_v52 import assemble_v52
 from pearl_news.pipeline.feed_ingest import ingest_feeds
@@ -43,6 +49,8 @@ from pearl_prime.teacher_system import list_active_teacher_ids
 PEARL_ROOT = REPO_ROOT / "pearl_news"
 CONFIG_ROOT = PEARL_ROOT / "config"
 FEEDS_PATH = CONFIG_ROOT / "feeds.yaml"
+TEACHER_LANGUAGE_MAP_PATH = CONFIG_ROOT / "teacher_language_map.yaml"
+TEACHER_ROSTER_PATH = CONFIG_ROOT / "teacher_news_roster.yaml"
 TRACE_DOC_PATH = "docs/PEARL_NEWS_BATCH_PIPELINE_TRACE.md"
 
 TOPIC_TITLE_MAP = {
@@ -67,6 +75,11 @@ TOPIC_CONCEPT_MAP = {
     "general": ("clear-seeing practice", "grounds", "news overload"),
 }
 
+# Default template_id per teacher. The `topic` field is LEGACY and ignored by
+# main() — topics are now allocated dynamically by allocate_unique_topics() so
+# each teacher in a batch gets a UNIQUE topic from their roster. The legacy
+# `topic` field is retained as a default for downstream test fixtures and
+# direct callers of _build_item() that pass it explicitly.
 TEACHER_BATCH_PLAN: dict[str, dict[str, str]] = {
     "ahjan": {"topic": "climate", "template_id": "commentary"},
     "channeler_junko": {"topic": "climate", "template_id": "hard_news_spiritual_response"},
@@ -81,6 +94,81 @@ TEACHER_BATCH_PLAN: dict[str, dict[str, str]] = {
     "ra": {"topic": "peace_conflict", "template_id": "hard_news_spiritual_response"},
     "sai_ma": {"topic": "mental_health", "template_id": "explainer_context"},
 }
+
+
+def _load_teacher_languages() -> dict[str, str]:
+    """Load teacher_id -> language map from teacher_language_map.yaml (canonical)."""
+    if not TEACHER_LANGUAGE_MAP_PATH.exists():
+        return {}
+    data = yaml.safe_load(TEACHER_LANGUAGE_MAP_PATH.read_text(encoding="utf-8")) or {}
+    return data.get("teacher_languages") or {}
+
+
+def _load_teacher_roster_topics() -> dict[str, list[str]]:
+    """Load teacher_id -> [news_topics] from teacher_news_roster.yaml (canonical)."""
+    if not TEACHER_ROSTER_PATH.exists():
+        return {}
+    data = yaml.safe_load(TEACHER_ROSTER_PATH.read_text(encoding="utf-8")) or {}
+    teachers = data.get("teachers") or {}
+    return {tid: (meta.get("news_topics") or []) for tid, meta in teachers.items()}
+
+
+def allocate_unique_topics(
+    teacher_ids: list[str],
+    seed: int | None = None,
+    topics_per_teacher: dict[str, list[str]] | None = None,
+) -> dict[str, str]:
+    """
+    Assign each teacher a UNIQUE topic drawn from that teacher's roster (news_topics
+    in teacher_news_roster.yaml). No two teachers in the same batch share a topic.
+
+    Invariants:
+    - Each teacher in `teacher_ids` gets exactly one topic in the output map.
+    - No two teachers share the same topic, unless the number of teachers exceeds
+      the size of the topic universe (mathematically unavoidable); in that case a
+      warning is logged and the colliding teacher reuses their first roster topic.
+    - Deterministic for a given (teacher_ids, seed): same inputs produce the same
+      allocation across runs.
+
+    Algorithm: seeded greedy assignment (ported from
+    scripts/pearl_news/run_daily_news_cycle.py::allocate_teacher_topics).
+    """
+    if topics_per_teacher is None:
+        topics_per_teacher = _load_teacher_roster_topics()
+    if seed is None:
+        seed = int(date.today().strftime("%Y%m%d"))
+
+    rng = random.Random(seed)
+    shuffled = teacher_ids.copy()
+    rng.shuffle(shuffled)
+
+    claimed: set[str] = set()
+    allocation: dict[str, str] = {}
+
+    for teacher_id in shuffled:
+        topics = topics_per_teacher.get(teacher_id) or []
+        if not topics:
+            # No roster topics — fall back to TEACHER_BATCH_PLAN legacy topic if present
+            legacy = TEACHER_BATCH_PLAN.get(teacher_id, {}).get("topic")
+            topics = [legacy] if legacy else ["general"]
+        offset = rng.randint(0, len(topics) - 1)
+        rotated = topics[offset:] + topics[:offset]
+        picked = None
+        for t in rotated:
+            if t not in claimed:
+                picked = t
+                break
+        if picked is None:
+            picked = topics[0]
+            logger.warning(
+                "[allocate_unique_topics] Topic collision: all %d topics for %s are "
+                "already claimed by other teachers in this batch; reusing %s",
+                len(topics), teacher_id, picked,
+            )
+        claimed.add(picked)
+        allocation[teacher_id] = picked
+
+    return allocation
 
 TOPIC_FIXTURES: dict[str, dict[str, Any]] = {
     "climate": {
@@ -239,11 +327,16 @@ def _build_item(
     template_id: str,
     source_item: dict[str, Any],
     source_mode: str,
+    language: str | None = None,
 ) -> dict[str, Any]:
     teacher = _build_teacher_payload(teacher_id, topic)
     article_id = f"teacher_{teacher_id}_{topic}_{template_id}"
     raw_title = source_item.get("raw_title") or source_item.get("title") or f"{_headline_topic(topic)} update"
     raw_summary = source_item.get("raw_summary") or source_item.get("summary") or ""
+    # Language: explicit param wins; else look up teacher's assigned language from the
+    # canonical teacher_language_map.yaml; else default to "en". This drives v52 lang-aware
+    # rendering and expansion_routing (Claude vs Qwen).
+    resolved_language = language or _load_teacher_languages().get(teacher_id) or "en"
     item = {
         "id": article_id,
         "template_id": template_id,
@@ -257,7 +350,7 @@ def _build_item(
         "summary": raw_summary,
         "url": source_item.get("url", ""),
         "pub_date": source_item.get("pub_date", ""),
-        "language": "en",
+        "language": resolved_language,
         "source_feed_id": source_item.get("source_feed_id") or source_mode,
         "_teacher_resolved": teacher,
         "_batch_source_mode": source_mode,
@@ -408,19 +501,30 @@ def main() -> int:
                 print(f"Error: no matching teachers in --teacher-set={args.teacher_set}", file=sys.stderr)
                 return 1
 
+    # Allocate UNIQUE topics across the active batch — one subject per teacher,
+    # never the same subject twice in one run. Pulls each teacher's roster topics
+    # from teacher_news_roster.yaml. Per-teacher language pulled from
+    # teacher_language_map.yaml so each article is written in the teacher's
+    # assigned language (en / ja / zh-cn / ...).
+    teacher_languages = _load_teacher_languages()
+    topic_allocation = allocate_unique_topics(active_teachers)
+
     batch_manifest: list[dict[str, Any]] = []
     failures: list[dict[str, Any]] = []
 
     for teacher_id in active_teachers:
         plan = TEACHER_BATCH_PLAN.get(teacher_id)
-        if not plan:
-            failures.append({"teacher_id": teacher_id, "error": "missing batch plan"})
+        # template_id falls back to a sensible default if a teacher is active but
+        # has no batch-plan entry (e.g., a freshly added roster teacher).
+        template_id = (plan or {}).get("template_id", "hard_news_spiritual_response")
+        topic = topic_allocation.get(teacher_id)
+        if not topic:
+            failures.append({"teacher_id": teacher_id, "error": "no topic allocated"})
             continue
-        topic = plan["topic"]
-        template_id = plan["template_id"]
+        language = teacher_languages.get(teacher_id, "en")
         source_item, source_mode = _pick_source_item(topic, teacher_id, live_items_by_topic)
         try:
-            item = _build_item(teacher_id, topic, template_id, source_item, source_mode)
+            item = _build_item(teacher_id, topic, template_id, source_item, source_mode, language=language)
             contract, deterministic_plan = build_slot_contract(item, REPO_ROOT)
             pending_path = write_pending_contract(contract, slots_dir)
 
@@ -430,6 +534,7 @@ def main() -> int:
                         "teacher_id": teacher_id,
                         "template_id": template_id,
                         "topic": topic,
+                        "language": language,
                         "source_mode": source_mode,
                         "source_title": source_item.get("title") or source_item.get("raw_title"),
                         "slot_source": "pending",
@@ -496,6 +601,7 @@ def main() -> int:
                     "teacher_id": teacher_id,
                     "template_id": template_id,
                     "topic": topic,
+                    "language": language,
                     "source_mode": source_mode,
                     "source_title": source_item.get("title") or source_item.get("raw_title"),
                     "qc_passed": payload["qc_passed"],
