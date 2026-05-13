@@ -1277,6 +1277,21 @@ def _run_spine_pipeline_mode(
                 json.dumps(_music_audit, indent=2, ensure_ascii=False),
                 encoding="utf-8",
             )
+        # Locale post-processing for spine mode: replace English template strings
+        # (bridges, transitions, chapter titles, practice labels) with locale versions
+        # from config/localization/pipeline_templates_<locale>.yaml. Mirrors the
+        # registry-mode post-pass in phoenix_v4/rendering/book_renderer.py.
+        _spine_locale = getattr(args, "locale", None) or ""
+        if _spine_locale and _spine_locale != "en-US":
+            try:
+                from phoenix_v4.rendering.locale_templates import localize_rendered_text
+
+                _prose_out = localize_rendered_text(_prose_out, _spine_locale)
+            except Exception as _loc_e:
+                print(
+                    f"Warning: spine-mode locale post-process skipped for {_spine_locale}: {_loc_e}",
+                    file=sys.stderr,
+                )
         book_path.write_text(_prose_out, encoding="utf-8")
         print(f"Rendered book (spine mode): {book_path}")
         _gcp = getattr(args, "golden_chapter_pilot", None)
