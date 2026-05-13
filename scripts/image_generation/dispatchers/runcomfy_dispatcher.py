@@ -4,6 +4,20 @@ Dry-run uses ``runcomfy_dispatch.dispatch_workflow`` (no HTTP). Live mode calls
 ``poll_billing(dry_run=False)`` before each job, respects the $10 cumulative
 soft cap, then uses ``runcomfy_batch.submit_inference`` + poll/result/download
 (``overrides`` pattern — deployment-native FLUX graph).
+
+V1.2 PANEL HANG FIX (2026-05-13)
+================================
+RunComfy serverless cold-start single inference wall time was measured at
+~292s (~5 min) on the FLUX deployment ``677edba8…`` — verified live on
+2026-05-13. The prior ``max_wait=300`` left effectively zero headroom and any
+upstream cell-guard set to 4 min was guaranteed to kill the dispatch before
+RunComfy completed even a single render. The poll budget here is now
+``RUNCOMFY_POLL_MAX_WAIT_S`` (default 600s, matching Pearl Star's history
+poll budget). Upstream callers that enforce a per-cell wall guard MUST be
+configured to >= 480s for RunComfy-dispatched panels — see
+``docs/specs/CONDUCTOR_V3_DISPATCH_BRIDGE_V1_SPEC.md`` AMENDMENT-2026-05-13.
+The dispatcher additionally returns ``poll_wait_s`` so observability can
+detect drift back toward the cold-start ceiling.
 """
 
 from __future__ import annotations
@@ -71,6 +85,24 @@ def _default_deployment_id() -> str:
         os.environ.get("RUNCOMFY_DEPLOYMENT_ID", "").strip()
         or "677edba8-ace0-4b2b-bad2-8e94b9959065"
     )
+
+
+# V1.2 PANEL HANG FIX: cold-start P95 measured at ~292s on 2026-05-13.
+# Set default to 600s and allow env override so ops can tune without redeploy.
+_DEFAULT_POLL_MAX_WAIT_S: int = 600
+
+
+def _poll_max_wait_s() -> int:
+    raw = os.environ.get("RUNCOMFY_POLL_MAX_WAIT_S", "").strip()
+    if not raw:
+        return _DEFAULT_POLL_MAX_WAIT_S
+    try:
+        value = int(raw)
+    except (TypeError, ValueError):
+        return _DEFAULT_POLL_MAX_WAIT_S
+    # Floor at 300 (legacy default) and ceil at 1800 (RunComfy hard timeout)
+    # to keep configuration mistakes from bricking the dispatcher.
+    return max(300, min(1800, value))
 
 
 def _runcomfy_api_key() -> str:
@@ -160,7 +192,19 @@ def dispatch(
     if not status_url:
         raise RuntimeError(f"RunComfy submit missing status URL: {submit!r}")
 
-    poll_request(api_key, status_url, max_wait=300)
+    poll_wait_s = _poll_max_wait_s()
+    poll_t0 = time.perf_counter()
+    poll_resp = poll_request(api_key, status_url, max_wait=poll_wait_s)
+    poll_elapsed = round(time.perf_counter() - poll_t0, 2)
+    poll_status = str(poll_resp.get("status", "unknown")) if isinstance(poll_resp, dict) else "unknown"
+    if poll_status == "timeout":
+        raise RuntimeError(
+            f"RunComfy poll timed out after {poll_wait_s}s (status_url terminal status never reached). "
+            f"Cold-start P95 is ~5 min; consider raising RUNCOMFY_POLL_MAX_WAIT_S."
+        )
+    if poll_status in ("failed", "error"):
+        err = poll_resp.get("error") if isinstance(poll_resp, dict) else None
+        raise RuntimeError(f"RunComfy poll terminal status={poll_status} error={err!r}")
     final = get_result(api_key, result_url) if result_url else {}
     image_url = extract_image_url(final)
     if not image_url:
@@ -182,6 +226,11 @@ def dispatch(
     result["sha256"] = sha
     result["wall_time_s"] = wall
     result["runcomfy_request_id"] = request_id
+    # V1.2 PANEL HANG FIX: surface poll wall-time + budget so upstream cell
+    # guards can be tuned against measured cold-start behaviour rather than
+    # guesses. See AMENDMENT-2026-05-13 in CONDUCTOR_V3_DISPATCH_BRIDGE spec.
+    result["poll_wait_s"] = poll_elapsed
+    result["poll_budget_s"] = poll_wait_s
 
     # Append per-call spend ledger row (RUNCOMFY-SPEND-LEDGER-V1).
     # Wall-time GPU-seconds × published per-second rate; flagged ``estimated``

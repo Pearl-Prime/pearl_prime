@@ -288,3 +288,42 @@ Checkpoint init enforces uniqueness, so the run was aborted at zero spend
 after this PR merges. Existing partial checkpoints for
 `conductor_v3_2026_05_11_t0103` should be discarded (no rows written
 beyond init).
+
+---
+
+## AMENDMENT-2026-05-13 — RunComfy poll-budget floor for panel dispatch
+
+**Trigger:** PR #1084 V1.2 live smoke (2026-05-12 ~06:00 UTC) hung at cell
+`v3_379879bed64c08` (body_memory_shojo manga panel) and was reaped by the
+operator's 4-min/cell guard. 11,908 of 13,540 Phase 2 fan-out batches
+blocked.
+
+**Root cause:** RunComfy serverless FLUX deployment cold-start single
+inference takes 5–6 min (measured: 292 s and 371 s on two consecutive live
+calls 2026-05-13). The dispatcher's `poll_request(..., max_wait=300)` and
+the 4-min cell guard were both below cold-start P50. See
+`artifacts/diagnostics/runcomfy_v1_2_panel_hang_diagnosis_2026-05-13.md`.
+
+**Code change (`scripts/image_generation/dispatchers/runcomfy_dispatcher.py`):**
+
+| Field | Before | After |
+| --- | --- | --- |
+| `poll_request(..., max_wait=…)` | hard-coded `300` | `_poll_max_wait_s()` → default `600`, env `RUNCOMFY_POLL_MAX_WAIT_S` override, clamped to `[300, 1800]` |
+| Result dict | (no poll observability) | adds `poll_wait_s` (actual) + `poll_budget_s` (configured) |
+| Poll timeout | silent (returned `{}`) | raises `RuntimeError` mentioning `RUNCOMFY_POLL_MAX_WAIT_S` |
+| Poll terminal-failure | not surfaced as error | raises `RuntimeError` with status + error body |
+
+Tests: `tests/image_generation/dispatchers/test_runcomfy_dispatcher_poll_budget.py`
+(7 cases, including a no-HTTP successful-dispatch fixture and a clear-error
+poll-timeout fixture).
+
+**Operator-side requirement:** Per-cell wall guard for RunComfy-dispatched
+panel batches MUST be set to **≥ 480 s (8 min)** — covers measured P95
+cold-start with ~30 % headroom and leaves the dispatcher its 600 s poll
+budget. Pearl Star (cover) dispatch is unaffected (it uses a separate
+runtime with no cold-start penalty).
+
+**Verification gate:** Live single-cell dispatch through the patched
+dispatcher returned `status=succeeded`, `wall_time_s=371.4`,
+`poll_wait_s=368.68`, valid 638 KiB PNG. Spend incurred for diagnosis +
+verification: ~$0.22.
