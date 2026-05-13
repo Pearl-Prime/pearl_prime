@@ -399,10 +399,58 @@ def _extract_registry_chapters(prose: str) -> list[str]:
     return chapters
 
 
+_SCENE_ANCHOR_CONFIG_CACHE: dict | None = None
+
+
+def _load_scene_anchor_density_config() -> dict:
+    """Load scene_anchor_density gate config, with sane defaults if file is missing.
+
+    See config/quality/scene_anchor_density_config.yaml for cap rationale (empirical
+    en_US catalog audit, PR #1089: cap=2 yielded 168/200 false-positive failures
+    dominated by natural rhetorical motifs at paragraph_count=3).
+    """
+    global _SCENE_ANCHOR_CONFIG_CACHE
+    if _SCENE_ANCHOR_CONFIG_CACHE is not None:
+        return _SCENE_ANCHOR_CONFIG_CACHE
+    defaults = {
+        "default_cap_per_chapter": 3,
+        "collapse_overlapping_ngrams": True,
+    }
+    try:
+        import yaml  # type: ignore[import-not-found]
+
+        cfg_path = (
+            Path(__file__).resolve().parent.parent
+            / "config" / "quality" / "scene_anchor_density_config.yaml"
+        )
+        if cfg_path.exists():
+            loaded = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or {}
+            for key, default in defaults.items():
+                if key in loaded:
+                    defaults[key] = loaded[key]
+    except Exception:
+        # Defensive: any config load failure falls back to safe defaults.
+        pass
+    _SCENE_ANCHOR_CONFIG_CACHE = defaults
+    return defaults
+
+
 def _scene_anchor_density_violations(prose: str, cap: int) -> list[dict]:
-    """Find repeated >3-word phrases appearing in more paragraphs than the plan allows."""
+    """Find repeated >3-word phrases appearing in more paragraphs than the plan allows.
+
+    Algorithm:
+      - Splits prose into chapters via the registry "Chapter N" heading convention.
+      - Within each chapter, enumerates all 4..8 word overlapping n-grams per paragraph.
+      - A phrase that appears in MORE THAN `cap` paragraphs is an offender.
+      - If `collapse_overlapping_ngrams` is enabled in config, offenders that are sub-
+        sequences of a longer offender with the same paragraph_count are dropped from
+        the reported list (the longest n-gram is kept). This is a reporting-only change;
+        a single recurring 8-word motif no longer balloons into 5 overlapping entries.
+    """
     if cap <= 0:
         return []
+    cfg = _load_scene_anchor_density_config()
+    collapse = bool(cfg.get("collapse_overlapping_ngrams", True))
     chapters = _extract_registry_chapters(prose)
     violations: list[dict] = []
     phrase_re = re.compile(r"\b[\w']+\b")
@@ -415,11 +463,31 @@ def _scene_anchor_density_violations(prose: str, cap: int) -> list[dict]:
                 for i in range(0, len(words) - n + 1):
                     phrase = " ".join(words[i : i + n])
                     phrase_paras.setdefault(phrase, set()).add(p_idx)
-        offenders = [
+        offenders_raw = [
             {"phrase": phrase, "paragraph_count": len(indices)}
             for phrase, indices in phrase_paras.items()
             if len(indices) > cap
         ]
+        if collapse and offenders_raw:
+            # Group by paragraph_count; within each group, drop any phrase that is
+            # a contiguous substring of a longer phrase in the same group. This collapses
+            # the n-gram explosion where one 8-word motif produced 5 overlapping entries
+            # (lengths 4..8) with identical paragraph_count.
+            by_count: dict[int, list[str]] = {}
+            for o in offenders_raw:
+                by_count.setdefault(o["paragraph_count"], []).append(o["phrase"])
+            kept: list[dict] = []
+            for pcount, phrases in by_count.items():
+                phrases_sorted = sorted(phrases, key=lambda s: (-len(s.split()), s))
+                survivors: list[str] = []
+                for p in phrases_sorted:
+                    if not any(p != q and p in q for q in survivors):
+                        survivors.append(p)
+                for p in survivors:
+                    kept.append({"phrase": p, "paragraph_count": pcount})
+            offenders = kept
+        else:
+            offenders = offenders_raw
         if offenders:
             offenders.sort(key=lambda x: (-x["paragraph_count"], x["phrase"]))
             violations.append({"chapter": ch_idx, "cap": cap, "offenders": offenders[:10]})
@@ -737,8 +805,15 @@ def _run_spine_pipeline_mode(
                 f"(cap {_per_chapter_word_cap}w/chapter)",
                 file=sys.stderr,
             )
+    # Default cap is sourced from config/quality/scene_anchor_density_config.yaml.
+    # Authored plans (config/plans/*.yaml) may override per-chapter via
+    # scene_plan.scene_anchor_cap; the min() across chapters means any chapter that
+    # tightens the cap tightens the book — preserving backward compat for hand-tuned plans.
+    _scene_anchor_default_cap = int(
+        _load_scene_anchor_density_config().get("default_cap_per_chapter", 3)
+    )
     scene_anchor_cap = min(
-        int((ch.scene_plan or {}).get("scene_anchor_cap", 2))
+        int((ch.scene_plan or {}).get("scene_anchor_cap", _scene_anchor_default_cap))
         for ch in book_plan.chapters
     )
     scene_anchor_violations = _scene_anchor_density_violations(prose, scene_anchor_cap)
