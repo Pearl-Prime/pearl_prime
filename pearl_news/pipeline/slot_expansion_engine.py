@@ -338,6 +338,31 @@ class _SafeDict(dict):
         return ""
 
 
+# Universal anti-echo postscript appended to every slot prompt. Telling the
+# model — at the END of the user message, where instructions stick best — what
+# NOT to include in its response. Without this, Gemma/Qwen sometimes echo back
+# the slot prompt's own scaffolding (SLOT:, HEADER:, ## LEDE, <h1>, etc.) on
+# top of the requested prose.
+_ANTI_ECHO_POSTSCRIPT = (
+    "\n\n---\n"
+    "OUTPUT CONTRACT (strict — failure to follow will be cleaned up downstream):\n"
+    "- Return ONLY the requested slot content as plain prose.\n"
+    "- Do NOT include HTML tags (no <h1>, <p>, <div>, <span>, etc.).\n"
+    "- Do NOT include Markdown headers or fences (no ##, no ```).\n"
+    "- Do NOT echo the words SLOT:, CONTEXT:, REQUIRED SECTIONS:, VOICE:, OUTPUT:, "
+    "WHAT YOU ARE DOING, CHAIN FOR, CONTRADICTION DOCTRINE, ANCHOR DENSITY, "
+    "or any other scaffolding label from this prompt.\n"
+    "- For slots that ask for HEADER:/PEG:/HOOK:/BIG_PICTURE: prefixes, include "
+    "that one labeled line followed by the prose — do NOT label additional lines.\n"
+    "- Do NOT include your reasoning, planning, or meta-commentary.\n"
+)
+
+
+def _build_slot_user_prompt(template: str, context: dict[str, Any]) -> str:
+    """Render a slot template against ctx and append the anti-echo postscript."""
+    return _render_prompt(template, context) + _ANTI_ECHO_POSTSCRIPT
+
+
 def _render_prompt(template: str, context: dict[str, Any]) -> str:
     return template.format_map(_SafeDict({k: ("" if v is None else str(v)) for k, v in context.items()}))
 
@@ -401,7 +426,7 @@ _SLOT_SCAFFOLD_LINE_RE = re.compile(
         | CONTEXT:.*                                  # CONTEXT: header
         | REQUIRED\s+SECTIONS?:.*                     # 'REQUIRED SECTIONS:'
         | VOICE:.*
-        | OUTPUT:.*
+        | OUTPUT(?:\s+CONTRACT)?:.*                   # OUTPUT: or OUTPUT CONTRACT:
         | CHAIN\s+FOR\s+.*:.*                         # CHAIN FOR TEACHER INTEGRATION: ...
         | CONTRADICTION\s+DOCTRINE.*                  # spec section labels
         | ANCHOR\s+DENSITY.*
@@ -414,9 +439,32 @@ _SLOT_SCAFFOLD_LINE_RE = re.compile(
     re.IGNORECASE | re.VERBOSE,
 )
 
+# Inline prefix labels the model may emit anywhere in the output. These are
+# stripped globally — including when they're NOT the slot's expected prefix —
+# because their presence in the rendered article is always wrong (they're
+# leftovers from the prompt template echo).
+_INLINE_PREFIX_RE = re.compile(
+    r"\b(HEADER|HOOK|PEG|BIG_PICTURE|CONTEXT|LEDE|NEWS\s+SUMMARY|YOUTH\s+IMPACT|"
+    r"TEACHER\s+PERSPECTIVE|SDG\s+CONNECTION|FORWARD\s+LOOK)\s*:\s*",
+    re.IGNORECASE,
+)
+
 
 def _is_scaffold_line(line: str) -> bool:
     return bool(_SLOT_SCAFFOLD_LINE_RE.match(line.strip()))
+
+
+def _scrub_inline_prefixes(line: str) -> str:
+    """
+    Remove inline "HOOK:"/"BIG_PICTURE:"/"## LEDE"-style prefix labels that
+    the model emitted MID-LINE (not as a leading directive — those are caught
+    by _SLOT_SCAFFOLD_LINE_RE). Replaces with a space; collapses whitespace.
+    """
+    cleaned = _INLINE_PREFIX_RE.sub(" ", line)
+    cleaned = re.sub(r"\s{2,}", " ", cleaned).strip()
+    # Also strip stray markdown bullet/header sigils at line start
+    cleaned = re.sub(r"^[#*]+\s*", "", cleaned)
+    return cleaned
 
 
 def _clean_slot_output(slot: str, text: str) -> str:
@@ -442,19 +490,28 @@ def _clean_slot_output(slot: str, text: str) -> str:
         if not line:
             continue
         # Drop scaffolding directives the model echoed back from the slot prompt
-        # (SLOT:, CONTEXT:, ## LEDE, ## YOUTH IMPACT, etc.).
+        # (SLOT:, CONTEXT:, ## LEDE, ## YOUTH IMPACT, OUTPUT CONTRACT, etc.).
         if _is_scaffold_line(line):
             continue
-        # Slot-specific prefix handling (HEADER:/PEG:/HOOK:/BIG_PICTURE:).
+        # Slot-specific prefix handling (HEADER:/PEG:/HOOK:/BIG_PICTURE:) —
+        # for slots where these are the EXPECTED format. The remainder is kept.
         if prefixes and any(line.upper().startswith(prefix) for prefix in prefixes):
             for prefix in prefixes:
                 if line.upper().startswith(prefix):
                     remainder = line[len(prefix) :].strip()
+                    # The remainder may still contain inline prefix echoes
+                    # from a multi-prefix scaffold line — scrub them too.
+                    remainder = _scrub_inline_prefixes(remainder)
                     if prefix != "HEADER:" and remainder:
                         kept.append(remainder)
                     break
             continue
-        kept.append(line)
+        # For slots that DON'T declare a prefix, the model may still emit
+        # HOOK:/BIG_PICTURE:/etc. as inline leakage. Scrub those labels but
+        # keep the prose that follows.
+        line = _scrub_inline_prefixes(line)
+        if line:
+            kept.append(line)
     return "\n\n".join(part for part in kept if part).strip()
 
 
@@ -826,7 +883,7 @@ def expand_item_slots(
                 logger.warning("No prompt template for %s/%s — skipping", template_id, slot)
                 values[slot] = ""
                 return
-            prompt = _render_prompt(slot_template, {**ctx, **values})
+            prompt = _build_slot_user_prompt(slot_template, {**ctx, **values})
             slot_max = min(_slot_token_budget(slot), int(prov.get("max_tokens") or config.get("max_tokens") or 4096))
             attempts = max(0, int(max_retries)) + 1
             for _ in range(attempts):
@@ -878,7 +935,7 @@ def expand_item_slots(
             slot_template = load_slot_prompt(prompts_root, template_id, slot, lang)
             if not slot_template:
                 continue
-            prompt = _render_prompt(slot_template, {**ctx, **values})
+            prompt = _build_slot_user_prompt(slot_template, {**ctx, **values})
             slot_max = min(_slot_token_budget(slot), int(prov.get("max_tokens") or config.get("max_tokens") or 4096))
             attempts = max(0, int(max_retries)) + 1
             out = None
