@@ -67,7 +67,15 @@ def merge_qwen_provider(full_cfg: dict[str, Any], provider: dict[str, Any]) -> d
             merged["api_key"] = "ollama"
         from pearl_news.pipeline.cjk_qwen_model import PEARL_STAR_CJK_MODEL, is_ollama_openai_base_url
 
-        if is_ollama_openai_base_url(merged.get("base_url")):
+        # Only force the CJK Qwen model when the configured model name is a
+        # cloud-only model that Ollama doesn't have (e.g. DashScope's "qwen-plus"),
+        # OR when no model was specified at all. Otherwise respect the YAML/env
+        # choice — needed for English Gemma routing on the same Pearl Star host.
+        existing_model = (merged.get("model") or "").strip()
+        cloud_only_qwen_models = {"qwen-plus", "qwen-max", "qwen-turbo", "qwen3-coder-plus"}
+        if is_ollama_openai_base_url(merged.get("base_url")) and (
+            not existing_model or existing_model in cloud_only_qwen_models
+        ):
             merged["model"] = PEARL_STAR_CJK_MODEL
 
     merged["enabled"] = full_cfg.get("enabled", True)
