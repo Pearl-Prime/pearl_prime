@@ -286,6 +286,12 @@ class EnrichmentRequest:
     spine_context: Optional[Dict[str, Any]] = None
     content_banks_dir: Optional[Path] = None
     ei_v2_config: Optional[Dict[str, Any]] = None  # P0.9: hybrid_select wiring
+    # Locale for persona-atom loading (e.g. 'ja-JP', 'zh-TW'). When set and not 'en-US',
+    # persona atoms are read from atoms/{persona}/{topic}/{slot}/locales/{locale}/CANONICAL.txt
+    # with a fallback to the base English CANONICAL.txt when the locale variant is missing.
+    # Mirrors the locale-aware loading already present in prose_resolver.py for the
+    # registry/teacher path.
+    locale: Optional[str] = None
     # Legacy flags preserved as no-ops for backward-compat with older callers.
     # additive_enrichment is the ONLY mode (PR #612). publishable_book is implicit —
     # gap always raises EnrichmentGapError.
@@ -334,6 +340,9 @@ class EnrichedBook:
     total_words: int
     enrichment_audit: Dict[str, Any]
     spine_context: Dict[str, Any] = field(default_factory=dict)
+    # Locale propagated from EnrichmentRequest so depth pass + downstream
+    # passes can re-use the same locale-aware atom loading path.
+    locale: Optional[str] = None
 
 
 def _norm_teacher_id(teacher_id: Optional[str]) -> Optional[str]:
@@ -482,10 +491,14 @@ def _merged_persona_atoms_deep_6h(
     primary_persona: str,
     topic: str,
     repo_root: Path,
+    locale: Optional[str] = None,
 ) -> Dict[str, List[dict]]:
     """
     HOOK / SCENE / STORY pools for deep_book_6h: primary persona first, then other personas
     for the same topic (deduped by normalized body).
+
+    When ``locale`` is set and not 'en-US', each persona's atoms are loaded from the
+    locale-specific CANONICAL.txt where present, falling back to English.
     """
     ids = _personas_with_topic(topic, repo_root)
     if primary_persona in ids:
@@ -498,7 +511,7 @@ def _merged_persona_atoms_deep_6h(
         seen: set[str] = set()
         acc: List[dict] = []
         for pid in ordered:
-            for atom in _load_persona_atoms(pid, topic).get(st, []):
+            for atom in _load_persona_atoms(pid, topic, locale=locale).get(st, []):
                 txt = str(atom.get("content") or "").strip()
                 n = _norm_ws(txt)
                 if not n or n in seen:
@@ -729,6 +742,7 @@ def peek_registry_content_for_beatmap_slot(
     persona_id: str,
     seed: str,
     repo_root: Optional[Path] = None,
+    locale: Optional[str] = None,
 ) -> str:
     """
     Registry variant text that would apply at this beatmap slot if teacher/persona/practice
@@ -755,16 +769,16 @@ def peek_registry_content_for_beatmap_slot(
     pid = (persona_id or "").strip()
     rf = (beatmap.runtime_format or "").strip()
     if rf == "deep_book_6h" and pid:
-        persona_atoms = _merged_persona_atoms_deep_6h(pid, topic, root)
+        persona_atoms = _merged_persona_atoms_deep_6h(pid, topic, root, locale=locale)
         # Supplement with remaining slot types (REFLECTION, EXERCISE, etc.) from the
         # primary persona. _merged_persona_atoms_deep_6h only merges HOOK/SCENE/STORY;
         # beatmap slots like the second REFLECTION (slot_index=6) need persona atoms too.
-        _primary_atoms = _load_persona_atoms(pid, topic)
+        _primary_atoms = _load_persona_atoms(pid, topic, locale=locale)
         for _st, _atoms in _primary_atoms.items():
             if _st not in persona_atoms and _atoms:
                 persona_atoms[_st] = _atoms
     elif pid:
-        persona_atoms = _load_persona_atoms(pid, topic)
+        persona_atoms = _load_persona_atoms(pid, topic, locale=locale)
     else:
         persona_atoms = {}
     chapter_index0 = chapter_number - 1
@@ -830,20 +844,27 @@ def select_enrichment(
     sections_root = reg.get("sections") or {}
     teacher_atoms: Dict[str, List[dict]] = _load_teacher_atoms(tid) if tid else {}
     pid = (persona_id or "").strip()
+    locale = request.locale
     rf_bm = (bm.runtime_format or "").strip()
     if rf_bm == "deep_book_6h" and pid:
-        persona_atoms = _merged_persona_atoms_deep_6h(pid, topic, root)
+        persona_atoms = _merged_persona_atoms_deep_6h(pid, topic, root, locale=locale)
         # Supplement with remaining slot types (REFLECTION, EXERCISE, etc.) from the
         # primary persona. _merged_persona_atoms_deep_6h only merges HOOK/SCENE/STORY;
         # beatmap slots like the second REFLECTION (slot_index=6) need persona atoms too.
-        _primary_atoms = _load_persona_atoms(pid, topic)
+        _primary_atoms = _load_persona_atoms(pid, topic, locale=locale)
         for _st, _atoms in _primary_atoms.items():
             if _st not in persona_atoms and _atoms:
                 persona_atoms[_st] = _atoms
     elif pid:
-        persona_atoms = _load_persona_atoms(pid, topic)
+        persona_atoms = _load_persona_atoms(pid, topic, locale=locale)
     else:
         persona_atoms = {}
+
+    if locale and locale != "en-US":
+        logger.info(
+            "select_enrichment: locale=%s active for persona atom loading (%s/%s)",
+            locale, pid, topic,
+        )
 
     # SPEC-739-THRESHOLD-01: runtime mirror of CI --strict gate.
     _MIN_VARIANTS = 3
@@ -1289,6 +1310,7 @@ def select_enrichment(
         total_words=total_words,
         enrichment_audit=enrichment_audit,
         spine_context=dict(request.spine_context or {}),
+        locale=locale,
     )
 
 
@@ -1618,6 +1640,7 @@ def _load_depth_content(
     seed: str,
     repo_root: Path,
     book_seen_bodies: Optional[set] = None,
+    locale: Optional[str] = None,
 ) -> Optional[str]:
     """
     Load actual content for a depth module from a specific source.
@@ -1659,9 +1682,19 @@ def _load_depth_content(
         return None
 
     if source_type == "persona_atom":
+        # Locale-aware path: prefer atoms/{persona}/{topic}/{slot}/locales/{locale}/CANONICAL.txt
+        # when locale is set and not 'en-US'; fall back to the base English file.
+        def _canonical_for(slot_dir: Path) -> Path:
+            if locale and locale != "en-US":
+                lp = slot_dir / "locales" / locale / "CANONICAL.txt"
+                if lp.exists():
+                    return lp
+            return slot_dir / "CANONICAL.txt"
+
         slot_types = source.get("slot_types", [])
         for slot_type in slot_types:
-            canonical = repo_root / "atoms" / persona_id / topic / slot_type / "CANONICAL.txt"
+            slot_dir = repo_root / "atoms" / persona_id / topic / slot_type
+            canonical = _canonical_for(slot_dir)
             if canonical.exists():
                 raw = canonical.read_text(encoding="utf-8")
                 prose = _extract_prose_from_canonical(raw)
@@ -1685,7 +1718,9 @@ def _load_depth_content(
                     continue
                 if engine_dir.name.isupper():
                     continue
-                canonical = engine_dir / "CANONICAL.txt"
+                if engine_dir.name == "locales":
+                    continue
+                canonical = _canonical_for(engine_dir)
                 if canonical.exists():
                     raw = canonical.read_text(encoding="utf-8")
                     prose = _extract_prose_from_canonical(raw)
@@ -1829,6 +1864,7 @@ def _fill_chapter_depth(
     audit_list: List[Dict[str, Any]],
     deficit_floor: int,
     book_seen_bodies: Optional[set] = None,
+    locale: Optional[str] = None,
 ) -> int:
     """
     Attempt to fill one chapter with depth content up to max_words_to_add.
@@ -1879,6 +1915,7 @@ def _fill_chapter_depth(
                 seed=f"depth:{topic}:{chapter.number}:{module_name}:r{depth_round}:{pass_label}",
                 repo_root=root,
                 book_seen_bodies=book_seen_bodies,
+                locale=locale,
             )
             if not content:
                 continue
@@ -1966,6 +2003,7 @@ def apply_depth_pass(
     topic_overrides = (depth_map.get("topic_overrides") or {}).get(topic, {})
     tid = enriched_book.teacher_id
     persona_id = enriched_book.persona_id
+    locale = getattr(enriched_book, "locale", None)
     chapter_count = len(enriched_book.chapters)
     rf = (enriched_book.runtime_format or "").strip()
     _bounds = _load_runtime_word_bounds(rf, root)
@@ -2073,6 +2111,7 @@ def apply_depth_pass(
                 audit_list=audit_list,
                 deficit_floor=deficit_floor,
                 book_seen_bodies=_chapter_seen_bodies.setdefault(chapter.number, set()),
+                locale=locale,
             )
             reservation_used += added
             depth_words_added_by_chapter[chapter.number] += added
@@ -2141,6 +2180,7 @@ def apply_depth_pass(
                 audit_list=audit_list,
                 deficit_floor=deficit_floor,
                 book_seen_bodies=_chapter_seen_bodies.setdefault(chapter.number, set()),
+                locale=locale,
             )
             depth_words_added_by_chapter[chapter.number] += added
 

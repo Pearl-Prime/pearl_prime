@@ -574,6 +574,16 @@ def _run_spine_pipeline_mode(
     _publishable_book = quality_profile in ("production",) or (
         bool(getattr(args, "render_book", False)) and quality_profile in ("production", "draft")
     )
+    # Locale propagation (LOCALE-PROP-FIX-2026): pull the locale that flowed in via
+    # --locale through BookSpec → book_spec_for_compiler into EnrichmentRequest so the
+    # spine pipeline reads atoms from atoms/<persona>/<topic>/<slot>/locales/<locale>/
+    # CANONICAL.txt with English fallback. Without this, non-en-US runs silently
+    # produced 100% English books even when the locale CANONICAL.txt existed.
+    _enrich_locale = (
+        book_spec_for_compiler.get("locale")
+        or getattr(args, "locale", None)
+        or None
+    )
     enriched = select_enrichment(
         EnrichmentRequest(
             beatmap=beatmap,
@@ -588,6 +598,7 @@ def _run_spine_pipeline_mode(
                 "atom_slot_specs": atom_slot_specs,
                 "chapter_selector_targets": _chapter_selector_targets,
             },
+            locale=_enrich_locale,
             publishable_book=_publishable_book,
             # PR #612: additive_enrichment is the only mode (no-op in EnrichmentRequest).
         ),
@@ -2213,6 +2224,7 @@ def main() -> int:
             seed=seed,
             teacher_id=teacher_id_for_reg or None,
             persona_id=book_spec_for_compiler.get("persona_id"),
+            locale=book_spec_for_compiler.get("locale") or getattr(args, "locale", None),
         )
 
         _reg_runtime = _resolved_runtime_format_id(args, format_plan_dict)

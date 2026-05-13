@@ -235,7 +235,26 @@ _KNOWN_SLOT_DIRS = frozenset({
 })
 
 
-def _load_persona_atoms(persona_id: str, topic_id: str) -> dict[str, list[dict]]:
+def _locale_canonical_path(slot_dir: Path, locale: Optional[str]) -> Path:
+    """Return locale-specific CANONICAL.txt path if it exists, else base English path.
+
+    Convention (mirrors phoenix_v4/rendering/prose_resolver._locale_atom_path):
+        {slot_dir}/locales/{locale}/CANONICAL.txt  →  preferred when locale != en-US
+        {slot_dir}/CANONICAL.txt                   →  fallback (English)
+    """
+    base = slot_dir / "CANONICAL.txt"
+    if locale and locale != "en-US":
+        locale_path = slot_dir / "locales" / locale / "CANONICAL.txt"
+        if locale_path.exists():
+            return locale_path
+    return base
+
+
+def _load_persona_atoms(
+    persona_id: str,
+    topic_id: str,
+    locale: Optional[str] = None,
+) -> dict[str, list[dict]]:
     """Load persona-specific atoms from atoms/{persona}/{topic}/{type}/CANONICAL.txt.
 
     Returns dict keyed by slot type (HOOK, SCENE, STORY, etc.) -> list of atom dicts.
@@ -252,6 +271,11 @@ def _load_persona_atoms(persona_id: str, topic_id: str) -> dict[str, list[dict]]
     Engine dirs are detected by exclusion against _KNOWN_SLOT_DIRS — this fixes the prior
     bug where midlife_women's UPPERCASE engine names (COMPARISON, GRIEF, OVERWHELM, SHAME)
     were treated as separate slot-type keys instead of STORY content.
+
+    When ``locale`` is set and not 'en-US', each slot/engine directory is first probed for
+    ``locales/{locale}/CANONICAL.txt`` and falls back to the base English ``CANONICAL.txt``
+    when the locale variant is missing. This makes the spine pipeline locale-aware in the
+    same way prose_resolver.py is for the registry/teacher path.
     """
     persona_root = ATOMS_ROOT / persona_id / topic_id
     if not persona_root.exists():
@@ -263,7 +287,10 @@ def _load_persona_atoms(persona_id: str, topic_id: str) -> dict[str, list[dict]]
     for sub in persona_root.iterdir():
         if not sub.is_dir():
             continue
-        canonical = sub / "CANONICAL.txt"
+        # Skip the locales/ sibling directory itself when iterating engine/slot dirs.
+        if sub.name == "locales":
+            continue
+        canonical = _locale_canonical_path(sub, locale)
         if not canonical.exists():
             continue
         slot_type_upper = sub.name.upper()
@@ -282,8 +309,8 @@ def _load_persona_atoms(persona_id: str, topic_id: str) -> dict[str, list[dict]]
 
     if atoms:
         logger.info(
-            "Loaded %d persona atom types for '%s/%s' (engine-bank STORY atoms: %d)",
-            len(atoms), persona_id, topic_id, len(engine_story_atoms),
+            "Loaded %d persona atom types for '%s/%s' locale=%s (engine-bank STORY atoms: %d)",
+            len(atoms), persona_id, topic_id, locale or "en-US", len(engine_story_atoms),
         )
     return atoms
 
@@ -359,6 +386,7 @@ def resolve_book(
     seed: str,
     teacher_id: Optional[str] = None,
     persona_id: Optional[str] = None,
+    locale: Optional[str] = None,
 ) -> ResolvedBook:
     """Resolve a complete book from a section registry.
 
@@ -371,6 +399,10 @@ def resolve_book(
         seed: Deterministic seed string (e.g., "book001" or catalog_id)
         teacher_id: Optional teacher for doctrine/exercise overlay
         persona_id: Optional persona for future persona-aware selection
+        locale: Optional locale (e.g. 'ja-JP'). When set and not 'en-US',
+            persona atoms are read from
+            atoms/{persona}/{topic}/{slot}/locales/{locale}/CANONICAL.txt
+            with a fallback to the base English CANONICAL.txt.
 
     Returns:
         ResolvedBook with all chapters and sections resolved.
@@ -392,7 +424,11 @@ def resolve_book(
     # Always load persona atoms when persona_id is provided — even in teacher mode.
     # Teacher mode = teacher overlay (doctrine, exercises) + persona overlay (hooks, scenes).
     # Teachers speak TO personas — they don't replace them.
-    persona_atoms = _load_persona_atoms(persona_id, reg_topic) if persona_id and reg_topic else {}
+    persona_atoms = (
+        _load_persona_atoms(persona_id, reg_topic, locale=locale)
+        if persona_id and reg_topic
+        else {}
+    )
 
     chapters: list[ResolvedChapter] = []
 
