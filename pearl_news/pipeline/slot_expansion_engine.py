@@ -352,11 +352,56 @@ _SLOT_FORMAT_PREFIXES: dict[str, tuple[str, ...]] = {
 }
 
 
+_HTML_TAG_RE = re.compile(r"<[^>]+>")
+_HTML_ENTITY_RE = re.compile(r"&(?:[a-zA-Z]+|#\d+);")
+
+
+def _strip_html_from_slot(text: str) -> str:
+    """
+    Defensive HTML stripping for slot output. Slot prompts say "plain text only,
+    no HTML, no markdown fences", but models (Gemma, Qwen, Claude) sometimes
+    return wrapped <h1>/<p>/<div> anyway when the system prompt is from
+    full-document mode. If we leave the HTML in, it gets inserted into the v52
+    template literally — operator sees "<h1>Syria Food Aid Halved...</h1>"
+    rendered as text below a section header.
+
+    Conservative: only strip when actual angle-bracketed tags are present;
+    otherwise pass through unchanged. Replaces tags with a space and collapses
+    whitespace so adjacent words stay separated. Also unescapes the common
+    HTML entities the LLM tends to emit.
+    """
+    has_tags = "<" in text and ">" in text
+    has_entities = "&" in text and ";" in text
+    if not has_tags and not has_entities:
+        return text
+    stripped = _HTML_TAG_RE.sub(" ", text) if has_tags else text
+    if has_entities or has_tags:
+        stripped = (
+            stripped.replace("&amp;", "&")
+            .replace("&lt;", "<")
+            .replace("&gt;", ">")
+            .replace("&quot;", '"')
+            .replace("&#39;", "'")
+            .replace("&#x27;", "'")
+            .replace("&nbsp;", " ")
+        )
+        stripped = _HTML_ENTITY_RE.sub("", stripped)
+    return re.sub(r"[ \t]+", " ", stripped).strip() if has_tags else stripped.strip()
+
+
 def _clean_slot_output(slot: str, text: str) -> str:
     cleaned = (text or "").strip()
     if not cleaned:
         return ""
     if cleaned.upper() == "READY":
+        return ""
+
+    # Strip wrapping HTML tags — slot prompts always say "plain text only".
+    # Defense-in-depth against models that fall back to the system prompt's
+    # full-document HTML mandate. Runs BEFORE prefix parsing so HEADER:/PEG:
+    # detection still works on the unwrapped text.
+    cleaned = _strip_html_from_slot(cleaned)
+    if not cleaned:
         return ""
 
     prefixes = _SLOT_FORMAT_PREFIXES.get(slot)
