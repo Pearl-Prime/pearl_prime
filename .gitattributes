@@ -50,3 +50,13 @@ brand-wizard-app/public/onboarding/proof/wizard/*.mp3 -filter -diff -merge text
 brand-wizard-app/public/onboarding/proof/wizard/*.png -filter -diff -merge -text
 brand-wizard-app/public/onboarding/proof/wizard/*.jpg -filter -diff -merge -text
 brand-wizard-app/public/onboarding/proof/wizard/*.mp3 -filter -diff -merge -text
+
+# Teacher portrait photos — un-LFS'd 2026-05-16 after GitHub LFS budget
+# exhaustion broke the live brand-admin-onboarding deploy. Each photo
+# is <=1MB (passes .github/workflows/no-binary-blobs.yml guard); total
+# ~10MB added to git as regular blobs. PR #1118's Pillow-based drift
+# guard (scripts/ci/check_teacher_photo_drift.py) still works on real
+# PNG bytes. Cloudflare Pages does not pull LFS; without this override,
+# all 13 portraits serve as 130-byte pointer text on the live site.
+teacher_pics/*.png -filter -diff -merge -text
+brand-wizard-app/public/teacher_pics/*.png -filter -diff -merge -text
