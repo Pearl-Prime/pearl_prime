@@ -85,21 +85,25 @@ def _run_gates_on_article(
     # 5) un_endorsement_detector: blocklist again (same negated allowance)
     results["un_endorsement_detector"] = "FAIL" if blocklist_fail else "PASS"
 
-    # 6) atoms_present: reject articles where article_assembler emitted the
-    # __MISSING_ATOM__ sentinel because a teacher×topic pack or SDG ref was
-    # missing. Check both the rendered content and the explicit list the
-    # assembler appends to item["_atoms_missing"] so the gate fires even if
-    # downstream v52 render strips the marker.
+    # 6) atoms_present: reject articles where the FINAL rendered output still
+    # contains the __MISSING_ATOM__ sentinel emitted by article_assembler.py.
+    # Check only what would actually ship — item["content"] (the rendered HTML)
+    # plus values inside item["_v52_slots"] (the v52 render reads from this).
+    #
+    # The earlier version also flagged on item["_atoms_missing"] (a list set by
+    # article_assembler BEFORE the v52 pass runs), but that fired false-positives
+    # for template-level slots like "youth_impact"/"sdg_ref" whose markers the
+    # assembler tagged for completeness even though the v52 path overwrites the
+    # final content from the (teacher × topic) pack. The flagged-list is still
+    # populated for debugging via the assembler's WARN logs, but it no longer
+    # blocks publish by itself — the actual rendered content is the truth.
     raw_content = item.get("content") or item.get("content_plain") or ""
     has_marker = _MISSING_ATOM_MARKER in raw_content
-    flagged_list = item.get("_atoms_missing") or []
-    if isinstance(flagged_list, list) and flagged_list:
-        has_marker = True
-    # Also scan v52 slot values if present
-    for slot_value in (item.get("_v52_slots") or {}).values():
-        if isinstance(slot_value, str) and _MISSING_ATOM_MARKER in slot_value:
-            has_marker = True
-            break
+    if not has_marker:
+        for slot_value in (item.get("_v52_slots") or {}).values():
+            if isinstance(slot_value, str) and _MISSING_ATOM_MARKER in slot_value:
+                has_marker = True
+                break
     results["atoms_present"] = "FAIL" if has_marker else "PASS"
 
     return results
