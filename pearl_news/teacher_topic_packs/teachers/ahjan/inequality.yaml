@@ -1,0 +1,351 @@
+schema_version: 1
+teacher_id: ahjan
+topic: inequality
+active: true
+identity:
+  display_name: Ahjan
+  attribution_name: Teacher Ahjan
+  tradition: Tantric Buddhist teacher (mysticism synthesis; Karma Yoga; Rama lineage)
+  tradition_short: Tantric Buddhism
+  teacher_setting_options:
+  - practice room
+  - retreat
+  teacher_years: '25'
+  affiliation_safe_line: has attended the United Spiritual Leaders Forum
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: dignity_drain
+    label: structural inequality eroding sense of inherent worth before any defense can land
+    loop: reads the rent-vs-wage chart -> chest tightens -> closes app -> opens it because the numbers do not get smaller
+    body_markers:
+    - chest
+    - throat
+    - shoulders
+    digital_markers:
+    - close
+    - reopen
+    - scroll
+    - check again
+topic_fit:
+  fit_level: primary
+  fit_reason: 'Inequality lands as bands of awareness collapsing under the daily proof that worth is being economically arbitrated; Tantric mysticism holds that laundry and mountains are equally sacred — a frame that protects inherent worth while the structural work proceeds.'
+  forbidden_angles:
+  - do not preach acceptance of structural harm as wisdom
+  - do not privatize inequality as a personal mindset problem
+hook_personal:
+  options:
+  - id: hook_personal_01
+    line: You watch the rent number rise faster than the wage number. You also feel the smaller, quieter drain — the way the gap keeps trying to tell you what you are worth.
+    semantic_family: ahjan-inequality-hook-personal
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_personal_02
+    line: You keep scrolling job listings between classes. You also know the math — that the wage on offer will not close the gap to the rent on the apartment your parents had at your age.
+    semantic_family: ahjan-inequality-hook-personal-alt
+    tone: grave
+    intensity: 4
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_personal_03
+    line: You compare the price of the textbook to the hours it will take to earn it. The math is fast. The slower thing is what the comparison keeps doing to how you see yourself.
+    semantic_family: ahjan-inequality-hook-personal-textbook
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: hook_big_picture_01
+    line: Inequality pressure is not only economic. It is the daily installation of a hierarchy of worth that the institutions perpetuating the gap refuse to name.
+    semantic_family: ahjan-inequality-hook-big
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_big_picture_02
+    line: The wealthiest 1% captured nearly two-thirds of new global wealth since 2020. The gap is not narrating itself as a structural arrangement. It is narrating itself as a verdict on the person it falls on.
+    semantic_family: ahjan-inequality-hook-big-verdict
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_big_picture_03
+    line: When wages cannot meet rent and student debt grows faster than starting salaries, inequality stops being an economic abstraction. It becomes the daily field in which young people are asked to negotiate with their own sense of inherent worth.
+    semantic_family: ahjan-inequality-hook-big-field
+    article_types:
+    - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: teacher_intro_01
+    line: Teacher Ahjan, a Tantric Buddhist teacher for 25 years, has watched in practice sessions what economic inequality does to young people. Students are not asking for permission to want a fair wage. They are asking how to keep the gap from rewriting their inner sense of worth while the structural fight goes on.
+    semantic_family: ahjan-inequality-intro
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_intro_02
+    line: Teacher Ahjan, rooted in the Rama lineage and the Tantric synthesis of Karma, Bhakti, and Jnana Yoga, has watched in the practice room what unequal systems install in young bodies. He has heard students name the hourly gap, the housing gap, the inheritance gap — and watched the inner work begin not with denial of the gap, but with refusing the verdict the gap keeps trying to deliver.
+    semantic_family: ahjan-inequality-intro-lineage
+    tone: grave
+    intensity: 4
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_intro_03
+    line: Teacher Ahjan has spent 25 years teaching the Tantric recognition that laundry and mountains are equally sacred. In practice sessions he has watched young people receive that teaching in the middle of economic precarity — and seen the moment the hierarchy of worth that inequality installs begins to lose its grip, even before the rent has changed.
+    semantic_family: ahjan-inequality-intro-laundry
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+youth_somatic:
+  options:
+  - id: youth_somatic_01
+    line: 'You open the rent listing. Your chest tightened. You closed the tab. Then you opened it again because the rent does not get smaller when you stop looking. LOOP_SEQUENCE: "opened the listing. chest tightened. closed the tab. opened it again."'
+    loop_type: dignity_drain
+    body_register: chest
+    digital_behavior: close-return
+    article_types:
+    - hard_news_spiritual_response
+  - id: youth_somatic_02
+    line: 'You saw the wealth-share chart in your feed. Your shoulders tightened. You scrolled past it. Then you came back because the chart was still the world. LOOP_SEQUENCE: "saw the chart. shoulders tightened. scrolled past. came back."'
+    loop_type: dignity_drain
+    body_register: shoulders
+    digital_behavior: scroll-return
+    article_types:
+    - hard_news_spiritual_response
+  - id: youth_somatic_03
+    line: 'You compared paychecks with a friend in the group chat. Your throat tightened. You stopped typing. Then you sent the message anyway because pretending it was equal was its own kind of harm. LOOP_SEQUENCE: "compared the paychecks. throat tightened. stopped typing. sent the message."'
+    loop_type: dignity_drain
+    body_register: throat
+    digital_behavior: pause-return
+    article_types:
+    - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: teacher_witness_01
+    line: Ahjan has seen this exact loop in practice rooms — the chart, the tightening, the look away, and the return because the arrangement is still there when attention comes back.
+    semantic_family: ahjan-inequality-witness
+    loop_type: dignity_drain
+    article_types:
+    - hard_news_spiritual_response
+  - id: teacher_witness_02
+    line: He has watched young people sit with the same gesture across years of teaching — reading the number, feeling the body register the verdict, naming it, and then refusing to be the verdict. The Tantric tradition has language for that refusal.
+    semantic_family: ahjan-inequality-witness-refusal
+    loop_type: dignity_drain
+    article_types:
+    - hard_news_spiritual_response
+  - id: teacher_witness_03
+    line: Ahjan has watched students arrive at the practice room with the gap already running through their sense of who they are. The first thing the room offers is not consolation. It is the disciplined recognition that the verdict the gap delivers is not the same thing as the gap itself.
+    semantic_family: ahjan-inequality-witness-discipline
+    loop_type: dignity_drain
+    article_types:
+    - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: turnaround_01
+    stat_line_1: 1,200 mutual-aid networks. 47 countries.
+    stat_line_2: Youth organizers are running cooperative housing pilots, wage transparency campaigns, and debt-strike legal clinics that treat dignity as infrastructure rather than as personal achievement.
+    semantic_family: ahjan-inequality-turnaround
+    article_types:
+    - hard_news_spiritual_response
+  - id: turnaround_02
+    stat_line_1: 1,200 mutual-aid networks. 47 countries.
+    stat_line_2: Young people are filing wage-theft complaints, building cooperative supply chains, and forcing public records of who owns what to surface — even when institutional response lags behind the data.
+    semantic_family: ahjan-inequality-turnaround-files
+    article_types:
+    - hard_news_spiritual_response
+  - id: turnaround_03
+    stat_line_1: 1,200 mutual-aid networks. 47 countries.
+    stat_line_2: Student-led housing co-ops, tenant unions, and wage-research collectives are rewriting what dignity looks like in practice — not as a state of mind but as a set of arrangements that protect it.
+    semantic_family: ahjan-inequality-turnaround-coops
+    article_types:
+    - hard_news_spiritual_response
+bridge:
+  options:
+  - id: bridge_01
+    line: 1,200 mutual-aid networks. 47 countries. The tracker measures what young people did. It has no column for what made the next step possible after another year of widening gaps — the capacity to refuse the hierarchy of worth that inequality installs as its deepest damage, while keeping the structural fight in view. The organizer who returned to the campaign needed it. So does the reader still in the loop. Ahjan's tradition has language for that protection.
+    hidden_capacity: refuse the hierarchy of worth while sustaining structural action
+    semantic_family: ahjan-inequality-bridge
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: bridge_02
+    line: Inequality trackers count median wages and Gini coefficients. They do not count the inner capacity that lets a young person stay in contact with the math without turning the math into a verdict on the self. That capacity — what Ahjan calls bands of awareness — is what the next organizer needs. It is what the reader who reopened the listing needs too. The Rama lineage has been protecting it for centuries.
+    hidden_capacity: hold bands of awareness wide enough to refuse the verdict
+    semantic_family: ahjan-inequality-bridge-bands
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: bridge_03
+    line: 1,200 mutual-aid networks. 47 countries. The number measures action. It does not measure the slower thing — the daily refusal to internalize the hierarchy of worth that the gap keeps trying to deliver. The Tantric tradition holds laundry and mountains as equally sacred. That recognition does not change the rent. It changes who the person paying the rent knows themselves to be.
+    hidden_capacity: hold inherent worth against economic arbitration
+    semantic_family: ahjan-inequality-bridge-laundry
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+teacher_perspective:
+  options:
+  - id: teacher_perspective_01
+    header: What Ahjan Sees
+    paragraphs:
+    - Ahjan teaches from the Tantric recognition that opposites are complementary. The tradition does not resolve inequality by denying its reality but by expanding the field in which it is held. Structural inequality and inner freedom are not the same problem — but the inner work of bands of awareness does not wait for the structural problem to be solved. Both practices proceed simultaneously.
+    - Karma Yoga — action without attachment to outcome — is the Tantric answer to despair in the face of structural inequality. Ahjan teaches that full engagement in the work of justice, without grasping at the outcome as the validation of one's effort, sustains differently than the righteous anger that converts activists into casualties of their own causes. Self-effort is both required and sufficient.
+    - The recognition that laundry and mountains are equally sacred applies directly to the inequality question. The person doing the laundry and the person on the mountain are not in different states of essential worth. This Tantric recognition does not change the economic arrangement, but it dissolves the internalized hierarchy of worth that economic inequality installs as its deepest damage.
+    semantic_family: ahjan-inequality-perspective
+    reframe_type: self_to_system
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_perspective_02
+    header: What Ahjan Sees
+    paragraphs:
+    - 'Ahjan reads economic inequality through bands of awareness: the discipline of holding multiple fields of attention without collapsing one into the other. The economic field is real. The field of inherent worth is also real. The first does not negate the second. Most psychological damage from inequality comes from letting the first field swallow the second — letting the wage become the verdict on the worth.'
+    - From there he turns to the Tantric synthesis of Karma, Bhakti, and Jnana Yoga. Action, love, and discernment work together — not in sequence. The student organizing the rent strike, the friend offering childcare during the shift, and the reader naming the structure clearly are all doing the same work from three angles. Reducing the practice to one yoga path misses what the integration is for.
+    - 'The Rama lineage holds that self-effort is required and sufficient. Ahjan applies this carefully: required means no one rescues the student from the rent; sufficient means the inner capacity to refuse the verdict the rent keeps trying to deliver is genuinely available to the student. The institutional arrangement still has to change. The inner ground for the work of changing it does not have to wait.'
+    semantic_family: ahjan-inequality-perspective-bands
+    reframe_type: self_to_system
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_perspective_03
+    header: What Ahjan Sees
+    paragraphs:
+    - Ahjan would name the damage precisely. Inequality is not only economic harm; it is the daily delivery of a verdict on the inner worth of the person it falls on. The body knows it before the language catches up — the chest tightening when the rent posts, the shoulders shifting when the paystub arrives. That body is not malfunctioning. It is registering an arrangement that asks for trust while delivering hierarchy.
+    - The Tantric tradition does not respond by minimizing the arrangement. It responds by widening the field of awareness in which the arrangement is held. Etiquette of consciousness — the protocol for approaching what cannot be solved by analysis alone — keeps the structural fight from collapsing into self-condemnation when the next quarter's numbers come in worse than the last.
+    - 'The reframe matters: what feels like a personal fault — me, broken, wrong — is often the accurate response to a system that keeps externalizing the cost of widening inequality onto the people it falls on. The mind stops calling itself broken when it sees that the real disorder is in the arrangement, and that the arrangement can be changed by the same people who are currently being asked to swallow it.'
+    semantic_family: ahjan-inequality-perspective-etiquette
+    reframe_type: self_to_system
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+practice:
+  default_id: practice_01
+  options:
+  - id: practice_01
+    display_name: 5-minute Bands of Awareness
+    duration: 5 minutes
+    announcement_line: Ahjan teaches a 5-minute Bands of Awareness practice for moments when the gap is trying to deliver a verdict on the self. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The mind stops conflating the economic arrangement with a verdict on inherent worth.
+    - A steadier ground returns for the next conversation, the next campaign, the next pay stub.
+    relief_register:
+    - capacity
+    - clarity
+    - act again
+    derived_from_frame: bands_of_awareness
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: practice_02
+    display_name: 5-minute Bands of Awareness
+    duration: 5 minutes
+    announcement_line: Ahjan teaches a 5-minute Bands of Awareness practice for the moment when the math has started narrating itself as a verdict. It is in the sidebar, short enough to use before the meeting, after the listing, or before sending the message.
+    relief_lines:
+    - The hierarchy of worth that the gap installs loses its grip on the body.
+    - Enough ground returns to keep the structural work in view without losing the worker.
+    relief_register:
+    - capacity
+    - clarity
+    - act again
+    derived_from_frame: bands_of_awareness
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: practice_03
+    display_name: 5-minute Laundry-and-Mountain Practice
+    duration: 5 minutes
+    announcement_line: Ahjan teaches a 5-minute practice rooted in the Tantric recognition that laundry and mountains are equally sacred — for moments when the wage gap or rent gap has started rearranging the inner sense of worth. It is in the sidebar.
+    relief_lines:
+    - The body stops carrying the economic verdict as if it were the truth about the self.
+    - A clearer ground returns for the next concrete act of solidarity.
+    relief_register:
+    - capacity
+    - clarity
+    - act again
+    derived_from_frame: laundry_and_mountains
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+sdg:
+  primary:
+    id: SDG 10
+    title: Reduced Inequalities
+    line: The United Nations has a framework for this through SDG 10 and its targets on income inequality, social protection, and equal opportunity.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the United Nations.
+cta:
+  options:
+  - id: cta_01
+    org: Oxfam International
+    line: 'Oxfam International publishes the annual inequality dataset and runs youth campaigns on wealth concentration. Door in: https://www.oxfam.org/en/take-action'
+    semantic_family: ahjan-inequality-cta-oxfam
+    article_types:
+    - hard_news_spiritual_response
+  - id: cta_02
+    org: Youth Action for Sustainability
+    line: 'Youth Action for Sustainability runs documentation projects on local wealth gaps and policy advocacy across the Global South. Door in: https://www.youthactionforsustainability.org'
+    semantic_family: ahjan-inequality-cta-yas
+    article_types:
+    - hard_news_spiritual_response
+  - id: cta_03
+    org: UN DESA — Youth and the SDGs
+    line: 'UN DESA runs the Youth and SDGs portal with public submission windows for the High-Level Political Forum. Door in: https://www.un.org/development/desa/youth/'
+    semantic_family: ahjan-inequality-cta-undesa
+    article_types:
+    - hard_news_spiritual_response
+title_system:
+  headline_layer_1:
+    options:
+    - id: headline_layer_1_01
+      line: The Top 1% Captured Two-Thirds Of New Wealth Since 2020.
+      semantic_family: ahjan-inequality-title1-wealth
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_1_02
+      line: Rent Outran Wages Again This Quarter.
+      semantic_family: ahjan-inequality-title1-rent
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_1_03
+      line: Youth Are Carrying The Widest Income Gap In A Generation.
+      semantic_family: ahjan-inequality-title1-gap
+      article_types:
+      - hard_news_spiritual_response
+  headline_layer_2:
+    options:
+    - id: headline_layer_2_01
+      line: A Tantric Buddhist teacher names the verdict the gap keeps trying to deliver — and the practice that protects worth while the structural fight proceeds.
+      semantic_family: ahjan-inequality-title2-verdict
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_2_02
+      line: The Rama lineage holds that laundry and mountains are equally sacred. The wage gap cannot deliver a verdict it does not own.
+      semantic_family: ahjan-inequality-title2-laundry
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_2_03
+      line: Bands of awareness keep the structural fight in view without collapsing the inner ground that sustains the worker.
+      semantic_family: ahjan-inequality-title2-bands
+      article_types:
+      - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

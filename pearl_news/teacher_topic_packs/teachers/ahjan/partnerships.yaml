@@ -1,0 +1,351 @@
+schema_version: 1
+teacher_id: ahjan
+topic: partnerships
+active: true
+identity:
+  display_name: Ahjan
+  attribution_name: Teacher Ahjan
+  tradition: Tantric Buddhist teacher (mysticism synthesis; Karma Yoga; Rama lineage)
+  tradition_short: Tantric Buddhism
+  teacher_setting_options:
+  - practice room
+  - retreat
+  teacher_years: '25'
+  affiliation_safe_line: has attended the United Spiritual Leaders Forum
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: 13-29
+  default_register: phone-native, high-pressure, institution-skeptical
+  daily_worlds:
+  - school
+  - phone
+  - group chat
+  - late-night scrolling
+  - part-time work
+  tie_to_real_world_struggles:
+  - id: extraction_fatigue
+    label: institutional partnerships that promise reciprocity then deliver extraction
+    loop: reads the partnership PR -> shoulders tighten -> closes the tab -> opens it because the partners are still the same names
+    body_markers:
+    - chest
+    - shoulders
+    - jaw
+    digital_markers:
+    - close
+    - reopen
+    - skim
+    - check again
+topic_fit:
+  fit_level: primary
+  fit_reason: 'Partnerships ask young people to keep showing up for institutional collaboration that has repeatedly delivered less than it promised; Tantric mysticism holds opposites as complementary — a frame for partnerships across difference that the extractive playbook cannot fake.'
+  forbidden_angles:
+  - do not preach naive cooperation as a substitute for accountability
+  - do not frame disillusionment with broken partnerships as personal cynicism
+hook_personal:
+  options:
+  - id: hook_personal_01
+    line: You read another joint-statement press release. You also know what the last three from the same partners actually produced once the cameras left.
+    semantic_family: ahjan-partnerships-hook-personal-press
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_personal_02
+    line: You said yes to the youth advisory seat. You also know the meeting is at 11 a.m. on a Wednesday, scheduled by people who do not need to skip a shift to attend.
+    semantic_family: ahjan-partnerships-hook-personal-seat
+    tone: grave
+    intensity: 4
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_personal_03
+    line: You scroll through the partnership logos at the bottom of the report. You also know which of those logos showed up to the launch and which of those logos has been quiet since.
+    semantic_family: ahjan-partnerships-hook-personal-logos
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+hook_big_picture:
+  options:
+  - id: hook_big_picture_01
+    line: Partnerships are no longer only an institutional design question. They are a daily test of whether the people most affected by an outcome have any say in how the partners structure the work.
+    semantic_family: ahjan-partnerships-hook-big-design
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_big_picture_02
+    line: SDG 17 names "partnerships for the goals" as the operating mechanism for the other sixteen. The mechanism has been measured. Most multi-stakeholder partnerships fail their stated youth-inclusion targets within 24 months of launch.
+    semantic_family: ahjan-partnerships-hook-big-sdg17
+    article_types:
+    - hard_news_spiritual_response
+  - id: hook_big_picture_03
+    line: The partnership form has been used as both genuine collaboration and as institutional cover. The difference between the two is rarely visible at launch — it is visible 18 months in, when the press conference is over and the convening organization decides which partner gets to keep showing up.
+    semantic_family: ahjan-partnerships-hook-big-cover
+    article_types:
+    - hard_news_spiritual_response
+teacher_intro:
+  options:
+  - id: teacher_intro_01
+    line: Teacher Ahjan, a Tantric Buddhist teacher for 25 years, has watched young people return from interfaith and civic partnerships with the same question. They are not asking whether collaboration matters. They are asking how to stay in genuine partnership when the larger partner keeps extracting more than they bring.
+    semantic_family: ahjan-partnerships-intro-extraction
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_intro_02
+    line: Teacher Ahjan, rooted in the Rama lineage and the Tantric synthesis of Karma, Bhakti, and Jnana Yoga, has watched in practice sessions the specific exhaustion of being the smaller partner in arrangements designed to deliver legitimacy to the larger one. The teaching he offers does not solve the structural asymmetry. It protects the inner ground from which the smaller partner can decide whether to keep showing up.
+    semantic_family: ahjan-partnerships-intro-asymmetry
+    tone: grave
+    intensity: 4
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_intro_03
+    line: Teacher Ahjan has spent 25 years teaching that opposites are complementary, not in conflict — the central insight of Tantric mysticism. In partnership work, he has watched students apply this in environments where the dominant partner is treating difference as friction to be managed rather than as the precise condition under which genuine collaboration becomes possible.
+    semantic_family: ahjan-partnerships-intro-opposites
+    tone: plain
+    intensity: 3
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+youth_somatic:
+  options:
+  - id: youth_somatic_01
+    line: 'You read the joint press release. Your shoulders tightened. You closed the tab. Then you opened it again because the names listed were not changing. LOOP_SEQUENCE: "read the release. shoulders tightened. closed the tab. opened it again."'
+    loop_type: extraction_fatigue
+    body_register: shoulders
+    digital_behavior: close-return
+    article_types:
+    - hard_news_spiritual_response
+  - id: youth_somatic_02
+    line: 'You opened the partnership invitation. Your jaw tightened. You skimmed past it. Then you came back because saying no had its own cost too. LOOP_SEQUENCE: "opened the invitation. jaw tightened. skimmed past. came back."'
+    loop_type: extraction_fatigue
+    body_register: jaw
+    digital_behavior: skim-return
+    article_types:
+    - hard_news_spiritual_response
+  - id: youth_somatic_03
+    line: 'You read the new MOU between the two organizations. Your chest tightened. You set the phone down. Then you picked it up because your friend on the smaller side was already in the group chat. LOOP_SEQUENCE: "read the MOU. chest tightened. put the phone down. picked it up again."'
+    loop_type: extraction_fatigue
+    body_register: chest
+    digital_behavior: put-down-return
+    article_types:
+    - hard_news_spiritual_response
+teacher_witness:
+  options:
+  - id: teacher_witness_01
+    line: Ahjan has seen this exact loop in young people returning from partnership work — the release, the tightening, the look away, and the return because the people on the smaller side were still in it.
+    semantic_family: ahjan-partnerships-witness
+    loop_type: extraction_fatigue
+    article_types:
+    - hard_news_spiritual_response
+  - id: teacher_witness_02
+    line: He has watched students who entered partnerships as equals leave them carrying invisible labor that the larger partner publicly took credit for. The Tantric tradition does not wave that away. It names it precisely, then asks what kind of inner ground the work of staying in or leaving the partnership actually requires.
+    semantic_family: ahjan-partnerships-witness-labor
+    loop_type: extraction_fatigue
+    article_types:
+    - hard_news_spiritual_response
+  - id: teacher_witness_03
+    line: Ahjan has watched the slower thing — the way young partners learn to read partnership language for what it leaves out. The teaching he offers is not skepticism. It is the disciplined recognition that bands of awareness are the thing the asymmetric partnership most needs the smaller partner to lose.
+    semantic_family: ahjan-partnerships-witness-bands
+    loop_type: extraction_fatigue
+    article_types:
+    - hard_news_spiritual_response
+turnaround:
+  options:
+  - id: turnaround_01
+    stat_line_1: 480 youth-led coalitions. 33 countries.
+    stat_line_2: Young partners are running open-books co-governance pilots, refusing nondisclosure-by-default in MOUs, and publishing partner accountability scorecards even when the larger partners ask them not to.
+    semantic_family: ahjan-partnerships-turnaround-cogov
+    article_types:
+    - hard_news_spiritual_response
+  - id: turnaround_02
+    stat_line_1: 480 youth-led coalitions. 33 countries.
+    stat_line_2: Youth partnership networks are documenting which partnerships kept their inclusion targets and which did not — and publishing the lists where the funders that wrote the original MOUs can find them.
+    semantic_family: ahjan-partnerships-turnaround-targets
+    article_types:
+    - hard_news_spiritual_response
+  - id: turnaround_03
+    stat_line_1: 480 youth-led coalitions. 33 countries.
+    stat_line_2: Young people are building South-South knowledge networks, running peer-to-peer convenings that bypass the convener-extractor model, and treating the partnership as infrastructure rather than as PR.
+    semantic_family: ahjan-partnerships-turnaround-southsouth
+    article_types:
+    - hard_news_spiritual_response
+bridge:
+  options:
+  - id: bridge_01
+    line: 480 youth-led coalitions. 33 countries. The tracker measures what young people built. It has no column for what made the next partnership possible after the last one delivered extraction in collaborative language — the capacity to hold the asymmetry in clear view without surrendering the field of inherent worth that genuine partnership requires of both parties. The partner who came back needed it. So does the reader still in the loop. Ahjan's tradition has language for that protection.
+    hidden_capacity: hold asymmetry in view while sustaining genuine partnership
+    semantic_family: ahjan-partnerships-bridge
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: bridge_02
+    line: Partnership trackers count signatures and joint statements. They do not count the inner capacity that lets a young partner stay engaged with the work after the dominant partner has used the partnership as cover. That capacity — what Ahjan calls bands of awareness — protects the smaller partner from carrying the asymmetry as a personal verdict. The Rama lineage has been refining the practice for centuries. SDG 17 has not.
+    hidden_capacity: refuse the asymmetry-as-verdict the dominant partner tries to deliver
+    semantic_family: ahjan-partnerships-bridge-bands
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: bridge_03
+    line: 480 youth-led coalitions. 33 countries. The count measures action. It does not measure the slower thing — the discipline of staying in genuine collaboration with people whose institutional power is shaped to extract from yours. The Tantric tradition holds opposites as complementary. In partnership, that means difference is not friction to be managed. It is the precise condition under which the collaboration can become real.
+    hidden_capacity: meet difference as condition for partnership, not as obstacle
+    semantic_family: ahjan-partnerships-bridge-opposites
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+teacher_perspective:
+  options:
+  - id: teacher_perspective_01
+    header: What Ahjan Sees
+    paragraphs:
+    - Tantric mysticism holds that opposites are complementary, not in conflict. Ahjan teaches that this is the foundational frame for partnerships across difference — whether of culture, ideology, or institutional power. Genuine partnership requires bands of awareness, the capacity to hold multiple fields of attention without collapsing one into the other. The partner who cannot hold their own field cannot genuinely meet the other's.
+    - Karma Yoga applied to partnership means full engagement without attachment to the outcome as the validation of the relationship. Ahjan teaches that partnerships structured around what each party gets from the arrangement are inherently fragile. Partnerships structured around what each party brings to genuine service — without grasping at the return — have a different quality of sustainability. The Rama lineage has been refining this for generations.
+    - Sacred site transmission — Ahjan's direct work with the Tantric recognition that physical reality is the medium of spiritual work — points to something partnerships frequently overlook. The location, history, and energetic quality of where parties meet shapes what becomes possible between them. Partnerships that ignore the quality of the ground on which they stand miss a significant variable in what determines their depth.
+    semantic_family: ahjan-partnerships-perspective-opposites
+    reframe_type: self_to_system
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_perspective_02
+    header: What Ahjan Sees
+    paragraphs:
+    - Ahjan reads partnership strain through bands of awareness. The smaller partner is being asked to hold two fields at once — the field of the stated collaboration and the field of what the dominant partner is actually doing. Most damage from extractive partnerships comes from collapsing those fields into one, then taking the collapse as evidence that the partner who noticed it was being uncooperative.
+    - From there Ahjan turns to the Tantric synthesis of Karma, Bhakti, and Jnana Yoga. Action, love, and discernment work together — not in sequence. The youth partner who pushes back on a misleading press release, the partner who keeps the relationship with the program officer warm even after the dispute, and the partner who names the structural asymmetry clearly are all doing the same work from three angles. Reducing partnership practice to one yoga path misses what the integration is for.
+    - 'The Rama lineage holds that self-effort is required and sufficient. Ahjan applies this carefully: required means the smaller partner cannot wait for the larger one to reform itself before doing genuine work; sufficient means the smaller partner''s inner capacity to keep the work clear, the boundaries firm, and the field of inherent worth intact is genuinely available to them. The institutional asymmetry still has to be addressed. The inner ground for addressing it does not have to wait.'
+    semantic_family: ahjan-partnerships-perspective-bands
+    reframe_type: self_to_system
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: teacher_perspective_03
+    header: What Ahjan Sees
+    paragraphs:
+    - Ahjan would name the asymmetry precisely. Most institutional partnerships are not failures of intention. They are arrangements designed by parties with very different exit costs. The party that can walk away cheaply will tend, in practice, to set the terms. The Tantric tradition does not respond by pretending the exit costs are equal. It responds by widening the field of awareness in which the asymmetry is held.
+    - Etiquette of consciousness — the protocol for approaching what cannot be solved by analysis alone — keeps the partnership work from collapsing into either naive cooperation or pure cynicism. The smaller partner who names the asymmetry clearly does not have to become a hostile partner. The Tantric tradition holds that opposites are complementary; in partnership terms, that means the disagreement and the collaboration are not in conflict. They are the conditions for each other.
+    - 'The reframe matters: what feels like a personal failure of cooperative skill — me, broken, wrong for noticing the extraction — is often the accurate response to a partnership designed to extract while calling itself collaborative. The mind stops calling itself broken when it sees that the real disorder is in the design of the partnership, and that the design can be changed by the same partners who are currently being asked to consent to it.'
+    semantic_family: ahjan-partnerships-perspective-etiquette
+    reframe_type: self_to_system
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+practice:
+  default_id: practice_01
+  options:
+  - id: practice_01
+    display_name: 5-minute Bands of Awareness for Partnership
+    duration: 5 minutes
+    announcement_line: Ahjan teaches a 5-minute Bands of Awareness practice for moments when a partnership has started extracting in collaborative language and the smaller partner needs to keep their field clear. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The two fields — what the partnership claims to be and what the partnership is doing — stop collapsing into each other.
+    - A steadier ground returns for the next conversation, the next MOU revision, the next decision about whether to stay in.
+    relief_register:
+    - capacity
+    - clarity
+    - act again
+    derived_from_frame: bands_of_awareness
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: practice_02
+    display_name: 5-minute Receiving Practice for Co-Partners
+    duration: 5 minutes
+    announcement_line: Ahjan teaches a 5-minute Receiving practice rooted in Karma Yoga — for moments when the partnership work is being treated as if the smaller partner's contribution were optional. It is in the sidebar, short enough to use before the call, after the meeting, or before sending the response.
+    relief_lines:
+    - The grasping after recognition softens; the work itself returns to view.
+    - Enough ground returns to choose engagement or refusal on the work's actual terms.
+    relief_register:
+    - capacity
+    - clarity
+    - act again
+    derived_from_frame: karma_yoga
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+  - id: practice_03
+    display_name: 5-minute Sacred-Ground Practice
+    duration: 5 minutes
+    announcement_line: Ahjan teaches a 5-minute practice rooted in the Tantric recognition that the ground on which partners meet shapes what becomes possible — for moments when a partnership has lost its sense of where it is actually standing. It is in the sidebar.
+    relief_lines:
+    - The body recognizes the room, the people, and the actual stakes of the meeting.
+    - A clearer ground returns for the next agreement, refusal, or honest pause.
+    relief_register:
+    - capacity
+    - clarity
+    - act again
+    derived_from_frame: sacred_site_transmission
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+sdg:
+  primary:
+    id: SDG 17
+    title: Partnerships for the Goals
+    line: The United Nations has a framework for this through SDG 17 and its targets on multi-stakeholder partnerships, data, monitoring, and accountability.
+  fallback_un_tie:
+    line: Pearl News is an independent nonprofit. We are not affiliated with the United Nations.
+cta:
+  options:
+  - id: cta_01
+    org: Major Group for Children and Youth (UN MGCY)
+    line: 'The UN Major Group for Children and Youth coordinates youth input into UN partnership processes including the High-Level Political Forum. Door in: https://www.unmgcy.org'
+    semantic_family: ahjan-partnerships-cta-mgcy
+    article_types:
+    - hard_news_spiritual_response
+  - id: cta_02
+    org: Restless Development
+    line: 'Restless Development runs youth-led research and accountability work on partnership outcomes across the Global South. Door in: https://restlessdevelopment.org'
+    semantic_family: ahjan-partnerships-cta-restless
+    article_types:
+    - hard_news_spiritual_response
+  - id: cta_03
+    org: Partners for Youth Empowerment Network
+    line: 'PYE Global runs peer-to-peer partnership trainings that treat collaboration as a practice, not a press release. Door in: https://pyeglobal.org'
+    semantic_family: ahjan-partnerships-cta-pye
+    article_types:
+    - hard_news_spiritual_response
+title_system:
+  headline_layer_1:
+    options:
+    - id: headline_layer_1_01
+      line: Most Multi-Stakeholder Partnerships Miss Their Youth-Inclusion Targets.
+      semantic_family: ahjan-partnerships-title1-miss
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_1_02
+      line: SDG 17 Is The Mechanism. The Mechanism Is Underperforming.
+      semantic_family: ahjan-partnerships-title1-sdg17
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_1_03
+      line: Young Partners Are Auditing The Partnerships That Use Their Names.
+      semantic_family: ahjan-partnerships-title1-audit
+      article_types:
+      - hard_news_spiritual_response
+  headline_layer_2:
+    options:
+    - id: headline_layer_2_01
+      line: A Tantric Buddhist teacher names the asymmetry the partnership form keeps trying to hide — and the practice that keeps the smaller partner's ground intact.
+      semantic_family: ahjan-partnerships-title2-asymmetry
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_2_02
+      line: Bands of awareness keep the partnership work clear when collaborative language is being used as cover for extraction.
+      semantic_family: ahjan-partnerships-title2-bands
+      article_types:
+      - hard_news_spiritual_response
+    - id: headline_layer_2_03
+      line: The Rama lineage holds that opposites are complementary. Difference is the condition for partnership, not the friction to be managed away.
+      semantic_family: ahjan-partnerships-title2-opposites
+      article_types:
+      - hard_news_spiritual_response
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: article_id + slot + teacher_id + topic
+  metadata_filters:
+    article_types:
+    - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4
