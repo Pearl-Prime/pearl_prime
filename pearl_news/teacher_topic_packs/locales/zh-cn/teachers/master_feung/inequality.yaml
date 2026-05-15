@@ -1,0 +1,176 @@
+# ZH-CN overlay for master_feung × inequality.
+# Patches `line:` fields per option `id`. Base structure is in:
+#   pearl_news/teacher_topic_packs/teachers/master_feung/inequality.yaml
+# Deep-merge engine: pearl_news/pipeline/deterministic_teacher_topic.py:_merge_options_lists
+# Register: 书面语 / 财新 · 新华社特稿 / 你 (not 您) / 规范简体字 / 教师姓名保持英文.
+
+schema_version: 1
+teacher_id: master_feung
+topic: inequality
+
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: |
+        你在打开 App 之前就知道那张表。租金一列。工资一列。两栏之间的差距像在向你索取一个解释——
+        关于你为什么会站在错的一边。
+    - id: hook_personal_02
+      line: |
+        房间在你读懂它之前已经先读懂了你。工资数字到位的时间总比有人问你这个月做了什么更早。
+        你开始和那个数字争论,仿佛它能听见。
+    - id: hook_personal_03
+      line: |
+        你停止投简历。又读了三个招聘帖,关掉标签。你不觉得自己脆弱。你觉得自己被仲裁——被一套
+        你从未同意的尺子量过。
+
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: |
+        年轻人面对的经济不平等不是个人缺陷。它是一种结构安排——把住房、教育、时间本身定价出去,
+        再要求被定价的一方解释他们韧性不足。
+    - id: hook_big_picture_02
+      line: |
+        不平等的形态已经改变。财富集中不再只在顶端,而是沿着住房、信贷、继承叠加,把年轻人分类
+        到未来里,早于他们自己做过任何一个决定。
+    - id: hook_big_picture_03
+      line: |
+        不平等如今戴着代际的面孔。承担系统的年轻劳动者,对系统产出的索取权最慢——而重新分配它
+        的制度已经停滞。
+
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: |
+        Master Feung,西安文化中心的中国智慧传承教师,从书法世系来,见过不平等进入学生第一句话
+        的方式:不是问他们在做什么,而是问他们是否属于这件工作。
+    - id: teacher_intro_02
+      line: |
+        Master Feung 来自西安文化中心——书法与 Grand Painting 教导在此交汇——长期观察到学生
+        带着一个更安静的问题走进来:他们的那一笔是否算在画面上。
+    - id: teacher_intro_03
+      line: |
+        Master Feung 在西安以书法为身体化修养教学已四十年。如今来到的学生带着一种特定的尊严
+        疲劳:经济本身在分类谁算一笔完成的笔画。
+
+youth_somatic:
+  options:
+    - id: youth_somatic_01
+      line: |
+        你读那张租金对工资的图表。胸口收紧。你关掉 App。然后又打开,因为数字没有变小。
+        LOOP_SEQUENCE: "read the chart. chest tightened. closed the app. opened it again."
+    - id: youth_somatic_02
+      line: |
+        你刷招聘帖。肩膀往里收。你放下手机。然后又拿起,因为房租没有移动。
+        LOOP_SEQUENCE: "scrolled the posts. shoulders pulled in. set the phone down. picked it up."
+    - id: youth_somatic_03
+      line: |
+        你看继承相关的报道。喉咙收紧。你重新打开聊天。然后停下打字,因为字词在结构面前显得很小。
+        LOOP_SEQUENCE: "checked the article. throat tightened. opened the chat. stopped typing."
+
+teacher_witness:
+  options:
+    - id: teacher_witness_01
+      line: |
+        Master Feung 在文化中心反复观察到这种模式——学生先问自己是否属于,再问自己想做什么。
+        他把这种提问视为房间本身被错误描述的标志。
+    - id: teacher_witness_02
+      line: |
+        四十年的教学里,Master Feung 见过同样的形态在不同年代里出现。新的是速度:尊严流失现在
+        在学生还没走进门之前,就已经通过手机抵达了他们。
+    - id: teacher_witness_03
+      line: |
+        Master Feung 看着学生在手机消息到来时把毛笔停在半笔。他不把这称为专注的失败。他把这
+        称为身体在准确读取房间还没承认的条件。
+
+turnaround:
+  options:
+    - id: turnaround_01
+      stat_line_1: 数十个城市。数百个青年主导的合作社。
+      stat_line_2: 年轻劳动者正在组织工资透明运动、住房合作社试点、继承政策行动,把尊严当成共享的基础设施,而非个人的咬牙坚持。
+    - id: turnaround_02
+      stat_line_1: 多个国家。多个试点项目。
+      stat_line_2: 学生租客、零工、第一代毕业生的联盟正在公开工资数据、绘制租金差距图、推动地方政府把住房视为基线而非奖励。
+    - id: turnaround_03
+      stat_line_1: 多个区域。多个最低生活工资试点。
+      stat_line_2: 由年轻劳动者带头的公民联盟正在试验普及基本服务、债务豁免提案、工人所有的平台替代方案——每一项都把尊严当作结构事实,而不是性格特质。
+
+bridge:
+  options:
+    - id: bridge_01
+      line: |
+        Master Feung 的 Grand Painting 框架直接命名不平等的回路:当一笔被定价低于另一笔时,
+        画面没有失败——是定价失败了。尊严不在质问中;仲裁它的系统才是。
+    - id: bridge_02
+      line: |
+        书法的框架在这里很具体:笔画无法撤回,但页面可以重新设计。Master Feung 认为,认得自己
+        必要位置的修养,与结构性的工作并行——不是替代,不是之后,是同时进行。
+    - id: bridge_03
+      line: |
+        从西安文化中心,Master Feung 指出一个陷阱:定价告诉那一笔它是可有可无的。定价错了;
+        那一笔没有错。修养的工作是保持从那个中心教学——在外面继续重新议价的同时。
+
+teacher_perspective:
+  options:
+    - id: teacher_perspective_01
+      paragraphs:
+        - |
+          在 Master Feung 的 Grand Painting 教导中,每一个人都是人类这幅画中一块独特且必要的部分
+          ——不是草稿,不是替代品,不是可有可无的。经济不平等是价签把自己误认成画。
+        - |
+          Master Feung 教导:笔画无法撤回,但页面可以重新设计。固有价值的工作与结构性重新设计
+          的工作并行。书法修养是保持与前者接触、同时进行后者的一种方式。
+        - |
+          西安文化中心认为,做自己才是真正的教学——不是朝某个理想自我完善,而是认得自己已经完整
+          的位置。从这个认得出发,再分配的工作就成为一门工艺,而不是恳求。
+    - id: teacher_perspective_02
+      paragraphs:
+        - |
+          Master Feung 做一个学生很快能识别的区分:定价不是绘画。工资和租金都是仲裁。它们告诉你
+          系统在问什么。它们不告诉你你的那一笔是什么。
+        - |
+          从 Grand Painting 的框架看,画在继续。你这周做的那一笔,已经在画面某处被需要。Master
+          Feung 让学生在定价被争论的同时继续画——不是争论之后,不是替代,是并行。
+        - |
+          西安文化中心把真实在场视为一门工艺。不平等通过要求被画上的那一笔证明自己属于,来侵蚀
+          这种在场。Master Feung 把问题还回原处:画本身就是证明。
+    - id: teacher_perspective_03
+      paragraphs:
+        - |
+          Master Feung 把不平等回路读为身体在读取条件:当经济说你可被仲裁时,胸口会收紧。身体
+          没错。仲裁是结构性的事实,需要被处理;固有价值并没有在被质问。
+        - |
+          书法修养小而具体。三笔。身体找到页面。页面找到身体。笔画无法撤回——这个事实让人安心,
+          不是威胁——总有一个地方,你做的事立刻被算上。
+        - |
+          Master Feung 认为 Grand Painting 包括最低薪的劳动者、最先被裁掉的人、最后被雇用的人。
+          这些都不是草稿的错误。不平等是定价方案。画本身没变。
+
+practice:
+  options:
+    - id: practice_01
+      announcement_line: |
+        拿起毛笔——或任何一支笔。在一页纸上写三笔。胸口找到那一笔;那一笔找到胸口。注意:页面
+        没有在仲裁你;是你在落笔。
+    - id: practice_02
+      announcement_line: |
+        把手机放下。拿一支笔。在干净的页面上写一个词。再写一个。页面是修养;定价不在这个房间里。
+    - id: practice_03
+      announcement_line: |
+        站立。三次缓慢呼吸。说出一件你做的、画面需要的事——不是市场定价的,而是画面需要的。
+        注意胸口。注意房间。
+
+cta:
+  options:
+    - id: cta_01
+      line: |
+        在 oxfam.org/inequality 追踪不平等指数。用它在你已经身处的房间里本地化一场工资与
+        租金的对话。
+    - id: cta_02
+      line: |
+        阅读 ilo.org/global-wage-report 上的国际劳工组织全球工资报告。一个数字,一个邻居——
+        把你居住地的工资差距讲给他们听。
+    - id: cta_03
+      line: |
+        打开 wid.world 上的世界不平等数据库,找到你国家的财富分配曲线。把一张图带到你下一场
+        公民对话中。
