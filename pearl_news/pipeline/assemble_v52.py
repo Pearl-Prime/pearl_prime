@@ -45,6 +45,101 @@ logger = logging.getLogger(__name__)
 #   "wide"         — sidebar bottom; cards as horizontal flex strip (900px body, 1280px max)
 LAYOUT_VARIANTS = frozenset({"default", "scroll_story", "dock", "editorial", "wide"})
 
+# ── SECTION HEADERS BY LANGUAGE ──────────────────────────────────────────────
+# Every visible UI label in the article body must match the article's language.
+# Operator (2026-05-16): a zh-cn article shipped with English section labels
+# wrapping Chinese body text — "THE WEIGHT OF IT" / "WHAT IT LOOKS LIKE" /
+# "ALREADY MOVING" / etc. all English in a Chinese article. Fixed by routing
+# every default label through this table keyed on the article's _lang.
+#
+# Per-language keys:
+#   hook        — section above the second-person somatic lede
+#   news_peg    — the UN facts section
+#   body        — the youth-experience section
+#   turnaround  — the agency-pivot block-blue header
+#   bridge      — the event-to-teacher connector
+#   teacher_sees— gold-block header. Format placeholder: {teacher_name}
+#   sage_body   — block-sage body-data evidence header
+#   practice    — practice_announce block-sage header
+#   forward     — forward_look section
+#   data_chain  — the "Your Voice Has Power" block-blue at the bottom
+#   take_action — the secondary forward-look subhead
+#   cta_block_paras — list of 3 paragraphs for the data-chain block
+_SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
+    "en": {
+        "hook":         "The Weight of It",
+        "news_peg":     "The Number",
+        "body":         "What It Looks Like",
+        "turnaround":   "Already Moving",
+        "bridge":       "What the Data Skips",
+        "teacher_sees": "What {teacher_name} Sees",
+        "sage_body":    "How Others Experience It",
+        "practice":     "The Practice",
+        "forward":      "There's a Door",
+        "data_chain":   "Your Voice Has Power",
+        "take_action":  "Take Action Now!",
+        "cta_block_paras": [
+            "The poll on this page connects to that chain. Pearl News brings aggregated reader data to UNA-USA convenings and UN press briefings.",
+            "Your response is not a comment. It is a data point in a set that gets presented to people deciding which questions get asked.",
+            "Vote in the sidebar. Submit your take. Be part of the solution.",
+        ],
+    },
+    "ja": {
+        "hook":         "重さ",
+        "news_peg":     "数字",
+        "body":         "そのかたち",
+        "turnaround":   "すでに動いている",
+        "bridge":       "データが飛ばすもの",
+        "teacher_sees": "{teacher_name}が見ているもの",
+        "sage_body":    "他者の経験から",
+        "practice":     "実践",
+        "forward":      "扉がある",
+        "data_chain":   "あなたの声には力がある",
+        "take_action":  "今、行動を",
+        "cta_block_paras": [
+            "このページの投票はそのつながりに接続します。Pearl Newsは集約された読者データをUNA-USAの会合やUNの記者ブリーフィングに持ち込みます。",
+            "あなたの応答はコメントではありません。問いを決める人々の前に提示される、データセットのひとつの点です。",
+            "サイドバーから投票してください。あなたの意見を寄せてください。解の一部になってください。",
+        ],
+    },
+    "zh-cn": {
+        "hook":         "压力的重量",
+        "news_peg":     "数字",
+        "body":         "它的样子",
+        "turnaround":   "已经在动",
+        "bridge":       "数据漏掉的部分",
+        "teacher_sees": "{teacher_name}所见",
+        "sage_body":    "他人怎么经历",
+        "practice":     "实修",
+        "forward":      "门在这里",
+        "data_chain":   "你的声音有力量",
+        "take_action":  "现在就行动",
+        "cta_block_paras": [
+            "本页的投票连接到那条链。Pearl News把汇总后的读者数据带到UNA-USA的会议与联合国记者会上。",
+            "你的回应不是评论。它是数据集中的一个点,呈现给决定哪些问题被提出的人。",
+            "请在侧栏投票。提交你的看法。成为解的一部分。",
+        ],
+    },
+    "zh": {
+        "hook":         "压力的重量",
+        "news_peg":     "数字",
+        "body":         "它的样子",
+        "turnaround":   "已经在动",
+        "bridge":       "数据漏掉的部分",
+        "teacher_sees": "{teacher_name}所见",
+        "sage_body":    "他人怎么经历",
+        "practice":     "实修",
+        "forward":      "门在这里",
+        "data_chain":   "你的声音有力量",
+        "take_action":  "现在就行动",
+        "cta_block_paras": [
+            "本页的投票连接到那条链。Pearl News把汇总后的读者数据带到UNA-USA的会议与联合国记者会上。",
+            "你的回应不是评论。它是数据集中的一个点,呈现给决定哪些问题被提出的人。",
+            "请在侧栏投票。提交你的看法。成为解的一部分。",
+        ],
+    },
+}
+
 # ── TEACHER DATABASE ─────────────────────────────────────────────────────────
 # Maps teacher name → tradition, key terms, practice, exercise steps, etc.
 # This is the minimum teacher data needed for v5.2 rendering.
@@ -934,17 +1029,26 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     # ── Section headers ──
     # 14-slot articles may include custom section_headers
     sec_h = meta.get("section_headers", {})
-    hook_header = sec_h.get("hook", meta.get("hook_header", "The Weight of It"))
-    news_peg_header = sec_h.get("news_peg", meta.get("news_peg_header", "The Number"))
-    body_header = sec_h.get("youth_somatic", meta.get("body_header", "What It Looks Like"))
-    turnaround_header = meta.get("turnaround_header", "Already Moving")
-    teacher_header = sec_h.get("bridge", meta.get("teacher_header", "What the Data Skips"))
+    # Resolve language early so section headers default to the article's locale.
+    # Operator complaint 2026-05-16: a zh-cn article shipped with English section
+    # labels ("THE WEIGHT OF IT" / "WHAT IT LOOKS LIKE" / etc.) wrapping Chinese
+    # body text. Every visible UI string in the rendered article must match the
+    # article's language.
+    _early_lang = (meta.get("language") or article_json.get("language") or "en").split("-")[0].lower()
+    _l10n = _SECTION_HEADERS_BY_LANG.get(_early_lang) or _SECTION_HEADERS_BY_LANG["en"]
+    hook_header = sec_h.get("hook", meta.get("hook_header", _l10n["hook"]))
+    news_peg_header = sec_h.get("news_peg", meta.get("news_peg_header", _l10n["news_peg"]))
+    body_header = sec_h.get("youth_somatic", meta.get("body_header", _l10n["body"]))
+    turnaround_header = meta.get("turnaround_header", _l10n["turnaround"])
+    teacher_header = sec_h.get("bridge", meta.get("teacher_header", _l10n["bridge"]))
     gold_block_header = sec_h.get("teacher_perspective_block",
-        meta.get("gold_block_header", f"What {teacher_name} Sees"))
-    sage_body_header = sec_h.get("body_data", meta.get("sage_body_header", "How Others Experience It"))
-    practice_header = "The Practice"
-    forward_header = meta.get("forward_header", "There's a Door")
-    data_chain_header = "Your Voice Has Power"
+        meta.get("gold_block_header", _l10n["teacher_sees"].format(teacher_name=teacher_name)))
+    sage_body_header = sec_h.get("body_data", meta.get("sage_body_header", _l10n["sage_body"]))
+    practice_header = _l10n["practice"]
+    forward_header = meta.get("forward_header", _l10n["forward"])
+    data_chain_header = _l10n["data_chain"]
+    take_action_header = _l10n["take_action"]
+    cta_block_paras = _l10n["cta_block_paras"]
 
     # ── Build exercise step dots ──
     total_steps = len(teacher["exercise_steps"])
@@ -1180,7 +1284,7 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
             f'    <!-- FORWARD LOOK -->\n'
             f'    <div id="sec-forward" class="section-header">{_esc(forward_header)}</div>\n'
             f'{_paras(forward_paras[:1])}\n'
-            f'    <div class="section-header">Take Action Now!</div>\n'
+            f'    <div class="section-header">{_esc(take_action_header)}</div>\n'
             f'{_paras(forward_paras[1:])}\n'
             f'{_inline_poll_html}\n'
         ) if forward_paras else "",
@@ -1238,9 +1342,7 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     <!-- READER DATA CHAIN — blue block: collective action, shared impact -->
     <div class="block-blue">
       <div class="block-header">{_esc(data_chain_header)}</div>
-      <p>The poll on this page connects to that chain. Pearl News brings aggregated reader data to UNA-USA convenings and UN press briefings.</p>
-      <p>Your response is not a comment. It is a data point in a set that gets presented to people deciding which questions get asked.</p>
-      <p>Vote in the sidebar. Submit your take. Be part of the solution.</p>
+      {"".join(f"<p>{_esc(p)}</p>" for p in cta_block_paras)}
     </div>
     <!-- REPORTING ATTRIBUTION -->
     <div class="reporting-attribution">
