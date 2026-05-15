@@ -42,6 +42,12 @@ jobs:
         working-directory: brand-wizard-app
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Pull git LFS objects (teacher_pics/*.png are LFS-tracked per PR #1118).
+          # Without this, build copies 130-byte LFS pointer files to dist/ instead
+          # of the actual PNG content, and brand-admin-onboarding.pages.dev serves
+          # broken images. Surfaced 2026-05-16 after PR #1111 deploy.
+          lfs: true
 
       - uses: actions/setup-python@v5
         with:
