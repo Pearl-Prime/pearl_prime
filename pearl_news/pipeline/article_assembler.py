@@ -56,18 +56,37 @@ def _resolve_slot(
         summary = item.get("summary") or item.get("raw_summary") or ""
         return f"<p>{summary}</p>"
 
+    # NOTE (2026-05-16): all generic placeholder filler in this function was
+    # removed because the v52 path was publishing it as the article body when a
+    # (teacher × topic) pack was missing — producing live articles with the
+    # writer-spec §7 failure-mode strings ("Young people are increasingly
+    # affected by..." / "A teacher from the United Spiritual Leaders Forum
+    # offers perspective..."). The new contract: when source data is missing,
+    # emit a sentinel `__MISSING_ATOM__:<source>` that the quality gate
+    # `atoms_present` (pearl_news/pipeline/quality_gates.py) rejects, blocking
+    # publish. The pipeline operator gets a loud, traceable failure instead of
+    # a silently shipped generic article.
+
+    def _missing(source_key: str) -> str:
+        marker = f"__MISSING_ATOM__:{source_key}"
+        flagged = item.setdefault("_atoms_missing", [])
+        if source_key not in flagged:
+            flagged.append(source_key)
+        logger.warning(
+            "atoms_missing source=%s slot=%s teacher=%s topic=%s — article will be QC-rejected",
+            source_key, slot_name,
+            item.get("teacher_id") or item.get("teacher") or "<none>",
+            topic,
+        )
+        return marker
+
     if source == "youth_impact":
         # Try atoms/youth_impact/<topic>.md or .txt
         for ext in (".md", ".txt", ".yaml"):
             p = atoms_root / "youth_impact" / f"{topic}{ext}"
             if p.exists():
                 return p.read_text(encoding="utf-8").strip()
-        label = sdg_labels.get(primary_sdg, "sustainable development")
-        return (
-            f"<p>Young people are increasingly affected by global events in this area. Gen Z and Gen Alpha seek clarity and constructive responses aligned with sustainable development and well-being (SDG {primary_sdg}: {label}).</p>\n\n"
-            f"<p>Research and reporting show that youth engagement—whether through education, advocacy, or community action—helps shape outcomes. Framing stories through a youth lens supports relevance and accountability.</p>\n\n"
-            f"<p>Pearl News highlights how global challenges intersect with the lives of young people and the frameworks that support their resilience and participation.</p>"
-        )
+        return _missing("youth_impact")
 
     if source == "teacher_quotes_practices":
         # Use per-teacher pack system (deterministic_teacher_topic.py).
@@ -75,10 +94,7 @@ def _resolve_slot(
         root = Path(__file__).resolve().parent.parent
         config_root = config_root or (root / "config")
         if _is_uslf_group_article(item, config_root):
-            return (
-                "<p>Leaders from the United Spiritual Leaders Forum emphasize reflection and resilience in the face of uncertainty, in line with ethical frameworks that support youth well-being and global goals.</p>\n\n"
-                "<p>Dialogue across traditions helps communities respond to crisis with clarity and compassion.</p>"
-            )
+            return _missing("teacher_quotes_practices.uslf_group")
 
         teacher_id = item.get("teacher_id") or item.get("teacher") or ""
         if teacher_id:
@@ -108,27 +124,14 @@ def _resolve_slot(
                     exc,
                 )
 
-        # Fallback: single teacher placeholder (never raw YAML)
-        return (
-            "<p>A teacher from the United Spiritual Leaders Forum offers perspective: "
-            "reflection and resilience in the face of uncertainty, drawing on the wisdom "
-            "of their tradition as it applies to this moment.</p>"
-        )
+        return _missing("teacher_quotes_practices")
 
     if source in ("sdg_ref", "sdg_framework", "sdg_un_tie", "sdg_alignment", "sdg_policy_tie", "sdg_reference"):
-        label = sdg_labels.get(primary_sdg) or "Sustainable Development"
-        return (
-            f"<p>This story relates to <strong>SDG {primary_sdg}: {label}</strong>. The {un_body} tracks progress and supports initiatives in this area.</p>\n\n"
-            f"<p>Understanding how global goals connect to daily life helps readers see the relevance of international frameworks. Youth, educators, and community leaders often use SDG language to align local action with broader objectives.</p>\n\n"
-            "<p>Pearl News is an independent nonprofit and is not affiliated with the United Nations.</p>"
-        )
+        return _missing(source)
 
     if source == "generate" or source == "fixed":
         if "forward_look" in slot_name or "solutions" in slot_name or "next_steps" in slot_name:
-            return (
-                "<p>Constructive next steps and dialogue continue to shape how communities and youth engage with these challenges.</p>\n\n"
-                "<p>Ongoing coverage will track developments and the role of multilateral dialogue, local initiatives, and youth-led responses.</p>"
-            )
+            return _missing(f"generate.{slot_name}")
         if "headline" in slot_name:
             return (item.get("title") or item.get("raw_title") or "News update").strip()
         return ""

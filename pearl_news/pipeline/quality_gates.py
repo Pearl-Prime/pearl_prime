@@ -22,7 +22,17 @@ GATE_IDS = [
     "sdg_un_accuracy",
     "promotional_tone_detector",
     "un_endorsement_detector",
+    "atoms_present",
 ]
+
+# Sentinel emitted by pearl_news/pipeline/article_assembler.py when a slot's
+# source data (teacher pack, SDG ref, generated text) cannot be resolved.
+# Format in body / slot value: "__MISSING_ATOM__:<source_key>".
+# Any article whose body or slot values contain this marker MUST be blocked
+# from publish — the prior behavior (shipping generic writer-spec failure-mode
+# filler such as "Young people are increasingly affected by...") created the
+# 2026-05-15 "$1.8 billion humanitarian" duplicate-publish incident.
+_MISSING_ATOM_MARKER = "__MISSING_ATOM__"
 
 
 def _load_legal_boundary(config_root: Path) -> list[str]:
@@ -74,6 +84,23 @@ def _run_gates_on_article(
 
     # 5) un_endorsement_detector: blocklist again (same negated allowance)
     results["un_endorsement_detector"] = "FAIL" if blocklist_fail else "PASS"
+
+    # 6) atoms_present: reject articles where article_assembler emitted the
+    # __MISSING_ATOM__ sentinel because a teacher×topic pack or SDG ref was
+    # missing. Check both the rendered content and the explicit list the
+    # assembler appends to item["_atoms_missing"] so the gate fires even if
+    # downstream v52 render strips the marker.
+    raw_content = item.get("content") or item.get("content_plain") or ""
+    has_marker = _MISSING_ATOM_MARKER in raw_content
+    flagged_list = item.get("_atoms_missing") or []
+    if isinstance(flagged_list, list) and flagged_list:
+        has_marker = True
+    # Also scan v52 slot values if present
+    for slot_value in (item.get("_v52_slots") or {}).values():
+        if isinstance(slot_value, str) and _MISSING_ATOM_MARKER in slot_value:
+            has_marker = True
+            break
+    results["atoms_present"] = "FAIL" if has_marker else "PASS"
 
     return results
 
