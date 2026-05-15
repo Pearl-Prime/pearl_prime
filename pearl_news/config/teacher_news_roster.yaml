@@ -10,11 +10,14 @@
 
 schema_version: 1
 
-# Active Pearl News teachers (per operator, 2026-05-15):
+# Active Pearl News teachers (per operator, 2026-05-16):
 #   ja:    joshin, junko, miki, omote
 #   zh-cn: master_feung, master_wu
 #   en:    sai_ma, master_sha, ahjan, maat
-# Non-active (retained for legacy compatibility; no Pearl News authoring): ra, pamela_fellows
+# REMOVED 2026-05-16: pamela_fellows, ra — both teachers are Pearl_Prime-only
+# (bestseller-pipeline). They are NOT eligible for Pearl News news article
+# generation. Existing teacher_topic_packs/teachers/{pamela_fellows,ra}/ are
+# inert without roster registration. Re-adding requires operator approval.
 
 teachers:
   ahjan:
@@ -41,13 +44,7 @@ teachers:
     news_topics: [mental_health, climate, education, peace_conflict, partnerships]
     attribution_template: "From within the Hindu Vishnuswami lineage, Sai Maa teaches that"
 
-  ra:
-    display_name: "Ra"
-    tradition: "Nondual witnessing awareness (I AM inquiry; Ra Netjer)"
-    tradition_short: "Nondual witnessing"
-    region_fit: [english, global]
-    news_topics: [peace_conflict, inequality, mental_health, partnerships]
-    attribution_template: "From within the nondual witnessing tradition, Ra teaches that"
+  # ra: REMOVED 2026-05-16 (Pearl_Prime-only; see header notes)
 
   junko:
     display_name: "Junko"
@@ -73,13 +70,7 @@ teachers:
     news_topics: [mental_health, peace_conflict, education, economy_work, climate]
     attribution_template: "From within the Taoist geomancy tradition, Master Wu teaches that"
 
-  pamela_fellows:
-    display_name: "Pamela Fellows"
-    tradition: "Heartfulness Coaching (beyond mindfulness; embodied awakening)"
-    tradition_short: "Heartfulness Coaching"
-    region_fit: [english, global]
-    news_topics: [inequality, mental_health, peace_conflict, partnerships, education]
-    attribution_template: "From within the Heartfulness Coaching tradition, Pamela Fellows teaches that"
+  # pamela_fellows: REMOVED 2026-05-16 (Pearl_Prime-only; see header notes)
 
   joshin:
     display_name: "Joshin"

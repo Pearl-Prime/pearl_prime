@@ -90,9 +90,8 @@ TEACHER_BATCH_PLAN: dict[str, dict[str, str]] = {
     "master_wu": {"topic": "education", "template_id": "youth_feature"},
     "miki": {"topic": "climate", "template_id": "hard_news_spiritual_response"},
     "omote": {"topic": "peace_conflict", "template_id": "hard_news_spiritual_response"},
-    "pamela_fellows": {"topic": "mental_health", "template_id": "youth_feature"},
-    "ra": {"topic": "peace_conflict", "template_id": "hard_news_spiritual_response"},
     "sai_ma": {"topic": "mental_health", "template_id": "explainer_context"},
+    # pamela_fellows + ra REMOVED 2026-05-16 (Pearl_Prime-only, not Pearl News).
 }
 
 
@@ -485,11 +484,22 @@ def main() -> int:
     (slots_dir / "completed").mkdir(parents=True, exist_ok=True)
 
     live_items_by_topic = _load_live_items(args.live_limit)
-    active_teachers = list_active_teacher_ids(REPO_ROOT)
+    # Pearl News uses ITS OWN roster (teacher_news_roster.yaml) as the source of
+    # truth for who is eligible to author a Pearl News article. Pearl_Prime's
+    # global active list (list_active_teacher_ids) may include teachers who are
+    # active for the bestseller pipeline but NOT for Pearl News (e.g.,
+    # pamela_fellows, ra — see 2026-05-16 operator directive). Intersect the
+    # two sets so Pearl_Prime-only teachers can't leak into a Pearl News batch.
+    _pearl_prime_active = set(list_active_teacher_ids(REPO_ROOT))
+    _pearl_news_roster = set(_load_teacher_roster_topics().keys())
+    active_teachers = [t for t in list_active_teacher_ids(REPO_ROOT) if t in _pearl_news_roster]
+    if not active_teachers:
+        print(f"Error: no active teachers found in Pearl News roster (teacher_news_roster.yaml)", file=sys.stderr)
+        return 1
 
     if args.teacher:
         if args.teacher not in active_teachers:
-            print(f"Warning: --teacher={args.teacher} not in active teachers, proceeding anyway", file=sys.stderr)
+            print(f"Warning: --teacher={args.teacher} not in Pearl News roster, proceeding anyway", file=sys.stderr)
         active_teachers = [args.teacher]
     elif args.teacher_set:
         if args.teacher_set.lower() == "all":

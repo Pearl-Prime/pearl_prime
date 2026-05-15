@@ -46,15 +46,18 @@ logger = logging.getLogger("pearl_news.daily_cycle")
 # ---------------------------------------------------------------------------
 # Teacher × language (matches TEACHER × LANGUAGE MATRIX in spec)
 # ---------------------------------------------------------------------------
+# Pearl News active teacher → language map.
+# 2026-05-16: pamela_fellows and ra removed — both teachers are Pearl_Prime-only
+# (bestseller-pipeline). They no longer receive a Pearl News article each cycle.
 TEACHER_LANGUAGE: dict[str, str] = {
     "ahjan": "en",
     "sai_ma": "en",
-    "ra": "en",
-    "pamela_fellows": "en",
     "maat": "en",
+    "master_sha": "en",
     "junko": "ja",
     "miki": "ja",
     "joshin": "ja",
+    "omote": "ja",
     "master_feung": "zh-cn",
     "master_wu": "zh-cn",
 }
@@ -72,14 +75,15 @@ LLM_CALL_PAUSE = 5      # seconds between LLM calls (Pearl Star guard)
 TEACHER_TOPICS: dict[str, list[str]] = {
     "ahjan": ["climate", "mental_health", "education", "peace_conflict", "partnerships", "inequality"],
     "sai_ma": ["mental_health", "climate", "education", "peace_conflict", "partnerships"],
-    "ra": ["peace_conflict", "inequality", "mental_health", "partnerships"],
-    "pamela_fellows": ["inequality", "mental_health", "peace_conflict", "partnerships", "education"],
     "maat": ["inequality", "peace_conflict", "climate", "partnerships", "economy_work"],
+    "master_sha": ["climate", "education", "mental_health", "peace_conflict"],
     "junko": ["mental_health", "education", "economy_work", "climate"],
     "miki": ["climate", "mental_health", "education", "partnerships"],
     "joshin": ["mental_health", "education", "climate", "economy_work"],
+    "omote": ["peace_conflict", "mental_health", "education"],
     "master_feung": ["climate", "economy_work", "partnerships", "education", "inequality"],
     "master_wu": ["mental_health", "peace_conflict", "education", "economy_work", "climate"],
+    # ra + pamela_fellows REMOVED 2026-05-16 (Pearl_Prime-only).
 }
 
 # ---------------------------------------------------------------------------
