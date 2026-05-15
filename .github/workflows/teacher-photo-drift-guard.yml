@@ -1,0 +1,44 @@
+name: Teacher photo drift guard
+
+# Fails CI when teacher_pics/ or its brand-wizard mirror match the manga-render
+# overwrite signature (800x1000 dims OR PNG metadata containing generative-AI
+# provenance keys). See scripts/ci/check_teacher_photo_drift.py for details
+# and ~/.claude/.../memory/project_known_good_anchors.md for the drift autopsy.
+
+on:
+  pull_request:
+    paths:
+      - "teacher_pics/**"
+      - "brand-wizard-app/public/teacher_pics/**"
+      - "scripts/ci/check_teacher_photo_drift.py"
+      - ".github/workflows/teacher-photo-drift-guard.yml"
+  push:
+    branches: [main]
+    paths:
+      - "teacher_pics/**"
+      - "brand-wizard-app/public/teacher_pics/**"
+
+jobs:
+  check:
+    name: Check teacher photos for manga drift
+    runs-on: ubuntu-latest
+    steps:
+      # NOTE: lfs: true would block when the repo exceeds its LFS budget.
+      # The check_teacher_photo_drift.py script gracefully WARN-and-skips
+      # LFS pointer files; real protection lives in pre-commit / local dev
+      # environments where LFS objects are pulled. The required-check
+      # workflows (Core tests, Release gates, EI V2 gates, Verify governance)
+      # do not depend on LFS objects either.
+      - name: Checkout (pointer-only — script handles LFS pointers)
+        uses: actions/checkout@v4
+      - name: Best-effort LFS pull (continues on budget exhaustion)
+        run: git lfs pull --include="teacher_pics/*,brand-wizard-app/public/teacher_pics/*" || echo "LFS pull skipped (budget or auth issue); script will WARN-skip pointer files"
+        continue-on-error: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Pillow
+        run: python -m pip install --upgrade pip Pillow
+      - name: Run drift guard
+        run: python3 scripts/ci/check_teacher_photo_drift.py
