@@ -4702,9 +4702,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 </div>
 </div>
         </div>
-        <div class="manga-topic-extra" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
-          <img src="assets/manga_covers/junko_cover_sleep_anxiety.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Sleep anxiety" style="height:200px;border-radius:4px;border:1px solid var(--border)">
-          <img src="assets/manga_covers/junko_cover_social_anxiety.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Social anxiety" style="height:200px;border-radius:4px;border:1px solid var(--border)">
+        <!-- Topic-cover thumbnails — hidden by default; the same files are
+             included in MANGA_IMGS["junko"] so clicking the Manga format card
+             cycles through them along with the portrait + scene. -->
+        <div class="manga-topic-extra" style="display:none">
+          <img src="assets/manga_covers/junko_cover_sleep_anxiety.png" loading="lazy" alt="Topic cover: Sleep anxiety">
+          <img src="assets/manga_covers/junko_cover_social_anxiety.png" loading="lazy" alt="Topic cover: Social anxiety">
         </div>
       </div>
 
@@ -6322,9 +6325,10 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 </div>
 </div>
         </div>
-        <div class="manga-topic-extra" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
-          <img src="assets/manga_covers/master_wu_cover_boundaries.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Boundaries" style="height:200px;border-radius:4px;border:1px solid var(--border)">
-          <img src="assets/manga_covers/master_wu_cover_burnout.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Burnout" style="height:200px;border-radius:4px;border:1px solid var(--border)">
+        <!-- Topic-cover thumbnails — hidden by default; included in MANGA_IMGS["master_wu"] cycle. -->
+        <div class="manga-topic-extra" style="display:none">
+          <img src="assets/manga_covers/master_wu_cover_boundaries.png" loading="lazy" alt="Topic cover: Boundaries">
+          <img src="assets/manga_covers/master_wu_cover_burnout.png" loading="lazy" alt="Topic cover: Burnout">
         </div>
       </div>
 
@@ -7838,9 +7842,10 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 </div>
 </div>
         </div>
-        <div class="manga-topic-extra" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
-          <img src="assets/manga_covers/joshin_cover_depression.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Depression" style="height:200px;border-radius:4px;border:1px solid var(--border)">
-          <img src="assets/manga_covers/joshin_cover_overthinking.png" loading="lazy" onerror="this.style.display='none'" alt="Topic cover: Overthinking" style="height:200px;border-radius:4px;border:1px solid var(--border)">
+        <!-- Topic-cover thumbnails — hidden by default; included in MANGA_IMGS["joshin"] cycle. -->
+        <div class="manga-topic-extra" style="display:none">
+          <img src="assets/manga_covers/joshin_cover_depression.png" loading="lazy" alt="Topic cover: Depression">
+          <img src="assets/manga_covers/joshin_cover_overthinking.png" loading="lazy" alt="Topic cover: Overthinking">
         </div>
       </div>
 
@@ -10363,11 +10368,11 @@ sections.forEach(section => observer.observe(section));
 
 var MANGA_IMGS = {
   "ahjan": ["assets/manga_covers/ahjan_portrait.png","assets/manga_covers/ahjan_scene.png"],
-  "joshin": ["assets/manga_covers/joshin_portrait.png","assets/manga_covers/joshin_scene.png"],
-  "junko": ["assets/manga_covers/junko_portrait.png","assets/manga_covers/junko_scene.png"],
+  "joshin": ["assets/manga_covers/joshin_portrait.png","assets/manga_covers/joshin_scene.png","assets/manga_covers/joshin_cover_depression.png","assets/manga_covers/joshin_cover_overthinking.png"],
+  "junko": ["assets/manga_covers/junko_portrait.png","assets/manga_covers/junko_scene.png","assets/manga_covers/junko_cover_sleep_anxiety.png","assets/manga_covers/junko_cover_social_anxiety.png"],
   "miki": ["assets/manga_covers/miki_portrait.png","assets/manga_covers/miki_scene.png"],
   "omote": ["assets/manga_covers/omote_portrait.png","assets/manga_covers/omote_scene.png"],
-  "master_wu": ["assets/manga_covers/master_wu_portrait.png","assets/manga_covers/master_wu_scene.png"],
+  "master_wu": ["assets/manga_covers/master_wu_portrait.png","assets/manga_covers/master_wu_scene.png","assets/manga_covers/master_wu_cover_boundaries.png","assets/manga_covers/master_wu_cover_burnout.png"],
   "maat": ["assets/manga_covers/maat_portrait.png","assets/manga_covers/maat_scene.png"],
   "ra": ["assets/manga_covers/ra_portrait.png","assets/manga_covers/ra_scene.png"],
   "sai_ma": ["assets/manga_covers/sai_ma_portrait.png","assets/manga_covers/sai_ma_scene.png"],
