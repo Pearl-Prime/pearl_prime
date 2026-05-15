@@ -3,91 +3,112 @@
 # Used by teacher_resolver.py to pick a named teacher per article.
 # Policy: One named teacher per article; attributed by name + tradition.
 # Spec ref: PEARL_NEWS_WRITER_SPEC.md §6 (commentary exception applies to all templates when teacher atoms present).
+# Authority: tradition / tradition_short / attribution_template MUST match each teacher's
+#   SOURCE_OF_TRUTH/teacher_banks/<id>/doctrine/doctrine.yaml — doctrine wins on conflict.
+# Canonical language assignment: pearl_news/config/teacher_language_map.yaml
+#   (region_fit below is informational only; teacher_language_map is enforced by the pipeline).
 
 schema_version: 1
 
-# Language/region fit per teacher (helps match language-specific articles)
-# Japan-fit teachers: Junko, Miki, Joshin (Japanese traditions)
-# China-fit teachers: Master Feung, Master Wu (Chinese traditions)
-# English-fit teachers: Ahjan, Sai Maa, Ra, Pamela Fellows, Maat (wide international reach)
+# Active Pearl News teachers (per operator, 2026-05-15):
+#   ja:    joshin, junko, miki, omote
+#   zh-cn: master_feung, master_wu
+#   en:    sai_ma, master_sha, ahjan, maat
+# Non-active (retained for legacy compatibility; no Pearl News authoring): ra, pamela_fellows
 
 teachers:
   ahjan:
     display_name: "Ahjan"
-    tradition: "Theravada Buddhist"
-    tradition_short: "Buddhist"
+    tradition: "Tantric Buddhist"
+    tradition_short: "Tantric Buddhist"
     region_fit: [japan, english, global]
     news_topics: [climate, mental_health, education, peace_conflict, partnerships, inequality]
-    attribution_template: "From within the Theravada Buddhist tradition, Ahjan sensei teaches that"
+    attribution_template: "From within the Tantric Buddhist tradition, Ahjan sensei teaches that"
 
   master_feung:
     display_name: "Master Feung"
-    tradition: "Taoist"
-    tradition_short: "Taoist"
+    tradition: "Chinese wisdom traditions (Grand Painting teaching)"
+    tradition_short: "Chinese wisdom"
     region_fit: [china, english, global]
     news_topics: [climate, economy_work, partnerships, education, inequality]
-    attribution_template: "From within the Taoist tradition, Master Feung teaches that"
+    attribution_template: "From within the Chinese wisdom tradition, Master Feung teaches that"
 
   sai_ma:
     display_name: "Sai Maa"
-    tradition: "Vedic Hindu"
-    tradition_short: "Vedic"
+    tradition: "Hindu Vishnuswami lineage (Jagadguru, Shakti transmission)"
+    tradition_short: "Hindu Vishnuswami"
     region_fit: [english, global]
     news_topics: [mental_health, climate, education, peace_conflict, partnerships]
-    attribution_template: "From within the Vedic tradition, Sai Maa teaches that"
+    attribution_template: "From within the Hindu Vishnuswami lineage, Sai Maa teaches that"
 
   ra:
     display_name: "Ra"
-    tradition: "African spiritual"
-    tradition_short: "African spiritual"
+    tradition: "Nondual witnessing awareness (I AM inquiry; Ra Netjer)"
+    tradition_short: "Nondual witnessing"
     region_fit: [english, global]
     news_topics: [peace_conflict, inequality, mental_health, partnerships]
-    attribution_template: "From within the African spiritual tradition, Ra teaches that"
+    attribution_template: "From within the nondual witnessing tradition, Ra teaches that"
 
   junko:
     display_name: "Junko"
-    tradition: "Zen Buddhist"
-    tradition_short: "Zen"
+    tradition: "Channeling and ascended masters (light language)"
+    tradition_short: "Channeling tradition"
     region_fit: [japan, english, global]
     news_topics: [mental_health, education, economy_work, climate]
-    attribution_template: "From within the Zen Buddhist tradition, Junko teaches that"
+    attribution_template: "From within the channeling tradition, Channeler Junko teaches that"
 
   miki:
     display_name: "Miki"
-    tradition: "Shinto"
-    tradition_short: "Shinto"
+    tradition: "Japanese light healing (Kurama-yama lineage; starseed and ascended masters)"
+    tradition_short: "Japanese light healing"
     region_fit: [japan, global]
     news_topics: [climate, mental_health, education, partnerships]
-    attribution_template: "From within the Shinto tradition, Miki teaches that"
+    attribution_template: "From within the Japanese light healing tradition, Miki teaches that"
 
   master_wu:
     display_name: "Master Wu"
-    tradition: "Chan Buddhist"
-    tradition_short: "Chan Buddhist"
+    tradition: "Taoist geomancy (Dragon Veins / Long Mai; earth meridian activation)"
+    tradition_short: "Taoist geomancy"
     region_fit: [china, english, global]
     news_topics: [mental_health, peace_conflict, education, economy_work, climate]
-    attribution_template: "From within the Chan Buddhist tradition, Master Wu teaches that"
+    attribution_template: "From within the Taoist geomancy tradition, Master Wu teaches that"
 
   pamela_fellows:
     display_name: "Pamela Fellows"
-    tradition: "Christian contemplative"
-    tradition_short: "Christian contemplative"
+    tradition: "Heartfulness Coaching (beyond mindfulness; embodied awakening)"
+    tradition_short: "Heartfulness Coaching"
     region_fit: [english, global]
     news_topics: [inequality, mental_health, peace_conflict, partnerships, education]
-    attribution_template: "From within the Christian contemplative tradition, Pamela Fellows teaches that"
+    attribution_template: "From within the Heartfulness Coaching tradition, Pamela Fellows teaches that"
 
   joshin:
     display_name: "Joshin"
-    tradition: "Rinzai Zen"
-    tradition_short: "Rinzai Zen"
+    tradition: "Shingon Esoteric Buddhism (Mikkyo; Sokushin Jobutsu; Sanmitsu)"
+    tradition_short: "Shingon Esoteric Buddhism"
     region_fit: [japan, english, global]
     news_topics: [mental_health, education, climate, economy_work]
-    attribution_template: "From within the Rinzai Zen tradition, Joshin teaches that"
+    attribution_template: "From within the Shingon Esoteric Buddhism tradition, Joshin teaches that"
 
   maat:
     display_name: "Ma'at"
-    tradition: "Ancient Egyptian (Ma'at principle)"
-    tradition_short: "Ma'at"
+    tradition: "Naqshbandi Sufi (Hazrat Inayat Khan lineage; fanaa; dhikr)"
+    tradition_short: "Naqshbandi Sufi"
     region_fit: [english, global]
     news_topics: [inequality, peace_conflict, climate, partnerships, economy_work]
-    attribution_template: "From within the Ma'at tradition of cosmic justice and truth, Ma'at teaches that"
+    attribution_template: "From within the Naqshbandi Sufi tradition, Ma'at teaches that"
+
+  omote:
+    display_name: "Omote"
+    tradition: "Yamato-gokoro awakening (Japanese spiritual-historical navigation; Project Phoenix lineage)"
+    tradition_short: "Yamato-gokoro awakening"
+    region_fit: [japan, global]
+    news_topics: [peace_conflict, mental_health, education]
+    attribution_template: "From within the Yamato-gokoro awakening tradition, Omote Sensei teaches that"
+
+  master_sha:
+    display_name: "Master Sha"
+    tradition: "Tao Grandmaster (soul healing; Tao Calligraphy high-frequency field; Tao Transformative Technologies)"
+    tradition_short: "Tao Grandmaster"
+    region_fit: [english, global]
+    news_topics: [climate, education, mental_health, peace_conflict]
+    attribution_template: "From within the Tao Grandmaster tradition, Dr. and Master Sha teaches that"

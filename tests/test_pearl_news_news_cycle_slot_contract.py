@@ -26,7 +26,7 @@ from scripts.run_pearl_news_teacher_batch import _build_item, TOPIC_FIXTURES, TE
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 TEMPLATE_TEST_CONFIGS = {
-    "hard_news_spiritual_response": {"teacher_id": "channeler_junko", "topic": "climate"},
+    "hard_news_spiritual_response": {"teacher_id": "junko", "topic": "climate"},
     "commentary": {"teacher_id": "ahjan", "topic": "climate"},
     "explainer_context": {"teacher_id": "maat", "topic": "peace_conflict"},
     "youth_feature": {"teacher_id": "joshin", "topic": "education"},
@@ -272,7 +272,7 @@ class TestBuildSlotContractCommentary:
 
 class TestApplyCompletedContract:
     def test_merges_deterministic_and_written_slots(self) -> None:
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, plan = build_slot_contract(item, REPO_ROOT)
         contract["required_slots"] = {
             "news_peg": "Fresh UN reporting ties the climate shift to student routine disruption.",
@@ -424,7 +424,7 @@ class TestContractRequiredFieldsCoverage:
             assert field in contract, f"missing required field: {field}"
 
     def test_contract_has_source_metadata(self) -> None:
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, _ = build_slot_contract(item, REPO_ROOT)
 
         assert "source_url" in contract
@@ -453,7 +453,7 @@ class TestDeterministicContextPreservation:
         assert isinstance(ctx["ordered_sections"], list)
 
     def test_deterministic_context_contains_pack_path(self) -> None:
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, _ = build_slot_contract(item, REPO_ROOT)
 
         ctx = contract["deterministic_context"]

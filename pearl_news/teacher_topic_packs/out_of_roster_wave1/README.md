@@ -5,6 +5,6 @@ These packs were authored for the launch-first topic set but sit **outside** the
 | File | Teacher | Topic | Reason |
 |------|---------|-------|--------|
 | master_sha_economy_work.yaml | master_sha | economy_work | master_sha `news_topics`: mental_health, climate, education, peace_conflict only |
-| channeler_junko_peace_conflict.yaml | channeler_junko | peace_conflict | channeler_junko `news_topics`: mental_health, education, economy_work, climate only |
+| junko_peace_conflict.yaml | junko | peace_conflict | junko `news_topics`: mental_health, education, economy_work, climate only |
 
 Do not reference these from the deterministic pack loader for launch.

@@ -172,7 +172,7 @@ class TestMockQwenProviderInterface:
         assert completed_path.exists()
 
     def test_provider_fills_only_required_slots(self, tmp_path: Path) -> None:
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, _ = build_slot_contract(item, REPO_ROOT)
         original_required_slots = set(contract["required_slots"].keys())
         write_pending_contract(contract, tmp_path)
@@ -216,7 +216,7 @@ class TestMockQwenProviderInterface:
 
 class TestQwenProviderCompletedContractValidation:
     def test_qwen_completed_contract_validates(self, tmp_path: Path) -> None:
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, _ = build_slot_contract(item, REPO_ROOT)
         write_pending_contract(contract, tmp_path)
 
@@ -229,7 +229,7 @@ class TestQwenProviderCompletedContractValidation:
         assert errors == [], f"Qwen-filled contract has errors: {errors}"
 
     @pytest.mark.parametrize("template_id,teacher_id,topic", [
-        ("hard_news_spiritual_response", "channeler_junko", "climate"),
+        ("hard_news_spiritual_response", "junko", "climate"),
         ("commentary", "ahjan", "climate"),
         ("explainer_context", "maat", "peace_conflict"),
         ("youth_feature", "joshin", "education"),
@@ -260,7 +260,7 @@ class TestQwenProviderCompletedContractValidation:
 class TestQwenProviderAssemblerIntegration:
     def test_qwen_output_usable_by_assembler(self, tmp_path: Path) -> None:
         """Verify Qwen-filled contract can be consumed by apply_completed_contract."""
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, plan = build_slot_contract(item, REPO_ROOT)
         write_pending_contract(contract, tmp_path)
 
@@ -280,7 +280,7 @@ class TestQwenProviderAssemblerIntegration:
 
     def test_qwen_output_preserves_deterministic_teacher_slots(self, tmp_path: Path) -> None:
         """Verify deterministic teacher-meaning slots are not overwritten."""
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, plan = build_slot_contract(item, REPO_ROOT)
 
         deterministic_teacher_intro = plan["slots"].get("teacher_intro", "")
@@ -316,7 +316,7 @@ class TestQwenProviderDoesNotBypassSlotFile:
 
     def test_assembler_reads_from_file_not_provider(self, tmp_path: Path) -> None:
         """Verify assembly uses load_completed_contract, not provider directly."""
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, plan = build_slot_contract(item, REPO_ROOT)
         write_pending_contract(contract, tmp_path)
 

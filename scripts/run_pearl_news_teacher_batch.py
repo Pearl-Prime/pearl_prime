@@ -82,7 +82,7 @@ TOPIC_CONCEPT_MAP = {
 # direct callers of _build_item() that pass it explicitly.
 TEACHER_BATCH_PLAN: dict[str, dict[str, str]] = {
     "ahjan": {"topic": "climate", "template_id": "commentary"},
-    "channeler_junko": {"topic": "climate", "template_id": "hard_news_spiritual_response"},
+    "junko": {"topic": "climate", "template_id": "hard_news_spiritual_response"},
     "joshin": {"topic": "education", "template_id": "youth_feature"},
     "maat": {"topic": "peace_conflict", "template_id": "explainer_context"},
     "master_feung": {"topic": "education", "template_id": "hard_news_spiritual_response"},

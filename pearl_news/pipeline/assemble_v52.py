@@ -494,7 +494,7 @@ TEACHER_DB: dict[str, dict[str, Any]] = {
         "cta_body": "Your patterns are not who you are \u2014 they are what runs when awareness is elsewhere. When you see conditioning clearly, it loses its grip. Awakening is not a destination. It is what is already here when the noise settles.",
         "micro_action": "72-hour micro-action: Three times each day, pause and ask: what pattern is running right now? Name it. Then choose one response that comes from clarity rather than habit.",
     },
-    "channeler_junko": {
+    "junko": {
         "tradition": "Contemporary Japanese channeling and light-language spirituality",
         "tradition_short": "the Japanese channeling tradition",
         "credential": "channeler and light-language transmitter",

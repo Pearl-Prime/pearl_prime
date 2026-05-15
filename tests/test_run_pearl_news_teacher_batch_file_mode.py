@@ -118,7 +118,7 @@ class TestStopAfterContracts:
 
     def test_stop_after_contracts_all_required_slots_empty(self, tmp_path: Path) -> None:
         """Verify pending contracts have empty required slots."""
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, _ = build_slot_contract(item, REPO_ROOT)
 
         for slot_value in contract["required_slots"].values():
@@ -148,7 +148,7 @@ class TestFileSlotSourceMode:
 
     def test_file_mode_loads_completed_contract(self, tmp_path: Path) -> None:
         """Verify file mode loads completed contracts from disk."""
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, plan = build_slot_contract(item, REPO_ROOT)
 
         contract["required_slots"] = {
@@ -170,7 +170,7 @@ class TestFileSlotSourceMode:
 
     def test_file_mode_applies_completed_contract(self, tmp_path: Path) -> None:
         """Verify file mode applies completed contracts to items."""
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, plan = build_slot_contract(item, REPO_ROOT)
 
         contract["required_slots"] = {
@@ -187,7 +187,7 @@ class TestFileSlotSourceMode:
 
     def test_file_mode_preserves_deterministic_slots(self, tmp_path: Path) -> None:
         """Verify file mode preserves deterministic teacher-meaning slots."""
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, plan = build_slot_contract(item, REPO_ROOT)
 
         original_teacher_intro = plan["slots"].get("teacher_intro", "")
@@ -244,7 +244,7 @@ class TestFileModeNoModelDependency:
 
     def test_file_mode_apply_contract_is_deterministic(self, tmp_path: Path) -> None:
         """Verify applying completed contract doesn't call any LLM APIs."""
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, plan = build_slot_contract(item, REPO_ROOT)
         contract["required_slots"] = {
             "news_peg": "Test content.",
@@ -264,7 +264,7 @@ class TestManifestRecordsSlotSource:
 
     def test_merged_item_has_slot_source(self, tmp_path: Path) -> None:
         """Verify merged item includes _slot_source metadata."""
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, plan = build_slot_contract(item, REPO_ROOT)
         contract["required_slots"] = {
             "news_peg": "Content.",
@@ -299,7 +299,7 @@ class TestAutoSlotSourceMode:
 
     def test_auto_mode_uses_file_when_available(self, tmp_path: Path) -> None:
         """Verify auto mode uses file when completed contract exists."""
-        item = _sample_item("channeler_junko", "climate", "hard_news_spiritual_response")
+        item = _sample_item("junko", "climate", "hard_news_spiritual_response")
         contract, plan = build_slot_contract(item, REPO_ROOT)
 
         contract["required_slots"] = {
@@ -341,7 +341,7 @@ class TestAllTemplatesCoverage:
     def test_template_contract_builds_successfully(self, template_id: str) -> None:
         """Verify contract builds for each main template type."""
         config = {
-            "hard_news_spiritual_response": ("channeler_junko", "climate"),
+            "hard_news_spiritual_response": ("junko", "climate"),
             "commentary": ("ahjan", "climate"),
             "explainer_context": ("maat", "peace_conflict"),
             "youth_feature": ("joshin", "education"),
@@ -367,7 +367,7 @@ class TestAllTemplatesCoverage:
     def test_template_contract_validates(self, template_id: str) -> None:
         """Verify built contracts pass validation for each template."""
         config = {
-            "hard_news_spiritual_response": ("channeler_junko", "climate"),
+            "hard_news_spiritual_response": ("junko", "climate"),
             "commentary": ("ahjan", "climate"),
             "explainer_context": ("maat", "peace_conflict"),
             "youth_feature": ("joshin", "education"),

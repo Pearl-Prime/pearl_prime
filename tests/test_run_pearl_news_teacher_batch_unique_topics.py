@@ -4,7 +4,7 @@ allocation and per-teacher language assignment.
 
 Bug being guarded:
   Pre-fix, TEACHER_BATCH_PLAN hardcoded teacher->topic with collisions
-  (e.g., ahjan/channeler_junko/miki all assigned "climate"). A batch run
+  (e.g., ahjan/junko/miki all assigned "climate"). A batch run
   picking those three teachers produced 3 articles on the SAME subject with
   3 different teachers. The pre-fix code also hardcoded item["language"] = "en"
   for every teacher, ignoring teacher_language_map.yaml.
@@ -46,7 +46,7 @@ class TestAllocateUniqueTopics:
     def test_three_teachers_get_three_unique_topics(self) -> None:
         """Operator's complaint reproduced + fix verified.
 
-        Pre-fix, picking ahjan + channeler_junko + miki returned 3x "climate".
+        Pre-fix, picking ahjan + junko + miki returned 3x "climate".
         Post-fix, the allocator returns 3 distinct topics drawn from each
         teacher's own roster.
         """
