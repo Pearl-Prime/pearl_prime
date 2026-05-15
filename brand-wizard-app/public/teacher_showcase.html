@@ -231,6 +231,20 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
     transition: all .15s;
   }
   #choose-bar-btn:hover { background: #b45309; border-color: #b45309; }
+  /* Composite (no teacher) banner — always visible at top of main content */
+  #composite-banner {
+    margin: 0 0 24px 0; padding: 16px 20px; border-radius: 10px;
+    background: linear-gradient(135deg, rgba(245,166,35,0.08), rgba(180,83,9,0.06));
+    border: 1px solid rgba(245,166,35,0.35);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  #composite-banner-text { color: var(--text-secondary, #cbd5e1); font-size: 14px; line-height: 1.4; flex: 1 1 280px; }
+  #composite-banner-btn {
+    background: transparent; color: #f5a623; border: 1px solid #f5a623;
+    padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  #composite-banner-btn:hover { background: #f5a623; color: #0a0a0a; }
   @media (max-width: 640px) {
     #choose-bar { left: 0; flex-direction: column; gap: 8px; text-align: center; }
   }
@@ -363,6 +377,12 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 <main class="main" style="padding-top:20px">
   <h1 class="page-title">Teacher Showcase</h1>
   <p class="page-subtitle">Media Portfolio Examples</p>
+
+  <!-- Composite mode CTA: skip teacher selection entirely -->
+  <div id="composite-banner">
+    <div id="composite-banner-text"><span id="composite-banner-hint">Author all books for this brand without a teacher voice</span></div>
+    <button id="composite-banner-btn" onclick="chooseComposite()">Composite mode (no teacher) →</button>
+  </div>
 
   <!-- Teacher Sections -->
 
@@ -10210,10 +10230,14 @@ function filterFormat(format) {
 
 // ── Teacher selection ───────────────────────────────────────────────────────
 const TEACHER_LABELS = {
-  en: { select: 'Select', chosen: 'Selected', barLabel: 'Viewing — ', barBtn: 'Choose This Teacher →' },
-  ja: { select: '選択する', chosen: '選択済み', barLabel: '表示中 — ', barBtn: 'このティーチャーを選ぶ →' },
-  zh: { select: '选择', chosen: '已选择', barLabel: '正在查看 — ', barBtn: '选择此老师 →' },
-  tw: { select: '選擇', chosen: '已選擇', barLabel: '正在查看 — ', barBtn: '選擇此老師 →' },
+  en: { select: 'Select', chosen: 'Selected', barLabel: 'Viewing — ', barBtn: 'Choose This Teacher →',
+        composite: 'Composite mode (no teacher) →', compositeHint: 'Author all books for this brand without a teacher voice' },
+  ja: { select: '選択する', chosen: '選択済み', barLabel: '表示中 — ', barBtn: 'このティーチャーを選ぶ →',
+        composite: 'コンポジット（教師なし） →', compositeHint: 'この銘柄の全ての書籍を、教師の声なしで執筆' },
+  zh: { select: '选择', chosen: '已选择', barLabel: '正在查看 — ', barBtn: '选择此老师 →',
+        composite: '综合模式（无教师） →', compositeHint: '为该品牌创作所有书籍，不使用教师之声' },
+  tw: { select: '選擇', chosen: '已選擇', barLabel: '正在查看 — ', barBtn: '選擇此老師 →',
+        composite: '綜合模式（無教師） →', compositeHint: '為此品牌創作所有書籍，不使用教師之聲' },
 };
 function _teacherLang() {
   const loc = localStorage.getItem('pearl_prime_locale') || navigator.language || 'en';
@@ -10252,6 +10276,21 @@ function chooseTeacher(id, name) {
   document.querySelectorAll('.nav-item').forEach(function (n) { n.classList.remove('active'); });
   const navFor = document.querySelector('.nav-item[data-teacher="' + id + '"]');
   if (navFor) navFor.classList.add('active');
+  // Navigate to wizard with the selected teacher (short delay so the user sees the
+  // "Selected" feedback before redirect). Prior bug: user had to scroll to find the
+  // sticky bar to actually proceed — this fixes that.
+  setTimeout(function () {
+    window.location.href = _wizardFile() + '?teacher=' + encodeURIComponent(id);
+  }, 280);
+}
+// Composite mode: skip teacher selection entirely. The wizard reads
+// phoenix_book_mode from localStorage AND honors ?mode=composite as a URL fallback.
+// YAML emit shape: teacher_mode: { mode: composite, selected_teacher: null, teacher_boost_pct: 0 }
+function chooseComposite() {
+  localStorage.setItem('phoenix_book_mode', JSON.stringify({
+    mode: 'composite', teacher: null
+  }));
+  window.location.href = _wizardFile() + '?mode=composite';
 }
 function updateChooseBar(id, name) {
   const lang = _teacherLang();
@@ -10294,6 +10333,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('choose-bar-btn').textContent = L.barBtn;
   document.getElementById('choose-bar-label').textContent = L.barLabel;
+  // Composite banner: locale-aware
+  const cBtn = document.getElementById('composite-banner-btn');
+  const cHint = document.getElementById('composite-banner-hint');
+  if (cBtn) cBtn.textContent = L.composite;
+  if (cHint) cHint.textContent = L.compositeHint;
   wireSidebarTeacherNav();
 });
 

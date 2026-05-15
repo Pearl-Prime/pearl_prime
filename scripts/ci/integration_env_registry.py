@@ -43,7 +43,8 @@ REGISTRY: list[tuple[str, str, bool, str]] = [
     ("ElevenLabs", "ELEVENLABS_API_KEY", False, "TTS (guided audio, journal prompts)"),
     # --- Infrastructure ---
     ("Cloudflare", "CLOUDFLARE_ACCOUNT_ID", False, "Workers AI + Pages"),
-    ("Cloudflare", "CLOUDFLARE_API_TOKEN", False, "Cloudflare API token"),
+    ("Cloudflare", "CLOUDFLARE_API_TOKEN", False, "Cloudflare API token. cfut_ prefix = Workers Builds (IP-locked to Cloudflare CI; CANNOT do Pages from a developer laptop)"),
+    ("Cloudflare", "CLOUDFLARE_API_TOKEN_PAGES", False, "Pages-scoped Custom token for local branch-preview deploys (must NOT have cfut_ prefix; create via dash.cloudflare.com/profile/api-tokens > Custom Token > Account:Cloudflare Pages:Edit, no IP filter)"),
     ("Cloudflare", "CLOUDFLARE_AI_API_TOKEN", False, "Workers AI inference token"),
     ("Cloudflare", "CLOUDFLARE_AI_BASE_URL", False, "Workers AI OpenAI-compat base URL (accounts/<ID>/ai/v1)"),
     ("Cloudflare", "CLOUDFLARE_AI_MODEL", False, "Workers AI model name (e.g. @cf/google/gemma-3-12b-it)"),

@@ -281,15 +281,51 @@ def select_variation_axes(angle_registry: dict, topic: str, persona: str,
 
 
 # ── Brand → teacher resolution ──────────────────────────────────────────────
-def build_brand_teacher_map(inputs: dict) -> dict[str, dict]:
+
+# Brand-admin "mode" contract.
+# Source: brand-wizard-app/src/BrandWizard.jsx:3287-3300 emit shape
+# (and the locale variants BrandWizard-{ja,tw,zh}.jsx:3245-3253).
+# - mode == "composite" → no teacher voice; teacher_id resolves to None and
+#   teacher_mode is False; planner treats the brand as a composite-tradition
+#   author. Aligns with scripts/catalog/music_mode_branch.py:96-128 where
+#   "composite" is a known catalog_pipeline_mode filter value.
+# - mode in {"teacher", "generalized", "named"} → a teacher_id is required;
+#   teacher_mode True iff the brand sits in the 12-teacher archetype list
+#   or is the Taiwan-only adi_da/bright_presence_tw pairing.
+# This shim lets brand-admin YAML emissions override the canonical teacher map
+# without disturbing the existing 12-teacher + zh-standard + adi_da defaults.
+BRAND_ADMIN_COMPOSITE_OVERRIDE_KEY = "teacher_mode"  # block name in admin YAML
+
+
+def resolve_brand_admin_mode(admin_entry: dict | None) -> str:
+    """Return 'composite' | 'teacher' from a brand-admin YAML's teacher_mode block.
+    Defaults to 'teacher' when the block is missing / malformed (back-compat)."""
+    if not isinstance(admin_entry, dict):
+        return "teacher"
+    block = admin_entry.get(BRAND_ADMIN_COMPOSITE_OVERRIDE_KEY) or {}
+    mode = (block.get("mode") or "").strip().lower()
+    return "composite" if mode == "composite" else "teacher"
+
+
+def build_brand_teacher_map(
+    inputs: dict,
+    brand_admin_overrides: dict[str, dict] | None = None,
+) -> dict[str, dict]:
     """
     Returns {brand_id: {"teacher_id": ..., "teacher_mode": bool}} for every brand
     referenced by any of the four target markets.
+
+    ``brand_admin_overrides`` (optional): {brand_id: brand_admin_yaml_dict}.
+    When a brand appears in overrides AND its teacher_mode.mode == "composite",
+    the planner skips teacher atom resolution for that brand (teacher_id=None,
+    teacher_mode=False). When absent or non-composite, the canonical defaults
+    below apply unchanged.
     """
     teacher_brand_archetypes = inputs["teacher_archetypes"]["data"].get(
         "teacher_brand_archetypes", []
     )
     matrix_zh = inputs["matrix_zh"]["data"].get("brands", {})
+    overrides = brand_admin_overrides or {}
 
     out: dict[str, dict] = {}
 
@@ -313,6 +349,14 @@ def build_brand_teacher_map(inputs: dict) -> dict[str, dict]:
         "teacher_id": "adi_da",
         "teacher_mode": True,
     }
+
+    # Brand-admin composite overrides (last write wins): if the admin selected
+    # "Composite (no teacher)" on teacher_showcase.html, force teacher_id=None
+    # and teacher_mode=False so downstream catalog generation skips teacher
+    # atom resolution and uses the composite-tradition path.
+    for brand_id, admin_entry in overrides.items():
+        if resolve_brand_admin_mode(admin_entry) == "composite":
+            out[brand_id] = {"teacher_id": None, "teacher_mode": False}
 
     return out
 

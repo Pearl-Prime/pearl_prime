@@ -3225,9 +3225,13 @@ function generateYAML(state) {
     const raw = localStorage.getItem("phoenix_book_mode");
     if (raw) teacherMode = JSON.parse(raw);
   } catch (_) {}
+  // Accept ?teacher= URL param (back-compat) and ?mode=composite (explicit composite entry).
   if (!teacherMode) {
-    const urlTeacher = new URLSearchParams(window.location.search).get("teacher");
+    const params = new URLSearchParams(window.location.search);
+    const urlTeacher = params.get("teacher");
+    const urlMode = params.get("mode");
     if (urlTeacher) teacherMode = { mode: "teacher", teacher: urlTeacher };
+    else if (urlMode === "composite") teacherMode = { mode: "composite", teacher: null };
   }
 
   let y = `# Brand Admin Application — ${ts}\n# Pearl Prime Brand Configuration\n\n`;
@@ -3379,6 +3383,20 @@ function IntroJourney({ onNext, onBack, onChooseTeacher }) {
             >
               {t("ui", "开始构建你的品牌")} <ArrowRight size={18} />
             </button>
+          </div>
+          {/* Composite mode — skip teacher selection entirely */}
+          <div className="mt-3 text-center">
+            <button
+              type="button"
+              onClick={() => {
+                try { localStorage.setItem("phoenix_book_mode", JSON.stringify({ mode: "composite", teacher: null })); } catch (_) {}
+                onNext();
+              }}
+              className="inline-flex items-center gap-2 rounded-2xl border border-amber-400/40 bg-transparent px-6 py-2.5 text-xs font-semibold text-amber-200 transition-all hover:bg-amber-500/10"
+            >
+              {t("ui", "或：综合模式（无教师）")} <ArrowRight size={14} />
+            </button>
+            <div className="mt-2 text-[10px] text-white/50">{t("ui", "为该品牌创作所有书籍，不使用教师之声")}</div>
           </div>
         </div>
       </div>
@@ -3569,10 +3587,12 @@ export default function BrandWizard() {
   const goToHowItWorks = () => { setPhase("intro"); setIntroPage(1); scrollTop(); };
   const goToTeacherShowcase = () => { window.location.href = "teacher_showcase.html"; };
 
-  // If ?teacher= in URL, skip intro
+  // If ?teacher= or ?mode=composite in URL, skip intro and jump straight to wizard step 1.
   useEffect(() => {
-    const urlTeacher = new URLSearchParams(window.location.search).get("teacher");
-    if (urlTeacher) { setPhase("wizard"); setStep(0); scrollTop(); }
+    const params = new URLSearchParams(window.location.search);
+    const urlTeacher = params.get("teacher");
+    const urlMode = params.get("mode");
+    if (urlTeacher || urlMode === "composite") { setPhase("wizard"); setStep(0); scrollTop(); }
   }, []);
 
   // INTRO: 0=welcome, 1=journey → straight to wizard (preview pages removed)
