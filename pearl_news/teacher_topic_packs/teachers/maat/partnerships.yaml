@@ -1,0 +1,283 @@
+schema_version: 1
+teacher_id: maat
+topic: partnerships
+active: true
+identity:
+  display_name: "Ma'at"
+  attribution_name: "Teacher Ma'at"
+  tradition: "Naqshbandi Sufi teacher (Hazrat Inayat Khan lineage; path of the heart; fanaa and dhikr)"
+  tradition_short: "Naqshbandi Sufi"
+  teacher_setting_options:
+    - "Sufi Circle"
+    - "sama gathering"
+  teacher_years: "Naqshbandi Tariqat lineage"
+  affiliation_safe_line: "has attended the United Spiritual Leaders Forum"
+  launch_approved: true
+persona:
+  id: gen_z_alpha
+  age_band: "13-29"
+  default_register: "phone-native, high-pressure, institution-skeptical"
+  daily_worlds:
+    - school
+    - home
+    - group chat
+    - commute
+    - public systems
+  tie_to_real_world_struggles:
+    - id: institutional_nafs
+      label: "the defensive self-interest of the larger partner showing up in collaborative language"
+      loop: "reads the joint statement -> shoulders tighten -> closes the tab -> opens it because the partner names are still the same"
+      body_markers: ["chest", "shoulders", "jaw"]
+      digital_markers: ["close", "reopen", "skim", "check again"]
+topic_fit:
+  fit_level: primary
+  fit_reason: "Partnerships rest on what the heart can sense before the contract names it; Sufi practice cultivates the qalb-level discernment that distinguishes genuine collaboration from extractive arrangement wearing collaborative language."
+  forbidden_angles:
+    - "do not preach naive trust as a substitute for accountability"
+    - "do not frame disillusionment with broken partnerships as personal cynicism"
+hook_personal:
+  options:
+    - id: hook_personal_01
+      line: "You read another joint-statement press release. You also know what the last three from the same partners actually produced once the cameras left."
+      semantic_family: "maat-partnerships-hook-personal-press"
+      tone: plain
+      intensity: 3
+      article_types: ["hard_news_spiritual_response"]
+    - id: hook_personal_02
+      line: "You said yes to the youth advisory seat. You also know the meeting is at 11 a.m. on a Wednesday, scheduled by people who do not need to skip a shift to attend."
+      semantic_family: "maat-partnerships-hook-personal-seat"
+      tone: grave
+      intensity: 4
+      article_types: ["hard_news_spiritual_response"]
+    - id: hook_personal_03
+      line: "You scroll the partner logos at the bottom of the report. You also know which logos showed up to the launch and which logos have been quiet since."
+      semantic_family: "maat-partnerships-hook-personal-logos"
+      tone: plain
+      intensity: 3
+      article_types: ["hard_news_spiritual_response"]
+hook_big_picture:
+  options:
+    - id: hook_big_picture_01
+      line: "Partnerships are no longer only an institutional-design question. They are a daily test of whether the people most affected by an outcome have any say in how the partners structure the work."
+      semantic_family: "maat-partnerships-hook-big-design"
+      article_types: ["hard_news_spiritual_response"]
+    - id: hook_big_picture_02
+      line: "SDG 17 names partnerships as the operating mechanism for the other sixteen goals. The mechanism has been measured. Most multi-stakeholder partnerships fail their stated youth-inclusion targets within 24 months of launch."
+      semantic_family: "maat-partnerships-hook-big-sdg17"
+      article_types: ["hard_news_spiritual_response"]
+    - id: hook_big_picture_03
+      line: "The partnership form has been used as both genuine collaboration and institutional cover. The difference between the two is rarely visible at launch — it is visible 18 months in, when the press conference is over and the convening organization decides which partner gets to keep showing up."
+      semantic_family: "maat-partnerships-hook-big-cover"
+      article_types: ["hard_news_spiritual_response"]
+teacher_intro:
+  options:
+    - id: teacher_intro_01
+      line: "Teacher Ma'at, a Naqshbandi Sufi teacher in the Hazrat Inayat Khan lineage, has watched young people return from interfaith and civic partnerships with the same question. They are not asking whether collaboration matters. They are asking how to stay in genuine partnership when the larger partner keeps extracting more than they bring."
+      semantic_family: "maat-partnerships-intro-extraction"
+      tone: plain
+      intensity: 3
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: teacher_intro_02
+      line: "Teacher Ma'at, rooted in the Naqshbandi Tariqat and the universal Sufism that Hazrat Inayat Khan brought West, has watched in sama gatherings the specific exhaustion of being the smaller partner in arrangements designed to deliver legitimacy to the larger one. The teaching she offers does not solve the structural asymmetry. It protects the qalb — the spiritual heart — from inheriting the costume the asymmetry tries to install."
+      semantic_family: "maat-partnerships-intro-asymmetry"
+      tone: grave
+      intensity: 4
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: teacher_intro_03
+      line: "Teacher Ma'at — Naqshbandi Sufi by lineage, MIT-trained engineer by formation — has watched in weekly Sufi Circles how the heart's discernment in partnership work runs faster than the analytical mind. Students arrive carrying the gut sense that something is off in a collaboration. The work in the circle is to let dhikr clear enough ground for the gut sense to name itself."
+      semantic_family: "maat-partnerships-intro-discernment"
+      tone: plain
+      intensity: 3
+      article_types: ["hard_news_spiritual_response", "commentary"]
+youth_somatic:
+  options:
+    - id: youth_somatic_01
+      line: "You read the joint press release. Your shoulders tightened. You closed the tab. Then you opened it again because the names listed were not changing.\nLOOP_SEQUENCE: \"read the release. shoulders tightened. closed the tab. opened it again.\""
+      loop_type: "institutional_nafs"
+      body_register: "shoulders"
+      digital_behavior: "close-return"
+      article_types: ["hard_news_spiritual_response"]
+    - id: youth_somatic_02
+      line: "You opened the partnership invitation. Your jaw tightened. You skimmed past it. Then you came back because saying no had its own cost too.\nLOOP_SEQUENCE: \"opened the invitation. jaw tightened. skimmed past. came back.\""
+      loop_type: "institutional_nafs"
+      body_register: "jaw"
+      digital_behavior: "skim-return"
+      article_types: ["hard_news_spiritual_response"]
+    - id: youth_somatic_03
+      line: "You read the new MOU between the two organizations. Your chest tightened. You set the phone down. Then you picked it up because your friend on the smaller side was already in the group chat.\nLOOP_SEQUENCE: \"read the MOU. chest tightened. put the phone down. picked it up again.\""
+      loop_type: "institutional_nafs"
+      body_register: "chest"
+      digital_behavior: "put-down-return"
+      article_types: ["hard_news_spiritual_response"]
+teacher_witness:
+  options:
+    - id: teacher_witness_01
+      line: "Ma'at has seen this exact loop in young people returning from partnership work — the release, the tightening, the look away, and the return because the people on the smaller side were still in it."
+      semantic_family: "maat-partnerships-witness-loop"
+      loop_type: "institutional_nafs"
+      article_types: ["hard_news_spiritual_response"]
+    - id: teacher_witness_02
+      line: "She has watched students who entered partnerships as equals leave them carrying invisible labor that the larger partner publicly took credit for. The Naqshbandi tradition does not wave that away. It names it precisely, then asks what kind of inner ground the work of staying in or leaving the partnership actually requires."
+      semantic_family: "maat-partnerships-witness-labor"
+      loop_type: "institutional_nafs"
+      article_types: ["hard_news_spiritual_response"]
+    - id: teacher_witness_03
+      line: "Ma'at has watched the slower thing — the way young partners learn to read partnership language for what it leaves out. The teaching she offers is not skepticism. It is the disciplined recognition that the qalb senses the institutional nafs before the contract does."
+      semantic_family: "maat-partnerships-witness-qalb"
+      loop_type: "institutional_nafs"
+      article_types: ["hard_news_spiritual_response"]
+turnaround:
+  options:
+    - id: turnaround_01
+      stat_line_1: "480 youth-led coalitions. 33 countries."
+      stat_line_2: "Young partners are running open-books co-governance pilots, refusing nondisclosure-by-default in MOUs, and publishing partner accountability scorecards even when the larger partners ask them not to."
+      semantic_family: "maat-partnerships-turnaround-cogov"
+      article_types: ["hard_news_spiritual_response"]
+    - id: turnaround_02
+      stat_line_1: "480 youth-led coalitions. 33 countries."
+      stat_line_2: "Youth partnership networks are documenting which partnerships kept their inclusion targets and which did not — and publishing the lists where the funders that wrote the original MOUs can find them."
+      semantic_family: "maat-partnerships-turnaround-targets"
+      article_types: ["hard_news_spiritual_response"]
+    - id: turnaround_03
+      stat_line_1: "480 youth-led coalitions. 33 countries."
+      stat_line_2: "Young people are building South-South knowledge networks, running peer-to-peer convenings that bypass the convener-extractor model, and treating the partnership as infrastructure rather than as PR."
+      semantic_family: "maat-partnerships-turnaround-southsouth"
+      article_types: ["hard_news_spiritual_response"]
+bridge:
+  options:
+    - id: bridge_01
+      line: "480 youth-led coalitions. 33 countries. The tracker measures what young people built. It has no column for what made the next partnership possible after the last one delivered extraction in collaborative language — the capacity to hold the asymmetry in clear view without surrendering the heart's own sense of inherent worth. The partner who came back needed it. So does the reader still in the loop. Ma'at's tradition has been refining the practice for centuries."
+      hidden_capacity: "hold asymmetry in view while sustaining genuine partnership"
+      semantic_family: "maat-partnerships-bridge-asymmetry"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: bridge_02
+      line: "Partnership trackers count signatures and joint statements. They do not count the inner capacity that lets a young partner stay engaged after the dominant partner has used the partnership as cover. That capacity — what dhikr cultivates — keeps the smaller partner from carrying the institutional asymmetry as a personal verdict. The Naqshbandi tradition addresses it directly. SDG 17 does not."
+      hidden_capacity: "refuse the asymmetry-as-verdict the dominant partner tries to install"
+      semantic_family: "maat-partnerships-bridge-dhikr"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: bridge_03
+      line: "480 youth-led coalitions. 33 countries. The count measures action. It does not measure the slower thing — the discipline of staying in genuine collaboration with people whose institutional power is shaped to extract from yours. Ma'at's tradition holds that the Beloved does not require a contract. Genuine partnership is a heart event before it is a structural one."
+      hidden_capacity: "meet the other as face of the Beloved, not as instrument"
+      semantic_family: "maat-partnerships-bridge-beloved"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+teacher_perspective:
+  options:
+    - id: teacher_perspective_01
+      header: "What Ma'at Sees"
+      paragraphs:
+        - "The Beloved does not require a contract. Ma'at teaches that the Sufi lover's orientation to the other is complete devotion, not strategic alignment. Genuine partnership is a heart event before it is a structural one — two souls recognizing in each other a face of the Beloved, in genuine resonance for shared service. This recognition does not emerge from negotiation; it emerges from the state of the heart that dhikr — remembrance — cultivates. Partnerships built on this ground have a different quality of durability."
+        - "Sama as partnership practice. The Sufi gathering of sama — sacred music and listening — is what Ma'at brings to the question of how genuine collaboration is built. When parties to a partnership can sit together in genuine dhikr, in remembrance of what they are serving beyond their institutional identities, the transactional dynamics that undermine most partnerships begin to dissolve. Ma'at's Sufi Circles demonstrate this weekly: strangers become collaborators through shared devotion, not through aligned incentives."
+        - "Fanaa of institutional nafs. The lower self of organizations — the defensive self-interest that prevents genuine partnership — is the same mechanism as the individual nafs, only larger. Ma'at teaches that the dissolution of institutional grasping, the organizational fanaa, is the prerequisite for the kind of partnership that changes what is possible. This is not achieved through structural redesign alone; it requires the heart dimension that the Sufi path addresses directly."
+      semantic_family: "maat-partnerships-perspective-beloved"
+      reframe_type: "self_to_system"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: teacher_perspective_02
+      header: "What Ma'at Sees"
+      paragraphs:
+        - "Ma'at reads partnership strain through the qalb — the spiritual heart that senses the institutional nafs before the contract does. The smaller partner is being asked to hold two fields at once — the field of the stated collaboration and the field of what the dominant partner is actually doing. Most damage from extractive partnerships comes from collapsing those fields into one, then taking the collapse as evidence that the partner who noticed it was being uncooperative."
+        - "From there Ma'at turns to dhikr as partnership discipline. Remembrance returns the smaller partner to the ground from which the heart can read the room accurately, without the analytical mind's tendency to second-guess what the heart has already named. The Hazrat Inayat Khan lineage holds that the heart's discernment, properly cultivated, is faster and more honest than the strategic mind."
+        - "The reframe is precise: what feels like a personal failure of cooperative skill — me, broken, wrong for noticing the extraction — is often the qalb's accurate refusal of a partnership designed to extract while calling itself collaborative. The mind stops calling itself broken when it sees that the real disorder is in the design of the partnership, and that design can be changed by the same partners who are currently being asked to consent to it."
+      semantic_family: "maat-partnerships-perspective-qalb"
+      reframe_type: "self_to_system"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: teacher_perspective_03
+      header: "What Ma'at Sees"
+      paragraphs:
+        - "Ma'at would name the asymmetry precisely. Most institutional partnerships are not failures of intention. They are arrangements designed by parties with very different exit costs. The party that can walk away cheaply will tend, in practice, to set the terms. The Naqshbandi tradition does not respond by pretending the exit costs are equal. It responds by widening the field of awareness in which the asymmetry is held."
+        - "All are welcome — Hazrat Inayat Khan's teaching that universal Sufism is open to any soul that longs for the Beloved — applies directly to partnership work. Ma'at teaches that genuine collaboration requires the same openness across institutional difference that the Sufi Circle requires across religious difference. The other partner is not a stranger to be managed. The other partner is a face of the Beloved with whom the work has been entrusted."
+        - "The reframe matters: what feels like a personal failure of cooperative skill — me, broken, wrong for noticing the extraction — is often the heart's accurate response to a partnership designed to extract while calling itself collaborative. The mind stops calling itself broken when it sees that the real disorder is in the design, and that the design can be changed."
+      semantic_family: "maat-partnerships-perspective-universal"
+      reframe_type: "self_to_system"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+practice:
+  default_id: practice_01
+  options:
+    - id: practice_01
+      display_name: "5-minute Qalb-Listening for Partnership"
+      duration: "5 minutes"
+      announcement_line: "Ma'at teaches a 5-minute Qalb-Listening practice for moments when a partnership has started extracting in collaborative language and the smaller partner needs to keep the heart's reading clear. It is in the sidebar, timed and step by step."
+      relief_lines:
+        - "The two fields — what the partnership claims to be and what the partnership is doing — stop collapsing into each other."
+        - "A steadier ground returns for the next conversation, the next MOU revision, the next decision about whether to stay in."
+      relief_register: ["capacity", "clarity", "act again"]
+      derived_from_frame: "qalb_listening"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: practice_02
+      display_name: "10-minute Sama for Co-Partners"
+      duration: "10 minutes"
+      announcement_line: "Ma'at teaches a 10-minute Sama practice — a single piece of devotional music, listened to with the chest, not the ears — for moments when the partnership work is being treated as if the smaller partner's contribution were optional. It is in the sidebar, short enough to use before the call or after the meeting."
+      relief_lines:
+        - "The grasping after recognition softens; the work itself returns to view."
+        - "Enough ground returns to choose engagement or refusal on the work's actual terms."
+      relief_register: ["capacity", "clarity", "act again"]
+      derived_from_frame: "sama"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+    - id: practice_03
+      display_name: "5-minute Dhikr Before the Meeting"
+      duration: "5 minutes"
+      announcement_line: "Ma'at teaches a 5-minute Dhikr practice — remembrance breath, the Beloved's name on each exhale — for the moment before a partnership meeting where the smaller partner needs the heart steady before the analytical mind begins. It is in the sidebar."
+      relief_lines:
+        - "The body recognizes the room, the people, and the actual stakes of the meeting."
+        - "A clearer ground returns for the next agreement, refusal, or honest pause."
+      relief_register: ["capacity", "clarity", "act again"]
+      derived_from_frame: "dhikr"
+      article_types: ["hard_news_spiritual_response", "commentary"]
+sdg:
+  primary:
+    id: "SDG 17"
+    title: "Partnerships for the Goals"
+    line: "The United Nations has a framework for this through SDG 17 and its targets on multi-stakeholder partnerships, data, monitoring, and accountability."
+  fallback_un_tie:
+    line: "Pearl News is an independent nonprofit. We are not affiliated with the United Nations."
+cta:
+  options:
+    - id: cta_01
+      org: "Major Group for Children and Youth (UN MGCY)"
+      line: "The UN Major Group for Children and Youth coordinates youth input into UN partnership processes including the High-Level Political Forum. Door in: https://www.unmgcy.org"
+      semantic_family: "maat-partnerships-cta-mgcy"
+      article_types: ["hard_news_spiritual_response"]
+    - id: cta_02
+      org: "Restless Development"
+      line: "Restless Development runs youth-led research and accountability work on partnership outcomes across the Global South. Door in: https://restlessdevelopment.org"
+      semantic_family: "maat-partnerships-cta-restless"
+      article_types: ["hard_news_spiritual_response"]
+    - id: cta_03
+      org: "Partners for Youth Empowerment Network"
+      line: "PYE Global runs peer-to-peer partnership trainings that treat collaboration as a practice, not a press release. Door in: https://pyeglobal.org"
+      semantic_family: "maat-partnerships-cta-pye"
+      article_types: ["hard_news_spiritual_response"]
+title_system:
+  headline_layer_1:
+    options:
+      - id: headline_layer_1_01
+        line: "Most Multi-Stakeholder Partnerships Miss Their Youth-Inclusion Targets."
+        semantic_family: "maat-partnerships-title1-miss"
+        article_types: ["hard_news_spiritual_response"]
+      - id: headline_layer_1_02
+        line: "SDG 17 Is The Mechanism. The Mechanism Is Underperforming."
+        semantic_family: "maat-partnerships-title1-sdg17"
+        article_types: ["hard_news_spiritual_response"]
+      - id: headline_layer_1_03
+        line: "Young Partners Are Auditing The Partnerships That Use Their Names."
+        semantic_family: "maat-partnerships-title1-audit"
+        article_types: ["hard_news_spiritual_response"]
+  headline_layer_2:
+    options:
+      - id: headline_layer_2_01
+        line: "A Naqshbandi Sufi teacher names the institutional nafs hidden inside collaborative language — and the dhikr that keeps the qalb steady."
+        semantic_family: "maat-partnerships-title2-nafs"
+        article_types: ["hard_news_spiritual_response"]
+      - id: headline_layer_2_02
+        line: "The Hazrat Inayat Khan lineage holds that the Beloved does not require a contract. Genuine partnership is a heart event before it is a structural one."
+        semantic_family: "maat-partnerships-title2-beloved"
+        article_types: ["hard_news_spiritual_response"]
+      - id: headline_layer_2_03
+        line: "Sama, dhikr, and the qalb's prior discernment — the Sufi tools partnership work has been missing."
+        semantic_family: "maat-partnerships-title2-sama"
+        article_types: ["hard_news_spiritual_response"]
+variation_policy:
+  avoid_same_semantic_family_within_article: true
+  deterministic_rotation_key: "article_id + slot + teacher_id + topic"
+  metadata_filters:
+    article_types: ["hard_news_spiritual_response", "commentary"]
+    intensity_range: [2, 4]
