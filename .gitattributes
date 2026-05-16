@@ -60,3 +60,12 @@ brand-wizard-app/public/onboarding/proof/wizard/*.mp3 -filter -diff -merge -text
 # all 13 portraits serve as 130-byte pointer text on the live site.
 teacher_pics/*.png -filter -diff -merge -text
 brand-wizard-app/public/teacher_pics/*.png -filter -diff -merge -text
+
+# Three specific manga portraits broken on live (LFS pointers leaking as
+# 130-byte text — ahjan, joshin, pamela_fellows). Same un-LFS pattern;
+# each ≤755 KB so under the no-binary-blobs guard. The rest of
+# brand-wizard-app/public/assets/manga_covers/*.png stays LFS-tracked
+# (those files happen to serve correctly from Cloudflare's deploy cache).
+brand-wizard-app/public/assets/manga_covers/ahjan_portrait.png -filter -diff -merge -text
+brand-wizard-app/public/assets/manga_covers/joshin_portrait.png -filter -diff -merge -text
+brand-wizard-app/public/assets/manga_covers/pamela_fellows_portrait.png -filter -diff -merge -text
