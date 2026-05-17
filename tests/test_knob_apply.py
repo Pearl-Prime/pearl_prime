@@ -55,7 +55,10 @@ def test_load_knob_profile_grief():
 
 def test_load_runtime_format_standard():
     spec = load_runtime_format("standard_book")
-    assert spec["word_range"] == [9000, 13000]
+    # bestseller-chord-audit-2026-05-17 Axis 4: raised ceiling 13000→18000 so
+    # 12-chapter arcs don't truncate ch 11-12 content to 0 in
+    # phoenix_v4/planning/enrichment_select.py:1228 format_wmax cap. PR #1152.
+    assert spec["word_range"] == [9000, 18000]
     # AUTO-PLAN-SSOT-01-AMENDMENT (2026-05-06) Group B ruling: standard_book
     # chapter_count_default reconciled from 12 (registry pre-amendment) to 10
     # (Python ACT-011/BSG-011 deliberate runtime value, preserved as the
@@ -255,7 +258,9 @@ def test_standard_book_word_count():
     profile = load_knob_profile("anxiety")
     shaped = apply_knobs(spine, profile, runtime_format="standard_book")
     total = sum(c.target_word_count for c in shaped.chapters)
-    assert 9000 <= total <= 13000
+    # bestseller-chord-audit-2026-05-17 Axis 4 (PR #1152): word_range raised to
+    # [9000, 18000] to accommodate 12-chapter arcs without truncating ch 11-12.
+    assert 9000 <= total <= 18000
 
 
 def test_micro_book_word_count():
@@ -370,7 +375,8 @@ def test_cli_three_topics_smoke():
         shaped = apply_knobs(spine, knobs, runtime_format="standard_book")
         total = sum(ch.target_word_count for ch in shaped.chapters)
         assert len(shaped.chapters) == 12
-        assert 9000 <= total <= 13000
+        # bestseller-chord-audit-2026-05-17 Axis 4 (PR #1152): raised ceiling 13000→18000.
+        assert 9000 <= total <= 18000
 
 
 

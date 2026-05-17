@@ -114,7 +114,7 @@ runtime_formats:
   standard_book:
     duration_minutes: 55
     chapter_count_default: 10  # AUTO-PLAN-SSOT-01-AMENDMENT Group B: was 12; Python value 10 preserved (most consequential — default canonical book runtime)
-    word_range: [9000, 13000]
+    word_range: [9000, 18000]  # bestseller-chord-audit-2026-05-17 Axis 4: raised ceiling 13000→18000 so 12-chapter arcs (config/plans/anxiety_gen_z_professionals_6h.yaml et al) don't truncate ch 11-12 content to 0 in enrichment_select.py:1228 format_wmax cap. 10-chapter waves unaffected (still ~13000 effective via per-slot target_words). Mirrors PR #939's deep_book_6h ceiling raise (65K→72K) pattern.
     compatible_tiers: [A, B]
     compatible_structural_formats: [F006, F007, F010, F011, F014]
   extended_book_2h:
