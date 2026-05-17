@@ -132,6 +132,23 @@ def load_teacher_topic_pack(
         loc_overlay = _load_yaml(locale_pack)
         if loc_overlay:
             base = _deep_merge(base, loc_overlay)
+
+    # Overlay Pearl_Prime's doctrine.yaml authority on the pack's `identity:`
+    # block (operator directive 2026-05-17: "There should not be separate
+    # authors for Pearl News. The authors should come from Pearl Prime.").
+    # The 59 existing pack identity blocks drift from doctrine — display_name
+    # typos ("Joshin Sensei", "Master Fan"), shortened tradition strings.
+    # Doctrine wins, silently. Pack-specific fields (teacher_years, setting
+    # options) pass through.
+    try:
+        from pearl_news.pipeline.teacher_authority import apply_authority_to_pack
+        base = apply_authority_to_pack(base, teacher_id, repo_root)
+    except Exception as exc:
+        logger.warning(
+            "teacher_authority overlay skipped for %s (%s); pack identity preserved as fallback",
+            teacher_id, exc,
+        )
+
     return base
 
 
@@ -306,8 +323,23 @@ def _select_option(
         if not candidates:
             candidates = [options[0]]
 
-    idx = _stable_index(f"{article_id}|{slot_name}|{teacher_id}|{topic}", len(candidates))
-    chosen = candidates[idx]
+    # Selection uses the least-recently-used tracker for variety. Falls back
+    # to stable_index hash as the tie-breaker. Operator directive 2026-05-17:
+    # "I want the article writer to vary the use of the five atoms... Keep
+    # track. Use them so that we have the fewest repeats."
+    try:
+        from pearl_news.pipeline.atom_usage_tracker import pick_least_recently_used
+        chosen = pick_least_recently_used(
+            candidates,
+            teacher_id=teacher_id,
+            topic=topic,
+            slot_name=slot_name,
+            article_id=article_id,
+        )
+    except Exception as exc:
+        logger.warning("atom_usage_tracker unavailable (%s); falling back to stable_index", exc)
+        idx = _stable_index(f"{article_id}|{slot_name}|{teacher_id}|{topic}", len(candidates))
+        chosen = candidates[idx]
     meta = _metadata_for(chosen)
     family = meta.get("semantic_family")
     if family:

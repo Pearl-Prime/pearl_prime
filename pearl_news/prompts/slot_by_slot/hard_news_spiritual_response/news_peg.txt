@@ -15,4 +15,16 @@ Youth/gen-Z hook context: {gen_z_impact}
 
 Use concrete anchors (numbers, places, cohorts) where the slot expects evidence. No UN affiliation claims.
 
-SLOT: News peg — HEADER: one line. PEG: what changed; UN/date/figure; why now.
+SLOT: News summary (article lead, target ~200 words across 2-3 paragraphs).
+Operator-restructured 2026-05-17: this slot is now the OPENING of the article —
+no longer a stat-anchor stub. Summarize what happened and why it matters:
+- Para 1 (60-90 words): the event itself. Named UN body, date, primary figure,
+  scope (countries / cohort / region affected). One concrete anchor minimum.
+- Para 2 (60-90 words): why this changed now. Driver, deadline, the specific
+  decision or shortfall that produced the news. A second concrete anchor.
+- Para 3 (40-60 words, OPTIONAL): the broader frame this fact lands inside —
+  pattern across recent months / years that this news either continues or
+  breaks. No editorializing. No "Pearl News thinks". Source-anchored only.
+Plain prose paragraphs separated by blank lines. Do NOT prefix any line with
+HEADER:/PEG:/SLOT:/CONTEXT: — those scaffolding labels have been removed in
+the 2026-05-17 restructure.

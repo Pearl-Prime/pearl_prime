@@ -68,8 +68,9 @@ LAYOUT_VARIANTS = frozenset({"default", "scroll_story", "dock", "editorial", "wi
 _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
     "en": {
         "hook":         "The Weight of It",
-        "news_peg":     "The Number",
+        "news_peg":     "News Summary",
         "body":         "What It Looks Like",
+        "felt_experience": "This is how it affects Gen Z and Gen Alpha",
         "turnaround":   "Already Moving",
         "bridge":       "What the Data Skips",
         "teacher_sees": "What {teacher_name} Sees",
@@ -86,8 +87,9 @@ _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
     },
     "ja": {
         "hook":         "重さ",
-        "news_peg":     "数字",
+        "news_peg":     "ニュース要約",
         "body":         "そのかたち",
+        "felt_experience": "Z世代とα世代にはこう響く",
         "turnaround":   "すでに動いている",
         "bridge":       "データが飛ばすもの",
         "teacher_sees": "{teacher_name}が見ているもの",
@@ -104,8 +106,9 @@ _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
     },
     "zh-cn": {
         "hook":         "压力的重量",
-        "news_peg":     "数字",
+        "news_peg":     "新闻摘要",
         "body":         "它的样子",
+        "felt_experience": "这对Z世代和α世代意味着什么",
         "turnaround":   "已经在动",
         "bridge":       "数据漏掉的部分",
         "teacher_sees": "{teacher_name}所见",
@@ -122,8 +125,9 @@ _SECTION_HEADERS_BY_LANG: dict[str, dict[str, object]] = {
     },
     "zh": {
         "hook":         "压力的重量",
-        "news_peg":     "数字",
+        "news_peg":     "新闻摘要",
         "body":         "它的样子",
+        "felt_experience": "这对Z世代和α世代意味着什么",
         "turnaround":   "已经在动",
         "bridge":       "数据漏掉的部分",
         "teacher_sees": "{teacher_name}所见",
@@ -814,10 +818,18 @@ _HARD_NEWS_FRAGMENT_BY_SLOT = {
     "sdg_un_tie": "forward",
 }
 
+# Operator restructure 2026-05-17:
+#  1) Start with the news summary (target ~200 words).
+#  2) Then a section header "This is how it affects Gen Z and Gen Alpha"
+#     (localized).
+#  3) Then the two felt-experience atoms (hook_personal + youth_somatic)
+#     under that header.
+#  4) Then teacher voice / practice / forward look as before.
+# The "hook" and "youth" fragments are merged into a single "felt_experience"
+# fragment that renders both atoms under one banner header.
 _DEFAULT_HARD_NEWS_FRAGMENT_ORDER = [
-    "hook",
-    "youth",
     "news",
+    "felt_experience",
     "intro",
     "witness",
     "evidence",
@@ -1039,6 +1051,11 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
     hook_header = sec_h.get("hook", meta.get("hook_header", _l10n["hook"]))
     news_peg_header = sec_h.get("news_peg", meta.get("news_peg_header", _l10n["news_peg"]))
     body_header = sec_h.get("youth_somatic", meta.get("body_header", _l10n["body"]))
+    # Operator-restructured 2026-05-17: single header banner above the
+    # felt-experience atoms (hook_personal + youth_somatic merged).
+    felt_experience_header = sec_h.get("felt_experience", meta.get(
+        "felt_experience_header", _l10n.get("felt_experience") or "This is how it affects Gen Z and Gen Alpha"
+    ))
     turnaround_header = meta.get("turnaround_header", _l10n["turnaround"])
     teacher_header = sec_h.get("bridge", meta.get("teacher_header", _l10n["bridge"]))
     gold_block_header = sec_h.get("teacher_perspective_block",
@@ -1230,17 +1247,39 @@ def assemble_v52(article_json: dict, metadata: dict | None = None, *, standalone
             f'    <div id="sec-hook" class="section-header">{_esc(hook_header)}</div>\n'
             f'    <p class="hook-1">{_esc(hook_para)}</p>\n'
         ) if hook_para else "",
+        # NEWS SUMMARY (lead, ~200 words per operator 2026-05-17). Renders
+        # only the news_peg slot content (first element of news_peg_paras).
+        # The slot prompt `news_peg.txt` now targets a 2-3-paragraph summary;
+        # split it back into paragraphs so each gets its own <p> tag.
         "news": (
-            f'    <!-- NEWS PEG -->\n'
+            f'    <!-- NEWS SUMMARY (lead, ~200 words) -->\n'
             f'    <div id="sec-news" class="section-header">{_esc(news_peg_header)}</div>\n'
-            f'{_paras(news_peg_paras[:1])}\n'
-        ) if news_peg_paras[:1] else "",
+            f'{_paras(_split_into_paragraphs(news_peg_paras[0]) if news_peg_paras else [])}\n'
+        ) if news_peg_paras else "",
+        # TEACHER INTRO — now lands AFTER felt_experience (operator restructure).
+        # Renders the teacher_intro slot content (second element of news_peg_paras
+        # per the slot conflation at line ~760).
         "intro": (
             f'    <!-- TEACHER INTRO -->\n'
-            f'{_paras(news_peg_paras[1:])}\n'
-        ) if news_peg_paras[1:] else "",
+            f'{_paras(_split_into_paragraphs(news_peg_paras[1]) if len(news_peg_paras) > 1 else [])}\n'
+        ) if len(news_peg_paras) > 1 else "",
+        # FELT EXPERIENCE (operator 2026-05-17): one header banner "This is
+        # how it affects Gen Z and Gen Alpha" (localized) with the two
+        # felt-experience atoms below it — hook_personal as opener line +
+        # youth_somatic as the body-loop paragraph. Replaces the old
+        # separately-headered "hook" and "youth" fragments.
+        "felt_experience": (
+            f'    <!-- FELT EXPERIENCE: hook_personal + youth_somatic -->\n'
+            f'    <div id="sec-felt" class="section-header">{_esc(felt_experience_header)}</div>\n'
+            + (f'    <p class="hook-1">{_esc(hook_para)}</p>\n' if hook_para else "")
+            + (f'{_paras(body_paras[:1], "hook-2")}\n' if body_paras[:1] else "")
+        ) if (hook_para or body_paras[:1]) else "",
+        # Legacy "youth" fragment retained for back-compat with any caller
+        # that pins the older fragment order via meta._deterministic_article_plan;
+        # produces the same body paragraph but under its old "What It Looks Like"
+        # header. New default order routes this content into felt_experience above.
         "youth": (
-            f'    <!-- YOUTH EXPERIENCE -->\n'
+            f'    <!-- YOUTH EXPERIENCE (legacy fragment, pre-2026-05-17 layout) -->\n'
             f'    <div id="sec-body" class="section-header">{_esc(body_header)}</div>\n'
             f'{_paras(body_paras[:1], "hook-2")}\n'
         ) if body_paras[:1] else "",
