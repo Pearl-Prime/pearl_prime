@@ -61,6 +61,13 @@ brand-wizard-app/public/onboarding/proof/wizard/*.mp3 -filter -diff -merge -text
 teacher_pics/*.png -filter -diff -merge -text
 brand-wizard-app/public/teacher_pics/*.png -filter -diff -merge -text
 
+# Manga-style teacher header portraits — operator-supplied 2026-05-17 for
+# the section-header avatar (NOT the left nav). Each ≤950 KB under the
+# 1 MB no-binary-blobs cap. Un-LFS for the same reason as the photos
+# above: GitHub LFS budget is exhausted, so any LFS-tracked file shows
+# as a 130-byte pointer on the live site.
+brand-wizard-app/public/teacher_pics/manga/*.png -filter -diff -merge -text
+
 # Three specific manga portraits broken on live (LFS pointers leaking as
 # 130-byte text — ahjan, joshin, pamela_fellows). Same un-LFS pattern;
 # each ≤755 KB so under the no-binary-blobs guard. The rest of
