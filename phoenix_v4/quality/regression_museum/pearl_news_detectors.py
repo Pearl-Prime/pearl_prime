@@ -34,18 +34,22 @@ class Violation:
 
 
 # ---------------------------------------------------------------------------
-# Teacher language map — mirrors TEACHER_LANGUAGE in run_daily_news_cycle.py
-# Used to validate language field without importing the script.
+# Teacher language map — mirrors TEACHER_LANGUAGE in run_daily_news_cycle.py.
+# MUST stay a subset of the cycle module's map per
+# tests/test_pearl_news_language_routing.py::test_cycle_module_language_map_matches_detector_map.
+# 'ra' and 'pamela_fellows' removed per PR #1132 (Pearl_Prime-only teachers,
+# not part of Pearl News roster). 'master_sha' and 'omote' kept in sync with
+# the cycle module's current roster.
 # ---------------------------------------------------------------------------
 TEACHER_LANGUAGE: dict[str, str] = {
     "ahjan": "en",
     "sai_ma": "en",
-    "ra": "en",
-    "pamela_fellows": "en",
     "maat": "en",
+    "master_sha": "en",
     "junko": "ja",
     "miki": "ja",
     "joshin": "ja",
+    "omote": "ja",
     "master_feung": "zh-cn",
     "master_wu": "zh-cn",
 }

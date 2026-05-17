@@ -71,12 +71,15 @@ class TestTeacherLanguageMap:
             )
 
     def test_english_teachers_map_to_en(self):
-        english_teachers = ["ahjan", "sai_ma", "ra", "pamela_fellows", "maat"]
+        # 'ra' and 'pamela_fellows' removed per PR #1132 (Pearl_Prime-only).
+        # 'master_sha' added to align with the cycle module's en-roster.
+        english_teachers = ["ahjan", "sai_ma", "maat", "master_sha"]
         for t in english_teachers:
             assert DETECTOR_TEACHER_LANGUAGE[t] == "en", f"{t} should be 'en'"
 
     def test_japanese_teachers_map_to_ja(self):
-        ja_teachers = ["junko", "miki", "joshin"]
+        # 'omote' added to align with the cycle module's ja-roster.
+        ja_teachers = ["junko", "miki", "joshin", "omote"]
         for t in ja_teachers:
             assert DETECTOR_TEACHER_LANGUAGE[t] == "ja", f"{t} should be 'ja'"
 
