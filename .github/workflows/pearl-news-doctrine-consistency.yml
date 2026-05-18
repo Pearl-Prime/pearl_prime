@@ -1,8 +1,9 @@
 name: Pearl News Doctrine Consistency
 
-# Advisory gate — surfaces Pearl News teacher pack drift from doctrine SSOT.
-# Currently runs in --report mode (exit 0). Flip to --strict once the
-# doctrine campaign Phase A/B content rewrites complete.
+# Enforcement gate — fails any PR that introduces Pearl News teacher pack drift
+# from the doctrine SSOT. As of Phase A completion (no ERROR violations on main),
+# this runs in --strict mode by default. Use workflow_dispatch with strict=false
+# for a non-blocking diagnostic run.
 
 on:
   pull_request:
@@ -14,9 +15,9 @@ on:
   workflow_dispatch:
     inputs:
       strict:
-        description: 'Run in --strict mode (fail on ERROR)'
+        description: 'Run in --strict mode (default true; set false for diagnostic run)'
         type: boolean
-        default: false
+        default: true
 
 permissions:
   contents: read
@@ -43,9 +44,10 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p artifacts
-          mode=""
-          if [ "${{ inputs.strict || 'false' }}" = "true" ]; then
-            mode="--strict"
+          # Default: strict (fail on ERROR). Operators can flip via workflow_dispatch.
+          mode="--strict"
+          if [ "${{ inputs.strict || 'true' }}" = "false" ]; then
+            mode=""
           fi
           python3 scripts/ci/pearl_news_doctrine_consistency.py $mode \
             | tee artifacts/doctrine_consistency.txt
