@@ -5,11 +5,12 @@ active: true
 identity:
   display_name: Ahjan
   attribution_name: Teacher Ahjan
-  tradition: Theravada Buddhist teacher
-  tradition_short: Theravada Buddhism
+  tradition: Tantric Buddhist teacher (mysticism synthesis; Karma Yoga, Bhakti Yoga, Jnana Yoga; Rama lineage)
+  tradition_short: Tantric Buddhism
   teacher_setting_options:
   - practice room
   - retreat
+  - sacred site
   teacher_years: '25'
   affiliation_safe_line: has attended the United Spiritual Leaders Forum
   launch_approved: true
@@ -25,12 +26,13 @@ persona:
   - part-time work
   tie_to_real_world_struggles:
   - id: attention_collapse
-    label: attention collapse after bad climate news
-    loop: reads update -> body tightens -> closes app -> reopens because truth remains
+    label: attention collapse after another climate threshold update
+    loop: reads the update -> chest tightens -> closes the app -> opens it again because
+      the heat is still there and so is the silence from the people supposed to act
     body_markers:
     - chest
     - throat
-    - tighten
+    - jaw
     digital_markers:
     - close
     - reopen
@@ -38,235 +40,691 @@ persona:
     - check again
 topic_fit:
   fit_level: primary
-  fit_reason: Climate distress maps to samvega, right effort, and overload under systemic
-    delay.
+  fit_reason: 'Climate distress is the precise pressure Tantric Buddhism is built
+    to meet: the body registers the mismatch between official reassurance and material
+    reality, and the etiquette of consciousness offers a way to stay in contact with
+    both the heat outside and the field of attention inside without collapsing one
+    into the other.'
   forbidden_angles:
   - do not reduce to generic resilience
-  - do not frame distress as personal weakness
+  - do not frame climate distress as personal weakness
+  - do not separate spiritual practice from civic action
 hook_personal:
   options:
-  - id: hook_personal_01
-    line: You care more about the planet than ever. You still feel less able to stay
-      with the next number long enough to decide what to do.
-    semantic_family: care-vs-capacity
-    tone: plain
-    intensity: 3
-    article_types:
-    - hard_news_spiritual_response
-  - id: hook_personal_02
+  - id: ahjan_climate_hook_personal_01
+    line: You read another threshold breach in the group chat. Your chest tightens
+      before the words finish loading — and part of you knows the tightening is not
+      malfunction but accurate contact with what the institutions still refuse to
+      meet at the same depth you already are.
+    metadata:
+      semantic_family: care-vs-capacity
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_hook_personal_02
+    line: You care more about the planet than ever. You also feel less able to stay
+      with the next number long enough to decide anything — and the friction between
+      the caring and the capacity is not a personal flaw. It is the felt edge of a
+      system that has outsourced unbearable delay onto your nervous system.
+    metadata:
+      semantic_family: truth-vs-overload
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_hook_personal_03
     line: You keep reading climate updates because looking away feels dishonest. You
-      also know what each new number is doing to your body.
-    semantic_family: truth-vs-overload
-    tone: grave
-    intensity: 4
-    article_types:
-    - hard_news_spiritual_response
+      also know what each new number is doing to your body — the throat, the chest,
+      the slow withdrawal from the day. The body has been holding the truth the conversation
+      has not yet caught up to.
+    metadata:
+      semantic_family: body-knows-first
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_hook_personal_04
+    line: At 1 a.m. you close the climate tab and open it again. Neither move helps,
+      because the heat does not pause for either choice. What is asked of you is not
+      a better choice between looking and not looking — it is a different relationship
+      to attention itself.
+    metadata:
+      semantic_family: midnight-loop
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_hook_personal_05
+    line: You have signed the petitions, joined the strike, posted the graphic. The
+      action has been real and the load has not lifted — because the load is not the
+      action's failure. It is the cost of staying conscious inside a system that has
+      kept asking you to know without giving you anywhere proportionate to put what
+      you know.
+    metadata:
+      semantic_family: action-without-relief
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
 hook_big_picture:
   options:
-  - id: hook_big_picture_01
+  - id: ahjan_climate_hook_big_01
     line: A generation can be highly informed, morally serious, and still lose daily
-      functional capacity when every update arrives as proof that institutions waited
-      too long.
-    semantic_family: institutional-delay
-    angle: future-loss
-    article_types:
-    - hard_news_spiritual_response
-  - id: hook_big_picture_02
-    line: 'The pressure is no longer only ecological. It is attentional, emotional,
-      and civic: how do young people stay in contact with reality without shutting
-      down under it?'
-    semantic_family: attention-collapse
-    angle: attention-collapse
-    article_types:
-    - hard_news_spiritual_response
+      functional capacity when every update arrives as proof that the institutions
+      waited too long. The pressure is no longer only ecological — it is attentional,
+      and the inherited spiritual vocabularies of reassurance are not built for it.
+    metadata:
+      semantic_family: institutional-delay
+      angle: future-loss
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_hook_big_02
+    line: 'The pressure has shifted layer. It is no longer only ecological — it is
+      attentional, emotional, and civic at once: how do young people stay in contact
+      with reality without shutting down under it, and which traditions have language
+      for staying in contact with something larger than the body can comfortably hold?'
+    metadata:
+      semantic_family: attention-collapse
+      angle: attention-collapse
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_hook_big_03
+    line: Tantric Buddhism holds that opposites are complementary, not in conflict.
+      Climate work asks a generation to hold action and grief, urgency and patience,
+      the heat outside and the steady ground inside — at the same time. The traditions
+      that split these have nothing to offer at the depth the moment now requires.
+    metadata:
+      semantic_family: opposites-complementary
+      angle: tantric-frame
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_hook_big_04
+    line: Bands of awareness — the discipline of holding multiple fields of attention
+      without collapsing one into the other — is what climate consciousness is now
+      asking young people to develop in practice, often before any tradition has named
+      it for them. The Rama lineage has been refining the practice for centuries.
+    metadata:
+      semantic_family: bands-of-awareness
+      angle: discipline-of-attention
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_hook_big_05
+    line: The wheel of dharma turns slowly and the heat is moving faster than the
+      civic response. What is being asked of young people is not to choose between
+      spiritual practice and political action but to recover the older recognition
+      that the two were never separable — that laundry and mountains are equally sacred,
+      and the next email and the next protest are both expressions of the same field.
+    metadata:
+      semantic_family: dharma-and-action
+      angle: practical-spiritual
+      article_types:
+      - hard_news_spiritual_response
 teacher_intro:
   options:
-  - id: identity_observation_shift_01
-    line: Teacher Ahjan, a Theravada Buddhist teacher for 25 years, has seen in practice
-      rooms what this does to young people. Students are not asking how to stay inspired
-      anymore. They are asking how to stay functional while the future they were promised
-      keeps disappearing on schedule.
-    semantic_family: identity_seen_shift
-    tone: plain
-    intensity: 3
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
-  - id: identity_observation_shift_02
-    line: Teacher Ahjan, a Theravada Buddhist teacher for 25 years, has watched climate
-      fear arrive in practice sessions first as moral seriousness and then as loss
-      of function. Students are not asking whether the crisis is real. They are asking
-      how to keep attention from collapsing under constant proof that adults waited
-      too long.
-    semantic_family: identity_seen_shift_alt
-    tone: grave
-    intensity: 4
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
+  - id: ahjan_climate_intro_01
+    line: 'Teacher Ahjan, a Tantric Buddhist teacher rooted in the Rama lineage for
+      25 years, has watched in practice rooms what climate updates do to young people.
+      Students are not asking how to stay inspired anymore. They are asking how to
+      stay functional while the future they were promised keeps disappearing on schedule
+      — and the tradition Ahjan teaches has language for exactly this kind of contact:
+      not denial, not collapse, but bands of awareness wide enough to hold both.'
+    metadata:
+      semantic_family: identity_seen_shift
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_intro_02
+    line: Teacher Ahjan teaches the Tantric synthesis of Karma Yoga, Bhakti Yoga,
+      and Jnana Yoga — action, devotion, and discernment as a single integrated practice.
+      For 25 years he has watched climate fear arrive in practice sessions first as
+      moral seriousness and then as loss of function. What the tradition offers is
+      not another instruction stack. It is a different relationship to the field of
+      attention itself.
+    metadata:
+      semantic_family: three-yogas-integration
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_intro_03
+    line: Teacher Ahjan, also known as Samvara in the Rama lineage he is recapitulating,
+      has taught in practice rooms and at sacred sites for 25 years. He does not separate
+      the spiritual work from the material world. In his framework climate distress
+      is not a contemplative problem to be solved by going inward — it is the felt
+      edge of the same field that the next civic action must address, and the etiquette
+      of consciousness applies to both.
+    metadata:
+      semantic_family: rama-lineage-recapitulation
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_intro_04
+    line: Teacher Ahjan teaches that the mystical cannot be known — only experienced,
+      and only through the etiquette of consciousness that lets the larger field meet
+      the smaller self. For 25 years he has watched young people arrive at his retreat
+      already in contact with something the conversation around them has refused to
+      meet at the same depth. Climate distress, in his framework, is one of the precise
+      places that contact is happening.
+    metadata:
+      semantic_family: etiquette-of-consciousness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_intro_05
+    line: Teacher Ahjan teaches inside a tradition that holds physical reality as
+      the medium of spiritual work. The subtle body and the six worlds are not metaphors
+      in his framework — they are precise language for what is happening when a young
+      person's nervous system registers planetary heat as personal collapse. The work
+      he offers does not move the climate. It refuses to let the climate's pressure
+      collapse the field in which the next response can still be made.
+    metadata:
+      semantic_family: subtle-body-six-worlds
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 youth_somatic:
   options:
-  - id: climate_threshold_phone_01
-    line: 'You read the update in a group chat. Your chest tightened. You closed the
+  - id: ahjan_climate_somatic_01
+    line: You read the update in a group chat. Your chest tightened. You closed the
       app. Then you opened it again because not looking did not make the number less
       true.
-
-      LOOP_SEQUENCE: "read the update. chest tightened. closed the app. opened it
-      again."'
-    loop_type: read-tighten-close-return
-    body_register: tightening
-    digital_behavior: close-return
-    article_types:
-    - hard_news_spiritual_response
-  - id: climate_threshold_phone_02
-    line: 'You saw the new threshold before class. Your throat tightened. You put
-      your phone face down. Then you picked it up again because the future does not
-      wait for you to feel ready.
-
-      LOOP_SEQUENCE: "saw the threshold. throat tightened. put the phone down. picked
-      it up again."'
-    loop_type: read-tighten-close-return
-    body_register: tightening
-    digital_behavior: put-down-return
-    article_types:
-    - hard_news_spiritual_response
+    metadata:
+      semantic_family: midnight_chest
+      loop_type: read-tighten-close-return
+      body_register: chest
+      digital_behavior: close-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_somatic_02
+    line: You saw the new threshold before class. Your throat tightened. You put your
+      phone face down. Then you picked it up again because the future does not wait
+      for you to feel ready.
+    metadata:
+      semantic_family: morning_throat
+      loop_type: read-tighten-putdown-return
+      body_register: throat
+      digital_behavior: put-down-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_somatic_03
+    line: Your jaw clenched when the COP livestream cut to the same delegate giving
+      the same speech. You scrolled past it. Then you scrolled back, because the silence
+      had a quality you needed to verify with your own attention.
+    metadata:
+      semantic_family: jaw_clench_cop
+      loop_type: scroll-past-scroll-back
+      body_register: jaw
+      digital_behavior: scroll-back
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_somatic_04
+    line: You held your breath without noticing while the wildfire map loaded. Your
+      shoulders lifted. You only exhaled when you confirmed the line had not yet reached
+      the place where someone you know lives — and only halfway, because the line
+      keeps moving.
+    metadata:
+      semantic_family: breath_hold_map
+      loop_type: breath-hold-confirm
+      body_register: breath
+      digital_behavior: map-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_somatic_05
+    line: You lay down and your eyes pinned open. The graphs from the day replayed.
+      Your chest would not soften. You knew sleep was the thing that would help and
+      you could not find the door into it.
+    metadata:
+      semantic_family: sleep_resistance_graphs
+      loop_type: sleep-resistance-replay
+      body_register: chest
+      digital_behavior: lying down
+      article_types:
+      - hard_news_spiritual_response
 teacher_witness:
   options:
-  - id: mirrored_loop_01
-    line: Ahjan has seen this exact loop in students this year - the reading, the
-      tightening, the closing, the return.
-    semantic_family: loop-mirror
-    loop_type: read-tighten-close-return
-    article_types:
-    - hard_news_spiritual_response
-  - id: mirrored_loop_02
-    line: He has watched that sequence repeat in young people -- the number arrives,
-      the body contracts, the phone goes down, and then the mind goes back because
-      reality is still there.
-    semantic_family: loop-mirror-alt
-    loop_type: read-tighten-close-return
-    article_types:
-    - hard_news_spiritual_response
+  - id: ahjan_climate_witness_01
+    line: Ahjan has seen this exact loop in young people in practice this year — the
+      reading, the tightening, the closing, the return. In his tradition that sequence
+      is not weakness. It is the body registering accurately what the conversation
+      has not yet caught up to, and the discipline of bands of awareness is precisely
+      what protects the field where the next response can still be made.
+    metadata:
+      semantic_family: loop-mirror
+      loop_type: read-tighten-close-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_witness_02
+    line: He has watched the slow thing happen — the way a young person's attention
+      collapses not at the first bad number but at the third, the fifth, the twentieth.
+      In Ahjan's framework the collapse is not the failure of attention. It is what
+      happens when bands of awareness have been asked to hold more than the inherited
+      practices know how to support, and the tradition's job is to widen those bands
+      again.
+    metadata:
+      semantic_family: cumulative-collapse-witness
+      loop_type: cumulative-collapse
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_witness_03
+    line: Ahjan has seen the body carry what the explanations could not — the throat
+      that closes when the next graph loads, the chest that locks before the report
+      finishes. In the Tantric framework the body is not the problem to be transcended.
+      It is the precise instrument through which the field is being read, and the
+      practice is to receive the reading without collapsing into it.
+    metadata:
+      semantic_family: somatic-instrument-witness
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_witness_04
+    line: Ahjan has watched young people walk into the retreat already certain they
+      should have figured this out alone. In his tradition that certainty is the signal
+      — the place where the inherited individualist frame stops, and the older recognition
+      that climate work is collective work at the level of the subtle body can finally
+      begin to land.
+    metadata:
+      semantic_family: collective-subtle-body
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_witness_05
+    line: He has watched the moment when a young person stops trying to fix the climate
+      from inside the same exhausted attention that the climate news has already shaped.
+      In Ahjan's framework that moment is not surrender. It is the etiquette of consciousness
+      finally being practiced — the protocol that lets a larger field come in and
+      meet the smaller self at the depth the moment requires.
+    metadata:
+      semantic_family: etiquette-readiness
+      article_types:
+      - hard_news_spiritual_response
 turnaround:
   options:
-  - id: youth_action_climate_01
-    stat_line_1: 2,666 cases. 51 jurisdictions.
-    stat_line_2: Students and youth coalitions are training peers, building campaigns,
-      and forcing officials to answer the gap between public targets and lived reality.
-    semantic_family: institutional-action
-    article_types:
-    - hard_news_spiritual_response
-  - id: youth_action_climate_02
-    stat_line_1: 2,666 cases. 51 jurisdictions.
-    stat_line_2: Young organizers are still filing cases, hosting workshops, and documenting
-      local losses even when national governments keep moving slower than the heat.
-    semantic_family: institutional-action-alt
-    article_types:
-    - hard_news_spiritual_response
+  - id: ahjan_climate_turnaround_01
+    stat_line_1: 7,500+ strikes. Fridays for Future.
+    stat_line_2: Since 2018, Fridays for Future has coordinated more than seven thousand
+      five hundred school strikes across one hundred and fifty countries — youth-led
+      civic infrastructure that did not exist a decade ago and now carries weight
+      in every climate negotiation that touches the next generation.
+    metadata:
+      semantic_family: ffl-strikes
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_turnaround_02
+    stat_line_1: 7.6 million people. One day.
+    stat_line_2: The Global Climate Strike of September 2019 brought seven point six
+      million people into the streets across one hundred and eighty-five countries
+      in a single coordinated week — the largest climate mobilization in human history,
+      organized almost entirely by people under thirty.
+    metadata:
+      semantic_family: global-strike-2019
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_turnaround_03
+    stat_line_1: YOUNGO. UNFCCC.
+    stat_line_2: YOUNGO, the official children and youth constituency of the UN Framework
+      Convention on Climate Change, now sends accredited youth delegates into every
+      COP — and the working groups they staff are increasingly the place where the
+      next-generation language of the agreements is actually drafted before the cameras
+      arrive.
+    metadata:
+      semantic_family: youngo-unfccc
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_turnaround_04
+    stat_line_1: $300B loss-and-damage. COP.
+    stat_line_2: The COP loss-and-damage finance commitment now stands at three hundred
+      billion dollars annually by 2035 — a number that was not on any negotiating
+      table before youth-led campaigns made the words loss and damage politically
+      unavoidable for the convening governments.
+    metadata:
+      semantic_family: loss-and-damage
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_turnaround_05
+    stat_line_1: 50,000 trained. Climate Reality.
+    stat_line_2: The Climate Reality Project has trained more than fifty thousand
+      climate leaders across one hundred and fifty-five countries since 2006 — a network
+      that did not exist before a former vice president decided to teach the same
+      slide deck across thousands of cities, and that now staffs much of the local-to-global
+      climate movement.
+    metadata:
+      semantic_family: climate-reality-trained
+      article_types:
+      - hard_news_spiritual_response
 bridge:
   options:
-  - id: tracker_capacity_01
-    line: 2,666 cases. 51 jurisdictions. The tracker measures what young people did.
-      It has no column for what made the next filing possible after the last delay
-      -- the capacity to stay functional enough to act again when the system keeps
-      not responding. The organizer who filed the next case needed it. So does the
-      person who read the update, closed the app, and opened it again. Ahjan sensei's
-      tradition has been developing it for 2,500 years.
+  - id: ahjan_climate_bridge_01
+    line: 7,500+ strikes. 150 countries. The tracker measures what young people built.
+      It has no column for what made the next strike possible after the last institutional
+      delay — the capacity to stay functional enough to act again when the system
+      keeps not responding at the depth the moment requires. The organizer who showed
+      up to the next Friday needed it. So does the reader who closed the app and opened
+      it again. The Rama lineage has been refining the discipline for centuries.
     hidden_capacity: stay functional enough to act again
-    semantic_family: tracker-capacity
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
-  - id: tracker_capacity_02
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_bridge_02
     line: Climate trackers count cases, targets, and thresholds. They do not count
-      the inner capacity that lets a young person stay in contact with the truth long
-      enough to act again after another institutional delay. That capacity is what
-      the next organizer needs. It is what the reader who reopened the app needs too.
-      Ahjan sensei's tradition has language and practice for protecting it.
-    hidden_capacity: stay in contact with truth without losing function
-    semantic_family: tracker-capacity-alt
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
+      the inner capacity that lets a young person hold action and grief at the same
+      time without collapsing one into the other. That capacity — what Ahjan calls
+      bands of awareness — is what climate work has been quietly requiring at the
+      level the inherited vocabularies of resilience cannot reach.
+    hidden_capacity: hold action and grief in the same field
+    metadata:
+      semantic_family: bands-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_bridge_03
+    line: The numbers show the scaffolding the young built. They do not show the etiquette
+      of consciousness the scaffolding was built inside — the protocol for staying
+      in contact with something larger than the personal capacity to hold, without
+      pretending the personal capacity is the only field that matters. The Tantric
+      tradition holds that protocol as native, not metaphor.
+    hidden_capacity: practice the etiquette of consciousness under planetary load
+    metadata:
+      semantic_family: etiquette-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_bridge_04
+    line: The data captures strikes, lawsuits, and finance commitments. It cannot
+      capture the integration the Tantric synthesis points to — that the Karma Yoga
+      of action, the Bhakti Yoga of devotion to the living world, and the Jnana Yoga
+      of discernment about which institutions are still capable of response are the
+      same work from three angles. Reducing climate practice to one yoga path misses
+      what the integration is for.
+    hidden_capacity: integrate the three yogas inside a single climate response
+    metadata:
+      semantic_family: three-yogas-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_bridge_05
+    line: 7.6 million people. One day. The count measures presence. It does not measure
+      the field — the energetic register in which a generation found itself in the
+      same room with the same recognition at the same time. In the Tantric framework
+      that field is not poetic. It is the precise level at which collective consciousness
+      shifts, and it is what the next coordinated response will require if it is to
+      meet the heat at the same depth.
+    hidden_capacity: register the field that the count cannot show
+    metadata:
+      semantic_family: field-shift-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 teacher_perspective:
   options:
-  - id: samvega_right_effort_01
+  - id: ahjan_climate_perspective_01
     header: What Ahjan Sees
     paragraphs:
-    - 'Buddhist practice has a precise name for this kind of pressure: samvega, the
-      destabilizing recognition that the world is more fragile than you were taught
-      to believe. What makes climate distress so exhausting is not that the body is
-      malfunctioning. It is that the body is perceiving the mismatch between official
-      reassurance and material reality accurately.'
-    - Ahjan pairs that with right effort. This is not productivity language. It is
-      the discipline of using energy where contact with truth is still possible. A
-      mind that can no longer stay with the next report is not proving personal weakness.
-      It is responding to a system that asks for constant awareness while refusing
-      proportionate response.
-    - 'The shift matters here: what feels like a private fault — me, broken, wrong
-      — is often accurate response to a system that asks for constant awareness while
-      refusing proportionate institutional action. The mind stops calling itself broken
-      when it sees that the real disorder is outside it.'
-    semantic_family: samvega-right-effort
-    reframe_type: self_to_system
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
-  - id: samvega_right_effort_02
+    - Tantric Buddhism holds that opposites are complementary, not in conflict — and
+      climate work is one of the precise places this insight has to be lived rather
+      than recited. The action and the grief, the urgency and the patience, the heat
+      outside and the steady ground inside are not in conflict. They are the conditions
+      for each other. The tradition does not resolve them by choosing one. It widens
+      the field of awareness wide enough to hold both at once.
+    - Bands of awareness — the discipline of holding multiple fields of attention
+      without collapsing one into the other — is what climate consciousness is asking
+      young people to develop in practice, often before any tradition has named it
+      for them. The fault is not that the cohort cannot do it. The fault is that the
+      inherited vocabularies of resilience were built for individual stress, not for
+      planetary load, and the practice has to be retrieved from older traditions where
+      the discipline was never lost.
+    - 'The reframe matters: what feels like a private fault — me, broken, wrong for
+      losing function — is often the accurate response of a nervous system being asked
+      to hold what no institution has yet agreed to hold at the same depth. The mind
+      stops calling itself broken when it sees that the real disorder is in the system
+      that has outsourced unbearable delay onto individual attention, and that the
+      Tantric tradition has language and practice for the inner ground from which
+      institutional change can still be made.'
+    metadata:
+      semantic_family: opposites-complementary-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_perspective_02
     header: What Ahjan Sees
     paragraphs:
-    - 'Ahjan reads climate panic through samvega: the moment when reality becomes
-      too serious for denial, and the body knows it before the mind finds the language.
-      That urgency is not an error signal. It is truthful contact with danger.'
-    - From there he turns to right effort. The question is not how to feel inspired
-      all day. The question is how to direct energy where contact with truth is still
-      possible, so attention is not consumed by helpless repetition.
-    - In that frame, self-blame softens. The fault is not yours — not a broken self,
-      not a wrong response. The problem is that institutions and policy systems keep
-      outsourcing unbearable delay onto individual nervous systems. Instead of naming
-      myself as the failure, I can finally see the structure that produced the pressure.
-    semantic_family: samvega-right-effort-alt
-    reframe_type: self_to_system
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
+    - The Tantric synthesis of Karma Yoga, Bhakti Yoga, and Jnana Yoga — action, devotion,
+      and discernment — is not a sequence. It is a single integrated practice that
+      climate work is one of the rare places now requiring all three at once. The
+      young organizer who files the lawsuit, the young person who grieves the coral
+      reef they will never see, and the young analyst who reads the IPCC report carefully
+      enough to know which targets the institutions have already privately abandoned
+      are all doing the same work from three angles.
+    - Reducing climate practice to one yoga path — pure action without devotion, or
+      pure contemplation without discernment, or pure analysis without love — misses
+      what the integration is for. The integration is what protects the practitioner
+      from collapse when any single angle becomes unbearable. The Rama lineage has
+      been refining this integration for centuries, and the tradition Ahjan carries
+      is a recapitulation of that work for the conditions the next generation is now
+      living inside.
+    - 'In that frame, self-blame softens. The fault is not that you have not done
+      enough — most of the cohort has already done more than the institutions ever
+      asked of them. The fault is that the work has been carried inside a frame that
+      reduces it to one yoga at a time, and the body knows the integration is missing
+      before the conversation does. The Tantric tradition does not ask the young to
+      become superhuman. It asks them to recover the practice their inherited spiritual
+      vocabularies forgot how to teach.'
+    metadata:
+      semantic_family: three-yogas-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_perspective_03
+    header: What Ahjan Sees
+    paragraphs:
+    - Etiquette of consciousness, in Ahjan's tradition, is the protocol for approaching
+      what cannot be solved by analysis alone. Climate is one of the clearest places
+      it applies. The heat is not a problem the individual mind can think its way
+      through. It is a field — a planetary condition the subtle body registers before
+      the conceptual mind catches up. The etiquette is the practice of letting the
+      field be received without collapsing it back into the smaller frame of personal
+      problem-solving.
+    - In practical terms this means the young person who closes the climate tab and
+      opens it again is not in malfunction. They are already practicing a primitive
+      version of the etiquette — refusing to look away, refusing to dissociate, but
+      not yet having the formal language for what they are doing. Ahjan's tradition
+      offers the language. It does not invent the practice. The practice is already
+      there in the body, waiting to be named precisely enough that it can be sustained
+      across the years the climate work actually requires.
+    - The reframe is that the etiquette of consciousness is not a contemplative withdrawal.
+      It is the discipline that lets the practitioner stay engaged with the laundry,
+      the next email, the next protest, the next vote — and the mountains, the wildfire
+      maps, the threshold breaches — without separating them. Laundry and mountains
+      are equally sacred. The next civic action and the next breath are the same field.
+      The tradition that splits these has nothing to offer at the depth climate now
+      requires.
+    metadata:
+      semantic_family: etiquette-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_perspective_04
+    header: What Ahjan Sees
+    paragraphs:
+    - The wheel of dharma turns slowly, and the climate is moving faster than the
+      civic response. In Ahjan's framework this is not cause for despair — it is the
+      precise condition the Tantric tradition was developed to meet. Tantric Buddhism
+      did not arise in times of equilibrium. It arose in periods of transition where
+      the inherited religious vocabularies were not adequate to the conditions, and
+      the practitioners had to recover the older recognition that opposites are complementary
+      before the new synthesis could form.
+    - 'The six worlds — the six realms of experience the tradition names — are not
+      metaphors in Ahjan''s framework. They are precise language for the layers of
+      experience climate work is asking young people to traverse: the hell-realm of
+      doom-scrolling, the hungry-ghost realm of insatiable information, the human
+      realm of moral seriousness, the realm of subtle bliss when the action briefly
+      lands, and the higher realms where the field itself is felt directly. The practice
+      is not to escape any of these. It is to recognize them and to keep the field
+      of attention wide enough that no single realm becomes the only one.'
+    - 'The reframe is that the young people losing function are not failing the moment.
+      They are registering the moment at the level the inherited spiritual vocabularies
+      were not designed to support. The Tantric tradition has the language. The Rama
+      lineage has been refining the practice. The work now is recapitulation — restoring
+      to the next generation the discipline their inherited frames forgot how to teach,
+      and trusting that the same discipline that carried earlier traditions through
+      their own transitions can carry this one through ours.'
+    metadata:
+      semantic_family: wheel-six-worlds-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_perspective_05
+    header: What Ahjan Sees
+    paragraphs:
+    - In Ahjan's tradition the subtle body is not metaphor. It is the precise level
+      at which climate distress is actually held — not in the conceptual mind that
+      reads the report, but in the energetic register that knows what the report means
+      before the conceptual mind catches up. The tightening in the chest, the closing
+      in the throat, the breath that will not deepen are subtle-body readings of planetary
+      load. The tradition's job is to receive those readings as information, not as
+      malfunction.
+    - 'The mystical cannot be known — only experienced, and only through the etiquette
+      that lets the smaller self approach what is larger than itself without collapsing
+      either one. Climate work is one of the places this is now being practiced at
+      scale, mostly without the formal language. Young people are already in contact
+      with something larger than the personal frame their inherited culture handed
+      them. The tradition Ahjan carries does not invent the contact. It names the
+      contact precisely enough that the contact can be sustained — across the years,
+      across the strikes, across the next institutional delay.'
+    - 'The reframe is that practical and spiritual are not separable. Laundry and
+      mountains are equally sacred. The next email and the next breath are the same
+      field. The tradition that splits these has nothing to offer at the depth climate
+      now requires, and the tradition that holds them together — Tantric Buddhism
+      in the Rama lineage — has been holding them together for centuries. The work
+      is recapitulation: restoring the integration the inherited frames lost track
+      of, so the next generation does not have to keep relearning it alone.'
+    metadata:
+      semantic_family: subtle-body-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 practice:
-  default_id: steadying_01
+  default_id: ahjan_climate_practice_01
   options:
-  - id: steadying_01
-    display_name: 5-minute Steadying Practice
+  - id: ahjan_climate_practice_01
+    display_name: Bands of Awareness Pause
     duration: 5 minutes
-    announcement_line: Ahjan sensei teaches a 5-minute Steadying Practice for moments
-      when climate information keeps converting attention into helplessness. It is
-      in the sidebar, timed and step by step.
+    announcement_line: Ahjan teaches a 5-minute Bands of Awareness Pause for moments
+      when a climate update has collapsed the field of attention into the single frame
+      of personal helplessness. It is in the sidebar, timed and step by step.
     relief_lines:
-    - The mind stops treating every update as proof that action is pointless.
-    - A steadier internal pace returns, and with it the capacity to act again.
+    - The two fields — what the climate is doing and what the body can sustain — stop
+      collapsing into each other.
+    - A steadier ground returns for the next action, the next conversation, the next
+      decision about where to put energy.
     relief_register:
     - capacity
     - clarity
     - act again
-    derived_from_frame: samvega_functional
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
-  - id: steadying_02
-    display_name: 5-minute Steadying Practice
-    duration: 5 minutes
-    announcement_line: Ahjan teaches a 5-minute Steadying Practice for the moment
-      when climate numbers turn into shutdown. It is in the sidebar, short enough
-      to use before class, after scrolling, or before the next meeting.
+    derived_from_frame: bands_of_awareness
+    metadata:
+      semantic_family: bands-of-awareness-pause
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_practice_02
+    display_name: Etiquette of Consciousness Recall
+    duration: 4 minutes
+    announcement_line: Ahjan teaches a 4-minute Etiquette of Consciousness Recall
+      for moments when climate information has been arriving faster than the field
+      of attention can hold, and the protocol for receiving rather than processing
+      has been lost in the rush. It is in the sidebar, timed and step by step.
     relief_lines:
-    - The body stops converting every update into total collapse.
-    - Enough steadiness returns for the next real action.
+    - The larger field is approached as something to be received, not solved.
+    - The body returns to a register that can sustain contact without collapse.
     relief_register:
-    - capacity
-    - clarity
-    - act again
-    derived_from_frame: samvega_functional
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
+    - receive
+    - protocol
+    - field
+    derived_from_frame: etiquette_of_consciousness
+    metadata:
+      semantic_family: etiquette-recall
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_practice_03
+    display_name: Six Worlds Witness
+    duration: 6 minutes
+    announcement_line: Ahjan teaches a 6-minute Six Worlds Witness practice for moments
+      when one realm of climate experience — the doom-scroll, the moral seriousness,
+      the brief lift after an action — has become the only field of attention. It
+      is in the sidebar, timed and step by step.
+    relief_lines:
+    - The single realm that had become the whole field returns to its actual proportion
+      inside the larger picture.
+    - The other realms become available again, and with them the energy that had been
+      trapped in the one.
+    relief_register:
+    - witness
+    - realm
+    - proportion
+    derived_from_frame: six_worlds
+    metadata:
+      semantic_family: six-worlds-witness
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_practice_04
+    display_name: Karma Yoga Daily Ritual
+    duration: 7 minutes
+    announcement_line: Ahjan teaches a 7-minute Karma Yoga Daily Ritual for moments
+      when climate action has started feeling like grasping after the outcome rather
+      than offering the work. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The grasping after the outcome softens; the work itself returns to view as the
+      offering it actually is.
+    - Enough ground returns to keep doing the work without requiring the work to deliver
+      relief on its own.
+    relief_register:
+    - offer
+    - action
+    - non-grasping
+    derived_from_frame: karma_yoga_daily
+    metadata:
+      semantic_family: karma-yoga-daily-ritual
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: ahjan_climate_practice_05
+    display_name: Subtle Body Listening
+    duration: 3 minutes
+    announcement_line: Ahjan teaches a 3-minute Subtle Body Listening practice for
+      moments when the chest, throat, or breath has been carrying a climate reading
+      the conceptual mind has not yet caught up to. It is in the sidebar, timed and
+      step by step.
+    relief_lines:
+    - The subtle-body reading becomes information rather than malfunction.
+    - The energetic register that had been compressed by the day returns to a range
+      the soul recognizes.
+    relief_register:
+    - listen
+    - subtle body
+    - reading
+    derived_from_frame: subtle_body_listening
+    metadata:
+      semantic_family: subtle-body-listening
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 sdg:
   primary:
     id: SDG 13
@@ -278,95 +736,89 @@ sdg:
       Nations.
 cta:
   options:
-  - id: youngo_01
-    org: YOUNGO
-    line: 'The Climate Reality Project and YOUNGO both run youth-facing entry points
-      into this work. Door in: https://youngoclimate.org'
-    semantic_family: door-in-climate
-    article_types:
-    - hard_news_spiritual_response
-  - id: una_usa_01
-    org: UNA-USA
-    line: 'If that is not your next step, UNA-USA runs a program at the local-to-global
-      level. Door in: join their network.'
-    semantic_family: door-in-una
-    article_types:
-    - hard_news_spiritual_response
-transitions:
-  loop_to_scale:
-    options:
-    - id: loop_to_scale_01
-      line: The scale is public now. What still lands first is the body.
-      metadata:
-        tone: plain
-        article_types:
-        - hard_news_spiritual_response
-  scale_to_action:
-    options:
-    - id: scale_to_action_01
-      line: That scale is not only a number. Young people are already moving on it.
-      metadata:
-        tone: plain
-        article_types:
-        - hard_news_spiritual_response
-  action_to_hidden_capacity:
-    options:
-    - id: action_to_capacity_01
-      line: What the numbers do not show is what made the next move possible.
-      metadata:
-        tone: plain
-        article_types:
-        - hard_news_spiritual_response
-  teaching_to_practice:
-    options:
-    - id: teaching_to_practice_01
-      line: From that frame, Ahjan offers something concrete.
-      metadata:
-        tone: plain
-        article_types:
-        - hard_news_spiritual_response
-  practice_to_sdg:
-    options:
-    - id: practice_to_sdg_01
-      line: That practice sits inside a larger frame.
-      metadata:
-        tone: plain
-        article_types:
-        - hard_news_spiritual_response
-  sdg_to_cta:
-    options:
-    - id: sdg_to_cta_01
-      line: If you are looking for a next step.
-      metadata:
-        tone: plain
-        article_types:
-        - hard_news_spiritual_response
+  - id: ahjan_climate_cta_01
+    org: 350.org
+    line: '350.org coordinates grassroots climate organizing across one hundred and
+      eighty-eight countries, with campaigns sized for first-time organizers and lifelong
+      ones alike. Door in: join their network.'
+    metadata:
+      semantic_family: door-in-350
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_cta_02
+    org: Fridays for Future
+    line: 'Fridays for Future has coordinated more than seven thousand five hundred
+      school strikes since 2018. Door in: find or start a local chapter.'
+    metadata:
+      semantic_family: door-in-ffl
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_cta_03
+    org: Sunrise Movement
+    line: 'Sunrise Movement organizes young people across the United States around
+      a Green New Deal and the political infrastructure to actually pass it. Door
+      in: join a hub or start one.'
+    metadata:
+      semantic_family: door-in-sunrise
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_cta_04
+    org: Earthjustice
+    line: 'Earthjustice runs the climate-focused public-interest law work that turns
+      grassroots organizing into binding precedent. Door in: support their cases or
+      join the action network.'
+    metadata:
+      semantic_family: door-in-earthjustice
+      article_types:
+      - hard_news_spiritual_response
+  - id: ahjan_climate_cta_05
+    org: The Climate Reality Project
+    line: 'The Climate Reality Project has trained more than fifty thousand climate
+      leaders since 2006 across one hundred and fifty-five countries. Door in: join
+      a training cohort.'
+    metadata:
+      semantic_family: door-in-climate-reality
+      article_types:
+      - hard_news_spiritual_response
 title_system:
-  headline_layer_1:
-    options:
-    - id: threshold_warning_01
-      line: 1.55C Is No Longer a Warning.
-      semantic_family: threshold-finality
-      article_types:
-      - hard_news_spiritual_response
-    - id: threshold_warning_02
-      line: The Threshold Is No Longer Abstract.
-      semantic_family: threshold-finality-alt
-      article_types:
-      - hard_news_spiritual_response
   headline_layer_2:
     options:
-    - id: buddhist_attention_01
-      line: A Buddhist teacher names what climate stress is doing to Gen Z attention.
-      semantic_family: teacher-attention
-      article_types:
-      - hard_news_spiritual_response
-    - id: buddhist_function_01
-      line: A Buddhist teacher reads climate distress as a fight for functional capacity,
-        not proof of weakness.
-      semantic_family: teacher-function
-      article_types:
-      - hard_news_spiritual_response
+    - id: ahjan_climate_headline_01
+      line: A Tantric Buddhist teacher names what climate stress is doing to Gen Z
+        attention — and the practice that widens the bands again.
+      metadata:
+        semantic_family: teacher-attention
+        article_types:
+        - hard_news_spiritual_response
+    - id: ahjan_climate_headline_02
+      line: Opposites are complementary — Ahjan reads climate distress as the precise
+        place the Tantric synthesis has to be lived rather than recited.
+      metadata:
+        semantic_family: opposites-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: ahjan_climate_headline_03
+      line: The Rama lineage holds the integration of Karma Yoga, Bhakti Yoga, and
+        Jnana Yoga — climate work is one of the rare places now requiring all three
+        at once.
+      metadata:
+        semantic_family: three-yogas-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: ahjan_climate_headline_04
+      line: Etiquette of consciousness, not contemplative withdrawal — a Tantric teacher
+        on the protocol climate work has been quietly requiring all along.
+      metadata:
+        semantic_family: etiquette-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: ahjan_climate_headline_05
+      line: Laundry and mountains are equally sacred — Ahjan refuses the split between
+        spiritual practice and civic action that the inherited frames keep proposing.
+      metadata:
+        semantic_family: practical-spiritual-frame
+        article_types:
+        - hard_news_spiritual_response
 variation_policy:
   avoid_same_semantic_family_within_article: true
   deterministic_rotation_key: article_id + slot + teacher_id + topic
@@ -374,9 +826,6 @@ variation_policy:
     article_types:
     - hard_news_spiritual_response
     - commentary
-    topic_subcases:
-    - threshold_news
-    - institutional_delay
     intensity_range:
     - 2
     - 4
