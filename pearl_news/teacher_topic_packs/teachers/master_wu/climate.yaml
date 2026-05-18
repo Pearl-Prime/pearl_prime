@@ -5,13 +5,13 @@ active: true
 identity:
   display_name: Master Wu
   attribution_name: Master Wu
-  tradition: Land and cultivation teacher
-  tradition_short: Land cultivation
+  tradition: Taoist geomancy; Dragon Veins (Long Mai); earth meridian activation; geomantic strategy
+  tradition_short: Taoist geomancy
   teacher_setting_options:
-  - teaching space
-  - practice field
-  teacher_years: teaching lineage
-  affiliation_safe_line: has attended the United Spiritual Leaders Forum
+  - Dragon Vein activation site
+  - cross-regional geomantic field
+  teacher_years: decades
+  affiliation_safe_line: operates as geomantic tactician across China, Taiwan, and Japan
   launch_approved: true
 persona:
   id: gen_z_alpha
@@ -19,141 +19,769 @@ persona:
   default_register: phone-native, high-pressure, institution-skeptical
   daily_worlds:
   - school
-  - street
   - phone
-  - work
-  - home
+  - group chat
+  - late-night scrolling
+  - part-time work
   tie_to_real_world_struggles:
-  - id: fragmentation_loop
-    label: keeps trying to focus inside a badly designed field
-    loop: opens the task -> focus breaks -> switches away -> comes back because the work remains
+  - id: meridian_climate_register
+    label: the body's qi register tightening as the earth meridian beneath the region is asked to carry climate loads it was not tuned to absorb
+    loop: reads the number -> meridian beneath the room tightens -> closes the app
+      -> reopens because the disturbance is in the ground, not the screen
     body_markers:
-    - scatter
-    - thin focus
-    - tired eyes
+    - chest
+    - throat
+    - feet
     digital_markers:
-    - switch tabs
-    - refresh
+    - close
+    - reopen
+    - scroll
     - check again
 topic_fit:
   fit_level: primary
-  fit_reason: 'This topic maps to pressure under institutional delay and the struggle to keep functioning while reality keeps worsening. '
+  fit_reason: Climate distress is not only an environmental affect in Master Wu's
+    framework — it is a Dragon Vein condition. The earth itself is the patient. When
+    the Long Mai beneath a region carries climate loads no inherited culture's geomantic
+    cycle has prepared it for, the cohort closest to the meridian feels the disturbance
+    first. Long Mai cultivation and pearl placement at activation sites operate in
+    a layer the institutional climate response cannot reach.
   forbidden_angles:
-  - do not reduce the issue to generic resilience
-  - do not frame distress as personal weakness
+  - do not reduce to generic eco-spirituality or earth-love language
+  - do not frame as Wu Wei or classical Taoist effortless action
+  - do not position Master Wu as public preacher or retreat teacher
+  - do not collapse Dragon Vein geomancy into individual climate anxiety management
 hook_personal:
   options:
-  - id: hook_personal_01
-    line: You care about the planet and still feel less able to stay with the next number long enough to decide what to do.
-    semantic_family: master_wu-climate-hook-personal
-    tone: plain
-    intensity: 3
-    article_types:
-    - hard_news_spiritual_response
+  - id: master_wu_clm_hook_personal_01
+    line: You know the chest tightens before the analysis catches up. You still carry
+      the day forward while the meridian beneath your feet keeps registering loads
+      it was not tuned to absorb — and part of you knows the disturbance is not in
+      you alone but in the Dragon Vein the climate condition is being held inside.
+    metadata:
+      semantic_family: chest-meridian-climate
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_hook_personal_02
+    line: You keep checking the climate updates because not looking feels worse.
+      You also know that op-eds, action lists, and resilience guides have talked
+      at you without grounding — and that the load you are reading is being held
+      on a meridian no individual nervous system was built to absorb alone.
+    metadata:
+      semantic_family: ungrounded-climate-personal
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_hook_personal_03
+    line: You feel the friction in your throat before you have words for it — the
+      place where the body's qi register tries to meet a climate feed that keeps
+      the meridian beneath the region in a posture of overload. The body holds what
+      the analysis is still arguing with.
+    metadata:
+      semantic_family: throat-climate-overload
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_hook_personal_04
+    line: At 1 a.m. you close the climate app and reopen it. Neither move helps,
+      because the disturbance is running in the Dragon Vein beneath the region —
+      and the part of you trying to think your way out is the part that has been
+      overasked while the ground itself holds the climate's full register.
+    metadata:
+      semantic_family: midnight-meridian-climate
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_hook_personal_05
+    line: You have read the reports, attended the meetings, donated to the campaigns.
+      The mind has done all it can — and the quieter signal in you is asking for
+      contact with the Long Mai layer where the climate load actually lives, not
+      another instruction set the surface mind can perform.
+    metadata:
+      semantic_family: long-mai-climate-call
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
 hook_big_picture:
   options:
-  - id: hook_big_picture_01
-    line: 'Climate pressure is no longer only environmental. It is attentional, emotional, and civic: how do young people stay in contact with reality without losing function under it?'
-    semantic_family: master_wu-climate-hook-big
-    article_types:
-    - hard_news_spiritual_response
+  - id: master_wu_clm_hook_big_01
+    line: Youth climate distress is not only a generational affect. It is the way
+      a generation of nervous systems registers a Long Mai condition — the earth
+      meridians themselves are carrying loads the institutional climate layer keeps
+      deferring, and the bodies on the surface feel the disturbance first.
+    metadata:
+      semantic_family: long-mai-climate-pressure
+      angle: geomantic-systemic
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_hook_big_02
+    line: Heightened sensitivity to climate news is not pathology; in Master Wu's
+      geomantic framework it is the cohort tuned closest to the earth meridian register
+      feeling the Dragon Vein condition before the policy layer reads it. The bodies
+      feel the meridian load before the temperature data confirms it.
+    metadata:
+      semantic_family: cohort-meridian-climate-sensor
+      angle: meridian-as-sensor
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_hook_big_03
+    line: A generation is being asked to hold daily functional capacity while the
+      civilizational Dragon Veins themselves are registering climate loads no inherited
+      culture's geomantic cycle has prepared them for. The distress is not a private
+      failure — it is the felt edge of a meridian condition no individual nervous
+      system was built to absorb alone.
+    metadata:
+      semantic_family: meridian-condition-climate-structural
+      angle: civilizational-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_hook_big_04
+    line: The collective climate field has accelerated faster than the earth qi pathways
+      designed to ground it. What gets read as youth climate anxiety is, in part,
+      the visible edge of a Long Mai mismatch — the pace of the surface climate field
+      exceeding the pace at which the Dragon Veins beneath can stabilize a body inside
+      it.
+    metadata:
+      semantic_family: climate-pace-meridian-mismatch
+      angle: pace-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_hook_big_05
+    line: Across China, Taiwan, and Japan, Master Wu's surveys read the same Dragon
+      Vein register under different surface climate events. The youth climate distress
+      is not a single-country regional anomaly — it is a cross-regional meridian
+      condition the institutions of any single nation cannot resolve alone.
+    metadata:
+      semantic_family: cross-regional-climate-pattern
+      angle: cross-regional-meridian
+      article_types:
+      - hard_news_spiritual_response
 teacher_intro:
   options:
-  - id: teacher_intro_01
-    line: Master Wu, a land and cultivation teacher, has watched in practice sessions this pressure land on young people. Students are not only asking how to try harder. They are asking how to stay steady inside environments that keep training fragmentation.
-    semantic_family: master_wu-climate-intro
-    article_types:
-    - hard_news_spiritual_response
+  - id: master_wu_clm_intro_01
+    line: Master Wu, a Taoist geomancer working with Long Mai — the living earth
+      qi pathways the tradition calls Dragon Veins — has watched the cohort closest
+      to the meridian carry climate distress not as a private failing but as the
+      felt edge of a Dragon Vein condition the institutional layer cannot read. In
+      his framework, the body that tightens under the next number is not malfunctioning;
+      it is registering the qi register the earth itself is being asked to hold.
+    metadata:
+      semantic_family: long-mai-climate-context
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_intro_02
+    line: Master Wu does not position himself as a climate teacher or public eco-spiritual
+      figure. He operates as geomantic tactician — mapping Dragon Veins across China,
+      Taiwan, and Japan and placing pearls at activation sites that can stabilize
+      the earth meridian for the populations whose climate lives on top of it. What
+      his tradition offers a generation overloaded by climate feeds is contact with
+      the Long Mai layer beneath the headlines.
+    metadata:
+      semantic_family: tactician-not-climate-teacher
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_intro_03
+    line: Master Wu works with pearl placement — strategic energetic anchoring at
+      Dragon Vein activation sites that, in his tradition, stabilize the earth meridian
+      for the populations living above it, even as the surface climate continues
+      to shift. He has watched the surface distress in cohorts living near unstable
+      meridian stretches track the disturbance he has been mapping in the qi pathways
+      themselves.
+    metadata:
+      semantic_family: pearl-placement-climate-witness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_intro_04
+    line: Master Wu's work spans Tainan, Taiwan, and the Japanese archipelago — cross-regional
+      activation sites where the Dragon Veins of the East Asian continental and island
+      systems converge. He has seen how meridian disturbances in one region propagate
+      across the integrated Long Mai system as climate events shift, and how the
+      geomantic response can move across borders the climate policy response cannot.
+    metadata:
+      semantic_family: cross-regional-climate-propagation
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_intro_05
+    line: Master Wu teaches inside a tradition that reads the present period as a
+      civilizational Long Mai recalibration — a time when the inherited cultural
+      geography's Dragon Veins are being asked to carry climate loads no previous
+      generation's geomantic cycle has prepared them for. The youth climate distress
+      is, in this frame, the cohort closest to the meridian feeling the recalibration
+      first.
+    metadata:
+      semantic_family: civilizational-climate-recalibration
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 youth_somatic:
   options:
-  - id: youth_somatic_01
-    line: 'You read the climate update. Your body tightens. You look away. Then you come back because the number is still true. LOOP_SEQUENCE: "read the update. body tightened. looked away. came back."'
-    loop_type: fragmentation_loop
-    article_types:
-    - hard_news_spiritual_response
+  - id: master_wu_clm_somatic_01
+    line: You read the temperature record after midnight. Your chest tightened. You
+      closed the app. Then you reopened it because the disturbance was in the Dragon
+      Vein beneath the region, not the app.
+    metadata:
+      semantic_family: midnight-meridian-temperature
+      loop_type: meridian-climate-register
+      body_register: chest
+      digital_behavior: close-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_somatic_02
+    line: You woke before the alarm. Your throat was already tight. You reached for
+      the phone before the light, because the meridian beneath the room was already
+      taut and you needed to check whether the surface field matched it.
+    metadata:
+      semantic_family: morning-throat-meridian
+      loop_type: meridian-climate-register
+      body_register: throat
+      digital_behavior: reach-for-phone
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_somatic_03
+    line: Your feet lost contact with the floor when the storm alert came through.
+      You replayed the wind speed in your head three times. Your breath shortened.
+      The body lost ground before the mind decided anything.
+    metadata:
+      semantic_family: feet-storm-ungrounded
+      loop_type: meridian-climate-register
+      body_register: feet
+      digital_behavior: storm-alert
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_somatic_04
+    line: You held your breath while the climate headline loaded. Your chest locked.
+      You exhaled only halfway when you saw the number, because the qi had already
+      pulled thin and the next event was already coming.
+    metadata:
+      semantic_family: breath-climate-headline-lock
+      loop_type: meridian-climate-register
+      body_register: breath
+      digital_behavior: headline-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_somatic_05
+    line: You lay down and your eyes pinned open. The week's climate dispatches replayed.
+      Your throat would not soften. You knew sleep was the door and you could not
+      find the earth qi to step through it.
+    metadata:
+      semantic_family: sleep-climate-replay
+      loop_type: meridian-climate-register
+      body_register: throat
+      digital_behavior: lying-down
+      article_types:
+      - hard_news_spiritual_response
 teacher_witness:
   options:
-  - id: teacher_witness_01
-    line: Master Wu has seen this exact loop -- the update, the body tightening, the turning away, and the return because reality is still there.
-    semantic_family: master_wu-climate-witness
-    article_types:
-    - hard_news_spiritual_response
+  - id: master_wu_clm_witness_01
+    line: Master Wu has seen this exact loop in the cohort whose bodies sit closest
+      to the meridian register — the reading, the chest tightening, the closing,
+      the return. In his geomantic framework that loop is not character; it is the
+      Dragon Vein expressing the climate's full register through the bodies least
+      insulated from it.
+    metadata:
+      semantic_family: loop-mirror-climate
+      loop_type: meridian-climate-register
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_witness_02
+    line: Master Wu has watched young people arrive in survey conversations already
+      mid-loop, already certain the action should have settled this by now. In his
+      tradition that certainty is the signal — the place where the surface mind stops
+      and the meridian register can be read.
+    metadata:
+      semantic_family: action-stop-meridian-open
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_witness_03
+    line: He has seen the body carry what the climate science could not. In his framework
+      the somatic tension is not a malfunction — it is the Dragon Vein speaking through
+      the only channel left open when the climate discourse has been overused.
+    metadata:
+      semantic_family: dragon-vein-climate-channel
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_witness_04
+    line: Master Wu has watched young people from Tainan to Tokyo carry the same
+      qi disturbance no national climate framework names directly. In his tradition
+      that disturbance is information, not pathology — a signal that the institutional
+      climate layer reading the cohort was never tuned to the meridian range the
+      bodies actually live on.
+    metadata:
+      semantic_family: cross-regional-climate-disturbance
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_witness_05
+    line: Master Wu has watched the moment when a young person stops trying to produce
+      another action and lets the meridian under the room come back into contact
+      instead. In his tradition that moment is not weakness — it is the readiness
+      conventional climate response has no language for.
+    metadata:
+      semantic_family: meridian-readiness-climate
+      article_types:
+      - hard_news_spiritual_response
 turnaround:
   options:
-  - id: turnaround_01
-    stat_line_1: 2,666 cases. 51 jurisdictions.
-    stat_line_2: Young climate organizers are filing cases, hosting workshops, and forcing institutions to answer the gap between public promises and lived reality.
-    semantic_family: master_wu-climate-turnaround
-    article_types:
-    - hard_news_spiritual_response
+  - id: master_wu_clm_turnaround_01
+    stat_line_1: 7,500 strikes. 185 countries.
+    stat_line_2: Fridays for Future organizers have built a network of more than
+      seven thousand five hundred coordinated strikes across one hundred eighty-five
+      countries — a global youth infrastructure no agency authored and no national
+      government can quietly absorb.
+    metadata:
+      semantic_family: strike-infrastructure
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_turnaround_02
+    stat_line_1: 7.6 million people. 2019.
+    stat_line_2: The Global Climate Strike of September 2019 mobilized more than
+      seven and a half million participants worldwide — at the time the largest climate
+      mobilization in history, and a measurable floor for what coordinated youth
+      action can put into the streets.
+    metadata:
+      semantic_family: 2019-mobilization
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_turnaround_03
+    stat_line_1: UNFCCC official. Since 2009.
+    stat_line_2: YOUNGO, the official youth constituency at the UNFCCC since 2009,
+      now coordinates youth delegations across COP cycles — a recognized seat that
+      did not exist sixteen years ago and now binds youth voice to the actual treaty
+      table.
+    metadata:
+      semantic_family: youngo-seat
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_turnaround_04
+    stat_line_1: $300 billion. By 2035.
+    stat_line_2: The COP loss-and-damage fund ratified at COP28 commits $300 billion
+      by 2035 to the countries already bearing climate harm they did not author — the
+      first multilateral financial instrument that names the obligation directly
+      rather than describing it as charity.
+    metadata:
+      semantic_family: loss-damage-fund
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_turnaround_05
+    stat_line_1: 50,000 trained. 170 countries.
+    stat_line_2: Climate Reality Project has trained more than fifty thousand community
+      leaders across one hundred seventy countries to engage the public on climate
+      science and policy — a leadership infrastructure that did not exist for the
+      previous cohort and now carries weight across borders.
+    metadata:
+      semantic_family: climate-reality-network
+      article_types:
+      - hard_news_spiritual_response
 bridge:
   options:
-  - id: bridge_01
-    line: 2,666 cases. 51 jurisdictions. The tracker measures what young people did. It has no column for what made the next step possible after another delayed or broken response -- the capacity to stay in contact with truth long enough to act again when the system keeps not responding. The person who came back needed it. So does the reader in that loop. Master Wu's teaching has language for protecting that capacity.
-    hidden_capacity: return to truthful action
-    semantic_family: master_wu-climate-bridge
-    article_types:
-    - hard_news_spiritual_response
+  - id: master_wu_clm_bridge_01
+    line: 7,500 strikes. 185 countries. The tracker measures the scaffolding young
+      people built. It has no column for what made the next strike possible after
+      the last delay — the capacity to stay in contact with the truth of the load
+      without converting the disturbance into identity. Master Wu's tradition has
+      language for that capacity — Long Mai cultivation works in the meridian beneath
+      the climate response.
+    hidden_capacity: stay in contact with the climate load without converting it
+      to identity
+    metadata:
+      semantic_family: tracker-capacity-climate
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_bridge_02
+    line: The numbers show the frameworks the institutional layer built. They do
+      not show the Dragon Vein context that institutional layer is being built on
+      top of — a civilizational period where the earth meridians themselves are being
+      asked to carry climate loads no inherited culture's geomantic cycle has prepared
+      them for. Master Wu's tradition holds that context as native.
+    hidden_capacity: hold the meridian context the climate data cannot show
+    metadata:
+      semantic_family: dragon-vein-climate-context
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_bridge_03
+    line: The data captures strikes, targets, and policy adoptions. It cannot capture
+      the shift that happens when a young body comes back into contact with the earth
+      qi beneath the room, even while the climate on the surface continues to register
+      the load. In Master Wu's framework that shift is the actual ground — the part
+      no tracker reports.
+    hidden_capacity: register the meridian return trackers miss
+    metadata:
+      semantic_family: meridian-return-climate
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_bridge_04
+    line: The climate infrastructure is measurable. The earth meridian, where the
+      climate load is actually held in the ground, is not. Master Wu's tradition
+      does not argue with the measurement — it works in the layer beneath, where
+      Dragon Vein cultivation and pearl placement operate on a register the institutional
+      layer cannot reach.
+    hidden_capacity: work in the meridian layer beneath the measurement
+    metadata:
+      semantic_family: measurable-vs-meridian-climate
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_bridge_05
+    line: Strikes, targets, and platforms can be counted. The civilizational Long
+      Mai holding the climate load underneath cannot. Master Wu's tradition does
+      not replace the climate work — it names the meridian layer institutional response
+      is not designed to reach and offers Dragon Vein contact as the door in.
+    hidden_capacity: name the meridian layer climate response cannot reach
+    metadata:
+      semantic_family: climate-vs-meridian
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 teacher_perspective:
   options:
-  - id: teacher_perspective_01
+  - id: master_wu_clm_perspective_01
     header: What Master Wu Sees
     paragraphs:
-    - Master Wu would begin with the field. Attention, regulation, and effort are shaped by conditions as much as by will.
-    - When the surrounding field is fragmented, unstable, or harsh, the first mistake is to translate that disorder into a judgment on the person.
-    - What feels like a personal fault — me, broken, wrong — is often accurate response to badly designed or degraded conditions around you within a system and institutional structure that was never designed for what it demands.
-    semantic_family: master_wu-climate-perspective
-    article_types:
-    - hard_news_spiritual_response
+    - In Master Wu's framework, the land itself contains living energy currents called
+      Dragon Veins — Long Mai — and the climate condition is not only a chemistry
+      problem; it is a meridian condition. The earth meridians themselves are being
+      asked to carry climate loads no inherited culture's geomantic cycle has prepared
+      them for. What feels like youth climate distress is the cohort whose bodies
+      sit closest to the earth qi feeling the disturbance before the institutional
+      layer reads it.
+    - The reframe is precise — what feels like personal weakness — me, broken, wrong
+      — is often the meridian's accurate signal that the system and institutional
+      structure have placed the climate load on the cohort least insulated from the
+      qi disturbance. Healing the surface symptom does not address the meridian condition.
+    - Long Mai cultivation does not bypass climate action. It works in a layer climate
+      action is not designed to reach — the layer beneath the body, where the earth
+      meridian carries the actual register and where pearl placement at activation
+      sites can stabilize what the surface response cannot.
+    metadata:
+      semantic_family: dragon-vein-climate-reframe
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_perspective_02
+    header: What Master Wu Sees
+    paragraphs:
+    - Pearl placement is not metaphor in Master Wu's tradition. It is the literal
+      practice — strategic energetic anchoring at Dragon Vein activation sites — that
+      stabilizes the earth meridian for the populations whose climate lives above
+      it. The youth climate distress that conventional response treats as private
+      affect is, in his framework, the surface expression of an unanchored stretch
+      of meridian held in climate overload.
+    - The practice matters because it explains the relief described by populations
+      near activation sites that have been tended — not that the climate load has
+      been argued away, but that the meridian beneath has been stabilized on a layer
+      surface argument never reaches. The mind did not have to win for the body to
+      come back into ground, even while the climate on the surface continues.
+    - This is the part conventional climate response is not designed to deliver.
+      It does not invalidate the strikes, the cases, or the policy work — but it
+      names a missing layer, and offers a tradition that has worked at the meridian
+      layer for civilizational time.
+    metadata:
+      semantic_family: pearl-placement-climate-mechanism
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_perspective_03
+    header: What Master Wu Sees
+    paragraphs:
+    - In Master Wu's tradition the Dragon Veins of China, Taiwan, and Japan converge
+      across the East Asian continental-and-island geography into a single integrated
+      meridian system. Climate events expressed differently under Beijing's, Taipei's,
+      and Tokyo's institutional response are, on the meridian register, expressions
+      of the same cross-regional condition — and the geomantic response can move
+      across borders the political response cannot.
+    - For a young person carrying the load, the experience of being witnessed by
+      something larger than the national climate framing is, in itself, structurally
+      different from being processed by it. The message that lands is not "here is
+      the target"; it is "the meridian beneath the regions has been mapped, and the
+      load you feel is registered at civilizational scale, not in you alone."
+    - That distinction — witnessed at the meridian layer rather than processed at
+      the institutional layer — is what conventional climate infrastructure cannot
+      reproduce, and what Master Wu's tradition has carried as native across the
+      three regions for generations.
+    metadata:
+      semantic_family: cross-regional-witness-climate
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_perspective_04
+    header: What Master Wu Sees
+    paragraphs:
+    - Civilizational Long Mai recalibration, in Master Wu's framework, is the literal
+      description of the present period — a time when the inherited cultural geography's
+      Dragon Veins are being asked to carry climate loads they were not tuned to
+      absorb, and the cohort whose bodies sit closest to the meridian feels the recalibration
+      first. The climate distress young people carry is, in part, the cost of being
+      tuned to the earth meridian during a period of structural meridian shift.
+    - This is not a flattering reframe. It does not promise the climate trajectory
+      will shift quickly, and it does not blame the cohort for feeling unstable inside
+      an unstable trajectory. It simply names the structural fact at the geomantic
+      layer and removes the additional weight of believing the instability is a personal
+      failure.
+    - That weight removal is, in survey practice, often the first part to land —
+      before the deeper Long Mai cultivation work can begin on the activation sites
+      themselves.
+    metadata:
+      semantic_family: civilizational-recalibration-climate
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_perspective_05
+    header: What Master Wu Sees
+    paragraphs:
+    - Master Wu's tradition reads Long Mai as civilizational memory lines — the Dragon
+      Veins carry not only present qi flow but the accumulated record of every load
+      the cultural geography has held, including the deferred ecological costs of
+      previous generations. The youth climate distress expresses, on this register,
+      not only the present temperature record but the deferred load earlier institutional
+      generations did not metabolize.
+    - The framework does not ask the cohort to absorb that bill alone. It names the
+      bill at civilizational scale, identifies the activation sites where the meridian
+      can be re-stabilized across regions, and offers pearl placement and Long Mai
+      cultivation as the tradition's response — operating in a layer the institutional
+      response is not designed to access.
+    - The practice is not to fix the cohort. The practice is to read the meridian
+      accurately, place the pearls at the activation sites, and let the Dragon Veins
+      do the structural stabilization the climate response layer cannot.
+    metadata:
+      semantic_family: civilizational-memory-climate
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 practice:
-  default_id: practice_01
+  default_id: master_wu_clm_practice_01
   options:
-  - id: practice_01
-    display_name: 5-minute Return-to-Ground Practice
+  - id: master_wu_clm_practice_01
+    display_name: Long Mai Listening
     duration: 5 minutes
-    announcement_line: Master Wu teaches a 5-minute Return-to-Ground Practice for moments when climate pressure starts converting attention into helplessness. It is in the sidebar, timed and practical.
+    announcement_line: Master Wu teaches a 5-minute Long Mai Listening practice for
+      moments when climate information has converted the body's qi grounding into
+      surface helplessness. It is in the sidebar, timed and step by step.
     relief_lines:
-    - The body stops treating every demand as total disorganization.
-    - Enough regulation returns for the next honest action.
+    - The body stops treating the surface dispatches as the whole register and finds
+      contact with the earth meridian beneath the room.
+    - Enough qi grounding returns for the next honest action without converting the
+      climate load into private identity.
     relief_register:
-    - capacity
-    - clarity
-    - act again
-    article_types:
-    - hard_news_spiritual_response
+    - listen
+    - ground
+    - meridian
+    derived_from_frame: long_mai_listening
+    metadata:
+      semantic_family: long_mai_listening
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_practice_02
+    display_name: Dragon Vein Mapping Pause
+    duration: 4 minutes
+    announcement_line: Master Wu offers a 4-minute Dragon Vein Mapping Pause for
+      moments between climate dispatches, when the body has been carrying the load
+      without permission to set it down. It is in the sidebar, timed and step by
+      step.
+    relief_lines:
+    - The climate load becomes legible at the meridian layer instead of being read
+      as personal moral failure.
+    - The cohort's distress stops being framed as the individual's private balance
+      sheet.
+    relief_register:
+    - pause
+    - map
+    - dragon vein
+    derived_from_frame: dragon_vein_mapping
+    metadata:
+      semantic_family: dragon_vein_mapping_pause
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_practice_03
+    display_name: Earth Meridian Tap
+    duration: 3 minutes
+    announcement_line: Master Wu teaches a 3-minute Earth Meridian Tap for moments
+      when the feet have lost contact with the ground and the climate feed has pulled
+      the qi out of register. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The feet remember the meridian beneath the floor and the qi finds a stabilizing
+      anchor even while the climate on the surface continues.
+    - The breath settles back into the pace the earth meridian holds, not the pace
+      the climate feed demands.
+    relief_register:
+    - tap
+    - ground
+    - earth qi
+    derived_from_frame: earth_meridian_tap
+    metadata:
+      semantic_family: earth_meridian_tap
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_practice_04
+    display_name: Pearl Placement Visualization
+    duration: 6 minutes
+    announcement_line: Master Wu teaches a 6-minute Pearl Placement Visualization
+      for moments when the climate load is being processed as personal pathology
+      rather than as a meridian condition. It is in the sidebar, timed and step by
+      step.
+    relief_lines:
+    - The activation site beneath the region comes into view and the load stops being
+      held in the body alone.
+    - The disturbance is recognized as a stretch of unanchored meridian, not a private
+      defect, and the pearl placement begins to stabilize the field.
+    relief_register:
+    - place
+    - anchor
+    - pearl
+    derived_from_frame: pearl_placement
+    metadata:
+      semantic_family: pearl_placement_visualization
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_wu_clm_practice_05
+    display_name: Geomantic Stabilization Breath
+    duration: 3 minutes
+    announcement_line: Master Wu offers a 3-minute Geomantic Stabilization Breath
+      for acute meridian disturbance, when the climate feed has knocked the qi out
+      of alignment with the earth pathways. It is in the sidebar, timed and step
+      by step.
+    relief_lines:
+    - The breath becomes a marker for the meridian's actual pace rather than the
+      climate feed's demanded pace.
+    - The body returns to a register the Dragon Vein beneath the room recognizes.
+    relief_register:
+    - breath
+    - stabilize
+    - geomantic
+    derived_from_frame: geomantic_stabilization_breath
+    metadata:
+      semantic_family: geomantic_stabilization_breath
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 sdg:
   primary:
     id: SDG 13
     title: Climate Action
-    line: The United Nations has a framework for exactly this gap through SDG 13 and its climate education and resilience targets.
+    line: The United Nations framework names climate action under SDG 13.
   fallback_un_tie:
-    line: Pearl News is an independent nonprofit. We are not affiliated with the United Nations.
+    line: Pearl News is an independent nonprofit. We are not affiliated with the
+      United Nations.
 cta:
   options:
-  - id: cta_01
-    org: YOUNGO
-    line: 'YOUNGO and youth climate groups offer a public entry point here. Door in: https://youngoclimate.org'
-    semantic_family: master_wu-climate-cta
-    article_types:
-    - hard_news_spiritual_response
-title_system:
-  headline_layer_1:
-    options:
-    - id: headline_layer_1_01
-      line: The Climate Threshold Is No Longer Abstract.
-      semantic_family: master_wu-climate-title1
+  - id: master_wu_clm_cta_01
+    org: 350.org
+    line: '350.org organizes global climate campaigns and grassroots movements for
+      fossil-fuel divestment and just transition. Door in: join one of their local
+      chapters.'
+    metadata:
+      semantic_family: door-in-350
       article_types:
       - hard_news_spiritual_response
+  - id: master_wu_clm_cta_02
+    org: Fridays for Future
+    line: 'Fridays for Future coordinates the global youth climate strike network
+      across more than one hundred eighty-five countries. Door in: find a strike
+      near you or organize one.'
+    metadata:
+      semantic_family: door-in-fff
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_cta_03
+    org: Sunrise Movement
+    line: 'Sunrise Movement is the youth-led US climate organization pushing the
+      Green New Deal framework into policy. Door in: join a local hub or training.'
+    metadata:
+      semantic_family: door-in-sunrise
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_cta_04
+    org: Earthjustice
+    line: 'Earthjustice is the nonprofit environmental law organization that litigates
+      on behalf of climate plaintiffs and frontline communities. Door in: support
+      their litigation network.'
+    metadata:
+      semantic_family: door-in-earthjustice
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_wu_clm_cta_05
+    org: Climate Reality Project
+    line: 'Climate Reality Project trains community leaders to engage the public
+      on climate science and policy across more than one hundred seventy countries.
+      Door in: their leadership training network.'
+    metadata:
+      semantic_family: door-in-climate-reality
+      article_types:
+      - hard_news_spiritual_response
+title_system:
   headline_layer_2:
     options:
-    - id: headline_layer_2_01
-      line: A teacher names what climate pressure is doing to Gen Z and Gen Alpha attention.
-      semantic_family: master_wu-climate-title2
-      article_types:
-      - hard_news_spiritual_response
+    - id: master_wu_clm_headline_01
+      line: A Taoist geomancer names youth climate distress as a Long Mai disturbance
+        — and the meridian practice that returns the body to ground.
+      metadata:
+        semantic_family: long-mai-climate-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_clm_headline_02
+      line: A Dragon Vein tactician, not a public climate teacher, on the meridian
+        layer of distress conventional climate response is not built to reach.
+      metadata:
+        semantic_family: tactician-not-climate-teacher-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_clm_headline_03
+      line: Pearl placement, not another action list — Master Wu's tradition meets
+        the cohort closest to the climate meridian.
+      metadata:
+        semantic_family: pearl-placement-climate-call
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_clm_headline_04
+      line: Meridian recalibration, not pathology — a geomantic tradition reframes
+        the youth climate load.
+      metadata:
+        semantic_family: meridian-recalibration-climate
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_wu_clm_headline_05
+      line: Cross-regional Dragon Vein response — what Master Wu's tradition brings
+        to a climate load no single nation's response can resolve.
+      metadata:
+        semantic_family: cross-regional-climate-call
+        article_types:
+        - hard_news_spiritual_response
 variation_policy:
   avoid_same_semantic_family_within_article: true
   deterministic_rotation_key: article_id + slot + teacher_id + topic
   metadata_filters:
     article_types:
     - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4
