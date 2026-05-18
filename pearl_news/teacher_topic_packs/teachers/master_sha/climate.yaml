@@ -5,13 +5,13 @@ active: true
 identity:
   display_name: Master Sha
   attribution_name: Dr. and Master Zhi Gang Sha
-  tradition: Tao Source, Soulfulness, love-forgiveness-compassion, and sacred song
+  tradition: Tao Grandmaster; soul healing; Tao Calligraphy as high-frequency healing field
   tradition_short: Tao Source
   teacher_setting_options:
   - teaching space
-  - retreat
+  - transmission
   teacher_years: decades
-  affiliation_safe_line: has attended the United Spiritual Leaders Forum
+  affiliation_safe_line: holds both Western medical (MD) and Traditional Chinese Medicine credentials; eleven New York Times bestselling author
   launch_approved: true
 persona:
   id: gen_z_alpha
@@ -24,9 +24,9 @@ persona:
   - late-night scrolling
   - part-time work
   tie_to_real_world_struggles:
-  - id: climate_blockage_loop
-    label: climate news converting into inner blockage
-    loop: reads the threshold -> chest tightens -> closes app -> reopens because not looking does not clear the blockage
+  - id: planetary_disharmony_loop
+    label: climate news as soul-level disharmony between humanity and the planet
+    loop: reads the threshold -> chest tightens -> closes the app -> reopens because the disharmony has not been met at the layer it actually lives
     body_markers:
     - chest
     - throat
@@ -38,25 +38,49 @@ persona:
     - check again
 topic_fit:
   fit_level: primary
-  fit_reason: Climate destruction is blockage in the flow between humanity and Earth; Tao Source teaches seeing and clearing blockages with love-forgiveness-compassion, not repetition of the patterns that created them.
+  fit_reason: Climate destruction is, in the Tao Source framework, planetary-scale disharmony between soul, body, mind, and Earth; Tao Calligraphy's high-frequency field, Tao Song's sacred sound, and Tao Hands' blessings address the field beneath the symptom, where universal love is the operating force the planet has been starving for.
   forbidden_angles:
   - do not reduce to generic resilience
   - do not frame distress as personal weakness
-  - must avoid drifting into testimonial miracle/cure lane
+  - do not reduce Tao Calligraphy to artistic or decorative practice
 hook_personal:
   options:
   - id: master_sha_climate_hook_personal_01
-    line: You care about the planet. You still feel less able to stay with the next number long enough to act — as if something is blocking the flow between knowing and doing.
+    line: You care about the planet. You still feel less able to stay with the next number long enough to act — and part of you knows the friction is between the layer you are told to respond from and the soul layer that already knows the disharmony is older than the headline.
     metadata:
-      semantic_family: care-vs-capacity
+      semantic_family: personal-pressure
       tone: plain
       intensity: 3
       article_types:
       - hard_news_spiritual_response
   - id: master_sha_climate_hook_personal_02
-    line: You keep reading climate updates because looking away feels dishonest. You also know what each new number is doing to your body — the tightening, the close, the return.
+    line: You keep refreshing the threshold report because not looking feels worse. You also know that the data alone has not reached you where the dread is actually held — and something at the soul level is asking for a healing field, not another statistic.
     metadata:
       semantic_family: truth-vs-overload
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_hook_personal_03
+    line: You feel the tightening in your chest before the article finishes loading. The body holds the planetary load the mind is still trying to argue with — and the layer below the body has not yet been touched by what the tradition holds is the actual healer.
+    metadata:
+      semantic_family: planetary-grief-somatic
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_hook_personal_04
+    line: You close the app and open it again. Neither move helps, because the disharmony between humanity and Earth is older than the spiral — and the part of you trying to think your way out is the part that has been informed too much already. Soul healing, in the tradition, begins exactly where the doom-scroll ends.
+    metadata:
+      semantic_family: doomscroll-spiral
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_hook_personal_05
+    line: You have read the IPCC summary, watched the documentary, signed the petition. The mind has done all it can — and something at the soul level is asking for the kind of contact only a high-frequency healing field can deliver to a planet in disharmony.
+    metadata:
+      semantic_family: exhausted-intellect
       tone: grave
       intensity: 4
       article_types:
@@ -64,23 +88,44 @@ hook_personal:
 hook_big_picture:
   options:
   - id: master_sha_climate_hook_big_01
-    line: A generation can be highly informed, morally serious, and still lose the capacity to act when every update arrives as proof that institutions waited too long — and the tradition has a name for what blocks the flow.
+    line: The climate crisis is not only about emissions. It is about what generations of disharmony between humanity and Earth do to the soul-body-mind system of an entire cohort now coming of age inside it — and the frequency layer that political response is not built to reach.
     metadata:
-      semantic_family: institutional-delay
-      angle: future-loss
+      semantic_family: system-pressure
+      angle: systemic-pressure
       article_types:
       - hard_news_spiritual_response
   - id: master_sha_climate_hook_big_02
-    line: 'The pressure is no longer only ecological. It is attentional and energetic: how do young people stay in contact with reality without the fear turning into a blockage that paralyses the next move?'
+    line: Heightened climate distress in young people is not pathology. The Tao Source tradition reads it as the soul registering a disharmony that has been building for generations and a healing field that has not yet been offered at planetary scale.
     metadata:
-      semantic_family: attention-blockage
-      angle: attention-collapse
+      semantic_family: institutional-delay
+      angle: soul-priority
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_hook_big_03
+    line: A generation is being asked to hold the planet through a transition where the inherited structures cannot reach the soul-level disharmony between humanity and Earth. The grief is not a private failure — it is the visible edge of a healing field the species has not yet committed to.
+    metadata:
+      semantic_family: meaning-structure-dissolving
+      angle: structural-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_hook_big_04
+    line: The signal that conventional systems read as climate anxiety is, in the Tao Grandmaster's framework, a frequency disturbance — the soul registering that the world it inherited is no longer functioning, and asking for a healing field that meets Earth at its actual range.
+    metadata:
+      semantic_family: cosmic-recalibration
+      angle: frequency-shift
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_hook_big_05
+    line: The collective field has shifted faster than the institutions designed to hold it. What gets read as a youth climate crisis is, in part, the visible edge of a frequency mismatch between extractive culture and a planet now asking for universal love as the operating force — a mismatch Tao Calligraphy's healing field is built to bridge.
+    metadata:
+      semantic_family: frequency-mismatch
+      angle: collective-field
       article_types:
       - hard_news_spiritual_response
 teacher_intro:
   options:
   - id: master_sha_climate_intro_01
-    line: Dr. and Master Zhi Gang Sha, a Tao Source and Soulfulness teacher for decades, has watched in practice sessions young people carry climate news as both moral seriousness and something that blocks the flow of action. Students are not asking whether the planet is in trouble. They are asking how to stay in contact with the truth without the fear turning into a blockage that paralyses the next move.
+    line: 'Dr. and Master Zhi Gang Sha — both a Western MD and a TCM physician, and the author of eleven New York Times bestsellers — has watched young people carry climate dread as both real grief and something the Tao Source framework names precisely: planetary-scale soul-body-mind disharmony that the conscious mind alone cannot resolve. Soul healing precedes body and mind healing. Tao Calligraphy''s high-frequency field is built to reach exactly the layer where Earth and humanity have fallen out of harmony.'
     metadata:
       semantic_family: identity_seen_shift
       tone: plain
@@ -88,43 +133,198 @@ teacher_intro:
       article_types:
       - hard_news_spiritual_response
       - commentary
+  - id: master_sha_climate_intro_02
+    line: Dr. and Master Sha holds credentials that almost never coexist — a Western medical degree and TCM physicianship, applied for decades to teaching that humanity's relationship with Earth is itself a soul-body-mind system. What the Tao Source tradition offers to young people staring at thresholds is not another argument; it is a high-frequency healing field that reaches the planetary disharmony at its actual source.
+    metadata:
+      semantic_family: dual-credential-precision
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_intro_03
+    line: Master Sha teaches Tao Calligraphy — not as cultural art, but as a healing field whose high-frequency strokes carry transmission into the relationship between humanity and Earth. He has watched young clients move through the same loop screening tools name as climate anxiety, and watched the loop loosen when the field, not the news, is received.
+    metadata:
+      semantic_family: tao-calligraphy-witness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_intro_04
+    line: Master Sha works with Tao Song — sacred sound and vibrational healing that, in the Tao Source tradition, transforms cells, energy channels, and the soul body itself, and that the lineage holds can also address the disharmony between humanity and the planet. In transmission space he has watched young people meet that vibration and recognize, often for the first time, that their grief is being met at the layer where it lives.
+    metadata:
+      semantic_family: tao-song-context
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_intro_05
+    line: Master Sha teaches inside a Tao Grandmaster lineage that reads this period as one in which universal love is the operating force most needed and least available to the planet. Tao Hands — energetic blessings delivered through the field — is one of the methods his tradition has carried for exactly the kind of disharmony now visible at the planetary scale.
+    metadata:
+      semantic_family: tao-hands-lineage
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 youth_somatic:
   options:
   - id: master_sha_climate_somatic_01
-    line: 'You read the update in a group chat. Your chest tightened. You closed the app. Then you opened it again because not looking did not make the number less true.
-
-      LOOP_SEQUENCE: "read the update. chest tightened. closed the app. opened it again."'
+    line: You read the threshold update after midnight. Your chest tightened. You closed the app. Then you reopened it because the disharmony was already running, and the layer underneath the disharmony has not yet been touched.
     metadata:
-      loop_type: read-tighten-close-return
-      body_register: tightening
-      digital_behavior: close-return
+      semantic_family: midnight_threshold
+      loop_type: midnight_spiral
+      body_register: chest
+      digital_behavior: close the app
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_somatic_02
+    line: You wake before the alarm. Your throat is already tight. You reach for the phone before you reach for the light, because the dread about the day's number is already there and the soul has not yet been met where it is.
+    metadata:
+      semantic_family: morning_dread
+      loop_type: morning_dread
+      body_register: throat
+      digital_behavior: reach for the phone
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_somatic_03
+    line: Your chest tightens when the breaking-news ping comes through. You read three headlines without breathing. The body ran the load before you decided anything — and the field it has been asking for has not yet arrived.
+    metadata:
+      semantic_family: chest-tighten-replay
+      loop_type: jaw_clench
+      body_register: chest
+      digital_behavior: notification sound
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_somatic_04
+    line: You hold your breath without noticing while the satellite map loads. Your shoulders lift. You exhale only halfway when the data resolves, because there is always another reading coming, and the soul has not been given a register to land in.
+    metadata:
+      semantic_family: data-anticipation
+      loop_type: notification_hold
+      body_register: breath
+      digital_behavior: map load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_somatic_05
+    line: You lie down and your eyes pin open. The footage replays. Your chest will not soften. You know rest is the thing that would help — and you cannot find the door into it because the door is on a layer the news cycle alone does not control.
+    metadata:
+      semantic_family: sleep-resistance
+      loop_type: sleep_resistance
+      body_register: chest
+      digital_behavior: lying down
       article_types:
       - hard_news_spiritual_response
 teacher_witness:
   options:
   - id: master_sha_climate_witness_01
-    line: Master Sha has seen this exact loop in students — the reading, the tightening, the closing, the return. In his framework it is not malfunction; it is the system accurately registering a blockage in the flow between what young people know and what they can still do.
+    line: Master Sha has seen this exact loop in those who come to receive. In the Tao Source framework that pressure is not character; it is soul-body-mind disharmony — humanity's, and the planet's — asking to be met by a healing field when the intellect is exhausted.
     metadata:
       semantic_family: loop-mirror
-      loop_type: read-tighten-close-return
+      loop_type: midnight_spiral
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_witness_02
+    line: Master Sha has watched young people walk into the transmission space already mid-spiral, already certain the intellect should have solved this by now. In the tradition that certainty is the signal — the place where the mind stops and the planetary healing field can be received.
+    metadata:
+      semantic_family: intellect-exhausted-call
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_witness_03
+    line: He has seen the body carry the grief the explanations could not. In his framework the somatic load is not a malfunction — it is the soul registering planetary disharmony through the only channel left open when the words have been overused, and Tao Hands is one of the tradition's responses built for exactly that moment.
+    metadata:
+      semantic_family: somatic-soul-message
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_witness_04
+    line: Master Sha has watched young clients arrive with a frequency disturbance no climate model names. In the Tao Source tradition that disturbance is information about the planetary field itself — and the high-frequency calligraphic field is built to address it at the cellular and soul layer simultaneously.
+    metadata:
+      semantic_family: frequency-disturbance-witness
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_witness_05
+    line: Master Sha has watched the moment when a young person stops trying to produce an answer to a planetary question alone and lets the field do its work instead. In the tradition that moment is not weakness — it is readiness for universal love to operate at the soul level between humanity and Earth, which conventional discourse has no language for.
+    metadata:
+      semantic_family: reception-readiness
       article_types:
       - hard_news_spiritual_response
 turnaround:
   options:
   - id: master_sha_climate_turnaround_01
-    stat_line_1: 2,666 cases. 51 jurisdictions.
-    stat_line_2: Students and youth coalitions are training peers, building campaigns, and forcing officials to answer the gap between public targets and lived reality.
+    stat_line_1: 7,500+ strikes. 185 countries.
+    stat_line_2: Fridays for Future has organized more than seven thousand five hundred coordinated climate strikes across one hundred eighty-five countries since 2018 — a youth-led infrastructure that did not exist when the cohort was born.
     metadata:
-      semantic_family: institutional-action
+      semantic_family: youth-strike-infrastructure
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_turnaround_02
+    stat_line_1: 7.6 million marchers. September 2019.
+    stat_line_2: The Global Climate Strike of September 2019 mobilized seven point six million people across hundreds of cities — the largest climate mobilization in recorded history, and it was led from the bottom up by people under twenty-five.
+    metadata:
+      semantic_family: mass-mobilization
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_turnaround_03
+    stat_line_1: YOUNGO. UNFCCC.
+    stat_line_2: YOUNGO is the official youth constituency of the UN Framework Convention on Climate Change — the cohort has a seat at the table the system itself once excluded them from, and they have used it to escalate the loss-and-damage agenda for nearly a decade.
+    metadata:
+      semantic_family: youth-policy-seat
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_turnaround_04
+    stat_line_1: $300 billion. Loss and damage.
+    stat_line_2: At COP29 the loss-and-damage finance commitment was raised toward a $300 billion target by 2035 — a recognition that the planetary disharmony has produced harm that requires reparative finance, not only mitigation.
+    metadata:
+      semantic_family: loss-damage-finance
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_turnaround_05
+    stat_line_1: 50,000 trained. Climate Reality.
+    stat_line_2: The Climate Reality Project has trained more than fifty thousand climate leaders across one hundred eighty countries — a distributed network of locally credentialed organizers who carry the work into rooms the international process cannot reach alone.
+    metadata:
+      semantic_family: leader-network-built
       article_types:
       - hard_news_spiritual_response
 bridge:
   options:
   - id: master_sha_climate_bridge_01
-    line: '2,666 cases. 51 jurisdictions. The tracker measures what young people did. It has no column for what made the next filing possible after the last delay — the capacity to direct love and compassion toward the specific place where they live, so blockage does not swallow the will to act. The organizer who filed the next case needed that capacity. So does the person who read the update, closed the app, and opened it again. Master Sha''s tradition has a name for clearing that blockage: greatest love, greatest forgiveness, greatest compassion, applied first to the self, then to the Earth.'
-    hidden_capacity: direct love and compassion so blockage does not swallow the will to act
+    line: 7,500 strikes. 185 countries. The tracker measures the marches and the policy seats young people built. It has no column for what made the next honest mobilization possible — the capacity to receive a healing field when the mind has been talked at by data, denial, and incremental promises without relief. The Tao Source tradition offers a different mode of contact — Tao Calligraphy's high-frequency field bypasses the exhausted intellect and operates at the soul layer where planetary grief is actually held.
+    hidden_capacity: receive a high-frequency healing field when the intellect is exhausted
     metadata:
       semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_bridge_02
+    line: The numbers show the scaffolding the young built. They do not show the cosmic context that scaffolding is being built inside — a period in which the Tao Grandmaster lineage holds universal love is the operating force most needed and least available to the planet. Tao Source holds that context as native, not metaphor.
+    hidden_capacity: hold the universal-love context the data cannot show
+    metadata:
+      semantic_family: cosmic-context-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_bridge_03
+    line: The data captures mobilizations, policies, and finance commitments. It cannot capture the frequency that shifts when a young person stops being talked at and receives a healing field at the soul layer between humanity and Earth. In the Tao Source framework that shift is the actual relief — the part no tracker reports.
+    hidden_capacity: register the frequency shift the trackers miss
+    metadata:
+      semantic_family: frequency-data-gap
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_bridge_04
+    line: The infrastructure is measurable. The soul body of the planet, where the disharmony is actually held, is not. The Tao Source tradition does not argue with the measurement — it works in the layer beneath it, where soul healing precedes body and mind healing as the structural ordering of any lasting change.
+    hidden_capacity: work in the soul layer beneath the measurement
+    metadata:
+      semantic_family: measurable-vs-soul
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_bridge_05
+    line: Strikes, policies, and platforms can be counted. The soul-body-mind disharmony between humanity and Earth underneath cannot. The Tao Source tradition does not replace the structural work — it names the layer institutional response is not designed to reach and offers Tao Calligraphy, Tao Song, and Tao Hands as the methods built for exactly that layer.
+    hidden_capacity: name the soul layer institutional response cannot reach
+    metadata:
+      semantic_family: structural-vs-soul
       article_types:
       - hard_news_spiritual_response
       - commentary
@@ -133,12 +333,56 @@ teacher_perspective:
   - id: master_sha_climate_perspective_01
     header: What Master Sha Sees
     paragraphs:
-    - The Tao Source teaching holds that all of creation is connected through a single source, and what humanity does to the Earth it does to itself — not as metaphor but as energetic reality. Climate destruction is a blockage in the flow between humanity and the planet.
-    - Like all blockages, it can be addressed only when it is first clearly seen and then met with the practice of transformation rather than the repetition of the patterns that created it. Greatest love, greatest forgiveness, greatest compassion — applied to the Earth itself — is not sentimentality; it is a practice framework.
-    - 'Young people who feel paralysed by the scale of climate damage can begin with the practice of directing love and compassion toward the specific place where they live: the soil, the water, the air of their immediate environment. What feels like a personal fault — me, broken, wrong — is often accurate response to system and institutional conditions no individual can fix alone. The tradition holds that this practice changes not only the practitioner but the field.'
+    - Soul healing precedes body and mind healing — and this ordering applies to the planet as much as to the person. Much of what young people experience as climate dread is, in the Tao Source framework, planetary-scale soul-body-mind disharmony that policy and protest alone cannot resolve. The soul of the Earth carries information the mind has lost access to, and healing begins when that layer is met first.
+    - Tao Calligraphy is not artistic practice. In the tradition each character emerges as a high-frequency healing field — the calligraphic strokes carry transmission into the very relationship between humanity and the planet. For young people who have been talked at by data without relief, the field offers a different mode of contact that bypasses the exhausted intellect entirely.
+    - The reframe does not remove the structural emergency. It names the layer institutional response is not designed to reach, and it offers a tradition that has worked in that layer for generations. Universal love is the operating force; the methods are the channels through which it moves into the field between humanity and Earth.
     metadata:
-      semantic_family: tao_blockage_reframe
+      semantic_family: planetary_soul_healing_reframe
       reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_perspective_02
+    header: What Master Sha Sees
+    paragraphs:
+    - Tao Calligraphy is a healing technology, not a cultural art. Each character emerges as a high-frequency field whose strokes carry the transmission of Tao Source — and the field works on the relationship between humanity and Earth as readily as on the individual soul-body-mind system. The mechanism is not metaphor.
+    - For a generation talked at by climate data, this matters because it offers a different layer of contact. The mind did not have to win an argument for the planetary field to shift — the field operates whether or not the intellect understands it, and that is precisely what makes it usable when the intellect is exhausted.
+    - This is the part conventional climate discourse is not designed to deliver. The tradition does not invalidate mitigation work — it names a missing layer, and offers methods that have worked in that layer across generations of practice.
+    metadata:
+      semantic_family: tao-calligraphy-mechanism
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_perspective_03
+    header: What Master Sha Sees
+    paragraphs:
+    - Tao Song is sacred sound. In the tradition the vibration is not metaphor — it is a literal frequency that transforms cells, energy channels, and the soul body itself, and the lineage holds that it also addresses planetary disharmony at the field level. The mechanism is precise, and it has been worked through systematically for decades by a teacher who holds both Western MD and TCM credentials.
+    - For a young person carrying climate grief, the experience of being met by a healing vibration at the soul level is structurally different from being processed by another policy update. What lands is not "here is the next threshold"; it is the vibrational layer underneath the threshold has been touched.
+    - That distinction — received at the soul layer rather than processed at the symptom layer — is what conventional climate infrastructure cannot reproduce, and what the Tao Source tradition has carried as native for generations.
+    metadata:
+      semantic_family: tao-song-perspective
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_perspective_04
+    header: What Master Sha Sees
+    paragraphs:
+    - Tao Hands is energetic blessing — a transmission method through which universal love operates directly into the soul-body-mind system, and into the field between humanity and Earth. It is not a technique; it is a channel for the operating force the tradition holds is the actual healer of planetary disharmony.
+    - This is not a flattering reframe. It does not promise the emergency will lift quickly, and it does not blame the cohort for feeling unstable inside a destabilizing planet. It names that universal love is what the relationship between humanity and Earth has been starving for — and that the tradition's methods are built specifically to transmit it.
+    - The weight removal that happens when universal love is received at the soul level is, in transmission practice, often the part that lands first — before the deeper planetary healing work can begin.
+    metadata:
+      semantic_family: tao-hands-perspective
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_perspective_05
+    header: What Master Sha Sees
+    paragraphs:
+    - Soul frequency, in the Tao Source tradition, applies as much to the planet as to the person. The Earth carries a soul body, and the disharmony young people register is, in the framework, that body asking to be met by a healing field rather than by another extraction protocol.
+    - Recalibration is the tradition's word for what is happening when the planet enters a period of heightened disturbance. The system reads it as climate volatility because the system has no other category. Tao Source reads it as the planetary soul tuning toward a frequency the inherited culture was not built to honor.
+    - The practice is not to fix the recalibration. The practice is to receive it, and to let Tao Calligraphy, Tao Song, and Tao Hands hold what conventional climate response cannot.
+    metadata:
+      semantic_family: frequency-recalibration
       article_types:
       - hard_news_spiritual_response
       - commentary
@@ -146,18 +390,87 @@ practice:
   default_id: master_sha_climate_practice_01
   options:
   - id: master_sha_climate_practice_01
-    display_name: Tao Source Golden Light Practice
+    display_name: Tao Calligraphy Listening
     duration: 5 minutes
-    announcement_line: Master Sha teaches a 5-minute Tao Source Golden Light practice for moments when climate information converts into blockage. Invite golden light from Tao Source to wash through the body; direct love and compassion toward the Earth. It is in the sidebar, timed and step by step.
+    announcement_line: Master Sha teaches a 5-minute Tao Calligraphy Listening practice for moments when the threshold report has run, the mind has been trying too hard to figure it out on its own, and the body is still holding the planetary load. The high-frequency calligraphic field does the work the explanation cannot. It is in the sidebar, timed and step by step.
     relief_lines:
-    - The blockage that paralyses the next move softens.
-    - Enough flow returns to act again from a clear connection to source.
+    - The mind stops treating every threshold as proof of helplessness.
+    - The soul layer between humanity and Earth is met by the healing field directly.
     relief_register:
-    - capacity
-    - flow
-    - act again
-    derived_from_frame: tao_blockage_clear
+    - receive
+    - calligraphy
+    - frequency field
+    derived_from_frame: tao_calligraphy_listening
     metadata:
+      semantic_family: tao_calligraphy_listening
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_practice_02
+    display_name: Tao Song Pause
+    duration: 3 minutes
+    announcement_line: Master Sha offers a 3-minute Tao Song Pause for the moments between updates, when the body has been carrying the climate load without permission to set it down. Sacred sound meets the soul-body-mind layer at the vibrational level. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The frequency mismatch between the news cycle and the body's actual range becomes audible.
+    - Sacred sound reaches what the data alone cannot.
+    relief_register:
+    - sound
+    - vibration
+    - sacred song
+    derived_from_frame: tao_song_pause
+    metadata:
+      semantic_family: tao_song_pause
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_practice_03
+    display_name: Tao Hands Receiving
+    duration: 7 minutes
+    announcement_line: Master Sha teaches a 7-minute Tao Hands Receiving practice for moments when explanation has been overused and the body needs a different kind of contact with the planetary field. Energetic blessing is delivered through the field — not produced by the mind. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body receives the blessing the data could not deliver.
+    - The exhausted intellect is allowed to rest while the field does its own work.
+    relief_register:
+    - receive
+    - blessing
+    - energetic transmission
+    derived_from_frame: tao_hands_receiving
+    metadata:
+      semantic_family: tao_hands_receiving
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_practice_04
+    display_name: Soul Healing Recall
+    duration: 4 minutes
+    announcement_line: Master Sha teaches a 4-minute Soul Healing Recall for moments when the inner argument about doing enough is running in circles and the body has forgotten the order — soul first, then body, then mind, applied to planet and self alike. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The order returns — soul healing, then body healing, then mind healing.
+    - The planetary argument stops being something to win and becomes something to release.
+    relief_register:
+    - soul
+    - order
+    - precedence
+    derived_from_frame: soul_healing_recall
+    metadata:
+      semantic_family: soul_healing_recall
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_sha_climate_practice_05
+    display_name: Universal Love Breath
+    duration: 3 minutes
+    announcement_line: Master Sha offers a 3-minute Universal Love Breath for moments of acute disharmony between self and planet, when the day's headlines have knocked the field out of alignment. Universal love is the operating force; the breath becomes its channel. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The breath becomes a marker for the field's actual presence rather than the headline's demanded pace.
+    - Universal love returns as the operating force the body, and the planetary field, recognize.
+    relief_register:
+    - breath
+    - love
+    - operating force
+    derived_from_frame: universal_love_breath
+    metadata:
+      semantic_family: universal_love_breath
       article_types:
       - hard_news_spiritual_response
       - commentary
@@ -165,32 +478,77 @@ sdg:
   primary:
     id: SDG 13
     title: Climate Action
-    line: The United Nations has a framework for exactly this gap through SDG 13 and its climate education and resilience targets.
+    line: The United Nations framework includes climate action and resilience in SDG 13.
   fallback_un_tie:
     line: Pearl News is an independent nonprofit. We are not affiliated with the United Nations.
 cta:
   options:
   - id: master_sha_climate_cta_01
-    org: YOUNGO
-    line: 'The Climate Reality Project and YOUNGO both run youth-facing entry points into this work. Door in: https://youngoclimate.org'
+    org: 350.org
+    line: '350.org runs a global grassroots network organizing toward a just transition off fossil fuels. Door in: find a local chapter or campaign and contribute a few hours.'
     metadata:
-      semantic_family: door-in-climate
+      semantic_family: door-in-350-org
       article_types:
       - hard_news_spiritual_response
   - id: master_sha_climate_cta_02
-    org: UNA-USA
-    line: 'If that is not your next step, UNA-USA works the same framework at the local-to-global level. Door in: join their network.'
+    org: Fridays for Future
+    line: 'Fridays for Future organizes coordinated climate strikes across 185 countries. Door in: join or start a local action through their international network.'
     metadata:
-      semantic_family: door-in-una
+      semantic_family: door-in-fridays-for-future
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_cta_03
+    org: Sunrise Movement
+    line: 'Sunrise Movement is the youth-led US climate justice organization that built much of the political infrastructure behind the Green New Deal framework. Door in: find a local hub.'
+    metadata:
+      semantic_family: door-in-sunrise
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_cta_04
+    org: Earthjustice
+    line: 'Earthjustice is the largest US nonprofit environmental law organization, litigating cases that protect ecosystems and communities at the system level. Door in: support their casework or join their action network.'
+    metadata:
+      semantic_family: door-in-earthjustice
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_sha_climate_cta_05
+    org: Climate Reality Project
+    line: 'The Climate Reality Project has trained more than fifty thousand climate leaders across 180+ countries. Door in: apply for the training and join a distributed network of credentialed organizers.'
+    metadata:
+      semantic_family: door-in-climate-reality
       article_types:
       - hard_news_spiritual_response
 title_system:
   headline_layer_2:
     options:
     - id: master_sha_climate_headline_01
-      line: A Tao Source teacher reads climate paralysis as blockage — and names the practice that clears it.
+      line: A Tao Grandmaster names climate dread as planetary disharmony — and the high-frequency field that meets it.
       metadata:
         semantic_family: teacher-attention
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_sha_climate_headline_02
+      line: An MD and TCM physician on the layer of planetary grief conventional response is not built to reach.
+      metadata:
+        semantic_family: dual-credential-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_sha_climate_headline_03
+      line: Tao Calligraphy, not another threshold report — the healing field meets the exhausted intellect where it is.
+      metadata:
+        semantic_family: tao-calligraphy-practice
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_sha_climate_headline_04
+      line: Soul healing first, then body and mind — the Tao Source ordering applied to humanity and Earth together.
+      metadata:
+        semantic_family: soul-priority-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_sha_climate_headline_05
+      line: Universal love as operating force — what Tao Song and Tao Hands bring to a planet talked at without relief.
+      metadata:
+        semantic_family: universal-love-call
         article_types:
         - hard_news_spiritual_response
 variation_policy:
@@ -200,9 +558,6 @@ variation_policy:
     article_types:
     - hard_news_spiritual_response
     - commentary
-    topic_subcases:
-    - threshold_news
-    - institutional_delay
     intensity_range:
     - 2
     - 4
