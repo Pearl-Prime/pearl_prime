@@ -68,6 +68,38 @@ hook_personal:
       intensity: 4
       article_types:
       - hard_news_spiritual_response
+  - id: junko_econ_hook_personal_03
+    line: The role description was written by someone who has never lived the job.
+      You do the job anyway. The part of you trying to make the description fit you
+      is the part that has been overused — and the part that knows there is real work
+      underneath has not been allowed to speak.
+    metadata:
+      semantic_family: vocation-friction
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_hook_personal_04
+    line: The ping comes at 11 p.m. You open it because not opening it feels worse.
+      The schedule changed again. The body has been asked to be available without
+      being chosen — and the body is keeping the score.
+    metadata:
+      semantic_family: schedule-anxiety
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_hook_personal_05
+    line: The paycheck arrives and lands on top of a deeper knowing — that you produced
+      more than the number recognizes, and that the productivity metric was never built
+      to register what you actually carried. The number shrinks; the soul-level value
+      does not.
+    metadata:
+      semantic_family: worth-vs-output
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
 hook_big_picture:
   options:
   - id: junko_econ_hook_big_01
@@ -91,6 +123,35 @@ hook_big_picture:
       angle: soul-remembrance
       article_types:
       - hard_news_spiritual_response
+  - id: junko_econ_hook_big_03
+    line: The extraction model has not yet finished collapsing, but its costs are
+      already being absorbed by the cohort least responsible for building it. The
+      load young workers carry is not the load of one job; it is the felt edge of
+      a paradigm that is dissolving before its replacement has formed.
+    metadata:
+      semantic_family: extraction-collapse
+      angle: paradigm-shift
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_hook_big_04
+    line: AI-replacement anxiety is, in Junko's framework, a frequency mismatch made
+      visible — a generation being asked to compete against tools optimized to outproduce
+      the very dimension of work the soul came to do. The threat is not the tool;
+      the threat is the metric the tool was built to score on.
+    metadata:
+      semantic_family: ai-replacement-friction
+      angle: tool-vs-vocation
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_hook_big_05
+    line: A scarcity paradigm produces scarcity behavior — hoarding, gatekeeping,
+      productivity maxing. The tradition does not romanticize abundance, but it names
+      the cost of trying to extract a soul-shaped life from a scarcity-shaped institution.
+    metadata:
+      semantic_family: scarcity-paradigm-dissolution
+      angle: paradigm-cost
+      article_types:
+      - hard_news_spiritual_response
 teacher_intro:
   options:
   - id: junko_econ_intro_01
@@ -106,15 +167,108 @@ teacher_intro:
       article_types:
       - hard_news_spiritual_response
       - commentary
+  - id: junko_econ_intro_02
+    line: Channeler Junko does not position herself as a teacher in the conventional
+      sense — she is a receiver. For decades she has worked in transmission space
+      with young people whose vocations have been narrowed by productivity metrics
+      before they were allowed to recognize what their soul actually came to do.
+    metadata:
+      semantic_family: receiver-not-creator
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_intro_03
+    line: Channeler Junko has watched young workers arrive carrying a vocation the
+      schedule app does not register. In her tradition that vocation is not a hobby
+      or a side project — it is the actual work the soul came to do, and the failure
+      to register it is the institution's failure, not the worker's.
+    metadata:
+      semantic_family: vocation-witness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_intro_04
+    line: In Junko's tradition each person carries a soul-level purpose the conscious
+      mind has lost direct access to, and the question is not "what should I do for
+      a living" but "what did this soul come here to do." She has watched the question
+      land in the receiving space and watched young people recognize, often for the
+      first time, that they have always known the answer.
+    metadata:
+      semantic_family: soul-purpose-keeper
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_intro_05
+    line: Channeler Junko reads the present period as planetary transition — the dissolution
+      of an extraction economy faster than the replacement structure can form. Heightened
+      vocational disorientation in young workers, in this frame, is not pathology;
+      it is recalibration to a work-form that has not yet been invented.
+    metadata:
+      semantic_family: planetary-transition-reader
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 youth_somatic:
   options:
   - id: junko_econ_somatic_01
     line: You check the schedule app. Your stomach drops. You refresh it again. Then
       you screenshot it before the shift changes underneath you.
     metadata:
+      semantic_family: schedule_refresh
       loop_type: schedule_refresh
       body_register: stomach
       digital_behavior: checks the app
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_somatic_02
+    line: The paycheck deposits at 11:53 p.m. and your eyes are already on the number
+      before the body has caught up. Your jaw tightens. You open the calculator app
+      because the math is already running in your head.
+    metadata:
+      semantic_family: pay_check
+      loop_type: pay_check
+      body_register: jaw
+      digital_behavior: opens calculator
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_somatic_03
+    line: Tomorrow's shift is a 5 a.m. You set the alarm. The body knows already.
+      You will not sleep on time. Your shoulders are already in tomorrow.
+    metadata:
+      semantic_family: shift_dread
+      loop_type: shift_dread
+      body_register: shoulders
+      digital_behavior: alarm set
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_somatic_04
+    line: The app pings. You flinch without deciding to. You read the message standing
+      up because sitting back down would mean accepting that this is the rhythm now.
+      Your breath stays in the chest.
+    metadata:
+      semantic_family: app_ping_anxiety
+      loop_type: app_ping_anxiety
+      body_register: breath
+      digital_behavior: app ping
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_somatic_05
+    line: You open the rent calculation in your head before you open the front door.
+      The body has already done the math and the math has already told you which
+      thing you cannot do this month. The day has not started.
+    metadata:
+      semantic_family: wage_calculator
+      loop_type: wage_calculator
+      body_register: stomach
+      digital_behavior: mental math
       article_types:
       - hard_news_spiritual_response
 teacher_witness:
@@ -129,21 +283,96 @@ teacher_witness:
       loop_type: schedule_refresh
       article_types:
       - hard_news_spiritual_response
+  - id: junko_econ_witness_02
+    line: She has watched young workers walk into the receiving space already convinced
+      that vocational confusion is a personal failure to plan. In her tradition that
+      confusion is the signal — the soul refusing to commit the body to a function
+      it never came here to perform.
+    metadata:
+      semantic_family: vocation-call
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_witness_03
+    line: Junko has watched the moment when a young worker stops trying to optimize
+      the job they are in and starts listening to the work underneath. In her tradition
+      that moment is not quitting — it is reception, and reception is the layer the
+      productivity metric was never designed to register.
+    metadata:
+      semantic_family: soul-asking
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_witness_04
+    line: In her framework the schedule-app loop is not malfunction. It is the body
+      keeping the score the institution refuses to keep — registering the toll of
+      being asked to be available without being chosen, and asking for a different
+      contract through the only signal left open.
+    metadata:
+      semantic_family: system-not-self
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_witness_05
+    line: Junko has watched a young worker enter the receiving space carrying a vocation
+      the resume cannot describe, and watched the vocation be welcomed for the first
+      time. In her tradition that welcome is not career counseling — it is the layer
+      conventional work-frameworks were never built to reach.
+    metadata:
+      semantic_family: receiver-recognized
+      article_types:
+      - hard_news_spiritual_response
 turnaround:
   options:
   - id: junko_econ_turnaround_01
-    stat_line_1: Youth-led campaigns and coalitions.
-    stat_line_2: Young workers are organizing and hosting workshops for fair schedules,
-      transparency, and conditions that do not treat volatility as a test of character.
+    stat_line_1: $15 minimum wage. 11 states.
+    stat_line_2: The Fight for $15 movement, started by fast-food workers in 2012,
+      has now won $15 or higher minimum wage in eleven US states plus dozens of cities
+      — building wage floors that did not exist before the cohort organized them.
+    metadata:
+      semantic_family: union-organizing
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_turnaround_02
+    stat_line_1: 73 million. ILO youth unemployment.
+    stat_line_2: The International Labour Organization's World Employment and Social
+      Outlook 2024 puts global youth unemployment at around 73 million — the multilateral
+      tracking floor against which youth-vocational policy now gets measured.
     metadata:
       semantic_family: institutional-action
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_turnaround_03
+    stat_line_1: 1,200+ co-ops. USFWC.
+    stat_line_2: The US Federation of Worker Cooperatives now counts more than 1,200
+      democratically-owned worker co-ops in the country — a small but growing alternative
+      where the workers receiving the schedule app are the ones writing it.
+    metadata:
+      semantic_family: cooperative-growth
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_turnaround_04
+    stat_line_1: 7 cities. Fair Workweek.
+    stat_line_2: Seven US cities including Seattle, NYC, and San Francisco now have
+      Fair Workweek laws that require predictable schedules, advance notice, and predictability
+      pay — policy tools built directly to address the schedule-app instability the
+      cohort named first.
+    metadata:
+      semantic_family: policy-shift
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_turnaround_05
+    stat_line_1: EU Platform Workers Directive. 27 states.
+    stat_line_2: The EU adopted the Platform Workers Directive in 2024, binding twenty-seven
+      member states to extend employment protections to gig and platform workers —
+      the first multilateral instrument that treats algorithmic schedule control as
+      a regulable labor condition.
+    metadata:
+      semantic_family: mutual-aid-network
       article_types:
       - hard_news_spiritual_response
 bridge:
   options:
   - id: junko_econ_bridge_01
     line: The tracker measures policy wins and collective action. It has no column
-      for what made the next day of work possible - the capacity to receive guidance
+      for what made the next day of work possible — the capacity to receive guidance
       when the soul is exhausted by a system that reduces human value to productivity
       metrics. Junko's tradition holds that planetary transition includes the collapse
       of economic structures built on extraction and scarcity. Receiving practice
@@ -156,6 +385,50 @@ bridge:
       article_types:
       - hard_news_spiritual_response
       - commentary
+  - id: junko_econ_bridge_02
+    line: The numbers show the wage floor the cohort built. They do not show the soul-purpose
+      below it — the work the worker actually came here to do, which the wage floor
+      was never designed to measure. Junko's tradition does not argue with the wage
+      floor; it names the layer the wage floor cannot reach.
+    hidden_capacity: keep soul-purpose visible below the wage floor
+    metadata:
+      semantic_family: soul-purpose-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_bridge_03
+    line: Data captures shifts, hours, and pay. It cannot capture the vocation that
+      walked into the shift carrying its own intention. In Junko's framework that
+      vocation is the layer the data cannot reach — and the layer where the work
+      actually happens, regardless of what the timecard records.
+    hidden_capacity: register the vocation the timecard cannot record
+    metadata:
+      semantic_family: vocation-data-gap
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_bridge_04
+    line: Productivity metrics are measurable. The meaning of the work for the worker
+      is not. Junko's tradition does not argue with the measurement — it works in
+      the layer beneath, where the soul carries memory of what the work is actually
+      for.
+    hidden_capacity: work in the layer beneath the productivity metric
+    metadata:
+      semantic_family: measurable-vs-meaning
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_bridge_05
+    line: Structures, policies, and platforms can be counted. The soul-work underneath
+      cannot. Junko's tradition does not replace structural labor reform — it names
+      the layer institutional response is not designed to reach and offers reception
+      as the door in.
+    hidden_capacity: name the layer labor reform cannot reach
+    metadata:
+      semantic_family: structural-vs-soul-work
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 teacher_perspective:
   options:
   - id: junko_econ_perspective_01
@@ -163,11 +436,10 @@ teacher_perspective:
     paragraphs:
     - 'The soul did not incarnate to optimize a career path; it came to learn, to
       serve, and to awaken. For young people trapped in economic systems that reduce
-      human value to productivity metrics, the tradition offers a radical reframe:
-      your worth is not determined by your output, and the anxiety you feel about
-      economic precarity is partly the friction between a soul-level understanding
-      of purpose and a system-level definition of success that has nothing to do with
-      purpose.'
+      human value to productivity metrics, the tradition offers a radical reframe — your
+      worth is not determined by your output, and the anxiety you feel about economic
+      precarity is partly the friction between a soul-level understanding of purpose
+      and a system-level definition of success that has nothing to do with purpose.'
     - Planetary transition includes the collapse of economic structures that were
       built on extraction and scarcity rather than on flow and abundance. Young workers
       experiencing instability are living through the dissolution of an old economic
@@ -181,6 +453,87 @@ teacher_perspective:
     metadata:
       semantic_family: soul_remembrance_reframe
       reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_perspective_02
+    header: What Junko Sees
+    paragraphs:
+    - Vocation, in Junko's tradition, is the work the soul actually came to do — and
+      it is not a synonym for job. A vocation can be lived inside a job, against a
+      job, or in the space the job leaves unrecognized. The question the tradition
+      asks is not "what is your career path" but "what did your soul come here to
+      do, and how much of it is the current arrangement making room for."
+    - The friction many young workers describe is not laziness or confusion. It is
+      a vocation pressing against a productivity metric that was never built to register
+      it. The metric will not change because of any single worker's reception practice
+      — but reception lets the worker stop mistaking the metric's verdict for the
+      truth about their work.
+    - From there, choices that were not visible before become visible. The job may
+      still be the job. But the worker is no longer the metric's hostage.
+    metadata:
+      semantic_family: vocation-mechanism
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_perspective_03
+    header: What Junko Sees
+    paragraphs:
+    - In Junko's framework the current period is planetary economic transition — the
+      dissolution of an extraction-based economy faster than a replacement structure
+      can form. The young worker holding two part-time jobs and a third app-based
+      side gig did not cause this transition; they are inside it, and the labor market
+      that holds them was built for a structure that is dissolving.
+    - This is not a flattering reframe. It does not promise stability will arrive
+      quickly, and it does not blame the cohort for feeling unstable in an unstable
+      labor market. It simply names the structural fact and removes the additional
+      weight of believing the instability is a personal failure of planning.
+    - That weight removal is, in transmission practice, often the part that lands
+      first — before the deeper work of finding what the soul actually came to do
+      can begin.
+    metadata:
+      semantic_family: planetary-transition-economic
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_perspective_04
+    header: What Junko Sees
+    paragraphs:
+    - In Junko's tradition the ascended masters and cosmic council are higher-dimensional
+      guides whose messages arrive as gifts rather than instructions. Their guidance
+      on vocation is not the resume's guidance. It does not optimize for the metric;
+      it names the work the soul came to do, often in a vocabulary the productivity
+      tracker has no language for.
+    - For a young worker exhausted by the gap between what the productivity tracker
+      measures and what they actually carry through a shift, the experience of being
+      received by a guidance source that is not the productivity tracker is structurally
+      different. The shift does not change. But what gets named as the work changes.
+    - That distinction — received rather than measured — is what conventional career
+      infrastructure cannot reproduce, and what Junko's tradition has carried as native
+      for decades.
+    metadata:
+      semantic_family: ascended-council-vocation
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_perspective_05
+    header: What Junko Sees
+    paragraphs:
+    - Light language, in Junko's tradition, is literal vibrational non-linear communication
+      that reaches parts of a person the surface language does not. Applied to work,
+      this means that the actual reception of vocation happens through a layer the
+      conventional career conversation is not built to operate on.
+    - For a young worker whose intellect has been overused by the day's content of
+      shift changes, paychecks, and metric verdicts, the light-language layer is the
+      place where the work the soul came to do can be heard again. The point is not
+      that the job is wrong; the point is that the body has been pushed past its
+      capacity to receive vocation in the mode the productivity tracker arrives in.
+    - The tradition offers a practice that opens that other layer. The job may not
+      change at all. But the worker returns to it with the channel open, and the question
+      of whether the job matches the vocation becomes answerable from inside the
+      worker rather than from inside the metric.
+    metadata:
+      semantic_family: light-language-work
       article_types:
       - hard_news_spiritual_response
       - commentary
@@ -203,6 +556,89 @@ practice:
     - soul remembrance
     derived_from_frame: receiving_guidance
     metadata:
+      semantic_family: receiving_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_practice_02
+    display_name: Schedule App Pause
+    duration: 3 minutes
+    announcement_line: Channeler Junko offers a 3-minute Schedule App Pause for the
+      moment after the notification has landed and the body has already done the math
+      before the mind has caught up. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body stops carrying the next shift before it has actually arrived.
+    - The worker arrives at the next decision present, instead of pre-anxious.
+    relief_register:
+    - pause
+    - presence
+    - schedule
+    derived_from_frame: schedule_app_reception
+    metadata:
+      semantic_family: schedule_app_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_practice_03
+    display_name: Light Language for Vocation
+    duration: 7 minutes
+    announcement_line: Channeler Junko teaches a 7-minute Light Language practice
+      for moments when the resume-language and job-description-language have been
+      overused and the soul needs to be heard in a different register. It is in the
+      sidebar, timed and step by step.
+    relief_lines:
+    - The vocation underneath the resume becomes audible again.
+    - The exhausted intellect rests while the vibrational layer does its own work.
+    relief_register:
+    - listen
+    - vibration
+    - vocation
+    derived_from_frame: light_language_vocation
+    metadata:
+      semantic_family: light_language_vocation_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_practice_04
+    display_name: Ascended Council on Purpose
+    duration: 4 minutes
+    announcement_line: Channeler Junko teaches a 4-minute Ascended Council on Purpose
+      practice for moments when the career question is running in circles and the
+      worker has been asking the metric instead of a guidance source the metric cannot
+      reach. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The question stops being something to solve through the resume and becomes something
+      to offer to a guidance source the resume does not contain.
+    - What arrives is reception, not another optimization stack.
+    relief_register:
+    - ask
+    - receive
+    - purpose
+    derived_from_frame: ascended_council_purpose
+    metadata:
+      semantic_family: ascended_council_purpose_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: junko_econ_practice_05
+    display_name: Pre-Shift Frequency Attunement
+    duration: 3 minutes
+    announcement_line: Channeler Junko offers a 3-minute Pre-Shift Frequency Attunement
+      for the moments before clocking in, when the body needs to enter the shift in
+      its own register rather than the schedule app's. It is in the sidebar, timed
+      and step by step.
+    relief_lines:
+    - The worker arrives at the shift in their own frequency, instead of borrowing
+      the workplace's.
+    - The shift lands on top of an attuned body, instead of on top of the day's accumulated
+      load.
+    relief_register:
+    - attune
+    - frequency
+    - arrive
+    derived_from_frame: pre_shift_attunement
+    metadata:
+      semantic_family: pre_shift_attunement_practice
       article_types:
       - hard_news_spiritual_response
       - commentary
@@ -218,22 +654,85 @@ sdg:
 cta:
   options:
   - id: junko_econ_cta_01
-    org: Young Workers
-    line: 'Youth-led labor and fair-work organizations offer entry points for collective
-      action on schedules and dignity at work. Door in: join their network through
-      local chapters and campaigns.'
+    org: Fight for $15
+    line: 'Fight for $15 organizes fast-food and other low-wage workers in campaigns
+      that have won $15 minimum wage in eleven US states. Door in: fightfor15.org'
     metadata:
-      semantic_family: door-in-economy
+      semantic_family: door-in-fight-for-15
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_cta_02
+    org: US Federation of Worker Cooperatives
+    line: 'The US Federation of Worker Cooperatives connects more than 1,200 democratically-owned
+      worker co-ops across the country, offering a model where the workers receiving
+      the schedule app are the ones writing it. Door in: usworker.coop'
+    metadata:
+      semantic_family: door-in-worker-coop
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_cta_03
+    org: Coworker.org
+    line: 'Coworker.org is a platform that helps workers at any workplace organize
+      campaigns for changes to schedule, pay, and conditions, without requiring a
+      formal union step. Door in: coworker.org'
+    metadata:
+      semantic_family: door-in-coworker
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_cta_04
+    org: Fair Workweek Initiative
+    line: 'The Fair Workweek Initiative tracks and supports the seven US cities that
+      have passed predictable-schedule laws, and helps organizers in other places
+      pursue the same policy. Door in: fairworkweek.org'
+    metadata:
+      semantic_family: door-in-fair-workweek
+      article_types:
+      - hard_news_spiritual_response
+  - id: junko_econ_cta_05
+    org: ILO Decent Work Agenda
+    line: 'The International Labour Organization publishes the Decent Work Agenda
+      and global youth-employment monitoring, which national policy teams use as the
+      multilateral floor for labor-condition decisions. Door in: ilo.org/decentwork'
+    metadata:
+      semantic_family: door-in-ilo
       article_types:
       - hard_news_spiritual_response
 title_system:
   headline_layer_2:
     options:
     - id: junko_econ_headline_01
-      line: A Japanese channeler reads work precarity as soul-purpose friction - and
+      line: A Japanese channeler reads work precarity as soul-purpose friction — and
         the practice that opens the channel.
       metadata:
         semantic_family: teacher-attention
+        article_types:
+        - hard_news_spiritual_response
+    - id: junko_econ_headline_02
+      line: Worth is not the productivity metric — a channeling tradition names the
+        vocation underneath the schedule app.
+      metadata:
+        semantic_family: soul-vocation-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: junko_econ_headline_03
+      line: A receiver, not a teacher, on the layer of work that conventional career
+        infrastructure cannot reach.
+      metadata:
+        semantic_family: receiver-economy
+        article_types:
+        - hard_news_spiritual_response
+    - id: junko_econ_headline_04
+      line: Planetary economic transition, not personal failure to plan — Junko on
+        the cohort holding the load.
+      metadata:
+        semantic_family: planetary-economic-transition
+        article_types:
+        - hard_news_spiritual_response
+    - id: junko_econ_headline_05
+      line: Reception over productivity — what the ascended council brings to a generation
+        graded by the metric.
+      metadata:
+        semantic_family: reception-vs-productivity
         article_types:
         - hard_news_spiritual_response
 variation_policy:
