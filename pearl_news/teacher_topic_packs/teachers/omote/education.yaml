@@ -5,13 +5,13 @@ active: true
 identity:
   display_name: Omote Sensei
   attribution_name: Omote Sensei
-  tradition: Japanese Sacred Way-of-Life and Purification Teaching
-  tradition_short: Japanese sacred way-of-life
+  tradition: Japanese spiritual-historical navigation and Yamato-gokoro awakening
+  tradition_short: Japanese spiritual-historical navigation
   teacher_setting_options:
-  - practice space
-  - ritual space
+  - pilgrimage route
+  - sacred site
   teacher_years: lineage-bearing
-  affiliation_safe_line: Japanese traditional wisdom teacher
+  affiliation_safe_line: teaches within the Japanese spiritual-historical tradition
   launch_approved: true
 persona:
   id: gen_z_alpha
@@ -24,299 +24,702 @@ persona:
   - late-night scrolling
   - part-time work
   tie_to_real_world_struggles:
-  - id: school_oni
-    label: oni taking root where difficulty is never honestly faced
-    loop: opens the portal -> body tenses -> switches away -> comes back because the
-      work still exists
+  - id: credential_vs_inheritance
+    label: friction between credentials the system measures and the inheritance the
+      soul knows the curriculum is missing
+    loop: opens the lecture -> mind drifts -> closes the tab -> opens it again because
+      the deadline is real and the recognition is not arriving
     body_markers:
-    - forehead
-    - shoulders
     - jaw
+    - eyes
+    - breath
     digital_markers:
-    - opens the portal
-    - switches away
-    - comes back
+    - opens the tab
+    - closes the tab
 topic_fit:
   fit_level: primary
-  fit_reason: Education pressure fits Omote when schools strip character formation
-    and honest encounter with difficulty, producing the conditions where the oni takes
-    root.
+  fit_reason: The curriculum young people are inside has been built for credential
+    delivery while the body and soul have been asking for inheritance — for the
+    long-view, the living field, the geography that recognizes them. Omote Sensei's
+    tradition reads this gap and offers spiritual-historical navigation as a different
+    mode of education.
   forbidden_angles:
-  - do not reduce this to generic wellness
-  - do not frame the pressure as personal weakness
+  - do not reduce to generic productivity
+  - do not frame as personal motivation problem
+  - do not use Noh theater as primary framework
 hook_personal:
   options:
-  - id: hook_personal_01
-    line: You are told school is preparing you for life. Some days it feels like it
-      is training you to distrust your own attention — and never to face what is actually
-      difficult.
-    semantic_family: personal-pressure
-    tone: plain
-    intensity: 3
-    article_types:
-    - hard_news_spiritual_response
+  - id: omote_ed_hook_personal_01
+    line: You can complete the assignments. You can hit the deadlines. You also know
+      that something the curriculum was supposed to deliver has not arrived — a recognition,
+      a long-view, an inheritance that the credential alone cannot transmit.
+    metadata:
+      semantic_family: credential-without-recognition
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_hook_personal_02
+    line: You are inside the system and you are doing what it asks. You also feel,
+      under all of it, the strangeness of being trained for a world the institution
+      itself no longer believes in — and the gap between what is taught and what
+      the body recognizes is widening.
+    metadata:
+      semantic_family: training-gap-widening
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_hook_personal_03
+    line: At 2 a.m. you finish the paper. The jaw is locked. You sleep four hours.
+      The grade arrives. Something a part of you keeps asking is not whether you
+      passed — it is whether anything was actually transmitted in the exchange.
+    metadata:
+      semantic_family: transmission-question
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_hook_personal_04
+    line: You read the syllabus and recognize none of yourself in it. You complete
+      the readings and the recognition does not arrive. The friction is not that
+      the material is hard — it is that the material has nothing to do with the
+      inheritance you came here to find.
+    metadata:
+      semantic_family: inheritance-not-found
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_hook_personal_05
+    line: A part of you knows the question is not how to study harder. The question
+      is what would it take to be inside a curriculum again — one where the long-view
+      and the lineage were part of the transmission, not optional electives in the
+      catalog.
+    metadata:
+      semantic_family: longer-arc-curriculum
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
 hook_big_picture:
   options:
-  - id: hook_big_picture_01
-    line: 'Education strain is also a character problem: schools name depth and care
-      while replacing character formation with measurable competencies — and the oni
-      takes root where young people are never taught to face difficulty honestly.'
-    semantic_family: system-pressure
-    angle: systemic-pressure
-    article_types:
-    - hard_news_spiritual_response
+  - id: omote_ed_hook_big_01
+    line: Youth education load is not only about workload. It is what credential
+      delivery does to attention, rest, and the capacity to recognize an inheritance
+      when the institution itself has been organized to deliver something other than
+      that.
+    metadata:
+      semantic_family: system-pressure
+      angle: systemic-pressure
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_hook_big_02
+    line: A generation is being asked to inherit a world the curriculum is not equipped
+      to describe. The gap between what is taught and what the cohort has to actually
+      live inside is not the cohort's fault — it is the visible edge of an inheritance
+      the modern institution has not been transmitting.
+    metadata:
+      semantic_family: curriculum-world-gap
+      angle: structural-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_hook_big_03
+    line: The credential is now the primary medium through which the institution
+      validates a young person and the primary place a young person can find the
+      institution will recognize them at all. That double role is the architecture
+      of educational overload — and it is not what any inheritance was designed to
+      do.
+    metadata:
+      semantic_family: credential-double-role
+      angle: medium-architecture
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_hook_big_04
+    line: Sacred geography in the Japanese tradition has been a curriculum for centuries
+      — a living transmission of the long-view that the modern institution does not
+      carry. The question is whether that curriculum can re-enter the picture in
+      time for the inheritance to do the work the credential was never built to do.
+    metadata:
+      semantic_family: geography-as-curriculum
+      angle: tradition-as-curriculum
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_hook_big_05
+    line: What gets read as student disengagement is often the opposite — the body
+      registering that the curriculum it is inside has not been transmitting the
+      inheritance it came here to find. Omote Sensei's tradition has language for
+      that registration that the modern institution does not.
+    metadata:
+      semantic_family: disengagement-as-recognition
+      angle: tradition-language-gap
+      article_types:
+      - hard_news_spiritual_response
 teacher_intro:
   options:
-  - id: teacher_intro_01
-    line: Omote Sensei, a teacher of the Japanese sacred way-of-life and purification,
-      has watched in practice sessions students carry school pressure as if scattered
-      attention were a moral flaw. They are not asking whether education matters.
-      They are asking what it means to learn inside systems that have stripped Yamato-gokoro
-      — the sincere heart-mind — from the curriculum and replaced it with performance.
-    semantic_family: identity-seen-shift
-    tone: plain
-    intensity: 3
-    article_types:
-    - hard_news_spiritual_response
-  - id: teacher_intro_02
-    line: Omote Sensei teaches from the Japanese tradition. He has seen in practice
-      sessions students arrive already exhausted by systems that protect them from
-      failure and discomfort — and the tradition holds that education must include
-      the practice of honest encounter with what is difficult, or the oni will take
-      root when hardship finally arrives.
-    semantic_family: identity-seen-shift-alt
-    tone: grave
-    intensity: 4
-    article_types:
-    - hard_news_spiritual_response
+  - id: omote_ed_intro_01
+    line: Omote Sensei, a teacher of Japanese spiritual-historical navigation and
+      Yamato-gokoro awakening, has taught young pilgrims inside the Yamato region
+      for decades. He has seen what the credential delivery model does to a cohort
+      that came in asking for an inheritance.
+    metadata:
+      semantic_family: identity-seen-shift
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_intro_02
+    line: Omote Sensei teaches inside Project Phoenix, his pilgrimage and awakening
+      tour lineage based in Kyoto. He does not position himself as an education reformer
+      in the policy sense — he is a guide through the sacred geography that has held
+      transmission as native for centuries.
+    metadata:
+      semantic_family: guide-not-reformer
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_intro_03
+    line: Omote Sensei works from the principle that history is not separate from
+      spirit and that sacred sites are living teachers. When he leads young pilgrims
+      to the temples of Nara or the long-view sites of the Yamato region, he is not
+      delivering a culture tour — he is restoring a curriculum the modern institution
+      cannot transmit.
+    metadata:
+      semantic_family: history-as-living-teacher
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_intro_04
+    line: Omote Sensei has watched young pilgrims arrive with credentials in hand
+      and an inheritance gap they cannot name. In his tradition Yamato-gokoro — the
+      sincere heart-mind — is dormant rather than absent. The work is to wake it
+      inside the geography that has held it longer than any modern institution has
+      existed.
+    metadata:
+      semantic_family: yamato-gokoro-dormant
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_intro_05
+    line: Omote Sensei is a bilingual guide — speaking across the Japanese tradition
+      and the global generation now arriving to inherit it. His teaching is that
+      the modern institution was built to deliver credentials, and that the inheritance
+      the cohort actually came for is held by the geography, not by the institution.
+    metadata:
+      semantic_family: bilingual-bridge
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
 youth_somatic:
   options:
-  - id: youth_somatic_01
-    line: 'You open the assignment portal. Your body tensed. You switched away. Then
-      you came back because the work still exists whether or not the system helps
-      you hold it.
-
-      LOOP_SEQUENCE: "opened the portal. body tensed. switched away. came back."'
-    loop_type: school_oni
-    body_register: forehead
-    digital_behavior: opens the portal
-    article_types:
-    - hard_news_spiritual_response
-  - id: youth_somatic_02
-    line: 'You saw the deadline in the app. Your shoulders and jaw tightened. You
-      switched tabs. Then you returned because the work still has to get done.
-
-      LOOP_SEQUENCE: "saw the deadline. shoulders and jaw tightened. switched tabs.
-      returned."'
-    loop_type: school_oni
-    body_register: shoulders
-    digital_behavior: switches away
-    article_types:
-    - hard_news_spiritual_response
+  - id: omote_ed_somatic_01
+    line: You opened the lecture tab at 1 a.m. The eyes drifted to the second screen.
+      You closed the lecture tab. Then you opened it again because the deadline was
+      real and the recognition was not arriving.
+    metadata:
+      semantic_family: lecture-tab-loop
+      loop_type: deadline_no_recognition
+      body_register: eyes
+      digital_behavior: opens the tab
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_somatic_02
+    line: You read the textbook chapter. The jaw locked at the third page. You took
+      a screenshot you would never reread. Then you moved on because the system
+      requires the moving-on, not the registration.
+    metadata:
+      semantic_family: jaw-locked-textbook
+      loop_type: textbook_required
+      body_register: jaw
+      digital_behavior: screenshot
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_somatic_03
+    line: You handed in the paper. The breath did not lengthen. The grade arrived
+      and the body did not register relief — because what the body had been waiting
+      for was not the grade.
+    metadata:
+      semantic_family: breath-grade-mismatch
+      loop_type: grade_no_relief
+      body_register: breath
+      digital_behavior: submission portal
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_somatic_04
+    line: You watched the lecture at 2x speed. The stomach turned at the gap between
+      the content and the world you would walk into after. You did not name the turning
+      — because the inheritance for what to do with that gap had not been transmitted.
+    metadata:
+      semantic_family: stomach-content-world-gap
+      loop_type: speed_compression
+      body_register: stomach
+      digital_behavior: 2x speed playback
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_somatic_05
+    line: You sat in the seminar and the shoulders would not soften. You looked
+      around and saw five other cohort members with the same shoulders — the body
+      registering, all at once, the curriculum the room had not built for them.
+    metadata:
+      semantic_family: shoulders-collective-recognition
+      loop_type: seminar_recognition
+      body_register: shoulders
+      digital_behavior: in-room observation
+      article_types:
+      - hard_news_spiritual_response
 teacher_witness:
   options:
-  - id: teacher_witness_01
-    line: Omote Sensei has seen that exact sequence — the task appears, the body braces,
-      attention leaves, and effort has to return inside a system that keeps misnaming
-      the problem. The Japanese tradition does not blame the student; it names the
-      system that stripped character formation and honest difficulty from the curriculum.
-    semantic_family: loop-mirror
-    loop_type: school_oni
-    article_types:
-    - hard_news_spiritual_response
-  - id: teacher_witness_02
-    line: He has watched students carry this loop — the portal opens, the body tenses,
-      the tab changes, and then the same pressure pulls them back. The tradition holds
-      that the oni takes root most easily where young people are never taught to face
-      difficulty honestly.
-    semantic_family: loop-mirror-alt
-    loop_type: school_oni
-    article_types:
-    - hard_news_spiritual_response
+  - id: omote_ed_witness_01
+    line: Omote Sensei has seen this exact loop in young pilgrims who arrive with
+      transcripts and an inheritance gap. In his tradition the loop is not academic
+      weakness — it is Yamato-gokoro registering the absence of the curriculum the
+      body came here to find.
+    metadata:
+      semantic_family: yamato-registers-curriculum-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_witness_02
+    line: He has watched young people walk the Nara temple paths and feel, for the
+      first time, that they are inside a curriculum that is teaching them. In his
+      tradition the recognition is not nostalgia — it is the body remembering what
+      transmission actually feels like when the geography is doing the teaching.
+    metadata:
+      semantic_family: geography-as-teacher
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_witness_03
+    line: He has guided cohorts who arrive convinced the credential was the curriculum.
+      The first practice on pilgrimage is letting the credential be set down — and
+      what arrives in its place is what they were looking for all along.
+    metadata:
+      semantic_family: credential-laid-down
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_witness_04
+    line: He has seen the moment when a young person asks, for the first time, what
+      their ancestors learned. In his tradition that question is the door — the inheritance
+      opens to whoever finally addresses it directly.
+    metadata:
+      semantic_family: ancestor-question-as-door
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_witness_05
+    line: He has watched the shift when a young pilgrim stops treating the credential
+      as the curriculum and lets the geography begin to teach. In his tradition the
+      shift is not anti-institutional — it is the body remembering what learning
+      was before the medium that now delivers it was invented.
+    metadata:
+      semantic_family: geography-teaches
+      article_types:
+      - hard_news_spiritual_response
 turnaround:
   options:
-  - id: turnaround_01
-    stat_line_1: 410 workshops. 27 cities.
-    stat_line_2: Young people are organizing workshops, hosting campaigns, and students
-      and youth educators are already building study supports, healthier schedules,
-      and attention-friendly learning spaces.
-    semantic_family: institutional-action
-    article_types:
-    - hard_news_spiritual_response
-  - id: turnaround_02
-    stat_line_1: 410 workshops. 27 cities.
-    stat_line_2: Young people are organizing and hosting peer circles, training listeners,
-      and forcing schools to treat character and honest difficulty as part of the
-      learning equation.
-    semantic_family: institutional-action-alt
-    article_types:
-    - hard_news_spiritual_response
+  - id: omote_ed_turnaround_01
+    stat_line_1: 244 million children. UNESCO.
+    stat_line_2: UNESCO estimates 244 million children and youth are still out of
+      school globally — a number that has framed Global Education First, SDG 4, and
+      a cascade of national plans translating ambition into local infrastructure.
+    metadata:
+      semantic_family: unesco-baseline
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_turnaround_02
+    stat_line_1: 100+ member countries. Global Campaign for Education.
+    stat_line_2: The Global Campaign for Education unites civil society in more than
+      one hundred member countries — turning education advocacy into shared infrastructure
+      rather than scattered campaigns.
+    metadata:
+      semantic_family: gce-coalition
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_turnaround_03
+    stat_line_1: SDG 4. 2030 deadline.
+    stat_line_2: SDG 4 commits the international community to inclusive and equitable
+      quality education for all by 2030 — a multilateral instrument that the previous
+      framework lacked.
+    metadata:
+      semantic_family: sdg-4-instrument
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_turnaround_04
+    stat_line_1: 76 million children. ECW.
+    stat_line_2: Education Cannot Wait has reached more than seventy-six million
+      crisis-affected children since its founding, with seven hundred million dollars
+      mobilized for education in emergencies — capacity that did not exist a decade
+      ago.
+    metadata:
+      semantic_family: ecw-emergency-capacity
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_turnaround_05
+    stat_line_1: 22 million volunteers. World's Largest Lesson.
+    stat_line_2: World's Largest Lesson, a partnership across UNICEF and global educators,
+      has reached more than 22 million children across 160 countries — translating
+      the SDG framework into classroom-level transmission infrastructure.
+    metadata:
+      semantic_family: wll-classroom-reach
+      article_types:
+      - hard_news_spiritual_response
 bridge:
   options:
-  - id: bridge_01
-    line: 410 workshops. 27 cities. The tracker measures reforms and study supports.
-      It has no column for what made the next honest return to learning possible after
-      another day of fragmentation — the capacity to face what is difficult without
-      calling the system's disorder your failure. The student who came back to the
-      portal needed that capacity. Omote Sensei's tradition has practiced cultivating
-      Yamato-gokoro and honest encounter with difficulty for generations.
-    hidden_capacity: face what is difficult without making it identity
-    semantic_family: tracker-capacity
-    article_types:
-    - hard_news_spiritual_response
-  - id: bridge_02
-    line: 'The numbers measure programs and reforms. They do not measure what happens
-      when a young person finally has a practice that includes honest facing — not
-      performance of competence but the sincere heart-mind that acts from moral feeling
-      rather than calculation. That capacity is what the next honest study session
-      needs. Omote Sensei''s tradition calls it Yamato-gokoro: integrity toward oneself,
-      one''s community, and the work itself.'
-    hidden_capacity: act from sincere heart-mind rather than performance
-    semantic_family: tracker-capacity-alt
-    article_types:
-    - hard_news_spiritual_response
+  - id: omote_ed_bridge_01
+    line: 244 million children. UNESCO. The tracker measures enrollment, completion,
+      and policy adoption. It does not measure what is transmitted inside the classroom
+      — whether the inheritance the cohort came for actually arrives, or whether
+      they receive a credential without recognition. Omote Sensei's tradition holds
+      the transmission question as native.
+    hidden_capacity: deliver inheritance, not only credential
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_bridge_02
+    line: The numbers show what has been built. They do not show the inheritance
+      gap — the long-view, the lineage, the living field that the modern institution
+      has not been transmitting and that the body keeps asking for. Omote Sensei's
+      tradition holds that field as native.
+    hidden_capacity: hold the living field the institution does not transmit
+    metadata:
+      semantic_family: living-field-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_bridge_03
+    line: Frameworks track participation and completion. They do not track the moment
+      a young pilgrim sits inside sacred geography and feels, for the first time,
+      that they are being taught. In Omote Sensei's framework that moment is the
+      curriculum the trackers cannot report.
+    hidden_capacity: register transmission the trackers cannot show
+    metadata:
+      semantic_family: transmission-recognition
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_bridge_04
+    line: Policy instruments scale credentials. They do not scale recognition. The
+      capacity to recognize an inheritance when it arrives — Yamato-gokoro doing
+      its work — is exactly what the modern institution does not teach. Omote Sensei's
+      tradition has carried it for centuries.
+    hidden_capacity: rebuild the recognition the policy frame does not carry
+    metadata:
+      semantic_family: recognition-capacity
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_bridge_05
+    line: The infrastructure is measurable. The transmission underneath it is not.
+      Omote Sensei's tradition does not replace the structural work — it names the
+      layer beneath it and offers the sacred geography that has held that layer in
+      waking memory for generations.
+    hidden_capacity: name and hold the layer beneath the measurement
+    metadata:
+      semantic_family: structural-vs-yamato-gokoro
+      article_types:
+      - hard_news_spiritual_response
 teacher_perspective:
   options:
-  - id: teacher_perspective_01
+  - id: omote_ed_perspective_01
     header: What Omote Sensei Sees
     paragraphs:
-    - Omote Sensei would not start by calling the student distracted. He would start
-      by naming the system. In the Japanese sacred tradition, education was never
-      separated from the formation of character — the cultivation of Yamato-gokoro,
-      the sincere heart-mind that acts from moral feeling rather than calculation.
-      Modern education systems that have stripped character formation from the curriculum
-      and replaced it with measurable competencies have produced technically capable
-      people who do not know how to live with integrity — and the tradition regards
-      this as a failure not of students but of the system that shaped them.
-    - From there he turns to the oni. The oni — inner affliction — takes root most
-      easily where young people are never taught to face difficulty honestly. Education
-      systems that protect students from failure, discomfort, and moral complexity
-      do not produce resilient adults; they produce adults whose first encounter with
-      genuine hardship activates the oni because no practice of facing it was ever
-      cultivated.
-    - 'That is the reframe: what feels like a personal fault — me, broken, wrong —
-      is often a truthful reading of a disordered learning environment — and the tradition
-      holds that education must include the practice of honest encounter with what
-      is difficult within a system and institutional structure that was never designed
-      for what it demands.'
-    semantic_family: teacher-diagnosis
-    reframe_type: self_to_system
-    article_types:
-    - hard_news_spiritual_response
-  - id: teacher_perspective_02
+    - Omote Sensei does not tell young people to study harder as if the friction
+      they feel were a motivation deficit. In his tradition the friction is Yamato-gokoro
+      registering the absence of the curriculum the body came here to find. The
+      problem is not the student. The problem is the architecture of credential delivery
+      operating without the transmission underneath.
+    - From there he turns to sacred geography. The temples of Nara, the shrines of
+      Kyoto, and the long-view sites of the Yamato region have been a curriculum
+      for centuries. When a young pilgrim sits at one of these sites, the work is
+      not metaphor — the geography is teaching, and the body recognizes the teaching
+      before the mind has language for it.
+    - That matters because what feels like a personal failure of focus is, in his
+      framework, accurate response to an inheritance gap. The reframe does not remove
+      the deadline. It places the deadline inside a longer arc that the credential
+      alone cannot carry.
+    metadata:
+      semantic_family: teacher-diagnosis
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_perspective_02
     header: What Omote Sensei Sees
     paragraphs:
-    - 'In Omote Sensei''s tradition, scattered attention is not only a cognitive issue.
-      It is a character issue — the absence of Yamato-gokoro, the sincere presence
-      that can only be cultivated through practice. When the system names depth and
-      care while organizing daily life around fragmentation and performance, the tradition
-      asks: where is the practice of facing what is difficult?'
-    - 'Sacred geography teaches that where you learn matters as much as what you learn.
-      For young people educated entirely through screens, the tradition identifies
-      a specific loss: the absence of place-based knowledge, the kind of understanding
-      that can only arise from sustained physical presence in a landscape that has
-      its own memory and its own demands on attention.'
-    - 'In that frame, self-blame softens. The problem is not that students are lazy
-      or that I am wrong for struggling. The problem is that the system has stripped
-      the conditions for sincere learning and then blamed the student for the result.
-      Omote Sensei''s tradition offers a standard: integrity toward oneself, one''s
-      community, and the work itself.'
-    semantic_family: teacher-diagnosis-alt
-    reframe_type: self_to_system
-    article_types:
-    - hard_news_spiritual_response
+    - In Omote Sensei's tradition Yamato-gokoro is the dormant curriculum — the inheritance
+      that has not been transmitted forward because the channels that used to transmit
+      it (sacred geography, ritual, intergenerational pilgrimage) have been thinned
+      by modern institutional life. The young arrive with the capacity intact and
+      no curriculum to wake it.
+    - His pilgrimage work is the curriculum. Walking the Kyoto streets, sitting at
+      the Nara temple gates, standing inside the long-view of Yamato itself — these
+      are not tourism. They are the actual teaching. The geography is the teacher;
+      he is the bilingual guide.
+    - For a generation carrying credentials without recognition, this is not another
+      course offering. It is a different mode of contact with what came before. The
+      relief is not that the deadline lifts — it is that the inheritance the body
+      had been asking for finally arrives.
+    metadata:
+      semantic_family: dormant-curriculum
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_perspective_03
+    header: What Omote Sensei Sees
+    paragraphs:
+    - Spiritual history navigation is Omote Sensei's term for what he teaches. History
+      in his tradition is not a closed archive — it is a living field, and the cycles
+      of transmission and loss that the Yamato region has held are still active in
+      the geography. To walk the path is to enter that field.
+    - He does not promise the field replaces the credential. He promises it gives
+      the student a lineage — a long-view that places the current studies inside
+      a longer arc than the credential, by design, can carry.
+    - In his framework the inability to find that arc inside the lecture is not personal
+      failure. It is the architectural limit of the medium. The body has been asking
+      for a different scale of curriculum, and the geography is one of the few that
+      still teaches at that scale.
+    metadata:
+      semantic_family: spiritual-history-curriculum
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_perspective_04
+    header: What Omote Sensei Sees
+    paragraphs:
+    - Project Phoenix is the name Omote Sensei gives his pilgrimage work — the deliberate
+      activation of Yamato-gokoro in those arriving with credentials and an inheritance
+      gap they cannot name. The name is not metaphor. The tradition holds that the
+      curriculum itself rises again when the conditions are arranged for it.
+    - For young people whose curriculum is the LMS and the syllabus, those conditions
+      are not abstract. They are walking, silence, the absence of the device, the
+      presence of a guide who is bilingual in the inheritance and the modernity that
+      has thinned it.
+    - The reframe matters because the modern read of educational friction is private
+      failure. In Omote Sensei's framework it is a curriculum that has not transmitted
+      the inheritance forward. The shift from private to inherited is the part that,
+      in pilgrimage practice, often lands first.
+    metadata:
+      semantic_family: project-phoenix-curriculum
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_perspective_05
+    header: What Omote Sensei Sees
+    paragraphs:
+    - The principle Omote Sensei returns to is that education was never meant to
+      be only credential delivery. It was meant to be transmission of an inheritance
+      across generations — a curriculum that the geography, the ritual, and the lineage
+      held together. When any one of those is missing, the credential remains and
+      the inheritance does not arrive.
+    - In his framework the modern institution has become very good at the credential
+      and increasingly unable to deliver the rest. That gap is not the institution's
+      fault alone — it is what happens when the channels of transmission thin faster
+      than the institution can replace them. His tradition has carried the channels
+      across centuries.
+    - For a phone-native cohort, the question is not whether to abandon the credential.
+      The question is whether the inheritance can be re-entered in time for the body
+      to remember what learning was. Omote Sensei teaches that it can be — and that
+      the entry point is the geography itself.
+    metadata:
+      semantic_family: credential-vs-inheritance
+      article_types:
+      - hard_news_spiritual_response
 practice:
-  default_id: practice_01
+  default_id: omote_ed_practice_01
   options:
-  - id: practice_01
-    display_name: Purification and Service Practice
+  - id: omote_ed_practice_01
+    display_name: Yamato-gokoro Curriculum Pause
     duration: 4 minutes
-    announcement_line: Omote Sensei teaches a 4-minute Purification and Service Practice
-      for moments when school pressure is making the mind perform against itself.
-      It is in the sidebar, brief and structured.
+    announcement_line: Omote Sensei teaches a 4-minute Yamato-gokoro Curriculum Pause
+      for moments when the deadline pressure has erased the question of whether anything
+      is actually being transmitted. It is in the sidebar, brief and usable inside
+      ordinary study.
     relief_lines:
-    - What has accumulated can be faced and released.
-    - Enough steadiness returns for the next honest move.
+    - The friction stops being read as motivation deficit and is recognized as the
+      heart-mind asking for transmission.
+    - Enough steadiness returns to keep working without losing the question.
     relief_register:
-    - clarity
-    - capacity
-    - act again
-    derived_from_frame: purification_service
-    article_types:
-    - hard_news_spiritual_response
-  - id: practice_02
-    display_name: Purification and Service Practice
-    duration: 4 minutes
-    announcement_line: Omote Sensei teaches a 4-minute Purification and Service Practice
-      for when the assignment portal and the fragmented day have left the inner life
-      in need of purification. It is in the sidebar, short enough to use before class
-      or between tasks.
+    - pause
+    - heart-mind
+    - transmission
+    derived_from_frame: yamato_gokoro_curriculum_pause
+    metadata:
+      semantic_family: yamato-gokoro-curriculum-pause
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_practice_02
+    display_name: Sacred Geography Curriculum Recall
+    duration: 3 minutes
+    announcement_line: Omote Sensei offers a 3-minute Sacred Geography Curriculum
+      Recall — placing imagined feet on a remembered sacred site so the body can
+      register that the long-view exists even inside the LMS. It is in the sidebar,
+      timed and step by step.
     relief_lines:
-    - The oni of performance is met with honest seeing.
-    - The sincere heart-mind returns for the next move.
+    - The body registers a curriculum the institution is not built to deliver.
+    - The credential finds a longer arc than the platform delivering it.
     relief_register:
-    - clarity
-    - release
-    - act again
-    derived_from_frame: purification_service
-    article_types:
-    - hard_news_spiritual_response
+    - recall
+    - long-view
+    - geography
+    derived_from_frame: sacred_geography_curriculum_recall
+    metadata:
+      semantic_family: sacred-geography-curriculum-recall
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_practice_03
+    display_name: Spiritual-Historical Navigation Walk
+    duration: 7 minutes
+    announcement_line: Omote Sensei teaches a 7-minute Spiritual-Historical Navigation
+      Walk — a short walk in which the practitioner places the current studies inside
+      the long arc of the tradition's cycles of transmission. It is in the sidebar,
+      timed and step by step.
+    relief_lines:
+    - The current credential is placed inside a longer arc than the platform can
+      show.
+    - The body remembers that transmission has happened before — and what conditions
+      it requires.
+    relief_register:
+    - navigate
+    - arc
+    - transmission
+    derived_from_frame: spiritual_historical_walk
+    metadata:
+      semantic_family: spiritual-historical-walk
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_practice_04
+    display_name: Ancestor Curriculum Inquiry
+    duration: 5 minutes
+    announcement_line: Omote Sensei teaches a 5-minute Ancestor Curriculum Inquiry
+      — a quiet asking of what the inheritance taught in moments like this one, without
+      requiring a clean answer to arrive. It is in the sidebar, timed and step by
+      step.
+    relief_lines:
+    - The question itself opens a door the syllabus has closed.
+    - The student stops being alone with the gap.
+    relief_register:
+    - inquire
+    - inheritance
+    - ancestor
+    derived_from_frame: ancestor_curriculum_inquiry
+    metadata:
+      semantic_family: ancestor-curriculum-inquiry
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_practice_05
+    display_name: Project Phoenix Study Breath
+    duration: 3 minutes
+    announcement_line: Omote Sensei offers a 3-minute Project Phoenix Study Breath
+      for the moments inside the work session, when the credential has been pushed
+      to the foreground and the inheritance has been pushed to the back. It is in
+      the sidebar, timed and step by step.
+    relief_lines:
+    - The breath becomes a marker for the inheritance, not the platform.
+    - The student returns to a pace the heart-mind recognizes as its own.
+    relief_register:
+    - breath
+    - phoenix
+    - inheritance
+    derived_from_frame: project_phoenix_breath
+    metadata:
+      semantic_family: project-phoenix-breath
+      article_types:
+      - hard_news_spiritual_response
 sdg:
   primary:
     id: SDG 4
     title: Quality Education
-    line: The United Nations has a framework for this through SDG 4 and its quality
-      education targets.
+    line: The United Nations framework includes inclusive and equitable quality education
+      and lifelong learning opportunities for all in SDG 4.
   fallback_un_tie:
-    line: Pearl News is an independent nonprofit. We are not affiliated with the United
-      Nations.
+    line: Pearl News is an independent nonprofit. We are not affiliated with the
+      United Nations.
 cta:
   options:
-  - id: cta_01
+  - id: omote_ed_cta_01
     org: UNESCO
-    line: 'UNESCO''s Global Education Coalition and student advocacy groups both offer
-      practical entry points here. Door in: https://www.unesco.org/en/education/globaleducationcoalition'
-    semantic_family: door-in
-    article_types:
-    - hard_news_spiritual_response
-  - id: cta_02
-    org: Student advocacy groups
-    line: 'If that is not your next step, student-led education justice groups work
-      the same framework at the local and national level. Door in: join their network.'
-    semantic_family: door-in-alt
-    article_types:
-    - hard_news_spiritual_response
-title_system:
-  headline_layer_1:
-    options:
-    - id: headline_layer_1_01
-      line: Schools Are Naming Learning While Breaking Its Conditions.
-      semantic_family: title
+    line: 'UNESCO is the United Nations Educational, Scientific and Cultural Organization
+      and the multilateral lead for SDG 4. Door in: their Global Education Coalition
+      or Member State engagement.'
+    metadata:
+      semantic_family: door-in-unesco
       article_types:
       - hard_news_spiritual_response
+  - id: omote_ed_cta_02
+    org: Global Campaign for Education
+    line: 'The Global Campaign for Education unites civil society in more than one
+      hundred member countries to demand inclusive quality education. Door in: their
+      national coalition list.'
+    metadata:
+      semantic_family: door-in-gce
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_cta_03
+    org: Education Cannot Wait
+    line: 'Education Cannot Wait is the global fund for education in emergencies,
+      reaching seventy-six million crisis-affected children. Door in: their advocacy
+      and partnership program.'
+    metadata:
+      semantic_family: door-in-ecw
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_cta_04
+    org: Malala Fund
+    line: 'Malala Fund champions every girl''s right to twelve years of free, safe,
+      quality education. Door in: their advocacy program and country campaigns.'
+    metadata:
+      semantic_family: door-in-malala-fund
+      article_types:
+      - hard_news_spiritual_response
+  - id: omote_ed_cta_05
+    org: Teach For All
+    line: 'Teach For All is a global network of independent partner organizations
+      in more than sixty countries developing collective leadership for education
+      change. Door in: their network and country partner list.'
+    metadata:
+      semantic_family: door-in-teach-for-all
+      article_types:
+      - hard_news_spiritual_response
+title_system:
   headline_layer_2:
     options:
-    - id: headline_layer_2_01
-      line: A Japanese tradition teacher reads scattered attention as a sign of institutional
-        misalignment — and names Yamato-gokoro.
-      semantic_family: subtitle
-      article_types:
-      - hard_news_spiritual_response
-    - id: headline_layer_2_02
-      line: Omote Sensei names what education pressure does when character formation
-        is stripped — and offers a practice to face difficulty honestly.
-      semantic_family: subtitle-alt
-      article_types:
-      - hard_news_spiritual_response
+    - id: omote_ed_headline_01
+      line: A Kyoto-based teacher of Japanese spiritual-historical navigation reads
+        the credential-vs-inheritance gap as the curriculum question the modern institution
+        has not been built to answer.
+      metadata:
+        semantic_family: teacher-attention
+        article_types:
+        - hard_news_spiritual_response
+    - id: omote_ed_headline_02
+      line: Sacred geography, not credential alone — Omote Sensei on the inheritance
+        gap behind the youth education load.
+      metadata:
+        semantic_family: geography-not-credential
+        article_types:
+        - hard_news_spiritual_response
+    - id: omote_ed_headline_03
+      line: Spiritual-historical navigation meets a phone-native cohort — Project
+        Phoenix and the curriculum the LMS cannot deliver.
+      metadata:
+        semantic_family: project-phoenix-meets-cohort
+        article_types:
+        - hard_news_spiritual_response
+    - id: omote_ed_headline_04
+      line: Yamato-gokoro, the sincere heart-mind — what an Omote Sensei pilgrimage
+        teaches that the syllabus cannot reach.
+      metadata:
+        semantic_family: yamato-gokoro-curriculum
+        article_types:
+        - hard_news_spiritual_response
+    - id: omote_ed_headline_05
+      line: Walking, silence, and the geography that teaches — a Japanese teacher
+        on the inheritance gap behind a generation's credential load.
+      metadata:
+        semantic_family: inheritance-gap-frame
+        article_types:
+        - hard_news_spiritual_response
 variation_policy:
   avoid_same_semantic_family_within_article: true
   deterministic_rotation_key: article_id + slot + teacher_id + topic
   metadata_filters:
     article_types:
     - hard_news_spiritual_response
-    topic_subcases:
-    - attention-fragmentation
-    - classroom-pressure
     intensity_range:
     - 2
     - 4
