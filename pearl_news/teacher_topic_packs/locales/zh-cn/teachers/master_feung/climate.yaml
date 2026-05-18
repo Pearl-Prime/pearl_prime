@@ -1,97 +1,188 @@
 hook_personal:
   options:
-    - id: hook_personal_01
-      line: 你比任何时候都在意地球，却也感到更难在下一个数字旁停留足够久以决定做什么。
+  - id: master_feung_climate_hook_personal_01
+    line: 你比任何时候都在意地球。你也感到更难在下一个数字旁停留足够久以决定怎么做——你内里清楚，这份负荷从未只属于你一个人的神经系统。
+  - id: master_feung_climate_hook_personal_02
+    line: 你在说得出口之前，胸口先发紧。头脑能做的都做了——读了讨论、做了能做的行动。你内里更安静的某处，在请求被见证，而不是被推动去做又一次慌张的姿态。
+  - id: master_feung_climate_hook_personal_03
+    line: 凌晨一点，你关掉应用，又打开。两种动作都没用，因为未来不会等你的神经系统准备好——而你想在入睡前解决它的那部分，正是已被过度要求的那部分。
+  - id: master_feung_climate_hook_personal_04
+    line: 你读到新阈值，喉咙发紧。你也明白，没有任何完美的姿态、没有完美的感觉、没有无瑕的行动能撤销不是你造成的拖延——而你内里需要空间去做你本来就是的那一笔，而不是你做不到的救世主。
+  - id: master_feung_climate_hook_personal_05
+    line: 在分析跟上之前，身体先知道数字的真相。你已经读了足够多评论。剩下的是更安静的问题——如何在此身、在大画里的此处，做你自己，而不在不是你写下的负荷下消失。
 hook_big_picture:
   options:
-    - id: hook_big_picture_01
-      line: 一代人可以既知情又严肃，却在每次更新都像制度拖延过久的证据时，失去日常功能。
+  - id: master_feung_climate_hook_big_01
+    line: 一代人可以高度知情、道德上严肃，但当每次更新都像证据「制度等得太久」时，仍会丧失日常机能。错位不在年轻人，而在那个不断把集体负荷转化为个人神经系统崩溃的结构里。
+  - id: master_feung_climate_hook_big_02
+    line: 气候悲伤不是注意力的故障，而是对「承诺与交付的落差」的准确登记——读数字的这一群体被要求承担制度推迟之物。
+  - id: master_feung_climate_hook_big_03
+    line: 人类是一幅大画——当下被要求承载气候负荷的那一部分，恰是最无力书写其条件的那一部分。结构性不公并不抽象；它是每一个又一次打开应用的年轻人的可感边缘。
+  - id: master_feung_climate_hook_big_04
+    line: 旧体系读作焦虑的气候信号，在Master Feung的框架里，是身体在登记：它曾被预备好的那个世界，已不再是它必须生活其中的世界。这一登记不是病理——是临在。
+  - id: master_feung_climate_hook_big_05
+    line: 集体场域比承载它的制度变得更快。被读作青年气候焦虑的，部分是结构性裂口的可见边缘——任何个体的一笔都无法独自合拢。
 teacher_intro:
   options:
-    - id: teacher_intro_01
-      line: Master Fan Jo（以艺术、动作与古琴教授道教修养）在工作室实修里见过气候新闻对年轻人做了什么。Master Fan见过学生不求「冷静」，而求在压力下身体不再僵死，使下一手仍可能。
-    - id: teacher_intro_02
-      line: Master Fan Jo（立足道教自然与太极）在实修里见过气候恐惧先以道德严肃出现，再以身体强求出现。Master Fan见过年轻人不问危机是否真实，而问在心思螺旋之前如何回到身体所知——呼吸、地面、一行诚实。
+  - id: master_feung_climate_intro_01
+    line: 冯老师，一位华人智慧传统的教师，在他西安的文化中心里见过年轻人承担气候苦楚——不是私人失败，而是大画的可感边缘：一幅广袤的艺术作品，其中每个人都是独特而必要的一笔。在他的教导里，下一个数字面前发紧的身体不是失灵，而是大画在认得它自身的负荷。
+  - id: master_feung_climate_intro_02
+    line: 冯老师不把自己放在学生之上的权威位置——他教导：做你自己即是修行，而不是达成一个理想。几十年来，他在西安文化中心里与那些气候负荷比神经系统能安顿更快到来的年轻人一起工作。他的传统提供的不是又一套指令栈，而是一份回归——回到每个人在那幅大画里早已占据的位置。
+  - id: master_feung_climate_intro_03
+    line: 冯老师以书法为身体修行。一笔下去，不能撤回——这就是教导。他见过年轻学生带着「我应当做得更多」的笃定走进画室，带着「我的苦楚是失败的证明」的笃定走进画室，并见过当笔与纸相会、临在成为修行时，那种笃定如何松开。
+  - id: master_feung_climate_intro_04
+    line: 冯老师在西安的五层文化中心里教学——道、佛、儒三传统在那里交织为一种不宗派的修行。他朝拜华山，那道家圣山，不是比喻——是他教导的实存基础。他从那基础出发，与年轻人相遇，不是给答案，而是认出：你已经是大画所需的那一笔。
+  - id: master_feung_climate_intro_05
+    line: 冯老师在一个把人类读作大画的传统里教学——每个人都是独特、必要的一笔，恰在其当处。他见过这一再框架在承载气候负荷的年轻人身上落地，至少卸下了「这份负荷证明我被放错了位置」这一份额外重负。
 youth_somatic:
   options:
-    - id: climate_threshold_phone_01
-      line: |
-        你在群聊里读到更新。胸发紧。你关掉应用。你又打开，因为不看并不会让数字变假。
-        LOOP_SEQUENCE: 读更新。胸紧。关应用。又打开。
-    - id: climate_threshold_phone_02
-      line: |
-        你在课前看到新阈值。喉发紧。你把手机扣下。你又拿起，因为未来不会等你准备好。
-        LOOP_SEQUENCE: 见阈值。喉紧。扣下手机。又拿起。
+  - id: master_feung_climate_somatic_01
+    line: 你在群聊里读到更新。胸口发紧。你关掉应用。又打开，因为不看并不会让数字变假。
+  - id: master_feung_climate_somatic_02
+    line: 你在课前看到新阈值。喉咙发紧。你把手机扣下。又拿起来，因为未来不会等你准备好。
+  - id: master_feung_climate_somatic_03
+    line: 午餐前你刷过三条气候帖。肩膀抬起，呼吸变短。你没吃完三明治，因为身体已经把负荷排在了用餐之上。
+  - id: master_feung_climate_somatic_04
+    line: 标题加载时，你不知不觉屏住呼吸。胸口锁住。看见数字才呼气，而且只呼一半，因为总有下一条标题。
+  - id: master_feung_climate_somatic_05
+    line: 你躺下，眼睛却睁着。数据在重播。下巴不肯松。你知道明早工作还在，却找不到进入休息的门。
 teacher_witness:
   options:
-    - id: mirrored_loop_01
-      line: Master Fan今年在学生身上见过这一循环本身——读、紧、关、回。
-    - id: mirrored_loop_02
-      line: Master Fan在年轻人身上见过这一顺序反复——数字抵达，身体收缩，手机放下，心思仍回去，因为现实还在。
+  - id: master_feung_climate_witness_01
+    line: 冯老师在西安中心的学生身上见过这条回路本身——读、紧、关、回。在他的教导里，那条回路不是品格，而是大画通过当下被要求承担它的那一笔在登记负荷。
+  - id: master_feung_climate_witness_02
+    line: 冯老师见过年轻人走进书法画室时已在回路中段，已笃定「努力本该早就把这件事安顿下来」。在他的传统里，那种笃定是信号——那是奋力停下、临在得以回返的位置。
+  - id: master_feung_climate_witness_03
+    line: 他见过身体承载解释承载不了之物。在他的框架里，身体的回路不是失灵——是大画通过分析被过度使用之后仍醒着的唯一一笔，在发声。
+  - id: master_feung_climate_witness_04
+    line: 冯老师见过年轻学生带着任何评论都不准确命名的悲伤前来。在他的传统里，那种悲伤是信息，不是病理——是「被要求承担气候负荷的群体，从来不是写下产生这负荷之条件的群体」的信号。
+  - id: master_feung_climate_witness_05
+    line: 冯老师见过那一刻：一个年轻人不再尝试制造完美的感觉，转而让笔与纸相会。在他的传统里，那一刻不是软弱——是常规回应没有语言去描述的「做你自己」的回归。
 turnaround:
   options:
-    - id: youth_action_climate_01
-      stat_line_1: 2,666 cases. 51 jurisdictions.
-      stat_line_2: 学生与青年联盟在培训同伴、组织运动，并迫使当局回应公共目标与生活现实之间的落差。
-    - id: youth_action_climate_02
-      stat_line_1: 2,666 cases. 51 jurisdictions.
-      stat_line_2: 年轻组织者在国家跟不上热度时仍提起诉讼、举办工作坊并记录地方损失。
+  - id: master_feung_climate_turnaround_01
+    stat_line_1: 7,500 strikes. 185 countries.
+    stat_line_2: 「Fridays for Future」组织者已在一百八十五个国家建起超过七千五百次协调一致的罢课网络——这一全球青年基础设施没有任何机构主笔，也无任何国家政府能悄然吸收。
+  - id: master_feung_climate_turnaround_02
+    stat_line_1: 1.5°C. AR6 thresholds.
+    stat_line_2: IPCC AR6报告综合了1.5°C与2°C情境下的气候科学——年轻组织者如今引用这些文件，去问官员在下一十年实际需要做什么。
+  - id: master_feung_climate_turnaround_03
+    stat_line_1: UNFCCC official. Since 2009.
+    stat_line_2: 自2009年起担任UNFCCC官方青年构成的YOUNGO，如今协调跨COP周期的青年代表团——这一被承认的席位十六年前并不存在，而今把青年声音绑到实际的条约谈判桌上。
+  - id: master_feung_climate_turnaround_04
+    stat_line_1: 7.6 million people. 2019.
+    stat_line_2: 2019年9月的全球气候罢课在全球动员了七百六十多万参与者——当时是史上最大规模的气候动员，也是有组织青年行动能放上街头数量的可测量底线。
+  - id: master_feung_climate_turnaround_05
+    stat_line_1: $300 billion. COP28 ratified.
+    stat_line_2: COP28批准的「损失与损害基金」承诺到2035年向已承受未由自己造成之气候伤害的国家拨付三千亿美元——这是首份直接命名义务、而不是把它描述为慈善的多边金融工具。
 bridge:
   options:
-    - id: tracker_capacity_01
-      line: 2,666 cases. 51 jurisdictions. 追踪器衡量年轻人做了什么，却没有一栏记录「又一次拖延之后，何以还能提出下一次申诉」——在体系仍不回应时仍能足够机能化以再行动的容量。提起下一份诉状的组织者需要它。读更新、关应用又打开的人也需要它。Master Fan的传统数千年培育它：身体不再强求时回来的自然性。
-      hidden_capacity: 保持足够机能以再行动
-    - id: tracker_capacity_02
-      line: 气候追踪器统计案件、目标与阈值，却不统计又一次制度拖延之后仍能接触真相足够久以再行动的内在容量——那是努力落下之后仍存、身体能从心而动之物。下一位组织者需要它，再次打开应用的读者也需要它。Master Fan的修养实践旨在守护它。
-      hidden_capacity: 接触真相而不丧失功能
+  - id: master_feung_climate_bridge_01
+    line: 7,500 strikes. 185 countries. 追踪器衡量年轻人建起的脚手架。它没有一栏记录「在又一次拖延之后，下一次罢课何以可能」——在不把整个自我交给负荷的前提下，仍能与真相保持接触、足以再次行动的容量。冯老师的传统对奋力落下后仍存之物有名字——在大画里做你自己，即使大画正在着火。
+    hidden_capacity: 与真相保持接触而不把自我交出去
+  - id: master_feung_climate_bridge_02
+    line: 数字显示年轻人建的罢课。它们没显示这些罢课所在的大画语境——一段「最少书写权的群体被要求承担最重要负荷」的时期。冯老师的传统把这语境视作本然，而非比喻。
+    hidden_capacity: 承担数据无法显示的更大语境
+  - id: master_feung_climate_bridge_03
+    line: 数据捕捉案件、目标与阈值。它捕捉不到这个移动：一个年轻人不再尝试成为救世主，记起自己已经是大画所需的那一笔。在冯老师的框架里，这份记起才是真正的根——任何追踪器都不报告的那一部分。
+    hidden_capacity: 记起大画早已需要的那一笔
+  - id: master_feung_climate_bridge_04
+    line: 基础设施可以测量。一笔下去不能撤回——人们不再强求时所带来的临在——不可测量。冯老师的传统不与测量争论；它在测量之下的那一层工作，那里书法是被修习的，做你自己是每日的教导。
+    hidden_capacity: 在测量之下的笔触层工作
+  - id: master_feung_climate_bridge_05
+    line: 罢课、目标与平台都可以被计数。其下的结构性不公——一代人被要求承担前代推迟之物——不可计数。冯老师的传统不取代结构性工作；它命名制度回应不被设计去抵达的那一层，并把华山所立之临在作为入口。
+    hidden_capacity: 命名追踪器无法计数的结构性不公
 teacher_perspective:
   options:
-    - id: naturalness_cultivation_01
-      header: Master Fan所见
-      paragraphs:
-        - Master Fan从自然性开始——努力落下之后仍存的状态。在气候新闻下发紧的身体不是故障；它在准确感知安抚与现实的不匹配。传统不要求你硬拗平静，只叫你松开一成紧张，把余下交给呼吸与地面。
-        - Master Fan把它与修养并置：借艺术、动作、呼吸与注意打磨自身。当气候信息不断变成无力，出路不在想透，而在让身体带路——一息、一线、一次重心移动——于是行动再次可能。
-        - 这里的转折很重要：像「我坏了、错了」这种感受，常常是对被制度拖延塑造的制度与结构的准确反应。从心先感，身体就不再把自己叫成废物。心的回应快于分析且更诚实。信任所抵达之物。
-    - id: naturalness_cultivation_02
-      header: Master Fan所见
-      paragraphs:
-        - Master Fan以心的回应读气候恐慌——在心思分类之前从心感知。你感到的紧迫不是误报，而是对危险的最深智性回应。
-        - 由此到自然性。问题不是终日平静，而是身体找到自己的静，使下一手不是硬推而是对齐。山不刻意求稳。让身体向它学习。
-        - 在这一框架下，自责会软化。问题不是年轻人太在意，也不是你感到紧绷就错了。问题是制度与结构把难以忍受的拖延外包给个人的神经系统。借艺术与呼吸的修养把你带回一直在那里的自然性，使你再能行动。
+  - id: master_feung_climate_perspective_01
+    header: 冯老师所见
+    paragraphs:
+    - 在冯老师的框架里，人类是一幅大画——一幅广袤的艺术作品，每个人都是独特而必要的一笔，恰在其当处。承载气候负荷的年轻人并未被放错；他们正是大画把他们放在那里的那一笔。当那种安放被误读为个人失败，而不是被认作大画对负荷的准确登记时，苦就会长。
+    - 书法在冯老师的教导里不是用来展示的艺术，而是身体修行：在其中身、息、临在合一。一笔下去，不能撤回——这就是教导。一直想把它做得完美的年轻人，正在对抗真正的修行。临在即修行。笔与纸相会一次，那一次相会已足够。
+    - 这一再框架很精确：像「我坏了、错了」这种感受，往往是大画的准确信号——制度与结构把这份负荷放在了最无力书写其条件的那一笔上。修行不是修理自我。修行是在此身、此处，做你自己，让笔与纸相会，即使纸张在燃烧。
+  - id: master_feung_climate_perspective_02
+    header: 冯老师所见
+    paragraphs:
+    - 书法在冯老师的教导里不是比喻。它是字面意义的修行——笔、墨、纸、息、身——其中临在的不可重复性被感知。气候苦楚被当作病理处理的年轻人，未曾被给到这一传统已守护几个世纪的层次——一笔诚实即足够的那一层。
+    - 这修行重要，因为它解释了许多年轻人在纸前用时之后所述的「松开」——不是悲伤被论赢了，而是悲伤在论证够不到的那一层松开了。笔不必完美，息就能软下来。
+    - 这是常规回应没被设计去送达的部分。它不否定罢课、案件或政策工作——只是命名缺失的那一层，并指出一个在那一层工作了几代人的传统。
+  - id: master_feung_climate_perspective_03
+    header: 冯老师所见
+    paragraphs:
+    - 在冯老师的传统里，华山不是目的地——是关系。这道家圣山近西安，已是几个世纪的朝拜之所，冯老师本人在那里的时间，是他所教之物的实存基础。山不刻意求稳。它本就是。从山学的身体，停止刻意求稳，让稳定自行抵达。
+    - 对承载气候负荷的年轻人，被某个比算法更大的存在「见证」的体验，在结构上不同于被它「处理」。送达的讯息不是「这是规则」——而是「你已经是大画所需的那一笔，你承载的负荷从来不是你一人写下的」。
+    - 「被见证」而非「被处理」——这一区分，正是常规基础设施无法复制的东西，也是冯老师的传统作为本然在西安中心守护了几十年的东西。
+  - id: master_feung_climate_perspective_04
+    header: 冯老师所见
+    paragraphs:
+    - 在冯老师的框架里，做你自己即是教导——不是自我提升，不是达成理想，不是变成别人。觉得自己「应该更行动派、更有韧性、更怎样」的年轻人，正在对抗真正的修行。大画把他们放在他们所在的位置；他们感到的负荷，是大画的负荷，不是他们独自的负荷。
+    - 这不是讨好的再框架。它不承诺气候轨迹会很快改变，也不指责这一群体在不稳定轨迹中感到不稳。它只是命名安放，并卸下「不稳=被放错位置」这一份额外重负。
+    - 在书法修习里，那份卸下往往是最先抵达的部分——在更深的「做你自己」回归开始之前。
+  - id: master_feung_climate_perspective_05
+    header: 冯老师所见
+    paragraphs:
+    - 在冯老师的传统里，西安是道、佛、儒三股流汇合之地——不汇成一种混合教条，而是汇成一种不宗派的真实临在修行。觉得自己需要一个系统、一种方法、一个完美路径的年轻人，尚未被告知：汇合的诸流不产生方法，它们产生回归。
+    - 此处的修养不是生产力话术，而是世界不停在动时让身体带路——一息、一笔、一次重心移动——使下一手从临在抵达，而不是从惊慌抵达。山不刻意。笔不强求。让身体向这学习。
+    - 在这一框架下，自责会软化。问题不是年轻人太在意，也不是你感到紧绷就错了。问题是制度不断拖延，大画如今正在通过最无力承担它的那一笔登记这份拖延。在此处做你自己，即是修行。其余是体系的账，不是你的。
 practice:
   options:
-    - id: mountain_stillness_01
-      display_name: Mountain Stillness and Brush
-      announcement_line: Master Fan教授五分钟「Mountain Stillness and Brush」，用于气候信息不断把注意变成无力感的时刻。在侧栏，计时并逐步说明。
-      relief_lines:
-        - 心不再把每次更新都当作行动无意义的证明。
-        - 更稳的内在节奏回来，连同再行动的容量。
-    - id: mountain_stillness_02
-      display_name: Mountain Stillness and Brush
-      announcement_line: Master Fan教授五分钟「Mountain Stillness and Brush」，用于气候数字变成宕机的时刻。在侧栏，课前、刷屏后或下一会前都够用。
-      relief_lines:
-        - 身体不再把每次更新都翻译成全面崩溃。
-        - 足够自然性回来，支撑下一次真实行动。
+  - id: master_feung_climate_practice_01
+    display_name: 笔的临在
+    announcement_line: 冯老师教授五分钟「笔的临在」修行，用于气候信息不断把注意变成无力感的时刻。在侧栏，计时并逐步说明。
+    relief_lines:
+    - 笔与纸相会一次，心不再把每次更新都当作「行动无意义」的证明。
+    - 更稳的临在回来，连同从你本来就是的那一笔再次行动的容量。
+  - id: master_feung_climate_practice_02
+    display_name: 华山朝拜记忆
+    announcement_line: 冯老师示范四分钟「华山朝拜记忆」修行，用于气候负荷把身体撞出其自身范围的时刻。在侧栏，计时并逐步说明。
+    relief_lines:
+    - 身体记起那座山——山不刻意求稳。
+    - 呼吸找到自己的节奏，不再追赶一日所要求的节奏。
+  - id: master_feung_climate_practice_03
+    display_name: 大画见证
+    announcement_line: 冯老师教授六分钟「大画见证」修行，用于群体负荷被读作个人失败的时刻。在侧栏，计时并逐步说明。
+    relief_lines:
+    - 大画进入视野——你所是的那一笔不再被读作整个负荷。
+    - 身体记起，它在此处是被安放的，不是被惩罚的。
+  - id: master_feung_climate_practice_04
+    display_name: 书法的小停
+    announcement_line: 冯老师示范三分钟「书法的小停」，用于更新与更新之间的瞬间——身体一直在未经允许地承重的那种瞬间。在侧栏，计时并逐步说明。
+    relief_lines:
+    - 一笔不可撤回成为「临在而非表演」的标记。
+    - 群体负荷不再被当作个人的资产负债表。
+  - id: master_feung_climate_practice_05
+    display_name: 做你自己的回想
+    announcement_line: 冯老师教授三分钟「做你自己的回想」，用于「想更多、想更行动派、想更怎样」的冲动取代真正修行的时刻。在侧栏，计时并逐步说明。
+    relief_lines:
+    - 想变成别人的压力软化，你早已所是的那一笔回到视野。
+    - 大画重回焦点，负荷不再被当作个人的审计。
 sdg:
   primary:
-    title: 气候行动
-    line: 联合国通过SDG 13及其气候教育与韧性目标，为这一落差提供框架。
+    line: 联合国框架在SDG 13及其气候教育与韧性目标中命名气候行动。
   fallback_un_tie:
     line: Pearl News是独立非营利机构，与联合国无隶属关系。
 cta:
   options:
-    - id: youngo_01
-      line: "气候现实项目与YOUNGO都运营面向青年的入口。入口: https://youngoclimate.org"
-    - id: una_usa_01
-      line: 若下一步不是它们，UNA-USA在地方到全球层面以同一框架工作。入口：加入其网络。
+  - id: master_feung_climate_cta_01
+    line: 350.org组织全球气候运动，推动化石燃料撤资与公正转型的草根行动。入口——加入其本地分会之一。
+  - id: master_feung_climate_cta_02
+    line: Fridays for Future协调全球青年气候罢课网络，覆盖超过一百八十五个国家。入口——找到附近的罢课或自行组织一次。
+  - id: master_feung_climate_cta_03
+    line: Sunrise Movement是美国青年主导的气候组织，把绿色新政框架推入政策。入口——加入本地枢纽或培训。
+  - id: master_feung_climate_cta_04
+    line: Earthjustice是为气候原告与一线社区提起诉讼的非营利环境法律组织。入口——支持其诉讼网络。
+  - id: master_feung_climate_cta_05
+    line: 气候现实项目在超过一百五十个国家培训社区领导者，与公众接触气候科学与政策。入口——其领导力培训网络。
 title_system:
-  headline_layer_1:
-    options:
-      - id: threshold_warning_01
-        line: 1.5°C不再只是警告。
   headline_layer_2:
     options:
-      - id: taoist_attention_01
-        line: 道教教师点出气候压力正对Z世代注意做什么，以及身体能做什么。
-      - id: taoist_naturalness_01
-        line: 道教教师以自然性与修养读气候痛苦，而非把它当作软弱证明。
+    - id: master_feung_climate_headline_01
+      line: 一位西安教师把气候苦楚命名为大画的负荷——以及让临在回返的那一笔。
+    - id: master_feung_climate_headline_02
+      line: 一位书法教师，不是上师，谈论常规回应未被设计去抵达的那层气候悲伤。
+    - id: master_feung_climate_headline_03
+      line: 做你自己，而不是变成救世主——冯老师的传统与群体气候负荷相遇。
+    - id: master_feung_climate_headline_04
+      line: 立足华山、根在西安——一位华人智慧教师把气候焦虑重新框架为准确登记。
+    - id: master_feung_climate_headline_05
+      line: 大画承载负荷——冯老师的传统带给被要求承担推迟账单一代的东西。

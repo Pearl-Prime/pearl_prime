@@ -3,15 +3,15 @@ teacher_id: master_feung
 topic: climate
 active: true
 identity:
-  display_name: Master Fan
-  attribution_name: Master Fan Jo
-  tradition: Taoist cultivation through art and embodied practice
-  tradition_short: Taoist cultivation
+  display_name: Master Feung
+  attribution_name: Master Feung
+  tradition: Chinese wisdom traditions; calligraphy as spiritual practice; Grand Painting teaching; Xi'an cultural center; Hua Shan pilgrimage lineage
+  tradition_short: Chinese wisdom traditions
   teacher_setting_options:
-  - studio
-  - Zhongnan retreat
-  teacher_years: decades of teaching
-  affiliation_safe_line: has attended the United Spiritual Leaders Forum
+  - Xi'an cultural center
+  - calligraphy studio
+  teacher_years: decades
+  affiliation_safe_line: teaches within Chinese wisdom traditions at his Xi'an cultural center
   launch_approved: true
 persona:
   id: gen_z_alpha
@@ -26,7 +26,7 @@ persona:
   tie_to_real_world_struggles:
   - id: climate_tighten_return
     label: climate update then body tightens and return
-    loop: reads the number -> body tightens -> closes app -> reopens because truth
+    loop: reads the number -> body tightens -> closes app -> reopens because the truth
       remains
     body_markers:
     - chest
@@ -39,272 +39,714 @@ persona:
     - check again
 topic_fit:
   fit_level: primary
-  fit_reason: Climate distress maps to Taoist naturalness and cultivation — the body
-    that tightens is not wrong; it can return to ease and action through breath, movement,
-    and heart response.
+  fit_reason: Climate distress is not a flaw in the young person. In the Grand Painting,
+    every piece is necessary — and the body that tightens under the next number is
+    not broken but registering its own place in the larger artwork. Calligraphy and
+    being-yourself practice return the brush stroke to the hand even when the system
+    keeps moving slower than the heat.
   forbidden_angles:
   - do not reduce to generic resilience
   - do not frame distress as personal weakness
 hook_personal:
   options:
-  - id: hook_personal_01
+  - id: master_feung_climate_hook_personal_01
     line: You care more about the planet than ever. You still feel less able to stay
-      with the next number long enough to decide what to do.
-    semantic_family: care-vs-capacity
-    tone: plain
-    intensity: 3
-    article_types:
-    - hard_news_spiritual_response
+      with the next number long enough to decide what to do — and part of you knows
+      the load was never meant to be carried by your nervous system alone.
+    metadata:
+      semantic_family: care-vs-capacity
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_hook_personal_02
+    line: You feel the chest tighten before you have words for it. The mind has done
+      its work — read the threads, taken the actions it could. Something quieter in
+      you is asking to be witnessed rather than mobilized into one more frantic gesture.
+    metadata:
+      semantic_family: chest-witness
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_hook_personal_03
+    line: At 1 a.m. you close the app and open it again. Neither move helps, because
+      the future does not wait for your nervous system to feel ready — and the part
+      of you trying to solve it before sleep is the part that has been over-asked.
+    metadata:
+      semantic_family: midnight-reopen
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_hook_personal_04
+    line: You read the new threshold and your throat tightens. You also know that
+      no individual posture, no perfect feeling, no flawless action will undo the
+      delay you did not create — and that something in you needs space to be the piece
+      it actually is, not the savior it cannot be.
+    metadata:
+      semantic_family: piece-not-savior
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_hook_personal_05
+    line: The body knows the truth of the number before the analysis catches up. You
+      have read enough commentary. What remains is a quieter question — how to be
+      yourself, here, in this body, in this part of the larger artwork, without disappearing
+      under the load you did not author.
+    metadata:
+      semantic_family: be-yourself-under-load
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
 hook_big_picture:
   options:
-  - id: hook_big_picture_01
+  - id: master_feung_climate_hook_big_01
     line: A generation can be highly informed, morally serious, and still lose daily
       functional capacity when every update arrives as proof that institutions waited
-      too long.
-    semantic_family: institutional-delay
-    angle: future-loss
-    article_types:
-    - hard_news_spiritual_response
+      too long. The mismatch is not in the young person; it is in the structure that
+      keeps converting collective load into private nervous-system collapse.
+    metadata:
+      semantic_family: institutional-delay
+      angle: future-loss
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_hook_big_02
+    line: Climate grief is not a malfunction of attention. It is the accurate registering
+      of the gap between what was promised and what is being delivered — and the cohort
+      reading the numbers is being asked to hold what institutions deferred.
+    metadata:
+      semantic_family: grief-as-accuracy
+      angle: institutional-deferral
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_hook_big_03
+    line: Humanity is a vast artwork — and the part of the painting now being asked
+      to carry the climate load is the part with the least power to have authored
+      the conditions. The structural injustice is not abstract; it is the felt edge
+      of every young person who reopens the app.
+    metadata:
+      semantic_family: grand-painting-injustice
+      angle: structural-injustice
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_hook_big_04
+    line: The climate signal that older systems read as anxiety is, in Master Feung's
+      framework, the body registering that the world it was prepared for is no longer
+      the world it has to live in. That registration is not pathology — it is presence.
+    metadata:
+      semantic_family: presence-registration
+      angle: body-as-witness
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_hook_big_05
+    line: The collective field has shifted faster than the institutions designed to
+      hold it. What gets read as climate anxiety in young people is, in part, the
+      visible edge of a structural gap that no individual brush stroke was built to
+      close alone.
+    metadata:
+      semantic_family: structural-gap
+      angle: collective-field
+      article_types:
+      - hard_news_spiritual_response
 teacher_intro:
   options:
-  - id: teacher_intro_01
-    line: Master Fan Jo, a Taoist teacher of cultivation through art, movement, and
-      the Guqin, has seen in practice sessions in the studio what climate news does
-      to young people. Master Fan has watched students ask not for calm, but for the
-      capacity to stop the body from locking under pressure so the next move is still
-      possible.
-    semantic_family: identity_seen_shift
-    tone: plain
-    intensity: 3
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
-  - id: teacher_intro_02
-    line: Master Fan Jo, grounded in Taoist naturalness and Tai Chi, has watched in
-      practice sessions climate fear arrive first as moral seriousness and then as
-      the body forcing. Master Fan has observed young people asking not whether the
-      crisis is real, but how to return to what the body knows before the mind spirals
-      — breath, ground, one honest line.
-    semantic_family: identity_seen_shift_alt
-    tone: grave
-    intensity: 4
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
+  - id: master_feung_climate_intro_01
+    line: Master Feung, a teacher of Chinese wisdom traditions, has watched in his
+      Xi'an cultural center young people carry climate distress not as a private failing
+      but as the felt edge of the Grand Painting — the vast artwork in which every
+      person is a unique, necessary piece. In his teaching, the body that tightens
+      under the next number is not malfunctioning; it is the painting recognizing
+      its own load.
+    metadata:
+      semantic_family: grand-painting-context
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_intro_02
+    line: Master Feung does not position himself as an authority above his students
+      — he teaches that being yourself is the practice, not attaining an ideal. For
+      decades he has worked at his Xi'an cultural center with young people whose climate
+      load arrives faster than their nervous systems can settle. What his tradition
+      offers is not another instruction stack; it is a return to the place each person
+      already holds in the larger artwork.
+    metadata:
+      semantic_family: being-yourself-frame
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_intro_03
+    line: Master Feung works with calligraphy as embodied practice. The brush stroke
+      cannot be undone — and that is the teaching. He has watched young students arrive
+      certain they should be doing more, certain their distress is proof of failure,
+      and watched the certainty soften when the brush meets the page and presence
+      becomes the practice.
+    metadata:
+      semantic_family: calligraphy-witness
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_intro_04
+    line: Master Feung teaches from his five-floor cultural center in Xi'an, where
+      Taoist, Buddhist, and Confucian traditions interweave into a single non-doctrinal
+      practice. His pilgrimage to Hua Shan, the sacred Taoist mountain, is not metaphor
+      — it is the lived ground of his teaching. From that ground he meets young people
+      not with answers but with the recognition that they are already the piece the
+      painting needed.
+    metadata:
+      semantic_family: xian-huashan-ground
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_intro_05
+    line: Master Feung teaches inside a tradition that reads humanity as a Grand Painting
+      — every person a unique, necessary piece exactly where they need to be. He has
+      watched the reframe land in young people carrying climate load and remove, at
+      least, the additional burden of believing the load is proof they were placed
+      wrong.
+    metadata:
+      semantic_family: piece-already-placed
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 youth_somatic:
   options:
-  - id: climate_threshold_phone_01
-    line: 'You read the update in a group chat. Your chest tightened. You closed the
+  - id: master_feung_climate_somatic_01
+    line: You read the update in a group chat. Your chest tightened. You closed the
       app. Then you opened it again because not looking did not make the number less
       true.
-
-      LOOP_SEQUENCE: read the update. chest tightened. closed the app. opened it again.'
-    loop_type: read-tighten-close-return
-    body_register: tightening
-    digital_behavior: close-return
-    article_types:
-    - hard_news_spiritual_response
-  - id: climate_threshold_phone_02
-    line: 'You saw the new threshold before class. Your throat tightened. You put
-      your phone face down. Then you picked it up again because the future does not
-      wait for you to feel ready.
-
-      LOOP_SEQUENCE: saw the threshold. throat tightened. put the phone down. picked
-      it up again.'
-    loop_type: read-tighten-close-return
-    body_register: tightening
-    digital_behavior: put-down-return
-    article_types:
-    - hard_news_spiritual_response
+    metadata:
+      semantic_family: chest-tighten-reopen
+      loop_type: read-tighten-close-return
+      body_register: chest
+      digital_behavior: close-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_somatic_02
+    line: You saw the new threshold before class. Your throat tightened. You put your
+      phone face down. Then you picked it up again because the future does not wait
+      for you to feel ready.
+    metadata:
+      semantic_family: throat-threshold
+      loop_type: read-tighten-close-return
+      body_register: throat
+      digital_behavior: put-down-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_somatic_03
+    line: You scrolled past three climate posts before lunch. Your shoulders lifted.
+      Your breath shortened. You did not finish the sandwich, because the body had
+      already ranked the load above the meal.
+    metadata:
+      semantic_family: shoulder-shorten-skip
+      loop_type: read-tighten-close-return
+      body_register: shoulders
+      digital_behavior: scroll-past
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_somatic_04
+    line: You held your breath without noticing while the headline loaded. Your chest
+      locked. You exhaled only when you saw the number and only halfway, because there
+      is always another headline coming.
+    metadata:
+      semantic_family: breath-hold-headline
+      loop_type: read-tighten-close-return
+      body_register: breath
+      digital_behavior: headline-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_somatic_05
+    line: You lay down and your eyes pinned open. The data replayed. Your jaw would
+      not soften. You knew the work would still be there in the morning and you could
+      not find the door into rest.
+    metadata:
+      semantic_family: night-replay
+      loop_type: read-tighten-close-return
+      body_register: jaw
+      digital_behavior: lying-down
+      article_types:
+      - hard_news_spiritual_response
 teacher_witness:
   options:
-  - id: mirrored_loop_01
-    line: Master Fan has seen this exact loop in students this year — the reading,
-      the tightening, the closing, the return.
-    semantic_family: loop-mirror
-    loop_type: read-tighten-close-return
-    article_types:
-    - hard_news_spiritual_response
-  - id: mirrored_loop_02
-    line: Master Fan has watched that sequence repeat in young people — the number
-      arrives, the body contracts, the phone goes down, and then the mind goes back
-      because reality is still there.
-    semantic_family: loop-mirror-alt
-    loop_type: read-tighten-close-return
-    article_types:
-    - hard_news_spiritual_response
+  - id: master_feung_climate_witness_01
+    line: Master Feung has seen this exact loop in students at his Xi'an center —
+      the reading, the tightening, the closing, the return. In his teaching that loop
+      is not character; it is the painting registering load through the only piece
+      currently asked to hold it.
+    metadata:
+      semantic_family: loop-mirror
+      loop_type: read-tighten-close-return
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_witness_02
+    line: Master Feung has watched young people walk into the calligraphy studio already
+      mid-loop, already certain the effort should have settled this by now. In his
+      tradition that certainty is the signal — the place where striving stops and
+      presence can return.
+    metadata:
+      semantic_family: striving-exhausted
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_witness_03
+    line: He has seen the body carry what the explanations could not. In his framework
+      the somatic loop is not a malfunction — it is the painting speaking through
+      the only piece left awake when the analysis has been overused.
+    metadata:
+      semantic_family: somatic-painting-message
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_witness_04
+    line: Master Feung has watched young students arrive with grief that no commentary
+      names accurately. In his tradition that grief is information, not pathology
+      — a signal that the cohort being asked to carry the climate load was never the
+      one that authored the conditions producing it.
+    metadata:
+      semantic_family: grief-information
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_witness_05
+    line: Master Feung has watched the moment when a young person stops trying to
+      produce the perfect feeling and lets the brush meet the page instead. In his
+      tradition that moment is not weakness — it is the return to being yourself that
+      conventional response has no language for.
+    metadata:
+      semantic_family: brush-return
+      article_types:
+      - hard_news_spiritual_response
 turnaround:
   options:
-  - id: youth_action_climate_01
-    stat_line_1: 2,666 cases. 51 jurisdictions.
-    stat_line_2: Students and youth coalitions are training peers, building campaigns,
-      and forcing officials to answer the gap between public targets and lived reality.
-    semantic_family: institutional-action
-    article_types:
-    - hard_news_spiritual_response
-  - id: youth_action_climate_02
-    stat_line_1: 2,666 cases. 51 jurisdictions.
-    stat_line_2: Young organizers are still filing cases, hosting workshops, and documenting
-      local losses even when national governments keep moving slower than the heat.
-    semantic_family: institutional-action-alt
-    article_types:
-    - hard_news_spiritual_response
+  - id: master_feung_climate_turnaround_01
+    stat_line_1: 7,500 strikes. 185 countries.
+    stat_line_2: Fridays for Future organizers have built a network of more than seven
+      thousand five hundred coordinated strikes across one hundred eighty-five countries
+      — a global youth infrastructure no agency authored and no national government
+      can quietly absorb.
+    metadata:
+      semantic_family: strike-infrastructure
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_turnaround_02
+    stat_line_1: 1.5°C. AR6 thresholds.
+    stat_line_2: The IPCC AR6 reports synthesize the climate science across the 1.5°C
+      and 2°C scenarios — the documents young organizers now cite when officials hedge
+      on what the next decade actually requires.
+    metadata:
+      semantic_family: ar6-citation-base
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_turnaround_03
+    stat_line_1: UNFCCC official. Since 2009.
+    stat_line_2: YOUNGO, the official youth constituency at the UNFCCC since 2009,
+      now coordinates youth delegations across COP cycles — a recognized seat that
+      did not exist sixteen years ago and now binds youth voice to the actual treaty
+      table.
+    metadata:
+      semantic_family: youngo-seat
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_turnaround_04
+    stat_line_1: 7.6 million people. 2019.
+    stat_line_2: The Global Climate Strike of September 2019 mobilized more than seven
+      and a half million participants worldwide — at the time the largest climate
+      mobilization in history, and a measurable floor for what coordinated youth action
+      can put into the streets.
+    metadata:
+      semantic_family: 2019-mobilization
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_turnaround_05
+    stat_line_1: $300 billion. COP28 ratified.
+    stat_line_2: The COP loss-and-damage fund ratified at COP28 commits $300 billion
+      by 2035 to the countries already bearing climate harm they did not author —
+      the first multilateral financial instrument that names the obligation directly
+      rather than describing it as charity.
+    metadata:
+      semantic_family: loss-damage-fund
+      article_types:
+      - hard_news_spiritual_response
 bridge:
   options:
-  - id: tracker_capacity_01
-    line: '2,666 cases. 51 jurisdictions. The tracker measures what young people did.
-      It has no column for what made the next filing possible after the last delay
-      — the capacity to stay functional enough to act again when the system keeps
-      not responding. The organizer who filed the next case needed it. So does the
-      person who read the update, closed the app, and opened it again. Master Fan''s
-      tradition has been developing it for millennia: naturalness that returns when
-      the body stops forcing.'
-    hidden_capacity: stay functional enough to act again
-    semantic_family: tracker-capacity
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
-  - id: tracker_capacity_02
-    line: Climate trackers count cases, targets, and thresholds. They do not count
-      the inner capacity that lets a young person stay in contact with the truth long
-      enough to act again after another institutional delay. That capacity — what
-      remains when striving falls away and the body can move from the heart — is what
-      the next organizer needs. It is what the reader who reopened the app needs too.
-      Master Fan's cultivation practice is designed to protect it.
-    hidden_capacity: stay in contact with truth without losing function
-    semantic_family: tracker-capacity-alt
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
+  - id: master_feung_climate_bridge_01
+    line: 7,500 strikes. 185 countries. The tracker measures the scaffolding young
+      people built. It has no column for what made the next strike possible after
+      the last delay — the capacity to stay in contact with the truth long enough
+      to act again without handing the whole self over to the load. Master Feung's
+      tradition has language for what remains when striving falls away — being yourself
+      in the painting, even when the painting is on fire.
+    hidden_capacity: stay in contact with the truth without handing the self over
+    metadata:
+      semantic_family: tracker-capacity
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_bridge_02
+    line: The numbers show the strikes the young built. They do not show the Grand
+      Painting context that those strikes are being built inside — a period where
+      the cohort with the least authoring power is being asked to hold the most consequential
+      load. Master Feung's tradition holds that context as native, not metaphor.
+    hidden_capacity: hold the larger context the data cannot show
+    metadata:
+      semantic_family: grand-painting-context-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_bridge_03
+    line: The data captures cases, targets, and thresholds. It cannot capture the
+      shift that happens when a young person stops trying to be the savior and remembers
+      they are already the piece the painting needed. In Master Feung's framework
+      that remembrance is the actual ground — the part no tracker reports.
+    hidden_capacity: remember the piece the painting already needed
+    metadata:
+      semantic_family: remembrance-ground
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_bridge_04
+    line: The infrastructure is measurable. The brush stroke that cannot be undone
+      — the presence each person brings when they stop forcing — is not. Master Feung's
+      tradition does not argue with the measurement; it works in the layer beneath
+      it, where calligraphy is practiced and being yourself becomes the daily teaching.
+    hidden_capacity: work in the brush-stroke layer beneath measurement
+    metadata:
+      semantic_family: measurable-vs-brush
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_bridge_05
+    line: Strikes, targets, and platforms can be counted. The structural injustice
+      underneath — a generation asked to carry what previous generations deferred
+      — cannot. Master Feung's tradition does not replace the structural work; it
+      names the layer institutional response is not designed to reach and offers Hua
+      Shan-grounded presence as the door in.
+    hidden_capacity: name the structural injustice the trackers cannot count
+    metadata:
+      semantic_family: structural-injustice-bridge
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 teacher_perspective:
   options:
-  - id: naturalness_cultivation_01
-    header: What Master Fan Sees
+  - id: master_feung_climate_perspective_01
+    header: What Master Feung Sees
     paragraphs:
-    - Master Fan begins with naturalness — the state that remains when striving falls
-      away. The body that tightens under climate news is not malfunctioning. It is
-      accurately perceiving the mismatch between reassurance and reality. The tradition
-      does not ask you to force calm. It asks you to release ten per cent of the tension,
-      then let the breath and the ground do the rest.
-    - 'Master Fan pairs that with cultivation: the practice of refining the self through
-      art, movement, breath, and attention. When climate information keeps converting
-      into helplessness, the move is not to think your way out. It is to let the body
-      lead — one breath, one line drawn, one shift of weight. That is how action becomes
-      possible again.'
-    - 'The shift matters here: what feels like a personal fault — me, broken, wrong
-      — is often accurate response to a system and institutional structure shaped
-      by institutional delay. The body stops calling itself broken when it senses
-      from the heart first — heart response is faster and more honest than analysis.
-      Trust what arrives.'
-    semantic_family: naturalness-cultivation
-    reframe_type: self_to_system
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
-  - id: naturalness_cultivation_02
-    header: What Master Fan Sees
+    - In Master Feung's framework, humanity is a Grand Painting — a vast artwork in
+      which every person is a unique, necessary piece exactly where they need to be.
+      The young person carrying climate load is not misplaced; they are the piece
+      the painting placed precisely there. Suffering grows when that placement is
+      misread as personal failure rather than recognized as the painting's accurate
+      registration of the load.
+    - Calligraphy in Master Feung's teaching is not art for display. It is embodied
+      practice in which body, breath, and presence unite. The brush stroke cannot
+      be undone — and that is the teaching. The young person who keeps trying to do
+      it perfectly is fighting the actual practice. Presence is the practice. The
+      brush meets the page once, and that meeting is enough.
+    - The reframe is precise — what feels like personal weakness — me, broken, wrong
+      — is often the painting's accurate signal that the system and institutional
+      structure have placed this load on the piece least able to have authored its
+      conditions. The practice is not to fix the self. The practice is to be yourself,
+      here, in this body, and let the brush meet the page even when the page is on
+      fire.
+    metadata:
+      semantic_family: grand-painting-reframe
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_perspective_02
+    header: What Master Feung Sees
     paragraphs:
-    - Master Fan reads climate panic through heart response — sensing from the heart
-      before the mind categorises. The urgency you feel is not an error signal. It
-      is the deepest kind of intelligence, responding to danger.
-    - From there Master Fan turns to naturalness. The question is not how to feel
-      calm all day. The question is how to let the body find its own stillness so
-      that the next move is not forced but aligned. The mountain does not try to be
-      stable. Let the body learn from that.
+    - Calligraphy is not metaphor in Master Feung's teaching. It is the literal practice
+      — brush, ink, page, breath, body — in which the unrepeatable nature of presence
+      becomes felt. The young person whose climate distress is being processed as
+      pathology has not been offered the layer the tradition has held for centuries —
+      the layer where one honest stroke is enough.
+    - The practice matters because it explains the relief many young people describe
+      after time at the page — not that they have been argued out of the grief, but
+      that the grief has loosened on a layer that argument never reaches. The brush
+      did not have to be perfect for the breath to soften.
+    - This is the part conventional response is not designed to deliver. It does not
+      invalidate the strikes, the cases, or the policy work — but it names a missing
+      layer, and offers a tradition that has worked in that layer for generations.
+    metadata:
+      semantic_family: calligraphy-mechanism
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_perspective_03
+    header: What Master Feung Sees
+    paragraphs:
+    - In Master Feung's tradition, Hua Shan is not a destination — it is a relationship.
+      The sacred Taoist mountain near Xi'an has been a pilgrimage site for centuries,
+      and Master Feung's own time there is the lived ground of what he teaches. The
+      mountain does not try to be stable. It is. The body that learns from the mountain
+      stops trying to be stable and lets stability arrive on its own.
+    - For a young person carrying climate load, the experience of being witnessed
+      by something larger than the algorithm is, in itself, structurally different
+      from being processed by it. The message that lands is not "here is the rule";
+      it is "you are already the piece the painting needed, and the load you carry
+      was never authored by you alone."
+    - That distinction — witnessed rather than processed — is what conventional infrastructure
+      cannot reproduce, and what Master Feung's tradition has carried as native for
+      decades at the Xi'an center.
+    metadata:
+      semantic_family: huashan-witness
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_perspective_04
+    header: What Master Feung Sees
+    paragraphs:
+    - Being yourself, in Master Feung's framework, is the teaching — not self-improvement,
+      not attaining an ideal, not becoming someone else. The young person who feels
+      they should be more activist, more resilient, more anything is fighting the
+      actual practice. The painting placed them exactly where they are, and the load
+      they feel is the painting's load, not theirs alone.
+    - This is not a flattering reframe. It does not promise the climate trajectory
+      will shift quickly, and it does not blame the cohort for feeling unstable in
+      an unstable trajectory. It simply names the placement and removes the additional
+      weight of believing the instability proves they were placed wrong.
+    - That weight removal is, in calligraphy practice, often the part that lands first
+      — before the deeper return to being yourself can begin.
+    metadata:
+      semantic_family: being-yourself-frame
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_perspective_05
+    header: What Master Feung Sees
+    paragraphs:
+    - Xi'an, in Master Feung's tradition, is the ground where Taoist, Buddhist, and
+      Confucian streams converge — not into a hybrid doctrine but into a single non-doctrinal
+      practice of authentic presence. The young person who feels they need a system,
+      a method, a perfect approach has not yet been told that the converging streams
+      do not produce a method. They produce a return.
+    - Cultivation here is not productivity language. It is the practice of letting
+      the body lead — one breath, one stroke, one shift of weight — so the next move
+      arrives from presence rather than panic. The mountain does not try. The brush
+      does not strive. Let the body learn from that.
     - In that frame, self-blame softens. The problem is not that young people care
-      too much or that I am wrong for feeling strained. The problem is that a system
-      and institutional structure keep outsourcing unbearable delay onto individual
-      nervous systems. Cultivation through art and breath returns you to what was
-      always there — naturalness — so you can act again.
-    semantic_family: naturalness-cultivation-alt
-    reframe_type: self_to_system
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
+      too much or that you are wrong for feeling strained. The problem is that institutions
+      kept deferring, and the painting is now registering the deferral through the
+      piece least able to absorb it. Being yourself, here, is the practice. The rest
+      is the system's accounting, not yours.
+    metadata:
+      semantic_family: xian-convergence
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 practice:
-  default_id: mountain_stillness_01
+  default_id: master_feung_climate_practice_01
   options:
-  - id: mountain_stillness_01
-    display_name: Mountain Stillness and Brush
+  - id: master_feung_climate_practice_01
+    display_name: Brush Presence
     duration: 5 minutes
-    announcement_line: Master Fan teaches a 5-minute Mountain Stillness and Brush
-      practice for moments when climate information keeps converting attention into
-      helplessness. It is in the sidebar, timed and step by step.
+    announcement_line: Master Feung teaches a 5-minute Brush Presence practice for
+      moments when climate information keeps converting attention into helplessness.
+      It is in the sidebar, timed and step by step.
     relief_lines:
-    - The mind stops treating every update as proof that action is pointless.
-    - A steadier internal pace returns, and with it the capacity to act again.
+    - The brush meets the page once, and the mind stops treating every update as proof
+      action is pointless.
+    - A steadier presence returns, and with it the capacity to act again from the
+      piece you actually are.
     relief_register:
+    - presence
     - capacity
-    - clarity
     - act again
-    derived_from_frame: naturalness
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
-  - id: mountain_stillness_02
-    display_name: Mountain Stillness and Brush
-    duration: 5 minutes
-    announcement_line: Master Fan teaches a 5-minute Mountain Stillness and Brush
-      for the moment when climate numbers turn into shutdown. It is in the sidebar,
-      short enough to use before class, after scrolling, or before the next meeting.
+    derived_from_frame: calligraphy_presence
+    metadata:
+      semantic_family: brush_presence
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_practice_02
+    display_name: Hua Shan Pilgrimage Memory
+    duration: 4 minutes
+    announcement_line: Master Feung offers a 4-minute Hua Shan Pilgrimage Memory practice
+      for moments when the climate load has knocked the body out of its own range.
+      It is in the sidebar, timed and step by step.
     relief_lines:
-    - The body stops converting every update into total collapse.
-    - Enough naturalness returns for the next real action.
+    - The body recalls the mountain — and the mountain does not try to be stable.
+    - The breath finds its own pace and stops chasing the day's demanded pace.
     relief_register:
-    - capacity
-    - clarity
-    - act again
-    derived_from_frame: naturalness
-    article_types:
-    - hard_news_spiritual_response
-    - commentary
+    - ground
+    - breath
+    - stillness
+    derived_from_frame: huashan_pilgrimage
+    metadata:
+      semantic_family: huashan_pilgrimage_memory
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_practice_03
+    display_name: Grand Painting Witness
+    duration: 6 minutes
+    announcement_line: Master Feung teaches a 6-minute Grand Painting Witness practice
+      for moments when the cohort load is being read as personal failure. It is in
+      the sidebar, timed and step by step.
+    relief_lines:
+    - The painting comes into view — and the piece you are stops being read as the
+      whole load.
+    - The body remembers it was placed here, not punished here.
+    relief_register:
+    - witness
+    - placement
+    - belonging
+    derived_from_frame: grand_painting
+    metadata:
+      semantic_family: grand_painting_witness
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_practice_04
+    display_name: Calligraphy Pause
+    duration: 3 minutes
+    announcement_line: Master Feung offers a 3-minute Calligraphy Pause for moments
+      between updates, when the body has been carrying the load without permission
+      to set it down. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The brush stroke that cannot be undone becomes the marker for presence rather
+      than performance.
+    - The cohort load stops being treated as the individual's personal balance sheet.
+    relief_register:
+    - pause
+    - presence
+    - release
+    derived_from_frame: calligraphy_pause
+    metadata:
+      semantic_family: calligraphy_pause
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: master_feung_climate_practice_05
+    display_name: Being-Yourself Recall
+    duration: 3 minutes
+    announcement_line: Master Feung teaches a 3-minute Being-Yourself Recall for moments
+      when the urge to be more — more activist, more resilient, more anything — has
+      replaced the actual practice. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The pressure to become someone else softens, and the piece you already are returns
+      to view.
+    - The painting comes back into focus, and the load stops being framed as a personal
+      audit.
+    relief_register:
+    - return
+    - being
+    - belonging
+    derived_from_frame: being_yourself
+    metadata:
+      semantic_family: being_yourself_recall
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 sdg:
   primary:
     id: SDG 13
     title: Climate Action
-    line: The United Nations has a framework for exactly this gap through SDG 13 and
-      its climate education and resilience targets.
+    line: The United Nations framework names climate action under SDG 13 and its climate
+      education and resilience targets.
   fallback_un_tie:
     line: Pearl News is an independent nonprofit. We are not affiliated with the United
       Nations.
 cta:
   options:
-  - id: youngo_01
-    org: YOUNGO
-    line: 'The Climate Reality Project and YOUNGO both run youth-facing entry points
-      into this work. Door in: https://youngoclimate.org'
-    semantic_family: door-in-climate
-    article_types:
-    - hard_news_spiritual_response
-  - id: una_usa_01
-    org: UNA-USA
-    line: 'If that is not your next step, UNA-USA works the same framework at the
-      local-to-global level. Door in: join their network.'
-    semantic_family: door-in-una
-    article_types:
-    - hard_news_spiritual_response
-title_system:
-  headline_layer_1:
-    options:
-    - id: threshold_warning_01
-      line: 1.55C Is No Longer a Warning.
-      semantic_family: threshold-finality
+  - id: master_feung_climate_cta_01
+    org: 350.org
+    line: '350.org organizes global climate campaigns and grassroots movements for
+      fossil-fuel divestment and just transition. Door in — join one of their local
+      chapters.'
+    metadata:
+      semantic_family: door-in-350
       article_types:
       - hard_news_spiritual_response
+  - id: master_feung_climate_cta_02
+    org: Fridays for Future
+    line: 'Fridays for Future coordinates the global youth climate strike network
+      across more than one hundred eighty-five countries. Door in — find a strike near
+      you or organize one.'
+    metadata:
+      semantic_family: door-in-fff
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_cta_03
+    org: Sunrise Movement
+    line: 'Sunrise Movement is the youth-led US climate organization pushing the Green
+      New Deal framework into policy. Door in — join a local hub or training.'
+    metadata:
+      semantic_family: door-in-sunrise
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_cta_04
+    org: Earthjustice
+    line: 'Earthjustice is the nonprofit environmental law organization that litigates
+      on behalf of climate plaintiffs and frontline communities. Door in — support
+      their litigation network.'
+    metadata:
+      semantic_family: door-in-earthjustice
+      article_types:
+      - hard_news_spiritual_response
+  - id: master_feung_climate_cta_05
+    org: Climate Reality Project
+    line: 'Climate Reality Project trains community leaders to engage the public on
+      climate science and policy across more than one hundred fifty countries. Door
+      in: their leadership training network.'
+    metadata:
+      semantic_family: door-in-climate-reality
+      article_types:
+      - hard_news_spiritual_response
+title_system:
   headline_layer_2:
     options:
-    - id: taoist_attention_01
-      line: A Taoist teacher names what climate stress is doing to Gen Z attention
-        — and what the body can do about it.
-      semantic_family: teacher-attention
-      article_types:
-      - hard_news_spiritual_response
-    - id: taoist_naturalness_01
-      line: A Taoist teacher reads climate distress through naturalness and cultivation,
-        not proof of weakness.
-      semantic_family: teacher-function
-      article_types:
-      - hard_news_spiritual_response
+    - id: master_feung_climate_headline_01
+      line: A Xi'an teacher names climate distress as the painting's load — and the
+        brush stroke that returns presence.
+      metadata:
+        semantic_family: painting-load-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_climate_headline_02
+      line: A calligraphy teacher, not a guru, on the layer of climate grief conventional
+        response is not built to reach.
+      metadata:
+        semantic_family: calligraphy-witness-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_climate_headline_03
+      line: Being yourself, not becoming a savior — Master Feung's tradition meets
+        the cohort climate load.
+      metadata:
+        semantic_family: being-yourself-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_climate_headline_04
+      line: Hua Shan grounded, Xi'an based — a Chinese wisdom teacher reframes climate
+        anxiety as accurate registration.
+      metadata:
+        semantic_family: huashan-xian-ground
+        article_types:
+        - hard_news_spiritual_response
+    - id: master_feung_climate_headline_05
+      line: The Grand Painting holds the load — what Master Feung's tradition brings
+        to a generation asked to carry a deferred bill.
+      metadata:
+        semantic_family: grand-painting-call
+        article_types:
+        - hard_news_spiritual_response
 variation_policy:
   avoid_same_semantic_family_within_article: true
   deterministic_rotation_key: article_id + slot + teacher_id + topic
@@ -312,9 +754,6 @@ variation_policy:
     article_types:
     - hard_news_spiritual_response
     - commentary
-    topic_subcases:
-    - threshold_news
-    - institutional_delay
     intensity_range:
     - 2
     - 4
