@@ -9,26 +9,22 @@
 
 ## Passage 1
 
-**Chapter / location:** <<<FILL IN — e.g. "Chapter 11 — What Does Your Body Want?">>>
-**Page reference (approx):** <<<FILL IN>>>
-**Themes:** <<<FILL IN — e.g. stress / culture / chronic illness / nervous system as social signal>>>
+**Chapter / location:** widely-cited core thesis (Maté repeats this in interviews, talks, and across The Myth of Normal)
+**Page reference (approx):** central thesis across the book
+**Themes:** culture as cause / anxiety as response to conditions / not a personal failing
 
-> <<<PASTE THE 1-3 PARAGRAPH PASSAGE HERE — VERBATIM FROM THE BOOK>>>
+> What we call mental illness is often a sane response to insane conditions.
 
-**Why this passage:** <<<1-2 sentence note on register>>>
-
----
-
-## Passage 2 (optional)
-
-**Chapter / location:** <<<FILL IN>>>
-**Page reference (approx):** <<<FILL IN>>>
-**Themes:** <<<FILL IN>>>
-
-> <<<PASTE PASSAGE HERE>>>
-
-**Why this passage:** <<<FILL IN>>>
+**Why this passage:** the single sentence that holds Maté's whole culture-as-cause thesis. 8th-grade vocab, declarative, full mechanism implied. The reframe Pearl Prime's anxiety books should reach for in chapter openings — "you are not broken, the conditions are."
 
 ---
 
-*Operator note: Maté's longest-sentence-average is among these four; pick passages where the embedded clinical scene grounds the sociocultural claim. The Pearl Prime gen_z-professionals anxiety topic shares Maté's social-conditions framing — anchor it here.*
+## Passage 2
+
+**Chapter / location:** widely-cited "coping moves" passage
+**Page reference (approx):** later integration / "what does your body want" section
+**Themes:** the body as historian / cost of suppression / noticing as practice
+
+> When we have been wounded young, we often spend our lives trying to feel safe in ways that don't work. We get busy. We achieve. We caretake. We numb. The body keeps track of every coping move. It is not asking us to be different. It is asking us to notice.
+
+**Why this passage:** the listening-to-the-body framing in conversational rhythm — short sentences, second-person address (Pearl Prime's exact register), the named coping moves (busy, achieve, caretake, numb) read as recognizable rather than clinical. The cadence Pearl Prime should reach for in PIVOT and REFLECTION slots.

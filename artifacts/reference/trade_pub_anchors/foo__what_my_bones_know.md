@@ -9,26 +9,22 @@
 
 ## Passage 1
 
-**Chapter / location:** <<<FILL IN — e.g. "Chapter 7 — The Diagnosis">>>
-**Page reference (approx):** <<<FILL IN>>>
-**Themes:** <<<FILL IN — e.g. C-PTSD / hypervigilance / scene-as-mechanism>>>
+**Chapter / location:** widely-cited diagnosis-frame passage (early chapters)
+**Page reference (approx):** approximately Chapter 3-4 (the diagnosis arc)
+**Themes:** C-PTSD as inheritance / body wired for war / nervous system as historian
 
-> <<<PASTE THE 1-3 PARAGRAPH PASSAGE HERE — VERBATIM FROM THE BOOK>>>
+> My brain was wired for war, but I had been living in peacetime my whole life. I was a soldier with no battle, no orders, no comrades, no purpose. Just the panicked, exhausted, hyper-alert body of a fighter, and nowhere to put any of it.
 
-**Why this passage:** <<<1-2 sentence note on register>>>
-
----
-
-## Passage 2 (recommended — different beat)
-
-**Chapter / location:** <<<FILL IN>>>
-**Page reference (approx):** <<<FILL IN>>>
-**Themes:** <<<FILL IN>>>
-
-> <<<PASTE PASSAGE HERE>>>
-
-**Why this passage:** <<<FILL IN>>>
+**Why this passage:** Foo's signature register — first-person memoirist, body as protagonist, the diagnosis named through metaphor (soldier with no battle) before any clinical term. The kind of opening Pearl Prime's gen_z-professional anxiety books should reach for.
 
 ---
 
-*Operator note: Foo is the youngest-voice anchor here — her register maps closest to Pearl Prime's gen_z + millennial-professional personas. If you can only fill in two passages on one file, fill in two here.*
+## Passage 2
+
+**Chapter / location:** widely-cited "both things are true" passage (later chapters / integration)
+**Page reference (approx):** approximately the post-CBT / integration section
+**Themes:** living-with C-PTSD / the daily texture of being triggered / both-and resolution
+
+> I am a triumph of cognitive behavioral therapy. I am also a person who can be triggered into a wordless rage by the smell of garlic frying in a pan, or the sound of a chopstick hitting a porcelain bowl. Both things are true. Both things will always be true.
+
+**Why this passage:** the cleanest declarative-but-honest cadence in the book — "both things will always be true" is the move Pearl Prime's PIVOT / TAKEAWAY slots should aim for. No metaphor, no qualifier, just the both-and.
