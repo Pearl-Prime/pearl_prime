@@ -54,6 +54,21 @@ ROSTER_PATH = REPO_ROOT / "pearl_news" / "config" / "teacher_news_roster.yaml"
 DOCTRINE_DIR = REPO_ROOT / "SOURCE_OF_TRUTH" / "teacher_banks"
 PACKS_DIR = REPO_ROOT / "pearl_news" / "teacher_topic_packs" / "teachers"
 
+# Phase F: cross-system scan paths. Catalog/brand config files contain
+# teacher-keyed blocks (e.g. `teacher: ra`, `teacher_id: maat`) whose
+# tradition/positioning/prose can violate doctrine prohibited_outcomes
+# even when the Pearl News pack layer is clean. The gate walks each YAML
+# file, finds teacher-keyed blocks, and scans the block context against
+# that teacher's prohibited keys.
+CROSS_SYSTEM_DIRS = [
+    REPO_ROOT / "config" / "catalog_planning",
+    REPO_ROOT / "config" / "brand_management",
+]
+TEACHER_REGISTRY_PATH = REPO_ROOT / "config" / "teachers" / "teacher_registry.yaml"
+
+# Field names whose value identifies which teacher a YAML block belongs to.
+TEACHER_KEY_FIELDS = frozenset({"teacher", "teacher_id", "author", "kb_id"})
+
 # Minimum substring length to use from a forbidden phrase. Short matches
 # (e.g. "the") would produce false positives.
 MIN_SUBSTR_LEN = 6
@@ -262,18 +277,125 @@ def render_text(violations: list[dict]) -> str:
         lines.append(f"--- {teacher_id} ({len(by_teacher[teacher_id])} issue(s)) ---")
         for v in by_teacher[teacher_id]:
             tag = "🚨 ERROR" if v["severity"] == "ERROR" else "⚠️  WARN "
-            pack = f"  {v['pack']}" if "pack" in v else ""
-            lines.append(f"  {tag}{pack}  [{v['kind']}]")
+            location = ""
+            if "pack" in v:
+                location = f"  {v['pack']}"
+            elif "file" in v:
+                location = f"  {v['file']}"
+            lines.append(f"  {tag}{location}  [{v['kind']}]")
             lines.append(f"      {v['message']}")
         lines.append("")
 
     return "\n".join(lines)
 
 
+def build_doctrine_keys(teacher_ids) -> dict:
+    """For each teacher, pre-compute the list of (original_phrase, keys) pairs
+    from their doctrine.yaml prohibited_outcomes. Returns dict[teacher_id] →
+    list of (phrase, [keys]).
+
+    Filters out keys that ALSO appear in the teacher's own positive doctrine
+    (tradition, primary_methods, core_principles, tone_profile, glossary).
+    Otherwise the gate flags legitimate uses of doctrine vocabulary as
+    violations — e.g. Ra's prohibition "witness practice as detachment from
+    life" extracts the 2-word key "witness practice", which also appears in
+    Ra's primary_methods as the literal teaching practice. Without this
+    filter the gate cannot distinguish "witness practice as a method" from
+    "witness practice as detachment."
+    """
+    out: dict[str, list[tuple[str, list[str]]]] = {}
+    for tid in teacher_ids:
+        doctrine = load_yaml(DOCTRINE_DIR / tid / "doctrine" / "doctrine.yaml")
+        prohibited = doctrine.get("prohibited_outcomes", []) or []
+        # Concatenate the teacher's POSITIVE doctrine fields — terms here
+        # are legitimate vocabulary and should not trigger as forbidden
+        # substrings.
+        safe_text_parts = []
+        for f in ("tradition", "primary_methods", "core_principles",
+                  "tone_profile", "glossary", "display_name"):
+            v = doctrine.get(f)
+            if isinstance(v, str):
+                safe_text_parts.append(v)
+            elif isinstance(v, list):
+                safe_text_parts.extend(str(x) for x in v)
+        safe_text = " ".join(safe_text_parts).lower()
+
+        pairs = []
+        for phrase in prohibited:
+            keys = forbidden_keys(phrase)
+            # Drop keys whose entire content appears in positive doctrine
+            filtered = [k for k in keys if k not in safe_text]
+            if filtered:
+                pairs.append((phrase, filtered))
+        if pairs:
+            out[tid] = pairs
+    return out
+
+
+def check_cross_system_file(path: Path, doctrine_keys: dict) -> list[dict]:
+    """Walk a YAML file looking for teacher-keyed blocks. For each block,
+    scan its content against that teacher's doctrine prohibited substrings."""
+    violations: list[dict] = []
+    data = load_yaml(path)
+    if not data:
+        return violations
+    rel_path = path.relative_to(REPO_ROOT)
+
+    def walk(node):
+        if isinstance(node, dict):
+            tid = None
+            for field in TEACHER_KEY_FIELDS:
+                if field in node and isinstance(node[field], str):
+                    candidate = node[field].strip().lower()
+                    if candidate in doctrine_keys:
+                        tid = candidate
+                        break
+            if tid:
+                block_text = extract_prose(node).lower()
+                for original, keys in doctrine_keys[tid]:
+                    for key in keys:
+                        if key in block_text:
+                            violations.append({
+                                "teacher_id": tid,
+                                "file": str(rel_path),
+                                "severity": "ERROR",
+                                "kind": "cross_system_prohibited",
+                                "message": (
+                                    f"{rel_path} block (teacher={tid}) contains prohibited "
+                                    f"substring '{key}' (from '{original}')"
+                                ),
+                            })
+                            break  # one hit per phrase is enough
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for x in node:
+                walk(x)
+
+    walk(data)
+    return violations
+
+
+def check_cross_system_paths(doctrine_keys: dict) -> list[dict]:
+    """Iterate CROSS_SYSTEM_DIRS and run check_cross_system_file on each .yaml."""
+    violations: list[dict] = []
+    for d in CROSS_SYSTEM_DIRS:
+        if not d.exists():
+            continue
+        for path in sorted(d.glob("*.yaml")):
+            violations.extend(check_cross_system_file(path, doctrine_keys))
+    return violations
+
+
 def main():
     ap = argparse.ArgumentParser(description="Pearl News doctrine consistency gate")
     ap.add_argument("--strict", action="store_true", help="exit 1 on any ERROR")
     ap.add_argument("--json", action="store_true", help="machine-readable output")
+    ap.add_argument(
+        "--no-cross-system",
+        action="store_true",
+        help="skip catalog_planning/brand_management cross-system scan (Phase F)",
+    )
     args = ap.parse_args()
 
     roster = load_yaml(ROSTER_PATH).get("teachers", {})
@@ -284,6 +406,16 @@ def main():
     all_violations: list[dict] = []
     for teacher_id, entry in roster.items():
         all_violations.extend(check_teacher(teacher_id, entry))
+
+    # Phase F: cross-system scan across all Pearl_Prime registry teachers.
+    # The catalog/brand layer references all 13 teachers (incl. adi_da,
+    # pamela_fellows, ra), so we walk the full registry, not just the
+    # Pearl News roster.
+    if not args.no_cross_system:
+        registry = load_yaml(TEACHER_REGISTRY_PATH).get("teachers", {})
+        all_teacher_ids = set(registry.keys()) | set(roster.keys())
+        doctrine_keys = build_doctrine_keys(all_teacher_ids)
+        all_violations.extend(check_cross_system_paths(doctrine_keys))
 
     error_count = sum(1 for v in all_violations if v["severity"] == "ERROR")
 

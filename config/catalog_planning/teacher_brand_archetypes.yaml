@@ -52,26 +52,33 @@ teacher_brand_archetypes:
 
   # ── 02 COGNITIVE CLARITY (Joshin) ──────────────────────────────────────
   - brand_id: cognitive_clarity
+    # Doctrine-aligned with SOURCE_OF_TRUTH/teacher_banks/joshin/doctrine/doctrine.yaml:
+    # Shingon Esoteric Buddhism (Mikkyo); Sokushin Jobutsu — Buddhahood in this
+    # body; ritual technology for digital natives. Zen framing and "pure heart /
+    # non-separation language" are explicitly prohibited (Joshin is Shingon esoteric,
+    # not Zen).
     teacher: joshin
     display_name: "Cognitive Clarity"
-    tradition: "Zen Buddhism — direct pointing, dropping the story, pure heart"
+    tradition: "Shingon Esoteric Buddhism (Mikkyo) — Sanmitsu (three mysteries: body, speech, mind), Sokushin Jobutsu (Buddhahood in this body), ritual technology for digital natives"
     gtm_identity:
       persona: overthinking_knowledge_worker
       age_range: [25, 50]
-      emotional_job: "stop believing the thinker"
-      functional_job: "inquiry practice to dissolve thought loops"
+      emotional_job: "interrupt the thought-loop with embodied ritual"
+      functional_job: "Shingon ritual technology to disrupt mental spirals without negating the mind"
       primary_moment: thought_spiral
     discovery_contract:
       keyword_clusters:
-        primary: ["zen clarity", "stop overthinking", "inquiry meditation"]
-        secondary: ["dropping the story", "koans for modern life", "direct seeing"]
+        primary: ["Shingon practice", "stop overthinking", "ritual meditation"]
+        secondary: ["mudra and mantra", "esoteric Buddhism for modern life", "Sokushin Jobutsu"]
     unique_angle: >
-      The problem isn't the thoughts. The problem is you believe them.
-      Joshin's Zen inquiry doesn't calm the mind — it shows you the mind
-      was never the problem. Direct pointing. No stories. Pure heart.
+      The problem isn't the thoughts. The problem is the thinking-only
+      mode that has no body to anchor to. Joshin's Shingon practice uses
+      Sanmitsu — body (mudra), speech (mantra), mind (visualization) —
+      to interrupt the spiral with embodied ritual, not with negation.
+      Mikkyo for digital natives.
     anti_spam_differentiation:
-      vs_optimizer: "Optimizer manages focus for productivity. Cognitive Clarity dissolves the thinker entirely."
-      vs_spiritual_ground: "Spiritual Ground explores. Cognitive Clarity cuts — direct, no frills, Zen."
+      vs_optimizer: "Optimizer manages focus for productivity. Cognitive Clarity uses Shingon ritual to disrupt the spiral entirely."
+      vs_spiritual_ground: "Spiritual Ground explores. Cognitive Clarity practices — Mikkyo ritual technology, body-speech-mind together."
 
   # ── 03 SOMATIC WISDOM (Pamela Fellows) ─────────────────────────────────
   - brand_id: somatic_wisdom
@@ -241,26 +248,32 @@ teacher_brand_archetypes:
 
   # ── 10 BODY MEMORY (Omote) ────────────────────────────────────────────
   - brand_id: body_memory
+    # Doctrine-aligned with SOURCE_OF_TRUTH/teacher_banks/omote/doctrine/doctrine.yaml:
+    # Japanese spiritual-historical navigation; Yamato-gokoro (Japanese spirit)
+    # awakening; sacred geography; Project Phoenix lineage. Noh theater as
+    # primary framing and "omote/surface" as primary concept are prohibited.
     teacher: omote
     display_name: "Body Memory"
-    tradition: "Japanese Body Practice — Shiatsu, Noh theater, authentic presence, seasonal body"
+    tradition: "Yamato-gokoro awakening — Japanese spiritual-historical navigation, sacred geography, Project Phoenix lineage; grief held in the land of the body"
     gtm_identity:
       persona: unprocessed_grief_carrier
       age_range: [30, 65]
-      emotional_job: "let the body remember what the mind forgot"
-      functional_job: "body-centered grief processing through Japanese somatic tradition"
+      emotional_job: "let the body remember what the spirit-history carries"
+      functional_job: "grief-as-sacred-geography practice in the Yamato-gokoro lineage"
       primary_moment: grief_stored_in_body
     discovery_contract:
       keyword_clusters:
         primary: ["body grief processing", "somatic grief", "body memory healing"]
-        secondary: ["shiatsu therapy", "seasonal healing", "authentic presence"]
+        secondary: ["Yamato-gokoro awakening", "sacred geography practice", "Project Phoenix lineage"]
     unique_angle: >
       The grief lives in your shoulders. Your hips. Your jaw. Omote teaches
-      through Noh theater's principle — the body remembers what the mind erased.
-      Not talk therapy. Not meditation. The body itself as the archive of loss.
+      that the body is its own sacred geography — the land where ancestral
+      and personal grief settle and wait. Yamato-gokoro awakening reads that
+      geography. Not talk therapy. Not technique. The body as the territory
+      the spirit-history still inhabits.
     anti_spam_differentiation:
-      vs_trauma_path: "Trauma Path is clinical safety. Body Memory is Japanese body practice — the archive is in the flesh, not the narrative."
-      vs_somatic_wisdom: "Somatic Wisdom explains why. Body Memory listens to where — the body's geography of grief."
+      vs_trauma_path: "Trauma Path is clinical safety. Body Memory is Yamato-gokoro awakening — the spirit-history reading the body's own terrain."
+      vs_somatic_wisdom: "Somatic Wisdom explains why. Body Memory navigates where — the body's sacred geography of grief."
 
   # ── 11 SOLAR RETURN (Ra) ──────────────────────────────────────────────
   # Doctrine-aligned with SOURCE_OF_TRUTH/teacher_banks/ra/doctrine/doctrine.yaml:
