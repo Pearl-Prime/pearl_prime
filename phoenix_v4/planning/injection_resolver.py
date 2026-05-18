@@ -12,6 +12,8 @@ across all 12 chapters of a single book assembly. See docs/RECOGNITION_BANK_SPEC
 """
 from __future__ import annotations
 
+import logging
+import re
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
@@ -19,6 +21,8 @@ from typing import Any, Dict, List, Optional, Set
 import yaml
 
 from phoenix_v4.planning.registry_resolver import _deterministic_index, _load_yaml
+
+_LOG = logging.getLogger(__name__)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
@@ -337,6 +341,54 @@ def _chapter_to_arc_position(chapter_index: int) -> str:
     return _ARC_POSITIONS[phase]
 
 
+# ── Canonical-fallback atom-block parsing ────────────────────────────────────
+# CANONICAL.txt files in atoms/{persona}/{topic}/{engine}/ are structured as a
+# sequence of `## <ARC_POSITION> v<NN>` blocks (see e.g.
+# atoms/corporate_managers/anxiety/spiral/CANONICAL.txt). Pre-patch the entire
+# file body was injected verbatim into every STORY slot in the book, so the
+# same 5,000-word blob landed in every chapter and the intra-chapter dedupe
+# pass left ~1 repeat per chapter — exactly the 16-occurrence Tanya/Sarah leak
+# in artifacts/canary/ja_jp_stillness_press_smoke_2026-05-16. The parser below
+# lets the canonical fallback pick a single arc-block per (chapter, section).
+_CANONICAL_BLOCK_RE = re.compile(
+    r"^##\s+(?P<arc>RECOGNITION|MECHANISM_PROOF|TURNING_POINT|EMBODIMENT|COST_REVEAL|RECKONING)\s+(?P<var>v\d+)\b",
+    re.IGNORECASE | re.MULTILINE,
+)
+
+
+def _split_canonical_into_atom_blocks(text: str) -> List[Dict[str, str]]:
+    """Parse a CANONICAL.txt into discrete atom blocks.
+
+    Each block's body is the prose between the second ``---`` separator and
+    the next ``---`` (or the next ``## `` header / end of file).
+
+    Returns a list of dicts ``{arc_position, variant, text}`` in source order.
+    Returns ``[]`` if the file does not use the ``## ARC vNN`` block
+    convention; the caller should fall back to whole-file behavior in that
+    case (and is expected to log the degradation).
+    """
+    out: List[Dict[str, str]] = []
+    if not text:
+        return out
+    matches = list(_CANONICAL_BLOCK_RE.finditer(text))
+    for i, m in enumerate(matches):
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+        chunk = text[m.start():end]
+        parts = chunk.split("---")
+        # Header line is parts[0]; YAML-like metadata is parts[1]; prose body
+        # is parts[2]. Some atoms in the wild only have one separator before
+        # the body — fall through to the last part in that case.
+        body = (parts[2] if len(parts) >= 3 else parts[-1]).strip()
+        if not body:
+            continue
+        out.append({
+            "arc_position": m.group("arc").lower(),
+            "variant": m.group("var").lower(),
+            "text": body,
+        })
+    return out
+
+
 def _find_story_atoms_content(
     persona_id: str,
     topic: str,
@@ -484,13 +536,66 @@ def _find_story_content(
                 if not engine_dir.is_dir() or engine_dir.name.isupper():
                     continue
                 canonical = engine_dir / "CANONICAL.txt"
-                if canonical.is_file():
-                    text = canonical.read_text(encoding="utf-8").strip()
-                    if text and _story_words(text) > 20:
+                if not canonical.is_file():
+                    continue
+                text = canonical.read_text(encoding="utf-8").strip()
+                if not text:
+                    continue
+                blocks = _split_canonical_into_atom_blocks(text)
+                if not blocks:
+                    # Plain-prose CANONICAL.txt without the ## ARC vNN
+                    # convention — fall back to current verbatim behavior so
+                    # we never go silent. This is degraded: every (chapter,
+                    # section) gets the same whole-file blob and intra-chapter
+                    # dedupe is the only line of defense.
+                    if _story_words(text) > 20:
+                        _LOG.warning(
+                            "[canonical_fallback] no ARC blocks found in %s; "
+                            "degraded behavior (whole-file paste), consider "
+                            "authoring story_atoms/%s/anchored/%s/...",
+                            canonical, persona, top,
+                        )
                         return {
                             "text": text,
                             "source": f"injection:persona_engine:{engine_dir.name}",
                         }
+                    continue
+
+                arc_pos = _chapter_to_arc_position(chapter_index)
+                # Prefer blocks tagged with this chapter's arc_position;
+                # widen to any long-enough block if no arc match exists.
+                candidates = [
+                    b for b in blocks
+                    if b["arc_position"] == arc_pos and _story_words(b["text"]) > 20
+                ] or [b for b in blocks if _story_words(b["text"]) > 20]
+                if not candidates:
+                    continue
+
+                # Strip the per-section `:inject:{ch}:{sec}` suffix so we
+                # match the book-level seed contract from
+                # _find_story_atoms_content, then inject the full
+                # (chapter, section, arc_pos, phase) coordinate so different
+                # slots resolve to different blocks deterministically.
+                book_seed = seed.split(":inject:")[0] if ":inject:" in seed else seed
+                phase = max(0, min((chapter_index - 1) // 3, 3))
+                pick_seed = (
+                    f"{book_seed}:canonical:{engine_dir.name}:{arc_pos}:"
+                    f"phase{phase}:{chapter_index}:{section_index}"
+                )
+                pick = candidates[_deterministic_index(pick_seed, len(candidates))]
+                _LOG.info(
+                    "[canonical_fallback] selected %s %s for chapter %s "
+                    "section %s from %s",
+                    pick["arc_position"], pick["variant"],
+                    chapter_index, section_index, canonical,
+                )
+                return {
+                    "text": pick["text"],
+                    "source": (
+                        f"injection:persona_engine:{engine_dir.name}:"
+                        f"{pick['arc_position']}:{pick['variant']}"
+                    ),
+                }
 
     reg_hit = _pick_registry_variant_for_slot(
         topic, chapter_index, section_index, seed, repo_root, min_words=20
