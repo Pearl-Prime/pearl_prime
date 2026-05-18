@@ -446,6 +446,124 @@ def _try_persona_content(
     return content, str(atom.get("atom_id") or f"persona_{idx}"), idx, meta
 
 
+# ---------------------------------------------------------------------------
+# EXERCISE-slot contract: practice-with-steps only, no teaching essays
+# ---------------------------------------------------------------------------
+# Background (PR #612 follow-up): teacher_atoms[EXERCISE] is loaded by directory
+# name (SOURCE_OF_TRUTH/teacher_banks/<tid>/approved_atoms/EXERCISE/*.yaml), but
+# some atoms in that directory are kb_mine_v1 essay synthesis from blog RTF —
+# their content is teaching prose ("Bhakti Yoga is the practice of...", "selfless
+# giving teaches us to..."), not instruction-with-steps. The keen-sinoussi book
+# audit caught this: EXERCISE slot rendered an essay about Bhakti Yoga where the
+# reader expected "count five breaths, place your hand on your chest". This
+# filter refuses essay-shaped atoms at selection time; the fallback chain
+# (practice_library) then provides the actual practice.
+#
+# Heuristic: an atom is treated as practice-shaped iff
+#   (a) its metadata declares slot_type == "exercise" / shape == "practice", OR
+#   (b) its content contains at least one practice-step marker (imperative verbs
+#       like "count", "notice", "place your", "inhale", "exhale", "breathe",
+#       "feel", "hold", a numbered-step prefix like "1.", "Step 1", or a
+#       sensory/body cue like "tongue", "shoulders", "jaw").
+# Essay markers ("Bhakti Yoga teaches", "transcendent", "is the practice of"
+# without imperative) are NOT positive evidence; we require positive practice
+# evidence to pass.
+_PRACTICE_STEP_MARKERS: tuple[str, ...] = (
+    "inhale",
+    "exhale",
+    "breathe in",
+    "breathe out",
+    "count to ",
+    "count five",
+    "count four",
+    "count three",
+    "count down",
+    "count back",
+    "place your hand",
+    "place your palm",
+    "place your feet",
+    "place one hand",
+    "place both hands",
+    "rest your hand",
+    "rest your palm",
+    "notice the ",
+    "notice your ",
+    "notice how ",
+    "notice what ",
+    "notice where ",
+    "feel your ",
+    "feel the ",
+    "feel where ",
+    "drop your shoulders",
+    "soften your jaw",
+    "unclench your jaw",
+    "relax your tongue",
+    "step 1",
+    "step 2",
+    "step one",
+    "step two",
+    "first, ",
+    "next, ",
+    "then, ",
+    "now, ",
+    "for thirty seconds",
+    "for sixty seconds",
+    "for one minute",
+    "for two minutes",
+    "for five minutes",
+    "close your eyes",
+    "open your eyes",
+    "sit comfortably",
+    "stand with your",
+    "lie down on",
+)
+
+# Numbered-step regex: lines starting with "1.", "1)", "(1)" etc.
+_NUMBERED_STEP_RE = re.compile(r"(?m)^\s*(?:\(?\d{1,2}[\.\)])\s+\S")
+
+
+def _is_practice_atom(atom: dict, *, atom_id: str = "", source_path: str = "") -> bool:
+    """Return True iff atom looks like instruction-with-steps, not a teaching essay.
+
+    Multi-signal classifier; positive practice evidence required.
+    Reference: enrichment_select.py:988 EXERCISE branch (PR #612 follow-up).
+    """
+    if not isinstance(atom, dict):
+        return False
+
+    meta = atom.get("metadata") or {}
+    if isinstance(meta, dict):
+        slot_meta = str(meta.get("slot_type") or "").strip().lower()
+        if slot_meta in ("exercise", "practice"):
+            return True
+        shape_meta = str(meta.get("shape") or meta.get("atom_shape") or "").strip().lower()
+        if shape_meta in ("practice", "instruction", "exercise"):
+            return True
+        atom_type = str(meta.get("atom_type") or meta.get("type") or "").strip().lower()
+        if atom_type in ("practice", "exercise", "instruction"):
+            return True
+
+    content = str(atom.get("content") or "").strip().lower()
+    if not content:
+        return False
+
+    # Numbered step list is strong practice evidence.
+    if _NUMBERED_STEP_RE.search(content):
+        return True
+
+    # Imperative / sensory step markers — case-insensitive substring search.
+    for marker in _PRACTICE_STEP_MARKERS:
+        if marker in content:
+            return True
+
+    return False
+
+
+def _filter_practice_pool(pool: List[dict]) -> List[dict]:
+    """Keep only atoms whose content is instruction-with-steps (not teaching essay)."""
+    return [a for a in (pool or []) if _is_practice_atom(a)]
+
+
 def _try_practice_library(
     chapter_index: int,
     topic_id: str,
@@ -988,6 +1106,13 @@ def select_enrichment(
                 if stype == "EXERCISE":
                     # EXERCISE-slot rule (PR #612): teacher exercise wins; else practice_library;
                     # else fall through to hard-fail gap raise below.
+                    #
+                    # EXERCISE-slot contract (post-PR #612 follow-up): teacher_atoms[EXERCISE]
+                    # is loaded by directory name, but some atoms in approved_atoms/EXERCISE/
+                    # are kb_mine_v1 essay synthesis (teaching prose about Bhakti Yoga,
+                    # selfless giving, transcendence) — not instruction-with-steps. Refuse
+                    # essay-shaped atoms here; fall through to practice_library which
+                    # produces actual practice content. See _is_practice_atom() above.
                     _at_hit_ex = None
                     if tid and teacher_atoms:
                         _at_for_slot_ex = {
@@ -997,6 +1122,10 @@ def select_enrichment(
                             ]
                             for _k, _pool in teacher_atoms.items()
                         }
+                        # Hard contract: EXERCISE pool must contain only practice-shaped atoms.
+                        _at_for_slot_ex["EXERCISE"] = _filter_practice_pool(
+                            _at_for_slot_ex.get("EXERCISE") or []
+                        )
                         _at_hit_ex = _try_teacher_content(
                             _at_for_slot_ex,
                             stype,
