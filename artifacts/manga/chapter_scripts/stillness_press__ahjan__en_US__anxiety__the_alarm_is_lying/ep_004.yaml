@@ -1,0 +1,424 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# CHAPTER SCRIPT — The Alarm Is Lying — Episode 4
+# ═══════════════════════════════════════════════════════════════════════════
+# Series:        stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+# Episode:       ep_004 — "Wednesday, 11:42 PM"
+# Author (EI):   Hana Tidecalm
+# Teacher:       ahjan (Buddhist contemporary; alarm-systems / pause)
+# Engine:        false_alarm
+# Genre:         iyashikei
+# Style:         cozy_iyashikei
+#
+# Continuity from ep_003:
+#   Four days later. Same Mira Aoki. The practice has been holding for
+#   waking hours. Tonight the alarm fires WITHOUT external trigger —
+#   the insomnia variant. The teaching applied in the dark, alone.
+#
+# Episode arc — the alarm without a cue:
+#   safety opening (dark apartment, soft lamp) → ramp (cannot sleep,
+#   mind unrolling) → climax (3 AM peak — the body insists something
+#   is wrong) → ground (the practice in low light) → Long Drop
+#   (sitting by the open window) → completion (dawn, kettle, sleeping
+#   on the couch finally)
+#
+# SCROLL THERAPEUTIC TEST:
+#   1. Safety cue inside first 800 px ........ ✓ panel 1 (warm bedside lamp + succulent shadow)
+#   2. ≥3 oscillations activation/ground ...... ✓ 4 oscillations
+#   3. Activation:Ground ≤ 1:2.5 .............. ✓ ~10 activation / ~22 ground panels
+#   4. Closes with completion ................. ✓ panels 30-32 settle
+#   5. HRV-style end-state delta .............. (Phase 2)
+#
+# CRAFT FORMULAS (different mix — night register):
+#   Tea Beat (panels 31-32 closing; absent at open — night doesn't open on tea)
+#   Anchor Panel — the succulent (panel 1 silhouette, panel 24 dawn-lit)
+#   Awe-Pullback (panel 18 — bedroom window onto sleeping city at 3 AM)
+#   Pendulation Pair (4-6 ↔ 7-9, 11-14 ↔ 15-17, 19-21 ↔ 22-25)
+#   Long Drop (panel 27 — window seat wide silent, pre-dawn)
+#   Continuity callback: jade pendant ON the bedside table (panel 8, 23) —
+#   off her neck for the first time, which is the point: she has to use
+#   the breath without the external anchor
+#
+# DOCTRINAL ANCHOR:
+#   The alarm without a stimulus is the hardest case — no external thing
+#   to point at, no work meeting, no parent's words. Just the body
+#   running its program. The teaching: you do not have to identify a
+#   cause. You can notice the activation as activation, full stop.
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_004
+title: "The Alarm Is Lying — Episode 4: Wednesday, 11:42 PM"
+manga_author: Hana Tidecalm
+teacher_id: ahjan
+brand_id: stillness_press
+engine: false_alarm
+locale: en_US
+default_locale: en_US
+available_locales: [en_US]
+
+main_characters:
+  - id: mira
+    name: Mira Aoki
+    age: 33
+    role: protagonist (UX researcher; mid-career; quietly anxious)
+    visual_anchor: "long brown hair, soft cotton pajamas (cream-and-grey), bare feet, no pendant tonight (it's on the bedside table)"
+
+scene_palette:
+  primary: warm lamp-amber + deep navy darkness
+  secondary: pale moon-grey (window light) + soft jade (succulent silhouette)
+  accent: bedside lamp glow (single point of warm light)
+  middle_of_night_palette: cool blue-grey + minimal warm sources
+  pre_dawn_palette: pale rose horizon + cool air
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PAGES (32 panels — slightly longer than ep_003 to hold the night-arc weight)
+# ═══════════════════════════════════════════════════════════════════════════
+
+pages:
+  - page_id: ep_004_p01
+    panels:
+
+      # ── OPENING — bedroom, lamp on, the safety cue must work at NIGHT ──
+      - panel_id: ep004_001
+        scene: |
+          Close-up — bedside lamp glowing warm amber against deep navy
+          darkness. The lamp's halo just catches the silhouette of the
+          succulent on the windowsill nearby. Warm + dark contrast: the
+          point is SAFETY in low light.
+        beat_type: ~
+        intent: "ANCHOR PANEL reference + SAFETY CUE in night register"
+        silence_confirmed: true
+
+      - panel_id: ep004_002
+        scene: |
+          Wider — Mira's bedroom. She's in cream-and-grey cotton pajamas,
+          sitting up against the headboard, a paperback open on her lap.
+          The clock on the bedside table reads 11:42 PM. Apartment quiet.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "Wednesday. Eleven forty-two."
+
+      - panel_id: ep004_003
+        scene: |
+          Close — Mira's hand turns a page. Her eyes have stopped reading.
+          The same paragraph twice. She knows.
+        beat_type: micro
+        intent: "Pre-activation — the body has registered something before the mind"
+
+      # ── RAMP — the body knows before the mind ─────────────────────────
+      - panel_id: ep004_004
+        scene: |
+          Close — Mira's chest area through the pajama top. Slight tension.
+          Her breath visibly shallow.
+        beat_type: micro
+        intent: "Activation 1 — onset without external trigger"
+        sfx_by_locale:
+          en_US: ["thud-thud..."]
+
+      - panel_id: ep004_005
+        scene: |
+          Mira closes the book. Sets it aside. The lamp halo on her face,
+          the rest of the room dim.
+        beat_type: spatial
+        dialogue_lines:
+          - speaker: mira_internal
+            text_by_locale:
+              en_US: "What is it tonight."
+            intensity: whisper
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: top_right
+
+      - panel_id: ep004_006
+        scene: |
+          Mid-shot — Mira lying back, eyes open in the dim. The ceiling
+          patterned with faint light from a passing car outside. The
+          patterns slide across.
+        beat_type: spatial
+        intent: "Activation 2 — the mind starts unrolling lists"
+
+      # ── GROUND 1 — pendulation: the lamp halo ─────────────────────────
+      - panel_id: ep004_007
+        scene: |
+          Mira's gaze finds the lamp again. Just the lamp. Warm, steady,
+          unchanging.
+        beat_type: micro
+        intent: "Pendulation — pull attention to a fixed warm source"
+
+      - panel_id: ep004_008
+        scene: |
+          Close — Mira's hand on the bedside table, two fingers touching
+          the jade pendant where it rests, not around her neck. She does
+          not put it on.
+        beat_type: micro
+        intent: "Anchor REFUSAL — the practice generalizes WITHOUT external prop"
+
+      - panel_id: ep004_009
+        scene: |
+          Tight close on Mira's face — eyes closing. A slow breath.
+        beat_type: micro
+        intent: "BREATH BRACKET — no pendant, no plant, just the breath"
+
+      # ── RAMP 2 — but the alarm doesn't stop ───────────────────────────
+      - panel_id: ep004_010
+        scene: |
+          Wider — Mira sits up, pushes the blanket off her legs. The clock
+          reads 12:18 AM now. The lamp the only warm light.
+        beat_type: spatial
+        intent: "Realistic — first ground move not enough; ramp continues"
+
+      - panel_id: ep004_011
+        scene: |
+          Close — Mira's feet finding the cool floor. Bare. The contrast
+          (warm covers above, cool floor below) is grounding-via-sensation.
+        beat_type: micro
+        intent: "Activation 3 — but she chooses sensation, not avoidance"
+        sfx_by_locale:
+          en_US: ["..."]
+
+      # ── KITCHEN MIDNIGHT — small ritual ───────────────────────────────
+      - panel_id: ep004_012
+        scene: |
+          Mira walking down the dim hallway toward the kitchen. The
+          lamplight behind her, kitchen's window-light ahead (moonlight).
+          Apartment is silent.
+        beat_type: standard
+        intent: "Scene transition — bedroom → kitchen"
+
+      - panel_id: ep004_013
+        scene: |
+          Kitchen at midnight. Window full of cool moonlight. Mira
+          standing at the sink, filling a glass of water. The succulent
+          a small silhouette to her left.
+        beat_type: spatial
+
+      - panel_id: ep004_014
+        scene: |
+          Close — Mira's mouth on the rim of the glass. Cool water. Eyes
+          closed.
+        beat_type: micro
+        intent: "Sensory anchor — water at midnight"
+
+      # ── GROUND 2 — the chair by the window ────────────────────────────
+      - panel_id: ep004_015
+        scene: |
+          Mira sitting in a small armchair by the kitchen window, knees
+          drawn up. The window cracked open an inch. Cool air moves the
+          edge of her hair.
+        beat_type: spatial
+        intent: "Settle position — neither bed nor bedroom; new container"
+
+      - panel_id: ep004_016
+        scene: |
+          Close on Mira's hands cupping the empty glass. Both thumbs against
+          the rim. The lamp halo from the bedroom barely visible, far away.
+        beat_type: micro
+
+      - panel_id: ep004_017
+        scene: |
+          Black panel — almost black, very thin frame of light at the edges.
+          Caption strip across the middle.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "There is no meeting tomorrow. There is no mother to call."
+        silence_confirmed: true
+
+      # ── AWE-PULLBACK — the city at 1 AM ────────────────────────────────
+      - panel_id: ep004_018
+        scene: |
+          Wide pullback through the kitchen window. The city sprawl at
+          1 AM — most lights out, a few apartment windows still glowing
+          warm in the dark. The sky deep navy with stars muted by city
+          glow. Mira small in the corner of the frame, knees up.
+          Intentional excess of darkness.
+        beat_type: miyazaki_ma
+        intent: "AWE-PULLBACK — the night holds her; she is small but not alone"
+        silence_confirmed: true
+
+      # ── ACTIVATION 4 — peak alarm without cause ────────────────────────
+      - panel_id: ep004_019
+        scene: |
+          Close on Mira's face — eyes open in the dim. The body is at
+          peak now. No external cause; the mind cannot point at anything.
+        beat_type: micro
+        intent: "Peak activation — pure body, no narrative attached"
+        sfx_by_locale:
+          en_US: ["thud-thud-thud..."]
+
+      - panel_id: ep004_020
+        scene: |
+          Close — Mira's chest. The shirt fabric rises and falls visibly.
+          Faster than her breathing. The alarm is louder than the breath.
+        beat_type: micro
+
+      - panel_id: ep004_021
+        scene: |
+          Wider — Mira in the chair, but now she has placed both hands flat
+          on her own chest, one over the other. Eyes closed. Not panicking.
+          Just present.
+        beat_type: spatial
+        intent: "GROUND 3 — touch + presence, no external anchor"
+        dialogue_lines:
+          - speaker: mira_internal
+            text_by_locale:
+              en_US: "It is not danger. It is just the alarm."
+            intensity: whisper
+            bubble_style: cloud_thought
+            tail_style: dotless
+            position_hint: top_right
+
+      # ── GROUND 3 — the breath finds the rhythm ────────────────────────
+      - panel_id: ep004_022
+        scene: |
+          Close on Mira's face. Eyes still closed. The shoulders settle
+          half a degree. A first long exhale.
+        beat_type: micro
+        intent: "First sign of nervous-system shift"
+
+      - panel_id: ep004_023
+        scene: |
+          Close on her hand sliding off her chest to her side. The other
+          hand briefly touching the jade pendant on the side table beside
+          the chair — she has brought it with her. She does not put it
+          on. Just touches it.
+        beat_type: micro
+        intent: "Pendant as friend, not as crutch"
+
+      # ── LONG DROP — window seat, silent ───────────────────────────────
+      - panel_id: ep004_024
+        scene: |
+          Wide silent panel. Mira asleep — or nearly asleep — folded into
+          the armchair, head against the window frame, blanket pulled
+          from the back of the chair. The succulent visible on the
+          windowsill, silhouetted against the moonlight. The city beyond,
+          dim. NO TEXT, NO CAPTION, NO SFX. Deliberate empty sky above.
+        beat_type: long_drop
+        intent: "LONG DROP — the body has surrendered to rest. Reader exhales."
+        silence_confirmed: true
+        dialogue_lines: []
+
+      # ── PRE-DAWN — the practice held; she rests ────────────────────────
+      - panel_id: ep004_025
+        scene: |
+          Close — Mira's hand on the blanket, fingers loose. The wrist
+          relaxed. Sleep marks on the wrist from the chair arm.
+        beat_type: micro
+
+      - panel_id: ep004_026
+        scene: |
+          The window. Pre-dawn now — pale rose tints in the sky beyond
+          the city skyline. The lamp behind in the bedroom long since
+          turned off (offscreen).
+        beat_type: spatial
+        intent: "Time-jump — pre-dawn marker"
+
+      - panel_id: ep004_027
+        scene: |
+          Wider — Mira still in the chair, eyes opening slowly. The first
+          light catching the succulent on the sill. She does not move yet.
+        beat_type: micro
+
+      # ── COMPLETION — dawn kitchen, kettle, the bookend ────────────────
+      - panel_id: ep004_028
+        scene: |
+          Mira at the stove. The kettle on the burner, beginning to warm.
+          She is still in pajamas. The window full of pre-dawn pale-rose
+          light now. Her hair loose, face soft, eyes a little sleep-marked.
+        beat_type: standard
+        intent: "Scene transition — chair → kettle"
+
+      - panel_id: ep004_029
+        scene: |
+          Close on the kettle, starting to steam. Same kettle as ep_001-003.
+          The visual rhyme holds.
+        beat_type: spatial
+        sfx_by_locale:
+          en_US: ["hsss..."]
+
+      - panel_id: ep004_030
+        scene: |
+          Mira sitting at the table. Fresh tea. The jade pendant placed
+          on the table beside the cup, not yet around her neck. She is
+          looking out at the dawn light.
+        beat_type: micro
+
+      - panel_id: ep004_031
+        scene: |
+          Close — her fingers picking up the pendant slowly, fastening
+          it. The slight ritual of returning it to her neckline.
+        beat_type: micro
+        intent: "Pendant returns — not as crutch this time, as companion"
+
+      - panel_id: ep004_032
+        scene: |
+          Final panel — Mira at the table, tea in front of her, the
+          pendant at her neck, the succulent in the window behind her,
+          the sky pale rose. Eyes peaceful. Caption strip below.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "No cue. No cause. The breath still works."
+        dialogue_lines: []
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WRITER NOTES
+# ═══════════════════════════════════════════════════════════════════════════
+notes:
+  arc_position: |
+    Episode 4 of 10. The hardest test case in the series so far: the alarm
+    fires without external stimulus. Mira applies the practice in the dark,
+    alone, without the pendant on, without a meeting to walk into, without
+    a parent to talk to. The teaching reduces to: notice. That's it. The
+    completion is sleep + dawn + the small ritual of putting the pendant
+    BACK ON in the morning, not as crutch but as choice.
+  pacing_vs_prior: |
+    32 panels — back up from ep_003's 30 because the night register needs
+    more breathing space. Lots of micro / spatial beats, fewer standard.
+    The slow time-passage (11:42 PM → 12:18 AM → 1 AM → pre-dawn → dawn)
+    is the texture.
+  continuity_callbacks: |
+    - Kettle bookend (panel 29, 30) — same kettle as ep_001-003
+    - Jade pendant — OFF Mira's neck the entire episode; returns at the
+      very last act of putting it back on at dawn (panel 31)
+    - Succulent on windowsill (panel 1, 24, 27, 32) — silhouetted at night,
+      catching first dawn light at end; full visual through-line
+    - Smoke detector — DOES NOT appear. The caption "It is not danger.
+      It is just the alarm." (panel 21) is now both internal AND silent
+      (whispered thought), not displayed as caption strip. Further
+      graduation.
+    - Cream + grey palette (instead of cream sweater) — same character
+      lock-in via pajama color family
+  craft_notes: |
+    The "no external trigger" episode is doctrinally important. Earlier
+    episodes had cues: work review, mother visiting. Insomnia onset is
+    pure body. The episode validates that the practice survives WITHOUT
+    a story to attach to. Iyashikei convention: this is shown via small
+    body actions (hands on chest, choosing the chair, opening the
+    window an inch) — not via a Big Revelation. The reader leaves
+    knowing the body found rest, without Mira "solving" anything.
+  long_drop_position: |
+    Panel 24 — the window seat. The Long Drop here doubles as sleep
+    onset; the silence is not just compositional, it's the body
+    surrendering. Different in feeling from ep_001's kitchen Long
+    Drop and ep_002's rooftop and ep_003's park bench. Setting variety
+    is critical to keep readers in the iyashikei register without
+    formulaic fatigue.
+  translation_handoff: |
+    Same as ep_001-003 — text_by_locale dicts populated for en_US only.
+    Locked terminology in iyashikei_glossary.py covers the new "No cue.
+    No cause. The breath still works." + "It is not danger. It is just
+    the alarm." callbacks.
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DOWNSTREAM CONSUMPTION
+# ═══════════════════════════════════════════════════════════════════════════
+# 1. visual_from_script_v3 → FLUX prompts (PR #655)
+# 2. lettering_from_script → v3 lettering_spec
+# 3. bubble_render with locale → per-market bubbles (PR #648)
+# 4. webtoon_compose → vertical strip (PR #650)
+# 5. r2_push_helper.push_book_render() (PR #637)
+# 6. webtoon_canvas_upload package (PR #630)
