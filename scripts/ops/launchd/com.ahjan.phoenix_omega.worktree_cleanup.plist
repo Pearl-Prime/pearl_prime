@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+  Phoenix Omega — daily worktree cleanup launch agent
+  Install:
+    cp scripts/ops/launchd/com.ahjan.phoenix_omega.worktree_cleanup.plist \
+       ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.ahjan.phoenix_omega.worktree_cleanup.plist
+  Disable:
+    launchctl bootout gui/$(id -u)/com.ahjan.phoenix_omega.worktree_cleanup
+  Trigger manually (test):
+    launchctl kickstart -k gui/$(id -u)/com.ahjan.phoenix_omega.worktree_cleanup
+  Status:
+    launchctl print gui/$(id -u)/com.ahjan.phoenix_omega.worktree_cleanup
+-->
+<dict>
+    <key>Label</key>
+    <string>com.ahjan.phoenix_omega.worktree_cleanup</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/ahjan/phoenix_omega/scripts/ops/worktree_cleanup_daily.sh</string>
+    </array>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>6</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <!-- Don't run if laptop is asleep at 06:00; run at next wake. -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <!-- Catch up if we missed the scheduled time (e.g. laptop was off) -->
+    <key>StartOnMount</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/ahjan/phoenix_omega/artifacts/cleanup_logs/launchd.stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/ahjan/phoenix_omega/artifacts/cleanup_logs/launchd.stderr.log</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/bin:/bin:/usr/local/bin:/opt/homebrew/bin</string>
+        <key>PHOENIX_OMEGA_REPO</key>
+        <string>/Users/ahjan/phoenix_omega</string>
+    </dict>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/ahjan/phoenix_omega</string>
+
+    <!-- Low priority — never block real work -->
+    <key>Nice</key>
+    <integer>10</integer>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+</dict>
+</plist>
