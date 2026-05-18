@@ -1686,6 +1686,160 @@ def _extract_prose_from_canonical(raw: str) -> str:
     return "\n\n".join(prose_parts)
 
 
+# ── Per-section ARC block parsing (patch (d) of dedupe-leak diagnosis) ───────
+#
+# CANONICAL.txt files in atoms/{persona}/{topic}/{engine}/ (and locale
+# overlays under .../locales/{locale}/CANONICAL.txt) are structured as a
+# sequence of ``## <ARC_POSITION> v<NN>`` blocks. Examples of ARC positions:
+# RECOGNITION, MECHANISM_PROOF, TURNING_POINT, EMBODIMENT, COST_REVEAL,
+# RECKONING (see atoms/corporate_managers/anxiety/spiral/CANONICAL.txt).
+#
+# Pre-patch (d), the persona_atom branch of ``_load_depth_content`` read each
+# CANONICAL.txt with ``_extract_prose_from_canonical`` (which concatenates ALL
+# atom prose bodies with ``\n\n``) and then called ``_select_prose_chunk_unique``
+# to grab ~150 words starting from a deterministic paragraph index. When the
+# starting paragraph and the next paragraph happened to be the long Tanya
+# (RECOGNITION v05) and Sarah (MECHANISM_PROOF v02) blocks from the same file,
+# both bodies were pasted together into the same DEPTH slot — and the same
+# concatenation re-appeared in every chapter the depth pass touched, surfacing
+# as the 9× "campaign that underperforms expectations" leak in Integration
+# Smoke #2 (artifacts/qa/integration_smoke_v2_2026-05-16.md).
+#
+# Integration Smoke #2 confirmed that ``injection_resolver.py`` patches (b) and
+# (c) (PRs #1137 / #1140) are DEAD CODE in spine mode: the spine pipeline
+# routes STORY/SCENE-class content through this file's ``persona_atom`` /
+# ``teacher_atom`` resolution, not through ``resolve_injections``'s
+# ``[STORY_INJECTION_POINT]`` marker path. Patch (d) ports patch (b)'s
+# per-section ARC-block selection logic into the spine-mode resolution path
+# at the leak's source.
+#
+# The selection uses a hash-deterministic index over arc-block candidates
+# keyed on (book_seed, engine, arc_position, chapter, section_index_proxy)
+# so each (chapter, section) coordinate receives a distinct ARC block from
+# the same CANONICAL.txt source.
+
+_ARC_POSITIONS_PATCH_D = (
+    "recognition", "mechanism_proof", "turning_point", "embodiment",
+)
+_CANONICAL_BLOCK_RE_PATCH_D = re.compile(
+    r"^##\s+(?P<arc>RECOGNITION|MECHANISM_PROOF|TURNING_POINT|EMBODIMENT|COST_REVEAL|RECKONING)"
+    r"\s+(?P<var>v\d+)\b",
+    re.IGNORECASE | re.MULTILINE,
+)
+
+
+def _split_canonical_into_atom_blocks(text: str) -> List[Dict[str, str]]:
+    """Parse a CANONICAL.txt into discrete atom blocks.
+
+    Each block's body is the prose between the second ``---`` separator and
+    the next ``---`` (or the next ``## `` header / end of file).
+
+    Returns a list of dicts ``{arc_position, variant, text}`` in source order.
+    Returns ``[]`` if the file does not use the ``## ARC vNN`` block
+    convention; the caller should fall back to whole-file behavior in that
+    case (and is expected to log the degradation).
+
+    Mirrors ``phoenix_v4.planning.injection_resolver._split_canonical_into_atom_blocks``
+    (introduced in PR #1137). Kept as an inline copy in this module so patch (d)
+    is independent of PR #1140's merge state — see commit message for details.
+    """
+    out: List[Dict[str, str]] = []
+    if not text:
+        return out
+    matches = list(_CANONICAL_BLOCK_RE_PATCH_D.finditer(text))
+    for i, m in enumerate(matches):
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+        chunk = text[m.start():end]
+        parts = chunk.split("---")
+        # Header line is parts[0]; YAML-like metadata is parts[1]; prose body
+        # is parts[2]. Some atoms in the wild only have one separator before
+        # the body — fall through to the last part in that case.
+        body = (parts[2] if len(parts) >= 3 else parts[-1]).strip()
+        if not body:
+            continue
+        out.append({
+            "arc_position": m.group("arc").lower(),
+            "variant": m.group("var").lower(),
+            "text": body,
+        })
+    return out
+
+
+def _chapter_to_arc_position_patch_d(chapter_index: int) -> str:
+    """Map 1-based chapter index to arc_position name using 3-chapter bands.
+
+    Mirrors ``phoenix_v4.planning.injection_resolver._chapter_to_arc_position``.
+    Inlined to keep patch (d) independent of injection_resolver imports.
+    """
+    phase = max(0, min((chapter_index - 1) // 3, len(_ARC_POSITIONS_PATCH_D) - 1))
+    return _ARC_POSITIONS_PATCH_D[phase]
+
+
+def _pick_canonical_block_per_section(
+    raw_text: str,
+    *,
+    chapter_index: int,
+    section_index: int,
+    seed: str,
+    slot_label: str,
+    source_path: Path,
+) -> Optional[Dict[str, str]]:
+    """Select a single ARC block from a CANONICAL.txt body per (chapter, section).
+
+    Returns the picked block dict (``{arc_position, variant, text}``) or
+    ``None`` when ``raw_text`` contains no usable blocks.
+
+    Per-pick INFO telemetry is emitted as
+    ``[enrichment_per_section] selected ARC v{N} for chapter {C} section {S}
+    slot {slot_label}``. When the file is single-block we just paste it
+    silently; when the file has 0 ARC blocks (plain-prose CANONICAL.txt) we
+    emit a WARNING so the degraded fallback is visible.
+    """
+    if not raw_text:
+        return None
+    blocks = _split_canonical_into_atom_blocks(raw_text)
+    if not blocks:
+        # Plain-prose CANONICAL.txt without the ## ARC vNN convention —
+        # the caller should fall back to the legacy whole-file chunk path
+        # (degraded) so we never go silent.
+        logger.warning(
+            "[enrichment_per_section] no ARC blocks parsed from %s; "
+            "falling back to legacy prose-chunk path (degraded). "
+            "Consider authoring story_atoms/ or restructuring this file "
+            "with ## ARC_POSITION vNN headers.",
+            source_path,
+        )
+        return None
+    if len(blocks) == 1:
+        # Single-block file: paste verbatim (no warning — this is fine).
+        only = blocks[0]
+        logger.info(
+            "[enrichment_per_section] selected ARC %s %s for chapter %s "
+            "section %s slot %s from %s (single-block file)",
+            only["arc_position"], only["variant"],
+            chapter_index, section_index, slot_label, source_path,
+        )
+        return only
+    # Multi-block file: prefer blocks tagged with this chapter's arc_position;
+    # widen to any block if no arc match exists.
+    arc_pos = _chapter_to_arc_position_patch_d(chapter_index)
+    candidates = [b for b in blocks if b["arc_position"] == arc_pos] or blocks
+    book_seed = seed.split(":inject:")[0] if ":inject:" in seed else seed
+    phase = max(0, min((chapter_index - 1) // 3, 3))
+    pick_seed = (
+        f"{book_seed}:enrichment_per_section:{source_path.parent.name}:"
+        f"{arc_pos}:phase{phase}:{chapter_index}:{section_index}:{slot_label}"
+    )
+    pick = candidates[_deterministic_index(pick_seed, len(candidates))]
+    logger.info(
+        "[enrichment_per_section] selected ARC %s %s for chapter %s "
+        "section %s slot %s from %s",
+        pick["arc_position"], pick["variant"],
+        chapter_index, section_index, slot_label, source_path,
+    )
+    return pick
+
+
 def _select_prose_chunk(content: str, seed: str, min_words: int = 21) -> Optional[str]:
     """
     Select a coherent prose chunk from extracted CANONICAL text.
@@ -1770,6 +1924,7 @@ def _load_depth_content(
     repo_root: Path,
     book_seen_bodies: Optional[set] = None,
     locale: Optional[str] = None,
+    section_index: int = 0,
 ) -> Optional[str]:
     """
     Load actual content for a depth module from a specific source.
@@ -1779,6 +1934,12 @@ def _load_depth_content(
     When provided, any content whose normalized body is already in the set is skipped
     so the caller can fall through to the next source and avoid producing duplicate
     paragraphs that _dedup_repeated_blocks would strip later.
+
+    section_index: positional index of this depth-slot within its chapter. Added
+    by patch (d) of dedupe-leak diagnosis (2026-05-16) so the persona_atom
+    branch can pick a distinct CANONICAL.txt ARC block per (chapter, section)
+    via _pick_canonical_block_per_section. Defaults to 0 for legacy callers
+    so existing tests stay green.
     """
     source_type = source.get("type")
     persona_id = (persona_id or "").strip()
@@ -1801,12 +1962,28 @@ def _load_depth_content(
             atoms = sorted(atom_dir.glob("*.yaml"))
             if not atoms:
                 continue
-            idx = _deterministic_index(f"{seed}:teacher:{slot_type}", len(atoms))
-            atom_data = _load_yaml(atoms[idx])
+            # Patch (d): include chapter_index and section_index in the seed so
+            # that multiple depth_module:teacher_atom slots in the same chapter
+            # pick distinct YAML atoms rather than the same idx. Teacher YAMLs
+            # are atomic (one body per file), so no ARC-block parsing is
+            # required here — but per-section variation in the index is still
+            # the right behavior. INFO telemetry mirrors the persona_atom path
+            # so audit is consistent.
+            idx = _deterministic_index(
+                f"{seed}:teacher:{slot_type}:ch{chapter_number}:sec{section_index}",
+                len(atoms),
+            )
+            atom_path = atoms[idx]
+            atom_data = _load_yaml(atom_path)
             content = str(atom_data.get("body") or atom_data.get("content") or "").strip()
             if content and len(content.split()) > 20:
                 if book_seen_bodies is not None and _norm_ws(content) in book_seen_bodies:
                     continue  # already used in another chapter — skip to next slot_type
+                logger.info(
+                    "[enrichment_per_section] selected teacher_atom %s for chapter %s "
+                    "section %s slot %s from %s",
+                    atom_path.stem, chapter_number, section_index, slot_type, atom_path,
+                )
                 return content
         return None
 
@@ -1824,22 +2001,40 @@ def _load_depth_content(
         for slot_type in slot_types:
             slot_dir = repo_root / "atoms" / persona_id / topic / slot_type
             canonical = _canonical_for(slot_dir)
-            if canonical.exists():
-                raw = canonical.read_text(encoding="utf-8")
-                prose = _extract_prose_from_canonical(raw)
-                # Use "depth_pa" prefix in seed so depth picks a DIFFERENT starting
-                # paragraph than base enrichment (which uses "{seed}:ch{N}:{slot}").
-                # _select_prose_chunk_unique additionally skips individual paragraphs
-                # already in book_seen_bodies so cross-chapter depth dedup is maintained.
-                chunk = _select_prose_chunk_unique(
-                    prose,
-                    f"{seed}:depth_pa:{chapter_number}:{slot_type}",
-                    book_seen_bodies,
-                )
-                if chunk:
-                    if book_seen_bodies is not None and _norm_ws(chunk) in book_seen_bodies:
-                        continue  # whole chunk already seen — skip to next slot_type
-                    return chunk
+            if not canonical.exists():
+                continue
+            raw = canonical.read_text(encoding="utf-8")
+            # Patch (d): try ARC-block selection FIRST. If the file is properly
+            # structured with ## ARC vNN headers, this gives one block per
+            # (chapter, section) and closes the cross-atom paragraph
+            # concatenation leak that surfaced as the 9× Tanya paragraph in
+            # Integration Smoke #2 (artifacts/qa/integration_smoke_v2_2026-05-16.md).
+            block = _pick_canonical_block_per_section(
+                raw,
+                chapter_index=chapter_number,
+                section_index=section_index,
+                seed=f"{seed}:depth_pa:{slot_type}",
+                slot_label=f"depth_pa:{slot_type}",
+                source_path=canonical,
+            )
+            if block is not None:
+                btext = block["text"]
+                if book_seen_bodies is not None and _norm_ws(btext) in book_seen_bodies:
+                    continue  # already used — skip to next slot_type
+                return btext
+            # Plain-prose CANONICAL.txt without ARC headers — fall back to the
+            # legacy prose-chunk path so we never go silent (a WARNING was
+            # already emitted by _pick_canonical_block_per_section above).
+            prose = _extract_prose_from_canonical(raw)
+            chunk = _select_prose_chunk_unique(
+                prose,
+                f"{seed}:depth_pa:{chapter_number}:{slot_type}:sec{section_index}",
+                book_seen_bodies,
+            )
+            if chunk:
+                if book_seen_bodies is not None and _norm_ws(chunk) in book_seen_bodies:
+                    continue
+                return chunk
         topic_dir = repo_root / "atoms" / persona_id / topic
         if topic_dir.exists():
             for engine_dir in sorted(topic_dir.iterdir()):
@@ -1850,18 +2045,37 @@ def _load_depth_content(
                 if engine_dir.name == "locales":
                     continue
                 canonical = _canonical_for(engine_dir)
-                if canonical.exists():
-                    raw = canonical.read_text(encoding="utf-8")
-                    prose = _extract_prose_from_canonical(raw)
-                    chunk = _select_prose_chunk_unique(
-                        prose,
-                        f"{seed}:depth_eng:{chapter_number}:{engine_dir.name}",
-                        book_seen_bodies,
-                    )
-                    if chunk:
-                        if book_seen_bodies is not None and _norm_ws(chunk) in book_seen_bodies:
-                            continue
-                        return chunk
+                if not canonical.exists():
+                    continue
+                raw = canonical.read_text(encoding="utf-8")
+                # Patch (d): ARC-block selection on the engine-dir path. THIS
+                # is the actual leak site — pre-patch this branch concatenated
+                # adjacent atom prose bodies (e.g. RECOGNITION v05 Tanya +
+                # MECHANISM_PROOF v02 Sarah) into the same DEPTH slot.
+                block = _pick_canonical_block_per_section(
+                    raw,
+                    chapter_index=chapter_number,
+                    section_index=section_index,
+                    seed=f"{seed}:depth_eng:{engine_dir.name}",
+                    slot_label=f"depth_eng:{engine_dir.name}",
+                    source_path=canonical,
+                )
+                if block is not None:
+                    btext = block["text"]
+                    if book_seen_bodies is not None and _norm_ws(btext) in book_seen_bodies:
+                        continue
+                    return btext
+                # Plain-prose engine CANONICAL.txt — degraded fallback.
+                prose = _extract_prose_from_canonical(raw)
+                chunk = _select_prose_chunk_unique(
+                    prose,
+                    f"{seed}:depth_eng:{chapter_number}:{engine_dir.name}:sec{section_index}",
+                    book_seen_bodies,
+                )
+                if chunk:
+                    if book_seen_bodies is not None and _norm_ws(chunk) in book_seen_bodies:
+                        continue
+                    return chunk
         return None
 
     if source_type == "registry_variant":
@@ -2035,6 +2249,13 @@ def _fill_chapter_depth(
         for source in module.get("sources", []):
             if not isinstance(source, dict):
                 continue
+            # Patch (d): pass the current positional offset within the chapter
+            # as section_index. Each successive _load_depth_content call (and
+            # therefore each appended depth slot) gets a distinct section_index,
+            # which feeds _pick_canonical_block_per_section's pick_seed and
+            # ensures per-section variation across multiple depth slots in the
+            # same chapter+module+round+pass.
+            _sec_idx_for_depth = len(chapter.slots)
             content = _load_depth_content(
                 source=source,
                 topic=topic,
@@ -2045,6 +2266,7 @@ def _fill_chapter_depth(
                 repo_root=root,
                 book_seen_bodies=book_seen_bodies,
                 locale=locale,
+                section_index=_sec_idx_for_depth,
             )
             if not content:
                 continue
