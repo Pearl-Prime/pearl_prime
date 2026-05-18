@@ -527,8 +527,57 @@ def _find_story_content(
         persona_story = repo_root / "atoms" / persona / top / "STORY" / "CANONICAL.txt"
         if persona_story.is_file():
             text = persona_story.read_text(encoding="utf-8").strip()
-            if text and _story_words(text) > 20:
-                return {"text": text, "source": "injection:persona_story"}
+            if text:
+                blocks = _split_canonical_into_atom_blocks(text)
+                if not blocks:
+                    # Plain-prose STORY/CANONICAL.txt without the ## ARC vNN
+                    # convention — fall back to current verbatim behavior so
+                    # we never go silent. This is degraded: every (chapter,
+                    # section) gets the same whole-file blob and intra-chapter
+                    # dedupe is the only line of defense. Mirrors the
+                    # canonical-engine-branch degraded path (see patch b).
+                    if _story_words(text) > 20:
+                        _LOG.warning(
+                            "[persona_story] no ARC blocks found in %s; "
+                            "degraded behavior (whole-file paste), consider "
+                            "authoring story_atoms/%s/anchored/%s/...",
+                            persona_story, persona, top,
+                        )
+                        return {"text": text, "source": "injection:persona_story"}
+                else:
+                    arc_pos = _chapter_to_arc_position(chapter_index)
+                    # Prefer blocks tagged with this chapter's arc_position;
+                    # widen to any long-enough block if no arc match exists.
+                    candidates = [
+                        b for b in blocks
+                        if b["arc_position"] == arc_pos and _story_words(b["text"]) > 20
+                    ] or [b for b in blocks if _story_words(b["text"]) > 20]
+                    if candidates:
+                        # Strip the per-section `:inject:{ch}:{sec}` suffix so we
+                        # match the book-level seed contract from
+                        # _find_story_atoms_content, then inject the full
+                        # (chapter, section, arc_pos, phase) coordinate so different
+                        # slots resolve to different blocks deterministically.
+                        book_seed = seed.split(":inject:")[0] if ":inject:" in seed else seed
+                        phase = max(0, min((chapter_index - 1) // 3, 3))
+                        pick_seed = (
+                            f"{book_seed}:persona_story:{arc_pos}:"
+                            f"phase{phase}:{chapter_index}:{section_index}"
+                        )
+                        pick = candidates[_deterministic_index(pick_seed, len(candidates))]
+                        _LOG.info(
+                            "[persona_story_per_section] selected ARC %s %s for "
+                            "chapter %s section %s from %s",
+                            pick["arc_position"], pick["variant"],
+                            chapter_index, section_index, persona_story,
+                        )
+                        return {
+                            "text": pick["text"],
+                            "source": (
+                                f"injection:persona_story:"
+                                f"{pick['arc_position']}:{pick['variant']}"
+                            ),
+                        }
 
         topic_dir = repo_root / "atoms" / persona / top
         if topic_dir.is_dir():
