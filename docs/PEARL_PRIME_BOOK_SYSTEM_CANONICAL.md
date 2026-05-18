@@ -26,11 +26,38 @@ Pilot script `scripts/pilot/run_spine_pipeline.py` is a standalone minimal
 harness and is KEPT as a reference implementation for debugging spine
 enrichment in isolation. It may NOT be used for production output.
 
+### 1.1 — Code default drift (KNOWN; pending flip)
+
+As of 2026-05-18, the `--pipeline-mode` argparse default in
+`scripts/run_pipeline.py:1604` is `"registry"`, NOT `"spine"`. This is
+the most consequential spec↔code drift in Pearl Prime today: the spec
+above says spine is mandatory; the code default is registry. Agents
+that omit `--pipeline-mode` are silently routed to the legacy path.
+
+**Until the code default flips, every Pearl_Prime CLI invocation
+MUST pass `--pipeline-mode spine` explicitly.** Confirm the flag is in
+the invocation BEFORE running. Sample audit:
+```bash
+grep -- "--pipeline-mode spine" "$YOUR_RUN_SCRIPT"
+```
+
+Routed for fix as `ws_pipeline_mode_default_flip_to_spine_20260518`
+(Pearl_Dev; small one-line change at `scripts/run_pipeline.py:1604`
++ `:1763` + `:1951` + `:2295`; plus a regression test that asserts
+the default at module import). Scheduled before any catalog-scale
+production run.
+
 ## 2. Structural format
 
-- **12 chapters** per book
+- **chapter count is per-runtime-format** — see `config/format_selection/format_registry.yaml` for the canonical value. As of 2026-05-18:
+  - `standard_book` → **10 chapters** (`chapter_count_default: 10`; the most consequential default per AUTO-PLAN-SSOT-01-AMENDMENT Group B)
+  - `extended_book_2h` → 14 chapters (works at 12 when paired with a 12-chapter F006 arc per `phoenix_v4/planning/format_selector.py:263-277`)
+  - `deep_book_6h` → 16 chapters (per `chapter_count_default`)
+  - 12-chapter arcs (F006 "Nervous System Ladder" et al.) remain valid for `extended_book_2h` and any format whose `compatible_structural_formats` includes F006
 - **10 sections** per chapter
-- **5 variants** per section (selected deterministically by seed)
+- **≥ 3 variants** per section (target 5 where authored; minimum 3 per TEMPLATE-UNIVERSAL-01 + SPEC-739-THRESHOLD-01; selected deterministically by seed)
+
+**No "12 chapters per book" canonical claim.** Prior drafts of this doc said 12; that was drift against the registry. The registry is the SSOT for `chapter_count_default` per format. See cap entry AUTO-PLAN-SSOT-01-AMENDMENT in `docs/PEARL_ARCHITECT_STATE.md` for the reconciliation history.
 
 Section types include `SCENE`, `DEPTH`, `TEACHER`, etc. (authoritative list
 lives in the format registry; see §6). SCENE slots live at section indices
