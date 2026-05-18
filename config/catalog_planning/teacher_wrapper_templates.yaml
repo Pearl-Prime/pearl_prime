@@ -15,6 +15,18 @@ named:
       - "In {TEACHER_NAME}'s framework, the path begins with..."
       - "Drawing on {TEACHER_NAME}'s {TEACHING_LINEAGE} approach..."
       - "{TEACHER_NAME} describes this as the foundation of {TRADITION_SHORT}..."
+      # Additive +7 sibling variants per ws_teacher_wrapper_intro_variants_diversification_20260518.
+      # Diversifies the pool 4 → 11 to dilute scene_anchor_density collisions in chapters that
+      # wrap multiple substance slots in named mode (TEACHER-MODE-WRAPPER-SEMANTICS-01 wrapper-line-budget).
+      # All variants are tradition-neutral so they remain doctrinally compatible across the teacher roster
+      # (Tantric, Zen, Theravada, Taoist, bhakti, somatic-therapist, integration-mystic).
+      - "What {TEACHER_NAME} returns to again and again is this..."
+      - "For {TEACHER_NAME}, the work begins in the body, not the idea..."
+      - "Sit with {TEACHER_NAME}'s {TEACHING_LINEAGE} long enough and one thread emerges..."
+      - "{TEACHER_NAME}'s reading of this is precise: ..."
+      - "Where {TEACHER_NAME} departs from the usual framing is here..."
+      - "Across {TEACHER_NAME}'s {TRADITION_SHORT} work, the through-line is..."
+      - "What {TEACHER_NAME} keeps pointing toward is..."
     slot_requirements: [TEACHER_NAME, TEACHING_LINEAGE]
 
   exercise_wrapper:
