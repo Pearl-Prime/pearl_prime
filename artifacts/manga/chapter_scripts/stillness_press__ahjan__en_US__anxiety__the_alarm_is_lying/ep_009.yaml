@@ -1,0 +1,384 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# CHAPTER SCRIPT — The Alarm Is Lying — Episode 9
+# ═══════════════════════════════════════════════════════════════════════════
+# Series:        stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+# Episode:       ep_009 — "Saturday, 2:38 PM"
+# Author (EI):   Hana Tidecalm
+# Teacher:       ahjan
+# Engine:        false_alarm
+# Genre:         iyashikei
+# Style:         cozy_iyashikei
+#
+# Continuity from ep_008:
+#   Two weeks later. The hardest iyashikei episode to write: nothing
+#   dramatic happens. Mira does the laundry, walks to the corner store,
+#   sits on a bench in the late-spring sun, comes home. The practice
+#   has become so settled she no longer reaches for it. The episode's
+#   doctrinal contribution: this is what mastery looks like — invisible,
+#   unceremonious, an ordinary afternoon.
+#
+# Episode arc — the practice as invisible:
+#   safety opening (folding laundry, sunlight) → no climax (one tiny
+#   moment of activation, met without effort) → continued ground (walking,
+#   sitting, watching) → Long Drop (the bench in the small park) →
+#   completion (back home, the apartment, evening)
+#
+# SCROLL THERAPEUTIC TEST:
+#   1. Safety cue inside first 800 px ........ ✓ panel 1 (folded laundry + sun stripe)
+#   2. ≥3 oscillations activation/ground ...... ✓ 3 oscillations (minimum; the episode IS ground)
+#   3. Activation:Ground ≤ 1:2.5 .............. ✓ ~4 activation / ~22 ground panels — most extreme ratio
+#   4. Closes with completion ................. ✓ panels 24-26 settle (already settled all episode)
+#   5. HRV-style end-state delta .............. (Phase 2)
+#
+# CRAFT FORMULAS (the most subtractive episode):
+#   Tea Beat (panel 26 closing only — Saturday afternoon opens on laundry)
+#   Anchor Panel — apartment succulent (panel 1) and a different bench
+#     park-plant the practice catches on the way home (panel 19)
+#   Awe-Pullback (panel 13 — small neighborhood street wide, no people)
+#   Pendulation Pair (MINIMAL — only 7-8 and 12-13; the episode is mostly
+#     all ground)
+#   Long Drop (panel 18 — park bench, this time during the day, not after
+#     a hard interaction; just the bench as Saturday afternoon allows)
+#   Continuity callback: jade pendant present (panel 1 = on her neck
+#     waking up; panel 26 = still on; she does not touch it once the
+#     whole episode. The practice is below the level of needing the
+#     anchor.)
+#
+# DOCTRINAL ANCHOR:
+#   This is the hardest doctrinal claim of the series: the practice
+#   eventually becomes invisible to the practitioner. Not gone —
+#   functioning. The reader sees what Mira no longer sees: the small
+#   moments where the practice would have caught her, except the practice
+#   has so settled into background presence that there is nothing to
+#   catch. This is iyashikei's truest expression: the work is to disappear.
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+schema_version: "1.0.0"
+artifact_type: chapter_script_writer_handoff
+schema_authority: schemas/manga/chapter_script_writer_handoff.schema.json
+
+series_id: stillness_press__ahjan__en_US__anxiety__the_alarm_is_lying
+chapter_id: ep_009
+title: "The Alarm Is Lying — Episode 9: Saturday, 2:38 PM"
+manga_author: Hana Tidecalm
+teacher_id: ahjan
+brand_id: stillness_press
+engine: false_alarm
+locale: en_US
+default_locale: en_US
+available_locales: [en_US]
+
+main_characters:
+  - id: mira
+    name: Mira Aoki
+    age: 33
+    role: protagonist
+    visual_anchor: "long brown hair loose, cream sweater + soft black leggings (weekend at-home register), jade pendant visible at neckline (worn but not touched all episode)"
+
+scene_palette:
+  primary: warm Saturday-afternoon gold + cream
+  secondary: pale sage (apartment plants) + soft cobalt (sky through windows)
+  accent: jade green (pendant + succulent + small park bench fern)
+  street_palette: late-spring sun + cool blue sky
+  park_palette: golden afternoon haze + soft green canopy
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PAGES (26 panels — the lightest episode by count; pacing is the message)
+# ═══════════════════════════════════════════════════════════════════════════
+
+pages:
+  - page_id: ep_009_p01
+    panels:
+
+      # ── OPENING — laundry, sun ─────────────────────────────────────────
+      - panel_id: ep009_001
+        scene: |
+          Close-up — a small folded stack of cream sweaters on a wooden
+          floor (laundry just sorted), a bar of afternoon sunlight
+          falling diagonally across them. Dust motes visible in the
+          beam. The succulent on the kitchen sill caught in the corner
+          of the frame, soft focus.
+        beat_type: ~
+        intent: "SAFETY CUE first 800 px — laundry + sun; pure ground opener"
+        silence_confirmed: true
+
+      - panel_id: ep009_002
+        scene: |
+          Wider — Mira sitting cross-legged on her apartment floor near
+          the laundry pile. Cream sweater, black leggings. Hair loose.
+          Hand smoothing a wrinkle on a folded shirt.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "Saturday. Two thirty-eight."
+
+      - panel_id: ep009_003
+        scene: |
+          Close — Mira's hand picking up a folded sweater, walking it to
+          a drawer. The drawer is half-open already.
+        beat_type: micro
+        intent: "Ordinary task — nothing to perform"
+
+      - panel_id: ep009_004
+        scene: |
+          The drawer sliding shut with a soft thump. The apartment quiet.
+        beat_type: spatial
+        sfx_by_locale:
+          en_US: ["clm..."]
+
+      # ── ACTIVATION 1 — tiny, met without effort ────────────────────────
+      - panel_id: ep009_005
+        scene: |
+          Mira at the kitchen sink, rinsing a single cup. A small thought
+          arrives — something about a project deadline. The body registers
+          for a flicker.
+        beat_type: micro
+        intent: "Activation 1 — minimum; the episode's only real spike"
+        sfx_by_locale:
+          en_US: ["..."]
+
+      - panel_id: ep009_006
+        scene: |
+          Close on Mira's face — eyes a little distant, then back. The
+          thought has passed. She sets the cup on the drying rack.
+        beat_type: micro
+        intent: "Met without effort — no pendant touch, no breath ritual"
+
+      # ── GROUND 1 — the cup in the rack ─────────────────────────────────
+      - panel_id: ep009_007
+        scene: |
+          Close on the cup, water still beaded on it. The afternoon
+          light catches a single drop.
+        beat_type: micro
+
+      - panel_id: ep009_008
+        scene: |
+          Mid-shot — Mira drying her hands on a towel by the sink. She is
+          looking out the window. Nothing in particular. Just looking.
+        beat_type: spatial
+        intent: "GROUND — the looking itself"
+        silence_confirmed: true
+
+      # ── DECISION — walk to the store ────────────────────────────────────
+      - panel_id: ep009_009
+        scene: |
+          Mira at the front door of her apartment, slipping on canvas
+          shoes. A small canvas tote bag on her shoulder.
+        beat_type: spatial
+        intent: "Scene transition — apartment → outside"
+
+      - panel_id: ep009_010
+        scene: |
+          Wide — Mira on the sidewalk outside her building. Late-spring
+          Saturday, soft cobalt sky, the trees in leaf. A woman walking
+          a small dog passes by. The light is golden.
+        beat_type: standard
+
+      - panel_id: ep009_011
+        scene: |
+          Close on Mira's feet walking. Sneakers on warm concrete. A
+          fallen petal on the sidewalk that she steps around without
+          thinking about it.
+        beat_type: micro
+
+      - panel_id: ep009_012
+        scene: |
+          Mira at a small corner store. Picking up a single lemon, a
+          bunch of basil, a small bottle of milk. The cashier nods. She
+          nods back. No words.
+        beat_type: standard
+        silence_confirmed: true
+
+      # ── AWE-PULLBACK — the street ──────────────────────────────────────
+      - panel_id: ep009_013
+        scene: |
+          Wide pullback. The neighborhood street from above-shoulder
+          angle. Late afternoon. A few pedestrians, parked cars, leafy
+          trees, an awning. Mira walking with the canvas tote, small in
+          the frame. Intentionally over-wide. No drama, just dimension.
+        beat_type: miyazaki_ma
+        intent: "AWE-PULLBACK — the ordinary held in light"
+
+      # ── A SMALL DETOUR — the park ──────────────────────────────────────
+      - panel_id: ep009_014
+        scene: |
+          Mira at a small intersection. She glances right — a small
+          neighborhood park visible, half a block down. She turns toward
+          it.
+        beat_type: micro
+        intent: "Choice — unscheduled, low-stakes"
+
+      - panel_id: ep009_015
+        scene: |
+          Wide — the small park: a fountain (off), a single wooden bench
+          under a tree, a few people on the grass. Mira walks toward the
+          bench.
+        beat_type: standard
+
+      - panel_id: ep009_016
+        scene: |
+          Close — Mira sitting on the bench, the canvas tote beside her.
+          She is not on her phone. Just sitting.
+        beat_type: micro
+
+      - panel_id: ep009_017
+        scene: |
+          Close — Mira's hand on the bench's wooden slat. Sun-warmed.
+          She feels the grain.
+        beat_type: micro
+        intent: "Sensory anchor — but without the meta-noticing"
+
+      # ── LONG DROP — the bench, daytime ─────────────────────────────────
+      - panel_id: ep009_018
+        scene: |
+          Wide silent panel. Mira on the bench, head tipped back slightly,
+          eyes closed. The afternoon sun on her face. A small fern beside
+          the bench, jade-green. A child laughing somewhere in the
+          distance, but the panel itself is composed silent — NO TEXT,
+          NO CAPTION, NO SFX. Deliberate empty sky.
+        beat_type: long_drop
+        intent: "LONG DROP — daytime, no precipitating event. Just the bench."
+        silence_confirmed: true
+        dialogue_lines: []
+
+      - panel_id: ep009_019
+        scene: |
+          Close — the small fern beside the bench. Jade-green, slightly
+          translucent in the sun. The visual rhyme catches Mira's eye as
+          she opens hers and stands.
+        beat_type: micro
+        intent: "ANCHOR — the practice is visible to her without effort"
+
+      # ── WALK HOME ──────────────────────────────────────────────────────
+      - panel_id: ep009_020
+        scene: |
+          Mira walking back, canvas tote with the lemon and basil and
+          milk. Soft afternoon light. She passes the same fallen petal
+          on the sidewalk — a small smile she does not perform.
+        beat_type: spatial
+        intent: "Continuity — the small returning"
+
+      - panel_id: ep009_021
+        scene: |
+          Mira at the door of her apartment building. The lobby light
+          warm. She is humming faintly — the reader sees the wave of her
+          mouth, no SFX.
+        beat_type: micro
+        intent: "Subtle joy — not articulated"
+
+      # ── COMPLETION — apartment, evening light ─────────────────────────
+      - panel_id: ep009_022
+        scene: |
+          Mira in her kitchen, unpacking the tote bag onto the counter.
+          The lemon, the basil, the milk. The succulent on the sill
+          visible behind, the late afternoon light fading toward evening.
+        beat_type: standard
+
+      - panel_id: ep009_023
+        scene: |
+          Close — Mira's hand setting the basil into a small glass of
+          water by the windowsill, next to the succulent. The two greens
+          beside each other.
+        beat_type: micro
+        intent: "ANCHOR — the visual rhyme is now a habit of placement"
+
+      - panel_id: ep009_024
+        scene: |
+          Cut to early evening. Mira on the couch, the paperback from
+          ep_006 in her lap, reading. The candle on the side table lit.
+          Soft cream-gold light.
+        beat_type: spatial
+        intent: "Bookend nod to ep_006 — the apartment in evening register"
+
+      # ── COMPLETION — kettle, the bookend ───────────────────────────────
+      - panel_id: ep009_025
+        scene: |
+          The kettle on the stove, just beginning to steam. Same kettle.
+          The evening sky purple-blue through the kitchen window beyond.
+        beat_type: spatial
+        sfx_by_locale:
+          en_US: ["hsss..."]
+
+      - panel_id: ep009_026
+        scene: |
+          Final panel — Mira at the kitchen table with the cup of tea.
+          The basil in the glass and the succulent in the pot side by
+          side on the windowsill behind her. Jade pendant at her neck.
+          Eyes peaceful. Caption strip below.
+        beat_type: micro
+        narrator_caption_by_locale:
+          en_US: "Nothing happened today. That is the practice."
+        dialogue_lines: []
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WRITER NOTES
+# ═══════════════════════════════════════════════════════════════════════════
+notes:
+  arc_position: |
+    Episode 9 of 10. The hardest iyashikei beat in the series to write:
+    NOTHING happens. The doctrinal point is that the practice has become
+    invisible to Mira (she does not touch the pendant once the entire
+    episode — the only episode where this is true) but visible to the
+    reader (the small fern beside the bench catches her eye, the basil
+    placed beside the succulent, the small smile at the same petal on
+    the sidewalk). The practice is now part of seeing, not a separate
+    technique. The closing caption "Nothing happened today. That is the
+    practice." names this directly — the most direct doctrinal naming
+    of the series after ep_007's caption.
+  pacing_vs_prior: |
+    26 panels — lightest of the series. Most extreme activation:ground
+    ratio so far (4:22 — well below 1:2.5 cap). The episode is mostly
+    GROUND. No phone calls, no people-conversations, no work, no
+    family. The activation at panel 5 is the only spike and it is met
+    without ritual.
+  continuity_callbacks: |
+    - Kettle bookend (panel 25-26)
+    - Succulent on the kitchen sill (panel 1, 22, 23, 26) — present in
+      4 panels, more visible than usual; the visual rhyme is the episode's
+      theme
+    - Jade pendant — worn from waking (panel 1 implicit, panel 26 explicit)
+      but NEVER TOUCHED across the entire episode. The first and only
+      episode this is true. Doctrinally important: the practice has
+      moved below the level of the anchor gesture.
+    - Basil — NEW prop introduced this episode (callback to ep_006's
+      mother's basil + window box). Placed beside the succulent at
+      panel 23 — visual rhyme to home and to mother both
+    - Park bench — second time the series visits a park bench (ep_003
+      was the first). Different bench, different park, different time
+      of day. Visual variety preserved.
+    - Cream sweater + leggings — same character lock-in
+    - Smoke detector image — absent
+    - "It is not danger" caption — absent
+  craft_notes: |
+    The challenge of this episode is keeping the reader engaged through
+    sustained quiet. The Awe-Pullback at panel 13 and the Long Drop at
+    panel 18 provide compositional scale-resets. The micro/spatial beat
+    ratio is heavy (panels 1, 3-9, 11-12, 15-17, 19-21, 23 = ~16 micro/
+    spatial beats out of 26 total). The reader's engagement is held by
+    the visual rhyme system (sun stripe → cup → fern → basil → window
+    light) — the practice as visible-to-reader-not-to-Mira.
+  long_drop_position: |
+    Panel 18 — daytime park bench. Ninth Long Drop. Departs from the
+    convention of Long Drop following hard interaction — this one
+    follows nothing in particular, which is the point. The day permits
+    the bench. Iyashikei doctrinal claim: ordinary moments can hold
+    long-drop weight when the body has the practice.
+  closing_caption: |
+    "Nothing happened today. That is the practice." Two sentences.
+    The most direct doctrinal naming in the series. Justified by this
+    being the doctrinal pivot — the episode that establishes mastery
+    is invisible. Without this caption, the reader could miss the
+    point and feel the episode is "boring" rather than "the achievement."
+  translation_handoff: |
+    Same as prior episodes. New locked phrase: "Nothing happened today.
+    That is the practice." (panel 26).
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DOWNSTREAM CONSUMPTION
+# ═══════════════════════════════════════════════════════════════════════════
+# 1. visual_from_script_v3 → FLUX prompts (PR #655)
+# 2. lettering_from_script → v3 lettering_spec
+# 3. bubble_render with locale → per-market bubbles (PR #648)
+# 4. webtoon_compose → vertical strip (PR #650)
+# 5. r2_push_helper.push_book_render() (PR #637)
+# 6. webtoon_canvas_upload package (PR #630)
