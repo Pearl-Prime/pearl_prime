@@ -473,3 +473,66 @@ variants:
     signature_phrases: ["repetition is how patterns ask to be seen"]
     forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
     notes_for_selector: "Third declarative short — pattern-visibility frame. Distinct rhythm from both prior declarative shorts."
+
+  - variant_id: gfg_021
+    slot_type: FLOW_GLUE
+    body: Calling it by its real name is the first cost the body stops paying alone.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.7
+      embodiment: 0.7
+    collision_family: naming_beat
+    signature_phrases: ["calling it by its real name", "first cost the body stops paying alone"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Fifth naming beat — somatic framing of naming as cost-sharing. Distinct from gfg_005/006/008/013 surface forms."
+
+  - variant_id: gfg_022
+    slot_type: FLOW_GLUE
+    body: The label is not the answer, but it changes the room you are answering in.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.7
+      practical_transfer: 0.6
+    collision_family: naming_beat
+    signature_phrases: ["the label is not the answer", "changes the room you are answering in"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Sixth naming beat — overclaim-management frame as alternative to gfg_013. Different surface, same posture."
+
+  - variant_id: gfg_023
+    slot_type: FLOW_GLUE
+    body: A precise name turns a private weight into a shared one.
+    topic_allowlist: []
+    topic_blocklist: []
+    persona_allowlist: []
+    frame_allowlist: ["secular", "workplace", "clinical", "nervous_system", "contemplative", "buddhist", "comparative_religion"]
+    frame_blocklist: []
+    runtime_allowlist: ["quick_book_15m", "quick_book_30m", "standard_book_1h", "deep_book_2h", "deep_book_4h", "deep_book_6h"]
+    band: 2
+    intensity: 2
+    mechanism_depth: 1
+    ontgp_move: name
+    ei_v2_targets:
+      engagement: 0.7
+      embodiment: 0.6
+    collision_family: naming_beat
+    signature_phrases: ["a precise name turns a private weight into a shared one"]
+    forbidden_terms: ["What this means is", "What matters here is", "The point is", "Put simply"]
+    notes_for_selector: "Seventh naming beat — relational shift frame. Distinct from all prior naming beats (somatic, consequence, overclaim, pattern)."
