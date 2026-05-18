@@ -1,0 +1,82 @@
+name: Pearl News Doctrine Consistency
+
+# Advisory gate — surfaces Pearl News teacher pack drift from doctrine SSOT.
+# Currently runs in --report mode (exit 0). Flip to --strict once the
+# doctrine campaign Phase A/B content rewrites complete.
+
+on:
+  pull_request:
+    paths:
+      - 'pearl_news/**'
+      - 'SOURCE_OF_TRUTH/teacher_banks/**'
+      - 'config/teachers/teacher_registry.yaml'
+      - 'scripts/ci/pearl_news_doctrine_consistency.py'
+  workflow_dispatch:
+    inputs:
+      strict:
+        description: 'Run in --strict mode (fail on ERROR)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  consistency:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install pyyaml
+        run: pip install pyyaml
+
+      - name: Run doctrine-consistency gate
+        id: gate
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          mode=""
+          if [ "${{ inputs.strict || 'false' }}" = "true" ]; then
+            mode="--strict"
+          fi
+          python3 scripts/ci/pearl_news_doctrine_consistency.py $mode \
+            | tee artifacts/doctrine_consistency.txt
+          python3 scripts/ci/pearl_news_doctrine_consistency.py --json \
+            > artifacts/doctrine_consistency.json
+
+      - name: Write step summary
+        if: always()
+        run: |
+          {
+            echo "## Pearl News — Doctrine Consistency Report"
+            echo ""
+            echo '```'
+            cat artifacts/doctrine_consistency.txt
+            echo '```'
+            echo ""
+            errors=$(python3 -c "import json; d=json.load(open('artifacts/doctrine_consistency.json')); print(d['summary']['errors'])")
+            warnings=$(python3 -c "import json; d=json.load(open('artifacts/doctrine_consistency.json')); print(d['summary']['warnings'])")
+            echo "**Errors:** \`$errors\`  **Warnings:** \`$warnings\`"
+            echo ""
+            if [ "$errors" -gt "0" ]; then
+              echo "> ⚠️ This PR or current state of main contains doctrine drift."
+              echo "> See \`artifacts/coordination/pearl_news_teacher_pack_drift_audit.md\` for the full audit."
+              echo "> Gate runs in **report mode** until the doctrine campaign completes; not blocking."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: doctrine-consistency-${{ github.run_id }}
+          path: artifacts/doctrine_consistency.*
+          retention-days: 30
