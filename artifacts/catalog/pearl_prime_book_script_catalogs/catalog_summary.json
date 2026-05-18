@@ -4,35 +4,39 @@
   "totals": {
     "en_US": {
       "rows": 1478,
-      "ready": 1478,
-      "blocked": 0,
+      "ready": 1127,
+      "blocked": 351,
       "by_status": {
-        "ready": 1478
+        "blocked_arc_missing": 351,
+        "ready": 1127
       }
     },
     "ja_JP": {
       "rows": 1478,
-      "ready": 1478,
-      "blocked": 0,
+      "ready": 1127,
+      "blocked": 351,
       "by_status": {
-        "ready": 1478
+        "blocked_arc_missing": 351,
+        "ready": 1127
       }
     },
     "zh_TW": {
       "rows": 2818,
-      "ready": 2658,
-      "blocked": 160,
+      "ready": 2049,
+      "blocked": 769,
       "by_status": {
+        "blocked_arc_missing": 609,
         "blocked_score": 160,
-        "ready": 2658
+        "ready": 2049
       }
     },
     "zh_CN": {
       "rows": 2630,
-      "ready": 2630,
-      "blocked": 0,
+      "ready": 2021,
+      "blocked": 609,
       "by_status": {
-        "ready": 2630
+        "blocked_arc_missing": 609,
+        "ready": 2021
       }
     }
   },
@@ -82,5 +86,10 @@
       "path": "config/manga/canonical_genre_list.yaml",
       "sha256": "08cc01e2d786a3c0c5747078f5edc39545b1868be61d67504601d45416afe3f5"
     }
-  ]
+  ],
+  "fixup_applied": {
+    "name": "ready_predicate_on_disk_verification",
+    "applied_at": "2026-05-16T06:43:48Z",
+    "note": "Re-applied verify_ready_files_on_disk to existing CSVs in-place. No rows deleted; only readiness_status / blockers / notes flipped on rows where arc/registry/atoms did not resolve on disk."
+  }
 }

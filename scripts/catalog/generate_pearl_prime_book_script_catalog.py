@@ -541,8 +541,13 @@ def is_killed(catalog_config: dict, brand: str, topic: str, persona: str,
 
 # ── Atom / registry slot stubs ──────────────────────────────────────────────
 # We do NOT touch atom banks here. We only emit the *expected* paths so the
-# row clearly declares its dependencies. Atom existence is not validated at
-# row-emit time; readiness_status reflects scoring only.
+# row clearly declares its dependencies.
+#
+# As of agent/catalog-ready-predicate-fix-20260516, status=ready now ALSO
+# requires that the declared arc + registry + atoms actually resolve on disk.
+# Previously, scoring alone was enough — and that mismatch surfaced today as
+# 20 stillness_press × ja_JP rows marked ready against missing adhd_focus +
+# mindfulness master_arc / registry files. See ``verify_ready_files_on_disk``.
 SECTION_TYPES_REPRESENTATIVE = ["scene", "depth", "teacher"]
 
 
@@ -559,6 +564,104 @@ def required_atoms_for(persona: str, topic: str) -> str:
 def output_target_path(locale: str, brand: str, topic: str, persona: str,
                        teacher_id: str) -> str:
     return f"artifacts/books/{locale}/{brand}/{topic}_{persona}_{teacher_id}.json"
+
+
+# ── Ready-predicate on-disk verification ────────────────────────────────────
+# Mirrors the existing ``blocked_score`` / ``blocked_lora`` / ``blocked_teacher``
+# precedents: a specific blocked_<reason> value in readiness_status plus a
+# human-readable token in ``blockers``.
+#
+# Verification order matches the assemble-all consumption order so the first
+# missing dependency is the one surfaced (most actionable). Returns the tuple
+# (readiness_status, blockers_token, notes_fragment).
+#
+# When the row would otherwise be ready, ``verify_ready_files_on_disk`` returns
+# either ("ready", "", "") OR a specific blocked tuple. Callers only invoke
+# this for rows that have already passed every other gate (scoring etc.).
+
+
+def _arc_glob_pattern(persona: str, topic: str) -> str:
+    """Filename pattern under master_arcs/ for any (persona, topic) pair.
+    Pattern: ``<persona>__<topic>__<engine>__<format>.yaml`` (e.g.
+    ``corporate_managers__anxiety__comparison__F006.yaml``)."""
+    return f"{persona}__{topic}__*.yaml"
+
+
+def _atoms_list_from_required_atoms(required_atoms_str: str) -> list[str]:
+    """Split the ``;``-joined required_source_atoms field into a path list."""
+    return [p for p in (required_atoms_str or "").split(";") if p.strip()]
+
+
+def verify_ready_files_on_disk(persona: str, topic: str,
+                               required_atoms_str: str,
+                               config_root: Path | None = None,
+                               *,
+                               enforce_atoms: bool = False,
+                               ) -> tuple[str, str, str]:
+    """Return ('ready', '', '') iff the on-disk source-of-truth files
+    declared by this catalog row exist:
+
+    1. At least one master_arc YAML matching ``<persona>__<topic>__*.yaml``
+       exists under ``config/source_of_truth/master_arcs/``.
+    2. ``registry/<topic>.yaml`` exists.
+    3. (opt-in via ``enforce_atoms=True``) Every path declared in
+       ``required_source_atoms`` exists. NOT enforced by default in this PR.
+
+    On the first failure, returns a blocked tuple. The blocked_<reason>
+    values are new but follow the existing convention (``blocked_score``,
+    ``blocked_lora``, ``blocked_teacher``). The ``blockers`` token mirrors
+    the same pattern (``needs_score`` → ``needs_master_arc`` etc.) so
+    downstream consumers like ``build_final_launch_report.py`` can opt in
+    by name.
+
+    Why atoms are NOT enforced by default
+    -------------------------------------
+    The catalog's ``required_source_atoms`` field is a *representative*
+    schema declaring 4 paths per row:
+        atoms/<persona>/anchored/<topic>/CANONICAL.txt
+        atoms/<persona>/<topic>/scene/CANONICAL.txt
+        atoms/<persona>/<topic>/depth/CANONICAL.txt
+        atoms/<persona>/<topic>/teacher/CANONICAL.txt
+    The on-disk atom topology never matches this schema in full: anchored
+    paths are keyed ``<topic>_<engine>`` (e.g. ``anxiety_shame``), and
+    section subdirs are engine-named (``shame``/``spiral``/...) not
+    ``scene``/``depth``/``teacher``. Enforcing the schema as-is would flip
+    ~95% of rows to ``blocked_atoms_missing`` across all locales, drowning
+    the operator-actionable arc/registry signal. Reconciling the
+    ``required_source_atoms`` schema with the on-disk topology is a
+    separate scope (cap: atom-topology reconciliation, NOT this PR).
+    Callers that have a reconciled schema can opt in with
+    ``enforce_atoms=True``.
+    """
+    root = config_root if config_root is not None else CONFIG_ROOT
+    arcs_dir = root / "config" / "source_of_truth" / "master_arcs"
+    pattern = _arc_glob_pattern(persona, topic)
+    if not any(arcs_dir.glob(pattern)):
+        return (
+            "blocked_arc_missing",
+            "needs_master_arc",
+            f"no master_arc matching {pattern} under config/source_of_truth/master_arcs/",
+        )
+
+    registry_path = root / "registry" / f"{topic}.yaml"
+    if not registry_path.exists():
+        return (
+            "blocked_registry_missing",
+            "needs_registry_topic",
+            f"registry/{topic}.yaml missing",
+        )
+
+    if enforce_atoms:
+        for atom_rel in _atoms_list_from_required_atoms(required_atoms_str):
+            atom_path = root / atom_rel
+            if not atom_path.exists():
+                return (
+                    "blocked_atoms_missing",
+                    "needs_atoms",
+                    f"required atom missing: {atom_rel}",
+                )
+
+    return ("ready", "", "")
 
 
 # ── Row builder ─────────────────────────────────────────────────────────────
@@ -647,6 +750,26 @@ def build_rows_for_locale(locale: str, inputs: dict,
                 if comp < SCORE_THRESHOLD_STRONG:
                     # Below strong threshold and both dimensions explicit → not
                     # a high-confidence row. Filter out to keep catalog tight.
+                    continue
+
+                # On-disk verification gate (agent/catalog-ready-predicate-fix-20260516):
+                # status=ready means scoring AND arc/registry/atoms all resolve.
+                # Any missing source flips the row to a specific blocked_<reason>
+                # value, mirroring the blocked_score / blocked_lora / blocked_teacher
+                # precedents. We DO NOT drop the row — downstream readiness reports
+                # (e.g. build_final_launch_report.py) surface blocked rows by category.
+                disk_status, disk_blockers, disk_note = verify_ready_files_on_disk(
+                    persona, topic, required_atoms_for(persona, topic))
+                if disk_status != "ready":
+                    rows.append(_row(
+                        locale, market_id, brand, teacher_id, teacher_mode,
+                        topic, persona, comp,
+                        catalog_config, locale_names, angle_registry,
+                        readiness=disk_status,
+                        blockers=disk_blockers,
+                        notes=f"composite={comp:.2f}; {disk_note}",
+                    ))
+                    status_counts[disk_status] = status_counts.get(disk_status, 0) + 1
                     continue
 
                 rows.append(_row(
@@ -778,6 +901,96 @@ def git_short_sha() -> str:
         return "unknown"
 
 
+# ── In-place ready-predicate fixup ──────────────────────────────────────────
+# When the generator cannot be re-run end-to-end (e.g. because the brand_wizard
+# YAML SSOT is not present in a given checkout), this entrypoint re-applies the
+# on-disk gate to existing CSVs in-place. It NEVER deletes rows — it only flips
+# status fields and updates the ``notes`` / ``blockers`` columns to mirror the
+# in-generator path used by ``build_rows_for_locale``.
+#
+# Intended use: regression fix for PR agent/catalog-ready-predicate-fix-20260516,
+# where 20 stillness_press × ja_JP rows were ready against missing arc files.
+
+def fixup_ready_predicate_in_place(csv_path: Path) -> dict[str, int]:
+    """Re-apply ``verify_ready_files_on_disk`` to every row where readiness=ready.
+
+    Returns a counter of {status: rows_flipped_to_this_status}. The original
+    ``ready`` count + flipped totals == the original ``ready`` count.
+    """
+    with open(csv_path, "r", encoding="utf-8", newline="") as fh:
+        reader = csv.DictReader(fh)
+        fieldnames = list(reader.fieldnames or COLUMNS)
+        rows = list(reader)
+
+    flipped: dict[str, int] = {}
+    for row in rows:
+        if (row.get("readiness_status") or "").strip() != "ready":
+            continue
+        persona = (row.get("persona") or "").strip()
+        topic = (row.get("topic") or "").strip()
+        required_atoms = (row.get("required_source_atoms") or "").strip()
+        if not (persona and topic):
+            continue
+        status, blockers, note = verify_ready_files_on_disk(
+            persona, topic, required_atoms)
+        if status == "ready":
+            continue
+        row["readiness_status"] = status
+        row["blockers"] = blockers
+        prev_notes = (row.get("notes") or "").strip()
+        row["notes"] = "; ".join(x for x in (prev_notes, note) if x)
+        flipped[status] = flipped.get(status, 0) + 1
+
+    with open(csv_path, "w", encoding="utf-8", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=fieldnames, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+
+    return flipped
+
+
+def _rewrite_summary_after_fixup(out_dir: Path, locales: list[str]) -> None:
+    """Recount readiness status totals from the updated CSVs and rewrite catalog_summary.json."""
+    summary_path = out_dir / "catalog_summary.json"
+    if not summary_path.exists():
+        return
+    with open(summary_path, "r", encoding="utf-8") as fh:
+        summary = json.load(fh)
+
+    totals = summary.get("totals") or {}
+    for locale in locales:
+        csv_path = out_dir / f"{locale}_catalog.csv"
+        if not csv_path.exists():
+            continue
+        breakdown: dict[str, int] = {}
+        rows_count = 0
+        with open(csv_path, "r", encoding="utf-8", newline="") as fh:
+            for row in csv.DictReader(fh):
+                rows_count += 1
+                status = (row.get("readiness_status") or "").strip() or "unknown"
+                breakdown[status] = breakdown.get(status, 0) + 1
+        ready = breakdown.get("ready", 0)
+        blocked = sum(v for k, v in breakdown.items() if k != "ready")
+        totals[locale] = {
+            "rows": rows_count,
+            "ready": ready,
+            "blocked": blocked,
+            "by_status": dict(sorted(breakdown.items())),
+        }
+    summary["totals"] = totals
+    summary["fixup_applied"] = {
+        "name": "ready_predicate_on_disk_verification",
+        "applied_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "note": (
+            "Re-applied verify_ready_files_on_disk to existing CSVs in-place. "
+            "No rows deleted; only readiness_status / blockers / notes flipped "
+            "on rows where arc/registry/atoms did not resolve on disk."
+        ),
+    }
+    with open(summary_path, "w", encoding="utf-8") as fh:
+        json.dump(summary, fh, indent=2, ensure_ascii=False)
+
+
 # ── Main ────────────────────────────────────────────────────────────────────
 def main() -> int:
     parser = argparse.ArgumentParser(
@@ -786,11 +999,46 @@ def main() -> int:
                         help="Comma-separated locales (primary tier first).")
     parser.add_argument("--output-dir", default="artifacts/catalog/pearl_prime_book_script_catalogs/",
                         help="Output directory for per-locale CSVs + summary JSON.")
+    parser.add_argument(
+        "--fixup-ready-predicate-in-place",
+        action="store_true",
+        help=(
+            "Skip full regeneration; re-apply on-disk ready-predicate to "
+            "existing CSVs (flips ready → blocked_<reason> where arc/registry/"
+            "atoms are missing). Intended for environments where the brand-wizard "
+            "YAML SSOT is unavailable so a clean regenerate is not possible."
+        ),
+    )
     args = parser.parse_args()
 
     locales = [s.strip() for s in args.locales.split(",") if s.strip()]
     out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    if args.fixup_ready_predicate_in_place:
+        # In-place mode: skip full regenerate, just re-apply on-disk ready gate.
+        total_flips: dict[str, int] = {}
+        for locale in locales:
+            csv_path = out_dir / f"{locale}_catalog.csv"
+            if not csv_path.exists():
+                print(f"[{locale}] skipped: {csv_path} not present")
+                continue
+            flipped = fixup_ready_predicate_in_place(csv_path)
+            for k, v in flipped.items():
+                total_flips[k] = total_flips.get(k, 0) + v
+            if flipped:
+                summary_line = ", ".join(
+                    f"{k}={v}" for k, v in sorted(flipped.items()))
+                print(f"[{locale}] flipped: {summary_line} → {csv_path}")
+            else:
+                print(f"[{locale}] no flips (all ready rows verified on disk) → {csv_path}")
+        _rewrite_summary_after_fixup(out_dir, locales)
+        if total_flips:
+            grand = ", ".join(f"{k}={v}" for k, v in sorted(total_flips.items()))
+            print(f"[totals] {grand}")
+        else:
+            print("[totals] no rows flipped — every ready row already on disk")
+        return 0
 
     inputs = load_all_inputs()
     brand_teacher = build_brand_teacher_map(inputs)
