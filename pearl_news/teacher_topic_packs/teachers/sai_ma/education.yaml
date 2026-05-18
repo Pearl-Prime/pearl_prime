@@ -5,13 +5,13 @@ active: true
 identity:
   display_name: Sai Maa
   attribution_name: Her Holiness Sai Maa
-  tradition: Vedic teacher of consciousness and grace
-  tradition_short: Vedic teaching
+  tradition: Hindu Vishnuswami lineage; Jagadguru; Divine Feminine as embodied living reality; Shakti transmission; unity consciousness
+  tradition_short: Vishnuswami lineage Jagadguru
   teacher_setting_options:
-  - retreat
-  - teaching circle
-  teacher_years: teaching lineage
-  affiliation_safe_line: has attended the United Spiritual Leaders Forum
+  - Diksha transmission
+  - Brain Illumination Meditation
+  teacher_years: decades
+  affiliation_safe_line: teaches inside the Hindu Vishnuswami lineage as Jagadguru and leads the humanitarian work of Humanity in Unity and the Temple of Consciousness
   launch_approved: true
 persona:
   id: gen_z_alpha
@@ -20,130 +20,642 @@ persona:
   daily_worlds:
   - school
   - phone
-  - home
-  - peer support
-  - night routine
+  - group chat
+  - late-night scrolling
+  - part-time work
   tie_to_real_world_struggles:
-  - id: overwhelm_loop
-    label: pressure grows until identity starts fusing with it
-    loop: reads pressure signal -> mind races -> pulls back -> checks again because
-      the pressure is still there
+  - id: focus_pattern_loop
+    label: limiting patterns of fragmented attention running in the brain while mastery
+      waits to be awakened
+    loop: opens the assignment portal -> mind splinters inside the inherited pattern
+      -> switches away -> returns because the work is still there and the pattern
+      is still firing
     body_markers:
-    - mind racing
-    - stomach drop
-    - breath shorten
+    - jaw
+    - stomach
+    - breath
     digital_markers:
-    - put down
-    - pick up again
-    - check again
+    - switch away
+    - come back
 topic_fit:
   fit_level: primary
-  fit_reason: 'This topic maps to fragmented attention, strained effort, and the conflict
-    between what learning needs and what many systems now produce. '
+  fit_reason: In Sai Maa's lineage education distress is not laziness — it is limiting
+    patterns of fragmented attention running in a brain that has been asked to host
+    more consciousness than the inherited classroom was designed to carry. Brain
+    Illumination Meditation and Diksha exist to clear those patterns and let mastery,
+    not compliance, become the basis of learning.
   forbidden_angles:
   - do not blame students for fragmentation
   - do not reduce focus to productivity hacks
+  - do not separate East and West — speak across both
+  - do not reduce the lineage to generic Hindu or Vedic Hindu framing
+  - do not omit the Jagadguru context or the Humanity in Unity humanitarian work
 hook_personal:
   options:
-  - id: hook_personal_01
+  - id: sai_ma_education_hook_personal_01
     line: You still want to learn. You also know how quickly the current system turns
-      attention into scatter and effort into exhaustion.
-    semantic_family: sai_ma-education-hook-personal
-    tone: plain
-    intensity: 3
-    article_types:
-    - hard_news_spiritual_response
+      attention into scatter and effort into exhaustion — and part of you knows the
+      mastery already inside you has been crowded out by patterns the classroom never
+      asked you to question.
+    metadata:
+      semantic_family: attention-scatter-pressure
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_hook_personal_02
+    line: You keep returning to the assignments because not finishing feels worse.
+      You also know the inherited stack — the platforms, the rubrics, the productivity
+      hacks — has talked at you without relief, and that something deeper, something
+      already alive in your learning, is asking to be recognized rather than optimized.
+    metadata:
+      semantic_family: inherited-stack-fatigue-education
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_hook_personal_03
+    line: You feel the friction in your jaw before the next deadline finishes loading
+      — the part of you that wants to learn running into the part that already carries
+      a deeper knowing the classroom has not made room for. The body holds what the
+      inherited curriculum is still trying to argue with.
+    metadata:
+      semantic_family: somatic-learning-knowing
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_hook_personal_04
+    line: You open the tab and close it again. Neither move helps, because the pattern
+      in the brain was already firing — and the part of you trying to think your
+      way out is the same part the inherited system has been overrunning for too long.
+    metadata:
+      semantic_family: tab-close-pattern
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_hook_personal_05
+    line: You have used every productivity app, tried every study method, set every
+      goal. The mind has done all it can — and the quieter mastery already inside
+      you is asking to be awakened, not optimized.
+    metadata:
+      semantic_family: inner-mastery-call-education
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
 hook_big_picture:
   options:
-  - id: hook_big_picture_01
-    line: Education strain is not only about workload. It is about whether schools
-      still create the conditions under which attention and learning can function.
-    semantic_family: sai_ma-education-hook-big
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_education_hook_big_01
+    line: Education strain is not only about workload. It is about whether the inherited
+      classroom can still create the conditions under which attention and learning
+      can function — and about the limiting patterns of separation between teacher
+      and student that the brain has not yet been illuminated through.
+    metadata:
+      semantic_family: system-pressure-education
+      angle: systemic-pressure
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_hook_big_02
+    line: Heightened sensitivity in young learners is not pathology. In Sai Maa's
+      lineage it is Shakti pressing on a brain still running inherited patterns of
+      passive reception — the cost of being awake during a period when the structures
+      of meaning the classroom inherited have not yet caught up to the consciousness
+      now arriving.
+    metadata:
+      semantic_family: shakti-pressing-on-classroom
+      angle: divine-feminine-emergence
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_hook_big_03
+    line: A generation is being asked to learn inside structures the inherited institutions
+      cannot scale. The fragmentation is not a private failure — it is the felt edge
+      of a structural gap that the Divine Feminine, recognized as embodied reality
+      rather than metaphor, is built to address.
+    metadata:
+      semantic_family: divine-feminine-structural-education
+      angle: structural-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_hook_big_04
+    line: The signal that older systems read as attention deficit is, in Sai Maa's
+      framework, the brain registering that the curriculum it was prepared for is
+      no longer the learning the soul has to live as. The pattern itself is the door
+      — and Diksha is the light that opens it.
+    metadata:
+      semantic_family: pattern-as-door-education
+      angle: diksha-opening
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_hook_big_05
+    line: The collective field is asking young learners to host more interconnection
+      than the inherited classroom was ever asked to teach. The education crisis is,
+      in part, the visible edge of unity consciousness pressing against patterns of
+      hierarchy that the brain has not yet been illuminated through.
+    metadata:
+      semantic_family: unity-consciousness-press-education
+      angle: collective-field
+      article_types:
+      - hard_news_spiritual_response
 teacher_intro:
   options:
-  - id: teacher_intro_01
-    line: Her Holiness Sai Maa, a Vedic teacher of consciousness and grace, has watched
-      in practice sessions this pressure land on young people. Students are not only
-      asking how to feel better. They are asking how to stop letting pressure become
-      the whole story of who they are.
-    semantic_family: sai_ma-education-intro
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_education_intro_01
+    line: 'Her Holiness Sai Maa, Jagadguru of the Hindu Vishnuswami lineage and the
+      first female Jagadguru in 2,700 years, has watched in Diksha transmissions young
+      learners carry educational fragmentation as both real strain and something her
+      lineage names precisely: limiting patterns of attention running in the brain
+      while mastery waits to be awakened. In Sai Maa''s framework, Brain Illumination
+      Meditation does not argue with the pattern — it clears it, and lets the mastery
+      already there become the basis of learning.'
+    metadata:
+      semantic_family: jagadguru-witness-education
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_intro_02
+    line: Her Holiness Sai Maa does not teach to produce followers. She teaches to
+      cultivate masters — to awaken the learning capacity already inside every student
+      who comes. For decades she has worked with young people whose minds are exhausted
+      from being talked at by the inherited classroom, and what her lineage offers
+      is not another instruction set; it is Diksha, the transmission of light into
+      the brain.
+    metadata:
+      semantic_family: masters-not-followers-education
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_intro_03
+    line: Her Holiness Sai Maa works through Sai Maa Diksha — the transmission of
+      light directly into the brain to awaken the divine energy that learning at depth
+      requires. She has watched young learners move through the same loop the rubrics
+      name as poor focus, and watched the loop loosen when the light, not the optimization,
+      reaches the pattern.
+    metadata:
+      semantic_family: diksha-light-witness-education
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_intro_04
+    line: Her Holiness Sai Maa speaks across East and West as one field — her lineage
+      is Hindu Vishnuswami, and she has received visitations from Jesus, St. Germain,
+      and Archangel Michael in the same realization. In Brain Illumination Meditation
+      young learners meet a tradition that does not split East and West and does not
+      ask them to choose between the ways of knowing they already carry.
+    metadata:
+      semantic_family: east-west-integration-education
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_intro_05
+    line: Her Holiness Sai Maa teaches inside the lineage of Vishnuswami as Jagadguru
+      — world teacher — and her teaching is inseparable from the humanitarian work
+      of Humanity in Unity and the Temple of Consciousness. Young learners are not
+      asked to leave the world to receive Diksha; they are taught that learning and
+      humanitarian service are the same practice.
+    metadata:
+      semantic_family: humanitarian-inseparable-education
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 youth_somatic:
   options:
-  - id: youth_somatic_01
-    line: 'You open the assignment portal. Focus breaks. You switch away. Then you
-      come back because the work is still there. LOOP_SEQUENCE: "opened the portal.
-      focus broke. switched away. came back."'
-    loop_type: overwhelm_loop
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_education_somatic_01
+    line: You open the assignment portal. Focus breaks. You switch away. Then you
+      come back because the work is still there and the pattern is already firing.
+    metadata:
+      semantic_family: portal_pattern
+      loop_type: portal_loop
+      body_register: jaw
+      digital_behavior: switch away
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_somatic_02
+    line: You wake before the alarm. Your stomach is already tight. You reach for
+      the phone before you reach for the syllabus, because the pattern is already
+      there and you need to check how far behind it says you are.
+    metadata:
+      semantic_family: morning_deadline_check
+      loop_type: morning_pattern
+      body_register: stomach
+      digital_behavior: reach for the phone
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_somatic_03
+    line: Your jaw clenches when the grade posts. You replay the last week of effort.
+      Your breath shortens. The brain ran the inherited pattern of evaluation before
+      you decided anything.
+    metadata:
+      semantic_family: jaw-clench-grade
+      loop_type: jaw_clench
+      body_register: jaw
+      digital_behavior: grade post
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_somatic_04
+    line: You hold your breath without noticing while the upload bar finishes. Your
+      shoulders lift. You exhale only when the submission confirms and only halfway,
+      because the pattern is teaching the body to brace for the next deadline.
+    metadata:
+      semantic_family: breath-brace-upload
+      loop_type: breath_brace
+      body_register: breath
+      digital_behavior: upload bar
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_somatic_05
+    line: You lie down and your eyes pin open. Tomorrow's deadlines replay. Your jaw
+      will not soften. You know rest is the thing that would help you learn and the
+      pattern keeps the door to it closed.
+    metadata:
+      semantic_family: sleep-resistance-education
+      loop_type: sleep_resistance
+      body_register: jaw
+      digital_behavior: lying down
+      article_types:
+      - hard_news_spiritual_response
 teacher_witness:
   options:
-  - id: teacher_witness_01
-    line: Sai Maa has seen this exact loop -- the portal opening, the break in focus,
-      the switch away, and the return because the work still remains.
-    semantic_family: sai_ma-education-witness
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_education_witness_01
+    line: Sai Maa has seen this exact loop in those who come to receive Diksha. In
+      her lineage that fragmentation is not character; it is the brain running a pattern
+      it never asked for, and the practice is to illuminate the pattern rather than
+      blame the one carrying it.
+    metadata:
+      semantic_family: pattern-mirror-education
+      loop_type: portal_loop
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_witness_02
+    line: Sai Maa has watched young learners walk into Brain Illumination Meditation
+      already mid-loop, already certain the productivity stack should have solved
+      this by now. In her lineage that certainty is the signal — the moment where
+      the mind stops and the light can land.
+    metadata:
+      semantic_family: intellect-exhausted-education
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_witness_03
+    line: She has seen the body carry what the rubrics could not name. In Sai Maa's
+      framework the somatic loop is not malfunction — it is the Divine Feminine asking
+      to be recognized through the only channel left open when the inherited curriculum
+      has overused the others.
+    metadata:
+      semantic_family: divine-feminine-somatic-education
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_witness_04
+    line: Sai Maa has watched young learners arrive with a Shakti pressure that no
+      assessment tool registers. In her lineage that pressure is information, not
+      pathology — divine energy pressing on a brain whose inherited patterns of evaluation
+      were never tuned to host this much consciousness at once.
+    metadata:
+      semantic_family: shakti-pressure-education
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_witness_05
+    line: Sai Maa has watched the moment when a young learner stops trying to produce
+      an answer and lets Diksha reach the pattern instead. In her lineage that moment
+      is not weakness — it is the readiness conventional education has no language
+      for, and the door into the mastery that was already there.
+    metadata:
+      semantic_family: diksha-readiness-education
+      article_types:
+      - hard_news_spiritual_response
 turnaround:
   options:
-  - id: turnaround_01
-    stat_line_1: 410 workshops. 27 cities.
-    stat_line_2: Students and educators are building study supports, healthier schedules,
-      and classroom reforms that protect attention instead of merely organizing campaigns
-      and hosting it.
-    semantic_family: sai_ma-education-turnaround
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_education_turnaround_01
+    stat_line_1: 244 million out of school.
+    stat_line_2: UNESCO now tracks roughly two hundred forty-four million children
+      and young people out of school worldwide — the load-bearing number that turned
+      educational access from a service question into a global infrastructure question.
+    metadata:
+      semantic_family: out-of-school-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_turnaround_02
+    stat_line_1: 100 countries. GCE.
+    stat_line_2: The Global Campaign for Education, a civil society coalition of more
+      than one hundred member countries, has held governments to the right-to-education
+      promise for over two decades — the structural complement to whatever any single
+      campus is doing.
+    metadata:
+      semantic_family: civil-society-coalition
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_turnaround_03
+    stat_line_1: SDG 4. 2030.
+    stat_line_2: SDG 4 commits the United Nations member states to inclusive, equitable
+      quality education and lifelong learning opportunities for all by 2030 — the
+      multilateral framework that gives youth education-justice work its formal vocabulary.
+    metadata:
+      semantic_family: multilateral-framework
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_turnaround_04
+    stat_line_1: 76 million reached. ECW.
+    stat_line_2: Education Cannot Wait, the UN global fund for education in emergencies
+      and protracted crises, has reached more than seventy-six million children since
+      its founding — a finance instrument whose existence rewrites what is possible
+      in displacement and conflict settings.
+    metadata:
+      semantic_family: emergency-education-finance
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_turnaround_05
+    stat_line_1: 22 million. 160 countries.
+    stat_line_2: The World's Largest Lesson, a UNICEF and partners initiative, has
+      reached more than twenty-two million participants across one hundred sixty countries,
+      threading the Sustainable Development Goals into classrooms most policy reports
+      never visit.
+    metadata:
+      semantic_family: classroom-reach
+      article_types:
+      - hard_news_spiritual_response
 bridge:
   options:
-  - id: bridge_01
-    line: 410 workshops. 27 cities. The tracker measures what young people did. It
-      has no column for what made the next step possible after another delayed or
-      broken response -- the capacity to return to the work without turning fragmentation
-      into identity. The person who came back needed it. So does the reader in that
-      loop. Sai Maa's teaching has language for protecting that capacity.
-    hidden_capacity: return to truthful action
-    semantic_family: sai_ma-education-bridge
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_education_bridge_01
+    line: '244 million out of school. The tracker measures the access gap young people
+      and their advocates organized into governance vocabulary. It has no column for
+      what made the next class possible — the capacity to learn when the brain''s
+      inherited patterns are still firing. Sai Maa''s lineage does not argue with
+      the pattern: Brain Illumination Meditation and Diksha illuminate it from inside,
+      so mastery can land where optimization cannot.'
+    hidden_capacity: learn through the inherited pattern
+    metadata:
+      semantic_family: tracker-capacity-education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_bridge_02
+    line: The numbers show the scaffolding the young built. They do not show the Divine
+      Feminine reality learning has always been — an embodied living reality the inherited
+      classroom treated as metaphor and the lineage holds as native. The data cannot
+      register what only Shakti can.
+    hidden_capacity: register the Divine Feminine the data cannot
+    metadata:
+      semantic_family: divine-feminine-bridge-education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_bridge_03
+    line: The data captures enrollment, completion, and policy adoptions. It cannot
+      capture the moment when a limiting pattern of fragmented attention in the brain
+      is illuminated and stops directing the day. In Sai Maa's framework that illumination
+      is the actual relief — the part no tracker reports because no tracker is tuned
+      to it.
+    hidden_capacity: catch the illumination the trackers miss
+    metadata:
+      semantic_family: illumination-data-gap-education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_bridge_04
+    line: The infrastructure is measurable. The layer where unity consciousness presses
+      against patterns of hierarchy between teacher and student is not. Sai Maa's
+      lineage does not argue with measurement — it works in the layer beneath it,
+      where every learner is being asked to recognize fundamental interconnection
+      with every other being in the room.
+    hidden_capacity: work in the unity-consciousness layer
+    metadata:
+      semantic_family: unity-consciousness-bridge-education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_bridge_05
+    line: Workshops, syllabi, and platforms can be counted. The mastery already alive
+      inside each young learner cannot. Sai Maa's lineage does not replace the structural
+      work — it cultivates masters, not followers, and offers Diksha as the door
+      through which the mastery already there can be awakened.
+    hidden_capacity: awaken mastery the structural work cannot reach
+    metadata:
+      semantic_family: master-cultivation-bridge-education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 teacher_perspective:
   options:
-  - id: teacher_perspective_01
+  - id: sai_ma_education_perspective_01
     header: What Sai Maa Sees
     paragraphs:
-    - Sai Maa would begin by separating consciousness from the storm moving through
-      it. Pressure is real, but overwhelm should not become identity.
-    - Her teaching does not ask young people to deny the difficulty. It asks them
-      to recover enough inner clarity that fear or overload does not become the sole
-      narrator of the self.
-    - What feels like a personal fault -- me, broken, wrong -- is often accurate response
-      to a system and institutional structure that keep normalizing unsustainable
-      strain.
-    semantic_family: sai_ma-education-perspective
-    article_types:
-    - hard_news_spiritual_response
+    - In the Vishnuswami lineage the brain is not the seat of consciousness — it is
+      the instrument consciousness moves through. Much of what young learners experience
+      as poor focus or motivation collapse is the brain running limiting patterns
+      of fragmented attention the soul never authored, while mastery waits to be received
+      on the other side of them. Brain Illumination Meditation begins where blame
+      ends.
+    - Sai Maa Diksha is not metaphor. It is the literal transmission of light into
+      the brain to awaken divine energy — a practice carried in the lineage and transmitted
+      with the authority of Jagadguru. For a generation talked at by every productivity
+      framework, this is not another voice. It is a different layer of contact.
+    - The reframe does not promise the pattern will never return. It promises that
+      every individual can achieve self-mastery, that the fragmentation is not proof
+      of being lazy, and that the inherited classroom was never designed to host what
+      the soul is now asking to learn. The work is to illuminate, not to argue.
+    metadata:
+      semantic_family: brain-illumination-reframe-education
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_perspective_02
+    header: What Sai Maa Sees
+    paragraphs:
+    - The Divine Feminine, in Sai Maa's lineage, is not symbol and not metaphor. It
+      is embodied living reality — the Shakti that has always been present in learning
+      itself and is now pressing against a brain whose inherited patterns of evaluation
+      were never tuned to receive it. The educational strain young learners carry
+      is, in part, the pressure of that meeting.
+    - This is the load-bearing context the conventional frame cannot supply. Sai Maa
+      is the first female Jagadguru in 2,700 years of Vishnuswami lineage, and the
+      arrival of the Divine Feminine through that office is not narrative flourish
+      — it is the lineage marking that this transmission belongs to this moment.
+    - The practice is to recognize Shakti in learning rather than manage anxiety about
+      performance. The recognition does not lift the workload; it changes what the
+      workload is read as. What looked like fragmentation becomes embodied divine
+      energy asking to be hosted, and the work moves from compliance to reception.
+    metadata:
+      semantic_family: divine-feminine-embodied-education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_perspective_03
+    header: What Sai Maa Sees
+    paragraphs:
+    - In Sai Maa's lineage the teaching is to cultivate masters, not followers. The
+      mastery is already inside every young learner who arrives carrying fragmentation
+      — it has only been overlaid with inherited patterns of evaluation the culture
+      asked them to run without their consent. Diksha and Brain Illumination Meditation
+      are tools to clear the overlay, not to add another authority on top.
+    - This matters in a generation that has been talked at by every available educational
+      authority and is exhausted by the position itself. The lineage refuses the position.
+      There is no spiritual hierarchy that disempowers in Sai Maa's work; the practice
+      is to awaken what is already there.
+    - The mastery, once recognized, is not a private possession. In the lineage it
+      naturally moves outward — into the humanitarian work, into the Temple of Consciousness,
+      into how a young learner carries the same learning tomorrow for someone else.
+      Self-mastery and shared learning are not sequential; they are one practice.
+    metadata:
+      semantic_family: masters-not-followers-perspective-education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_perspective_04
+    header: What Sai Maa Sees
+    paragraphs:
+    - Sai Maa speaks across East and West as one field. The lineage is Hindu Vishnuswami;
+      the visitations from Jesus, St. Germain, and Archangel Michael are received
+      within the same realization. For a generation raised across overlapping traditions
+      and asked to choose, the refusal to choose is not eclecticism. It is doctrine.
+    - This matters for education because much of the strain young learners carry
+      is the cost of believing the ways of knowing already alive in them belong to
+      incompatible camps — Western scientific method, indigenous wisdom, contemplative
+      knowing. The lineage holds that they do not. They are part of the same field
+      — and inheriting that integration is part of the relief.
+    - The practice is not to argue traditions into agreement. The practice is to receive
+      Diksha as the lineage has carried it and let the integration that is native
+      to it land. What conventional education cannot supply, the realization can.
+    metadata:
+      semantic_family: east-west-integration-perspective-education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_perspective_05
+    header: What Sai Maa Sees
+    paragraphs:
+    - Unity consciousness, in Sai Maa's lineage, is the recognition that every being
+      is fundamentally interconnected — that the learning of one is not separate
+      from the field, and the mastery of one is not separate from the whole. The
+      educational strain young learners carry is, in part, the cost of trying to
+      learn inside structures built on the separation of teacher and student, mind
+      and body, knowing and being.
+    - The reframe does not flatter. It does not promise the workload will lift quickly,
+      and it does not blame the cohort for feeling fragmented in inherited structures
+      that were never built for what they are being asked to host. It names the structural
+      fact, removes the additional weight of believing the fragmentation is a personal
+      failure, and offers the lineage's tools — Diksha, Brain Illumination Meditation
+      — as the layer beneath the load.
+    - That weight removal is, in transmission practice, often the part that lands
+      first — and the humanitarian work the lineage carries is the natural extension
+      of the same learning recognition.
+    metadata:
+      semantic_family: unity-consciousness-perspective-education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 practice:
-  default_id: practice_01
+  default_id: sai_ma_education_practice_01
   options:
-  - id: practice_01
-    display_name: 5-minute Overwhelm Reset
+  - id: sai_ma_education_practice_01
+    display_name: Brain Illumination Pause
     duration: 5 minutes
-    announcement_line: Sai Maa teaches a 5-minute Overwhelm Reset for moments when
-      education pressure starts converting attention into helplessness. It is in the
-      sidebar, timed and practical.
+    announcement_line: Sai Maa teaches a 5-minute Brain Illumination Pause for moments
+      when an inherited pattern of fragmented attention is firing in the brain and
+      the mind has been trying too hard to argue with it. It is in the sidebar, timed
+      and step by step.
     relief_lines:
-    - The spiral loses some of its authority to define the whole self.
-    - Enough clarity returns for the next honest decision.
+    - The pattern stops being treated as identity.
+    - Enough light reaches the brain that the next honest learning decision becomes
+      possible again.
     relief_register:
-    - capacity
+    - illuminate
     - clarity
-    - act again
-    article_types:
-    - hard_news_spiritual_response
+    - mastery
+    derived_from_frame: brain_illumination
+    metadata:
+      semantic_family: brain_illumination_practice_education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_practice_02
+    display_name: Diksha Receiving
+    duration: 3 minutes
+    announcement_line: Sai Maa offers a 3-minute Diksha Receiving practice for moments
+      between deadlines, when the brain has been held in the inherited pattern of
+      evaluation without permission to set it down. It is in the sidebar, timed and
+      step by step.
+    relief_lines:
+    - The pattern softens enough that the light can reach where optimization cannot.
+    - The mastery already there surfaces alongside the day's workload.
+    relief_register:
+    - receive
+    - light
+    - diksha
+    derived_from_frame: diksha_receiving
+    metadata:
+      semantic_family: diksha_receiving_practice_education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_practice_03
+    display_name: Divine Feminine Recall
+    duration: 7 minutes
+    announcement_line: Sai Maa teaches a 7-minute Divine Feminine Recall practice
+      for moments when the inherited classroom's reading of learning has been overused
+      and the body needs the Shakti reality of knowing re-recognized. It is in the
+      sidebar, timed and step by step.
+    relief_lines:
+    - The body remembers it has been hosting Shakti, not failing.
+    - The reading of the learning changes from compliance to embodied recognition.
+    relief_register:
+    - embody
+    - shakti
+    - divine feminine
+    derived_from_frame: divine_feminine_recall
+    metadata:
+      semantic_family: divine_feminine_recall_practice_education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_practice_04
+    display_name: Shakti Listening
+    duration: 4 minutes
+    announcement_line: Sai Maa teaches a 4-minute Shakti Listening practice for moments
+      when the inner argument about the assignment is running in circles and a different
+      layer of input is being asked for. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The question stops being something to solve and becomes something to host.
+    - What arrives is divine energy, not another instruction stack.
+    relief_register:
+    - listen
+    - receive
+    - shakti
+    derived_from_frame: shakti_listening
+    metadata:
+      semantic_family: shakti_listening_practice_education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_education_practice_05
+    display_name: Unity Consciousness Breath
+    duration: 3 minutes
+    announcement_line: Sai Maa offers a 3-minute Unity Consciousness Breath for moments
+      of acute pattern firing, when the day's deadlines have knocked the recognition
+      of shared learning out of reach. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The breath becomes a marker for the field the learning has always been part of.
+    - The body returns to a register where mastery and shared learning belong to the
+      same practice.
+    relief_register:
+    - breath
+    - unity
+    - interconnection
+    derived_from_frame: unity_consciousness_breath
+    metadata:
+      semantic_family: unity_consciousness_practice_education
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 sdg:
   primary:
     id: SDG 4
@@ -155,31 +667,97 @@ sdg:
       Nations.
 cta:
   options:
-  - id: cta_01
+  - id: sai_ma_education_cta_01
     org: UNESCO
-    line: 'UNESCO''s Global Education Coalition offers a public entry point here.
-      Door in: https://www.unesco.org/en/education/globaleducationcoalition'
-    semantic_family: sai_ma-education-cta
-    article_types:
-    - hard_news_spiritual_response
-title_system:
-  headline_layer_1:
-    options:
-    - id: headline_layer_1_01
-      line: Students Are Losing Focus Faster Than Systems Can Adapt.
-      semantic_family: sai_ma-education-title1
+    line: 'UNESCO''s Global Education Coalition coordinates the multilateral response
+      to the access gap young people have already named. Door in: the coalition''s
+      partnership network turns SDG 4 into operational pressure.'
+    metadata:
+      semantic_family: door-in-unesco
       article_types:
       - hard_news_spiritual_response
+  - id: sai_ma_education_cta_02
+    org: Global Campaign for Education
+    line: 'The Global Campaign for Education is a civil society coalition holding
+      governments to the right-to-education promise across more than one hundred member
+      countries. Door in: their membership turns advocacy into binding pressure.'
+    metadata:
+      semantic_family: door-in-gce
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_cta_03
+    org: Education Cannot Wait
+    line: 'Education Cannot Wait is the UN global fund for education in emergencies
+      and protracted crises, with more than 76 million children reached since founding.
+      Door in: their grants pipeline converts displacement into continued learning.'
+    metadata:
+      semantic_family: door-in-ecw
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_cta_04
+    org: Malala Fund
+    line: 'Malala Fund invests in girls'' secondary education across regions where
+      the access gap is widest. Door in: their education champions network turns
+      country-level reality into international leverage.'
+    metadata:
+      semantic_family: door-in-malala
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_education_cta_05
+    org: Teach For All
+    line: 'Teach For All is a network of independent organizations in more than 60
+      countries placing teachers in under-resourced classrooms. Door in: their alumni
+      network becomes a long-arc education leadership pipeline.'
+    metadata:
+      semantic_family: door-in-teach-for-all
+      article_types:
+      - hard_news_spiritual_response
+title_system:
   headline_layer_2:
     options:
-    - id: headline_layer_2_01
-      line: A teacher names the fight to keep learning possible under fragmented conditions.
-      semantic_family: sai_ma-education-title2
-      article_types:
-      - hard_news_spiritual_response
+    - id: sai_ma_education_headline_01
+      line: A Jagadguru of the Vishnuswami lineage names educational fragmentation
+        as pattern — and Brain Illumination Meditation as the practice that meets
+        it.
+      metadata:
+        semantic_family: jagadguru-attention-education
+        article_types:
+        - hard_news_spiritual_response
+    - id: sai_ma_education_headline_02
+      line: Diksha — the transmission of light into the brain — on the layer of learning
+        conventional education is not built to reach.
+      metadata:
+        semantic_family: diksha-frame-education
+        article_types:
+        - hard_news_spiritual_response
+    - id: sai_ma_education_headline_03
+      line: The Divine Feminine as embodied living reality of knowing — Sai Maa's
+        lineage meets the exhausted intellect.
+      metadata:
+        semantic_family: divine-feminine-frame-education
+        article_types:
+        - hard_news_spiritual_response
+    - id: sai_ma_education_headline_04
+      line: Cultivating masters, not followers — a Vishnuswami Jagadguru reframes
+        the learning load Gen Z and Gen Alpha are carrying.
+      metadata:
+        semantic_family: masters-frame-education
+        article_types:
+        - hard_news_spiritual_response
+    - id: sai_ma_education_headline_05
+      line: Unity consciousness over private failure — what the humanitarian lineage
+        brings to a generation learning under fragmented conditions.
+      metadata:
+        semantic_family: unity-consciousness-frame-education
+        article_types:
+        - hard_news_spiritual_response
 variation_policy:
   avoid_same_semantic_family_within_article: true
   deterministic_rotation_key: article_id + slot + teacher_id + topic
   metadata_filters:
     article_types:
     - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4

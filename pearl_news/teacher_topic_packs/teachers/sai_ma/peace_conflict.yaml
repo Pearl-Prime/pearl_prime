@@ -5,13 +5,13 @@ active: true
 identity:
   display_name: Sai Maa
   attribution_name: Her Holiness Sai Maa
-  tradition: Vedic teacher of consciousness and grace
-  tradition_short: Vedic teaching
+  tradition: Hindu Vishnuswami lineage; Jagadguru; Divine Feminine as embodied living reality; Shakti transmission; unity consciousness
+  tradition_short: Vishnuswami lineage Jagadguru
   teacher_setting_options:
-  - retreat
-  - teaching circle
-  teacher_years: teaching lineage
-  affiliation_safe_line: has attended the United Spiritual Leaders Forum
+  - Diksha transmission
+  - Brain Illumination Meditation
+  teacher_years: decades
+  affiliation_safe_line: teaches inside the Hindu Vishnuswami lineage as Jagadguru and leads the humanitarian work of Humanity in Unity and the Temple of Consciousness
   launch_approved: true
 persona:
   id: gen_z_alpha
@@ -20,131 +20,643 @@ persona:
   daily_worlds:
   - school
   - phone
-  - home
-  - peer support
-  - night routine
+  - group chat
+  - late-night scrolling
+  - part-time work
   tie_to_real_world_struggles:
-  - id: overwhelm_loop
-    label: pressure grows until identity starts fusing with it
-    loop: reads pressure signal -> mind races -> pulls back -> checks again because
-      the pressure is still there
+  - id: conflict_pattern_loop
+    label: limiting patterns of separation running in the brain under repeated witness
+      of violence
+    loop: reads the latest report -> mind accelerates inside the inherited frame
+      of helplessness -> looks away -> comes back because conscience is still there
+      and the pattern is still firing
     body_markers:
-    - mind racing
-    - stomach drop
-    - breath shorten
+    - chest
+    - jaw
+    - breath
     digital_markers:
-    - put down
-    - pick up again
-    - check again
+    - look away
+    - come back
 topic_fit:
   fit_level: primary
-  fit_reason: 'This topic maps to moral injury, institutional mistrust, and the strain
-    of repeated conflict on young bodies and minds. '
+  fit_reason: In Sai Maa's lineage conflict distress is not moral failure — it is
+    unity consciousness pressing on a brain whose inherited patterns of separation
+    cannot host the recognition that every being is interconnected. Brain Illumination
+    Meditation and Diksha exist to clear those patterns and let young people stay
+    human under repeated witness of violence without collapsing or numbing.
   forbidden_angles:
   - do not preach numbness as wisdom
   - do not confuse silence with peace
+  - do not separate East and West — speak across both
+  - do not reduce the lineage to generic Hindu or Vedic Hindu framing
+  - do not omit the Jagadguru context or the Humanity in Unity humanitarian work
 hook_personal:
   options:
-  - id: hook_personal_01
+  - id: sai_ma_pc_hook_personal_01
     line: You keep reading because not looking feels dishonest. You also know what
-      repeated violence is doing to your body and your trust.
-    semantic_family: sai_ma-peace_conflict-hook-personal
-    tone: plain
-    intensity: 3
-    article_types:
-    - hard_news_spiritual_response
+      repeated violence is doing to your body and your trust — and part of you knows
+      something larger has been asking to reach you, but the patterns of separation
+      in the brain keep crowding it out.
+    metadata:
+      semantic_family: witness-pressure
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_hook_personal_02
+    line: You keep returning to the feed because not staying in contact feels worse.
+      You also know the inherited stack — the briefings, the takes, the doomscroll
+      — has talked at you without relief, and that something deeper, something already
+      alive in you, is asking to be recognized rather than briefed.
+    metadata:
+      semantic_family: inherited-frame-fatigue-peace
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_hook_personal_03
+    line: You feel it in your chest before the headline finishes loading — the part
+      of you that wants to look away running into the part that already carries a
+      deeper knowing about the unity of every being. The body holds what the inherited
+      frame is still trying to argue with.
+    metadata:
+      semantic_family: somatic-unity-knowing
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_hook_personal_04
+    line: You scroll past the image and scroll back. Neither move helps, because the
+      pattern in the brain was already firing — and the part of you trying to think
+      your way out is the same part that has been overrun for too long.
+    metadata:
+      semantic_family: scroll-back-pattern
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_hook_personal_05
+    line: You have signed the petitions, joined the calls, kept the vigil. The mind
+      has done all it can — and the quieter recognition of unity consciousness already
+      inside you is asking to be awakened, not added to.
+    metadata:
+      semantic_family: unity-call-peace
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
 hook_big_picture:
   options:
-  - id: hook_big_picture_01
-    line: Conflict pressure is no longer only geopolitical. It arrives as moral injury
-      and as the collapse of trust in institutions that keep failing to protect.
-    semantic_family: sai_ma-peace_conflict-hook-big
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_pc_hook_big_01
+    line: Conflict pressure is no longer only geopolitical. It arrives as moral injury,
+      as the collapse of trust in institutions that keep failing to protect — and
+      as the felt edge of unity consciousness pressing on a brain whose inherited
+      patterns of separation were never asked to host the recognition that every being
+      is interconnected.
+    metadata:
+      semantic_family: unity-pressure-on-pattern-peace
+      angle: systemic-pressure
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_hook_big_02
+    line: Heightened moral sensitivity in young people is not pathology. In Sai Maa's
+      lineage it is the felt edge of Shakti pressing against inherited categories
+      of us and them — the cost of being awake during a period when the structures
+      designed to manage conflict were never built to recognize humanity as one body.
+    metadata:
+      semantic_family: shakti-conflict-press
+      angle: divine-feminine-emergence
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_hook_big_03
+    line: A generation is being asked to hold the world inside structures the inherited
+      institutions cannot scale. The moral injury is not a private failure — it is
+      the felt edge of a structural gap that the Divine Feminine, recognized as embodied
+      reality rather than metaphor, is built to address.
+    metadata:
+      semantic_family: divine-feminine-structural-peace
+      angle: structural-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_hook_big_04
+    line: The signal that older systems read as moral fatigue is, in Sai Maa's framework,
+      the brain registering that the world it was prepared for is no longer the world
+      conscience has to live in. The pattern itself is the door — and Diksha is the
+      light that opens it.
+    metadata:
+      semantic_family: pattern-as-door-peace
+      angle: diksha-opening
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_hook_big_05
+    line: The collective field is asking young people to host the actual interconnection
+      of every life — not the abstraction. The peace crisis is, in part, the visible
+      edge of unity consciousness pressing against patterns of separation that the
+      brain has not yet been illuminated through.
+    metadata:
+      semantic_family: unity-consciousness-press-peace
+      angle: collective-field
+      article_types:
+      - hard_news_spiritual_response
 teacher_intro:
   options:
-  - id: teacher_intro_01
-    line: Her Holiness Sai Maa, a Vedic teacher of consciousness and grace, has watched
-      in practice sessions this pressure land on young people. Students are not only
-      asking how to feel better. They are asking how to stop letting pressure become
-      the whole story of who they are.
-    semantic_family: sai_ma-peace_conflict-intro
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_pc_intro_01
+    line: 'Her Holiness Sai Maa, Jagadguru of the Hindu Vishnuswami lineage and the
+      first female Jagadguru in 2,700 years, has watched in Diksha transmissions young
+      people carry conflict distress as both real moral injury and something her lineage
+      names precisely: unity consciousness pressing on inherited patterns of separation.
+      In Sai Maa''s framework, Brain Illumination Meditation does not argue with the
+      pattern — it clears it, and lets the recognition of interconnection land where
+      it has always been ready to.'
+    metadata:
+      semantic_family: jagadguru-witness-peace
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_intro_02
+    line: Her Holiness Sai Maa does not teach to produce followers. She teaches to
+      cultivate masters — to awaken the recognition of unity consciousness already
+      inside every person who comes. For decades she has worked with young people
+      whose minds are exhausted from witnessing violence the inherited institutions
+      cannot stop, and what her lineage offers is not another instruction set; it
+      is Diksha, the transmission of light into the brain.
+    metadata:
+      semantic_family: masters-not-followers-peace
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_intro_03
+    line: Her Holiness Sai Maa works through Sai Maa Diksha — the transmission of
+      light directly into the brain to awaken the recognition that every being is
+      interconnected. She has watched young people move through the same loop the
+      briefings name as moral injury, and watched the loop loosen when the light,
+      not the analysis, reaches the pattern.
+    metadata:
+      semantic_family: diksha-light-witness-peace
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_intro_04
+    line: Her Holiness Sai Maa speaks across East and West as one field — her lineage
+      is Hindu Vishnuswami, and she has received visitations from Jesus, St. Germain,
+      and Archangel Michael in the same realization. In Brain Illumination Meditation
+      young people meet a tradition that does not split East and West and refuses
+      the inherited categories of us and them on which most conflict frames rest.
+    metadata:
+      semantic_family: east-west-integration-peace
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_intro_05
+    line: Her Holiness Sai Maa teaches inside the lineage of Vishnuswami as Jagadguru
+      — world teacher — and her teaching is inseparable from the humanitarian work
+      of Humanity in Unity and the Temple of Consciousness. Young people are not asked
+      to leave the world to receive Diksha; they are taught that staying human under
+      witness and humanitarian service are the same practice.
+    metadata:
+      semantic_family: humanitarian-inseparable-peace
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 youth_somatic:
   options:
-  - id: youth_somatic_01
-    line: 'You read the latest report. Your chest tightens. You look away. Then you
-      come back because conscience is still there. LOOP_SEQUENCE: "read the report.
-      chest tightened. looked away. came back."'
-    loop_type: overwhelm_loop
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_pc_somatic_01
+    line: You read the latest report. Your chest tightens. You look away. Then you
+      come back because conscience is still there and the pattern is already firing.
+    metadata:
+      semantic_family: report_pattern
+      loop_type: report_loop
+      body_register: chest
+      digital_behavior: look away
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_somatic_02
+    line: You wake before the alarm. Your stomach is already tight. You reach for
+      the phone before you reach for the light, because the pattern is already there
+      and you need to check whether the world has shifted overnight.
+    metadata:
+      semantic_family: morning_conflict_check
+      loop_type: morning_pattern
+      body_register: stomach
+      digital_behavior: reach for the phone
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_somatic_03
+    line: Your jaw clenches when the breaking-news banner comes through. You replay
+      the names you already remember. Your breath shortens. The brain ran the inherited
+      pattern of separation before you decided anything.
+    metadata:
+      semantic_family: jaw-clench-banner
+      loop_type: jaw_clench
+      body_register: jaw
+      digital_behavior: breaking-news banner
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_somatic_04
+    line: You hold your breath without noticing while the photograph loads. Your shoulders
+      lift. You exhale only after you see it and only halfway, because the pattern
+      is teaching the body to brace for the next image.
+    metadata:
+      semantic_family: breath-brace-image
+      loop_type: breath_brace
+      body_register: breath
+      digital_behavior: photograph load
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_somatic_05
+    line: You lie down and your eyes pin open. The day's headlines replay. Your jaw
+      will not soften. You know rest is the thing that would help you stay human
+      and the pattern keeps the door to it closed.
+    metadata:
+      semantic_family: sleep-resistance-peace
+      loop_type: sleep_resistance
+      body_register: jaw
+      digital_behavior: lying down
+      article_types:
+      - hard_news_spiritual_response
 teacher_witness:
   options:
-  - id: teacher_witness_01
-    line: Sai Maa has seen this exact loop -- the report, the body tightening, the
-      turning away, and the return because conscience is still present.
-    semantic_family: sai_ma-peace_conflict-witness
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_pc_witness_01
+    line: Sai Maa has seen this exact loop in those who come to receive Diksha. In
+      her lineage that pressure is not character; it is the brain running a pattern
+      of separation it never asked for, and the practice is to illuminate the pattern
+      rather than blame the one carrying it.
+    metadata:
+      semantic_family: pattern-mirror-peace
+      loop_type: report_loop
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_witness_02
+    line: Sai Maa has watched young people walk into Brain Illumination Meditation
+      already mid-loop, already certain the intellect should have solved this by now.
+      In her lineage that certainty is the signal — the moment where the mind stops
+      and the light can land.
+    metadata:
+      semantic_family: intellect-exhausted-peace
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_witness_03
+    line: She has seen the body carry what the briefings could not name. In Sai Maa's
+      framework the somatic loop is not malfunction — it is the Divine Feminine asking
+      to be recognized through the only channel left open when the inherited words
+      about conflict have been overused.
+    metadata:
+      semantic_family: divine-feminine-somatic-peace
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_witness_04
+    line: Sai Maa has watched young people arrive with a Shakti pressure that no peace
+      framework registers. In her lineage that pressure is information, not pathology
+      — divine energy pressing on a brain whose inherited patterns of separation were
+      never tuned to host humanity as one body.
+    metadata:
+      semantic_family: shakti-pressure-peace
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_witness_05
+    line: Sai Maa has watched the moment when a young person stops trying to produce
+      a position and lets Diksha reach the pattern instead. In her lineage that moment
+      is not weakness — it is the readiness conventional conflict discourse has no
+      language for.
+    metadata:
+      semantic_family: diksha-readiness-peace
+      article_types:
+      - hard_news_spiritual_response
 turnaround:
   options:
-  - id: turnaround_01
-    stat_line_1: 143 youth coalitions. 28 countries.
-    stat_line_2: Young peacebuilders are documenting harm, organizing workshops, and
-      hosting harm, supporting displaced peers, and building trust networks even while
-      institutions stall.
-    semantic_family: sai_ma-peace_conflict-turnaround
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_pc_turnaround_01
+    stat_line_1: 676 million within 50 km.
+    stat_line_2: UN figures show roughly six hundred seventy-six million women and
+      girls live within fifty kilometers of an active conflict — a number that turned
+      gendered conflict harm from rhetorical talking point into governance vocabulary.
+    metadata:
+      semantic_family: gendered-harm-load
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_turnaround_02
+    stat_line_1: UN Resolution 2250. YPS.
+    stat_line_2: UN Security Council Resolution 2250, adopted in 2015, established
+      the Youth, Peace and Security agenda — the multilateral instrument that recognizes
+      young people as essential agents in peace, not only its casualties.
+    metadata:
+      semantic_family: yps-multilateral
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_turnaround_03
+    stat_line_1: 47 countries. National Action Plans.
+    stat_line_2: Forty-seven countries now hold formal National Action Plans on Youth,
+      Peace and Security — the country-level vehicles that translate the YPS resolution
+      into ministry-level pressure rather than rhetoric.
+    metadata:
+      semantic_family: nap-country-level
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_turnaround_04
+    stat_line_1: 5,000 peacebuilders.
+    stat_line_2: Search for Common Ground works in conflict zones across the world
+      and now lists more than five thousand peacebuilders inside its network — a
+      distributed peacebuilding infrastructure whose existence is the alternative
+      to despair as a position.
+    metadata:
+      semantic_family: distributed-peacebuilding
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_turnaround_05
+    stat_line_1: 100+ organizations. Generation Peace.
+    stat_line_2: The Generation Peace Network connects more than one hundred youth-led
+      peacebuilding organizations into a single coordination layer — the structural
+      complement to whatever any one local effort is carrying alone.
+    metadata:
+      semantic_family: youth-coordination-network
+      article_types:
+      - hard_news_spiritual_response
 bridge:
   options:
-  - id: bridge_01
-    line: 143 youth coalitions. 28 countries. The tracker measures what young people
-      did. It has no column for what made the next step possible after another delayed
-      or broken response -- the capacity to stay human enough to act again without
-      surrendering to numbness or despair. The person who came back needed it. So
-      does the reader in that loop. Sai Maa's teaching has language for protecting
-      that capacity.
-    hidden_capacity: return to truthful action
-    semantic_family: sai_ma-peace_conflict-bridge
-    article_types:
-    - hard_news_spiritual_response
+  - id: sai_ma_pc_bridge_01
+    line: '676 million women and girls live within 50 km of conflict. The tracker
+      measures the demographic young peacebuilders organized into governance vocabulary.
+      It has no column for what made the next vigil possible — the capacity to stay
+      human when the brain''s inherited patterns of separation are still firing. Sai
+      Maa''s lineage does not argue with the pattern: Brain Illumination Meditation
+      and Diksha illuminate it from inside, so unity consciousness can land where
+      explanation cannot.'
+    hidden_capacity: stay human through the inherited pattern
+    metadata:
+      semantic_family: tracker-capacity-peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_bridge_02
+    line: The numbers show the scaffolding the young built. They do not show the Divine
+      Feminine reality humanity has always been — an embodied living reality the inherited
+      conflict frame treated as metaphor and the lineage holds as native. The data
+      cannot register what only Shakti can.
+    hidden_capacity: register the Divine Feminine the data cannot
+    metadata:
+      semantic_family: divine-feminine-bridge-peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_bridge_03
+    line: The data captures casualties, resolutions, and policy adoptions. It cannot
+      capture the moment when a limiting pattern of separation in the brain is illuminated
+      and stops directing the day. In Sai Maa's framework that illumination is the
+      actual relief — the part no tracker reports because no tracker is tuned to
+      it.
+    hidden_capacity: catch the illumination the trackers miss
+    metadata:
+      semantic_family: illumination-data-gap-peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_bridge_04
+    line: The infrastructure is measurable. The layer where unity consciousness presses
+      against patterns of us and them is not. Sai Maa's lineage does not argue with
+      measurement — it works in the layer beneath it, where every individual is being
+      asked to recognize fundamental interconnection with every other being on the
+      planet, including those the inherited frame names as opposite.
+    hidden_capacity: work in the unity-consciousness layer
+    metadata:
+      semantic_family: unity-consciousness-bridge-peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_bridge_05
+    line: Resolutions, NAPs, and platforms can be counted. The mastery already alive
+      inside each young person staying human under witness cannot. Sai Maa's lineage
+      does not replace the structural work — it cultivates masters, not followers,
+      and offers Diksha as the door through which the mastery already there can be
+      awakened.
+    hidden_capacity: awaken mastery the structural work cannot reach
+    metadata:
+      semantic_family: master-cultivation-bridge-peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 teacher_perspective:
   options:
-  - id: teacher_perspective_01
+  - id: sai_ma_pc_perspective_01
     header: What Sai Maa Sees
     paragraphs:
-    - Sai Maa would begin by separating consciousness from the storm moving through
-      it. Pressure is real, but overwhelm should not become identity.
-    - Her teaching does not ask young people to deny the difficulty. It asks them
-      to recover enough inner clarity that fear or overload does not become the sole
-      narrator of the self.
-    - What feels like a personal fault -- me, broken, wrong -- is often accurate response
-      to a system and institutional structure that keep normalizing unsustainable
-      strain.
-    semantic_family: sai_ma-peace_conflict-perspective
-    article_types:
-    - hard_news_spiritual_response
+    - In the Vishnuswami lineage the brain is not the seat of consciousness — it is
+      the instrument consciousness moves through. Much of what young people experience
+      as moral injury is the brain running inherited patterns of separation the soul
+      never authored, while the recognition of interconnection waits to be received
+      on the other side of them. Brain Illumination Meditation begins where blame
+      ends.
+    - Sai Maa Diksha is not metaphor. It is the literal transmission of light into
+      the brain to awaken divine energy — a practice carried in the lineage and transmitted
+      with the authority of Jagadguru. For a generation talked at by every available
+      conflict authority, this is not another voice. It is a different layer of contact.
+    - The reframe does not promise the pattern will never return. It promises that
+      every individual can achieve self-mastery, that the moral injury is not proof
+      of being broken, and that the inherited system was never designed to host humanity
+      as one body. The work is to illuminate, not to argue.
+    metadata:
+      semantic_family: brain-illumination-reframe-peace
+      reframe_type: self_to_system
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_perspective_02
+    header: What Sai Maa Sees
+    paragraphs:
+    - The Divine Feminine, in Sai Maa's lineage, is not symbol and not metaphor. It
+      is embodied living reality — the Shakti that has always been present in every
+      life and is now pressing against a brain whose inherited patterns of us and
+      them were never tuned to recognize it. The conflict distress young people carry
+      is, in part, the pressure of that meeting.
+    - This is the load-bearing context the conventional frame cannot supply. Sai Maa
+      is the first female Jagadguru in 2,700 years of Vishnuswami lineage, and the
+      arrival of the Divine Feminine through that office is not narrative flourish
+      — it is the lineage marking that this transmission belongs to this moment.
+    - The practice is to recognize Shakti in every life rather than manage anxiety
+      about violence. The recognition does not lift the witness; it changes what the
+      witness is read as. What looked like collapse becomes embodied divine energy
+      asking to be hosted, and the work moves from numbness to reception.
+    metadata:
+      semantic_family: divine-feminine-embodied-peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_perspective_03
+    header: What Sai Maa Sees
+    paragraphs:
+    - In Sai Maa's lineage the teaching is to cultivate masters, not followers. The
+      mastery is already inside every young person who arrives carrying moral injury
+      — it has only been overlaid with inherited patterns of separation the culture
+      asked them to run without their consent. Diksha and Brain Illumination Meditation
+      are tools to clear the overlay, not to add another authority on top.
+    - This matters in a generation that has been talked at by every available conflict
+      authority and is exhausted by the position itself. The lineage refuses the position.
+      There is no spiritual hierarchy that disempowers in Sai Maa's work; the practice
+      is to awaken what is already there.
+    - The mastery, once recognized, is not a private possession. In the lineage it
+      naturally moves outward — into the humanitarian work, into the Temple of Consciousness,
+      into how a young person carries the same witness tomorrow for someone else.
+      Self-mastery and humanitarian service are not sequential; they are one practice.
+    metadata:
+      semantic_family: masters-not-followers-perspective-peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_perspective_04
+    header: What Sai Maa Sees
+    paragraphs:
+    - Sai Maa speaks across East and West as one field. The lineage is Hindu Vishnuswami;
+      the visitations from Jesus, St. Germain, and Archangel Michael are received
+      within the same realization. For a generation raised across overlapping traditions
+      and asked to choose, the refusal to choose is not eclecticism. It is doctrine.
+    - This matters for conflict because most conflict frames rest on inherited categories
+      of us and them — religious, national, cultural. The lineage holds that the
+      divine voices speaking through every tradition belong to the same field, and
+      that the separation those frames presume is itself the pattern that needs to
+      be illuminated.
+    - The practice is not to argue traditions into agreement. The practice is to receive
+      Diksha as the lineage has carried it and let the integration that is native
+      to it land. What conventional conflict discourse cannot supply, the realization
+      can.
+    metadata:
+      semantic_family: east-west-integration-perspective-peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_perspective_05
+    header: What Sai Maa Sees
+    paragraphs:
+    - Unity consciousness, in Sai Maa's lineage, is the recognition that every being
+      is fundamentally interconnected — that the suffering of one is not separate
+      from the field, and the mastery of one is not separate from the whole. The
+      conflict distress young people carry is, in part, the cost of trying to hold
+      that recognition inside structures built on the separation of us and them.
+    - The reframe does not flatter. It does not promise the moral injury will lift
+      quickly, and it does not blame the cohort for feeling unstable in inherited
+      structures that were never built for what they are being asked to host. It names
+      the structural fact, removes the additional weight of believing the instability
+      is a personal failure, and offers the lineage's tools — Diksha, Brain Illumination
+      Meditation — as the layer beneath the load.
+    - That weight removal is, in transmission practice, often the part that lands
+      first — and the humanitarian work the lineage carries is the natural extension
+      of the same unity recognition.
+    metadata:
+      semantic_family: unity-consciousness-perspective-peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 practice:
-  default_id: practice_01
+  default_id: sai_ma_pc_practice_01
   options:
-  - id: practice_01
-    display_name: 5-minute Overwhelm Reset
+  - id: sai_ma_pc_practice_01
+    display_name: Brain Illumination Pause
     duration: 5 minutes
-    announcement_line: Sai Maa teaches a 5-minute Overwhelm Reset for moments when
-      peace conflict pressure starts converting attention into helplessness. It is
-      in the sidebar, timed and practical.
+    announcement_line: Sai Maa teaches a 5-minute Brain Illumination Pause for moments
+      when an inherited pattern of separation is firing in the brain and the mind
+      has been trying too hard to argue with it. It is in the sidebar, timed and
+      step by step.
     relief_lines:
-    - The spiral loses some of its authority to define the whole self.
-    - Enough clarity returns for the next honest decision.
+    - The pattern stops being treated as identity.
+    - Enough light reaches the brain that the next honest act of conscience becomes
+      possible again.
     relief_register:
-    - capacity
+    - illuminate
     - clarity
-    - act again
-    article_types:
-    - hard_news_spiritual_response
+    - mastery
+    derived_from_frame: brain_illumination
+    metadata:
+      semantic_family: brain_illumination_practice_peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_practice_02
+    display_name: Diksha Receiving
+    duration: 3 minutes
+    announcement_line: Sai Maa offers a 3-minute Diksha Receiving practice for moments
+      between briefings, when the brain has been held in the inherited pattern of
+      separation without permission to set it down. It is in the sidebar, timed and
+      step by step.
+    relief_lines:
+    - The pattern softens enough that the light can reach where explanation cannot.
+    - The recognition of interconnection surfaces alongside the day's witness.
+    relief_register:
+    - receive
+    - light
+    - diksha
+    derived_from_frame: diksha_receiving
+    metadata:
+      semantic_family: diksha_receiving_practice_peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_practice_03
+    display_name: Divine Feminine Recall
+    duration: 7 minutes
+    announcement_line: Sai Maa teaches a 7-minute Divine Feminine Recall practice
+      for moments when the inherited frame's reading of conflict has been overused
+      and the body needs the Shakti reality of every life re-recognized. It is in
+      the sidebar, timed and step by step.
+    relief_lines:
+    - The body remembers it has been hosting Shakti, not failing.
+    - The reading of the witness changes from us-and-them to embodied recognition.
+    relief_register:
+    - embody
+    - shakti
+    - divine feminine
+    derived_from_frame: divine_feminine_recall
+    metadata:
+      semantic_family: divine_feminine_recall_practice_peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_practice_04
+    display_name: Shakti Listening
+    duration: 4 minutes
+    announcement_line: Sai Maa teaches a 4-minute Shakti Listening practice for moments
+      when the inner argument about the conflict is running in circles and a different
+      layer of input is being asked for. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The question stops being something to solve and becomes something to host.
+    - What arrives is divine energy, not another instruction stack.
+    relief_register:
+    - listen
+    - receive
+    - shakti
+    derived_from_frame: shakti_listening
+    metadata:
+      semantic_family: shakti_listening_practice_peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: sai_ma_pc_practice_05
+    display_name: Unity Consciousness Breath
+    duration: 3 minutes
+    announcement_line: Sai Maa offers a 3-minute Unity Consciousness Breath for moments
+      of acute pattern firing, when the day's headlines have knocked the recognition
+      of fundamental interconnection out of reach. It is in the sidebar, timed and
+      step by step.
+    relief_lines:
+    - The breath becomes a marker for the field every being has always been part of.
+    - The body returns to a register where staying human and humanitarian service
+      belong to the same practice.
+    relief_register:
+    - breath
+    - unity
+    - interconnection
+    derived_from_frame: unity_consciousness_breath
+    metadata:
+      semantic_family: unity_consciousness_practice_peace
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 sdg:
   primary:
     id: SDG 16
@@ -156,32 +668,97 @@ sdg:
       Nations.
 cta:
   options:
-  - id: cta_01
-    org: UN Youth Office
-    line: 'The UN Youth Office and youth peace networks offer a public entry point
-      here. Door in: https://www.un.org/youthenvoy/'
-    semantic_family: sai_ma-peace_conflict-cta
-    article_types:
-    - hard_news_spiritual_response
-title_system:
-  headline_layer_1:
-    options:
-    - id: headline_layer_1_01
-      line: Young People Are Carrying Conflict as Moral Injury.
-      semantic_family: sai_ma-peace_conflict-title1
+  - id: sai_ma_pc_cta_01
+    org: UNA-USA
+    line: 'UNA-USA connects Americans to the work of the United Nations across peace,
+      humanitarian, and human-rights tracks. Door in: their chapter network turns
+      multilateral concern into local organizing.'
+    metadata:
+      semantic_family: door-in-una-usa
       article_types:
       - hard_news_spiritual_response
+  - id: sai_ma_pc_cta_02
+    org: Search for Common Ground
+    line: 'Search for Common Ground works in conflict zones worldwide with more than
+      five thousand peacebuilders in network. Door in: a distributed peacebuilding
+      infrastructure whose existence is the structural alternative to despair as a
+      position.'
+    metadata:
+      semantic_family: door-in-search-for-common-ground
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_cta_03
+    org: Generations For Peace
+    line: 'Generations For Peace trains volunteers in non-violence and conflict transformation
+      across more than fifty countries. Door in: their fellowship program turns young
+      people into trained practitioners rather than only witnesses.'
+    metadata:
+      semantic_family: door-in-generations-for-peace
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_cta_04
+    org: Peace Direct
+    line: 'Peace Direct funds local peacebuilding led by people inside conflict zones.
+      Door in: their network reroutes peacebuilding investment away from outside-experts
+      and into the people already doing the work.'
+    metadata:
+      semantic_family: door-in-peace-direct
+      article_types:
+      - hard_news_spiritual_response
+  - id: sai_ma_pc_cta_05
+    org: UNOY
+    line: 'UNOY Peacebuilders is a global network of youth-led peace organizations.
+      Door in: the network turns local youth peacebuilding into international visibility
+      and shared infrastructure.'
+    metadata:
+      semantic_family: door-in-unoy
+      article_types:
+      - hard_news_spiritual_response
+title_system:
   headline_layer_2:
     options:
-    - id: headline_layer_2_01
-      line: A teacher names the fight to stay human under repeated violence and institutional
-        failure.
-      semantic_family: sai_ma-peace_conflict-title2
-      article_types:
-      - hard_news_spiritual_response
+    - id: sai_ma_pc_headline_01
+      line: A Jagadguru of the Vishnuswami lineage names moral injury as pattern —
+        and Brain Illumination Meditation as the practice that meets it.
+      metadata:
+        semantic_family: jagadguru-attention-peace
+        article_types:
+        - hard_news_spiritual_response
+    - id: sai_ma_pc_headline_02
+      line: Diksha — the transmission of light into the brain — on the layer of moral
+        injury conventional discourse is not built to reach.
+      metadata:
+        semantic_family: diksha-frame-peace
+        article_types:
+        - hard_news_spiritual_response
+    - id: sai_ma_pc_headline_03
+      line: The Divine Feminine as embodied living reality in every life — Sai Maa's
+        lineage meets the exhausted intellect.
+      metadata:
+        semantic_family: divine-feminine-frame-peace
+        article_types:
+        - hard_news_spiritual_response
+    - id: sai_ma_pc_headline_04
+      line: Cultivating masters, not followers — a Vishnuswami Jagadguru reframes
+        the witness load Gen Z is carrying.
+      metadata:
+        semantic_family: masters-frame-peace
+        article_types:
+        - hard_news_spiritual_response
+    - id: sai_ma_pc_headline_05
+      line: Unity consciousness over us-and-them — what the humanitarian lineage brings
+        to a generation staying human under repeated violence.
+      metadata:
+        semantic_family: unity-consciousness-frame-peace
+        article_types:
+        - hard_news_spiritual_response
 variation_policy:
   avoid_same_semantic_family_within_article: true
   deterministic_rotation_key: article_id + slot + teacher_id + topic
   metadata_filters:
     article_types:
     - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4
