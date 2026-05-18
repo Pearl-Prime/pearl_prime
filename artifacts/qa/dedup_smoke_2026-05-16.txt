@@ -1,0 +1,26 @@
+========================================================================
+book-wide paragraph dedupe smoke: canary ja_jp_stillness_press_smoke_2026-05-16
+  corpus: anxiety_corporate_managers_ahjan/book.txt
+  diagnosis: artifacts/qa/dedupe_leak_diagnosis_2026-05-16.md (patch (a))
+========================================================================
+
+PHRASE COUNTS
+  "she thinks about the"               BEFORE:    0   AFTER:    0
+  "campaign that underperforms expectations" BEFORE:   16   AFTER:    9
+
+PARAGRAPH-LEVEL HITS (paragraphs containing the Tanya phrase)
+  BEFORE: 16 paragraphs
+  AFTER:  9 paragraphs
+    -> the 81-word verbatim canonical paragraph (the leak) went from 8 -> 1
+    -> the remaining 9 are distinct paragraphs that *contain* the phrase
+       (variants left as residue of the architectural bug — patch (b) territory)
+
+TEXT SHAPE
+  lines  BEFORE:  1368   AFTER:  1226
+  chars  BEFORE: 102546  AFTER:  86866
+  elisions performed by patch (a): 45
+
+VERDICT: safety-net engages.  Verbatim 81-word repeat reduced from 8 -> 1.
+         Patch (b) (chapter-aware canonical fallback in injection_resolver.py)
+         remains the architectural fix for the variant residue — out of scope
+         for this PR per operator routing.

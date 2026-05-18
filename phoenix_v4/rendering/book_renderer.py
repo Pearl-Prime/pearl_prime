@@ -365,6 +365,105 @@ def _dedup_repeated_blocks(
     return deduped
 
 
+# Default keep-cap for the book-wide dedupe pass: keep the first occurrence only
+# (matches the chapter-scoped `_dedup_repeated_blocks` convention). Overridable
+# via the `PHOENIX_BOOK_DEDUPE_KEEP` env var for tests or for an operator to
+# permit a small number of intentional cross-chapter echoes.
+import os as _os  # noqa: E402  (kept local to the dedupe block for clarity)
+
+
+def _book_wide_dedupe_keep_default() -> int:
+    try:
+        return max(1, int(_os.environ.get("PHOENIX_BOOK_DEDUPE_KEEP", "1") or "1"))
+    except (TypeError, ValueError):
+        return 1
+
+
+def _dedup_paragraphs_book_wide(
+    text: str,
+    min_words: int = 30,
+    *,
+    min_chars: int = 120,
+    keep: Optional[int] = None,
+) -> tuple[str, list[str]]:
+    """Final cross-chapter paragraph dedupe.
+
+    Strips verbatim paragraph repeats that survive intra-chapter dedupe. Required
+    because canonical-fallback story injection (atoms/.../CANONICAL.txt whole-file
+    blob) can paste the same atom into every chapter and the chapter-scoped
+    `_dedup_repeated_blocks` resets at each `Chapter N` heading.
+
+    Args:
+        text: full manuscript text (chapter-separated, blank-line paragraphs).
+        min_words: paragraphs shorter than this (word count) are exempt — short
+            transitional lines, dialogue tags, and the like are allowed to repeat.
+        min_chars: paragraphs shorter than this (character count) are also exempt.
+            Both gates apply; a paragraph must clear BOTH to participate.
+        keep: max occurrences of any given normalized paragraph to retain. Defaults
+            to `_book_wide_dedupe_keep_default()` (env-override of "1"). All occurrences
+            after the Nth are elided.
+
+    Returns:
+        (deduped_text, notes) — notes is one entry per elided occurrence.
+
+    Casing/whitespace of the KEPT paragraph is preserved verbatim; normalization
+    (lowercase, punctuation strip, whitespace collapse) is only used as the
+    comparison fingerprint.
+    """
+    if not (text or "").strip():
+        return text, []
+    if keep is None:
+        keep = _book_wide_dedupe_keep_default()
+    if keep < 1:
+        keep = 1
+
+    notes: list[str] = []
+    seen: dict[str, int] = {}
+    kept: list[str] = []
+    counts_first_seen: dict[str, str] = {}
+
+    for para in re.split(r"\n{2,}", text):
+        stripped = para.strip()
+        if not stripped:
+            continue
+        # Always keep chapter headings so chapter structure survives the pass.
+        if re.match(r"^Chapter\s+\d+", stripped, re.IGNORECASE):
+            kept.append(stripped)
+            continue
+        wc = len(stripped.split())
+        cc = len(stripped)
+        if wc < min_words or cc < min_chars:
+            # Short paragraphs are exempt — transitional lines, beats, dialogue
+            # tags must be free to repeat across chapters.
+            kept.append(stripped)
+            continue
+        fp = re.sub(r"\s+", " ", re.sub(r"[^\w\s]+", "", stripped.lower())).strip()
+        seen[fp] = seen.get(fp, 0) + 1
+        if seen[fp] <= keep:
+            kept.append(stripped)
+            counts_first_seen.setdefault(fp, stripped[:80])
+        else:
+            notes.append(
+                f"book_wide_paragraph_dedupe: removed_extra (occurrence {seen[fp]}) "
+                f"{stripped[:80]!r}"
+            )
+
+    # One log line per elided fingerprint with its total occurrence count so
+    # production has telemetry on how often the safety-net actually fires.
+    if notes:
+        elided_fps = {fp: count for fp, count in seen.items() if count > keep}
+        for fp, count in elided_fps.items():
+            fp_hash = hashlib.sha1(fp.encode("utf-8")).hexdigest()[:10]
+            logger.info(
+                "[dedup] book-wide paragraph elision: %s appeared %d times, kept %d",
+                fp_hash,
+                count,
+                keep,
+            )
+
+    return "\n\n".join(kept), notes
+
+
 def _build_signature_phrase_index(
     text: str,
     min_words: int = 8,
@@ -494,6 +593,16 @@ def clean_for_delivery(
             rr = governance_report.setdefault("recurrence_report", [])
             if isinstance(rr, list):
                 rr.extend(recurrence_removed)
+
+    # Cross-chapter paragraph dedupe safety-net (patch (a) of
+    # artifacts/qa/dedupe_leak_diagnosis_2026-05-16.md). Strips whole-paragraph
+    # verbatim repeats that survived the chapter-scoped `_dedup_repeated_blocks`
+    # because they were inserted by the canonical-fallback story injection.
+    text, book_dedupe_notes = _dedup_paragraphs_book_wide(text)
+    if governance_report is not None and book_dedupe_notes:
+        gov_notes = governance_report.setdefault("whole_book_dedupe_notes", [])
+        if isinstance(gov_notes, list):
+            gov_notes.extend(book_dedupe_notes)
 
     text = _RESIDUAL_BRACE_PLACEHOLDER.sub("", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
