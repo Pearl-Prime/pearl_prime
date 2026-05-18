@@ -1690,3 +1690,59 @@ overlay_param:
 **Authority:** This cap entry + `docs/specs/JAPAN_MANGA_ONLY_CATALOG_V1_SPEC.md` (detail).
 
 ---
+
+### TEACHER-MODE-WRAPPER-SEMANTICS-01 — Teacher voice wraps persona+topic substance; never substitutes (decision approved 2026-05-17)
+
+**Status:** **ratified-as-drafted** (operator approved 2026-05-17 per audit §7 reroute).
+
+**Context:** [`artifacts/qa/persona_topic_yaml_specificity_audit_20260517.md`](../artifacts/qa/persona_topic_yaml_specificity_audit_20260517.md) §6 identified the primary root cause of operator-reported vague/generic books: the loader at [`phoenix_v4/planning/enrichment_select.py:982-1080`](../phoenix_v4/planning/enrichment_select.py) performs "additive stacking" (persona_atom → registry → teacher_atom, all three fire) without per-slot precedence rules. Result: teacher atoms fire on ~60/120 slots (~50%) and frequently override the substance of slots where persona+topic atoms should dominate. Smoking gun (audit §4): Chapter 1 opens with `ahjan_HOOK_011` ("Every person carries the capacity for awakening...") instead of [`registry/anxiety.yaml:25`](../registry/anxiety.yaml) ("You did everything they said to do. Your chest has not gotten the memo..."). The teacher voice substituted for the topic-specific somatic hook even though the HOOK slot's body should come from persona+registry. This cap entry locks the **substance vs voice** distinction and resolves the per-slot precedence ambiguity that TEACHER-POOL-SEMANTICS-01 left underspecified.
+
+**Decision: Teacher banks are a VOICE layer that wraps the SUBSTANCE layer (persona × topic atoms + topic registry). Per-slot precedence is locked per the table below.**
+
+**Per-slot precedence (locked):**
+
+| Slot type | Body (substance) source — first match wins | Voice wrapper allowed? |
+|---|---|---|
+| HOOK | `atoms/<persona>/<topic>/HOOK/*` → `registry/<topic>.yaml` | ≤1 line teacher framing at opening only; teacher HOOK atoms fall back ONLY when persona+registry empty |
+| SCENE (sec 2/5/9) | `atoms/<persona>/<topic>/<engine>/CANONICAL.txt` (engine-bank, named-character continuity per `SOURCE_OF_TRUTH/story_atoms/character_roster.yaml`) | ≤2 lines teacher framing at scene open/close; teacher SCENE atoms fall back ONLY when persona engine-bank empty |
+| STORY | same as SCENE — persona engine-bank first | same wrapper rule as SCENE |
+| COMPRESSION | `atoms/<persona>/<topic>/COMPRESSION/*` → `registry/<topic>.yaml` mechanism vocab | teacher voice for cadence only; never replaces mechanism vocabulary |
+| PERMISSION | `atoms/<persona>/<topic>/PERMISSION/*` → `registry/<topic>.yaml` | teacher voice for cadence only |
+| PIVOT | `atoms/<persona>/<topic>/PIVOT/*` → `registry/<topic>.yaml` | teacher voice for cadence only |
+| TAKEAWAY | `atoms/<persona>/<topic>/TAKEAWAY/*` → `registry/<topic>.yaml` | teacher voice for cadence only |
+| THREAD | `atoms/<persona>/<topic>/THREAD/*` → `registry/<topic>.yaml` | teacher voice for cadence only |
+| TEACHER_DOCTRINE | `SOURCE_OF_TRUTH/teacher_banks/<teacher>/approved_atoms/TEACHER_DOCTRINE/*` (teacher OWNS this slot) | n/a |
+| REFLECTION | `SOURCE_OF_TRUTH/teacher_banks/<teacher>/approved_atoms/REFLECTION/*` (teacher OWNS) | n/a |
+| INTEGRATION | `SOURCE_OF_TRUTH/teacher_banks/<teacher>/approved_atoms/INTEGRATION/*` (teacher OWNS) | n/a |
+| EXERCISE | per existing EXERCISE-BANK-RESOLUTION-01 (PR #912 strict-canonical) | n/a (locked separately) |
+| QUOTE | per existing QUOTE-ATOM-ROUTING-01 (migrate to TEACHER_DOCTRINE / REFLECTION / INTEGRATION) | n/a (locked separately) |
+
+**Story selection order for SCENE / STORY slots (sec 2/5/9 per BESTSELLER-INJECTIONS-MANDATORY-01):**
+1. PRIMARY — `atoms/<persona>/<topic>/<engine>/CANONICAL.txt` (engine-bank, 2,584 files per [`phoenix_v4/planning/pool_index.py:7`](../phoenix_v4/planning/pool_index.py); proven 27/30 bestseller-grade in [`artifacts/qa/move4_2026_04_26/per_persona_topic_coverage.md`](../artifacts/qa/move4_2026_04_26/per_persona_topic_coverage.md))
+2. WRAPPER — teacher voice ≤2 lines framing the scene open/close (cadence, register, gesture toward the body) — wraps the scene; does not replace the named-character continuity
+3. FALLBACK ONLY — `SOURCE_OF_TRUTH/teacher_banks/<teacher>/approved_atoms/STORY/*` ONLY when the persona engine-bank pool is empty for the (`<persona>`, `<topic>`, `<engine>`) tuple
+
+**Voice-wrapper rules (when teacher voice augments a substance slot):**
+- **Scope:** framing only — opening or closing line of the slot, transition cadence — NEVER the body sentence(s) carrying mechanism vocabulary, named-character continuity, or somatic specificity
+- **Line budget:** HOOK ≤1 wrapper line; SCENE/STORY ≤2 wrapper lines per scene; other substance slots cadence-only (no extra lines, just stylistic register)
+- **Doctrine compliance:** wrapper honors `SOURCE_OF_TRUTH/teacher_banks/<teacher>/doctrine/doctrine.yaml` (tradition, tone, forbidden claims)
+- **Mechanism-specificity preserved:** wrapper line must NOT contradict, soften, or generalize the topic-specific mechanism vocabulary from the substance source
+
+**Anti-drift check:**
+- SUPPLEMENTS TEACHER-POOL-SEMANTICS-01 (first-match deterministic but WHICH pool was unspecified — this cap resolves it)
+- SUPPLEMENTS BESTSELLER-INJECTIONS-MANDATORY-01 (clarifies the injection content at sec 2/5/9 comes from persona engine-bank, not teacher banks)
+- SUPPLEMENTS PEARL-EDITOR-UPSTREAM-01 (formalizes content-authority vs voice-authority layer separation)
+- DOES NOT CONTRADICT EXERCISE-BANK-RESOLUTION-01 / QUOTE-ATOM-ROUTING-01 / BG-PR-09
+- Retires unqualified "additive stacking" framing for substance slots: the loader still STACKS sources, but precedence per the table above selects the BODY; teacher contributions in substance slots are wrapper-only per the line-budget rule
+
+**Handoffs (Pearl_PM opens these 3 ws's after merge; ws rows seeded by this PR in `artifacts/coordination/ACTIVE_WORKSTREAMS.tsv`):**
+
+- **Pearl_Dev (PRIMARY) — `ws_teacher_wrapper_semantics_impl_20260517`**: amend [`phoenix_v4/planning/enrichment_select.py:982-1080`](../phoenix_v4/planning/enrichment_select.py) per-slot waterfall to encode the precedence table above. For substance slots: persona+registry wins on body; teacher contributes wrapper line(s) within the line-budget rule. For voice slots (TEACHER_DOCTRINE / REFLECTION / INTEGRATION): teacher wins. Add test fixture `tests/test_teacher_wrapper_semantics.py` covering: (i) HOOK body sourced from persona+registry when both pools non-empty; (ii) teacher HOOK falls back ONLY when persona+registry empty; (iii) SCENE wrapper line-budget enforced; (iv) voice slots remain teacher-owned. ~50-100 lines including tests. Acceptance: re-run `--quality-profile production` for ahjan × gen_z_professionals × anxiety × standard_book; Chapter 1 opens with `registry/anxiety.yaml:25` somatic hook (not `ahjan_HOOK_011`); karma/Dharma/Buddha/enlightenment counts ≤ 2 each per chapter; `bestseller_craft.overall_score` ≥ 0.55.
+
+- **Pearl_Dev (FOLLOW-UP) — `ws_enrichment_audit_section_packet_serialization_fix_20260517`**: fix the serialization type-bug at [`scripts/run_pipeline.py:1406`](../scripts/run_pipeline.py) so `enrichment_audit.json` includes the `story_schedule` key per audit §7.4. ~10 lines. Unblocks audit §7.2's story_schedule diagnosis ws.
+
+- **Pearl_Editor + Pearl_Writer — `ws_ahjan_teacher_bank_framing_reauthor_20260517`** (replaces the audit's §7.1 ws at a NEW SMALLER scope per this cap entry's wrap-not-replace rule): re-author the ahjan teacher_bank HOOK/REFLECTION/COMPRESSION subset as anxiety-AWARE FRAMINGS (~12-15 wrapper-style atoms total — opening/closing lines in ahjan voice that gesture at the body, the felt sense, the moment). NOT full substantive essays — the substance comes from persona+topic atoms and `registry/anxiety.yaml`. Scope intentionally smaller than the audit's original §7.1 estimate because this cap routes substance to persona+topic and reserves teacher banks for voice. Gated on `ws_teacher_wrapper_semantics_impl_20260517` landing (semantics first, then re-author against locked rules).
+
+**Authority:** This cap entry + the supplemented entries above + [`docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md`](./PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md) §570-577 (canonical CLI) + [`specs/PHOENIX_V4_5_WRITER_SPEC.md`](../specs/PHOENIX_V4_5_WRITER_SPEC.md) §4 (three-source content rule).
+
+---
