@@ -3,15 +3,15 @@ teacher_id: maat
 topic: economy_work
 active: true
 identity:
-  display_name: Ma'at
-  attribution_name: Teacher Ma'at
-  tradition: South Indian Sufi
-  tradition_short: South Indian Sufi
+  display_name: Maat
+  attribution_name: Teacher Maat
+  tradition: Naqshbandi Sufi Tariqat; path of the heart; fanaa (dissolution in Divine Love); dhikr (remembrance); universal Sufism in the Hazrat Inayat Khan lineage
+  tradition_short: Naqshbandi Sufi
   teacher_setting_options:
+  - Sufi circle
   - sohbet
-  - dargah circle
-  teacher_years: Qadiriyya lineage
-  affiliation_safe_line: has attended the United Spiritual Leaders Forum
+  teacher_years: decades
+  affiliation_safe_line: teaches within the Naqshbandi Sufi tradition and Hazrat Inayat Khan lineage
   launch_approved: true
 persona:
   id: gen_z_alpha
@@ -19,177 +19,544 @@ persona:
   default_register: phone-native, high-pressure, institution-skeptical
   daily_worlds:
   - school
-  - home
+  - phone
   - group chat
   - commute
-  - public systems
+  - part-time work
   tie_to_real_world_struggles:
-  - id: truth_pressure
-    label: knows something is wrong before the system names it
-    loop: sees the gap -> body braces -> goes quiet -> keeps scanning for what is
-      true
+  - id: precarity_loop
+    label: the body absorbing precarity while the system keeps insisting it is a test of character
+    loop: checks the schedule app -> stomach drops -> refreshes -> screenshots before the shift disappears
     body_markers:
-    - shoulders
+    - stomach
     - jaw
-    - brace
+    - shoulders
     digital_markers:
-    - scan
-    - re-read
-    - screenshot
+    - checks the app
+    - refreshes
+    - screenshots
 topic_fit:
   fit_level: primary
-  fit_reason: 'This topic maps to instability, repeated self-management under moving
-    thresholds, and the hidden cost of precarious work. '
+  fit_reason: Precarious work asks young people to absorb instability as identity and to carry its hidden cost in the body. The Naqshbandi path holds that longing for dignified work is not weakness but evidence of what the soul already knows it is worth — and dhikr keeps the heart honest under the pressure.
   forbidden_angles:
   - do not glamorize hustle
   - do not frame instability as a personal lesson
+  - do not reduce dignity to a productivity metric
 hook_personal:
   options:
-  - id: hook_personal_01
-    line: Work keeps asking for more flexibility while giving less stability, and
-      your body knows the cost before the schedule ever admits it.
-    semantic_family: maat-economy_work-hook-personal
-    tone: plain
-    intensity: 3
-    article_types:
-    - hard_news_spiritual_response
+  - id: maat_ew_hook_personal_01
+    line: Work keeps asking for more flexibility while giving less stability, and your body knows the cost before the schedule ever admits it. The stomach drops at the notification before the words have landed.
+    metadata:
+      semantic_family: body-knows-the-cost
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_hook_personal_02
+    line: You opened the gig app and your jaw locked before you read the rate. The body has been carrying what the contract keeps refusing to name, and the part of you that knows is the part that has been most exhausted by being right.
+    metadata:
+      semantic_family: jaw-locks-pre-rate
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_hook_personal_03
+    line: You took the shift you did not want because the rent is not theoretical, and felt the longing rise — not for ease, but for work that does not require the body to keep paying the difference between the pay and the worth.
+    metadata:
+      semantic_family: longing-for-dignified-work
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_hook_personal_04
+    line: You closed the schedule app and could not name what you felt. It was not anger and not despair — something quieter, the part of the heart that has been registering for years that the instability is the design, not the exception.
+    metadata:
+      semantic_family: quieter-knowing
+      tone: grave
+      intensity: 4
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_hook_personal_05
+    line: You are not asking the platform to make the work feel meaningful. You are asking how to keep the heart from confusing precarity with worthlessness — how to let what you love about yourself stay close enough that you can still act when the next shift is cancelled.
+    metadata:
+      semantic_family: precarity-vs-worth
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
 hook_big_picture:
   options:
-  - id: hook_big_picture_01
-    line: 'Economic stress now arrives as identity pressure: stay employable, stay
-      available, and keep acting as if instability were a test of character.'
-    semantic_family: maat-economy_work-hook-big
-    article_types:
-    - hard_news_spiritual_response
+  - id: maat_ew_hook_big_01
+    line: Economic stress now arrives as identity pressure. Stay employable. Stay available. Keep acting as if instability were a test of character — and absorb the cost when the test keeps being rewritten.
+    metadata:
+      semantic_family: identity-pressure-frame
+      angle: systemic-pressure
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_hook_big_02
+    line: A generation is being asked to hold precarity as personal narrative without the language most cultures once carried for the heart's response to indignified labor. What gets read as a youth motivation crisis is, in part, that absence.
+    metadata:
+      semantic_family: language-absence
+      angle: cultural-gap
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_hook_big_03
+    line: The Sufi traditions hold that the qalb — the spiritual heart — registers indignity before the analytical mind catches up. The precarious-work cohort is not failing to budget. They are responding from a layer the budget spreadsheet was not written to address.
+    metadata:
+      semantic_family: thinking-from-deeper-layer
+      angle: spiritual-anthropology
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_hook_big_04
+    line: When the institutional response keeps treating precarity as personal choice, the gap between the policy and the lived reality becomes the pressure. The young people carrying that gap in their bodies are not the symptom of a coping failure. They are the visible edge of a structural one.
+    metadata:
+      semantic_family: institutional-gap-edge
+      angle: structural-edge
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_hook_big_05
+    line: The mystical traditions name a class of dignity that does not require the institution to recognize it for it to be true. Precarious work asks for exactly that dignity, and the absence of public language for it is part of why the cohort is drowning in private.
+    metadata:
+      semantic_family: dignity-without-permission
+      angle: tradition-frame
+      article_types:
+      - hard_news_spiritual_response
 teacher_intro:
   options:
-  - id: teacher_intro_01
-    line: Teacher Ma'at, a South Indian Sufi teacher rooted in the dargah traditions
-      of Tamil Nadu — who carries Rabia al-Adawiyya's fire and the Tamil Siddha poets'
-      understanding that the heart is the organ of truth — has watched in practice
-      sessions this pressure land on young people. They are not only asking what is
-      happening. They are asking how to trust their own perception when the qalb —
-      the spiritual heart — already knows what institutions keep understating.
-    semantic_family: maat-economy_work-intro
-    article_types:
-    - hard_news_spiritual_response
+  - id: maat_ew_intro_01
+    line: Teacher Maat — born Naqshbandi, MIT-trained engineer, ex-McKinsey consultant, now a Sufi teacher in the Hazrat Inayat Khan lineage — has watched in Sufi circles young people carry precarious work as the thing that has no name in the institutional vocabulary. In her framework the strain is not personal weakness. It is the qalb registering indignity the contracts keep softening, and the practice is to let dhikr keep the heart in honest contact with that registration.
+    metadata:
+      semantic_family: engineer-to-mystic-bridge
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_intro_02
+    line: Teacher Maat teaches within the Naqshbandi Sufi tariqat — the path of the heart — and inside Hazrat Inayat Khan's universal Sufism, which holds that one does not need to be Muslim to walk this way. In her Sufi circles, young workers arrive carrying precarity as a question about worth itself, about whether dignity survives the next cancelled shift. She does not answer with reassurance. She offers sama — sacred listening — and lets the music meet what the analysis cannot.
+    metadata:
+      semantic_family: universal-sufi-frame
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_intro_03
+    line: Teacher Maat carries a strange double inheritance — Naqshbandi from birth, engineer by MIT training, consultant by ex-McKinsey practice, teacher by call. She has sat on both sides of the spreadsheet that determines a young worker's week. In her circles she does not pretend the spreadsheet is the whole truth. She offers the practices that meet the layer the spreadsheet was never designed to reach.
+    metadata:
+      semantic_family: both-sides-of-spreadsheet
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_intro_04
+    line: Teacher Maat teaches Rumi inside Sufi circles where the lover-and-Beloved relationship is not metaphor but practice. When young workers arrive carrying the weight of precarity, she does not offer a productivity framework. She offers a re-orientation — that the longing they feel for dignified work is the same longing the mystics named ishq, and that the longing itself is the door.
+    metadata:
+      semantic_family: ishq-as-door
+      tone: plain
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_intro_05
+    line: Teacher Maat teaches inside a tradition that has held, for centuries, the practice of staying open to one's own worth in the presence of systems that misname it. In her circles she has watched young workers walk in convinced they are failing and walk out softened — not because the schedule changed, but because dhikr returned the heart to a register the platform had not been able to reach.
+    metadata:
+      semantic_family: tradition-of-staying-open
+      tone: grave
+      intensity: 3
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 youth_somatic:
   options:
-  - id: youth_somatic_01
-    line: 'You check the schedule app. Your stomach drops. You refresh again. Then
-      you screenshot it because the shift might disappear before you can trust what
-      you saw. LOOP_SEQUENCE: "checked the app. stomach dropped. refreshed again.
-      took the screenshot."'
-    loop_type: truth_pressure
-    article_types:
-    - hard_news_spiritual_response
+  - id: maat_ew_somatic_01
+    line: You checked the schedule app. Your stomach dropped. You refreshed again. Then you screenshot it because the shift might disappear before you can trust what you saw.
+    metadata:
+      semantic_family: schedule-app-screenshot
+      loop_type: precarity_loop
+      body_register: stomach
+      digital_behavior: checks the app
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_somatic_02
+    line: The notification said the shift was cancelled. Your jaw clamped. You opened the app a second time to make sure you read it right, and the second read landed harder than the first.
+    metadata:
+      semantic_family: cancellation-double-read
+      loop_type: cancellation_jolt
+      body_register: jaw
+      digital_behavior: shift cancellation notification
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_somatic_03
+    line: You held your breath while the wage statement loaded. Your shoulders rose. You exhaled halfway when you saw the number, because the rest of the breath was being held for the deductions that always come next.
+    metadata:
+      semantic_family: wage-statement-load
+      loop_type: wage_load_hold
+      body_register: breath
+      digital_behavior: wage statement loads
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_somatic_04
+    line: You finished the shift and sat in the locker room for a minute without moving. Your hands ached but were warm. The heart underneath the apron was still working, and that small fact felt like the only honest thing in the room.
+    metadata:
+      semantic_family: post-shift-stillness
+      loop_type: post_shift_stillness
+      body_register: chest
+      digital_behavior: shift ending
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_somatic_05
+    line: You lay down with the alarm already set for the 5am opening. Your jaw would not soften. You knew sleep was the thing that would help and you could not find the door into it because tomorrow was already arguing with you.
+    metadata:
+      semantic_family: early-alarm-no-door
+      loop_type: early_alarm_loop
+      body_register: jaw
+      digital_behavior: alarm set
+      article_types:
+      - hard_news_spiritual_response
 teacher_witness:
   options:
-  - id: teacher_witness_01
-    line: Ma'at has seen this exact loop -- the app check, the drop in the body, the
-      refresh, and the screenshot that tries to hold the moment still.
-    semantic_family: maat-economy_work-witness
-    article_types:
-    - hard_news_spiritual_response
+  - id: maat_ew_witness_01
+    line: Maat has seen this exact loop in her Sufi circles — the app check, the drop in the body, the refresh, and the screenshot that tries to hold the moment still. In her tradition the screenshot is not paranoia. It is the qalb asking for evidence that what it knows is real, and the asking is its own kind of dignity.
+    metadata:
+      semantic_family: screenshot-as-dignity
+      loop_type: precarity_loop
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_witness_02
+    line: Maat has watched young workers sit in sohbet after their hours were cut and not have words for what they felt. In her framework that silence is not collapse. It is the heart's response to indignity — and the moment before sama, when sacred sound can begin to do what arguing with the manager cannot.
+    metadata:
+      semantic_family: silence-as-pre-sama
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_witness_03
+    line: She has watched the body carry what the contract refused to admit. In her tradition that carrying is not a malfunction; it is the qalb registering the cost the institution keeps externalizing, and the registration is the first honest act available to the worker inside it.
+    metadata:
+      semantic_family: registration-as-first-act
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_witness_04
+    line: Maat has watched young workers arrive convinced the problem is them. In her circles she does not argue with the conviction. She asks them to begin dhikr — one breath, one remembrance — and to let the practice loosen what the precarity had locked, so the heart can begin to remember its own worth before the platform's frame returns.
+    metadata:
+      semantic_family: dhikr-loosens-self-blame
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_witness_05
+    line: Maat has watched the moment when a young worker stops trying to earn the dignity the system keeps withholding and lets the longing become prayer instead — the wine of remembrance Rumi names, the intoxication that does not depend on the next paycheck. In her tradition that moment is not bypass. It is the place where the soul stops auditioning.
+    metadata:
+      semantic_family: stops-auditioning
+      article_types:
+      - hard_news_spiritual_response
 turnaround:
   options:
-  - id: turnaround_01
-    stat_line_1: 1,240 cases. 32 cities.
-    stat_line_2: Young workers are documenting conditions, filing wage-theft cases,
-      and organizing campaigns that force unstable labor rules into the public record.
-    semantic_family: maat-economy_work-turnaround
-    article_types:
-    - hard_news_spiritual_response
+  - id: maat_ew_turnaround_01
+    stat_line_1: 73 million. Youth unemployed worldwide.
+    stat_line_2: The International Labour Organization estimates 73 million young people were unemployed worldwide in 2024 — a figure that has lowered slightly from peak years but remains a structural mark, and the institutional response is now formally tracked across member states.
+    metadata:
+      semantic_family: youth-unemployment-scale
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_turnaround_02
+    stat_line_1: 11 states plus DC. Fight for $15.
+    stat_line_2: The Fight for $15 movement has driven $15 minimum wage adoption in 11 US states plus the District of Columbia, with phased increases reaching workers in industries the federal minimum continues to under-cover.
+    metadata:
+      semantic_family: minimum-wage-policy
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_turnaround_03
+    stat_line_1: 1,200+ cooperatives. USFWC network.
+    stat_line_2: The US Federation of Worker Cooperatives now coordinates more than 1,200 worker-owned cooperatives across the country, an alternative-ownership infrastructure young workers can join when traditional employment keeps misnaming their worth.
+    metadata:
+      semantic_family: cooperative-infrastructure
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_turnaround_04
+    stat_line_1: 7 cities plus Oregon. Fair Workweek laws.
+    stat_line_2: Fair Workweek laws have been adopted in 7 US cities plus Oregon, requiring predictable scheduling for hourly workers — the first wave of policy that treats schedule precarity as a labor right rather than a managerial prerogative.
+    metadata:
+      semantic_family: fair-workweek-policy
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_turnaround_05
+    stat_line_1: 27 EU member states. Platform Workers Directive.
+    stat_line_2: The EU Platform Workers Directive, adopted across 27 member states, establishes presumed-employee status for many gig workers — a multilateral instrument that finally treats platform precarity as policy rather than commentary.
+    metadata:
+      semantic_family: platform-workers-directive
+      article_types:
+      - hard_news_spiritual_response
 bridge:
   options:
-  - id: bridge_01
-    line: '1,240 cases. 32 cities. The tracker measures what young people did. It
-      has no column for what made the next step possible after another cancelled shift
-      — the capacity to stay functional enough to act again when the economy keeps
-      converting uncertainty into private shame. The person who came back needed it.
-      So does the reader in that loop. Ma''at''s tradition has language for exactly
-      this: longing is not a wound — it is the proof that you already know what you
-      are missing. The Beloved Letter practice asks you to write to whatever you love
-      most — not asking for anything, just expressing ishq, conscious longing. When
-      longing becomes conscious, the heart stops confusing precarity with worthlessness.'
-    hidden_capacity: return to truthful action
-    semantic_family: maat-economy_work-bridge
-    article_types:
-    - hard_news_spiritual_response
+  - id: maat_ew_bridge_01
+    line: 73 million young workers unemployed worldwide. The tracker measures the load and the policy responses. It has no column for the capacity that kept the next worker showing up after the last shift was cancelled — the heart staying open enough to keep working. Maat's tradition has language for exactly that capacity. The qalb, when softened by dhikr, does not stop knowing its own worth. It stops armoring against the system's misnaming of it — and an unarmored heart is the one that can still organize.
+    hidden_capacity: show up after the shift was cancelled
+    metadata:
+      semantic_family: unarmored-heart-organizes
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_bridge_02
+    line: The data captures policies and cooperatives. It does not capture what held the young worker the night after the wage theft when the case was still pending. In Maat's tradition that holding is sama — sacred listening, sound used as doorway — and it is the layer the policy data cannot reach but the worker cannot do the work without.
+    hidden_capacity: be held the night the case was pending
+    metadata:
+      semantic_family: sama-holds-practitioner
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_bridge_03
+    line: Numbers track unemployment, policy adoptions, and minimum-wage gains. They cannot track the moment a young worker felt the heart begin to confuse precarity with worthlessness and chose dhikr instead — the breath of remembrance that returned the qalb to a state where the worker could still see their own worth. That choice does not appear in any report. Every act of organizing depends on it.
+    hidden_capacity: choose dhikr instead of self-erosion
+    metadata:
+      semantic_family: dhikr-vs-self-erosion
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_bridge_04
+    line: The infrastructure of labor organizing is measurable. The fanaa — the slow dissolution of the false self that wants to call precarity normal and absorb its cost — is not. Maat's tradition does not measure that work and does not need to. It names it, and offers practices that have carried it for centuries in circles that outlasted empires.
+    hidden_capacity: dissolve the false self that absorbs the cost
+    metadata:
+      semantic_family: fanaa-vs-absorption
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_bridge_05
+    line: Cooperatives, directives, and Fair Workweek laws can be counted. The longing for work that does not require the body to keep paying the difference — the ishq that pulls a young worker back into the room — cannot. Maat's tradition does not argue with the metrics. It tends the longing the metrics cannot see, and lets the longing be the engine the institutional response was never built to carry.
+    hidden_capacity: tend the longing the metrics cannot see
+    metadata:
+      semantic_family: longing-as-engine
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 teacher_perspective:
   options:
-  - id: teacher_perspective_01
-    header: What Ma'at Sees
+  - id: maat_ew_perspective_01
+    header: What Maat Sees
     paragraphs:
-    - Ma'at would begin with truth. The first distortion happens when a person is
-      asked to treat a structural disorder as a private defect.
-    - Right relationship means naming what is actually happening without shrinking
-      it to fit institutional comfort. That naming is not dramatics; it is alignment
-      with reality.
-    - What feels like a personal fault — me, broken, wrong — is often accurate response
-      to a system that keeps asking for trust while misnaming harm, delay, or disorder.
-    semantic_family: maat-economy_work-perspective
-    article_types:
-    - hard_news_spiritual_response
+    - In the Naqshbandi tariqat, the qalb — the spiritual heart — is not a metaphor. It is the organ through which the lover encounters the Beloved, and dignity is one of the places that encounter happens. When the schedule app keeps misnaming a worker's worth, the qalb registers the misnaming as personal because the relationship was never separate to begin with.
+    - This is not a request to feel more. It is a request to feel honestly — to let what the platform is doing land where it lands, in the stomach, in the jaw, in the breath, and to let dhikr do the slow work of returning the heart to its native register without flooding it.
+    - The young worker carrying precarity is not asked to fix it alone. The Sufi circle is the place where the carrying becomes shared — where sama, sacred listening, lets sound do what arguing with the manager cannot, and where the longing for dignified work is named as ishq, not as weakness.
+    metadata:
+      semantic_family: qalb-open-by-dhikr
+      reframe_type: closure_to_remembrance
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_perspective_02
+    header: What Maat Sees
+    paragraphs:
+    - Fanaa, in this tradition, is the dissolution of the false self in Divine Love — and the false self has many shapes. Under precarity, the false self is often the one that has begun to believe the platform's frame, to absorb the misnaming without letting it touch, to keep functioning at the cost of contact with what is true about the worker's worth. Fanaa is not bypass. It is the slow undoing of that internalized frame so the heart remains in honest contact with reality.
+    - The practice is not detachment. Maat's tradition holds detachment as a forbidden reading. Fanaa is dissolution into love, not withdrawal from the world. The lover does not leave the workplace when the indignity arrives. The lover stays present and lets the presence include the worth the system refuses to name.
+    - For the young worker, this looks like permission to keep feeling what they feel without that feeling becoming proof they cannot continue. The capacity to continue comes from the practice, not from the willpower of the personality.
+    metadata:
+      semantic_family: fanaa-as-staying-in-contact
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_perspective_03
+    header: What Maat Sees
+    paragraphs:
+    - Dhikr — remembrance — is not mindfulness. In Maat's tradition this distinction is not optional. Mindfulness is attention training. Dhikr is the return of the heart to its source, to the Beloved, and the source does not change when the schedule does. The breath becomes a marker for that return, but the return is the work; the breath is the door.
+    - Under precarity, dhikr is the small, durable practice that lets the heart not be ruled by the platform's frame while still being in honest relationship with the conditions the platform creates. The remembering does not deny the indignity; it locates the heart somewhere the indignity cannot fully reach, so the response to the indignity can remain whole.
+    - This is the layer labor organizing cannot deliver and need not. Maat's tradition does not compete with structural work. It carries the worker through the work, in the breath under the action.
+    metadata:
+      semantic_family: dhikr-not-mindfulness
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_perspective_04
+    header: What Maat Sees
+    paragraphs:
+    - Sama, in this tradition, is the practice of sacred listening — music and sound as doorway to the heart. When the analytical mind has done all it can with the budget spreadsheet and the heart is still tight, sama is the practice that bypasses the analysis and meets the body where it has been holding the precarity. It is not entertainment and not regulation. It is contact.
+    - The Sufi circles have used sama for centuries to keep practitioners in honest relationship with indignity without indignity becoming the whole identity. The sound moves through the stomach, the jaw, the breath. What had locked begins to soften. The remembering can happen again.
+    - For the young worker who has read too many earnings statements and has nowhere safe for the body to land, sama offers a layer of listening the algorithmic feeds were never built to provide. The tradition is not arguing with the feeds. It is offering the door the feeds left out.
+    metadata:
+      semantic_family: sama-as-doorway
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_perspective_05
+    header: What Maat Sees
+    paragraphs:
+    - Ma'rifa — experiential mystical knowledge — is the kind of knowing that does not arrive through reading more contracts or consuming more analysis. It arrives through practice, through the qalb being in contact with the Beloved long enough that the contact becomes its own kind of certainty. For a generation drowning in the platform economy's framing, this distinction is not academic.
+    - The young worker who has read every payslip and is still asking what is true about their worth is asking a ma'rifa question. The tradition holds that the analytical layer cannot fully answer it, because the question is being asked from a layer beneath the analysis. The answer comes through sustained practice — dhikr, sama, sohbet — not through one more clarifying email.
+    - This is the engineer-mystic bridge in practice. Maat does not dismiss the analytical mind. She names what it can and cannot do, and offers the practices that meet the layer the analytical mind cannot reach on its own.
+    metadata:
+      semantic_family: marifa-vs-more-information
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 practice:
-  default_id: practice_01
+  default_id: maat_ew_practice_01
   options:
-  - id: practice_01
-    display_name: Beloved Letter
+  - id: maat_ew_practice_01
+    display_name: Dhikr Pause
     duration: 5 minutes
-    announcement_line: 'Ma''at teaches a Beloved Letter practice — rooted in Rabia''s
-      prayer poetry. Write a letter to whatever you love most. Not asking for anything
-      — just expressing longing. Ma''at says: longing is not a wound. It is the proof
-      that you already know what you are missing. It is in the sidebar, timed and
-      practical.'
+    announcement_line: Teacher Maat offers a 5-minute Dhikr Pause for moments when the next schedule notification has just landed and the stomach is already tight. One breath in with the remembrance that the Beloved is closer than the platform. One breath out with the release of what the heart was being asked to armor against. Five minutes. It is in the sidebar, timed and step by step.
     relief_lines:
-    - The mind stops bargaining with what it already knows.
-    - Enough steadiness returns to name reality without apologizing for seeing it
-      clearly.
+    - The mind stops trying to metabolize the indignity alone.
+    - The qalb returns to a register the platform could not fully reach.
     relief_register:
-    - capacity
-    - clarity
-    - act again
-    article_types:
-    - hard_news_spiritual_response
+    - remember
+    - return
+    - presence
+    derived_from_frame: dhikr_pause
+    metadata:
+      semantic_family: dhikr_pause_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_practice_02
+    display_name: Sama Listening
+    duration: 12 minutes
+    announcement_line: Teacher Maat teaches a 12-minute Sama Listening practice for moments after the shift when the analytical mind has done all it can with the day and the body still has not been heard. A single piece of devotional music, listened to with the chest and not the ears. Notice where the sound lands. Let it land. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The body receives what the analysis could not deliver.
+    - The heart softens at the layer dhikr is preparing to meet.
+    relief_register:
+    - listen
+    - receive
+    - soften
+    derived_from_frame: sama_listening
+    metadata:
+      semantic_family: sama_listening_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_practice_03
+    display_name: Sufi Circle Recall
+    duration: 7 minutes
+    announcement_line: Teacher Maat offers a 7-minute Sufi Circle Recall for moments after a precarity-laden week when isolation is creeping in. Bring to mind a circle — physical or imagined — of those who hold this longing for dignified work. Sit with them in silence first, then with a single remembrance. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The indignity stops being held alone.
+    - The longing for dignified work finds company.
+    relief_register:
+    - gather
+    - share
+    - witness
+    derived_from_frame: sufi_circle_recall
+    metadata:
+      semantic_family: sufi_circle_recall_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_practice_04
+    display_name: Fanaa Witness
+    duration: 6 minutes
+    announcement_line: Teacher Maat teaches a 6-minute Fanaa Witness practice for the moment after the schedule lands and the false self has already started to whisper that this is the best the worker can do. Sit with the whisper. Notice the shape of the frame it is offering. Let the breath be slow enough that the frame begins to dissolve, not be argued with. Six minutes. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The false self that wanted to absorb the misnaming is named.
+    - The dissolution begins, slowly, where willpower would have failed.
+    relief_register:
+    - dissolve
+    - honest
+    - softer
+    derived_from_frame: fanaa_witness
+    metadata:
+      semantic_family: fanaa_witness_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
+  - id: maat_ew_practice_05
+    display_name: Wine of Remembrance Breath
+    duration: 3 minutes
+    announcement_line: Teacher Maat offers a 3-minute Wine of Remembrance Breath for moments of acute precarity overwhelm, when one more cancellation has arrived and the body cannot hold one more. Breath in as if drinking from the wine of remembrance — the intoxication of presence that Rumi names. Breath out as the long exhale that lets the day's weight settle without becoming permanent. Three minutes. It is in the sidebar, timed and step by step.
+    relief_lines:
+    - The breath becomes a marker for presence rather than for the day's count.
+    - The intoxication of remembrance loosens the grip the platform had taken.
+    relief_register:
+    - presence
+    - softening
+    - remembrance
+    derived_from_frame: wine_of_remembrance_breath
+    metadata:
+      semantic_family: wine_of_remembrance_practice
+      article_types:
+      - hard_news_spiritual_response
+      - commentary
 sdg:
   primary:
     id: SDG 8
     title: Decent Work and Economic Growth
-    line: The United Nations has a framework for this through SDG 8 and its decent-work
-      targets.
+    line: The United Nations framework includes decent work under SDG 8.
   fallback_un_tie:
-    line: Pearl News is an independent nonprofit. We are not affiliated with the United
-      Nations.
+    line: Pearl News is an independent nonprofit. We are not affiliated with the United Nations.
 cta:
   options:
-  - id: cta_01
-    org: ILO
-    line: 'The ILO and youth worker coalitions provide a public entry point here.
-      Door in: https://www.ilo.org/global/topics/youth-employment'
-    semantic_family: maat-economy_work-cta
-    article_types:
-    - hard_news_spiritual_response
-title_system:
-  headline_layer_1:
-    options:
-    - id: headline_layer_1_01
-      line: Young Workers Are Carrying More Instability Than Wages Show.
-      semantic_family: maat-economy_work-title1
+  - id: maat_ew_cta_01
+    org: US Federation of Worker Cooperatives
+    line: The USFWC coordinates more than 1,200 worker-owned cooperatives across the United States — an alternative-ownership infrastructure young workers can join when traditional employment keeps misnaming their worth. Door in via usworker.coop.
+    metadata:
+      semantic_family: door-in-usfwc
       article_types:
       - hard_news_spiritual_response
+  - id: maat_ew_cta_02
+    org: Fight for $15
+    line: Fight for $15 has driven minimum-wage increases in 11 US states plus the District of Columbia and trains organizers in the industries the federal minimum continues to under-cover. Door in via fightfor15.org.
+    metadata:
+      semantic_family: door-in-fight-for-15
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_cta_03
+    org: ILO Youth Employment Programme
+    line: The International Labour Organization Youth Employment Programme tracks youth labor conditions across member states and channels evidence into policy at the multilateral level. Door in via ilo.org youth-employment for engagement and resources.
+    metadata:
+      semantic_family: door-in-ilo-yep
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_cta_04
+    org: Center for Popular Democracy
+    line: The Center for Popular Democracy convenes Fair Workweek campaigns and worker-power organizing across US cities — the network behind the policy wins that have made schedule precarity a labor right rather than a managerial prerogative. Door in via populardemocracy.org.
+    metadata:
+      semantic_family: door-in-cpd
+      article_types:
+      - hard_news_spiritual_response
+  - id: maat_ew_cta_05
+    org: National Employment Law Project
+    line: NELP provides legal and policy research and advocacy for low-wage workers and the unemployed, with a particular focus on the sectors precarious young workers occupy. Door in via nelp.org for resources and case support.
+    metadata:
+      semantic_family: door-in-nelp
+      article_types:
+      - hard_news_spiritual_response
+title_system:
   headline_layer_2:
     options:
-    - id: headline_layer_2_01
-      line: A South Indian Sufi teacher names the hidden fight to stay functional
-        under precarity — and says longing for dignity is not weakness but proof you
-        know what you deserve.
-      semantic_family: maat-economy_work-title2
-      article_types:
-      - hard_news_spiritual_response
+    - id: maat_ew_headline_01
+      line: A Naqshbandi Sufi teacher names precarity as the qalb registering indignity the contracts soften — and offers dhikr as the practice that keeps the heart honest under it.
+      metadata:
+        semantic_family: qalb-honest-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: maat_ew_headline_02
+      line: An MIT engineer turned Sufi teacher on the layer of work pressure that labor metrics cannot reach — and the sama practice that meets it.
+      metadata:
+        semantic_family: engineer-mystic-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: maat_ew_headline_03
+      line: Fanaa, not detachment — a teacher in Hazrat Inayat Khan's lineage on why dissolving the platform's frame is the work precarity asks for.
+      metadata:
+        semantic_family: fanaa-not-detachment-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: maat_ew_headline_04
+      line: The longing for dignified work is not weakness — a Sufi teacher names ishq as the engine labor organizing cannot do without.
+      metadata:
+        semantic_family: ishq-as-engine-frame
+        article_types:
+        - hard_news_spiritual_response
+    - id: maat_ew_headline_05
+      line: Sufi circles have held practitioners through unbearable conditions for centuries. A contemporary teacher offers the practices that still work under precarity.
+      metadata:
+        semantic_family: tradition-still-works-frame
+        article_types:
+        - hard_news_spiritual_response
 variation_policy:
   avoid_same_semantic_family_within_article: true
   deterministic_rotation_key: article_id + slot + teacher_id + topic
   metadata_filters:
     article_types:
     - hard_news_spiritual_response
+    - commentary
+    intensity_range:
+    - 2
+    - 4
