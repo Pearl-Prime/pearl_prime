@@ -1110,10 +1110,14 @@ def select_enrichment(
                     atom_id = _sched_slot.source
                     audit_counts["slots_from_persona"] += 1  # story atoms count as persona-class
 
-            # --- PR #612: additive is the ONLY mode. Two code paths:
-            #   EXERCISE slots: teacher → practice_library → FAIL (no persona, no registry)
-            #     Persona atoms and registry templates are NOT real exercises — they're short
-            #     reflections. Using them as EXERCISE content shipped bad books pre-#612.
+            # --- PR #612 + OPD-107: additive is the ONLY mode. Two code paths:
+            #   EXERCISE slots: teacher → persona (practice-shaped only) → practice_library → FAIL
+            #     PR #612 originally locked EXERCISE to teacher → practice_library because
+            #     persona atoms and registry templates were "short reflections" that shipped
+            #     bad books when rendered as EXERCISE content. OPD-107 (2026-05-18) re-opens
+            #     persona consultation but ONLY through the same _filter_practice_pool gate
+            #     the teacher pool uses — so the original guarantee (no essay-shaped atom
+            #     can enter an EXERCISE slot) holds. Registry templates remain excluded.
             #   All other slots: persona + registry + teacher stacked
             if not content:
                 _add_pieces: List[str] = []
@@ -1162,7 +1166,46 @@ def select_enrichment(
                         _add_ids.append(_at_hit_ex[1])
                         teacher_content_val = _at_content_ex
                         audit_counts["slots_from_teacher"] += 1
-                    else:
+                    elif persona_atoms:
+                        # OPD-107 (2026-05-18): consult persona EXERCISE pool through the
+                        # SAME shape gate before falling through to practice_library.
+                        # Pre-fix, the EXERCISE branch hard-coded teacher → practice_library;
+                        # 30 practice-shaped persona atoms in
+                        # atoms/<persona>/<topic>/EXERCISE/CANONICAL.txt were invisible to
+                        # primary fill even though 29/30 pass _filter_practice_pool cleanly.
+                        # PR #612's original guarantee is preserved: only practice-shaped
+                        # atoms (passing the same _is_practice_atom filter the teacher pool
+                        # uses) can enter the EXERCISE slot. Essay-shaped persona atoms
+                        # still get rejected and fall through to practice_library exactly
+                        # as before. See docs/diagnostics/OPD-107_PRACTICE_SHAPE_FILTER_2026-05-18.md
+                        _persona_ex_pool = _filter_practice_pool(
+                            persona_atoms.get("EXERCISE") or []
+                        )
+                        _persona_ex_pool = [
+                            _a for _a in _persona_ex_pool
+                            if not _is_doctrine_quarantined(str(_a.get("content") or ""), _frame)
+                            and atom_passes_book_governance(
+                                _a.get("metadata"),
+                                topic_id=topic,
+                                persona_id=persona_id,
+                                book_frame=_frame,
+                            )
+                        ]
+                        if _persona_ex_pool:
+                            _ap_idx = _deterministic_index(
+                                f"{seed_key}:persona_ex", len(_persona_ex_pool)
+                            )
+                            _ap_atom = _persona_ex_pool[_ap_idx]
+                            _ap_content = str(_ap_atom.get("content") or "").strip()
+                            if _ap_content:
+                                _add_pieces.append(_ap_content)
+                                _add_sources.append("persona_atom")
+                                _add_ids.append(
+                                    str(_ap_atom.get("atom_id") or f"persona_ex_{_ap_idx}")
+                                )
+                                audit_counts["slots_from_persona"] += 1
+                    if not _add_pieces:
+                        # Final EXERCISE fallback: practice_library (unchanged path).
                         _apl = _try_practice_library(chapter_index0, topic, persona_id, seed)
                         if _apl:
                             _add_pieces.append(_apl[0])
