@@ -193,7 +193,7 @@ def derive_brand_id(teacher_id: str) -> str:
     return {
         "ahjan": "stillness_press",
         "joshin": "zen_threshold",
-        "junko": "harmony_circle",  # awaits cosmic brand per OPD-111 follow-up
+        "junko": "heart_transmission",  # OPD-111 §7.C cosmic-channeling brand
         "miyuki": "relational_calm",  # per OPD-111 — inherits relational_calm brand
         "maat": "scales_of_light",
         "master_feung": "rooted_breath",

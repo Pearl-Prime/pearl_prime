@@ -1,9 +1,10 @@
-# Teacher Mode Brand Archetypes — 12 brands, each owned by 1 teacher.
+# Teacher Mode Brand Archetypes — 13 brands, each owned by 1 teacher.
 # Authority: config/catalog_planning/teacher_brand_lane_assignments.yaml
 #            artifacts/research/teacher_market_validation_matrix_2026_04_04.md
 #
 # Same structure as brand_archetype_registry.yaml (24 standard brands).
-# These 12 + those 24 = 36 brands per lane.
+# These 13 + those 24 = 37 brands per lane (post-OPD-111 §7.C; was 12+24=36
+# pre-OPD-111 when Junko shared zen_clarity; she now owns heart_transmission).
 #
 # RULE: Each teacher brand has a UNIQUE persona × topic × emotional_job
 # grouping that does NOT overlap with any standard brand.
@@ -327,3 +328,57 @@ teacher_brand_archetypes:
     anti_spam_differentiation:
       vs_resilient_parent: "Resilient Parent builds coping. Devotion Path opens receiving — the problem isn't capacity, it's direction."
       vs_spiritual_ground: "Spiritual Ground explores. Devotion Path surrenders — not seeking, but being found."
+
+  # ── 13 HEART TRANSMISSION (Junko) — per OPD-111 §7.C ───────────────────
+  # Doctrine-aligned with SOURCE_OF_TRUTH/teacher_banks/junko/doctrine/doctrine.yaml:
+  # Channeling / light language / ascended masters / cosmic guidance. Junko is a
+  # receiver, not a teacher in the conventional sense — messages arrive as gifts,
+  # not instructions. Zen / Buddhist / Japanese contemplative framings are forbidden;
+  # technique-first language is forbidden; "personal mastery" framing is forbidden.
+  # Tagline ("Receive the messages your heart already knows are true.") is 8th-grade
+  # reading level per operator preference OPD-100.
+  - brand_id: heart_transmission
+    teacher: junko
+    display_name: "Heart Transmission"
+    tagline: "Receive the messages your heart already knows are true."
+    tradition: "Channeling / light language / ascended masters / cosmic guidance (New Age)"
+    gtm_identity:
+      persona: spiritually_seeking_awakener
+      age_range: [28, 55]
+      emotional_job: "trust the inner knowing that words can't explain"
+      functional_job: "channeled cosmic guidance for soul-level awakening and remembrance"
+      primary_moment: inner_knowing_arrival
+    discovery_contract:
+      keyword_clusters:
+        primary: ["light language messages", "channeled guidance", "spiritual awakening"]
+        secondary:
+          - "ascended masters"
+          - "cosmic council"
+          - "soul remembrance"
+          - "frequency transmission"
+          - "lightworker guidance"
+          - "Age of Air spirituality"
+          - "heart awakening"
+          - "energetic attunement"
+    unique_angle: >
+      The message is not invented — it is received. Junko channels light
+      language and cosmic guidance from ascended masters and the source
+      field, then offers it whole. Not teaching, not technique. Recognition
+      of what your soul already knows. The heart is the receiver; the
+      transmission is the gift.
+    anti_spam_differentiation:
+      vs_cosmic_edge: "Cosmic Edge explores universal meaning intellectually. Heart Transmission delivers received messages — the difference between thinking about cosmos and feeling its voice."
+      vs_solar_return: "Solar Return recognizes the witness through burnout. Heart Transmission receives guidance from beyond the self — the channel is the practice."
+      vs_devotion_path: "Devotion Path surrenders inward to receive love. Heart Transmission receives cosmic messages — surrender is the posture, transmission is the content."
+      vs_relational_calm: "Relational Calm (Miyuki) sits in the body's contemplative quiet. Heart Transmission listens for the voice that arrives — luminous, not still; cosmic, not domestic."
+    visual_register:
+      palette: "luminous gold-rose, soft cosmic blue, warm celestial light"
+      motifs: "soft halos, ascending light particles, hands raised in reception, open palms, starlight wash"
+      excluded: "ink-brush, enso, wabi-sabi monochrome, kitchen-table domestic, Zen-coded stillness"
+      distinct_from_miyuki: "Miyuki = ink and silence; Heart Transmission = light and reception. Miyuki sits at the kitchen table; Junko stands with hands open to the cosmic field."
+    cover_art_prompt_skeleton: >
+      A serene Japanese woman in flowing luminous robes stands receptively
+      with hands raised toward soft cosmic light, golden-rose particles
+      drifting around her, warm celestial halo behind her shoulders, expression
+      open and listening, transmissive presence — distinct from monochrome
+      contemplative imagery; no ink-brush, no enso, no domestic settings.
