@@ -1253,7 +1253,8 @@ Operator decisions (**all defaults accepted**):
 | ahjan → stillness_press (sp) | en-US | pure_manga |
 | joshin → cognitive_clarity (cc) | ja-JP | pure_manga **(pilot — locked)** |
 | miki → digital_ground (dg) | ja-JP | pure_manga |
-| junko → relational_calm (rc) | ja-JP | pure_manga |
+| miyuki → relational_calm (rc) | ja-JP | pure_manga | (per OPD-111)
+| junko → (new cosmic brand pending) | ja-JP | pure_manga | (per OPD-111 — channeling)
 | omote → body_memory (bm) | ja-JP | pure_manga |
 | master_wu → warrior_calm (wc) | zh-TW | pure_manga |
 | master_feung → qi_foundation (qf) | zh-CN | manga_fantasy_hybrid |
@@ -1785,5 +1786,50 @@ overlay_param:
 5. Pearl_Video pilot regeneration if `joshin / cognitive_clarity / ja-JP` pilot was Zen-coded
 
 **Authority:** This cap entry + the four phase PRs (1207, 1208, 1209, this PR).
+
+---
+
+### JUNKO-CHANNELING-MIYUKI-CONTEMPLATIVE-01 — Junko stays channeling; new Miyuki (Japanese contemplative) carries former wabi-sabi atoms (OPD-111 approved 2026-05-19)
+
+**Decision-of-record:** [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv) OPD-20260519-111.
+
+**Authority sources:**
+- Plan: [`docs/migrations/JUNKO_CHANNELING_MIYUKI_CONTEMPLATIVE_MIGRATION_PLAN_2026-05-19.md`](./migrations/JUNKO_CHANNELING_MIYUKI_CONTEMPLATIVE_MIGRATION_PLAN_2026-05-19.md)
+- Junko doctrine v2 (unchanged — channeling-correct): [`SOURCE_OF_TRUTH/teacher_banks/junko/doctrine/doctrine.yaml`](../SOURCE_OF_TRUTH/teacher_banks/junko/doctrine/doctrine.yaml)
+- Miyuki doctrine v1 (new): [`SOURCE_OF_TRUTH/teacher_banks/miyuki/doctrine/doctrine.yaml`](../SOURCE_OF_TRUTH/teacher_banks/miyuki/doctrine/doctrine.yaml)
+- Junko intake: [`teachers/junko/junko_doctrine_notes.rtf`](../teachers/junko/junko_doctrine_notes.rtf) + [`teachers/junko/junko_yt.rtf`](../teachers/junko/junko_yt.rtf)
+
+**What changed:**
+- **Junko (display_name: "Channeler Junko"):** doctrine unchanged (channeling/light-language/cosmic guidance/ascended masters per intake). 152 contemplative atoms (Japanese contemplative + body-anchored + ganbaru voice; e.g., STORY_003 opened "In the Zen tradition, there is a story…") MIGRATED OUT to new teacher `miyuki`. 152 NEW channeling atoms authored from intake material in same combined Phase 2+3 PR.
+- **NEW teacher: `miyuki` (display_name: "Miyuki"):** Japanese contemplative (lay-secular, wabi-sabi, ganbaru, mono no aware). Honorific = null (operator decision #3). Geographic anchor = Kyoto (operator decision #4). Female, late 40s. Doctrine v1 grounds in ganbaru-as-practice, mono no aware, ma, body-first recognition, secular dailiness, small arrivals not breakthroughs. Signature practices: body_noticing, breath_anchored_sitting, kitchen_table_dawn, ganbaru_walk. Inherits 152 atoms wholesale (renamed junko_* → miyuki_*).
+- **Relational Calm / Bare Form Books brand:** wholesale-migrated from junko to miyuki across all 14 catalog_planning files, 6 manga config files, 9 manga_profiles, 2 brand_management files (13 zen_clarity locale instances), 2 publishing files, 15 scripts, 2 tests, 1 workflow. Wabi-sabi visual register inherited (junko awaits new cosmic visuals in Phase 5 deferred re-render commission).
+- **Hybrid Option III for cosmic canonical topics (operator decision #2):** both teachers share contemplative topics (anxiety, social_anxiety, burnout, sleep_anxiety, relational_harmony, shame, etc.); differentiation is voice register (junko=channeling/cosmic; miyuki=Japanese contemplative/lay-secular), not topic. No new canonical topics added.
+- **register_gate.py:** Junko forbidden_tokens populated (zen, zazen, ganbaru, mono no aware, kitchen table, etc.). Miyuki forbidden_tokens added (channel, light language, ascended master, shingon, etc.).
+- **Pearl_News scope:** Junko's Pearl_News entry already correctly channeling (no change). Miyuki is NOT added to Pearl_News per OPD-111 explicit scope (operator decision #6 — matches OPD-105 Kenjin precedent; Pearl_Prime-only).
+- **Voice ID:** Miyuki audiobook voice = `ja_f_mature_warm_01` (operator decision #7).
+
+**Operator decisions (7 approved):**
+1. (P0) Phase 2 + Phase 3 PR shape → **Combined PR** (~302 files; avoids atom-empty Junko window)
+2. (P0) Cosmic canonical topics → **Hybrid Option III** (shared topics, voice differentiation; no new topics added)
+3. (P1) Miyuki honorific → **null** (matches Junko/Maat/Miki)
+4. (P1) Miyuki geographic anchor → **Kyoto** (matches wabi-sabi voice in atoms)
+5. (P1) 3 sample channeling atoms in plan §4.4 → **Approved** (used VERBATIM as HOOK_001, STORY_001, PIVOT_001)
+6. (P2) Add Miyuki to Pearl_News → **No** (Pearl_Prime-only; matches OPD-105 Kenjin precedent)
+7. (P2) Voice ID for Miyuki audiobook → **`ja_f_mature_warm_01`**
+
+**PRs (4-phase migration, stacked):**
+- Phase 1: PR #1219 — Miyuki teacher card (15 files)
+- Phase 2+3 combined: PR #1220 — atom migration (152) + new Junko channeling atoms (152) = 308 files
+- Phase 4: PR (this commit) — catalog routing across catalog_planning + manga + brand_management + publishing + scripts + tests + workflow + docs + register_gate
+- Phase 5: PR (next) — visual asset rename (no re-render)
+
+**Out of scope (follow-up commissions, per migration plan §7.C):**
+1. Junko cosmic-coded brand authoring (new brand name + identity + colophon + 4-6 new luminous-coded authors)
+2. Junko visual asset re-render (cosmic register: luminous robes, light particles, hands-raised mudras, gold/blue palette)
+3. Junko's new bestseller book in channeling voice ("The Receivers" working title; ~1-2 Pearl_Writer sessions)
+4. Miyuki Pearl_News integration if operator reverses decision #6
+5. Voice audit for Miyuki audiobook (CosyVoice2 reference clip confirmation)
+
+**Authority:** This cap entry + the four phase PRs (1219, 1220, this PR, and the Phase 5 PR).
 
 ---

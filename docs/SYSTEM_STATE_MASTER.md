@@ -85,9 +85,9 @@ All 11 atom types x 12 personas are covered:
 - STORY coverage landed in PR #140 (172 files)
 - COMPRESSION/INTEGRATION and other base types were present from earlier PRs
 
-### SOURCE_OF_TRUTH/teacher_banks/ (13 teachers, 2,143 files)
+### SOURCE_OF_TRUTH/teacher_banks/ (15 teachers — OPD-105 + OPD-111)
 
-Teachers: adi_da, ahjan, joshin, junko, maat, master_feung, master_sha, master_wu, miki, omote, pamela_fellows, ra, sai_ma
+Teachers: adi_da, ahjan, joshin, junko, kenjin, maat, master_feung, master_sha, master_wu, miki, miyuki, omote, pamela_fellows, ra, sai_ma
 
 - adi_da has full 11-type coverage (COMPRESSION, EXERCISE, HOOK, INTEGRATION, PERMISSION, PIVOT, REFLECTION, SCENE, STORY, TAKEAWAY, THREAD) plus localized atoms (ja-JP)
 - Other teachers have 6 types (base coverage)

@@ -56,6 +56,7 @@ TEACHER_DISPLAY: dict[str, str] = {
     "ahjan": "Ahjan",
     "joshin": "Joshin",
     "junko": "Junko",
+    "miyuki": "Miyuki",  # per OPD-111
     "maat": "Ma'at",
     "master_feung": "Master Feung",
     "master_sha": "Master Sha",

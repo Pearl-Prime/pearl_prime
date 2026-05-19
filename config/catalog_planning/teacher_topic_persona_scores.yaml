@@ -664,3 +664,59 @@ teachers:
 
       # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)
       educators: 0.78    # P0 — educators are relational professionals, relational_calm fits
+
+  # ── miyuki / relational_calm (iyashikei, wabi-sabi simplicity) — JP-primary ─
+  # Per OPD-111 Hybrid Option III: junko and miyuki share contemplative topic scoring.
+  # Differentiation is voice register (junko=channeling/cosmic; miyuki=Japanese
+  # contemplative/lay-secular), not topic. Routing by intent and voice, not by topic.
+  # Authority: brand_plan (anxiety, social_anxiety, burnout, sleep_anxiety)
+  #   + signature (relational_harmony, shame, inner_security)
+  #   + iyashikei genre — JP native, highest cadence target
+  miyuki:
+    topic_scores:
+      # Explicit allocation (shared with junko per OPD-111 Hybrid Option III)
+      anxiety: 0.9                    # iyashikei-anxiety register
+      social_anxiety: 0.95            # miyuki's relational flagship (inherited from atoms)
+      burnout: 0.85
+      sleep_anxiety: 0.85
+      # Signature vocabulary
+      relational_harmony: 0.95        # namesake
+      shame: 0.9                      # miyuki specifically addresses shame
+      inner_security: 0.95            # attachment-adjacent namesake
+      # Strong adjacents
+      self_worth: 0.85                # inner-security overlap
+      boundaries: 0.9                 # relational-calm core work
+      imposter_syndrome: 0.75         # social-comparison framing
+      compassion_fatigue: 0.75        # relational-exhaustion
+      perfectionism: 0.7              # other-oriented perfectionism
+      # Medium/weak
+      overthinking: 0.7               # relational rumination
+      grief: 0.7                      # grief-in-relationship register
+      depression: 0.65
+      somatic_healing: 0.55
+      courage: 0.6
+      financial_anxiety: 0.4
+      financial_stress: 0.4
+      performance_pressure: 0.55
+      # P0/P1 backfill (carried from junko block — same topics, same scores)
+      adhd_focus: 0.72    # P0 — relational_calm has indirect attentional benefit
+      mindfulness: 0.72    # P0 — minimum ready; iyashikei is gentle mindfulness adjacent
+    persona_scores:
+      # Strong — relational-anxiety personas
+      millennial_women_professionals: 0.9   # iyashikei + relational fit
+      gen_z_professionals: 0.9               # relational-anxiety native
+      gen_z_student: 0.85                    # social-anxiety demo peak
+      working_parents: 0.8                   # relational-fatigue
+      healthcare_rns: 0.8                    # relational-witness register
+      # Medium
+      corporate_managers: 0.7
+      gen_x_sandwich: 0.8
+      entrepreneurs: 0.65
+      tech_finance_burnout: 0.7
+      # Weak
+      nyc_executives: 0.6
+      first_responders: 0.6                  # action-register dilutes relational
+      gen_alpha_students: 0.7                # social-anxiety early emergence
+
+      # P0/P1 backfill (carried from junko block)
+      educators: 0.78    # P0 — educators are relational professionals, relational_calm fits

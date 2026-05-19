@@ -178,7 +178,8 @@ Note: PR #940 required a rebase conflict resolution — `docs/PEARL_ARCHITECT_ST
 | ahjan | stillness_press (sp) | en-US | pure_manga |
 | joshin | cognitive_clarity (cc) | ja-JP | pure_manga **← PILOT** |
 | miki | digital_ground (dg) | ja-JP | pure_manga |
-| junko | relational_calm (rc) | ja-JP | pure_manga |
+| miyuki | relational_calm (rc) | ja-JP | pure_manga | (per OPD-111 — was junko)
+| junko | (new cosmic brand pending) | ja-JP | pure_manga | (per OPD-111 — channeling register)
 | omote | body_memory (bm) | ja-JP | pure_manga |
 | master_wu | warrior_calm (wc) | zh-TW | pure_manga |
 | master_feung | qi_foundation (qf) | zh-CN | manga_fantasy_hybrid |

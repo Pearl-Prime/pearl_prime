@@ -152,10 +152,10 @@ brands:
     colophon_position: bottom_center
 
   relational_calm:
-    character_lora: "junko_rc"
+    character_lora: "miyuki_rc"  # per OPD-111
     style_lora: "style_rc"
     prompt_template: >
-      {format} cover art, style_rc junko_rc, wabi-sabi minimal illustration,
+      {format} cover art, style_rc miyuki_rc, wabi-sabi minimal illustration,
       warm white and stone, maximum negative space, asymmetric composition,
       {title_area}, {colophon_area}
     color_overlay: "rgba(160, 147, 125, 0.04)"

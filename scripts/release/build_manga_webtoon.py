@@ -303,7 +303,7 @@ def main() -> None:
 
     # Combined PDF
     if strips:
-        pdf_path = out_dir / "junko_sleep_anxiety_complete.pdf"
+        pdf_path = out_dir / "miyuki_sleep_anxiety_complete.pdf"  # per OPD-111
         save_pdf(strips, pdf_path)
         print(f"  Saved PDF: {pdf_path}")
 

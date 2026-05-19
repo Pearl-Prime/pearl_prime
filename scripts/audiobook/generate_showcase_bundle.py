@@ -44,7 +44,7 @@ TEACHER_ROWS: list[dict[str, str]] = [
     {"id": "pamela_fellows", "topic": "burnout", "brand": "somatic_wisdom", "name": "Pamela Fellows", "locale": "en-US", "cv_builtin": "english_female"},
     {"id": "master_wu", "topic": "courage", "brand": "warrior_calm", "name": "Master Wu", "locale": "zh-CN", "cv_builtin": "chinese_male"},
     {"id": "miki", "topic": "imposter_syndrome", "brand": "digital_ground", "name": "Miki", "locale": "ja-JP", "cv_builtin": "ja_m_calm_01"},
-    {"id": "junko", "topic": "overthinking", "brand": "relational_calm", "name": "Junko", "locale": "ja-JP", "cv_builtin": "ja_female_warm"},
+    {"id": "miyuki", "topic": "overthinking", "brand": "relational_calm", "name": "Miyuki", "locale": "ja-JP", "cv_builtin": "ja_female_warm"},  # per OPD-111
     {"id": "master_sha", "topic": "grief", "brand": "sleep_restoration", "name": "Master Sha", "locale": "zh-CN", "cv_builtin": "chinese_male"},
     {"id": "ra", "topic": "self_worth", "brand": "solar_return", "name": "Ra", "locale": "en-US", "cv_builtin": "english_male"},
     {"id": "sai_ma", "topic": "grief", "brand": "devotion_path", "name": "Sai Ma", "locale": "zh-CN", "cv_builtin": "chinese_female"},

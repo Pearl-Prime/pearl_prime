@@ -285,8 +285,24 @@ TEACHER_FORBIDDEN_TOKENS: dict[str, list[str]] = {
         "krishna", "bhakti", "vedanta", "sufi",
     ],
     "junko": [
-        # Junko = receiver/hibakusha witness — NOT a "teacher" in the conventional sense
-        # Don't flag heavily; her doctrine permits witness-register language
+        # Junko = channeler / light-language transmitter (receiver of cosmic guidance)
+        # per OPD-111. Forbidden tokens block Zen/contemplative/ganbaru drift that
+        # would re-create the OPD-111 doctrine mismatch in atom generation.
+        "zen", "zazen", "shikantaza", "satori", "kensho", "kenshō", "roshi",
+        "ganbaru", "mono no aware", "kitchen table",
+        "shingon", "ajikan", "kōbō", "kobo daishi",
+        "yuki", "hana", "kenji",  # Miyuki's recurring characters
+    ],
+    "miyuki": [
+        # Miyuki = Japanese contemplative (lay-secular, wabi-sabi, ganbaru) per OPD-111.
+        # Forbidden tokens block channeling/cosmic drift (Junko's territory) and
+        # explicit Zen lineage drift (Kenjin's territory) and Shingon (Joshin's).
+        "channel", "channeling", "light language", "ライトランゲージ",
+        "ascended master", "cosmic council", "transmission", "soul remembrance",
+        "frequency upgrade", "lemuria", "atlantis", "age of air",
+        "shingon", "ajikan", "kōbō", "kobo daishi", "mikkyo",
+        "shikantaza",  # method-name; Kenjin Roshi owns Sōtō Zen
+        "satori", "kenshō", "kensho", "dokusan",
     ],
     "master_feung": [
         # Generic Asian wisdom that should NOT appear in Grand Painting / Chinese wisdom register

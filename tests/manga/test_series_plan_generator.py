@@ -163,7 +163,7 @@ def test_build_series_id_falls_back_for_non_latin_titles():
 
 
 def test_derive_brand_id_returns_unique_brand_per_teacher():
-    teachers = ["ahjan", "joshin", "junko", "kenjin", "maat", "miki", "ra"]  # OPD-105: + kenjin
+    teachers = ["ahjan", "joshin", "junko", "kenjin", "maat", "miki", "miyuki", "ra"]  # OPD-105: + kenjin; OPD-111: + miyuki
     brands = {derive_brand_id(t) for t in teachers}
     assert len(brands) == len(teachers), "each teacher should map to a unique brand"
 

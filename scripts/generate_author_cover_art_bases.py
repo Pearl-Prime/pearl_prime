@@ -22,7 +22,8 @@ AUTHOR_PALETTES = {
     "master_feung": ["#5D4E37", "#8B7355", "#C4B896"],
     "sai_ma": ["#6B7B8C", "#4A5568", "#A8B5C4"],
     "ra": ["#5C6B73", "#3D4F56", "#B8C5CE"],
-    "junko": ["#8B6914", "#C9A227", "#E8D5A3"],
+    "junko": ["#F2C14E", "#5A4A8A", "#FFD700"],   # per OPD-111 — cosmic luminous (gold/blue)
+    "miyuki": ["#8B6914", "#C9A227", "#E8D5A3"],  # per OPD-111 — inherits warm wabi-sabi earth tones
     "miki": ["#4A6B7C", "#2C4A5A", "#B5D4E3"],
     "master_wu": ["#6B5344", "#8B7355", "#D4C4B8"],
     "pamela_fellows": ["#3D5A6C", "#2C4050", "#A8C5D8"],

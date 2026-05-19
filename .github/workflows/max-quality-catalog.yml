@@ -16,10 +16,12 @@ on:
           - sai_ma
           - ra
           - junko
+          - miyuki
           - miki
           - master_wu
           - pamela_fellows
           - joshin
+          - kenjin
           - maat
           - omote
           - master_sha
@@ -71,6 +73,9 @@ jobs:
           - shard: junko
             mode: teacher
             teacher_id: junko
+          - shard: miyuki
+            mode: teacher
+            teacher_id: miyuki
           - shard: miki
             mode: teacher
             teacher_id: miki
@@ -83,6 +88,9 @@ jobs:
           - shard: joshin
             mode: teacher
             teacher_id: joshin
+          - shard: kenjin
+            mode: teacher
+            teacher_id: kenjin
           - shard: maat
             mode: teacher
             teacher_id: maat

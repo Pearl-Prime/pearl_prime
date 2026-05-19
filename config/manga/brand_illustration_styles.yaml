@@ -142,13 +142,13 @@ brands:
     mood_reference: "JoJo Bizarre Adventure dramatic weight + Egyptian mythological grandeur"
 
   relational_calm:
-    teacher: junko
+    teacher: miyuki  # per OPD-111 — wabi-sabi is Japanese contemplative
     style_name: "Wabi-Sabi Simplicity"
-    archetype_base: dark_psychological
+    archetype_base: cozy_iyashikei_quiet
     prompt_template: >
-      manga in stark Zen aesthetic, bold decisive brushstrokes,
+      manga in soft iyashikei aesthetic, gentle rounded linework,
       warm white and stone tones, maximum negative space,
-      asymmetric composition, Vagabond meets Ping Pong, {subject}
+      asymmetric composition, Honey and Clover meets Mushishi quiet panels, {subject}
     negative_prompt: "busy, cluttered, bright colors, decorative, ornamental"
     color_palette:
       primary: ["#F5F0E8", "#A0937D"]  # warm white, stone

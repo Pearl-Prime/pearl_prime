@@ -53,7 +53,9 @@ INSTAGRAM_MAX_S = 90  # Instagram Reels max per platform_compliance.yaml
 # YT topic: the subject matter of the 5-min educational video
 TEACHER_YT_TOPIC = {
     "ahjan": "burnout", "adi_da": "courage", "joshin": "overthinking",
-    "junko": "burnout", "maat": "self_worth", "master_feung": "somatic_healing",
+    "junko": "burnout",  # per OPD-111 — junko can teach burnout from channeling angle
+    "miyuki": "burnout",  # per OPD-111 — inherits contemplative burnout teaching
+    "maat": "self_worth", "master_feung": "somatic_healing",
     "master_sha": "somatic_healing", "master_wu": "burnout", "miki": "sleep_anxiety",
     "omote": "self_worth", "pamela_fellows": "somatic_healing", "ra": "depression",
     "sai_ma": "compassion_fatigue",
@@ -62,7 +64,8 @@ TEACHER_YT_TOPIC = {
 # Instagram topic: the hook topic for the 90s Reel
 TEACHER_IG_TOPIC = {
     "ahjan": "self_worth", "adi_da": "boundaries", "joshin": "burnout",
-    "junko": "courage", "maat": "social_anxiety", "master_feung": "courage",
+    "junko": "courage", "miyuki": "courage",  # per OPD-111
+    "maat": "social_anxiety", "master_feung": "courage",
     "master_sha": "depression", "master_wu": "boundaries", "miki": "anxiety",
     "omote": "social_anxiety", "pamela_fellows": "financial_anxiety", "ra": "courage",
     "sai_ma": "depression",
@@ -71,7 +74,8 @@ TEACHER_IG_TOPIC = {
 # Audio topic: which audiobook the source audio is drawn from
 TEACHER_AUDIO_TOPIC = {
     "ahjan": "depression", "adi_da": "depression", "joshin": "sleep_anxiety",
-    "junko": "imposter_syndrome", "maat": "courage", "master_feung": "self_worth",
+    "junko": "imposter_syndrome", "miyuki": "imposter_syndrome",  # per OPD-111
+    "maat": "courage", "master_feung": "self_worth",
     "master_sha": "anxiety", "master_wu": "self_worth", "miki": "compassion_fatigue",
     "omote": "imposter_syndrome", "pamela_fellows": "burnout", "ra": "self_worth",
     "sai_ma": "boundaries",
@@ -79,7 +83,8 @@ TEACHER_AUDIO_TOPIC = {
 
 TEACHER_NAMES = {
     "ahjan": "Ahjan", "adi_da": "Adi Da", "joshin": "Joshin",
-    "junko": "Junko", "maat": "Maat", "master_feung": "Master Feung",
+    "junko": "Junko", "miyuki": "Miyuki",  # per OPD-111
+    "maat": "Maat", "master_feung": "Master Feung",
     "master_sha": "Master Sha", "master_wu": "Master Wu", "miki": "Miki",
     "omote": "Omote", "pamela_fellows": "Pamela Fellows", "ra": "Ra",
     "sai_ma": "Sai Ma",
@@ -87,7 +92,9 @@ TEACHER_NAMES = {
 
 TEACHER_BRAND = {
     "ahjan": "Stillness Press", "adi_da": "Awakening Press", "joshin": "Clear Seeing Books",
-    "junko": "Bare Form Books", "maat": "Feather & Scale Press", "master_feung": "Root & Meridian Press",
+    "junko": "Cosmic Channeling Press",  # per OPD-111 — awaits new cosmic brand commission
+    "miyuki": "Bare Form Books",  # per OPD-111 — inherits former junko brand
+    "maat": "Feather & Scale Press", "master_feung": "Root & Meridian Press",
     "master_sha": "Night Architecture Books", "master_wu": "Iron Gate Press", "miki": "Present Tense Books",
     "omote": "Held Ground Press", "pamela_fellows": "Felt Sense Publishing", "ra": "Ember & Ash Publishing",
     "sai_ma": "Open Vessel Press",

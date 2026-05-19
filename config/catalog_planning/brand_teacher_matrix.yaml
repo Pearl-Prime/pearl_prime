@@ -62,8 +62,8 @@ brands:
     content: [audiobooks, manga, video, exercises, freebies]
 
   relational_calm:
-    primary_teacher: junko
-    teachers: [junko]
+    primary_teacher: miyuki  # per OPD-111
+    teachers: [miyuki]
     topic_focus: [relational_harmony, shame, inner_security, belonging]
     content: [audiobooks, manga, video, exercises, freebies]
 
@@ -122,6 +122,9 @@ teacher_constraints:
     max_books_per_topic: 4
     max_books_per_persona: 5
   junko:
+    max_books_per_topic: 3
+    max_books_per_persona: 4
+  miyuki:  # per OPD-111 — Japanese contemplative (lay-secular, wabi-sabi)
     max_books_per_topic: 3
     max_books_per_persona: 4
   master_wu:

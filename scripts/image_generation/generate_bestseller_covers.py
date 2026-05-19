@@ -357,7 +357,7 @@ TEACHER_BOOKS = {
     "qi_foundation": {"title": "Root and Breath", "subtitle": "Qi cultivation for the overwhelmed system", "author": "Master Feung", "topic": "burnout"},
     "digital_ground": {"title": "Scroll Stop", "subtitle": "Digital-age calm for the always-on generation", "author": "Miki", "topic": "imposter_syndrome"},
     "heart_balance": {"title": "Scales of Ma'at", "subtitle": "Shadow work as self-worth recalibration", "author": "Maat", "topic": "boundaries"},
-    "relational_calm": {"title": "The Empty Cup", "subtitle": "Radical acceptance in relationships", "author": "Junko", "topic": "overthinking"},
+    "relational_calm": {"title": "The Empty Cup", "subtitle": "Radical acceptance in relationships", "author": "Miyuki", "topic": "overthinking"},  # per OPD-111
     "warrior_calm": {"title": "Iron Gate", "subtitle": "Martial composure under pressure", "author": "Master Wu", "topic": "courage"},
     "sleep_restoration": {"title": "Night Architecture", "subtitle": "Building sleep from the inside", "author": "Master Sha", "topic": "grief"},
     "body_memory": {"title": "Held Ground", "subtitle": "Letting the body process what the mind cannot", "author": "Omote", "topic": "sleep_anxiety"},

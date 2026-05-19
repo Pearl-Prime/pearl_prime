@@ -63,7 +63,7 @@ TEACHER_BOOKS = [
     {"id": "joshin", "author": "Joshin", "publisher": "Still Forest",
      "title": "Quiet Enough", "subtitle": "A Zen Guide to Calming Anxiety and Finding Presence",
      "topic": "anxiety", "lang": "en"},
-    {"id": "junko", "author": "Junko", "publisher": "Zen Clarity",
+    {"id": "miyuki", "author": "Miyuki", "publisher": "Zen Clarity",  # per OPD-111 — Loop Breaker is contemplative
      "title": "The Loop Breaker", "subtitle": "How to Stop Overthinking and Quiet Your Racing Mind",
      "topic": "overthinking", "lang": "en"},
     {"id": "maat", "author": "Ma'at", "publisher": "Truth Compass",

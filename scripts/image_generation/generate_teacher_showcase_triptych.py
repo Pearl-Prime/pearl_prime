@@ -33,8 +33,8 @@ OUTPUT_DIR = REPO_ROOT / "brand-wizard-app" / "public" / "assets" / "manga_cover
 DEFAULT_COMFY_URL = os.environ.get("COMFYUI_URL", "http://192.168.1.112:8188")
 
 SHOWCASE_TEACHER_IDS: list[str] = [
-    "ahjan", "adi_da", "master_feung", "sai_ma", "ra", "junko", "miki",
-    "master_wu", "pamela_fellows", "joshin", "maat", "omote", "master_sha",
+    "ahjan", "adi_da", "master_feung", "sai_ma", "ra", "junko", "miyuki", "miki",
+    "master_wu", "pamela_fellows", "joshin", "kenjin", "maat", "omote", "master_sha",
 ]
 # Legacy output files may use older keys; map yaml teacher id -> filename prefix if they differ.
 YAML_KEY_TO_FILE_PREFIX: dict[str, str] = {}
@@ -90,10 +90,15 @@ TRIPTYCH_BRIEF: dict[str, dict[str, str]] = {
         "scene": "Mossy forest, fireflies, cyan dusk accents.",
         "symbolic": "Forest canopy; figure woven into tree pattern.",
     },
-    "junko": {
-        "portrait": "Sharp eyes, dry smile, extreme negative space.",
-        "scene": "Empty wall, one tea cup, long morning shadow.",
-        "symbolic": "Large enso; figure from brushstroke gap.",
+    "junko": {  # per OPD-111 — cosmic channeling register (Phase 5 re-render commission)
+        "portrait": "Soft receptive eyes, luminous robes, hands raised in mudra of reception.",
+        "scene": "Workshop room with golden light, light particles in air, transmission moment.",
+        "symbolic": "Sacred geometry, gold and luminous-blue, channeling form (NOT Buddhist mandala).",
+    },
+    "miyuki": {  # per OPD-111 — inherits former junko wabi-sabi register
+        "portrait": "Kind unfooled eyes, low loose tie, simple cardigan, full-presence listening.",
+        "scene": "Kyoto kitchen table before dawn, one cup of tea, soft natural window light.",
+        "symbolic": "Single brushstroke, wabi-sabi negative space, warm white and stone.",
     },
     "master_sha": {
         "portrait": "Compassionate eyes, violet gold particles, lotus hints.",
