@@ -48,13 +48,13 @@ character_loras:
     style_ref: stillness_press  # inherits brand art style
     notes: "South Asian male, warm expression, contemplative bearing; forest-refuge scenes use same face with earth-tone wardrobe"
 
-  joshin:
-    trigger_word: "joshin_cc"
+  kenjin:
+    trigger_word: "kenjin_cc"
     reference_images_needed: [front_portrait, three_quarter_view, profile_view, expression_sheet]
     training_steps: 1500
     ip_adapter_weight: 0.83
     style_ref: cognitive_clarity
-    notes: "Japanese-American female, precise gaze, zen authority"
+    notes: "Japanese-American male, austere bearing, roshi authority (Soto Zen)"
 
   pamela_fellows:
     trigger_word: "pamela_sw"

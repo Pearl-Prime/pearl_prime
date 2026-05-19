@@ -130,13 +130,13 @@ teachers:
       healthcare_rns: 0.6             # compassion fatigue + conductivity
       # other personas default to 0.5
 
-  # ── joshin / cognitive_clarity (seinen, stark zen ink) ──────────────────────
+  # ── kenjin / cognitive_clarity (seinen, stark zen ink) ──────────────────────  # OPD-105: was joshin
   # Authority signals:
   #   - Brand topic_allocation (explicit): overthinking, imposter_syndrome, burnout, boundaries
   #   - Signature vocab: zen, direct_pointing, sitting, koans
   #   - Genre: seinen — mature psychological drama; en_US precedent: Vinland Saga, Berserk
   #   - Direct Pointing method = cognitive disruption register
-  joshin:
+  kenjin:
     topic_scores:
       # Explicit topic_allocation — flagship territory
       overthinking: 0.95           # brand flagship — rumination loops + koan-style interruption
@@ -157,13 +157,13 @@ teachers:
       depression: 0.6              # zen surrender-to-shadow works but not flagship
       perfectionism: 0.7           # cognitive origin; direct pointing at the grasping
       performance_pressure: 0.7    # external cognitive load
-      compassion_fatigue: 0.55     # joshin leans individual not relational
+      compassion_fatigue: 0.55     # kenjin leans individual not relational
       # Weak fits — defer
       grief: 0.5                   # grief needs warmer register; default
       financial_anxiety: 0.5
       financial_stress: 0.5
       sleep_anxiety: 0.55          # 3am rumination overlap but not flagship
-      somatic_healing: 0.4         # joshin's voice is cognitive, not somatic
+      somatic_healing: 0.4         # kenjin's voice is cognitive, not somatic
       courage: 0.6                 # zen equanimity register
       # Other signature topics (other teachers) default to 0.5
       # P0/P1 backfill 2026-04-29 (Issue #777 — adhd_focus, mindfulness, educators + ahjan extras)

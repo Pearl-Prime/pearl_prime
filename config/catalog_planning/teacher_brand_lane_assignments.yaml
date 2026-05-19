@@ -166,7 +166,7 @@ brand_lanes:
 
 english_global:
   stillness_press:    { teacher: ahjan,           content: [audiobooks, manga, video, exercises, freebies] }
-  cognitive_clarity:  { teacher: joshin,          content: [audiobooks, manga, video, exercises, freebies] }
+  cognitive_clarity:  { teacher: kenjin,          content: [audiobooks, manga, video, exercises, freebies] }
   somatic_wisdom:     { teacher: pamela_fellows,   content: [audiobooks, manga, video, exercises, freebies] }
   qi_foundation:      { teacher: master_feung,     content: [audiobooks, manga, video, exercises, freebies] }
   digital_ground:     { teacher: miki,             content: [audiobooks, manga, video, exercises, freebies] }
@@ -187,7 +187,7 @@ english_global:
 
   dach:           # Lane 2
     stillness_press_de:     { teacher: ahjan }
-    cognitive_clarity_de:   { teacher: joshin }
+    cognitive_clarity_de:   { teacher: kenjin }
     somatic_wisdom_de:      { teacher: pamela_fellows }
     qi_foundation_de:       { teacher: master_feung }
     digital_ground_de:      { teacher: miki }
@@ -201,7 +201,7 @@ english_global:
 
   france:         # Lane 3
     stillness_press_fr:     { teacher: ahjan }
-    cognitive_clarity_fr:   { teacher: joshin }
+    cognitive_clarity_fr:   { teacher: kenjin }
     somatic_wisdom_fr:      { teacher: pamela_fellows }
     qi_foundation_fr:       { teacher: master_feung }
     digital_ground_fr:      { teacher: miki }
@@ -215,7 +215,7 @@ english_global:
 
   spain:          # Lane 4
     stillness_press_es:     { teacher: ahjan }
-    cognitive_clarity_es:   { teacher: joshin }
+    cognitive_clarity_es:   { teacher: kenjin }
     somatic_wisdom_es:      { teacher: pamela_fellows }
     qi_foundation_es:       { teacher: master_feung }
     digital_ground_es:      { teacher: miki }
@@ -229,7 +229,7 @@ english_global:
 
   italy:          # Lane 5
     stillness_press_it:     { teacher: ahjan }
-    cognitive_clarity_it:   { teacher: joshin }
+    cognitive_clarity_it:   { teacher: kenjin }
     somatic_wisdom_it:      { teacher: pamela_fellows }
     qi_foundation_it:       { teacher: master_feung }
     digital_ground_it:      { teacher: miki }
@@ -243,7 +243,7 @@ english_global:
 
   latam:          # Lane 6
     stillness_press_latam:     { teacher: ahjan }
-    cognitive_clarity_latam:   { teacher: joshin }
+    cognitive_clarity_latam:   { teacher: kenjin }
     somatic_wisdom_latam:      { teacher: pamela_fellows }
     qi_foundation_latam:       { teacher: master_feung }
     digital_ground_latam:      { teacher: miki }
@@ -257,7 +257,7 @@ english_global:
 
   brazil:         # Lane 7
     stillness_press_br:     { teacher: ahjan }
-    cognitive_clarity_br:   { teacher: joshin }
+    cognitive_clarity_br:   { teacher: kenjin }
     somatic_wisdom_br:      { teacher: pamela_fellows }
     qi_foundation_br:       { teacher: master_feung }
     digital_ground_br:      { teacher: miki }
@@ -271,7 +271,7 @@ english_global:
 
   japan:          # Lane 8
     stillness_press_jp:     { teacher: ahjan }
-    cognitive_clarity_jp:   { teacher: joshin }
+    cognitive_clarity_jp:   { teacher: kenjin }
     somatic_wisdom_jp:      { teacher: pamela_fellows }
     qi_foundation_jp:       { teacher: master_feung }
     digital_ground_jp:      { teacher: miki }
@@ -285,7 +285,7 @@ english_global:
 
   korea:          # Lane 9
     stillness_press_kr:     { teacher: ahjan }
-    cognitive_clarity_kr:   { teacher: joshin }
+    cognitive_clarity_kr:   { teacher: kenjin }
     somatic_wisdom_kr:      { teacher: pamela_fellows }
     qi_foundation_kr:       { teacher: master_feung }
     digital_ground_kr:      { teacher: miki }
@@ -299,7 +299,7 @@ english_global:
 
   taiwan:         # Lane 10 (13 teacher-mode brands; Adi Da catalog exception)
     stillness_press_tw:     { teacher: ahjan }
-    cognitive_clarity_tw:   { teacher: joshin }
+    cognitive_clarity_tw:   { teacher: kenjin }
     somatic_wisdom_tw:      { teacher: pamela_fellows }
     qi_foundation_tw:       { teacher: master_feung }
     digital_ground_tw:      { teacher: miki }
@@ -316,7 +316,7 @@ english_global:
 
   china:          # Lane 11 (mainland + HK + SG)
     stillness_press_cn:     { teacher: ahjan }
-    cognitive_clarity_cn:   { teacher: joshin }
+    cognitive_clarity_cn:   { teacher: kenjin }
     somatic_wisdom_cn:      { teacher: pamela_fellows }
     qi_foundation_cn:       { teacher: master_feung }
     digital_ground_cn:      { teacher: miki }
@@ -330,7 +330,7 @@ english_global:
 
   hungary:        # Lane 12
     stillness_press_hu:     { teacher: ahjan }
-    cognitive_clarity_hu:   { teacher: joshin }
+    cognitive_clarity_hu:   { teacher: kenjin }
     somatic_wisdom_hu:      { teacher: pamela_fellows }
     qi_foundation_hu:       { teacher: master_feung }
     digital_ground_hu:      { teacher: miki }
@@ -365,7 +365,7 @@ summary:
     total: 145                  # 11 × 12 + 13
     base_names:
       - stillness_press       # ahjan        — alarm recognition + forest simplicity / renunciation strands
-      - cognitive_clarity     # joshin       — overthinking_knowledge_worker / zen inquiry
+      - cognitive_clarity     # kenjin       — overthinking_knowledge_worker / zen inquiry (OPD-105: was joshin)
       - somatic_wisdom        # pamela_fellows — high_functioning_perfectionist / polyvagal science
       - qi_foundation         # master_feung — energy_depleted_professional / qi cultivation
       - digital_ground        # miki         — doomscrolling_gen_z / presence without phone

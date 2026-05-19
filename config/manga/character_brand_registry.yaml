@@ -105,13 +105,13 @@ brands:
   # ── 2. COGNITIVE CLARITY — teacher: joshin — genre: seinen ──────────────
   cognitive_clarity:
     brand_id: cognitive_clarity
-    teacher_id: joshin
+    teacher_id: kenjin
     genre: seinen
     style_archetype: sharp_psychological
     character_prompt_ref: "config/manga/teacher_character_prompts.yaml#joshin"
 
     teacher_character:
-      character_id: joshin_sensei
+      character_id: kenjin_sensei
       display_name: "Joshin"
       role: teacher_analyst
       signature_elements:
