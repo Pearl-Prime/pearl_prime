@@ -120,6 +120,28 @@ teachers:
       require_teacher_exercise: true
       allow_generic_fallback_for_scene: true
 
+  miyuki:
+    display_name: "Miyuki"
+    formal_name: "Miyuki"
+    pronouns: "she/her"
+    honorific: null  # lay-secular Kyoto teacher; no honorific per OPD-111
+    kb_id: "miyuki"
+    doctrine_profile: "miyuki"
+    tradition: "Japanese contemplative — ganbaru, mono no aware, body-anchored; lay-secular, Zen-adjacent without explicit lineage"
+    sub_school: null
+    lineage_root: null   # lay practitioner, no formal transmission
+    allowed_topics: *all_topics
+    disallowed_topics: [manifestation, get_rich_quick]
+    forbidden_traditions: [channeling, light_language, zen_explicit, shingon, theravada_explicit]  # Per OPD-111 — Miyuki is lay-Japanese-contemplative, NOT channeling (Junko), NOT Sōtō Zen (Kenjin), NOT Shingon (Joshin)
+    allowed_engines: [shame, false_alarm, overwhelm, spiral, watcher, grief, comparison]
+    allowed_resolution_types: [open_loop, internal_shift_only, grounded_reframe]
+    identity_shift_allowed: false
+    preferred_formats: [F006, standard_book]
+    teacher_mode_defaults:
+      require_teacher_story: true
+      require_teacher_exercise: true
+      allow_generic_fallback_for_scene: true
+
   miki:
     display_name: "Miki"
     formal_name: "Miki"
