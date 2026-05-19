@@ -57,6 +57,11 @@ _CHAPTER_INDEX_TLS: int = 0  # Thread-local-ish chapter index for variant rotati
 # Module-level locale for bridge functions (set by compose_chapter_prose)
 _LOCALE_TLS: str | None = None
 _BOOK_BRIDGE_MEMORY_TLS: "BridgeMemory | None" = None
+# OPD-109 Phase 1.1: per-render rotation memory for within-slot bridges.
+# Set by render_spine_book at the start of a book render (so usage counts
+# accumulate across chapters) and cleared at the end so we never leak state
+# between books in a long-running process.
+_WITHIN_SLOT_ROTATION_TLS: "WithinSlotRotationState | None" = None
 _MECHANISM_THESIS_CACHE: dict[str, Any] | None = None
 _EXERCISE_WRAPPER_CACHE: dict[str, Any] | None = None
 _BRIDGE_TRANSITION_CACHE: dict[str, Any] | None = None
@@ -369,6 +374,40 @@ class BridgeMemory:
             k = root.strip().lower()
             if k:
                 root_map[k] = root_map.get(k, 0) + 1
+
+
+@dataclass
+class WithinSlotRotationState:
+    """OPD-109 Phase 1.1: rotation memory for within-slot bridge variants.
+
+    Tracks variant usage across one book render so the selector can:
+      - prefer variants that have not yet been used in any chapter
+      - fall back to the least-recently-used variant among the candidate pool
+      - never reuse the same variant twice within a single chapter
+
+    Identity of a variant is the canonical text string. Selection is keyed
+    deterministically off (chapter_index, slot_type, atom_pair_index) so
+    re-renders with the same seed produce identical output.
+
+    Defect ref: docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md
+    """
+
+    # variant text -> count of uses across the entire book render
+    book_usage: dict[str, int] = field(default_factory=dict)
+    # chapter_index -> set of variant texts already used in that chapter
+    chapter_used: dict[int, set[str]] = field(default_factory=dict)
+
+    def book_count(self, text: str) -> int:
+        return self.book_usage.get(text, 0)
+
+    def chapter_has_used(self, chapter_index: int, text: str) -> bool:
+        return text in self.chapter_used.get(chapter_index, set())
+
+    def register(self, chapter_index: int, text: str) -> None:
+        if not text:
+            return
+        self.book_usage[text] = self.book_usage.get(text, 0) + 1
+        self.chapter_used.setdefault(chapter_index, set()).add(text)
 
 
 def _chapter_position_bucket(chapter_index: int, total_chapters: int) -> str:
@@ -1149,18 +1188,33 @@ def _bridge_within_slot(
     slot_type: str,
     atom_pair_index: int,
     chapter_index: int = 0,
+    rotation_state: "WithinSlotRotationState | None" = None,
 ) -> str:
     """Return a 1-sentence transition between two atoms of the same slot.
 
-    Deterministic: same (chapter_index, slot_type, atom_pair_index) always
-    returns the same bridge variant. Template-only — no LLM calls.
+    Deterministic: same (chapter_index, slot_type, atom_pair_index) with the
+    same `rotation_state` always returns the same bridge variant. With the
+    default ``rotation_state=None`` the call still uses the deterministic
+    seed-only path so existing callers (and the legacy test path) keep
+    their behavior. Template-only — no LLM calls.
 
-    Selection: variant chosen by sha256(chapter_index|slot_type|atom_pair_index)
-    over the union of variants across all shape buckets within the slot
-    family. Shape buckets rotate by atom_pair_index so consecutive bridges
-    inside one slot do not repeat the same rhetorical shape.
+    Selection (OPD-109 Phase 1.1):
+      1. Pick the shape bucket by ``atom_pair_index % len(shapes)``. This
+         keeps adjacent bridges inside one slot landing on different
+         rhetorical shapes.
+      2. Within the chosen shape, build a candidate list excluding any
+         variant already used in THIS chapter (per-chapter no-reuse).
+      3. If ``rotation_state`` is present, sort the surviving candidates
+         by ``(book_usage_count, seed_rank)`` — variants not yet used in
+         the book come first; ties break on a SHA digest of the slot
+         coordinates so the choice is reproducible.
+      4. Without ``rotation_state``, fall back to the legacy seed-only
+         hash modulo, then a chapter_used filter if a per-render TLS
+         state is present.
 
     Returns "" if YAML is missing or the family has no entries.
+
+    Defect ref: docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md
     """
     st_upper = (slot_type or "").strip().upper()
     payload = _load_within_slot_bridge_families()
@@ -1189,25 +1243,62 @@ def _bridge_within_slot(
         for sk in shape_names:
             entries = family.get(sk) or []
             if isinstance(entries, list) and entries:
+                shape_key = sk
                 break
     if not isinstance(entries, list) or not entries:
         return ""
 
-    # Variant selection within the shape bucket: deterministic on the
-    # (chapter_index, slot_type, atom_pair_index) tuple so re-renders are
-    # stable and the test suite can pin specific outputs.
-    seed = f"opd109|{int(chapter_index)}|{st_upper}|{int(atom_pair_index)}"
-    digest = hashlib.sha256(seed.encode("utf-8")).digest()
-    idx = int.from_bytes(digest[:8], "big") % len(entries)
-    entry = entries[idx]
-    if not isinstance(entry, dict):
+    # Build (text, seed_rank) tuples for every variant in this shape.
+    # The seed_rank ties variant choice to the slot coordinates so
+    # re-renders with the same seed produce identical output.
+    seed_root = f"opd109|{int(chapter_index)}|{st_upper}|{int(atom_pair_index)}|{shape_key}"
+    raw_variants: list[tuple[str, int]] = []
+    for v_idx, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            continue
+        text = str(entry.get("text") or "").strip()
+        if not text:
+            continue
+        rank_seed = f"{seed_root}|{v_idx}|{text}"
+        rank_digest = hashlib.sha256(rank_seed.encode("utf-8")).digest()
+        seed_rank = int.from_bytes(rank_digest[:8], "big")
+        raw_variants.append((text, seed_rank))
+    if not raw_variants:
         return ""
-    text = str(entry.get("text") or "").strip()
-    if not text:
-        return ""
+
+    # Resolve rotation state: explicit parameter wins, then per-render TLS,
+    # then None (legacy seed-only path).
+    effective_state: "WithinSlotRotationState | None" = (
+        rotation_state if rotation_state is not None else _WITHIN_SLOT_ROTATION_TLS
+    )
+
+    if effective_state is not None:
+        # Filter out variants already used in THIS chapter (per-chapter no-reuse).
+        chapter_filtered = [
+            (text, rank)
+            for (text, rank) in raw_variants
+            if not effective_state.chapter_has_used(chapter_index, text)
+        ]
+        # If every variant in this shape was used, allow reuse but keep the
+        # least-used-in-book first so we still spread the load.
+        candidates = chapter_filtered if chapter_filtered else raw_variants
+        candidates_sorted = sorted(
+            candidates,
+            key=lambda pair: (effective_state.book_count(pair[0]), pair[1]),
+        )
+        chosen_text = candidates_sorted[0][0]
+        effective_state.register(chapter_index, chosen_text)
+    else:
+        # Legacy seed-only path: pick by hash modulo for backward compat.
+        seed = f"{seed_root}|legacy"
+        digest = hashlib.sha256(seed.encode("utf-8")).digest()
+        idx = int.from_bytes(digest[:8], "big") % len(raw_variants)
+        chosen_text = raw_variants[idx][0]
+
+    text_out = chosen_text
     if _LOCALE_TLS:
-        text = _gt(text, locale=_LOCALE_TLS)
-    return text
+        text_out = _gt(text_out, locale=_LOCALE_TLS)
+    return text_out
 
 
 # ---------------------------------------------------------------------------
@@ -2365,8 +2456,10 @@ def compose_from_enriched_book(
     mechanism_memory = MechanismThesisMemory()
     exercise_memory = ExerciseWrapperMemory()
     bridge_memory = BridgeMemory()
-    global _BOOK_BRIDGE_MEMORY_TLS
+    within_slot_rotation = WithinSlotRotationState()
+    global _BOOK_BRIDGE_MEMORY_TLS, _WITHIN_SLOT_ROTATION_TLS
     _BOOK_BRIDGE_MEMORY_TLS = bridge_memory
+    _WITHIN_SLOT_ROTATION_TLS = within_slot_rotation
 
     chapters_prose: list[str] = []
     for ch_idx, ch in enumerate(enriched.chapters):
@@ -2460,4 +2553,5 @@ def compose_from_enriched_book(
         if isinstance(rr, list):
             rr.extend(furniture_notes)
     _BOOK_BRIDGE_MEMORY_TLS = None
+    _WITHIN_SLOT_ROTATION_TLS = None
     return deduped

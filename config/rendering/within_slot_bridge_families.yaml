@@ -7,9 +7,16 @@
 # Defect ref: docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md
 # Operator reference: artifacts/qa/BLIND_10_VERDICT_2026-05-18.md Book 3
 #
-# Selection: deterministic, keyed by (chapter_index, slot_type, atom_pair_index).
-# No paid LLM calls. Templates are static strings; no substitution slots
-# beyond what the renderer already emits. Reading level: 8th grade (OPD-100).
+# OPD-109 Phase 1.1 (2026-05-19): variant counts expanded ~3x and rotation
+# state added in chapter_composer._bridge_within_slot. Each shape now has
+# 10-13 variants instead of 4-5. The renderer prefers variants not yet used
+# in the book and never reuses a variant within a single chapter.
+#
+# Selection: deterministic, keyed by (chapter_index, slot_type, atom_pair_index)
+# tiebreaker. Rotation state is a per-render counter keyed by (slot_type,
+# shape_key, variant_idx). No paid LLM calls. Templates are static strings;
+# no substitution slots beyond what the renderer already emits.
+# Reading level: 8th grade (operator preference OPD-100).
 #
 # Schema:
 #   slot_families:
@@ -23,10 +30,14 @@
 #   STORY, REFLECTION, EXERCISE, INTEGRATION, TEACHER_DOCTRINE,
 #   SCENE, COMPRESSION, HOOK
 #
-# Each family has 4-5 variants per shape; 3 shapes per family minimum
-# → ~12 variants per family → enough to cover 7-atom slot with no repeats.
+# Variant authorship rules (OPD-109 Phase 1.1):
+#   - Each variant has a GENUINELY DIFFERENT sentence structure or rhythmic
+#     shape — not just synonym substitution.
+#   - Within one shape, no two variants share the same opening 3 words.
+#   - 8th-grade reading level; no jargon, no metaphor stacks.
+#   - One sentence preferred; two if rhythm requires.
 
-schema_version: 1
+schema_version: 2
 
 slot_families:
 
@@ -67,6 +78,90 @@ slot_families:
         - context
         - body
         - response
+      - text: "A second person walks into this exact moment and meets it the same way."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - person
+        - moment
+        - same
+      - text: "Trade the desk for a kitchen counter. The pattern still arrives on cue."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - desk
+        - kitchen
+        - cue
+      - text: "Move it to a Sunday morning. The script reads the same."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - sunday
+        - script
+        - same
+      - text: "Pick any face in the room. The wave hits each one in turn."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - face
+        - wave
+        - room
+      - text: "Same machinery, different operator."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - machinery
+        - operator
+        - different
+      - text: "The pattern is portable. Watch it set up shop in a new building."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - portable
+        - building
+        - shop
+      - text: "Switch the lighting and the soundtrack. The footwork stays."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - lighting
+        - soundtrack
+        - footwork
+      - text: "Hand the same script to a colleague. They hit the same marks."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - colleague
+        - marks
+        - hit
+      - text: "Send the pattern out into traffic. It lands in the next car."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - traffic
+        - next
+        - car
+      - text: "Same opening, different month. The body remembers its part."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - month
+        - remembers
+        - part
+      - text: "Plant it in a different city. It still grows the same fruit."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - plant
+        - city
+        - fruit
+      - text: "Run the experiment at midnight. The reading does not move."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - midnight
+        - experiment
+        - reading
     quiet_pivot:
       - text: "Stay with that picture for a moment, then watch this next one."
         stems:
@@ -82,7 +177,7 @@ slot_families:
         - happen
         - notice
         - scene
-      - text: "Hold that frame. The next one is close cousin to it."
+      - text: "Hold that frame. A close cousin of it follows."
         stems:
         - pause and observe
         roots:
@@ -96,6 +191,90 @@ slot_families:
         - thread
         - moment
         - pause
+      - text: "Let that scene finish breathing before the next one arrives."
+        stems:
+        - pause and observe
+        roots:
+        - breathing
+        - arrives
+        - finish
+      - text: "One slow blink. Now turn your attention to the next image."
+        stems:
+        - pause and observe
+        roots:
+        - blink
+        - attention
+        - image
+      - text: "Rest your eyes on that scene. Another loads in behind it."
+        stems:
+        - pause and observe
+        roots:
+        - rest
+        - eyes
+        - loads
+      - text: "Mark that scene with a small flag. Move forward."
+        stems:
+        - pause and observe
+        roots:
+        - mark
+        - flag
+        - forward
+      - text: "Stop the camera there. Restart it at a slightly later beat."
+        stems:
+        - pause and observe
+        roots:
+        - camera
+        - restart
+        - beat
+      - text: "Catch your breath inside that pause. Now the next one."
+        stems:
+        - pause and observe
+        roots:
+        - catch
+        - pause
+        - breath
+      - text: "Let the scene cool for one heartbeat before the next."
+        stems:
+        - pause and observe
+        roots:
+        - cool
+        - heartbeat
+        - scene
+      - text: "Park there for a second. The next image is right around the corner."
+        stems:
+        - pause and observe
+        roots:
+        - park
+        - corner
+        - second
+      - text: "Take a slow breath inside that picture, then keep walking."
+        stems:
+        - pause and observe
+        roots:
+        - slow
+        - walking
+        - inside
+      - text: "Stay there until your eyes adjust. Then the next moment."
+        stems:
+        - pause and observe
+        roots:
+        - adjust
+        - eyes
+        - until
+      - text: "Wait a beat. The room rearranges itself for the next shot."
+        stems:
+        - pause and observe
+        roots:
+        - rearranges
+        - room
+        - wait
+      - text: "Stay close to that scene. The follow-up is one inch ahead."
+        stems:
+        - pause and observe
+        roots:
+        - close
+        - follow
+        - ahead
     contrast_lift:
       - text: "Now watch what shifts when the trigger comes from a different angle."
         stems:
@@ -111,13 +290,13 @@ slot_families:
         - body
         - door
         - change
-      - text: "Turn the camera. The same alarm sounds in a different room."
+      - text: "Turn the camera. The same alarm sounds from another angle."
         stems:
         - cue from new angle
         roots:
         - camera
         - alarm
-        - room
+        - angle
       - text: "Compare that with what happens when the cue is softer."
         stems:
         - cue from new angle
@@ -125,6 +304,90 @@ slot_families:
         - compare
         - cue
         - soft
+      - text: "Crank the volume down on the trigger. The reflex still fires."
+        stems:
+        - cue from new angle
+        roots:
+        - volume
+        - reflex
+        - crank
+      - text: "Send the same signal at half strength. Watch the response stay full."
+        stems:
+        - cue from new angle
+        roots:
+        - signal
+        - strength
+        - response
+      - text: "Now reverse the polarity. The body still pays the same price."
+        stems:
+        - cue from new angle
+        roots:
+        - reverse
+        - polarity
+        - price
+      - text: "Place the cue inside a friendly room. The alarm reads it the same."
+        stems:
+        - cue from new angle
+        roots:
+        - friendly
+        - room
+        - alarm
+      - text: "Change the messenger. The message arrives intact."
+        stems:
+        - cue from new angle
+        roots:
+        - messenger
+        - message
+        - change
+      - text: "Set the same scene in slow motion. The pulse beat is identical."
+        stems:
+        - cue from new angle
+        roots:
+        - slow
+        - motion
+        - pulse
+      - text: "Walk the cue into a kinder hallway. The body still flinches."
+        stems:
+        - cue from new angle
+        roots:
+        - hallway
+        - kinder
+        - flinches
+      - text: "Try the same setup with one comfort added. Watch what survives."
+        stems:
+        - cue from new angle
+        roots:
+        - comfort
+        - survives
+        - setup
+      - text: "Quiet the trigger by half. The pulse note still plays."
+        stems:
+        - cue from new angle
+        roots:
+        - note
+        - half
+        - plays
+      - text: "Hand the same cue to a calmer day. The reaction shows up anyway."
+        stems:
+        - cue from new angle
+        roots:
+        - calmer
+        - day
+        - anyway
+      - text: "Soften the lighting on the same beat. The chest interprets it as before."
+        stems:
+        - cue from new angle
+        roots:
+        - soften
+        - lighting
+        - interprets
+      - text: "Rotate the angle by ten degrees. The chest does not care."
+        stems:
+        - cue from new angle
+        roots:
+        - rotate
+        - degrees
+        - cares
 
   REFLECTION:
     deepen_the_seeing:
@@ -156,14 +419,126 @@ slot_families:
         - downstairs
         - step
         - seeing
+      - text: "What looks like one piece is actually two, stacked."
+        stems:
+        - layer underneath
+        roots:
+        - piece
+        - stacked
+        - actually
+      - text: "Tilt your head. A second pattern sits behind the first."
+        stems:
+        - layer underneath
+        roots:
+        - tilt
+        - head
+        - behind
+      - text: "Now read what is printed under the first layer of ink."
+        stems:
+        - layer underneath
+        roots:
+        - printed
+        - ink
+        - read
+      - text: "Behind that observation, another one is keeping it company."
+        stems:
+        - layer underneath
+        roots:
+        - observation
+        - company
+        - keeping
+      - text: "Open the door at the back of that thought."
+        stems:
+        - layer underneath
+        roots:
+        - door
+        - back
+        - thought
+      - text: "Trace what holds that recognition up. There is a floor beneath it."
+        stems:
+        - layer underneath
+        roots:
+        - holds
+        - trace
+        - floor
+      - text: "Sit lower in the chair. A second view opens from there."
+        stems:
+        - layer underneath
+        roots:
+        - chair
+        - view
+        - lower
+      - text: "Peel back the obvious. Something else lives one inch down."
+        stems:
+        - layer underneath
+        roots:
+        - peel
+        - obvious
+        - inch
+      - text: "Crouch a little closer. The grain of the wood becomes visible."
+        stems:
+        - layer underneath
+        roots:
+        - crouch
+        - grain
+        - wood
+      - text: "Listen for the part of this you have not said yet."
+        stems:
+        - layer underneath
+        roots:
+        - listen
+        - part
+        - said
+      - text: "Press in on the seam. A subtler reading opens."
+        stems:
+        - layer underneath
+        roots:
+        - seam
+        - subtler
+        - reading
+      - text: "Stand still and the next ring of the observation comes into focus."
+        stems:
+        - layer underneath
+        roots:
+        - ring
+        - focus
+        - still
+      - text: "Beyond the first take, a quieter reading is waiting."
+        stems:
+        - layer underneath
+        roots:
+        - quieter
+        - reading
+        - take
+      - text: "Carry the seeing one room further into the house."
+        stems:
+        - layer underneath
+        roots:
+        - house
+        - room
+        - further
+      - text: "Set the obvious aside. Now consider the smaller signal underneath."
+        stems:
+        - layer underneath
+        roots:
+        - smaller
+        - signal
+        - aside
+      - text: "Reach past the headline and find the footnote."
+        stems:
+        - layer underneath
+        roots:
+        - headline
+        - footnote
+        - reach
     name_the_mechanism:
-      - text: "Here is the mechanism that keeps that pattern in place."
+      - text: "The mechanism behind this pattern is small and stubborn."
         stems:
         - mechanism name
         roots:
         - mechanism
         - pattern
-        - place
+        - stubborn
       - text: "The engine underneath this is simpler than it looks."
         stems:
         - mechanism name
@@ -185,6 +560,118 @@ slot_families:
         - reflex
         - story
         - work
+      - text: "Strip the costume off. The motor underneath is small and predictable."
+        stems:
+        - mechanism name
+        roots:
+        - costume
+        - motor
+        - predictable
+      - text: "Boil this down to its parts. There is a small machine inside."
+        stems:
+        - mechanism name
+        roots:
+        - boil
+        - parts
+        - machine
+      - text: "One feedback loop runs the whole show."
+        stems:
+        - mechanism name
+        roots:
+        - feedback
+        - loop
+        - show
+      - text: "Trace it back to the first move. That move is the lever."
+        stems:
+        - mechanism name
+        roots:
+        - lever
+        - move
+        - trace
+      - text: "If you slow this down, you can see the gears turn one click at a time."
+        stems:
+        - mechanism name
+        roots:
+        - gears
+        - click
+        - slow
+      - text: "Name the small habit that keeps the rest running."
+        stems:
+        - mechanism name
+        roots:
+        - habit
+        - keeps
+        - small
+      - text: "The whole thing rests on one cue and one response."
+        stems:
+        - mechanism name
+        roots:
+        - rests
+        - cue
+        - response
+      - text: "Pin down the trigger and the cycle becomes visible."
+        stems:
+        - mechanism name
+        roots:
+        - pin
+        - cycle
+        - visible
+      - text: "Underneath the noise, a smaller pulley is doing the lifting."
+        stems:
+        - mechanism name
+        roots:
+        - pulley
+        - lifting
+        - noise
+      - text: "Follow the wire back to the wall. There is the source."
+        stems:
+        - mechanism name
+        roots:
+        - wire
+        - wall
+        - source
+      - text: "The whole reaction sits on a tiny pivot. Find the pivot."
+        stems:
+        - mechanism name
+        roots:
+        - pivot
+        - tiny
+        - reaction
+      - text: "There is one rule the system keeps following without asking."
+        stems:
+        - mechanism name
+        roots:
+        - rule
+        - following
+        - system
+      - text: "Quiet the explanation. Watch the small switch flip."
+        stems:
+        - mechanism name
+        roots:
+        - switch
+        - flip
+        - quiet
+      - text: "All the moving parts answer to a single hidden setting."
+        stems:
+        - mechanism name
+        roots:
+        - parts
+        - hidden
+        - setting
+      - text: "A simple if-then is running the whole performance."
+        stems:
+        - mechanism name
+        roots:
+        - performance
+        - simple
+        - running
+      - text: "The pattern survives because one micro-step keeps repeating."
+        stems:
+        - mechanism name
+        roots:
+        - survives
+        - micro
+        - repeating
     permission_to_pause:
       - text: "It is enough to recognize this much. Sit with it."
         stems:
@@ -193,13 +680,13 @@ slot_families:
         - enough
         - sit
         - recognize
-      - text: "You do not have to fix that yet. You can simply see it."
+      - text: "Fixing it is not the assignment yet. Seeing it is the whole task."
         stems:
         - permission to pause
         roots:
-        - fix
-        - see
-        - simply
+        - fixing
+        - assignment
+        - whole
       - text: "Naming the pattern is already work. Let it land before the next piece."
         stems:
         - permission to pause
@@ -214,6 +701,118 @@ slot_families:
         - pause
         - breath
         - enough
+      - text: "Nothing more is required right now. The noticing carries weight on its own."
+        stems:
+        - permission to pause
+        roots:
+        - required
+        - noticing
+        - weight
+      - text: "Rest at this stop. You do not have to march past it."
+        stems:
+        - permission to pause
+        roots:
+        - rest
+        - stop
+        - march
+      - text: "Let the recognition land before you ask it to do anything."
+        stems:
+        - permission to pause
+        roots:
+        - recognition
+        - land
+        - anything
+      - text: "Spending one quiet beat here is not a delay. It is the work."
+        stems:
+        - permission to pause
+        roots:
+        - quiet
+        - beat
+        - delay
+      - text: "Drop the urge to move on. Stay one extra moment."
+        stems:
+        - permission to pause
+        roots:
+        - drop
+        - urge
+        - extra
+      - text: "If the seeing is small, that is fine. Small still counts."
+        stems:
+        - permission to pause
+        roots:
+        - small
+        - fine
+        - counts
+      - text: "You have permission to stop here for a breath."
+        stems:
+        - permission to pause
+        roots:
+        - permission
+        - stop
+        - breath
+      - text: "No next step is owed. Sit until your shoulders soften."
+        stems:
+        - permission to pause
+        roots:
+        - owed
+        - shoulders
+        - soften
+      - text: "Catch one breath here without doing anything to earn it."
+        stems:
+        - permission to pause
+        roots:
+        - catch
+        - earn
+        - anything
+      - text: "Setting this down for a beat is part of the practice."
+        stems:
+        - permission to pause
+        roots:
+        - setting
+        - beat
+        - practice
+      - text: "Trust that the noticing itself is doing some quiet work."
+        stems:
+        - permission to pause
+        roots:
+        - trust
+        - itself
+        - quiet
+      - text: "Stay until the sentence lands all the way down."
+        stems:
+        - permission to pause
+        roots:
+        - sentence
+        - lands
+        - down
+      - text: "Hold this small recognition like a warm cup."
+        stems:
+        - permission to pause
+        roots:
+        - warm
+        - cup
+        - holds
+      - text: "Let the chest settle one full breath before continuing."
+        stems:
+        - permission to pause
+        roots:
+        - chest
+        - settle
+        - full
+      - text: "The next thought can wait. Stand here for ten seconds."
+        stems:
+        - permission to pause
+        roots:
+        - ten
+        - seconds
+        - stand
+      - text: "Rest in what you just saw. No bigger move is asked of you."
+        stems:
+        - permission to pause
+        roots:
+        - bigger
+        - move
+        - asked
 
   EXERCISE:
     next_practice_handoff:
@@ -245,6 +844,62 @@ slot_families:
         - far
         - today
         - step
+      - text: "Stack a second practice on top once the first feels easy."
+        stems:
+        - practice handoff
+        roots:
+        - stack
+        - easy
+        - top
+      - text: "Carry that small skill into this next experiment."
+        stems:
+        - practice handoff
+        roots:
+        - skill
+        - experiment
+        - carry
+      - text: "Run that until it stops feeling clever, then come here."
+        stems:
+        - practice handoff
+        roots:
+        - clever
+        - run
+        - here
+      - text: "Hold what you learned from that. The next reps will use it."
+        stems:
+        - practice handoff
+        roots:
+        - learned
+        - reps
+        - hold
+      - text: "Roll that practice into this one without resetting your posture."
+        stems:
+        - practice handoff
+        roots:
+        - roll
+        - posture
+        - resetting
+      - text: "Now extend the practice by one small inch."
+        stems:
+        - practice handoff
+        roots:
+        - extend
+        - inch
+        - one
+      - text: "Bridge from that into the next move while the body is still warm."
+        stems:
+        - practice handoff
+        roots:
+        - bridge
+        - warm
+        - still
+      - text: "Tag in the next practice the way one runner hands off to another."
+        stems:
+        - practice handoff
+        roots:
+        - tag
+        - runner
+        - hands
     different_door_same_room:
       - text: "Here is another way in to the same opening."
         stems:
@@ -274,6 +929,55 @@ slot_families:
         - land
         - breath
         - version
+      - text: "Pick the door that opens for you today."
+        stems:
+        - alternate entry
+        roots:
+        - pick
+        - opens
+        - today
+      - text: "Different handle, same room behind it."
+        stems:
+        - alternate entry
+        roots:
+        - handle
+        - behind
+        - room
+      - text: "If the first route felt forced, this one runs through the side gate."
+        stems:
+        - alternate entry
+        roots:
+        - route
+        - gate
+        - side
+      - text: "Approach the same skill from a different leg of the journey."
+        stems:
+        - alternate entry
+        roots:
+        - approach
+        - leg
+        - journey
+      - text: "When the front door is jammed, try the window."
+        stems:
+        - alternate entry
+        roots:
+        - jammed
+        - window
+        - front
+      - text: "Same medicine, different cup."
+        stems:
+        - alternate entry
+        roots:
+        - medicine
+        - cup
+        - same
+      - text: "Walk into the practice from another room of your week."
+        stems:
+        - alternate entry
+        roots:
+        - walk
+        - week
+        - room
 
   INTEGRATION:
     weave_it_in:
@@ -305,6 +1009,55 @@ slot_families:
         - conversation
         - today
         - move
+      - text: "Plant that skill in the soil of an ordinary errand."
+        stems:
+        - weave to context
+        roots:
+        - plant
+        - errand
+        - soil
+      - text: "Spend it on the next small choice in your day."
+        stems:
+        - weave to context
+        roots:
+        - spend
+        - choice
+        - day
+      - text: "Anchor it to one daily thing you already do."
+        stems:
+        - weave to context
+        roots:
+        - anchor
+        - daily
+        - already
+      - text: "Pin that to your tomorrow morning."
+        stems:
+        - weave to context
+        roots:
+        - pin
+        - tomorrow
+        - morning
+      - text: "Walk the seeing back to the dinner table."
+        stems:
+        - weave to context
+        roots:
+        - dinner
+        - table
+        - walk
+      - text: "Use it the next time someone asks you a routine question."
+        stems:
+        - weave to context
+        roots:
+        - routine
+        - question
+        - someone
+      - text: "Let that ripple into the easy part of your afternoon."
+        stems:
+        - weave to context
+        roots:
+        - ripple
+        - easy
+        - afternoon
     close_the_loop:
       - text: "That brings us back to where the chapter started, but now with a foothold."
         stems:
@@ -334,6 +1087,55 @@ slot_families:
         - circled
         - view
         - different
+      - text: "Notice the rhyme with the opening of this chapter."
+        stems:
+        - loop closure
+        roots:
+        - rhyme
+        - opening
+        - notice
+      - text: "Loop closed. The first scene reads differently in light of this one."
+        stems:
+        - loop closure
+        roots:
+        - closed
+        - light
+        - first
+      - text: "Stand again where we stood at the start. Something has shifted."
+        stems:
+        - loop closure
+        roots:
+        - stood
+        - shifted
+        - again
+      - text: "The thread that opened this chapter ties off here."
+        stems:
+        - loop closure
+        roots:
+        - thread
+        - ties
+        - opened
+      - text: "Set this side by side with the first paragraph and listen for the echo."
+        stems:
+        - loop closure
+        roots:
+        - echo
+        - paragraph
+        - listen
+      - text: "The trip ends roughly where it began, but the body knows more now."
+        stems:
+        - loop closure
+        roots:
+        - trip
+        - knows
+        - began
+      - text: "Same shore, different tide. The chapter has come full circle."
+        stems:
+        - loop closure
+        roots:
+        - shore
+        - tide
+        - circle
 
   TEACHER_DOCTRINE:
     teacher_attribution_bridge:
@@ -365,6 +1167,55 @@ slot_families:
         - teaching
         - wrinkle
         - part
+      - text: "Old hands have a short line for this kind of moment."
+        stems:
+        - teacher attribution
+        roots:
+        - hands
+        - line
+        - short
+      - text: "Stripped of style, the teaching says the same thing."
+        stems:
+        - teacher attribution
+        roots:
+        - stripped
+        - style
+        - says
+      - text: "One phrase from the lineage holds this whole observation."
+        stems:
+        - teacher attribution
+        roots:
+        - lineage
+        - phrase
+        - whole
+      - text: "The teaching frames this in fewer words than we just used."
+        stems:
+        - teacher attribution
+        roots:
+        - frames
+        - fewer
+        - words
+      - text: "What the elders called this is short and very specific."
+        stems:
+        - teacher attribution
+        roots:
+        - elders
+        - specific
+        - called
+      - text: "Said the way the teacher would say it:"
+        stems:
+        - teacher attribution
+        roots:
+        - said
+        - teacher
+        - way
+      - text: "There is a one-line teaching that lives behind this paragraph."
+        stems:
+        - teacher attribution
+        roots:
+        - behind
+        - paragraph
+        - lives
     deepen_doctrine:
       - text: "The teaching goes one step further."
         stems:
@@ -394,6 +1245,55 @@ slot_families:
         - companion
         - next
         - lives
+      - text: "Now the tradition turns the lamp a quarter inch."
+        stems:
+        - doctrine deepening
+        roots:
+        - lamp
+        - quarter
+        - turn
+      - text: "The teaching pushes one finger deeper into the same wound."
+        stems:
+        - doctrine deepening
+        roots:
+        - finger
+        - wound
+        - deeper
+      - text: "Pair that with this second line from the same lineage."
+        stems:
+        - doctrine deepening
+        roots:
+        - pair
+        - lineage
+        - second
+      - text: "Move one rung up the same ladder of teaching."
+        stems:
+        - doctrine deepening
+        roots:
+        - rung
+        - ladder
+        - up
+      - text: "The next pointer is sharper than the one before it."
+        stems:
+        - doctrine deepening
+        roots:
+        - sharper
+        - pointer
+        - before
+      - text: "Listen for the deeper note inside the same teaching."
+        stems:
+        - doctrine deepening
+        roots:
+        - deeper
+        - note
+        - inside
+      - text: "There is a second saying that finishes the first."
+        stems:
+        - doctrine deepening
+        roots:
+        - saying
+        - finishes
+        - second
 
   SCENE:
     scene_continuation:
@@ -425,6 +1325,55 @@ slot_families:
         - desk
         - hour
         - response
+      - text: "Cut to the kitchen. The scene is still running."
+        stems:
+        - scene continuation
+        roots:
+        - cut
+        - kitchen
+        - running
+      - text: "Two blocks east. The same weight rides on a different set of shoulders."
+        stems:
+        - scene continuation
+        roots:
+        - blocks
+        - east
+        - shoulders
+      - text: "Forty minutes pass. The room rearranges. The signal does not."
+        stems:
+        - scene continuation
+        roots:
+        - forty
+        - rearranges
+        - signal
+      - text: "Now the same scene plays out under a different ceiling."
+        stems:
+        - scene continuation
+        roots:
+        - ceiling
+        - plays
+        - now
+      - text: "Move forward an hour. The chest is still doing its quiet work."
+        stems:
+        - scene continuation
+        roots:
+        - forward
+        - chest
+        - quiet
+      - text: "Same hallway, three doors down."
+        stems:
+        - scene continuation
+        roots:
+        - hallway
+        - doors
+        - three
+      - text: "A new face enters the same script."
+        stems:
+        - scene continuation
+        roots:
+        - face
+        - enters
+        - script
     scene_to_inside:
       - text: "Step closer. What is happening inside the body in that moment?"
         stems:
@@ -454,6 +1403,55 @@ slot_families:
         - nervous
         - system
         - gap
+      - text: "Turn the lens inward. What is the gut reporting?"
+        stems:
+        - scene to interior
+        roots:
+        - lens
+        - gut
+        - reporting
+      - text: "Where did the breath go when the moment landed?"
+        stems:
+        - scene to interior
+        roots:
+        - went
+        - landed
+        - where
+      - text: "Press against the sternum. What is the data there?"
+        stems:
+        - scene to interior
+        roots:
+        - sternum
+        - data
+        - press
+      - text: "Track the heat in the face right after that beat."
+        stems:
+        - scene to interior
+        roots:
+        - heat
+        - face
+        - track
+      - text: "Inside the same moment, the body is keeping a separate record."
+        stems:
+        - scene to interior
+        roots:
+        - inside
+        - record
+        - separate
+      - text: "Pause the outside view. The inside view is more useful."
+        stems:
+        - scene to interior
+        roots:
+        - outside
+        - inside
+        - useful
+      - text: "Read what the shoulders are doing before the scene moves on."
+        stems:
+        - scene to interior
+        roots:
+        - shoulders
+        - moves
+        - reading
 
   COMPRESSION:
     name_it_simple:
@@ -485,6 +1483,55 @@ slot_families:
         - chapter
         - observation
         - whole
+      - text: "The headline of all of this is short."
+        stems:
+        - simple naming
+        roots:
+        - headline
+        - short
+        - all
+      - text: "Print this on a sticky note and call it done:"
+        stems:
+        - simple naming
+        roots:
+        - sticky
+        - note
+        - done
+      - text: "Forget the rest if you have to. Keep this line."
+        stems:
+        - simple naming
+        roots:
+        - forget
+        - line
+        - keep
+      - text: "Underneath, the single phrase is:"
+        stems:
+        - simple naming
+        roots:
+        - single
+        - phrase
+        - underneath
+      - text: "If you only carried one sentence away, carry this."
+        stems:
+        - simple naming
+        roots:
+        - carried
+        - away
+        - only
+      - text: "Reduced to its bones, the point is this:"
+        stems:
+        - simple naming
+        roots:
+        - reduced
+        - bones
+        - point
+      - text: "Drop the explanation. Hold the conclusion."
+        stems:
+        - simple naming
+        roots:
+        - explanation
+        - conclusion
+        - hold
     say_it_again_smaller:
       - text: "Said a smaller way:"
         stems:
@@ -514,6 +1561,55 @@ slot_families:
         - simply
         - put
         - more
+      - text: "Smaller still:"
+        stems:
+        - restate small
+        roots:
+        - smaller
+        - still
+        - even
+      - text: "Or, said in fewer words:"
+        stems:
+        - restate small
+        roots:
+        - fewer
+        - words
+        - said
+      - text: "Pocket-sized version:"
+        stems:
+        - restate small
+        roots:
+        - pocket
+        - sized
+        - version
+      - text: "On a postcard:"
+        stems:
+        - restate small
+        roots:
+        - postcard
+        - card
+        - on
+      - text: "One last shrink:"
+        stems:
+        - restate small
+        roots:
+        - shrink
+        - last
+        - one
+      - text: "Tighter still:"
+        stems:
+        - restate small
+        roots:
+        - tighter
+        - still
+        - even
+      - text: "Or, in seven words:"
+        stems:
+        - restate small
+        roots:
+        - seven
+        - words
+        - in
 
   HOOK:
     hook_continuation:
@@ -545,6 +1641,55 @@ slot_families:
         - opening
         - door
         - try
+      - text: "Pose it as a different reader would:"
+        stems:
+        - hook continuation
+        roots:
+        - pose
+        - reader
+        - would
+      - text: "Frame the question one more time, with the corners knocked off."
+        stems:
+        - hook continuation
+        roots:
+        - corners
+        - knocked
+        - frame
+      - text: "Walk in by a side path. The clearing is the same."
+        stems:
+        - hook continuation
+        roots:
+        - clearing
+        - path
+        - side
+      - text: "Open the chapter again from this other angle."
+        stems:
+        - hook continuation
+        roots:
+        - open
+        - chapter
+        - other
+      - text: "Ask the same question in plainer clothing:"
+        stems:
+        - hook continuation
+        roots:
+        - plainer
+        - clothing
+        - ask
+      - text: "Try the question lower, closer to the floor:"
+        stems:
+        - hook continuation
+        roots:
+        - lower
+        - closer
+        - floor
+      - text: "Put a softer edge on the same opening:"
+        stems:
+        - hook continuation
+        roots:
+        - softer
+        - edge
+        - same
 
 # Default fallback for slot types not listed above
 default_family:
@@ -577,3 +1722,45 @@ default_family:
       - cousin
       - follows
       - near
+    - text: "Now the same point shows up wearing a different sentence."
+      stems:
+      - generic continuation
+      roots:
+      - point
+      - wearing
+      - sentence
+    - text: "Try the thought again at a slightly different pitch."
+      stems:
+      - generic continuation
+      roots:
+      - pitch
+      - thought
+      - slightly
+    - text: "Different wording, same destination."
+      stems:
+      - generic continuation
+      roots:
+      - wording
+      - destination
+      - different
+    - text: "Here is the idea reset and restated."
+      stems:
+      - generic continuation
+      roots:
+      - reset
+      - restated
+      - idea
+    - text: "Listen for the same shape inside the next sentence."
+      stems:
+      - generic continuation
+      roots:
+      - shape
+      - inside
+      - listen
+    - text: "Same target, different arrow."
+      stems:
+      - generic continuation
+      roots:
+      - target
+      - arrow
+      - same
