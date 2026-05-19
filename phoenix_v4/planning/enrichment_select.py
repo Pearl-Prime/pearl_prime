@@ -110,6 +110,97 @@ class InsufficientVariantsError(RuntimeError):
 
 
 # ---------------------------------------------------------------------------
+# OPD-109 Phase 3: per-book persona-pool rotation state
+# ---------------------------------------------------------------------------
+# Defect: the deterministic-index selector picks an atom via
+# `_deterministic_index(seed_key, len(pool))`. With 96 SCENE-class slots and
+# ~57 atoms in pool, the mod-distribution is mathematically reasonable, but
+# the within-slot expansion (which pulls ADDITIONAL atoms via
+# `_expand_atom_pool_blocks`) re-ranks by SHA(seed_key + label + index) every
+# call. Because the SHA-rank is independent of book-level usage, the same few
+# atoms top the rank at every slot's expansion call, so ~50% of the pool is
+# never touched even though the pool is large enough. Pearl_Writer #2's
+# diagnosis: deep_book_6h post-Phase-2 still picks 3-5 unique SCENE atoms
+# across 96 slots.
+#
+# Fix: thread a per-book rotation state through `select_enrichment`. The
+# selector and expansion paths both consult `least_used_index_order(pool)` so
+# atoms with lower book-level usage rank first; ties are broken by the
+# existing SHA-rank so re-renders at the same seed reproduce. This matches
+# the pattern in `phoenix_v4/rendering/chapter_composer.WithinSlotRotationState`
+# introduced by PR #1217 for within-slot bridge variants.
+# ---------------------------------------------------------------------------
+
+
+class PersonaPoolRotationState:
+    """Book-level usage counter for persona atom IDs.
+
+    Two methods are exposed:
+      - `pick_index(pool, seed_key)`: deterministic least-used-first selection.
+      - `register(atom_id)`: increment book-level usage after the pick.
+
+    Identity of an atom is its `atom_id`. Two atoms with identical content but
+    different IDs are treated as distinct (matches `_expand_atom_pool_blocks`
+    semantics, which already dedupes on normalized text inside the expansion).
+    """
+
+    def __init__(self) -> None:
+        # atom_id -> count of uses across the entire book render
+        self._book_usage: Dict[str, int] = {}
+
+    def book_count(self, atom_id: str) -> int:
+        return self._book_usage.get(atom_id, 0)
+
+    def register(self, atom_id: str) -> None:
+        if not atom_id:
+            return
+        self._book_usage[atom_id] = self._book_usage.get(atom_id, 0) + 1
+
+    def pick_index(self, pool: List[Dict[str, Any]], seed_key: str) -> int:
+        """Return the index of the least-used atom in `pool`.
+
+        Ties (atoms used the same number of times so far in this book) are
+        broken by the existing `_deterministic_index` SHA seed, so re-renders
+        at the same seed reproduce identically.
+        """
+        if not pool:
+            return 0
+        n = len(pool)
+        # Hash-derived primary index gives the original deterministic anchor.
+        primary = _deterministic_index(seed_key, n)
+        # Rank every index by (book-usage-count, distance-from-primary).
+        # Lower count wins; identical count → closer to primary wins.
+        def _key(i: int) -> Tuple[int, int]:
+            aid = str(pool[i].get("atom_id") or i)
+            return (self._book_usage.get(aid, 0), (i - primary) % n)
+        order = sorted(range(n), key=_key)
+        return order[0]
+
+    def least_used_order(
+        self,
+        pool: List[Dict[str, Any]],
+        seed_key: str,
+        label: str,
+    ) -> List[int]:
+        """Return indices ordered from least-used to most-used.
+
+        Tie-break by SHA(seed_key:label:i) so re-renders are deterministic and
+        the order respects the existing `_expand_atom_pool_blocks` ranking
+        convention (which uses SHA-of-key-label-index).
+        """
+        if not pool:
+            return []
+        n = len(pool)
+        def _key(i: int) -> Tuple[int, str]:
+            aid = str(pool[i].get("atom_id") or i)
+            tiebreak = hashlib.sha256(
+                f"{seed_key}:{label}:{i}".encode("utf-8")
+            ).hexdigest()
+            return (self._book_usage.get(aid, 0), tiebreak)
+        return sorted(range(n), key=_key)
+
+
+# ---------------------------------------------------------------------------
 # ACT-007: Bestseller metadata field bonuses and collision_family dedup
 # ---------------------------------------------------------------------------
 
@@ -881,13 +972,32 @@ def _expand_atom_pool_blocks(
     label: str,
     goal_extra_words: int,
     max_chunks: int,
+    rotation_state: Optional["PersonaPoolRotationState"] = None,
 ) -> List[str]:
+    """Pull additional atoms from `pool` to top up a slot toward its target words.
+
+    OPD-109 Phase 3: when `rotation_state` is provided, the candidate order is
+    least-used-first (book-level usage), with the original SHA-of-key-label-index
+    tiebreak so re-renders at the same seed reproduce. When `rotation_state`
+    is None, falls back to pure SHA-ordering (legacy behavior; preserves
+    callers that have not adopted the rotation tracker yet).
+
+    Picks are registered into `rotation_state` so subsequent slots see the
+    increased usage and prefer not-yet-touched atoms.
+    """
     if len(pool) <= 1 or goal_extra_words <= 0 or max_chunks <= 0:
         return []
-    order = [i for i in range(len(pool)) if i != primary_idx]
-    order.sort(
-        key=lambda i: hashlib.sha256(f"{seed_key}:{label}:{i}".encode("utf-8")).hexdigest()
-    )
+    if rotation_state is not None:
+        # Least-used-first ordering; SHA tiebreak via the state helper.
+        order_full = rotation_state.least_used_order(pool, seed_key, label)
+        order = [i for i in order_full if i != primary_idx]
+    else:
+        order = [i for i in range(len(pool)) if i != primary_idx]
+        order.sort(
+            key=lambda i: hashlib.sha256(
+                f"{seed_key}:{label}:{i}".encode("utf-8")
+            ).hexdigest()
+        )
     primary = pool[primary_idx]
     primary_norm = _norm_ws(str(primary.get("content") or ""))
     out: List[str] = []
@@ -906,6 +1016,11 @@ def _expand_atom_pool_blocks(
         seen.add(norm)
         out.append(txt)
         running += _wc(txt)
+        # Register the pick so book-level usage updates for the next slot.
+        if rotation_state is not None:
+            aid = str(atom.get("atom_id") or "")
+            if aid:
+                rotation_state.register(aid)
     return out
 
 
@@ -1198,6 +1313,12 @@ def select_enrichment(
     )
     _book_tracker = BookSlotTracker()
 
+    # OPD-109 Phase 3: per-book rotation state for persona atom picks. Prefers
+    # least-used atoms (with deterministic SHA tiebreak), so the selector spreads
+    # picks across the available pool instead of hammering the same 3-5 atoms
+    # across all 96 SCENE-class slots. See `PersonaPoolRotationState` doc above.
+    _persona_rotation = PersonaPoolRotationState()
+
     # Section packet audit: per-slot source detail (written to enrichment_audit at end).
     _slot_audit: List[Dict[str, Any]] = []
 
@@ -1335,18 +1456,24 @@ def select_enrichment(
                             )
                         ]
                         if _persona_ex_pool:
-                            _ap_idx = _deterministic_index(
-                                f"{seed_key}:persona_ex", len(_persona_ex_pool)
+                            # OPD-109 Phase 3: rotation-aware least-used pick for
+                            # EXERCISE persona atoms too. Without this, the same
+                            # 1-3 practice atoms win every EXERCISE slot when
+                            # the teacher pool misses; rotation spreads picks
+                            # across the 16-30 atom pool typical for gen_z
+                            # professionals/anxiety EXERCISE.
+                            _ap_idx = _persona_rotation.pick_index(
+                                _persona_ex_pool, f"{seed_key}:persona_ex"
                             )
                             _ap_atom = _persona_ex_pool[_ap_idx]
                             _ap_content = str(_ap_atom.get("content") or "").strip()
                             if _ap_content:
                                 _add_pieces.append(_ap_content)
                                 _add_sources.append("persona_atom")
-                                _add_ids.append(
-                                    str(_ap_atom.get("atom_id") or f"persona_ex_{_ap_idx}")
-                                )
+                                _ap_aid = str(_ap_atom.get("atom_id") or f"persona_ex_{_ap_idx}")
+                                _add_ids.append(_ap_aid)
                                 audit_counts["slots_from_persona"] += 1
+                                _persona_rotation.register(_ap_aid)
                     if not _add_pieces:
                         # Final EXERCISE fallback: practice_library (unchanged path).
                         _apl = _try_practice_library(chapter_index0, topic, persona_id, seed)
@@ -1369,14 +1496,27 @@ def select_enrichment(
                         )
                     ]
                     if _ap_pool:
-                        _ap_idx = _deterministic_index(f"{seed_key}:persona", len(_ap_pool))
+                        # OPD-109 Phase 3: rotation-aware least-used pick. Falls
+                        # back to hash-anchor (`_deterministic_index`) for the
+                        # tiebreak so seed-determinism is preserved.
+                        _ap_idx = _persona_rotation.pick_index(_ap_pool, f"{seed_key}:persona")
                         _ap_atom = _ap_pool[_ap_idx]
                         _ap_content = str(_ap_atom.get("content") or "").strip()
                         if _ap_content:
                             _add_pieces.append(_ap_content)
                             _add_sources.append("persona_atom")
-                            _add_ids.append(str(_ap_atom.get("atom_id") or f"persona_{_ap_idx}"))
+                            _ap_aid = str(_ap_atom.get("atom_id") or f"persona_{_ap_idx}")
+                            _add_ids.append(_ap_aid)
                             audit_counts["slots_from_persona"] += 1
+                            # OPD-109 Phase 3: expose pool + primary index for
+                            # the within-slot expansion path (lines 1521+). The
+                            # previous wiring left these as None, so the slot
+                            # never pulled additional persona atoms, fell short
+                            # of `target_words`, and the rendered book stayed
+                            # 24-200w per slot vs the 1200w target.
+                            persona_expand_pool = _ap_pool
+                            persona_primary_idx = _ap_idx
+                            _persona_rotation.register(_ap_aid)
 
                     # 2) registry (baseline)
                     _ar_hit = _try_registry_variant(reg_lists, stype, reg_counters, seed_key)
@@ -1513,14 +1653,18 @@ def select_enrichment(
                         goal = min(goal, room_after_base)
                     if goal < 100:
                         goal = 0
-                    if source == "registry" and reg_sec_meta is not None and goal >= 100:
-                        sd, vi = reg_sec_meta
-                        extra_bodies = _extra_registry_variant_bodies(
-                            sd, vi, seed_key, goal, max_x
-                        )
-                    elif (
+                    # OPD-109 Phase 3: source is now a "+"-joined string when
+                    # multiple sources stack (e.g. "persona_atom+registry+teacher_atom").
+                    # Use substring detection so expansion fires regardless of stack
+                    # order. Priority: persona pool first (16-57 atoms typical for
+                    # gen_z_professionals/anxiety), then registry, then teacher.
+                    _src_parts = source.split("+") if source else []
+                    _has_persona = "persona_atom" in _src_parts
+                    _has_registry = "registry" in _src_parts
+                    _has_teacher = "teacher_atom" in _src_parts
+                    if (
                         goal >= 100
-                        and source == "persona_atom"
+                        and _has_persona
                         and persona_expand_pool
                         and persona_primary_idx is not None
                         and len(persona_expand_pool) > 1
@@ -1532,10 +1676,16 @@ def select_enrichment(
                             "persona_x",
                             goal,
                             max_x,
+                            rotation_state=_persona_rotation,
+                        )
+                    elif _has_registry and reg_sec_meta is not None and goal >= 100:
+                        sd, vi = reg_sec_meta
+                        extra_bodies = _extra_registry_variant_bodies(
+                            sd, vi, seed_key, goal, max_x
                         )
                     elif (
                         goal >= 100
-                        and source == "teacher_atom"
+                        and _has_teacher
                         and teacher_expand_pool
                         and teacher_primary_idx is not None
                         and len(teacher_expand_pool) > 1
@@ -1552,7 +1702,18 @@ def select_enrichment(
                     content = "\n\n".join([content] + extra_bodies)
                     nx = len(extra_bodies)
                     audit_counts["slots_format_scaled"] += 1
-                    if source == "registry":
+                    # OPD-109 Phase 3: when expansion comes from the registry
+                    # path we annotate as "+vN" (registry variant), else "+stackN"
+                    # (atom-pool stack). The detection is now substring-based so
+                    # stacked-source `source` like "persona_atom+registry+teacher_atom"
+                    # still records the correct annotation.
+                    _src_parts_post = source.split("+") if source else []
+                    _used_registry_path = (
+                        "registry" in _src_parts_post
+                        and "persona_atom" not in _src_parts_post
+                        and reg_sec_meta is not None
+                    )
+                    if _used_registry_path:
                         source_id = f"{source_id}+v{nx}"
                     else:
                         source_id = f"{source_id}+stack{nx}"

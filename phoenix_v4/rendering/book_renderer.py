@@ -379,6 +379,48 @@ def _book_wide_dedupe_keep_default() -> int:
         return 1
 
 
+# OPD-109 Phase 3: atom-sized paragraphs (20-200 words) are allowed to repeat
+# up to `_atom_paragraph_keep_default()` times across the book. Longer paragraphs
+# (>200 words) remain `keep=1` because they typically indicate template/scaffold
+# leakage that should not appear twice. This is conservative: with the OPD-109
+# selector rotation, atom collisions are already rare, but when they do occur
+# (16-30 atom EXERCISE pool, 12 chapters × 2 EXERCISE slots = 24 slot picks)
+# stripping ALL duplicates wipes ~275 paragraphs from the rendered book.
+#
+# Calibration vs `repeated_phrase_violations` (8-word phrase cap = 12 book-wide):
+# an 80-word atom paragraph contains ~70 unique 4-grams. Allowing 2 occurrences
+# doubles the 4-gram count to ~140 occurrences per atom-phrase. Even if all
+# four atoms share a stem like "for four counts", that's 8 occurrences — well
+# under the 12-book cap. See OPD-109 Phase 3 validation render notes.
+_ATOM_PARA_MIN_WORDS = 20  # below this: short transitions, already exempt
+_ATOM_PARA_MAX_WORDS = 200  # above this: likely template/scaffold; keep=1
+
+
+def _atom_paragraph_keep_default() -> int:
+    """Default keep-cap for atom-sized paragraphs (20-200 words).
+
+    Overridable via `PHOENIX_ATOM_PARAGRAPH_KEEP` for tests. Defaults to 2
+    (allow each atom-paragraph to appear twice book-wide).
+    """
+    try:
+        return max(1, int(_os.environ.get("PHOENIX_ATOM_PARAGRAPH_KEEP", "2") or "2"))
+    except (TypeError, ValueError):
+        return 2
+
+
+def _keep_cap_for_paragraph(paragraph: str, *, base_keep: int) -> int:
+    """Return the keep cap to apply to `paragraph` under the OPD-109 Phase 3 rule.
+
+    - Paragraphs in the atom-sized range (20-200 words) → atom-paragraph keep
+      (defaults to 2; env override `PHOENIX_ATOM_PARAGRAPH_KEEP`).
+    - Paragraphs longer than 200 words → `base_keep` (defaults to 1).
+    """
+    wc = len(paragraph.split())
+    if _ATOM_PARA_MIN_WORDS <= wc <= _ATOM_PARA_MAX_WORDS:
+        return max(base_keep, _atom_paragraph_keep_default())
+    return base_keep
+
+
 def _dedup_paragraphs_book_wide(
     text: str,
     min_words: int = 30,
@@ -393,6 +435,11 @@ def _dedup_paragraphs_book_wide(
     blob) can paste the same atom into every chapter and the chapter-scoped
     `_dedup_repeated_blocks` resets at each `Chapter N` heading.
 
+    OPD-109 Phase 3: atom-sized paragraphs (20-200 words) are allowed up to
+    `_atom_paragraph_keep_default()` occurrences. The base `keep` parameter
+    still applies to longer paragraphs (templates/scaffold) so the dedup-leak
+    safety net for those long blocks is unchanged.
+
     Args:
         text: full manuscript text (chapter-separated, blank-line paragraphs).
         min_words: paragraphs shorter than this (word count) are exempt — short
@@ -400,8 +447,10 @@ def _dedup_paragraphs_book_wide(
         min_chars: paragraphs shorter than this (character count) are also exempt.
             Both gates apply; a paragraph must clear BOTH to participate.
         keep: max occurrences of any given normalized paragraph to retain. Defaults
-            to `_book_wide_dedupe_keep_default()` (env-override of "1"). All occurrences
-            after the Nth are elided.
+            to `_book_wide_dedupe_keep_default()` (env-override of "1"). This is
+            the BASE keep; atom-sized paragraphs additionally honor the larger
+            `_atom_paragraph_keep_default()`. All occurrences after the per-bucket
+            cap are elided.
 
     Returns:
         (deduped_text, notes) — notes is one entry per elided occurrence.
@@ -437,9 +486,11 @@ def _dedup_paragraphs_book_wide(
             # tags must be free to repeat across chapters.
             kept.append(stripped)
             continue
+        # OPD-109 Phase 3: per-paragraph keep cap based on size bucket.
+        effective_keep = _keep_cap_for_paragraph(stripped, base_keep=keep)
         fp = re.sub(r"\s+", " ", re.sub(r"[^\w\s]+", "", stripped.lower())).strip()
         seen[fp] = seen.get(fp, 0) + 1
-        if seen[fp] <= keep:
+        if seen[fp] <= effective_keep:
             kept.append(stripped)
             counts_first_seen.setdefault(fp, stripped[:80])
         else:
@@ -450,15 +501,19 @@ def _dedup_paragraphs_book_wide(
 
     # One log line per elided fingerprint with its total occurrence count so
     # production has telemetry on how often the safety-net actually fires.
+    # OPD-109 Phase 3: the kept threshold can be either `keep` (base) or
+    # `_atom_paragraph_keep_default()` (atom-sized bucket); the log line reports
+    # the larger of the two so the operator sees the actual cap applied.
     if notes:
-        elided_fps = {fp: count for fp, count in seen.items() if count > keep}
+        elided_max_keep = max(keep, _atom_paragraph_keep_default())
+        elided_fps = {fp: count for fp, count in seen.items() if count > elided_max_keep}
         for fp, count in elided_fps.items():
             fp_hash = hashlib.sha1(fp.encode("utf-8")).hexdigest()[:10]
             logger.info(
-                "[dedup] book-wide paragraph elision: %s appeared %d times, kept %d",
+                "[dedup] book-wide paragraph elision: %s appeared %d times, kept_cap_upper_bound %d",
                 fp_hash,
                 count,
-                keep,
+                elided_max_keep,
             )
 
     return "\n\n".join(kept), notes
