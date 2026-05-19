@@ -174,13 +174,40 @@ teachers:
 
   joshin:
     display_name: "Joshin"
-    formal_name: "Joshin Roshi"
+    formal_name: "Joshin Ajari"
     pronouns: "he/him"
-    honorific: "Roshi"
+    honorific: "Ajari"  # 阿闍梨 — Shingon ācārya; NOT roshi (Zen-specific) per OPD-105
     kb_id: "joshin"
     doctrine_profile: "joshin"
+    tradition: "Shingon Esoteric Buddhism (Kōyasan Shingon-shū)"
+    sub_school: "kogi_koyasan"  # Kogi Shingon, Mount Kōya headquarters
+    lineage_root: "Kōbō Daishi (Kūkai, 774-835)"
     allowed_topics: *all_topics
     disallowed_topics: [manifestation, get_rich_quick]
+    forbidden_traditions: [zen, theravada]  # Zen drift is the canonical OPD-105 error
+    allowed_engines: [overwhelm, shame]
+    allowed_resolution_types: [open_loop, internal_shift_only, grounded_reframe]
+    identity_shift_allowed: false
+    preferred_formats: [F006, standard_book]
+    teacher_mode_defaults:
+      require_teacher_story: true
+      require_teacher_exercise: true
+      allow_generic_fallback_for_scene: true
+
+  kenjin:
+    display_name: "Kenjin Roshi"
+    formal_name: "Kenjin Roshi"
+    short_name: "Kenjin"
+    pronouns: "he/him"
+    honorific: "Roshi"  # 老師 — canonical Zen senior teacher title
+    kb_id: "kenjin"
+    doctrine_profile: "kenjin"
+    tradition: "Sōtō Zen Buddhism"
+    sub_school: "soto_zen"
+    lineage_root: "Eihei Dōgen Zenji (1200-1253), via Tendō Nyojō; Sōtō school"
+    allowed_topics: *all_topics
+    disallowed_topics: [manifestation, get_rich_quick]
+    forbidden_traditions: [shingon, theravada]  # Per OPD-105 — Kenjin owns Zen, NOT Shingon
     allowed_engines: [overwhelm, shame]
     allowed_resolution_types: [open_loop, internal_shift_only, grounded_reframe]
     identity_shift_allowed: false
