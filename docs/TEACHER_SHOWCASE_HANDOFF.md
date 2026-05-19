@@ -12,7 +12,7 @@ Single reference for **`brand-wizard-app/public/teacher_showcase.html`**, relate
 | Public assets root | `brand-wizard-app/public/` |
 
 Teachers are **13** sections (`<section id="…" class="teacher-section">`):  
-`ahjan`, `adi_da`, `master_feung`, `sai_ma`, `ra`, `junko`, `miki`, `master_wu`, `pamela_fellows`, `joshin`, `maat`, `omote`, `master_sha`.
+`ahjan`, `adi_da`, `master_feung`, `sai_ma`, `ra`, `junko`, `miki`, `master_wu`, `pamela_fellows`, `joshin` (Shingon), `kenjin` (Sōtō Zen, new per OPD-105), `maat`, `omote`, `master_sha`.
 
 ---
 

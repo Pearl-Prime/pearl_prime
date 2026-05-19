@@ -1746,3 +1746,44 @@ overlay_param:
 **Authority:** This cap entry + the supplemented entries above + [`docs/PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md`](./PEARL_PRIME_BESTSELLER_WRITING_OVERLAY_SPEC.md) §570-577 (canonical CLI) + [`specs/PHOENIX_V4_5_WRITER_SPEC.md`](../specs/PHOENIX_V4_5_WRITER_SPEC.md) §4 (three-source content rule).
 
 ---
+
+### JOSHIN-SHINGON-KENJIN-ZEN-01 — Joshin recast to Shingon; new Kenjin Roshi (Sōtō Zen) carries existing Zen content (OPD-105 approved 2026-05-18)
+
+**Decision-of-record:** [`artifacts/coordination/operator_decisions_log.tsv`](../artifacts/coordination/operator_decisions_log.tsv) OPD-20260518-105.
+
+**Authority sources:**
+- Plan: [`docs/migrations/JOSHIN_SHINGON_KENJIN_ZEN_MIGRATION_PLAN_2026-05-18.md`](./migrations/JOSHIN_SHINGON_KENJIN_ZEN_MIGRATION_PLAN_2026-05-18.md)
+- Research foundation: [`docs/research/shingon_buddhism_research_2026-05-18.md`](./research/shingon_buddhism_research_2026-05-18.md)
+- Joshin doctrine v3: [`SOURCE_OF_TRUTH/teacher_banks/joshin/doctrine/doctrine.yaml`](../SOURCE_OF_TRUTH/teacher_banks/joshin/doctrine/doctrine.yaml)
+- Kenjin doctrine v1: [`SOURCE_OF_TRUTH/teacher_banks/kenjin/doctrine/doctrine.yaml`](../SOURCE_OF_TRUTH/teacher_banks/kenjin/doctrine/doctrine.yaml)
+
+**What changed:**
+- **Joshin (display_name: "Joshin"):** tradition recast to **Shingon Esoteric Buddhism (Kōyasan Shingon-shū, Kogi branch)**. Honorific = `ajari` (NOT roshi). Doctrine v3 grounds in sokushin-jōbutsu, sanmitsu, dual mandala, rokudai, honpushō. Signature practices: gohōgō recitation ("Namu Daishi Henjō Kongō"), susokukan, hokkai-jō-in mudrā + Kōmyō Shingon, gachirin-kan, Ajikan. Heart Sutra opening: "Bussetsu Maka Hannya Haramita Shingyō" (with Bussetsu prefix — Shingon form).
+- **NEW teacher: `kenjin` (display_name: "Kenjin Roshi"):** Sōtō Zen Buddhism (Eihei-ji line). Male, late 50s, Japanese-American (Kyoto-born, Bay Area sangha). Honorific = `roshi`. Signature practices: shikantaza, kinhin, oryoki, koan inquiry. Heart Sutra opening: "Maka Hannya Haramita Shingyō" (no Bussetsu prefix — Zen form). 4 STORY atoms migrated from Joshin (canonical Zen-genre parables).
+- **Cognitive Clarity / Clear Seeing Books brand:** wholesale-migrated from joshin to kenjin per OPD-105 operator decision #1 (Option C). 132 book_plans + 44 series_plans renamed (`cognitive_clarity__joshin__*` → `cognitive_clarity__kenjin__*`). 6 Zen-coded authors (Ada Park, Joel Crane, Hana Lee, Marcus Stone, Yuki Tanabe, Elliot Vane) wholesale-keep with Kenjin (operator decision #5). All catalog_planning routing tables (lane_assignments × 12 locales, brand_identity_system, teacher_brand_archetypes, brand_display_names, etc.) updated.
+- **`still_forest` brand:** tradition rewritten from "Forest meditation / nature connection" (third-axis drift, neither Zen nor Shingon) to "Mount Kōya forest training, ajari-led contemplative stillness" (Shingon-grounded forest framing per operator decision #4). Applied across `config/brand_management/teacher_brand_map.yaml` + `global_brand_registry.yaml` (13 region instances).
+- **Pearl_News scope:** Joshin's Pearl_News entry was already correctly Shingon (no change). Kenjin is NOT added to Pearl_News per OPD-105 explicit scope.
+
+**Operator decisions (5 approved):**
+1. (P0) Cognitive Clarity routing → **Option C** (wholesale to Kenjin; Joshin gets new Shingon brand in follow-up commission per migration plan §6.B)
+2. (P1) Joshin's Shingon sub-school → **Kōyasan Shingon-shū (Kogi)**
+3. (P1) Kenjin's identity → **Male, late 50s, Japanese-American (Bay Area), Sōtō Zen**
+4. (P1) `still_forest` reconciliation → **Reconcile in same migration**
+5. (P2) Clear Seeing Books 6-author roster → **Wholesale-keep with Kenjin**
+
+**PRs (4-phase migration, stacked):**
+- Phase 1: PR #1207 — Joshin Shingon doctrine + Kenjin teacher card (5 files)
+- Phase 2: PR #1208 — Cognitive Clarity wholesale brand migration to Kenjin (204 files)
+- Phase 3: PR #1209 — Joshin Zen-tell atom corrections + still_forest reconciliation (8 files)
+- Phase 4: PR (this commit) — docs + tests + governance backfill
+
+**Out of scope (follow-up commissions, per migration plan §6.B):**
+1. Joshin Shingon-coded brand authoring (new brand name + identity + colophon + tagline + 6+ new Shingon-coded authors)
+2. Joshin new Shingon atom authoring (12 STORY + 12 EXERCISE + 12 SCENE atoms grounded in research §3 / §6.3)
+3. Visual asset re-render for Joshin (Shingon iconography)
+4. Audiobook prose regen for `artifacts/audiobook_samples/_prose/joshin_anxiety_ch1.txt`
+5. Pearl_Video pilot regeneration if `joshin / cognitive_clarity / ja-JP` pilot was Zen-coded
+
+**Authority:** This cap entry + the four phase PRs (1207, 1208, 1209, this PR).
+
+---

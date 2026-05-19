@@ -129,7 +129,7 @@ Both Gemini and DeepSeek converge on eight scalable visual archetypes. Each maps
 | Webtoon Vertical Romance | Soft focus, fashion, close-ups | Female Gen Z, Asia | Ma’at, Miki (relational) |
 | Meme-Driven Chaotic | Lo-fi, exaggerated, surreal | Gen Alpha, TikTok | Short-form Practice Cards |
 | Dark Psychological | High contrast, minimalist | Older Gen Z, EU/US | Ahjan (shame, spiral engines) |
-| Cozy Iyashikei | Pastel, rounded, kawaii | Anxiety relief, global | Sai Maa, Joshin (healing) |
+| Cozy Iyashikei | Pastel, rounded, kawaii | Anxiety relief, global | Sai Maa, Joshin (Shingon ritual healing), Kenjin (Sōtō Zen direct-pointing) |  # OPD-105: Joshin = Shingon, Kenjin owns Zen lane
 | Power Progression | UI overlays, level-up visuals | Male Gen Z, games | Exercise atoms as “skill unlocks” |
 | Social Media Simulacra | Mimics phone UI, text msgs | Core Gen Z, global | Pearl News article format |
 | Interactive/Branching | Polls, AR, multi-path | Gen Alpha, Bilibili/US | Arc system (choose-path) |
