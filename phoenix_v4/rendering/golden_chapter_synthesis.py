@@ -454,7 +454,15 @@ def _resolve_location_placeholders(
     t = re.sub(r"(?i)\bis there below\b", "is audible outside", t)
     t = re.sub(r"[ \t]{2,}", " ", t)
     t = re.sub(r"[ \t]+\.[ \t]+", ". ", t)
-    t = re.sub(r"([.!?])\1+", r"\1", t)
+    # Collapse runs of duplicated sentence terminators (e.g. ".." → ".", "??" → "?"),
+    # but PRESERVE legitimate three-dot ellipses ("..." stays "..."), and clamp
+    # over-long period runs ("...." or longer) back to a canonical three-dot ellipsis.
+    # The original ``([.!?])\1+`` collapsed every ``...`` to ``.``, breaking lead-in
+    # wrapper templates like ``"What {TEACHER} keeps pointing toward is..."`` —
+    # producing the F2 register-gate ``"... is."`` artifact. See OPD-20260518-002.
+    t = re.sub(r"\.{4,}", "...", t)
+    t = re.sub(r"([!?])\1+", r"\1", t)
+    t = re.sub(r"(?<!\.)\.\.(?!\.)", ".", t)
     t = re.sub(r"\s+,", ",", t)
     t = re.sub(r"\(\s+", "(", t)
     t = re.sub(r"\s+\)", ")", t)
