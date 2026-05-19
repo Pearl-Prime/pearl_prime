@@ -1,0 +1,579 @@
+# Within-slot bridge families
+#
+# Purpose: provide 1-sentence transition prose between consecutive atoms
+# that land in the SAME canonical slot at long runtimes (deep_book_6h
+# stacks up to ~8 atoms per slot after OPD-109 Phase 1 cap reduction).
+#
+# Defect ref: docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md
+# Operator reference: artifacts/qa/BLIND_10_VERDICT_2026-05-18.md Book 3
+#
+# Selection: deterministic, keyed by (chapter_index, slot_type, atom_pair_index).
+# No paid LLM calls. Templates are static strings; no substitution slots
+# beyond what the renderer already emits. Reading level: 8th grade (OPD-100).
+#
+# Schema:
+#   slot_families:
+#     <SLOT_TYPE>:           # canonical slot type uppercase
+#       <shape_label>:       # rotation bucket (e.g. "noticing_continuation")
+#         - text: "<sentence>"
+#           stems: [<stem-1>, ...]   # anti-reuse stems
+#           roots: [<root-1>, ...]   # anti-reuse roots
+#
+# 8 families cover the high-volume slot types from the OPD-109 audit:
+#   STORY, REFLECTION, EXERCISE, INTEGRATION, TEACHER_DOCTRINE,
+#   SCENE, COMPRESSION, HOOK
+#
+# Each family has 4-5 variants per shape; 3 shapes per family minimum
+# → ~12 variants per family → enough to cover 7-atom slot with no repeats.
+
+schema_version: 1
+
+slot_families:
+
+  STORY:
+    same_pattern_different_face:
+      - text: "The same pattern shows up in a different room."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - pattern
+        - room
+        - scene
+      - text: "Watch how the same shape lands in another life."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - shape
+        - life
+        - pattern
+      - text: "Another version of this turn happens at a different hour."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - turn
+        - hour
+        - version
+      - text: "Here is the same beat with new furniture around it."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - beat
+        - furniture
+        - pattern
+      - text: "Different context, same body response."
+        stems:
+        - pattern travels across scenes
+        roots:
+        - context
+        - body
+        - response
+    quiet_pivot:
+      - text: "Stay with that picture for a moment, then watch this next one."
+        stems:
+        - pause and observe
+        roots:
+        - picture
+        - moment
+        - watch
+      - text: "Sit with what just happened. Then notice the next scene."
+        stems:
+        - pause and observe
+        roots:
+        - happen
+        - notice
+        - scene
+      - text: "Hold that frame. The next one is close cousin to it."
+        stems:
+        - pause and observe
+        roots:
+        - frame
+        - cousin
+        - close
+      - text: "Pause there. Now follow the thread into the next moment."
+        stems:
+        - pause and observe
+        roots:
+        - thread
+        - moment
+        - pause
+    contrast_lift:
+      - text: "Now watch what shifts when the trigger comes from a different angle."
+        stems:
+        - cue from new angle
+        roots:
+        - shift
+        - trigger
+        - angle
+      - text: "Same body. Different door. Watch what changes."
+        stems:
+        - cue from new angle
+        roots:
+        - body
+        - door
+        - change
+      - text: "Turn the camera. The same alarm sounds in a different room."
+        stems:
+        - cue from new angle
+        roots:
+        - camera
+        - alarm
+        - room
+      - text: "Compare that with what happens when the cue is softer."
+        stems:
+        - cue from new angle
+        roots:
+        - compare
+        - cue
+        - soft
+
+  REFLECTION:
+    deepen_the_seeing:
+      - text: "There is another layer to this, sitting just under the first."
+        stems:
+        - layer underneath
+        roots:
+        - layer
+        - first
+        - under
+      - text: "Look one notch deeper than the surface of that."
+        stems:
+        - layer underneath
+        roots:
+        - notch
+        - deeper
+        - surface
+      - text: "Beneath that recognition, a second one is waiting."
+        stems:
+        - layer underneath
+        roots:
+        - beneath
+        - recognition
+        - waiting
+      - text: "The seeing has a downstairs. Step into it."
+        stems:
+        - layer underneath
+        roots:
+        - downstairs
+        - step
+        - seeing
+    name_the_mechanism:
+      - text: "Here is the mechanism that keeps that pattern in place."
+        stems:
+        - mechanism name
+        roots:
+        - mechanism
+        - pattern
+        - place
+      - text: "The engine underneath this is simpler than it looks."
+        stems:
+        - mechanism name
+        roots:
+        - engine
+        - simple
+        - underneath
+      - text: "What drives this is a single body habit, repeated."
+        stems:
+        - mechanism name
+        roots:
+        - drives
+        - habit
+        - body
+      - text: "Underneath the story, one nervous-system reflex is doing the work."
+        stems:
+        - mechanism name
+        roots:
+        - reflex
+        - story
+        - work
+    permission_to_pause:
+      - text: "It is enough to recognize this much. Sit with it."
+        stems:
+        - permission to pause
+        roots:
+        - enough
+        - sit
+        - recognize
+      - text: "You do not have to fix that yet. You can simply see it."
+        stems:
+        - permission to pause
+        roots:
+        - fix
+        - see
+        - simply
+      - text: "Naming the pattern is already work. Let it land before the next piece."
+        stems:
+        - permission to pause
+        roots:
+        - naming
+        - land
+        - work
+      - text: "Pause. The seeing is enough for this breath."
+        stems:
+        - permission to pause
+        roots:
+        - pause
+        - breath
+        - enough
+
+  EXERCISE:
+    next_practice_handoff:
+      - text: "Once that lands in the body, try this next move."
+        stems:
+        - practice handoff
+        roots:
+        - lands
+        - body
+        - move
+      - text: "When that one feels familiar, the next practice builds on it."
+        stems:
+        - practice handoff
+        roots:
+        - familiar
+        - practice
+        - build
+      - text: "After a few rounds of that, layer in this one."
+        stems:
+        - practice handoff
+        roots:
+        - rounds
+        - layer
+        - one
+      - text: "Take that as far as it goes today, then add the next step."
+        stems:
+        - practice handoff
+        roots:
+        - far
+        - today
+        - step
+    different_door_same_room:
+      - text: "Here is another way in to the same opening."
+        stems:
+        - alternate entry
+        roots:
+        - way
+        - opening
+        - another
+      - text: "Same destination, different doorway."
+        stems:
+        - alternate entry
+        roots:
+        - destination
+        - doorway
+        - same
+      - text: "If that one does not click, this one might."
+        stems:
+        - alternate entry
+        roots:
+        - click
+        - might
+        - one
+      - text: "Some people land in this through the body; others land through the breath. Try this version."
+        stems:
+        - alternate entry
+        roots:
+        - land
+        - breath
+        - version
+
+  INTEGRATION:
+    weave_it_in:
+      - text: "Now let that thread connect to the rest of the week."
+        stems:
+        - weave to context
+        roots:
+        - thread
+        - week
+        - connect
+      - text: "Carry that small piece into the next ordinary moment."
+        stems:
+        - weave to context
+        roots:
+        - piece
+        - ordinary
+        - moment
+      - text: "Bring that recognition back to one specific place this evening."
+        stems:
+        - weave to context
+        roots:
+        - recognition
+        - evening
+        - specific
+      - text: "Let that move into one conversation you have today."
+        stems:
+        - weave to context
+        roots:
+        - conversation
+        - today
+        - move
+    close_the_loop:
+      - text: "That brings us back to where the chapter started, but now with a foothold."
+        stems:
+        - loop closure
+        roots:
+        - back
+        - chapter
+        - foothold
+      - text: "The opening question now has a partial answer."
+        stems:
+        - loop closure
+        roots:
+        - opening
+        - question
+        - answer
+      - text: "Here is the same ground we stood on at the start, seen with new eyes."
+        stems:
+        - loop closure
+        roots:
+        - ground
+        - start
+        - eyes
+      - text: "We have circled back. The view is different now."
+        stems:
+        - loop closure
+        roots:
+        - circled
+        - view
+        - different
+
+  TEACHER_DOCTRINE:
+    teacher_attribution_bridge:
+      - text: "This is what the teaching points to, in plain language."
+        stems:
+        - teacher attribution
+        roots:
+        - teaching
+        - plain
+        - language
+      - text: "The tradition has a phrase for this. Here is one rendering."
+        stems:
+        - teacher attribution
+        roots:
+        - tradition
+        - phrase
+        - rendering
+      - text: "The teacher would put it this way."
+        stems:
+        - teacher attribution
+        roots:
+        - teacher
+        - way
+        - put
+      - text: "Set next to that, another part of the teaching adds a wrinkle."
+        stems:
+        - teacher attribution
+        roots:
+        - teaching
+        - wrinkle
+        - part
+    deepen_doctrine:
+      - text: "The teaching goes one step further."
+        stems:
+        - doctrine deepening
+        roots:
+        - step
+        - further
+        - teaching
+      - text: "Underneath that, the tradition adds a second pointer."
+        stems:
+        - doctrine deepening
+        roots:
+        - underneath
+        - pointer
+        - second
+      - text: "Where the first line ends, the next teaching picks up."
+        stems:
+        - doctrine deepening
+        roots:
+        - ends
+        - picks
+        - line
+      - text: "There is a companion teaching that lives next to that one."
+        stems:
+        - doctrine deepening
+        roots:
+        - companion
+        - next
+        - lives
+
+  SCENE:
+    scene_continuation:
+      - text: "Pan across the room. Another small scene is unfolding."
+        stems:
+        - scene continuation
+        roots:
+        - pan
+        - room
+        - small
+      - text: "A few minutes later, in the same building, this happens."
+        stems:
+        - scene continuation
+        roots:
+        - minutes
+        - building
+        - same
+      - text: "The day moves a few hours. The body keeps the pattern."
+        stems:
+        - scene continuation
+        roots:
+        - hours
+        - body
+        - pattern
+      - text: "Different desk, different hour, same response."
+        stems:
+        - scene continuation
+        roots:
+        - desk
+        - hour
+        - response
+    scene_to_inside:
+      - text: "Step closer. What is happening inside the body in that moment?"
+        stems:
+        - scene to interior
+        roots:
+        - closer
+        - inside
+        - moment
+      - text: "Zoom in on the chest, the breath, the jaw."
+        stems:
+        - scene to interior
+        roots:
+        - chest
+        - breath
+        - jaw
+      - text: "Stay with the body for a beat before the next picture."
+        stems:
+        - scene to interior
+        roots:
+        - body
+        - beat
+        - picture
+      - text: "Notice what the nervous system did in that gap."
+        stems:
+        - scene to interior
+        roots:
+        - nervous
+        - system
+        - gap
+
+  COMPRESSION:
+    name_it_simple:
+      - text: "In one sentence: that is what is happening."
+        stems:
+        - simple naming
+        roots:
+        - sentence
+        - happening
+        - one
+      - text: "Strip the rest away. This is the through-line."
+        stems:
+        - simple naming
+        roots:
+        - strip
+        - through
+        - rest
+      - text: "If only one piece sticks today, let it be this."
+        stems:
+        - simple naming
+        roots:
+        - piece
+        - sticks
+        - today
+      - text: "The whole chapter compresses into one observation."
+        stems:
+        - simple naming
+        roots:
+        - chapter
+        - observation
+        - whole
+    say_it_again_smaller:
+      - text: "Said a smaller way:"
+        stems:
+        - restate small
+        roots:
+        - smaller
+        - said
+        - way
+      - text: "In the plainest version of the same point:"
+        stems:
+        - restate small
+        roots:
+        - plainest
+        - version
+        - point
+      - text: "Boiled down to one breath of language:"
+        stems:
+        - restate small
+        roots:
+        - boiled
+        - breath
+        - language
+      - text: "And, more simply put:"
+        stems:
+        - restate small
+        roots:
+        - simply
+        - put
+        - more
+
+  HOOK:
+    hook_continuation:
+      - text: "Here is the same opening from a different angle."
+        stems:
+        - hook continuation
+        roots:
+        - opening
+        - angle
+        - same
+      - text: "Or, said another way:"
+        stems:
+        - hook continuation
+        roots:
+        - said
+        - way
+        - another
+      - text: "The question shows up in more than one shape. Here is the next shape."
+        stems:
+        - hook continuation
+        roots:
+        - question
+        - shape
+        - shows
+      - text: "Try the same opening through a different door."
+        stems:
+        - hook continuation
+        roots:
+        - opening
+        - door
+        - try
+
+# Default fallback for slot types not listed above
+default_family:
+  generic_continuation:
+    - text: "Here is the same idea seen from another side."
+      stems:
+      - generic continuation
+      roots:
+      - idea
+      - side
+      - same
+    - text: "Another version of the same thing:"
+      stems:
+      - generic continuation
+      roots:
+      - version
+      - thing
+      - same
+    - text: "Said one more way:"
+      stems:
+      - generic continuation
+      roots:
+      - said
+      - way
+      - one
+    - text: "A near-cousin of that follows."
+      stems:
+      - generic continuation
+      roots:
+      - cousin
+      - follows
+      - near

@@ -643,7 +643,16 @@ def _merged_persona_atoms_deep_6h(
 
 
 def _max_extra_chunks_for_format(runtime_format: str, slot_target_words: int) -> int:
-    """Cap additional registry/persona/teacher variants per slot (format + beatmap slot target)."""
+    """Cap additional registry/persona/teacher variants per slot (format + beatmap slot target).
+
+    OPD-109 Phase 1 cap reductions (2026-05-18):
+        - deep_book_6h: 18 → 8 (was stacking up to 24 atoms/slot, no bridges)
+        - deep_book_4h: 7 → 5
+        - extended_book_2h: 5 → 4
+        - hard cap on tw-derived extras tightened: was min(24, ...), now min(12, ...)
+    Other formats unchanged. Phase 2 will address word-target re-tuning via
+    atom expansion. See docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md.
+    """
     rf = (runtime_format or "").strip()
     tw = max(0, int(slot_target_words or 0))
     if rf in ("micro_book_15", "micro_book_20"):
@@ -661,15 +670,23 @@ def _max_extra_chunks_for_format(runtime_format: str, slot_target_words: int) ->
     elif rf == "standard_book":
         base = 3
     elif rf == "extended_book_2h":
-        base = 5
+        # OPD-109 Phase 1: was 5; reduced to 4 to thin the per-slot stack.
+        base = 4
     elif rf == "deep_book_4h":
-        base = 7
+        # OPD-109 Phase 1: was 7; reduced to 5.
+        base = 5
     elif rf == "deep_book_6h":
-        base = 18
+        # OPD-109 Phase 1: was 18 (cap min(24, 18+x)); reduced to 8 to address
+        # the "type-block dumping" reader experience. Combined with the within-
+        # slot bridge generator, this drops Ch1 from ~45 atoms to ~25 while
+        # adding 1-sentence transitions between every remaining atom pair.
+        base = 8
     else:
         base = 3
     extra = max(0, tw - 320) // 160
-    return min(24, base + extra)
+    # OPD-109 Phase 1: hard cap tightened from 24 to 12 to keep long-form
+    # slots from re-stacking via the tw-derived extra path.
+    return min(12, base + extra)
 
 
 def _extra_registry_variant_bodies(
@@ -2360,7 +2377,13 @@ def apply_depth_pass(
     _bounds = _load_runtime_word_bounds(rf, root)
     book_wmax: Optional[int] = _bounds[1] if _bounds else None
     deficit_floor = 55 if rf == "deep_book_6h" else 100
-    depth_rounds = 3 if rf == "deep_book_6h" else 1
+    # OPD-109 Phase 1: deep_book_6h depth_rounds reduced from 3 to 2.
+    # Three rounds × 2 passes × ~6 module hits stacked ~35 depth atoms into
+    # Ch1's STORY+REFLECTION buckets, producing the "8 tableaus in a row"
+    # operator complaint. Two rounds still fills word budget when paired with
+    # the relaxed _max_extra_chunks_for_format and within-slot bridges.
+    # See docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md.
+    depth_rounds = 2 if rf == "deep_book_6h" else 1
 
     enriched_book.enrichment_audit.setdefault("depth_modules_added", [])
 

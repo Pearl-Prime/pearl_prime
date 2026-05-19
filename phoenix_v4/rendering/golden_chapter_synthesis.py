@@ -16,7 +16,7 @@ import json
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any, Callable, Optional
 
 if TYPE_CHECKING:
     from phoenix_v4.planning.enrichment_select import EnrichedChapter, EnrichedSlot
@@ -555,7 +555,18 @@ def _dedupe_paragraphs(
     *,
     phrase_memory: EnvironmentPhraseMemory | None = None,
     chapter_index: int = 0,
+    bridge_fn: "Callable[[str, str, int], str] | None" = None,
 ) -> str:
+    """Dedupe paragraphs across blocks and join them.
+
+    OPD-109 Phase 1: if `bridge_fn` is provided, it is called between every
+    pair of adjacent surviving paragraphs and the returned 1-sentence
+    transition is interleaved into the output. Callback signature:
+        bridge_fn(prev_atom: str, next_atom: str, atom_pair_index: int) -> str
+    `bridge_fn` returning "" is treated as no-op (atoms still join with the
+    bare "\\n\\n" separator). Default (None) preserves backward-compat with
+    every existing caller.
+    """
     seen_prefixes: set[str] = set()
     seen_suffixes: set[str] = set()
     out: list[str] = []
@@ -582,7 +593,20 @@ def _dedupe_paragraphs(
             seen_prefixes.add(prefix_key)
             seen_suffixes.add(suffix_key)
             out.append(p)
-    return "\n\n".join(out)
+    if bridge_fn is None or len(out) < 2:
+        return "\n\n".join(out)
+    woven: list[str] = []
+    for i, p in enumerate(out):
+        if i > 0:
+            try:
+                bridge = bridge_fn(out[i - 1], p, i - 1) or ""
+            except Exception:
+                bridge = ""
+            bridge = (bridge or "").strip()
+            if bridge:
+                woven.append(bridge)
+        woven.append(p)
+    return "\n\n".join(woven)
 
 
 def _dedupe_hook_scene(hook: str, scene: str) -> tuple[str, str]:
@@ -637,7 +661,14 @@ def _first_or_join(
     *,
     phrase_memory: EnvironmentPhraseMemory | None = None,
     chapter_index: int = 0,
+    bridge_fn: "Callable[[str, str, int], str] | None" = None,
 ) -> str:
+    """Clean parts and join them, optionally interleaving bridge sentences.
+
+    OPD-109 Phase 1: `bridge_fn` is forwarded to `_dedupe_paragraphs` when
+    multiple parts survive. Default (None) preserves the bare-join behavior
+    for every caller that does not pass `bridge_fn`.
+    """
     cleaned: list[str] = []
     for p in parts:
         fixed = _strip_slot_artifacts(
@@ -651,7 +682,7 @@ def _first_or_join(
         return ""
     if len(cleaned) == 1:
         return cleaned[0]
-    return _dedupe_paragraphs(cleaned)
+    return _dedupe_paragraphs(cleaned, bridge_fn=bridge_fn)
 
 
 def _collapse_chapter_one_story_stack(story: str) -> str:
@@ -677,27 +708,58 @@ def build_virtual_slot_streams(
     """
     Map enriched beatmap slots → parallel (slot_types, slot_proses) for
     ``compose_chapter_prose`` (one prose string per canonical slot type).
+
+    OPD-109 Phase 1: when atoms stack inside a single slot (long runtimes),
+    interleave a 1-sentence within-slot bridge between consecutive atoms via
+    `chapter_composer._bridge_within_slot`. Bridge selection is deterministic
+    on (chapter_index0, slot_type, atom_pair_index). No paid-LLM dependency.
+    See docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md.
     """
+    # Late import to avoid module-level circularity with chapter_composer.
+    try:
+        from phoenix_v4.rendering import chapter_composer as _cc
+
+        def _mk_bridge(stype: str) -> "Callable[[str, str, int], str]":
+            def _fn(prev: str, nxt: str, idx: int) -> str:
+                try:
+                    return _cc._bridge_within_slot(
+                        prev_atom=prev,
+                        next_atom=nxt,
+                        slot_type=stype,
+                        atom_pair_index=idx,
+                        chapter_index=chapter_index0,
+                    )
+                except Exception:
+                    return ""
+
+            return _fn
+    except Exception:
+        def _mk_bridge(stype: str) -> "Callable[[str, str, int], str]":
+            return lambda _p, _n, _i: ""
+
     b = _bucket_slots(slots)
-    hook, scene = _dedupe_hook_scene(_first_or_join(b["HOOK"]), _first_or_join(b["SCENE"]))
-    reflection = _first_or_join(b["REFLECTION"])
+    hook, scene = _dedupe_hook_scene(
+        _first_or_join(b["HOOK"], bridge_fn=_mk_bridge("HOOK")),
+        _first_or_join(b["SCENE"], bridge_fn=_mk_bridge("SCENE")),
+    )
+    reflection = _first_or_join(b["REFLECTION"], bridge_fn=_mk_bridge("REFLECTION"))
     if b["_depth_mech"]:
-        extra = _dedupe_paragraphs(b["_depth_mech"])
+        extra = _dedupe_paragraphs(b["_depth_mech"], bridge_fn=_mk_bridge("REFLECTION"))
         reflection = "\n\n".join(x for x in (reflection, extra) if x)
-    story = _first_or_join(b["STORY"])
+    story = _first_or_join(b["STORY"], bridge_fn=_mk_bridge("STORY"))
     if b["_depth_story"]:
-        extra_s = _dedupe_paragraphs(b["_depth_story"])
+        extra_s = _dedupe_paragraphs(b["_depth_story"], bridge_fn=_mk_bridge("STORY"))
         story = "\n\n".join(x for x in (story, extra_s) if x)
     if chapter_index0 == 0 and story.strip():
         story = _collapse_chapter_one_story_stack(story)
-    pivot = _first_or_join(b["PIVOT"])
-    exercise = _first_or_join(b["EXERCISE"])
-    integration = _first_or_join(b["INTEGRATION"])
-    thread = _first_or_join(b["THREAD"])
-    takeaway = _first_or_join(b["TAKEAWAY"])
-    permission = _first_or_join(b["PERMISSION"])
-    compression = _first_or_join(b["COMPRESSION"])
-    doctrine = _first_or_join(b["TEACHER_DOCTRINE"])
+    pivot = _first_or_join(b["PIVOT"], bridge_fn=_mk_bridge("PIVOT"))
+    exercise = _first_or_join(b["EXERCISE"], bridge_fn=_mk_bridge("EXERCISE"))
+    integration = _first_or_join(b["INTEGRATION"], bridge_fn=_mk_bridge("INTEGRATION"))
+    thread = _first_or_join(b["THREAD"], bridge_fn=_mk_bridge("THREAD"))
+    takeaway = _first_or_join(b["TAKEAWAY"], bridge_fn=_mk_bridge("TAKEAWAY"))
+    permission = _first_or_join(b["PERMISSION"], bridge_fn=_mk_bridge("PERMISSION"))
+    compression = _first_or_join(b["COMPRESSION"], bridge_fn=_mk_bridge("COMPRESSION"))
+    doctrine = _first_or_join(b["TEACHER_DOCTRINE"], bridge_fn=_mk_bridge("TEACHER_DOCTRINE"))
     # Sprint-1 word-floor fix: route TEACHER_DOCTRINE to COMPRESSION so it is
     # appended verbatim by compose_chapter_prose (compose_chapter_prose never adds
     # doctrine from slot_map to parts — TEACHER_DOCTRINE was silently discarded).

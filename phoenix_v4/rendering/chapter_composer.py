@@ -60,10 +60,12 @@ _BOOK_BRIDGE_MEMORY_TLS: "BridgeMemory | None" = None
 _MECHANISM_THESIS_CACHE: dict[str, Any] | None = None
 _EXERCISE_WRAPPER_CACHE: dict[str, Any] | None = None
 _BRIDGE_TRANSITION_CACHE: dict[str, Any] | None = None
+_WITHIN_SLOT_BRIDGE_CACHE: dict[str, Any] | None = None
 _CHAPTER_THESIS_BANK_CACHE: dict | None = None
 _MECHANISM_THESIS_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "mechanism_thesis_families.yaml"
 _EXERCISE_WRAPPER_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "exercise_wrapper_families.yaml"
 _BRIDGE_TRANSITION_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "bridge_transition_families.yaml"
+_WITHIN_SLOT_BRIDGE_PATH = Path(__file__).resolve().parents[2] / "config" / "rendering" / "within_slot_bridge_families.yaml"
 _CHAPTER_THESIS_BANK_PATH = Path(__file__).resolve().parents[2] / "config" / "planning" / "chapter_thesis_bank.yaml"
 _EMOTIONAL_JOBS = {"recognition", "mechanism", "deepening", "reframe", "practice", "integration", "resolution"}
 _ROOT_CAP_4_CHAPTER_WINDOW = {
@@ -145,6 +147,26 @@ def _load_bridge_transition_families() -> dict[str, Any]:
         loaded = {}
     _BRIDGE_TRANSITION_CACHE = loaded if isinstance(loaded, dict) else {}
     return _BRIDGE_TRANSITION_CACHE
+
+
+def _load_within_slot_bridge_families() -> dict[str, Any]:
+    """Load config/rendering/within_slot_bridge_families.yaml (cached).
+
+    Defect ref: OPD-109 — within-slot atom transition prose.
+    See docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md.
+    """
+    global _WITHIN_SLOT_BRIDGE_CACHE
+    if _WITHIN_SLOT_BRIDGE_CACHE is not None:
+        return _WITHIN_SLOT_BRIDGE_CACHE
+    if yaml is None:
+        _WITHIN_SLOT_BRIDGE_CACHE = {}
+        return _WITHIN_SLOT_BRIDGE_CACHE
+    try:
+        loaded = yaml.safe_load(_WITHIN_SLOT_BRIDGE_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        loaded = {}
+    _WITHIN_SLOT_BRIDGE_CACHE = loaded if isinstance(loaded, dict) else {}
+    return _WITHIN_SLOT_BRIDGE_CACHE
 
 
 def _load_chapter_thesis_bank() -> dict:
@@ -1106,6 +1128,86 @@ def _bridge_before_integration(
         family_key=f"before_integration|{job or 'legacy'}",
         seed_parts=(thesis, integration),
     )
+
+
+# ---------------------------------------------------------------------------
+# Within-slot bridges (OPD-109 Phase 1)
+#
+# Long runtimes (deep_book_6h) stack multiple atoms inside a single canonical
+# slot (STORY, REFLECTION, EXERCISE, INTEGRATION, TEACHER_DOCTRINE, ...).
+# Without bridge prose, the reader sees "8 SCENE tableaus in a row".
+# `_bridge_within_slot` returns a 1-sentence transition between two adjacent
+# atoms in the SAME slot. Selection is deterministic (chapter_index +
+# slot_type + atom_pair_index → seed). NO paid-LLM dependency.
+#
+# Defect ref: docs/diagnostics/OPD-109_RENDERING_LAYER_DIAGNOSIS_2026-05-18.md
+# ---------------------------------------------------------------------------
+
+def _bridge_within_slot(
+    prev_atom: str,
+    next_atom: str,
+    slot_type: str,
+    atom_pair_index: int,
+    chapter_index: int = 0,
+) -> str:
+    """Return a 1-sentence transition between two atoms of the same slot.
+
+    Deterministic: same (chapter_index, slot_type, atom_pair_index) always
+    returns the same bridge variant. Template-only — no LLM calls.
+
+    Selection: variant chosen by sha256(chapter_index|slot_type|atom_pair_index)
+    over the union of variants across all shape buckets within the slot
+    family. Shape buckets rotate by atom_pair_index so consecutive bridges
+    inside one slot do not repeat the same rhetorical shape.
+
+    Returns "" if YAML is missing or the family has no entries.
+    """
+    st_upper = (slot_type or "").strip().upper()
+    payload = _load_within_slot_bridge_families()
+    families = payload.get("slot_families") or {}
+    default_family = payload.get("default_family") or {}
+    family = families.get(st_upper)
+    if not isinstance(family, dict) or not family:
+        family = default_family if isinstance(default_family, dict) else {}
+    if not isinstance(family, dict) or not family:
+        return ""
+
+    # Flatten shape buckets in deterministic order so the chosen variant
+    # is stable across runs and process invocations.
+    shape_names = sorted(str(k) for k in family.keys())
+    if not shape_names:
+        return ""
+
+    # Rotate shape bucket by atom_pair_index so adjacent bridges inside the
+    # same slot land in different shape buckets when more than one bucket
+    # is defined for the slot.
+    shape_idx = atom_pair_index % len(shape_names)
+    shape_key = shape_names[shape_idx]
+    entries = family.get(shape_key) or []
+    if not isinstance(entries, list) or not entries:
+        # fall back to the first non-empty shape
+        for sk in shape_names:
+            entries = family.get(sk) or []
+            if isinstance(entries, list) and entries:
+                break
+    if not isinstance(entries, list) or not entries:
+        return ""
+
+    # Variant selection within the shape bucket: deterministic on the
+    # (chapter_index, slot_type, atom_pair_index) tuple so re-renders are
+    # stable and the test suite can pin specific outputs.
+    seed = f"opd109|{int(chapter_index)}|{st_upper}|{int(atom_pair_index)}"
+    digest = hashlib.sha256(seed.encode("utf-8")).digest()
+    idx = int.from_bytes(digest[:8], "big") % len(entries)
+    entry = entries[idx]
+    if not isinstance(entry, dict):
+        return ""
+    text = str(entry.get("text") or "").strip()
+    if not text:
+        return ""
+    if _LOCALE_TLS:
+        text = _gt(text, locale=_LOCALE_TLS)
+    return text
 
 
 # ---------------------------------------------------------------------------
