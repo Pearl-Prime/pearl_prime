@@ -521,15 +521,159 @@ _PRACTICE_STEP_MARKERS: tuple[str, ...] = (
 # Numbered-step regex: lines starting with "1.", "1)", "(1)" etc.
 _NUMBERED_STEP_RE = re.compile(r"(?m)^\s*(?:\(?\d{1,2}[\.\)])\s+\S")
 
+# ---------------------------------------------------------------------------
+# OPD-107 follow-up: negative-evidence (residue) guards for _is_practice_atom
+# ---------------------------------------------------------------------------
+# Background: ahjan_EXERCISE_064_mined ships as a `body:` field whose content
+# begins with `Helvetica;ArialMT; ;;;;; ;; ...Step 1. Choose products...`.
+# The literal substring "Step 1." trips _NUMBERED_STEP_RE / _PRACTICE_STEP_MARKERS
+# and the atom is accepted as a valid practice atom. It then wins all 24 EXERCISE
+# slots in ahjan x gen_z_professionals x anxiety x deep_book_6h (Book 3),
+# blocking the persona-pool fallthrough that OPD-107 (PR #1211) plumbed in.
+#
+# Root cause: positive-evidence patterns ("Step 1.", "first,", "now,") fire
+# inside RTF/blog residue text just as readily as inside legitimate practice
+# scripts. We need an *additive* negative-evidence pass: if any marker in
+# _RESIDUE_MARKERS is found in the atom content (case-insensitive substring),
+# reject the atom regardless of positive evidence.
+#
+# Markers are grouped by source:
+#  - Font-stack tells: RTF \fonttbl ASCII output leaves bare font family
+#    names followed by ; or , (e.g. "Helvetica;", "ArialMT;", "Times New Roman,")
+#  - RTF artifact tokens: leftovers from raw RTF parses that escape mining
+#  - HTML/markdown residue: tags or entities never rendered out
+#  - Blog/marketing tells: high-confidence non-practice content signals
+#    (affiliate marketing posts, YouTube CTAs, URL fragments). A real practice
+#    script never says "Click here" or links to https://...
+#  - Mining-tool stamps: synthesis_method may say kb_mine_v1, but body text
+#    sometimes carries through "kb_mine" / "synthesis_method" artifacts too.
+#
+# All markers are lowercase substrings; content is lowercased before match.
+# To add an exception (a legitimate atom that intentionally contains one of
+# these markers), append the atom_id to _PRACTICE_RESIDUE_ALLOWLIST below.
+_RESIDUE_MARKERS: tuple[str, ...] = (
+    # --- Font-stack tells (RTF \fonttbl residue) ----------------------------
+    # Bare font family names followed by ; or , — never appears in clean prose.
+    "helvetica;",
+    "helvetica,",
+    "arialmt;",
+    "arialmt,",
+    "times new roman;",
+    "times new roman,",
+    "courier;",
+    "courier,",
+    "verdana;",
+    "verdana,",
+    "georgia;",
+    "georgia,",
+    # --- RTF artifact tokens ------------------------------------------------
+    # Survives raw RTF if the parser misses control-word stripping.
+    r"\fonttbl",
+    r"\rtf1",
+    r"\fs2",
+    r"\f0\fs",
+    "{\\colortbl",
+    ";}\\",
+    # --- HTML / markdown residue --------------------------------------------
+    # Practice scripts are plain prose; HTML tags = unconverted source residue.
+    "<p>",
+    "</p>",
+    "<br>",
+    "<br/>",
+    "<br />",
+    "<div",
+    "</div>",
+    "<span",
+    "</span>",
+    "&nbsp;",
+    "&amp;",
+    "&quot;",
+    # --- Blog / marketing tells ---------------------------------------------
+    # Practice scripts never include affiliate-marketing CTAs or URLs.
+    "click here",
+    "affiliate marketing",
+    "affiliate link",
+    "affiliate product",
+    "affiliate program",
+    "subscribe to",
+    "youtube channel",
+    "youtube video",
+    "comparison video",
+    "step-by-step guide on how to do it",  # blog phrasing, never a real cue
+    "potential earnings",
+    "hypothetical example",
+    "http://",
+    "https://",
+    "www.",
+    # --- Mining-tool stamps -------------------------------------------------
+    # If any of these survive into atom content, the body was assembled
+    # mechanically without prose normalization.
+    "synthesis_method:",
+    "quote_hash:",
+    "kb_mine_v1",
+    "doc_id:",
+)
+
+
+# Allow-list escape-hatch: explicit atom_ids that pass the residue filter
+# even if their content contains one of _RESIDUE_MARKERS. Empty by default.
+# Add only after operator review; entries should explain why the marker is
+# intentional (e.g. a teaching atom that intentionally references a URL or
+# discusses HTML tags pedagogically). Maintained in code (not YAML) to keep
+# the filter logic self-contained and auditable; switch to a config file
+# only when this list exceeds ~10 entries.
+_PRACTICE_RESIDUE_ALLOWLIST: frozenset[str] = frozenset({
+    # Format: "atom_id"  # reason
+})
+
+
+def _has_residue_markers(content_lower: str) -> bool:
+    """Return True iff content contains any RTF / blog / HTML residue marker.
+
+    `content_lower` MUST already be lowercased by the caller (we don't
+    re-lowercase per marker for performance).
+    """
+    if not content_lower:
+        return False
+    for marker in _RESIDUE_MARKERS:
+        if marker in content_lower:
+            return True
+    return False
+
 
 def _is_practice_atom(atom: dict, *, atom_id: str = "", source_path: str = "") -> bool:
     """Return True iff atom looks like instruction-with-steps, not a teaching essay.
 
     Multi-signal classifier; positive practice evidence required.
     Reference: enrichment_select.py:988 EXERCISE branch (PR #612 follow-up).
+
+    OPD-107 follow-up (residue filter): atoms whose content contains RTF font-
+    stack tells (`Helvetica;`), HTML residue (`<p>`), blog/marketing tells
+    (`Click here`, `https://`), or mining-tool stamps (`kb_mine_v1`) are
+    rejected before any positive evidence is considered. Rationale: such
+    atoms were mined from raw RTF blog files and never sanitized; their
+    "Step 1."/"first,"/"now," substrings are residue from the source doc,
+    not real practice cues. Add atom_ids to _PRACTICE_RESIDUE_ALLOWLIST to
+    bypass this check (for intentional URL or HTML-discussion content).
     """
     if not isinstance(atom, dict):
         return False
+
+    # Resolve effective atom_id (caller may pass explicitly, else read from dict).
+    eff_atom_id = atom_id or str(atom.get("atom_id") or "").strip()
+
+    # Read content early — residue check runs BEFORE metadata short-circuits
+    # because metadata flags (slot_type: exercise) can't compensate for an atom
+    # whose body is literal blog scaffolding. Atoms also load content from
+    # `body` upstream (registry_resolver._load_teacher_atoms) so by the time we
+    # see them the field is always "content".
+    content_lower = str(atom.get("content") or "").strip().lower()
+
+    # Negative evidence (additive filter): reject residue regardless of any
+    # positive signal, unless explicitly allow-listed by operator.
+    if content_lower and eff_atom_id not in _PRACTICE_RESIDUE_ALLOWLIST:
+        if _has_residue_markers(content_lower):
+            return False
 
     meta = atom.get("metadata") or {}
     if isinstance(meta, dict):
@@ -543,17 +687,16 @@ def _is_practice_atom(atom: dict, *, atom_id: str = "", source_path: str = "") -
         if atom_type in ("practice", "exercise", "instruction"):
             return True
 
-    content = str(atom.get("content") or "").strip().lower()
-    if not content:
+    if not content_lower:
         return False
 
     # Numbered step list is strong practice evidence.
-    if _NUMBERED_STEP_RE.search(content):
+    if _NUMBERED_STEP_RE.search(content_lower):
         return True
 
     # Imperative / sensory step markers — case-insensitive substring search.
     for marker in _PRACTICE_STEP_MARKERS:
-        if marker in content:
+        if marker in content_lower:
             return True
 
     return False
