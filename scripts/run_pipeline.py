@@ -1228,19 +1228,26 @@ def _run_spine_pipeline_mode(
             _distinct_roles = sorted(set(_roles))
             _band_ok = len(_distinct_roles) >= 3 if len(_roles) >= 6 else len(_distinct_roles) >= 2
 
+            # OPD-20260518-002 / ws_flow_glue_selector_cap_enforcement_20260517:
+            # identity_stages previously checked enrichment_audit.depth_modules_added,
+            # but those depth-modules are word-budget side effects — they only fire
+            # when chapters need more words. Standard_book renders that meet word
+            # targets without depth enrichment do NOT add recognition_depth /
+            # integration_landing modules, so this check spuriously FAILed for valid
+            # standard_book content (Junko + Miyuki smokes 2026-05-19).
+            # Logic now lives in phoenix_v4.quality.identity_stages_check so the
+            # check has a stable unit-test surface.
+            from phoenix_v4.quality.identity_stages_check import compute_identity_stages
+
             _audit_modules = []
             for _entry in (enriched.enrichment_audit or {}).get("depth_modules_added", []):
                 if isinstance(_entry, dict):
                     _module = str(_entry.get("module", "")).strip()
                     if _module:
                         _audit_modules.append(_module)
-            _identity_stage_tags = {
-                "recognition": any("recognition" in _m for _m in _audit_modules),
-                "mechanism": any("mechanism" in _m for _m in _audit_modules),
-                "integration": any("integration" in _m or "practice" in _m for _m in _audit_modules),
-            }
-            _identity_stage_count = sum(1 for _v in _identity_stage_tags.values() if _v)
-            _identity_ok = _identity_stage_count >= 2
+            _identity_stage_tags, _identity_stage_count, _identity_ok = compute_identity_stages(
+                _roles, _audit_modules,
+            )
 
             _last_chapter = (_chapters_for_quality[-1] if _chapters_for_quality else "").lower()
             _callback_ok = any(

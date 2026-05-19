@@ -86,6 +86,19 @@ _TRANSITION_CUES = (
     "you can see",
     "what looks like",
     "remember this",
+    # ws_flow_glue_selector_cap_enforcement_20260517 expansion.
+    # Bridge families and post-OPD-109 phrasings emit these transitional shapes;
+    # the gate previously missed them and false-FAILed WEAK_TRANSITIONS on
+    # otherwise well-bridged chapters (Junko + Miyuki standard_book 2026-05-19).
+    "watch how",          # bridge family same_pattern_different_face
+    "sit with",           # 'sit with X long enough'
+    "underneath",         # 'underneath the desk', 'underneath the story'
+    "beneath",            # 'beneath that recognition'
+    "one thread",         # 'one thread emerges'
+    "across",             # 'Across <teacher>'s work'
+    "step into",          # bridge family seeing-has-a-downstairs
+    "the seeing",         # 'The seeing has a downstairs'
+    "in another",         # 'in another room'
 )
 
 _THESIS_CUES = (
@@ -93,6 +106,21 @@ _THESIS_CUES = (
     "the point is",
     "what this means",
     "this is not",
+    # ws_flow_glue_selector_cap_enforcement_20260517 expansion.
+    # The old cue list relied on four exact phrases that teacher-voice atoms
+    # do not always emit verbatim; modern teacher prose makes the clear point
+    # through structurally equivalent shapes that this list now recognizes.
+    "is not the problem",   # 'Contradiction is not the problem here'
+    "is the data",          # 'it is the data'
+    "is the practice",      # 'X is the practice'
+    "is not a sign",        # 'these are not signs that something is going wrong'
+    "is meant to",          # 'It is meant to make the pattern visible'
+    "is the entry",         # 'That freeze is the entry point'
+    "is not a test",        # 'What follows is not a test'
+    "is not just",          # 'this is not just X'
+    "what follows",         # 'What follows is not a test, it is an invitation'
+    "what remains",         # 'What remains is the moment after'
+    "the truth",            # 'the body often tells the truth in extremities'
 )
 
 _AHA_CUES = (
