@@ -46,7 +46,7 @@ book_structure_plan:
       bestseller_beat_order: [HOOK, SCENE, STORY, PIVOT, REFLECTION, EXERCISE, TAKEAWAY, INTEGRATION, THREAD]
       word_budget: { min: 4500, target: 5500, max: 6500 }
       tts_targets: { ideal_sentence_words: [8, 25], max_sentence_words: 35, min_paragraph_breaks_per_500_words: 3, rhythm_variance_min: 0.15, max_rhetorical_question_ratio: 0.2 }
-      scene_plan: { primary_location_family: "bedroom_3am", forbidden_duplicate_families: [], unique_sensory_detail_quota: 3, action_state_required: true, scene_anchor_cap: 2 }
+      scene_plan: { primary_location_family: "bedroom_3am", forbidden_duplicate_families: [], unique_sensory_detail_quota: 3, action_state_required: true, scene_anchor_cap: 3 }
       safety_budget: { max_medical_claim_risk: 0.35, max_clinical_language_risk: 0.35, promotional_risk_ceiling: 0.25 }
       duration_fit: { format: "audiobook_chapter_std", intent: "therapeutic", duration_sec: 1380 }
       frame_context: { frame: "somatic_first", doctrine_chapter: false, allow_early_spiritual: false }
