@@ -224,6 +224,29 @@ teachers:
       busy background, dark horror, chibi, action battle, heavy screentone,
       ornate, neon colors
 
+  kenjin:  # per OPD-105 — Sōtō Zen teacher (Japanese-American, Kyoto-born, Bay Area)
+    display_name: "Kenjin Roshi"
+    style_archetype: dark_psychological
+    ip_adapter_weight: 0.83
+    img2img_denoise: 0.77
+    positive: >-
+      seinen manga character, late 50s Japanese-American man, close-cropped grey
+      hair softening at the temples, round wire-rim glasses settled on a calm
+      face that has spent decades watching breath come and go, clean simple
+      monastic clothing in muted greys plain samue or grey roomwear no robes no
+      kesa, posture upright but unguarded the sit of someone who has long
+      stopped trying to look meditative, eyes that are direct without being
+      sharp the kind that meet you exactly where you are, minimal background
+      single object a black tea bowl or a wooden floor or a sliding paper door
+      rendered with restraint, hint of Kyoto rooted in Bay Area lay sangha,
+      style of Vagabond contemplative moments meets Mushishi quiet observation
+      meets Antique Bakery kitchen-counter pacing, the look of someone whose
+      teaching is just sitting
+    negative: >-
+      busy background, dark horror, chibi, action battle, heavy screentone,
+      ornate robes, kesa, rakusu, chanting, prayer beads, ornate altar, kyosaku
+      stick, dramatic lighting, glowing aura
+
   maat:
     display_name: "Maat"
     style_archetype: power_progression
