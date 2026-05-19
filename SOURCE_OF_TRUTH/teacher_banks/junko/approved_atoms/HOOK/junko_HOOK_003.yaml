@@ -2,7 +2,9 @@ atom_id: junko_HOOK_003
 band: 2
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: Your discomfort is not a problem to solve. It is the soil where wisdom grows.
-hook_type: paradox
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
+body: I do not create what I bring. I receive it. The receiving is the practice.
+hook_type: opening_image

@@ -2,8 +2,10 @@ atom_id: junko_SCENE_009
 band: 2
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: "A memory surfaces\u2014something you are ashamed of. You watch it without defense.\
-  \ It is ancient and unmoving, like a painting."
-scene_type: meditation
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
+body: The Lightworker training was on the third day. The students were tired in the good way — the way that lets the personality
+  step aside. When I opened my mouth, what came through was not for them as students. It was for them as the souls they had
+  agreed to be. Three of them stopped pretending to be smaller than they were.

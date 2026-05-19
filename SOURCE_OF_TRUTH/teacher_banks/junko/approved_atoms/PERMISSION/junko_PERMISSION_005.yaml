@@ -1,7 +1,9 @@
 atom_id: junko_PERMISSION_005
-band: universal
-body: Your practice does not need to look like anyone else's. Sit when you sit. Walk when you walk. That is enough.
+band: 2
+body: You may speak to what you sense without proof. The sensing is the proof.
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: doctrine_grounded
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1

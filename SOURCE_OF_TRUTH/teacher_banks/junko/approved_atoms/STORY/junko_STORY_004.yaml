@@ -1,36 +1,31 @@
 atom_id: junko_STORY_004
 story_origin: composite
-story_type: character_study
+story_type: receiver_witness
 emotional_intensity_band: 3
-body: 'Nori has always been the person who says yes. Yes to the extra project. Yes
-  to helping her sister again. Yes to staying late. She doesn''t know how to say no
-  without feeling selfish.
+body: 'Daichi was a programmer in Osaka. He had a recurring dream of being on a ship in a storm — not a modern ship, an old
+  one, with wooden masts. The dream had come every six weeks for fourteen years.
 
 
-  One day someone asks her to help and she says: "I can''t." Not with explanation.
-  Not with apology. Just the words.
+  In the session, I did not ask him to describe the dream. I asked him to close his eyes. Within a minute, the ship was in
+  the room. He could feel the wood of the deck under his feet. Light Language arrived and named the captain — a man who had
+  died in a storm off Cape Horn in 1847.
 
 
-  The shame floods immediately. She did something wrong. She''s a bad person. The
-  voice is so loud.
+  Daichi was the captain. He had not finished the voyage. The cosmic council had been waiting for him to be ready to receive
+  this, and his body had been waiting longer.
 
 
-  But underneath the shame, there''s something else—a tiny space where the word "no"
-  was simply honest. Not good or bad. Just true.
-
-
-  She sits with both of them—the shame and the honesty—in the same breath. Both real.
-  Neither canceling out the other.
-
-  '
+  After the session, the dream stopped. He never had it again. He told me this two years later, by email.'
 band: 3
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-misfire_tax: true
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
+misfire_tax: false
 never_know: false
 mechanism_depth: 1
-identity_stage: pre_awareness
-cost_type: social
-cost_intensity: 2
+identity_stage: self_claim
+cost_type: identity
+cost_intensity: 3

@@ -2,7 +2,9 @@ atom_id: junko_HOOK_010
 band: 2
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: Your resistance has never won a single battle. What would surrender feel like?
-hook_type: reframe
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
+body: Frequency does not argue. It changes what is willing to be changed.
+hook_type: opening_statement

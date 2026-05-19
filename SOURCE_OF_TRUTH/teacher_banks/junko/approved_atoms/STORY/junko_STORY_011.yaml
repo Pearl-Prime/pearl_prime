@@ -1,35 +1,28 @@
 atom_id: junko_STORY_011
 story_origin: composite
-story_type: direct_teaching
-emotional_intensity_band: 2
-body: 'When you look directly at shame, something changes. Not because shame is bad.
-  Not because you''ve decided to accept yourself. But because you''ve stopped pretending
-  it''s bigger than it is.
+story_type: conduit_session
+emotional_intensity_band: 3
+body: 'Daichi — a younger Daichi, sixteen — came with his mother. He had not slept well in two years. He had been called for
+  the second time in his life, but he was too young to know what calling meant.
 
 
-  Shame thrives in darkness. It needs you to not look. The moment you turn toward
-  it—with bare attention, no story—it becomes smaller. Not gone. Just smaller.
+  The cosmic council was patient. They do not rush a sixteen-year-old. They told me to tell him only this: you are not broken.
+  You are arriving. The arriving takes longer than you think. The sleep will return when the channel is set. The channel will
+  be set in your nineteenth year. Until then, you have permission to rest with the work that is unfinished.
 
 
-  You might feel the heat in your face. The tightness in your throat. The impulse
-  to hide or explain or disappear. All of this is the body being the body.
-
-
-  None of it is proof that you''re bad. None of it requires fixing.
-
-
-  Shame is like a child who needs to be seen, not corrected. When you see it directly,
-  it stops needing so much from you.
-
-  '
-band: 2
+  He took this in as if he had been waiting to hear it. He slept through that night, his mother told me. He did not sleep
+  through every night after, but he understood what the sleeplessness was about, which was what he had needed.'
+band: 3
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
 misfire_tax: false
 never_know: false
-mechanism_depth: 3
-identity_stage: experimentation
-cost_type: opportunity
+mechanism_depth: 1
+identity_stage: self_claim
+cost_type: identity
 cost_intensity: 3

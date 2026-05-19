@@ -2,8 +2,10 @@ atom_id: junko_SCENE_010
 band: 2
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: 'Nothing special happens in your meditation. Your life is ordinary. You realize:
-  this ordinariness is the point.'
-scene_type: meditation
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
+body: The night before the retreat, the cosmic council attended me in sleep. I do not remember the agenda. I never do. I woke
+  at three in the morning and wrote down a sentence that did not make sense to me. By the time the workshop opened the next
+  morning, the sentence had become the through-line of the whole day. They had given me the title in advance.

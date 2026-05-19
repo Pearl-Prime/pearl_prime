@@ -1,8 +1,10 @@
 atom_id: junko_INTEGRATION_008
 band: 2
+body: The cosmic council does not require you to remember every transmission. They require only that you live in the direction
+  the transmissions point. The pointing is integration.
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: Do not become a spiritual person. Become ordinary and see what happens.
-integration_type: practice_anchor
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1

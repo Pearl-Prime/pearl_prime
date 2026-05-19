@@ -1,8 +1,10 @@
 atom_id: junko_INTEGRATION_009
 band: 2
+body: After receiving from a place — a shrine, a mountain, a coast — return there in the body if you can. The place is part
+  of the message. The return completes the loop.
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: Your practice is not separate from your life. Your life is the practice.
-integration_type: practice_anchor
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1

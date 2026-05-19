@@ -1,8 +1,10 @@
 atom_id: junko_REFLECTION_010
 band: 2
+body: I have learned that the body of the channeler matters. If I am ill, the transmissions are clouded. If I am rested, they
+  arrive clean. The instrument must be cared for. This is not vanity. It is craft.
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: Is the shame about what happened, or about the story you made about what happened?
-reflection_type: inquiry
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1

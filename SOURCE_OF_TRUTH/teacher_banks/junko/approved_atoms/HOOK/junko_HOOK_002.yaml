@@ -2,7 +2,9 @@ atom_id: junko_HOOK_002
 band: 2
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: Striving is the obstacle. Have you noticed this yet?
-hook_type: direct_statement
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
+body: The light moved through what was willing to be moved through. The rest is the listening.
+hook_type: opening_question

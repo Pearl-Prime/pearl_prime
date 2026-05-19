@@ -1,8 +1,10 @@
 atom_id: junko_INTEGRATION_004
 band: 2
+body: A grandmother who arrives in a session does not always need you to do something. Sometimes she only needs you to know
+  she is still attending. Knowing is the integration.
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: You do not become different. You become transparent to what you already are.
-integration_type: practice_anchor
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1

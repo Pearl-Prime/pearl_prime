@@ -2,7 +2,9 @@ atom_id: junko_HOOK_007
 band: 2
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: 'Beginner''s mind: you know less than you think and that is the opening.'
-hook_type: cutting
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
+body: The ascended masters do not speak in sentences. They speak in resonance.
+hook_type: opening_statement

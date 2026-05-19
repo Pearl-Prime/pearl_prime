@@ -2,7 +2,9 @@ atom_id: junko_HOOK_009
 band: 2
 teacher:
   teacher_id: junko
-  source_refs: []
-  synthesis_method: authored_v1
-body: What if acceptance is not resignation but accuracy about what is true?
-hook_type: awareness
+  source_refs:
+  - teachers/junko/junko_doctrine_notes.rtf
+  - teachers/junko/junko_yt.rtf
+  synthesis_method: doctrine_grounded_v1
+body: The cosmic council does not negotiate. It transmits, and the soul recognizes.
+hook_type: opening_statement
