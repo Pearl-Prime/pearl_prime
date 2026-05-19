@@ -54,12 +54,22 @@ _TEACHER_OVERLAY_TYPES = frozenset({
 })
 # Section types that get overlaid in regular/persona mode
 _PERSONA_OVERLAY_TYPES = frozenset({"HOOK", "SCENE", "STORY"})
-# Mapping from registry section type to teacher atom directory name
-# TEACHING is the on-disk teacher-bank section type name for some teachers
-# (e.g., ahjan); aliased to TEACHER_DOCTRINE so slot lookup reaches it.
-# Per F2 in atom_usage_audit_2026-05-06.md.
+# Mapping from registry section type to teacher atom directory name.
+#
+# TEACHER_DOCTRINE lookup chain (first non-empty pool wins, per
+# TEACHER-POOL-SEMANTICS-01):
+#   1. TEACHER_DOCTRINE/ — operator-canonical location for explicit doctrine
+#      atoms (e.g. Pearl_Writer #4's OPD-109 Phase 2 expansion in PR #1230
+#      added 10 ahjan TEACHER_DOCTRINE atoms here).
+#   2. COMPRESSION/ — legacy location for compact doctrine-shaped atoms.
+#   3. REFLECTION/ — secondary fallback (some teachers store doctrine here).
+#   4. TEACHING/ — on-disk teacher-bank slot name some teachers used before
+#      the TEACHER_DOCTRINE alias existed; preserved for backward compat.
+# Per F2 in atom_usage_audit_2026-05-06.md, and PR fixing the resolver bug
+# that omitted TEACHER_DOCTRINE/ from the lookup chain entirely (Pearl_Writer
+# #4 had to dual-locate atoms in TEACHER_DOCTRINE/ + COMPRESSION/ as a hack).
 _TEACHER_TYPE_MAP = {
-    "TEACHER_DOCTRINE": ["COMPRESSION", "REFLECTION", "TEACHING"],
+    "TEACHER_DOCTRINE": ["TEACHER_DOCTRINE", "COMPRESSION", "REFLECTION", "TEACHING"],
     "HOOK": ["HOOK"],
     "EXERCISE": ["EXERCISE"],
     "INTEGRATION": ["INTEGRATION"],
@@ -467,11 +477,19 @@ def resolve_book(
             # render output deterministic given (seed, ch_key, sec_key) and
             # preserves render-cache stability. Switching to union-pool semantics
             # would change seed→atom mapping and require a regeneration pass on
-            # any cached/shipped books. Content gaps that surface in this code
-            # path (e.g., ahjan TEACHING atoms unreachable when COMPRESSION pool
-            # is non-empty) are routed to Pearl_Editor + Pearl_Writer content
-            # migration ws's (e.g., ws_ahjan_teaching_atoms_migration_20260506),
-            # not to a code-side semantics flip.
+            # any cached/shipped books.
+            #
+            # For TEACHER_DOCTRINE the chain is now:
+            #   TEACHER_DOCTRINE → COMPRESSION → REFLECTION → TEACHING
+            # so teachers with an explicit TEACHER_DOCTRINE/ directory win
+            # over the legacy COMPRESSION/REFLECTION/TEACHING fallback.
+            # Teachers without TEACHER_DOCTRINE/ on disk still resolve via the
+            # legacy chain — backward-compatible.
+            # Content gaps that surface in this code path (e.g., teachers
+            # whose doctrine lives only under TEACHING/) are routed to
+            # Pearl_Editor + Pearl_Writer content migration ws's (e.g.,
+            # ws_ahjan_teaching_atoms_migration_20260506), not to a code-side
+            # semantics flip.
             if teacher_atoms and sec_type in _TEACHER_OVERLAY_TYPES:
                 atom_pool: list[dict] = []
                 for dir_name in _TEACHER_TYPE_MAP.get(sec_type, [sec_type]):
