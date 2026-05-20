@@ -2,6 +2,17 @@
 # Ordered list — first matching rule wins.
 # Each rule specifies match conditions and component modes (full/lean/skip).
 # bridge_tone: "gentle" triggers the softer bridge variant for post-emotional content.
+#
+# OPD-113 (2026-05-20): added `introduction` mode per rule. Maps to operator's
+# Part 1 of the 5-part exercise structure — the explicit "Now we're going to
+# do an exercise" cue. When unset, defaults to mirror the `intro` mode.
+#
+# Operator's 5-part mapping:
+#   1. introduction → introduction_templates.yaml ("Now we're going to do a practice.")
+#   2. description  → intro field / intro_templates.yaml ("This is a X practice...")
+#   3. guidance     → description field / atom text
+#   4. aha          → aha field
+#   5. integration  → integration field
 
 version: 1
 
@@ -12,6 +23,7 @@ rules:
       repeat_count_gte: 2
     components:
       bridge: skip
+      introduction: skip   # OPD-113: a repeat doesn't need the explicit cue again
       intro: skip
       description: lean
       aha: skip
@@ -23,6 +35,7 @@ rules:
       emotional_state: heavy
     components:
       bridge: full
+      introduction: full   # OPD-113
       intro: full
       description: full
       aha: full
@@ -35,6 +48,7 @@ rules:
       emotional_state: flow
     components:
       bridge: lean
+      introduction: lean   # OPD-113: keep the cue even in flow state, just shorter
       intro: skip
       description: full
       aha: full
@@ -46,7 +60,9 @@ rules:
       is_session_close: true
     components:
       bridge: skip
-      intro: skip
+      introduction: full   # OPD-113: explicit cue is still required at session close
+      intro: full          # OPD-113: keep description visible even at close so the
+                           # exercise is identifiable; was 'skip' pre-OPD-113
       description: full
       aha: full
       integration: full
@@ -58,7 +74,8 @@ rules:
       repeat_count_lte: 1
     components:
       bridge: lean
-      intro: lean
+      introduction: full   # OPD-113: every exercise still gets the explicit cue
+      intro: full          # OPD-113: keep the named description (was 'lean')
       description: full
       aha: full
       integration: full
@@ -69,6 +86,7 @@ rules:
       first_encounter: true
     components:
       bridge: full
+      introduction: full   # OPD-113
       intro: full
       description: full
       aha: full
@@ -79,6 +97,7 @@ rules:
     match: {}
     components:
       bridge: lean
+      introduction: full   # OPD-113
       intro: full
       description: full
       aha: full

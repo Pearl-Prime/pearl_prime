@@ -113,15 +113,33 @@ def load_component_templates(locale: str | None = None) -> dict:
     return _TEMPLATES_CACHE
 
 
+def _introduction_for_type(exercise_type: str) -> str:
+    """OPD-113: Lookup the explicit "Now we're going to do an exercise" cue.
+
+    Loads from SOURCE_OF_TRUTH/exercises_v4/introduction_templates.yaml. Falls
+    back to "_default" template if the specific type is missing, then to a
+    hardcoded string if the YAML file itself is missing.
+    """
+    try:
+        from phoenix_v4.exercises.component_assembler import _load_introduction_templates
+        templates = _load_introduction_templates()
+        intr = templates.get(exercise_type) or templates.get("_default") or {}
+        return str(intr.get("full", "")).strip()
+    except Exception:
+        return "Now we're going to do a practice."
+
+
 def compose_exercise(
     exercise: dict,
     chapter_index: int,
     seed: str,
     templates: Optional[dict] = None,
 ) -> str:
-    """Compose a full exercise with bridge + intro + description + aha + integration.
+    """Compose a full exercise with bridge + introduction + intro + description + aha + integration.
 
     Uses the 5-dimension component template system for maximum variation.
+    OPD-113: prepends an explicit "Now we're going to do an exercise" cue
+    (operator's Part 1) before the intro/description.
 
     Args:
         exercise: Exercise dict from practice library (must have 'text' and 'name')
@@ -139,6 +157,9 @@ def compose_exercise(
     ex_type = exercise.get("exercise_type", "body_awareness")
     components = exercise.get("components", {})
 
+    # OPD-113: explicit "Now we're going to do an exercise" cue (Part 1)
+    introduction = _introduction_for_type(ex_type)
+
     # Use pre-composed components if available
     if isinstance(components, dict) and components.get("bridge"):
         # Components may be strings or dicts with full/lean variants
@@ -149,10 +170,16 @@ def compose_exercise(
                 return comp.get("full", comp.get("text", str(comp)))
             return str(comp) if comp else ""
         bridge = _get_text(components["bridge"])
+        # OPD-113: prefer ab_tady-provided introduction, else template lookup
+        intro_from_data = _get_text(components.get("introduction", ""))
+        if intro_from_data:
+            introduction = intro_from_data
         intro = _get_text(components.get("intro", ""))
         aha = _get_text(components.get("aha", ""))
         integration = _get_text(components.get("integration", ""))
-        return f"{bridge}\n\n{intro}\n\n{description}\n\n{aha}\n\n{integration}".strip()
+        return "\n\n".join(
+            p for p in (bridge, introduction, intro, description, aha, integration) if p
+        ).strip()
 
     # Otherwise compose from templates
     h = f"{seed}:exercise:ch{chapter_index}"
@@ -203,7 +230,10 @@ def compose_exercise(
         closing = closings[_deterministic_index(h + ":close", len(closings))] if closings else ""
         integration = f"Before you move on, {takeaway}. {closing}".strip()
 
-    return f"{bridge}\n\n{intro}\n\n{description}\n\n{aha}\n\n{integration}".strip()
+    # OPD-113: prepend explicit introduction cue (Part 1) before intro/description
+    return "\n\n".join(
+        p for p in (bridge, introduction, intro, description, aha, integration) if p
+    ).strip()
 
 
 def get_exercise_for_chapter(

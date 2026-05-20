@@ -70,7 +70,11 @@ class TestRuleMatching:
         sel = select_components(ctx, rules)
         assert sel.rule_name == "familiar_new_context"
         assert sel.bridge == ComponentMode.LEAN
-        assert sel.intro == ComponentMode.LEAN
+        # OPD-113: intro changed from LEAN to FULL so the named description
+        # ("This is a X practice...") is always visible in long-form runtimes.
+        assert sel.intro == ComponentMode.FULL
+        # OPD-113: introduction (Part 1 cue) is always emitted for non-repeat paths.
+        assert sel.introduction == ComponentMode.FULL
 
     def test_first_encounter_fires(self, rules):
         ctx = AssemblyContext(first_encounter=True)

@@ -1662,6 +1662,44 @@ def _resolve_practice_type(exercise_type_hint: str, exercise_atom_id: str, exerc
     return "body_awareness"
 
 
+# OPD-113: practice_type → exercise_type_template_key mapping. Practice types
+# used by chapter_composer's bridges and exercise_type keys used by the
+# introduction/intro template YAML files share intent but have different names.
+_PRACTICE_TYPE_TO_EXERCISE_TYPE: dict[str, str] = {
+    "breath_regulation": "00_breath_regulation",
+    "grounding": "01_grounding_orientation",
+    "body_scan": "02_body_awareness_scan",
+    "somatic_discharge": "03_somatic_release_discharge",
+    "visualization": "08_emotional_processing_completion",
+    "reflective_prompt": "09_embodied_intention_direction",
+    "attention_training": "02_body_awareness_scan",
+    "vagus_stimulation": "06_vagal_stimulation_sound",
+    "integration_pause": "10_integration_return_to_baseline",
+    "body_awareness": "02_body_awareness_scan",
+}
+
+
+def _exercise_introduction_cue(practice_type: str) -> str:
+    """OPD-113: explicit "Now we're going to do an exercise" cue (Part 1).
+
+    Used by the fallback path when neither component_assembler nor
+    practice_library composers can compose the exercise. Pulls from
+    introduction_templates.yaml so operator-facing language stays consistent.
+    Returns empty string if templates can't be loaded — caller skips silently.
+    """
+    try:
+        from phoenix_v4.exercises.component_assembler import _load_introduction_templates
+        templates = _load_introduction_templates()
+        eff_type = _PRACTICE_TYPE_TO_EXERCISE_TYPE.get(practice_type, "_default")
+        intr = templates.get(eff_type) or templates.get("_default") or {}
+        text = str(intr.get("full", "")).strip()
+        if text and _LOCALE_TLS:
+            return _gt(text, locale=_LOCALE_TLS)
+        return text
+    except Exception:
+        return ""
+
+
 def _post_practice_validation_sentence(
     *,
     emotional_job: str = "",
@@ -2073,6 +2111,10 @@ def compose_chapter_prose(
                         bridge_memory=resolved_bridge_memory,
                     )
                 )
+                # OPD-113: explicit introduction cue (Part 1) for fallback path
+                introduction_cue = _exercise_introduction_cue(practice_type)
+                if introduction_cue:
+                    parts.append(introduction_cue)
                 parts.append(
                     _exercise_setup_sentence(
                         reflection_raw,

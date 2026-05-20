@@ -30,6 +30,7 @@ from phoenix_v4.exercises.models import (
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 RULES_PATH = REPO_ROOT / "config" / "practice" / "assembly_components.yaml"
 BRIDGE_TEMPLATES_PATH = REPO_ROOT / "SOURCE_OF_TRUTH" / "exercises_v4" / "bridge_templates.yaml"
+INTRODUCTION_TEMPLATES_PATH = REPO_ROOT / "SOURCE_OF_TRUTH" / "exercises_v4" / "introduction_templates.yaml"  # OPD-113
 INTRO_TEMPLATES_PATH = REPO_ROOT / "SOURCE_OF_TRUTH" / "exercises_v4" / "intro_templates.yaml"
 AHA_STANDARD_PATH = REPO_ROOT / "SOURCE_OF_TRUTH" / "exercises_v4" / "aha_noticing_phoenix_standard.yaml"
 INTEGRATION_STANDARD_PATH = REPO_ROOT / "SOURCE_OF_TRUTH" / "exercises_v4" / "integration_phoenix_standard.yaml"
@@ -242,8 +243,16 @@ def select_components(
     for rule in rules:
         if _match_rule(rule, ctx):
             comps = rule.get("components") or {}
+            # OPD-113: `introduction` defaults to mirror `intro` mode when not
+            # set explicitly — so existing rules keep their behavior. Rules
+            # that explicitly skip intro (quick_repeat, flow_state, session_close)
+            # also skip the introduction cue, preserving their flow intent.
+            introduction_mode = comps.get(
+                "introduction", comps.get("intro", "full")
+            )
             return ComponentSelection(
                 bridge=ComponentMode(comps.get("bridge", "lean")),
+                introduction=ComponentMode(introduction_mode),
                 intro=ComponentMode(comps.get("intro", "full")),
                 description=ComponentMode(comps.get("description", "full")),
                 aha=ComponentMode(comps.get("aha", "full")),
@@ -261,6 +270,7 @@ def select_components(
 # ---------------------------------------------------------------------------
 
 _bridge_cache: dict[str, dict] = {}
+_introduction_cache: dict[str, dict] = {}  # OPD-113
 _intro_cache: dict[str, dict] = {}
 _aha_cache: dict[str, str] = {}
 _integration_cache: dict[str, str] = {}
@@ -272,6 +282,19 @@ def _load_bridge_templates(path: Optional[Path] = None) -> dict[str, dict]:
         for key, val in (data.get("templates") or {}).items():
             _bridge_cache[key] = val
     return _bridge_cache
+
+
+def _load_introduction_templates(path: Optional[Path] = None) -> dict[str, dict]:
+    """Load OPD-113 introduction templates ("Now we're going to do an exercise" cue).
+
+    Backward-compatible: missing file or empty templates → empty cache → caller
+    treats absence as SKIP and emits nothing for the introduction component.
+    """
+    if not _introduction_cache:
+        data = _load_yaml(path or INTRODUCTION_TEMPLATES_PATH)
+        for key, val in (data.get("templates") or {}).items():
+            _introduction_cache[key] = val
+    return _introduction_cache
 
 
 def _load_intro_templates(path: Optional[Path] = None) -> dict[str, dict]:
@@ -324,6 +347,7 @@ def resolve_exercise_components(
     3. Standards (aha, integration) keyed by exercise_id
     """
     bridge_templates = _load_bridge_templates()
+    introduction_templates = _load_introduction_templates()  # OPD-113
     intro_templates = _load_intro_templates()
     aha_standards = _load_aha_standards()
     integration_standards = _load_integration_standards()
@@ -340,7 +364,15 @@ def resolve_exercise_components(
         gentle=bt.get("gentle", ""),
     )
 
-    # Intro from templates
+    # Introduction from templates (OPD-113: explicit "Now we're going to do an
+    # exercise" cue — operator's Part 1 of the 5-part structure)
+    intr = introduction_templates.get(eff_type) or introduction_templates.get("_default") or {}
+    introduction = ComponentVariants(
+        full=intr.get("full", ""),
+        lean=intr.get("lean", ""),
+    )
+
+    # Intro from templates (operator's Part 2 / "description" in operator-speak)
     it = intro_templates.get(eff_type) or intro_templates.get("_default") or {}
     intro = ComponentVariants(
         full=it.get("full", ""),
@@ -381,6 +413,7 @@ def resolve_exercise_components(
         exercise_id=exercise_id,
         exercise_type=eff_type,
         bridge=bridge,
+        introduction=introduction,  # OPD-113
         intro=intro,
         description=description,
         aha=aha,
@@ -389,7 +422,12 @@ def resolve_exercise_components(
 
 
 def resolve_from_ab_tady_components(exercise_data: dict) -> ExerciseComponents:
-    """Build ExerciseComponents from an ab_tady_37 JSON entry with components field."""
+    """Build ExerciseComponents from an ab_tady_37 JSON entry with components field.
+
+    OPD-113: pulls introduction from the ab_tady data if present; otherwise
+    falls back to the template-driven introduction by exercise_type so that
+    the explicit "Now we're going to do an exercise" cue is always available.
+    """
     comps = exercise_data.get("components") or {}
     exercise_id = exercise_data.get("id", "")
     exercise_type = exercise_data.get("exercise_type", "")
@@ -404,10 +442,22 @@ def resolve_from_ab_tady_components(exercise_data: dict) -> ExerciseComponents:
             gentle=c.get("gentle", ""),
         )
 
+    # OPD-113: introduction — prefer ab_tady-provided field, else template fallback
+    introduction = _variants("introduction")
+    if not introduction.full and not introduction.lean:
+        intr_templates = _load_introduction_templates()
+        eff_type = infer_exercise_type(0, exercise_type)
+        intr = intr_templates.get(eff_type) or intr_templates.get("_default") or {}
+        introduction = ComponentVariants(
+            full=intr.get("full", ""),
+            lean=intr.get("lean", ""),
+        )
+
     return ExerciseComponents(
         exercise_id=exercise_id,
         exercise_type=exercise_type,
         bridge=_variants("bridge"),
+        introduction=introduction,  # OPD-113
         intro=_variants("intro"),
         description=_variants("description"),
         aha=_variants("aha"),
@@ -438,6 +488,14 @@ def assemble_exercise(
     """
     Join selected exercise components into final prose.
 
+    Order (OPD-113 operator's 5-part exercise structure):
+      bridge (optional transition)
+      → introduction  (Part 1: "Now we're going to do an exercise")
+      → intro         (Part 2: description — "This is a X practice...")
+      → description   (Part 3: guidance — the atom text itself)
+      → aha           (Part 4: what happens / what to notice)
+      → integration   (Part 5: how to carry it forward)
+
     Returns the composed text with paragraph breaks between components.
     Components set to SKIP are omitted entirely.
     """
@@ -446,6 +504,11 @@ def assemble_exercise(
     bridge_text = _get_text(components.bridge, selection.bridge, selection.bridge_tone)
     if bridge_text:
         parts.append(bridge_text)
+
+    # OPD-113: explicit "Now we're going to do an exercise" cue (Part 1)
+    introduction_text = _get_text(components.introduction, selection.introduction)
+    if introduction_text:
+        parts.append(introduction_text)
 
     intro_text = _get_text(components.intro, selection.intro)
     if intro_text:
