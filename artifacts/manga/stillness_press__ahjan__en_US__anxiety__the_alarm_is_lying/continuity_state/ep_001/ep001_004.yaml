@@ -1,0 +1,35 @@
+schema_version: 1.0.0
+panel_id: ep001_004
+inherits_from: ep001_003
+beat_type: spatial
+archetype: hand_table_micro
+scene_state:
+  scene_id: kitchen_table_aoki
+  temporal: dawn
+  light_rig_id: K01_dawn_window_warm
+character_state:
+  mira_aoki:
+    character_design_hash: axes_only_PENDING_compute
+    pose_id: hand_only_table
+    expression_dial: 0.3
+    emotional: calm_with_subtle_unease
+    gaze_direction: at_named_object_phone
+    hand_state: relaxed_open
+prop_state:
+  cup: full
+  phone: face_up_dark
+  succulent_in_clay_pot: normal
+continuity_invariants:
+- POV shift (spatial beat) — scene anchor unchanged
+- phone advances face_down -> face_up_dark (adjacent in enum, micro change)
+- notification glow lands in next panel ep001_004b (face_up_dark -> face_up_notification,
+  adjacent)
+relational_field:
+  active_entities:
+  - id: mira_aoki
+    on_frame: true
+    role: subject
+  shared_attention_anchor: phone
+  emotional_tension_vector:
+    direction: rising
+    magnitude_delta_from_prev: 0.1

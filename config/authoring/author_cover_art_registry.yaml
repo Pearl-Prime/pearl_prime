@@ -68,6 +68,15 @@ authors:
     style_hint: warm
     palette_tokens: [warm]
 
+  # Migrated from junko per PR #1221 (OPD-111 Phase 4: junko -> miyuki catalog
+  # routing). Cover art PNG TBD by author cover-gen pipeline; warn-only mode
+  # tolerates missing on-disk asset until proper miyuki cover ships.
+  miyuki:
+    display_name: "Miyuki"
+    cover_art_base: assets/authors/cover_art/miyuki_base.png
+    style_hint: contemplative
+    palette_tokens: [contemplative]
+
   miki:
     display_name: "Miki"
     cover_art_base: assets/authors/cover_art/miki_base.png
@@ -91,6 +100,16 @@ authors:
     cover_art_base: assets/authors/cover_art/joshin_base.png
     style_hint: gentle
     palette_tokens: [gentle]
+
+  # Migrated from joshin per PR #1208 (OPD-105 Phase 2: Cognitive Clarity
+  # wholesale-migrate joshin -> kenjin). Cover art PNG TBD by author cover-gen
+  # pipeline; warn-only mode tolerates missing on-disk asset until proper kenjin
+  # cover ships. Thai Forest Tradition aesthetic — grounded earth palette.
+  kenjin:
+    display_name: "Kenjin"
+    cover_art_base: assets/authors/cover_art/kenjin_base.png
+    style_hint: grounded
+    palette_tokens: [grounded]
 
   maat:
     display_name: "Maat"

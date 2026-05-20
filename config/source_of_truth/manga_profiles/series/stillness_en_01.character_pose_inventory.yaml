@@ -1,0 +1,132 @@
+# Character pose inventory for stillness_en_01.
+# Per MANGA_LAYER_RENDER_CONTRACT_SPEC.md §6.3.A + §8.1.
+#
+# Each pose_id is a distinct rendered L2 layer (cached). The continuity_state
+# of each panel declares `character_state.<character_id>.pose_id` — the
+# validator (§6.3.A invariant 2) checks that the declared pose_id exists
+# in this inventory.
+#
+# Pose IDs are deliberately small in vocabulary; cardinality budget per §6.8.
+
+schema_version: "1.0.0"
+series_id: stillness_en_01
+
+characters:
+
+  mira_aoki:
+    # 12 poses for V4 launch; covers ep_001's confirmed beats + buffer for
+    # ep_002-010 likely needs. Add only when archetype demands surface in
+    # the chapter_script (§6.8 empirical caching).
+
+    poses:
+
+      - pose_id: front_portrait_seated_calm
+        subject_type: character_face_only
+        framing_row: CU
+        description: >
+          Mira seated upright at table; head + shoulders visible; gaze slightly
+          downward; neutral mouth, relaxed brow; cream sweater visible at collar.
+
+      - pose_id: front_portrait_seated_tense
+        subject_type: character_face_only
+        framing_row: CU
+        description: >
+          Same seated framing as above but with subtle tension: slight brow
+          micro-furrow, jaw soft but set, gaze fixed slightly off-center.
+          Same hair, same wardrobe, same identity hash as _calm.
+
+      - pose_id: hands_wrapping_cup
+        subject_type: character_hands_and_arms
+        framing_row: ECU
+        description: >
+          Both hands wrapping a ceramic cup; fingers relaxed not gripped;
+          wrists visible; sweater cuffs visible; tea-cup-warmth gesture.
+          No face visible (face is a separate pose).
+
+      - pose_id: hand_only_table
+        subject_type: character_hand_only
+        framing_row: ECU
+        description: >
+          Single hand resting on or near the table surface; fingers slightly
+          curled; relaxed; sweater cuff at top of frame. Reaching variant
+          declared separately.
+
+      - pose_id: hand_only_reaching
+        subject_type: character_hand_only
+        framing_row: ECU
+        description: >
+          Hand extended forward (toward phone, cup, or off-frame object);
+          fingertips visible; tension light.
+
+      - pose_id: chest_breath_micro
+        subject_type: character_chest_partial
+        framing_row: MCU
+        description: >
+          Chest + sweater + collar visible; subtle fabric-fold tension
+          indicating quickened or settling breath; no face.
+
+      - pose_id: medium_seated_three_quarter
+        subject_type: character_full_figure
+        framing_row: MS
+        description: >
+          Mira seated, three-quarter angle, head + upper body visible;
+          hands resting on lap or holding something; full sweater + pendant
+          visible; gaze neutral.
+
+      - pose_id: full_figure_standing_at_window
+        subject_type: character_full_figure
+        framing_row: MS
+        description: >
+          Full upper body standing facing or near window; one hand may rest
+          on sill; cream sweater visible; soft natural posture.
+
+      - pose_id: silhouette_back_at_window
+        subject_type: character_silhouette_back
+        framing_row: CU
+        description: >
+          Back-of-head + shoulders silhouette against bright window light;
+          intentional left-edge bleed (per archetype_exception window_light_threshold);
+          hair-tie or shoulder line readable.
+
+      - pose_id: walking_thoughtful_medium
+        subject_type: character_full_figure
+        framing_row: MS
+        description: >
+          Mira walking, three-quarter angle from camera, mid-stride; gaze
+          slightly downward or middle-distance; cream sweater + scarf
+          if cool weather; quiet pace.
+
+      - pose_id: holding_phone_in_hand
+        subject_type: character_hand_only
+        framing_row: ECU
+        description: >
+          One hand holding a phone (face-up); thumb resting near screen;
+          notification glow visible on hand skin.
+
+      - pose_id: covering_face_with_hand
+        subject_type: character_face_only
+        framing_row: CU
+        description: >
+          Face partially visible behind one hand near forehead/temple
+          (self-soothing gesture); other features readable; subtle weight
+          in the gesture, not theatrical.
+
+    # ── inventory metadata ──────────────────────────────────────────
+    canonical_axes_hash_input: "sha256(canonical_json(character_design.axes))"
+    canonical_axes_hash: "PENDING_compute_on_first_render"   # backfilled when
+      # the render orchestrator first reads stillness_en_01.yaml and hashes
+      # the 12-axis block. Stored back here to detect axes drift across edits.
+    reference_image_path: null                # PuLID blocked; no reference image
+    identity_lock_active: false               # per §15.A.2: hash-only structural check
+    identity_lock_active_when:
+      - "PuLID-FaceNet EVA-CLIP issue resolved AND reference_image_path set, OR"
+      - "per-character LoRA trained on ai-toolkit AND lora_path declared"
+
+  # minor cast pose inventories — author when ep_003+ scripts confirm them
+  # mother:
+  # kenji:
+  # yara:
+
+authority:
+  spec: docs/specs/MANGA_LAYER_RENDER_CONTRACT_SPEC.md §6.3.A + §8.1
+  character_design: config/source_of_truth/manga_profiles/series/stillness_en_01.yaml

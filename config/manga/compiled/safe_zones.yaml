@@ -1,0 +1,2424 @@
+compiled:
+  archetype_exception=window_light_threshold:
+    _provenance:
+      archetype_exception: window_light_threshold
+      framing: CU
+      genre: healing
+      subject: character_silhouette_back
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    placement_pinned:
+    - 5
+    - 30
+    - 45
+    - 95
+    subject_must_not_touch_edge: false
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_chest_partial|framing=MCU|genre=comedy:
+    _provenance:
+      framing: MCU
+      genre: comedy
+      subject: character_chest_partial
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 13
+      left: 22.5
+      right: 22.5
+      top: 20
+    margin_min_pct_all_sides: 5
+    notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 55
+    - 75
+  subject=character_chest_partial|framing=MCU|genre=dark_fantasy:
+    _provenance:
+      framing: MCU
+      genre: dark_fantasy
+      subject: character_chest_partial
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 9
+      left: 17
+      right: 17
+      top: 8
+    margin_min_pct_all_sides: 5
+    notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 55
+    - 75
+  subject=character_chest_partial|framing=MCU|genre=fantasy_adventure:
+    _provenance:
+      framing: MCU
+      genre: fantasy_adventure
+      subject: character_chest_partial
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 13
+      left: 22.5
+      right: 22.5
+      top: 12
+    margin_min_pct_all_sides: 5
+    notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 55
+    - 75
+  subject=character_chest_partial|framing=MCU|genre=healing:
+    _provenance:
+      framing: MCU
+      genre: healing
+      subject: character_chest_partial
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 13
+      left: 22.5
+      right: 22.5
+      top: 12
+    margin_min_pct_all_sides: 5
+    notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 55
+    - 75
+  subject=character_chest_partial|framing=MCU|genre=mecha:
+    _provenance:
+      framing: MCU
+      genre: mecha
+      subject: character_chest_partial
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 13
+      left: 22.5
+      right: 22.5
+      top: 12
+    margin_min_pct_all_sides: 5
+    notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 55
+    - 75
+  subject=character_chest_partial|framing=MCU|genre=psychological_horror:
+    _provenance:
+      framing: MCU
+      genre: psychological_horror
+      subject: character_chest_partial
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 13
+      left: 22.5
+      right: 22.5
+      top: 12
+    margin_min_pct_all_sides: 5
+    notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 55
+    - 75
+  subject=character_chest_partial|framing=MCU|genre=romance:
+    _provenance:
+      framing: MCU
+      genre: romance
+      subject: character_chest_partial
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 13
+      left: 22.5
+      right: 22.5
+      top: 12
+    margin_min_pct_all_sides: 5
+    notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 55
+    - 75
+  subject=character_chest_partial|framing=MCU|genre=slice_of_life:
+    _provenance:
+      framing: MCU
+      genre: slice_of_life
+      subject: character_chest_partial
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 13
+      left: 22.5
+      right: 22.5
+      top: 12
+    margin_min_pct_all_sides: 5
+    notes: 'mid-close-up: chest + face; used when chest+arm gesture matters'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 55
+    - 75
+  subject=character_face_only|framing=CU|genre=comedy:
+    _provenance:
+      framing: CU
+      genre: comedy
+      subject: character_face_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 5
+      left: 17.5
+      right: 17.5
+      top: 18
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_face_only|framing=CU|genre=dark_fantasy:
+    _provenance:
+      framing: CU
+      genre: dark_fantasy
+      subject: character_face_only
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 3
+      left: 12
+      right: 12
+      top: 7
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_face_only|framing=CU|genre=fantasy_adventure:
+    _provenance:
+      framing: CU
+      genre: fantasy_adventure
+      subject: character_face_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 5
+      left: 17.5
+      right: 17.5
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_face_only|framing=CU|genre=healing:
+    _provenance:
+      framing: CU
+      genre: healing
+      subject: character_face_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 5
+      left: 17.5
+      right: 17.5
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_face_only|framing=CU|genre=mecha:
+    _provenance:
+      framing: CU
+      genre: mecha
+      subject: character_face_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 5
+      left: 17.5
+      right: 17.5
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_face_only|framing=CU|genre=psychological_horror:
+    _provenance:
+      framing: CU
+      genre: psychological_horror
+      subject: character_face_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 0
+      left: 17.5
+      right: 17.5
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_face_only|framing=CU|genre=romance:
+    _provenance:
+      framing: CU
+      genre: romance
+      subject: character_face_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 5
+      left: 17.5
+      right: 17.5
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_face_only|framing=CU|genre=slice_of_life:
+    _provenance:
+      framing: CU
+      genre: slice_of_life
+      subject: character_face_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 5
+      left: 17.5
+      right: 17.5
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_full_figure|framing=MS|genre=comedy:
+    _provenance:
+      framing: MS
+      genre: comedy
+      subject: character_full_figure
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 5
+      left: 25
+      right: 25
+      top: 5
+    margin_min_pct_all_sides: 5
+    notes: 'medium: full upper body, knees-up; most common character framing'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 50
+    - 90
+  subject=character_full_figure|framing=MS|genre=dark_fantasy:
+    _provenance:
+      framing: MS
+      genre: dark_fantasy
+      subject: character_full_figure
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 5
+      left: 25
+      right: 25
+      top: 5
+    margin_min_pct_all_sides: 5
+    notes: 'medium: full upper body, knees-up; most common character framing'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 50
+    - 90
+  subject=character_full_figure|framing=MS|genre=fantasy_adventure:
+    _provenance:
+      framing: MS
+      genre: fantasy_adventure
+      subject: character_full_figure
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 5
+      left: 25
+      right: 25
+      top: 5
+    margin_min_pct_all_sides: 5
+    notes: 'medium: full upper body, knees-up; most common character framing'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 55
+    - 90
+  subject=character_full_figure|framing=MS|genre=healing:
+    _provenance:
+      framing: MS
+      genre: healing
+      subject: character_full_figure
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 5
+      left: 25
+      right: 25
+      top: 5
+    margin_min_pct_all_sides: 5
+    notes: 'medium: full upper body, knees-up; most common character framing'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 50
+    - 90
+  subject=character_full_figure|framing=MS|genre=mecha:
+    _provenance:
+      framing: MS
+      genre: mecha
+      subject: character_full_figure
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 5
+      left: 25
+      right: 25
+      top: 5
+    margin_min_pct_all_sides: 5
+    notes: 'medium: full upper body, knees-up; most common character framing'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 50
+    - 90
+  subject=character_full_figure|framing=MS|genre=psychological_horror:
+    _provenance:
+      framing: MS
+      genre: psychological_horror
+      subject: character_full_figure
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 5
+      left: 25
+      right: 25
+      top: 5
+    margin_min_pct_all_sides: 5
+    notes: 'medium: full upper body, knees-up; most common character framing'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 50
+    - 90
+  subject=character_full_figure|framing=MS|genre=romance:
+    _provenance:
+      framing: MS
+      genre: romance
+      subject: character_full_figure
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 5
+      left: 25
+      right: 25
+      top: 5
+    margin_min_pct_all_sides: 5
+    notes: 'medium: full upper body, knees-up; most common character framing'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 50
+    - 90
+  subject=character_full_figure|framing=MS|genre=slice_of_life:
+    _provenance:
+      framing: MS
+      genre: slice_of_life
+      subject: character_full_figure
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 5
+      left: 25
+      right: 25
+      top: 5
+    margin_min_pct_all_sides: 5
+    notes: 'medium: full upper body, knees-up; most common character framing'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 50
+    - 90
+  subject=character_hand_only|framing=ECU|genre=comedy:
+    _provenance:
+      framing: ECU
+      genre: comedy
+      subject: character_hand_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 17.5
+      left: 17.5
+      right: 17.5
+      top: 17.5
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 65
+  subject=character_hand_only|framing=ECU|genre=dark_fantasy:
+    _provenance:
+      framing: ECU
+      genre: dark_fantasy
+      subject: character_hand_only
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 17.5
+      left: 17.5
+      right: 17.5
+      top: 17.5
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 65
+  subject=character_hand_only|framing=ECU|genre=fantasy_adventure:
+    _provenance:
+      framing: ECU
+      genre: fantasy_adventure
+      subject: character_hand_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 17.5
+      left: 17.5
+      right: 17.5
+      top: 17.5
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 65
+  subject=character_hand_only|framing=ECU|genre=healing:
+    _provenance:
+      framing: ECU
+      genre: healing
+      subject: character_hand_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 17.5
+      left: 17.5
+      right: 17.5
+      top: 17.5
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 65
+  subject=character_hand_only|framing=ECU|genre=mecha:
+    _provenance:
+      framing: ECU
+      genre: mecha
+      subject: character_hand_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 17.5
+      left: 17.5
+      right: 17.5
+      top: 17.5
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 65
+  subject=character_hand_only|framing=ECU|genre=psychological_horror:
+    _provenance:
+      framing: ECU
+      genre: psychological_horror
+      subject: character_hand_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 17.5
+      left: 17.5
+      right: 17.5
+      top: 17.5
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 65
+  subject=character_hand_only|framing=ECU|genre=romance:
+    _provenance:
+      framing: ECU
+      genre: romance
+      subject: character_hand_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 17.5
+      left: 17.5
+      right: 17.5
+      top: 17.5
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 65
+  subject=character_hand_only|framing=ECU|genre=slice_of_life:
+    _provenance:
+      framing: ECU
+      genre: slice_of_life
+      subject: character_hand_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 17.5
+      left: 17.5
+      right: 17.5
+      top: 17.5
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 65
+    - 65
+  subject=character_hands_and_arms|framing=ECU|genre=comedy:
+    _provenance:
+      framing: ECU
+      genre: comedy
+      subject: character_hands_and_arms
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 70
+    - 60
+  subject=character_hands_and_arms|framing=ECU|genre=dark_fantasy:
+    _provenance:
+      framing: ECU
+      genre: dark_fantasy
+      subject: character_hands_and_arms
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 70
+    - 60
+  subject=character_hands_and_arms|framing=ECU|genre=fantasy_adventure:
+    _provenance:
+      framing: ECU
+      genre: fantasy_adventure
+      subject: character_hands_and_arms
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 70
+    - 60
+  subject=character_hands_and_arms|framing=ECU|genre=healing:
+    _provenance:
+      framing: ECU
+      genre: healing
+      subject: character_hands_and_arms
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 70
+    - 60
+  subject=character_hands_and_arms|framing=ECU|genre=mecha:
+    _provenance:
+      framing: ECU
+      genre: mecha
+      subject: character_hands_and_arms
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 70
+    - 60
+  subject=character_hands_and_arms|framing=ECU|genre=psychological_horror:
+    _provenance:
+      framing: ECU
+      genre: psychological_horror
+      subject: character_hands_and_arms
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 70
+    - 60
+  subject=character_hands_and_arms|framing=ECU|genre=romance:
+    _provenance:
+      framing: ECU
+      genre: romance
+      subject: character_hands_and_arms
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 70
+    - 60
+  subject=character_hands_and_arms|framing=ECU|genre=slice_of_life:
+    _provenance:
+      framing: ECU
+      genre: slice_of_life
+      subject: character_hands_and_arms
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: false
+      right: false
+      top: true
+    subject_zone_pct:
+    - 70
+    - 60
+  subject=character_pet_only|framing=ECU|genre=comedy:
+    _provenance:
+      framing: ECU
+      genre: comedy
+      subject: character_pet_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 70
+    - 70
+  subject=character_pet_only|framing=ECU|genre=dark_fantasy:
+    _provenance:
+      framing: ECU
+      genre: dark_fantasy
+      subject: character_pet_only
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 70
+    - 70
+  subject=character_pet_only|framing=ECU|genre=fantasy_adventure:
+    _provenance:
+      framing: ECU
+      genre: fantasy_adventure
+      subject: character_pet_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 70
+    - 70
+  subject=character_pet_only|framing=ECU|genre=healing:
+    _provenance:
+      framing: ECU
+      genre: healing
+      subject: character_pet_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 70
+    - 70
+  subject=character_pet_only|framing=ECU|genre=mecha:
+    _provenance:
+      framing: ECU
+      genre: mecha
+      subject: character_pet_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 70
+    - 70
+  subject=character_pet_only|framing=ECU|genre=psychological_horror:
+    _provenance:
+      framing: ECU
+      genre: psychological_horror
+      subject: character_pet_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 70
+    - 70
+  subject=character_pet_only|framing=ECU|genre=romance:
+    _provenance:
+      framing: ECU
+      genre: romance
+      subject: character_pet_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 70
+    - 70
+  subject=character_pet_only|framing=ECU|genre=slice_of_life:
+    _provenance:
+      framing: ECU
+      genre: slice_of_life
+      subject: character_pet_only
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 15
+      left: 15
+      right: 15
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: false
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 70
+    - 70
+  subject=character_silhouette_back|framing=CU|genre=comedy:
+    _provenance:
+      framing: CU
+      genre: comedy
+      subject: character_silhouette_back
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 18
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_silhouette_back|framing=CU|genre=dark_fantasy:
+    _provenance:
+      framing: CU
+      genre: dark_fantasy
+      subject: character_silhouette_back
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 3
+      left: 12
+      right: 12
+      top: 7
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_silhouette_back|framing=CU|genre=fantasy_adventure:
+    _provenance:
+      framing: CU
+      genre: fantasy_adventure
+      subject: character_silhouette_back
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_silhouette_back|framing=CU|genre=healing:
+    _provenance:
+      framing: CU
+      genre: healing
+      subject: character_silhouette_back
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_silhouette_back|framing=CU|genre=mecha:
+    _provenance:
+      framing: CU
+      genre: mecha
+      subject: character_silhouette_back
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_silhouette_back|framing=CU|genre=psychological_horror:
+    _provenance:
+      framing: CU
+      genre: psychological_horror
+      subject: character_silhouette_back
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 0
+      left: 10
+      right: 10
+      top: 15
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_silhouette_back|framing=CU|genre=romance:
+    _provenance:
+      framing: CU
+      genre: romance
+      subject: character_silhouette_back
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=character_silhouette_back|framing=CU|genre=slice_of_life:
+    _provenance:
+      framing: CU
+      genre: slice_of_life
+      subject: character_silhouette_back
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 10
+      right: 10
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'close-up: face + shoulders; forehead has air; shoulders may crop at the
+      very bottom edge intentionally'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 80
+  subject=food_close_up|framing=ECU|genre=comedy:
+    _provenance:
+      framing: ECU
+      genre: comedy
+      subject: food_close_up
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 20
+      left: 20
+      right: 20
+      top: 20
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 60
+    - 55
+  subject=food_close_up|framing=ECU|genre=dark_fantasy:
+    _provenance:
+      framing: ECU
+      genre: dark_fantasy
+      subject: food_close_up
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 20
+      left: 20
+      right: 20
+      top: 20
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 60
+    - 55
+  subject=food_close_up|framing=ECU|genre=fantasy_adventure:
+    _provenance:
+      framing: ECU
+      genre: fantasy_adventure
+      subject: food_close_up
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 20
+      left: 20
+      right: 20
+      top: 20
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 60
+    - 55
+  subject=food_close_up|framing=ECU|genre=healing:
+    _provenance:
+      framing: ECU
+      genre: healing
+      subject: food_close_up
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 20
+      left: 20
+      right: 20
+      top: 20
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 60
+    - 55
+  subject=food_close_up|framing=ECU|genre=mecha:
+    _provenance:
+      framing: ECU
+      genre: mecha
+      subject: food_close_up
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 20
+      left: 20
+      right: 20
+      top: 20
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 60
+    - 55
+  subject=food_close_up|framing=ECU|genre=psychological_horror:
+    _provenance:
+      framing: ECU
+      genre: psychological_horror
+      subject: food_close_up
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 20
+      left: 20
+      right: 20
+      top: 20
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 60
+    - 55
+  subject=food_close_up|framing=ECU|genre=romance:
+    _provenance:
+      framing: ECU
+      genre: romance
+      subject: food_close_up
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 20
+      left: 20
+      right: 20
+      top: 20
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 60
+    - 55
+  subject=food_close_up|framing=ECU|genre=slice_of_life:
+    _provenance:
+      framing: ECU
+      genre: slice_of_life
+      subject: food_close_up
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 20
+      left: 20
+      right: 20
+      top: 20
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 60
+    - 55
+  subject=multi_object_overhead|framing=insert|genre=comedy:
+    _provenance:
+      framing: insert
+      genre: comedy
+      subject: multi_object_overhead
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 75
+  subject=multi_object_overhead|framing=insert|genre=dark_fantasy:
+    _provenance:
+      framing: insert
+      genre: dark_fantasy
+      subject: multi_object_overhead
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 75
+  subject=multi_object_overhead|framing=insert|genre=fantasy_adventure:
+    _provenance:
+      framing: insert
+      genre: fantasy_adventure
+      subject: multi_object_overhead
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 75
+  subject=multi_object_overhead|framing=insert|genre=healing:
+    _provenance:
+      framing: insert
+      genre: healing
+      subject: multi_object_overhead
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 75
+  subject=multi_object_overhead|framing=insert|genre=mecha:
+    _provenance:
+      framing: insert
+      genre: mecha
+      subject: multi_object_overhead
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 75
+  subject=multi_object_overhead|framing=insert|genre=psychological_horror:
+    _provenance:
+      framing: insert
+      genre: psychological_horror
+      subject: multi_object_overhead
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 75
+  subject=multi_object_overhead|framing=insert|genre=romance:
+    _provenance:
+      framing: insert
+      genre: romance
+      subject: multi_object_overhead
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 75
+  subject=multi_object_overhead|framing=insert|genre=slice_of_life:
+    _provenance:
+      framing: insert
+      genre: slice_of_life
+      subject: multi_object_overhead
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 65
+    - 75
+  subject=object_macro|framing=ECU|genre=comedy:
+    _provenance:
+      framing: ECU
+      genre: comedy
+      subject: object_macro
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 12.5
+      right: 12.5
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 75
+    - 80
+  subject=object_macro|framing=ECU|genre=dark_fantasy:
+    _provenance:
+      framing: ECU
+      genre: dark_fantasy
+      subject: object_macro
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 12.5
+      right: 12.5
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 75
+    - 80
+  subject=object_macro|framing=ECU|genre=fantasy_adventure:
+    _provenance:
+      framing: ECU
+      genre: fantasy_adventure
+      subject: object_macro
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 12.5
+      right: 12.5
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 75
+    - 80
+  subject=object_macro|framing=ECU|genre=healing:
+    _provenance:
+      framing: ECU
+      genre: healing
+      subject: object_macro
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 12.5
+      right: 12.5
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 75
+    - 80
+  subject=object_macro|framing=ECU|genre=mecha:
+    _provenance:
+      framing: ECU
+      genre: mecha
+      subject: object_macro
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 8
+      left: 8
+      right: 8
+      top: 8
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 75
+    - 80
+  subject=object_macro|framing=ECU|genre=psychological_horror:
+    _provenance:
+      framing: ECU
+      genre: psychological_horror
+      subject: object_macro
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 10
+      left: 12.5
+      right: 12.5
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 75
+    - 80
+  subject=object_macro|framing=ECU|genre=romance:
+    _provenance:
+      framing: ECU
+      genre: romance
+      subject: object_macro
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 10
+      left: 12.5
+      right: 12.5
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 75
+    - 80
+  subject=object_macro|framing=ECU|genre=slice_of_life:
+    _provenance:
+      framing: ECU
+      genre: slice_of_life
+      subject: object_macro
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 10
+      left: 12.5
+      right: 12.5
+      top: 10
+    margin_min_pct_all_sides: 5
+    notes: 'extreme close-up: macro of object/eye/hand; subject IS the panel; tight
+      tolerances OK'
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 75
+    - 80
+  subject=object_scene_fit|framing=insert|genre=comedy:
+    _provenance:
+      framing: insert
+      genre: comedy
+      subject: object_scene_fit
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      expression_burst_zone: outside_subject_zone_within_canvas
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 35
+    - 45
+  subject=object_scene_fit|framing=insert|genre=dark_fantasy:
+    _provenance:
+      framing: insert
+      genre: dark_fantasy
+      subject: object_scene_fit
+    alpha_bimodal: true
+    archetype_flag:
+      dramatic_bleed_allowed: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 35
+    - 45
+  subject=object_scene_fit|framing=insert|genre=fantasy_adventure:
+    _provenance:
+      framing: insert
+      genre: fantasy_adventure
+      subject: object_scene_fit
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 35
+    - 45
+  subject=object_scene_fit|framing=insert|genre=healing:
+    _provenance:
+      framing: insert
+      genre: healing
+      subject: object_scene_fit
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 40
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 35
+    - 45
+  subject=object_scene_fit|framing=insert|genre=mecha:
+    _provenance:
+      framing: insert
+      genre: mecha
+      subject: object_scene_fit
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 35
+    - 45
+  subject=object_scene_fit|framing=insert|genre=psychological_horror:
+    _provenance:
+      framing: insert
+      genre: psychological_horror
+      subject: object_scene_fit
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_dutch_angle:
+      margin_all_bonus: 5
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 35
+    - 45
+  subject=object_scene_fit|framing=insert|genre=romance:
+    _provenance:
+      framing: insert
+      genre: romance
+      subject: object_scene_fit
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    feather_px: 0
+    framing_CU:
+      eye_height_alignment: rule_of_thirds_upper
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 35
+    - 45
+  subject=object_scene_fit|framing=insert|genre=slice_of_life:
+    _provenance:
+      framing: insert
+      genre: slice_of_life
+      subject: object_scene_fit
+    alpha_bimodal: true
+    backdrop: pure_white
+    backdrop_corner_tolerance: 5
+    composite_rule:
+      negative_space_min_pct: 30
+    feather_px: 0
+    margin:
+      bottom: 12.5
+      left: 17.5
+      right: 17.5
+      top: 12.5
+    margin_min_pct_all_sides: 5
+    notes: overhead / top-down view; object(s) center-frame
+    subject_must_not_touch_edge: true
+    subject_must_not_touch_edge_axes:
+      bottom: true
+      left: true
+      right: true
+      top: true
+    subject_zone_pct:
+    - 35
+    - 45
+schema_version: 1.0.0

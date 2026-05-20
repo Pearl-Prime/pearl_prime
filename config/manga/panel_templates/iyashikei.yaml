@@ -1,0 +1,785 @@
+# Panel Template Library — Iyashikei (color register)
+#
+# Status: AUTHORITY (new, this PR — V3 plan, operator-directed)
+# Schema version: 1.0
+# Date: 2026-05-18
+# Author: Pearl_Int + Pearl_Dev (synthesizing internal + external research)
+#
+# What this file is:
+#   The per-panel template library for iyashikei (color register). Maps each of
+#   19 named panel archetypes (from artifacts/research/iyashikei_panel_composition_study_2026-05-18.md
+#   §2) to its complete render contract: framing, beat_role, beat_type, aspect,
+#   subject placement, eye-flow anchor, composition tokens, typical pairings,
+#   forbidden grammar, and ENGINE ROUTING per docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md.
+#
+# Consumed by:
+#   - scripts/manga/build_panel_prompts_v2.py (Phase S extension)
+#   - scripts/manga/character_individuation/engine_router.py
+#   - scripts/manga/queue_panel_renders.py (--engine flag dispatch)
+#
+# Authority chain:
+#   - 7-field panel schema: docs/research/manga_craft/iyashikei_minimalism.md §8
+#   - 19 archetypes: artifacts/research/iyashikei_panel_composition_study_2026-05-18.md
+#   - Engine routing: docs/specs/MANGA_V3_3_MODEL_ROUTING_SPEC.md
+#   - beat_role mapping: artifacts/qa/phase_r_internal_vs_external_reconciliation_2026-05-18.md §5
+#   - 5 craft moves + 10 failure modes: artifacts/research/manga_quality_bar/01_iyashikei_craft_study.md
+#
+# What this file is NOT:
+#   - It is NOT a B&W iyashikei template (Mushishi/Yotsuba/A Bride's Story register).
+#     B&W iyashikei would route to Animagine XL 4.0 + PuLID; not in scope for this file.
+#     Future workstream: config/manga/panel_templates/iyashikei_bw.yaml.
+
+schema_version: "1.0.0"
+template_id: "iyashikei_color"
+genre_family: healing
+sub_register: iyashikei_color
+parent_format_template: vertical_scroll_webtoon  # extends, doesn't replace
+applies_to:
+  brands:
+    - stillness_press
+    - cognitive_clarity   # color iyashikei applicability — future
+    - somatic_wisdom      # color iyashikei applicability — future
+  topics:
+    - anxiety
+    - somatic_grounding
+    - false_alarm_recognition
+  locales:
+    - en_US
+    - ja_JP
+    - zh_TW
+    - zh_CN
+
+# ── Genre rules (apply to all archetypes; gates at QA time) ─────────────────
+# Sourced from iyashikei_panel_composition_study_2026-05-18.md §3
+genre_rules:
+  negative_space_min_pct: 40           # ≥40% of frame must be empty/atmospheric
+  background_to_character_ratio_min_pct: 60  # ≥60% bg area in most panels
+  rule_of_thirds_required: true        # centered compositions reserved for seasonal_anchor_object
+  lighting_direction: window_light_dominant   # camera-left or camera-back default
+  camera_height: eye_level_or_low      # never high-angle on characters (food_preparation_overhead exception)
+  linework_register: soft_pen_and_ink  # Mushishi-Yokohama Kaidashi Kikō register
+  silence_panel_ratio_target: 0.50     # ≥50% silent panels per chapter (chapter-level gate)
+  pendulation_max_activation_run: 5    # ≤5 consecutive activation panels w/o grounding
+  pendulation_target_ratio: "1:2.5"    # activation:ground panel ratio
+
+# ── Forbidden visual grammar (negative prompt for ALL archetypes) ──────────
+forbidden_grammar:
+  - shonen_action_zoom_lines
+  - speed_lines
+  - motion_blur
+  - dutch_angles
+  - dramatic_foreshortening
+  - exaggerated_reactions
+  - sweatdrops
+  - popping_veins
+  - anime_shouting_mouths
+  - concentration_lines
+  - mecha_splash_backgrounds
+  - high_contrast_stark_blacks  # reserved for horror, not iyashikei
+  - screentone_tonal_hierarchy   # only as atmospheric texture
+
+# ── Color palette discipline (per-series; this file is genre-level) ─────────
+palette_discipline:
+  primary_register: warm_color    # cream + warm-gold + sage + pale-terracotta
+  cool_register_usage: reserved_for_activation_or_flashback
+  accent_color_max_per_panel: 1   # one jade pendant OR one red kettle, not both
+  bw_register_note: "B&W iyashikei is a different template (iyashikei_bw.yaml — future); this template assumes color render"
+
+# ── Beat vocabulary crosswalk ───────────────────────────────────────────────
+# beat_role = narrative function (from iyashikei_minimalism.md §8)
+# beat_type = pacing function (from webtoon_compose.py + chapter_script)
+beat_vocabularies:
+  beat_role_values:
+    - weather_hook            # chapter-opening meteorological/temporal cue
+    - attunement              # character regulating, anchoring
+    - gesture                 # small action (lift cup, look out window)
+    - environmental_correlative  # object/place carries the interior state
+    - breath                  # rest panel; decompression
+    - closure                 # quiet final beat
+  beat_type_values:           # from chapter_script.yaml + webtoon_compose.py
+    - micro                   # within-scene continuation, ~40px gutter
+    - spatial                 # same scene different angle, ~200px gutter
+    - standard                # scene transition, ~800px gutter
+    - long_drop               # therapeutic decompression, ~2200px gutter
+    - miyazaki_ma             # once-per-arc decompression, ~2800px gutter
+
+# ── Archetype catalog (19 archetypes, 5 narrative-function clusters) ───────
+
+archetypes:
+
+  # ============================================================
+  # CLUSTER 1: GROUNDING beats (the regulating anchors)
+  # ============================================================
+
+  tea_beat_close_up:
+    cluster: grounding
+    framing: CU             # close-up (sometimes macro)
+    beat_role: attunement
+    beat_type:
+      primary: micro
+      secondary: spatial
+    aspect_hint: square_1_1_or_portrait_4_5
+    subject_placement_bbox: [28, 25, 78, 78]   # cup off-center-right, hand entering from camera-left or below
+    eye_flow_anchor: center
+    eye_flow_anchor_detail: "cup rim or the steam curl"
+    composition_tokens:
+      - "macro close-up of hands wrapping a ceramic cup"
+      - "soft window light from camera-left"
+      - "gentle steam curl"
+      - "shallow depth of field"
+      - "warm cream and sage palette"
+      - "rule of thirds"
+      - "generous negative space upper-right"
+      - "fingertips relaxed not gripped"
+    typical_pairing:
+      preceded_by: [character_quiet_face, window_light_threshold]
+      followed_by: [character_quiet_face, sparse_establishing_wide]
+    bestseller_exemplars:
+      - "Yokohama Kaidashi Kikō — Alpha brewing coffee at café opens many chapters"
+      - "Aria vol.1 — Akari + Alicia tea at Aria Company kitchen"
+      - "Polar Bear Café — recurring espresso-cup-with-steam morning service beats"
+    engine_routing: flux_dev
+    engine_routing_rationale: "Object macro with partial hand; hand detail matters; not face-critical so PuLID overhead unjustified"
+
+  kettle_steam_macro:
+    cluster: grounding
+    framing: ECU            # extreme close-up / macro
+    beat_role: environmental_correlative
+    beat_type:
+      primary: spatial
+      secondary: micro
+    aspect_hint: portrait_4_5
+    subject_placement_bbox: [35, 38, 70, 85]   # spout off-center-right, steam plume reaching upper margin
+    eye_flow_anchor: lower_third
+    eye_flow_anchor_detail: "spout; eye tracks up the steam to upper margin"
+    composition_tokens:
+      - "macro detail of a kettle spout exhaling steam"
+      - "soft directional backlight"
+      - "vertical plume reaching upper frame"
+      - "polished metal or matte ceramic surface"
+      - "shallow depth of field"
+      - "dust motes catching light"
+      - "no human in frame"
+      - "cream and warm-gold palette"
+    typical_pairing:
+      preceded_by: [character_quiet_face]
+      followed_by: [miyazaki_ma_pause, seasonal_anchor_object]
+    bestseller_exemplars:
+      - "YKK — recurring teapot-on-stove macro shots in slow chapters"
+      - "Aria — gondola-water + breath-cloud equivalents"
+      - "Yotsuba! — cicada-and-watering-can summer macro beats"
+    engine_routing: flux_schnell
+    engine_routing_rationale: "Pure object macro with atmospheric steam; no character; schnell handles atmosphere well at lowest cost"
+
+  morning_routine_sequence:
+    cluster: grounding
+    framing: mixed_CU_MS_vertical_stack
+    beat_role: weather_hook
+    beat_type:
+      primary: standard
+      secondary: micro    # sub-frames within the strip
+    aspect_hint: tall_9_16
+    subject_placement_bbox: distributed   # 3-5 sub-frames, each with its own focal
+    eye_flow_anchor: upper_subframe_center
+    eye_flow_anchor_detail: "eye reads downward through stack"
+    composition_tokens:
+      - "vertical webtoon strip stacking 3-4 small panel frames"
+      - "morning ritual sequence"
+      - "ceramic cup, leafy houseplant, slipper at threshold, kettle on stove"
+      - "soft directional dawn light"
+      - "cream and pale sage palette"
+      - "no human face visible"
+      - "naturalistic montage"
+      - "generous gutter between sub-frames"
+    typical_pairing:
+      precedes: [character_quiet_face, window_light_threshold]
+      role: "chapter opener"
+    bestseller_exemplars:
+      - "YKK — chapter openings stitch coffee-prep → window-open → cat-tea aspects"
+      - "Yotsuba! — Azuma's daily-life openings, no concentration lines"
+      - "Yuru Camp — Nadeshiko's pack-and-bike sequences before camp day"
+    engine_routing: flux_schnell
+    engine_routing_rationale: "Aspect-to-aspect montage of small objects; no face in frame; schnell"
+
+  window_light_threshold:
+    cluster: grounding
+    framing: MS_or_LS       # over-shoulder facing window or wide
+    beat_role: attunement
+    beat_type:
+      primary: spatial
+      secondary: standard
+    aspect_hint: portrait_4_5_or_square_1_1
+    subject_placement_bbox_character: [5, 30, 45, 95]   # character cropped left-side
+    subject_placement_bbox_window:    [40, 5, 95, 70]   # window right-dominant bright value
+    eye_flow_anchor: upper_right_quadrant
+    eye_flow_anchor_detail: "the bright window pane, then sweeps back to character silhouette"
+    composition_tokens:
+      - "medium shot from behind the character looking out a window"
+      - "soft directional daylight streaming in"
+      - "character cropped to silhouette on camera-left"
+      - "window pane occupying upper-right two-thirds of frame"
+      - "hand of character resting on counter or sill"
+      - "cream and sage palette"
+      - "generous bright value in window"
+      - "character in soft shadow value"
+    typical_pairing:
+      preceded_by: [character_face_micro_tension]
+      followed_by: [character_quiet_face, tea_beat_close_up]
+    bestseller_exemplars:
+      - "YKK — Alpha at her counter window facing rising-sea horizon"
+      - "March Comes in Like a Lion — Rei at apartment window in Tokyo skyline scenes"
+      - "Sweetness & Lightning — Inuzuka at kitchen window after a difficult day"
+    engine_routing: flux_dev
+    engine_routing_rationale: "Medium shot with character silhouette; light interaction needs detail; flux_dev for nuanced light gradient"
+
+  # ============================================================
+  # CLUSTER 2: SOMATIC beats (the body register)
+  # ============================================================
+
+  character_quiet_face:
+    cluster: somatic
+    framing: CU             # close-up
+    beat_role: breath
+    beat_type:
+      primary: micro
+    aspect_hint: square_1_1
+    subject_placement_bbox: [22, 12, 78, 88]   # face center-frame, off-center via slight rotation
+    eye_flow_anchor: eyes
+    eye_flow_anchor_detail: "rest on the eyes; soft gaze direction off-frame upper-right"
+    composition_tokens:
+      - "close-up of an early-30s East-Asian-coded woman with a soft round face"
+      - "long brown hair side-parted"
+      - "double-eyelid almond eyes"
+      - "neutral-soft resting expression"
+      - "cream knit sweater visible at neckline"
+      - "small jade pendant on leather cord"
+      - "soft window light from camera-left"
+      - "shallow depth of field"
+      - "rule of thirds"
+    typical_pairing:
+      preceded_by: [character_face_micro_tension, window_light_threshold]
+      followed_by: [tea_beat_close_up, hand_table_micro]
+    bestseller_exemplars:
+      - "March Comes in Like a Lion — Rei's quiet face at the shogi board"
+      - "Komi Can't Communicate — Komi's quiet contemplation beats"
+      - "Yokohama Kaidashi Kikō — Alpha's serene contemplation"
+    engine_routing: qwen_image_pulid
+    engine_routing_rationale: "FACE close-up; identity-critical; PuLID locks face geometry to Mira reference; highest fidelity model"
+
+  character_face_micro_tension:
+    cluster: somatic
+    framing: CU             # close-up with subtle tension
+    beat_role: gesture
+    beat_type:
+      primary: micro
+    aspect_hint: square_1_1
+    subject_placement_bbox: [22, 12, 78, 88]
+    eye_flow_anchor: eyes
+    eye_flow_anchor_detail: "slight squint or downcast — anxiety tell, not panic"
+    composition_tokens:
+      - "close-up of the same character"
+      - "subtle tension in brow or jaw"
+      - "slight under-eye shadow"
+      - "no exaggerated reaction"
+      - "no anime sweatdrop"
+      - "soft window light"
+      - "the smallest signal of activation: a held breath, a still-too-still posture"
+    typical_pairing:
+      preceded_by: [phone_notification_macro, walking_in_thought_medium]
+      followed_by: [chest_breath_micro, hand_table_micro, window_light_threshold]
+    bestseller_exemplars:
+      - "March — Rei's depression-tension face"
+      - "Komi — Komi's social-anxiety micro-tension beats"
+    engine_routing: qwen_image_pulid
+    engine_routing_rationale: "FACE close-up with subtle expression; identity AND expression detail critical; PuLID + Qwen"
+
+  chest_breath_micro:
+    cluster: somatic
+    framing: MCU            # mid-close-up: chest + partial face
+    beat_role: breath
+    beat_type:
+      primary: micro
+    aspect_hint: portrait_4_5
+    subject_placement_bbox: [25, 5, 75, 88]
+    eye_flow_anchor: chest_center
+    eye_flow_anchor_detail: "rise of the breath; sweater fold catches light"
+    composition_tokens:
+      - "mid-close-up of character chest and partial face"
+      - "soft tension lines in fabric suggesting quickened pulse"
+      - "fingers lightly brushing the jade pendant"
+      - "soft motion blur on the edges of frame suggesting heartbeat"
+      - "cream sweater catching dappled light"
+      - "warm cream palette"
+    typical_pairing:
+      preceded_by: [character_face_micro_tension]
+      followed_by: [character_quiet_face, hand_table_micro]
+    bestseller_exemplars:
+      - "Komi Can't Communicate — somatic anxiety chest beats"
+      - "March — Rei's quiet body-tension beats"
+    engine_routing: flux_dev
+    engine_routing_rationale: "Body but not face; fabric texture + light interaction matters; flux_dev"
+
+  hand_table_micro:
+    cluster: somatic
+    framing: CU             # hand macro
+    beat_role: gesture
+    beat_type:
+      primary: micro
+    aspect_hint: square_1_1
+    subject_placement_bbox: [20, 30, 80, 90]
+    eye_flow_anchor: fingertips
+    eye_flow_anchor_detail: "where the hand meets the object"
+    composition_tokens:
+      - "macro close-up of a hand on the kitchen table"
+      - "thumb on the rim of a ceramic mug"
+      - "soft window light from camera-left"
+      - "wood grain texture visible"
+      - "wedding band absent, jade pendant cord touching wrist"
+      - "shallow depth of field"
+      - "cream and warm-gold palette"
+    typical_pairing:
+      preceded_by: [character_quiet_face, tea_beat_close_up]
+      followed_by: [tea_beat_close_up, sparse_establishing_wide]
+    bestseller_exemplars:
+      - "YKK — Alpha's hands on the counter, on the bicycle, on the camera"
+      - "Aria — Akari's hands on the oar"
+    engine_routing: flux_dev
+    engine_routing_rationale: "Hand macro; anatomy detail critical (extra fingers risk on schnell); flux_dev"
+
+  # ============================================================
+  # CLUSTER 3: COMPANION beats (the small living others)
+  # ============================================================
+
+  pet_companion_micro:
+    cluster: companion
+    framing: CU             # animal close-up
+    beat_role: environmental_correlative
+    beat_type:
+      primary: micro
+      secondary: spatial
+    aspect_hint: square_1_1
+    subject_placement_bbox: [18, 25, 78, 88]
+    eye_flow_anchor: animal_eyes_or_paws
+    composition_tokens:
+      - "close-up of a small animal companion"
+      - "cat blinking in window light, OR a small bird at the windowsill, OR a dog resting"
+      - "soft natural lighting"
+      - "cream and sage palette"
+      - "the animal regards something off-frame with quiet attention"
+      - "the human is implied not shown"
+    typical_pairing:
+      preceded_by: [character_quiet_face, sparse_establishing_wide]
+      followed_by: [character_quiet_face, walking_in_thought_medium]
+    bestseller_exemplars:
+      - "Natsume's Book of Friends — Madara/Nyanko-sensei beats"
+      - "My Roommate is a Cat — Haru-the-cat companion beats"
+      - "Polar Bear Café — animal companion register"
+    engine_routing: flux_dev
+    engine_routing_rationale: "Animal anatomy detail (eyes, fur, paws); flux_dev handles this better than schnell"
+
+  food_preparation_overhead:
+    cluster: companion
+    framing: insert         # top-down (the iyashikei high-angle exception)
+    beat_role: gesture
+    beat_type:
+      primary: spatial
+      secondary: standard
+    aspect_hint: square_1_1
+    subject_placement_bbox: [10, 10, 90, 90]   # food fills most of frame
+    eye_flow_anchor: center
+    eye_flow_anchor_detail: "the food itself"
+    composition_tokens:
+      - "top-down overhead shot of food preparation"
+      - "ceramic bowl, ingredients arrayed on wooden cutting board"
+      - "hands entering frame from camera-bottom or camera-right"
+      - "soft natural light from above"
+      - "warm earthy palette: cream, terracotta, sage greens"
+      - "no human face in frame"
+      - "the food is the protagonist"
+    typical_pairing:
+      preceded_by: [morning_routine_sequence]
+      followed_by: [shared_meal_table_medium]
+    bestseller_exemplars:
+      - "Sweetness & Lightning — Inuzuka's food preparation beats"
+      - "Yuru Camp — outdoor cooking sequences"
+      - "Polar Bear Café — espresso prep overheads"
+    engine_routing: flux_schnell
+    engine_routing_rationale: "Pure overhead still life; objects + light; no face; schnell"
+
+  shared_meal_table_medium:
+    cluster: companion
+    framing: MS             # medium shot, character partial + table
+    beat_role: attunement
+    beat_type:
+      primary: standard
+    aspect_hint: portrait_4_5
+    subject_placement_bbox: [10, 35, 90, 95]
+    eye_flow_anchor: hands_and_food
+    composition_tokens:
+      - "medium shot of character partial at the dining table"
+      - "shared meal in foreground"
+      - "second place setting visible — companion presence implied or shown"
+      - "soft window light"
+      - "cream and warm-terracotta palette"
+      - "character occupies lower-left third; food and table dominate frame"
+    typical_pairing:
+      preceded_by: [food_preparation_overhead]
+      followed_by: [character_quiet_face, tea_beat_close_up]
+    bestseller_exemplars:
+      - "Sweetness & Lightning — meal scenes with father+daughter"
+      - "Yotsuba! — family dinner beats"
+    engine_routing: flux_dev
+    engine_routing_rationale: "Mid-shot with character partial + food + table; multi-element; flux_dev"
+
+  # ============================================================
+  # CLUSTER 4: ENVIRONMENTAL beats (the world as protagonist)
+  # ============================================================
+
+  sparse_establishing_wide:
+    cluster: environmental
+    framing: ELS            # extreme long shot / wide establishing
+    beat_role: weather_hook
+    beat_type:
+      primary: spatial
+      secondary: standard
+    aspect_hint: wide_16_9
+    subject_placement_bbox: [0, 0, 100, 100]   # the whole frame is the environment
+    character_placement_bbox: [3, 65, 25, 85]  # character in lower-left corner, ≤22% of frame width
+    eye_flow_anchor: distant_horizon_or_window_light
+    composition_tokens:
+      - "wide establishing shot of an environment"
+      - "kitchen at dawn / office lobby at 9am / park bench at noon"
+      - "soft directional light from upper-window"
+      - "character optional and small — lower-left third if present"
+      - "cream and warm-gold palette"
+      - "generous negative space in upper half of frame"
+      - "atmospheric stillness; no movement"
+    typical_pairing:
+      role: "scene-opener or scene-closer"
+      precedes: [character_quiet_face, tea_beat_close_up]
+    bestseller_exemplars:
+      - "Mushishi — opening landscape sequences"
+      - "Aria — Neo-Venezia panoramas"
+      - "YKK — coastal café exteriors"
+    engine_routing: flux_schnell
+    engine_routing_rationale: "Wide environment; character distant or absent; schnell handles atmosphere"
+
+  dappled_light_hand:
+    cluster: environmental
+    framing: CU             # hand close-up with light dapples
+    beat_role: breath
+    beat_type:
+      primary: spatial
+    aspect_hint: square_1_1
+    subject_placement_bbox: [22, 25, 78, 80]
+    eye_flow_anchor: where_light_meets_skin
+    composition_tokens:
+      - "close-up of a hand catching dappled light"
+      - "tree-leaf shadow pattern moves across the palm"
+      - "soft pen-and-ink with light-and-shadow gradient"
+      - "no face visible"
+      - "warm cream palette with cool shadow accents"
+      - "the hand at rest, fingers slightly curled or open"
+      - "moment of grace"
+    typical_pairing:
+      preceded_by: [walking_in_thought_medium, character_quiet_face]
+      followed_by: [character_quiet_face, miyazaki_ma_pause]
+    bestseller_exemplars:
+      - "YKK — Alpha's hands in the dappled afternoon light"
+      - "March — Rei's hand on the shogi piece in window light"
+    engine_routing: flux_dev
+    engine_routing_rationale: "Hand close-up with complex dappled-light play; flux_dev handles light nuance + hand anatomy"
+
+  seasonal_anchor_object:
+    cluster: environmental
+    framing: ECU            # macro of a single seasonal object
+    beat_role: environmental_correlative
+    beat_type:
+      primary: spatial
+    aspect_hint: square_1_1
+    subject_placement_bbox: [25, 25, 75, 75]
+    eye_flow_anchor: center
+    eye_flow_anchor_detail: "centered — this is the rare iyashikei centering exception (reverence)"
+    composition_tokens:
+      - "macro detail of a single seasonal object"
+      - "first chestnut of autumn, OR cherry blossom petal, OR first snow on a windowsill, OR a single fallen leaf"
+      - "soft natural lighting"
+      - "shallow depth of field background"
+      - "the object centered with reverence"
+      - "cream and sage palette"
+    typical_pairing:
+      preceded_by: [sparse_establishing_wide]
+      followed_by: [character_quiet_face, miyazaki_ma_pause]
+    bestseller_exemplars:
+      - "YKK — first chestnut, sea-stones, autumn fruit"
+      - "Yuru Camp — seasonal camping-gear beats"
+      - "Mushishi — seasonal mushi-token beats"
+    engine_routing: flux_schnell
+    engine_routing_rationale: "Single-object still life; pure object detail; schnell"
+    note: "Smoke-detector LED motif from The Alarm Is Lying maps here as a series-specific seasonal_anchor_object variant"
+
+  walking_in_thought_medium:
+    cluster: environmental
+    framing: MS             # medium shot, character walking, face partial or away
+    beat_role: gesture
+    beat_type:
+      primary: standard
+    aspect_hint: portrait_4_5
+    subject_placement_bbox: [25, 30, 70, 95]
+    eye_flow_anchor: direction_of_travel
+    eye_flow_anchor_detail: "the path ahead, not the character's face"
+    composition_tokens:
+      - "medium shot of a character walking through a quiet environment"
+      - "back-three-quarter or side profile"
+      - "face partial or turned away"
+      - "soft directional light"
+      - "the environment dominates upper two-thirds of frame"
+      - "cream and warm-gold palette"
+      - "no urgency in stride; thinking-pace not walking-pace"
+    typical_pairing:
+      preceded_by: [sparse_establishing_wide, phone_notification_macro]
+      followed_by: [dappled_light_hand, character_face_micro_tension]
+    bestseller_exemplars:
+      - "YKK — Alpha's bicycle/walk transitions"
+      - "March — Rei walking through Tokyo introspective beats"
+      - "Polar Bear Café — characters walking between locations"
+    engine_routing: flux_dev
+    engine_routing_rationale: "Mid-shot with character partial; if face visible, optional PuLID conditioning at panel_prompts build time"
+    engine_override_condition: "if intent contains FACE or EXPRESSION, escalate to qwen_image_pulid"
+
+  # ============================================================
+  # CLUSTER 5: DECOMPRESSION beats (the rest after activation)
+  # ============================================================
+
+  phone_notification_macro:
+    cluster: decompression
+    framing: ECU            # extreme close-up of phone screen
+    beat_role: environmental_correlative
+    beat_type:
+      primary: spatial
+    aspect_hint: portrait_4_5
+    subject_placement_bbox: [28, 22, 78, 88]
+    eye_flow_anchor: notification_text
+    composition_tokens:
+      - "extreme close-up of a phone screen"
+      - "notification banner glowing on a dim screen"
+      - "phone resting face-up on a kitchen counter"
+      - "edge of a ceramic mug entering frame"
+      - "cool blue light from screen vs warm window light"
+      - "soft motion of the notification appearing"
+    typical_pairing:
+      preceded_by: [tea_beat_close_up, character_quiet_face]
+      followed_by: [character_face_micro_tension, chest_breath_micro]
+    bestseller_exemplars:
+      - "Komi Can't Communicate — messaging-anxiety beats"
+      - "Modern slice-of-life: contemporary phone-as-trigger motifs"
+    engine_routing: flux_schnell
+    engine_routing_rationale: "Object screen close-up; cool/warm light contrast; schnell"
+
+  long_drop_decompression:
+    cluster: decompression
+    framing: LS_to_ELS      # long shot to extreme long shot
+    beat_role: breath
+    beat_type:
+      primary: long_drop    # the Phoenix therapeutic technique — ~2200px gutter on either side
+    aspect_hint: tall_9_16
+    subject_placement_bbox: [40, 70, 60, 92]   # if character present, small in lower-middle
+    eye_flow_anchor: upper_third_void
+    eye_flow_anchor_detail: "the eye reads downward through generous empty space before encountering subject"
+    composition_tokens:
+      - "long-shot wide composition with vast upper negative space"
+      - "domestic interior — kitchen at dusk, bedroom at dawn, living room empty"
+      - "character small in frame lower-third or absent"
+      - "soft warm light pooling at floor level"
+      - "atmospheric stillness — the decompression beat"
+      - "cream and warm-gold palette"
+    typical_pairing:
+      preceded_by: [character_face_micro_tension, walking_in_thought_medium]
+      followed_by: [character_quiet_face, miyazaki_ma_pause]
+    bestseller_exemplars:
+      - "March — Rei alone in his vast empty apartment"
+      - "Polar Bear Café — closing time empty café"
+      - "Sweetness & Lightning — empty apartment after dinner"
+    engine_routing: flux_schnell
+    engine_routing_rationale: "Vast scene with negative space; character small or absent; schnell"
+    operator_distinction: "long_drop = domestic-interior wide; miyazaki_ma = outdoor-awe-vast (the two are sibling but distinct decompressions)"
+
+  miyazaki_ma_pause:
+    cluster: decompression
+    framing: ELS            # extreme long shot — outdoor awe
+    beat_role: breath
+    beat_type:
+      primary: miyazaki_ma  # once-per-arc decompression — ~2800px gutter
+    aspect_hint: wide_16_9_or_tall_9_16
+    subject_placement_bbox: [40, 70, 60, 90]   # character very small if present
+    eye_flow_anchor: horizon_or_sky_void
+    composition_tokens:
+      - "outdoor wide vista"
+      - "sky, mountain, sea, or rooftop horizon"
+      - "soft gradient of natural light"
+      - "character very small in lower-middle if present, otherwise pure landscape"
+      - "the moment of awe — the world reasserts its scale"
+      - "cream-to-sage-to-pale-blue palette"
+      - "this is the once-per-arc beat: never repeat exact composition within a chapter"
+    typical_pairing:
+      preceded_by: [long_drop_decompression, dappled_light_hand]
+      followed_by: [character_quiet_face, sparse_establishing_wide]
+      uniqueness: "limit 1-2 instances per chapter; never back-to-back"
+    bestseller_exemplars:
+      - "Mushishi — every chapter's closing landscape"
+      - "Aria — Neo-Venezia panoramas at golden hour"
+      - "Yuru Camp — sunrise/sunset campground vistas"
+      - "Studio Ghibli — the genre's namesake decompression beat"
+    engine_routing: flux_schnell
+    engine_routing_rationale: "Vast outdoor environment; character very small or absent; schnell"
+    operator_distinction: "miyazaki_ma = outdoor-awe-vast; long_drop = domestic-interior wide"
+
+  # ============================================================
+  # META: pendulation_pair_visual_rhyme (NOT a rendered archetype)
+  # ============================================================
+
+  pendulation_pair_visual_rhyme:
+    cluster: meta
+    framing: META           # not directly renderable
+    beat_role: meta_documentation_rule
+    beat_type:
+      primary: micro
+      secondary: spatial
+    aspect_hint: meta_n_a
+    engine_routing: meta_n_a
+    description: |
+      Documentation rule, NOT a renderable archetype. When a sequence of activation
+      panels (character_face_micro_tension, phone_notification_macro, chest_breath_micro)
+      is followed by a grounding pair (tea_beat_close_up + character_quiet_face), the
+      composition of the grounding pair should VISUALLY RHYME with the activation
+      composition that immediately preceded — same camera angle, same light direction,
+      same subject placement but with the body now regulated. The reader experiences
+      regulation as the camera-recompose, not as new information.
+    usage: |
+      Phase S panel_prompts builder reads typical_pairing chains and detects
+      activation→ground transitions; when a `pendulation_pair_visual_rhyme` rule
+      applies, it injects a `(visually rhyming with prior panel <id>)` token into
+      the grounding panel's composition_tokens.
+    bestseller_exemplars:
+      - "Polar Bear Café — repeat-pose café-counter beats showing emotional recovery"
+      - "March — Rei's recurring chair-at-shogi-board beats with shifting body language"
+
+# ── Phase H QA gates (validation checklist for V3 renders) ───────────────────
+# Sourced from artifacts/research/manga_quality_bar/01_iyashikei_craft_study.md
+# (10 AI failure modes + benchmark table)
+qa_gates:
+
+  per_panel:
+    - id: g1_no_shonen_grammar
+      check: "no zoom lines, speed lines, motion blur, dutch angles in render"
+      tool: negative_prompt_enforcement_at_render_time
+
+    - id: g2_negative_space
+      check: "≥40% of frame is empty/atmospheric"
+      tool: visual_analysis (foreground/background mask ratio)
+
+    - id: g3_no_high_contrast
+      check: "no stark-black tonal hierarchy; soft pen-and-ink register"
+      tool: tonal_softness_score (luminance histogram)
+
+    - id: g4_environment_ratio
+      check: "≥60% background area per panel (where character present)"
+      tool: visual_analysis (background_mask_pct vs character_mask_pct)
+
+    - id: g5_face_distance_when_pulid
+      check: "qwen_image_pulid panels: face cosine distance < 0.55 vs reference"
+      tool: phoenix_v4/manga/character_individuation/qa_face_distance.py
+
+    - id: g6_no_forbidden_grammar
+      check: "negative prompt forbidden_grammar list absent from final render"
+      tool: visual_pattern_match
+
+  per_episode:
+    - id: e1_silence_ratio
+      check: "≥50% of panels are silent (no dialogue/sfx text)"
+      tool: chapter_script_audit + render_text_overlay_check
+
+    - id: e2_pendulation_run_limit
+      check: "no >5 consecutive activation panels without a grounding archetype"
+      tool: archetype_sequence_audit on chapter_script
+
+    - id: e3_breath_panel_count
+      check: "5-10 breath panels per episode (DECOMPRESSION cluster archetypes)"
+      tool: archetype_distribution_count
+
+  per_series:
+    - id: s1_solver_pass
+      check: "Mira character_design passes constraint_solver against stillness_press catalog"
+      tool: scripts/manga/character_individuation/constraint_solver.py
+
+    - id: s2_archetype_coverage
+      check: "every panel in chapter_scripts maps to ≥1 archetype"
+      tool: build_panel_prompts_v2 coverage report
+
+# ── Engine routing summary (denormalized for quick reference) ───────────────
+engine_routing_summary:
+  flux_schnell:
+    archetypes:
+      - kettle_steam_macro
+      - morning_routine_sequence
+      - food_preparation_overhead
+      - sparse_establishing_wide
+      - seasonal_anchor_object
+      - phone_notification_macro
+      - long_drop_decompression
+      - miyazaki_ma_pause
+    count: 8
+    use_case: "simple objects, backgrounds, decompression"
+    avg_throughput_s_per_panel: 15
+
+  flux_dev:
+    archetypes:
+      - tea_beat_close_up
+      - window_light_threshold
+      - chest_breath_micro
+      - hand_table_micro
+      - pet_companion_micro
+      - shared_meal_table_medium
+      - dappled_light_hand
+      - walking_in_thought_medium
+    count: 8
+    use_case: "mid-shots, hands, animals, character-in-scene"
+    avg_throughput_s_per_panel: 30
+
+  qwen_image_pulid:
+    archetypes:
+      - character_quiet_face
+      - character_face_micro_tension
+    count: 2
+    use_case: "face close-ups (identity-critical)"
+    avg_throughput_s_per_panel: 50
+    requires_reference_sheet: true
+
+  meta:
+    archetypes:
+      - pendulation_pair_visual_rhyme
+    count: 1
+    use_case: "documentation rule (Phase S handles inline)"
+
+# ── Open items for downstream phases ────────────────────────────────────────
+open_items:
+  phase_s_builder:
+    - "Implement archetype-id selection from chapter_script intent/beat_type fallback chain"
+    - "Inject composition_tokens into panel_prompts.json per-archetype"
+    - "Route to correct workflow JSON based on engine_routing field"
+    - "Detect pendulation_pair_visual_rhyme sequences and inject rhyme tokens"
+
+  phase_d_render:
+    - "Render in engine-batched order (schnell → dev → qwen+pulid) to minimize VRAM swap"
+    - "Per-archetype smoke test before fan-out"
+
+  pearl_research_v4:
+    - "Empirical FLUX-dev+PuLID vs Qwen-Image+PuLID face fidelity comparison"
+    - "Multi-character PuLID conditioning (Mira + Mother, Mira + Kenji)"
+    - "Cross-engine style consistency (does palette match across schnell/dev/qwen?)"
+    - "Action / motion archetype routing for non-iyashikei genres"
+
+  v3_v4_evolution:
+    - "B&W iyashikei template variant (iyashikei_bw.yaml) — routes to Animagine XL"
+    - "Per-genre webtoon template variants (already in flight as parallel ws)"
+    - "V4 introduces masked-inpaint multi-pass for highest-quality face+environment panels"

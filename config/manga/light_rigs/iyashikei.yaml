@@ -1,0 +1,103 @@
+# Light rig library — iyashikei (healing color register).
+# Per MANGA_LAYER_RENDER_CONTRACT_SPEC.md §6.9.
+#
+# Each rig is a 7-axis lighting bundle. The `prompt_clause` field is the
+# string injected into L0/L2/L3 prompts (slot light_rig.prompt_clause).
+# §14.B.1 post-composite validation compares rendered lighting against
+# each axis declared here.
+
+schema_version: "1.0.0"
+genre: healing
+sub_register: iyashikei_color
+
+light_rigs:
+
+  - light_rig_id: K01_dawn_window_warm
+    primary_direction: "camera_left_slightly_above"
+    primary_softness: "soft"
+    primary_color_temp_K: 3200
+    rim_intensity: 0.3
+    ambient_bounce_color: "warm_cream_FFE6C2"
+    atmospheric_diffusion: 0.4
+    exposure_key: "high_key_dawn"
+    prompt_clause: "warm dawn light from camera-left and slightly above, soft window-diffused with gentle warm bounce on shadow side, color temperature ~3200K, slight atmospheric haze (dust motes catching light), high-key exposure with 200-250 brightness range"
+
+  - light_rig_id: K02_morning_window_neutral
+    primary_direction: "camera_left"
+    primary_softness: "soft"
+    primary_color_temp_K: 4500
+    rim_intensity: 0.2
+    ambient_bounce_color: "neutral_warm_F0E8D8"
+    atmospheric_diffusion: 0.2
+    exposure_key: "mid_to_high_key"
+    prompt_clause: "soft morning light from camera-left, neutral-warm color temperature ~4500K, gentle ambient bounce, minimal atmospheric haze, mid-to-high-key exposure"
+
+  - light_rig_id: K03_midday_bright_natural
+    primary_direction: "camera_above_slightly_right"
+    primary_softness: "medium"
+    primary_color_temp_K: 5500
+    rim_intensity: 0.1
+    ambient_bounce_color: "neutral_E8E8E0"
+    atmospheric_diffusion: 0.1
+    exposure_key: "high_key"
+    prompt_clause: "midday natural daylight from above and slightly right, medium softness, neutral daylight color temperature ~5500K, minimal rim, low atmospheric haze, high-key clean exposure"
+
+  - light_rig_id: K05_afternoon_golden
+    primary_direction: "camera_right"
+    primary_softness: "medium_soft"
+    primary_color_temp_K: 3800
+    rim_intensity: 0.4
+    ambient_bounce_color: "golden_F4D8A8"
+    atmospheric_diffusion: 0.3
+    exposure_key: "mid_key"
+    prompt_clause: "afternoon golden-hour light from camera-right, medium-soft falloff, warm golden color temperature ~3800K, noticeable rim on subject silhouette, slight atmospheric haze, mid-key exposure with warm shadows"
+
+  - light_rig_id: K06_evening_warm_amber
+    primary_direction: "camera_left"
+    primary_softness: "soft"
+    primary_color_temp_K: 2800
+    rim_intensity: 0.5
+    ambient_bounce_color: "warm_amber_E8B888"
+    atmospheric_diffusion: 0.5
+    exposure_key: "mid_to_low_key"
+    prompt_clause: "evening warm-amber light from camera-left, soft, deep warm color temperature ~2800K, strong rim glow on subject edges, moderate atmospheric haze, mid-to-low-key exposure with rich warm shadows"
+
+  - light_rig_id: K07_night_lamp_warm
+    primary_direction: "camera_above_close"   # interior lamp directly above/near subject
+    primary_softness: "medium"
+    primary_color_temp_K: 2700
+    rim_intensity: 0.2
+    ambient_bounce_color: "warm_amber_low_C09060"
+    atmospheric_diffusion: 0.2
+    exposure_key: "low_key"
+    prompt_clause: "interior lamp light from above-and-close, medium softness, very warm color temperature ~2700K, moderate ambient bounce, low atmospheric haze, low-key exposure (dark surrounds) with warm-amber pool of light around subject"
+
+  - light_rig_id: K_flashback_cool_grey_blue
+    primary_direction: "camera_above_overhead"        # overhead fluorescent
+    primary_softness: "hard"
+    primary_color_temp_K: 6500
+    rim_intensity: 0.1
+    ambient_bounce_color: "cool_grey_blue_A8B4C0"
+    atmospheric_diffusion: 0.0
+    exposure_key: "mid_to_low_key_desaturated"
+    prompt_clause: "harsh overhead fluorescent light, desaturated cool grey-blue palette throughout (flashback register), color temperature ~6500K, minimal rim, no atmospheric haze, mid-to-low-key exposure with all warm tones suppressed and shadows reading cool blue-grey rather than amber"
+
+  - light_rig_id: K08_night_moonlight_cool
+    primary_direction: "camera_right"
+    primary_softness: "very_soft"
+    primary_color_temp_K: 7500
+    rim_intensity: 0.4
+    ambient_bounce_color: "cool_blue_8090A0"
+    atmospheric_diffusion: 0.3
+    exposure_key: "low_key"
+    prompt_clause: "moonlight from camera-right, very soft, cool color temperature ~7500K, gentle cool-blue ambient bounce, slight atmospheric diffusion, low-key exposure with cool blue shadows"
+
+# ── notes ────────────────────────────────────────────────────────────────
+# - K04 reserved for future "afternoon overcast" variant (Phase 2).
+# - 7-axis schema per §6.9. Each rig's `prompt_clause` embeds all axes in prose
+#   so the renderer constrains lighting from the prompt; the QA gate validates
+#   post-render that the produced image matches each axis within tolerance.
+# - rim_intensity 0..1 (0 = no rim, 1 = pronounced backlit silhouette).
+# - exposure_key: how much of the histogram lives in the upper third (high_key),
+#   middle (mid_key), or lower third (low_key).
+# - atmospheric_diffusion 0..1 — 0 = clear, 1 = heavy fog/dust.
