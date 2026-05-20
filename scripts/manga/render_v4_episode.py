@@ -332,8 +332,11 @@ def dispatch_render(panel_id: str, prompt: str, negative_prompt: str,
         "--workflow-path", str(REPO / "scripts/image_generation/comfyui_workflows/qwen_image_no_pulid_manga.json"),
         "--comfy-url", comfy_url,
     ]
+    # queue_panel_renders.py reads COMFYUI_POLL_TIMEOUT_SEC env (default 300s);
+    # raise to 1800s for V4 layer dispatches (some L0/L2 renders take 5-8 min)
+    env = {**__import__("os").environ, "COMFYUI_POLL_TIMEOUT_SEC": "1800"}
     t0 = time.time()
-    r = subprocess.run(cmd, capture_output=True, text=True, timeout=1800)
+    r = subprocess.run(cmd, capture_output=True, text=True, timeout=1800, env=env)
     elapsed = time.time() - t0
     img_path = out_dir / f"{panel_id}.png"
     if r.returncode != 0 or not img_path.is_file():
